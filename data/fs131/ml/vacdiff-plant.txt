@@ -1,0 +1,6 @@
+LOST EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis :: HadwigerNelson.Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1
+NOT MERGE'S SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave_aux :: F.Valid
+main rows 830, merged rows 845, lost 1, added 16 (167 MERGE names)
+  added SITE GENERIC on F.Condition5: 2
+  added SITE GENERIC on F.Valid: 13
+vacdiff: FAIL (2)

@@ -262,7 +262,7 @@ you are its only writer. A brief for a job that runs a process or builds a check
 ## Staffing
 
 Staffing — head-count, model, budget — is Kooshi's.
-- **Three Opus-agent slots at a time** (Kooshi, 2026-10-03; extended 2026-10-04: *"I extend the 3 agent cap with a rule: it was sized for 3 Opus agents. […] one Opus slot may be filled with two Sonnet agents."*), the Searcher included: an Opus agent counts one, a Sonnet agent one half, and the total stays at or under three.
+- **Three Opus-agent slots at a time** (Kooshi, 2026-10-03; extended 2026-10-04: *"I extend the 3 agent cap with a rule: it was sized for 3 Opus agents. […] one Opus slot may be filled with two Sonnet agents."*), the Searcher included: an Opus agent counts one, a Sonnet agent one half, and the total stays at or under three. The FS-131 fourth is withdrawn (Kooshi, 2026-10-05: *"We need to reduce the cap back to 3 subagents. […]"*).
 - **Models**: Opus 5.5 for everything judged and for de Bruijn's implementer (Kooshi, 2026-10-04, after the implementer trial: *"Yes, all implementers should be Opus based on those results."*); Sonnet 5.5 for the Clerk.
 - **Replace, do not reuse**, an agent returning with about 500k–600k tokens of context by the harness's count (agents' own counts run at
   30–70 % of it): brief a successor from the record.

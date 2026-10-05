@@ -2,6 +2,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.Chain
 import Proofs.HadwigerNelson.Plane.Tiles
 import Proofs.HadwigerNelson.Plane.ValidMap.Sectors
 import Proofs.HadwigerNelson.Plane.ValidMap.Contact
+import Proofs.HadwigerNelson.Plane.ValidMap.MapTopology
 
 /-!
 # The limit of a locally finite sequence of local steps (FS131-KL1)
@@ -1007,100 +1008,24 @@ end ArcMap
 
 namespace Arc
 
-/-- The parametrisation of an arc: the segment's affine parameter, or the circle's angle (`main`'s `Surgery` `Arc.pt`, suffixed
-`L` on this branch until the merge with `main`). -/
-noncomputable def ptL : Arc → ℝ → ℂ
-  | seg p q, t => p + (t : ℂ) * (q - p)
-  | circ c R _ _, θ => c + (R : ℂ) * e θ
-
-/-- The parameter interval of an arc (`main`'s `Arc.params`). -/
-def paramsL : Arc → Set ℝ
-  | seg _ _ => Icc 0 1
-  | circ _ _ θ₀ θ₁ => Icc θ₀ θ₁
-
-/-- The sub-arc over the parameters `[t₀, t₁]` (`main`'s `Arc.sub`). -/
-noncomputable def subL : Arc → ℝ → ℝ → Arc
-  | seg p q, t₀, t₁ => seg (p + (t₀ : ℂ) * (q - p)) (p + (t₁ : ℂ) * (q - p))
-  | circ c R _ _, t₀, t₁ => circ c R t₀ t₁
-
-/-- The parametrisation is continuous. -/
-theorem continuous_ptL (a : Arc) : Continuous a.ptL := by
-  cases a with
-  | seg p q => exact continuous_const.add (Complex.continuous_ofReal.mul continuous_const)
-  | circ c R θ₀ θ₁ => exact continuous_const.add (continuous_const.mul continuous_e)
-
-/-- An arc is the image of its parameter interval. -/
-theorem carrier_eq_imageL (a : Arc) : a.carrier = a.ptL '' a.paramsL := by
-  cases a with
-  | seg p q =>
-    show segment ℝ p q = _
-    rw [segment_eq_image']
-    simp only [paramsL, ptL, Complex.real_smul]
-  | circ c R θ₀ θ₁ => rfl
-
-/-- A sub-arc is the image of its parameters. -/
-theorem carrier_subL (a : Arc) {t₀ t₁ : ℝ} (h : t₀ ≤ t₁) : (a.subL t₀ t₁).carrier = a.ptL '' Icc t₀ t₁ := by
-  cases a with
-  | seg p q =>
-    show segment ℝ _ _ = _
-    rw [segment_eq_image']
-    ext z
-    simp only [mem_image, mem_Icc, ptL, Complex.real_smul]
-    constructor
-    · rintro ⟨u, ⟨hu0, hu1⟩, rfl⟩
-      refine ⟨t₀ + u * (t₁ - t₀), ⟨by nlinarith, by nlinarith⟩, ?_⟩
-      push_cast; ring
-    · rintro ⟨t, ⟨ht0, ht1⟩, rfl⟩
-      rcases eq_or_lt_of_le h with heq | hlt
-      · subst heq
-        have : t = t₀ := le_antisymm ht1 ht0
-        subst this
-        exact ⟨0, ⟨le_rfl, zero_le_one⟩, by push_cast; ring⟩
-      · refine ⟨(t - t₀) / (t₁ - t₀), ⟨div_nonneg (by linarith) (by linarith), (div_le_one (by linarith)).mpr (by linarith)⟩, ?_⟩
-        have hne : ((t₁ : ℂ) - t₀) ≠ 0 := by
-          rw [← Complex.ofReal_sub]; exact_mod_cast (sub_pos.mpr hlt).ne'
-        push_cast
-        field_simp
-        ring
-  | circ c R θ₀ θ₁ => rfl
-
-/-- A sub-arc over a non-trivial sub-interval of a non-degenerate arc's parameters is non-degenerate. -/
-theorem nondegenerate_subL {a : Arc} (ha : a.Nondegenerate) {t₀ t₁ : ℝ} (hlt : t₀ < t₁) (hsub : Icc t₀ t₁ ⊆ a.paramsL) :
-    (a.subL t₀ t₁).Nondegenerate := by
-  cases a with
-  | seg p q =>
-    show p + (t₀ : ℂ) * (q - p) ≠ p + (t₁ : ℂ) * (q - p)
-    intro h
-    have hqp : q - p ≠ 0 := sub_ne_zero.mpr (Ne.symm ha)
-    have : ((t₀ : ℂ) - t₁) * (q - p) = 0 := by linear_combination h
-    rcases mul_eq_zero.mp this with h' | h'
-    · have : (t₀ : ℝ) = t₁ := by exact_mod_cast sub_eq_zero.mp h'
-      linarith
-    · exact hqp h'
-  | circ c R θ₀ θ₁ =>
-    obtain ⟨hR, -, h2⟩ := ha
-    have h0 := (hsub ⟨le_rfl, hlt.le⟩).1
-    have h1 := (hsub ⟨hlt.le, le_rfl⟩).2
-    exact ⟨hR, hlt, by linarith⟩
-
 /-- The parameter interval is compact. -/
-theorem isCompact_paramsL (a : Arc) : IsCompact a.paramsL := by
+theorem isCompact_params (a : Arc) : IsCompact a.params := by
   cases a <;> exact isCompact_Icc
 
 /-- The parameter interval is an interval. -/
-theorem ordConnected_paramsL (a : Arc) : a.paramsL.OrdConnected := by
+theorem ordConnected_params (a : Arc) : a.params.OrdConnected := by
   cases a <;> exact ordConnected_Icc
 
 /-- **Finitely many parameters of a non-degenerate arc map to one point** (a segment is injective; a circular arc of at most
 one turn meets each point at most at its two ends). -/
-theorem finite_ptL_eq {a : Arc} (ha : a.Nondegenerate) (x : ℂ) : {t | t ∈ a.paramsL ∧ a.ptL t = x}.Finite := by
+theorem finite_pt_eq {a : Arc} (ha : a.Nondegenerate) (x : ℂ) : {t | t ∈ a.params ∧ a.pt t = x}.Finite := by
   cases a with
   | seg p q =>
     have hqp : q - p ≠ 0 := sub_ne_zero.mpr (Ne.symm ha)
     refine Set.Subsingleton.finite fun t ht t' ht' => ?_
     have h : (t : ℂ) * (q - p) = t' * (q - p) := by
       have := ht.2.trans ht'.2.symm
-      simp only [ptL] at this
+      simp only [pt] at this
       linear_combination this
     exact_mod_cast mul_right_cancel₀ hqp h
   | circ c R θ₀ θ₁ =>
@@ -1111,7 +1036,7 @@ theorem finite_ptL_eq {a : Arc} (ha : a.Nondegenerate) (x : ℂ) : {t | t ∈ a.
       have hR' : (R : ℂ) ≠ 0 := by exact_mod_cast hR.ne'
       have heq : e t = e t₀ := by
         have := ht.2.trans hx.symm
-        simp only [ptL] at this
+        simp only [pt] at this
         exact mul_left_cancel₀ hR' (add_left_cancel this)
       obtain ⟨m, hm⟩ := e_eq_e_iff.mp heq
       have ht' : t ∈ Icc θ₀ θ₁ := ht.1
@@ -1424,30 +1349,6 @@ theorem notMem_essSet_of_isolated {x : ℂ} {ε : ℝ} (hε : 0 < ε) (hball : b
 
 /-! ## Cleaning: the essential status is locally constant on `Γ` near a point, off it -/
 
-/-- **Branch points are closure points of the sectors they bound** (FS131 wave 4's `BranchGerms.branchPt_mem_closure_sector`,
-`MapTopology`, on `fs131-w5`; re-proved here): at a distance where the germs are strictly ordered, the point of germ `i` lies in
-the closure of sector `i`, and the point of the germ after `i` in the closure of sector `i` too. -/
-theorem branchPt_mem_closure_sector_pair {n : ℕ} (G : BranchGerms n) {ρ : ℝ}
-    (hord : ∀ s ∈ Ioo 0 ρ, ∀ i, G.dir i s < G.nextDir i s) (v : ℂ) (i : Fin n) {s : ℝ} (hs : s ∈ Ioo 0 ρ) :
-    branchPt v (G.β i) (G.κ i) s ∈ closure (G.sector v ρ i) ∧
-      branchPt v (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s ∈ closure (G.sector v ρ i) := by
-  have hgap := hord s hs i
-  have hmem : ∀ φ ∈ Ioo (G.dir i s) (G.nextDir i s), v + (s : ℂ) * e φ ∈ G.sector v ρ i :=
-    fun φ hφ => ⟨s, hs, φ, hφ, rfl⟩
-  have hcont : Continuous fun φ : ℝ => v + (s : ℂ) * e φ := continuous_const.add (continuous_const.mul continuous_e)
-  constructor
-  · refine mem_closure_of_tendsto ((hcont.tendsto (G.dir i s)).mono_left
-      (nhdsWithin_le_nhds (s := Ioi (G.dir i s)))) ?_
-    filter_upwards [Ioo_mem_nhdsGT hgap] with φ hφ
-    exact hmem φ hφ
-  · have hpt : branchPt v (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s = v + (s : ℂ) * e (G.nextDir i s) := by
-      rw [branchPt_eq, BranchGerms.e_nextDir]; rfl
-    rw [hpt]
-    refine mem_closure_of_tendsto ((hcont.tendsto (G.nextDir i s)).mono_left
-      (nhdsWithin_le_nhds (s := Iio (G.nextDir i s)))) ?_
-    filter_upwards [Ioo_mem_nhdsLT hgap] with φ hφ
-    exact hmem φ hφ
-
 /-- **In a good ball about `x`, a chart at another point of `Γ` has at most two germs** (they are the two germs of the one curve
 through it: `germ_eq_curveGerm_of_goodAt`; the argument of `not_isSite_of_goodAt`). -/
 theorem germs_le_two_of_goodAt {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x ρ₀) {y : ℂ} (hy : y ∈ ball x ρ₀) (hyx : y ≠ x)
@@ -1548,8 +1449,8 @@ theorem eventually_essSet_iff_of_goodAt {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x
       obtain ⟨l, s, hs, rfl⟩ := mem_iUnion.mp hz'
       have hnn : ∀ m : Fin 2, BranchGerms.next (BranchGerms.next m) = m := by
         intro m; fin_cases m <;> rfl
-      have h1 := (branchPt_mem_closure_sector_pair G hord y l hs).1
-      have h2 := (branchPt_mem_closure_sector_pair G hord y (BranchGerms.next l) hs).2
+      have h1 := (BranchGerms.branchPt_mem_closure_sector G hord y l hs).1
+      have h2 := (BranchGerms.branchPt_mem_closure_sector G hord y (BranchGerms.next l) hs).2
       rw [hnn l] at h2
       have hcases : i = l ∨ i = BranchGerms.next l := by
         fin_cases i <;> fin_cases l <;> simp [BranchGerms.next]
@@ -1564,11 +1465,11 @@ theorem eventually_essSet_iff_of_goodAt {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x
 
 variable (F) in
 /-- The parameters of the arc `a` at which its point is off the domain or essential. -/
-def essParams (a : Arc) : Set ℝ := {t | t ∈ a.paramsL ∧ (a.ptL t ∉ F.dom ∨ a.ptL t ∈ F.essSet)}
+def essParams (a : Arc) : Set ℝ := {t | t ∈ a.params ∧ (a.pt t ∉ F.dom ∨ a.pt t ∈ F.essSet)}
 
 /-- The essential parameters of an arc form a closed set. -/
 theorem isClosed_essParams (a : Arc) : IsClosed (F.essParams a) := by
-  have h : F.essParams a = a.paramsL ∩ (a.ptL ⁻¹' (F.dom \ F.essSet))ᶜ := by
+  have h : F.essParams a = a.params ∩ (a.pt ⁻¹' (F.dom \ F.essSet))ᶜ := by
     ext t
     simp only [essParams, mem_setOf_eq, mem_inter_iff, mem_compl_iff, mem_preimage, Set.mem_sdiff, not_and, not_not]
     constructor
@@ -1576,44 +1477,44 @@ theorem isClosed_essParams (a : Arc) : IsClosed (F.essParams a) := by
       · exact ⟨ht, fun hd => absurd hd h⟩
       · exact ⟨ht, fun _ => h⟩
     · rintro ⟨ht, h⟩
-      by_cases hd : a.ptL t ∈ F.dom
+      by_cases hd : a.pt t ∈ F.dom
       · exact ⟨ht, Or.inr (h hd)⟩
       · exact ⟨ht, Or.inl hd⟩
   rw [h]
-  exact a.isCompact_paramsL.isClosed.inter (isOpen_dom_diff_essSet.preimage a.continuous_ptL).isClosed_compl
+  exact a.isCompact_params.isClosed.inter (isOpen_dom_diff_essSet.preimage a.continuous_pt).isClosed_compl
 
 /-- The component of an essential parameter is the closed interval between its ends. -/
 theorem essComp_eq_Icc (a : Arc) {u : ℝ} (hu : u ∈ F.essParams a) :
     (F.essParams a).ordConnectedComponent u = Icc (sInf ((F.essParams a).ordConnectedComponent u))
       (sSup ((F.essParams a).ordConnectedComponent u)) :=
-  ordConnectedComponent_eq_Icc (isClosed_essParams a) (a.isCompact_paramsL.isBounded.subset fun _ h => h.1) hu
+  ordConnectedComponent_eq_Icc (isClosed_essParams a) (a.isCompact_params.isBounded.subset fun _ h => h.1) hu
 
 variable (F) in
 /-- **The clean map's arcs**: the sub-arcs of `F`'s arcs over the non-trivial maximal intervals of essential parameters. -/
 def cleanArcs : Set Arc :=
   {b | ∃ a ∈ F.arcs, ∃ u ∈ F.essParams a,
     sInf ((F.essParams a).ordConnectedComponent u) < sSup ((F.essParams a).ordConnectedComponent u) ∧
-      b = a.subL (sInf ((F.essParams a).ordConnectedComponent u)) (sSup ((F.essParams a).ordConnectedComponent u))}
+      b = a.sub (sInf ((F.essParams a).ordConnectedComponent u)) (sSup ((F.essParams a).ordConnectedComponent u))}
 
 /-- The clean arcs are non-degenerate. -/
 theorem cleanArcs_nondegenerate {b : Arc} (hb : b ∈ F.cleanArcs) : b.Nondegenerate := by
   obtain ⟨a, ha, u, hu, hlt, rfl⟩ := hb
-  refine Arc.nondegenerate_subL (F.nondegenerate a ha) hlt ?_
+  refine Arc.nondegenerate_sub (F.nondegenerate a ha) hlt ?_
   rw [← essComp_eq_Icc a hu]
   exact fun t ht => (ordConnectedComponent_subset ht).1
 
 /-- **Essential membership is locally constant along an arc near a point of a good ball, off its centre.** -/
 theorem essParams_eventually_iff {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x ρ₀) {a : Arc} (ha : a ∈ F.arcs) {t : ℝ}
-    (ht : t ∈ a.paramsL) (h1 : a.ptL t ∈ ball x ρ₀) (h2 : a.ptL t ≠ x) :
-    ∀ᶠ t' in 𝓝 t, t' ∈ a.paramsL → (t' ∈ F.essParams a ↔ t ∈ F.essParams a) := by
-  have hmem : ∀ s ∈ a.paramsL, a.ptL s ∈ ⋃ b ∈ F.arcs, b.carrier := fun s hs =>
-    mem_iUnion₂.mpr ⟨a, ha, by rw [a.carrier_eq_imageL]; exact ⟨s, hs, rfl⟩⟩
-  have hyΓ : a.ptL t ∈ F.Γ := ⟨hG.subdom h1, hmem t ht⟩
-  have hev := a.continuous_ptL.continuousAt.eventually (eventually_essSet_iff_of_goodAt hG h1 h2 hyΓ)
-  have hev2 := a.continuous_ptL.continuousAt.eventually (isOpen_ball.mem_nhds h1)
+    (ht : t ∈ a.params) (h1 : a.pt t ∈ ball x ρ₀) (h2 : a.pt t ≠ x) :
+    ∀ᶠ t' in 𝓝 t, t' ∈ a.params → (t' ∈ F.essParams a ↔ t ∈ F.essParams a) := by
+  have hmem : ∀ s ∈ a.params, a.pt s ∈ ⋃ b ∈ F.arcs, b.carrier := fun s hs =>
+    mem_iUnion₂.mpr ⟨a, ha, by rw [a.carrier_eq_image]; exact ⟨s, hs, rfl⟩⟩
+  have hyΓ : a.pt t ∈ F.Γ := ⟨hG.subdom h1, hmem t ht⟩
+  have hev := a.continuous_pt.continuousAt.eventually (eventually_essSet_iff_of_goodAt hG h1 h2 hyΓ)
+  have hev2 := a.continuous_pt.continuousAt.eventually (isOpen_ball.mem_nhds h1)
   filter_upwards [hev, hev2] with t' h h' ht'
-  have hd' : a.ptL t' ∈ F.dom := hG.subdom h'
-  have hd : a.ptL t ∈ F.dom := hG.subdom h1
+  have hd' : a.pt t' ∈ F.dom := hG.subdom h'
+  have hd : a.pt t ∈ F.dom := hG.subdom h1
   have key := h ⟨hd', hmem t' ht'⟩
   simp only [essParams, mem_setOf_eq]
   constructor
@@ -1628,13 +1529,13 @@ theorem essParams_eventually_iff {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x ρ₀)
 met, and every essential parameter near the point reaches a parameter at the point through essential parameters. -/
 theorem eventually_clean_near {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x ρ₀) :
     ∀ᶠ ε in 𝓝[>] (0 : ℝ), ∀ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ ball x ρ₀).Nonempty},
-      ((fun w => (F.essParams a).ordConnectedComponent w) '' (F.essParams a ∩ a.ptL ⁻¹' ball x ε)).Finite ∧
-      ∀ t ∈ F.essParams a, a.ptL t ∈ ball x ε → a.ptL t ≠ x →
-        ∃ u ∈ a.paramsL, a.ptL u = x ∧ u ≠ t ∧ ∀ t' ∈ uIcc u t, t' ≠ u → t' ∈ F.essParams a := by
+      ((fun w => (F.essParams a).ordConnectedComponent w) '' (F.essParams a ∩ a.pt ⁻¹' ball x ε)).Finite ∧
+      ∀ t ∈ F.essParams a, a.pt t ∈ ball x ε → a.pt t ≠ x →
+        ∃ u ∈ a.params, a.pt u = x ∧ u ≠ t ∧ ∀ t' ∈ uIcc u t, t' ≠ u → t' ∈ F.essParams a := by
   rw [eventually_all_finite hG.fin]
   rintro a ⟨ha, -⟩
-  exact eventually_finite_components a.continuous_ptL a.isCompact_paramsL a.ordConnected_paramsL (fun _ h => h.1) hG.pos
-    (Arc.finite_ptL_eq (F.nondegenerate a ha) x) fun t ht h1 h2 => essParams_eventually_iff hG ha ht h1 h2
+  exact eventually_finite_components a.continuous_pt a.isCompact_params a.ordConnected_params (fun _ h => h.1) hG.pos
+    (Arc.finite_pt_eq (F.nondegenerate a ha) x) fun t ht h1 h2 => essParams_eventually_iff hG ha ht h1 h2
 
 /-- **The clean arcs are locally finite in the domain.** -/
 theorem cleanArcs_locallyFinite {x : ℂ} (hx : x ∈ F.dom) :
@@ -1642,13 +1543,13 @@ theorem cleanArcs_locallyFinite {x : ℂ} (hx : x ∈ F.dom) :
   obtain ⟨ρ₀, hG⟩ := F.exists_goodAt hx
   obtain ⟨ε, hε, hε0⟩ := ((eventually_clean_near hG).and (Ioo_mem_nhdsGT hG.pos)).exists
   refine ⟨ball x ε, ball_mem_nhds x hε0.1, ?_⟩
-  refine (hG.fin.biUnion fun a ha => ((hε a ha).1.image fun C => a.subL (sInf C) (sSup C))).subset ?_
+  refine (hG.fin.biUnion fun a ha => ((hε a ha).1.image fun C => a.sub (sInf C) (sSup C))).subset ?_
   rintro b ⟨⟨a, ha, u, huA, hlt, rfl⟩, z, hzb, hzt⟩
   have hCI := essComp_eq_Icc a huA
-  rw [a.carrier_subL hlt.le, ← hCI] at hzb
+  rw [a.carrier_sub hlt.le, ← hCI] at hzb
   obtain ⟨w, hwC, rfl⟩ := hzb
   have hwA : w ∈ F.essParams a := ordConnectedComponent_subset hwC
-  have hza : a.ptL w ∈ a.carrier := by rw [a.carrier_eq_imageL]; exact ⟨w, hwA.1, rfl⟩
+  have hza : a.pt w ∈ a.carrier := by rw [a.carrier_eq_image]; exact ⟨w, hwA.1, rfl⟩
   refine mem_iUnion₂.mpr ⟨a, ⟨ha, _, hza, ball_subset_ball hε0.2.le hzt⟩, ?_⟩
   exact ⟨(F.essParams a).ordConnectedComponent u, ⟨w, ⟨hwA, hzt⟩,
     (ordConnectedComponent_eq (mem_ordConnectedComponent.mp hwC)).symm⟩, rfl⟩
@@ -1665,7 +1566,7 @@ theorem essSet_subset_cleanArcs : F.essSet ⊆ ⋃ b ∈ F.cleanArcs, b.carrier 
   obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp (essSet_subset_Γ hzE).2
   have ha𝒜 : a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ ball x ρ₀).Nonempty} :=
     ⟨ha, z, hza, ball_subset_ball hε0.2.le hz⟩
-  rw [a.carrier_eq_imageL] at hza
+  rw [a.carrier_eq_image] at hza
   obtain ⟨t, ht, rfl⟩ := hza
   have htA : t ∈ F.essParams a := ⟨ht, Or.inr hzE⟩
   obtain ⟨u, huI, hux, hut, hall⟩ := (hε a ha𝒜).2 t htA hz hzx
@@ -1684,7 +1585,7 @@ theorem essSet_subset_cleanArcs : F.essSet ⊆ ⋃ b ∈ F.cleanArcs, b.carrier 
     · linarith [htC.1, huC.2]
   apply hno
   refine mem_iUnion₂.mpr ⟨_, ⟨a, ha, u, huA, hlt, rfl⟩, ?_⟩
-  rw [a.carrier_subL hlt.le]
+  rw [a.carrier_sub hlt.le]
   exact ⟨u, huC, hux⟩
 
 /-- **The clean arcs inside the domain are exactly the essential set.** -/
@@ -1692,7 +1593,7 @@ theorem dom_inter_cleanArcs : F.dom ∩ ⋃ b ∈ F.cleanArcs, b.carrier = F.ess
   refine Subset.antisymm ?_ fun x hx => ⟨hx.1, essSet_subset_cleanArcs hx⟩
   rintro z ⟨hzd, hz⟩
   obtain ⟨b, ⟨a, ha, u, huA, hlt, rfl⟩, hzb⟩ := mem_iUnion₂.mp hz
-  rw [a.carrier_subL hlt.le, ← essComp_eq_Icc a huA] at hzb
+  rw [a.carrier_sub hlt.le, ← essComp_eq_Icc a huA] at hzb
   obtain ⟨w, hwC, rfl⟩ := hzb
   rcases (ordConnectedComponent_subset hwC).2 with h | h
   · exact absurd hzd h
@@ -1843,17 +1744,17 @@ example (j : Fin 2) : (ArcMap.const univ isOpen_univ j).IsClean := by
   intro x hx
   simp [ArcMap.Γ, ArcMap.const] at hx
 
-/-- The parametrisation of a segment is affine (a spec example for `Arc.ptL`). -/
-example : (Arc.seg 0 2).ptL (1 / 2) = 1 := by norm_num [Arc.ptL]
+/-- The parametrisation of a segment is affine (a spec example for `Arc.pt`). -/
+example : (Arc.seg 0 2).pt (1 / 2) = 1 := by norm_num [Arc.pt]
 
-/-- A circular arc's parameters are its angles (a spec example for `Arc.paramsL`). -/
-example : (Arc.circ 0 1 0 π).paramsL = Icc 0 π := rfl
+/-- A circular arc's parameters are its angles (a spec example for `Arc.params`). -/
+example : (Arc.circ 0 1 0 π).params = Icc 0 π := rfl
 
-/-- A sub-arc of a circular arc keeps its circle (a spec example for `Arc.subL`). -/
-example : (Arc.circ 0 1 0 π).subL 1 2 = Arc.circ 0 1 1 2 := rfl
+/-- A sub-arc of a circular arc keeps its circle (a spec example for `Arc.sub`). -/
+example : (Arc.circ 0 1 0 π).sub 1 2 = Arc.circ 0 1 1 2 := rfl
 
-/-- A sub-arc of a segment is the segment between the two parameters' points (a spec example for `Arc.subL`). -/
-example : (Arc.seg 0 2).subL 0 (1 / 2) = Arc.seg 0 1 := by norm_num [Arc.subL]
+/-- A sub-arc of a segment is the segment between the two parameters' points (a spec example for `Arc.sub`). -/
+example : (Arc.seg 0 2).sub 0 (1 / 2) = Arc.seg 0 1 := by norm_num [Arc.sub]
 
 /-- **`halfDiscMono` has no essential point**: its segment carries colour `0` on both sides (a spec example for `essSet`). -/
 theorem halfDiscMono_essSet : halfDiscMono.essSet = ∅ := by

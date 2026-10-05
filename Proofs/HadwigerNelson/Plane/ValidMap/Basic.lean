@@ -11,7 +11,7 @@ vocabulary of FS-110's N3–N4 rounds (`plans/FS110-N-proof.md` § Continuation 
   `N = v + n`, `S′ = v − n`, `P_k = v + kn` are `v + k * n` with `n = e (α + π / 2)`.
 * **Upward curvature.** The circle (or line) through `v` tangent to `a` with upward curvature `κ` is `tanHeight κ = 0`, and
   "above it" is `tanHeight κ > 0` (exact, not second order: every boundary arc is a circle or a line). The unit circles `ω(N)`
-  and `ω(S′)` are the curvatures `1` and `−1` (`tanHeight_one_framePt`).
+  and `ω(S′)` are the curvatures `1` and `−1` (`tanHeight_one_fromFrame`).
 * **A horn** along `e α` between the arcs of curvatures `κ₁ < κ₂` is `hornSet v α κ₁ κ₂ r`; `IsHorn` says it is, for all small
   `r`, a sector of the map of one colour. A cusp horn has the single direction `α` as its cone.
 * **Sectors** (`IsSector`): the components of the interior points in `B(v, r)` whose closure holds `v`; `HasSectors v c n` and
@@ -41,7 +41,7 @@ noncomputable def frameX (v : ℂ) (α : ℝ) (z : ℂ) : ℝ := ((z - v) * star
 noncomputable def frameY (v : ℂ) (α : ℝ) (z : ℂ) : ℝ := ((z - v) * starRingEnd ℂ (e α)).im
 
 /-- The point with frame coordinates `(x, y)`: `v + (x + y i) e α`. -/
-noncomputable def framePt (v : ℂ) (α x y : ℝ) : ℂ := v + ((x : ℂ) + (y : ℂ) * I) * e α
+noncomputable def fromFrame (v : ℂ) (α x y : ℝ) : ℂ := v + ((x : ℂ) + (y : ℂ) * I) * e α
 
 /-- The height of `(x, y)` above the circle through the origin tangent to the `x`-axis with upward curvature `κ` (the line
 `y = 0` when `κ = 0`): `y − κ (x² + y²)/2`. The circle is its zero set; its centre side, near the origin, is the positive side
@@ -748,6 +748,18 @@ example : unitArcPlane.RingArcsWithin unitArcPlane ∧
   have hm : ringPt 0 θ₁ ∈ ringArc 0 θ₁ θ₂ := ⟨θ₁, ⟨le_rfl, hlt.le⟩, rfl⟩
   have := hsub hm
   simp [Γ, const] at this
+
+/-- **Adversary of Condition 5**: `unitArcPlane`'s arc is a unit arc, meeting `ω(0)` in infinitely many points of the domain. A closed
+refutation, so the vacuity scan reads `Condition5` as refutable at a concrete map (`scripts/Vacuity.lean`, wave 4's carriers). -/
+theorem unitArcPlane_not_condition5 : ¬ unitArcPlane.Condition5 := by
+  intro h
+  have hfin := h (Arc.circ 0 1 0 π) (mem_singleton _) 0
+  have hinj : InjOn (spherePt 0 1) (Ioo 0 π) :=
+    (injOn_spherePt 0 one_pos 0).mono (Ioo_subset_Ioo_right (by linarith [pi_pos]))
+  refine ((Ioo_infinite pi_pos).image hinj) (hfin.subset ?_)
+  rintro _ ⟨θ, hθ, rfl⟩
+  refine ⟨⟨⟨θ, Ioo_subset_Icc_self hθ, rfl⟩, mem_univ _⟩, ?_⟩
+  simp [spherePt, norm_e]
 
 /-- A map with one segment: the plane, one colour, the segment `[0, 1]` as its only arc. -/
 noncomputable def segPlane : ArcMap 1 where

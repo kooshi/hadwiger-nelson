@@ -1,0 +1,5 @@
+original block at 02e85433: 36..595 (29612 bytes)
+  plant A (module byte): FAIL: block occurs 0 times in the new module (expected 1); block is 29612 bytes
+plant A (module byte): FAIL (as it must)
+  plant B (MapGraph byte): FAIL: MapGraph differs from the expected remainder at line 37: got [' namespace HadwigerNelson.Plane'], expected ['namespace HadwigerNelson.Plane']
+plant B (MapGraph byte): FAIL (as it must)

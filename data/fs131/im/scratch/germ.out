@@ -1,0 +1,13 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 16,17
+data/fs131/im/scratch/GermArc.lean:158:70: warning: Variable name `hκρ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/im/scratch/GermArc.lean:166:10: warning: This simp argument is unused:
+  norm_mul_e hρ.le
+
+Hint: Omit it from the simp argument list.
+  simp [̵n̵o̵r̵m̵_̵m̵u̵l̵_̵e̵ ̵h̵ρ̵.̵l̵e̵]̵ ̵at this
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

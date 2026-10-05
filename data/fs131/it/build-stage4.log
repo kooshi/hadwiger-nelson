@@ -1,0 +1,564 @@
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,12,13,14,15
+==> build: this run's full output: build/gate/build/20261005T024305Z-686079.log
+==> up-to-date check: exit 3 after 2s (3 means something needs building) — walking the batches
+==> 447 batches of at most 4 modules, capped at 40G
+==> [1/447] 4 modules  21:43:07
+==> [2/447] 4 modules  21:43:08
+==> [3/447] 4 modules  21:43:09
+==> [4/447] 4 modules  21:43:10
+==> [5/447] 4 modules  21:43:11
+    rebuilt: Thomassen (6.1s)
+==> [6/447] 1 modules  21:43:18
+==> [7/447] 4 modules  21:43:18
+==> [8/447] 4 modules  21:43:19
+    ⚠ [2786/2787] Replayed Proofs.HadwigerNelson.Plane.PlaneTopology
+    warning: Proofs/HadwigerNelson/Plane/PlaneTopology.lean:344:8: declaration uses `sorry`
+==> [9/447] 4 modules  21:43:20
+==> [10/447] 4 modules  21:43:21
+==> [11/447] 4 modules  21:43:22
+==> [12/447] 4 modules  21:43:22
+==> [13/447] 4 modules  21:43:23
+==> [14/447] 4 modules  21:43:24
+==> [15/447] 4 modules  21:43:24
+==> [16/447] 4 modules  21:43:25
+==> [17/447] 4 modules  21:43:25
+==> [18/447] 4 modules  21:43:26
+==> [19/447] 4 modules  21:43:26
+==> [20/447] 4 modules  21:43:27
+==> [21/447] 4 modules  21:43:27
+==> [22/447] 4 modules  21:43:28
+==> [23/447] 4 modules  21:43:29
+==> [24/447] 4 modules  21:43:30
+==> [25/447] 4 modules  21:43:31
+==> [26/447] 4 modules  21:43:31
+==> [27/447] 4 modules  21:43:32
+==> [28/447] 4 modules  21:43:33
+==> [29/447] 4 modules  21:43:33
+==> [30/447] 4 modules  21:43:34
+==> [31/447] 1 modules  21:43:35
+==> [32/447] 4 modules  21:43:36
+==> [33/447] 4 modules  21:43:37
+==> [34/447] 4 modules  21:43:38
+==> [35/447] 4 modules  21:43:38
+==> [36/447] 4 modules  21:43:39
+==> [37/447] 4 modules  21:43:40
+==> [38/447] 4 modules  21:43:41
+==> [39/447] 4 modules  21:43:42
+==> [40/447] 4 modules  21:43:43
+==> [41/447] 4 modules  21:43:44
+==> [42/447] 4 modules  21:43:45
+==> [43/447] 4 modules  21:43:45
+==> [44/447] 3 modules  21:43:46
+==> [45/447] 4 modules  21:43:47
+==> [46/447] 4 modules  21:43:48
+==> [47/447] 4 modules  21:43:49
+==> [48/447] 4 modules  21:43:50
+==> [49/447] 4 modules  21:43:51
+==> [50/447] 4 modules  21:43:52
+==> [51/447] 3 modules  21:43:53
+==> [52/447] 4 modules  21:43:54
+==> [53/447] 4 modules  21:43:55
+==> [54/447] 4 modules  21:43:55
+==> [55/447] 4 modules  21:43:56
+==> [56/447] 4 modules  21:43:57
+==> [57/447] 4 modules  21:43:58
+==> [58/447] 4 modules  21:44:00
+==> [59/447] 4 modules  21:44:01
+==> [60/447] 4 modules  21:44:02
+==> [61/447] 4 modules  21:44:03
+==> [62/447] 4 modules  21:44:03
+==> [63/447] 4 modules  21:44:04
+==> [64/447] 4 modules  21:44:05
+==> [65/447] 4 modules  21:44:06
+==> [66/447] 4 modules  21:44:07
+==> [67/447] 4 modules  21:44:08
+==> [68/447] 4 modules  21:44:09
+==> [69/447] 4 modules  21:44:10
+==> [70/447] 4 modules  21:44:11
+==> [71/447] 4 modules  21:44:12
+==> [72/447] 4 modules  21:44:13
+==> [73/447] 4 modules  21:44:14
+==> [74/447] 4 modules  21:44:15
+==> [75/447] 4 modules  21:44:16
+==> [76/447] 4 modules  21:44:17
+==> [77/447] 4 modules  21:44:18
+==> [78/447] 4 modules  21:44:19
+==> [79/447] 4 modules  21:44:20
+==> [80/447] 4 modules  21:44:21
+==> [81/447] 4 modules  21:44:21
+==> [82/447] 4 modules  21:44:22
+==> [83/447] 4 modules  21:44:23
+==> [84/447] 4 modules  21:44:24
+==> [85/447] 4 modules  21:44:25
+==> [86/447] 4 modules  21:44:26
+==> [87/447] 4 modules  21:44:27
+==> [88/447] 4 modules  21:44:28
+==> [89/447] 4 modules  21:44:29
+==> [90/447] 4 modules  21:44:30
+==> [91/447] 4 modules  21:44:31
+==> [92/447] 4 modules  21:44:32
+==> [93/447] 4 modules  21:44:33
+==> [94/447] 4 modules  21:44:34
+==> [95/447] 4 modules  21:44:35
+==> [96/447] 4 modules  21:44:35
+==> [97/447] 4 modules  21:44:36
+==> [98/447] 4 modules  21:44:37
+==> [99/447] 4 modules  21:44:38
+==> [100/447] 4 modules  21:44:39
+==> [101/447] 4 modules  21:44:40
+==> [102/447] 4 modules  21:44:41
+==> [103/447] 4 modules  21:44:42
+==> [104/447] 4 modules  21:44:43
+==> [105/447] 1 modules  21:44:44
+==> [106/447] 4 modules  21:44:44
+==> [107/447] 4 modules  21:44:45
+==> [108/447] 4 modules  21:44:46
+==> [109/447] 4 modules  21:44:47
+==> [110/447] 4 modules  21:44:49
+==> [111/447] 4 modules  21:44:50
+==> [112/447] 4 modules  21:44:51
+==> [113/447] 4 modules  21:44:53
+==> [114/447] 4 modules  21:44:54
+==> [115/447] 4 modules  21:44:55
+==> [116/447] 4 modules  21:44:56
+==> [117/447] 4 modules  21:44:58
+==> [118/447] 4 modules  21:44:59
+==> [119/447] 4 modules  21:45:00
+==> [120/447] 4 modules  21:45:01
+==> [121/447] 4 modules  21:45:03
+==> [122/447] 4 modules  21:45:04
+==> [123/447] 4 modules  21:45:05
+==> [124/447] 4 modules  21:45:07
+==> [125/447] 4 modules  21:45:08
+==> [126/447] 4 modules  21:45:09
+==> [127/447] 4 modules  21:45:10
+==> [128/447] 4 modules  21:45:12
+==> [129/447] 4 modules  21:45:13
+==> [130/447] 4 modules  21:45:14
+==> [131/447] 4 modules  21:45:15
+==> [132/447] 4 modules  21:45:17
+==> [133/447] 4 modules  21:45:18
+==> [134/447] 4 modules  21:45:19
+==> [135/447] 4 modules  21:45:21
+==> [136/447] 4 modules  21:45:22
+==> [137/447] 4 modules  21:45:23
+==> [138/447] 4 modules  21:45:24
+==> [139/447] 4 modules  21:45:26
+==> [140/447] 4 modules  21:45:27
+==> [141/447] 4 modules  21:45:28
+==> [142/447] 4 modules  21:45:30
+==> [143/447] 4 modules  21:45:31
+==> [144/447] 4 modules  21:45:32
+==> [145/447] 4 modules  21:45:33
+==> [146/447] 4 modules  21:45:35
+==> [147/447] 4 modules  21:45:36
+==> [148/447] 4 modules  21:45:37
+==> [149/447] 4 modules  21:45:39
+==> [150/447] 4 modules  21:45:40
+==> [151/447] 4 modules  21:45:41
+==> [152/447] 4 modules  21:45:42
+==> [153/447] 4 modules  21:45:44
+==> [154/447] 4 modules  21:45:45
+==> [155/447] 4 modules  21:45:46
+==> [156/447] 4 modules  21:45:47
+==> [157/447] 4 modules  21:45:49
+==> [158/447] 4 modules  21:45:50
+==> [159/447] 4 modules  21:45:52
+==> [160/447] 4 modules  21:45:53
+==> [161/447] 4 modules  21:45:55
+==> [162/447] 4 modules  21:45:56
+==> [163/447] 4 modules  21:45:58
+==> [164/447] 4 modules  21:45:59
+==> [165/447] 4 modules  21:46:00
+==> [166/447] 4 modules  21:46:02
+==> [167/447] 4 modules  21:46:03
+==> [168/447] 4 modules  21:46:04
+==> [169/447] 4 modules  21:46:06
+==> [170/447] 4 modules  21:46:07
+==> [171/447] 4 modules  21:46:08
+==> [172/447] 4 modules  21:46:09
+==> [173/447] 4 modules  21:46:11
+==> [174/447] 4 modules  21:46:12
+==> [175/447] 4 modules  21:46:13
+==> [176/447] 4 modules  21:46:15
+==> [177/447] 4 modules  21:46:16
+==> [178/447] 4 modules  21:46:17
+==> [179/447] 4 modules  21:46:19
+==> [180/447] 4 modules  21:46:20
+==> [181/447] 4 modules  21:46:21
+==> [182/447] 4 modules  21:46:23
+==> [183/447] 4 modules  21:46:24
+==> [184/447] 4 modules  21:46:25
+==> [185/447] 4 modules  21:46:26
+==> [186/447] 4 modules  21:46:28
+==> [187/447] 4 modules  21:46:29
+==> [188/447] 4 modules  21:46:30
+==> [189/447] 4 modules  21:46:31
+==> [190/447] 4 modules  21:46:33
+==> [191/447] 4 modules  21:46:34
+==> [192/447] 4 modules  21:46:35
+==> [193/447] 4 modules  21:46:37
+==> [194/447] 4 modules  21:46:38
+==> [195/447] 4 modules  21:46:39
+==> [196/447] 4 modules  21:46:41
+==> [197/447] 4 modules  21:46:42
+==> [198/447] 4 modules  21:46:43
+==> [199/447] 4 modules  21:46:44
+==> [200/447] 4 modules  21:46:46
+==> [201/447] 4 modules  21:46:47
+==> [202/447] 4 modules  21:46:48
+==> [203/447] 4 modules  21:46:50
+==> [204/447] 4 modules  21:46:51
+==> [205/447] 4 modules  21:46:52
+==> [206/447] 4 modules  21:46:54
+==> [207/447] 4 modules  21:46:55
+==> [208/447] 4 modules  21:46:56
+==> [209/447] 4 modules  21:46:57
+==> [210/447] 4 modules  21:46:59
+==> [211/447] 4 modules  21:47:00
+==> [212/447] 4 modules  21:47:01
+==> [213/447] 4 modules  21:47:02
+==> [214/447] 4 modules  21:47:04
+==> [215/447] 4 modules  21:47:05
+==> [216/447] 4 modules  21:47:06
+==> [217/447] 4 modules  21:47:08
+==> [218/447] 4 modules  21:47:09
+==> [219/447] 4 modules  21:47:10
+==> [220/447] 4 modules  21:47:11
+==> [221/447] 4 modules  21:47:13
+==> [222/447] 4 modules  21:47:14
+==> [223/447] 4 modules  21:47:15
+==> [224/447] 4 modules  21:47:16
+==> [225/447] 4 modules  21:47:18
+==> [226/447] 4 modules  21:47:19
+==> [227/447] 4 modules  21:47:20
+==> [228/447] 4 modules  21:47:22
+==> [229/447] 4 modules  21:47:23
+==> [230/447] 4 modules  21:47:24
+==> [231/447] 4 modules  21:47:26
+==> [232/447] 4 modules  21:47:27
+==> [233/447] 4 modules  21:47:28
+==> [234/447] 4 modules  21:47:29
+==> [235/447] 4 modules  21:47:31
+==> [236/447] 4 modules  21:47:32
+==> [237/447] 4 modules  21:47:33
+==> [238/447] 4 modules  21:47:34
+==> [239/447] 4 modules  21:47:36
+==> [240/447] 4 modules  21:47:37
+==> [241/447] 4 modules  21:47:38
+==> [242/447] 4 modules  21:47:40
+==> [243/447] 4 modules  21:47:41
+==> [244/447] 4 modules  21:47:42
+==> [245/447] 4 modules  21:47:43
+==> [246/447] 4 modules  21:47:45
+==> [247/447] 4 modules  21:47:46
+==> [248/447] 4 modules  21:47:47
+==> [249/447] 4 modules  21:47:49
+==> [250/447] 4 modules  21:47:50
+==> [251/447] 4 modules  21:47:52
+==> [252/447] 4 modules  21:47:53
+==> [253/447] 4 modules  21:47:55
+==> [254/447] 4 modules  21:47:56
+==> [255/447] 4 modules  21:47:57
+==> [256/447] 4 modules  21:47:59
+==> [257/447] 4 modules  21:48:00
+==> [258/447] 4 modules  21:48:01
+==> [259/447] 4 modules  21:48:02
+==> [260/447] 4 modules  21:48:04
+==> [261/447] 4 modules  21:48:05
+==> [262/447] 4 modules  21:48:06
+==> [263/447] 4 modules  21:48:07
+==> [264/447] 4 modules  21:48:09
+==> [265/447] 4 modules  21:48:10
+==> [266/447] 4 modules  21:48:11
+==> [267/447] 4 modules  21:48:13
+==> [268/447] 4 modules  21:48:14
+==> [269/447] 4 modules  21:48:15
+==> [270/447] 4 modules  21:48:16
+==> [271/447] 4 modules  21:48:18
+==> [272/447] 4 modules  21:48:19
+==> [273/447] 4 modules  21:48:20
+==> [274/447] 4 modules  21:48:21
+==> [275/447] 4 modules  21:48:23
+==> [276/447] 4 modules  21:48:24
+==> [277/447] 4 modules  21:48:25
+==> [278/447] 4 modules  21:48:27
+==> [279/447] 4 modules  21:48:28
+==> [280/447] 4 modules  21:48:29
+==> [281/447] 4 modules  21:48:30
+==> [282/447] 4 modules  21:48:32
+==> [283/447] 4 modules  21:48:33
+==> [284/447] 4 modules  21:48:34
+==> [285/447] 4 modules  21:48:36
+==> [286/447] 4 modules  21:48:37
+==> [287/447] 4 modules  21:48:38
+==> [288/447] 4 modules  21:48:39
+==> [289/447] 4 modules  21:48:41
+==> [290/447] 4 modules  21:48:42
+==> [291/447] 4 modules  21:48:43
+==> [292/447] 4 modules  21:48:45
+==> [293/447] 4 modules  21:48:46
+==> [294/447] 4 modules  21:48:47
+==> [295/447] 4 modules  21:48:48
+==> [296/447] 4 modules  21:48:50
+==> [297/447] 4 modules  21:48:51
+==> [298/447] 4 modules  21:48:52
+==> [299/447] 4 modules  21:48:53
+==> [300/447] 4 modules  21:48:55
+==> [301/447] 4 modules  21:48:56
+==> [302/447] 4 modules  21:48:57
+==> [303/447] 4 modules  21:48:59
+==> [304/447] 4 modules  21:49:00
+==> [305/447] 4 modules  21:49:01
+==> [306/447] 4 modules  21:49:02
+==> [307/447] 4 modules  21:49:04
+==> [308/447] 4 modules  21:49:05
+==> [309/447] 4 modules  21:49:06
+==> [310/447] 4 modules  21:49:07
+==> [311/447] 4 modules  21:49:09
+==> [312/447] 4 modules  21:49:10
+==> [313/447] 4 modules  21:49:11
+==> [314/447] 4 modules  21:49:12
+==> [315/447] 4 modules  21:49:14
+==> [316/447] 4 modules  21:49:15
+==> [317/447] 4 modules  21:49:16
+==> [318/447] 4 modules  21:49:18
+==> [319/447] 4 modules  21:49:19
+==> [320/447] 4 modules  21:49:20
+==> [321/447] 4 modules  21:49:21
+==> [322/447] 4 modules  21:49:23
+==> [323/447] 4 modules  21:49:24
+==> [324/447] 4 modules  21:49:25
+==> [325/447] 4 modules  21:49:27
+==> [326/447] 4 modules  21:49:28
+==> [327/447] 4 modules  21:49:29
+==> [328/447] 4 modules  21:49:30
+==> [329/447] 4 modules  21:49:32
+==> [330/447] 4 modules  21:49:33
+==> [331/447] 4 modules  21:49:34
+==> [332/447] 4 modules  21:49:36
+==> [333/447] 4 modules  21:49:37
+==> [334/447] 4 modules  21:49:38
+==> [335/447] 4 modules  21:49:39
+==> [336/447] 4 modules  21:49:41
+==> [337/447] 4 modules  21:49:42
+==> [338/447] 4 modules  21:49:43
+==> [339/447] 4 modules  21:49:44
+==> [340/447] 4 modules  21:49:46
+==> [341/447] 4 modules  21:49:47
+==> [342/447] 4 modules  21:49:48
+==> [343/447] 4 modules  21:49:50
+==> [344/447] 4 modules  21:49:51
+==> [345/447] 4 modules  21:49:52
+==> [346/447] 4 modules  21:49:53
+==> [347/447] 4 modules  21:49:55
+==> [348/447] 4 modules  21:49:56
+==> [349/447] 4 modules  21:49:57
+==> [350/447] 4 modules  21:49:58
+==> [351/447] 4 modules  21:50:00
+==> [352/447] 4 modules  21:50:01
+==> [353/447] 4 modules  21:50:02
+==> [354/447] 4 modules  21:50:04
+==> [355/447] 4 modules  21:50:05
+==> [356/447] 4 modules  21:50:06
+==> [357/447] 4 modules  21:50:07
+==> [358/447] 4 modules  21:50:09
+==> [359/447] 4 modules  21:50:10
+==> [360/447] 4 modules  21:50:11
+==> [361/447] 4 modules  21:50:12
+==> [362/447] 4 modules  21:50:14
+==> [363/447] 4 modules  21:50:15
+==> [364/447] 4 modules  21:50:16
+==> [365/447] 4 modules  21:50:17
+==> [366/447] 4 modules  21:50:19
+==> [367/447] 4 modules  21:50:20
+==> [368/447] 4 modules  21:50:21
+==> [369/447] 4 modules  21:50:23
+==> [370/447] 4 modules  21:50:24
+==> [371/447] 4 modules  21:50:25
+==> [372/447] 4 modules  21:50:26
+==> [373/447] 4 modules  21:50:28
+==> [374/447] 4 modules  21:50:29
+==> [375/447] 4 modules  21:50:30
+==> [376/447] 4 modules  21:50:32
+==> [377/447] 4 modules  21:50:33
+==> [378/447] 4 modules  21:50:34
+==> [379/447] 4 modules  21:50:35
+==> [380/447] 4 modules  21:50:37
+==> [381/447] 4 modules  21:50:38
+==> [382/447] 4 modules  21:50:39
+==> [383/447] 4 modules  21:50:41
+==> [384/447] 4 modules  21:50:42
+==> [385/447] 4 modules  21:50:43
+==> [386/447] 4 modules  21:50:44
+==> [387/447] 4 modules  21:50:46
+==> [388/447] 4 modules  21:50:47
+==> [389/447] 4 modules  21:50:48
+==> [390/447] 4 modules  21:50:49
+==> [391/447] 4 modules  21:50:51
+==> [392/447] 4 modules  21:50:52
+==> [393/447] 4 modules  21:50:53
+==> [394/447] 4 modules  21:50:55
+==> [395/447] 4 modules  21:50:56
+==> [396/447] 4 modules  21:50:57
+==> [397/447] 4 modules  21:50:58
+==> [398/447] 4 modules  21:51:00
+==> [399/447] 4 modules  21:51:01
+==> [400/447] 4 modules  21:51:02
+==> [401/447] 4 modules  21:51:04
+==> [402/447] 4 modules  21:51:05
+==> [403/447] 4 modules  21:51:06
+==> [404/447] 4 modules  21:51:07
+==> [405/447] 4 modules  21:51:09
+==> [406/447] 4 modules  21:51:10
+==> [407/447] 4 modules  21:51:11
+==> [408/447] 4 modules  21:51:13
+==> [409/447] 4 modules  21:51:14
+==> [410/447] 4 modules  21:51:15
+==> [411/447] 4 modules  21:51:16
+==> [412/447] 4 modules  21:51:18
+==> [413/447] 4 modules  21:51:19
+==> [414/447] 4 modules  21:51:20
+==> [415/447] 4 modules  21:51:21
+==> [416/447] 4 modules  21:51:22
+==> [417/447] 4 modules  21:51:23
+==> [418/447] 4 modules  21:51:24
+==> [419/447] 4 modules  21:51:25
+==> [420/447] 2 modules  21:51:26
+    ⚠ [2678/2680] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:184:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:191:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:199:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:207:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:214:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:224:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:235:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:350:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:729:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:842:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:846:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:850:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:855:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:859:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:864:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:872:8: declaration uses `sorry`
+    ⚠ [2680/2680] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Contact
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:525:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:646:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:655:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:669:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:680:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:691:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:705:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:721:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:737:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:760:8: declaration uses `sorry`
+==> [421/447] 4 modules  21:51:27
+==> [422/447] 4 modules  21:51:28
+==> [423/447] 4 modules  21:51:29
+==> [424/447] 4 modules  21:51:30
+==> [425/447] 4 modules  21:51:31
+    ⚠ [2645/2811] Replayed Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:445:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:450:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:461:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:475:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:482:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:490:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:545:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:561:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:570:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:577:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:584:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:590:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:602:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:615:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:627:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:1165:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:1183:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:1294:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:1305:8: declaration uses `sorry`
+==> [426/447] 4 modules  21:51:32
+==> [427/447] 4 modules  21:51:34
+    ⚠ [2902/2904] Replayed Proofs.HadwigerNelson.Plane.ValidMap.HexRing
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:184:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:195:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:209:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:228:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:246:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:267:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:337:8: declaration uses `sorry`
+    ⚠ [2904/2904] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Terminal
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:57:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:75:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:87:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:132:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:140:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:151:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:164:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:184:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:196:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:208:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:224:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:238:8: declaration uses `sorry`
+==> [428/447] 1 modules  21:51:35
+==> [429/447] 4 modules  21:51:35
+==> [430/447] 4 modules  21:51:37
+    ⚠ [2919/2919] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Dense
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean:47:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean:58:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean:72:8: declaration uses `sorry`
+==> [431/447] 4 modules  21:51:38
+    ⚠ [2861/2967] Replayed Proofs.HadwigerNelson.Plane.ValidMap.MapTopology
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean:1387:8: declaration uses `sorry`
+==> [432/447] 4 modules  21:51:39
+==> [433/447] 4 modules  21:51:41
+==> [434/447] 2 modules  21:51:43
+    ⚠ [2868/2874] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BaseWalk
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:103:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:113:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:135:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:141:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:148:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:156:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:167:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:173:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:183:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:190:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:217:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:287:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:294:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:320:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:327:8: declaration uses `sorry`
+    ⚠ [2874/2874] Built Proofs.HadwigerNelson.Plane.ValidMap.MapGraph (7.1s)
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:101:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:108:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:125:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:131:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:135:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:144:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:152:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:160:8: declaration uses `sorry`
+    rebuilt: Plane.ValidMap.MapGraph (7.1s)
+==> [435/447] 4 modules  21:51:51
+==> [436/447] 4 modules  21:51:53
+==> [437/447] 2 modules  21:51:54
+    ⚠ [2869/2959] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BaseDense
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:35:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:45:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:121:8: declaration uses `sorry`
+==> [438/447] 4 modules  21:51:55
+==> [439/447] 4 modules  21:51:56
+==> [440/447] 1 modules  21:51:57
+==> [441/447] 4 modules  21:51:58
+==> [442/447] 1 modules  21:51:59
+==> [443/447] 4 modules  21:52:00
+==> [444/447] 3 modules  21:52:01
+==> [445/447] 3 modules  21:52:02
+==> [446/447] 1 modules  21:52:04
+==> [447/447] 1 modules  21:52:05
+    rebuilt: Proofs (1.8s)
+==> build: OK — 447 of 447 batches, 3 module(s) rebuilt, 11 module(s) with warnings, 9m2s
+    full output: build/gate/build/20261005T024305Z-686079.log
+EXIT 0

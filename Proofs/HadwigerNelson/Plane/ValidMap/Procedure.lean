@@ -54,17 +54,6 @@ variable {F}
 theorem ringPt_add_int (p : ℂ) (θ : ℝ) (m : ℤ) : ringPt p (θ + 2 * π * m) = ringPt p θ := by
   rw [ringPt, ringPt, e_add_int_mul]
 
-/-- A ring arc is unchanged by whole turns of both ends. -/
-theorem ringArc_add_int (p : ℂ) (a b : ℝ) (m : ℤ) : ringArc p (a + 2 * π * m) (b + 2 * π * m) = ringArc p a b := by
-  ext z
-  simp only [ringArc, mem_image, mem_Icc]
-  constructor
-  · rintro ⟨θ, ⟨h1, h2⟩, rfl⟩
-    refine ⟨θ - 2 * π * m, ⟨by linarith, by linarith⟩, ?_⟩
-    rw [← ringPt_add_int p (θ - 2 * π * m) m, sub_add_cancel]
-  · rintro ⟨θ, ⟨h1, h2⟩, rfl⟩
-    exact ⟨θ + 2 * π * m, ⟨by linarith, by linarith⟩, ringPt_add_int p θ m⟩
-
 /-- A radius-two arc is unchanged by whole turns of both ends. -/
 theorem radiusTwoArc_add_int (p : ℂ) (a b : ℝ) (m : ℤ) :
     radiusTwoArc p (a + 2 * π * m) (b + 2 * π * m) = radiusTwoArc p a b := by
@@ -81,7 +70,7 @@ theorem radiusTwoArc_add_int (p : ℂ) (a b : ℝ) (m : ℤ) :
 theorem isRingArc_add_int {p : ℂ} {a b : ℝ} {c c' : Fin k} (m : ℤ) :
     F.IsRingArc p (a + 2 * π * m) (b + 2 * π * m) c c' ↔ F.IsRingArc p a b c c' := by
   unfold IsRingArc
-  rw [ringArc_add_int]
+  rw [ringArc_add_two_pi_mul]
   constructor
   · rintro ⟨h1, h2, h3⟩
     refine ⟨by linarith, h2, fun θ hθ => ?_⟩

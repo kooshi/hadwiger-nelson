@@ -1,0 +1,13 @@
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: admitted env: mem 40 GiB (hard cap), cpus 4,5,6,7,8,9,10,11
+==> build: this run's full output: build/gate/build/20261005T013928Z-247025.log
+    ⚠ [5023/5360] Replayed Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:3973:8: declaration uses `sorry`
+    ⚠ [5033/5360] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Moves
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean:1667:8: declaration uses `sorry`
+    ⚠ [5042/5360] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Contact
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:1525:8: declaration uses `sorry`
+    All targets up-to-date (5362 jobs).
+==> build: OK — all 1747 modules already up to date, nothing built, 3 module(s) with warnings, 2s
+    full output: build/gate/build/20261005T013928Z-247025.log
+exit=0

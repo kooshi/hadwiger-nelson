@@ -1,0 +1,13 @@
+import Mathlib
+open Set
+#check @Fin.strictMono_iff_lt_succ
+#check @finRotate_of_lt
+#check @finRotate_last'
+#check @Polynomial.finite_setOf_isRoot
+#check @Fin.sum_univ_succ
+#check @Fin.sum_univ_castSucc
+#check @IsPreconnected.constant
+#check @Finset.sum_range_succ_sub_sum
+#check @Fin.sum_univ_eq_sum_range
+#check @finRotate_succ_apply
+#check @Finset.sum_range_sub

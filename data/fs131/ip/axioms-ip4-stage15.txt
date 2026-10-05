@@ -1,0 +1,37 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 4,5
+'HadwigerNelson.Plane.hasCurveStar_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_annular_out' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_annular_in' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.subset_or_subset_of_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.side_contra' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.branch_side' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_Ico_ringPt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.disjoint_closedBall_of_isOpen' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.shared_germ3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.tile_inter_ball_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.mem_closure_some_sector' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.coloursAt_subset_near' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.germ_side_cw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.germPseudo_of_side' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.inner_star' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.circ_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_not_abut' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.colours_sub' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.endpoint_of_far_end' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.exists_endpoint' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_nested' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.pseudo_finite' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.pair_ii' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.noBoth' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cor3' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+exit=0

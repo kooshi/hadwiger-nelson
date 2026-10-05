@@ -359,26 +359,17 @@ theorem exists_isRingArc_of_onRingArc {p x : ℂ} (h : F.OnRingArc p x) {ε : �
     _ ≤ ε / 2 := abs_le.mpr ⟨by linarith, by linarith⟩
     _ < ε := by linarith
 
-/-- The point `N + t e(α − π/2 + x)` in the frame at `v` along `e α`: `(t sin x, 1 − t cos x)`. -/
-theorem N_add_eq_framePt (v : ℂ) (α t x : ℝ) :
-    v + e (α + π / 2) + (t : ℂ) * e (α - π / 2 + x) = framePt v α (t * Real.sin x) (1 - t * Real.cos x) := by
-  unfold framePt
-  rw [e_add α (π / 2), show α - π / 2 + x = α + (x - π / 2) by ring, e_add α (x - π / 2), e_eq (π / 2), e_eq (x - π / 2),
-    Real.cos_pi_div_two, Real.sin_pi_div_two, Real.cos_sub_pi_div_two, Real.sin_sub_pi_div_two]
-  push_cast
-  ring
-
 /-- The point `S′ + t e(α + π/2 − x)` in the frame at `v` along `e α`: `(t sin x, t cos x − 1)`. -/
-theorem S_add_eq_framePt (v : ℂ) (α t x : ℝ) :
-    v - e (α + π / 2) + (t : ℂ) * e (α + π / 2 - x) = framePt v α (t * Real.sin x) (t * Real.cos x - 1) := by
-  unfold framePt
+theorem S_add_eq_fromFrame (v : ℂ) (α t x : ℝ) :
+    v - e (α + π / 2) + (t : ℂ) * e (α + π / 2 - x) = fromFrame v α (t * Real.sin x) (t * Real.cos x - 1) := by
+  unfold fromFrame
   rw [e_add α (π / 2), show α + π / 2 - x = α + (π / 2 - x) by ring, e_add α (π / 2 - x), e_eq (π / 2), e_eq (π / 2 - x),
     Real.cos_pi_div_two, Real.sin_pi_div_two, Real.cos_pi_div_two_sub, Real.sin_pi_div_two_sub]
   push_cast
   ring
 
 /-- The squared distance from `v` of a point at distance `t` from a pole, at angle `x` off the direction of `v`. -/
-theorem framePt_normSq_aux {t x : ℝ} : (t * Real.sin x) ^ 2 + (1 - t * Real.cos x) ^ 2 =
+theorem fromFrame_normSq_aux {t x : ℝ} : (t * Real.sin x) ^ 2 + (1 - t * Real.cos x) ^ 2 =
     (t - 1) ^ 2 + 2 * t * (1 - Real.cos x) := by
   have := Real.sin_sq_add_cos_sq x
   linear_combination t ^ 2 * this
@@ -413,24 +404,24 @@ theorem horn_radial_N {v : ℂ} {α κ₁ : ℝ} {c : Fin k} (hH : F.IsHorn v α
   have hu2 : u < A * (1 - κ₁) / 4 := by rw [hu]; linarith [ht.2, min_le_right (r / 2) (A * (1 - κ₁) / 4)]
   have ht' : t = 1 + u := by rw [hu]; ring
   apply hr₀sub
-  rw [N_add_eq_framePt]
+  rw [normalPt_add_eq_fromFrame]
   have hq : (t * Real.sin x) ^ 2 + (1 - t * Real.cos x) ^ 2 = u ^ 2 + 2 * (1 + u) * A := by
-    rw [framePt_normSq_aux, ht', hA]; ring
+    rw [fromFrame_normSq_aux, ht', hA]; ring
   have hcosx : -1 ≤ Real.cos x := Real.neg_one_le_cos x
   refine ⟨?_, ?_, ?_, ?_⟩
   · -- the distance from `v`
-    have hn := frame_normSq v α (framePt v α (t * Real.sin x) (1 - t * Real.cos x))
-    rw [frameX_framePt, frameY_framePt, hq, ← dist_eq_norm] at hn
+    have hn := frame_normSq v α (fromFrame v α (t * Real.sin x) (1 - t * Real.cos x))
+    rw [frameX_fromFrame, frameY_fromFrame, hq, ← dist_eq_norm] at hn
     have hlt : u ^ 2 + 2 * (1 + u) * A < r₀ ^ 2 := by
       have hx2 : x < r / 2 := hx.2
       have : x ^ 2 < r ^ 2 / 4 := by nlinarith [mul_lt_mul'' hx2 hx2 hx.1.le hx.1.le]
       nlinarith
-    nlinarith [dist_nonneg (x := framePt v α (t * Real.sin x) (1 - t * Real.cos x)) (y := v)]
+    nlinarith [dist_nonneg (x := fromFrame v α (t * Real.sin x) (1 - t * Real.cos x)) (y := v)]
   · show 0 < frameX v α _
-    rw [frameX_framePt]
+    rw [frameX_fromFrame]
     nlinarith
   · show 0 < tanHeight κ₁ (frameX v α _) (frameY v α _)
-    rw [frameX_framePt, frameY_framePt]
+    rw [frameX_fromFrame, frameY_fromFrame]
     unfold tanHeight
     rw [hq]
     have hY : 1 - t * Real.cos x = A - u * Real.cos x := by rw [ht', hA]; ring
@@ -440,7 +431,7 @@ theorem horn_radial_N {v : ℂ} {α κ₁ : ℝ} {c : Fin k} (hH : F.IsHorn v α
     nlinarith [mul_le_mul_of_nonneg_left hcosx hu0.le, mul_le_mul_of_nonneg_left (Real.cos_le_one x) hu0.le,
       mul_nonneg hu0.le hA0.le, sq_nonneg u]
   · show tanHeight 1 (frameX v α _) (frameY v α _) < 0
-    rw [frameX_framePt, frameY_framePt]
+    rw [frameX_fromFrame, frameY_fromFrame]
     unfold tanHeight
     rw [hq]
     have hY : 1 - t * Real.cos x = A - u * Real.cos x := by rw [ht', hA]; ring
@@ -476,30 +467,30 @@ theorem horn_radial_S {v : ℂ} {α κ₂ : ℝ} {c : Fin k} (hH : F.IsHorn v α
   have hu2 : u < A * (1 + κ₂) / 4 := by rw [hu]; linarith [ht.2, min_le_right (r / 2) (A * (1 + κ₂) / 4)]
   have ht' : t = 1 + u := by rw [hu]; ring
   apply hr₀sub
-  rw [S_add_eq_framePt]
+  rw [S_add_eq_fromFrame]
   have hq : (t * Real.sin x) ^ 2 + (t * Real.cos x - 1) ^ 2 = u ^ 2 + 2 * (1 + u) * A := by
-    have := framePt_normSq_aux (t := t) (x := x)
+    have := fromFrame_normSq_aux (t := t) (x := x)
     rw [show (t * Real.cos x - 1) ^ 2 = (1 - t * Real.cos x) ^ 2 by ring, this, ht', hA]; ring
   have hcosx : -1 ≤ Real.cos x := Real.neg_one_le_cos x
   have hY : t * Real.cos x - 1 = -(A - u * Real.cos x) := by rw [ht', hA]; ring
   refine ⟨?_, ?_, ?_, ?_⟩
-  · have hn := frame_normSq v α (framePt v α (t * Real.sin x) (t * Real.cos x - 1))
-    rw [frameX_framePt, frameY_framePt, hq, ← dist_eq_norm] at hn
+  · have hn := frame_normSq v α (fromFrame v α (t * Real.sin x) (t * Real.cos x - 1))
+    rw [frameX_fromFrame, frameY_fromFrame, hq, ← dist_eq_norm] at hn
     have hlt : u ^ 2 + 2 * (1 + u) * A < r₀ ^ 2 := by
       have hx2 : x < r / 2 := hx.2
       have : x ^ 2 < r ^ 2 / 4 := by nlinarith [mul_lt_mul'' hx2 hx2 hx.1.le hx.1.le]
       nlinarith
-    nlinarith [dist_nonneg (x := framePt v α (t * Real.sin x) (t * Real.cos x - 1)) (y := v)]
+    nlinarith [dist_nonneg (x := fromFrame v α (t * Real.sin x) (t * Real.cos x - 1)) (y := v)]
   · show 0 < frameX v α _
-    rw [frameX_framePt]
+    rw [frameX_fromFrame]
     nlinarith
   · show 0 < tanHeight (-1) (frameX v α _) (frameY v α _)
-    rw [frameX_framePt, frameY_framePt]
+    rw [frameX_fromFrame, frameY_fromFrame]
     unfold tanHeight
     rw [hq, hY]
     nlinarith [sq_nonneg u, mul_pos hu0 hA0, Real.cos_le_one x]
   · show tanHeight κ₂ (frameX v α _) (frameY v α _) < 0
-    rw [frameX_framePt, frameY_framePt]
+    rw [frameX_fromFrame, frameY_fromFrame]
     unfold tanHeight
     rw [hq, hY]
     have hA2 : A ≤ 2 := by rw [hA]; linarith

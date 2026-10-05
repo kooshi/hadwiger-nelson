@@ -15,7 +15,7 @@ reads six colours). The frame at a horn's vertex `v` is the foundation's: `a = e
 * **FS114-L60-LE**: L60-LE (`l60_le`), L60-EQ (`l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners`, `l60_eq_third`), L60-REAL (`l60Frag`,
   `l60_real`).
 * **FS112-N2-BENDS** with FS112-BEND merged: N2-SIGN (`n2_sign`), N2-ENV (`n2_env_toward`, `n2_env_away`, `n2_env_near`,
-  `n2_env_near_away`), the bends (`bend_toward`, `bend_away`, `bend_away_whole`).
+  `n2_env_near_away`), the bends (`bend_toward`, `bend_away_whole`).
 * **FS112-ISO** (`isoFrag`, `iso`); **FS112-FLANK** (`inType_shadows_horn`, `flank_siamese_of_inType`; its third clause, the bowtie's
   witness, is `flank_incomplete_bowtie` in `Plane/ValidMap/BaseSteps`); **FS112-N2-FLANK-Q** (`flankQ_upper`, `flankQ_lower`,
   `flankQ_both`).
@@ -26,19 +26,19 @@ namespace HadwigerNelson.Plane
 
 open Complex Real Set Filter Topology Metric
 
-/-- `framePt` has the `x` coordinate it is built from. -/
-theorem frameX_framePt (v : ℂ) (α x y : ℝ) : frameX v α (framePt v α x y) = x := by
+/-- `fromFrame` has the `x` coordinate it is built from. -/
+theorem frameX_fromFrame (v : ℂ) (α x y : ℝ) : frameX v α (fromFrame v α x y) = x := by
   have hce := conj_e_mul_e α
-  unfold frameX framePt
+  unfold frameX fromFrame
   have : (v + ((x : ℂ) + (y : ℂ) * I) * e α - v) * starRingEnd ℂ (e α) = (x : ℂ) + (y : ℂ) * I := by
     calc _ = ((x : ℂ) + (y : ℂ) * I) * (e α * starRingEnd ℂ (e α)) := by ring
       _ = _ := by rw [hce, mul_one]
   rw [this]; simp
 
-/-- `framePt` has the `y` coordinate it is built from. -/
-theorem frameY_framePt (v : ℂ) (α x y : ℝ) : frameY v α (framePt v α x y) = y := by
+/-- `fromFrame` has the `y` coordinate it is built from. -/
+theorem frameY_fromFrame (v : ℂ) (α x y : ℝ) : frameY v α (fromFrame v α x y) = y := by
   have hce := conj_e_mul_e α
-  unfold frameY framePt
+  unfold frameY fromFrame
   have : (v + ((x : ℂ) + (y : ℂ) * I) * e α - v) * starRingEnd ℂ (e α) = (x : ℂ) + (y : ℂ) * I := by
     calc _ = ((x : ℂ) + (y : ℂ) * I) * (e α * starRingEnd ℂ (e α)) := by ring
       _ = _ := by rw [hce, mul_one]
@@ -67,10 +67,10 @@ parabola `y = s x²/2`, which lie above every arc of curvature `m < s` and below
 theorem exists_mem_hornSet_aboveBelow (v : ℂ) (α : ℝ) {κ₁ κ₂ s m r : ℝ} (hr : 0 < r) (h1 : κ₁ < s) (h2 : s < κ₂)
     (hm : m ≠ s) :
     ∃ z ∈ hornSet v α κ₁ κ₂ r, (m < s → TanAbove v α m z) ∧ (s < m → TanBelow v α m z) := by
-  have hc : Continuous fun t : ℝ => framePt v α t (s * t ^ 2 / 2) := by unfold framePt; fun_prop
-  have hdist : ∀ᶠ t in 𝓝 (0 : ℝ), dist (framePt v α t (s * t ^ 2 / 2)) v < r := by
+  have hc : Continuous fun t : ℝ => fromFrame v α t (s * t ^ 2 / 2) := by unfold fromFrame; fun_prop
+  have hdist : ∀ᶠ t in 𝓝 (0 : ℝ), dist (fromFrame v α t (s * t ^ 2 / 2)) v < r := by
     have := hc.tendsto 0
-    have h0 : framePt v α 0 (s * 0 ^ 2 / 2) = v := by simp [framePt]
+    have h0 : fromFrame v α 0 (s * 0 ^ 2 / 2) = v := by simp [fromFrame]
     rw [h0] at this
     exact (Metric.tendsto_nhds.mp this) r hr
   have e1 := eventually_hornPt_pos h1
@@ -83,15 +83,15 @@ theorem exists_mem_hornSet_aboveBelow (v : ℂ) (α : ℝ) {κ₁ κ₂ s m r : 
       exact ⟨fun h => absurd h (not_lt.mpr hgt.le), fun _ => ht⟩
   have hall : ∀ᶠ t in 𝓝[>] (0 : ℝ), 0 < s - κ₁ - κ₁ * s ^ 2 * t ^ 2 / 4 ∧ s - κ₂ - κ₂ * s ^ 2 * t ^ 2 / 4 < 0 ∧
       ((m < s → 0 < s - m - m * s ^ 2 * t ^ 2 / 4) ∧ (s < m → s - m - m * s ^ 2 * t ^ 2 / 4 < 0)) ∧ t ∈ Ioi (0 : ℝ) ∧
-      dist (framePt v α t (s * t ^ 2 / 2)) v < r := by
+      dist (fromFrame v α t (s * t ^ 2 / 2)) v < r := by
     filter_upwards [e1, e2, e3, eventually_mem_nhdsWithin, hdist.filter_mono nhdsWithin_le_nhds] with t a b c d e
     exact ⟨a, b, c, d, e⟩
   obtain ⟨t, ht1, ht2, ht3, ht0, hd⟩ := hall.exists
   have ht0' : 0 < t := ht0
-  have hX : frameX v α (framePt v α t (s * t ^ 2 / 2)) = t := frameX_framePt v α _ _
-  have hY : frameY v α (framePt v α t (s * t ^ 2 / 2)) = s * t ^ 2 / 2 := frameY_framePt v α _ _
+  have hX : frameX v α (fromFrame v α t (s * t ^ 2 / 2)) = t := frameX_fromFrame v α _ _
+  have hY : frameY v α (fromFrame v α t (s * t ^ 2 / 2)) = s * t ^ 2 / 2 := frameY_fromFrame v α _ _
   have hpos : 0 < t ^ 2 / 2 := by positivity
-  refine ⟨framePt v α t (s * t ^ 2 / 2), ⟨hd, by rw [hX]; exact ht0', ?_, ?_⟩, ?_, ?_⟩
+  refine ⟨fromFrame v α t (s * t ^ 2 / 2), ⟨hd, by rw [hX]; exact ht0', ?_, ?_⟩, ?_, ?_⟩
   · unfold TanAbove; rw [hX, hY, tanHeight_hornPt]; exact mul_pos hpos ht1
   · unfold TanBelow; rw [hX, hY, tanHeight_hornPt]; exact mul_neg_of_pos_of_neg hpos ht2
   · intro h; unfold TanAbove; rw [hX, hY, tanHeight_hornPt]; exact mul_pos hpos (ht3.1 h)
@@ -2635,6 +2635,1137 @@ theorem n2_env_near_away (P : ℂ) {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂) (h�
   rw [dist_eq_norm, heq]
   nlinarith [norm_nonneg ((p - P) - ((1 + s : ℝ) : ℂ) * e φ)]
 
+end ArcMap
+
+/-! ## The bends' geometry: polar form about a direction, the lens profile, arcs cut by a half-plane -/
+
+/-- `cos a − cos h ≤ h − a` for `0 ≤ a ≤ h ≤ π`. -/
+theorem cos_sub_cos_le_sub {a h : ℝ} (ha : 0 ≤ a) (hah : a ≤ h) (hh : h ≤ π) : Real.cos a - Real.cos h ≤ h - a := by
+  rw [Real.cos_sub_cos]
+  have h1 : Real.sin ((a - h) / 2) = - Real.sin ((h - a) / 2) := by rw [← Real.sin_neg]; ring_nf
+  rw [h1]
+  have h2 : Real.sin ((h - a) / 2) ≤ (h - a) / 2 := Real.sin_le (by linarith)
+  have h3 : 0 ≤ Real.sin ((h - a) / 2) := Real.sin_nonneg_of_nonneg_of_le_pi (by linarith) (by linarith)
+  have h4 : Real.sin ((a + h) / 2) ≤ 1 := Real.sin_le_one _
+  nlinarith
+
+/-- A cosine at least `cos h`, `0 ≤ h ≤ π`, puts an angle of `(−π, π]` within `h` of `0`. -/
+theorem abs_le_of_cos_le {a h : ℝ} (ha : |a| ≤ π) (hh : 0 ≤ h) (hc : Real.cos h ≤ Real.cos a) : |a| ≤ h := by
+  by_contra hlt
+  push Not at hlt
+  have := Real.cos_lt_cos_of_nonneg_of_le_pi hh ha hlt
+  rw [Real.cos_abs] at this
+  linarith
+
+/-- The strict form. -/
+theorem abs_lt_of_cos_lt {a h : ℝ} (ha : |a| ≤ π) (hh : 0 ≤ h) (hc : Real.cos h < Real.cos a) : |a| < h := by
+  by_contra hle
+  push Not at hle
+  have := Real.cos_le_cos_of_nonneg_of_le_pi hh ha hle
+  rw [Real.cos_abs] at this
+  linarith
+
+/-- **The toward lens profile in polar form**: a point `w`, `‖w‖ ≤ 1`, with `1 − ‖w‖² ≤ 2d(Re w − cos h)` has `|arg w| ≤ h` and radial
+depth `1 − ‖w‖ ≤ 2d(h − |arg w|)`. -/
+theorem polar_toward {d h : ℝ} (hd : 0 < d) (hh : 0 < h) (hh2 : h < π / 2) {w : ℂ} (hw1 : ‖w‖ ≤ 1)
+    (hK : 1 - ‖w‖ ^ 2 ≤ 2 * d * (w.re - Real.cos h)) :
+    0 < w.re ∧ |arg w| ≤ h ∧ 1 - ‖w‖ ≤ 2 * d * (h - |arg w|) := by
+  have hcos : 0 < Real.cos h := Real.cos_pos_of_mem_Ioo ⟨by linarith, hh2⟩
+  have hn0 := norm_nonneg w
+  have hre : Real.cos h ≤ w.re := by
+    by_contra hlt; push Not at hlt; nlinarith
+  have hre0 : 0 < w.re := hcos.trans_le hre
+  have hw0 : w ≠ 0 := fun h0 => by rw [h0, Complex.zero_re] at hre0; exact lt_irrefl _ hre0
+  have hnpos : 0 < ‖w‖ := norm_pos_iff.mpr hw0
+  have hca : Real.cos (arg w) = w.re / ‖w‖ := Complex.cos_arg hw0
+  have hge : w.re ≤ Real.cos (arg w) := by rw [hca, le_div_iff₀ hnpos]; nlinarith
+  have habs := abs_le_of_cos_le (Complex.abs_arg_le_pi w) hh.le (hre.trans hge)
+  refine ⟨hre0, habs, ?_⟩
+  have hsub := cos_sub_cos_le_sub (abs_nonneg (arg w)) habs (by linarith [Real.pi_pos])
+  rw [Real.cos_abs] at hsub
+  have hre' : w.re = ‖w‖ * Real.cos (arg w) := by rw [hca]; field_simp
+  have : w.re ≤ Real.cos (arg w) := hge
+  nlinarith
+
+/-- The strict form: strictly inside the angle, strictly thinner than the profile. -/
+theorem polar_toward_strict {d h : ℝ} (hd : 0 < d) (hh : 0 < h) (hh2 : h < π / 2) {w : ℂ} (hw1 : ‖w‖ ≤ 1)
+    (hK : 1 - ‖w‖ ^ 2 < 2 * d * (w.re - Real.cos h)) : |arg w| < h ∧ 1 - ‖w‖ < 2 * d * (h - |arg w|) := by
+  obtain ⟨hre0, -, -⟩ := polar_toward hd hh hh2 hw1 hK.le
+  have hn0 := norm_nonneg w
+  have hre : Real.cos h < w.re := by
+    by_contra hle; push Not at hle; nlinarith
+  have hw0 : w ≠ 0 := fun h0 => by rw [h0, Complex.zero_re] at hre0; exact lt_irrefl _ hre0
+  have hnpos : 0 < ‖w‖ := norm_pos_iff.mpr hw0
+  have hca : Real.cos (arg w) = w.re / ‖w‖ := Complex.cos_arg hw0
+  have hge : w.re ≤ Real.cos (arg w) := by rw [hca, le_div_iff₀ hnpos]; nlinarith
+  have habs := abs_lt_of_cos_lt (Complex.abs_arg_le_pi w) hh.le (hre.trans_le hge)
+  refine ⟨habs, ?_⟩
+  have hsub := cos_sub_cos_le_sub (abs_nonneg (arg w)) habs.le (by linarith [Real.pi_pos])
+  rw [Real.cos_abs] at hsub
+  nlinarith
+
+/-- **The away lens profile in polar form**: a point `w`, `‖w‖ ≥ 1`, with `‖w‖² − 1 ≤ 2d(Re w − cos h)`, `d ≤ 1/2`, has
+`|arg w| ≤ h` and radial height `‖w‖ − 1 ≤ 2d(h − |arg w|)`. -/
+theorem polar_away {d h : ℝ} (hd : 0 < d) (hd2 : d ≤ 1 / 2) (hh : 0 < h) (hh2 : h < π / 2) {w : ℂ} (hw1 : 1 ≤ ‖w‖)
+    (hK : ‖w‖ ^ 2 - 1 ≤ 2 * d * (w.re - Real.cos h)) :
+    0 < w.re ∧ |arg w| ≤ h ∧ ‖w‖ - 1 ≤ 2 * d * (h - |arg w|) := by
+  have hcos : 0 < Real.cos h := Real.cos_pos_of_mem_Ioo ⟨by linarith, hh2⟩
+  have hcos1 : Real.cos h ≤ 1 := Real.cos_le_one h
+  have hre : ‖w‖ * Real.cos h ≤ w.re := by
+    nlinarith [mul_nonneg (sub_nonneg.mpr hw1) (show 0 ≤ ‖w‖ + 1 - 2 * d * Real.cos h by nlinarith)]
+  have hre0 : 0 < w.re := lt_of_lt_of_le (by positivity) hre
+  have hw0 : w ≠ 0 := fun h0 => by rw [h0, Complex.zero_re] at hre0; exact lt_irrefl _ hre0
+  have hnpos : 0 < ‖w‖ := norm_pos_iff.mpr hw0
+  have hca : Real.cos (arg w) = w.re / ‖w‖ := Complex.cos_arg hw0
+  have hge : Real.cos h ≤ Real.cos (arg w) := by rw [hca, le_div_iff₀ hnpos]; linarith
+  have habs := abs_le_of_cos_le (Complex.abs_arg_le_pi w) hh.le hge
+  refine ⟨hre0, habs, ?_⟩
+  have hsub := cos_sub_cos_le_sub (abs_nonneg (arg w)) habs (by linarith [Real.pi_pos])
+  rw [Real.cos_abs] at hsub
+  have hre' : w.re = ‖w‖ * Real.cos (arg w) := by rw [hca]; field_simp
+  have hc1 : Real.cos (arg w) ≤ 1 := Real.cos_le_one _
+  have hm1 : d * (Real.cos (arg w) - Real.cos h) ≤ d * (h - |arg w|) := mul_le_mul_of_nonneg_left hsub hd.le
+  have hm2 : d * (‖w‖ - 1) * Real.cos (arg w) ≤ d * (‖w‖ - 1) :=
+    mul_le_of_le_one_right (mul_nonneg hd.le (by linarith)) hc1
+  have hstep : (‖w‖ - 1) * (2 - 2 * d) ≤ 2 * d * (h - |arg w|) := by nlinarith
+  have hΔ : 0 ≤ h - |arg w| := by linarith
+  nlinarith
+
+/-- The strict form of `polar_away`. -/
+theorem polar_away_strict {d h : ℝ} (hd : 0 < d) (hd2 : d ≤ 1 / 2) (hh : 0 < h) (hh2 : h < π / 2) {w : ℂ}
+    (hw1 : 1 ≤ ‖w‖) (hK : ‖w‖ ^ 2 - 1 < 2 * d * (w.re - Real.cos h)) :
+    |arg w| < h ∧ ‖w‖ - 1 < 2 * d * (h - |arg w|) := by
+  obtain ⟨hre0, -, -⟩ := polar_away hd hd2 hh hh2 hw1 hK.le
+  have hcos : 0 < Real.cos h := Real.cos_pos_of_mem_Ioo ⟨by linarith, hh2⟩
+  have hre : ‖w‖ * Real.cos h < w.re := by
+    nlinarith [mul_nonneg (sub_nonneg.mpr hw1) (show 0 ≤ ‖w‖ + 1 - 2 * d * Real.cos h by nlinarith [Real.cos_le_one h])]
+  have hw0 : w ≠ 0 := fun h0 => by rw [h0, Complex.zero_re] at hre0; exact lt_irrefl _ hre0
+  have hnpos : 0 < ‖w‖ := norm_pos_iff.mpr hw0
+  have hca : Real.cos (arg w) = w.re / ‖w‖ := Complex.cos_arg hw0
+  have hge : Real.cos h < Real.cos (arg w) := by rw [hca, lt_div_iff₀ hnpos]; linarith
+  have habs := abs_lt_of_cos_lt (Complex.abs_arg_le_pi w) hh.le hge
+  refine ⟨habs, ?_⟩
+  have hsub := cos_sub_cos_le_sub (abs_nonneg (arg w)) habs.le (by linarith [Real.pi_pos])
+  rw [Real.cos_abs] at hsub
+  have hre' : w.re = ‖w‖ * Real.cos (arg w) := by rw [hca]; field_simp
+  have hc1 : Real.cos (arg w) ≤ 1 := Real.cos_le_one _
+  have hm1 : d * (Real.cos (arg w) - Real.cos h) ≤ d * (h - |arg w|) := mul_le_mul_of_nonneg_left hsub hd.le
+  have hm2 : d * (‖w‖ - 1) * Real.cos (arg w) ≤ d * (‖w‖ - 1) :=
+    mul_le_of_le_one_right (mul_nonneg hd.le (by linarith)) hc1
+  have hstep : (‖w‖ - 1) * (2 - 2 * d) < 2 * d * (h - |arg w|) := by nlinarith
+  nlinarith
+
+/-- **An arc cut from a circle by a half-plane**: for `|τ| ≤ R`, the arc `circ C R (φ − arccos(τ/R)) (φ + arccos(τ/R))` is the set of
+points of the circle whose component along `e φ` from the centre is at least `τ`. -/
+theorem carrier_circ_arccos {C : ℂ} {R φ τ : ℝ} (hR : 0 < R) (hτ : |τ| ≤ R) :
+    (Arc.circ C R (φ - Real.arccos (τ / R)) (φ + Real.arccos (τ / R))).carrier =
+      {z | dist z C = R ∧ τ ≤ ((z - C) * starRingEnd ℂ (e φ)).re} := by
+  have hτR : -1 ≤ τ / R ∧ τ / R ≤ 1 := by
+    rw [abs_le] at hτ
+    exact ⟨by rw [le_div_iff₀ hR]; linarith, by rw [div_le_one hR]; linarith⟩
+  have hcosγ : Real.cos (Real.arccos (τ / R)) = τ / R := Real.cos_arccos hτR.1 hτR.2
+  have hγ0 := Real.arccos_nonneg (τ / R)
+  have hγπ := Real.arccos_le_pi (τ / R)
+  ext z
+  simp only [Arc.carrier, mem_image, mem_setOf_eq]
+  constructor
+  · rintro ⟨θ, hθ, rfl⟩
+    refine ⟨by rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos hR], ?_⟩
+    rw [add_sub_cancel_left, mul_assoc, Complex.re_ofReal_mul, ArcMap.re_e_mul_conj_e]
+    have habs : |θ - φ| ≤ Real.arccos (τ / R) := abs_le.mpr ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+    have hc : Real.cos (Real.arccos (τ / R)) ≤ Real.cos |θ - φ| :=
+      Real.cos_le_cos_of_nonneg_of_le_pi (abs_nonneg _) hγπ habs
+    rw [Real.cos_abs, hcosγ] at hc
+    rw [div_le_iff₀ hR] at hc
+    linarith
+  · rintro ⟨hd, hτq⟩
+    set q := (z - C) * starRingEnd ℂ (e φ) with hq
+    have hqn : ‖q‖ = R := by rw [hq, norm_mul, RCLike.norm_conj, norm_e, mul_one, ← dist_eq_norm, hd]
+    have hq0 : q ≠ 0 := fun h0 => by rw [h0, norm_zero] at hqn; linarith
+    have hzq : z = C + q * e φ := by
+      rw [hq, mul_assoc, mul_comm (starRingEnd ℂ (e φ)), e_mul_conj_e, mul_one]; ring
+    have hca : Real.cos (arg q) = q.re / R := by rw [Complex.cos_arg hq0, hqn]
+    have hc : Real.cos (Real.arccos (τ / R)) ≤ Real.cos (arg q) := by
+      rw [hcosγ, hca]; exact div_le_div_of_nonneg_right hτq hR.le
+    have habs := abs_le_of_cos_le (Complex.abs_arg_le_pi q) hγ0 hc
+    refine ⟨φ + arg q, ⟨by linarith [(abs_le.mp habs).1], by linarith [(abs_le.mp habs).2]⟩, ?_⟩
+    have hqe : q = (R : ℂ) * e (arg q) := by rw [← hqn]; exact eq_norm_mul_e_arg
+    symm
+    calc z = C + q * e φ := hzq
+      _ = C + (R : ℂ) * e (arg q) * e φ := by rw [← hqe]
+      _ = C + R * e (φ + arg q) := by rw [e_add]; ring
+
+/-- The frame along `e φ` at `P`: `w = (z − P) e(φ)‾` has `‖w‖ = |z − P|`. -/
+theorem norm_frameDir (P z : ℂ) (φ : ℝ) : ‖(z - P) * starRingEnd ℂ (e φ)‖ = dist z P := by
+  rw [norm_mul, RCLike.norm_conj, norm_e, mul_one, dist_eq_norm]
+
+/-- `z = P + |z − P| e(φ + arg w)`, `w = (z − P) e(φ)‾`. -/
+theorem eq_polar_frameDir (P z : ℂ) (φ : ℝ) :
+    z = P + (dist z P : ℂ) * e (φ + arg ((z - P) * starRingEnd ℂ (e φ))) := by
+  set w := (z - P) * starRingEnd ℂ (e φ) with hw
+  have hzw : z - P = w * e φ := by rw [hw, mul_assoc, mul_comm (starRingEnd ℂ (e φ)), e_mul_conj_e, mul_one]
+  have h1 : w = (‖w‖ : ℂ) * e (arg w) := eq_norm_mul_e_arg
+  rw [← norm_frameDir P z φ, ← hw, e_add]
+  calc z = P + w * e φ := by rw [← hzw]; ring
+    _ = P + (‖w‖ : ℂ) * e (arg w) * e φ := by rw [← h1]
+    _ = _ := by ring
+
+/-- The squared distance to `P − d e(φ)`: `|z − P|² + 2d Re w + d²`. -/
+theorem dist_sq_sub_dir (P z : ℂ) (φ d : ℝ) :
+    dist z (P - d * e φ) ^ 2 = dist z P ^ 2 + 2 * d * ((z - P) * starRingEnd ℂ (e φ)).re + d ^ 2 := by
+  set w := (z - P) * starRingEnd ℂ (e φ) with hw
+  have hzw : z - P = w * e φ := by rw [hw, mul_assoc, mul_comm (starRingEnd ℂ (e φ)), e_mul_conj_e, mul_one]
+  have h1 : z - (P - d * e φ) = (w + d) * e φ := by rw [add_mul, ← hzw]; ring
+  rw [dist_eq_norm, h1, norm_mul, norm_e, mul_one, ← norm_frameDir P z φ, ← hw, Complex.sq_norm, Complex.sq_norm,
+    Complex.normSq_apply, Complex.normSq_apply]
+  simp only [Complex.add_re, Complex.ofReal_re, Complex.add_im, Complex.ofReal_im, add_zero]
+  ring
+
+/-- The squared distance to `P + d e(φ)`: `|z − P|² − 2d Re w + d²`. -/
+theorem dist_sq_add_dir (P z : ℂ) (φ d : ℝ) :
+    dist z (P + d * e φ) ^ 2 = dist z P ^ 2 - 2 * d * ((z - P) * starRingEnd ℂ (e φ)).re + d ^ 2 := by
+  have := dist_sq_sub_dir P z φ (-d)
+  rw [show P - ((-d : ℝ) : ℂ) * e φ = P + d * e φ by push_cast; ring] at this
+  rw [this]; ring
+
+/-- For a point `r(θ)` of `ω(P)`, `Re w = cos(θ − φ)`. -/
+theorem re_frameDir_ringPt (P : ℂ) (θ φ : ℝ) : ((ringPt P θ - P) * starRingEnd ℂ (e φ)).re = Real.cos (θ - φ) := by
+  rw [ringPt, add_sub_cancel_left, ArcMap.re_e_mul_conj_e]
+
+/-- `min (h + a) (h − a) = h − |a|`. -/
+theorem min_add_sub_eq (h a : ℝ) : min (h + a) (h - a) = h - |a| := by
+  rcases le_total 0 a with ha | ha
+  · rw [abs_of_nonneg ha, min_eq_right (by linarith)]
+  · rw [abs_of_nonpos ha, min_eq_left (by linarith)]; ring
+
+/-- The distance from `P + ρ e(φ)` to `r(φ)` is `|1 − ρ|`. -/
+theorem dist_polar_ringPt (P : ℂ) (ρ φ : ℝ) : dist (P + (ρ : ℂ) * e φ) (ringPt P φ) = |1 - ρ| := by
+  rw [dist_eq_norm, ringPt, show P + (ρ : ℂ) * e φ - (P + e φ) = ((ρ - 1 : ℝ) : ℂ) * e φ by push_cast; ring, norm_mul, norm_e,
+    mul_one, Complex.norm_real, Real.norm_eq_abs, abs_sub_comm]
+
+/-- An inequality on the open interval passes to the closed one (by continuity). -/
+theorem le_on_Icc_of_Ioo {f : ℝ → ℝ} (hf : Continuous f) {a b c : ℝ} (hab : a < b) (h : ∀ θ ∈ Ioo a b, f θ ≤ c) :
+    ∀ θ ∈ Icc a b, f θ ≤ c := by
+  have : Icc a b ⊆ {θ | f θ ≤ c} := by
+    rw [← closure_Ioo hab.ne]; exact closure_minimal h (isClosed_le hf continuous_const)
+  exact fun θ hθ => this hθ
+
+/-- The same, from below. -/
+theorem ge_on_Icc_of_Ioo {f : ℝ → ℝ} (hf : Continuous f) {a b c : ℝ} (hab : a < b) (h : ∀ θ ∈ Ioo a b, c ≤ f θ) :
+    ∀ θ ∈ Icc a b, c ≤ f θ := by
+  have : Icc a b ⊆ {θ | c ≤ f θ} := by
+    rw [← closure_Ioo hab.ne]; exact closure_minimal h (isClosed_le continuous_const hf)
+  exact fun θ hθ => this hθ
+
+/-- **The toward lens in polar form**: a point of `B̄(P, 1)` outside or on the circle about `P − d e(φ)` of squared radius
+`1 + 2d cos h + d²` is `P + |z − P| e(φ + a)`, `a = arg w`, with `|a| ≤ h` and depth `1 − |z − P| ≤ 2d(h − |a|)`. -/
+theorem toward_polar {P z : ℂ} {φ h d : ℝ} (hd : 0 < d) (hh : 0 < h) (hh2 : h < π / 2) (hz1 : dist z P ≤ 1)
+    (hzC : 1 + 2 * d * Real.cos h + d ^ 2 ≤ dist z (P - d * e φ) ^ 2) :
+    |arg ((z - P) * starRingEnd ℂ (e φ))| ≤ h ∧
+      1 - dist z P ≤ 2 * d * (h - |arg ((z - P) * starRingEnd ℂ (e φ))|) := by
+  have hK : 1 - ‖(z - P) * starRingEnd ℂ (e φ)‖ ^ 2 ≤ 2 * d * (((z - P) * starRingEnd ℂ (e φ)).re - Real.cos h) := by
+    rw [norm_frameDir]; rw [dist_sq_sub_dir] at hzC; linarith
+  obtain ⟨-, h1, h2⟩ := polar_toward hd hh hh2 (by rw [norm_frameDir]; exact hz1) hK
+  rw [norm_frameDir] at h2
+  exact ⟨h1, h2⟩
+
+/-- The strict form: strictly outside the circle, strictly inside the angle and the profile. -/
+theorem toward_polar_strict {P z : ℂ} {φ h d : ℝ} (hd : 0 < d) (hh : 0 < h) (hh2 : h < π / 2) (hz1 : dist z P ≤ 1)
+    (hzC : 1 + 2 * d * Real.cos h + d ^ 2 < dist z (P - d * e φ) ^ 2) :
+    |arg ((z - P) * starRingEnd ℂ (e φ))| < h ∧
+      1 - dist z P < 2 * d * (h - |arg ((z - P) * starRingEnd ℂ (e φ))|) := by
+  have hK : 1 - ‖(z - P) * starRingEnd ℂ (e φ)‖ ^ 2 < 2 * d * (((z - P) * starRingEnd ℂ (e φ)).re - Real.cos h) := by
+    rw [norm_frameDir]; rw [dist_sq_sub_dir] at hzC; linarith
+  have h := polar_toward_strict hd hh hh2 (by rw [norm_frameDir]; exact hz1) hK
+  rw [norm_frameDir] at h
+  exact h
+
+/-- The squared distance between two points in polar form about `P`. -/
+theorem dist_polar_polar_sq (P : ℂ) (ρ ρ' b b' : ℝ) :
+    dist (P + (ρ : ℂ) * e b) (P + (ρ' : ℂ) * e b') ^ 2 = ρ ^ 2 + ρ' ^ 2 - 2 * ρ * ρ' * Real.cos (b - b') := by
+  rw [dist_eq_norm, add_sub_add_left_eq_sub, Complex.sq_norm, Complex.normSq_apply]
+  simp only [Complex.sub_re, Complex.sub_im, Complex.re_ofReal_mul, Complex.im_ofReal_mul, re_e, im_e]
+  rw [Real.cos_sub]
+  nlinarith [Real.cos_sq_add_sin_sq b, Real.cos_sq_add_sin_sq b']
+
+/-- **Two points of the toward lens are never at distance `1`** (half-length `h ≤ 30°`): in polar form both lie within `h` of the
+middle direction and within the unit disc, so `|z − z'|² < ρ² + ρ'² − ρρ' ≤ 1`. -/
+theorem toward_pairs {P z z' : ℂ} {φ h d : ℝ} (hd : 0 < d) (hh : 0 < h) (hh6 : h ≤ π / 6)
+    (hz1 : dist z P ≤ 1) (hzC : 1 + 2 * d * Real.cos h + d ^ 2 < dist z (P - d * e φ) ^ 2)
+    (hz1' : dist z' P ≤ 1) (hzC' : 1 + 2 * d * Real.cos h + d ^ 2 < dist z' (P - d * e φ) ^ 2) : dist z z' ≠ 1 := by
+  have hπ := Real.pi_pos
+  have hh2 : h < π / 2 := by linarith
+  set a := arg ((z - P) * starRingEnd ℂ (e φ))
+  set a' := arg ((z' - P) * starRingEnd ℂ (e φ))
+  obtain ⟨ha, -⟩ := toward_polar_strict hd hh hh2 hz1 hzC
+  obtain ⟨ha', -⟩ := toward_polar_strict hd hh hh2 hz1' hzC'
+  -- the radii are positive: the lens misses `P`
+  have hcosh : 0 < Real.cos h := Real.cos_pos_of_mem_Ioo ⟨by linarith, hh2⟩
+  have hoff : ∀ x : ℂ, 1 + 2 * d * Real.cos h + d ^ 2 < dist x (P - d * e φ) ^ 2 → 0 < dist x P := by
+    intro x hx
+    by_contra h0; push Not at h0
+    have hxP : x = P := dist_le_zero.mp h0
+    rw [hxP, dist_eq_norm, show P - (P - (d : ℂ) * e φ) = (d : ℂ) * e φ by ring, norm_mul, norm_e, mul_one,
+      Complex.norm_real, Real.norm_eq_abs, sq_abs] at hx
+    nlinarith
+  have hρ := hoff z hzC
+  have hρ' := hoff z' hzC'
+  have hcos : 1 / 2 < Real.cos (a - a') := by
+    have h1 : |a - a'| < π / 3 := by
+      have := abs_sub (a) (a'); linarith [abs_sub_le_iff.mp (le_refl |a - a'|)]
+    have := Real.cos_lt_cos_of_nonneg_of_le_pi (abs_nonneg (a - a')) (by linarith) h1
+    rw [Real.cos_abs, Real.cos_pi_div_three] at this
+    exact this
+  have hsq : dist z z' ^ 2 = dist z P ^ 2 + dist z' P ^ 2 - 2 * dist z P * dist z' P * Real.cos (a - a') := by
+    have hz := eq_polar_frameDir P z φ
+    have hz' := eq_polar_frameDir P z' φ
+    have : dist z z' = dist (P + (dist z P : ℂ) * e (φ + a)) (P + (dist z' P : ℂ) * e (φ + a')) := by
+      rw [← hz, ← hz']
+    rw [this, dist_polar_polar_sq, show φ + a - (φ + a') = a - a' by ring]
+  intro h1
+  have : dist z P ^ 2 + dist z' P ^ 2 - 2 * dist z P * dist z' P * Real.cos (a - a') < 1 := by
+    nlinarith [mul_pos hρ hρ', mul_nonneg (sub_nonneg.mpr hz1) (show 0 ≤ dist z P + 1 - dist z' P by linarith),
+      mul_nonneg hρ'.le (sub_nonneg.mpr hz1')]
+  rw [← hsq, h1] at this
+  norm_num at this
+
+/-- The component of `z − (P − d e(φ))` along `e φ` is `Re w + d`. -/
+theorem re_frameDir_sub_dir (P z : ℂ) (φ d : ℝ) :
+    ((z - (P - d * e φ)) * starRingEnd ℂ (e φ)).re = ((z - P) * starRingEnd ℂ (e φ)).re + d := by
+  rw [show z - (P - d * e φ) = (z - P) + d * e φ by ring, add_mul, mul_assoc, e_mul_conj_e, mul_one, Complex.add_re,
+    Complex.ofReal_re]
+
+/-- **The toward bend's new arc**: the arc of the circle about `P − d e(φ)` of squared radius `1 + 2d cos h + d²` cut by the
+half-plane `Re((z − C) e(φ)‾) ≥ d + cos h` is exactly that circle's part in `B̄(P, 1)`. -/
+theorem toward_carrier (P : ℂ) {φ h d : ℝ} (hd : 0 < d) (hcos : 0 < Real.cos h) :
+    (Arc.circ (P - d * e φ) √(1 + 2 * d * Real.cos h + d ^ 2)
+      (φ - Real.arccos ((d + Real.cos h) / √(1 + 2 * d * Real.cos h + d ^ 2)))
+      (φ + Real.arccos ((d + Real.cos h) / √(1 + 2 * d * Real.cos h + d ^ 2)))).carrier =
+      {z | dist z (P - d * e φ) = √(1 + 2 * d * Real.cos h + d ^ 2) ∧ dist z P ≤ 1} := by
+  have hpos : 0 < 1 + 2 * d * Real.cos h + d ^ 2 := by positivity
+  set R := √(1 + 2 * d * Real.cos h + d ^ 2) with hRdef
+  have hRsq : R ^ 2 = 1 + 2 * d * Real.cos h + d ^ 2 := Real.sq_sqrt hpos.le
+  have hR : 0 < R := Real.sqrt_pos.2 hpos
+  have hτ : |d + Real.cos h| ≤ R := by
+    rw [abs_of_pos (by positivity)]
+    refine Real.le_sqrt_of_sq_le ?_
+    nlinarith [Real.cos_sq_le_one h]
+  rw [carrier_circ_arccos hR hτ]
+  ext z
+  simp only [mem_setOf_eq, re_frameDir_sub_dir]
+  have hd2 := dist_sq_sub_dir P z φ d
+  constructor <;> rintro ⟨hzc, h2⟩ <;> refine ⟨hzc, ?_⟩
+  · rw [hzc, hRsq] at hd2
+    have : dist z P ^ 2 ≤ 1 := by nlinarith
+    nlinarith [dist_nonneg (x := z) (y := P)]
+  · rw [hzc, hRsq] at hd2
+    have : dist z P ^ 2 ≤ 1 := by nlinarith [dist_nonneg (x := z) (y := P)]
+    nlinarith
+
+/-- The component of `z − (P + d e(φ))` along `e φ` is `Re w − d`. -/
+theorem re_frameDir_add_dir (P z : ℂ) (φ d : ℝ) :
+    ((z - (P + d * e φ)) * starRingEnd ℂ (e φ)).re = ((z - P) * starRingEnd ℂ (e φ)).re - d := by
+  have := re_frameDir_sub_dir P z φ (-d)
+  rw [show P - ((-d : ℝ) : ℂ) * e φ = P + d * e φ by push_cast; ring] at this
+  rw [this]; ring
+
+/-- **The away lens in polar form**: a point outside `B(P, 1)` inside or on the circle about `P + d e(φ)` of squared radius
+`1 − 2d cos h + d²` (`d ≤ 1/2`) is `P + |z − P| e(φ + a)` with `|a| ≤ h` and height `|z − P| − 1 ≤ 2d(h − |a|)`. -/
+theorem away_polar {P z : ℂ} {φ h d : ℝ} (hd : 0 < d) (hd2 : d ≤ 1 / 2) (hh : 0 < h) (hh2 : h < π / 2)
+    (hz1 : 1 ≤ dist z P) (hzC : dist z (P + d * e φ) ^ 2 ≤ 1 - 2 * d * Real.cos h + d ^ 2) :
+    |arg ((z - P) * starRingEnd ℂ (e φ))| ≤ h ∧
+      dist z P - 1 ≤ 2 * d * (h - |arg ((z - P) * starRingEnd ℂ (e φ))|) := by
+  have hK : ‖(z - P) * starRingEnd ℂ (e φ)‖ ^ 2 - 1 ≤ 2 * d * (((z - P) * starRingEnd ℂ (e φ)).re - Real.cos h) := by
+    rw [norm_frameDir]; rw [dist_sq_add_dir] at hzC; linarith
+  obtain ⟨-, h1, h2⟩ := polar_away hd hd2 hh hh2 (by rw [norm_frameDir]; exact hz1) hK
+  rw [norm_frameDir] at h2
+  exact ⟨h1, h2⟩
+
+/-- The strict form of `away_polar`. -/
+theorem away_polar_strict {P z : ℂ} {φ h d : ℝ} (hd : 0 < d) (hd2 : d ≤ 1 / 2) (hh : 0 < h) (hh2 : h < π / 2)
+    (hz1 : 1 ≤ dist z P) (hzC : dist z (P + d * e φ) ^ 2 < 1 - 2 * d * Real.cos h + d ^ 2) :
+    |arg ((z - P) * starRingEnd ℂ (e φ))| < h ∧
+      dist z P - 1 < 2 * d * (h - |arg ((z - P) * starRingEnd ℂ (e φ))|) := by
+  have hK : ‖(z - P) * starRingEnd ℂ (e φ)‖ ^ 2 - 1 < 2 * d * (((z - P) * starRingEnd ℂ (e φ)).re - Real.cos h) := by
+    rw [norm_frameDir]; rw [dist_sq_add_dir] at hzC; linarith
+  have h := polar_away_strict hd hd2 hh hh2 (by rw [norm_frameDir]; exact hz1) hK
+  rw [norm_frameDir] at h
+  exact h
+
+/-- **The away bend's new arc**: the arc of the circle about `P + d e(φ)` of squared radius `1 − 2d cos h + d²` cut by the
+half-plane `Re((z − C) e(φ)‾) ≥ cos h − d` is exactly that circle's part outside `B(P, 1)`. -/
+theorem away_carrier (P : ℂ) {φ h d : ℝ} (hd : 0 < d) (hpos : 0 < 1 - 2 * d * Real.cos h + d ^ 2) :
+    (Arc.circ (P + d * e φ) √(1 - 2 * d * Real.cos h + d ^ 2)
+      (φ - Real.arccos ((Real.cos h - d) / √(1 - 2 * d * Real.cos h + d ^ 2)))
+      (φ + Real.arccos ((Real.cos h - d) / √(1 - 2 * d * Real.cos h + d ^ 2)))).carrier =
+      {z | dist z (P + d * e φ) = √(1 - 2 * d * Real.cos h + d ^ 2) ∧ 1 ≤ dist z P} := by
+  set R := √(1 - 2 * d * Real.cos h + d ^ 2) with hRdef
+  have hRsq : R ^ 2 = 1 - 2 * d * Real.cos h + d ^ 2 := Real.sq_sqrt hpos.le
+  have hR : 0 < R := Real.sqrt_pos.2 hpos
+  have hτ : |Real.cos h - d| ≤ R := by
+    refine Real.abs_le_sqrt ?_
+    nlinarith [Real.cos_sq_le_one h]
+  rw [carrier_circ_arccos hR hτ]
+  ext z
+  simp only [mem_setOf_eq, re_frameDir_add_dir]
+  have hd2 := dist_sq_add_dir P z φ d
+  constructor <;> rintro ⟨hzc, h2⟩ <;> refine ⟨hzc, ?_⟩
+  · rw [hzc, hRsq] at hd2
+    have h3 : 0 ≤ d * (((z - P) * starRingEnd ℂ (e φ)).re - Real.cos h) := mul_nonneg hd.le (by linarith)
+    have : 1 ≤ dist z P ^ 2 := by nlinarith
+    nlinarith [dist_nonneg (x := z) (y := P)]
+  · rw [hzc, hRsq] at hd2
+    have : 1 ≤ dist z P ^ 2 := by nlinarith [dist_nonneg (x := z) (y := P)]
+    have h3 : 0 ≤ d * (((z - P) * starRingEnd ℂ (e φ)).re - Real.cos h) := by nlinarith
+    have h4 := (mul_nonneg_iff_of_pos_left hd).mp h3
+    linarith
+
+/-- `1 + 2dy ≤ 2 cos(π/3 − y)` for `0 ≤ y ≤ π/3`, `d ≤ 1/10`. -/
+theorem one_add_le_two_cos {d y : ℝ} (hd1 : d ≤ 1 / 10) (hy : 0 ≤ y) (hy3 : y ≤ π / 3) :
+    1 + 2 * d * y ≤ 2 * Real.cos (π / 3 - y) := by
+  have hπ := Real.pi_pos
+  have hπ4 := Real.pi_lt_d2
+  rw [Real.cos_sub, Real.cos_pi_div_three, Real.sin_pi_div_three]
+  have hc : 1 - y ^ 2 / 2 ≤ Real.cos y := Real.one_sub_sq_div_two_le_cos
+  have hs : 2 / π * y ≤ Real.sin y := Real.mul_le_sin hy (by linarith)
+  have hs' : y / 2 ≤ Real.sin y := by
+    refine le_trans ?_ hs
+    rw [div_mul_eq_mul_div, le_div_iff₀ hπ]; nlinarith
+  have h3 : (17 / 10 : ℝ) ≤ √3 := Real.le_sqrt_of_sq_le (by norm_num)
+  have hsy : 0 ≤ Real.sin y := le_trans (by linarith) hs'
+  nlinarith [mul_le_mul_of_nonneg_right h3 hsy]
+
+/-- **A point of the away lens lies in `B̄(A, 1) ∩ B̄(B, 1)`**: at `P + ρ e(φ + b)`, `|b| < h ≤ 30°`, with height
+`ρ − 1 ≤ 2d(h − |b|)`, `d ≤ 1/10`, both ends are within `1`. -/
+theorem away_mem_lens {P : ℂ} {φ h d ρ b : ℝ} (hd : 0 ≤ d) (hd1 : d ≤ 1 / 10) (hh6 : h ≤ π / 6) (hb : |b| ≤ h)
+    (hρ1 : 1 ≤ ρ) (hρ : ρ - 1 ≤ 2 * d * (h - |b|)) :
+    dist (P + (ρ : ℂ) * e (φ + b)) (ringPt P (φ - h)) ≤ 1 ∧ dist (P + (ρ : ℂ) * e (φ + b)) (ringPt P (φ + h)) ≤ 1 := by
+  have hπ := Real.pi_pos
+  have key : ∀ β' y : ℝ, 0 ≤ y → |φ + b - β'| + y ≤ π / 3 → ρ ≤ 1 + 2 * d * y →
+      dist (P + (ρ : ℂ) * e (φ + b)) (ringPt P β') ≤ 1 := by
+    intro β' y hy hxy hρy
+    have hcx : Real.cos (π / 3 - y) ≤ Real.cos |φ + b - β'| :=
+      Real.cos_le_cos_of_nonneg_of_le_pi (abs_nonneg _) (by linarith) (by linarith)
+    rw [Real.cos_abs] at hcx
+    have h2 := one_add_le_two_cos hd1 hy (by linarith [abs_nonneg (φ + b - β')])
+    have hr : ringPt P β' = P + ((1 : ℝ) : ℂ) * e β' := by rw [ringPt, Complex.ofReal_one, one_mul]
+    rw [hr, ← sq_le_one_iff₀ dist_nonneg, dist_polar_polar_sq]
+    nlinarith
+  have hab := abs_le.mp hb
+  refine ⟨key _ (h - b) (by linarith) ?_ (by nlinarith [le_abs_self b]), key _ (h + b) (by linarith) ?_
+    (by nlinarith [neg_abs_le b])⟩
+  · rw [show φ + b - (φ - h) = h + b by ring, abs_of_nonneg (by linarith)]; linarith
+  · rw [show φ + b - (φ + h) = -(h - b) by ring, abs_neg, abs_of_nonneg (by linarith)]; linarith
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-! ## Engine 3: the cut of an open sub-arc of a unit circle out of a map's arcs, and the bend -/
+
+section Bend
+
+variable (F)
+
+/-- The lower end of the `m`-th piece of the arc `circ P 1 θa θb` off the open sub-arc `r((θ₁, θ₂))`. -/
+noncomputable def cutLo (θ₂ θa : ℝ) (m : ℤ) : ℝ := max θa (θ₂ + m * (2 * π))
+
+/-- The upper end of the `m`-th piece. -/
+noncomputable def cutHi (θ₁ θb : ℝ) (m : ℤ) : ℝ := min θb (θ₁ + (m + 1) * (2 * π))
+
+/-- **Engine 3, the cut** (`plans/FS131-w4-kernel-plan.md` § 13.1): the arcs of `F` with the open sub-arc `r((θ₁, θ₂))` of `ω(P)`
+removed — every arc that is not an arc `circ P 1 θa θb` of `ω(P)` kept whole, each arc of `ω(P)` replaced by its non-degenerate
+pieces over the parameter intervals `[θ₂ + 2πm, θ₁ + 2π(m + 1)]` that miss the sub-arc. -/
+def cutArcs (P : ℂ) (θ₁ θ₂ : ℝ) : Set Arc :=
+  {a | a ∈ F.arcs ∧ ∀ θa θb, a ≠ .circ P 1 θa θb} ∪
+    {b | ∃ θa θb, Arc.circ P 1 θa θb ∈ F.arcs ∧ ∃ m : ℤ, cutLo θ₂ θa m < cutHi θ₁ θb m ∧
+      b = .circ P 1 (cutLo θ₂ θa m) (cutHi θ₁ θb m)}
+
+/-- The carrier of an arc of `ω(P)`: its points are `r(t)`. -/
+theorem carrier_circ_one (P : ℂ) (θa θb : ℝ) : (Arc.circ P 1 θa θb).carrier = ringPt P '' Icc θa θb := by
+  ext z
+  simp only [Arc.carrier, mem_image, ringPt, Complex.ofReal_one, one_mul]
+
+/-- The pieces of the cut are non-degenerate arcs. -/
+theorem cutArcs_nondegenerate {P : ℂ} {θ₁ θ₂ : ℝ} : ∀ b ∈ F.cutArcs P θ₁ θ₂, b.Nondegenerate := by
+  rintro b (⟨hb, -⟩ | ⟨θa, θb, ha, m, hlt, rfl⟩)
+  · exact F.nondegenerate b hb
+  · obtain ⟨-, h1, h2⟩ := F.nondegenerate _ ha
+    refine ⟨one_pos, hlt, ?_⟩
+    have := le_max_left θa (θ₂ + m * (2 * π))
+    have := min_le_left θb (θ₁ + (m + 1) * (2 * π))
+    simp only [cutLo, cutHi] at *
+    linarith
+
+/-- Each arc of the cut lies in an arc of `F`. -/
+theorem cutArcs_subset {P : ℂ} {θ₁ θ₂ : ℝ} :
+    ∀ b ∈ F.cutArcs P θ₁ θ₂, ∃ a ∈ F.arcs, b.carrier ⊆ a.carrier := by
+  rintro b (⟨hb, -⟩ | ⟨θa, θb, ha, m, hlt, rfl⟩)
+  · exact ⟨b, hb, subset_rfl⟩
+  · refine ⟨_, ha, ?_⟩
+    rw [carrier_circ_one, carrier_circ_one]
+    exact image_mono (Icc_subset_Icc (le_max_left _ _) (min_le_left _ _))
+
+/-- An arc of `ω(P)` has finitely many pieces. -/
+theorem finite_cut_pieces (θ₁ θ₂ θa θb : ℝ) :
+    {m : ℤ | cutLo θ₂ θa m < cutHi θ₁ θb m}.Finite := by
+  have hπ := Real.pi_pos
+  refine (Set.finite_Icc (⌊(θa - θ₁) / (2 * π)⌋ - 1) ⌈(θb - θ₂) / (2 * π)⌉).subset ?_
+  intro m hm
+  simp only [mem_setOf_eq, cutLo, cutHi, lt_min_iff, max_lt_iff] at hm
+  obtain ⟨⟨-, h1⟩, h2, -⟩ := hm
+  constructor
+  · have : (θa - θ₁) / (2 * π) < (m : ℝ) + 1 := by
+      rw [div_lt_iff₀ (by positivity)]; linarith
+    have h3 : ⌊(θa - θ₁) / (2 * π)⌋ < m + 1 := by
+      rw [Int.floor_lt]; push_cast; exact this
+    omega
+  · have : (m : ℝ) < (θb - θ₂) / (2 * π) := by
+      rw [lt_div_iff₀ (by positivity)]; linarith
+    exact_mod_cast this.le.trans (Int.le_ceil _)
+
+/-- The cut's arcs are locally finite on the domain. -/
+theorem cutArcs_locallyFinite {P : ℂ} {θ₁ θ₂ : ℝ} :
+    ∀ x ∈ F.dom, ∃ t ∈ 𝓝 x, {b | b ∈ F.cutArcs P θ₁ θ₂ ∧ (b.carrier ∩ t).Nonempty}.Finite := by
+  intro x hx
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite x hx
+  refine ⟨t, ht, ?_⟩
+  set S := {a | a ∈ F.arcs ∧ (a.carrier ∩ t).Nonempty}
+  have hpieces : ∀ θa θb : ℝ, {b | ∃ m : ℤ, cutLo θ₂ θa m < cutHi θ₁ θb m ∧
+      b = Arc.circ P 1 (cutLo θ₂ θa m) (cutHi θ₁ θb m)}.Finite := fun θa θb =>
+    ((finite_cut_pieces θ₁ θ₂ θa θb).image fun m => Arc.circ P 1 (cutLo θ₂ θa m) (cutHi θ₁ θb m)).subset
+      fun b ⟨m, hm, hb⟩ => ⟨m, hm, hb.symm⟩
+  set pieces : Arc → Set Arc := fun a => {b | ∃ θa θb, a = Arc.circ P 1 θa θb ∧ ∃ m : ℤ, cutLo θ₂ θa m < cutHi θ₁ θb m ∧
+      b = Arc.circ P 1 (cutLo θ₂ θa m) (cutHi θ₁ θb m)} with hpdef
+  have hS : (S ∩ {a | ∃ θa θb, a = Arc.circ P 1 θa θb}).Finite := hfin.subset inter_subset_left
+  have hfp : ∀ a ∈ S ∩ {a | ∃ θa θb, a = Arc.circ P 1 θa θb}, (pieces a).Finite := by
+    rintro a ⟨-, θa, θb, rfl⟩
+    refine (hpieces θa θb).subset ?_
+    rintro b ⟨θa', θb', heq, m, hm, rfl⟩
+    simp only [Arc.circ.injEq, true_and] at heq
+    obtain ⟨rfl, rfl⟩ := heq
+    exact ⟨m, hm, rfl⟩
+  refine (hfin.union (hS.biUnion hfp)).subset ?_
+  rintro b ⟨⟨hb, -⟩ | ⟨θa, θb, ha, m, hm, rfl⟩, hbt⟩
+  · exact Or.inl ⟨hb, hbt⟩
+  · refine Or.inr (mem_iUnion₂.mpr ⟨Arc.circ P 1 θa θb, ⟨⟨ha, ?_⟩, θa, θb, rfl⟩, θa, θb, rfl, m, hm, rfl⟩)
+    obtain ⟨z, hz, hzt⟩ := hbt
+    refine ⟨z, ?_, hzt⟩
+    rw [carrier_circ_one] at hz ⊢
+    exact image_mono (Icc_subset_Icc (le_max_left _ _) (min_le_left _ _)) hz
+
+/-- A point `r(t)` lies on the open sub-arc `r((θ₁, θ₂))` exactly when some `t − 2πn` lies in `(θ₁, θ₂)`. -/
+theorem ringPt_mem_openArc_iff (P : ℂ) {θ₁ θ₂ t : ℝ} :
+    ringPt P t ∈ ringPt P '' Ioo θ₁ θ₂ ↔ ∃ n : ℤ, t - n * (2 * π) ∈ Ioo θ₁ θ₂ := by
+  constructor
+  · rintro ⟨u, hu, heq⟩
+    have he : e u = e t := by simpa [ringPt] using heq
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp he.symm
+    exact ⟨n, by rw [hn]; simpa using hu⟩
+  · rintro ⟨n, hn⟩
+    refine ⟨t - n * (2 * π), hn, ?_⟩
+    have := e_eq_e_iff.mpr ⟨n, (sub_add_cancel t _).symm⟩
+    simp only [ringPt, this]
+
+/-- The cut's pieces miss the open sub-arc. -/
+theorem disjoint_piece_openArc {P : ℂ} {θ₁ θ₂ θa θb : ℝ} (m : ℤ) :
+    Disjoint (Arc.circ P 1 (cutLo θ₂ θa m) (cutHi θ₁ θb m)).carrier (ringPt P '' Ioo θ₁ θ₂) := by
+  rw [carrier_circ_one, Set.disjoint_left]
+  rintro _ ⟨t, ht, rfl⟩ hmem
+  obtain ⟨n, hn1, hn2⟩ := (ringPt_mem_openArc_iff P).mp hmem
+  have hlo : θ₂ + m * (2 * π) ≤ t := (le_max_right _ _).trans ht.1
+  have hhi : t ≤ θ₁ + (m + 1) * (2 * π) := ht.2.trans (min_le_right _ _)
+  have hπ := Real.pi_pos
+  rcases le_or_gt n m with h | h
+  · have : (n : ℝ) ≤ m := by exact_mod_cast h
+    nlinarith
+  · have : (m : ℝ) + 1 ≤ n := by exact_mod_cast h
+    nlinarith
+
+/-- **The cut covers what it should**: a point of an arc `circ P 1 θa θb` of `F` off the open sub-arc and off its two ends lies on a
+piece. -/
+theorem mem_cut_of_mem_circ {P : ℂ} {θ₁ θ₂ θa θb : ℝ} (ha : Arc.circ P 1 θa θb ∈ F.arcs) {x : ℂ}
+    (hx : x ∈ (Arc.circ P 1 θa θb).carrier) (hO : x ∉ ringPt P '' Ioo θ₁ θ₂) (hA : x ≠ ringPt P θ₁)
+    (hB : x ≠ ringPt P θ₂) : x ∈ ⋃ b ∈ F.cutArcs P θ₁ θ₂, b.carrier := by
+  rw [carrier_circ_one] at hx
+  obtain ⟨t, ht, rfl⟩ := hx
+  have hπ := Real.pi_pos
+  set m := ⌊(t - θ₂) / (2 * π)⌋ with hm
+  have h1 : (m : ℝ) ≤ (t - θ₂) / (2 * π) := Int.floor_le _
+  have h2 : (t - θ₂) / (2 * π) < m + 1 := Int.lt_floor_add_one _
+  have h1' : θ₂ + m * (2 * π) ≤ t := by rw [le_div_iff₀ (by positivity)] at h1; linarith
+  have h2' : t < θ₂ + (m + 1) * (2 * π) := by rw [div_lt_iff₀ (by positivity)] at h2; linarith
+  have h3 : t ≤ θ₁ + (m + 1) * (2 * π) := by
+    by_contra h
+    push Not at h
+    refine hO ((ringPt_mem_openArc_iff P).mpr ⟨m + 1, ?_, ?_⟩) <;> push_cast <;> linarith
+  have hlo : cutLo θ₂ θa m ≤ t := max_le ht.1 h1'
+  have hhi : t ≤ cutHi θ₁ θb m := le_min ht.2 h3
+  rcases lt_or_eq_of_le (hlo.trans hhi) with hlt | heq
+  · exact mem_iUnion₂.mpr ⟨_, Or.inr ⟨θa, θb, ha, m, hlt, rfl⟩, by
+      rw [carrier_circ_one]; exact ⟨t, ⟨hlo, hhi⟩, rfl⟩⟩
+  · exfalso
+    have hlo' : cutLo θ₂ θa m = t := le_antisymm hlo (heq ▸ hhi)
+    have hhi' : cutHi θ₁ θb m = t := le_antisymm (heq ▸ hlo) hhi
+    obtain ⟨-, hab, -⟩ := F.nondegenerate _ ha
+    rcases max_choice θa (θ₂ + m * (2 * π)) with h | h <;> rw [cutLo, h] at hlo' <;>
+      rcases min_choice θb (θ₁ + (m + 1) * (2 * π)) with h' | h' <;> rw [cutHi, h'] at hhi'
+    · linarith
+    · exact hA (by rw [← hhi']; simpa [ringPt] using (e_add_int_mul_two_pi θ₁ (m + 1)))
+    · exact hB (by rw [← hlo']; simpa [ringPt] using (e_add_int_mul_two_pi θ₂ m))
+    · exact hB (by rw [← hlo']; simpa [ringPt] using (e_add_int_mul_two_pi θ₂ m))
+
+/-- Off the open sub-arc and its two ends, the cut's arcs and `F`'s cover the same points. -/
+theorem mem_cutArcs_iff {P : ℂ} {θ₁ θ₂ : ℝ} {x : ℂ} (hO : x ∉ ringPt P '' Ioo θ₁ θ₂) (hA : x ≠ ringPt P θ₁)
+    (hB : x ≠ ringPt P θ₂) : x ∈ ⋃ b ∈ F.cutArcs P θ₁ θ₂, b.carrier ↔ x ∈ ⋃ a ∈ F.arcs, a.carrier := by
+  constructor
+  · intro h
+    obtain ⟨b, hb, hxb⟩ := mem_iUnion₂.mp h
+    obtain ⟨a, ha, hsub⟩ := F.cutArcs_subset b hb
+    exact mem_iUnion₂.mpr ⟨a, ha, hsub hxb⟩
+  · intro h
+    obtain ⟨a, ha, hxa⟩ := mem_iUnion₂.mp h
+    by_cases hc : ∃ θa θb, a = Arc.circ P 1 θa θb
+    · obtain ⟨θa, θb, rfl⟩ := hc
+      exact F.mem_cut_of_mem_circ ha hxa hO hA hB
+    · push Not at hc
+      exact mem_iUnion₂.mpr ⟨a, Or.inl ⟨ha, hc⟩, hxa⟩
+
+/-- On the open sub-arc, a point of the cut's arcs lies on an arc of `F` that is not an arc of `ω(P)`. -/
+theorem exists_kept_of_mem_openArc {P : ℂ} {θ₁ θ₂ : ℝ} {x : ℂ} (hO : x ∈ ringPt P '' Ioo θ₁ θ₂)
+    (hx : x ∈ ⋃ b ∈ F.cutArcs P θ₁ θ₂, b.carrier) : ∃ a ∈ F.arcs, (∀ θa θb, a ≠ .circ P 1 θa θb) ∧ x ∈ a.carrier := by
+  obtain ⟨b, hb, hxb⟩ := mem_iUnion₂.mp hx
+  rcases hb with ⟨hb, hnot⟩ | ⟨θa, θb, -, m, -, rfl⟩
+  · exact ⟨b, hb, hnot, hxb⟩
+  · exact absurd hO (Set.disjoint_left.mp (disjoint_piece_openArc m) hxb)
+
+/-! ## The bend: the cut, one new arc, and a lens recoloured -/
+
+/-- Off a locally finite family of arcs, a point has a neighbourhood off the family. -/
+theorem eventually_not_mem_arcs {A : Set Arc} {x : ℂ} (hlf : ∃ t ∈ 𝓝 x, {a | a ∈ A ∧ (a.carrier ∩ t).Nonempty}.Finite)
+    (hx : x ∉ ⋃ a ∈ A, a.carrier) : ∀ᶠ y in 𝓝 x, y ∉ ⋃ a ∈ A, a.carrier := by
+  obtain ⟨t, ht, hfin⟩ := hlf
+  have hcl : IsClosed (⋃ a ∈ {a | a ∈ A ∧ (a.carrier ∩ t).Nonempty}, a.carrier) :=
+    hfin.isClosed_biUnion fun a _ => a.isClosed_carrier
+  have hxn : x ∉ ⋃ a ∈ {a | a ∈ A ∧ (a.carrier ∩ t).Nonempty}, a.carrier := fun h => by
+    obtain ⟨a, ⟨ha, -⟩, hxa⟩ := mem_iUnion₂.mp h
+    exact hx (mem_iUnion₂.mpr ⟨a, ha, hxa⟩)
+  filter_upwards [ht, hcl.isOpen_compl.mem_nhds hxn] with y hyt hyc hy
+  obtain ⟨a, ha, hya⟩ := mem_iUnion₂.mp hy
+  exact hyc (mem_iUnion₂.mpr ⟨a, ⟨ha, y, hya, hyt⟩, hya⟩)
+
+/-- The bend's arcs (the cut and one new arc) are locally finite on the domain. -/
+theorem bendArcs_locallyFinite {P : ℂ} {θ₁ θ₂ : ℝ} (a : Arc) :
+    ∀ x ∈ F.dom, ∃ t ∈ 𝓝 x, {b | b ∈ F.cutArcs P θ₁ θ₂ ∪ {a} ∧ (b.carrier ∩ t).Nonempty}.Finite := by
+  intro x hx
+  obtain ⟨t, ht, hfin⟩ := F.cutArcs_locallyFinite (P := P) (θ₁ := θ₁) (θ₂ := θ₂) x hx
+  refine ⟨t, ht, (hfin.union (finite_singleton a)).subset ?_⟩
+  rintro b ⟨hb | hb, hbt⟩
+  · exact Or.inl ⟨hb, hbt⟩
+  · exact Or.inr hb
+
+/-- The bend's colouring: `j` on the lens `L`, `F`'s elsewhere. -/
+noncomputable def bendCol (L : Set ℂ) (j : Fin k) : ℂ → Fin k := by
+  classical
+  exact fun y => if y ∈ L then j else F.col y
+
+/-- On the lens the bend's colour is `j`. -/
+theorem bendCol_of_mem {L : Set ℂ} {j : Fin k} {y : ℂ} (hy : y ∈ L) : F.bendCol L j y = j := by
+  simp [bendCol, hy]
+
+/-- Off the lens the bend's colour is `F`'s. -/
+theorem bendCol_of_not_mem {L : Set ℂ} {j : Fin k} {y : ℂ} (hy : y ∉ L) : F.bendCol L j y = F.col y := by
+  simp [bendCol, hy]
+
+/-- **The bend's colouring is locally constant off its arcs**: inside the lens off `ω(P)` by openness; at a point of the open
+sub-arc, the lens on one side and `F`'s class of `j` on the other (`hside`, `hcol`); off the lens, `F`'s. -/
+theorem bend_hlc {P : ℂ} {θ₁ θ₂ : ℝ} {a : Arc} {L S : Set ℂ} {j : Fin k} (hOL : ringPt P '' Ioo θ₁ θ₂ ⊆ L)
+    (hAa : ringPt P θ₁ ∈ a.carrier) (hBa : ringPt P θ₂ ∈ a.carrier) (hcl : closure L ⊆ L ∪ a.carrier)
+    (hLsph : ∀ x ∈ L, x ∈ sphere P 1 → x ∈ ringPt P '' Ioo θ₁ θ₂) (hLopen : ∀ x ∈ L, x ∉ sphere P 1 → L ∈ 𝓝 x)
+    (hS : Disjoint S (sphere P 1)) (hside : ∀ x ∈ ringPt P '' Ioo θ₁ θ₂, ∀ᶠ y in 𝓝 x, y ∈ L ∨ y ∈ S)
+    (hcol : ∀ x ∈ ringPt P '' Ioo θ₁ θ₂, ∀ i, i ≠ j → x ∉ closure (F.region i ∩ S)) :
+    ∀ x ∈ F.dom, x ∉ ⋃ b ∈ F.cutArcs P θ₁ θ₂ ∪ {a}, b.carrier → ∀ᶠ y in 𝓝 x, F.bendCol L j y = F.bendCol L j x := by
+  intro x hx hxA
+  have hev := eventually_not_mem_arcs (F.bendArcs_locallyFinite a x hx) hxA
+  have hxa : x ∉ a.carrier := fun h => hxA (mem_iUnion₂.mpr ⟨a, Or.inr rfl, h⟩)
+  have hxcut : x ∉ ⋃ b ∈ F.cutArcs P θ₁ θ₂, b.carrier := fun h => by
+    obtain ⟨b, hb, hxb⟩ := mem_iUnion₂.mp h
+    exact hxA (mem_iUnion₂.mpr ⟨b, Or.inl hb, hxb⟩)
+  by_cases hxL : x ∈ L
+  · rw [F.bendCol_of_mem hxL]
+    by_cases hsph : x ∈ sphere P 1
+    · have hxO := hLsph x hxL hsph
+      have hfin : ∀ᶠ y in 𝓝 x, ∀ i, i ≠ j → y ∉ F.region i ∩ S := by
+        rw [eventually_all]
+        intro i
+        by_cases hij : i = j
+        · exact Filter.Eventually.of_forall fun _ h => absurd hij h
+        · filter_upwards [isClosed_closure.isOpen_compl.mem_nhds (hcol x hxO i hij)] with y hy _ hyR
+          exact hy (subset_closure hyR)
+      filter_upwards [hev, hside x hxO, hfin, F.isOpen_dom.mem_nhds hx] with y hyA hyLS hyR hyd
+      by_cases hyL : y ∈ L
+      · exact F.bendCol_of_mem hyL
+      · have hyS : y ∈ S := hyLS.resolve_left hyL
+        rw [F.bendCol_of_not_mem hyL]
+        have hyF : y ∉ ⋃ b ∈ F.arcs, b.carrier := by
+          intro h
+          obtain ⟨b, hb, hyb⟩ := mem_iUnion₂.mp h
+          by_cases hc : ∃ θa θb, b = Arc.circ P 1 θa θb
+          · obtain ⟨θa, θb, rfl⟩ := hc
+            rw [carrier_circ_one] at hyb
+            obtain ⟨t, -, rfl⟩ := hyb
+            exact Set.disjoint_left.mp hS hyS (ringPt_mem_sphere P t)
+          · push Not at hc
+            exact hyA (mem_iUnion₂.mpr ⟨b, Or.inl (Or.inl ⟨hb, hc⟩), hyb⟩)
+        by_contra hne
+        exact hyR (F.col y) hne ⟨⟨⟨hyd, hyF⟩, rfl⟩, hyS⟩
+    · filter_upwards [hLopen x hxL hsph] with y hy
+      exact F.bendCol_of_mem hy
+  · have hxcl : x ∉ closure L := fun h => (hcl h).elim hxL hxa
+    have hxF : x ∉ ⋃ b ∈ F.arcs, b.carrier := by
+      intro h
+      refine hxcut ((F.mem_cutArcs_iff (fun h' => hxL (hOL h')) (fun h' => hxa (h' ▸ hAa))
+        (fun h' => hxa (h' ▸ hBa))).mpr h)
+    filter_upwards [F.locallyConstant x hx hxF, isClosed_closure.isOpen_compl.mem_nhds hxcl] with y hy hyL
+    have hyL' : y ∉ L := fun h => hyL (subset_closure h)
+    rw [F.bendCol_of_not_mem hyL', F.bendCol_of_not_mem hxL, hy]
+
+/-- **The bent map**: `F`'s domain, the cut of the open sub-arc `r((θ₁, θ₂))` of `ω(P)` together with one new arc `a`, and the
+colour `j` on the lens `L`. -/
+noncomputable def bendMap (P : ℂ) (θ₁ θ₂ : ℝ) (a : Arc) (L : Set ℂ) (j : Fin k) (ha : a.Nondegenerate)
+    (hlc : ∀ x ∈ F.dom, x ∉ ⋃ b ∈ F.cutArcs P θ₁ θ₂ ∪ {a}, b.carrier → ∀ᶠ y in 𝓝 x, F.bendCol L j y = F.bendCol L j x) :
+    ArcMap k where
+  dom := F.dom
+  isOpen_dom := F.isOpen_dom
+  arcs := F.cutArcs P θ₁ θ₂ ∪ {a}
+  nondegenerate := by
+    rintro b (hb | hb)
+    · exact F.cutArcs_nondegenerate b hb
+    · rw [mem_singleton_iff.mp hb]; exact ha
+  locallyFinite := F.bendArcs_locallyFinite a
+  col := F.bendCol L j
+  locallyConstant := hlc
+
+section BendMap
+
+variable {F} {P : ℂ} {θ₁ θ₂ : ℝ} {a : Arc} {L : Set ℂ} {j : Fin k} {ha : a.Nondegenerate}
+  {hlc : ∀ x ∈ F.dom, x ∉ ⋃ b ∈ F.cutArcs P θ₁ θ₂ ∪ {a}, b.carrier → ∀ᶠ y in 𝓝 x, F.bendCol L j y = F.bendCol L j x}
+
+/-- The bent map's interior points off the lens are `F`'s, with `F`'s colours. -/
+theorem bendMap_interiorPts (hOL : ringPt P '' Ioo θ₁ θ₂ ⊆ L) (hAa : ringPt P θ₁ ∈ a.carrier)
+    (hBa : ringPt P θ₂ ∈ a.carrier) {z : ℂ} (hz : z ∈ (F.bendMap P θ₁ θ₂ a L j ha hlc).interiorPts) (hzL : z ∉ L) :
+    z ∈ F.interiorPts ∧ (F.bendMap P θ₁ θ₂ a L j ha hlc).col z = F.col z := by
+  obtain ⟨hzd, hzA⟩ := hz
+  have hza : z ∉ a.carrier := fun h => hzA (mem_iUnion₂.mpr ⟨a, Or.inr rfl, h⟩)
+  have hzcut : z ∉ ⋃ b ∈ F.cutArcs P θ₁ θ₂, b.carrier := fun h => by
+    obtain ⟨b, hb, hzb⟩ := mem_iUnion₂.mp h
+    exact hzA (mem_iUnion₂.mpr ⟨b, Or.inl hb, hzb⟩)
+  refine ⟨⟨hzd, fun h => hzcut ((F.mem_cutArcs_iff (fun h' => hzL (hOL h')) (fun h' => hza (h' ▸ hAa))
+    (fun h' => hza (h' ▸ hBa))).mpr h)⟩, F.bendCol_of_not_mem hzL⟩
+
+/-- **The bent map agrees with `F` off `U`** when the lens, the new arc and the closed arc lie in `U`. -/
+theorem bendMap_agreesOff (h12 : θ₁ < θ₂) {U : Set ℂ} (hLU : L ⊆ U) (haU : a.carrier ⊆ U) (hαU : ringArc P θ₁ θ₂ ⊆ U) :
+    (F.bendMap P θ₁ θ₂ a L j ha hlc).AgreesOff F U := by
+  refine ⟨rfl, fun z hz => ⟨?_, (F.bendCol_of_not_mem fun h => hz (hLU h)).symm⟩⟩
+  have hzO : z ∉ ringPt P '' Ioo θ₁ θ₂ := fun h => hz (hαU (image_mono Ioo_subset_Icc_self h))
+  have hzA : z ≠ ringPt P θ₁ := by rintro rfl; exact hz (hαU ⟨θ₁, ⟨le_rfl, h12.le⟩, rfl⟩)
+  have hzB : z ≠ ringPt P θ₂ := by rintro rfl; exact hz (hαU ⟨θ₂, ⟨h12.le, le_rfl⟩, rfl⟩)
+  have hza : z ∉ a.carrier := fun h => hz (haU h)
+  have key := F.mem_cutArcs_iff hzO hzA hzB
+  show z ∈ F.dom \ _ ↔ z ∈ F.dom \ _
+  refine ⟨fun ⟨hd, hn⟩ => ⟨hd, fun h => ?_⟩, fun ⟨hd, hn⟩ => ⟨hd, fun h => hn ?_⟩⟩
+  · obtain ⟨b, hb | hb, hzb⟩ := mem_iUnion₂.mp h
+    · exact hn (key.mp (mem_iUnion₂.mpr ⟨b, hb, hzb⟩))
+    · exact hza (mem_singleton_iff.mp hb ▸ hzb)
+  · obtain ⟨b, hb, hzb⟩ := mem_iUnion₂.mp (key.mpr h)
+    exact mem_iUnion₂.mpr ⟨b, Or.inl hb, hzb⟩
+
+/-- **The bent map creates no unit arc** (engine 2): its `Γ` lies in `F`'s and the new arc, which is not a unit arc. -/
+theorem bendMap_ringArcsWithin (hau : ¬ a.IsUnitArc) : (F.bendMap P θ₁ θ₂ a L j ha hlc).RingArcsWithin F := by
+  refine ringArcsWithin_of_Γ_subset rfl (A' := {a}) (fun b hb => mem_singleton_iff.mp hb ▸ ha)
+    (fun x _ => ⟨univ, univ_mem, (finite_singleton a).subset fun b hb => hb.1⟩)
+    (fun b hb => mem_singleton_iff.mp hb ▸ hau) ?_
+  rintro z ⟨hzd, hz⟩
+  obtain ⟨b, hb | hb, hzb⟩ := mem_iUnion₂.mp hz
+  · obtain ⟨a', ha', hsub⟩ := F.cutArcs_subset b hb
+    exact Or.inl ⟨hzd, mem_iUnion₂.mpr ⟨a', ha', hsub hzb⟩⟩
+  · exact Or.inr (mem_iUnion₂.mpr ⟨a, rfl, mem_singleton_iff.mp hb ▸ hzb⟩)
+
+/-- **The bent map is valid** (engine 1) when the lens is clear for `j` in `F` and holds no unit pair. -/
+theorem bendMap_valid (hF : F.Valid) (h12 : θ₁ < θ₂) {U : Set ℂ} (hLU : L ⊆ U) (haU : a.carrier ⊆ U)
+    (hαU : ringArc P θ₁ θ₂ ⊆ U) (hOL : ringPt P '' Ioo θ₁ θ₂ ⊆ L) (hAa : ringPt P θ₁ ∈ a.carrier)
+    (hBa : ringPt P θ₂ ∈ a.carrier) (hclear : ∀ z ∈ L, F.IsClear j z) (hLL : ∀ z ∈ L, ∀ z' ∈ L, dist z z' ≠ 1) :
+    (F.bendMap P θ₁ θ₂ a L j ha hlc).Valid := by
+  set F' := F.bendMap P θ₁ θ₂ a L j ha hlc
+  have hjL : ∀ z ∈ L, F'.col z = j := fun z hz => F.bendCol_of_mem hz
+  have hoff : ∀ {z}, z ∈ (F.bendMap P θ₁ θ₂ a L j ha hlc).interiorPts → z ∉ L →
+      z ∈ F.interiorPts ∧ (F.bendMap P θ₁ θ₂ a L j ha hlc).col z = F.col z :=
+    fun hz hzL => bendMap_interiorPts hOL hAa hBa hz hzL
+  refine Valid.of_agreesOff hF (bendMap_agreesOff h12 hLU haU hαU) (fun z ⟨_, hz⟩ => ?_) ?_
+  · by_cases hzL : z ∈ L
+    · rw [hjL z hzL]; exact hclear z hzL
+    · obtain ⟨hzi, hzc⟩ := hoff hz hzL
+      rw [hzc]
+      intro y hy hzy
+      exact hF z hzi y hy.1 hzy hy.2.symm
+  · rintro z ⟨_, hz⟩ y ⟨_, hy⟩ hzy hcol
+    by_cases hzL : z ∈ L <;> by_cases hyL : y ∈ L
+    · exact hLL z hzL y hyL hzy
+    · obtain ⟨hyi, hyc⟩ := hoff hy hyL
+      refine hclear z hzL y ⟨hyi, ?_⟩ hzy
+      show F.col y = j
+      rw [← hyc, ← hcol, hjL z hzL]
+    · obtain ⟨hzi, hzc⟩ := hoff hz hzL
+      refine hclear y hyL z ⟨hzi, ?_⟩ (by rw [dist_comm]; exact hzy)
+      show F.col z = j
+      rw [← hzc, hcol, hjL y hyL]
+    · obtain ⟨hzi, hzc⟩ := hoff hz hzL
+      obtain ⟨hyi, hyc⟩ := hoff hy hyL
+      exact hF z hzi y hyi hzy (by rw [← hzc, ← hyc]; exact hcol)
+
+/-- The bent map's classes: no colour but `j` gains points, and `j` only on the lens. -/
+theorem bendMap_region (hOL : ringPt P '' Ioo θ₁ θ₂ ⊆ L) (hAa : ringPt P θ₁ ∈ a.carrier)
+    (hBa : ringPt P θ₂ ∈ a.carrier) :
+    (∀ i, i ≠ j → (F.bendMap P θ₁ θ₂ a L j ha hlc).region i ⊆ F.region i) ∧
+      (F.bendMap P θ₁ θ₂ a L j ha hlc).region j ⊆ F.region j ∪ L := by
+  have hoff : ∀ {z}, z ∈ (F.bendMap P θ₁ θ₂ a L j ha hlc).interiorPts → z ∉ L →
+      z ∈ F.interiorPts ∧ (F.bendMap P θ₁ θ₂ a L j ha hlc).col z = F.col z :=
+    fun hz hzL => bendMap_interiorPts hOL hAa hBa hz hzL
+  refine ⟨fun i hij z ⟨hz, hzc⟩ => ?_, fun z ⟨hz, hzc⟩ => ?_⟩
+  · have hzL : z ∉ L := fun h => hij (by rw [← (show _ = i from hzc)]; exact F.bendCol_of_mem h)
+    obtain ⟨hzi, hcz⟩ := hoff hz hzL
+    exact ⟨hzi, by show F.col z = i; rw [← hcz]; exact hzc⟩
+  · by_cases hzL : z ∈ L
+    · exact Or.inr hzL
+    · obtain ⟨hzi, hcz⟩ := hoff hz hzL
+      exact Or.inl ⟨hzi, by show F.col z = j; rw [← hcz]; exact hzc⟩
+
+/-- **The open sub-arc leaves `ω(P)`'s arcs**: in the bent map no point of `r((θ₁, θ₂))` lies on an arc of `Γ` on `ω(P)` — near it
+the cut leaves only arcs of `F` that are not arcs of `ω(P)`, finitely many, each meeting `ω(P)` finitely often. -/
+theorem bendMap_not_onRingArc (hdom : ringPt P '' Ioo θ₁ θ₂ ⊆ F.dom)
+    (haO : Disjoint a.carrier (ringPt P '' Ioo θ₁ θ₂)) :
+    ∀ θ ∈ Ioo θ₁ θ₂, ¬ (F.bendMap P θ₁ θ₂ a L j ha hlc).OnRingArc P (ringPt P θ) := by
+  rintro θ hθ ⟨a', b', hab, ⟨t₀, ht₀, heq⟩, hsub⟩
+  have hπ := Real.pi_pos
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite _ (hdom ⟨θ, hθ, rfl⟩)
+  obtain ⟨r, hr, hrt⟩ := Metric.mem_nhds_iff.mp ht
+  obtain ⟨n, hn⟩ := e_eq_e_iff.mp (show e t₀ = e θ by simpa [ringPt] using heq)
+  set η := min r (min (θ₂ - θ) (θ - θ₁)) with hη
+  have hη0 : 0 < η := lt_min hr (lt_min (by linarith [hθ.2]) (by linarith [hθ.1]))
+  -- a sub-interval of `[a', b']` within `η` of `t₀`
+  obtain ⟨lo, hi, hlh, hJ⟩ : ∃ lo hi, lo < hi ∧ Icc lo hi ⊆ Icc a' b' ∩ Ioo (t₀ - η) (t₀ + η) := by
+    rcases lt_or_eq_of_le ht₀.2 with h | h
+    · refine ⟨t₀, min b' (t₀ + η / 2), lt_min h (by linarith), fun u hu => ⟨⟨by linarith [ht₀.1, hu.1], ?_⟩, by linarith [hu.1], ?_⟩⟩
+      · linarith [hu.2, min_le_left b' (t₀ + η / 2)]
+      · linarith [hu.2, min_le_right b' (t₀ + η / 2)]
+    · refine ⟨max a' (t₀ - η / 2), t₀, max_lt (by linarith) (by linarith), fun u hu => ⟨⟨?_, by linarith [hu.2]⟩, ?_, by linarith [hu.2]⟩⟩
+      · linarith [hu.1, le_max_left a' (t₀ - η / 2)]
+      · linarith [hu.1, le_max_right a' (t₀ - η / 2)]
+  -- the finitely many points of `ω(P)` on the arcs of `F` near `r(θ)` that are not arcs of `ω(P)`
+  set Cf := ⋃ b ∈ {b | b ∈ F.arcs ∧ (b.carrier ∩ t).Nonempty ∧ ∀ θa θb, b ≠ Arc.circ P 1 θa θb}, b.carrier ∩ sphere P 1
+  have hCf : Cf.Finite := by
+    refine (hfin.subset fun b hb => ⟨hb.1, hb.2.1⟩).biUnion fun b hb => ?_
+    rcases Arc.finite_inter_sphere_or_eq_circ b (F.nondegenerate b hb.1) P with h | ⟨θa, θb, h⟩
+    · exact h
+    · exact absurd h (hb.2.2 θa θb)
+  have hy0 : ringPt P lo ∈ ringArc P lo hi := ⟨lo, ⟨le_rfl, hlh.le⟩, rfl⟩
+  have hne : (ringArc P lo hi \ Cf).Nonempty := by
+    by_contra h
+    rw [not_nonempty_iff_eq_empty] at h
+    have := mem_closure_ringArc_diff_finite hlh hCf hy0
+    rw [h, closure_empty] at this
+    exact this
+  obtain ⟨_, ⟨u, hu, rfl⟩, huC⟩ := hne
+  have huJ := hJ hu
+  have huO : ringPt P u ∈ ringPt P '' Ioo θ₁ θ₂ := by
+    refine (ringPt_mem_openArc_iff P).mpr ⟨n, ?_, ?_⟩
+    · have := huJ.2.1; have := min_le_right r (min (θ₂ - θ) (θ - θ₁)); have := min_le_right (θ₂ - θ) (θ - θ₁); linarith
+    · have := huJ.2.2; have := min_le_right r (min (θ₂ - θ) (θ - θ₁)); have := min_le_left (θ₂ - θ) (θ - θ₁); linarith
+  have huΓ := hsub ⟨u, huJ.1, rfl⟩
+  obtain ⟨b, hb | hb, hub⟩ := mem_iUnion₂.mp huΓ.2
+  · obtain ⟨a₁, ha₁, hnot, hua₁⟩ := F.exists_kept_of_mem_openArc huO (mem_iUnion₂.mpr ⟨b, hb, hub⟩)
+    have hut : ringPt P u ∈ t := by
+      refine hrt ?_
+      rw [mem_ball, dist_eq_norm, ringPt, ringPt, show P + e u - (P + e θ) = e u - e θ by ring]
+      have h1 : e θ = e t₀ := by simpa [ringPt] using heq.symm
+      rw [h1]
+      calc ‖e u - e t₀‖ ≤ |u - t₀| := norm_e_sub_e_le u t₀
+        _ < η := by rw [abs_lt]; constructor <;> linarith [huJ.2.1, huJ.2.2]
+        _ ≤ r := min_le_left _ _
+    exact huC (mem_iUnion₂.mpr ⟨a₁, ⟨ha₁, ⟨_, hua₁, hut⟩, hnot⟩, hua₁, ringPt_mem_sphere P u⟩)
+  · exact Set.disjoint_left.mp haO (mem_singleton_iff.mp hb ▸ hub) huO
+
+end BendMap
+
+/-- A point `P + ρ e(β)` with `β ∈ [θ₁, θ₂]` and `|1 − ρ| < ε` lies within `ε` of the closed arc. -/
+theorem mem_thickening_ringArc_of_polar {P z : ℂ} {θ₁ θ₂ β ρ ε : ℝ} (hβ : β ∈ Icc θ₁ θ₂) (hz : z = P + (ρ : ℂ) * e β)
+    (hρ : |1 - ρ| < ε) : z ∈ thickening ε (ringArc P θ₁ θ₂) := by
+  rw [Metric.mem_thickening_iff]
+  exact ⟨ringPt P β, ⟨β, hβ, rfl⟩, by rw [hz, dist_polar_ringPt]; exact hρ⟩
+
+/-- **The toward lens point is clear for the outer colour** (N2-TOWARD's clearness): a point `P + (1 − s) e(φ)` of the lens profile
+`0 < s ≤ ψ Δ(φ)` is at distance `≠ 1` from the outer class — a near point of the class (inside a unit disc about the arc) lies in
+`B̄(A, 1) ∩ B̄(B, 1)` (N2-SIGN), within `< 1` of the lens point (N2-ENV near); a far one lies, by N2-ENV toward, in `B(P, r)`, which
+the class misses. -/
+theorem toward_clear (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c') {r ψ₁ ψ₂ : ℝ}
+    (hr : ∀ y ∈ F.region c', r ≤ dist y P)
+    (henv : ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ) →
+      closedBall (P + (1 - s) * e φ) 1 \ ⋃ θ ∈ Icc θ₁ θ₂, ball (ringPt P θ) 1 ⊆ ball P r)
+    (hnear : ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ₂ * min (φ - θ₁) (θ₂ - φ) →
+      ∀ p ∈ closedBall (ringPt P θ₁) 1 ∩ closedBall (ringPt P θ₂) 1, dist p (P + (1 - s) * e φ) < 1)
+    {φ s : ℝ} (hφ : φ ∈ Ioo θ₁ θ₂) (hs : 0 < s) (hsψ₁ : s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ))
+    (hsψ₂ : s ≤ ψ₂ * min (φ - θ₁) (θ₂ - φ)) :
+    F.IsClear c' (P + (1 - s) * e φ) := by
+  intro y hy hzy
+  have h12 : θ₁ < θ₂ := hA.1
+  have hcont : Continuous fun θ : ℝ => dist y (ringPt P θ) := by unfold ringPt e; fun_prop
+  by_cases hU : y ∈ ⋃ θ ∈ Icc θ₁ θ₂, ball (ringPt P θ) 1
+  · obtain ⟨θ₀, hθ₀, hy0⟩ := mem_iUnion₂.mp hU
+    rw [mem_ball] at hy0
+    rcases n2_sign hF hA (Or.inr rfl) hy with hlt | hgt
+    · have hle := le_on_Icc_of_Ioo hcont h12 fun θ hθ => (hlt θ hθ).le
+      have := hnear φ hφ s hs hsψ₂ y ⟨mem_closedBall.mpr (hle θ₁ ⟨le_rfl, h12.le⟩),
+        mem_closedBall.mpr (hle θ₂ ⟨h12.le, le_rfl⟩)⟩
+      rw [dist_comm] at this; linarith
+    · have hge := ge_on_Icc_of_Ioo hcont h12 fun θ hθ => (hgt θ hθ).le
+      linarith [hge θ₀ hθ₀]
+  · have hyb : y ∈ closedBall (P + (1 - s) * e φ) 1 := by rw [mem_closedBall, dist_comm]; exact hzy.le
+    have := henv φ hφ s hs hsψ₁ ⟨hyb, hU⟩
+    rw [mem_ball] at this
+    linarith [hr y hy]
+
+/-- **The away lens point is clear for the inner colour** (N2-AWAY's clearness): a point `P + (1 + s) e(φ)` of the lens profile is
+at distance `≠ 1` from the inner class — a near point of the class lies in `B̄(A, 1) ∩ B̄(B, 1)` (N2-SIGN), off `B(P, r)` (which
+the class misses) within `< 1` of the lens point (N2-ENV near, away); a far one lies, by N2-ENV away, within `r` of `R₂(ᾱ)`, which
+the class misses. -/
+theorem away_clear (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c') {r ψ₁ ψ₂ : ℝ}
+    (hr : ∀ y ∈ F.region c, r ≤ dist y P) (hr2 : ∀ y ∈ F.region c, y ∉ thickening r (radiusTwoArc P θ₁ θ₂))
+    (henv : ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ) →
+      closedBall (P + (1 + s) * e φ) 1 \ ⋃ θ ∈ Icc θ₁ θ₂, ball (ringPt P θ) 1 ⊆ thickening r (radiusTwoArc P θ₁ θ₂))
+    (hnear : ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ₂ * min (φ - θ₁) (θ₂ - φ) →
+      ∀ p ∈ (closedBall (ringPt P θ₁) 1 ∩ closedBall (ringPt P θ₂) 1) \ ball P r, dist p (P + (1 + s) * e φ) < 1)
+    {φ s : ℝ} (hφ : φ ∈ Ioo θ₁ θ₂) (hs : 0 < s) (hsψ₁ : s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ))
+    (hsψ₂ : s ≤ ψ₂ * min (φ - θ₁) (θ₂ - φ)) :
+    F.IsClear c (P + (1 + s) * e φ) := by
+  intro y hy hzy
+  have h12 : θ₁ < θ₂ := hA.1
+  have hcont : Continuous fun θ : ℝ => dist y (ringPt P θ) := by unfold ringPt e; fun_prop
+  by_cases hU : y ∈ ⋃ θ ∈ Icc θ₁ θ₂, ball (ringPt P θ) 1
+  · obtain ⟨θ₀, hθ₀, hy0⟩ := mem_iUnion₂.mp hU
+    rw [mem_ball] at hy0
+    rcases n2_sign hF hA (Or.inl rfl) hy with hlt | hgt
+    · have hle := le_on_Icc_of_Ioo hcont h12 fun θ hθ => (hlt θ hθ).le
+      have hyP : y ∉ ball P r := fun h' => by rw [mem_ball] at h'; linarith [hr y hy]
+      have := hnear φ hφ s hs hsψ₂ y ⟨⟨mem_closedBall.mpr (hle θ₁ ⟨le_rfl, h12.le⟩),
+        mem_closedBall.mpr (hle θ₂ ⟨h12.le, le_rfl⟩)⟩, hyP⟩
+      rw [dist_comm] at this; linarith
+    · have hge := ge_on_Icc_of_Ioo hcont h12 fun θ hθ => (hgt θ hθ).le
+      linarith [hge θ₀ hθ₀]
+  · have hyb : y ∈ closedBall (P + (1 + s) * e φ) 1 := by rw [mem_closedBall, dist_comm]; exact hzy.le
+    exact hr2 y hy (henv φ hφ s hs hsψ₁ ⟨hyb, hU⟩)
+
+/-- **The away lens is clear for the inner colour**: on `ω(P)` by `ne1_region`, off it by `away_clear` at the lens profile. -/
+theorem away_lens_clear (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c') {r ψ₁ ψ₂ d : ℝ}
+    (hd : 0 < d) (hd10 : d ≤ 1 / 10)
+    (hr : ∀ y ∈ F.region c, r ≤ dist y P) (hr2 : ∀ y ∈ F.region c, y ∉ thickening r (radiusTwoArc P θ₁ θ₂))
+    (henv : ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ) →
+      closedBall (P + (1 + s) * e φ) 1 \ ⋃ θ ∈ Icc θ₁ θ₂, ball (ringPt P θ) 1 ⊆ thickening r (radiusTwoArc P θ₁ θ₂))
+    (hnear : ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ₂ * min (φ - θ₁) (θ₂ - φ) →
+      ∀ p ∈ (closedBall (ringPt P θ₁) 1 ∩ closedBall (ringPt P θ₂) 1) \ ball P r, dist p (P + (1 + s) * e φ) < 1)
+    (hd1 : 2 * d ≤ ψ₁) (hd2 : 2 * d ≤ ψ₂) {z : ℂ} (hz1 : 1 ≤ dist z P)
+    (hzC : dist z (P + d * e ((θ₁ + θ₂) / 2)) ^ 2 < 1 - 2 * d * Real.cos ((θ₂ - θ₁) / 2) + d ^ 2) :
+    F.IsClear c z := by
+  have h12 : θ₁ < θ₂ := hA.1
+  have hℓ := l60_le hF hA
+  have hπ := Real.pi_pos
+  set φ := (θ₁ + θ₂) / 2 with hφdef
+  set h := (θ₂ - θ₁) / 2 with hhdef
+  have hh : 0 < h := by rw [hhdef]; linarith
+  have hh2 : h < π / 2 := by rw [hhdef]; linarith
+  obtain ⟨hb, hs⟩ := away_polar_strict hd (by linarith) hh hh2 hz1 hzC
+  set b := arg ((z - P) * starRingEnd ℂ (e φ)) with hbdef
+  have hpolO : φ + b ∈ Ioo θ₁ θ₂ :=
+    ⟨by rw [hφdef]; rw [hhdef] at hb; linarith [(abs_lt.mp hb).1], by rw [hφdef]; rw [hhdef] at hb; linarith [(abs_lt.mp hb).2]⟩
+  by_cases hsph : dist z P = 1
+  · have hz := eq_polar_frameDir P z φ
+    rw [← hbdef, hsph, Complex.ofReal_one, one_mul] at hz
+    have hcl' : z ∈ closure (F.region c) := by
+      have : c ∈ F.innerColours P (ringPt P (φ + b)) := by rw [(hA.2.2 _ hpolO).1]; rfl
+      rw [hz]; exact closure_mono inter_subset_left this
+    intro y hy hzy
+    exact ne1_region hF hcl' hy (by rw [dist_comm]; exact hzy)
+  · have hs0 : 0 < dist z P - 1 := by have := lt_of_le_of_ne hz1 (Ne.symm hsph); linarith
+    have hmin : min (φ + b - θ₁) (θ₂ - (φ + b)) = h - |b| := by
+      rw [show φ + b - θ₁ = h + b by rw [hφdef, hhdef]; ring, show θ₂ - (φ + b) = h - b by rw [hφdef, hhdef]; ring]
+      exact min_add_sub_eq h b
+    have hzeq : z = P + (1 + ((dist z P - 1 : ℝ) : ℂ)) * e (φ + b) := by
+      have := eq_polar_frameDir P z φ
+      rw [← hbdef] at this
+      calc z = P + (dist z P : ℂ) * e (φ + b) := this
+        _ = _ := by push_cast; ring
+    have hΔ : 0 ≤ h - |b| := by linarith
+    rw [hzeq]
+    refine F.away_clear hF hA hr hr2 henv hnear hpolO hs0 ?_ ?_ <;> rw [hmin]
+    · exact (hs.trans_le (mul_le_mul_of_nonneg_right hd1 hΔ)).le
+    · exact (hs.trans_le (mul_le_mul_of_nonneg_right hd2 hΔ)).le
+
+/-- **Two points of the away lens are never at distance `1`**: if one is off `ω(P)` it is a lens point of the profile and the other
+lies in `B̄(A, 1) ∩ B̄(B, 1)` off `B(P, r)` (`away_mem_lens`), so N2-ENV's near clause puts them within `< 1`; two points of `ω(P)`
+within `2h ≤ 60°` of each other are within `< 1`. -/
+theorem away_pairs {P : ℂ} {θ₁ θ₂ d r ψ : ℝ} (h12 : θ₁ < θ₂) (hℓ : θ₂ - θ₁ ≤ π / 3) (hd : 0 < d) (hd10 : d ≤ 1 / 10)
+    (hr : r ≤ 1 / 2) (hdψ : 2 * d ≤ ψ)
+    (hnear : ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ * min (φ - θ₁) (θ₂ - φ) →
+      ∀ p ∈ (closedBall (ringPt P θ₁) 1 ∩ closedBall (ringPt P θ₂) 1) \ ball P r, dist p (P + (1 + s) * e φ) < 1)
+    {z z' : ℂ} (hz1 : 1 ≤ dist z P)
+    (hzC : dist z (P + d * e ((θ₁ + θ₂) / 2)) ^ 2 < 1 - 2 * d * Real.cos ((θ₂ - θ₁) / 2) + d ^ 2)
+    (hz1' : 1 ≤ dist z' P)
+    (hzC' : dist z' (P + d * e ((θ₁ + θ₂) / 2)) ^ 2 < 1 - 2 * d * Real.cos ((θ₂ - θ₁) / 2) + d ^ 2) :
+    dist z z' ≠ 1 := by
+  have hπ := Real.pi_pos
+  set φ := (θ₁ + θ₂) / 2 with hφdef
+  set h := (θ₂ - θ₁) / 2 with hhdef
+  have hh : 0 < h := by rw [hhdef]; linarith
+  have hh6 : h ≤ π / 6 := by rw [hhdef]; linarith
+  have hh2 : h < π / 2 := by linarith
+  have hdh : d ≤ 1 / 2 := by linarith
+  have hθ₁ : φ - h = θ₁ := by rw [hφdef, hhdef]; ring
+  have hθ₂ : φ + h = θ₂ := by rw [hφdef, hhdef]; ring
+  have hinI : ∀ x : ℂ, 1 ≤ dist x P → dist x (P + d * e φ) ^ 2 < 1 - 2 * d * Real.cos h + d ^ 2 →
+      x ∈ (closedBall (ringPt P θ₁) 1 ∩ closedBall (ringPt P θ₂) 1) \ ball P r := by
+    intro x hx1 hxC
+    obtain ⟨hb, hs⟩ := away_polar_strict hd hdh hh hh2 hx1 hxC
+    have hx' := eq_polar_frameDir P x φ
+    have := away_mem_lens (P := P) (φ := φ) hd.le hd10 hh6 hb.le hx1 hs.le
+    rw [← hx', hθ₁, hθ₂] at this
+    refine ⟨⟨mem_closedBall.mpr this.1, mem_closedBall.mpr this.2⟩, fun h' => ?_⟩
+    rw [mem_ball] at h'
+    linarith
+  have hoff1 : ∀ x x' : ℂ, 1 ≤ dist x P → dist x (P + d * e φ) ^ 2 < 1 - 2 * d * Real.cos h + d ^ 2 →
+      1 ≤ dist x' P → dist x' (P + d * e φ) ^ 2 < 1 - 2 * d * Real.cos h + d ^ 2 → dist x P ≠ 1 → dist x x' ≠ 1 := by
+    intro x x' hx1 hxC hx1' hxC' hsph
+    obtain ⟨hb, hs⟩ := away_polar_strict hd hdh hh hh2 hx1 hxC
+    set b := arg ((x - P) * starRingEnd ℂ (e φ)) with hbdef
+    have hpolO : φ + b ∈ Ioo θ₁ θ₂ :=
+      ⟨by rw [← hθ₁]; linarith [(abs_lt.mp hb).1], by rw [← hθ₂]; linarith [(abs_lt.mp hb).2]⟩
+    have hs0 : 0 < dist x P - 1 := by have := lt_of_le_of_ne hx1 (Ne.symm hsph); linarith
+    have hmin : min (φ + b - θ₁) (θ₂ - (φ + b)) = h - |b| := by
+      rw [← hθ₁, ← hθ₂, show φ + b - (φ - h) = h + b by ring, show φ + h - (φ + b) = h - b by ring]
+      exact min_add_sub_eq h b
+    have hxeq : x = P + (1 + ((dist x P - 1 : ℝ) : ℂ)) * e (φ + b) := by
+      have := eq_polar_frameDir P x φ
+      rw [← hbdef] at this
+      calc x = P + (dist x P : ℂ) * e (φ + b) := this
+        _ = _ := by push_cast; ring
+    have hΔ : 0 ≤ h - |b| := by linarith
+    have := hnear (φ + b) hpolO (dist x P - 1) hs0
+      (by rw [hmin]; exact (hs.trans_le (mul_le_mul_of_nonneg_right hdψ hΔ)).le) x' (hinI x' hx1' hxC')
+    rw [← hxeq, dist_comm] at this
+    exact ne_of_lt this
+  by_cases h1 : dist z P = 1
+  · by_cases h1' : dist z' P = 1
+    · obtain ⟨hb, -⟩ := away_polar_strict hd hdh hh hh2 hz1 hzC
+      obtain ⟨hb', -⟩ := away_polar_strict hd hdh hh hh2 hz1' hzC'
+      set b := arg ((z - P) * starRingEnd ℂ (e φ))
+      set b' := arg ((z' - P) * starRingEnd ℂ (e φ))
+      have hcos : 1 / 2 < Real.cos (b - b') := by
+        have h3 : |b - b'| < π / 3 := by have := abs_sub b b'; linarith
+        have := Real.cos_lt_cos_of_nonneg_of_le_pi (abs_nonneg _) (by linarith) h3
+        rw [Real.cos_abs, Real.cos_pi_div_three] at this
+        exact this
+      have hz₀ := eq_polar_frameDir P z φ
+      have hz₀' := eq_polar_frameDir P z' φ
+      have hd' : dist z z' = dist (P + (dist z P : ℂ) * e (φ + b)) (P + (dist z' P : ℂ) * e (φ + b')) := by
+        rw [← hz₀, ← hz₀']
+      intro h2
+      have := dist_polar_polar_sq P (dist z P) (dist z' P) (φ + b) (φ + b')
+      rw [← hd', h2, h1, h1', show φ + b - (φ + b') = b - b' by ring] at this
+      nlinarith
+    · rw [dist_comm]; exact hoff1 z' z hz1' hzC' hz1 hzC h1'
+  · exact hoff1 z z' hz1 hzC hz1' hzC' h1
+
+/-- The away bend's circle: positive squared radius `1 − 2d cos h + d²`, its half-plane threshold below the radius (so the arc is
+non-degenerate), and radius `≠ 1` (so it is not a unit arc), for `0 < d ≤ 1/10`, `0 < h ≤ 30°`. -/
+theorem away_circle_facts {d h : ℝ} (hd : 0 < d) (hd10 : d ≤ 1 / 10) (hh : 0 < h) (hh6 : h ≤ π / 6) :
+    0 < 1 - 2 * d * Real.cos h + d ^ 2 ∧ (Real.cos h - d) / √(1 - 2 * d * Real.cos h + d ^ 2) < 1 ∧
+      √(1 - 2 * d * Real.cos h + d ^ 2) ≠ 1 := by
+  have hπ := Real.pi_pos
+  have hc1 := Real.cos_le_one h
+  have hcosh2 : 1 / 2 < Real.cos h := by
+    have := Real.cos_lt_cos_of_nonneg_of_le_pi hh.le (by linarith) (show h < π / 3 by linarith)
+    rwa [Real.cos_pi_div_three] at this
+  have hpos : 0 < 1 - 2 * d * Real.cos h + d ^ 2 := by nlinarith
+  refine ⟨hpos, ?_, ?_⟩
+  · rw [div_lt_one (Real.sqrt_pos.2 hpos)]
+    refine Real.lt_sqrt_of_sq_lt ?_
+    have : Real.cos h ^ 2 < 1 := by
+      have hsin : 0 < Real.sin h := Real.sin_pos_of_pos_of_lt_pi hh (by linarith)
+      nlinarith [Real.sin_sq_add_cos_sq h]
+    nlinarith
+  · intro h1
+    have : (√(1 - 2 * d * Real.cos h + d ^ 2)) ^ 2 = 1 := by rw [h1]; norm_num
+    rw [Real.sq_sqrt hpos.le] at this
+    nlinarith
+
+/-! ### Spec examples for the cut and the bend -/
+
+/-- The cut's piece ends: `max θa (θ₂ + 2πm)` and `min θb (θ₁ + 2π(m + 1))`. -/
+example : cutLo 1 0 0 = 1 ∧ cutHi 0 1 0 = 1 := by
+  have hπ := Real.pi_gt_three
+  refine ⟨by norm_num [cutLo], ?_⟩
+  simp only [cutHi, Int.cast_zero, zero_add, one_mul]
+  exact min_eq_left (by linarith)
+
+/-- Cutting `r((π/3, 2π/3))` out of `unitArcPlane`'s arc `r([0, π])` leaves the piece `r([2π/3, π])` (`m = 0`) and removes the
+whole arc. -/
+example : Arc.circ 0 1 (2 * π / 3) π ∈ unitArcPlane.cutArcs 0 (π / 3) (2 * π / 3) ∧
+    Arc.circ 0 1 0 π ∉ unitArcPlane.cutArcs 0 (π / 3) (2 * π / 3) := by
+  have hπ := Real.pi_pos
+  refine ⟨Or.inr ⟨0, π, rfl, 0, ?_, ?_⟩, ?_⟩
+  · simp only [cutLo, cutHi, Int.cast_zero, zero_mul, add_zero, zero_add, one_mul]
+    rw [max_eq_right (by positivity), min_eq_left (by linarith)]
+    linarith
+  · simp only [cutLo, cutHi, Int.cast_zero, zero_mul, add_zero, zero_add, one_mul]
+    rw [max_eq_right (by positivity), min_eq_left (by linarith)]
+  · rintro (⟨-, hne⟩ | ⟨θa, θb, ha, m, -, heq⟩)
+    · exact hne 0 π rfl
+    · have ha' : Arc.circ 0 1 θa θb = Arc.circ 0 1 0 π := ha
+      simp only [Arc.circ.injEq, true_and] at ha'
+      obtain ⟨rfl, rfl⟩ := ha'
+      simp only [Arc.circ.injEq, true_and, cutLo, cutHi] at heq
+      obtain ⟨h1, h2⟩ := heq
+      have h1' : 2 * π / 3 + m * (2 * π) ≤ 0 := by
+        have := le_max_right (0 : ℝ) (2 * π / 3 + m * (2 * π)); linarith
+      have h2' : π ≤ π / 3 + (m + 1) * (2 * π) := by
+        have := min_le_right π (π / 3 + (m + 1) * (2 * π)); linarith
+      have hm1 : (m : ℝ) < 0 := by
+        by_contra h0; push Not at h0
+        have := mul_nonneg h0 (by positivity : (0 : ℝ) ≤ 2 * π); linarith
+      have hm2 : m ≤ -1 := by
+        have : m < 0 := by exact_mod_cast hm1
+        omega
+      have hm3 : (m : ℝ) + 1 ≤ 0 := by
+        have : (m : ℝ) ≤ -1 := by exact_mod_cast hm2
+        linarith
+      have := mul_nonpos_of_nonpos_of_nonneg hm3 (by positivity : (0 : ℝ) ≤ 2 * π)
+      linarith
+
+/-- The bend's colouring is `j` on the lens and `F`'s colour off it. -/
+example : (ArcMap.const univ isOpen_univ (0 : Fin 2)).bendCol {0} 1 0 = 1 ∧
+    (ArcMap.const univ isOpen_univ (0 : Fin 2)).bendCol {0} 1 1 = 0 := by
+  refine ⟨bendCol_of_mem _ rfl, ?_⟩
+  rw [bendCol_of_not_mem _ (by simp)]
+  rfl
+
+/-- The bent map's arcs are the cut and the new arc, its colouring the bend's. -/
+example {k : ℕ} (F : ArcMap k) (P : ℂ) (θ₁ θ₂ : ℝ) (a : Arc) (L : Set ℂ) (j : Fin k) (ha : a.Nondegenerate)
+    (hlc : ∀ x ∈ F.dom, x ∉ ⋃ b ∈ F.cutArcs P θ₁ θ₂ ∪ {a}, b.carrier → ∀ᶠ y in 𝓝 x, F.bendCol L j y = F.bendCol L j x) :
+    (F.bendMap P θ₁ θ₂ a L j ha hlc).arcs = F.cutArcs P θ₁ θ₂ ∪ {a} ∧ (F.bendMap P θ₁ θ₂ a L j ha hlc).col = F.bendCol L j ∧
+      (F.bendMap P θ₁ θ₂ a L j ha hlc).dom = F.dom :=
+  ⟨rfl, rfl, rfl⟩
+
+end Bend
+
 /-- `C₂(ᾱ)` (FS112-N2-TAN): the angles of the closed arc whose radius-2 point lies in the closure of the colour `c`'s class. -/
 def r2Contacts (P : ℂ) (θ₁ θ₂ : ℝ) (c : Fin k) : Set ℝ := {θ ∈ Icc θ₁ θ₂ | P + 2 * e θ ∈ closure (F.region c)}
 
@@ -2647,37 +3778,359 @@ theorem bend_toward (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} 
     ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (thickening ε (ringArc P θ₁ θ₂)) ∧ F'.RingArcsWithin F ∧
       (∀ θ ∈ Ioo θ₁ θ₂, ¬ F'.OnRingArc P (ringPt P θ)) ∧ (∀ j, j ≠ c' → F'.region j ⊆ F.region j) ∧
       F'.region c' ⊆ F.region c' ∪ (thickening ε (ringArc P θ₁ θ₂) ∩ closedBall P 1) := by
-  sorry
-
-/-- **FS112-N2-BENDS**, the away bend with the tangent bend (N2-AWAY and N2-TAN; FS112-BEND's away case is its special case): if the
-inner colour is not carried at the centre, the arc bends away from `P` everywhere but along the arcs of R2 contact — for every
-`ε > 0` there is a valid map agreeing with `F` off the `ε`-neighbourhood of the closed arc and creating no unit arc, in which an
-interior point of the arc still on an arc of `Γ` on `ω(P)` lies in a non-degenerate interval of `C₂(ᾱ)` ("isolated R2 contacts are cleared
-by a tangent bend, and only R2 along an arc blocks"), no colour but the inner one gains points, and the inner one only outside
-`B(P, 1)` near the arc. -/
-theorem bend_away (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
-    (hin : c ∉ F.coloursAt P) {ε : ℝ} (hε : 0 < ε) :
-    ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (thickening ε (ringArc P θ₁ θ₂)) ∧ F'.RingArcsWithin F ∧
-      (∀ θ ∈ Ioo θ₁ θ₂, F'.OnRingArc P (ringPt P θ) →
-        ∃ a b, a < b ∧ θ ∈ Icc a b ∧ Icc a b ⊆ F.r2Contacts P θ₁ θ₂ c) ∧
-      (∀ j, j ≠ c → F'.region j ⊆ F.region j) ∧
-      F'.region c ⊆ F.region c ∪ (thickening ε (ringArc P θ₁ θ₂) \ ball P 1) := by
-  sorry
+  have h12 : θ₁ < θ₂ := hA.1
+  have hℓ := l60_le hF hA
+  have hπ := Real.pi_pos
+  set φ := (θ₁ + θ₂) / 2 with hφdef
+  set h := (θ₂ - θ₁) / 2 with hhdef
+  have hh : 0 < h := by rw [hhdef]; linarith
+  have hh6 : h ≤ π / 6 := by rw [hhdef]; linarith
+  have hh2 : h < π / 2 := by linarith
+  have hcosh : 0 < Real.cos h := Real.cos_pos_of_mem_Ioo ⟨by linarith, hh2⟩
+  -- the outer class keeps a positive distance from `P`
+  obtain ⟨r, hr, hrc⟩ : ∃ r > 0, ∀ y ∈ F.region c', r ≤ dist y P := by
+    have : P ∉ closure (F.region c') := hout
+    rw [Metric.mem_closure_iff] at this
+    push Not at this
+    obtain ⟨r, hr, hr'⟩ := this
+    exact ⟨r, hr, fun y hy => by rw [dist_comm]; exact hr' y hy⟩
+  obtain ⟨ψ₁, hψ₁, henv⟩ := n2_env_toward P h12 hℓ hr
+  obtain ⟨ψ₂, hψ₂, hnear⟩ := n2_env_near P h12 hℓ
+  set d := min (min ψ₁ ψ₂) ε / 4 with hddef
+  have hd : 0 < d := by positivity
+  have hd1 : 2 * d ≤ ψ₁ := by have := min_le_left (min ψ₁ ψ₂) ε; have := min_le_left ψ₁ ψ₂; rw [hddef]; linarith
+  have hd2 : 2 * d ≤ ψ₂ := by have := min_le_left (min ψ₁ ψ₂) ε; have := min_le_right ψ₁ ψ₂; rw [hddef]; linarith
+  have hdε : 2 * d * h < ε := by
+    have := min_le_right (min ψ₁ ψ₂) ε
+    have h1 : 2 * d ≤ ε / 2 := by rw [hddef]; linarith
+    have h2 : h < 1 := by linarith [Real.pi_lt_four]
+    nlinarith
+  set C := P - (d : ℂ) * e φ with hCdef
+  set L : Set ℂ := {z | dist z P ≤ 1 ∧ 1 + 2 * d * Real.cos h + d ^ 2 < dist z C ^ 2} with hLdef
+  set R := √(1 + 2 * d * Real.cos h + d ^ 2) with hRdef
+  have hRsq : R ^ 2 = 1 + 2 * d * Real.cos h + d ^ 2 := Real.sq_sqrt (by positivity)
+  set a := Arc.circ C R (φ - Real.arccos ((d + Real.cos h) / R)) (φ + Real.arccos ((d + Real.cos h) / R)) with hadef
+  have hcar : a.carrier = {z | dist z C = R ∧ dist z P ≤ 1} := toward_carrier P hd hcosh
+  set O := ringPt P '' Ioo θ₁ θ₂ with hOdef
+  set U := thickening ε (ringArc P θ₁ θ₂) with hUdef
+  -- the arc's points against the bending circle
+  have hring : ∀ θ, dist (ringPt P θ) C ^ 2 = 1 + 2 * d * Real.cos (θ - φ) + d ^ 2 := by
+    intro θ; rw [hCdef, dist_sq_sub_dir, re_frameDir_ringPt, dist_ringPt]; ring
+  have hOL : O ⊆ L := by
+    rintro _ ⟨θ, hθ, rfl⟩
+    refine ⟨(dist_ringPt P θ).le, ?_⟩
+    rw [hring]
+    have habs : |θ - φ| < h := abs_lt.mpr ⟨by rw [hφdef, hhdef]; linarith [hθ.1], by rw [hφdef, hhdef]; linarith [hθ.2]⟩
+    have := Real.cos_lt_cos_of_nonneg_of_le_pi (abs_nonneg _) (by linarith) habs
+    rw [Real.cos_abs] at this
+    nlinarith
+  have hend : ∀ θ, (θ = θ₁ ∨ θ = θ₂) → ringPt P θ ∈ a.carrier := by
+    intro θ hθ
+    rw [hcar]
+    refine ⟨?_, (dist_ringPt P θ).le⟩
+    have hc : Real.cos (θ - φ) = Real.cos h := by
+      rcases hθ with h1 | h1 <;> rw [h1]
+      · rw [show θ₁ - φ = -h by rw [hφdef, hhdef]; ring, Real.cos_neg]
+      · rw [show θ₂ - φ = h by rw [hφdef, hhdef]; ring]
+    have := hring θ
+    rw [hc, ← hRsq] at this
+    exact (pow_left_inj₀ dist_nonneg (Real.sqrt_nonneg _) two_ne_zero).mp this
+  -- polar forms
+  have hpolI : ∀ z, |arg ((z - P) * starRingEnd ℂ (e φ))| ≤ h →
+      φ + arg ((z - P) * starRingEnd ℂ (e φ)) ∈ Icc θ₁ θ₂ := fun z hb =>
+    ⟨by rw [hφdef]; rw [hhdef] at hb; linarith [(abs_le.mp hb).1], by rw [hφdef]; rw [hhdef] at hb; linarith [(abs_le.mp hb).2]⟩
+  have hpolO : ∀ z, |arg ((z - P) * starRingEnd ℂ (e φ))| < h →
+      φ + arg ((z - P) * starRingEnd ℂ (e φ)) ∈ Ioo θ₁ θ₂ := fun z hb =>
+    ⟨by rw [hφdef]; rw [hhdef] at hb; linarith [(abs_lt.mp hb).1], by rw [hφdef]; rw [hhdef] at hb; linarith [(abs_lt.mp hb).2]⟩
+  have hU1 : ∀ z, dist z P ≤ 1 → |arg ((z - P) * starRingEnd ℂ (e φ))| ≤ h →
+      1 - dist z P ≤ 2 * d * (h - |arg ((z - P) * starRingEnd ℂ (e φ))|) → z ∈ U := by
+    intro z hz1 hb hs
+    refine mem_thickening_ringArc_of_polar (hpolI z hb) (eq_polar_frameDir P z φ) ?_
+    rw [abs_of_nonneg (by linarith)]
+    have : 0 ≤ |arg ((z - P) * starRingEnd ℂ (e φ))| := abs_nonneg _
+    nlinarith
+  have hLU : L ⊆ U := fun z hz => by
+    obtain ⟨hb, hs⟩ := toward_polar_strict hd hh hh2 hz.1 hz.2
+    exact hU1 z hz.1 hb.le hs.le
+  have haU : a.carrier ⊆ U := fun z hz => by
+    rw [hcar] at hz
+    obtain ⟨hb, hs⟩ := toward_polar hd hh hh2 hz.2 (by rw [hz.1, hRsq])
+    exact hU1 z hz.2 hb hs
+  have hαU : ringArc P θ₁ θ₂ ⊆ U := self_subset_thickening hε _
+  have haO : Disjoint a.carrier O := by
+    rw [Set.disjoint_left]
+    intro z hz hzO
+    rw [hcar] at hz
+    have := (hOL hzO).2
+    rw [hz.1, hRsq] at this
+    exact lt_irrefl _ this
+  have hcl : closure L ⊆ L ∪ a.carrier := by
+    have hK : IsClosed {z : ℂ | dist z P ≤ 1 ∧ 1 + 2 * d * Real.cos h + d ^ 2 ≤ dist z C ^ 2} :=
+      (isClosed_le (continuous_id.dist continuous_const) continuous_const).inter
+        (isClosed_le continuous_const ((continuous_id.dist continuous_const).pow 2))
+    intro z hz
+    obtain ⟨hz1, hz2⟩ := closure_minimal (show L ⊆ {z : ℂ | dist z P ≤ 1 ∧ 1 + 2 * d * Real.cos h + d ^ 2 ≤ dist z C ^ 2}
+      from fun y hy => ⟨hy.1, hy.2.le⟩) hK hz
+    rcases lt_or_eq_of_le hz2 with hlt | heq
+    · exact Or.inl ⟨hz1, hlt⟩
+    · refine Or.inr ?_
+      rw [hcar]
+      refine ⟨?_, hz1⟩
+      rw [← hRsq] at heq
+      exact (pow_left_inj₀ dist_nonneg (Real.sqrt_nonneg _) two_ne_zero).mp heq.symm
+  have hLsph : ∀ x ∈ L, x ∈ sphere P 1 → x ∈ O := by
+    intro x hx hsph
+    rw [mem_sphere] at hsph
+    obtain ⟨hb, -⟩ := toward_polar_strict hd hh hh2 hx.1 hx.2
+    refine ⟨_, hpolO x hb, ?_⟩
+    have := eq_polar_frameDir P x φ
+    rw [hsph, Complex.ofReal_one, one_mul] at this
+    rw [ringPt, ← this]
+  have hLopen : ∀ x ∈ L, x ∉ sphere P 1 → L ∈ 𝓝 x := by
+    intro x hx hsph
+    have hlt : dist x P < 1 := lt_of_le_of_ne hx.1 hsph
+    have hopen : IsOpen {z : ℂ | dist z P < 1 ∧ 1 + 2 * d * Real.cos h + d ^ 2 < dist z C ^ 2} :=
+      (isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+        (isOpen_lt continuous_const ((continuous_id.dist continuous_const).pow 2))
+    exact Filter.mem_of_superset (hopen.mem_nhds ⟨hlt, hx.2⟩) fun z hz => ⟨hz.1.le, hz.2⟩
+  have hS : Disjoint (closedBall P 1)ᶜ (sphere P 1) :=
+    Set.disjoint_left.mpr fun z hz hs => hz (sphere_subset_closedBall hs)
+  have hside : ∀ x ∈ O, ∀ᶠ y in 𝓝 x, y ∈ L ∨ y ∈ (closedBall P 1)ᶜ := by
+    intro x hx
+    have hopen : IsOpen {z : ℂ | 1 + 2 * d * Real.cos h + d ^ 2 < dist z C ^ 2} :=
+      isOpen_lt continuous_const ((continuous_id.dist continuous_const).pow 2)
+    filter_upwards [hopen.mem_nhds (hOL hx).2] with y hy
+    by_cases hy1 : dist y P ≤ 1
+    · exact Or.inl ⟨hy1, hy⟩
+    · exact Or.inr fun h' => hy1 (mem_closedBall.mp h')
+  have hcol : ∀ x ∈ O, ∀ i, i ≠ c' → x ∉ closure (F.region i ∩ (closedBall P 1)ᶜ) := by
+    rintro _ ⟨θ, hθ, rfl⟩ i hi hcl'
+    have hout' := (hA.2.2 θ hθ).2
+    have : i ∈ F.outerColours P (ringPt P θ) := by rw [outerColours, mem_setOf_eq, Set.sdiff_eq]; exact hcl'
+    rw [hout'] at this
+    exact hi this
+  have hclear : ∀ z ∈ L, F.IsClear c' z := by
+    intro z hz
+    by_cases hsph : dist z P = 1
+    · obtain ⟨θ, hθ, rfl⟩ := hLsph z hz (mem_sphere.mpr hsph)
+      have hcl' : ringPt P θ ∈ closure (F.region c') := by
+        have : c' ∈ F.outerColours P (ringPt P θ) := by rw [(hA.2.2 θ hθ).2]; rfl
+        exact closure_mono sdiff_subset this
+      intro y hy hzy
+      exact ne1_region hF hcl' hy (by rw [dist_comm]; exact hzy)
+    · obtain ⟨hb, hs⟩ := toward_polar_strict hd hh hh2 hz.1 hz.2
+      set b := arg ((z - P) * starRingEnd ℂ (e φ)) with hbdef
+      have hs0 : 0 < 1 - dist z P := by have := lt_of_le_of_ne hz.1 hsph; linarith
+      have hmin : min (φ + b - θ₁) (θ₂ - (φ + b)) = h - |b| := by
+        rw [show φ + b - θ₁ = h + b by rw [hφdef, hhdef]; ring, show θ₂ - (φ + b) = h - b by rw [hφdef, hhdef]; ring]
+        exact min_add_sub_eq h b
+      have hzeq : z = P + (1 - ((1 - dist z P : ℝ) : ℂ)) * e (φ + b) := by
+        have := eq_polar_frameDir P z φ
+        rw [← hbdef] at this
+        calc z = P + (dist z P : ℂ) * e (φ + b) := this
+          _ = _ := by push_cast; ring
+      have hΔ : 0 ≤ h - |b| := by linarith
+      rw [hzeq]
+      refine F.toward_clear hF hA hrc henv hnear (hpolO z hb) hs0 ?_ ?_ <;> rw [hmin]
+      · exact (hs.trans_le (mul_le_mul_of_nonneg_right hd1 hΔ)).le
+      · exact (hs.trans_le (mul_le_mul_of_nonneg_right hd2 hΔ)).le
+  have hLL : ∀ z ∈ L, ∀ z' ∈ L, dist z z' ≠ 1 := fun z hz z' hz' => toward_pairs hd hh hh6 hz.1 hz.2 hz'.1 hz'.2
+  have hdom : O ⊆ F.dom := fun x hx => (hA.2.1 (image_mono Ioo_subset_Icc_self hx)).1
+  have hRpos : 0 < R := Real.sqrt_pos.2 (by positivity)
+  have hκ : (d + Real.cos h) / R < 1 := by
+    rw [div_lt_one hRpos]
+    refine Real.lt_sqrt_of_sq_lt ?_
+    have : Real.cos h ^ 2 < 1 := by
+      have hsin : 0 < Real.sin h := Real.sin_pos_of_pos_of_lt_pi hh (by linarith)
+      nlinarith [Real.sin_sq_add_cos_sq h]
+    nlinarith
+  have ha : a.Nondegenerate := ⟨hRpos, by have := Real.arccos_pos.mpr hκ; linarith,
+    by have := Real.arccos_le_pi ((d + Real.cos h) / R); linarith⟩
+  have hau : ¬ a.IsUnitArc := by
+    intro h1
+    change R = 1 at h1
+    have : R ^ 2 = 1 := by rw [h1]; norm_num
+    rw [hRsq] at this
+    nlinarith
+  have hlc := F.bend_hlc (a := a) (L := L) (S := (closedBall P 1)ᶜ) (j := c') hOL (hend θ₁ (Or.inl rfl))
+    (hend θ₂ (Or.inr rfl)) hcl hLsph hLopen hS hside hcol
+  refine ⟨F.bendMap P θ₁ θ₂ a L c' ha hlc, bendMap_valid hF h12 hLU haU hαU hOL (hend θ₁ (Or.inl rfl))
+    (hend θ₂ (Or.inr rfl)) hclear hLL, bendMap_agreesOff h12 hLU haU hαU, bendMap_ringArcsWithin hau,
+    bendMap_not_onRingArc hdom haO, (bendMap_region hOL (hend θ₁ (Or.inl rfl)) (hend θ₂ (Or.inr rfl))).1, fun z hz => ?_⟩
+  rcases (bendMap_region hOL (hend θ₁ (Or.inl rfl)) (hend θ₂ (Or.inr rfl))).2 hz with h1 | h1
+  · exact Or.inl h1
+  · exact Or.inr ⟨hLU h1, mem_closedBall.mpr h1.1⟩
 
 /-- **FS112-N2-BENDS**, the away bend as the row states it (N2-AWAY): if the inner colour is not carried at the centre and no point of
 the radius-2 arc `R₂(ᾱ)` lies in the closure of its class, the whole arc bends away — no interior point of it is left on an arc of
-`Γ` on `ω(P)`. -/
+`Γ` on `ω(P)`. Proved directly on the away lens (`bendMap` with the circle about `P + d e(φ_m)` through the arc's ends), with no domain
+hypothesis: the inner class keeps a positive distance from `P` and from the compact `R₂(ᾱ)`. -/
 theorem bend_away_whole (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
     (hin : c ∉ F.coloursAt P) (hR2 : Disjoint (radiusTwoArc P θ₁ θ₂) (closure (F.region c))) {ε : ℝ} (hε : 0 < ε) :
     ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (thickening ε (ringArc P θ₁ θ₂)) ∧ F'.RingArcsWithin F ∧
       (∀ θ ∈ Ioo θ₁ θ₂, ¬ F'.OnRingArc P (ringPt P θ)) ∧ (∀ j, j ≠ c → F'.region j ⊆ F.region j) ∧
       F'.region c ⊆ F.region c ∪ (thickening ε (ringArc P θ₁ θ₂) \ ball P 1) := by
-  -- `bend_away` with no radius-2 contact: an interval of `C₂(ᾱ)` would put a point of `R₂(ᾱ)` in the closure of the inner class
-  obtain ⟨F', hV, hAg, hW, hon, hreg, hc⟩ := bend_away hF hA hin hε
-  refine ⟨F', hV, hAg, hW, fun θ hθ h => ?_, hreg, hc⟩
-  obtain ⟨a, b, hab, -, hsub⟩ := hon θ hθ h
-  obtain ⟨ha, hacl⟩ := hsub ⟨le_rfl, hab.le⟩
-  exact Set.disjoint_left.mp hR2 ⟨a, ha, rfl⟩ hacl
+  have h12 : θ₁ < θ₂ := hA.1
+  have hℓ := l60_le hF hA
+  have hπ := Real.pi_pos
+  set φ := (θ₁ + θ₂) / 2 with hφdef
+  set h := (θ₂ - θ₁) / 2 with hhdef
+  have hh : 0 < h := by rw [hhdef]; linarith
+  have hh6 : h ≤ π / 6 := by rw [hhdef]; linarith
+  have hh2 : h < π / 2 := by linarith
+  have hcosh : 0 < Real.cos h := Real.cos_pos_of_mem_Ioo ⟨by linarith, hh2⟩
+  -- the inner class keeps a positive distance from `P` and from `R₂(ᾱ)`
+  obtain ⟨r₁, hr₁, hr₁c⟩ : ∃ r > 0, ∀ y ∈ F.region c, r ≤ dist y P := by
+    have : P ∉ closure (F.region c) := hin
+    rw [Metric.mem_closure_iff] at this
+    push Not at this
+    obtain ⟨r, hr, hr'⟩ := this
+    exact ⟨r, hr, fun y hy => by rw [dist_comm]; exact hr' y hy⟩
+  have hK : IsCompact (radiusTwoArc P θ₁ θ₂) := isCompact_Icc.image (by unfold e; fun_prop)
+  obtain ⟨r₂, hr₂, hr₂c⟩ := hK.exists_thickening_subset_open isClosed_closure.isOpen_compl
+    (fun x hx hcl => Set.disjoint_left.mp hR2 hx hcl)
+  set r := min (min r₁ r₂) (1 / 2) with hrdef
+  have hr : 0 < r := by positivity
+  have hrc : ∀ y ∈ F.region c, r ≤ dist y P := fun y hy =>
+    le_trans (le_trans (min_le_left _ _) (min_le_left _ _)) (hr₁c y hy)
+  have hr2c : ∀ y ∈ F.region c, y ∉ thickening r (radiusTwoArc P θ₁ θ₂) := fun y hy hyt =>
+    hr₂c (thickening_mono (le_trans (min_le_left _ _) (min_le_right _ _)) _ hyt) (subset_closure hy)
+  obtain ⟨ψ₁, hψ₁, henv⟩ := n2_env_away P h12 hℓ hr
+  obtain ⟨ψ₂, hψ₂, hnear⟩ := n2_env_near_away P h12 hℓ hr
+  set d := min (min (min ψ₁ ψ₂) ε) (1 / 2) / 5 with hddef
+  have hd : 0 < d := by positivity
+  have hm1 := min_le_left (min (min ψ₁ ψ₂) ε) (1 / 2)
+  have hm2 := min_le_right (min (min ψ₁ ψ₂) ε) (1 / 2)
+  have hm3 := min_le_left (min ψ₁ ψ₂) ε
+  have hm4 := min_le_right (min ψ₁ ψ₂) ε
+  have hd1 : 2 * d ≤ ψ₁ := by have := min_le_left ψ₁ ψ₂; rw [hddef]; linarith
+  have hd2 : 2 * d ≤ ψ₂ := by have := min_le_right ψ₁ ψ₂; rw [hddef]; linarith
+  have hd10 : d ≤ 1 / 10 := by rw [hddef]; linarith
+  have hdh : d ≤ 1 / 2 := by linarith
+  have hdε : 2 * d * h < ε := by
+    have h1 : 2 * d ≤ ε / 2 := by rw [hddef]; linarith
+    have h2 : h < 1 := by linarith [Real.pi_lt_four]
+    nlinarith
+  obtain ⟨hpos, hκ, hR1⟩ := away_circle_facts hd hd10 hh hh6
+  set C := P + (d : ℂ) * e φ with hCdef
+  set L : Set ℂ := {z | 1 ≤ dist z P ∧ dist z C ^ 2 < 1 - 2 * d * Real.cos h + d ^ 2} with hLdef
+  set R := √(1 - 2 * d * Real.cos h + d ^ 2) with hRdef
+  have hRsq : R ^ 2 = 1 - 2 * d * Real.cos h + d ^ 2 := Real.sq_sqrt hpos.le
+  set a := Arc.circ C R (φ - Real.arccos ((Real.cos h - d) / R)) (φ + Real.arccos ((Real.cos h - d) / R)) with hadef
+  have hcar : a.carrier = {z | dist z C = R ∧ 1 ≤ dist z P} := away_carrier P hd hpos
+  set O := ringPt P '' Ioo θ₁ θ₂ with hOdef
+  set U := thickening ε (ringArc P θ₁ θ₂) with hUdef
+  have hring : ∀ θ, dist (ringPt P θ) C ^ 2 = 1 - 2 * d * Real.cos (θ - φ) + d ^ 2 := by
+    intro θ; rw [hCdef, dist_sq_add_dir, re_frameDir_ringPt, dist_ringPt]; ring
+  have hOL : O ⊆ L := by
+    rintro _ ⟨θ, hθ, rfl⟩
+    refine ⟨(dist_ringPt P θ).ge, ?_⟩
+    rw [hring]
+    have habs : |θ - φ| < h := abs_lt.mpr ⟨by rw [hφdef, hhdef]; linarith [hθ.1], by rw [hφdef, hhdef]; linarith [hθ.2]⟩
+    have := Real.cos_lt_cos_of_nonneg_of_le_pi (abs_nonneg _) (by linarith) habs
+    rw [Real.cos_abs] at this
+    nlinarith
+  have hend : ∀ θ, (θ = θ₁ ∨ θ = θ₂) → ringPt P θ ∈ a.carrier := by
+    intro θ hθ
+    rw [hcar]
+    refine ⟨?_, (dist_ringPt P θ).ge⟩
+    have hc : Real.cos (θ - φ) = Real.cos h := by
+      rcases hθ with h1 | h1 <;> rw [h1]
+      · rw [show θ₁ - φ = -h by rw [hφdef, hhdef]; ring, Real.cos_neg]
+      · rw [show θ₂ - φ = h by rw [hφdef, hhdef]; ring]
+    have := hring θ
+    rw [hc, ← hRsq] at this
+    exact (pow_left_inj₀ dist_nonneg (Real.sqrt_nonneg _) two_ne_zero).mp this
+  have hpolI : ∀ z, |arg ((z - P) * starRingEnd ℂ (e φ))| ≤ h →
+      φ + arg ((z - P) * starRingEnd ℂ (e φ)) ∈ Icc θ₁ θ₂ := fun z hb =>
+    ⟨by rw [hφdef]; rw [hhdef] at hb; linarith [(abs_le.mp hb).1], by rw [hφdef]; rw [hhdef] at hb; linarith [(abs_le.mp hb).2]⟩
+  have hpolO : ∀ z, |arg ((z - P) * starRingEnd ℂ (e φ))| < h →
+      φ + arg ((z - P) * starRingEnd ℂ (e φ)) ∈ Ioo θ₁ θ₂ := fun z hb =>
+    ⟨by rw [hφdef]; rw [hhdef] at hb; linarith [(abs_lt.mp hb).1], by rw [hφdef]; rw [hhdef] at hb; linarith [(abs_lt.mp hb).2]⟩
+  have hU1 : ∀ z, 1 ≤ dist z P → |arg ((z - P) * starRingEnd ℂ (e φ))| ≤ h →
+      dist z P - 1 ≤ 2 * d * (h - |arg ((z - P) * starRingEnd ℂ (e φ))|) → z ∈ U := by
+    intro z hz1 hb hs
+    refine mem_thickening_ringArc_of_polar (hpolI z hb) (eq_polar_frameDir P z φ) ?_
+    rw [abs_sub_comm, abs_of_nonneg (by linarith)]
+    have : 0 ≤ |arg ((z - P) * starRingEnd ℂ (e φ))| := abs_nonneg _
+    nlinarith
+  have hLU : L ⊆ U := fun z hz => by
+    obtain ⟨hb, hs⟩ := away_polar_strict hd hdh hh hh2 hz.1 hz.2
+    exact hU1 z hz.1 hb.le hs.le
+  have haU : a.carrier ⊆ U := fun z hz => by
+    rw [hcar] at hz
+    obtain ⟨hb, hs⟩ := away_polar hd hdh hh hh2 hz.2 (by rw [hz.1, hRsq])
+    exact hU1 z hz.2 hb hs
+  have hαU : ringArc P θ₁ θ₂ ⊆ U := self_subset_thickening hε _
+  have haO : Disjoint a.carrier O := by
+    rw [Set.disjoint_left]
+    intro z hz hzO
+    rw [hcar] at hz
+    have := (hOL hzO).2
+    rw [hz.1, hRsq] at this
+    exact lt_irrefl _ this
+  have hcl : closure L ⊆ L ∪ a.carrier := by
+    have hK' : IsClosed {z : ℂ | 1 ≤ dist z P ∧ dist z C ^ 2 ≤ 1 - 2 * d * Real.cos h + d ^ 2} :=
+      (isClosed_le continuous_const (continuous_id.dist continuous_const)).inter
+        (isClosed_le ((continuous_id.dist continuous_const).pow 2) continuous_const)
+    intro z hz
+    obtain ⟨hz1, hz2⟩ := closure_minimal (show L ⊆ {z : ℂ | 1 ≤ dist z P ∧ dist z C ^ 2 ≤ 1 - 2 * d * Real.cos h + d ^ 2}
+      from fun y hy => ⟨hy.1, hy.2.le⟩) hK' hz
+    rcases lt_or_eq_of_le hz2 with hlt | heq
+    · exact Or.inl ⟨hz1, hlt⟩
+    · refine Or.inr ?_
+      rw [hcar]
+      refine ⟨?_, hz1⟩
+      rw [← hRsq] at heq
+      exact (pow_left_inj₀ dist_nonneg (Real.sqrt_nonneg _) two_ne_zero).mp heq
+  have hLsph : ∀ x ∈ L, x ∈ sphere P 1 → x ∈ O := by
+    intro x hx hsph
+    rw [mem_sphere] at hsph
+    obtain ⟨hb, -⟩ := away_polar_strict hd hdh hh hh2 hx.1 hx.2
+    refine ⟨_, hpolO x hb, ?_⟩
+    have := eq_polar_frameDir P x φ
+    rw [hsph, Complex.ofReal_one, one_mul] at this
+    rw [ringPt, ← this]
+  have hLopen : ∀ x ∈ L, x ∉ sphere P 1 → L ∈ 𝓝 x := by
+    intro x hx hsph
+    have hlt : 1 < dist x P := lt_of_le_of_ne hx.1 (Ne.symm hsph)
+    have hopen : IsOpen {z : ℂ | 1 < dist z P ∧ dist z C ^ 2 < 1 - 2 * d * Real.cos h + d ^ 2} :=
+      (isOpen_lt continuous_const (continuous_id.dist continuous_const)).inter
+        (isOpen_lt ((continuous_id.dist continuous_const).pow 2) continuous_const)
+    exact Filter.mem_of_superset (hopen.mem_nhds ⟨hlt, hx.2⟩) fun z hz => ⟨hz.1.le, hz.2⟩
+  have hS : Disjoint (ball P 1) (sphere P 1) :=
+    Set.disjoint_left.mpr fun z hz hs => by rw [mem_ball] at hz; rw [mem_sphere] at hs; linarith
+  have hside : ∀ x ∈ O, ∀ᶠ y in 𝓝 x, y ∈ L ∨ y ∈ ball P 1 := by
+    intro x hx
+    have hopen : IsOpen {z : ℂ | dist z C ^ 2 < 1 - 2 * d * Real.cos h + d ^ 2} :=
+      isOpen_lt ((continuous_id.dist continuous_const).pow 2) continuous_const
+    filter_upwards [hopen.mem_nhds (hOL hx).2] with y hy
+    by_cases hy1 : 1 ≤ dist y P
+    · exact Or.inl ⟨hy1, hy⟩
+    · exact Or.inr (mem_ball.mpr (not_le.mp hy1))
+  have hcol : ∀ x ∈ O, ∀ i, i ≠ c → x ∉ closure (F.region i ∩ ball P 1) := by
+    rintro _ ⟨θ, hθ, rfl⟩ i hi hcl'
+    have hin' := (hA.2.2 θ hθ).1
+    have : i ∈ F.innerColours P (ringPt P θ) := hcl'
+    rw [hin'] at this
+    exact hi this
+  have hclear : ∀ z ∈ L, F.IsClear c z := fun z hz =>
+    F.away_lens_clear hF hA hd hd10 hrc hr2c henv hnear hd1 hd2 hz.1 hz.2
+  have hLL : ∀ z ∈ L, ∀ z' ∈ L, dist z z' ≠ 1 := fun z hz z' hz' =>
+    away_pairs h12 hℓ hd hd10 (min_le_right _ _) hd2 hnear hz.1 hz.2 hz'.1 hz'.2
+  have hdom : O ⊆ F.dom := fun x hx => (hA.2.1 (image_mono Ioo_subset_Icc_self hx)).1
+  have hRpos : 0 < R := Real.sqrt_pos.2 hpos
+  have ha : a.Nondegenerate := ⟨hRpos, by have := Real.arccos_pos.mpr hκ; linarith,
+    by have := Real.arccos_le_pi ((Real.cos h - d) / R); linarith⟩
+  have hau : ¬ a.IsUnitArc := fun h1 => hR1 h1
+  have hlc := F.bend_hlc (a := a) (L := L) (S := ball P 1) (j := c) hOL (hend θ₁ (Or.inl rfl))
+    (hend θ₂ (Or.inr rfl)) hcl hLsph hLopen hS hside hcol
+  refine ⟨F.bendMap P θ₁ θ₂ a L c ha hlc, bendMap_valid hF h12 hLU haU hαU hOL (hend θ₁ (Or.inl rfl))
+    (hend θ₂ (Or.inr rfl)) hclear hLL, bendMap_agreesOff h12 hLU haU hαU, bendMap_ringArcsWithin hau,
+    bendMap_not_onRingArc hdom haO, (bendMap_region hOL (hend θ₁ (Or.inl rfl)) (hend θ₂ (Or.inr rfl))).1, fun z hz => ?_⟩
+  rcases (bendMap_region hOL (hend θ₁ (Or.inl rfl)) (hend θ₂ (Or.inr rfl))).2 hz with h1 | h1
+  · exact Or.inl h1
+  · exact Or.inr ⟨hLU h1, fun h' => by rw [mem_ball] at h'; linarith [h1.1]⟩
 
 /-! ## FS112-ISO: an isolated R2 contact, and what it blocks -/
 
@@ -3202,7 +4655,696 @@ theorem flank_siamese_of_inType (hF : F.Valid) {v : ℂ} {α κ' : ℝ} (hκ' : 
     have := dist_triangle z (v + e (α + π / 2)) y
     linarith
 
+end ArcMap
+
+/-- **The radial points of `ω(N)` from `v`, in the frame at `v`** (child of engine 5): `N + ρ e(α − π/2 + t)` has frame coordinates
+`(ρ sin t, 1 − ρ cos t)`, `N = v + e(α + π/2)`; at `ρ = 1` the arc of `ω(N)` leaving `v` along `e α`. -/
+theorem normalPt_add_eq_fromFrame (v : ℂ) (α ρ t : ℝ) :
+    v + e (α + π / 2) + (ρ : ℂ) * e (α - π / 2 + t) = fromFrame v α (ρ * Real.sin t) (1 - ρ * Real.cos t) := by
+  have h1 : e (α + π / 2) = I * e α := e_add_pi_div_two α
+  have h2 : e (α - π / 2 + t) = -(I * e α * e t) := by
+    have := e_add_pi (α - π / 2 + t)
+    rw [show α - π / 2 + t + π = (α + π / 2) + t by ring, e_add, h1] at this
+    linear_combination this
+  rw [h2, h1, e_eq t]
+  unfold fromFrame
+  simp only [Complex.ofReal_mul, Complex.ofReal_sub, Complex.ofReal_one]
+  linear_combination (-((ρ : ℂ) * (Real.sin t : ℂ) * e α)) * Complex.I_sq
+
+/-- **The radial points of `ω(S′)` from `v`, in the frame at `v`** (child of engine 5, the lower bound): `S′ + ρ e(α + π/2 − t)` has
+frame coordinates `(ρ sin t, −(1 − ρ cos t))`, `S′ = v − e(α + π/2)`; at `ρ = 1` the arc of `ω(S′)` leaving `v` along `e α`. -/
+theorem normalPt_sub_add_eq_fromFrame (v : ℂ) (α ρ t : ℝ) :
+    v - e (α + π / 2) + (ρ : ℂ) * e (α + π / 2 - t) = fromFrame v α (ρ * Real.sin t) (-(1 - ρ * Real.cos t)) := by
+  have h1 : e (α + π / 2) = I * e α := e_add_pi_div_two α
+  have h2 : e (α + π / 2 - t) = I * e α * e (-t) := by
+    rw [show α + π / 2 - t = (α + π / 2) + -t by ring, e_add, h1]
+  rw [h2, h1, e_eq (-t), Real.cos_neg, Real.sin_neg]
+  unfold fromFrame
+  simp only [Complex.ofReal_mul, Complex.ofReal_sub, Complex.ofReal_one, Complex.ofReal_neg]
+  linear_combination (-((ρ : ℂ) * (Real.sin t : ℂ) * e α)) * Complex.I_sq
+
+/-- The angle, measured from `arg u`, at which the circle of radius `2` about `0` meets `ω(u)` going counter-clockwise. -/
+noncomputable def r2Cross (u : ℂ) : ℝ := Complex.arg u + Real.arccos ((3 + ‖u‖ ^ 2) / (4 * ‖u‖))
+
+/-- The squared distance from `2 e(t)` to `u`, by the angle from `arg u`. -/
+theorem sq_norm_two_e_sub (u : ℂ) (t : ℝ) :
+    ‖2 * e t - u‖ ^ 2 = 4 + ‖u‖ ^ 2 - 4 * ‖u‖ * Real.cos (t - Complex.arg u) := by
+  have hu : u = (‖u‖ : ℂ) * e (Complex.arg u) := by
+    rw [e]; exact (Complex.norm_mul_exp_arg_mul_I u).symm
+  conv_lhs => rw [hu]
+  rw [Complex.sq_norm, Complex.normSq_apply, e_eq, e_eq]
+  simp only [Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+    Complex.add_re, Complex.add_im, Complex.I_re, Complex.I_im, Complex.re_ofNat, Complex.im_ofNat]
+  rw [Real.cos_sub]
+  have h1 := Real.cos_sq_add_sin_sq t
+  have h2 := Real.cos_sq_add_sin_sq (Complex.arg u)
+  nlinarith [h1, h2]
+
+/-- **The crossing of `ω(u)` with the circle of radius `2`** (child of FLANK-Q's shadow clause): for `1 < ‖u‖ < 3` above the real
+axis, the angle `r2Cross u` lies in `(0, arg u + π/2)`, the point `2 e(t)` is inside `ω(u)` for `t` between `arg u` and it, and outside
+for `t` between it and `arg u + π`. -/
+theorem r2Cross_spec {u : ℂ} (h1 : 1 < ‖u‖) (h3 : ‖u‖ < 3) (him : 0 < u.im) :
+    0 < Complex.arg u ∧ Complex.arg u < r2Cross u ∧ r2Cross u < Complex.arg u + π / 2 ∧
+      (∀ t, Complex.arg u < t → t < r2Cross u → ‖2 * e t - u‖ < 1) ∧
+      (∀ t, r2Cross u < t → t < Complex.arg u + π → 1 < ‖2 * e t - u‖) := by
+  have hπ := Real.pi_pos
+  set ρ := ‖u‖ with hρ
+  set x := (3 + ρ ^ 2) / (4 * ρ) with hx
+  have hρ0 : 0 < ρ := by linarith
+  have hx0 : 0 < x := by positivity
+  have hx1 : x < 1 := by
+    rw [hx, div_lt_one (by positivity)]; nlinarith
+  have harg0 : 0 < Complex.arg u := by
+    rcases (Complex.arg_nonneg_iff.mpr him.le).lt_or_eq with h | h
+    · exact h
+    · exfalso
+      have := (Complex.arg_eq_zero_iff.mp h.symm).2
+      linarith
+  have hargπ : Complex.arg u < π := by
+    rcases (Complex.arg_le_pi u).lt_or_eq with h | h
+    · exact h
+    · exfalso
+      have := (Complex.arg_eq_pi_iff.mp h).2
+      linarith
+  set Δ := Real.arccos x with hΔ
+  have hΔ0 : 0 < Δ := Real.arccos_pos.mpr hx1
+  have hΔ1 : Δ < π / 2 := Real.arccos_lt_pi_div_two.mpr hx0
+  have hcosΔ : Real.cos Δ = x := Real.cos_arccos (by linarith) hx1.le
+  have hsc : r2Cross u = Complex.arg u + Δ := rfl
+  refine ⟨harg0, by rw [hsc]; linarith, by rw [hsc]; linarith, ?_, ?_⟩
+  · intro t ht1 ht2
+    rw [hsc] at ht2
+    have hlt : x < Real.cos (t - Complex.arg u) := by
+      rw [← hcosΔ]
+      exact Real.cos_lt_cos_of_nonneg_of_le_pi (by linarith) (by linarith) (by linarith)
+    have hsq := sq_norm_two_e_sub u t
+    have hxρ : 4 * ρ * x = 3 + ρ ^ 2 := by rw [hx]; field_simp
+    have : ‖2 * e t - u‖ ^ 2 < 1 := by rw [hsq]; nlinarith
+    nlinarith [norm_nonneg (2 * e t - u)]
+  · intro t ht1 ht2
+    rw [hsc] at ht1
+    have hlt : Real.cos (t - Complex.arg u) < x := by
+      rw [← hcosΔ]
+      exact Real.cos_lt_cos_of_nonneg_of_le_pi hΔ0.le (by linarith) (by linarith)
+    have hsq := sq_norm_two_e_sub u t
+    have hxρ : 4 * ρ * x = 3 + ρ ^ 2 := by rw [hx]; field_simp
+    have : 1 < ‖2 * e t - u‖ ^ 2 := by rw [hsq]; nlinarith
+    nlinarith [norm_nonneg (2 * e t - u)]
+
+/-- `r2Cross` is continuous at `u = 1` (so it tends to `r2Cross 1 = 0` there). -/
+theorem continuousAt_r2Cross_one : ContinuousAt r2Cross 1 := by
+  unfold r2Cross
+  refine (Complex.continuousAt_arg (by simp [Complex.mem_slitPlane_iff])).add ?_
+  refine Real.continuous_arccos.continuousAt.comp ?_
+  refine ContinuousAt.div (by fun_prop) (by fun_prop) (by simp)
+
+/-- At `u = 1` the crossing angle is `0`. -/
+theorem r2Cross_one : r2Cross 1 = 0 := by
+  simp only [r2Cross, Complex.arg_one, norm_one]
+  norm_num
+
+
+
+/-- **A nondegenerate arc meets the circle of radius `2` about `C` finitely, or lies on it** (the homothety `z ↦ (z + C)/2`, which takes
+that circle to `ω(C)` and arcs to arcs, carried through `Arc.finite_inter_sphere_or_eq_circ`). -/
+theorem Arc.finite_inter_sphere_two_or_subset (a : Arc) (ha : a.Nondegenerate) (C : ℂ) :
+    (a.carrier ∩ sphere C 2).Finite ∨ a.carrier ⊆ sphere C 2 := by
+  have hinj : Function.Injective (fun z : ℂ => (z + C) / 2) := by
+    intro z w h; simp only at h; linear_combination 2 * h
+  have hsph : ∀ z, z ∈ sphere C 2 ↔ (z + C) / 2 ∈ sphere C 1 := by
+    intro z
+    rw [mem_sphere, mem_sphere, dist_eq_norm, dist_eq_norm,
+      show (z + C) / 2 - C = (z - C) / 2 by ring, norm_div]
+    simp only [Complex.norm_ofNat]
+    constructor <;> intro h <;> linarith
+  cases a with
+  | seg p q =>
+    left
+    have hnd : (Arc.seg ((p + C) / 2) ((q + C) / 2)).Nondegenerate := by
+      intro h; exact ha (hinj h)
+    rcases Arc.finite_inter_sphere_or_eq_circ _ hnd C with h | ⟨θ₀, θ₁, h⟩
+    · refine (h.preimage hinj.injOn).subset ?_
+      rintro z ⟨hz, hzs⟩
+      refine ⟨?_, (hsph z).mp hzs⟩
+      obtain ⟨s, t, hs, ht, hst, rfl⟩ := hz
+      refine ⟨s, t, hs, ht, hst, ?_⟩
+      simp only [Complex.real_smul]
+      linear_combination (C / 2) * (by exact_mod_cast hst : ((s : ℂ) + t) = 1)
+    · cases h
+  | circ c ρ θ₀ θ₁ =>
+    obtain ⟨hρ, h01, h01'⟩ := ha
+    have hnd : (Arc.circ ((c + C) / 2) (ρ / 2) θ₀ θ₁).Nondegenerate := ⟨by linarith, h01, h01'⟩
+    rcases Arc.finite_inter_sphere_or_eq_circ _ hnd C with h | ⟨θa, θb, h⟩
+    · left
+      refine (h.preimage hinj.injOn).subset ?_
+      rintro z ⟨hz, hzs⟩
+      refine ⟨?_, (hsph z).mp hzs⟩
+      obtain ⟨θ, hθ, rfl⟩ := hz
+      refine ⟨θ, hθ, ?_⟩
+      simp only; push_cast; ring
+    · right
+      simp only [Arc.circ.injEq] at h
+      obtain ⟨hc, hρ2, -, -⟩ := h
+      have hcC : c = C := by linear_combination 2 * hc
+      have hρ' : ρ = 2 := by linarith
+      rintro z ⟨θ, -, rfl⟩
+      rw [mem_sphere, dist_eq_norm, hcC, hρ', add_sub_cancel_left, norm_mul, norm_e]
+      simp
+
+/-- Spec: at `u = 2` (norm `2`, argument `0`) the crossing angle is `arccos (7/8)`. -/
+example : r2Cross 2 = Real.arccos (7 / 8) := by
+  simp only [r2Cross, Complex.norm_ofNat]
+  norm_num
+
+/-- `cos(m·60°)` is positive when `m ≡ 0, ±1 (mod 6)`. -/
+theorem cos_int_mul_third_pos {m : ℤ} (h : m % 6 = 0 ∨ m % 6 = 1 ∨ m % 6 = 5) : 0 < Real.cos (m * (π / 3)) := by
+  have hm : (m : ℝ) * (π / 3) = ((m % 6 : ℤ) : ℝ) * (π / 3) + ((m / 6 : ℤ) : ℝ) * (2 * π) := by
+    have := Int.emod_add_mul_ediv m 6
+    have h' : ((m % 6 : ℤ) : ℝ) + 6 * ((m / 6 : ℤ) : ℝ) = m := by exact_mod_cast this
+    rw [← h']; ring
+  rw [hm, Real.cos_add_int_mul_two_pi]
+  rcases h with h | h | h <;> rw [h] <;> push_cast
+  · simp
+  · rw [one_mul, Real.cos_pi_div_three]; norm_num
+  · rw [show (5 : ℝ) * (π / 3) = -(π / 3) + (1 : ℤ) * (2 * π) by push_cast; ring, Real.cos_add_int_mul_two_pi,
+      Real.cos_neg, Real.cos_pi_div_three]; norm_num
+
+/-- `cos(m·60°)` is negative when `m ≡ 2, 3, 4 (mod 6)`. -/
+theorem cos_int_mul_third_neg {m : ℤ} (h : m % 6 = 2 ∨ m % 6 = 3 ∨ m % 6 = 4) : Real.cos (m * (π / 3)) < 0 := by
+  have hm : (m : ℝ) * (π / 3) = ((m % 6 : ℤ) : ℝ) * (π / 3) + ((m / 6 : ℤ) : ℝ) * (2 * π) := by
+    have := Int.emod_add_mul_ediv m 6
+    have h' : ((m % 6 : ℤ) : ℝ) + 6 * ((m / 6 : ℤ) : ℝ) = m := by exact_mod_cast this
+    rw [← h']; ring
+  rw [hm, Real.cos_add_int_mul_two_pi]
+  rcases h with h | h | h <;> rw [h] <;> push_cast
+  · rw [show (2 : ℝ) * (π / 3) = π - π / 3 by ring, Real.cos_pi_sub, Real.cos_pi_div_three]; norm_num
+  · rw [show (3 : ℝ) * (π / 3) = π by ring, Real.cos_pi]; norm_num
+  · rw [show (4 : ℝ) * (π / 3) = π / 3 + π by ring, Real.cos_add_pi, Real.cos_pi_div_three]; norm_num
+
+/-- **The sign table of NB-4's last step**: for distinct orbit indices `j ≠ l` and a parity `p`, some `k ∈ {p, p + 2, p + 4}` sees
+`r(ψ + j·60°)` and `r(ψ + l·60°)` on opposite sides — `cos((j − k)·60°)` and `cos((l − k)·60°)` have opposite strict signs. -/
+theorem exists_opposite_cos_third {j l p : ℕ} (hj : j < 6) (hl : l < 6) (hp : p < 2) (hjl : j ≠ l) :
+    ∃ i < 3, Real.cos (((j : ℤ) - (p + 2 * i : ℕ)) * (π / 3)) * Real.cos (((l : ℤ) - (p + 2 * i : ℕ)) * (π / 3)) < 0 := by
+  have key : ∃ i < 3, (((j : ℤ) - (p + 2 * i : ℕ)) % 6 ∈ ({0, 1, 5} : Finset ℤ) ∧ ((l : ℤ) - (p + 2 * i : ℕ)) % 6 ∈ ({2, 3, 4} : Finset ℤ)) ∨
+      (((j : ℤ) - (p + 2 * i : ℕ)) % 6 ∈ ({2, 3, 4} : Finset ℤ) ∧ ((l : ℤ) - (p + 2 * i : ℕ)) % 6 ∈ ({0, 1, 5} : Finset ℤ)) := by
+    interval_cases j <;> interval_cases l <;> interval_cases p <;> simp at hjl <;> decide
+  obtain ⟨i, hi, h⟩ := key
+  refine ⟨i, hi, ?_⟩
+  simp only [Finset.mem_insert, Finset.mem_singleton] at h
+  push_cast at h ⊢
+  rcases h with ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · exact mul_neg_of_pos_of_neg (by exact_mod_cast cos_int_mul_third_pos (m := (j : ℤ) - (p + 2 * i)) (by exact_mod_cast h1))
+      (by exact_mod_cast cos_int_mul_third_neg (m := (l : ℤ) - (p + 2 * i)) (by exact_mod_cast h2))
+  · exact mul_neg_of_neg_of_pos (by exact_mod_cast cos_int_mul_third_neg (m := (j : ℤ) - (p + 2 * i)) (by exact_mod_cast h1))
+      (by exact_mod_cast cos_int_mul_third_pos (m := (l : ℤ) - (p + 2 * i)) (by exact_mod_cast h2))
+
+
+/-- The squared norm of a sum of two unit vectors: `‖e a + e b‖² = 2 + 2 cos(a − b)`. -/
+theorem sq_norm_e_add_e (a b : ℝ) : ‖e a + e b‖ ^ 2 = 2 + 2 * Real.cos (a - b) := by
+  rw [Complex.sq_norm, Complex.normSq_apply, e_eq, e_eq, Real.cos_sub]
+  simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+    Complex.I_re, Complex.I_im]
+  nlinarith [Real.cos_sq_add_sin_sq a, Real.cos_sq_add_sin_sq b]
+
+/-- The two unit vectors `60°` on either side of `e a` add up to `e a`. -/
+theorem e_add_third_add_e_sub_third (a : ℝ) : e (a + π / 3) + e (a - π / 3) = e a := by
+  rw [e_eq, e_eq, e_eq, Real.cos_add, Real.cos_sub, Real.sin_add, Real.sin_sub, Real.cos_pi_div_three]
+  push_cast; ring
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
 /-! ## FS112-N2-FLANK-Q: horn bounds `±1` sit on (Q) or (R2) arcs -/
+
+/-- **Engine 5, the upper bound** (`plans/FS131-w4-kernel-plan.md` § 13.1 item 5): a horn at `v` along `e α` whose upper arc has
+curvature `1`, with a flank colour `g` above it, is bounded by an arc of `Γ` on `ω(N)` leaving `v`, with constant sides — inner colour
+`g`, outer colour the horn's. The points of that arc near `v` are limits of both the horn and the flank and are not interior points
+(an interior one would join the horn's component, which holds no point inside `ω(N)`); near each of them the horn and the flank fill
+everything off `ω(N)`, so the arcs there lie on `ω(N)` (`isRingArc_of_clean`). -/
+theorem IsHorn.isRingArc_upper {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {c g : Fin k}
+    (hH : F.IsHorn v α κ₁ 1 c) (hg : F.IsFlankAbove v α 1 g) :
+    ∃ θ₂, α - π / 2 < θ₂ ∧ F.IsRingArc (v + e (α + π / 2)) (α - π / 2) θ₂ g c := by
+  have hπ := Real.pi_pos
+  have hπ3 := Real.pi_gt_three
+  obtain ⟨hκ₁, hHev⟩ := hH
+  obtain ⟨κ', hκ', hgev⟩ := hg
+  obtain ⟨r, ⟨⟨hsec, hcol⟩, hfl⟩, hr0⟩ :=
+    ((hHev.and hgev).and (Ioo_mem_nhdsGT (show (0 : ℝ) < 1 / 2 by norm_num))).exists
+  set N := v + e (α + π / 2) with hN
+  obtain ⟨x₀, -, hHeq, hvH⟩ := hsec
+  have hHI : hornSet v α κ₁ 1 r ⊆ F.interiorPts := by
+    rw [hHeq]; exact (connectedComponentIn_subset _ _).trans inter_subset_left
+  have hFlI : hornSet v α 1 κ' r ⊆ F.interiorPts := fun z hz => (hfl hz).1
+  -- a preconnected set of interior points in `B(v, r)` meeting the horn lies in it
+  have hjoin : ∀ B : Set ℂ, IsPreconnected B → B ⊆ F.interiorPts ∩ ball v r → ∀ p ∈ B, p ∈ hornSet v α κ₁ 1 r →
+      B ⊆ hornSet v α κ₁ 1 r := by
+    intro B hB hBsub p hpB hpH
+    rw [hHeq] at hpH ⊢
+    rw [connectedComponentIn_eq hpH]
+    exact hB.subset_connectedComponentIn hpB hBsub
+  set O : Set ℂ := {z | dist z v < r ∧ 0 < frameX v α z ∧ TanAbove v α κ₁ z ∧ TanBelow v α κ' z} with hOdef
+  have hOopen : IsOpen O := by
+    have hfx : Continuous (frameX v α) := by unfold frameX; fun_prop
+    have hfy : Continuous (frameY v α) := by unfold frameY; fun_prop
+    have ht : ∀ κ : ℝ, Continuous fun z => tanHeight κ (frameX v α z) (frameY v α z) := fun κ => by
+      unfold tanHeight; fun_prop
+    exact (isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+      ((isOpen_lt continuous_const hfx).inter ((isOpen_lt continuous_const (ht κ₁)).inter (isOpen_lt (ht κ') continuous_const)))
+  have hOball : O ⊆ ball v r := fun z hz => hz.1
+  have hOH : ∀ z ∈ O, 1 < dist z N → z ∈ hornSet v α κ₁ 1 r := fun z hz h =>
+    ⟨hz.1, hz.2.1, hz.2.2.1, (tanBelow_one_iff v α z).mpr h⟩
+  have hOF : ∀ z ∈ O, dist z N < 1 → z ∈ hornSet v α 1 κ' r := fun z hz h =>
+    ⟨hz.1, hz.2.1, (tanAbove_one_iff v α z).mpr h, hz.2.2.2⟩
+  have hHN : ∀ z ∈ hornSet v α κ₁ 1 r, 1 < dist z N := fun z hz => (tanBelow_one_iff v α z).mp hz.2.2.2
+  -- the radial points
+  have hdN : ∀ ρ θ : ℝ, 0 ≤ ρ → dist (N + (ρ : ℂ) * e θ) N = ρ := fun ρ θ hρ => by
+    rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hρ]
+  have hdd : ∀ ρ θ : ℝ, dist (N + (ρ : ℂ) * e θ) (N + e θ) = |ρ - 1| := fun ρ θ => by
+    rw [dist_eq_norm, show N + (ρ : ℂ) * e θ - (N + e θ) = ((ρ - 1 : ℝ) : ℂ) * e θ by push_cast; ring, norm_mul, norm_e, mul_one,
+      Complex.norm_real, Real.norm_eq_abs]
+  -- the arc points `a(t) = N + e(α − π/2 + t)`, `0 < t ≤ τ`, lie in `O`
+  set τ := min (r / 2) 1 with hτ
+  have hτ0 : 0 < τ := lt_min (by linarith [hr0.1]) one_pos
+  have hτr : τ ≤ r / 2 := min_le_left _ _
+  have hτ1 : τ ≤ 1 := min_le_right _ _
+  have hapt : ∀ t, ringPt N (α - π / 2 + t) = fromFrame v α (Real.sin t) (1 - Real.cos t) := fun t => by
+    have := normalPt_add_eq_fromFrame v α 1 t
+    rw [ofReal_one, one_mul, one_mul, one_mul] at this
+    rw [ringPt, ← this]
+  have hadist : ∀ t, 0 ≤ t → dist (ringPt N (α - π / 2 + t)) v ≤ t := by
+    intro t ht
+    have h := frame_normSq v α (ringPt N (α - π / 2 + t))
+    rw [hapt, frameX_fromFrame, frameY_fromFrame, ← hapt, ← dist_eq_norm] at h
+    have hc := Real.one_sub_sq_div_two_le_cos (x := t)
+    have hsc := Real.sin_sq_add_cos_sq t
+    have h2 : dist (ringPt N (α - π / 2 + t)) v ^ 2 ≤ t ^ 2 := by nlinarith
+    nlinarith [dist_nonneg (x := ringPt N (α - π / 2 + t)) (y := v)]
+  have hainO : ∀ t ∈ Ioc 0 τ, ringPt N (α - π / 2 + t) ∈ O := by
+    intro t ht
+    have hcos : Real.cos t < 1 := by
+      have := Real.cos_lt_cos_of_nonneg_of_le_pi (le_refl 0) (by linarith [ht.2, hτ1]) ht.1
+      rwa [Real.cos_zero] at this
+    have hsin : 0 < Real.sin t := Real.sin_pos_of_pos_of_lt_pi ht.1 (by linarith [ht.2, hτ1])
+    have hsc := Real.sin_sq_add_cos_sq t
+    refine ⟨by linarith [hadist t ht.1.le, hr0.1, ht.2, hτr], ?_, ?_, ?_⟩
+    · rw [hapt, frameX_fromFrame]; exact hsin
+    · unfold TanAbove; rw [hapt, frameX_fromFrame, frameY_fromFrame]; unfold tanHeight
+      nlinarith
+    · unfold TanBelow; rw [hapt, frameX_fromFrame, frameY_fromFrame]; unfold tanHeight
+      nlinarith
+  -- the arc points are not interior points
+  have hnotI : ∀ t ∈ Ioc 0 τ, ringPt N (α - π / 2 + t) ∉ F.interiorPts := by
+    intro t ht hI
+    set a := ringPt N (α - π / 2 + t) with ha
+    obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp (F.isOpen_interiorPts.inter hOopen) a ⟨hI, hainO t ht⟩
+    have hae : a = N + e (α - π / 2 + t) := rfl
+    set s := min (δ / 2) (1 / 2) with hs
+    have hs0 : 0 < s := lt_min (by linarith) (by norm_num)
+    have hsδ : s < δ := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+    have hs1 : s ≤ 1 / 2 := min_le_right _ _
+    have hout : N + ((1 + s : ℝ) : ℂ) * e (α - π / 2 + t) ∈ ball a δ := by
+      rw [mem_ball, hae, hdd, abs_of_pos (by linarith)]; linarith
+    have hin : N + ((1 - s : ℝ) : ℂ) * e (α - π / 2 + t) ∈ ball a δ := by
+      rw [mem_ball, hae, hdd, abs_of_neg (by linarith)]; linarith
+    have hBsub : ball a δ ⊆ F.interiorPts ∩ ball v r := fun z hz => ⟨(hball hz).1, hOball (hball hz).2⟩
+    have houtH := hOH _ (hball hout).2 (by rw [hdN _ _ (by linarith)]; linarith)
+    have hsub := hjoin (ball a δ) (convex_ball a δ).isPreconnected hBsub _ hout houtH
+    have := hHN _ (hsub hin)
+    rw [hdN _ _ (by linarith)] at this
+    linarith
+  have hvnotI : v ∉ F.interiorPts := by
+    intro hI
+    obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp F.isOpen_interiorPts v hI
+    set δ' := min δ r with hδ'
+    have hδ'0 : 0 < δ' := lt_min hδ hr0.1
+    have hBsub : ball v δ' ⊆ F.interiorPts ∩ ball v r := fun z hz =>
+      ⟨hball (ball_subset_ball (min_le_left _ _) hz), ball_subset_ball (min_le_right _ _) hz⟩
+    obtain ⟨p, hpB, hpH⟩ := mem_closure_iff.mp hvH (ball v δ') isOpen_ball (mem_ball_self hδ'0)
+    have hsub := hjoin (ball v δ') (convex_ball v δ').isPreconnected hBsub p hpB hpH
+    have hq : fromFrame v α (-(δ' / 2)) 0 ∈ ball v δ' := by
+      rw [mem_ball, dist_eq_norm]
+      unfold fromFrame
+      rw [show v + ((((-(δ' / 2) : ℝ) : ℂ) + ((0 : ℝ) : ℂ) * I)) * e α - v = ((-(δ' / 2) : ℝ) : ℂ) * e α by push_cast; ring,
+        norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_neg, abs_of_pos (by linarith)]
+      linarith
+    have := (hsub hq).2.1
+    rw [frameX_fromFrame] at this
+    linarith
+  have hdomv : ∀ z, dist z v < r → z ∈ F.dom := fun z hz => hv (by rw [mem_closedBall]; linarith [hr0.2])
+  have hΓ : ringArc N (α - π / 2) (α - π / 2 + τ) ⊆ F.Γ := by
+    rintro _ ⟨θ, hθ, rfl⟩
+    have hθe : θ = α - π / 2 + (θ - (α - π / 2)) := by ring
+    rcases (show 0 ≤ θ - (α - π / 2) by linarith [hθ.1]).eq_or_lt with h0 | hpos
+    · have hθ0 : θ = α - π / 2 := by linarith
+      have hv' : ringPt N θ = v := by
+        rw [hθ0, show α - π / 2 = α - π / 2 + 0 by ring, hapt]; simp [fromFrame]
+      rw [hv']
+      exact ⟨hdomv v (by rw [dist_self]; exact hr0.1), not_not.mp fun h => hvnotI ⟨hdomv v (by rw [dist_self]; exact hr0.1), h⟩⟩
+    · have ht : θ - (α - π / 2) ∈ Ioc 0 τ := ⟨hpos, by linarith [hθ.2]⟩
+      rw [hθe]
+      have hd := hdomv _ (hainO _ ht).1
+      exact ⟨hd, not_not.mp fun h => hnotI _ ht ⟨hd, h⟩⟩
+  have hclean : ∀ θ ∈ Ioo (α - π / 2) (α - π / 2 + τ), ∃ δ > 0, ball (ringPt N θ) δ ⊆ F.dom ∧
+      ∀ z ∈ ball (ringPt N θ) δ, z ∈ ⋃ a ∈ F.arcs, a.carrier → dist z N = 1 := by
+    intro θ hθ
+    have ht : θ - (α - π / 2) ∈ Ioc 0 τ := ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+    have hmem := hainO _ ht
+    rw [show α - π / 2 + (θ - (α - π / 2)) = θ by ring] at hmem
+    obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp hOopen _ hmem
+    refine ⟨δ, hδ, fun z hz => hdomv z (hball hz).1, fun z hz hza => ?_⟩
+    have hzO := hball hz
+    by_contra hne
+    rcases lt_or_gt_of_ne hne with h | h
+    · exact (hFlI (hOF z hzO h)).2 hza
+    · exact (hHI (hOH z hzO h)).2 hza
+  obtain ⟨c₀, c₀', hR⟩ := isRingArc_of_clean (by linarith) hΓ hclean
+  -- the side colours: the flank inside, the horn outside
+  set m := α - π / 2 + τ / 2 with hm
+  have hmI : m ∈ Ioo (α - π / 2) (α - π / 2 + τ) := ⟨by linarith, by linarith⟩
+  have hmO : ringPt N m ∈ O := hainO (τ / 2) ⟨by linarith, by linarith⟩
+  obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp hOopen _ hmO
+  have hme : ringPt N m = N + e m := rfl
+  have hgin : g ∈ F.innerColours N (ringPt N m) := by
+    show ringPt N m ∈ closure (F.region g ∩ ball N 1)
+    rw [Metric.mem_closure_iff]
+    intro ε hε
+    set s := min (min (ε / 2) (δ / 2)) (1 / 2) with hs
+    have hs0 : 0 < s := lt_min (lt_min (by linarith) (by linarith)) (by norm_num)
+    have hs1 := min_le_left (min (ε / 2) (δ / 2)) (1 / 2)
+    have hs2 := min_le_right (min (ε / 2) (δ / 2)) (1 / 2)
+    have hs3 := min_le_left (ε / 2) (δ / 2)
+    have hs4 := min_le_right (ε / 2) (δ / 2)
+    have hd1 : dist (N + ((1 - s : ℝ) : ℂ) * e m) (ringPt N m) = s := by
+      rw [hme, hdd, abs_of_neg (by linarith)]; ring
+    have hbO : N + ((1 - s : ℝ) : ℂ) * e m ∈ O := hball (by rw [mem_ball, hd1]; linarith)
+    have hbN : dist (N + ((1 - s : ℝ) : ℂ) * e m) N < 1 := by rw [hdN _ _ (by linarith)]; linarith
+    refine ⟨_, ⟨hfl (hOF _ hbO hbN), hbN⟩, ?_⟩
+    rw [dist_comm, hd1]; linarith
+  have hcout : c ∈ F.outerColours N (ringPt N m) := by
+    show ringPt N m ∈ closure (F.region c \ closedBall N 1)
+    rw [Metric.mem_closure_iff]
+    intro ε hε
+    set s := min (ε / 2) (δ / 2) with hs
+    have hs0 : 0 < s := lt_min (by linarith) (by linarith)
+    have hs3 := min_le_left (ε / 2) (δ / 2)
+    have hs4 := min_le_right (ε / 2) (δ / 2)
+    have hd1 : dist (N + ((1 + s : ℝ) : ℂ) * e m) (ringPt N m) = s := by
+      rw [hme, hdd, abs_of_pos (by linarith)]; ring
+    have hbO : N + ((1 + s : ℝ) : ℂ) * e m ∈ O := hball (by rw [mem_ball, hd1]; linarith)
+    have hbN : 1 < dist (N + ((1 + s : ℝ) : ℂ) * e m) N := by rw [hdN _ _ (by linarith)]; linarith
+    have hbH := hOH _ hbO hbN
+    refine ⟨_, ⟨⟨hHI hbH, hcol hbH⟩, by rw [mem_closedBall, not_le]; exact hbN⟩, ?_⟩
+    rw [dist_comm, hd1]; linarith
+  have hgc : g = c₀ := by
+    have := (hR.2.2 m hmI).1 ▸ hgin; exact this
+  have hcc : c = c₀' := by
+    have := (hR.2.2 m hmI).2 ▸ hcout; exact this
+  subst hgc hcc
+  exact ⟨α - π / 2 + τ, by linarith, hR⟩
+
+/-- **Near a point of the circle of radius `2` about `C`, all but finitely many nearby points of that circle see only arcs lying on
+the circle** (child of FLANK-Q's shadow clause): at `S₀ = C + 2 e(θ₀)` in the domain, for every angle `θ ≠ θ₀` near `θ₀` the point
+`C + 2 e(θ)` is in the domain and some ball about it meets the arcs only on the circle. -/
+theorem eventually_arcs_on_sphere_two {C : ℂ} {θ₀ : ℝ} (hd : C + 2 * e θ₀ ∈ F.dom) :
+    ∀ᶠ θ in 𝓝[≠] θ₀, C + 2 * e θ ∈ F.dom ∧
+      ∃ η > 0, ∀ w ∈ ball (C + 2 * e θ) η, w ∈ ⋃ a ∈ F.arcs, a.carrier → dist w C = 2 := by
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite _ hd
+  set A := {a | a ∈ F.arcs ∧ (a.carrier ∩ t).Nonempty} with hA
+  set Afin := {a | a ∈ A ∧ (a.carrier ∩ sphere C 2).Finite} with hAfin
+  have hAfinF : Afin.Finite := hfin.subset fun a ha => ha.1
+  set D := ⋃ a ∈ Afin, a.carrier with hD
+  have hDc : IsClosed D := hAfinF.isClosed_biUnion fun a _ => a.isClosed_carrier
+  have hE : (D ∩ sphere C 2).Finite := by
+    rw [hD, iUnion₂_inter]
+    exact hAfinF.biUnion fun a ha => ha.2
+  have hcont : Continuous (fun θ : ℝ => C + 2 * e θ) := by unfold e; fun_prop
+  -- the points of the circle near `S₀` lie in the interior of `t` and in the domain
+  have h1 : ∀ᶠ θ in 𝓝 θ₀, C + 2 * e θ ∈ interior t ∩ F.dom :=
+    hcont.continuousAt.preimage_mem_nhds (inter_mem (interior_mem_nhds.mpr ht) (F.isOpen_dom.mem_nhds hd))
+  -- and, `θ ≠ θ₀` near `θ₀`, off the finite set `D ∩ sphere C 2`
+  have hinj : InjOn (fun θ : ℝ => C + 2 * e θ) (Ioo (θ₀ - π) (θ₀ - π + 2 * π)) := by
+    have := injOn_spherePt C (show (0 : ℝ) < 2 by norm_num) (θ₀ - π)
+    intro x hx y hy hxy
+    exact this hx hy (by simpa [spherePt] using hxy)
+  set Θ := (fun θ : ℝ => C + 2 * e θ) ⁻¹' (D ∩ sphere C 2) ∩ Ioo (θ₀ - π) (θ₀ - π + 2 * π) with hΘ
+  have hΘfin : Θ.Finite :=
+    Set.Finite.of_finite_image (hE.subset (image_subset_iff.mpr fun θ (hθ : θ ∈ Θ) => hθ.1))
+      (hinj.mono fun θ (hθ : θ ∈ Θ) => hθ.2)
+  have h2 : ∀ᶠ θ in 𝓝[≠] θ₀, θ ∉ Θ := by
+    have hcl : IsClosed (Θ \ {θ₀}) := (hΘfin.subset sdiff_subset).isClosed
+    have hmem : (Θ \ {θ₀})ᶜ ∈ 𝓝 θ₀ := hcl.isOpen_compl.mem_nhds (fun h => h.2 rfl)
+    filter_upwards [nhdsWithin_le_nhds hmem, self_mem_nhdsWithin] with θ h hne h'
+    exact h ⟨h', hne⟩
+  have h3 : ∀ᶠ θ in 𝓝 θ₀, θ ∈ Ioo (θ₀ - π) (θ₀ - π + 2 * π) :=
+    Ioo_mem_nhds (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos])
+  filter_upwards [nhdsWithin_le_nhds h1, h2, nhdsWithin_le_nhds h3] with θ hθ hθΘ hθI
+  refine ⟨hθ.2, ?_⟩
+  have hpD : C + 2 * e θ ∉ D := by
+    intro h
+    refine hθΘ ⟨⟨h, ?_⟩, hθI⟩
+    rw [mem_sphere, dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e]; simp
+  obtain ⟨η₁, hη₁, hb1⟩ := Metric.isOpen_iff.mp hDc.isOpen_compl _ hpD
+  obtain ⟨η₂, hη₂, hb2⟩ := Metric.isOpen_iff.mp isOpen_interior _ hθ.1
+  refine ⟨min η₁ η₂, lt_min hη₁ hη₂, fun w hw hwa => ?_⟩
+  have hw1 : w ∈ ball (C + 2 * e θ) η₁ := ball_subset_ball (min_le_left _ _) hw
+  have hw2 : w ∈ interior t := hb2 (ball_subset_ball (min_le_right _ _) hw)
+  obtain ⟨a, ha, hwa'⟩ := mem_iUnion₂.mp hwa
+  have haA : a ∈ A := ⟨ha, w, hwa', interior_subset hw2⟩
+  rcases Arc.finite_inter_sphere_two_or_subset a (F.nondegenerate a ha) C with hf | hs
+  · exact absurd (mem_iUnion₂.mpr ⟨a, ⟨haA, hf⟩, hwa'⟩) (hb1 hw1)
+  · exact hs hwa'
+
+/-- **One side of the circle of radius `2`, near a point of it in a class's closure, is that class** (child of FLANK-Q's shadow
+clause): at `p = C + 2 e(φ)` in the domain and in the closure of `g`'s class, with the arcs near `p` lying on the circle, some polar
+box just outside the circle, or just inside it, about `p` lies in `g`'s class. -/
+theorem exists_polarBox_subset_region {C : ℂ} {φ : ℝ} {g : Fin k} (hd : C + 2 * e φ ∈ F.dom)
+    (hcl : C + 2 * e φ ∈ closure (F.region g)) {η₀ : ℝ} (hη₀ : 0 < η₀)
+    (harc : ∀ w ∈ ball (C + 2 * e φ) η₀, w ∈ ⋃ a ∈ F.arcs, a.carrier → dist w C = 2) :
+    ∃ η > 0, η < 1 ∧
+      ((fun q : ℝ × ℝ => C + (q.1 : ℂ) * e q.2) '' (Ioo 2 (2 + η) ×ˢ Ioo (φ - η) (φ + η)) ⊆ F.region g ∨
+        (fun q : ℝ × ℝ => C + (q.1 : ℂ) * e q.2) '' (Ioo (2 - η) 2 ×ˢ Ioo (φ - η) (φ + η)) ⊆ F.region g) := by
+  set p := C + 2 * e φ with hp
+  obtain ⟨η₁, hη₁, hball⟩ := Metric.isOpen_iff.mp F.isOpen_dom p hd
+  set η := min (min η₁ η₀ / 3) (1 / 2) with hη
+  have hη0 : 0 < η := lt_min (by positivity) (by norm_num)
+  have hη1 : η ≤ min η₁ η₀ / 3 := min_le_left _ _
+  have hηh : η ≤ 1 / 2 := min_le_right _ _
+  set Φ := fun q : ℝ × ℝ => C + (q.1 : ℂ) * e q.2 with hΦ
+  have hΦc : Continuous Φ := by rw [hΦ]; unfold e; fun_prop
+  -- a box point is within `3η` of `p`, so in the domain and in the ball where the arcs lie on the circle
+  have hnear : ∀ ρ t, |ρ - 2| < η → |t - φ| < η → dist (Φ (ρ, t)) p < min η₁ η₀ := by
+    intro ρ t hρ ht
+    have : dist (Φ (ρ, t)) p ≤ |ρ - 2| + 2 * |t - φ| := by
+      rw [hΦ, hp, dist_eq_norm]
+      simp only
+      have h1 : C + (ρ : ℂ) * e t - (C + 2 * e φ) = ((ρ - 2 : ℝ) : ℂ) * e t + 2 * (e t - e φ) := by push_cast; ring
+      rw [h1]
+      calc ‖((ρ - 2 : ℝ) : ℂ) * e t + 2 * (e t - e φ)‖ ≤ ‖((ρ - 2 : ℝ) : ℂ) * e t‖ + ‖2 * (e t - e φ)‖ := norm_add_le _ _
+        _ = |ρ - 2| + 2 * ‖e t - e φ‖ := by
+          rw [norm_mul, norm_mul, norm_e, Complex.norm_real, Real.norm_eq_abs]; simp
+        _ ≤ |ρ - 2| + 2 * |t - φ| := by linarith [norm_e_sub_e_le t φ]
+    linarith
+  have hdistC : ∀ ρ t, 0 ≤ ρ → dist (Φ (ρ, t)) C = ρ := by
+    intro ρ t hρ
+    rw [hΦ, dist_eq_norm]; simp only
+    rw [add_sub_cancel_left, norm_mul, norm_e, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hρ, mul_one]
+  -- each half box is a preconnected set of interior points
+  have hhalf : ∀ a b : ℝ, 2 - η ≤ a → b ≤ 2 + η → (2 ∉ Ioo a b) →
+      IsPreconnected (Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η))) ∧
+        Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η)) ⊆ F.interiorPts := by
+    intro a b ha hb h2
+    refine ⟨(isPreconnected_Ioo.prod isPreconnected_Ioo).image _ hΦc.continuousOn, ?_⟩
+    rintro _ ⟨⟨ρ, t⟩, ⟨hρ, ht⟩, rfl⟩
+    have hρ2 : |ρ - 2| < η := by rw [abs_lt]; constructor <;> linarith [hρ.1, hρ.2]
+    have ht2 : |t - φ| < η := by rw [abs_lt]; constructor <;> linarith [ht.1, ht.2]
+    have hn := hnear ρ t hρ2 ht2
+    refine ⟨hball (lt_of_lt_of_le hn (min_le_left _ _)), fun hmem => ?_⟩
+    have := harc _ (lt_of_lt_of_le hn (min_le_right _ _)) hmem
+    rw [hdistC ρ t (by linarith [hρ.1])] at this
+    exact h2 (this ▸ hρ)
+  obtain ⟨hpo, hpo'⟩ := hhalf 2 (2 + η) (by linarith) le_rfl (fun h => lt_irrefl _ h.1)
+  obtain ⟨hpi, hpi'⟩ := hhalf (2 - η) 2 le_rfl (by linarith) (fun h => lt_irrefl _ h.2)
+  -- a half box with one point of colour `g` lies in `g`'s class
+  have hfill : ∀ H : Set ℂ, IsPreconnected H → H ⊆ F.interiorPts → (H ∩ F.region g).Nonempty → H ⊆ F.region g := by
+    intro H hH hHi ⟨y, hyH, hyg⟩ w hw
+    refine ⟨hHi hw, ?_⟩
+    have := hH.constant (F.continuousOn_col.mono hHi) hw hyH
+    show F.col w = g
+    rw [this]; exact hyg.2
+  -- a point of `g`'s class near `p`, in polar form about `C`
+  have harg : ∀ᶠ ζ in 𝓝 (2 : ℂ), |Complex.arg ζ| < η := by
+    have hc : ContinuousAt Complex.arg 2 := Complex.continuousAt_arg (by simp)
+    have : Complex.arg 2 = 0 := by simp
+    have h := hc.eventually (Metric.ball_mem_nhds (Complex.arg 2) hη0)
+    filter_upwards [h] with ζ hζ
+    have hζ' : dist (Complex.arg ζ) (Complex.arg 2) < η := hζ
+    rw [Real.dist_eq, this, sub_zero] at hζ'; exact hζ'
+  obtain ⟨ε, hε, hεarg⟩ := Metric.eventually_nhds_iff.mp harg
+  obtain ⟨y, hyg, hyd⟩ := Metric.mem_closure_iff.mp hcl (min ε η) (lt_min hε hη0)
+  set ζ := (y - C) / e φ with hζ
+  have he0 : e φ ≠ 0 := by intro h; simpa [h] using norm_e φ
+  have hζ2 : dist ζ 2 < min ε η := by
+    rw [hζ, dist_eq_norm, show (y - C) / e φ - 2 = (y - (C + 2 * e φ)) / e φ by field_simp; ring, norm_div, norm_e,
+      div_one, ← dist_eq_norm, dist_comm]; exact hyd
+  have hζarg : |Complex.arg ζ| < η := hεarg (lt_of_lt_of_le hζ2 (min_le_left _ _))
+  have hζn : |‖ζ‖ - 2| < η := by
+    have := abs_norm_sub_norm_le ζ 2
+    rw [show ‖(2 : ℂ)‖ = 2 by simp] at this
+    rw [dist_eq_norm] at hζ2
+    linarith [min_le_right ε η]
+  have hy : y = Φ (‖ζ‖, φ + Complex.arg ζ) := by
+    rw [hΦ]; simp only
+    have hpol : (‖ζ‖ : ℂ) * e (Complex.arg ζ) = ζ := Complex.norm_mul_exp_arg_mul_I ζ
+    rw [e_add, show (‖ζ‖ : ℂ) * (e φ * e (Complex.arg ζ)) = e φ * ((‖ζ‖ : ℂ) * e (Complex.arg ζ)) by ring, hpol, hζ]
+    field_simp; ring
+  have htI : φ + Complex.arg ζ ∈ Ioo (φ - η) (φ + η) := by
+    rw [abs_lt] at hζarg; constructor <;> linarith [hζarg.1, hζarg.2]
+  rw [abs_lt] at hζn
+  refine ⟨η, hη0, by linarith, ?_⟩
+  rcases lt_trichotomy ‖ζ‖ 2 with h | h | h
+  · right
+    exact hfill _ hpi hpi' ⟨y, hy ▸ mem_image_of_mem _ ⟨⟨by linarith [hζn.1], h⟩, htI⟩, hyg⟩
+  · -- `y` on the circle: its class contains a small ball, which reaches outside
+    left
+    obtain ⟨ε', hε', hb'⟩ := Metric.isOpen_iff.mp (F.isOpen_region g) y hyg
+    set δ := min (ε' / 2) (η / 2) with hδ
+    have hδ0 : 0 < δ := lt_min (by linarith) (by linarith)
+    refine hfill _ hpo hpo' ⟨Φ (2 + δ, φ + Complex.arg ζ), mem_image_of_mem _ ⟨⟨by linarith, by linarith [min_le_right (ε' / 2) (η / 2)]⟩, htI⟩, hb' ?_⟩
+    rw [mem_ball, hy, h, hΦ, dist_eq_norm]; simp only
+    rw [show C + ((2 + δ : ℝ) : ℂ) * e (φ + Complex.arg ζ) - (C + ((2 : ℝ) : ℂ) * e (φ + Complex.arg ζ)) =
+      (δ : ℂ) * e (φ + Complex.arg ζ) by push_cast; ring, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos hδ0]
+    linarith [min_le_left (ε' / 2) (η / 2)]
+  · left
+    exact hfill _ hpo hpo' ⟨y, hy ▸ mem_image_of_mem _ ⟨⟨h, by linarith [hζn.2]⟩, htI⟩, hyg⟩
+
+/-- **A circle crossing the circle of radius `2` into a class's side lies in the class's shadow** (child of FLANK-Q's shadow clause):
+if `p = C + 2 e(φ)` is as in `exists_polarBox_subset_region` and `z` has points of that circle at angles arbitrarily near `φ` both
+inside and outside `ω(z)`, then `z` is in the shadow of `g`'s class. -/
+theorem mem_shadow_of_crossing {C z : ℂ} {φ : ℝ} {g : Fin k} (hd : C + 2 * e φ ∈ F.dom)
+    (hcl : C + 2 * e φ ∈ closure (F.region g)) {η₀ : ℝ} (hη₀ : 0 < η₀)
+    (harc : ∀ w ∈ ball (C + 2 * e φ) η₀, w ∈ ⋃ a ∈ F.arcs, a.carrier → dist w C = 2)
+    (hcross : ∀ δ > 0, ∃ φ₁ φ₂, |φ₁ - φ| < δ ∧ |φ₂ - φ| < δ ∧ dist z (C + 2 * e φ₁) < 1 ∧ 1 < dist z (C + 2 * e φ₂)) :
+    z ∈ shadow (F.region g) := by
+  obtain ⟨η, hη, hη1, hbox⟩ := exists_polarBox_subset_region hd hcl hη₀ harc
+  obtain ⟨φ₁, φ₂, h1, h2, hd1, hd2⟩ := hcross η hη
+  set Φ := fun q : ℝ × ℝ => C + (q.1 : ℂ) * e q.2 with hΦ
+  have hΦc : Continuous Φ := by rw [hΦ]; unfold e; fun_prop
+  have hc1 : Continuous fun ρ : ℝ => dist z (Φ (ρ, φ₁)) := by fun_prop
+  have hc2 : Continuous fun ρ : ℝ => dist z (Φ (ρ, φ₂)) := by fun_prop
+  have hev : ∀ᶠ ρ in 𝓝 (2 : ℝ), dist z (Φ (ρ, φ₁)) < 1 ∧ 1 < dist z (Φ (ρ, φ₂)) := by
+    have e1 : dist z (Φ (2, φ₁)) < 1 := by simpa [hΦ] using hd1
+    have e2 : 1 < dist z (Φ (2, φ₂)) := by simpa [hΦ] using hd2
+    exact (hc1.continuousAt.eventually (gt_mem_nhds e1)).and (hc2.continuousAt.eventually (lt_mem_nhds e2))
+  have hφ1 : φ₁ ∈ Ioo (φ - η) (φ + η) := by rw [abs_lt] at h1; constructor <;> linarith [h1.1, h1.2]
+  have hφ2 : φ₂ ∈ Ioo (φ - η) (φ + η) := by rw [abs_lt] at h2; constructor <;> linarith [h2.1, h2.2]
+  have hivt : ∀ a b : ℝ, (Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η)) ⊆ F.region g) →
+      (∃ ρ ∈ Ioo a b, dist z (Φ (ρ, φ₁)) < 1 ∧ 1 < dist z (Φ (ρ, φ₂))) → z ∈ shadow (F.region g) := by
+    intro a b hsub ⟨ρ, hρ, hρ1, hρ2⟩
+    have hpc : IsPreconnected (Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η))) :=
+      (isPreconnected_Ioo.prod isPreconnected_Ioo).image _ hΦc.continuousOn
+    have hm1 : Φ (ρ, φ₁) ∈ Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η)) := mem_image_of_mem _ ⟨hρ, hφ1⟩
+    have hm2 : Φ (ρ, φ₂) ∈ Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η)) := mem_image_of_mem _ ⟨hρ, hφ2⟩
+    obtain ⟨y, hy, hyd⟩ := hpc.intermediate_value hm1 hm2 (continuous_const.dist continuous_id).continuousOn
+      (show (1 : ℝ) ∈ Icc (dist z (Φ (ρ, φ₁))) (dist z (Φ (ρ, φ₂))) from ⟨hρ1.le, hρ2.le⟩)
+    exact ⟨y, hsub hy, hyd⟩
+  rcases hbox with hb | hb
+  · refine hivt 2 (2 + η) hb ?_
+    obtain ⟨ρ, hρ, hρI⟩ := ((hev.filter_mono nhdsWithin_le_nhds).and (Ioo_mem_nhdsGT (show (2 : ℝ) < 2 + η by linarith))).exists
+    exact ⟨ρ, hρI, hρ⟩
+  · refine hivt (2 - η) 2 hb ?_
+    obtain ⟨ρ, hρ, hρI⟩ := ((hev.filter_mono nhdsWithin_le_nhds).and (Ioo_mem_nhdsLT (show (2 - η : ℝ) < 2 by linarith))).exists
+    exact ⟨ρ, hρI, hρ⟩
+
+/-- **FS112-N2-FLANK-Q's (R2) shadow, upper** (child of `flankQ_upper`): if the radius-2 arc `R₂` over `[α − π/2, θ₂]` about `N` lies in
+the closure of the flank colour `g`'s class, `g`'s class shadows every horn point near `v` below `ω(N)`. -/
+theorem flankQ_upper_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {g : Fin k}
+    (hg : F.IsFlankAbove v α 1 g) {θ₂ : ℝ} (hθ₂ : α - π / 2 < θ₂)
+    (hR2 : radiusTwoArc (v + e (α + π / 2)) (α - π / 2) θ₂ ⊆ closure (F.region g)) :
+    ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α κ₁ 1 r ⊆ shadow (F.region g) := by
+  have _ := hF
+  have _ := hg
+  set N := v + e (α + π / 2) with hN
+  set θ₀ := α - π / 2 with hθ₀
+  have heb : e (α + π / 2) = -e θ₀ := by
+    rw [show α + π / 2 = θ₀ + π by rw [hθ₀]; ring, e_add_pi]
+  have hb0 : e θ₀ ≠ 0 := by intro h; simpa [h] using norm_e θ₀
+  -- `S′ = N + 2 e(θ₀)` is in the domain
+  have hS : N + 2 * e θ₀ ∈ F.dom := by
+    refine hv ?_
+    rw [mem_closedBall, hN, heb, dist_eq_norm, show v + -e θ₀ + 2 * e θ₀ - v = e θ₀ by ring, norm_e]
+  obtain ⟨ε₁, hε₁, hgood⟩ := Metric.eventually_nhds_iff.mp (eventually_nhdsWithin_iff.mp (eventually_arcs_on_sphere_two hS))
+  set ε := min ε₁ (θ₂ - θ₀) with hε
+  have hε0 : 0 < ε := lt_min hε₁ (by linarith)
+  -- the frame coordinate `u = (z − N)/e(θ₀)`, equal to `1` at `v`
+  set u : ℂ → ℂ := fun z => (z - N) / e θ₀ with hu
+  have huc : Continuous u := by rw [hu]; fun_prop (disch := exact hb0)
+  have huv : u v = 1 := by
+    rw [hu]; simp only; rw [hN, heb, show v - (v + -e θ₀) = e θ₀ by ring, div_self hb0]
+  have hev : ∀ᶠ z in 𝓝 v, r2Cross (u z) < ε ∧ ‖u z‖ < 3 := by
+    have h1 : ∀ᶠ z in 𝓝 v, r2Cross (u z) < ε := by
+      have hc : ContinuousAt (r2Cross ∘ u) v :=
+        ContinuousAt.comp (by rw [huv]; exact continuousAt_r2Cross_one) huc.continuousAt
+      have : (r2Cross ∘ u) v = 0 := by simp only [Function.comp, huv, r2Cross_one]
+      exact hc.eventually (gt_mem_nhds (show (r2Cross ∘ u) v < ε by rw [this]; exact hε0))
+    have h2 : ∀ᶠ z in 𝓝 v, ‖u z‖ < 3 := by
+      have hc : ContinuousAt (fun z => ‖u z‖) v := (continuous_norm.comp huc).continuousAt
+      exact hc.eventually (gt_mem_nhds (show ‖u v‖ < 3 by rw [huv]; norm_num))
+    exact h1.and h2
+  obtain ⟨δ, hδ, hδev⟩ := Metric.eventually_nhds_iff.mp hev
+  filter_upwards [Ioo_mem_nhdsGT hδ] with r hr z hz
+  obtain ⟨hzr, hzx, -, hzB⟩ := hz
+  obtain ⟨hsc, hu3⟩ := hδev (lt_trans hzr hr.2)
+  have hzN : z - N = e θ₀ * u z := by rw [hu]; simp only; field_simp
+  -- `u z` is above the real axis, of norm `> 1`
+  have hun : ‖u z‖ = dist z N := by
+    rw [hu]; simp only; rw [norm_div, norm_e, div_one, dist_eq_norm]
+  have hu1 : 1 < ‖u z‖ := by rw [hun]; exact (tanBelow_one_iff v α z).mp hzB
+  have huim : 0 < (u z).im := by
+    have : (u z).im = frameX v α z := by
+      rw [hu]; simp only
+      rw [hN, heb, show z - (v + -e θ₀) = (z - v) + e θ₀ by ring, add_div, div_self hb0]
+      unfold frameX
+      have hinv : (e θ₀)⁻¹ = starRingEnd ℂ (e θ₀) := by
+        rw [Complex.inv_def, Complex.normSq_eq_norm_sq, norm_e]; simp
+      have hI : e (π / 2) = I := by rw [e_eq]; simp
+      rw [show α = θ₀ + π / 2 by rw [hθ₀]; ring, e_add, div_eq_mul_inv, hinv, hI, map_mul, Complex.conj_I]
+      simp only [Complex.add_im, Complex.one_im, add_zero, Complex.mul_re, Complex.mul_im, Complex.neg_re, Complex.neg_im,
+        Complex.I_re, Complex.I_im]
+      ring
+    rw [this]; exact hzx
+  obtain ⟨hw0, hwc, hcw, hin, hout⟩ := r2Cross_spec hu1 hu3 huim
+  set sc := r2Cross (u z) with hscdef
+  have hsc0 : 0 < sc := by linarith
+  -- the crossing point `p = N + 2 e(θ₀ + sc)`
+  obtain ⟨hpd, η₀, hη₀, harc⟩ := hgood (by
+    rw [Real.dist_eq, show θ₀ + sc - θ₀ = sc by ring, abs_of_pos hsc0]; exact lt_of_lt_of_le hsc (min_le_left _ _))
+    (by intro h; simp only [mem_singleton_iff] at h; linarith)
+  have hpcl : N + 2 * e (θ₀ + sc) ∈ closure (F.region g) := by
+    refine hR2 ⟨θ₀ + sc, ⟨by linarith, ?_⟩, rfl⟩
+    have := lt_of_lt_of_le hsc (min_le_right ε₁ (θ₂ - θ₀)); linarith
+  have hdist : ∀ t, dist z (N + 2 * e (θ₀ + t)) = ‖2 * e t - u z‖ := by
+    intro t
+    calc dist z (N + 2 * e (θ₀ + t)) = ‖(z - N) - 2 * (e θ₀ * e t)‖ := by
+          rw [dist_eq_norm, e_add]; congr 1; ring
+      _ = ‖e θ₀ * (u z - 2 * e t)‖ := by rw [hzN]; congr 1; ring
+      _ = ‖2 * e t - u z‖ := by rw [norm_mul, norm_e, one_mul, norm_sub_rev]
+  refine mem_shadow_of_crossing hpd hpcl hη₀ harc fun d hd => ?_
+  set d' := min d (sc - Complex.arg (u z)) / 2 with hd'
+  have hd'0 : 0 < d' := by
+    have : 0 < min d (sc - Complex.arg (u z)) := lt_min hd (by linarith)
+    linarith
+  have hd'1 : d' < d := by
+    have := min_le_left d (sc - Complex.arg (u z)); linarith
+  have hd'2 : d' < sc - Complex.arg (u z) := by
+    have := min_le_right d (sc - Complex.arg (u z)); linarith
+  refine ⟨θ₀ + (sc - d'), θ₀ + (sc + d'), ?_, ?_, ?_, ?_⟩
+  · rw [show θ₀ + (sc - d') - (θ₀ + sc) = -d' by ring, abs_neg, abs_of_pos hd'0]; exact hd'1
+  · rw [show θ₀ + (sc + d') - (θ₀ + sc) = d' by ring, abs_of_pos hd'0]; exact hd'1
+  · rw [hdist]; exact hin _ (by linarith) (by linarith)
+  · rw [hdist]; exact hout _ (by linarith) (by linarith [Real.pi_pos])
+
 
 /-- **FS112-N2-FLANK-Q**, the upper bound `κ₂ = 1`. Let `c` have a horn at `v` along `e α` whose upper arc lies on `ω(N)`, with flank
 colour `g` above it and an out-type `c`-contact at `N` (N3-DEG's, where `int D_c(v) = ∅`), and suppose every arc of `Γ` on `ω(N)` with
@@ -3221,7 +5363,375 @@ theorem flankQ_upper (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ : �
         (F.IsR2Arc (v + e (α + π / 2)) (α - π / 2) θ₂ ∧ g ∉ F.coloursAt (v + e (α + π / 2)) ∧
           v - e (α + π / 2) ∈ closure (F.region g) ∧ F.OutType v g (v - e (α + π / 2)) ∧
           ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α κ₁ 1 r ⊆ shadow (F.region g))) := by
-  sorry
+  have _ := hcN
+  have hπ := Real.pi_pos
+  set N := v + e (α + π / 2) with hN
+  have hNdom : N ∈ F.dom := hv (by rw [mem_closedBall, hN, dist_eq_norm]; simp)
+  obtain ⟨θ₂, hθ₂, hR⟩ := hH.isRingArc_upper hv hg
+  -- the side colours of an arc of `Γ` with constant sides are unique
+  set m := ((α - π / 2) + θ₂) / 2 with hm
+  have hmI : m ∈ Ioo (α - π / 2) θ₂ := ⟨by linarith, by linarith⟩
+  have huniq : ∀ d d', F.IsRingArc N (α - π / 2) θ₂ d d' → d = g ∧ d' = c := by
+    intro d d' hR'
+    have h2 := (hR.2.2 m hmI).1
+    have h4 := (hR.2.2 m hmI).2
+    rw [(hR'.2.2 m hmI).1] at h2
+    rw [(hR'.2.2 m hmI).2] at h4
+    exact ⟨Set.singleton_eq_singleton_iff.mp h2, Set.singleton_eq_singleton_iff.mp h4⟩
+  -- flank points: inside `ω(N)`, on the `+n` side, arbitrarily near `v`
+  obtain ⟨κ', hκ', hgev⟩ := hg
+  have hflank : ∀ ε > 0, ∃ f ∈ F.region g, dist f v < ε ∧ dist f N < 1 ∧ 0 < frameY v α f := by
+    intro ε hε
+    obtain ⟨r, hr, hrpos⟩ := (hgev.and (Ioo_mem_nhdsGT hε)).exists
+    obtain ⟨z, hz, -, -⟩ := exists_mem_hornSet_aboveBelow v α (κ₁ := 1) (κ₂ := κ') (s := (1 + κ') / 2) (m := 1)
+      hrpos.1 (by linarith) (by linarith) (by intro h; linarith)
+    refine ⟨z, hr hz, by linarith [hz.1, hrpos.2], (tanAbove_one_iff v α z).mp hz.2.2.1, ?_⟩
+    have := hz.2.2.1
+    unfold TanAbove tanHeight at this
+    nlinarith [sq_nonneg (frameX v α z), sq_nonneg (frameY v α z)]
+  have htile : ∀ f ∈ F.region g, F.TileOf g (connectedComponentIn F.interiorPts f) ∧
+      f ∈ connectedComponentIn F.interiorPts f := by
+    intro f hf
+    have hT : F.IsTile (connectedComponentIn F.interiorPts f) := ⟨f, hf.1, rfl⟩
+    have hfT : f ∈ connectedComponentIn F.interiorPts f := mem_connectedComponentIn hf.1
+    refine ⟨?_, hfT⟩
+    have := hT.tileOf hfT
+    rwa [show F.col f = g from hf.2] at this
+  rcases hQR _ _ _ _ hR with hQ | hR2
+  · -- (Q): `g` is carried at `N`, and its tile there is Siamese with the flank, so inside `B(v, 1)`
+    obtain ⟨d, d', hR', hd, -, -⟩ := id hQ
+    rw [(huniq d d' hR').1] at hd
+    obtain ⟨T, hT, hNT⟩ := (F.mem_coloursAt_iff_exists_tileOf hNdom).mp hd
+    refine ⟨θ₂, hθ₂, hR, Or.inl ⟨hQ, T, hT, ?_, hNT⟩⟩
+    have hnear : ∀ t ∈ T, ∀ f ∈ F.region g, dist f N < 1 → dist t f < 1 := by
+      intro t ht f hf hfN
+      obtain ⟨hTf, hfT⟩ := htile f hf
+      rcases unitNear_or_unitFar hF hT hTf with h | h
+      · exact h t ht f hfT
+      · exfalso
+        obtain ⟨y, hy, hyd⟩ := Metric.mem_closure_iff.mp hNT (1 - dist f N) (by linarith)
+        have h1 := h y hy f hfT
+        have := dist_triangle y N f
+        rw [dist_comm N f] at this
+        rw [dist_comm] at hyd
+        linarith
+    have hTv : T ⊆ closedBall v 1 := by
+      intro t ht
+      rw [mem_closedBall]
+      by_contra hlt
+      push Not at hlt
+      obtain ⟨f, hf, hfv, hfN, -⟩ := hflank (dist t v - 1) (by linarith)
+      have h1 := hnear t ht f hf hfN
+      have := dist_triangle t f v
+      linarith
+    have := hT.1.isOpen.subset_interior_iff.mpr hTv
+    rwa [interior_closedBall v one_ne_zero] at this
+  · -- (R2): `S′ = N + 2e(α − π/2)` is the arc's radius-2 point at its end `v`; `g`'s tiles there are far from the flank
+    obtain ⟨d, d', hR', -, hd, hsub⟩ := id hR2
+    rw [(huniq d d' hR').1] at hd hsub
+    have hS : v - e (α + π / 2) = N + 2 * e (α - π / 2) := by
+      have := e_add_pi (α - π / 2)
+      rw [show α - π / 2 + π = α + π / 2 by ring] at this
+      rw [hN, this]; ring
+    have hSg : v - e (α + π / 2) ∈ closure (F.region g) := by
+      rw [hS]; exact hsub ⟨α - π / 2, ⟨le_rfl, hθ₂.le⟩, rfl⟩
+    refine ⟨θ₂, hθ₂, hR, Or.inr ⟨hR2, hd, hSg, ?_, flankQ_upper_shadow hF hv ⟨κ', hκ', hgev⟩ hθ₂ hsub⟩⟩
+    intro T hT hST
+    have hfar : ∀ t ∈ T, ∀ f ∈ F.region g, 0 < frameY v α f → 1 < dist t f := by
+      intro t ht f hf hfy
+      have hfS : 1 < dist f (v - e (α + π / 2)) := by
+        have h := sq_dist_S v α f
+        nlinarith [sq_nonneg (frameX v α f), dist_nonneg (x := f) (y := v - e (α + π / 2))]
+      obtain ⟨hTf, hfT⟩ := htile f hf
+      rcases unitNear_or_unitFar hF hT hTf with h | h
+      · exfalso
+        obtain ⟨y, hy, hyd⟩ := Metric.mem_closure_iff.mp hST (dist f (v - e (α + π / 2)) - 1) (by linarith)
+        have h1 := h y hy f hfT
+        have := dist_triangle f y (v - e (α + π / 2))
+        rw [dist_comm f y] at this
+        rw [dist_comm] at hyd
+        linarith
+      · exact h t ht f hfT
+    have hTv : T ⊆ {w | 1 ≤ dist w v} := by
+      intro t ht
+      show 1 ≤ dist t v
+      by_contra hlt
+      push Not at hlt
+      obtain ⟨f, hf, hfv, -, hfy⟩ := hflank (1 - dist t v) (by linarith)
+      have h1 := hfar t ht f hf hfy
+      have := dist_triangle t v f
+      rw [dist_comm v f] at this
+      linarith
+    have hint := hT.1.isOpen.subset_interior_iff.mpr hTv
+    have hcompl : {w : ℂ | 1 ≤ dist w v} = (ball v 1)ᶜ := by ext w; simp [mem_ball, not_lt]
+    rw [hcompl, interior_compl, closure_ball v one_ne_zero] at hint
+    exact Set.disjoint_left.mpr fun t ht htB => hint ht htB
+
+/-- **Engine 5, the lower bound** (the mirror of `IsHorn.isRingArc_upper`): a horn at `v` along `e α` whose lower arc has curvature
+`−1`, with a flank colour `h` below it, is bounded by an arc of `Γ` on `ω(S′)` ending at `v`, with constant sides — inner colour `h`,
+outer colour the horn's. -/
+theorem IsHorn.isRingArc_lower {v : ℂ} (hv : F.Covers v 1) {α κ₂ : ℝ} {c h : Fin k}
+    (hH : F.IsHorn v α (-1) κ₂ c) (hh : F.IsFlankBelow v α (-1) h) :
+    ∃ θ₁, θ₁ < α + π / 2 ∧ F.IsRingArc (v - e (α + π / 2)) θ₁ (α + π / 2) h c := by
+  have hπ := Real.pi_pos
+  have hπ3 := Real.pi_gt_three
+  obtain ⟨hκ₂, hHev⟩ := hH
+  obtain ⟨κ', hκ', hhev⟩ := hh
+  obtain ⟨r, ⟨⟨hsec, hcol⟩, hfl⟩, hr0⟩ :=
+    ((hHev.and hhev).and (Ioo_mem_nhdsGT (show (0 : ℝ) < 1 / 2 by norm_num))).exists
+  set S := v - e (α + π / 2) with hS
+  obtain ⟨x₀, -, hHeq, hvH⟩ := hsec
+  have hHI : hornSet v α (-1) κ₂ r ⊆ F.interiorPts := by
+    rw [hHeq]; exact (connectedComponentIn_subset _ _).trans inter_subset_left
+  have hFlI : hornSet v α κ' (-1) r ⊆ F.interiorPts := fun z hz => (hfl hz).1
+  have hjoin : ∀ B : Set ℂ, IsPreconnected B → B ⊆ F.interiorPts ∩ ball v r → ∀ p ∈ B, p ∈ hornSet v α (-1) κ₂ r →
+      B ⊆ hornSet v α (-1) κ₂ r := by
+    intro B hB hBsub p hpB hpH
+    rw [hHeq] at hpH ⊢
+    rw [connectedComponentIn_eq hpH]
+    exact hB.subset_connectedComponentIn hpB hBsub
+  set O : Set ℂ := {z | dist z v < r ∧ 0 < frameX v α z ∧ TanAbove v α κ' z ∧ TanBelow v α κ₂ z} with hOdef
+  have hOopen : IsOpen O := by
+    have hfx : Continuous (frameX v α) := by unfold frameX; fun_prop
+    have ht : ∀ κ : ℝ, Continuous fun z => tanHeight κ (frameX v α z) (frameY v α z) := fun κ => by
+      unfold tanHeight frameX frameY; fun_prop
+    exact (isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+      ((isOpen_lt continuous_const hfx).inter ((isOpen_lt continuous_const (ht κ')).inter (isOpen_lt (ht κ₂) continuous_const)))
+  have hOball : O ⊆ ball v r := fun z hz => hz.1
+  have hOH : ∀ z ∈ O, 1 < dist z S → z ∈ hornSet v α (-1) κ₂ r := fun z hz hz' =>
+    ⟨hz.1, hz.2.1, (tanAbove_neg_one_iff v α z).mpr hz', hz.2.2.2⟩
+  have hOF : ∀ z ∈ O, dist z S < 1 → z ∈ hornSet v α κ' (-1) r := fun z hz hz' =>
+    ⟨hz.1, hz.2.1, hz.2.2.1, (tanBelow_neg_one_iff v α z).mpr hz'⟩
+  have hHS : ∀ z ∈ hornSet v α (-1) κ₂ r, 1 < dist z S := fun z hz => (tanAbove_neg_one_iff v α z).mp hz.2.2.1
+  have hdS : ∀ ρ θ : ℝ, 0 ≤ ρ → dist (S + (ρ : ℂ) * e θ) S = ρ := fun ρ θ hρ => by
+    rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hρ]
+  have hdd : ∀ ρ θ : ℝ, dist (S + (ρ : ℂ) * e θ) (S + e θ) = |ρ - 1| := fun ρ θ => by
+    rw [dist_eq_norm, show S + (ρ : ℂ) * e θ - (S + e θ) = ((ρ - 1 : ℝ) : ℂ) * e θ by push_cast; ring, norm_mul, norm_e, mul_one,
+      Complex.norm_real, Real.norm_eq_abs]
+  set τ := min (r / 2) 1 with hτ
+  have hτ0 : 0 < τ := lt_min (by linarith [hr0.1]) one_pos
+  have hτr : τ ≤ r / 2 := min_le_left _ _
+  have hτ1 : τ ≤ 1 := min_le_right _ _
+  have hapt : ∀ t, ringPt S (α + π / 2 - t) = fromFrame v α (Real.sin t) (-(1 - Real.cos t)) := fun t => by
+    have := normalPt_sub_add_eq_fromFrame v α 1 t
+    rw [ofReal_one, one_mul, one_mul, one_mul] at this
+    rw [ringPt, ← this]
+  have hadist : ∀ t, 0 ≤ t → dist (ringPt S (α + π / 2 - t)) v ≤ t := by
+    intro t ht
+    have h := frame_normSq v α (ringPt S (α + π / 2 - t))
+    rw [hapt, frameX_fromFrame, frameY_fromFrame, ← hapt, ← dist_eq_norm] at h
+    have hc := Real.one_sub_sq_div_two_le_cos (x := t)
+    have hsc := Real.sin_sq_add_cos_sq t
+    have h2 : dist (ringPt S (α + π / 2 - t)) v ^ 2 ≤ t ^ 2 := by nlinarith
+    nlinarith [dist_nonneg (x := ringPt S (α + π / 2 - t)) (y := v)]
+  have hainO : ∀ t ∈ Ioc 0 τ, ringPt S (α + π / 2 - t) ∈ O := by
+    intro t ht
+    have hcos : Real.cos t < 1 := by
+      have := Real.cos_lt_cos_of_nonneg_of_le_pi (le_refl 0) (by linarith [ht.2, hτ1]) ht.1
+      rwa [Real.cos_zero] at this
+    have hsin : 0 < Real.sin t := Real.sin_pos_of_pos_of_lt_pi ht.1 (by linarith [ht.2, hτ1])
+    have hsc := Real.sin_sq_add_cos_sq t
+    refine ⟨by linarith [hadist t ht.1.le, hr0.1, ht.2, hτr], ?_, ?_, ?_⟩
+    · rw [hapt, frameX_fromFrame]; exact hsin
+    · unfold TanAbove; rw [hapt, frameX_fromFrame, frameY_fromFrame]; unfold tanHeight
+      nlinarith
+    · unfold TanBelow; rw [hapt, frameX_fromFrame, frameY_fromFrame]; unfold tanHeight
+      nlinarith
+  have hnotI : ∀ t ∈ Ioc 0 τ, ringPt S (α + π / 2 - t) ∉ F.interiorPts := by
+    intro t ht hI
+    set a := ringPt S (α + π / 2 - t) with ha
+    obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp (F.isOpen_interiorPts.inter hOopen) a ⟨hI, hainO t ht⟩
+    have hae : a = S + e (α + π / 2 - t) := rfl
+    set s := min (δ / 2) (1 / 2) with hs
+    have hs0 : 0 < s := lt_min (by linarith) (by norm_num)
+    have hsδ : s < δ := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+    have hs1 : s ≤ 1 / 2 := min_le_right _ _
+    have hout : S + ((1 + s : ℝ) : ℂ) * e (α + π / 2 - t) ∈ ball a δ := by
+      rw [mem_ball, hae, hdd, abs_of_pos (by linarith)]; linarith
+    have hin : S + ((1 - s : ℝ) : ℂ) * e (α + π / 2 - t) ∈ ball a δ := by
+      rw [mem_ball, hae, hdd, abs_of_neg (by linarith)]; linarith
+    have hBsub : ball a δ ⊆ F.interiorPts ∩ ball v r := fun z hz => ⟨(hball hz).1, hOball (hball hz).2⟩
+    have houtH := hOH _ (hball hout).2 (by rw [hdS _ _ (by linarith)]; linarith)
+    have hsub := hjoin (ball a δ) (convex_ball a δ).isPreconnected hBsub _ hout houtH
+    have := hHS _ (hsub hin)
+    rw [hdS _ _ (by linarith)] at this
+    linarith
+  have hvnotI : v ∉ F.interiorPts := by
+    intro hI
+    obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp F.isOpen_interiorPts v hI
+    set δ' := min δ r with hδ'
+    have hδ'0 : 0 < δ' := lt_min hδ hr0.1
+    have hBsub : ball v δ' ⊆ F.interiorPts ∩ ball v r := fun z hz =>
+      ⟨hball (ball_subset_ball (min_le_left _ _) hz), ball_subset_ball (min_le_right _ _) hz⟩
+    obtain ⟨p, hpB, hpH⟩ := mem_closure_iff.mp hvH (ball v δ') isOpen_ball (mem_ball_self hδ'0)
+    have hsub := hjoin (ball v δ') (convex_ball v δ').isPreconnected hBsub p hpB hpH
+    have hq : fromFrame v α (-(δ' / 2)) 0 ∈ ball v δ' := by
+      rw [mem_ball, dist_eq_norm]
+      unfold fromFrame
+      rw [show v + ((((-(δ' / 2) : ℝ) : ℂ) + ((0 : ℝ) : ℂ) * I)) * e α - v = ((-(δ' / 2) : ℝ) : ℂ) * e α by push_cast; ring,
+        norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_neg, abs_of_pos (by linarith)]
+      linarith
+    have := (hsub hq).2.1
+    rw [frameX_fromFrame] at this
+    linarith
+  have hdomv : ∀ z, dist z v < r → z ∈ F.dom := fun z hz => hv (by rw [mem_closedBall]; linarith [hr0.2])
+  have hΓ : ringArc S (α + π / 2 - τ) (α + π / 2) ⊆ F.Γ := by
+    rintro _ ⟨θ, hθ, rfl⟩
+    have hθe : θ = α + π / 2 - (α + π / 2 - θ) := by ring
+    rcases (show 0 ≤ α + π / 2 - θ by linarith [hθ.2]).eq_or_lt with h0 | hpos
+    · have hθ0 : θ = α + π / 2 := by linarith
+      have hv' : ringPt S θ = v := by
+        rw [hθ0, show α + π / 2 = α + π / 2 - 0 by ring, hapt]; simp [fromFrame]
+      rw [hv']
+      exact ⟨hdomv v (by rw [dist_self]; exact hr0.1), not_not.mp fun h => hvnotI ⟨hdomv v (by rw [dist_self]; exact hr0.1), h⟩⟩
+    · have ht : α + π / 2 - θ ∈ Ioc 0 τ := ⟨hpos, by linarith [hθ.1]⟩
+      rw [hθe]
+      have hd := hdomv _ (hainO _ ht).1
+      exact ⟨hd, not_not.mp fun h => hnotI _ ht ⟨hd, h⟩⟩
+  have hclean : ∀ θ ∈ Ioo (α + π / 2 - τ) (α + π / 2), ∃ δ > 0, ball (ringPt S θ) δ ⊆ F.dom ∧
+      ∀ z ∈ ball (ringPt S θ) δ, z ∈ ⋃ a ∈ F.arcs, a.carrier → dist z S = 1 := by
+    intro θ hθ
+    have ht : α + π / 2 - θ ∈ Ioc 0 τ := ⟨by linarith [hθ.2], by linarith [hθ.1]⟩
+    have hmem := hainO _ ht
+    rw [show α + π / 2 - (α + π / 2 - θ) = θ by ring] at hmem
+    obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp hOopen _ hmem
+    refine ⟨δ, hδ, fun z hz => hdomv z (hball hz).1, fun z hz hza => ?_⟩
+    have hzO := hball hz
+    by_contra hne
+    rcases lt_or_gt_of_ne hne with h' | h'
+    · exact (hFlI (hOF z hzO h')).2 hza
+    · exact (hHI (hOH z hzO h')).2 hza
+  obtain ⟨c₀, c₀', hR⟩ := isRingArc_of_clean (by linarith) hΓ hclean
+  set m := α + π / 2 - τ / 2 with hm
+  have hmI : m ∈ Ioo (α + π / 2 - τ) (α + π / 2) := ⟨by linarith, by linarith⟩
+  have hmO : ringPt S m ∈ O := hainO (τ / 2) ⟨by linarith, by linarith⟩
+  obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp hOopen _ hmO
+  have hme : ringPt S m = S + e m := rfl
+  have hhin : h ∈ F.innerColours S (ringPt S m) := by
+    show ringPt S m ∈ closure (F.region h ∩ ball S 1)
+    rw [Metric.mem_closure_iff]
+    intro ε hε
+    set s := min (min (ε / 2) (δ / 2)) (1 / 2) with hs
+    have hs0 : 0 < s := lt_min (lt_min (by linarith) (by linarith)) (by norm_num)
+    have hs1 := min_le_left (min (ε / 2) (δ / 2)) (1 / 2)
+    have hs2 := min_le_right (min (ε / 2) (δ / 2)) (1 / 2)
+    have hs3 := min_le_left (ε / 2) (δ / 2)
+    have hs4 := min_le_right (ε / 2) (δ / 2)
+    have hd1 : dist (S + ((1 - s : ℝ) : ℂ) * e m) (ringPt S m) = s := by
+      rw [hme, hdd, abs_of_neg (by linarith)]; ring
+    have hbO : S + ((1 - s : ℝ) : ℂ) * e m ∈ O := hball (by rw [mem_ball, hd1]; linarith)
+    have hbS : dist (S + ((1 - s : ℝ) : ℂ) * e m) S < 1 := by rw [hdS _ _ (by linarith)]; linarith
+    refine ⟨_, ⟨hfl (hOF _ hbO hbS), hbS⟩, ?_⟩
+    rw [dist_comm, hd1]; linarith
+  have hcout : c ∈ F.outerColours S (ringPt S m) := by
+    show ringPt S m ∈ closure (F.region c \ closedBall S 1)
+    rw [Metric.mem_closure_iff]
+    intro ε hε
+    set s := min (ε / 2) (δ / 2) with hs
+    have hs0 : 0 < s := lt_min (by linarith) (by linarith)
+    have hs3 := min_le_left (ε / 2) (δ / 2)
+    have hs4 := min_le_right (ε / 2) (δ / 2)
+    have hd1 : dist (S + ((1 + s : ℝ) : ℂ) * e m) (ringPt S m) = s := by
+      rw [hme, hdd, abs_of_pos (by linarith)]; ring
+    have hbO : S + ((1 + s : ℝ) : ℂ) * e m ∈ O := hball (by rw [mem_ball, hd1]; linarith)
+    have hbS : 1 < dist (S + ((1 + s : ℝ) : ℂ) * e m) S := by rw [hdS _ _ (by linarith)]; linarith
+    have hbH := hOH _ hbO hbS
+    refine ⟨_, ⟨⟨hHI hbH, hcol hbH⟩, by rw [mem_closedBall, not_le]; exact hbS⟩, ?_⟩
+    rw [dist_comm, hd1]; linarith
+  have hhc : h = c₀ := by
+    have := (hR.2.2 m hmI).1 ▸ hhin; exact this
+  have hcc : c = c₀' := by
+    have := (hR.2.2 m hmI).2 ▸ hcout; exact this
+  subst hhc hcc
+  exact ⟨α + π / 2 - τ, by linarith, hR⟩
+
+/-- **FS112-N2-FLANK-Q's (R2) shadow, lower** (child of `flankQ_lower`, the mirror of `flankQ_upper_shadow`): if the radius-2 arc over
+`[θ₁, α + π/2]` about `S′` lies in the closure of the flank colour `h`'s class, `h`'s class shadows every horn point near `v` above
+`ω(S′)`. -/
+theorem flankQ_lower_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₂ : ℝ} {h : Fin k}
+    (hh : F.IsFlankBelow v α (-1) h) {θ₁ : ℝ} (hθ₁ : θ₁ < α + π / 2)
+    (hR2 : radiusTwoArc (v - e (α + π / 2)) θ₁ (α + π / 2) ⊆ closure (F.region h)) :
+    ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α (-1) κ₂ r ⊆ shadow (F.region h) := by
+  have _ := hF
+  have _ := hh
+  set θ₀ := α + π / 2 with hθ₀
+  set S := v - e θ₀ with hS
+  have hb0 : e θ₀ ≠ 0 := by intro h; simpa [h] using norm_e θ₀
+  -- `N = S + 2 e(θ₀)` is in the domain
+  have hN : S + 2 * e θ₀ ∈ F.dom := by
+    refine hv ?_
+    rw [mem_closedBall, hS, dist_eq_norm, show v - e θ₀ + 2 * e θ₀ - v = e θ₀ by ring, norm_e]
+  obtain ⟨ε₁, hε₁, hgood⟩ := Metric.eventually_nhds_iff.mp (eventually_nhdsWithin_iff.mp (eventually_arcs_on_sphere_two hN))
+  set ε := min ε₁ (θ₀ - θ₁) with hε
+  have hε0 : 0 < ε := lt_min hε₁ (by linarith)
+  -- the frame coordinate `u = (z − S′)/e(θ₀)`, equal to `1` at `v`; its conjugate is above the real axis on the horn
+  set u : ℂ → ℂ := fun z => starRingEnd ℂ ((z - S) / e θ₀) with hu
+  have huc : Continuous u := by rw [hu]; fun_prop (disch := exact hb0)
+  have huv : u v = 1 := by
+    rw [hu]; simp only; rw [hS, show v - (v - e θ₀) = e θ₀ by ring, div_self hb0, map_one]
+  have hev : ∀ᶠ z in 𝓝 v, r2Cross (u z) < ε ∧ ‖u z‖ < 3 := by
+    have h1 : ∀ᶠ z in 𝓝 v, r2Cross (u z) < ε := by
+      have hc : ContinuousAt (r2Cross ∘ u) v :=
+        ContinuousAt.comp (by rw [huv]; exact continuousAt_r2Cross_one) huc.continuousAt
+      have : (r2Cross ∘ u) v = 0 := by simp only [Function.comp, huv, r2Cross_one]
+      exact hc.eventually (gt_mem_nhds (show (r2Cross ∘ u) v < ε by rw [this]; exact hε0))
+    have h2 : ∀ᶠ z in 𝓝 v, ‖u z‖ < 3 := by
+      have hc : ContinuousAt (fun z => ‖u z‖) v := (continuous_norm.comp huc).continuousAt
+      exact hc.eventually (gt_mem_nhds (show ‖u v‖ < 3 by rw [huv]; norm_num))
+    exact h1.and h2
+  obtain ⟨δ, hδ, hδev⟩ := Metric.eventually_nhds_iff.mp hev
+  filter_upwards [Ioo_mem_nhdsGT hδ] with r hr z hz
+  obtain ⟨hzr, hzx, hzA, -⟩ := hz
+  obtain ⟨hsc, hu3⟩ := hδev (lt_trans hzr hr.2)
+  have hzS : z - S = e θ₀ * starRingEnd ℂ (u z) := by
+    rw [hu]; simp only; rw [Complex.conj_conj]; field_simp
+  have hun : ‖u z‖ = dist z S := by
+    rw [hu]; simp only; rw [Complex.norm_conj, norm_div, norm_e, div_one, dist_eq_norm]
+  have hu1 : 1 < ‖u z‖ := by rw [hun]; exact (tanAbove_neg_one_iff v α z).mp hzA
+  have huim : 0 < (u z).im := by
+    have : (u z).im = frameX v α z := by
+      rw [hu]; simp only
+      rw [Complex.conj_im, hS, show z - (v - e θ₀) = (z - v) + e θ₀ by ring, add_div, div_self hb0]
+      unfold frameX
+      have hinv : (e θ₀)⁻¹ = starRingEnd ℂ (e θ₀) := by
+        rw [Complex.inv_def, Complex.normSq_eq_norm_sq, norm_e]; simp
+      have hI : e (π / 2) = I := by rw [e_eq]; simp
+      rw [div_eq_mul_inv, hinv, hθ₀, e_add, hI, map_mul, Complex.conj_I]
+      simp only [Complex.add_im, Complex.one_im, add_zero, Complex.mul_re, Complex.mul_im, Complex.neg_re, Complex.neg_im,
+        Complex.I_re, Complex.I_im]
+      ring
+    rw [this]; exact hzx
+  obtain ⟨hw0, hwc, hcw, hin, hout⟩ := r2Cross_spec hu1 hu3 huim
+  set sc := r2Cross (u z) with hscdef
+  have hsc0 : 0 < sc := by linarith
+  -- the crossing point `p = S′ + 2 e(θ₀ − sc)`
+  obtain ⟨hpd, η₀, hη₀, harc⟩ := hgood (by
+    rw [Real.dist_eq, show θ₀ - sc - θ₀ = -sc by ring, abs_neg, abs_of_pos hsc0]; exact lt_of_lt_of_le hsc (min_le_left _ _))
+    (by intro h; simp only [mem_singleton_iff] at h; linarith)
+  have hpcl : S + 2 * e (θ₀ - sc) ∈ closure (F.region h) := by
+    refine hR2 ⟨θ₀ - sc, ⟨?_, by linarith⟩, rfl⟩
+    have := lt_of_lt_of_le hsc (min_le_right ε₁ (θ₀ - θ₁)); linarith
+  have hdist : ∀ t, dist z (S + 2 * e (θ₀ - t)) = ‖2 * e t - u z‖ := by
+    intro t
+    calc dist z (S + 2 * e (θ₀ - t)) = ‖(z - S) - 2 * (e θ₀ * e (-t))‖ := by
+          rw [dist_eq_norm, sub_eq_add_neg θ₀ t, e_add]; congr 1; ring
+      _ = ‖e θ₀ * starRingEnd ℂ (u z - 2 * e t)‖ := by
+          rw [hzS, map_sub, map_mul, conj_e, show (starRingEnd ℂ) (2 : ℂ) = 2 from map_ofNat _ 2]; congr 1; ring
+      _ = ‖2 * e t - u z‖ := by rw [norm_mul, norm_e, one_mul, Complex.norm_conj, norm_sub_rev]
+  refine mem_shadow_of_crossing hpd hpcl hη₀ harc fun d hd => ?_
+  set d' := min d (sc - Complex.arg (u z)) / 2 with hd'
+  have hd'0 : 0 < d' := by
+    have : 0 < min d (sc - Complex.arg (u z)) := lt_min hd (by linarith)
+    linarith
+  have hd'1 : d' < d := by
+    have := min_le_left d (sc - Complex.arg (u z)); linarith
+  have hd'2 : d' < sc - Complex.arg (u z) := by
+    have := min_le_right d (sc - Complex.arg (u z)); linarith
+  refine ⟨θ₀ - (sc - d'), θ₀ - (sc + d'), ?_, ?_, ?_, ?_⟩
+  · rw [show θ₀ - (sc - d') - (θ₀ - sc) = d' by ring, abs_of_pos hd'0]; exact hd'1
+  · rw [show θ₀ - (sc + d') - (θ₀ - sc) = -d' by ring, abs_neg, abs_of_pos hd'0]; exact hd'1
+  · rw [hdist]; exact hin _ (by linarith) (by linarith)
+  · rw [hdist]; exact hout _ (by linarith) (by linarith [Real.pi_pos])
 
 /-- **FS112-N2-FLANK-Q**, the lower bound `κ₁ = −1`, the mirror: the horn's lower arc on `ω(S′)` with flank colour `h` below, an out-type
 `c`-contact at `S′`, and every arc of `Γ` on `ω(S′)` with constant sides (Q) or (R2) (the same named hypothesis at `S′`): the lower arc is
@@ -3239,7 +5749,102 @@ theorem flankQ_lower (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₂ : �
         (F.IsR2Arc (v - e (α + π / 2)) θ₁ (α + π / 2) ∧ h ∉ F.coloursAt (v - e (α + π / 2)) ∧
           v + e (α + π / 2) ∈ closure (F.region h) ∧ F.OutType v h (v + e (α + π / 2)) ∧
           ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α (-1) κ₂ r ⊆ shadow (F.region h))) := by
-  sorry
+  have _ := hcS
+  have hπ := Real.pi_pos
+  set S := v - e (α + π / 2) with hS
+  have hSdom : S ∈ F.dom := hv (by rw [mem_closedBall, hS, dist_eq_norm]; simp)
+  obtain ⟨θ₁, hθ₁, hR⟩ := hH.isRingArc_lower hv hh
+  set m := (θ₁ + (α + π / 2)) / 2 with hm
+  have hmI : m ∈ Ioo θ₁ (α + π / 2) := ⟨by linarith, by linarith⟩
+  have huniq : ∀ d d', F.IsRingArc S θ₁ (α + π / 2) d d' → d = h ∧ d' = c := by
+    intro d d' hR'
+    have h2 := (hR.2.2 m hmI).1
+    have h4 := (hR.2.2 m hmI).2
+    rw [(hR'.2.2 m hmI).1] at h2
+    rw [(hR'.2.2 m hmI).2] at h4
+    exact ⟨Set.singleton_eq_singleton_iff.mp h2, Set.singleton_eq_singleton_iff.mp h4⟩
+  obtain ⟨κ', hκ', hhev⟩ := hh
+  have hflank : ∀ ε > 0, ∃ f ∈ F.region h, dist f v < ε ∧ dist f S < 1 ∧ frameY v α f < 0 := by
+    intro ε hε
+    obtain ⟨r, hr, hrpos⟩ := (hhev.and (Ioo_mem_nhdsGT hε)).exists
+    obtain ⟨z, hz, -, -⟩ := exists_mem_hornSet_aboveBelow v α (κ₁ := κ') (κ₂ := -1) (s := (κ' - 1) / 2) (m := -1)
+      hrpos.1 (by linarith) (by linarith) (by intro h'; linarith)
+    refine ⟨z, hr hz, by linarith [hz.1, hrpos.2], (tanBelow_neg_one_iff v α z).mp hz.2.2.2, ?_⟩
+    have := hz.2.2.2
+    unfold TanBelow tanHeight at this
+    nlinarith [sq_nonneg (frameX v α z), sq_nonneg (frameY v α z)]
+  have htile : ∀ f ∈ F.region h, F.TileOf h (connectedComponentIn F.interiorPts f) ∧
+      f ∈ connectedComponentIn F.interiorPts f := by
+    intro f hf
+    have hT : F.IsTile (connectedComponentIn F.interiorPts f) := ⟨f, hf.1, rfl⟩
+    have hfT : f ∈ connectedComponentIn F.interiorPts f := mem_connectedComponentIn hf.1
+    refine ⟨?_, hfT⟩
+    have := hT.tileOf hfT
+    rwa [show F.col f = h from hf.2] at this
+  rcases hQR _ _ _ _ hR with hQ | hR2
+  · obtain ⟨d, d', hR', hd, -, -⟩ := id hQ
+    rw [(huniq d d' hR').1] at hd
+    obtain ⟨T, hT, hST⟩ := (F.mem_coloursAt_iff_exists_tileOf hSdom).mp hd
+    refine ⟨θ₁, hθ₁, hR, Or.inl ⟨hQ, T, hT, ?_, hST⟩⟩
+    have hnear : ∀ t ∈ T, ∀ f ∈ F.region h, dist f S < 1 → dist t f < 1 := by
+      intro t ht f hf hfS
+      obtain ⟨hTf, hfT⟩ := htile f hf
+      rcases unitNear_or_unitFar hF hT hTf with h' | h'
+      · exact h' t ht f hfT
+      · exfalso
+        obtain ⟨y, hy, hyd⟩ := Metric.mem_closure_iff.mp hST (1 - dist f S) (by linarith)
+        have h1 := h' y hy f hfT
+        have := dist_triangle y S f
+        rw [dist_comm S f] at this
+        rw [dist_comm] at hyd
+        linarith
+    have hTv : T ⊆ closedBall v 1 := by
+      intro t ht
+      rw [mem_closedBall]
+      by_contra hlt
+      push Not at hlt
+      obtain ⟨f, hf, hfv, hfS, -⟩ := hflank (dist t v - 1) (by linarith)
+      have h1 := hnear t ht f hf hfS
+      have := dist_triangle t f v
+      linarith
+    have := hT.1.isOpen.subset_interior_iff.mpr hTv
+    rwa [interior_closedBall v one_ne_zero] at this
+  · obtain ⟨d, d', hR', -, hd, hsub⟩ := id hR2
+    rw [(huniq d d' hR').1] at hd hsub
+    have hN : v + e (α + π / 2) = S + 2 * e (α + π / 2) := by rw [hS]; ring
+    have hNh : v + e (α + π / 2) ∈ closure (F.region h) := by
+      rw [hN]; exact hsub ⟨α + π / 2, ⟨hθ₁.le, le_rfl⟩, rfl⟩
+    refine ⟨θ₁, hθ₁, hR, Or.inr ⟨hR2, hd, hNh, ?_, flankQ_lower_shadow hF hv ⟨κ', hκ', hhev⟩ hθ₁ hsub⟩⟩
+    intro T hT hNT
+    have hfar : ∀ t ∈ T, ∀ f ∈ F.region h, frameY v α f < 0 → 1 < dist t f := by
+      intro t ht f hf hfy
+      have hfN : 1 < dist f (v + e (α + π / 2)) := by
+        have h' := sq_dist_N v α f
+        nlinarith [sq_nonneg (frameX v α f), dist_nonneg (x := f) (y := v + e (α + π / 2))]
+      obtain ⟨hTf, hfT⟩ := htile f hf
+      rcases unitNear_or_unitFar hF hT hTf with h' | h'
+      · exfalso
+        obtain ⟨y, hy, hyd⟩ := Metric.mem_closure_iff.mp hNT (dist f (v + e (α + π / 2)) - 1) (by linarith)
+        have h1 := h' y hy f hfT
+        have := dist_triangle f y (v + e (α + π / 2))
+        rw [dist_comm f y] at this
+        rw [dist_comm] at hyd
+        linarith
+      · exact h' t ht f hfT
+    have hTv : T ⊆ {w | 1 ≤ dist w v} := by
+      intro t ht
+      show 1 ≤ dist t v
+      by_contra hlt
+      push Not at hlt
+      obtain ⟨f, hf, hfv, -, hfy⟩ := hflank (1 - dist t v) (by linarith)
+      have h1 := hfar t ht f hf hfy
+      have := dist_triangle t v f
+      rw [dist_comm v f] at this
+      linarith
+    have hint := hT.1.isOpen.subset_interior_iff.mpr hTv
+    have hcompl : {w : ℂ | 1 ≤ dist w v} = (ball v 1)ᶜ := by ext w; simp [mem_ball, not_lt]
+    rw [hcompl, interior_compl, closure_ball v one_ne_zero] at hint
+    exact Set.disjoint_left.mpr fun t ht htB => hint ht htB
 
 /-- **FS112-N2-FLANK-Q**, "then both horns' upper arcs form one arc of `ω(N)` through `v`": if `c` has horns along `±a` at `v`, the one
 along `+a` bounded above by `ω(N)`, one tile `T_g` of a colour `g` lies directly on the `+n` side of both horns, a `g`-tile inside
@@ -3564,6 +6169,147 @@ theorem a4six (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {a b : Fin k} (hab : 
     · exact hθ1
     · exact hθ2
 
+/-- **The ring rotates its colours** (child of NB4P): if the germ of `ω(v)` on side `s` of `r(θ)` lies in the class of `c`, and
+`r(θ + 60°)` is on no arc of `Γ` on `ω(v)`, the germ on side `s` of `r(θ + 60°)` lies in the class of a colour `d ≠ c` absent at
+`v`. -/
+theorem germ_rotate_third (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {θ : ℝ} {s : Side} {c : Fin k}
+    (hg : GermIn v θ s (F.region c)) (hna : ¬ F.OnRingArc v (ringPt v (θ + π / 3))) :
+    ∃ d, d ≠ c ∧ d ∉ F.coloursAt v ∧ GermIn v (θ + π / 3) s (F.region d) := by
+  have hdom : ringPt v (θ + π / 3) ∈ F.dom := hv (sphere_subset_closedBall (ringPt_mem_sphere v _))
+  rcases F.germ_dichotomy hdom s with ⟨d, hd⟩ | ⟨θ₁, θ₂, c₁, c₂, hA, hgA⟩
+  · refine ⟨d, ?_, ?_, hd⟩
+    · rintro rfl
+      obtain ⟨δ, hδ, h1⟩ := hg
+      obtain ⟨δ', hδ', h2⟩ := hd
+      set t := min δ δ' / 2 with ht
+      have ht0 : 0 < t := by positivity
+      have htδ : t < δ := by have := min_le_left δ δ'; linarith
+      have htδ' : t < δ' := by have := min_le_right δ δ'; linarith
+      have hz1 : ringPt v (θ + s.sign * t) ∈ F.region d := h1 ⟨t, ⟨ht0, htδ⟩, rfl⟩
+      have hz2 : ringPt v (θ + π / 3 + s.sign * t) ∈ F.region d := h2 ⟨t, ⟨ht0, htδ'⟩, rfl⟩
+      have hd1 : dist (ringPt v (θ + s.sign * t)) (ringPt v (θ + π / 3 + s.sign * t)) = 1 := by
+        rw [show θ + π / 3 + s.sign * t = (θ + s.sign * t) + 1 * (π / 3) by ring]
+        exact dist_ringPt_third v _ 1 (Or.inl rfl)
+      exact hF _ hz1.1 _ hz2.1 hd1 (hz1.2.trans hz2.2.symm)
+    · obtain ⟨z, hz, hzs⟩ := GermIn.exists_mem_sphere hd
+      exact not_mem_coloursAt_of_mem_sphere hF hzs hz
+  · exact absurd ⟨θ₁, θ₂, hA.1, mem_ringArc_of_germIn hgA, hA.2.1⟩ hna
+
+/-- **The straddlers of `ω(y_{k+1})` at `y_k`** (child of NB4P; `plans/FS112-N-proof.md` § 2.1 W1 (ii), (1) and (3), with NB-4's half-plane
+step): let `y_k = r(θ)` and `y_{k+1} = r(θ + 60°)` on `ω(v)`, both absent colours `X`, `X'` carried at `y_{k+1}`, and `y_k` on no arc of `Γ`
+on `ω(y_{k+1})`. Then the germ of `ω(y_{k+1})` at `y_k` inside `B(v, 1)` lies in one colour `i`, the one outside `B̄(v, 1)` in one colour
+`o ≠ i`; both are colours of `v` carried at `y_k` and not at `y_{k+1}`; and `v`'s class of `i` approaches `v` only along directions facing
+`y_k`, that of `o` only along directions facing away. -/
+theorem straddlers_third (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {θ : ℝ} {X X' : Fin k}
+    (hcompl : (F.coloursAt v)ᶜ = {X, X'})
+    (hX : X ∈ F.coloursAt (ringPt v (θ + π / 3))) (hX' : X' ∈ F.coloursAt (ringPt v (θ + π / 3)))
+    (hna : ¬ F.OnRingArc (ringPt v (θ + π / 3)) (ringPt v θ)) :
+    ∃ i o, i ≠ o ∧ i ∈ F.coloursAt v ∧ o ∈ F.coloursAt v ∧
+      i ∉ F.coloursAt (ringPt v (θ + π / 3)) ∧ o ∉ F.coloursAt (ringPt v (θ + π / 3)) ∧
+      i ∈ F.coloursAt (ringPt v θ) ∧ o ∈ F.coloursAt (ringPt v θ) ∧
+      (∀ β ∈ coneAt (F.region i) v, 0 ≤ Real.cos (β - θ)) ∧ (∀ β ∈ coneAt (F.region o) v, Real.cos (β - θ) ≤ 0) := by
+  have hπ := Real.pi_pos
+  set p := ringPt v (θ + π / 3) with hp
+  set φ₀ := θ - π / 3 with hφ₀
+  have hpt : ringPt p φ₀ = ringPt v θ := by
+    rw [hp, hφ₀]; unfold ringPt; rw [add_assoc, e_add_third_add_e_sub_third]
+  have hvd : v ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  have hdom : ringPt p φ₀ ∈ F.dom := by rw [hpt]; exact hv (sphere_subset_closedBall (ringPt_mem_sphere v _))
+  have hgerm : ∀ s, ∃ c, GermIn p φ₀ s (F.region c) := by
+    intro s
+    rcases F.germ_dichotomy hdom s with h | ⟨θ₁, θ₂, c₁, c₂, hA, hgA⟩
+    · exact h
+    · exact absurd ⟨θ₁, θ₂, hA.1, hpt ▸ mem_ringArc_of_germIn hgA, hA.2.1⟩ hna
+  obtain ⟨i, hi⟩ := hgerm .cw
+  obtain ⟨o, ho⟩ := hgerm .ccw
+  have hnotp : ∀ s c, GermIn p φ₀ s (F.region c) → c ∉ F.coloursAt p := by
+    intro s c hg
+    obtain ⟨z, hz, hzs⟩ := GermIn.exists_mem_sphere hg
+    exact not_mem_coloursAt_of_mem_sphere hF hzs hz
+  have hinv : ∀ c, c ∉ F.coloursAt p → c ∈ F.coloursAt v := by
+    intro c hc
+    by_contra h
+    have : c ∈ (F.coloursAt v)ᶜ := h
+    rw [hcompl] at this
+    rcases this with rfl | rfl
+    · exact hc hX
+    · exact hc hX'
+  have haty : ∀ s c, GermIn p φ₀ s (F.region c) → c ∈ F.coloursAt (ringPt v θ) := by
+    intro s c ⟨δ, hδ, hsub⟩
+    rw [← hpt]; exact closure_mono hsub (ringPt_mem_closure_germ p φ₀ s hδ)
+  -- distances from `v` to the two germs
+  have hdv : ∀ φ, dist v (ringPt p φ) ^ 2 = 2 + 2 * Real.cos (θ + π / 3 - φ) := by
+    intro φ
+    rw [hp, dist_eq_norm, show v - ringPt (ringPt v (θ + π / 3)) φ = -(e (θ + π / 3) + e φ) by unfold ringPt; ring, norm_neg,
+      sq_norm_e_add_e]
+  have hc23 : Real.cos (2 * π / 3) = -(1 / 2) := by
+    rw [show 2 * π / 3 = π - π / 3 by ring, Real.cos_pi_sub, Real.cos_pi_div_three]
+  have hin_d : ∀ t ∈ Ioo 0 (π / 3), dist v (ringPt p (φ₀ + Side.cw.sign * t)) < 1 := by
+    intro t ht
+    have hcos : Real.cos (2 * π / 3 + t) < -(1 / 2) := by
+      rw [← hc23]; exact Real.cos_lt_cos_of_nonneg_of_le_pi (by positivity) (by linarith [ht.2]) (by linarith [ht.1])
+    have h := hdv (φ₀ + Side.cw.sign * t)
+    rw [show θ + π / 3 - (φ₀ + Side.cw.sign * t) = 2 * π / 3 + t by rw [hφ₀]; simp [Side.sign]; ring] at h
+    nlinarith [dist_nonneg (x := v) (y := ringPt p (φ₀ + Side.cw.sign * t))]
+  have hout_d : ∀ t ∈ Ioo 0 (π / 3), 1 < dist v (ringPt p (φ₀ + Side.ccw.sign * t)) := by
+    intro t ht
+    have hcos : -(1 / 2) < Real.cos (2 * π / 3 - t) := by
+      rw [← hc23]; exact Real.cos_lt_cos_of_nonneg_of_le_pi (by linarith [ht.2]) (by linarith) (by linarith [ht.1])
+    have h := hdv (φ₀ + Side.ccw.sign * t)
+    rw [show θ + π / 3 - (φ₀ + Side.ccw.sign * t) = 2 * π / 3 - t by rw [hφ₀]; simp [Side.sign]; ring] at h
+    nlinarith [dist_nonneg (x := v) (y := ringPt p (φ₀ + Side.ccw.sign * t))]
+  have hy1 : ‖v - ringPt p φ₀‖ = 1 := by
+    rw [hpt, ← dist_eq_norm, dist_comm]; exact dist_ringPt v θ
+  have hre : ∀ β, ((v - ringPt p φ₀) * starRingEnd ℂ (e β)).re = -Real.cos (β - θ) := by
+    intro β
+    rw [hpt, show v - ringPt v θ = -e θ by unfold ringPt; ring, neg_mul, Complex.neg_re, re_e_mul_conj_e,
+      ← Real.cos_neg, neg_sub]
+  have hconeI : ∀ β ∈ coneAt (F.region i) v, 0 ≤ Real.cos (β - θ) := by
+    intro β hβ
+    have := Valid.cone_re_nonpos_of_germ hF (hi.mono subset_closure) hy1 ⟨π / 3, by positivity, hin_d⟩ β hβ
+    rw [hre] at this; linarith
+  have hconeO : ∀ β ∈ coneAt (F.region o) v, Real.cos (β - θ) ≤ 0 := by
+    intro β hβ
+    have := Valid.cone_re_nonneg_of_germ hF (ho.mono subset_closure) hy1 ⟨π / 3, by positivity, hout_d⟩ β hβ
+    rw [hre] at this; linarith
+  refine ⟨i, o, ?_, hinv i (hnotp _ _ hi), hinv o (hnotp _ _ ho), hnotp _ _ hi, hnotp _ _ ho, haty _ _ hi, haty _ _ ho,
+    hconeI, hconeO⟩
+  -- an inner and an outer straddler at one point never share a colour (N-E2 against `v`'s tile of that colour)
+  rintro rfl
+  obtain ⟨Tv, hTv, hvTv⟩ := (F.mem_coloursAt_iff_exists_tileOf hvd).mp (hinv i (hnotp _ _ hi))
+  -- the tile of a germ: it holds the germ, so has `y_k` in its closure
+  have htile : ∀ s, GermIn p φ₀ s (F.region i) → ∃ t ∈ Ioo 0 (π / 3), ∃ T, F.TileOf i T ∧
+      ringPt p (φ₀ + s.sign * t) ∈ T ∧ ringPt v θ ∈ closure T := by
+    intro s ⟨δ, hδ, hsub⟩
+    set t := min δ (π / 3) / 2 with ht
+    have ht0 : 0 < t := by positivity
+    have htδ : t < δ := by have := min_le_left δ (π / 3); linarith
+    have htπ : t < π / 3 := by have := min_le_right δ (π / 3); linarith
+    have hzg : ringPt p (φ₀ + s.sign * t) ∈ germ p φ₀ s δ := ⟨t, ⟨ht0, htδ⟩, rfl⟩
+    have hz := hsub hzg
+    have hgT : germ p φ₀ s δ ⊆ connectedComponentIn F.interiorPts (ringPt p (φ₀ + s.sign * t)) :=
+      (isPreconnected_germ p φ₀ s δ).subset_connectedComponentIn hzg (hsub.trans (F.region_subset_interiorPts i))
+    have hT : F.IsTile (connectedComponentIn F.interiorPts (ringPt p (φ₀ + s.sign * t))) := ⟨_, hz.1, rfl⟩
+    have hTi := hT.tileOf (mem_connectedComponentIn hz.1)
+    rw [show F.col (ringPt p (φ₀ + s.sign * t)) = i from hz.2] at hTi
+    exact ⟨t, ⟨ht0, htπ⟩, _, hTi, mem_connectedComponentIn hz.1,
+      hpt ▸ closure_mono hgT (ringPt_mem_closure_germ p φ₀ s hδ)⟩
+  obtain ⟨t₁, ht₁, Tin, hTin, hz₁, hyin⟩ := htile .cw hi
+  obtain ⟨t₂, ht₂, Tout, hTout, hz₂, hyout⟩ := htile .ccw ho
+  have hnear := unitNear_of_mem_closure hF hTin hTv (subset_closure hz₁) hvTv (by rw [dist_comm]; exact hin_d t₁ ht₁)
+  have hfar := unitFar_of_mem_closure hF hTout hTv (subset_closure hz₂) hvTv (by rw [dist_comm]; exact hout_d t₂ ht₂)
+  have hsph : Tv ⊆ sphere (ringPt v θ) 1 := by
+    intro b hb
+    have h1 : dist (ringPt v θ) b ≤ 1 :=
+      closure_minimal (fun a ha => (hnear a ha b hb).le) (isClosed_le (continuous_id.dist continuous_const) continuous_const) hyin
+    have h2 : 1 ≤ dist (ringPt v θ) b :=
+      closure_minimal (fun a ha => (hfar a ha b hb).le) (isClosed_le continuous_const (continuous_id.dist continuous_const)) hyout
+    rw [mem_sphere, dist_comm]; linarith
+  have hint := interior_maximal hsph hTv.1.isOpen
+  rw [interior_sphere _ one_ne_zero] at hint
+  obtain ⟨b, hb⟩ := hTv.1.nonempty
+  exact hint hb
+
 /-- **FS112-NB4P** (NB-4 corrected): at a point `v` of exactly four colours of a valid six-coloured map, let `y₀ = r(ψ)` be a change
 point of its ring (a covering pair with `v`, automatically) and `y_j = r(ψ + j·60°)` its `σ_v`-orbit. If no orbit point lies on an arc
 of `Γ` on `ω(v)` (closed arcs, so ends included), and no arc of `Γ` on `ω(y_{j±1})` has `y_j` on it, contradiction. The bound on the
@@ -3575,7 +6321,158 @@ theorem nb4p {G : ArcMap 6} (hF : G.Valid) {v : ℂ} (hv : G.Covers v 1) (h4 : (
       ¬ G.OnRingArc (ringPt v (ψ + ((j : ℝ) + 1) * (π / 3))) (ringPt v (ψ + j * (π / 3))) ∧
         ¬ G.OnRingArc (ringPt v (ψ + ((j : ℝ) - 1) * (π / 3))) (ringPt v (ψ + j * (π / 3)))) :
     False := by
-  sorry
+  classical
+  have hπ := Real.pi_pos
+  obtain ⟨-, hcompl⟩ := germS_absent hF hv (by omega) (by omega) hy
+  have hXX' : X ≠ X' := hy.2.1
+  have hvd : v ∈ G.dom := hv (mem_closedBall_self zero_le_one)
+  set P := G.coloursAt v with hP
+  have hangle : ∀ j : ℕ, ψ + ((j + 1 : ℕ) : ℝ) * (π / 3) = ψ + j * (π / 3) + π / 3 := by intro j; push_cast; ring
+  -- Step 1: the ring's colours alternate between the two absent colours at every orbit point
+  have hrot : ∀ θ s (c c' : Fin 6), ({c, c'} : Set (Fin 6)) = {X, X'} → c ≠ c' → GermIn v θ s (G.region c) →
+      ¬ G.OnRingArc v (ringPt v (θ + π / 3)) → GermIn v (θ + π / 3) s (G.region c') := by
+    intro θ s c c' hcc hne hg hna
+    obtain ⟨d, hdc, hdv, hd⟩ := germ_rotate_third hF hv hg hna
+    have : d ∈ ({c, c'} : Set (Fin 6)) := by rw [hcc, ← hcompl]; exact hdv
+    rcases this with rfl | rfl
+    · exact absurd rfl hdc
+    · exact hd
+  have halt : ∀ j : ℕ, j ≤ 5 → ∃ c c', ({c, c'} : Set (Fin 6)) = {X, X'} ∧ c ≠ c' ∧
+      GermIn v (ψ + j * (π / 3)) .ccw (G.region c) ∧ GermIn v (ψ + j * (π / 3)) .cw (G.region c') := by
+    intro j hj
+    induction j with
+    | zero => exact ⟨X, X', rfl, hXX', by simpa using hy.2.2.1, by simpa using hy.2.2.2⟩
+    | succ j ih =>
+      obtain ⟨c, c', hcc, hne, hg1, hg2⟩ := ih (by omega)
+      have hna : ¬ G.OnRingArc v (ringPt v (ψ + j * (π / 3) + π / 3)) := by
+        have := hring (j + 1) (by omega); rwa [hangle] at this
+      rw [hangle]
+      refine ⟨c', c, by rw [Set.pair_comm]; exact hcc, hne.symm, hrot _ _ c c' hcc hne hg1 hna, ?_⟩
+      exact hrot _ _ c' c (by rw [Set.pair_comm]; exact hcc) hne.symm hg2 hna
+  have hcl : ∀ θ s c, GermIn v θ s (G.region c) → c ∈ G.coloursAt (ringPt v θ) := by
+    intro θ s c ⟨δ, hδ, hsub⟩
+    exact closure_mono hsub (ringPt_mem_closure_germ v θ s hδ)
+  have hXy : ∀ j : ℕ, j ≤ 6 → X ∈ G.coloursAt (ringPt v (ψ + j * (π / 3))) ∧ X' ∈ G.coloursAt (ringPt v (ψ + j * (π / 3))) := by
+    intro j hj
+    have h05 : ∀ j : ℕ, j ≤ 5 → X ∈ G.coloursAt (ringPt v (ψ + j * (π / 3))) ∧ X' ∈ G.coloursAt (ringPt v (ψ + j * (π / 3))) := by
+      intro j hj
+      obtain ⟨c, c', hcc, -, hg1, hg2⟩ := halt j hj
+      have h1 := hcl _ _ _ hg1
+      have h2 := hcl _ _ _ hg2
+      have hX : X ∈ ({c, c'} : Set (Fin 6)) := by rw [hcc]; exact Or.inl rfl
+      have hX' : X' ∈ ({c, c'} : Set (Fin 6)) := by rw [hcc]; exact Or.inr rfl
+      constructor
+      · rcases hX with rfl | rfl <;> assumption
+      · rcases hX' with rfl | rfl <;> assumption
+    rcases Nat.lt_or_ge j 6 with h | h
+    · exact h05 j (by omega)
+    · have hj6 : j = 6 := by omega
+      subst hj6
+      have : ringPt v (ψ + ((6 : ℕ) : ℝ) * (π / 3)) = ringPt v (ψ + ((0 : ℕ) : ℝ) * (π / 3)) := by
+        unfold ringPt; push_cast; rw [show ψ + 6 * (π / 3) = ψ + 0 * (π / 3) + 2 * π by ring, e_add_two_pi]
+      rw [this]; exact h05 0 (by omega)
+  -- Step 2: the straddlers of `ω(y_{k+1})` at `y_k`
+  have hS : ∀ k : ℕ, ∃ i o : Fin 6, k < 6 → (i ≠ o ∧ i ∈ P ∧ o ∈ P ∧
+      i ∉ G.coloursAt (ringPt v (ψ + ((k + 1 : ℕ) : ℝ) * (π / 3))) ∧ o ∉ G.coloursAt (ringPt v (ψ + ((k + 1 : ℕ) : ℝ) * (π / 3))) ∧
+      i ∈ G.coloursAt (ringPt v (ψ + k * (π / 3))) ∧ o ∈ G.coloursAt (ringPt v (ψ + k * (π / 3))) ∧
+      (∀ β ∈ coneAt (G.region i) v, 0 ≤ Real.cos (β - (ψ + k * (π / 3)))) ∧
+      (∀ β ∈ coneAt (G.region o) v, Real.cos (β - (ψ + k * (π / 3))) ≤ 0)) := by
+    intro k
+    rcases Nat.lt_or_ge k 6 with hk | hk
+    · have hX2 := hXy (k + 1) (by omega)
+      rw [hangle] at hX2 ⊢
+      have hna := (hnb k hk).1
+      rw [show ψ + ((k : ℝ) + 1) * (π / 3) = ψ + k * (π / 3) + π / 3 by ring] at hna
+      obtain ⟨i, o, h⟩ := straddlers_third hF hv hcompl hX2.1 hX2.2 hna
+      exact ⟨i, o, fun _ => h⟩
+    · exact ⟨X, X, fun h => absurd h (by omega)⟩
+  choose I O hIO using hS
+  -- Step 3: the straddler pairs alternate between two complementary halves of `P`
+  set Q : ℕ → Set (Fin 6) := fun k => {I k, O k} with hQ
+  have hQP : ∀ k, k < 6 → Q k ⊆ P := by
+    intro k hk; rintro _ (rfl | rfl)
+    · exact (hIO k hk).2.1
+    · exact (hIO k hk).2.2.1
+  have hQ2 : ∀ k, k < 6 → (Q k).ncard = 2 := fun k hk => Set.ncard_pair (hIO k hk).1
+  have hPfin : P.Finite := Set.toFinite _
+  have hstep : ∀ k, k < 5 → Q (k + 1) = P \ Q k := by
+    intro k hk
+    have hsub : Q (k + 1) ⊆ P \ Q k := by
+      intro x hx
+      refine ⟨hQP (k + 1) (by omega) hx, ?_⟩
+      have hxy : x ∈ G.coloursAt (ringPt v (ψ + ((k + 1 : ℕ) : ℝ) * (π / 3))) := by
+        rcases hx with rfl | rfl
+        · exact (hIO (k + 1) (by omega)).2.2.2.2.2.1
+        · exact (hIO (k + 1) (by omega)).2.2.2.2.2.2.1
+      rintro (rfl | rfl)
+      · exact (hIO k (by omega)).2.2.2.1 hxy
+      · exact (hIO k (by omega)).2.2.2.2.1 hxy
+    refine Set.eq_of_subset_of_ncard_le hsub ?_ hPfin.sdiff
+    rw [Set.ncard_sdiff (hQP k (by omega)), h4, hQ2 k (by omega), hQ2 (k + 1) (by omega)]
+  have hback : ∀ k, k < 4 → Q (k + 2) = Q k := by
+    intro k hk
+    have h1 : Q (k + 2) = P \ Q (k + 1) := hstep (k + 1) (by omega)
+    rw [h1, hstep k (by omega), Set.sdiff_sdiff_cancel_left (hQP k (by omega))]
+  have e1 : Q 1 = P \ Q 0 := hstep 0 (by omega)
+  have e2 : Q 2 = Q 0 := hback 0 (by omega)
+  have e4 : Q 4 = Q 0 := (hback 2 (by omega)).trans e2
+  have e3 : Q 3 = Q 1 := hback 1 (by omega)
+  have e5 : Q 5 = Q 1 := (hback 3 (by omega)).trans e3
+  -- each colour of `v` is a straddler at three orbit points of one parity
+  set Str : ℕ → Fin 6 → Prop := fun k A => (∀ β ∈ coneAt (G.region A) v, 0 ≤ Real.cos (β - (ψ + k * (π / 3)))) ∨
+    (∀ β ∈ coneAt (G.region A) v, Real.cos (β - (ψ + k * (π / 3))) ≤ 0) with hStr
+  have hStrQ : ∀ k, k < 6 → ∀ A ∈ Q k, Str k A := by
+    intro k hk A hA
+    rcases hA with rfl | rfl
+    · exact Or.inl (hIO k hk).2.2.2.2.2.2.2.1
+    · exact Or.inr (hIO k hk).2.2.2.2.2.2.2.2
+  have hpar : ∀ A ∈ P, ∃ p < 2, ∀ i < 3, Str (p + 2 * i) A := by
+    intro A hA
+    by_cases h0 : A ∈ Q 0
+    · refine ⟨0, by omega, fun i hi => ?_⟩
+      interval_cases i
+      · exact hStrQ 0 (by omega) A h0
+      · exact hStrQ 2 (by omega) A (by rw [e2]; exact h0)
+      · exact hStrQ 4 (by omega) A (by rw [e4]; exact h0)
+    · have h1 : A ∈ Q 1 := by rw [e1]; exact ⟨hA, h0⟩
+      refine ⟨1, by omega, fun i hi => ?_⟩
+      interval_cases i
+      · exact hStrQ 1 (by omega) A h1
+      · exact hStrQ 3 (by omega) A (by rw [e3]; exact h1)
+      · exact hStrQ 5 (by omega) A (by rw [e5]; exact h1)
+  -- Step 4: each colour of `v` approaches `v` along at most one of the six orbit directions
+  have hone : ∀ A ∈ P, ∀ j l : ℕ, j < 6 → l < 6 → ψ + j * (π / 3) ∈ coneAt (G.region A) v →
+      ψ + l * (π / 3) ∈ coneAt (G.region A) v → j = l := by
+    intro A hA j l hj hl hjc hlc
+    by_contra hjl
+    obtain ⟨p, hp, hS3⟩ := hpar A hA
+    obtain ⟨i, hi, hneg⟩ := exists_opposite_cos_third hj hl hp hjl
+    have hcj : Real.cos (ψ + j * (π / 3) - (ψ + ((p + 2 * i : ℕ) : ℝ) * (π / 3))) =
+        Real.cos (((j : ℤ) - (p + 2 * i : ℕ)) * (π / 3)) := by congr 1; push_cast; ring
+    have hcl' : Real.cos (ψ + l * (π / 3) - (ψ + ((p + 2 * i : ℕ) : ℝ) * (π / 3))) =
+        Real.cos (((l : ℤ) - (p + 2 * i : ℕ)) * (π / 3)) := by congr 1; push_cast; ring
+    rcases hS3 i hi with h | h
+    · have a1 := h _ hjc; have a2 := h _ hlc
+      rw [hcj] at a1; rw [hcl'] at a2
+      nlinarith [mul_nonneg a1 a2]
+    · have a1 := h _ hjc; have a2 := h _ hlc
+      rw [hcj] at a1; rw [hcl'] at a2
+      nlinarith [mul_nonneg_of_nonpos_of_nonpos a1 a2]
+  -- Step 5: six directions, four colours
+  have hC : ∀ j : ℕ, ∃ c, ψ + j * (π / 3) ∈ coneAt (G.region c) v := fun j => G.exists_mem_coneAt_region hvd _
+  choose C hCc using hC
+  have hCP : ∀ j, C j ∈ P := fun j => mem_closure_of_mem_coneAt (hCc j)
+  have hinj : Set.InjOn C (Finset.range 6 : Set ℕ) := by
+    intro j hj l hl hjl
+    simp only [Finset.coe_range, mem_Iio] at hj hl
+    exact hone (C j) (hCP j) j l hj hl (hCc j) (hjl ▸ hCc l)
+  have hcard : (Finset.range 6).card ≤ P.toFinset.card := by
+    rw [← Finset.card_image_of_injOn hinj]
+    refine Finset.card_le_card fun c hc => ?_
+    obtain ⟨j, -, rfl⟩ := Finset.mem_image.mp hc
+    exact Set.mem_toFinset.mpr (hCP j)
+  rw [Finset.card_range, ← Set.ncard_eq_toFinset_card', h4] at hcard
+  omega
 
 end ArcMap
 

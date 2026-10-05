@@ -1,0 +1,92 @@
+slot: admitted axioms.sh: mem 30 GiB (hard cap), cpus 2,3,10,11
+==> axioms: this run's full output: build/gate/axioms/20261004T224728Z-3095228.log
+    audited: 2532 records — 2512 clean on the standard axioms, 11 axiom-free, 4 imported (resting on a declared outside theorem), 5 declared purchase(s)
+    clean records, by axiom set:
+       2405  [propext, Classical.choice, Quot.sound]
+         57  [propext]
+         49  [propext, Quot.sound]
+          1  [Quot.sound]
+         11  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.PartialColoring.map, HadwigerNelson.Q4.approx, HadwigerNelson.Stripe.wheel_all, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    declared imports (1): HadwigerNelson.Plane.falconer_lemma2_nonempty
+    imported records (4):
+      HadwigerNelson.Plane.falconer_reduction  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+      HadwigerNelson.Plane.le_chiM_of_falconerFan  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+      HadwigerNelson.Plane.exists_mem_falconerE  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+      HadwigerNelson.Plane.fan_tip_ae_mem  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+    library axioms other than native auxiliaries (1): HadwigerNelson.Plane.falconer_lemma2_nonempty; native auxiliaries: 10
+    RECORDED COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 1856 clean → 2512, 0 imported → 4
+    --- changes since the previous complete run ---
+    previous: build/gate/axioms/20261004T221018Z-2806763.log
+    + HadwigerNelson.Plane.Arc.branch_mem_of_mem  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.Arc.eventually_mem_carrier  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.Arc.exists_near  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.Arc.finite_ends  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_tile_inter_ball  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.ArcMap.IsSectorChart.sector_nonempty  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.ArcMap.IsSectorChart.sector_subset_interiorPts  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.ArcMap.IsTile.eq_of_mem  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.ArcMap.Simple.coneAt_eq_angleIcc_sep  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.ArcMap.isSectorChart_of  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.Mono.disjoint  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.Mono.le_add  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.Mono.le_of_le  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.Mono.le_two_pi  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.Mono.nextβ_le  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.Mono.nextβ_le_add  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.Mono.nextβ_le_of_lt  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.Mono.not_mem_angleIoo  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.Mono.zero_le  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.Sorted.mono  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.atRadius_mono  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.atRadius_nextβ  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.coneAt_sector  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.continuous_dir  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.continuous_nextDir  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.dir_lt_nextDir  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.e_nextDir  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.exists_angle  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.isOpen_sector  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.isPreconnected_sector  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.mem_coneAt_of_ray  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.mem_sector_iff  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.nextDir_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.nextDir_of_next_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.nextκ_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.sector_disjoint  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.sector_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.sector_mono  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.BranchGerms.sector_subset_ball  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.arg_div_self  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.branchPt_curveGerm  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.branchPt_curveGerm_mem  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.branchPt_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.continuousAt_arg_div  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.continuous_branchPt  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.continuous_germDir  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.curveGerm_fst_mem  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.e_add_int_mul  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.e_toIcoMod_add  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.eq_polar_arg  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.eq_polar_local  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.exists_eq_branchPt_curveGerm  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.exists_germDir_ne  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.germDir_add_two_pi  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.germDir_zero  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.halfDisc_sectorChart  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.localSectors  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.mul_e_mul_conj  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.norm_branchPt_sub  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.norm_mul_e  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.polar_eq_iff  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.sq_norm_e_sub_e  CLEAN [propext, Classical.choice, Quot.sound]
+    purchase ledgers agree — the docstrings warn of exactly the purchases the audit finds (5: four_le_chromaticNumber_plane_certified moserSpindle_cnf_unsat moserSpindleCubes_unsat moserSpindle_not_colorable_three_cubes moserSpindle_not_colorable_three_lrat)
+    declared imports: 1; library axioms other than native auxiliaries: 1, every one declared; native auxiliaries: 10
+==> axioms: OK — 2512 clean, 11 axiom-free, 4 imported, 5 declared purchase(s)
+    full output: build/gate/axioms/20261004T224728Z-3095228.log
+exit=0

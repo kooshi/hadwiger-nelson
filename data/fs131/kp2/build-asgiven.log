@@ -1,0 +1,26 @@
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: admitted env: mem 40 GiB (hard cap), cpus 8,9,10,11,12,13,14,15
+==> build: this run's full output: build/gate/build/20261005T104808Z-3479001.log
+    ⚠ [5604/5729] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BendCollar
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean:31:8: declaration uses `sorry`
+    ⚠ [5635/5729] Replayed Proofs.HadwigerNelson.Plane.ValidMap.HexRing
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:2142:8: declaration uses `sorry`
+    ⚠ [5742/5788] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Terminal
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:459:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:471:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:555:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:566:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:579:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:599:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:611:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:623:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:642:8: declaration uses `sorry`
+    ⚠ [5784/5788] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BaseDense
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:356:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:430:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:480:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:703:8: declaration uses `sorry`
+    All targets up-to-date (5788 jobs).
+==> build: OK — all 1781 modules already up to date, nothing built, 4 module(s) with warnings, 3s
+    full output: build/gate/build/20261005T104808Z-3479001.log
+EXIT 0

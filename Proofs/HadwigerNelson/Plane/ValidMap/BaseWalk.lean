@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Dense
 import Proofs.HadwigerNelson.Plane.RingBand
+import Proofs.HadwigerNelson.Plane.ValidMap.MapTopology
 
 /-!
 # Row 134's base with unit arcs: the walk's leaves
@@ -536,13 +537,706 @@ theorem reduce (hns : ∀ x, ¬ C.IsSwap x) (𝓙 : Set (ℝ × ℝ)) (hfin : �
     · have hag := hagree' _ hcov
       exact hns x ⟨hxS.1, a, b, ha', hb', Or.inr ⟨((hvals _ hag b).1).mp hb2, ((hvals _ hag a).2).mp ha2⟩⟩
 
+/-! ### The selection's machinery (FS131-I5g): first passages of an integer lift (BV-L5's running maximum, read at its jumps), the window
+bounds from the band (BV-H1), the hexagon at increment `6` (BV-C6) and three far points per pair otherwise (BV-P18) -/
+
+section SelectAux
+
+variable {C}
+
+/-- A function locally constant off the change set is bounded above, off the change set, on every compact interval. -/
+theorem select_bdd {g : ℝ → ℤ} (hlc : ∀ y ∉ C.S, ∀ᶠ y' in 𝓝 y, g y' = g y) (a b : ℝ) :
+    ∃ B, ∀ y ∈ Icc a b, y ∉ C.S → g y ≤ B := by
+  refine isCompact_Icc.induction_on (p := fun t => ∃ B, ∀ y ∈ t, y ∉ C.S → g y ≤ B) ⟨0, by simp⟩ ?_ ?_ ?_
+  · intro s t hst ⟨B, hB⟩
+    exact ⟨B, fun y hy => hB y (hst hy)⟩
+  · intro s t ⟨B, hB⟩ ⟨B', hB'⟩
+    exact ⟨max B B', fun y hy hyS => hy.elim (fun h => (hB y h hyS).trans (le_max_left _ _))
+      (fun h => (hB' y h hyS).trans (le_max_right _ _))⟩
+  intro x _
+  obtain ⟨l, hl⟩ := exists_left_const hlc x
+  obtain ⟨r, hr⟩ := exists_right_const hlc x
+  have ht : ∀ᶠ y in 𝓝 x, (y < x → g y = l) ∧ (x < y → g y = r) := by
+    have a := eventually_nhdsWithin_iff.mp hl
+    have b := eventually_nhdsWithin_iff.mp hr
+    filter_upwards [a, b] with y h1 h2 using ⟨fun h => h1 h, fun h => h2 h⟩
+  refine ⟨_, mem_nhdsWithin_of_mem_nhds ht, max (max l r) (g x), fun y hy _ => ?_⟩
+  rcases lt_trichotomy y x with h | h | h
+  · rw [hy.1 h]; exact (le_max_left _ _).trans (le_max_left _ _)
+  · rw [h]; exact le_max_right _ _
+  · rw [hy.2 h]; exact (le_max_right _ _).trans (le_max_left _ _)
+
+/-- **First passage** of an integer lift through a level (BV-L5's running maximum, read at its jumps): with a positive increment `N` per
+period, every level `ℓ` has a point `x` left of which (off the change set) the lift stays below `ℓ`, with values `ℓ − 1` just left of `x`
+and `ℓ` just right of it. -/
+theorem select_firstPassage {g : ℝ → ℤ} (hlc : ∀ y ∉ C.S, ∀ᶠ y' in 𝓝 y, g y' = g y)
+    {N : ℤ} (hN : 0 < N) (hper : ∀ θ ∉ C.S, ∀ n : ℤ, g (θ + n * (2 * π)) = g θ + n * N)
+    (hjump : ∀ θ, ∀ᶠ a in 𝓝[<] θ, ∀ᶠ b in 𝓝[>] θ, |g b - g a| ≤ 1) (ℓ : ℤ) :
+    ∃ x, (∀ y < x, y ∉ C.S → g y < ℓ) ∧ (∀ᶠ y in 𝓝[<] x, g y = ℓ - 1) ∧ ∀ᶠ y in 𝓝[>] x, g y = ℓ := by
+  have hπ := Real.pi_pos
+  obtain ⟨θ₀, -, hg₀⟩ := C.exists_good_near 0 1 one_pos
+  have hθ₀ : θ₀ ∉ C.S := hg₀.notMem
+  obtain ⟨B, hB⟩ := select_bdd hlc θ₀ (θ₀ + 2 * π)
+  set A := {x | x ∉ C.S ∧ ℓ ≤ g x} with hA
+  have hne : A.Nonempty := by
+    refine ⟨θ₀ + ((|ℓ - g θ₀| : ℤ) : ℝ) * (2 * π), (C.mem_S_add_int _ θ₀).not.mpr hθ₀, ?_⟩
+    rw [hper θ₀ hθ₀]
+    have h1 : |ℓ - g θ₀| * 1 ≤ |ℓ - g θ₀| * N := mul_le_mul_of_nonneg_left (by omega) (abs_nonneg _)
+    have h2 := le_abs_self (ℓ - g θ₀)
+    linarith
+  have hbdd : BddBelow A := by
+    refine ⟨θ₀ + ((ℓ - B : ℤ) : ℝ) / N * (2 * π), fun x ⟨hxS, hx⟩ => ?_⟩
+    set n := ⌊(x - θ₀) / (2 * π)⌋
+    have h1 : (n : ℝ) ≤ (x - θ₀) / (2 * π) := Int.floor_le _
+    have h2 : (x - θ₀) / (2 * π) < n + 1 := Int.lt_floor_add_one _
+    have h1' : n * (2 * π) ≤ x - θ₀ := by rwa [le_div_iff₀ (by positivity)] at h1
+    have h2' : x - θ₀ < (n + 1) * (2 * π) := by rwa [div_lt_iff₀ (by positivity)] at h2
+    have hyS : x - n * (2 * π) ∉ C.S := fun h => hxS (by simpa using (C.mem_S_add_int n _).mpr h)
+    have hgy : g x = g (x - n * (2 * π)) + n * N := by
+      have := hper _ hyS n; rwa [sub_add_cancel] at this
+    have hyB := hB _ ⟨by linarith, by linarith⟩ hyS
+    have hint : ℓ - B ≤ n * N := by linarith
+    have hNr : (0 : ℝ) < N := by exact_mod_cast hN
+    have : ((ℓ - B : ℤ) : ℝ) / N ≤ n := by
+      rw [div_le_iff₀ hNr]; exact_mod_cast hint
+    nlinarith
+  refine ⟨sInf A, fun y hy hyS => ?_, ?_⟩
+  · by_contra hle; push Not at hle
+    exact absurd (csInf_le hbdd ⟨hyS, hle⟩) (not_le.mpr hy)
+  set x := sInf A
+  have hP1 : ∀ y < x, y ∉ C.S → g y < ℓ := fun y hy hyS => by
+    by_contra hle; push Not at hle
+    exact absurd (csInf_le hbdd ⟨hyS, hle⟩) (not_le.mpr hy)
+  have hxA : x ∉ A := by
+    rintro ⟨hxS, hx⟩
+    have hloc : ∀ᶠ y in 𝓝[<] x, g y = g x := nhdsWithin_le_nhds (hlc x hxS)
+    obtain ⟨y, h1, h2, h3⟩ := (hloc.and ((C.eventually_notMem_S_lt x).and self_mem_nhdsWithin)).exists
+    have := hP1 y h3 h2
+    omega
+  obtain ⟨l, hl⟩ := exists_left_const hlc x
+  obtain ⟨r, hr⟩ := exists_right_const hlc x
+  have hrℓ : ℓ ≤ r := by
+    obtain ⟨u, hu, hsub⟩ := mem_nhdsGT_iff_exists_Ioo_subset.mp hr
+    obtain ⟨a, haA, hau⟩ := exists_lt_of_csInf_lt hne (show x < u from hu)
+    have hxa : x ≤ a := csInf_le hbdd haA
+    have hxa' : x < a := lt_of_le_of_ne hxa fun h => hxA (h ▸ haA)
+    have := hsub ⟨hxa', hau⟩
+    simp only [mem_setOf_eq] at this
+    rw [← this]; exact haA.2
+  have hlℓ : l < ℓ := by
+    obtain ⟨y, h1, h2, h3⟩ := (hl.and ((C.eventually_notMem_S_lt x).and self_mem_nhdsWithin)).exists
+    rw [← h1]; exact hP1 y h3 h2
+  have hj : |r - l| ≤ 1 := by
+    obtain ⟨a, ha, hal⟩ := ((hjump x).and hl).exists
+    obtain ⟨b, hb, hbr⟩ := (ha.and hr).exists
+    rw [← hal, ← hbr]; exact hb
+  rw [abs_le] at hj
+  have hl' : l = ℓ - 1 := by omega
+  have hr' : r = ℓ := by omega
+  exact ⟨hl' ▸ hl, hr' ▸ hr⟩
+
+/-- Two first-passage points of one level coincide. -/
+theorem select_unique {g : ℝ → ℤ} {ℓ : ℤ} {x x' : ℝ} (h1 : ∀ y < x, y ∉ C.S → g y < ℓ) (h2 : ∀ᶠ y in 𝓝[>] x, g y = ℓ)
+    (h1' : ∀ y < x', y ∉ C.S → g y < ℓ) (h2' : ∀ᶠ y in 𝓝[>] x', g y = ℓ) : x = x' := by
+  have key : ∀ x x' : ℝ, (∀ᶠ y in 𝓝[>] x, g y = ℓ) → (∀ y < x', y ∉ C.S → g y < ℓ) → ¬ x < x' := by
+    intro x x' h2 h1' hlt
+    obtain ⟨y, hy1, hy2, hy3⟩ := (h2.and ((C.eventually_notMem_S_gt x).and (Ioo_mem_nhdsGT hlt))).exists
+    have := h1' y hy3.2 hy2
+    omega
+  rcases lt_trichotomy x x' with h | h | h
+  · exact absurd h (key x x' h2 h1')
+  · exact h
+  · exact absurd h (key x' x h2' h1)
+
+/-- First-passage points increase with the level. -/
+theorem select_lt {g : ℝ → ℤ} {ℓ ℓ' : ℤ} (hℓ : ℓ < ℓ') {x x' : ℝ} (h1 : ∀ y < x, y ∉ C.S → g y < ℓ)
+    (h2 : ∀ᶠ y in 𝓝[>] x, g y = ℓ) (h2' : ∀ᶠ y in 𝓝[>] x', g y = ℓ') : x < x' := by
+  by_contra hle; push Not at hle
+  rcases eq_or_lt_of_le hle with h | h
+  · subst h
+    obtain ⟨y, hy1, hy2⟩ := (h2.and h2').exists
+    omega
+  · obtain ⟨y, hy1, hy2, hy3⟩ := (h2'.and ((C.eventually_notMem_S_gt x').and (Ioo_mem_nhdsGT h))).exists
+    have := h1 y hy3.2 hy2
+    omega
+
+/-- **The window bound** (BV-P18's count): `3M + 3` levels past a first-passage point lie more than `60°` beyond it. -/
+theorem select_window {g : ℝ → ℤ} (hlc : ∀ y ∉ C.S, ∀ᶠ y' in 𝓝 y, g y' = g y) {M : ℤ}
+    (hband : ∀ z, z ∉ C.S → z + π / 3 ∉ C.S → 3 * M + 1 ≤ g (z + π / 3) - g z ∧ g (z + π / 3) - g z ≤ 3 * M + 2)
+    {ℓ : ℤ} {x x' : ℝ} (h1 : ∀ y < x, y ∉ C.S → g y < ℓ) (h2 : ∀ᶠ y in 𝓝[>] x, g y = ℓ)
+    (h2' : ∀ᶠ y in 𝓝[>] x', g y = ℓ + 3 * M + 3) : x + π / 3 < x' := by
+  -- just right of `x`, and everywhere left of it, the lift is at most `ℓ`
+  obtain ⟨u, hu, hsub⟩ := mem_nhdsGT_iff_exists_Ioo_subset.mp h2
+  have hP4 : ∀ z < u, z ∉ C.S → g z ≤ ℓ := by
+    intro z hz hzS
+    rcases lt_trichotomy z x with h | h | h
+    · exact (h1 z h hzS).le
+    · subst h
+      have hloc : ∀ᶠ y in 𝓝[>] z, g y = g z := nhdsWithin_le_nhds (hlc z hzS)
+      obtain ⟨y, hy1, hy2⟩ := (hloc.and h2).exists
+      omega
+    · exact (hsub ⟨h, hz⟩ : g z = ℓ).le
+  by_contra hle; push Not at hle
+  have hS' : ∀ᶠ y in 𝓝[>] x', y + -(π / 3) ∉ C.S :=
+    eventually_gt_add (C.eventually_notMem_S_gt (x' + -(π / 3)))
+  have hu' : x' < x' + (u - x) := by linarith [mem_Ioi.mp hu]
+  obtain ⟨y, hy1, hy2, hy3, hy4⟩ := (h2'.and ((C.eventually_notMem_S_gt x').and (hS'.and (Ioo_mem_nhdsGT hu')))).exists
+  have hz := hP4 (y + -(π / 3)) (by linarith [hy4.2]) hy3
+  have hb := (hband (y + -(π / 3)) hy3 (by rwa [neg_add_cancel_right])).2
+  rw [neg_add_cancel_right] at hb
+  omega
+
+/-- **The lower window** (BV-H1's band from below): `3M + 1` levels past a first-passage point are reached within `60°`. -/
+theorem select_window' {g : ℝ → ℤ} {M : ℤ}
+    (hband : ∀ z, z ∉ C.S → z + π / 3 ∉ C.S → 3 * M + 1 ≤ g (z + π / 3) - g z ∧ g (z + π / 3) - g z ≤ 3 * M + 2)
+    {ℓ : ℤ} {x x' : ℝ} (h2 : ∀ᶠ y in 𝓝[>] x, g y = ℓ) (h1' : ∀ y < x', y ∉ C.S → g y < ℓ + 3 * M + 1) :
+    x' ≤ x + π / 3 := by
+  refine le_of_forall_pos_lt_add fun ε hε => ?_
+  have hS' : ∀ᶠ y in 𝓝[>] x, y + π / 3 ∉ C.S := eventually_gt_add (C.eventually_notMem_S_gt (x + π / 3))
+  obtain ⟨y, hy1, hy2, hy3, hy4⟩ := (h2.and ((C.eventually_notMem_S_gt x).and (hS'.and
+    (Ioo_mem_nhdsGT (show x < x + ε by linarith))))).exists
+  have hb := (hband y hy2 hy3).1
+  by_contra hle; push Not at hle
+  have := h1' (y + π / 3) (by linarith [hy4.2]) hy3
+  omega
+
+/-- Chords of the unit circle between angles more than `60°` and less than `300°` apart are longer than `1`. -/
+theorem select_chord {a b : ℝ} (h1 : π / 3 < b - a) (h2 : b - a < 2 * π - π / 3) : 1 < ‖e a - e b‖ := by
+  have hπ := Real.pi_pos
+  have hc : Real.cos (a - b) < 1 / 2 := by
+    rw [show a - b = -(b - a) by ring, Real.cos_neg]
+    rcases le_or_gt (b - a) π with h | h
+    · have := Real.cos_lt_cos_of_nonneg_of_le_pi (by positivity) h h1
+      rwa [Real.cos_pi_div_three] at this
+    · rw [show b - a = 2 * π - (2 * π - (b - a)) by ring, Real.cos_two_pi_sub]
+      have := Real.cos_lt_cos_of_nonneg_of_le_pi (by positivity) (by linarith) (show π / 3 < 2 * π - (b - a) by linarith)
+      rwa [Real.cos_pi_div_three] at this
+  have hsq := norm_e_sub_e_sq a b
+  have h0 := norm_nonneg (e a - e b)
+  nlinarith
+
+
+/-- The pair residue: for a sign `τ` and two distinct colours, one residue `r` has `{τ (r − 1), τ r}` equal to them in some order. -/
+theorem select_residue {τ v w : ZMod 3} (hτ : τ = 1 ∨ τ = -1) (hvw : v ≠ w) :
+    ∃ r : ZMod 3, (τ * (r - 1) = v ∧ τ * r = w) ∨ (τ * (r - 1) = w ∧ τ * r = v) := by
+  rcases hτ with rfl | rfl <;> revert v w <;> decide
+
+/-- **The selection, over an integer lift with positive winding** (BV-L5's first passages, BV-C6, BV-P18): the hexagon when the increment
+per period is `6`, else three passage points per pair, pairwise more than `60°` apart. -/
+theorem select_core {g : ℝ → ℤ} {τ : ZMod 3} (hτ : τ = 1 ∨ τ = -1) (hcast : ∀ y ∉ C.S, C.c y = τ * (g y : ZMod 3))
+    (hlc : ∀ y ∉ C.S, ∀ᶠ y' in 𝓝 y, g y' = g y) (hjump : ∀ θ, ∀ᶠ a in 𝓝[<] θ, ∀ᶠ b in 𝓝[>] θ, |g b - g a| ≤ 1)
+    {N M : ℤ} (hper : ∀ θ ∉ C.S, ∀ n : ℤ, g (θ + n * (2 * π)) = g θ + n * N)
+    (hband : ∀ z, z ∉ C.S → z + π / 3 ∉ C.S → 3 * M + 1 ≤ g (z + π / 3) - g z ∧ g (z + π / 3) - g z ≤ 3 * M + 2)
+    (hNlo : 18 * M + 6 ≤ N) (hNhi : N ≤ 18 * M + 12) (h3 : 3 ∣ N) (hM : 0 ≤ M) :
+    (∃ ψ b, C.IsHex ψ b) ∨
+      ∀ v w : ZMod 3, v ≠ w → ∃ x : Fin 3 → ℝ, (∀ i, C.ChangeWith (x i) v w) ∧ ∀ i j, i ≠ j → 1 < ‖e (x i) - e (x j)‖ := by
+  have hπ := Real.pi_pos
+  have hN : 0 < N := by omega
+  choose xs hP1 hP3 hP2 using select_firstPassage hlc hN hper hjump
+  have hLV : ∀ ℓ, C.LeftVal (xs ℓ) (τ * ((ℓ - 1 : ℤ) : ZMod 3)) := fun ℓ => by
+    filter_upwards [hP3 ℓ, C.eventually_notMem_S_lt (xs ℓ)] with y h1 h2
+    rw [hcast y h2, h1]
+  have hRV : ∀ ℓ, C.RightVal (xs ℓ) (τ * (ℓ : ZMod 3)) := fun ℓ => by
+    filter_upwards [hP2 ℓ, C.eventually_notMem_S_gt (xs ℓ)] with y h1 h2
+    rw [hcast y h2, h1]
+  have hS : ∀ ℓ, xs ℓ ∈ C.S := by
+    intro ℓ; by_contra hx
+    have h1 : ∀ᶠ y in 𝓝[<] xs ℓ, g y = g (xs ℓ) := nhdsWithin_le_nhds (hlc _ hx)
+    have h2 : ∀ᶠ y in 𝓝[>] xs ℓ, g y = g (xs ℓ) := nhdsWithin_le_nhds (hlc _ hx)
+    obtain ⟨y, hy1, hy2⟩ := ((hP3 ℓ).and h1).exists
+    obtain ⟨y', hy1', hy2'⟩ := ((hP2 ℓ).and h2).exists
+    omega
+  have hmono : StrictMono xs := fun a b hab => select_lt hab (hP1 a) (hP2 a) (hP2 b)
+  have hperx : ∀ ℓ, xs (ℓ + N) = xs ℓ + 2 * π := by
+    intro ℓ
+    refine select_unique (hP1 (ℓ + N)) (hP2 (ℓ + N)) (fun y hy hyS => ?_) ?_
+    · have hyS' : y - 2 * π ∉ C.S := fun h => hyS (by simpa using (C.mem_S_add_int 1 _).mpr h)
+      have := hper _ hyS' 1
+      simp only [Int.cast_one, one_mul, sub_add_cancel] at this
+      have := hP1 ℓ (y - 2 * π) (by linarith) hyS'
+      omega
+    · have h : ∀ᶠ z in 𝓝[>] (xs ℓ + 2 * π + -(2 * π)), g z = ℓ ∧ z ∉ C.S := by
+        rw [add_neg_cancel_right]; exact (hP2 ℓ).and (C.eventually_notMem_S_gt _)
+      filter_upwards [eventually_gt_add h] with y ⟨hy1, hy2⟩
+      have := hper _ hy2 1
+      simp only [Int.cast_one, one_mul, neg_add_cancel_right] at this
+      omega
+  have hW1 : ∀ ℓ, xs ℓ + π / 3 < xs (ℓ + 3 * (M + 1)) := fun ℓ =>
+    select_window hlc hband (hP1 ℓ) (hP2 ℓ) (by rw [show ℓ + 3 * (M + 1) = ℓ + 3 * M + 3 by ring]; exact hP2 _)
+  by_cases h6 : N = 6
+  · left
+    have hM0 : M = 0 := by omega
+    subst hM0
+    have hW2 : ∀ ℓ, xs (ℓ + 1) ≤ xs ℓ + π / 3 := fun ℓ =>
+      select_window' hband (hP2 ℓ) (by simpa using hP1 (ℓ + 1))
+    have e6 := hperx 0
+    rw [h6] at e6
+    have a1 := hW2 0; have a2 := hW2 1; have a3 := hW2 2; have a4 := hW2 3; have a5 := hW2 4; have a6 := hW2 5
+    norm_num at a1 a2 a3 a4 a5 a6 e6
+    have hx : ∀ j : ℕ, j < 6 → xs j = xs 0 + j * (π / 3) := by
+      intro j hj
+      interval_cases j <;> norm_num <;> linarith
+    refine ⟨xs 0, fun j => τ * (j - 1), ?_, fun j hj => ?_⟩
+    · intro a b hab
+      have hτ' : τ * τ = 1 := by rcases hτ with rfl | rfl <;> decide
+      have := congrArg (τ * ·) hab
+      simp only [← mul_assoc, hτ', one_mul] at this
+      exact sub_left_injective this
+    · rw [← hx j hj]
+      refine ⟨?_, ?_⟩
+      · have := hLV j; push_cast at this ⊢; exact this
+      · have := hRV j; push_cast at this ⊢; simpa using this
+  · right
+    have h9 : 9 * (M + 1) ≤ N := by omega
+    intro v w hvw
+    obtain ⟨r, hr⟩ := select_residue hτ hvw
+    set k : ℤ := 3 * (M + 1) with hk
+    have hcast3 : ∀ i : ℤ, (((r.val : ℤ) + k * i : ℤ) : ZMod 3) = r := by
+      intro i
+      have : ((k : ℤ) : ZMod 3) = 0 := by
+        rw [hk]; push_cast; rw [show (3 : ZMod 3) = 0 from rfl, zero_mul]
+      push_cast; rw [this, zero_mul, add_zero]; simp
+    refine ⟨fun i => xs (r.val + k * (i : ℕ)), fun i => ⟨hS _, ?_⟩, ?_⟩
+    · have hl := hLV (r.val + k * (i : ℕ))
+      have hr' := hRV (r.val + k * (i : ℕ))
+      have hc := hcast3 ((i : ℕ) : ℤ)
+      rw [show (((r.val + k * (i : ℕ) - 1 : ℤ)) : ZMod 3) = (((r.val + k * (i : ℕ) : ℤ)) : ZMod 3) - 1 by push_cast; ring,
+        hc] at hl
+      rw [hc] at hr'
+      rcases hr with ⟨h1, h2⟩ | ⟨h1, h2⟩
+      · left; exact ⟨h1 ▸ hl, h2 ▸ hr'⟩
+      · right; exact ⟨h1 ▸ hl, h2 ▸ hr'⟩
+    · set ℓ₀ : ℤ := ((r.val : ℕ) : ℤ)
+      have d1 := hW1 ℓ₀
+      have d2 := hW1 (ℓ₀ + k)
+      have d3 : xs (ℓ₀ + 2 * k) + π / 3 < xs (ℓ₀ + N) := by
+        have := hW1 (ℓ₀ + 2 * k)
+        have hle : xs (ℓ₀ + 2 * k + 3 * (M + 1)) ≤ xs (ℓ₀ + N) := hmono.monotone (by omega)
+        linarith
+      rw [hperx] at d3
+      rw [show ℓ₀ + k + k = ℓ₀ + 2 * k by ring] at d2
+      have hx1 : xs (ℓ₀ + k * ((1 : ℕ) : ℤ)) = xs (ℓ₀ + k) := by simp
+      have hx2 : xs (ℓ₀ + k * ((2 : ℕ) : ℤ)) = xs (ℓ₀ + 2 * k) := by congr 1; push_cast; ring
+      have hx0 : xs (ℓ₀ + k * ((0 : ℕ) : ℤ)) = xs ℓ₀ := by simp
+      intro i j hij
+      fin_cases i <;> fin_cases j <;> simp only [ne_eq, not_true_eq_false] at hij <;>
+        dsimp only <;>
+        first
+        | (rw [hx0, hx1]; exact select_chord (by linarith) (by linarith))
+        | (rw [hx0, hx2]; exact select_chord (by linarith) (by linarith))
+        | (rw [hx1, hx0, norm_sub_rev]; exact select_chord (by linarith) (by linarith))
+        | (rw [hx1, hx2]; exact select_chord (by linarith) (by linarith))
+        | (rw [hx2, hx0, norm_sub_rev]; exact select_chord (by linarith) (by linarith))
+        | (rw [hx2, hx1, norm_sub_rev]; exact select_chord (by linarith) (by linarith))
+
+end SelectAux
+
 /-- **The selection** (`[SokolovVoronov2025]` Lemma 5, BV-C6 and Prop. 18, as BASE-V § 1a.2–1a.3 and FS110-CD § 2.5 derived them): a circle
 colouring with no swap point is the rotating hexagon, or for each pair of colours it has three change points with that pair, pairwise more than
 `60°` apart (chords longer than `1`). Circle-abstract; Lemma 5's recolouring keeps each kept point's pair, so the points are the colouring's own. -/
 theorem select (hns : ∀ x, ¬ C.IsSwap x) :
     (∃ ψ b, C.IsHex ψ b) ∨
       ∀ v w : ZMod 3, v ≠ w → ∃ x : Fin 3 → ℝ, (∀ i, C.ChangeWith (x i) v w) ∧ ∀ i j, i ≠ j → 1 < ‖e (x i) - e (x j)‖ := by
-  sorry
+  have hπ := Real.pi_pos
+  obtain ⟨L⟩ := exists_lift C
+  obtain ⟨θ₀, -, hg₀⟩ := C.exists_good_near 0 1 one_pos
+  have hθ₀S : θ₀ ∉ C.S := hg₀.notMem
+  have hT0 : ∀ j : ℕ, j < 6 → θ₀ + j * (π / 3) ∈ T0 C := fun j hj => by
+    refine ⟨hg₀ j hj, ?_⟩
+    have := hg₀.hex_notMem (i := j + 1) (by omega)
+    rwa [show θ₀ + ((j + 1 : ℕ) : ℝ) * (π / 3) = θ₀ + j * (π / 3) + π / 3 by push_cast; ring] at this
+  -- the band (BV-H1): no swap point keeps `D₀` in one band `{3M + 1, 3M + 2}`
+  obtain ⟨M, hMc⟩ : ∃ M, ∀ z ∈ T0 C, L.m 0 z = M :=
+    ⟨L.m 0 θ₀, fun z hz => m0_const L (hbig_of_noSwap L hns) z hz θ₀ (by simpa using hT0 0 (by norm_num))⟩
+  have hband : ∀ z, z ∉ C.S → z + π / 3 ∉ C.S →
+      3 * M + 1 ≤ L.f (z + π / 3) - L.f z ∧ L.f (z + π / 3) - L.f z ≤ 3 * M + 2 := by
+    intro z hz hz'
+    have h1 := hMc z ⟨hz, hz'⟩
+    have h2 := Lift.D0_mod_ne (L := L) hz hz'
+    unfold Lift.m at h1
+    rw [D0_eq] at h1 h2
+    omega
+  -- the increment per period
+  have hdvd : ∀ θ ∉ C.S, (3 : ℤ) ∣ L.f (θ + 2 * π) - L.f θ := by
+    intro θ hθ
+    have hθ' : θ + 2 * π ∉ C.S := fun h => hθ ((C.periodic_S θ).mp h)
+    have := (ZMod.intCast_zmod_eq_zero_iff_dvd (L.f (θ + 2 * π) - L.f θ) 3).mp (by
+      push_cast; rw [L.cast_eq _ hθ', L.cast_eq _ hθ, C.periodic θ, sub_self])
+    exact_mod_cast this
+  set N := L.f (θ₀ + 2 * π) - L.f θ₀ with hN
+  have hstep : ∀ θ ∉ C.S, L.f (θ + 2 * π) = L.f θ + N := by
+    intro θ hθ
+    have hW := Lift.W_eq_aux (L := L) hθ hθ₀S
+    unfold Lift.W at hW
+    have h1 := hdvd θ hθ
+    have h2 := hdvd θ₀ hθ₀S
+    omega
+  have hper : ∀ θ ∉ C.S, ∀ n : ℤ, L.f (θ + n * (2 * π)) = L.f θ + n * N := by
+    intro θ hθ n
+    induction n using Int.induction_on with
+    | zero => simp
+    | succ n ih =>
+      have hS : θ + (n : ℤ) * (2 * π) ∉ C.S := (C.mem_S_add_int n θ).not.mpr hθ
+      rw [show θ + (((n : ℤ) + 1 : ℤ) : ℝ) * (2 * π) = (θ + (n : ℤ) * (2 * π)) + 2 * π by push_cast; ring,
+        hstep _ hS, ih]
+      ring
+    | pred n ih =>
+      have hS : θ + ((-(n : ℤ) - 1 : ℤ) : ℝ) * (2 * π) ∉ C.S := (C.mem_S_add_int _ θ).not.mpr hθ
+      have := hstep _ hS
+      rw [show θ + ((-(n : ℤ) - 1 : ℤ) : ℝ) * (2 * π) + 2 * π = θ + ((-(n : ℤ) : ℤ) : ℝ) * (2 * π) by push_cast; ring,
+        ih] at this
+      linarith
+  -- the increment lies in `[18M + 6, 18M + 12]` (the band summed over a hexagon)
+  set a : ℕ → ℤ := fun j => L.f (θ₀ + j * (π / 3)) with ha
+  have hb : ∀ j : ℕ, j < 6 → 3 * M + 1 ≤ a (j + 1) - a j ∧ a (j + 1) - a j ≤ 3 * M + 2 := fun j hj => by
+    have := hband _ (hT0 j hj).1 (hT0 j hj).2
+    simp only [ha]
+    rwa [show θ₀ + ((j + 1 : ℕ) : ℝ) * (π / 3) = θ₀ + j * (π / 3) + π / 3 by push_cast; ring]
+  have ha0 : a 0 = L.f θ₀ := by simp [ha]
+  have ha6 : a 6 = L.f (θ₀ + 2 * π) := by simp only [ha]; congr 1; push_cast; ring
+  have b0 := hb 0 (by norm_num); have b1 := hb 1 (by norm_num); have b2 := hb 2 (by norm_num)
+  have b3 := hb 3 (by norm_num); have b4 := hb 4 (by norm_num); have b5 := hb 5 (by norm_num)
+  norm_num only at b0 b1 b2 b3 b4 b5
+  have hNlo : 18 * M + 6 ≤ N := by omega
+  have hNhi : N ≤ 18 * M + 12 := by omega
+  have h3N : (3 : ℤ) ∣ N := hdvd θ₀ hθ₀S
+  rcases lt_or_gt_of_ne (show N ≠ 0 by omega) with hneg | hpos
+  · -- negative winding: run the selection on the negated lift
+    refine select_core (g := fun θ => -L.f θ) (τ := -1) (N := -N) (M := -M - 1) (Or.inr rfl) (fun y hy => ?_)
+      (fun y hy => ?_) (fun θ => ?_) (fun θ hθ n => ?_) (fun z hz hz' => ?_) (by omega) (by omega) (dvd_neg.mpr h3N)
+      (by omega)
+    · push_cast; rw [L.cast_eq y hy]; ring
+    · filter_upwards [L.locallyConstant y hy] with y' h using by rw [h]
+    · filter_upwards [L.jump θ] with a' ha'
+      filter_upwards [ha'] with b' hb'
+      rwa [show -L.f b' - -L.f a' = -(L.f b' - L.f a') by ring, abs_neg]
+    · rw [hper θ hθ n]; ring
+    · have := hband z hz hz'; constructor <;> omega
+  · exact select_core (g := L.f) (τ := 1) (Or.inl rfl) (fun y hy => by rw [L.cast_eq y hy, one_mul]) L.locallyConstant
+      L.jump hper hband hNlo hNhi h3N (by omega)
+
+/-! ### The linkage's height difference (FS131-I5g, for `l3_base`): one-sided values of a lift along a path with finite fibres, the band
+constancy of `L₁(φ) − L₂(χ)` (BASE-V § 1b.3 step 4), relabelling, periodic finiteness -/
+
+section LinkAux
+
+/-- A continuous function on `[a, b]` with finite fibres keeps one side of its value just right of an interior point. -/
+theorem link_side_right {f : ℝ → ℝ} {a b : ℝ} (hc : ContinuousOn f (Icc a b))
+    (hfin : ∀ v, {s | s ∈ Icc a b ∧ f s = v}.Finite) {s₀ : ℝ} (hs₀ : s₀ ∈ Ico a b) :
+    ∃ δ > 0, s₀ + δ ≤ b ∧ ((∀ s ∈ Ioo s₀ (s₀ + δ), f s < f s₀) ∨ (∀ s ∈ Ioo s₀ (s₀ + δ), f s₀ < f s)) := by
+  have hF : ({s | s ∈ Icc a b ∧ f s = f s₀} \ {s₀}).Finite := (hfin _).sdiff
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hF.isClosed.isOpen_compl s₀ (by simp)
+  refine ⟨min ε (b - s₀), lt_min hε (by linarith [hs₀.2]), by linarith [min_le_right ε (b - s₀)], ?_⟩
+  have hne : ∀ s ∈ Ioo s₀ (s₀ + min ε (b - s₀)), f s ≠ f s₀ := by
+    intro s hs hfs
+    have hsb : s ∈ ball s₀ ε := by
+      rw [mem_ball, Real.dist_eq, abs_lt]; constructor <;> linarith [hs.1, hs.2, min_le_left ε (b - s₀)]
+    exact hball hsb ⟨⟨⟨by linarith [hs.1, hs₀.1], by linarith [hs.2, min_le_right ε (b - s₀)]⟩, hfs⟩, by
+      simp only [mem_singleton_iff]; exact ne_of_gt hs.1⟩
+  have hcI : ContinuousOn f (Ioo s₀ (s₀ + min ε (b - s₀))) :=
+    hc.mono fun s hs => ⟨by linarith [hs.1, hs₀.1], by linarith [hs.2, min_le_right ε (b - s₀)]⟩
+  by_contra hno
+  push Not at hno
+  obtain ⟨⟨s₁, hs₁, h₁⟩, ⟨s₂, hs₂, h₂⟩⟩ := hno
+  have hsub : uIcc s₁ s₂ ⊆ Ioo s₀ (s₀ + min ε (b - s₀)) :=
+    (ordConnected_Ioo).uIcc_subset hs₁ hs₂
+  obtain ⟨c, hc', hfc⟩ := intermediate_value_uIcc (hcI.mono hsub) (show f s₀ ∈ uIcc (f s₁) (f s₂) from
+    ⟨min_le_of_right_le h₂, le_max_of_le_left h₁⟩)
+  exact hne c (hsub hc') hfc
+
+/-- The mirror of `link_side_right`: just left of an interior point. -/
+theorem link_side_left {f : ℝ → ℝ} {a b : ℝ} (hc : ContinuousOn f (Icc a b))
+    (hfin : ∀ v, {s | s ∈ Icc a b ∧ f s = v}.Finite) {s₀ : ℝ} (hs₀ : s₀ ∈ Ioc a b) :
+    ∃ δ > 0, a ≤ s₀ - δ ∧ ((∀ s ∈ Ioo (s₀ - δ) s₀, f s < f s₀) ∨ (∀ s ∈ Ioo (s₀ - δ) s₀, f s₀ < f s)) := by
+  have hc' : ContinuousOn (fun s => f (-s)) (Icc (-b) (-a)) :=
+    hc.comp continuousOn_neg fun s hs => ⟨by linarith [hs.2], by linarith [hs.1]⟩
+  have hfin' : ∀ v, {s | s ∈ Icc (-b) (-a) ∧ f (-s) = v}.Finite := fun v =>
+    ((hfin v).image fun s => -s).subset fun s hs => ⟨-s, ⟨⟨by linarith [hs.1.2], by linarith [hs.1.1]⟩, hs.2⟩, by simp⟩
+  obtain ⟨δ, hδ, hδb, h⟩ := link_side_right hc' hfin' (s₀ := -s₀) ⟨by linarith [hs₀.2], by linarith [hs₀.1]⟩
+  refine ⟨δ, hδ, by linarith, ?_⟩
+  simp only [neg_neg] at h
+  rcases h with h | h
+  · exact Or.inl fun s hs => by simpa using h (-s) ⟨by linarith [hs.2], by linarith [hs.1]⟩
+  · exact Or.inr fun s hs => by simpa using h (-s) ⟨by linarith [hs.2], by linarith [hs.1]⟩
+
+variable {C}
+
+/-- Just right of a point, a lift read along a continuous path with finite fibres is one of its two sides at the point, with the path on
+the corresponding side. -/
+theorem link_val_right (L : C.Lift) {f : ℝ → ℝ} {a b : ℝ} (hc : ContinuousOn f (Icc a b))
+    (hfin : ∀ v, {s | s ∈ Icc a b ∧ f s = v}.Finite) {s₀ : ℝ} (hs₀ : s₀ ∈ Ico a b) {l r : ℤ} (hLR : L.Sides (f s₀) l r) :
+    ∃ δ > 0, s₀ + δ ≤ b ∧ ((∀ s ∈ Ioo s₀ (s₀ + δ), L.f (f s) = l ∧ f s < f s₀) ∨
+      (∀ s ∈ Ioo s₀ (s₀ + δ), L.f (f s) = r ∧ f s₀ < f s)) := by
+  obtain ⟨δ, hδ, hδb, hside⟩ := link_side_right hc hfin hs₀
+  obtain ⟨l', hl', hsubl⟩ := mem_nhdsLT_iff_exists_Ioo_subset.mp hLR.1
+  obtain ⟨r', hr', hsubr⟩ := mem_nhdsGT_iff_exists_Ioo_subset.mp hLR.2.1
+  have hl'' : l' < f s₀ := hl'
+  have hr'' : f s₀ < r' := hr'
+  -- continuity at `s₀` within `[a, b]`
+  have hcont : ∀ ρ > 0, ∃ η > 0, ∀ s ∈ Icc a b, |s - s₀| < η → |f s - f s₀| < ρ := by
+    intro ρ hρ
+    have := Metric.continuousWithinAt_iff.mp (hc s₀ (Ico_subset_Icc_self hs₀)) ρ hρ
+    obtain ⟨η, hη, h⟩ := this
+    exact ⟨η, hη, fun s hs hss => by rw [← Real.dist_eq]; exact h hs (by rwa [Real.dist_eq])⟩
+  obtain ⟨η, hη, hηc⟩ := hcont (min (f s₀ - l') (r' - f s₀)) (lt_min (by linarith) (by linarith))
+  refine ⟨min δ η, lt_min hδ hη, by linarith [min_le_left δ η], ?_⟩
+  have hin : ∀ s ∈ Ioo s₀ (s₀ + min δ η), s ∈ Ioo s₀ (s₀ + δ) ∧ |f s - f s₀| < min (f s₀ - l') (r' - f s₀) := by
+    intro s hs
+    refine ⟨⟨hs.1, by linarith [hs.2, min_le_left δ η]⟩, hηc s ⟨by linarith [hs.1, hs₀.1], by linarith [hs.2, min_le_left δ η]⟩ ?_⟩
+    rw [abs_lt]; constructor <;> linarith [hs.1, hs.2, min_le_right δ η]
+  rcases hside with h | h
+  · refine Or.inl fun s hs => ⟨?_, h s (hin s hs).1⟩
+    have h1 := h s (hin s hs).1
+    have h2 := (hin s hs).2
+    rw [abs_lt] at h2
+    exact hsubl ⟨by linarith [h2.1, min_le_left (f s₀ - l') (r' - f s₀)], h1⟩
+  · refine Or.inr fun s hs => ⟨?_, h s (hin s hs).1⟩
+    have h1 := h s (hin s hs).1
+    have h2 := (hin s hs).2
+    rw [abs_lt] at h2
+    exact hsubr ⟨h1, by linarith [h2.2, min_le_right (f s₀ - l') (r' - f s₀)]⟩
+
+/-- The mirror of `link_val_right`. -/
+theorem link_val_left (L : C.Lift) {f : ℝ → ℝ} {a b : ℝ} (hc : ContinuousOn f (Icc a b))
+    (hfin : ∀ v, {s | s ∈ Icc a b ∧ f s = v}.Finite) {s₀ : ℝ} (hs₀ : s₀ ∈ Ioc a b) {l r : ℤ} (hLR : L.Sides (f s₀) l r) :
+    ∃ δ > 0, a ≤ s₀ - δ ∧ ((∀ s ∈ Ioo (s₀ - δ) s₀, L.f (f s) = l ∧ f s < f s₀) ∨
+      (∀ s ∈ Ioo (s₀ - δ) s₀, L.f (f s) = r ∧ f s₀ < f s)) := by
+  obtain ⟨δ, hδ, hδb, hside⟩ := link_side_left hc hfin hs₀
+  obtain ⟨l', hl', hsubl⟩ := mem_nhdsLT_iff_exists_Ioo_subset.mp hLR.1
+  obtain ⟨r', hr', hsubr⟩ := mem_nhdsGT_iff_exists_Ioo_subset.mp hLR.2.1
+  have hl'' : l' < f s₀ := hl'
+  have hr'' : f s₀ < r' := hr'
+  have hcont : ∀ ρ > 0, ∃ η > 0, ∀ s ∈ Icc a b, |s - s₀| < η → |f s - f s₀| < ρ := by
+    intro ρ hρ
+    obtain ⟨η, hη, h⟩ := Metric.continuousWithinAt_iff.mp (hc s₀ (Ioc_subset_Icc_self hs₀)) ρ hρ
+    exact ⟨η, hη, fun s hs hss => by rw [← Real.dist_eq]; exact h hs (by rwa [Real.dist_eq])⟩
+  obtain ⟨η, hη, hηc⟩ := hcont (min (f s₀ - l') (r' - f s₀)) (lt_min (by linarith) (by linarith))
+  refine ⟨min δ η, lt_min hδ hη, by linarith [min_le_left δ η], ?_⟩
+  have hin : ∀ s ∈ Ioo (s₀ - min δ η) s₀, s ∈ Ioo (s₀ - δ) s₀ ∧ |f s - f s₀| < min (f s₀ - l') (r' - f s₀) := by
+    intro s hs
+    refine ⟨⟨by linarith [hs.1, min_le_left δ η], hs.2⟩, hηc s ⟨by linarith [hs.1, min_le_left δ η], by linarith [hs.2, hs₀.2]⟩ ?_⟩
+    rw [abs_lt]; constructor <;> linarith [hs.1, hs.2, min_le_right δ η]
+  rcases hside with h | h
+  · refine Or.inl fun s hs => ⟨?_, h s (hin s hs).1⟩
+    have h1 := h s (hin s hs).1
+    have h2 := (hin s hs).2
+    rw [abs_lt] at h2
+    exact hsubl ⟨by linarith [h2.1, min_le_left (f s₀ - l') (r' - f s₀)], h1⟩
+  · refine Or.inr fun s hs => ⟨?_, h s (hin s hs).1⟩
+    have h1 := h s (hin s hs).1
+    have h2 := (hin s hs).2
+    rw [abs_lt] at h2
+    exact hsubr ⟨h1, by linarith [h2.2, min_le_right (f s₀ - l') (r' - f s₀)]⟩
+
+
+/-- **The height difference along a linkage path keeps its band** (BASE-V § 1b.3 step 4, abstract): along a continuous path `s ↦ (φ s, χ s)`
+with finite fibres, read through lifts `L₁`, `L₂`, the difference `L₁(φ) − L₂(χ)` at generic parameters is never `0 mod 3` (`hgen`), and its band
+`⌊·/3⌋` never changes: a jump by one cannot cross a multiple of `3` without landing on it, and a jump by two is a double event, whose two changes
+carry one pair — excluded unless `χ` turns there (`hdbl`). -/
+theorem link_path {C₁ C₂ : CircleColouring} (L₁ : C₁.Lift) (L₂ : C₂.Lift) {φ χ : ℝ → ℝ} {a b : ℝ} (hab : a < b)
+    (hφc : ContinuousOn φ (Icc a b)) (hχc : ContinuousOn χ (Icc a b))
+    (hφf : ∀ v, {s | s ∈ Icc a b ∧ φ s = v}.Finite) (hχf : ∀ v, {s | s ∈ Icc a b ∧ χ s = v}.Finite)
+    {T₁ T₂ : Set ℝ} (hT₁ : ∀ a b, (T₁ ∩ Icc a b).Finite) (hT₂ : ∀ a b, (T₂ ∩ Icc a b).Finite)
+    (hS₁ : C₁.S ⊆ T₁) (hS₂ : C₂.S ⊆ T₂)
+    (hgen : ∀ s ∈ Ioo a b, φ s ∉ T₁ → χ s ∉ T₂ → (L₁.f (φ s) - L₂.f (χ s)) % 3 ≠ 0)
+    (hdbl : ∀ s ∈ Ioo a b, ∀ l₁ r₁ l₂ r₂ : ℤ, L₁.Sides (φ s) l₁ r₁ → L₂.Sides (χ s) l₂ r₂ → (r₁ - l₁ = 1 ∨ r₁ - l₁ = -1) →
+      (r₂ - l₂ = 1 ∨ r₂ - l₂ = -1) → ((l₁ - l₂) % 3 = 0 ∧ (r₁ - r₂) % 3 = 0 ∨ (l₁ - r₂) % 3 = 0 ∧ (r₁ - l₂) % 3 = 0) →
+      (∀ᶠ s' in 𝓝[≠] s, χ s' < χ s) ∨ (∀ᶠ s' in 𝓝[≠] s, χ s < χ s')) :
+    ∀ GA GB : ℤ, (∃ δ > 0, ∀ s ∈ Ioo a (a + δ), L₁.f (φ s) - L₂.f (χ s) = GA) →
+      (∃ δ > 0, ∀ s ∈ Ioo (b - δ) b, L₁.f (φ s) - L₂.f (χ s) = GB) → GA % 3 ≠ 0 ∧ GB % 3 ≠ 0 ∧ GA / 3 = GB / 3 := by
+  set T := {s | s ∈ Ioo a b ∧ φ s ∉ T₁ ∧ χ s ∉ T₂} with hT
+  -- the bad parameters are finitely many, so generic parameters are dense
+  have hbad : {s | s ∈ Icc a b ∧ (φ s ∈ T₁ ∨ χ s ∈ T₂)}.Finite := by
+    obtain ⟨m, hm⟩ := (isCompact_Icc.image_of_continuousOn hφc).bddBelow
+    obtain ⟨M, hM⟩ := (isCompact_Icc.image_of_continuousOn hφc).bddAbove
+    obtain ⟨m', hm'⟩ := (isCompact_Icc.image_of_continuousOn hχc).bddBelow
+    obtain ⟨M', hM'⟩ := (isCompact_Icc.image_of_continuousOn hχc).bddAbove
+    refine (((hT₁ m M).biUnion fun v _ => hφf v).union ((hT₂ m' M').biUnion fun v _ => hχf v)).subset ?_
+    rintro s ⟨hs, h | h⟩
+    · left
+      exact mem_biUnion (x := φ s) ⟨h, hm ⟨s, hs, rfl⟩, hM ⟨s, hs, rfl⟩⟩ ⟨hs, rfl⟩
+    · right
+      exact mem_biUnion (x := χ s) ⟨h, hm' ⟨s, hs, rfl⟩, hM' ⟨s, hs, rfl⟩⟩ ⟨hs, rfl⟩
+  have hdense : ∀ c d, a ≤ c → d ≤ b → c < d → ∃ z ∈ T, z ∈ Ioo c d := by
+    intro c d hc hd hcd
+    obtain ⟨z, hz, hzb⟩ := ((Ioo_infinite hcd).sdiff hbad).nonempty
+    refine ⟨z, ⟨⟨by linarith [hz.1], by linarith [hz.2]⟩, fun h => hzb ⟨⟨by linarith [hz.1], by linarith [hz.2]⟩, Or.inl h⟩,
+      fun h => hzb ⟨⟨by linarith [hz.1], by linarith [hz.2]⟩, Or.inr h⟩⟩, hz⟩
+  have hT' : ∀ y ∈ Ioo a b, ∀ ε > 0, ∃ z ∈ T, |z - y| < ε := by
+    intro y hy ε hε
+    obtain ⟨z, hzT, hz⟩ := hdense (max a (y - ε)) (min b (y + ε)) (le_max_left _ _) (min_le_left _ _)
+      (by rw [max_lt_iff, lt_min_iff, lt_min_iff]; exact ⟨⟨by linarith [hy.1, hy.2], by linarith [hy.1]⟩, by linarith [hy.2],
+        by linarith⟩)
+    refine ⟨z, hzT, ?_⟩
+    rw [abs_lt]; constructor <;> linarith [hz.1, hz.2, le_max_right a (y - ε), min_le_right b (y + ε)]
+  suffices hconst : ∀ s ∈ T, ∀ s' ∈ T, (L₁.f (φ s) - L₂.f (χ s)) / 3 = (L₁.f (φ s') - L₂.f (χ s')) / 3 by
+    rintro GA GB ⟨δ, hδ, hA⟩ ⟨δ', hδ', hB⟩
+    obtain ⟨z, hzT, hz⟩ := hdense a (min (a + δ) b) le_rfl (min_le_right _ _) (lt_min (by linarith) hab)
+    obtain ⟨z', hz'T, hz'⟩ := hdense (max (b - δ') a) b (le_max_right _ _) le_rfl (max_lt (by linarith) hab)
+    have e1 := hA z ⟨hz.1, lt_of_lt_of_le hz.2 (min_le_left _ _)⟩
+    have e2 := hB z' ⟨lt_of_le_of_lt (le_max_left _ _) hz'.1, hz'.2⟩
+    refine ⟨?_, ?_, ?_⟩
+    · rw [← e1]; exact hgen z hzT.1 hzT.2.1 hzT.2.2
+    · rw [← e2]; exact hgen z' hz'T.1 hz'T.2.1 hz'T.2.2
+    · rw [← e1, ← e2]; exact hconst z hzT z' hz'T
+  refine fun s hs s' hs' => const_of_local isPreconnected_Ioo hT' (g := fun s => (L₁.f (φ s) - L₂.f (χ s)) / 3) ?_
+    s ⟨hs, hs.1⟩ s' ⟨hs', hs'.1⟩
+  intro y hy
+  obtain ⟨l₁, r₁, hs₁, hb₁⟩ := L₁.exists_sides (φ y)
+  obtain ⟨l₂, r₂, hs₂, hb₂⟩ := L₂.exists_sides (χ y)
+  rw [abs_le] at hb₁ hb₂
+  obtain ⟨δ1, hδ1, hδ1a, h1L⟩ := link_val_left L₁ hφc hφf ⟨hy.1, hy.2.le⟩ hs₁
+  obtain ⟨δ1', hδ1', hδ1b, h1R⟩ := link_val_right L₁ hφc hφf ⟨hy.1.le, hy.2⟩ hs₁
+  obtain ⟨δ2, hδ2, hδ2a, h2L⟩ := link_val_left L₂ hχc hχf ⟨hy.1, hy.2.le⟩ hs₂
+  obtain ⟨δ2', hδ2', hδ2b, h2R⟩ := link_val_right L₂ hχc hχf ⟨hy.1.le, hy.2⟩ hs₂
+  set ε := min (min δ1 δ1') (min δ2 δ2') with hε
+  have hε0 : 0 < ε := lt_min (lt_min hδ1 hδ1') (lt_min hδ2 hδ2')
+  have e1 : ε ≤ δ1 := (min_le_left _ _).trans (min_le_left _ _)
+  have e1' : ε ≤ δ1' := (min_le_left _ _).trans (min_le_right _ _)
+  have e2 : ε ≤ δ2 := (min_le_right _ _).trans (min_le_left _ _)
+  have e2' : ε ≤ δ2' := (min_le_right _ _).trans (min_le_right _ _)
+  have hL : ∀ s ∈ Ioo (y - ε) y, s ∈ Ioo (y - δ1) y ∧ s ∈ Ioo (y - δ2) y := fun s hs =>
+    ⟨⟨by linarith [hs.1], hs.2⟩, ⟨by linarith [hs.1], hs.2⟩⟩
+  have hR : ∀ s ∈ Ioo y (y + ε), s ∈ Ioo y (y + δ1') ∧ s ∈ Ioo y (y + δ2') := fun s hs =>
+    ⟨⟨hs.1, by linarith [hs.2]⟩, ⟨hs.1, by linarith [hs.2]⟩⟩
+  -- the four one-sided values
+  obtain ⟨A₁, hA₁, hA₁v⟩ : ∃ A₁, (∀ s ∈ Ioo (y - ε) y, L₁.f (φ s) = A₁) ∧ (A₁ = l₁ ∨ A₁ = r₁) := by
+    rcases h1L with h | h
+    · exact ⟨l₁, fun s hs => (h s (hL s hs).1).1, Or.inl rfl⟩
+    · exact ⟨r₁, fun s hs => (h s (hL s hs).1).1, Or.inr rfl⟩
+  obtain ⟨B₁, hB₁, hB₁v⟩ : ∃ B₁, (∀ s ∈ Ioo y (y + ε), L₁.f (φ s) = B₁) ∧ (B₁ = l₁ ∨ B₁ = r₁) := by
+    rcases h1R with h | h
+    · exact ⟨l₁, fun s hs => (h s (hR s hs).1).1, Or.inl rfl⟩
+    · exact ⟨r₁, fun s hs => (h s (hR s hs).1).1, Or.inr rfl⟩
+  obtain ⟨A₂, hA₂, hA₂v⟩ : ∃ A₂, (∀ s ∈ Ioo (y - ε) y, L₂.f (χ s) = A₂) ∧
+      ((A₂ = l₂ ∧ ∀ s ∈ Ioo (y - ε) y, χ s < χ y) ∨ (A₂ = r₂ ∧ ∀ s ∈ Ioo (y - ε) y, χ y < χ s)) := by
+    rcases h2L with h | h
+    · exact ⟨l₂, fun s hs => (h s (hL s hs).2).1, Or.inl ⟨rfl, fun s hs => (h s (hL s hs).2).2⟩⟩
+    · exact ⟨r₂, fun s hs => (h s (hL s hs).2).1, Or.inr ⟨rfl, fun s hs => (h s (hL s hs).2).2⟩⟩
+  obtain ⟨B₂, hB₂, hB₂v⟩ : ∃ B₂, (∀ s ∈ Ioo y (y + ε), L₂.f (χ s) = B₂) ∧
+      ((B₂ = l₂ ∧ ∀ s ∈ Ioo y (y + ε), χ s < χ y) ∨ (B₂ = r₂ ∧ ∀ s ∈ Ioo y (y + ε), χ y < χ s)) := by
+    rcases h2R with h | h
+    · exact ⟨l₂, fun s hs => (h s (hR s hs).2).1, Or.inl ⟨rfl, fun s hs => (h s (hR s hs).2).2⟩⟩
+    · exact ⟨r₂, fun s hs => (h s (hR s hs).2).1, Or.inr ⟨rfl, fun s hs => (h s (hR s hs).2).2⟩⟩
+  -- generic values on each side are not `0 mod 3`
+  have hGL : (A₁ - A₂) % 3 ≠ 0 := by
+    obtain ⟨z, hzT, hz⟩ := hdense (y - ε) y (by linarith) hy.2.le (by linarith)
+    have := hgen z hzT.1 hzT.2.1 hzT.2.2
+    rwa [hA₁ z hz, hA₂ z hz] at this
+  have hGR : (B₁ - B₂) % 3 ≠ 0 := by
+    obtain ⟨z, hzT, hz⟩ := hdense y (y + ε) hy.1.le (by linarith) (by linarith)
+    have := hgen z hzT.1 hzT.2.1 hzT.2.2
+    rwa [hB₁ z hz, hB₂ z hz] at this
+  -- a turn of `χ` keeps its side value
+  have hturn : ((∀ᶠ s' in 𝓝[≠] y, χ s' < χ y) ∨ (∀ᶠ s' in 𝓝[≠] y, χ y < χ s')) → A₂ = B₂ := by
+    have hLt : ∀ P : ℝ → Prop, (∀ᶠ s' in 𝓝[≠] y, P s') → ∃ s ∈ Ioo (y - ε) y, P s := fun P h => by
+      have h' : ∀ᶠ s' in 𝓝[<] y, P s' := h.filter_mono (nhdsWithin_mono y fun s (hs : s < y) => ne_of_lt hs)
+      obtain ⟨s, h1, h2⟩ := (h'.and (Ioo_mem_nhdsLT (show y - ε < y by linarith))).exists
+      exact ⟨s, h2, h1⟩
+    have hGt : ∀ P : ℝ → Prop, (∀ᶠ s' in 𝓝[≠] y, P s') → ∃ s ∈ Ioo y (y + ε), P s := fun P h => by
+      have h' : ∀ᶠ s' in 𝓝[>] y, P s' := h.filter_mono (nhdsWithin_mono y fun s (hs : y < s) => ne_of_gt hs)
+      obtain ⟨s, h1, h2⟩ := (h'.and (Ioo_mem_nhdsGT (show y < y + ε by linarith))).exists
+      exact ⟨s, h2, h1⟩
+    rintro (h | h)
+    · obtain ⟨s, hs, hsy⟩ := hLt _ h
+      obtain ⟨s', hs', hs'y⟩ := hGt _ h
+      rcases hA₂v with ⟨e, -⟩ | ⟨-, h'⟩
+      · rcases hB₂v with ⟨e', -⟩ | ⟨-, h''⟩
+        · rw [e, e']
+        · exact absurd (h'' s' hs') (not_lt.mpr hs'y.le)
+      · exact absurd (h' s hs) (not_lt.mpr hsy.le)
+    · obtain ⟨s, hs, hsy⟩ := hLt _ h
+      obtain ⟨s', hs', hs'y⟩ := hGt _ h
+      rcases hA₂v with ⟨-, h'⟩ | ⟨e, -⟩
+      · exact absurd (h' s hs) (not_lt.mpr hsy.le)
+      · rcases hB₂v with ⟨-, h''⟩ | ⟨e', -⟩
+        · exact absurd (h'' s' hs') (not_lt.mpr hs'y.le)
+        · rw [e, e']
+  have hA₂v' : A₂ = l₂ ∨ A₂ = r₂ := hA₂v.imp (fun h => h.1) (fun h => h.1)
+  have hB₂v' : B₂ = l₂ ∨ B₂ = r₂ := hB₂v.imp (fun h => h.1) (fun h => h.1)
+  have hband : (A₁ - A₂) / 3 = (B₁ - B₂) / 3 := by
+    by_cases hd : A₂ = B₂
+    · omega
+    · have hnp : ¬ ((r₁ - l₁ = 1 ∨ r₁ - l₁ = -1) ∧ (r₂ - l₂ = 1 ∨ r₂ - l₂ = -1) ∧
+          ((l₁ - l₂) % 3 = 0 ∧ (r₁ - r₂) % 3 = 0 ∨ (l₁ - r₂) % 3 = 0 ∧ (r₁ - l₂) % 3 = 0)) :=
+        fun ⟨h1, h2, h3⟩ => hd (hturn (hdbl y hy l₁ r₁ l₂ r₂ hs₁ hs₂ h1 h2 h3))
+      omega
+  -- the band is constant near `y`
+  refine ⟨ε, hε0, fun z hz hzy z' hz' hz'y => ?_⟩
+  have hval : ∀ w ∈ T, |w - y| < ε → (L₁.f (φ w) - L₂.f (χ w)) / 3 = (A₁ - A₂) / 3 := by
+    intro w hw hwy
+    rw [abs_lt] at hwy
+    rcases lt_trichotomy w y with h | h | h
+    · rw [hA₁ w ⟨by linarith, h⟩, hA₂ w ⟨by linarith, h⟩]
+    · subst h
+      have e1 := hs₁.2.2 fun hS => hw.2.1 (hS₁ hS)
+      have e2 := hs₂.2.2 fun hS => hw.2.2 (hS₂ hS)
+      have hA₁e : A₁ = L₁.f (φ w) := by rcases hA₁v with h | h <;> rw [h] <;> [exact e1.1; exact e1.2]
+      have hA₂e : A₂ = L₂.f (χ w) := by rcases hA₂v' with h | h <;> rw [h] <;> [exact e2.1; exact e2.2]
+      rw [hA₁e, hA₂e]
+    · rw [hB₁ w ⟨h, by linarith⟩, hB₂ w ⟨h, by linarith⟩, hband]
+  show (L₁.f (φ z) - L₂.f (χ z)) / 3 = (L₁.f (φ z') - L₂.f (χ z')) / 3
+  rw [hval z hz hzy, hval z' hz' hz'y]
+
+/-- **Relabelling a circle colouring** by an injection `ρ` of `ℤ/3`: the same change set, one-sided values moved by `ρ`, no swap point
+kept. -/
+theorem link_relabel (C : CircleColouring) {ρ : ZMod 3 → ZMod 3} (hρ : Function.Injective ρ) :
+    ∃ C' : CircleColouring, C'.S = C.S ∧ (∀ θ v, C'.LeftVal θ (ρ v) ↔ C.LeftVal θ v) ∧
+      (∀ θ v, C'.RightVal θ (ρ v) ↔ C.RightVal θ v) ∧ (∀ θ ∉ C.S, C'.c θ = ρ (C.c θ)) ∧
+      ((∀ x, ¬ C.IsSwap x) → ∀ x, ¬ C'.IsSwap x) := by
+  have hsurj : Function.Surjective ρ := Finite.surjective_of_injective hρ
+  let C' : CircleColouring :=
+    { c := ρ ∘ C.c, S := C.S, periodic := fun θ => by simp only [Function.comp_apply, C.periodic θ],
+      periodic_S := C.periodic_S, finite_S := C.finite_S,
+      locallyConstant := fun θ hθ => (C.locallyConstant θ hθ).mono fun θ' h => by simp only [Function.comp_apply, h],
+      proper := fun θ h1 h2 h => C.proper θ h1 h2 (hρ h) }
+  have hL : ∀ θ v, C'.LeftVal θ (ρ v) ↔ C.LeftVal θ v := fun θ v =>
+    ⟨fun h => h.mono fun y hy => hρ hy, fun h => h.mono fun y hy => by
+      show ρ (C.c y) = ρ v; rw [hy]⟩
+  have hR : ∀ θ v, C'.RightVal θ (ρ v) ↔ C.RightVal θ v := fun θ v =>
+    ⟨fun h => h.mono fun y hy => hρ hy, fun h => h.mono fun y hy => by
+      show ρ (C.c y) = ρ v; rw [hy]⟩
+  refine ⟨C', rfl, hL, hR, fun θ _ => rfl, fun hns x ⟨hx, a, b, ha, hb, hsw⟩ => ?_⟩
+  obtain ⟨a₀, rfl⟩ := hsurj a
+  obtain ⟨b₀, rfl⟩ := hsurj b
+  refine hns x ⟨hx, a₀, b₀, (hL x a₀).mp ha, (hR x b₀).mp hb, ?_⟩
+  rcases hsw with ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · exact Or.inl ⟨(hL _ b₀).mp h1, (hR _ a₀).mp h2⟩
+  · exact Or.inr ⟨(hL _ b₀).mp h1, (hR _ a₀).mp h2⟩
+
+/-- A `2π`-periodic set of reals finite in one period is finite in every compact interval. -/
+theorem link_periodic_finite {T : Set ℝ} (hper : ∀ θ, θ + 2 * π ∈ T ↔ θ ∈ T) (hfin : (T ∩ Ico 0 (2 * π)).Finite)
+    (a b : ℝ) : (T ∩ Icc a b).Finite := by
+  have hπ := Real.pi_pos
+  have hint : ∀ (n : ℤ) θ, θ + n * (2 * π) ∈ T ↔ θ ∈ T := by
+    intro n θ
+    induction n using Int.induction_on with
+    | zero => simp
+    | succ n ih =>
+      rw [show θ + (((n : ℤ) + 1 : ℤ) : ℝ) * (2 * π) = (θ + ((n : ℤ) : ℝ) * (2 * π)) + 2 * π by push_cast; ring, hper, ih]
+    | pred n ih =>
+      rw [← hper, show θ + ((-(n : ℤ) - 1 : ℤ) : ℝ) * (2 * π) + 2 * π = θ + ((-(n : ℤ) : ℤ) : ℝ) * (2 * π) by
+        push_cast; ring, ih]
+  have hF := ((Finset.Icc ⌊a / (2 * π)⌋ ⌊b / (2 * π)⌋ ×ˢ hfin.toFinset : Finset (ℤ × ℝ)).image
+    (fun q : ℤ × ℝ => q.2 + q.1 * (2 * π))).finite_toSet
+  refine hF.subset ?_
+  rintro x ⟨hx, hax, hxb⟩
+  set n := ⌊x / (2 * π)⌋
+  have h1 : (n : ℝ) ≤ x / (2 * π) := Int.floor_le _
+  have h2 : x / (2 * π) < n + 1 := Int.lt_floor_add_one _
+  have h1' : n * (2 * π) ≤ x := by rwa [le_div_iff₀ (by positivity)] at h1
+  have h2' : x < (n + 1) * (2 * π) := by rwa [div_lt_iff₀ (by positivity)] at h2
+  have hmem : x - n * (2 * π) ∈ T := by
+    have := (hint (-n) x).mpr hx; simpa [sub_eq_add_neg] using this
+  simp only [Finset.coe_image, Finset.coe_product, Finset.coe_Icc, mem_image, mem_prod, mem_Icc,
+    Set.Finite.coe_toFinset, Prod.exists]
+  refine ⟨n, x - n * (2 * π), ⟨⟨?_, ?_⟩, hmem, ?_, ?_⟩, by ring⟩
+  · exact Int.floor_mono (div_le_div_of_nonneg_right hax (by positivity))
+  · exact Int.floor_mono (div_le_div_of_nonneg_right hxb (by positivity))
+  · linarith
+  · linarith
+
+end LinkAux
 
 end CircleColouring
 
@@ -1140,25 +1834,498 @@ theorem BaseCtx.retArcs_finite (B : F.BaseCtx u) :
       obtain ⟨δ, hδ, h'⟩ := ha'; exact ⟨δ, hδ, by rw [germ_sub_two_pi]; exact h'⟩
     exact pseudo_ncard_ne_one_of_change hac.symm hc'' ha''
 
+/-- **Two change points of one `a|c` boundary with the same orientation are impossible** (the orientation step, over `orient`): in the base's
+context, a closed preconnected `C` inside `cl T₁ ∩ cl T₂ ∩ B̄(u, 1)` (`T₁` an `a`-tile, `T₂` a `c`-tile) cannot hold two distinct change
+points `r(θ)`, `r(φ)` of the pseudo-colouring of `ω(u)` both from `a` (clockwise) to `c` (counter-clockwise). -/
+theorem BaseCtx.orient_pair (B : F.BaseCtx u) {a c : Fin 6} (hac : a ≠ c) {T₁ T₂ : Set ℂ} (h₁ : F.TileOf a T₁)
+    (h₂ : F.TileOf c T₂) {C : Set ℂ} (hC : IsClosed C) (hCc : IsPreconnected C)
+    (hCsub : C ⊆ closure T₁ ∩ closure T₂ ∩ closedBall u 1) {θ φ : ℝ} (hx : ringPt u θ ∈ C) (hq : ringPt u φ ∈ C)
+    (hxq : ringPt u θ ≠ ringPt u φ) (ha : F.GermPseudo u θ .cw a) (hc : F.GermPseudo u θ .ccw c)
+    (ha' : F.GermPseudo u φ .cw a) (hc' : F.GermPseudo u φ .ccw c) : False := by
+  have hdom : ∀ z ∈ closedBall u 1, z ∈ F.dom := fun z hz => B.covers (closedBall_subset_closedBall (by norm_num) hz)
+  have hnr : ∀ z ∈ closedBall u 1, ¬ F.HasRepeatedColour z := fun z hz hr =>
+    Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hz) (Or.inr ⟨hdom z hz, hr⟩)
+  have hne : T₂ ≠ T₁ := fun h => hac (h₁.eq_colour (h ▸ h₂)) |>.elim
+  have hCT : Disjoint C T₂ := Set.disjoint_left.mpr fun z hz hzT =>
+    IsTile.subset_compl_closure h₁.1 h₂.1 hne hzT (hCsub hz).1.1
+  have hloc : ∀ z ∈ C, ∃ r₀ > 0, ∀ r ∈ Ioc 0 r₀, IsPreconnected (T₂ ∩ ball z r) := by
+    intro z hz
+    obtain ⟨r₀, hr₀, -, h⟩ := tile_side (hdom z (hCsub hz).2) (hnr z (hCsub hz).2) h₂ (hCsub hz).1.2
+    exact ⟨r₀, hr₀, fun r hr => (h r hr).1⟩
+  have hfacts : ∀ α : ℝ, ringPt u α ∈ C → F.GermPseudo u α .cw a → F.GermPseudo u α .ccw c →
+      (∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (α + t) ∈ closure T₂ \ C) ∧ ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (α - t) ∉ closure T₂ := by
+    intro α hα haα hcα
+    obtain ⟨⟨δ, hδ, h⟩, h'⟩ := germ_side hac haα hcα h₁ h₂ (hdom _ (hCsub hα).2) (hnr _ (hCsub hα).2) (hCsub hα).1.2
+    exact ⟨⟨δ, hδ, fun t ht => ⟨(h t ht).1, fun hC' => (h t ht).2 (hCsub hC').1.1⟩⟩, h'⟩
+  obtain ⟨hx₁, hx₂⟩ := hfacts θ hx ha hc
+  obtain ⟨hq₁, hq₂⟩ := hfacts φ hq ha' hc'
+  exact orient h₂.1.isOpen hC hCc (fun z hz => (hCsub hz).2) hCT (fun z hz => (hCsub hz).1.2) hloc hx hq hxq hx₁ hx₂ hq₁ hq₂
+
+/-- **Returning arcs do not interleave** (FS110-CB D5 item 1; FS131-KP plan § 4, leaf NEST-X): with `s < s' + 2πn < t < t' + 2πn`, the
+closures of the two joining continua meet (`inter_nonempty_of_interleaved`, after the shift by `2πn`), at a point `z` of `B̄(u, 1)` in the
+closures of the `a`- and `c`-tiles of both pairs. If a tile of the second pair is neither tile of the first, `z` carries three tiles, so it is
+cubic trichromatic with three pseudo-colours, disjoint from `u`'s and within `1` of `u`, and `cor3` puts a four-colour point in `B̄(u, 2)`, against
+H. If the pairs share their tiles — in the same order `r(s′)`, in the swapped order `r(t′)` — that point is a second change point from `a` to `c`
+on the preconnected `cl K ∪ cl K′`, against one-sidedness (`BaseCtx.orient_pair`). (FS131-IP4; the planned child PATH was not needed.) -/
+theorem BaseCtx.retArcs_not_interleaved (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t') (n : ℤ)
+    (hi : s < s' + 2 * π * n ∧ s' + 2 * π * n < t ∧ t < t' + 2 * π * n) : False := by
+  obtain ⟨hst, hst', a, c, hac, ha, hc, hc₂, ha₂, T₁, T₂, h₁, h₂, K, hK, hsK, htK, hKsub⟩ := h
+  obtain ⟨hst₁, hst₁', a', c', hac', ha', hc', hc₂', ha₂', T₁', T₂', h₁', h₂', K', hK', hsK', htK', hK'sub⟩ := h'
+  have hπ := Real.pi_pos
+  have hper : ∀ x : ℝ, ringPt u (x + 2 * π * n) = ringPt u x := fun x => by simp only [ringPt, e_add_int_mul]
+  have hdom : ∀ z ∈ closedBall u 1, z ∈ F.dom := fun z hz => B.covers (closedBall_subset_closedBall (by norm_num) hz)
+  have hgood : ∀ z ∈ closedBall u 1, z ∉ F.fourSet ∪ F.repSet := fun z hz =>
+    Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hz)
+  have hcl : ∀ {L : Set ℂ} {A₁ A₂ : Set ℂ}, L ⊆ closure A₁ ∩ closure A₂ ∩ closedBall u 1 →
+      closure L ⊆ closure A₁ ∩ closure A₂ ∩ closedBall u 1 := fun hL =>
+    closure_minimal hL ((isClosed_closure.inter isClosed_closure).inter isClosed_closedBall)
+  have hKc := hcl hKsub
+  have hK'c := hcl hK'sub
+  obtain ⟨z, hzK, hzK'⟩ := inter_nonempty_of_interleaved (u := u) isClosed_closure isClosed_closure hK.isPreconnected.closure
+    hK'.isPreconnected.closure (fun y hy => (hKc hy).2) (fun y hy => (hK'c hy).2) hi.1 hi.2.1 hi.2.2 (by linarith)
+    (subset_closure hsK) (subset_closure htK) (by rw [hper]; exact subset_closure hsK') (by rw [hper]; exact subset_closure htK')
+  have hzB := (hKc hzK).2
+  -- the pseudo-colours are not `u`'s
+  have hnotu : ∀ {θ : ℝ} {s : Side} {j : Fin 6}, F.GermPseudo u θ s j → j ∉ F.coloursAt u := by
+    intro θ s j hj
+    obtain ⟨δ, hδ, hg⟩ := hj
+    have : j ∈ F.pseudoColours u (ringPt u (θ + s.sign * (δ / 2))) := by
+      rw [hg ⟨δ / 2, ⟨half_pos hδ, half_lt_self hδ⟩, rfl⟩]; rfl
+    exact this.2
+  have hne12 : T₁ ≠ T₂ := fun h => hac (h₁.eq_colour (h ▸ h₂))
+  -- a third tile at `z` makes `z` a cubic trichromatic point complementary to `u` at distance `≤ 1`
+  have hthird : ∀ T₃ d, F.TileOf d T₃ → z ∈ closure T₃ → d ∉ F.coloursAt u → T₃ ≠ T₁ → T₃ ≠ T₂ → False := by
+    intro T₃ d h₃ hz₃ hdu h31 h32
+    have hcub : F.IsCubicTrichromatic z :=
+      isCubicTrichromatic_of_three_tiles (hdom z hzB) h₁.1 h₂.1 h₃.1 hne12 h31.symm h32.symm (hKc hzK).1.1 (hKc hzK).1.2 hz₃
+        (hgood z hzB)
+    have hnr : ¬ F.HasRepeatedColour z := fun hr => hgood z hzB (Or.inr ⟨hdom z hzB, hr⟩)
+    have hdiff : ∀ {A A' : Set ℂ} {j j' : Fin 6}, F.TileOf j A → F.TileOf j' A' → z ∈ closure A → z ∈ closure A' → A ≠ A' →
+        j ≠ j' := fun hA hA' hzA hzA' hAA' hjj => hnr (hasRepeatedColour_of_two_tiles (hdom z hzB) hA (hjj ▸ hA') hAA' hzA hzA')
+    have hsub : ({a, c, d} : Set (Fin 6)) ⊆ F.coloursAt z := by
+      intro j hj
+      rcases hj with rfl | rfl | rfl
+      · exact mem_coloursAt_of_tileOf h₁ (hKc hzK).1.1
+      · exact mem_coloursAt_of_tileOf h₂ (hKc hzK).1.2
+      · exact mem_coloursAt_of_tileOf h₃ hz₃
+    have h3 : ({a, c, d} : Set (Fin 6)).ncard = 3 :=
+      Set.ncard_eq_three.mpr ⟨a, c, d, hac, hdiff h₁ h₃ (hKc hzK).1.1 hz₃ h31.symm,
+        hdiff h₂ h₃ (hKc hzK).1.2 hz₃ h32.symm, rfl⟩
+    have heq : ({a, c, d} : Set (Fin 6)) = F.coloursAt z :=
+      Set.eq_of_subset_of_ncard_le hsub (by rw [h3, hcub.2]) (Set.toFinite _)
+    have hdis : Disjoint (F.coloursAt z) (F.coloursAt u) := by
+      rw [← heq, Set.disjoint_left]
+      rintro j (rfl | rfl | rfl)
+      · exact hnotu ha
+      · exact hnotu hc
+      · exact hdu
+    -- `cor3` (FS112-N3-COR3) puts a four-colour point within `1` of `z`, inside `B̄(u, 2)`
+    have hcov : ∀ {q : ℂ}, q ∈ closedBall u 1 → F.Covers q 1 := fun {q} hq y hy =>
+      B.covers (show y ∈ closedBall u 2 by rw [mem_closedBall] at hq hy ⊢; linarith [dist_triangle y q u])
+    obtain ⟨qp, qm, -, hq⟩ := cor3 B.valid hcub B.cubic (hcov hzB) (hcov (mem_closedBall_self zero_le_one)) hdis
+      (by rw [mem_closedBall] at hzB; linarith)
+    obtain ⟨hqp, -, h4, -⟩ := hq qp (by simp)
+    have hqu : qp ∈ closedBall u 2 := by
+      rw [mem_closedBall] at hzB ⊢; linarith [dist_triangle qp z u]
+    exact Set.disjoint_left.mp B.hyp hqu (Or.inl ⟨B.covers hqu, h4⟩)
+  by_cases h1 : T₁' ≠ T₁ ∧ T₁' ≠ T₂
+  · exact hthird T₁' a' h₁' (hK'c hzK').1.1 (hnotu ha') h1.1 h1.2
+  by_cases h2 : T₂' ≠ T₁ ∧ T₂' ≠ T₂
+  · exact hthird T₂' c' h₂' (hK'c hzK').1.2 (hnotu hc') h2.1 h2.2
+  push Not at h1 h2
+  have hne' : T₁' ≠ T₂' := fun h => hac' (h₁'.eq_colour (h ▸ h₂'))
+  set C := closure K ∪ closure K' with hCdef
+  have hCc : IsPreconnected C := hK.isPreconnected.closure.union z hzK hzK' hK'.isPreconnected.closure
+  have hCcl : IsClosed C := isClosed_closure.union isClosed_closure
+  have hdist : ∀ x : ℝ, s < x → x < s + 2 * π → ringPt u s ≠ ringPt u x := fun x h0 h1 h => by
+    rw [ringPt_eq_polarPt, ringPt_eq_polarPt] at h
+    exact polarPt_ne_of_sub one_pos one_pos (by linarith) (by linarith) h.symm
+  rcases eq_or_ne T₁' T₁ with hT1 | hT1
+  · -- the same tiles in the same order: `r(s′)` is a second change point from `a` to `c`
+    have hT2 : T₂' = T₂ := by
+      rcases eq_or_ne T₂' T₁ with h | h
+      · exact absurd (hT1.trans h.symm) hne'
+      · exact h2 h
+    subst hT1 hT2
+    have haa : a' = a := h₁'.eq_colour h₁
+    have hcc : c' = c := h₂'.eq_colour h₂
+    subst haa hcc
+    refine B.orient_pair hac h₁ h₂ hCcl hCc (union_subset hKc hK'c) (subset_closure hsK |> Or.inl)
+      (subset_closure hsK' |> Or.inr) ?_ ha hc ha' hc'
+    rw [← hper s']
+    exact hdist _ hi.1 (by linarith)
+  · -- the same tiles swapped: `r(t′)` is a second change point from `a` to `c`
+    have hT1' : T₁' = T₂ := h1 hT1
+    have hT2' : T₂' = T₁ := by
+      by_contra h
+      exact hne' (hT1'.trans (h2 h).symm)
+    subst hT1' hT2'
+    have hca : a' = c := h₁'.eq_colour h₂
+    have hac' : c' = a := h₂'.eq_colour h₁
+    subst hca hac'
+    refine B.orient_pair hac h₁ h₂ hCcl hCc (union_subset hKc (fun y hy => ⟨⟨(hK'c hy).1.2, (hK'c hy).1.1⟩, (hK'c hy).2⟩))
+      (subset_closure hsK |> Or.inl) (subset_closure htK' |> Or.inr) ?_ ha hc hc₂' ha₂'
+    rw [← hper t']
+    exact hdist _ (by linarith) (by linarith)
+
+/-- **Returning arcs do not abut** (FS131-KP plan § 4, leaf NEST-A): at a common end `p = r(t) = r(s')` the germs force the second pair to be `(c, a)` (`GermPseudo.eq_of_cw`), so its tiles are the
+first pair's swapped (no repeated colour, under H); then `r(s)` and `r(t′)` are two distinct change points from `a` to `c` on the preconnected
+`cl K ∪ cl K′`, against one-sidedness (`BaseCtx.orient_pair`). (FS131-IP4; the planned child PATH was not needed.) -/
+theorem BaseCtx.retArcs_not_abut (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t')
+    (hab : ringPt u t = ringPt u s') : False := by
+  obtain ⟨hst, hst', a, c, hac, ha, hc, hc₂, ha₂, T₁, T₂, h₁, h₂, K, hK, hsK, htK, hKsub⟩ := h
+  obtain ⟨hst₁, hst₁', a', c', hac', ha', hc', hc₂', ha₂', T₁', T₂', h₁', h₂', K', hK', hsK', htK', hK'sub⟩ := h'
+  have hπ := Real.pi_pos
+  have he : e t = e s' := by
+    have := congrArg (· - u) hab
+    simpa [ringPt] using this
+  obtain ⟨m, hm⟩ := e_eq_e_iff.mp he
+  -- the germs at the common end make the second pair `(c, a)`
+  have hca : a' = c := GermPseudo.eq_of_same (ha'.congr_e he.symm) hc₂
+  have hac'' : c' = a := GermPseudo.eq_of_same (hc'.congr_e he.symm) ha₂
+  subst hca hac''
+  -- and its tiles the first pair's, swapped (one sector per colour at the common end)
+  have hp : ringPt u t ∈ closedBall u 1 := (hKsub htK).2
+  have hpd : ringPt u t ∈ F.dom := B.covers (closedBall_subset_closedBall (by norm_num) hp)
+  have hnr : ¬ F.HasRepeatedColour (ringPt u t) := fun hr =>
+    Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hp) (Or.inr ⟨hpd, hr⟩)
+  have hpK' : ringPt u t ∈ K' := hab ▸ hsK'
+  have hT1 : T₁' = T₂ := by
+    by_contra hne
+    exact hnr (hasRepeatedColour_of_two_tiles hpd h₁' h₂ hne (hK'sub hpK').1.1 (hKsub htK).1.2)
+  have hT2 : T₂' = T₁ := by
+    by_contra hne
+    exact hnr (hasRepeatedColour_of_two_tiles hpd h₂' h₁ hne (hK'sub hpK').1.2 (hKsub htK).1.1)
+  subst hT1 hT2
+  have hcl : ∀ {L : Set ℂ} {A₁ A₂ : Set ℂ}, L ⊆ closure A₁ ∩ closure A₂ ∩ closedBall u 1 →
+      closure L ⊆ closure A₁ ∩ closure A₂ ∩ closedBall u 1 := fun hL =>
+    closure_minimal hL ((isClosed_closure.inter isClosed_closure).inter isClosed_closedBall)
+  have hKc := hcl hKsub
+  have hK'c := hcl hK'sub
+  -- `r(s)` and `r(t′)` are two change points from `a` to `c` on the continuum `cl K ∪ cl K′`
+  refine B.orient_pair hac h₁ h₂ (isClosed_closure.union isClosed_closure)
+    (hK.isPreconnected.closure.union (ringPt u t) (subset_closure htK) (subset_closure hpK') hK'.isPreconnected.closure)
+    (union_subset hKc (fun y hy => ⟨⟨(hK'c hy).1.2, (hK'c hy).1.1⟩, (hK'c hy).2⟩)) (Or.inl (subset_closure hsK))
+    (Or.inr (subset_closure htK')) ?_ ha hc hc₂' ha₂'
+  have hper : ringPt u (t' + m * (2 * π)) = ringPt u t' := by
+    simp only [ringPt]; rw [show t' + m * (2 * π) = t' + 2 * π * m by ring, e_add_int_mul]
+  rw [← hper, ringPt_eq_polarPt, ringPt_eq_polarPt]
+  intro h0
+  exact polarPt_ne_of_sub one_pos one_pos (a := t' + m * (2 * π)) (b := s) (by linarith) (by linarith) h0.symm
+
 /-- **The returning arcs nest or are disjoint** (FS110-CB D5 item 1, "paths do not cross; their arcs nest or are disjoint"; FS110-CD Lemma R
 step 4) — **planar core**: interleaved ends would make the `a`-tile of one pair cross the boundary of the other's tiles away from a
 four-colour point, and abutting ends would need two inner `a|c` germs at one point of `ω(u)` (each point there has at most three colours, one
 sector each, under H, and an `a|c` germ along `ω(u)` is an inert arc, excluded by `NoInertNear`) — the joining continua `K` of `IsRetArc` carry
-this. Planned over the finite boundary graph of the disc (plan § 4, leaf C3). -/
+this. Reduced (FS131-KP, `plans/FS131-planar-kernel-plan.md` § 4) to `ringArc_cases`, `retArcs_not_interleaved` (over the crossing
+lemma `inter_nonempty_of_interleaved`) and `retArcs_not_abut`. -/
 theorem BaseCtx.retArcs_nested (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t') :
     Disjoint (ringArc u s t) (ringArc u s' t') ∨ ringArc u s t ⊆ ringArc u s' t' ∨ ringArc u s' t' ⊆ ringArc u s t := by
-  sorry
+  rcases ringArc_cases u h.1 h.2.1 h'.1 h'.2.1 with hd | hn | hn | ⟨n, hi | hi⟩ | hab | hab
+  · exact Or.inl hd
+  · exact Or.inr (Or.inl hn)
+  · exact Or.inr (Or.inr hn)
+  · exact (B.retArcs_not_interleaved h h' n hi).elim
+  · exact (B.retArcs_not_interleaved h' h (-n) ⟨by push_cast; linarith, by push_cast; linarith, by push_cast; linarith⟩).elim
+  · exact (B.retArcs_not_abut h h' hab).elim
+  · exact (B.retArcs_not_abut h' h hab).elim
+
+/-- **The colours of a point of `B̄(u, 1)` carrying two pseudo-colours `a`, `c`**: `a`, `c` and colours of `u` (a third colour off `u`'s would make
+it a cubic trichromatic point complementary to `u` within `1`, and `cor3` puts a four-colour point in `B̄(u, 2)`, against H). -/
+theorem BaseCtx.colours_sub (B : F.BaseCtx u) {z : ℂ} (hz : z ∈ closedBall u 1) {a c : Fin 6} (hac : a ≠ c)
+    (ha : a ∈ F.coloursAt z) (hc : c ∈ F.coloursAt z) (hau : a ∉ F.coloursAt u) (hcu : c ∉ F.coloursAt u) :
+    ∀ j ∈ F.coloursAt z, j = a ∨ j = c ∨ j ∈ F.coloursAt u := by
+  intro j hj
+  by_contra hcon
+  push Not at hcon
+  obtain ⟨hja, hjc, hju⟩ := hcon
+  have hzd : z ∈ F.dom := B.covers (closedBall_subset_closedBall (by norm_num) hz)
+  have hgood : z ∉ F.fourSet ∪ F.repSet := Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hz)
+  have hnr : ¬ F.HasRepeatedColour z := fun hr => hgood (Or.inr ⟨hzd, hr⟩)
+  have hle : (F.coloursAt z).ncard ≤ 3 := by
+    by_contra h; push Not at h; exact hgood (Or.inl ⟨hzd, h⟩)
+  have hsub : ({a, c, j} : Set (Fin 6)) ⊆ F.coloursAt z := by
+    intro i hi; rcases hi with rfl | rfl | rfl
+    · exact ha
+    · exact hc
+    · exact hj
+  have h3 : ({a, c, j} : Set (Fin 6)).ncard = 3 := Set.ncard_eq_three.mpr ⟨a, c, j, hac, Ne.symm hja, Ne.symm hjc, rfl⟩
+  have heq : ({a, c, j} : Set (Fin 6)) = F.coloursAt z :=
+    Set.eq_of_subset_of_ncard_le hsub (by rw [h3]; exact hle) (Set.toFinite _)
+  have hcub : F.IsCubicTrichromatic z := isCubicTrichromatic_of_three_of_noRep hzd (by rw [← heq, h3]) hnr
+  have hdis : Disjoint (F.coloursAt z) (F.coloursAt u) := by
+    rw [← heq, Set.disjoint_left]
+    rintro i (rfl | rfl | rfl)
+    · exact hau
+    · exact hcu
+    · exact hju
+  have hcov : ∀ {q : ℂ}, q ∈ closedBall u 1 → F.Covers q 1 := fun {q} hq y hy =>
+    B.covers (show y ∈ closedBall u 2 by rw [mem_closedBall] at hq hy ⊢; linarith [dist_triangle y q u])
+  obtain ⟨qp, qm, -, hq⟩ := cor3 B.valid hcub B.cubic (hcov hz) (hcov (mem_closedBall_self zero_le_one)) hdis
+    (by rw [mem_closedBall] at hz; linarith)
+  obtain ⟨hqp, -, h4, -⟩ := hq qp (by simp)
+  have hqu : qp ∈ closedBall u 2 := by
+    rw [mem_closedBall] at hz ⊢; linarith [dist_triangle qp z u]
+  exact Set.disjoint_left.mp B.hyp hqu (Or.inl ⟨B.covers hqu, h4⟩)
+
+/-- **The far end gives an endpoint** (FS110-CD Lemma E, FS110-CE R1–R4; FS131-KP plan § 4, leaf END-C): a far end `q` of the `a|c` boundary
+from `r(θ)` (`exists_far_end`) with three colours in `B(u, 1)` is an endpoint outright; a three-colour point on `ω(u)` (`r(θ)` itself
+included) is V-in (its colour of `u` has a tile meeting `B(u, 1)`: CE R2, R4), an endpoint; a two-colour exit `q ≠ r(θ)` closes a returning
+pair through `r(θ)` — against `hout`. The proof (FS131-IP4, read against CD Lemma E and CE R1–R4): with no endpoint, every point of the
+component carries a curve star (`inner_star` inside the disc, `circ_local` on `ω(u)`), of degree `1` at `r(θ)`; the handshake
+(`exists_finset_even_sum_deg`) gives a second odd vertex, a change point of `ω(u)` running `c → a` (`orient_pair` excludes `a → c`); it lies within
+`1` of `r(θ)`, and a chord of exactly `1` is excluded by `pair_ii` with `noBoth`, so it is within `60°` — a returning pair whose arc holds `r(θ)`,
+against `hout`. `IsRetArc`'s `60°` bound needs no change. -/
+theorem BaseCtx.endpoint_of_far_end (B : F.BaseCtx u) {θ : ℝ} {a c : Fin 6} (hac : a ≠ c) (ha : F.GermPseudo u θ .cw a)
+    (hc : F.GermPseudo u θ .ccw c) (hout : ∀ s t, F.IsRetArc u s t → ringPt u θ ∉ ringArc u s t) {T₁ T₂ : Set ℂ}
+    (h₁ : F.TileOf a T₁) (h₂ : F.TileOf c T₂) (hx₁ : ringPt u θ ∈ closure T₁) (hx₂ : ringPt u θ ∈ closure T₂) {q : ℂ}
+    (hq : q ∈ connectedComponentIn (closure T₁ ∩ closure T₂ ∩ closedBall u 1) (ringPt u θ))
+    (hq3 : (F.coloursAt q).ncard = 3 ∨ (q ≠ ringPt u θ ∧ dist q u = 1)) : ∃ p, F.IsEndpoint u (ringPt u θ) a c p := by
+  classical
+  have hπ := Real.pi_pos
+  set x := ringPt u θ with hx
+  set K := closure T₁ ∩ closure T₂ ∩ closedBall u 1 with hKdef
+  set C := connectedComponentIn K x with hCdef
+  have hKsub : ∀ {z}, z ∈ K → z ∈ closure T₁ ∧ z ∈ closure T₂ ∧ z ∈ closedBall u 1 := fun hz => ⟨hz.1.1, hz.1.2, hz.2⟩
+  -- the given far end, if it has three colours inside the disc, is an endpoint outright
+  have hshort : (F.coloursAt q).ncard = 3 → q ∈ ball u 1 → ∃ p, F.IsEndpoint u x a c p := fun h3 hqb =>
+    ⟨q, h3, Or.inl hqb, T₁, T₂, h₁, h₂, hx₁, hx₂, (hKsub (connectedComponentIn_subset _ _ hq)).1,
+      (hKsub (connectedComponentIn_subset _ _ hq)).2.1⟩
+  have main : ∃ p, F.IsEndpoint u x a c p := by
+    by_contra hno
+    have hdomB : ∀ z ∈ closedBall u 1, z ∈ F.dom := fun z hz => B.covers (closedBall_subset_closedBall (by norm_num) hz)
+    have hgood : ∀ z ∈ closedBall u 1, z ∉ F.fourSet ∪ F.repSet := fun z hz =>
+      Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hz)
+    have hnr : ∀ z ∈ closedBall u 1, ¬ F.HasRepeatedColour z := fun z hz hr => hgood z hz (Or.inr ⟨hdomB z hz, hr⟩)
+    have hle3 : ∀ z ∈ closedBall u 1, (F.coloursAt z).ncard ≤ 3 := fun z hz => by
+      by_contra h; push Not at h; exact hgood z hz (Or.inl ⟨hdomB z hz, h⟩)
+    have hnotu : ∀ {θ' : ℝ} {s : Side} {j : Fin 6}, F.GermPseudo u θ' s j → j ∉ F.coloursAt u := by
+      intro θ' s j hj
+      obtain ⟨δ, hδ, hg⟩ := hj
+      have : j ∈ F.pseudoColours u (ringPt u (θ' + s.sign * (δ / 2))) := by
+        rw [hg ⟨δ / 2, ⟨half_pos hδ, half_lt_self hδ⟩, rfl⟩]; rfl
+      exact this.2
+    have hau := hnotu ha
+    have hcu := hnotu hc
+    have hne : T₁ ≠ T₂ := fun h => hac (h₁.eq_colour (h ▸ h₂))
+    have hxu : dist x u = 1 := dist_ringPt u θ
+    have hxB : x ∈ closedBall u 1 := by rw [mem_closedBall, hxu]
+    have hxK : x ∈ K := ⟨⟨hx₁, hx₂⟩, hxB⟩
+    have hcolK : ∀ z ∈ K, ∀ j ∈ F.coloursAt z, j = a ∨ j = c ∨ j ∈ F.coloursAt u := fun z hz =>
+      B.colours_sub (hKsub hz).2.2 hac (mem_coloursAt_of_tileOf h₁ (hKsub hz).1) (mem_coloursAt_of_tileOf h₂ (hKsub hz).2.1) hau hcu
+    have hpseudoK : ∀ z ∈ K, F.pseudoColours u z = {a, c} := by
+      intro z hz
+      ext j
+      simp only [pseudoColours, Set.mem_sdiff, mem_insert_iff, mem_singleton_iff]
+      constructor
+      · rintro ⟨hj, hju⟩
+        rcases hcolK z hz j hj with h | h | h
+        · exact Or.inl h
+        · exact Or.inr h
+        · exact absurd h hju
+      · rintro (rfl | rfl)
+        · exact ⟨mem_coloursAt_of_tileOf h₁ (hKsub hz).1, hau⟩
+        · exact ⟨mem_coloursAt_of_tileOf h₂ (hKsub hz).2.1, hcu⟩
+    -- a third tile at a point of `K` misses the closed disc (else the point is an endpoint: inside, or V-in)
+    have hVout : ∀ z ∈ K, ∀ j T, F.TileOf j T → z ∈ closure T → j ≠ a → j ≠ c → Disjoint T (closedBall u 1) := by
+      intro z hz j T hT hzT hja hjc
+      have hzB := (hKsub hz).2.2
+      have hjz : j ∈ F.coloursAt z := mem_coloursAt_of_tileOf hT hzT
+      have h3 : (F.coloursAt z).ncard = 3 := by
+        refine le_antisymm (hle3 z hzB) ?_
+        have hsub : ({a, c, j} : Set (Fin 6)) ⊆ F.coloursAt z := by
+          intro i hi
+          rcases hi with rfl | rfl | rfl
+          · exact mem_coloursAt_of_tileOf h₁ (hKsub hz).1
+          · exact mem_coloursAt_of_tileOf h₂ (hKsub hz).2.1
+          · exact hjz
+        have := Set.ncard_le_ncard hsub (Set.toFinite _)
+        rwa [Set.ncard_eq_three.mpr ⟨a, c, j, hac, Ne.symm hja, Ne.symm hjc, rfl⟩] at this
+      have hendpt : (z ∈ ball u 1 ∨ F.VIn u z) → False := fun h =>
+        hno ⟨z, h3, h, T₁, T₂, h₁, h₂, hx₁, hx₂, (hKsub hz).1, (hKsub hz).2.1⟩
+      have hzu : dist z u = 1 := by
+        by_contra h
+        exact hendpt (Or.inl (lt_of_le_of_ne (mem_closedBall.mp hzB) h))
+      have hju : j ∈ F.coloursAt u := by
+        rcases hcolK z hz j hjz with h | h | h
+        · exact absurd h hja
+        · exact absurd h hjc
+        · exact h
+      exact disjoint_closedBall_of_isOpen hT.1.isOpen
+        (Set.disjoint_left.mpr fun w hwT hwb => hendpt (Or.inr ⟨hzu, j, hju, T, hT, hzT, w, hwT, hwb⟩))
+    -- the points of `ω(u)` in `cl T₁ ∩ cl T₂` are finitely many (`pseudo_finite`), so isolated
+    have hiso : ∀ z, ∃ ε > 0, ∀ w ∈ ball z ε, w ≠ z → w ∈ closure T₁ → w ∈ closure T₂ → ‖w - u‖ ≠ 1 := by
+      have hfin := B.pseudo_finite (mem_closedBall_self zero_le_one) B.cubic
+      set W := closure T₁ ∩ closure T₂ ∩ sphere u 1 with hW
+      have hWfin : W.Finite := by
+        refine (hfin.image (ringPt u)).subset ?_
+        rintro w ⟨⟨hw1, hw2⟩, hws⟩
+        rw [mem_sphere, dist_eq_norm] at hws
+        obtain ⟨θ', hθ', rfl⟩ := exists_Ico_ringPt hws
+        refine ⟨θ', ⟨hθ', ?_⟩, rfl⟩
+        have hsub : ({a, c} : Set (Fin 6)) ⊆ F.pseudoColours u (ringPt u θ') :=
+          insert_subset_iff.mpr ⟨⟨mem_coloursAt_of_tileOf h₁ hw1, hau⟩, singleton_subset_iff.mpr ⟨mem_coloursAt_of_tileOf h₂ hw2, hcu⟩⟩
+        have := Set.ncard_le_ncard hsub (Set.toFinite _)
+        rw [Set.ncard_pair hac] at this
+        omega
+      intro z
+      have hcl : IsClosed (W \ {z}) := (hWfin.subset sdiff_subset).isClosed
+      obtain ⟨ε, hε, hεb⟩ := Metric.isOpen_iff.mp hcl.isOpen_compl z (fun h => h.2 rfl)
+      exact ⟨ε, hε, fun w hw hwz hw1 hw2 hwu => hεb hw ⟨⟨⟨hw1, hw2⟩, by rw [mem_sphere, dist_eq_norm]; exact hwu⟩, hwz⟩⟩
+    have hKc : IsCompact K := (isCompact_closedBall u 1).inter_left (isClosed_closure.inter isClosed_closure)
+    have hxC : x ∈ C := mem_connectedComponentIn hxK
+    have hCK : C ⊆ K := connectedComponentIn_subset _ _
+    have hCcl : IsClosed C := isClosed_of_closure_subset
+      (isPreconnected_connectedComponentIn.closure.subset_connectedComponentIn (subset_closure hxC)
+        (closure_minimal hCK hKc.isClosed))
+    have hCc : IsCompact C := hKc.of_isClosed_subset hCcl hCK
+    -- the stars: two rays inside the disc; at a circle point, one ray exactly at a change point
+    have hstar : ∀ z ∈ C, ∃ d : ℕ, d ≤ 2 ∧ HasCurveStar C z d ∧ (dist z u < 1 → d = 2) ∧
+        (dist z u = 1 → ∃ φ, z = ringPt u φ ∧ (d = 1 ↔ ∃ δ > 0,
+          (∀ t ∈ Ioo 0 δ, ringPt u (φ - t) ∈ closure T₁ \ closure T₂ ∧ ringPt u (φ + t) ∈ closure T₂ \ closure T₁) ∨
+          (∀ t ∈ Ioo 0 δ, ringPt u (φ - t) ∈ closure T₂ \ closure T₁ ∧ ringPt u (φ + t) ∈ closure T₁ \ closure T₂))) := by
+      intro z hz
+      have hzK := hCK hz
+      have hzB := (hKsub hzK).2.2
+      rcases lt_or_eq_of_le (mem_closedBall.mp hzB) with hzu | hzu
+      · have h2 : (F.coloursAt z).ncard = 2 := by
+          have hsub : F.coloursAt z ⊆ {a, c} := by
+            intro j hj
+            by_contra hjac
+            simp only [mem_insert_iff, mem_singleton_iff, not_or] at hjac
+            obtain ⟨T, hT, hzT⟩ := (F.mem_coloursAt_iff_exists_tileOf (hdomB z hzB)).mp hj
+            obtain ⟨w, hwT, hwb⟩ := (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨z, hzT, mem_ball.mpr hzu⟩
+            exact Set.disjoint_left.mp (hVout z hzK j T hT hzT hjac.1 hjac.2) hwT (ball_subset_closedBall hwb)
+          refine le_antisymm ?_ ?_
+          · have := Set.ncard_le_ncard hsub (Set.toFinite _); rwa [Set.ncard_pair hac] at this
+          · have := Set.ncard_le_ncard (show ({a, c} : Set (Fin 6)) ⊆ F.coloursAt z from
+              insert_subset_iff.mpr ⟨mem_coloursAt_of_tileOf h₁ (hKsub hzK).1,
+                singleton_subset_iff.mpr (mem_coloursAt_of_tileOf h₂ (hKsub hzK).2.1)⟩) (Set.toFinite _)
+            rwa [Set.ncard_pair hac] at this
+        exact ⟨2, le_rfl, (inner_star hzu (hdomB z hzB) (hnr z hzB) h2 h₁ h₂ hne (hKsub hzK).1 (hKsub hzK).2.1).connectedComponentIn hz,
+          fun _ => rfl, fun h => absurd h (ne_of_lt hzu)⟩
+      · obtain ⟨φ, -, rfl⟩ := exists_Ico_ringPt (show ‖z - u‖ = 1 by rw [← dist_eq_norm]; exact hzu)
+        obtain ⟨d, hd2, hdstar, hdiff⟩ := circ_local hac h₁ h₂ (hdomB _ hzB) (hnr _ hzB) (hle3 _ hzB) (hKsub hzK).1 (hKsub hzK).2.1
+          (fun j T hT hzT hja hjc => hVout _ hzK j T hT hzT hja hjc) (hiso _)
+        exact ⟨d, hd2, hdstar.connectedComponentIn hz, fun h => absurd hzu (ne_of_lt h), fun _ => ⟨φ, rfl, hdiff⟩⟩
+    choose! deg hdeg2 hdegstar hdegin hdegcirc using hstar
+    obtain ⟨N, hN, heven⟩ := exists_finset_even_sum_deg hCc hdegstar
+    -- the degree at `x` is `1`: its germs lie in different tiles
+    have hx1 : deg x = 1 := by
+      obtain ⟨φx, hφx, hiffx⟩ := hdegcirc x hxC hxu
+      rw [hiffx]
+      obtain ⟨⟨δ₁, hδ₁, hccw⟩, ⟨δ₃, hδ₃, hcw₂⟩⟩ := germ_side hac ha hc h₁ h₂ (hdomB x hxB) (hnr x hxB) hx₂
+      obtain ⟨δ₂, hδ₂, hcw₁⟩ := germ_side_cw ha h₁ (hdomB x hxB) (hnr x hxB) hx₁
+      have he : e φx = e θ := by
+        have := congrArg (· - u) hφx
+        simp only [hx, ringPt, add_sub_cancel_left] at this
+        exact this.symm
+      have hp : ∀ t, ringPt u (φx + t) = ringPt u (θ + t) := fun t => by simp only [ringPt, e_add, he]
+      have hm : ∀ t, ringPt u (φx - t) = ringPt u (θ - t) := fun t => by simp only [ringPt, sub_eq_add_neg, e_add, he]
+      refine ⟨min δ₁ (min δ₂ δ₃), lt_min hδ₁ (lt_min hδ₂ hδ₃), Or.inl fun t ht => ⟨?_, ?_⟩⟩
+      · rw [hm]
+        exact ⟨hcw₁ t ⟨ht.1, ht.2.trans_le ((min_le_right _ _).trans (min_le_left _ _))⟩,
+          hcw₂ t ⟨ht.1, ht.2.trans_le ((min_le_right _ _).trans (min_le_right _ _))⟩⟩
+      · rw [hp]
+        exact hccw t ⟨ht.1, ht.2.trans_le (min_le_left _ _)⟩
+    have hxN : x ∈ N := (hN x).mpr ⟨hxC, not_isRegularAt_of_hasCurveStar_one (hx1 ▸ hdegstar x hxC)⟩
+    -- the handshake: a second odd vertex
+    obtain ⟨q', hq'N, hq'x, hq'odd⟩ : ∃ q' ∈ N, q' ≠ x ∧ Odd (deg q') := by
+      by_contra hcon
+      have hev : ∀ v ∈ N.erase x, Even (deg v) := fun v hv => by
+        by_contra h
+        exact hcon ⟨v, Finset.mem_of_mem_erase hv, Finset.ne_of_mem_erase hv, Nat.not_even_iff_odd.mp h⟩
+      rw [← Finset.add_sum_erase N _ hxN, hx1] at heven
+      exact Nat.not_even_one ((Nat.even_add.mp heven).mpr (Finset.even_sum _ hev))
+    have hq'C : q' ∈ C := ((hN q').mp hq'N).1
+    have hq'K := hCK hq'C
+    have hq'B := (hKsub hq'K).2.2
+    have hq'u : dist q' u = 1 := by
+      rcases lt_or_eq_of_le (mem_closedBall.mp hq'B) with h | h
+      · have := hdegin q' hq'C h
+        rw [this] at hq'odd
+        exact absurd hq'odd (by decide)
+      · exact h
+    have hd1 : deg q' = 1 := by
+      have := hdeg2 q' hq'C
+      obtain ⟨m, hm⟩ := hq'odd
+      omega
+    -- the far end is less than `1` from `x` (a tile's diameter; `= 1` is FS112-N3-PAIRS (ii) with `noBoth`)
+    have hdist : dist x q' < 1 := by
+      have hle : dist x q' ≤ 1 := by
+        have := IsTile.closure_subset_closedBall B.valid h₁.1 hx₁ (hKsub hq'K).1
+        rw [mem_closedBall, dist_comm] at this
+        exact this
+      refine lt_of_le_of_ne hle fun h1 => ?_
+      have hcov1 : F.Covers u 1 := fun y hy => B.covers (closedBall_subset_closedBall (by norm_num) hy)
+      rcases pair_ii B.valid B.cubic B.cubic hcov1 hcov1 hxu hq'u h1
+          ⟨fun h => by rw [h, dist_self] at hq'u; norm_num at hq'u, by rw [hq'u]; norm_num⟩ hac (hpseudoK x hxK)
+          (hpseudoK q' hq'K) with h4 | ⟨θ₁, θ₂, hboth⟩
+      · exact absurd (hle3 x hxB) (not_le.mpr (by omega))
+      · rcases noBoth B.valid (hdomB q' hq'B) hboth with h4 | hr
+        · exact absurd (hle3 q' hq'B) (not_le.mpr (by omega))
+        · exact hnr q' hq'B hr
+    obtain ⟨φ, hφ, hiffq⟩ := hdegcirc q' hq'C hq'u
+    obtain ⟨δ, hδ, hG⟩ := hiffq.mp hd1
+    subst hφ
+    have hq'd := hdomB _ hq'B
+    have hcolq := hcolK _ hq'K
+    have hcolq' : ∀ j ∈ F.coloursAt (ringPt u φ), j = c ∨ j = a ∨ j ∈ F.coloursAt u := fun j hj => by
+      rcases hcolq j hj with h | h | h
+      · exact Or.inr (Or.inl h)
+      · exact Or.inl h
+      · exact Or.inr (Or.inr h)
+    have hm1 : ∀ t : ℝ, φ + Side.cw.sign * t = φ - t := fun t => by simp only [Side.sign]; ring
+    have hp1 : ∀ t : ℝ, φ + Side.ccw.sign * t = φ + t := fun t => by simp only [Side.sign, one_mul]
+    rcases hG with hG | hG
+    · -- the same orientation as at `x`: two change points `a → c` on `C`
+      have haq : F.GermPseudo u φ .cw a := germPseudo_of_side h₁ h₂ hq'd (hnr _ hq'B) (hKsub hq'K).2.1 hau hcolq hδ
+        (fun t ht => by rw [hm1]; exact (hG t ht).1)
+      have hcq : F.GermPseudo u φ .ccw c := germPseudo_of_side h₂ h₁ hq'd (hnr _ hq'B) (hKsub hq'K).1 hcu hcolq' hδ
+        (fun t ht => by rw [hp1]; exact (hG t ht).2)
+      exact B.orient_pair hac h₁ h₂ hCcl isPreconnected_connectedComponentIn (fun z hz => hCK hz) hxC hq'C
+        (Ne.symm hq'x) ha hc haq hcq
+    · -- the opposite orientation: a returning pair through `x`, against `hout`
+      have hcq : F.GermPseudo u φ .cw c := germPseudo_of_side h₂ h₁ hq'd (hnr _ hq'B) (hKsub hq'K).1 hcu hcolq' hδ
+        (fun t ht => by rw [hm1]; exact (hG t ht).1)
+      have haq : F.GermPseudo u φ .ccw a := germPseudo_of_side h₁ h₂ hq'd (hnr _ hq'B) (hKsub hq'K).2.1 hau hcolq hδ
+        (fun t ht => by rw [hp1]; exact (hG t ht).2)
+      obtain ⟨φ', hφ', heφ'⟩ := exists_mem_Icc_e_eq (θ - π) φ
+      have hq'φ' : ringPt u φ = ringPt u φ' := by simp only [ringPt, heφ']
+      have habs : |φ' - θ| ≤ π := abs_le.mpr ⟨by linarith [hφ'.1], by linarith [hφ'.2]⟩
+      have hlt : |φ' - θ| < π / 3 :=
+        ((dist_ringPt_ringPt_cmp_one u habs).2.1).mp (by rw [← hq'φ', dist_comm]; exact hdist)
+      have hφ'θ : φ' ≠ θ := fun h => hq'x (by rw [hq'φ', h])
+      have hcq' := hcq.congr_e heφ'.symm
+      have haq' := haq.congr_e heφ'.symm
+      have hCconn : IsConnected C := ⟨⟨x, hxC⟩, isPreconnected_connectedComponentIn⟩
+      have hq'C' : ringPt u φ' ∈ C := hq'φ' ▸ hq'C
+      rcases lt_or_gt_of_ne hφ'θ with hlt' | hgt'
+      · exact hout φ' θ ⟨hlt', by linarith [(abs_lt.mp hlt).1], c, a, Ne.symm hac, hcq', haq', ha, hc, T₂, T₁, h₂, h₁, C,
+          hCconn, hq'C', hxC, fun z hz => ⟨⟨(hKsub (hCK hz)).2.1, (hKsub (hCK hz)).1⟩, (hKsub (hCK hz)).2.2⟩⟩
+          ⟨θ, ⟨hlt'.le, le_rfl⟩, rfl⟩
+      · exact hout θ φ' ⟨hgt', by linarith [(abs_lt.mp hlt).2], a, c, hac, ha, hc, hcq', haq', T₁, T₂, h₁, h₂, C, hCconn,
+          hxC, hq'C', fun z hz => hCK hz⟩ ⟨θ, ⟨le_rfl, hgt'.le⟩, rfl⟩
+  rcases hq3 with h3 | -
+  · by_cases hqb : q ∈ ball u 1
+    · exact hshort h3 hqb
+    · exact main
+  · exact main
 
 /-- **A non-returning change point has an endpoint** (`[SokolovVoronov2025]` Prop. 19(b) as FS110-CD Lemma E and FS110-CE R1–R4 repaired it,
 path-free in its conclusion) — **planar core**: a change point `r(θ)` of the pseudo-colouring of `ω(u)` with pair `{a, c}`, outside every returning
 arc (CD's sense: `IsRetArc` carries the joining `a|c` continuum in the closed disc, inventory item 232), has an
 endpoint: the `a|c` boundary from it, continued through spikes, ends at a three-colour point of `B(u, 1)` or at a V-in vertex of `ω(u)`, in the
-closures of the two tiles at `r(θ)`. Planned over the finite boundary graph (the handshake lemma, plan § 4, leaf C4). -/
+closures of the two tiles at `r(θ)`. Reduced (FS131-KP plan § 4) to `exists_far_end` (the handshake on the finite boundary graph) and
+`endpoint_of_far_end`; the dead disjunct of `hc` by `GermPseudo.eq_of_cw`. -/
 theorem BaseCtx.exists_endpoint (B : F.BaseCtx u) {θ : ℝ} {a c : Fin 6} (hac : a ≠ c) (ha : F.GermPseudo u θ .cw a)
     (hc : F.GermPseudo u θ .ccw c ∨ (F.GermPseudo u θ .cw c ∧ F.GermPseudo u θ .ccw a))
     (hout : ∀ s t, F.IsRetArc u s t → ringPt u θ ∉ ringArc u s t) :
     ∃ p, F.IsEndpoint u (ringPt u θ) a c p := by
-  sorry
+  rcases hc with hc | ⟨hc', -⟩
+  · obtain ⟨T₁, T₂, h₁, h₂, hx₁, hx₂, q, hq, hq3⟩ := exists_far_end B.valid B.covers B.hyp hac ha hc
+    exact B.endpoint_of_far_end hac ha hc hout h₁ h₂ hx₁ hx₂ hq hq3
+  · exact absurd (GermPseudo.eq_of_cw ha hc') hac
 
 /-- **The eleventh point** (`[SokolovVoronov2025]` p. 28, "on the boundary of the union of three regions … whose vertex is `u`, there is at
 least one more trichromatic point"; FS110-CD § 2.6; FS112-N3-3) — proved from `B.unenclosed` (FS131-E4 E4-RIM, `plans/FS131-E4-derivation.md`
@@ -1168,8 +2335,8 @@ hypothesis `UnenclosedC u` replaces that step. A three-colour point of `B̄(u, 1
 colours lie in `B(u, 1)`. -/
 theorem BaseCtx.exists_eleventh (B : F.BaseCtx u) :
     ∃ q ∈ closedBall u 1, (F.coloursAt q).ncard = 3 ∧ (F.coloursAt q ∩ F.coloursAt u).ncard = 2 ∧
-      ∀ j ∈ F.coloursAt q ∩ F.coloursAt u, ∀ T, F.TileOf j T → q ∈ closure T → T ⊆ ball u 1 := by
-  sorry
+      ∀ j ∈ F.coloursAt q ∩ F.coloursAt u, ∀ T, F.TileOf j T → q ∈ closure T → T ⊆ ball u 1 :=
+  exists_eleventh_of B.valid B.covers B.cubic B.hyp B.unenclosed
 
 /-! ## D — the refuters and the distances -/
 
@@ -1436,14 +2603,980 @@ theorem BaseCtx.cor3_base (B : F.BaseCtx u) {p p' : ℂ} (hp : p ∈ closedBall 
   have hdom : qp ∈ F.dom := B.covers hqu
   exact Set.disjoint_left.mp B.hyp hqu (Or.inl ⟨hdom, h4⟩)
 
+/-! ### The unit-distance linkage of two unit circles (FS131-I5g, for `l3_base`; BASE-V § 1b.3 step 1) -/
+
+/-- A cosine level is met finitely often on a compact interval. -/
+theorem link_cos_fibre (c a b : ℝ) : {θ | θ ∈ Icc a b ∧ Real.cos θ = c}.Finite := by
+  by_cases h : ∃ θ₀, Real.cos θ₀ = c
+  · obtain ⟨θ₀, h₀⟩ := h
+    have hπ := Real.pi_pos
+    set N : ℤ := ⌈(|a| + |b| + |θ₀|) / (2 * π)⌉ with hN
+    set K := Finset.Icc (-N) N
+    refine ((K.finite_toSet.image fun k : ℤ => 2 * k * π + θ₀).union
+      (K.finite_toSet.image fun k : ℤ => 2 * k * π - θ₀)).subset ?_
+    rintro θ ⟨hθ, hc⟩
+    obtain ⟨k, hk⟩ := Real.cos_eq_cos_iff.mp (h₀.trans hc.symm)
+    have hθab : |θ| ≤ |a| + |b| := by
+      rw [abs_le]; constructor <;> cases abs_cases a <;> cases abs_cases b <;> linarith [hθ.1, hθ.2]
+    have h2k : |2 * k * π| ≤ |a| + |b| + |θ₀| := by
+      rcases hk with hk | hk
+      · have : 2 * k * π = θ - θ₀ := by linarith
+        rw [this]; linarith [abs_sub θ θ₀]
+      · have : 2 * k * π = θ + θ₀ := by linarith
+        rw [this]; linarith [abs_add_le θ θ₀]
+    have hkN : |(k : ℝ)| ≤ N := by
+      have : |(k : ℝ)| * (2 * π) ≤ |a| + |b| + |θ₀| := by
+        rw [show 2 * (k : ℝ) * π = k * (2 * π) by ring, abs_mul, abs_of_pos (by positivity : (0 : ℝ) < 2 * π)] at h2k
+        exact h2k
+      have h' : |(k : ℝ)| ≤ (|a| + |b| + |θ₀|) / (2 * π) := by rw [le_div_iff₀ (by positivity)]; exact this
+      exact h'.trans (Int.le_ceil _)
+    have hkK : k ∈ K := by
+      rw [Finset.mem_Icc]
+      have : |k| ≤ N := by exact_mod_cast hkN
+      rw [abs_le] at this; exact this
+    rcases hk with hk | hk
+    · left; exact ⟨k, hkK, hk.symm⟩
+    · right; exact ⟨k, hkK, hk.symm⟩
+  · push Not at h
+    exact Set.finite_empty.subset fun θ hθ => h θ hθ.2
+
+/-- **A point on two unit circles** with distinct centres `c₁`, `c₂` is `m + r i (c₂ − c₁)` with `m` the midpoint and `r² |c₂ − c₁|² =
+1 − |c₂ − c₁|²/4`. -/
+theorem link_circles_rep {c₁ c₂ z : ℂ} (hne : c₁ ≠ c₂) (h₁ : dist z c₁ = 1) (h₂ : dist z c₂ = 1) :
+    ∃ r : ℝ, z = (c₁ + c₂) / 2 + r * I * (c₂ - c₁) ∧ r ^ 2 * ‖c₂ - c₁‖ ^ 2 = 1 - ‖c₂ - c₁‖ ^ 2 / 4 := by
+  have e1 := dist_sq_re_im z c₁
+  have e2 := dist_sq_re_im z c₂
+  rw [h₁] at e1; rw [h₂] at e2
+  have hv : ‖c₂ - c₁‖ ^ 2 = (c₂.re - c₁.re) ^ 2 + (c₂.im - c₁.im) ^ 2 := by
+    rw [Complex.sq_norm, Complex.normSq_apply]; simp only [Complex.sub_re, Complex.sub_im]; ring
+  have hv0 : 0 < (c₂.re - c₁.re) ^ 2 + (c₂.im - c₁.im) ^ 2 := by
+    rw [← hv]; have : 0 < ‖c₂ - c₁‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hne.symm); positivity
+  have horth : (z.re - (c₁.re + c₂.re) / 2) * (c₂.re - c₁.re) + (z.im - (c₁.im + c₂.im) / 2) * (c₂.im - c₁.im) = 0 := by
+    nlinarith
+  have hab : (z.re - (c₁.re + c₂.re) / 2) ^ 2 + (z.im - (c₁.im + c₂.im) / 2) ^ 2 =
+      1 - ((c₂.re - c₁.re) ^ 2 + (c₂.im - c₁.im) ^ 2) / 4 := by nlinarith
+  refine ⟨((z.im - (c₁.im + c₂.im) / 2) * (c₂.re - c₁.re) - (z.re - (c₁.re + c₂.re) / 2) * (c₂.im - c₁.im)) /
+    ((c₂.re - c₁.re) ^ 2 + (c₂.im - c₁.im) ^ 2), ?_, ?_⟩
+  · apply Complex.ext
+    · simp only [Complex.add_re, Complex.div_re, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+        Complex.I_re, Complex.I_im, Complex.sub_re, Complex.sub_im, Complex.add_im]
+      norm_num
+      field_simp
+      linear_combination (8 * (c₂.re - c₁.re)) * horth
+    · simp only [Complex.add_im, Complex.div_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+        Complex.I_re, Complex.I_im, Complex.sub_re, Complex.sub_im, Complex.add_re]
+      norm_num
+      field_simp
+      linear_combination (8 * (c₂.im - c₁.im)) * horth
+  · rw [hv, div_pow]
+    field_simp
+    linear_combination (16 * ((c₂.re - c₁.re) ^ 2 + (c₂.im - c₁.im) ^ 2)) * hab -
+      16 * ((z.re - (c₁.re + c₂.re) / 2) * (c₂.re - c₁.re) + (z.im - (c₁.im + c₂.im) / 2) * (c₂.im - c₁.im)) * horth
+
+/-- **Two distinct points on two unit circles**: every common point is one of them, and `|z₁ − z₂|² = 4 − |c₂ − c₁|²`. -/
+theorem link_circles_two {c₁ c₂ z₁ z₂ : ℂ} (hne : c₁ ≠ c₂) (h₁₁ : dist z₁ c₁ = 1) (h₁₂ : dist z₁ c₂ = 1)
+    (h₂₁ : dist z₂ c₁ = 1) (h₂₂ : dist z₂ c₂ = 1) (hz : z₁ ≠ z₂) :
+    (∀ z, dist z c₁ = 1 → dist z c₂ = 1 → z = z₁ ∨ z = z₂) ∧ ‖z₁ - z₂‖ ^ 2 = 4 - ‖c₂ - c₁‖ ^ 2 := by
+  have hv : 0 < ‖c₂ - c₁‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hne.symm)
+  have hv2 : 0 < ‖c₂ - c₁‖ ^ 2 := by positivity
+  obtain ⟨r₁, e₁, q₁⟩ := link_circles_rep hne h₁₁ h₁₂
+  obtain ⟨r₂, e₂, q₂⟩ := link_circles_rep hne h₂₁ h₂₂
+  have hsq : ∀ r r' : ℝ, r ^ 2 * ‖c₂ - c₁‖ ^ 2 = 1 - ‖c₂ - c₁‖ ^ 2 / 4 → r' ^ 2 * ‖c₂ - c₁‖ ^ 2 = 1 - ‖c₂ - c₁‖ ^ 2 / 4 →
+      r = r' ∨ r = -r' := by
+    intro r r' h h'
+    have : r ^ 2 = r' ^ 2 := by
+      have := h.trans h'.symm
+      exact mul_right_cancel₀ hv2.ne' this
+    exact sq_eq_sq_iff_eq_or_eq_neg.mp this
+  have hr : r₂ = -r₁ := by
+    rcases hsq r₂ r₁ q₂ q₁ with h | h
+    · exact absurd (by rw [e₁, e₂, h]) hz
+    · exact h
+  refine ⟨fun z h₁ h₂ => ?_, ?_⟩
+  · obtain ⟨r, e, q⟩ := link_circles_rep hne h₁ h₂
+    rcases hsq r r₁ q q₁ with h | h
+    · left; rw [e, e₁, h]
+    · right; rw [e, e₂, h, hr]
+  · have : z₁ - z₂ = ((2 * r₁ : ℝ) : ℂ) * (I * (c₂ - c₁)) := by rw [e₁, e₂, hr]; push_cast; ring
+    rw [this, norm_mul, norm_mul, Complex.norm_I, Complex.norm_real, Real.norm_eq_abs, one_mul, mul_pow, sq_abs]
+    linear_combination 4 * q₁
+
+/-- Two unit circles with distinct centres meet in finitely many points. -/
+theorem link_circles_finite {c₁ c₂ : ℂ} (hne : c₁ ≠ c₂) : {z | dist z c₁ = 1 ∧ dist z c₂ = 1}.Finite := by
+  by_cases h : ∃ z₁, dist z₁ c₁ = 1 ∧ dist z₁ c₂ = 1
+  · obtain ⟨z₁, h₁, h₂⟩ := h
+    by_cases h' : ∃ z₂, dist z₂ c₁ = 1 ∧ dist z₂ c₂ = 1 ∧ z₂ ≠ z₁
+    · obtain ⟨z₂, h₂₁, h₂₂, hne'⟩ := h'
+      refine (Set.toFinite {z₁, z₂}).subset fun z hz => ?_
+      rcases (link_circles_two hne h₁ h₂ h₂₁ h₂₂ hne'.symm).1 z hz.1 hz.2 with rfl | rfl <;> simp
+    · push Not at h'
+      exact (Set.finite_singleton z₁).subset fun z hz => h' z hz.1 hz.2
+  · push Not at h
+    exact Set.finite_empty.subset fun z hz => h z hz.1 hz.2
+
+
+/-- The norm of `e α − t` squared. -/
+theorem link_norm_e_sub_sq (α t : ℝ) : ‖e α - t‖ ^ 2 = 1 + t ^ 2 - 2 * t * Real.cos α := by
+  rw [Complex.sq_norm, Complex.normSq_apply]
+  simp only [Complex.sub_re, Complex.sub_im, re_e, im_e, Complex.ofReal_re, Complex.ofReal_im, sub_zero]
+  nlinarith [Real.sin_sq_add_cos_sq α]
+
+/-- Along `φ = φ_c + θ_X cos θ` (`θ_X < π`), equal points `r_{u₁}(φ θ) = r_{u₁}(φ θ₀)` have equal `cos θ`. -/
+theorem link_cos_eq_of_ringPt {u₁ : ℂ} {φ : ℝ → ℝ} {φc θX : ℝ} (hθX0 : 0 < θX) (hθXπ : θX < π)
+    (hφ : ∀ θ, φ θ = φc + θX * Real.cos θ) {θ θ₀ : ℝ} (h : ringPt u₁ (φ θ) = ringPt u₁ (φ θ₀)) :
+    Real.cos θ = Real.cos θ₀ := by
+  have he : e (φ θ) = e (φ θ₀) := by simp only [ringPt] at h; exact add_left_cancel h
+  obtain ⟨n, hn⟩ := e_eq_e_iff.mp he
+  have hn0 : n = 0 := CircleColouring.reduce_int_eq_zero (by
+    rw [show (n : ℝ) * (2 * π) = φ θ - φ θ₀ by linarith, hφ, hφ,
+      show φc + θX * Real.cos θ - (φc + θX * Real.cos θ₀) = θX * (Real.cos θ - Real.cos θ₀) by ring, abs_mul,
+      abs_of_pos hθX0]
+    have : |Real.cos θ - Real.cos θ₀| ≤ 2 := by
+      rw [abs_le]; constructor <;> linarith [Real.neg_one_le_cos θ, Real.cos_le_one θ, Real.neg_one_le_cos θ₀,
+        Real.cos_le_one θ₀]
+    nlinarith)
+  subst hn0
+  rw [Int.cast_zero, zero_mul, add_zero, hφ, hφ] at hn
+  exact mul_left_cancel₀ hθX0.ne' (add_left_cancel hn)
+
+/-- **Finite fibres of the linkage's two angles**. -/
+theorem link_fibres {u₁ u₂ : ℂ} {φ χ : ℝ → ℝ} {φc θX : ℝ} (hθX0 : 0 < θX) (hθXπ : θX < π)
+    (hφ : ∀ θ, φ θ = φc + θX * Real.cos θ) (hd : ∀ θ, dist (ringPt u₁ (φ θ)) (ringPt u₂ (χ θ)) = 1)
+    (hne : ∀ v, u₁ ≠ ringPt u₂ v) :
+    (∀ a b v, {θ | θ ∈ Icc a b ∧ φ θ = v}.Finite) ∧ (∀ a b v, {θ | θ ∈ Icc a b ∧ χ θ = v}.Finite) := by
+  have hφfib : ∀ a b v, {θ | θ ∈ Icc a b ∧ φ θ = v}.Finite := by
+    intro a b v
+    refine (link_cos_fibre ((v - φc) / θX) a b).subset fun θ ⟨hθ, hv⟩ => ⟨hθ, ?_⟩
+    rw [hφ] at hv
+    rw [eq_div_iff hθX0.ne']; linarith
+  have hxfib : ∀ a b z, {θ | θ ∈ Icc a b ∧ ringPt u₁ (φ θ) = z}.Finite := by
+    intro a b z
+    by_cases h : ∃ θ₀, θ₀ ∈ Icc a b ∧ ringPt u₁ (φ θ₀) = z
+    · obtain ⟨θ₀, -, hθ₀⟩ := h
+      exact (link_cos_fibre (Real.cos θ₀) a b).subset fun θ ⟨hθ, hz⟩ =>
+        ⟨hθ, link_cos_eq_of_ringPt hθX0 hθXπ hφ (hz.trans hθ₀.symm)⟩
+    · push Not at h
+      exact Set.finite_empty.subset fun θ hθ => h θ hθ.1 hθ.2
+  refine ⟨hφfib, fun a b v => ?_⟩
+  refine ((link_circles_finite (hne v)).biUnion fun z _ => hxfib a b z).subset fun θ ⟨hθ, hv⟩ => ?_
+  refine mem_biUnion (x := ringPt u₁ (φ θ)) ⟨dist_ringPt _ _, ?_⟩ ⟨hθ, rfl⟩
+  rw [← hv]; exact hd θ
+
+/-- **A turn of the angle at an end of its range**. -/
+theorem link_turn {χ : ℝ → ℝ} {χref θX : ℝ} (hfib : ∀ a b v, {θ | θ ∈ Icc a b ∧ χ θ = v}.Finite)
+    (hrange : ∀ θ, |χ θ - χref| ≤ θX) {θ : ℝ} (hθ : |χ θ - χref| = θX) :
+    (∀ᶠ θ' in 𝓝[≠] θ, χ θ' < χ θ) ∨ (∀ᶠ θ' in 𝓝[≠] θ, χ θ < χ θ') := by
+  have hF : ({θ' | θ' ∈ Icc (θ - 1) (θ + 1) ∧ χ θ' = χ θ} \ {θ}).Finite := (hfib _ _ _).sdiff
+  have hne : ∀ᶠ θ' in 𝓝[≠] θ, χ θ' ≠ χ θ := by
+    filter_upwards [mem_nhdsWithin_of_mem_nhds (hF.isClosed.isOpen_compl.mem_nhds (fun h => h.2 (mem_singleton θ))),
+      mem_nhdsWithin_of_mem_nhds (Icc_mem_nhds (show θ - 1 < θ by linarith) (show θ < θ + 1 by linarith)),
+      self_mem_nhdsWithin] with θ' h1 h2 h3 h4
+    exact h1 ⟨⟨h2, h4⟩, h3⟩
+  have hθX : 0 ≤ θX := (abs_nonneg _).trans_eq hθ
+  rcases (abs_eq hθX).mp hθ with h | h
+  · left
+    filter_upwards [hne] with θ' h'
+    have := hrange θ'
+    rw [abs_le] at this
+    exact lt_of_le_of_ne (by linarith) h'
+  · right
+    filter_upwards [hne] with θ' h'
+    have := hrange θ'
+    rw [abs_le] at this
+    exact lt_of_le_of_ne (by linarith) (Ne.symm h')
+
+/-- **The angle is strictly monotone near a parameter where `|y − u₁| < 2`** (BASE-V § 1b.3 step 1: there the two partners of `y` on
+`ω(u₁)` are apart, so near the parameter `x` is a function of `y`). -/
+theorem link_flip {u₁ u₂ : ℂ} {φ χ : ℝ → ℝ} {φc θX : ℝ} (hθX0 : 0 < θX) (hθXπ : θX < π)
+    (hφ : ∀ θ, φ θ = φc + θX * Real.cos θ) (hχc : Continuous χ)
+    (hd : ∀ θ, dist (ringPt u₁ (φ θ)) (ringPt u₂ (χ θ)) = 1) (hne : ∀ v, u₁ ≠ ringPt u₂ v)
+    {θ₀ : ℝ} (hθ₀ : θ₀ ∈ Ioo 0 π ∨ θ₀ ∈ Ioo (-π) 0) (h2 : dist (ringPt u₂ (χ θ₀)) u₁ < 2) :
+    ∃ η > 0, StrictMonoOn χ (Icc (θ₀ - η) (θ₀ + η)) ∨ StrictAntiOn χ (Icc (θ₀ - η) (θ₀ + η)) := by
+  have hπ := Real.pi_pos
+  set d₀ := dist (ringPt u₂ (χ θ₀)) u₁ with hd₀
+  set μ := 4 - ((d₀ + 2) / 2) ^ 2 with hμ
+  have hd₀0 : 0 ≤ d₀ := dist_nonneg
+  have hμ0 : 0 < μ := by rw [hμ]; nlinarith
+  have hcont : Continuous fun θ => dist (ringPt u₂ (χ θ)) u₁ := by
+    simp only [ringPt]; exact ((continuous_const.add (continuous_e.comp hχc)).dist continuous_const)
+  obtain ⟨η₁, hη₁, hη₁c⟩ := Metric.continuous_iff.mp hcont θ₀ ((2 - d₀) / 2) (by linarith)
+  have hθ₀' : 0 < |θ₀| ∧ |θ₀| < π := by
+    rcases hθ₀ with h | h
+    · rw [abs_of_pos h.1]; exact h
+    · rw [abs_of_neg h.2]; constructor <;> linarith [h.1, h.2]
+  set η := min (min (η₁ / 2) (|θ₀| / 2)) (min ((π - |θ₀|) / 2) (√μ / (4 * π))) with hη
+  have hη0 : 0 < η := lt_min (lt_min (by linarith) (by linarith)) (lt_min (by linarith) (by positivity))
+  have hηa : η ≤ η₁ / 2 := (min_le_left _ _).trans (min_le_left _ _)
+  have hηb : η ≤ |θ₀| / 2 := (min_le_left _ _).trans (min_le_right _ _)
+  have hηc : η ≤ (π - |θ₀|) / 2 := (min_le_right _ _).trans (min_le_left _ _)
+  have hηd : η ≤ √μ / (4 * π) := (min_le_right _ _).trans (min_le_right _ _)
+  refine ⟨η, hη0, (hχc.continuousOn).strictMonoOn_of_injOn_Icc' (by linarith) ?_⟩
+  intro θ₁ hθ₁ θ₂ hθ₂ heq
+  -- the two `y` agree; if the two `x` differed, they would be the two partners of `y`, at least `√μ` apart
+  have hy : ringPt u₂ (χ θ₁) = ringPt u₂ (χ θ₂) := by rw [heq]
+  have hnear : ∀ θ ∈ Icc (θ₀ - η) (θ₀ + η), dist (ringPt u₂ (χ θ)) u₁ < (d₀ + 2) / 2 := by
+    intro θ hθ
+    have := hη₁c θ (show dist θ θ₀ < η₁ by
+      rw [Real.dist_eq, abs_lt]; constructor <;> linarith [hθ.1, hθ.2])
+    rw [Real.dist_eq] at this
+    have := (abs_lt.mp this).2
+    linarith
+  have hx : ringPt u₁ (φ θ₁) = ringPt u₁ (φ θ₂) := by
+    by_contra hxne
+    have hc := (link_circles_two (hne (χ θ₁)) (dist_ringPt _ _) (hd θ₁)
+      (dist_ringPt _ _) (by rw [hy]; exact hd θ₂) hxne).2
+    have hlt := hnear θ₁ hθ₁
+    rw [← dist_eq_norm (ringPt u₂ (χ θ₁)) u₁] at hc
+    have hge : μ ≤ ‖ringPt u₁ (φ θ₁) - ringPt u₁ (φ θ₂)‖ ^ 2 := by
+      rw [hc, hμ]; nlinarith [dist_nonneg (x := ringPt u₂ (χ θ₁)) (y := u₁)]
+    have hle : ‖ringPt u₁ (φ θ₁) - ringPt u₁ (φ θ₂)‖ ≤ θX * |θ₁ - θ₂| := by
+      simp only [ringPt, add_sub_add_left_eq_sub]
+      refine (norm_e_sub_e_le _ _).trans ?_
+      rw [hφ, hφ, show φc + θX * Real.cos θ₁ - (φc + θX * Real.cos θ₂) = θX * (Real.cos θ₁ - Real.cos θ₂) by ring,
+        abs_mul, abs_of_pos hθX0]
+      exact mul_le_mul_of_nonneg_left (Real.abs_cos_sub_cos_le θ₁ θ₂) hθX0.le
+    have h12 : |θ₁ - θ₂| ≤ 2 * η := by rw [abs_le]; constructor <;> linarith [hθ₁.1, hθ₁.2, hθ₂.1, hθ₂.2]
+    have hsq : √μ ^ 2 = μ := Real.sq_sqrt hμ0.le
+    have h4 : θX * |θ₁ - θ₂| ≤ π * (2 * (√μ / (4 * π))) :=
+      mul_le_mul hθXπ.le (h12.trans (by linarith)) (abs_nonneg _) hπ.le
+    have h5 : π * (2 * (√μ / (4 * π))) = √μ / 2 := by field_simp; ring
+    have hn0 := norm_nonneg (ringPt u₁ (φ θ₁) - ringPt u₁ (φ θ₂))
+    have := hle.trans (h4.trans h5.le)
+    nlinarith [Real.sqrt_nonneg μ]
+  have hcos := link_cos_eq_of_ringPt hθX0 hθXπ hφ hx
+  rcases hθ₀ with h | h
+  · rw [abs_of_pos h.1] at hηb hηc
+    exact Real.injOn_cos ⟨by linarith [hθ₁.1], by linarith [hθ₁.2]⟩ ⟨by linarith [hθ₂.1], by linarith [hθ₂.2]⟩ hcos
+  · rw [abs_of_neg h.2] at hηb hηc
+    have := Real.injOn_cos (x₁ := -θ₁) (x₂ := -θ₂) ⟨by linarith [hθ₁.2], by linarith [hθ₁.1]⟩
+      ⟨by linarith [hθ₂.2], by linarith [hθ₂.1]⟩ (by rw [Real.cos_neg, Real.cos_neg]; exact hcos)
+    linarith
+
+/-- The distance between two ring points, from the cosine of their angle difference. -/
+theorem link_dist_ringPt_sq (p : ℂ) (a b : ℝ) : dist (ringPt p a) (ringPt p b) ^ 2 = 2 - 2 * Real.cos (a - b) := by
+  rw [dist_eq_norm]; simp only [ringPt, add_sub_add_left_eq_sub]; exact norm_e_sub_e_sq a b
+
+/-- **The two partners of an intersection point**: two distinct points of `ω(u₂)` at distance `1` from `P = r_{u₂}(χ_P)` are
+`r_{u₂}(χ_P ± 60°)`. -/
+theorem link_partners {u₂ P y₁ y₂ : ℂ} {χP : ℝ} (hPχ : P = ringPt u₂ χP)
+    (h₁ : dist y₁ u₂ = 1) (h₁' : dist y₁ P = 1) (h₂ : dist y₂ u₂ = 1) (h₂' : dist y₂ P = 1) (hne : y₁ ≠ y₂) :
+    (y₁ = ringPt u₂ (χP + π / 3) ∧ y₂ = ringPt u₂ (χP - π / 3)) ∨
+      (y₁ = ringPt u₂ (χP - π / 3) ∧ y₂ = ringPt u₂ (χP + π / 3)) := by
+  have hu : u₂ ≠ P := fun h => by have := dist_ringPt u₂ χP; rw [← hPχ, ← h, dist_self] at this; norm_num at this
+  have hdp : ∀ c : ℝ, Real.cos (c - χP) = 1 / 2 → dist (ringPt u₂ c) P = 1 := by
+    intro c hc
+    have := link_dist_ringPt_sq u₂ c χP
+    rw [hc, ← hPχ] at this
+    nlinarith [dist_nonneg (x := ringPt u₂ c) (y := P)]
+  have hp : dist (ringPt u₂ (χP + π / 3)) P = 1 :=
+    hdp _ (by rw [show χP + π / 3 - χP = π / 3 by ring, Real.cos_pi_div_three])
+  have hm : dist (ringPt u₂ (χP - π / 3)) P = 1 :=
+    hdp _ (by rw [show χP - π / 3 - χP = -(π / 3) by ring, Real.cos_neg, Real.cos_pi_div_three])
+  have hpm : ringPt u₂ (χP + π / 3) ≠ ringPt u₂ (χP - π / 3) := by
+    intro h
+    have := link_dist_ringPt_sq u₂ (χP + π / 3) (χP - π / 3)
+    rw [h, dist_self, show χP + π / 3 - (χP - π / 3) = π - π / 3 by ring, Real.cos_pi_sub, Real.cos_pi_div_three] at this
+    norm_num at this
+  have htwo := (link_circles_two hu (dist_ringPt _ _) hp (dist_ringPt _ _) hm hpm).1
+  rcases htwo y₁ h₁ h₁' with e1 | e1 <;> rcases htwo y₂ h₂ h₂' with e2 | e2
+  · exact absurd (e1.trans e2.symm) hne
+  · exact Or.inl ⟨e1, e2⟩
+  · exact Or.inr ⟨e1, e2⟩
+  · exact absurd (e1.trans e2.symm) hne
+
+/-- At most one of two distinct unit-partners of `P ∈ ω(u₁)` is at distance `2` from `u₁` (equality in the triangle inequality puts it at
+`2P − u₁`). -/
+theorem link_one_lt_two {u₁ P y₁ y₂ : ℂ} (hP : dist P u₁ = 1) (h₁ : dist y₁ P = 1) (h₂ : dist y₂ P = 1) (hne : y₁ ≠ y₂) :
+    dist y₁ u₁ < 2 ∨ dist y₂ u₁ < 2 := by
+  have hle : ∀ y, dist y P = 1 → dist y u₁ ≤ 2 := fun y hy => by linarith [dist_triangle y P u₁]
+  have key : ∀ y, dist y P = 1 → dist y u₁ = 2 → y = 2 * P - u₁ := by
+    intro y hy h2
+    have a := dist_sq_re_im y P; have b := dist_sq_re_im P u₁; have c := dist_sq_re_im y u₁
+    rw [hy] at a; rw [hP] at b; rw [h2] at c
+    set A := y.re - P.re - (P.re - u₁.re) with hA
+    set B := y.im - P.im - (P.im - u₁.im) with hB
+    have h1 : A ^ 2 + B ^ 2 = 0 := by rw [hA, hB]; nlinarith
+    have hre : A = 0 := by nlinarith [sq_nonneg A, sq_nonneg B]
+    have him : B = 0 := by nlinarith [sq_nonneg A, sq_nonneg B]
+    apply Complex.ext <;> simp <;> linarith
+  by_contra h
+  push Not at h
+  exact hne ((key y₁ h₁ (le_antisymm (hle y₁ h₁) h.1)).trans (key y₂ h₂ (le_antisymm (hle y₂ h₂) h.2)).symm)
+
+
+-- The construction is one declaration of explicit trigonometry; measured: it passes at 300000 heartbeats and fails at the
+-- default 200000 (FS131-I5g, stage 28).
+set_option maxHeartbeats 400000 in
+/-- **The unit-distance linkage of two unit circles** whose centres are between `1` and `2` apart (BASE-V § 1b.3 step 1), parametrized
+as one loop: `x = r_{u₁}(φ θ)`, `y = r_{u₂}(χ θ)`, `|x − y| = 1`, with `φ θ = φ_c + θ_X cos θ` sweeping the arc of `ω(u₁)` within `2` of `u₂`
+and `χ` a continuous angle of `y`. At `θ = ±θ_A` the point `x` is an intersection point `P` of the two circles, and `y` its two partners
+`r_{u₂}(χ_P ± 60°)`; between them `x` stays on one side of `P`. Fibres are finite; `χ` turns where `|y − u₁| = 2` and is strictly monotone
+near `±θ_A` where `|y − u₁| < 2`, which holds at one of them at least. -/
+theorem exists_linkage {u₁ u₂ : ℂ} (ht : 1 < dist u₁ u₂) (ht' : dist u₁ u₂ < 2) :
+    ∃ (φ χ : ℝ → ℝ) (θA φP χP : ℝ),
+      Continuous φ ∧ Continuous χ ∧ (∀ θ, φ (θ + 2 * π) = φ θ) ∧ (∀ θ, χ (θ + 2 * π) = χ θ) ∧
+      (∀ θ, dist (ringPt u₁ (φ θ)) (ringPt u₂ (χ θ)) = 1) ∧
+      (∀ a b v, {θ | θ ∈ Icc a b ∧ φ θ = v}.Finite) ∧ (∀ a b v, {θ | θ ∈ Icc a b ∧ χ θ = v}.Finite) ∧
+      (∀ θ, dist (ringPt u₂ (χ θ)) u₁ = 2 → (∀ᶠ θ' in 𝓝[≠] θ, χ θ' < χ θ) ∨ (∀ᶠ θ' in 𝓝[≠] θ, χ θ < χ θ')) ∧
+      0 < θA ∧ θA < π ∧ φ θA = φP ∧ φ (-θA) = φP ∧
+      (∀ θ ∈ Ioo (-θA) θA, φP < φ θ) ∧ (∀ θ ∈ Ioo θA (2 * π - θA), φ θ < φP) ∧
+      ((χ θA = χP + π / 3 ∧ χ (-θA) = χP - π / 3) ∨ (χ θA = χP - π / 3 ∧ χ (-θA) = χP + π / 3)) ∧
+      (∀ θ₀, (θ₀ = θA ∨ θ₀ = -θA) → dist (ringPt u₂ (χ θ₀)) u₁ < 2 →
+        ∃ η > 0, StrictMonoOn χ (Icc (θ₀ - η) (θ₀ + η)) ∨ StrictAntiOn χ (Icc (θ₀ - η) (θ₀ + η))) ∧
+      (dist (ringPt u₂ (χ θA)) u₁ < 2 ∨ dist (ringPt u₂ (χ (-θA))) u₁ < 2) := by
+  classical
+  have hπ := Real.pi_pos
+  set t := dist u₁ u₂ with ht_def
+  set w := u₂ - u₁ with hw
+  have hwt : ‖w‖ = t := by rw [hw, ← dist_eq_norm, dist_comm]
+  set φc := arg w with hφc
+  have hwe : w = (t : ℂ) * e φc := by rw [← hwt]; exact eq_polar_arg w
+  have ht0 : 0 < t := by linarith
+  set c₀ := (t ^ 2 - 3) / (2 * t) with hc₀
+  have hc₀1 : -1 < c₀ := by rw [hc₀, lt_div_iff₀ (by positivity)]; nlinarith
+  have hc₀2 : c₀ < t / 2 := by rw [hc₀, div_lt_iff₀ (by positivity)]; nlinarith
+  have ht2 : t / 2 < 1 := by linarith
+  have ht2' : 1 / 2 < t / 2 := by linarith
+  set θX := arccos c₀ with hθX
+  have hθX0 : 0 < θX := Real.arccos_pos.mpr (by linarith)
+  have hθXπ : θX < π := Real.arccos_lt_pi.mpr hc₀1
+  have hcosθX : Real.cos θX = c₀ := Real.cos_arccos hc₀1.le (by linarith)
+  -- the parametrization
+  set φ : ℝ → ℝ := fun θ => φc + θX * Real.cos θ with hφ
+  set Dsq : ℝ → ℝ := fun θ => 1 + t ^ 2 - 2 * t * Real.cos (θX * Real.cos θ) with hDsq
+  have hxu : ∀ θ, ringPt u₁ (φ θ) - u₂ = e φc * (e (θX * Real.cos θ) - t) := by
+    intro θ; simp only [ringPt, hφ, e_add]
+    rw [show u₁ + e φc * e (θX * Real.cos θ) - u₂ = e φc * e (θX * Real.cos θ) - w by rw [hw]; ring, hwe]; ring
+  have hD : ∀ θ, ‖ringPt u₁ (φ θ) - u₂‖ ^ 2 = Dsq θ := by
+    intro θ; rw [hxu, norm_mul, norm_e, one_mul, link_norm_e_sub_sq]
+  have hcosge : ∀ θ, c₀ ≤ Real.cos (θX * Real.cos θ) := by
+    intro θ
+    have h1 : |θX * Real.cos θ| ≤ θX := by
+      rw [abs_mul, abs_of_pos hθX0]; nlinarith [Real.abs_cos_le_one θ]
+    rw [← Real.cos_abs, ← hcosθX]
+    exact Real.cos_le_cos_of_nonneg_of_le_pi (abs_nonneg _) hθXπ.le h1
+  have hDle : ∀ θ, Dsq θ ≤ 4 := by
+    intro θ; simp only [hDsq]
+    have := hcosge θ
+    have h2 : 2 * t * c₀ = t ^ 2 - 3 := by rw [hc₀]; field_simp
+    nlinarith
+  have hDpos : ∀ θ, (t - 1) ^ 2 ≤ Dsq θ := by
+    intro θ; simp only [hDsq]; nlinarith [Real.cos_le_one (θX * Real.cos θ)]
+  have hDpos' : ∀ θ, 0 < Dsq θ := fun θ => lt_of_lt_of_le (by nlinarith) (hDpos θ)
+  have hD4 : ∀ θ, Real.sin θ = 0 → Dsq θ = 4 := by
+    intro θ hs
+    have hc : Real.cos θ = 1 ∨ Real.cos θ = -1 := by
+      have := Real.sin_sq_add_cos_sq θ; rw [hs] at this
+      have : (Real.cos θ - 1) * (Real.cos θ + 1) = 0 := by nlinarith
+      rcases mul_eq_zero.mp this with h | h
+      · left; linarith
+      · right; linarith
+    simp only [hDsq]
+    have h2 : 2 * t * c₀ = t ^ 2 - 3 := by rw [hc₀]; field_simp
+    rcases hc with hc | hc <;> rw [hc] <;> simp only [mul_one, mul_neg, Real.cos_neg] <;> rw [hcosθX] <;> linarith
+  set σ : ℝ → ℝ := fun θ => Real.sin θ / |Real.sin θ| with hσ
+  set k : ℝ → ℝ := fun θ => σ θ * √(1 / Dsq θ - 1 / 4) with hk
+  have hk2 : ∀ θ, k θ ^ 2 = 1 / Dsq θ - 1 / 4 := by
+    intro θ
+    have hnn : 0 ≤ 1 / Dsq θ - 1 / 4 := by
+      have := hDle θ; have := hDpos' θ
+      rw [sub_nonneg, div_le_div_iff₀ (by norm_num) (hDpos' θ)]; linarith
+    by_cases hs : Real.sin θ = 0
+    · have := hD4 θ hs
+      simp only [hk, hσ, hs, abs_zero, div_zero, zero_mul, this]; norm_num
+    · simp only [hk, hσ]
+      rw [mul_pow, Real.sq_sqrt hnn, div_pow, sq_abs, div_self (pow_ne_zero 2 hs), one_mul]
+  set y : ℝ → ℂ := fun θ => u₂ + (ringPt u₁ (φ θ) - u₂) * (1 / 2 + (k θ : ℂ) * I) with hy
+  have hfac : ∀ θ, ‖(1 / 2 : ℂ) + (k θ : ℂ) * I‖ ^ 2 = 1 / Dsq θ := by
+    intro θ
+    rw [Complex.sq_norm, Complex.normSq_apply]
+    simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.I_re, Complex.I_im]
+    norm_num
+    rw [← sq, hk2]; ring
+  have hfac' : ∀ θ, ‖(-1 / 2 : ℂ) + (k θ : ℂ) * I‖ ^ 2 = 1 / Dsq θ := by
+    intro θ
+    rw [Complex.sq_norm, Complex.normSq_apply]
+    simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.I_re, Complex.I_im]
+    norm_num
+    rw [← sq, hk2]; ring
+  have hy2 : ∀ θ, dist (y θ) u₂ = 1 := by
+    intro θ
+    have : ‖y θ - u₂‖ ^ 2 = 1 := by
+      simp only [hy, add_sub_cancel_left]
+      rw [norm_mul, mul_pow, hD, hfac]; field_simp [(hDpos' θ).ne']
+    rw [dist_eq_norm]; nlinarith [norm_nonneg (y θ - u₂)]
+  have hyx : ∀ θ, dist (ringPt u₁ (φ θ)) (y θ) = 1 := by
+    intro θ
+    have : ‖y θ - ringPt u₁ (φ θ)‖ ^ 2 = 1 := by
+      have : y θ - ringPt u₁ (φ θ) = (ringPt u₁ (φ θ) - u₂) * (-1 / 2 + (k θ : ℂ) * I) := by simp only [hy]; ring
+      rw [this, norm_mul, mul_pow, hD, hfac']; field_simp [(hDpos' θ).ne']
+    rw [dist_comm, dist_eq_norm]; nlinarith [norm_nonneg (y θ - ringPt u₁ (φ θ))]
+  -- the angle of `y` at `u₂`, measured from the direction toward `u₁`
+  set χref := φc + π with hχref
+  have heref : e χref = -e φc := by rw [hχref, e_add_pi]
+  set A : ℂ → ℝ := fun z => χref + arg ((z - u₂) * (starRingEnd ℂ) (e χref)) with hA
+  have hq1 : ∀ z, dist z u₂ = 1 → ‖(z - u₂) * (starRingEnd ℂ) (e χref)‖ = 1 := by
+    intro z hz; rw [norm_mul, Complex.norm_conj, norm_e, mul_one, ← dist_eq_norm, hz]
+  have hAe : ∀ z, dist z u₂ = 1 → ringPt u₂ (A z) = z := by
+    intro z hz
+    have hpol := eq_polar_arg ((z - u₂) * (starRingEnd ℂ) (e χref))
+    rw [hq1 z hz, Complex.ofReal_one, one_mul] at hpol
+    simp only [ringPt, hA, e_add]
+    rw [← hpol, mul_comm (z - u₂), ← mul_assoc, e_mul_conj_e, one_mul]; ring
+  have hy1u : ∀ θ, dist (y θ) u₁ ≤ 2 := by
+    intro θ
+    calc dist (y θ) u₁ ≤ dist (y θ) (ringPt u₁ (φ θ)) + dist (ringPt u₁ (φ θ)) u₁ := dist_triangle _ _ _
+      _ = 2 := by rw [dist_comm, hyx, dist_ringPt]; norm_num
+  have hslit : ∀ θ, (y θ - u₂) * (starRingEnd ℂ) (e χref) ∈ slitPlane := by
+    intro θ
+    by_contra hns
+    rw [mem_slitPlane_iff] at hns
+    push Not at hns
+    set q := (y θ - u₂) * (starRingEnd ℂ) (e χref) with hqdef
+    have hqn := hq1 (y θ) (hy2 θ)
+    rw [← hqdef] at hqn
+    have hq : q = -1 := by
+      have h2 : q.re ^ 2 + q.im ^ 2 = 1 := by
+        have := Complex.sq_norm q; rw [hqn, Complex.normSq_apply] at this; nlinarith
+      rw [hns.2] at h2
+      apply Complex.ext
+      · simp only [Complex.neg_re, Complex.one_re]; nlinarith [hns.1]
+      · simp only [Complex.neg_im, Complex.one_im, neg_zero]; exact hns.2
+    have hyq : y θ - u₂ = q * e χref := by
+      rw [hqdef, mul_assoc, mul_comm ((starRingEnd ℂ) (e χref)), e_mul_conj_e, mul_one]
+    rw [hq, heref] at hyq
+    have : dist (y θ) u₁ = t + 1 := by
+      rw [dist_eq_norm, show y θ - u₁ = (y θ - u₂) + w by rw [hw]; ring, hyq, hwe]
+      rw [show -1 * -e φc + (t : ℂ) * e φc = ((t + 1 : ℝ) : ℂ) * e φc by push_cast; ring, norm_mul, norm_e, mul_one,
+        Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith)]
+    linarith [hy1u θ]
+  set χ : ℝ → ℝ := fun θ => A (y θ) with hχ
+  have hχe : ∀ θ, ringPt u₂ (χ θ) = y θ := fun θ => hAe _ (hy2 θ)
+  -- continuity
+  have hφcont : Continuous φ := by simp only [hφ]; fun_prop
+  have hDcont : Continuous Dsq := by simp only [hDsq]; fun_prop
+  set g : ℝ → ℝ := fun θ => √(1 / Dsq θ - 1 / 4) with hg
+  have hgcont : Continuous g := by
+    simp only [hg]
+    exact ((continuous_const.div hDcont fun θ => (hDpos' θ).ne').sub continuous_const).sqrt
+  have hσle : ∀ θ, |σ θ| ≤ 1 := by
+    intro θ; simp only [hσ]
+    rw [abs_div, abs_abs]
+    by_cases h : Real.sin θ = 0
+    · simp [h]
+    · rw [div_self (abs_ne_zero.mpr h)]
+  have hkcont : Continuous k := by
+    rw [continuous_iff_continuousAt]
+    intro θ
+    by_cases hs : Real.sin θ = 0
+    · have hk0 : k θ = 0 := by simp only [hk, hσ, hs, abs_zero, div_zero, zero_mul]
+      have hg0 : g θ = 0 := by simp only [hg, hD4 θ hs]; norm_num
+      rw [ContinuousAt, hk0]
+      refine squeeze_zero_norm' (Filter.Eventually.of_forall fun θ' => ?_) (hg0 ▸ hgcont.tendsto θ)
+      simp only [hk, Real.norm_eq_abs, abs_mul]
+      rw [abs_of_nonneg (Real.sqrt_nonneg _)]
+      exact mul_le_of_le_one_left (Real.sqrt_nonneg _) (hσle θ')
+    · have hσc : ContinuousAt σ θ := by
+        simp only [hσ]
+        exact (Real.continuous_sin.continuousAt).div (Real.continuous_sin.abs.continuousAt) (abs_ne_zero.mpr hs)
+      exact hσc.mul (hgcont.continuousAt)
+  have hycont : Continuous y := by
+    simp only [hy, ringPt]
+    exact continuous_const.add (((continuous_const.add (continuous_e.comp hφcont)).sub continuous_const).mul
+      (continuous_const.add ((Complex.continuous_ofReal.comp hkcont).mul continuous_const)))
+  have hχcont : Continuous χ := by
+    rw [continuous_iff_continuousAt]
+    intro θ
+    simp only [hχ, hA]
+    have hc : Continuous (fun θ => (y θ - u₂) * (starRingEnd ℂ) (e χref)) := (hycont.sub continuous_const).mul continuous_const
+    exact continuousAt_const.add ((continuousAt_arg (hslit θ)).comp (f := fun θ => (y θ - u₂) * (starRingEnd ℂ) (e χref))
+      hc.continuousAt)
+  -- periodicity
+  have hφper : ∀ θ, φ (θ + 2 * π) = φ θ := fun θ => by simp only [hφ, Real.cos_add_two_pi]
+  have hkper : ∀ θ, k (θ + 2 * π) = k θ := fun θ => by simp only [hk, hσ, hDsq, Real.sin_add_two_pi, Real.cos_add_two_pi]
+  have hyper : ∀ θ, y (θ + 2 * π) = y θ := fun θ => by simp only [hy, hφper, hkper]
+  have hχper : ∀ θ, χ (θ + 2 * π) = χ θ := fun θ => by simp only [hχ, hyper]
+  have hδ : ∀ θ, χ θ - χref ∈ Ioc (-π) π := fun θ => by
+    simp only [hχ, hA, add_sub_cancel_left]; exact ⟨neg_pi_lt_arg _, arg_le_pi _⟩
+  have hdsq : ∀ θ, dist (y θ) u₁ ^ 2 = 1 + t ^ 2 - 2 * t * Real.cos (χ θ - χref) := by
+    intro θ
+    rw [dist_eq_norm, show y θ - u₁ = (ringPt u₂ (χ θ) - u₂) + w by rw [hχe, hw]; ring, hwe]
+    simp only [ringPt, add_sub_cancel_left]
+    rw [show e (χ θ) + (t : ℂ) * e φc = e χref * (e (χ θ - χref) - t) by
+      rw [mul_sub, ← e_add, show χref + (χ θ - χref) = χ θ by ring, heref]; ring, norm_mul, norm_e, one_mul, link_norm_e_sub_sq]
+  have harc : ∀ c, c - χref ∈ Ioc (-π) π → A (ringPt u₂ c) = c := by
+    intro c hc
+    simp only [hA, ringPt, add_sub_cancel_left]
+    rw [conj_e, ← e_add, show c + -χref = c - χref by ring, e_eq, Complex.ofReal_cos, Complex.ofReal_sin,
+      Complex.arg_cos_add_sin_mul_I hc]
+    ring
+  have hφ' : ∀ θ, φ θ = φc + θX * Real.cos θ := fun θ => by rw [hφ]
+  have hkodd : ∀ θ, k (-θ) = -k θ := fun θ => by
+    simp only [hk, hσ, hDsq, Real.sin_neg, abs_neg, Real.cos_neg, neg_div, neg_mul]
+  have hyform : ∀ θ, y θ = u₂ + (ringPt u₁ (φ θ) - u₂) * (1 / 2 + (k θ : ℂ) * I) := fun θ => by rw [hy]
+  have hχform : ∀ θ, χ θ = A (y θ) := fun θ => by rw [hχ]
+  have hkpos : ∀ θ, 0 < Real.sin θ → Dsq θ < 4 → 0 < k θ := by
+    intro θ hs hD
+    simp only [hk, hσ, abs_of_pos hs, div_self hs.ne', one_mul]
+    apply Real.sqrt_pos.mpr
+    rw [sub_pos, div_lt_div_iff₀ (by norm_num) (hDpos' θ)]; linarith
+  have hDform : ∀ θ, Dsq θ = 1 + t ^ 2 - 2 * t * Real.cos (θX * Real.cos θ) := fun θ => by rw [hDsq]
+  clear_value χ A y k σ g Dsq φ θX c₀ χref φc w t
+  have hdist : ∀ θ, dist (ringPt u₁ (φ θ)) (ringPt u₂ (χ θ)) = 1 := fun θ => by rw [hχe]; exact hyx θ
+  have hne : ∀ v, u₁ ≠ ringPt u₂ v := fun v h => by
+    have := dist_ringPt u₂ v; rw [← h] at this; linarith
+  obtain ⟨hφfib, hχfib⟩ := link_fibres hθX0 hθXπ hφ' hdist hne
+  have h2c : 2 * t * c₀ = t ^ 2 - 3 := by rw [hc₀]; field_simp
+  have hcos_of : ∀ θ, c₀ ≤ Real.cos (χ θ - χref) := by
+    intro θ
+    have h1 := hdsq θ
+    have h2 := hy1u θ
+    have h3 : dist (y θ) u₁ ^ 2 ≤ 4 := by nlinarith [dist_nonneg (x := y θ) (y := u₁)]
+    have h4 : 2 * t * c₀ ≤ 2 * t * Real.cos (χ θ - χref) := by linarith
+    exact le_of_mul_le_mul_left h4 (by positivity)
+  have hrange : ∀ θ, |χ θ - χref| ≤ θX := by
+    intro θ
+    have hab : |χ θ - χref| ≤ π := abs_le.mpr ⟨(hδ θ).1.le, (hδ θ).2⟩
+    rw [← Real.arccos_cos (abs_nonneg _) hab, Real.cos_abs, hθX]
+    exact Real.strictAntiOn_arccos.antitoneOn ⟨hc₀1.le, by linarith⟩
+      ⟨Real.neg_one_le_cos _, Real.cos_le_one _⟩ (hcos_of θ)
+  have hturn : ∀ θ, dist (ringPt u₂ (χ θ)) u₁ = 2 →
+      (∀ᶠ θ' in 𝓝[≠] θ, χ θ' < χ θ) ∨ (∀ᶠ θ' in 𝓝[≠] θ, χ θ < χ θ') := by
+    intro θ h2
+    rw [hχe] at h2
+    refine link_turn hχfib hrange ?_
+    have hc : Real.cos (χ θ - χref) = c₀ := by
+      have h := hdsq θ; rw [h2] at h
+      have h' : 2 * t * Real.cos (χ θ - χref) = 2 * t * c₀ := by linarith
+      exact mul_left_cancel₀ (mul_ne_zero two_ne_zero ht0.ne') h'
+    have e1 : arccos (Real.cos |χ θ - χref|) = |χ θ - χref| := Real.arccos_cos (abs_nonneg _) ((hrange θ).trans hθXπ.le)
+    rw [Real.cos_abs, hc, ← hθX] at e1
+    exact e1.symm
+  -- the intersection point `P`, the parameters `±θ_A`
+  have hγ0 : 0 < arccos (t / 2) := Real.arccos_pos.mpr ht2
+  have hγX : arccos (t / 2) < θX := by
+    rw [hθX]; exact Real.strictAntiOn_arccos ⟨hc₀1.le, by linarith⟩ ⟨by linarith, ht2.le⟩ hc₀2
+  have hγπ3 : arccos (t / 2) < π / 3 := by
+    have h := Real.strictAntiOn_arccos (show (1 / 2 : ℝ) ∈ Icc (-1) 1 by constructor <;> norm_num)
+      (show t / 2 ∈ Icc (-1) 1 by constructor <;> linarith) ht2'
+    rwa [← Real.cos_pi_div_three, Real.arccos_cos (by positivity) (by linarith)] at h
+  have hcosγ : Real.cos (arccos (t / 2)) = t / 2 := Real.cos_arccos (by linarith) ht2.le
+  set γ := arccos (t / 2) with hγ
+  have hγθ0 : 0 < γ / θX := div_pos hγ0 hθX0
+  have hγθ1 : γ / θX < 1 := (div_lt_one hθX0).mpr hγX
+  set θA := arccos (γ / θX) with hθA
+  have hθA0 : 0 < θA := Real.arccos_pos.mpr hγθ1
+  have hθAπ2 : θA < π / 2 := Real.arccos_lt_pi_div_two.mpr hγθ0
+  have hcosθA : Real.cos θA = γ / θX := Real.cos_arccos (by linarith) hγθ1.le
+  have hγA : γ = θX * Real.cos θA := by rw [hcosθA]; field_simp
+  have hφA : φ θA = φc + γ := by rw [hφ', hγA]
+  have hφA' : φ (-θA) = φc + γ := by rw [hφ', Real.cos_neg, hγA]
+  clear_value θA γ
+  have hin1 : ∀ θ ∈ Ioo (-θA) θA, φc + γ < φ θ := by
+    intro θ hθ
+    have h1 : |θ| < θA := abs_lt.mpr hθ
+    have h2 : Real.cos θA < Real.cos θ := by
+      rw [← Real.cos_abs θ]; exact Real.cos_lt_cos_of_nonneg_of_le_pi (abs_nonneg θ) (by linarith) h1
+    rw [hφ', hγA]; linarith [mul_lt_mul_of_pos_left h2 hθX0]
+  have hin2 : ∀ θ ∈ Ioo θA (2 * π - θA), φ θ < φc + γ := by
+    intro θ hθ
+    have h2 : Real.cos θ < Real.cos θA := by
+      rcases le_or_gt θ π with h | h
+      · exact Real.cos_lt_cos_of_nonneg_of_le_pi hθA0.le h hθ.1
+      · rw [← Real.cos_two_pi_sub θ]
+        exact Real.cos_lt_cos_of_nonneg_of_le_pi hθA0.le (by linarith) (by linarith [hθ.2])
+    rw [hφ', hγA]; linarith [mul_lt_mul_of_pos_left h2 hθX0]
+  set P := ringPt u₁ (φc + γ) with hP
+  have hPχ : P = ringPt u₂ (χref - γ) := by
+    simp only [hP, ringPt]
+    have hsγ : Real.sin γ ^ 2 = 1 - (t / 2) ^ 2 := by rw [← hcosγ]; linarith [Real.sin_sq_add_cos_sq γ]
+    have hq : e γ - t = e (π - γ) := by
+      apply Complex.ext
+      · simp only [Complex.sub_re, re_e, Complex.ofReal_re, Real.cos_pi_sub, hcosγ]; ring
+      · simp only [Complex.sub_im, im_e, Complex.ofReal_im, Real.sin_pi_sub, sub_zero]
+    rw [show u₁ + e (φc + γ) = u₂ + (e φc * (e γ - t)) by rw [e_add, show u₂ = u₁ + w by rw [hw]; ring, hwe]; ring, hq,
+      ← e_add, hχref]
+    ring_nf
+  have hxA : ringPt u₁ (φ θA) = P := by rw [hφA]
+  have hxA' : ringPt u₁ (φ (-θA)) = P := by rw [hφA']
+  have hyA : dist (y θA) P = 1 := by rw [← hxA, dist_comm]; exact hyx θA
+  have hyA' : dist (y (-θA)) P = 1 := by rw [← hxA', dist_comm]; exact hyx (-θA)
+  have hPu : P - u₂ ≠ 0 := by
+    intro h; have := dist_ringPt u₂ (χref - γ); rw [← hPχ, dist_eq_norm, h, norm_zero] at this; norm_num at this
+  have hyne : y θA ≠ y (-θA) := by
+    intro h
+    rw [hyform, hyform, hxA, hxA', hkodd] at h
+    have hk0 : 0 < k θA := hkpos θA (Real.sin_pos_of_pos_of_lt_pi hθA0 (by linarith)) (by
+      rw [hDform, ← hγA, hcosγ]; nlinarith)
+    have : (P - u₂) * ((2 * k θA : ℝ) * I) = 0 := by
+      have h' := congrArg (fun z => z - u₂) h; simp only [add_sub_cancel_left] at h'
+      push_cast at h' ⊢; linear_combination h'
+    rcases mul_eq_zero.mp this with h1 | h1
+    · exact hPu h1
+    · have := congrArg Complex.im h1
+      simp at this; linarith
+  have hchiA : (χ θA = χref - γ + π / 3 ∧ χ (-θA) = χref - γ - π / 3) ∨
+      (χ θA = χref - γ - π / 3 ∧ χ (-θA) = χref - γ + π / 3) := by
+    have hp : χref - γ + π / 3 - χref ∈ Ioc (-π) π := ⟨by linarith, by linarith⟩
+    have hm : χref - γ - π / 3 - χref ∈ Ioc (-π) π := ⟨by linarith, by linarith⟩
+    rcases link_partners hPχ (hy2 θA) hyA (hy2 (-θA)) hyA' hyne with ⟨e1, e2⟩ | ⟨e1, e2⟩
+    · left; rw [hχform, hχform, e1, e2, harc _ hp, harc _ hm]; exact ⟨rfl, rfl⟩
+    · right; rw [hχform, hχform, e1, e2, harc _ hp, harc _ hm]; exact ⟨rfl, rfl⟩
+  have hflip : ∀ θ₀, (θ₀ = θA ∨ θ₀ = -θA) → dist (ringPt u₂ (χ θ₀)) u₁ < 2 →
+      ∃ η > 0, StrictMonoOn χ (Icc (θ₀ - η) (θ₀ + η)) ∨ StrictAntiOn χ (Icc (θ₀ - η) (θ₀ + η)) := by
+    rintro θ₀ (rfl | rfl) h2
+    · exact link_flip hθX0 hθXπ hφ' hχcont hdist hne (Or.inl ⟨hθA0, by linarith⟩) h2
+    · exact link_flip hθX0 hθXπ hφ' hχcont hdist hne (Or.inr ⟨by linarith, by linarith⟩) h2
+  have hone : dist (ringPt u₂ (χ θA)) u₁ < 2 ∨ dist (ringPt u₂ (χ (-θA))) u₁ < 2 := by
+    rw [hχe, hχe]; exact link_one_lt_two (dist_ringPt _ _) hyA hyA' hyne
+  exact ⟨φ, χ, θA, φc + γ, χref - γ, hφcont, hχcont, hφper, hχper, hdist, hφfib, hχfib, hturn, hθA0, by linarith,
+    hφA, hφA', hin1, hin2, hchiA, hflip, hone⟩
+
 /-- **Lemma 3 in pseudo-colour form** (`[SokolovVoronov2025]` Lemma 3; BASE-V's BV-L3 route — the unit-distance linkage and the band lemma —
 on the two pseudo-colourings): two cubic trichromatic points of `B̄(u, 1)` with one multicolour are not at distance in `(1, 2)`. Their circles may
 carry in- and out-contact unit arcs (plan § 2.2), so `bv_l3`'s `RingProper` is not available; the inputs are `exists_pseudoCircle` at both,
-(i) across the circles from `pair_i`, the double event from `pair_ii` (or `bv_nd`), and `linkage_dot_ne_zero`. -/
+(i) across the circles from `pair_i`, and the double switch of both colours excluded by `pair_ii` (two switching points carry one pair, which
+needs no sense of motion), read along the linkage `exists_linkage` by the band lemma `link_path`. No velocity argument is used, so neither
+`linkage_dot_ne_zero` nor `bv_nd` is an input. -/
 theorem BaseCtx.l3_base (B : F.BaseCtx u) {u₁ u₂ : ℂ} (h₁ : u₁ ∈ closedBall u 1) (h₂ : u₂ ∈ closedBall u 1)
     (c₁ : F.IsCubicTrichromatic u₁) (c₂ : F.IsCubicTrichromatic u₂) (hsame : F.coloursAt u₁ = F.coloursAt u₂)
     (ht : 1 < dist u₁ u₂) (ht' : dist u₁ u₂ < 2) : False := by
-  sorry
+  classical
+  have hπ := Real.pi_pos
+  have hF := B.valid
+  have hcov : ∀ {q : ℂ}, q ∈ closedBall u 1 → F.Covers q 1 := fun {q} hq z hz =>
+    B.covers (show z ∈ closedBall u 2 by rw [mem_closedBall] at hq hz ⊢; linarith [dist_triangle z q u])
+  have hring2 : ∀ {q : ℂ}, q ∈ closedBall u 1 → ∀ z, dist z q = 1 → z ∈ closedBall u 2 := fun {q} hq z hz => by
+    rw [mem_closedBall] at hq ⊢; linarith [dist_triangle z q u]
+  -- the two pseudo-colourings, read through one labelling `g₁`
+  obtain ⟨C₁, g₁, hg₁, hg₁u, hL₁, hR₁, -, hns₁⟩ := B.exists_pseudoCircle h₁ c₁
+  obtain ⟨C₂, g₂, hg₂, hg₂u, hL₂, hR₂, -, hns₂⟩ := B.exists_pseudoCircle h₂ c₂
+  have hsurj : ∀ j : Fin 6, j ∉ F.coloursAt u₁ → ∃ v, g₁ v = j := by
+    intro j hj
+    by_contra hno
+    push Not at hno
+    have hsub : ((Finset.univ.image g₁ ∪ {j} : Finset (Fin 6)) : Set (Fin 6)) ⊆ (F.coloursAt u₁)ᶜ := by
+      intro i hi
+      simp only [Finset.coe_union, Finset.coe_image, Finset.coe_univ, image_univ, Finset.coe_singleton, mem_union,
+        mem_range, mem_singleton_iff] at hi
+      rcases hi with ⟨v, rfl⟩ | rfl
+      · exact hg₁u v
+      · exact hj
+    have hdisj : Disjoint (Finset.univ.image g₁) {j} := by
+      rw [Finset.disjoint_singleton_right]; simp only [Finset.mem_image, Finset.mem_univ, true_and, not_exists]
+      exact hno
+    have hcard : (Finset.univ.image g₁ ∪ {j}).card = 4 := by
+      rw [Finset.card_union_of_disjoint hdisj, Finset.card_image_of_injective _ hg₁]; simp
+    have h3 : (F.coloursAt u₁)ᶜ.ncard = 3 := by
+      rw [Set.ncard_compl, Nat.card_eq_fintype_card, Fintype.card_fin, c₁.2]
+    have := Set.ncard_le_ncard hsub
+    rw [Set.ncard_coe_finset, hcard, h3] at this
+    omega
+  choose ρ hρ using fun w => hsurj (g₂ w) (hsame ▸ hg₂u w)
+  have hρi : Function.Injective ρ := fun a b h => hg₂ (by rw [← hρ a, ← hρ b, h])
+  obtain ⟨C₂', hS₂', hL₂', hR₂', -, hns₂'⟩ := CircleColouring.link_relabel C₂ hρi
+  have hns₂'' := hns₂' hns₂
+  have hL₂g : ∀ θ v, C₂'.LeftVal θ v ↔ F.GermPseudo u₂ θ .cw (g₁ v) := by
+    intro θ v
+    obtain ⟨w, hw⟩ := CircleColouring.exists_left_const C₂.locallyConstant θ
+    have hw' : C₂'.LeftVal θ (ρ w) := (hL₂' θ w).mpr hw
+    have hgw : F.GermPseudo u₂ θ .cw (g₁ (ρ w)) := by rw [hρ]; exact (hL₂ θ w).mp hw
+    constructor
+    · intro h; rw [CircleColouring.LeftVal.unique h hw']; exact hgw
+    · intro h; rw [hg₁ (germPseudo_unique h hgw)]; exact hw'
+  have hR₂g : ∀ θ v, C₂'.RightVal θ v ↔ F.GermPseudo u₂ θ .ccw (g₁ v) := by
+    intro θ v
+    obtain ⟨w, hw⟩ := CircleColouring.exists_right_const C₂.locallyConstant θ
+    have hw' : C₂'.RightVal θ (ρ w) := (hR₂' θ w).mpr hw
+    have hgw : F.GermPseudo u₂ θ .ccw (g₁ (ρ w)) := by rw [hρ]; exact (hR₂ θ w).mp hw
+    constructor
+    · intro h; rw [CircleColouring.RightVal.unique h hw']; exact hgw
+    · intro h; rw [hg₁ (germPseudo_unique h hgw)]; exact hw'
+  -- lifts, and the band of the second (BV-H1)
+  obtain ⟨L₁⟩ := CircleColouring.exists_lift C₁
+  obtain ⟨L₂⟩ := CircleColouring.exists_lift C₂'
+  obtain ⟨θ₀, -, hg₀⟩ := C₂'.exists_good_near 0 1 one_pos
+  have hT00 : θ₀ ∈ CircleColouring.T0 C₂' := ⟨hg₀.notMem, by simpa using hg₀.hex_notMem (i := 1) (by norm_num)⟩
+  obtain ⟨M, hMc⟩ : ∃ M, ∀ z ∈ CircleColouring.T0 C₂', L₂.m 0 z = M :=
+    ⟨L₂.m 0 θ₀, fun z hz => CircleColouring.m0_const L₂ (CircleColouring.hbig_of_noSwap L₂ hns₂'') z hz θ₀ hT00⟩
+  have hbandz : ∀ z ∈ CircleColouring.T0 C₂', 3 * M + 1 ≤ L₂.D 0 z ∧ L₂.D 0 z ≤ 3 * M + 2 := by
+    intro z hz
+    have h1 := hMc z hz
+    have h2 := CircleColouring.Lift.D0_mod_ne (L := L₂) hz.1 hz.2
+    unfold CircleColouring.Lift.m at h1
+    omega
+  have hbandL : ∀ (x : ℝ) (l r l' r' : ℤ), L₂.Sides x l r → L₂.Sides (x + π / 3) l' r' →
+      3 * M + 1 ≤ l' - l ∧ l' - l ≤ 3 * M + 2 := by
+    intro x l r l' r' h0 h1
+    obtain ⟨z, hz, hzD⟩ := CircleColouring.exists_T0_left L₂ h0 h1
+    rw [← hzD]; exact hbandz z hz
+  have hbandR : ∀ (x : ℝ) (l r l' r' : ℤ), L₂.Sides x l r → L₂.Sides (x + π / 3) l' r' →
+      3 * M + 1 ≤ r' - r ∧ r' - r ≤ 3 * M + 2 := by
+    intro x l r l' r' h0 h1
+    obtain ⟨z, hz, hzD⟩ := CircleColouring.exists_T0_right L₂ h0 h1
+    rw [← hzD]; exact hbandz z hz
+  -- the linkage
+  obtain ⟨φ, χ, θA, φP, χP, hφc, hχc, hφper, hχper, hdist, hφfib, hχfib, hturn, hθA0, hθAπ, hφA, hφA', hin1, hin2,
+    hchiA, hflip, hone⟩ := exists_linkage ht ht'
+  -- the generic sets: change points and non-singleton points of each ring
+  set N₁ := {θ : ℝ | (F.pseudoColours u₁ (ringPt u₁ θ)).ncard ≠ 1} with hN₁
+  set N₂ := {θ : ℝ | (F.pseudoColours u₂ (ringPt u₂ θ)).ncard ≠ 1} with hN₂
+  have hNper : ∀ p : ℂ, ∀ θ, (F.pseudoColours p (ringPt p (θ + 2 * π))).ncard = (F.pseudoColours p (ringPt p θ)).ncard :=
+    fun p θ => by rw [show ringPt p (θ + 2 * π) = ringPt p θ by simp only [ringPt, e_add_two_pi]]
+  have hNfin : ∀ {p : ℂ}, p ∈ closedBall u 1 → F.IsCubicTrichromatic p → ∀ a b,
+      ({θ : ℝ | (F.pseudoColours p (ringPt p θ)).ncard ≠ 1} ∩ Icc a b).Finite := by
+    intro p hp hp3 a b
+    refine CircleColouring.link_periodic_finite (fun θ => by simp only [mem_setOf_eq, hNper]) ?_ a b
+    refine (B.pseudo_finite hp hp3).subset fun θ ⟨h1, h2⟩ => ⟨h2, h1⟩
+  have hT₁ : ∀ a b, ((C₁.S ∪ N₁) ∩ Icc a b).Finite := fun a b => by
+    rw [union_inter_distrib_right]; exact (C₁.S_inter_Icc_finite a b).union (hNfin h₁ c₁ a b)
+  have hT₂ : ∀ a b, ((C₂'.S ∪ N₂) ∩ Icc a b).Finite := fun a b => by
+    rw [union_inter_distrib_right]; exact (C₂'.S_inter_Icc_finite a b).union (hNfin h₂ c₂ a b)
+  -- (hgen) generic pairs are not `0 mod 3`: FS112-N3-PAIRS (i)
+  have hpseudo1 : ∀ θ, θ ∉ C₁.S → θ ∉ N₁ → F.pseudoColours u₁ (ringPt u₁ θ) = {g₁ (C₁.c θ)} := by
+    intro θ hS hN
+    have hv : C₁.LeftVal θ (C₁.c θ) := nhdsWithin_le_nhds (C₁.locallyConstant θ hS)
+    have hm := ((hL₁ θ _).mp hv).mem_pseudoColours
+    have h1 : (F.pseudoColours u₁ (ringPt u₁ θ)).ncard = 1 := by by_contra h; exact hN h
+    obtain ⟨a, ha⟩ := Set.ncard_eq_one.mp h1
+    rw [ha] at hm ⊢; rw [mem_singleton_iff.mp hm]
+  have hpseudo2 : ∀ θ, θ ∉ C₂'.S → θ ∉ N₂ → F.pseudoColours u₂ (ringPt u₂ θ) = {g₁ (C₂'.c θ)} := by
+    intro θ hS hN
+    have hv : C₂'.LeftVal θ (C₂'.c θ) := nhdsWithin_le_nhds (C₂'.locallyConstant θ hS)
+    have hm := ((hL₂g θ _).mp hv).mem_pseudoColours
+    have h1 : (F.pseudoColours u₂ (ringPt u₂ θ)).ncard = 1 := by by_contra h; exact hN h
+    obtain ⟨a, ha⟩ := Set.ncard_eq_one.mp h1
+    rw [ha] at hm ⊢; rw [mem_singleton_iff.mp hm]
+  have hgen : ∀ s, φ s ∉ C₁.S ∪ N₁ → χ s ∉ C₂'.S ∪ N₂ → (L₁.f (φ s) - L₂.f (χ s)) % 3 ≠ 0 := by
+    intro s hs1 hs2 h0
+    have hS1 : φ s ∉ C₁.S := fun h => hs1 (Or.inl h)
+    have hS2 : χ s ∉ C₂'.S := fun h => hs2 (Or.inl h)
+    have hc : C₁.c (φ s) = C₂'.c (χ s) := by
+      have h3 : ((L₁.f (φ s) - L₂.f (χ s) : ℤ) : ZMod 3) = 0 :=
+        (ZMod.intCast_zmod_eq_zero_iff_dvd _ 3).mpr (Int.dvd_of_emod_eq_zero h0)
+      push_cast at h3
+      rw [L₁.cast_eq _ hS1, L₂.cast_eq _ hS2] at h3
+      exact sub_eq_zero.mp h3
+    have hp2 := hpseudo2 (χ s) hS2 fun h => hs2 (Or.inr h)
+    rw [← hc] at hp2
+    exact pair_i hF c₁ c₂ (hcov h₁) (hcov h₂) (by linarith) (dist_ringPt _ _) (dist_ringPt _ _) (hdist s)
+      (hpseudo1 (φ s) hS1 fun h => hs1 (Or.inr h)) hp2
+  -- (hdbl) a double event carries one pair, against FS112-N3-PAIRS (ii) under H, unless `y` turns
+  have hdbl : ∀ s, ∀ l₁ r₁ l₂ r₂ : ℤ, L₁.Sides (φ s) l₁ r₁ → L₂.Sides (χ s) l₂ r₂ → (r₁ - l₁ = 1 ∨ r₁ - l₁ = -1) →
+      (r₂ - l₂ = 1 ∨ r₂ - l₂ = -1) → ((l₁ - l₂) % 3 = 0 ∧ (r₁ - r₂) % 3 = 0 ∨ (l₁ - r₂) % 3 = 0 ∧ (r₁ - l₂) % 3 = 0) →
+      (∀ᶠ s' in 𝓝[≠] s, χ s' < χ s) ∨ (∀ᶠ s' in 𝓝[≠] s, χ s < χ s') := by
+    intro s l₁ r₁ l₂ r₂ hs1 hs2 hj1 hj2 hpair
+    by_cases h2 : dist (ringPt u₂ (χ s)) u₁ = 2
+    · exact hturn s h2
+    exfalso
+    have hcast : ∀ a b : ℤ, (a - b) % 3 = 0 → (a : ZMod 3) = b := fun a b h =>
+      (ZMod.intCast_eq_intCast_iff' a b 3).mpr (by omega)
+    have hne : ∀ a b : ℤ, (a - b = 1 ∨ a - b = -1) → (a : ZMod 3) ≠ b := fun a b h h' => by
+      have := (ZMod.intCast_eq_intCast_iff' a b 3).mp h'; omega
+    obtain ⟨hv1l, hv1r⟩ := hs1.vals
+    obtain ⟨hv2l, hv2r⟩ := hs2.vals
+    have hpx : F.pseudoColours u₁ (ringPt u₁ (φ s)) = {g₁ (l₁ : ZMod 3), g₁ (r₁ : ZMod 3)} := by
+      have hsub : ({g₁ (l₁ : ZMod 3), g₁ (r₁ : ZMod 3)} : Set (Fin 6)) ⊆ F.pseudoColours u₁ (ringPt u₁ (φ s)) :=
+        insert_subset ((hL₁ _ _).mp hv1l).mem_pseudoColours (singleton_subset_iff.mpr ((hR₁ _ _).mp hv1r).mem_pseudoColours)
+      have hle := B.pseudo_ncard_le_two h₁ c₁ (dist_ringPt u₁ (φ s))
+      exact (Set.eq_of_subset_of_ncard_le hsub (by rw [Set.ncard_pair (hg₁.ne (hne r₁ l₁ hj1).symm)]; exact hle)).symm
+    have hpy : F.pseudoColours u₂ (ringPt u₂ (χ s)) = {g₁ (l₂ : ZMod 3), g₁ (r₂ : ZMod 3)} := by
+      have hsub : ({g₁ (l₂ : ZMod 3), g₁ (r₂ : ZMod 3)} : Set (Fin 6)) ⊆ F.pseudoColours u₂ (ringPt u₂ (χ s)) :=
+        insert_subset ((hL₂g _ _).mp hv2l).mem_pseudoColours (singleton_subset_iff.mpr ((hR₂g _ _).mp hv2r).mem_pseudoColours)
+      have hle := B.pseudo_ncard_le_two h₂ c₂ (dist_ringPt u₂ (χ s))
+      exact (Set.eq_of_subset_of_ncard_le hsub (by rw [Set.ncard_pair (hg₁.ne (hne r₂ l₂ hj2).symm)]; exact hle)).symm
+    have hpy' : F.pseudoColours u₂ (ringPt u₂ (χ s)) = {g₁ (l₁ : ZMod 3), g₁ (r₁ : ZMod 3)} := by
+      rw [hpy]
+      rcases hpair with ⟨h1, h2⟩ | ⟨h1, h2⟩
+      · rw [hcast l₁ l₂ h1, hcast r₁ r₂ h2]
+      · rw [hcast l₁ r₂ h1, hcast r₁ l₂ h2, Set.pair_comm]
+    have htr : ringPt u₂ (χ s) ≠ u₁ ∧ dist (ringPt u₂ (χ s)) u₁ ≠ 2 := ⟨fun h => by
+      have := dist_ringPt u₂ (χ s); rw [h] at this; linarith, h2⟩
+    rcases pair_ii hF c₁ c₂ (hcov h₁) (hcov h₂) (dist_ringPt _ _) (dist_ringPt _ _) (hdist s) htr
+        (hg₁.ne (hne r₁ l₁ hj1).symm) hpx hpy' with h4 | ⟨θ₁, θ₂, hb⟩
+    · have hx2 := hring2 h₁ _ (dist_ringPt u₁ (φ s))
+      exact Set.disjoint_left.mp B.hyp hx2 (Or.inl ⟨B.covers hx2, h4⟩)
+    · have hy2 := hring2 h₂ _ (dist_ringPt u₂ (χ s))
+      rcases noBoth hF (B.covers hy2) hb with h4 | hrep
+      · exact Set.disjoint_left.mp B.hyp hy2 (Or.inl ⟨B.covers hy2, h4⟩)
+      · exact Set.disjoint_left.mp B.hyp hy2 (Or.inr ⟨B.covers hy2, hrep⟩)
+  -- sides at the ends of the two paths
+  obtain ⟨l₁P, r₁P, hsP, -⟩ := L₁.exists_sides φP
+  obtain ⟨lA, rA, hsA, -⟩ := L₂.exists_sides (χ θA)
+  obtain ⟨lB, rB, hsB, -⟩ := L₂.exists_sides (χ (-θA))
+  have hsP1 : L₁.Sides (φ (-θA)) l₁P r₁P := hφA' ▸ hsP
+  have hsP2 : L₁.Sides (φ θA) l₁P r₁P := hφA ▸ hsP
+  have h2πA : 2 * π - θA = -θA + 2 * π := by ring
+  have hsP3 : L₁.Sides (φ (2 * π - θA)) l₁P r₁P := by rw [h2πA, hφper]; exact hsP1
+  have hsB3 : L₂.Sides (χ (2 * π - θA)) lB rB := by rw [h2πA, hχper]; exact hsB
+  have hφc' := hφc.continuousOn (s := Icc (-θA) θA)
+  have hχc' := hχc.continuousOn (s := Icc (-θA) θA)
+  have hφc'' := hφc.continuousOn (s := Icc θA (2 * π - θA))
+  have hχc'' := hχc.continuousOn (s := Icc θA (2 * π - θA))
+  -- path 1, `[−θ_A, θ_A]`: `x` above `P`
+  obtain ⟨δ1, hδ1, hδ1b, h1φ⟩ := CircleColouring.link_val_right L₁ hφc' (hφfib _ _) ⟨le_rfl, by linarith⟩ hsP1
+  obtain ⟨δ2, hδ2, hδ2b, h1χ⟩ := CircleColouring.link_val_right L₂ hχc' (hχfib _ _) ⟨le_rfl, by linarith⟩ hsB
+  obtain ⟨δ3, hδ3, hδ3a, h2φ⟩ := CircleColouring.link_val_left L₁ hφc' (hφfib _ _) ⟨by linarith, le_rfl⟩ hsP2
+  obtain ⟨δ4, hδ4, hδ4a, h2χ⟩ := CircleColouring.link_val_left L₂ hχc' (hχfib _ _) ⟨by linarith, le_rfl⟩ hsA
+  have hφ1 : ∀ s ∈ Ioo (-θA) (-θA + δ1), L₁.f (φ s) = r₁P := by
+    rcases h1φ with h | h
+    · intro s hs; exfalso
+      have e1 := (h s hs).2; have e2 := hin1 s ⟨hs.1, by linarith [hs.2]⟩; rw [hφA'] at e1; linarith
+    · exact fun s hs => (h s hs).1
+  have hφ2 : ∀ s ∈ Ioo (θA - δ3) θA, L₁.f (φ s) = r₁P := by
+    rcases h2φ with h | h
+    · intro s hs; exfalso
+      have e1 := (h s hs).2; have e2 := hin1 s ⟨by linarith [hs.1], hs.2⟩; rw [hφA] at e1; linarith
+    · exact fun s hs => (h s hs).1
+  obtain ⟨hB1, hB1v, hB1s⟩ : ∃ h : ℤ, (∀ s ∈ Ioo (-θA) (-θA + δ2), L₂.f (χ s) = h) ∧
+      ((h = lB ∧ ∀ s ∈ Ioo (-θA) (-θA + δ2), χ s < χ (-θA)) ∨ (h = rB ∧ ∀ s ∈ Ioo (-θA) (-θA + δ2), χ (-θA) < χ s)) := by
+    rcases h1χ with h | h
+    · exact ⟨lB, fun s hs => (h s hs).1, Or.inl ⟨rfl, fun s hs => (h s hs).2⟩⟩
+    · exact ⟨rB, fun s hs => (h s hs).1, Or.inr ⟨rfl, fun s hs => (h s hs).2⟩⟩
+  obtain ⟨hA1, hA1v, hA1s⟩ : ∃ h : ℤ, (∀ s ∈ Ioo (θA - δ4) θA, L₂.f (χ s) = h) ∧
+      ((h = lA ∧ ∀ s ∈ Ioo (θA - δ4) θA, χ s < χ θA) ∨ (h = rA ∧ ∀ s ∈ Ioo (θA - δ4) θA, χ θA < χ s)) := by
+    rcases h2χ with h | h
+    · exact ⟨lA, fun s hs => (h s hs).1, Or.inl ⟨rfl, fun s hs => (h s hs).2⟩⟩
+    · exact ⟨rA, fun s hs => (h s hs).1, Or.inr ⟨rfl, fun s hs => (h s hs).2⟩⟩
+  have hp1 := CircleColouring.link_path L₁ L₂ (by linarith : -θA < θA) hφc' hχc' (hφfib _ _) (hχfib _ _) hT₁ hT₂
+    subset_union_left subset_union_left (fun s _ => hgen s) (fun s _ => hdbl s) (r₁P - hB1) (r₁P - hA1)
+    ⟨min δ1 δ2, lt_min hδ1 hδ2, fun s hs => by
+      rw [hφ1 s ⟨hs.1, by linarith [hs.2, min_le_left δ1 δ2]⟩, hB1v s ⟨hs.1, by linarith [hs.2, min_le_right δ1 δ2]⟩]⟩
+    ⟨min δ3 δ4, lt_min hδ3 hδ4, fun s hs => by
+      rw [hφ2 s ⟨by linarith [hs.1, min_le_left δ3 δ4], hs.2⟩, hA1v s ⟨by linarith [hs.1, min_le_right δ3 δ4], hs.2⟩]⟩
+  -- path 2, `[θ_A, 2π − θ_A]`: `x` below `P`
+  obtain ⟨δ5, hδ5, hδ5b, h3φ⟩ := CircleColouring.link_val_right L₁ hφc'' (hφfib _ _) ⟨le_rfl, by linarith⟩ hsP2
+  obtain ⟨δ6, hδ6, hδ6b, h3χ⟩ := CircleColouring.link_val_right L₂ hχc'' (hχfib _ _) ⟨le_rfl, by linarith⟩ hsA
+  obtain ⟨δ7, hδ7, hδ7a, h4φ⟩ := CircleColouring.link_val_left L₁ hφc'' (hφfib _ _) ⟨by linarith, le_rfl⟩ hsP3
+  obtain ⟨δ8, hδ8, hδ8a, h4χ⟩ := CircleColouring.link_val_left L₂ hχc'' (hχfib _ _) ⟨by linarith, le_rfl⟩ hsB3
+  have hφ3 : ∀ s ∈ Ioo θA (θA + δ5), L₁.f (φ s) = l₁P := by
+    rcases h3φ with h | h
+    · exact fun s hs => (h s hs).1
+    · intro s hs; exfalso
+      have e1 := (h s hs).2; have e2 := hin2 s ⟨hs.1, by linarith [hs.2]⟩; rw [hφA] at e1; linarith
+  have hφ4 : ∀ s ∈ Ioo (2 * π - θA - δ7) (2 * π - θA), L₁.f (φ s) = l₁P := by
+    rcases h4φ with h | h
+    · exact fun s hs => (h s hs).1
+    · intro s hs; exfalso
+      have e1 := (h s hs).2; have e2 := hin2 s ⟨by linarith [hs.1], hs.2⟩
+      rw [h2πA, hφper, hφA'] at e1; linarith
+  obtain ⟨hA2, hA2v, hA2s⟩ : ∃ h : ℤ, (∀ s ∈ Ioo θA (θA + δ6), L₂.f (χ s) = h) ∧
+      ((h = lA ∧ ∀ s ∈ Ioo θA (θA + δ6), χ s < χ θA) ∨ (h = rA ∧ ∀ s ∈ Ioo θA (θA + δ6), χ θA < χ s)) := by
+    rcases h3χ with h | h
+    · exact ⟨lA, fun s hs => (h s hs).1, Or.inl ⟨rfl, fun s hs => (h s hs).2⟩⟩
+    · exact ⟨rA, fun s hs => (h s hs).1, Or.inr ⟨rfl, fun s hs => (h s hs).2⟩⟩
+  obtain ⟨hB2, hB2v, hB2s⟩ : ∃ h : ℤ, (∀ s ∈ Ioo (2 * π - θA - δ8) (2 * π - θA), L₂.f (χ s) = h) ∧
+      ((h = lB ∧ ∀ s ∈ Ioo (2 * π - θA - δ8) (2 * π - θA), χ s < χ (2 * π - θA)) ∨
+        (h = rB ∧ ∀ s ∈ Ioo (2 * π - θA - δ8) (2 * π - θA), χ (2 * π - θA) < χ s)) := by
+    rcases h4χ with h | h
+    · exact ⟨lB, fun s hs => (h s hs).1, Or.inl ⟨rfl, fun s hs => (h s hs).2⟩⟩
+    · exact ⟨rB, fun s hs => (h s hs).1, Or.inr ⟨rfl, fun s hs => (h s hs).2⟩⟩
+  have hp2 := CircleColouring.link_path L₁ L₂ (by linarith : θA < 2 * π - θA) hφc'' hχc'' (hφfib _ _) (hχfib _ _) hT₁ hT₂
+    subset_union_left subset_union_left (fun s _ => hgen s) (fun s _ => hdbl s) (l₁P - hA2) (l₁P - hB2)
+    ⟨min δ5 δ6, lt_min hδ5 hδ6, fun s hs => by
+      rw [hφ3 s ⟨hs.1, by linarith [hs.2, min_le_left δ5 δ6]⟩, hA2v s ⟨hs.1, by linarith [hs.2, min_le_right δ5 δ6]⟩]⟩
+    ⟨min δ7 δ8, lt_min hδ7 hδ8, fun s hs => by
+      rw [hφ4 s ⟨by linarith [hs.1, min_le_left δ7 δ8], hs.2⟩, hB2v s ⟨by linarith [hs.1, min_le_right δ7 δ8], hs.2⟩]⟩
+  -- the flips: where `|y − u₁| < 2`, the two paths reach `y` from opposite sides
+  have hflipA : dist (ringPt u₂ (χ θA)) u₁ < 2 → (hA1 = lA ∧ hA2 = rA) ∨ (hA1 = rA ∧ hA2 = lA) := by
+    intro hd
+    obtain ⟨η, hη, hm⟩ := hflip θA (Or.inl rfl) hd
+    set ε := min η (min δ4 δ6) with hε
+    have hε0 : 0 < ε := lt_min hη (lt_min hδ4 hδ6)
+    have e1 : ε ≤ η := min_le_left _ _
+    have e2 : ε ≤ δ4 := (min_le_right _ _).trans (min_le_left _ _)
+    have e3 : ε ≤ δ6 := (min_le_right _ _).trans (min_le_right _ _)
+    have hs₁ : θA - ε / 2 ∈ Ioo (θA - δ4) θA := ⟨by linarith, by linarith⟩
+    have hs₂ : θA + ε / 2 ∈ Ioo θA (θA + δ6) := ⟨by linarith, by linarith⟩
+    have m₁ : θA - ε / 2 ∈ Icc (θA - η) (θA + η) := ⟨by linarith, by linarith⟩
+    have m₀ : θA ∈ Icc (θA - η) (θA + η) := ⟨by linarith, by linarith⟩
+    have m₂ : θA + ε / 2 ∈ Icc (θA - η) (θA + η) := ⟨by linarith, by linarith⟩
+    rcases hm with hm | hm
+    · have f1 := hm m₁ m₀ (by linarith)
+      have f2 := hm m₀ m₂ (by linarith)
+      left; constructor
+      · rcases hA1s with ⟨h, -⟩ | ⟨-, h⟩
+        · exact h
+        · exact absurd (h _ hs₁) (not_lt.mpr f1.le)
+      · rcases hA2s with ⟨-, h⟩ | ⟨h, -⟩
+        · exact absurd (h _ hs₂) (not_lt.mpr f2.le)
+        · exact h
+    · have f1 := hm m₁ m₀ (by linarith)
+      have f2 := hm m₀ m₂ (by linarith)
+      right; constructor
+      · rcases hA1s with ⟨-, h⟩ | ⟨h, -⟩
+        · exact absurd (h _ hs₁) (not_lt.mpr f1.le)
+        · exact h
+      · rcases hA2s with ⟨h, -⟩ | ⟨-, h⟩
+        · exact h
+        · exact absurd (h _ hs₂) (not_lt.mpr f2.le)
+  have hflipB : dist (ringPt u₂ (χ (-θA))) u₁ < 2 → (hB1 = rB ∧ hB2 = lB) ∨ (hB1 = lB ∧ hB2 = rB) := by
+    intro hd
+    obtain ⟨η, hη, hm⟩ := hflip (-θA) (Or.inr rfl) hd
+    set ε := min η (min δ2 δ8) with hε
+    have hε0 : 0 < ε := lt_min hη (lt_min hδ2 hδ8)
+    have e1 : ε ≤ η := min_le_left _ _
+    have e2 : ε ≤ δ2 := (min_le_right _ _).trans (min_le_left _ _)
+    have e3 : ε ≤ δ8 := (min_le_right _ _).trans (min_le_right _ _)
+    have hs₁ : -θA + ε / 2 ∈ Ioo (-θA) (-θA + δ2) := ⟨by linarith, by linarith⟩
+    have hs₂ : 2 * π - θA - ε / 2 ∈ Ioo (2 * π - θA - δ8) (2 * π - θA) := ⟨by linarith, by linarith⟩
+    have hper2 : χ (2 * π - θA - ε / 2) = χ (-θA - ε / 2) := by
+      rw [show 2 * π - θA - ε / 2 = (-θA - ε / 2) + 2 * π by ring, hχper]
+    have hper0 : χ (2 * π - θA) = χ (-θA) := by rw [h2πA, hχper]
+    have m₁ : -θA - ε / 2 ∈ Icc (-θA - η) (-θA + η) := ⟨by linarith, by linarith⟩
+    have m₀ : -θA ∈ Icc (-θA - η) (-θA + η) := ⟨by linarith, by linarith⟩
+    have m₂ : -θA + ε / 2 ∈ Icc (-θA - η) (-θA + η) := ⟨by linarith, by linarith⟩
+    rcases hm with hm | hm
+    · have f1 := hm m₁ m₀ (by linarith)
+      have f2 := hm m₀ m₂ (by linarith)
+      left; constructor
+      · rcases hB1s with ⟨-, h⟩ | ⟨h, -⟩
+        · exact absurd (h _ hs₁) (not_lt.mpr f2.le)
+        · exact h
+      · rcases hB2s with ⟨h, -⟩ | ⟨-, h⟩
+        · exact h
+        · have := h _ hs₂; rw [hper2, hper0] at this; exact absurd this (not_lt.mpr f1.le)
+    · have f1 := hm m₁ m₀ (by linarith)
+      have f2 := hm m₀ m₂ (by linarith)
+      right; constructor
+      · rcases hB1s with ⟨h, -⟩ | ⟨-, h⟩
+        · exact h
+        · exact absurd (h _ hs₁) (not_lt.mpr f2.le)
+      · rcases hB2s with ⟨-, h⟩ | ⟨h, -⟩
+        · have := h _ hs₂; rw [hper2, hper0] at this; exact absurd this (not_lt.mpr f1.le)
+        · exact h
+  -- the band at the two partners of `P` (BV-H1): `χ(±θ_A) = χ_P ± 60°`
+  obtain ⟨l₀, r₀, hs₀, -⟩ := L₂.exists_sides χP
+  obtain ⟨lp, rp, hsp, -⟩ := L₂.exists_sides (χP + π / 3)
+  obtain ⟨lm, rm, hsm, -⟩ := L₂.exists_sides (χP - π / 3)
+  have b1 := hbandL χP l₀ r₀ lp rp hs₀ hsp
+  have b2 := hbandR χP l₀ r₀ lp rp hs₀ hsp
+  have hsm' : L₂.Sides (χP - π / 3 + π / 3) l₀ r₀ := by rw [show χP - π / 3 + π / 3 = χP by ring]; exact hs₀
+  have b3 := hbandL (χP - π / 3) lm rm l₀ r₀ hsm hsm'
+  have b4 := hbandR (χP - π / 3) lm rm l₀ r₀ hsm hsm'
+  have hAB : (lA = lp ∧ rA = rp ∧ lB = lm ∧ rB = rm) ∨ (lA = lm ∧ rA = rm ∧ lB = lp ∧ rB = rp) := by
+    rcases hchiA with ⟨eA, eB⟩ | ⟨eA, eB⟩
+    · rw [eA] at hsA; rw [eB] at hsB
+      obtain ⟨f1, f2⟩ := hsA.unique hsp
+      obtain ⟨f3, f4⟩ := hsB.unique hsm
+      exact Or.inl ⟨f1, f2, f3, f4⟩
+    · rw [eA] at hsA; rw [eB] at hsB
+      obtain ⟨f1, f2⟩ := hsA.unique hsm
+      obtain ⟨f3, f4⟩ := hsB.unique hsp
+      exact Or.inr ⟨f1, f2, f3, f4⟩
+  obtain ⟨p1a, p1b, p1c⟩ := hp1
+  obtain ⟨p2a, p2b, p2c⟩ := hp2
+  have hB1v' : hB1 = lB ∨ hB1 = rB := hB1s.imp (fun h => h.1) (fun h => h.1)
+  have hA1v' : hA1 = lA ∨ hA1 = rA := hA1s.imp (fun h => h.1) (fun h => h.1)
+  have hA2v' : hA2 = lA ∨ hA2 = rA := hA2s.imp (fun h => h.1) (fun h => h.1)
+  have hB2v' : hB2 = lB ∨ hB2 = rB := hB2s.imp (fun h => h.1) (fun h => h.1)
+  rcases hone with hd | hd
+  · rcases hflipA hd with ⟨e1, e2⟩ | ⟨e1, e2⟩ <;> rcases hB1v' with e3 | e3 <;> rcases hB2v' with e4 | e4 <;>
+      rcases hAB with ⟨f1, f2, f3, f4⟩ | ⟨f1, f2, f3, f4⟩ <;> omega
+  · rcases hflipB hd with ⟨e1, e2⟩ | ⟨e1, e2⟩ <;> rcases hA1v' with e3 | e3 <;> rcases hA2v' with e4 | e4 <;>
+      rcases hAB with ⟨f1, f2, f3, f4⟩ | ⟨f1, f2, f3, f4⟩ <;> omega
 
 /-- **The hexagon is excluded** (Prop. 17 with unit arcs): a rotating hexagon of the (reduced) pseudo-colouring of `ω(u)` is a `HexRing` of the
 map — its six points keep their germs — so `p17_ua` (or `bv_hex`) refutes it. -/

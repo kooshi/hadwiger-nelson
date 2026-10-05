@@ -1,0 +1,18 @@
+'HadwigerNelson.Plane.ArcMap.dist_ne_one_of_isOpen_isClear' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.add_mem_allowedCone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.smul_mem_allowedCone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.clear_of_push' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dot_e_eq_cos_sin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.norm_sub_smul_e_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.push_alg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.push_contacts_of_mem_allowedCone' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.tanHeight_hgt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.abs_hgt_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sign_sub_hgt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.e_add_sigma_pi_div_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sigma_tanHeight_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.push_decomp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.clear_near_end' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_merge_aux' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

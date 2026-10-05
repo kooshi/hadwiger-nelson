@@ -12,7 +12,7 @@ FS131-E5's two lemmas (`plans/FS131-E5-derivation.md` §§ 3.1, 3.3; entries `e5
   `tanAbove_S_of_dist_le_one`, its mirror `tanBelow_N_of_dist_le_one`; the horn forms `shadow_hornSet_subset_S`,
   `shadow_hornSet_add_pi_subset_S`, `shadow_hornSet_subset_N`, `shadow_hornSet_add_pi_subset_N`.
 * **SH2**, E5's form, on each side at each pole: `mem_shadow_hornSet_S`, `mem_shadow_hornSet_add_pi_S`, `mem_shadow_hornSet_N`,
-  `mem_shadow_hornSet_add_pi_N` (over `isPreconnected_hornSet_unit` and the far-side shadow `shadow_farSide_above`).
+  `mem_shadow_hornSet_add_pi_N` (over `Surgery`'s `isPreconnected_hornSet` and the far-side shadow `shadow_farSide_above`).
 * **SEP**, as the unit pair it produces: `sep_S`, `sep_add_pi_S`, `sep_N`, `sep_add_pi_N`.
 -/
 
@@ -174,47 +174,6 @@ theorem shadow_hornSet_add_pi_subset_N {v : ℂ} {α κ₃ κ₄ r : ℝ} (hκ�
 
 /-! ## SH2 — near the pole, the region above the concentric circle is in the shadow -/
 
-/-- **A horn with bounds in `[−1, 1]` is connected** (radius at most `1/2`): it is the sector between two germs of one direction
-(`sectorBetween_eq_hornSet`, `BranchGerms.isPreconnected_sector`). -/
-theorem isPreconnected_hornSet_unit {v : ℂ} {α κ₁ κ₂ r : ℝ} (h12 : κ₁ < κ₂) (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1)
-    (hr : r ≤ 1 / 2) : IsPreconnected (hornSet v α κ₁ κ₂ r) := by
-  have hπ := Real.pi_pos
-  set G : BranchGerms 2 := ⟨![α, α], ![κ₁, κ₂]⟩ with hG
-  have hb1 : |κ₁| ≤ 1 := abs_le.mpr ⟨h1, by linarith⟩
-  have hb2 : |κ₂| ≤ 1 := abs_le.mpr ⟨by linarith, h2⟩
-  have hsec : G.sector v r 0 = hornSet v α κ₁ κ₂ r := by
-    have hb : G.nextβ 0 = α := by simp [BranchGerms.nextβ, hG]
-    have hk : G.nextκ 0 = κ₂ := by simp [BranchGerms.nextκ, hG]
-    show sectorBetween v (G.β 0) (G.κ 0) (G.nextβ 0) (G.nextκ 0) r = _
-    rw [hb, hk]
-    have h0 : G.β 0 = α := rfl
-    have h1' : G.κ 0 = κ₁ := rfl
-    rw [h0, h1']
-    rcases le_or_gt r 0 with hr0 | hr0
-    · ext z
-      simp only [sectorBetween, hornSet, mem_setOf_eq]
-      constructor
-      · rintro ⟨s, ⟨hs0, hsr⟩, -⟩; linarith
-      · rintro ⟨hz, -⟩; linarith [dist_nonneg (x := z) (y := v)]
-    · exact sectorBetween_eq_hornSet v α κ₁ κ₂ r (by nlinarith [abs_nonneg κ₁]) (by nlinarith [abs_nonneg κ₂])
-  rw [← hsec]
-  refine G.isPreconnected_sector (r₀ := 1 / 2) (fun s hs i => ?_) hr 0
-  have hs0 := hs.1
-  have hs1 := hs.2
-  have ha1 : κ₁ * s / 2 ∈ Icc (-1 : ℝ) 1 := half_curv_mem_Icc (r := 1 / 2) (by nlinarith) hs0.le hs1.le
-  have ha2 : κ₂ * s / 2 ∈ Icc (-1 : ℝ) 1 := half_curv_mem_Icc (r := 1 / 2) (by nlinarith) hs0.le hs1.le
-  fin_cases i
-  · show germDir (G.β 0) (G.κ 0) s < germDir (G.nextβ 0) (G.nextκ 0) s
-    simp only [germDir, BranchGerms.nextβ, BranchGerms.nextκ, hG]
-    norm_num
-    exact Real.arcsin_lt_arcsin ha1.1 (by nlinarith) ha2.2
-  · show germDir (G.β 1) (G.κ 1) s < germDir (G.nextβ 1) (G.nextκ 1) s
-    simp only [germDir, BranchGerms.nextβ, BranchGerms.nextκ, hG]
-    norm_num
-    have := Real.arcsin_le_pi_div_two (κ₂ * s / 2)
-    have := Real.neg_pi_div_two_le_arcsin (κ₁ * s / 2)
-    linarith
-
 /-- **The vertical drop** (E5's (D), in heights): from a point `(X, Y)` above the `ν`-circle near the origin (`X > 0`, `X² + Y² < δ²`,
 `0 < δ ≤ 1/4`, `|ν| ≤ 1`) a lower height `Y' ∈ [−δ, Y)` lies strictly between the `ν`-circle and the `ν'`-circle (`ν < ν'`): an
 intermediate value of `t ↦ tanHeight ν X (Y − t)`, below `(ν' − ν) X²/2`. -/
@@ -291,21 +250,21 @@ theorem exists_near_hornSet_of_partner {v : ℂ} {α ν ν' r δ : ℝ} (hνabs 
     have h : (Yy + 1) ^ 2 < (1 / 4) ^ 2 := by linarith [sq_nonneg Xy]
     have := abs_lt.mp (abs_lt_of_sq_lt_sq h (by norm_num)); linarith
   obtain ⟨Y', hY'lo, hY'hi, hT1, hT2⟩ := exists_drop_height hνabs hνν' hwX hw2 hδ hδq hwT
-  refine ⟨framePt v α Xw Y', ⟨?_, ?_, ?_, ?_⟩, ?_⟩
-  · have h1 := sq_dist_frame v α (framePt v α Xw Y') v
-    rw [frameX_self, frameY_self, frameX_framePt, frameY_framePt] at h1
+  refine ⟨fromFrame v α Xw Y', ⟨?_, ?_, ?_, ?_⟩, ?_⟩
+  · have h1 := sq_dist_frame v α (fromFrame v α Xw Y') v
+    rw [frameX_self, frameY_self, frameX_fromFrame, frameY_fromFrame] at h1
     have hY'2 : Y' ^ 2 ≤ δ ^ 2 := by nlinarith
     have hXw2 : Xw ^ 2 < δ ^ 2 := by linarith [sq_nonneg Yw]
-    have : dist (framePt v α Xw Y') v ^ 2 < r ^ 2 := by nlinarith
+    have : dist (fromFrame v α Xw Y') v ^ 2 < r ^ 2 := by nlinarith
     exact (pow_lt_pow_iff_left₀ dist_nonneg hr.le two_ne_zero).mp this
-  · rw [frameX_framePt]; exact hwX
+  · rw [frameX_fromFrame]; exact hwX
   · show 0 < tanHeight _ _ _
-    rw [frameX_framePt, frameY_framePt]; exact hT1
+    rw [frameX_fromFrame, frameY_fromFrame]; exact hT1
   · show tanHeight _ _ _ < 0
-    rw [frameX_framePt, frameY_framePt]; exact hT2
-  · have h1 := sq_dist_frame v α y (framePt v α Xw Y')
-    rw [frameX_framePt, frameY_framePt, hXy, hYy] at h1
-    have : dist y (framePt v α Xw Y') ^ 2 < 1 := by
+    rw [frameX_fromFrame, frameY_fromFrame]; exact hT2
+  · have h1 := sq_dist_frame v α y (fromFrame v α Xw Y')
+    rw [frameX_fromFrame, frameY_fromFrame, hXy, hYy] at h1
+    have : dist y (fromFrame v α Xw Y') ^ 2 < 1 := by
       rw [h1]
       have hlo : Yy < Y' := by linarith
       have hp : 0 < (Yw - Y') * (Yw + Y' - 2 * Yy) := mul_pos (by linarith) (by linarith)
@@ -378,7 +337,9 @@ theorem mem_shadow_hornSet_S {v : ℂ} {α ν ν' r : ℝ} (hν : -1 < ν) (hν�
     rw [dist_comm z₀ y] at this
     linarith
   -- the intermediate value on the connected horn
-  have hpre := isPreconnected_hornSet_unit (v := v) (α := α) (r := r) hνν' hν.le hν' hr2
+  have hpre := isPreconnected_hornSet v α (r := r) hνν'
+    ((mul_le_of_le_one_left hr.le hνabs).trans_lt (by linarith))
+    ((mul_le_of_le_one_left hr.le (abs_le.mpr ⟨by linarith, hν'⟩)).trans_lt (by linarith))
   have hcont : ContinuousOn (fun z => dist y z) (hornSet v α ν ν' r) :=
     (continuous_const.dist continuous_id).continuousOn
   obtain ⟨z, hz, hyz⟩ := hpre.intermediate_value hw'H hz₀H hcont ⟨hyw'.le, hyz₀.le⟩
@@ -394,9 +355,9 @@ theorem mem_shadow_hornSet_add_pi_S {v : ℂ} {α κ₃ κ₄ r : ℝ} (h3 : -1 
   obtain ⟨ρ, hρ, H⟩ := mem_shadow_hornSet_S (v := v) (α := α) (ν := -κ₄) (ν' := -κ₃) (by linarith) (by linarith)
     (by linarith) hr hr2
   refine ⟨ρ, hρ, fun y hyS hyX hyT => ?_⟩
-  set y' := framePt v α (-frameX v α y) (frameY v α y) with hy'def
-  have hfx : frameX v α y' = -frameX v α y := frameX_framePt _ _ _ _
-  have hfy : frameY v α y' = frameY v α y := frameY_framePt _ _ _ _
+  set y' := fromFrame v α (-frameX v α y) (frameY v α y) with hy'def
+  have hfx : frameX v α y' = -frameX v α y := frameX_fromFrame _ _ _ _
+  have hfy : frameY v α y' = frameY v α y := frameY_fromFrame _ _ _ _
   have hy'S : dist y' (v - e (α + π / 2)) < ρ := by
     have : dist y' (v - e (α + π / 2)) = dist y (v - e (α + π / 2)) := by
       apply dist_eq_dist_of_frame (v := v) (α := α)
@@ -409,9 +370,9 @@ theorem mem_shadow_hornSet_add_pi_S {v : ℂ} {α κ₃ κ₄ r : ℝ} (h3 : -1 
     unfold tanHeight at hyT ⊢
     rw [neg_sq]; exact hyT
   obtain ⟨w, hw, hyw⟩ := H y' hy'S (by rw [hfx]; linarith) hy'T
-  set w' := framePt v α (-frameX v α w) (frameY v α w) with hw'def
-  have hgx : frameX v α w' = -frameX v α w := frameX_framePt _ _ _ _
-  have hgy : frameY v α w' = frameY v α w := frameY_framePt _ _ _ _
+  set w' := fromFrame v α (-frameX v α w) (frameY v α w) with hw'def
+  have hgx : frameX v α w' = -frameX v α w := frameX_fromFrame _ _ _ _
+  have hgy : frameY v α w' = frameY v α w := frameY_fromFrame _ _ _ _
   refine ⟨w', ⟨?_, ?_, ?_, ?_⟩, ?_⟩
   · have : dist w' v = dist w v := by
       apply dist_eq_dist_of_frame (v := v) (α := α)
@@ -951,32 +912,32 @@ theorem flank_radial_N {v : ℂ} {α : ℝ} {g : Fin k} (hg : F.IsFlankAbove v �
     rw [hu]; linarith [ht.1, min_le_right (r / 2) (min (1 / 2) (δ * A / 4)), min_le_right (1 / 2 : ℝ) (δ * A / 4)]
   have ht' : t = 1 - u := by rw [hu]; ring
   apply hr₀sub
-  rw [N_add_eq_framePt]
+  rw [normalPt_add_eq_fromFrame]
   have hq : (t * Real.sin x) ^ 2 + (1 - t * Real.cos x) ^ 2 = u ^ 2 + 2 * (1 - u) * A := by
-    rw [framePt_normSq_aux, ht', hA]; ring
+    rw [fromFrame_normSq_aux, ht', hA]; ring
   have hY : 1 - t * Real.cos x = u + A - u * A := by rw [ht', hA]; ring
   refine ⟨?_, ?_, ?_, ?_⟩
   · -- the distance from `v`
-    have hn := frame_normSq v α (framePt v α (t * Real.sin x) (1 - t * Real.cos x))
-    rw [frameX_framePt, frameY_framePt, hq, ← dist_eq_norm] at hn
+    have hn := frame_normSq v α (fromFrame v α (t * Real.sin x) (1 - t * Real.cos x))
+    rw [frameX_fromFrame, frameY_fromFrame, hq, ← dist_eq_norm] at hn
     have hlt : u ^ 2 + 2 * (1 - u) * A < r₀ ^ 2 := by
       have hx2 : x < r / 2 := hx.2
       have : x ^ 2 < r ^ 2 / 4 := by nlinarith [mul_lt_mul'' hx2 hx2 hx.1.le hx.1.le]
       have : u ^ 2 < r ^ 2 / 4 := by nlinarith
       have : r ^ 2 ≤ r₀ ^ 2 := by nlinarith
       nlinarith
-    nlinarith [dist_nonneg (x := framePt v α (t * Real.sin x) (1 - t * Real.cos x)) (y := v)]
+    nlinarith [dist_nonneg (x := fromFrame v α (t * Real.sin x) (1 - t * Real.cos x)) (y := v)]
   · show 0 < frameX v α _
-    rw [frameX_framePt]
+    rw [frameX_fromFrame]
     have : 0 < t := by rw [ht']; linarith
     positivity
   · show 0 < tanHeight 1 (frameX v α _) (frameY v α _)
-    rw [frameX_framePt, frameY_framePt]
+    rw [frameX_fromFrame, frameY_fromFrame]
     unfold tanHeight
     rw [hq, hY]
     nlinarith
   · show tanHeight κ' (frameX v α _) (frameY v α _) < 0
-    rw [frameX_framePt, frameY_framePt]
+    rw [frameX_fromFrame, frameY_fromFrame]
     unfold tanHeight
     rw [hq, hY]
     have hκ'e : κ' = 1 + δ := by rw [hδ]; ring
@@ -1022,34 +983,34 @@ theorem flank_radial_S {v : ℂ} {α : ℝ} {h : Fin k} (hh : F.IsFlankBelow v �
     rw [hu]; linarith [ht.1, min_le_right (r / 2) (min (1 / 2) (δ * A / 4)), min_le_right (1 / 2 : ℝ) (δ * A / 4)]
   have ht' : t = 1 - u := by rw [hu]; ring
   apply hr₀sub
-  rw [S_add_eq_framePt]
+  rw [S_add_eq_fromFrame]
   have hq : (t * Real.sin x) ^ 2 + (t * Real.cos x - 1) ^ 2 = u ^ 2 + 2 * (1 - u) * A := by
-    have := framePt_normSq_aux (t := t) (x := x)
+    have := fromFrame_normSq_aux (t := t) (x := x)
     rw [show (t * Real.cos x - 1) ^ 2 = (1 - t * Real.cos x) ^ 2 by ring, this, ht', hA]; ring
   have hY : t * Real.cos x - 1 = -(u + A - u * A) := by rw [ht', hA]; ring
   refine ⟨?_, ?_, ?_, ?_⟩
-  · have hn := frame_normSq v α (framePt v α (t * Real.sin x) (t * Real.cos x - 1))
-    rw [frameX_framePt, frameY_framePt, hq, ← dist_eq_norm] at hn
+  · have hn := frame_normSq v α (fromFrame v α (t * Real.sin x) (t * Real.cos x - 1))
+    rw [frameX_fromFrame, frameY_fromFrame, hq, ← dist_eq_norm] at hn
     have hlt : u ^ 2 + 2 * (1 - u) * A < r₀ ^ 2 := by
       have hx2 : x < r / 2 := hx.2
       have : x ^ 2 < r ^ 2 / 4 := by nlinarith [mul_lt_mul'' hx2 hx2 hx.1.le hx.1.le]
       have : u ^ 2 < r ^ 2 / 4 := by nlinarith
       have : r ^ 2 ≤ r₀ ^ 2 := by nlinarith
       nlinarith
-    nlinarith [dist_nonneg (x := framePt v α (t * Real.sin x) (t * Real.cos x - 1)) (y := v)]
+    nlinarith [dist_nonneg (x := fromFrame v α (t * Real.sin x) (t * Real.cos x - 1)) (y := v)]
   · show 0 < frameX v α _
-    rw [frameX_framePt]
+    rw [frameX_fromFrame]
     have : 0 < t := by rw [ht']; linarith
     positivity
   · show 0 < tanHeight κ' (frameX v α _) (frameY v α _)
-    rw [frameX_framePt, frameY_framePt]
+    rw [frameX_fromFrame, frameY_fromFrame]
     unfold tanHeight
     rw [hq, hY]
     have hκ'e : κ' = -1 - δ := by rw [hδ]; ring
     rw [hκ'e]
     nlinarith [mul_pos hδ0 hA0, sq_nonneg u, mul_pos hu0 hδ0]
   · show tanHeight (-1) (frameX v α _) (frameY v α _) < 0
-    rw [frameX_framePt, frameY_framePt]
+    rw [frameX_fromFrame, frameY_fromFrame]
     unfold tanHeight
     rw [hq, hY]
     nlinarith

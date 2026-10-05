@@ -1,0 +1,16 @@
+verbatim  "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a"  <- CLAUDE.md
+verbatim  'theorem exists_preBend {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hu2 : F.Covers u 2) (hu : F.'  <- .claude/worktrees/fs131-w5/Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean
+verbatim  "theorem bend_toward_collar (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRin"  <- .claude/worktrees/fs131-w5/data/fs131/i5o/BendCollar.lean
+verbatim  '- **E4-BEND-UN** — the toward-bend keeps the un-enclosure hypothesis — [hand], one mind, a'  <- plans/FS131-E4-derivation.md
+verbatim  '1. **Why `bendMap` cannot give the collar** (wave 4, `UnitArc` on `main`, `bendMap P θ₁ θ₂'  <- .claude/worktrees/fs131-w5/plans/FS131-I5-implementation.md
+verbatim  '2. **The construction in mind.** (a) *The lens boundary*: at a horn end, a circle arc thro'  <- .claude/worktrees/fs131-w5/plans/FS131-I5-implementation.md
+verbatim  '6. **Full circles** (`hlen`): a whole inert circle `ω(P) ⊆ Γ` has no ends; it needs its ow'  <- .claude/worktrees/fs131-w5/plans/FS131-I5-implementation.md
+verbatim  "359. **FS131-I5o, by message (mid-job): `exists_preBend`'s strengthened bend needs more th"  <- plans/FS131-close-inventory.md
+verbatim  '360. **Ruling on item 359.** (a) **Accepted: the strengthened bend as a stated child of `e'  <- plans/FS131-close-inventory.md
+verbatim  '365. **FS131-I5o, by message: a correction to item 363 — finding (1) retracted, finding (2'  <- plans/FS131-close-inventory.md
+verbatim  '366. **Ruling on item 365: FS131-E6 withdrawn; KB2 unblocked.** (a) No Ephodos job: findin'  <- plans/FS131-close-inventory.md
+verbatim  '369. **FS131-I5o handed back: `row134BaseUA` is held on `fs131-w5`** (Stage 42 SAVED, harn'  <- plans/FS131-close-inventory.md
+verbatim  "370. **Rulings on I5o's held items, and its slot.** (a) **`bv_l3` moves**, statement verba"  <- plans/FS131-close-inventory.md
+verbatim  "317. **Rulings on I5f's questions, and its slot.** (a) **I5f's slot → FS131-I5g on `fs131-"  <- plans/FS131-close-inventory.md
+verbatim  "**It may**: add children anywhere in the wave's modules — every child §§ 4, 9.1 name is an"  <- .claude/worktrees/fs131-w5/plans/FS131-w5-kernel-plan.md
+15 quotations, 0 not verbatim

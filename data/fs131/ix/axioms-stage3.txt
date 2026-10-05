@@ -1,0 +1,20 @@
+'HadwigerNelson.Plane.inter_nonempty_of_interleaved' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_eq_of_interleaved_paths' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.e_mul_e_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.arg_one_sub_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.arg_one_sub_e_of_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.re_pos_of_mem_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ringPt_sub_ringPt_mul_e_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.im_sub_eq_arg_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.continuous_discRetract' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.discRetract_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.discRetract_of_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_discRetract_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_thickening' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.inter_nonempty_of_interleaved_of_isClosed_left' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_not_interleaved' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

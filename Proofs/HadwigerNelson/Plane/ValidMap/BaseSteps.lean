@@ -4049,6 +4049,14 @@ theorem bowtie_isStuck : bowtie.IsStuck 0 ∧ ¬ bowtie.IsStuck I ∧ ¬ bowtie.
   · rintro ⟨-, -, -, c, n, h2, hn⟩; have := bowtie_hasSectors_le_one (Or.inl rfl) hn; omega
   · rintro ⟨-, -, -, c, n, h2, hn⟩; have := bowtie_hasSectors_le_one (Or.inr rfl) hn; omega
 
+/-- `bowtie_isStuck`'s second clause as a closed refutation: `N = i` is not stuck. The vacuity scan's evidence that `IsStuck` is
+refutable at a concrete map (`scripts/Vacuity.lean`, wave 4's carriers). -/
+theorem bowtie_not_isStuck_I : ¬ bowtie.IsStuck I := bowtie_isStuck.2.1
+
+/-- `bowtie_not_isHorn_I` at one closed instance (the horn the bowtie has at `0`, asked at `i`). The vacuity scan's evidence that
+`IsHorn` is refutable at a concrete map (`scripts/Vacuity.lean`, wave 4's carriers). -/
+theorem bowtie_not_isHorn_I_axis : ¬ bowtie.IsHorn I 0 (-1) 1 1 := bowtie_not_isHorn_I 0 (-1) 1 1
+
 /-- **No MERGE, MERGE-RAY or SHAVE applies at `E`, `E ± n`.** -/
 theorem bowtie_terminalOn : bowtie.TerminalOn {0, I, -I} := by
   intro v hv

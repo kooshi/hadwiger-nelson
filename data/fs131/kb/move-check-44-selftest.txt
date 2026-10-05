@@ -1,0 +1,6 @@
+FIRED: hypothesis changed (FAIL statement or docstring differs from the scratch file)
+FIRED: docstring letter changed (FAIL statement or docstring differs from the scratch file)
+FIRED: variable line dropped (FAIL context line missing before the theorem: variable {k : ℕ} {F : ArcMap k})
+FIRED: second declaration (FAIL expected one declaring file under Proofs/, found 2: ['Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean', 'Proofs/Planted.lean'])
+unplanted: PASS
+SELF-TEST PASS

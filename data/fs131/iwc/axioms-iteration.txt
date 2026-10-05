@@ -1,0 +1,55 @@
+data/fs131/iwc/scratch/ax.lean:873:8: warning: declaration uses `sorry`
+data/fs131/iwc/scratch/ax.lean:1074:8: warning: declaration uses `sorry`
+data/fs131/iwc/scratch/ax.lean:1089:8: warning: declaration uses `sorry`
+'HadwigerNelson.Plane.clear_wedge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_annSector_union_of_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.disjoint_annSector_wedges' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.wedgeArcs_nondegenerate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.frontier_annSector_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.annSector_subset_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.annSector_mono_r₂' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_segment_ray' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.wedgeArcs_subset_polar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.polar_notMem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.annSector_notMem_wedgeArcs' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.recolour_valid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.recolour_region_diff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.wedgeMerge_valid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.wedgeMerge_condition5' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.wedgeMerge_region_diff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.coloursAt_congr' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.niceAt_congr' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_dirColourAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ncard_coloursAt_le_two_of_sides' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.mem_curveAt_one_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.GoodAt.ncard_coloursAt_le_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.finite_three_le_coloursAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.dirColourAt_wedgeMerge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.mem_coneAt_inter_annSector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.mem_angleIcc_iff_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.isClosed_angleIcc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.coneAt_wedgeMerge_of_notMem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.eq_of_mem_coneAt_wedgeMerge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.eq_of_mem_coneAt_wedgeMerge_of_subset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_woodallMerged' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.threeCol_locallyConstant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.threeSectorDisc_ncard_coloursAt_le_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.threeSectorDisc_woodallMerged' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.threeSectorDisc_woodallNormal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_forall_merged' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_forall_normal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.halfDisc_sectorsAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.halfDisc_niceAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.coneAt_annSector_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_annSector_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]

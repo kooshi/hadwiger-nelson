@@ -1,0 +1,37 @@
+import Proofs.HadwigerNelson.Plane.ValidMap.BaseDense
+import Proofs.HadwigerNelson.Plane.ValidMap.MapGraph
+set_option pp.fullNames true
+#print axioms HadwigerNelson.Plane.eq_of_intValued_of_isPreconnected
+#print axioms HadwigerNelson.Plane.isPreconnected_inter_of_union_eq_univ
+#print axioms HadwigerNelson.Plane.inter_frontier_nonempty_of_isPreconnected
+#print axioms HadwigerNelson.Plane.frontier_connectedComponentIn_subset
+#print axioms HadwigerNelson.Plane.isPreconnected_compl_connectedComponentIn
+#print axioms HadwigerNelson.Plane.isPreconnected_frontier_connectedComponentIn
+#print axioms HadwigerNelson.Plane.exists_inter_of_finite_closed_cover
+#print axioms HadwigerNelson.Plane.isPreconnected_compl_closedBall
+#print axioms HadwigerNelson.Plane.compl_closedBall_subset_connectedComponentIn
+#print axioms HadwigerNelson.Plane.isBounded_connectedComponentIn_of_frontier_subset
+#print axioms HadwigerNelson.Plane.connectedComponentIn_eq_of_not_isBounded
+#print axioms HadwigerNelson.Plane.ringArc_add_two_pi_mul
+#print axioms HadwigerNelson.Plane.ringArc_cases
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.subset_compl_closure
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.subset_or_subset_of_separated
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tile_inter_of_isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_closure_of_mem_closure_biUnion
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tile_mem_closure_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.mem_of_touch_closed
+#print axioms HadwigerNelson.Plane.ArcMap.finite_tiles_closure_inter
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_outerDom
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.closure_subset_closedBall_zero
+#print axioms HadwigerNelson.Plane.ArcMap.exists_not_mem_closedBall_zero
+#print axioms HadwigerNelson.Plane.ArcMap.outerDom_eq_connectedComponentIn
+#print axioms HadwigerNelson.Plane.ArcMap.exists_rim_vertex
+#print axioms HadwigerNelson.Plane.ArcMap.tileOf_subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.GermPseudo.eq_of_cw
+#print axioms HadwigerNelson.Plane.ArcMap.cvb_pinch_connected
+#print axioms HadwigerNelson.Plane.ArcMap.cvb_hole_disconnected
+#print axioms HadwigerNelson.Plane.ArcMap.exists_unenclosed_or_bad
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_sector_subset_tile
+#print axioms HadwigerNelson.Plane.ArcMap.hasRepeatedColour_of_two_tiles
+#print axioms HadwigerNelson.Plane.ArcMap.isCubicTrichromatic_of_three_tiles
+#print axioms HadwigerNelson.Plane.inter_nonempty_of_interleaved

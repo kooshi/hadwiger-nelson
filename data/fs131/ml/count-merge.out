@@ -1,0 +1,4 @@
+slot: admitted lake: mem 20 GiB (hard cap), cpus 0,1
+REFUTATION HadwigerNelson.Plane.ArcMap.Near.merge_valid
+REFUTATION HadwigerNelson.Plane.ArcMap.Near.isClear_chain
+MERGE declarations=175 refutations=2

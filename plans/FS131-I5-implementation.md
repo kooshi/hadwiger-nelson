@@ -130,6 +130,48 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
   `reduce_leftVal_add_int_mul`, `reduce_rightVal_add_int_mul`, `Removable.add_int_mul`, `reduce_nearOnly`, `reduce_exists_max`, `reduce_left_uncov`,
   `reduce_right_uncov`, `reduce_zmod3`, `reduce_partner_noChange`, `reduce_leftVal_ne`, `reduce_vals_of_const`, `reduce_locConst`, `reduce_proper_off`,
   `reduce_int_eq_zero` (all `CircleColouring.`).
+- Stage 27 (`data/fs131/i5g/build-stage27.log`; `build/gate/build/20261005T034254Z-1077466.log`; axioms `I5gAxioms27.out`, control `l3_base` with
+  `sorryAx`), `BaseWalk`: `HadwigerNelson.Plane.CircleColouring.select` (`[SokolovVoronov2025]` Lemma 5, BV-C6, Prop. 18 as BASE-V's BV-L5, BV-C6,
+  BV-P18); children `select_bdd`, `select_firstPassage`, `select_unique`, `select_lt`, `select_window`, `select_window'`, `select_chord`,
+  `select_residue`, `select_core`.
+- Stage 28 (`data/fs131/i5g/build-stage28.log`; `build/gate/build/20261005T043331Z-1353383.log`; axioms `I5gAxioms28.out`, controls `row134BaseUA`
+  and `bv_hex` with `sorryAx`, `linkage_dot_ne_zero` clean), `BaseWalk`: `HadwigerNelson.Plane.ArcMap.BaseCtx.l3_base` (`[SokolovVoronov2025]` Lemma 3
+  in pseudo-colour form, BASE-V's BV-L3 route); children `CircleColouring.link_side_right`, `link_side_left`, `link_val_right`, `link_val_left`,
+  `link_path`, `link_relabel`, `link_periodic_finite`; `ArcMap.link_cos_fibre`, `link_circles_rep`, `link_circles_two`, `link_circles_finite`,
+  `link_norm_e_sub_sq`, `link_cos_eq_of_ringPt`, `link_fibres`, `link_turn`, `link_flip`, `link_dist_ringPt_sq`, `link_partners`, `link_one_lt_two`,
+  `exists_linkage`.
+
+### FS131-I5j (wave 5's eighth implementer)
+
+*Each stage's build and axiom read named in its line; axioms read from that build's oleans (`data/fs131/i5j/I5jAxioms<stage>.lean`, output `.out`).*
+
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
+- Stage 31 (`data/fs131/i5j/build-stage31.log`; `build/gate/build/20261005T051518Z-1601427.log`; axioms `I5jAxioms31.out`, controls `rot_out` and
+  `row134BaseUA` with `sorryAx`, `linkage_dot_ne_zero` clean), `Plane/ValidMap/HexRing`: `HadwigerNelson.Plane.ArcMap.bv_hex` (FS114-BV-HEX, BASE-V
+  § 1a.4 steps 1–6), `HadwigerNelson.Plane.ArcMap.hex_regular` (FS112-ROTHEX's N2-HEX; its first disjunct always), and with them `p17_ua`,
+  `BaseCtx.hex_base`; the shared child `coneAt_of_cubic` (plan § 9.1); children `hex_int_core`, `hex_int_noAdj`, `exists_halfTurn_of_cos_nonpos`,
+  `eq_floor_of_floor_eq_ceil`, `hex_real_core`, `angleIcc_add_int_mul`, `hex_cones_of_serve`, `subset_closure_region_of_isOpen`,
+  `Valid.cone_re_nonneg_of_preconnected`, `GermPseudo.germIn_closure`, `germPseudo_add_two_pi`, `ringPt_add_two_pi'`, `hex_side`, `dist_frame`,
+  `ringPt_frame`, `norm_sq_eq_re_im`, `e_hex_re_im`, `hex_point`, `hex_adjacent` (all `ArcMap.`).
+- Stage 32 (`data/fs131/i5j/build-stage32.log`; `build/gate/build/20261005T052713Z-1651689.log`; axioms `I5jAxioms32.out`, control `rot_in` with
+  `sorryAx`, `linkage_dot_ne_zero` clean), `HexRing`: `HadwigerNelson.Plane.ArcMap.rot_out` (FS112-ROTHEX, N2-ROT's outward row (A+, A−)); child
+  `dist_radial_hex`.
+
+### FS131-I5m (wave 5's ninth implementer)
+
+*Each stage's build and axiom read named in its line; axioms read from that build's oleans (`data/fs131/i5m/I5mAxioms<stage>.lean`, output `.out`).*
+
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
+- Stage 35 (`data/fs131/i5m/build-stage35.log`; `build/gate/build/20261005T062507Z-1929717.log`; axioms `I5mAxioms35.out`, control `bv_nd` with
+  `sorryAx`, `linkage_dot_ne_zero` clean), `Plane/ValidMap/HexRing`: `HadwigerNelson.Plane.ArcMap.rot_in` (FS112-ROTHEX, N2-ROT's inward row (B+, B−));
+  children `hex_side_far`, `Valid.cone_re_nonpos_of_preconnected`, `dist_radial_hex_in`, `hex_point_in` (all `ArcMap.`).
+- Stage 36 (`data/fs131/i5m/build-stage36.log`; `build/gate/build/20261005T064038Z-2050688.log`; axioms `I5mAxioms36.out`, control `bv_l3` with
+  `sorryAx`, `linkage_dot_ne_zero` clean), `HexRing`: `HadwigerNelson.Plane.ArcMap.bv_nd` (FS114-BV-HEX's (BV-ND), BASE-V § 1b.2 steps 2–4, with unit
+  arcs, at every `k`), and with it `bv_nd1`; children `sq_dist_germ`, `germ_dist_cmp_one`, `exists_chart_of_noRep`, `IsSectorChart.exists_sector_of_region`,
+  `BranchGerms.next_adj`, `IsSectorChart.exists_shared`, `Valid.pair_le`, `Valid.pair_ge`, `tangent_pair_ne_one` (all `ArcMap.`).
+- Stage 37 (`data/fs131/i5m/build-stage37.log`; `build/gate/build/20261005T065125Z-2125030.log`; axioms `I5mAxioms37.out`, control `bv_l3` with
+  `sorryAx`, `linkage_dot_ne_zero` clean), `HexRing`, children for `bv_l3` (not yet consumed): `dot_ringPt_sub`, `linkage_first_order`, `half_le_sin`,
+  `linkage_cmp`, `linkage_end` (all `ArcMap.`).
 
 ### FS131-I5h (wave 5's `Terminal` implementer)
 
@@ -1252,6 +1294,962 @@ record is KB's).
 
 ## Stage 26 — SAVED
 
+## Stage 27 — SAVED: `CircleColouring.select` proved (a kernel theorem)
+
+**`select` is proved as stated** (`Plane/ValidMap/BaseWalk`; axioms the standard three), circle-abstract, on BASE-V's route (§ 1a.2–1a.3) with BV-L5's
+recolouring replaced by its jump points — the **first passages** of the lift — so no recoloured colouring is built:
+1. *The band* (BV-H1): with no swap point wave 3's `m0_const` (over `hbig_of_noSwap`) makes `m₀` constant on `T0`, so `D₀ ∈ {3M + 1, 3M + 2}` at every `z`
+   with `z, z + 60°` off `S`. *The increment* `N = f(θ + 2π) − f(θ)` is one integer off `S` (`W_eq_aux` and `3 | N`, by periodicity of `c`), and summing the
+   band over a good hexagon gives `18M + 6 ≤ N ≤ 18M + 12`, so `N ≠ 0`. For `N < 0` the selection runs on the negated lift (colours `−c`, `M ↦ −M − 1`).
+2. *First passages* (`select_firstPassage`, for an integer lift `g` with `N > 0`): `x_ℓ = inf {x ∉ S | g x ≥ ℓ}` exists (`g` is bounded above on a period,
+   `select_bdd`, by compactness), `g < ℓ` left of it, `g = ℓ − 1` just left and `g = ℓ` just right (the jump is at most one). They are unique
+   (`select_unique`), strictly increasing (`select_lt`), `2π`-periodic in `ℓ ↦ ℓ + N`, change points, and each keeps its pair `{ℓ − 1, ℓ}` — BV-L5's
+   kept points with their pairs.
+3. *Windows* (`select_window`, `select_window'`): `x_{ℓ + 3M + 3} > x_ℓ + 60°` (BV-P18's count: just right of `x_ℓ` and everywhere left of it `g ≤ ℓ`, and
+   the band adds at most `3M + 2`), and `x_{ℓ + 3M + 1} ≤ x_ℓ + 60°` (the band adds at least `3M + 1`).
+4. *`N = 6`* forces `M = 0`; six gaps of at most `60°` summing to `2π` are all `60°`: the hexagon `IsHex (x_0) (j ↦ τ(j − 1))` (BV-C6).
+   *Otherwise* `N ≥ 9(M + 1)` (`3 | N`), and for a pair `{v, w}` the levels `ℓ₀, ℓ₀ + k, ℓ₀ + 2k` (`k = 3(M + 1)`, `ℓ₀` the pair's residue,
+   `select_residue`) give three change points with that pair, consecutive gaps `> 60°` summing to `2π`, so every chord exceeds `1` (`select_chord`).
+
+Read against the informal claim (`select`'s docstring; BASE-V BV-L5, BV-C6, BV-P18): "a circle colouring with no swap point is the rotating hexagon, or for
+each pair of colours it has three change points with that pair, pairwise more than `60°` apart (chords longer than `1`); the points are the colouring's
+own" — **same**.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS). New names collision-free (`git grep` on `fs131-w5p`, `fs131-w5t`, `fs131-w4`, `main`).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 3 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T034254Z-1077466.log`; driver log `data/fs131/i5g/build-stage27.log`). Wave 5's sorry declarations: **26** (`BaseWalk` 4),
+mine 8. Axioms (`I5gAxioms27.lean` → `.out`): `select` and its 9 children on the standard three; control `l3_base` reads `sorryAx`. `scripts/Axioms.lean`:
+the 9 children added to the "FS131-I5g" block.
+
+**Re-pricing from the first two hard leaves**: `reduce` and `select` (both M–H/H in the plan) each took roughly 30–40k tokens and one build. The remaining
+leaves are map-level (planar geometry, sector charts, the linkage): `l3_base` is the linkage argument of BASE-V § 1b.3 and I expect it to be the largest
+of the set (a parametrized linkage loop, a discrete intermediate-value argument for the height difference, the band at the two partners of an
+intersection point).
+
+## Stage 27 — SAVED
+
+## Stage 28 — SAVED: `BaseCtx.l3_base` proved (a kernel theorem); `linkage_dot_ne_zero`'s docstring rewritten (item 274 (b))
+
+**`l3_base` is proved as stated** (`Plane/ValidMap/BaseWalk`; axioms the standard three), on BASE-V § 1b.3's route — the unit-distance linkage and the
+band — with three changes of construction, each forced by the pseudo-colour setting (rings may carry contact arcs, change points may be non-generic):
+1. *The linkage as one loop* (`exists_linkage`, explicit): `x = r_{u₁}(φ θ)`, `φ θ = φ_c + θ_X cos θ` (`φ_c` the direction to `u₂`, `cos θ_X =
+   (t² − 3)/2t`, so `φ` sweeps exactly the arc of `ω(u₁)` within `2` of `u₂`), `y = u₂ + (x − u₂)(½ + k i)` with `k = sgn(sin θ)·√(1/|x − u₂|² − ¼)`,
+   `χ` the angle of `y` read from the direction to `u₁` (continuous: `y` never reaches the far point, which is `t + 1 > 2` from `u₁`). Facts: finite
+   fibres (`link_fibres`: a point of `ω(u₂)` has at most two partners on `ω(u₁)`, `link_circles_finite`); `χ` turns where `|y − u₁| = 2` (`link_turn`:
+   there `χ` is an end of its range); at the intersection point `P = r_{u₁}(φ_c + γ)`, `cos γ = t/2`, reached at `θ = ±θ_A`, the two values of `y` are
+   `P`'s partners `r_{u₂}(χ_P ± 60°)` (`link_partners`), `x` stays above `P` on `(−θ_A, θ_A)` and below it on `(θ_A, 2π − θ_A)`; `χ` is strictly monotone
+   near `±θ_A` where `|y − u₁| < 2` (`link_flip`: the two partners of `y` are then apart, so `x` is a function of `y` near `P`), which holds at one of
+   them at least (`link_one_lt_two`). The declaration needs 300000 heartbeats (measured; it fails at the default 200000), so it carries
+   `set_option maxHeartbeats 400000 in` with that measurement as its comment.
+2. *The band constancy* (`link_path`, circle-abstract): along a path with finite fibres, read through lifts `L₁`, `L₂`, the difference `L₁(φ) − L₂(χ)`
+   at generic parameters is never `0 mod 3` (`hgen`) and keeps its band `⌊·/3⌋`: at every parameter the one-sided values (`link_val_left/right`, from
+   the lifts' sides and the path's side, constant by the intermediate value theorem) differ by at most `1`, unless both lifts jump and the jump is `±2`
+   — and then the two changes carry one pair (computed), which `hdbl` excludes unless `χ` turns. No velocity is used: BV-ND's `μ ≠ 0` and the
+   turning-point step of QA3's note 2.4 d are replaced by "the two points switch the same pair" (FS112-N3-PAIRS (ii), `pair_ii`, which needs no sense),
+   so `linkage_dot_ne_zero` is not cited (its docstring is rewritten anyway, as item 274 (b) asks).
+3. *The endpoints and the band* (no `c₀`, no genericity of `P`): on each of the two paths from `P`'s configurations — `θ ∈ [−θ_A, θ_A]` (`x` above `P`)
+   and `[θ_A, 2π − θ_A]` (`x` below) — `L₁` is read at `P` from one side at both ends, so the band constancy gives `|L₂(χ_A^±) − L₂(χ_B^±)| ≤ 1` for the
+   sides from which `y` reaches its two ends. The flip makes the two paths reach a non-end partner from opposite sides; at one partner at least this
+   holds. With the band of `C₂` (`D₀ ∈ {3M + 1, 3M + 2}`, at left and at right values) at `χ_P ± 60°` and `χ_P`, every combination of sides gives a
+   difference of absolute value at least `2` (equal sides: two band terms; opposite sides on both paths: their sum is four band terms) — a
+   contradiction (`omega` over the cases). This replaces BASE-V's `c₀ = h₁(P) − h₂(P) ∈ 3ℤ`, which needs `P` generic (BV's "non-generic `P`" remark).
+
+Map inputs: both pseudo-colourings from `exists_pseudoCircle`, the second relabelled to the first's labelling (`link_relabel`; `g₁` hits every colour
+absent at `u₁`, a count); `hgen` is FS112-N3-PAIRS (i) (`pair_i`) at points whose pseudo-colour is one colour (non-singleton points excluded with the
+change points: `pseudo_finite` and `link_periodic_finite`); `hdbl` is FS112-N3-PAIRS (ii) (`pair_ii`) with `y ≠ u₁`, `|y − u₁| ≠ 2`, its two outcomes
+refuted by H (`BaseCtx.hyp`) and `noBoth`.
+
+Read against the informal claim (`l3_base`'s docstring; `[SokolovVoronov2025]` Lemma 3, BV-L3): "two cubic trichromatic points of `B̄(u, 1)` with one
+multicolour are not at distance in `(1, 2)`; their circles may carry in- and out-contact unit arcs" — **same**. The docstring's list of inputs names
+`linkage_dot_ne_zero`, which the proof does not need (point 2); left as written (a docstring, not a statement).
+
+**`linkage_dot_ne_zero`'s docstring** (`HexRing`) now reads as `plans/FS131-QA3-audit.md` § 2.4 d drafts it ("at least one of the two points moves with
+non-zero component along `e`; at a switch of both colours (no turning point, `λ₁, λ₂ ≠ 0`) the two components are equal, so both are non-zero");
+statement unchanged.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS). New names collision-free (`git grep` on `fs131-w5p`, `fs131-w5t`, `fs131-w4`,
+`fs131-w5x`, `main`).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`HexRing`, `Dense`, `BaseWalk`, `BaseDense`, `Proofs`), 8 with
+warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T043331Z-1353383.log`; driver log `data/fs131/i5g/build-stage28.log`).
+Wave 5's sorry declarations: **25** (`BaseWalk` 3 — the planar job's `retArcs_nested`, `exists_endpoint`, `exists_eleventh`), mine 7. Axioms
+(`I5gAxioms28.lean` → `.out`): `l3_base` and its 20 children on the standard three; controls `row134BaseUA` and `bv_hex` read `sorryAx`,
+`linkage_dot_ne_zero` clean. `scripts/Axioms.lean`: the 20 children added to the "FS131-I5g" block.
+
+**`row134BaseUA` now rests, of this half, on `bv_hex` alone** (through `hex_base` → `p17_ua`), with the planar job's three.
+
+## Stage 28 — SAVED
+
+## Stage 29 — SAVED: the handoff (what is left of this half, and where it stands)
+
+`tools/check_architecture.py`: PASS (no module added; imports unchanged). The working tree is clean at the stage-28 commit.
+
+**What is left of my set (7)**, for wave 5's next implementer on this half:
+- **`bv_hex`** (**H**; the last of this half on `row134BaseUA`'s path — with the planar job's three, all `row134BaseUA` now rests on). BASE-V § 1a.4
+  steps 1–6. Step 6's count reads the tangent cones of `u`'s three sectors as closed angular intervals summing to `2π` (horns of angle `0` allowed):
+  the shared child **`coneAt_of_cubic`** (plan § 9.1, `hex_regular`'s child too) does not exist yet — only `Simple.coneAt_eq_angleIcc`
+  (`Plane/LocalStructure` l. 2463) for simple maps, and `IsJordanDomain.coneAt_eq_angleIcc` (l. 386). Build it first, from the sector chart of a cubic
+  trichromatic vertex (`IsCubicTrichromatic.chart`, `Plane/ValidMap/BaseSteps` l. 407). Step 5 is `Valid.cone_re_nonneg_of_germ`'s pattern
+  (`Plane/RingGerm` l. 134) along the outward radial. Step 4's exactly-unit pair `x_j + s t`, `x_{j+1} + s t` needs open neighbourhoods inside the two
+  cones (the colour at the point itself is not read); `hF.dist_ne_one_of_isOpen_subset_closure` (used in `BaseSteps`) is the tool.
+- **`rot_out`, `rot_in`** (M each), **`hex_regular`** (M, over `coneAt_of_cubic`), **`bv_nd`** (M–H: BASE-V § 1b.2 steps 2–4, the unit-arc tangency
+  computation of step 4), **`bv_l3`** (H; off the walk's path — `l3_base` replaced it there). For `bv_l3` the stage-28 machinery transfers: with
+  `RingProper` the two rings are wave 3's `ringCircleColouring`s, `exists_linkage` and `link_path` apply verbatim, and `hdbl` is `bv_nd` (or
+  `pair_ii`, which `bv_l3`'s hypothesis H on the circles supports, as in `l3_base`).
+- **`exists_preBend`** (H): needs the strengthened bend (ruling 317 (b): a child of `exists_preBend`, read back against E4-BEND-UN, citing
+  `bend_toward` as given). Not attempted in this job.
+
+**Route notes for the next implementer** (from stages 26–28):
+- Circle-abstract arguments go fastest as lemmas over a family or an integer function with explicit hypotheses (`reduce_*`, `select_*`,
+  `link_path`), assembled in the leaf's proof.
+- A long `set`-based construction exhausts the declaration's heartbeat budget (it is cumulative); `clear_value` the `set` variables once their
+  defining equations are recorded, keep `nlinarith` off goals that mention them, and split facts into lemmas over the defining equations
+  (`link_fibres`, `link_flip`, …). `exists_linkage` still needs 300000 (measured) and carries `set_option maxHeartbeats 400000 in`.
+- Iteration: `data/fs131/i5g/iter.sh` (scratch mirror `/home/kooshi/scratch-w5g`); a scratch file importing `BaseWalk` compiles in seconds.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 29 — SAVED
+
+## Stage 30 — SAVED: FS131-I5j's readback
+
+*FS131-I5j, wave 5's eighth implementer (Opus), resuming this record at its first unsaved stage (Stage 29 SAVED, `f0c6ba67`). Brief:
+`data/fs131/briefs/FS131-I5j-wave5.md` (main tree). My set (ruling 331 (b)): `coneAt_of_cubic` (a new shared child), then `HexRing`'s `bv_hex` and
+`hex_regular` over it, then `rot_out`, `rot_in`, `bv_nd`, `bv_l3`, then `BaseDense`'s `exists_preBend` over the strengthened-bend child (ruling 317 (b))
+— 7 `sorry` declarations. Never `Terminal`, `cv_exists`, `disc1_local`, or the planar job's declarations.
+
+### 30.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by a new script, `tools/fs131_i5_quote_check.py` (each run of `> ` lines searched verbatim, line breaks folded, in the file its `— source:` line
+names; a relative path resolves to the main tree first, an absolute one as given): **12 quotations, 12 verbatim**, exit 0. Negative control: `--plant`
+changes "practically" to "practicaly" in the first quotation, and the checker reports it MISMATCH (exit 0 under `--plant` only when caught). A first run
+resolved `plans/FS131-close-inventory.md` to the worktree's stale copy and reported the six inventory quotations as mismatches — the resolution was
+corrected to the main tree's copy (the brief's own tree), and the six then read verbatim.
+
+| quotation (opening words) | source | result |
+|---|---|---|
+| "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors | verbatim |
+| "**What is left of my set (7)**, for wave 5's next implementer on this half:" | this record, Stage 29 | verbatim |
+| "- **`bv_hex`** (**H**; the last of this half on `row134BaseUA`'s path — …" | this record, Stage 29 | verbatim |
+| "- **`rot_out`, `rot_in`** (M each), **`hex_regular`** (M, over `coneAt_of_cubic`), …" | this record, Stage 29 | verbatim |
+| "- **`exists_preBend`** (H): needs the strengthened bend (ruling 317 (b): …" | this record, Stage 29 | verbatim |
+| "330. **FS131-I5g handed back** …" | `plans/FS131-close-inventory.md` item 330 | verbatim |
+| "331. **Rulings on I5g's held items, and its slot.** …" | the inventory, item 331 | verbatim |
+| "317. **Rulings on I5f's questions, and its slot.** …" | the inventory, item 317 | verbatim |
+| "226. **FS131-E4 done, harness ≈ 480k** …" | the inventory, item 226 | verbatim |
+| "274. **Rulings on QA3's held items and the freed slot.** …" | the inventory, item 274 | verbatim |
+| "**It may**: add children anywhere in the wave's modules — …" | `plans/FS131-w5-kernel-plan.md` § 10.2 | verbatim |
+| "295. **Ruling: MERGE leaves wave 4; …" | the inventory, item 295 | verbatim |
+
+Items 317, 330, 331 read in full; I5g's Stages 25–29 read; the kernel plan's §§ 3.2, 4, 8.2, 9.1, 10.2 and the base plan's Stages 3–6 read.
+
+### 30.2 The as-given build (`f0c6ba67`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1754 modules already
+up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T044936Z-1440310.log`; driver log
+`data/fs131/i5j/build-stage30-asgiven.log`). Every warning is `declaration uses 'sorry'`, 33: wave 5's `Terminal` 9, `Dense` 1, `HexRing` 6, `MapGraph` 3,
+`BaseWalk` 3, `BaseDense` 3 (**25**, the brief's count; mine 7 of them: `HexRing`'s 6 and `BaseDense`'s `exists_preBend`), and wave 4's stale `Contact` 3,
+`UnitArc` 5. `tools/fs131_i5_stmt_check.py d61edefc`: PASS; `--self-test`: three plants fired, the control passed.
+
+Iteration script: `data/fs131/i5j/iter.sh` (I5g's, re-pointed at a fresh scratch mirror `/home/kooshi/scratch-w5j`, outside the repository).
+
+## Stage 30 — SAVED
+
+## Stage 31 — SAVED: `coneAt_of_cubic` (a new shared child), `hex_regular` and `bv_hex` proved (kernel theorems); `l3_base`'s docstring corrected
+
+**`coneAt_of_cubic`** (plan § 9.1's shared child, `Plane/ValidMap/HexRing`): at a cubic trichromatic `u` there are `β : Fin 3 → ℝ` and an injective
+`f : Fin 3 → Fin k` with `β₀ ≤ β₁ ≤ β₂ ≤ β₀ + 2π`, `coloursAt u = range f`, and the cones of the three colour classes at `u` the closed angular intervals
+`[β₀, β₁]`, `[β₁, β₂]`, `[β₂, β₀ + 2π]` (horns of angle `0` allowed). From the sector chart (`IsCubicTrichromatic.chart`): the class of `f i` near `u` is
+the `i`-th sector (`exists_sector_of_mem_coneAt_region` and injectivity), whose cone is the chart's. Spec example: it applies at the brick corner
+(`sevenBrick_corner_isCubicTrichromatic`, a valid map of the plane).
+
+**The hexagon count** (new children, pure arithmetic): `hex_int_core` (three integer intervals over one period holding the six residues mod 6 are the
+tight ones — a Finset count: two classes fit an interval of length `≤ 3`, so `2 · 6 ≤ 12` forces equality; a class of two needs two integers),
+`hex_int_noAdj` (with no two consecutive residues in one class, impossible), `exists_halfTurn_of_cos_nonpos`, `eq_floor_of_floor_eq_ceil`,
+`hex_real_core` (the same in the directions, through `⌊3(a − ψ)/π − 3/2⌋`, `⌈3(a − ψ)/π − 9/2⌉`), `angleIcc_add_int_mul`, and `hex_cones_of_serve`
+(the six directions served by the cones of a cubic vertex make the cones regular, and two consecutive directions share a colour). A first attempt
+to close the count by `omega` over the 3⁶ assignments timed out at 200000 heartbeats both as one call and as 729 split calls; the count is now a
+Finset argument and every `omega` call is small.
+
+**`hex_regular` is proved as stated** — **and its first disjunct always holds**: at a cubic vertex the cones are contiguous, so two horns share their
+boundary direction and point the same way; the antipodal double cusp (the second disjunct) needs four branches. So **F-HEXCUSP (plan § 8.4) does not
+arise at a cubic vertex**: N2-HEX holds as FS-110 wrote it, for degree 3. The statement is untouched (its second disjunct is unrealized, not false);
+the docstring now says what the proof establishes. Read against the informal claim (FS110-N2-HEX): "each of the six points served ⟹ `u` regular" —
+**same** (stronger than the statement, which also allows the unrealized disjunct).
+
+**`bv_hex` is proved as stated** (`plans/BASE-V-verification.md` § 1a.4 steps 1–6), with new children:
+- `hex_side` (step 1: a germ in the closure of `q` whose points are nearer than `1` to `x` puts the class of `q` near `x` inside `B̄(y, 1)`);
+- `hex_point` (steps 1–3 and 5 at one point: near `x`, outside `B̄(r(φ ± 60°), 1)`, every interior point has one colour `c ∈ P_cl(u)`, and `c`'s cone at
+  `u` lies in the closed half-plane away from `x`; the outward radial lies in that cone, `1 + s + s²`); step 3 uses only "fewer than four colours" at
+  `x` (the repeated-colour half of H is not needed: the cone's colours are colours of `x` that are colours of `u`, and there is one such);
+- `Valid.cone_re_nonneg_of_preconnected` (`Valid.cone_re_nonneg_of_germ` with the germ replaced by any preconnected set; step 5 along the radial);
+- `hex_adjacent` (step 4: `x + s e(φ + 30°)` and `x′ + s e(φ + 30°)` are exactly `1` apart, in the two cones — `1 + s²` to the near neighbours,
+  `1 + √3 s + s²` to the far ones — and each cone is an open set in its colour's closure, `subset_closure_region_of_isOpen`; then
+  `Valid.dist_ne_one_of_isOpen_subset_closure`);
+- glue: `GermPseudo.germIn_closure`, `germPseudo_add_two_pi`, `ringPt_add_two_pi'`, `dist_frame`, `ringPt_frame`, `norm_sq_eq_re_im`, `e_hex_re_im`.
+Step 6 is `hex_cones_of_serve` (no colour serves two consecutive directions alone, against step 4). Read against the informal claim (FS114-BV-HEX):
+"the regular hexagon of kept points cannot occur at a cubic trichromatic `u` of a valid map (unit arcs allowed) when `x_1, …, x_6` are cubic" —
+**same** (the statement's widening G-BVHEX — every `k`, H at the six points, `B̄(u, 1)` — holds as stated).
+
+With `bv_hex`, `p17_ua` and `BaseCtx.hex_base` are kernel theorems, and **`row134BaseUA` rests only on the planar job's three** (`retArcs_nested`,
+`exists_endpoint`, `exists_eleventh`).
+
+**`l3_base`'s docstring** (item 330's correction) now names its inputs as the proof uses them (`exists_pseudoCircle`, `pair_i`, `pair_ii`,
+`exists_linkage`, `link_path`) and says that neither `linkage_dot_ne_zero` nor `bv_nd` is an input.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS). New names collision-free on `fs131-w5p`, `fs131-w5c`, `fs131-w4`, `main` as
+full names (`git grep`); `main` has `HadwigerNelson.Plane.dist_frame` (wave 2's `MaximalCover`), a different full name from mine
+(`HadwigerNelson.Plane.ArcMap.dist_frame`) — renamed `dist_eFrame` at the next stage to keep `open ArcMap` unambiguous after the merge.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`HexRing`, `Dense`, `BaseWalk`, `BaseDense`, `Proofs`), 8 with
+warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T051518Z-1601427.log`; driver log `data/fs131/i5j/build-stage31.log`).
+Wave 5's sorry declarations (distinct sites in the gate log): **23** (`HexRing` 4: `rot_out`, `rot_in`, `bv_l3`, `bv_nd`), mine 5. Axioms
+(`data/fs131/i5j/I5jAxioms31.lean` → `.out`, read against the build's oleans): `bv_hex`, `hex_regular`, `p17_ua`, `BaseCtx.hex_base` and the 20 children
+on the standard three; controls `rot_out` and `row134BaseUA` read `sorryAx`, `linkage_dot_ne_zero` clean. `scripts/Axioms.lean`: the 20 children added to
+the "FS131-I5g" block (a comment line names this stage), above the `=== PURCHASED ===` banner. `tools/check_architecture.py`: PASS.
+
+**Re-pricing from the first two hard leaves** (`coneAt_of_cubic` with `hex_regular`, then `bv_hex`): about 60k and 90k tokens of context with three
+iteration rounds each — the plan's M and M–H hold; the arithmetic count (planned "finite real arithmetic") was the expensive part of `hex_regular`.
+
+## Stage 31 — SAVED
+
+## Stage 32 — SAVED: `rot_out` proved (a kernel theorem); `dist_frame` renamed `dist_eFrame`
+
+**`rot_out` is proved as stated** (FS112-ROTHEX, N2-ROT's outward row (A+, A−); `Plane/ValidMap/HexRing`). It is `hex_point` at the change point
+`x = r(ψ)`: `rot_noThird` gives `c′(x) = {p, q}`, (A+) and (A−) are exactly `hex_point`'s two germ inputs, and H (no four colours at `x ∈ B̄(u, 2)`)
+its colour bound — so `g` is the outward cone's colour, `P_cl(x) = {p, q, g}` (a clause added to `hex_point`'s conclusion), `g` fills the cone, and
+`g`'s cone at `u` faces away from `x` (step 5). The tile clause is new: `x` is cubic trichromatic (three colours, no repeated colour by H), so a
+`g`-tile `T` at `x` meets the `g`-sector of `x`'s chart, which holds an interior point of the outward cone beyond `ω(u)`; `T` with the sector is
+connected and in the closure of `g`, so by validity against points of `g` near `u` every point of `T` is at distance at least `1` from `u`, and `T`
+is open, so it misses `B̄(u, 1)`. New child: `dist_radial_hex` (the outward radial's distances, factored out of `hex_point`). Read against the
+informal claim (FS110-N2-ROT's outward row, with unit arcs under H): "`x` carries `p`, `q` and one colour `g` of `u`; `g` fills the outward cone; every
+`g`-tile at `x` misses `B̄(u, 1)`; `u`'s `g`-sector lies in the closed half-plane away from `x`" — **same**.
+
+**`dist_frame` → `dist_eFrame`** (`main` has `HadwigerNelson.Plane.dist_frame`, wave 2's `MaximalCover`; distinct full names, but `open ArcMap` inside
+`HadwigerNelson.Plane` would make the short name ambiguous after the merge). `scripts/Axioms.lean` updated, `dist_radial_hex` added to the block.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS; `hex_point` is this job's own child, its conclusion widened by one clause and
+its one consumer, `bv_hex`, updated). New names collision-free (`git grep` on `fs131-w5p`, `fs131-w5c`, `fs131-w4`, `main`).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T052713Z-1651689.log`; driver log `data/fs131/i5j/build-stage32.log`). Wave 5's sorry declarations (distinct sites):
+**22** (`HexRing` 3: `rot_in`, `bv_l3`, `bv_nd`), mine 4. Axioms (`I5jAxioms32.lean` → `.out`): `rot_out`, `hex_point`, `dist_radial_hex`, `dist_eFrame`,
+`bv_hex`, `hex_regular`, `rot_noThird` on the standard three; control `rot_in` reads `sorryAx`, `linkage_dot_ne_zero` clean.
+
+## Stage 32 — SAVED
+
+## Stage 33 — SAVED: the handoff (what is left of this half, and where it stands)
+
+The working tree is clean at the stage-32 commit. `tools/check_architecture.py`: PASS (no module added; imports unchanged).
+
+**What is left of my set (4)**, for wave 5's next implementer on this half (none is on `row134BaseUA`'s path, which now rests only on the planar
+job's three):
+- **`rot_in`** (M): the mirror of `rot_out` (stage 32). Children to add, each a mirror of a stage-31 lemma: `hex_side_far` (a germ in the closure of
+  `p` whose points are **farther** than `1` from `x` — here the germ just counter-clockwise of `r(ψ + 60°)`, at chord `60° + t` — keeps the class of `p`
+  near `x` outside `B(r(ψ + 60°), 1)`; same proof as `hex_side`, the two cases swapped); `hex_point_in` (the **inward** cone `{z : |z − r(ψ ± 60°)| < 1}`,
+  which holds the inward radial `x − s e ψ`, `|·|² = 1 − s + s²` for `0 < s < 1`); `Valid.cone_re_nonpos_of_preconnected` (the mirror of
+  `Valid.cone_re_nonneg_of_preconnected` with a point **nearer** than `1`, as `Valid.cone_re_nonpos_of_germ` mirrors `_nonneg_`); the tile clause
+  mirrored (the tile with the `g`-sector reaches inside `ω(u)`, so all its points are within `1` of `u`, and `T` is open, so `T ⊆ B(u, 1)`).
+- **`bv_nd`** (M–H): BASE-V § 1b.2 steps 2–4. H at `x₀`, `y₀` (no four colours, no repeated colour) makes each cubic or interior; step 2 is
+  `hF.dist_lt_or_gt_of_isPreconnected` over the `α`- and `β`-sectors (the event's germs lie in the open regions, `GermIn … (F.region α)`); step 4 is
+  the tangency identity `|a(s) − b(±s)|²` (`tools/base_v_linkage.py`, K3, K4), the frame lemmas `dist_eFrame`, `ringPt_frame`, `norm_sq_eq_re_im`
+  of stage 31 serve its distances.
+- **`bv_l3`** (H): I5g's note stands — with `RingProper` the rings are wave 3's `ringCircleColouring`s, `exists_linkage` and `link_path` apply as in
+  `l3_base`, and `hdbl` is `pair_ii` (H on the circles) or `bv_nd`.
+- **`exists_preBend`** (H): the strengthened bend (ruling 317 (b)), not attempted in this job; E4-BEND-UN not read here.
+
+**Route notes** (from stages 31–32):
+- A count over `3⁶` assignments is beyond `omega` (200000 heartbeats both as one call and as 729 split calls); a `Finset` card argument with small
+  `omega` calls closes it (`hex_int_core`).
+- `hex_point` packages BV-HEX's steps 1–3 and 5 at one point and serves both `bv_hex` and `rot_out`; its inward mirror is `rot_in`'s main child.
+- `convert … using 2` on `GermPseudo` splits the angle sum (`ψ + jπ/3 + π/3` against `ψ + (j+1)π/3`) into wrong subgoals; rewrite the angle and the
+  `ZMod 3` index first (`bv_hex`'s `hcw`, `hccw`).
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 33 — SAVED
+
+## Stage 34 — SAVED: FS131-I5m's readback
+
+*FS131-I5m, wave 5's ninth implementer (Opus), resuming this record at its first unsaved stage (Stage 33 SAVED, `ad8ff032`; branch head `298a3c0b`).
+Brief: `data/fs131/briefs/FS131-I5m-wave5.md` (main tree). My set (ruling 344 (b)): `rot_in`, then `bv_nd`, `bv_l3`, then `BaseDense`'s `exists_preBend`
+over the strengthened-bend child (ruling 317 (b)) — 4 `sorry` declarations. Never `Terminal`, `cv_exists`, `disc1_local`, or the planar jobs' declarations.
+
+### 34.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_i5_quote_check.py` (I5j's) on the brief: **12 quotations, 12 verbatim**, exit 0; `--plant` (one letter changed in the first quotation)
+reports it MISMATCH, exit 0 under `--plant` only when caught.
+
+| quotation (opening words) | source | result |
+|---|---|---|
+| "Do not consider Lean formalization a cost. …" | `CLAUDE.md` § Counter-priors | verbatim |
+| "- **`rot_in`** (M): the mirror of `rot_out` (stage 32). …" | this record, Stage 33 | verbatim |
+| "- **`bv_nd`** (M–H): BASE-V § 1b.2 steps 2–4. …" | this record, Stage 33 | verbatim |
+| "- **`bv_l3`** (H): I5g's note stands — …" | this record, Stage 33 | verbatim |
+| "- **`exists_preBend`** (H): the strengthened bend (ruling 317 (b)), …" | this record, Stage 33 | verbatim |
+| "336. **FS131-I5j handed back** …" | `plans/FS131-close-inventory.md` item 336 | verbatim |
+| "344. **Rulings on IMM2's held items, and its slot.** …" | the inventory, item 344 | verbatim |
+| "317. **Rulings on I5f's questions, and its slot.** …" | the inventory, item 317 | verbatim |
+| "226. **FS131-E4 done, harness ≈ 480k** …" | the inventory, item 226 | verbatim |
+| "274. **Rulings on QA3's held items and the freed slot.** …" | the inventory, item 274 | verbatim |
+| "**It may**: add children anywhere in the wave's modules — …" | `plans/FS131-w5-kernel-plan.md` § 10.2 | verbatim |
+| "295. **Ruling: MERGE leaves wave 4; …" | the inventory, item 295 | verbatim |
+
+Items 226, 274, 295, 317, 336, 344 read in full; I5j's Stages 30–33 and I5g's Stage 29 read; the kernel plan's §§ 3.2, 8.2, 10.2 read.
+
+### 34.2 The as-given build (`298a3c0b`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1754 modules already
+up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T061811Z-1883588.log`; driver log
+`data/fs131/i5m/build-stage34-asgiven.log`). Every warning is `declaration uses 'sorry'`: wave 5's `Terminal` 9, `HexRing` 3, `MapGraph` 3, `BaseWalk` 3,
+`BaseDense` 3, `Dense` 1 (**22**, item 336's count; mine 4: `HexRing`'s `rot_in`, `bv_nd`, `bv_l3` and `BaseDense`'s `exists_preBend`), and wave 4's stale
+`Contact` 3, `UnitArc` 5. `tools/fs131_i5_stmt_check.py d61edefc`: PASS.
+
+## Stage 34 — SAVED
+
+## Stage 35 — SAVED: `rot_in` proved (a kernel theorem)
+
+**`rot_in` is proved as stated** (FS112-ROTHEX, N2-ROT's inward row (B+, B−); `Plane/ValidMap/HexRing`), as I5j's route note planned: the mirror of
+`rot_out`. New children, each a mirror of a stage-31/32 lemma:
+- `hex_side_far` (`hex_side` mirrored: a germ in the closure of `q` whose points are **farther** than `1` from `x` keeps the class of `q` near `x`
+  outside `B(y, 1)`; the same connectedness argument, the two cases swapped);
+- `Valid.cone_re_nonpos_of_preconnected` (`Valid.cone_re_nonneg_of_preconnected` mirrored, with a point of the set **nearer** than `1` to `y`, as
+  `Valid.cone_re_nonpos_of_germ` mirrors `_nonneg_`);
+- `dist_radial_hex_in` (the inward radial `x − s e φ` lies inside both neighbouring unit discs: `|·|² = 1 − s + s²`, `0 < s < 1`);
+- `hex_point_in` (`hex_point` mirrored: under (B+) — the germ counter-clockwise of `r(φ + 60°)` pseudo-coloured `p`, at chord `60° + t` — and (B−),
+  near `x` the inward cone `{z : |z − r(φ ± 60°)| < 1}` has one colour `c ∈ P_cl(u)`, `P_cl(x) = {p, q, c}`, and `c`'s cone at `u` lies in the closed
+  half-plane toward `x`, along the inward radial; the radius is kept below `1/2` so the radial stays inside `ω(u)`).
+
+`rot_in` itself is `rot_out`'s proof with the tile clause mirrored: `x` is cubic trichromatic (three colours, H); a `g`-tile `T` at `x` meets the
+`g`-sector of `x`'s chart, which holds an interior point `v` of the inward cone inside `ω(u)` (`|v − u| < 1`); `T` with the sector is connected, in
+the closure of `g`, and validity against points of `g` near `u` keeps every point of `T` within `1` of `u`; `T` is open, so a point at distance
+exactly `1` would have a neighbour of `T` beyond `1` along `t − u` — so `T ⊆ B(u, 1)`. Read against the informal claim (FS110-N2-ROT's inward row,
+with unit arcs under H; plan § 8.2): "`x` carries `p`, `q` and one colour `g` of `u`; `g` fills the inward cone (the directions `(150°, 210°)`);
+every `g`-tile at `x` lies in `B(u, 1)`; `u`'s `g`-sector lies in the closed half-plane toward `x`" — **same**.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS). New names collision-free (`git grep` of each full theorem name on
+`origin/fs131-w5p`, `origin/fs131-w5c`, `origin/fs131-w4`, `main`: none).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`HexRing`, `Dense`, `BaseWalk`, `BaseDense`, `Proofs`), 8
+with warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T062507Z-1929717.log`; driver log
+`data/fs131/i5m/build-stage35.log`). Wave 5's sorry declarations (distinct sites): **21** (`HexRing` 2: `bv_l3`, `bv_nd`), mine 3. Axioms
+(`data/fs131/i5m/I5mAxioms35.lean` → `.out`, read against the build's oleans under a 12 GiB slot): `rot_in` and its four children, `rot_out` on the
+standard three; control `bv_nd` reads `sorryAx`, `linkage_dot_ne_zero` clean. `scripts/Axioms.lean`: the four children added to the "FS131-I5g"
+block (a comment line names this stage), above the `=== PURCHASED ===` banner. `tools/check_architecture.py`: PASS.
+
+**Re-pricing (first leaf)**: `rot_in` took about 40k tokens of context and one iteration round (every child compiled first time from its mirror):
+M holds, low.
+
+## Stage 35 — SAVED
+
+## Stage 36 — SAVED: `bv_nd` proved (a kernel theorem), and with it `bv_nd1`
+
+**`bv_nd` is proved as stated** (FS114-BV-HEX's (BV-ND), `plans/BASE-V-verification.md` § 1b.2 steps 2–4; `Plane/ValidMap/HexRing`), with unit arcs and
+at every `k`. The route, in the map's own terms (new children in brackets):
+1. At each of `x₀ = r_{u₁}(φ)`, `y₀ = r_{u₂}(χ)` (H: no four colours, no repeated colour) a sector chart with at most three sectors of pairwise
+   distinct colours [`exists_chart_of_noRep`, from `localSectors_disj`; the proof of `isCubicTrichromatic_of_three_of_noRep` without the count];
+   the germ points of a colour near the point lie in that colour's sector [`IsSectorChart.exists_sector_of_region`].
+2. Step 2 (first order): with `E = x₀ − y₀`, the germ of `ω(u₂)` on side `σ` sits at squared distance `1 + 2(1 + a)(1 − cos t) − 2 D sin t` from
+   `x₀`, `D = ⟨σ i e χ, E⟩` [`sq_dist_germ`, an identity]; so the `α`-germ ahead of `y₀` (`D > 0`) comes within `1` of `x₀` and the `β`-germ behind
+   goes beyond [`germ_dist_cmp_one`].
+3. Validity along connected sectors: one `α`-point of `y₀`'s sector within `1` of `x₀ ∈ cl A₁` puts every pair of `cl A₁ × cl A₂` within `1`
+   [`Valid.pair_le`]; one `β`-point beyond `1` puts every `β`-pair at `≥ 1` [`Valid.pair_ge`].
+4. Step 3: with at most three sectors the `α`- and `β`-sectors are adjacent [`BranchGerms.next_adj`, by `decide` for `n ≤ 3`], so at each small
+   distance `s` there is a point of both closures [`IsSectorChart.exists_shared`, from `mem_closure_sector_of_lt` and `e_nextDir`]; at `x₀` it lies
+   on `ω(y₀)` (`≤ 1` and `≥ 1`), at `y₀` on `ω(x₀)`.
+5. Step 4: two such points at the same `s ∈ (0, 1)` are `1 − s²` or `√(1 + 2s²)` apart, never `1` [`tangent_pair_ne_one`, real algebra in the
+   frame of `E`]; the first contradicts the `β`-pairs, the second the `α`-pairs.
+
+**What the proof reads** (recorded in `bv_nd`'s docstring): only `y₀`'s sense — the component of `ω(u₂)`'s velocity along `E` — and, at `x₀`, only
+that both colours are carried there. The `DoubleEvent`'s first dot condition and the senses of `ω(u₁)`'s germs are not used (validity makes them
+follow). A **generalization**, not stated as a theorem: BV-ND holds with the double event replaced by "`x₀` carries `α` and `β`, and `y₀` switches
+`β → α` moving toward `x₀`". Read against the informal claim (BV-ND, plan § 8.2, G-BVND): "no double event at two points of the domain outside
+`F(M) ∪ R(M)`, every `k`, any centres; with unit arcs, at cusps" — **same**. `bv_nd1` (proved over `bv_nd` by FS131-I5, stage 5) is now a kernel
+theorem.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS); `bv_nd`'s docstring gained the paragraph above. New names collision-free
+(`git grep` on `origin/fs131-w5p`, `origin/fs131-w5c`, `origin/fs131-w4`, `main`, `origin/fs131-w5`: none).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T064038Z-2050688.log`; driver log `data/fs131/i5m/build-stage36.log`). Wave 5's sorry declarations (distinct sites):
+**20** (`HexRing` 1: `bv_l3`), mine 2. Axioms (`I5mAxioms36.lean` → `.out`): `bv_nd`, `bv_nd1`, the nine children and `rot_in` on the standard three
+(`BranchGerms.next_adj` on `[propext]`); control `bv_l3` reads `sorryAx`, `linkage_dot_ne_zero` clean. `scripts/Axioms.lean`: the nine children
+added to the "FS131-I5g" block (comment line names this stage). `tools/check_architecture.py`: PASS.
+
+**Re-pricing from the first two leaves** (`rot_in`, `bv_nd`): about 40k and 35k tokens of context, every child compiling within two rounds. The
+plan's M and M–H hold, low; the cost of `bv_l3` and `exists_preBend` is in their new content (stage 37), not in iteration.
+
+## Stage 36 — SAVED
+
+## Stage 37 — SAVED: the linkage to first order (five children for `bv_l3`); `bv_l3` moved below `bv_nd`; the handoff
+
+**Why `bv_l3` needs new content.** `l3_base`'s route transfers (I5g's note), except at one input: its double-event step `hdbl` is `pair_ii`, which
+needs `u₁` cubic trichromatic (`pair_ii` reads `u₁`'s chart for "`d₁ ≠ d₂`"), and `bv_l3` has no sector hypothesis at `u₁`, `u₂` (cusps, double cusps,
+any degree — plan § 8.2's read-back). So `hdbl` must go through `bv_nd`, which needs the senses of motion: the new content is the velocity reading
+of the linkage. Its analytic core is proved here, as five children placed after `bv_nd1`, and **`bv_l3` (statement and `sorry` unchanged) is moved to
+the end of the file**, below `bv_nd` and these children, so its proof can cite them:
+- `linkage_first_order`: with `|r_{u₁}(a₀) − r_{u₂}(b₀)| = 1`, `E` their difference, `D₁ = ⟨i e a₀, E⟩`, `D₂ = ⟨i e b₀, E⟩`:
+  `| |r_{u₁}(a) − r_{u₂}(b)|² − 1 − 2(D₁ sin(a − a₀) − D₂ sin(b − b₀)) | ≤ 3((a − a₀)² + (b − b₀)²)` (from `dot_ringPt_sub`, an identity);
+- `linkage_cmp`: two motions that both lengthen the pair to first order (`s₁ D₁ > 0`, `s₂ D₂ < 0`) leave every nearby moved pair farther than `1`;
+  both shortening, nearer (`half_le_sin`: `sin t ≥ t/2` on `[0, 1]`);
+- `linkage_end`: at `D₂ = 0` (with `x ≠ u₂`, so `x = u₂ + 2 e b₀`) moving `y` never shortens the pair, so a lengthening motion of `x` takes every
+  pair beyond `1`, whatever `y` does.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T065125Z-2125030.log`; driver log `data/fs131/i5m/build-stage37.log`). Wave 5's sorry declarations: **20** (unchanged),
+mine 2 (`bv_l3`, `exists_preBend`). Axioms (`I5mAxioms37.lean` → `.out`): the five children, `bv_nd`, `rot_in` on the standard three; control `bv_l3`
+reads `sorryAx`, `linkage_dot_ne_zero` clean. `scripts/Axioms.lean`: the five children added to the "FS131-I5g" block (comment line names this
+stage). Statements unchanged (`tools/fs131_i5_stmt_check.py d61edefc`: PASS; the checker matches by name within a file, so the move is invisible
+to it, as it should be). New names collision-free on `origin/fs131-w5p`, `origin/fs131-w5c`, `origin/fs131-w4`, `main`. `tools/check_architecture.py`: PASS.
+
+### What is left of this half (2), for the next implementer
+
+- **`bv_l3`** (H; off the walk's path). The route, every input named:
+  1. *Rings.* `C_i := ringCircleColouring hF hc_i hno_i g hg` with **one** `g : Fin 6 → ZMod 3` injective on `(coloursAt u₁)ᶜ = (coloursAt u₂)ᶜ`
+     (`hsame`; `h3` makes it three colours); `hno_i : ∀ x, ¬ F.OnRingArc u_i x` from `RingProper`'s finiteness of `Γ ∩ ω(u_i)` (a lemma to write: a
+     ring arc puts infinitely many points of `Γ` on the circle). No relabelling (`link_relabel`) is needed: both rings read through `g`.
+  2. *`hgen`* (FS112-N3-PAIRS (i)'s place): two generic points off `Γ` at distance `1` with `L₁.f − L₂.f ≡ 0` have `g(col x) = g(col y)`, so one
+     colour (`InjOn`; both colours absent at `u₁` by `not_mem_coloursAt_of_mem_sphere`), against validity (both interior). No `pair_i`.
+  3. *No swap on `ω(u₂)`* (for the band): `RingProper`'s (ii) forbids two change points at distance `1` with one pair; an `IsSwap` gives two
+     (the `LeftVal`/`RightVal` values turn into `GermIn … (region c)` because the ring's points near a change point are off `Γ`, hence interior).
+  4. *The band* `3M + 1 ≤ D ≤ 3M + 2`: `l3_base`'s `hbandL`/`hbandR` verbatim (`hbig_of_noSwap`, `m0_const`, `D0_mod_ne`, `exists_T0_left/right`).
+  5. *`hdbl`* (the new step). At `s₀` with both jumps `±1` and a pair condition: if `|y₀ − u₁| = 2`, `exists_linkage`'s turning clause. Otherwise
+     take the one-sided sides of `φ` and `χ` at `s₀` (`link_val_left`, `link_val_right`) and a generic parameter in each one-sided neighbourhood (the
+     bad set is finite, as `link_path`'s `hbad`), where `hgen` holds. Under P1 (`l₁ ≡ l₂`, `r₁ ≡ r₂`) the admissible (x-side, y-side) pairs before
+     and after are `(l₁, r₂)`, `(r₁, l₂)`; under P2 (`l₁ ≡ r₂`, `r₁ ≡ l₂`) they are `(l₁, l₂)`, `(r₁, r₂)`. So: y on one side before and after ⟹
+     `χ` turns (the conclusion); x on one side ⟹ y too ⟹ the same; otherwise both cross — in opposite senses under P1, the same sense under P2.
+     For a crossing, with `D₁ = ⟨i e φ₀, E⟩`, `D₂ = ⟨i e χ₀, E⟩`: `D₁ = 0` forces `|y₀ − u₁| ∈ {0, 2}` (excluded: `y₀ = u₁` would give `t = 1`);
+     `D₂ = 0` forces `x₀ = u₂ + 2 e χ₀`, and `linkage_end` makes the crossing of `x` impossible (on its lengthening side every pair is beyond `1`,
+     against `|x(s) − y(s)| = 1`); a sign pattern where both motions lengthen or both shorten is refuted by `linkage_cmp` just after `s₀` (with
+     `t₁ = |φ(s) − φ₀|`, `t₂ = |χ(s) − χ₀|` small by continuity); the remaining pattern is a `DoubleEvent`, refuted by `bv_nd` with H at `x₀`, `y₀`
+     (`hH`): P2 with `D₁, D₂ > 0`: sides `ccw, ccw`, `α` the colour of `l₁`; P2 with `D₁, D₂ < 0`: `cw, cw`, `α` of `r₁`; P1 with `D₁ > 0 > D₂`:
+     `ccw, cw`, `α` of `l₁`; P1 with `D₁ < 0 < D₂`: `cw, ccw`, `α` of `r₁`. (`linkage_dot_ne_zero` is not needed on this route.)
+  6. *The rest*: `l3_base`'s two paths `[−θ_A, θ_A]`, `[θ_A, 2π − θ_A]`, the flips at `±θ_A`, the band at `P`'s partners and the closing `omega`,
+     verbatim, with `C₂` for `C₂'`.
+  Estimate: the `l3_base` copy is about 350 lines; steps 1, 3 and 5 are new, about 250 lines. H stands.
+- **`exists_preBend`** (H): the strengthened bend (ruling 317 (b)) — not attempted; E4-BEND-UN (`plans/FS131-E4-derivation.md`) not read in this job.
+
+**Route notes** (stages 35–37): the mirrors of stage-31/32 lemmas compile first time from a text substitution (`hex_side` → `hex_side_far` etc.); a
+lemma placed in a scratch file importing an *upstream* module (`BaseSteps`) can be iterated while a build of `HexRing` runs; `omega` does not see
+through `max n 1` after `simp` (state `ncard ≤ 1` by `exact` from `max 0 1`).
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 37 — SAVED
+
+## Stage 38 — SAVED (FS131-I5o): the readback, and the as-given build
+
+*FS131-I5o, wave 5's non-`Terminal` lane (Opus), resuming this record at its first unsaved stage (Stage 37 SAVED, `1b4a75d8`; branch head `f33ef153`).
+Brief: `data/fs131/briefs/FS131-I5o-wave5.md` (main tree). My set (ruling 358): merge `fs131-w5p` (at `5086e856`) into `fs131-w5` and check it; then
+`bv_l3`, `exists_preBend` (over the strengthened-bend child, ruling 317 (b)), `disc1_local`. Never `Terminal`, `cv_exists`, `main`, `framePt → fromFrame`,
+the gate, or any statement on either side of the merge.
+
+### 38.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_i5_quote_check.py` (I5j's, run, not edited) on the brief: **13 quotations, 13 verbatim**, exit 0 (`data/fs131/i5o/quote-check-38.txt`);
+`--plant` (one letter changed in the first) reports it MISMATCH (`quote-check-38-plant.txt`). The thirteen: `CLAUDE.md` § Counter-priors; inventory
+items 358, 357, 349, 317, 226, 274, 295; this record's Stage 37 (the `bv_l3` and `exists_preBend` bullets); `Dense.lean`'s `disc1_local` docstring opening
+and its statement line; the kernel plan § 10.2's "**It may**" line. Items 226, 274, 295, 317, 349, 357, 358 read in full; I5m's Stages 34–37 read; RS1's
+Stage 29 on `fs131-w5p` (`plans/FS131-planar-implementation.md`) read.
+
+### 38.2 The as-given build (`f33ef153`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1754 modules already
+up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T082731Z-2684723.log`; driver log
+`data/fs131/i5o/build-stage38-asgiven.log`). Every warning is `declaration uses 'sorry'`: wave 5's `Terminal` 9, `MapGraph` 3, `BaseWalk` 3, `BaseDense` 3,
+`HexRing` 1, `Dense` 1 (**20**, item 349's count), and wave 4's stale `Contact` 3, `UnitArc` 5. `tools/fs131_i5_stmt_check.py d61edefc`: PASS
+(`data/fs131/i5o/stmt-check-38.txt`).
+
+## Stage 38 — SAVED
+
+## Stage 39 — SAVED (FS131-I5o): `fs131-w5p` merged (the planar chain); checked
+
+`git merge --no-ff origin/fs131-w5p` (at `5086e856`; merge base `0db34854`) into `fs131-w5` (at `956c1cd2`). Git auto-merged `Proofs.lean`, `BaseDense`,
+`BaseWalk` and brought `MapGraph`, `MapTopology`, `CurveGraph`, `PlaneTopology`, `Thomassen` and `fs131-w5p`'s `data/`, `plans/`, `tools/` files; two
+conflicts, each **keep both sides**, nothing more:
+- `ARCHITECTURE.md` (the module table): classified row by row against the merge base, **no row changed on both sides** (ours changed `BaseSteps`, `BrickMap`,
+  `Contact`, `Cor3`, `Dense`, `FlankUA`, `HexRing`, `Terminal`, `UnitArc`; theirs `BaseWalk`, `MapGraph` and the new `CurveGraph`, `PlaneTopology`,
+  `MapTopology`, `Thomassen`); each row taken from the side that changed it, `MapTopology` and `Thomassen` placed before `MapGraph` as theirs orders them;
+  checked by script: 239 rows = 235 ours + 4 new, every row equal to its changed side.
+- `scripts/Axioms.lean`: both sides appended a block at the end of the CLEAN section (ours FS131-IC1 … I5m; theirs FS131-IX1 … RS1); both kept, ours
+  first; the merged `#print axioms` lines equal the union of both parents' (3099), no duplicate.
+
+### 39.1 The checks
+
+- **(a) Statements, byte for byte** — new tool `tools/fs131_i5o_merge_check.py BASE OURS THEIRS`: every declaration of `BaseWalk`, `BaseDense`, `MapGraph`,
+  `MapTopology`, `CurveGraph`, `PlaneTopology`, `Thomassen` in either parent (a theorem up to its `:=`, any other declaration whole), three-way against
+  the base, must appear in the merge identical to the side that changed it (a key changed on both sides is a CONFLICT); and every `.lean` file only one
+  side changed must equal that side's file. **PASS: 504 declaration keys, 0 conflicts, 17 one-sided files byte-equal** (`data/fs131/i5o/merge-check.txt`).
+  `--self-test`: a hypothesis added in `BaseWalk`, `cvb_thom_reduced` renamed, a line appended to `HexRing` — each FIRED, the unplanted run PASS
+  (`merge-check-selftest.txt`). Also `tools/fs131_i5_stmt_check.py d61edefc`: PASS (`stmt-check-39.txt`).
+- **The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 448 of 448 batches, 8 modules rebuilt (`Thomassen`, `PlaneTopology`, `CurveGraph`, `MapTopology`,
+  `MapGraph`, `BaseWalk`, `BaseDense`, `Proofs`), 6 with warnings, every warning `declaration uses 'sorry'`**, exit 0, 9 min 20 s
+  (`build/gate/build/20261005T083032Z-2697877.log`; driver log `data/fs131/i5o/build-stage39-merge.log`). `tools/check_architecture.py`: PASS.
+- **(b) Axioms** (`data/fs131/i5o/I5oAxioms39.lean` → `.out`, against the merged build's oleans, 12 GiB slot): **on the standard three** —
+  `BaseCtx.retArcs_nested`, `BaseCtx.exists_endpoint`, `BaseCtx.exists_eleventh` (`BaseWalk`'s planar three), `BaseCtx.false`, **`row134BaseUA`**,
+  `exists_unenclosed_or_bad`, `cvb_thom_reduced`, `cvb_thom`, `cvb_pinch_connected`, `cvb_hole_disconnected` (`MapGraph`'s three leaves and their consumer),
+  `IsBoundaryWalk.sep`, `filledGraph_ringList`, `filledGraph_planarLike`; **controls on `sorryAx`**: `exists_preBend`, `bv_l3`, `localDense` (it rests on
+  `n3_base` → `exists_preBend`).
+- **(c) `sorry` by file** (`grep -cw sorry`; `data/fs131/i5o/sorry-counts-39.txt`), before (`f33ef153`) → after: `BaseWalk` 3 → 0, `BaseDense` 3 → 2
+  (`exists_preBend`, `cv_exists`), `MapGraph` 3 → 0, `HexRing` 1 → 1, `Dense` 1 → 1, `Terminal` 9 → 9; `MapTopology`, `CurveGraph`, `PlaneTopology`,
+  `Thomassen` 0. **Wave 5: 20 → 13** (`Terminal` 9 — the other lane's; mine: `bv_l3`, `exists_preBend`, `disc1_local`; `cv_exists` the `Terminal` lane's).
+  Wave 4's stale copies unchanged (`Contact` 3, `UnitArc` 5).
+
+**`row134BaseUA` is a kernel theorem on this branch** (with the planar chain and E4-RIM; `n3_base` still waits on `exists_preBend`). Statements unchanged on
+both sides; no `axiom`, no `native_decide`. The merge commit is made with `git commit -i <paths>` (a merge cannot be a partial commit; `-i` names the
+resolved paths explicitly, standing rule 6's intent).
+
+## Stage 39 — SAVED
+
+## Stage 40 — SAVED (FS131-I5o): `disc1_local` proved (a kernel theorem)
+
+**`disc1_local` is proved as stated** (FS112-DISC1 on a fragment, `Plane/ValidMap/Dense`), by FS106-TS-T's argument read on one closed square (order changed
+by ruling 360 (c): `disc1_local` before `bv_l3`). New declarations, all in `Dense` (names collision-free on `HEAD`, `origin/fs131-w5c`, `origin/fs131-w4mm`,
+`origin/main`):
+- `IsRegOf` (a region of a family of classes: `AeProperRegions.IsRegion` with the classes given directly), with `IsRegOf.subset`, `.isPreconnected`,
+  `.chain_step`, `.dist_lt_one`, and `unitPairsNull_of_dist_ne_one`; two spec examples (the plane is a region of `univ`; `∅` is not a region);
+- `exists_three_le_multicolour_square`: open classes with no unit pair inside a class, **dense and locally finite only at the points of a closed square of
+  side `s > 1`**, have a point of the square in three class closures. The proof is `AeProperRegions.exists_three_le_multicolour`'s, transformed by script
+  (`R.cls` → `cls`, `R.IsRegion` → `IsRegOf cls`, the global local finiteness chosen only at points of the square, `R.dense p` → the hypothesis at `p`);
+- `ArcMap.exists_three_le_coloursAt_square`: a valid map whose domain holds such a square has a point of at least three colours in it (density by
+  `dense_interiorPts`, local finiteness by `finite_tiles_near`, both at domain points; `region_locallyFinite`'s argument with `hx : x ∈ F.dom`);
+- `ArcMap.closedSquare_subset_closedBall`: the square of side `6/5` about `x` lies in `B̄(x, 1)` (half-diagonal `3√2/5 < 1`).
+`disc1_local`: the square of side `6/5` about `x` is in `B̄(x, 1) ⊆ F.dom`, so it holds a point of three colours. Read against the informal claim (FS129-OR1-
+LOCALDENSE's reading of FS112-DISC1: "a valid fragment covering `B̄(x, 1)` has a point of at least three colours in `B̄(x, 1)`") — **same**; the route differs
+from the docstring's quoted FS129 wording (nested tiles), which the docstring keeps as the row's own words (a `--` comment in the proof says so). Strictly
+more is true by the proof: the point lies within `3√2/5` of `x`, for any valid fragment whose domain holds that square.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 448 of 448 batches, 4 modules rebuilt (`Dense`, `BaseWalk`, `BaseDense`, `Proofs`), 5 with warnings
+(`Dense` has none now), every warning `declaration uses 'sorry'`**, exit 0, 8 min 43 s (`build/gate/build/20261005T084436Z-2794592.log`; driver log
+`data/fs131/i5o/build-stage40.log`). Axioms (`I5oAxioms40.lean` → `.out`): `disc1_local` and its nine children on the standard three; control `bv_l3` on
+`sorryAx`. `scripts/Axioms.lean`: the eight new theorems added under "-- FS131-I5o (stage 40)" after I5m's stage-37 lines. `tools/fs131_i5_stmt_check.py
+d61edefc`: PASS; `tools/check_architecture.py`: PASS. Wave 5's `sorry` declarations: **12** (mine left: `bv_l3`, `exists_preBend`).
+
+## Stage 40 — SAVED
+
+## Stage 41 — SAVED (FS131-I5o): the strengthened bend stated (scratch, elaborated); notes for its construction and for `exists_preBend`; `bv_l3`'s placement; two of `bv_l3`'s steps compiled
+
+### 41.1 The strengthened bend, as stated (rulings 359–360, 363–366)
+
+`data/fs131/i5o/BendCollar.lean` (imports `Chain`; elaborates, one `sorry`; **not in the library** — `exists_preBend` stays `sorry`, so the statement would
+be an unused leaf): `ArcMap.bend_toward_collar`. Hypotheses: `F.Valid`; `F.IsRingArc P θ₁ θ₂ c c'` with `c' ∉ F.coloursAt P`; `θ₂ − θ₁ < 2π`; **`hmax`** (no
+ring arc at `P` with the same sides strictly contains `α`, as sets); **`hfree`** (near each point of `α°`, `Γ ⊆ ω(P)`); `ε > 0`. Conclusions: `M` and a
+homeomorphism `h : ℂ ≃ₜ ℂ` with `M.Valid`, `M.dom = F.dom`; `h = id` off `thickening ε α`; `h` fixes every point of `F.Γ` off `α°`; `h` carries interior points to
+interior points of the same colour; hence (stated) `M.coloursAt (h z) = F.coloursAt z`, `M.HasDegree (h z) n ↔ F.HasDegree z n`, `M.HasRepeatedColour (h z)
+↔ F.HasRepeatedColour z`; **R1** every ring arc of `M` is one of `F` with the same sides; **R2** every ring arc of `F` whose open arc misses `α°` is one of `M`;
+**R3** no point of `α°` is on a unit arc of `M` at `P`; and **no new inert arc** (`M.Inert Q a b → F.Inert Q a b`).
+
+**Read back against E4-BEND-UN** (`plans/FS131-E4-derivation.md`, its derivation block and § Argument): E4's "the toward-bend of a whole inert unit arc …
+with its lens chosen inside a collar of the arc in its inner tile" — the child bends a whole maximal constant-sided arc whose outer colour is absent at `P`
+(the toward bend's own hypothesis; inert is stronger, and is what `exists_preBend` supplies); E4's "uses only: that the bend is induced by a homeomorphism of
+the plane supported in a small neighbourhood of the lens's closure, fixing the arc's ends, carrying each old tile onto the new tile of the same index" — the
+`h` clauses (support in `thickening ε α`, the ends and all of `Γ ∖ α°` fixed, interior points and colours carried point by point, which is "each old tile
+onto the new tile of the same index"); E4's conclusion "keeps `Unenclosed u`" — follows from the `h` clauses (a homeomorphism carries bounded components of
+`ℂ ∖ cl T` to bounded components of `ℂ ∖ cl h(T)`; `h u = u` because `u ∈ Γ ∖ α°`), not stated as a clause: the iteration derives it. **Beyond E4**: the
+transport of colours, degrees and repeated colours (`exists_preBend`'s docstring: "no point gains a colour or a sector"), and R1–R3 with no new inert arc,
+which the iteration's measure needs (§ 41.3). **Same**, with those additions.
+
+### 41.2 Notes for the construction job (the collar bend)
+
+1. **Why `bendMap` cannot give the collar** (wave 4, `UnitArc` on `main`, `bendMap P θ₁ θ₂ a L j`): the bent map has exactly one new `Arc` `a` through both
+   ends `A = r(θ₁)`, `B = r(θ₂)`, and the lens is bounded by `α` and `a`. Two distinct circles (or a circle and a line) through `A` and `B` cross
+   transversally at `A`, so every `bendMap` lens has a positive opening angle at each tip. **The horn end**: the inner tile's sector at `A` beside `α` is
+   bounded by `α` and the next ray `ρ` of `Γ` at `A`; if `ρ` is tangent to `α` at `A` (an internally tangent circle, curvature `κ_ρ > 1` — the only arcs that
+   can be tangent to `ω(P)` at `A` on the inner side: a segment or a circle of curvature `< 1` tangent at `A` lies outside `B(P, 1)` near `A`), the sector is a
+   horn of width `O(t²)` and no positive-angle wedge fits in it. Main's crescent then swallows the horn's tip and a wedge of the tile beyond `ρ`: at `A` with
+   colours `{c, c', d}`, `c` can be lost at `A`, and `a` crosses `ρ`, making new vertices. So the collar needs a lens bounded by several arcs.
+2. **The construction in mind.** (a) *The lens boundary*: at a horn end, a circle arc through `A` tangent to `α` with curvature strictly between `1` and `κ_ρ`
+   — it lies strictly between `α` and `ρ` near `A` (second order); at a transversal end, a circle arc through `A` at an angle smaller than the sector's; in
+   the middle, an arc inside the collar; the joins inside `T_in` (corners are degree-2 points with colours `{c, c'}`, harmless). So `bendMap` generalized to a
+   finite set of new arcs. (b) *Validity*: for a small crescent parameter `d`, the collar lens can be chosen inside main's crescent `L` (its tips lie in `L`'s
+   wedge, its middle under `L`'s depth), so main's clearness (`IsClear c'` on `L`) and "no unit pair inside `L`" apply to the subset. (c) *The homeomorphism*:
+   a radial push in polar coordinates about `P`, `h(P + ρ e(θ)) = P + ψ_θ(ρ) e(θ)` for `θ ∈ (θ₁, θ₂)`, `ψ_θ` a piecewise-linear homeomorphism of
+   `[1 − w_in(θ), 1 + w_out(θ)]` fixing the ends and sending `1 ↦ 1 − ℓ(θ)`, the identity elsewhere; `w_in`, `w_out` are collar widths in `T_in`, `T_out`
+   (`→ 0` at an end whose sector on that side is a horn), `ℓ < w_in` the lens depth (`ρ = 1 − ℓ(θ)` is the lens boundary). Continuity at the ends needs `w, ℓ →
+   0` there; bi-Lipschitz near the ends if `ℓ/w_in` stays bounded away from `1`, which is what transporting sector counts (metric: balls) needs.
+   (d) *The collar exists* along `α°` by `hfree` and local finiteness (a uniform strip over each compact sub-arc of `α°`), and at the ends inside the two
+   sectors beside `α`.
+3. **"No new inert arc" holds — the validity argument** (my first report said otherwise; corrected, items 365–366). Colours change only at points of `α°`
+   (`{c, c'} → {c'}`), of the lens (`{c} → {c'}`) and of the new boundary (`{c} → {c, c'}`: a gain, harmless). Let `β ⊆ ω(Q)` be a unit arc with `Q ∈ α°`. Near
+   `Q` the colour `c` fills an open half-disc `H` on `α`'s inner side. If `c` lay on β's inner (outer) side: `x = Q + δn ∈ H`, `y = Q + (1 ∓ η)e(t)` on β's `c`
+   side, `|x − y|² − 1 = ∓2η − 2δ⟨e(t), n⟩ + O(δ² + η² + δη)`; for every `t` but the one normal direction some `n ∈ H` gives the needed sign, and the
+   intermediate value theorem in `η` gives two `c`-points at distance exactly `1` — against validity. So a unit arc centred on `α°` never carries `c` on a side;
+   non-inert in `F`, it carries `c'`, which `Q` keeps. A centre in the lens has a whole `c`-disc around it: the same argument excludes `c` on any side. With R1
+   (sides kept), nothing becomes inert.
+4. **The fake-boundary vertex — and why `exists_preBend` never meets it.** If an arc `δ` of `Γ` meets `α` at an interior point `x` (crossing, tangent, or
+   ending there), constant sides force `δ` to have one colour on both sides near `x` (a crossing needs `c = c'`; a tangency from inside needs `c` on both sides of
+   `δ`); near `x`, `cl T_in` is two cusps pinched at `x`, not `α° × [0, 1)`, and a homeomorphism fixing `Γ ∖ α°` cannot move `α°` off a crossing point
+   (`h(x) = x` by continuity along `δ`). **But such an `x` is a repeated-colour point** (`c` or `c'` has at least two sectors at `x`), and `α° ⊆ B̄(u, 2)` (`P ∈
+   B̄(u, 1)`), so `BaseHyp u` excludes it; likewise `c = c'` makes every point of `α°` a repeated-colour point. So under the base's hypotheses `hfree` follows
+   from `BaseHyp u` and local finiteness (arcs not through `x` keep a positive distance), and `c ≠ c'`. In a general map, splitting `α` at the finitely many
+   such vertices (each piece is constant-sided with a free interior, but not maximal — R2 then needs the piece's ends, interior points of `α`, handled: the
+   remaining piece of `α` stays a ring arc because sides are read only at interior points) or pinching the lens at them would be needed; `exists_preBend`
+   does not need either.
+5. **The `Covers u 2` edge**: `α ⊆ B̄(u, 2)` may touch `∂B̄(u, 2)` (when `|P − u| = 1`); the domain is open and contains `B̄(u, 2)`, so `thickening ε α ⊆ F.dom`
+   for small `ε`, and the collar lives in the domain; bad points outside `B̄(u, 2)` are fixed by `h` (they lie in `Γ ∖ α°`), so `BaseHyp u` is kept.
+6. **Full circles** (`hlen`): a whole inert circle `ω(P) ⊆ Γ` has no ends; it needs its own case (an annular lens bounded by a concentric circle of radius
+   `1 − δ`, a radial push with no end conditions).
+
+### 41.3 `exists_preBend` over the child — the route (not formalized this job)
+
+Strong induction on **`N(F)` = the number of maximal constant-sided unit arcs (any sides) centred in `B̄(u, 1)`** — a finiteness child to state: finitely many
+arcs of `F.arcs` meet `B̄(u, 2)` (local finiteness on a compact set), each positive-length unit arc of `Γ` lies on one of their circles, and the
+constant-sided maximal sub-arcs on each are finitely many (their ends are among finitely many break points); with it, every ring arc lies in a maximal one.
+Step: if no inert arc is centred in `B̄(u, 1)`, stop (`M = F`). Else extend one to its maximal ring arc `α` (same sides, same centre, so inert), check
+`hlen` (else the full-circle case), `hmax`, `hfree` (§ 41.2 item 4 from `BaseHyp u`), choose `ε` with `thickening ε α ⊆ F.dom` and `u ∉ thickening` unless
+`u ∈ {A, B}` (in either case `h u = u`: `u ∈ Γ ∖ α°`, since `u` has three colours and points of `α°` two), and bend. Invariants: `Valid`, `Covers u 2`
+(same domain), `IsCubicTrichromatic u` (colours and degree at `h u = u`), `BaseHyp u` (bad points of `M` are `h`-images of bad points of `F`, which are in
+`Γ ∖ α°`, so fixed), `UnenclosedC u` (homeomorphism invariance, § 41.1). **The count drops**: a maximal ring arc `β` of `M` is a ring arc of `F` (R1), inside a
+maximal `γ` of `F`; `γ ≠ α` (R3 and `β` of positive length); `γ°` misses `α°` (same centre: overlapping maximal arcs with the same sides merge; other sides
+cannot overlap; another centre: `hfree`); so `γ` is a ring arc of `M` (R2) and `β = γ` by maximality in `M` — an injection into `F`'s maximal arcs minus `α`.
+At the end no inert arc is centred in `B̄(u, 1)`: `NoInertNear u`. Children to state with it: the finiteness child, `hfree_of_baseHyp`, the full-circle bend.
+
+### 41.4 `bv_l3`: its placement blocks the route as written
+
+`bv_l3` is in `Plane/ValidMap/HexRing`, which imports neither `Plane/RingBand` (`ringCircleColouring`, the band lemmas `hbig_of_noSwap`, `m0_const`, `D0_mod_ne`,
+`exists_T0_left/right`) nor `Plane/ValidMap/BaseWalk` (`exists_linkage`, `link_path`, `link_val_left/right`, `l3_base`'s argument); `HexRing` is upstream of
+`BaseWalk` (`BaseWalk → Dense → HexRing`), so I5m's route (Stage 37) cannot be written in `HexRing`. **Nothing consumes `bv_l3`** (`git grep`: docstrings only).
+Proposal for a ruling: move `bv_l3`, statement verbatim, to the end of `BaseWalk` (after `l3_base`) or to `BaseDense`; I5m's linkage children stay in `HexRing`
+(`BaseWalk` sees them). A move-aware statement check is needed (the lane's `fs131_i5_stmt_check.py` matches by name within each file; I5e's
+`fs131_i5_cor3_move.py` is the model). And a shorter route than copying `l3_base` (about 350 lines): extract its band-and-linkage argument into one lemma over the
+two inputs that differ — `hgen` (generic pairs not `0 mod 3`) and `hdbl` (a double switch makes `χ` turn) — so `l3_base` and `bv_l3` are each a short proof
+over it.
+
+**Two of `bv_l3`'s new steps, compiled** (`data/fs131/i5o/RingScratch.lean`, importing `RingBand` and `HexRing`; elaborates with no `sorry`; ready for
+`bv_l3`'s new home): `not_onRingArc_of_finite` (step 1: a ring meeting `Γ` finitely carries no arc of `Γ` — from `RingProper`'s first clause);
+`ringCircle_val_germ` (the bridge: a one-sided value of `ringCircleColouring` is a germ of the map in one absent colour's class, sent to that value by `g`);
+`ringCircle_noSwap` (step 3: a proper ring has no swap point — a swap gives two change points at distance `1` with one pair, against `RingProper`'s second
+clause; the two values differ because the clockwise germs are `1` apart). Left for `bv_l3`: step 2 (`hgen` through one `g` on both rings), step 5 (`hdbl`
+by the velocity reading, I5m's children), and the band-and-linkage argument (steps 4 and 6).
+
+## Stage 41 — SAVED
+
+## Stage 42 — SAVED (FS131-I5o): the hand-back
+
+### Theorems this phase proved (FS131-I5o)
+
+- `HadwigerNelson.Plane.ArcMap.disc1_local` (FS112-DISC1 on a fragment) — [kernel], `[propext, Classical.choice, Quot.sound]` — `Plane/ValidMap/Dense`
+- `HadwigerNelson.Plane.exists_three_le_multicolour_square` (FS106-TS-T on a square, classes given directly) — [kernel], standard three — `Dense`
+- `HadwigerNelson.Plane.ArcMap.exists_three_le_coloursAt_square` (TS-T on a square inside a fragment) — [kernel], standard three — `Dense`
+- `HadwigerNelson.Plane.ArcMap.closedSquare_subset_closedBall` — [kernel], standard three — `Dense`
+- `HadwigerNelson.Plane.IsRegOf.subset`, `.isPreconnected`, `.chain_step`, `.dist_lt_one`, `HadwigerNelson.Plane.unitPairsNull_of_dist_ne_one` — [kernel],
+  standard three — `Dense`
+- By the merge (proved on `fs131-w5p` by the planar jobs; on the standard three on this branch's merged build, Stage 39): `row134BaseUA`, `BaseCtx.false`,
+  `BaseCtx.retArcs_nested`, `BaseCtx.exists_endpoint`, `BaseCtx.exists_eleventh`, `exists_unenclosed_or_bad`, `cvb_thom_reduced`, `cvb_thom`,
+  `cvb_pinch_connected`, `cvb_hole_disconnected`, `IsBoundaryWalk.sep`, `filledGraph_ringList`, `filledGraph_planarLike`.
+- Compiled in scratch only, not in the library (no audit): `not_onRingArc_of_finite`, `ringCircle_val_germ`, `ringCircle_noSwap`
+  (`data/fs131/i5o/RingScratch.lean`); stated with `sorry`: `bend_toward_collar` (`data/fs131/i5o/BendCollar.lean`).
+
+**Left in my set (2)**: `bv_l3` (needs a ruling on its module, § 41.4; route and two steps ready), `exists_preBend` (over the collar bend, § 41.1–41.3; the
+construction is its own job). **Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 42 — SAVED
+
+## Stage 43 — SAVED (FS131-KB2): the readback, and the as-given build
+
+*FS131-KB2, the strengthened bend's construction (Opus), continuing this record from Stage 42 (`4a0e5c28`). Brief:
+`data/fs131/briefs/FS131-KB2-bend.md` (main tree). My set (ruling 370 (d)): land `bend_toward_collar` (I5o's statement) in a module of its own upstream of
+`BaseDense`, construct it, then `exists_preBend` over it. Never `HexRing`, `BaseWalk`, `Terminal`, `Dense`, `MapGraph`, wave 4's stale modules, `main`, or the
+gate.*
+
+### 43.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_i5_quote_check.py` (I5j's, run, not edited) on the brief: **15 quotations, 15 verbatim**, exit 0 (`data/fs131/kb/quote-check-43.txt`); `--plant`
+reports 1 not verbatim (`quote-check-43-plant.txt`). The fifteen: `CLAUDE.md` § Counter-priors; `exists_preBend`'s first line (`BaseDense`); `bend_toward_collar`'s
+first line (`data/fs131/i5o/BendCollar.lean`); E4-BEND-UN's index line; this record's § 41.2 items 1, 2, 6; inventory items 359, 360, 365, 366, 369, 370, 317;
+the kernel plan § 10.2's "**It may**" line. Read in full: items 317, 359–370; this record's Stages 38–42; E4-BEND-UN's derivation block and § Argument
+(`plans/FS131-E4-derivation.md`); `BaseDense` whole; the scratch child whole.
+
+### 43.2 The as-given build (`4a0e5c28`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1758 modules already
+up to date, nothing built, 5 modules with warnings**, exit 0 (`build/gate/build/20261005T085919Z-2876965.log`; driver log
+`data/fs131/kb/build-stage43-asgiven.log`); every warning `declaration uses 'sorry'`. `tools/fs131_i5_stmt_check.py d61edefc`: PASS (`data/fs131/kb/stmt-check-43.txt`).
+
+## Stage 43 — SAVED
+
+## Stage 44 — SAVED (FS131-KB2): `bend_toward_collar` landed in `Plane/ValidMap/BendCollar`; the construction's design
+
+### 44.1 The landing
+
+`Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean` (new; imports `Chain`, `UnitArc`, `LocalStructure`), imported by `BaseDense`; added to
+`Proofs.lean`, to `ARCHITECTURE.md` (a row before `BaseDense`, whose Imports cell gains it) and to `scripts/Axioms.lean` (after I5o's stage-40 lines).
+`bend_toward_collar`, docstring and statement, **verbatim**: `tools/fs131_kb_stmt_move.py` (new) compares the block from `/--` to `:= by` in
+`data/fs131/i5o/BendCollar.lean` at `4a0e5c28` with the module's, byte for byte, and checks the context lines (`namespace HadwigerNelson.Plane`,
+`namespace ArcMap`, `variable {k : ℕ} {F : ArcMap k}`) and that one file under `Proofs/` declares it: **PASS** (`data/fs131/kb/move-check-44.txt`);
+`--self-test`: a changed hypothesis, a changed docstring letter, a dropped `variable` line, a second declaring file — each FIRED, unplanted PASS
+(`move-check-44-selftest.txt`). The scratch file is deleted (its content is in the library; the check reads it from `4a0e5c28`).
+
+### 44.2 The statement read clause by clause (no defect found)
+
+Before building, each clause was checked for an edge case that could make it false; none was found, and two facts shorten the construction:
+- **`hlen` is implied, and full circles cannot occur**: `l60_le` (wave 4, proved on this branch) gives `θ₂ − θ₁ ≤ π/3` for every ring arc of a valid map,
+  so § 41.2 item 6's full-circle case is empty (a whole circle would be a ring arc of length `2π`).
+- **No new inert arc at a centre on `α°` is `lock`**: a unit arc of `M` centred at `Q ∈ α°` is one of `F`'s (R1); if `c` lay on a side, every interior
+  point `x` of it would be in `cl(C_c) ∩ ω(Q)`, which `lock` (FS112-LOCK, proved here) confines to `{P, P + 2e(θ_Q)}` — two points. At a centre in the lens
+  (an open set inside `C_c`) it is `Valid.dist_ne_one_of_isOpen_subset_closure`. Every other centre keeps its colours or only gains (`β°` gains `c'`).
+- **R1/R2 reduce to the two ends**: with `β` built from circles of radius `≠ 1`, a unit arc in `M.Γ` meets `β` finitely, so lies in `F.Γ` (closed in the
+  domain), misses `β°` (`β° ⊆` interior points of `F`) and `α°` (interior points of `M`); off `cl(supp h)` the maps agree; `cl(supp h) ∩ F.Γ = α`. So
+  only a unit arc of `ω(Q)` through `A` or `B`, `Q ≠ P`, needs its sides compared, and there the collar near the end (the two sectors of the end's chart
+  beside `α`, with `α`'s branch) is preconnected and misses `ω(Q)`, so it lies on one side of `ω(Q)`, and each side carries the same colours in `M` and
+  `F` (`c` keeps `S_in ∖ cl L`, `c'` gains only on that side).
+- **R3** is `α° ∩ M.Γ = ∅`; **degrees and repeated colours** need local structure only at interior points (degree 1), at `α°` (two germs of `ω(P)`),
+  at `β°` (two germs, at a corner of two circles or on one circle) and at the ends.
+
+### 44.3 The construction's design (D1; for the construction leaves)
+
+- **The lens boundary `β`**: `C_A`, `C_B`, the circles of radius `R < 1` internally tangent to `ω(P)` at `A`, `B` (centres `P + (1 − R)e(θ₁)`,
+  `P + (1 − R)e(θ₂)`), curvature `1/R`; `β` = the arc of `C_A` from `A` to their crossing `X` (on the ray at `θ_m = (θ₁+θ₂)/2`, by symmetry) and the arc of
+  `C_B` from `X` to `B`. With `R > 1/2`, `P` is inside both discs, so each ray from `P` meets each circle once: `C_A` is the radial graph
+  `t_A(θ) = (1−R)cos(θ−θ₁) + √((1−R)²cos²(θ−θ₁) + 2R − 1)`, and `β`'s radial function is `max(t_A, t_B)`; the depth of `β` below `α` is about
+  `(1−R)(1 − cos(θ − θ_E))` (at most `(1−R)/2`), quadratic at the ends — so (i) at a horn end (the next germ inside tangent to `α`, curvature `κ > 1`) `C_A`'s
+  germ `(β_α, 1/R)` fits between `α`'s germ `(β_α, 1)` and it once `1/R < κ`, and (ii) the depth is below main's toward profile `ψ · min(θ − θ₁, θ₂ − θ)`, so
+  main's `toward_clear` argument (N2-SIGN, N2-ENV near and toward; `n2_env_*` are proved on this branch, `toward_clear` is main-only — ~30 lines to
+  re-prove under a new name) makes every lens point clear for `c'`; `α°` points are clear by `ne1_region`; two points of `L ∪ α°` are `< 1` apart
+  (angular width `≤ π/3`, radii `≤ 1`). Validity is then `Valid.of_agreesOff` on `U = cl L` (proved on this branch).
+- **The push `h`**: along the rays from `P`, `h(P + t e(θ)) = P + ψ_θ(t) e(θ)` with `ψ_θ(t) = t − ℓ(θ) · tent_{a(θ), 1, b(θ)}(t)` (tent = 0 off
+  `[a, b]`, 1 at `1`, linear between), `ℓ = 1 − max(t_A, t_B)` the lens depth, `a`, `b` the collar's inner and outer profiles (inner: the same two circles
+  with a smaller radius `R' < R`, outer: the circles of radius `R'' > 1` tangent externally-containing at `A`, `B`); identity for `θ ∉ (θ₁, θ₂)`. Its
+  inverse is `u ↦ u + ℓ · tent_{a, 1−ℓ, b}(u)`. Increasing since `ℓ < 1 − a`; continuous at the ends since `ℓ → 0` there. The collar is Γ-free but for
+  `α°`: near each end by the end's chart (`localSectors_disj`; `α`'s germ `(θ_E + π/2, 1)` is one of the chart's, and the collar's germs lie strictly
+  between its neighbours), in the middle by `hfree` and compactness.
+- **The bent map**: `M.dom = F.dom`, `M.col = F.col ∘ h⁻¹`, `M.arcs` = F's arcs with the open arc cut out (main's `cutArcs` engine, ~150 lines, main-only:
+  to re-prove under a new name, or to cite after the merge with `main`) and the two arcs of `β`. Then `M.Γ = h(F.Γ)`, so clauses 3–6 and
+  `M.interiorPts = h(F.interiorPts)` follow, and `M`'s colour is locally constant through `h`.
+- **Degrees at the ends**: `M`'s chart at `A` is `F`'s with `α`'s germ replaced by `C_A`'s (`isSectorChart_of`), so both have `max n 1` sectors, and the
+  sector colours agree as lists (`α`'s outer neighbour sector becomes `S_out ∪ α ∪ L`, colour `c'`; the inner `S_in ∖ cl L`, colour `c`).
+- **Price**: about 3,000–4,000 lines (geometry of the tangent circles and radial graphs ~600; the push ~400; the bent map ~400; collar freeness ~500;
+  validity ~300; degrees ~700; R1/R2 ~500). Not attempted this job beyond the landing (budget: the job opened at about 340k by the harness's count
+  after the readback).
+
+### 44.4 The build
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`: **OK — 448 of 448 batches, 3 modules rebuilt (`BendCollar`,
+`BaseDense`, `Proofs`), 6 with warnings, every warning `declaration uses 'sorry'`** (new: `bend_toward_collar`), exit 0, 8 min 16 s
+(`build/gate/build/20261005T091944Z-2965180.log`; driver log `data/fs131/kb/build-stage44.log`). `tools/fs131_i5_stmt_check.py d61edefc`: PASS
+(`stmt-check-44.txt`); `tools/check_architecture.py`: PASS; `tools/fs131_kb_stmt_move.py` after the deletion: PASS.
+
+## Stage 44 — SAVED
+
+## Stage 45 — SAVED (FS131-KB2): `exists_preBend` proved over the collar bend and six named children
+
+`exists_preBend`'s `sorry` is replaced by record § 41.3's iteration (statement unchanged): strong induction on `(G.maxRingArcs u).ncard`, each step
+`exists_preBend_step`, which applies `bend_toward_collar` to the maximal extension of an inert arc and checks every hypothesis on the bent map. New, all in
+`BaseDense` before `exists_preBend` (names collision-free on `HEAD`, `origin/main`, `origin/fs131-w5c`, `origin/fs131-w4mm` by `git grep`):
+- `maxRingArcs F u` — the maximal constant-sided unit arcs centred in `B̄(u, 1)`, as sets; spec example: a map with no arcs has none.
+- **`exists_preBend_step`** — proved over the children: the inert arc's maximal extension `α` (`exists_maxRingArc`), `hfree` (`hfree_of_baseHyp`), `hlen`
+  (`l60_le`), `ε` with `thickening ε α ⊆ dom` (`IsCompact.exists_thickening_subset_open`); `h u = u` (`u ∈ Γ` by its three colours, `u ∉ α°` by
+  `ncard_coloursAt_le_two_of_mem_openArc`, then clause 4); cubic trichromatic by clauses 6–7 at `u`; `BaseHyp u` (a point of `B̄(u, 2)` whose preimage lies
+  outside it was moved, so lies in the thickening and off `Γ ∖ α°`, and not on `α° ⊆ B̄(u, 2)`: an interior point, one colour, no repeated colour);
+  `UnenclosedC u` (`unenclosedC_of_homeomorph`, `K` the thickening); the measure drops (`maxRingArcs_subset_of_bend`, and `α` is one of `F`'s maximal arcs).
+- **`not_hasRepeatedColour_of_mem_interiorPts`** — proved (near an interior point the one sector is a ball).
+- Children left `sorry`, each stated with its route in its docstring: `finite_maxRingArcs` (the finiteness child), `exists_maxRingArc` (sup of ends),
+  `hfree_of_baseHyp` (a third germ at `x ∈ α°` makes a repeated colour), `ncard_coloursAt_le_two_of_mem_openArc`, `maxRingArcs_subset_of_bend` (R1–R3,
+  maximality, `hfree`), `unenclosedC_of_homeomorph` (E4-BEND-UN's argument).
+
+So `n3_base`, `localDense`, `dense3` now rest on `bend_toward_collar` and these six, nothing else open (`row134BaseUA` is on the standard three).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 448 of 448 batches, 2 modules rebuilt (`BaseDense`, `Proofs`), 6 with warnings, every warning
+`declaration uses 'sorry'`**, exit 0, 8 min 20 s (`build/gate/build/20261005T093152Z-3016959.log`; driver log `data/fs131/kb/build-stage45.log`). `BaseDense`'s
+`sorry` declarations: the six children (lines 320, 326, 335, 342, 365, 379) and `cv_exists` (the stale copy, the `Terminal` lane's); `exists_preBend` and
+`exists_preBend_step` carry none of their own. **Axioms** (`data/fs131/kb/KBAxioms45.lean` → `.out`, 12 GiB slot): `not_hasRepeatedColour_of_mem_interiorPts` and
+`row134BaseUA` on the standard three; controls on `sorryAx`: `exists_preBend_step`, `exists_preBend`, `n3_base`, `bend_toward_collar`. `scripts/Axioms.lean`: the
+eight new theorems after the stage-44 line. `tools/fs131_i5_stmt_check.py d61edefc`: PASS (`stmt-check-45.txt`; `exists_preBend`'s statement unchanged);
+`tools/fs131_kb_stmt_move.py`: PASS; `tools/check_architecture.py`: PASS.
+
+## Stage 45 — SAVED
+
+## Stage 46 — SAVED (FS131-KB2): the hand-back
+
+### Theorems this phase proved (FS131-KB2)
+
+- `HadwigerNelson.Plane.ArcMap.not_hasRepeatedColour_of_mem_interiorPts` — [kernel], `[propext, Classical.choice, Quot.sound]` — `Plane/ValidMap/BaseDense`
+- `HadwigerNelson.Plane.ArcMap.exists_preBend` (FS112-N3-BASE's pre-bend, E4-BEND-UN's iteration) and `exists_preBend_step` — proved **over** `bend_toward_collar`
+  and six stated children (`finite_maxRingArcs`, `exists_maxRingArc`, `hfree_of_baseHyp`, `ncard_coloursAt_le_two_of_mem_openArc`, `maxRingArcs_subset_of_bend`,
+  `unenclosedC_of_homeomorph`); on `sorryAx` through them — not kernel theorems yet.
+- Stated with `sorry`: `bend_toward_collar` (landed verbatim, `Plane/ValidMap/BendCollar`) and the six children.
+
+**Left (the construction and six children)**: `bend_toward_collar`'s construction (design § 44.3, priced there at 3,000–4,000 lines) and the six children above
+(each docstring names its route). **Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 46 — SAVED
+
+## Stage 47 — SAVED (FS131-M5): the readback, and the as-given build
+
+*FS131-M5, wave 5's sync (Opus), continuing this record from Stage 46 (`caada347`). Brief: `data/fs131/briefs/FS131-M5-sync.md` (main tree). My set (ruling
+379 (a)–(b)): merge `main` into `fs131-w5` (`main`'s side for every wave-4 module, `framePt → fromFrame` in wave 5's files, identical copies removed, checked),
+then, as budget allows, four `BaseDense` children of `exists_preBend`. Never `main`, `BendCollar`'s statement, `HexRing`/`BaseWalk` beyond the merge,
+`Terminal`, or the gate scripts' recorded counts.*
+
+### 47.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_i5_quote_check.py` (I5j's, run, not edited) on the brief: **11 quotations, 11 verbatim**, exit 0 (`data/fs131/m5/quote-check.txt`); `--plant`
+reports 1 not verbatim, exit 0 as the control expects (`quote-check-plant.txt`). The eleven: `CLAUDE.md` § Counter-priors; inventory items 379, 378, 318, 375,
+358, 369; the first lines of `ncard_coloursAt_le_two_of_mem_openArc`, `unenclosedC_of_homeomorph`, `exists_maxRingArc`, `hfree_of_baseHyp` (`BaseDense` at
+`caada347`). Read in full: items 318, 375–379; this record's Stages 39 and 43–46; ML1's Stage 14 (`fs131-w4mm`'s `plans/FS131-IMM-implementation.md`: it
+took `main`'s side for every wave-4 module, restored two declarations by script, checked dupes before the merge with a new tool and statements three-way
+with `tools/fs131_wl_mergestmts.py`).
+
+### 47.2 The as-given build (`caada347`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1759 modules already
+up to date, nothing built, 6 modules with warnings**, exit 0 (`build/gate/build/20261005T094501Z-3096603.log`; driver log `data/fs131/m5/build-asgiven.log`);
+every warning `declaration uses 'sorry'`.
+
+### 47.3 The ground before the merge
+
+Merge base `111830c8`; this branch changed 319 files since, `main` 539; **both**: `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean`,
+`Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean` — as the brief says. `sorry` by file (`grep -rcw`, `data/fs131/m5/sorry-counts-before.txt`):
+`BaseDense` 7, `BendCollar` 1, `Contact` 3, `HexRing` 1, `Terminal` 9, `UnitArc` 5, and `Packed` 1 (a word in a docstring, not a term).
+
+## Stage 47 — SAVED
+
+## Stage 48 — SAVED (FS131-M5): `main` merged (wave 4, Woodall, MERGE); copies removed; checked; the build green
+
+`git merge --no-ff --no-commit origin/main` into `fs131-w5` (at `e6ba8923`; one merge base `111830c8`). `origin/main` was **`1be5d622`** when the merge ran — `ddad786d` (the brief's) plus inventory item 380, `plans/` only (another session's fetch moved the shared ref); the commit subject's "ddad786d" is that slip, the merge's second parent is `1be5d622`, and every check below ran against it. Git took `main`'s side for every
+wave-4 module by itself — this branch never touched `Basic`, `Contact`, `UnitArc` after the fork, so their stale copies (`Contact` 3 `sorry`, `UnitArc` 5)
+were replaced by `main`'s proved files — and brought `Surgery`, `Cone`, `Moves`, `MergeMove`, Woodall's five modules, wave 2's and the Falconer modules.
+`BaseSteps`, the one proof file both sides changed, merged clean: both deleted `n3_end` identically (this branch moved it to `Terminal`), and `main` added
+`bowtie_not_isStuck_I`, `bowtie_not_isHorn_I_axis`. **No declaration this branch added to a wave-4 module** (it added none after the fork). Three conflicts,
+each two blocks appended at one place, **kept both, ours first**: `Proofs.lean` (wave 5's thirteen imports; Woodall's five), `ARCHITECTURE.md` (wave 5's
+fifteen rows; Woodall's five), `scripts/Axioms.lean` (wave 5's blocks; `Moves`' and later blocks).
+
+### 48.1 The rename and the copies
+
+- **`framePt → fromFrame`** in `FlankUA`, the only wave-5 file using it (29 occurrences, among them its own lemma names: `N_add_eq_framePt`,
+  `S_add_eq_framePt`, `framePt_normSq_aux` → `…fromFrame…`), and their three records in `scripts/Axioms.lean`. After the merge `framePt` occurs only in
+  wave 2's `Plane/Slack` (and its record `dist_framePt_sq`); no wave-5 module's import closure reaches `Slack`, so even a missed occurrence could not
+  resolve to it. **Note for `fs131-w5c`**: its `HornShadow`, `Terminal`, `FlankUA` use `framePt` and need the same rename at their merge.
+- **Copies.** New tool `tools/fs131_m5_dupes.py` (comments and docstrings stripped first, namespaces tracked, binder names alpha-normalized): every
+  declaration of a file this branch changed since the fork, not declared at the fork, against every name and every theorem statement of `main`. Before
+  the merge (`data/fs131/m5/dupes-premerge.txt`): **three NAME collisions and two STATEMENT copies**, each of a lemma new on `main` since the fork:
+  - NAME `BranchGerms.next_injective` and `ArcMap.coloursAt_subset_of_mem_interiorPts` (`MapTopology` / `main`'s `Surgery`; statements equal up to binder
+    names) — **deleted from `MapTopology`**, which now imports `Plane/ValidMap/Surgery` (adds `Cone`, `Surgery` to its closure, nothing else; no cycle); the
+    uses (`MapTopology` 4, `MapGraph` 5) cite `main`'s unchanged.
+  - NAME `e_mul_e_neg` (`PlaneTopology` / `main`'s wave-2 `Slack`, identical) — importing `Slack` would put ten wave-2 measure-theory modules under the
+    planar chain's root, so **`PlaneTopology`'s copy is made `private`** (module-local: its name is mangled, no collision), its docstring naming `Slack`'s.
+    The common home of both is `Plane/Basic` (beside `e_add`), a `main` file outside this job: a correction owed.
+  - STATEMENT `unitPairsNull_of_dist_ne_one` (`Dense`, I5o's helper) = `main`'s `unitPairsNull_of_no_unit_pair` (`FalconerReduction`) — **deleted**; `Dense`
+    imports `Plane/FalconerReduction` (adds `Cover`, `FalconerFan`, `UnitAvoiding`, `FalconerReduction`) and its one use cites `main`'s.
+  - STATEMENT `branchPt_congr` (`CurveGraph`) = `main`'s `branchPt_congr_dir` (`Moves`) — importing `Moves` would put seventeen modules, all of wave 4's
+    surgery, under the planar foundation, so **`CurveGraph`'s copy is made `private`**, its docstring naming `Moves`'. Common home: `Plane/LocalStructure`
+    (where `branchPt` lives), a `main` file: a correction owed.
+  - After the rename one more: STATEMENT `ArcMap.N_add_eq_fromFrame` (`FlankUA`) = `main`'s `normalPt_add_eq_fromFrame` (`UnitArc`, already in `FlankUA`'s
+    closure) — **deleted**, its one use cites `main`'s.
+  - The tool also reported a NAME `ArcMap.near` through QA1's parser (`tools/fs131_ml_dupes.py`, run before writing mine): a docstring line beginning
+    "class near `y`" read as a `class` declaration on both sides — no declaration; mine strips docstrings and does not report it.
+  - Records: the five ours-side `#print axioms` lines of the deleted or private copies removed (`next_injective`, `coloursAt_subset_of_mem_interiorPts`,
+    `unitPairsNull_of_dist_ne_one`, `e_mul_e_neg`, `branchPt_congr`, and `ArcMap.N_add_eq_fromFrame`); `main`'s lines kept, none twice.
+  - `ARCHITECTURE.md`: the Imports cells of `MapTopology` (+ `Plane/ValidMap/Surgery`) and `Dense` (+ `Plane/FalconerReduction`); `tools/check_architecture.py`
+    failed on exactly those two before the edit (its control) and **PASS** after (`data/fs131/m5/arch-check.txt`).
+  - Not removed (reported, `STATEMENT-OLD`, informational): `ArcMap.dist_sq_re_im` (`BaseWalk`) and `ArcMap.norm_sq_eq_re_im` (`HexRing`) repeat lemmas
+    declared at the fork (`SixFragment`, `Chord`, `UnitArc`) — repeats the merge does not create, in files this job does not touch beyond the merge.
+  - I5h's `isPreconnected_hornSet_unit` is not on this branch (it is `fs131-w5c`'s `HornShadow`): for that branch's merge.
+- After: **`tools/fs131_m5_dupes.py`: 0 NAME/STATEMENT pairs**, 2 PRIVATE (the two module-local copies), 4 STATEMENT-OLD, 4 CONCL candidates read by hand (none
+  a copy: `IsRegOf.dist_lt_one` vs `SVMap`'s `IsRegion.dist_lt_one` are different predicates; `Terminal`'s `flankQ_*_of_qrOnly` are the unconditional
+  forms of `UnitArc`'s, by design) (`dupes-merged.txt`). `--plant` (a re-declared `main` name, `main`'s `isPreconnected_hornSet` statement under a new name,
+  a docstring line "class e_mul_e_neg"): reports exactly the first two, exit 1 (`dupes-plant.txt`).
+
+### 48.2 The checks
+
+- **Files, byte for byte** — new tool `tools/fs131_m5_merge_check.py`: every file `main` alone changed equals `main`'s; every file this branch alone
+  changed equals ours after the declared edits (each old text occurring exactly as often as declared); `BaseSteps` equals `git merge-file`'s clean merge;
+  `Proofs.lean`'s imports and `scripts/Axioms.lean`'s records are the three-way merges of the sides' sets (ours' records renamed, the copies' dropped, the
+  moved `n3_end` kept — a set-level merge would drop it: its line moved on our side, its old place deleted on `main`'s), none twice; `ARCHITECTURE.md`
+  row by row three-way, up to the two Imports cells. **PASS, 1783 files** (`data/fs131/m5/merge-check-selftest.txt`). `--self-test`: a byte in `Surgery`, an
+  extra line in `FlankUA`, a dropped import, a doubled record, a reverted Imports cell — each FIRED naming its file; the unplanted run PASS.
+- **Statements, three-way** (`tools/fs131_wl_mergestmts.py HEAD origin/main --rename framePt=fromFrame`, WL1's, run): 7,126 names, 0 base conflicts,
+  **6 reported, each this job's declared change**: `N_add_eq_fromFrame`, `next_injective`, `unitPairsNull_of_dist_ne_one` "merged {} expected {…}" (the
+  deleted copies), `coloursAt_subset_of_mem_interiorPts` CONFLICT (added on both sides; `main`'s kept), `e_mul_e_neg` "merged 2 expected 1" (`Slack`'s and
+  the private copy), `n3_end` "merged 1 expected {}" (moved to `Terminal` on this branch, statement verbatim; `main` deleted `BaseSteps`' copy)
+  (`mergestmts.txt`). `--plant`: a seventh, `AeColouring.exists_fill`, exit 1 (`mergestmts-plant.txt`). `tools/fs131_i5_stmt_check.py d61edefc`: PASS
+  (`stmt-check-48.txt`).
+- **The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 44 modules rebuilt, 4 with warnings, every warning `declaration uses 'sorry'`**
+  (`BaseDense`, `BendCollar`, `HexRing`, `Terminal`), exit 0, 14 min 31 s (`build/gate/build/20261005T100515Z-3256459.log`, "Build completed successfully
+  (5788 jobs)"; driver log `data/fs131/m5/build-merge.log`).
+- **Axioms** (`data/fs131/m5/M5Axioms48.lean` → `.out`, 12 GiB slot, against the merged build): **on the standard three** — wave 4's seven leaves this branch
+  carried as stale `sorry`: `exists_shave`, `exists_rayMerge`, `exists_merge`, `bend_toward`, `flankQ_upper`, `flankQ_lower`, `nb4p` (`bend_away` is deleted
+  on `main`, unused here); the consumers of the renamed and de-duplicated declarations: `S_add_eq_fromFrame`, `fromFrame_normSq_aux`, `horn_radial_N`,
+  `horn_radial_S`, `exists_ball_two_tiles`, `exists_isRingArc_of_touch`, `exists_inner_branch`, `IsRegOf.chain_step`, `exists_eq_of_interleaved_paths`,
+  `exists_curveGerm_eq`; wave 5's held `row134BaseUA`, `cvb_thom`, `disc1_local`, `not_hasRepeatedColour_of_mem_interiorPts`. **Controls on `sorryAx`**:
+  `exists_preBend`, `n3_base`, `bend_toward_collar`, `bv_l3`.
+- **`sorry` by file** (`grep -rcw`; `sorry-counts-before.txt` → `sorry-counts-after.txt`): `Contact` 3 → 0, `UnitArc` 5 → 0 (`main`'s); `BaseDense` 7,
+  `BendCollar` 1, `HexRing` 1, `Terminal` 9 unchanged; `Packed` 1, `Cover` 1, `CoverExamples` 2 are docstring words ("sorry-free"), not terms.
+
+Statements unchanged on both sides but for the copies removed; no `axiom`, no `native_decide`.
+
+## Stage 48 — SAVED
+
+## Stage 49 — SAVED (FS131-M5): `ncard_coloursAt_le_two_of_mem_openArc` and `unenclosedC_of_homeomorph` proved
+
+Statements unchanged; no new declarations.
+- **`ncard_coloursAt_le_two_of_mem_openArc`** — a colour `j` at `x = r(θ)` has `x` in the closure of its class; the class is open (`isOpen_region`), so
+  each of its points on `ω(P)` is a closure point of its part inside (`IsOpen.inter_closure`, `closure_ball`); hence
+  `region j ⊆ cl(region j ∩ B(P, 1)) ∪ (region j ∖ B̄(P, 1))`, and `x` is in the closure of one of the two parts: `j` is an inner colour (`= c`) or an
+  outer one (`= c'`). So `coloursAt x ⊆ {c, c'}`, `ncard ≤ 2`. (No arc geometry needed: the sphere part is absorbed by openness.)
+- **`unenclosedC_of_homeomorph`** — pull everything back by `h`: `h⁻¹' M.interiorPts = F.interiorPts`; the preimage of a component is the component of
+  the preimage (`Homeomorph.image_connectedComponentIn` for `h.symm`), so `h⁻¹'` carries `M`'s tiles to `F`'s and their colours (`hint`); closures and
+  complements commute with `h⁻¹'`; and `h⁻¹' C ⊆ cl K ∪ C` (`h` is the identity off `K`), so a bounded component pulls back to a bounded one, which
+  `F.UnenclosedC u` forbids. Only the one direction of boundedness is used.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 2 modules rebuilt (`BaseDense`, `Proofs`), 4 with warnings, every warning
+`declaration uses 'sorry'`** — `BaseDense`'s now at `finite_maxRingArcs`, `exists_maxRingArc`, `hfree_of_baseHyp`, `maxRingArcs_subset_of_bend`,
+`cv_exists` — exit 0, 8 min 14 s (`build/gate/build/20261005T102236Z-3314484.log`; driver log `data/fs131/m5/build-stage49.log`). Axioms: in Stage 50's print.
+
+## Stage 49 — SAVED
+
+## Stage 50 — SAVED (FS131-M5): `exists_maxRingArc` proved, over two new helpers
+
+Statement unchanged. New, before it in `BaseDense` (names free on `HEAD`, `origin/main`, `origin/fs131-w5c` by `git grep`):
+- **`exists_shift_of_ringArc_subset`** (namespace `Plane`): if `ringArc P a b ⊆ ringArc P s t`, `a ≤ b` and `t − s < 2π`, then for some `n : ℤ`,
+  `s + 2πn ≤ a` and `b ≤ t + 2πn` — the lift of `a` fixes `n`; were `b` past `t + 2πn`, the parameter `min b (t + 2πn + δ)`, `δ` half the gap
+  `2π − (t − s)`, would have no lift into `[s, t]` (`e_eq_e_iff`). No bound on `b − a` is needed.
+- **`IsRingArc.shift`**: a ring arc read with both ends shifted by `2πn` is a ring arc with the same sides (`ringArc_add_two_pi_mul`, `ringPt_add_int_mul`).
+- **`exists_maxRingArc`**: `a` = the infimum of the left ends, `b` = the supremum of the right ends, over the lifts `[s, t] ⊇ [θ₁, θ₂]` of ring arcs with
+  sides `c, c'` (bounded by `l60_le`: `θ₂ − π/3 ≤ s`, `t ≤ θ₁ + π/3`). Every `φ ∈ (a, b)` lies inside one member (`exists_lt_of_csInf_lt`,
+  `exists_lt_of_lt_csSup`, or `(θ₁, θ₂)` itself), which gives `r(φ) ∈ Γ` and its sides; the two ends are in `Γ` because the arc lies in the domain
+  (`ω(P) ⊆ B̄(u, 2)`) and `Γ` is closed there (`ringArc_subset_Γ_of_finite`, the ends as the finite set). Maximality: an arc with these sides containing
+  `[a, b]` is, after the shift `exists_shift_of_ringArc_subset` gives, a member, so its ends are `a` and `b`. (The domain hypothesis is exactly what
+  inventory item 380's counterexample says such a statement needs: `ω(P) ⊆ dom`, here from `Covers u 2` and `P ∈ B̄(u, 1)`.)
+
+Elaborated first in `data/fs131/m5/scratch/MaxArc.lean` (deleted now; its content is in the library). `tools/fs131_i5_stmt_check.py d61edefc`: PASS
+(`data/fs131/m5/stmt-check-50.txt`). `scripts/Axioms.lean`: the two helpers' records before `exists_maxRingArc`'s.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 2 modules rebuilt (`BaseDense`, `Proofs`), 4 with warnings, every warning
+`declaration uses 'sorry'`**, exit 0, 8 min 21 s (`build/gate/build/20261005T103209Z-3367893.log`, "Build completed successfully (5788 jobs)"; driver log
+`data/fs131/m5/build-stage50.log`). **Axioms** (`data/fs131/m5/M5Axioms50.lean` → `.out`, 12 GiB slot): **on the standard three** —
+`ncard_coloursAt_le_two_of_mem_openArc`, `unenclosedC_of_homeomorph`, `exists_maxRingArc`, `exists_shift_of_ringArc_subset`, `IsRingArc.shift`; **controls on
+`sorryAx`**: `hfree_of_baseHyp`, `exists_preBend_step`, `exists_preBend`. `BaseDense`'s `sorry` 7 → 4: `finite_maxRingArcs`, `hfree_of_baseHyp`,
+`maxRingArcs_subset_of_bend`, `cv_exists` (the `Terminal` lane's stale copy).
+
+## Stage 50 — SAVED
+
+## Stage 51 — SAVED (FS131-M5): the hand-back
+
+### Theorems this phase proved (FS131-M5)
+
+All [kernel], `[propext, Classical.choice, Quot.sound]`, in `Plane/ValidMap/BaseDense`:
+- `HadwigerNelson.Plane.ArcMap.ncard_coloursAt_le_two_of_mem_openArc` — an interior point of a constant-sided unit arc carries at most its two side colours.
+- `HadwigerNelson.Plane.ArcMap.unenclosedC_of_homeomorph` — `UnenclosedC u` is carried by a homeomorphism of the plane fixing `u`, the identity off a bounded set,
+  that carries interior points, colours and colour sets (E4-BEND-UN's argument).
+- `HadwigerNelson.Plane.ArcMap.exists_maxRingArc` — every unit arc centred in `B̄(u, 1)` of a valid fragment covering `B̄(u, 2)` lies in a maximal one with its sides.
+- Helpers: `HadwigerNelson.Plane.exists_shift_of_ringArc_subset`, `HadwigerNelson.Plane.ArcMap.IsRingArc.shift`.
+- On this branch after the merge (proved on `main`, now the files here): wave 4's `exists_shave`, `exists_rayMerge`, `exists_merge`, `bend_toward`, `flankQ_upper`,
+  `flankQ_lower`, `nb4p` — on the standard three against this branch's build (Stage 48).
+
+**Left**: `hfree_of_baseHyp` — route, not attempted for budget: at `x = r(θ)`, `BaseHyp u` puts `x ∉ fourSet ∪ repSet` (`dist x u ≤ 2`), so
+`exists_chart_of_noRep` (`HexRing`) gives a chart with sector colours injective; each sector colour is carried at `x`, and the colours at `x` lie in `{c, c'}`
+(`ncard_coloursAt_le_two_of_mem_openArc`'s first step, worth factoring out as `coloursAt_subset_of_mem_openArc`), so at most two germs; both of `ω(P)`'s
+germs at `x` are germs of the chart (the arc near `x` lies in `Γ`), so the branches are the circle's (same tangent: `curveAt_eq_of_same`, `curve_inter` in
+`LocalStructure` for the curvature), and `Γ ∩ B(x, r₀) ⊆ ω(P)`. Also left: `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`, and `bend_toward_collar`'s
+construction (ruling 379 (c): a planner pass first). **Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 51 — SAVED
+
+*The join (FS131-M6, Stage 53, merging `origin/fs131-w5` at `385b5ad3` into `fs131-w5c`): the stages above from Stage 27 to Stage 51 are `fs131-w5`'s (FS131-I5g, I5j, I5m, I5o, KB2, M5), numbered as on that branch; the stages below, Stage 27 to Stage 44, are `fs131-w5c`'s (FS131-I5h, I5i, I5k, I5l, I5n, I5p), numbered as on this branch, so that the inventory's citations of "`fs131-w5c`'s Stages n–m" still resolve; FS131-M6's own stages run from Stage 52.*
+
+
 ## Stage 27 — SAVED (FS131-I5h): the readback
 
 *FS131-I5h, wave 5's `Terminal` implementer (Opus), on branch `fs131-w5c` in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c`, cut from `fs131-w5`
@@ -2159,3 +3157,77 @@ Merge base `75689a4c`; `origin/fs131-w5` at `385b5ad3` when read (KP2's stage 1 
 `Packed` 1, `Cover` 1, `CoverExamples` 2 (docstring words).
 
 ## Stage 52 — SAVED
+
+## Stage 53 — SAVED (FS131-M6): `origin/fs131-w5` merged into `fs131-w5c`; `framePt → fromFrame`; copies removed; checked; the build green
+
+`git merge --no-ff --no-commit origin/fs131-w5` at `e37e864d` (one merge base `75689a4c`). **The merged commit is `385b5ad3`** (KP2's stage 1 over
+M5's `ae881022`); `origin/fs131-w5` moved to `4ced8071` (KP2's stages 2–5: `RadialPush`, `Pushforward`, `BendCollar`'s children) while this stage ran,
+and is **not** in this merge — every check below names `385b5ad3`, never the moving ref (M5's slip, avoided). Git merged `Proofs.lean`,
+`scripts/Axioms.lean`, `BaseDense` (both sides kept: `exists_preBend`'s children from `fs131-w5`, `cv_exists`'s proof from here) and `Contact`
+(equal to `fs131-w5`'s, i.e. `main`'s proved `exists_merge`, whose statement equals this branch's, item 355) by itself. Two conflicts:
+`ARCHITECTURE.md` (one block of rows, resolved row by row three-way: `HornShadow`, `Terminal` ours; `Dense`, `BaseWalk`, `BendCollar`, `BaseDense`
+theirs) and this record (rebuilt from the base and both sides' additions: `fs131-w5`'s Stages 27–51 as numbered there, then the join line, then
+this branch's Stages 27–44 and 52 as numbered here, so the inventory's "`fs131-w5c`'s Stages n–m" citations still resolve; both sides' summary
+blocks at the head kept, `fs131-w5`'s first).
+
+### 53.1 The rename and the copies
+
+- **`framePt → fromFrame`** on this branch's side: `HornShadow` (42 occurrences: `framePt`, `frameX_framePt`, `frameY_framePt`, `framePt_normSq_aux`,
+  `S_add_eq_framePt` → `main`'s names; `N_add_eq_framePt` → `main`'s `normalPt_add_eq_fromFrame`, the statement M5 found equal), `Terminal` (17,
+  among them its own `ringPt_S_sub_eq_framePt` → `ringPt_S_sub_eq_fromFrame`, record renamed). No `framePt` remains outside wave 2's `Plane/Slack`
+  (and its record `dist_framePt_sq`); neither `HornShadow`'s nor `Terminal`'s import closure reaches `Slack` (`tools/fs131_m6_closure.py --reach`,
+  self-test passed), so none could resolve to it. `Limit`, `Procedure`, `BaseDense` had none.
+- **Copies removed** (each declaration and its `#print axioms` line deleted, its uses renamed):
+  - `isPreconnected_hornSet_unit` (`HornShadow`; `|κᵢ| ≤ 1`, `r ≤ 1/2`) — a special case of `Surgery`'s `isPreconnected_hornSet` (`|κᵢ| r < 2`), already
+    in `HornShadow`'s closure; its one use (`mem_shadow_hornSet_S`) now cites `Surgery`'s with `|ν| r ≤ r < 2` by `mul_le_of_le_one_left` (a first
+    `nlinarith` form timed out at 200000 heartbeats in that large context, `LEAN.md`'s warning; replaced before the green build).
+  - `IsHorn.isRingArc_lower_ua` (`Terminal`) = `main`'s `IsHorn.isRingArc_lower` (`UnitArc`), verbatim statement; its use in `n3_end_bothKind` cites `main`'s.
+  - `Arc.ptL`, `Arc.paramsL`, `Arc.subL`, `continuous_ptL`, `carrier_eq_imageL`, `carrier_subL`, `nondegenerate_subL` (`Limit`) = `Surgery`'s `Arc.pt`,
+    `params`, `sub` and four lemmas; the three lemmas `Surgery` lacks are renamed `Arc.isCompact_params`, `Arc.ordConnected_params`, `Arc.finite_pt_eq`
+    (names free on `HEAD`, `origin/main`, `origin/fs131-w5`) and state the same over `main`'s definitions; the four spec examples kept, over `Arc.pt`/`sub`.
+  - `branchPt_mem_closure_sector_pair` (`Limit`) = `fs131-w5`'s `BranchGerms.branchPt_mem_closure_sector` (`MapTopology`) up to `next` vs `BranchGerms.next`
+    and a section variable — **`Limit` now imports `Plane/ValidMap/MapTopology`** (no cycle: `MapTopology` does not reach `Limit`), adding ten modules to
+    `Limit`'s closure (`MapTopology`, `HexRing`, `UnitArc`, `BaseSteps`, `Cor3`, `PlaneTopology`, `CurveGraph`, `RingGerm`, `SixFragment`,
+    `LocalMapExamples`), all already under `Procedure`'s or `Terminal`'s; a choice the coordinator may reverse (M5's alternative: a `private` copy).
+  - `ringArc_add_int` (`Procedure`, found by the tool) = `MapTopology`'s `ringArc_add_two_pi_mul`, now in `Procedure`'s closure through `Limit`; its one use
+    (`isRingArc_add_int`) cites it.
+  - Left, reported (`STATEMENT-OLD`, repeats of lemmas declared at the fork in modules outside the closure, not created by the merge):
+    `Limit`'s `coloursAt_eq_singleton_of_interior` = `FlankUA`'s `coloursAt_eq_of_mem_interiorPts`; `Procedure`'s `ringPt_add_int` = `BaseWalk`'s
+    `ringPt_add_int_mul`.
+- **The dupes tool**: `tools/fs131_m6_dupes.py`, M5's under my prefix with one more failing class, **STATEMENT-NORM** (statements equal after
+  deleting namespace qualifiers and binder-bracket kinds, with the section variables a statement uses prepended) — M5's exact class missed
+  `branchPt_mem_closure_sector_pair`. Before the merge (`8d84435e` against `385b5ad3`): `branchPt_mem_closure_sector_pair` (NORM),
+  `ringArc_add_int`, `IsHorn.isRingArc_lower_ua` (`dupes-premerge-m6tool.txt`, exit 1). After: **0 NAME/STATEMENT/NORM pairs**, the two
+  STATEMENT-OLD above, two CONCL candidates read by hand (`ringPt_add_int`; `Terminal`'s `isPreconnected_hornSet_of_abs_le`, `≤ 2` against
+  `Surgery`'s `< 2`: a generalization, kept) (`dupes-merged.txt`, exit 0). `--plant` (a re-declared name, `isPreconnected_hornSet`'s statement under a
+  new name, a docstring "class" line, and `branchPt_mem_closure_sector_pair`'s text): reports exactly the three it must, exit 1 (`dupes-plant.txt`).
+- `ARCHITECTURE.md`: `Limit`'s Imports cell (+ `Plane/ValidMap/MapTopology`), `HornShadow`'s row (cites `Surgery`'s lemma). `tools/check_architecture.py`
+  failed on exactly `Limit`'s imports before the edit (`arch-check-before-edit.txt`) and **PASS** after (`arch-check.txt`).
+
+### 53.2 The checks
+
+- **Files, byte for byte** — `tools/fs131_m6_merge_check.py` (M5's adapted: a `cut` edit kind, the records' renames, the shared record):
+  `75689a4c e37e864d 385b5ad3`: **PASS, 1787 files**; `--self-test`: a byte in `Surgery`, a line in `Terminal`, a dropped import, a doubled record,
+  a reverted Imports cell, a dropped record line — each FIRED naming its file (`merge-check-selftest.txt`).
+- **Statements, three-way** — `tools/fs131_wl_mergestmts.py e37e864d 385b5ad3 --rename framePt=fromFrame --rename ptL=pt --rename paramsL=params
+  --rename subL=sub --rename carrier_eq_imageL=carrier_eq_image` (WL1's, run): 7,358 names, 0 base conflicts, **exactly 4 reported, the 4 declared
+  deletions** (`IsHorn.isRingArc_lower_ua`, `branchPt_mem_closure_sector_pair`, `isPreconnected_hornSet_unit`, `ringArc_add_int`: "merged {}");
+  every other statement of either side is the changing side's up to the renames (`mergestmts.txt`). `--plant`: a fifth, `AeColouring.exists_fill`,
+  exit 1 (`mergestmts-plant.txt`).
+- **The build** (slot 40 GiB, 8 cpus, `BATCH=4`): the first run failed on the heartbeat timeout above (`build/gate/build/20261005T111830Z-3709289.log`,
+  445 of 456 batches); after the fix **OK — 456 of 456 batches, 10 modules rebuilt, 5 with warnings, every warning `declaration uses 'sorry'`**, exit
+  0, 9 min 49 s (`build/gate/build/20261005T113352Z-3846867.log`, "Build completed successfully (5791 jobs)"; driver log `data/fs131/m6/build-merge.log`).
+- **Axioms** (`data/fs131/m6/M6Axioms53.lean` → `.out`, 12 GiB slot, against this build): **on the standard three** — the brief's six, `flankQ_upper`,
+  `flankQ_lower`, `cv_class`, `c_double`, `c_ends`, `exists_merge`; the consumers of the renamed and removed declarations `ringPt_S_sub_eq_fromFrame`,
+  `mem_shadow_hornSet_S`, `sep_S`, `n3_end_bothKind`, `n3_end`, `cv_hd`, `eventually_essSet_iff_of_goodAt`, `exists_clean`, `Arc.finite_pt_eq`,
+  `Arc.isCompact_params`, `isRingArc_add_int`, `badCount_lt_top`, `mergeAvailable_of_bothKind`. **Controls on `sorryAx`**: `run_hornBoundsQR`,
+  `stuckRun_ne_univ`, `exists_terminal`, `cv_exists`, `exists_preBend`.
+- **`sorry` by file** (`grep -rcw`; `sorry-counts-before.txt` → `sorry-counts-after.txt`): `BaseWalk` 5 → 0, `Contact` 3 → 0, `Dense` 1 → 0, `MapGraph`
+  3 → 0, `UnitArc` 5 → 0 (`fs131-w5`'s and `main`'s proofs), `HexRing` 6 → 1 (`bv_l3`), `BaseDense` 2 → 3 (`finite_maxRingArcs`, `hfree_of_baseHyp`,
+  `maxRingArcs_subset_of_bend`; `cv_exists` proved here), `BendCollar` 0 → 1 (`bend_toward_collar`), `Procedure` 4 (`exists_vertexStep`,
+  `exists_arcStep`, `exists_terminalSeq`, and a docstring word), `Terminal` 2 (`run_hornBoundsQR`, `stuckRun_ne_univ`); `Packed` 1, `Cover` 1,
+  `CoverExamples` 2 are docstring words.
+
+Statements unchanged on both sides but for the four copies removed and the declared renames; no `axiom`, no `native_decide`.
+
+## Stage 53 — SAVED

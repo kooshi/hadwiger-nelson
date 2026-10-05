@@ -1,0 +1,9 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Plane.isPreconnected_diff_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.inter_nonempty_of_interleaved_exterior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.cons' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.filledGraph_adj_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.sep' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.isRing' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_boundaryWalk' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.filledGraph_ringList' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

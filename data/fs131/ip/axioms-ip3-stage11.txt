@@ -1,0 +1,49 @@
+'HadwigerNelson.Plane.line_eq_span' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.line_inter_sphere_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsCurve.eq_of_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsCurve.three_mem_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsCurve.eq_of_inter_ball_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.line_param_inj' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.circle_param_injOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsCurve.exists_param' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.star_local_ray' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.HasCurveStar.isRegularAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.finite_nonRegular' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isOpen_setOf_agree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.port_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.even_sum_deg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_finset_even_sum_deg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isCurve_curveAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.e_arg_mul_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.branchPt_congr' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_curveGerm_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.branch_locally_curve' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.hasCurveStar_of_branch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.HasCurveStar.connectedComponentIn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsCurve.exists_two_mem_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.not_isRegularAt_of_hasCurveStar_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.halfLine_hasCurveStar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.col_eq_of_mem_sector' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.col_mem_coloursAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.hasRepeatedColour_of_col_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.eq_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.inter_closure_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.hasCurveStar_of_branches' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.fin_two_eq_of_ne' does not depend on any axioms
+'HadwigerNelson.Plane.ArcMap.coloursAt_subset_of_mem_interiorPts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_inner_branch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_far_end' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.endpoint_of_far_end' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.exists_endpoint' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
