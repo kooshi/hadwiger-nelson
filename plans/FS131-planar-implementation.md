@@ -37,7 +37,13 @@ Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plan
   `BranchGerms.exists_far_side`, `BranchGerms.eventually_dir_lt_nextDir`, `BranchGerms.dir_lt_dir`, `BranchGerms.dir_le_dir`,
   `BranchGerms.dir_lt_dir_zero_add`, `BranchGerms.next_injective` (`Plane/ValidMap/MapTopology`)
 
-IP1's thirty-two declarations and IP2's fourteen. `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
+- `ArcMap.exists_isRingArc_of_touch` — at a cubic touch point on `ω(u)`, a tile inside `B(u, 1)` and one off `B̄(u, 1)` bound an arc of `Γ` on `ω(u)`
+  (`Plane/ValidMap/MapTopology`); children `BranchGerms.branchPt_mem_closure_sector`, `BranchGerms.eq_or_next_eq_of_mem_closure_sector` (stage 8)
+- `ArcMap.exists_eleventh_of` — **FS131-E4's E4-RIM** (`Plane/ValidMap/MapTopology`), hence `BaseCtx.exists_eleventh`: proved, **on `sorryAx` through
+  `noBoth`** (FS112-N3-NOBOTH, `ValidMap/UnitArc`, wave 4's leaf, `sorry` at the pin, used by statement); it lands on the standard three when `noBoth`
+  does
+
+IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
 
 ## Stage 1 — SAVED: the readback
@@ -399,3 +405,33 @@ an `IsRingArc u θ₁ θ₂ a c` (branch points are closure points of both secto
 (wave 4's leaf, `sorry` at the pin, used by statement) give a bad point at `u`, against H; (viii) the colours: `{a, b, c}` with `c ∉ P_cl(u)`,
 two in common, and a second tile of `a` at `q` would be a repeated colour. `exists_eleventh_of` will carry `sorryAx` through `noBoth` until that
 leaf lands.
+
+## Stage 8 — SAVED: `exists_eleventh_of` (E4-RIM), over one new child and `noBoth`
+
+### 8.1 Proved
+
+`exists_eleventh_of` as planned in § 7.5, steps (i)–(viii), with one new geometric child, **`exists_isRingArc_of_touch`**: at a cubic `q` the chart
+has three germs, any two of its sectors are adjacent (`decide` on `Fin 3`), so the sectors of `A` (inside `B(u, 1)`) and `Y` (off `B̄(u, 1)`) share a
+germ `m`; its branch points are closure points of both sectors (child `BranchGerms.branchPt_mem_closure_sector`, by directions just inside) and of no
+other (child `BranchGerms.eq_or_next_eq_of_mem_closure_sector`, over `exists_far_side`), so they lie on `ω(u)` and their side colours are `a` inside and
+`c` outside; the angle `arg ((p s − u)/(q − u))` is continuous (the chord to `q` stays below `1/2`, so the quotient stays off the negative axis) and
+injective, so two radii give `θ₁ < θ₂` and the IVT fills `[θ₁, θ₂]` with branch points, all in `Γ` (the chart's `branches`). Then `BothKind u θ₁ θ₂` and
+`noBoth` give a bad point at `u`, against H. **`exists_eleventh_of` carries `sorryAx` only through `noBoth`** (its other inputs are proved: the module's
+one remaining `sorry` is `exists_far_end`, which it does not use); it lands with `noBoth`.
+
+### 8.2 The stage-8 build and the receipt
+
+`733729a6` under the slot: **OK — 446 of 446 batches, 5 modules rebuilt, 11 modules with warnings, every warning `declaration uses 'sorry'`, exit 0**
+(`build/gate/build/20261005T013504Z-210720.log`; `data/fs131/ip/build-stage8.log`; nothing but `sorry` lines and Lake's probe line). Axioms
+(`data/fs131/ip/axioms-ip2-stage8.txt`, `tools/fs131_ip_axioms.py`): **17 records on the standard three; the 3 partners (`noBoth`,
+`exists_eleventh_of`, `localDense`) on `sorryAx`**. `scripts/Axioms.lean`'s FS131-KP block gains the three stage-8 children. `MapTopology` has one
+`sorry` left: `exists_far_end`.
+
+### 8.3 Where this hands off (ruling 293 (b)'s order)
+
+Done: `unenclosed_of_rim_vertex`, `exists_outermost`, `exists_eleventh_of` (closing `exists_unenclosed_or_bad` outright and `exists_eleventh` up to
+`noBoth`). **Left, in the ruled order**: BG with PATH, `exists_far_end`, `endpoint_of_far_end` (route findings § 7.4: re-select the far end as an
+odd vertex; the orientation at an exit is a Jordan-type step); F-LOC/CONN/INF/ONE; `not_isHoleOf_chain`, `isHoleOf_cluster`; F-RING after BG;
+`retArcs_not_abut`, `retArcs_not_interleaved`. **For the coordinator** (done-means 5): BG does not exist yet, so whether the crossing lemma's route (b)
+is cheap through it is not measured; what is held now that bears on it is `exists_ball_two_tiles` (vertices of a compact disc are finitely many, by
+isolation and compactness), BG's hardest finiteness. F-RING not reached, not measured.
