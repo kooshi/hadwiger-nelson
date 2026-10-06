@@ -174,15 +174,17 @@ exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false 
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
 
-## Amendment 1 (2026-10-06, at launch) — your branch now stands on wave 6's first half, landed and proved
+## Amendment 1 (2026-10-06, at launch) — your branch now stands on wave 6's first half, landed and proved, and on the fourth planner's pass
 
-Nothing above is withdrawn but where an item below says so; the base moved under you while this brief waited.
+Nothing above is withdrawn but where an item below says so; the base moved under you twice while this brief waited.
 
-1. **Your branch was fast-forwarded** from `6fc27fa1` to `4ae5bd36`: the wave's fourth planner merged `main` into the wave's line after
-   the wave's first half landed there (inventory items 558, 561). Your tree was untouched and unstarted, and the third pass's four
-   modules are byte-identical to `6fc27fa1` (`git diff`, mine). Every "statement check against `6fc27fa1`" above now reads **against
-   `4ae5bd36`**. The branch as given has **34** `sorry` leaves, not 65 — ten yours, in `Accumulation`; the other thirty-one were proved by five implementers
-   and passed the full gate. Your tree's build is a copy of the planner's at `4ae5bd36`, so the build as given should rebuild nothing.
+1. **Your branch was fast-forwarded** from `6fc27fa1` to `2aa3f720`: the wave's fourth planner merged `main` into the wave's line after
+   the wave's first half landed there, then added four modules of its own and handed back (inventory items 558, 561, 566). Your tree
+   was untouched and unstarted, and the third pass's four modules are byte-identical to `6fc27fa1` (`git diff`, mine). Every "statement
+   check against `6fc27fa1`" above now reads **against `2aa3f720`**. The branch as given has **62** `sorry` leaves, not 65 — ten yours, in `Accumulation`;
+   of the rest, twenty-eight are the fourth planner's in its new modules and not yours, and the thirty-one of the first two passes
+   were proved by five implementers and passed the full gate. Your tree's build is a copy of the planner's at `2aa3f720`, so the build
+   as given should rebuild nothing.
 2. **The fourteen modules beneath you are theorems now — cite them, re-declare nothing, edit none.** Two names changed at the landing,
    and the plan and records you read may still use the old ones: `polarRegion_isOpen` and `polarRegion_isPreconnected` were folded
    into these two, the same statements binder for binder:
@@ -197,9 +199,16 @@ Nothing above is withdrawn but where an item below says so; the base moved under
    `variable` enters a theorem only if its statement mentions it, so a leaf can lack a hypothesis its file shows, and a comparison of
    text cannot see it. `#check` each leaf before you prove it — with `lake env lean` under the slot, the output saved under your
    `data/` folder — and each head again at your last stage. A leaf whose kernel statement lacks a binder its row reads is a message to
-   me before you prove it: proving the wider statement is not the job.
-4. **The fourth planner is working on the wave's line now** — a fresh pass over the third pass's definitions and six more rows, in
-   modules of its own. It does not edit your files. If its pass finds that a statement of yours should change, I send it to you as a
-   second amendment; until then the statements stand as given.
-5. **Nothing of your ten statements moved**, and the facts they read from the bridge — the fan at an isolated singular point, the
-   local graph, the nine-colour map's locally finite singular set — are now theorems in your tree, on the standard three.
+   me before you prove it: proving the wider statement is not the job. Another implementer of this milestone found four leaves false
+   for exactly this reason today (item 564) and built a check that compares elaborated signatures, with controls; you may read it
+   and use it: `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w7a/tools/fs131_i7a_stmt_check.py`.
+4. **The fourth planner's pass over the third pass's definitions found none of them wrong** (its record's Stages 17–25, in your tree's
+   copy of the plan). Its four new modules — the fragment's six rows, the cover's two lemmas, a reduction, and owed inhabitants with
+   two bridges between this pass's notions — are not yours: do not prove their leaves, and do not edit them but as item 6 says.
+5. **A reading it settled, which you should hold too**: "saturated on a disc", for a map, is `SaturatedOn F.region U` and never wave
+   3's pointwise `SaturatedAt` at every point of the disc — that is false at every interior point of a tile of a valid map, so a
+   helper that assumes it is true of nothing.
+6. **Nothing of your ten statements moved**, and the facts they read from the bridge — the fan at an isolated singular point, the
+   local graph, the nine-colour map's locally finite singular set — are now theorems in your tree, on the standard three. The fourth
+   planner's module of owed inhabitants imports yours and proves that a pointwise period is a period: read it before your
+   periodicity leaves, and cite it if it serves.

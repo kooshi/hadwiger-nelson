@@ -6922,3 +6922,65 @@ reason by the close.*
      rows of (3) are generalizations for the wave's errata; KAPPA and PAIR, being ring-calculus rows, are named to
      wave 8's second planner in its launch amendment so that it cites them and restates neither. No reply sent: it
      asks none.
+566. **FS131-K6d done at its Stage 25: wave 6's fourth planning pass — the fragment's six rows stated with no statement defect, the cover's cell proved, and a gap in FS111-M-REDUCE-I now carried by a saved stage** (planner; harness 524k and 51 minutes by the task notice; record `fs131-w6`'s `plans/FS131-w6-kernel-plan.md` Stages 16–25; report `data/fs131/reports/FS131-K6d.md`; commits `59ce6b0c`, the merge `4ae5bd36`, `b79d4892`, `87e8968c`, `2aa3f720`; pushed, tree clean).
+     **Stated** (four new modules of `Plane/Saturated/`: `Fragment` 19 leaves, `ReduceI` 1, `Owed` 8, `CoverDiscs` none):
+     FS116-O1-SATPIN, -V4-PARTNER, -S1-RUNG (proved from PARTNER's leaf), -N1-AXIS, -S1-KAPPA (three clauses proved),
+     -S1-PAIR; the owed inhabitants; two bridges between the third pass's notions. **Proved on the standard three, by
+     its control file**: the pinch's out–out cell on a cover with no disjointness (`hasTwoDiscsAt_of_out_out_of_cover`),
+     FS111-M-C11 (i) on a cover from the leaf `pinch_of_cover`. **Settled**: "saturated on a disc" is
+     `SaturatedOn F.region U` (item 565 (2)). **The gap** (item 565 (1), now at its Stage 22): FS111-M-REDUCE-I's
+     argument reaches Jordan C^{1,1} boundaries, not an arc map; stated two ways — `AeColouring.reduce_i` with arc
+     interfaces inside the predicate, and `reduce_i_of_arcInterfaces` over the named open statement
+     `ArcInterfacesOfRegJ k`. **Price**: about 3,700 lines, three implementer jobs. **My receipt**: tip `2aa3f720`
+     equals `origin/fs131-w6`, tree clean; since its merge it changed, outside `data/`, `plans/`, `tools/`, four new
+     modules, `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean` and no existing module; `sorry` by the
+     handoff's grep: 4, 13, 7, 10 as given and 19, 1, 8 new — 62; its last build log ends "OK — 470 of 470 batches",
+     62 warnings, each a `sorry`, none other; **`ReduceI` read by me**: `HasArcInterfaces` asks a locally finite
+     family of nondegenerate arcs holding the essential boundary and the cusps; `ArcInterfacesOfRegJ k` is "saturated
+     with locally finite singular set implies arc interfaces" for every colouring; `reduce_i_of_arcInterfaces` takes
+     it and the honest existence form and concludes a valid plane arc map from a tight colouring — the entry's
+     sentence with one named hypothesis more; `CoverDiscs` imports `CoverHull`. Not checked by me: its control
+     file's output; the six rows against their entries; whether `exists_arcMap_of_hasArcInterfaces` is true as
+     stated (a leaf). **Slips, the job's, disclosed**: the six rows' inhabitant lines are owed, not exhibited; three
+     source sections unread. **Credit**: the reading of "saturated on a disc" that would have made a class of
+     theorems empty; the cover's cell put through the kernel in place of an argument; a wrong prediction of its own
+     recorded. **Rulings.** (a) **Wave 9's join takes `reduce_i_of_arcInterfaces`**: the predicate stays the row's
+     own (saturated, singular set locally finite) and the missing step is a hypothesis with a name. Alternative:
+     `reduce_i`, with arc interfaces inside the predicate. Why not: the row's sentence would then mean something
+     stronger than it says, and no list of assumptions would show it. Confidence: high. (b) **Ledger row 154 and
+     the front page's item 31 owe an erratum**: "given REG-J′₅" becomes "given REG-J′₅ and that its interfaces are
+     locally finitely many segments and circular arcs" — two planners reached it from two sides (item 533 (3),
+     this item); held for the filing with FS111-M-REDUCE-I's own line; **Kooshi is told now** (ruling 565 (c)'s
+     condition is met). (c) **No deriver's job on the step now** (ruling 565 (b) stands): its ingredients are this
+     wave's open rows (no accumulating radii) and one statement no entry makes (locally finitely many straight
+     pieces); the question is written into the wave's stub lines at the filing. Confidence: medium. (d) **The three
+     third-pass branches are fast-forwarded to `2aa3f720`** (mine; each was clean and unstarted; builds copied
+     with no `lake` running in the planner's tree), and their briefs' Amendment 1 rewritten for it
+     (`mk-i6k-amend.py`, gate exit 0 each): the cover's implementer may move the cell lemma into `CoverHull`,
+     which the planner's module imports — one declaration, one name; ruling 561 (b) is superseded. (e) Three
+     implementer jobs are owed on its 28 leaves (its lines X, Y, W), after the third pass's three; briefs not
+     written. (f) Left by it, for the wave's tidy or a later pass: R7 with a fan, `sq9Map` at a lattice vertex for
+     wave 8, NOBEND at a degree-2 point, `example`s on `sq9Map`, a `#check` of the third pass's 34 leaves (now
+     each implementer's, by their amendment). (g) **Slot → FS131-K8b** (wave 8's second planner), item 567.
+567. **FS131-I8A, by message mid-job: `emptyNS` is proved and saved; the generalization of item 563 is now carried by a saved stage; a gap at one step of `star_anti`** (source: I8A's message to "main", 2026-10-06; commit `368a2c1a` on `origin/fs131-w8a`, fetched — the full review is at its hand-back).
+     By its word: all six leaves of the route to `emptyNS` and `doubleTip` built; `not_sole_tip_of_adjacent_changePoints`
+     (`Plane/RingCalculus/SoleTip`) on the standard three; `v6_hug` and `doubleTip` read the dropped hypotheses by
+     `have _ :=`; on joint satisfiability: two change points 60° apart are held by no fragment, so those two
+     hypotheses together are already not known satisfiable. **The gap**: `star_anti`'s step "t⁺ ≠ t⁻ by the interval
+     argument" fails to close when the shared tile's cone at `p` is the whole circle — the Lean lemma then separates
+     the other tiles only from the open interval and leaves one direction free (`plans/FS116-N2-proof.md` ll.
+     220–222's "leaving no room" does not follow); sound for a proper interval; no configuration realizing the case,
+     no proof it cannot occur. It leaves `star_anti` open unless told otherwise. **Checked by me**: `368a2c1a` is on
+     `origin/fs131-w8a` and descends from `f1c13612`; `sorry` at it under `RingCalculus/`: `Empty` 1 (`outerAdj`),
+     `Star` 2; the heads of `emptyNS`, `doubleTip`, `v6_hug` are textually those of the base; its build log at that
+     commit ends "OK — 468 of 468 batches", `EXIT=0`, no warning but `sorry`. **Rulings.** (a) **`star_anti` stays
+     open, as it proposes; the gap goes to wave 8's second planner** (its launch amendment): a statement that needs a
+     proper-interval hypothesis, a missing lemma (a full-circle cone cannot occur between two antipodal hubs), or a
+     deriver's question — its to say, from the argument. Alternative: the implementer spends its remaining budget
+     on it. Why not: it has no route and says so. Confidence: high. No reply sent: silence is the answer it asked
+     for. (b) **`fs131-w8` is fast-forwarded from `f1c13612` to `368a2c1a`** (mine; clean and unstarted; pushed):
+     the second planner states its rows over `emptyNS`, `doubleTip` and the sole-tip lemma by ancestry.
+     (c) **The generalization of item 563 is a result at [built, not gated]**: FS116-V6-HUG and FS129-MR1-DOUBLETIP
+     hold with no Γ-free ring, no simplicity and no condition on the far germs; whether the rows are restated is the
+     wave's landing's (ruling 563 (b)). (d) **FS131-K8b launched 2026-10-06** with a dated Amendment 1
+     (`mk-k8b-amend.py`, gate exit 0). In flight: 3 (L10B, I8A, K8b).
