@@ -329,6 +329,21 @@ Two exclusions are worth their reasons, because both look like obvious additions
   `GENERIC` at a variable map, the restored `exists_merge` and `exists_merge_aux` among them — and `Near`, `Near.Small`, `Covers`,
   `HasSectors`, `IsClear`, `IsTile` OUT.
 
+* **OPEN's carriers (FS131-OL1, by the procedure below; `Plane/ValidMap/OpenMove`).** **No new carrier IN.** **OUT**:
+  `ArcMap.HasHornCount` (a fact about a point's sectors — for every small radius, exactly `j` of them are horn sets — like `HasSectors` and
+  `HasDegree`: decided where it occurs, at a variable map at every site, `HasHornCount.eq`, `Near.hasHornCount_chart`,
+  `Near.open_degree_horns`, `exists_open`; both of its spec values are positive `example`s, `HasHornCount 0 0` at the constant map and
+  `cuspFrag.HasHornCount 0 2`, and no refutation is stated as a theorem — register it when one is); `Near.OpenConfig` (OPEN's
+  configuration at a chart: a `Prop`-valued structure of eleven facts about a chart's written-down germs, colours and radii, taken at a
+  variable chart at every site, like `Near.RayConfig`; under OPEN's hypotheses its existence is a theorem, `Near.exists_openConfig`, and no
+  theorem refutes it at a concrete chart — register it when one does, or when a theorem takes it at a concrete chart);
+  `BranchGerms.hornPos`, `rayPos`, `openWedge`, `openCol`, `openRim`, `openPiece`, `openRest`, `openArcs`, `openRay`, `Near.openSectors`
+  (indices, sets, a colouring and arcs, written down). Every other hypothesis `OpenMove` takes is a carrier decided above: `Valid`,
+  `IsHorn` and `Condition5` IN — OPEN's 14 sites, 11 on `Valid`, 2 on `IsHorn` (`Near.exists_openConfig`, `exists_open`) and 1 on
+  `Condition5` (`Near.open_condition5`), all `GENERIC` at a variable map — and `Near`, `Near.Small`, `Covers`, `HasSectors`, `HasDegree`,
+  `IsClear` OUT. `exists_open`'s hypotheses hold together on no map of the library yet (its docstring's inhabitant note: FS131-E6's
+  twelve-colour map, at [hand]); that is a conjunction across binders, which this per-binder scan cannot see.
+
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
 its reason, in the `UDCert` / `AeColouring` style — IN iff "does one exist" is a theorem rather than a

@@ -1,0 +1,2 @@
+data/fs131/ln/lint-baseline.out: 3 findings; data/fs131/ln/lint-restored.out: 3 findings
+added 0, removed 0, changed text 0

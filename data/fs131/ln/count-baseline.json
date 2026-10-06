@@ -1,0 +1,112 @@
+{
+ "found": [
+  3,
+  9643,
+  8414,
+  14
+ ],
+ "linters": [
+  "checkType",
+  "defsWithUnderscore",
+  "deprecatedNoSince",
+  "docBlame",
+  "impossibleInstance",
+  "nonClassInstance",
+  "simpComm",
+  "simpNF",
+  "structureInType",
+  "subsetDotNotationLinter",
+  "synTaut",
+  "tacticDocs",
+  "unusedArguments",
+  "unusedHavesSuffices"
+ ],
+ "passed": false,
+ "trace": {
+  "checkType": 0,
+  "defsWithUnderscore": 0,
+  "deprecatedNoSince": 0,
+  "docBlame": 0,
+  "impossibleInstance": 0,
+  "nonClassInstance": 0,
+  "simpComm": 0,
+  "simpNF": 0,
+  "structureInType": 0,
+  "subsetDotNotationLinter": 0,
+  "synTaut": 0,
+  "tacticDocs": 0,
+  "unusedArguments": 3,
+  "unusedHavesSuffices": 0
+ },
+ "total": 3,
+ "modules_with_findings": 3,
+ "class_modules": {
+  "older": 1706,
+  "fs131": 52,
+  "post-m2": 8
+ },
+ "by_linter": {
+  "checkType": 0,
+  "defsWithUnderscore": 0,
+  "deprecatedNoSince": 0,
+  "docBlame": 0,
+  "impossibleInstance": 0,
+  "nonClassInstance": 0,
+  "simpComm": 0,
+  "simpNF": 0,
+  "structureInType": 0,
+  "subsetDotNotationLinter": 0,
+  "synTaut": 0,
+  "tacticDocs": 0,
+  "unusedArguments": 3,
+  "unusedHavesSuffices": 0
+ },
+ "by_linter_class": {
+  "unusedArguments": {
+   "fs131": 3,
+   "post-m2": 0,
+   "older": 0
+  }
+ },
+ "by_class": {
+  "fs131": 3,
+  "post-m2": 0,
+  "older": 0
+ },
+ "by_module": [
+  {
+   "module": "Proofs.HadwigerNelson.Arith.Dyadic",
+   "cls": "fs131",
+   "total": 1,
+   "by": {
+    "unusedArguments": 1
+   }
+  },
+  {
+   "module": "Proofs.HadwigerNelson.Arith.FalconerField",
+   "cls": "fs131",
+   "total": 1,
+   "by": {
+    "unusedArguments": 1
+   }
+  },
+  {
+   "module": "Proofs.HadwigerNelson.Arith.PlaceHom",
+   "cls": "fs131",
+   "total": 1,
+   "by": {
+    "unusedArguments": 1
+   }
+  }
+ ],
+ "samples": {
+  "unusedArguments": [
+   "/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/Proofs/HadwigerNelson/Arith/Dyadic.lean:36:1: error: @HadwigerNelson.Arith.DyadicSqrt3Conclusion 1 unused argument:\n  argument 5: [NumberField L]",
+   "/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/Proofs/HadwigerNelson/Arith/FalconerField.lean:179:1: error: HadwigerNelson.Arith.falconerFan_five_placeHom 1 unused argument:\n  argument 2: [NumberField ↥F]",
+   "/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/Proofs/HadwigerNelson/Arith/PlaceHom.lean:219:1: error: HadwigerNelson.Arith.placeHom_step 1 unused argument:\n  argument 2: [NumberField ↥F]"
+  ]
+ },
+ "blurb": {
+  "unusedArguments": "UNUSED ARGUMENTS.\n"
+ }
+}

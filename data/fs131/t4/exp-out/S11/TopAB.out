@@ -1,0 +1,2 @@
+exit 1
+T4Exp/S11/TopAB.lean:1:0: error: import T4Exp.S11.B failed, environment already contains 'T4.S11.dup' from T4Exp.S11.A

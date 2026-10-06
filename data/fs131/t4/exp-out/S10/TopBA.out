@@ -1,0 +1,2 @@
+exit 1
+T4Exp/S10/TopBA.lean:1:0: error: import T4Exp.S10.A failed, environment already contains 'T4.S10.instInhabitedTok' from T4Exp.S10.B

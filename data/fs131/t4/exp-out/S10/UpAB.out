@@ -1,0 +1,7 @@
+exit 0
+PROBE T4.S10.instInhabitedTok DECLARED-BY T4Exp.S10.A kind=def uses=[Inhabited.mk, T4.Tok, T4.Tok.a]
+PROBE T4.S10.instInhabitedTok ENV-HOLDS kind=def uses=[Inhabited.mk, T4.Tok, T4.Tok.a] copy-of=[T4Exp.S10.A]
+PROBE T4.S10.instInhabitedTok ATTRIBUTED-TO T4Exp.S10.A
+PROBE T4.S10.instInhabitedTok AXIOMS-PRINTED []
+PROBE T4.S10.instInhabitedTok AXIOMS-OF-HELD-VALUE []
+LOCALS [T4.S10.instInhabitedTok_1]

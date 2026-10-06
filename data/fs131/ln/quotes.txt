@@ -1,0 +1,10 @@
+ok   brief:30   -> plans/FS131-close-inventory.md:3726                          '414. **OPEN LANDED on `main`, held in the kernel: FS131-OL1 done** (ha'
+ok   brief:33   -> plans/FS131-close-inventory.md:3748                          "415. **Rulings on OL1's held items, and its slot.** (a) **Dates in fil"
+ok   brief:40   -> LEAN.md:162                                                  'Elaboration is the floor: the build green, zero `sorry`, `#print axiom'
+ok   brief:43   -> lakefile.toml:4                                              '# `lake lint` — WORKFLOW\'s "linters silent" gate item, which errored w'
+ok   brief:46   -> lakefile.toml:9                                              'lintDriver = "batteries/runLinter"'
+ok   brief:49   -> data/crunch-2026-09-25/briefs/J23b-M2-close-math.md:24       "2. **`lake lint`, once** (the owner's ruling: it runs at M2's close on"
+ok   brief:52   -> data/crunch-2026-09-25/briefs/J23b-M2-close-math.md:26       '   rebuild anything beyond the lint driver itself, stop it (by pid, ve'
+ok   brief:55   -> data/crunch-2026-09-25/reports/J23b.md:2                     'RESULT: M2 closed, verdict Paid (kernel). Gate green (stage 0): build '
+ok   brief:60   -> data/fs73/records/phase-P5.md:124                            '| `lake lint` negative control | a planted `def fs73LintPlant (n m : ℕ'
+9 quoted lines, 9 found verbatim, 0 missing

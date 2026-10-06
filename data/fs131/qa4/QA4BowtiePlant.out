@@ -1,0 +1,85 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 8,9
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4BowtiePlant.lean:22:4: error: linarith failed to find a contradiction
+case inl.inl.inl.inl.inl.inl.inl.inl.inl.inl
+z : ℂ
+hx : z.re ≤ |z.re|
+h1 : ‖z - I‖ < 1
+h3 : 12 * |z.re| < 5 * (1 - z.im)
+him : |z.im - 1| ≤ ‖z - I‖
+this : -1 ≤ z.im - 1
+a✝ : 1 / 4 < z.re
+⊢ False
+failed
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4BowtiePlant.lean:28:4: error: linarith failed to find a contradiction
+case inl.inl.inl.inl.inl.inl.inl.inl.inl.inr
+z : ℂ
+hx : z.re ≤ |z.re|
+h1 : ‖z + I‖ < 1
+h3 : 12 * |z.re| < 5 * (1 + z.im)
+him : |z.im + 1| ≤ ‖z + I‖
+this : z.im + 1 ≤ 1
+a✝ : 1 / 4 < z.re
+⊢ False
+failed
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4BowtiePlant.lean:29:28: error: linarith failed to find a contradiction
+case inl.inl.inl.inl.inl.inl.inl.inl.inr
+z : ℂ
+hx : z.re ≤ |z.re|
+h2 : |z.re| < 5 / 13
+a✝ : 1 / 4 < z.re
+⊢ False
+failed
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4BowtiePlant.lean:30:26: error: linarith failed to find a contradiction
+case inl.inl.inl.inl.inl.inl.inl.inr
+z : ℂ
+hx : z.re ≤ |z.re|
+h1 : |z.re| < z.im - 1
+h2 : z.im < 7 / 5
+a✝ : 1 / 4 < z.re
+⊢ False
+failed
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4BowtiePlant.lean:31:26: error: linarith failed to find a contradiction
+case inl.inl.inl.inl.inl.inl.inr
+z : ℂ
+hx : z.re ≤ |z.re|
+h1 : |z.re| < -1 - z.im
+h2 : -7 / 5 < z.im
+a✝ : 1 / 4 < z.re
+⊢ False
+failed
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4BowtiePlant.lean:32:31: error: linarith failed to find a contradiction
+case inl.inl.inl.inl.inl.inr
+z : ℂ
+hx : z.re ≤ |z.re|
+h3 : 1 * z.re < 2 / 5
+a✝ : 1 / 4 < z.re
+⊢ False
+failed
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4BowtiePlant.lean:34:31: error: linarith failed to find a contradiction
+case inl.inl.inl.inr
+z : ℂ
+hx : z.re ≤ |z.re|
+h3 : 1 * z.re < 2 / 5
+a✝ : 1 / 4 < z.re
+⊢ False
+failed
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4BowtiePlant.lean:36:28: error: linarith failed to find a contradiction
+case inl.inr
+z : ℂ
+hx : z.re ≤ |z.re|
+h2 : 1 * z.re < 113 / 260
+a✝ : 1 / 4 < z.re
+⊢ False
+failed
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4BowtiePlant.lean:45:33: error: Type mismatch
+  qa4_bowtieTiles_re hz
+has type
+  z.re ≤ 1 / 4
+but is expected to have type
+  z ∈ {z | z.re ≤ 1 / 2}
+'HadwigerNelson.Plane.ArcMap.qa4_bowtie_not_covers' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.qa4_bowtie_not_isPlaneMap' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.qa4_cuspFrag_not_covers' depends on axioms: [propext, Classical.choice, Quot.sound]

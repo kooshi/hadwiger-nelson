@@ -1,0 +1,1 @@
+SELF-TEST OK: 2 inputs counted exactly, 13 plants each refused for its own reason, the diff names a planted finding alone, the classes are inhabited ({'older': 1706, 'fs131': 52, 'post-m2': 8})

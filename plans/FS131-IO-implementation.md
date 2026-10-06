@@ -51,6 +51,16 @@ FS131-IO3 (Stages 11–15; build and axioms print in § 15.2):
 
 Nothing in `OpenMove` is left `sorry`.
 
+FS131-OL1 (Stages 16–20; OPEN's landing): **proves no new theorem** — it brought the 105 theorems above through the full gate and onto
+`main` (`7470222e`, gated commit `68670175`). Read from the gate's saved axioms log (`build/gate/axioms/20261006T030550Z-413723.log`, by
+`tools/fs131_ol_axioms.py`): **105 records of `OpenMove` — 103 on exactly `[propext, Classical.choice, Quot.sound]`, 2 on fewer
+(`BranchGerms.idx_idx` `[propext]`, `BranchGerms.turns_idx` `[propext, Quot.sound]`), 0 on none, 0 `sorryAx`**; among the 103:
+
+- `HadwigerNelson.Plane.ArcMap.exists_open` — [kernel], `[propext, Classical.choice, Quot.sound]` — FS131-E6-OPEN at a lone horn
+  (`plans/FS131-E6-derivation.md` § 4.2; the lone form by ruling 392 (a)), held on `main`
+- `HadwigerNelson.Plane.ArcMap.Near.open_allowedCone`, `Near.open_valid`, `Near.open_degree_horns`, `Near.open_rim`, `Near.open_hlc`,
+  `Near.exists_openConfig` — [kernel], each `[propext, Classical.choice, Quot.sound]` — its clauses and configuration, held on `main`
+
 ## Stage 1 — SAVED (FS131-IO1): the readback, the as-given build, and what this job may change
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -642,3 +652,319 @@ rebuilt and 0 warnings), re-run `data/fs131/io/iter.sh data/fs131/io/AxiomsIO.le
 `tools/fs131_io_axioms.py <file> --expect 105` (expect exit 0, 103 exactly standard), then hand `fs131-wop` to the gate.
 
 ## Stage 15 — SAVED (FS131-IO3)
+
+## Stage 16 — SAVED (FS131-OL1): the readback, the as-given build, and what this job may change
+
+*FS131-OL1 (de Bruijn, the implementer, on Opus) continues this record from here, on `fs131-wop` at `a20bb6f5`. Brief:
+`data/fs131/briefs/FS131-OL1-open-land.md` (on `main` at `34a28786`). Report: `data/fs131/reports/FS131-OL1.md`. Its job: OPEN's landing —
+merge `main` into `fs131-wop`, the full gate on one commit, a fast-forward of `main`, and the drafts for the filing. It proves no theorem.*
+
+### 16.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (`data/fs131/ol/quotes.py <brief> --root /home/kooshi/source/lean-dir`: every `> ` line of the brief followed by a
+`> — source:` line, searched as an exact substring of one line of its source; a relative source path is read under `main`'s tree, where the
+brief was written). Output `data/fs131/ol/quotes.txt`: **13 quotations, 0 mismatches**, each verbatim:
+
+| quotation (a prefix) | source | line |
+|---|---|---|
+| "408. **FS131-IO3 done — OPEN held** (Stage 15 SAVED at Kooshi's halt, …" | `plans/FS131-close-inventory.md` (`main`) | 3683 |
+| "409. **Ruling on OPEN: it lands on `main` by its own gate-and-land job on restart** …" | the same | 3698 |
+| "411. **Rulings: the three slots, filled from the queue of the handoff.** …" | the same | 3708 |
+| "384. **FS131-E6 done: F6 is real, and repaired with no backlog statement changed** …" | the same | 3411 |
+| "391. **FS131-IO1 handed back** (Stage 3 SAVED, …" | the same | 3507 |
+| "393. **FS131-IO2, by message: `open_allowedCone` is false as stated; a one-field repair to `OpenConfig`.** …" | the same | 3530 |
+| "397. **FS131-IO2, by message: `open_degree_horns` is also false as stated; a second one-field repair to `OpenConfig`.** …" | the same | 3569 |
+| "400. **FS131-IO2 handed back** (Stage 10 SAVED, …" | the same | 3605 |
+| "375. **MERGE LANDED on `main`, held in the kernel: FS131-ML1 done** …" | the same | 3302 |
+| "376. **MERGE's landing counts filed** (Keryx, drafts 1, 2, 4 verbatim): …" | the same | 3324 |
+| "Of this brief: nothing. Of OPEN's landing, for the coordinator (not this job's to run): the full gate on a branch carrying `fs131-wop`" | this record § 15.3 | 635 |
+| "theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c : Fin k}" | `OpenMove.lean` (`a20bb6f5`) | 2847 |
+| "def HasHornCount (v : ℂ) (j : ℕ) : Prop :=" | `OpenMove.lean` (`a20bb6f5`) | 36 |
+
+Controls on the checker: `--plant` (one character of the first quotation altered) reports exactly one `MISMATCH`, exit 1
+(`data/fs131/ol/quotes-plant.txt`); a file with no quotation exits 2. A defect found live: the first version read the relative path in this
+worktree, whose copy of the inventory is the branch point's (no item 384 or later), and reported 8 mismatches — the reason for `--root`.
+
+### 16.2 Read for this job
+
+`plans/STANDING-RULES.md` and `LEAN.md` in full; `RUNNING.md` § Building and § Make the gate fail, and watch it fail; inventory items 375–376
+and 408–411 in full; this record's header and Stages 10–15 in full; ML1's landing (`plans/FS131-IMM-implementation.md` Stages 13–16 and its
+drafts), whose order this landing follows; `exists_open` and `HasHornCount` whole, as they stand at `a20bb6f5`; `scripts/axioms.sh`,
+`scripts/Vacuity.lean` (the docstring's carrier list and procedure, and the scan) in full.
+
+### 16.3 The branch builds as given, and IO3's axioms check re-run
+
+- **Build** at `a20bb6f5`, under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK — "all 1767
+  modules already up to date, nothing built, 0 module(s) with warnings, 2s"**, exit 0; log `build/gate/build/20261006T023101Z-70425.log`
+  ("All targets up-to-date (5750 jobs)"), driver output `data/fs131/ol/build-asgiven.log`.
+- **Axioms** against those oleans (`data/fs131/io/iter.sh data/fs131/io/AxiomsIO.lean` → `data/fs131/ol/axioms-io-asgiven.txt`, exit 0),
+  classified by `tools/fs131_io_axioms.py … --expect 105` (`data/fs131/ol/axioms-io-asgiven-classified.txt`, exit 0): **105 records, 0
+  `sorryAx`, 0 foreign; 103 on exactly `[propext, Classical.choice, Quot.sound]`, 2 on fewer** (`BranchGerms.idx_idx` `[propext]`,
+  `BranchGerms.turns_idx` `[propext, Quot.sound]`). The classifier's own summary line reads `std=105`: its `STD` class is "within the
+  standard three", so the 103 is read from the classified lines (`grep -c` of the full triple: 103), as IO3 read it. The print is
+  byte-identical to IO3's `data/fs131/io/axioms-io3-final.txt` but for that file's first line, the slot's own "admitted" notice.
+
+### 16.4 What this job may and may not change
+
+**May**: the merge's files; `scripts/Axioms.lean` (OPEN's records, already registered as one block of 105 by IO1–IO3), `scripts/Vacuity.lean`
+(the carrier list's OPEN entry, by the procedure in its docstring), `scripts/vacuity-controls.lean` and `scripts/vacuity.sh`'s `expect` lines
+(a control, numbered after `main`'s last, 62, where the procedure asks for one), `scripts/vacuity-baseline.txt`'s header (its two count
+lines; **no entry** — a new entry is the coordinator's ruling), `scripts/axioms-controls.txt` (the controls' expected counts, if this state
+moves them); `Proofs.lean`, `ARCHITECTURE.md`; `OpenMove.lean` for a linter or docstring fix only; this record; `tools/fs131_ol_*.py`,
+`data/fs131/ol/`, `data/fs131/reports/FS131-OL1.md`; then `main`, by fast-forward only. **May not**: any statement — no hypothesis, no
+conclusion, no definition a statement uses (`OpenConfig` as IO2 left it); no `axiom`, no `native_decide`; `CLAUDE.md`, `LEAN.md`, `LEDGER.md`,
+`tools/claude_md_fact_audit.py` (drafts only); another job's tools (`tools/fs131_io_*.py`, `tools/fs131_ml_*.py` are run, never edited);
+and **the branch is never rewritten**: `a20bb6f5` stays an ancestor of everything pushed (FS131-IR1 merges it into wave 5 today, item 411 (d)).
+
+**`main` since the branch point** `11a34d9d` (one merge base, `git merge-base --all HEAD origin/main`), at `origin/main` = `34a28786`:
+`git diff --name-only 11a34d9d origin/main` names `BIBLIOGRAPHY.md`, ten briefs under `data/fs131/briefs/`, `plans/FS131-close-inventory.md`
+and `plans/SESSION-HANDOFF-2026-10-04.md` — no Lean file, no script (`data/fs131/ol/main-since-base.txt`).
+
+## Stage 16 — SAVED (FS131-OL1)
+
+## Stage 17 — SAVED (FS131-OL1): `main` merged (`dff76573`); the build green; the checkers written; the counts predicted
+
+**The merge** (`dff76573`: `git merge --no-ff origin/main` at `34a28786`, one merge base `11a34d9d`, no conflict). The files it changed on this
+branch (`git diff --name-only f8c6173e dff76573`): `BIBLIOGRAPHY.md`, ten briefs under `data/fs131/briefs/`, `plans/FS131-close-inventory.md`,
+`plans/SESSION-HANDOFF-2026-10-04.md` — **no Lean file, no script, no tool** (`git diff --name-only f8c6173e dff76573 -- '*.lean' scripts
+lakefile.toml lake-manifest.json lean-toolchain tools ARCHITECTURE.md CLAUDE.md LEAN.md`: empty). Against `origin/main`, outside `plans/` and
+`data/`, the branch differs in exactly its own six files: `ARCHITECTURE.md` (one row), `Proofs.lean` (one import), `OpenMove.lean`,
+`scripts/Axioms.lean` (OPEN's block), `tools/fs131_io_axioms.py`, `tools/fs131_io_decls.py`. `a20bb6f5` is an ancestor of `dff76573`. With
+no Lean source of `main` changed there is no name to collide and no statement to re-check against `main`: the Lean tree is `a20bb6f5`'s.
+
+**Build** of the merged tree (under the slot): **OK — "all 1767 modules already up to date, nothing built, 0 module(s) with warnings, 2s"**,
+exit 0 (`build/gate/build/20261006T023331Z-82931.log`, "All targets up-to-date (5750 jobs)"; driver `data/fs131/ol/build-merged.log`). The
+oleans it found current are IO3's last full build's (`build/gate/build/20261005T124448Z-133559.log`: 451 of 451 batches, `OpenMove` and
+`Proofs` rebuilt, "Build completed successfully (5750 jobs)"). **Warnings counted**: `grep -c warning` is 0 in both logs (the full log's one
+`error` line is the up-to-date probe's "target is out-of-date", which starts the walk). Control on the count: IO2's log of the tree with one
+`sorry` (`20261005T115945Z-4035875.log`) holds 2 `warning` lines, both `OpenMove.lean:2175:8: declaration uses 'sorry'`.
+
+**The checkers** (new, this job's):
+- **`tools/fs131_ol_axioms.py <axioms log>`**: three lists must agree — the theorems `OpenMove.lean` declares (its own parser; the same 105
+  names as `tools/fs131_io_decls.py` lists, compared as sets), the names in `scripts/Axioms.lean`'s OPEN block (which must stand between the
+  CLEAN and PURCHASED banners), and the gate's saved log (IMM4's `records`, imported) — each name once, printed under CLEAN, within the
+  standard three. Seen failing before any pass: on the banner-less IO print it fails all 105 on the banner check alone
+  (`data/fs131/ol/open-axioms-nobanner.txt`, exit 1); on `main`'s gated log, which holds no OPEN record, 105 × "no record in the log"
+  (`open-axioms-mainlog.txt`, exit 1). Its `--plant` is run on the gate's own log in Stage 18.
+- **`tools/fs131_ol_vacdiff.py <main log> <landing log>`** (after ML1's): every SITE and EVIDENCE row of `main`'s gated scan must be in
+  the landing scan; every added row must belong to a declaration of `OpenMove`; an added SITE row reading VACUOUS, STALE or UNKNOWN is
+  `FLAGGED` and fails (the brief's stop). `main`'s scan against itself: 845 rows, 0 lost, 0 added, PASS; `--plant` (a `main` row dropped, a
+  non-OPEN row added, an OPEN row added reading UNKNOWN): `LOST`, `NOT OPEN'S`, `FLAGGED`, exit 1 (`data/fs131/ol/vacdiff-plant-pre.txt`).
+- **`data/fs131/ol/count-open.lean`** (after ML1's `count-merge.lean`; `isRefutation`, `isNegationConcl`, `isGeneratedDecl` copied verbatim
+  from `scripts/Vacuity.lean`): the declarations of the module `OpenMove` as the scan counts them. **147 declarations, 5 refutations**
+  (`data/fs131/ol/count-open.out`): 105 theorems (the source's, name for name), 10 equation lemmas (`hornPos.eq_1`, `rayPos.eq_1`,
+  `openWedge.eq_1`, `openCol.eq_1`, `openRim.eq_1`, `openPiece.eq_1`, `openRest.eq_1`, `openRay.eq_1`, and `liftDir.eq_1`,
+  `sectorBetween.eq_1` realized here), 11 definitions, 5 matchers, the structure `Near.OpenConfig` and its 15 generated declarations (11
+  fields, `mk`, `rec`, `recOn`, `casesOn`). The five refutations (a stated conclusion that reduces to `… → False`): `Near.open_valid`,
+  `Near.openRay_nondegenerate`, `Near.OpenConfig.isClear_of_mem_openWedge`, `Near.OpenConfig.isClear_of_Icc`, and the generated projection
+  `Near.OpenConfig.clear`. Control: the same count over a module that does not exist prints `declarations=0` (`count-open-plant.out`).
+
+**The prediction, written before any gate run in this worktree** (`data/fs131/ol/prediction.txt`): axioms 3,912 records — 3,889 clean, 14
+axiom-free, 4 imported, 5 purchases (105 added, all CLEAN); vacuity `declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0
+stale=0 declared=3 witnessed=32 generic=747 unknown=2` — 14 new sites, all `GENERIC`: 11 on `F.Valid` (12 theorems bind `hF : F.Valid`;
+`open_valid` is a refutation, skipped), 2 on `F.IsHorn v α κ₁ κ₂ c` (`exists_openConfig`, `exists_open`), 1 on `F.Condition5`
+(`open_condition5`); no EVIDENCE row; both self-tests unchanged (23, 62).
+
+## Stage 17 — SAVED (FS131-OL1)
+
+## Stage 18 — SAVED (FS131-OL1): the full gate on `92529c5c` — green, every count as predicted
+
+**The gated commit is `92529c5c`** (`dff76573`'s Lean tree, plus this job's registrations: `scripts/Vacuity.lean`'s carrier entry — a
+comment —, `scripts/vacuity-baseline.txt`'s two count lines, `ARCHITECTURE.md`'s `OpenMove` row, the two checkers). The gate was run twice:
+once on `3b7a42df` before the registrations (tag `merged`), once on `92529c5c` (tag `final`); the axioms receipt and the vacuity scan of the
+two runs are byte-identical (`cmp`), as they must be — nothing the scan reads changed between them. Every check below is the `final` run's,
+its saved log read (copies under `data/fs131/ol/`; runner `data/fs131/ol/run-gate.sh final`, each script under `scripts/slot.py --mem 30
+--cpus 4`; `data/fs131/ol/run-gate-final.head` records `HEAD=92529c5c…` with no tracked file modified, and each gate's `latest` log).
+
+- **Build**: "build: OK — all 1767 modules already up to date, nothing built, 0 module(s) with warnings, 2s", exit 0
+  (`build/gate/build/20261006T025507Z-337184.log`; driver `data/fs131/ol/build-final.log`) — the up-to-date probe against the oleans of
+  IO3's full build of the same Lean sources (`build/gate/build/20261005T124448Z-133559.log`, "Build completed successfully (5750 jobs)").
+  **Warnings: 0** in both (`grep -c warning`; Stage 17 has the control, 2 lines on the tree with one `sorry`). The linters the build runs
+  (`linter.missingDocs` and the defaults) are among those warnings: silent. The 13 spec `example`s of `OpenMove` elaborate in that build.
+- **Sorry**: `grep -rnP '^\s*sorry\s*$|:= sorry|by sorry' Proofs/`: **0**; the wider `\bsorry\b` finds 4 lines, all docstring prose of
+  `main`'s (`Plane/Cover` l. 33, `Plane/CoverExamples` l. 13 and l. 6541, `Packed` l. 266; `data/fs131/ol/sorry-final.txt`), the same four
+  as at MERGE's landing. Control: the narrow pattern over IO2's tree `276aeaff` finds its one `sorry`, `OpenMove.lean:2180`
+  (`data/fs131/ol/sorry-control-276aeaff.txt`).
+- **Axioms** (`scripts/axioms.sh`): "**axioms: OK — 3889 clean, 14 axiom-free, 4 imported, 5 declared purchase(s)**", exit 0; "audited:
+  3912 records" (`build/gate/axioms/20261006T025509Z-337459.log`, copy `data/fs131/ol/axioms-receipt-final.log`; digest
+  `data/fs131/ol/axioms-final.log`). **The prediction of Stage 17, met exactly.** **Reconciled against `main`'s gated run** (ML1's
+  `data/fs131/ml/axioms-receipt-final.log`, `cmp`-identical to `fs131-w4mm/build/gate/axioms/20261005T092312Z-2984691.log`; `main`'s Lean
+  and scripts unchanged since): `scripts/gate_report.py axioms` with it as the previous run lists **105 records added, every one CLEAN,
+  none removed, none changed** (`data/fs131/ol/axioms-vs-main-final.txt`); 3,807 + 105 = 3,912; clean 3,784 + 105 = 3,889; axiom-free 14,
+  imported 4, purchases 5 unchanged (no `axiom`, no `native_decide` in `OpenMove`; the purchases are rung A's five). **OPEN's records**
+  (`tools/fs131_ol_axioms.py` on the gate's log): **105 theorems in the source = 105 names in the audit block = 105 records, each once,
+  under CLEAN — 103 on exactly `[propext, Classical.choice, Quot.sound]`, `ArcMap.exists_open` and `Near.open_allowedCone` among them, 2
+  on fewer (`BranchGerms.idx_idx` `[propext]`, `BranchGerms.turns_idx` `[propext, Quot.sound]`), 0 on none; PASS**
+  (`data/fs131/ol/open-axioms-final.txt`). Its `--plant` on the same log (`sorryAx` on `exists_open`, `open_allowedCone`'s record
+  dropped, `open_valid` unaudited, `open_rim` under PURCHASED) FAILS naming all four, exit 1 (`open-axioms-plant.txt`).
+  **`--self-test`**: "23 controls … OK — every planted fault fired, and every partner passed", exit 0, 23 `ok` lines, 0 `FAIL`
+  (`build/gate/axioms-self-test/20261006T025513Z-337882.log`, copy `axioms-selftest-receipt-final.log`; driver
+  `axioms-selftest-final.log`); OPEN declares no axiom, so `scripts/axioms-controls.txt`'s expected counts do not move: unchanged.
+- **Vacuity** (`scripts/vacuity.sh`): "**vacuity: OK**", exit 0: `declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0
+  stale=0 declared=3 witnessed=32 generic=747 unknown=2`, `untelescoped=0`; "recorded counts in scripts/vacuity-baseline.txt's header:
+  match (9 of 9 compared)"; against the `merged` run "counts: unchanged, rows: none changed"; the two held UNKNOWN are the baseline's
+  `hexShell_plane5`, `hexShell_plane6` (`build/gate/vacuity/20261006T025646Z-348097.log`, copy `data/fs131/ol/vacuity-scan-final.log`;
+  digest `data/fs131/ol/vacuity-final.log`). **The prediction of Stage 17, met exactly, count for count and row for row.**
+  **Reconciled against `main`'s gated scan** (ML1's `data/fs131/ml/vacuity-scan-final.log`, `sites=770`) by
+  `tools/fs131_ol_vacdiff.py … --no-evidence`: 845 rows of `main`'s, **0 lost; 14 added, every one an `OpenMove` declaration's and every
+  one `SITE GENERIC`** (`data/fs131/ol/vacdiff-final.txt`): **11 on `F.Valid`** (`Near.exists_openConfig_up`, `_down`,
+  `Near.exists_openConfig`, `Near.OpenConfig.exists_clearSet`, `Near.open_isContact_iff`, `open_tile_split`, `open_tile_cover`,
+  `open_inType_iff`, `open_outType_iff`, `open_allowedCone`, `ArcMap.exists_open`), **2 on `F.IsHorn v α κ₁ κ₂ c`**
+  (`Near.exists_openConfig`, `ArcMap.exists_open`), **1 on `F.Condition5`** (`Near.open_condition5`); no EVIDENCE row added (18
+  emptiness proofs and 57 witnesses, as on `main`); no site VACUOUS, STALE or UNKNOWN, and nothing asks for a baseline entry.
+  `declarations` +147 and `refutations-skipped` +5 are `count-open.out`'s 147 and 5 (Stage 17), name for name.
+  **How the scan classes OPEN's binders.** `cfg : X.OpenConfig c up s b ψ ρc` (51 theorems bind it) and the surgery section's
+  binders (`hv : v ∈ F.dom`, `hρ`, `hA`, `hAf`, `hlc`, `h : X.Small ρ`, `hρc`) raise **no site**: their heads are not tracked carriers.
+  `hj : F.HasHornCount v j`, `hm : F.HasDegree v m`, `h1 : F.HasSectors v c 1`, `hv : F.Covers v 1`: no site, for the same reason. The
+  tracked heads `OpenMove` binds are `Valid`, `IsHorn` and `Condition5`, each at a variable map: `GENERIC`. `Near.open_valid` binds
+  `hF : F.Valid` and raises no site because its stated conclusion `(…).Valid` reduces to `… → False`: the scan counts it a refutation
+  and skips it (the reading WL1 and ML1 recorded for `merge_valid`).
+  **OPEN's carriers, decided by the procedure** (`scripts/Vacuity.lean`, "OPEN's carriers (FS131-OL1 …)"): **no new carrier IN**, so no
+  control is added and the last on `main` stays 62. `ArcMap.HasHornCount` OUT — a fact about a point's sectors like `HasSectors` and
+  `HasDegree` (both OUT since wave 4), at a variable map at every site, its two spec values positive `example`s, no refutation stated as
+  a theorem. `Near.OpenConfig` OUT — a `Prop`-valued structure of eleven facts about a chart's germs, colours and radii, at a variable
+  chart at every site, like `Near.RayConfig` (OUT since wave 4); nothing refutes it at a concrete chart. The definitions (`hornPos`,
+  `rayPos`, `openWedge`, `openCol`, `openRim`, `openPiece`, `openRest`, `openArcs`, `openRay`, `Near.openSectors`) are data. Entering
+  either predicate would add `GENERIC` rows and no signal, and the procedure's control for an IN carrier needs a refutation theorem at a
+  concrete instance, which `OpenMove` does not state and this job may not add.
+  **What the scan cannot see, said plainly**: `exists_open`'s hypotheses hold together on no map of the library — the inhabitant note
+  in its docstring (FS131-E6's twelve-colour map, at [hand]). Each binder alone is `GENERIC`; their conjunction is across binders. The
+  gate is green on this, as it is on `exists_merge`, `exists_shave`, `exists_rayMerge`; the Lean model stays owed (inventory item 408).
+  **`--self-test`**: "OK — all 62 controls behaved: every one fired, and the silent ones stayed silent", exit 0, 62 `ok` lines, 0 `FAIL`
+  (`build/gate/vacuity-self-test/20261006T025752Z-353401.log`, copy `vacuity-selftest-scan-final.log`; driver
+  `vacuity-selftest-final.log`). **Negative controls, run before the final run**: (1) `ArcMap.IsHorn` misspelt in `trackedProps`
+  (`IsHornX`), the self-test: "FAIL — 3 of 62 control(s) did not behave as designed", exactly `planted_vacuous_horn`,
+  `planted_generic_horn`, `planted_unknown_horn`, exit 1 (`data/fs131/ol/vacuity-selftest-plant-ishorn.log`); the file restored from a
+  copy (`cmp` identical, `git status` clean). (2) The scan itself with that misspelling (`vacuity-scan-plant-ishorn.log`: `sites=740`,
+  `witnessed=31`) against `main`'s by the row check: **44 rows LOST**, and OPEN's added rows fall from 14 to 12 — its two `IsHorn` sites
+  gone — exit 1 (`vacdiff-plant-ishorn.txt`): the row check goes red when the scan is blind to a carrier, and OPEN's `IsHorn` sites are
+  read through that `trackedProps` entry.
+- **Architecture**: `tools/check_architecture.py` "RESULT: PASS", exit 0 (`data/fs131/ol/arch-final.txt`). Negative control:
+  `OpenMove`'s row removed in a copy-edit — "missing: ['Plane/ValidMap/OpenMove']", "FAIL module coverage", "RESULT: 1 failure(s)",
+  exit 1 (`arch-plant.txt`); restored, `cmp` identical. The row now names FS131-IO1–IO3 and the landing.
+- **The drafts, checked by the digest**: drafts 1 and 2 below applied to a scratch copy of `main`'s `CLAUDE.md` and read by
+  `scripts/gate_report.py` against the final logs: § Trust ledger "match (clean, purchases and imported compared)"
+  (`data/fs131/ol/drafts-axioms-digest.txt`); § The gate "match (9 of 9 compared)" (`drafts-vacuity-digest.txt`). The unedited
+  `CLAUDE.md`: "RECORDED COUNT IS STALE … 3784 clean → 3889" and "RECORDED COUNTS ARE STALE … declarations 11026 → 11173,
+  refutations-skipped 113 → 118, sites 770 → 784, generic 733 → 747" — flagged, never failed, until the filing.
+- **Not run, as at every FS-131 landing**: `lake lint` (the Batteries environment linters; it would start Lake's own build of the lint
+  driver, outside `scripts/build.sh`). "Linters silent" is read from the build's warnings. Held for the coordinator, with the report.
+
+**Read against the informal statement, aloud** (the gate item no automation replaces). `ArcMap.exists_open`'s hypotheses: `F.Valid` (no
+two interior points of one colour at distance exactly 1), `F.Covers v 1` (the map is defined on a neighbourhood of `B̄(v, 1)`),
+`F.IsHorn v α κ₁ κ₂ c` (a sector of colour `c` at `v` is the horn set along `α` between curvatures `κ₁ < κ₂`), `F.HasSectors v c 1` (`c` has
+exactly one sector at `v` for all small radii — **the horn is lone**), `(interior (F.allowedCone v c)).Nonempty`, `F.HasDegree v m`,
+`F.HasHornCount v j` (for all small radii, `m` sectors at `v`, `j` of them horn sets) and `0 < δ`. Its conclusion: a radius `ρ ∈ (0, δ)`
+and a map `F'` that is valid, agrees with `F` off `B̄(v, ρ)`, has its ring arcs within `F`'s (no unit arc created), keeps Condition 5 when
+`F` has it, adds no colour at `v`, has a degree `m' ≤ m` and a horn count `j' < j` at `v`, carries at most three colours and no repeated
+colour at every rim point, and leaves `D_c(v′)` unchanged for every `v′ ∉ B̄(v, ρ)`. That is **FS131-E6-OPEN** (`plans/FS131-E6-derivation.md`
+§ 4.2, statement at l. 329–332) clause for clause, **in its lone form**: E6-OPEN's hand statement does not assume `HasSectors v c 1`; the
+Lean statement does, by ruling (inventory item 392 (a): E6-ROUTE's OPEN branch only ever meets a lone horn). `hm` and `hj` name the degree
+and the horn count the hand statement speaks of ("degree not raised", "its number of horns lowered by at least one"); they restrict
+nothing: every point of the domain has a degree (`exists_hasDegree_of_chart`, `Sectors`) and a horn count at a chart
+(`Near.hasHornCount_chart`). So the kernel holds E6-OPEN at a lone horn, not E6-OPEN
+for a horn whose colour has further sectors at `v`.
+
+## Stage 18 — SAVED (FS131-OL1)
+
+## Stage 19 — SAVED (FS131-OL1): `main` merged again (`68670175`), and the gate re-run on it — green, receipts byte-identical
+
+`origin/main` moved during Stage 18, to `a01002f8` (two commits: inventory items 412 and 413). `git diff --name-only 5b014f02 68670175`
+(the second merge, `git merge --no-ff origin/main`, no conflict): **`.claude/output-styles/keryx.md`**, `plans/FS131-close-inventory.md`,
+`plans/SESSION-HANDOFF-2026-10-04.md`. One of the three is outside `plans/` and `data/`, so by the brief's rule the gate was **re-run on the
+merged commit `68670175`**, whole (tag `landed`; `data/fs131/ol/run-gate-landed.head` records `HEAD=68670175…`, no tracked file modified).
+No Lean file, script or tool changed (`git diff --name-only 92529c5c 68670175 -- . ':!plans' ':!data'` = the output style alone), and of
+the files under `scripts/`, `lakefile.toml` and the checkers only `scripts/identities.py` names the output-style directory; it is no part
+of `LEAN.md` § The gate, and `scripts/identities.py check` reads "IDENTITIES: PASS", exit 0 (`data/fs131/ol/identities-landed.txt`).
+
+**The gate on `68670175`**, each saved log read:
+- **Build**: "all 1767 modules already up to date, nothing built, 0 module(s) with warnings, 2s", exit 0
+  (`build/gate/build/20261006T030548Z-413449.log`, 0 `warning` lines; driver `data/fs131/ol/build-landed.log`).
+- **Axioms**: "axioms: OK — 3889 clean, 14 axiom-free, 4 imported, 5 declared purchase(s)", "audited: 3912 records", "no record appeared,
+  disappeared or changed its axioms", exit 0 (`build/gate/axioms/20261006T030550Z-413723.log`, `cmp`-identical to
+  `data/fs131/ol/axioms-receipt-final.log`; digest `axioms-landed.log`). `tools/fs131_ol_axioms.py` on it: 105 = 105 = 105, 103 on exactly
+  the three, 2 on fewer, 0 on none, `exists_open` on the three, PASS. Self-test: 23 `ok`, 0 `FAIL`, "OK — every planted fault fired, and
+  every partner passed", exit 0 (`build/gate/axioms-self-test/20261006T030555Z-414206.log`; driver `axioms-selftest-landed.log`).
+- **Vacuity**: "vacuity: OK", `declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0 stale=0 declared=3 witnessed=32
+  generic=747 unknown=2`, the baseline header "match (9 of 9 compared)", "counts: unchanged, rows: none changed", exit 0
+  (`build/gate/vacuity/20261006T030742Z-427710.log`, `cmp`-identical to `data/fs131/ol/vacuity-scan-final.log`; digest
+  `vacuity-landed.log`). `tools/fs131_ol_vacdiff.py` against `main`'s gated scan: PASS (0 lost, 14 added, all `GENERIC`, all OPEN's).
+  Self-test: 62 `ok`, 0 `FAIL`, "OK — all 62 controls behaved", exit 0 (`build/gate/vacuity-self-test/20261006T030854Z-434391.log`;
+  driver `vacuity-selftest-landed.log`).
+- **Architecture**: "RESULT: PASS", exit 0 (`arch-landed.txt`). **Sorry**: the same four prose lines, 0 by the narrow pattern
+  (`sorry-landed.txt`, identical to `sorry-final.txt`).
+
+**The gated commit for the landing is `68670175`.** Stage 18's negative controls stand for it: nothing they exercise changed.
+
+## Stage 19 — SAVED (FS131-OL1)
+
+## Stage 20 — SAVED (FS131-OL1): the landing — `main` fast-forwarded to `7470222e`
+
+Checked before the push, at `HEAD` = `7470222e` (Stage 19's commit): `origin/main` (`a01002f8`, unmoved since the second merge) an
+ancestor of `HEAD` (`git merge-base --is-ancestor`); `a20bb6f5` an ancestor of `HEAD` (the branch was never rewritten: FS131-IR1's merge
+of it into wave 5 meets no conflict from this landing); `git diff --name-only 68670175 HEAD -- . ':!plans' ':!data'` empty — nothing but
+this record and its logs changed after the gated commit. **`git push origin HEAD:main`: `a01002f8..7470222e`, a fast-forward**
+(`data/fs131/ol/push-main.txt`); after it `origin/main` = `origin/fs131-wop` = `7470222e`. No `sorry` reached `main`. No background
+process is left running: every build, gate script and scan ran in the foreground under the slot and exited.
+
+**What is on `main` now**: `Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean` (2,874 lines, 105 theorems, 0 `sorry`), its import in
+`Proofs.lean`, its row in `ARCHITECTURE.md`, its 105 records in `scripts/Axioms.lean`, its carrier entry in `scripts/Vacuity.lean`, the
+baseline header's new counts, IO1–IO3's and this job's tools and logs.
+
+## Stage 20 — SAVED (FS131-OL1)
+
+## Drafts for the front page (FS131-OL1)
+
+Each with its slot and the log line it comes from. The gated commit is `68670175`; its receipts are byte-identical to the run on
+`92529c5c`. **The saved gate logs, for `scripts/gate_report.py` to re-read** (the `build/gate/` files are in the worktree
+`.claude/worktrees/fs131-wop`; the copies are committed):
+
+- axioms: `build/gate/axioms/20261006T030550Z-413723.log`, copy `data/fs131/ol/axioms-receipt-landed.log` —
+  `python3 scripts/gate_report.py axioms data/fs131/ol/axioms-receipt-landed.log data/fs131/ml/axioms-receipt-final.log CLAUDE.md`
+  (the previous run being MERGE's landing: 105 records added, each CLEAN; `data/fs131/ol/axioms-vs-main-final.txt`);
+- vacuity: `build/gate/vacuity/20261006T030742Z-427710.log`, copy `data/fs131/ol/vacuity-scan-landed.log` —
+  `python3 scripts/gate_report.py vacuity data/fs131/ol/vacuity-scan-landed.log data/fs131/ml/vacuity-scan-final.log
+  scripts/vacuity-baseline.txt CLAUDE.md` (14 rows added; `data/fs131/ol/vacuity-vs-main-landed.txt`);
+- self-tests: `build/gate/axioms-self-test/20261006T030555Z-414206.log`, `build/gate/vacuity-self-test/20261006T030854Z-434391.log`
+  (drivers `data/fs131/ol/axioms-selftest-landed.log`, `vacuity-selftest-landed.log`); build:
+  `build/gate/build/20261006T030548Z-413449.log` over IO3's full build `build/gate/build/20261005T124448Z-133559.log`.
+
+Drafts 1 and 2 were applied to a scratch copy of `main`'s `CLAUDE.md` and read by `scripts/gate_report.py` against these logs: § Trust
+ledger "match (clean, purchases and imported compared)"; § The gate "match (9 of 9 compared)" (`data/fs131/ol/drafts-axioms-digest.txt`,
+`drafts-vacuity-digest.txt`).
+
+1. **`CLAUDE.md` § Trust ledger**, the words "the current audit reads 3784 clean and 5 declared purchases, and 4 imported (and 14
+   axiom-free; 3,807 records at MERGE's landing, FS131-ML1, 2026-10-05)" become: "the current audit reads 3889 clean and 5 declared
+   purchases, and 4 imported (and 14 axiom-free; 3,912 records at OPEN's landing, FS131-OL1, 2026-10-06)". From
+   `data/fs131/ol/axioms-landed.log`: "audited: 3912 records — 3889 clean on the standard axioms, 14 axiom-free, 4 imported (resting on a
+   declared outside theorem), 5 declared purchase(s)" and "==> axioms: OK — 3889 clean, 14 axiom-free, 4 imported, 5 declared
+   purchase(s)". (The date is the logs' UTC date.)
+2. **`CLAUDE.md` § The gate**, the two count lines "`declarations=11026 refutations-skipped=113 sites=770`, `vacuous=0 stale=0 declared=3
+   witnessed=32 generic=733 unknown=2`" become "`declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0 stale=0 declared=3
+   witnessed=32 generic=747 unknown=2`". From `data/fs131/ol/vacuity-landed.log`: "scanned: declarations=11173  refutations-skipped=118"
+   and "sites:   sites=784  vacuous=0  stale=0  declared=3  witnessed=32  generic=747  unknown=2". The baseline's two entries are unchanged
+   (`hexShell_plane5`, `hexShell_plane6`).
+3. **`scripts/vacuity-baseline.txt`'s header** (written by this job from `scripts/gate_report.py header`, now on `main`): "#
+   declarations=11173  refutations-skipped=118  sites=784" / "#   vacuous=0 stale=0 declared=3 witnessed=32 generic=747 unknown=2" — the
+   digest's "recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)". No entry added or removed.
+4. **`tools/claude_md_fact_audit.py`'s `GATE_CHANGES`**, after the `(("3633", "5"), ("3784", "5"))` entry:
+   `(("3784", "5"), ("3889", "5")): "FS-131 OPEN's landing (FS131-OL1; .claude/worktrees/fs131-wop/build/gate/axioms/20261006T030550Z-413723.log, copy
+   data/fs131/ol/axioms-receipt-landed.log, gated commit 68670175): 3,912 records, 3,889 clean, 14 axiom-free, 4 imported, 5 purchases",`
+5. **`LEAN.md` § The gate**: no change — the vacuity self-test still plants sixty-two controls ("==> vacuity self-test: OK — all 62
+   controls behaved", `data/fs131/ol/vacuity-selftest-landed.log`) and the axiom audit 23 ("==> axioms self-test: 23 controls",
+   `data/fs131/ol/axioms-selftest-landed.log`). No carrier of `OpenMove` is tracked, so no control was added.
+6. **Held for the milestone's filing** (as MERGE's draft 6): `plans/FS131-E6-derivation.md`'s entry **E6-OPEN** (the list line at l. 12,
+   "[hand, one mind; the clearness step is `clear_near_end`, kernel]", and the block `derivation: e6-open`, "grade: hand", "minds: 1")
+   gains **[kernel], in its lone form** — `HadwigerNelson.Plane.ArcMap.exists_open`
+   (`Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean`), with the added hypothesis `h1 : F.HasSectors v c 1` (ruling 392 (a)), on
+   exactly `[propext, Classical.choice, Quot.sound]`, resting on no outside theorem and on no hypothesis beyond its statement's
+   (FS131-IO1–IO3, landed by FS131-OL1, gated commit `68670175`). The block's "not claimed: … that the horn's colour has one sector (the
+   statement does not need it)" is the correction item 391 already owes: the kernel statement needs it. No row of `LEDGER.md` names
+   E6-OPEN (`grep`: none), so no ledger row is regraded; `CLAUDE.md`'s Frontier text names no count of FS-131's landings and needs no
+   new line for this one; the Proof Atlas grade for E6-OPEN, if it has a node, moves to kernel (lone form) with the derivation's.
+
+## After the landing (FS131-OL1)
+
+Stage 20, the drafts and the report were committed as `a94f30e7` and pushed to `fs131-wop` and to `main` — `7470222e..a94f30e7`, a
+fast-forward (`data/fs131/ol/push-main-2.txt`); `git diff --name-only 68670175 a94f30e7 -- . ':!plans' ':!data'` is empty, so `main`'s
+gate inputs are the gated commit's. This note and that push's log go in one last commit, pushed the same way.

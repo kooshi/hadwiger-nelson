@@ -1,0 +1,30 @@
+slot: admitted axioms.sh: mem 30 GiB (hard cap), cpus 0,1,2,3
+==> axioms: this run's full output: build/gate/axioms/20261006T024056Z-145400.log
+    audited: 3912 records — 3889 clean on the standard axioms, 14 axiom-free, 4 imported (resting on a declared outside theorem), 5 declared purchase(s)
+    clean records, by axiom set:
+       3768  [propext, Classical.choice, Quot.sound]
+         62  [propext]
+         58  [propext, Quot.sound]
+          1  [Quot.sound]
+         14  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.PartialColoring.map, HadwigerNelson.Plane.BranchGerms.fin3_adj, HadwigerNelson.Plane.BranchGerms.mem_gapGerm, HadwigerNelson.Plane.BranchGerms.mem_gapSec, HadwigerNelson.Q4.approx, HadwigerNelson.Stripe.wheel_all, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    declared imports (1): HadwigerNelson.Plane.falconer_lemma2_nonempty
+    imported records (4):
+      HadwigerNelson.Plane.falconer_reduction  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+      HadwigerNelson.Plane.le_chiM_of_falconerFan  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+      HadwigerNelson.Plane.exists_mem_falconerE  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+      HadwigerNelson.Plane.fan_tip_ae_mem  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+    library axioms other than native auxiliaries (1): HadwigerNelson.Plane.falconer_lemma2_nonempty; native auxiliaries: 10
+    RECORDED COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 3784 clean → 3889
+    --- changes since the previous complete run ---
+    no previous complete run on record; the next run is compared with this one
+    purchase ledgers agree — the docstrings warn of exactly the purchases the audit finds (5: four_le_chromaticNumber_plane_certified moserSpindle_cnf_unsat moserSpindleCubes_unsat moserSpindle_not_colorable_three_cubes moserSpindle_not_colorable_three_lrat)
+    declared imports: 1; library axioms other than native auxiliaries: 1, every one declared; native auxiliaries: 10
+==> axioms: OK — 3889 clean, 14 axiom-free, 4 imported, 5 declared purchase(s)
+    full output: build/gate/axioms/20261006T024056Z-145400.log
+exit=0

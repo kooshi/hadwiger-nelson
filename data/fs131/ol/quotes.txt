@@ -1,0 +1,14 @@
+verbatim  l.  3683  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  408. **FS131-IO3 done — OPEN held** (Stage 15 SAVED at Kooshi's halt, all three 
+verbatim  l.  3698  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  409. **Ruling on OPEN: it lands on `main` by its own gate-and-land job on restar
+verbatim  l.  3708  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  411. **Rulings: the three slots, filled from the queue of the handoff.** (a) **F
+verbatim  l.  3411  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  384. **FS131-E6 done: F6 is real, and repaired with no backlog statement changed
+verbatim  l.  3507  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  391. **FS131-IO1 handed back** (Stage 3 SAVED, harness ≈ 408k by the task notice
+verbatim  l.  3530  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  393. **FS131-IO2, by message: `open_allowedCone` is false as stated; a one-field
+verbatim  l.  3569  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  397. **FS131-IO2, by message: `open_degree_horns` is also false as stated; a sec
+verbatim  l.  3605  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  400. **FS131-IO2 handed back** (Stage 10 SAVED, harness ≈ 560k by the task notic
+verbatim  l.  3302  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  375. **MERGE LANDED on `main`, held in the kernel: FS131-ML1 done** (harness ≈ 3
+verbatim  l.  3324  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  376. **MERGE's landing counts filed** (Keryx, drafts 1, 2, 4 verbatim): `CLAUDE.
+verbatim  l.   635  /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/plans/FS131-IO-implementation.md  |  Of this brief: nothing. Of OPEN's landing, for the coordinator (not this job's t
+verbatim  l.  2847  /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean  |  theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c 
+verbatim  l.    36  /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean  |  def HasHornCount (v : ℂ) (j : ℕ) : Prop :=
+quotations=13 mismatches=0

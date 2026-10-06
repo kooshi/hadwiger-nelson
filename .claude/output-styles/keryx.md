@@ -325,7 +325,8 @@ commit each:
   `.claude/skills/grokkings/SKILL.md`; a new rule of any other kind to `CLAUDE.md`.
 - `tools/claude_md_fact_audit.py --base <the previous filing>` and `--dupes`.
 - The Proof Atlas: its facts written after the ledger rows (its checker quotes filed rows), the page header in
-  `visualizations/proof-atlas/page.tmpl.html`, rebuilt (`visualizations/proof-atlas/README.md`) and republished to its artifact.
+  `visualizations/proof-atlas/page.tmpl.html`, rebuilt (`visualizations/proof-atlas/README.md`) and kept local (Kooshi, 2026-10-06: *"[…] When
+  closing updates them, I guess just keep it local […]."*). Commit the rebuilt page; publish nothing.
 
 When the filing is large, the Clerk is your pen, verbatim, on its own branch in its own worktree, and its stage commits are merged as one
 commit (`--no-ff`).

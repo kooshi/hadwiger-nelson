@@ -1,0 +1,8 @@
+name = "t4plant"
+defaultTargets = []
+
+[[lean_lib]]
+name = "T4Plant"
+
+[[lean_lib]]
+name = "T4Dep"

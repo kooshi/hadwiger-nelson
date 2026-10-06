@@ -1,0 +1,7 @@
+axioms exit=0
+axioms-selftest exit=0
+vacuity exit=0
+vacuity-selftest exit=0
+arch exit=0
+sorry-lines=4
+DONE

@@ -1,0 +1,8 @@
+  on fewer: HadwigerNelson.Plane.BranchGerms.idx_idx ['propext']
+  on fewer: HadwigerNelson.Plane.BranchGerms.turns_idx ['Quot.sound', 'propext']
+FAIL a theorem of OpenMove with no line in the audit block: HadwigerNelson.Plane.ArcMap.Near.open_valid
+FAIL no record in the log: HadwigerNelson.Plane.ArcMap.Near.open_allowedCone
+FAIL printed under ['PURCHASED'] in the log, not once under CLEAN: HadwigerNelson.Plane.ArcMap.Near.open_rim
+FAIL outside the standard three: HadwigerNelson.Plane.ArcMap.exists_open ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+OPEN records: 105 theorems in the source, 104 names in the audit block, 3911 records in the log — 101 on exactly the standard three, 2 on fewer, 0 on none; exists_open ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+open axioms: FAIL (4)

@@ -1,0 +1,25 @@
+FS131-OL1 — the gate's counts, predicted before the first gate run on the merged tree (written 2026-10-06, before
+scripts/axioms.sh or scripts/vacuity.sh had run in this worktree; main's gated run is ML1's, data/fs131/ml/*-final.log).
+
+AXIOMS (scripts/axioms.sh), from IO3's print re-run in Stage 16 (105 OPEN records: 103 exactly standard, 2 on fewer, 0 on none):
+  records   3807 + 105 = 3912
+  clean     3784 + 105 = 3889   (a record on a non-empty subset of the three counts as clean; the 2 on fewer are non-empty)
+  axiom-free  14 (unchanged)    imported 4 (unchanged)    declared purchases 5 (unchanged)
+  against main's gated log: 105 records added, every one CLEAN, none removed, none changed
+  self-test: 23 controls, unchanged (OPEN declares no axiom; scripts/axioms-controls.txt reads the library's one declared import)
+
+VACUITY (scripts/vacuity.sh), main's gated scan: declarations=11026 refutations-skipped=113 sites=770,
+  vacuous=0 stale=0 declared=3 witnessed=32 generic=733 unknown=2
+  declarations         11026 + 147 = 11173   (data/fs131/ol/count-open.out: 105 theorems, 10 equation lemmas, 11 definitions,
+                                              5 matchers, the structure OpenConfig and its 15 generated declarations)
+  refutations-skipped    113 + 5   = 118     (count-open.out: open_valid, openRay_nondegenerate, OpenConfig.isClear_of_mem_openWedge,
+                                              OpenConfig.isClear_of_Icc, and the generated projection OpenConfig.clear)
+  sites                  770 + 14  = 784     from the source's binders of tracked carriers, all at a variable map:
+                                              F.Valid — 12 theorems bind `hF : F.Valid`, less open_valid (a refutation, skipped) = 11;
+                                              F.IsHorn v α κ₁ κ₂ c — exists_openConfig, exists_open = 2;
+                                              F.Condition5 — open_condition5 (the arrow's hypothesis) = 1
+  generic                733 + 14  = 747     every new site GENERIC
+  vacuous 0, stale 0, declared 3, witnessed 32, unknown 2 — unchanged; no EVIDENCE row added
+  self-test: 62 controls, unchanged, if no carrier of OpenMove is decided IN (HasHornCount: a fact about a point's sectors, like
+  HasSectors and HasDegree, OUT; Near.OpenConfig: a predicate of a chart's data at a variable chart at every site, like
+  Near.RayConfig, OUT)

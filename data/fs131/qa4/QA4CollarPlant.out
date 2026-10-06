@@ -1,0 +1,20 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 8,9
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4CollarPlant.lean:38:24: error: Application type mismatch: The argument
+  hfit.ring
+has type
+  l60Frag.IsRingArc 0 (π / 8) (5 * π / 24) 0 1
+but is expected to have type
+  l60Frag.IsRingArc 0 (π / 8) (5 * π / 24) 1 0
+in the application
+  And.intro hfit.ring
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4CollarPlant.lean:85:92: error: Application type mismatch: The argument
+  hout
+has type
+  1 ∉ l60Frag.coloursAt 0
+but is expected to have type
+  0 ∉ l60Frag.coloursAt 0
+in the application
+  qa4_bend_toward_collar_weak hF hA hout
+'HadwigerNelson.Plane.ArcMap.qa4_collar_hyps' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.qa4_collar_not_hmax' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.qa4_bend_toward_collar_weak' depends on axioms: [propext, Classical.choice, Quot.sound]
