@@ -6623,3 +6623,31 @@ reason by the close.*
      derive the library's form in the kernel — is filed with the second landing, from its § 16.7. (f) **Slot →
      FS131-I7A** (wave 7, route T's count, on `fs131-w7a` at the merge `6f9807b9`), launched 2026-10-06 with a dated
      amendment for its moved base (gate exit 0). In flight: 3 (L6A, IF1, I7A) + the special-purpose slot (T5).
+
+556. **FS131-I7A, by message mid-job: a defect of the skeleton — four leaves of route T's count are false as stated, because
+     the kernel's statements lack a hypothesis the file's reader sees** (source: I7A's message to "main", 2026-10-06; its
+     evidence `data/fs131/i7a/draft/Defect.lean` and log, in its tree, not yet committed — to be read at its saved
+     stage). `CountData.card_edgeNbrs`, `card_vertNbrs`, `deg_le`, `count_poly` never mention the section variable
+     `(C : CountData M k)` in their statements, and at the pin a theorem takes a section variable only if its statement
+     mentions it; so each claims its conclusion of every combinatorial map. It kernel-checks the negation of each on the
+     planner's own one-face torus, and derives `False` from each `sorry` leaf as it stands. **Kind**: a statement that
+     lacks a hypothesis — of the Lean skeleton, not of a filed result (the rows and the plan's § 3.5 say `μ = 0` and a
+     proper colouring). **Reach**: no module but `Count` reads them (its `grep`); nothing on `main`; no proved theorem —
+     a false statement cannot be proved, so the class can only live in `sorry` leaves and in what is proved from them.
+     **My sweep, textual and approximate** (every open skeleton on five branches: an explicit section variable that an
+     open leaf's statement does not mention): it reproduces these four exactly; the only other hits are `erosion` and
+     `pencil_window` in wave 6's `Centre`, which do not mention `(F : c.Fan z)` — the planner says `erosion` reads no
+     fan; `pencil_window` is to be confirmed by its implementer (FS131-I6Z's brief regenerated with the line). **Rulings.**
+     (a) **`include C in` above each of the four, with a docstring clause naming the hypothesis** — the elaborated
+     statements gain `(C : CountData M k)`. Alternative: the binder written into each signature. Why this: it keeps the
+     planner's text and matches the sibling module's `omit … in` lines; the docstring clause serves the reader.
+     Confidence: high. (b) Its `omit [...] in` lines for instance binders a proved theorem does not read: adopted
+     (they only widen). (c) **A defect of every statement check this milestone has used, mine to have missed**: they
+     compare text, and this class never changes the text. I7A is asked to compare elaborated signatures (`#check` at
+     the base and at its tip) with a planted `include` as control; the shared checker owed (item 406 (c)) must do the
+     same; **my own receipts' "statements compared head by head" lines are textual too** and say nothing about this
+     class — true for every hand-back logged today. For proved leaves that is harmless (the kernel holds the proved
+     statement; what could differ from the file's reading is which hypotheses it takes), and it is exactly what a
+     landing's read-back of heads should now check with `#check`. (d) **Filed**: the Lean fact, in `LEAN.md` §
+     Searching — Lean. (e) **Credit**: it read the kernel's statement where the file's looked right, and brought a
+     counterexample with the report.

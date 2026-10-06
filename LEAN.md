@@ -177,6 +177,12 @@ the `.olean` would. Settle every hand-written module before starting a long gene
   a loud failure at the join: the two theorems merge in silence and the axiom audit then reads one copy while the kernel holds the
   other (§ The gate, `scripts/dupnames.sh`). A line that needs another line's lemma before they meet takes it as a hypothesis, or
   states it under a name of its own and says so in its report; the join then makes one declaration.
+- **A section `variable` enters a theorem only if the theorem's statement mentions it** (at the pin; the proof body cannot pull it in).
+  A skeleton leaf whose statement does not name a hypothesis-carrying variable is stated without it: `Plane/RouteT/Count` held four
+  such leaves — each false of a one-face torus, each a `sorry` from which the next leaves were to be proved (FS131-I7A, inventory
+  item 556). `include C in` above the theorem adds the binder and leaves the text unchanged; `omit [...] in` drops instance binders a
+  proved theorem does not read (with a `sorry` body the `unusedSectionVars` linter stays quiet). **Read a leaf as the kernel has it —
+  `#check` — never as the file prints it; a statement check that compares text passes this whole class.**
 
 ## The package
 
