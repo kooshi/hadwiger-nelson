@@ -1,0 +1,15 @@
+MATCH     plans/FS131-close-inventory.md:6456 (verbatim)  ::  551. **Kooshi's word, 2026-10-06: the gate is to enumerate both kinds of assumption; a spe
+MATCH     plans/FS131-close-inventory.md:6388 (verbatim)  ::  548. **Kooshi's word, 2026-10-06: Falconer's lemma is pulled into this milestone; and two 
+MATCH     plans/FS131-close-inventory.md:6789 (verbatim)  ::  562. **FS131-T5 done: the gate has a step that lists what the library assumes, in both for
+MATCH     Proofs/HadwigerNelson/Plane/Slack.lean:3664 (verbatim)  ::  def Voronov11 : Prop :=
+MATCH     Proofs/HadwigerNelson/Plane/Slack.lean:3859 (verbatim)  ::  theorem mu_lt_of_voronov11 (hV : Voronov11) {ε : ℝ} (hε : 0 < ε) : mu 6 ε < 1 := by
+MATCH     Proofs/HadwigerNelson/Plane/Slack.lean:3916 (verbatim)  ::  theorem forall_mu_six_lt_one_iff : (∀ ε > (0 : ℝ), mu 6 ε < 1) ↔ Voronov11 := by
+MATCH     Proofs/HadwigerNelson/Bridge.lean:51 (verbatim)  ::  def RealAlgebraicDescent : Prop :=
+MATCH     /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wt5/plans/FS131-T5-assumptions.md:402 (verbatim, under § What is on its way — how each landing meets the step)  ::  - **A wave that brings a named hypothesis** (`WEqKLimit`, `ReduceToMap`, `MapNO`, `GammaFr
+MATCH     /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wt5/plans/FS131-T5-assumptions.md:409 (verbatim, under § What is on its way — how each landing meets the step)  ::  - **`KloostermanBound` becoming an axiom** (Weil's bound): while a hypothesis it is a `.fo
+MATCH     /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wt5/plans/FS131-T5-assumptions.md:414 (verbatim, under § What is on its way — how each landing meets the step)  ::  - **The job removing `falconer_lemma2_nonempty`**: its four `RESTS` rows go stale (`stale-
+MATCH     /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wt5/plans/FS131-T5-assumptions.md:423 (verbatim, under § What is on its way — how each landing meets the step)  ::  - **When an assumption is proved**: a theorem concluding a declared former over its own va
+MATCH     /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wt5/plans/FS131-T5-assumptions.md:516 (verbatim, under § Drafts for the front page)  ::  **8. Docstrings under `Proofs/`, for a landing to make** (none is this job's to change; ea
+MATCH     CLAUDE.md:449 (verbatim, under § Trust ledger)  ::  as a set); the current audit reads 6304 clean and 5 declared purchases, and 8 imported (an
+MATCH     CLAUDE.md:506 (verbatim, under § The gate)  ::  `declarations=14501 refutations-skipped=199 sites=1269`, `vacuous=0 stale=0 declared=3 wit
+quotations=14 mismatched=0
