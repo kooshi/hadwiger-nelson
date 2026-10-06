@@ -1073,4 +1073,91 @@ example : -curvDown (-(1 / 2)) = curvUp (1 / 2) ∧ curvUp (1 / 2) = 1 := by
   · exact neg_curvDown_neg _
   · norm_num [curvUp]
 
+/-! ## N4-SHADOW's two inequalities between stacked vertices (FS131-IS1, for `stuckRun_ne_univ`)
+
+`plans/FS110-N-proof.md` § Continuation — FS110-N4, § 2.6: `λ_k ≤ f(λ_{k+1})` and `f̃(υ_{k−1}) ≤ υ_k`, each "from validity of the flanks
+alone" (`plans/FS110-derivation.md`, FS110-N4-FIN's verdict line) once the colours are placed: SH2 at the pole and `Valid`. -/
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- **FS110-N4-SHADOW's inequality going down** (N4 § 2.6, `λ_k ≤ f(λ_{k+1})`, with `w = P_k`, `N = w + n = P_{k+1}`): in a valid map, if
+the colour `h` lies directly below the arc of upward curvature `a` at `w` along `e α` (a lower flank) and has a horn along `e α` at `N`
+between the curvatures `−1 < a' < b' ≤ 1`, then `a ≤ f(a') = a'/(1 + a')` (`curvDown`). The horn shadows, near `w` on the `+e α` side,
+everything above the concentric circle of curvature `f(a')` through `w` (SH2, `mem_shadow_hornSet_S`); a band of the flank above that
+circle would hold a point at distance `1` from a point of the horn, both of colour `h`. Stated at any number of colours and with no
+terminality: validity alone. No model of the two hypotheses on one valid map is known in Lean (`GENERIC`: a horn stacked over a flank of its
+colour is a two-vertex stuck chain, FS-115); the one-sided chain `λ_k = −1/(k + 1)` meets the inequality with equality
+(`rayLower_eq_curvDown`, `Plane/StuckChain`). -/
+theorem le_curvDown_of_flankBelow_of_horn (hF : F.Valid) {w : ℂ} {α a a' b' : ℝ} {h : Fin k}
+    (hh : F.IsFlankBelow w α a h) (H' : F.IsHorn (w + e (α + π / 2)) α a' b' h) (ha' : -1 < a') (hb' : b' ≤ 1) :
+    a ≤ curvDown a' := by
+  by_contra hlt
+  rw [not_le] at hlt
+  obtain ⟨κ', hκ', hev⟩ := hh
+  -- a radius at which the horn at `N` lies in its colour's class
+  obtain ⟨r₁, hr₁, hr₁0, hr₁2⟩ : ∃ r₁, hornSet (w + e (α + π / 2)) α a' b' r₁ ⊆ F.region h ∧ 0 < r₁ ∧ r₁ ≤ 1 / 2 := by
+    obtain ⟨r, hr, hr0⟩ :=
+      (H'.eventually_subset_region.and (Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 2 by norm_num))).exists
+    exact ⟨r, hr, hr0.1, hr0.2⟩
+  obtain ⟨ρ, hρ, Hsh⟩ := mem_shadow_hornSet_S (v := w + e (α + π / 2)) (α := α) ha' H'.1 hb' hr₁0 hr₁2
+  rw [add_sub_cancel_right] at Hsh
+  -- a radius below `ρ` at which the flank's band lies in its colour's class
+  obtain ⟨r₂, hr₂, hr₂0, hr₂ρ⟩ : ∃ r₂, hornSet w α κ' a r₂ ⊆ F.region h ∧ 0 < r₂ ∧ r₂ ≤ ρ := by
+    obtain ⟨r, hr, hr0⟩ := (hev.and (Ioc_mem_nhdsGT hρ)).exists
+    exact ⟨r, hr, hr0.1, hr0.2⟩
+  have hs1 : κ' ≤ max κ' (curvDown a') := le_max_left _ _
+  have hs2 : curvDown a' ≤ max κ' (curvDown a') := le_max_right _ _
+  have hsa : max κ' (curvDown a') < a := max_lt hκ' hlt
+  -- a point of the band between the `f(a')`-circle and the flank's arc
+  obtain ⟨y, hy, hyA, -⟩ := exists_mem_hornSet_aboveBelow w α (κ₁ := max κ' (curvDown a')) (κ₂ := a)
+    (s := (max κ' (curvDown a') + a) / 2) (m := curvDown a') hr₂0 (by linarith) (by linarith) (by intro h0; linarith)
+  have hyT : TanAbove w α (curvDown a') y := hyA (by linarith)
+  have hyR : y ∈ F.region h := hr₂ (hornSet_mono hs1 le_rfl hy)
+  obtain ⟨z, hz, hyz⟩ := Hsh y (lt_of_lt_of_le hy.1 hr₂ρ) (by rw [frameX_base_N]; exact hy.2.1) hyT
+  have hzR : z ∈ F.region h := hr₁ hz
+  have hcy : F.col y = h := hyR.2
+  have hcz : F.col z = h := hzR.2
+  exact hF y hyR.1 z hzR.1 hyz (hcy.trans hcz.symm)
+
+/-- **FS110-N4-SHADOW's inequality going up** (N4 § 2.6, `f̃(υ_{k−1}) ≤ υ_k`, with `w = P_{k−1}`, `N = w + n = P_k`; the mirror of
+`le_curvDown_of_flankBelow_of_horn`): in a valid map, if the colour `g` has a horn along `e α` at `w` between the curvatures
+`−1 ≤ a < b < 1` and lies directly above the arc of upward curvature `b'` at `N` along `e α` (an upper flank), then
+`f̃(b) = b/(1 − b) ≤ b'` (`curvUp`). The horn shadows, near `N` on the `+e α` side, everything below the concentric circle of curvature
+`f̃(b)` through `N` (SH2 mirrored, `mem_shadow_hornSet_N`). No model in Lean (`GENERIC`, FS-115), as for the downward form; the one-sided
+chain's `υ_k = 0` meets it with equality (`ray_chain`). -/
+theorem curvUp_le_of_horn_of_flankAbove (hF : F.Valid) {w : ℂ} {α a b b' : ℝ} {g : Fin k}
+    (H : F.IsHorn w α a b g) (hg : F.IsFlankAbove (w + e (α + π / 2)) α b' g) (ha : -1 ≤ a) (hb : b < 1) :
+    curvUp b ≤ b' := by
+  by_contra hlt
+  rw [not_le] at hlt
+  obtain ⟨κ', hκ', hev⟩ := hg
+  -- a radius at which the horn at `w` lies in its colour's class
+  obtain ⟨r₁, hr₁, hr₁0, hr₁2⟩ : ∃ r₁, hornSet w α a b r₁ ⊆ F.region g ∧ 0 < r₁ ∧ r₁ ≤ 1 / 2 := by
+    obtain ⟨r, hr, hr0⟩ :=
+      (H.eventually_subset_region.and (Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 2 by norm_num))).exists
+    exact ⟨r, hr, hr0.1, hr0.2⟩
+  obtain ⟨ρ, hρ, Hsh⟩ := mem_shadow_hornSet_N (v := w) (α := α) ha H.1 hb hr₁0 hr₁2
+  -- a radius below `ρ` at which the flank's band lies in its colour's class
+  obtain ⟨r₂, hr₂, hr₂0, hr₂ρ⟩ :
+      ∃ r₂, hornSet (w + e (α + π / 2)) α b' κ' r₂ ⊆ F.region g ∧ 0 < r₂ ∧ r₂ ≤ ρ := by
+    obtain ⟨r, hr, hr0⟩ := (hev.and (Ioc_mem_nhdsGT hρ)).exists
+    exact ⟨r, hr, hr0.1, hr0.2⟩
+  have hs1 : min κ' (curvUp b) ≤ κ' := min_le_left _ _
+  have hs2 : min κ' (curvUp b) ≤ curvUp b := min_le_right _ _
+  have hsb : b' < min κ' (curvUp b) := lt_min hκ' hlt
+  -- a point of the band between the flank's arc and the `f̃(b)`-circle
+  obtain ⟨y, hy, -, hyB⟩ := exists_mem_hornSet_aboveBelow (w + e (α + π / 2)) α (κ₁ := b') (κ₂ := min κ' (curvUp b))
+    (s := (b' + min κ' (curvUp b)) / 2) (m := curvUp b) hr₂0 (by linarith) (by linarith) (by intro h0; linarith)
+  have hyT : TanBelow (w + e (α + π / 2)) α (curvUp b) y := hyB (by linarith)
+  have hyR : y ∈ F.region g := hr₂ (hornSet_mono le_rfl hs1 hy)
+  obtain ⟨z, hz, hyz⟩ := Hsh y (lt_of_lt_of_le hy.1 hr₂ρ) (by rw [← frameX_base_N]; exact hy.2.1) hyT
+  have hzR : z ∈ F.region g := hr₁ hz
+  have hcy : F.col y = g := hyR.2
+  have hcz : F.col z = g := hzR.2
+  exact hF y hyR.1 z hzR.1 hyz (hcy.trans hcz.symm)
+
+end ArcMap
+
 end HadwigerNelson.Plane
