@@ -197,3 +197,150 @@ files, each refused unless its old text stands exactly once (`--dry` on the merg
 - Other rows of `ARCHITECTURE.md` and other block headers of `scripts/Axioms.lean` still say "skeleton" or "sorry until … lands"
   for modules that hold no `sorry` (waves 1–5; about twenty-five lines, most on `main` already). They were not on this job's list
   and are not changed: a tidy for after the landing, listed in the report.
+
+## Stage 3 — SAVED (FS131-L5)
+
+## Stage 4 — SAVED (FS131-L5): `main` merged in (`0184efde`, then `1351ebc2`); no file under `Proofs/`
+
+- **What `main` changed since this branch last had it** (`git diff --name-only a20bb6f5 origin/main`, at `28ac525a`;
+  `data/fs131/l5/main-since-base.txt`, 592 paths): 562 under `data/`, 9 under `plans/`, and outside them `.claude/` (2),
+  `BIBLIOGRAPHY.md`, `CLAUDE.md`, `LEAN.md`, `ARCHITECTURE.md`, `scripts/DupNames.lean`, `scripts/dupnames.sh`,
+  `scripts/dupnames-controls.txt` (FS131-T4's, new), `scripts/Vacuity.lean`, `scripts/vacuity-baseline.txt`, and ten files
+  under `tools/`. **`git diff --name-only a20bb6f5 origin/main -- Proofs Proofs.lean lakefile.toml lake-manifest.json
+  lean-toolchain`: empty.** The brief expected `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md` and T4's new files; the others are
+  FS131-OL1's landing registrations (`ARCHITECTURE.md`'s `OpenMove` row, OPEN's carriers in the scan's docstring, the baseline
+  header's two count lines) and the coordinator's filings (`CLAUDE.md`, `LEAN.md`, `tools/claude_md_fact_audit.py`, QA4's, LN1's
+  and OL1's tools). Two of them are Lean files — `scripts/DupNames.lean`, new, and `scripts/Vacuity.lean`, a docstring paragraph
+  — both gate scripts, neither part of the library; read as the brief's "new files under `scripts/`" and OL1's registration, and
+  said here rather than by message.
+- **The merge** `0184efde` (`git merge --no-ff origin/main`, parents `618b535f` and `28ac525a`; no conflict, `ARCHITECTURE.md`
+  merged by itself). File by file (`tools/fs131_m7_merge_check.py a20bb6f5 HEAD origin/main`, `merge-main-check.txt`): 16,963
+  files, 1 changed by both sides, 0 failures. Plants (`merge-main-plants.txt`): `scripts/vacuity-baseline.txt` set to this
+  line's blob, `SixFragment.lean` to `main`'s, `ARCHITECTURE.md` to this line's — each fails naming its file. The Lean tree is
+  Stage 3's: `git diff --name-only 618b535f 0184efde -- Proofs Proofs.lean lakefile.toml` is empty, and the build reads "all 1796
+  modules already up to date" (`build-mainmerged.log`).
+- **`main` moved again before the gate's final run**, to `5358f6cf`: two commits, `plans/FS131-close-inventory.md`,
+  `plans/SESSION-HANDOFF-2026-10-06.md` and two files under `data/fs131/briefs/`. Merged as `1351ebc2` before the final run, so
+  the gated commit holds them.
+
+## Stage 4 — SAVED (FS131-L5)
+
+## Stage 5 — SAVED (FS131-L5): the full gate on `1351ebc2` — green at every step
+
+**The gated commit is `1351ebc2`** (parents `ffd899e0`, this line with its registrations, and `5358f6cf`, `main`). Runner
+`data/fs131/l5/run-gate.sh final`, each step under the slot, each driver log ending in its exit status;
+`data/fs131/l5/run-gate-final.head` records `HEAD=1351ebc2…`, **no tracked file modified**, and each gate's saved log (copies:
+`data/fs131/l5/receipt-<gate>-final.log`). A first pass ran on `7edc365d` before the registrations (tag `merged`).
+
+### 5.1 What this job registered, by the gate's own procedures
+
+- **`scripts/Axioms.lean`**: one record, in a block "FS131-L5" — `ArcMap.LocalSeq.limit_dom` (`Limit` l. 613, `@[simp]`, by
+  `rfl`), the one hand-written theorem of the wave with no record (found by `tools/fs131_l5_records.py` on the first pass's log,
+  which failed naming it: that check's live negative control). 5,221 records.
+- **`scripts/Vacuity.lean`**, a docstring entry "Wave 5's carriers (FS131-L5 …)": **no new carrier IN**, so no control is added
+  (the last stays 62). The decision rests on a census (`data/fs131/l5/census.lean` → `census.out`, `census.json`): of the 201
+  hypothesis-formers of the `Plane` modules and `Thomassen`, 60 are new to `main`; **none of the 60 has an unconditional `¬ P …` at
+  a closed instance or an `IsEmpty` instance**, the two shapes the scan's `gather` reads as emptiness, so no `VACUOUS` control
+  could be planted for any. The entry names all sixty OUT, by kind, with what inhabits each. **The census's positive control**:
+  for the 18 tracked carriers of those modules it reproduces the scan's evidence (one closed refutation each for `IsHorn`,
+  `IsStuck`, `Condition5`, `SemiconcaveWith`, `SectorsAt`, `NiceAt`, `WoodallMerged`, `WoodallNormal`; two `IsEmpty` each for
+  `AeColouring`, `CPColouring`, `AeProperRegions`).
+- **`scripts/vacuity-baseline.txt`**: the header's two count lines, from `scripts/gate_report.py header`. No entry added.
+- `scripts/axioms-controls.txt`, `scripts/vacuity-controls.lean`, `scripts/vacuity.sh`: unchanged — the wave declares no axiom
+  and enters no carrier, so no expected count moves. `ARCHITECTURE.md`: Stage 3's rows; the wave's 29 modules each have a row.
+
+### 5.2 The steps, each saved log read
+
+| step | result | log |
+|---|---|---|
+| build | exit 0, "all 1796 modules already up to date, nothing built, 0 module(s) with warnings"; **0 `warning` lines** here and in the full build of these sources (Stage 3: 464 of 464 batches, "Build completed successfully (5803 jobs)") | `build/gate/build/20261006T094556Z-3064490.log` (copy `build-final-full.log`); `20261006T091411Z-2877053.log` (copy `build-tidy-full.log`) |
+| `sorry` | narrow pattern: **0** lines; `\bsorry\b`: 5, all prose (`Packed` l. 266, `Plane/Cover` l. 33, `Plane/CoverExamples` l. 13 and 6541, `BendStep` l. 345) | `sorry-narrow-final.txt`, `sorry-wide-final.txt` |
+| doubled names | **"dupnames: OK — no name is declared by two modules"**; 7,310 modules scanned, 1,796 the package's against 1,796 source files; 21,020 constants; `TOTALS doubled=0 generated=23 generated-axioms-differ=0` | `build/gate/dupnames/20261006T094558Z-3064636.log` |
+| its self-test | "OK — all 15 controls behaved", 15 `ok`, 0 `FAIL` | `build/gate/dupnames-self-test/20261006T094602Z-3064814.log` |
+| axioms | **"axioms: OK — 5196 clean, 16 axiom-free, 4 imported, 5 declared purchase(s)"**; "audited: 5221 records"; purchase ledgers agree; 1 declared import, every library axiom declared | `build/gate/axioms/20261006T094617Z-3066074.log` |
+| its self-test | "OK — every planted fault fired, and every partner passed", 23 `ok`, 0 `FAIL` | `build/gate/axioms-self-test/20261006T094622Z-3066319.log` |
+| vacuity | **"vacuity: OK"**; `declarations=12999 refutations-skipped=182 sites=1130`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=1093 unknown=2`, `untelescoped=0`; baseline header "match (9 of 9 compared)"; the two UNKNOWN are the baseline's `hexShell_plane5`, `hexShell_plane6` | `build/gate/vacuity/20261006T094806Z-3076636.log` |
+| its self-test | "OK — all 62 controls behaved", 62 `ok`, 0 `FAIL` | `build/gate/vacuity-self-test/20261006T094916Z-3082560.log` |
+| architecture | "RESULT: PASS", exit 0 | `arch-final.txt` |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "(2/2) Passed!" | `lint-final.log` |
+| notes | 193 notes read (the bend's seven modules and `ArcStep` among them), **0 CONFLICT** | `notes-final.txt` |
+
+### 5.3 The axioms, reconciled
+
+- **Against `main`'s gated audit** (FS131-OL1's `data/fs131/ol/axioms-receipt-landed.log`, 3,912 records) by
+  `scripts/gate_report.py axioms` (`axioms-vs-main-final.txt`): **1,312 records added, every one CLEAN; 3 removed; none changed.**
+  3,912 − 3 + 1,312 = 5,221. The three removed are second names FS131-RP1 removed that `main` held (`ArcMap.HasDegree.eq`,
+  `ArcMap.sq_norm_eq_re_im`, `sq_norm_re_im`). Imported 4 and purchases 5 are unchanged: the wave adds no `axiom` and no
+  `native_decide` (no added line of `git diff origin/main -- Proofs` matches either; the pattern matches two planted lines).
+- **Every wave-5 theorem is audited** (`tools/fs131_l5_records.py`, `records-final.txt`, PASS). The landing library holds 8,330
+  theorems against `main`'s 6,958 (the kernel's own list, `count-modules-*.out`): 1,375 new, 3 gone. Of the 1,375, 66 are
+  generated by Lean (51 `eq_1`, 4 `eq_2`, 1 `eq_3`, 1 `eq_def`, 2 `congr_simp`, 2 `mk.inj`, 2 `mk.injEq`, 2 `mk.sizeOf_spec`,
+  1 `brecOn`), which the audit has never listed; **the 1,309 hand-written each have exactly one record, under CLEAN: 1,288 on
+  exactly `[propext, Classical.choice, Quot.sound]`, 12 on `[propext, Quot.sound]`, 7 on `[propext]`, 2 on none.** The other three
+  added records are definitions (`LocalSeq.const`, `LocalSeq.limit`, `pushOutHomeo`).
+- **The heads**, each on exactly the standard three in the gate's log: `exists_terminalMap`, `exists_terminal`, `exists_red`,
+  `bend_away_part`, `exists_arcStep`, `LocalStep.of_cutArcs`, `CollarFit.map_localStep`.
+- Controls: the tool's `--plant` on the first pass's log (`records-plant.txt`) fails naming `sorryAx` on a head, a record
+  dropped, doubled, moved under PURCHASED, and a head on `Quot.sound` alone. **A defect of mine, found by the tool failing toward
+  the alarm**: its first version read a record's name as `'[^']+'` and so lost the 21 records whose names end in a prime — four
+  false MISSING lines; the name is now `\S+`, and the count of records it reads equals the audit's (5,221).
+
+### 5.4 The vacuity counts, reconciled
+
+- **Predicted before the scan**, by `data/fs131/l5/count-modules.lean` on the landing library: `declarations=12999
+  refutations=182`. The scan reads the same. The counter reproduces `main`'s gated line on `main`'s library (11173, 118).
+- **By module** (`tools/fs131_l5_vacdiff.py`, `vacdiff-final.txt`, PASS): `declarations` +1,826 = 1,829 new − 3 gone;
+  `refutations-skipped` +64; 29 new modules account for +1,827 and five modules of `main` for −1 (`Plane/Basic` +2 and `Chord` −2:
+  `conj_e`, `sq_norm_eq` moved; `SixFragment` −1, `UnitArc` −1, `OpenMove` −1: the removed second names; `ValidMap/Basic` +1:
+  `HasDegree.unique` moved in). The new declarations: 1,375 theorems, 221 definitions, 18 inductives and structures, 215
+  generated. FS131-RP1 predicted "ten lower on this account": on its line, yes; against `main`, three are gone, since seven of
+  its eleven removals were of names `main` never held and `conj_e` was counted once on `main`.
+- **Row for row against `main`'s gated scan** (FS131-OL1's `vacuity-scan-landed.log`, 859 rows): **0 rows lost; 346 added, every
+  one `SITE GENERIC`, every one on a declaration `main` does not hold; no evidence row added (18 emptiness proofs, 57
+  witnesses, as on `main`).** By carrier: 194 `Valid`, 62 `IsRingArc`, 58 `IsHorn`, 26 `IsStuck`, 6 `IsQArc`. By module:
+  `Terminal` 100, `Procedure` 41, `MapGraph` 24, `FlankUA` 23, `BaseDense` 21, `ArcStep` 19, `BendCollar` 19, `BendStep` 14,
+  `BendGap` 13, `HexRing` 13, `HornShadow` 12, `Limit` 11, `Cor3` 8, `MapTopology` 7, `BaseWalk` 6, `BendAway` 5, `R2Cap` 5,
+  `Dense` 4, `Chain` 1. **No new site reads VACUOUS, STALE or UNKNOWN; nothing asks for a baseline entry.**
+- The scan's full output on the gated commit is **byte-identical** (`cmp`) to the first pass's, taken before the docstring
+  entry and the header were written: nothing the scan computes moved.
+- **What the scan cannot see, said plainly.** (i) `ArcMap.BaseCtx` is empty at every instance (`BaseCtx.false`), by design: its
+  26 binder sites are the steps of `row134BaseUA`'s proof by contradiction, each docstring says so, and the carrier is OUT (the
+  planner's decision, `BaseWalk`'s header; the entry records it). (ii) Hypothesis sets that hold together on no map of the
+  library: the open gate items of the drafts below. Each binder alone is `GENERIC`.
+
+### 5.5 Each check's negative control, watched
+
+| check | the plant | what went red |
+|---|---|---|
+| build's warning count | the as-given tree (Stage 1) | 36 `warning` lines, against 0 |
+| `sorry` scan | the tree before the merge (`git grep` at `5d3a739f`) | 39 lines by the narrow pattern, against 0 |
+| doubled names | its 15 controls; FS131-T4 watched the gate itself fail on `main`'s line at `conj_e` (`data/fs131/t4/logs/gate-on-main-line.log`), which this line no longer holds twice | — |
+| axioms | its 23 controls; the records check on the first pass (one record missing) and its five plants; the heads' reader on the print before the merge (Stage 2) | named each |
+| vacuity | `ArcMap.IsStuck` misspelt in `trackedProps` (`IsStuckX`), file restored from a copy (`cmp` identical) | the self-test: "FAIL — 3 of 62", exactly `planted_vacuous_stuck`, `planted_generic_stuck`, `planted_unknown_stuck` (`vacuity-selftest-plant-isstuck.log`); the scan: `sites=1097`, and the row check **8 rows LOST**, the wave's 26 `IsStuck` sites gone (`vacdiff-plant-isstuck.txt`, exit 1). The scan itself exits 0 on a misspelt name — the reason the control and the row check exist |
+| row check | `--plant` (`vacdiff-plant.txt`) | LOST, NOT NEW, FLAGGED, COUNTER-DISAGREES |
+| architecture | `BendGap`'s row removed, restored (`cmp` identical) | "missing: ['Plane/ValidMap/BendGap']", exit 1 (`arch-plant.txt`) |
+| notes | RP1's two plants and one of this wrapper's (a conflicting note in `BendGap`) | CONFLICT 0 → 1 each (`notes-selftest.txt`) |
+| lint | none at a landing (ruling 419 (b): the close keeps the firing control) | FS131-LN1's measurement is the record that it fires; its three `[NumberField _]` findings are gone, as FS131-RP1 predicted |
+
+### 5.6 The drafts, checked by the digest
+
+The two `CLAUDE.md` drafts below, applied to a scratch copy, are read by `scripts/gate_report.py` against the final logs:
+§ Trust ledger "match (clean, purchases and imported compared)"; § The gate "match (9 of 9 compared)". The unedited `CLAUDE.md`
+is flagged STALE by both digests (3889 → 5196; 11173 → 12999, 118 → 182, 784 → 1130, 747 → 1093) until the filing.
+
+### 5.7 Read against the informal statement, aloud
+
+- `ArcMap.exists_terminalMap (hF : F.Valid) (hP : F.IsPlaneMap) : ∃ M : ArcMap k, F.IsModification M ∧ M.IsTerminalMap` — "every
+  valid map of the plane, at any number of colours, has a modification (the same domain, no unit arc created, the colours of
+  every point of at least four colours kept) that is a terminal valid map: valid, of the plane, no MERGE, MERGE-RAY or SHAVE
+  available at any point, every constant-sided unit arc (Q) or (R2)". FS112-N2-TERM's construction, at every `k`.
+- `ArcMap.exists_red` — the same hypotheses; "a modification that is valid with every unit arc (Q) or (R2)": FS112-N2-RED.
+- `ArcMap.exists_terminal {F : ArcMap 6}` — FS112-N2-TERM at six colours, with its clauses 2 and 3: in the terminal
+  modification every vertex is cubic trichromatic, carries at least four colours, or is stuck; and every vertex stuck along
+  `e α` with at most three colours lies on a run that is not bi-infinite, each end of which is within `1` of a point of a (Q) or
+  (R2) arc or of a point of at least four colours, with every horn bound `±1` on the run a (Q) or (R2) arc. Nothing is stated
+  about one-sided infinite runs (the docstring's not-claimed clause). **Its hypotheses' satisfiability is the open question**: a
+  valid six-map of the plane (FS-114); the class at seven colours is inhabited by `sevenBrickMap`.
+- `ArcMap.bend_away_part` — FS112-N2-AWAY with N2-TAN in collar form, as FS131-BA3 read it clause by clause; unchanged here.
+- `ArcMap.exists_arcStep` — as FS131-M7 read it; unchanged here.
+These are the kernel's statements. What they are not: a statement that a terminal map with a stuck vertex exists, or does not.
