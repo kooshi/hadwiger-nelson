@@ -4552,3 +4552,30 @@ reason by the close.*
      No instance and no other hand-written name is doubled. Grade, T4's: the scan has seen the known pair and the generated class; its planted
      controls are not run yet. **Ruling**: no push to Kooshi (ruling 462 (d)'s condition is not met); the trust ledger's filed counts stand;
      the check's controls and the rest of the table are T4's remaining work.
+
+464. **FS131-BA3 done: the outward bend is whole in the kernel — `bend_away_part` on the standard three, no open leaf beneath it** (implementer;
+     harness ≈ 345k by the task notice; record `fs131-w5z`'s `plans/FS131-BA2-implementation.md` Stages 5–9; report
+     `data/fs131/reports/FS131-BA3.md` on that branch; commits `bdbea7f7` … `1685b22b` (the Lean source the build read), `d4f04ff3`; pushed,
+     tree clean). **Results**: `CollarFitOut.map_R1` and `map_R2` proved as stated (the outward bent map creates no constant-sided unit arc and
+     keeps the ones off the bent arc); with them `CollarFitOut.awayBend`, `bend_away_gap`, `bend_away_subdiv`, `bend_away_part` on the standard
+     three. No clause of R1 or R2 is false for the outward lens. The three ruled removals (457 (b)) made, exactly those by script. Seven
+     helpers. 361 lines, against "about 350" priced. **My receipt**: tip equals `origin/fs131-w5z`; the build log
+     `build/gate/build/20261006T081717Z-2541073.log` ends "Build completed successfully (5802 jobs)", 0 warnings other than `sorry`, 3
+     distinct `sorry` warnings, none in the bend's seven modules (`Procedure` 2 and `Terminal` 1, this line's old copies); `sorry` by the
+     handoff's grep: 0 in each of `BendGap`, `HornChart`, `R2Cap`, `BendStep`, `LensOut`, `CollarMapOut`, `BendAway`;
+     `data/fs131/ba3/BA3Axioms.out` parsed by script, 19 records, every one on exactly the standard three (`bend_away_part`,
+     `bend_away_subdiv`, `bend_away_gap`, `CollarFitOut.awayBend`, `map_R1`, `map_R2` among them); `bend_away_part`'s statement compared by
+     `cmp` with the planner's at `dd8c2c33` — identical. **So the outward collar bend went from "proved nowhere" (item 433) to the kernel in
+     one day: a statement by one job's reading, a plan of 36 children, three implementers.** **Items**: generalization, unruled — `hF` is not
+     read by `CollarFitOut.map_R1`, `map_R2`, nor (by reading) by the toward `CollarFit.sides_end`, `sides_eq`, `map_R1`, `map_R2`.
+     Corrections owed — three stale lines in `BendStep.lean` and `BendGap`'s header ("skeleton", "open"). A hazard met and avoided — a scratch
+     overlay of oleans made by symlinks is written through by `lean -o` into `.lake/build`. Drafts for the front page in its record (the away
+     bend's ledger row to [kernel]). Slips, the job's, disclosed.
+465. **Rulings on BA3's held items, and its slot.** (a) **The unread `hF` of the six R1/R2 and side lemmas, with `CollarFit.map_hornCount_le`'s,
+     goes in one list to the landing job's post-merge tidy** (ruling 457 (b)'s second half, widened): removed where every caller is in the
+     joined line. Alternative: leave them for the tidy stage after the landing. Why now: the statements are new, their callers few, and after
+     the landing each removal rebuilds `main`. Confidence: medium-high; the landing job may defer any whose callers surprise it. (b) **The
+     stale lines** join the same list. (c) **Every leaf of wave 5 is now proved on some branch**: the landing waits on FS131-RP1 (the remedy
+     pass, in `fs131-w5c`) and then one job — merge `origin/fs131-w5z`, the post-merge list, `main`, the gate. (d) **Slot → FS131-MA1**, the
+     example maps' implementer A, launched 2026-10-06 on `fs131-wm` (brief of item 461 (a)). In flight: 1 (RP1) + 1 (T4) + 1 (MA1) = 3.
+     Queue: wave 5's landing job at RP1's hand-back; implementer B; the second planning pass for `F₀`, `F₁`.
