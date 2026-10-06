@@ -6651,3 +6651,18 @@ reason by the close.*
      landing's read-back of heads should now check with `#check`. (d) **Filed**: the Lean fact, in `LEAN.md` §
      Searching — Lean. (e) **Credit**: it read the kernel's statement where the file's looked right, and brought a
      counterexample with the report.
+
+557. **FS131-L6A, by message before its gated commit: the join is whole — nothing left on `sorryAx` — and two questions,
+     answered** (source: L6A's message to "main", 2026-10-06; by its word, to be read at its hand-back): the three merges
+     and `main` are in on `fs131-w6j` with no conflict in a Lean file; the joined tree builds with 0 warnings and 0
+     `sorry`; **every theorem of the fourteen modules, and every name the five reports list as wired or resting on an
+     upstream leaf, prints the standard three or a subset**; the doubled-name check is OK; the ruled tidies are made. The
+     vacuity scan on the joined tree: `declarations=14299 refutations-skipped=199 sites=1269`, `vacuous=0 stale=0
+     declared=3 witnessed=38 generic=1226 unknown=2`; against `main`'s gated scan 0 rows lost and 96 added, each
+     `GENERIC` on `AeColouring` at a variable `k`. **Rulings.** (a) **It may update the two count lines in the header
+     of `scripts/vacuity-baseline.txt`, no entry added** — my word, as its brief required, and as the last landing
+     did. (b) **No new carrier is entered; `AeColouring.Fan` stays OUT**, its closed inhabitant `sq9Fan` named in the
+     scan's entry — its decision, kept. Alternative: IN, as `StationarySet` was by ruling 507 (d) (51 more `GENERIC`
+     sites and one `WITNESSED`, no `VACUOUS` control plantable). Why OUT: the procedure's law as wave 5 applied it;
+     the one exception already made is a question for the tooling lane (ruling 535 (a)), and `Fan` joins it as the
+     second case. Confidence: medium.
