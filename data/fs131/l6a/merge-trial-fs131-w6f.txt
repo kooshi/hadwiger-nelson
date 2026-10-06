@@ -1,0 +1,9 @@
+f501c7c0062626afb296497d0443e8945d8939b8
+ARCHITECTURE.md
+scripts/Axioms.lean
+
+Auto-merging ARCHITECTURE.md
+CONFLICT (content): Merge conflict in ARCHITECTURE.md
+Auto-merging Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+Auto-merging scripts/Axioms.lean
+CONFLICT (content): Merge conflict in scripts/Axioms.lean
