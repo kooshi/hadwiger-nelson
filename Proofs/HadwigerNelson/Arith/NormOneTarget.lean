@@ -27,9 +27,10 @@ namespace HadwigerNelson.StandingFive
 
 open Finset
 
-/-- **A non-trivial involution of a field of `Q²` elements is the `Q`-th power map.** Its fixed field `k₀` has `Q` elements
-(`[k : k₀] = 2`, Artin); for `x ∈ k` the polynomial `(T − x)(T − σ x)` has coefficients in `k₀`, which `y ↦ y ^ Q` fixes, so
-`x ^ Q ∈ {x, σ x}`, and `x ^ Q = x` only for `x ∈ k₀`, where `σ x = x`. -/
+/-- **A non-trivial involution of a field of `Q²` elements is the `Q`-th power map.** As proved (FS131-I10D), with no fixed
+field: `σ` is an algebra endomorphism over the prime field `𝔽_p`, hence a power `y ↦ y ^ p ^ j`, `j < n = [k : 𝔽_p]`, of the
+Frobenius (`FiniteField.bijective_frobeniusAlgHom_pow`); `σ ∘ σ = id` gives `n ∣ 2j` and `σ ≠ id` gives `j ≠ 0`, so `2j = n`
+and `Q = p ^ j`. -/
 theorem involution_eq_pow {k : Type*} [Field k] [Fintype k] (σ : k →+* k) (hσ : ∀ x, σ (σ x) = x)
     (hne : σ ≠ RingHom.id k) {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) (x : k) : σ x = x ^ Q := by
   -- Route: not the fixed field. `σ` is an algebra endomorphism over the prime field, so it is a power `j < n` of the

@@ -39,7 +39,8 @@ Exit 0 iff no MISSING-BINDER, NOT-FOUND, NO-RECORD and no unreviewed ABSENT inst
 pass: (1) a prop binder of the kernel's record dropped where the file's signature names it (MISSING-BINDER);
 (2) a hypothesis `variable (hplant : (1 : Nat) = 1)` planted in a scratch copy of a module, in scope of its theorems
 (ABSENT term, on every theorem of that scope — the file's reader sees a hypothesis the kernel lacks); (3) a head with
-no record (NO-RECORD). Partner: a variable the file `include`s reads INCLUDED (`SpectralInputs.si4`'s `h𝒜`, `hc`).
+no record (NO-RECORD). Partner: one section variable is read both ways — `Floor128`'s `(t : R)` is INCLUDED in the
+theorems whose statements mention it and ABSENT in those that do not — so neither verdict is a blanket one.
 """
 import os
 import re
@@ -364,7 +365,7 @@ def main(argv):
             with tempfile.NamedTemporaryFile('w', suffix='.lean', delete=False, encoding='utf-8') as f:
                 f.write(src.replace(anchor, anchor + '\nvariable (hplant : (1 : Nat) = 1)\n', 1))
             f2, _ = read(recs, reviewed, quiet=True, override={mod: f.name})
-            in_mod = [n_ for n_, r in recs.items() if r['module'] == mod]
+            in_mod = [n_ for n_, r in recs.items() if r['module'] == mod and not GENERATED.search(n_)]
             hit = [n_ for n_ in in_mod if any(x.startswith(f'ABSENT term {n_}:') and 'hplant' in x for x in f2)]
             fired = bool(in_mod) and len(hit) == len(in_mod)
             print(f'plant 2 (`variable (hplant : (1 : Nat) = 1)` in scope of {mod}): '
@@ -376,11 +377,13 @@ def main(argv):
         fired = any(x.startswith('NO-RECORD ') for x in f3)
         print(f'plant 3 (a head with no record): {"fired (NO-RECORD)" if fired else "DID NOT FIRE"}')
         ok = ok and fired
-        # partner: an `include`d variable reads INCLUDED
-        partner = [nt for name, _, _, notes in rows if name == 'HadwigerNelson.SpectralInputs.si4' for nt in notes]
-        pok = any(nt.startswith('INCLUDED') and 'h𝒜' in nt and '(include)' in nt for nt in partner) and \
-            any(nt.startswith('INCLUDED') and 'hc' in nt and '(include)' in nt for nt in partner)
-        print(f'partner (`si4`: the `include`d variables `h𝒜`, `hc` read INCLUDED): {"passed" if pok else "FAILED"}')
+        # partner: one section variable read both ways — INCLUDED where the statement mentions it, ABSENT where not
+        f128 = [nt for name, r, _, notes in rows if r['module'].endswith('.Floor128') for nt in notes]
+        n_in = sum(nt.startswith('INCLUDED (t : R)') for nt in f128)
+        n_ab = sum(nt.startswith('ABSENT term (t : R)') for nt in f128)
+        pok = n_in > 0 and n_ab > 0
+        print(f'partner (`Floor128`\'s section variable `(t : R)`: INCLUDED in {n_in} theorem(s), ABSENT in {n_ab}): '
+              f'{"passed" if pok else "FAILED"}')
         ok = ok and pok
         print('self-test: PASS' if ok else 'self-test: FAIL')
         return 0 if ok else 1

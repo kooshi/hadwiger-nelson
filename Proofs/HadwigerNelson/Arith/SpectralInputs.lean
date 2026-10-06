@@ -263,12 +263,14 @@ theorem rot_negOne_apply (χ : Dual F) (y : unitRing F) :
 /-- **J45-SP-if** (Lemma SP-if, §4.2): "If some finite positive `U`-invariant `ν` with `ν(E) = 0` is not a multiple of Haar,
 then some finite positive `U`-invariant `τ` has `τ(E) = 0` and `∫ Re χ(1) dτ < 0`." Over an interface with `MulStable` and
 `NegCircle`; Fourier uniqueness is Herglotz–Bochner's uniqueness clause. INHABITANT: over the arithmetic `E` the hypothesis is
-the open zero-entropy question; at `Interface.trivial` it is met by the point mass at the trivial character. **`hcirc :
-I.NegCircle` has no Lean model on file**: `Interface.trivial` meets `MulStable` (its `E` is empty) and, with that point mass
-for `ν`, the measure hypotheses, and no declaration proves `NegCircle` of it or of any interface — one is planned at `F = ℚ` by
-the parity character (`negCircle_trivial_bot`, `Arith/NegCircleModel`, on the wave's second pass and not on this line), and
-until it lands this theorem is an open gate item under the inhabitant rule (`LEAN.md` § The gate). `hBH` is the named
-classical hypothesis `BochnerHerglotz`, with no kernel model. -/
+the open zero-entropy question; at `Interface.trivial` it is met by the point mass at the trivial character. MODEL: given
+`hBH`, every other hypothesis holds at once at `F = ℚ` with `Interface.trivial` (`sp_if_hypotheses_trivial_bot`,
+`Arith/NegCircleModel`, whose spec example applies this theorem to it; its `hcirc` is `negCircle_trivial_bot`, the point mass
+at the parity character). **One named classical hypothesis is still assumed**: `hBH` is the Herglotz–Bochner theorem for
+the countable discrete group `unitRing ⊥` — a classical theorem named as a hypothesis from outside the backlog
+(`plans/FS131-kernel-plan.md` § 7.4), true, not in the kernel; it is a statement to prove, not a structure to inhabit, and
+no smaller group serves (`unitRing ⊥ ⊇ ℤ`). Until it is proved this theorem stays an open gate item under the inhabitant
+rule (`LEAN.md` § The gate): open by one classical theorem. -/
 theorem sp_if (I : Interface F) (hBH : BochnerHerglotz (unitRing F)) (hmul : I.MulStable)
     (hcirc : I.NegCircle) {ν m : Measure (Dual F)} (hfin : IsFiniteMeasure ν) (hrot : RotInv F ν) (hE : ν I.E = 0)
     (hm : IsHaarFourier m) (hnh : ∀ a : ENNReal, ν ≠ a • m) :
@@ -850,7 +852,11 @@ end
 
 /-- **J45-N2, first sentence**: "`σ_f(R̂ ∖ E_S) = 0` iff `y ↦ V_y f` is `τ′_S`-continuous" — for a first-countable group topology
 `t` on `R` satisfying Bochner's theorem and an action by measure-preserving maps of any measure space (`σ` carries `‖f‖²`: that
-`μ` is a probability measure is not read). -/
+`μ` is a probability measure is not read). MODEL (the planner's note, `plans/FS131-w10-kernel-plan.md` § 16.2; described,
+**not a Lean declaration**): the discrete topology (`bochnerOn_bot`), the trivial action `T y = id`, and `σ = ‖f‖² • δ₁`, the
+point mass at the trivial character — then both sides hold. At `τ′_S` the hypothesis `BochnerOn` is Bochner's theorem on
+`G′_S` with J45-N1 (b), not in the kernel. Until the model is a declaration this theorem is an open gate item under the
+inhabitant rule (`LEAN.md` § The gate). -/
 theorem spectral_carried_iff (t : TopologicalSpace R)
     (ht : @IsTopologicalAddGroup R t _) (hcount : (@nhds R t 0).IsCountablyGenerated) (hB : BochnerOn t)
     (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (hadd : ∀ x y, T (x + y) = T x ∘ T y)
@@ -961,7 +967,13 @@ theorem mul_mem_contChars_iff (t : TopologicalSpace R) {a : AddChar R Circle} (h
 characters are Haar-null when they are measurable, separate the points of `R` (dense) and are not all characters (proper).
 Route on the Fourier side, with no topology on the dual and no Steinhaus–Weil: for `H = contChars t` with `m(H) > 0`, the
 Fourier coefficients of `1_H·m` vanish off `0` (translation by `h ∈ H` multiplies the `r`-th one by `h(r)`, and `H` separates
-points), so `1_H·m = m(H)·m` by Herglotz–Bochner's uniqueness, `m(H) = 1`, and a second coset would have measure `1` too. -/
+points), so `1_H·m = m(H)·m` by Herglotz–Bochner's uniqueness, `m(H) = 1`, and a second coset would have measure `1` too.
+MODEL (the planner's note, `plans/FS131-w10-kernel-plan.md` § 16.2; described, **not a Lean declaration**): given `hBH`,
+`R = ℤ` with the profinite topology — the continuous characters are those of finite order, a countable (so measurable) proper
+subgroup separating the points of `ℤ`; `m` from `exists_isHaarFourier`. `hBH` is Herglotz's theorem, classical and not in the
+kernel: as for `sp_if`, a statement to prove and not a structure to inhabit. No finite `R` is a model (a separating group of
+characters of a finite group is the whole dual, against `hproper`). Until the model is a declaration this theorem is an open
+gate item under the inhabitant rule (`LEAN.md` § The gate). -/
 theorem contChars_haar_null (hBH : BochnerHerglotz R) (t : TopologicalSpace R) (hmeas : MeasurableSet (contChars t))
     (hsep : ∀ r : R, r ≠ 0 → ∃ χ ∈ contChars t, χ r ≠ 1) (hproper : contChars t ≠ Set.univ)
     {m : Measure (AddChar R Circle)} (hm : IsHaarFourier m) : m (contChars t) = 0 := by
@@ -1134,7 +1146,11 @@ end
 colouring `c` (properness of `c` is not read): if the conditional laws at adjacent vertices are orthogonal
 (`Σ_j E[p_j(x) p_j(y)] = 0`, SI-3's form of equality), then for every choice function `f` the colouring `f ∘ M` is
 `𝒜`-measurable, almost surely proper, and `c(x) ∈ M(x)` almost surely (SI-2). The equivariance clause is
-`plans/FS131-w10-kernel-plan.md` § 3's child `si4_equivariant`. -/
+`plans/FS131-w10-kernel-plan.md` § 3's child `si4_equivariant`. MODEL (the planner's note, `plans/FS131-w10-kernel-plan.md`
+§ 16.2; described, **not a Lean declaration**): a deterministic proper colouring — `μ` a point mass, `c ω = c₀` with
+`c₀ x ≠ c₀ y` across `adj`: each conditional law is a point mass and `hdisj` holds for every `𝒜`. A model with a non-trivial
+`𝒜` is J45-SI-C's noisy colouring with `𝒜 = σ(Φ)` (`GapSeven.supp_disjoint` is its `hdisj` on the finite plane), not built.
+Until one is a declaration this theorem is an open gate item under the inhabitant rule (`LEAN.md` § The gate). -/
 theorem si4 [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : Measure Ω) [IsProbabilityMeasure μ]
     (h𝒜 : 𝒜 ≤ m0)
     (c : Ω → V → Fin 4) (hc : ∀ x, Measurable fun ω => c ω x) (adj : V → V → Prop)
@@ -1189,7 +1205,9 @@ theorem condExp_comp_measurePreserving (𝒜 : MeasurableSpace Ω) [m0 : Measura
 invariant (`S⁻¹𝒜 = 𝒜`) and moves the colouring by a map `π` of the vertices (`c (S ω) x = c ω (π x)`; for the shift by `y`,
 `π x = x + y`), then almost surely the conditional supports move the same way, `M(S ω)(x) = M(ω)(π x)` for every `x` — so every
 selection `f ∘ M` is equivariant. With Mathlib's fixed version of the conditional expectation the identity is almost sure;
-the derivation chooses versions that make it sure. -/
+the derivation chooses versions that make it sure. MODEL: any additive action with `T 0 = id`, `𝒜` its factor σ-algebra —
+`comap_factorSigma_eq_of_action` supplies `hS𝒜`, and `si4_equivariant_factorSigma` is this theorem there
+(`Arith/FactorAction`). -/
 theorem si4_equivariant [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : Measure Ω)
     [IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) (c : Ω → V → Fin 4) (hc : ∀ x, Measurable fun ω => c ω x)
     {S : Ω → Ω} (hS : MeasurePreserving S μ μ) (hS𝒜 : 𝒜.comap S = 𝒜) (π : V → V)

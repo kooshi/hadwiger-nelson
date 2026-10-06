@@ -698,8 +698,9 @@ end Integers
 theorem numberField_standingField : NumberField standingField :=
   { to_finiteDimensional := Module.Finite.of_injective toStandingIF.toRatAlgHom.toLinearMap toStandingIF_injective }
 
-/-- `F` is a number field: the instance the Dedekind-domain lemmas below read, local to this file. -/
-local instance instNumberFieldStanding : NumberField standingField := numberField_standingField
+/-- `F` is a number field: the instance the Dedekind-domain lemmas below read. Global since wave 10's second landing, so that
+no module downstream declares its own: two anonymous instances of one proposition merge in silence (`LEAN.md` § The gate). -/
+instance instNumberFieldStanding : NumberField standingField := numberField_standingField
 
 local notation "𝓞L" => 𝓞 (fieldI standingField)
 

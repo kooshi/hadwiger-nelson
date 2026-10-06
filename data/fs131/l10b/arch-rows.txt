@@ -1,0 +1,3 @@
+rows 5; names looked up 34; arch rows: PASS
+plant (a cited name misspelt): fired (MISSING)
+plant (a row saying "skeleton"): fired (SKELETON)

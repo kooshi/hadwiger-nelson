@@ -1,0 +1,27 @@
+OK   n=1  Proofs/HadwigerNelson/Arith/MajorityVote.lean: (i) the statement: two hypotheses dropped, [Finite K] -> [Countable K]
+OK   n=1  Proofs/HadwigerNelson/Arith/MajorityVote.lean: (i) the proof: the three lines that only read the dropped hypotheses
+OK   n=1  Proofs/HadwigerNelson/Arith/MajorityVote.lean: (i) the proof: countability is now the hypothesis
+OK   n=1  Proofs/HadwigerNelson/Arith/MajorityVote.lean: (i) the caller: the spec example (its line, and the binder that only fed it)
+OK   n=1  Proofs/HadwigerNelson/Arith/MajorityVote.lean: (i) the theorem's docstring
+OK   n=1  Proofs/HadwigerNelson/Arith/MajorityVote.lean: (i) the module docstring: the statement is at the class the argument reads
+OK   n=1  Proofs/HadwigerNelson/Arith/StandingFive.lean: (ii) local instance -> instance, and the docstring word that said "local"
+OK   n=1  Proofs/HadwigerNelson/Arith/NormOneTarget.lean: (iii) involution_eq_pow: the proof the kernel holds (ruling 538 (b))
+OK   n=1  Proofs/HadwigerNelson/Arith/SpectralInputs.lean: (iii) sp_if: its model, and the one named classical hypothesis still assumed (ruling 547 (a))
+OK   n=1  Proofs/HadwigerNelson/Arith/SpectralInputs.lean: (iii) si4: the note of the planner's § 16.2
+OK   n=1  Proofs/HadwigerNelson/Arith/SpectralInputs.lean: (iii) si4_equivariant: the note of § 16.2
+OK   n=1  Proofs/HadwigerNelson/Arith/SpectralInputs.lean: (iii) spectral_carried_iff: the note of § 16.2
+OK   n=1  Proofs/HadwigerNelson/Arith/SpectralInputs.lean: (iii) contChars_haar_null: the note of § 16.2
+OK   n=1  Proofs/HadwigerNelson/Arith/FloorPlanes.lean: (iii) FloorPlanes, module docstring: Weil's bound is now imported
+OK   n=1  Proofs/HadwigerNelson/Arith/FloorPlanes.lean: (iii) FloorPlanes, module docstring: the source is held and read back
+OK   n=1  Proofs/HadwigerNelson/Arith/FloorPlanes.lean: (iii) KloostermanBound's docstring
+OK   n=1  Proofs/HadwigerNelson/Arith/Floor128.lean: (iii) Floor128, module docstring: the Bézout pair is an independent witness
+OK   n=1  Proofs/HadwigerNelson/Arith/Floor128.lean: (iii) bezout4's docstring
+OK   n=1  Proofs/HadwigerNelson/Arith/Floor128.lean: (iii) bezout128's docstring
+OK   n=1  ARCHITECTURE.md: (iii) ARCHITECTURE.md, Arith/NormOneTarget: proved
+OK   n=1  ARCHITECTURE.md: (iii) ARCHITECTURE.md, Arith/NormOneTarget: its two leaves are theorems
+OK   n=1  ARCHITECTURE.md: (iii) ARCHITECTURE.md, Arith/FloorPlanes: proved; the object; the import
+OK   n=1  ARCHITECTURE.md: (iii) ARCHITECTURE.md, Arith/ProductFactor: proved
+OK   n=1  ARCHITECTURE.md: (iii) ARCHITECTURE.md, Arith/MajorityVote: proved, at the class of ruling 542
+OK   n=1  ARCHITECTURE.md: (iii) ARCHITECTURE.md, Arith/NegCircleModel: proved
+edits=25 bad=0 files=7
+tidy: written

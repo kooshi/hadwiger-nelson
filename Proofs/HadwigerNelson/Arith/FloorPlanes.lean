@@ -11,12 +11,15 @@ the circle sums `Σ_{s₁² + s₂² = 1} ψ(b₁s₁ + b₂s₂)`, each **minus
 (`circle_sum_eq_kloosterman`, the completion of `[MMST1996]` (7)–(11); it is FS-20's open item R4, here a theorem), hence
 at least `−2√Q` by Weil's bound; the ratio bound then gives `χ ≥ 1 + (Q + 1)/(2√Q) > 6` from `Q = 98` on.
 
-**The one outside theorem, a named hypothesis in this pass** (ruled mid-job: no `axiom` until a held source's page is read
-back against it): `KloostermanBound F` — for every non-trivial additive character `ψ` of the finite field `F` and
+**The one outside theorem, a named hypothesis in this module** (its import is in `Arith/WeilKloosterman`, below):
+`KloostermanBound F` — for every non-trivial additive character `ψ` of the finite field `F` and
 `a, b ≠ 0`, `|Σ_{x ≠ 0} ψ(a x + b x⁻¹)| ≤ 2√|F|`. The floor reads it at the fields of `Q` elements, `Q ≡ 3 (mod 4)` a prime
-power — so at **prime powers** `p^f` with `p ≡ 3 (mod 4)`, `f` odd, not only at primes. `[Weil1948]` is the classical
-source (not held; its row states the bound at a prime); `[MMST1996]` Theorem 3 (p. 231, held and read) states the
-circle-sum bound directly but is **false as printed at `a = 0`** and is not what is assumed here.
+power — so at **prime powers** `p^f` with `p ≡ 3 (mod 4)`, `f` odd, not only at primes. `[Weil1948]` p. 207 is the classical
+source, held and read back against the Lean statement by wave 10's third planning pass: **the import is
+`StandingFive.kloosterman_bound` (`Arith/WeilKloosterman`), at characteristic not 2**, and
+`kloostermanBound_of_ringChar_ne_two` proves `KloostermanBound F` from it there; the theorems of this module keep the
+hypothesis form. `[MMST1996]` Theorem 3 (p. 231, held and read) states the circle-sum bound directly but is **false as
+printed at `a = 0`** and is not what is assumed here.
 
 **Inhabitants.** `KloostermanBound F` holds for every field of at most five elements by the triangle inequality
 (`kloostermanBound_of_card_le_five`), so it is satisfiable; at larger fields it is Weil's theorem. A field of `Q²` elements
@@ -29,9 +32,10 @@ namespace HadwigerNelson.StandingFive
 open Finset
 
 /-- **Weil's bound for Kloosterman sums over the finite field `F` — a named classical hypothesis.** For every non-trivial
-additive character `ψ` of `F` and `a, b ≠ 0`: `|Σ_{x ∈ Fˣ} ψ(a x + b x⁻¹)| ≤ 2√|F|`. (`[Weil1948]`; for a general finite
-field the textbook form is Lidl–Niederreiter, *Finite Fields*, Theorem 5.45 — neither held, so this is a `Prop`, never an
-`axiom`, until a page is read back against it.) -/
+additive character `ψ` of `F` and `a, b ≠ 0`: `|Σ_{x ∈ Fˣ} ψ(a x + b x⁻¹)| ≤ 2√|F|`. (`[Weil1948]` p. 207; for a general
+finite field the textbook form is Lidl–Niederreiter, *Finite Fields*, Theorem 5.45, not held. This `Prop` is the hypothesis
+form the floor's modules were proved over; the import is `StandingFive.kloosterman_bound` (`Arith/WeilKloosterman`), at
+characteristic not 2, and `kloostermanBound_of_ringChar_ne_two` proves this `Prop` from it.) -/
 def KloostermanBound (F : Type*) [Field F] [Fintype F] [DecidableEq F] : Prop :=
   ∀ ψ : AddChar F ℂ, ψ ≠ 1 → ∀ a b : F, a ≠ 0 → b ≠ 0 →
     ‖∑ x : Fˣ, ψ (a * (x : F) + b * ((x⁻¹ : Fˣ) : F))‖ ≤ 2 * Real.sqrt (Fintype.card F)

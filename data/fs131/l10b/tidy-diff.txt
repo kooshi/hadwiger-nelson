@@ -1,0 +1,148 @@
+diff --git a/Proofs/HadwigerNelson/Arith/Floor128.lean b/Proofs/HadwigerNelson/Arith/Floor128.lean
+index 22f33070..04fc4bc2 100644
+--- a/Proofs/HadwigerNelson/Arith/Floor128.lean
++++ b/Proofs/HadwigerNelson/Arith/Floor128.lean
+@@ -37 +37,3 @@ polynomial coded by `n`; in characteristic 2 it turns `^^^` into `+` and `clmul`
+-  **`bezout4` and `bezout128` are not read**: the exact period already says that `P` is primitive.
++  **`bezout4` and `bezout128` are not read by the bridge**: the exact period already says that `P` is primitive. They stay
++  as an independent witness of `P`'s irreducibility — with `clmul_P_qBig`, coprimality to `x⁴ + x` and to `x¹²⁸ + x` leaves
++  no factor of degree dividing 2 or 7 — which a reviewer can check without the 16,383-step orbit.
+@@ -93 +95,2 @@ theorem clmul_P_qBig : clmul 15 P qBig = 2 ^ 16384 ^^^ 2 := by decide +kernel
+-/-- `a4·P + b4·(x⁴ + x) = 1`: no root of `P` lies in `𝔽₄`. -/
++/-- `a4·P + b4·(x⁴ + x) = 1`: no root of `P` lies in `𝔽₄`. Not read by the bridge: an independent witness of `P`'s
++irreducibility (with `bezout128` and `clmul_P_qBig`, Rabin's test). -/
+@@ -96 +99,2 @@ theorem bezout4 : clmul 15 P a4 ^^^ clmul 14 b4 (2 ^ 4 ^^^ 2) = 1 := by decide +
+-/-- `a128·P + b128·(x¹²⁸ + x) = 1`: no root of `P` lies in `𝔽₁₂₈`. -/
++/-- `a128·P + b128·(x¹²⁸ + x) = 1`: no root of `P` lies in `𝔽₁₂₈`. Not read by the bridge: an independent witness of `P`'s
++irreducibility (with `bezout4` and `clmul_P_qBig`, Rabin's test). -/
+diff --git a/Proofs/HadwigerNelson/Arith/FloorPlanes.lean b/Proofs/HadwigerNelson/Arith/FloorPlanes.lean
+index 5f42045f..3706ebbc 100644
+--- a/Proofs/HadwigerNelson/Arith/FloorPlanes.lean
++++ b/Proofs/HadwigerNelson/Arith/FloorPlanes.lean
+@@ -14,2 +14,2 @@ at least `−2√Q` by Weil's bound; the ratio bound then gives `χ ≥ 1 + (Q +
+-**The one outside theorem, a named hypothesis in this pass** (ruled mid-job: no `axiom` until a held source's page is read
+-back against it): `KloostermanBound F` — for every non-trivial additive character `ψ` of the finite field `F` and
++**The one outside theorem, a named hypothesis in this module** (its import is in `Arith/WeilKloosterman`, below):
++`KloostermanBound F` — for every non-trivial additive character `ψ` of the finite field `F` and
+@@ -17,3 +17,6 @@ back against it): `KloostermanBound F` — for every non-trivial additive charac
+-power — so at **prime powers** `p^f` with `p ≡ 3 (mod 4)`, `f` odd, not only at primes. `[Weil1948]` is the classical
+-source (not held; its row states the bound at a prime); `[MMST1996]` Theorem 3 (p. 231, held and read) states the
+-circle-sum bound directly but is **false as printed at `a = 0`** and is not what is assumed here.
++power — so at **prime powers** `p^f` with `p ≡ 3 (mod 4)`, `f` odd, not only at primes. `[Weil1948]` p. 207 is the classical
++source, held and read back against the Lean statement by wave 10's third planning pass: **the import is
++`StandingFive.kloosterman_bound` (`Arith/WeilKloosterman`), at characteristic not 2**, and
++`kloostermanBound_of_ringChar_ne_two` proves `KloostermanBound F` from it there; the theorems of this module keep the
++hypothesis form. `[MMST1996]` Theorem 3 (p. 231, held and read) states the circle-sum bound directly but is **false as
++printed at `a = 0`** and is not what is assumed here.
+@@ -32,3 +35,4 @@ open Finset
+-additive character `ψ` of `F` and `a, b ≠ 0`: `|Σ_{x ∈ Fˣ} ψ(a x + b x⁻¹)| ≤ 2√|F|`. (`[Weil1948]`; for a general finite
+-field the textbook form is Lidl–Niederreiter, *Finite Fields*, Theorem 5.45 — neither held, so this is a `Prop`, never an
+-`axiom`, until a page is read back against it.) -/
++additive character `ψ` of `F` and `a, b ≠ 0`: `|Σ_{x ∈ Fˣ} ψ(a x + b x⁻¹)| ≤ 2√|F|`. (`[Weil1948]` p. 207; for a general
++finite field the textbook form is Lidl–Niederreiter, *Finite Fields*, Theorem 5.45, not held. This `Prop` is the hypothesis
++form the floor's modules were proved over; the import is `StandingFive.kloosterman_bound` (`Arith/WeilKloosterman`), at
++characteristic not 2, and `kloostermanBound_of_ringChar_ne_two` proves this `Prop` from it.) -/
+diff --git a/Proofs/HadwigerNelson/Arith/MajorityVote.lean b/Proofs/HadwigerNelson/Arith/MajorityVote.lean
+index 6f8677c2..306d8fc6 100644
+--- a/Proofs/HadwigerNelson/Arith/MajorityVote.lean
++++ b/Proofs/HadwigerNelson/Arith/MajorityVote.lean
+@@ -26,2 +26,3 @@ measurable map for the σ-algebra the `c x` generate (`measurableSet_lt_two_mul_
+-`exists_measurable_selector`). **The argument reads less than the statement carries**: not the measurability of `G`, not
+-the measurability of the `c x`, and of `[Finite K]` only that `K` is countable.
++`exists_measurable_selector`). **The statement is at the class the argument reads** (inventory ruling 542, made at wave
++10's second landing, FS131-L10B): the proof as first written read neither the measurability of `G` nor that of the `c x`,
++and of `[Finite K]` only that `K` is countable, so the two hypotheses are gone and the class is `[Countable K]`.
+@@ -173,3 +174,4 @@ theorem exists_measurable_selector {Ω K : Type*} {m : MeasurableSpace Ω} [Coun
+-/-- **FS131-E8-SI5C — majority decoding.** A finite-valued `G` that every `c x` equals unless an event `E x` of
+-probability at most `p < 1/2` occurs, the `E x` pairwise independent over an infinite index set, is almost surely equal to
+-a function measurable for the σ-algebra the `c x` generate. -/
++/-- **FS131-E8-SI5C — majority decoding.** A `G` with values in a countable type that every `c x` equals unless an event
++`E x` of probability at most `p < 1/2` occurs, the `E x` pairwise independent over an infinite index set, is almost surely
++equal to a function measurable for the σ-algebra the `c x` generate. Neither `G` nor the `c x` is assumed measurable (the
++entry's finite-valued measurable variables are an instance). -/
+@@ -177,2 +179,2 @@ theorem ae_eq_measurable_of_majority {Ω I K : Type*} [MeasurableSpace Ω] {μ :
+-    [Infinite I] [Finite K] [MeasurableSpace K] [MeasurableSingletonClass K] (G : Ω → K) (hG : Measurable G)
+-    (c : I → Ω → K) (hc : ∀ x, Measurable (c x)) (E : I → Set Ω) (hE : ∀ x, MeasurableSet (E x)) {p : ℝ}
++    [Infinite I] [Countable K] [MeasurableSpace K] [MeasurableSingletonClass K] (G : Ω → K)
++    (c : I → Ω → K) (E : I → Set Ω) (hE : ∀ x, MeasurableSet (E x)) {p : ℝ}
+@@ -184,3 +185,0 @@ theorem ae_eq_measurable_of_majority {Ω I K : Type*} [MeasurableSpace Ω] {μ :
+-  -- the measurability of `G` and of the `c x` is not read by this argument, and of `[Finite K]` only countability is
+-  have _hG := hG
+-  have _hc := hc
+@@ -237 +235,0 @@ theorem ae_eq_measurable_of_majority {Ω I K : Type*} [MeasurableSpace Ω] {μ :
+-  haveI : Countable K := Finite.to_countable
+@@ -247 +245 @@ theorem ae_eq_measurable_of_majority {Ω I K : Type*} [MeasurableSpace Ω] {μ :
+-example {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsProbabilityMeasure μ] (G : Ω → Bool) (hG : Measurable G) :
++example {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsProbabilityMeasure μ] (G : Ω → Bool) :
+@@ -249 +247 @@ example {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsProbabilityMeasur
+-  ae_eq_measurable_of_majority G hG (fun _ : ℕ => G) (fun _ => hG) (fun _ => ∅) (fun _ => MeasurableSet.empty)
++  ae_eq_measurable_of_majority G (fun _ : ℕ => G) (fun _ => ∅) (fun _ => MeasurableSet.empty)
+diff --git a/Proofs/HadwigerNelson/Arith/NormOneTarget.lean b/Proofs/HadwigerNelson/Arith/NormOneTarget.lean
+index 4b41e0a1..f03a1ae4 100644
+--- a/Proofs/HadwigerNelson/Arith/NormOneTarget.lean
++++ b/Proofs/HadwigerNelson/Arith/NormOneTarget.lean
+@@ -30,3 +30,4 @@ open Finset
+-/-- **A non-trivial involution of a field of `Q²` elements is the `Q`-th power map.** Its fixed field `k₀` has `Q` elements
+-(`[k : k₀] = 2`, Artin); for `x ∈ k` the polynomial `(T − x)(T − σ x)` has coefficients in `k₀`, which `y ↦ y ^ Q` fixes, so
+-`x ^ Q ∈ {x, σ x}`, and `x ^ Q = x` only for `x ∈ k₀`, where `σ x = x`. -/
++/-- **A non-trivial involution of a field of `Q²` elements is the `Q`-th power map.** As proved (FS131-I10D), with no fixed
++field: `σ` is an algebra endomorphism over the prime field `𝔽_p`, hence a power `y ↦ y ^ p ^ j`, `j < n = [k : 𝔽_p]`, of the
++Frobenius (`FiniteField.bijective_frobeniusAlgHom_pow`); `σ ∘ σ = id` gives `n ∣ 2j` and `σ ≠ id` gives `j ≠ 0`, so `2j = n`
++and `Q = p ^ j`. -/
+diff --git a/Proofs/HadwigerNelson/Arith/SpectralInputs.lean b/Proofs/HadwigerNelson/Arith/SpectralInputs.lean
+index d280a0ef..f3c1d759 100644
+--- a/Proofs/HadwigerNelson/Arith/SpectralInputs.lean
++++ b/Proofs/HadwigerNelson/Arith/SpectralInputs.lean
+@@ -266,6 +266,8 @@ then some finite positive `U`-invariant `τ` has `τ(E) = 0` and `∫ Re χ(1) d
+-the open zero-entropy question; at `Interface.trivial` it is met by the point mass at the trivial character. **`hcirc :
+-I.NegCircle` has no Lean model on file**: `Interface.trivial` meets `MulStable` (its `E` is empty) and, with that point mass
+-for `ν`, the measure hypotheses, and no declaration proves `NegCircle` of it or of any interface — one is planned at `F = ℚ` by
+-the parity character (`negCircle_trivial_bot`, `Arith/NegCircleModel`, on the wave's second pass and not on this line), and
+-until it lands this theorem is an open gate item under the inhabitant rule (`LEAN.md` § The gate). `hBH` is the named
+-classical hypothesis `BochnerHerglotz`, with no kernel model. -/
++the open zero-entropy question; at `Interface.trivial` it is met by the point mass at the trivial character. MODEL: given
++`hBH`, every other hypothesis holds at once at `F = ℚ` with `Interface.trivial` (`sp_if_hypotheses_trivial_bot`,
++`Arith/NegCircleModel`, whose spec example applies this theorem to it; its `hcirc` is `negCircle_trivial_bot`, the point mass
++at the parity character). **One named classical hypothesis is still assumed**: `hBH` is the Herglotz–Bochner theorem for
++the countable discrete group `unitRing ⊥` — a classical theorem named as a hypothesis from outside the backlog
++(`plans/FS131-kernel-plan.md` § 7.4), true, not in the kernel; it is a statement to prove, not a structure to inhabit, and
++no smaller group serves (`unitRing ⊥ ⊇ ℤ`). Until it is proved this theorem stays an open gate item under the inhabitant
++rule (`LEAN.md` § The gate): open by one classical theorem. -/
+@@ -853 +855,5 @@ end
+-`μ` is a probability measure is not read). -/
++`μ` is a probability measure is not read). MODEL (the planner's note, `plans/FS131-w10-kernel-plan.md` § 16.2; described,
++**not a Lean declaration**): the discrete topology (`bochnerOn_bot`), the trivial action `T y = id`, and `σ = ‖f‖² • δ₁`, the
++point mass at the trivial character — then both sides hold. At `τ′_S` the hypothesis `BochnerOn` is Bochner's theorem on
++`G′_S` with J45-N1 (b), not in the kernel. Until the model is a declaration this theorem is an open gate item under the
++inhabitant rule (`LEAN.md` § The gate). -/
+@@ -964 +970,7 @@ Fourier coefficients of `1_H·m` vanish off `0` (translation by `h ∈ H` multip
+-points), so `1_H·m = m(H)·m` by Herglotz–Bochner's uniqueness, `m(H) = 1`, and a second coset would have measure `1` too. -/
++points), so `1_H·m = m(H)·m` by Herglotz–Bochner's uniqueness, `m(H) = 1`, and a second coset would have measure `1` too.
++MODEL (the planner's note, `plans/FS131-w10-kernel-plan.md` § 16.2; described, **not a Lean declaration**): given `hBH`,
++`R = ℤ` with the profinite topology — the continuous characters are those of finite order, a countable (so measurable) proper
++subgroup separating the points of `ℤ`; `m` from `exists_isHaarFourier`. `hBH` is Herglotz's theorem, classical and not in the
++kernel: as for `sp_if`, a statement to prove and not a structure to inhabit. No finite `R` is a model (a separating group of
++characters of a finite group is the whole dual, against `hproper`). Until the model is a declaration this theorem is an open
++gate item under the inhabitant rule (`LEAN.md` § The gate). -/
+@@ -1137 +1149,5 @@ colouring `c` (properness of `c` is not read): if the conditional laws at adjace
+-`plans/FS131-w10-kernel-plan.md` § 3's child `si4_equivariant`. -/
++`plans/FS131-w10-kernel-plan.md` § 3's child `si4_equivariant`. MODEL (the planner's note, `plans/FS131-w10-kernel-plan.md`
++§ 16.2; described, **not a Lean declaration**): a deterministic proper colouring — `μ` a point mass, `c ω = c₀` with
++`c₀ x ≠ c₀ y` across `adj`: each conditional law is a point mass and `hdisj` holds for every `𝒜`. A model with a non-trivial
++`𝒜` is J45-SI-C's noisy colouring with `𝒜 = σ(Φ)` (`GapSeven.supp_disjoint` is its `hdisj` on the finite plane), not built.
++Until one is a declaration this theorem is an open gate item under the inhabitant rule (`LEAN.md` § The gate). -/
+@@ -1192 +1208,3 @@ selection `f ∘ M` is equivariant. With Mathlib's fixed version of the conditio
+-the derivation chooses versions that make it sure. -/
++the derivation chooses versions that make it sure. MODEL: any additive action with `T 0 = id`, `𝒜` its factor σ-algebra —
++`comap_factorSigma_eq_of_action` supplies `hS𝒜`, and `si4_equivariant_factorSigma` is this theorem there
++(`Arith/FactorAction`). -/
+diff --git a/Proofs/HadwigerNelson/Arith/StandingFive.lean b/Proofs/HadwigerNelson/Arith/StandingFive.lean
+index 8fa13540..ff640f7d 100644
+--- a/Proofs/HadwigerNelson/Arith/StandingFive.lean
++++ b/Proofs/HadwigerNelson/Arith/StandingFive.lean
+@@ -701,2 +701,3 @@ theorem numberField_standingField : NumberField standingField :=
+-/-- `F` is a number field: the instance the Dedekind-domain lemmas below read, local to this file. -/
+-local instance instNumberFieldStanding : NumberField standingField := numberField_standingField
++/-- `F` is a number field: the instance the Dedekind-domain lemmas below read. Global since wave 10's second landing, so that
++no module downstream declares its own: two anonymous instances of one proposition merge in silence (`LEAN.md` § The gate). -/
++instance instNumberFieldStanding : NumberField standingField := numberField_standingField

@@ -34,7 +34,9 @@ polynomial coded by `n`; in characteristic 2 it turns `^^^` into `+` and `clmul`
   code, once each.
 * *The basis* (`ev_ne_zero`, `ev_inj`, `exists_code`): a non-zero code below `2¹⁴` is a state, whose value at a root `g`
   is a power `gʲ ≠ 0`; so the codes below `2¹⁴` are the field's elements, and `g` generates its multiplicative group.
-  **`bezout4` and `bezout128` are not read**: the exact period already says that `P` is primitive.
+  **`bezout4` and `bezout128` are not read by the bridge**: the exact period already says that `P` is primitive. They stay
+  as an independent witness of `P`'s irreducibility — with `clmul_P_qBig`, coprimality to `x⁴ + x` and to `x¹²⁸ + x` leaves
+  no factor of degree dividing 2 or 7 — which a reviewer can check without the 16,383-step orbit.
 * *The sum* (`pass_class`, `class_le`, `exists_addChar`): the coordinate-0 character `ψ₀` reads the low bit of the
   register's state at `gⁿ`; over `{u : u¹²⁹ = 1} = {g^(127 j)}` the shifted sum is `129 − 2·c_r`, and `c_r ≤ 74` is the
   packed counter `r` of `counts`. Every non-trivial character is a shift of `ψ₀` (`StandingFive.exists_mulShift_eq`).
@@ -90,10 +92,12 @@ def countsOk (bound : Nat) : Bool :=
 /-- `P · qBig = x^(2¹⁴) + x`: `P` divides `x^(2¹⁴) − x`, so it splits in every field of `2¹⁴` elements. -/
 theorem clmul_P_qBig : clmul 15 P qBig = 2 ^ 16384 ^^^ 2 := by decide +kernel
 
-/-- `a4·P + b4·(x⁴ + x) = 1`: no root of `P` lies in `𝔽₄`. -/
+/-- `a4·P + b4·(x⁴ + x) = 1`: no root of `P` lies in `𝔽₄`. Not read by the bridge: an independent witness of `P`'s
+irreducibility (with `bezout128` and `clmul_P_qBig`, Rabin's test). -/
 theorem bezout4 : clmul 15 P a4 ^^^ clmul 14 b4 (2 ^ 4 ^^^ 2) = 1 := by decide +kernel
 
-/-- `a128·P + b128·(x¹²⁸ + x) = 1`: no root of `P` lies in `𝔽₁₂₈`. -/
+/-- `a128·P + b128·(x¹²⁸ + x) = 1`: no root of `P` lies in `𝔽₁₂₈`. Not read by the bridge: an independent witness of `P`'s
+irreducibility (with `bezout4` and `clmul_P_qBig`, Rabin's test). -/
 theorem bezout128 : clmul 15 P a128 ^^^ clmul 14 b128 (2 ^ 128 ^^^ 2) = 1 := by decide +kernel
 
 /-- `g^(16383/r) ≠ 1` for `r = 3, 43, 127`, in coordinates: `g` generates the multiplicative group. -/

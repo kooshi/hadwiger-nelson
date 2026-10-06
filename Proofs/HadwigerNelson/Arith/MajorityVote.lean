@@ -23,8 +23,9 @@ sequence in `I`, the event "at least half of the first `n` errors occur" has pro
 (`lt_two_mul_card_filter_of_bad`), and a strict majority is unique (`eq_of_lt_two_mul_card_filter`); along a subsequence
 with summable probabilities `G` is almost surely the eventual strict majority, and "the eventual strict majority" is a
 measurable map for the σ-algebra the `c x` generate (`measurableSet_lt_two_mul_card_filter`,
-`exists_measurable_selector`). **The argument reads less than the statement carries**: not the measurability of `G`, not
-the measurability of the `c x`, and of `[Finite K]` only that `K` is countable.
+`exists_measurable_selector`). **The statement is at the class the argument reads** (inventory ruling 542, made at wave
+10's second landing, FS131-L10B): the proof as first written read neither the measurability of `G` nor that of the `c x`,
+and of `[Finite K]` only that `K` is countable, so the two hypotheses are gone and the class is `[Countable K]`.
 
 **Inhabitants.** The degenerate model (`E x = ∅`, `c x = G`) satisfies every hypothesis and makes the conclusion trivial
 (the spec example); the entry's model — `I = ℕ`, `G` uniform on two values, `ε` i.i.d. of probability `1/3` — exercises the
@@ -170,20 +171,18 @@ theorem exists_measurable_selector {Ω K : Type*} {m : MeasurableSpace Ω} [Coun
 
 /-! ## The lemma -/
 
-/-- **FS131-E8-SI5C — majority decoding.** A finite-valued `G` that every `c x` equals unless an event `E x` of
-probability at most `p < 1/2` occurs, the `E x` pairwise independent over an infinite index set, is almost surely equal to
-a function measurable for the σ-algebra the `c x` generate. -/
+/-- **FS131-E8-SI5C — majority decoding.** A `G` with values in a countable type that every `c x` equals unless an event
+`E x` of probability at most `p < 1/2` occurs, the `E x` pairwise independent over an infinite index set, is almost surely
+equal to a function measurable for the σ-algebra the `c x` generate. Neither `G` nor the `c x` is assumed measurable (the
+entry's finite-valued measurable variables are an instance). -/
 theorem ae_eq_measurable_of_majority {Ω I K : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsProbabilityMeasure μ]
-    [Infinite I] [Finite K] [MeasurableSpace K] [MeasurableSingletonClass K] (G : Ω → K) (hG : Measurable G)
-    (c : I → Ω → K) (hc : ∀ x, Measurable (c x)) (E : I → Set Ω) (hE : ∀ x, MeasurableSet (E x)) {p : ℝ}
+    [Infinite I] [Countable K] [MeasurableSpace K] [MeasurableSingletonClass K] (G : Ω → K)
+    (c : I → Ω → K) (E : I → Set Ω) (hE : ∀ x, MeasurableSet (E x)) {p : ℝ}
     (hp : p < 1 / 2) (hEp : ∀ x, μ.real (E x) ≤ p)
     (hindep : ∀ x y, x ≠ y → μ (E x ∩ E y) = μ (E x) * μ (E y))
     (hGc : ∀ x, ∀ᵐ ω ∂μ, c x ω ≠ G ω → ω ∈ E x) :
     ∃ g : Ω → K, Measurable[⨆ x, MeasurableSpace.comap (c x) inferInstance] g ∧ G =ᵐ[μ] g := by
   classical
-  -- the measurability of `G` and of the `c x` is not read by this argument, and of `[Finite K]` only countability is
-  have _hG := hG
-  have _hc := hc
   let x : ℕ ↪ I := Infinite.natEmbedding I
   -- the bad events: at least half of the first `n` errors occur
   let Bad : ℕ → Set Ω := fun n =>
@@ -234,7 +233,6 @@ theorem ae_eq_measurable_of_majority {Ω I K : Type*} [MeasurableSpace Ω] {μ :
     have h3 : (2 * ((Finset.range (nn j)).filter fun i => ω ∈ E (x i)).card : ℝ) < (nn j : ℝ) := by linarith
     exact_mod_cast h3
   obtain ⟨ω₀⟩ := nonempty_of_isProbabilityMeasure μ
-  haveI : Countable K := Finite.to_countable
   obtain ⟨g, hgm, hg⟩ := exists_measurable_selector (m := ⨆ y, MeasurableSpace.comap (c y) inferInstance) Bk hBk hdisj
     (G ω₀)
   refine ⟨g, hgm, ?_⟩
@@ -244,9 +242,9 @@ theorem ae_eq_measurable_of_majority {Ω I K : Type*} [MeasurableSpace Ω] {μ :
 /-! ## Spec -/
 
 -- the degenerate model: no error event, every `c x` is `G`; all hypotheses hold at `p = 0`.
-example {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsProbabilityMeasure μ] (G : Ω → Bool) (hG : Measurable G) :
+example {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsProbabilityMeasure μ] (G : Ω → Bool) :
     ∃ g : Ω → Bool, Measurable[⨆ _x : ℕ, MeasurableSpace.comap G inferInstance] g ∧ G =ᵐ[μ] g :=
-  ae_eq_measurable_of_majority G hG (fun _ : ℕ => G) (fun _ => hG) (fun _ => ∅) (fun _ => MeasurableSet.empty)
+  ae_eq_measurable_of_majority G (fun _ : ℕ => G) (fun _ => ∅) (fun _ => MeasurableSet.empty)
     (p := 0) (by norm_num) (fun _ => by simp) (fun _ _ _ => by simp) (fun _ => by simp)
 
 end HadwigerNelson.MajorityVote
