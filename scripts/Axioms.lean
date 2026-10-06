@@ -6298,6 +6298,34 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 
 #print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limit_dom
 
+/-! ## FS131-K6 — wave 6 (saturated colourings): the foundation, and the leaves the planner proved (the skeleton's `sorry` leaves are listed by wave 6's implementer as it proves them) -/
+
+#print axioms HadwigerNelson.Plane.AeColouring.isOpen_openPart
+#print axioms HadwigerNelson.Plane.AeColouring.openPart_subset_densitySet
+#print axioms HadwigerNelson.Plane.AeColouring.TwoColourAt.symm
+#print axioms HadwigerNelson.Plane.AeColouring.interfaceSet_subset_essBdry
+#print axioms HadwigerNelson.Plane.AeColouring.disjoint_interfaceSet_singularSet
+#print axioms HadwigerNelson.Plane.AeColouring.exists_twoColourAt_of_mem_interfaceSet
+#print axioms HadwigerNelson.Plane.AeColouring.not_isCuspAt_of_mem_interfaceSet
+#print axioms HadwigerNelson.Plane.AeColouring.IsCuspAt.mem_singularSet
+#print axioms HadwigerNelson.Plane.AeColouring.hasTwoDiscsAt_comm
+#print axioms HadwigerNelson.Plane.AeColouring.isTangentAt_comm
+#print axioms HadwigerNelson.Plane.sqColA_ne_sqColB
+#print axioms HadwigerNelson.Plane.sq9Col_near_edge
+#print axioms HadwigerNelson.Plane.sq9_twoColourAt
+#print axioms HadwigerNelson.Plane.sq9_hasTwoDiscsAt
+#print axioms HadwigerNelson.Plane.IsMUA.exists_ball_ae_subset
+#print axioms HadwigerNelson.Plane.saturated_of_forall_isMUA
+#print axioms HadwigerNelson.Plane.AeColouring.saturated_of_idomatic
+#print axioms HadwigerNelson.Plane.half_dichotomy
+#print axioms HadwigerNelson.Plane.dist_le_one_of_mem_closure
+#print axioms HadwigerNelson.Plane.erosion_diam
+#print axioms HadwigerNelson.Plane.erosion_diam_cot
+#print axioms HadwigerNelson.Plane.essSupport_eq_closure_of_isOpen
+#print axioms HadwigerNelson.Plane.bound_iff
+#print axioms HadwigerNelson.Plane.gmap_i
+#print axioms HadwigerNelson.Plane.gmap_ii
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
