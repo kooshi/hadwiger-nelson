@@ -1,0 +1,52 @@
+resolved 1 hunk(s) in ARCHITECTURE.md: theirs' lines, then ours', no blank line between
+resolved 1 hunk(s) in Proofs.lean: theirs' lines, then ours', no blank line between
+resolved 1 hunk(s) in scripts/Axioms.lean (theirs first)
+--- the three paths both sides changed, against ours (HEAD), theirs origin/main (ac2e84ea), base a917d57f
+faithful: ARCHITECTURE.md: 725 non-blank lines; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): ARCHITECTURE.md: 724 non-blank lines; faults 1
+  LOST '| `Arith/CharacterColouring` | **FS-131 wave 10 (FS131-K10).** Characters `M →+ ℝ/ℤ`: `bandSet`, `to' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): ARCHITECTURE.md: 726 non-blank lines; faults 1
+  EXTRA '| `Arith/CharacterColouring` | **FS-131 wave 10 (FS131-K10).** Characters `M →+ ℝ/ℤ`: `bandSet`, `to' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): ARCHITECTURE.md: 726 non-blank lines; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+self-test: PASS
+exit=0
+faithful: Proofs.lean: 264 non-blank lines; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): Proofs.lean: 263 non-blank lines; faults 1
+  LOST 'import Proofs.HadwigerNelson.Arith.CharacterColouring' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): Proofs.lean: 265 non-blank lines; faults 1
+  EXTRA 'import Proofs.HadwigerNelson.Arith.CharacterColouring' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): Proofs.lean: 265 non-blank lines; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+self-test: PASS
+exit=0
+faithful: scripts/Axioms.lean: 6871 non-blank lines; #print axioms lines 6122 = ours 5534 + theirs 5809 - base 5221; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): scripts/Axioms.lean: 6870 non-blank lines; #print axioms lines 6122 = ours 5534 + theirs 5809 - base 5221; faults 1
+  LOST '/-! ## FS-131, the example maps (jobs FS131-KM1, MA1, MB1, MB2; landed by FS131-MC1): `Plane/Models/' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): scripts/Axioms.lean: 6872 non-blank lines; #print axioms lines 6122 = ours 5534 + theirs 5809 - base 5221; faults 1
+  EXTRA '/-! ## FS-131, the example maps (jobs FS131-KM1, MA1, MB1, MB2; landed by FS131-MC1): `Plane/Models/' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): scripts/Axioms.lean: 6872 non-blank lines; #print axioms lines 6122 = ours 5534 + theirs 5809 - base 5221; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+plant (a record of theirs doubled): scripts/Axioms.lean: 6872 non-blank lines; #print axioms lines 6123 = ours 5534 + theirs 5809 - base 5221; faults 3
+  COUNT #print axioms: have 6123, expected ours 5534 + theirs 5809 - base 5221
+  EXTRA '#print axioms HadwigerNelson.Plane.ArcMap.relabel_region' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  TWICE HadwigerNelson.Plane.ArcMap.relabel_region (2)
+  -> fired (TWICE)
+plant (a record of theirs dropped): scripts/Axioms.lean: 6870 non-blank lines; #print axioms lines 6121 = ours 5534 + theirs 5809 - base 5221; faults 2
+  COUNT #print axioms: have 6121, expected ours 5534 + theirs 5809 - base 5221
+  LOST '#print axioms HadwigerNelson.Plane.ArcMap.relabel_region' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (COUNT)
+self-test: PASS
+exit=0
