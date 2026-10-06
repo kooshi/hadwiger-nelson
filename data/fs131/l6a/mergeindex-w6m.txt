@@ -1,0 +1,9 @@
+### control: the path that merged by itself (Proofs.lean) not named
+merge of origin/fs131-w6m (2e55a2d6) into d55f872d, base 3928644b: staged 28 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 25 taken whole from theirs
+  BOTH sides changed, merged unread: Proofs.lean
+merge-index: FAIL (1 fault(s))
+exit=1
+### faithful: the three paths both sides changed named, each read by the three-way check (keepboth-w6m.txt)
+merge of origin/fs131-w6m (2e55a2d6) into d55f872d, base 3928644b: staged 28 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 25 taken whole from theirs
+merge-index: PASS
+exit=0

@@ -1,0 +1,9 @@
+83c239e821b3ad348ce87736b692c2ee90645cd7
+ARCHITECTURE.md
+scripts/Axioms.lean
+
+Auto-merging ARCHITECTURE.md
+CONFLICT (content): Merge conflict in ARCHITECTURE.md
+Auto-merging Proofs.lean
+Auto-merging scripts/Axioms.lean
+CONFLICT (content): Merge conflict in scripts/Axioms.lean
