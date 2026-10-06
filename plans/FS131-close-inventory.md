@@ -5684,3 +5684,29 @@ reason by the close.*
      leaves read nothing of the map. Confidence: high. **A wording I corrected before the gate** (mine, in the draft):
      `emptyNS` reads "at least four colours" and no simplicity — the brief now says what the statement says and cites row
      148 and the entry, not a paraphrase of the row. **Still not written**: K10c, K7b, K8b, MD1, MD2.
+
+528. **Two more briefs written ahead of their slots: FS131-K7b and FS131-K8b, the second planning passes of waves 7 and 8**
+     (mine; 2026-10-06; generator `data/fs131/briefs/scripts/mk-k78b.py 7|8`; `data/fs131/briefs/FS131-K7b-wave7-second.md`,
+     `FS131-K8b-wave8-second.md`; each gate exit 0, 33 quotations). **K7b**, on `fs131-w7` at `b5ef0e39`, new modules only
+     under `Plane/FourColour/`: the four flagged places first (N3-FACE, N3-ODD, N4-LENS, N7-QOPP), each from its argument;
+     the four-colour foundation (the tactic edge, the degree-4 vertex, the lens, the Reuleaux bowtie, the pinwheel); the
+     thirteen rows, FS114-N2-ENDS's second sentence and N3-PAY; FS114-Y2-BOWTIE's kernel route priced. **K8b**, on `fs131-w8`
+     at `f1c13612`, new modules only under `Plane/RingCalculus/`: the first pass's questions first; the three undefined words;
+     the nine semi-hub rows, SIXRING, RING-TWIST-C; the plans for `outerAdj` and `doubleTip`; FS114-N7-QOPP as a hypothesis
+     under wave 8's own name. **Rulings.** (a) **Both planners state FS114-N7-QOPP's two forms to meet at the join, through
+     me**: K7b sends its statement of the row when fixed, K8b its definition of the hypothesis, and I relay each to the
+     other. Alternative: K8b waits for K7b. Why not: ruling 498 — a hypothesis discharged at the join costs a few lines, and
+     the relay keeps the two from drifting. Confidence: high. (b) **A shared module of the second passes travels by
+     ancestry, as before**: K7b commits its foundation alone after a build and sends the hash; a name K7b wants from wave
+     8's `Plane/RingCalculus/Basic` is a merge of `26b08395` that I ask of it by message, never a re-declaration.
+     Alternative: I merge `26b08395` into `fs131-w7` now. Why not: the two branches each added lines to `Proofs.lean`,
+     `ARCHITECTURE.md` and `scripts/Axioms.lean` after `611ffa39`, so it is no fast-forward, and a merge with registry
+     conflicts is a planner's build, not a coordinator's edit. Confidence: medium-high. (c) **K8b puts SIXRING and
+     RING-TWIST-C in a module of its own**, not in `Star` as the first pass assigned them. Why: FS131-I8A proves `Star`'s
+     two leaves on a branch of its own, and two branches do not edit one file where a new module serves. The one exception
+     in K8b's brief: the statements of `outerAdj` and `doubleTip` in `Empty`, the two leaves I8A leaves alone, which K8b
+     may correct after telling me. Confidence: high. **A lesson carried into both briefs** (item 526): a mid-job report
+     says whether it is a statement that lacks a hypothesis or a route that reads more than the statement needs.
+     **Corrected before the gate, mine**: three sentences of the drafts claimed more than their sources (that the top
+     three stubs read wave 7's rows; that both first passes lost a build to a doubled name — only wave 8's did; a quoted
+     phrase in prose) — replaced by what the records say. **Still not written**: K10c, MD1, MD2.
