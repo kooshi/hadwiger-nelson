@@ -361,3 +361,153 @@ measure, σ-algebra or ring element that the statement does not mention.
   (their §§ 12–15 and reports), which the kernel's binders now agree with; and anything about a theorem outside the 193.
 
 ## Stage 4 — SAVED (FS131-L10B)
+
+## Stage 5 — SAVED (FS131-L10B): the full gate — red at the lint on `e80221d3`, repaired on the coordinator's word, green at every step on `f0cc3018`
+
+**The gated commit is `f0cc3018`.** Two whole passes were run (runner `data/fs131/l10b/run-pass.sh <tag>`: the build, the kernel's
+list, `run-gate.sh`, the records check, the kernel-signature read, the two reconciliations against `main`'s gated receipts
+`data/fs131/l6a/*-first.*`, the digests — each step under the slot, each log ending in its exit status).
+
+### 5.1 The first pass, on `e80221d3` (tag `first`): one step red
+
+Every step exit 0 but **the guarded lint, exit 1** (`lint-first.log`): "`@HadwigerNelson.SpectralInputs.fibre_mem_factorSets` 1
+unused argument: argument 11: `[MeasurableSingletonClass Ω₁]`" (`ProductFactor.lean:393`; "Found 1 error in 12628 declarations",
+thirteen linters passed) — FS131-I10F's own child lemma under `contVec_prod_eq`, whose proof does not read the instance; the
+build's linters do not report an unused anonymous instance binder, and no branch of the second pass had run the lint on that
+file. The repair is a statement change, so it was **a message to the coordinator, with three options; ruled (a)**: "delete the
+one binder … It is the pattern of rulings 494 (a) and 507 (a) … exactly one declaration changes, by exactly that binder; its
+caller's text and the callers' own `[MeasurableSingletonClass Ω₁]` binders are untouched". Made as ruled (`f0cc3018`): one line
+of `ProductFactor.lean`. Checked: on a scratch copy the file elaborates with the binder gone (`iter-productfactor-binder.log`,
+exit 0, no message); `tools/fs131_l10b_tidyshape.py --self-test 53f4cde5` with that one line added to its lists (`tidyshape.txt`,
+exit 0: **code lines removed nine, added six, in three files**; four plants fired); `tools/fs131_l10b_statements.py delta`
+(`statements-tidies.txt`: statements changed exactly three — the majority vote, the instance, `fibre_mem_factorSets` — removed 0,
+added 0, nine docstrings alone); the kernel's signature of `fibre_mem_factorSets` on the gated commit holds no
+`MeasurableSingletonClass` (`kernel-sigs-final-table.txt`); the lint then reports no second line. Build
+(`build-binder.log`, `HEAD=f0cc3018`): **`build: OK — 471 of 471 batches, 2 module(s) rebuilt, 0 module(s) with warnings`**
+(`ProductFactor`, `Proofs`), 0 `warning` lines, "Build completed successfully (5932 jobs)".
+
+### 5.2 What this job registered, by the gate's own procedures (commit `e80221d3`)
+
+- **`scripts/Axioms.lean`**: a block "FS131-L10B" of **5 records** — the hand-written theorems of the landing no block listed
+  (`measurePreserving_prodMap₃`, `RatioBound.fourier_sq_mul_charSum`, `standingFloor_seven`, `standingFloor_five`,
+  `seven_le_localBound_of_kloosterman`), read from the kernel's own list (`tools/fs131_l10b_register.py` on
+  `data/fs131/l5/count-modules.lean`'s two outputs; `register-before.txt`, `register-after.txt`: MISSING 5 → 0, STALE 0,
+  FOREIGN-MODULE 0; its self-test: a record removed reads MISSING, a record naming nothing reads STALE). `#print axioms` lines:
+  6,329 + 5 = **6,334** = `main`'s 6,174 + the landing's 160 hand-written theorems.
+- **`scripts/Vacuity.lean`**: the entry "Wave 10's second pass, its import, and Falconer's lemma proved (FS131-L10B …)". **No
+  new carrier IN**; no name added to `trackedProps`, no control planted; `scripts/vacuity-controls.lean` and `scripts/vacuity.sh`
+  untouched. The census (`data/fs131/l10b/census.lean`, wave 5's with its scope changed; `census.out`) lists **two
+  hypothesis-formers** in the twelve new modules, `StandingFive.KloostermanBound` and `GapSeven.Gapped`: `refut=0`, `isEmpty=0`,
+  `closedSites=0` on both — so for neither could step (3)'s `VACUOUS` control be planted; both OUT, each with its inhabitant
+  named in the entry.
+- **`scripts/vacuity-baseline.txt`**: the header's counts, from `scripts/gate_report.py header`, **on the coordinator's word**
+  ("update the two count lines … no entry added, removed or reworded"). **One line changes, not two**: the second line's six
+  counts did not move. The file's diff (`vacuity-baseline.diff`):
+  ```
+  -#   declarations=14299  refutations-skipped=199  sites=1269
+  +#   declarations=14501  refutations-skipped=199  sites=1269
+  ```
+  Made after a probe scan (`vacuity-probe.log`) and confirmed by the gated pass, whose digest reads the header "match (9 of 9
+  compared)" — the scan's final run on the commit that lands.
+- **`scripts/axioms-controls.txt`**: Stage 3's edit. `ARCHITECTURE.md`, `Proofs.lean`: the merges' and Stage 3's.
+
+### 5.3 The second pass, on `f0cc3018` (tag `final`): every step exit 0
+
+`run-gate-final.head` records `HEAD=f0cc3018…` and **no tracked file modified**; `run-pass-final.out` reads exit 0 at every step.
+
+| step | result | log (`data/fs131/l10b/`) |
+|---|---|---|
+| build | `build: OK — all 1831 modules already up to date, nothing built, 0 module(s) with warnings`, exit 0; the full builds of these Lean sources are Stage 3's and § 5.1's: 471 of 471 batches, **0 `warning` lines** in each | `build-final.log`; `build-tidies-full.log`, `build-binder-full.log` |
+| `sorry` | narrow pattern: **0** lines; `\bsorry\b`: 8, all prose, the eight `main` holds (`Packed` l. 266, `Plane/Cover` l. 33, `Plane/CoverExamples` l. 13 and 6541, `BendStep` l. 345, and `Pinch`, `LocalGraph`, `FanBridge`'s "no `sorry`") — none in a file of this landing | `sorry-narrow-final.txt`, `sorry-wide-final.txt` |
+| doubled names, **before the audit** | **"dupnames: OK — no name is declared by two modules (23 generated on demand, listed above)"** | `dupnames-final.log`, `receipt-dupnames-final.log` |
+| its self-test | "OK — all 15 controls behaved: every planted fault fired, and every partner passed." | `dupnames-selftest-final.log` |
+| axioms | **"axioms: OK — 6304 clean, 17 axiom-free, 8 imported, 5 declared purchase(s)"**; "audited: 6334 records"; "declared imports (1): HadwigerNelson.StandingFive.kloosterman_bound"; "library axioms other than native auxiliaries (1): HadwigerNelson.StandingFive.kloosterman_bound; native auxiliaries: 10" | `axioms-final.log`, `receipt-axioms-final.log` |
+| its self-test — **green after** Stage 3's edit | "OK — every planted fault fired, and every partner passed." (23 controls) | `axioms-selftest-final.log` |
+| vacuity | **"vacuity: OK"**; `declarations=14501 refutations-skipped=199`, `sites=1269 vacuous=0 stale=0 declared=3 witnessed=38 generic=1226 unknown=2`; baseline header "match (9 of 9 compared)" | `vacuity-final.log`, `receipt-vacuity-final.log` |
+| its self-test | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent." | `vacuity-selftest-final.log` |
+| architecture | "RESULT: PASS", exit 0 | `arch-final.txt` |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "(2/2) Passed!" | `lint-final.log` |
+| notes | `notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58`, **0 CONFLICT** — `main`'s own count: the check reads the audited modules of `Plane/ValidMap` and their kin and none of this landing's; `tools/fs131_qa4_notes.py --self-test`: "OK (6 controls, 1 planted)" | `notes-final.txt`, `notes-qa4-selftest-final.txt` |
+| records, against the kernel's own list | **PASS** (§ 5.4) | `records-final.txt` |
+| every head from the kernel | **PASS**: 193 records, 176 compared, no MISSING-BINDER, 27 absent data variables all reviewed (Stage 4) | `kernel-sigs-final.out`, `-read.txt`, `-table.txt` |
+
+### 5.4 The axioms, reconciled
+
+- **Every theorem of the landing is audited** (`tools/fs131_l10b_records.py`, new — `tools/fs131_l5_records.py` with the import's
+  eight read as IMPORTED; on `count-modules-final.out` against `data/fs131/l6a/count-modules-first.out`): the library holds
+  9,513 theorems against `main`'s 9,336 — **177 new, 0 gone**; 17 are generated by Lean (`congr_simp` 3, `eq_1` 8, `eq_2` 3,
+  `eq_def` 3); **the 160 hand-written each have exactly one record: 152 under CLEAN — 135 on exactly the three, 9 on `[propext,
+  Quot.sound]`, 8 on `[propext]` — and 8 under IMPORTED, each on exactly the three and `StandingFive.kloosterman_bound`.** By
+  module: `FactorAction` 3, `Floor128` 48, `FloorPlanes` 17, `GapSeven` 8, `MajorityVote` 6, `NegCircleModel` 11,
+  `NormOneTarget` 4, `ProductFactor` 23, `RatioBound` 5, `TargetFloors` 5, `WeilKloosterman` 14, `Plane/MetricalBoundary` 15,
+  `Plane/FalconerReduction` 1 (`falconer_lemma2_nonempty`, an axiom on `main`, a theorem here).
+- **Over the whole log, not only the landing's records**: records under IMPORTED **8**, exactly the eight; records carrying the
+  import **8**; **records listing `falconer_lemma2_nonempty` as an axiom: 0**. The four that rested on it
+  (`falconer_reduction`, `le_chiM_of_falconerFan`, `exists_mem_falconerE`, `fan_tip_ae_mem`) are under CLEAN on the three.
+- **The heads**: the 48 of `heads.txt`, each "exactly the standard three"; the 8 of `import-heads.txt`, each "exactly the
+  standard three and StandingFive.kloosterman_bound". **No record of the landing prints `sorryAx`.**
+- **Against `main`'s gated audit** (6,174 records): 6,334 − 6,174 = 160 added; clean 6,148 → 6,304 (+152 new, +4 moved from
+  IMPORTED); imported 4 → 8; axiom-free 17 and purchases 5 unchanged (`digest-axioms-final.txt`). The landing has no
+  `native_decide`.
+
+### 5.5 The vacuity counts, reconciled — the scan reads no new site
+
+`tools/fs131_l5_vacdiff.py` (`vacdiff-final.txt`, PASS): the counter agrees with both scans; `declarations` 14,299 → 14,501
+(**+202, all in the twelve new modules**: `FactorAction` 3, `Floor128` 75, `FloorPlanes` 18, `GapSeven` 13, `MajorityVote` 6,
+`NegCircleModel` 11, `NormOneTarget` 5, `ProductFactor` 31, `RatioBound` 5, `TargetFloors` 5, `WeilKloosterman` 15,
+`MetricalBoundary` 15; no count of a module of `main` changed — the axiom that became a theorem is still one declaration);
+`refutations-skipped` 199 → 199. **Row for row against `main`'s gated scan (1,350 rows): 0 lost, 0 added.** `sites` 1,269,
+`generic` 1,226, `witnessed` 38, `declared` 3, `unknown` 2: all unchanged. **No new site, so none reads `VACUOUS`, `STALE` or
+`UNKNOWN`; nothing asks for a baseline entry.** The probe scan before any registration text read the same nine counts
+(`vacdiff-probe.txt`). What the scan does not read of the landing: its two formers left OUT; hypothesis sets that hold together
+on no object of the library — the open gate items of the drafts' item 7.
+
+### 5.6 Each check's negative control, watched
+
+| check | the plant | what went red |
+|---|---|---|
+| build's warning count; lint | the first pass: one unused instance argument (not a plant — § 5.1) | lint exit 1, naming the declaration and the argument; exit 0 after the repair |
+| `sorry` scan | the third pass's tip `e09209e4`, which this landing does not merge (`git grep` there: `LevelGraph` 2, `UsablePlace` 1 — inventory item 555's receipt) | 3 lines, against 0 here |
+| doubled names | its 15 controls | each fired |
+| axioms | its 23 controls — **three of them red before Stage 3's edit and green after**; the records check's eight plants on this pass's log (`records-plant.txt`, exit 1, "plants fired: 8 of 8": `sorryAx` on a head, a record dropped, doubled, moved under PURCHASED, a head on fewer axioms, one of the eight stripped of the import, a CLEAN record given the import, a record given Falconer's lemma as an axiom) | named each |
+| vacuity | its 65 controls; the row check's plants (`vacdiff-plant.txt`, exit 1) | named each |
+| architecture | the row check's two plants (Stage 3); FS131-IF1's two on copies (its record) | fired |
+| notes | its self-test | fired |
+| the merges | the three-way check's plants on every both-changed path; the joined-state check's six; the merge index's live controls (Stage 2) | each fired |
+| this job's tools | `tools/fs131_l10b_quotes.py`, `_keepboth.py`, `_joined.py`, `_statements.py`, `_tidyshape.py`, `_register.py`, `_kernelsig.py` `--self-test`; `_records.py --plant`; `_mergeindex.py` by live controls | each plant fired beside a faithful run |
+
+### 5.7 The drafts, checked by the digest
+
+Drafts 1 and 2 below, applied to a scratch copy of `CLAUDE.md`, are read by `scripts/gate_report.py` against this pass's logs:
+§ Trust ledger "match (clean, purchases and imported compared)" (`digest-axioms-draft.txt`); § The gate "match (9 of 9
+compared)" (`digest-vacuity-draft.txt`). The unedited `CLAUDE.md` is flagged STALE by both digests until the filing (6148 →
+6304, 4 imported → 8; declarations 14299 → 14501).
+
+### 5.8 Read against the informal statement, aloud
+
+The planner and the implementers read each statement against its row (the plan's Stages 12–15; the three reports; FS131-IF1's
+Stage 5); this landing changed two statements, both by dropping what the proof did not read. The statements the front page will
+quote, read here once more on the joined tree from the kernel's signatures, with what each is not:
+
+- `StandingFive.kloosterman_bound` — the **axiom**: "for a finite field `F` of characteristic not 2, an additive character `ψ`
+  with some value other than 1, and `c, d, a` with `4cd = a ≠ 0`: `‖Σ_{x ≠ 0} ψ(cx + dx⁻¹)‖ ≤ 2√|F|`" — `[Weil1948]` p. 207's
+  second display, clause for clause (the planner's Stage 12; the coordinator's own reading, item 554). Not assumed: anything at
+  characteristic 2. Its model in the file: `ZMod 3`, where the conclusion is a theorem with no axiom.
+- `standingFloor_seven_weil : StandingFloor 7` — "every field of `128²` elements, and every field of `Q²` elements with `Q ≡ 3
+  (mod 4)`, `Q ≥ 347`, with a non-trivial involution `σ`, has `χ(Cay(k, {x : x·σ(x) = 1})) ≥ 7`"; over the import and nothing
+  else. `seven_le_localBound_weil : 7 ≤ localBound standingField` — TC1-STANDING-FIVE's "so `L(F) ≥ 7`", `F = K·E₇`. **Not** a
+  statement about `χ` of `F`'s plane, of any finite plane `Γ_Q`, or of `ℝ²`.
+- `targetFloor_six_weil {Q} (hQ4 : Q % 4 = 3) (hQ : 62 ≤ Q) : TargetFloor 6 Q` — "the norm-one target of every field of `Q²`
+  elements needs six colours"; stated for every `Q`, empty of content where `Q` is no prime power; over the import.
+- `Floor128.targetFloor_eight_128 : TargetFloor 8 128` — "every field of `2¹⁴` elements with a non-trivial involution has
+  `χ(normOneCayley) ≥ 8`"; the standard three, no import, run in its file at `GaloisField 2 14`. G56's "`U₁₂₈`'s Hoffman floor
+  is 8"; the exact spectrum is not in the kernel.
+- `MajorityVote.ae_eq_measurable_of_majority` — FS131-E8-SI5C at the class of ruling 542: values in a countable type, no
+  measurability of `G` or the `c x`, events of probability at most `p < 1/2`, pairwise independent, over an infinite index set.
+- `Plane.falconer_lemma2_nonempty` — `[Falconer1981]` p. 185, Lemma 2 (i) at `n = 2` for Borel `S`: now a theorem;
+  `Plane.exists_not_tendsto_ratio_and_compl` — the same in every finite dimension, for an additive Haar measure and a
+  null-measurable set.
+- `sp_if` — J45-SP-if over an interface; still over `BochnerHerglotz`.
+- What none of these is: a new value or bound of `χ(ℝ²)` or of any field's plane; a proof of Weil's bound.
+
+## Stage 5 — SAVED (FS131-L10B)

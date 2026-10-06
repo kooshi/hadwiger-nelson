@@ -1,0 +1,26 @@
+counter vs the main scan: declarations 14299 / 14299, refutations 199 / 199: agree
+counter vs the landing scan: declarations 14501 / 14501, refutations 199 / 199: agree
+main rows 1350, landing rows 1350; lost 0 (0 with a removed declaration); added 0
+  declarations: 14299 -> 14501 (+202)
+  refutations-skipped: 199 -> 199 (+0)
+  sites: 1269 -> 1269 (+0)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1226 -> 1226 (+0)
+  unknown: 2 -> 2 (+0)
+  module Arith.FactorAction: declarations 0 -> 3 (+3), refutations 0 -> 0 (+0)  [new module]
+  module Arith.Floor128: declarations 0 -> 75 (+75), refutations 0 -> 0 (+0)  [new module]
+  module Arith.FloorPlanes: declarations 0 -> 18 (+18), refutations 0 -> 0 (+0)  [new module]
+  module Arith.GapSeven: declarations 0 -> 13 (+13), refutations 0 -> 0 (+0)  [new module]
+  module Arith.MajorityVote: declarations 0 -> 6 (+6), refutations 0 -> 0 (+0)  [new module]
+  module Arith.NegCircleModel: declarations 0 -> 11 (+11), refutations 0 -> 0 (+0)  [new module]
+  module Arith.NormOneTarget: declarations 0 -> 5 (+5), refutations 0 -> 0 (+0)  [new module]
+  module Arith.ProductFactor: declarations 0 -> 31 (+31), refutations 0 -> 0 (+0)  [new module]
+  module Arith.RatioBound: declarations 0 -> 5 (+5), refutations 0 -> 0 (+0)  [new module]
+  module Arith.TargetFloors: declarations 0 -> 5 (+5), refutations 0 -> 0 (+0)  [new module]
+  module Arith.WeilKloosterman: declarations 0 -> 15 (+15), refutations 0 -> 0 (+0)  [new module]
+  module Plane.MetricalBoundary: declarations 0 -> 15 (+15), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +202, refutations +0: equal to the scans difference
+vacdiff: PASS
