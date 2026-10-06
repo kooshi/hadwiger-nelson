@@ -1,0 +1,5 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 16,17
+-- Found 0 errors in 69 declarations (plus 63 automatically generated ones) in the current file with 14 linters
+
+
+-- All linting checks passed!

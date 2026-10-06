@@ -67,3 +67,66 @@ statement beyond the ruled ones; `CLAUDE.md`, `LEAN.md`, `LEDGER.md`, `BIBLIOGRA
 of the wave's second pass (`fs131-w10k` and the three branches cut from it); a new `axiom`; `native_decide`.
 
 ## Stage 1 — SAVED (FS131-L10A)
+
+## Stage 2 — SAVED (FS131-L10A): the two merges; the first pass is whole
+
+### 2.1 The merges, each its own commit
+
+| merge | commit | conflict | resolution |
+|---|---|---|---|
+| `origin/fs131-w10b` (`423cd8e8`) into `f51c1f4e` | **`a0864d87`** (two parents) | `scripts/Axioms.lean`, one hunk at one anchor | keep both: this line's block "FS131-I10A", a blank line, the block "FS131-I10B" |
+| `origin/fs131-w10c` (`8ee0d85b`) into `14a27a4a` | **`ee5a662a`** (two parents) | `scripts/Axioms.lean`, one hunk at the same anchor | keep both: the blocks in the order FS131-I10A, FS131-I10B, FS131-I10C, above the `=== PURCHASED ===` banner |
+
+No other path conflicted (trial of the second on the first merge's commit: `data/fs131/l10a/merge-trial-w10c.txt`). Each merge was made
+with `--no-ff --no-commit`, resolved, checked, and then committed as a merge.
+
+- **The resolution, by script** (`tools/fs131_l10a_keepboth.py resolve`, then `--self-test`; `data/fs131/l10a/keepboth-w10b.txt`,
+  `keepboth-w10c.txt`, each exit 0): the resolved file holds no marker; every non-blank line of both sides is in it with its multiplicity;
+  its `#print axioms` lines number ours + theirs − base — **4,015 = 3,964 + 3,982 − 3,931** after the first merge, **4,046 = 4,015 + 3,962 −
+  3,931** after the second; no name is printed twice. Its three plants fire beside the faithful run: a record of theirs dropped (LOST), a
+  record doubled (TWICE), a marker left in (MARKER).
+- **The index holds the merge and nothing else** (`tools/fs131_l10a_mergeindex.py <theirs> scripts/Axioms.lean`;
+  `mergeindex-w10b.txt`, `mergeindex-w10c.txt`): `MERGE_HEAD` is the named tip; no path unmerged; the staged paths are exactly the
+  paths theirs changed since the base (30 and 23); every one but `scripts/Axioms.lean` is taken whole from theirs, and
+  `scripts/Axioms.lean` is the one path both sides changed; the working tree equals the index. Two controls run live on the first
+  merge, each exit 1 before the faithful run's exit 0: the conflict path resolved and not yet staged (UNMERGED, DIRTY), and a file of
+  this job's staged beside the merge (EXTRA, NOT-THEIRS; taken out of the index again before the commit).
+- A merge cannot be committed by path (git refuses a partial commit during a merge), so each was committed whole after that check;
+  this job's own files went in separate commits by path (`14a27a4a`, `2a6bf3f2`).
+
+### 2.2 No statement of any side changed
+
+- **The four files are byte-identical to their owners' tips**: `git diff --quiet` of `CharacterColouring.lean` and
+  `SpectralInputs.lean` against `origin/fs131-w10`, of `StationaryRatio.lean` against `origin/fs131-w10b`, of `StandingFive.lean`
+  against `origin/fs131-w10c` — exit 0 each. Against each tip, the only paths under `Proofs/`, `Proofs.lean`, the lakefile, the
+  manifest and the toolchain that differ from the merged tree are the wave files that tip did not prove.
+- **By script, against each branch's tip and the planner's** (`tools/fs131_l10a_statements.py present <ref> <the four files>`;
+  `data/fs131/l10a/statements-merges.txt`): every declaration of each of `origin/fs131-w10` (36, 93, 11, 24 declarations in the four
+  files), `origin/fs131-w10b` (33, 24, 59, 24), `origin/fs131-w10c` (33, 24, 11, 132) and `f919973e` (33, 24, 11, 24) appears
+  verbatim in the merged tree — a theorem's text to its first ` :=` followed by ` :=`, anything else whole, docstrings included. **0
+  flagged in all sixteen comparisons.** The tool's self-test, on each of the four files: five plants, each fired (one character of a
+  statement; a disjunct appended to a conclusion; a declaration renamed away; one added; a docstring edited).
+
+### 2.3 The build of the joined line
+
+`data/fs131/l10a/build-merges.log` (`HEAD=2a6bf3f2`, whose Lean sources are `ee5a662a`'s; no tracked file modified): **`build: OK — 451
+of 451 batches, 3 module(s) rebuilt, 0 module(s) with warnings, 10m5s`, `exit=0`**. The full log (`build-merges-full.log`) holds **0
+`warning` lines** and ends "Build completed successfully (5756 jobs)"; the three rebuilt are `Arith.StationaryRatio` (4.1 s),
+`Arith.StandingFive` (13 s) and `Proofs`. One build after both merges, not one after each: the two merges change disjoint Lean files
+(§ 1.3), so a failure would have named its side.
+
+### 2.4 The receipt that the first pass is whole
+
+- **Zero `sorry`**: `grep -c sorry` reads 0 in each of the four files; the gate's narrow pattern over `Proofs/` and `Proofs.lean`
+  reads 0 lines. Its control is Stage 1's tree: twelve `sorry` warnings and `grep -c` 3 and 9.
+- **Every leaf on exactly the standard three** (`tools/fs131_l10a_leaves.py`; `data/fs131/l10a/axioms-leaves.lean`, its output
+  `axioms-leaves-merges.log`, the reading `leaves-merges.txt`, exit 0). The leaf list is not written by hand: it is every declaration
+  of the four files at the planner's tip `f919973e` whose text holds `sorry` — **21: `CharacterColouring` 1, `SpectralInputs` 8,
+  `StationaryRatio` 3, `StandingFive` 9**, the count the planner and the three implementers report — with the three compositions the
+  planner proved over leaves (`no_small_usable`, `seven_le_localBound`, `five_le_chromaticNumber`). **All 24 print
+  `[propext, Classical.choice, Quot.sound]`, none a proper subset, none anything else.** The control is in the same file: a theorem
+  proved by `sorry`, whose print shows `sorryAx`. The reader's three plants fire: a leaf's print given `sorryAx` (BAD-AXIOM), a leaf's
+  print dropped (NO-PRINT), the control's print made clean (CONTROL). This is iteration's evidence (`lake env lean` on the built
+  tree); the audit of every record of the wave is the gate's, after the doubled-name check (Stage 5).
+
+## Stage 2 — SAVED (FS131-L10A)

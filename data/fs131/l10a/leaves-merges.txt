@@ -1,0 +1,12 @@
+faithful: 24 names; 24 on exactly the standard three, 0 on a proper subset; control shows sorryAx; faults 0
+plant BAD-AXIOM: 24 names; 23 on exactly the standard three, 0 on a proper subset; control shows sorryAx; faults 1
+  BAD-AXIOM HadwigerNelson.CharacterColouring.mem_archimedean_unitRing_iff: ['sorryAx']
+  -> fired (BAD-AXIOM)
+plant NO-PRINT: 24 names; 23 on exactly the standard three, 0 on a proper subset; control shows sorryAx; faults 1
+  NO-PRINT HadwigerNelson.CharacterColouring.mem_archimedean_unitRing_iff
+  -> fired (NO-PRINT)
+plant CONTROL: 24 names; 24 on exactly the standard three, 0 on a proper subset; control SILENT; faults 1
+  CONTROL HadwigerNelson.fs131_l10a_control: its print does not show sorryAx (['propext'])
+  -> fired (CONTROL)
+self-test: PASS
+exit=0
