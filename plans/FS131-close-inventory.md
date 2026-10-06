@@ -3713,3 +3713,7 @@ reason by the close.*
      (`bend_away`, open on `fs131-w4ba` at `71cca146`), IR1 states it as a `sorry` child and proves the step over it; the bend itself stays queued with its
      own implementer. Alternative weighed: IR1 proves the bend too. Why: it is a construction of its own (E5 § 4) and would take the whole budget. Confidence:
      medium-high. In flight after the launches: 3.
+412. **Kooshi, 2026-10-06, after the launches**: *"Minor notes: […] and if for whatever reason you need something from before the halt from /tmp, it's in the rescue dir
+     in `~/source`"*. Staffing stays at three Opus slots (item 323); the budget is about 48 hours at that rate. **Slip, the coordinator's**: two reports
+     said "pushed to GitHub"; `origin` is the backup remote (memory `push-policy`, on file since 2026-09-24). No file in the repository said it; the
+     memory now carries the wording rule.
