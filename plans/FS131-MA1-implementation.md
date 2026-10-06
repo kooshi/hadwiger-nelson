@@ -85,3 +85,61 @@ Each of the 31 statements was worked by hand before a line of Lean, the three th
   radial segment `[z, c + (3/2)(z − c)]`, which stays in the brick and off the disc. A route changed, no statement.
 
 No statement was found false.
+
+## Stage 2 — SAVED (FS131-MA1): `Paint` whole — its 13 leaves proved, no `sorry` left in the file
+
+### 2.1 The leaves, in the planner's order
+
+| leaf | route taken | lines (planner's price) |
+|---|---|---|
+| `brickBase_mem_interiorPts`, `brickBase_col_eq`, `brickBase_col_zero` | one child `brick_floor_eq` (the two floors of a point strictly inside a brick are `r` and `c`), then `not_mem_sevenBrickArcs` with `not_int_between`; `sevenBrick_color_eq`; the cell `(0, 0)` by `decide` on the table, stated first without the free `k` | 12 + 6 + 5 + 7 (M, S, S — "about 120") |
+| `norm_plantDir`, `tangentDisc_subset_ball` | coordinates (`plantPt_re`, …, `tangentCentre_im`); the one tangent point from `(q − v)·u ≥ 1`, two `nlinarith` steps | 5 + 27 (S, M) |
+| `hornArcs_nondegenerate` | as planned | 13 (S) |
+| `frontier_hornSet_subset`, `hornArcs_carrier_subset` | the closure's weak inequalities by `closure_minimal` (`closure_hornSet_subset`), as the plan warned; the normal line gives `v`; a vanishing height gives the germ's arc (`mem_carrier_germArc_of_tanHeight_eq_zero`, over `eq_branchPt_of_tanHeight_eq_zero`); **the rim piece by `sectorBetween_eq_hornSet` at radius `2ρ`** — the point is in the wider horn, the library hands back its polar form, and `s = ρ` — in place of the planned `tanHeight_polar` computation | 45 + 16, helpers 50 (M, S) |
+| `isOpen_fanRest`, `isPreconnected_fanRest` | as planned: three convex sets (`convex_frameX_neg`, and two discs by `tanBelow_iff_of_neg`, `tanAbove_iff_of_pos`), joined at `fromFrame v α (−t) (∓t)` | 10 + 40, helpers 30 (S, M) |
+| `ball_diff_fan` | as planned, with `exists_sign_change` by `Fin.induction` (11 lines); a point of a germ's arc has `tanHeight κ' = ‖z − v‖²(κ − κ')/2` (`frame_of_mem_carrier_germArc`, over `tanHeight_branchPt`) | 50, helpers 30 (M–H) |
+| `isSector_fan_iff`, `fanRest_ne_hornSet` | the partition as a named family `fanPiece : Option (Fin (m + 1)) → Set ℂ` with `fanPiece_data` (open, connected, disjoint, non-empty, the vertex in each closure) and `iUnion_fanPiece`; the rest's cone holds the open half-turn behind the vertex (`Ioo_subset_coneAt_fanRest`), which gives its non-emptiness, its closure clause and `fanRest_ne_hornSet` at once | 13 + 2, helpers 95 (M, S) |
+
+**The re-pricing, from the first two leaves** (brief, Done means 2): the brick facts came to 30 lines against "about 120", and
+`tangentDisc_subset_ball` to 27 against "M (30–120)" — a quarter to a half of the plan's table. Re-priced on that: `Paint` 300–400 lines
+(plan: 450–650), `Moves` 350–500 (plan: 500–700). **Measured at this stage**: `Paint` grew from 330 to 715 lines, 385 added, inside the
+re-priced band and under the plan's.
+
+### 2.2 What is new beside the leaves (helpers, all in `Paint`, all new names)
+
+27 declarations: `brick_floor_eq`, `not_int_between`; `plantPt_re`, `plantPt_im`, `plantDir_re`, `plantDir_im`, `tangentCentre_re`,
+`tangentCentre_im`, `dist_tangentCentre`; `closure_hornSet_subset`, `tanHeight_zero_left`, `half_le_one_sub`, `abs_frameY_le`,
+`eq_of_frame_eq_zero`, `self_mem_carrier_germArc`, `mem_carrier_germArc_of_tanHeight_eq_zero`; `frameX_combo`, `convex_frameX_neg`,
+`dist_fromFrame_lt`; `exists_sign_change`, `frame_of_mem_carrier_germArc`, `fan_tanHeight_of_mem_hornSet`; **`fanPiece`** (a definition:
+the fan's pieces indexed by `Option (Fin (m + 1))`, so that `ArcMap.encard_sectorsOf_of_partition` counts a colour's sectors on it — the
+shape `Moves`' sector leaves want), `iUnion_fanPiece` (its spec), `Ioo_subset_coneAt_fanRest`, `interior_coneAt_fanRest_nonempty`,
+`fanPiece_data`.
+
+### 2.3 Two observations about statements, neither a defect
+
+- `frontier_hornSet_subset` carries `h12 : κ₁ < κ₂` and does not need it (for `κ₂ ≤ κ₁` the horn set is empty). The statement stands as
+  written; the proof names the hypothesis (`have _ := h12`) so that no linter reports it. A generalization, for the inventory.
+- `fanRest_ne_hornSet` carries no hypothesis on `κlo`, `κhi`, correctly: the rest holds the half-disc behind the vertex whatever they are.
+
+### 2.4 The receipts
+
+- **Build**: `data/fs131/ma/build-1.log` (2026-10-06 08:47 UTC, the tree as committed for `Proofs/`): `build: OK — 452 of 452 batches,
+  5 module(s) rebuilt, 3 module(s) with warnings`, exit 0. `declaration uses 'sorry'`: `Moves` 18, `Stuck` 21, `Bends` 7 — **46, none
+  in `Paint`**; 0 other warnings.
+- **Axioms**: `tools/fs131_ma_axioms.py` over `data/fs131/ma/MAAxioms.lean` → `MAAxioms-1.out`: **58 of 58 theorems of `Paint` on the
+  standard three** (every theorem of the file: the general layer, the 13 leaves, the helpers); the two controls — `stuckModel_hyps`,
+  `awayModel_hyps`, implementer B's, open on this branch — are reported with `sorryAx`. `--self-test`: three planted faults (an open
+  record listed as claimed; a clean record listed as a control; a misspelt name), each fails with its own message, exit 0.
+- **The statement check**: `tools/fs131_ma_statements.py --names --no-sorry …/Paint.lean` → `statements-1.out`: 132 skeleton
+  declarations of the four model files compared against `fe9d6d32` — every theorem's statement (the text up to the `:=` that ends
+  it), every definition's whole text, the context lines — **0 problems; 27 added; 0 `sorry` in `Paint`; no added name declared
+  elsewhere under `Proofs/`.** `--self-test`: five planted faults fire (a hypothesis's bound, a definition's body, an `open` line, a
+  helper named after an identifier of a statement, the library's known doubled name `conj_e` treated as added), and the unplanted
+  text passes.
+- `scripts/Axioms.lean`: a block "FS131-MA1" above the `=== PURCHASED ===` banner, listing the `Paint` records KM1's block does not.
+
+### Theorems this phase proved, so far (all **[kernel]**, `Plane/Models/Paint`, each on the standard three by `MAAxioms-1.out`)
+
+`brickBase_mem_interiorPts`, `brickBase_col_eq`, `brickBase_col_zero`, `norm_plantDir`, `tangentDisc_subset_ball`,
+`hornArcs_nondegenerate`, `frontier_hornSet_subset`, `hornArcs_carrier_subset`, `isOpen_fanRest`, `isPreconnected_fanRest`,
+`ball_diff_fan`, `isSector_fan_iff`, `fanRest_ne_hornSet` — the 13 leaves — and the 26 helper theorems of § 2.2.

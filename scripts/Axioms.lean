@@ -4848,6 +4848,16 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.awayModel_hyps
 #print axioms HadwigerNelson.Plane.awayModel_r2Contacts
 
+/-! ## FS-131, the example maps, half A (job FS131-MA1) — `Plane/Models/Paint`'s leaves proved, and the two models of the four local moves (`Plane/Models/Moves`). Records the FS131-KM1 block above already lists are not repeated here. -/
+-- FS131-MA1: the construction (Paint) — the leaves KM1's block does not list, and the fan's partition
+#print axioms HadwigerNelson.Plane.norm_plantDir
+#print axioms HadwigerNelson.Plane.hornArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.hornArcs_carrier_subset
+#print axioms HadwigerNelson.Plane.isOpen_fanRest
+#print axioms HadwigerNelson.Plane.fanRest_ne_hornSet
+#print axioms HadwigerNelson.Plane.iUnion_fanPiece
+#print axioms HadwigerNelson.Plane.fanPiece_data
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

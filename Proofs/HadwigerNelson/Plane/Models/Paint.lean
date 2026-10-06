@@ -218,13 +218,38 @@ theorem brickBase_region_spare {k : ℕ} (h : 7 ≤ k) {j : Fin k} (hj : 7 ≤ (
   simp only [Fin.val_castLE] at hj
   omega
 
+/-- The floors of a point strictly inside the brick of column `c` and row `r`: the row is `r` and the column `c`. -/
+theorem brick_floor_eq {c r : ℤ} {z : ℂ}
+    (hre : 2 / 5 * (r : ℝ) + 4 / 5 * c < z.re ∧ z.re < 2 / 5 * (r : ℝ) + 4 / 5 * (c + 1))
+    (him : 3 / 5 * (r : ℝ) < z.im ∧ z.im < 3 / 5 * ((r : ℝ) + 1)) :
+    ⌊z.im / (3 / 5)⌋ = r ∧ ⌊(z.re - 2 / 5 * r) / (4 / 5)⌋ = c := by
+  constructor
+  · rw [Int.floor_eq_iff]
+    constructor
+    · rw [le_div_iff₀ (by norm_num)]; linarith [him.1]
+    · rw [div_lt_iff₀ (by norm_num)]; linarith [him.2]
+  · rw [Int.floor_eq_iff]
+    constructor
+    · rw [le_div_iff₀ (by norm_num)]; linarith [hre.1]
+    · rw [div_lt_iff₀ (by norm_num)]; linarith [hre.2]
+
+/-- No integer lies strictly between two consecutive integers. -/
+theorem not_int_between {a n : ℤ} (h1 : (a : ℝ) < n) (h2 : (n : ℝ) < a + 1) : False := by
+  have h1' : a < n := by exact_mod_cast h1
+  have h2' : n < a + 1 := by exact_mod_cast h2
+  omega
+
 /-- **A point strictly inside a brick is an interior point of the base**: the brick of column `c` and row `r` is
 `(2r/5 + 4c/5, 2r/5 + 4(c + 1)/5) × (3r/5, 3(r + 1)/5)`. (Wave 5's `Plane/ValidMap/BrickMap` states this with `brickCell`; this form needs
 nothing that is not on `main`.) -/
 theorem brickBase_mem_interiorPts {k : ℕ} (h : 7 ≤ k) {c r : ℤ} {z : ℂ}
     (hre : 2 / 5 * (r : ℝ) + 4 / 5 * c < z.re ∧ z.re < 2 / 5 * (r : ℝ) + 4 / 5 * (c + 1))
     (him : 3 / 5 * (r : ℝ) < z.im ∧ z.im < 3 / 5 * ((r : ℝ) + 1)) : z ∈ (brickBase k h).interiorPts := by
-  sorry
+  obtain ⟨hfr, -⟩ := brick_floor_eq hre him
+  refine ⟨mem_univ z, not_mem_sevenBrickArcs (fun n hn => ?_) (fun n hn => ?_)⟩
+  · exact not_int_between (a := r) (n := n) (by nlinarith [him.1]) (by nlinarith [him.2])
+  · rw [hfr] at hn
+    exact not_int_between (a := c) (n := n) (by nlinarith [hre.1]) (by nlinarith [hre.2])
 
 /-- **Two points strictly inside one brick have one base colour.** -/
 theorem brickBase_col_eq {k : ℕ} (h : 7 ≤ k) {c r : ℤ} {z z' : ℂ}
@@ -232,12 +257,20 @@ theorem brickBase_col_eq {k : ℕ} (h : 7 ≤ k) {c r : ℤ} {z z' : ℂ}
     (him : 3 / 5 * (r : ℝ) < z.im ∧ z.im < 3 / 5 * ((r : ℝ) + 1))
     (hre' : 2 / 5 * (r : ℝ) + 4 / 5 * c < z'.re ∧ z'.re < 2 / 5 * (r : ℝ) + 4 / 5 * (c + 1))
     (him' : 3 / 5 * (r : ℝ) < z'.im ∧ z'.im < 3 / 5 * ((r : ℝ) + 1)) : (brickBase k h).col z = (brickBase k h).col z' := by
-  sorry
+  obtain ⟨h1, h2⟩ := brick_floor_eq hre him
+  obtain ⟨h1', h2'⟩ := brick_floor_eq hre' him'
+  show Fin.castLE h (sevenBrickMap.col z) = Fin.castLE h (sevenBrickMap.col z')
+  rw [sevenBrick_color_eq h1 h2, sevenBrick_color_eq h1' h2']
 
 /-- **The base colour of the brick `(0, 4/5) × (0, 3/5)` is `0`** (the corner's upper right cell, `sevenBrick_corner_col`). -/
 theorem brickBase_col_zero {k : ℕ} (h : 7 ≤ k) {z : ℂ} (hre : 0 < z.re ∧ z.re < 4 / 5) (him : 0 < z.im ∧ z.im < 3 / 5) :
     ((brickBase k h).col z : ℕ) = 0 := by
-  sorry
+  obtain ⟨h1, h2⟩ := brick_floor_eq (c := 0) (r := 0) (z := z) (by push_cast; constructor <;> linarith [hre.1, hre.2])
+    (by push_cast; constructor <;> linarith [him.1, him.2])
+  have h0 : sevenBrick.table (zmodIdx 7 (by norm_num) 0) (zmodIdx 7 (by norm_num) 0) = 0 := by decide
+  show ((Fin.castLE h (sevenBrickMap.col z) : Fin k) : ℕ) = 0
+  rw [sevenBrick_color_eq h1 h2, h0]
+  rfl
 
 /-- The planted vertex: the centre `2/5 + (3/10) i` of the brick `(0, 4/5) × (0, 3/5)`. -/
 noncomputable def plantPt : ℂ := 2 / 5 + 3 / 10 * I
@@ -255,14 +288,68 @@ noncomputable def plantN : ℂ := plantPt + I
 /-- The lower pole `S′ = plantPt − i`: a point of the brick `(0, 4/5) × (−6/5, −3/5)`. -/
 noncomputable def plantS : ℂ := plantPt - I
 
+/-- The planted vertex's abscissa. -/
+theorem plantPt_re : plantPt.re = 2 / 5 := by simp [plantPt]
+
+/-- The planted vertex's ordinate. -/
+theorem plantPt_im : plantPt.im = 3 / 10 := by simp [plantPt]
+
+/-- The tangent direction's abscissa. -/
+theorem plantDir_re : plantDir.re = 3 / 5 := by simp [plantDir]
+
+/-- The tangent direction's ordinate. -/
+theorem plantDir_im : plantDir.im = 4 / 5 := by simp [plantDir]
+
+/-- The abscissa of the tangent disc's centre `97/100 + (106/100) i`. -/
+theorem tangentCentre_re : (plantPt + 19 / 20 * plantDir).re = 97 / 100 := by
+  simp [plantPt, plantDir]; norm_num
+
+/-- The ordinate of the tangent disc's centre. -/
+theorem tangentCentre_im : (plantPt + 19 / 20 * plantDir).im = 106 / 100 := by
+  simp [plantPt, plantDir]; norm_num
+
 /-- `plantDir` is a unit vector. -/
 theorem norm_plantDir : ‖plantDir‖ = 1 := by
-  sorry
+  have h : ‖plantDir‖ ^ 2 = 1 := by
+    rw [Complex.sq_norm, Complex.normSq_apply, plantDir_re, plantDir_im]; norm_num
+  have h0 := norm_nonneg plantDir
+  nlinarith
+
+/-- The tangent disc's centre is `19/20` from the planted vertex. -/
+theorem dist_tangentCentre : dist (plantPt + 19 / 20 * plantDir) plantPt = 19 / 20 := by
+  rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_plantDir]; norm_num
 
 /-- The tangent disc lies in the open unit disc about the planted vertex, and its closure meets the unit circle at one point. -/
 theorem tangentDisc_subset_ball : tangentDisc ⊆ ball plantPt 1 ∧
     closure tangentDisc ∩ sphere plantPt 1 = {plantPt + plantDir} := by
-  sorry
+  refine ⟨fun q hq => ?_, ?_⟩
+  · rw [tangentDisc, mem_ball] at hq
+    rw [mem_ball]
+    calc dist q plantPt ≤ dist q (plantPt + 19 / 20 * plantDir) + dist (plantPt + 19 / 20 * plantDir) plantPt :=
+          dist_triangle _ _ _
+      _ < 1 := by rw [dist_tangentCentre]; linarith
+  · rw [tangentDisc, closure_ball _ (by norm_num : (1 / 20 : ℝ) ≠ 0)]
+    ext q
+    simp only [mem_inter_iff, mem_closedBall, mem_sphere_iff_norm, mem_singleton_iff]
+    constructor
+    · -- `(q − v)·u ≥ 1` with `‖q − v‖ = ‖u‖ = 1` forces `q − v = u`
+      rintro ⟨h1, h2⟩
+      have h1' : dist q (plantPt + 19 / 20 * plantDir) ^ 2 ≤ (1 / 20) ^ 2 := pow_le_pow_left₀ dist_nonneg h1 2
+      rw [dist_sq_re_im, tangentCentre_re, tangentCentre_im] at h1'
+      have h2' : dist q plantPt ^ 2 = 1 := by rw [dist_eq_norm, h2]; norm_num
+      rw [dist_sq_re_im, plantPt_re, plantPt_im] at h2'
+      have hdot : 1 ≤ 3 / 5 * (q.re - 2 / 5) + 4 / 5 * (q.im - 3 / 10) := by nlinarith
+      have hsq : (q.re - 1) ^ 2 + (q.im - 11 / 10) ^ 2 ≤ 0 := by nlinarith
+      have hre : q.re = 1 := by nlinarith [sq_nonneg (q.re - 1), sq_nonneg (q.im - 11 / 10)]
+      have him : q.im = 11 / 10 := by nlinarith [sq_nonneg (q.re - 1), sq_nonneg (q.im - 11 / 10)]
+      apply Complex.ext
+      · rw [hre, Complex.add_re, plantPt_re, plantDir_re]; norm_num
+      · rw [him, Complex.add_im, plantPt_im, plantDir_im]; norm_num
+    · rintro rfl
+      refine ⟨?_, by rw [add_sub_cancel_left, norm_plantDir]⟩
+      rw [dist_eq_norm, show plantPt + plantDir - (plantPt + 19 / 20 * plantDir) = (1 / 20 : ℂ) * plantDir by ring, norm_mul,
+        norm_plantDir]
+      norm_num
 
 /-! ## Horn patches and the fan -/
 
@@ -274,22 +361,148 @@ noncomputable def hornArcs (v : ℂ) (α κ₁ κ₂ ρ : ℝ) : Set Arc :=
 /-- The three arcs have positive length. -/
 theorem hornArcs_nondegenerate (v : ℂ) (α : ℝ) {κ₁ κ₂ ρ : ℝ} (hρ : 0 < ρ) (h12 : κ₁ < κ₂) (h1 : |κ₁| * ρ ≤ 1)
     (h2 : |κ₂| * ρ ≤ 1) : ∀ a ∈ hornArcs v α κ₁ κ₂ ρ, a.Nondegenerate := by
-  sorry
+  have hπ := Real.pi_pos
+  intro a ha
+  simp only [hornArcs, mem_insert_iff, mem_singleton_iff] at ha
+  rcases ha with rfl | rfl | rfl
+  · exact germArc_nondegenerate v α κ₁ hρ
+  · exact germArc_nondegenerate v α κ₂ hρ
+  · have hk1 := half_curv_mem_Icc (κ := κ₁) (r := ρ) (s := ρ) (by linarith) hρ.le le_rfl
+    have hk2 := half_curv_mem_Icc (κ := κ₂) (r := ρ) (s := ρ) (by linarith) hρ.le le_rfl
+    have hlt : κ₁ * ρ / 2 < κ₂ * ρ / 2 := by nlinarith
+    have hasin := Real.arcsin_lt_arcsin hk1.1 hlt hk2.2
+    have hlo := Real.neg_pi_div_two_le_arcsin (κ₁ * ρ / 2)
+    have hhi := Real.arcsin_le_pi_div_two (κ₂ * ρ / 2)
+    exact ⟨hρ, by linarith, by linarith⟩
 
 /-- The three arcs are finitely many. -/
 theorem hornArcs_finite (v : ℂ) (α κ₁ κ₂ ρ : ℝ) : (hornArcs v α κ₁ κ₂ ρ).Finite := by
   unfold hornArcs
   exact ((finite_singleton _).insert _).insert _
 
+/-- The weak inequalities of a horn set hold on its closure (taken from continuity, never from a description of the closure). -/
+theorem closure_hornSet_subset (v : ℂ) (α κ₁ κ₂ ρ : ℝ) :
+    closure (hornSet v α κ₁ κ₂ ρ) ⊆ {z | dist z v ≤ ρ ∧ 0 ≤ frameX v α z ∧
+      0 ≤ tanHeight κ₁ (frameX v α z) (frameY v α z) ∧ tanHeight κ₂ (frameX v α z) (frameY v α z) ≤ 0} := by
+  have hX : Continuous (frameX v α) := by unfold frameX; fun_prop
+  have hY : Continuous (frameY v α) := by unfold frameY; fun_prop
+  have hT : ∀ κ, Continuous fun z => tanHeight κ (frameX v α z) (frameY v α z) := fun κ => by
+    unfold tanHeight; fun_prop
+  refine closure_minimal (fun z hz => ⟨hz.1.le, hz.2.1.le, le_of_lt hz.2.2.1, le_of_lt hz.2.2.2⟩) ?_
+  exact ((isClosed_le (continuous_id.dist continuous_const) continuous_const).inter
+    (isClosed_le continuous_const hX)).inter ((isClosed_le continuous_const (hT κ₁)).inter
+    (isClosed_le (hT κ₂) continuous_const)) |> fun h => by
+      simpa [Set.setOf_and, Set.inter_assoc] using h
+
+/-- On the normal line through the vertex the height above the arc of curvature `κ` is `y (1 − κ y / 2)`. -/
+theorem tanHeight_zero_left (κ y : ℝ) : tanHeight κ 0 y = y * (1 - κ * y / 2) := by
+  unfold tanHeight; ring
+
+/-- Within `ρ` of the vertex, with `|κ| ρ ≤ 1`, the factor `1 − κ y / 2` is at least `1/2`: on the normal line the height has the sign
+of the ordinate. -/
+theorem half_le_one_sub {κ ρ y : ℝ} (hκ : |κ| * ρ ≤ 1) (hy : |y| ≤ ρ) : 1 / 2 ≤ 1 - κ * y / 2 := by
+  have h : |κ * y| ≤ 1 := by
+    rw [abs_mul]
+    calc |κ| * |y| ≤ |κ| * ρ := mul_le_mul_of_nonneg_left hy (abs_nonneg κ)
+      _ ≤ 1 := hκ
+  have := (abs_le.mp h).2
+  linarith
+
+/-- The frame's ordinate is at most the distance from the vertex. -/
+theorem abs_frameY_le (v : ℂ) (α : ℝ) (z : ℂ) : |frameY v α z| ≤ dist z v := by
+  have h := frame_normSq v α z
+  rw [← dist_eq_norm] at h
+  exact abs_le_of_sq_le_sq (by nlinarith [sq_nonneg (frameX v α z)]) dist_nonneg
+
+/-- A point with both frame coordinates `0` is the vertex. -/
+theorem eq_of_frame_eq_zero {v z : ℂ} {α : ℝ} (hx : frameX v α z = 0) (hy : frameY v α z = 0) : z = v := by
+  have h := frame_normSq v α z
+  rw [hx, hy] at h
+  have : ‖z - v‖ = 0 := by nlinarith [norm_nonneg (z - v)]
+  exact sub_eq_zero.mp (norm_eq_zero.mp this)
+
+/-- The vertex is on every germ's arc. -/
+theorem self_mem_carrier_germArc (v : ℂ) (α : ℝ) {κ ρ : ℝ} (hρ : 0 ≤ ρ) (hκρ : |κ| * ρ ≤ 2) :
+    v ∈ (germArc v α κ ρ).carrier := by
+  rw [carrier_germArc v α hρ hκρ]
+  exact ⟨0, ⟨le_rfl, hρ⟩, by simp [branchPt]⟩
+
+/-- **A point of a tangent arc in front of the vertex is on the germ's arc**: `tanHeight κ = 0`, `frameX > 0`, `dist z v ≤ ρ`. -/
+theorem mem_carrier_germArc_of_tanHeight_eq_zero {v z : ℂ} {α κ ρ : ℝ} (hκρ : |κ| * ρ ≤ 2) (hX : 0 < frameX v α z)
+    (hT : tanHeight κ (frameX v α z) (frameY v α z) = 0) (hd : dist z v ≤ ρ) : z ∈ (germArc v α κ ρ).carrier := by
+  have hn : ‖z - v‖ ≤ ρ := by rw [← dist_eq_norm]; exact hd
+  have hρ : 0 ≤ ρ := (norm_nonneg _).trans hn
+  rw [carrier_germArc v α hρ hκρ]
+  refine ⟨‖z - v‖, ⟨norm_nonneg _, hn⟩, ?_⟩
+  exact (eq_branchPt_of_tanHeight_eq_zero hX hT
+    ((mul_le_mul_of_nonneg_left hn (abs_nonneg κ)).trans hκρ)).symm
+
 /-- **The frontier of a horn set lies on its three arcs.** -/
 theorem frontier_hornSet_subset (v : ℂ) (α : ℝ) {κ₁ κ₂ ρ : ℝ} (hρ : 0 < ρ) (h12 : κ₁ < κ₂) (h1 : |κ₁| * ρ ≤ 1)
     (h2 : |κ₂| * ρ ≤ 1) : frontier (hornSet v α κ₁ κ₂ ρ) ⊆ ⋃ a ∈ hornArcs v α κ₁ κ₂ ρ, a.carrier := by
-  sorry
+  have _ := h12
+  rw [(isOpen_hornSet v α κ₁ κ₂ ρ).frontier_eq]
+  rintro z ⟨hzc, hzn⟩
+  obtain ⟨hd, hx, hA, hB⟩ := closure_hornSet_subset v α κ₁ κ₂ ρ hzc
+  have hin : ∀ a ∈ hornArcs v α κ₁ κ₂ ρ, z ∈ a.carrier → z ∈ ⋃ a ∈ hornArcs v α κ₁ κ₂ ρ, a.carrier :=
+    fun a ha hz => mem_iUnion₂.mpr ⟨a, ha, hz⟩
+  have hm1 : germArc v α κ₁ ρ ∈ hornArcs v α κ₁ κ₂ ρ := by simp [hornArcs]
+  have hm2 : germArc v α κ₂ ρ ∈ hornArcs v α κ₁ κ₂ ρ := by simp [hornArcs]
+  have hm3 : Arc.circ v ρ (α + Real.arcsin (κ₁ * ρ / 2)) (α + Real.arcsin (κ₂ * ρ / 2)) ∈ hornArcs v α κ₁ κ₂ ρ := by
+    simp [hornArcs]
+  rcases hx.eq_or_lt with hx0 | hxpos
+  · -- on the normal line: the point is `v`
+    have hy := (abs_frameY_le v α z).trans hd
+    rw [← hx0, tanHeight_zero_left] at hA hB
+    have hp1 := half_le_one_sub h1 hy
+    have hp2 := half_le_one_sub h2 hy
+    have hy0 : frameY v α z = 0 := by
+      have ha : 0 ≤ frameY v α z := by
+        by_contra hneg
+        push Not at hneg
+        nlinarith
+      have hb : frameY v α z ≤ 0 := by
+        by_contra hpos
+        push Not at hpos
+        nlinarith
+      linarith
+    have hzv : z = v := eq_of_frame_eq_zero hx0.symm hy0
+    rw [hzv]
+    exact mem_iUnion₂.mpr ⟨_, hm1, self_mem_carrier_germArc v α (κ := κ₁) hρ.le (by linarith)⟩
+  · rcases hA.eq_or_lt with hA0 | hApos
+    · exact hin _ hm1 (mem_carrier_germArc_of_tanHeight_eq_zero (by linarith) hxpos hA0.symm hd)
+    rcases hB.eq_or_lt with hB0 | hBneg
+    · exact hin _ hm2 (mem_carrier_germArc_of_tanHeight_eq_zero (by linarith) hxpos hB0 hd)
+    -- strictly between the two arcs and in front of the vertex: the point is on the rim
+    have hdρ : dist z v = ρ := by
+      by_contra hne
+      exact hzn ⟨lt_of_le_of_ne hd hne, hxpos, hApos, hBneg⟩
+    have hz2 : z ∈ hornSet v α κ₁ κ₂ (2 * ρ) := ⟨by rw [hdρ]; linarith, hxpos, hApos, hBneg⟩
+    rw [← sectorBetween_eq_hornSet v α κ₁ κ₂ (2 * ρ) (by nlinarith [abs_nonneg κ₁]) (by nlinarith [abs_nonneg κ₂])] at hz2
+    obtain ⟨s, hs, φ, hφ, rfl⟩ := hz2
+    have hsρ : s = ρ := by
+      rw [dist_eq_norm, add_sub_cancel_left, norm_mul_e hs.1.le] at hdρ
+      exact hdρ
+    subst hsρ
+    exact hin _ hm3 ⟨φ, ⟨hφ.1.le, hφ.2.le⟩, rfl⟩
 
 /-- The arcs of a horn's boundary lie in the closed disc of its radius. -/
 theorem hornArcs_carrier_subset (v : ℂ) (α : ℝ) {κ₁ κ₂ ρ : ℝ} (hρ : 0 < ρ) (h1 : |κ₁| * ρ ≤ 1) (h2 : |κ₂| * ρ ≤ 1) :
     ⋃ a ∈ hornArcs v α κ₁ κ₂ ρ, a.carrier ⊆ closedBall v ρ := by
-  sorry
+  have hgerm : ∀ κ, |κ| * ρ ≤ 1 → (germArc v α κ ρ).carrier ⊆ closedBall v ρ := by
+    intro κ hκ
+    rw [carrier_germArc v α hρ.le (by linarith)]
+    rintro _ ⟨s, hs, rfl⟩
+    rw [mem_closedBall, dist_eq_norm, norm_branchPt_sub v α κ hs.1]
+    exact hs.2
+  intro z hz
+  obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp hz
+  simp only [hornArcs, mem_insert_iff, mem_singleton_iff] at ha
+  rcases ha with rfl | rfl | rfl
+  · exact hgerm κ₁ h1 hza
+  · exact hgerm κ₂ h2 hza
+  · obtain ⟨θ, -, rfl⟩ := hza
+    rw [mem_closedBall, dist_eq_norm, add_sub_cancel_left, norm_mul_e hρ.le]
 
 /-- **The rest of a ball off a fan**: the points of `B(v, r)` behind the vertex, below the fan's lowest arc or above its highest. -/
 def fanRest (v : ℂ) (α κlo κhi r : ℝ) : Set ℂ :=
@@ -297,13 +510,124 @@ def fanRest (v : ℂ) (α κlo κhi r : ℝ) : Set ℂ :=
 
 /-- The rest is open. -/
 theorem isOpen_fanRest (v : ℂ) (α κlo κhi r : ℝ) : IsOpen (fanRest v α κlo κhi r) := by
-  sorry
+  have hX : Continuous (frameX v α) := by unfold frameX; fun_prop
+  have hY : Continuous (frameY v α) := by unfold frameY; fun_prop
+  have hT : ∀ κ, Continuous fun z => tanHeight κ (frameX v α z) (frameY v α z) := fun κ => by
+    unfold tanHeight; fun_prop
+  have h : fanRest v α κlo κhi r = {z | dist z v < r} ∩ ({z | frameX v α z < 0} ∪
+      ({z | tanHeight κlo (frameX v α z) (frameY v α z) < 0} ∪ {z | 0 < tanHeight κhi (frameX v α z) (frameY v α z)})) := by
+    ext z; rfl
+  rw [h]
+  exact (isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+    ((isOpen_lt hX continuous_const).union ((isOpen_lt (hT κlo) continuous_const).union (isOpen_lt continuous_const (hT κhi))))
+
+/-- The frame's abscissa is affine: it is kept by convex combinations. -/
+theorem frameX_combo (v : ℂ) (α : ℝ) (x y : ℂ) {a b : ℝ} (hab : a + b = 1) :
+    frameX v α (a • x + b • y) = a * frameX v α x + b * frameX v α y := by
+  have hb : b = 1 - a := by linarith
+  subst hb
+  unfold frameX
+  simp only [Complex.real_smul, Complex.mul_re, Complex.sub_re, Complex.add_re, Complex.sub_im, Complex.add_im, Complex.mul_im,
+    Complex.ofReal_re, Complex.ofReal_im, Complex.ofReal_sub, Complex.ofReal_one, Complex.one_re, Complex.one_im]
+  ring
+
+/-- The open half-plane behind the vertex is convex. -/
+theorem convex_frameX_neg (v : ℂ) (α : ℝ) : Convex ℝ {z | frameX v α z < 0} := by
+  intro x hx y hy a b ha hb hab
+  show frameX v α (a • x + b • y) < 0
+  rw [frameX_combo v α x y hab]
+  have hx' : frameX v α x < 0 := hx
+  have hy' : frameX v α y < 0 := hy
+  rcases ha.eq_or_lt with ha0 | ha0
+  · have hb1 : b = 1 := by linarith
+    rw [← ha0, hb1]; linarith
+  · nlinarith [mul_nonneg hb (neg_pos.mpr hy').le]
+
+/-- The point with frame coordinates `(x, y)`, `x² + y² < r²`, is less than `r` from the vertex. -/
+theorem dist_fromFrame_lt {v : ℂ} {α x y r : ℝ} (hr : 0 < r) (h : x ^ 2 + y ^ 2 < r ^ 2) : dist (fromFrame v α x y) v < r := by
+  have hn := frame_normSq v α (fromFrame v α x y)
+  rw [frameX_fromFrame, frameY_fromFrame, ← dist_eq_norm] at hn
+  exact lt_of_pow_lt_pow_left₀ 2 hr.le (by rw [← hn]; exact h)
 
 /-- **The rest is connected** when the fan's lowest curvature is negative and its highest positive: it is the union of three convex sets
 (a half-disc and two lenses), the half-disc meeting both lenses. -/
 theorem isPreconnected_fanRest (v : ℂ) (α : ℝ) {κlo κhi r : ℝ} (hlo : κlo < 0) (hhi : 0 < κhi) (hr : 0 < r) :
     IsPreconnected (fanRest v α κlo κhi r) := by
-  sorry
+  set H : Set ℂ := ball v r ∩ {z | frameX v α z < 0} with hH
+  set L₁ : Set ℂ := ball v r ∩ {z | TanBelow v α κlo z} with hL₁
+  set L₂ : Set ℂ := ball v r ∩ {z | TanAbove v α κhi z} with hL₂
+  have hsplit : fanRest v α κlo κhi r = H ∪ L₁ ∪ L₂ := by
+    ext z
+    simp only [fanRest, hH, hL₁, hL₂, mem_setOf_eq, mem_union, mem_inter_iff, mem_ball]
+    tauto
+  have hcH : Convex ℝ H := (convex_ball v r).inter (convex_frameX_neg v α)
+  have hcL₁ : Convex ℝ L₁ := by
+    have : {z | TanBelow v α κlo z} = ball (v + ((1 / κlo : ℝ) : ℂ) * e (α + π / 2)) (-(1 / κlo)) := by
+      ext z; rw [mem_setOf_eq, tanBelow_iff_of_neg v α hlo, mem_ball]
+    rw [hL₁, this]
+    exact (convex_ball v r).inter (convex_ball _ _)
+  have hcL₂ : Convex ℝ L₂ := by
+    have : {z | TanAbove v α κhi z} = ball (v + ((1 / κhi : ℝ) : ℂ) * e (α + π / 2)) (1 / κhi) := by
+      ext z; rw [mem_setOf_eq, tanAbove_iff_of_pos v α hhi, mem_ball]
+    rw [hL₂, this]
+    exact (convex_ball v r).inter (convex_ball _ _)
+  -- a point behind `v` and below the lowest arc, and one behind `v` and above the highest
+  obtain ⟨s, hs0, hsr, hs2⟩ := exists_small_s (max |κlo| |κhi|) hr
+  have hκ1 : |κlo| * s < 2 := lt_of_le_of_lt (mul_le_mul_of_nonneg_right ((le_max_left _ _).trans (le_abs_self _)) hs0.le) hs2
+  have hκ2 : |κhi| * s < 2 := lt_of_le_of_lt (mul_le_mul_of_nonneg_right ((le_max_right _ _).trans (le_abs_self _)) hs0.le) hs2
+  rw [abs_of_neg hlo] at hκ1
+  rw [abs_of_pos hhi] at hκ2
+  set t := s / 2 with ht
+  have ht0 : 0 < t := by positivity
+  have hd : ∀ y : ℝ, y ^ 2 = t ^ 2 → dist (fromFrame v α (-t) y) v < r := fun y hy =>
+    dist_fromFrame_lt hr (by nlinarith)
+  have h1 : 0 < 1 + κlo * t := by rw [ht]; linarith
+  have h2 : 0 < 1 - κhi * t := by rw [ht]; linarith
+  have hp₁H : fromFrame v α (-t) (-t) ∈ H := ⟨hd _ (by ring), by show frameX _ _ _ < 0; rw [frameX_fromFrame]; linarith⟩
+  have hp₁L : fromFrame v α (-t) (-t) ∈ L₁ := ⟨hd _ (by ring), by
+    show tanHeight _ _ _ < 0
+    rw [frameX_fromFrame, frameY_fromFrame]; unfold tanHeight; nlinarith [mul_pos ht0 h1]⟩
+  have hp₂H : fromFrame v α (-t) t ∈ H := ⟨hd _ rfl, by show frameX _ _ _ < 0; rw [frameX_fromFrame]; linarith⟩
+  have hp₂L : fromFrame v α (-t) t ∈ L₂ := ⟨hd _ rfl, by
+    show 0 < tanHeight _ _ _
+    rw [frameX_fromFrame, frameY_fromFrame]; unfold tanHeight; nlinarith [mul_pos ht0 h2]⟩
+  rw [hsplit]
+  exact IsPreconnected.union _ (Or.inl hp₂H) hp₂L
+    (IsPreconnected.union _ hp₁H hp₁L hcH.isPreconnected hcL₁.isPreconnected) hcL₂.isPreconnected
+
+/-- A sequence of non-zero reals that starts positive and ends negative changes sign between two consecutive terms. -/
+theorem exists_sign_change {m : ℕ} (f : Fin (m + 2) → ℝ) (h0 : 0 < f 0) (hl : f (Fin.last (m + 1)) < 0)
+    (hne : ∀ j, f j ≠ 0) : ∃ i : Fin (m + 1), 0 < f i.castSucc ∧ f i.succ < 0 := by
+  by_contra hcon
+  push Not at hcon
+  have hall : ∀ j : Fin (m + 2), 0 < f j := by
+    intro j
+    induction j using Fin.induction with
+    | zero => exact h0
+    | succ i ih => exact lt_of_le_of_ne (hcon i ih) (Ne.symm (hne _))
+  exact lt_asymm (hall _) hl
+
+/-- **A point of a germ's arc**: it is not behind the vertex, and its height above the tangent arc of any curvature `κ'` is
+`‖z − v‖² (κ − κ') / 2` — zero for its own curvature, of the sign of `κ − κ'` otherwise. -/
+theorem frame_of_mem_carrier_germArc {v z : ℂ} {α κ ρ : ℝ} (hρ : 0 ≤ ρ) (hκρ : |κ| * ρ ≤ 1) (hz : z ∈ (germArc v α κ ρ).carrier) :
+    0 ≤ frameX v α z ∧ ∀ κ', tanHeight κ' (frameX v α z) (frameY v α z) = ‖z - v‖ ^ 2 * (κ - κ') / 2 := by
+  rw [carrier_germArc v α hρ (by linarith)] at hz
+  obtain ⟨s, hs, rfl⟩ := hz
+  have hκs : |κ| * s ≤ 1 := (mul_le_mul_of_nonneg_left hs.2 (abs_nonneg κ)).trans hκρ
+  refine ⟨?_, fun κ' => ?_⟩
+  · rcases hs.1.eq_or_lt with h0 | h0
+    · rw [← h0]; simp [branchPt, frameX]
+    · exact (frameX_branchPt_pos v α κ (by linarith) h0).le
+  · rw [tanHeight_branchPt v α κ κ' (by linarith) hs.1, norm_branchPt_sub v α κ hs.1]
+
+/-- **A point of a horn of the fan against every arc of the fan**: above the arcs up to its lower one, below those from its upper
+one on. -/
+theorem fan_tanHeight_of_mem_hornSet {m : ℕ} {κ : Fin (m + 2) → ℝ} (hκ : StrictMono κ) {v z : ℂ} {α r : ℝ} {i : Fin (m + 1)}
+    (hz : z ∈ hornSet v α (κ i.castSucc) (κ i.succ) r) (j : Fin (m + 2)) :
+    (j ≤ i.castSucc → 0 < tanHeight (κ j) (frameX v α z) (frameY v α z)) ∧
+      (i.succ ≤ j → tanHeight (κ j) (frameX v α z) (frameY v α z) < 0) :=
+  ⟨fun hj => lt_of_lt_of_le hz.2.2.1 (tanHeight_anti (hκ.monotone hj) _ _),
+    fun hj => lt_of_le_of_lt (tanHeight_anti (hκ.monotone hj) _ _) hz.2.2.2⟩
 
 /-- **A ball cut by a fan** of `m + 2` tangent arcs of increasing curvatures along one ray: off the arcs it is the rest and the `m + 1`
 horn sets between consecutive arcs. -/
@@ -311,7 +635,167 @@ theorem ball_diff_fan {m : ℕ} (κ : Fin (m + 2) → ℝ) (hκ : StrictMono κ)
     (hκρ : ∀ i, |κ i| * ρ ≤ 1) :
     ball v r \ ⋃ i, (germArc v α (κ i) ρ).carrier =
       fanRest v α (κ 0) (κ (Fin.last (m + 1))) r ∪ ⋃ i : Fin (m + 1), hornSet v α (κ i.castSucc) (κ i.succ) r := by
-  sorry
+  have hρ : 0 < ρ := lt_of_lt_of_le hr hrρ
+  ext z
+  simp only [Set.mem_sdiff, mem_ball, mem_iUnion, not_exists, mem_union]
+  constructor
+  · rintro ⟨hd, harc⟩
+    rcases lt_trichotomy (frameX v α z) 0 with hx | hx | hx
+    · exact Or.inl ⟨hd, Or.inl hx⟩
+    · -- on the normal line, off `v`: the sign of the ordinate decides
+      have hy := (abs_frameY_le v α z).trans (hd.le.trans hrρ)
+      have hy0 : frameY v α z ≠ 0 := fun hy0 => harc 0 (by
+        rw [eq_of_frame_eq_zero hx hy0]
+        exact self_mem_carrier_germArc v α hρ.le (by linarith [hκρ 0]))
+      rcases lt_or_gt_of_ne hy0 with hneg | hpos
+      · refine Or.inl ⟨hd, Or.inr (Or.inl ?_)⟩
+        show tanHeight _ _ _ < 0
+        rw [hx, tanHeight_zero_left]
+        have := half_le_one_sub (hκρ 0) hy
+        nlinarith
+      · refine Or.inl ⟨hd, Or.inr (Or.inr ?_)⟩
+        show 0 < tanHeight _ _ _
+        rw [hx, tanHeight_zero_left]
+        have := half_le_one_sub (hκρ (Fin.last (m + 1))) hy
+        nlinarith
+    · -- in front of the vertex and on no arc: no height vanishes, so the heights change sign once
+      have hne : ∀ j, tanHeight (κ j) (frameX v α z) (frameY v α z) ≠ 0 := fun j h0 =>
+        harc j (mem_carrier_germArc_of_tanHeight_eq_zero (by linarith [hκρ j]) hx h0 (hd.le.trans hrρ))
+      rcases lt_or_gt_of_ne (hne 0) with h0 | h0
+      · exact Or.inl ⟨hd, Or.inr (Or.inl h0)⟩
+      rcases lt_or_gt_of_ne (hne (Fin.last (m + 1))) with hl | hl
+      · obtain ⟨i, hi1, hi2⟩ := exists_sign_change (fun j => tanHeight (κ j) (frameX v α z) (frameY v α z)) h0 hl hne
+        exact Or.inr ⟨i, hd, hx, hi1, hi2⟩
+      · exact Or.inl ⟨hd, Or.inr (Or.inr hl)⟩
+  · rintro (⟨hd, h⟩ | ⟨i, hi⟩)
+    · refine ⟨hd, fun j hj => ?_⟩
+      obtain ⟨hx, hT⟩ := frame_of_mem_carrier_germArc hρ.le (hκρ j) hj
+      rcases h with h | h | h
+      · exact absurd hx (not_le.mpr h)
+      · have h1 := tanHeight_anti (hκ.monotone (Fin.zero_le j)) (frameX v α z) (frameY v α z)
+        have h2 := hT (κ j)
+        have h3 : tanHeight (κ 0) (frameX v α z) (frameY v α z) < 0 := h
+        rw [sub_self, mul_zero, zero_div] at h2
+        linarith
+      · have h1 := tanHeight_anti (hκ.monotone (Fin.le_last j)) (frameX v α z) (frameY v α z)
+        have h2 := hT (κ j)
+        have h3 : 0 < tanHeight (κ (Fin.last (m + 1))) (frameX v α z) (frameY v α z) := h
+        rw [sub_self, mul_zero, zero_div] at h2
+        linarith
+    · refine ⟨hi.1, fun j hj => ?_⟩
+      obtain ⟨-, hT⟩ := frame_of_mem_carrier_germArc hρ.le (hκρ j) hj
+      have h2 := hT (κ j)
+      rw [sub_self, mul_zero, zero_div] at h2
+      obtain ⟨ha, hb⟩ := fan_tanHeight_of_mem_hornSet hκ hi j
+      rcases lt_or_ge j i.succ with hlt | hge
+      · exact absurd h2 (ha (Fin.le_castSucc_iff.mpr hlt)).ne'
+      · exact absurd h2 (hb hge).ne
+
+/-- **The pieces of a ball cut by a fan** of tangent arcs: the rest (`none`) and the horn sets between consecutive arcs (`some i`). The
+partition `isSector_fan_iff` reads, indexed so that `ArcMap.encard_sectorsOf_of_partition` counts a colour's sectors on it. -/
+def fanPiece {m : ℕ} (κ : Fin (m + 2) → ℝ) (v : ℂ) (α r : ℝ) : Option (Fin (m + 1)) → Set ℂ
+  | none => fanRest v α (κ 0) (κ (Fin.last (m + 1))) r
+  | some i => hornSet v α (κ i.castSucc) (κ i.succ) r
+
+/-- The union of the pieces is the rest and the horn sets (the spec of `fanPiece`: it fails if a piece is dropped or doubled). -/
+theorem iUnion_fanPiece {m : ℕ} (κ : Fin (m + 2) → ℝ) (v : ℂ) (α r : ℝ) :
+    ⋃ o, fanPiece κ v α r o =
+      fanRest v α (κ 0) (κ (Fin.last (m + 1))) r ∪ ⋃ i : Fin (m + 1), hornSet v α (κ i.castSucc) (κ i.succ) r := by
+  ext z
+  simp only [mem_iUnion, mem_union]
+  constructor
+  · rintro ⟨o, ho⟩
+    cases o with
+    | none => exact Or.inl ho
+    | some i => exact Or.inr ⟨i, ho⟩
+  · rintro (h | ⟨i, hi⟩)
+    · exact ⟨none, h⟩
+    · exact ⟨some i, hi⟩
+
+/-- **The rest approaches the vertex along the open half-turn behind it.** -/
+theorem Ioo_subset_coneAt_fanRest (v : ℂ) (α κlo κhi : ℝ) {r : ℝ} (hr : 0 < r) :
+    Ioo (α + π / 2) (α + 3 * π / 2) ⊆ coneAt (fanRest v α κlo κhi r) v := by
+  intro β hβ ε hε
+  set t := min r ε / 2 with ht
+  have ht0 : 0 < t := by have := lt_min hr hε; positivity
+  have htr : t < r := by have := min_le_left r ε; linarith
+  have htε : t < ε := by have := min_le_right r ε; linarith
+  have hdist : dist (v + (t : ℂ) * e β) v = t := by rw [dist_eq_norm, add_sub_cancel_left, norm_mul_e ht0.le]
+  refine ⟨v + (t : ℂ) * e β, ⟨by rw [hdist]; exact htr, Or.inl ?_⟩, ?_, by rw [hdist]; exact htε, ?_⟩
+  · rw [(frame_polar v α t β).1]
+    exact mul_neg_of_pos_of_neg ht0 (Real.cos_neg_of_pi_div_two_lt_of_lt (by linarith [hβ.1]) (by linarith [hβ.2]))
+  · intro h
+    rw [h, dist_self] at hdist
+    exact ht0.ne hdist
+  · have hnorm : ‖v + (t : ℂ) * e β - v‖ = t := by rw [← dist_eq_norm]; exact hdist
+    rw [hnorm, add_sub_cancel_left, mul_div_cancel_left₀ _ (by exact_mod_cast ht0.ne'), sub_self, norm_zero]
+    exact hε
+
+/-- The rest's cone at the vertex has interior directions. -/
+theorem interior_coneAt_fanRest_nonempty (v : ℂ) (α κlo κhi : ℝ) {r : ℝ} (hr : 0 < r) :
+    (interior (coneAt (fanRest v α κlo κhi r) v)).Nonempty := by
+  have hπ := Real.pi_pos
+  exact ⟨α + π, interior_maximal (Ioo_subset_coneAt_fanRest v α κlo κhi hr) isOpen_Ioo ⟨by linarith, by linarith⟩⟩
+
+/-- **The pieces of a fan are a partition into sectors' shapes**: open, connected, pairwise disjoint, non-empty, each with the vertex in
+its closure. -/
+theorem fanPiece_data {m : ℕ} (κ : Fin (m + 2) → ℝ) (hκ : StrictMono κ) (v : ℂ) (α : ℝ) {ρ r : ℝ} (hr : 0 < r) (hrρ : r ≤ ρ)
+    (hκρ : ∀ i, |κ i| * ρ ≤ 1) (hlo : κ 0 < 0) (hhi : 0 < κ (Fin.last (m + 1))) :
+    (∀ o, IsOpen (fanPiece κ v α r o)) ∧ (∀ o, IsPreconnected (fanPiece κ v α r o)) ∧
+      (∀ o o', o ≠ o' → Disjoint (fanPiece κ v α r o) (fanPiece κ v α r o')) ∧ (∀ o, (fanPiece κ v α r o).Nonempty) ∧
+      ∀ o, v ∈ closure (fanPiece κ v α r o) := by
+  have hπ := Real.pi_pos
+  have hκr : ∀ i, |κ i| * r < 2 := fun i =>
+    lt_of_le_of_lt ((mul_le_mul_of_nonneg_left hrρ (abs_nonneg _)).trans (hκρ i)) (by norm_num)
+  have hlt : ∀ i : Fin (m + 1), κ i.castSucc < κ i.succ := fun i => hκ (Fin.castSucc_lt_succ)
+  have hcone : ∀ o, ∃ β, β ∈ coneAt (fanPiece κ v α r o) v := by
+    intro o
+    cases o with
+    | none => exact ⟨α + π, Ioo_subset_coneAt_fanRest v α _ _ hr ⟨by linarith, by linarith⟩⟩
+    | some i => exact ⟨α, mem_coneAt_hornSet v α (hlt i) hr⟩
+  -- the rest misses every horn of the fan
+  have hrest : ∀ i : Fin (m + 1), Disjoint (fanPiece κ v α r none) (fanPiece κ v α r (some i)) := by
+    intro i
+    rw [disjoint_left]
+    rintro z ⟨-, h⟩ hz
+    obtain ⟨ha, -⟩ := fan_tanHeight_of_mem_hornSet hκ hz 0
+    obtain ⟨-, hb⟩ := fan_tanHeight_of_mem_hornSet hκ hz (Fin.last (m + 1))
+    rcases h with h | h | h
+    · exact lt_asymm h hz.2.1
+    · exact lt_asymm h (ha (Fin.zero_le _))
+    · exact lt_asymm h (hb (Fin.le_last _))
+  -- two horns of the fan, the first below the second
+  have hhorn : ∀ i j : Fin (m + 1), i < j → Disjoint (fanPiece κ v α r (some i)) (fanPiece κ v α r (some j)) := by
+    intro i j hij
+    rw [disjoint_left]
+    intro z hzi hzj
+    obtain ⟨-, hb⟩ := fan_tanHeight_of_mem_hornSet hκ hzi j.castSucc
+    exact lt_asymm (hb (Fin.succ_le_castSucc_iff.mpr hij)) hzj.2.2.1
+  refine ⟨fun o => ?_, fun o => ?_, fun o o' hne => ?_, fun o => ?_, fun o => ?_⟩
+  · cases o with
+    | none => exact isOpen_fanRest v α _ _ r
+    | some i => exact isOpen_hornSet v α _ _ r
+  · cases o with
+    | none => exact isPreconnected_fanRest v α hlo hhi hr
+    | some i => exact isPreconnected_hornSet v α (hlt i) (hκr _) (hκr _)
+  · cases o with
+    | none =>
+      cases o' with
+      | none => exact absurd rfl hne
+      | some j => exact hrest j
+    | some i =>
+      cases o' with
+      | none => exact (hrest i).symm
+      | some j =>
+        have hij : i ≠ j := fun h => hne (by rw [h])
+        rcases lt_or_gt_of_ne hij with h | h
+        · exact hhorn i j h
+        · exact (hhorn j i h).symm
+  · obtain ⟨β, hβ⟩ := hcone o
+    obtain ⟨z, hz, -⟩ := hβ 1 one_pos
+    exact ⟨z, hz⟩
+  · obtain ⟨β, hβ⟩ := hcone o
+    exact mem_closure_of_mem_coneAt hβ
 
 /-- **The sectors of a fan**: a map whose interior points in `B(v, r)` are the ball off a fan of tangent arcs, the lowest curvature
 negative and the highest positive, has as its sectors at radius `r` the rest and the `m + 1` horn sets. -/
@@ -320,11 +804,22 @@ theorem isSector_fan_iff {k : ℕ} {G : ArcMap k} {m : ℕ} (κ : Fin (m + 2) �
     (hI : G.interiorPts ∩ ball v r = ball v r \ ⋃ i, (germArc v α (κ i) ρ).carrier) {S : Set ℂ} :
     G.IsSector v r S ↔ S = fanRest v α (κ 0) (κ (Fin.last (m + 1))) r ∨
       ∃ i : Fin (m + 1), S = hornSet v α (κ i.castSucc) (κ i.succ) r := by
-  sorry
+  have hU : G.interiorPts ∩ ball v r = ⋃ o, fanPiece κ v α r o := by
+    rw [hI, ball_diff_fan κ hκ v α hr hrρ hκρ, iUnion_fanPiece]
+  obtain ⟨ho, hp, hd, hn, hc⟩ := fanPiece_data κ hκ v α hr hrρ hκρ hlo hhi
+  rw [ArcMap.isSector_iff_of_partition hU ho hp hd hn hc]
+  constructor
+  · rintro ⟨o, rfl⟩
+    cases o with
+    | none => exact Or.inl rfl
+    | some i => exact Or.inr ⟨i, rfl⟩
+  · rintro (rfl | ⟨i, rfl⟩)
+    · exact ⟨none, rfl⟩
+    · exact ⟨some i, rfl⟩
 
 /-- **The rest is no horn set**: it approaches `v` along an open interval of directions. -/
 theorem fanRest_ne_hornSet (v : ℂ) (α : ℝ) {κlo κhi r : ℝ} (hr : 0 < r) (α' κ₁ κ₂ : ℝ) :
-    fanRest v α κlo κhi r ≠ hornSet v α' κ₁ κ₂ r := by
-  sorry
+    fanRest v α κlo κhi r ≠ hornSet v α' κ₁ κ₂ r :=
+  ne_hornSet_of_interior_coneAt (interior_coneAt_fanRest_nonempty v α κlo κhi hr) α' κ₁ κ₂ r
 
 end HadwigerNelson.Plane
