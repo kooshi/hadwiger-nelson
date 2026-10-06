@@ -1,0 +1,14 @@
+q=  3 (p=3) least margin 2sqrt(q)-|lambda| = +1.464102 at a=(1,) b=((1,), (1,)) |lambda|=2.000000  ok
+q=  5 (p=5) least margin 2sqrt(q)-|lambda| = +0.472136 at a=(0,) b=((1,), (2,)) |lambda|=4.000000  ok
+q=  7 (p=7) least margin 2sqrt(q)-|lambda| = +0.797543 at a=(1,) b=((2,), (3,)) |lambda|=4.493959  ok
+q= 11 (p=11) least margin 2sqrt(q)-|lambda| = +0.916297 at a=(1,) b=((0,), (4,)) |lambda|=5.716953  ok
+q= 13 (p=13) least margin 2sqrt(q)-|lambda| = -4.788897 at a=(0,) b=((1,), (5,)) |lambda|=12.000000  VIOLATION
+q= 17 (p=17) least margin 2sqrt(q)-|lambda| = -7.753789 at a=(0,) b=((1,), (4,)) |lambda|=16.000000  VIOLATION
+q= 19 (p=19) least margin 2sqrt(q)-|lambda| = +1.108069 at a=(1,) b=((4,), (5,)) |lambda|=7.609729  ok
+q= 23 (p=23) least margin 2sqrt(q)-|lambda| = +1.630976 at a=(1,) b=((3,), (9,)) |lambda|=7.960687  ok
+q=  9 (p=3) least margin 2sqrt(q)-|lambda| = -2.000000 at a=(0, 0) b=((0, 1), (1, 0)) |lambda|=8.000000  VIOLATION
+q= 25 (p=5) least margin 2sqrt(q)-|lambda| = -14.000000 at a=(0, 0) b=((0, 1), (0, 2)) |lambda|=24.000000  VIOLATION
+q= 27 (p=3) least margin 2sqrt(q)-|lambda| = +0.392305 at a=(0, 2, 1) b=((0, 0, 1), (1, 0, 2)) |lambda|=10.000000  ok
+q= 49 (p=7) least margin 2sqrt(q)-|lambda| = -34.000000 at a=(0, 0) b=((0, 1), (1, 0)) |lambda|=48.000000  VIOLATION
+violations: 5
+exit=1

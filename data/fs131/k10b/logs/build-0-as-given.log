@@ -1,0 +1,20 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 8,9,10,11,12,13,14,15
+==> build: this run's full output: build/gate/build/20261006T120409Z-3822333.log
+    ⚠ [3703/3891] Replayed Proofs.HadwigerNelson.Arith.StationaryRatio
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:100:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:107:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:121:8: declaration uses `sorry`
+    ⚠ [5751/5753] Replayed Proofs.HadwigerNelson.Arith.StandingFive
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:70:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:85:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:91:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:102:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:128:8: declaration uses `sorry`
+    All targets up-to-date (5755 jobs).
+==> build: OK — all 1771 modules already up to date, nothing built, 2 module(s) with warnings, 3s
+    full output: build/gate/build/20261006T120409Z-3822333.log
+EXIT=0

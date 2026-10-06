@@ -353,3 +353,83 @@ local and never write a `rfl` between `unitRing ⊥` and `unitRing F` (§ 3.2). 
 - `LEAN.md` § Searching — Lean: § 3.2's kernel fact.
 - `BIBLIOGRAPHY.md`: no new key used. Debts: Rudin 1.4.3 / 1.3.6 read against the page (for `BochnerHerglotz`, `BochnerOn`); Weil's bound for the
   norm-one torus sums, if the floor is imported.
+
+---
+
+# FS131-K10b — wave 10's second planning pass (stages 6–9)
+
+*Job FS131-K10b (de Bruijn, the planner), 2026-10-06, branch `fs131-w10k` (cut from `fs131-w10` at `ace98a35`). Brief:
+`data/fs131/briefs/FS131-K10b-wave10-second.md`. Stages 1–5 above are FS131-K10's and are not changed.*
+
+**What I may change, and what I may not.** Mine: new modules under `Proofs/HadwigerNelson/Arith/`, with their lines in `Proofs.lean` and
+`ARCHITECTURE.md`; a block "FS131-K10b" in `scripts/Axioms.lean`; this record from here down; `tools/fs131_k10b_*.py`; `data/fs131/k10b/`;
+the report. Not mine: the wave's four existing files (`SpectralInputs` and `CharacterColouring` wait for the joining job; `StationaryRatio`
+and `StandingFive` are being proved on `fs131-w10b` and `fs131-w10c` — I import them and edit nothing in them), any landed module beyond
+new declarations, `main`, the gate, `BIBLIOGRAPHY.md` (drafts in the report), an `axiom` (ruled mid-job: none in this pass, § 7.3).
+
+## Theorems this phase proved (FS131-K10b)
+
+Kernel-checked on this branch by `./scripts/build.sh` (§ 9.1's log); the branch does not run the gate, so the axiom audit is the landing's.
+
+- **`RatioBound.card_mul_le_of_indep`** — the ratio bound for a finite abelian group by characters: any finite `S`, `Re Σ_{s∈S} ψ(s) ≥ −m` at
+  every non-trivial `ψ`, a set `I` with no difference in `S` has `|I|(|S| + m) ≤ m|G|`. [kernel on this branch]
+  `Proofs/HadwigerNelson/Arith/RatioBound.lean`. Not in Mathlib or this library before (§ 7.1).
+- **`RatioBound.le_chromaticNumber_of_charSum`** — its chromatic corollary, `(N − 1)m < |S| + m ⟹ N ≤ χ`. [kernel on this branch] same file.
+- **`SpectralInputs.comap_factorSigma_eq`**, `comap_factorSigma_eq_of_action`, **`si4_equivariant_factorSigma`** — J45-SI-4's "equivariant"
+  at the factor σ-algebra, for a map of the family with a left inverse in the family. [kernel on this branch]
+  `Proofs/HadwigerNelson/Arith/FactorAction.lean`.
+- The further leaves proved are listed at § 9.2, with the stage that proved each.
+
+Outside the kernel, with a planted fault each: **`[MMST1996]` Theorem 3 is false as printed at `a = 0`** (`q = 13`, `b = (1, 5)`:
+`|λ_b| = 12 > 2√13`; `tools/fs131_k10b_circle.py --fault`, [measured], and by hand, the coordinator's and mine) and holds with `a ≠ 0` on
+twelve small fields, four of them prime powers [measured]; **the non-trivial spectrum of `U₁₂₈` is the eleven odd integers −19, −15, …, 21**,
+so its Hoffman floor is `1 + 129/19 > 7.78`, i.e. `χ(U₁₂₈) ≥ 8` (`tools/fs131_k10b_u128.py`, exact, two routes agreeing; [tools]).
+
+## Stage 6 — SAVED (FS131-K10b): the readback, the registered expectations, the five statements read back
+
+### 6.1 The brief's quotations (standing rule 3)
+
+By script (`data/fs131/k10b/logs/quotations.sh`, `grep -F` of each quoted string in the file the brief names; output
+`data/fs131/k10b/logs/quotations.txt`): **twenty of twenty match** — `CLAUDE.md` § Counter-priors; inventory items 484, 485, 491, 492, 493,
+494 (`plans/FS131-close-inventory.md` on `main`, where they are filed); the plan's § 7.3 heading and items 3, 4; the first pass's § 3.3
+heading and its four bullets, and § 5.5's floor paragraph; `plans/FS131-E8-derivation.md`'s entry line and its handoff line; I10A's findings
+2 and 3.
+
+### 6.2 Read, and the branch as given
+
+Read whole: the brief, `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building, Stages 1–5 above, the first pass's report, I10A's
+record, inventory items 484–485 and 491–494, the plan's §§ 7.1–7.5, the six J45 backlog entries (`plans/LEAN-BACKLOG.md:7201–7347`) with
+caution C139, `StandingFive.lean` whole, `SpectralInputs.lean` lines 1–62, 200–280, 348–377, 694–793, 1017–1245 (the foundation and the five
+new statements with their proofs), then — after the registration below — `plans/FS84-SI-D-derivation.md` § 1.2, §§ 2.1–2.3 and the six
+entries (lines 419–521), and `plans/FS131-E8-derivation.md` Stage 5 with its entry and control. `[MMST1996]` pp. 225–232 from the held PDF.
+
+**The branch as given**: `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, exit 0, "all 1771 modules already
+up to date", twelve `sorry` leaves — `StandingFive` 9, `StationaryRatio` 3, the other two files none
+(`data/fs131/k10b/logs/build-0-as-given.log`).
+
+### 6.3 Registered expectations (committed in `data/fs131/k10b/registered.md` at `git log`'s first K10b commit, before the derivations were read)
+
+Y1 J45-N1 (a)(b) hides a statement defect: 0.4. Y2 J45-SI-J: 0.35. Y3 J45-SI-5: 0.5. Y4 J45-SI-C: 0.4. Y5 at least one of the four: 0.8.
+Y6 the majority-vote lemma formalizes as written: 0.75; Mathlib's strong law serves as it stands: 0.4. Y7 floor (i): one implementer job,
+about 500 lines, 200–250k, kernel cost under a minute; proved in this job: 0.2. Y8 floor (ii): one job, about 400 lines beside the ratio
+bound, 200k; the import statable in this job: 0.6 before opening `[MMST1996]`, 0.85 after its p. 231. Y9 the import avoidable at 347 by a
+moment bound: 0.1. Y10 a model of `Interface.NegCircle` at `F = ℚ` short enough to prove here: 0.35. Scored at § 9.6.
+
+### 6.4 The five statements read back (the brief's item 2; ruling 494 (b))
+
+| statement (in `SpectralInputs`) | the sentence of its row | read aloud | verdict |
+|---|---|---|---|
+| `condExpL2_mem_contVec` | J45-N2: "and `Π(E_S) = E[·\|𝒜_S]`"; Lemma N2 (`plans/FS84-SI-D-derivation.md:126–127`): "the spectral projection `Π(E_S)` is `E[· \| 𝒜_S]`" | for every `f ∈ L²(μ)` (real), Mathlib's `condExpL2` for `factorSigma T hT l` lies in `contVec T hT l` | **says what the clause says, in three parts** — with the next two it is "`condExpL2` is the orthogonal projection of `L²(μ)` onto the `l`-continuous vectors": range inside, fixes exactly them, residual orthogonal. Two recorded differences, neither a defect: (i) **real `L²`** (the row's `L²` carries complex characters; the subspace is closed under conjugation, Lemma N2's proof, so a complex vector lies in it iff its real and imaginary parts do, and every consumer — SI-1, SI-4 — reads real vectors); (ii) **`Π(E_S)` is not defined as a projection-valued measure**: it is read as the orthogonal projection onto the vectors whose spectral measure is carried by `E_S`, and that set is `contVec T hT (𝓝 0)` by `spectral_carried_iff` over `BochnerOn t` — so the clause reaches `E_S` through that named hypothesis and no other way |
+| `condExpL2_eq_self_iff` | the same | `condExpL2 f = f ↔ f ∈ contVec` | as above; says no more than the row |
+| `inner_sub_condExpL2_eq_zero` | the same | `⟨f − condExpL2 f, g⟩ = 0` for `g ∈ contVec` | as above |
+| `condExp_comp_measurePreserving` | § 2.2 (`:142`): "set `p_j(x) := p_j(0) ∘ T_x` (a version of `P(c(x) = j \| 𝒜_S)`, `𝒜_S` being invariant)" | for `S` measure-preserving with `𝒜.comap S = 𝒜` and `g` integrable, `E[g\|𝒜] ∘ S = E[g ∘ S\|𝒜]` a.s. | **says the sentence, at the class it holds**: "invariant" is the equality `S⁻¹𝒜 = 𝒜` (for a group action the inclusion at every `x` gives it; for one map it does not, I10A's one-sided shift). `[IsProbabilityMeasure μ]` is more than the argument reads (a σ-finite trim would do); no consumer wants the wider class |
+| `si4_equivariant` | J45-SI-4: "an `𝒜_S`-measurable **equivariant** proper four-colouring"; § 1.2 (`:62–63`): "`c′_{T_y ω} = c′_ω(· + y)`"; Lemma SI-4 (`:162`): "`M(x + y) = M(x) ∘ T_y` by the choice of versions" | for measure-preserving `S` with `S⁻¹𝒜 = 𝒜` and `c (S ω) x = c ω (π x)`: a.s., for every `x`, `M(S ω)(x) = M(ω)(π x)` | **says the clause almost surely, the row says it surely** ("by the choice of versions"): with Mathlib's fixed version of the conditional expectation the identity holds off a null set for each map, hence for countably many at once. For the consumer (A⁺: the push-forward of `μ` under `ω ↦ f ∘ M(ω)` is an invariant measure on colourings) almost-sure equivariance is what is read. **Not a defect; a difference to file with the row** |
+
+**The lemma that applies it at the factor σ-algebra** (I10A's finding 3), stated at the class it holds and proved:
+`comap_factorSigma_eq` — for a commuting family of measure-preserving maps and `T x' ∘ T x = id`, `(factorSigma T hT l).comap (T x) =
+factorSigma T hT l`; `comap_factorSigma_eq_of_action` for an additive group action with `T 0 = id`; `si4_equivariant_factorSigma`, the
+composition. The class is "a map of the family with a left inverse in the family", which is weaker than a group action and is exactly what
+the second inclusion reads (`A = (T x)⁻¹((T x')⁻¹A)`). New module `Arith/FactorAction.lean`, namespace `SpectralInputs` (the joining job may
+move the three into `SpectralInputs.lean`; the names are new).
+
+**No statement says less or more than its row in a way that changes a consumer**; nothing here was a message to the coordinator.
