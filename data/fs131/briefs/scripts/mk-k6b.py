@@ -1,6 +1,6 @@
 exec(open("/home/kooshi/source/lean-dir/data/fs131/briefs/scripts/mkbrief.py").read())
 import subprocess
-# Run at launch: the quotations from the deriver's record are read from main's tree as it then stands.
+# The deriver's record (FS131-E8) is final at 49cc6bff; the quotations are read from main's tree.
 KP="plans/FS131-kernel-plan.md"
 W=WT+"fs131-w6/"
 TIP=subprocess.run(["git","-C",W,"rev-parse","--short","HEAD"],capture_output=True,text=True).stdout.strip()
@@ -16,13 +16,13 @@ b=f'''# Brief FS131-K6b — wave 6's second planning pass: the foundation restat
 brief: FS131-K6b
   identity: {PIDENT}
   role: wave 6's second planner — first restate the foundation's pointwise predicates over a family of sets and save that stage (it unblocks an implementer); then land the fan as a library module with an inhabitant, plan the eight entries a deriver added today (the bridge from "the singular set is locally finite" to the fan) as rows, read the arguments the first pass did not read and state those rows (the ladder, the fragment, five more) with `sorry` at each leaf, a plan and a price per leaf, and a handoff implementers can split by file
-  launch: when a slot frees, in the tree the first pass (FS131-K6) handed back, beside jobs of other waves on other branches; the deriver FS131-E8 may still be writing its last stages on `main`
+  launch: when a slot frees, in the tree the first pass (FS131-K6) handed back, beside jobs of other waves on other branches; the deriver FS131-E8 has handed back, and its record on `main` is final
   mission: § Why this job
   statements: § The statements
   acceptance: § Done means
   yours: § What is yours to decide
   fences: {FENCE}
-  channel: message the coordinator ("main") by SendMessage mid-job — **one line when the restated foundation is saved** (§ Done means 2: an implementer launches on a branch cut from that commit); a statement defect in a row or a gap in the deriver's argument (at once, with the address: it goes to the deriver); a generalization or a shorter route; an outside theorem you would import; a change you find you need in `Basic` or `Pinch` after § Done means 2 is saved; or a question you cannot work around. The report goes to `data/fs131/reports/FS131-K6b.md` on your branch, and its text is your final message (if the harness refuses that file, say so and the coordinator files it from your hand-back)
+  channel: message the coordinator ("main") by SendMessage mid-job — **one line when the restated foundation is saved** (§ Done means 2: an implementer launches on a branch cut from that commit); a statement defect in a row or a gap in the deriver's argument (at once, with the address: it goes to a deriver); a generalization or a shorter route; an outside theorem you would import; a change you find you need in `Basic` or `Pinch` after § Done means 2 is saved; or a question you cannot work around. The report goes to `data/fs131/reports/FS131-K6b.md` on your branch, and its text is your final message (if the harness refuses that file, say so and the coordinator files it from your hand-back)
   standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full (§ The gate: the doubled-name check and the inhabitant rule; § Searching — Lean, last bullet: two branches never state one lemma under one name), and `RUNNING.md` § Building before your first build
   record: `plans/FS131-w6-kernel-plan.md` (on branch `fs131-w6`; the first pass's record — your stages from 8, headed FS131-K6b)
   touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6` (branch `fs131-w6`, at `{TIP}`): the modules under `Proofs/HadwigerNelson/Plane/Saturated/` — `Basic`, `Pinch` and `MapColouring` for the restatement of § Done means 2 (signatures and the statements of open leaves; no proved theorem loses its proof), and new modules for the fan, the bridge, the fragment and the ladder (the layout is yours); `Proofs.lean` and `ARCHITECTURE.md` for them; **new declarations only** in landed modules (no statement, definition or docstring of a declaration that is on `main` is edited); `scripts/Axioms.lean` (a block of your own, headed "FS131-K6b", above the `=== PURCHASED ===` banner), `plans/FS131-w6-kernel-plan.md`, `tools/fs131_k6b_*.py`, `data/fs131/k6b/`, `data/fs131/reports/FS131-K6b.md`; **not** `main` (you read the deriver's record there, you do not write it), another wave's branch, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`
@@ -51,6 +51,8 @@ What the first pass handed back, the deriver's result, and the rulings in force 
 {item(487)}
 {item(481)}
 {item(490)}
+{item(491)}
+{item(492)}
 The milestone's plan binds every wave's planning job (read its §§ 7.1–7.5 whole):
 
 {Q(KP,"### 7.3 What each wave's planning job must hold")}
@@ -91,11 +93,17 @@ FS131-E8-LOCAL's *not claimed* line):
 {Q(E8,"  handoff: de Bruijn — the statement as a lemma producing the planner's Fan at z")}
 {Q(E8,"  handoff: de Bruijn — ∀ c : AeColouring k, Saturated c.cls →")}
 {Q(E8,"  handoff: de Bruijn — c.RegJLiteral follows from Saturated c.cls")}
+Its trace of the wave's rows — which row reads a fan at one point, which local finiteness, which the local graph — and what it finds your
+`Fan` does not carry (its § 4.6; read the section whole, table and all; the rows it marks † it read from their entries only):
+
+{Q(E8,"### 4.6 Row by row, for wave 6's second planner")}
+{Q(E8,"**Rows that need a fan at one point and no local finiteness:**")}
+{Q(E8,"**No row reads more than FS131-E8 gives; four read more than the planner's `Fan` has fields for.**")}
 ## Done means
 
 1. **Your readback first**: check every quotation above against its source; read the first pass's record whole (Stages 1–7) and its report
    (`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/data/fs131/reports/FS131-K6.md`), the three modules and the design file, the
-   deriver's record through its last saved stage, and the plan's §§ 7.1–7.5. Register, before reading the unread arguments closely: which of
+   deriver's record whole (Stages 1–5), and the plan's §§ 7.1–7.5. Register, before reading the unread arguments closely: which of
    your rows you expect to hide a statement defect, which to be short, and your price for the bridge. Build the branch once as given (eight
    `sorry` leaves). Open your stages in the record with what you may and may not change. Commit and push.
 2. **The foundation restated, saved first** (the first pass's § 7.2 item 1): `H1`, `H2`, `TwoColourAt`, `IsSplitAt`, `HasTwoDiscsAt`,
@@ -107,7 +115,9 @@ FS131-E8-LOCAL's *not claimed* line):
    find you need after it is a message to me, never an edit.
 3. **The fan as a library module** (the first pass's § 7.2 item 2): the structure, `HasSector`, `HasHorn`, `RegJFan`, `RegJLiteral`, each with a
    spec example, and a named inhabitant (`sq9` at a grid vertex: four branches of constant angle). No `sorry` in the definitions or the
-   inhabitant.
+   inhabitant. The deriver finds four rows read two facts about a branch that the design's `Fan` has no field for — the curvature bound
+   along it, and the convergence of its unit tangent (not only its polar angle) to the limit direction: decide here whether they are fields
+   of the structure or lemmas the bridge exports beside it, and say why (ruling 492 (b)).
 4. **The bridge's eight rows**: for each of the deriver's entries — the statement at the class its argument reads, what it rests on, a skeleton
    with `sorry` at its leaves, a plan and a price per leaf. FS131-E8-FAN is the lemma that produces a `Fan` at `z`; -BRIDGE and -CLAUSE2 are its
    corollaries; -LOCAL is, by the deriver's reading, the form of C11 (ii) the kernel needs and holds FS121-V5-LOC with V5-OFF — say which of
@@ -141,9 +151,9 @@ rows are one theorem and its corollary, what is formalized and what is named as 
 one mind's, and so is the deriver's argument, written this morning and read by me once: the kernel is its second check, and you are the first
 reader who has to make it compile. Attack both. A step of the
 bridge that does not formalize as written, a constant that is off, a hypothesis a proof reads that an entry does not name — each is a message to
-me with the address, and a finding; the deriver may still be running and can answer the same hour. If a row of the ladder turns out to need only
-a fan at one point and no local finiteness — or more than the fan gives — say so row by row: the deriver is tracing the same consumers, and I
-will send you its table when it arrives. Three failed attempts on one route is a dispatch to the companion your identity names, never a fourth.
+me with the address, and a finding; I route it to a deriver the same hour. If a row of the ladder turns out to need only
+a fan at one point and no local finiteness — or more than the fan gives — say so row by row: the deriver's § 4.6 is its own trace of the same
+rows, most of it from entries, and your reading of the arguments is its check. Three failed attempts on one route is a dispatch to the companion your identity names, never a fourth.
 {NOSPAWN}
 
 {MACHINE}'''

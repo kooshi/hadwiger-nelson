@@ -4954,3 +4954,41 @@ reason by the close.*
      not a centred ball) — held for the milestone's errata. (d) **Bearing outside the milestone**: REG-J′ is route M's regularity
      hypothesis (rows 140–144); what is left open of it is its first clause alone (FS-127). E8 drafts the stub lines at its hand-back;
      I file them then. Kooshi is told in the next report, not by a notification: no value moves and nothing waits on him.
+
+491. **FS131-E8 done: nine entries derived, none stalled — the bridge (item 490, its §§ 3.1–3.7 unchanged since), the consumers traced row by
+     row, and the second question answered: J45-SI-5's step (c) needs no pointwise ergodic theorem** (deriver; harness 441k by the task
+     notice; record `plans/FS131-E8-derivation.md` Stages 1–5; report `data/fs131/reports/FS131-E8.md`; commits `39d7b431`, `0310d854`,
+     `9fcac197`, `fe9d2479`, `49cc6bff`, all on `origin/main`, tree clean). **New since item 490**: **FS131-E8-SI5C** ([hand], one mind) —
+     a finite-valued `G` that every `c(x)` equals unless an indicator `ε(x)` of probability `p < 1/2` fires, the `ε` pairwise independent
+     over an infinite index set, is almost surely a function of `c`: majority decoding by Chebyshev and the closedness of `L²(σ(c))`; it
+     replaces "ergodic averages along a tempered Følner sequence" in J45-SI-5 (c), whose remainder was not re-derived. **The trace**
+     (§§ 4.2, 4.6): no filed result becomes true under the stronger hypothesis only; four rows need a fan at one point and no local
+     finiteness (FS111-W-KB-DIR, FS121-DB1-L3, -V2-SECTOR, -V3-CPI); **the planner's `Fan` lacks two facts those rows read** — the
+     curvature bound along a branch, and the convergence of a branch's unit tangent to `dir i` (`Fan.tendsto` is the polar angle's) —
+     both in the record (FS131-E8-LOCAL at branch points; -GAMMA with -BETA's last clause). The table's rows marked † were read from
+     entries only. **Its attack** (§ 4.1): the nearest false statements located (without saturation; at an accumulation point of Σ; in a
+     disc of radius above `1/2`); "the fan has a region of positive angle" not decided; on a cover, not decided. **My receipt**: the five
+     commits are ancestors of `origin/main`; the diff of the record from `0310d854` to `49cc6bff` removes no line (§§ 3.1–3.7 unchanged, by
+     `git diff`); `data/fs131/e8/gate-stage5.out` reads 9 entries, 9 derived, 3 controls fired, `GATE: PASS`; `e8_majority.py` run by me
+     prints 0, and 291 with `--p 2/3`; the Chebyshev line redone by hand (`(2n/9)/(n/6)² = 8/n`); four of § 4.6's quoted phrases found once
+     each in their sources (`plans/FS121-derivation.md`, `plans/FS111-derivation.md` l. 1020). Not checked by me: the table's rows against
+     the arguments (the planner reads them). **Items**: predictions scored — five of five met, Brier 0.014, all registered after a sketch
+     (its § 1.5 says so); prior-art debts — Schur's comparison theorem and Allard–Almgren named as recalled, nothing rests on either, no
+     literature search run, nothing claimed new beyond "not found in this project's records"; a slip, the job's — no token count readable
+     at its saved stages; drafts in its §§ 4.4 and 4.6 (two stub lines, two errata lines, a note for `data/fs121/claims.md`, G85's words,
+     a G92 instance). **Credit**: the off-centre reading of M-PINCH and the cusp gap in C11 (ii) were found by re-reading the held proofs
+     against the Lean statements, and the consumer table was added on one message's notice.
+492. **Rulings on E8's held items, and its slot.** (a) **REG-J′ and C121-REGJ keep their frozen words in the stubs' question sections and
+     on the front page until the bridge's module passes the gate**; the two bearing lines are filed today (`plans/STUB-lateral-extent.md`,
+     `plans/STUB-curved-pencils.md`, verbatim by script from E8's § 4.4), and the rewrite to "Σ locally finite" goes with the filing that
+     regrades the bridge, Poros asked at its next re-rank whether FS-127's card changes. Alternative: rewrite now. Why: "held" means
+     kernel-checked, and one mind's hand result does not rename a hypothesis in files every agent loads at launch; nothing there is wrong
+     today (`CLAUDE.md`'s theory paragraph already names the first clause alone, E8's § 4.4). Confidence: high. (b) **The `Fan`'s two
+     missing facts go to FS131-K6b's brief**: whether they are fields of the structure or lemmas exported beside it is the planner's
+     (the structure is a design, landed nowhere). (c) **The errata lines** (FS111-M-C11, FS111-M-PINCH), the note for
+     `data/fs121/claims.md`, G85's replacement words and the G92 instance are **held for the milestone's filing** with the other errata,
+     their texts at E8's §§ 4.4 and 4.6. Alternative: file each now. Why: one filing audits them together (`tools/claude_md_fact_audit.py`),
+     and the grokkings file is loaded at launch by two lanes. Confidence: high. (d) **FS131-E8-SI5C becomes a row of wave 10's second
+     pass** (K10b), under J45-SI-5; that job checks at the pin whether Mathlib's strong law serves or Chebyshev is written out. (e) No
+     bibliography row (E8's § 4.4: nothing rests on the two recalled theorems). (f) **Slot → FS131-K6b**, wave 6's second planner
+     (`debruijn`), its brief regenerated with E8's § 4.6 and re-gated, launched 2026-10-06. In flight: 1 (MC1) + 1 (I10A) + 1 (K6b) = 3.
