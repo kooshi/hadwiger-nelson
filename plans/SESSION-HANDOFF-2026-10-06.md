@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–432 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–434 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -48,7 +48,13 @@ planted-picture models land (queue item 2).
 Agent ids are in this session's scratch (`agents.txt`), never in a file. If the session restarted, resume a job from its record's last SAVED stage with
 a fresh agent on the same brief.
 
-## 4. Queue for the next freed slots, in order (item 427)
+## 4. Queue for the next freed slots, in order (item 427; re-ordered by ruling 434)
+
+0. **FS131-KA1, the outward collar bend's planner** (`debruijn`) — **first, ahead of everything below** (ruling 434 (a)): the arc step needs a bend
+   proved nowhere, `bend_away_part` (`sorry` in `fs131-w5a`'s `BendStep.lean`; item 433). Brief drafted and gated,
+   `data/fs131/briefs/FS131-KA1-bend-away.md`; **regenerate it at launch** (`python3 data/fs131/briefs/scripts/mk-ka1.py [tree] [branch] [launch
+   line]`, then the gate): on `fs131-w5a` once IA1 has handed back, or on a branch cut from IA1's last pushed stage if another slot frees first.
+   It replaces item 5 below.
 
 1. **The freed lane's continuation**, if it left leaves on wave 5's path (IR2's will).
 2. **FS131-E7**, a short Ephodos job (`ephodos`): QA4's rank 9 and rank 10's question (`plans/FS131-QA4-audit.md` § 6.2) — a model or a contradiction
