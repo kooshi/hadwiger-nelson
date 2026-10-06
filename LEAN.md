@@ -174,6 +174,11 @@ the characteristic failure here:
   `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants sixty-two controls
   and watches each fire; the load-bearing one — the same carrier family at an instantiation nothing refutes — must read `UNKNOWN`,
   never `VACUOUS`.
+- **The environment linters** are `lake lint --no-build -- --no-build --trace` under the slot (about 5 s, 4.8 GB): Lake's
+  `--no-build` exits instead of rebuilding the driver, the driver's exits instead of building the library, and `--trace` prints
+  one verdict per linter. Green is exit 0, `-- Linting passed for Proofs.`, and every linter `(2/2) Passed!`. An unused argument
+  named with an underscore, or referenced by `have _ := h`, is not reported; an unused anonymous instance binder is, and the
+  build's own linters do not warn about it.
 - **Every gate keeps what it computed — read it before re-running one.** `build.sh`, `axioms.sh`, `vacuity.sh` and `lean4checker.sh`
   save their tool's complete output under `build/gate/<gate>/` (`latest` is the last complete run; `scripts/gate-log.sh`) and print a
   digest: every count, whether the counts recorded in `CLAUDE.md` still match, every flagged or declared row in full, and every row

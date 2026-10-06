@@ -3791,3 +3791,39 @@ reason by the close.*
      (ruling 370 (a)) — the queue's next; with them `exists_preBend`, `n3_base`, `localDense` and `dense3` come off `sorryAx`. Alternative weighed:
      `bend_away`'s implementer on `fs131-w4ba`. Why: these four are on wave 5's landing path and `bend_away` lands on its own; it takes the slot LN1 frees.
      Confidence: high. In flight after I5q's launch: 1 (IR1) + 1 (LN1) + 1 (I5q) = 3.
+418. **`lake lint` over `main` at `333ecaa1`, measured: FS131-LN1 done** (harness ≈ 248k by the task notice; record `plans/FS131-lint-measurement.md`, data
+     `data/fs131/ln/`, report `data/fs131/reports/FS131-LN1.md`; commits `f747e665`, `95c2420e`, `5b8a753d`, `4b68d47d` on `fs131-wop`, merged into `main` by
+     Keryx at `cfdf26f3`). Exit 1: **3 findings in 9,643 declarations** (plus 8,414 automatically generated) with 14 linters, 13 of them passing; all three
+     `unusedArguments`, each an unused anonymous `[NumberField _]` instance binder, all in wave 2's `Arith/` (`DyadicSqrt3Conclusion`, a definition;
+     `placeHom_step`; `falconerFan_five_placeHom`, row FS129-SA1-FALC-RES (ii)); none on a hypothesis a ruling kept. 4.9 s, 4.8 GB, nothing rebuilt, run as
+     `lake lint --no-build -- --no-build --trace` (the two guards make a rebuild impossible). Control: a planted unused argument in `OpenMove` reported at
+     `OpenMove.lean:2876:1`, exit 1, the file restored byte for byte, the third run byte-identical to the first. **What the linters do not see** (checked on
+     a scratch file with a firing control): an unused argument named with an underscore, or referenced by `have _ := h`, is not reported (so rulings 185 and
+     244's kept hypotheses are never findings); an unused anonymous instance binder is, and the build's own linters do not warn about it. **Generalization**:
+     `placeHom_step` and `falconerFan_five_placeHom` hold for every subfield `F` of `ℝ`. **Prediction scored**: 11 of 12 met; missed the size (it gave "20 to
+     300 findings" 0.60; it is 3). **Receipt** (Keryx): `origin/fs131-wop` is `4b68d47d`, the tree clean, its changes since `333ecaa1` under `data/`, `plans/`
+     and `tools/` only; `data/fs131/ln/lint-baseline.out` read: the three findings as reported, 13 lines "Passed!"; `count-baseline.md` read. **Filed**
+     (this commit): LN1's draft 1, the linters' bullet in `LEAN.md` § The gate, verbatim; `.claude/agents/debruijn-implementer.md`'s workflow line corrected
+     to "on Opus 5.5" (LN1's correction; `scripts/identities.py check` PASS); the fact audit against `47e2b181` passes with 0 losses. **For planner briefs**
+     (LN1): a skeleton that copies `[NumberField F]`-style binders from a row's wording checks at its first green build that each is used. Credit: LN1, for a
+     measurement that turned a feared debt into three lines, and the guarded command.
+419. **Rulings on LN1's held items; a correction to ruling 417 (b); the slot.** (a) **The three binders are removed** (two theorems become strictly stronger,
+     one definition loses an idle argument), each a statement change recorded with its diff and logged as a generalization for the errata. Alternative weighed:
+     name them `[_h : NumberField _]`, which changes no type. Why: an instance hypothesis a statement does not need misstates what the theorem asks, and no
+     call site passes an instance by hand. Confidence: high. When: with (d)'s remedy pass, before wave 5's landing. (b) **Ruling 415 (c) revised: every
+     landing runs the guarded lint** after its green build (`--mem 8`), and the close keeps the firing control. Why: 415 (c)'s reason (it starts Lake outside
+     `scripts/build.sh`) does not hold for the guarded command. Confidence: high. (c) **Kept hypotheses stay kept**: an unused hypothesis a ruling kept
+     (underscore-named, or read by `have _ :=`) is not a linter finding; each stays logged as a generalization for the errata, with no mass removal.
+     Confidence: high. (d) **Slip, the coordinator's — ruling 417 (b) was made from memory and is wrong on the rule.** `LEAN.md` § The gate, re-read: every
+     theorem whose hypothesis is a structure ships a named inhabitant or a note naming the theorem that supplies one, and "the inhabitant satisfies every
+     hypothesis the theorem does not refute, at once". So a model of `bend_toward_collar`'s whole hypothesis set **is** asked for by the gate's letter, as
+     is one for `exists_open` (which landed with a note that none exists in Lean yet: OL1's "gate-rule gap", item 414) and, by IO3's reading (item 408),
+     `exists_merge`. The scan cannot check this item; it is read by people, and FS131-QA2 and QA3 (items 172, 273) last read it on 2026-10-04, before
+     MERGE's landed form, OPEN, the collar, the limit and the procedure existed. **Ruled**: (i) a third pass of the impossible-assumption audit,
+     **FS131-QA4**, takes LN1's slot now — every theorem landed since QA3 and every wave-5 theorem about to land, against the rule's letter, with an attack on
+     each uninhabited hypothesis set and a priced list of models owed; (ii) its list is cleared by one remedy pass before wave 5's landing (the three binders
+     of (a); `bend_toward_collar` without `hmax` and `hlen`, which the kernel shows unused, so that `collarModel`'s arc inhabits it; the models it names);
+     (iii) what "held" means for MERGE and OPEN is unchanged as to truth — the kernel checked them, and E6's exact model satisfies OPEN's hypotheses at
+     [hand] — but each carries this open gate item until its model lands. Alternative weighed: the tangent "away" bend's planner now, the audit at the close.
+     Why: this class of defect has been found twice by audit and never by the scan (items 158, 268), and every statement built on an unaudited one is at
+     risk. Confidence: high. `bend_away`'s planner takes the next slot. In flight after QA4's launch: 1 (IR1) + 1 (I5q) + 1 (QA4) = 3.
