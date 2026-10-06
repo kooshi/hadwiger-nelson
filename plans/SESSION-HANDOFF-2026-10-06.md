@@ -55,7 +55,8 @@ a fresh agent on the same brief.
    All three slots are full (MC1, I10A, E8); wave 10 and wave 6 are planned in a first pass (items 484–487). K10 has reported a statement defect in a filed hand result, ruled (items 477–478: TC1-STANDING-FIVE
    takes a second named hypothesis, the finite-target floor; FS89-S0A-10 takes its band's order bound as a hypothesis). In order, as slots free: **FS131-K6b is running** (§ 3; E8 handed back, items 491–492: nine entries derived, its stub lines filed, its errata held for the filing);
    next into free slots:
-   **in this order (rulings 495 (d), 497): FS131-I10C** (`debruijn-implementer`, `model: "opus"`; § 3's I10B row);
+   **the order, planners and implementers alternating (rulings 495 (d), 497; a planner's hand-back is what implementers wait on, and planners
+   find the statement defects): K7, I10C, K8, I6A, K9, I6B, then MD1, MD2.** The jobs: **FS131-I10C** (`debruijn-implementer`, `model: "opus"`; § 3's I10B row);
    **FS131-I6A** (`Pinch`'s seven leaves, on `fs131-w6p`) and **FS131-I6B** (`MapColouring`'s `sat_inP` and its Lean model, on `fs131-w6m`) — both
    implementers, briefs gated (`data/fs131/briefs/FS131-I6A-wave6.md`, `FS131-I6B-wave6.md`; generator `mk-i6.py A|B`), trees made at `3928644b`;
    **the planners of waves 7–9, FS131-K7, K8, K9** (`debruijn`; **briefs gated, trees made** at `e6e7b312` — `data/fs131/briefs/FS131-K7-wave7.md`,
