@@ -24,7 +24,7 @@ else:
     sc=open('data/fs131/ir/ir3/scratch/Open.lean').read()
     aux = sc[sc.index("/-- **The vertex step from OPEN's surgery**"):sc.index("end Near\n")]
     body = sc[sc.index("  classical\n  obtain ⟨X⟩ := exists_near", sc.index("theorem exists_openStep'")):sc.index("\nend ArcMap")]
-    assert body.rstrip().endswith("hF hc hdeg hhorn⟩⟩")
+    assert body.rstrip().endswith("hF hc hdeg hhorn⟩")
     old_doc = s[s.index("/-- **The vertex step, OPEN's case**"):s.index("theorem exists_openStep (hF")]
     new_doc = """/-- **The vertex step, OPEN's case** (FS131-E6-OPEN, cleaned): `exists_open`'s hypotheses at a point of a clean map. Its map is
 `OpenMove`'s surgery (`openArcs`, `openCol` for the configuration `Near.exists_openConfig` gives, `Near.exists_openStep_aux`) at a

@@ -5857,6 +5857,10 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.exists_mergeStep_aux
 #print axioms HadwigerNelson.Plane.ArcMap.exists_mergeStep
 
+-- FS131-IR3, stage 27: OPEN's case; with it the vertex step (`exists_vertexStep`, recorded in an earlier block above) rests on no open case
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_openStep_aux
+#print axioms HadwigerNelson.Plane.ArcMap.exists_openStep
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -1552,7 +1552,8 @@ theorem not_isSite_of_rim_junction {M : ArcMap k} (hc : M.IsClean) {v : ℂ} {β
 circle of radius `ρ₁` about `v` and on finitely many branches from `v`, pairwise apart and each a graph out to `R`. Then a point
 `x ≠ v` of the ball is no site and carries at most three colours, provided that where a branch meets the circle at `x`, points of the
 circle or of that branch off the arcs lie arbitrarily near `x` (one of the junction's four branches is dead). Off the circle, or off
-every branch, `x` lies on at most one curve (`not_isSite_of_curve`); at a junction, `not_isSite_of_rim_junction`. -/
+every branch, `x` lies on at most one curve (`not_isSite_of_curve`); at a junction, `not_isSite_of_rim_junction`. Inhabitants of the
+hypotheses: the cleaned maps of the four cases (through `Near.not_isSite_of_chart`); no Lean model of such a map is on file. -/
 theorem not_isSite_of_branches {M : ArcMap k} (hc : M.IsClean) {v : ℂ} {R ρ₁ : ℝ} (hρ₁ : 0 < ρ₁) (hρ₁R : ρ₁ < R)
     (hdom : ball v R ⊆ M.dom) (𝒢 : Finset (ℝ × ℝ)) (hcurv : ∀ g ∈ 𝒢, |g.2| * R < 2)
     (hapart : ∀ g ∈ 𝒢, ∀ g' ∈ 𝒢, ∀ t ∈ Ioo 0 R, branchPt v g.1 g.2 t = branchPt v g'.1 g'.2 t → g = g')
@@ -1830,7 +1831,8 @@ theorem mem_cleanKeep_interiorPts_of_const {M : ArcMap k} {w : ℂ} (hwd : w ∈
 unit arc and adds no colour at `v`, whose cleaned map has no site and at most three colours at the other points of the closed disc
 and a lower potential at `v`, gives the step — `cleanKeep_valid`, `cleanKeep_isClean`, `surgery_cleanKeep_localStep`, and
 `IsModification`'s colour clause read off the disc by locality, at `v` by the surgery's clause, elsewhere in the disc by the bound
-three. -/
+three. Inhabitants of the hypotheses: each of the four cases' constructions (`Near.RayConfig.exists_step`,
+`Near.exists_shaveStep_aux`, `Near.exists_mergeStep_aux`, `Near.exists_openStep_aux`), on maps with no Lean model on file. -/
 theorem surgery_step (hc : F.IsClean) {v : ℂ} {ρ : ℝ} {A : Set Arc} {col' : ℂ → Fin k} {hv : v ∈ F.dom} {hρ : 0 < ρ}
     {hA : ∀ a ∈ A, a.Nondegenerate} {hAf : A.Finite}
     {hlc : ∀ x ∈ F.dom, x ∉ ⋃ a ∈ F.trimArcs v ρ ∪ A, a.carrier → ∀ᶠ y in 𝓝 x, col' y = col' x}
@@ -1889,9 +1891,8 @@ end Near
 /-! ## The vertex step's four cases (FS131-IR2): one statement per move, in the vertex step's own conclusion
 
 `exists_vertexStep` is their case split (FS131-E6-ROUTE). Each takes its move's hypotheses (`exists_merge_aux`, `exists_rayMerge_aux`,
-`exists_shave_aux`, `exists_open`) with cleanness and the two counts, and concludes the step. A case is open (`sorry`) until proved
-from its construction (routes: `plans/FS131-limit-kernel-plan.md`, Stage 20; proved so far, by FS131-IR3: MERGE-RAY's and
-SHAVE's, MERGE's). -/
+`exists_shave_aux`, `exists_open`) with cleanness and the two counts, and concludes the step. All four are proved
+(FS131-IR3; `plans/FS131-limit-kernel-plan.md`, Stages 24–27), each from its move's construction through `surgery_step`. -/
 
 /-- A colour with a horn at `v` has at least one sector there. -/
 theorem one_le_of_isHorn {v : ℂ} (hv : v ∈ F.dom) {α κ₁ κ₂ : ℝ} {c : Fin k} (hH : F.IsHorn v α κ₁ κ₂ c) {n : ℕ}
@@ -1927,7 +1928,8 @@ variable {v : ℂ} {X : F.Near v} {s : Fin X.n} {a b : ℕ}
 arcs of the surgery lie on the map's arcs and on the rim arc (`mem_merge_interiorPts_of_mem`), so the junctions are on the circle of
 radius `ρ/2`: at a gap germ the germ's inner branch is interior to the recoloured gap; at any other germ the sector after it is no
 gap sector, and its points on that circle are off the rim arc, interior to the surgery. The count is `pot_lt_of_interior` at the
-gap's first germ. Neither the gap's freedom from `c`-sectors nor `a + 1 < b` is read. -/
+gap's first germ. Neither the gap's freedom from `c`-sectors nor `a + 1 < b` is read. Inhabitant: none in Lean (as
+`exists_mergeStep`, which supplies the hypotheses from `Near.exists_gap`). -/
 theorem exists_mergeStep_aux {ρ ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) (hF : F.Valid) (hc : F.IsClean)
     {c : Fin k} (hab : a < b) (hbn : b < X.n) (hca : X.col (BranchGerms.idx s a) = c)
     (hcb : X.col (BranchGerms.idx s b) = c) {ρc : ℝ} (hρc : ρ ≤ ρc)
@@ -2050,7 +2052,8 @@ variable {v : ℂ} {X : F.Near v} {ρ α κ₁ κ₂ κ₃ κ₄ : ℝ} {i₀ i�
 colouring `rayCol`, then `cleanKeep`. The count is `pot_lt_of_interior` at the lower horn's upper germ, which the merge drops; a
 point of the rim on a kept germ has the sector after the germ of one colour on both sides of the rim, a point on a dropped germ has
 the germ's inner branch interior to the merged horn (`not_isSite_of_chart`). The gap need hold no chart sector of another colour
-only: `RayConfig.exists_merge`'s hypothesis `hfree` is not read, so the two given horns serve as they are. -/
+only: `RayConfig.exists_merge`'s hypothesis `hfree` is not read, so the two given horns serve as they are. Inhabitant: none in
+Lean (as `exists_rayStep`, which supplies the hypotheses from two horns of one colour along one ray). -/
 theorem RayConfig.exists_step (hR : X.RayConfig ρ α κ₁ κ₂ κ₃ κ₄ i₀ i₁) {R : ℝ} (hRs : X.Small R) (hρR : ρ < R) (hF : F.Valid)
     (hc : F.IsClean) {c : Fin k} (hci₀ : X.col i₀ = c) (hci₁ : X.col i₁ = c)
     (hclear : ∀ z ∈ hornSet v α κ₂ κ₃ ρ, F.IsClear c z) {m j : ℕ} (hdeg : F.HasDegree v m) (hhorn : F.HasHornCount v j) :
@@ -2213,7 +2216,8 @@ arc of curvature `σ` added and the colouring `shaveCol`, then `cleanKeep`. The 
 a sector of the cleaned map holds an interior point of the move; off the horn its chart sector lies in it; in the horn above the
 `σ`-arc, the upper piece, the points of the germ above it — interior after cleaning, the flank's colour `g` on both sides — and the
 flank sector do; below, the same with `h`. The rim: the sector after a germ other than the horn's lower one keeps its colour, and so
-does the sector before that one; the `σ`-arc ends at the rim, its continuation interior to the horn (`not_isSite_of_chart`). -/
+does the sector before that one; the `σ`-arc ends at the rim, its continuation interior to the horn (`not_isSite_of_chart`).
+Inhabitant: none in Lean (as `exists_shaveStep`, which supplies the hypotheses from a horn with its two flanks). -/
 theorem exists_shaveStep_aux (X : F.Near v) {ρ R : ℝ} (hs : X.Small ρ) (hRs : X.Small R) (hρR : ρ < R) (hF : F.Valid)
     (hc : F.IsClean) {α κ₁ κ₂ σ : ℝ} {g h : Fin k} {i₀ p : Fin X.n} (hp : BranchGerms.next p = i₀)
     (hβ : e (X.G.β i₀) = e α) (hnβ : X.G.nextβ i₀ = X.G.β i₀) (hκ : X.G.κ i₀ = κ₁) (hnκ : X.G.nextκ i₀ = κ₂)
@@ -2505,16 +2509,179 @@ theorem exists_shaveStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Cover
     hσ₁ hσ₂ hcl hdeg hhorn⟩
 
 
-/-- **The vertex step, OPEN's case** (FS131-E6-OPEN, cleaned): `exists_open`'s hypotheses at a point of a clean map. Open: its map
-is `OpenMove`'s surgery (radius below `δ` already), then `cleanKeep`; the count is `exists_open`'s clause and `cleanKeep_pot_le`.
-Inhabitant: none in Lean (FS131-E6's twelve-colour map at [hand], as `exists_open`'s note says). -/
+/-! ### OPEN's case (FS131-IR3) -/
+
+namespace Near
+
+variable {v : ℂ} {X : F.Near v} {s : Fin X.n} {b : ℕ}
+
+/-- **The vertex step from OPEN's surgery** (FS131-E6-OPEN's construction, cleaned): the surgery at radius `ρ` with `openArcs` and
+`openCol` — the gap `s, 0, b` and the wedge recoloured `c` inside `ρ/2`, the ray added, the rim arcs at `ρ/2` — then `cleanKeep`. The
+count is `open_degree_horns` and `cleanKeep_pot_le`. The arcs of the surgery lie on the map's arcs, on the circle of radius `ρ/2`
+and on the ray, a branch apart from the chart's germs below `ρc`; at a gap germ on that circle the germ's inner branch is interior
+(`OpenConfig.not_mem_openArcs`); at another germ, a sector beside it is neither a gap sector nor the partial sector, so its points
+on the circle are interior (`mem_open_interiorPts_of_sector_off`); at the ray's end the ray's continuation is interior to the
+partial sector (`mem_open_interiorPts_of_mem`). Inhabitant: none in Lean (as `exists_openStep`, which supplies the configuration
+from `Near.exists_openConfig`). -/
+theorem exists_openStep_aux {c : Fin k} {up : Bool} {ψ ρc ρ ρ' : ℝ} (cfg : X.OpenConfig c up s b ψ ρc) (h' : X.Small ρ')
+    (hρρ' : ρ < ρ') (hρ'c : ρ' ≤ ρc) (h : X.Small ρ) (hF : F.Valid) (hc : F.IsClean) {m j : ℕ} (hdeg : F.HasDegree v m)
+    (hhorn : F.HasHornCount v j) :
+    ∃ F' : ArcMap k, F'.Valid ∧ F'.IsClean ∧ LocalStep F F' (closedBall v ρ) ∧ F.IsModification F' ∧
+      (∃ m' j', m' + j' < m + j ∧ F'.HasDegree v m' ∧ F'.HasHornCount v j') ∧
+      F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F'.IsSite x := by
+  classical
+  have hρc : ρ ≤ ρc := hρρ'.le.trans hρ'c
+  have hn2 := cfg.two_le
+  have hhalf : 0 < ρ / 2 := by linarith [h.1]
+  have hhalfρ' : ρ / 2 < ρ' := by linarith [h.1]
+  set F₁ := F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) X.mem_dom h.1
+    (openArcs_nondegenerate cfg h hρc) (openArcs_finite ρ) (open_hlc cfg h' hρρ' h hρc) with hF₁
+  have hval : F₁.Valid := open_valid hF cfg h' hρρ' h hρc
+  have hself : F₁.coloursAt v ⊆ F.coloursAt v := open_coloursAt_self cfg h hρc
+  have hcol : ∀ z ∉ closedBall v ρ, X.G.openCol v X.col F.col up s b ψ c ρ z = F.col z := by
+    intro z hz
+    have hz' : z ∉ ball v ρ := fun h'' => hz (ball_subset_closedBall h'')
+    have hW : z ∉ X.G.openWedge v up s b ψ ρ := fun h'' =>
+      hz' (ball_subset_ball (by linarith [h.1]) (X.G.openWedge_subset_ball v up s b ψ ρ h''))
+    simp only [BranchGerms.openCol, if_neg hW]
+    exact mergeCol_of_not_mem h hz'
+  -- the ray as a branch from `v`, inside the partial sector below `ρ'`
+  have hray : ∀ t : ℝ, branchPt v ψ 0 t = v + (t : ℂ) * e ψ := fun t => by simp [branchPt]
+  have hraysec : ∀ t ∈ Ioo 0 ρ', v + (t : ℂ) * e ψ ∈ X.G.sector v ρ' (BranchGerms.idx s (BranchGerms.rayPos up b)) :=
+    fun t ht => (X.G.mem_sector_idx s _).mpr ⟨t, ht, ψ, cfg.ray t ⟨ht.1, ht.2.trans_le hρ'c⟩, rfl⟩
+  -- the arcs of the surgery
+  have hΓ₁ : ∀ z ∈ F₁.Γ, z ∈ F.Γ ∨ z ∈ sphere v (ρ / 2) ∨ ∃ t ∈ Icc 0 (ρ / 2), z = v + (t : ℂ) * e ψ := by
+    rintro z ⟨hzd, hzA⟩
+    obtain ⟨B, hB, hzB⟩ := mem_iUnion₂.mp hzA
+    rcases hB with hB | hB | rfl | rfl
+    · obtain ⟨-, a', ha', hsub, -⟩ := (F.trimArcs_spec X.mem_dom h.1).1 B hB
+      exact Or.inl ⟨hzd, mem_iUnion₂.mpr ⟨a', ha', hsub hzB⟩⟩
+    · rcases mergeArcs_cases h hB with ⟨j', hj'⟩ | ⟨-, rfl⟩
+      · exact Or.inl (germ_subset_Γ h j' (hj' hzB))
+      · right; left
+        rw [mem_sphere, dist_eq_norm]; exact norm_of_mem_rimArc h hzB
+    · exact Or.inr (Or.inr (eq_of_mem_openRay h.1 hzB))
+    · exact Or.inr (Or.inl (X.G.openRim_subset_sphere v up s b ψ h.1.le hzB))
+  have hpts : ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F₁.cleanKeep.IsSite x ∧ (F₁.cleanKeep.coloursAt x).ncard ≤ 3 := by
+    intro x hx hxv
+    refine X.not_isSite_of_chart (M := F₁.cleanKeep) h' hhalf hhalfρ' cleanKeep_isClean rfl {(ψ, 0)} ?_ ?_ ?_
+      (closedBall_subset_ball hρρ' hx) hxv ?_ ?_
+    · intro g' hg'
+      rw [Finset.mem_singleton] at hg'
+      subst hg'
+      simp
+    · intro g' hg' t ht
+      rw [Finset.mem_singleton] at hg'
+      subst hg'
+      refine ⟨fun i heq => ?_, fun g'' hg'' _ => (Finset.mem_singleton.mp hg'').symm⟩
+      have hI := sector_subset_interiorPts h' _ (hraysec t ht)
+      rw [← hray, show branchPt v ψ 0 t = branchPt v (X.G.β i) (X.G.κ i) t from heq] at hI
+      exact hI.2 (X.hC.branchPt_mem_Γ i ⟨ht.1, ht.2.trans h'.lt_r₀⟩).2
+    · intro z hz hzR hzv
+      rcases hΓ₁ z (cleanKeep_Γ_subset _ hz) with h1 | h1 | ⟨t, ht, rfl⟩
+      · exact Or.inr (Or.inl (X.hC.exists_branchPt_eq hzv (ball_subset_ball h'.lt_r₀.le hzR) fun hI => hI.2 h1.2))
+      · exact Or.inl h1
+      · refine Or.inr (Or.inr ⟨(ψ, 0), Finset.mem_singleton_self _, ?_⟩)
+        rw [add_sub_cancel_left, norm_mul_e ht.1]
+        exact (hray t).symm
+    · -- a germ of the chart on the circle of radius `ρ/2`
+      intro i hxi ε hε
+      have hxΓ : x ∈ F.Γ := hxi ▸ X.hC.branchPt_mem_Γ i ⟨hhalf, hhalfρ'.trans h'.lt_r₀⟩
+      by_cases hi : i ∈ BranchGerms.gapGerm s 0 b
+      · -- a gap germ: its branch inside `ρ/2` is interior to the recoloured gap
+        obtain ⟨m', hm1, hm2, rfl⟩ := hi
+        obtain ⟨t, ht, htε⟩ := exists_branchPt_near_lt v (X.G.β (BranchGerms.idx s m')) (X.G.κ (BranchGerms.idx s m'))
+          hhalf hε
+        have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, by linarith [ht.2, h.1, h.2.1]⟩
+        have htc : t ∈ Ioo 0 ρc := ⟨ht.1, by linarith [ht.2, h.1]⟩
+        have hmono := X.G.liftDir_mono X.hord s hts
+        have hne : X.G.liftDir s m' t ≠ ψ := by
+          cases up
+          · have h3 := (cfg.ray t htc).2
+            simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at h3
+            exact ne_of_gt (lt_of_lt_of_le h3 (hmono.monotone (show 1 ≤ m' by omega)))
+          · have h3 := (cfg.ray t htc).1
+            simp only [BranchGerms.rayPos, if_true] at h3
+            exact ne_of_lt (lt_of_le_of_lt (hmono.monotone hm2) h3)
+        have hnot := cfg.not_mem_openArcs h hρc ht (hmono (show 0 < m' by omega)) (hmono (show m' < b + 1 by omega)) hne
+        rw [← X.G.branchPt_idx v s m' t] at hnot
+        have htb : branchPt v (X.G.β (BranchGerms.idx s m')) (X.G.κ (BranchGerms.idx s m')) t ∈ ball v ρ := by
+          rw [mem_ball, dist_branchPt _ ht.1.le]; linarith [ht.2]
+        have hI : branchPt v (X.G.β (BranchGerms.idx s m')) (X.G.κ (BranchGerms.idx s m')) t ∈ F₁.interiorPts :=
+          (mem_open_interiorPts_iff h htb).mpr hnot
+        refine ⟨_, by rw [mem_ball, hxi]; exact htε, fun heq => ?_,
+          Or.inr ⟨t, ⟨ht.1.le, by linarith [ht.2, h.1]⟩, rfl⟩, fun hΓ => hI.2 (cleanKeep_Γ_subset _ hΓ).2⟩
+        have h3 := congrArg (fun z => dist z v) heq
+        simp only [hxi, dist_branchPt _ ht.1.le, dist_branchPt _ hhalf.le] at h3
+        linarith [ht.2]
+      · by_cases hir : i = BranchGerms.idx s (BranchGerms.rayPos up b)
+        · -- the sector after the germ is the partial sector: the sector before it is neither that nor a gap sector
+          obtain ⟨p, hp⟩ := exists_next_eq (X := X) i
+          have hpi : p ≠ i := fun h'' => BranchGerms.next_ne_self hn2 p (by rw [hp, h''])
+          have hpg : p ∉ BranchGerms.gapSec s 0 b := by
+            rintro ⟨m', h1, h2, rfl⟩
+            exact hi ⟨m' + 1, by omega, by omega, by rw [← BranchGerms.next_idx, hp]⟩
+          obtain ⟨w, hw, hwρ, hwx⟩ := X.exists_rim_mem_sector_before h' hhalf hhalfρ' p hε
+          rw [hp] at hwx
+          have hwρ' : w ∈ X.G.sector v ρ p := mem_sector_of_lt hw (by rw [← dist_eq_norm, hwρ]; linarith [h.1])
+          have hwI₁ : w ∈ F₁.interiorPts := mem_open_interiorPts_of_sector_off cfg h hρc (hir ▸ hpi) hpg hwρ'
+          exact ⟨w, by rw [mem_ball, hxi]; exact hwx,
+            fun hwx' => (sector_subset_interiorPts h' p hw).2 (hwx' ▸ hxΓ).2, Or.inl hwρ,
+            fun hΓ => hwI₁.2 (cleanKeep_Γ_subset _ hΓ).2⟩
+        · -- the sector after the germ is neither the partial sector nor a gap sector
+          have hig : i ∉ BranchGerms.gapSec s 0 b := fun ⟨m', h1, h2, he⟩ => hi ⟨m', h1, h2.le, he⟩
+          obtain ⟨w, hw, hwρ, hwx⟩ := X.exists_rim_mem_sector h' hhalf hhalfρ' i hε
+          have hwρ' : w ∈ X.G.sector v ρ i := mem_sector_of_lt hw (by rw [← dist_eq_norm, hwρ]; linarith [h.1])
+          have hwI₁ : w ∈ F₁.interiorPts := mem_open_interiorPts_of_sector_off cfg h hρc hir hig hwρ'
+          exact ⟨w, by rw [mem_ball, hxi]; exact hwx,
+            fun hwx' => (sector_subset_interiorPts h' i hw).2 (hwx' ▸ hxΓ).2, Or.inl hwρ,
+            fun hΓ => hwI₁.2 (cleanKeep_Γ_subset _ hΓ).2⟩
+    · -- the ray's end: past `ρ/2` the ray's line is interior to the partial sector
+      intro g' hg' hxg ε hε
+      rw [Finset.mem_singleton] at hg'
+      subst hg'
+      obtain ⟨t, ht, htε⟩ := exists_branchPt_near_gt v ψ 0 hhalfρ' hε
+      have htR : t ∈ Ioo 0 ρ' := ⟨hhalf.trans ht.1, ht.2⟩
+      have hwI : branchPt v ψ 0 t ∈ F.interiorPts := by
+        rw [hray]; exact sector_subset_interiorPts h' _ (hraysec t htR)
+      have hd : ‖branchPt v ψ 0 t - v‖ = t := norm_branchPt_sub v _ _ htR.1.le
+      have hI₁ : branchPt v ψ 0 t ∈ F₁.interiorPts := mem_open_interiorPts_of_mem h hwI (by rw [hd]; exact ht.1)
+      refine ⟨_, by rw [mem_ball, hxg]; exact htε, fun heq => ?_, Or.inr ⟨t, ⟨htR.1.le, htR.2.le⟩, rfl⟩,
+        fun hΓ => hI₁.2 (cleanKeep_Γ_subset _ hΓ).2⟩
+      have h3 := congrArg (fun z => ‖z - v‖) heq
+      simp only [hxg, hd, norm_branchPt_sub v ψ 0 hhalf.le] at h3
+      linarith [ht.1]
+  -- the count: OPEN's own, and cleaning raises neither number
+  have hdh : ∃ m₁ j₁, m₁ ≤ m ∧ j₁ < j ∧ F₁.HasDegree v m₁ ∧ F₁.HasHornCount v j₁ :=
+    open_degree_horns cfg h' hρρ' h hρc hdeg hhorn
+  obtain ⟨m₁, j₁, hm₁, hj₁, hdeg₁, hhorn₁⟩ := hdh
+  exact surgery_step hc (openArcs_subset_closedBall h) hcol hval (open_ringArcsWithin h) hself hpts
+    (fun m' j' hm' hj' => by
+      obtain ⟨h1, h2⟩ := cleanKeep_pot_le (M := F₁) X.mem_dom hdeg₁ hhorn₁ hm' hj'
+      omega)
+
+end Near
+
+/-- **The vertex step, OPEN's case** (FS131-E6-OPEN, cleaned): `exists_open`'s hypotheses at a point of a clean map. Its map is
+`OpenMove`'s surgery (`openArcs`, `openCol` for the configuration `Near.exists_openConfig` gives, `Near.exists_openStep_aux`) at a
+radius below `δ` and below half the configuration's clear radius, then `cleanKeep`; the count is `open_degree_horns` and
+`cleanKeep_pot_le`. Inhabitant: none in Lean (FS131-E6's twelve-colour map at [hand], as `exists_open`'s note says). -/
 theorem exists_openStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c : Fin k}
     (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : F.HasSectors v c 1) (hD : (interior (F.allowedCone v c)).Nonempty) {m j : ℕ}
     (hdeg : F.HasDegree v m) (hhorn : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :
     ∃ ρ, 0 < ρ ∧ ρ < δ ∧ ∃ F' : ArcMap k, F'.Valid ∧ F'.IsClean ∧ LocalStep F F' (closedBall v ρ) ∧ F.IsModification F' ∧
       (∃ m' j', m' + j' < m + j ∧ F'.HasDegree v m' ∧ F'.HasHornCount v j') ∧
       F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F'.IsSite x := by
-  sorry
+  classical
+  obtain ⟨X⟩ := exists_near (hv (mem_closedBall_self zero_le_one))
+  obtain ⟨up, s, b, ψ, ρc, cfg⟩ := Near.exists_openConfig hF hv X hH h1 hD
+  obtain ⟨ρ₀, h₀⟩ := X.eventually_small.exists
+  have h' : X.Small (min ρ₀ ρc) := h₀.mono (lt_min h₀.1 cfg.hρc) (min_le_left _ _)
+  have hρ0 : 0 < min (min ρ₀ ρc / 2) (δ / 2) := lt_min (by linarith [h'.1]) (by linarith)
+  have hρρ' : min (min ρ₀ ρc / 2) (δ / 2) < min ρ₀ ρc := (min_le_left _ _).trans_lt (by linarith [h'.1])
+  exact ⟨_, hρ0, (min_le_right _ _).trans_lt (by linarith),
+    Near.exists_openStep_aux cfg h' hρρ' (min_le_right _ _) (h'.mono hρ0 hρρ'.le) hF hc hdeg hhorn⟩
+
 
 /-! ## The two steps (the strengthened moves, cleaned) -/
 

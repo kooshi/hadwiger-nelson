@@ -1,0 +1,7 @@
+plant hypothesis dropped (exists_rayStep, Procedure): FIRED
+plant conclusion changed (exists_clean, Limit): FIRED
+plant declaration renamed (mergeAvailable_of_bothKind, Procedure): FIRED
+plant definition body changed (treatPts, Procedure): FIRED
+plant definition changed (rayKeep, Moves): FIRED
+plant statement behind an attribute changed (germDir-style head, Limit): FIRED
+unplanted control: PASS (827 statements read)

@@ -1188,6 +1188,12 @@ current at each saved stage (the last stage's receipt is the one to read).
   **`ArcMap.Near.exists_shaveStep_aux`**, **`ArcMap.exists_shaveStep`** (the second case; its statement as IR2 wrote it).
 - **Stage 26 — MERGE's case** (`Procedure`): **`ArcMap.Near.exists_mergeStep_aux`**, **`ArcMap.exists_mergeStep`** (the third
   case; its statement as IR2 wrote it).
+- **Stage 27 — OPEN's case; the vertex step closed** (`Procedure`): **`ArcMap.Near.exists_openStep_aux`**,
+  **`ArcMap.exists_openStep`** (the fourth case; its statement as IR2 wrote it). With it **`ArcMap.exists_vertexStep`** (IR2's
+  assembly; ruling 423's statement) **depends on `[propext, Classical.choice, Quot.sound]`** — no open case is left under it.
+- **Open at the hand-back**: none of this job's. `ArcMap.exists_arcStep` (`sorry`, restated by ruling 430 in Stage 23) is the one
+  `sorry` in `Procedure`; `exists_procStep`, `exists_terminalSeq`, `exists_terminalMap`, `exists_red`, `exists_terminal` are on
+  `sorryAx` through it alone.
 
 ## Stage 22 — SAVED (FS131-IR3): the readback, the as-given build, IR2's axioms check re-run
 
@@ -1437,3 +1443,88 @@ never needed separating.
 - Working files: `data/fs131/ir/ir3/scratch/Merge.lean`, `scratch/transplant26.py` (run with `merge`).
 
 ## Stage 26 — SAVED (FS131-IR3)
+
+## Stage 27 — SAVED (FS131-IR3): OPEN's case proved; the vertex step rests on no open case; the handover
+
+### 27.1 What was proved ([kernel]; `Procedure`, subsection "OPEN's case")
+
+**`Near.exists_openStep_aux`** and **`exists_openStep`**, as stated by IR2. The map is `OpenMove`'s surgery for the configuration
+`Near.exists_openConfig` gives. Through `surgery_step`:
+- validity `open_valid`, no colour gained `open_coloursAt_self`, no unit arc `open_ringArcsWithin`;
+- **the arcs**: on `F`'s `Γ`, on the circle of radius `ρ/2` (`norm_of_mem_rimArc`, `openRim_subset_sphere`), or on the ray
+  `v + t e ψ`, `t ≤ ρ/2` — the branch `(ψ, 0)`, apart from the chart's germs below the configuration's clear radius `ρc` because
+  it runs strictly inside the partial sector there (`OpenConfig.ray`);
+- **the dead branch**: at a gap germ, its branch inside `ρ/2` (`OpenConfig.not_mem_openArcs`: a direction in the window, off the
+  ray); at another germ, the sector after it if that is not the partial sector, else the sector before it — neither a gap sector
+  nor the partial sector, so interior to the surgery on the circle (`mem_open_interiorPts_of_sector_off`); at the ray's end, the
+  ray's continuation past `ρ/2` (`mem_open_interiorPts_of_mem`);
+- **the count**: `open_degree_horns` (`m₁ ≤ m`, `j₁ < j` for the surgery) and `cleanKeep_pot_le`.
+
+**One change of radius** (mine to decide; no statement touched): `exists_open` takes `ρ = min (min (ρ'/2) ρc) (δ/2)`, so `ρ ≤ ρc`
+and the ray is known inside the partial sector only up to `ρ`. The step needs it past the inner rim, out to the chart radius the
+kit reads (`R > ρ`), so `exists_openStep` takes the chart radius `R = min ρ₀ ρc` and `ρ = min (R/2) (δ/2)`: then `ρ < R ≤ ρc`.
+
+### 27.2 The build and the receipt (the handover)
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 6 modules rebuilt, 4 with warnings, all 6 warnings `declaration
+  uses 'sorry'`**: **`Procedure` 1 — `exists_arcStep` l. 2748, and no other**; `Terminal` 0; not mine: `BaseDense` 3, `BendCollar` 1,
+  `HexRing` 1. 9 min 17 s, exit 0 (`build/gate/build/20261006T060632Z-1519398.log`, which ends "Build completed successfully (5792
+  jobs)"; driver log `data/fs131/ir/ir3/build-stage27.log`). By `grep -nw sorry` `Procedure` reads one line, l. 2759.
+- **Axioms** against that build (`data/fs131/ir/ir3/IR3Axioms27.lean` → `.out`, `slot.py --mem 12 --cpus 2 -- lake env lean`, exit 0;
+  `tools/fs131_ir_axsum.py` with `IR3Axioms27-expect.txt`; `IR3Axioms27-summary.txt`, PASS): **35 records — 29 on the standard three
+  or fewer, 6 through `sorryAx`, exactly the six expected, 0 other.** By name: **`exists_rayStep`, `exists_shaveStep`,
+  `exists_mergeStep`, `exists_openStep` and `exists_vertexStep` each depend on `[propext, Classical.choice, Quot.sound]`**;
+  `exists_arcStep` is the `sorry`; `exists_procStep`, `exists_terminalSeq`, `exists_terminalMap`, `exists_red`, `exists_terminal`
+  are on `sorryAx` through it alone (the build names no other `sorry` in `Procedure` or `Terminal`). **Controls**: read with
+  Stage 26's expectation (which lists `exists_openStep` and `exists_vertexStep`), the summarizer FAILS naming both
+  (`IR3Axioms27-control.txt`); the same output with a foreign axiom planted in `exists_vertexStep`'s record makes it exit 1, naming
+  it (`IR3Axioms27-planted-summary.txt`); the six `sorryAx` records are the print's positive control.
+- **Statements**: `tools/fs131_ir_stmt_check.py a036811f` (against Stage 26): PASS, 854 read, additions only
+  (`ir3/stmt-check-27.txt`); **against the tree as given, `a5a12a0b`, over nine files (827 statements): one changed,
+  `exists_arcStep`, the ruled restatement** — PASS with `--allow exists_arcStep` (`ir3/stmt-check-final.txt`); the checker's
+  `--self-test`: six plants FIRED, the unplanted control PASS (`ir3/stmt-check-final-selftest.txt`). No `axiom`, no
+  `native_decide`. `tools/check_architecture.py` PASS (`ir3/arch-stage27.txt`; no import changed in this job).
+- **Receipt**: the block "FS131-IR3" in `scripts/Axioms.lean`, 27 records, above `=== PURCHASED ===` (`exists_vertexStep` itself is
+  recorded in an earlier block and is now standard there).
+- **Declarations added to landed modules** (ruling 421 (c)): **none** — `Moves`, `MergeMove`, `OpenMove`, `Surgery`, `FlankUA` are
+  untouched; everything is in `Procedure` (1,297 lines added by this job, the file now 3,403 lines). In `Procedure`: no statement
+  or definition changed but the ruled one; `exists_hasHornCount` moved up in the file, its statement unchanged; the proofs of
+  `exists_procStep` (two lines, Stage 23) and `RayConfig.exists_step` (its tail, Stage 25) edited; docstrings of the four cases,
+  the two steps and the cases' section header brought up to date; one-line inhabitant notes on the new step lemmas (LEAN.md § The
+  gate).
+- I ran no gate, did not touch `main`, `Terminal.lean` beyond the merge, or `BendStep`; five builds, each ended with its exit line
+  read; no process left running.
+
+### 27.3 What is proved, and what is left
+
+**Proved**: the four cases, so `exists_vertexStep` is [kernel] on the standard three. Their truth at the junctions — IR2's hand
+check, one mind — is now the kernel's: at every junction of every move one branch is dead, by one of three reasons (a chart sector
+that keeps its colour across the rim; points interior to the surgery; the continuation of an arc that ends on the rim). No clause
+of any case failed, and no message to the coordinator was needed.
+
+**Left under `exists_terminalMap`: `exists_arcStep` alone** (`sorry`; not this job's — its assembly is a later job's, on FS131-IA1's
+groundwork on `fs131-w5a`). Its statement is ruling 430's (Stage 23); its consumer `exists_procStep` reads the restated degree clause
+on `T` and compiles. For that assembly: § 24.3 says what the two-curve lemma offers it.
+
+**Next step for a successor starting cold**: read Stages 22–27; check out `fs131-w5c` at this stage's commit; build once under the
+slot (expect "all … up to date"); re-run `data/fs131/ir/ir3/IR3Axioms27.lean` through `tools/fs131_ir_axsum.py` with
+`IR3Axioms27-expect.txt` (expect PASS, 29 and 6); then `exists_arcStep`.
+
+### 27.4 Prices, scored
+
+IR1 and IR2 priced the four cases at two sessions (IR2: 300–500 lines each, a junction lemma of about 150). Measured: one session;
+the kit 480 lines (Stage 24, of which the two-curve lemma 100 and `not_isSite_of_branches` 105), MERGE-RAY 150, SHAVE 250 with the
+assembly 90, MERGE 110, OPEN 170. What made it short: `not_isSite_of_branches` reduced "no site at the other points of the disc"
+to a description of the arcs and one dead branch per junction, and no case needed the three exclusions by cleanness.
+
+## Drafts for the front page
+
+None to file now: wave 5 is not at its gate (`exists_arcStep` is a `sorry`), and my brief runs no gate. For the filing, when
+`exists_terminalMap` closes — slot `LEDGER.md`, the rows for N2-TERM's `exists_red` and `exists_terminal` (they regrade to [kernel]
+only after `exists_arcStep`): the vertex step's declarations to name are `ArcMap.exists_vertexStep` and its four cases
+`ArcMap.exists_mergeStep`, `.exists_rayStep`, `.exists_shaveStep`, `.exists_openStep`, each on `[propext, Classical.choice,
+Quot.sound]` with no assumption beyond their stated hypotheses (`F.Valid`, `F.IsClean`, `F.Covers v 1`, the move's own). Slot
+`CLAUDE.md` § The gate and § Trust ledger: no count is mine to state (I ran neither `axioms.sh` nor `vacuity.sh`); this job adds 27
+records to the receipt's CLEAN section and no purchase.
+
+## Stage 27 — SAVED (FS131-IR3)
