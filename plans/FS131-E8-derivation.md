@@ -491,3 +491,104 @@ derivation: FS131-E8-CLAUSE2
 `RegJBridge k` is **true for every `k`** (FS131-E8-BRIDGE), and it does not read `RegJLiteral`'s second conjunct, which is itself a consequence
 (FS131-E8-CLAUSE2). Under saturation the three forms — Σ locally finite; the frozen words; the fan with end tangents — are one hypothesis.
 [hand], one mind, kernel pending.
+
+## Stage 4 — SAVED: the attack, the trace of the consumers, the drafts, the predictions scored
+
+### 4.1 The attack: where it succeeds, and where it does not
+
+On the statement, smallest cases first. **SQ9 at a vertex** and **R7 at a lattice point** are the two held singular points; both have fans (four
+branches in four directions; six branches tangent in three pairs — so "the branches have different limit directions" is false, and is not
+claimed). The nearest false statements, each located:
+
+| the statement, altered | fails at | where the argument breaks |
+|---|---|---|
+| without saturation | (α), (β), (γ): circles of radii `2^{−n}` accumulating at `z`; a spiral into `z` — both drawable in a slack sixteen-colouring by squares of side `0.4`, whose edges may be redrawn freely | § 3.1 (2): no contacts, no tangent discs, no curvature bound |
+| at an accumulation point of Σ | the fan's own `singular` field | § 3.2's setting has no `R` |
+| on a cover in place of a colouring | not decided here | FS111-M-PINCH's (out, out) case changes with overlaps (`plans/FS111-M2-regularity.md` § 2.2) |
+| in a disc of radius above `1/2` | "not closed", "length at most `π/2`" (a unit circle of interface fits in a disc of radius above 1) | § 3.2 (2)'s chord below 1 |
+| "the fan has a region of positive angle" | not decided: branches all tangent to one line are not excluded here | nothing in §§ 3.1–3.6 reads an angle |
+
+On the steps. (i) *FS111-M-PINCH off-centre* — the one place the argument reads a held proof in a form its Lean statement does not have. I re-read
+`plans/FS111-M-regularity.md` § 3.1 for it: Step 1 reads `P_a`, the contact, and M-HULL1; Step 2 reads `S_a ∪ S_b ⊇ N` a.e. and open cones at the
+point. Neither reads the centre of `N`. FS111-M-C11's statement already applies it "with the same `N`, `P_a`, `P_b`". (ii) *A cusp inside the
+two-colour ball* — excluded in § 3.1 (1) by `U ∩ Σ = ∅`; FS111-M-C11 as filed has no such hypothesis, and its line "each normal line near `x`
+meet the boundary once" finds a point of `supp S_a ∩ supp S_b`, which is an essential boundary point only if it is no cusp. Every consumer
+applies C11 off a closed Σ, so nothing filed is at risk; the formal C11 (ii) should carry the hypothesis. (iii) *A neighbour that could have
+refuted it*: FS121-V5-GRID-CANTOR's colouring has a non-locally-finite breakpoint set and SQ9's locally finite Σ — against FS131-E8-CLAUSE2 only
+if its extra breakpoints carried essential boundary; they are redundant (the colour is the same on both sides), so they carry none. Consistent.
+(iv) *R7's numbers*: a unit arc from a lattice point `z` has length `2 arcsin(1/4) ≈ 0.505 < π/2` inside `B(z, 1/2)`, and its distance from `z`
+increases up to the antipode. Consistent with §§ 3.2–3.3.
+
+**What the attack could not supply:** a second mind. This derivation is one mind's, sighted of V2, V3 and V5; the kernel is the second check.
+
+### 4.2 The trace: which filed results read which clause, and what each becomes
+
+Read from the entries' `uses only` lines (`plans/FS111-derivation.md`, `plans/FS121-derivation.md`) and from three arguments (V2 §§ 2.1–2.3, V3
+§ 2.3, V5 § 3.1). The other arguments were not re-read: a row that reads something of REG-J′ beyond the two clauses and the fan would not be caught
+here, and no `uses only` line names such a thing.
+
+| rows | what of REG-J′ each reads | clauses | under the verdict |
+|---|---|---|---|
+| FS121-DB1-L3 (carrying FS111-W-NOREP), FS121-V2-SECTOR, FS121-V3-CPI, FS111-W-KB-DIR | the fan at one point: the essential boundary near `z` is the arcs at `z`; each has a tangent there; each region is a.e. one colour | (α), (γ), (δ); (β) only as the Lean structure's way of writing a branch | **unchanged**; true at every singular point isolated in Σ, with FS131-E8-FAN as the lemma |
+| FS111-M2-INTRAD (iii), FS111-M-REDUCE-I, FS121-D2-PERFIN | the second clause, or "finitely many interface arcs meet a compact set" | — (the words' second clause) | **unchanged**; the clause is FS131-E8-CLAUSE2 |
+| FS121-O1-ENDS, -DB1-L6, -O1-OUT, -O1-LRA-LINE, FS121-D1-VT, -V2-VT-W, -D1-EROSION, -D1-PENCILWIN, FS121-D2-EXT, -D2-THIN, -D2-SYM | Σ locally finite; the fan and end tangents where an arc ends at a point of Σ; the rows above | (α), (γ), (δ) through the rows above | **unchanged**; each needs the bridge as a lemma |
+| FS121-V5-LOC, -V5-RAY | Σ closed only | none | **unchanged**; FS131-E8-LOCAL is V5-LOC's statement with its hypothesis read |
+| FS121-DB1-L7, FS121-D4-HOLE | nothing (no REG-J′) | none | unchanged |
+
+**No filed result becomes "true under the stronger hypothesis only".** The weakest hypothesis the consumers share, which is what the kernel should
+carry: globally, `Saturated c.cls` and `∀ x, ∃ r > 0, (c.singularSet ∩ ball x r).Finite`; at one point, `c.singularSet ∩ ball z R ⊆ {z}` with
+saturation at the essential boundary points of the punctured ball. The fan is then a theorem (FS131-E8-FAN), not a hypothesis; a row may still
+take a `Fan` as an argument, with the lemma supplying it.
+
+**Bearing on inventory item 481's ruling (b)** — "REG-J′'s fan form with end tangents stays in the hypothesis, named, each consumer's docstring
+saying it is stronger than the frozen words": under FS131-E8-BRIDGE the fan form is not stronger, given saturation. The docstring sentence is
+true of the two definitions as bare predicates and false of every saturated colouring. Held for the coordinator.
+
+### 4.3 What it implies (the look-back)
+
+- **C121-REGJ is its first clause.** "Σ is locally finite and each point of Σ meets finitely many interface arcs" follows, in a saturated
+  colouring, from "Σ is locally finite" (FS131-E8-CLAUSE2). FS-127's question — "can infinitely many singular points, or infinitely many boundary
+  arcs, crowd into a bounded set?" (`plans/STUB-lateral-extent.md` l. 9) — is the singular points alone: infinitely many interface arcs in a
+  bounded set make Σ not locally finite.
+- **Route M's regularity hypothesis is local finiteness of Σ.** FS111-M2-REDUCE-A's three conditions at six are honest saturation, REG-J′₆, ¬LRA;
+  the second is now "Σ locally finite" with nothing beside it.
+- **Grid colourings.** In an honest saturated grid colouring, breakpoints that carry essential boundary and accumulate put Σ on the limit line;
+  so FS121-D4-GRID's open "Σ clause" at uncountable breakpoint sets is the question whether its genuine breakpoints are locally finite. Not
+  decided here.
+- **Could it have been foreseen?** Yes: FS121-V5-RAY is the same compactness, run for arcs of radii tending to infinity; the record held the reading
+  (the close's note) and the lemma that proves it (V5-RAY) in two files. An instance of G92 (a held result reaches as far as its argument).
+- **Is it known?** Its parts are textbook (the chord bound; local finiteness of the components of a closed embedded submanifold). The statement
+  about saturated colourings is about this project's objects; no literature search was run, and nothing is claimed new beyond "not found in this
+  project's records".
+
+### 4.4 Drafts for the coordinator's files (I edit none of them)
+
+Each names its slot.
+
+- **`plans/STUB-lateral-extent.md`, § Provisional bearings, a line after "G84, G85; …":** "Since FS131-E8 (`plans/FS131-E8-derivation.md`; [hand],
+  one mind, kernel pending): in a saturated colouring a locally finite Σ gives a fan with end tangents at each of its points and finitely many
+  interface arcs in every bounded set (FS131-E8-BRIDGE, -CLAUSE2), so C121-REGJ is its first clause — the question is the singular points alone, and
+  infinitely many boundary arcs in a bounded set are a wild Σ, never a second kind of crowding."
+- **`plans/STUB-curved-pencils.md`, § Provisional bearings, a line after "G84, G85 (contact, integer radii; …":** "Since FS131-E8: REG-J′'s fan
+  reading is derived from its first clause (FS131-E8-BRIDGE; [hand], one mind, kernel pending), so this stub's class is the honest saturated
+  colourings with locally finite Σ; the failure clause on quoting REG-J′ stays as a quotation rule."
+- **`data/fs121/claims.md`, Notes at the close, a note after "§ 0, add (V3 § 3.6)":** "*2026-10-06, FS131-E8:* the fan reading of REG-J′ is derived
+  from its words, and from their first clause alone (FS131-E8-BRIDGE, -CLAUSE2, `plans/FS131-E8-derivation.md`; [hand], one mind, kernel pending).
+  C121-REGJ's second clause follows from its first."
+- **`.claude/skills/grokkings/SKILL.md`, G85, the words "Off a singular set that is locally finite with finitely many arcs at each point,":**
+  replace by "Off a locally finite singular set (finitely many arcs then meet each of its points, FS131-E8-CLAUSE2),". And `CLAUDE.md` § Grokkings,
+  the theory paragraph's "off a locally finite singular set its interfaces are segments and arcs of integer radius, that finiteness open": no
+  change — it already names the first clause alone.
+- **`plans/GROKKING-INSTANCES.md` § G92, an instance:** "FS131-E8 (2026-10-06): FS121-V5-RAY's compactness — arcs accumulating off Σ are one arc —
+  was filed for arcs of radii tending to infinity; its argument reads no radius, and run on a circle about a singular point it gives the fan the
+  close had filed as a reading of REG-J′ (FS131-E8-ALPHA). Source: `plans/FS131-E8-derivation.md` § 3.4."
+- **`LEDGER.md`:** no row drafted — FS-131 files by its inventory; the result is a lemma under rows 140–144, [hand], one mind, kernel pending.
+- **`BIBLIOGRAPHY.md`:** no row. Schur's comparison theorem and Allard–Almgren's structure theorem are named as recalled, not read, and nothing
+  rests on either: the chord bound is proved in § 3.2 (1), and home 3 was killed.
+
+### 4.5 The predictions, scored
+
+Registered at stage 1 after a sketch (§ 1.5's note): (α) derived at 0.88 — met; (β) derived at 0.92 — met; (γ) derived, found in the record, at
+0.95 — met; (δ) derived without Federer at 0.93 — met; "the second clause is not consumed" at 0.8 — met. Brier 0.014 over five, all informed.
+Neither registered break occurred as a failure; the first (M-PINCH off-centre) is the note of § 4.1 (i), and a break not registered — the cusp
+inside C11's ball — is § 4.1 (ii).
