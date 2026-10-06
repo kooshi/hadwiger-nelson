@@ -7422,3 +7422,27 @@ reason by the close.*
      FS131-I8C's and I8D's briefs generated and gated (`mk-i8cd.py`). (e) **Slot → FS131-I7M** (the six-colour
      model's kernel job, on `fs131-w7m`), launched 2026-10-06; I8C and I8D take the next two. In flight: 3 (LT5,
      I6K, I7M) + the special-purpose slot (EXT-HN2).
+587. **EXT-HN2 done: the outside repository at its new commit still proves nothing about the plane; all three points of the first audit hold in Lean against it; the refutation is delivered as a patch that builds inside its own package** (`debruijn`, the special-purpose slot; harness 369k and 33 minutes by the task notice; record `plans/EXT-HN2-verification.md`; report `data/external/reports/EXT-HN2.md`; commits `dc738cec`, `729adcce`, `c5c44e89`, `d59b6a2f`, `91f78963` on `main`, under `plans/` and `data/external/` only).
+     **Findings, its**: items 582–583, and beyond them — **the comparator tool, run by it, accepts the repository's
+     pair** ("Your solution is okay!"; under two conditions: the tool's sandbox step replaced by its own stub, a
+     prebuilt exporter), with a control (a challenge with the assumption removed is rejected): the pass certifies
+     the Solution against a Challenge that carries the assumption, and bears on none of the three points; nothing
+     in any commit or file mentions the issue or narrows the claim; the Zenodo record has no new version.
+     **The deliverable of Amendment 1** (`data/external/hn2/fork/`): `Outside_Headline_Audit.lean` (319 lines),
+     a five-line addition to the Lake file, a 29-line note, a comparator pair for two of its statements, and a
+     patch against `outside-commit-2`. **My receipt**: the patch (sha256 `e519cd80…`) applied by me to a fresh checkout of
+     `outside-commit-2` — `git apply --check` exit 0; nine files, eight added and the Lake file changed; **the headline
+     file's hash after the patch equals the first audit's kept copy**; the patched Lean file equals the tree's; the
+     patch carries no author line; **the note read by me in full and every docstring and statement of the Lean
+     file**: they state (a) the hypothesis is met by no six-colouring at `r ≥ 0`, (b) the bound false at `1/4` and
+     at `1/√3`, (c) the headline from six numbers, (d) a proper colouring of the circle at `1/√3` with three
+     colours as a term of the repository's own structure, and the remark on `r < 0`; no `sorry` but the word in a
+     comment, no `axiom`, eight axiom prints; no sentence about the author or how the work was made. Not checked
+     by me: that it builds (its sandboxed build log and the eight printed lines are its word); the comparator
+     runs; the proofs. **Rulings.** (a) **The `[Outside2026]` row is replaced by its proposed text** (filed, verbatim
+     from its record § 4.3). (b) The two memory departures and the toolchain unpacked into its build area are
+     ratified. (c) **`~/.cache/ext-hn2/` (20 GB) is kept** until Kooshi says the matter is closed. (d) The note's
+     reading for this project's own publication plan — the challenge file is the text to read aloud — is an
+     instance for `plans/GROKKING-INSTANCES.md` at the filing (item 582). (e) **The special-purpose slot is
+     closed.** Where the patch, the note and the drafted account go is Kooshi's; handed to him in my report. In
+     flight: 3 (LT5, I6K, I7M).
