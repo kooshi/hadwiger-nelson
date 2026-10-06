@@ -395,3 +395,56 @@ removals leave.
    `Q ≠ P` for the same reason — which are `sides_eq`'s three hypotheses.
 
 ## Stage 5 — SAVED (FS131-BA3)
+
+## Stage 6 — SAVED (FS131-BA3): the three ruled removals of unread hypotheses (inventory ruling 457 (b))
+
+### 6.1 The three statements, as they now read
+
+| declaration | removed | its calls (each changed by dropping the argument or its goal) |
+|---|---|---|
+| `ArcMap.hasHornCount_zero_of_two_spheres` (`HornChart`) | `(hρ : 0 < ρ) (hρ' : 0 < ρ')` | one: `hornCount_le_of_collarBend` (`BendGap`), which passed `hR0 hR0` |
+| `ArcMap.hasHornCount_iff_of_germ_swap` (`HornChart`) | `(hκ : |κ₀| * r < 2)` | one: `hasHornCount_iff_collar_end` (`BendGap`), whose first sub-goal (`|σ| * r < 2`) is gone |
+| `ArcMap.CollarFitOut.map_hornCount_le` (`BendGap`) | `(hF : F.Valid)` | one: `CollarFitOut.awayBend`'s field `horn` (`BendGap`) |
+
+Verbatim, from the checker's print (`data/fs131/ba3/stmt-stage6.txt`):
+- `theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪
+  sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) :
+  F.HasHornCount x 0`
+- `theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r)
+  (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x
+  β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt
+  x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j`
+- `theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) :
+  ∃ j' ≤ j, hfit.map.HasHornCount x j'`
+
+Each proof lost its `have _ := h…` line and the comment above it; nothing else in either file moved (the diff is 6 lines in, 14 out).
+No call sits outside `HornChart` and `BendGap` (a search of `Proofs/` and `scripts/` for the three names: the other hits are
+docstrings and `#print axioms` lines). `CollarFit.map_hornCount_le` (`BendStep`) keeps its `hF`, as the brief says.
+
+### 6.2 Exactly these three, by script
+
+`tools/fs131_ba3_stmt.py` (base `dae3d93e`): **0 failures over 1,795 base files; the three ruled names each "exactly as ruled"**; no
+other statement of `HornChart` or `BendGap` differs from the base, every other file under `Proofs/` is byte-identical to it
+(`data/fs131/ba3/stmt-stage6.txt`). `--self-test`: **16 plants, each FIRED for its own reason, the unplanted run PASS**
+(`data/fs131/ba3/stmt-selftest.txt`) — each ruled removal left undone, a second change to a ruled statement (two forms), `map_R1`'s
+conclusion changed, `map_R1` with an added hypothesis, `map_R2` without `hd`, `map_R2` renamed, a hypothesis dropped from
+`exists_collarFitOut`, an edit to `BendCollar`, to `BendStep` (its horn child's `hF` removed) and to `CollarMapOut`, an `axiom` in a
+new file and in an editable one, `native_decide` in an editable one. Each plant asserts it changed its file before it is scored.
+
+### 6.3 The build and the receipts
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`), of commit `ef33a037`: **OK — 459 of 459 batches, 4 modules rebuilt (`HornChart`,
+  `BendGap`, `BendStep`, `Proofs`), exit 0, no warning other than `declaration uses sorry`**
+  (`build/gate/build/20261006T074718Z-2318634.log`, which ends "Build completed successfully (5802 jobs)"; its line 3, "error: target
+  is out-of-date and needs to be rebuilt", is the up-to-date probe's answer, after which the walk ran; driver log
+  `data/fs131/ba3/build1.log`). **5 distinct `sorry` warnings**, unchanged: `BendGap` 2 (l. 983, 988 now), `Procedure` 2, `Terminal` 1.
+- **Axioms** against that build's oleans (`data/fs131/ba3/BA3Axioms-stage6.lean` → `BA3Axioms-stage6.out`, `slot.py --mem 12 --cpus 2
+  -- lake env lean`, exit 0; `tools/fs131_ir_axsum.py`, `BA3Axioms-stage6-summary.txt`, PASS): **12 records — 6 on the standard three
+  (the three changed statements and the three declarations that call them or stand beside them: `hasHornCount_iff_collar_end`,
+  `hornCount_le_of_collarBend`, `CollarFit.map_hornCount_le`), 6 through `sorryAx`, exactly the expected ones** (`map_R1`, `map_R2`,
+  `awayBend`, `bend_away_gap`, `bend_away_subdiv`, `bend_away_part`), 0 other. **Control**: expecting
+  `CollarFitOut.map_hornCount_le` through `sorryAx` fails, naming it as standard (`BA3Axioms-stage6-control.txt`).
+- Iteration (never evidence): the two edited files elaborated outside Lake against a scratch copy of the oleans before the build, so
+  the build ran once.
+
+## Stage 6 — SAVED (FS131-BA3)
