@@ -7350,3 +7350,16 @@ reason by the close.*
      whether that statement is the claim — the item "read the final statement aloud against the informal claim"
      is not replaced by it. An instance for `plans/GROKKING-INSTANCES.md` § The standard of evidence, at the filing.
      No reply sent: it asks none.
+583. **EXT-HN2, by message: Lean run — all three points of the first audit hold against the new commit `outside-commit-2`, at both of its toolchain pins, and the issue's Lean block compiles unchanged against both** (source: EXT-HN2's message to "main", 2026-10-06 — its staged commits and copies are read at its hand-back; nothing here is checked by me yet).
+     By its word: the root package now builds as shipped (Lean and Mathlib `v4.28.0`, exit 0, no warning) — the first
+     audit's build defect is fixed; `comparator/` (`v4.34.0`) builds its Challenge by default and its Solution by
+     name. The headline as the kernel holds it, the same at both pins: `∀ (r : ℝ) (C : OutsideColoring r), (∀ i,
+     OutsideDensity r (C.color i)) → ∑ i, outside_measure r (C.color i) < 2 * π`, on the standard three. **(1)** still
+     assumed: the headline re-proved in two lines from six reals each below π/3; **(2)** still false: radius 1/4 as
+     before, and **now in Lean at the paper's own radius 1/√3**, which the first audit had by hand; **(3)** still
+     applies to nothing at every radius `r ≥ 0`; new: at `r < 0`, where the circle is empty, the empty colouring
+     meets the hypotheses and nothing else does. Controls: a planted `sorry` and a planted axiom show at both pins.
+     Not run: the comparator tool itself. **Two departures, ratified**: it ran under `--mem 8` because the slot's
+     ledger stood at 80 of 90 GiB (nothing hit the cap); its Mathlib builds are at `~/.cache/ext-hn2/` (20 GB on
+     disk, since the scratch directory is memory) — **held, default keep** until Kooshi says the matter is closed,
+     then deleted. No reply sent: it asks none.
