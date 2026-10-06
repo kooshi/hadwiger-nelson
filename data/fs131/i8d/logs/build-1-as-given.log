@@ -1,0 +1,33 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261006T225814Z-3861774.log
+    ⚠ [5744/5819] Replayed Proofs.HadwigerNelson.Plane.RingCalculus.Empty
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:559:8: declaration uses `sorry`
+    ⚠ [5745/5819] Replayed Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:213:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:228:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:233:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:251:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:261:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:285:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:296:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:304:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:312:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:320:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:381:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:390:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:398:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:409:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:427:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:443:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:455:8: declaration uses `sorry`
+    ⚠ [5758/5819] Replayed Proofs.HadwigerNelson.Plane.RingCalculus.SemiHubPlaces
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:69:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:85:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:95:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:107:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:123:8: declaration uses `sorry`
+    All targets up-to-date (5819 jobs).
+==> build: OK — all 1812 modules already up to date, nothing built, 3 module(s) with warnings, 3s
+    full output: build/gate/build/20261006T225814Z-3861774.log
+EXIT=0

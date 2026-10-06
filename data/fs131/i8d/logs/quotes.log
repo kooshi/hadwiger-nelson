@@ -1,0 +1,28 @@
+ok    1  /home/kooshi/source/lean-dir/CLAUDE.md                                  "Do not consider Lean formalization a cost. It's practically "
+ok    2  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             "572. **FS131-K8b done at its Stage 10: wave 8's second plann"
+ok    3  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             '571. **FS131-K8b, by message mid-job: the nine semi-hub rows'
+ok    4  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             '568. **FS131-K8b, by message mid-job (its Stage 6 saved at `'
+ok    5  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             '584. **FS131-I8B, by message mid-job: the shared module is s'
+ok    6  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             "586. **FS131-I8B done: wave 8's join — the two branches merg"
+ok    7  /fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean  'theorem semiHub_places (hF : F.Valid) (hN : F.NonSiamese) {p'
+ok    8  /fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean  'theorem crossed_no_tip (hF : F.Valid) (hN : F.NonSiamese) {p'
+ok    9  /fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean  'theorem crossed_outer (hF : F.Valid) (hN : F.NonSiamese) {p '
+ok   10  /fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean  'theorem crossed_four (hF : F.Valid) (hN : F.NonSiamese) {p :'
+ok   11  /fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean  'theorem crossed_changePoint (hF : F.Valid) (hN : F.NonSiames'
+ok   12  /fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean  'theorem crossed_semiHub (hF : F.Valid) (hN : F.NonSiamese) {'
+ok   13  orktrees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean  'theorem outerAdj {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSi'
+ok   14  rees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/StarChart.lean  'theorem exists_int_of_angleIcc_subset {a b lo hi : ℝ} (hab :'
+ok   15  rees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/StarChart.lean  'theorem int_eq_zero_of_two_pi_mul_lt {m : ℤ} (h₁ : -(2 * π) '
+ok   16  rees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/StarChart.lean  'theorem mem_closure_tile_of_near (hF : F.Valid) (hN : F.NonS'
+ok   17  rees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/StarChart.lean  'theorem IsSectorChart.tileAt_equiv {n : ℕ} {G : BranchGerms '
+ok   18  rees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/StarChart.lean  'theorem exists_sectorChart_tileAt (hF : F.Valid) (hN : F.Non'
+ok   19  rees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/StarChart.lean  'theorem IsSectorChart.exists_initialPiece_between {n : ℕ} {G'
+ok   20  rees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/StarChart.lean  'theorem exists_initialPiece_of_ncard_le_three (hF : F.Valid)'
+ok   21  rce/lean-dir/.claude/worktrees/fs131-w8d/plans/FS131-w8-kernel-plan.md  '### 9.1 The statements the proofs derive from'
+ok   22  rce/lean-dir/.claude/worktrees/fs131-w8d/plans/FS131-w8-kernel-plan.md  '### 9.3 `Plane/RingCalculus/SemiHubPlaces` — six leaves'
+ok   23  rce/lean-dir/.claude/worktrees/fs131-w8d/plans/FS131-w8-kernel-plan.md  '### 9.4 `outerAdj` (`Plane/RingCalculus/Empty`) — the plan'
+ok   24  rce/lean-dir/.claude/worktrees/fs131-w8d/plans/FS131-w8-kernel-plan.md  '### 9.5 Prices'
+ok   25  rce/lean-dir/.claude/worktrees/fs131-w8d/plans/FS131-w8-kernel-plan.md  '### 9.6 Inhabitants and vacuity'
+ok   26  rce/lean-dir/.claude/worktrees/fs131-w8d/plans/FS131-w8-kernel-plan.md  '### 9.8 The handoff'
+ok   27  rce/lean-dir/.claude/worktrees/fs131-w8d/plans/FS131-w8-kernel-plan.md  '- **Order inside a file**: `SemiHub` — `qcol_inner_tile`, th'
+quotations=27 missing=0
