@@ -119,6 +119,8 @@ three elaboration rounds (H1, H2, C1, H3, H4 on the first; C2's helpers on the s
   `ValidMap/Basic` with the factors the other way round; mine is `conj_e_mul_e'`), `IsOpen.inter` on a set-builder conjunction
   (`IsOpen.and`), a `set` that hid a rewrite target, an `obtain` pattern clearing a variable its neighbours depend on.
 
+## Stage 2 — SAVED (FS131-BA2)
+
 ## Stage 3 — SAVED (FS131-BA2): C4, the lens's clearance — the new mathematics — in the kernel; C5; C7, C9 and C6's first clause from the other half's children
 
 ### 3.1 C4 `exists_lensOut_clear`: the planner's hand proof (§ 2.5) checked step by step, and it holds
@@ -179,9 +181,111 @@ the merge is its own commit.
 
 ## Stage 3 — SAVED (FS131-BA2)
 
+## Stage 4 — SAVED (FS131-BA2): the two merges (ruling 452 (b)); the horn clause for both bends (C8 and the toward bend's child); 14 of 16 children proved, C6's two long mirrors left
+
+### 4.1 The merges
+
+- `9b665413` — `origin/fs131-w5a` at `66cb0314` (lane G: `LensOut`, `CollarMapOut` proved; `AwayBend.idle`'s ruled change with its one
+  call in `BendStep`). No conflict.
+- `43dfeb6e` — `fs131-w5a` at `4559c106` (FS131-BA1 done: `BendAway` proved; `dist_lt_one_of_thin`'s ruled change — no child of mine
+  calls it). **One conflict, `scripts/Axioms.lean`, both blocks kept** (FS131-BA1's, then FS131-BA2's, above `=== PURCHASED ===`). The
+  index was checked before each commit: under `Proofs/` the merged tree differs from `4559c106` in my three files and `BendStep`'s horn
+  child only.
+- **Names.** None of mine collided with BA1's 33. Four access lemmas of mine that re-proved a BA1 lemma under another name were
+  **deleted** and their uses moved to BA1's: `CollarFitOut.prof_cases` → `PushOutProfiles.cases`, `.lensOutCurve_subset_collar` →
+  `.lensOutCurve_subset`, `.homeo_off_collar` → `.homeo_eq_self`, `.homeo_fix_Γ_off_arc` → `.homeo_fix_Γ`. Five stay (no counterpart
+  in `CollarMapOut`): `CollarFitOut.lensOutSet_subset_collar`, `.ringArc_subset_collar`, `.collar_isClosed`, `.collar_inter_sphere`,
+  `.homeo_maps_collar`.
+
+### 4.2 The horn clause, once for both bends
+
+`hornCount_le_of_collarBend` (`BendGap`): for any map `M` on `F`'s domain that agrees with `F` off a closed collar `collarK P θ₁ θ₂ R'
+R''` meeting `F.Γ` only on the arc, with `Γ_M = (Γ_F ∖ α°) ∪` the two germ arcs of curvature `±1/R` from the ends (`R' < R < R''`,
+`R ≠ 1`, `R' < 1 < R''`) — no horn count rises. **`CollarFit.map_hornCount_le` (the toward bend, `BendStep`) and
+`CollarFitOut.map_hornCount_le` (C8) are each twelve lines over it**, and both are on the standard three axioms. By the place of the
+point, as the plan's § 4 has it: off the collar H1; in the collar and not an end, interior (H2) or on the lens arcs, which lie on two
+circles of one radius whose centres are apart and closer than a diameter (`im_ne_zero_of_two_spheres`; H3); at an end H4
+(`hasHornCount_iff_collar_end`).
+
+**Where the route differs from the plan's § 4.** The plan asked "the converse inclusion of `collarK_frame` near the end, to be minted".
+Taken instead: the **polar form of a branch at an end** (`branchPt_end_polar`: the branch of radius `ρ > 1/2` from `r(θ_E)` along the
+arc is `P + tangRad ρ u · e(θ_E + σu)` for an angle `u ∈ [0, π/2]` with the same chord — `germ_tangentCircle`, `polar_tangentCircle`,
+`eq_of_tangentCircle` and the intermediate value theorem; valid for every `ρ > 1/2`, so it serves `R < 1` and `R > 1` alike), then
+`tangRad`'s monotonicity in the radius puts a branch of a curvature between the arc's and the lens's between the collar's two profiles
+(`branch_between_notMem_Γ`); the other end's profiles stay off `1` near angle `0` by continuity (`exists_collar_end_radius`). The far
+lens arc is excluded near an end without any polar form: its carrier is closed and lies on a circle that meets `ω(P)` only at its own
+end (`eq_ringPt_of_mem_tangentCircle`). One σ (`±1`) runs both ends.
+
+### 4.3 State of the 16 children
+
+| child | state |
+|---|---|
+| H1–H4 (`HornChart`) | proved, standard three |
+| C1, C2, C3 (`R2Cap`) | proved, standard three (C3 since the merge) |
+| C4 `exists_lensOut_clear`, C5 `exists_collarFitOut` | proved, standard three |
+| C6 `CollarFitOut.map_ringArcsWithin` | proved, standard three |
+| C6 `CollarFitOut.map_R1`, `CollarFitOut.map_R2` | **open — `sorry`** (the long mirrors; route in § 4.6) |
+| C7 `CollarFitOut.map_localStep` | proved, standard three |
+| C8 `CollarFitOut.map_hornCount_le` | proved, standard three |
+| C9 `CollarFitOut.awayBend` | proved from `map_R1`, `map_R2` (through `sorryAx` by those two alone) |
+| `CollarFit.map_hornCount_le` (`BendStep`) | proved, standard three |
+
+So `bend_away_gap`, `bend_away_subdiv` and `bend_away_part` now rest on **two** open children, `CollarFitOut.map_R1` and
+`CollarFitOut.map_R2`.
+
+### 4.4 Findings about statements (no statement changed; held for the coordinator)
+
+- *Generalizations* (a hypothesis the proof does not read; each proof opens with `have _ := h` and a comment so the build carries no
+  warning): `hasHornCount_zero_of_two_spheres` — `hρ`, `hρ'`; `hasHornCount_iff_of_germ_swap` — `hκ`;
+  `CollarFit.map_hornCount_le` and `CollarFitOut.map_hornCount_le` — `hF : F.Valid` (the horn clause is geometry of `Γ`).
+- *A stale line outside my files*: `BendStep.lean`'s module header still reads "`CollarFit.map_hornCount_le`, open: its children are
+  `Plane/ValidMap/HornChart`'s" — the header is not mine to edit; the child's own docstring is brought to "Proved".
+- The docstrings of the 14 proved children said "**Open — `sorry`**"; they now say "**Proved (FS131-BA2)**" (docstrings are not
+  statements in the checker; the rebuild they cost is `build5.log`).
+
+### 4.5 The build and the receipts (the tree at this stage)
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 459 of 459 batches, exit 0, no warning other than `declaration uses sorry`**
+  (`build/gate/build/20261006T072828Z-2178943.log`; driver log `data/fs131/ba2/build5.log`; the builds of the two merge states and of
+  the horn clause before the docstrings: `build3.log`, `build4.log`, all OK). **5 distinct `sorry` warnings**: `BendGap` 2
+  (`CollarFitOut.map_R1`, `.map_R2`), and — not this job's — `Procedure` 2, `Terminal` 1. From 39 at the skeleton.
+- **Axioms** (`data/fs131/ba2/BA2Axioms.lean` → `BA2Axioms-stage4.out`, `BA2Axioms-stage4-summary.txt`, PASS): **71 records — 65 on
+  `[propext, Classical.choice, Quot.sound]`, 6 through `sorryAx`, exactly the expected ones** (`map_R1`, `map_R2`, `awayBend`,
+  `bend_away_gap`, `bend_away_subdiv`, `bend_away_part`), 0 other. **Control**: expecting `CollarFit.map_hornCount_le` through
+  `sorryAx` fails, naming it as standard (`BA2Axioms-stage4-control.txt`).
+- **Statements**: `tools/fs131_ba2_stmt.py --other 4559c106` — the checker extended for the ruled merge: a file outside my four must
+  equal the skeleton's **or** the merged commit's; my four are still read declaration by declaration against the skeleton —
+  **0 failures over 1,795 base files**, 55 new declarations listed (`data/fs131/ba2/stmt-stage4.txt`). Without `--other` it fails naming
+  exactly the three merged files (`stmt-stage4-no-other.txt`: the expected red). `--self-test`: **eleven plants, each FIRED** (the new
+  one: an edit to `LensOut` against the merged commit), the unplanted run PASS (`stmt-selftest-stage4.txt`).
+- **The map**: no module added; `tools/check_architecture.py` PASS (`data/fs131/ba2/arch-stage4.txt`).
+- **Receipt**: my block in `scripts/Axioms.lean` now lists 52 helper records (21 + 31), all proved. I ran no gate, touched nothing on
+  `main`, and left no process running.
+- Iteration under `lake env lean` (never evidence), errors of mine read and fixed: a monolithic end lemma that died at 200,000
+  heartbeats (split into `exists_collar_end_radius`, `branch_between_notMem_Γ`, `collar_end_Γ`; no limit raised); a lemma missing
+  `hℓ`; `rfl : M.dom = F.dom` unifying `F` with the bent map until `(F := F)` was given.
+
+### 4.6 What is left, and its route for a successor
+
+**C6's two long mirrors, `CollarFitOut.map_R1` and `CollarFitOut.map_R2`** (`BendGap.lean` l. 984, 989) — about 350 lines of
+`BendCollar` l. 866–1275 mirrored; one stage. Not started (budget). The route, with what is already in the tree:
+1. `exists_one_side` — the toward proof reads the fit only through `params` (`1/2 < R'`, `1 < R''`) and `short`
+   (`collarK_frame`, `side_core`): the collar is the same set, so copy it with `CollarFitOut`'s `params` destructured, or state it
+   once for `collarK`.
+2. The closed lens `polarSet P (Icc θ₁ θ₂) fun θ => Icc 1 (outerProf θ₁ θ₂ R θ)`: closed (`isCompact_polarSet_Icc P continuous_const
+   hp.cont_l`), and it holds `lensOutSet ∪ lensOutCurve` (mirrors of `isClosed_closedLens`, `lens_subset_closedLens`).
+3. `sides_end` — with `exists_one_side`, `CollarFitOut.homeo_maps_collar` (mine), `.homeo_eq_self`, `.kin_subset`, `.kout_subset`
+   (BA1's). Mind the colours: here the lens holds the **inner** colour `c` (the inner collar is stretched over it).
+4. `sides_eq` — `map_agreesOff` off the closed lens with `mem_closure_region_inter_iff_of_agree` (`BendCollar`, public); on it, an end.
+5. `map_R1` — `map_ringArcsWithin` (proved), `sides_eq`, and the open arc interior in the bent map (`map_lens` at `t = 1`: the
+   `hbent` step of `CollarFitOut.awayBend`); `map_R2` — `map_Γ`, `sides_eq`.
+BA1's warning applies (its record § 4.1): a mirror is not always a flipped inequality.
+
+**Not built**: the inhabitant `awayModel` (plan § 5) — owed with the models' lane, as the children's docstrings say.
+
 ## Theorems this phase proved (the list the head of this record points to)
 
-Kernel-checked, on `[propext, Classical.choice, Quot.sound]` (`data/fs131/ba2/BA2Axioms-stage2.out`), namespace
+Kernel-checked, on `[propext, Classical.choice, Quot.sound]` (`data/fs131/ba2/BA2Axioms-stage4.out`), namespace
 `HadwigerNelson.Plane`:
 - `ArcMap.hasHornCount_iff_of_agree`, `ArcMap.hasHornCount_zero_of_mem_interiorPts`, `ArcMap.hasHornCount_zero_of_two_spheres`,
   `ArcMap.hasHornCount_iff_of_germ_swap` (`ValidMap/HornChart`) — the horn count where two maps agree, at an interior point, on two
@@ -195,8 +299,35 @@ Kernel-checked, on `[propext, Classical.choice, Quot.sound]` (`data/fs131/ba2/BA
   § 2.5 over FS131-E5's two lemmas, now **[kernel]**); with `lens_end_far`, `two_le_dist_of_far`, `ArcMap.lens_far_end`,
   `ArcMap.exists_gap_cap`, `ArcMap.exists_gap_middle_far`. `ArcMap.exists_collarFitOut` — the outward collar exists.
 
-Proved **from open children** (through `sorryAx`; not results yet): `ArcMap.exists_r2Subdiv` (from `R2Subdiv.of_local`, FS131-BA1's
-D6); `ArcMap.CollarFitOut.map_ringArcsWithin`, `.map_localStep`, `.awayBend` (Stage 3: from the other half's children, and `awayBend`
-also from `map_R1`, `map_R2`, `map_hornCount_le`).
+- `ArcMap.exists_r2Subdiv` (`ValidMap/R2Cap`) — the radius-2 contacts over a constant-sided unit arc have a finite subdivision
+  (on the standard three since the merge of FS131-BA1's `R2Subdiv.of_local`).
+- `ArcMap.CollarFitOut.map_ringArcsWithin`, `ArcMap.CollarFitOut.map_localStep` (`ValidMap/BendGap`) — the outward bend creates no
+  unit arc and is a local step on its collar.
+- `ArcMap.hornCount_le_of_collarBend`, `ArcMap.hasHornCount_iff_collar_end` (`ValidMap/BendGap`) — **the horn clause of a collar
+  bend, either way**; `ArcMap.CollarFitOut.map_hornCount_le` (`ValidMap/BendGap`) and **`ArcMap.CollarFit.map_hornCount_le`**
+  (`ValidMap/BendStep`, the toward bend's horn child) over it; with `branchPt_end_polar`, `branchPt_end_unit`, `dist_branchPt_end`,
+  `eq_ringPt_of_mem_tangentCircle`, `im_ne_zero_of_two_spheres`, `exists_collar_end_radius`, `ArcMap.branch_between_notMem_Γ`,
+  `ArcMap.collar_end_Γ`.
+All of the above: axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/ba2/BA2Axioms-stage4.out`, 65 records).
 
-## Stage 2 — SAVED (FS131-BA2)
+Proved **from open children** (through `sorryAx`; not a result yet): `ArcMap.CollarFitOut.awayBend` — every field of the clause
+package, from `CollarFitOut.map_R1` and `CollarFitOut.map_R2` alone.
+
+## Stage 4 — SAVED (FS131-BA2)
+
+## Drafts for the front page
+
+No gate was run by this job (the brief's item 5), so there are no counts to draft for `CLAUDE.md` § The gate or § Trust ledger. For
+the wave's final sync, when its gate passes — each slot named, nothing filed by me:
+- **`plans/FS131-close-inventory.md`, a new item after 452**: "FS131-BA2: 14 of its 16 children proved on the standard three —
+  lane H whole, C1–C5, C7, C8, `map_ringArcsWithin` — with `CollarFit.map_hornCount_le` (the toward bend's horn child);
+  `exists_lensOut_clear` (FS131-KA1's § 2.5) checked step by step and found true as stated; `CollarFitOut.awayBend` proved from the two
+  left, `CollarFitOut.map_R1`, `CollarFitOut.map_R2`; `bend_away_part` rests on those two alone."
+- **`LEDGER.md`, the row of FS131-KA1's lens clearance (§ 2.5 of `plans/FS131-bendaway-kernel-plan.md`), when the wave files it**:
+  regraded [hand, one mind] → **[kernel]**: `HadwigerNelson.Plane.ArcMap.exists_lensOut_clear`
+  (`Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean`), axioms `[propext, Classical.choice, Quot.sound]`, assumptions: none beyond
+  its hypotheses (`F.Valid`, a constant-sided unit arc, `c ∉ coloursAt P`, the radius-2 arc in the domain, no contact at an interior
+  angle).
+- **`BendStep.lean`'s module header** (not mine to edit): "`CollarFit.map_hornCount_le`, open: its children are …" → "proved, over
+  `hornCount_le_of_collarBend` (`Plane/ValidMap/BendGap`)".
+- **Frontier line, Proof Atlas**: no change owed by this job alone — the wave's closing filing carries them.

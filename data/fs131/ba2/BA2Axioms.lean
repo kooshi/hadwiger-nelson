@@ -30,7 +30,7 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.exists_inner_ball
 #print axioms HadwigerNelson.Plane.ArcMap.r2_side_dichotomy
 #print axioms HadwigerNelson.Plane.ArcMap.exists_r2Subdiv
--- lane C (BendGap): the clearance (C4), the collar (C5), and their helpers
+-- lane C (BendGap): helpers (the clearance's, the horn clause's, the collar's access lemmas)
 #print axioms HadwigerNelson.Plane.r2Y_eq
 #print axioms HadwigerNelson.Plane.r2X_polar
 #print axioms HadwigerNelson.Plane.r2_dist_sq_pair
@@ -38,19 +38,41 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.dist_lt_of_lt_tangRad
 #print axioms HadwigerNelson.Plane.lens_end_far
 #print axioms HadwigerNelson.Plane.two_le_dist_of_far
+#print axioms HadwigerNelson.Plane.eq_ringPt_of_mem_tangentCircle
+#print axioms HadwigerNelson.Plane.im_ne_zero_of_two_spheres
+#print axioms HadwigerNelson.Plane.branchPt_end_frame
+#print axioms HadwigerNelson.Plane.e_sign_mul
+#print axioms HadwigerNelson.Plane.dist_branchPt_end
+#print axioms HadwigerNelson.Plane.branchPt_end_polar
+#print axioms HadwigerNelson.Plane.branchPt_end_unit
+#print axioms HadwigerNelson.Plane.lt_of_sin_lt_sin
+#print axioms HadwigerNelson.Plane.inv_between
+#print axioms HadwigerNelson.Plane.exists_collar_end_radius
+#print axioms HadwigerNelson.Plane.ArcMap.branch_between_notMem_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.collar_end_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.hasHornCount_iff_collar_end
+#print axioms HadwigerNelson.Plane.ArcMap.hornCount_le_of_collarBend
 #print axioms HadwigerNelson.Plane.ArcMap.tangRad_sub_one_le_mul
 #print axioms HadwigerNelson.Plane.ArcMap.neg_two_lt_r2Y
 #print axioms HadwigerNelson.Plane.ArcMap.lens_far_end
 #print axioms HadwigerNelson.Plane.ArcMap.exists_gap_cap
 #print axioms HadwigerNelson.Plane.ArcMap.exists_gap_middle_far
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.lensOutSet_subset_collar
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.ringArc_subset_collar
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.collar_isClosed
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.collar_inter_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_maps_collar
+-- lane C (BendGap): the children, and the toward bend's horn child (BendStep)
 #print axioms HadwigerNelson.Plane.ArcMap.exists_lensOut_clear
 #print axioms HadwigerNelson.Plane.ArcMap.exists_collarFitOut
--- lane C (BendGap): proved from the other half's children (open in this tree until the merge), and the assembly
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_ringArcsWithin
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_localStep
-#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend
--- still open at this stage
-#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R1
-#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_hornCount_le
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_hornCount_le
+-- still open (C6's two long mirrors), and what rests on them
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R1
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend
+#print axioms HadwigerNelson.Plane.ArcMap.bend_away_gap
+#print axioms HadwigerNelson.Plane.ArcMap.bend_away_subdiv
+#print axioms HadwigerNelson.Plane.ArcMap.bend_away_part

@@ -6110,6 +6110,37 @@ The children themselves are in FS131-KA1's block above; these are the helpers th
 #print axioms HadwigerNelson.Plane.mem_closure_dist_gt
 #print axioms HadwigerNelson.Plane.under_point
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.exists_inner_ball
+#print axioms HadwigerNelson.Plane.r2Y_eq
+#print axioms HadwigerNelson.Plane.r2X_polar
+#print axioms HadwigerNelson.Plane.r2_dist_sq_pair
+#print axioms HadwigerNelson.Plane.tangRad_neg
+#print axioms HadwigerNelson.Plane.dist_lt_of_lt_tangRad
+#print axioms HadwigerNelson.Plane.lens_end_far
+#print axioms HadwigerNelson.Plane.two_le_dist_of_far
+#print axioms HadwigerNelson.Plane.eq_ringPt_of_mem_tangentCircle
+#print axioms HadwigerNelson.Plane.im_ne_zero_of_two_spheres
+#print axioms HadwigerNelson.Plane.branchPt_end_frame
+#print axioms HadwigerNelson.Plane.e_sign_mul
+#print axioms HadwigerNelson.Plane.dist_branchPt_end
+#print axioms HadwigerNelson.Plane.branchPt_end_polar
+#print axioms HadwigerNelson.Plane.branchPt_end_unit
+#print axioms HadwigerNelson.Plane.lt_of_sin_lt_sin
+#print axioms HadwigerNelson.Plane.inv_between
+#print axioms HadwigerNelson.Plane.exists_collar_end_radius
+#print axioms HadwigerNelson.Plane.ArcMap.branch_between_notMem_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.collar_end_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.hasHornCount_iff_collar_end
+#print axioms HadwigerNelson.Plane.ArcMap.hornCount_le_of_collarBend
+#print axioms HadwigerNelson.Plane.ArcMap.tangRad_sub_one_le_mul
+#print axioms HadwigerNelson.Plane.ArcMap.neg_two_lt_r2Y
+#print axioms HadwigerNelson.Plane.ArcMap.lens_far_end
+#print axioms HadwigerNelson.Plane.ArcMap.exists_gap_cap
+#print axioms HadwigerNelson.Plane.ArcMap.exists_gap_middle_far
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.lensOutSet_subset_collar
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.ringArc_subset_collar
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.collar_isClosed
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.collar_inter_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_maps_collar
 -- FS131-BA2 block end
 
 #eval IO.println "=== PURCHASED ==="

@@ -279,7 +279,7 @@ theorem CollarFit.map_degree_le (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂
       exact ⟨m, le_rfl, ((hfit.map_degree_end hF hend).1 m).mpr hm⟩
 
 /-- **The horn clause for the collar bend** (`exists_arcStep`'s clause of inventory item 385 (a), FS131-E6's): no point's horn count
-rises. **Open — `sorry`** (FS131-IA1; hand grade, one mind; **planned by FS131-KA1**, `plans/FS131-bendaway-kernel-plan.md` § 4, over
+rises. **Proved (FS131-BA2)**, by `hornCount_le_of_collarBend` (`Plane/ValidMap/BendGap`), over the children below (stated by FS131-IA1; **planned by FS131-KA1**, `plans/FS131-bendaway-kernel-plan.md` § 4, over
 `Plane/ValidMap/HornChart`'s children `hasHornCount_iff_of_agree`, `hasHornCount_zero_of_mem_interiorPts`,
 `hasHornCount_zero_of_two_spheres`, `hasHornCount_iff_of_germ_swap`). Route, by the place of `x`: off the
 collar the maps agree near `x` (`hasHornCount_iff_of_agreesOff`'s argument); in the lens and on the open arc `x` is interior in the
@@ -289,7 +289,25 @@ bent map, on the lens boundary it has two germs of different directions (a circl
 the indices with `β i = nextβ i` are the same and the count is kept. No inhabitant note is owed beyond `collarModel` (`CollarFit`'s). -/
 theorem CollarFit.map_hornCount_le (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ}
     (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j' := by
-  sorry
+  -- validity is not read: the clause is geometry of `Γ` (reported: FS131-BA2's record)
+  have _ := hF
+  obtain ⟨hR', hR'R, hR1, hR''⟩ := hfit.params
+  have h12 := hfit.ring.1
+  have hπ := Real.pi_pos
+  have hRh : (1 : ℝ) / 2 < R := by linarith
+  have hu0 : 0 < (θ₂ - θ₁) / 2 := by linarith
+  have hu1 : (θ₂ - θ₁) / 2 < π := by linarith [hfit.short]
+  refine hornCount_le_of_collarBend (F := F) (M := hfit.map) (dA := dist (ringPt P θ₁) (collarMid P θ₁ θ₂ R))
+    (dB := dist (ringPt P θ₂) (collarMid P θ₁ θ₂ R)) h12 hfit.short hR' hR'R (by linarith) (by linarith) hR'' hR1.ne rfl
+    hfit.sub_dom hfit.isClosed_collarK hfit.ring.2.1 hfit.free (fun z hz => ?_) ?_ ?_ ?_ ?_ ?_ hj
+  · have := (pushforward_mem_interiorPts_iff (hfit.homeo.symm z) :
+      hfit.homeo (hfit.homeo.symm z) ∈ hfit.map.interiorPts ↔ hfit.homeo.symm z ∈ F.interiorPts)
+    rwa [hfit.homeo.apply_symm_apply, (hfit.homeo_eq_self hz).2] at this
+  · rw [dist_collarMid_left h12.le]; exact norm_tangRad_sub_one_pos hRh hu0 hu1
+  · rw [dist_collarMid_left h12.le]; exact norm_tangRad_sub_one_le hRh hu0.le hu1.le
+  · rw [dist_collarMid_right h12.le]; exact norm_tangRad_sub_one_pos hRh hu0 hu1
+  · rw [dist_collarMid_right h12.le]; exact norm_tangRad_sub_one_le hRh hu0.le hu1.le
+  · rw [hfit.map_Γ, ← collarArcs_carrier hRh hR1 h12 hfit.short]; rfl
 
 end Collar
 

@@ -37,7 +37,7 @@ theorem IsSectorChart.hasHornCount {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀
   exact Near.hasHornCount_chart (X := (⟨n, G, r₀, s₀, ρ₀, col, hC, ⟨hs₀, hs₀r₀⟩, hdisj, hord, hG, hcol⟩ : F.Near v)) hn
 
 /-- **Horn counts agree where two maps have the same interior points near the point** (sectors are read off the interior points of
-small balls; mirror of `hasDegree_iff_of_agree`). **Open — `sorry`** (plan § 3, child H1; short). Inhabitant of the hypotheses: `F' = F`. -/
+small balls; mirror of `hasDegree_iff_of_agree`). **Proved (FS131-BA2)** (plan § 3, child H1; short). Inhabitant of the hypotheses: `F' = F`. -/
 theorem hasHornCount_iff_of_agree {F' : ArcMap k} {v : ℂ} {r₀ : ℝ} (hr₀ : 0 < r₀)
     (hI : ∀ x ∈ ball v r₀, x ∈ F'.interiorPts ↔ x ∈ F.interiorPts) (j : ℕ) : F'.HasHornCount v j ↔ F.HasHornCount v j := by
   have hU : ∀ r ∈ Ioc 0 r₀, F'.interiorPts ∩ ball v r = F.interiorPts ∩ ball v r := by
@@ -55,7 +55,7 @@ theorem hasHornCount_iff_of_agree {F' : ArcMap k} {v : ℂ} {r₀ : ℝ} (hr₀ 
     Set.ext fun S => and_congr_left fun _ => hS r hr S]
 
 /-- **An interior point has no horn** (its only sector is the ball, which holds the point; `exists_hasHornCount`'s first case).
-**Open — `sorry`** (child H2; short). -/
+**Proved (FS131-BA2)** (child H2; short). -/
 theorem hasHornCount_zero_of_mem_interiorPts {v : ℂ} (hv : v ∈ F.interiorPts) : F.HasHornCount v 0 := by
   obtain ⟨X⟩ := exists_near hv.1
   have hn : X.n = 0 := by
@@ -161,7 +161,7 @@ theorem branch_curv_eq_of_two_spheres {x q q' : ℂ} {β β' κ κ' ρ ρ' : ℝ
 /-- **No horn where `Γ` lies on two circles that are not tangent at the point** (the same circle twice is allowed): a horn is a sector
 between two consecutive germs of one direction (`Near.sector_eq_hornSet_iff`); a germ's branch lies in `Γ`, so on one of the circles
 near the point, and is tangent to it there; two germs of one direction on one circle are one germ (`Near.hdisj`), and on two circles
-they make the circles tangent. **Open — `sorry`** (child H3). Inhabitant of the hypotheses: a point of a ring arc's interior with
+they make the circles tangent. **Proved (FS131-BA2)** (child H3). Inhabitant of the hypotheses: a point of a ring arc's interior with
 `Γ` free near it (`q = q' = P`, `ρ = ρ' = 1`; `l60Frag`). -/
 theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hρ : 0 < ρ) (hρ' : 0 < ρ')
     (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ')
@@ -265,7 +265,7 @@ theorem germ_eq_of_frequently_branchPt_eq {x : ℂ} {β β' κ κ' : ℝ}
 direction `β₀` and curvature `κ₀` replaced by the branch of the same direction and curvature `κ₀'`, and `Γ_F` has no point on a branch
 of that direction with curvature between the two (other than `κ₀`'s own). Route: `F`'s chart at `x` (`localSectors`) has a germ
 `(β₀, κ₀)` (its branch lies in `Γ`); the germs with `κ₀'` in its place are sorted (`hbetween`) and are `M`'s chart (`isSectorChart_of`,
-`hM`); directions are unchanged, so the cusps `{i | β i = nextβ i}` are the same (`IsSectorChart.hasHornCount`). **Open — `sorry`**
+`hM`); directions are unchanged, so the cusps `{i | β i = nextβ i}` are the same (`IsSectorChart.hasHornCount`). **Proved (FS131-BA2)**
 (child H4, the hardest of lane H). Inhabitant of the hypotheses: the toward collar bend at an end of its arc (`collarModel`), with
 `β₀ = θ₁ + π/2`, `κ₀ = 1`, `κ₀' = 1/R`. -/
 theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom)

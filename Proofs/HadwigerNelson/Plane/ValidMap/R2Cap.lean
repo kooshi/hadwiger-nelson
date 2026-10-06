@@ -26,7 +26,7 @@ variable {k : ℕ} {F : ArcMap k}
 /-- **Near a radius-2 point, the arcs of `Γ` in the crescent hugging the radius-2 circle lie on it** (the radius-2 form of
 `exists_end_free`, at any point `P + 2 e(θ_E)` of the domain and either side `σ`). Route: `exists_end_free`'s proof with the frame at
 `P + 2 e(θ_E)`: `branch_transversal` applies as it stands (`R' = 2(1 − τ) > 1/2`, `R'' = 2(1 + τ) > 1`); `branch_tangent` applies to
-the halved variables `(X/2, Y/2, s/2, 2κ)`, which turn the radius-2 crescent into the unit one. **Open — `sorry`** (child C1).
+the halved variables `(X/2, Y/2, s/2, 2κ)`, which turn the radius-2 crescent into the unit one. **Proved (FS131-BA2)** (child C1).
 Inhabitant of the hypotheses: any point of a plane map. -/
 theorem exists_r2_crescent_free (F : ArcMap k) {P : ℂ} {θE σ : ℝ} (hE : P + 2 * e θE ∈ F.dom) (hσ : σ = 1 ∨ σ = -1) :
     ∃ ρ > 0, ∃ τ₀ > 0, ∀ τ, 0 < τ → τ < τ₀ → ∀ z ∈ F.Γ, dist z (P + 2 * e θE) < ρ → ∀ X Y : ℝ,
@@ -433,7 +433,7 @@ of radius `ρ₀ > 2` tangent to it at `w₀` from `P`'s side (centre `P + (2 �
 radius-2 circle and the circle of radius `2(1 + τ)` on that side is free of `Γ` (`exists_r2_crescent_free`), connected and in the
 domain, so of one colour `j`; a radius-2 point `w` next to `w₀` on that side has a neighbourhood whose part outside the radius-2 circle
 is in the crescent and whose part inside or on it misses the class (inside by `ne1_region` against the inner side of the arc near
-`r(θ)`, an interior point of the arc; on the circle because the class is open), so `w` is a contact iff `j = c`. **Open — `sorry`** (child C2). Inhabitant of the
+`r(θ)`, an interior point of the arc; on the circle because the class is open), so `w` is a contact iff `j = c`. **Proved (FS131-BA2)** (child C2). Inhabitant of the
 hypotheses: owed with the away bend's model (plan § 5). -/
 theorem r2_side_dichotomy (hF : F.Valid) {P : ℂ} {θ₁ θ₂ θ₀ σ δ₀ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
     (hσ : σ = 1 ∨ σ = -1) (hθ₀ : θ₀ ∈ Icc θ₁ θ₂) (hδ₀ : 0 < δ₀) (hside : θ₀ + σ * δ₀ ∈ Icc θ₁ θ₂)
@@ -542,7 +542,7 @@ theorem r2_side_dichotomy (hF : F.Valid) {P : ℂ} {θ₁ θ₂ θ₀ σ δ₀ :
 
 /-- **The radius-2 contacts over a constant-sided unit arc have a finite subdivision** when `R₂(ᾱ)` lies in the domain: by
 `r2_side_dichotomy` each angle of `[θ₁, θ₂]` has, on each side, a one-sided neighbourhood wholly in the contacts or wholly off them;
-`R2Subdiv.of_local` joins the pieces (near `x` an interval `(u, v)` is one piece if `x ∉ (u, v)` and two joined at `x` otherwise). **Open — `sorry`** (child C3). Inhabitant of the hypotheses: owed with the away bend's model. -/
+`R2Subdiv.of_local` joins the pieces (near `x` an interval `(u, v)` is one piece if `x ∉ (u, v)` and two joined at `x` otherwise). **Proved (FS131-BA2)** (child C3). Inhabitant of the hypotheses: owed with the away bend's model. -/
 theorem exists_r2Subdiv (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
     (hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom) : R2Subdiv {θ | P + 2 * e θ ∈ closure (F.region c)} θ₁ θ₂ := by
   refine R2Subdiv.of_local hA.1 fun x hx => ?_

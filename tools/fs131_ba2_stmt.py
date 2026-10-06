@@ -4,6 +4,7 @@
 the skeleton's commit `dd8c2c33`, and ALLOW emptied: no statement changes in this job.)
 
   python3 tools/fs131_ba2_stmt.py [--base dd8c2c33]            # exit 0 iff the checks hold
+  python3 tools/fs131_ba2_stmt.py --other 4559c106           # after the ruled merge: a non-editable file may instead equal that commit's
   python3 tools/fs131_ba2_stmt.py --self-test                  # plants faults in memory; each must fire
 
 Checks, for every `.lean` file under `Proofs/` (and `Proofs.lean`) that exists at the base:
@@ -43,6 +44,9 @@ def decls(text):
     return out
 
 
+OTHER = None  # a ref the non-editable files are compared against after a ruled merge (--other <ref>)
+
+
 def check(base, tree_text=None, extra=None):
     """tree_text: {path: text} overrides of the working tree (for plants); extra: {path: text} new files."""
     tree_text = tree_text or {}
@@ -64,6 +68,8 @@ def check(base, tree_text=None, extra=None):
                 bad.append(f"Proofs.lean changed beyond added imports: -{gone} +{[l for l in added if not l.startswith('import ')]}")
             continue
         if f not in EDITABLE:
+            if OTHER is not None and new == git("show", f"{OTHER}:{f}"):
+                continue  # identical to the merged commit of the other half (inventory ruling 452 (b))
             bad.append(f"CHANGED (not editable) {f}"); continue
         do, dn = decls(old), decls(new)
         for name, stmts in do.items():
@@ -97,7 +103,10 @@ def check(base, tree_text=None, extra=None):
 
 
 def main():
+    global OTHER
     base = "dd8c2c33"
+    if "--other" in sys.argv:
+        OTHER = sys.argv[sys.argv.index("--other") + 1]
     if "--base" in sys.argv:
         base = sys.argv[sys.argv.index("--base") + 1]
     if "--self-test" in sys.argv:
@@ -121,6 +130,7 @@ def main():
             "a weakened hypothesis of the swap lemma": ({hc: thc.replace("(hbetween : ∀ κ, min κ₀ κ₀' ≤ κ", "(hbetween : ∀ κ, min κ₀ κ₀' < κ", 1)}, None),
             "a hypothesis dropped from the clearance (exists_lensOut_clear)": ({bg: tbg.replace("(hin : c ∉ F.coloursAt P)", "", 1)}, None),
             "an edit to a file that is not editable (BendCollar)": ({g: Path(g).read_text() + "\n-- planted\n"}, None),
+            "an edit to the other half's file (LensOut), against --other too": ({V + "LensOut.lean": Path(V + "LensOut.lean").read_text() + "\n-- planted\n"}, None),
             "an axiom in a new file": (None, {"Proofs/Planted.lean": "axiom planted : False\n"}),
             "an axiom in an editable file": ({bg: tbg + "\naxiom planted : False\n"}, None),
             "native_decide in an editable file": ({r2: tr2 + "\nexample : 1 = 1 := by native_decide\n"}, None),
