@@ -1,0 +1,14 @@
+Proofs/HadwigerNelson/Arith/NormOneTarget.lean: 3 base declarations, 3 with statement and docstring kept, 0 docstring(s) extended, 0 flagged
+Proofs/HadwigerNelson/Arith/FloorPlanes.lean: 7 base declarations, 7 with statement and docstring kept, 0 docstring(s) extended, 0 flagged
+STATEMENTS: PASS
+exit=0
+SELF-TEST Proofs/HadwigerNelson/Arith/NormOneTarget.lean: definition fault NOT RUN (the base file declares no definition)
+SELF-TEST Proofs/HadwigerNelson/Arith/NormOneTarget.lean: theorem statement fault on `card_normOne`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/NormOneTarget.lean: docstring fault on `involution_eq_pow`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/NormOneTarget.lean: docstring extension on `involution_eq_pow` (partner): as required
+exit=0
+SELF-TEST Proofs/HadwigerNelson/Arith/FloorPlanes.lean: theorem statement fault on `circle_sum_le`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/FloorPlanes.lean: definition fault on `KloostermanBound`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/FloorPlanes.lean: docstring fault on `kloostermanBound_of_card_le_five`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/FloorPlanes.lean: docstring extension on `kloostermanBound_of_card_le_five` (partner): as required
+exit=0
