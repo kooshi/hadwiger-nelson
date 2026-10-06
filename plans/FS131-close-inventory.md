@@ -6784,3 +6784,67 @@ reason by the close.*
      Amendment 1 (generator `mk-i6k-amend.py`): the moved base, the fourteen modules beneath them proved, the two
      folded helper names, the kernel-level statement check, and per job what the landing supersedes. No reply
      sent to the planner: it asks none.
+562. **FS131-T5 done: the gate has a step that lists what the library assumes, in both forms; `main` assumes 34 things, six of them outside theorems** (implementer, Opus, the special-purpose slot; harness 534k and 76 minutes by the task notice; record `fs131-t5`'s `plans/FS131-T5-assumptions.md`; report `data/fs131/reports/FS131-T5.md`; six commits, tip `4dd69014`; pushed, tree clean).
+     **The step**: `scripts/Assumptions.lean` with `scripts/assumptions.sh` (`--self-test`, `--write-ledger`), a controls
+     file, a ledger of every (assumption, statement) pair, a third digest in `scripts/gate_report.py`; by its word 32
+     self-test checks and a mutation harness, 18 of 18 caught. **`main` at `3bfc7d2e`** (before wave 6's first half):
+     one outside axiom (Falconer's; 4 theorems) and 33 hypotheses — 18 named, 15 written out in a binder; by kind 5
+     outside theorems (`BochnerHerglotz` 12 statements, `InvariantMeasureOnClosed` 7, `Bridge.RealAlgebraicDescent` 6,
+     `BochnerOn` 1, `Voronov11` 1), 24 hand results of ours, 4 open questions; 85 (assumption, statement) pairs, 40
+     distinct statements. **What it cannot decide, printed every run**: `unseen=14112` — a hand result written out
+     over a theorem's own variables with a silent docstring is not told from a condition; five such on `main` were
+     found by reading, and are declared. **Red on `main` as shipped, by three failures, each a bibliography row
+     missing** (`[Rudin1962]` twice, `[Kakutani1938]`); green on a copy with the rows. **My receipt**: tip equals
+     `origin/fs131-t5`, tree clean; against its base it adds four files under `scripts/`, changes
+     `scripts/gate_report.py`, adds two tools, its record, report and 26 files under `data/fs131/t5/` — nothing under
+     `Proofs/` (`git diff --name-status`); `data/fs131/t5/runs/gate-main-as-shipped.out` ends with the three
+     `FAIL unresolved-source` lines and "assumptions: FAIL — 3 check(s) failed"; `gate-main-with-drafts.out` ends
+     "assumptions: OK — 1 outside theorem(s) as axioms, with 4 theorem(s) resting on them; 18 named and 15 inline
+     hypotheses (5 outside, 24 ours, 4 open), taken by 85 statement(s) and mentioned by 1"; the self-test's receipt
+     shows `fails=26` in its planted copy. **One step redone by me**: `Bridge.RealAlgebraicDescent` — by `git grep`
+     on `main`, six theorems of `Bridge` take `(hD : RealAlgebraicDescent)`, the six its ledger lists; **my search of
+     item 548 missed it**, though the front page says the bridge is "conditional on one named true hypothesis"; its
+     counts for the five I had found (12, 7, 1, 1, 1) agree with mine. Not checked by me: the scan's code, the
+     mutation harness, the reasons of its 31 declared conditions and 2 premises. **Slips, the job's, disclosed**: no
+     token count read; three record-against-docstring differences reported at the hand-back, not mid-job; the
+     controls file is under `scripts/`. **Credit**: an outside theorem my list lacked; three cited works with no
+     bibliography row; the observation that a hypothesis with no free variable is an assumption by its shape, which
+     makes one class decidable; and a step that says every run what it cannot see. **Rulings.** (a) **The two rows
+     are filed** in `BIBLIOGRAPHY.md` under its keys (so its declarations stand), in the table's five columns: not
+     held, not read; Rudin's data recalled; Kakutani's seen in a search listing only (mine, 2026-10-06: the title,
+     journal, volume and pages as a 1977 reference list cites them). **Prior-art debt**: the read-back of Rudin
+     1.4.3 and 1.3.6 against the two hypotheses; Markov's 1936 paper unidentified. (b) **`Plane.Voronov11` is
+     assumed**: its declaration as an outside theorem with one consumer stands, and its docstring gains a sentence at
+     the step's landing. Alternative: "named, not imported", as the docstring says. Why not: `mu_lt_of_voronov11`
+     takes it as a hypothesis; the docstring's phrase is true of the other theorem, which holds it under an
+     equivalence. Confidence: high. (c) **`Interface.MulStable` stays a hand result of ours, and the kind rule it
+     changed — a cited key contradicts no kind — is ratified.** Alternative: restore the rule and declare it outside.
+     Why: the kind says whose statement it is, and a hand result may cite a paper for an ingredient; the landing's
+     table and the derivation have it ours. Confidence: medium-high; it changes if the landing's reader finds the
+     statement is the cited paper's theorem. (d) **Its four design forks are ratified, with one change**: once the
+     nine counts are in `CLAUDE.md`, their absence fails — a recorded count whose deletion passes is this gate's own
+     failure mode. The step's landing makes that change, with a control. (e) **The step lands in a job of its own,
+     FS131-LT5, after wave 10's second landing; ruling 560 (a) is withdrawn.** Why: to be green on a tree with
+     everything landed it needs docstring edits under `Proofs/` (its draft 8: a rebuild), declarations for two
+     landings' modules its enumeration predates, its ledger rewritten (Falconer's rows leave, Weil's arrive), and a
+     second reader for 33 reasons that are one mind's. Alternative: the wave's landing merges it last. Why not: it
+     would be done at the end of another job's context. Confidence: high. FS131-L10B's brief is regenerated
+     (unlaunched): its step 6 now points at what T5's record says of the axiom audit's three controls, and asks for
+     the wave's hypotheses in a table the step's landing can declare from. (f) **Its drafts for `LEAN.md`,
+     `CLAUDE.md`, `ARCHITECTURE.md` and the line for landing briefs are filed at that landing, not now**: those
+     files hold current state, and the script is not on `main`. (g) **The special-purpose slot is closed** (Kooshi's
+     word, item 551); FS131-LT5 takes a standing slot. (h) The complete list owed to Kooshi (item 548 (2)) goes in
+     my report of this turn, from its record's stage 5.
+563. **FS131-I8A, by message mid-job: a generalization at iteration grade — the hug and the double tip hold with no Γ-free ring, no simplicity and no condition on the far germs** (source: I8A's message to "main", 2026-10-06; elaborated in its scratch, by its word; not built, not committed — the artifact is read at its hand-back).
+     Its lemma `not_sole_tip_of_adjacent_changePoints`, in a helper module of its own, is `v6_hug` without `hΓ` and
+     `doubleTip` without `hS`, `hv`, `hu`, at every `k`; a route that uses none of wave 3's flank lemmas. It asked
+     whether to close `doubleTip` (stated in its file, not its leaf). Read by me in its tree: both statements, as it
+     quotes them. Not checked by it, said so: any held fragment against the lemma; why the entries asked for
+     simplicity and the far germs. **Rulings.** (a) **It closes `doubleTip` from its lemma once the lemma is in a
+     saved stage; the statement does not change** — the three binders stay, read by `have _ :=` (ruling 419 (c)).
+     Alternative: leave it to wave 8's second planner. Why not: the file has one writer and the proof is one line.
+     Confidence: high. (b) Whether the row is restated at the wider class is decided at the wave's landing, by the
+     pattern of rulings 494 (a) and 542. (c) **Wave 8's second planner's brief gets a dated amendment at its
+     launch**: `doubleTip`'s plan becomes a read-back of that proof and of the entries' reasons. (d) Announced as a
+     result only when its saved stage carries it (item 526). Reply sent, one message. A generalization for the
+     wave's errata (FS116-V6-HUG, FS129-MR1-DOUBLETIP), held.

@@ -133,7 +133,7 @@ The gate's recorded state on `main`, which your counts are reconciled against:
    and the last landing's record for the gate's procedure (`/home/kooshi/source/lean-dir/plans/FS131-L6A-landing.md`, its gate and
    landing stages). Build the branch once as given (no `sorry` anywhere at `248f8f4f`). Open your record. Commit and push.
 2. **The merges**, each its own commit, each trialled before it is made and checked before the next. (i) `git merge origin/main` (at
-   `f2ad1a4f` when this was written: wave 6's first half and the filing). My trial on your base conflicts in `scripts/Axioms.lean` only —
+   `3c9ebe0e` when this was written: wave 6's first half and the filing). My trial on your base conflicts in `scripts/Axioms.lean` only —
    adjacent additions, keep every side. (ii) `git merge origin/fs131-wf1` (at `a61f0d14`): against `main` alone it is clean; against your
    base it conflicts in `ARCHITECTURE.md` and `scripts/Axioms.lean`, where the planner added the new import's row and declaration beside
    the ones this branch removes. The resolution is the joined state, not a side: Falconer's `declareImport` line and its row in
@@ -169,14 +169,18 @@ The gate's recorded state on `main`, which your counts are reconciled against:
    `tools/fs131_qa4_notes.py`, no CONFLICT; **the records check** against the kernel's own list of theorems
    (`tools/fs131_l5_records.py`, as the last landings ran it: every hand-written theorem of the wave has one record, on the standard
    three or a subset, or on the import if it is one of the eight). Save every step's log under `data/fs131/l10b/` and name them.
-6. **The gate's new step, if it is back in time.** A tooling job (FS131-T5, on branch `fs131-t5`) is building a step that lists every
-   assumption the library makes — outside axioms and named hypotheses — with the theorems resting on each. It was still running when this
-   was written. **If I message you that it is back and reviewed before your step 7**: after step 5 is green and its logs are saved,
-   merge `origin/fs131-t5` as a commit of its own (my trial shows no conflict against your base or `main`; confirm it changes no file
-   under `Proofs/`), declare what this wave and wave 6's first half brought since its enumeration of `main` (its record says how), run
-   its step and its self-test, and re-run any step of 5 whose files the merge touched. **If its step cannot be made green inside your
-   touches and budget, land the commit before that merge** — it passed the whole gate — and hand back with the merge on your branch,
-   unlanded, and the step's log. If no message comes, land without it and say so.
+6. **The gate's new step is not yours, but two things of it are.** A tooling job (FS131-T5, done; branch `fs131-t5`) built a step
+   that lists every assumption the library makes — outside axioms, and hypotheses standing for outside theorems, hand results of ours
+   and open questions — with the statements resting on each. It lands in a job of its own right after you (inventory item 562); you
+   do not merge it or run it. (i) Its record
+   (`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wt5/plans/FS131-T5-assumptions.md`, the section "What is on its way") says
+   what your join does to the **axiom audit's** controls: `baseline`, `imported_declared` and `banner_dropped` in
+   `scripts/axioms-controls.txt` read `main`'s one declared import and its four records, and on your joined tree the one declared
+   import is another axiom, with eight — read that section before you set them in step 2. (ii) Your drafts' table of hypotheses
+   (step 8) is written so that job can declare from it: for each hypothesis a theorem of this wave takes — named, or written out in a
+   binder — its full name (or the theorem and the binder), its kind (an outside theorem, a hand result of ours, an open question),
+   its source (a `BIBLIOGRAPHY.md` key, a ledger row, a derivation entry's id) and the theorems that take it. A hand result written
+   out over a theorem's own variables is the one thing that step cannot find by itself, so say plainly whether the wave has any.
 7. **The landing**: if `main` moved meanwhile, merge it again; when the new commits touch only `plans/`, `data/`, `.claude/`,
    `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, say so with the diff that shows it, otherwise re-run the gate on the merged commit. Then
    `git push origin HEAD:main` from the worktree — a fast-forward only, never a force-push; on a rejected push, fetch, merge and try again.
@@ -188,8 +192,7 @@ The gate's recorded state on `main`, which your counts are reconciled against:
    the join changed (`BIBLIOGRAPHY.md` rows for Weil's paper, for the paper whose three theorems the planner read back, for Falconer's
    and the unheld lemma it cites; the sentence for `LEAN.md` § Assumptions on stating an import in its paper's own form;
    `plans/LEAN-BACKLOG.md` rows; `LEDGER.md` clauses, said about the norm-one Cayley graph and not about "the plane" until the link is
-   proved); **the named hypotheses each landed theorem rests on, by name** (a table as the first landing's record has, unless the new
-   step printed it); **the open gate items at this landing** (a theorem whose hypotheses no Lean object on `main` satisfies at once, or
+   proved); **the named hypotheses each landed theorem rests on, by name** (the table of step 6 (ii)); **the open gate items at this landing** (a theorem whose hypotheses no Lean object on `main` satisfies at once, or
    that still assumes a named hypothesis — `sp_if` is one); and the generalizations the reports found, as a list for the wave's errata.
 9. **Your record**, stages headed "Stage n — SAVED (FS131-L10B)"; the report in standing rule 11's form, the wave's heads and record counts
    read from the gate's saved axioms log. Leave no background process running. Stopping at a saved stage with the gate red at a named
