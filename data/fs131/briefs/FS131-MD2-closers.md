@@ -152,3 +152,18 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-06, at launch) — `main` has moved since this brief was written; three things to hold
+
+Nothing above is withdrawn.
+
+1. **Your branch was cut from `main` at `1ed1cfd2`, and `main` has since taken four landings** (wave 10's two passes, wave 6's first
+   half, and a new gate step). Do not merge it: your modules and what they import are whole in your tree, the build as given is its
+   own, and the landing that takes your branch does the merge. Your statement checks are against `1ed1cfd2`.
+2. **Read each statement you prove as the kernel has it** (inventory item 556; `LEAN.md` § Searching — Lean, last bullet): a section
+   `variable` enters a theorem only if its statement mentions it, so a comparison of text can pass a statement that lacks a
+   hypothesis its file shows. `#check` each head with `lake env lean` under the slot, the output saved under your `data/` folder.
+3. **After your last green build, the guarded lint** — `lake lint --no-build -- --no-build --trace` under the slot with `--mem 8`
+   (`LEAN.md` § The gate), its output saved: a landing's gate went red on an instance argument a proof did not read, which the
+   build's own linters do not report (inventory item 573). A line it reports in what you wrote is yours to repair if no statement
+   changes, and a message to me if one does.

@@ -7590,3 +7590,30 @@ reason by the close.*
      generalization, for its report); the plan's child `disjoint_angleIcc_antipodal` is what wave 4's landed
      `IsRingArc.disjoint_coneAt` already gives. Its own names sent for the sibling. **Done**: its names relayed to
      FS131-I8C (one message; compared by me with I8C's list: no overlap). No ruling asked.
+595. **FS131-I7M done: the search's six-colour model is a kernel fact on its branch — `RouteT.grid12 : CountData (torusGrid 12 12) 6`; no field failed** (implementer, Opus; harness 406k and 63 minutes by the task notice; record `fs131-w7m`'s `plans/FS131-I7M-implementation.md`; report `data/fs131/reports/FS131-I7M.md`; five commits, tip `c6b169e3`; pushed, tree clean).
+     **Proved on the standard three** (new module `Plane/RouteT/Grid12`, 424 lines; built, not gated): `grid12`;
+     `grid12Col_eq_certificate` (the term's 144 values are the certificate's); `grid12_card_tac` (288 tactic
+     darts); `room`, `slack`, `ends_identity`, `joint_first` applied to it; of `joint`'s hypotheses the model's
+     full assignment meets five and the sixth is the one `joint` refutes; **`grid12_not_hK1`: the model fails
+     `kill`'s extra hypothesis, at every vertex** — `kill` still has no known inhabitant. **The kernel's price**:
+     the count's conditions as stated did not finish at 144 cells (three passed 8 GiB in half a minute); their
+     local forms — a cell, its four rook steps, its four diagonal steps, carried to the field by a lemma for every
+     grid — cost 6.5 s in all. **The checker and the kernel agree** on this one accepting instance, by a different
+     route; that says nothing of the checker's rejections. Seven docstrings of the count's module made true.
+     **My receipt**: tip equals `origin/fs131-w7m`, tree clean; outside `data/`, `plans/`, `tools/` it changed the
+     new module, `Count.lean` (46 lines), `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`; `sorry` in both
+     modules: 0; no `native_decide` in the new module; its last build log ends `EXIT=0`; its axioms print parsed by
+     script — 50 records, none outside the standard three but the control `anchor` on `sorryAx`; **`Count.lean`
+     with every doc comment removed is identical to its base (my script)**; the four named declarations are
+     present as it states them. Not checked by me: the proofs beyond the build; its elaborated signature check;
+     the lint's output. **Credit**: the kernel's cost measured before the model was written, and a local form found
+     that turns an evaluation that did not finish into seconds, for every grid; the sixth theorem's status said
+     exactly. **Slips, the job's, disclosed**: three pricing runs killed by a guessed memory cap (read at once, not
+     retried); a first reading of an elaborator failure wrong, and its own test said so. **Rulings.** (a) **Queue
+     line 8's fate gains "[kernel] on branch"** (filed). (b) Its two `LEAN.md` bullets (the elaborator's recursion
+     on membership in a closed nested product; the local-form pattern) and the two docstring lines outside its
+     seven are filed and made at wave 7's landing. (c) **Wave 7's third planner merges `origin/fs131-w7m`** (it
+     holds the count branch whole). (d) The deriver's questions it repeats (is `kill` empty; `joint`'s `hsrc` met
+     by no model held) join item 580 (c). (e) **Slot → FS131-MD1** (the example maps' first closer, on
+     `fs131-wd1`; a dated Amendment 1 appended to both closers' briefs, gate exit 0), launched 2026-10-06. In
+     flight: 3 (I8C, I8D, MD1).
