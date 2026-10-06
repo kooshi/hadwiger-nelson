@@ -473,3 +473,10 @@ the lane's five jobs' records, tools and logs. After this stage's commit (this s
 fast-forwarded once more, in `plans/` and `data/` alone.
 
 ## Stage 5 — SAVED (FS131-MC1)
+
+## After the landing (FS131-MC1)
+
+Stage 5 and the report were committed as `37536810` and pushed to `fs131-wmb` and to `main` — `edd6aa8d..37536810`, a fast-forward
+(`data/fs131/mc/push-main-2.txt`); `git diff --name-only d9347791 37536810 -- . ':!plans' ':!data'` is empty, so `main`'s gate inputs
+are the gated commit's. This note and that push's log go in one last commit, pushed the same way. The report is
+`data/fs131/reports/FS131-MC1.md`.
