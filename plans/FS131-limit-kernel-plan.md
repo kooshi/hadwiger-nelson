@@ -1163,3 +1163,51 @@ None: the vertex step is not closed, wave 5 is not at its gate, and my brief run
 the four cases close: `exists_vertexStep` joins the declarations under `exists_terminalMap` that are [kernel].
 
 ## Stage 21 — SAVED (FS131-IR2)
+
+---
+
+# FS131-IR3 — the implementer: the vertex step's four cases (continuing FS131-IR2's record from its Stage 21)
+
+*de Bruijn, the implementer (Opus), on branch `fs131-w5c` from `a5a12a0b`. Brief: `data/fs131/briefs/FS131-IR3-vertex-cases.md` (main tree).*
+
+## Theorems this phase proved (FS131-IR3)
+
+Each [kernel] on `[propext, Classical.choice, Quot.sound]` or a subset, read against the build of the stage that names it; the list is kept
+current at each saved stage (the last stage's receipt is the one to read).
+- Stage 22 (the readback): none.
+
+## Stage 22 — SAVED (FS131-IR3): the readback, the as-given build, IR2's axioms check re-run
+
+### 22.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_ir_quotes.py` (IR1's checker, run unchanged) on the brief as launched: **16 quotations, 0 failures**
+(`data/fs131/ir/ir3/quotes.txt`); `--self-test` (one letter planted in the first quotation): **fired**, 1 failure
+(`ir3/quotes-selftest.txt`). No mismatch.
+
+Read in full: the brief; `plans/STANDING-RULES.md`; `LEAN.md`; `RUNNING.md` §§ Building, Make the gate fail; this record's § 17.3 (IR1) and
+Stages 18–21 (IR2); E6's derivation §§ 4.1–4.3; inventory items 421, 429–430, 435–436; FS131-IA1's § 3.6
+(`fs131-w5a`, `plans/FS131-arcstep-implementation.md`); QA4's § 6.2 (rank 7's line); `Procedure.lean`'s kit (ll. 1014–1300), the four cases, the
+two steps and `exists_procStep`.
+
+### 22.2 The as-given build (`a5a12a0b`) and IR2's axioms check, re-run
+
+`/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before
+any edit: **OK — all 1785 modules already up to date, nothing built, 5 modules with warnings**, exit 0, 2 s
+(`build/gate/build/20261006T050608Z-1196466.log`; driver log `data/fs131/ir/ir3/build-stage22-asgiven.log`): `Procedure` 5 `sorry` warnings
+(the four cases l. 1334, 1346, 1358, 1372; `exists_arcStep` l. 1438), `Terminal` 1 (`stuckRun_ne_univ` l. 3592). IR2's
+`data/fs131/ir/ir2/IR2AxiomsFinal.lean` re-run (`slot.py --mem 12 --cpus 2 -- lake env lean`, exit 0 → `ir3/IR2AxiomsFinal-rerun.out`) and
+read by `tools/fs131_ir_axsum.py` with `ir2/IR2AxiomsFinal-expect.txt`: **37 records — 25 on the standard three or fewer, 12 through
+`sorryAx`, exactly the twelve expected, 0 other; PASS** (`ir3/IR2AxiomsFinal-rerun-summary.txt`). The summarizer's `--self-test`: four
+plants, each FIRED, the control PASS (`ir3/axsum-selftest.txt`).
+
+### 22.3 What I may and may not change (the brief's `touches`, § Done means, § What is yours to decide)
+
+**May**: the ruled restatement of `exists_arcStep` (ruling 430; IA1's § 3.6) with its caller's lines and the three docstring corrections;
+the merge of `origin/fs131-w5s`; prove the four cases and add children beside them in `Procedure`; **new declarations only** in `Moves`,
+`MergeMove`, `OpenMove`, `Surgery` (ruling 421 (c): a named form that exposes a move's map, or a `private` helper made public); a block
+"FS131-IR3" in `scripts/Axioms.lean` above `=== PURCHASED ===`; `ARCHITECTURE.md` for a row whose imports I change; `tools/fs131_ir_*.py`;
+`data/fs131/ir/ir3/`; this record; the report. **May not**: change any other statement or definition; prove `exists_arcStep`; edit
+`Terminal.lean` beyond what the merge brings, `BendStep`, `main`; run the gate; add an `axiom` or a `native_decide`; edit a file while a
+build of it runs; start an agent.
+
+## Stage 22 — SAVED (FS131-IR3)
