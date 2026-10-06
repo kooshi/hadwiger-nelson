@@ -7040,3 +7040,13 @@ reason by the close.*
      second elaborated statement checker; the shared one is chosen at the tidy job (ruling 564 (g)). (d) **Slot →
      FS131-I6L** (wave 6's cover hull and parallels, on `fs131-w6l` at `2aa3f720`), launched 2026-10-06. In
      flight: 3 (L10B, K8b, I6L).
+570. **FS131-L10B, by message mid-job: both merges made, the joined tree builds, the tidies applied; one word asked** (source: L10B's message to "main", 2026-10-06; its record's Stages 1–2 saved on `fs131-w10m` — the artifact is read at its hand-back).
+     By its word: `main` merged at `615c715c` and `fs131-wf1` at `a61f0d14`, each a merge commit; 471 batches, no
+     warning; no doubled name; one declared import, eight records under IMPORTED, Falconer's under CLEAN; the audit's
+     self-test red before its controls edit at exactly `baseline`, `imported_declared`, `banner_dropped`; ruling 542's
+     change has one caller, a spec example, whose own `hG` binder it dropped. **Asked**: may it update the two count
+     lines of `scripts/vacuity-baseline.txt`'s header, no entry added, as the last two landings did. **Rulings.**
+     (a) **Yes — the header's counts only**, after the scan's final run, with the file's diff in its record.
+     Alternative: leave the header stale, which the scan tolerates. Why not: the digest then prints a stale line at
+     every later landing, and the last two landings updated it. Confidence: high. (b) The example's dropped binder
+     is ratified: the caller's line adjusted, its conclusion unchanged. Reply sent, one message.
