@@ -6108,3 +6108,44 @@ reason by the close.*
      existence half) by message: `local_graph` stands as stated; what `IsInterfaceChart` does not export is a second
      chart lemma to ask for, never a change to the structure; five helpers by name, to be merged on request and never
      re-declared. (f) **Slot → FS131-I6E**, launched 2026-10-06. In flight: 1 (I6D) + 1 (I10E) + 1 (I6E) = 3.
+
+540. **FS131-I6D done: the existence half of the bridge is proved — all seven leaves, as stated — so the deriver's theorem "a
+     saturated colouring whose singular set is locally finite has a fan at every singular point" has every step in Lean, on
+     branches; and the model `sq9.SingLocallyFinite`** (implementer, Opus; harness 542k by the task notice — past the line;
+     record `fs131-w6f`'s `plans/FS131-I6D-implementation.md`; report `data/fs131/reports/FS131-I6D.md`; commits `17cb682e`,
+     `53648b40`, `e1dbd3e5`, `d93b1782`, `8e81fedd`; pushed, tree clean). **Proved**: `IsUnitCurve.exists_polarGraph`,
+     `AeColouring.gamma` (FS131-E8-GAMMA), `.beta`, `.alpha`, **`.fan_of_isolated`** (FS131-E8-FAN), `.regJLiteral_of_saturated`
+     and `.finite_arcs_of_isBounded` (-CLAUSE2); so the planner's `regJFan_of_saturated` and `regJFan_iff_singLocallyFinite`
+     (-BRIDGE) have no open leaf of this file beneath them; `sq9_singLocallyFinite` on the standard three with nothing
+     beneath, and `sq9_regJFan`. Four new modules (`CurveArc`, `ArcContinuation`, `FanArcs`, `FanBuild`), no `sorry`.
+     **My receipt**: tip `8e81fedd` equals `origin/fs131-w6f`, tree clean; the last real build's full log
+     (`build/gate/build/20261006T160816Z-1247380.log`, 3 modules rebuilt) ends "Build completed successfully (5815 jobs)",
+     146 warnings, all `declaration uses sorry`, in `Curve`, `LocalGraph`, `MapColouring`, `Pinch` (other lines') and
+     `FanBridge` (the five `Fan` leaves, FS131-I6E's); `sorry` by the handoff's grep: the four new modules 0, `FanExamples`
+     0, `FanBridge` 5; no `axiom`, no `native_decide`; its axioms listing (`axioms-3.txt`, its tool's own format — my
+     parser for the plain print read nothing until I read the file) re-parsed by script: 41 records, 15 on exactly the
+     standard three (`sq9_singLocallyFinite` among them), 26 with `sorryAx` and nothing else beyond the three — each of
+     the seven leaves among those, resting on `Curve`'s and `LocalGraph`'s leaves, which are proved on `fs131-w6c` with
+     identical statements (item 539); its three controls read; `FanBridge`'s seventeen and `FanExamples`' twenty-nine
+     earlier declarations compared head by head with `32f2ab4c` — none changed; `fan_of_isolated`'s statement compared by
+     `cmp` — the same: `0 < R`, `Σ ∩ B(z, R) ⊆ {z}`, saturation on the punctured disc, nothing else. Not checked by me:
+     the 1,685 lines of the four modules beyond the build; **that the 26 go clean — the join of the branches shows it,
+     and until then "proved" here means: proved over leaves that are proved elsewhere under the same statements**.
+     **Generalizations**: -CLAUSE2's first clause reads no saturation; its second needs no compactness off the fans;
+     -GAMMA is colour-free and reads seven of the chart's fields; `gamma` and `beta` do not read `IsolatedAt.pos`.
+     **A shorter route**: `gamma` with no Zorn and no gluing of charts. **Predictions scored**: the plan priced these
+     leaves at about twelve agent-days; one job. **Slips, the job's, disclosed**: a helper's name collided with a landed
+     theorem's, caught by its own names tool before the build; it ran the guarded lint once as iteration evidence (exit
+     0) — within the one `lake` call the rules allow, no slip. **Credit**: it answered item 526's question for every
+     statement it proved, built a names tool that checks its 67 new names against five other branches, and declined a
+     merge it did not need. **Rulings.** (a) **The fourth planner's join takes four branches** — `43ea4886`, `2e55a2d6`,
+     `d62406a2`, `8e81fedd` — and corrects the three stale "[hand], kernel pending" docstring phrases when the last
+     builds; brief regenerated. (b) **FS131-I6E** (running on the same file's other half) **is told by a second dated
+     amendment**: 21 names never to declare again, the three facts its two leaves want, and one merge of `8e81fedd` it
+     may make at a saved stage, its decision (`mk-i6e-amend2.py`; gate exit 0). Alternative: I ask for the merge. Why
+     its decision: it knows how far along it is, and either way the join makes one declaration. (c) The vacuity scan
+     meets three new structures at the wave's gate (`HasArcChart`, `ArcSetting`, `IsArcOf`), their inhabitant named —
+     a count to reconcile at the landing. (d) The drafts (E8's six grade lines, the Frontier line) wait for the wave's
+     gate; **ruling 492 (a) — REG-J′ rewritten to "Σ locally finite" — is due when the wave lands, not before.**
+     (e) **Slot → FS131-I10F** (wave 10's three measure-theoretic leaves and the model `sp_if` owes), launched
+     2026-10-06. In flight: 1 (I10E) + 1 (I6E) + 1 (I10F) = 3.

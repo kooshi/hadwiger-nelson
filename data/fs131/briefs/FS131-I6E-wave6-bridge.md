@@ -164,3 +164,33 @@ Nothing above is withdrawn; three facts changed.
    and changed none of your file; its leaves read `Fan.branch_contacts`, `Fan.branch_outside_discs` and `Fan.sector_alone` as they stand,
    so a statement of yours that turns out false or short of a hypothesis is a message to me at once — and say which kind you have: a
    *statement* that needs a hypothesis it lacks, or a *route* that reads more than the statement needs (inventory item 526).
+
+## Amendment 2 (2026-10-06, mid-job) — the other half of your file is proved; a merge you may make
+
+Nothing above is withdrawn. The implementer of `FanBridge`'s existence half (FS131-I6D, inventory item 540) has handed back on
+`origin/fs131-w6f` at `8e81fedd`: its seven leaves are proved with no statement changed, in four new modules beside your file and seven
+proof bodies inside it; your five leaves are untouched there.
+
+1. **Names proved on that branch — never declare one of them again**: `isOpen_polarRegion`, `isPreconnected_polarRegion`,
+   `polarRegion_nonempty`, `isPreconnected_polarGraph`, `polarPt_norm_arg`, `polarPt_eq_polarPt`, `polarPt_add_int`, `polarGraph_sub_int`,
+   `polarRegion_disjoint_polarGraph`, `IsUnitCurve.affine`, `IsUnitCurve.sin_le_dist`, `IsUnitCurve.sin_abs_le_dist`, `IsUnitCurve.dist_le`,
+   `IsUnitCurve.injOn_of_abs_le`, `IsUnitCurve.continuousOn`, `IsUnitCurve.abs_angle_sub_le`, `IsUnitCurve.reparam`, `angleCurve`,
+   `AeColouring.arcSetting_of_isolated`, `AeColouring.exists_arc_of_isolated`, `AeColouring.polarGraph_of_curve_from_center`. If you have
+   already declared one of these names, rename yours before your next push and say so.
+2. **Its author's note for your line**: `Fan.branch_outside_discs` and `Fan.branch_contacts` want exactly the last three —
+
+> theorem arcSetting_of_isolated (hR2 : R ≤ 1 / 2) (hS : c.singularSet ∩ ball z R ⊆ {z})
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6f/Proofs/HadwigerNelson/Plane/Saturated/FanArcs.lean
+
+> theorem exists_arc_of_isolated (hR2 : R ≤ 1 / 2) (hS : c.singularSet ∩ ball z R ⊆ {z})
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6f/Proofs/HadwigerNelson/Plane/Saturated/FanArcs.lean
+
+> theorem polarGraph_of_curve_from_center {L : ℝ} {γ : ℝ → ℂ} {ψ : ℝ → ℝ} (hL : 0 < L) (hLπ : L ≤ Real.pi / 2)
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6f/Proofs/HadwigerNelson/Plane/Saturated/FanArcs.lean
+
+3. **A merge you may make, at a saved stage of your choosing**: `git merge --no-edit 8e81fedd` into your branch — the one merge this brief
+   allows beyond its fast-forward. It adds the four modules, edits the other half of the file you prove in (your five leaves are in
+   regions it does not touch), the module of the fan's examples, and the three registry files (keep both sides where they meet your block). After it:
+   the build, `./scripts/dupnames.sh`, your statement check. **It is yours to decide**: if you are past the two leaves that want these
+   facts, or close to done, do not merge — take the facts you need as hypotheses under names of your own, or cite nothing — and say which
+   you did in your report. Either way the wave's join makes one declaration of each.
