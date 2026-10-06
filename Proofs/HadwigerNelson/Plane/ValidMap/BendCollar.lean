@@ -600,6 +600,102 @@ theorem exists_collarFit (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ c c') (h
   exact ⟨1 - τ, 1 - τ / 2, 1 + τ, ⟨hA, hℓ, ⟨by linarith, by linarith, by linarith, by linarith⟩, hfree, hthin ε (by linarith),
     (hthin δ (by linarith)).trans hδdom, hfr, hclear⟩⟩
 
+/-! ## The model: a collar on the L60 fragment (B0; FS131-CC2) -/
+
+/-- A chord of the unit circle over an angle in `(π/8, π/3)` is longer than `1/4` and shorter than `1`. -/
+theorem quarter_lt_chord {x : ℝ} (h1 : π / 8 < x) (h2 : x < π / 3) : 1 / 4 < 2 * Real.sin (x / 2) ∧ 2 * Real.sin (x / 2) < 1 := by
+  have hπ := Real.pi_pos
+  constructor
+  · have h := Real.mul_lt_sin (show 0 < x / 2 by linarith) (show x / 2 < π / 2 by linarith)
+    have h3 : 2 / π * (x / 2) = x / π := by field_simp
+    have h4 : 1 / 8 < x / π := by rw [lt_div_iff₀ hπ]; linarith
+    linarith
+  · have h := Real.sin_lt_sin_of_lt_of_le_pi_div_two (show -(π / 2) ≤ x / 2 by linarith) (show π / 6 ≤ π / 2 by linarith)
+      (show x / 2 < π / 6 by linarith)
+    rw [Real.sin_pi_div_six] at h
+    linarith
+
+/-- **The model `collarModel` (B0): `CollarFit` is inhabited, with two different side colours.** On the valid four-colour fragment
+`l60Frag` of L60-REAL (`Plane/ValidMap/UnitArc`: the arc `r([0, 60°])` of `ω(0)` with sides `0` inside and `1` outside), the sub-arc
+`r([π/8, 5π/24])` satisfies every hypothesis of `exists_collarFit`: it is a constant-sided unit arc (a sub-arc of
+`l60Frag_isRingArc`), the outer colour `1` is not carried at the centre `0` (its class lies in `B(1 + e 60°, 1)`, which is `√3` from
+`0`), and near each of its points `Γ` is `ω(0)` (the other four arcs are circles about `1` and `e 60°` of radii `1` and `1/4`, and the
+points of the sub-arc are at distance strictly between `1/4` and `1` from both: `quarter_lt_chord`). So every clause lemma that takes a
+`CollarFit` has a model, with `c = 0 ≠ 1 = c'`. The sub-arc is not maximal: the model is of `exists_collarFit`'s hypotheses, not of
+`bend_toward_collar`'s `hmax`, which the construction never reads. -/
+theorem collarModel {ε : ℝ} (hε : 0 < ε) : ∃ R' R R'', CollarFit l60Frag 0 (π / 8) (5 * π / 24) 0 1 ε R' R R'' := by
+  have hπ := Real.pi_pos
+  have hA := l60Frag_isRingArc
+  -- the sub-arc
+  have hsub : l60Frag.IsRingArc 0 (π / 8) (5 * π / 24) 0 1 :=
+    ⟨by linarith, (image_mono (Icc_subset_Icc (by linarith) (by linarith))).trans hA.2.1,
+      fun θ hθ => hA.2.2 θ ⟨by linarith [hθ.1], by linarith [hθ.2]⟩⟩
+  -- the outer colour is not carried at the centre
+  have hout : (1 : Fin 4) ∉ l60Frag.coloursAt 0 := by
+    intro h
+    have hreg : l60Frag.region 1 ⊆ closedBall (1 + e (π / 3)) 1 := by
+      rintro x ⟨hx, hc⟩
+      have hc' : l60Frag.col x = 1 := hc
+      rcases l60_interior_cases hx with h0 | h1 | h2 | h3
+      · rw [hc'] at h0; exact absurd h0.1 (by decide)
+      · exact ball_subset_closedBall h1.2.2
+      · rw [hc'] at h2; exact absurd h2.1 (by decide)
+      · rw [hc'] at h3; exact absurd h3.1 (by decide)
+    have h0 : (0 : ℂ) ∈ closedBall (1 + e (π / 3)) 1 := closure_minimal hreg isClosed_closedBall h
+    rw [mem_closedBall, dist_eq_norm, zero_sub, norm_neg] at h0
+    have h3 : ‖(1 : ℂ) + e (π / 3)‖ ^ 2 = 3 := by
+      rw [sq_norm_eq_re_im]
+      simp only [Complex.add_re, Complex.one_re, re_e, Complex.add_im, Complex.one_im, im_e, Real.cos_pi_div_three,
+        Real.sin_pi_div_three]
+      nlinarith [Real.sq_sqrt (show (0 : ℝ) ≤ 3 by norm_num)]
+    nlinarith [norm_nonneg ((1 : ℂ) + e (π / 3))]
+  -- near each point of the sub-arc, `Γ` is `ω(0)`
+  have hfree : ∀ θ ∈ Ioo (π / 8) (5 * π / 24), ∃ r > 0, l60Frag.Γ ∩ ball (ringPt 0 θ) r ⊆ sphere 0 1 := by
+    intro θ hθ
+    have hv : ringPt 0 θ = e θ := by simp [ringPt]
+    obtain ⟨ha1, ha2⟩ := quarter_lt_chord hθ.1 (show θ < π / 3 by linarith [hθ.2])
+    obtain ⟨hb1, hb2⟩ := quarter_lt_chord (show π / 8 < π / 3 - θ by linarith [hθ.2]) (show π / 3 - θ < π / 3 by linarith [hθ.1])
+    have hd1 : dist (e θ) 1 = 2 * Real.sin (θ / 2) := by
+      rw [dist_eq_norm, ← e_zero, norm_e_sub_e_eq, sub_zero, abs_of_pos (by linarith)]
+    have hd2 : dist (e θ) (e (π / 3)) = 2 * Real.sin ((π / 3 - θ) / 2) := by
+      rw [dist_eq_norm, norm_e_sub_e_eq, show (θ - π / 3) / 2 = -((π / 3 - θ) / 2) by ring, Real.sin_neg, abs_neg,
+        abs_of_pos (by linarith)]
+    set d₁ := dist (e θ) 1 with hd₁
+    set d₂ := dist (e θ) (e (π / 3)) with hd₂
+    rw [← hd1] at ha1 ha2
+    rw [← hd2] at hb1 hb2
+    refine ⟨min (min (d₁ - 1 / 4) (1 - d₁)) (min (d₂ - 1 / 4) (1 - d₂)),
+      lt_min (lt_min (by linarith) (by linarith)) (lt_min (by linarith) (by linarith)), ?_⟩
+    rintro z ⟨⟨-, hzU⟩, hzb⟩
+    rw [hv, mem_ball] at hzb
+    have hr1 : dist z (e θ) < d₁ - 1 / 4 := lt_of_lt_of_le hzb ((min_le_left _ _).trans (min_le_left _ _))
+    have hr2 : dist z (e θ) < 1 - d₁ := lt_of_lt_of_le hzb ((min_le_left _ _).trans (min_le_right _ _))
+    have hr3 : dist z (e θ) < d₂ - 1 / 4 := lt_of_lt_of_le hzb ((min_le_right _ _).trans (min_le_left _ _))
+    have hr4 : dist z (e θ) < 1 - d₂ := lt_of_lt_of_le hzb ((min_le_right _ _).trans (min_le_right _ _))
+    have t1 := dist_triangle z (e θ) 1
+    have t2 := dist_triangle (e θ) z 1
+    have t3 := dist_triangle z (e θ) (e (π / 3))
+    have t4 := dist_triangle (e θ) z (e (π / 3))
+    rw [dist_comm (e θ) z] at t2 t4
+    -- a point of a circle is at its radius from its centre
+    have hcirc : ∀ (c : ℂ) (ρ a b : ℝ), 0 ≤ ρ → z ∈ (Arc.circ c ρ a b).carrier → dist z c = ρ := by
+      rintro c ρ a b hρ ⟨t, -, rfl⟩
+      rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg hρ]
+    obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp hzU
+    have ha' : a ∈ l60Arcs := ha
+    simp only [l60Arcs, mem_insert_iff, mem_singleton_iff] at ha'
+    rcases ha' with rfl | rfl | rfl | rfl | rfl
+    · exact hcirc 0 1 _ _ zero_le_one hza
+    · have := hcirc 1 1 _ _ zero_le_one hza
+      linarith
+    · have := hcirc (e (π / 3)) 1 _ _ zero_le_one hza
+      linarith
+    · have := hcirc 1 (1 / 4) _ _ (by norm_num) hza
+      linarith
+    · have := hcirc (e (π / 3)) (1 / 4) _ _ (by norm_num) hza
+      linarith
+  exact exists_collarFit l60Frag_valid hsub hout hfree hε
+
 /-- **`F` at a point of the open arc**: degree `2`, its sectors coloured `c` (inside) and `c'` (outside). Route: `Γ` near the point is
 `ω(P)` (`free_open`), a two-germ sector chart (`isSectorChart_of` with the germs `(θ + π/2, 1)`, `(θ − π/2, −1)`; branches by
 `exists_eq_branchPt_curveGerm`, `branchPt_curveGerm_mem`), `IsSectorChart.hasDegree`, `IsSectorChart.encard_sectorsOf`. -/

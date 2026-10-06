@@ -224,7 +224,22 @@ launch), with `plans/STANDING-RULES.md`, `LEAN.md` and `RUNNING.md` § Building 
 
 ## Theorems this phase proved (FS131-CC2)
 
-Filled at each saved stage below; the list as it stands is in the last saved stage's section.
+Each **[kernel], on exactly `[propext, Classical.choice, Quot.sound]`** (or fewer), read from `data/fs131/cc/CCAxioms6.out`,
+`CCAxioms7.out` and `CCAxioms8.out` (each printed against its stage's build); names under `HadwigerNelson.Plane.ArcMap`.
+- **`bend_toward_collar`** (`Plane/ValidMap/BendCollar`) — the collar bend, FS131-KB2's statement in FS131-I5o's form, unchanged.
+- `Plane/ValidMap/BendCollar`, the skeleton's four open leaves: **`exists_collarFit`**, **`CollarFit.map_degree_lensCurve`**,
+  **`CollarFit.map_degree_end`**, **`CollarFit.sides_end`**.
+- `Plane/ValidMap/BendCollar`, the model B0: **`collarModel`** (`CollarFit` inhabited on `l60Frag`, with `c = 0 ≠ 1 = c'`), `quarter_lt_chord`.
+- `Plane/ValidMap/Pushforward`, new: **`hasDegree_iff_of_homeo`** (degrees and repeated colours are carried by a homeomorphism that
+  carries interior points and their colours), `IsSectorChart.exists_injective_of_homeo`, `exists_subset_of_isPreconnected_iUnion`,
+  `pushforward_hasDegree`.
+- `Plane/ValidMap/BendCollar`, new supporting theorems: `collarK_frame`, `crescent_Y`, `side_core_pos`, `side_core_neg`, `side_core`,
+  `CollarFit.exists_one_side`, `CollarFit.homeo_mem_collarK`, `collarK_thin`, `exists_lens_clear`, `exists_pos_forall_le`,
+  `branch_transversal`, `branch_tangent`, `exists_end_free`, `exists_collar_free`.
+- Kernel theorems now with no change to their text, their inputs having landed (CC1's and lane G's): `CollarFit.sides_eq`, `map_R1`,
+  `map_R2`, `map_inert`, `map_degree_and_repeated`, `map_hasDegree`, `map_hasRepeatedColour`, `lensProf_le_one`, `isClosed_closedLens`,
+  `isClosed_collarK`, `lens_subset_closedLens`, `map_ringArcsWithin`, `map_R3`, `coloursAt_subset`, `side_ne_inner_of_mem_lens`; lane G's
+  `map_Γ`, `map_lens`, `map_agreesOff`, `map_valid`.
 
 ## Stage 4 — SAVED (FS131-CC2): the readback, the as-given build, and what this job may change
 
@@ -497,3 +512,80 @@ Each [kernel], on exactly `[propext, Classical.choice, Quot.sound]` (`data/fs131
 free of other arcs and whose outer colour is not carried at the centre.
 
 ## Stage 7 — SAVED (FS131-CC2)
+
+## Stage 8 — SAVED (FS131-CC2): the model B0 (`collarModel`), and the handover
+
+### 8.1 B0, `collarModel` — a different model from the plan's, and what it does not model
+
+KP2's plan § 4 sketched B0 as a new arc map: a disc about `r([0, π/6])` with `ω(0)` across it and two radial segments, colours swapping
+across each, so that the arc is maximal. A valid model with a constant-sided unit arc already exists upstream: **`l60Frag`**
+(`Plane/ValidMap/UnitArc`, L60-REAL's four-colour fragment; `l60Frag_valid`, `l60Frag_isRingArc : l60Frag.IsRingArc 0 0 (π / 3) 0 1`).
+Its whole arc is not free (the two circles of radius `1/4` about the ends cross it), so the model takes the sub-arc between the
+crossings:
+
+> `theorem collarModel {ε : ℝ} (hε : 0 < ε) : ∃ R' R R'', CollarFit l60Frag 0 (π / 8) (5 * π / 24) 0 1 ε R' R R''`
+
+by `exists_collarFit` at `l60Frag`: the sub-arc is a ring arc with sides `0`, `1`; the outer colour `1` is not carried at the centre `0`
+(`l60_interior_cases`: its class lies in `B(1 + e 60°, 1)`, and `|1 + e 60°|² = 3`); and near each point of the sub-arc `Γ` is `ω(0)`
+(the other four arcs lie on circles about `1` and `e 60°` of radii `1` and `1/4`, and a point of the sub-arc is at a distance strictly
+between `1/4` and `1` from both: `quarter_lt_chord`, from `Real.mul_lt_sin` and `sin (π/6) = 1/2`). About 95 lines against the plan's
+150 for a new map. It stands in `BendCollar` after `exists_collarFit`.
+
+**What it models, and what it does not.** It inhabits `CollarFit` at every `ε > 0` with **`c = 0 ≠ 1 = c'`** on a valid four-colour map,
+so every clause lemma taking a `CollarFit` has a model with two different side colours (the plan's § 5.1 vacuity item), and it is a model of
+all five hypotheses of `exists_collarFit` at once. It is **not** a model of `bend_toward_collar`'s `hmax`: the sub-arc extends inside
+`l60Frag`'s arc. The construction never reads `hmax` (§ 7.3), but a model of `bend_toward_collar`'s hypotheses all at once — a maximal
+arc with a free open part — is not shipped; `l60Frag`'s whole arc is maximal-looking but not free, and the plan's disc with two segments
+would be one. Held for the coordinator.
+
+### 8.2 The build, the axioms, the statements (the handover's evidence)
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`), the last of this job: **OK — 455 of 455 batches, 3 modules rebuilt (`BendCollar`,
+`BaseDense`, `Proofs`), 3 with warnings** (`HexRing`, `BaseDense`, `Terminal`: other lanes'), exit 0, 8 min 22 s (driver log
+`data/fs131/cc/build-stage8.log`, ending `EXIT=0`; full output `data/fs131/cc/build-stage8-full.log`, ending "Build completed
+successfully (5791 jobs)"). On it, `tools/fs131_cc_sorry_upstream.py --expect 0` (`sorry-upstream-8.txt`): **PASS — no `sorry`
+declaration in `BendCollar` nor in the 28 modules it imports; no other warning in the collar's four modules**; its self-test on this log:
+3 of 3 plants fired, 2 of 2 partners passed (`sorry-upstream-selftest8.txt`).
+
+**Axioms** against that build's oleans (`data/fs131/cc/CCAxioms8.lean` → `.out`; `axioms-8.txt`: **PASS, 9 names, 9 records**):
+- `'HadwigerNelson.Plane.ArcMap.bend_toward_collar' depends on axioms: [propext, Classical.choice, Quot.sound]`
+- `'HadwigerNelson.Plane.ArcMap.exists_collarFit' depends on axioms: [propext, Classical.choice, Quot.sound]`
+- `'HadwigerNelson.Plane.ArcMap.collarModel' depends on axioms: [propext, Classical.choice, Quot.sound]`
+- and `quarter_lt_chord`, `hasDegree_iff_of_homeo`, `CollarFit.map_degree_lensCurve`, `CollarFit.map_degree_end`, `CollarFit.sides_end`,
+  each on the standard three;
+- **the control on `sorryAx`**: `theorem ccControlPlanted : (1 : ℕ) = 2 := sorry`, planted in the print file, prints `sorryAx`, the only
+  record that does. The reader's self-test: 5 of 5 plants fired, partner PASS.
+
+**Statements**: `tools/fs131_cc_stmt.py`: **PASS** (`data/fs131/cc/stmt-stage8.txt`; 85 skeleton declarations, each once, statements
+byte-identical to `2736ab8c`; `bend_toward_collar`'s whole text unchanged; lane G's files byte-identical to `5059983d`; no other file
+under `Proofs/` changed; no `axiom`, no `native_decide`; 46 new declarations in lane C's two files, none clashing with another file's);
+self-test 15 of 15 plants fired, 8 of 8 partners passed (`stmt-selftest8.txt`). `tools/check_architecture.py`: PASS (`arch-8.txt`; no
+module added). `scripts/Axioms.lean`: the block headed "FS131-CC2" above the `=== PURCHASED ===` banner holds this job's 20 new
+theorems; both sides' earlier blocks kept.
+
+### 8.3 What is proved, and what is left
+
+**Proved**: everything the brief listed — the merge; the four leaves; B0; the statement checker's fix. `RadialPush`, `Pushforward`,
+`CollarMap` and `BendCollar` hold no `sorry`; `bend_toward_collar` is a kernel theorem on the standard three.
+
+**Left in lane C**: nothing. **Left for others** (none of it this job's to do): the merge of `fs131-w5k` into `fs131-w5` (on the
+coordinator's word); the gate (not run here, by the brief); the tidy moves of items 387 (a) and 406 — and one more duplicate seen now
+that both lanes share a tree: CC1's `ArcMap.ringPt_not_mem_openArc_of_end` (`BendCollar`) and lane G's `ringPt_not_mem_openArc`
+(`RadialPush`) state the same fact; a maximal model for `bend_toward_collar`'s `hmax` (§ 8.1), if the gate's inhabitant rule wants one.
+
+**Final price of lane C** (lines of Lean; `wc -l` and `git diff --numstat`): `Pushforward` 106 lines at `2736ab8c`, 460 at `bc168474`
+(CC1), 602 now; `BendCollar` 167, 632, 1,429. This job's part is about 940 lines (`Pushforward` +142, `BendCollar` +801 −4 against
+`bc168474`) against CC1's re-priced 1,450 for the same leaves — the two degree leaves at a fifth of their price, `sides_end` and
+`exists_collarFit` near theirs, B0 below.
+
+## Drafts for the front page
+
+No gate was run in this job (the brief), so there are no gate counts and no trust-ledger counts to draft; the milestone's rows are
+drafted when wave 5 lands. One line the coordinator may file as it stands, for the inventory or wave 5's record:
+
+- *slot: `plans/FS131-close-inventory.md`, the item recording this hand-back.* "`ArcMap.bend_toward_collar`
+  (`Plane/ValidMap/BendCollar`, on `fs131-w5k`) is proved: [kernel] on `[propext, Classical.choice, Quot.sound]` against the build of
+  `fs131-w5k`'s head (`data/fs131/cc/CCAxioms8.out`); it rests on no hypothesis beyond its own, `hmax` and `hlen` unread; `CollarFit`
+  is inhabited by `ArcMap.collarModel` on `l60Frag` with two different side colours. Not yet through the gate."
+
+## Stage 8 — SAVED (FS131-CC2)
