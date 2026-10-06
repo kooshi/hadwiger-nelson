@@ -14,7 +14,7 @@ with that count, as in `Plane/RingGerm`. "On a closed disc of radius above 1 abo
 |---|---|---|
 | FS116-RING-GERM | first clause: `germS_absent` (`Plane/RingGerm`); (i) `ringGerm_inward`; (ii) `ringGerm_outward`; (iii) `germS_four` (`Plane/RingGerm`) | proved |
 | FS116-N2-STAR | `star_coloursAt`, `star_absent`, `IsTip.coneAt_subset` (`…/Basic`), `star_outer_cone`, `star_flank`, `star_flank_interior`, `star_tip_nonempty`, `star_outer_nonempty` | proved |
-| FS116-N2-RECIP | `ringPt_ringPt_add_pi`, `star_recip` | stated; `star_recip` open |
+| FS116-N2-RECIP | `ringPt_ringPt_add_pi`, `exists_tileOf_of_germIn`, `star_recip` | proved (job FS131-I8A) |
 | FS116-N2-ANTI | `star_anti` | stated, open |
 
 **What is wider than the rows** (each reported as a generalization):
@@ -199,6 +199,21 @@ theorem star_outer_nonempty (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4
 theorem ringPt_ringPt_add_pi (p : ℂ) (ψ : ℝ) : ringPt (ringPt p ψ) (ψ + π) = p := by
   simp only [ringPt, e_add_pi]; ring
 
+/-- **A germ in a colour class lies in one tile of that colour**, which has the ring point in its closure (a germ is
+connected and misses `Γ`). -/
+theorem exists_tileOf_of_germIn {p : ℂ} {θ : ℝ} {s : Side} {c : Fin k} (h : GermIn p θ s (F.region c)) :
+    ∃ T, F.TileOf c T ∧ ringPt p θ ∈ closure T ∧ GermIn p θ s T := by
+  obtain ⟨δ, hδ, hsub⟩ := h
+  have hg : ringPt p (θ + s.sign * (δ / 2)) ∈ germ p θ s δ := ⟨δ / 2, ⟨by linarith, by linarith⟩, rfl⟩
+  have hgI : ringPt p (θ + s.sign * (δ / 2)) ∈ F.interiorPts := (hsub hg).1
+  have hT : F.IsTile (connectedComponentIn F.interiorPts (ringPt p (θ + s.sign * (δ / 2)))) := ⟨_, hgI, rfl⟩
+  have hgT := mem_connectedComponentIn hgI
+  have hsubT : germ p θ s δ ⊆ connectedComponentIn F.interiorPts (ringPt p (θ + s.sign * (δ / 2))) :=
+    hT.subset_of_preconnected (isPreconnected_germ p θ s δ) (hsub.trans (F.region_subset_interiorPts c)) hg hgT
+  refine ⟨_, ?_, closure_mono hsubT (ringPt_mem_closure_germ p θ s hδ), δ, hδ, hsubT⟩
+  have := hT.tileOf hgT
+  rwa [show F.col (ringPt p (θ + s.sign * (δ / 2))) = c from (hsub hg).2] at this
+
 /-- **FS116-N2-RECIP** (at the class its argument reads: `y` a change point, the non-Siamese hypothesis idle): in a valid
 six-coloured fragment on a closed disc of radius above 2 about a vertex `p` of four colours, let `y = r(ψ)` be a change
 point of the ring of `p` with four colours and no more. If `p` lies on no arc of `Γ` on `ω(y)` and the four germs of `ω(y)`
@@ -215,7 +230,29 @@ theorem star_recip {F : ArcMap 6} (hF : F.Valid) {p : ℂ} (hp : F.Covers p 2) (
     ∃ Y Y', F.IsChangePoint (ringPt p ψ) (ψ + π) Y Y' ∧ (F.coloursAt (ringPt p ψ))ᶜ = {Y, Y'} ∧
       (∃ T, F.TileOf Y T ∧ p ∈ closure T ∧ GermIn (ringPt p ψ) (ψ + π) .ccw T) ∧
       ∃ T, F.TileOf Y' T ∧ p ∈ closure T ∧ GermIn (ringPt p ψ) (ψ + π) .cw T := by
-  sorry
+  have hp1 : F.Covers p 1 := (closedBall_subset_closedBall one_le_two).trans hp
+  have hcy : F.Covers (ringPt p ψ) 1 := fun z hz => hp (mem_closedBall.mpr (by
+    have := dist_triangle z (ringPt p ψ) p
+    rw [dist_ringPt] at this
+    linarith [mem_closedBall.mp hz]))
+  have hpy : ringPt (ringPt p ψ) (ψ + π) = p := ringPt_ringPt_add_pi p ψ
+  -- the colours absent at `y` are colours of `p`
+  have habs : (F.coloursAt (ringPt p ψ))ᶜ ⊆ F.coloursAt p := by
+    rw [star_absent hF hp1 h4.ge (by omega) hy]
+    exact sdiff_subset
+  -- `p` is a change point of the ring of `y`: otherwise FS129-SR2-TOUCHW at `y` makes an absent colour of `y` absent at `p`
+  have hch : ∃ Y Y', F.IsChangePoint (ringPt p ψ) (ψ + π) Y Y' := by
+    by_contra hnc
+    push Not at hnc
+    obtain ⟨Z, Z', -, hcZ, -, -, -, hZ'⟩ := touchW hF hcy hy4.ge (by omega) hnc (by rwa [hpy]) hq
+    rw [hpy] at hZ'
+    exact hZ' (habs (by rw [hcZ]; exact mem_insert_of_mem _ rfl))
+  obtain ⟨Y, Y', hYY'⟩ := hch
+  refine ⟨Y, Y', hYY', (germS_absent hF hcy hy4.ge (by omega) hYY').2, ?_, ?_⟩
+  · obtain ⟨T, hT, hcl, hg⟩ := exists_tileOf_of_germIn hYY'.2.2.1
+    exact ⟨T, hT, hpy ▸ hcl, hg⟩
+  · obtain ⟨T, hT, hcl, hg⟩ := exists_tileOf_of_germIn hYY'.2.2.2
+    exact ⟨T, hT, hpy ▸ hcl, hg⟩
 
 /-! ## FS116-N2-ANTI -/
 

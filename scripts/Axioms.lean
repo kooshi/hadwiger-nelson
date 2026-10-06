@@ -6778,6 +6778,9 @@ modules `HubCount`, `TilesAt`, `SoleTip`, `RingColour`). -/
 #print axioms HadwigerNelson.Plane.ArcMap.ringPt_sixth_dist_le_one
 #print axioms HadwigerNelson.Plane.ArcMap.v6_count
 #print axioms HadwigerNelson.Plane.ArcMap.exists_ne_mem_closure_inter_of_split
+-- FS131-I8A: Plane/RingCalculus/Star (FS116-N2-RECIP)
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tileOf_of_germIn
+#print axioms HadwigerNelson.Plane.ArcMap.star_recip
 -- FS131-I8A block end
 
 /-! ## FS131-K8b — FS-131 wave 8's second planner: the semi-hub rows (`Plane/RingCalculus/SemiHub`, `SemiHubPlaces`). The

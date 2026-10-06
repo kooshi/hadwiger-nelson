@@ -228,6 +228,11 @@ theorem halfPlane2_covers : halfPlane2.Covers 0 1 := fun z hz =>
 example (θ : ℝ) (s : Side) : ∃ c, GermIn 0 θ s (halfPlane2.region c) :=
   halfPlane2_gammaFreeRing.exists_germIn halfPlane2_covers θ s
 
+/-- **Inhabitant of the germ-colouring hypothesis** (`hκ` of the lemmas above): `halfPlane2`'s ring about `0` has one. -/
+example : ∃ κ : ℝ → Side → Fin 2, ∀ θ s, GermIn 0 θ s (halfPlane2.region (κ θ s)) := by
+  choose κ hκ using fun θ s => halfPlane2_gammaFreeRing.exists_germIn halfPlane2_covers θ s
+  exact ⟨κ, hκ⟩
+
 /-- On `halfPlane2`'s ring any germ colouring changes at `r(0)`, its change point (colours `1` above, `0` below). -/
 example {κ : ℝ → Side → Fin 2} (hκ : ∀ θ s, GermIn 0 θ s (halfPlane2.region (κ θ s))) : κ 0 .ccw ≠ κ 0 .cw :=
   (ArcMap.exists_isChangePoint_iff halfPlane2_covers hκ 0).mp ⟨1, 0, halfPlane2_isChangePoint⟩

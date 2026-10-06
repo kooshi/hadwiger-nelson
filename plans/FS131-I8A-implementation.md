@@ -36,6 +36,11 @@ namespace is given.
   no arc of Γ", l. 173, with *simple* removed by FS129-SR3): `F : ArcMap 6`, `F.Valid`, `F.NonSiamese`, `F.Covers p 1` (the open domain
   holds `B̄(p, 1)`, which is "radius above 1": `covers_one_iff`), `4 ≤ (F.coloursAt p).ncard`, `F.GammaFreeRing p` (no sub-arc of `ω(p)`
   of positive length lies in `Γ`) ⊢ `False`. With it `v6_hubs_vacuous` and `v6_hug_vacuous` are kernel facts.
+- **FS116-N2-RECIP** — `star_recip` (`Plane/RingCalculus/Star`), with `exists_tileOf_of_germIn`. Read against "p is a change point of
+  y's ring, its two sides lying in the tiles of p that hold the directions ψ − 90° and ψ + 90°, whose colours are the two colours of
+  A(y)" (`plans/FS116-N2-proof.md` § 2.2, RECIP): a change point of `ω(y)` at angle `ψ + π`, the absent colours of `y` are its two
+  colours, and each germ lies in a tile of `p` of that colour. As the planner recorded, the statement does not say those tiles hold the
+  directions `ψ ∓ 90°`.
 
 ## Stage 1 — SAVED (FS131-I8A): the readback, the branch built as given, the statement instrument
 
@@ -256,3 +261,113 @@ composition. About 75 lines (the plan's price: 200).
   `[propext, Quot.sound]`); the control prints `sorryAx`; `--fault` exits 1 naming the control.
 - `./scripts/dupnames.sh`: OK (`data/fs131/i8a/logs/dupnames-3.log`). `tools/check_architecture.py`: PASS
   (`data/fs131/i8a/logs/check-architecture-3.log`), with rows for `SoleTip` and `RingColour`.
+
+## Stage 5 — SAVED (FS131-I8A): `star_recip`; `star_anti` left open, with a gap named
+
+### 5.1 `star_recip`
+
+The plan's route, shorter: `p` is a change point of `ω(y)` because otherwise FS129-SR2-TOUCHW (`touchW`, landed) at `y` and angle
+`ψ + π` makes one of the two colours absent at `y` absent at `p` too, while `star_absent` puts both among the colours of `p`. No
+separate proof that the two germs at `p` lie in single classes is needed (the change point carries them). The tiles are
+`exists_tileOf_of_germIn` (a germ in a colour class is connected and off `Γ`, so in one tile of that colour, with the ring point in its
+closure) — a new lemma in `Star`, class-free. About 45 lines (the plan's price: 150); one elaboration.
+
+### 5.2 `star_anti` — not proved: a gap at the plan's step "t⁺ ≠ t⁻"
+
+Not started beyond its analysis. The argument (`plans/FS116-N2-proof.md` ll. 219–222): "If t⁺ = t⁻, its cone (an interval) holds one of
+the closed half-circles … in its interior, leaving no room for a tip of y … or for the tile of p of an outer colour of y". In Lean the
+cone of a tile at a point where the map is simple is `angleIcc β₁ β₂` with `β₁ ≤ β₂ ≤ β₁ + 2π`, and the separation
+(`SimpleOn.coneAt_eq_angleIcc_sep`) is disjointness of every other tile's cone from the **open** interval `angleIoo β₁ β₂`.
+
+- If `β₂ < β₁ + 2π` the argument is sound: the other tiles' cones lie in the closed gap, which holds neither `ψ + 90°` nor `ψ − 90°`
+  (both interior to the cone), and a tip's cone (in `[ψ − 90°, ψ + 90°]`) and an outer colour's tile's cone (in `[ψ + 90°, ψ + 270°]`)
+  cannot both lie in one gap missing both boundary directions.
+- **If `β₂ = β₁ + 2π`** (the cone is the whole circle), the gap is the single direction `β₁`, and the separation leaves the other
+  three tiles of `p` room there, as cusps. A tip of `y` and the tile of an outer colour of `y` can then both have the cone `{β₁}` with
+  `β₁ ≡ ψ ± 90°`: tangent at `p` to `ω(y)`, one inside `B̄(y, 1)`, one outside `B(y, 1)`. I found no contradiction from the lemmas
+  held (STAR's clauses, validity, non-Siamese, Jordan domains at `p`), and no configuration realizing it in a valid map with two
+  antipodal hubs.
+
+So: **GAP at that step, the full-circle cone; neither a proof nor a refutation of the statement.** If the configuration exists,
+`star_anti`'s first conjunct (`tp ≠ tm`) fails and the statement needs `tp ≠ tm` (or a proper cone) as a hypothesis. Sent to the
+coordinator mid-job with the save of Stage 4. The rest of the route (cardinalities from `star_coloursAt`; the single tip colour — for
+which the diameter of a tile is enough: a tile of one colour tipping `y` and `y*` would have closure points `2` apart) looked sound and
+is about 150 lines.
+
+### 5.3 Small repairs in this stage
+
+- `Plane/RingCalculus/TilesAt`'s header said its spec examples were at its end; they are in `Empty` (the split lemma on `halfPlane2`).
+  Corrected. A slip of Stage 2, mine.
+- `Plane/RingCalculus/RingColour`: an `example` exhibiting a germ colouring of `halfPlane2`'s ring — an inhabitant of the hypothesis
+  `hκ` its lemmas take.
+
+### 5.4 The save
+
+- Builds: `data/fs131/i8a/logs/build-4-recip.log` (with `star_recip`: "build: OK — 468 of 468 batches, 5 module(s) rebuilt", `EXIT=0`)
+  and `data/fs131/i8a/logs/build-5-final.log` (with the two repairs of § 5.3: "build: OK — 468 of 468 batches, 5 module(s) rebuilt,
+  2 module(s) with warnings", `EXIT=0`). The warnings are the two `sorry` left on the branch's ring calculus: `Star` l. 268
+  (`star_anti`) and `Empty` l. 559 (`outerAdj`). `rg -c "^\s*sorry"`: `Star` 1, `Empty` 1, the five other modules 0.
+- Statement check against `f1c13612` (`data/fs131/i8a/logs/stmt-5.log`): 23 base declarations compared, **0 changed or missing**,
+  10 added (9 in `Empty`, `exists_tileOf_of_germIn` in `Star`). `…/Basic` byte-identical to `f1c13612` (`git diff` empty).
+- Axioms (`data/fs131/i8a/logs/axioms-5.txt`): 66 records, each a subset of the standard three; the control prints `sorryAx`;
+  `--fault` exits 1 naming the control (`axioms-5-fault.verdict`).
+- `./scripts/dupnames.sh`: OK (`data/fs131/i8a/logs/dupnames-5.log`). `tools/check_architecture.py`: PASS (`check-architecture-4.log`).
+- No `axiom`, no `native_decide` in the seven modules (grep; the one hit is `HubCount`'s docstring saying so).
+
+### 5.5 The coordinator's ruling on `star_anti`, and what I did with it
+
+The ruling (mid-job, after § 5.2 was sent): the gap is a defect of the skeleton's hypothesis — the row's "not claimed" line
+(`plans/FS116-derivation.md` l. 719) excludes "anything when an edge of p leaves at ψ + 90° or ψ − 90°", which
+`ψ ± π/2 ∈ interior (coneAt t p)` says except when the cone is the whole circle — and `star_anti` gains two binders after `hm`:
+
+    (hp'' : ∀ T, F.TileAt p T → T ≠ tp → ψ + π / 2 ∉ coneAt T p)
+    (hm'' : ∀ T, F.TileAt p T → T ≠ tm → ψ - π / 2 ∉ coneAt T p)
+
+with the choice left to me by my token count. **I did not make the change**: by my own count I am past the brief's guidance line and
+near its hand-back line, and the leaf is about 200 lines of interval work modulo `2π`. The statement and the leaf stand as at
+`f1c13612`; the wave's next job makes the ruled change. What I can hand it, attacked by thought only (not elaborated):
+
+- **The binders close the stuck case.** If `tp = tm = t` with the whole circle as cone, every other tile of `p` has its cone in
+  `{β₁} + 2πℤ`; a tip of `y` (cone non-empty, in `[ψ − 90°, ψ + 90°]`) and the tile of `p` of an outer colour of `y` (cone non-empty, in
+  `[ψ + 90°, ψ + 270°]`) both exist at a hub and are not `t` (its colour is absent at `y`, theirs are not), so `β₁` is in both closed
+  half-circles, hence `β₁ ≡ ψ ± 90°` — which `hp''` or `hm''` forbids of a tile other than `t`.
+- **They are no new content at a proper interval.** If the cone of `tp` is `angleIcc β₁ β₂` with `β₂ < β₁ + 2π`, its interior is in
+  `angleIoo β₁ β₂`, which `SimpleOn.coneAt_eq_angleIcc_sep` keeps disjoint from every other tile's cone; and if `tp ≠ tm` a
+  whole-circle cone of one leaves the other's cone discrete, with empty interior, against `hm` or `hp'`. So the binders bite only where
+  the statement was not known true.
+- **Their form is usable as written**: the proof applies them to a tip (`IsTip p y S` gives `F.TileAt p S`) and to the tile of `p` of an
+  outer colour. `TileAt`, not `TileOf`, is the right one.
+- **The route for the rest**: (a) `cp ≠ cm` from `tp ≠ tm` (one tile per colour at `p`); (b) `{cp, cm} ⊆ A(y), A(y*)` from
+  `star_flank_interior` (at `y*` use the angle `ψ − π`, whose ring point is `r(ψ + π)`); (c) `|C(y)| = 2 + |T_y| + |O_y|` from
+  `star_coloursAt`, `disjoint_tipColours_outerTileColours`, and both non-empty at a hub, so `|C(y)| = 4`, `A(y) = {cp, cm}`,
+  `T_y = {a}`, `O_y = {b}`; (d) `a ≠ a*` for the tip colours at `y` and `y*` because one tile of `p` of that colour would hold `y` and
+  `y*`, `2` apart (`IsTile.dist_le_one_of_mem_closure`), so `T_y = O_(y*)` and `O_y = T_(y*)` — no cones needed for (d), unlike the
+  plan's route.
+
+## Drafts for the front page
+
+*For the coordinator to file; nothing here is filed by this job. This job did not run the gate (its brief withholds it: the landing's),
+so it drafts no gate counts and no trust-ledger counts.*
+
+1. **`CLAUDE.md` § The gate, § Trust ledger** — no draft: counts are the landing job's. What the landing will meet from this branch:
+   two `decide +kernel` tables (`V6Count.table`, `V6Count.doublesTable`; axioms `[propext, Quot.sound]`, no purchase), about 24 s of
+   kernel time in `Plane/RingCalculus/HubCount`; this job's block in `scripts/Axioms.lean` (66 records, all CLEAN); two
+   `VACUITY DECLARED` lines (`v6_hubs`, `v6_hug`) the vacuity scan will print, each with a kernel refutation beside it; `sorry` left on
+   the branch: `outerAdj` (`Empty`), `star_anti` (`Star`).
+2. **`LEDGER.md` row 148** (slot: the row's grade and address; follows its statement) — draft: "**[kernel on `fs131-w8a`, not gated]**
+   at the wider class of FS129-SR3-EMPTY-NS — non-Siamese, simple or not: `HadwigerNelson.Plane.ArcMap.emptyNS`
+   (`Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean`), on the standard three axioms, no assumption imported. Its steps:
+   `v6_hubs`, `v6_hug` (each `VACUITY DECLARED`, refuted by `v6_hubs_vacuous`, `v6_hug_vacuous`), `v6_count` (a kernel table),
+   `exists_ne_mem_closure_inter_of_split`, `v6_anti`. Lean model at nine colours owed (`sq9Map`, five facts)."
+3. **`LEDGER.md` row 150**, its sole-tip half (slot: after "share neither a sole tip") — draft: "the sole-tip half **[kernel on
+   `fs131-w8a`, not gated]**, and wider than filed: `not_sole_tip_of_adjacent_changePoints`
+   (`Proofs/HadwigerNelson/Plane/RingCalculus/SoleTip.lean`) reads no simplicity and no condition on the far germs; `doubleTip` is its
+   instance with the row's hypotheses kept. The sole-outer-colour half (`outerAdj`) is open."
+4. **`LEDGER.md` § B, FS116-V6-HUG's line** (slot: its grade cell, "hand; one mind; true vacuously") — draft: "kernel on `fs131-w8a`;
+   not vacuous at the class its proof reads (`not_sole_tip_of_adjacent_changePoints`: no Γ-free ring)."
+5. **`LEDGER.md` § B, FS116-N2-RECIP's line** (slot: its grade cell) — draft: "kernel on `fs131-w8a`: `star_recip`, at a change point
+   `y` of four colours (never a hub, never non-Siamese), `Covers p 2`."
+6. **`CLAUDE.md` § Frontier**, the Open-milestones paragraph (slot: after "the Lean backlog … in a session of its own") — no change of
+   state by this job: FS-131 stays open; wave 8's route to `emptyNS` is proved on a branch.
+7. **Proof Atlas grade changes** (on landing, not now): FS129-SR3-EMPTY-NS, FS116-Y4-EMPTY, FS116-Y4-OBST, FS116-V6-HUBS, -V6-HUG,
+   -V6-COUNT, FS129-MR1-DOUBLETIP, FS116-N2-RECIP → kernel; FS116-N2-ANTI stays hand, with a gap named (§ 5.2).
