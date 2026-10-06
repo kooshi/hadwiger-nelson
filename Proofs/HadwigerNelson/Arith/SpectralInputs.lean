@@ -32,6 +32,12 @@ argument reads**, which is in every case wider than the arithmetic setting it wa
 **Not stated in this pass** (their foundation is listed in `plans/FS131-w10-kernel-plan.md` § 3): J45-N1 (a)–(b) (the topology
 `τ′_S` and its three summands), J45-SI-5, J45-SI-J, J45-SI-C.
 
+**Added with the proofs (FS131-I10A).** N2's last clause, "`Π(E_S) = E[· | 𝒜_S]`", as three statements about Mathlib's
+`condExpL2` for `factorSigma` (`condExpL2_mem_contVec`, `condExpL2_eq_self_iff`, `inner_sub_condExpL2_eq_zero`); SI-4's
+equivariance clause (`si4_equivariant`, over `condExp_comp_measurePreserving`); Fourier uniqueness on the characters from
+Herglotz–Bochner's uniqueness clause (`ext_of_fourier`, over `posDef_fourier`), and the translation invariance of Haar measure
+(`IsHaarFourier.map_mulRight`).
+
 **Inhabitants.** `IsHaarFourier` is satisfiable given Herglotz–Bochner (`exists_isHaarFourier`). `contVec`, `factorSets` and
 `factorSigma` take plain data; the identity family `T y = id` is a model (`contVec_id`). `BochnerOn` holds at the discrete
 topology (`bochnerOn_bot`). `sp_if`'s hypothesis — a non-Haar finite
@@ -57,9 +63,84 @@ def IsHaarFourier (m : Measure (AddChar G Circle)) : Prop :=
 theorem measurable_evalChar (y : G) : Measurable (fun χ : AddChar G Circle => (χ y : ℂ)) :=
   (measurable_pi_apply y).comp (comap_measurable (fun χ : AddChar G Circle => fun g : G => (χ g : ℂ)))
 
+/-! ### Fourier uniqueness, from Herglotz–Bochner's uniqueness clause -/
+
+/-- A map into the characters is measurable (for the cylinder σ-algebra) as soon as each evaluation is. -/
+theorem measurable_of_evalChar {X : Type*} [MeasurableSpace X] {g : X → AddChar G Circle}
+    (h : ∀ y, Measurable fun x => ((g x) y : ℂ)) : Measurable g :=
+  measurable_comap_iff.mpr (measurable_pi_iff.mpr h)
+
+theorem integrable_evalChar (σ : Measure (AddChar G Circle)) [IsFiniteMeasure σ] (y : G) :
+    Integrable (fun χ : AddChar G Circle => (χ y : ℂ)) σ :=
+  Integrable.of_bound (measurable_evalChar y).aestronglyMeasurable 1 (Filter.Eventually.of_forall fun χ => by simp)
+
+theorem coe_char_sub (χ : AddChar G Circle) (x y : G) :
+    (χ (x - y) : ℂ) = (χ x : ℂ) * (starRingEnd ℂ) (χ y : ℂ) := by
+  rw [AddChar.map_sub_eq_div, div_eq_mul_inv, Circle.coe_mul, Circle.coe_inv_eq_conj]
+
+/-- The Fourier–Stieltjes transform of a finite measure on the characters is positive definite:
+`Σ z_x z̄_y σ̂(x − y) = ∫ |Σ z_x χ(x)|² dσ`. -/
+theorem posDef_fourier (σ : Measure (AddChar G Circle)) [IsFiniteMeasure σ] :
+    PosDef (fun y => ∫ χ, (χ y : ℂ) ∂σ) := by
+  intro s z
+  have hint : ∀ x y : G, Integrable (fun χ : AddChar G Circle => z x * star (z y) * (χ (x - y) : ℂ)) σ :=
+    fun x y => (integrable_evalChar σ (x - y)).const_mul _
+  have hpt : ∀ χ : AddChar G Circle, ∑ x ∈ s, ∑ y ∈ s, z x * star (z y) * (χ (x - y) : ℂ) =
+      ((Complex.normSq (∑ x ∈ s, z x * (χ x : ℂ)) : ℝ) : ℂ) := by
+    intro χ
+    rw [← Complex.mul_conj, map_sum, Finset.sum_mul_sum]
+    refine Finset.sum_congr rfl fun x _ => Finset.sum_congr rfl fun y _ => ?_
+    rw [coe_char_sub, map_mul, Complex.star_def]
+    ring
+  have key : ∑ x ∈ s, ∑ y ∈ s, z x * star (z y) * ∫ χ, (χ (x - y) : ℂ) ∂σ =
+      ((∫ χ, Complex.normSq (∑ x ∈ s, z x * (χ x : ℂ)) ∂σ : ℝ) : ℂ) := by
+    have h1 : ∀ x y, z x * star (z y) * ∫ χ, (χ (x - y) : ℂ) ∂σ =
+        ∫ χ, z x * star (z y) * (χ (x - y) : ℂ) ∂σ := fun x y => (integral_const_mul _ _).symm
+    have h2 : ∀ x, ∑ y ∈ s, ∫ χ, z x * star (z y) * (χ (x - y) : ℂ) ∂σ =
+        ∫ χ, ∑ y ∈ s, z x * star (z y) * (χ (x - y) : ℂ) ∂σ :=
+      fun x => (integral_finsetSum s fun y _ => hint x y).symm
+    simp only [h1, h2]
+    rw [← integral_finsetSum s fun x _ => integrable_finsetSum s fun y _ => hint x y, ← integral_complex_ofReal]
+    exact integral_congr_ae (ae_of_all _ hpt)
+  rw [key]
+  exact ⟨Complex.ofReal_im _, by
+    rw [Complex.ofReal_re]; exact integral_nonneg fun χ => Complex.normSq_nonneg _⟩
+
+/-- **Fourier uniqueness on the characters**, from Herglotz–Bochner's uniqueness clause: two finite measures with the same
+Fourier coefficients are equal. -/
+theorem ext_of_fourier (hBH : BochnerHerglotz G) {σ σ' : Measure (AddChar G Circle)} [IsFiniteMeasure σ]
+    [IsFiniteMeasure σ'] (h : ∀ y, ∫ χ, (χ y : ℂ) ∂σ = ∫ χ, (χ y : ℂ) ∂σ') : σ = σ' := by
+  obtain ⟨σ₀, -, -, huniq⟩ := hBH _ (posDef_fourier σ')
+  rw [huniq σ inferInstance h, huniq σ' inferInstance fun _ => rfl]
+
+/-- `a·δ₀` is positive definite for `a ≥ 0`: the double sum is `a Σ |z_x|²`. -/
+theorem posDef_delta [DecidableEq G] {a : ℝ} (ha : 0 ≤ a) : PosDef (fun y : G => if y = 0 then (a : ℂ) else 0) := by
+  intro s z
+  have key : ∑ x ∈ s, ∑ y ∈ s, z x * star (z y) * (if x - y = 0 then (a : ℂ) else 0) =
+      ((∑ x ∈ s, Complex.normSq (z x) * a : ℝ) : ℂ) := by
+    push_cast
+    refine Finset.sum_congr rfl fun x hx => ?_
+    have h : ∀ y, z x * star (z y) * (if x - y = 0 then (a : ℂ) else 0) = if x = y then z x * star (z y) * a else 0 := by
+      intro y
+      simp only [sub_eq_zero, mul_ite, mul_zero]
+    simp only [h, Finset.sum_ite_eq, hx, if_true]
+    rw [← Complex.mul_conj, Complex.star_def]
+  rw [key]
+  exact ⟨Complex.ofReal_im _, by
+    rw [Complex.ofReal_re]; exact Finset.sum_nonneg fun x _ => mul_nonneg (Complex.normSq_nonneg _) ha⟩
+
+theorem integral_evalChar_zero (σ : Measure (AddChar G Circle)) : ∫ χ, (χ 0 : ℂ) ∂σ = (σ.real Set.univ : ℂ) := by
+  simp
+
 /-- Haar measure exists in Fourier form, given Herglotz–Bochner: `δ₀` is positive definite. -/
 theorem exists_isHaarFourier (hBH : BochnerHerglotz G) : ∃ m : Measure (AddChar G Circle), IsHaarFourier m := by
-  sorry
+  classical
+  obtain ⟨σ, hfin, hσ, -⟩ := hBH _ (posDef_delta (G := G) zero_le_one)
+  refine ⟨σ, ⟨?_⟩, fun r hr => by rw [hσ r, if_neg hr]⟩
+  have h0 := hσ 0
+  rw [integral_evalChar_zero, if_pos rfl, Complex.ofReal_one, Complex.ofReal_eq_one, measureReal_def,
+    ENNReal.toReal_eq_one_iff] at h0
+  exact h0
 
 /-- **J45-SP-oi, at the class its argument reads**: a measure with `∫ Re χ(r) dτ < 0` at some `r ≠ 0` is not a multiple of
 Haar measure — "`∫ χ(1) dHaar = 0` because `1 ≠ 0` in `R`". -/
@@ -75,6 +156,46 @@ theorem sp_only_if {τ m : Measure (AddChar G Circle)} (hm : IsHaarFourier m) {r
     rw [h, hm.2 r hr, Complex.zero_re]
   rw [integral_smul_measure, h0, smul_zero] at hneg
   exact lt_irrefl 0 hneg
+
+/-! ### Haar measure is translation-invariant -/
+
+/-- The Fourier coefficients of Haar measure: `δ₀`. -/
+theorem IsHaarFourier.integral_eq [DecidableEq G] {m : Measure (AddChar G Circle)} (hm : IsHaarFourier m) (y : G) :
+    ∫ χ, (χ y : ℂ) ∂m = if y = 0 then 1 else 0 := by
+  haveI := hm.1
+  by_cases hy : y = 0
+  · subst hy
+    rw [if_pos rfl, integral_evalChar_zero]
+    simp
+  · rw [if_neg hy, hm.2 y hy]
+
+theorem measurable_mulRight (a : AddChar G Circle) : Measurable fun χ : AddChar G Circle => χ * a :=
+  measurable_of_evalChar fun y => by
+    simp only [AddChar.mul_apply, Circle.coe_mul]
+    exact (measurable_evalChar y).mul_const _
+
+theorem integral_evalChar_map_mulRight (σ : Measure (AddChar G Circle)) (a : AddChar G Circle) (y : G) :
+    ∫ χ, (χ y : ℂ) ∂(σ.map fun χ => χ * a) = (∫ χ, (χ y : ℂ) ∂σ) * (a y : ℂ) := by
+  rw [integral_map (measurable_mulRight a).aemeasurable (measurable_evalChar y).aestronglyMeasurable,
+    ← integral_mul_const]
+  simp only [AddChar.mul_apply, Circle.coe_mul]
+
+/-- Haar measure is invariant under every translation of the characters (by uniqueness). -/
+theorem IsHaarFourier.map_mulRight (hBH : BochnerHerglotz G) {m : Measure (AddChar G Circle)} (hm : IsHaarFourier m)
+    (a : AddChar G Circle) : (m.map fun χ => χ * a) = m := by
+  classical
+  haveI := hm.1
+  refine ext_of_fourier hBH fun y => ?_
+  rw [integral_evalChar_map_mulRight, hm.integral_eq]
+  by_cases hy : y = 0
+  · subst hy
+    simp
+  · rw [if_neg hy, zero_mul]
+
+theorem measurable_mul_char : Measurable fun p : AddChar G Circle × AddChar G Circle => p.1 * p.2 :=
+  measurable_of_evalChar fun y => by
+    simp only [AddChar.mul_apply, Circle.coe_mul]
+    exact ((measurable_evalChar y).comp measurable_fst).mul ((measurable_evalChar y).comp measurable_snd)
 
 end Haar
 
@@ -105,6 +226,39 @@ def _root_.HadwigerNelson.SpectralChain.Interface.NegCircle (I : Interface F) : 
     (∃ S : Set (Dual F), MeasurableSet S ∧ lam Sᶜ = 0 ∧ ∀ a ∈ S, ∀ χ : Dual F, χ * a ∈ I.E → χ ∈ I.E) ∧
     ∫ χ, (χ 1 : ℂ).re ∂lam < 0
 
+/-! ### The proof of SP-if: the dual of a multiplication, rotation by `−1` -/
+
+/-- The dual of multiplication by `r₀` on the ring `R`: `χ ↦ χ(r₀ ·)` (J45 §4.2, SP-if step 2's `m`). -/
+def mulDual (r₀ : unitRing F) (χ : Dual F) : Dual F := χ.compAddMonoidHom (AddMonoidHom.mulLeft r₀)
+
+theorem mulDual_apply (r₀ : unitRing F) (χ : Dual F) (y : unitRing F) : mulDual r₀ χ y = χ (r₀ * y) := rfl
+
+theorem measurable_mulDual (r₀ : unitRing F) : Measurable (mulDual r₀) :=
+  measurable_of_evalChar fun y => measurable_evalChar (r₀ * y)
+
+theorem rot_apply (u : unitVectors F) (χ : Dual F) (y : unitRing F) : rot u χ y = χ (uvRing u * y) := rfl
+
+theorem rot_comp_mulDual (u : unitVectors F) (r₀ : unitRing F) : rot u ∘ mulDual r₀ = mulDual r₀ ∘ rot u := by
+  funext χ
+  refine DFunLike.ext _ _ fun y => ?_
+  show χ (r₀ * (uvRing u * y)) = χ (uvRing u * (r₀ * y))
+  rw [mul_left_comm]
+
+theorem rot_mul (u : unitVectors F) (χ a : Dual F) : rot u (χ * a) = rot u χ * rot u a :=
+  DFunLike.ext _ _ fun _ => rfl
+
+/-- `−1 ∈ U`. -/
+def negOne (F : Subfield ℝ) : unitVectors F :=
+  ⟨-1, ⟨by simp, by simp⟩, by simp⟩
+
+/-- Rotation by `−1` is conjugation of the values: `χ(−y) = conj χ(y)`. -/
+theorem rot_negOne_apply (χ : Dual F) (y : unitRing F) :
+    ((rot (negOne F) χ) y : ℂ) = (starRingEnd ℂ) (χ y : ℂ) := by
+  have h : uvRing (negOne F) * y = -y := by
+    apply Subtype.ext
+    simp [uvRing, negOne]
+  rw [rot_apply, h, AddChar.map_neg_eq_inv, Circle.coe_inv_eq_conj]
+
 /-- **J45-SP-if** (Lemma SP-if, §4.2): "If some finite positive `U`-invariant `ν` with `ν(E) = 0` is not a multiple of Haar,
 then some finite positive `U`-invariant `τ` has `τ(E) = 0` and `∫ Re χ(1) dτ < 0`." Over an interface with `MulStable` and
 `NegCircle`; Fourier uniqueness is Herglotz–Bochner's uniqueness clause. INHABITANT: over the arithmetic `E` the hypothesis is
@@ -113,7 +267,82 @@ theorem sp_if (I : Interface F) [Countable (unitRing F)] (hBH : BochnerHerglotz 
     (hcirc : I.NegCircle) {ν m : Measure (Dual F)} (hfin : IsFiniteMeasure ν) (hrot : RotInv F ν) (hE : ν I.E = 0)
     (hm : IsHaarFourier m) (hnh : ∀ a : ENNReal, ν ≠ a • m) :
     ∃ τ : Measure (Dual F), IsFiniteMeasure τ ∧ RotInv F τ ∧ τ I.E = 0 ∧ ∫ χ, (χ 1 : ℂ).re ∂τ < 0 := by
-  sorry
+  classical
+  -- the countability of `R` is not read by this argument
+  have _hcount : Countable (unitRing F) := inferInstance
+  haveI := hm.1
+  -- (1) a non-zero frequency with a non-zero coefficient: Fourier uniqueness
+  obtain ⟨r₀, hr₀, hne⟩ : ∃ r₀ : unitRing F, r₀ ≠ 0 ∧ ∫ χ, (χ r₀ : ℂ) ∂ν ≠ 0 := by
+    by_contra hall
+    have hall' : ∀ r : unitRing F, r ≠ 0 → ∫ χ, (χ r : ℂ) ∂ν = 0 := fun r hr => by
+      by_contra h
+      exact hall ⟨r, hr, h⟩
+    haveI : IsFiniteMeasure (ν Set.univ • m) := Measure.smul_finite m (measure_ne_top ν Set.univ)
+    refine hnh (ν Set.univ) (ext_of_fourier hBH fun y => ?_)
+    rw [integral_smul_measure, hm.integral_eq]
+    by_cases hy : y = 0
+    · subst hy
+      rw [integral_evalChar_zero, if_pos rfl, measureReal_def]
+      simp
+    · rw [hall' y hy, if_neg hy, smul_zero]
+  -- the coefficient is real: rotation by `−1`
+  have hreal : (∫ χ, (χ r₀ : ℂ) ∂ν).im = 0 := by
+    have h1 : ∫ χ, (χ r₀ : ℂ) ∂ν = (starRingEnd ℂ) (∫ χ, (χ r₀ : ℂ) ∂ν) :=
+      calc ∫ χ, (χ r₀ : ℂ) ∂ν = ∫ χ, (χ r₀ : ℂ) ∂(ν.map (rot (negOne F))) := by rw [hrot (negOne F)]
+        _ = ∫ χ, ((rot (negOne F) χ) r₀ : ℂ) ∂ν :=
+          integral_map (measurable_rot _).aemeasurable (measurable_evalChar r₀).aestronglyMeasurable
+        _ = ∫ χ, (starRingEnd ℂ) (χ r₀ : ℂ) ∂ν := integral_congr_ae (ae_of_all _ fun χ => rot_negOne_apply χ r₀)
+        _ = (starRingEnd ℂ) (∫ χ, (χ r₀ : ℂ) ∂ν) := integral_conj
+    exact Complex.conj_eq_iff_im.mp h1.symm
+  -- (2) `τ′ = m_* ν`
+  have hτ'rot : RotInv F (ν.map (mulDual r₀)) := by
+    intro u
+    rw [Measure.map_map (measurable_rot u) (measurable_mulDual r₀), rot_comp_mulDual,
+      ← Measure.map_map (measurable_mulDual r₀) (measurable_rot u), hrot u]
+  have hτ'E : ν.map (mulDual r₀) I.E = 0 := by
+    rw [Measure.map_apply (measurable_mulDual r₀) I.measurableSet_E]
+    exact measure_mono_null (fun χ hχ => hmul r₀ hr₀ χ hχ) hE
+  have hτ'1 : ∫ χ, (χ 1 : ℂ) ∂(ν.map (mulDual r₀)) = ∫ χ, (χ r₀ : ℂ) ∂ν := by
+    rw [integral_map (measurable_mulDual r₀).aemeasurable (measurable_evalChar 1).aestronglyMeasurable]
+    simp only [mulDual_apply, mul_one]
+  have hre : ∀ τ : Measure (Dual F), IsFiniteMeasure τ → ∫ χ, (χ 1 : ℂ).re ∂τ = (∫ χ, (χ 1 : ℂ) ∂τ).re := by
+    intro τ _
+    have h := integral_re (𝕜 := ℂ) (integrable_evalChar τ 1)
+    simpa only [RCLike.re_to_complex] using h
+  set a : ℝ := (∫ χ, (χ r₀ : ℂ) ∂ν).re with ha
+  have haz : ∫ χ, (χ r₀ : ℂ) ∂ν = (a : ℂ) := Complex.ext (by simp [ha]) (by simp [hreal])
+  have ha0 : a ≠ 0 := fun h => hne (by rw [haz, h, Complex.ofReal_zero])
+  rcases lt_or_gt_of_ne ha0 with hneg | hpos
+  · refine ⟨ν.map (mulDual r₀), inferInstance, hτ'rot, hτ'E, ?_⟩
+    rw [hre _ inferInstance, hτ'1, haz, Complex.ofReal_re]
+    exact hneg
+  -- (3) the positive case: convolve with the negative circle
+  obtain ⟨lam, hlprob, hlrot, ⟨S, -, hS0, hS⟩, hlneg⟩ := hcirc
+  haveI := hlprob
+  refine ⟨((ν.map (mulDual r₀)).prod lam).map (fun p => p.1 * p.2), inferInstance, ?_, ?_, ?_⟩
+  · intro u
+    have hcomm : rot u ∘ (fun p : Dual F × Dual F => p.1 * p.2) =
+        (fun p : Dual F × Dual F => p.1 * p.2) ∘ Prod.map (rot u) (rot u) := by
+      funext p
+      exact rot_mul u p.1 p.2
+    rw [Measure.map_map (measurable_rot u) measurable_mul_char, hcomm,
+      ← Measure.map_map measurable_mul_char ((measurable_rot u).prodMap (measurable_rot u)),
+      ← Measure.map_prod_map _ _ (measurable_rot u) (measurable_rot u), hτ'rot u, hlrot u]
+  · rw [Measure.map_apply measurable_mul_char I.measurableSet_E,
+      Measure.prod_apply_symm (measurable_mul_char I.measurableSet_E)]
+    have h0 : ∀ᵐ b ∂lam, ν.map (mulDual r₀)
+        ((fun χ => (χ, b)) ⁻¹' ((fun p : Dual F × Dual F => p.1 * p.2) ⁻¹' I.E)) = 0 := by
+      filter_upwards [measure_eq_zero_iff_ae_notMem.mp hS0] with b hb
+      exact measure_mono_null (fun χ hχ => hS b (not_not.mp hb) χ hχ) hτ'E
+    rw [lintegral_congr_ae h0, lintegral_zero]
+  · rw [hre _ inferInstance,
+      integral_map measurable_mul_char.aemeasurable (measurable_evalChar 1).aestronglyMeasurable]
+    have h1 : ∫ p : Dual F × Dual F, (((p.1 * p.2) 1 : Circle) : ℂ) ∂((ν.map (mulDual r₀)).prod lam) =
+        (∫ χ, (χ 1 : ℂ) ∂(ν.map (mulDual r₀))) * ∫ χ, (χ 1 : ℂ) ∂lam := by
+      rw [← integral_prod_mul]
+      simp only [AddChar.mul_apply, Circle.coe_mul]
+    rw [h1, hτ'1, haz, Complex.re_ofReal_mul, ← hre lam inferInstance]
+    exact mul_neg_of_pos_of_neg hpos hlneg
 
 end SP
 
@@ -556,6 +785,65 @@ def IsSpectralMeasureOf (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T 
     (σ : Measure (AddChar R Circle)) : Prop :=
   IsFiniteMeasure σ ∧ ∀ y : R, ∫ χ, (χ y : ℂ) ∂σ = ((∫ ω, f ω * Lp.compMeasurePreserving (T y) (hT y) f ω ∂μ : ℝ) : ℂ)
 
+/-! ### The proof of N2's first sentence: `‖V_y f − f‖² = 2 ∫ (1 − Re χ(y)) dσ_f` -/
+
+theorem compMeasurePreserving_congr {g g' : Ω → Ω} (h : g = g') (hg : MeasurePreserving g μ μ)
+    (hg' : MeasurePreserving g' μ μ) (f : Lp ℝ 2 μ) :
+    Lp.compMeasurePreserving g hg f = Lp.compMeasurePreserving g' hg' f := by
+  subst h
+  rfl
+
+/-- `V_g (V_h f) = V_{h ∘ g} f`. -/
+theorem compMeasurePreserving_comp_apply {g h : Ω → Ω} (hg : MeasurePreserving g μ μ) (hh : MeasurePreserving h μ μ)
+    (f : Lp ℝ 2 μ) :
+    Lp.compMeasurePreserving g hg (Lp.compMeasurePreserving h hh f) =
+      Lp.compMeasurePreserving (h ∘ g) (hh.comp hg) f := by
+  apply Lp.ext
+  have h1 := Lp.coeFn_compMeasurePreserving (Lp.compMeasurePreserving h hh f) hg
+  have h2 := (Lp.coeFn_compMeasurePreserving f hh).comp_tendsto hg.quasiMeasurePreserving.tendsto_ae
+  have h3 := Lp.coeFn_compMeasurePreserving f (hh.comp hg)
+  filter_upwards [h1, h2, h3] with ω e1 e2 e3
+  rw [e1, e3]
+  exact e2
+
+section
+variable {T : R → Ω → Ω} {hT : ∀ y, MeasurePreserving (T y) μ μ}
+
+/-- For an action, `V_{x+y} = V_y ∘ V_x`. -/
+theorem compMeasurePreserving_add (hadd : ∀ x y, T (x + y) = T x ∘ T y) (x y : R) (f : Lp ℝ 2 μ) :
+    Lp.compMeasurePreserving (T (x + y)) (hT (x + y)) f =
+      Lp.compMeasurePreserving (T y) (hT y) (Lp.compMeasurePreserving (T x) (hT x) f) := by
+  rw [compMeasurePreserving_comp_apply]
+  exact compMeasurePreserving_congr (hadd x y) _ _ f
+
+/-- For an action, `V_0 = id`: it is an idempotent isometry. -/
+theorem compMeasurePreserving_zero (hadd : ∀ x y, T (x + y) = T x ∘ T y) (f : Lp ℝ 2 μ) :
+    Lp.compMeasurePreserving (T 0) (hT 0) f = f := by
+  have h : Lp.compMeasurePreserving (T 0) (hT 0) (Lp.compMeasurePreserving (T 0) (hT 0) f) =
+      Lp.compMeasurePreserving (T 0) (hT 0) f := by
+    rw [← compMeasurePreserving_add hadd 0 0 f]
+    exact compMeasurePreserving_congr (congrArg T (add_zero 0)) _ _ f
+  exact (Lp.isometry_compMeasurePreserving (hT 0)).injective h
+
+omit [AddCommGroup R] in
+/-- The correlation `∫ f · (f ∘ T_y)` is the inner product `⟨f, V_y f⟩`. -/
+theorem integral_mul_comp_eq_inner (y : R) (f : Lp ℝ 2 μ) :
+    ∫ ω, f ω * Lp.compMeasurePreserving (T y) (hT y) f ω ∂μ =
+      inner ℝ f (Lp.compMeasurePreserving (T y) (hT y) f) := by
+  rw [L2.inner_def]
+  refine integral_congr_ae (ae_of_all _ fun ω => ?_)
+  simp [mul_comm]
+
+omit [AddCommGroup R] in
+/-- `‖V_y f − f‖² = 2(⟨f, f⟩ − ⟨f, V_y f⟩)`. -/
+theorem norm_comp_sub_sq (y : R) (f : Lp ℝ 2 μ) :
+    ‖Lp.compMeasurePreserving (T y) (hT y) f - f‖ ^ 2 =
+      2 * (inner ℝ f f - inner ℝ f (Lp.compMeasurePreserving (T y) (hT y) f)) := by
+  rw [norm_sub_sq_real, Lp.norm_compMeasurePreserving, real_inner_self_eq_norm_sq, real_inner_comm f]
+  ring
+
+end
+
 /-- **J45-N2, first sentence**: "`σ_f(R̂ ∖ E_S) = 0` iff `y ↦ V_y f` is `τ′_S`-continuous" — for a first-countable group topology
 `t` on `R` satisfying Bochner's theorem and an action by measure-preserving maps. -/
 theorem spectral_carried_iff [IsProbabilityMeasure μ] (t : TopologicalSpace R)
@@ -563,13 +851,108 @@ theorem spectral_carried_iff [IsProbabilityMeasure μ] (t : TopologicalSpace R)
     (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (hadd : ∀ x y, T (x + y) = T x ∘ T y)
     {f : Lp ℝ 2 μ} {σ : Measure (AddChar R Circle)} (hσ : IsSpectralMeasureOf T hT f σ) :
     σ (contChars t)ᶜ = 0 ↔ f ∈ contVec T hT (@nhds R t 0) := by
-  sorry
+  -- that `μ` is a probability measure is not read by this argument (`σ` carries `‖f‖²`)
+  have _hprob : IsProbabilityMeasure μ := inferInstance
+  letI := t
+  haveI := ht
+  haveI := hcount
+  haveI := hσ.1
+  have hc : ∀ y, ∫ χ, (χ y : ℂ) ∂σ = ((inner ℝ f (Lp.compMeasurePreserving (T y) (hT y) f) : ℝ) : ℂ) := fun y => by
+    rw [hσ.2 y, integral_mul_comp_eq_inner]
+  have hre : ∀ y, ∫ χ, (χ y : ℂ).re ∂σ = inner ℝ f (Lp.compMeasurePreserving (T y) (hT y) f) := fun y => by
+    have h := integral_re (𝕜 := ℂ) (integrable_evalChar σ y)
+    simp only [RCLike.re_to_complex] at h
+    rw [h, hc y, Complex.ofReal_re]
+  have hmass : σ.real Set.univ = inner ℝ f f := by
+    have h := hre 0
+    rw [compMeasurePreserving_zero hadd f] at h
+    rw [← h]
+    simp
+  have hD : ∀ y, ‖Lp.compMeasurePreserving (T y) (hT y) f - f‖ ^ 2 = 2 * ∫ χ, (1 - (χ y : ℂ).re) ∂σ := fun y => by
+    have hint : Integrable (fun χ : AddChar R Circle => (χ y : ℂ).re) σ := (integrable_evalChar σ y).re
+    rw [norm_comp_sub_sq, integral_sub (integrable_const 1) hint, hre y, ← hmass]
+    simp
+  constructor
+  · intro h0
+    have hae : ∀ᵐ χ ∂σ, χ ∈ contChars t := by
+      filter_upwards [measure_eq_zero_iff_ae_notMem.mp h0] with χ hχ using not_not.mp hχ
+    have hsq : Filter.Tendsto (fun y => ‖Lp.compMeasurePreserving (T y) (hT y) f - f‖ ^ 2) (nhds 0) (nhds 0) := by
+      simp only [hD]
+      rw [Filter.tendsto_iff_seq_tendsto]
+      intro u hu
+      have hlim : Filter.Tendsto (fun n => ∫ χ, (1 - (χ (u n) : ℂ).re) ∂σ) Filter.atTop
+          (nhds (∫ _χ : AddChar R Circle, (0 : ℝ) ∂σ)) := by
+        refine tendsto_integral_of_dominated_convergence (fun _ => (2 : ℝ)) (fun n => ?_) (integrable_const 2)
+          (fun n => ?_) ?_
+        · exact (measurable_const.sub (Complex.measurable_re.comp (measurable_evalChar (u n)))).aestronglyMeasurable
+        · refine Filter.Eventually.of_forall fun χ => ?_
+          have h1 : |(χ (u n) : ℂ).re| ≤ 1 := (Complex.abs_re_le_norm _).trans (by simp)
+          rw [abs_le] at h1
+          rw [Real.norm_eq_abs, abs_le]
+          constructor <;> linarith [h1.1, h1.2]
+        · filter_upwards [hae] with χ hχ
+          have hχc : Continuous fun y => χ y := hχ
+          have h1 : Filter.Tendsto (fun n => χ (u n)) Filter.atTop (nhds (χ 0)) := (hχc.tendsto 0).comp hu
+          have h2 : Filter.Tendsto (fun n => ((χ (u n) : Circle) : ℂ).re) Filter.atTop (nhds ((χ 0 : Circle) : ℂ).re) :=
+            ((Complex.continuous_re.comp continuous_subtype_val).tendsto _).comp h1
+          have h3 := (tendsto_const_nhds (x := (1 : ℝ))).sub h2
+          simpa using h3
+      simpa [Function.comp_def] using hlim.const_mul 2
+    have h := (Real.continuous_sqrt.tendsto 0).comp hsq
+    show Filter.Tendsto (fun y => ‖Lp.compMeasurePreserving (T y) (hT y) f - f‖) (nhds 0) (nhds 0)
+    simpa [Function.comp_def, Real.sqrt_sq (norm_nonneg _)] using h
+  · intro hf
+    refine hB σ hσ.1 ?_
+    have hfun : (fun y : R => ∫ χ, (χ y : ℂ) ∂σ) =
+        fun y => ((inner ℝ f (Lp.compMeasurePreserving (T y) (hT y) f) : ℝ) : ℂ) := funext hc
+    rw [hfun]
+    refine Complex.continuous_ofReal.comp (continuous_iff_continuousAt.mpr fun x => ?_)
+    show Filter.Tendsto (fun y => inner ℝ f (Lp.compMeasurePreserving (T y) (hT y) f)) (nhds x)
+      (nhds (inner ℝ f (Lp.compMeasurePreserving (T x) (hT x) f)))
+    rw [tendsto_iff_dist_tendsto_zero]
+    have hbound : ∀ y, dist (inner ℝ f (Lp.compMeasurePreserving (T y) (hT y) f))
+        (inner ℝ f (Lp.compMeasurePreserving (T x) (hT x) f)) ≤
+        ‖f‖ * ‖Lp.compMeasurePreserving (T (y - x)) (hT (y - x)) f - f‖ := by
+      intro y
+      have e : Lp.compMeasurePreserving (T y) (hT y) f =
+          Lp.compMeasurePreserving (T x) (hT x) (Lp.compMeasurePreserving (T (y - x)) (hT (y - x)) f) := by
+        rw [← compMeasurePreserving_add hadd (y - x) x f]
+        exact compMeasurePreserving_congr (congrArg T (sub_add_cancel y x).symm) _ _ f
+      rw [Real.dist_eq, ← inner_sub_right, e, ← map_sub]
+      refine (abs_real_inner_le_norm _ _).trans ?_
+      rw [Lp.norm_compMeasurePreserving]
+    have htend : Filter.Tendsto (fun y : R => y - x) (nhds x) (nhds 0) := by
+      have h := (continuous_sub_right x).tendsto x
+      rwa [sub_self] at h
+    have h := (Filter.Tendsto.comp hf htend).const_mul ‖f‖
+    exact squeeze_zero (fun y => dist_nonneg) hbound (by simpa [Function.comp_def] using h)
 
 /-- Bochner's theorem holds for the discrete topology: every character is continuous. The hypothesis' model. -/
 theorem bochnerOn_bot : BochnerOn (⊥ : TopologicalSpace R) := fun σ _ _ => by
   have h : contChars (⊥ : TopologicalSpace R) = Set.univ :=
     Set.eq_univ_of_forall fun χ => (continuous_bot : @Continuous R Circle ⊥ _ fun y => χ y)
   rw [h, Set.compl_univ, measure_empty]
+
+/-- The `t`-continuous characters are stable under multiplication by one of them, both ways: they are a subgroup, whatever
+the topology `t`. -/
+theorem mul_mem_contChars_iff (t : TopologicalSpace R) {a : AddChar R Circle} (ha : a ∈ contChars t)
+    (χ : AddChar R Circle) : χ * a ∈ contChars t ↔ χ ∈ contChars t := by
+  letI := t
+  have ha' : Continuous fun y => a y := ha
+  constructor
+  · intro h
+    have h' : Continuous fun y => (χ * a) y := h
+    have e : (fun y => χ y) = fun y => (χ * a) y * (a y)⁻¹ := by
+      funext y
+      rw [AddChar.mul_apply, mul_inv_cancel_right]
+    show Continuous fun y => χ y
+    rw [e]
+    exact h'.mul ha'.inv
+  · intro h
+    have h' : Continuous fun y => χ y := h
+    show Continuous fun y => (χ * a) y
+    simp only [AddChar.mul_apply]
+    exact h'.mul ha'
 
 /-- **J45-N1 (c), the clause the chain consumes**: "`E_S` is a proper dense … subgroup, Haar-null" — the `t`-continuous
 characters are Haar-null when they are measurable, separate the points of `R` (dense) and are not all characters (proper).
@@ -579,7 +962,56 @@ points), so `1_H·m = m(H)·m` by Herglotz–Bochner's uniqueness, `m(H) = 1`, a
 theorem contChars_haar_null (hBH : BochnerHerglotz R) (t : TopologicalSpace R) (hmeas : MeasurableSet (contChars t))
     (hsep : ∀ r : R, r ≠ 0 → ∃ χ ∈ contChars t, χ r ≠ 1) (hproper : contChars t ≠ Set.univ)
     {m : Measure (AddChar R Circle)} (hm : IsHaarFourier m) : m (contChars t) = 0 := by
-  sorry
+  classical
+  haveI := hm.1
+  by_contra h0
+  set H := contChars t with hH
+  -- `ν = m|_H` is invariant under translation by `H`
+  have hinv : ∀ a ∈ H, ((m.restrict H).map fun χ => χ * a) = m.restrict H := by
+    intro a ha
+    have hpre : (fun χ : AddChar R Circle => χ * a) ⁻¹' H = H := by
+      ext χ
+      exact mul_mem_contChars_iff t ha χ
+    have h1 := Measure.restrict_map (μ := m) (measurable_mulRight a) hmeas
+    rw [hpre, hm.map_mulRight hBH a] at h1
+    exact h1.symm
+  -- so its Fourier coefficients vanish off `0`
+  have hcoef : ∀ r : R, r ≠ 0 → ∫ χ, (χ r : ℂ) ∂(m.restrict H) = 0 := by
+    intro r hr
+    obtain ⟨a, ha, har⟩ := hsep r hr
+    have h1 := integral_evalChar_map_mulRight (m.restrict H) a r
+    rw [hinv a ha] at h1
+    have har' : (a r : ℂ) ≠ 1 := fun h => har (Circle.coe_eq_one.mp h)
+    have h2 : (∫ χ, (χ r : ℂ) ∂(m.restrict H)) * (1 - (a r : ℂ)) = 0 := by
+      rw [mul_sub, mul_one, ← h1, sub_self]
+    exact (mul_eq_zero.mp h2).resolve_right (sub_ne_zero.mpr (Ne.symm har'))
+  -- hence `m|_H = m(H)·m`
+  haveI : IsFiniteMeasure (m H • m) := Measure.smul_finite m (measure_ne_top m H)
+  have heq : m.restrict H = m H • m := by
+    refine ext_of_fourier hBH fun y => ?_
+    rw [integral_smul_measure, hm.integral_eq]
+    by_cases hy : y = 0
+    · subst hy
+      rw [integral_evalChar_zero, if_pos rfl, measureReal_def, Measure.restrict_apply MeasurableSet.univ,
+        Set.univ_inter]
+      simp
+    · rw [hcoef y hy, if_neg hy, smul_zero]
+  -- so `m(Hᶜ) = 0`
+  have hcompl : m Hᶜ = 0 := by
+    have h1 := congrArg (fun μ' : Measure (AddChar R Circle) => μ' Hᶜ) heq
+    simp only [Measure.restrict_apply hmeas.compl, Set.compl_inter_self, measure_empty, Measure.smul_apply,
+      smul_eq_mul] at h1
+    exact (mul_eq_zero.mp h1.symm).resolve_left h0
+  -- but a second coset has the measure of `H`
+  obtain ⟨χ₀, hχ₀⟩ := (Set.ne_univ_iff_exists_notMem H).mp hproper
+  have hsub : (fun χ : AddChar R Circle => χ * χ₀) ⁻¹' H ⊆ Hᶜ := by
+    intro χ hχ hχH
+    have h1 : χ * χ₀ ∈ H := hχ
+    rw [mul_comm] at h1
+    exact hχ₀ ((mul_mem_contChars_iff t hχH χ₀).mp h1)
+  have h2 : m ((fun χ : AddChar R Circle => χ * χ₀) ⁻¹' H) = m H := by
+    rw [← Measure.map_apply (measurable_mulRight χ₀) hmeas, hm.map_mulRight hBH χ₀]
+  exact h0 (h2 ▸ measure_mono_null hsub hcompl)
 
 end Spectral
 
@@ -593,6 +1025,106 @@ variable {Ω : Type*} {V : Type*}
 def condSupport (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : Measure Ω) (c : Ω → V → Fin 4) (ω : Ω) (x : V) :
     Finset (Fin 4) :=
   Finset.univ.filter fun j => 0 < (μ[(Set.indicator {ω' | c ω' x = j} fun _ => (1 : ℝ)) | 𝒜]) ω
+
+/-! ### The proof of SI-4: SI-2 (`c(x) ∈ M(x)` a.s.), and orthogonal conditional laws have disjoint supports -/
+
+section
+variable (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : Measure Ω) (c : Ω → V → Fin 4)
+
+/-- The conditional law of the colour at `x`: `p_j(x) = P(c(x) = j | 𝒜)`, Mathlib's version. -/
+def condLaw (x : V) (j : Fin 4) : Ω → ℝ := μ[(Set.indicator {ω' | c ω' x = j} fun _ => (1 : ℝ)) | 𝒜]
+
+theorem mem_condSupport {ω : Ω} {x : V} {j : Fin 4} : j ∈ condSupport 𝒜 μ c ω x ↔ 0 < condLaw 𝒜 μ c x j ω := by
+  simp [condSupport, condLaw]
+
+theorem measurable_condLaw (x : V) (j : Fin 4) : Measurable[𝒜] (condLaw 𝒜 μ c x j) :=
+  (stronglyMeasurable_condExp (m := 𝒜) (μ := μ) (f := Set.indicator {ω' | c ω' x = j} fun _ => (1 : ℝ))).measurable
+
+theorem measurableSet_condLaw_pos (x : V) (j : Fin 4) : MeasurableSet[𝒜] {ω | 0 < condLaw 𝒜 μ c x j ω} :=
+  measurable_condLaw 𝒜 μ c x j measurableSet_Ioi
+
+theorem measurableSet_condSupport_eq (x : V) (s : Finset (Fin 4)) :
+    MeasurableSet[𝒜] {ω | condSupport 𝒜 μ c ω x = s} := by
+  have h : {ω | condSupport 𝒜 μ c ω x = s} = ⋂ j : Fin 4, {ω | 0 < condLaw 𝒜 μ c x j ω ↔ j ∈ s} := by
+    ext ω
+    simp only [Set.mem_setOf_eq, Set.mem_iInter, Finset.ext_iff, mem_condSupport]
+  rw [h]
+  refine MeasurableSet.iInter fun j => ?_
+  by_cases hj : j ∈ s
+  · simpa only [hj, iff_true] using measurableSet_condLaw_pos 𝒜 μ c x j
+  · simp only [hj, iff_false]
+    exact (measurableSet_condLaw_pos 𝒜 μ c x j).compl
+
+theorem measurable_selection (f : Finset (Fin 4) → Fin 4) (x : V) :
+    Measurable[𝒜] fun ω => f (condSupport 𝒜 μ c ω x) := by
+  refine @measurable_to_countable' (Fin 4) Ω _ _ 𝒜 _ fun k => ?_
+  have h : (fun ω => f (condSupport 𝒜 μ c ω x)) ⁻¹' {k} =
+      ⋃ s : Finset (Fin 4), ⋃ (_ : f s = k), {ω | condSupport 𝒜 μ c ω x = s} := by
+    ext ω
+    simp
+  rw [h]
+  exact MeasurableSet.iUnion fun s => MeasurableSet.iUnion fun _ => measurableSet_condSupport_eq 𝒜 μ c x s
+
+theorem condLaw_nonneg (x : V) (j : Fin 4) : 0 ≤ᵐ[μ] condLaw 𝒜 μ c x j :=
+  condExp_nonneg (Filter.Eventually.of_forall fun ω => Set.indicator_nonneg (fun _ _ => zero_le_one) ω)
+
+variable [IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) (hc : ∀ x, Measurable fun ω => c ω x)
+include h𝒜 hc
+
+omit h𝒜 in
+theorem integrable_colourIndicator (x : V) (j : Fin 4) :
+    Integrable (Set.indicator {ω' | c ω' x = j} fun _ => (1 : ℝ)) μ :=
+  (integrable_const (1 : ℝ)).indicator (hc x (measurableSet_singleton j))
+
+/-- **SI-2**, for one vertex and one colour: `P(c(x) = j, p_j(x) ≤ 0) = 0`. -/
+theorem measure_condLaw_nonpos_inter (x : V) (j : Fin 4) :
+    μ ({ω | condLaw 𝒜 μ c x j ω ≤ 0} ∩ {ω | c ω x = j}) = 0 := by
+  have hA : MeasurableSet {ω | c ω x = j} := hc x (measurableSet_singleton j)
+  have hs : MeasurableSet[𝒜] {ω | condLaw 𝒜 μ c x j ω ≤ 0} := measurable_condLaw 𝒜 μ c x j measurableSet_Iic
+  have h1 : ∫ ω in {ω | condLaw 𝒜 μ c x j ω ≤ 0}, (Set.indicator {ω' | c ω' x = j} fun _ => (1 : ℝ)) ω ∂μ =
+      μ.real ({ω | condLaw 𝒜 μ c x j ω ≤ 0} ∩ {ω | c ω x = j}) := by
+    rw [setIntegral_indicator hA, setIntegral_const, smul_eq_mul, mul_one]
+  have h2 : μ.real ({ω | condLaw 𝒜 μ c x j ω ≤ 0} ∩ {ω | c ω x = j}) ≤ 0 := by
+    rw [← h1, ← setIntegral_condExp h𝒜 (integrable_colourIndicator μ c hc x j) hs]
+    exact setIntegral_nonpos (h𝒜 _ hs) fun ω hω => hω
+  have h3 := le_antisymm h2 measureReal_nonneg
+  rwa [measureReal_def, ENNReal.toReal_eq_zero_iff, or_iff_left (measure_ne_top μ _)] at h3
+
+/-- **SI-2**: almost surely, the colour at every vertex is in its conditional support. -/
+theorem ae_mem_condSupport [Countable V] : ∀ᵐ ω ∂μ, ∀ x, c ω x ∈ condSupport 𝒜 μ c ω x := by
+  have h : ∀ᵐ ω ∂μ, ∀ x, ∀ j, ω ∉ {ω | condLaw 𝒜 μ c x j ω ≤ 0} ∩ {ω | c ω x = j} :=
+    ae_all_iff.mpr fun x => ae_all_iff.mpr fun j =>
+      measure_eq_zero_iff_ae_notMem.mp (measure_condLaw_nonpos_inter 𝒜 μ c h𝒜 hc x j)
+  filter_upwards [h] with ω hω x
+  rw [mem_condSupport]
+  by_contra hneg
+  exact hω x (c ω x) ⟨not_lt.mp hneg, rfl⟩
+
+theorem condLaw_le_one (x : V) (j : Fin 4) : ∀ᵐ ω ∂μ, condLaw 𝒜 μ c x j ω ≤ 1 := by
+  have h := condExp_mono (m := 𝒜) (integrable_colourIndicator μ c hc x j) (integrable_const (1 : ℝ))
+    (Filter.Eventually.of_forall fun ω => Set.indicator_le_self' (fun _ _ => zero_le_one) ω)
+  rw [condExp_const h𝒜] at h
+  exact h
+
+/-- Orthogonal conditional laws: `E[p_j(x) p_j(y)] = 0` makes `p_j(x) p_j(y) = 0` almost surely. -/
+theorem ae_condLaw_mul_eq_zero {x y : V} {j : Fin 4}
+    (h : ∫ ω, condLaw 𝒜 μ c x j ω * condLaw 𝒜 μ c y j ω ∂μ = 0) :
+    ∀ᵐ ω ∂μ, condLaw 𝒜 μ c x j ω * condLaw 𝒜 μ c y j ω = 0 := by
+  have hnn : 0 ≤ᵐ[μ] fun ω => condLaw 𝒜 μ c x j ω * condLaw 𝒜 μ c y j ω := by
+    filter_upwards [condLaw_nonneg 𝒜 μ c x j, condLaw_nonneg 𝒜 μ c y j] with ω h1 h2
+    exact mul_nonneg h1 h2
+  have hint : Integrable (fun ω => condLaw 𝒜 μ c x j ω * condLaw 𝒜 μ c y j ω) μ := by
+    refine Integrable.mono' (integrable_condExp (m := 𝒜) (μ := μ)
+      (f := Set.indicator {ω' | c ω' y = j} fun _ => (1 : ℝ))).norm
+      ((integrable_condExp (m := 𝒜)).aestronglyMeasurable.mul (integrable_condExp (m := 𝒜)).aestronglyMeasurable) ?_
+    filter_upwards [condLaw_nonneg 𝒜 μ c x j, condLaw_le_one 𝒜 μ c h𝒜 hc x j] with ω h1 h2
+    rw [norm_mul]
+    refine mul_le_of_le_one_left (norm_nonneg _) ?_
+    rw [Real.norm_eq_abs, abs_le]
+    exact ⟨by have : (0 : ℝ) ≤ condLaw 𝒜 μ c x j ω := h1; linarith, h2⟩
+  exact (integral_eq_zero_iff_of_nonneg_ae hnn hint).mp h
+
+end
 
 /-- **J45-SI-4, at the class its argument reads**: "equality at every `u` ⟹ every selection from the supports is an
 `𝒜_S`-measurable … proper four-colouring". For any countable graph `adj` on `V`, any sub-σ-algebra `𝒜` and any random
@@ -610,7 +1142,68 @@ theorem si4 [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] 
     (∀ x, Measurable[𝒜] fun ω => f (condSupport 𝒜 μ c ω x)) ∧
       (∀ᵐ ω ∂μ, ∀ x y, adj x y → f (condSupport 𝒜 μ c ω x) ≠ f (condSupport 𝒜 μ c ω y)) ∧
       ∀ᵐ ω ∂μ, ∀ x, c ω x ∈ condSupport 𝒜 μ c ω x := by
-  sorry
+  have hmem := ae_mem_condSupport 𝒜 μ c h𝒜 hc
+  refine ⟨measurable_selection 𝒜 μ c f, ?_, hmem⟩
+  have hprod : ∀ᵐ ω ∂μ, ∀ x y, adj x y → ∀ j, condLaw 𝒜 μ c x j ω * condLaw 𝒜 μ c y j ω = 0 := by
+    refine ae_all_iff.mpr fun x => ae_all_iff.mpr fun y => ?_
+    by_cases hxy : adj x y
+    · have h : ∀ᵐ ω ∂μ, ∀ j, condLaw 𝒜 μ c x j ω * condLaw 𝒜 μ c y j ω = 0 :=
+        ae_all_iff.mpr fun j => ae_condLaw_mul_eq_zero 𝒜 μ c h𝒜 hc (hdisj x y hxy j)
+      filter_upwards [h] with ω hω _ using hω
+    · exact Filter.Eventually.of_forall fun ω h => absurd h hxy
+  filter_upwards [hprod, hmem] with ω h1 h2 x y hxy heq
+  have hx := (mem_condSupport 𝒜 μ c).mp (hf _ ⟨c ω x, h2 x⟩)
+  have hy := (mem_condSupport 𝒜 μ c).mp (hf _ ⟨c ω y, h2 y⟩)
+  rw [← heq] at hy
+  exact (mul_pos hx hy).ne' (h1 x y hxy _)
+
+/-! ### SI-4's equivariance clause -/
+
+/-- Conditional expectation commutes with a measure-preserving map that leaves the σ-algebra invariant:
+`E[g | 𝒜] ∘ S = E[g ∘ S | 𝒜]` almost surely, when `S⁻¹𝒜 = 𝒜`. -/
+theorem condExp_comp_measurePreserving (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : Measure Ω)
+    [IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) {S : Ω → Ω} (hS : MeasurePreserving S μ μ) (hS𝒜 : 𝒜.comap S = 𝒜)
+    {g : Ω → ℝ} (hg : Integrable g μ) : (μ[g | 𝒜]) ∘ S =ᵐ[μ] μ[g ∘ S | 𝒜] := by
+  have hSm : Measurable[𝒜, 𝒜] S := measurable_iff_comap_le.mpr hS𝒜.le
+  have hmap : ∀ {h : Ω → ℝ}, AEStronglyMeasurable h μ → ∀ {s' : Set Ω}, MeasurableSet s' →
+      ∫ ω in S ⁻¹' s', h (S ω) ∂μ = ∫ ω in s', h ω ∂μ := by
+    intro h hh s' hs'
+    have h1 := setIntegral_map (μ := μ) (g := S) (f := h) hs' (by rwa [hS.map_eq]) hS.measurable.aemeasurable
+    rw [hS.map_eq] at h1
+    exact h1.symm
+  have hint : Integrable ((μ[g | 𝒜]) ∘ S) μ :=
+    (hS.integrable_comp integrable_condExp.aestronglyMeasurable).mpr integrable_condExp
+  refine ae_eq_condExp_of_forall_setIntegral_eq h𝒜 ((hS.integrable_comp hg.aestronglyMeasurable).mpr hg)
+    (fun s _ _ => hint.integrableOn) (fun s hs _ => ?_)
+    ((stronglyMeasurable_condExp (m := 𝒜)).comp_measurable hSm).aestronglyMeasurable
+  rw [← hS𝒜] at hs
+  obtain ⟨s', hs', rfl⟩ := MeasurableSpace.measurableSet_comap.mp hs
+  show ∫ ω in S ⁻¹' s', (μ[g | 𝒜]) (S ω) ∂μ = ∫ ω in S ⁻¹' s', g (S ω) ∂μ
+  rw [hmap integrable_condExp.aestronglyMeasurable (h𝒜 _ hs'), hmap hg.aestronglyMeasurable (h𝒜 _ hs'),
+    setIntegral_condExp h𝒜 hg hs']
+
+/-- **J45-SI-4, the equivariance clause** ("`M(x + y) = M(x) ∘ T_y`"): if a measure-preserving map `S` of `Ω` leaves `𝒜`
+invariant (`S⁻¹𝒜 = 𝒜`) and moves the colouring by a map `π` of the vertices (`c (S ω) x = c ω (π x)`; for the shift by `y`,
+`π x = x + y`), then almost surely the conditional supports move the same way, `M(S ω)(x) = M(ω)(π x)` for every `x` — so every
+selection `f ∘ M` is equivariant. With Mathlib's fixed version of the conditional expectation the identity is almost sure;
+the derivation chooses versions that make it sure. -/
+theorem si4_equivariant [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : Measure Ω)
+    [IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) (c : Ω → V → Fin 4) (hc : ∀ x, Measurable fun ω => c ω x)
+    {S : Ω → Ω} (hS : MeasurePreserving S μ μ) (hS𝒜 : 𝒜.comap S = 𝒜) (π : V → V)
+    (hπ : ∀ ω x, c (S ω) x = c ω (π x)) :
+    ∀ᵐ ω ∂μ, ∀ x, condSupport 𝒜 μ c (S ω) x = condSupport 𝒜 μ c ω (π x) := by
+  have h : ∀ᵐ ω ∂μ, ∀ x, ∀ j, condLaw 𝒜 μ c x j (S ω) = condLaw 𝒜 μ c (π x) j ω := by
+    refine ae_all_iff.mpr fun x => ae_all_iff.mpr fun j => ?_
+    have h1 := condExp_comp_measurePreserving 𝒜 μ h𝒜 hS hS𝒜 (integrable_colourIndicator μ c hc x j)
+    have h2 : (Set.indicator {ω' | c ω' x = j} fun _ => (1 : ℝ)) ∘ S =
+        Set.indicator {ω' | c ω' (π x) = j} fun _ => (1 : ℝ) := by
+      funext ω
+      simp only [Function.comp_apply, Set.indicator_apply, Set.mem_setOf_eq, hπ]
+    rw [h2] at h1
+    exact h1
+  filter_upwards [h] with ω hω x
+  ext j
+  rw [mem_condSupport, mem_condSupport, hω x j]
 
 end Selection
 
@@ -634,5 +1227,19 @@ example : clamp 3 (-1) = 0 := by norm_num [clamp]
 example {R Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsFiniteMeasure μ] (T : R → Ω → Ω)
     (hT : ∀ y, MeasurePreserving (T y) μ μ) (l : Filter R) (A : Set Ω) :
     MeasurableSet[factorSetsSpace T hT l] A ↔ A ∈ factorSets T hT l := Iff.rfl
+
+-- `condLaw` is the function `condSupport` thresholds: `j ∈ M(x) ↔ 0 < p_j(x)`.
+example {Ω V : Type*} (𝒜 : MeasurableSpace Ω) [MeasurableSpace Ω] (μ : Measure Ω) (c : Ω → V → Fin 4) (ω : Ω) (x : V)
+    (j : Fin 4) : j ∈ condSupport 𝒜 μ c ω x ↔ 0 < condLaw 𝒜 μ c x j ω := mem_condSupport 𝒜 μ c
+
+-- `mulDual r₀` is `χ ↦ χ(r₀ ·)`, and `negOne` is the unit vector `−1`.
+example {F : Subfield ℝ} (r₀ : unitRing F) (χ : Dual F) (y : unitRing F) : mulDual r₀ χ y = χ (r₀ * y) := rfl
+example (F : Subfield ℝ) : ((negOne F : unitVectors F) : ℂ) = -1 := rfl
+
+-- `si4_equivariant`'s hypotheses have a model: the identity map, with the identity on the vertices.
+example {Ω V : Type*} [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : Measure Ω)
+    [IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) (c : Ω → V → Fin 4) (hc : ∀ x, Measurable fun ω => c ω x) :
+    ∀ᵐ ω ∂μ, ∀ x, condSupport 𝒜 μ c (id ω) x = condSupport 𝒜 μ c ω (id x) :=
+  si4_equivariant 𝒜 μ h𝒜 c hc (MeasurePreserving.id μ) MeasurableSpace.comap_id id fun _ _ => rfl
 
 end HadwigerNelson.SpectralInputs

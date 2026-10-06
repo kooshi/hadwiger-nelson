@@ -2,6 +2,8 @@ import Proofs.HadwigerNelson.SpectralChain
 import Mathlib.Topology.Instances.AddCircle.Defs
 import Mathlib.GroupTheory.Torsion
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+import Mathlib.Algebra.Category.Grp.Injective
+import Mathlib.Algebra.Module.LinearMap.Rat
 
 /-!
 # Character colourings: band sets, and the gluing from the rational circle to every real field (FS-131 wave 10)
@@ -354,13 +356,37 @@ theorem cl2
   ⟨gluing_field (band 4) 168 (fun _ hθ => hN0 ⟨hθ, hRQ4 hθ⟩) F,
     (gluing_iff_of_orderBound (band 5) hN5pos hN5).mp hRQ5 F⟩
 
+/-- The inclusion `R_F → F(i)`, as an additive map. -/
+def unitRingToFieldI (F : Subfield ℝ) : unitRing F →+ fieldI F where
+  toFun x := ⟨x, UnitRing.unitRingOver_le_planeOverSubring F x.2⟩
+  map_zero' := rfl
+  map_add' _ _ := rfl
+
+theorem unitRingToFieldI_injective (F : Subfield ℝ) : Function.Injective (unitRingToFieldI F) :=
+  fun _ _ h => Subtype.ext (congrArg (fun z : fieldI F => (z : ℂ)) h)
+
+/-- An additive map from a subgroup of a `ℚ`-vector space into `ℝ` extends to a `ℚ`-linear map: `ℝ` is divisible, hence
+injective over `ℤ` (Baer), and an additive map of `ℚ`-vector spaces is `ℚ`-linear. -/
+theorem exists_ratLinear_extension {S V : Type*} [AddCommGroup S] [AddCommGroup V] [Module ℚ V] (ι : S →+ V)
+    (hι : Function.Injective ι) (ψ : S →+ ℝ) : ∃ ℓ : V →ₗ[ℚ] ℝ, ∀ x, ℓ (ι x) = ψ x := by
+  obtain ⟨g, hg⟩ := (Module.Baer.of_divisible ℝ).extension_property_addMonoidHom ι hι ψ
+  exact ⟨g.toRatLinearMap, fun x => by rw [← hg]; rfl⟩
+
 /-- **The corrected `A` is the erratum's**: a character of `R_F` is archimedean iff it is the reduction of a `ℚ`-linear map
 `F(i) → ℝ` restricted to `R_F` (`A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`, `plans/FS89-derivation.md:32`). -/
 theorem mem_archimedean_unitRing_iff (F : Subfield ℝ) (θ : unitRing F →+ UnitAddCircle) :
     θ ∈ archimedean (unitRing F) ↔
       ∃ ℓ : fieldI F →ₗ[ℚ] ℝ, ∀ x : unitRing F,
         θ x = ((ℓ ⟨x, UnitRing.unitRingOver_le_planeOverSubring F x.2⟩ : ℝ) : UnitAddCircle) := by
-  sorry
+  rw [mem_archimedean]
+  constructor
+  · rintro ⟨ψ, hψ⟩
+    obtain ⟨ℓ, hℓ⟩ := exists_ratLinear_extension (unitRingToFieldI F) (unitRingToFieldI_injective F) ψ
+    refine ⟨ℓ, fun x => ?_⟩
+    rw [hψ x, ← hℓ x]
+    rfl
+  · rintro ⟨ℓ, hℓ⟩
+    exact ⟨ℓ.toAddMonoidHom.comp (unitRingToFieldI F), fun x => hℓ x⟩
 
 end Field
 
@@ -394,5 +420,8 @@ example : half ∈ torsionBy ℤ 0 := by rw [mem_torsionBy, zero_nsmul]
 example : (0 : ℤ →+ UnitAddCircle) ∈ archimedean ℤ := zero_mem _
 -- `1 ∈ U_ℚ`.
 example : (1 : Qring) ∈ unitSet ⊥ := ⟨(UnitRing.planeOverSubfield ⊥).one_mem, by simp⟩
+
+-- `unitRingToFieldI` is the inclusion: it does not move the underlying complex number.
+example (F : Subfield ℝ) (x : unitRing F) : ((unitRingToFieldI F x : fieldI F) : ℂ) = (x : ℂ) := rfl
 
 end HadwigerNelson.CharacterColouring
