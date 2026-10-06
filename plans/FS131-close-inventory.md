@@ -3827,3 +3827,40 @@ reason by the close.*
      [hand] — but each carries this open gate item until its model lands. Alternative weighed: the tangent "away" bend's planner now, the audit at the close.
      Why: this class of defect has been found twice by audit and never by the scan (items 158, 268), and every statement built on an unaudited one is at
      risk. Confidence: high. `bend_away`'s planner takes the next slot. In flight after QA4's launch: 1 (IR1) + 1 (I5q) + 1 (QA4) = 3.
+420. **FS131-IR1 handed back** (Stage 17 SAVED, harness ≈ 505k by the task notice; record `fs131-w5c`'s `plans/FS131-limit-kernel-plan.md`, Stages 12–17;
+     report `data/fs131/reports/FS131-IR1.md`; commits `61a0b31d`, `533195c4` (the merge of `a20bb6f5`), `67039c57`, `9489c44b`, `3395426d`, `a300d495`,
+     `89bf0ac4`, `ebb0b292`, pushed). **Done**: OPEN merged into `fs131-w5c` (files byte for byte on 15,679 paths, statements three-way on 7,460 names, 0
+     duplicates, `exists_open` standard there); `exists_vertexStep` restated in E6's form and `exists_arcStep` with the horn clause, both still `sorry` —
+     **E6's drafts needed no change**: their consumer is proved over exactly these statements. **`exists_terminalSeq` proved over the two steps** (no `sorry`
+     of its own; statement unchanged; about 520 lines: `ProcInv`, `ProcStep`, `ProcRun`, `finite_acted`, `locallyFinite`, `eventually_not_todo`), so
+     `exists_terminalMap` rests on exactly `exists_vertexStep` and `exists_arcStep`. **[kernel], standard three**: `horn_bounds_of_interior_empty`
+     (FS131-E6-CONE, E6 § 4.5 (1) verbatim); `cleanKeep`, `LocalStep.cleanKeep`, `LocalStep.exists_clean`; `surgery_localStep`,
+     `surgery_cleanKeep_localStep` (every move's surgery is a local step on its closed ball — KL1 § 3.3's `LocalStep` clause once for all four moves); 34
+     supporting theorems. **Left**: `exists_vertexStep` (H, two sessions), `exists_arcStep` (H), `stuckRun_ne_univ` (M–H, one session; shares nothing
+     with the steps) — routes in record § 17.3. **Receipt** (Keryx): `origin/fs131-w5c` is `ebb0b292`, the tree clean, `a20bb6f5` its ancestor; the build
+     log (`build/gate/build/20261006T034742Z-719788.log` in that tree) ends "Build completed successfully (5792 jobs)", 0 warnings other than `sorry`; `sorry`
+     by grep `Procedure` 2, `Terminal` 1, `Limit` 0, `FlankUA` 0, `OpenMove` 0; `data/fs131/ir/IRAxiomsFinal.out` parsed: 48 records, 40 within the standard
+     three, 8 on `sorryAx` (the eight named in the report), 0 foreign, `horn_bounds_of_interior_empty`, `surgery_localStep`, `exists_open` standard by name;
+     the planted print carries the plant; `exists_terminalSeq`'s statement `diff`ed against `87e95385` — identical; `exists_vertexStep` read: E6's form.
+     **Corrections owed** (to KL1's plan text, left standing): its routes end "then `exists_clean`", but `ArcMap.clean` cannot be shown a local step (it
+     resets the colour function everywhere; `LocalStep` compares colour functions at every point off the support) — the cleaned step is `cleanKeep`;
+     `acted_finitely`'s "within `3`" is within `4`; `shave_step_gen` not needed and the four `LocalStep` clauses are one lemma. **Finding for the vertex
+     step** (IR1): no move's statement exports a radius below `δ` (OPEN's apart), its map by name (MERGE-RAY's and SHAVE's are behind `∃ F'`), or anything
+     about points strictly inside the disc off `v` — which `IsModification`'s third clause and "no other site" both read. **Tool defects**:
+     `tools/fs131_m6_dupes.py --plant` cannot fire outside M6's refs (IR1's copy has plants that fire); `tools/fs131_il_axsum.py` cuts a primed name (the
+     class of item 353; IR1's copy reads them). **Slips, its own, caught by its self-tests**: a merge check read through the working tree; a stale module
+     header. **Generalization**: `surgery_localStep` for any surgery with its new arcs in the closed ball. Credit: IR1, for the procedure's run in the
+     kernel and for finding that cleaning must keep the colour function.
+421. **Rulings on IR1's held items, and its slot.** (a) **`clean` and `cleanKeep` both stay** until wave 5 has landed; unifying them (one colour function)
+     joins the tidy moves (item 387 (a)). Alternative weighed: change `clean` now. Why: `Limit` is proved over `clean`, and a change there rebuilds the
+     limit's chain for no new theorem. Confidence: high. (b) **KL1's superseded text** gets a one-line pointer to § 17.4 at the head of its §§ 3.1 and 3.3,
+     written by the next job on that record. (c) **The moves' hidden witnesses — ruling 372 (a) amended**: the vertex step's implementer may add **new
+     declarations** to `Moves`, `MergeMove`, `OpenMove` and `Surgery` on the wave-5 branch — named forms of an assembly that expose its map and radius, or
+     a `private` helper made public — with no statement or definition changed. Alternative weighed: re-prove the assemblies in a module downstream, as 372
+     (a) said. Why: a witness behind `∃ F'` cannot be reached from downstream, so "downstream only" would mean copying four constructions; additive
+     declarations merge cleanly with `main`, where nobody else edits those modules. Confidence: medium-high (it changes if a needed form turns out to
+     require a changed definition: then a message). (d) **IR1's slot → FS131-IR2 on `fs131-w5c`: `exists_vertexStep`** by record § 17.3 Left 1. (e)
+     **`stuckRun_ne_univ` runs beside it, FS131-IS1, on a new branch `fs131-w5s`** (cut from `fs131-w5c` at `ebb0b292`; worktree by the recipe, the build
+     copied while that tree was idle) at the next slot that frees; it edits `Terminal` only. (f) **`exists_arcStep`** follows `exists_vertexStep` in
+     `Procedure` (one file, one writer), unless a slot is free earlier — then its bend exports (`bend_step`, KL1 § 3.3) go to a module of their own first.
+     `bend_away`'s planner keeps its place after the audit's slot (item 419). In flight after IR2's launch: 1 (I5q) + 1 (QA4) + 1 (IR2) = 3.
