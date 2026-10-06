@@ -1,0 +1,16 @@
+statement check against f1c13612: 23 base declarations compared in 2 modules; 1 changed or missing; 1 added since the base
+DIFF Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.v6_anti: CHANGED (type hash, printed type)
+    base: ∀ {k : ℕ} {F : HadwigerNelson.Plane.ArcMap k}, F.Valid → ∀ {p : ℂ} {ψ : ℝ} {T T' : Set ℂ}, F.IsTile T → F.IsTile T' → HadwigerNelson.Plane.ringPt p ψ ∈ closure T → HadwigerNelson.Plane.ringPt p (ψ + Real.pi) ∈ closure T' → closure T ∩ closure T' ⊆ {p}
+    now:  ∀ {k : ℕ} {F : HadwigerNelson.Plane.ArcMap k}, F.Valid → ∀ {p : ℂ} {ψ : ℝ} {T T' : Set ℂ}, F.IsTile T → F.IsTile T' → HadwigerNelson.Plane.ringPt p ψ ∈ closure T → HadwigerNelson.Plane.ringPt p (ψ + Real.pi) ∈ closure T' → closure T ∩ closure T' ⊆ {p, p}
+control 'def': exit 1 — FIRED
+statement check against f1c13612: 23 base declarations compared in 2 modules; 1 changed or missing; 0 added since the base
+DIFF Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.ringPt_sixth_dist_le_one: CHANGED (type hash, printed type)
+    base: ∀ {p : ℂ} {ψ₀ : ℝ} {n m : ℤ}, Dist.dist (HadwigerNelson.Plane.ringPt p (ψ₀ + ↑n * (Real.pi / 3))) (HadwigerNelson.Plane.ringPt p (ψ₀ + ↑m * (Real.pi / 3))) ≤ 1 → ↑(n - m) = 0 ∨ ↑(n - m) = 1 ∨ ↑(n - m) = -1
+    now:  0 = 1 → ∀ {p : ℂ} {ψ₀ : ℝ} {n m : ℤ}, Dist.dist (HadwigerNelson.Plane.ringPt p (ψ₀ + ↑n * (Real.pi / 3))) (HadwigerNelson.Plane.ringPt p (ψ₀ + ↑m * (Real.pi / 3))) ≤ 1 → ↑(n - m) = 0 ∨ ↑(n - m) = 1 ∨ ↑(n - m) = -1
+control 'include': exit 1 — FIRED
+statement check against f1c13612: 23 base declarations compared in 2 modules; 1 changed or missing; 0 added since the base
+DIFF Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.v6_count: CHANGED (type hash, printed type)
+    base: ∀ (tip : Fin 4 → ZMod 6 → Prop), (∀ (a : ZMod 6), ∃ i, tip i a) → (∀ (i : Fin 4) (a b : ZMod 6), tip i a → tip i b → b = a ∨ b = a + 1 ∨ b = a - 1) → (∀ (i : Fin 4) (a : ZMod 6), tip i a → tip i (a + 1) → (∃ j, j ≠ i ∧ tip j a) ∨ ∃ j, j ≠ i ∧ tip j (a + 1)) → ∃ a, (∀ (i : Fin 4), tip i a ∨ tip i (a + 3)) ∧ (∀ (i : Fin 4), ¬(tip i a ∧ tip i (a + 3))) ∧ (∃ i j, i ≠ j ∧ ∀ (l : Fin 4), tip l a ↔ l = i ∨ l = j) ∧ (∃ i j, i ≠ j ∧ ∀ (l : Fin 4), tip l (a + 3) ↔ l = i ∨ l = j) ∧ ∀ (i : Fin 4), ∃ b, tip i b ∧ tip i (b + 1)
+    now:  ∀ (tip : Fin 4 → ZMod 6 → Prop), (∀ (a : ZMod 6), ∃ i, tip i a) → (∀ (i : Fin 4) (a b : ZMod 6), tip i a → tip i b → b = a ∨ b = a + 1 ∨ b = a - 1) → (∀ (i : Fin 4) (a : ZMod 6), tip i a → tip i (a + 2) → (∃ j, j ≠ i ∧ tip j a) ∨ ∃ j, j ≠ i ∧ tip j (a + 1)) → ∃ a, (∀ (i : Fin 4), tip i a ∨ tip i (a + 3)) ∧ (∀ (i : Fin 4), ¬(tip i a ∧ tip i (a + 3))) ∧ (∃ i j, i ≠ j ∧ ∀ (l : Fin 4), tip l a ↔ l = i ∨ l = j) ∧ (∃ i j, i ≠ j ∧ ∀ (l : Fin 4), tip l (a + 3) ↔ l = i ∨ l = j) ∧ ∀ (i : Fin 4), ∃ b, tip i b ∧ tip i (b + 1)
+control 'text': exit 1 — FIRED
+self-test: OK — every planted fault fired
