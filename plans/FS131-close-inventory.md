@@ -3757,3 +3757,37 @@ reason by the close.*
      nothing waits on the `exists_preBend` children today. Confidence: medium-high. (e) **What "held" means is unchanged**: a landed result is checked by
      the kernel (build, zero `sorry`, axioms, vacuity); the environment linters are hygiene (unused arguments, docstrings, simp forms), not truth. In flight
      after LN1's launch: 1 (CC2) + 1 (IR1) + 1 (LN1) = 3.
+416. **FS131-CC2 done: the collar bend is proved** (harness ≈ 514k by the task notice; record `fs131-w5k`'s `plans/FS131-collar-C-implementation.md`,
+     Stages 4–8; report `data/fs131/reports/FS131-CC2.md`; commits `6db9c5d8`, `60dd05c9` (the merge of `origin/fs131-w5` at `5059983d`), `ed61376a`,
+     `425da26a`, `3b120cd3`, pushed). **[kernel], exactly the standard three, statements unchanged**: `ArcMap.bend_toward_collar` (E4-BEND-UN with R1–R3 in
+     I5o's form, read back clause by clause in the report); `exists_collarFit`; `CollarFit.map_degree_lensCurve`, `map_degree_end`, `sides_end`; B0
+     `collarModel` (`CollarFit` inhabited on `l60Frag`'s sub-arc, `c = 0 ≠ 1 = c'`, every `ε > 0`); new `hasDegree_iff_of_homeo` (`Pushforward`: a
+     homeomorphism carrying interior points and colours carries degrees and repeated colours at every domain point); 20 supporting theorems.
+     `RadialPush`, `Pushforward`, `CollarMap`, `BendCollar` hold no `sorry`. **Receipt** (Keryx): `origin/fs131-w5k` is `3b120cd3`, the tree clean, `5059983d`
+     its ancestor; the latest build log (`build/gate/build/20261006T031833Z-508592.log` in that tree) ends "Build completed successfully (5791 jobs)", 0
+     warnings other than `sorry`, the `sorry` warnings in `BaseDense`, `HexRing`, `Terminal` only; `sorry` by grep 0 in each of the four modules;
+     `data/fs131/cc/CCAxioms8.out` parsed: 9 records, 8 on exactly the standard three (`bend_toward_collar`, `exists_collarFit`, the three leaves,
+     `collarModel`, `hasDegree_iff_of_homeo` by name), the planted control on `sorryAx`; `bend_toward_collar`'s statement `diff`ed against `2736ab8c` —
+     identical. **How the leaves fell** (CC2): the two degree leaves priced at about 650 lines took about 135, because the number of germs in a sector chart
+     is a topological invariant of the point; `sides_end` and `exists_collarFit`'s end-freeness share one lemma, `collarK_frame`. **Prediction scored**:
+     KP2's reading that `hmax` is never used (item 390) — TRUE (`hmax`, `hlen` read only in `have _ := …`). **Generalizations**: `hasDegree_iff_of_homeo`
+     for any two arc maps; `hF` read by neither `map_degree_end` nor `sides_end`. **Corrections owed**: KP2's plan § 5.1 ("`h` carries sectors" is false —
+     true at a given radius, false of their number and colour word; its routes for the two degree leaves and CC1's § 3.2 rows superseded);
+     `exists_collarFit`'s docstring names a route not used; a second duplicate for the tidy moves (`ArcMap.ringPt_not_mem_openArc_of_end` in `BendCollar` ~
+     `ringPt_not_mem_openArc` in `RadialPush`). **Tool defects, its own, fixed**: a name-only clash check's false alarm; a log check that missed an
+     unused-variable warning (`tools/fs131_cc_sorry_upstream.py` now fails on any warning but `sorry`). `tools/fs131_cc_stmt.py` fixed as ruled (406 (c)).
+     **Slip, its own**: the merge commit made with no path list (git refuses one on a merge); each file was added by name — as ruling 370 (c) accepts.
+     **Note** (CC2): B0 as shipped is a model of `exists_collarFit`'s hypotheses and of `CollarFit`, not of `bend_toward_collar`'s `hmax`. Credit: CC2, for
+     the invariant that cut two leaves to a fifth of their price, and the collar whole.
+417. **Rulings on CC2's held items, and its slot.** (a) **`fs131-w5` fast-forwarded to `fs131-w5k`** at `3b120cd3` (Keryx, in the `fs131-w5` tree, no build
+     running there; pushed). `fs131-w5` now holds `main` as of M5, the planar chain, the non-`Terminal` lane and the collar whole; open on it: `BaseDense`'s
+     `finite_maxRingArcs`, `hfree_of_baseHyp`, `maxRingArcs_subset_of_bend` (and `cv_exists`'s stale copy, proved on `fs131-w5c`), `HexRing`'s `bv_l3`, and
+     `Terminal`'s stale copies. (b) **A model of `bend_toward_collar`'s whole hypothesis set is not required for wave 5's landing**: the gate's vacuity rule
+     is per carrier, and each carrier here is witnessed or generic; the theorem joins the list of statements with no Lean inhabitant of all hypotheses at
+     once (with `exists_open`, items 408, 414), held for the filing. Whether `hmax` and `hlen` are dropped (which would make `collarModel`'s arc an
+     inhabitant) is decided with the unused-argument policy after FS131-LN1's measurement. Confidence: medium (it changes if the linters' count shows unused
+     hypotheses must go). (c) **`exists_collarFit`'s docstring** is corrected to the route proved by the next job that edits `BendCollar`; a docstring is
+     not a statement. (d) **CC2's slot → FS131-I5q on `fs131-w5`**: the three remaining `exists_preBend` children and `bv_l3` with its move to `BaseWalk`
+     (ruling 370 (a)) — the queue's next; with them `exists_preBend`, `n3_base`, `localDense` and `dense3` come off `sorryAx`. Alternative weighed:
+     `bend_away`'s implementer on `fs131-w4ba`. Why: these four are on wave 5's landing path and `bend_away` lands on its own; it takes the slot LN1 frees.
+     Confidence: high. In flight after I5q's launch: 1 (IR1) + 1 (LN1) + 1 (I5q) = 3.
