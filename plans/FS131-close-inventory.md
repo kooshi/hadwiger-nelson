@@ -5116,3 +5116,31 @@ reason by the close.*
      `data/fs131/briefs/FS131-K7-wave7.md`, `FS131-K8-wave8.md`, `FS131-K9-wave9.md`, generator `mk-kw.py 7|8|9`, each gate PASS.
      Wave 7's brief carries the plan's open word "simple" (a fragment's tiles that cross the domain's boundary) as that planner's
      decision, to be relayed to wave 8's.
+
+499. **FS131-K6b, by message mid-job: findings on the bridge while stating it — none a refutation; the skeleton (`Curve`, `LocalGraph`,
+     `FanBridge`) elaborates** (source: K6b's message to "main", 2026-10-06; not checked by me against the branch — its record and build
+     are the artifact at its hand-back). (1) **A step of FS131-E8 § 3.1 (4) does not formalize as written** ("at a point where g″
+     exists … ψ is absolutely continuous": Rademacher and the fundamental theorem for Lipschitz functions), **and has a shorter route,
+     proved in Lean on the branch** (`norm_sub_le_of_discs`): if neither pair of opposite unit discs at two interface points overlaps,
+     the parallelogram law gives `‖ν′ − ν″‖ ≤ ‖x′ − x″‖`, the sharp constant with no second derivative; the non-overlap from § 3.1
+     (3)(c)'s crude `6δ` bound; the 1-Lipschitz tangent angle then by subdivision (a leaf). (2) The fan's existence reads only a crude
+     curvature bound, so FAN, BRIDGE and CLAUSE2 could land on § 3.1 (3)(c) alone; the sharp constant is read by the consumers' lens.
+     (3) **A generalization**: "at least two branches, the two sides of a branch differ in colour" reads no saturation — it follows
+     from the fan's fields and `z ∈ Σ` (`Fan.two_le_n`, `Fan.col_ne`; K6b's argument, one mind). (4) **Three statements of its own
+     assembly, for a deriver's eye**: `IsUnitCurve.one_le_dist` (a curve of length at most `π/2` with 1-Lipschitz tangent angle stays
+     outside the two open unit discs tangent at its start); `Fan.branch_contacts` (FS121-V2's Lemma T (ii) for any fan, with the claim
+     that a branch is of split type along its whole length or of tangent type along it); `fan_of_isolated` at every `z` with
+     `Σ ∩ B(z, R) ⊆ {z}`, singular or not. (5) On ruling 495 (a): FS131-E8-LOCAL is stated over `TwoColourOn A B N` and "no cusp in
+     `U ⊆ N`" and does not read Σ, so the centred-ball Σ serves; the agreement lemma is not stated (priced at about a day after LOCAL).
+     Also stated over the fan: FS121-V2-SECTOR (`Fan.sector_alone`) and FS121-DB1-L3 with FS111-W-NOREP as its case
+     (`Fan.sector_unique`, proved from it) — a fan at one point and saturation at its branch points, no local finiteness, confirming
+     E8's § 4.6 for those two rows. It hands back after its build; the ladder, the fragment, HULLC, KB-DIR, INTRAD and V3-CPI go to a
+     third pass. **My check of one**: `one_le_dist`'s derivative redone by hand — `(d/ds)|γ(s) − γ(0) ∓ i e(ψ₀)|² = 2⟨γ(s) − γ(0),
+     T(s)⟩ ∓ 2 sin(ψ(s) − ψ₀) ≥ 2 sin s − 2 sin s`, by E8's C2 and `|ψ(s) − ψ₀| ≤ s ≤ π/2`; it holds as written. **Ruling**: **the
+     deriver's check is a short job for the mind that holds the derivation** — FS131-E8 resumed (441k by the harness, below its line)
+     on a dated amendment to its brief, once K6b's record is committed and a slot is free at K6b's hand-back: items (1), (3), (4)
+     against its own entries, its record amended where a step is replaced (§ 3.1 (4)) and where an entry widens (FAN without
+     saturation for the two clauses; `fan_of_isolated` at non-singular points). Alternative weighed: a fresh deriver (it would re-read
+     the whole derivation first, about three times the cost), or no deriver, the implementer's proof being the check. Why: `Fan.branch_contacts`
+     carries a new claim every sector row will read, and a false leaf found by an implementer costs a job where a deriver's reading
+     costs a stage; the kernel remains the second check either way. Confidence: medium-high.
