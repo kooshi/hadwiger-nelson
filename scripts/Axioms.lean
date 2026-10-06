@@ -6398,6 +6398,18 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.IsUnitCurve.exists_polarGraph
 #print axioms HadwigerNelson.Plane.AeColouring.beta
 #print axioms HadwigerNelson.Plane.AeColouring.alpha
+#print axioms HadwigerNelson.Plane.isOpen_polarRegion
+#print axioms HadwigerNelson.Plane.isPreconnected_polarRegion
+#print axioms HadwigerNelson.Plane.exists_ordered_lifts
+#print axioms HadwigerNelson.Plane.polarRegion_disjoint_polarGraph
+#print axioms HadwigerNelson.Plane.AeColouring.exists_fan_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.finite_arcs_meeting_ball
+#print axioms HadwigerNelson.Plane.AeColouring.regJLiteral_of_locallyFinite
+#print axioms HadwigerNelson.Plane.AeColouring.finite_arcs_of_bounded
+#print axioms HadwigerNelson.Plane.AeColouring.fan_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.regJFan_of_saturated
+#print axioms HadwigerNelson.Plane.AeColouring.regJLiteral_of_saturated
+#print axioms HadwigerNelson.Plane.AeColouring.finite_arcs_of_isBounded
 
 #eval IO.println "=== PURCHASED ==="
 

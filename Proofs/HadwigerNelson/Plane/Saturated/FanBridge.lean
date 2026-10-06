@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Plane.Saturated.LocalGraph
 import Proofs.HadwigerNelson.Plane.Saturated.FanExamples
 import Proofs.HadwigerNelson.Plane.Saturated.FanArcs
+import Proofs.HadwigerNelson.Plane.Saturated.FanBuild
 
 /-!
 # The bridge: an isolated singular point of a saturated colouring has a fan (FS-131 wave 6: FS131-E8)
@@ -111,8 +112,8 @@ theorem alpha (h : c.IsolatedAt z R) :
 essential boundary points of the punctured disc, then `z` has a fan. Not read: saturation at `z` or outside the
 punctured disc; any clause about arcs meeting `z`; that `z` is singular; the number of colours. -/
 theorem fan_of_isolated (c : AeColouring k) {z : ℂ} {R : ℝ} (hR : 0 < R) (hS : c.singularSet ∩ ball z R ⊆ {z})
-    (hsat : SaturatedOn c.cls (ball z R \ {z})) : Nonempty (c.Fan z) := by
-  sorry
+    (hsat : SaturatedOn c.cls (ball z R \ {z})) : Nonempty (c.Fan z) :=
+  c.exists_fan_of_isolated hR hS hsat
 
 /-- **FS131-E8-BRIDGE.** A saturated colouring whose singular set is locally finite satisfies REG-J′ in its fan form:
 every singular point has a fan with end tangents. The frozen words' second clause is not read. -/
@@ -129,15 +130,15 @@ theorem regJFan_iff_singLocallyFinite (c : AeColouring k) (hsat : Saturated c.cl
 /-- **FS131-E8-CLAUSE2**, first clause: under saturation the frozen words of REG-J′ follow from their first clause —
 every singular point lies in the closure of finitely many components of the interface set. -/
 theorem regJLiteral_of_saturated (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite) :
-    c.RegJLiteral := by
-  sorry
+    c.RegJLiteral :=
+  c.regJLiteral_of_locallyFinite hsat hS
 
 /-- **FS131-E8-CLAUSE2**, second clause: in a saturated colouring with locally finite singular set, a bounded set
 meets finitely many components of the interface set. -/
 theorem finite_arcs_of_isBounded (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite)
     {K : Set ℂ} (hK : Bornology.IsBounded K) :
-    {A : Set ℂ | (∃ y ∈ c.interfaceSet, A = connectedComponentIn c.interfaceSet y) ∧ (A ∩ K).Nonempty}.Finite := by
-  sorry
+    {A : Set ℂ | (∃ y ∈ c.interfaceSet, A = connectedComponentIn c.interfaceSet y) ∧ (A ∩ K).Nonempty}.Finite :=
+  c.finite_arcs_of_bounded hsat hS hK
 
 /-! ## What every fan carries under saturation -/
 

@@ -112,3 +112,40 @@ limit at each end": the component is `γ '' Ioo 0 L`, `L ≤ π/2`, `γ` injecti
 {z + t e(φ(t)) : 0 < t < R} with φ continuous on (0, R) and convergent, as t → 0": `beta`'s conclusion. ALPHA — "finitely many connected
 components … meet the closed disc of radius R/2 about z, and there is r with 0 < r ≤ R/2 such that every point of the essential boundary in
 B(z, r) other than z lies on a component that has an end at z": `alpha`'s conclusion, "has an end at z" read as `z` in the closure.
+
+## Stage 3 — SAVED (FS131-I6D): `fan_of_isolated`, `regJLiteral_of_saturated`, `finite_arcs_of_isBounded` — proved (all seven leaves closed)
+
+**Leaves closed (7 of 7)**: with stage 2's four, `AeColouring.fan_of_isolated`, `AeColouring.regJLiteral_of_saturated`,
+`AeColouring.finite_arcs_of_isBounded` — one-line terms in `FanBridge` over `Plane/Saturated/FanBuild` (new, no `sorry`). `FanBridge`'s five
+remaining `sorry`s are the five `AeColouring.Fan` leaves of the other implementer (`two_le_n`, `col_ne`, `branch_outside_discs`,
+`branch_contacts`, `sector_alone`), untouched. `regJFan_of_saturated` (FS131-E8-BRIDGE, proved by the planner from `fan_of_isolated`) now rests on
+no `sorry` of this file.
+
+**Routes, against the plan's § 11.4.**
+- `fan_of_isolated`: the plan's route (E8 § 3.6), in five pieces. `isOpen_polarRegion` — every point is in polar form about `z` with its angle
+  measured from a reference direction by `arg` (`polarPt_norm_arg`), continuous near a point of the region, so the region is a neighbourhood of
+  each of its points; `isPreconnected_polarRegion` — the image of a rectangle; `exists_ordered_lifts` — the angles at `r/2` reduced into
+  `[0, 2π)` by a floor, sorted by `Finset.orderEmbOfFin`, and the difference of two lifts stays in `(0, 2π)` because its image is an interval that
+  misses `0` and `2π`; `polarRegion_disjoint_polarGraph` — no branch enters the region between consecutive ones; regions by
+  `ae_one_colour_of_isConnected`. Reads `alpha`, `beta` and `AeColouring.ae_one_colour_of_isConnected` (an upstream leaf).
+- CLAUSE2, **shorter than the plan's** (and than E8 § 3.7's "compactness off the fans"): `fan_of_isolated` gives a fan at *every* point under
+  saturation and local finiteness (singular or not), a fan's disc meets finitely many interface arcs (`Fan.finite_arcs_meeting_ball`: an arc
+  that meets it off the centre holds a whole branch; no saturation read), and a bounded set is covered by finitely many such discs. The first
+  clause is the same lemma at one disc; no chart is read again.
+
+**Checks.**
+- Build: **OK — 466 of 466 batches, 3 modules rebuilt** (`FanBuild`, `FanBridge`, `Proofs`), **24 `declaration uses sorry`** (31 as given, less
+  my seven), exit 0 — `data/fs131/i6d/logs/build-2-fan-clause2.log`.
+- Statements: `tools/fs131_i6d_statements.py` OK against `32f2ab4c`.
+- Axioms (`data/fs131/i6d/logs/axioms-2.txt`): 35 records — 10 clean, 25 the standard three and `sorryAx` (upstream leaves only: my four modules
+  hold no `sorry`); the three controls as in stage 2.
+- `tools/check_architecture.py`: PASS (row `Plane/Saturated/FanBuild`). Names: 0 hits for 57 short names on the wave's five other branches
+  (`origin/fs131-w6` `6fc27fa1`, `-w6c` `d62406a2`, `-w6g` `32f2ab4c`, `-w6p`, `-w6m`).
+
+**Each theorem against its entry.** FAN — "there is r > 0 such that the essential boundary in B(z, r) off z is the union of finitely many pairwise
+disjoint curves … each a polar graph t ↦ z + t e(φ(t)) over 0 < t < r with φ continuous and convergent as t → 0, and each open region between two
+angularly consecutive curves is almost everywhere of one colour": the structure `Fan`, field by field (`bdry`, `cont`, `tendsto`, `mono` and
+`wrap` for "angularly consecutive", `region`); "at least two" and "of different colours" are the other implementer's `two_le_n`, `col_ne`.
+Hypotheses: `0 < R`, `Σ ∩ B(z, R) ⊆ {z}`, saturation on the punctured disc — no `z ∈ Σ`, no `R ≤ 1/2` (the proof passes to `min R (1/2)`).
+CLAUSE2 — "every point of Σ lies in the closure of finitely many connected components of the interface set, and every bounded set meets
+finitely many connected components of the interface set": the two declarations, verbatim.
