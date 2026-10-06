@@ -4903,3 +4903,11 @@ reason by the close.*
      `fs131-w10`; **FS131-E8**, the deriver on REG-J′'s bridge (ruling 481 (c); brief `data/fs131/briefs/FS131-E8-regj-bridge.md`, gate
      PASS, with J45-SI-5's question as a second), launched on `main`'s `plans/` and `data/`. In flight: 1 (MC1) + 1 (I10A) + 1 (E8) = 3.
      Queue: FS131-K6b; FS131-I10B and I10C (`mk-i10.py B`, `C`, each on a branch cut from `fs131-w10` at `f919973e`); K10b.
+
+488. **Kooshi rules on item 483's offer: no planner pass on measure rigidity, and no pricing of it, for now** (2026-10-06; his words): *"Let's
+     keep holding off on formalizing or pricing MR for now. That backlog is big enough that I might request community support for filling
+     it. I'm going to wait to do that too though. OpenAI is rumored to be releasing proofs of 400 previously open problems soon, and if HN
+     is one of them, then our project becomes a footnote for individual progress in AI assisted research."* **So**: the offer of item 483
+     is withdrawn; FS-113 and FS-101 stay where they are ranked; no job prices or opens them until he says so; a request for community
+     support on that backlog is his to make and is also on hold. FS-131 runs on as staffed (three slots). Not to be re-offered by a later
+     session.
