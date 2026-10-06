@@ -584,7 +584,84 @@ an arc of `F` missing `K` misses the closed arc, so it is in the cut whole; a pi
 theorem LocalStep.of_cutArcs {M : ArcMap k} {K : Set ℂ} {S : Set Arc} {P : ℂ} {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂)
     (hag : M.AgreesOff F K) (harcs : M.arcs = F.cutArcs P θ₁ θ₂ ∪ S) (hS : ∀ a ∈ S, a.carrier ⊆ K)
     (hK : ringArc P θ₁ θ₂ ⊆ K) : LocalStep F M K := by
-  sorry
+  have hπ := Real.pi_pos
+  have h2π : 0 < 2 * π := by positivity
+  have hturn : ∀ (t : ℝ) (m : ℤ), ringPt P (t + m * (2 * π)) = ringPt P t := fun t m => by
+    rw [ringPt, ringPt, show t + (m : ℝ) * (2 * π) = t + 2 * π * m by ring, e_add_int_mul]
+  refine ⟨hag, fun a ha hd => ?_, fun b hb hbF => ?_⟩
+  · rw [harcs]
+    left
+    by_cases hne : ∀ θa θb, a ≠ .circ P 1 θa θb
+    · exact Or.inl ⟨ha, hne⟩
+    · push Not at hne
+      obtain ⟨θa, θb, rfl⟩ := hne
+      obtain ⟨-, hab, -⟩ := F.nondegenerate _ ha
+      right
+      obtain ⟨m, hm⟩ : ∃ m : ℤ, m = ⌊(θa - θ₂) / (2 * π)⌋ := ⟨_, rfl⟩
+      have hm1 : (m : ℝ) * (2 * π) ≤ θa - θ₂ := by
+        have := Int.floor_le ((θa - θ₂) / (2 * π))
+        rw [← hm] at this
+        rwa [le_div_iff₀ h2π] at this
+      have hm2 : θa - θ₂ < ((m : ℝ) + 1) * (2 * π) := by
+        have := Int.lt_floor_add_one ((θa - θ₂) / (2 * π))
+        rw [← hm] at this
+        rwa [div_lt_iff₀ h2π] at this
+      have hlo : cutLo θ₂ θa m = θa := max_eq_left (by linarith)
+      have hhi : cutHi θ₁ θb m = θb := by
+        refine min_eq_left ?_
+        by_contra hlt
+        push Not at hlt
+        -- otherwise the arc holds a point of the closed arc, a point of `K`
+        have ht1 : max θa (θ₁ + ((m : ℝ) + 1) * (2 * π)) ≤ θb := max_le hab.le hlt.le
+        have ht2 : max θa (θ₁ + ((m : ℝ) + 1) * (2 * π)) ≤ θ₂ + ((m : ℝ) + 1) * (2 * π) :=
+          max_le (by linarith) (by linarith)
+        have ht3 : θ₁ + ((m : ℝ) + 1) * (2 * π) ≤ max θa (θ₁ + ((m : ℝ) + 1) * (2 * π)) := le_max_right _ _
+        have hmem : ringPt P (max θa (θ₁ + ((m : ℝ) + 1) * (2 * π))) ∈ (Arc.circ P 1 θa θb).carrier := by
+          rw [carrier_circ_one]
+          exact ⟨_, ⟨le_max_left _ _, ht1⟩, rfl⟩
+        have hK' : ringPt P (max θa (θ₁ + ((m : ℝ) + 1) * (2 * π))) ∈ K := by
+          have := hturn (max θa (θ₁ + ((m : ℝ) + 1) * (2 * π)) - ((m + 1 : ℤ) : ℝ) * (2 * π)) (m + 1)
+          rw [sub_add_cancel] at this
+          rw [this]
+          refine hK ⟨_, ⟨?_, ?_⟩, rfl⟩
+          · push_cast; linarith
+          · push_cast; linarith
+        exact Set.disjoint_left.mp hd hmem hK'
+      exact ⟨θa, θb, ha, m, by rw [hlo, hhi]; exact hab, by rw [hlo, hhi]⟩
+  · rw [harcs] at hb
+    rcases hb with hb | hb
+    · rcases hb with ⟨hb, -⟩ | ⟨θa, θb, ha, m, hlt, rfl⟩
+      · exact absurd hb hbF
+      · right
+        refine ⟨_, ha, ?_, ?_⟩
+        · have hne : cutLo θ₂ θa m ≠ θa ∨ cutHi θ₁ θb m ≠ θb := by
+            by_contra hcon
+            push Not at hcon
+            rw [hcon.1, hcon.2] at hbF
+            exact hbF ha
+          have hlo : θa ≤ cutLo θ₂ θa m := le_max_left _ _
+          have hhi : cutHi θ₁ θb m ≤ θb := min_le_left _ _
+          rcases hne with hne | hne
+          · have hlo' : cutLo θ₂ θa m = θ₂ + m * (2 * π) := by
+              rcases max_choice θa (θ₂ + m * (2 * π)) with h | h
+              · exact absurd h hne
+              · exact h
+            refine ⟨ringPt P θ₂, ?_, hK ⟨θ₂, ⟨h12.le, le_rfl⟩, rfl⟩⟩
+            rw [carrier_circ_one, ← hturn θ₂ m]
+            exact ⟨_, ⟨by rw [← hlo']; exact hlo, by rw [← hlo']; linarith⟩, rfl⟩
+          · have hhi' : cutHi θ₁ θb m = θ₁ + (m + 1) * (2 * π) := by
+              rcases min_choice θb (θ₁ + (m + 1) * (2 * π)) with h | h
+              · exact absurd h hne
+              · exact h
+            refine ⟨ringPt P θ₁, ?_, hK ⟨θ₁, ⟨le_rfl, h12.le⟩, rfl⟩⟩
+            have hθ₁ := hturn θ₁ (m + 1)
+            rw [carrier_circ_one, ← hθ₁]
+            refine ⟨_, ⟨?_, ?_⟩, rfl⟩
+            · push_cast; rw [← hhi']; linarith
+            · push_cast; rw [← hhi']; exact hhi
+        · rw [carrier_circ_one, carrier_circ_one]
+          exact image_mono (Icc_subset_Icc (le_max_left _ _) (min_le_left _ _))
+    · exact Or.inl (hS b hb)
 
 /-! ## The toward collar bend supplies the interface -/
 
