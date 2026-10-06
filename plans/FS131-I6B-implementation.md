@@ -151,8 +151,11 @@ circular arcs, a.e. a saturated family — **the closure-level form of `𝒫_k` 
 
 This contradicts one sentence of the planners' record, `plans/FS131-w6-kernel-plan.md` § 3.3: "The closure-level alternative (`x ∈ closure (S
 i) ∩ closure (S m)`, no ball) is strictly stronger and would make FS121-C1-SAT false at a vertex where colour `i` has a cusp." As a definition
-of `InP` the closure-level form is still stronger (more points are asked about), so `NoPar` would be weaker under it and `gmap_i` would need
-its points; nothing here proposes a change. What it does change: the "lemma owed" of § 3.3 (the equivalence of `InP` with the edge form, for
+of `InP` the closure-level form is stronger (more points are asked about), so `NoPar` — C121-NOPAR — would be a weaker hypothesis under it.
+And `gmap_i`'s proof, as it stands, reads of `hsep` only `hsep.1.1` and `hsep.1.2` (the two closures) as well: **no proof in this module
+reads the ball clause**, so FS121-C1-GMAP (i), (ii) and both clauses of FS121-C1-SAT would hold verbatim over the closure-level `𝒫_k`, with
+the weaker C121-NOPAR. Whether to restate is the planner's and the deriver's (the claim list's `𝒫_k` speaks of "every point of every edge");
+nothing is changed here. What the finding changes at once: the "lemma owed" of § 3.3 (the equivalence of `InP` with the edge form, for
 Jordan-arc maps) is not needed to apply FS121-C1-SAT at vertices, and FS116-O1-SATPIN's "saturated on a disc" has its bound lemma already
 (`SaturatedOn F.region (ball p ρ)` is `ArcMap.bound_of_saturatedOn` with `C = F.region`, `U = ball p ρ`).
 
@@ -199,7 +202,7 @@ Lean, last bullet): `MapEdge.isPreconnected_puncturedBall` (= `isPreconnected_ba
 
 *This job ran no gate (the brief: the wave's gate is the coordinator's), so no counts are drafted.*
 
-- **`LEDGER.md`, the row FS121-C1-SAT was filed under at its derivation (FS-121's rows 142–144), regraded when the wave's gate passes** —
+- **`LEDGER.md` row 143, and its § B line "FS121-C1-SAT | 143" (l. 1393), regraded when the wave's gate passes** —
   draft: "FS121-C1-SAT [kernel]: `sat_inP`, `sat_noPar` (`Proofs/HadwigerNelson/Plane/Saturated/MapColouring`), on the standard three axioms;
   wider: `ArcMap.bound_of_saturatedOn` (a family saturated on an open set; no neighbourhood free of other colours). Assumptions by name:
   `sat_noPar` takes C121-NOPAR as the hypothesis `NoPar 𝒞` (a named open statement, proved nowhere); `sat_inP` none. Inhabitant:
