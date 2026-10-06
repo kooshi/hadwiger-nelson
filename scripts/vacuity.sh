@@ -181,6 +181,9 @@ if [[ "${1:-}" == "--self-test" ]]; then
   expect VACUOUS planted_vacuous_normal   "WoodallNormal on the punctured disc, which puncturedThreeSectorDisc_not_woodallNormal refutes"
   expect_site GENERIC planted_generic_normal "WoodallNormal at a variable map: parametric"
   expect UNKNOWN planted_unknown_normal   "WoodallNormal on halfDisc, true but proved nowhere: the load-bearing half"
+  expect_site GENERIC planted_generic_stationary "StationarySet at a variable group: parametric (wave 10, FS131-L10A)"
+  expect_site WITNESSED planted_witnessed_stationary "StationarySet at ZMod 2, which StationarySet.parity inhabits"
+  expect UNKNOWN planted_unknown_stationary "StationarySet at ℤ, inhabited by a construction and by no closed declaration: the load-bearing half"
   silent planted_arrow_false              "a genuine refutation P → False over the empty carrier stays skipped"
 
   if [[ "${fails}" -gt 0 ]]; then
