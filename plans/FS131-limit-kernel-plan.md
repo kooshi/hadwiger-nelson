@@ -1183,6 +1183,9 @@ current at each saved stage (the last stage's receipt is the one to read).
   **`.not_isSite_of_rim_junction`**, **`.not_isSite_of_branches`**, **`.Near.not_isSite_of_chart`**, `.Near.exists_rim_mem_sector`,
   `.Near.exists_rim_mem_sector_before`, `.Near.move_not_mem_cleanKeep_Γ`, `.Near.move_Γ_cases`,
   **`.Near.RayConfig.exists_step`**, **`ArcMap.exists_rayStep`** (the first of the four cases; its statement as IR2 wrote it).
+- **Stage 25 — the assembly the cases share, SHAVE's case** (`Procedure`): `subset_connectedComponentIn_of_mem_closure` (namespace
+  `HadwigerNelson.Plane`), `ArcMap.mem_cleanKeep_interiorPts_of_const`, **`ArcMap.surgery_step`**, `ArcMap.Near.move_step`,
+  **`ArcMap.Near.exists_shaveStep_aux`**, **`ArcMap.exists_shaveStep`** (the second case; its statement as IR2 wrote it).
 
 ## Stage 22 — SAVED (FS131-IR3): the readback, the as-given build, IR2's axioms check re-run
 
@@ -1345,3 +1348,50 @@ for a point from which finitely many branches leave, with one concentric circle.
   `scratch/transplant24.py` (the script that placed it in `Procedure`).
 
 ## Stage 24 — SAVED (FS131-IR3)
+
+## Stage 25 — SAVED (FS131-IR3): SHAVE's case proved; the assembly the four cases share
+
+### 25.1 What was proved ([kernel]; `Procedure`, subsections "The assembly the four cases share" and "SHAVE's case")
+
+- **`surgery_step`** — the assembly, once for the four cases: a valid surgery at `v` of radius `ρ`, its new arcs in the closed disc
+  and its colouring `F`'s off it, creating no unit arc and adding no colour at `v`, whose cleaned map has no site and at most three
+  colours at the other points of the disc and a lower potential at `v`, gives the vertex step's conclusion (`cleanKeep_valid`,
+  `cleanKeep_isClean`, `surgery_cleanKeep_localStep`; `IsModification`'s colour clause off the disc by locality, at `v` by the
+  surgery's clause, elsewhere in the disc by the bound three). `Near.move_step` is the same for a `Near.move`. MERGE-RAY's
+  `RayConfig.exists_step` now ends in it (its statement unchanged).
+- **`Near.exists_shaveStep_aux`** and **`exists_shaveStep`** — SHAVE's case, as stated by IR2, **proved**. The count is § 20.2's
+  (`pot_lt_of_sectors` with the shaved horn): a sector of the cleaned map holds an interior point of the move
+  (`dense_interiorPts`); off the horn its chart sector lies in the sector; in the horn above the `σ`-arc, the upper piece
+  `hornSet v α σ κ₂ r`, a point of the germ above it and the flank sector are joined
+  (`subset_connectedComponentIn_of_mem_closure`), the germ's point being interior after cleaning because both sides carry `g` near
+  it (`mem_cleanKeep_interiorPts_of_const` on a ball cut by `0 < tanHeight σ`); below, the same with `h`.
+- The rim (`Near.not_isSite_of_chart` with the extra branch `(α, σ)` when `κ₁ < σ < κ₂`): at a germ other than the horn's lower one
+  the sector after it misses the horn and keeps its colour; at the horn's lower germ the sector before it does; **the `σ`-arc ends
+  on the rim** (a T-junction), and the dead branch is its continuation past the rim, interior to the horn outside the disc.
+
+### 25.2 The route, where it differs from § 20.2's (decisions of mine)
+
+- **`Moves`' two cut cases are not separated**, and neither `g ≠ c` nor `h ≠ c` is used: § 20.2 excluded the cuts by cleanness
+  (a flank of the horn's colour); the recolouring serves whatever the flank colours are, because the count reads the potential
+  and not `HasSectors v c n`. `exists_shaveStep` does not read its hypothesis `hn`.
+- **No declaration was added to `Moves`** (as Stage 24): `shaveArcs`, `shaveCol`, `Near.shave_hlc`,
+  `Near.shave_mem_interiorPts_iff` are public; validity and "no colour gained at `v`" are re-run from `exists_shave_recolour`'s
+  body (about 20 lines).
+
+### 25.3 The build, the receipt, the checks
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 6 modules rebuilt, 4 with warnings, all 8 warnings `declaration
+  uses 'sorry'`**: `Procedure` 3 (`exists_mergeStep` l. 1922, `exists_openStep` l. 2398, `exists_arcStep` l. 2468); `Terminal` 0; not
+  mine: `BaseDense` 3, `BendCollar` 1, `HexRing` 1. 8 min 58 s, exit 0 (`build/gate/build/20261006T054044Z-1332088.log`, which ends
+  "Build completed successfully (5792 jobs)"; driver log `data/fs131/ir/ir3/build-stage25.log`).
+- **Axioms** against that build (`data/fs131/ir/ir3/IR3Axioms25.lean` → `.out`, exit 0; `tools/fs131_ir_axsum.py` with
+  `IR3Axioms25-expect.txt`; `IR3Axioms25-summary.txt`, PASS): **33 records — 24 on the standard three or fewer, 9 through `sorryAx`,
+  exactly the nine expected, 0 other.** **`exists_shaveStep` and `exists_rayStep` depend on `[propext, Classical.choice,
+  Quot.sound]`.** **Control**: read with Stage 24's expectation (which lists `exists_shaveStep`), the summarizer FAILS naming it
+  (`IR3Axioms25-control.txt`).
+- **Statements**: `tools/fs131_ir_stmt_check.py 844435a5` (against Stage 24): PASS, 848 read, additions only
+  (`ir3/stmt-check-25.txt`). No `axiom`, no `native_decide`. `tools/check_architecture.py` PASS (`ir3/arch-stage25.txt`).
+- **Receipt**: six records more in the "FS131-IR3" block of `scripts/Axioms.lean` (23 in all).
+- Working files: `data/fs131/ir/ir3/scratch/Shave.lean`, `scratch/transplant25.py`.
+
+## Stage 25 — SAVED (FS131-IR3)

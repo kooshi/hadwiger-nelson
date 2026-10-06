@@ -70,6 +70,24 @@ namespace Near
 
 variable {v : ℂ}
 
+/-- **The vertex step from a `Near.move`** (`surgery_step` for MERGE-RAY's and SHAVE's construction). -/
+theorem move_step (hc : F.IsClean) {X : F.Near v} {ρ : ℝ} {h : X.Small ρ} {K : Set (Fin X.n)} {E : Set Arc}
+    {col' : ℂ → Fin k} {hE : ∀ a ∈ E, a.Nondegenerate} {hEf : E.Finite}
+    {hlc : ∀ x ∈ F.dom, x ∉ ⋃ a ∈ F.trimArcs v ρ ∪ X.newArcs ρ K E, a.carrier → ∀ᶠ y in 𝓝 x, col' y = col' x}
+    (hEin : ∀ a ∈ E, a.carrier ⊆ closedBall v ρ) (hcol : ∀ z ∉ closedBall v ρ, col' z = F.col z)
+    (hEu : ∀ a ∈ E, ¬ a.IsUnitArc) (hval : (X.move h K E col' hE hEf hlc).Valid)
+    (hself : (X.move h K E col' hE hEf hlc).coloursAt v ⊆ F.coloursAt v)
+    (hpts : ∀ x ∈ closedBall v ρ, x ≠ v → ¬ (X.move h K E col' hE hEf hlc).cleanKeep.IsSite x ∧
+      ((X.move h K E col' hE hEf hlc).cleanKeep.coloursAt x).ncard ≤ 3)
+    {m j : ℕ} (hpot : ∀ m' j', (X.move h K E col' hE hEf hlc).cleanKeep.HasDegree v m' →
+      (X.move h K E col' hE hEf hlc).cleanKeep.HasHornCount v j' → m' + j' < m + j) :
+    ∃ F' : ArcMap k, F'.Valid ∧ F'.IsClean ∧ LocalStep F F' (closedBall v ρ) ∧ F.IsModification F' ∧
+      (∃ m' j', m' + j' < m + j ∧ F'.HasDegree v m' ∧ F'.HasHornCount v j') ∧
+      F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F'.IsSite x :=
+  surgery_step (hv := X.mem_dom) (hρ := h.1) (hA := newArcs_nondegenerate h hE) (hAf := newArcs_finite hEf) (hlc := hlc) hc
+    (newArcs_subset_closedBall h hEin) hcol hval
+    (move_ringArcsWithin (h := h) (K := K) (col' := col') (hE := hE) (hEf := hEf) (hlc := hlc) hEu) hself hpts hpot
+
 /-- **The vertex step from SHAVE's recolouring** (FS110-N4-SHAVE's construction, cleaned): `Near.move` with every germ kept, the
 arc of curvature `σ` added and the colouring `shaveCol`, then `cleanKeep`. The count is `pot_lt_of_sectors` with the shaved horn:
 a sector of the cleaned map holds an interior point of the move; off the horn its chart sector lies in it; in the horn above the
@@ -332,7 +350,7 @@ theorem exists_shaveStep_aux (X : F.Near v) {ρ R : ℝ} (hs : X.Small ρ) (hRs 
       exact ⟨X.G.sector v r (BranchGerms.next i₀), hsecS _, hne _ hni, subset_connectedComponentIn_of_mem_closure hWo hUS
         (branchPt_mem_closure_hornSet_upper v α hσ₂' hhalf.1 hhalf.2 (hκh κ₂ hκ2))
         ⟨hupper hσ₂' _ hhalfρ, hbb κ₂⟩ (X.hC.isPreconnected r hr₀ _) (hsecW _ hni) hbq⟩
-  exact surgery_step hc (newArcs_subset_closedBall hs hEin) hcol hval (move_ringArcsWithin hEu) hself hpts
+  exact move_step hc hEin hcol hEu hval hself hpts
     (fun m' j' hm' hj' => pot_lt_of_sectors X.mem_dom hcount hdeg hhorn hm' hj')
 
 end Near
