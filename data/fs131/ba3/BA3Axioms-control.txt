@@ -1,0 +1,22 @@
+## control 1: the final print, expecting bend_away_part through sorryAx (must FAIL naming it as standard)
+records 19 (print commands 19): standard-three-or-fewer 19, through sorryAx 0, other 0
+THROUGH sorryAx:
+SORRY-EXPECTED-BUT-STANDARD HadwigerNelson.Plane.ArcMap.bend_away_part
+FAIL
+exit=1
+
+## control 2: the print of the tree one commit earlier (stage 8, map_R2 open), judged with no sorry expected (must FAIL naming five)
+records 13 (print commands 13): standard-three-or-fewer 8, through sorryAx 5, other 0
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend
+  HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2
+  HadwigerNelson.Plane.ArcMap.bend_away_gap
+  HadwigerNelson.Plane.ArcMap.bend_away_part
+  HadwigerNelson.Plane.ArcMap.bend_away_subdiv
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.bend_away_gap
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.bend_away_part
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.bend_away_subdiv
+FAIL
+exit=1
