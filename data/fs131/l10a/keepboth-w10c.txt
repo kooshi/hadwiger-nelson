@@ -1,0 +1,14 @@
+faithful: #print axioms lines 4046 = ours 4015 + theirs 3962 - base 3931; faults 0
+plant LOST: #print axioms lines 4045 = ours 4015 + theirs 3962 - base 3931; faults 2
+  LOST from theirs: '#print axioms HadwigerNelson.StandingFive.g_eta' (need 1, have 0)
+  COUNT #print axioms: have 4045, expected ours 4015 + theirs 3962 - base 3931 = 4046
+  plant LOST: fired
+plant TWICE: #print axioms lines 4047 = ours 4015 + theirs 3962 - base 3931; faults 2
+  COUNT #print axioms: have 4047, expected ours 4015 + theirs 3962 - base 3931 = 4046
+  TWICE HadwigerNelson.StandingFive.g_eta (2)
+  plant TWICE: fired
+plant MARKER: #print axioms lines 4046 = ours 4015 + theirs 3962 - base 3931; faults 1
+  MARKER '======='
+  plant MARKER: fired
+self-test: PASS
+exit=0
