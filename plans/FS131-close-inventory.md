@@ -4699,3 +4699,45 @@ reason by the close.*
      on a new branch `fs131-w10` from `main`. Alternative weighed: the second planning pass for E7's `F₀` and `F₁`. Why wave 10: it is the
      milestone's own remaining work — 111 rows stand in waves 6–10 — and the only wave that waits on nothing; `F₀` and `F₁` close gate items
      on theorems that already have hand models. Confidence: medium-high. In flight: 1 (L5) + 1 (MB2) + 1 (K10) = 3.
+
+474. **Wave 5 is on `main`** (FS131-L5, the landing; harness ≈ 578k by the task notice; record `plans/FS131-L5-landing.md` Stages 1–6 with
+     "Drafts for the front page (FS131-L5)"; report `data/fs131/reports/FS131-L5.md`; the gated commit `1351ebc2`, the landed tip
+     `ad611866`, a fast-forward, differing from the gated commit in `plans/` and `data/` alone). **What landed**: the termination procedure
+     (`exists_terminalMap`: every valid map of the plane has a terminal valid modification), `exists_red`, `exists_terminal` with its clauses
+     about terminal maps, the vertex step and the arc step, both collar bends (`bend_toward_collar`, `bend_away_part`), the density half
+     (`exists_preBend`, `n3_base`, `localDense`, `dense3`, `bv_l3`, `row134BaseUA`), the planar chain and Thomassen's theorem — 1,309
+     hand-written theorems new to `main`, each with an audit record. **The merge** of `origin/fs131-w5z` (`d4f04ff3`): one conflict,
+     keep-both; after it 0 `sorry` under `Proofs/` and the wave's seven heads on exactly the standard three. **The tidies** (rulings
+     457 (b), 465 (a)): the unread `hF` out of seven lemmas, `ringPt_ne_of_abs_sub_lt` removed, 26 stale lines; exactly those by script.
+     **The gate on `1351ebc2`**: build exit 0 with 0 warnings; `sorry` 0; doubled names `doubled=0` (23 generated) and its 15 controls;
+     axioms "OK — 5196 clean, 16 axiom-free, 4 imported, 5 declared purchase(s)", 5,221 records, 23 controls; vacuity
+     `declarations=12999 refutations-skipped=182 sites=1130`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=1093 unknown=2`,
+     `untelescoped=0`, 62 controls; architecture PASS; the guarded lint silent (14 linters); the notes check 193 notes, 0 CONFLICT. No new
+     site vacuous, stale or unknown; no baseline entry. One record was missing from the audit and is registered (`LocalSeq.limit_dom`, a
+     line beginning `@[simp] theorem`), found by reading the kernel's list of theorems against the audit. **My receipt**: `main` pulled to
+     `ad611866`, equal to `origin/main`; `git diff --name-only 1351ebc2 HEAD` names nothing outside `plans/` and `data/`; `sorry` under
+     `Proofs/` by the handoff's grep: 0; `data/fs131/l5/receipt-vacuity-final.log` and `receipt-dupnames-final.log` read at their totals
+     lines (as above); `scripts/gate_report.py axioms` and `vacuity` run by me on the saved logs against OPEN's landing's — after the filing
+     both read "match" for `CLAUDE.md` (clean, purchases and imported; 9 of 9 counts) and for the baseline's header; the axioms digest's
+     removed records are the three names RP1 made one (`HasDegree.eq`, `sq_norm_eq_re_im`, `sq_norm_re_im`). **Items**: generalizations —
+     seven lemmas hold for every map with the collar's fit, valid or not. Corrections owed — my brief's list of what `main` changed since
+     the branch had it (it omitted OL1's registrations and the filings; no file under `Proofs/`). Questions for the tooling lane — four
+     predicates the vacuity scan holds OUT have closed refutations in the library (`UnitPairsNull`, `MergeAvailable`, `RayAvailable`,
+     `ShaveAvailable`); `ArcMap.BaseCtx` is empty at every instance and held OUT with the reason recorded — whether it should carry
+     `VACUITY DECLARED:`; the scan reads a refutation as evidence only when every binder is instance-implicit. Tool defects — two
+     self-tests that cannot run where their plant's target is absent. Slips, the job's, each disclosed (a record added while the first gate
+     pass ran: the final pass, on a committed clean tree, is the evidence). Predictions scored — its own count of `declarations` and
+     `refutations-skipped`, written before the scan, met exactly.
+475. **The landing's filing, and rulings** (Keryx, 2026-10-06). (a) **Filed, verbatim from L5's drafts 1, 2 and 4**: `CLAUDE.md` § Trust
+     ledger ("5196 clean and 5 declared purchases, and 4 imported (and 16 axiom-free; 5,221 records at wave 5's landing, FS131-L5,
+     2026-10-06)") and § The gate (the two count lines); `tools/claude_md_fact_audit.py`'s `GATE_CHANGES` entry `(("3889", "5"), ("5196",
+     "5"))`. `tools/claude_md_fact_audit.py --base 2a753bf0`: 13 losses, every one OPEN's superseded count, date or job id (read one by
+     one) — the expected result; `--dupes` as before. (b) **Held for the milestone's filing**: L5's draft 5 (a `LEAN.md` sentence: every
+     hand-written theorem of a landing has an audit record, checked against the kernel's list) and draft 6 (the open gate items at this
+     landing, 62 theorems by name in `data/fs131/l5/open-gate-items.txt`: the four moves and the stuck family until the example maps land,
+     the outward bend with `exists_arcStep`, E7's four); the ledger regrades (rows 134–137's unit-arc and termination entries to [kernel]
+     with their assumptions); the Proof Atlas rebuilt locally. (c) **The two gate scripts in `main`'s diff** were rightly read as scripts,
+     no message needed. (d) **The vacuity scan's three questions** go to a tooling job after the example maps land; default until then:
+     the scan as it is. (e) **The gate has a new standing step from this landing on**: a landing reads the kernel's own list of the
+     library's theorems against the audit's records (L5's `tools/fs131_l5_records.py`), since a registration read from the source misses
+     declarations whose line does not begin with `theorem`. Confidence: high. (f) **Kooshi is notified by push.**
