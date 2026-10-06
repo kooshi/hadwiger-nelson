@@ -4579,3 +4579,38 @@ reason by the close.*
      pass, in `fs131-w5c`) and then one job — merge `origin/fs131-w5z`, the post-merge list, `main`, the gate. (d) **Slot → FS131-MA1**, the
      example maps' implementer A, launched 2026-10-06 on `fs131-wm` (brief of item 461 (a)). In flight: 1 (RP1) + 1 (T4) + 1 (MA1) = 3.
      Queue: wave 5's landing job at RP1's hand-back; implementer B; the second planning pass for `F₀`, `F₁`.
+
+466. **FS131-T4 done: the law of a doubled name measured, `main` scanned clean but for the known pair, and the gate's check built and watched
+     to fail three ways** (implementer; harness ≈ 336k by the task notice; record `plans/FS131-T4-dupnames.md` Stages 1–4, now on `main`;
+     report `data/fs131/reports/FS131-T4.md`; commits `709cc396`, `0c6e6f8a`, `f53b7bdf` on `fs131-t4`, merged into `main` — new files only,
+     nothing under `Proofs/`). **The experiment** (`data/fs131/t4/experiment-table.md`, 12 scenarios, 120 consumers, Lean v4.32.0): for a
+     theorem declared under one name and type by two modules, neither importing the other, the environment holds the proof of the module
+     imported last and `#print axioms` reads the list stored by the module imported first — never the same copy; a clean copy first and a
+     `sorry` copy last gives a clean print over `sorry`; the same over a declared axiom and over `native_decide`; a theorem over an axiom of
+     its name: the theorem is held in either order; the print of an imported theorem is the list stored when its own module was compiled.
+     "Hygiene, not soundness" holds by argument, one mind. **`main`'s library**: one doubled name, `conj_e`, both copies on the standard
+     three; 22 generated names, not failures; no audited print and no filed count affected. **The check**: `scripts/DupNames.lean`,
+     `scripts/dupnames.sh`, `scripts/dupnames-controls.txt`; `--self-test` 15 of 15; on `main`'s line exit 1 naming `conj_e` and both
+     modules; eight one-line faults planted in copies of the scan and the wrapper, each caught. **My receipt**: tip equals
+     `origin/fs131-t4`; `git diff` of `Proofs` and `Proofs.lean` against the branch point empty; `data/fs131/t4/logs/gate-on-main-line.log`
+     ends "dupnames: FAIL — 1 check(s) failed … doubled names: 1", naming `conj_e`; `self-test.log` ends "OK — all 15 controls behaved";
+     `mutations.log` ends "mutations: 8; every one caught"; **the key row read raw** (`data/fs131/t4/exp-out/S2/TopBA.out`): the environment's
+     `dup` uses `sorryAx`, the printed axioms are `[]`, and "'T4.S2.down' does not depend on any axioms". **Items**: generalizations — a
+     `Prop`-valued instance is a theorem to the kernel, so two siblings' instances merge in silence; a name two dependencies' modules share is
+     out of the scan's scope (not built). Question for the tooling lane — `scripts/Vacuity.lean`'s header says imported theorem bodies are not
+     retained; T4's scan read them by matching `.thmInfo v => v.value`: the blocker recorded there may be the accessor, not the data.
+     Corrections owed — item 443's "loud by design" (item 458); M7's drafted bullet, replaced. Slips, the job's, disclosed.
+467. **Rulings and filings on T4's held items, and its slot.** (a) **Filed, verbatim from its drafts 1–3**: `LEAN.md` § The gate (a new
+     bullet after the `#eval`/`example` bullet; one clause in the first paragraph) and § Searching — Lean (the naming rule). (b) **The landing
+     procedure's line** (its draft 4) is carried by wave 5's landing brief and by the handoff: after the build and before the axiom audit,
+     `scripts/slot.py --mem 16 --cpus 8 -- ./scripts/dupnames.sh`, then `--self-test`. (c) **The branch is merged into `main`** (`--no-ff`),
+     before any landing is in flight; the gate's new step fails on `main` until `conj_e` is one declaration, which wave 5's line carries
+     (FS131-RP1). (d) **The experiment's package with its planted `sorry` stays under `data/fs131/t4/exp/`**: "nothing with a `sorry` reaches
+     `main`" is the rule for `Proofs/`, which the gate's check reads; the package is the table's evidence. Alternative: drop it and keep the
+     table. Confidence: medium; it changes if a gate step is found to read `data/`. (e) **The self-test's planted library** moves from
+     `data/fs131/t4/plant/` to the gate's build directory — a one-line tidy (`PLANT=`), for the tidy stage. (f) **The dependency-only pass is
+     not built now**: it is the publication gate's question (`lean4checker`, the comparator), logged for it. Confidence: medium. (g) **The
+     briefing practice changes** (its draft 5, mine to own): two lines never state one lemma under one name; a line that needs another's
+     lemma takes it as a hypothesis or states it under its own name. Item 443's instruction was the opposite and was wrong. (h) **Slot →
+     FS131-MB1**, the example maps' implementer B, on a branch `fs131-wmb` cut from the skeleton `fe9d6d32`. In flight: 1 (RP1) + 1 (MA1) +
+     1 (MB1) = 3. Queue: wave 5's landing job at RP1's hand-back.
