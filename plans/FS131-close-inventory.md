@@ -7476,3 +7476,38 @@ reason by the close.*
      **A cost of mine**: two re-runs of the gate were caused by other lanes' tool files reaching `main` during a
      landing; a brief for a job that commits to `main` while a landing is in flight should name its tool paths as
      exempt to the landing beforehand, or keep its tools on a branch (to the handoff's procedures).
+590. **FS131-I6K done: wave 6's accumulation rows — all ten leaves proved as stated** (implementer, Opus; harness 513k and 95 minutes by the task notice; record `fs131-w6k`'s `plans/FS131-I6K-implementation.md`; report `data/fs131/reports/FS131-I6K.md`; five commits, tip `2a8ed9eb`; pushed, tree clean).
+     **Proved** (`Plane/Saturated/Accumulation`, with a new helper module `AccumulationAux`; built, not gated): on the
+     standard three — FS121-V5-RAY (`ray_subset_singularSet`, `rays_false`: curves in the interface's closure
+     converging to a segment put the segment in the singular set, so the singular set is not locally finite),
+     FS121-D4-HOLE (`frontier_hole_subset_singularSet`, `no_hole_of_singLocallyFinite`: with the singular set
+     locally finite no region has a hole), `cocompact_of_periods`; **over `Parallel`'s statements, proved on
+     another branch** — FS121-D2-SYM (`not_lra_of_windowsGE`, `windowsGE_of_cocompact`), -D2-THIN, -D2-PERFIN
+     (`finite_radii_of_cocompact`: the set of radii lies in `{{1}}`), -D2-EXT. **A generalization that matters to
+     item 576's deriver's question**: under a cocompact symmetry no arc of radius other than 1 lies in the
+     interface's closure at all (`no_arc_of_cocompact`), so SYM's in-particular clause and PERFIN read no
+     per-radius finiteness — the one-mind step INTRAD (iii) loses both consumers. Also: isometries of the plane
+     preserve Lebesgue measure and transport density, supports, boundaries and the interface set (for any later
+     row that reads a symmetry). **Three hypotheses unread** (`hlam`; `hx₀`, `hy`), held by `have _ :=`. **My
+     receipt**: tip equals `origin/fs131-w6k`, tree clean; outside `data/`, `plans/`, `tools/` it changed
+     `Accumulation` (691 lines added), the new `AccumulationAux` (555), `Proofs.lean`, `ARCHITECTURE.md`,
+     `scripts/Axioms.lean`; `sorry` in both modules: 0; its last build log ends "OK — 470 of 470 batches"; its
+     lint output reads "Linting passed for Proofs."; its last axioms print parsed by script — 52 records, 41 on
+     the standard three and 11 not: the ten it lists as resting on `Parallel`'s leaves and that module's
+     `out_family` itself, an open leaf on this branch; **the 22 heads the base declared in `Accumulation` are
+     textually unchanged, no `include` or `omit` added**. Not checked by me: the proofs beyond the build; its
+     elaborated statement check; its helpers' names against the two sibling branches (the join's doubled-name
+     check is that). **Prediction scored**: the planner's 19 days for the file, the three leaves "carrying the
+     price" included — one job; 1,280 lines, for which the calibration's line gives 476k against 513k measured.
+     **Credit**: the cocompact case closed by an argument that removes a dependence on a one-mind step; the local
+     obligation met with no chart; all five routes it registered before its first leaf stood. **Slips, the job's,
+     disclosed**: one name it stated already existed in the library (the build refused it); two helpers first
+     placed upstream of what they read. **Rulings.** (a) Its two appended docstring sentences ("As proved …")
+     are kept: they say what the proofs read. (b) The three unread hypotheses stay (ruling 419 (c)); the wider
+     forms go to the wave's errata. (c) **FS131-E9's brief carries the cocompact finding**: its second question
+     (finitely many pieces of each radius) is asked for what still reads it, which is no longer these rows.
+     (d) **Wave 6's third pass now stands on three sibling branches** (`fs131-w6l` 15 of 17, `fs131-w6z` 4 of 7,
+     `fs131-w6k` 10 of 10): they are joined by the centres' continuation job (FS131-I6Z2 merges the other two
+     first, so that its leaves stand on the proved parallels) — my trial of the three merges is owed before its
+     brief. (e) Its drafts are held for the filing. (f) **Slot → FS131-I8C** (wave 8's `SemiHub`, on `fs131-w8c`
+     at `6e0cf10d`), launched 2026-10-06; I8D takes the next. In flight: 3 (LT5, I7M, I8C).
