@@ -721,3 +721,31 @@ cleaned map's sectors at `v` (degree and horn count) and at every other point of
 N2-TAN bend as a child. `stuckRun_ne_univ` stays **M–H, one session** (M6's route), untouched.
 
 ## Stage 15 — SAVED (FS131-IR1)
+
+## Stage 16 — SAVED (FS131-IR1): cleaning a step — `cleanKeep`, `LocalStep.cleanKeep` (a finding about the route "a move, then `exists_clean`")
+
+**The finding.** KL1's routes for both steps end "then `exists_clean`". `exists_clean`'s statement gives no `LocalStep`, and its witness `ArcMap.clean`
+cannot be shown to be one: `clean` sets the colour function to `cleanCol` at **every** point, and at a point of two or more colours `cleanCol` is
+`Set.Nonempty.some` of the colours there — a choice that nothing ties to the colour function before the step — while `LocalStep.agreesOff`
+(`AgreesOff`, wave 4's definition) asks for equal colour functions at every point off the support, the points of arcs included. So
+`LocalStep F F'.clean U` is not provable for an arc of `F` far from `U` (not refutable either: the choice is opaque). No statement is wrong; the
+route needs a different witness.
+
+**The repair, [kernel]** (`Procedure`, section "Cleaning a step", about 170 lines; no statement of `Limit` touched):
+- `ArcMap.cleanKeep` — the clean map with the colour function changed only on the new interior (`dom \ essSet`) and kept elsewhere; the same
+  domain and arcs as `clean`, so `cleanKeep_Γ`, `cleanKeep_interiorPts` are `clean`'s; `cleanKeep_col`, `cleanKeep_col_of_not_mem`,
+  `cleanKeep_region` (the same colour classes), `coloursAt_cleanKeep`, `cleanKeep_valid`, `cleanKeep_isClean`, `cleanKeep_isModification`.
+- **`LocalStep.cleanKeep`** — a local step from a **clean** map on a **closed** support is still a local step after the new map is cleaned with
+  its colour kept. Off the support the new interior is the old one (the old map is clean) with its colours; an old arc missing the support is
+  kept as the same arc (`essParams_eq_params_of_disjoint`: each of its points keeps its two colours, so its one clean piece is itself —
+  `Arc.exists_params_eq_Icc`, `ordConnectedComponent_Icc`); a clean arc is a piece of an arc of the step.
+- `LocalStep.exists_clean` — the packaged form (clean, valid, a local step, a modification, the same colours, no new point of `Γ`).
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 6 modules rebuilt, 5 with warnings, all 8 warnings `declaration uses
+'sorry'`** (`Procedure` at the two steps only), 9 min 14 s, exit 0 (`build/gate/build/20261006T032147Z-527023.log`; driver log
+`data/fs131/ir/build-stage16.log`). **Axioms** (`data/fs131/ir/IRAxioms16.lean` → `.out`, `IRAxioms16-summary.txt`, PASS): 15 records — the 14
+new ones on the standard three or fewer, the control `exists_vertexStep` on `sorryAx`. `tools/check_architecture.py` PASS (`arch-stage16.txt`).
+Spec examples: `halfDiscMono.cleanKeep.Γ = ∅`; the adversary (on the essential set `cleanKeep` keeps the old colour function); cleaning a clean
+map is an idle step (`LocalStep.cleanKeep`'s hypotheses inhabited by `LocalStep.refl`).
+
+## Stage 16 — SAVED (FS131-IR1)

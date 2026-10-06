@@ -5760,6 +5760,22 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.ProcRun.eventually_not_todo
 #print axioms HadwigerNelson.Plane.const_treatPts
 
+-- FS131-IR1, stage 16: cleaning a step (`cleanKeep`, `LocalStep.cleanKeep`)
+#print axioms HadwigerNelson.Plane.Arc.exists_params_eq_Icc
+#print axioms HadwigerNelson.Plane.ordConnectedComponent_Icc
+#print axioms HadwigerNelson.Plane.ArcMap.cleanKeep_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.cleanKeep_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.cleanKeep_col
+#print axioms HadwigerNelson.Plane.ArcMap.cleanKeep_col_of_not_mem
+#print axioms HadwigerNelson.Plane.ArcMap.cleanKeep_region
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_cleanKeep
+#print axioms HadwigerNelson.Plane.ArcMap.cleanKeep_valid
+#print axioms HadwigerNelson.Plane.ArcMap.cleanKeep_isClean
+#print axioms HadwigerNelson.Plane.ArcMap.cleanKeep_isModification
+#print axioms HadwigerNelson.Plane.ArcMap.essParams_eq_params_of_disjoint
+#print axioms HadwigerNelson.Plane.ArcMap.LocalStep.cleanKeep
+#print axioms HadwigerNelson.Plane.ArcMap.LocalStep.exists_clean
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
