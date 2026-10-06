@@ -133,7 +133,7 @@ The gate's recorded state on `main`, which your counts are reconciled against:
    and the last landing's record for the gate's procedure (`/home/kooshi/source/lean-dir/plans/FS131-L6A-landing.md`, its gate and
    landing stages). Build the branch once as given (no `sorry` anywhere at `248f8f4f`). Open your record. Commit and push.
 2. **The merges**, each its own commit, each trialled before it is made and checked before the next. (i) `git merge origin/main` (at
-   `3c9ebe0e` when this was written: wave 6's first half and the filing). My trial on your base conflicts in `scripts/Axioms.lean` only —
+   `a17694cf` when this was written: wave 6's first half and the filing). My trial on your base conflicts in `scripts/Axioms.lean` only —
    adjacent additions, keep every side. (ii) `git merge origin/fs131-wf1` (at `a61f0d14`): against `main` alone it is clean; against your
    base it conflicts in `ARCHITECTURE.md` and `scripts/Axioms.lean`, where the planner added the new import's row and declaration beside
    the ones this branch removes. The resolution is the joined state, not a side: Falconer's `declareImport` line and its row in

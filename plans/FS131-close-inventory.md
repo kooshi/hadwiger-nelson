@@ -6848,3 +6848,43 @@ reason by the close.*
      launch**: `doubleTip`'s plan becomes a read-back of that proof and of the entries' reasons. (d) Announced as a
      result only when its saved stage carries it (item 526). Reply sent, one message. A generalization for the
      wave's errata (FS116-V6-HUG, FS129-MR1-DOUBLETIP), held.
+564. **FS131-I7A done at its Stage 3: route T's count is proved — nineteen leaves and two models; four of the nineteen were false as the skeleton stated them, repaired as ruled; `anchor` not started** (implementer, Opus; harness 451k and 60 minutes by the task notice; record `fs131-w7a`'s `plans/FS131-I7A-implementation.md`; report `data/fs131/reports/FS131-I7A.md`; four commits, tip `5777e8e7`; pushed, tree clean).
+     **Proved on the standard three** (`Plane/RouteT/Count`, 263 lines at the base, 1,218 now): the tile identity, the
+     count polynomial, **`five_count` — no five-colour count data on a nonempty combinatorial map of Euler
+     characteristic at most 0** (FS114-N2-FIVE), `room` (FS114-N114-ROOM), `ends_identity` and `slack` (FS114-N2-ENDS),
+     `joint_first`, `kill`, `joint` (FS114-N3-JOINT), `mu_eq_zero_iff`. **Models, by the kernel's evaluation, no
+     native evaluation**: `torusGrid n m` (the square grid on a torus, Euler characteristic 0, every `n`, `m`),
+     `grid9 : CountData (torusGrid 3 3) 9`, `grid15 : CountData (torusGrid 4 4) 15` — the plan's two hand grids hold
+     in every field. **The defect** (item 556, now with its evidence): `card_edgeNbrs`, `card_vertNbrs`, `deg_le`,
+     `count_poly` named no field of the section variable `C`, so the kernel's statements took no count data and each
+     was false of `oneFaceTorus`; repaired with `include C in`, a docstring clause each. **What none of it says**:
+     anything about an `ArcMap` — the passage from a doubly periodic valid map to count data is not held, and the
+     docstrings no longer say "a torus map". **No `CountData 6` on a map of characteristic 0 is held**: the six
+     theorems at six colours have no inhabitant, and say so. **My receipt**: tip equals `origin/fs131-w7a`, tree
+     clean; outside `data/`, `plans/`, `tools/` it changed `Count.lean` (1,039 lines added) and `scripts/Axioms.lean`
+     and nothing else; `sorry` by the handoff's grep: `Count` 0, `Rainbow` 1 (the unstarted `anchor`); its last real
+     build log ends "OK — 467 of 467 batches, 2 module(s) rebuilt", `EXIT=0`, no warning but the one `sorry`; both
+     axioms prints parsed by script — 42 and 50 records, none outside the standard three but the control `anchor`,
+     which shows `sorryAx`; **the 37 heads the base declared in `Count` are textually unchanged at the tip (by
+     script), with `include C in` above the four ruled leaves and one helper, and seventeen `omit` lines**; its
+     defect log shows the kernel's `count_poly` at the base with no `C`; its elaborated statement check's log ends
+     "RESULT: PASS (text and elaborated)". Not checked by me: the proofs beyond the build; its check's code and
+     controls; the grids' fields. **Predictions scored**: the plan priced `Count` at 200–250k tokens — 451k; the
+     calibration's line `311k + 129 per line` gives 445k for its 1,039 lines. **Credit**: the defect found at the
+     readback and shown false by a kernel-checked counterexample before a line was proved; **a statement check that
+     compares elaborated signatures, with controls** (`tools/fs131_i7a_stmt_check.py`) — the instrument item 406 (c)
+     asked for; two routes shorter than the plan's. **Slips, the job's, disclosed**: three in its checks' first runs,
+     each said in the record. **Rulings.** (a) **`Rainbow` may import `Plane.ValidMap.Pushforward` and
+     `Plane.ValidMap.Contact`** for `anchor` (with `ARCHITECTURE.md`'s row, `check_architecture` exit 0).
+     Alternative: re-derive the three lemmas. Why not: a lemma is cited, never restated. Confidence: high.
+     (b) **`anchor` rides as the first leaf of wave 7's next implementer** (FS131-I7L, `FourColour/Local`, whose
+     docstring cites it). (c) `joint`'s unread `hw0` stays (ruling 419 (c)); the wider form is for the wave's
+     errata. (d) The `omit` line on the planner's proved `mu_nonneg` is ratified: its leaf lost the instance, and the
+     statement is wider only. (e) **The search request is queued** (`plans/SEARCH-QUEUE.md` line 8): a six-colour
+     count on a map of characteristic 0 — a model, or the six theorems are empty on combinatorial maps. (f)
+     **`fs131-w7a` is merged into wave 7's line by the wave's third planner as its first act** (my trial of
+     `origin/fs131-w7a` into `origin/fs131-w7` conflicts in `scripts/Axioms.lean` only), with `ARCHITECTURE.md`'s
+     stale row for `Count`. (g) **Its statement checker becomes the milestone's shared one** at wave 7's landing or
+     the tidy job, whichever is first; until then a brief may point at it on its branch. (h) Its drafts (ledger
+     lines for five rows, a `LEAN.md` bullet, FS-117's stub lines) are held for the filing. (i) **Slot →
+     FS131-L10B** (wave 10's second landing), launched 2026-10-06. In flight: 3 (K6d, I8A, L10B).
