@@ -144,13 +144,34 @@ structure AwayBend (F M : ArcMap k) (h : ℂ ≃ₜ ℂ) (K : Set ℂ) (P : ℂ)
   /-- All but finitely many interior angles off the radius-2 contacts are bent. -/
   rest : {θ | θ ∈ Ioo a b ∧ ringPt P θ ∉ M.region c ∧ P + 2 * e θ ∉ closure (F.region c)}.Finite
 
-/-- **The idle bend** over a piece all of whose interior angles are radius-2 contacts: `M = F`, `h = id`, `K = ∅`. **Open — `sorry`**
-(plan § 3, child D1; short: every field is `rfl`-like, `rest` is empty by `hC`). Inhabitant of the hypotheses: none named in Lean — an
-(R2) witness at a ring arc of a valid map is the open gate item of `BendStep`'s header (ruling 427 (d)). -/
-theorem AwayBend.idle (hF : F.Valid) {P : ℂ} {a b : ℝ} {c c' : Fin k} (hA : F.IsRingArc P a b c c')
-    (hC : ∀ θ ∈ Ioo a b, P + 2 * e θ ∈ closure (F.region c)) {ε : ℝ} (hε : 0 < ε) :
-    AwayBend F F (Homeomorph.refl ℂ) ∅ P a b c ε := by
-  sorry
+/-- **The idle bend** over a piece all of whose interior angles are radius-2 contacts: `M = F`, `h = id`, `K = ∅` (plan § 3, child
+D1: every field is `rfl`-like, `rest` is empty by `hC`). It reads neither a ring arc nor `0 < ε` (inventory ruling 446 (b)).
+Inhabitant of the hypotheses: none named in Lean — an (R2) witness at a ring arc of a valid map is the open gate item of `BendStep`'s
+header (ruling 427 (d)). -/
+theorem AwayBend.idle (hF : F.Valid) {P : ℂ} {a b : ℝ} {c : Fin k}
+    (hC : ∀ θ ∈ Ioo a b, P + 2 * e θ ∈ closure (F.region c)) {ε : ℝ} :
+    AwayBend F F (Homeomorph.refl ℂ) ∅ P a b c ε where
+  valid := hF
+  compact := isCompact_empty
+  thick := empty_subset _
+  free := fun _ h => h.2.elim
+  ring_K := fun _ h => h.1.elim
+  step := LocalStep.refl F ∅
+  fix_off := fun _ _ => rfl
+  maps := fun _ h => h.elim
+  fix_Γ := fun _ _ _ => rfl
+  interior := fun _ => ⟨Iff.rfl, fun _ => rfl⟩
+  colours := fun _ => rfl
+  degree := fun _ _ => Iff.rfl
+  repeated := fun _ => Iff.rfl
+  horn := fun _ j h => ⟨j, le_rfl, h⟩
+  within := fun _ _ h => h
+  r1 := fun _ _ _ _ _ h => h
+  r2 := fun _ _ _ _ _ h _ => h
+  bent := fun _ _ => Or.inl rfl
+  rest := by
+    convert Set.finite_empty (α := ℝ)
+    exact Set.eq_empty_of_forall_notMem fun θ hθ => hθ.2.2 (hC θ hθ.1)
 
 /-- **What the next piece reads of a bent map** (plan § 3, child D2): after a bend over `[a, b]` within `ε ≤ 1/2`, the piece `(b, c₂)` of
 a ring arc `r([a, c₂])` of `F` is a ring arc of `M` with the same sides, the inner colour is still absent at `P`, `Γ_M` is `ω(P)` alone

@@ -309,7 +309,7 @@ theorem bend_away_subdiv {C : Set ℝ} {P : ℂ} {c c' : Fin k} {a b : ℝ} (hs 
   induction hs with
   | @contact a₀ b₀ hab hC =>
     intro F hF _ hA _ _ hC' ε hε _
-    exact ⟨F, Homeomorph.refl ℂ, ∅, AwayBend.idle hF hA (fun θ hθ => (hC' θ).mpr (hC hθ)) hε⟩
+    exact ⟨F, Homeomorph.refl ℂ, ∅, AwayBend.idle hF (fun θ hθ => (hC' θ).mpr (hC hθ))⟩
   | @gap a₀ b₀ hab hC =>
     intro F hF hP hA hin hfree hC' ε hε _
     exact bend_away_gap hF hA hin (by rw [show F.dom = univ from hP]; exact subset_univ _) hfree
