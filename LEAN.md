@@ -124,6 +124,12 @@ the `.olean` would. Settle every hand-written module before starting a long gene
   transfer to a bare `List.range` re-evaluated in a loop, which the kernel's cache absorbs; hoisting it is still the honest shape. A
   rule you are obeying is still a claim, and it is measured before it is written down. A `Nat` literal costs about 2.3 KB of olean
   against about 145 bytes per plain literal node, so pack many values into few big `Nat`s.
+- **A closed `Nat` term rewritten by a lemma stated at other instances than its own is evaluated by the kernel.** `0 + S` with `S` a
+  closed sum of 16,383 register states, rewritten by Mathlib's `zero_add`: elaboration succeeds, the kernel runs 173 s to
+  `deterministic timeout`, and passes 8 GiB in 27 s; with one variable free in `S`, or with core's `Nat.zero_add` on the closed term,
+  2 s (`data/fs131/i10e/lean/closed-term/`, on branch `fs131-w10e` until wave 10's second landing). State the lemma that does the algebra with the term's parameters free and instantiate it
+  last (`Floor128.pass_class`, `class_le`); a `(kernel) deterministic timeout` is a memory event too, so bisect one under a slot.
+  (Measured by FS131-I10E; the mechanism is its reading, one mind, not checked against the kernel's source.)
 - **A `∀ x ∈ l, P x` under `decide` costs an order of magnitude more than the same check as a `Bool`** (31.9 GB and a timeout against
   3.5 GB and 5 s on 778 pairs). State list checks through `List.all` and recover the per-element form with `List.all_eq_true`.
 - **A numeral at an unsimplified type index is paid per numeral, at elaboration, even in a definition with no proof.** A 48-point

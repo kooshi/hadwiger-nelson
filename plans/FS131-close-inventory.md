@@ -6201,3 +6201,46 @@ reason by the close.*
      item 3 — a row is stated at the class its argument reads. Confidence: high. The third planner's brief carries the
      fact (`mk-k10c.py`; gate exit 0), so a consumer it states over the lemma asks for nothing the lemma does not read.
      No reply sent: it asks none.
+
+543. **FS131-I10E done: the target at 128 needs eight colours, in the kernel with no outside theorem — the one leaf proved as
+     stated; with FS131-I10D's, the finite-target floor at seven now rests on Weil's bound alone** (implementer, Opus;
+     harness 424k and 58 minutes by the task notice; record `fs131-w10e`'s `plans/FS131-I10E-implementation.md`; report
+     `data/fs131/reports/FS131-I10E.md`; commits `8e5b85ff`, `aa6e0715`, `1148c21d`, `d4adcd40`; pushed, tree clean).
+     **Proved**: `charSum_128_ge` — in every field of `128²` elements every non-trivial additive character sums to real
+     part at least `−19` over the solutions of `u^129 = 1`; so the planner's `targetFloor_eight_128 : TargetFloor 8 128`
+     and `targetFloor_seven_128` stand on proved leaves, and on this branch `standingFloor_seven` and
+     `standingFloor_five` print the standard three, over the hypothesis `KloostermanBound` alone. The floor is run in
+     the file at a model of every hypothesis (`GaloisField 2 14` with the 128-th power map). Forty new theorems and one
+     definition, the bridge from the certificate: a root of the certificate's polynomial in every such field with no
+     splitting field; the basis read off a shift register's orbit (period exactly 16,383), not off the two Bézout
+     identities, which no proof now reads. **Not in the kernel, not claimed**: the exact spectrum and that `−19` is
+     attained ([tools]). **My receipt**: tip `d4adcd40` equals `origin/fs131-w10e`, tree clean; outside `data/`,
+     `plans/`, `tools/` it changed two files, `Arith/Floor128.lean` and `scripts/Axioms.lean` — inside its touches; the
+     last real build's full log (`build/gate/build/20261006T164609Z-1488605.log`, 3 modules rebuilt) ends "Build
+     completed successfully (5793 jobs)", 84 warnings, all `declaration uses sorry` in five other jobs' files, none in
+     `Floor128`; `sorry` in `Floor128` by the handoff's grep: 0; no `axiom`, no `native_decide` (ten `decide +kernel`
+     lines); `data/fs131/i10e/logs/axioms-all.log` parsed by script — 47 records, 45 within the standard three, the two
+     with `sorryAx` its controls (`usable_card_ge`, and `seven_le_localBound_of_kloosterman` over `StandingFive`'s
+     leaves, proved on `main`); `charSum_128_ge`, `targetFloor_eight_128`, `standingFloor_seven` each read
+     `[propext, Classical.choice, Quot.sound]`; the seventeen declarations of `Floor128` at `a14f9ab0` compared head by
+     head — none changed, forty added; `charSum_128_ge`'s statement read. The harness flagged that its automatic
+     review of this job's actions was unavailable; **the file list above is my check of what it touched**. Not checked
+     by me: the 543 added lines beyond the build; its three scratch measurements. **A kernel finding, measured**: a
+     closed `Nat` term rewritten by a lemma stated at other instances than its own is evaluated by the kernel (173 s to
+     a timeout and 8 GiB in 27 s, against 2 s) — **filed** in `LEAN.md` § The kernel's cost model from its draft, the
+     mechanism marked as its reading. **Prediction scored**: 486 lines against the plan's 520, 424k tokens against 300k
+     — one more pair for item 541, on its line. **Slips, the job's, disclosed**: three elaborations outside the memory
+     slot ran into that blow-up before it knew the cause; nothing lost. **Credit**: a certified bridge with no splitting
+     field and no minimal polynomial, the floor run at an actual field, and the kernel's cost measured and explained
+     instead of worked around. **Rulings.** (a) **The forty-one new statements are read back by the third planner**
+     (those a reader of the floor would cite); (b) **the two Bézout identities are kept or dropped by that planner,
+     with its reason** — alternative, keep by default: they cost under a second and the docstring says nothing reads
+     them; confidence either way: low stakes. (c) **The architecture cell for `Floor128`'s new import is made by the
+     third planner with its merge** (the file is in its touches, not the implementer's). Alternative: resume the
+     implementer for one line. Why not: a resume bills its whole context for a cell another job is about to touch.
+     (d) **The floor at six for the target with 64 elements** (the same bridge with constants made parameters) is the
+     third planner's to price in lines and to state if it judges it a row: the theory's window names that target.
+     (e) **The third planner's brief now opens with two merges** — `origin/main`, then `d4adcd40` — so its import's
+     consumers print the standard three and the import and nothing else; regenerated with both branches' tips
+     (`mk-k10c.py fs131-w10d=a14f9ab0 fs131-w10e=d4adcd40`; gate exit 0). (f) **Slot → FS131-K10c**, launched
+     2026-10-06. In flight: 1 (I6E) + 1 (I10F) + 1 (K10c) = 3.
