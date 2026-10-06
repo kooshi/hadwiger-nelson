@@ -1,0 +1,13 @@
+HEAD=3b2e9848cd30f89ce937cf31e111e45276898ea0  2026-10-06T20:48:40Z
+ancestor of HEAD: fd855acb6afd7c3a446f6e977e6ce66d1818fe2c
+ancestor of HEAD: 248f8f4f
+ancestor of HEAD: a61f0d14
+ancestor of HEAD: 615c715c
+ancestor of HEAD: f0cc3018
+ancestor of HEAD: e80221d3
+git diff --name-only f0cc3018 HEAD outside plans/ and data/:
+(end)
+tracked files modified:
+(end)
+sorry, narrow pattern, lines: 0
+third pass's row modules present: 0

@@ -511,3 +511,230 @@ quote, read here once more on the joined tree from the kernel's signatures, with
 - What none of these is: a new value or bound of `χ(ℝ²)` or of any field's plane; a proof of Weil's bound.
 
 ## Stage 5 — SAVED (FS131-L10B)
+
+## Stage 6 — SAVED (FS131-L10B): the landing — `main` fast-forwarded to `3b2e9848`
+
+`origin/main` had moved after the gated merge, from `615c715c` to `fd855acb` — eleven commits; `data/fs131/l10b/main-since-gate.txt`:
+nine paths under `data/`, two under `plans/`, **nothing else**, so by the brief's item 7 the gate was not run again. Merged as
+`3b2e9848` (`git merge --no-ff`, by hash, no conflict; the index checked, `mergeindex-main2.txt`: 11 paths, none changed by both
+sides, each taken whole from `main`). Checked before the push, at `3b2e9848` (`data/fs131/l10b/pre-push.txt`): `origin/main`
+(`fd855acb`) an ancestor of `HEAD`; the branch as given (`248f8f4f`), `fs131-wf1`'s tip (`a61f0d14`), the first merge's `main`
+(`615c715c`), the first pass's commit (`e80221d3`) and the gated commit (`f0cc3018`) ancestors of `HEAD` — no line was rewritten;
+`git diff --name-only f0cc3018 HEAD -- . ':!plans' ':!data'` names **nothing** — the gate's inputs are the gated commit's; no
+tracked file modified; `sorry` under `Proofs/` by the gate's narrow pattern: 0; none of the third pass's three row modules is in
+the tree. **`git push origin HEAD:main`: `fd855acb..3b2e9848`, a fast-forward** (`data/fs131/l10b/push-main.txt`); after it
+`origin/main` = `origin/fs131-w10m` = `3b2e9848`. No background process is left running: every build and pass ran under the slot
+and exited.
+
+**What is on `main` now**: wave 10's second pass — the eleven new modules of `Arith/` and the import's module among them — and
+`Plane/MetricalBoundary` with Falconer's lemma proved: 160 hand-written theorems, 0 `sorry`, each with one audit record, 152
+within the standard three and 8 on the standard three and `StandingFive.kloosterman_bound`; **one declared outside axiom**; the
+ruled tidies; the scan's entry in `scripts/Vacuity.lean` and the baseline header's count; the audit's controls at the joined
+state; the planners', the implementers' and this job's records, tools and logs through Stage 5. **What `main` does not hold**:
+this stage, the drafts below, the final lists and the report — they are on `fs131-w10m` after `3b2e9848`, under `plans/` and
+`data/` alone; the brief gives this job one push to `main`, and it was the landing's. **What `main`'s front page does not say
+yet**: `CLAUDE.md` § Trust ledger and § The gate hold the last landing's counts until drafts 1 and 2 are filed; both gates'
+digests flag them STALE and name the new numbers.
+
+## Stage 6 — SAVED (FS131-L10B)
+
+## Drafts for the front page (FS131-L10B)
+
+The gated commit is `f0cc3018`; the landed tip differs from it in `plans/` and `data/` alone (Stage 6). The saved gate logs are in this
+worktree under `build/gate/`; the copies are committed under `data/fs131/l10b/`: `receipt-axioms-final.log`,
+`receipt-vacuity-final.log`, `receipt-dupnames-final.log`, the three self-tests' (`receipt-<gate>-self-test-final.log`), and the
+full builds `build-tidies-full.log`, `build-binder-full.log`. To re-read: `python3 scripts/gate_report.py axioms
+data/fs131/l10b/receipt-axioms-final.log data/fs131/l6a/receipt-axioms-first.log CLAUDE.md` and `python3 scripts/gate_report.py
+vacuity data/fs131/l10b/receipt-vacuity-final.log data/fs131/l6a/receipt-vacuity-first.log scripts/vacuity-baseline.txt CLAUDE.md`.
+
+**1. `CLAUDE.md` § Trust ledger** — replaces "the current audit reads 6148 clean and 5 declared purchases, and 4 imported (and 17
+axiom-free; 6,174 records at wave 6's first landing, FS131-L6A, 2026-10-06)". From `axioms-final.log` l. 3 ("audited: 6334 records —
+6304 clean on the standard axioms, 17 axiom-free, 8 imported (resting on a declared outside theorem), 5 declared purchase(s)"):
+
+> the current audit reads 6304 clean and 5 declared purchases, and 8 imported (and 17 axiom-free; 6,334 records at wave 10's second
+> landing, FS131-L10B, 2026-10-06)
+
+and, after the sentence's clause "an imported record rests on a declared outside theorem (`LEAN.md` § Trust ledger)", one new
+sentence (from the same log, l. 16: "declared imports (1): HadwigerNelson.StandingFive.kloosterman_bound"; l. 26: "library axioms
+other than native auxiliaries (1)"):
+
+> The library declares one outside axiom, `StandingFive.kloosterman_bound` — Weil's bound for Kloosterman sums, `[Weil1948]`
+> p. 207, read against its page by two readers — and the eight imported records are the theorems that rest on it; its first
+> import, `[Falconer1981]` Lemma 2 (i), is a theorem since FS131-IF1.
+
+**The imported count is of records, not of axioms**: 8 records, 1 axiom. Against `main`: clean 6148 → 6304 (+156: Falconer's four
+moved from IMPORTED, and 152 new records), imported 4 → 8 (−4 on Falconer's lemma, +8 on Weil's bound), axiom-free 17, purchases
+5, records 6174 → 6334 (+160).
+
+**2. `CLAUDE.md` § The gate**, the two count lines — replace "`declarations=14299 refutations-skipped=199 sites=1269`, `vacuous=0
+stale=0 declared=3 witnessed=38 generic=1226 unknown=2`" by (from `vacuity-final.log`, "scanned:" and "sites:"):
+
+> `declarations=14501 refutations-skipped=199 sites=1269`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1226 unknown=2`.
+
+Only `declarations` moves (+202, the twelve new modules). The baseline's two entries are unchanged.
+
+**3. `tools/claude_md_fact_audit.py`, `GATE_CHANGES`** — one entry after the last:
+
+```
+    (("6148", "5"), ("6304", "5")): "FS-131, wave 10's second landing (FS131-L10B; copy data/fs131/l10b/receipt-axioms-final.log, gated commit f0cc3018): 6,334 records, 6,304 clean, 17 axiom-free, 8 imported, 5 purchases",
+```
+
+**4. `LEAN.md`.**
+- § Assumptions, after item 2 of "An imported theorem carries four things" (the planner's § 16.7, ruling 555 (e)): "State the
+  axiom in the paper's own form and derive the form the library uses: the translation is then kernel-checked and the read-back is
+  symbol against symbol (`StandingFive.kloosterman_bound`, with `kloostermanBound_of_ringChar_ne_two` and
+  `kloosterman_page_of_kloostermanBound`)."
+- § The kernel's cost model, the bullet on a closed `Nat` term: delete ", on branch `fs131-w10e` until wave 10's second landing" —
+  `data/fs131/i10e/lean/closed-term/` is on `main` with this landing.
+- § Searching — Lean, after the bullet "A section `variable` enters a theorem only if …": "`data/fs131/l10b/kernel-sigs.lean` with
+  `tools/fs131_l10b_kernelsig.py` is that reading for a list of modules: the binders of each stored type against the file's own
+  signature and every `variable` in scope (FS131-L10B)." And FS131-IF1's `ENNReal` bullet (its Drafts item 6), unchanged.
+- § The gate: the counts it quotes ("23 planted faults", "sixty-five controls", "fifteen controls") are unchanged.
+
+**5. `BIBLIOGRAPHY.md`** (rows by their keys; line numbers on `main` today).
+- **`[Weil1948]`** (l. 165), from the planner's § 16.7, corrected for the landing: read status "read: pp. 204–207 (FS131-K10c,
+  2026-10-06; pp. 206–207 at 300 dpi), read back against the Lean statement in `plans/FS131-w10-kernel-plan.md` Stage 12; the
+  displayed sentence read again by the coordinator (inventory item 554)". Replace "It is the import ruled for FS-131's floor …"
+  by "**It is imported**: `StandingFive.kloosterman_bound` (`Arith/WeilKloosterman`), on `main` since FS131-L10B — the second
+  display of p. 207 in the page's form, characteristic not 2; the library's one outside axiom, with eight theorems resting on
+  it". Add: "a slip in print on p. 206: `ω(1 + x₁T + …) = −ψ(x₁)`, read `ψ(−x₁)`; it does not touch the displayed bound". And
+  "`> 5` for `p ≥ 62`" is `targetFloor_six_weil` [kernel over the import] — **as a statement about the norm-one Cayley graph
+  of `𝔽_{p²}`**, not yet about the plane `UD(𝔽_p, 2)` (no declaration links the two).
+- **`[MMST1996]`** (l. 158), the planner's § 15.1 sentence (ruling 538 (a), met): "Theorem 3 (p. 231) at `n = 2` holds exactly
+  when `a ≠ 0` or `b` is anisotropic (`circle_sum_le_weil`, [kernel] over the import `[Weil1948]`), and fails at `a = 0`, `b ≠ 0`
+  isotropic, `q ≥ 9`, where the sum is `q − 1` (`−1` a square) (`circle_sum_zero_of_isotropic`, `two_sqrt_lt_circle_sum_zero`,
+  [kernel], no axiom)"; and its "verified numerically here" for (11) at `n = 2` becomes "`circle_sum_eq_kloosterman` [kernel]".
+- **`[Falconer1981]`** (l. 171) and **the Croft debt row** (l. 884): FS131-IF1's Drafts item 5, word for word; with the join its
+  first sentence stays true — the lemma "is no longer assumed" — and the library is not axiom-free: say "the library's one
+  remaining import is `[Weil1948]`'s" where IF1's other drafts say "the library declares no axiom".
+- No new row: nothing was read by this job; the planner's and IF1's reading statuses are theirs.
+
+**6. The named hypotheses each landed theorem rests on, by name** — written so the gate's assumptions step (FS131-T5's, landing
+after this) can declare from it. From the kernel's binders (`kernel-sigs-final.out`: every `Prop` binder whose type mentions a
+former below), not from the text.
+
+| hypothesis (full name, or theorem and binder) | kind | source | theorems of this landing that take it |
+|---|---|---|---|
+| `HadwigerNelson.StandingFive.KloostermanBound` (a named former, `Arith/FloorPlanes`) | an outside theorem — **and now also provable from the declared import at characteristic not 2** (`kloostermanBound_of_ringChar_ne_two`), so for T5's step: the axiom `StandingFive.kloosterman_bound` is the import (`ref=bib:Weil1948`), and this former is a hypothesis form concluded by a theorem only over that axiom | `[Weil1948]` p. 207 | nine: `circle_sum_le`, `circle_sum_le_of_ne`, `kloosterman_page_of_kloostermanBound` (at one field `F`); `normOne_charSum_ge`, `targetFloor_seven_of_kloosterman`, `targetFloor_six_of_kloosterman` (at every field of `Q` elements); `standingFloor_seven`, `standingFloor_five`, `seven_le_localBound_of_kloosterman` (at every field of `q ≡ 3 (mod 4)`, `q ≥ 347` elements) |
+| the axiom `HadwigerNelson.StandingFive.kloosterman_bound` | an outside theorem, as an `axiom` | `[Weil1948]` p. 207 | eight (the IMPORTED records): `kloostermanBound_of_ringChar_ne_two`, `targetFloor_seven_weil`, `targetFloor_six_weil`, `circle_sum_le_weil`, `standingFloor_seven_weil`, `standingFloor_five_weil`, `seven_le_localBound_weil`, `five_le_chromaticNumber_weil` |
+| `HadwigerNelson.SpectralChain.BochnerHerglotz` (named, landed earlier) | an outside theorem (Herglotz–Bochner for a countable discrete group) | as FS131-T5 declares it on `fs131-t5` (inventory item 562: one of its five outside hypotheses on `main`; its bibliography row filed, not read) — not re-read by me | of this landing: `sp_if_hypotheses_trivial_bot` (at `unitRing ⊥`). On `main` already: `sp_if`, `contChars_haar_null` and their kin |
+| `five_le_chromaticNumber_weil`, binder `hRow123 : min (localBound standingField) 5 ≤ χ(F²)` — **written out in a binder, a closed proposition** (no variable of the theorem occurs in it) | a hand result of ours ([hand], given MR — measure rigidity, an outside theorem, is inside it and is not imported) | `LEDGER.md` row 123: the conclusion of `SpectralChain.min_localBound_five_le_chromaticNumber` at the standing field (the theorem's docstring) | `five_le_chromaticNumber_weil` (and, landed earlier, `five_le_chromaticNumber`) |
+| `HadwigerNelson.StandingFive.StandingFloor` (named, landed earlier) | a hand result of ours, **discharged by this landing over the import**: `standingFloor_seven_weil : StandingFloor 7`, `standingFloor_five_weil` | TC1-STANDING-FIVE | none of this landing takes it; the landed `seven_le_localBound`, `five_le_chromaticNumber`, `standingFloor_mono` do. For T5's step: a former concluded by a theorem with no hypothesis — but over an axiom — is its `discharged` case to rule on |
+| `HadwigerNelson.SpectralInputs.BochnerOn` (named, landed earlier) | an outside theorem (Bochner's theorem, for the topology `t`) | as FS131-T5 declares it on `fs131-t5` (inventory item 562) — not re-read by me | none of this landing; the landed `spectral_carried_iff`, whose docstring this landing edits |
+
+**A hand result written out over a theorem's own variables: this landing has none.** Every other `Prop` binder of its 160
+theorems is a condition of the statement (a measurability, an independence, a bound on a character sum that the consumers in the
+same modules discharge — `targetFloor_of_charSum`'s `hchar` is discharged by `charSum_128_ge` and `normOne_charSum_ge`), read by
+me in the table of signatures; the one inline assumption, `hRow123`, is closed and so of the shape the step finds by itself.
+
+**7. The open gate items at this landing** (a theorem whose hypotheses no Lean object on `main` satisfies at once, or that still
+assumes a named hypothesis).
+- **`sp_if`** — open by one classical theorem: given `BochnerHerglotz (unitRing ⊥)` every other hypothesis holds at once
+  (`sp_if_hypotheses_trivial_bot`, landed here, with `negCircle_trivial_bot`); `BochnerHerglotz` is assumed.
+- **`contChars_haar_null`**, **`spectral_carried_iff`**, **`si4`** — no model of all hypotheses at once is a declaration; each
+  docstring now carries the planner's described model and says it is not a Lean declaration (the planner prices the two cheap
+  ones at about 55 lines; `contChars_haar_null`'s needs `BochnerHerglotz`). `si4_equivariant` is met by landed theorems.
+- **`usable_card_ge`, `no_small_usable`** (landed earlier) — still bound a family the kernel does not know non-empty: the usable
+  place of the standing field is the third pass's leaf `exists_usable_place`, on `fs131-w10k`, not in this landing.
+- **The eight on the import** assume `[Weil1948]` p. 207 and nothing else outside the standard three; `five_le_chromaticNumber_weil`
+  also row 123's chain.
+- **Not a gate item, a reading**: "every usable plane `Γ_Q` refuses six" is not a kernel sentence. The kernel's floors
+  (`TargetFloor`, `StandingFloor`, `localBound`) are about the norm-one Cayley graph of `𝔽_{Q²}`; no declaration relates
+  `normOneCayley` to `finitePlane` (the planner's § 15.1). `FloorPlanes`' module docstring still reads G56's sentence that way
+  in its first paragraph.
+
+**8. Generalizations the wave's reports found — for the errata.**
+- FS131-I10F / ruling 542: `ae_eq_measurable_of_majority` at `[Countable K]` with no measurability of `G` or the `c x` — **landed
+  here as the row's statement**.
+- FS131-L10B (the lint; ruled mid-job): `fibre_mem_factorSets` does not read `[MeasurableSingletonClass Ω₁]` — **landed**.
+- FS131-I10D: `circle_sum_le_of_ne` (the bound needs `a ≠ 0` **or** `b` anisotropic; `circle_sum_le` its special case) — landed
+  as a theorem beside the row; and, available, the floor at six from `Q ≥ 62` — since stated by the planner and landed
+  (`targetFloor_six_of_kloosterman`, `targetFloor_six_weil`).
+- FS131-I10E: the bridge at `Q = 64` (`TargetFloor 6 64`) with the constants made parameters — not stated (a stub at the filing,
+  ruling 555 (d)).
+- FS131-IF1: Falconer's Lemma 2 (i) in every finite dimension, any norm, any additive Haar measure, null-measurable sets
+  (`exists_not_tendsto_ratio_and_compl`), and the quantitative form `exists_ratio_ge_and_compl_ge` — landed.
+- FS131-K10c (§ 14.4; on `fs131-w10k`, not in this landing): the level row with no symmetry and no `ν(K) = 0`; J45-N1 (a), (b)'s
+  readers need two facts of a filter.
+
+**9. `LEDGER.md`, `plans/LEAN-BACKLOG.md`, `plans/FS131-kernel-plan.md` § 7.4, the Frontier, the atlas** — the planner's § 16.7
+and FS131-IF1's Drafts items 3–4 and 8, corrected for the join:
+- **`LEDGER.md` row 53 and G56's row** (the planner's draft; ruling 555's correction owed): "the floor at seven for `Q ≡ 3
+  (mod 4)`, `Q ≥ 98` (`StandingFive.targetFloor_seven_weil`), at six from `Q ≥ 62` (`targetFloor_six_weil`), and `χ(U₁₂₈) ≥ 8`
+  (`Floor128.targetFloor_eight_128`) are [kernel] — the first two over one import (`StandingFive.kloosterman_bound`,
+  `[Weil1948]` p. 207), the third on the standard three with no import — **as statements about the norm-one Cayley graph of
+  `𝔽_{Q²}`** (`normOneCayley k σ`, every field `k` of `Q²` elements with a non-trivial involution `σ`); 'the plane `Γ_Q`' waits
+  for the link `normOneCayley ≃g unitQuadrance`, not stated". **§ B row FS91-J10-T9** ("`U₁₂₈`'s Hoffman floor is 8"):
+  [kernel], `Floor128.targetFloor_eight_128`, `[propext, Classical.choice, Quot.sound]`, no assumption; the exact spectrum
+  `−19, …, 21` stays [tools].
+- **TC1-STANDING-FIVE**: "so `L(F) ≥ 7`" — [kernel over one import], `StandingFive.seven_le_localBound_weil : 7 ≤ localBound
+  standingField`, resting on `StandingFive.kloosterman_bound` and nothing else outside the standard three; "and given MR,
+  `χ(F²) ≥ 5`" — `five_le_chromaticNumber_weil`, over the same import **and** the hypothesis `hRow123` (row 123's chain).
+- **FS-20's item R4** (`plans/STUB-theorem-B-writeup.md` § 5; FS131-I10D's draft): "a circle sum is a Kloosterman sum" is
+  `StandingFive.circle_sum_eq_kloosterman` [kernel], standard three, every finite field of odd characteristic, every radius.
+- **`LEDGER.md` row 152**, its FALC-RED clause (FS131-IF1's Drafts item 4): [kernel], `Plane.falconer_reduction`,
+  `Plane.le_chiM_of_falconerFan`, `[propext, Classical.choice, Quot.sound]`, resting on no import and no named hypothesis.
+- **`plans/LEAN-BACKLOG.md`**: FS131-E8-SI5C — landed, at the wider class (ruling 542); J45-SI-J — `contVec_prod_eq` landed,
+  with its model; J45-SP-if — its model landed, open by `BochnerHerglotz`; TC1-STANDING-FIVE — as above; the level row, J45-N1
+  (a)(b)'s interface and the usable place — on `fs131-w10k`, not landed; J45-SI-5, -SI-C — not stated.
+- **`plans/FS131-kernel-plan.md` § 7.4**: `KloostermanBound` leaves the table of named hypotheses from outside (it is the import,
+  in `ARCHITECTURE.md` § Trust); `StandingFloor` is discharged over the import.
+- **`CLAUDE.md` § Frontier, "What the kernel holds"** — one clause: "**wave 10's floors** — `7 ≤ L(F)` at the standing field and
+  the floors at seven (`Q ≥ 98`) and six (`Q ≥ 62`) of the norm-one targets at `Q ≡ 3 (mod 4)`, over one declared import, Weil's
+  bound for Kloosterman sums; `χ(U₁₂₈) ≥ 8` with no import; `[Falconer1981]` Lemma 2 (i) proved, so Falconer's reduction reads the
+  standard three". No value of `χ` of the plane moves.
+- **The Proof Atlas**: `falconer_lemma2_nonempty` changes kind (axiom → theorem) and its four consumers lose their dependence on
+  an import; one new axiom node, `kloosterman_bound`, with eight theorems on it; twelve new modules, 160 hand-written theorems.
+- **`ARCHITECTURE.md`**: edited on this branch — the five rows of Stage 3, § 5's table (Stage 2).
+
+## Theorems this phase proved, final
+
+**This job proved no theorem of its own**: it joined three lines, made the ruled tidies and gated the result. What it landed,
+each [kernel] on the gated commit `f0cc3018`, axioms read from the gate's saved log (`data/fs131/l10b/receipt-axioms-final.log`;
+the reading `records-final.txt`); all 160 with their axioms are in that log, the heads here.
+
+- **On the standard three and one import, `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207), and nothing else** (the eight
+  IMPORTED records; `Proofs/HadwigerNelson/Arith/WeilKloosterman.lean`): `kloostermanBound_of_ringChar_ne_two`,
+  `standingFloor_seven_weil : StandingFloor 7`, `standingFloor_five_weil`, `seven_le_localBound_weil : 7 ≤ localBound
+  standingField` (TC1-STANDING-FIVE), `five_le_chromaticNumber_weil` (also over `hRow123`), `targetFloor_seven_weil` (`Q ≥ 98`),
+  `targetFloor_six_weil` (`Q ≥ 62`), `circle_sum_le_weil`.
+- **On `[propext, Classical.choice, Quot.sound]`, no import** (each "exactly the standard three" in the records check):
+  - `Floor128.targetFloor_eight_128 : TargetFloor 8 128`, `targetFloor_seven_128`, `charSum_128_ge`, `exists_root`,
+    `exists_root_pow_eq`, `class_le`, `normOne_eq_image`, `exists_addChar` (`Arith/Floor128.lean`);
+  - `StandingFive.involution_eq_pow`, `card_normOne`, `targetFloor_of_charSum` (`Arith/NormOneTarget.lean`);
+    `sum_quadratic_eq`, `circle_sum_eq_kloosterman` (FS-20's item R4), `circle_sum_le`, `circle_sum_le_of_ne`,
+    `circle_sum_zero_of_isotropic`, `two_sqrt_lt_circle_sum_zero`, `normOne_charSum_ge`, `targetFloor_seven_of_kloosterman`,
+    `kloostermanBound_of_card_le_five` (`Arith/FloorPlanes.lean`); `standingFloor_seven`, `standingFloor_five`,
+    `seven_le_localBound_of_kloosterman` (`Arith/TargetFloors.lean`; hypothesis forms over `KloostermanBound`);
+    `kloosterman_page_of_kloostermanBound`, `kloosterman_bound_model`, `four_mul_mul_ne_zero_iff`, `sum_units_eq_sum_ne_zero`,
+    `ringChar_ne_two_of_card_mod_four`, `targetFloor_six_of_kloosterman` (`Arith/WeilKloosterman.lean`);
+  - `RatioBound.card_mul_le_of_indep`, `le_chromaticNumber_of_charSum` (`Arith/RatioBound.lean`);
+  - `MajorityVote.ae_eq_measurable_of_majority` (FS131-E8-SI5C, at the class of ruling 542; `Arith/MajorityVote.lean`);
+  - `SpectralInputs.contVec_prod_eq` (J45-SI-J), `contVec_prod_eq_coin`, `fibre_mem_factorSets` (`Arith/ProductFactor.lean`);
+    `exists_parityHom`, `negCircle_trivial_bot`, `sp_if_hypotheses_trivial_bot` (over `BochnerHerglotz`;
+    `Arith/NegCircleModel.lean`); `comap_factorSigma_eq`, `comap_factorSigma_eq_of_action`, `si4_equivariant_factorSigma`
+    (`Arith/FactorAction.lean`);
+  - `Plane.exists_not_tendsto_ratio_and_compl`, `exists_ratio_ge_and_compl_ge` (`Plane/MetricalBoundary.lean`);
+    `Plane.falconer_lemma2_nonempty` (the axiom, now a theorem), and, moved from IMPORTED to CLEAN, `falconer_reduction`,
+    `le_chiM_of_falconerFan`, `exists_mem_falconerE`, `fan_tip_ae_mem` (`Plane/FalconerReduction.lean`).
+- On a proper subset of the three: 17 records of `Floor128` and `GapSeven` (the `decide +kernel` certificates: 9 on `[propext,
+  Quot.sound]`, 8 on `[propext]`).
+- **The axiom**: `StandingFive.kloosterman_bound` — not a theorem; the library's one outside assumption declared as an axiom.
+
+## Slips, my own
+
+1. My first message to the coordinator named the tidies' commit by a placeholder that is no hash; the commit is `3c4172e2`.
+2. Four of this job's new checks were wrong on their first run and repaired before any result was taken from them: the
+   joined-state check read a `declareImport` line quoted in a docstring as a declaration; the kernel-signature reader's
+   self-test named a partner with no section variable; the row check read three letters of a formula of mine as declaration
+   names (I reworded the row); the shape check's plant could not be planted after its lists were extended. Each is said where
+   its result is recorded.
+3. `rsync-w6j-build.txt` prints its filter's exit status under the label of `rsync`'s; the copy was moot (Lake rebuilt all
+   fourteen modules).
+4. Stage 2's commit took two logs that were still being written (`dupnames-joined.log`, the red-before self-test's); both were
+   committed complete with Stage 3. `dupnames-joined.log`'s head names the commit before a `plans/`-only commit made while it
+   waited for a slot; the Lean sources are the same.
+5. The statement checker's self-test was first run on a file where one plant cannot be planted, and failed for that reason; it
+   passes on `WeilKloosterman.lean` with all five.
+6. My token counts are estimates: this session has no instrument for the harness's count.
+7. Not run, and not claimed: `lean4checker` (a publication gate); the Proof Atlas rebuild (the coordinator's); FS131-T5's step.
