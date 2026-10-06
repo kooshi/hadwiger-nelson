@@ -428,4 +428,71 @@ theorem awayModel_r2Contacts : awayModel.r2Contacts awayP (-(Real.arcsin (3 / 10
       have e2 : 3 / 10 + 2 * Real.sin θ - (3 / 10 + 2 * Real.sin θ - t * (2 * Real.sin θ)) = t * (2 * Real.sin θ) := by ring
       rw [e1, e2, neg_sq]; exact hnear
 
+section AwayModelCentre
+
+open ArcMap
+
+/-! ### The centre of `awayModel`'s arc carries the colour `6` alone: the toward bend on a map of the plane (FS131-MB2) -/
+
+/-- **In the centre's brick `(−4/5, 0) × (0, 3/5)` the map is the base**: every point is an interior point of colour `6` (the brick map's
+colour of the cell of column `−1` and row `0`). -/
+theorem awayModel_centre_brick {w : ℂ} (hw : -(4 / 5) < w.re ∧ w.re < 0 ∧ 0 < w.im ∧ w.im < 3 / 5) : w ∈ awayModel.region 6 := by
+  have hnW : w ∉ awayW := fun hW => by
+    rcases awayModel_mem_awayW.mp hW with ⟨h', -⟩ | ⟨h', -⟩
+    · linarith [hw.2.1, h'.1]
+    · linarith [hw.2.1, h'.1]
+  have hre : 2 / 5 * ((0 : ℤ) : ℝ) + 4 / 5 * ((-1 : ℤ) : ℝ) < w.re ∧ w.re < 2 / 5 * ((0 : ℤ) : ℝ) + 4 / 5 * (((-1 : ℤ) : ℝ) + 1) := by
+    constructor <;> push_cast <;> linarith [hw.1, hw.2.1]
+  have him : 3 / 5 * ((0 : ℤ) : ℝ) < w.im ∧ w.im < 3 / 5 * (((0 : ℤ) : ℝ) + 1) := by
+    constructor <;> push_cast <;> linarith [hw.2.2.1, hw.2.2.2]
+  have hd : dist w awayP < 1 := by
+    refine (lt_iff_sq_lt_sq' dist_nonneg zero_le_one).mpr ?_
+    rw [awayModel_dist_sq]
+    have e1 : (w.re + 3 / 5) ^ 2 < (3 / 5) ^ 2 := sq_lt_sq' (by linarith [hw.1]) (by linarith [hw.2.1])
+    have e2 : (w.im - 3 / 10) ^ 2 < (3 / 10) ^ 2 := sq_lt_sq' (by linarith [hw.2.2.1]) (by linarith [hw.2.2.2])
+    nlinarith
+  refine ⟨?_, ?_⟩
+  · unfold awayModel
+    rw [ArcMap.interiorPts_paint]
+    refine ⟨brickBase_mem_interiorPts _ hre him, fun ha => ?_⟩
+    rcases awayModel_arcs_subset ha with h | h <;> linarith
+  · have hc : awayModel.col w = (brickBase 8 (by norm_num)).col w := ArcMap.paint_col_of_not_mem hnW
+    obtain ⟨h1, h2⟩ := brick_floor_eq hre him
+    have h6 : sevenBrick.table (zmodIdx 7 (by norm_num) (-1)) (zmodIdx 7 (by norm_num) 0) = 6 := by decide
+    show awayModel.col w = 6
+    rw [hc]
+    show Fin.castLE (by norm_num) (sevenBrickMap.col w) = 6
+    rw [sevenBrick_color_eq h1 h2, h6]
+    rfl
+
+/-- **The centre carries the colour `6` and no other**: neither side colour of the arc is carried at it. -/
+theorem awayModel_coloursAt : awayModel.coloursAt awayP = {6} := by
+  set U : Set ℂ := {w : ℂ | -(4 / 5) < w.re ∧ w.re < 0 ∧ 0 < w.im ∧ w.im < 3 / 5} with hU
+  have hUo : IsOpen U := awayModel_isOpen_rect (-(4 / 5)) 0
+  have hPU : awayP ∈ U := by
+    obtain ⟨h1, h2⟩ := awayModel_P_coords
+    show -(4 / 5) < awayP.re ∧ awayP.re < 0 ∧ 0 < awayP.im ∧ awayP.im < 3 / 5
+    rw [h1, h2]; norm_num
+  ext j
+  simp only [ArcMap.coloursAt, mem_setOf_eq, mem_singleton_iff]
+  constructor
+  · intro h
+    obtain ⟨w, hwU, hw⟩ := mem_closure_iff.mp h U hUo hPU
+    have h6 : awayModel.col w = 6 := (awayModel_centre_brick hwU).2
+    have hj : awayModel.col w = j := hw.2
+    rw [← hj, h6]
+  · rintro rfl
+    exact subset_closure (awayModel_centre_brick hPU)
+
+end AwayModelCentre
+
+/-- **A model of `bend_toward` on a map of the plane**: the toward bend applied to `awayModel`'s arc of `ω(awayP)`. The centre carries a
+colour (`6`: `awayModel_coloursAt`) and not the arc's outer colour `0` — where `cuspFrag_bend_toward`'s centre is off its fragment and
+carries no colour at all. -/
+theorem awayModel_bend_toward : ∃ F' : ArcMap 8, F'.Valid ∧
+    ∀ θ ∈ Ioo (-(Real.arcsin (3 / 10))) (Real.arcsin (3 / 10)), ¬ F'.OnRingArc awayP (ringPt awayP θ) := by
+  obtain ⟨F', h1, -, -, h2, -⟩ := ArcMap.bend_toward awayModel_hyps.1 awayModel_hyps.2.2.1
+    (by rw [awayModel_coloursAt]; decide) one_pos
+  exact ⟨F', h1, h2⟩
+
 end HadwigerNelson.Plane.Scratch

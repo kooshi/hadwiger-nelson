@@ -409,3 +409,51 @@ parameters, all nine. **No clause holds for want of an object**: both flanks are
 point of a live class (`shadowModel_shadow` exhibits it). The conclusion `7 ≠ 8` is true of the model for the reason E7 § 6.2 gives —
 the lower pole's horn shadows the flank below — and decidable without it; what the application shows is that the nine hypotheses are
 not jointly empty.
+
+## Stage 7 — SAVED (FS131-MB2): the other half joined — `origin/fs131-wm` at `87699974` merged; `stuckModel_hyps` and `shadowModel_flank_ne` on the standard three
+
+*2026-10-06 10:10 UTC.* **A change to the brief, by the coordinator's message mid-job** (the brief's Done means 4 said "You do not merge
+another branch into this one"): "merge `origin/fs131-wm` at `87699974` into `fs131-wmb` when it suits your order — it turns `Paint`'s 13
+open leaves into theorems under you". Done after Stage 6's save and before `awayModel` went into `Bends`, so that the join has a build
+and a receipt of its own.
+
+### 7.1 The merge
+
+- **Before it**: no name is declared by both halves — the 198 declaration names of `Paint` and `Moves` at `87699974` against the 131
+  of `Stuck` and `Bends` at `c56383d8` (and the names `awayModel_…` then in scratch): none in common, by script; so no helper of mine
+  was renamed. (The gate's `scripts/dupnames.sh` on the joined tree is the landing's.)
+- **The merge commit `97c5d0fd`** (parents `c56383d8`, `87699974`): 21 paths in the index, read before the commit — `Paint.lean` and
+  `Moves.lean` (byte-identical to `87699974`), FS131-MA1's record, report, three tools and fourteen data files, and
+  `scripts/Axioms.lean`, **the one conflict**: both halves' blocks kept above the `=== PURCHASED ===` banner, half A's first — 4,010
+  `#print axioms` lines = 3,948 (the skeleton's tip) + 30 (MA1) + 32 (MB1 18, MB2 14). `Stuck.lean`, `Bends.lean`, `Proofs.lean` and
+  `ARCHITECTURE.md` untouched by it.
+- **The statement check, its base moved** (`tools/fs131_mb2_statements.py`): a path outside this job's that differs from MB1's tip
+  must now be byte-identical to its content at `87699974`. `statements.out`: 115 and 53 declarations, 0 not found verbatim once; 20
+  paths outside this job's, 20 identical to the merged half, 0 not. Its control for the new clause: against the pre-merge tip as the
+  reference all 20 are reported, against the true one none (`self-test: 115 of 115 … 20 of 20 … 0 -> OK`).
+
+### 7.2 The build of the joined tree, and the receipt
+
+**The build**: `data/fs131/mb2/build-2.log` — `build: OK — 452 of 452 batches, 5 module(s) rebuilt, 2 module(s) with warnings, 8m35s`,
+exit 0; the full log (`build-2-full.log`) ends `Build completed successfully (5754 jobs)`: **0 warnings other than `sorry`**; distinct
+`sorry` warnings **5** — `Stuck` 1 (`stuckModel_terminal`), `Bends` 4 (`awayModel`'s, proved in scratch, Stage 8); `Paint` 0, `Moves` 0.
+
+**The receipt** (`MB2Axioms-stage7.out` → `receipt-stage7.out`, `--stage 7`, exit 0: 51 records, 0 findings): **48 on exactly the
+standard three, with no `sorry`-proved declaration in the closure** — among them `stuckModel_hyps`, `stuckModel_isStuck` and the eleven
+other records of MB1's that waited on `brickBase_mem_interiorPts`, and `shadowModel_flank_ne`, `shadowModel_valid`,
+`shadowModel_condition5`, `shadowModel_flanks`, `shadowModel_doublyShadowed`; 3 open (`stuckModel_terminal`; `awayModel`'s two).
+Controls (`receipt-selftest-stage7.out`): `4 of 4 plants fired; faithful run 0 finding(s) -> OK`. `tools/check_architecture.py`:
+exit 0, `RESULT: PASS`.
+
+**FS131-MA1's own receipt on the joined tree** (`python3 tools/fs131_ma_axioms.py`, run, not edited; output
+`data/fs131/mb2/ma-axioms-stage7.out`): `177 of 177 claimed records on the standard three; 3 of 4 controls fire; 1 problem(s) -> FAIL` —
+the one problem is `CONTROL SILENT HadwigerNelson.Plane.stuckModel_hyps`, **red by design**: MA1's control 1 expects implementer B's
+two model theorems on `sorryAx`, and `stuckModel_hyps` no longer is. `awayModel_hyps` still fires. The two lines are dropped at
+Stage 8, when both are whole, as MA1's record and the coordinator's message say.
+
+### 7.3 What the merge leaves doubled in statement, not in name (for the landing's tidy)
+
+- `Paint`'s `disjoint_hornSet_hornArcs` (MA1) is the same-base-point case of `shadowModel_hornSet_not_mem_hornArcs`, and
+  `mem_hornArcs_carrier_iff_of_mem_ball` overlaps `shadowModel_mem_hornArcs`; mine were written before the merge, read the library
+  alone, and also carry the far case. Two statements of one fact under two names — no merged declaration, nothing for `dupnames.sh` —
+  and a candidate for folding once the lane is on `main`.

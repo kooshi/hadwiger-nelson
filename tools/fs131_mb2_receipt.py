@@ -68,7 +68,7 @@ AWAY_HELPERS = ["awayModel_P_coords", "awayModel_dist_sq", "awayModel_circPt", "
                 "awayModel_wall_mem", "awayModel_mem_awayW", "awayModel_rect_subset", "awayModel_rect_dist",
                 "awayModel_not_mem_arcs", "awayModel_no_unit_pair", "awayModel_isPlaneMap", "awayModel_region_seven",
                 "awayModel_brick", "awayModel_trig", "awayModel_ringPt_mem", "awayModel_approach_real",
-                "awayModel_coloursAt_zero", "awayModel_bend_toward"]
+                "awayModel_centre_brick", "awayModel_coloursAt", "awayModel_bend_toward"]
 
 APPLIED_BASE = [("cuspFrag_bend_away", "ArcMap.bend_away_whole"), ("cuspFrag_bend_toward", "ArcMap.bend_toward"),
                 ("shadowModel_flank_ne", "ArcMap.flank_ne_of_doublyShadowed")]
