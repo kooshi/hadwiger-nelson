@@ -7133,3 +7133,44 @@ reason by the close.*
      question for a deriver — his "otherwise". (c) **Staffing**: the cap stays at three, the Searcher takes a
      slot and adds none, and my own context is the other lever (a compaction when he calls one; the handoff is kept
      current for it). (d) The handoff's §§ 2–4 are rewritten to current state with a "learned" list.
+575. **FS131-L10B done: wave 10's second landing is on `main` through the full gate — the library declares exactly one outside axiom** (landing implementer, Opus; harness 545k and 103 minutes by the task notice; record `plans/FS131-L10B-landing.md`; report `data/fs131/reports/FS131-L10B.md`; gated commit `f0cc3018`, landed `3b2e9848`, a fast-forward).
+     **Landed**: the wave's second pass proved (eleven modules of `Arith/`), the import of Weil's bound with its
+     eight theorems — `standingFloor_seven_weil`, `seven_le_localBound_weil`, `five_le_chromaticNumber_weil`,
+     `targetFloor_seven_weil`, `targetFloor_six_weil`, `circle_sum_le_weil`, `standingFloor_five_weil`,
+     `kloostermanBound_of_ringChar_ne_two` — `targetFloor_eight_128` on no import, the measure leaves, and
+     `Plane/MetricalBoundary` with Falconer's lemma a theorem. 160 hand-written theorems. Three statements changed,
+     each ruled: the majority vote (542), the standing field's instance (555 (a)), one unused instance binder
+     (573). **The gate, on `f0cc3018`, by its saved run**: every step exit 0, the lint included. **My receipt**:
+     since the gated commit `main` changed under `plans/` and `data/` only (`git diff --name-only`, empty outside
+     them); `sorry` under `Proofs/`: 0; `^axiom` under `Proofs/`: the native-evaluation example and
+     `kloosterman_bound`, no other; **both digests run by me against wave 6's first landing's receipts**: axioms —
+     "6334 records — 6304 clean on the standard axioms, 17 axiom-free, 8 imported, 5 declared purchase(s)",
+     "declared imports (1)", 160 added (152 CLEAN, 8 IMPORTED), 0 removed, 4 changed (Falconer's four, IMPORTED to
+     CLEAN); vacuity — `declarations=14501 refutations-skipped=199 sites=1269`, `vacuous=0 stale=0 declared=3
+     witnessed=38 generic=1226 unknown=2`, the baseline's header matching. Not checked by me: the proofs beyond the
+     gate; its kernel-signature table line by line; the three docstring notes it copied from the planner marked "not
+     a Lean declaration". **Filed, mine** (commit `e9a65a86`): `CLAUDE.md` § Trust ledger (its sentence, and the
+     new one on the one outside axiom) and § The gate; a `GATE_CHANGES` entry; `LEAN.md` — an import stated in its
+     paper's own form (ruling 555 (e)), the stale branch clause, the kernel-signature reading, IF1's `ENNReal`
+     bullet; after it both digests read "match"; the fact audit against `df61d748` loses six tokens, each a
+     superseded count or its landing's name; `--dupes` exit 0. `BIBLIOGRAPHY.md`: `[Weil1948]` (imported; read
+     status; the slip in print; "about the norm-one Cayley graph"), `[MMST1996]` (ruling 538 (a) met),
+     `[Falconer1981]` and the Croft debt row, from its drafts and IF1's. Its record, drafts and receipts merged to
+     `main` by me (`3c31d362`: `plans/` and `data/` only). **Prediction scored**: briefed at 450k; 545k.
+     **Credit**: the audit's self-test shown red at exactly the three controls before their edit; a new instrument
+     that reads every stored type's binders against its file and section variables; stopping at a statement
+     change and naming three options. **Slips, the job's, disclosed**: seven, listed in its record. **Rulings.**
+     (a) **The open gate items at this landing go to the wave's next implementer** (FS131-I10G, brief not written):
+     the usable place (`usable_card_ge`, `no_small_usable` wait on its leaf), the two Lean models the planner
+     priced at about 55 lines (`contChars_haar_null`, `spectral_carried_iff`, `si4`'s notes say "not a Lean
+     declaration"), and `FloorPlanes`' docstring paragraph that still says "the plane". `sp_if` stays open by one
+     classical theorem. (b) Two tool defects (the records check cannot read an imported record; the keep-both
+     check reads the controls file's print lines) join the shared checker's list (item 406 (c)). (c) Its drafts 8
+     and 9 (the wave's generalizations; `LEDGER.md` row 53 and G56 said of the norm-one Cayley graph, row 152,
+     `plans/LEAN-BACKLOG.md`, the plan's § 7.4, the Frontier clause, the atlas) are held for the milestone's filing.
+     (d) Its table of hypotheses (draft 6) is FS131-LT5's input; two of its cases are pre-ruled in that brief
+     (a former proved over the declared import leaves the list; `KloostermanBound` is declared only if the step
+     asks). (e) **Slot → FS131-LT5** (the gate step's landing; tree `fs131-wlt`, branch `fs131-lt5`, from the filed
+     `main` at `e9a65a86`; brief gated), launched 2026-10-06. **From now until it hands back I commit nothing to
+     `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`.** In flight: 3 (I6L,
+     I6Z, LT5); the Searcher takes the next free slot.
