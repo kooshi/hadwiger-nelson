@@ -31,4 +31,13 @@ new       Proofs/HadwigerNelson/Arith/MajorityVote.lean :: measurableSet_lt_two_
 new       Proofs/HadwigerNelson/Arith/MajorityVote.lean :: exists_measurable_selector
 same      Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: exists_parityHom
 same      Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: negCircle_trivial_bot
+new       Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: two_dvd_of_sq_add_sq_eq_four_mul
+new       Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: re_im_of_mul_intCast_eq
+new       Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: exists_odd_rep_of_unitVector
+new       Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: exists_odd_rep_of_mem_unitRing
+new       Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: intCast_zmod_two_of_odd
+new       Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: parity_rep_unique
+new       Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: exists_signChar
+new       Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: countable_bot_subfield_real
+new       Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: sp_if_hypotheses_trivial_bot
 compared 9 base statements (4 of 4 leaves among them); differences: 1

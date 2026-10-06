@@ -4917,6 +4917,17 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.SpectralInputs.fibre_mem_factorSets
 #print axioms HadwigerNelson.SpectralInputs.exists_measurableSet_prodFactorSigma_ae_eq
 #print axioms HadwigerNelson.SpectralInputs.contVec_prod_eq
+#print axioms HadwigerNelson.SpectralInputs.two_dvd_of_sq_add_sq_eq_four_mul
+#print axioms HadwigerNelson.SpectralInputs.re_im_of_mul_intCast_eq
+#print axioms HadwigerNelson.SpectralInputs.exists_odd_rep_of_unitVector
+#print axioms HadwigerNelson.SpectralInputs.exists_odd_rep_of_mem_unitRing
+#print axioms HadwigerNelson.SpectralInputs.intCast_zmod_two_of_odd
+#print axioms HadwigerNelson.SpectralInputs.parity_rep_unique
+#print axioms HadwigerNelson.SpectralInputs.exists_parityHom
+#print axioms HadwigerNelson.SpectralInputs.exists_signChar
+#print axioms HadwigerNelson.SpectralInputs.negCircle_trivial_bot
+#print axioms HadwigerNelson.SpectralInputs.countable_bot_subfield_real
+#print axioms HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot
 
 #eval IO.println "=== PURCHASED ==="
 

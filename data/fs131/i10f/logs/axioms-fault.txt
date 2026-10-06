@@ -43,4 +43,19 @@
  Classical.choice,
  Quot.sound]
 'HadwigerNelson.SpectralInputs.contVec_prod_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.two_dvd_of_sq_add_sq_eq_four_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.re_im_of_mul_intCast_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.exists_odd_rep_of_unitVector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.exists_odd_rep_of_mem_unitRing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.intCast_zmod_two_of_odd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.parity_rep_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.exists_parityHom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.exists_signChar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.negCircle_trivial_bot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.countable_bot_subfield_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot' depends on axioms: [propext, Classical.choice, Quot.sound]
 'FS131I10F.control' depends on axioms: [sorryAx]
