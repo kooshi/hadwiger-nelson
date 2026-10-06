@@ -977,6 +977,231 @@ theorem CollarFitOut.map_ringArcsWithin (hfit : CollarFitOut F P θ₁ θ₂ c c
       · exact mem_iUnion₂.mpr ⟨_, Or.inl rfl, h⟩
       · exact mem_iUnion₂.mpr ⟨_, Or.inr rfl, h⟩
 
+/-! ### The sides of a unit circle at a point of `Γ` off the open arc (FS131-BA3; mirrors of `CollarFit.exists_one_side`, `sides_end`,
+`sides_eq`). Inhabitant of the `CollarFitOut` hypotheses: `exists_collarFitOut`, at any map satisfying `bend_away_gap`'s. -/
+
+/-- **Near an end the collar set lies on one side of every other unit circle** — `CollarFit.exists_one_side` stated for the set
+`collarK P θ₁ θ₂ R' R''` alone, which is all its proof reads of a fit (`1/2 < R'`, `1 < R''`, an arc of at most `60°`), so that it
+serves the outward collar, the same set: for `Q ≠ P` and an end `x` of the arc there is a radius within which every collar point but
+`x` is inside `ω(Q)`, or every one is outside. On `ω(Q)` this is `side_core` in the end's frame (`collarK_frame`); off it, continuity
+of the distance. -/
+theorem collarK_one_side (hR' : 1 / 2 < R') (hR'' : 1 < R'') (hℓ : θ₂ - θ₁ ≤ π / 3) {Q x : ℂ} (hQ : Q ≠ P)
+    (hx : x = ringPt P θ₁ ∨ x = ringPt P θ₂) :
+    ∃ ρ > 0, (∀ z ∈ collarK P θ₁ θ₂ R' R'', z ≠ x → dist z x < ρ → dist z Q < 1) ∨
+      (∀ z ∈ collarK P θ₁ θ₂ R' R'', z ≠ x → dist z x < ρ → 1 < dist z Q) := by
+  rcases lt_trichotomy (dist x Q) 1 with hlt | heq | hgt
+  · exact ⟨1 - dist x Q, by linarith, Or.inl fun z _ _ hz => by linarith [dist_triangle z x Q]⟩
+  · -- on `ω(Q)`: the frame at the end
+    obtain ⟨θE, σ, hσ, rfl, hfr⟩ : ∃ θE σ : ℝ, (σ = 1 ∨ σ = -1) ∧ x = ringPt P θE ∧
+        ∀ z ∈ collarK P θ₁ θ₂ R' R'', ∃ X Y : ℝ, z - ringPt P θE = ((Y : ℂ) + (X : ℂ) * I) * e θE ∧ 0 ≤ σ * X ∧
+          0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) ∧ 2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0 := by
+      rcases hx with rfl | rfl
+      · refine ⟨θ₁, 1, Or.inl rfl, rfl, fun z hz => ?_⟩
+        obtain ⟨X, Y, h0, h1, h2, h3⟩ := (collarK_frame hR' hR'' hℓ hz).1
+        exact ⟨X, Y, h0, by linarith, h2, h3⟩
+      · refine ⟨θ₂, -1, Or.inr rfl, rfl, fun z hz => ?_⟩
+        obtain ⟨X, Y, h0, h1, h2, h3⟩ := (collarK_frame hR' hR'' hℓ hz).2
+        exact ⟨X, Y, h0, by linarith, h2, h3⟩
+    set m : ℂ := ringPt P θE - Q with hm
+    set g : ℂ := m * starRingEnd ℂ (e θE) with hg
+    have hmn : ‖m‖ = 1 := by rw [hm, ← dist_eq_norm]; exact heq
+    have hgn : Complex.normSq g = 1 := by
+      rw [hg, Complex.normSq_mul, Complex.normSq_conj, Complex.normSq_eq_norm_sq, Complex.normSq_eq_norm_sq, hmn, norm_e]
+      norm_num
+    have hαβ : g.re ^ 2 + g.im ^ 2 = 1 := by rw [← hgn, Complex.normSq_apply]; ring
+    have hmg : m = g * e θE := by
+      rw [hg, mul_assoc, mul_comm (starRingEnd ℂ (e θE)), e_mul_conj_e, mul_one]
+    have hne : ¬ (g.re = 1 ∧ g.im = 0) := by
+      rintro ⟨h1, h2⟩
+      have hg1 : g = 1 := Complex.ext (by simpa using h1) (by simpa using h2)
+      apply hQ
+      have : ringPt P θE - Q = e θE := by rw [← hm, hmg, hg1, one_mul]
+      rw [ringPt] at this
+      linear_combination -this
+    obtain ⟨ρ, hρ, hcore⟩ := side_core hαβ hne hσ
+    -- the distance to `Q` in the frame
+    have hdist : ∀ z : ℂ, ∀ X Y : ℝ, z - ringPt P θE = ((Y : ℂ) + (X : ℂ) * I) * e θE →
+        dist z Q ^ 2 = X ^ 2 + Y ^ 2 + 2 * (g.re * Y + g.im * X) + 1 ∧ dist z (ringPt P θE) ^ 2 = X ^ 2 + Y ^ 2 := by
+      intro z X Y hz
+      have hzQ : z - Q = ((Y : ℂ) + (X : ℂ) * I + g) * e θE := by
+        rw [add_mul, ← hmg, ← hz, hm]; ring
+      have hre : ((Y : ℂ) + (X : ℂ) * I + g).re = Y + g.re := by simp
+      have him : ((Y : ℂ) + (X : ℂ) * I + g).im = X + g.im := by simp
+      refine ⟨?_, ?_⟩
+      · rw [dist_eq_norm, hzQ, norm_mul, norm_e, mul_one, ← Complex.normSq_eq_norm_sq, Complex.normSq_apply, hre, him]
+        linear_combination hαβ
+      · rw [dist_eq_norm, hz, norm_mul, norm_e, mul_one, ← Complex.normSq_eq_norm_sq, Complex.normSq_apply]
+        simp
+        ring
+    have hsmall : ∀ z : ℂ, z ≠ ringPt P θE → dist z (ringPt P θE) < min 1 ρ → ∀ X Y : ℝ,
+        dist z (ringPt P θE) ^ 2 = X ^ 2 + Y ^ 2 → 0 < X ^ 2 + Y ^ 2 ∧ X ^ 2 + Y ^ 2 < ρ := by
+      intro z hzx hzd X Y hN
+      have hd0 : 0 < dist z (ringPt P θE) := dist_pos.mpr hzx
+      have hd1 : dist z (ringPt P θE) < 1 := lt_of_lt_of_le hzd (min_le_left _ _)
+      have hd2 : dist z (ringPt P θE) < ρ := lt_of_lt_of_le hzd (min_le_right _ _)
+      rw [← hN]
+      exact ⟨by positivity, by nlinarith⟩
+    refine ⟨min 1 ρ, lt_min one_pos hρ, ?_⟩
+    rcases hcore with hc | hc
+    · refine Or.inr fun z hzK hzx hzd => ?_
+      obtain ⟨X, Y, hz, hX, h1, h2⟩ := hfr z hzK
+      obtain ⟨hdQ, hdx⟩ := hdist z X Y hz
+      obtain ⟨hN0, hNρ⟩ := hsmall z hzx hzd X Y hdx
+      have := hc X Y R' R'' hR' hR'' hX h1 h2 hN0 hNρ
+      nlinarith [dist_nonneg (x := z) (y := Q)]
+    · refine Or.inl fun z hzK hzx hzd => ?_
+      obtain ⟨X, Y, hz, hX, h1, h2⟩ := hfr z hzK
+      obtain ⟨hdQ, hdx⟩ := hdist z X Y hz
+      obtain ⟨hN0, hNρ⟩ := hsmall z hzx hzd X Y hdx
+      have := hc X Y R' R'' hR' hR'' hX h1 h2 hN0 hNρ
+      nlinarith [dist_nonneg (x := z) (y := Q)]
+  · exact ⟨dist x Q - 1, by linarith, Or.inr fun z _ _ hz => by
+      have := dist_triangle x z Q
+      rw [dist_comm x z] at this
+      linarith⟩
+
+/-- Spec: `collarK_one_side` applies at numbers — the collar of radii `3/4`, `5/4` over `[0, π/6]` about `0`, its end `ringPt 0 0`,
+and the unit circle about `2`, which touches `ω(0)` there from outside. -/
+example : ∃ ρ > 0, (∀ z ∈ collarK (0 : ℂ) 0 (π / 6) (3 / 4) (5 / 4), z ≠ ringPt 0 0 → dist z (ringPt 0 0) < ρ → dist z 2 < 1) ∨
+    (∀ z ∈ collarK (0 : ℂ) 0 (π / 6) (3 / 4) (5 / 4), z ≠ ringPt 0 0 → dist z (ringPt 0 0) < ρ → 1 < dist z 2) :=
+  collarK_one_side (by norm_num) (by norm_num) (by linarith [Real.pi_pos]) (by norm_num) (Or.inl rfl)
+
+/-- The outward lens profile is at least `1` (above `1` over the open sector, `1` off it). -/
+theorem CollarFitOut.one_le_outerProf (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') (θ : ℝ) : 1 ≤ outerProf θ₁ θ₂ R θ := by
+  rcases hfit.pushOutProfiles.cases θ with ⟨-, -, -, h, -⟩ | ⟨-, -, h, -⟩
+  · exact h.le
+  · exact h.ge
+
+/-- **The closed outward lens is closed**: `{P + t e(θ) : θ ∈ [θ₁, θ₂], 1 ≤ t ≤ outerProf θ}` (mirror of
+`CollarFit.isClosed_closedLens`; the lens is on the other side of `ω(P)`). -/
+theorem CollarFitOut.isClosed_closedLensOut (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') :
+    IsClosed (polarSet P (Icc θ₁ θ₂) fun θ => Icc 1 (outerProf θ₁ θ₂ R θ)) :=
+  (isCompact_polarSet_Icc P continuous_const hfit.pushOutProfiles.cont_l fun θ _ => hfit.one_le_outerProf θ).isClosed
+
+/-- The outward lens with its boundary lies in the closed outward lens. -/
+theorem CollarFitOut.lensOut_subset_closedLensOut (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') :
+    lensOutSet P θ₁ θ₂ R ∪ lensOutCurve P θ₁ θ₂ R ⊆ polarSet P (Icc θ₁ θ₂) fun θ => Icc 1 (outerProf θ₁ θ₂ R θ) := by
+  rintro z (⟨θ, hθ, t, ht, rfl⟩ | ⟨θ, hθ, t, ht, rfl⟩)
+  · exact ⟨θ, Ioo_subset_Icc_self hθ, t, ⟨ht.1, ht.2.le⟩, rfl⟩
+  · rw [mem_singleton_iff] at ht
+    exact ⟨θ, hθ, t, ⟨ht ▸ hfit.one_le_outerProf θ, ht.le⟩, rfl⟩
+
+/-- **The sides of a unit circle through an end are kept** by the outward bend (mirror of `CollarFit.sides_end`; validity is not
+read): near an end the homeomorphism moves points only inside the collar, which lies on one side of `ω(Q)` for `Q ≠ P`
+(`collarK_one_side`), so it moves no point across `ω(Q)`, and the closures at the end of each class met with either side are carried
+to themselves. No colour is named: the lens's colour — the inner one here, the outer one for the toward bend — plays no part at an
+end. -/
+theorem CollarFitOut.sides_end (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {Q x : ℂ} (hQ : Q ≠ P)
+    (hx : x = ringPt P θ₁ ∨ x = ringPt P θ₂) :
+    hfit.map.innerColours Q x = F.innerColours Q x ∧ hfit.map.outerColours Q x = F.outerColours Q x := by
+  have h12 := hfit.ring.1
+  obtain ⟨ρ, hρ, hside⟩ :=
+    collarK_one_side hfit.params.1 (hfit.params.2.2.1.trans hfit.params.2.2.2.1) hfit.short hQ hx
+  -- the end is fixed
+  have hfix : hfit.homeo x = x := by
+    obtain ⟨ψ, hψ, hψ', rfl⟩ : ∃ ψ, ψ ∈ Icc θ₁ θ₂ ∧ ψ ∉ Ioo θ₁ θ₂ ∧ x = ringPt P ψ := by
+      rcases hx with rfl | rfl
+      · exact ⟨θ₁, ⟨le_rfl, h12.le⟩, fun h => lt_irrefl _ h.1, rfl⟩
+      · exact ⟨θ₂, ⟨h12.le, le_rfl⟩, fun h => lt_irrefl _ h.2, rfl⟩
+    exact hfit.homeo_fix_Γ (hfit.ring.2.1 ⟨ψ, hψ, rfl⟩) (ringPt_not_mem_openArc hfit.short hψ hψ')
+  -- a ball about the end whose image stays within `ρ` of it
+  obtain ⟨δ, hδ, hδb⟩ := Metric.continuousAt_iff.mp hfit.homeo.continuous.continuousAt ρ hρ
+  rw [hfix] at hδb
+  set ρ' := min δ ρ with hρ'
+  have hρ'0 : 0 < ρ' := lt_min hδ hρ
+  -- on that ball the homeomorphism moves no point across `ω(Q)`
+  have hiff : ∀ z ∈ ball x ρ', (dist (hfit.homeo z) Q < 1 ↔ dist z Q < 1) ∧ (dist (hfit.homeo z) Q ≤ 1 ↔ dist z Q ≤ 1) := by
+    intro z hz
+    by_cases hzK : z ∈ collarK P θ₁ θ₂ R' R''
+    · by_cases hzx : z = x
+      · rw [hzx, hfix]
+        exact ⟨Iff.rfl, Iff.rfl⟩
+      · have h1 : dist z x < ρ := lt_of_lt_of_le (mem_ball.mp hz) (min_le_right _ _)
+        have h2 : dist (hfit.homeo z) x < ρ := hδb (lt_of_lt_of_le (mem_ball.mp hz) (min_le_left _ _))
+        have hne : hfit.homeo z ≠ x := fun h => hzx (hfit.homeo.injective (h.trans hfix.symm))
+        rcases hside with hs | hs
+        · have a1 := hs z hzK hzx h1
+          have a2 := hs _ (hfit.homeo_maps_collar hzK) hne h2
+          exact ⟨iff_of_true a2 a1, iff_of_true a2.le a1.le⟩
+        · have a1 := hs z hzK hzx h1
+          have a2 := hs _ (hfit.homeo_maps_collar hzK) hne h2
+          exact ⟨iff_of_false (not_lt.mpr a2.le) (not_lt.mpr a1.le), iff_of_false (not_le.mpr a2) (not_le.mpr a1)⟩
+    · rw [(hfit.homeo_eq_self hzK).1]
+      exact ⟨Iff.rfl, Iff.rfl⟩
+  -- the closures at the end, of a class met with a set the homeomorphism respects near the end
+  have key : ∀ S : Set ℂ, (∀ z ∈ ball x ρ', (hfit.homeo z ∈ S ↔ z ∈ S)) → ∀ d : Fin k,
+      x ∈ closure (hfit.map.region d ∩ S) ↔ x ∈ closure (F.region d ∩ S) := by
+    intro S hS d
+    have hreg : hfit.map.region d = hfit.homeo '' F.region d := pushforward_region d
+    have hWo : IsOpen (hfit.homeo '' ball x ρ') := hfit.homeo.isOpenMap _ isOpen_ball
+    have hxW : x ∈ hfit.homeo '' ball x ρ' := ⟨x, mem_ball_self hρ'0, hfix⟩
+    have himg : hfit.homeo '' ball x ρ' ∩ (hfit.homeo '' F.region d ∩ S) = hfit.homeo '' (ball x ρ' ∩ (F.region d ∩ S)) := by
+      ext y
+      constructor
+      · rintro ⟨⟨z, hzW, rfl⟩, ⟨z', hz', hzz⟩, hyS⟩
+        obtain rfl := hfit.homeo.injective hzz
+        exact ⟨z', ⟨hzW, hz', (hS z' hzW).mp hyS⟩, rfl⟩
+      · rintro ⟨z, ⟨hzW, hzr, hzS⟩, rfl⟩
+        exact ⟨⟨z, hzW, rfl⟩, ⟨z, hzr, rfl⟩, (hS z hzW).mpr hzS⟩
+    have hloc : x ∈ closure (hfit.homeo '' F.region d ∩ S) ↔
+        x ∈ closure (hfit.homeo '' ball x ρ' ∩ (hfit.homeo '' F.region d ∩ S)) :=
+      ⟨fun h => hWo.inter_closure ⟨hxW, h⟩, fun h => closure_mono inter_subset_right h⟩
+    rw [hreg, hloc, himg, ← hfit.homeo.image_closure]
+    constructor
+    · rintro ⟨y, hy, hyx⟩
+      have hyx' : y = x := hfit.homeo.injective (hyx.trans hfix.symm)
+      rw [hyx'] at hy
+      exact closure_mono inter_subset_right hy
+    · intro h
+      exact ⟨x, isOpen_ball.inter_closure ⟨mem_ball_self hρ'0, h⟩, hfix⟩
+  refine ⟨Set.ext fun d => ?_, Set.ext fun d => ?_⟩
+  · exact key (ball Q 1) (fun z hz => by simp only [mem_ball]; exact (hiff z hz).1) d
+  · show x ∈ closure (hfit.map.region d \ closedBall Q 1) ↔ x ∈ closure (F.region d \ closedBall Q 1)
+    rw [sdiff_eq, sdiff_eq]
+    exact key (closedBall Q 1)ᶜ (fun z hz => by
+      simp only [mem_compl_iff, mem_closedBall]; exact not_congr (hiff z hz).2) d
+
+/-- **The sides at a point of `F.Γ` off the open arc are kept** by the outward bend (mirror of `CollarFit.sides_eq`; the common step
+of R1 and R2): off the closed outward lens the two maps agree near the point (`map_agreesOff`, closures being local); on it, such a
+point is an end of the arc — over the open sector the lens off `ω(P)` lies in the **outer** collar, interior in `F` (`kout_subset`;
+the toward bend's lens lies in the inner collar) — where `sides_end` applies for a centre other than `P`. -/
+theorem CollarFitOut.sides_eq (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {Q x : ℂ} (hxΓ : x ∈ F.Γ)
+    (hxO : x ∉ ringPt P '' Ioo θ₁ θ₂) (hQ : (x = ringPt P θ₁ ∨ x = ringPt P θ₂) → Q ≠ P) :
+    hfit.map.innerColours Q x = F.innerColours Q x ∧ hfit.map.outerColours Q x = F.outerColours Q x := by
+  have hp := hfit.pushOutProfiles
+  by_cases hxV : x ∈ polarSet P (Icc θ₁ θ₂) fun θ => Icc 1 (outerProf θ₁ θ₂ R θ)
+  · obtain ⟨ψ, hψ, t, ht, hxe⟩ := hxV
+    by_cases hψ' : ψ ∈ Ioo θ₁ θ₂
+    · exfalso
+      rcases eq_or_lt_of_le ht.1 with ht1 | ht1
+      · subst ht1
+        exact hxO ⟨ψ, hψ', by rw [hxe]; simp [ringPt]⟩
+      · exact (hfit.kout_subset ⟨ψ, hψ', t, ⟨ht1, ht.2.trans (hp.inside ψ hψ').2.2.2.le⟩, hxe⟩).1.2 hxΓ.2
+    · have ht1 : t = 1 := le_antisymm ((hp.off ψ hψ').2.1 ▸ ht.2) ht.1
+      have hxe' : x = ringPt P ψ := by rw [hxe, ht1]; simp [ringPt]
+      have hend : x = ringPt P θ₁ ∨ x = ringPt P θ₂ := by
+        rcases eq_or_lt_of_le hψ.1 with h1 | h1
+        · exact Or.inl (hxe'.trans (by rw [h1]))
+        · exact Or.inr (hxe'.trans (by rw [le_antisymm hψ.2 (not_lt.mp fun h2 => hψ' ⟨h1, h2⟩)]))
+      exact hfit.sides_end (hQ hend) hend
+  · have hO : IsOpen (polarSet P (Icc θ₁ θ₂) fun θ => Icc 1 (outerProf θ₁ θ₂ R θ))ᶜ := hfit.isClosed_closedLensOut.isOpen_compl
+    have hag : ∀ z ∈ (polarSet P (Icc θ₁ θ₂) fun θ => Icc 1 (outerProf θ₁ θ₂ R θ))ᶜ,
+        (z ∈ hfit.map.interiorPts ↔ z ∈ F.interiorPts) ∧ hfit.map.col z = F.col z :=
+      fun z hz => ⟨(hfit.map_agreesOff.2 z fun hzU => hz (hfit.lensOut_subset_closedLensOut hzU)).1.symm,
+        (hfit.map_agreesOff.2 z fun hzU => hz (hfit.lensOut_subset_closedLensOut hzU)).2.symm⟩
+    have hloc := fun j S => mem_closure_region_inter_iff_of_agree hO hxV (fun z hz => (hag z hz).1)
+      (fun z hz => (hag z hz).2) j S
+    refine ⟨Set.ext fun j => hloc j (ball Q 1), Set.ext fun j => ?_⟩
+    show x ∈ closure (hfit.map.region j \ closedBall Q 1) ↔ x ∈ closure (F.region j \ closedBall Q 1)
+    rw [sdiff_eq, sdiff_eq]
+    exact hloc j (closedBall Q 1)ᶜ
+
+/-- **The open arc is interior in the outward bent map** (`map_lens` at `t = 1`: the lens with the open arc takes the inner colour),
+so off its `Γ`. -/
+theorem CollarFitOut.ringPt_notMem_map_Γ (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {ψ : ℝ} (hψ : ψ ∈ Ioo θ₁ θ₂) :
+    ringPt P ψ ∉ hfit.map.Γ := fun hΓ =>
+  (hfit.map_lens ⟨ψ, hψ, 1, ⟨le_rfl, (hfit.pushOutProfiles.inside ψ hψ).2.2.1⟩, by simp [ringPt]⟩).1.2 hΓ.2
+
 /-- **R1** for the outward bend (mirror of `CollarFit.map_R1`, through the mirrors of `exists_one_side`, `sides_end`, `sides_eq`:
 near an end the collar lies on one side of `ω(Q)`, `Q ≠ P`, and both its halves keep their colours and the end in their closures).
 **Open — `sorry`** (child C6). -/

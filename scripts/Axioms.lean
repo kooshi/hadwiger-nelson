@@ -6143,6 +6143,19 @@ The children themselves are in FS131-KA1's block above; these are the helpers th
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_maps_collar
 -- FS131-BA2 block end
 
+/-! ## FS-131 wave 5 (job FS131-BA3) — the outward bend's last two children: new helper declarations (`Plane/ValidMap/BendGap`)
+
+`CollarFitOut.map_R1` and `CollarFitOut.map_R2` themselves are in FS131-KA1's block above; these are the helpers this job minted
+(the mirrors of `CollarFit.exists_one_side`, the closed lens, `sides_end`, `sides_eq`). All proved. -/
+#print axioms HadwigerNelson.Plane.ArcMap.collarK_one_side
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.one_le_outerProf
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.isClosed_closedLensOut
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.lensOut_subset_closedLensOut
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.sides_end
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.sides_eq
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.ringPt_notMem_map_Γ
+-- FS131-BA3 block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
