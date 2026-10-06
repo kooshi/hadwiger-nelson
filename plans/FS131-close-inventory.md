@@ -7363,3 +7363,22 @@ reason by the close.*
      ledger stood at 80 of 90 GiB (nothing hit the cap); its Mathlib builds are at `~/.cache/ext-hn2/` (20 GB on
      disk, since the scratch directory is memory) — **held, default keep** until Kooshi says the matter is closed,
      then deleted. No reply sent: it asks none.
+584. **FS131-I8B, by message mid-job: the shared module is saved — `Plane/RingCalculus/StarChart`, commit `d635a30a` on `origin/fs131-w8b`, no `sorry`; the merge of the first implementer's branch made with no conflict** (source: I8B's message to "main", 2026-10-06 — the full review is at its hand-back).
+     **The three shared lemmas, as it prints them**: C1 `exists_int_of_angleIcc_subset` — an interval inside the union
+     of `2π`-translates of an interval shorter than `2π` lies in one — **a finding: it was not missing**, it is wave
+     3's `ArcMap.exists_lift_of_Icc_subset_angleIcc` in another form, stated as its one-line corollary; K1
+     `IsSectorChart.tileAt_equiv` — under `SimpleOn` at a point its tiles are its chart's sectors, one each, with
+     their cones — and the counted form both later jobs call, `exists_sectorChart_tileAt`; K2
+     `IsSectorChart.exists_initialPiece_between` — consecutive sectors share an initial piece of a map arc in both
+     closures — and `exists_initialPiece_of_ncard_le_three` for the three-tile case. With them C2, G1
+     (`mem_closure_tile_of_near`), `ncard_tileAt_eq` and two children of K2. By its word: 16 declarations on a
+     subset of the standard three, a control printing `sorryAx`, the doubled-name check and the module map passing;
+     and `star_anti` elaborates with the two ruled binders exactly — "they close the leaf" — not yet committed.
+     **Checked by me**: `d635a30a` is the tip of `origin/fs131-w8b`; `StarChart.lean` there is 578 lines with no
+     `sorry` and imports `TilesAt`, `ValidMap/HexRing`, `ValidMap/Surgery` (not `Star`: the two semi-hub modules can
+     import it); the seven named statements are present; `sorry` at that commit: `SemiHub` 17, `SemiHubPlaces` 6,
+     `Empty` 1, `Star` 1; its build log at that commit ends "OK — 468 of 468 batches", `EXIT=0`. **Rulings.**
+     (a) **The two parallel implementers' branches are cut from its hand-back tip, not from this hash**: its
+     `star_anti` save follows shortly and no slot is free before then. (b) Their briefs' generator is written and
+     its quotations dry-checked against its tree (`mk-i8cd.py C|D`); each brief quotes the seven shared statements
+     and asks for a `#check` of every leaf and the lint. No reply sent: it asks none.
