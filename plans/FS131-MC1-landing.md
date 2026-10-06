@@ -38,3 +38,34 @@ built, 1 module(s) with warnings`, `exit=0`; the one warning replayed is `Plane/
 
 No statement or definition of a landed declaration; no statement of the lane's skeleton. New declarations in the four model modules (or
 beside them); docstrings only in landed modules; the registrations the gate's procedures ask.
+
+## Stage 2 — SAVED (FS131-MC1): `main` merged in (`abe678bb`); the joined tree builds; no doubled name
+
+- **The trial** (`git merge-tree --write-tree --name-only HEAD origin/main`, `data/fs131/mc/merge-trial.txt`; `origin/main` at
+  `c52be9e9`, merge base `f46430e2`): one conflict, `scripts/Axioms.lean`; `ARCHITECTURE.md` and `Proofs.lean` merge by themselves.
+- **The merge `abe678bb`** (`git merge --no-ff origin/main`): `scripts/Axioms.lean` keep-both, `main`'s blocks first and the example
+  maps' block after them, above the `=== PURCHASED ===` banner — 5,328 `#print axioms` lines = `main`'s 5,221 + the lane's 107;
+  `git diff origin/main -- scripts/Axioms.lean` removes no line. Against `main`, `Proofs.lean` gains the four `Plane.Models` imports
+  and `ARCHITECTURE.md` the four rows, nothing else.
+- **The build tree.** Wave 5's compiled modules were copied in from the idle landing worktree before the build
+  (`rsync -a --update .claude/worktrees/fs131-w5c/.lake/build/ .lake/build/`, `data/fs131/mc/rsync-w5c-build.txt`: 76 `.olean` files
+  written, 24 of them new; that tree is at `ad611866`, whose `Proofs/` is `main`'s — `git diff --name-only 1351ebc2 origin/main --
+  Proofs Proofs.lean lakefile.toml lake-manifest.json lean-toolchain` is empty). Lake checks each module's trace by hash, so a
+  copied file that did not match its source would have been rebuilt.
+- **The build of the joined tree** (`data/fs131/mc/build-merge.log`, `HEAD=abe678bb`): `build: OK — 465 of 465 batches, 5 module(s)
+  rebuilt, 1 module(s) with warnings, 8m41s`, `exit=0`; the full log (`build-merge-full.log`) ends `Build completed successfully
+  (5807 jobs)` and holds one warning, twice printed: `Plane/Models/Stuck.lean:1362:8: declaration uses 'sorry'`. The five rebuilt are
+  the four model modules and `Proofs`.
+- **`./scripts/dupnames.sh` on the joined tree, before anything else** (`data/fs131/mc/dupnames-joined.log`, `exit=0`): `dupnames: OK
+  — no name is declared by two modules (23 generated on demand, listed above)`. The three brick facts re-proved in this lane carry
+  names of their own (`brickBase_mem_interiorPts`, `brickBase_col_eq`, `brickBase_col_zero`), so the join made no doubled name; the
+  tidy to wave 5's `BrickMap` is Stage 3's.
+
+### 2.1 A finding sent to the coordinator at this stage (by message, 2026-10-06)
+
+Read by script over the nineteen stuck-family heads of `Plane/ValidMap/Terminal`: `F.Terminal` alone is a hypothesis of `n3_end_chain`
+(and of the three `n3_end_*` steps whose `hno` the model fails by design); `cv_l0`, `hornBoundsQR_of_isChainVertex`,
+`horn_upper_ne_one`, `c_ends`, `run_ends` take `hM : F.IsTerminalMap`, which is `Valid ∧ IsPlaneMap ∧ Terminal ∧ QROnly`
+(`Plane/ValidMap/Chain.lean` l. 76). `stuckModel.QROnly` is not a declaration of the skeleton. So `stuckModel_terminal` proved would
+serve one docstring line in full (`n3_end_chain`); `cv_l0`'s needs `QROnly` beside it. The other fifteen heads take `Covers` or
+`IsPlaneMap` with `IsStuck` or `IsChainVertex`, which `stuckModel_hyps` supplies.
