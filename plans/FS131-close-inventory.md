@@ -4362,3 +4362,10 @@ reason by the close.*
      not: 33 lemmas proved twice, then a rename across proofs. Confidence: high. Sent to BA2 with the list verbatim; its brief amended on disk
      (gate PASS). **A slip, mine**: the message to BA2 says "three statement changes" and lists two; corrected in the amendment and to be
      corrected in the next message to BA2. **Credit**: BA1 saw the collision before either branch had it.
+
+453. **A slip, mine, and a tool defect** (2026-10-06). The amendment to FS131-BA2's brief (item 452) was committed with the gate failing: my
+     command piped the gate through `tail`, so the chain read `tail`'s exit status, not the gate's. Two failures behind it: a bare file name
+     (mine), and **a false one — the gate reads a backticked token that begins with a dot (`.toward`, a dotted abbreviation of a Lean name) as a
+     path that does not exist**. Fixed within minutes (the names written out; the gate's exit status read directly; PASS); the job had the
+     content by message, so nothing reached it wrong. For agent-forge (`forge/STATUS.md` under Keryx), with the repro: a brief line holding
+     `` `.toward` ``. From here on the gate's own exit status gates a brief's commit.

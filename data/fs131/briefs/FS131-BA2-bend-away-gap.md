@@ -130,10 +130,10 @@ cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches
 FS131-BA1, on `fs131-w5a`, proved `LensOut` and `CollarMapOut` (built, `66cb0314`) and `BendAway` (a later commit, sent by message when it is
 built), and added public helpers the skeleton did not state. **Do not declare these names; merge `origin/fs131-w5a` into `fs131-w5z` and use
 them** (ruling 452 (b)) — now at `66cb0314` if a child needs a `CollarFitOut` fact, and again or only at `BendAway`'s commit. Expected conflict:
-`scripts/Axioms.lean`, keep both blocks; `BendStep.lean` merges by itself (BA1's hunk is l. 312, yours the horn child). The names, in BA1's words:
+`scripts/Axioms.lean`, keep both blocks; the module `BendStep` merges by itself (BA1's hunk is l. 312, yours the horn child). The names, from BA1's message (its dotted abbreviations written out):
 in `CollarMapOut`: `CollarFitOut.mem_interiorPts`, `kin_subset`, `kout_subset`, `homeo_eq_self`, `homeo_ringPt`, `homeo_fix_Γ`,
-`lensOutCurve_subset`, `ringPt_mem_lensOutCurve`, `not_kept`, `homeo_image_Γ`; in `LensOut`: `PushOutProfiles.cases`, `.toward`, `.a_pos`,
-`.push1_zero`, `.push1_pos`, `.push1_push1`, `tangRad_mono`, `tangRad_mul_cos_anti`, `tangentArc_image_out`, `collarOutMid_eq`,
+`lensOutCurve_subset`, `ringPt_mem_lensOutCurve`, `not_kept`, `homeo_image_Γ`; in `LensOut`: `PushOutProfiles.cases`, `PushOutProfiles.toward`, `PushOutProfiles.a_pos`,
+`PushOutProfiles.push1_zero`, `PushOutProfiles.push1_pos`, `PushOutProfiles.push1_push1`, `tangRad_mono`, `tangRad_mul_cos_anti`, `tangentArc_image_out`, `collarOutMid_eq`,
 `dist_collarOutMid_left`, `dist_collarOutMid_right`, `outerProf_le_left`, `outerProf_le_right`, `dist_lt_one_of_mem_lensOutSet`,
 `two_sin_half_le_of_gap`, `sq_div_two_lt_sin`; in `BendAway`: `ringPt_inj_of_abs_sub_lt`, `AgreesOff.mem_Γ_iff_of_notMem`,
 `AgreesOff.mem_region_iff_of_notMem`, `AwayBend.dist_centre`, `AwayBend.closure_region_iff`, `AwayBend.ringPt_notMem`. **Two ruled statement
