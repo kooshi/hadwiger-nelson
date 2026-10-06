@@ -6346,3 +6346,39 @@ reason by the close.*
      (`mk-k78b.py 8`; gate exit 0); the final Lean text is relayed when K7b's skeleton builds. (d) Confidence in (b):
      high — I read the lines; what I did not check is whether any other filed result quotes one of the three entries
      without its class: asked of K7b for its saved stage.
+
+547. **FS131-I10F done: wave 10's three measure-theoretic leaves and the model `sp_if` owed are proved, as stated — every leaf
+     of the wave's second planning pass is now proved on some branch** (implementer, Opus; harness 442k and 63 minutes by
+     the task notice; record `fs131-w10f`'s `plans/FS131-I10F-implementation.md`; report `data/fs131/reports/FS131-I10F.md`;
+     seven commits, tip `f65c2aa5`; pushed, tree clean). **Proved on the standard three**:
+     `MajorityVote.ae_eq_measurable_of_majority` (FS131-E8-SI5C, the deriver's lemma, at the planner's wider class);
+     `SpectralInputs.contVec_prod_eq` (J45-SI-J at the filter form of item 503 — by a route on events, with no conditional
+     expectation and no `L²` density); `exists_parityHom` (with no valuation subring) and `negCircle_trivial_bot`; and
+     beyond the leaves `sp_if_hypotheses_trivial_bot` — given `BochnerHerglotz`, every other hypothesis of `sp_if` at once
+     at `F = ℚ` with the trivial interface, with `sp_if` applied to it — and `contVec_prod_eq_coin`, a model of every
+     hypothesis of `contVec_prod_eq`. **My receipt**: tip `f65c2aa5` equals `origin/fs131-w10f`, tree clean; outside
+     `data/`, `plans/`, `tools/` it changed its three files and `scripts/Axioms.lean`; the last real build's full log
+     (`build/gate/build/20261006T171502Z-1696764.log`) ends "Build completed successfully (5851 jobs)", 93 warnings, all
+     `declaration uses sorry` in five other jobs' files, none in its three; `sorry` in the three by the handoff's grep:
+     0, 0, 0; no `axiom`, no `native_decide`; `axioms-final.txt` parsed by script — 38 records, 37 on exactly the
+     standard three (the four leaves and the two models among them), one control on `sorryAx`; the eight declarations of
+     the three files at `330d2f48` compared head by head — none changed, 35 added; `sp_if_hypotheses_trivial_bot`'s
+     statement read, and the spec example's application of `sp_if` found (l. 320). Not checked by me: the 1,010 added
+     lines beyond the build; the fibrewise step it says closes my unchecked receipt on item 503. **Generalization**: item
+     542. **Predictions scored**: 204, 493 and 301 lines against 150, about 500 and 210 planned; 442k tokens against 350k
+     — two more pairs on item 541's lines. **Tool defect, its own, disclosed**: a planted fault that first landed where
+     its check does not look. **Credit**: the product's factor proved by a variance of sections where the plan marked an
+     `L²` density hard, the model the plan left unbuilt built, and the landed form of `sp_if` checked against its own.
+     **Rulings.** (a) **`sp_if`'s open gate item now rests on one named classical hypothesis and nothing else**
+     (`BochnerHerglotz`, a theorem to discharge, not a structure to inhabit): its docstring names
+     `sp_if_hypotheses_trivial_bot` at the second landing and says so. Alternative: call the item closed. Why not: the
+     gate's rule is every hypothesis at once, and one is still assumed. Confidence: high. (b) **Wave 10's third planner
+     merges `f65c2aa5` after `d4adcd40` and before it states the import** (a dated amendment to its brief, gate exit
+     0; my trial of the three merges on its base conflicts in two registry files at the merge of `main` only): the
+     commit it sends for the import then holds the whole second pass proved, and **wave 10's second landing,
+     FS131-L10B, is cut from that commit** — the ten modules and the import, without the third pass's new skeleton.
+     Brief not written; it waits for that hash. (c) The majority vote's hypotheses: ruling 542 stands. (d) The fuller
+     model of `contVec_prod_eq` (a non-trivial first system, about forty lines) is not asked: the one built meets every
+     hypothesis. (e) **Slot → FS131-L6A** (wave 6's first landing, item 545), launched 2026-10-06; **from now until it
+     hands back I commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`,
+     `LEAN.md`.** In flight: 1 (K10c) + 1 (K7b) + 1 (L6A) = 3.

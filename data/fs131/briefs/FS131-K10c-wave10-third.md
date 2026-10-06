@@ -238,3 +238,25 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-06, mid-job) — the third implementer is back: one more merge, before the import
+
+Nothing above is withdrawn. The implementer of `ProductFactor`, `MajorityVote` and `NegCircleModel` (FS131-I10F, inventory item 547) has
+handed back on `origin/fs131-w10f` at `f65c2aa5`: its four leaves are proved as stated, on the standard three, with no statement changed.
+With it every leaf of the second pass is proved.
+
+1. **Merge `f65c2aa5` after `d4adcd40` and before you state the import** (a trial on your base with `origin/main` and `d4adcd40` beneath
+   it conflicts in the registry files only). Then the commit you send me for the import holds the whole second pass, proved, and the
+   wave's second landing is cut from it.
+2. **What it found that your rows read**: `ae_eq_measurable_of_majority` reads neither `hG` nor `hc`, and only countability of `K`
+   (already in your brief; the hypotheses go at the landing, ruling 542); `contVec_prod_eq` is proved on events, with no conditional
+   expectation and no `L²` density — and its model is built (`contVec_prod_eq_coin`: coin tosses indexed by `ℤ` under the shift), with a
+   fuller one (a non-trivial first system) about forty lines more and not done; the instance of J45-SI-J at the arithmetic filter still
+   waits on J45-N1 (a)(b) or your two-fact interface.
+3. **`sp_if`'s open gate item**: `negCircle_trivial_bot` is proved, and `sp_if_hypotheses_trivial_bot` gives every hypothesis of `sp_if`
+   at once at `F = ℚ` with the trivial interface, **given `BochnerHerglotz`** — so what the item still lacks is a model of that one
+   classical hypothesis, which is a theorem to discharge and not a structure to inhabit. Say in your handoff how the docstring should put
+   it. Its spec example supplies `[Countable (unitRing ⊥)]` by two `haveI` lines that the landed `sp_if` no longer reads: after the three
+   merges, delete them if the build or the lint objects, otherwise leave them for the landing and say so.
+4. **Its new statements owe your read-back** with the others: the two models, `fibre_mem_factorSets`, and the two definitions `cylMap`,
+   `cylSets`.
