@@ -21,8 +21,9 @@ Usage: python3 tools/fs131_i6a_statements.py [--plant KIND]
   --plant basic   alters one character of an in-memory copy of Basic.lean
   --plant axiom   appends an `axiom` to the in-memory copy
   --plant proof   alters the body of a base-proved theorem (`half_dichotomy`)
+  --plant example alters the statement of a base `example` (the spec of `erosion_diam`)
 Each must report at least one failure and exit 1."""
-import re, subprocess, sys, pathlib
+import hashlib, re, subprocess, sys, pathlib
 
 BASE = "3928644b"
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -71,14 +72,16 @@ def parse(text):
                 j += 1
             block = "\n".join(lines[i:j]).rstrip()
             kind, name = mk.group(1), mk.group(2)
-            if kind == "example" or not name:
-                anon += 1
-                name = f"<{kind} #{anon}>"
             if kind in ("theorem", "lemma", "example", "instance"):
                 k = block.find(":=")
                 stmt, body = (block, "") if k < 0 else (block[:k], block[k:])
             else:
                 stmt, body = block, ""
+            if kind == "example" or not name:
+                # an anonymous declaration is keyed by its statement, never by its position: helpers added above it
+                # must not shift it (a defect of this tool's first version, found at stage 3)
+                anon += 1
+                name = f"<{kind} {hashlib.sha1(stmt.encode()).hexdigest()[:10]}>"
             decls.append((kind, name, pending_doc, stmt, body))
             pending_doc = ""
             i = j
@@ -106,6 +109,9 @@ def main():
     elif plant == "proof":
         assert "obtain ⟨hout, hin⟩ := hcon" in new_p
         new_p = new_p.replace("obtain ⟨hout, hin⟩ := hcon", "obtain ⟨hout, hin'⟩ := hcon", 1)
+    elif plant == "example":
+        assert "example : (1 / 2 : ℝ) ≤ 1 / (2 * Real.sin" in new_p
+        new_p = new_p.replace("example : (1 / 2 : ℝ) ≤ 1 / (2 * Real.sin", "example : (1 / 3 : ℝ) ≤ 1 / (2 * Real.sin", 1)
     elif plant is not None:
         print("unknown plant", plant)
         sys.exit(2)
@@ -136,7 +142,7 @@ def main():
     for kind, name, doc, stmt, body in old:
         d = newmap.get(name)
         if d is None:
-            fail(f"{kind} {name}: missing from the tree")
+            fail(f"{kind} {name}: missing from the tree" + (" (an anonymous declaration: its STATEMENT differs or it was removed)" if name.startswith("<") else ""))
             continue
         notes = []
         if d[0] != kind:

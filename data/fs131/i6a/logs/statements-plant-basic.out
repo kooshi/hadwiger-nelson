@@ -3,20 +3,51 @@ same    | Pinch: module docstring
 same    | theorem IsMUA.exists_ball_ae_subset: statement identical; proved at base
 same    | theorem saturated_of_forall_isMUA: statement identical; proved at base
 same    | theorem AeColouring.saturated_of_idomatic: statement identical; proved at base
-same    | example <example #1>: statement identical; proved at base
+same    | example <example 7fe739d7ef>: statement identical; proved at base
 same    | theorem half_dichotomy: statement identical; proved at base
-same    | theorem half_upperDensity: statement identical; leaf: still sorry
-same    | theorem sq9_isTangentAt: statement identical; leaf: still sorry
-same    | theorem pinch: statement identical; leaf: still sorry
-same    | theorem pinch_not_in_in: statement identical; leaf: still sorry
-same    | theorem TwoColourOn.essBoundary_inter_eq: statement identical; leaf: still sorry
+same    | theorem half_upperDensity: statement identical; leaf: PROVED here; docstring: lines added (allowed)
+same    | theorem sq9_isTangentAt: statement identical; leaf: PROVED here
+same    | theorem pinch: statement identical; leaf: PROVED here; docstring: lines added (allowed)
+same    | theorem pinch_not_in_in: statement identical; leaf: PROVED here
+same    | theorem TwoColourOn.essBoundary_inter_eq: statement identical; leaf: PROVED here
 same    | theorem TwoColourNhd.mem_essBoundary: statement identical; proved at base
 same    | theorem pinch_interface: statement identical; proved at base
-same    | theorem c11_discs: statement identical; leaf: still sorry
+same    | theorem c11_discs: statement identical; leaf: PROVED here
 same    | theorem c11_discs_interface: statement identical; proved at base
-same    | theorem c11_split: statement identical; leaf: still sorry
+same    | theorem c11_split: statement identical; leaf: PROVED here
 same    | theorem dist_le_one_of_mem_closure: statement identical; proved at base
 same    | theorem erosion_diam: statement identical; proved at base
 same    | theorem erosion_diam_cot: statement identical; proved at base
-same    | example <example #2>: statement identical; proved at base
-base declarations: 19  helpers: 0  sorry leaves in the tree: 7 ['half_upperDensity', 'sq9_isTangentAt', 'pinch', 'pinch_not_in_in', 'TwoColourOn.essBoundary_inter_eq', 'c11_discs', 'c11_split']  failures: 1
+same    | example <example 04263eabc8>: statement identical; proved at base
+helper  | theorem volume_halfPlane_inter_closedBall_le
+helper  | theorem volume_shifted_halfPlane_inter_closedBall_le
+helper  | theorem densityRatio_le_of_subset_halfPlane
+helper  | theorem tendsto_ofReal_one_add_sq_div_two
+helper  | theorem norm_sq_mul_sub_of_norm_eq_one
+helper  | theorem dist_add_mul_lt_one
+helper  | theorem one_lt_dist_add_mul
+helper  | theorem exists_add_mul_mem_of_isOpen
+helper  | theorem real_inner_lt_one_of_ne
+helper  | theorem neg_one_lt_real_inner_of_ne_neg
+helper  | theorem subset_of_isOpen_ae_le_isClosed
+helper  | theorem isSplitAt_of_in_out
+helper  | theorem hasTwoDiscsAt_of_out_out
+helper  | theorem densityRatio_add_of_cover
+helper  | theorem TwoColourOn.essBoundary_inter_subset
+helper  | theorem IsSplitAt.hasTwoDiscsAt
+helper  | theorem densityRatio_eventuallyEq_of_ae_eq_inter
+helper  | theorem essBoundary_inter_congr
+helper  | theorem mem_essBoundary_of_balls
+helper  | theorem exists_ball_subset_ball_of_mem_sphere
+helper  | theorem exists_ball_subset_compl_closedBall_of_mem_sphere
+helper  | theorem essBoundary_ball_one
+helper  | theorem essBoundary_compl_closedBall_one
+helper  | theorem dist_sqEdgePt_add_one
+helper  | example <example 492adddabe>
+helper  | example <example f64ad3421e>
+helper  | example <example 3e03013b9f>
+helper  | example <example e6d695ee59>
+helper  | theorem isSplitAt_ball_compl_closedBall
+helper  | example <example dcedadbb3b>
+helper  | example <example 0a8bd3f2c8>
+base declarations: 19  helpers: 31  sorry leaves in the tree: 0 []  failures: 1
