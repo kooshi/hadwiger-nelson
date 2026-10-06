@@ -7233,3 +7233,25 @@ reason by the close.*
      instance) — a slip of mine, found by the job testing it. (b) Its four decisions are ratified; Weil's bound
      appears in three forms (the axiom, a named hypothesis, one inline label), to be said in one sentence in the
      enumeration. Reply sent, one message.
+578. **The Searcher, by message mid-run: a model exists — a six-colouring of `torusGrid 12 12` meets every field of `CountData` at Euler characteristic 0; a candidate until the kernel evaluates it** (source: the Searcher's message to "main", 2026-10-06, about a quarter of an hour after launch; `data/search/2026-10-06/MODEL-torusGrid-12-12.json`, on disk, its commit to follow — the run goes on inside its hour: sheared quotients, a formula, other tilings).
+     By its word: its exact checker (`tools/search_20261006_check.py`, a transcription of the two Lean files) passes
+     all seven fields; the checker reproduces the kernel's numbers on `grid9`, `grid15`, `oneFaceTorus` and the
+     digon, and a planted fault in each field fails (48 controls); every cell has exactly two tactic darts, 288 in
+     all — "the count's extreme case"; **every other `torusGrid n m` with 3 ≤ n ≤ m ≤ 13 is unsatisfiable** (65
+     instances, each proof verified by `cake_lpr`). **Checked by me, with a script of my own that shares nothing
+     with its checker**: on the 12 × 12 torus, no cell's colour repeats among its eight neighbours, every cell's
+     four edge-neighbours are pairwise distinct, no colour absent from a cell's edge-neighbours appears on more
+     than three of its diagonal neighbours, and each of the six colours is used 24 times; and its own checker, run
+     by me, prints PASS for the seven fields, "tactic darts: 288", exit 0. Not checked by me: `mu_zero`,
+     `repeat_one_side`, `partner_unique` (its checker only); the 65 refutations; that its transcription is the
+     Lean definitions (the kernel's evaluation is that check). **Grade**: a certified candidate — [cert] by its
+     checker and mine in part, not [kernel]. **Rulings.** (a) **The model is stated in Lean as an inhabitant** —
+     `CountData (torusGrid 12 12) 6` by the kernel's evaluation, as `grid9` and `grid15` are — **by a small
+     implementer job on wave 7's count branch** (FS131-I7M, from `fs131-w7a`; brief written when the run's report
+     is in: a smaller sheared quotient, if it finds one, is the cheaper object for the kernel). With it the six
+     theorems at six colours name an inhabitant and item 564's gap closes. Alternative: leave it a certificate.
+     Why not: the milestone's rule is the kernel, and the two existing models show the shape. Confidence: high.
+     (b) **What it bears on is the deriver's to read, not mine**: the count's conditions are consistent at six
+     colours on a combinatorial map — said at that grade and no further in my report to Kooshi; a line for
+     FS-117's stub at the filing. (c) Search-lane tool files on `main` are exempt from a landing's re-gating (a
+     message to the running landing). No reply sent to the Searcher: it asks none and its hour is running.
