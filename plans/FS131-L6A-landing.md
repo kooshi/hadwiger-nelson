@@ -212,3 +212,76 @@ no name declared twice in it, and the fifteen `sorry` leaves of Stage 1 are gone
   list only, and 68 are on neither — each needs its line in `scripts/Axioms.lean` before the records check can pass (Stages 3, 5).
 
 ## Stage 2 — SAVED (FS131-L6A)
+
+## Stage 3 — SAVED (FS131-L6A): the ruled tidies — two duplicate lemmas folded into their twins, twenty records entered, the stale sentences corrected
+
+### 3.1 What was ruled, and what changed (the brief's item 3; rulings 544, 540 (a), 517 (b))
+
+Every edit is an exact text replacement that must match once (`data/fs131/l6a/tidy.py`: `--check` first, then the write;
+`tidy-applied.txt`), with one more of the same kind after it (`tidy2.txt`). All went through as ruled; none is deferred. Commit
+`06568a43`, on Stage 2's tip `17657aaf`.
+
+**(i) The duplicate.** `polarRegion_isOpen` and `polarRegion_isPreconnected` (FS131-I6E's, `FanBridge`) are deleted — 34 lines, the
+two theorems with their docstrings — and their three uses now cite FS131-I6D's `isOpen_polarRegion`, `isPreconnected_polarRegion`
+(`FanBuild`, which `FanBridge` imports since the first merge): in `Fan.isOpen_cell`, `Fan.isPreconnected_polarRegion_of_le`,
+`Fan.exists_isOpen_subset_cells`. Their two audit records are gone from block "FS131-I6E". No branch of the wave's later modules
+cites either name (`git grep` on `origin/fs131-w6`, `-w6l`, `-w6z`, `-w6k`: none).
+
+**(ii) The records.** Appended to their blocks of `scripts/Axioms.lean`, each under a `--` line saying over what it was proved:
+FS131-I6C's six (`HasTwoDiscsAt.one_le_norm_sub`, `.norm_sub_le`, `.normal_unique`, `local_graph`, `AeColouring.local_graph`,
+`sq9_exists_isInterfaceChart`) and FS131-I6E's fourteen (`Fan.exists_unitCurve_branch`, `.exists_twoColourNhd_branch`,
+`.dist_eq_one_of_common_contact`, `.contacts_of_no_common`, `.branch_outside_discs`, `.branch_contacts`,
+`.exists_contact_nextDir`, `.exists_contact_dir`, `.sector_constraints`, `.horn_false`, `.false_of_horn_next`,
+`.false_of_horn_dir`, `.sector_alone`, `.sector_unique`). `#print axioms` lines: 5,516 − 2 + 20 = **5,534**. Three block
+headings say what is now true: FS131-I6E's ("the fourteen records … are the block's last section, entered at the join"),
+FS131-I6D's ("re-read at the join, FS131-L6A: nothing beneath them is open", in place of "until `fs131-w6c` joins, the records
+that read `Curve`'s or `LocalGraph`'s leaves print `sorryAx` on this branch"). FS131-I6D's forty-one records were re-read in
+Stage 2's receipt: each on exactly the three.
+
+**(iii) The sentences the join makes false**, base text otherwise intact (`data/fs131/l6a/tidy-docdiff.txt` is the whole diff of
+the Lean files' doc text):
+
+| where | was | now |
+|---|---|---|
+| `Fan.lean`, module docstring | "by FS131-E8-BRIDGE ([hand], one mind, until `Plane/Saturated/FanBridge` lands)" | "by FS131-E8-BRIDGE (kernel-checked in `Plane/Saturated/FanBridge`)" |
+| `FanBridge.lean`, module docstring | "each entry **[hand], one mind, kernel pending** until this module lands" | "each entry kernel-checked in this module (no `sorry`)" |
+| `Fan.sector_alone`, docstring | "by FS131-E8-BRIDGE ([hand], one mind, until `fan_of_isolated` is proved)" | "by FS131-E8-BRIDGE (kernel-checked: `fan_of_isolated`)" |
+| `LocalGraph.lean`, module docstring | "§§ 3.1, 3.5 ([hand], one mind, until this module lands)"; "`local_graph` rests on two leaves of `Plane/Saturated/Pinch`" | "§§ 3.1, 3.5 (kernel-checked in this module)"; "… rests on two theorems of `Plane/Saturated/Pinch`" |
+| `Pinch.lean`, module docstring (FS131-I6A's correction owed; ruling 517 (b)) | three rows marked "Proved.", silence on the rest | one paragraph added: "**Every row above is proved; the module holds no `sorry`**: …" naming the seven leaves and FS131-I6A |
+| `MapEdge.lean`, module docstring | "a second line may hold the same facts under other names until the wave's join" | "giving each one home with the same facts of other modules is a tidy after wave 6's first landing" |
+
+The first three are the three the fourth implementer lists; the fourth is the same phrase in `LocalGraph`, which its list does not
+name; no module docstring of the fourteen says "skeleton" (the word stood in `ARCHITECTURE.md`'s rows only).
+**`ARCHITECTURE.md`**: the rows of `Pinch`, `Curve`, `LocalGraph` and `FanBridge` read "**FS-131 wave 6** (jobs …: every leaf
+proved, no `sorry`)" in place of "**FS-131 wave 6, skeleton**", each with the implementers' drafted clauses (FS131-I6C's Drafts
+item 3; FS131-I6E's item 1 without the two deleted names; FS131-I6A's children); "the leaves" and "rests on … leaves" in the rows of
+`Curve`, `CurveArc` and `FanArcs` read "proved by FS131-I6C" and "theorems".
+
+**(iv) Nothing else.** `SeparatesAt` keeps its second clause; DELTA's `IsOpen W`, `IsolatedAt.pos` in `gamma` and `beta`, and (H2)'s
+unread clauses stay in their statements; `fanAngle` beside `polarAngle` and `MapEdge.isPreconnected_puncturedBall` beside
+`isPreconnected_ball_diff_singleton` are left where they are (drafts, item 9).
+
+### 3.2 Exactly the ruled changes, by script
+
+- **`tools/fs131_l6a_tidyshape.py --self-test 17657aaf`** (`data/fs131/l6a/tidyshape.txt`, exit 0): (a) the two deleted lemmas'
+  statements at `17657aaf`, the name alone substituted, are `FanBuild`'s two statements — the same binder for binder; (b) neither
+  old name occurs under `Proofs/`, in `scripts/Axioms.lean` or in `ARCHITECTURE.md`; (c) outside the deleted block, the code lines
+  of `FanBridge` that differ are exactly three, each the old line with the one name replaced, in the three declarations named
+  above; (d) no other Lean file of the fourteen has a changed line outside a doc comment; (e) the records changed by the two
+  removed and the reports' twenty added, each in its own job's block, none printed twice. Four plants, each fired with its word:
+  a use left on the old name (OLD-NAME), a binder changed at the comparison (SHAPE), a proof line changed in another file (CODE),
+  a record no report lists (RECORDS).
+- **`tools/fs131_l6a_statements.py delta 17657aaf --removed <the two> --docs …Fan.sector_alone`** over the fourteen files
+  (`statements-tidies.txt`): 423 declarations before, 421 after; **statements changed: none; removed: exactly the two; added: none;
+  a docstring changed with its statement unchanged: exactly `Fan.sector_alone`.** PASS.
+- **`tools/fs131_l6a_archrows.py --self-test`** (`arch-rows.txt`, exit 0): the fourteen rows exist, one each; none says
+  "skeleton", "leaves" or `sorry` outside "no `sorry`"; every backticked declaration name of a row's description is declared — 218
+  in the row's own module, 9 elsewhere in the wave, 7 elsewhere in the library, **0 missing**. Two plants fired (a cited name
+  misspelt: MISSING; a row saying "skeleton": SKELETON). The check's first run read five sibling-module names and an abbreviated
+  suffix (`_of_im`) as missing declarations — its fault, repaired before any result was read from it — and found one stale word of
+  mine to correct (`CurveArc`'s "beyond `Curve`'s leaves"). `tools/check_architecture.py`: `RESULT: PASS`, exit 0 (`arch-tidy.txt`).
+- **Iteration, before the commit**: `FanBridge.lean` with the three uses repointed elaborates (`lake env lean`, both
+  auto-implicit options off, under the slot: exit 0, no message; `iter-fanbridge-tidy.log`). Iteration, not evidence: the build of
+  the tidied files is Stage 4's, with `main` merged — the tidies change three code lines, in one file, and that file was elaborated.
+
+## Stage 3 — SAVED (FS131-L6A)

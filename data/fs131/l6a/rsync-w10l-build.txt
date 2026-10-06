@@ -1,0 +1,4 @@
+rsync -a --update --itemize-changes ../fs131-w10l/.lake/build/ .lake/build/   (2026-10-06T17:56:58Z); source tree at b344490e, clean, idle; its Lean inputs equal ac2e84ea's (git diff --name-only: empty)
+rsync exit=0
+files written: 304; .olean: 38; new files: 72
+0
