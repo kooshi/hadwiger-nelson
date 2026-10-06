@@ -559,8 +559,7 @@ theorem hasHornCount_iff_collar_end {M : ArcMap k} {P : ℂ} {θ₁ θ₂ θE σ
   obtain ⟨δ', hδ', hballL⟩ := Metric.isOpen_iff.mp hL'.isOpen_compl _ hxL'
   obtain ⟨r, hr, hr2, hrb, hunit, hpolar⟩ := exists_collar_end_radius P θE hσ h12 hℓ hR' hR'1 h1R'' (lt_min hdE hδ')
   refine hasHornCount_iff_of_germ_swap (F := F) (M := M) (β₀ := θE + σ * (π / 2)) (κ₀ := σ) (κ₀' := σ / R) (r := r)
-    (hring ⟨θE, hθE, rfl⟩).1 hdom hr ?_ ?_ ?_ ?_ ?_ j
-  · rw [hσabs]; linarith
+    (hring ⟨θE, hθE, rfl⟩).1 hdom hr ?_ ?_ ?_ ?_ j
   · rw [abs_div, hσabs, abs_of_pos hR0, div_mul_eq_mul_div, one_mul, div_lt_iff₀ hR0]; nlinarith
   · rintro _ ⟨s, hs, rfl⟩
     obtain ⟨u, hu0, hu1, h1, -⟩ := hunit s hs
@@ -656,7 +655,7 @@ theorem hornCount_le_of_collarBend {M : ArcMap k} {P : ℂ} {θ₁ θ₂ R' R R'
           have hπ4 := Real.pi_lt_four
           nlinarith [norm_nonneg (e θ₁ - e θ₂)]
         refine hasHornCount_zero_of_two_spheres (F := M) (q := P + ((1 - R : ℝ) : ℂ) * e θ₁)
-          (q' := P + ((1 - R : ℝ) : ℂ) * e θ₂) (ρ := R) (ρ' := R) (hdom ▸ hxd) hr hR0 hR0 ?_ ?_
+          (q' := P + ((1 - R : ℝ) : ℂ) * e θ₂) (ρ := R) (ρ' := R) (hdom ▸ hxd) hr ?_ ?_
         · rintro z ⟨hzM, hzb⟩
           rw [hΓ] at hzM
           rcases hzM with ⟨hzF, -⟩ | hA' | hB'
@@ -1010,10 +1009,8 @@ theorem CollarFitOut.map_localStep (hfit : CollarFitOut F P θ₁ θ₂ c c' ε 
 collar `hasHornCount_iff_of_agree`; in the collar and not an end, `0` (`hasHornCount_zero_of_mem_interiorPts`, or
 `hasHornCount_zero_of_two_spheres` on the lens curve's two circles); at an end `hasHornCount_iff_of_germ_swap` with `κ₀ = ±1`,
 `κ₀' = ±1/R`. **Proved (FS131-BA2)** (child C8). -/
-theorem CollarFitOut.map_hornCount_le (hF : F.Valid) (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ}
+theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ}
     (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j' := by
-  -- validity is not read: the clause is geometry of `Γ` (reported: FS131-BA2's record)
-  have _ := hF
   obtain ⟨hR', hR'1, hR1, hRR'', -⟩ := hfit.params
   have h12 := hfit.ring.1
   have hπ := Real.pi_pos
@@ -1077,7 +1074,7 @@ theorem CollarFitOut.awayBend (hF : F.Valid) (hfit : CollarFitOut F P θ₁ θ�
       colours := fun z => pushforward_coloursAt z
       degree := fun z n => (hdeg z).1 n
       repeated := fun z => (hdeg z).2
-      horn := fun x j hj => hfit.map_hornCount_le hF hj
+      horn := fun x j hj => hfit.map_hornCount_le hj
       within := hfit.map_ringArcsWithin
       r1 := fun Q a' b' d d' h => hfit.map_R1 hF h
       r2 := fun Q a' b' d d' h hd => hfit.map_R2 hF h hd

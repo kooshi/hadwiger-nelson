@@ -163,13 +163,10 @@ between two consecutive germs of one direction (`Near.sector_eq_hornSet_iff`); a
 near the point, and is tangent to it there; two germs of one direction on one circle are one germ (`Near.hdisj`), and on two circles
 they make the circles tangent. **Proved (FS131-BA2)** (child H3). Inhabitant of the hypotheses: a point of a ring arc's interior with
 `Γ` free near it (`q = q' = P`, `ρ = ρ' = 1`; `l60Frag`). -/
-theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hρ : 0 < ρ) (hρ' : 0 < ρ')
+theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r)
     (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ')
     (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) :
     F.HasHornCount x 0 := by
-  -- the radii's positivity is not read by this proof (reported: FS131-BA2's record, a generalization)
-  have _ := hρ
-  have _ := hρ'
   obtain ⟨X⟩ := exists_near hx
   rcases Nat.eq_zero_or_pos X.n with hn | hn
   · filter_upwards [Ioc_mem_nhdsGT X.hC.pos] with r' hr'
@@ -269,13 +266,11 @@ of that direction with curvature between the two (other than `κ₀`'s own). Rou
 (child H4, the hardest of lane H). Inhabitant of the hypotheses: the toward collar bend at an end of its arc (`collarModel`), with
 `β₀ = θ₁ + π/2`, `κ₀ = 1`, `κ₀' = 1/R`. -/
 theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom)
-    (hr : 0 < r) (hκ : |κ₀| * r < 2) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ)
+    (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ)
     (hM : (M.Γ ∩ ball x r) \ {x} =
       ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r)
     (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) :
     M.HasHornCount x j ↔ F.HasHornCount x j := by
-  -- `hκ` is not read by this proof: `F`'s own chart bounds its germ's curvature (reported: FS131-BA2's record, a generalization)
-  have _ := hκ
   obtain ⟨r₀, n, G, hC, hdisjF⟩ := localSectors_disj F hx
   have hr₁ : 0 < min r r₀ := lt_min hr hC.pos
   have hnex : ∀ {β κ s : ℝ}, 0 < s → branchPt x β κ s ≠ x := by
