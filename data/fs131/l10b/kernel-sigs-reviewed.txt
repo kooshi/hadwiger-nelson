@@ -1,0 +1,29 @@
+# FS131-L10B: section variables in scope that the kernel's statement does not hold, each read by eye (class) and by
+# script (the statement does not mention it). <full name>\t<binder>\t<reading>. Written by data/fs131/l10b/mk-reviewed.py.
+HadwigerNelson.Floor128.coeff_ev_X	(t : R)	a ring element; the statement speaks of `X` or of the root `g` and not of `t`; a bare element carries no hypothesis
+HadwigerNelson.Floor128.ev_iterate_step	(t : R)	a ring element; the statement speaks of `X` or of the root `g` and not of `t`; a bare element carries no hypothesis
+HadwigerNelson.Floor128.ev_step	(t : R)	a ring element; the statement speaks of `X` or of the root `g` and not of `t`; a bare element carries no hypothesis
+HadwigerNelson.SpectralInputs.exists_cyl_of_subset	{μX : Measure X}	a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+HadwigerNelson.SpectralInputs.exists_cyl_of_subset	{μ₃ : Measure Ω₃}	a bare measure the statement does not mention; `Measure Ω₃` bundles no hypothesis
+HadwigerNelson.SpectralInputs.exists_fst_preimage_of_integral_section_var_eq_zero	[MeasurableSpace B]	a σ-algebra on a type `B` the statement does not mention
+HadwigerNelson.SpectralInputs.generateFrom_cylSets	{μX : Measure X}	a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+HadwigerNelson.SpectralInputs.generateFrom_cylSets	{μ₃ : Measure Ω₃}	a bare measure the statement does not mention; `Measure Ω₃` bundles no hypothesis
+HadwigerNelson.SpectralInputs.integrable_measureReal_section	[MeasurableSpace B]	a σ-algebra on a type `B` the statement does not mention
+HadwigerNelson.SpectralInputs.integrable_section_var	[MeasurableSpace B]	a σ-algebra on a type `B` the statement does not mention
+HadwigerNelson.SpectralInputs.integral_section_var_le_add	[MeasurableSpace B]	a σ-algebra on a type `B` the statement does not mention
+HadwigerNelson.SpectralInputs.isSetRing_cylSets	{μX : Measure X}	a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+HadwigerNelson.SpectralInputs.isSetRing_cylSets	{μ₃ : Measure Ω₃}	a bare measure the statement does not mention; `Measure Ω₃` bundles no hypothesis
+HadwigerNelson.SpectralInputs.measurable_cylMap	{μX : Measure X}	a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+HadwigerNelson.SpectralInputs.measurable_cylMap	{μ₃ : Measure Ω₃}	a bare measure the statement does not mention; `Measure Ω₃` bundles no hypothesis
+HadwigerNelson.SpectralInputs.measurable_measureReal_section	[MeasurableSpace B]	a σ-algebra on a type `B` the statement does not mention
+HadwigerNelson.SpectralInputs.measurable_measureReal_section	{μX : Measure X}	a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+HadwigerNelson.SpectralInputs.measureReal_mul_one_sub_le_symmDiff	[MeasurableSpace X]	a σ-algebra on a type `X` the statement does not mention
+HadwigerNelson.SpectralInputs.measureReal_mul_one_sub_le_symmDiff	[MeasurableSpace B]	a σ-algebra on a type `B` the statement does not mention
+HadwigerNelson.SpectralInputs.measureReal_mul_one_sub_le_symmDiff	{μX : Measure X}	a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+HadwigerNelson.SpectralInputs.measureReal_prod_eq_integral_section	[MeasurableSpace B]	a σ-algebra on a type `B` the statement does not mention
+HadwigerNelson.SpectralInputs.mem_factorSets_of_ae_eq	[MeasurableSpace Ω']	a σ-algebra on a second space `Ω'` the statement does not mention
+HadwigerNelson.SpectralInputs.mem_factorSets_of_ae_eq	{μ' : Measure Ω'}	a bare measure on a second space the statement does not mention
+HadwigerNelson.SpectralInputs.univ_mem_cylSets	{μX : Measure X}	a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+HadwigerNelson.SpectralInputs.univ_mem_cylSets	{μ₃ : Measure Ω₃}	a bare measure the statement does not mention; `Measure Ω₃` bundles no hypothesis
+HadwigerNelson.SpectralInputs.contChars_haar_null	[MeasurableSpace Ω]	a σ-algebra on `Ω`; the statement mentions no `Ω`
+HadwigerNelson.SpectralInputs.contChars_haar_null	{μ : Measure Ω}	a bare measure on `Ω`; the statement is about a measure `m` on the dual and mentions neither `Ω` nor `μ`

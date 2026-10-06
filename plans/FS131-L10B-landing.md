@@ -205,3 +205,102 @@ with its import, and the proof of Falconer's lemma together, and the kernel acce
 `FalconerReduction`, and none of `Plane/Saturated/` on `Arith/`'s new modules.
 
 ## Stage 2 — SAVED (FS131-L10B)
+
+## Stage 3 — SAVED (FS131-L10B): the audit's controls at the joined state; the ruled tidies — one statement changed, one word of an instance, the docstrings
+
+### 3.1 `scripts/axioms-controls.txt`: red before, at exactly the three controls that read the library's state
+
+On the joined tree as merged (the controls file `fs131-wf1`'s: no declared import), `./scripts/axioms.sh --self-test`
+(`data/fs131/l10b/axioms-selftest-red-before.log`, exit 1; the complete output `receipt-axioms-self-test-red-before.log`): **"FAIL — 3
+of 23 control(s) did not behave as designed"** — `baseline` ("passed; expected COUNTS imported=0 … declared=0 … library=0"),
+`imported_declared` (expected `1 / 1 / 1`), `banner_dropped` ("failed (10 FAIL line(s))": with eight records in the section,
+dropping its banner strands them and their declaration, consequences the control did not expect). The other twenty behaved. The
+edit (`data/fs131/l10b/controls-edit.py`, five exact replacements, the pattern of `082f86c9`): `baseline` expects `imported=8
+declared=1 library=1` and its `old` digest "… and the audit has 8 imported"; `imported_declared` expects `9 / 2 / 2` and "… has 9
+imported"; `banner_dropped` gains `expect FAIL outside-banners kloostermanBound_of_ringChar_ne_two` and `expect FAIL
+stale-declaration kloosterman_bound`; the header's paragraph says the state it reads (one declared import,
+`StandingFive.kloosterman_bound`, eight records). **Green after** is the gate's own run on the gated commit (Stage 5).
+
+`./scripts/dupnames.sh` on the joined tree, before anything else read an axiom list (`dupnames-joined.log`, exit 0): **"dupnames: OK
+— no name is declared by two modules (23 generated on demand, listed above)"** — `main`'s own count of generated names. The join of
+this line, `main` and `fs131-wf1` made no doubled name.
+
+### 3.2 What was ruled, and what changed (the brief's item 3)
+
+Every edit is an exact text replacement that must match once (`data/fs131/l10b/tidy.py`: `--check` first, then the write;
+`tidy-applied.txt`: 25 edits in 7 files, 0 refused; the whole diff of the Lean files is `tidy-diff.txt`). All went through as ruled;
+none is deferred. Commit `3c4172e2`, on Stage 2's tip `53f4cde5`.
+
+**(i) The one statement change (ruling 542).** `MajorityVote.ae_eq_measurable_of_majority` loses `(hG : Measurable G)` and
+`(hc : ∀ x, Measurable (c x))`, and `[Finite K]` is `[Countable K]`; the name stays. In its proof, the three lines that only read
+the dropped hypotheses (`have _hG := hG`, `have _hc := hc` and their comment) and the line that derived countability
+(`haveI : Countable K := Finite.to_countable`) are gone; nothing else of the proof moved. **Its callers: one, the spec example of
+its own file** (`git grep`: no other use under `Proofs/`). The example's call line loses the two arguments; and the example's own
+binder `(hG : Measurable G)`, which existed only to be passed to the lemma, is dropped with them (left in, it is an unused variable
+and a build warning) — its conclusion is unchanged. *Reported to the coordinator mid-job and ratified* ("the caller's line adjusted
+and nothing more"). The docstrings say what is now held: the theorem's ("A `G` with values in a countable type … Neither `G` nor the
+`c x` is assumed measurable"), and the module's paragraph that said "The argument reads less than the statement carries" now says
+"The statement is at the class the argument reads (inventory ruling 542 …)".
+
+**(ii) The instance.** `StandingFive`: `local instance instNumberFieldStanding` is `instance instNumberFieldStanding` — one word —
+and its docstring's "local to this file" reads "Global since wave 10's second landing, so that no module downstream declares its
+own: two anonymous instances of one proposition merge in silence".
+
+**(iii) Docstrings, base text otherwise intact.**
+
+| where | was | now |
+|---|---|---|
+| `involution_eq_pow` (`NormOneTarget`; ruling 538 (b)) | the fixed-field sketch ("Its fixed field `k₀` has `Q` elements (`[k : k₀] = 2`, Artin) …") | the proof the kernel holds: `σ` a power `y ↦ y ^ p ^ j` of the Frobenius over the prime field (`FiniteField.bijective_frobeniusAlgHom_pow`); `σ ∘ σ = id` gives `n ∣ 2j`, `σ ≠ id` gives `j ≠ 0`, so `2j = n`, `Q = p ^ j` |
+| `sp_if` (`SpectralInputs`; ruling 547 (a)) | "**`hcirc : I.NegCircle` has no Lean model on file** … until it lands this theorem is an open gate item …" | "MODEL: given `hBH`, every other hypothesis holds at once at `F = ℚ` with `Interface.trivial` (`sp_if_hypotheses_trivial_bot` …). **One named classical hypothesis is still assumed**: `hBH` is the Herglotz–Bochner theorem for the countable discrete group `unitRing ⊥` … Until it is proved this theorem stays an open gate item … open by one classical theorem." (the planner's § 15.4 wording) |
+| `si4`, `spectral_carried_iff`, `contChars_haar_null` (`SpectralInputs`; the planner's § 16.2) | no inhabitant note | each gains the planner's note, marked "MODEL (the planner's note, `plans/FS131-w10-kernel-plan.md` § 16.2; described, **not a Lean declaration**)", and the sentence that until the model is a declaration the theorem is an open gate item |
+| `si4_equivariant` (`SpectralInputs`; § 16.2) | no inhabitant note | "MODEL: any additive action with `T 0 = id`, `𝒜` its factor σ-algebra — `comap_factorSigma_eq_of_action` supplies `hS𝒜`, and `si4_equivariant_factorSigma` is this theorem there (`Arith/FactorAction`)" — both are landed theorems |
+| `Floor128`, module docstring; `bezout4`, `bezout128` (§ 15.2) | "**`bezout4` and `bezout128` are not read**" | "… are not read by the bridge … They stay as an independent witness of `P`'s irreducibility …"; each identity's docstring gains "Not read by the bridge: an independent witness of `P`'s irreducibility (… Rabin's test)" |
+| `FloorPlanes`, module docstring; `KloostermanBound` | "(ruled mid-job: no `axiom` until a held source's page is read back against it)"; "`[Weil1948]` … (not held; its row states the bound at a prime)"; "neither held, so this is a `Prop`, never an `axiom`, until a page is read back against it" | "`[Weil1948]` p. 207 … held and read back …: **the import is `StandingFive.kloosterman_bound` (`Arith/WeilKloosterman`), at characteristic not 2**, and `kloostermanBound_of_ringChar_ne_two` proves `KloostermanBound F` from it"; the definition's docstring says it is the hypothesis form and names the import |
+| `ARCHITECTURE.md`, rows `Arith/NormOneTarget`, `FloorPlanes`, `ProductFactor`, `MajorityVote`, `NegCircleModel` | "**FS-131 wave 10 (FS131-K10b), skeleton.**" | "(FS131-K10b; every leaf proved by FS131-I10D / -I10F, no `sorry`)", with the theorems the implementers added; `FloorPlanes`' row no longer says "never an `axiom`" and says its object: the norm-one target of `𝔽_{Q²}` (`TargetFloor 7 Q`), "G56's `χ(Γ_Q) ≥ 7` once the target is linked to the plane `Γ_Q`, which no declaration does yet"; `MajorityVote`'s row says the class of ruling 542 |
+
+The three notes marked "not a Lean declaration" are the planner's reading, one mind, not kernel-checked; the docstrings say so, and
+the three theorems are listed as open gate items below (drafts, item 7). The planner's § 16.2 priced two of the models at about 55
+lines "to state and prove at the landing"; the brief's item 3 (iv) is "nothing else", so they are not stated here.
+
+**(iv) Nothing else.** `StandingFive.seven_le_localBound` and `five_le_chromaticNumber` keep their hypothesis forms beside the new
+heads; no hypothesis a ruling kept unread was touched; `FloorPlanes`' first paragraph, which reads G56's sentence as "the plane
+`Γ_Q = UD(𝔽_Q, 2)` is the level-one target of `𝔽_{Q²}`", is left as the planner wrote it (it is the informal claim being read
+against; the kernel holds no such link — listed in the report for the coordinator).
+
+### 3.3 Exactly the ruled changes, by script
+
+- **`tools/fs131_l10b_tidyshape.py --self-test 53f4cde5`** (new; `data/fs131/l10b/tidyshape.txt`, exit 0): (a) the Lean files that
+  differ from Stage 2's tip are exactly six (`MajorityVote`, `StandingFive`, `NormOneTarget`, `SpectralInputs`, `FloorPlanes`,
+  `Floor128`); (b) with every comment and docstring blanked, **the code lines removed are eight and the lines added five, in two
+  files** — the majority vote's two statement lines, its four proof lines, the example's signature and call; the one instance
+  line — and no other code line of any file changed: the other four files differ in comments and docstrings only; (c) the
+  majority vote's statement is the old one with exactly ` (hG : Measurable G)` and ` (hc : ∀ x, Measurable (c x))` deleted and
+  `[Finite K]` replaced by `[Countable K]`; (d) the instance line is the old one with `local ` deleted. Four plants, each fired
+  with its word: a proof line changed in another file (CODE), a hypothesis of another theorem dropped (CODE), the majority vote's
+  conclusion changed (SHAPE), a file outside the list touched in a comment only (FILES).
+- **`tools/fs131_l10b_statements.py delta 53f4cde5 --changed … --docs …`** over the fifteen files of `Arith/` and the two of the
+  Falconer line (`statements-tidies.txt`, exit 0): 525 declarations before, 525 after; **statements changed: exactly two —
+  `MajorityVote.ae_eq_measurable_of_majority` and `StandingFive.instNumberFieldStanding` (its whole declaration is its statement:
+  the word `local`); removed: none; added: none; a docstring changed with its statement unchanged: exactly nine** —
+  `involution_eq_pow`, `sp_if`, `si4`, `si4_equivariant`, `spectral_carried_iff`, `contChars_haar_null`, `KloostermanBound`,
+  `bezout4`, `bezout128`. Its self-test on `WeilKloosterman.lean`: five plants fired (`statements-selftest.txt`, exit 0; on
+  `TargetFloors.lean`, tried first, one plant could not be planted and the self-test said so and failed — the file's shape, not a
+  finding).
+- **`data/fs131/l10b/archrows.py --self-test`** (`arch-rows.txt`, exit 0): the five rewritten rows exist once each, none says
+  "skeleton", and each of the 34 backticked declaration names they cite is declared under `Proofs/`. Two plants fired (a cited
+  name misspelt: MISSING; a row saying "skeleton": SKELETON). Its first run read three backticked letters of a formula of mine as
+  names (MISSING) — the row was reworded, not the check. `tools/check_architecture.py`: `RESULT: PASS`, exit 0 (`arch-tidy.txt`).
+- **Iteration, before the commit**: the tidied `MajorityVote.lean`, on a scratch copy, elaborates with both auto-implicit options
+  off and the unused-variable linter on (`lake env lean` under the slot: exit 0, no message; `iter-majorityvote-tidy.log`).
+  Iteration, not evidence.
+
+### 3.4 The build of the tidied tree
+
+`data/fs131/l10b/build-tidies.log` (`HEAD=3c4172e2`; no tracked file modified): **`build: OK — 471 of 471 batches, 12 module(s)
+rebuilt, 0 module(s) with warnings, 8m51s`, `exit=0`**; the full log (`build-tidies-full.log`) holds **0 `warning` lines** and ends
+"Build completed successfully (5932 jobs)". Rebuilt: `MajorityVote`, `SpectralInputs`, `StandingFive`, `FactorAction`,
+`NormOneTarget`, `ProductFactor`, `NegCircleModel`, `FloorPlanes`, `Floor128`, `TargetFloors`, `WeilKloosterman`, `Proofs` — the
+six tidied modules, their dependents and the import surface. So the global instance breaks no module downstream of
+`StandingFive`, and the majority vote's one caller compiles against the new statement.
+
+## Stage 3 — SAVED (FS131-L10B)

@@ -1,0 +1,4 @@
+HEAD=3c4172e21a3acb18607cfa6d83cf1c901b1e9322
+DIRTY  M scripts/Axioms.lean
+slot: admitted vacuity.sh: mem 30 GiB (hard cap), cpus 0,1,2,3
+==> vacuity: this run's full output: build/gate/vacuity/20261006T201211Z-2923025.log
