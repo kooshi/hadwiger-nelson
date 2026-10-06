@@ -962,3 +962,9 @@ ledger "match (clean, purchases and imported compared)"; § The gate "match (9 o
    statement does not need it)" is the correction item 391 already owes: the kernel statement needs it. No row of `LEDGER.md` names
    E6-OPEN (`grep`: none), so no ledger row is regraded; `CLAUDE.md`'s Frontier text names no count of FS-131's landings and needs no
    new line for this one; the Proof Atlas grade for E6-OPEN, if it has a node, moves to kernel (lone form) with the derivation's.
+
+## After the landing (FS131-OL1)
+
+Stage 20, the drafts and the report were committed as `a94f30e7` and pushed to `fs131-wop` and to `main` — `7470222e..a94f30e7`, a
+fast-forward (`data/fs131/ol/push-main-2.txt`); `git diff --name-only 68670175 a94f30e7 -- . ':!plans' ':!data'` is empty, so `main`'s
+gate inputs are the gated commit's. This note and that push's log go in one last commit, pushed the same way.
