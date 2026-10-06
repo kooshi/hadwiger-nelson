@@ -6302,17 +6302,8 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 
 #print axioms HadwigerNelson.Plane.AeColouring.isOpen_openPart
 #print axioms HadwigerNelson.Plane.AeColouring.openPart_subset_densitySet
-#print axioms HadwigerNelson.Plane.AeColouring.TwoColourAt.symm
-#print axioms HadwigerNelson.Plane.AeColouring.interfaceSet_subset_essBdry
-#print axioms HadwigerNelson.Plane.AeColouring.disjoint_interfaceSet_singularSet
-#print axioms HadwigerNelson.Plane.AeColouring.exists_twoColourAt_of_mem_interfaceSet
-#print axioms HadwigerNelson.Plane.AeColouring.not_isCuspAt_of_mem_interfaceSet
-#print axioms HadwigerNelson.Plane.AeColouring.IsCuspAt.mem_singularSet
-#print axioms HadwigerNelson.Plane.AeColouring.hasTwoDiscsAt_comm
-#print axioms HadwigerNelson.Plane.AeColouring.isTangentAt_comm
 #print axioms HadwigerNelson.Plane.sqColA_ne_sqColB
 #print axioms HadwigerNelson.Plane.sq9Col_near_edge
-#print axioms HadwigerNelson.Plane.sq9_twoColourAt
 #print axioms HadwigerNelson.Plane.sq9_hasTwoDiscsAt
 #print axioms HadwigerNelson.Plane.IsMUA.exists_ball_ae_subset
 #print axioms HadwigerNelson.Plane.saturated_of_forall_isMUA
@@ -6325,6 +6316,27 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.bound_iff
 #print axioms HadwigerNelson.Plane.gmap_i
 #print axioms HadwigerNelson.Plane.gmap_ii
+
+/-! ## FS131-K6b — wave 6's second planning pass: the foundation restated over two sets and a family (the first pass's `TwoColourAt` lines are replaced by these), the fan, and the leaves this pass proved -/
+
+#print axioms HadwigerNelson.Plane.H2On.volume_pos
+#print axioms HadwigerNelson.Plane.TwoColourOn.nonempty
+#print axioms HadwigerNelson.Plane.TwoColourOn.symm
+#print axioms HadwigerNelson.Plane.TwoColourNhd.ne
+#print axioms HadwigerNelson.Plane.TwoColourNhd.symm
+#print axioms HadwigerNelson.Plane.TwoColourNhd.radius_pos
+#print axioms HadwigerNelson.Plane.AeColouring.twoColourNhd_of_h1
+#print axioms HadwigerNelson.Plane.interfaceSet_subset_essBdry
+#print axioms HadwigerNelson.Plane.disjoint_interfaceSet_singularSet
+#print axioms HadwigerNelson.Plane.exists_twoColourNhd_of_mem_interfaceSet
+#print axioms HadwigerNelson.Plane.not_isCuspAt_of_mem_interfaceSet
+#print axioms HadwigerNelson.Plane.cuspSet_subset_singularSet
+#print axioms HadwigerNelson.Plane.Saturated.saturatedOn
+#print axioms HadwigerNelson.Plane.saturatedOn_univ
+#print axioms HadwigerNelson.Plane.SaturatedOn.mono
+#print axioms HadwigerNelson.Plane.hasTwoDiscsAt_comm
+#print axioms HadwigerNelson.Plane.isTangentAt_comm
+#print axioms HadwigerNelson.Plane.sq9_twoColourNhd
 
 #eval IO.println "=== PURCHASED ==="
 

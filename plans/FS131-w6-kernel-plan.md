@@ -412,3 +412,92 @@ Written after §§ 8.1–8.3; the deriver's record is read, the FS-116 and FS-12
 | Y6 | **The curve notion**: one definition serves the bridge and the ladder — a unit-speed map on an interval with 1-Lipschitz derivative — rather than a graph over a line | 0.65 |
 | Y7 | Rows whose **argument reads a different class than the entry** (a fan at one point where the entry says REG-J′, or more than the fan gives): at least 3 of those I read | 0.7 |
 | Y8 | The restated foundation costs the four proved rows nothing (no proof edited beyond a name) | 0.85 |
+
+## Stage 9 — SAVED: the foundation restated over two sets and a family (`debruijn-domain-modeling`, invoked fresh)
+
+**From this stage's commit the statements of `Plane/Saturated/Basic` and `Plane/Saturated/Pinch` are fixed** (an implementer on `Pinch` is cut
+from it): a change found necessary later is a message to the coordinator, never an edit.
+
+### 9.1 The model
+
+The pass's question: what does FS111-M-PINCH's argument read? An open set `N`; two sets `A`, `B` in it; that `N` is almost everywhere `A ∪ B`
+and that `A ∩ B ∩ N` is null; (H2) for each; a point `x ∈ N`; the supports at the contacts. It reads no colouring, no third class, no index, and
+never the centre of `N` (the deriver's note, `plans/FS131-E8-derivation.md` §§ 3.1 (2), 4.1 (i)). The first pass's predicates carried
+`c : AeColouring k` and indices `a b : Fin k` through every signature and inspected neither — the smell "an index threaded through every signature
+and inspected by none". So:
+
+| level | definitions | the decision |
+|---|---|---|
+| **two sets on an open set** | `IsCuspAt A x`; `H2On A N`; `TwoColourOn A B N` (a `structure … : Prop`: `isOpen`, `cover : N ≤ᵐ A ∪ B`, `disj : volume (A ∩ B ∩ N) = 0`, `h2a`, `h2b`); `IsSplitAt A B N x y`; `HasTwoDiscsAt A B N x ν`; `IsTangentAt A B N x ν` | the class the argument reads. *Honest*, where an argument reads it, is exactly `cover` and `disj`; on a cover with overlaps `disj` can fail, which is where FS111-M-PINCH's (out, out) case changes (`plans/FS111-M2-regularity.md` § 2.2). `a ≠ b` is no longer a field: it follows from `disj` and (H2) (`TwoColourNhd.ne`; the spec `¬ TwoColourOn A A N`) |
+| **a family** `C : Fin k → Set ℂ` | `essBdry C`, `cuspSet C`, `H1On C N a b`, `TwoColourNhd C N a b` ((H1) and `TwoColourOn (C a) (C b) N`), `singularSet C`, `interfaceSet C`, `SaturatedOn C U` | the notions that read every class. A colouring's classes, a cover's, a fragment's regions are all families; FS116-O1-SATPIN's "saturated on a disc" is `SaturatedOn F.region (ball p ρ)` |
+| **a colouring** | `c.openPart j`; `c.essBdry`, `c.singularSet`, `c.interfaceSet` as `abbrev`s of the family forms at `c.cls`; `AeColouring.twoColourNhd_of_h1` | "the `AeColouring` forms their instances": for a colouring the frozen (H1), (H2) give `cover` and `disj` (the classes partition the plane) — proved |
+
+**Three choices with a cost.**
+1. **`Σ` keeps the frozen words' ball centred at the point.** `data/fs121/claims.md` § 0 says "(H1) at `x`: a ball `N = B(x, ρ)`"; FS111-M-PINCH's
+   statement says "a neighbourhood N". The predicates take any open `N` (PINCH's reading); `singularSet C` asks for no two-colour **ball centred
+   at the point** (the claim list's). The other reading — no two-colour open set containing the point — defines a set `Σ° ⊆ Σ`, and makes "regular"
+   an open condition; under it FS131-E8-LOCAL's hypothesis "U ∩ Σ = ∅" would reduce to "no cusp in U". The two agree under saturation once
+   FS131-E8-LOCAL is proved (a point with a two-colour open set, off the cusps, lies on a `C^{1,1}` graph with two sides, so small balls centred at
+   it are two-colour — one connectivity lemma beyond LOCAL). I did not move a frozen definition on that argument; **offered, not adopted**
+   (INVENTORY: the two frozen sentences differ in this word).
+2. **The frozen (H2)'s clause `x ∈ cl P_a ∩ cl P_b` is not a field.** At an essential boundary point of a family with a two-colour neighbourhood it
+   follows from the rest: a third class is null near `x`, so `x ∈ ∂_e (C a)` or `∂_e (C b)`; the density ratios of the two sum to 1 in small balls
+   (`cover`, `disj`), so `x` is an essential boundary point of both (`TwoColourOn.essBoundary_inter_eq`, a leaf; `TwoColourNhd.mem_essBoundary`,
+   proved from it); so `x ∈ supp (C a) ∩ supp (C b)`, and inside the open `N` a point of `supp A` is in `cl P` (`A ∩ N =ᵐ P`, `P` open). So
+   `singularSet` is the frozen set. And PINCH's argument does not read the clause: in each of its three cases the contacts give it back.
+   Cost: the equivalence with the frozen wording rests on a hand argument until `TwoColourOn.essBoundary_inter_eq` is proved (priced below).
+3. **`IsSplitAt`, `HasTwoDiscsAt`, `IsTangentAt` do not carry `x ∈ N`** (the first pass's did not carry `0 < ρ` either): every theorem takes
+   `hx : x ∈ N` beside them. An adversarial member: `HasTwoDiscsAt A B ∅ x ν` holds for every unit `ν`.
+
+Incidental structure refused: a typeclass or a bundled "two-colour neighbourhood" type; a separate `AeColouring`-level copy of each predicate (one
+concept in two costumes); the open-neighbourhood `Σ°` beside `Σ`.
+
+### 9.2 The leaves restated, each against its row (`data/fs131/k6/backlog-rows-w6.md`)
+
+| row | declaration (new statement) | read-back |
+|---|---|---|
+| FS111-M-PINCH | `pinch {A B N} (hA hAn hB hBn) (h : TwoColourOn A B N) (hx : x ∈ N) (hya : ya ∈ essSupport A) (hxa : dist x ya = 1) (hyb …) (hxb …) : (ya = yb ∧ (IsSplitAt A B N x ya ∨ IsSplitAt B A N x ya)) ∨ (yb − x = −(ya − x) ∧ IsTangentAt A B N x (ya − x))` | "a neighbourhood N in which only two colours a, b have positive measure and each is a.e. one connected open set of density points (H1, H2)": `TwoColourOn A B N` with `x ∈ N` — any point of `N` (the deriver's note); "honest": `cover`, `disj`; "saturated point": the contacts, given; the conclusion as in the first pass's read-back, with the two sets. Wider than the row: no colouring, no family |
+| FS111-M-PINCH, (in, in) | `pinch_not_in_in {A B N} (hN : IsOpen N) (hcover : N ≤ᵐ A ∪ B) (hx : x ∈ N) (hxa) (hxb) (hin : A ∩ N ≤ᵐ closedBall ya 1 ∧ B ∩ N ≤ᵐ closedBall yb 1) : False` | "the case (in, in) is impossible". Reads only `N` open and `cover` (a direction leaving both closed discs at `x`: `−(u + v)`, or `i u` when `v = −u`); neither (H2), nor `disj`, nor measurability. Wider |
+| FS111-M-PINCH at its points | `TwoColourOn.essBoundary_inter_eq` (leaf); `TwoColourNhd.mem_essBoundary` (proved from it); `pinch_interface {C} (hC : IsAdmissible C) (hsat : SaturatedOn C U) (hxU : x ∈ U) (hx : x ∈ interfaceSet C) : ∃ ρ a b, TwoColourNhd C (ball x ρ) a b ∧ ((∃ y, IsSplitAt (C a) (C b) (ball x ρ) x y) ∨ ∃ ν, IsTangentAt …)` (**proved** from `pinch` and the leaf) | "at a saturated point x": saturation is read at `x` only (`SaturatedOn C U`, `x ∈ U`); for a family, so for a fragment's regions |
+| FS111-M-C11 (i) | `c11_discs {A B N} (…) (h : TwoColourOn A B N) (hx : x ∈ N) (hcA : IsContactFor A x) (hcB : IsContactFor B x) : ∃ ν, HasTwoDiscsAt A B N x ν`; `c11_discs_interface` (proved from it) | "unit-parallel partners on both sides" read as the two discs, **at every point of the one `N`** — the form FS131-E8 § 3.1 (2) applies ("with the same N, P_a, P_b") |
+| FS111-M-C11 (iii) | `c11_split {A B N} (hN : IsOpen N) (h : IsSplitAt A B N x y) : essBoundary A ∩ N = sphere y 1 ∩ N ∧ essBoundary B ∩ N = sphere y 1 ∩ N` | "a single unit arc if any of its points is of the split type" — for each of the two sets (the first pass's `c.essBdry` was the family's; with (H1) the family's follows) |
+| FS111-M-HALF | `half_dichotomy`, `half_upperDensity` | unchanged (one set) |
+| the inhabitant | `sq9_isTangentAt : IsTangentAt (sq9.cls sqColA) (sq9.cls sqColB) (ball sqEdgePt (1/8)) sqEdgePt 1` | unchanged in content |
+
+FS111-M-C11 (ii) with "no cusp in the neighbourhood" (the deriver's second note) is FS131-E8-LOCAL, stated in stage 11 over these predicates; the
+foundation's part is `IsCuspAt A x` at the set level, so that "neither set has a cusp in `N`" is `∀ x ∈ N, ¬ IsCuspAt A x ∧ ¬ IsCuspAt B x`.
+
+**Mutation audit** (statement level, by hand): `pinch` without `hx` is false (a point far from `N`); without `disj` its (out, out) case is false
+on overlapping classes (two classes that overlap in a lens between the two discs); without `cover`, false (a third set between them);
+`pinch_not_in_in` without `hx`, false; `c11_split` without `hN`, false (`N` a single point of the circle); `TwoColourNhd.mem_essBoundary` without
+`hx`, false.
+
+### 9.3 Validation
+
+- **The proved rows still build, no proof edited**: FALLSAT, EROSION-DIAM, C1-BOUND, C1-GMAP, HALF's dichotomy — their modules' proofs are
+  byte-identical (the diff of `Pinch` touches the PINCH and C11 sections and the module docstring only; `MapColouring` is untouched). The
+  inhabitants: `sq9_twoColourNhd` (the first pass's `sq9_twoColourAt`, through `twoColourNhd_of_h1`; the proof of its three parts kept),
+  `sq9_hasTwoDiscsAt` (statement re-typed, proof unchanged).
+- **Spec examples**: `¬ TwoColourOn A A N`; `TwoColourOn.symm`, `TwoColourNhd.symm`, `TwoColourNhd.ne`, `TwoColourOn.nonempty`,
+  `TwoColourNhd.radius_pos`; `hasTwoDiscsAt_comm`, `isTangentAt_comm`; `disjoint_interfaceSet_singularSet`, `cuspSet_subset_singularSet`,
+  `not_isCuspAt_of_mem_interfaceSet`; `saturatedOn_univ`, `SaturatedOn.mono`.
+- **Negative controls** (2026-10-06, on copies of the module, `lake env lean`): `disj` weakened to a triviality — 3 errors, the first at the spec
+  example and at `TwoColourNhd.ne`; `HasTwoDiscsAt` with both discs on one side — 4 errors, the first at `hasTwoDiscsAt_comm`, then at the
+  inhabitant. Each fires; the files were scratch copies and the tree is unchanged.
+- **Build**: OK — 464 of 464 batches, 2 modules with warnings, every warning `declaration uses sorry` (8: `Pinch` 7 — `half_upperDensity`,
+  `sq9_isTangentAt`, `pinch`, `pinch_not_in_in`, `TwoColourOn.essBoundary_inter_eq`, `c11_discs`, `c11_split`; `MapColouring` 1), exit 0
+  (`build/gate/build/20261006T114135Z-3705508.log`; driver logs `data/fs131/k6b/logs/build-1-foundation.log` — a first run that failed at one line
+  of `TwoColourNhd.mem_essBoundary`, fixed — and `build-2-foundation.log`). `scripts/Axioms.lean`: the first pass's block lost its eleven lines
+  for renamed declarations and a block "FS131-K6b" lists the eighteen new ones; all 34 lines of the two blocks resolve and read the standard
+  three (checked on a scratch file with the two modules' imports; the audit itself is the gate's).
+
+### 9.4 The plan per leaf, where it changed (the first pass's § 5 otherwise stands)
+
+| leaf | route | price |
+|---|---|---|
+| `pinch_not_in_in` | as § 5's (P3a), (P4); (P2) is now the hypothesis `hcover` | 1.5 h |
+| `pinch` | § 5's route with `P` from `h.h2a`, `h.h2b`; (P2) is `h.cover`; the split case's a.e. equalities from `h.cover` and `Measure.addHaar_sphere` (no `disj`); (out, out) from `h.disj`; every local step uses `Metric.isOpen_iff.1 h.isOpen x hx` in place of the centred ball | 6 h |
+| `TwoColourOn.essBoundary_inter_eq` | by symmetry (`h.symm`) one inclusion: for `x ∈ ∂_e A ∩ N` and `ball x r ⊆ N`, `densityRatio A x r + densityRatio B x r = 1` (`h.cover`, `h.disj`, `measure_union_add_inter`, `hA`); so `limsup` of one is positive iff the other does not tend to 1 (`densityRatio_add_compl`'s pattern, `tendsto_densityRatio_of_notMem_essClosure`) | 3 h |
+| `c11_discs` | contacts to `essSupport` (`essSupport_eq_closure_densitySet`); `pinch`; tangent gives the discs; split with `ν = x − y` and `ball (2x − y) 1 ⊆ (closedBall y 1)ᶜ` | 1 h |
+| `c11_split` | § 5's route, per set, with `Metric.isOpen_iff.1 hN` | 4 h |
+| `sq9_isTangentAt` | **shorter than § 5's**: `sqEdgePt + 1 ∈ sq9Sq 3 0` and `sqEdgePt − 1 ∈ sq9Sq (−2) 0`, then `sq9Sq_subset_essClosure` (wave 2) and `essClosure_subset_essSupport`; the colours by `simp` | 0.5 h |

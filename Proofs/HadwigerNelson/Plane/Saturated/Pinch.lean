@@ -10,15 +10,15 @@ Rows of `plans/LEAN-BACKLOG.md`, each at the class its argument reads (`plans/FS
   read. `AeColouring.saturated_of_idomatic` is the row's own form. **Proved.**
 * **FS111-M-HALF** — `half_dichotomy` (a preconnected piece of `S̃` lies in the closed unit disc about a contact or
   misses the open one; one class, no colouring; **proved**) and `half_upperDensity` (upper density at most `1/2`).
-* **FS111-M-PINCH** — `pinch` (for given contacts: split, one way or the other, or tangent), `pinch_not_in_in`,
-  `pinch_interface` (every interface point of a saturated colouring).
-* **FS111-M-C11**, clauses (i) and (iii) — `c11_discs`, `c11_split`. Clause (ii), the `C^{1,1}` graph, is the second
-  planning pass's (the plan's § 5).
+* **FS111-M-PINCH** — `pinch` (two sets on an open set `N`, any point of `N`, given contacts: split, one way or the
+  other, or tangent), `pinch_not_in_in`, `pinch_interface` (every interface point of a family, where it is saturated).
+* **FS111-M-C11**, clauses (i) and (iii) — `c11_discs` (every point of the one `N`), `c11_discs_interface`,
+  `c11_split`. Clause (ii), the `C^{1,1}` graph, is FS131-E8-LOCAL (`Plane/Saturated/LocalGraph`).
 * **FS121-V2-EROSION-DIAM** — `erosion_diam`, `erosion_diam_cot`: two straight pieces from `z` in the closure of one
   preconnected unit-distance-free set. No sector and no colouring is read. **Proved.**
 
 **Inhabitants.** FALLSAT: `r7Cls` (`r7Cls_isMaximalCover` with `isMaximalCover_iff`, seven MUA sets). PINCH and C11:
-`sq9` at `sqEdgePt` (`sq9_twoColourAt`; saturated by `sq9_tight_saturated`), of tangent type (`sq9_isTangentAt`).
+`sq9` at `sqEdgePt` (`sq9_twoColourNhd`; saturated by `sq9_tight_saturated`), of tangent type (`sq9_isTangentAt`).
 HALF: any class of `sq9` with a contact. EROSION-DIAM: an open square of side `1/2` at a corner.
 -/
 
@@ -137,47 +137,105 @@ theorem half_upperDensity {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPair
 
 /-- `sq9` at the edge point is of tangent type: beyond `sq9_hasTwoDiscsAt`, the contacts `sqEdgePt ± 1` lie in the
 supports of the two squares' colours (the squares one unit to the right and to the left). -/
-theorem sq9_isTangentAt : sq9.IsTangentAt sqEdgePt (1 / 8) sqColA sqColB 1 := by
+theorem sq9_isTangentAt :
+    IsTangentAt (sq9.cls sqColA) (sq9.cls sqColB) (ball sqEdgePt (1 / 8)) sqEdgePt 1 := by
   sorry
 
-/-- **FS111-M-PINCH.** At a point `x` with (H1), (H2) in `N = B(x, ρ)` for the colours `a`, `b`, and contacts `ya` of
-`a`, `yb` of `b` (points of the supports at distance exactly `1`; no density of the partner is asked): either
-`ya = yb` and `N` is split by the unit circle about it, `a` inside and `b` outside or the reverse, or the contacts are
-antipodal and `x` is of tangent type with normal `ya − x` into `b`. -/
-theorem pinch (c : AeColouring k) {x : ℂ} {ρ : ℝ} {a b : Fin k} (h : c.TwoColourAt x ρ a b) {ya yb : ℂ}
-    (hya : ya ∈ essSupport (c.cls a)) (hxa : dist x ya = 1) (hyb : yb ∈ essSupport (c.cls b)) (hxb : dist x yb = 1) :
-    (ya = yb ∧ (c.IsSplitAt x ρ a b ya ∨ c.IsSplitAt x ρ b a ya)) ∨
-      (yb - x = -(ya - x) ∧ c.IsTangentAt x ρ a b (ya - x)) := by
+/-- **FS111-M-PINCH**, at the class its argument reads: two measurable sets `A`, `B` with null unit pairs, an open set
+`N` on which they satisfy the row's hypotheses (`TwoColourOn`: (H1) as "cover and almost disjoint", (H2) for each), a
+point `x` of `N` — any point, `N` is not centred at it — and contacts `ya` of `A`, `yb` of `B` (points of the supports
+at distance exactly `1`; no density of the partner is asked). Either `ya = yb` and `N` is split by the unit circle
+about it, `A` inside and `B` outside or the reverse, or the contacts are antipodal and `x` is of tangent type with
+normal `ya − x` into `B`. No colouring, no third class and no family is read. -/
+theorem pinch {A B N : Set ℂ} (hA : MeasurableSet A) (hAn : UnitPairsNull A) (hB : MeasurableSet B)
+    (hBn : UnitPairsNull B) (h : TwoColourOn A B N) {x ya yb : ℂ} (hx : x ∈ N)
+    (hya : ya ∈ essSupport A) (hxa : dist x ya = 1) (hyb : yb ∈ essSupport B) (hxb : dist x yb = 1) :
+    (ya = yb ∧ (IsSplitAt A B N x ya ∨ IsSplitAt B A N x ya)) ∨
+      (yb - x = -(ya - x) ∧ IsTangentAt A B N x (ya - x)) := by
   sorry
 
-/-- **FS111-M-PINCH**, "the case (in, in) is impossible": the two classes do not both lie, within `N`, in the closed
-unit discs about their contacts. A refutation; its hypotheses without the last are `pinch`'s, inhabited by `sq9` at
-`sqEdgePt` (`sq9_twoColourAt`), where the last fails. -/
-theorem pinch_not_in_in (c : AeColouring k) {x : ℂ} {ρ : ℝ} {a b : Fin k} (h : c.TwoColourAt x ρ a b) {ya yb : ℂ}
-    (hxa : dist x ya = 1) (hxb : dist x yb = 1)
-    (hin : (c.cls a ∩ ball x ρ : Set ℂ) ≤ᵐ[volume] closedBall ya 1 ∧
-      (c.cls b ∩ ball x ρ : Set ℂ) ≤ᵐ[volume] closedBall yb 1) : False := by
+/-- **FS111-M-PINCH**, "the case (in, in) is impossible", at the class its argument reads: if an open set `N` is
+almost everywhere `A ∪ B`, no point `x` of `N` on the unit circles about `ya` and `yb` has `A` and `B` both, within
+`N`, in the closed unit discs about them. Neither (H2), nor almost-disjointness, nor measurability is read.
+A refutation; its hypotheses without the last are met by `sq9` at `sqEdgePt` (`sq9_twoColourNhd`, with
+`ya = sqEdgePt + 1`, `yb = sqEdgePt - 1`), where the last fails. -/
+theorem pinch_not_in_in {A B N : Set ℂ} (hN : IsOpen N) (hcover : (N : Set ℂ) ≤ᵐ[volume] (A ∪ B : Set ℂ))
+    {x ya yb : ℂ} (hx : x ∈ N) (hxa : dist x ya = 1) (hxb : dist x yb = 1)
+    (hin : (A ∩ N : Set ℂ) ≤ᵐ[volume] closedBall ya 1 ∧ (B ∩ N : Set ℂ) ≤ᵐ[volume] closedBall yb 1) : False := by
   sorry
 
-/-- **FS111-M-PINCH** at the points it is used: in a saturated colouring every interface point has a two-colour
-neighbourhood in which it is of split type (`a` inside) or of tangent type. -/
-theorem pinch_interface (c : AeColouring k) (hsat : Saturated c.cls) {x : ℂ} (hx : x ∈ c.interfaceSet) :
-    ∃ ρ a b, c.TwoColourAt x ρ a b ∧ ((∃ y, c.IsSplitAt x ρ a b y) ∨ ∃ ν, c.IsTangentAt x ρ a b ν) := by
+/-- In a two-colour open set the two sets have the same essential boundary: where one is neither of density `1` nor
+of density `0`, so is the other (the density ratios of `A` and `B` sum to `1` in small balls). -/
+theorem TwoColourOn.essBoundary_inter_eq {A B N : Set ℂ} (hA : MeasurableSet A) (hB : MeasurableSet B)
+    (h : TwoColourOn A B N) : essBoundary A ∩ N = essBoundary B ∩ N := by
   sorry
+
+/-- In a two-colour neighbourhood of a family, an essential boundary point of the family is an essential boundary
+point of both classes (a third class is null near it). With `cl P = supp` inside `N` this is the frozen (H2)'s clause
+`x ∈ cl P_a ∩ cl P_b`. -/
+theorem TwoColourNhd.mem_essBoundary {C : Fin k → Set ℂ} (hm : ∀ j, MeasurableSet (C j)) {N : Set ℂ} {a b : Fin k}
+    (h : TwoColourNhd C N a b) {x : ℂ} (hx : x ∈ N) (hxb : x ∈ essBdry C) :
+    x ∈ essBoundary (C a) ∧ x ∈ essBoundary (C b) := by
+  obtain ⟨j, hj⟩ := mem_iUnion.1 hxb
+  have key := h.two.essBoundary_inter_eq (hm a) (hm b)
+  by_cases hja : j = a
+  · subst hja
+    exact ⟨hj, (key.subset ⟨hj, hx⟩).1⟩
+  · by_cases hjb : j = b
+    · subst hjb
+      exact ⟨(key.superset ⟨hj, hx⟩).1, hj⟩
+    · exfalso
+      obtain ⟨r, hr, hsub⟩ := Metric.isOpen_iff.1 h.two.isOpen x hx
+      have h0 : ∀ s, 0 < s → s ≤ r / 2 → volume (C j ∩ closedBall x s) = 0 := fun s _ hs =>
+        measure_mono_null (inter_subset_inter_right _ ((closedBall_subset_ball (by linarith)).trans hsub))
+          (h.h1 j hja hjb)
+      exact (ne_of_gt hj.1) (upperDensityAt_eq_zero_of_null (half_pos hr) h0)
+
+/-- **FS111-M-PINCH** at the points it is used, for a family (a colouring's classes: `c.cls`, with
+`c.isAeCover.1`): at an interface point where the family is saturated, some ball centred there is a two-colour
+neighbourhood in which the point is of split type (`a` inside) or of tangent type. -/
+theorem pinch_interface {C : Fin k → Set ℂ} (hC : IsAdmissible C) {U : Set ℂ} (hsat : SaturatedOn C U) {x : ℂ}
+    (hxU : x ∈ U) (hx : x ∈ interfaceSet C) :
+    ∃ ρ a b, TwoColourNhd C (ball x ρ) a b ∧
+      ((∃ y, IsSplitAt (C a) (C b) (ball x ρ) x y) ∨ ∃ ν, IsTangentAt (C a) (C b) (ball x ρ) x ν) := by
+  obtain ⟨ρ, a, b, h⟩ := exists_twoColourNhd_of_mem_interfaceSet hx
+  have hxN : x ∈ ball x ρ := mem_ball_self h.radius_pos
+  obtain ⟨hxa, hxb⟩ := h.mem_essBoundary (fun j => (hC j).1) hxN hx.1
+  obtain ⟨ya, hya, hda⟩ := hsat a x ⟨hxa, hxU⟩
+  obtain ⟨yb, hyb, hdb⟩ := hsat b x ⟨hxb, hxU⟩
+  rw [← essSupport_eq_closure_densitySet] at hya hyb
+  rcases pinch (hC a).1 (hC a).2 (hC b).1 (hC b).2 h.two hxN hya hda hyb hdb with ⟨rfl, hs | hs⟩ | ⟨-, ht⟩
+  · exact ⟨ρ, a, b, h, Or.inl ⟨ya, hs⟩⟩
+  · exact ⟨ρ, b, a, h.symm, Or.inl ⟨ya, hs⟩⟩
+  · exact ⟨ρ, a, b, h, Or.inr ⟨_, ht⟩⟩
 
 /-! ## FS111-M-C11, clauses (i) and (iii) -/
 
-/-- **FS111-M-C11 (i).** In a saturated colouring every interface point carries two open unit discs tangent there from
-opposite sides, one in each of its two colours (within `N`, up to null sets) — at the split type as at the tangent
-type. -/
-theorem c11_discs (c : AeColouring k) (hsat : Saturated c.cls) {x : ℂ} (hx : x ∈ c.interfaceSet) :
-    ∃ ρ a b ν, c.TwoColourAt x ρ a b ∧ c.HasTwoDiscsAt x ρ a b ν := by
+/-- **FS111-M-C11 (i)**, at the class its argument reads: in a two-colour open set `N`, every point of `N` with a
+contact of `A` and a contact of `B` — every point, with the one `N` — carries two open unit discs tangent there from
+opposite sides, one in each set (within `N`, up to null sets): at the split type as at the tangent type. (At a point
+of `N` off the common essential boundary the two contacts cannot both exist.) -/
+theorem c11_discs {A B N : Set ℂ} (hA : MeasurableSet A) (hAn : UnitPairsNull A) (hB : MeasurableSet B)
+    (hBn : UnitPairsNull B) (h : TwoColourOn A B N) {x : ℂ} (hx : x ∈ N) (hcA : IsContactFor A x)
+    (hcB : IsContactFor B x) : ∃ ν, HasTwoDiscsAt A B N x ν := by
   sorry
 
-/-- **FS111-M-C11 (iii).** If `x` is of split type in `N = B(x, ρ)` about `y`, the essential boundary in `N` is the arc
-of the unit circle about `y`. -/
-theorem c11_split (c : AeColouring k) {x : ℂ} {ρ : ℝ} {a b : Fin k} {y : ℂ} (h : c.IsSplitAt x ρ a b y) :
-    c.essBdry ∩ ball x ρ = sphere y 1 ∩ ball x ρ := by
+/-- **FS111-M-C11 (i)** at an interface point of a family saturated there: a two-colour ball centred at the point,
+and the two tangent unit discs in it. -/
+theorem c11_discs_interface {C : Fin k → Set ℂ} (hC : IsAdmissible C) {U : Set ℂ} (hsat : SaturatedOn C U) {x : ℂ}
+    (hxU : x ∈ U) (hx : x ∈ interfaceSet C) :
+    ∃ ρ a b ν, TwoColourNhd C (ball x ρ) a b ∧ HasTwoDiscsAt (C a) (C b) (ball x ρ) x ν := by
+  obtain ⟨ρ, a, b, h⟩ := exists_twoColourNhd_of_mem_interfaceSet hx
+  have hxN : x ∈ ball x ρ := mem_ball_self h.radius_pos
+  obtain ⟨hxa, hxb⟩ := h.mem_essBoundary (fun j => (hC j).1) hxN hx.1
+  obtain ⟨ν, hν⟩ := c11_discs (hC a).1 (hC a).2 (hC b).1 (hC b).2 h.two hxN (hsat a x ⟨hxa, hxU⟩)
+    (hsat b x ⟨hxb, hxU⟩)
+  exact ⟨ρ, a, b, ν, h, hν⟩
+
+/-- **FS111-M-C11 (iii).** If some point is of split type in the open set `N` about `y`, the essential boundary of
+each of the two sets in `N` is the arc of the unit circle about `y`. -/
+theorem c11_split {A B N : Set ℂ} (hN : IsOpen N) {x y : ℂ} (h : IsSplitAt A B N x y) :
+    essBoundary A ∩ N = sphere y 1 ∩ N ∧ essBoundary B ∩ N = sphere y 1 ∩ N := by
   sorry
 
 /-! ## FS121-V2-EROSION-DIAM -/
