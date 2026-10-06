@@ -5799,6 +5799,14 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.hasRepeatedColour_of_cleanKeep
 #print axioms HadwigerNelson.Plane.ArcMap.not_isSite_cleanKeep
 
+-- FS131-IR2, stage 20: the points of a step's disc (germs on branches with distinct directions; clean maps); the cases' helpers
+#print axioms HadwigerNelson.Plane.ArcMap.Near.col_ne_next_of_isClean
+#print axioms HadwigerNelson.Plane.ArcMap.Near.two_le_of_isClean
+#print axioms HadwigerNelson.Plane.ArcMap.not_hasRepeatedColour_of_degree_le_three
+#print axioms HadwigerNelson.Plane.ArcMap.hasHornCount_zero_of_germs
+#print axioms HadwigerNelson.Plane.ArcMap.one_le_of_isHorn
+#print axioms HadwigerNelson.Plane.ArcMap.two_le_of_isHorn_of_isHorn
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
