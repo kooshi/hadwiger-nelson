@@ -4614,3 +4614,35 @@ reason by the close.*
      lemma takes it as a hypothesis or states it under its own name. Item 443's instruction was the opposite and was wrong. (h) **Slot →
      FS131-MB1**, the example maps' implementer B, on a branch `fs131-wmb` cut from the skeleton `fe9d6d32`. In flight: 1 (RP1) + 1 (MA1) +
      1 (MB1) = 3. Queue: wave 5's landing job at RP1's hand-back.
+
+468. **FS131-RP1 done: the remedy pass — six ruled statement tidies, no name twice and no statement under two names in `Plane`, 58 corrected
+     docstrings, the notes check at 0 CONFLICT** (implementer; harness ≈ 475k by the task notice; record `fs131-w5c`'s
+     `plans/FS131-RP1-remedy.md` Stages 1–4; report `data/fs131/reports/FS131-RP1.md` on that branch; commits `fcca0383`, `7e0ec194`,
+     `a10abf53` (the Lean sources the final build read), `21acdeb6`, `8f2280d0`; pushed, tree clean). **Results**: `nb4p` with one conjunct;
+     `bend_toward_collar` without `hlen`, `hmax`, and a named theorem `collarModel_hyps` (its hypotheses at once on `l60Frag`'s sub-arc);
+     `exists_rayStep`, `exists_shaveStep` without `hn`; the three `[NumberField _]` binders gone (two theorems now for every subfield of
+     `ℝ`); `conj_e` and `sq_norm_eq` declared once, in `Plane/Basic`; eleven second names removed with ten audit records; 58 docstring edits
+     in 16 files — the notes check reads 175 notes with 0 CONFLICT, and it had read **21** on the branch as given, not 17. Exactly the ruled
+     statements changed (11,258 declarations read against a manifest: changed 7, gone 14, added 4). **My receipt**: tip equals
+     `origin/fs131-w5c`; the build log `build/gate/build/20261006T083152Z-2635123.log` ends "Build completed successfully (5803 jobs)", 0
+     warnings other than `sorry`, 36 distinct `sorry` sites (the bend's skeleton on this line, as given); `conj_e` declared once under
+     `Proofs/` by `grep` (`Plane/Basic.lean:47`); `nb4p`'s and `bend_toward_collar`'s statements read (one conjunct; no `hmax`, `hlen`);
+     `data/fs131/rp/RPAxioms.out` parsed by script, 23 records: 22 on exactly the standard three, the control `exists_arcStep` through
+     `sorryAx`. **Items**: corrections owed — my brief's "seventeen notes" (ten and ten, and one in `Procedure`); QA4's rank 8 (c) (it is
+     the open line: the four lemmas' hypotheses are some of `BaseCtx`'s fields, so `row134BaseUA` does not refute them); E7's drafted
+     docstring lines name Lean objects that do not exist (the notes say `F₀`, `F₁`, `P₄`, `P₅` at [hand], open gate items); rank 7's line
+     was itself wrong once the step took a plane map. Generalizations — seven statements strictly stronger (for the errata). Slip, the job's,
+     disclosed and instructive — a caller of `bend_toward_collar` missed because `lake env lean` read the old olean; found by the build.
+     Tool defects — `tools/fs131_qa4_notes.py` matches phrases with a literal space (fails toward the alarm); `tools/fs131_im_move_cone.py
+     --check` is pinned to an old commit. Predictions for the landing's gate — `declarations` ten lower on this account, the linter's three
+     findings gone. Listed, not made — three more same-fact pairs (`re_e`/`im_e` against `e_re_im`; `e_add_int_mul_two_pi` against
+     `e_add_int_mul`; `e_zero`). A `LEAN.md` sentence drafted (what `lake env lean` reads).
+469. **Rulings on RP1's held items, and its slot.** (a) `collarModel_hyps` with four conjuncts stands (the fifth was `hlen`). (b) `conj_e`
+     in `Plane/Basic` stands; the one rebuild of everything downstream is the landing's. (c) **The names RP1 removed are not used in the
+     bend's seven modules on `origin/fs131-w5z`** (my `grep`, nine names, 0 each); a trial merge of `origin/fs131-w5z` into this tip
+     (`git merge-tree`) shows **one conflict, `scripts/Axioms.lean`**, keep-both. (d) `Terminal`'s "skeleton", `BendStep`'s docstrings and
+     RP1's closing list go to the landing job with ruling 465 (a)'s. (e) **RP1's drafted `LEAN.md` sentence is held for the filing**, to be
+     reconciled with BA3's hazard note (item 464: an overlay made of symlinks is written through by `lean -o`): two lanes' notes on one
+     practice, filed once. (f) The three further same-fact pairs are a tidy move after the landing. (g) **Slot → FS131-L5, wave 5's landing**,
+     launched 2026-10-06 in `fs131-w5c`. While it is in flight I commit nothing to `main` outside `plans/`, `data/`, `.claude/`,
+     `BIBLIOGRAPHY.md`, `LEDGER.md` (ruling 415 (b)). In flight: 1 (L5) + 1 (MA1) + 1 (MB1) = 3.
