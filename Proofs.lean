@@ -231,6 +231,8 @@ import Proofs.HadwigerNelson.Plane.Woodall.Merge
 import Proofs.HadwigerNelson.Plane.Woodall.Steps
 import Proofs.HadwigerNelson.Plane.Saturated.Basic
 import Proofs.HadwigerNelson.Plane.Saturated.Pinch
+import Proofs.HadwigerNelson.Plane.Saturated.MapEdge
+import Proofs.HadwigerNelson.Plane.Saturated.Sq9Map
 import Proofs.HadwigerNelson.Plane.Saturated.MapColouring
 import Proofs.HadwigerNelson.Plane.Saturated.Fan
 import Proofs.HadwigerNelson.Plane.Saturated.FanExamples

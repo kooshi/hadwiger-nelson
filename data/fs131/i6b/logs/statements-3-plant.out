@@ -1,0 +1,4 @@
+kept     | Proofs/HadwigerNelson/Plane/Saturated/Basic.lean: 253 lines of 3928644b stand in order (253 now)
+kept     | Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: 189 lines of 3928644b stand in order (196 now)
+CHANGED  | Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean: line of 3928644b not found in order:   ∀ i m, σ i < σ m → ∀ x, SeparatesAt S i m x → OnLevel (closure (S i)) x
+files: 3  kept: 2  changed: 1

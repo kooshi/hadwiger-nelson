@@ -1,0 +1,11 @@
+/tmp/claude-1000/-home-kooshi-source-lean-dir/97d700e3-0ed0-4032-8dcd-cebbe8c929fe/scratchpad/PlantB.lean:33:57: error: unsolved goals
+a : Arc
+⊢ (∃ i i_1, a = Arc.seg (sq9Corner i i_1) (sq9Corner (i + 1) i_1)) ↔
+    ∃ n m, a = Arc.seg (sq9Corner n m) (sq9Corner (n + 1) m) ∨ a = Arc.seg (sq9Corner n m) (sq9Corner n (m + 1))
+/tmp/claude-1000/-home-kooshi-source-lean-dir/97d700e3-0ed0-4032-8dcd-cebbe8c929fe/scratchpad/PlantB.lean:34:34: warning: This simp argument is unused:
+  mem_insert_iff
+
+Hint: Omit it from the simp argument list.
+  simp only [sq9Arcs, mem_iUnion, m̵e̵m̵_̵i̵n̵s̵e̵r̵t̵_̵i̵f̵f̵,̵ ̵mem_singleton_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

@@ -1,4 +1,6 @@
 import Proofs.HadwigerNelson.Plane.Saturated.Basic
+import Proofs.HadwigerNelson.Plane.Saturated.MapEdge
+import Proofs.HadwigerNelson.Plane.Saturated.Sq9Map
 import Proofs.HadwigerNelson.Plane.Closure
 import Proofs.HadwigerNelson.Plane.Diameter
 import Proofs.HadwigerNelson.Plane.Slack
@@ -21,7 +23,11 @@ never a planar graph (`plans/FS131-w6-kernel-plan.md` §§ 2, 3.3):
 
 Rows: **FS121-C1-BOUND** (`bound_iff`, proved, for one open set with null unit pairs); **FS121-C1-GMAP** (i) (`gmap_i`,
 proved) and (ii) (`gmap_ii`, proved, for every class `𝒞` of open families in place of "locally finite map colourings");
-**FS121-C1-SAT** (`sat_inP`, `sat_noPar`).
+**FS121-C1-SAT** (`sat_inP`, `sat_noPar`; `sat_inP` from `ArcMap.bound_of_saturatedOn`, for a family saturated on an
+open set, which asks no neighbourhood free of other colours).
+
+**Inhabitant** of FS121-C1-SAT's hypotheses, all at once: `sq9Map` (`Plane/Saturated/Sq9Map`), at `k = 9`, with a
+separating point (`sq9Map_sat_model`).
 -/
 
 namespace HadwigerNelson.Plane
@@ -187,14 +193,51 @@ theorem gmap_ii (𝒞 : (Fin 6 → Set ℂ) → Prop)
 
 /-! ## FS121-C1-SAT -/
 
+/-- **FS121-C1-SAT at the class its argument reads**: let the regions of an arc map be, up to null sets, a family `C`
+saturated on an open set `U`. Then every point of `U` in the domain and in the closures of the regions of two
+different colours `i`, `m` is `i`-bound. (Essential boundary points of `region i` accumulate at the point,
+`ArcMap.exists_mem_essBoundary_region`; saturation puts each at distance `1` from `supp (C i) = closure (region i)`;
+the unit shadow of a closed set is closed.) Not asked: a colouring, null unit pairs, a map of the whole plane, an order
+of the colours, or a neighbourhood of the point free of other colours — the second clause of `SeparatesAt`; the point
+may be a vertex at which `region i` has a cusp. Inhabitant: `sq9Map_sat_model` (`U` the plane). -/
+theorem ArcMap.bound_of_saturatedOn (F : ArcMap k) {C : Fin k → Set ℂ} (hC : ∀ j, C j =ᵐ[volume] F.region j)
+    {U : Set ℂ} (hU : IsOpen U) (hsat : SaturatedOn C U) {i m : Fin k} (him : i ≠ m) {x : ℂ} (hxU : x ∈ U)
+    (hxd : x ∈ F.dom) (hxi : x ∈ closure (F.region i)) (hxm : x ∈ closure (F.region m)) :
+    x ∈ unitShadow (closure (F.region i)) := by
+  have hcl : IsClosed (unitShadow (closure (F.region i))) := isClosed_unitShadow isClosed_closure
+  rw [← hcl.closure_eq, Metric.mem_closure_iff]
+  intro ε hε
+  obtain ⟨r, hr, hrU⟩ := Metric.isOpen_iff.1 hU x hxU
+  obtain ⟨z, hzx, hz⟩ := F.exists_mem_essBoundary_region hxd him hxi hxm (lt_min hε hr)
+  refine ⟨z, ?_, by rw [dist_comm]; exact lt_of_lt_of_le hzx (min_le_left _ _)⟩
+  rw [← MapEdge.essBoundary_congr_ae (hC i)] at hz
+  obtain ⟨y, hy, hzy⟩ := hsat i z ⟨hz, hrU (ball_subset_ball (min_le_right _ _) hzx)⟩
+  rw [← essSupport_eq_closure_densitySet, MapEdge.essSupport_congr_ae (hC i),
+    essSupport_eq_closure_of_isOpen (F.isOpen_region i)] at hy
+  exact ⟨y, hy, hzy⟩
+
+/-- **FS121-C1-SAT without the second clause of `SeparatesAt`**: in a plane map bounded by segments and circular arcs
+whose regions are, up to null sets, the classes of a saturated colouring, every point in the closures of the regions
+of two different colours `i`, `m` is `i`-bound (`ArcMap.bound_of_saturatedOn` on the whole plane). Inhabitant:
+`sq9Map_sat_model`. -/
+theorem sat_bound_of_mem_closure (F : ArcMap k) (hF : F.IsPlaneMap) (c : AeColouring k)
+    (hc : ∀ j, c.cls j =ᵐ[volume] F.region j) (hsat : Saturated c.cls) {i m : Fin k} (him : i ≠ m) {x : ℂ}
+    (hxi : x ∈ closure (F.region i)) (hxm : x ∈ closure (F.region m)) :
+    x ∈ unitShadow (closure (F.region i)) :=
+  F.bound_of_saturatedOn hc isOpen_univ (hsat.saturatedOn univ) him (mem_univ x) (by rw [hF]; exact mem_univ x) hxi hxm
+
 /-- **FS121-C1-SAT**, first clause: a plane map bounded by segments and circular arcs (an `ArcMap`: locally finitely
 many of them) whose classes `F.region j` are those of a saturated colouring `c` up to null sets is in `𝒫_k` under
 every order of its colours. (Validity of the map is not a hypothesis: open classes almost everywhere equal to classes
-with null unit pairs have none, `UnitPairsNull.congr_ae`.) -/
+with null unit pairs have none, `UnitPairsNull.congr_ae`.) Inhabitant of the hypotheses, all at once, with a point the
+conclusion speaks about: `sq9Map_sat_model` (`k = 9`: `sq9` on the half-integer grid, the edge point `sqEdgePt`). -/
 theorem sat_inP (F : ArcMap k) (hF : F.IsPlaneMap) (c : AeColouring k)
     (hc : ∀ j, c.cls j =ᵐ[volume] F.region j) (hsat : Saturated c.cls) (σ : Equiv.Perm (Fin k)) :
     InP F.region σ := by
-  sorry
+  intro i m him x hsep
+  have hne : i ≠ m := fun h => by rw [h] at him; exact lt_irrefl _ him
+  exact (bound_iff (F.isOpen_region i) ((c.isAeCover.1 i).2.congr_ae (hc i)) hsep.1.1).1
+    (sat_bound_of_mem_closure F hF c hc hsat hne hsep.1.1 hsep.1.2)
 
 /-- **FS121-C1-SAT**, the "so" clause: if `𝒫_6` is empty on a class `𝒞` containing the classes of every valid plane
 map bounded by segments and circular arcs (C121-NOPAR, a named open statement, for the locally finite map
@@ -204,5 +247,56 @@ theorem sat_noPar (𝒞 : (Fin 6 → Set ℂ) → Prop) (hNoPar : NoPar 𝒞) (F
     (h𝒞 : 𝒞 F.region) (c : AeColouring 6) (hc : ∀ j, c.cls j =ᵐ[volume] F.region j) (hsat : Saturated c.cls) :
     False :=
   hNoPar _ h𝒞 (Equiv.refl _) (sat_inP F hF c hc hsat _)
+
+/-! ## The inhabitant: `sq9` on the half-integer grid -/
+
+/-- The edge point `1/2 + i/4` separates the colours of the two squares it lies between, in `sq9Map`. -/
+theorem sq9Map_separatesAt : SeparatesAt sq9Map.region sqColA sqColB sqEdgePt :=
+  ⟨sqEdgePt_mem_closure_regions, 1 / 8, by norm_num, sqEdge_ball_subset_closure_regions⟩
+
+/-- **Inhabitant of `sat_inP`'s hypotheses, all at once** (and of `sat_bound_of_mem_closure`'s), at `k = 9`: `sq9Map`
+is a map of the plane bounded by segments, its regions are the classes of `sq9` up to the null grid, `sq9` is
+saturated — and the conclusion is not empty there: the edge point `sqEdgePt` separates `sqColA` and `sqColB`. (At
+`k = 6`, where `sat_noPar` refutes these hypotheses under C121-NOPAR, their satisfiability is the open question.) -/
+theorem sq9Map_sat_model : sq9Map.IsPlaneMap ∧ (∀ j, sq9.cls j =ᵐ[volume] sq9Map.region j) ∧ Saturated sq9.cls ∧
+    SeparatesAt sq9Map.region sqColA sqColB sqEdgePt :=
+  ⟨sq9Map_isPlaneMap, sq9Map_region_ae, sq9_tight_saturated.2.1, sq9Map_separatesAt⟩
+
+/-- Spec: `sat_inP` at its inhabitant — `sq9Map` is in `𝒫_9` under every order of its colours. -/
+example (σ : Equiv.Perm (Fin 9)) : InP sq9Map.region σ :=
+  sat_inP sq9Map sq9Map_sat_model.1 sq9 sq9Map_sat_model.2.1 sq9Map_sat_model.2.2.1 σ
+
+/-- Spec: the conclusion at the inhabitant's point — the edge point lies on a level of a component of the closed class
+of `sqColA` (its unit circle meets that class: the point `sqEdgePt − 1`). -/
+example : OnLevel (closure (sq9Map.region sqColA)) sqEdgePt :=
+  sat_inP sq9Map sq9Map_sat_model.1 sq9 sq9Map_sat_model.2.1 sq9Map_sat_model.2.2.1 (Equiv.refl _) sqColA sqColB
+    (by decide) sqEdgePt sq9Map_separatesAt
+
+/-- Spec: `ArcMap.bound_of_saturatedOn` at the inhabitant, saturated on the ball `B(sqEdgePt, 1/8)` only. -/
+example : sqEdgePt ∈ unitShadow (closure (sq9Map.region sqColA)) :=
+  sq9Map.bound_of_saturatedOn sq9Map_region_ae isOpen_ball
+    (sq9_tight_saturated.2.1.saturatedOn (ball sqEdgePt (1 / 8))) sqColA_ne_sqColB sqEdgePt_mem_ball (mem_univ _)
+    sqEdgePt_mem_closure_regions.1 sqEdgePt_mem_closure_regions.2
+
+/-- **Inhabitant of `ArcMap.exists_mem_essBoundary_region`'s hypotheses** (`Plane/Saturated/MapEdge`): `sq9Map` at the
+edge point, between the colours of its two squares. -/
+example : ∃ z ∈ ball sqEdgePt (1 / 100), z ∈ essBoundary (sq9Map.region sqColA) :=
+  sq9Map.exists_mem_essBoundary_region (mem_univ _) sqColA_ne_sqColB sqEdgePt_mem_closure_regions.1
+    sqEdgePt_mem_closure_regions.2 (by norm_num)
+
+/-- **Inhabitant of `ArcMap.mem_essBoundary_region_of_curve`'s hypotheses** (`Plane/Saturated/MapEdge`): `sq9Map` at
+the edge point, where the arcs meeting `B(sqEdgePt, 1/8)` lie on the line `re z = 1/2` (`κ = 0`, `b = 1`) — the edge
+point is an essential boundary point of the left square's region. -/
+example : sqEdgePt ∈ essBoundary (sq9Map.region sqColA) := by
+  have hsub : sq9Map.region sqColB ⊆ sq9Map.interiorPts \ sq9Map.region sqColA := fun w hw =>
+    ⟨hw.1, fun hA => Set.disjoint_left.1 (sq9Map.disjoint_region sqColA_ne_sqColB) hA hw⟩
+  refine sq9Map.mem_essBoundary_region_of_curve (κ := 0) (b := 1) (Or.inl rfl) one_ne_zero (δ := 1 / 8) (by norm_num)
+    (by norm_num) (subset_univ _) (fun y hy a ha hya => ?_) sqEdgePt_mem_closure_regions.1
+    (closure_mono hsub sqEdgePt_mem_closure_regions.2)
+  have hre : y.re = 1 / 2 := by
+    by_contra hne
+    exact (sqEdge_mem_interiorPts hy hne).2 (mem_iUnion₂.2 ⟨a, ha, hya⟩)
+  simp only [curveAt, mem_setOf_eq, zero_mul, map_one, mul_one, Complex.sub_re, hre]
+  norm_num [sqEdgePt]
 
 end HadwigerNelson.Plane
