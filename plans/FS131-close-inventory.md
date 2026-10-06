@@ -5514,3 +5514,40 @@ reason by the close.*
      `TileAt`, `IsTip`, `IsOuterTile`, `GammaFreeRing`, `QFreeRing`, `IsSemiHub`, and seventeen more) are what wave 9's planner
      and wave 7's second pass will read; asked of K8 by message: commit that module alone after a build and send the hash, so
      both take it by ancestry and re-declare nothing.
+
+519. **FS131-I10C done: all nine leaves of wave 10's `StandingFive` proved — with it every one of the wave's four first-pass files
+     holds no `sorry`, each on its own branch** (implementer, Opus; harness 444k by the task notice; record `fs131-w10c`'s
+     `plans/FS131-I10C-implementation.md` Stages 1–4; report `data/fs131/reports/FS131-I10C.md`; commits `ff01f137`, `429afe7d`,
+     `06420fee`, `057b769a`, `8ee0d85b`; pushed, tree clean). **Row TC1-STANDING-FIVE, clause by clause**: the standing field is a
+     number field of degree 28, totally real; exactly two primes above 2, neither split in `F(i)`, each of norm `128²` there
+     with conjugation moving an element; no usable residue field below 347 (`usable_card_ge`, by a `decide +kernel` over the
+     naturals below 347 that needs no primality); the same on the stable primes; `le_localBound` — "so `L(F) ≥ 7`" — over the
+     named hypothesis `StandingFloor n`, with `seven_le_localBound` and `five_le_chromaticNumber` (the latter also over
+     `Row123Chain`) resting on no `sorry`. **New statements, one mind, owed the planner's read-back**: `g_eta`, `cev_hvec`,
+     `finrank_E7_and_K`, `minpoly_eta`, `irreducible_gPoly`, `card_ge_of_usable`, `fourteen_dvd_of_char_two`,
+     `card_fixed_of_involution`, `two_sq_ne_of_isIntegral`, `dyadic_summary`, `exists_stablePrime_two`,
+     `im_eq_zero_of_aeval_gPoly`. **My receipt**: tip `8ee0d85b` equals `origin/fs131-w10c`, tree clean; no `sorry`, no `axiom`, no
+     `native_decide` anywhere in `StandingFive.lean` (1,283 lines), by grep; the full build log named by
+     `data/fs131/i10c/logs/build-3-final.log` ends "Build completed successfully (5754 jobs)", 0 warnings other than `sorry`, none
+     in `StandingFive` (the others are the three files proved on other branches); `axioms-final.log` parsed by script: 34
+     records, 32 on the standard three or a subset, one axiom-free, and the control (a leaf open on this branch) on `sorryAx`;
+     the nine leaves and the two compositions found by name; five statements compared with `f919973e` by `cmp` — identical.
+     **Items**: three generalizations (the usable clause and the dyadic clause hold at the maximal ideals of any commutative
+     ring holding the named elements; degree 28 and the irreducibility of `g` follow from the dyadic count, the plan's "mod 2
+     and mod 7" inputs unread); `StablePrime standingField` is inhabited, so `localBound` there is an infimum over a non-empty
+     family; **a correction owed to any front-page sentence: the kernel says "at least 347"; that a place attains 347 stays
+     [tools]**; a reading note (`card_quotient_of_two_mem` does not read its prime's stability; statement unchanged); slips, the
+     job's, disclosed (four, none reaching a commit's statements); three Lean facts, filed in `LEAN.md` today.
+520. **Rulings on I10C's held items, and its slot.** (a) **"347 is attained by a place of `F`" is not made a row**: the filed
+     row claims only that no usable residue field is small, the kernel's sentence is "at least 347", and the attainment stays a
+     [tools] remark in the module's docstring. Alternative: a row for the third planning pass (a prime above 347 of residue
+     degree 1). Why not: it is a sharpening no filed result states or uses. Confidence: high. (b) Whether
+     `NumberField standingField` becomes a global instance, and the read-back of the twelve new statements, go to wave 10's
+     third planning pass with the first two implementers' (rulings 494 (b), 507 (c)). (c) **Wave 10's first pass is ready to
+     land on its own**: a joining-and-landing job, FS131-L10A, merges `fs131-w10`, `fs131-w10b`, `fs131-w10c` and `main`,
+     drops the nine unread arguments (rulings 494 (a), 507 (a)), adds `StationarySet` to the vacuity scan's carriers, runs the
+     full gate and lands; the second pass's ten modules follow in a second landing when their leaves are proved. Alternative:
+     one landing for the whole wave. Why two: four files' results become held now instead of after three more implementers and
+     a planner, and the later branches then merge a `main` that already holds their imports. Confidence: medium-high. Brief not
+     written. (d) **Slot → FS131-K6c** (wave 6's third planner): wave 9's planner is next in the order but waits for wave 8's
+     shared module (item 518). In flight: 1 (K8) + 1 (I6B) + 1 (K6c) = 3.

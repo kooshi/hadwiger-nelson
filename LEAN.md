@@ -153,6 +153,15 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - For sets, `s ≤ᵐ[μ] t` is `∀ᵐ z, z ∈ s → z ∈ t`: prove it with `filter_upwards […] with z … hz`, or from an inclusion as
   `Eventually.of_forall fun z hz => h hz`; `Eventually.of_forall h` with `h : s ⊆ t` does not elaborate, and
   `HasSubset.Subset.eventuallyLE` is deprecated at the pin (FS131-I6A).
+- At the pin Mathlib holds two ramification APIs. The number-field lemmas — `Ideal.sum_ramification_inertia` (`Σ e·f = [L:K]` over
+  `IsDedekindDomain.primesOverFinset`), `Ideal.absNorm_eq_pow_inertiaDeg'`, `Ideal.IsDedekindDomain.ramificationIdx'_eq_multiplicity` —
+  are stated for the primed `Ideal.ramificationIdx'` / `Ideal.inertiaDeg'` (`Mathlib/NumberTheory/RamificationInertia/`), over
+  `Ideal.span {((p : ℕ) : ℤ)}`; the unprimed names are a newer definition in `Mathlib/RingTheory/RamificationInertia/` with a
+  different statement of the sum (FS131-I10C).
+- `simp` does not rewrite the coercion of a numeral out of a subfield, `((3 : ↥S) : K)`; `map_ofNat S.subtype 3` and `norm_cast` do.
+  Dot notation on a `local notation` (`twoZ.inertiaDeg' P`) is an unknown identifier: make the object an `abbrev`. And
+  `lake env lean` does not report a missing docstring on a public `def` (the lakefile's linter options are not in force); the
+  build does (FS131-I10C).
 
 - **A failed `exact?` is not an absence.** It proves the shape you asked for was not found; vary the statement (`= true` versus
   `decide (…)`, an iff versus an implication) first. **And Mathlib is not the whole library:** `grep -rn "<name-fragment>" $(lean
