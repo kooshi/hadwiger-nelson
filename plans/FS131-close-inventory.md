@@ -6543,3 +6543,126 @@ reason by the close.*
      quotations). (e) The errata lines (three, and D1's) are held for the filing. (f) **Slot → FS131-IF1**
      (Falconer's lemma, by Kooshi's word, item 550), launched 2026-10-06. In flight: 3 (L6A, K10c, IF1) + the
      special-purpose slot (T5).
+
+554. **FS131-K10c, by message: the import is committed — Weil's bound for Kloosterman sums, stated as the page states it;
+     and my own reading of the page against the axiom** (source: K10c's message to "main", 2026-10-06; commit `248f8f4f`
+     on `origin/fs131-w10k`, fetched; its record's Stages 11–13 — the artifact beyond the axiom is read at its
+     hand-back). **The axiom**, read by me at `248f8f4f:Proofs/HadwigerNelson/Arith/WeilKloosterman.lean` ll. 42–53:
+     `StandingFive.kloosterman_bound (F) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 2) (ψ : AddChar F ℂ)
+     (hψ : ∃ x, ψ x ≠ 1) (c d a : F) (h4 : 4 * c * d = a) (ha : a ≠ 0) : ‖∑ x ∈ univ.filter (· ≠ 0), ψ (c * x + d * x⁻¹)‖
+     ≤ 2 * √(card F)`; its docstring names `[Weil1948]`, p. 207's second displayed inequality, and the pages of each
+     hypothesis. **The page, read by me from the held PDF** (pp. 206–207, the image): p. 206, "where ψ is a character of
+     the additive group of k, not everywhere equal to 1 … If the characteristic p of k is not 2, we have d = 2 for
+     R_b(t) = t² − a, a ≠ 0; hence, in that case," p. 207, "|Σψ(x)χ(x² − a)| ≤ 2√q. If, in this, we take for χ the
+     character of k* of order 2 … an elementary transformation shows that the sum in the left-hand side is identical
+     with the so-called Kloosterman sum Σψ(cx + dx⁻¹), for 4cd = a; hence |Σ_{x≠0} ψ(cx + dx⁻¹)| ≤ 2√q, and, in the
+     case of a prime field of p elements, with p ≠ 2: …". **Clause by clause, mine**: finite field of `q` elements —
+     `[Field F] [Fintype F]`, `card F`; characteristic not 2 — `ringChar F ≠ 2`; a character not everywhere 1 —
+     `∃ x, ψ x ≠ 1`; `a ≠ 0` and `4cd = a` — `ha`, `h4`; the sum over `x ≠ 0` — the filter; `2√q` — the bound. The
+     quantification over `c`, `d` is the page's: the transformation it cites holds for every pair with `4cd = a`
+     (checked by me: `cx + d/x = y` has `1 + χ(y² − 4cd)` solutions, so the Kloosterman sum is `Σψ(y) + Σψ(y)χ(y² − a)`
+     and the first term vanishes). **So the axiom says what the page says, and no more**; it is the page's sentence and
+     not `KloostermanBound`, and the translation between the two is a kernel theorem in both directions
+     (`kloostermanBound_of_ringChar_ne_two`, `kloosterman_page_of_kloostermanBound` — read by name, not by proof).
+     **By its word, to be read at its hand-back**: the four items done (the model `kloosterman_bound_model` at `ZMod 3`,
+     with the conclusion proved there with no axiom); eight records under IMPORTED, each on the standard three and the
+     import; the three merges beneath it built with no second-pass head changed; the sentence true by exact arithmetic
+     at nine fields with four faults that fire. **At the landing**: declared outside axioms one → two (or one → one if
+     Falconer's is removed in the same landing), imported records 4 → 12. A slip in print on p. 206, outside the
+     imported sentence, for the bibliography row. **Rulings.** (a) **The import is accepted as stated** — two readings
+     of the page agree with it, the planner's and mine, made separately. Confidence: high. (b) **Wave 10's second
+     landing, FS131-L10B, is cut from `248f8f4f`**, which holds `main` as of its merge, the two floors, the three
+     measure leaves and the import, with no `sorry`: its tidies are the majority vote's two hypotheses and class
+     (ruling 542), `involution_eq_pow`'s docstring (538 (b)), `sp_if`'s docstring naming its model and the one
+     hypothesis left (547 (a)), and what K10c's hand-back adds; it merges `main` again (wave 6's first half, once
+     landed), and **`fs131-t5` and `fs131-wf1` if they are back** — the gate's new step and Falconer's lemma — runs
+     the full gate, lands. It launches after FS131-L6A has handed back: two landings do not run at once. Brief not
+     written.
+
+555. **FS131-K10c done at its Stage 17: wave 10's third planning pass — the import whole, two of the four rows stated, the
+     other two designed and left to a fourth pass** (planner; harness 474k and 67 minutes by the task notice; record
+     `fs131-w10k`'s `plans/FS131-w10-kernel-plan.md` Stages 10–17; report `data/fs131/reports/FS131-K10c.md`; commits
+     `f502f00a`, three merges (`dd7fc1e2` `origin/main`, `6f1fcaec`, `f145798a`), **`248f8f4f` (the import; no `sorry` in
+     the tree)**, `04573c38`, `e09209e4`; pushed, tree clean). **The import**: item 554. **On it alone, in the kernel**:
+     `standingFloor_seven_weil : StandingFloor 7`, `seven_le_localBound_weil` (TC1-STANDING-FIVE's "so `L(F) ≥ 7`", no
+     hypothesis left), `five_le_chromaticNumber_weil`, the planes' floors at seven from 98 and **at six from 62**
+     (`targetFloor_six_weil`), `circle_sum_le_weil` (the held paper's Theorem 3 at `n = 2` in its true form).
+     **Stated**: the level row (X25B-L1 against the finite quotient graph, wider than the second pass's shape, two
+     leaves, settled from the entry with no deriver's question); J45-N1 (a)(b) as the two-fact interface
+     `IsPlaceFilter`, stated and inhabited; a usable place of the standing field as a leaf (`UsablePlace`, ruling
+     535 (c)). **Not stated**: J45-SI-5 and J45-SI-C's measure parts — designed (its § 14.3), with a gap named at one
+     step of SI-5. **Read-backs**: every implementer's statement it read says its sentence; **the kernel does not hold
+     a link from the floor's object to the finite plane** — the floor is about the norm-one Cayley graph of the field
+     of `Q²` elements, and "the plane `Γ_Q`" needs an isomorphism of about 150 lines that is not stated. **My
+     receipt**: tip `e09209e4` equals `origin/fs131-w10k`, tree clean; `sorry` at the tip by the handoff's grep:
+     `LevelGraph` 2, `UsablePlace` 1, every other file of `Arith/` 0; **at `248f8f4f`, zero `sorry` under `Proofs/`**
+     (`git grep` on that commit); the library's axioms at that commit by `git grep '^axiom '`: the new one, Falconer's,
+     and the native-evaluation example — no other; `axioms-import.log` parsed by script — 17 records, 8 on the
+     standard three and `kloosterman_bound` and nothing else (the eight it names), 9 on the standard three (the model
+     `kloosterman_bound_model` and the page-form translation among them); the `declareImport` line for it at
+     `scripts/Axioms.lean` l. 206 and the row in `ARCHITECTURE.md`; its last build log "OK — 469 of 469 batches";
+     the axiom's text and the page: item 554. Not checked by me: its exact-arithmetic tool's nine fields; the two new
+     statements against their rows; its read-backs. **Corrections owed, held for the filing**: G56's and `LEDGER.md`
+     row 53's "the plane" (the kernel's floor is the Cayley graph's until the link is proved); `BIBLIOGRAPHY.md`'s
+     `[Weil1948]` and `[MMST1996]` rows (what was read; the slip in print on p. 206; the correction now citable —
+     ruling 538 (a) is met: its read-back of the three theorems is in its § 15.1). **Slips, the job's, disclosed**:
+     the modeling passes not invoked fresh; no predictions registered; draft files in the import's commit. **Credit**:
+     the axiom stated as the page's sentence with the library's form derived in the kernel, a read-back with every
+     difference settled from the page, and the missing link to the finite plane said plainly. **Rulings.** (a) **The
+     second landing's edits are its § 16.6 list, adopted**: `NumberField standingField` a global instance; the two
+     Bézout identities kept, their docstring saying they are an independent witness; the docstring notes for the four
+     J45 heads and `sp_if`; the stale "never an axiom" and "skeleton" lines. (b) **One implementer, FS131-I10G**:
+     `LevelGraph`'s two leaves and `UsablePlace`'s one (about 730 lines), on a branch to cut from `e09209e4`. Brief
+     not written. (c) **A fourth planning pass, FS131-K10d, now and not after J45-N1 (a)(b)**: J45-SI-5 and J45-SI-C
+     over `IsPlaceFilter`; **and the link from the norm-one Cayley graph to the finite plane as a row** — it decides
+     whether the front page may say "every usable plane". Alternative: wait for the adic foundation. Why not: the
+     interface is inhabited, and the two rows land over it. Confidence: medium-high. Brief not written. (d) J45-N1
+     (a)(b) proper (one theorem, `IsPlaceFilter` at the arithmetic filter; a planning pass and about two jobs) and
+     the floor at six for the target with 64 elements (about 410 lines) are stubs for the milestone's filing, not
+     jobs now. (e) **A sentence for `LEAN.md` § Assumptions** — state an imported theorem in the paper's own form and
+     derive the library's form in the kernel — is filed with the second landing, from its § 16.7. (f) **Slot →
+     FS131-I7A** (wave 7, route T's count, on `fs131-w7a` at the merge `6f9807b9`), launched 2026-10-06 with a dated
+     amendment for its moved base (gate exit 0). In flight: 3 (L6A, IF1, I7A) + the special-purpose slot (T5).
+
+556. **FS131-I7A, by message mid-job: a defect of the skeleton — four leaves of route T's count are false as stated, because
+     the kernel's statements lack a hypothesis the file's reader sees** (source: I7A's message to "main", 2026-10-06; its
+     evidence `data/fs131/i7a/draft/Defect.lean` and log, in its tree, not yet committed — to be read at its saved
+     stage). `CountData.card_edgeNbrs`, `card_vertNbrs`, `deg_le`, `count_poly` never mention the section variable
+     `(C : CountData M k)` in their statements, and at the pin a theorem takes a section variable only if its statement
+     mentions it; so each claims its conclusion of every combinatorial map. It kernel-checks the negation of each on the
+     planner's own one-face torus, and derives `False` from each `sorry` leaf as it stands. **Kind**: a statement that
+     lacks a hypothesis — of the Lean skeleton, not of a filed result (the rows and the plan's § 3.5 say `μ = 0` and a
+     proper colouring). **Reach**: no module but `Count` reads them (its `grep`); nothing on `main`; no proved theorem —
+     a false statement cannot be proved, so the class can only live in `sorry` leaves and in what is proved from them.
+     **My sweep, textual and approximate** (every open skeleton on five branches: an explicit section variable that an
+     open leaf's statement does not mention): it reproduces these four exactly; the only other hits are `erosion` and
+     `pencil_window` in wave 6's `Centre`, which do not mention `(F : c.Fan z)` — the planner says `erosion` reads no
+     fan; `pencil_window` is to be confirmed by its implementer (FS131-I6Z's brief regenerated with the line). **Rulings.**
+     (a) **`include C in` above each of the four, with a docstring clause naming the hypothesis** — the elaborated
+     statements gain `(C : CountData M k)`. Alternative: the binder written into each signature. Why this: it keeps the
+     planner's text and matches the sibling module's `omit … in` lines; the docstring clause serves the reader.
+     Confidence: high. (b) Its `omit [...] in` lines for instance binders a proved theorem does not read: adopted
+     (they only widen). (c) **A defect of every statement check this milestone has used, mine to have missed**: they
+     compare text, and this class never changes the text. I7A is asked to compare elaborated signatures (`#check` at
+     the base and at its tip) with a planted `include` as control; the shared checker owed (item 406 (c)) must do the
+     same; **my own receipts' "statements compared head by head" lines are textual too** and say nothing about this
+     class — true for every hand-back logged today. For proved leaves that is harmless (the kernel holds the proved
+     statement; what could differ from the file's reading is which hypotheses it takes), and it is exactly what a
+     landing's read-back of heads should now check with `#check`. (d) **Filed**: the Lean fact, in `LEAN.md` §
+     Searching — Lean. (e) **Credit**: it read the kernel's statement where the file's looked right, and brought a
+     counterexample with the report.
+
+557. **FS131-L6A, by message before its gated commit: the join is whole — nothing left on `sorryAx` — and two questions,
+     answered** (source: L6A's message to "main", 2026-10-06; by its word, to be read at its hand-back): the three merges
+     and `main` are in on `fs131-w6j` with no conflict in a Lean file; the joined tree builds with 0 warnings and 0
+     `sorry`; **every theorem of the fourteen modules, and every name the five reports list as wired or resting on an
+     upstream leaf, prints the standard three or a subset**; the doubled-name check is OK; the ruled tidies are made. The
+     vacuity scan on the joined tree: `declarations=14299 refutations-skipped=199 sites=1269`, `vacuous=0 stale=0
+     declared=3 witnessed=38 generic=1226 unknown=2`; against `main`'s gated scan 0 rows lost and 96 added, each
+     `GENERIC` on `AeColouring` at a variable `k`. **Rulings.** (a) **It may update the two count lines in the header
+     of `scripts/vacuity-baseline.txt`, no entry added** — my word, as its brief required, and as the last landing
+     did. (b) **No new carrier is entered; `AeColouring.Fan` stays OUT**, its closed inhabitant `sq9Fan` named in the
+     scan's entry — its decision, kept. Alternative: IN, as `StationarySet` was by ruling 507 (d) (51 more `GENERIC`
+     sites and one `WITNESSED`, no `VACUOUS` control plantable). Why OUT: the procedure's law as wave 5 applied it;
+     the one exception already made is a question for the tooling lane (ruling 535 (a)), and `Fan` joins it as the
+     second case. Confidence: medium.
