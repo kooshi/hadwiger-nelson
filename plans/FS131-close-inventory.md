@@ -4202,3 +4202,20 @@ reason by the close.*
      **For the final sync**: IA2 states the lemma in its own module with the same name and signature (it cannot import KA1's branch), so the two
      lines **will collide by name** when they meet — a loud failure by design, where two names for one statement would be silent; the job that
      joins them keeps `BendAway`'s declaration and moves a proof into it if IA2 has one.
+
+444. **FS131-IA2, by message at its Stage 6: the interface between the two bends and the arc step is fixed, and it asks less than
+     `bend_away_part` gives** (source: IA2's message to "main", 2026-10-06; `fs131-w5y` at `c73f5458`, pushed; the structure `ArcMap.ArcBend F M h
+     K P θ₁ θ₂ c c' g ε` in its new module `Plane/ValidMap/ArcStep.lean` l. 53–92, 20 fields; record § 6.2; the module's skeleton elaborates with
+     26 `sorry` leaves). (1) Weaker than `bend_away_part`'s conclusion wherever it differs: no `IsCompact K`, no `∀ z ∈ K, h z ∈ K`, one direction
+     only of the interior-points, degree and repeated-colour iffs, and of the last clause only the contact at the angle itself (its field `left`);
+     the horn clause in the `∃ j' ≤ j` form; `LocalStep.of_cutArcs` stated with KA1's signature fits the toward instance. (2) **The count clauses
+     need no definition moved**: everything is stated on point sets with maximality read in `IsMaxRingArc`'s unfolded last clause
+     (`ArcBend.maxBad_centre`, `maxBad_other`); left for the last lines in `Procedure` are W5 in one form (a ring arc of `F` about `P` meeting
+     `α°` has `α`'s sides and lies in `α`) and the two `encard` steps. So item 439's open alternative is closed: no move. (3) It will hand over
+     the last lines compiled in a scratch file under `data/fs131/ia2/` that imports `Procedure` and its module and proves the repaired statement
+     under a scratch name (`lake env lean`: iteration-grade evidence, said as such). **My receipt**: tip equals `origin/fs131-w5y`; the structure
+     read in the file, field by field. **Rulings**: (a) FS131-KA1 may weaken any clause of `bend_away_part`'s conclusion down to what `ArcBend`
+     reads, without a round trip, keeping what its construction gives for free; relayed with the addresses and IA2's words. Alternative: keep IA1's
+     stronger statement whole. Why: one reader. Confidence: high. (b) (3) is welcome as offered; no reply sent (it asked for none). (c) **For the
+     final sync**: `ArcBend` lives downstream of `BendStep`, so `bend_away_part` cannot conclude it today; whether the structure moves upstream
+     and the bend concludes `∃ M h K, ArcBend …` is that job's choice.
