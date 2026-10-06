@@ -33,14 +33,32 @@ certificate. **Nothing in `tools/` is trusted**: a generator bug can only produc
      (`StandingFive.kloosterman_bound`, with `kloostermanBound_of_ringChar_ne_two` and `kloosterman_page_of_kloostermanBound`);
   3. one model of its hypotheses — a `theorem` or `example` in the same file exhibiting an object that satisfies them;
   4. a line in `ARCHITECTURE.md` § Trust, as a declared purchase.
-- **Our own hand results** that a module needs before their own module lands enter as explicit hypotheses of the theorems that use
-  them, never as axioms, so they disappear when discharged.
+- **Our own hand results** that a module needs before their own module lands enter as explicit hypotheses of the
+  theorems that use them, never as axioms, so they disappear when discharged. **So may an outside theorem** (five do on
+  `main`, in seven entries: Herglotz–Bochner in two forms, Markov–Kakutani, Artin–Lang, Voronov's Thm 1.1, and Weil's
+  bound in the hypothesis forms its modules were proved over), when its statement is better carried as a named `Prop`
+  than as an axiom.
+- **Every assumption in hypothesis form is declared to the gate**, in `AssumptionAudit.declared` at the end of
+  `scripts/Assumptions.lean`, by the landing that brings it: a named one by `.former ``Full.Name kind "source"`; one
+  written out in a binder by `.site ``Theorem `binder "Label" kind "source"`, once per theorem that takes it (sites
+  with one label carry one source, character for character); a former that is only a condition on a theorem's
+  parameters by `.condition ``Full.Name "reason"`; a closed premise that is not an assumption by `.premise ``Theorem
+  `binder "reason"`. The kind is `outside` (source: a `BIBLIOGRAPHY.md` key in brackets), `ours` (a ledger row `row N`,
+  a grokking `G N`, or a derivation entry id) or `open` (those, or a stub `FS-N`); the source opens with that
+  reference. The definition's docstring says whose it is in the words the gate reads — "external" or "classical" or
+  its bracketed key; "[hand]", "[tools]", "[cert]" or "outside the backlog"; "open question" — or it is counted
+  `SILENT`; and a former that is **not** assumed must not use the words "named hypothesis", "outside the backlog" or
+  "external" in its docstring. Then `./scripts/assumptions.sh --self-test`, `./scripts/assumptions.sh`,
+  `./scripts/assumptions.sh --write-ledger` (read the rows it adds: each is a statement that is now conditional), and
+  the nine counts for `CLAUDE.md` § Trust ledger, which the step reads as stale — flagged, not failed — until they are
+  refiled. A hand result written out in a binder over the theorem's own variables is the one thing the gate cannot find
+  by itself: the landing declares it on its own word.
 - **At publication** the cost of landing every assumption on the standard three axioms is measured first; Kooshi prefers the three
   axioms if it is about a week of agent work or less.
 
 ## Trust ledger
 
-The audit's counts are recorded in `CLAUDE.md` § Trust ledger, where `scripts/gate_report.py` reads them. What it accepts:
+The audit's counts are recorded in `CLAUDE.md` § Trust ledger, where `scripts/gate_report.py` reads them. So are the assumptions step's nine. What it accepts:
 
 | Entry | Status |
 |---|---|
@@ -48,6 +66,7 @@ The audit's counts are recorded in `CLAUDE.md` § Trust ledger, where `scripts/g
 | `sorryAx` | the gate fails on it |
 | `<decl>._native.native_decide.ax_N_M` | **explicit purchase, per use**, named in its declaration's docstring and listed in `ARCHITECTURE.md` § Trust |
 | an `axiom` importing an outside theorem | **explicit purchase**, with the four items above; declared to the gate by one `AxiomAudit.declareImport` line in `scripts/Axioms.lean`'s IMPORTED section (the procedure is beside its banner), every record resting on it audited there |
+| a hypothesis standing for an outside theorem, a hand result of ours or an open question | **declared**, with its kind and source, by one line of `AssumptionAudit.declared` in `scripts/Assumptions.lean`; every statement that takes it listed in `scripts/assumptions-ledger.txt` |
 
 **The audit checks each record's axioms as a set** (`scripts/axioms.sh`): under CLEAN a subset of the standard three; under IMPORTED
 the standard three and declared imports, at least one; under PURCHASED those and native axioms, at least one native. Any other axiom
@@ -205,7 +224,8 @@ invoked. `lake update` and Mathlib bumps go alone in a labeled commit (they move
 
 ## The gate
 
-Elaboration is the floor: the build green, zero `sorry`, `#print axioms` clean on the public surface (`scripts/axioms.sh`), no name declared by two modules (`scripts/dupnames.sh`, run before the audit, whose prints are faithful only then), and `./scripts/axioms.sh --self-test` green (23 planted faults, each watched to fire, two of them partners that must pass), linters
+Elaboration is the floor: the build green, zero `sorry`, `#print axioms` clean on the public surface (`scripts/axioms.sh`), no name declared by two modules (`scripts/dupnames.sh`, run before the audit, whose prints are faithful only then), and `./scripts/axioms.sh --self-test` green (23 planted faults, each watched to fire, two of them partners that must pass), `./scripts/assumptions.sh` and `./scripts/assumptions.sh --self-test` green (21
+controls planted in one copy of the audit, 33 checks), linters
 silent, spec examples passing. On top of that, the statement-level gate, because a formalization that proves the *wrong* theorem is
 the characteristic failure here:
 
@@ -262,6 +282,29 @@ the characteristic failure here:
   module asks (`f.eq_1`, `f.congr_simp`; reserved names, which no author can declare) — failing only if their copies' axioms differ.
   `--self-test` plants fifteen controls in a scratch library (`scripts/dupnames-controls.txt`). **A join of two lines runs it on the
   joined tree, before the axiom audit**: the join makes the doubled name, and neither line's own gate can see it.
+- **`./scripts/assumptions.sh` and `./scripts/assumptions.sh --self-test` are green** — everything a theorem rests on
+  that the kernel did not check is listed, in both forms it takes. An outside theorem declared as an `axiom` shows in
+  `#print axioms`; a hypothesis does not — a theorem that says "if Herglotz–Bochner holds, then …" prints the standard
+  three — so `scripts/Assumptions.lean` reads every hand-written statement as the kernel holds it and prints every
+  library axiom with the theorems whose stored axiom lists hold it (`RESTS`), and every declared hypothesis with its
+  kind (`outside`, `ours`, `open`), its source and the statements that take it (`TAKES`, `MENTIONS`). Whether a
+  hypothesis is an assumption or a condition on the theorem's parameters is intent, which no type records, so the
+  check **requires evidence**: the one list is `AssumptionAudit.declared`. **It fails** on a *closed* hypothesis (no
+  free variable: a statement about the world) that is neither declared, nor proved by the library, nor the one claim
+  a refutation refutes — a closed family `∀ F, … → H F` of a declared `H` included: the binder is declared as a site;
+  on a `Prop`-former taken as a hypothesis that no theorem concludes, or that is concluded only from declared
+  assumptions, or whose docstring uses the words "named hypothesis", "outside the backlog" or "external", when neither
+  list holds it; on a source that is not in `BIBLIOGRAPHY.md`, `LEDGER.md`, the grokkings, the stubs or the
+  derivations; on a declared kind its docstring contradicts; on a declared hypothesis no statement takes, or one a
+  theorem proves over its own variables; on any consumer that `scripts/assumptions-ledger.txt` does not list, or lists
+  and the scan does not find; and **when the nine counts are absent from `CLAUDE.md` § Trust ledger** (a recorded count
+  whose deletion passes is no record; counts that have drifted are flagged, not failed). **It counts and prints, and
+  cannot decide**: the other hypotheses of every consumer (`COHYP`), and `unseen=` — every other hypothesis over a
+  theorem's own variables, among which a hand result written out in a binder, undeclared and unremarked in its
+  docstring, is not told from a condition. **A former proved at the instances where it is taken closed** (not over its
+  own variables) is not reported: its entry leaves on the landing's reading, its docstring is reworded to say over what
+  it is proved, and its closed takers then read `ESTABLISHED` (`StandingFive.StandingFloor`, FS131-LT5). The nine counts
+  are recorded in `CLAUDE.md` § Trust ledger and in the ledger's header, where `scripts/gate_report.py` reads them.
 - The Moser spindle's non-3-colourability is proved **twice** — by `decide` and through the SAT bridge — so the CNF encoding is
   checked against an independent oracle.
 - The final statement is read against Mathlib's `SimpleGraph.chromaticNumber` and the informal claim, out loud, before it is believed.

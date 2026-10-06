@@ -7511,3 +7511,42 @@ reason by the close.*
      first, so that its leaves stand on the proved parallels) — my trial of the three merges is owed before its
      brief. (e) Its drafts are held for the filing. (f) **Slot → FS131-I8C** (wave 8's `SemiHub`, on `fs131-w8c`
      at `6e0cf10d`), launched 2026-10-06; I8D takes the next. In flight: 3 (LT5, I7M, I8C).
+591. **FS131-LT5 done: the gate's step that lists what the library assumes is on `main` — of 10,173 theorems, 58 are conditional on something the kernel did not check** (landing implementer, Opus; harness 560k and 120 minutes by the task notice; record `plans/FS131-LT5-landing.md`; report `data/fs131/reports/FS131-LT5.md`; gated commit `5a62be0a`, landed `befb51d3`, a fast-forward).
+     **Landed**: `scripts/Assumptions.lean`, `scripts/assumptions.sh` with its self-test and ledger, a third digest in
+     `scripts/gate_report.py`, `ARCHITECTURE.md` § 5's tables; 22 doc comments in 9 modules, no statement,
+     definition or proof changed. **The enumeration on the landed tree**: 8 theorems rest on the one outside axiom;
+     51 statements take one or more of 35 declared hypotheses (98 pairs); one does both. **Outside** — six theorems
+     of the literature in eight entries: Weil's bound in three forms (the axiom, 8; the named hypothesis, 9; written
+     out at a family of fields, 3), Herglotz–Bochner (13), Bochner for a topology (1), Markov–Kakutani (7),
+     Artin–Lang (6), Voronov's Thm 1.1 (1, and 1 under an equivalence) — four of the six "not read" in the
+     bibliography. **Ours** — 23 hand results, 12 named and 11 written out. **Open** — 5: `Plane.NoPar` (2) and the
+     four of item 562. **Left the list**: Falconer's lemma (a theorem) and `StandingFloor` (proved over the import).
+     **What it cannot decide, printed every run**: `unseen=15214`. **Its second reading agrees with all 33 declared
+     conditions and premises.** **The gate, by its saved runs**: three passes, every step exit 0 but the new step's
+     refusal of an unfiled count; the axiom audit and the vacuity scan unchanged from wave 10's second landing; the
+     kernel's list of 14,501 declarations byte-identical to it. **My receipt**: since the gated commit `main`
+     changed only under exempt paths and two lanes' tool scripts (`git diff --name-only`, empty outside them);
+     `sorry` under `Proofs/`: 0; under `Proofs/` it differs from the second landing in 9 files, 55 lines added and
+     30 deleted (its docstrings; that no signature moved is its elaborated check, not re-run by me); **the new
+     digest run by me before the filing: exit 3, "RECORDED COUNTS ABSENT in CLAUDE.md § Trust ledger" — and after
+     it: "match (9 of 9 compared)" for the ledger's header and for the front page, exit 0**; the axioms digest
+     against the second landing's receipt: 0 added, 0 removed, 0 changed, "match"; the vacuity digest: both
+     recorded sources "match". Not checked by me: the scan itself (I ran its digest on the saved receipt, not the
+     scan); the docstrings' wording; its table of 33. **Filed, mine**: `CLAUDE.md` § Trust ledger — its draft 1's
+     paragraph, verbatim (commit `e3d9b643`; the fact audit against `e9a65a86` passes with no loss, `--dupes` exit
+     0); `LEAN.md` § The gate (a clause and a bullet), § Assumptions (two bullets), § Trust ledger (a sentence and
+     a table row), from its drafts 3–5 verbatim; `RUNNING.md`'s toolchain row gains the proof checker's memory
+     figure (ruling 580 (f)). **Prediction scored**: briefed at 450k; 560k, two of its three gate passes forced by
+     my rule (item 589). **Credit**: a pre-ruling of mine tested against the instrument instead of applied; the
+     step shown red by 22 before a line was declared, each failure read; three forms of one theorem kept visible
+     where a rule change would have hidden one. **Slips, the job's, disclosed**: a fourth doc comment edited where
+     the ruling named three (one sentence, so the file does not contradict itself — ratified); no token count
+     read. **Rulings.** (a) **Weil's bound stays in three entries, and the front page says so in one sentence**
+     (its draft, filed). (b) `SevenConditional.G4` is graded as its ledger row has it — a measurement; the
+     docstring's "[tools] / [measured]" stands. (c) `Plane.NoPar` stays declared open, with "an open question"
+     added to its docstring at the next landing that touches the module (wave 6's second). (d) Its two conditions
+     of one mind (`GrundyBound`, `H1On`) stand until a wave's planner reads them. (e) **Every landing brief from
+     now on carries its draft 7** (the line on declaring assumptions; in the handoff). (f) Two tool notes join
+     the shared checker's list: the notes check's wrapper is the working-tree one; the step does not report a
+     former proved only at instances. (g) **Slot → FS131-I8D** (wave 8's `SemiHubPlaces` with `outerAdj`, on
+     `fs131-w8d` at `6e0cf10d`), launched 2026-10-06. In flight: 3 (I7M, I8C, I8D). **No landing is in flight.**
