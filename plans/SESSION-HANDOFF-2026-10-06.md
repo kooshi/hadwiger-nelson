@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–471 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–473 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -42,7 +42,7 @@ planted-picture models land (queue item 2).
 | job | tree and branch | what | brief | on its hand-back |
 |---|---|---|---|---|
 | **FS131-L5** | `.claude/worktrees/fs131-w5c`, `fs131-w5c` (from `8f2280d0`: joined, remedied — item 468) | **wave 5's landing**: merge `origin/fs131-w5z` (`d4f04ff3`, the outward bend whole; trial: one conflict, `scripts/Axioms.lean`), the post-merge tidies (465 (a), RP1's list), merge `main`, the full gate on one commit (build, zero `sorry`, `scripts/dupnames.sh`, `scripts/axioms.sh`, `scripts/vacuity.sh`, architecture, the guarded lint, the notes check), fast-forward `main`, drafts | `data/fs131/briefs/FS131-L5-wave5-land.md` | **while it is in flight commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`**; on its hand-back follow § 5 "At a landing" (the previous logs are `data/fs131/ol/axioms-receipt-landed.log`, `data/fs131/ol/vacuity-scan-landed.log`), file the counts, push-notify Kooshi; a red gate step is a message mid-job: rule it |
-| **FS131-MA1** | `.claude/worktrees/fs131-wm`, `fs131-wm` (from `fe9d6d32`) | the example maps, half A: the general layer's open leaves (`Plane/Models/Paint`) and the models of the four moves (`Plane/Models/Moves`: `hornModel` for SHAVE and OPEN, `twoHornModel` for MERGE-RAY and MERGE) — each model theorem is the landed move applied | `data/fs131/briefs/FS131-MA1-models-moves.md` | then implementer B (`python3 data/fs131/briefs/scripts/mk-ma.py B`, on a branch `fs131-wmb` cut from A's tip); the lane lands on its own from `main` after wave 5 |
+| **FS131-K10** | `.claude/worktrees/fs131-w10`, `fs131-w10` (`main`'s line) | a planner (`debruijn`): wave 10, the fourteen arithmetic rows (`Arith/StandingFive`, `CharacterColouring`, `SpectralInputs`, `StationaryRatio`; `plans/FS131-kernel-plan.md` § 7.1) — dispositions, a sorry-free foundation, a skeleton, a plan per leaf; it waits on nothing in waves 4–9 | `data/fs131/briefs/FS131-K10-wave10.md` | brief its implementers from its handoff; a row whose derivation does not support its statement is a message mid-job: an Ephodos job |
 | **FS131-MB2** | `.claude/worktrees/fs131-wmb`, `fs131-wmb` (from `b7fbe6f9`) | MB1's successor (item 470: the cusp arc's two bend models and `stuckModel_valid` are whole; `stuckModel_hyps` waits on one leaf of half A's): `shadowModel` (7 leaves, the model of `flank_ne_of_doublyShadowed`), then `awayModel` (4 leaves) | `data/fs131/briefs/FS131-MB2-models-shadow.md` | merge with half A's branch `fs131-wm` (disjoint files; `scripts/Axioms.lean` keep-both; run `scripts/dupnames.sh` on the joined tree); after wave 5 lands the lane's landing job adds `stuckModel_terminal`, the sub-arc model of `bend_away_whole` (ruling 471 (c)), the wave-5 applications and the docstring lines |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. If the session restarted, resume a job from its record's last SAVED stage with
@@ -134,7 +134,8 @@ a fresh agent on the same brief.
 | `fs131-w5k` | `3b120cd3` | idle (the collar's lane; `fs131-w5` was fast-forwarded past it) |
 | `fs131-wop` | `4b68d47d` | the branch is merged into `main`; its worktree now holds branch `fs131-t4` |
 | `fs131-w4ba` | `71cca146` | no worktree; `bend_away`'s repaired statement |
-| `fs131-wm` | moving (MA1) | the example maps' skeleton (item 460), half A in progress |
+| `fs131-wm` | `87699974` | idle: the example maps' half A whole (item 472: `Paint`, `Moves` with no `sorry`; the four moves' models on the standard three); MB2 is merging it into `fs131-wmb` |
+| `fs131-w10` | moving (K10) | `main`'s line: wave 10's plan |
 
 ## 8. Held for the milestone's filing
 
