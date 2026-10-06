@@ -406,3 +406,83 @@ of `exists_hasHornCount`.
    `LocalStep.union` (KA1's, proved there) is not importable yet — not needed here.
 
 ## Stage 5 — SAVED (FS131-IA2)
+
+## Stage 6 — SAVED (FS131-IA2): the interface, written before the proofs; the module's skeleton
+
+### 6.1 The module and its skeleton
+
+`Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean` (imports `BendStep`; namespace `HadwigerNelson.Plane.ArcMap`). The skeleton —
+the interface and every statement, `sorry` at 26 leaves — elaborates under `lake env lean -DautoImplicit=false
+-DrelaxedAutoImplicit=false`, exit 0 (`data/fs131/ia2/arcstep-iter1.txt`: 26 `declaration uses 'sorry'`, nothing else; iteration
+only, not evidence).
+
+### 6.2 The interface: `ArcBend F M h K P θ₁ θ₂ c c' g ε` — the weakest clauses the step reads
+
+A `Prop` structure: the bent map `M`, the homeomorphism `h`, the collar `K`, the arc's sides `c` (inner), `c'` (outer), the gaining
+colour `g`. Each field, why the step reads it, and how each bend supplies it (toward: `hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R''`,
+`M = hfit.map`, `h = hfit.homeo`, `K = collarK P θ₁ θ₂ R' R''`, `g = c'`; away: `bend_away_part`'s conclusion, `g = c`):
+
+| field | statement | read by | toward (`CollarFit`) | away (`bend_away_part`) |
+|---|---|---|---|---|
+| `ring` | `F.IsRingArc P θ₁ θ₂ c c'` | every clause | `hfit.ring` | its hypothesis `hA` |
+| `side` | `g = c ∨ g = c'` | colours at a point of `T ∩ α°` | `Or.inr rfl` | `Or.inl rfl` |
+| `valid` | `M.Valid` | `F'.Valid` | `hfit.map_valid hF` | clause 1 |
+| `sub_thick` | `K ⊆ thickening ε (ringArc P θ₁ θ₂)` | the step's support; `P ∉ K`; radius-2 points off `K` | `hfit.sub_thick` | clause 3 |
+| `sub_dom` | `K ⊆ F.dom` | cleanness; question (5) (`isR2Arc_of_fixed`'s `hK`) | `hfit.sub_dom` | `F.IsPlaneMap` |
+| `free` | `F.Γ ∩ K ⊆ ringArc P θ₁ θ₂` | the place of a moved point | `hfit.free` | clause 4 |
+| `step` | `LocalStep F M K` | `LocalStep` on `cthickening ε α` (`mono`); `M.dom = F.dom` | `LocalStep.of_cutArcs` with `map_agreesOff` (6.4) | clause 5 |
+| `fix_off` | `∀ z ∉ K, h z = z` | everywhere | `hfit.homeo_eq_self` | clause 6 |
+| `fix_Γ` | `∀ z ∈ F.Γ, z ∉ ringPt P '' Ioo θ₁ θ₂ → h z = z` | the place of a moved point; question (5) | `hfit.homeo_fix_Γ` | clause 8 |
+| `interior` | `∀ z ∈ F.interiorPts, h z ∈ M.interiorPts` | cleanness (`M.Γ ⊆ h '' F.Γ`) | `pushforward_mem_interiorPts_iff` | clause 9, `.1.mpr` |
+| `coloursAt` | `∀ z, M.coloursAt (h z) = F.coloursAt z` | cleanness, modification, colours, (Q), question (5) | `pushforward_coloursAt` | clause 10 |
+| `degree` | `∀ z n, F.HasDegree z n → M.HasDegree (h z) n` | the degree clause at a fixed point | `hfit.map_hasDegree`, `.mpr` | clause 11, `.mpr` |
+| `repeated` | `∀ z, M.HasRepeatedColour (h z) → F.HasRepeatedColour z` | no site created | `hfit.map_hasRepeatedColour`, `.mp` | clause 12, `.mp` |
+| `horn` | `∀ x j, F.HasHornCount x j → ∃ j' ≤ j, M.HasHornCount x j'` | the horn clause; no site created | **`CollarFit.map_hornCount_le`** (open, KA1's) | clause 13 in the weakened form (ruling 438 (b), amendment 1) |
+| `ringArcsWithin` | `M.RingArcsWithin F` | `IsModification` | `hfit.map_ringArcsWithin` | clause 14 |
+| `R1` | `∀ Q a b d d', M.IsRingArc Q a b d d' → F.IsRingArc Q a b d d'` | both counts | `hfit.map_R1 hF` | clause 15 |
+| `R2` | `∀ Q a b d d', F.IsRingArc Q a b d d' → Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂) → M.IsRingArc Q a b d d'` | both counts; (Q), (R2) kept | `hfit.map_R2 hF` | clause 16 |
+| `gain` | `∀ θ ∈ Ioo θ₁ θ₂, h (ringPt P θ) = ringPt P θ ∨ ringPt P θ ∈ M.region g` | degree and colours at a point of `T ∩ α°` | `Or.inr`: `map_lens` at `t = 1` | clause 17 |
+| `left` | `∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) → c' ∈ F.coloursAt P ∧ c ∉ F.coloursAt P ∧ P + 2 * e θ ∈ closure (F.region c)` | `P`'s count: what is left of `α` is (R2) | vacuous: `hfit.map_R3` | `hout`, `hin`, and clause 18 at the angle (`θ ∈ Icc a b ⊆ r2Contacts`) |
+
+**Where it differs from `bend_away_part`'s conclusion, and why** (each weaker; nothing is asked of a bend that it does not export):
+- **Not read at all**: `IsCompact K` and `∀ z ∈ K, h z ∈ K` (clauses 2 and 7). The step's support is `cthickening ε α`, compact by
+  itself, and "a moved point's preimage lies in `K`" needs `fix_off` only.
+- **One direction of an iff**: `interior` (and the colour of an interior point is never read — `coloursAt` carries it), `degree`,
+  `repeated`.
+- **`left` is pointwise, on the `F` side**: the non-degenerate interval of contacts in clause 18 is not read (the ends of a surviving
+  sub-arc follow by closedness of `closure (F.region c)`), and the two facts about the colours at `P` are the away case's own
+  hypotheses. For the toward bend it is vacuous by R3, so the one family covers both without a case split on the colours at `P`.
+- **`sub_dom`** is a field (`isR2Arc_of_fixed` reads `K ⊆ F.dom`); `bend_away_part` has it from `F.IsPlaneMap`.
+- **Added**: `ring` and `side`, so that every lemma reads the arc and "the gaining colour is a side colour" off the bundle.
+
+`hfree` (`Γ` free near `α°`) is not a field: the step has it from cleanness (`IsRingArc.free_of_isClean`), and the abstract lemmas that
+read it take `hc : F.IsClean`.
+
+### 6.3 The statements over the interface (the skeleton's list)
+
+- **At a ring arc's interior points** (no bend): `IsRingArc.coloursAt_openArc` (`= {c, c'}`), `IsRingArc.sides_ne_of_isClean`,
+  `IsRingArc.degree_openArc` (degree `2`; a repeated colour iff `c = c'`; `CollarFit.degree_openArc`'s proof, read without the collar),
+  `IsRingArc.disjoint_openArc_of_ne` (**W4**).
+- **W6**, as one statement with the count's existence: `exists_hasHornCount_isHorn_iff : v ∈ F.dom → ∃ j, F.HasHornCount v j ∧
+  ((∃ α κ₁ κ₂ c, F.IsHorn v α κ₁ κ₂ c) ↔ 1 ≤ j)`.
+- **The radius**: `exists_arcStep_radius` (`ε < δ`, `ε < 1`, `cthickening ε α ∩ T ⊆ α`).
+- **From `hB : ArcBend …`**: `dom_eq`, `dist_of_mem`, `symm_cases` (a point is fixed, or its preimage is interior or on `α°`),
+  `coloursAt_of_notMem`, `coloursAt_centre`, `isClean`, `localStep`, `isModification`, `coloursAt_subset`, `degree_le`, `isSite`,
+  `isQArc_of`, `isR2Arc_of` (question (5)), `isR2Arc_left` (**W7**), and the package `arcStep`.
+- **The two counts at the ring-arc level**: `maxBad` (one lemma for any centre `Q` whose colours are kept, with the hypothesis `hmeet`:
+  a unit arc of `F` about `Q` whose open arc meets `α°` is centred at `P`, has `α`'s sides and lies in `α`), and its two corollaries
+  `maxBad_centre` (`hmeet` is `α`'s maximality read on point sets — **W5**, `Procedure`'s) and `maxBad_other` (`Q ≠ P`: `hmeet` is
+  vacuous by W4). The maximality of an arc is read in `IsMaxRingArc`'s unfolded last clause, so `Procedure` applies these to
+  `hmax.2.2` as they stand.
+- **The instances**: `LocalStep.of_cutArcs` (KA1's signature, amendment 2), `CollarFit.ringArc_subset_collarK`,
+  `CollarFit.lensSet_subset_collarK` (**W3**), `CollarFit.map_localStep`, `CollarFit.arcBend`, `exists_arcBend_toward`; `ArcBend.of_away`
+  (from `bend_away_part`'s conclusion as one conjunction, its horn clause in the weakened form).
+
+### 6.4 `LocalStep.of_cutArcs` fits the toward instance (the check amendment 2 asked for)
+
+`M := hfit.map`, `S := {collarArcA P θ₁ θ₂ R, collarArcB P θ₁ θ₂ R}`, `K := collarK P θ₁ θ₂ R' R''`: `harcs` is `rfl` (`collarArcs`);
+`hag` is `hfit.map_agreesOff` weakened from the closed lens to `K` (`lensSet ⊆ K`: W3; `lensCurve ⊆ K`: `hfit.lensCurve_subset`);
+`hS` by `collarArcs_carrier` (the two carriers' union is `lensCurve`); `hK`: `1 ∈ [lensProf R' θ, outerProf R'' θ]` at every angle
+(`PushProfiles.cases`). Nothing is off in the signature.
+
+## Stage 6 — SAVED (FS131-IA2)
