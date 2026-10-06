@@ -7329,3 +7329,24 @@ reason by the close.*
      (a claimed proof that decides the problem or moves a bound). (d) The first audit's Mathlib harness is no longer
      on this machine (`~/.cache/ext-hn1` absent — checked): the job rebuilds one. Launched 2026-10-06. In flight: 3
      (LT5, I6K, I8B) + the special-purpose slot (EXT-HN2).
+582. **EXT-HN2's early answer: the update changed neither the headline theorem nor its file, so the first audit's three points still apply by the text; nothing about the plane was proved; no build has run yet** (source: EXT-HN2's message to "main", 2026-10-06 — the artifact is read at its hand-back).
+     By its word (an anonymous clone, head `outside-commit-2`, nine commits all dated
+     2026-10-05; the first-audited commit `outside-commit-1` still an ancestor — history not rewritten):
+     `OutsideClaim.lean` is byte-identical to the copy the first audit kept; the headline is still
+     `outside_headline (r) (C : OutsideColoring r) (h_safe : ∀ i, OutsideDensity r (C.color i)) : (∑ i, outside_measure r
+     (C.color i)) < 2 * π` — no graph, no chromatic number, no `False`. **Added by the update**: a Lake configuration
+     that requires Mathlib at `v4.28.0` with a manifest (it answers the issue's remark that the build failed as
+     shipped; not yet run); a `comparator/` directory — a Challenge file with the two theorems stated with `sorry`,
+     a Solution file, a configuration permitting the standard three axioms, at Lean and Mathlib `v4.34.0`; and a
+     second README link, "Confirm Results with Comparator Live". The README's claim is unchanged ("exactly 7").
+     **Its reading, not yet run**: a comparator run would pass, because it checks that the Solution proves the
+     Challenge's statement, and the Challenge's statement already carries `h_safe`; it cannot see that the
+     statement is not the README's claim. No file executes code at configure or elaboration time beyond standard
+     Lake declarations. **The issue's visibility**: one anonymous API request at 2026-10-06 21:50:12 GMT — HTTP
+     410, "This issue was deleted". Pending: the sandboxed builds at both toolchains, the Lean checks of points 2
+     and 3 against the new commit, the axioms. **Not checked by me**: anything — relayed to Kooshi at that grade.
+     **A note for this project's own publication plan** (`CLAUDE.md` § Publication: the comparator shape): a
+     comparator certifies that a solution proves the challenge's statement on permitted axioms, and nothing about
+     whether that statement is the claim — the item "read the final statement aloud against the informal claim"
+     is not replaced by it. An instance for `plans/GROKKING-INSTANCES.md` § The standard of evidence, at the filing.
+     No reply sent: it asks none.
