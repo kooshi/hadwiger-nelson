@@ -6373,6 +6373,24 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.norm_sub_le_of_discs
 #print axioms HadwigerNelson.Plane.sq9_isolatedAt
 
+/-! ## FS131-I6C — wave 6's bridge, line C: the leaves of `Plane/Saturated/Curve` (unit-speed curves with 1-Lipschitz tangent angle), then of `Plane/Saturated/LocalGraph`, with the implementer's children -/
+
+#print axioms HadwigerNelson.Plane.IsUnitCurve.hasDerivWithinAt_re_mul
+#print axioms HadwigerNelson.Plane.IsUnitCurve.hasDerivWithinAt_norm_sq
+#print axioms HadwigerNelson.Plane.IsUnitCurve.abs_sub_le
+#print axioms HadwigerNelson.Plane.IsUnitCurve.sin_add_sin_le
+#print axioms HadwigerNelson.Plane.IsUnitCurve.chord
+#print axioms HadwigerNelson.Plane.IsUnitCurve.sin_le_inner
+#print axioms HadwigerNelson.Plane.IsUnitCurve.strictMonoOn_dist
+#print axioms HadwigerNelson.Plane.IsUnitCurve.norm_sub_le
+#print axioms HadwigerNelson.Plane.IsUnitCurve.one_le_dist_of_sign
+#print axioms HadwigerNelson.Plane.IsUnitCurve.one_le_dist
+#print axioms HadwigerNelson.Plane.isUnitCurve_circle
+#print axioms HadwigerNelson.Plane.two_sin_le_norm_e_sub_e
+#print axioms HadwigerNelson.Plane.lt_mul_of_two_sin_le
+#print axioms HadwigerNelson.Plane.le_add_of_chord
+#print axioms HadwigerNelson.Plane.lipschitzOnWith_of_chord
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
