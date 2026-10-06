@@ -4048,3 +4048,39 @@ reason by the close.*
      open child, `CollarFit.map_hornCount_le`**, goes to the same planner unless IA1 proves it first. (d) **The three doubled statements** are a
      tidy move at the final sync: one name kept per statement, the other an alias or removed, by that job. Default taken. (e) **Credit**: the
      reading that found the missing bend, and that wave 4's two away bends cannot carry "no site created", is IA1's.
+
+435. **FS131-IR2 done at its Stage 21: the vertex step proved over four stated cases; the kit the cases share is in the kernel** (implementer;
+     harness ≈ 452k by the task notice; record `fs131-w5c`'s `plans/FS131-limit-kernel-plan.md` Stages 18–21; report
+     `data/fs131/reports/FS131-IR2.md` on that branch; commits `d7954838`, `8e5276b3`, `42801d8a`, `a149e5d4` (the Lean source the build read),
+     `a5a12a0b`; branch at `a5a12a0b`, pushed, tree clean). **Results**: `exists_vertexStep` — E6-ROUTE's case split, no `sorry` of its own, over
+     `exists_mergeStep`, `exists_rayStep`, `exists_shaveStep`, `exists_openStep`, each stated and `sorry`; ruling 423's restatement applied
+     (`hv : F.Covers v 1`; the call supplies `covers_of_isPlaneMap`). The potential under a step (`pot_le_of_sectors`, `pot_lt_of_sectors`,
+     `pot_lt_of_interior`, `cleanKeep_pot_le`, `not_isSite_cleanKeep`): the count degree-plus-horns needs no chart of the new map. The points of a
+     step's disc (`Near.col_ne_next_of_isClean`, `not_hasRepeatedColour_of_degree_le_three`, `hasHornCount_zero_of_germs`, `not_isSite_of_curve`,
+     `exists_curveAt_of_branch`, `curveAt_rebase`). All on the standard three. **Not proved**: the brief's item 2 in its named form (the cleaned
+     map's sectors as maximal runs of chart sectors); the direction the counts read is proved as a comparison of sectors (record § 19.2). **My
+     receipt**: tip equals `origin/fs131-w5c`; the build log `build/gate/build/20261006T045152Z-1110185.log` ends "Build completed successfully
+     (5792 jobs)", 0 warnings other than `sorry`, 11 distinct `sorry` warnings (`Procedure` 5 — the four cases and `exists_arcStep` — `Terminal` 1,
+     and this line's stale copies: `HexRing` 1, `BendCollar` 1, `BaseDense` 3); `Procedure`'s `sorry` by the handoff's grep: 5;
+     `data/fs131/ir/ir2/IR2AxiomsFinal.out` parsed by script, 37 records: 25 on exactly the standard three, 12 with `sorryAx` and nothing else
+     foreign (the four cases, `exists_vertexStep`, `exists_arcStep`, `exists_procStep`, `exists_terminalSeq`, `exists_terminalMap`, `exists_red`,
+     `exists_terminal`, `stuckRun_ne_univ` — the last proved on `fs131-w5s`); `exists_vertexStep`'s statement read against ruling 423's text, and
+     the four cases' statements read whole. **Items**: generalization — in a clean map consecutive chart sectors differ in colour, so three
+     sub-cases of the moves never occur in the vertex step (SHAVE's two flank cuts, MERGE-RAY's adjacent-horn cut, MERGE with adjacent
+     `c`-sectors). Corrections owed — IR1's finding (b) located (MERGE's and OPEN's surgeries recolour inside `ρ/2`, so the junctions lie on the
+     circle of radius `ρ/2` and the two statements' rim clauses on `sphere v ρ` do not cover them); E6-ROUTE's priority between MERGE-RAY and
+     SHAVE is not needed for the split; `exists_vertexStep`'s docstring still opens "each followed by `exists_clean`". Slip, the job's, disclosed —
+     item 2's form changed without a message at the time. Prediction scored — IR1 priced the vertex step at two sessions; the kit and assembly took
+     about a quarter of one (about 560 lines), the four cases are priced 300–500 lines each with one junction lemma of about 150, so two sessions
+     stands.
+436. **Rulings on IR2's held items, and its slot.** (a) **The four cases go to a successor, FS131-IR3**, on `fs131-w5c`, in IR2's order
+     (MERGE-RAY, SHAVE, MERGE, OPEN), from record § 20.2. Alternative weighed: the outward bend's planner (ruling 434 (a)) into this slot. Why IR3:
+     the tree and the work list are ready now, and the planner's tree is `fs131-w5a`, where IA1 is finishing — it takes IA1's slot. Confidence:
+     high. (b) **The brief's item 2 in its exact form is declined**: no clause of the step reads the converse (separation), and it is several
+     hundred lines with no consumer. Alternative: build it for completeness. Confidence: high; it changes if a later proof needs the cleaned map's
+     own chart. (c) **`Procedure` imports `FlankUA`** (for `horn_bounds_of_noMerge`): accepted; `ARCHITECTURE.md`'s row is updated. (d) **IR3's
+     first stage carries two edits**: ruling 430's restatement of `exists_arcStep` with its caller's lines (from IA1's record § 3.6), with the
+     docstring corrections (the withdrawn clause; QA4's rank 7 line; `exists_vertexStep`'s `cleanKeep`), and the merge of `origin/fs131-w5s`
+     (ruling 432 (f) revised: the tree is quiet between IR2 and IR3; a trial merge by `git merge-tree` shows one conflict, `scripts/Axioms.lean`,
+     keep-both). (e) **Ruling 421 (c)'s named forms** (the moves' maps exposed) are the cases', as new declarations in the move modules. (f) **Slot
+     → FS131-IR3**, launched 2026-10-06. In flight: 1 (IR3) + 1 (IA1) + 1 (E7) = 3. Next freed slot: FS131-KA1 (ruling 434 (a)), then FS131-KM1.
