@@ -454,3 +454,22 @@ the uniqueness of `7`'s contact at `stuckModel`'s vertex.
   both.
 - I printed one gate log to my own context at length where its result lines would have done; no number came from misreading it.
 - The live notes CONFLICT of § 4.5 was not kept as a file.
+
+## Stage 5 — SAVED (FS131-MC1): the landing — `main` fast-forwarded to `edd6aa8d`
+
+`origin/main` had moved twice after the gated merge: to `74d392dc` (merged before the pass, Stage 4) and to `a296e60d` —
+`data/fs131/mc/main-since-gate.txt`: 5 paths under `data/`, 2 under `plans/`, **nothing else**, so by ruling 415 (b) the gate was not
+run again. Merged as `edd6aa8d` (`git merge --no-ff`, no conflict). Checked before the push, at `edd6aa8d`: `origin/main`
+(`a296e60d`) an ancestor of `HEAD`; the branch as given (`b9b3a9e5`) an ancestor of `HEAD` (never rewritten); `git diff --name-only
+d9347791 HEAD -- . ':!plans' ':!data'` empty — the gate's inputs are the gated commit's; no tracked file modified; `sorry` under
+`Proofs/` by the gate's narrow pattern: 0. **`git push origin HEAD:main`: `a296e60d..edd6aa8d`, a fast-forward**
+(`data/fs131/mc/push-main.txt`); after it `origin/main` = `origin/fs131-wmb` = `edd6aa8d`. No background process is left running: the
+builds and the passes ran under the slot and exited (`scripts/slot.py --status` reads no slot of this job's).
+
+**What is on `main` now**: the example maps — `Plane/Models/{Paint, Moves, Stuck, Bends, Applied}`, 329 theorems, 0 `sorry`, each
+with an audit record on the standard three; their imports in `Proofs.lean`, their rows in `ARCHITECTURE.md`, the scan's entry in
+`scripts/Vacuity.lean` and the baseline header's counts; sixty docstring lines in eleven modules of `Plane/ValidMap` (docstrings only);
+the lane's five jobs' records, tools and logs. After this stage's commit (this section, the report, the push's log) `main` is
+fast-forwarded once more, in `plans/` and `data/` alone.
+
+## Stage 5 — SAVED (FS131-MC1)
