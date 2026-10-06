@@ -4260,3 +4260,38 @@ reason by the close.*
      first, or to a short job of its own. (f) **KA1's own derivation of the clearance** (`exists_lensOut_clear`, record § 2.5) is one mind's
      hand proof of new mathematics; the kernel is its check, and BA2 is told to stop and message if a step of it fails. (g) **Slot → FS131-BA1**,
      launched 2026-10-06. In flight: 1 (IR3) + 1 (IA2) + 1 (BA1) = 3. Queue: FS131-BA2; the freed lanes' continuations; FS131-KM1.
+
+447. **FS131-IA2 done: the arc step's assembly upstream of `Procedure` is proved; the last lines for `Procedure` are written and compiled in
+     scratch** (implementer; harness ≈ 436k by the task notice; record `fs131-w5y`'s `plans/FS131-arcstep-implementation.md` Stages 5–8; report
+     `data/fs131/reports/FS131-IA2.md` on that branch; commits `963ed0d2`, `c73f5458`, `974f1e28`, `3858e9d4`, `24ce4a63` (the Lean source the
+     build read), `cd2a04ec`, `3f8270c0`; pushed, tree clean). **Results**: the new module `Plane/ValidMap/ArcStep` (772 lines, 32 theorems, one
+     structure, no `sorry` of its own) — the interface `ArcBend`; every clause of the repaired `exists_arcStep` from it (`ArcBend.arcStep`); the
+     two count clauses at the ring-arc level (`ArcBend.maxBad_centre`, `maxBad_other`); W1–W4, W6 (`exists_hasHornCount_isHorn_iff`), W7; the
+     toward bend's instance and the away bend's (`ArcBend.of_away`). 30 theorems on the standard three; 2 (`CollarFit.arcBend`,
+     `exists_arcBend_toward`) through `sorryAx` by the open child `CollarFit.map_hornCount_le` alone. `LocalStep.of_cutArcs` **proved**, with
+     KA1's exact signature. **The last lines for `Procedure`** — W5 (`IsMaxRingArc.meet`), the repaired `exists_arcStep` with its docstring and
+     proof, the consumer's two changed places — compile in `data/fs131/ia2/ProcedureLastLines.lean` against `Procedure` and `ArcStep` (`lake
+     env lean`: iteration grade, said as such; the withdrawn degree clause planted back makes it fail); their text is in the report. **My
+     receipt**: tip equals `origin/fs131-w5y`; the build log `build/gate/build/20261006T055730Z-1436630.log` ends "Build completed successfully
+     (5797 jobs)", 0 warnings other than `sorry`, the 5 distinct `sorry` warnings are `BendStep` 2, `Procedure` 2, `Terminal` 1; `ArcStep`'s
+     `sorry` by the handoff's grep: 0; `data/fs131/ia2/IA2Axioms.out` parsed by script, 32 records: 30 on exactly the standard three, 2 with
+     `sorryAx` alone beyond them; `LocalStep.of_cutArcs`'s signature in `ArcStep.lean` l. 584–586 read against the text relayed in item 443 —
+     identical. **Items**: corrections owed — IA1's work list (W7's second half not needed; W1 and W2 one lemma; `IsModification`'s colour clause
+     needs no case split); `Procedure.lean`'s module docstring l. 18–23 and `exists_arcStep`'s docstring (the new one is in the report).
+     Generalizations — `IsRingArc.degree_openArc`, `coloursAt_openArc` read no collar; `ArcBend.isModification` reads neither validity nor
+     cleanness; W6 is one statement usable by the vertex step. A bound, not a defect — `Procedure`'s ring-arc lemmas sit downstream of every bend
+     module (KA1 found the same, item 445). Open gate items (ruling 427 (d)) — no Lean model of a clean map carrying a ring arc, nor of a bent
+     map with a maximal bad arc left; `ArcBend`'s named inhabitant is on `sorryAx` until the horn child lands. Prediction scored — priced "M–H,
+     one session" by IA1; done in one, about 772 lines.
+448. **Rulings on IA2's held items, and two slots.** (a) **At the merge of the arc lines, `BendAway`'s `LocalStep.of_cutArcs` is kept and
+     `ArcStep`'s copy deleted** (item 443); FS131-BA1 copies IA2's proof into `BendAway` now, with credit, so the join is a deletion and an
+     import. (b) **`ArcBend.of_away`'s hypothesis follows `bend_away_part`'s conclusion as KA1 left it** (the last clause weakened, item 445):
+     a one-place edit, the final sync's. (c) **The last lines go into `Procedure.lean` at wave 5's final sync**, by the job that joins the arc
+     lines (`fs131-w5a`, `fs131-w5z`, `fs131-w5y`) with `fs131-w5c`, from IA2's report. Alternative weighed: FS131-IR3 writes them now. Why not:
+     they need `ArcStep` and `BendStep` among `Procedure`'s imports, which `fs131-w5c` does not have until the lines are joined. Confidence: high.
+     Ruling 430 (c) is read so: IR3 made the statement repair (its Stage 22, to be confirmed at its hand-back); the proof is the sync's. (d) **W6**
+     is offered to FS131-BA2 for the horn child (in its brief) and to IR3 only if its cases ask. (e) **Two slots → FS131-BA1 and FS131-BA2**,
+     both launched 2026-10-06 (BA1 on `fs131-w5a`; BA2 on `fs131-w5z`, cut from `fs131-w5a` at `dd8c2c33`; briefs gated, 16 and 15 quotations;
+     each with a record file of its own, so the two halves append to no shared file). In flight: 1 (IR3) + 1 (BA1) + 1 (BA2) = 3. Queue: the
+     freed lanes' continuations (IR4 if IR3 leaves cases; the outward bend's successors); the inhabitant `awayModel`; wave 5's final sync with
+     the last lines; FS131-KM1 at the first slot no wave-5 continuation claims.
