@@ -8,6 +8,12 @@ finding is a recommendation routed through Keryx. Started 2026-10-06 03:55 UTC.*
 None in the library. An audit proves nothing there; its scratch Lean (`data/fs131/qa4/`) and exact checks (`tools/fs131_qa4_*.py`) are
 evidence for verdicts, listed where used, each at its grade.
 
+Scratch statements, **[scratch-kernel]** (elaborated by `lake env lean` against an idle tree's oleans, axioms printed as the standard three, a
+planted fault watched to fail; not the gate's build), kept under `data/fs131/qa4/` for the remedy job:
+
+- `qa4_collar_hyps`, `qa4_collar_not_hmax`, `qa4_bend_toward_collar_weak`, and the instance (`QA4Collar.lean`; § 3.1);
+- `qa4_bowtieTiles_re`, `qa4_bowtie_not_covers`, `qa4_bowtie_not_isPlaneMap`, `qa4_cuspFrag_not_covers` (`QA4Bowtie.lean`; § 3.3).
+
 ## Stage 1 — SAVED (FS131-QA4)
 
 ### 1.1 The brief's quotations (standing rule 3)
@@ -291,7 +297,7 @@ children inherit it (§ 2.3). "Hand model" is graded [hand] and is mine unless a
 |---|---|---|---|---|
 | plane topology, curve graphs (`PlaneTopology`, `CurveGraph`; 8) | sets of the plane | PARAMETRIC; `HasCurveStar`: AT-ONCE (`halfLine_hasCurveStar`) | — | — |
 | Thomassen (`Thomassen`; 2 heads, 79 children) | a locally finite, connected, locally Hamiltonian infinite graph; `PlanarLike` | AT-ONCE | `triLattice_hyps`, `triLattice_planarLike` ("every field is exercised") | — |
-| E4-OUTERMOST, E4-RIM (`MapTopology`; 17) | `Valid`, tiles, `EnclosesTile`; base hypotheses for `exists_eleventh_of`, `exists_far_end` | AT-ONCE, unnamed (universal over tiles of a valid map); the two base lemmas: DECLARED through `BaseCtx` | `sevenBrick_unenclosedC` (`BrickMap`) | — |
+| E4-OUTERMOST, E4-RIM (`MapTopology`; 17) | `Valid`, tiles, `EnclosesTile`; base hypotheses for `exists_eleventh_of`, `exists_far_end` | AT-ONCE, unnamed (universal over tiles of a valid map); **the two base lemmas: nothing said** (they take the base's hypotheses directly; the base's line is on `BaseCtx`, in `BaseWalk`) | `sevenBrick_unenclosedC` (`BrickMap`) | — |
 | the planar reduction (`MapGraph`; 47) | `Valid ∧ IsPlaneMap`, outer tiles, boundary walks, port graphs | AT-ONCE | `cvb_thom`, `cvb_thom_reduced`, `cvb_pinch_connected` name `sevenBrickMap`; `IsBoundaryWalk`, `IsEdgeOf`, `IsPortGraph` are supplied by existence theorems on every plane map (`exists_boundaryWalk`, `exists_edgeOf`, `exists_isPortGraph`) | **`cvb_hole_disconnected`** (`Valid ∧ IsPlaneMap ∧ IsTile T ∧ IsHoleOf T Hc`): BY-HYPOTHESIS — the one holed model, `exists_holed_valid_fragment`, is a fragment; **hand**: a fresh-coloured disc planted inside a brick (§ 3.2 (b) gives it in Lean) |
 | `Chain` (5) | definitions' lemmas | AT-ONCE, degenerate (`IsModification.refl`, `const_qrOnly`) | a non-degenerate modification: any proved move's output, none yet composed | — |
 | COR3 (`Cor3`; 4) | a cubic vertex, a both-kind leaving centre | NOTE-NONE ("No inhabitant: a valid fragment with such a pair is FS112-STOP's object; `GENERIC`") | — | not attacked: FS112-STOP's object is a derivation's question |
@@ -357,3 +363,82 @@ proved theorem gives an instance at every object of its kind; **N** a proved, na
 | `IsMaxRingArc` (`Procedure` 35) | 3 | H | the spec example is negative; a positive one: `l60Frag`'s whole arc (maximal by `l60_le`) | minor; it is `exists_arcStep`'s hypothesis |
 
 No new definition is unsatisfiable on real objects, and none fails at the kind of point its theorems quantify over (the class of item 158).
+
+## Stage 6 — SAVED (FS131-QA4): what is owed, what should wait for it, and where the rule is unclear
+
+### 6.1 In plain words
+
+I read every theorem this milestone landed on `main` since the last audit and every theorem of wave 5 at the two commits named, heads first: 2,590
+theorems, 318 of them heads, in 39 modules, and the 28 definitions new or changed. **No hypothesis set I attacked is unsatisfiable on real
+objects, and no new definition fails at the kind of point its theorems talk about.** What I found is the audit's old weakness in three new
+places, and one missing hypothesis:
+
+1. **`exists_vertexStep` lacked `F.Covers v 1`**, which every move it composes assumes (QA4-1; sent at once; ruled, items 422–423).
+2. **Nothing in Lean is both stuck (or horned) and covers the unit disc about its vertex.** The bowtie reaches only `|re z| < 113/260`, and the cusp
+   fragment lives on `B(0, 1/2)`; I proved both failures in scratch Lean. So the four moves on `main`, the stuck family of wave 5, FLANK-Q and the
+   vertex step have no Lean object satisfying their hypotheses together — and **seventeen docstrings say the bowtie is one** (QA4-2).
+3. **`bend_toward_collar` as stated has no inhabitant in `l60Frag`**; without `hmax` and `hlen`, which the kernel confirms it never reads, `l60Frag`'s
+   sub-arc is one, hypothesis by hypothesis, checked in scratch Lean.
+4. **`exists_open`'s hand model stands**: I re-read E6's twelve-colour map against each of the seven hypotheses and it satisfies them at once.
+
+Every set of item 2 is satisfiable by hand (a small picture in fresh colours planted in a valid background; the bowtie completed by fresh-coloured
+cells), so nothing landed is in doubt as to truth. What is open is the gate's item, and its price is two constructions.
+
+### 6.2 The list of what is owed, ranked by what rests on the theorem
+
+| rank | owed | remedy | who | price | before wave 5 lands? |
+|---|---|---|---|---|---|
+| 1 | `exists_vertexStep` (`Procedure`): the hypothesis `F.Covers v 1` — the procedure's vertex step rests on it | the hypothesis, in place of `v ∈ F.dom` | the planner's statement, FS131-IR2's pen | one argument at each call | **yes — done by ruling** (items 422–423) |
+| 2 | QA4-2: 17 docstrings naming `bowtie` as the inhabitant under `Covers v 1` or `IsPlaneMap` (`FlankUA` 9, `Terminal` 8; § 3.5's list) — every later reading of the stuck family trusts them | each note corrected: "`bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` (FS131-QA4, QA4-B1); no Lean model of all at once; the completed bowtie at [hand]" | the implementers of `fs131-w5` (`FlankUA`) and `fs131-w5c` (`Terminal`) | 17 docstring lines; their dependents rebuild once | **yes** — a landed docstring is environment data, and correcting it after landing rebuilds every dependent on `main` |
+| 3 | `bend_toward_collar` (`BendCollar`): `hmax`, `hlen` unused, and with them no model in `l60Frag` | drop both; a named theorem stating QA4-C1's conjunction beside `collarModel`; a docstring line naming it on `bend_toward_collar` and `exists_collarFit` | the implementer who next edits `BendCollar`, under ruling 419 (d)(ii) | about 30 lines, text in `data/fs131/qa4/QA4Collar.lean` | **yes** — a statement change is cheapest before the landing |
+| 4 | Lean models for the four moves (`exists_merge`, `exists_rayMerge`, `exists_shave`, `exists_open`; landed on `main`), and with them `exists_vertexStep`, `cvb_hole_disconnected`, and positive inhabitants of `IsSite` and `HasHornCount 1` — the whole procedure runs on these moves | **the planted picture** (§ 3.2 (b)): `sevenBrickMap` relabelled into more colours, small open sets inside one brick recoloured in fresh colours by `ArcMap.recolour`; four pictures (two wedges; two horns on a ray; one horn; one lone horn with a tangent disc) | the planner (a short plan: the relabelling, the local facts at `v`), then an implementer | 400–800 lines, plus about 100 per picture; one implementer job | no — truth is not in question (kernel-checked; hand models §§ 3.2–3.3); it clears the open gate item on MERGE and OPEN |
+| 5 | A Lean model of `Valid ∧ Covers v 1 ∧ IsStuck v` — FLANK-Q on `main`, `FlankUA`'s 25 theorems, `Terminal`'s any-`k` stuck lemmas, `woodallCone` | **the completed bowtie** (§ 3.5): the bowtie's eleven tiles kept, the rest of a disc of radius above `1` (or of the plane) filled by fresh-coloured cells; the transfer of `IsStuck 0`, horns, flanks and contacts through "the colours below 6 keep their regions and tiles" | the planner (whether one overlay construction serves ranks 4 and 5), then an implementer | 1,500–3,000 lines by the bowtie's own size (about 2,700); one to two implementer jobs | no; the hand argument of § 3.5 stands meanwhile |
+| 6 | `bend_away_whole`, `bend_toward` (`UnitArc`, landed): no model named | `cuspFrag.IsRingArc I θ₁ θ₂ 0 1` on one side of `0` (a model of both bends: the centre carries no colour) and a docstring line each; for `bend_toward` also `l60Frag` through rank 3's theorem | an implementer, with rank 4's pass | 60–120 lines | no |
+| 7 | `exists_arcStep` (`Procedure`, `sorry`): nothing said | a docstring line now ("no Lean model on file; `l60Frag` cleaned, its whole arc, at [hand]"); the Lean model with the step's proof | FS131-IR2 | one line now; 100–200 lines with the proof | the line: yes |
+| 8 | Docstring lines with no mathematics: (a) the three moves and their `_aux` forms — an inhabitant note; (b) `pair_ii`, `fail_leavingCentre`, `fail_colours` (`BaseSteps`) — the note names an inhabitant of one hypothesis on a map where the others cannot hold; say so; (c) `rot_out`, `rot_in` (`HexRing`), `exists_eleventh_of`, `exists_far_end` (`MapTopology`), `dense3`, `cv_exists` (`BaseDense`) — the base's line or the open line; (d) Woodall's refutation steps (`SectorsAt.false_of_ncard_le_two_on_arc`, `false_of_four_le_sectors`, `woodall_step4`, `townsend_lemma`) — "a refutation step", naming `sevenBrickMap_woodallModel`; (e) `LocalSeq.const` — "idle", not "every clause exercised"; (f) one module-level line naming the model for the families that are AT-ONCE, unnamed (TS-T, the ring-arc theorems, `Cone`'s contact lemmas, `MapTopology`) | the lines | the wave-5 files: their current implementers; `main`'s files: one remedy pass | about 30 lines | wave 5's files: yes; `main`'s: with the remedy pass (one rebuild) |
+| 9 | Neither a model nor a contradiction found: `a4six`, `straddlers_third`, `nb4p` (is `sixFrag` a model of their backgrounds?); `flank_ne_of_doublyShadowed` (a doubly shadowed horn under Condition 5 with `Covers`) | a short derivation each | a deriver (Ephodos), or the planner for `sixFrag` | a short job | no |
+| 10 | The OPEN class: 19 heads stated at six colours on a plane map, and the terminal-map-with-a-stuck-vertex family at any `k` | a ruling on the rule (§ 6.3 F1); for the any-`k` part, the question whether a terminal valid plane map with a stuck vertex exists at some `k ≥ 7` | Keryx for the rule; a deriver for the question (it is beside FS-115) | — | no |
+
+**My judgment on the landing**: ranks 1–3, rank 7's line and rank 8's wave-5 lines hold it (all cheap, all in files the landing touches, two of
+them statement changes and the rest docstrings that cost a rebuild later). Ranks 4–6 and 9–10 can follow it: the theorems are kernel-checked,
+each uninhabited set has a hand model here, and the two constructions are a job each. If one model is wanted before the landing as proof that the
+class is not empty in Lean, it is rank 4's first picture (one fresh-coloured horn in a brick: a model of `exists_shave` and, with a tangent disc,
+of `exists_open`).
+
+### 6.3 Where the rule was unclear, how I read it, and a draft (the rule is Keryx's)
+
+- **F1. No line for a hypothesis set whose satisfiability is the open question.** `exists_terminal`, `cv_hd`, `c_ends`, `stuckRun_ne_univ` and 15
+  more are stated at `{F : ArcMap 6}` on a (terminal) plane map: an inhabitant would be a valid six-map of the plane, and no theorem refutes one.
+  The rule offers an inhabitant or "none expected, with the refuting theorem"; neither exists. I tabled these as OPEN and counted the docstrings
+  that say so as meeting the rule's intent. The rule's phrase "at a parameter the refutation leaves alive" also presumes the statement has a free
+  parameter; these have none (`exists_terminal`'s note offers the class "at seven colours", which the statement does not admit). Whether each
+  proof uses `k = 6` other than through its counting children is a planner's question I did not read.
+- **F2. R1 for universal hypothesis sets.** About 100 heads assume only `Valid`, `IsPlaneMap`, `Covers`, a tile, a ring arc; `sevenBrickMap` or
+  `l60Frag` satisfies them and no docstring says so. I read these as meeting R3 and not R1's letter, and propose a module-level line.
+- **F3. A note that names a derivation, not a theorem.** `exists_open`'s note names E6's hand model. The rule says "a one-line note naming the
+  theorem that supplies one". I tabled it NOTE-NONE; ruling 419 (d)(iii) already reads it as an open gate item.
+- **F4. A note is a claim.** The rule does not say that an inhabitant note is checked; QA4-2 is seventeen that were not. `tools/fs131_qa4_notes.py`
+  checks each note's named object against a table of that object's kernel-checked failures (`bowtie`: `Covers`, `IsPlaneMap`, Condition 5;
+  `cuspFrag`: `Covers`); it could run at each landing, with the table grown as models and failures are proved.
+
+*Draft for `LEAN.md` § The gate* (slot: after the inhabitant bullet's last sentence, "… the docstring says so with the theorem that refutes the
+configuration."): "**A note names an object only for the hypotheses that object satisfies**: 'inhabitant of the hypotheses' is a claim and is
+checked like one — a fragment that does not cover the unit disc about its vertex is no model of a theorem assuming `F.Covers v 1` (FS131-QA4:
+seventeen notes named `bowtie` there). **Where the hypotheses' satisfiability is the open question at the stated parameter** (a valid six-map of the
+plane; a stuck vertex in a terminal plane map), the docstring says so, names the question, and names an object satisfying the local hypotheses at
+once together with the hypothesis it fails."
+
+### 6.4 Tools and data
+
+`tools/fs131_qa4_census.py` (self-test 15 controls, 4 planted; two faults planted in the tool and watched to fire) and
+`tools/fs131_qa4_notes.py` (self-test 6 controls, 1 planted). Data: `data/fs131/qa4/{theorems,heads,defs,notes}.tsv`; scratch Lean
+`QA4Collar.lean`, `QA4Bowtie.lean` with their outputs and planted-fault twins. No background process is left running. Nothing in `Proofs/`,
+in any worktree or on any branch but `main` was changed; two idle trees were read by `lake env lean` (their `git status` clean before and after).
+
+### 6.5 Slips, my own
+
+- § 2.2's three per-body rows were first written from an estimate; corrected one commit later to the script's counts.
+- § 3.2 first gave `T_c`'s distance from `0` as `2/5`; it is at least `7/10` (corrected in the stage 4–5 commit).
+- § 4.2 first tabled `exists_eleventh_of` and `exists_far_end` as DECLARED; their docstrings say nothing (corrected in this stage's commit).
+- An unquoted here-document let the shell read back-quoted names as commands while I wrote the first scratch file (each "command not found",
+  and one bare `lean` that printed its help); nothing ran, the file was rewritten from a quoted one.
