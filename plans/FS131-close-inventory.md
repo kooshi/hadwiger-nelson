@@ -5878,3 +5878,37 @@ reason by the close.*
      what the records say. **Disk**: 301 GB free of 1.9 TB after ten new trees today at 4.9 GB a build copy; the finished
      trees' removal is held for the filing (handoff § 8) and becomes due earlier if free space falls under about 150 GB.
      **Every job ruled so far has a gated brief.**
+
+533. **FS131-K9, by message mid-job: five findings from reading wave 9's eleven rows — no row refuted; a supporting lemma that
+     belongs to wave 6; a hypothesis from outside the backlog; two rows that are one theorem; a correction to a ruling of mine**
+     (source: K9's message to "main", 2026-10-06; its Stage 1 saved at `67c86f8f`, equal to `origin/fs131-w9` — checked; the
+     findings are not yet in a saved stage's Lean, and by item 526's rule none is announced as a defect: K9 labels each, and
+     none is a statement defect). **(1) FS111-M-REDUCE-I cannot be formalized on wave 9's branch**: its words (honest,
+     saturated, Σ, REG-J′) are wave 6's foundation and its `uses only` names wave 6's rows (`plans/FS111-derivation.md`
+     l. 619 — read by me: FS111-M-C11 off Σ, the finitely-many-arcs clause, FS111-W-NOBEND, FS111-M-EXTREME or V0-CLEAN's
+     island fill). FS129-OR1-TOP5 reads it only as an implication, so K9 states TOP5 for any predicate on five-colourings with
+     that implication as a hypothesis. **(2) A hypothesis from outside the backlog**: FS111-C1-PW rests on FS107-W-EQ-K's ⟹
+     (a compactness step), and FS-107 has no backlog row (`grep -c FS107 plans/LEAN-BACKLOG.md`: 0); it enters as the named
+     `Prop` `WEqKLimit K`. **(3) A shorter route**: over arc maps FS111-V0-CLEAN's cleaning and three steps of
+     FS111-M2-REDUCE-C are read by no consumer; one theorem carries both rows — an a.e. cover of the plane by `k` sets with
+     null unit pairs whose frontiers lie in a locally finite family of segments and circular arcs gives a valid `k`-coloured
+     arc map of the plane — reading no tightness and no six. **(4) A generalization**: FS111-C-SIX-M is FS111-V0-RESCALE's
+     contrapositive at every `k`. **(5)** FS129-OR1-DISCF-NS carries no outside hypothesis (its registered 0.8 that it
+     would was wrong); **and for a row that is an implication between two class statements, the `SimpleOn` form is not
+     formally stronger than the row as filed** — the hypothesis grows with the class — so it states each such row twice.
+     Also a route fact for FS129-SR1-BENDANY: the away bend on a fragment of radius below 2 is a new leaf. **Rulings.**
+     (a) **The plan's R13 is amended: FS111-M-REDUCE-I is stated in wave 6's tree, by its fourth planner; TOP5 is proved in
+     wave 9 at the abstract class, and its instance is made where the two waves meet.** Alternative: it stays a named
+     hypothesis of TOP5's instance and is not formalized in this milestone. Why: R13 ruled it formalized, its inputs are
+     wave 6's vocabulary, and that planner reads FS111-W-NOBEND's argument already. Confidence: medium-high; if the fourth
+     pass does not hold it, it is a named hypothesis and a row for a later pass. K9 is asked for the exact Lean form of
+     TOP5's hypothesis when its skeleton builds, for me to relay. (b) `WEqKLimit K` is adopted as a named hypothesis and
+     joins the plan's § 7.4 list at the filing; **a stub to mint**: FS107's compactness step in Lean (Blaschke selection
+     for arcs), unpriced. (c) The one theorem for V0-CLEAN and M2-REDUCE-C's first clause, and C-SIX-M at every `k`, are
+     adopted; each row's read-back says what the filed row had that the theorem does not read. (d) Rows that are
+     implications between two class statements are stated twice. **A correction to my ruling 508, mine**: its reason
+     ("by `Simple.simpleOn` every row proved under the narrow hypothesis gives the row as filed, so the choice cannot
+     lose a result") holds for non-existence rows only; the ruling stands, its sentence does not, and the second
+     planners of waves 7 and 8 are told in their briefs. **My check of one**: (5)'s logic — `SimpleOn S` is weaker than
+     `Simple`, so a hypothesis quantified over the `SimpleOn` class is the stronger hypothesis, and the implication over
+     the wide class does not entail the one over the narrow. **Relayed**: all five rulings to K9 by message.

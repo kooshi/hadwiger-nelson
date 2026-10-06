@@ -51,6 +51,7 @@ What the earlier passes and the implementers handed back, and the rulings in for
 {item(526)}
 {item(516)}
 {item(487)}
+{item(533)}
 The milestone's plan binds every wave's planning job (read its §§ 7.1–7.5 whole):
 
 {Q(KP,"### 7.3 What each wave's planning job must hold")}
@@ -70,6 +71,12 @@ merge below):
 
 {Q(M+"MapColouring.lean","theorem ArcMap.bound_of_saturatedOn ")}
 {Q(M+"Sq9Map.lean","noncomputable def sq9Map : ArcMap 9 where")}
+A supporting lemma that moved to this wave today (ruling 533 (a)) — its entry, `plans/FS111-derivation.md` l. 617:
+
+{Q("plans/FS111-derivation.md","derivation: FS111-M-REDUCE-I")}
+{Q("plans/FS111-derivation.md","  statement: REG-I_k follows from the honest existence form of C-SAT-T at k together with REG-J′_k")}
+{Q("plans/FS111-derivation.md","  uses only: FS111-M-C11 off Σ;",None,"the finitely-many-arcs clause for S–V Condition 3 at Σ; FS111-M-EXTREME or V0-CLEAN")}
+{Q("plans/FS111-derivation.md","  not claimed: honest C-SAT-T at five;")}
 ## Done means
 
 1. **Your readback first**: check every quotation above against its source; read the three passes' record whole (Stages 1–15), the wave's
@@ -96,19 +103,24 @@ merge below):
 5. **The pinch's consequences on a cover**: `c11_discs` and `local_graph` for two sets that may overlap, in a module of yours, if their
    arguments allow — the implementer proving `local_graph` now (FS131-I6C) is asked to say where its proof reads disjointness; I will
    send you its answer if it is back. And FS111-W-NOBEND's own argument, read, with its merge into FS131-E8-LOCAL confirmed or corrected.
-6. **The inhabitants the wave owes**, stated as leaves with a plan each (the third pass's § 14.6): the colouring that pass calls R7, with a
+6. **FS111-M-REDUCE-I** (ruling 533 (a)): the implication its entry states, read from its argument and stated over this wave's foundation
+   (`SingLocallyFinite`, `RegJFan` for REG-J′; the rows its `uses only` names). Wave 9's planner proves the composition that reads it
+   (FS129-OR1-TOP5) for an abstract predicate with the implication as a hypothesis; I will send you that hypothesis's exact Lean form, and
+   yours is stated to meet it at the join. If it is not in hand when you reach this item, state yours from the entry and say so. If this
+   item is more than the pass holds, leave it stated as a named hypothesis with what a later pass reads.
+7. **The inhabitants the wave owes**, stated as leaves with a plan each (the third pass's § 14.6): the colouring that pass calls R7, with a
    fan at a lattice point; `sq9`'s two periods; a chart and a two-branch fan for `sq9` at a regular point; and, for `sq9Map`, the facts
    no one has proved — `Valid` and `NonSiamese` first — which the fragment rows' inhabitant lines and wave 8's main refutation both need (ruling 530 (c): one map, declared once; wave 8's job will take your module by ancestry).
    `sq9.SingLocallyFinite` is another implementer's (FS131-I6D) and is not yours.
-7. **Vacuity and inhabitants** for what you state, in `LEAN.md` § The gate's form: a named Lean inhabitant, an owed one named, or
+8. **Vacuity and inhabitants** for what you state, in `LEAN.md` § The gate's form: a named Lean inhabitant, an owed one named, or
    "satisfiability open" with the question and the object meeting the local hypotheses but one.
-8. **The skeleton**: builds through the worktree's `./scripts/build.sh` with only `sorry` warnings; `Proofs.lean`, `ARCHITECTURE.md`
+9. **The skeleton**: builds through the worktree's `./scripts/build.sh` with only `sorry` warnings; `Proofs.lean`, `ARCHITECTURE.md`
    (`tools/check_architecture.py` exit 0) and `scripts/Axioms.lean` updated; no new `axiom`, no `native_decide`; `./scripts/dupnames.sh`.
-9. **Your record**: a plan per leaf (route, the Mathlib and library lemmas confirmed with `#check`, what is hard, a price — re-priced from
+10. **Your record**: a plan per leaf (route, the Mathlib and library lemmas confirmed with `#check`, what is hard, a price — re-priced from
    the first two leaves you prove; this wave's implementers have beaten the planners' prices by an order of magnitude on set-algebra
    leaves), the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), and a handoff for implementers by file. A leaf
    you can prove in about an hour, prove, and say so.
-10. The report, in standing rule 11's form. You do not merge any other branch, run the gate, or touch `main`. Leave no background process
+11. The report, in standing rule 11's form. You do not merge any other branch, run the gate, or touch `main`. Leave no background process
     running, and keep what your record cites under `data/fs131/k6d/`. If this is more than one pass holds: the join, the modeling pass and
     the six rows first, the inhabitants after; stopping at a saved stage and saying exactly what is left is a good report.
 
