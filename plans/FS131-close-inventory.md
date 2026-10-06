@@ -5431,3 +5431,28 @@ reason by the close.*
      `CountData` inhabitants, from a branch cut at `b5ef0e39`; RD's `anchor` rides with K7b's first implementer. Briefs not
      written. (c) **Slot → FS131-K8** (wave 8's planner, on `fs131-w8` at `611ffa39`), launched 2026-10-06. In flight: 1 (I10C) + 1
      (I6A) + 1 (K8) = 3.
+
+515. **Kooshi saved the two papers asked of him (item 500); both are in the library, and Weil's page states the bound the floor needs**
+     (2026-10-06; his words: "Done and done"). **Identity, checked by me**: `library/pdf/pnas-1948-weil-on-some-exponential-sums.pdf`
+     — "On some exponential sums", by André Weil, communicated March 9, 1948; 4 pages, PNAS 34 pp. 204–207; and
+     `library/pdf/jnt-1992-li-feng-character-sums-abelian-ramanujan-graphs.pdf` — "Character Sums and Abelian Ramanujan Graphs",
+     Wen-Ch'ing Winnie Li, with an appendix by Keqin Feng and Wen-Ch'ing Winnie Li, J. Number Theory 41, 199–217 (1992); 19 pages.
+     **A correction to our record**: the second paper's author is Li alone (the row said Li and Feng; I repeated it to Kooshi with
+     the caveat that it was unverified); the key keeps its form. **What Weil's p. 207 states, read from the page image**: `k` a
+     finite field of `q` elements, `ψ` a character of the additive group of `k` not everywhere equal to 1; "If the characteristic
+     p of k is not 2 … |Σψ(x)χ(x² − a)| ≤ 2√q"; with `χ` the character of order 2, "an elementary transformation [Davenport 1933,
+     Th. 5, p. 172] shows that the sum in the left-hand side is identical with the so-called Kloosterman sum Σψ(cx + dx⁻¹), for
+     4cd = a; hence |Σ_{x≠0} ψ(cx + dx⁻¹)| ≤ 2√q", and the prime case after it. So the page covers **every finite field of odd
+     characteristic — prime powers included — with `c`, `d` non-zero**, which is `KloostermanBound F` at `ringChar F ≠ 2`; the
+     floor reads it only at fields of `q ≡ 3 (mod 4)` elements. **What Li's abstract states**: `|Σ_{x∈N₂} χ(x)ψ(x)| ≤ 2q^{1/2}` for
+     all non-trivial characters of `N₂ × F₂` — the sum over the norm-one group that `normOne_charSum_ge` bounds, directly.
+     `BIBLIOGRAPHY.md`'s two rows brought current (what each states, the copy, what was read). **Rulings.** (a) **The import is
+     Weil's displayed inequality of p. 207, stated with characteristic not 2 as the page has it** (ruling 500 stands); the
+     alternative now in hand — Li's theorem for the norm-one sums, which would make the completion's four leaves unnecessary — is
+     not taken. Why: the Kloosterman bound is the smaller and the canonical axiom, the completion is already stated and about one
+     job, and it kernel-checks an identity this project has only verified numerically; Li's theorem stays the cross-check of
+     `normOne_charSum_ge`'s statement. Confidence: high. (b) **The read-back against the Lean statement, and the axiom with its
+     four items, are a planner's**: the first item of wave 10's third planning pass (FS131-K10c), which then discharges
+     `standingFloor_seven`'s hypothesis; my reading above locates the statement and is not the read-back. Until then
+     `KloostermanBound` stays a hypothesis, and FS131-I10D proves over it as briefed. (c) The audit's imported count goes from 4 to
+     5 when that lands; Kooshi has been told (the interim report, 2026-10-06).
