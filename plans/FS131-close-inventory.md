@@ -6888,3 +6888,37 @@ reason by the close.*
      the tidy job, whichever is first; until then a brief may point at it on its branch. (h) Its drafts (ledger
      lines for five rows, a `LEAN.md` bullet, FS-117's stub lines) are held for the filing. (i) **Slot →
      FS131-L10B** (wave 10's second landing), launched 2026-10-06. In flight: 3 (K6d, I8A, L10B).
+565. **FS131-K6d, by message mid-job: findings from reading the fragment's six arguments and FS111-M-REDUCE-I — no row refuted; one changes what wave 9's join can use** (source: K6d's message to "main", 2026-10-06; by its word the four new modules elaborate one by one, the full build is running and unread, and nothing is in a saved stage — the artifact is read at its hand-back).
+     **(1) FS111-M-REDUCE-I does not reach an arc map as its argument is written** — its kind, in its words: a statement
+     that needs a hypothesis its entry lacks, at the form `top5` reads; the entry itself (Jordan boundaries) is not
+     touched. `plans/FS111-M-regularity.md` § 5.1 builds a map whose boundaries are C^{1,1} arcs; `RegA` asks an
+     `ArcMap` — segments and circular arcs, locally finitely many — and no entry it read derives that step from
+     REG-J′ (it would take FS111-M2-INTRAD (i), (iii), no accumulating radii, which is open, and local finiteness of
+     the straight pieces, which no entry states). Stated in `Plane/Saturated/ReduceI`: `AeColouring.HasArcInterfaces`,
+     a leaf `exists_arcMap_of_hasArcInterfaces`, `AeColouring.reduce_i` proved from the leaf — `ReduceToMap P True` for
+     `P c := Saturated c.cls ∧ c.SingLocallyFinite ∧ c.HasArcInterfaces`, every `k` — and the named open statement
+     `ArcInterfacesOfRegJ k`. The proof reads only the third conjunct; and the leaf is, by content, wave 9's first
+     planner's finding (3) (item 533) said of a colouring instead of a cover. **(2) "Saturated on a disc" is
+     `SaturatedOn F.region U`, not wave 3's `SaturatedAt` at every point**: the latter fails at every interior point
+     of a tile of a valid map, so a theorem assuming it on a set would be vacuous (stated as a leaf, not proved; the
+     author's § 4.1 agrees). **(3) Rows that read less than filed**, each stated at the class its argument reads:
+     FS116-S1-KAPPA and -S1-PAIR read no saturation (ring-calculus rows; KAPPA's clauses proved from wave 3's
+     lemmas at any `k`); FS116-V4-PARTNER reads one half-disc; FS116-S1-RUNG reads no vertex, degree, count or tile
+     and is proved from PARTNER's leaf; FS116-N1-AXIS (a), (d) read no saturation. **(4)** Its registered 0.5 that
+     PARTNER's far clause fails with a Siamese twin: wrong, no defect. **(5)** No row of the six reads
+     FS111-M2-HULLC's finite-perimeter conclusion (ruling 531 (a)'s condition is met). **Checked by me on (2)**: on
+     `main`, `SaturatedAt` appears in four lines of three files and no statement quantifies it over a set (`git
+     grep`), so no landed theorem is vacuous for that reason. Not checked by me: anything else — it is one mind's
+     reading, unbuilt. **Rulings.** (a) **Finding (1) is routed to wave 9's second planner's brief (FS131-K9b, not
+     written)**: it states the wave's join over `AeColouring.reduce_i` and `ArcInterfacesOfRegJ`, by ancestry, and
+     derives its own finding (3) from K6d's leaf or the reverse — one statement, one name. (b) **If its saved stage
+     carries (1), ledger row 154's "given REG-J′₅" needs a second hypothesis in the kernel's form — arc interfaces
+     from REG-J′ — and that is an erratum for the row and for the front page's item 31, held for the filing; a
+     deriver's job on the step (C^{1,1} arcs to locally finitely many segments and circular arcs) is launched only
+     if the wave's join cannot be stated honestly without it.** Alternative: a deriver's job now. Why not: the
+     kernel's statement is true as K6d states it, the gap is named as an open statement, and three of its four
+     ingredients are already rows of this wave. Confidence: medium; it changes if the planner's hand-back says the
+     step is short. (c) **Announced to Kooshi as a defect only when a saved stage carries it** (item 526). (d) The
+     rows of (3) are generalizations for the wave's errata; KAPPA and PAIR, being ring-calculus rows, are named to
+     wave 8's second planner in its launch amendment so that it cites them and restates neither. No reply sent: it
+     asks none.
