@@ -6110,6 +6110,57 @@ instance of the interface. -/
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.arcBend
 #print axioms HadwigerNelson.Plane.ArcMap.exists_arcBend_toward
 
+/-! ## FS-131 wave 5 (job FS131-KA1) — the away bend's skeleton (`Plane/ValidMap/BendAway`, `LensOut`, `HornChart`, `CollarMapOut`, `R2Cap`, `BendGap`)
+
+The first six records are proved. The rest are the plan's open children (`sorry`) and the three theorems proved from them
+(`bend_away_gap`, `bend_away_subdiv`, `CollarFitOut.pushOutProfiles`; `bend_away_part` is in FS131-IA1's block above): the gate fails on
+each until its children land. -/
+
+#print axioms HadwigerNelson.Plane.R2Subdiv.lt
+#print axioms HadwigerNelson.Plane.ArcMap.LocalStep.union
+#print axioms HadwigerNelson.Plane.claim_e
+#print axioms HadwigerNelson.Plane.end_cap
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.hasHornCount
+#print axioms HadwigerNelson.Plane.ArcMap.collarOutArcs_locallyFinite
+#print axioms HadwigerNelson.Plane.ArcMap.bend_away_gap
+#print axioms HadwigerNelson.Plane.ArcMap.bend_away_subdiv
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.pushOutProfiles
+#print axioms HadwigerNelson.Plane.R2Subdiv.of_local
+#print axioms HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+#print axioms HadwigerNelson.Plane.ArcMap.AwayBend.idle
+#print axioms HadwigerNelson.Plane.ArcMap.AwayBend.next
+#print axioms HadwigerNelson.Plane.ArcMap.AwayBend.join
+#print axioms HadwigerNelson.Plane.ArcMap.AwayBend.contact_of_onRingArc
+#print axioms HadwigerNelson.Plane.pushOutHomeo
+#print axioms HadwigerNelson.Plane.pushOutHomeo_polar
+#print axioms HadwigerNelson.Plane.pushOutHomeo_symm_polar
+#print axioms HadwigerNelson.Plane.pushOutHomeo_eq_self
+#print axioms HadwigerNelson.Plane.pushOutProfiles_collar
+#print axioms HadwigerNelson.Plane.collarOutArcs_carrier
+#print axioms HadwigerNelson.Plane.dist_lt_one_of_thin
+#print axioms HadwigerNelson.Plane.ArcMap.hasHornCount_iff_of_agree
+#print axioms HadwigerNelson.Plane.ArcMap.hasHornCount_zero_of_mem_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.hasHornCount_zero_of_two_spheres
+#print axioms HadwigerNelson.Plane.ArcMap.hasHornCount_iff_of_germ_swap
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_image_dom
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.collarOutArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.collarOutArcs_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_lens
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_agreesOff
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_valid
+#print axioms HadwigerNelson.Plane.ArcMap.exists_r2_crescent_free
+#print axioms HadwigerNelson.Plane.ArcMap.r2_side_dichotomy
+#print axioms HadwigerNelson.Plane.ArcMap.exists_r2Subdiv
+#print axioms HadwigerNelson.Plane.ArcMap.exists_lensOut_clear
+#print axioms HadwigerNelson.Plane.ArcMap.exists_collarFitOut
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_ringArcsWithin
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R1
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_localStep
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_hornCount_le
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
