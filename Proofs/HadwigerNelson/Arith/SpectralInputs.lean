@@ -25,7 +25,7 @@ argument reads**, which is in every case wider than the arithmetic setting it wa
   (`spectral_carried_iff`) reads a topology `t` on `R` for which Bochner's theorem holds (`BochnerOn t`, a named classical
   hypothesis: true for the topology induced by a dense homomorphism into a locally compact abelian group).
 * **J45-N1**, the part the chain consumes (`contChars_haar_null`): the characters continuous for `t` are Haar-null when they
-  are a proper measurable subgroup separating the points of a torsion-free `R`.
+  are a proper measurable subgroup separating the points of `R` (given Herglotz–Bochner; no topology on the dual).
 * **J45-SI-4** (`si4`): if the conditional supports of a random colouring given a sub-σ-algebra `𝒜` are disjoint across every
   edge, any selection from the supports is an `𝒜`-measurable proper colouring — for any countable graph and any `𝒜`.
 
@@ -33,7 +33,8 @@ argument reads**, which is in every case wider than the arithmetic setting it wa
 `τ′_S` and its three summands), J45-SI-5, J45-SI-J, J45-SI-C.
 
 **Inhabitants.** `IsHaarFourier` is satisfiable given Herglotz–Bochner (`exists_isHaarFourier`). `contVec`, `factorSets` and
-`factorSigma` take plain data; the identity family `T y = id` is a model (`contVec_id`). `sp_if`'s hypothesis — a non-Haar finite
+`factorSigma` take plain data; the identity family `T y = id` is a model (`contVec_id`). `BochnerOn` holds at the discrete
+topology (`bochnerOn_bot`). `sp_if`'s hypothesis — a non-Haar finite
 rotation-invariant `E`-null measure — is the open zero-entropy question over the arithmetic `E` (J45 §4.2, "Not claimed"); at
 `Interface.trivial` (`E = ∅`) it is met by the point mass at the trivial character.
 -/
@@ -204,11 +205,18 @@ theorem spectral_carried_iff [IsProbabilityMeasure μ] (t : TopologicalSpace R)
     σ (contChars t)ᶜ = 0 ↔ f ∈ contVec T hT (@nhds R t 0) := by
   sorry
 
+/-- Bochner's theorem holds for the discrete topology: every character is continuous. The hypothesis' model. -/
+theorem bochnerOn_bot : BochnerOn (⊥ : TopologicalSpace R) := fun σ _ _ => by
+  have h : contChars (⊥ : TopologicalSpace R) = Set.univ :=
+    Set.eq_univ_of_forall fun χ => (continuous_bot : @Continuous R Circle ⊥ _ fun y => χ y)
+  rw [h, Set.compl_univ, measure_empty]
+
 /-- **J45-N1 (c), the clause the chain consumes**: "`E_S` is a proper dense … subgroup, Haar-null" — the `t`-continuous
-characters of a countable torsion-free `R` are Haar-null when they are measurable, separate the points of `R` (dense) and are
-not all characters (proper). Steinhaus–Weil in the compact connected dual. -/
-theorem contChars_haar_null [Countable R] (htf : ∀ (n : ℕ) (x : R), n ≠ 0 → n • x = 0 → x = 0) (t : TopologicalSpace R)
-    (ht : @IsTopologicalAddGroup R t _) (hmeas : MeasurableSet (contChars t))
+characters are Haar-null when they are measurable, separate the points of `R` (dense) and are not all characters (proper).
+Route on the Fourier side, with no topology on the dual and no Steinhaus–Weil: for `H = contChars t` with `m(H) > 0`, the
+Fourier coefficients of `1_H·m` vanish off `0` (translation by `h ∈ H` multiplies the `r`-th one by `h(r)`, and `H` separates
+points), so `1_H·m = m(H)·m` by Herglotz–Bochner's uniqueness, `m(H) = 1`, and a second coset would have measure `1` too. -/
+theorem contChars_haar_null (hBH : BochnerHerglotz R) (t : TopologicalSpace R) (hmeas : MeasurableSet (contChars t))
     (hsep : ∀ r : R, r ≠ 0 → ∃ χ ∈ contChars t, χ r ≠ 1) (hproper : contChars t ≠ Set.univ)
     {m : Measure (AddChar R Circle)} (hm : IsHaarFourier m) : m (contChars t) = 0 := by
   sorry

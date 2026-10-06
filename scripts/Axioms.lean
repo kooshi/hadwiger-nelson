@@ -4821,6 +4821,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.SpectralInputs.sp_only_if
 #print axioms HadwigerNelson.SpectralInputs.sp_only_if_interface
 #print axioms HadwigerNelson.SpectralInputs.contVec_id
+#print axioms HadwigerNelson.SpectralInputs.bochnerOn_bot
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.empty_aeIndependent
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio
 #print axioms HadwigerNelson.StandingFive.K_le
