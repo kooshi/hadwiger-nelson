@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–499 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–500 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -187,7 +187,12 @@ FS110-W-MERGE to [kernel]); the Proof Atlas rebuilt and committed, not published
 - **Conditional, his words** (item 489): *"if they release an HN proof, we will analyze the hell out of it."* Trigger: a published or claimed
   proof that decides the problem or moves a bound, brought by Kooshi or found by the Searcher. Then: stop launches at the next hand-backs,
   read it in full, a bibliography entry that day, and brief the lanes to analyze it against row 33 and rows 131–154. Nothing changes before.
-- FS131-MC1 lands the example maps without `stuckModel_terminal` (ruling 482); a later job proves `stuckModel.IsTerminalMap` whole.
+- **Asked of him, 2026-10-06 (item 500): two browser saves** — Weil 1948 (`https://pmc.ncbi.nlm.nih.gov/articles/PMC1079093/`, to
+  `~/source/library/pdf/pnas-1948-weil-on-some-exponential-sums.pdf`, 4 pages) and Li–Feng 1992 (`https://doi.org/10.1016/0022-314X(92)90120-E`, to
+  `~/source/library/pdf/jnt-1992-li-feng-character-sums-abelian-ramanujan-graphs.pdf`, 19 pages). When either arrives: verify by title, authors
+  and page count, update its `BIBLIOGRAPHY.md` row, and have wave 10's planner or its next job read the Kloosterman bound's page back against
+  the named hypothesis before it becomes an imported axiom (ruling 500). Default without them: the floor at the planes stays over the hypothesis.
+- The example maps landed without `stuckModel_terminal` (ruling 482); FS131-MD1 proves `stuckModel.IsTerminalMap` whole (ruling 497 (b)).
 
 - The external repositories (items 9, 105, 108–122): the outside repository's issue is written; nothing waits on it.
 - From FS-129: the order (the backlog, then FS-124) stands; the finite-graph search is held; FS-129 closes when its 32 compositions pass.

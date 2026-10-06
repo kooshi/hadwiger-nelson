@@ -5144,3 +5144,29 @@ reason by the close.*
      the whole derivation first, about three times the cost), or no deriver, the implementer's proof being the check. Why: `Fan.branch_contacts`
      carries a new claim every sector row will read, and a false leaf found by an implementer costs a job where a deriver's reading
      costs a stage; the kernel remains the second check either way. Confidence: medium-high.
+
+500. **FS131-K10b, by message mid-job, before stating the floor's import: the bound for the circle sums is a theorem of the held
+     `[MMST1996]`, false as printed at `a = 0`; Weil's own paper is not held — and the import is ruled** (source: K10b's message to
+     "main", 2026-10-06). **What it read** (the held PDF, pp. 225–232): Theorem 3, p. 231, "`|λ_b| ≤ 2q^{(n−1)/2}`, for `b ≠ 0`", with
+     Prop. 2 (p. 230) `λ_b = Σ_{d(s,0)=a} e_b(s)`; at `n = 2` exactly the sum over the circle the planes' floor needs, for every odd
+     prime power; its proof a sketch citing Carlitz 1953 and Weil's Collected Works (or `[LiFeng1992]`), neither held. **A statement
+     defect in the printed theorem**: it carries no restriction on `a`, the paper allows `a = 0` (p. 227), and at `n = 2`, `a = 0`, `−1`
+     a square, `b` isotropic, `λ_b = q − 1 > 2√q` (`q = 13`, `b = (1, 5)`: 12 against 7.21; `tools/fs131_k10b_circle.py`, float,
+     [measured], finds it at `q = 9, 13, 17, 25, 49` and no violation with `a ≠ 0` on fourteen fields). An axiom copied from the
+     printed sentence would be inconsistent. No elementary bound replaces it at 347: the fourth moment gives `(2Q³)^{1/4}`, seven only
+     from about `Q ≥ 1250`. **My receipt**: the `q = 13` case redone by hand — the circle `x² + y² = 0` over `𝔽₁₃` is the two lines
+     `y = ±5x`; on `y = 5x` the pairing with `b = (1, 5)` vanishes (`1 + 25 = 26`), contributing 13; on `y = −5x` it is `2t`,
+     contributing 0; less the origin counted twice: `λ_b = 12`. Not checked by me: its reading of pp. 225–232. **Ruling: the import is
+     Weil's Kloosterman bound over a finite field, and the completion from the circle sum to the Kloosterman sum is formalized (K10b's
+     option (β)); in this pass the bound is a named hypothesis, never an axiom, until a held source's page is read back against it.**
+     Alternative weighed: `[MMST1996]` Thm 3 at `n = 2` with our restriction `a ≠ 0` (K10b's default, (α)). Why: (α)'s read-back would
+     be against a sentence we have had to correct, with an unread sketch behind it; (β)'s axiom is the smaller and the canonical one,
+     everything between it and the floor is kernel-checked (about 250 lines over Mathlib's Gauss sums, which also kernel-check FS-20's
+     open item R4), and `LEAN.md` § Assumptions says when unsure, formalize. Confidence: high on (β) over (α); medium on a held source
+     stating the bound for prime powers soon. This refines ruling 485 (b). **The fetch, mine**: `[Weil1948]` is free at PubMed Central
+     (PMC1079093) and `[LiFeng1992]` free at its publisher (doi 10.1016/0022-314X(92)90120-E), by OpenAlex; both answered a scripted
+     fetch with a proof-of-work or challenge page (four routes tried), so by the fetch notes' rule they are **asked of Kooshi as two
+     browser saves**, with target file names; default, the planes' floor stays a theorem over the named hypothesis. **Corrections
+     owed**: `BIBLIOGRAPHY.md`'s `[MMST1996]` row — the `a = 0` defect and what was read, from K10b's draft at its hand-back; the
+     `[Weil1948]` row's "for a prime `p`" against what the floor needs (prime powers). **Credit**: K10b stopped before the axiom and
+     read the page, and found the printed theorem false in a case.
