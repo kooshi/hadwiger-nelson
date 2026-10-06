@@ -1,0 +1,13 @@
+MISMATCH  CLAUDE.md  «xo not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-close-inventory.md  «420. **FS131-IR1 handed back** (Stage 17 SAVED, harness ≈ 505k by the »
+verbatim  FS131-close-inventory.md  «421. **Rulings on IR1's held items, and its slot.** (a) **`clean` and »
+verbatim  FS131-close-inventory.md  «384. **FS131-E6 done: F6 is real, and repaired with no backlog stateme»
+verbatim  FS131-close-inventory.md  «372. **Rulings on item 371.** (a) **`ArcMap.clean` accepted** as the p»
+verbatim  Procedure.lean  «theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv »
+verbatim  Procedure.lean  «    (hhorn : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :»
+verbatim  Procedure.lean  «      (∃ m' j', m' + j' < m + j ∧ F'.HasDegree v m' ∧ F'.HasHornCount »
+verbatim  FS131-E6-derivation.md  «At a site `v` of a clean valid map with an available move, for every `»
+verbatim  FS131-limit-kernel-plan.md  «**Left 1 — `exists_vertexStep`** (`sorry`; H, two sessions). E6-ROUTE'»
+verbatim  OpenMove.lean  «theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ»
+11 quotations, 1 failures
+SELF-TEST: FIRED (good)

@@ -109,6 +109,8 @@ repeated-colour points; (3) an input map may carry one-coloured arcs; repair: `e
 
 ### 3.1 The pass, statement by statement (each: what the proof derives from; children; a missing hypothesis)
 
+*Superseded in part — see § 17.4 (FS131-IR1's corrections: the cleaned step is `cleanKeep`, not `exists_clean`; "within `3`" is within `4`; the potential is degree plus horns), and Stage 18 on for the vertex step as proved (pointer added by FS131-IR2, ruling 421 (b)).*
+
 | child | verdict | route and children |
 |---|---|---|
 | `LocalSeq.frozen` | derives **from a strengthened invariant** | `arc_origin`: every arc of `F n` lies in an arc of `F 0` or in some `U m`, `m < n` (induction on `n` by `keep`/`new`). Then `K' := ⋃ {a ∈ (F 0).arcs meeting K} ∪ ⋃ {U m meeting K}` is compact (finitely many: `(F 0).locallyFinite` on compact `K ⊆ dom`, `LocallyFinite.finite_nonempty_inter_compact`); `N` past the finitely many `n` with `U n ∩ K' ≠ ∅`; for `n ≥ N` induction on `n` (arcs meeting `K` lie in `K'`, so miss `U n`: `keep`; a new arc meeting `K` would lie in `U n` or in an arc meeting `U n`, both inside `K'`). **M** |
@@ -136,6 +138,8 @@ statement: **A** — `Limit` (the limit, locality, `exists_clean`) then `Procedu
 then `exists_vertexStep`/`exists_arcStep` after the merge with `main`. `exists_terminalSeq` last, by whoever finishes first.
 
 ### 3.3 The moves' lemmas, for the module downstream of `Moves` and `MergeMove` (ruling 372 (a); new declarations only)
+
+*Superseded in part — see § 17.4 (`shave_step_gen` is not needed; the four `LocalStep` clauses are one lemma, `surgery_localStep`) and ruling 421 (c) (new declarations may go into the moves' modules) (pointer added by FS131-IR2, ruling 421 (b)).*
 
 Each is proved by re-opening a construction, after this branch merges `main`, in `Plane/ValidMap/Procedure` (its imports then gain
 `Moves`, `MergeMove`, `UnitArc`) or a module between them; none changes a landed statement.
@@ -845,3 +849,92 @@ None: wave 5 is not at its gate, and my brief runs no gate. For the filing, when
 `exists_red` and `exists_terminal` regrade to [kernel] only after the three leaves above; nothing regrades now.
 
 ## Stage 17 — SAVED (FS131-IR1)
+
+---
+
+# FS131-IR2 — the implementer: the vertex step, `exists_vertexStep` (continuing FS131-IR1's record from its Stage 17)
+
+*de Bruijn, the implementer (Opus), on branch `fs131-w5c` from `ebb0b292`. Brief: `data/fs131/briefs/FS131-IR2-vertex-step.md` (main tree), with its
+dated amendment (inventory items 422–423).*
+
+## Theorems this phase proved (FS131-IR2)
+
+Each [kernel] on `[propext, Classical.choice, Quot.sound]` or a subset, read against the build of the stage that names it; the list is kept current
+at each saved stage (the last stage's receipt is the one to read).
+- **Stage 19 — the potential under a step** (`Plane/ValidMap/Procedure`, section "Comparing the sectors of two maps at a point"):
+  `ArcMap.IsSector.eq_of_inter_nonempty`, `.encard_le_of_forall_exists_subset`, `.IsSector.hornSet_of_subset`, `.encard_sectors_le_aux`,
+  **`.pot_le_of_sectors`**, **`.pot_lt_of_sectors`**, `.exists_isSector_subset`, `.exists_isSector_ne_subset`, **`.pot_lt_of_interior`**,
+  `.interiorPts_subset_cleanKeep`, **`.cleanKeep_pot_le`**, `.hasRepeatedColour_of_cleanKeep`, **`.not_isSite_cleanKeep`**;
+  `BranchGerms.next_ne_self`.
+- Later stages add their lines below as they are saved.
+
+## Stage 18 — SAVED (FS131-IR2): the readback, the as-given build, the ruled restatement (inventory item 423)
+
+### 18.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_ir_quotes.py` (IR1's checker, run unchanged) on the brief as launched: **11 quotations, 0 failures**
+(`data/fs131/ir/ir2/quotes.txt`); `--self-test` (one letter planted in the first quotation): **fired**, 1 failure
+(`quotes-selftest.txt`). On the brief with its amendment (three quotations more: items 422, 423, `covers_of_isPlaneMap`): **14 quotations,
+0 failures** (`quotes-amended.txt`). No mismatch.
+
+Read in full: the brief and its amendment; `plans/STANDING-RULES.md`; `LEAN.md`; `RUNNING.md` §§ Building, Make the gate fail; this record's
+Stages 12–17 (IR1); E6's derivation §§ 4.1–4.5; inventory items 372, 420–423; `Procedure.lean`'s cleaning section, the two steps and
+`exists_procStep`; `Basic.lean`'s definitions; `Limit.lean`'s `LocalStep`, `IsClean`, `IsSite`, `not_isSite_of_goodAt`,
+`germ_eq_curveGerm_of_goodAt`; `Surgery.lean`'s `Near`, `newArcs`, `move`; `Moves.lean`'s three assemblies and `RayConfig.exists_merge`;
+`MergeMove.lean`'s `mergeArcs`, `mergeCol`, `exists_gap` and the `merge_*` clauses' statements; `OpenMove.lean`'s outline and `exists_open`;
+`LocalStructure.lean`'s `IsSectorChart`, `GoodAt`, `curveAt`, `curveGerm`; `Sectors.lean`'s chart lemmas.
+
+### 18.2 The as-given build (`ebb0b292`) and IR1's axioms check, re-run
+
+`/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before
+any edit: **OK — all 1785 modules already up to date, nothing built, 5 modules with warnings**, exit 0, 2 s
+(`build/gate/build/20261006T040301Z-811757.log`; driver log `data/fs131/ir/ir2/build-stage18-asgiven.log`). IR1's
+`data/fs131/ir/IRAxiomsFinal.lean` re-run (`slot.py --mem 12 --cpus 2 -- lake env lean`, exit 0 → `ir2/IRAxiomsFinal-rerun.out`) and read by
+`tools/fs131_ir_axsum.py` with Stage 17's expectation list: **48 records — 40 on the standard three or fewer, 8 through `sorryAx`, exactly the
+eight expected, 0 other; PASS** (`ir2/IRAxiomsFinal-rerun-summary.txt`). The summarizer's `--self-test`: four plants, each FIRED, the
+control PASS (`ir2/axsum-selftest.txt`).
+
+### 18.3 The ruled restatement of `exists_vertexStep` (inventory items 422–423; the third repair to this statement)
+
+By the coordinator's message and the brief's amendment (FS131-QA4's finding: the step assumed `v ∈ F.dom` where each of the four moves it
+composes assumes `F.Covers v 1`). The statement's diff, beside IR1's of Stage 14 (`data/fs131/ir/ir2/restate-423.diff`; the file before it is
+`ir2/Procedure-before-423.lean`):
+
+```
+-theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : v ∈ F.dom)
++theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Covers v 1)
+```
+
+and its one call, in `exists_procStep`:
+
+```
+-      exists_vertexStep hG.valid hG.clean (hGd t) hmv hdeg hhorn hδ0
++      exists_vertexStep hG.valid hG.clean (covers_of_isPlaneMap hG.plane t 1) hmv hdeg hhorn hδ0
+```
+
+The docstring's first sentence now names the covering hypothesis. Nothing else changed: `exists_arcStep`, `exists_terminalSeq`,
+`exists_terminalMap` are as IR1 left them. `tools/fs131_il_stmt_check.py ebb0b292` (IL2's, run): **exactly one statement changed,
+`exists_vertexStep`** (exit 1, as it must be; `ir2/stmt-check-18.txt`).
+
+**Build** of this stage (slot 40 GiB, 8 cpus, `BATCH=4`): see § 18.5.
+
+### 18.4 What I may and may not change (the brief's `touches`, § What is yours to decide, ruling 421 (c))
+
+**May**: prove `exists_vertexStep` and add children beside it in `Procedure`; add **new declarations only** to `Moves`, `MergeMove`,
+`OpenMove`, `Surgery` (named forms that expose an assembly's map and radius, or a `private` helper made public); supporting lemmas in
+`FlankUA`; a module between the moves and `Procedure` (with `Proofs.lean` and `ARCHITECTURE.md`); a block "FS131-IR2" in
+`scripts/Axioms.lean` above `=== PURCHASED ===`; `tools/fs131_ir_*.py`, `data/fs131/ir/`, this record, the report. **May not**: change any
+statement or definition (the ruled restatement above apart); touch `exists_arcStep`'s, `exists_terminalSeq`'s or `exists_terminalMap`'s
+statement; edit `Terminal.lean`, `Limit.lean`, `BaseDense`, `BendCollar`, `HexRing`, `main`; merge anything into this branch; run the gate;
+add an `axiom` or a `native_decide`; edit a file while a build of it runs.
+
+### 18.5 Pointers added (ruling 421 (b)) and the stage's build
+
+One-line pointers to § 17.4 at the heads of §§ 3.1 and 3.3 of this record (KL1's text, left standing below them).
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 6 modules rebuilt, 5 with warnings, all 8 warnings `declaration uses
+'sorry'`** (`Procedure` at `exists_vertexStep` l. 796 and `exists_arcStep` l. 813; `Terminal` at `stuckRun_ne_univ`; `BaseDense` 3,
+`BendCollar` 1, `HexRing` 1, none mine), 8 min 55 s, exit 0 (`build/gate/build/20261006T041511Z-859027.log`; driver log
+`data/fs131/ir/ir2/build-stage18.log`).
+
+## Stage 18 — SAVED (FS131-IR2)

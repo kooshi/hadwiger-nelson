@@ -780,7 +780,8 @@ theorem surgery_cleanKeep_localStep (hc : F.IsClean) {v : ℂ} {ρ : ℝ} {A : S
 /-! ## The two steps (the strengthened moves, cleaned) -/
 
 /-- **The vertex step** (FS131-E6-ROUTE: MERGE; else MERGE-RAY; else SHAVE where the horn's colour has an allowed cone with empty
-interior; else OPEN — each followed by `exists_clean`): at a point of a clean valid map where a move is available, for every bound
+interior; else OPEN — each followed by `exists_clean`): at a point of a clean valid map whose closed unit disc lies in the domain
+(`F.Covers v 1`, what each of the four moves takes — inventory item 423) and where a move is available, for every bound
 `δ > 0`, a clean valid modification that is a local step on `B̄(v, ρ)`, `ρ < δ`, in which `v`'s **potential — its degree plus its
 number of horns — drops**, `v` gains no colour, and no other point of the disc is a site. The degree alone need not drop: at
 FS131-E6's twelve-colour model (a lone horn shaveable only along a unit circle) no local step lowers it (E6-NODROP), and OPEN removes
@@ -792,7 +793,7 @@ drops the kept germs that now have one colour on both sides and the one-coloured
 SHAVE raises `v`'s degree); `LocalStep` is read off each construction's `surgery` (`trimArcs_spec`) and survives the cleaning
 (`LocalStep.cleanKeep`). No Lean model of the hypotheses is on file (a clean valid map with a move
 available at a point): FS131-E6's twelve-colour map (derivation §§ 3.1–3.3) satisfies them at [hand] grade, as `exists_open`'s note says. -/
-theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : v ∈ F.dom)
+theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Covers v 1)
     (hav : F.MergeAvailable v ∨ F.RayAvailable v ∨ F.ShaveAvailable v) {m j : ℕ} (hdeg : F.HasDegree v m)
     (hhorn : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :
     ∃ ρ, 0 < ρ ∧ ρ < δ ∧ ∃ F' : ArcMap k, F'.Valid ∧ F'.IsClean ∧ LocalStep F F' (closedBall v ρ) ∧ F.IsModification F' ∧
@@ -1076,7 +1077,7 @@ theorem exists_procStep (hP : F.IsPlaneMap) (hc : F.IsClean) (f : ℂ → ℕ) {
       · push Not at hx1
         exact lt_of_le_of_lt (min_le_left _ _) (by linarith)
     obtain ⟨ρ, hρ0, hρδ, G', hV, hC, hstep, hmod, ⟨m', j', hlt, hdeg', hhorn'⟩, hcol, hsite⟩ :=
-      exists_vertexStep hG.valid hG.clean (hGd t) hmv hdeg hhorn hδ0
+      exists_vertexStep hG.valid hG.clean (covers_of_isPlaneMap hG.plane t 1) hmv hdeg hhorn hδ0
     have hUc : IsClosed (closedBall t ρ) := isClosed_closedBall
     have hoff : ∀ x ∈ F.treatPts, x ≠ t → x ∉ closedBall t ρ := fun x hx hxt hxb => by
       have := hδT x hx hxt; rw [mem_closedBall] at hxb; linarith

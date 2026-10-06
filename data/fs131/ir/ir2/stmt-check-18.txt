@@ -1,0 +1,2 @@
+CHANGED Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean exists_vertexStep
+RESULT: FAIL (1)
