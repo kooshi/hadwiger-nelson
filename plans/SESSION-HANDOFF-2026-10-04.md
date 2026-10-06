@@ -1,10 +1,12 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
-*Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–383 at this writing; its first two sections are the rules
+*Rewritten 2026-10-06 by Keryx after the restart (inventory items 407, 410). Current state only. A successor arriving with nothing
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–411 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **383**.
+> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **411**. Kooshi restarted the work,
+> ("forge ahead as normal with 3 subagents"). `/tmp` is a tmpfs: the pre-halt scratch is
+> in `/home/kooshi/source/lean-dir-tmp-rescue-2026-10-05/tmp/` (item 407), and a record citing `/tmp/claude-1000/…` reads it there.
 >
 > **Held in the kernel, on `main`**: **MERGE** (item 375: `main` at `ca4dcfa2`, gated `df473bfe`, counts filed, item 376 — 3,807 records, 3,784 clean); waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -13,14 +15,30 @@ that judge the milestone, written before any job).*
 > three run now, and every slot that frees from here is refilled from the queue.
 >
 > **Running (3)** — each reports to "main" by hand-back; its report file is on its branch:
-> - **FS131-IL2** (`fs131-w5c`): lane A finished — `exists_clean`, the three finiteness lemmas (with `hP`), `mergeAvailable_of_bothKind`. Brief
->   `data/fs131/briefs/FS131-IL2-limit.md`.
-> - **FS131-M5** (`fs131-w5`): `main` merged into `fs131-w5` (wave 4, Woodall, MERGE brought in; `framePt → fromFrame` in wave 5's files), then four short
->   children of `exists_preBend`. Brief `data/fs131/briefs/FS131-M5-sync.md`.
-> - **FS131-E6** (Ephodos, main tree): F6 — can a lone horn, shaveable only at `σ = ±1`, occur where the terminal procedure meets it; claim list
->   `data/fs131/claims-E6.md`. Brief `data/fs131/briefs/FS131-E6-shave.md`.
+> - **FS131-CC2** (`fs131-w5k`): the collar bend's lane C, continued — merge `origin/fs131-w5` in, then `map_degree_lensCurve`, the hard pair
+>   (`map_degree_end` with `exists_collarFit`'s C4), `sides_end`, B0 `collarModel`; fix `tools/fs131_cc_stmt.py`. Brief
+>   `data/fs131/briefs/FS131-CC2-collar.md`. On its hand-back: fast-forward `fs131-w5` to `fs131-w5k` (Keryx's word).
+> - **FS131-IR1** (`fs131-w5c`): the procedure's last steps — merge `a20bb6f5` (OPEN) in, restate `exists_vertexStep` (degree + horns) and `exists_arcStep`
+>   (horn clause), then `horn_bounds_of_interior_empty`, `exists_vertexStep`, `stuckRun_ne_univ`, `exists_terminalSeq`, `exists_arcStep` (over a `sorry`
+>   child `bend_away_part` if it needs the tangent bend, item 411 (e)). More than one session: expect a successor. Brief
+>   `data/fs131/briefs/FS131-IR1-procedure.md`.
+> - **FS131-OL1** (`fs131-wop`): OPEN's landing on `main` — merge `main`, the full gate, fast-forward, drafts for the filing. Brief
+>   `data/fs131/briefs/FS131-OL1-open-land.md`. **On its hand-back**: read the saved gate logs, run `scripts/gate_report.py axioms|vacuity`, file the counts
+>   (`CLAUDE.md` § Trust ledger and § The gate, `GATE_CHANGES`), run the fact audit before committing, `git pull --ff-only` in the main tree first.
 >
-> **Done since the compaction**: **FS131-IL1** (item 381: the limit proved — validity, modification and terminality pass to it); **E6's mid-job finding**
+> **Done at the halt**: **FS131-CC1** (item 405: `Pushforward` free of `sorry`; four leaves and B0 left; rulings 406); **FS131-IO3** (item 408: **OPEN held**
+> on `fs131-wop` at `a20bb6f5`; ruling 409).
+>
+> **Queue for the next freed slot**: (1) the freed lane's continuation if it left leaves on wave 5's path (IR1's will); (2) the rest of the queue
+> paragraph below, from its item (4).
+>
+> **Done since the compaction**: **FS131-CG1** (item 402: the collar's lane G complete — `RadialPush`, `CollarMap` free of `sorry`); **FS131-IO2** (items 400–401: four of OPEN's five leaves in the kernel; `margin` and `ray0` repairs made); **FS131-M6** (items 398–399: **`fs131-w5` merged into `fs131-w5c`**; `run_hornBoundsQR` in the kernel; `stuckRun_ne_univ`
+> left); IO2's second finding (item 397: `OpenConfig` gains `ray0`); CG1's move commit `2736ab8c` (item 396); **FS131-KP2** (item 394: the collar bend planned — 53 children, about 4,750 lines, lanes G and C; the bent map as `F`'s
+> pushforward); IO2's finding (item 393: `OpenConfig` gains a clear margin); **FS131-IO1** (items 391–392: OPEN's statement settled (lone form kept), its configuration and four clauses in the kernel;
+> five leaves left); **FS131-IL2** (items 388–389: **the limit's lane A complete** — `Limit` free of `sorry`; `exists_clean`, the finiteness lemmas,
+> `mergeAvailable_of_bothKind` in the kernel); **FS131-M5** (items 386–387: **`main` merged into `fs131-w5`** — wave 4's stale leaves now standard there; three `exists_preBend`
+> children proved; `fs131-w5c`'s merge with `main` owes the same rename and dupes check); **FS131-E6** (items 384–385: F6 realized at an exact model; E6-OPEN, E6-ROUTE derived; `exists_vertexStep` and
+> `exists_arcStep` restated as children; three errata held for the filing); **FS131-IL1** (item 381: the limit proved — validity, modification and terminality pass to it); **E6's mid-job finding**
 > (items 382–383: **F6 realized** at an exact model; a fifth move OPEN repairs `exists_vertexStep`, no backlog statement changes; its degree clause held);
 > **FS131-KB2** (items 378–379: `bend_toward_collar` landed; `exists_preBend` over it and six children; the construction designed,
 > 3,000–4,000 lines, needs `main`'s cut engine); **FS131-ML1** (items 375–376: **MERGE landed on `main`**; wave 5's landing now waits on wave 5 alone); **FS131-KL1** (items 371–374: the limit constructions planned over one `exists_terminalMap`; `ArcMap.clean` repairs the
@@ -49,13 +67,12 @@ that judge the milestone, written before any job).*
 > `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'`; the axioms print parsed by script from the job's data file; one statement read back); log the item; rule the
 > slot per item 323. **At each landing** (as WL1's, items 326–327): read the saved gate logs, file the drafts with `scripts/gate_report.py axioms|vacuity` and `tools/claude_md_fact_audit.py --base <last CLAUDE.md commit>` run **before** committing, push notify Kooshi.
 >
-> **Queue for the next freed slot (items 374, 377, 379, 383)**: the freed lane's own continuation if on wave 5's path; **OPEN's construction** (after E6's
-> derivation: a one-sector wedge-opening, likely over `MergeMove`) and `exists_vertexStep`'s restatement; after M5, **the collar construction's planner
-> FS131-KP2** (KB2's D1 design, record § 44.3; on a branch cut from `fs131-w5`) and the remaining two `exists_preBend` children (`finite_maxRingArcs`,
-> `maxRingArcs_subset_of_bend`); **lane B of the limit** (`Terminal`'s `run_hornBoundsQR`,
-> `stuckRun_ne_univ`, then `exists_vertexStep`/`exists_arcStep` after `main` merges in; on a branch cut from `fs131-w5c`); **`bv_l3`'s move and proof** (to
-> `BaseWalk` after `l3_base`, item 370 (a)); then **`bend_away`'s implementer** (branch `fs131-w4ba` at
-> `71cca146`; E5 § 4 — e5-claim-e and e5-end-cap — its route; lands on its own); then **`disc1_local`** (planar, after `fs131-w5p` merges back into `fs131-w5`).
+> **Queue for the next freed slot (items 383, 385, 389, 395)**, in order: (1) the freed lane's own continuation if on wave 5's path; (2) **`stuckRun_ne_univ` and the
+> procedure's last steps** on `fs131-w5c` (`exists_vertexStep` and `exists_arcStep` restated, items 383 (b), 385 (a); the moves' new lemmas, KL1's plan
+> § 3.3; OPEN merged in from `fs131-wop` once IO2 lands it; `exists_terminalSeq`); (4) **the remaining three `exists_preBend` children** (`hfree_of_baseHyp`,
+> `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`) **with `bv_l3`'s move and proof** (to `BaseWalk` after `l3_base`, item 370 (a)), on a branch cut from
+> `fs131-w5` (disjoint from the collar's files); then `bend_away`'s implementer (branch `fs131-w4ba` at `71cca146`, E5 § 4; lands on its own); and the tidy
+> moves of item 387 (a) after wave 5 lands.
 >
 > **Merges ahead** (MERGE lands on `main` before wave 5's landing, or merges into wave 5 at it — item 348 (b)): `fs131-w5t` → `fs131-w5p` (IP4, by amendment); then `fs131-w5p` → `fs131-w5` and `fs131-w5c` → `fs131-w5` on Keryx's word when their
 > jobs finish (disjoint files except `BaseWalk`, edited on `fs131-w5` and `fs131-w5p` in different declarations, item 330; one `scripts/Axioms.lean` block each); then wave 5's landing job (merge `main`, `framePt → fromFrame` in `FlankUA` and the
@@ -110,13 +127,13 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (3, at the cap; items 323, 325, 329)
+## 3. Running now (3; items 410–411)
 
 | job | model | brief | reports to |
 |---|---|---|---|
-| FS131-IL2 (lane A finished on `fs131-w5c`; items 381–383) | Opus | `data/fs131/briefs/FS131-IL2-limit.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-IL2.md` |
-| FS131-M5 (`main` into `fs131-w5`; four `exists_preBend` children; items 378–379) | Opus | `data/fs131/briefs/FS131-M5-sync.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-M5.md` |
-| FS131-E6 (Ephodos: F6, SHAVE's residual case; items 374, 377) | Opus | `data/fs131/briefs/FS131-E6-shave.md` | `data/fs131/reports/FS131-E6.md` (main tree) |
+| FS131-CC2 (the collar bend's lane C on `fs131-w5k`) | Opus | `data/fs131/briefs/FS131-CC2-collar.md` | branch `fs131-w5k`'s `data/fs131/reports/FS131-CC2.md` |
+| FS131-IR1 (the procedure's last steps on `fs131-w5c`) | Opus | `data/fs131/briefs/FS131-IR1-procedure.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-IR1.md` |
+| FS131-OL1 (OPEN's landing, on `fs131-wop` then `main`) | Opus | `data/fs131/briefs/FS131-OL1-open-land.md` | branch `fs131-wop`'s `data/fs131/reports/FS131-OL1.md` |
 
 
 **Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.
