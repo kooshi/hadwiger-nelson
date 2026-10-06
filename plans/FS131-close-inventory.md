@@ -6666,3 +6666,72 @@ reason by the close.*
      sites and one `WITNESSED`, no `VACUOUS` control plantable). Why OUT: the procedure's law as wave 5 applied it;
      the one exception already made is a question for the tooling lane (ruling 535 (a)), and `Fan` joins it as the
      second case. Confidence: medium.
+
+558. **FS131-L6A done: wave 6's first half is on `main` through the full gate — `aed29ad4..409b0877`, a fast-forward; gated
+     commit `7e67af3b`; exempt paths only after it. The deriver's bridge is in the kernel** (implementer, Opus; harness
+     584k and 69 minutes by the task notice — past the line; record `plans/FS131-L6A-landing.md` Stages 1–6 with drafts;
+     report `data/fs131/reports/FS131-L6A.md`; receipts `data/fs131/l6a/`, tag `first`). **Landed**: the fourteen modules
+     of `Plane/Saturated/` that the wave's first two planning passes and five implementers wrote — 363 hand-written
+     theorems, 0 `sorry`; the rows FS111-M-PINCH, -M-C11 (i)(iii), -M-HALF, FS121-D3-FALLSAT, -V2-EROSION-DIAM,
+     -C1-BOUND, -C1-GMAP, -C1-SAT, -V5-OFF, -V5-LOC (i)(ii), -V2-SECTOR, -DB1-L3; and FS131-E8's entries —
+     `AeColouring.fan_of_isolated`, **`regJFan_of_saturated`** ("a saturated colouring whose singular set is locally
+     finite has a fan at every singular point"), `regJFan_iff_singLocallyFinite`, `regJLiteral_of_saturated`,
+     `finite_arcs_of_isBounded`, `gamma`, `beta`, `alpha`, `local_graph`, and the five `Fan` lemmas. **The join is
+     whole**: no declaration rests on `sorryAx`; the 46 records that printed it on their own branches print the
+     standard three. **Not proved and not claimed**: that the singular set of every honest saturated colouring is
+     locally finite (C121-REGJ); `NoPar` at any class (`gmap_ii` and `sat_noPar` take it as a named open statement);
+     the third pass's 34 leaves; no value of χ moved. **The gate on `7e67af3b`, every step exit 0**: build 0
+     warnings; `sorry` 0; doubled names OK; axioms 6,174 records — 6,148 clean, 17 axiom-free, 4 imported, 5
+     purchases; vacuity `declarations=14299 refutations-skipped=199 sites=1269`, `vacuous=0 stale=0 declared=3
+     witnessed=38 generic=1226 unknown=2`; architecture, lint, notes, records checks pass. **My receipt**: `main` =
+     `origin/main` = `e618ee65` at the hand-back; `git diff --name-only 7e67af3b HEAD` outside `plans/`, `data/`,
+     `LEAN.md`: empty; the gate's head file names `HEAD=7e67af3b…`, its pass summary reads exit 0 at all seventeen
+     steps; `sorry` by the handoff's grep over `Proofs/` on `main`: 0; `build-main-full.log` ends "Build completed
+     successfully (5828 jobs)"; `scripts/gate_report.py axioms` and `vacuity` run by me against wave 10's first
+     landing's receipts — 365 records added and 0 removed, every one CLEAN (364 on exactly the three, `sq9_pred_ne`
+     on two), `fan_of_isolated`, `regJFan_of_saturated`, `local_graph`, `pinch`, `sat_inP`, `Fan.sector_alone` each
+     on exactly the three, `vacuous=0`, each recorded count "STALE" before the filing and "match" after. Not checked
+     by me: its 1,234 statement comparisons (textual, item 556's blind class — harmless for proved theorems); the
+     heads' kernel statements by `#check`; its three-way line check of the merged files. **Filed** (commit `df61d748`):
+     `CLAUDE.md` § Trust ledger and § The gate, the `GATE_CHANGES` entry; `tools/claude_md_fact_audit.py --base
+     c6990ba5` loses the twelve superseded tokens only, `--dupes` exit 0. **Open gate items it lists** (its draft 6,
+     one mind): `gmap_i` has no Lean model of its hypotheses and no note; five refutations inside proofs carry no
+     "no model expected" note; `bound_iff`'s owed example; two of `Pinch`'s models are words. **A whiff it raises**:
+     the third planner's "FS111-M-PINCH reads no disjointness" against the first implementer's "`disj` is read in the
+     (out, out) cell" — bears on the open leaf `pinch_of_cover` (told to K6d at launch; for FS131-I6L's brief).
+     **A correction to my brief**: "adjacent additions: keep every side" was wrong for one `ARCHITECTURE.md` hunk
+     (two rows each rewritten on one side); it resolved by row and its check has a plant for it. **Slips, the job's,
+     seven, disclosed.** **Credit**: one clean pass of the gate, the join's central question answered with every
+     record named, and a brief's instruction found wrong and repaired with a control. **Rulings.** (a) **The front
+     page's REG-J′ sentence (its draft 10) is filed at the milestone's filing**, with E8's drafts (ruling 492 (a),
+     (c)) — the bridge is in the kernel now, and what the kernel does not hold is said there. (b) The open gate
+     items and the two tidy moves are one tidy job after the wave's second landing (its draft 9). (c) Slots: item
+     559.
+
+559. **FS131-IF1 done: Falconer's lemma is a theorem — the library declares no `axiom` from outside on that branch; the
+     candidate route held at every step** (implementer, Opus; harness 338k and 44 minutes by the task notice; record
+     `fs131-wf1`'s `plans/FS131-IF1-implementation.md`; report `data/fs131/reports/FS131-IF1.md`; five commits, tip
+     `a61f0d14`; pushed, tree clean). **Proved on the standard three**: `falconer_lemma2_nonempty`, same name, binders
+     and conclusion; `exists_not_tendsto_ratio_and_compl` — the lemma in every finite dimension, any norm, any
+     additive Haar measure, null-measurable sets (new module `Plane/MetricalBoundary`, 338 lines, Mathlib imports
+     only); `exists_ratio_ge_and_compl_ge` — a quantitative form not in the paper (a point and radii tending to 0 at
+     which the set and its complement both have ratio at least `1/(2·2^dim)`); thirteen children. The four theorems
+     that rested on the axiom move from IMPORTED to CLEAN, statements untouched. **The route** (item 550, mine):
+     accepted at every step after its attack; one change — the intermediate value on the convex ball of allowed
+     centres, not on a segment. **My receipt**: tip `a61f0d14` equals `origin/fs131-wf1`, tree clean; the statement's
+     `git diff` is the keyword, `:=` and a one-line proof term — read; outside `data/`, `plans/`, `tools/` it changed
+     `FalconerReduction.lean` (31 lines), the new module, `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`,
+     and `scripts/axioms-controls.txt`; `grep '^axiom '` over its `Proofs/`: only the native-evaluation example;
+     `sorry`: 0; its saved audit: "5825 records — 5803 clean … 0 imported", "declared imports (0): none". Not checked
+     by me: the proof beyond the build and the audit; its self-test's red-before and green-after logs. **Prediction
+     scored**: ruled "more than an hour" at wave 2 (item 93); 44 minutes. **Prior-art debt, its own words**: not
+     compared with Croft's lemma (unheld); the classical statement (the density topology is connected) recalled, not
+     read; nothing claimed new, and no search made. **Rulings.** (a) **Its edit of `scripts/axioms-controls.txt` is
+     ratified** — the self-test's expected counts live there, not in the wrapper my brief named; a slip of my
+     brief's. (b) **`fs131-wf1` is merged by wave 10's second landing**, with the three collision points it names
+     (the IMPORTED section, `ARCHITECTURE.md` § 5's table, the control lines — its commit `082f86c9` is the
+     pattern): after that landing the library declares one outside axiom, Weil's bound, and eight imported records.
+     (c) The bibliography's lines (the `[Falconer1981]` row; the Croft debt) are filed with that landing, from its
+     drafts. (d) **Slots → FS131-K6d** (wave 6's fourth planner: it merges the landed `main` first) **and FS131-I8A**
+     (wave 8's empty class), launched 2026-10-06. In flight: 3 (I7A, K6d, I8A) + the special-purpose slot (T5).
+     **Next into a free slot: FS131-L10B** — brief not written.
