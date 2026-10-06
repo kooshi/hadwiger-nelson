@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.OpenMove
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
+import Proofs.HadwigerNelson.Plane.ValidMap.BrickMap
 import Proofs.HadwigerNelson.Plane.Woodall.Steps
 
 /-!
@@ -259,59 +260,48 @@ theorem brickBase_region_spare {k : ℕ} (h : 7 ≤ k) {j : Fin k} (hj : 7 ≤ (
   simp only [Fin.val_castLE] at hj
   omega
 
-/-- The floors of a point strictly inside the brick of column `c` and row `r`: the row is `r` and the column `c`. -/
-theorem brick_floor_eq {c r : ℤ} {z : ℂ}
+/-- A point strictly inside the brick of column `c` and row `r`, in the coordinates this lane's statements use, is a point of wave 5's
+open cell `brickCell c r` (`Plane/ValidMap/BrickMap`): the two forms differ in `4/5 * (c + 1)` against `4/5 * c + 4/5`. -/
+theorem mem_brickCell_of_coords {c r : ℤ} {z : ℂ}
     (hre : 2 / 5 * (r : ℝ) + 4 / 5 * c < z.re ∧ z.re < 2 / 5 * (r : ℝ) + 4 / 5 * (c + 1))
-    (him : 3 / 5 * (r : ℝ) < z.im ∧ z.im < 3 / 5 * ((r : ℝ) + 1)) :
-    ⌊z.im / (3 / 5)⌋ = r ∧ ⌊(z.re - 2 / 5 * r) / (4 / 5)⌋ = c := by
-  constructor
-  · rw [Int.floor_eq_iff]
-    constructor
-    · rw [le_div_iff₀ (by norm_num)]; linarith [him.1]
-    · rw [div_lt_iff₀ (by norm_num)]; linarith [him.2]
-  · rw [Int.floor_eq_iff]
-    constructor
-    · rw [le_div_iff₀ (by norm_num)]; linarith [hre.1]
-    · rw [div_lt_iff₀ (by norm_num)]; linarith [hre.2]
+    (him : 3 / 5 * (r : ℝ) < z.im ∧ z.im < 3 / 5 * ((r : ℝ) + 1)) : z ∈ brickCell c r :=
+  mem_brickCell.mpr ⟨⟨hre.1, by linarith [hre.2]⟩, him.1, by linarith [him.2]⟩
 
-/-- No integer lies strictly between two consecutive integers. -/
-theorem not_int_between {a n : ℤ} (h1 : (a : ℝ) < n) (h2 : (n : ℝ) < a + 1) : False := by
-  have h1' : a < n := by exact_mod_cast h1
-  have h2' : n < a + 1 := by exact_mod_cast h2
-  omega
+/-- **The base colour of a cell is `(c + 3 r) mod 7`** (`sevenBrick_col_val`, read in `Fin k`). Inhabitant of the hypothesis: any point
+of a cell, e.g. `plantPt` in `brickCell 0 0` (`brickBase_col_zero`). -/
+theorem brickBase_col_val {k : ℕ} (h : 7 ≤ k) {c r : ℤ} {z : ℂ} (hz : z ∈ brickCell c r) :
+    ((brickBase k h).col z : ℕ) = ((c % 7).toNat + 3 * (r % 7).toNat) % 7 := by
+  show ((Fin.castLE h (sevenBrickMap.col z) : Fin k) : ℕ) = _
+  rw [Fin.val_castLE, sevenBrick_col_val hz]
 
 /-- **A point strictly inside a brick is an interior point of the base**: the brick of column `c` and row `r` is
-`(2r/5 + 4c/5, 2r/5 + 4(c + 1)/5) × (3r/5, 3(r + 1)/5)`. (Wave 5's `Plane/ValidMap/BrickMap` states this with `brickCell`; this form needs
-nothing that is not on `main`.) -/
+`(2r/5 + 4c/5, 2r/5 + 4(c + 1)/5) × (3r/5, 3(r + 1)/5)`, wave 5's `brickCell c r` (`sevenBrick_mem_interiorPts`). -/
 theorem brickBase_mem_interiorPts {k : ℕ} (h : 7 ≤ k) {c r : ℤ} {z : ℂ}
     (hre : 2 / 5 * (r : ℝ) + 4 / 5 * c < z.re ∧ z.re < 2 / 5 * (r : ℝ) + 4 / 5 * (c + 1))
     (him : 3 / 5 * (r : ℝ) < z.im ∧ z.im < 3 / 5 * ((r : ℝ) + 1)) : z ∈ (brickBase k h).interiorPts := by
-  obtain ⟨hfr, -⟩ := brick_floor_eq hre him
-  refine ⟨mem_univ z, not_mem_sevenBrickArcs (fun n hn => ?_) (fun n hn => ?_)⟩
-  · exact not_int_between (a := r) (n := n) (by nlinarith [him.1]) (by nlinarith [him.2])
-  · rw [hfr] at hn
-    exact not_int_between (a := c) (n := n) (by nlinarith [hre.1]) (by nlinarith [hre.2])
+  show z ∈ sevenBrickMap.interiorPts
+  exact sevenBrick_mem_interiorPts.mpr ⟨c, r, mem_brickCell_of_coords hre him⟩
 
 /-- **Two points strictly inside one brick have one base colour.** -/
 theorem brickBase_col_eq {k : ℕ} (h : 7 ≤ k) {c r : ℤ} {z z' : ℂ}
     (hre : 2 / 5 * (r : ℝ) + 4 / 5 * c < z.re ∧ z.re < 2 / 5 * (r : ℝ) + 4 / 5 * (c + 1))
     (him : 3 / 5 * (r : ℝ) < z.im ∧ z.im < 3 / 5 * ((r : ℝ) + 1))
     (hre' : 2 / 5 * (r : ℝ) + 4 / 5 * c < z'.re ∧ z'.re < 2 / 5 * (r : ℝ) + 4 / 5 * (c + 1))
-    (him' : 3 / 5 * (r : ℝ) < z'.im ∧ z'.im < 3 / 5 * ((r : ℝ) + 1)) : (brickBase k h).col z = (brickBase k h).col z' := by
-  obtain ⟨h1, h2⟩ := brick_floor_eq hre him
-  obtain ⟨h1', h2'⟩ := brick_floor_eq hre' him'
-  show Fin.castLE h (sevenBrickMap.col z) = Fin.castLE h (sevenBrickMap.col z')
-  rw [sevenBrick_color_eq h1 h2, sevenBrick_color_eq h1' h2']
+    (him' : 3 / 5 * (r : ℝ) < z'.im ∧ z'.im < 3 / 5 * ((r : ℝ) + 1)) : (brickBase k h).col z = (brickBase k h).col z' :=
+  Fin.ext ((brickBase_col_val h (mem_brickCell_of_coords hre him)).trans (brickBase_col_val h (mem_brickCell_of_coords hre' him')).symm)
 
-/-- **The base colour of the brick `(0, 4/5) × (0, 3/5)` is `0`** (the corner's upper right cell, `sevenBrick_corner_col`). -/
+/-- **The base colour of the brick `(0, 4/5) × (0, 3/5)` is `0`** (the cell `(0, 0)`: `(0 + 3 · 0) mod 7`). -/
 theorem brickBase_col_zero {k : ℕ} (h : 7 ≤ k) {z : ℂ} (hre : 0 < z.re ∧ z.re < 4 / 5) (him : 0 < z.im ∧ z.im < 3 / 5) :
     ((brickBase k h).col z : ℕ) = 0 := by
-  obtain ⟨h1, h2⟩ := brick_floor_eq (c := 0) (r := 0) (z := z) (by push_cast; constructor <;> linarith [hre.1, hre.2])
-    (by push_cast; constructor <;> linarith [him.1, him.2])
-  have h0 : sevenBrick.table (zmodIdx 7 (by norm_num) 0) (zmodIdx 7 (by norm_num) 0) = 0 := by decide
-  show ((Fin.castLE h (sevenBrickMap.col z) : Fin k) : ℕ) = 0
-  rw [sevenBrick_color_eq h1 h2, h0]
+  have hz : z ∈ brickCell 0 0 :=
+    mem_brickCell.mpr ⟨⟨by push_cast; linarith [hre.1], by push_cast; linarith [hre.2]⟩, by push_cast; linarith [him.1],
+      by push_cast; linarith [him.2]⟩
+  rw [brickBase_col_val h hz]
   rfl
+
+/-- The squared distance of two points of the plane, in coordinates (the form the models' real inequalities read). -/
+theorem dist_sq_coords (z w : ℂ) : dist z w ^ 2 = (z.re - w.re) ^ 2 + (z.im - w.im) ^ 2 := by
+  rw [Complex.dist_eq_re_im, Real.sq_sqrt (by positivity)]
 
 /-- The planted vertex: the centre `2/5 + (3/10) i` of the brick `(0, 4/5) × (0, 3/5)`. -/
 noncomputable def plantPt : ℂ := 2 / 5 + 3 / 10 * I

@@ -2728,7 +2728,9 @@ bounds in `[−1, 1]` (`horn_bounds_of_noMerge`), `exists_rayMerge_aux`; else SH
 drops the kept germs that now have one colour on both sides and the one-coloured parts of the rim — FS131-KL1's finding: without it
 SHAVE raises `v`'s degree); `LocalStep` is read off each construction's `surgery` (`trimArcs_spec`) and survives the cleaning
 (`LocalStep.cleanKeep`). No Lean model of the hypotheses is on file (a clean valid map with a move
-available at a point): FS131-E6's twelve-colour map (derivation §§ 3.1–3.3) satisfies them at [hand] grade, as `exists_open`'s note says. -/
+available at a point): `hornModel` at `plantPt` (`Plane/Models/Moves`) meets every one but `hc` — `IsClean` is not proved for it (checked
+by elaboration in `Plane/Models/Applied`); FS131-E6's twelve-colour map (derivation §§ 3.1–3.3) satisfies them at [hand] grade, as
+`exists_open`'s note says. -/
 theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Covers v 1)
     (hav : F.MergeAvailable v ∨ F.RayAvailable v ∨ F.ShaveAvailable v) {m j : ℕ} (hdeg : F.HasDegree v m)
     (hhorn : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :

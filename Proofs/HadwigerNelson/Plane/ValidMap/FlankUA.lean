@@ -73,10 +73,11 @@ theorem shadow_of_not_shave {v : ℂ} {α κ₁ κ₂ : ℝ} {c g h : Fin k} (hS
     exact ⟨fun hA => absurd hz.2.2.2 (lt_asymm hA), fun _ y hy hzy => hno z (hornSet_mono_radius hr.2.le hz) ⟨y, hy, hzy⟩⟩
 
 /-- **An upper flank on `ω(N)` is never out-type at `N`**: at `κ₂ = 1` the flank lies inside `B(N, 1)`, so a tile of its colour at `N`
-is unit-near the flank, hence within `1` of `v` — and an out-type tile misses `B̄(v, 1)`. Inhabitant: no Lean model of all at once. `bowtie` at `0`, `α = 0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
-(`bowtie_flanks`, `bowtie_inType`: its `g` is in-type at `N = i`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on
-FS131-E7's `P₅` at its stuck vertex, `α = 0`, `g = 7` (twelve colours; `plans/FS131-E7-derivation.md` § 7): an open gate item until its
-Lean model lands. -/
+is unit-near the flank, hence within `1` of `v` — and an out-type tile misses `B̄(v, 1)`. Inhabitant: `stuckModel` at `plantPt`
+(`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0`, `α = 0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_flanks`, `bowtie_inType`: its `g` is in-type at `N = i`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `α = 0`,
+`g = 7`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of `Plane/Models/Stuck`. The map is FS131-E7's
+`P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its poles. -/
 theorem not_outType_N_of_flankAbove_one (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α : ℝ} {g : Fin k}
     (hg : F.IsFlankAbove v α 1 g) (hNcl : v + e (α + π / 2) ∈ closure (F.region g)) :
     ¬ F.OutType v g (v + e (α + π / 2)) := by
@@ -101,10 +102,11 @@ theorem not_outType_N_of_flankAbove_one (hF : F.Valid) {v : ℂ} (hv : F.Covers 
   obtain ⟨hAp, hpA⟩ := tileOf_component hpg
   exact false_of_pole hF hT hAp (subset_closure ht) hy hpA hpt hpy
 
-/-- **A lower flank on `ω(S′)` is never out-type at `S′`** (the mirror of `not_outType_N_of_flankAbove_one`). Inhabitant: no Lean model of all at once. `bowtie` at `0`, `α = 0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
-(`bowtie_flanks`, `bowtie_inType`: its `h` is in-type at `S′ = −i`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on
-FS131-E7's `P₅` at its stuck vertex, `α = 0`, `h = 8` (twelve colours; `plans/FS131-E7-derivation.md` § 7): an open gate item until its
-Lean model lands. -/
+/-- **A lower flank on `ω(S′)` is never out-type at `S′`** (the mirror of `not_outType_N_of_flankAbove_one`). Inhabitant: `stuckModel` at
+`plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0`, `α = 0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_flanks`, `bowtie_inType`: its `h` is in-type at `S′ = −i`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `α = 0`,
+`h = 8`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of `Plane/Models/Stuck`. The map is FS131-E7's
+`P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its poles. -/
 theorem not_outType_S_of_flankBelow_neg_one (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α : ℝ} {h : Fin k}
     (hh : F.IsFlankBelow v α (-1) h) (hScl : v - e (α + π / 2) ∈ closure (F.region h)) :
     ¬ F.OutType v h (v - e (α + π / 2)) := by
@@ -131,10 +133,12 @@ theorem not_outType_S_of_flankBelow_neg_one (hF : F.Valid) {v : ℂ} (hv : F.Cov
 
 /-- **The upper flank's shadow comes from a `+n` source**: if the colour `g` above a horn with bounds in `[−1, 1]` shadows the horn at
 every scale, then `g` has an in-type contact at `N` or an out-type contact at `S′` (FS114-CV § 1.4: "in-type at `N` or out-type at `S`";
-at `κ₂ < 1` the second, by `horn_shadow_near_S`). Inhabitant: no Lean model of all at once. `bowtie` at `0`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` satisfies every hypothesis but `F.Covers 0 1` —
+at `κ₂ < 1` the second, by `horn_shadow_near_S`). Inhabitant: `stuckModel` at `plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map
+of the plane; among the fragments, `bowtie` at `0`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` satisfies every hypothesis but `F.Covers 0 1` —
 the local hypotheses (`bowtie_flanks`; its tip is in the shadow of both flanks, `bowtie_doublyShadowed`); `Covers` fails there by
-FS131-QA4's QA4-B1. At [hand] all hold on FS131-E7's `P₅` at its stuck vertex, `α = 0`, `κ₁ = −1`, `κ₂ = 1`, `g = 7` (twelve colours;
-`plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean model lands. -/
+FS131-QA4's QA4-B1. On `stuckModel`, `α = 0`, `κ₁ = −1`, `κ₂ = 1`, `g = 7`: `Plane/Models/Applied` applies this theorem to it, every
+hypothesis a named fact of `Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with
+squares for the discs at its poles. -/
 theorem srcG_of_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {g : Fin k}
     (h1 : -1 ≤ κ₁) (h12 : κ₁ < κ₂) (h2 : κ₂ ≤ 1) (hg : F.IsFlankAbove v α κ₂ g)
     (hsh : ∀ ρ > 0, ∃ z ∈ hornSet v α κ₁ κ₂ ρ, z ∈ shadow (F.region g)) :
@@ -182,10 +186,10 @@ theorem srcG_of_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ
     · exact Or.inr (hS hScl)
 
 /-- **The lower flank's shadow comes from a `−n` source** (the mirror of `srcG_of_shadow`): an in-type contact at `S′` or an out-type
-contact at `N`. Inhabitant: no Lean model of all at once. `bowtie` at `0`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` satisfies every hypothesis but `F.Covers 0 1` —
-the local hypotheses (`bowtie_flanks`, `bowtie_doublyShadowed`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on
-FS131-E7's `P₅` at its stuck vertex, `α = 0`, `κ₁ = −1`, `κ₂ = 1`, `h = 8` (twelve colours; `plans/FS131-E7-derivation.md` § 7): an open
-gate item until its Lean model lands. -/
+contact at `N`. Inhabitant: `stuckModel` at `plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` satisfies every hypothesis but `F.Covers 0 1` —
+the local hypotheses (`bowtie_flanks`, `bowtie_doublyShadowed`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `α = 0`, `κ₁
+= −1`, `κ₂ = 1`, `h = 8`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of `Plane/Models/Stuck`. The
+map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its poles. -/
 theorem srcH_of_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {h : Fin k}
     (h1 : -1 ≤ κ₁) (h12 : κ₁ < κ₂) (h2 : κ₂ ≤ 1) (hh : F.IsFlankBelow v α κ₁ h)
     (hsh : ∀ ρ > 0, ∃ z ∈ hornSet v α κ₁ κ₂ ρ, z ∈ shadow (F.region h)) :
@@ -258,9 +262,11 @@ theorem dot_nonpos_of_srcH {v : ℂ} {α : ℝ} {j : Fin k}
     rwa [add_sub_cancel_left] at this
 
 /-- **An in-type contact keeps its colour's class near `v` within `1` of the contact**: a point of the class near `v` is within `< 1`
-of a point of the in-type tile (inside `B(v, 1)`), so its tile is unit-near that tile, and closure points are within `1`. Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
-(`bowtie_inType`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on FS131-E7's `P₅` at its stuck vertex, `j = 7`, `w` its
-upper pole (twelve colours; `plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean model lands. -/
+of a point of the in-type tile (inside `B(v, 1)`), so its tile is unit-near that tile, and closure points are within `1`. Inhabitant:
+`stuckModel` at `plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_inType`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `j = 7`, `w` its upper pole: `Plane/Models/Applied`
+applies this theorem to it, every hypothesis a named fact of `Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours;
+`plans/FS131-E7-derivation.md` § 7) with squares for the discs at its poles. -/
 theorem region_near_of_inType (hF : F.Valid) {v w : ℂ} {j : Fin k} (hv : F.Covers v 1)
     (hcont : F.IsContact v j w) (hin : F.InType v j w) :
     ∃ ε > 0, ∀ z ∈ F.region j, dist z v < ε → dist z w ≤ 1 := by
@@ -316,10 +322,12 @@ theorem region_far_N_of_srcH (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α : 
 `k`-tile can shadow the tip"): were both flanks one colour, its contacts at `N` and at `S′` would be out-type (`outType_N_of_mem_closure`
 as the lower flank, `outType_S_of_mem_closure` as the upper), which a bound `κ₂ = 1` or `κ₁ = −1` forbids
 (`not_outType_N_of_flankAbove_one`, `not_outType_S_of_flankBelow_neg_one`), and which off them keeps the tip out of the colour's shadow
-near both poles (`horn_not_shadowed_near_N`, `_S`) — against the shadow at every scale. Inhabitant: no Lean model of all at once. `bowtie` at `0`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` satisfies every hypothesis but `F.Covers 0 1` —
+near both poles (`horn_not_shadowed_near_N`, `_S`) — against the shadow at every scale. Inhabitant: `stuckModel` at `plantPt`
+(`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` satisfies every hypothesis but `F.Covers 0 1` —
 the local hypotheses (`bowtie_flanks`, `bowtie_doublyShadowed`; its flanks are `0` and `2`); `Covers` fails there by FS131-QA4's QA4-B1.
-At [hand] all hold on FS131-E7's `P₅` at its stuck vertex, `α = 0`, `κ₁ = −1`, `κ₂ = 1`, `g = 7`, `h = 8` (twelve colours;
-`plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean model lands. -/
+On `stuckModel`, `α = 0`, `κ₁ = −1`, `κ₂ = 1`, `g = 7`, `h = 8`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a
+named fact of `Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the
+discs at its poles. -/
 theorem flank_ne_of_shadows (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {g h : Fin k}
     (h1 : -1 ≤ κ₁) (h12 : κ₁ < κ₂) (h2 : κ₂ ≤ 1) (hg : F.IsFlankAbove v α κ₂ g) (hh : F.IsFlankBelow v α κ₁ h)
     (hshg : ∀ ρ > 0, ∃ z ∈ hornSet v α κ₁ κ₂ ρ, z ∈ shadow (F.region g))
@@ -564,10 +572,12 @@ theorem not_antipodal_coneAt_S_of_horn (hF : F.Valid) {v : ℂ} {α κ₂ : ℝ}
   exact not_mem_angleIcc_add_pi (by linarith) h1' h2'
 
 /-- **A horn of a two-sector colour, at a vertex with no MERGE, has out-type contacts of its colour at both its poles** (N3-DEG through
-wave 4's `woodallCone`, read at the horn's own axis: `woodallCone`'s axis is the horn's up to `π`). Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
-(`bowtie_not_merge_zero`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on
-FS131-E7's `P₅` at its stuck vertex, `c = 9`, `m = 2`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` (twelve colours; `plans/FS131-E7-derivation.md` § 7):
-an open gate item until its Lean model lands. -/
+wave 4's `woodallCone`, read at the horn's own axis: `woodallCone`'s axis is the horn's up to `π`). Inhabitant: `stuckModel` at `plantPt`
+(`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_not_merge_zero`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `c = 9`,
+`m = 2`, `α = 0`, `κ₁ = −1`, `κ₂ = 1`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of
+`Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its
+poles. -/
 theorem horn_poles_contact (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hM : ¬ F.MergeAvailable v) {c : Fin k} {m : ℕ}
     (hm : 2 ≤ m) (hc : F.HasSectors v c m) {α κ₁ κ₂ : ℝ} (hH : F.IsHorn v α κ₁ κ₂ c) :
     (F.IsContact v c (v + e (α + π / 2)) ∧ F.OutType v c (v + e (α + π / 2))) ∧
@@ -714,10 +724,12 @@ theorem IsFlankAbove.unique {v : ℂ} {α κ : ℝ} {g g' : Fin k} (hg : F.IsFla
   exact (hp.1.2 : F.col p = g).symm.trans hp.2.2
 
 /-- **A horn of a two-sector colour, at a vertex with no MERGE, has bounds in `[−1, 1]`** (wave 4's `woodallCone`: every sector of the colour
-is a horn along the axis with such bounds, and a horn's bounds are determined by its set, `hornSet_curv_eq`). Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
-(`bowtie_not_merge_zero`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on
-FS131-E7's `P₅` at its stuck vertex, `c = 9`, `m = 2`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` (twelve colours; `plans/FS131-E7-derivation.md` § 7):
-an open gate item until its Lean model lands. -/
+is a horn along the axis with such bounds, and a horn's bounds are determined by its set, `hornSet_curv_eq`). Inhabitant: `stuckModel` at
+`plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_not_merge_zero`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `c = 9`,
+`m = 2`, `α = 0`, `κ₁ = −1`, `κ₂ = 1`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of
+`Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its
+poles. -/
 theorem horn_bounds_of_noMerge (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hM : ¬ F.MergeAvailable v) {c : Fin k} {m : ℕ}
     (hm : 2 ≤ m) (hc : F.HasSectors v c m) {α κ₁ κ₂ : ℝ} (hH : F.IsHorn v α κ₁ κ₂ c) : -1 ≤ κ₁ ∧ κ₂ ≤ 1 := by
   have hcv : c ∈ F.coloursAt v := mem_closure_of_mem_coneAt hH.mem_coneAt_region
@@ -741,9 +753,10 @@ the colour is then a horn set along one axis with such bounds, and a horn's boun
 horn with a bound outside `[−1, 1]` — every horn shaveable only along a unit circle strictly inside it — has `int D_c(v) ≠ ∅`.
 `horn_bounds_of_noMerge` is the case where the empty interior comes from two sectors and no MERGE (this is its proof with the cone
 hypothesis made direct; FS131-E6 § 4.1); that lemma's local hypotheses give these by the example below, so `bowtie` at `0` satisfies every hypothesis here but `F.Covers 0 1`
-(FS131-QA4's QA4-B1): no Lean model of all at once. At [hand] all hold on FS131-E7's `P₅` at its stuck vertex, `c = 9`, `α = 0`, `κ₁ =
-−1`, `κ₂ = 1` (the cone of `9` there lies in a line; twelve colours; `plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean
-model lands. -/
+(FS131-QA4's QA4-B1). Inhabitant: `stuckModel` at `plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane. On
+`stuckModel`, `c = 9`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` (the cone of `9` there lies in a line: `stuckModel_interior_allowedCone`):
+`Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of `Plane/Models/Stuck`. The map is FS131-E7's `P₅`
+(twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its poles. -/
 theorem horn_bounds_of_interior_empty (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {α κ₁ κ₂ : ℝ}
     (hH : F.IsHorn v α κ₁ κ₂ c) (hD : interior (F.allowedCone v c) = ∅) : -1 ≤ κ₁ ∧ κ₂ ≤ 1 := by
   have hcv : c ∈ F.coloursAt v := mem_closure_of_mem_coneAt hH.mem_coneAt_region
@@ -769,9 +782,10 @@ example (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hM : ¬ F.MergeAvailable v
 /-- **One sector, by a half-plane of contacts**: a colour carried at `v` whose every contact `w` on `ω(v)` is in-type with `w − v = u` or
 out-type with `w − v = −u` (`‖u‖ = 1`) has the open half-plane `d·u > 0` in its allowed cone, so `u` is interior to it; with no MERGE at
 `v` it has exactly one sector (wave 4's `stuck_structure_flanks` step `hone`, with an in-type contact allowed). Inhabitant: no Lean model of all at once. `bowtie` at `0` with `j = 0`, `u = i` satisfies every hypothesis but `F.Covers 0 1`
-— the local hypotheses (`bowtie_not_merge_zero`, `bowtie_inType`; FS131-QA4 § 3.5's sample); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all
-hold on FS131-E7's `P₅` at its stuck vertex, `j = 7`, `u = i` (the one contact of `7` there is the upper pole, in-type) (twelve colours;
-`plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean model lands. -/
+— the local hypotheses (`bowtie_not_merge_zero`, `bowtie_inType`; FS131-QA4 § 3.5's sample); `Covers` fails there by FS131-QA4's QA4-B1. At
+[hand] all hold on FS131-E7's `P₅` at its stuck vertex, `j = 7`, `u = i` (the one contact of `7` there is the upper pole, in-type) (twelve
+colours; `plans/FS131-E7-derivation.md` § 7). In Lean that map is `stuckModel` (`Plane/Models/Stuck`), which meets every hypothesis but
+`hcont`: four of its contacts are stated (`stuckModel_contacts`), and that `7` has no other is not proved — an open gate item. -/
 theorem hasSectors_one_of_contacts (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hM : ¬ F.MergeAvailable v) {j : Fin k}
     {u : ℂ} (hu : ‖u‖ = 1) (hj : j ∈ F.coloursAt v)
     (hcont : ∀ w, F.IsContact v j w → (w - v = u ∧ F.InType v j w) ∨ (w - v = -u ∧ F.OutType v j w)) :

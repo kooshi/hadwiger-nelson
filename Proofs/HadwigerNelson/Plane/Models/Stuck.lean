@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Plane.Models.Paint
 
 /-!
-# A stuck vertex in a valid map of the plane, and a doubly shadowed band under Condition 5 (FS131-KM1, skeleton)
+# A stuck vertex in a valid map of the plane, and a doubly shadowed band under Condition 5 (FS131-KM1; proved by FS131-MB1 and FS131-MB2)
 
 `plans/FS131-models-kernel-plan.md` § 4; the hand objects are FS131-E7's `P₅` and `P₄` (`plans/FS131-E7-derivation.md` §§ 7, 6).
 
@@ -63,10 +63,6 @@ open ArcMap
 theorem stuckModel_plant_coords : plantPt.re = 2 / 5 ∧ plantPt.im = 3 / 10 ∧ plantN.re = 2 / 5 ∧ plantN.im = 13 / 10 ∧
     plantS.re = 2 / 5 ∧ plantS.im = -7 / 10 := by
   refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩ <;> simp [plantN, plantS, plantPt] <;> norm_num
-
-/-- The squared distance in coordinates. -/
-theorem stuckModel_dist_sq (z w : ℂ) : dist z w ^ 2 = (z.re - w.re) ^ 2 + (z.im - w.im) ^ 2 := by
-  rw [Complex.dist_eq_re_im, Real.sq_sqrt (by positivity)]
 
 /-- Each coordinate difference is at most the distance. -/
 theorem stuckModel_abs_coords_le (z w : ℂ) : |z.re - w.re| ≤ dist z w ∧ |z.im - w.im| ≤ dist z w := by
@@ -723,8 +719,8 @@ theorem stuckModel_dist_pole_lt (x : ℂ) :
     (dist x plantS < 1 ↔ (x.re - 2 / 5) ^ 2 + (x.im - 3 / 10 + 1) ^ 2 < 1) := by
   obtain ⟨-, -, h3, h4, h5, h6⟩ := stuckModel_plant_coords
   constructor
-  · rw [← sq_lt_one_iff₀ dist_nonneg, stuckModel_dist_sq, h3, h4, show x.im - 13 / 10 = x.im - 3 / 10 - 1 by ring]
-  · rw [← sq_lt_one_iff₀ dist_nonneg, stuckModel_dist_sq, h5, h6, show x.im - -7 / 10 = x.im - 3 / 10 + 1 by ring]
+  · rw [← sq_lt_one_iff₀ dist_nonneg, dist_sq_coords, h3, h4, show x.im - 13 / 10 = x.im - 3 / 10 - 1 by ring]
+  · rw [← sq_lt_one_iff₀ dist_nonneg, dist_sq_coords, h5, h6, show x.im - -7 / 10 = x.im - 3 / 10 + 1 by ring]
 
 /-- E7 § 7.2, colour `7`, in real variables: a point within `1/10` of the vertex inside the unit disc about `N` and a point of the wedge
 toward the vertex at `N` are not `1` apart (they are closer). -/
@@ -908,7 +904,7 @@ theorem stuckModel_pole_rays (p : ℂ) {t : ℝ} (ht0 : 0 < t) (ht : t < 1 / 20)
 
 /-- The squared distance to the vertex, in coordinates. -/
 theorem stuckModel_dist_vertex_sq (z : ℂ) : dist z plantPt ^ 2 = (z.re - 2 / 5) ^ 2 + (z.im - 3 / 10) ^ 2 := by
-  rw [stuckModel_dist_sq, stuckModel_plant_coords.1, stuckModel_plant_coords.2.1]
+  rw [dist_sq_coords, stuckModel_plant_coords.1, stuckModel_plant_coords.2.1]
 
 /-- The wedges at the poles against the unit disc about the vertex: the wedges toward the vertex lie inside it, the wedges away from it
 outside its closure. -/
@@ -1357,11 +1353,6 @@ on a map of the plane. -/
 theorem stuckModel_hyps : stuckModel.Valid ∧ stuckModel.IsPlaneMap ∧ stuckModel.Covers plantPt 1 ∧ stuckModel.IsStuck plantPt :=
   ⟨stuckModel_valid, stuckModel_isPlaneMap, stuckModel_covers, stuckModel_isStuck⟩
 
-/-- **`stuckModel` is terminal**: no move is available at any point of the plane (FS131-E7 § 7.4: the vertex is the only point with a
-repeated colour or a horn). -/
-theorem stuckModel_terminal : stuckModel.Terminal := by
-  sorry
-
 /-! ## A doubly shadowed band under Condition 5 -/
 
 /-- The class of `7` in `shadowModel`: the flank above the band at the vertex, and a horn at the lower pole. -/
@@ -1411,26 +1402,17 @@ theorem shadowModel_mem_hornArcs {v : ℂ} {α κ₁ κ₂ ρ : ℝ} (hρ : 0 �
 /-- **A horn set misses another horn's boundary arcs** when the two horns share their base point and direction, the set's radius is at
 most the arcs', and neither of the arcs' curvatures is strictly inside the set's window — or when the base points are further apart than
 the two radii together. -/
-theorem shadowModel_hornSet_not_mem_hornArcs {v w : ℂ} {κ₁ κ₂ σ₁ σ₂ r ρ : ℝ} (hρ : 0 ≤ ρ) (h1 : |σ₁| * ρ ≤ 2) (h2 : |σ₂| * ρ ≤ 2)
+theorem shadowModel_hornSet_not_mem_hornArcs {v w : ℂ} {κ₁ κ₂ σ₁ σ₂ r ρ : ℝ} (hρ : 0 ≤ ρ) (h1 : |σ₁| * ρ ≤ 1) (h2 : |σ₂| * ρ ≤ 1)
     (h : (v = w ∧ r ≤ ρ ∧ (σ₁ ≤ κ₁ ∨ κ₂ ≤ σ₁) ∧ (σ₂ ≤ κ₁ ∨ κ₂ ≤ σ₂)) ∨ r + ρ ≤ dist v w) {z : ℂ}
     (hz : z ∈ hornSet v 0 κ₁ κ₂ r) : z ∉ ⋃ a ∈ hornArcs w 0 σ₁ σ₂ ρ, a.carrier := by
-  intro hza
-  obtain ⟨hd, hcase⟩ := shadowModel_mem_hornArcs hρ h1 h2 hza
-  obtain ⟨hzr, -, hA, hB⟩ := hz
   rcases h with ⟨rfl, hrρ, hs1, hs2⟩ | hfar
-  · have key : ∀ σ : ℝ, (σ ≤ κ₁ ∨ κ₂ ≤ σ) → tanHeight σ (frameX v 0 z) (frameY v 0 z) ≠ 0 := by
-      rintro σ (hσ | hσ) h0
-      · have := tanHeight_anti hσ (frameX v 0 z) (frameY v 0 z)
-        unfold TanAbove at hA; linarith
-      · have := tanHeight_anti hσ (frameX v 0 z) (frameY v 0 z)
-        unfold TanBelow at hB; linarith
-    rcases hcase with h0 | h0 | h0
-    · exact key σ₁ hs1 h0
-    · exact key σ₂ hs2 h0
-    · linarith
-  · have := dist_triangle v z w
+  · -- one base point: `Paint`'s `disjoint_hornSet_hornArcs`
+    exact fun hza => disjoint_left.mp (disjoint_hornSet_hornArcs hrρ h1 h2 hs1 hs2) hz hza
+  · intro hza
+    obtain ⟨hd, -⟩ := shadowModel_mem_hornArcs hρ (by linarith) (by linarith) hza
+    have := dist_triangle v z w
     rw [dist_comm v z] at this
-    linarith
+    linarith [hz.1]
 
 /-- The distances between the planted points. -/
 theorem shadowModel_dists : dist plantPt plantN = 1 ∧ dist plantPt plantS = 1 ∧ dist plantN plantS = 2 ∧ dist plantN plantPt = 1 ∧
@@ -1593,20 +1575,20 @@ theorem shadowModel_flank_source {z p : ℂ} :
     rw [shadowModel_tanHeight, c1, c2] at hz
     rw [shadowModel_tanHeight, c5, c6] at hp
     refine shadowModel_apart (c := plantPt + 4 * I) (hsq dist_nonneg (by norm_num) ?_) (hsq (by norm_num) dist_nonneg ?_)
-    · rw [stuckModel_dist_sq]; simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
+    · rw [dist_sq_coords]; simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
       norm_num
       nlinarith [sq_nonneg (z.re - 2 / 5), sq_nonneg (z.im - 3 / 10)]
-    · rw [stuckModel_dist_sq]; simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
+    · rw [dist_sq_coords]; simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
       norm_num
       nlinarith
   · unfold TanBelow at hz; unfold TanAbove at hp
     rw [shadowModel_tanHeight, c1, c2] at hz
     rw [shadowModel_tanHeight, c3, c4] at hp
     refine shadowModel_apart (c := plantPt - 4 * I) (hsq dist_nonneg (by norm_num) ?_) (hsq (by norm_num) dist_nonneg ?_)
-    · rw [stuckModel_dist_sq]; simp only [Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
+    · rw [dist_sq_coords]; simp only [Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
       norm_num
       nlinarith [sq_nonneg (z.re - 2 / 5), sq_nonneg (z.im - 3 / 10)]
-    · rw [stuckModel_dist_sq]; simp only [Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
+    · rw [dist_sq_coords]; simp only [Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
       norm_num
       nlinarith
 
@@ -1678,7 +1660,7 @@ theorem shadowModel_shadow {z : ℂ} (hz : z ∈ hornSet plantPt 0 (-1 / 8) (1 /
   rw [shadowModel_tanHeight, c1, c2] at hA hB
   rw [(stuckModel_frames plantPt z).1, c1] at hX
   have hd2 : (z.re - 2 / 5) ^ 2 + (z.im - 3 / 10) ^ 2 < 1 / 10000 := by
-    have := stuckModel_dist_sq z plantPt
+    have := dist_sq_coords z plantPt
     rw [c1, c2] at this
     rw [← this]; nlinarith [dist_nonneg (x := z) (y := plantPt)]
   have hone : ∀ {w : ℂ}, dist z w ^ 2 = 1 → dist z w = 1 := fun {w} h => by
@@ -1690,25 +1672,25 @@ theorem shadowModel_shadow {z : ℂ} (hz : z ∈ hornSet plantPt 0 (-1 / 8) (1 /
     have ha2 := hsmall ha0 hax
     refine ⟨⟨2 / 5 + a, -7 / 10 + a ^ 2 / 14⟩, ⟨?_, ?_, ?_, ?_⟩, hone ?_⟩
     · refine (lt_iff_sq_lt_sq' dist_nonneg (by norm_num)).mpr ?_
-      rw [stuckModel_dist_sq, c5, c6]; ring_nf; nlinarith [sq_nonneg a, sq_nonneg (a ^ 2)]
+      rw [dist_sq_coords, c5, c6]; ring_nf; nlinarith [sq_nonneg a, sq_nonneg (a ^ 2)]
     · rw [(stuckModel_frames plantS _).1, c5]; simpa using ha0
     · show 0 < tanHeight _ _ _
       rw [shadowModel_tanHeight, c5, c6]; ring_nf; nlinarith [sq_pos_of_pos ha0, sq_nonneg (a ^ 2)]
     · show tanHeight _ _ _ < 0
       rw [shadowModel_tanHeight, c5, c6]; ring_nf; nlinarith [sq_pos_of_pos ha0, sq_nonneg (a ^ 2)]
-    · rw [stuckModel_dist_sq]; simp only; rw [← hfa]; ring
+    · rw [dist_sq_coords]; simp only; rw [← hfa]; ring
   · obtain ⟨a, ha0, hax, hfa⟩ := shadowModel_witness_real (y := -(z.im - 3 / 10)) hX (by rw [neg_sq]; exact hd2)
       (by rw [neg_sq]; linarith) (by rw [neg_sq]; linarith)
     have ha2 := hsmall ha0 hax
     refine ⟨⟨2 / 5 + a, 13 / 10 - a ^ 2 / 14⟩, ⟨?_, ?_, ?_, ?_⟩, hone ?_⟩
     · refine (lt_iff_sq_lt_sq' dist_nonneg (by norm_num)).mpr ?_
-      rw [stuckModel_dist_sq, c3, c4]; ring_nf; nlinarith [sq_nonneg a, sq_nonneg (a ^ 2)]
+      rw [dist_sq_coords, c3, c4]; ring_nf; nlinarith [sq_nonneg a, sq_nonneg (a ^ 2)]
     · rw [(stuckModel_frames plantN _).1, c3]; simpa using ha0
     · show 0 < tanHeight _ _ _
       rw [shadowModel_tanHeight, c3, c4]; ring_nf; nlinarith [sq_pos_of_pos ha0, sq_nonneg (a ^ 2)]
     · show tanHeight _ _ _ < 0
       rw [shadowModel_tanHeight, c3, c4]; ring_nf; nlinarith [sq_pos_of_pos ha0, sq_nonneg (a ^ 2)]
-    · rw [stuckModel_dist_sq]; simp only; rw [← hfa]; ring
+    · rw [dist_sq_coords]; simp only; rw [← hfa]; ring
 
 end ShadowModelHelpers
 

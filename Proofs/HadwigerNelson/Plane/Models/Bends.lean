@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Plane.Models.Paint
 
 /-!
-# Models of the bends: a ring arc of the cusp fragment, and a plane map with a radius-2 contact interval (FS131-KM1, skeleton)
+# Models of the bends: a ring arc of the cusp fragment, and a plane map with a radius-2 contact interval (FS131-KM1; proved by FS131-MB1 and FS131-MB2)
 
 `plans/FS131-models-kernel-plan.md` § 5.
 
@@ -172,7 +172,7 @@ theorem awayModel_P_coords : awayP.re = -3 / 5 ∧ awayP.im = 3 / 10 := by
 
 /-- The squared distance to the centre, in coordinates. -/
 theorem awayModel_dist_sq (z : ℂ) : dist z awayP ^ 2 = (z.re + 3 / 5) ^ 2 + (z.im - 3 / 10) ^ 2 := by
-  rw [Complex.dist_eq_re_im, Real.sq_sqrt (by positivity), awayModel_P_coords.1, awayModel_P_coords.2]; ring
+  rw [dist_sq_coords, awayModel_P_coords.1, awayModel_P_coords.2]; ring
 
 /-- The point of the circle of radius `ρ` about the centre at the angle `θ`, in coordinates. -/
 theorem awayModel_circPt (ρ θ : ℝ) : (awayP + (ρ : ℂ) * e θ).re = -3 / 5 + ρ * Real.cos θ ∧
@@ -625,13 +625,9 @@ theorem awayModel_centre_brick {w : ℂ} (hw : -(4 / 5) < w.re ∧ w.re < 0 ∧ 
     refine ⟨brickBase_mem_interiorPts _ hre him, fun ha => ?_⟩
     rcases awayModel_arcs_subset ha with h | h <;> linarith
   · have hc : awayModel.col w = (brickBase 8 (by norm_num)).col w := ArcMap.paint_col_of_not_mem hnW
-    obtain ⟨h1, h2⟩ := brick_floor_eq hre him
-    have h6 : sevenBrick.table (zmodIdx 7 (by norm_num) (-1)) (zmodIdx 7 (by norm_num) 0) = 6 := by decide
     show awayModel.col w = 6
     rw [hc]
-    show Fin.castLE (by norm_num) (sevenBrickMap.col w) = 6
-    rw [sevenBrick_color_eq h1 h2, h6]
-    rfl
+    exact Fin.ext ((brickBase_col_val _ (mem_brickCell_of_coords hre him)).trans (by decide))
 
 /-- **The centre carries the colour `6` and no other**: neither side colour of the arc is carried at it. -/
 theorem awayModel_coloursAt : awayModel.coloursAt awayP = {6} := by

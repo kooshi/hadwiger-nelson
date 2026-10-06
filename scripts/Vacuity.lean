@@ -382,6 +382,15 @@ Two exclusions are worth their reasons, because both look like obvious additions
   `(h : F.IsTerminalMap)` raises no site though the definition holds `F.Valid`: the scan reads a binder's head as written. What it
   cannot see, as before: hypothesis sets that hold together on no map of the library — the stuck family, `exists_arcStep`,
   `bend_away_part`, the base's steps — each of which says so in its docstring and is listed as an open gate item at the landing.
+* **The example maps' carriers (FS131-MC1, by the procedure below; `Plane/Models/{Paint, Moves, Stuck, Bends, Applied}`).** **No new
+  carrier, IN or OUT**: the lane defines maps (`ArcMap.relabel`, `ArcMap.paint`, `brickBase`, `hornModel`, `twoHornModel`, `stuckModel`,
+  `shadowModel`, `awayModel`), point sets, arc sets and colourings — no structure and no predicate a theorem may take as a hypothesis —
+  so no name is added to `trackedProps` and no control is planted. What the lane gives this scan is evidence in the one form it
+  registers, an unconditional theorem at a closed instance: `Valid`, `IsHorn`, `IsStuck` and `IsRingArc` each gain witnesses at maps of
+  the plane (`hornModel_valid`, `stuckModel_isStuck`, `awayModel_isRingArc_gap`, …; the `EVIDENCE WITNESS` rows). The sites those maps
+  inhabit stay `GENERIC`: a site on a variable map is the caller's obligation by this scan's law, and no witness can be registered
+  against it. That each model meets every hypothesis of a theorem at once is checked where it can be, by elaboration
+  (`Plane/Models/Applied` applies each theorem to its model), and said in that theorem's docstring.
 
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
