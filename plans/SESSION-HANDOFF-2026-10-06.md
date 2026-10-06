@@ -51,8 +51,9 @@ a fresh agent on the same brief.
 ## 4. Queue for the next freed slots, in order (item 427; re-ordered by ruling 434)
 
 0. **Order now** (rulings 459, 461, 465): **wave 5's landing job** as soon as FS131-RP1 is back — **the outward bend is whole** on
-   `fs131-w5z` at `d4f04ff3` (item 464: `bend_away_part` on the standard three), so every leaf of wave 5 is proved on some branch (brief not written — model it on
-   `data/fs131/briefs/FS131-OL1-open-land.md`): on `fs131-w5c`, merge `origin/fs131-w5z` (it holds `fs131-w5a`; trial first; then
+   `fs131-w5z` at `d4f04ff3` (item 464: `bend_away_part` on the standard three), so every leaf of wave 5 is proved on some branch (job FS131-L5; **its brief's generator is written**: `python3 data/fs131/briefs/scripts/mk-l5.py <the inventory
+   item numbers of RP1's hand-back and rulings>`, then the gate read on its own exit status, then launch with `debruijn-implementer`,
+   `model: "opus"`, in `fs131-w5c`): on `fs131-w5c`, merge `origin/fs131-w5z` (it holds `fs131-w5a`; trial first; then
    `LocalStep.of_cutArcs` and `CollarFit.map_localStep` must print the standard three, 459 (d)); RP1's post-merge list with ruling 465 (a)'s (`hF` out of
    `CollarFit.map_hornCount_le` and the six R1/R2 and side lemmas, the stale headers and lines, the two `ringPt` forms); merge `main` (with T4's check, if it has landed); the full gate —
    build with zero warnings, zero `sorry`, `scripts/axioms.sh`, `scripts/vacuity.sh`, `tools/check_architecture.py`, the guarded lint, the notes
