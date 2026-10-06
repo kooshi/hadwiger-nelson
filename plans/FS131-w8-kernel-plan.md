@@ -333,3 +333,90 @@ Library lemmas confirmed by use in this pass's proofs (each elaborated): `germS_
   `Plane/ValidMap/UnitArc`; `cos_nonpos_of_coneAt_of_disjoint` is its disjointness form), `IsOuterTile` renamed `IsOuterTileAt`,
   `recip` and `anti` renamed `star_recip`, `star_anti`; every new name then grepped against all of `Proofs/` by declaration keyword. The
   mid-job message to the coordinator carried two of the old names; the message with the foundation's hash corrects them.
+
+---
+
+# FS131-K8b — the second planning pass (stages 6 onward)
+
+*Job FS131-K8b (de Bruijn, the planner), 2026-10-06, branch `fs131-w8`, from `368a2c1a`. Brief:
+`data/fs131/briefs/FS131-K8b-wave8-second.md` (on `main`), with its Amendment 1. Working files: `data/fs131/k8b/`. The stages continue
+the first pass's numbering.*
+
+## Theorems this phase proved (FS131-K8b)
+
+*Filled at each saved stage; see the last stage's list.*
+
+## Stage 6 — SAVED: the readback, the registered expectations, what may and may not change
+
+### 6.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_k8b_quotes.py` reads every `> …` block of the brief with its `> — source:` line and looks for the text, whitespace
+collapsed, in the source (`data/fs131/k8b/logs/quotes.log`): **40 quotations, 40 found verbatim, 0 missing**. Planted fault
+(`--fault`, one letter changed in the first quotation): exit 1, one `MISS` (`data/fs131/k8b/logs/quotes-fault.log`).
+
+Three notes on the sources, none a defect of the brief:
+
+- The five statements of wave 7 (`qArc_inner`, `qArc_outer`, `qArc_ne`, `qArc_cone_disjoint`, `qArc_others_absent`) were found in the
+  worktree `fs131-w7` and then read whole at the commit the brief names (`git show 195c7855:…/FourColour/Local.lean` ll. 215–250):
+  the same five, each with `sorry`. `ring_odd` and `ring_odd'` are at ll. 185–199 of that file, stated with `¬ F.OnRingArc p (ringPt p θ)`
+  on a half-open window.
+- The inventory in this worktree stops before item 508; items 498, 518, 524, 525, 533, 541, 553, 563, 567 were read on `main`.
+- Amendment 1 says three `sorry` leaves at `368a2c1a`: counted by `rg -c "^\s*sorry"`: `Star.lean` 2, `Empty.lean` 1 — three.
+
+### 6.2 What was read before the arguments
+
+The first pass's record whole (Stages 1–5); `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building; the milestone plan's
+§§ 7.1–7.5; the wave's modules in full: `Plane/RingCalculus/Basic`, `Star`, `Empty`, `SoleTip` (the implementer's), and the statement
+surfaces of `TilesAt`, `RingColour`, `HubCount`; `Plane/LocalMap` and `Plane/SimpleOn` in full; the eleven rows' entries
+(`data/fs131/k8/rows-extract.md`).
+
+### 6.3 What this pass may and may not change
+
+- **May**: new modules under `Proofs/HadwigerNelson/Plane/RingCalculus/` (with `Proofs.lean`, `ARCHITECTURE.md`); a block
+  "FS131-K8b" in `scripts/Axioms.lean`; this record; `tools/fs131_k8b_*.py`; `data/fs131/k8b/`; the report.
+- **May, after telling the coordinator**: the *statement* of `outerAdj` in `Empty` (the one leaf of that file the implementer leaves
+  alone). `doubleTip` is proved (Amendment 1): its statement is decided at the wave's landing.
+- **May not**: `Basic` (shared with wave 9 by ancestry), `Star`, `Empty` beyond `outerAdj`'s statement, the implementer's four
+  modules (`HubCount`, `TilesAt`, `SoleTip`, `RingColour`), any landed module, `main`, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`. No merge
+  of another branch unless asked. No name of wave 6's `Plane/Saturated/Fragment` or of wave 7's `Plane/FourColour/*` restated.
+
+### 6.4 Registered expectations
+
+Registered after the entries, the first pass's record and the Lean foundation, and **before** any of the unread arguments
+(`plans/FS116-N3-proof.md`, `plans/FS116-V5-verification.md`, `plans/FS116-N1-proof.md` § 2.2, `plans/FS129-SR3-audit.md`,
+`plans/FS129-MR1-audit.md`; `plans/FS116-N2-proof.md` ll. 200–230 for the `star_anti` gap).
+
+**Rows expected to hide a statement defect** (probability that the entry lacks a hypothesis its argument reads, or a word has no
+reading under which the row is true as filed):
+
+| row | p | where |
+|---|---|---|
+| FS116-N3-STAR2 | 0.35 | "the tiles of p are, counter-clockwise, …" reads exactly four tiles at `p`; the entry says "at least four colours" (0.6 that four is forced by another row, so no defect); a degenerate window when `ℓ + m = 60°` |
+| FS116-N3-CROSS | 0.5 | the last clause ("`p` is a semi-hub of kind O of the ring of `y`") — one mind and a checking reading; "cone of zero angle" for a tile that may have an empty or a one-point cone |
+| FS116-N3-SEMI | 0.4 | "the tile of `p` whose cone holds `ψ + 180°` (kind O) or `ψ` (kind T) in its interior" — cone at `p` or at `y`? |
+| FS116-N3-CONE | 0.4 | the edge clause: "an edge at `y` between a tile inside `B̄(w, 1)` and a tile outside `B(w, 1)`" needs the two tiles adjacent along a common boundary arc from `y` |
+| FS116-RING-TWIST-C | 0.5 | the half-open window's ends (an arc of `Γ` ending at the window's start); `σ` undefined in the entry |
+| FS116-V5-QCOL | 0.25 | "in this setting"; "the hub's partner point" at a change point that is no hub |
+| FS116-N2-SIXRING | 0.2 | the indexing's existence; the covering step |
+| FS116-V5-DICHO, FS116-N3-PAIR | 0.15 each | |
+| `outerAdj` (stated) | 0.3 | that it needs *simple* or a second germ condition |
+
+**Expected to be one theorem** (or a citation): FS116-V5-OUT2 is `star_outer_cone` (0.85); FS116-N3-PAIR is the bracket of
+FS116-V5-DICHO's first alternative, one theorem and a corollary (0.8); FS116-RING-TRANSFER-QC adds nothing to SEMI, PAIR, STAR2,
+CROSS (0.8); FS116-N3-CONE's first four clauses are wave 3's `germR_*` in tile form (0.8); FS116-RING-TWIST-C's last clause and wave
+7's `ring_odd` are one theorem and a corollary (given by the brief).
+
+**How many rows will be stated in this pass**: median 8 of 11 (5 to 11); the likeliest to go to a third pass are FS116-N2-SIXRING and
+FS116-RING-TWIST-C (their arguments are the longest per row and neither is on the SemiHub rows' dependency chain).
+
+**The `star_anti` gap** (Amendment 1, item 3): expected a missing lemma, 0.5; a statement defect needing a hypothesis, 0.3; a
+deriver's question, 0.2. Formed from the Lean side only: `SimpleOn.coneAt_eq_angleIcc_sep` allows `β₂ = β₁ + 2π`, and then every
+other tile of `p` has its cone inside the one direction `β₁` — three horns in one direction beside a tile that surrounds `p`; I do
+not yet see what excludes it between two antipodal hubs.
+
+Scored in the last stage.
+
+### 6.5 The branch as given
+
+`./scripts/build.sh` under the slot (`--mem 40 --cpus 8`, `MEMMAX=40G BATCH=4`), log `data/fs131/k8b/logs/build-1-as-given.log`; at
+this save it waits for a slot (two 40 GiB builds hold 80 of the ledger's 90). Its result is recorded in Stage 7's first lines.
