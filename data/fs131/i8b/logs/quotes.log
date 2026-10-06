@@ -1,0 +1,19 @@
+ok    1  /home/kooshi/source/lean-dir/CLAUDE.md                                  "Do not consider Lean formalization a cost. It's practically "
+ok    2  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             '567. **FS131-I8A, by message mid-job: `emptyNS` is proved an'
+ok    3  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             '568. **FS131-K8b, by message mid-job (its Stage 6 saved at `'
+ok    4  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             "569. **FS131-I8A done at its Stage 5: wave 8's empty class i"
+ok    5  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             "572. **FS131-K8b done at its Stage 10: wave 8's second plann"
+ok    6  worktrees/fs131-w8b/Proofs/HadwigerNelson/Plane/RingCalculus/Star.lean  'theorem star_anti {F : ArcMap 6} (hF : F.Valid) (hN : F.NonS'
+ok    7  /home/kooshi/source/lean-dir/plans/FS116-derivation.md                  'not claimed: anything when an edge of p leaves at ψ + 90° or'
+ok    8  lean-dir/.claude/worktrees/fs131-w8a/plans/FS131-I8A-implementation.md  "(hp'' : ∀ T, F.TileAt p T → T ≠ tp → ψ + π / 2 ∉ coneAt T p)"
+ok    9  lean-dir/.claude/worktrees/fs131-w8a/plans/FS131-I8A-implementation.md  "(hm'' : ∀ T, F.TileAt p T → T ≠ tm → ψ - π / 2 ∉ coneAt T p)"
+ok   10  lean-dir/.claude/worktrees/fs131-w8a/plans/FS131-I8A-implementation.md  '- **The binders close the stuck case.** If `tp = tm = t` wit'
+ok   11  lean-dir/.claude/worktrees/fs131-w8a/plans/FS131-I8A-implementation.md  '- **They are no new content at a proper interval.** If the c'
+ok   12  lean-dir/.claude/worktrees/fs131-w8a/plans/FS131-I8A-implementation.md  '- **Their form is usable as written**: the proof applies the'
+ok   13  lean-dir/.claude/worktrees/fs131-w8a/plans/FS131-I8A-implementation.md  '- **The route for the rest**: (a) `cp ≠ cm` from `tp ≠ tm` ('
+ok   14  rce/lean-dir/.claude/worktrees/fs131-w8b/plans/FS131-w8-kernel-plan.md  '`e₁ … e₄`. The repeated chain is one missing lemma, minted o'
+ok   15  rce/lean-dir/.claude/worktrees/fs131-w8b/plans/FS131-w8-kernel-plan.md  "under `SimpleOn {x}` the tiles of `x` are the chart's sector"
+ok   16  rce/lean-dir/.claude/worktrees/fs131-w8b/plans/FS131-w8-kernel-plan.md  'sectors share the branch between them — an initial piece of '
+ok   17  rce/lean-dir/.claude/worktrees/fs131-w8b/plans/FS131-w8-kernel-plan.md  '- **By file**: *I8B* on `Plane/RingCalculus/SemiHub` (17 lea'
+ok   18  rce/lean-dir/.claude/worktrees/fs131-w8b/plans/FS131-w8-kernel-plan.md  '- **`star_anti`** gains two binders on the first implementer'
+quotations=18 missing=0
