@@ -6984,3 +6984,26 @@ reason by the close.*
      hold with no Γ-free ring, no simplicity and no condition on the far germs; whether the rows are restated is the
      wave's landing's (ruling 563 (b)). (d) **FS131-K8b launched 2026-10-06** with a dated Amendment 1
      (`mk-k8b-amend.py`, gate exit 0). In flight: 3 (L10B, I8A, K8b).
+568. **FS131-K8b, by message mid-job (its Stage 6 saved at `5d4e4d12`; no Lean of its own yet): three answers from the arguments — `star_anti`'s gap is a defect of the skeleton's hypothesis; `doubleTip`'s extra hypotheses were a route's; FS116-V5-OUT2 is `star_outer_cone`** (source: K8b's message to "main", 2026-10-06).
+     **(1) `star_anti`** — kind, its words: a statement defect of the Lean skeleton, the row stands. The row's
+     "not claimed" line excludes "anything when an edge of p leaves at ψ + 90° or ψ − 90°"; the skeleton wrote
+     `ψ ± π/2 ∈ interior (coneAt t p)`, which admits one more case — a tile whose cone at `p` is the whole circle,
+     with other tiles of `p` as cusps in one direction — where the statement is not known true. Its remedy: two
+     binders, `(hp'' : ∀ T, F.TileAt p T → T ≠ tp → ψ + π / 2 ∉ coneAt T p)` and the same at `ψ - π / 2` for `tm`;
+     for a proper interval they follow from the present hypotheses. **(2) `doubleTip`, `v6_hug`**: the far germs
+     entered at one step of the entry's route and simplicity at another; the Γ-free ring was the setting, never
+     read; the implementer's lemma never forms a cone. Recommendation for the landing: one theorem, two
+     corollaries. **(3) FS116-V5-OUT2** is `star_outer_cone` at `ψ = θ`: a citation, no declaration; the Lean
+     proof reads valid and non-Siamese only — a generalization of the row. Also: FS116-N3-CROSS's first clause is
+     true because no tile of `p` reaches `y` at all; it states the stronger `tipColours = ∅`. `outerAdj` stands as
+     stated. **Read by me**: `plans/FS116-derivation.md` l. 719 — "not claimed: anything when an edge of p leaves at
+     ψ + 90° or ψ − 90°"; `Star.lean` ll. 231–238 at `368a2c1a` — the hypotheses `hp'`, `hm` are memberships in
+     `interior (coneAt _ p)`. Not checked by me: that the two binders close the stuck case; that they follow for
+     a proper interval. **Rulings.** (a) **`star_anti` gains the two binders** (the content: no other tile of `p`
+     has `ψ ± 90°` in its cone; the form is the implementer's to adjust if the proof wants another). Alternative:
+     leave the statement and send the full-circle case to a deriver. Why not: the row itself excludes the case;
+     the skeleton, not the mathematics, was wider. Confidence: high. (b) **The edit is the first implementer's**
+     (its file; message sent): made and closed if its budget allows, otherwise by the wave's next job. (c) The
+     excluded case — can a tile of a four-colour vertex hold every direction in its cone, with two antipodal
+     hubs? — is a question for the wave's stub lines, not a job. (d) (2) and (3) are generalizations for the
+     wave's errata; the restatement is the landing's (ruling 563 (b)). Replies sent: one to each job.
