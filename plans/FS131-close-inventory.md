@@ -4848,3 +4848,35 @@ reason by the close.*
      Wave 10 holds the spectral statements under row 121 and the standing-five field. **Offered, not ruled** (the order of milestones is
      his): one planner pass on FS-113 at a free slot, to price it from its first leaves; default, his order stands (the backlog, then
      FS-124). Awaiting his word.
+
+484. **FS131-K10 done at its Stage 5: wave 10 planned — dispositions for all fourteen rows, a foundation, a skeleton of eleven, four rows
+     proved on the way; three rows and part of a fourth not stated** (planner; harness ≈ 428k by the task notice; record `fs131-w10`'s
+     `plans/FS131-w10-kernel-plan.md`; report `data/fs131/reports/FS131-K10.md` on that branch; commits `6ca3fb4e`, `90e95f58`, `f919973e`;
+     pushed, tree clean). **Proved on the branch**: FS89-S0A-2 at a wider class (`CharacterColouring.gluing`); FS89-S0A-10 given the band's
+     order bound, and its uniform form at every band; FS89-CL2 as a composition over four named results from outside the backlog; J45-SP-oi
+     at a wider class. **TC1-STANDING-FIVE** stated with two named hypotheses, row 123's chain and the finite-target floor `StandingFloor n`
+     (at `U₁₂₈` and every `Γ_Q`, `Q ≡ 3 (mod 4)`, `Q ≥ 347`); nine leaves open; "the least usable residue field has 347 elements" by an
+     exact tool with a fault that fires. Stated with `sorry` leaves: J45-SP-if, -N2, -SI-4, X25B-PZ, X25B-L1, J45-N1 (c). **Not stated**:
+     J45-SI-5, -SI-J, -SI-C, J45-N1 (a)(b). **My receipt**: tip equals `origin/fs131-w10`; `data/fs131/k10/logs/build-2-skeleton.log` ends
+     `EXIT=0`; `sorry` by the handoff's grep: `CharacterColouring` 1, `SpectralInputs` 8, `StationaryRatio` 3, `StandingFive` 9 — the 21
+     leaves reported; `StandingFloor` and `seven_le_localBound (hFloor : StandingFloor 7)` read in `StandingFive.lean` l. 122–133: the floor
+     is a hypothesis, never an axiom. **Items**: six further generalizations (J45-N2's second sentence needs no spectral theory; J45-N1 (c)
+     by a Fourier-side route; J45-SI-4 for any countable graph; X25B without Haar measure; the standing field's arithmetic without a
+     decomposition law). Corrections owed — the dispositions file's line 179; statements not yet separate. Questions — for a deriver:
+     J45-SI-5 step (c) cites a pointwise ergodic theorem Mathlib lacks: is there a conditional-expectation argument? For Poros: the order
+     bound at every band. Prior-art debts (Rudin for `BochnerHerglotz`; Weil's bound). A kernel fact for `LEAN.md` (a `rfl` between
+     coercions out of `unitRing ⊥` times out). Slips, the job's, disclosed. **Its price for the wave**: three implementer jobs by file (I-A
+     `SpectralInputs` and `CharacterColouring`'s leaf, about 300k; I-B `StationaryRatio`, about 350k; I-C `StandingFive`, about 300k), a
+     second planning pass K10b (about 150k), one or two jobs after it. **The floor as a kernel row, priced**: `U₁₂₈` by Hoffman and an
+     exact integer spectrum, one job, no outside theorem; `Γ_Q`, `Q ≥ 347`, by Hoffman and Weil — one job with Weil's bound imported,
+     about 1M tokens without.
+485. **Rulings on K10's held items, and its slot.** (a) **Three implementers by file, as it splits them**; the first, FS131-I10A
+     (`SpectralInputs` and `CharacterColouring`'s leaf), takes this slot on `fs131-w10`; the others on branches cut from `f919973e`.
+     (b) **The finite-target floor becomes two rows of wave 10's second pass**: `U₁₂₈`'s floor formalized (no outside theorem); `Γ_Q`'s with
+     Weil's bound for the norm-one torus sums imported under `LEAN.md` § Assumptions' four items. Alternative weighed: leave the floor a
+     named hypothesis for good, or formalize Weil (about 1M tokens). Why: Kooshi's rule lets a milestone trust the literature with each
+     import documented, and an imported Weil is a far smaller assumption than a hand floor for infinitely many planes; the full
+     formalization is priced for the publication-cost measurement. Confidence: medium — it raises the audit's imported count, which Kooshi
+     sees in the next report. (c) **K10b** (the three unstated rows, J45-N1 (a)(b), the two floor rows) follows the implementers.
+     (d) **J45-SI-5's question** goes with FS131-E8's brief as a second question, or to K10b if it finds the argument. (e) The slips are
+     logged; no redo. In flight: 1 (MC1) + 1 (K6) + 1 (I10A) = 3.
