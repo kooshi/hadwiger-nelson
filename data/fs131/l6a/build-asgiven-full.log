@@ -1,0 +1,20 @@
+### up-to-date check, lake build --no-build over 1804 modules: exit 0 after 3s
+⚠ [5595/5625] Replayed Proofs.HadwigerNelson.Plane.Saturated.MapColouring
+warning: Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean:194:8: declaration uses `sorry`
+⚠ [5596/5625] Replayed Proofs.HadwigerNelson.Plane.Saturated.Pinch
+warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:131:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:140:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:150:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:162:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:169:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:218:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:237:8: declaration uses `sorry`
+⚠ [5623/5625] Replayed Proofs.HadwigerNelson.Plane.Saturated.FanBridge
+warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:67:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:78:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:91:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:100:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:112:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:130:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:136:8: declaration uses `sorry`
+All targets up-to-date (5811 jobs).

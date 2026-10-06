@@ -1,0 +1,15 @@
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:134:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:142:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:155:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:165:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:171:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:221:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:239:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:71:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:82:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:95:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:105:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:114:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:132:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:139:  sorry
+Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean:197:  sorry
