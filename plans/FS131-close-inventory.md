@@ -4347,3 +4347,18 @@ reason by the close.*
      and by `tools/check_architecture.py`. **No objection; no reply sent** (it asked for none). **A slip, mine**: the brief's "a trial of each
      shows two conflicts" came from trialling each merge against `fs131-w5c` alone; I did not trial the second on top of the first, where the
      base differs. Cost: one message. For the later merges of `fs131-w5a` and `fs131-w5z`, trial them in the order they will be made.
+
+452. **FS131-BA1, by message: its half of the outward bend is proved but for one build in flight; a name collision foreseen; one unused
+     hypothesis** (source: BA1's message to "main", 2026-10-06; `fs131-w5a` at `66cb0314`, pushed: lane G saved — `LensOut` and `CollarMapOut`
+     with no `sorry`, built, 48 axiom records, 45 on the standard three and 3 through `sorryAx` as expected; `BendAway` proved at `4a8be4de`
+     under `lake env lean`, its build running; not checked by me yet — the hand-back's review is the receipt). `LocalStep.of_cutArcs` is IA2's
+     proof, copied with credit. `AwayBend.idle` lost `hA`, `hε` and, with `hA`, its implicit `c'` (ruling 446 (b)); `BendStep` changed in one
+     line. Re-priced: every child elaborated on its first or second run; the half is well under one session. **Foreseen**: BA1 added 33 public
+     helpers (10 in `CollarMapOut`, 17 in `LensOut`, 6 in `BendAway`) that FS131-BA2's mirrors will want and cannot see; the same names declared
+     on `fs131-w5z` would collide at the merge. **Rulings**: (a) **`dist_lt_one_of_thin` loses `hκ0 : 0 ≤ κ`**, which the other hypotheses
+     imply; BA1 removes it with its one call. Alternative: keep it by `have _ :=`. Why: ruling 446 (b)'s reason. Confidence: high. (b) **BA2
+     merges `origin/fs131-w5a` into `fs131-w5z` and uses BA1's helpers; it declares none of those names** — when, its choice (now at `66cb0314`,
+     or once at `BendAway`'s commit, which I relay). Alternative weighed: BA2 re-proves under other names and the final join reconciles. Why
+     not: 33 lemmas proved twice, then a rename across proofs. Confidence: high. Sent to BA2 with the list verbatim; its brief amended on disk
+     (gate PASS). **A slip, mine**: the message to BA2 says "three statement changes" and lists two; corrected in the amendment and to be
+     corrected in the next message to BA2. **Credit**: BA1 saw the collision before either branch had it.
