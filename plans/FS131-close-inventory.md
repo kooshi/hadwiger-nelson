@@ -5374,3 +5374,29 @@ reason by the close.*
      their planners' briefs regenerated with it (`mk-kw.py 8 611ffa39`, `9 611ffa39`), each gate PASS. Alternative weighed: each
      planner merges the commit itself. Why mine: the branches were empty, a fast-forward cannot conflict, and a planner's brief
      then needs no exception to "you do not merge".
+
+512. **FS131-K7, by message mid-job: route T's rows — three proved on the way, six generalizations, three hypotheses the formal
+     statements add, and the outside theorem decided** (source: K7's message to "main", 2026-10-06; its record's Stages 3–4 on
+     `fs131-w7`, to be committed at its next push — not checked by me against the branch; the artifact is read at its hand-back).
+     **Proved on the branch, by its word**: FS114-N114-EULER's identity; FS114-Y-EDGE whole; FS114-N114-RD's display on contact sets
+     (its anchoring clause open). **Generalizations**: (1) FS114-N114-EULER holds at every Euler characteristic, with no hypothesis
+     on degrees — the torus is `χ = 0`; (2) FS114-N2-FIVE holds on every map of Euler characteristic at most 0, without the step
+     `d ≤ 5` (`2d² − 13d + 24 > 0` at every integer); (3) FS114-Y-EDGE needs no arcs; (4) FS114-N114-RD's cross-distance step reads
+     two far sets and one tile, no colour; (5) FS114-N3-JOINT's assignment form reads neither radius; (6) the tactic darts are
+     determined by the colouring, so "tactic" is a definition and K1 a statement about a colouring alone. **Hypotheses added**: (a)
+     FS114-N114-EULER's `μ ≥ 0` is for vertices of degree at least 3, the derivation's convention, and it is read (the sphere's
+     two-gon has `μ_f = −1`); (b) FS114-N2-FIVE needs a nonempty map; (c) "a torus map" enters as `V − E + F = 0` alone —
+     connectedness is never read. **The outside theorem**: Euler's formula is not imported — the counting rows are theorems about a
+     combinatorial map (a rotation system on darts) with `V − E + F = 0` a hypothesis; the passage from a doubly periodic `ArcMap`
+     to such a map is not formalized, and no backlog row reads the torus rows through it (their consumer FS114-ROUTE-T is a gap
+     verdict). No axiom. **Flags for its second pass, from the entries' own words, unverified**: FS114-N4-LEMMAS' N4-LENS is stated
+     without the non-Siamese hypothesis its own *not claimed* line says it needs; N3-FACE says "two distinct tiles of one colour"
+     where the conclusion holds for a far pair; N3-ODD's parity against FS116-N1-TWIST-LIT; four sentences about arguments have no
+     formal statement. **My check of one**: `2d² − 13d + 24` has discriminant `169 − 192 < 0`, so it is positive at every real `d`.
+     **Rulings**: (i) the six generalizations and the decision on Euler's formula are adopted. Alternative for the latter: import
+     Euler's formula for cellular torus maps and state the rows on periodic arc maps. Why not: no row of the backlog reads the
+     passage, a combinatorial hypothesis is no assumption at all, and an import nobody consumes is trust spent for nothing.
+     Confidence: high; **what the kernel then does not hold, to be said in the wave's read-backs: that a doubly periodic valid map
+     gives such a combinatorial map**. (ii) (b) is a correction owed to FS114-N2-FIVE's entry (the nonempty map), with the wave's
+     errata; (a) and (c) are readings, logged. (iii) The flag on N4-LENS, if its second pass confirms it, is a statement defect in
+     a filed entry and comes to me as a message then.
