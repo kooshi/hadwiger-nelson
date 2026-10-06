@@ -240,7 +240,8 @@ opposite pairs.
 
 - **Build** (the module text of digest `40148413b2a7b1cb`, md5, first sixteen characters, recorded before the launch and matched
   after): `data/fs131/i8c/logs/build-3-seventeen-leaves.log` — "build: OK — 468 of 468 batches, 3 module(s) rebuilt, 2 module(s)
-  with warnings, 8m38s", `EXIT=0`. Its full log (`build/gate/build/20261006T233019Z-4080976.log`): "✔ Built
+  with warnings, 8m38s", `EXIT=0`. Its full log (`build/gate/build/20261006T233019Z-4080976.log`, scratch; the lines cited here
+  are kept in `data/fs131/i8c/logs/build-3-full-excerpt.log`): "✔ Built
   Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub (6.9s)", no warning of any kind for `SemiHub`; the two modules with warnings are
   `SemiHubPlaces` (6 declarations with `sorry`) and `Empty` (1), the sibling implementer's. The log's one line reading "error" is
   the up-to-date probe naming `SemiHub` as the target to rebuild (line 5; the same line stands in build 2's log).
@@ -293,3 +294,55 @@ opposite pairs.
 - `IsStar4`'s helpers and the star leaves ship with no Lean inhabitant (§ 3.4): the docstrings say so; the debt is not paid.
 - I cannot read the harness's token count; the hand-back is at this saved stage on my own estimate, with all seventeen leaves
   closed.
+
+## Drafts for the front page
+
+*For the coordinator to file; nothing here is filed by this job. This job did not run the gate (the brief withholds it), so it
+drafts no gate counts and no trust-ledger counts. Every regrade below is "kernel on `fs131-w8c` at `b0699c54`, built, not gated,
+not on `main`": it becomes [kernel] at the wave's landing, when its module passes the gate.*
+
+1. **`CLAUDE.md` § The gate, § Trust ledger** — no draft. What the wave's landing will meet from this job: 35 records in the block
+   "FS131-I8C" of `scripts/Axioms.lean` (above the PURCHASED banner), all CLEAN on the standard three; no purchase, no import; no
+   `VACUITY DECLARED` line added. The vacuity scan will meet the star rows and FS116-N3-CONE (a) with **no Lean inhabitant** of
+   their hypotheses (§ 3.4): expect them GENERIC or UNKNOWN, not WITNESSED, and read the counts with that in mind. One line of
+   prose in `SemiHub` holds the word `sorry` (the planner's docstring of `qcol_inner_tile`): a debt scan by text will flag it.
+2. **`LEDGER.md` § B, the grade cells of five rows** (slots: the fourth cell of each row's line — on `main` today "hand; one mind"
+   for FS116-V5-QCOL, FS116-V5-DICHO, FS116-N3-CONE; "hand; held, two minds (the second blind)" for FS116-N3-PAIR; "derived; one
+   mind" for FS116-N3-STAR2). Drafts, each "kernel on `fs131-w8c`, not gated; `Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean`;
+   the standard three axioms; no assumption imported":
+   - **FS116-V5-QCOL** — `qcol_cw`, `qcol_ccw`, `qcol_inner_tile`, `ringArc_dist_le_one`,
+     `IsTile.not_mem_closure_of_not_subset_ball`, `qcol_not_one_arc`, `GermOnQWith.exists_isRingArc_ccw`, `…_cw`; **all clauses
+     but "a (Q) arc holding u⁺ (v⁻) and not u⁻ (v⁺) ends at u (v)", which stays at its filed grade** (not stated in Lean).
+   - **FS116-N3-PAIR** — `germPair_inner_ne`, `germPair_swap`; with no change point, no *simple*, any `k` (a generalization).
+   - **FS116-V5-DICHO** — `germPair_dicho`, at a point of exactly four colours simple for the map, any `k`; its dichotomy clause
+     for any two (Q) arcs of the vertex, `ringArc_pair_eq_or_disjoint` (a generalization of that clause; the swap not).
+   - **FS116-N3-CONE** — (a) `ringTile_uMinus`, `ringTile_vMinus`, `ringTile_vPlus`, `ringTile_uPlus` (no *simple*); (b) the four
+     `germOnQ_bar_*` (the planner's); (c) `closure_inter_subset_sphere`, `isRingArc_of_edge` ("is an arc of ω(w)" read as: `y` lies
+     on an arc of `Γ` on `ω(w)` with those side colours), `four_le_of_bothKind` (with `w ∈ dom` and *simple* at `w`).
+   - **FS116-N3-STAR2** — `exists_isStar4`, `ringArc_star`, `fullSemiHub_star_crossed`, `fullSemiHub_star_parallel`; at exactly
+     four colours; the row's "full semi-hub of kind O" read as its two arcs.
+3. **`plans/FS116-derivation.md` — errata, drafts only (the deriver's file)**:
+   - FS116-V5-DICHO's entry (slot: after its statement line): "the dichotomy (Π₁ = Π₂ as sets, or Π₁ ∩ Π₂ = ∅) holds for any two
+     (Q) arcs of p — the two tiles of an arc are opposite among the four; the parenthesis (inner and outer exchanged) holds at the
+     two germs of one pair only".
+   - FS116-N3-CONE's entry (slot: its edge clause): "the two tiles need not be assumed distinct (inside B̄(w, 1) and outside
+     B(w, 1) they are)".
+   - FS116-N3-STAR2's entry (slot: its *not claimed* line): "the parallel star of kind T is in the kernel
+     (`fullSemiHub_star_parallel_T`), with no held model".
+4. **`plans/FS131-w8-kernel-plan.md` § 8.4** (the planner's record; a note for whoever reads it next, no edit by this job): its
+   table of DICHO's one-shared-colour cases was **not** checked by the kernel — the proof took another route (§ 3.2).
+5. **`CLAUDE.md` § Frontier** — no change of state from this job alone: FS-131 stays open; on wave 8's line, `SemiHub` is whole
+   on its branch, and the wave closes when its joined tree passes the gate.
+6. **Proof Atlas grade changes** (on landing, not now): FS116-V5-QCOL (all clauses but one), FS116-N3-PAIR, FS116-V5-DICHO,
+   FS116-N3-CONE, FS116-N3-STAR2 → kernel, each with the scope of item 2.
+7. **For the join of the two implementers' branches** (a trial, `git merge-tree --write-tree HEAD origin/fs131-w8d` with the
+   sibling at `1e6b71d9` and this branch at `b0699c54`; a query — nothing was merged): **exit 1, two conflicts, both of
+   adjacency and neither of content** — `ARCHITECTURE.md` (this job changed the row of `Plane/RingCalculus/SemiHub`, the sibling
+   the next line, the row of `…/SemiHubPlaces`: keep each side's own row) and `scripts/Axioms.lean` (each side inserted its own
+   block above the PURCHASED banner, 35 records here and 22 there, none removed: keep both blocks). No Lean file conflicts.
+   `SemiHubPlaces` imports `SemiHub`; the two modules declare no theorem name in common (22 of the sibling's at that tip against
+   this module's 53, by source text; the sibling may have pushed since — run `./scripts/dupnames.sh` on the joined tree, before
+   the axiom audit, as `LEAN.md` § The gate says). An earlier wording of this draft said `ARCHITECTURE.md` would merge clean; the
+   trial corrected it. **With wave 9**: `simpleOn_not_hasRepeatedColour` (here)
+   and `not_hasRepeatedColour_of_simpleOn` (`Plane/Classes/QFree`) are one statement under two names — one becomes a one-line
+   corollary. **With wave 7**: `qcol_inner_tile` and `qArc_inner`'s first clause, as the planner's § 9.8 says.

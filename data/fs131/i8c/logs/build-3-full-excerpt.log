@@ -1,0 +1,51 @@
+# Excerpt of build/gate/build/20261006T233019Z-4080976.log (the full output of the build cited as build-3-seventeen-leaves.log), kept here because build/ is scratch.
+# Lines 1-9 (the up-to-date probe), every line naming RingCalculus.SemiHub or RingCalculus.Empty, every 'declaration uses sorry' line (distinct), and the last 3 lines.
+## lines 1-9
+### up-to-date check, lake build --no-build over 1812 modules: exit 3 after 2s
+⚠ [5743/5819] Replayed Proofs.HadwigerNelson.Plane.RingCalculus.Empty
+warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:559:8: declaration uses `sorry`
+✖ [5756/5819] Building Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub
+error: target is out-of-date and needs to be rebuilt
+Some required targets logged failures:
+- Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub
+### batch 1/468, attempt 1: exit 0 after 1s: Proofs.Basic Proofs.HadwigerNelson.Arith.Dyadic Proofs.HadwigerNelson.Arith.FalconerFan Proofs.HadwigerNelson.Arith.NoAffine
+Build completed successfully (3703 jobs).
+## lines naming SemiHub / SemiHubPlaces / Empty
+2:⚠ [5743/5819] Replayed Proofs.HadwigerNelson.Plane.RingCalculus.Empty
+3:warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:559:8: declaration uses `sorry`
+4:✖ [5756/5819] Building Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub
+7:- Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub
+898:### batch 446/468, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.RingCalculus.Empty Proofs.HadwigerNelson.Plane.RingCalculus.StarChart Proofs.HadwigerNelson.Plane.ValidMap.BrickMap Proofs.HadwigerNelson.Plane.ValidMap.FlankUA
+899:⚠ [2669/2711] Replayed Proofs.HadwigerNelson.Plane.RingCalculus.Empty
+900:warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:559:8: declaration uses `sorry`
+906:### batch 449/468, attempt 1: exit 0 after 7s: Proofs.HadwigerNelson.Instances.TwoAdicFive Proofs.HadwigerNelson.Plane.Models.Paint Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub Proofs.HadwigerNelson.Plane.ValidMap.HornChart
+907:✔ [2853/2853] Built Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub (6.9s)
+917:### batch 454/468, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Plane.RingCalculus.SemiHubPlaces Proofs.HadwigerNelson.Plane.ValidMap.BendAway Proofs.HadwigerNelson.Transcendental
+918:⚠ [3260/3260] Built Proofs.HadwigerNelson.Plane.RingCalculus.SemiHubPlaces (1.5s)
+919:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:48:8: declaration uses `sorry`
+920:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:69:8: declaration uses `sorry`
+921:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:85:8: declaration uses `sorry`
+922:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:95:8: declaration uses `sorry`
+923:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:107:8: declaration uses `sorry`
+924:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:123:8: declaration uses `sorry`
+953:⚠ [5814/5819] Replayed Proofs.HadwigerNelson.Plane.RingCalculus.Empty
+954:warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:559:8: declaration uses `sorry`
+955:⚠ [5817/5819] Replayed Proofs.HadwigerNelson.Plane.RingCalculus.SemiHubPlaces
+956:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:48:8: declaration uses `sorry`
+957:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:69:8: declaration uses `sorry`
+958:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:85:8: declaration uses `sorry`
+959:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:95:8: declaration uses `sorry`
+960:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:107:8: declaration uses `sorry`
+961:warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:123:8: declaration uses `sorry`
+## distinct 'declaration uses sorry' lines
+warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:559:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:107:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:123:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:48:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:69:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:85:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:95:8: declaration uses `sorry`
+## last 3 lines
+warning: Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:123:8: declaration uses `sorry`
+✔ [5818/5819] Built Proofs (1.6s)
+Build completed successfully (5819 jobs).
