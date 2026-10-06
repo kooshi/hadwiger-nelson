@@ -4479,3 +4479,40 @@ reason by the close.*
      standard three. (e) **The `ARCHITECTURE.md` resolution** (item 451) stands. (f) **Kooshi is told in the next report** (a gap in the gate
      on `main`, no theorem in doubt, the check queued); not by push at night. (g) **Slot → FS131-RP1**, the remedy pass, launched 2026-10-06 on
      `fs131-w5c`. In flight: 1 (BA3) + 1 (KM1) + 1 (RP1) = 3. Queue: FS131-T4; the merge of `fs131-w5z`; the landing.
+
+460. **FS131-KM1 done at its Stage 3: the example maps are one construction, with a skeleton whose model theorems are the moves applied; the
+     flower's two models go to a second planning pass** (planner; harness ≈ 463k by the task notice; record `fs131-wm`'s
+     `plans/FS131-models-kernel-plan.md` Stages 1–3; report `data/fs131/reports/FS131-KM1.md` on that branch; commits `ad56c123`, `10d0bd66`,
+     `a003da50` (the Lean source the build read), `fe9d6d32`; pushed, tree clean). **Results**: every model is `(brickBase k).paint W B g` — the
+     seven-colour brick map read in `k ≥ 7` colours with a picture in spare colours painted on small sets inside bricks; it serves QA4's ranks
+     4 and 5, E7's `P₄` and `P₅`, and `awayModel`; rank 6 is a ring arc of `cuspFrag`. Skeleton `Plane/Models/{Paint, Moves, Stuck, Bends}`
+     (821 lines; 59 `sorry` leaves). **The four moves' model theorems are the moves applied** — `hornModel_shave`, `hornModel_open`,
+     `twoHornModel_rayMerge`, `twoHornModel_merge` elaborate against `exists_shave`, `exists_open`, `exists_rayMerge`, `exists_merge`, so each
+     hypothesis list is kernel-read against the landed statement; the same form for `flank_ne_of_doublyShadowed`, `bend_away_whole`,
+     `bend_toward`; `stuckModel_hyps : Valid ∧ IsPlaneMap ∧ Covers plantPt 1 ∧ IsStuck plantPt`. Proved in the job: the general layer
+     (`ArcMap.relabel`, `ArcMap.paint` and their lemmas, `brickBase`'s; 19 lemmas). No hypothesis set resisted a model; E7's `P₄` and `P₅` read
+     independently, no clause fails ([hand]). The completed bowtie is dropped for `P₅`. **Not done**: `F₀` and `F₁` (no skeleton); the
+     wave-5 applications and `stuckModel_terminal` (after wave 5). **A constraint found**: a horn-coloured disc internally tangent to `ω(v)` at
+     the pole of the horn's own axis is invalid; the tangent point must make a positive angle with the horn (E6's placement). **My receipt**:
+     tip equals `origin/fs131-wm`; the build log `build/gate/build/20261006T075428Z-2371761.log` ends "Build completed successfully (5754
+     jobs)", 0 warnings other than `sorry`, 59 distinct `sorry` warnings, all in the four model files (`Stuck` 21, `Moves` 18, `Paint` 13,
+     `Bends` 7); `data/fs131/km/KMAxioms.out` parsed by script, 36 records: 10 on exactly the standard three, 26 with `sorryAx` alone beyond
+     them; `hornModel_shave` read in `Moves.lean` l. 100–105: it is `ArcMap.exists_shave` applied to `hornModel`, every hypothesis supplied by
+     a named fact. **Items**: generalizations — `ArcMap.paint` generalizes the landed `recolour`; `ball_diff_fan`/`isSector_fan_iff`.
+     Correction owed — QA4 § 3.2 (b)'s "local facts are a chart" (the library holds a partition lemma). Predictions scored — the relabelling
+     45 lines against 60; rank 4 re-priced 950–1,350 lines, rank 5 about half of QA4's. Variation — `P₅`'s pole pieces are squares, E7's
+     inequalities re-read. Slips, the job's, disclosed. Three places a returned statement is most likely: `hornArcs`' rim-piece angles,
+     `brickBase_col_zero`, `stuckModel_terminal`.
+461. **Rulings on KM1's held items, and its slot.** (a) **Two implementers, split by file as its § 3.9 has it — A: `Paint`, `Moves`; B:
+     `Stuck`, `Bends` — starting on `main`'s line now**, the three brick facts re-proved in coordinates (about 120 lines) and tidied to wave
+     5's `BrickMap` after the landing. Alternative: wait for wave 5 to land. Why now: `hornModel` and `twoHornModel` close the open gate item on
+     the four moves, which is on landed results, and nothing in them reads wave 5. A takes the next free slot, B the one after; both behind
+     wave 5's landing job. Confidence: high. (b) **A wedge model for `exists_merge` is not wanted now**: the rule asks for an object meeting
+     every hypothesis at once, which two horns on a ray do; MERGE across two wedge sectors is a case of the proof, not a clause of the
+     statement — logged as a spec example a later pass may add. Confidence: medium. (c) **`bend_away_whole`'s plane-map model is wanted**
+     (about 30 lines beside `awayModel`, implementer B): the `cuspFrag` model meets `hin` only because the arc's centre carries no colour at
+     all, the degenerate way `LEAN.md`'s rule calls no model. Confidence: high. (d) **`F₀` and `F₁`** get a second planning pass after wave 5
+     lands. (e) **The docstring lines** (plan § 3.10) are applied by the implementer who lands the lane; the seventeen notes name
+     `stuckModel_hyps` once `Stuck` lands. (f) **Slot → FS131-T4** (the doubled-name check; ruling 459 (b)), launched 2026-10-06 on branch
+     `fs131-t4`. In flight: 1 (BA3) + 1 (RP1) + 1 (T4) = 3. Queue: the models' implementer A; wave 5's landing job when RP1 and BA3 are both
+     back; the models' implementer B.
