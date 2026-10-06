@@ -1,0 +1,11 @@
+brief l.34	CLAUDE.md	count: worktree=1 main=1	Do not consider Lean formalization a cost. It's practically mechanical
+brief l.39	plans/FS131-close-inventory.md	count: worktree=0 main=1	460. **FS131-KM1 done at its Stage 3: the example maps are one constru
+brief l.42	plans/FS131-close-inventory.md	count: worktree=0 main=1	461. **Rulings on KM1's held items, and its slot.** (a) **Two implemen
+brief l.45	plans/FS131-close-inventory.md	count: worktree=1 main=1	426. **FS131-QA4 done: the impossible-assumption audit, third pass** (
+brief l.48	plans/FS131-close-inventory.md	count: worktree=1 main=1	427. **Rulings on QA4's list and the rule.** (a) **Before wave 5 lands
+brief l.55	/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wm/Proofs/HadwigerNelson/Plane/Models/Moves.lean	count: as given=1	theorem hornModel_shave : ∃ ρ > 0, ∃ F' : ArcMap 8, F'.Valid ∧ F'.Agre
+brief l.58	/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wm/Proofs/HadwigerNelson/Plane/Models/Moves.lean	count: as given=1	theorem hornModel_open : ∃ F' : ArcMap 8, F'.Valid ∧ F'.HasHornCount p
+brief l.61	/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wm/Proofs/HadwigerNelson/Plane/Models/Moves.lean	count: as given=1	theorem twoHornModel_rayMerge : ∃ ρ > 0, ∃ F' : ArcMap 8, F'.Valid ∧ F
+brief l.64	/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wm/Proofs/HadwigerNelson/Plane/Models/Moves.lean	count: as given=1	theorem twoHornModel_merge : ∃ ρ > 0, ∃ F' : ArcMap 8, F'.Valid ∧ F'.A
+brief l.69	/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wm/plans/FS131-models-kernel-plan.md	count: as given=1	## Stage 3 — SAVED (FS131-KM1): the skeleton, its readback, the plan p
+10 quotations, 0 missing
