@@ -7582,3 +7582,11 @@ reason by the close.*
      then. Alternative: merge wave 8's branch into wave 9's now. Why not: wave 8's line is mid-flight on two
      branches. Confidence: high. (c) (3) goes to the wave's errata; announced as a result when its saved stage
      carries it (item 526). No reply sent to it: it needs none.
+594. **FS131-I8D, by message mid-job: the relay read; the ruled binder is in; three of its leaves built, two more elaborating** (source: I8D's message to "main", 2026-10-06 — the artifact is read at its hand-back).
+     By its word: its statement check against `6e0cf10d` shows exactly the five statements changed, each by exactly
+     the ruled binder (ruling 592); `crossed_no_tip`, `crossed_outer`, `crossed_four` built; `crossed_changePoint`
+     and `crossed_semiHub` elaborate — FS116-N3-CROSS's last clause closes with no gap at the step a blind second
+     mind had left open, and reads neither the freedom of the outer pair nor *simple* at the change point (a
+     generalization, for its report); the plan's child `disjoint_angleIcc_antipodal` is what wave 4's landed
+     `IsRingArc.disjoint_coneAt` already gives. Its own names sent for the sibling. **Done**: its names relayed to
+     FS131-I8C (one message; compared by me with I8C's list: no overlap). No ruling asked.
