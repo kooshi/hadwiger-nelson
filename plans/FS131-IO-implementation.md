@@ -859,3 +859,34 @@ nothing: every point of the domain has a degree (`exists_hasDegree_of_chart`, `S
 for a horn whose colour has further sectors at `v`.
 
 ## Stage 18 — SAVED (FS131-OL1)
+
+## Stage 19 — SAVED (FS131-OL1): `main` merged again (`68670175`), and the gate re-run on it — green, receipts byte-identical
+
+`origin/main` moved during Stage 18, to `a01002f8` (two commits: inventory items 412 and 413). `git diff --name-only 5b014f02 68670175`
+(the second merge, `git merge --no-ff origin/main`, no conflict): **`.claude/output-styles/keryx.md`**, `plans/FS131-close-inventory.md`,
+`plans/SESSION-HANDOFF-2026-10-04.md`. One of the three is outside `plans/` and `data/`, so by the brief's rule the gate was **re-run on the
+merged commit `68670175`**, whole (tag `landed`; `data/fs131/ol/run-gate-landed.head` records `HEAD=68670175…`, no tracked file modified).
+No Lean file, script or tool changed (`git diff --name-only 92529c5c 68670175 -- . ':!plans' ':!data'` = the output style alone), and of
+the files under `scripts/`, `lakefile.toml` and the checkers only `scripts/identities.py` names the output-style directory; it is no part
+of `LEAN.md` § The gate, and `scripts/identities.py check` reads "IDENTITIES: PASS", exit 0 (`data/fs131/ol/identities-landed.txt`).
+
+**The gate on `68670175`**, each saved log read:
+- **Build**: "all 1767 modules already up to date, nothing built, 0 module(s) with warnings, 2s", exit 0
+  (`build/gate/build/20261006T030548Z-413449.log`, 0 `warning` lines; driver `data/fs131/ol/build-landed.log`).
+- **Axioms**: "axioms: OK — 3889 clean, 14 axiom-free, 4 imported, 5 declared purchase(s)", "audited: 3912 records", "no record appeared,
+  disappeared or changed its axioms", exit 0 (`build/gate/axioms/20261006T030550Z-413723.log`, `cmp`-identical to
+  `data/fs131/ol/axioms-receipt-final.log`; digest `axioms-landed.log`). `tools/fs131_ol_axioms.py` on it: 105 = 105 = 105, 103 on exactly
+  the three, 2 on fewer, 0 on none, `exists_open` on the three, PASS. Self-test: 23 `ok`, 0 `FAIL`, "OK — every planted fault fired, and
+  every partner passed", exit 0 (`build/gate/axioms-self-test/20261006T030555Z-414206.log`; driver `axioms-selftest-landed.log`).
+- **Vacuity**: "vacuity: OK", `declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0 stale=0 declared=3 witnessed=32
+  generic=747 unknown=2`, the baseline header "match (9 of 9 compared)", "counts: unchanged, rows: none changed", exit 0
+  (`build/gate/vacuity/20261006T030742Z-427710.log`, `cmp`-identical to `data/fs131/ol/vacuity-scan-final.log`; digest
+  `vacuity-landed.log`). `tools/fs131_ol_vacdiff.py` against `main`'s gated scan: PASS (0 lost, 14 added, all `GENERIC`, all OPEN's).
+  Self-test: 62 `ok`, 0 `FAIL`, "OK — all 62 controls behaved", exit 0 (`build/gate/vacuity-self-test/20261006T030854Z-434391.log`;
+  driver `vacuity-selftest-landed.log`).
+- **Architecture**: "RESULT: PASS", exit 0 (`arch-landed.txt`). **Sorry**: the same four prose lines, 0 by the narrow pattern
+  (`sorry-landed.txt`, identical to `sorry-final.txt`).
+
+**The gated commit for the landing is `68670175`.** Stage 18's negative controls stand for it: nothing they exercise changed.
+
+## Stage 19 — SAVED (FS131-OL1)
