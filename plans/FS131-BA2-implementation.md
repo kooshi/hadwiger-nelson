@@ -516,3 +516,110 @@ the coordinator.
 - **Statements**: `tools/fs131_ba3_stmt.py`: **0 failures over 1,795 base files** (`data/fs131/ba3/stmt-stage8.txt`).
 
 ## Stage 8 — SAVED (FS131-BA3)
+
+## Stage 9 — SAVED (FS131-BA3): `CollarFitOut.map_R2` proved; the receipt — `bend_away_part` rests on no open leaf of the bend's
+
+### 9.1 `CollarFitOut.map_R2`
+
+Statement unchanged. The toward proof's route with the outward helpers, and nothing in it turns on the lens's side: the closed arc
+misses `α°` (`free_open`, `exists_sphere_inter_ball_subset_openArc`), so it lies in the bent map's `Γ` (`map_Γ`); the sides by
+`sides_eq`, with `Q ≠ P` at an end because an arc of `ω(P)` through an end continues into `α°`, against `hd`. Elaborated on its first
+run. `hF : F.Valid` is not read here either (kept by `have _ := hF`; held for the coordinator with Stage 8's).
+
+### 9.2 The receipt (the brief's item 4)
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`), of commit `1685b22b`: **OK — 459 of 459 batches, 3 modules rebuilt (`BendGap`,
+  `BendStep`, `Proofs`), exit 0, no warning other than `declaration uses sorry`** (`build/gate/build/20261006T081717Z-2541073.log`,
+  ending "Build completed successfully (5802 jobs)"; its line 8, "error: target is out-of-date and needs to be rebuilt", is the
+  up-to-date probe's answer, after which the walk ran; driver log `data/fs131/ba3/build4.log`). **3 distinct `sorry` warnings, none in
+  the bend's seven modules**: `Procedure` 2 (l. 795, 812), `Terminal` 1 (l. 3592) — this branch's old copies of files proved on
+  another branch. The log holds no warning naming `BendAway`, `LensOut`, `CollarMapOut`, `R2Cap`, `HornChart`, `BendGap` or `BendStep`
+  (a count of 0, against 1 in Stage 8's log and 2 in Stage 7's: the same grep, watched red twice before it read 0); the word `sorry`
+  does not occur in six of the seven sources, and once in `BendStep`, in a docstring (l. 347, about `fs131-w4ba`).
+- **Axioms** against that build's oleans (`data/fs131/ba3/BA3Axioms.lean` → `BA3Axioms.out`, `slot.py --mem 12 --cpus 2 -- lake env
+  lean`, exit 0; `tools/fs131_ir_axsum.py`, `BA3Axioms-summary.txt`, PASS): **19 records, every one on exactly
+  `[propext, Classical.choice, Quot.sound]`, 0 through `sorryAx`, 0 other** — among them **`CollarFitOut.awayBend`,
+  `bend_away_gap`, `bend_away_subdiv`, `bend_away_part`**, the two children, the seven helpers, the three ruled statements and their
+  callers. **Two controls, both fire** (`BA3Axioms-control.txt`): (1) the final print with `bend_away_part` expected through
+  `sorryAx` exits 1, naming it as standard; (2) the print of the tree one commit earlier (Stage 8's, `map_R2` open), judged with no
+  `sorry` expected, exits 1 naming `map_R2`, `awayBend`, `bend_away_gap`, `bend_away_subdiv`, `bend_away_part` — the instrument on
+  the same declarations with one leaf open.
+- **The wider list**: FS131-BA2's 71 records (`data/fs131/ba2/BA2Axioms.lean`) printed against this build
+  (`data/fs131/ba3/BA2Axioms-final.out`, `BA2Axioms-final-summary.txt`, PASS): **71 on the standard three or fewer, 0 through
+  `sorryAx`** (6 at BA2's Stage 4).
+- **Statements** (`tools/fs131_ba3_stmt.py`, base `dae3d93e`; `data/fs131/ba3/stmt-final.txt`): **0 failures over 1,795 base files**;
+  the three ruled names "exactly as ruled"; 7 new declarations listed, all in `BendGap`; under `Proofs/` the tree differs from the
+  base in `BendGap.lean` and `HornChart.lean` alone. `--self-test` on the final tree: **16 plants, each FIRED, the unplanted run PASS**
+  (`stmt-selftest-final.txt`). No `axiom`, no `native_decide`.
+- **The map**: no module added; `tools/check_architecture.py` PASS (`data/fs131/ba3/arch-stage9.txt`).
+- I ran no gate, merged nothing, touched nothing on `main`, in `BendStep.lean`, the other half's modules, the toward bend's modules,
+  `Procedure.lean` or `Terminal.lean`. The four builds and the axiom prints have exited; nothing of this job is running (the slot
+  ledger's one entry at this writing, `run.sh`, is another job's).
+
+### 9.3 The price, measured
+
+BA2 priced the two mirrors at "about 350 lines … one stage". Measured: 361 lines added to `BendGap` (7 helpers, a spec example, the
+two proofs), **every declaration elaborated on its first run** in a working file (`data/fs131/ba3/Mirror.lean`) against the built
+oleans; the wall clock was four builds of 8.4 to 9.4 minutes each (the walk costs that whatever is rebuilt), one per save the brief
+asks.
+
+### 9.4 Slips of my own, and one hazard met
+
+- The quote checker's provenance line named itself after a `sed` (it now names BA2's); caught before the first commit.
+- Once I looked up my build's wrapper with `pgrep -f` (to read which log it held open). Nothing was decided or signalled on it, but
+  `RUNNING.md` bars letting a pattern that can match its own shell decide anything; I should have read the PID from the slot ledger.
+- *Hazard, met and avoided*: to elaborate `BendGap` against the edited `HornChart` before the build, I made a scratch overlay of the
+  oleans by symlinks (`cp -rs`). `lean -o <overlay>/…/BendGap.olean` would have written **through the symlink into `.lake/build`**;
+  I removed the symlink before writing. An overlay for iteration must hold real files wherever it is written to.
+
+### 9.5 Not done, and why
+
+- **The inhabitant `awayModel`** (the planner's § 5): not in this brief; owed with the models' lane (FS131-KM1's).
+- **Stale prose outside my files** (`BendStep.lean`, not mine to edit): the module header's "`CollarFit.map_hornCount_le`, open: its
+  children are …" (BA2's note); the section title "## The away bend, in the form the arc step reads (open)"; `bend_away_part`'s
+  docstring "**Proved from open children**" — each is now proved outright. `BendGap.lean`'s module header still says "FS131-KA1's
+  skeleton": left, because a module docstring costs every dependent a rebuild and the last build's receipts are for this text.
+- **`hF` in `CollarFitOut.map_R1`, `CollarFitOut.map_R2`**: unread, kept; a ruling's to remove (§ 8.1).
+
+## Theorems this phase proved (FS131-BA3)
+
+Kernel-checked, each on exactly `[propext, Classical.choice, Quot.sound]` (`data/fs131/ba3/BA3Axioms.out`, 19 records), namespace
+`HadwigerNelson.Plane`, all in `Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean` unless said:
+- **`ArcMap.CollarFitOut.map_R1`** — R1 for the outward collar bend: every constant-sided unit arc of the bent map is one of `F`'s,
+  with the same centre, angles and side colours.
+- **`ArcMap.CollarFitOut.map_R2`** — R2: a constant-sided unit arc of `F` whose open arc misses the bent arc's open arc is one of the
+  bent map's, with the same data.
+- Helpers: `ArcMap.collarK_one_side` (near an end the collar set lies on one side of every other unit circle),
+  `ArcMap.CollarFitOut.one_le_outerProf`, `.isClosed_closedLensOut`, `.lensOut_subset_closedLensOut`, `.sides_end`, `.sides_eq`,
+  `.ringPt_notMem_map_Γ`.
+- **Now on the standard three, with no open leaf of the bend's beneath them**: `ArcMap.CollarFitOut.awayBend`,
+  `ArcMap.bend_away_gap` (`BendGap`), `ArcMap.bend_away_subdiv`, **`ArcMap.bend_away_part`** (`BendStep`) — FS131-KA1's statements,
+  proved by FS131-KA1, BA1, BA2 and this job together.
+- Statements changed as ruled (inventory ruling 457 (b)), proofs unchanged but for the dropped lines:
+  `ArcMap.hasHornCount_zero_of_two_spheres`, `ArcMap.hasHornCount_iff_of_germ_swap` (`HornChart`),
+  `ArcMap.CollarFitOut.map_hornCount_le`.
+
+## Drafts for the front page (FS131-BA3)
+
+No gate was run by this job (the brief's item 5), so there are no counts to draft for `CLAUDE.md` § The gate or § Trust ledger. For
+the wave's final sync, each slot named, nothing filed by me:
+- **`plans/FS131-close-inventory.md`, a new item after 457**: "FS131-BA3 done: the three ruled removals made (`hρ`, `hρ'`; `hκ`;
+  `hF` of `CollarFitOut.map_hornCount_le`), exactly those by script; `CollarFitOut.map_R1` and `CollarFitOut.map_R2` proved on the
+  standard three over seven helpers (`collarK_one_side`, the closed outward lens, `CollarFitOut.sides_end`, `sides_eq`); the bend's
+  seven modules hold no `sorry`; `CollarFitOut.awayBend`, `bend_away_gap`, `bend_away_subdiv`, `bend_away_part` on
+  `[propext, Classical.choice, Quot.sound]`. Held: `hF` is unread in the outward `map_R1`, `map_R2` (and, by reading, in the toward
+  `CollarFit.sides_end`, `sides_eq`, `map_R1`, `map_R2`)."
+- **`LEDGER.md`, the row of the away bend (FS112-N2-AWAY with N2-TAN, in the collar form the arc step reads), when the wave files
+  it**: regraded [hand] → **[kernel]**: `HadwigerNelson.Plane.ArcMap.bend_away_part`
+  (`Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean`), axioms `[propext, Classical.choice, Quot.sound]`; assumptions: none beyond
+  its hypotheses, by name `hF : F.Valid`, `hP : F.IsPlaneMap`, `hA : F.IsRingArc P θ₁ θ₂ c c'`, `hin : c ∉ F.coloursAt P`,
+  `hfree` (near each interior point of the arc `Γ` is `ω(P)` alone), `hε : 0 < ε`. Its inhabitant (`awayModel`) is still owed, so the
+  vacuity gate's evidence for it is not in the tree.
+- **`Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean`** (not mine to edit), three stale lines: the module header's
+  "`CollarFit.map_hornCount_le`, open: its children are …" → "proved, over `hornCount_le_of_collarBend` (`Plane/ValidMap/BendGap`)";
+  the section title "## The away bend, in the form the arc step reads (open)" → without "(open)"; `bend_away_part`'s docstring
+  "**Proved from open children**" → "**Proved**", and its "Model of the hypotheses: none in Lean on this branch" as the models' lane
+  leaves it.
+- **Frontier line, Proof Atlas**: no change owed by this job alone — the wave's closing filing carries them.
+
+## Stage 9 — SAVED (FS131-BA3)

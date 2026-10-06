@@ -1,7 +1,8 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.BendGap
 
 /-! FS131-BA3's working file (iteration only, never evidence): the helpers and the two mirrors, elaborated against `BendGap`'s olean
-under primed names before they are pasted into `BendGap.lean`. -/
+under primed names before they are pasted into `BendGap.lean`. Since Stage 7 the helpers are declared in `BendGap` itself, so this file
+no longer elaborates against the tree (its names collide with theirs); it is kept as the record of what was elaborated first. -/
 
 namespace HadwigerNelson.Plane
 
