@@ -256,3 +256,10 @@ Token count at this stage: about 300k by my own estimate.
    read it only at fields of odd cardinality (`Q ≡ 3 (mod 4)`); `[Weil1948]` p. 207 assumes characteristic not 2 (the bibliography
    row), so the axiom is stated with `ringChar F ≠ 2` — `∀ F, ringChar F ≠ 2 → KloostermanBound F` discharges
    `standingFloor_seven`'s hypothesis by `FiniteField.even_card_iff_char_two`."
+
+## Stage 4 — SAVED (FS131-I10D): the report
+
+`data/fs131/reports/FS131-I10D.md`, in standing rule 11's form, ending with what is left and its route. Commits of this job on
+`fs131-w10d`: `de072a7c` (stage 1), `7d4395a9` (stage 2), `7dace39e` (stage 3), and the report's. No background process is left
+running (the three builds each wrote their `exit=` line); nothing the record cites lives outside `data/fs131/i10d/`, `tools/`,
+`scripts/Axioms.lean` and the two modules.
