@@ -27,9 +27,9 @@ def asked(lean):
 
 def records(out):
     recs = []
-    for m in re.finditer(r"'([^']+)' depends on axioms: \[([^\]]*)\]", out, re.S):
+    for m in re.finditer(r"'(\S+)' depends on axioms: \[([^\]]*)\]", out, re.S):
         recs.append((m.group(1), frozenset(a.strip() for a in m.group(2).split(",") if a.strip())))
-    for m in re.finditer(r"'([^']+)' does not depend on any axioms", out):
+    for m in re.finditer(r"'(\S+)' does not depend on any axioms", out):
         recs.append((m.group(1), frozenset()))
     return recs
 

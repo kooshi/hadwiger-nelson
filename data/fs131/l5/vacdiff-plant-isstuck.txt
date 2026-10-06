@@ -1,0 +1,80 @@
+counter vs the main scan: declarations 11173 / 11173, refutations 118 / 118: agree
+counter vs the landing scan: declarations 12999 / 12999, refutations 182 / 182: agree
+LOST EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isStuck_I :: HadwigerNelson.Plane.bowtie.IsStuck Complex.I
+LOST SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_chain :: F.IsStuck (v + ↑j * HadwigerNelson.Plane.e (α + Real.pi / 2))
+LOST SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_chain :: F.IsStuck v
+LOST SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_flip :: F.IsStuck w
+LOST SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_horns :: F.IsStuck v
+LOST SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_step :: F.IsStuck w
+LOST SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure :: F.IsStuck v
+LOST SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure_flanks :: F.IsStuck v
+main rows 859, landing rows 1171; lost 8 (0 with a removed declaration); added 320
+  added SITE GENERIC on IsHorn: 58
+  added SITE GENERIC on IsQArc: 6
+  added SITE GENERIC on IsRingArc: 62
+  added SITE GENERIC on Valid: 194
+  added rows in Plane.ValidMap.ArcStep: 19
+  added rows in Plane.ValidMap.BaseDense: 21
+  added rows in Plane.ValidMap.BaseWalk: 6
+  added rows in Plane.ValidMap.BendAway: 5
+  added rows in Plane.ValidMap.BendCollar: 19
+  added rows in Plane.ValidMap.BendGap: 13
+  added rows in Plane.ValidMap.BendStep: 14
+  added rows in Plane.ValidMap.Chain: 1
+  added rows in Plane.ValidMap.Cor3: 8
+  added rows in Plane.ValidMap.Dense: 4
+  added rows in Plane.ValidMap.FlankUA: 23
+  added rows in Plane.ValidMap.HexRing: 13
+  added rows in Plane.ValidMap.HornShadow: 12
+  added rows in Plane.ValidMap.Limit: 11
+  added rows in Plane.ValidMap.MapGraph: 24
+  added rows in Plane.ValidMap.MapTopology: 7
+  added rows in Plane.ValidMap.Procedure: 41
+  added rows in Plane.ValidMap.R2Cap: 5
+  added rows in Plane.ValidMap.Terminal: 74
+  declarations: 11173 -> 12999 (+1826)
+  refutations-skipped: 118 -> 182 (+64)
+  sites: 784 -> 1097 (+313)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 32 -> 32 (+0)
+  generic: 747 -> 1060 (+313)
+  unknown: 2 -> 2 (+0)
+  module Plane.Basic: declarations 13 -> 15 (+2), refutations 0 -> 0 (+0)  [changed]
+  module Plane.Chord: declarations 18 -> 16 (-2), refutations 0 -> 0 (+0)  [changed]
+  module Plane.CurveGraph: declarations 0 -> 31 (+31), refutations 0 -> 1 (+1)  [new module]
+  module Plane.PlaneTopology: declarations 0 -> 26 (+26), refutations 0 -> 1 (+1)  [new module]
+  module Plane.SixFragment: declarations 137 -> 136 (-1), refutations 4 -> 4 (+0)  [changed]
+  module Plane.ValidMap.ArcStep: declarations 0 -> 55 (+55), refutations 0 -> 1 (+1)  [new module]
+  module Plane.ValidMap.BaseDense: declarations 0 -> 33 (+33), refutations 0 -> 5 (+5)  [new module]
+  module Plane.ValidMap.BaseWalk: declarations 0 -> 127 (+127), refutations 0 -> 10 (+10)  [new module]
+  module Plane.ValidMap.Basic: declarations 91 -> 92 (+1), refutations 1 -> 1 (+0)  [changed]
+  module Plane.ValidMap.BendAway: declarations 0 -> 54 (+54), refutations 0 -> 1 (+1)  [new module]
+  module Plane.ValidMap.BendCollar: declarations 0 -> 43 (+43), refutations 0 -> 1 (+1)  [new module]
+  module Plane.ValidMap.BendGap: declarations 0 -> 49 (+49), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ValidMap.BendStep: declarations 0 -> 13 (+13), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ValidMap.BrickMap: declarations 0 -> 46 (+46), refutations 0 -> 3 (+3)  [new module]
+  module Plane.ValidMap.Chain: declarations 0 -> 29 (+29), refutations 0 -> 1 (+1)  [new module]
+  module Plane.ValidMap.CollarMap: declarations 0 -> 39 (+39), refutations 0 -> 3 (+3)  [new module]
+  module Plane.ValidMap.CollarMapOut: declarations 0 -> 39 (+39), refutations 0 -> 3 (+3)  [new module]
+  module Plane.ValidMap.Cor3: declarations 0 -> 13 (+13), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ValidMap.Dense: declarations 0 -> 14 (+14), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ValidMap.FlankUA: declarations 0 -> 28 (+28), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ValidMap.HexRing: declarations 0 -> 64 (+64), refutations 0 -> 5 (+5)  [new module]
+  module Plane.ValidMap.HornChart: declarations 0 -> 9 (+9), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ValidMap.HornShadow: declarations 0 -> 49 (+49), refutations 0 -> 1 (+1)  [new module]
+  module Plane.ValidMap.LensOut: declarations 0 -> 47 (+47), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ValidMap.Limit: declarations 0 -> 152 (+152), refutations 0 -> 2 (+2)  [new module]
+  module Plane.ValidMap.MapGraph: declarations 0 -> 204 (+204), refutations 0 -> 7 (+7)  [new module]
+  module Plane.ValidMap.MapTopology: declarations 0 -> 85 (+85), refutations 0 -> 5 (+5)  [new module]
+  module Plane.ValidMap.OpenMove: declarations 147 -> 146 (-1), refutations 5 -> 5 (+0)  [changed]
+  module Plane.ValidMap.Procedure: declarations 0 -> 171 (+171), refutations 0 -> 3 (+3)  [new module]
+  module Plane.ValidMap.Pushforward: declarations 0 -> 35 (+35), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ValidMap.R2Cap: declarations 0 -> 27 (+27), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ValidMap.RadialPush: declarations 0 -> 119 (+119), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ValidMap.Terminal: declarations 0 -> 104 (+104), refutations 0 -> 6 (+6)  [new module]
+  module Plane.ValidMap.UnitArc: declarations 239 -> 238 (-1), refutations 7 -> 7 (+0)  [changed]
+  module Thomassen: declarations 0 -> 123 (+123), refutations 0 -> 5 (+5)  [new module]
+  by module: declarations +1826, refutations +64: equal to the scans difference
+vacdiff: FAIL (8)

@@ -344,6 +344,45 @@ Two exclusions are worth their reasons, because both look like obvious additions
   `IsClear` OUT. `exists_open`'s hypotheses hold together on no map of the library yet (its docstring's inhabitant note: FS131-E6's
   twelve-colour map, at [hand]); that is a conjunction across binders, which this per-binder scan cannot see.
 
+* **Wave 5's carriers (FS131-L5, by the procedure below; the 29 modules of the limit, the procedure, the terminal maps, the bends, the
+  base's walk and the planar reduction, `Plane/ValidMap/Limit` to `Thomassen`).** **No new carrier IN.** The wave declares sixty
+  hypothesis-formers (every definition, structure and inductive of the `Plane` modules and of `Thomassen` whose type ends in a sort and
+  which `main`'s library did not hold, listed by `data/fs131/l5/census.lean` with what the library proves of each): none has an
+  unconditional `¬ P …` at a closed instance and none an `IsEmpty` instance — the two shapes `gather` reads as emptiness — so for none
+  could step (3)'s `VACUOUS` control be planted, and entering one would add `GENERIC` rows and no signal. **OUT**, by kind:
+  - **the base's context**: `ArcMap.BaseCtx` (26 binder sites, `BaseWalk` and `BaseDense`) bundles `Row134BaseUA`'s hypotheses at a
+    six-coloured fragment and is **empty at every instance** — `BaseCtx.false`, a refutation over variable `F`, `u`, which this scan
+    skips and cannot read as evidence. Every theorem taking it is a step inside that proof by contradiction and says so in its
+    docstring ("no model expected", naming `row134BaseUA`), which is what `LEAN.md` § The gate asks of such a step. Tracked, each
+    site would read `GENERIC`, which is false of a carrier known empty; it is kept out and the fact is recorded here. Its fields
+    `ArcMap.BaseHyp`, `NoInertNear`, `UnenclosedC` are predicates of a point of a variable map, each satisfied on `sevenBrickMap`
+    (`sevenBrick_baseHyp`, `sevenBrick_noInertNear`, `sevenBrick_unenclosedC`; `not_row134BaseUA_seven` reads all at once at seven
+    colours); `ArcMap.Unenclosed` is the stronger form of the last (`Unenclosed.unenclosedC`). `Row134BaseUA` is a closed
+    proposition, proved (`row134BaseUA`), never a binder;
+  - **clause packages, `Prop`-valued structures at a variable map at every site**, none refuted at a concrete instance by a theorem —
+    register one when it is: `ArcMap.ArcBend` (the arc step's interface; inhabited at `l60Frag`'s collar bend, `ArcStep`'s spec
+    example), `ArcMap.AwayBend` (`AwayBend.idle`), `ArcMap.CollarFit` (`collarModel`), `ArcMap.CollarFitOut` (`exists_collarFitOut`,
+    under `bend_away_gap`'s hypotheses, whose own model is owed: an open gate item), `ArcMap.LocalStep` and `ArcMap.IsModification`
+    (reflexive: `LocalStep.refl`, `IsModification.refl`), `ArcMap.ProcInv`, `ArcMap.ProcStep`, `ArcMap.IsBoundaryWalk`,
+    `ArcMap.IsPortGraph`, `Thomassen.PlanarLike` (`triLattice_planarLike`), `PushProfiles`, `PushOutProfiles` (`pushProfiles_collar`,
+    `pushOutProfiles_collar`);
+  - **data, written down**: `ArcMap.LocalSeq` (`LocalSeq.const`), `ArcMap.ProcRun` (`ProcRun.const`); the inductive `R2Subdiv` (a
+    finite subdivision, built by its constructors; `R2Subdiv.below` is its generated auxiliary);
+  - **facts about a point, an arc or a tile of a variable map**, decided where they occur, like `HasSectors` and `IsSectorChart`:
+    `ArcMap.IsClean`, `IsSite`, `IsChainVertex`, `StuckAlong`, `IsTerminalMap` (inhabited: `sevenBrickMap_isTerminalMap`), `QROnly`,
+    `IsMaxRingArc`, `MoveAt`, `Todo`, `HornBoundsQR`, `OnQR2Arc`, `GermPseudo`, `HexRing`, `RingProper`, `DoubleEvent`, `VIn`,
+    `IsEndpoint`, `IsRetArc`, `IsHoleOf`, `IsOuterTile`, `IsEdgeOf`, `EnclosesTile`, `BasedTrail`;
+  - **predicates of a circle colouring, a set, a point or a graph variable**: `CircleColouring.Removable`, `ChangeWith`, `IsHex`;
+    `HasCurveStar`, `IsCurve`, `IsRegularAt`, `IsRegOf`; `Thomassen.IsTwoSep`, `IsMaximalTwoSep`, `IsRing`, `LocallyHamiltonian`,
+    `NoInterleave`, `ReachIn`, `TwiceApart`.
+  `IsRegularAt`, `IsSite`, `IsHoleOf`, `EnclosesTile` and `IsMaximalTwoSep` are refuted only under hypotheses or over variables
+  (nine theorems), which is no evidence to this scan. Every other hypothesis the wave takes is a carrier decided above: its **346 new
+  sites** are 194 on `Valid`, 62 on `IsRingArc`, 58 on `IsHorn`, 26 on `IsStuck` and 6 on `IsQArc`, **all `GENERIC`** at a variable map
+  (`tools/fs131_l5_vacdiff.py`: no row of `main`'s scan lost, none added to a declaration `main` holds, no new evidence row). A binder
+  `(h : F.IsTerminalMap)` raises no site though the definition holds `F.Valid`: the scan reads a binder's head as written. What it
+  cannot see, as before: hypothesis sets that hold together on no map of the library — the stuck family, `exists_arcStep`,
+  `bend_away_part`, the base's steps — each of which says so in its docstring and is listed as an open gate item at the landing.
+
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
 its reason, in the `UDCert` / `AeColouring` style — IN iff "does one exist" is a theorem rather than a

@@ -6290,6 +6290,14 @@ The children themselves are in FS131-KA1's block above; these are the helpers th
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.ringPt_notMem_map_Γ
 -- FS131-BA3 block end
 
+/-! ## FS-131 wave 5 (job FS131-L5) — the landing: one record the wave's blocks lacked
+
+`LocalSeq.limit_dom` (`Plane/ValidMap/Limit`; `@[simp]`, by `rfl`) was the one hand-written theorem of wave 5 with no record:
+found by reading the kernel's list of the landing library's theorems against this file (`tools/fs131_l5_records.py`). Removed
+by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ringPt_inj_of_abs_sub_lt`, `BendAway`). -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limit_dom
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

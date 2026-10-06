@@ -10,7 +10,11 @@ Three lists are read:
   gone     the theorems of `main`'s library the landing no longer holds (the ruled removals);
   log      the records of `scripts/axioms.sh`'s full output (`build/gate/axioms/…`), each with the banner it was printed under.
 
-Checks: every wave theorem has exactly one record (MISSING / DOUBLED otherwise), printed between the CLEAN banner and the next
+A wave theorem whose name Lean generates (an equation lemma `f.eq_1`, a `congr_simp`, a structure's `mk.inj`, `mk.injEq`,
+`mk.sizeOf_spec`, an inductive predicate's `brecOn`: reserved names no author writes, which the audit has never listed) is counted
+and named as `generated`, and no record is asked of it; a record it does have is read like any other.
+
+Checks: every hand-written wave theorem has exactly one record (MISSING / DOUBLED otherwise), printed between the CLEAN banner and the next
 one (NOT-CLEAN-SECTION), on a subset of `[propext, Classical.choice, Quot.sound]` (FOREIGN: `sorryAx`, a native auxiliary, any
 other axiom); no gone theorem has a record (STALE-RECORD); each name given by `--heads` rests on EXACTLY the three (HEAD).
 Prints how many rest on exactly the three, on fewer (by set) and on none, by module.
@@ -26,8 +30,9 @@ import re
 import sys
 
 STD = frozenset({"propext", "Classical.choice", "Quot.sound"})
-REC = re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)", re.S)
+REC = re.compile(r"'(\S+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)", re.S)
 BANNER = re.compile(r"^=== ([A-Z]+) ===$", re.M)
+GENERATED = re.compile(r"\.(eq_\d+|eq_def|congr_simp|brecOn|binductionOn)$|\.mk\.(inj|injEq|sizeOf_spec)$")
 
 
 def theorems(path):
@@ -58,8 +63,12 @@ def check(wave, gone, recs, heads, list_missing=False):
     for n, ax, sec in recs:
         by[n].append((ax, sec))
     bad, tally, bymod = [], collections.Counter(), collections.Counter()
+    generated = []
     for n in sorted(wave):
         got = by.get(n, [])
+        if GENERATED.search(n) and not got:
+            generated.append(n)
+            continue
         if len(got) != 1:
             bad.append(f"{'MISSING' if not got else 'DOUBLED'} {n} ({len(got)} records; module {wave[n]})")
             continue
@@ -79,7 +88,7 @@ def check(wave, gone, recs, heads, list_missing=False):
         got = by.get(h, [])
         if len(got) != 1 or got[0][0] != STD:
             bad.append(f"HEAD {h}: {'no single record' if len(got) != 1 else 'axioms ' + str(sorted(got[0][0]))}")
-    return bad, tally, bymod
+    return bad, tally, bymod, generated
 
 
 def main(argv):
@@ -118,9 +127,12 @@ def main(argv):
         recs = planted
         print(f"planted: sorryAx on {h0}; {v_drop} dropped; {v_dbl} doubled; {v_move} under PURCHASED; "
               f"{heads[1] if len(heads) > 1 else '-'} on Quot.sound alone  ({sorted(done)})")
-    bad, tally, bymod = check(wave, gone, recs, heads)
-    print(f"main: {len(mthm)} theorems; landing: {len(lthm)}; wave (landing only): {len(wave)}; gone (main only): {len(gone)}; "
+    bad, tally, bymod, generated = check(wave, gone, recs, heads)
+    print(f"main: {len(mthm)} theorems; landing: {len(lthm)}; wave (landing only): {len(wave)} = {len(wave) - len(generated)} "
+          f"hand-written + {len(generated)} generated with no record asked; gone (main only): {len(gone)}; "
           f"records in the log: {len(recs)}")
+    kinds = collections.Counter(re.sub(r"^.*\.(mk\.)?", "", g) for g in generated)
+    print("  generated, by suffix: " + ", ".join(f"{k} {v}" for k, v in sorted(kinds.items())))
     for g in sorted(gone):
         print(f"  gone: {g}  ({gone[g].replace('Proofs.HadwigerNelson.', '')})")
     for k, c in sorted(tally.items()):

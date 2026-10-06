@@ -67,8 +67,15 @@ def head_of(row):
         return ""
     c = row.split(" :: ", 1)[1].strip()
     c = re.sub(r" \[by .*\]$", "", c)
-    first = c.split()[0].lstrip("(¬")
-    return first.split(".")[-1].rstrip(")")
+    if c.startswith("("):  # `(F.surgery v ρ …).Valid`, `(ArcMap.const Set.univ ⋯ j).IsRingArc P …`: the head follows the group
+        depth = 0
+        for i, ch in enumerate(c):
+            depth += ch == "("
+            depth -= ch == ")"
+            if depth == 0:
+                m = re.match(r"\.([\w']+)", c[i + 1:])
+                return m.group(1) if m else "?"
+    return c.split()[0].split(".")[-1]
 
 
 def main(argv):
