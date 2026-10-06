@@ -4899,6 +4899,24 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.MajorityVote.measurableSet_lt_two_mul_card_filter
 #print axioms HadwigerNelson.MajorityVote.exists_measurable_selector
 #print axioms HadwigerNelson.MajorityVote.ae_eq_measurable_of_majority
+#print axioms HadwigerNelson.SpectralInputs.mem_factorSets_of_ae_eq
+#print axioms HadwigerNelson.SpectralInputs.measureReal_prod_eq_integral_section
+#print axioms HadwigerNelson.SpectralInputs.measurable_measureReal_section
+#print axioms HadwigerNelson.SpectralInputs.integrable_measureReal_section
+#print axioms HadwigerNelson.SpectralInputs.integrable_section_var
+#print axioms HadwigerNelson.SpectralInputs.measureReal_mul_one_sub_le_symmDiff
+#print axioms HadwigerNelson.SpectralInputs.integral_section_var_le_add
+#print axioms HadwigerNelson.SpectralInputs.exists_fst_preimage_of_integral_section_var_eq_zero
+#print axioms HadwigerNelson.SpectralInputs.measurable_cylMap
+#print axioms HadwigerNelson.SpectralInputs.exists_cyl_of_subset
+#print axioms HadwigerNelson.SpectralInputs.univ_mem_cylSets
+#print axioms HadwigerNelson.SpectralInputs.isSetRing_cylSets
+#print axioms HadwigerNelson.SpectralInputs.generateFrom_cylSets
+#print axioms HadwigerNelson.SpectralInputs.integral_section_var_le_symmDiff_shift
+#print axioms HadwigerNelson.SpectralInputs.exists_fst_preimage_ae_eq_of_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.fibre_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.exists_measurableSet_prodFactorSigma_ae_eq
+#print axioms HadwigerNelson.SpectralInputs.contVec_prod_eq
 
 #eval IO.println "=== PURCHASED ==="
 

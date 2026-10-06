@@ -9,4 +9,38 @@
  Quot.sound]
 'HadwigerNelson.MajorityVote.exists_measurable_selector' depends on axioms: [propext, Classical.choice, Quot.sound]
 'HadwigerNelson.MajorityVote.ae_eq_measurable_of_majority' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.mem_factorSets_of_ae_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.measureReal_prod_eq_integral_section' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.measurable_measureReal_section' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.integrable_measureReal_section' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.integrable_section_var' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.measureReal_mul_one_sub_le_symmDiff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.integral_section_var_le_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.exists_fst_preimage_of_integral_section_var_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.measurable_cylMap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.exists_cyl_of_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.univ_mem_cylSets' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.isSetRing_cylSets' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.generateFrom_cylSets' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.integral_section_var_le_symmDiff_shift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.exists_fst_preimage_ae_eq_of_mem_factorSets' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.fibre_mem_factorSets' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.exists_measurableSet_prodFactorSigma_ae_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.contVec_prod_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'FS131I10F.control' depends on axioms: [sorryAx]
