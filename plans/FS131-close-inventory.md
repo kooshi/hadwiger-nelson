@@ -5551,3 +5551,12 @@ reason by the close.*
      a planner, and the later branches then merge a `main` that already holds their imports. Confidence: medium-high. Brief not
      written. (d) **Slot → FS131-K6c** (wave 6's third planner): wave 9's planner is next in the order but waits for wave 8's
      shared module (item 518). In flight: 1 (K8) + 1 (I6B) + 1 (K6c) = 3.
+
+521. **The landing of wave 10's first pass is prepared; and a slip of mine** (2026-10-06). Branch `fs131-w10l` cut from `fs131-w10`
+     at `ace98a35`, its worktree made (build copied from `fs131-w10`, no `lake` running there), pushed; trial merges in the order
+     they will be made — `origin/fs131-w10b`, then `origin/fs131-w10c` — show one conflict each, `scripts/Axioms.lean` (three blocks
+     at one anchor); brief `data/fs131/briefs/FS131-L10A-wave10-land.md`, generator `mk-l10a.py`, gate PASS (the gate's own exit
+     status; a first run failed on two branch-only paths, replaced by full worktree paths). **The slip**: making that worktree I
+     changed directory into it inside one command, which the handoff's § 1 item 6 forbids for the top-level session (the harness
+     announces the change of directory); I returned to the main tree in the next command, no file was written from there, and no
+     running job has reported an effect. Compound commands on a worktree use `git -C` and absolute paths, as the rule says.
