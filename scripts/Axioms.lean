@@ -4949,6 +4949,131 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.unenclosedC_of_homeomorph
 #print axioms HadwigerNelson.Plane.ArcMap.exists_preBend_step
 #print axioms HadwigerNelson.Plane.ArcMap.not_hasRepeatedColour_of_mem_interiorPts
+-- FS131-KP2: the collar bend laid out as children (`Plane/ValidMap/RadialPush`, `Pushforward`, `BendCollar`; sorry but the marked few)
+#print axioms HadwigerNelson.Plane.push1_mid
+#print axioms HadwigerNelson.Plane.push1_of_not_mem
+#print axioms HadwigerNelson.Plane.push1_push1
+#print axioms HadwigerNelson.Plane.push1_image_Ico
+#print axioms HadwigerNelson.Plane.push1_image_Ioc
+#print axioms HadwigerNelson.Plane.pushInv_pushFun
+#print axioms HadwigerNelson.Plane.pushFun_pushInv
+#print axioms HadwigerNelson.Plane.continuous_pushFun
+#print axioms HadwigerNelson.Plane.continuous_pushInv
+#print axioms HadwigerNelson.Plane.pushHomeo_polar
+#print axioms HadwigerNelson.Plane.pushHomeo_eq_self
+#print axioms HadwigerNelson.Plane.pushHomeo_image_polarSet
+#print axioms HadwigerNelson.Plane.tangRad_zero
+#print axioms HadwigerNelson.Plane.tangRad_spec
+#print axioms HadwigerNelson.Plane.tangRad_lt_one
+#print axioms HadwigerNelson.Plane.one_lt_tangRad
+#print axioms HadwigerNelson.Plane.tangRad_lt_tangRad
+#print axioms HadwigerNelson.Plane.one_sub_tangRad_le
+#print axioms HadwigerNelson.Plane.tangRad_sub_one_le
+#print axioms HadwigerNelson.Plane.pushProfiles_collar
+#print axioms HadwigerNelson.Plane.one_sub_lensProf_le
+#print axioms HadwigerNelson.Plane.collarArcs_carrier
+#print axioms HadwigerNelson.Plane.dist_lt_one_of_mem_polarSet
+#print axioms HadwigerNelson.Plane.ArcMap.pushforward_locallyConstant
+#print axioms HadwigerNelson.Plane.ArcMap.pushforward_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.pushforward_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.pushforward_mem_interiorPts_iff
+#print axioms HadwigerNelson.Plane.ArcMap.pushforward_col_apply
+#print axioms HadwigerNelson.Plane.ArcMap.pushforward_region
+#print axioms HadwigerNelson.Plane.ArcMap.pushforward_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.hasDegree_iff_of_agree
+#print axioms HadwigerNelson.Plane.ArcMap.hasDegree_iff_of_charts
+#print axioms HadwigerNelson.Plane.ArcMap.hasDegree_iff_of_mem_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.exists_collarFit
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.kin_subset
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.kout_subset
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.pushProfiles
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.homeo_eq_self
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.homeo_ringPt
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.homeo_fix_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.homeo_image_dom
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.collarArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.ArcMap.collarArcs_locallyFinite
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.collarArcs_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_lens
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_agreesOff
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_valid
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.degree_openArc
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_lensCurve
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_end
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_hasDegree
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_hasRepeatedColour
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_ringArcsWithin
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.sides_end
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_R1
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_R2
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_R3
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.coloursAt_subset
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.side_ne_inner_of_mem_lens
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_inert
+-- FS131-CG1: lane G's supporting lemmas (`Plane/ValidMap/RadialPush`: the radial push, the tangent circles, the lens boundary; `Plane/ValidMap/CollarMap`: the collar's map)
+#print axioms HadwigerNelson.Plane.tent_nonneg
+#print axioms HadwigerNelson.Plane.tent_of_le_left
+#print axioms HadwigerNelson.Plane.tent_le_one
+#print axioms HadwigerNelson.Plane.tent_of_le_mid
+#print axioms HadwigerNelson.Plane.tent_of_mid_le
+#print axioms HadwigerNelson.Plane.push1_of_le_mid
+#print axioms HadwigerNelson.Plane.push1_of_mid_le
+#print axioms HadwigerNelson.Plane.push1_self
+#print axioms HadwigerNelson.Plane.push1_mem_Ico
+#print axioms HadwigerNelson.Plane.push1_mem_Ioc
+#print axioms HadwigerNelson.Plane.PushProfiles.cases
+#print axioms HadwigerNelson.Plane.PushProfiles.a_pos
+#print axioms HadwigerNelson.Plane.PushProfiles.exists_a_ge
+#print axioms HadwigerNelson.Plane.polarAngle_mem
+#print axioms HadwigerNelson.Plane.eq_polar_polarAngle
+#print axioms HadwigerNelson.Plane.polarAngle_polar
+#print axioms HadwigerNelson.Plane.abs_sub_bisector_le
+#print axioms HadwigerNelson.Plane.mem_window_of_mem_Icc
+#print axioms HadwigerNelson.Plane.radialMap_id
+#print axioms HadwigerNelson.Plane.pushFun_eq_radialMap
+#print axioms HadwigerNelson.Plane.pushInv_eq_radialMap
+#print axioms HadwigerNelson.Plane.radialMap_center
+#print axioms HadwigerNelson.Plane.radialMap_polar
+#print axioms HadwigerNelson.Plane.radialMap_eq_self
+#print axioms HadwigerNelson.Plane.radialMap_radialMap
+#print axioms HadwigerNelson.Plane.push1_zero
+#print axioms HadwigerNelson.Plane.push1_pos
+#print axioms HadwigerNelson.Plane.PushProfiles.push1_zero
+#print axioms HadwigerNelson.Plane.PushProfiles.push1_pos
+#print axioms HadwigerNelson.Plane.PushProfiles.push1_push1
+#print axioms HadwigerNelson.Plane.radialMap_push1_eq
+#print axioms HadwigerNelson.Plane.continuous_radialMap_push1
+#print axioms HadwigerNelson.Plane.tangRad_quad
+#print axioms HadwigerNelson.Plane.tangRad_pos
+#print axioms HadwigerNelson.Plane.le_tangRad_iff
+#print axioms HadwigerNelson.Plane.tangRad_le_iff
+#print axioms HadwigerNelson.Plane.lt_tangRad_iff
+#print axioms HadwigerNelson.Plane.tangRad_root
+#print axioms HadwigerNelson.Plane.cos_lt_one_of_abs
+#print axioms HadwigerNelson.Plane.continuous_tangRad
+#print axioms HadwigerNelson.Plane.tangRad_identity
+#print axioms HadwigerNelson.Plane.tangRad_anti
+#print axioms HadwigerNelson.Plane.eq_of_tangentCircle
+#print axioms HadwigerNelson.Plane.germ_tangentCircle
+#print axioms HadwigerNelson.Plane.polar_tangentCircle
+#print axioms HadwigerNelson.Plane.norm_tangRad_sub_one_le
+#print axioms HadwigerNelson.Plane.tangentArc_image
+#print axioms HadwigerNelson.Plane.collarMid_eq
+#print axioms HadwigerNelson.Plane.dist_collarMid_left
+#print axioms HadwigerNelson.Plane.dist_collarMid_right
+#print axioms HadwigerNelson.Plane.norm_tangRad_sub_one_pos
+#print axioms HadwigerNelson.Plane.polarSet_mono
+#print axioms HadwigerNelson.Plane.polar_inj_window
+#print axioms HadwigerNelson.Plane.polar_not_mem_polarSet
+#print axioms HadwigerNelson.Plane.ringPt_not_mem_openArc
+#print axioms HadwigerNelson.Plane.push1_mem_Ioo
+#print axioms HadwigerNelson.Plane.pushHomeo_symm_polar
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.mem_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.lensCurve_subset
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.ringPt_mem_lensCurve
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.not_kept
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.homeo_image_Γ
 
 /-! ## FS-131 wave 5 (job FS131-IX1) — the crossing lemma's children (`inter_nonempty_of_interleaved` itself is in FS131-KP's block) -/
 
@@ -5860,6 +5985,130 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 -- FS131-IR3, stage 27: OPEN's case; with it the vertex step (`exists_vertexStep`, recorded in an earlier block above) rests on no open case
 #print axioms HadwigerNelson.Plane.ArcMap.Near.exists_openStep_aux
 #print axioms HadwigerNelson.Plane.ArcMap.exists_openStep
+
+-- FS131-CC1: lane C of the collar bend — `Pushforward`'s supporting lemmas (the two-germ chart on a circle), and lane C's new children
+#print axioms HadwigerNelson.Plane.ArcMap.HasDegree.unique
+#print axioms HadwigerNelson.Plane.ArcMap.HasDegree.iff_eq
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.not_hasRepeatedColour_of_zero
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.hasRepeatedColour_iff
+#print axioms HadwigerNelson.Plane.ArcMap.curveAt_one_sub_eq_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.branchPt_congr
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_nextβ_zero
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_nextβ_one
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_nextκ_zero
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_nextκ_one
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_mem_sector_zero
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_mem_sector_one
+#print axioms HadwigerNelson.Plane.ArcMap.isSectorChart_circle
+#print axioms HadwigerNelson.Plane.ArcMap.exists_two_le_encard_fin_two_iff
+#print axioms HadwigerNelson.Plane.ArcMap.degree_of_circle
+#print axioms HadwigerNelson.Plane.ArcMap.exists_sphere_inter_ball_subset_openArc
+#print axioms HadwigerNelson.Plane.ArcMap.isCompact_polarSet_Icc
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_not_mem_openArc_of_end
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.lensProf_le_one
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.isClosed_closedLens
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.lens_subset_closedLens
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_region_inter_iff_of_agree
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.isClosed_collarK
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.sides_eq
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_and_repeated
+
+-- FS131-CC2: lane C of the collar bend, continued — germ counts carried by a homeomorphism (`Pushforward`), the collar in an end's frame
+#print axioms HadwigerNelson.Plane.ArcMap.exists_subset_of_isPreconnected_iUnion
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_injective_of_homeo
+#print axioms HadwigerNelson.Plane.ArcMap.hasDegree_iff_of_homeo
+#print axioms HadwigerNelson.Plane.ArcMap.pushforward_hasDegree
+#print axioms HadwigerNelson.Plane.ArcMap.collarK_frame
+#print axioms HadwigerNelson.Plane.ArcMap.side_core_pos
+#print axioms HadwigerNelson.Plane.ArcMap.side_core_neg
+#print axioms HadwigerNelson.Plane.ArcMap.crescent_Y
+#print axioms HadwigerNelson.Plane.ArcMap.side_core
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.exists_one_side
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.homeo_mem_collarK
+#print axioms HadwigerNelson.Plane.ArcMap.collarK_thin
+#print axioms HadwigerNelson.Plane.ArcMap.exists_lens_clear
+#print axioms HadwigerNelson.Plane.ArcMap.exists_pos_forall_le
+#print axioms HadwigerNelson.Plane.ArcMap.branch_transversal
+#print axioms HadwigerNelson.Plane.ArcMap.branch_tangent
+#print axioms HadwigerNelson.Plane.ArcMap.exists_end_free
+#print axioms HadwigerNelson.Plane.ArcMap.exists_collar_free
+#print axioms HadwigerNelson.Plane.ArcMap.quarter_lt_chord
+#print axioms HadwigerNelson.Plane.ArcMap.collarModel
+
+/-! ## FS-131 wave 5 (job FS131-I5q) — `exists_preBend`'s last three children proved (their records are in the FS131-KB2 block above); helpers -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ne_of_abs_sub_lt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_ringArc_notMem
+#print axioms HadwigerNelson.Plane.ArcMap.eq_of_ringArc_subset_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.finite_arcs_meeting_compact
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.sides_eq_of_ringPt_eq
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.union_of_overlap
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.not_regularAt_of_max
+
+-- FS131-I5q (stage 58): `bv_l3` moved to `BaseWalk` and proved (its record is in the FS131-K5b block above); `l3_base` and `bv_l3` over `l3_core`
+#print axioms HadwigerNelson.Plane.ArcMap.l3_core
+#print axioms HadwigerNelson.Plane.ArcMap.bv_l3_dbl
+#print axioms HadwigerNelson.Plane.ArcMap.not_onRingArc_of_finite
+#print axioms HadwigerNelson.Plane.ArcMap.ringCircle_val_germ
+#print axioms HadwigerNelson.Plane.ArcMap.ringCircle_noSwap
+#print axioms HadwigerNelson.Plane.ArcMap.eq_or_eq_neg_of_dot_I_mul_e
+#print axioms HadwigerNelson.Plane.CircleColouring.link_bad_finite
+#print axioms HadwigerNelson.Plane.CircleColouring.link_val_right_side
+#print axioms HadwigerNelson.Plane.CircleColouring.link_val_left_side
+
+/-! ## FS-131 wave 5 (job FS131-IA1) — the bends in the form the arc step reads (`Plane/ValidMap/BendStep`)
+
+The last two records are open children (`sorry`): the horn clause for the collar bend, and the away bend in collar form. -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.Γ_eq_of_degree_clause
+#print axioms HadwigerNelson.Plane.ArcMap.r2_notMem_region
+#print axioms HadwigerNelson.Plane.ArcMap.radiusTwoArc_inter_dom_subset_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.radiusTwoArc_disjoint_openArc
+#print axioms HadwigerNelson.Plane.ArcMap.isR2Arc_of_fixed
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.free_of_isClean
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_isClean
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_isR2Arc
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_le
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_hornCount_le
+#print axioms HadwigerNelson.Plane.ArcMap.bend_away_part
+
+/-! ## FS-131 wave 5 (job FS131-IA2) — the arc step from the clauses a bend exports (`Plane/ValidMap/ArcStep`)
+
+The last two records rest on the open child `CollarFit.map_hornCount_le` (`BendStep`, `sorry`): the toward collar bend's
+instance of the interface. -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.coloursAt_openArc
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.sides_ne_of_isClean
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.degree_openArc
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.disjoint_openArc_of_ne
+#print axioms HadwigerNelson.Plane.ArcMap.exists_hasHornCount_isHorn_iff
+#print axioms HadwigerNelson.Plane.ArcMap.exists_arcStep_radius
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.dom_eq
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.dist_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.symm_cases
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.coloursAt_of_notMem
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.coloursAt_centre
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.isClean
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.localStep
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.isModification
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.fixed_or_gain
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.coloursAt_subset
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.degree_le
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.isSite
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.isQArc_of
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.isR2Arc_of
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.isR2Arc_left
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.maxBad
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.maxBad_centre
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.maxBad_other
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.arcStep
+#print axioms HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.ringArc_subset_collarK
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.lensSet_subset_collarK
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_localStep
+#print axioms HadwigerNelson.Plane.ArcMap.ArcBend.of_away
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.arcBend
+#print axioms HadwigerNelson.Plane.ArcMap.exists_arcBend_toward
 
 #eval IO.println "=== PURCHASED ==="
 

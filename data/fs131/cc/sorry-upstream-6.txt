@@ -1,0 +1,3 @@
+BendCollar imports 28 modules of Proofs/ (transitively); `sorry` declarations in them: 0
+BendCollar `sorry` declaration, line 120: exists_collarFit
+PASS

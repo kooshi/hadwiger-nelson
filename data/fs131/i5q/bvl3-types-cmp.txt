@@ -1,0 +1,4 @@
+before == after: True (8161 bytes, two #check outputs: bv_l3, BaseCtx.l3_base)
+plant 'a bound of bv_l3 changed (nat_lit 2 -> 3)': fired
+plant 'a relation changed (LT.lt -> LE.le)': fired
+plant 'a hypothesis changed (RingProper -> Covers)': fired

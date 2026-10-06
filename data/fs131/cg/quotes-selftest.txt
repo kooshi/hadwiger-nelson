@@ -1,0 +1,1 @@
+self-test: 11 of 11 plants fired; unplanted partner PASS

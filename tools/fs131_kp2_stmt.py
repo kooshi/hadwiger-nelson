@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+"""FS131-KP2: `bend_toward_collar`'s docstring and statement are unchanged, and the new modules purchase nothing.
+
+Compares the block from `/-- **The collar bend**` to its `:= by` in `Plane/ValidMap/BendCollar.lean` at the brief's commit `ae881022`
+with the working tree's, byte for byte; checks that exactly one file under `Proofs/` declares `bend_toward_collar`; and that the three
+modules of the layout (`RadialPush`, `Pushforward`, `BendCollar`) contain no `axiom` declaration and no `native_decide`.
+Exit 0 iff all hold. `--self-test` plants a changed hypothesis, a changed docstring letter, a second declaring file and an `axiom`
+line (in memory), and requires each to fail.
+"""
+import pathlib
+import re
+import subprocess
+import sys
+
+TREE = pathlib.Path("/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5")
+REL = "Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean"
+MODS = ["Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean", "Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean", REL]
+BASE = "ae881022"
+
+
+def block(text):
+    i = text.index("/-- **The collar bend**")
+    j = text.index(":= by", i)
+    return text[i:j + len(":= by")]
+
+
+def declaring(files):
+    return [f for f, t in files.items() if re.search(r"^theorem bend_toward_collar\b", t, re.M)]
+
+
+def purchases(mods):
+    bad = []
+    for f, t in mods.items():
+        if re.search(r"^\s*(private\s+|protected\s+)?axiom\s", t, re.M):
+            bad.append((f, "axiom"))
+        if "native_decide" in t:
+            bad.append((f, "native_decide"))
+    return bad
+
+
+def check(base, cur, files, mods):
+    errs = []
+    if block(base) != block(cur):
+        errs.append("statement block differs from " + BASE)
+    d = declaring(files)
+    if len(d) != 1:
+        errs.append(f"{len(d)} files declare bend_toward_collar: {d}")
+    for f, kind in purchases(mods):
+        errs.append(f"{kind} in {f}")
+    return errs
+
+
+def main():
+    base = subprocess.run(["git", "-C", str(TREE), "show", f"{BASE}:{REL}"], check=True, capture_output=True,
+                          text=True).stdout
+    cur = (TREE / REL).read_text()
+    files = {str(p.relative_to(TREE)): p.read_text() for p in (TREE / "Proofs").rglob("*.lean")}
+    mods = {m: (TREE / m).read_text() for m in MODS}
+    if "--self-test" in sys.argv:
+        plants = {
+            "hypothesis": (cur.replace("(hlen : θ₂ - θ₁ < 2 * π)", "(hlen : θ₂ - θ₁ ≤ 2 * π)", 1), files, mods),
+            "docstring": (cur.replace("**The collar bend**", "**The collar bend*", 1).replace(
+                "/-- **The collar bend*", "/-- **The collar bend**", 0), files, mods),
+            "second file": (cur, {**files, "Proofs/X.lean": "theorem bend_toward_collar : True := trivial\n"}, mods),
+            "axiom": (cur, files, {**mods, MODS[0]: mods[MODS[0]] + "\naxiom bogus : False\n"}),
+        }
+        # the docstring plant changes a letter inside the block, after its anchor
+        plants["docstring"] = (cur.replace("(E4-BEND-UN with R1–R3;", "(E4-BEND-UN with R1–R2;", 1), files, mods)
+        fired = 0
+        for name, (c, fs, ms) in plants.items():
+            if check(base, c, fs, ms):
+                fired += 1
+            else:
+                print(f"PLANT DID NOT FIRE: {name}")
+        print(f"self-test: {fired} of {len(plants)} plants fired")
+        return 0 if fired == len(plants) else 1
+    errs = check(base, cur, files, mods)
+    for e in errs:
+        print("FAIL:", e)
+    if not errs:
+        print("PASS: statement block byte-identical to", BASE, "; one declaring file; no axiom, no native_decide in", len(MODS),
+              "modules")
+    return 0 if not errs else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

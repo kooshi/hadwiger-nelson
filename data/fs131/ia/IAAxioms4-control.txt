@@ -1,0 +1,7 @@
+records 13 (print commands 13): standard-three-or-fewer 10, through sorryAx 3, other 0
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.CollarFit.map_hornCount_le
+  HadwigerNelson.Plane.ArcMap.bend_away_part
+  HadwigerNelson.Plane.ArcMap.exists_arcStep
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.CollarFit.map_hornCount_le
+FAIL

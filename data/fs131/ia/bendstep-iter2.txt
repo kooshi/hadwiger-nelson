@@ -1,0 +1,2 @@
+Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:278:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:300:8: warning: declaration uses `sorry`

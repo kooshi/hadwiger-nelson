@@ -1,0 +1,21 @@
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:283:33: warning: `Set.diff_subset` has been deprecated: Use `Set.sdiff_subset` instead
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:307:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:312:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:317:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:321:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:325:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:334:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:339:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:345:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:352:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:356:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:361:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:367:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:377:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:415:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:431:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:443:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:448:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:453:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:459:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:480:8: warning: declaration uses `sorry`

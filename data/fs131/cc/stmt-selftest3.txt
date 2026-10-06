@@ -1,0 +1,12 @@
+FIRED (changed hypothesis): hasDegree_iff_of_agree: statement differs from 2736ab8c (Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean)
+FIRED (changed docstring letter): CollarFit.map_R3: statement differs from 2736ab8c (Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean)
+FIRED (changed definition body): pushforward: statement differs from 2736ab8c (Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean)
+FIRED (changed spec example): Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean: differs from 2736ab8c (lane G's file)
+FIRED (edit to CollarMap): Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean: differs from 2736ab8c (lane G's file)
+FIRED (deleted theorem): CollarFit.map_inert: 0 theorem chunks in Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean
+FIRED (duplicated theorem): CollarFit.map_R3: 2 theorem chunks in Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean
+FIRED (edit to the assembly): bend_toward_collar: whole text (with its assembly) differs from 2736ab8c
+FIRED (edit outside the layout): Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean: differs from 2736ab8c (outside lane C's files)
+FIRED (axiom line): axiom in Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean
+FIRED (native_decide): native_decide in Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean
+self-test: 11 of 11 plants fired, each naming its culprit; unplanted partner PASS

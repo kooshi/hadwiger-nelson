@@ -1,0 +1,6 @@
+FIRED (a standard name expected to hold sorryAx): HadwigerNelson.Plane.push1_push1: expected sorryAx, got ['Classical.choice', 'Quot.sound', 'propext']
+FIRED (a sorryAx name expected standard): HadwigerNelson.Plane.ArcMap.CollarFit.sides_eq: expected the standard three or fewer, got ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+FIRED (a record deleted): HadwigerNelson.Plane.ArcMap.CollarFit.pushProfiles: no record in the output
+FIRED (a foreign axiom in a record): HadwigerNelson.Plane.push1_push1: expected the standard three or fewer, got ['Classical.choice', 'Quot.sound', 'bogusAx', 'propext']
+FIRED (a foreign axiom in a sorry record): HadwigerNelson.Plane.ArcMap.CollarFit.sides_eq: an axiom beyond sorryAx and the standard three: ['Classical.choice', 'Quot.sound', 'bogusAx', 'propext', 'sorryAx']
+self-test: 5 of 5 plants fired, each naming its culprit; unplanted partner PASS

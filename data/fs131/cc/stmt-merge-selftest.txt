@@ -1,0 +1,24 @@
+FIRED (changed hypothesis): hasDegree_iff_of_agree: statement differs from 2736ab8c (Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean)
+FIRED (changed docstring letter): CollarFit.map_R3: statement differs from 2736ab8c (Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean)
+FIRED (changed definition body): pushforward: statement differs from 2736ab8c (Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean)
+FIRED (changed spec example): Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean: differs from 5059983d (lane G's file)
+FIRED (edit to CollarMap): Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean: differs from 5059983d (lane G's file)
+FIRED (changed hypothesis in a lane-G theorem): tangRad_lt_one: statement differs from 2736ab8c (Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean)
+FIRED (deleted theorem): CollarFit.map_inert: 0 theorem chunks in Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean
+FIRED (duplicated theorem): CollarFit.map_R3: 2 theorem chunks in Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean
+FIRED (edit to the assembly): bend_toward_collar: whole text (with its assembly) differs from 2736ab8c
+FIRED (edit outside the layout): Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean: differs from 2736ab8c (outside the collar's four modules)
+FIRED (axiom line): axiom in Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean
+FIRED (native_decide): native_decide in Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean
+FIRED (new name clashing with the library (same namespace)): new declaration HadwigerNelson.Plane.ArcMap.exists_kept_of_mem_openArc (Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean) also declared in ['Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean']
+FIRED (term-mode proof under a changed statement): CollarFit.map_R3: statement differs from 2736ab8c (Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean)
+PARTNER PASS (the unplanted tree)
+PARTNER PASS (a new name another namespace declares (no clash))
+PARTNER PASS (`:= by exact X` turned `:= X` (statement unchanged))
+PARTNER PASS (a tactic block replaced by a one-line term (statement unchanged))
+FIRED (splitter: a changed default value inside a binder)
+PARTNER PASS (splitter: a binder `:=` kept, the proof changed)
+PARTNER PASS (splitter: the statement ends at the top-level `:=`)
+PARTNER PASS (splitter: a `:=` in a comment or a string is skipped)
+PARTNER PASS (splitter: a `let` in the statement fails closed (whole text compared))
+self-test: 15 of 15 plants fired, each naming its culprit; 8 of 8 partners passed
