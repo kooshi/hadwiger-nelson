@@ -6043,6 +6043,33 @@ each until its children land. -/
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_hornCount_le
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend
 
+/-! ## FS-131 wave 5 (job FS131-BA2) — the away bend's lanes C and H: new helper declarations (`Plane/ValidMap/HornChart`, `R2Cap`, `BendGap`)
+
+The children themselves are in FS131-KA1's block above; these are the helpers this job minted. All proved. -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.branch_frequently_mem_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.branch_curv_eq_of_two_spheres
+#print axioms HadwigerNelson.Plane.ArcMap.germ_eq_of_frequently_branchPt_eq
+#print axioms HadwigerNelson.Plane.conj_e_mul_e'
+#print axioms HadwigerNelson.Plane.r2_frame
+#print axioms HadwigerNelson.Plane.r2_coords
+#print axioms HadwigerNelson.Plane.r2_dist_sq
+#print axioms HadwigerNelson.Plane.r2_dist_sq_base
+#print axioms HadwigerNelson.Plane.r2_dist_sq_center
+#print axioms HadwigerNelson.Plane.r2X_eq
+#print axioms HadwigerNelson.Plane.r2_coords_r2
+#print axioms HadwigerNelson.Plane.continuous_r2X
+#print axioms HadwigerNelson.Plane.continuous_r2Y
+#print axioms HadwigerNelson.Plane.isOpen_r2Side
+#print axioms HadwigerNelson.Plane.two_lt_dist_iff
+#print axioms HadwigerNelson.Plane.dist_lt_of_mem_r2Crescent
+#print axioms HadwigerNelson.Plane.isPreconnected_r2Crescent
+#print axioms HadwigerNelson.Plane.r2pt_mem_r2Side
+#print axioms HadwigerNelson.Plane.mem_closure_dist_gt
+#print axioms HadwigerNelson.Plane.under_point
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.exists_inner_ball
+-- FS131-BA2 block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
