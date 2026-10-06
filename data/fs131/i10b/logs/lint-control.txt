@@ -1,9 +1,9 @@
-data/fs131/i10b/scratch/Stage6lint2.lean:774:54: warning: Variable name `hK` is not explicitly referenced.
+data/fs131/i10b/scratch/lint-control.lean:774:54: warning: Variable name `hK` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-data/fs131/i10b/scratch/Stage6lint2.lean:952:0: error: -- Found 3 errors in 72 declarations (plus 63 automatically generated ones) in the current file with 14 linters
+data/fs131/i10b/scratch/lint-control.lean:952:0: error: -- Found 3 errors in 72 declarations (plus 63 automatically generated ones) in the current file with 14 linters
 
 /- The `unusedArguments` linter reports:
 UNUSED ARGUMENTS.

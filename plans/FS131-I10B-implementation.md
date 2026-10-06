@@ -143,8 +143,9 @@ than `sorry` in the run. Axioms: `data/fs131/i10b/axioms-group1.lean`, log `data
 **The unused-arguments linter, with its control** (on a scratch copy of the file with `#lint` appended; iteration only): 0 errors in 59
 declarations as committed; with the five consuming `have _ := …` lines removed it reports exactly `prob_le_ratio_mul`: `[MeasurableAdd₂ G]`, and
 `ratio_prod_le_iSup_levels`: `[MeasurableAdd₂ X]`, `[T2Space Y]`, `[SigmaFinite νX]`, `(hK : Antitone K)`
-(`data/fs131/i10b/logs/lint-control.txt`). Those are the statement's arguments the proofs do not read (§ Findings); each is consumed by a `have`
-with a comment at the line, the statements unchanged.
+(`data/fs131/i10b/logs/lint-control.txt` as committed at `65e21c8f`; Stage 4 regenerates the log for the final file, by
+`data/fs131/i10b/lint-control.sh`, where it names seven). Those are the statement's arguments the proofs do not read (§ Findings); each is consumed
+by a `have` with a comment at the line, the statements unchanged.
 
 **Re-priced from these two leaves** (the brief's ask). The plan: 1,100 lines for the two (400 + 700), and 800 for the third; 350k harness tokens for
 the file. Written: about 330 lines for the two with their toolkit (toolkit 130, X25B-P 65, X25B-PZ 135), four elaboration rounds on a scratch copy
@@ -211,7 +212,8 @@ holds 36 records. Two Mathlib imports added to the module (`Mathlib.MeasureTheor
 missing from the print), and the control (`StandingFive.usable_card_ge`) on `sorryAx`**. Statements: PASS (11 base declarations, 140 base lines;
 five faults fire). `sorry` in the file: 0. Environment linters on a scratch copy with `#lint` appended (iteration only, not the gate's run): 0
 errors in 72 declarations (`data/fs131/i10b/logs/lint-pass.txt`); **its control** — the seven consuming lines removed — reports exactly the seven
-unread arguments of § Findings item 1 (`data/fs131/i10b/logs/lint-control.txt`). `tools/check_architecture.py`: PASS (the module's Mathlib imports
+unread arguments of § Findings item 1 (`data/fs131/i10b/logs/lint-control.txt`; both logs by `data/fs131/i10b/lint-control.sh`, run under the
+slot: pass exit 0, control exit 1). `tools/check_architecture.py`: PASS (the module's Mathlib imports
 grew by four: `Measure.ContinuousPreimage`, `Integral.Lebesgue.DominatedConvergence`, `Measure.Count`, `Topology.Instances.ZMod`). Names: every new
 declaration is in `HadwigerNelson.StationaryRatio`, which no other module of `Proofs/` opens or mentions (`rg`, this branch).
 
@@ -299,3 +301,7 @@ files are open on it. Drafts, each for the landing of wave 10, each naming its s
   (FS131-I10B): no Haar measure on the group is read; the pigeonhole holds for any probability on any parameter space."
 - **Frontier line and Proof Atlas**: no change until the wave lands; at the landing X25B-PZ and X25B-L1 move from [hand; one mind] to [kernel]
   (L1 with finding 4's difference stated).
+
+## The report
+
+`data/fs131/reports/FS131-I10B.md` (standing rule 11's form; the same text is the hand-back).
