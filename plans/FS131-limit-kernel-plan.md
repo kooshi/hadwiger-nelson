@@ -870,7 +870,10 @@ at each saved stage (the last stage's receipt is the one to read).
   `.Near.two_le_of_isClean`, **`.not_hasRepeatedColour_of_degree_le_three`**, **`.hasHornCount_zero_of_germs`**, `.one_le_of_isHorn`,
   `.two_le_of_isHorn_of_isHorn`. **`ArcMap.exists_vertexStep` — proved over open children** (no `sorry` of its own; on `sorryAx` through
   `exists_mergeStep`, `exists_rayStep`, `exists_shaveStep`, `exists_openStep`, the four cases, each a `sorry`).
-- Later stages add their lines below as they are saved.
+- **Stage 21 — a point on one curve** (`Procedure`): `ArcMap.not_isSite_of_hasHornCount_zero`, `e_curveGerm_ne`,
+  **`ArcMap.not_isSite_of_curve`**, `curveAt_rebase`, `exists_curveAt_of_branch`.
+- **Open at the hand-back** (each a `sorry`, stated, with its route in § 20.2): `ArcMap.exists_mergeStep`, `.exists_rayStep`,
+  `.exists_shaveStep`, `.exists_openStep`.
 
 ## Stage 18 — SAVED (FS131-IR2): the readback, the as-given build, the ruled restatement (inventory item 423)
 
@@ -1057,8 +1060,8 @@ meeting only at `v` (`Near.hdisj`), each a closed set; so some ball about `x` me
 (`exists_curveGerm_eq`, `branchPt_curveGerm_mem`), the same curve read from `x`. Then `hasHornCount_zero_of_germs` with the curve's two
 germs at `x` (`exists_eq_branchPt_curveGerm`; their directions are opposite) gives horn count `0` and degree at most `2`;
 `not_hasRepeatedColour_of_degree_le_three` gives no repeated colour; `exists_hasDegree_of_mem_dom` gives at most two colours. (A draft
-of this lemma, `not_isSite_of_curve`, and of the change of base point `curveAt_rebase`, is `data/fs131/ir/ir2/scratch/Curve.lean` —
-see § 20.4 for whether it was checked.)
+of this lemma, `not_isSite_of_curve`, and of the change of base point `curveAt_rebase`, was `data/fs131/ir/ir2/scratch/Curve.lean`;
+**both are proved in Stage 21**, with `exists_curveAt_of_branch`.)
 
 **(b), (d) at the junctions** — the finitely many points where a germ or new arc meets a rim: the circle of radius `ρ` for MERGE-RAY
 and SHAVE (`Near.move` adds the whole circle), **the circle of radius `ρ/2` for MERGE and OPEN** (their surgery recolours inside `ρ/2`
@@ -1104,3 +1107,59 @@ sessions** for the four, as IR1 priced it; nothing found so far says more.
 - **Receipt**: six records more in the "FS131-IR2" block of `scripts/Axioms.lean` (20 in all); the `sorry` cases are not in it.
 
 ## Stage 20 — SAVED (FS131-IR2)
+
+## Stage 21 — SAVED (FS131-IR2): a point on one curve; the handover
+
+### 21.1 Added in this stage ([kernel], `Procedure`, subsection "A point on one curve")
+
+- `not_isSite_of_hasHornCount_zero` (no horn sector and no repeated colour: no site); `e_curveGerm_ne` (the two germs of a line or
+  circle leave its point in opposite directions).
+- **`not_isSite_of_curve`** — a point of a **clean** map near which `Γ` lies on one line or circle through it is no site, and carries
+  at most two colours: `hasHornCount_zero_of_germs` with the curve's two germs, then
+  `not_hasRepeatedColour_of_degree_le_three`. It is `not_isSite_of_goodAt`'s local content with the good ball replaced by its one
+  consequence, so it applies to the cleaned map of a move, whose arcs are not presented through `v`.
+- `curveAt_rebase` (a line or circle through `v`, read from another of its points) and **`exists_curveAt_of_branch`** (a germ's branch
+  from `v` lies on one line or circle through any one of its points) — the hypothesis of `not_isSite_of_curve` at a point of a kept
+  germ, of SHAVE's arc, of OPEN's ray: § 20.2's paragraph "(b), (d) at `x ≠ v` … on no junction" is now these two lemmas and the
+  per-move fact that some ball about `x` meets one arc only.
+
+### 21.2 The build and the receipt (the handover)
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 6 modules rebuilt, 5 with warnings, all 11 warnings `declaration
+  uses 'sorry'`**: `Procedure` 5 (the four cases l. 1334, 1346, 1358, 1372; `exists_arcStep` l. 1438), `Terminal` 1
+  (`stuckRun_ne_univ`); not mine: `BaseDense` 3, `BendCollar` 1, `HexRing` 1. 9 min 10 s, exit 0
+  (`build/gate/build/20261006T045152Z-1110185.log`; driver log `data/fs131/ir/ir2/build-stage21.log`). By `grep -cw sorry` `Procedure`
+  reads 6: the five proofs and one word in a section header.
+- **Axioms** against that build (`data/fs131/ir/ir2/IR2AxiomsFinal.lean` → `.out`, `slot.py --mem 12 --cpus 2 -- lake env lean`, exit
+  0; `tools/fs131_ir_axsum.py` with `IR2AxiomsFinal-expect.txt`; `IR2AxiomsFinal-summary.txt`, PASS): **37 records — 25 on the standard
+  three or fewer (every lemma of Stages 19–21), 12 through `sorryAx`, exactly the twelve expected, 0 other.** By name:
+  **`exists_vertexStep` is on `sorryAx` through its four cases alone** (the build names no `sorry` at it); `exists_procStep`,
+  `exists_terminalSeq`, `exists_terminalMap`, `exists_red` follow it and `exists_arcStep`; `exists_terminal` also reads
+  `stuckRun_ne_univ`. **Control**: the same output with a foreign axiom planted in `not_isSite_of_curve`'s record makes the summarizer
+  exit 1, naming it (`IR2AxiomsFinal-planted-summary.txt`); the twelve `sorryAx` records are the print's positive control. *The brief's
+  item 4 asks for `exists_terminalMap` on `sorryAx` through `exists_arcStep` alone: not yet — it is through `exists_arcStep` and the
+  four cases.*
+- **Statements**: `tools/fs131_il_stmt_check.py 42801d8a` (against Stage 20): PASS, additions only (`ir2/stmt-check-21.txt`);
+  against IR1's `ebb0b292`: exactly one changed, `exists_vertexStep`, the ruled restatement (`ir2/stmt-check-final.txt`, exit 1 as it
+  must be). No `axiom`, no `native_decide`. `tools/check_architecture.py` PASS (`ir2/arch-stage21.txt`).
+- **Receipt**: the block "FS131-IR2" in `scripts/Axioms.lean`, 25 records, above `=== PURCHASED ===`; the open cases are not in it.
+- **Declarations added to landed modules** (ruling 421 (c)): **none** — `Moves`, `MergeMove`, `OpenMove`, `Surgery`, `FlankUA` are
+  untouched; everything is in `Procedure`. The named forms § 20.2 (a) asks for are the next implementer's.
+- I ran no gate, merged nothing, did not touch `Terminal.lean` or `main`, and left no process running (four builds, each ended with
+  its exit line read).
+
+### 21.3 Next step for a successor starting cold
+
+Read Stages 18–21 (§ 20.2 is the work list); check out `fs131-w5c` at this stage's commit; build once under the slot (expect "all …
+up to date"); re-run `data/fs131/ir/ir2/IR2AxiomsFinal.lean` through `tools/fs131_ir_axsum.py` with `IR2AxiomsFinal-expect.txt`
+(expect PASS, 25 and 12); then take `exists_rayStep`. Its first two children fix the forms the other three reuse: the named form of
+`RayConfig.exists_merge` in `Moves` (its map exposed), and the junction lemma in its two-curve form (`hasHornCount_zero_of_germs` with
+four germs and one dead branch) in `Procedure`. Iterate with `lake env lean` on a scratch file that imports `Procedure` (it elaborates
+in about ten seconds), and build only at a stage's end (nine minutes).
+
+### 21.4 Drafts for the front page
+
+None: the vertex step is not closed, wave 5 is not at its gate, and my brief runs no gate. Nothing regrades now. For the filing, when
+the four cases close: `exists_vertexStep` joins the declarations under `exists_terminalMap` that are [kernel].
+
+## Stage 21 — SAVED (FS131-IR2)

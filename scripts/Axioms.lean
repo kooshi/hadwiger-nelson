@@ -5807,6 +5807,13 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.one_le_of_isHorn
 #print axioms HadwigerNelson.Plane.ArcMap.two_le_of_isHorn_of_isHorn
 
+-- FS131-IR2, stage 21: a point on one curve
+#print axioms HadwigerNelson.Plane.ArcMap.not_isSite_of_hasHornCount_zero
+#print axioms HadwigerNelson.Plane.e_curveGerm_ne
+#print axioms HadwigerNelson.Plane.ArcMap.not_isSite_of_curve
+#print axioms HadwigerNelson.Plane.curveAt_rebase
+#print axioms HadwigerNelson.Plane.exists_curveAt_of_branch
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

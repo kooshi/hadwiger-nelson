@@ -83,6 +83,32 @@ theorem _root_.HadwigerNelson.Plane.curveAt_rebase {v y : ℂ} {κ : ℝ} {b : �
   constructor <;> intro h
   · linear_combination h - hy
   · linear_combination h + hy
+
+/-- **A germ's branch from `v`, read from one of its points**: it lies on one line or circle through that point (the hypothesis
+of `not_isSite_of_curve` at a point of a kept germ, of SHAVE's arc or of OPEN's ray). -/
+theorem _root_.HadwigerNelson.Plane.exists_curveAt_of_branch (v : ℂ) (β κ : ℝ) {r : ℝ} (hκr : |κ| * r < 2) {s₁ : ℝ}
+    (hs₁ : s₁ ∈ Icc 0 r) :
+    ∃ κ' : ℝ, ∃ b : ℂ, 0 ≤ κ' ∧ b ≠ 0 ∧ ∀ t ∈ Icc 0 r, branchPt v β κ t ∈ curveAt (branchPt v β κ s₁) κ' b := by
+  obtain ⟨κ', b, σ, hκ', hb, hσ, hκb, heq⟩ := exists_curveGerm_eq v β κ hκr
+  have hκ0 : 0 ≤ κ' := by rcases hκ' with h | h <;> simp [h]
+  have hmem : ∀ t ∈ Icc 0 r, branchPt v β κ t ∈ curveAt v κ' b := fun t ht => by
+    rw [heq t]
+    exact branchPt_curveGerm_mem hκ0 hb hσ ht.1 ((mul_le_mul_of_nonneg_left ht.2 hκ0).trans hκb)
+  have hy := hmem s₁ hs₁
+  refine ⟨κ', b + (κ' : ℂ) * (v - branchPt v β κ s₁), hκ0, ?_, fun t ht => by
+    rw [← curveAt_rebase hy]; exact hmem t ht⟩
+  rcases hκ' with h | h
+  · rw [h]; simpa using hb
+  · intro h0
+    rw [h] at h0 hy
+    have hyv : branchPt v β κ s₁ - v = b := by
+      have h0' : b + (v - branchPt v β κ s₁) = 0 := by simpa using h0
+      linear_combination -h0'
+    have h1 : Complex.normSq b = 2 * Complex.normSq b := by
+      have h2 := hy
+      rw [curveAt, mem_setOf_eq, hyv, one_mul, Complex.mul_conj, Complex.ofReal_re] at h2
+      exact h2
+    exact hb (Complex.normSq_eq_zero.mp (by linarith))
 --END
 
 end ArcMap
