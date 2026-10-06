@@ -4776,3 +4776,33 @@ reason by the close.*
      for infinitely many finite planes, not on MR alone; nothing in the kernel is affected (the row was never there), and `LEDGER.md`'s row
      for it is re-read at the filing. **A question for Poros** (the ask lane's next run): does the order bound hold at every band? (f) Item
      476's launch stands: in flight 1 (MB2) + 1 (K10) + 1 (K6) = 3.
+
+479. **FS131-MB2 done: the example maps are whole on `fs131-wmb` but one declaration — `shadowModel` and `awayModel` built, the two halves
+     joined** (implementer; harness ≈ 489k by the task notice; record `fs131-wmb`'s `plans/FS131-MB1-implementation.md` Stages 5–8; report
+     `data/fs131/reports/FS131-MB2.md` on that branch; commits `969ab4d0`, `c56383d8`, `97c5d0fd` (the merge of `origin/fs131-wm` at
+     `87699974`, at my direction), `2f51d5cb`, `a004bb41`, `b9b3a9e5`; pushed, tree clean). **Results**, on the standard three:
+     `shadowModel_flank_ne` — `flank_ne_of_doublyShadowed` applied to a nine-colour map of the plane, its nine hypotheses at once, both
+     shadows live; `awayModel_hyps` — the five hypotheses of wave 5's `bend_away_part` at once on an eight-colour map of the plane, with
+     `awayModel_r2Contacts` (the contacts an interval strictly inside the arc's angles) and `awayModel_bend_toward` (a model of `bend_toward`
+     whose centre carries a colour); after the merge `stuckModel_hyps` (`Valid ∧ IsPlaneMap ∧ Covers plantPt 1 ∧ IsStuck plantPt`) reads the
+     standard three. **Left**: `stuckModel_terminal` (`Stuck` l. 1362, the lane's one `sorry`) and the sub-arc model of `bend_away_whole`,
+     both for after wave 5. **My receipt**: tip equals `origin/fs131-wmb`; `data/fs131/mb2/build-3.log` ends `exit=0` and its full log
+     "Build completed successfully (5754 jobs)", 0 warnings other than `sorry`, **one `sorry` warning in the build**, at
+     `Plane/Models/Stuck.lean:1362`; `sorry` by the handoff's grep: `Paint` 0, `Moves` 0, `Bends` 0, `Stuck` 1; its receipt's self-test
+     ends "4 of 4 plants fired; faithful run 0 finding(s) -> OK"; the receipt's classes read by `grep` (this item's commit shows the
+     counts). **Items**: generalizations — the shadow's witness by the intermediate value theorem on a parabola, rational coordinates, no
+     square root; a horn's three boundary arcs as point conditions. Corrections owed, tidies — `shadowModel_hornSet_not_mem_hornArcs` folds
+     over `Paint`'s `disjoint_hornSet_hornArcs`; `awayModel_dist_sq` beside `stuckModel_dist_sq`. Predictions scored — `Stuck` 1,500 lines
+     against 950–1,300, `Bends` 566 against 350–500. It edited one file of the other half's at my direction (the silenced control).
+     Slips, the job's, disclosed.
+480. **Rulings on MB2's held items, and its slot.** (a) **One job finishes the lane and lands it, FS131-MC1**, on `fs131-wmb`: merge
+     `main` (wave 5); the brick facts tidied to wave 5's `BrickMap`; `stuckModel_terminal` proved; the sub-arc model of `bend_away_whole` by
+     `IsRingArc.mono` (ruling 471 (c)); the wave-5 applications (`bend_away_part` at `awayModel`; the vertex step's and the holed tile's);
+     the docstring lines on the landed theorems (KM1's plan § 3.10, MB1's and MB2's drafts; the stuck family's notes name
+     `stuckModel_hyps`); the two tidies of item 479; the `ARCHITECTURE.md` rows; then the full gate with the doubled-name check and L5's
+     records check, and the fast-forward. Alternative weighed: land now without `stuckModel_terminal` and add the rest later. Why one job:
+     nothing with a `sorry` reaches `main`, removing a skeleton statement to land sooner would be a statement dropped for convenience, and
+     the docstring edits rebuild the library once either way. Confidence: medium-high; if `stuckModel_terminal` resists, the job lands the
+     lane without that declaration and says so — a ruling then, by message. (b) The merge and the edited control at my direction are
+     recorded as mine. (c) **Slot → FS131-MC1**, launched 2026-10-06. In flight: 1 (K10) + 1 (K6) + 1 (MC1) = 3. While it is in its
+     landing stage I commit nothing to `main` outside the exempt paths.
