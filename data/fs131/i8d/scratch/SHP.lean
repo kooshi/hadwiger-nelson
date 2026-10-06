@@ -11,9 +11,20 @@ inhabitants). Arguments: `plans/FS116-N3-proof.md` §§ 2.4, 3.1, 3.3; `plans/FS
 
 | row | declarations | state |
 |---|---|---|
-| FS116-N3-SEMI | `semiHub_places` | stated |
-| FS116-N3-CROSS | `crossed_no_tip`, `crossed_tip_zeroAngle`, `crossed_outer`, `crossed_four`, `crossed_changePoint`, `crossed_semiHub` | `crossed_tip_zeroAngle` proved from `crossed_no_tip`; the rest stated |
+| FS116-N3-SEMI | `semiHub_places`, from `semiHub_places_O`, `semiHub_places_T` over `semiHub_edge`, `disjoint_ball_of_far_witness`, `mem_closure_of_coneAt_toward` | proved (job FS131-I8D) |
+| FS116-N3-CROSS | `crossed_no_tip`, `crossed_tip_zeroAngle`, `crossed_outer`, `crossed_four`, `crossed_changePoint`, `crossed_semiHub`, over `crossed_star_data`, `crossed_coloursAt`, `crossed_not_germOnQ_inside` | proved (job FS131-I8D) |
 | FS116-RING-TRANSFER-QC | `transferQC` | proved from `semiHub_places` |
+
+**Proved over the statements of `Plane/RingCalculus/SemiHub`** (job FS131-I8C's leaves, in a tree of its own until the wave's
+join): no declaration of this module holds a `sorry`, and each rests on that module's leaves it cites.
+
+**The class** (ruled on job FS131-I8D's finding): `semiHub_places`, `transferQC`, `crossed_four`, `crossed_changePoint` and
+`crossed_semiHub` read a vertex `p` of *exactly* four colours (`(F.coloursAt p).ncard = 4`). At a change point two colours are
+absent at `p` (`germS_absent`), so "at least four colours, at most two absent" is four colours only at `k = 6`.
+
+**What is wider than the rows** (each reported as a generalization): `crossed_semiHub` reads neither the freedom of the
+outer pair of `y` (`ho`) nor *simple* at `y` — it holds at a closed change point too; `GermIn.tangent_mem_coneAt` (a germ
+approaches its ring point along the tangent) and `IsRingArc.inner_ne_outer` are class-free.
 
 **Inhabitants** (no Lean term; `data/fs116/n3/semi.out`): the strip's `P₀` at `P₂` — a crossed full semi-hub of kind O with
 four colours — meets the hypotheses of every `crossed_*` leaf and of `semiHub_places`, and lands in its first alternative;
@@ -922,8 +933,10 @@ map simple at `p` and at `y`, `p` is a semi-hub of kind O of the ring of `y`.
 
 **Grade of the row's argument at this clause: one mind and a checking reading** — the blind second mind's verdict was a gap
 here, "an arc of `ω(y)` through `v` (or `u`) inside `B(p, 1)` with `X̄` on `y`'s side and `X` beyond … is not excluded"
-(`plans/FS116-V5-verification.md` ll. 650–660), closed after reading by FS112-U1 at `y`. The implementer proves this leaf
-last and reports the step if it does not close.
+(`plans/FS116-V5-verification.md` ll. 650–660), closed after reading by FS112-U1 at `y`. **In the kernel the step closes**
+(`crossed_not_germOnQ_inside`): the two side classes of such an arc have disjoint cones at `y`, and the directions at `y`
+into `B(p, 1)` are a connected interval covered by those two closed cones, each met at an end. The proof reads neither `ho`
+nor *simple* at `y` (both kept as filed).
 
 **The class** (`h4`; ruled on FS131-I8D's finding): `p` carries *exactly* four colours. At a change point two colours are
 absent at `p` (`germS_absent`: `ncard + 2 = k`), so "at least four colours with at most two absent" is four colours only at

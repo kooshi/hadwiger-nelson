@@ -6845,6 +6845,22 @@ leaves close. -/
 #print axioms HadwigerNelson.Plane.ArcMap.crossed_outer
 #print axioms HadwigerNelson.Plane.ArcMap.crossed_coloursAt
 #print axioms HadwigerNelson.Plane.ArcMap.crossed_four
+#print axioms HadwigerNelson.Plane.e_add_sub_e_sub
+#print axioms HadwigerNelson.Plane.GermIn.tangent_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_changePoint
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_semiHub
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_four_thirds
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.inner_ne_outer
+#print axioms HadwigerNelson.Plane.ArcMap.eq_of_ncard_eq_four
+#print axioms HadwigerNelson.Plane.ArcMap.eq_triple_of_ncard_le_three
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_witness
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_of_coneAt_toward
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_edge
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_places_O
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_places_T
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_places
+#print axioms HadwigerNelson.Plane.ArcMap.transferQC
 -- FS131-I8D block end
 
 #eval IO.println "=== PURCHASED ==="
