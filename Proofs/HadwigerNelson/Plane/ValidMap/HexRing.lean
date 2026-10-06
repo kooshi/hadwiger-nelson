@@ -1110,7 +1110,10 @@ theorem rot_noThird {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) 
 **outward cone** at `x` — the points near `x` outside both `B̄(σx, 1)` and `B̄(σ⁻¹x, 1)`, the directions `(−30°, 30°)` about the outward
 radial; every `g`-tile at `x` misses `B̄(u, 1)`; and `u`'s `g`-sector lies in the closed half-plane away from `x` (its tangent cone at `u`
 has non-positive component along `x − u`). Under the base's hypothesis, unit arcs allowed (N2-ROT uses N-E2 only). A step inside
-`row134BaseUA`'s proof (`GENERIC`). -/
+`row134BaseUA`'s proof (`GENERIC`).
+Inhabitant: none named, and none is claimed — the hypotheses on the map are among the base's (`BaseCtx`, `Plane/ValidMap/BaseWalk`), which
+`row134BaseUA` refutes whole at six colours; whether those assumed here hold together on some valid six-coloured fragment is open. At
+seven colours the base's hypotheses hold on `sevenBrickMap` at its corner (`not_row134BaseUA_seven`), which is not six-coloured. -/
 theorem rot_out {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
     {ψ : ℝ} {p q : Fin 6} (hpq : p ≠ q) (hp : F.GermPseudo u ψ .cw p) (hq : F.GermPseudo u ψ .ccw q)
     (hAp : F.GermPseudo u (ψ + π / 3) .cw q) (hAm : F.GermPseudo u (ψ - π / 3) .ccw p) :
@@ -1220,7 +1223,10 @@ theorem rot_out {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu 
 /-- **FS112-ROTHEX, N2-ROT's inward row (B+, B−)**: at a change point `x = r(ψ)` with `c(σx+) = p` (B+) and `c(σ⁻¹x−) = q` (B−), the point
 `x` carries `p`, `q` and one colour `g` of `P_cl(u)`; `g` fills the **inward cone** at `x` — the points near `x` inside both `B(σx, 1)` and
 `B(σ⁻¹x, 1)`, the directions `(150°, 210°)`; every `g`-tile at `x` lies in `B(u, 1)`; and `u`'s `g`-sector lies in the closed half-plane
-toward `x`. Under the base's hypothesis, unit arcs allowed. A step inside `row134BaseUA`'s proof (`GENERIC`). -/
+toward `x`. Under the base's hypothesis, unit arcs allowed. A step inside `row134BaseUA`'s proof (`GENERIC`).
+Inhabitant: none named, and none is claimed — the hypotheses on the map are among the base's (`BaseCtx`, `Plane/ValidMap/BaseWalk`), which
+`row134BaseUA` refutes whole at six colours; whether those assumed here hold together on some valid six-coloured fragment is open. At
+seven colours the base's hypotheses hold on `sevenBrickMap` at its corner (`not_row134BaseUA_seven`), which is not six-coloured. -/
 theorem rot_in {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
     {ψ : ℝ} {p q : Fin 6} (hpq : p ≠ q) (hp : F.GermPseudo u ψ .cw p) (hq : F.GermPseudo u ψ .ccw q)
     (hBp : F.GermPseudo u (ψ + π / 3) .ccw p) (hBm : F.GermPseudo u (ψ - π / 3) .cw q) :

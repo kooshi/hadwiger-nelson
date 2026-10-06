@@ -20,6 +20,10 @@ reads six colours). The frame at a horn's vertex `v` is the foundation's: `a = e
   witness, is `flank_incomplete_bowtie` in `Plane/ValidMap/BaseSteps`); **FS112-N2-FLANK-Q** (`flankQ_upper`, `flankQ_lower`,
   `flankQ_both`).
 * **FS112-A4SIX** (`a4six`); **FS112-NB4P** (`nb4p`).
+
+**The model of the ring-arc theorems** (those assuming only `F.Valid` and `F.IsRingArc P θ₁ θ₂ c c'`: LOCK, N2-SIGN, L60-LE/EQ,
+N2-ENV, U1, ISO): `l60Frag` — `l60_real`: valid, `IsRingArc 0 0 (π / 3) 0 1`, an arc of exactly `60°` (FS131-QA4 § 4.1; inventory
+ruling 427 (d), F2). Theorems with further hypotheses carry their own note.
 -/
 
 namespace HadwigerNelson.Plane
@@ -6073,7 +6077,11 @@ theorem exists_coveringPoint_of_window {v : ℂ} (hv : F.Covers v 1) {s w : ℝ}
 open MeasureTheory in
 /-- **FS112-A4SIX** (C-UA-BUDGET, branch 1), at the class its argument reads: a point `v` of a valid map at which exactly two colours
 are absent (a four-colour vertex, at six colours), with no covering pair `(v, y)` on its unit circle, has on that circle arcs of `Γ`
-of total length at least `60°`, or at least six, one inside each of six consecutive open `60°` windows. -/
+of total length at least `60°`, or at least six, one inside each of six consecutive open `60°` windows.
+Inhabitant of the hypotheses at six colours, at [hand] — no Lean object yet, an open gate item: FS131-E7's four-petal flower `F₀` at `0`
+with `a = 4`, `b = 5` (`plans/FS131-E7-derivation.md` § 3): both absent colours are carried on `ω(0)` and no ring point carries both; its
+ring arcs total `240°`. `sixFrag` relabelled into eight colours satisfies the letter at `0` only degenerately: the classes of the two
+absent colours are empty there (§ 3.6). -/
 theorem a4six (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {a b : Fin k} (hab : a ≠ b)
     (habs : (F.coloursAt v)ᶜ = {a, b}) (hno : ∀ y ∈ sphere v 1, ¬ F.IsCoveringPair v y) :
     ENNReal.ofReal (π / 3) ≤ arcLength {θ | F.OnRingArc v (ringPt v θ)} ∨
@@ -6195,7 +6203,10 @@ theorem germ_rotate_third (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {θ : ℝ
 step): let `y_k = r(θ)` and `y_{k+1} = r(θ + 60°)` on `ω(v)`, both absent colours `X`, `X'` carried at `y_{k+1}`, and `y_k` on no arc of `Γ`
 on `ω(y_{k+1})`. Then the germ of `ω(y_{k+1})` at `y_k` inside `B(v, 1)` lies in one colour `i`, the one outside `B̄(v, 1)` in one colour
 `o ≠ i`; both are colours of `v` carried at `y_k` and not at `y_{k+1}`; and `v`'s class of `i` approaches `v` only along directions facing
-`y_k`, that of `o` only along directions facing away. -/
+`y_k`, that of `o` only along directions facing away.
+Inhabitant of the hypotheses at six colours, at [hand] — no Lean object yet, an open gate item: FS131-E7's `F₁`, the four-petal flower
+`F₀` with the rectangle `19/20 < Re < 21/20`, `−1/20 < Im < 0` recoloured `5`, at `v = 0`, `θ = −π/3`, `X = 4`, `X' = 5`
+(`plans/FS131-E7-derivation.md` § 4); the conclusion holds there with `i = 3`, `o = 1`, and `ω(y′)` carries no arc of `Γ`. -/
 theorem straddlers_third (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {θ : ℝ} {X X' : Fin k}
     (hcompl : (F.coloursAt v)ᶜ = {X, X'})
     (hX : X ∈ F.coloursAt (ringPt v (θ + π / 3))) (hX' : X' ∈ F.coloursAt (ringPt v (θ + π / 3)))

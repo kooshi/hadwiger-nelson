@@ -843,7 +843,7 @@ theorem unenclosedC_of_homeomorph {M : ArcMap k} {h : ℂ ≃ₜ ℂ} {u : ℂ} 
   rwa [hcc (closure T)ᶜ y hy.2, preimage_compl, h.preimage_closure] at this
 
 /-- **One pre-bend** (record § 41.3's step): if an inert unit arc is centred within `1` of `u`, its maximal extension `α` is bent toward
-its centre by `bend_toward_collar` (with `hfree` from `BaseHyp u` and `hlen` from `l60_le`); the bent map keeps every hypothesis of
+its centre by `bend_toward_collar` (with `hfree` from `BaseHyp u`); the bent map keeps every hypothesis of
 `exists_preBend` (`h` fixes `u`, which lies on `Γ` off `α°`; a point moved into `B̄(u, 2)` was an interior point) and has strictly fewer
 maximal arcs centred in `B̄(u, 1)`. A step inside a refutation: no model expected. -/
 theorem exists_preBend_step (hF : F.Valid) {u : ℂ} (hu2 : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
@@ -855,12 +855,11 @@ theorem exists_preBend_step (hF : F.Valid) {u : ℂ} (hu2 : F.Covers u 2) (hu : 
   obtain ⟨P, hP, θ₁, θ₂, c, c', hA, -, hc'⟩ := hI
   obtain ⟨a, b, -, hA', hmax⟩ := exists_maxRingArc hF hu2 hP hA
   have hfree := hfree_of_baseHyp hF hu2 hH hP hA'
-  have hlen : b - a < 2 * π := by have := l60_le hF hA'; linarith [Real.pi_pos]
   have hαd : ringArc P a b ⊆ F.dom := fun z hz => (hA'.2.1 hz).1
   have hαc : IsCompact (ringArc P a b) := isCompact_Icc.image (by unfold ringPt e; fun_prop)
   obtain ⟨ε, hε, hεd⟩ := hαc.exists_thickening_subset_open F.isOpen_dom hαd
   obtain ⟨M, h, hMv, hdom, hsupp, hfix, hint, hcol, hdeg, hrep, hR1, hR2, hR3, -⟩ :=
-    bend_toward_collar hF hA' hc' hlen hmax hfree hε
+    bend_toward_collar hF hA' hc' hfree hε
   have hMcov : M.Covers u 2 := by rw [Covers, hdom]; exact hu2
   -- `u` lies on `Γ` (three colours), off the open arc (two colours there): `h` fixes it
   have hud : u ∈ F.dom := hu2 (mem_closedBall_self (by norm_num))
@@ -1003,7 +1002,8 @@ theorem localDense {F : ArcMap 6} (hF : F.Valid) {x : ℂ} (hx : F.Covers x 3) :
     exact n3_base hF (hsub.trans hx) hcub (Set.disjoint_left.mpr fun z hz hzb => hno z (hsub hz) hzb) hun.unenclosedC
 
 /-- **FS112-N3-DENSE3**: every closed disc of radius `3` of every valid six-coloured map of the plane holds a vertex of
-at least four colours or a vertex with a repeated colour (`localDense` on the plane). No valid six-map of the plane is known (`GENERIC`). -/
+at least four colours or a vertex with a repeated colour (`localDense` on the plane). Inhabitant of the hypotheses: none at six colours is known (a valid six-map of the plane is FS-114's open question, `GENERIC`); the
+statement's class at seven colours is inhabited by `sevenBrickMap`, which is not six-coloured. -/
 theorem dense3 {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (x : ℂ) :
     ∃ y ∈ closedBall x 3, y ∈ F.fourSet ∪ F.repSet :=
   localDense hF (fun z _ => hP ▸ mem_univ z)
@@ -1014,8 +1014,8 @@ theorem dense3 {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (x : ℂ) :
 itself. The proof (FS114-CVB's route, `plans/FS114-CVB-verification.md` § 1.4) passes through `M*` (`exists_terminal`): with no such
 vertex, `dense3` on `M*` gives a stuck vertex whose run is bi-infinite (`stuckRun_eq_univ_of_noFour`: CVB § 1.4 items 4–6), against N4-FIN
 in `exists_terminal`'s clause 3 (the run is not `univ`); a four-colour vertex of `M*` carries its colours in the map
-(`IsModification.coloursAt_subset`). It uses neither CV-HD nor C-ENDS, and no strict bound (FS114-L60-WALK: over `l60_le`). No valid six-map of
-the plane is known (`GENERIC`). -/
+(`IsModification.coloursAt_subset`). It uses neither CV-HD nor C-ENDS, and no strict bound (FS114-L60-WALK: over `l60_le`). Inhabitant of the hypotheses: none at six colours is known (a valid six-map of the plane is FS-114's open question, `GENERIC`); the
+statement's class at seven colours is inhabited by `sevenBrickMap`, which is not six-coloured. -/
 theorem cv_exists {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) :
     ∃ x, 4 ≤ (F.coloursAt x).ncard := by
   obtain ⟨M, hMod, hMT, -, hcl3⟩ := exists_terminal hF hP

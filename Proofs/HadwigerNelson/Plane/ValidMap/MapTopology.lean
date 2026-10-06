@@ -22,6 +22,11 @@ Upstream of `MapGraph` (the `cvb_*` leaves), `BaseWalk` (`retArcs_nested`, `exis
   assembly `exists_eleventh_of`.
 * **D — the common boundary of two tiles in a disc, and arcs of a circle**: `exists_far_end` (the handshake on the finite boundary graph),
   `ringArc_cases` (two short arcs of one circle are disjoint, nested, interleaved, or abut).
+
+**The model of the tile theorems** (E4-OUTERMOST, E4-RIM: those assuming only `F.Valid`, tiles of `F` and `EnclosesTile`): they
+are universal over the tiles of a valid map, and `sevenBrickMap` (`Plane/SVMap`) is one, with `UnenclosedC` at every point
+(`sevenBrick_unenclosedC`, `Plane/ValidMap/BrickMap`) (FS131-QA4 § 4.2; inventory ruling 427 (d), F2). The two base lemmas,
+`exists_eleventh_of` and `exists_far_end`, carry their own note.
 -/
 
 namespace HadwigerNelson.Plane
@@ -1177,7 +1182,10 @@ theorem exists_isRingArc_of_touch {u q : ℂ} (hq : q ∈ F.dom) (hcub : F.IsCub
 `B(u, 1)` (`tileOf_subset_ball`) and every tile of `u`'s colours touching it is one of them (N3-NOBOTH, `noBoth`, at a touching point on
 `ω(u)`); the frontier of `R*`'s outer domain is preconnected and meets two of its tiles (one alone would enclose `u`'s other tiles, against
 `UnenclosedC u`: `isBounded_connectedComponentIn_of_frontier_subset`); two meet there (`exists_inter_of_finite_closed_cover`) at `q`; a tile at
-`q` meets the outer domain and has no colour of `u`; no fourth colour. -/
+`q` meets the outer domain and has no colour of `u`; no fourth colour.
+Inhabitant: none named, and none is claimed — the hypotheses on the map are among the base's (`BaseCtx`, `Plane/ValidMap/BaseWalk`), which
+`row134BaseUA` refutes whole at six colours; whether those assumed here hold together on some valid six-coloured fragment is open. At
+seven colours the base's hypotheses hold on `sevenBrickMap` at its corner (`not_row134BaseUA_seven`), which is not six-coloured. -/
 theorem exists_eleventh_of {F : ArcMap 6} {u : ℂ} (hF : F.Valid) (hcov : F.Covers u 2) (hu : F.IsCubicTrichromatic u)
     (hH : F.BaseHyp u) (hE : F.UnenclosedC u) :
     ∃ q ∈ closedBall u 1, (F.coloursAt q).ncard = 3 ∧ (F.coloursAt q ∩ F.coloursAt u).ncard = 2 ∧
@@ -1813,7 +1821,10 @@ outward, the component `{r(θ)}`; then `r(θ)` is V-in, an endpoint: the obligat
 finite boundary graph of `F` in `B̄(u, 1)` (vertices: arc ends, crossings, points on `ω(u)`; edges: arc pieces), whose `T₁|T₂` subgraph has
 degree `2` at every two-colour point of `B(u, 1)` (two sectors, no repeated colour under H) and, when `r(θ)` has two colours, degree `1`
 there (one branch enters the disc: the germ change), so
-the handshake lemma (`SimpleGraph.even_card_odd_degree_vertices`) gives a second odd vertex in `r(θ)`'s component. -/
+the handshake lemma (`SimpleGraph.even_card_odd_degree_vertices`) gives a second odd vertex in `r(θ)`'s component.
+Inhabitant: none named, and none is claimed — the hypotheses on the map are among the base's (`BaseCtx`, `Plane/ValidMap/BaseWalk`), which
+`row134BaseUA` refutes whole at six colours; whether those assumed here hold together on some valid six-coloured fragment is open. At
+seven colours the base's hypotheses hold on `sevenBrickMap` at its corner (`not_row134BaseUA_seven`), which is not six-coloured. -/
 theorem exists_far_end {F : ArcMap 6} {u : ℂ} (_hF : F.Valid) (hcov : F.Covers u 2) (hH : F.BaseHyp u) {θ : ℝ} {a c : Fin 6}
     (hac : a ≠ c) (ha : F.GermPseudo u θ .cw a) (hc : F.GermPseudo u θ .ccw c) :
     ∃ T₁ T₂, F.TileOf a T₁ ∧ F.TileOf c T₂ ∧ ringPt u θ ∈ closure T₁ ∧ ringPt u θ ∈ closure T₂ ∧

@@ -515,7 +515,10 @@ differ (`flank_ne_of_shadows`); the directions `±n` then force the turned horn'
 or out-type at `S′` (`h` the mirror), so no MERGE leaves each one sector (`hasSectors_one_of_contacts`); the sides by `region_far_of_outType` for `c`
 and `region_far_N_of_srcH`, `region_far_S_of_srcG` for the flanks. No Condition 5. Since two `c`-sectors are exactly these two horns, the statement is
 `stuck_structure_ua`'s conclusion at this axis (the other axis `α + π` is the same configuration with `g ↔ h`). A step of `stuck_structure_ua`'s
-proof. Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_isStuck`, `bowtie_coloursAt_zero`), with the horns `stuck_horns_ua` gives there. -/
+proof. Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_isStuck`, `bowtie_coloursAt_zero`, with the horns `stuck_horns_ua` gives there); `Covers` fails there by FS131-QA4's QA4-B1. At
+[hand] all hold on FS131-E7's `P₅` at its stuck vertex, `α = 0`, `c = 9`, the four bounds `−1, 1, −1, 1` (twelve colours;
+`plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean model lands. -/
 theorem stuck_flanks_ua (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard ≤ 3)
     {c : Fin k} {α κ₁ κ₂ κ₃ κ₄ : ℝ} (Hu : F.IsHorn v α κ₁ κ₂ c) (Hd : F.IsHorn v (α + π) κ₃ κ₄ c)
     (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1) (h3' : -1 ≤ κ₃) (h4 : κ₄ ≤ 1) (hc2 : F.HasSectors v c 2)
@@ -767,8 +770,9 @@ cusp horns along `±e α` with bounding curvatures in `[−1, 1]`, out-type `c`-
 the interior points near `v` above the parabola `frameY = ‖z − v‖²/2` of colour `g` and below `frameY = −‖z − v‖²/2` of colour `h` (the sides
 clause in inventory item 252's form (b), the point form outside the parabola: both horns, of curvatures in `[−1, 1]`, lie in
 `|frameY| ≤ ‖z − v‖²/2`, so "the side off the horns is filled by `g` above and `h` below", as the derivation's (ii) says), `g` the upper flank
-and `h` the lower flank of both horns (the flank conjuncts, kept beside it by the same ruling). Inhabitant of the hypotheses: `bowtie` at `0`
-(`bowtie_isStuck`, `bowtie_coloursAt_zero`). -/
+and `h` the lower flank of both horns (the flank conjuncts, kept beside it by the same ruling). Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_isStuck`, `bowtie_coloursAt_zero`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on FS131-E7's `P₅` at its
+stuck vertex, `c = 9`, `m = 2` (twelve colours; `plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean model lands. -/
 theorem stuck_structure_ua (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hst : F.IsStuck v)
     (h3 : (F.coloursAt v).ncard ≤ 3) {c : Fin k} {m : ℕ} (hm : 2 ≤ m) (hc : F.HasSectors v c m) :
     ∃ α κ₁ κ₂ κ₃ κ₄ : ℝ, ∃ g h : Fin k,
@@ -785,7 +789,9 @@ theorem stuck_structure_ua (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hst : F
   exact ⟨α, κ₁, κ₂, κ₃, κ₄, g, h, Hu, Hd, h1, h2, h3', h4, hc2, hdeg, hcol, hgh, hgc, hhc, fa, fb, fa', fb', hsides, hN, hS⟩
 
 /-- **Every colour at a chain vertex approaches it along both directions of one axis** (`stuck_structure_ua`: `c`'s two horns, `g` and `h`
-flanking both). Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_isStuck`, `bowtie_coloursAt_zero`). -/
+flanking both). Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_isStuck`, `bowtie_coloursAt_zero`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on FS131-E7's `P₅` at its
+stuck vertex (twelve colours; `plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean model lands. -/
 theorem chainVertex_antipodal (hF : F.Valid) {E : ℂ} (hv : F.Covers E 1) (hst : F.IsStuck E)
     (h3 : (F.coloursAt E).ncard ≤ 3) :
     ∃ α : ℝ, ∀ j ∈ F.coloursAt E, α ∈ coneAt (F.region j) E ∧ α + π ∈ coneAt (F.region j) E := by
@@ -849,8 +855,9 @@ theorem IsQArc.add_int_mul {P : ℂ} {θ₁ θ₂ : ℝ} (h : F.IsQArc P θ₁ �
 /-! ## FS114-CV-HD: CV-L0, the main clause, the equivalences, CV-CLASS -/
 
 /-- **FS114-CV-HD, (CV-L0)**: in a terminal valid map a stuck vertex with at most three colours centres no unit arc, so `Γ ∩ ω(E)` is
-finite. No model of a stuck vertex in a terminal valid plane map is known (`GENERIC`: FS-115's question); `bowtie` inhabits the local
-hypotheses on a fragment. -/
+finite. Inhabitant at [hand]: FS131-E7's planted bowtie `P₅`, twelve colours (`plans/FS131-E7-derivation.md` § 7) — a terminal valid map of the
+plane with one stuck vertex, of three colours; no Lean object yet (an open gate item). `bowtie` inhabits the local hypotheses on a
+fragment. At six colours the existence of one is FS-115's question, unchanged (`GENERIC`). -/
 theorem cv_l0 (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.coloursAt E).ncard ≤ 3) :
     (∀ x, ¬ F.OnRingArc E x) ∧ (F.Γ ∩ sphere E 1).Finite := by
   obtain ⟨hF, hP, -, hQR⟩ := hM
@@ -1412,8 +1419,10 @@ theorem exists_mem_sectorsOf_of_mem_coneAt {x : ℂ} (hx : x ∈ F.dom) (hxI : x
   exact ⟨G.sector x r i, ⟨(hC.isSector_iff hn hr).mpr ⟨i, rfl⟩, hi⟩, hβi⟩
 
 /-- **At a stuck point, a direction of a repeated colour's class is the axis of one of its horns**, with the colour's out-type contact
-at that horn's `−n` pole (N3-DEG's horns, `woodallCone_isHorn_ua`, located by the direction). Model of the hypotheses: `bowtie` at `0`, its
-colour `1`, `β = 0` (`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`). -/
+at that horn's `−n` pole (N3-DEG's horns, `woodallCone_isHorn_ua`, located by the direction). Inhabitant: no Lean model of all at once. `bowtie` at `0`, its colour `1`, `β = 0` satisfies every hypothesis but `F.Covers 0 1` — the
+local hypotheses (`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all
+hold on FS131-E7's `P₅` at its stuck vertex, `g = 9`, `m = 2`, `β = 0` (the direction of its right horn) (twelve colours;
+`plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean model lands. -/
 theorem exists_horn_of_mem_coneAt_of_stuck (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1) (hst : F.IsStuck w)
     (hwI : w ∉ F.interiorPts) {g : Fin k} {m : ℕ} (hm : 2 ≤ m) (hg : F.HasSectors w g m) {β : ℝ}
     (hβ : β ∈ coneAt (F.region g) w) :
@@ -1764,7 +1773,9 @@ setting `S′ = v − n` carries at least four colours. Proved by a shorter rout
 (`flank_two_sectors_at_S`) and the map is terminal, so `S′` is stuck (`isStuck_of_hasRepeatedColour`); with at most three colours it would be
 a chain vertex, where every colour, `c` among them, approaches along both directions of one axis (`chainVertex_antipodal`), while U1 keeps
 `c`'s cone at `S′` free of antipodal pairs (`not_antipodal_coneAt_S_of_horn`). NB3's colours `y ≠ z` beside `g`'s `+a` horn and its SHAVE
-step are not needed. A step inside a refutation-shaped row: no model expected. -/
+step are not needed. A step inside a refutation-shaped row: no model expected. The hypotheses without `hno` hold at [hand] on FS131-E7's `P₅` at its stuck
+vertex (`α = 0`, `κ₂ = 1`, `c = 9`; twelve colours; `plans/FS131-E7-derivation.md` § 7.5), whose upper flank is in-type at the upper pole,
+so `hno` fails there. -/
 theorem n3_end_four_colours (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v : ℂ} {α κ₂ : ℝ} {c : Fin k}
     (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α (-1) κ₂ c)
     (hno : ∀ g, F.IsFlankAbove v α κ₂ g → ¬ (F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2)))) :
@@ -1788,8 +1799,9 @@ no SHAVE makes its lower flank `y` shadow it (`shadow_of_not_shave`), from an in
 (`srcH_of_shadow`). The second puts `y` in `P_cl(v) = {c, g, h}`: `c` is excluded by U1 (`α` is not in `c`'s cone at `S′`), `g` by validity
 (its own shadow on its own horn), `h` because its flank below `c`'s horn lies in `B(S′, 1)` near `v` (`not_outType_v_of_flankBelow_neg_one`).
 The first keeps `y`'s class near `S′` in `B̄(v − 2n, 1)`, so the horn's lower bound is `−1` and its lower arc is an arc of `Γ` on `ω(v − 2n)`
-with inner colour `y` and outer `g` (`IsHorn.isRingArc_lower`), both carried at `v − 2n`. NB3's `z ≠ y` is not needed. A step inside a
-refutation-shaped row: no model expected. -/
+with inner colour `y` and outer `g` (`IsHorn.isRingArc_lower`), both carried at `v − 2n`. NB3's `z ≠ y` is not needed. A step inside a refutation-shaped row: no model expected. The hypotheses without `hno` hold at [hand] on FS131-E7's `P₅` at its stuck
+vertex (`α = 0`, `κ₂ = 1`, `c = 9`; twelve colours; `plans/FS131-E7-derivation.md` § 7.5), whose upper flank is in-type at the upper pole,
+so `hno` fails there. -/
 theorem n3_end_bothKind (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v : ℂ} {α κ₂ : ℝ} {c : Fin k}
     (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α (-1) κ₂ c)
     (hno : ∀ g, F.IsFlankAbove v α κ₂ g → ¬ (F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2)))) :
@@ -1880,8 +1892,9 @@ a repeated colour at `S′ = v − n`, a both-kind unit arc centred at `v − 2n
 item 2's premise read as "no in-type `g`-tile at `N`" (FS131-I4m's reading, inventory items 288–289: NB3 leaves the case `κ₂ = 1`, `g ∉ P_cl(N)` to its
 item 1, whose conclusion is not this statement): the `g`-shadow on both horns then comes from out-type `g`-tiles at `S′` tangent to `±a` (`srcG_of_shadow`
 gives "in-type at `N` or out-type at `S′`"), two sectors of `g` at `S′`; `S′` terminal makes them horns; the colours `y ≠ z` beside the `+a` horn
-(SHAVE otherwise); an in-type `y`-tile at `v − 2n` Siamese to the lower flank. The open part of `n3_end`. A step inside a refutation-shaped row: no
-model expected. -/
+(SHAVE otherwise); an in-type `y`-tile at `v − 2n` Siamese to the lower flank. The open part of `n3_end`. A step inside a refutation-shaped row: no model expected. The hypotheses without `hno` hold at [hand] on FS131-E7's `P₅` at its stuck
+vertex (`α = 0`, `κ₂ = 1`, `c = 9`; twelve colours; `plans/FS131-E7-derivation.md` § 7.5), whose upper flank is in-type at the upper pole,
+so `hno` fails there. -/
 theorem n3_end_of_not_inType (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v : ℂ} {α κ₂ : ℝ} {c : Fin k}
     (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α (-1) κ₂ c)
     (hno : ∀ g, F.IsFlankAbove v α κ₂ g → ¬ (F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2)))) :
@@ -1929,7 +1942,9 @@ theorem n3_end (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v : ℂ} {�
 /-- **FS112-N3-END's chain clause** ("and the chain is the single vertex", inventory item 74; wave 4's `n3_end` states the rest): in
 n3_end's setting (a terminal valid plane map, `v` stuck with three colours, `c`'s horn along `e α` with lower bound `−1`), in its second
 disjunct — the upper flank `g` in-type at `N` and `κ₂ = 1` — the stuck run through `v` is `{0}`: neither neighbour is a chain vertex.
-Model of the local hypotheses: `bowtie` at `0` (`bowtie_isStuck`: `E` stuck, `±i` not). -/
+Model of the local hypotheses: `bowtie` at `0` (`bowtie_isStuck`: `E` stuck, `±i` not).
+At [hand] every hypothesis holds on FS131-E7's `P₅` at its stuck vertex, `α = 0`, `c = 9`, `g = 7` (twelve colours;
+`plans/FS131-E7-derivation.md` § 7): no Lean object yet, an open gate item. -/
 theorem n3_end_chain (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v : ℂ} {α : ℝ} {c g : Fin k}
     (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α (-1) 1 c)
     (hg : F.IsFlankAbove v α 1 g) (hgN : F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2))) :
@@ -1972,7 +1987,10 @@ leaves read) -/
 /-- **CV-HD's Siamese arrow `G_N ⇒ υ± = 1`** (`plans/FS114-CVB-verification.md` § 1.6, "the two easy arrows"): at a stuck vertex `E` with at
 most three colours, an in-type upper-flank contact at `N` forces both horns' `N`-side arcs onto `ω(N)` — `κ₂ = 1` (else the flank's contact
 at `N` is out-type, `outType_N_of_flankAbove`) and `κ₃ = −1` (the same for the `−e α` horn, whose `N`-side flank is `g` again,
-`stuck_flanks_ua`). The argument of `n3_end`'s second branch, at any lower bounds. Inhabitant of the hypotheses: `bowtie` at `0`. -/
+`stuck_flanks_ua`). The argument of `n3_end`'s second branch, at any lower bounds. Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.IsPlaneMap` — the local hypotheses
+(`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`, `bowtie_flanks`, `bowtie_inType`); it is a fragment, not a map of the plane
+(FS131-QA4's QA4-B2). At [hand] all hold on FS131-E7's `P₅` at its stuck vertex, `α = 0`, `c = 9`, `g = 7` (twelve colours;
+`plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean model lands. -/
 theorem upper_bounds_of_inType_N (hF : F.Valid) (hP : F.IsPlaneMap) {E : ℂ} (hst : F.IsStuck E)
     (h3 : (F.coloursAt E).ncard ≤ 3) {c : Fin k} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₃ κ₄ : ℝ}
     (hH : F.IsHorn E α κ₁ κ₂ c) (hH' : F.IsHorn E (α + π) κ₃ κ₄ c) {g : Fin k} (hg : F.IsFlankAbove E α κ₂ g)
@@ -2000,7 +2018,10 @@ theorem upper_bounds_of_inType_N (hF : F.Valid) (hP : F.IsPlaneMap) {E : ℂ} (h
 /-- **A stuck vertex in the frame turned by `π`**: at a stuck vertex `E` with at most three colours (horns of `c` along `±e α`, upper flank
 `g`, lower flank `h`), the configuration read along `e (α + π)` is the same with `g ↔ h` — the horn along `α + π + π` is the horn along `α`,
 `h` is the turned horn's upper flank and `g` its lower one, and the turned frame's poles are `S` and `N` (`stuck_flanks_ua`,
-`IsFlankAbove.unique`, `IsFlankBelow.unique`). Inhabitant of the hypotheses: `bowtie` at `0`. -/
+`IsFlankAbove.unique`, `IsFlankBelow.unique`). Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.IsPlaneMap` — the local hypotheses
+(`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`, `bowtie_flanks`); it is a fragment, not a map of the plane (FS131-QA4's
+QA4-B2). At [hand] all hold on FS131-E7's `P₅` at its stuck vertex, `α = 0`, `c = 9`, `g = 7`, `h = 8` (twelve colours;
+`plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean model lands. -/
 theorem stuck_turned_frame (hF : F.Valid) (hP : F.IsPlaneMap) {E : ℂ} (hst : F.IsStuck E)
     (h3 : (F.coloursAt E).ncard ≤ 3) {c : Fin k} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₃ κ₄ : ℝ}
     (hH : F.IsHorn E α κ₁ κ₂ c) (hH' : F.IsHorn E (α + π) κ₃ κ₄ c) {g h : Fin k} (hg : F.IsFlankAbove E α κ₂ g)
@@ -3196,8 +3217,10 @@ theorem StuckAlong.congr {v : ℂ} {α α' : ℝ} (he : e α = e α') (h : F.Stu
 
 /-- **The stuck structure along a given horn's axis**: at a stuck vertex with at most three colours, a horn of a colour with two or more
 sectors along `e α` is one of the two horns of `stuck_structure_ua`, so its structure (the opposite horn, two sectors, three colours, the
-flanks) holds along `e α` itself (`e_eq_or_of_two_horns`; along the opposite axis the flanks swap). Inhabitant of the hypotheses: `bowtie`
-at `0`. -/
+flanks) holds along `e α` itself (`e_eq_or_of_two_horns`; along the opposite axis the flanks swap). Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on FS131-E7's
+`P₅` at its stuck vertex, `c = 9`, `m = 2`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` (twelve colours; `plans/FS131-E7-derivation.md` § 7): an open
+gate item until its Lean model lands. -/
 theorem stuck_structure_at_axis (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1) (hst : F.IsStuck w)
     (h3 : (F.coloursAt w).ncard ≤ 3) {c : Fin k} {m : ℕ} (hm : 2 ≤ m) (hc : F.HasSectors w c m) {α κ₁ κ₂ : ℝ}
     (hH : F.IsHorn w α κ₁ κ₂ c) :
@@ -3318,7 +3341,9 @@ theorem four_or_stuck_of_chainVertex {F : ArcMap 6} (hM : F.IsTerminalMap) {w : 
 /-- **FS112-C-ENDS** in its erratum's form (caution C116; `plans/FS112-derivation.md:443` item 2) — FS114-CV-HD's (CV-ENDS): in a
 terminal valid six-coloured map, the point of the normal line one step beyond each finite end of a stuck chain has at least four colours.
 The chain is the stuck run through a vertex stuck along `e α`; its upper end is a member `j` with `j + 1` outside, its lower end a member
-with `j − 1` outside. No model of a stuck chain in a terminal valid plane map is known (`GENERIC`, FS-115). Route (FS114-CVB § 1.8, CV-ENDS): the end vertex is a
+with `j − 1` outside. No model at six colours is known (a terminal valid six-map of the plane with a stuck vertex: `GENERIC`, FS-115). At twelve colours
+FS131-E7's `P₅` is a terminal valid map of the plane with one stuck vertex, at [hand] (`plans/FS131-E7-derivation.md` § 7); it is not
+six-coloured, so it is no inhabitant of this statement. Route (FS114-CVB § 1.8, CV-ENDS): the end vertex is a
 chain vertex whose axis is `±e α` (`stuckAlong_of_mem_stuckRun`, the plan's `stuckAlong_of_run` by induction along the run); CV-CLASS there
 (`cv_class`) makes each neighbour along `±n` four-coloured or stuck (`four_or_stuck_of_chainVertex`), and the neighbour beyond the end is not a
 chain vertex, so a stuck one carries at least four colours. Placed after `cv_class`. -/
@@ -3477,8 +3502,9 @@ theorem terminal_vertices (hM : F.IsTerminalMap) :
     · exact absurd h hR
 
 /-- **N2-TERM's clause 3, the ends, in every terminal six-map**: an end of a stuck run is within distance `1` of a point of at least
-four colours — the next point of the normal line (`c_ends`, FS112-C-ENDS's erratum form). No model of a stuck chain in a terminal
-valid plane map is known (`GENERIC`, FS-115). -/
+four colours — the next point of the normal line (`c_ends`, FS112-C-ENDS's erratum form). No model at six colours is known (a terminal valid six-map of the plane with a stuck vertex: `GENERIC`, FS-115). At twelve colours
+FS131-E7's `P₅` is a terminal valid map of the plane with one stuck vertex, at [hand] (`plans/FS131-E7-derivation.md` § 7); it is not
+six-coloured, so it is no inhabitant of this statement. -/
 theorem run_ends {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : ℝ} (hv : F.StuckAlong v α) :
     ∀ j ∈ F.stuckRun v α, (j + 1 ∉ F.stuckRun v α ∨ j - 1 ∉ F.stuckRun v α) →
       ∃ z, dist z (v + (j : ℂ) * e (α + π / 2)) ≤ 1 ∧ (F.OnQR2Arc z ∨ 4 ≤ (F.coloursAt z).ncard) := by
@@ -3503,8 +3529,10 @@ theorem _root_.HadwigerNelson.Plane.BranchGerms.horn_cases_four {n : ℕ} (hn : 
 
 /-- **Every horn at a chain vertex is one of the two-sector colour's**: at a stuck vertex with at most three colours, a horn of any
 colour along any direction is a horn of the colour with two sectors (`stuck_structure_ua`'s), whose sector chart has four germs (degree
-`4`); so its colour has two sectors and it carries the stuck structure's flanks along its own direction. Inhabitant of the hypotheses:
-`bowtie` at `0` (`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`). -/
+`4`); so its colour has two sectors and it carries the stuck structure's flanks along its own direction. Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on FS131-E7's
+`P₅` at its stuck vertex, `β = 0`, `a = −1`, `b = 1`, `d = 9` (twelve colours; `plans/FS131-E7-derivation.md` § 7): an open gate item
+until its Lean model lands. -/
 theorem horn_flanks_of_isChainVertex (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1) (hw : F.IsChainVertex w) {β a b : ℝ}
     {d : Fin k} (H : F.IsHorn w β a b d) :
     F.HasSectors w d 2 ∧ ∃ g h : Fin k, F.IsFlankAbove w β b g ∧ F.IsFlankBelow w β a h := by
@@ -3551,8 +3579,9 @@ theorem horn_flanks_of_isChainVertex (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1
 
 /-- **Every horn bound `±1` at a chain vertex of a terminal map sits on a (Q) or (R2) arc**, along every direction: the horn is the
 two-sector colour's, with its flanks and out-type pole contacts (`horn_flanks_of_isChainVertex`, `horn_poles_contact`), so FLANK-Q
-(`flankQ_upper_of_qrOnly`, `flankQ_lower_of_qrOnly`) applies. No model of a chain vertex in a terminal valid plane map is known
-(`GENERIC`, FS-115); `bowtie` at `0` inhabits the local hypotheses on a fragment. -/
+(`flankQ_upper_of_qrOnly`, `flankQ_lower_of_qrOnly`) applies. Inhabitant at [hand]: FS131-E7's planted bowtie `P₅`, twelve colours (`plans/FS131-E7-derivation.md` § 7) — a terminal valid map of the
+plane with one stuck vertex, of three colours, at that vertex and any `β`; no Lean object yet (an open gate item). `bowtie` at `0`
+inhabits the local hypotheses on a fragment. At six colours the existence of one is FS-115's question, unchanged (`GENERIC`). -/
 theorem hornBoundsQR_of_isChainVertex (hM : F.IsTerminalMap) {w : ℂ} (hw : F.IsChainVertex w) (β : ℝ) :
     F.HornBoundsQR w β := by
   obtain ⟨hF, hP, -, hQR⟩ := hM
@@ -3588,8 +3617,10 @@ theorem run_hornBoundsQR {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : �
 
 /-- **All horns at a chain vertex have one colour**: at a stuck vertex with at most three colours, a horn of any colour along any
 direction has the colour of `stuck_structure_ua`'s two horns — the chart has four germs, and a sector between two germs of one direction
-is one of those two (`BranchGerms.horn_cases_four`, as in `horn_flanks_of_isChainVertex`). Inhabitant of the hypotheses: `bowtie` at `0`
-(`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`). -/
+is one of those two (`BranchGerms.horn_cases_four`, as in `horn_flanks_of_isChainVertex`). Inhabitant: no Lean model of all at once. `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
+(`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on FS131-E7's
+`P₅` at its stuck vertex, its two horns (`β = 0`, `β' = π`, `d = d' = 9`) (twelve colours; `plans/FS131-E7-derivation.md` § 7): an open
+gate item until its Lean model lands. -/
 theorem horn_colour_eq_of_isChainVertex (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1) (hw : F.IsChainVertex w)
     {β a b β' a' b' : ℝ} {d d' : Fin k} (H : F.IsHorn w β a b d) (H' : F.IsHorn w β' a' b' d') : d = d' := by
   obtain ⟨hst, h3⟩ := hw
@@ -3626,7 +3657,10 @@ theorem horn_colour_eq_of_isChainVertex (hF : F.Valid) {w : ℂ} (hv : F.Covers 
 
 /-- **A colour carried twice at a chain vertex is the colour of its horns**: a colour with at least two sectors at a stuck vertex has a
 horn there (N4-STUCK (i), `stuck_horns_ua`), and all horns at a chain vertex have one colour (`horn_colour_eq_of_isChainVertex`).
-Inhabitant of the hypotheses: `bowtie` at `0`, the horn's own colour. -/
+Inhabitant: no Lean model of all at once. `bowtie` at `0`, the horn's own colour satisfies every hypothesis but `F.Covers 0 1`
+— the local hypotheses (`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. At [hand] all hold on
+FS131-E7's `P₅` at its stuck vertex, `d = j = 9` (twelve colours; `plans/FS131-E7-derivation.md` § 7): an open gate item until its Lean
+model lands. -/
 theorem eq_horn_colour_of_two_sectors (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1) (hw : F.IsChainVertex w)
     {β a b : ℝ} {d j : Fin k} (H : F.IsHorn w β a b d)
     (h2 : ∀ᶠ r in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf w r j).encard) : j = d := by
@@ -3641,8 +3675,8 @@ theorem eq_horn_colour_of_two_sectors (hF : F.Valid) {w : ℂ} (hv : F.Covers w 
 
 /-- **No upper horn bound is `1` below a chain vertex**: in a terminal map, at a chain vertex `w` whose neighbour `N = w + n`
 (`n = e (β + π/2)`) is a chain vertex, a horn along `e β` has upper bound `≠ 1` — a bound `1` is the start of a (Q) or (R2) arc of
-`ω(N)` (`hornBoundsQR_of_isChainVertex`), an arc of `Γ` centred at the chain vertex `N`, which centres none (`cv_l0`). No model of two
-neighbouring chain vertices in a terminal valid plane map is known (`GENERIC`, FS-115). -/
+`ω(N)` (`hornBoundsQR_of_isChainVertex`), an arc of `Γ` centred at the chain vertex `N`, which centres none (`cv_l0`). No model of two neighbouring chain vertices in a terminal valid plane map is known (`GENERIC`, FS-115): FS131-E7's `P₅`, a terminal valid
+twelve-colour map of the plane at [hand] (`plans/FS131-E7-derivation.md` § 7), has one chain vertex only. -/
 theorem horn_upper_ne_one (hM : F.IsTerminalMap) {w : ℂ} {β : ℝ} (hw : F.IsChainVertex w)
     (hN : F.IsChainVertex (w + e (β + π / 2))) {a b : ℝ} {d : Fin k} (H : F.IsHorn w β a b d) : b ≠ 1 := by
   rintro rfl
@@ -3654,7 +3688,7 @@ theorem horn_upper_ne_one (hM : F.IsTerminalMap) {w : ℂ} {β : ℝ} (hw : F.Is
     ⟨β - π / 2, θ₂, hθ, ⟨β - π / 2, ⟨le_rfl, hθ.le⟩, rfl⟩, hR.2.1⟩
 
 /-- **No lower horn bound is `−1` above a chain vertex** (the mirror of `horn_upper_ne_one`): at a chain vertex `w` of a terminal map
-whose neighbour `S = w − n` is a chain vertex, a horn along `e β` has lower bound `≠ −1`. No model known (`GENERIC`, FS-115). -/
+whose neighbour `S = w − n` is a chain vertex, a horn along `e β` has lower bound `≠ −1`. No model known (`GENERIC`, FS-115): as `horn_upper_ne_one`, FS131-E7's `P₅` has one chain vertex only. -/
 theorem horn_lower_ne_neg_one (hM : F.IsTerminalMap) {w : ℂ} {β : ℝ} (hw : F.IsChainVertex w)
     (hS : F.IsChainVertex (w - e (β + π / 2))) {a b : ℝ} {d : Fin k} (H : F.IsHorn w β a b d) : a ≠ -1 := by
   rintro rfl

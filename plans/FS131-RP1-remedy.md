@@ -131,3 +131,79 @@ times checked).
   nothing ran.
 - The first overlay had only the two new oleans; Lean takes every `Proofs.*` module from the first path entry holding `Proofs/`,
   so all three checks failed at import. Rebuilt as a symlink copy.
+
+## Stage 3 — SAVED (FS131-RP1): Stage 2's build found a caller the iteration could not see; the docstrings (N1–N12); the sources the final build reads
+
+*As at Stage 2: this stage's sources are checked by script and elaborated for iteration. The build and the axioms print are Stage 4.*
+
+### 3.1 Stage 2's build, and the caller it found — a slip of mine
+
+`data/fs131/rp/build1.log` (`build/gate/build/20261006T080648Z-2461087.log`): **FAIL at the last module**, 463 of 464 batches, 73 modules
+rebuilt in 17 m 8 s: `BaseDense` l. 863, `exists_preBend_step`, calls `bend_toward_collar hF hA' hc' hlen hmax hfree hε`. § 1.4's row S5
+said "callers: none in `Proofs/`"; that was false. **How I missed it**: my search for the theorem's uses was run over the fenced bend
+modules only, and the iteration check of `BaseDense` read the old `BendCollar` olean, which still took the two hypotheses — a stale
+check failing toward "green", as `LEAN.md` warns. The repair is the ruled one (the two arguments go; the now-unused `have hlen` goes;
+the docstring's "`hlen` from `l60_le`" goes); `hmax` stays in the proof, which reads it twice below. Elaborated against the fresh
+library: exit 0. Every other module of Stage 2 built with no warning but the outward bend's `sorry` (36 sites, as given).
+
+### 3.2 The docstrings: 58 edits in 16 files, as data (`data/fs131/rp/notes_edits.py`), drafted under the build and applied after it
+
+Each entry names a declaration and is refused unless its old text stands exactly once in that declaration's docstring (`--dry`: 58 of
+58 matched before anything was written).
+
+- **N1, `FlankUA`, ten notes; N2, `Terminal`, ten notes.** Each now says: no Lean model of all at once; `bowtie` at `0` satisfies every
+  hypothesis but `F.Covers 0 1` (or `F.IsPlaneMap`: `upper_bounds_of_inType_N`, `stuck_turned_frame`), with the `bowtie_*` theorems
+  that give the others; at [hand] all hold on FS131-E7's `P₅` at its stuck vertex, with the parameters. **Checked before writing, each
+  statement against E7 § 7.1–7.5's facts** (`coloursAt v = {7, 8, 9}`; horns `IsHorn v 0 (−1) 1 9`, `IsHorn v π (−1) 1 9`;
+  `HasSectors v 9 2`; flanks `7` above and `8` below, in-type at the poles; `9` out-type at both; no MERGE; every horn point in both
+  shadows; a plane map): all twenty hypothesis sets are met. One fact is mine and not E7's, [hand], one line — for
+  `hasSectors_one_of_contacts` at `j = 7`: the closure of the class of `7` meets `ω(v)` at the upper pole only (a point `N + (a, b)`
+  with `b ≤ −|a|` has `|· − v|² = 1 + 2b + a² + b² ≤ 1 + 2b(1 + b) ≤ 1`, with equality only at `N`). The `bowtie` half: the named
+  theorems' statements read (`bowtie_flanks`, `bowtie_inType`, `bowtie_doublyShadowed`, `bowtie_not_merge_zero`, `bowtie_isHorn`,
+  `bowtie_coloursAt_zero`); `hsh` from `DoublyShadowed` is a two-line step (a sub-horn's points are horn points) and stays the
+  original note's claim; `hasSectors_one_of_contacts`'s is QA4 § 3.5's sample.
+- **The stuck family (E7 § 7.5)**: `cv_l0`, `hornBoundsQR_of_isChainVertex` — "Inhabitant at [hand]: … `P₅`"; `n3_end_chain` — every
+  hypothesis holds on `P₅` (read against its statement); `n3_end_four_colours`, `n3_end_bothKind`, `n3_end_of_not_inType` (one
+  hypothesis set, E7's reading of the first) — "no model expected" stays, with "the hypotheses without `hno` hold on `P₅`";
+  `horn_upper_ne_one`, `horn_lower_ne_neg_one` — unchanged in substance (two neighbouring chain vertices: `P₅` has one), saying so;
+  `c_ends`, `run_ends` (stated at six colours) — "no model at six colours is known", `P₅` named as twelve-coloured and no
+  inhabitant. The seventeen at `ArcMap 6` whose notes say "no model expected" are unchanged, as E7 rules.
+- **N3** `a4six` (`F₀`, and the padded `sixFrag` degenerate), `straddlers_third` (`F₁`); `nb4p` at Stage 2. **N4**
+  `flank_ne_of_doublyShadowed` (`P₄`); the three moves — none in Lean at once, what each named object fails, QA4 § 3.3's hand model.
+  **N5** the `_aux` forms point to them. Each hand model is named with its grade, "no Lean object yet, an open gate item"
+  (ruling 427 (d), F3). E7's drafted lines use Lean names that do not exist (`fourFlower`, `fourFlowerCell`); the notes use the
+  derivation's `F₀`, `F₁`, `P₄`, `P₅`.
+- **N6** `pair_ii`, `fail_leavingCentre` (the note inhabits one hypothesis, on a map where the others cannot hold), `fail_colours`
+  (no note before). **N7** `rot_out`, `rot_in`, `exists_eleventh_of`, `exists_far_end` — **the open line, not "no model expected"**:
+  their hypotheses on the map are some of `BaseCtx`'s six fields, not all, so `row134BaseUA` does not refute them, and whether they
+  hold together on a valid six-coloured fragment is open; `dense3`, `cv_exists` — `exists_terminal`'s landed sentence (none at six
+  colours; the class at seven is `sevenBrickMap`'s). **N8** Woodall's four refutation steps. **N9** `LocalSeq.const` — "a degenerate
+  one", not "every clause exercised". **N10** four module lines (`SVMap`, `UnitArc`, `Cone`, `MapTopology`), each naming the model
+  and the theorems it covers; `Cone`'s says which of its lemmas it does not cover. **N11** `exists_arcStep` — **the note as M7 left
+  it named `l60Frag` under `hP : F.IsPlaneMap`**: `l60Frag` is a fragment; the note now says it satisfies the local hypotheses at
+  [hand] and that no model of all at once is on file (the outward bend's `awayModel` is the candidate, unchecked against this
+  statement).
+- **N12** `ARCHITECTURE.md`: IS1's two cells verbatim (ruling 432 (b)); `Terminal`'s row keeps "skeleton" (ruling 432 (b): until
+  `Procedure`'s steps are proved, and `exists_arcStep` rests on the bend's open children); three rows follow the code (`Plane/Basic`
+  gains `conj_e`, `sq_norm_eq`; `FlankUA` loses the removed lemma; `BendCollar` names `collarModel_hyps`).
+
+### 3.3 The checks of this stage
+
+- **The notes check** (`tools/fs131_rp_notes.py`, QA4's tool over the working tree): **175 notes read, 0 CONFLICT** (before: 151
+  read, 21 CONFLICT); `data/fs131/rp/notes-after.txt`. Its self-test at Stage 1: a planted conflicting note raises the count by one;
+  an unreadable tree exits 1.
+- **The statement check**: unchanged manifest, 0 deviations (`stmt-stage3.txt`) — the docstrings and `BaseDense`'s proof are not
+  statements.
+- `tools/check_architecture.py`: PASS (`arch-check.txt`). `tools/fs131_im_statements.py --check`: PASS (the moves' statements in
+  `Moves` still equal `Contact`'s). `tools/fs131_im_move_cone.py --check`: its two "verbatim in `Cone`" lines hold; its third line
+  fails as it did before this job (the working `Contact` against a fixed commit — a stale check, not this job's).
+- `tools/fs131_m7_dupes.py --whole Proofs/HadwigerNelson/Plane a20bb6f5`: **0 NAME-TWICE, 0 STATEMENT-TWICE**, 5 NORM-TWICE — the five
+  M7's report names as its normalizer's artefacts (`dupes-whole-stage2.txt`).
+- No `axiom`, no `native_decide` added (patterns shown to match two planted lines first; no added line of this job's diff matches).
+- Iteration: the 16 docstring-edited files and `BaseDense`, against the library Stage 2's build left: each exit 0, no warning.
+
+### 3.4 Slips, mine
+
+- The missed caller (§ 3.1).
+- Two notes read as CONFLICT after the edit: QA4's tool looks for "local hypotheses" with one space, and my wrap had put a line break
+  inside the phrase. Found by the tool; the phrases it reads are now kept on one line.

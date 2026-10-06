@@ -2772,7 +2772,10 @@ and — unless it loses one — raising no bad count. The toward collar bend whe
 the bend's interface (`ArcBend.arcStep`, `ArcBend.maxBad_centre`, `ArcBend.maxBad_other`; `Plane/ValidMap/ArcStep`); the last clause
 is FS131-KL1's question (5) (`isR2Arc_of_fixed`, `Plane/ValidMap/BendStep`). The plane hypothesis (item 430 (b)) gives the bad
 count's finiteness.
-Inhabitant: no Lean model on file; `l60Frag` cleaned, its whole arc, at [hand] (FS131-QA4 § 6.2, rank 7). -/
+Inhabitant: no Lean model on file. `l60Frag` cleaned, at its whole arc `r([0, π/3])`, satisfies the local hypotheses at [hand] (FS131-QA4
+§ 4.3: maximal by `l60_le`, the inner colour `0` carried at the centre and the outer `1` not, so neither (Q) nor (R2)); it is a fragment,
+and `hP`, a map of the plane, is not among them. A model of all at once is not on file: the plane-map model owed for the outward bend
+(`awayModel`, FS131-KM1's; inventory ruling 455 (a)) is the candidate, unchecked against this statement. -/
 theorem exists_arcStep (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
     (hmax : F.IsMaxRingArc P θ₁ θ₂ c c') (hQ : ¬ F.IsQArc P θ₁ θ₂) (hR : ¬ F.IsR2Arc P θ₁ θ₂)
     (hnb : ¬ (c ∈ F.coloursAt P ∧ c' ∈ F.coloursAt P)) {T : Set ℂ}

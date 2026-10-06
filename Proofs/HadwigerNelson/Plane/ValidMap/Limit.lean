@@ -391,7 +391,8 @@ namespace LocalSeq
 
 variable (S : LocalSeq k)
 
-/-- The constant sequence (every step idle, on the empty set): the inhabitant of `LocalSeq`, every clause exercised. -/
+/-- The constant sequence (every step idle, on the empty set): the inhabitant of `LocalSeq`, a degenerate one — every step is idle, on the empty set, so the clauses about a step's support hold
+vacuously (FS131-QA4 § 4.3). A sequence with live steps is `exists_terminalSeq`'s (`Plane/ValidMap/Procedure`). -/
 def const (F : ArcMap k) : LocalSeq k where
   F := fun _ => F
   U := fun _ => ∅
