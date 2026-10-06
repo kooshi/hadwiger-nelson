@@ -235,3 +235,193 @@ run. Planted names start `t5c_`; planted files and the control ledger are built 
 under `Proofs/`. Every control has its silent partner, and every `FAIL` row of the control run must be one some control
 predicts (two-sided). The controls plant their own axiom, formers and consumers, so none depends on what `main` assumes
 today (the axiom audit's `baseline` control does, inventory item 259).
+
+## Stage 3 — SAVED (FS131-T5): the step, built; what the first runs on `main` changed in the design
+
+**Files.** `scripts/Assumptions.lean` (the list and the scan), `scripts/assumptions.sh` (the gate, `--self-test`,
+`--write-ledger`), `scripts/assumptions-controls.txt` (21 controls), `scripts/assumptions-ledger.txt` (90 rows),
+`scripts/gate_report.py` (a third digest, `assumptions`), `tools/fs131_t5_mutate.py` (the mutation harness),
+`tools/fs131_t5_readback.py`. One scan is about 70 s and under 16 GiB (`scripts/slot.py --mem 16 --cpus 4 --
+./scripts/assumptions.sh`); the self-test is one scan.
+
+**Four things the runs changed, each decided on its reason and recorded here because stage 2 said nothing would be
+loosened to make `main` green:**
+
+1. **A refuted occurrence is neither taken nor produced** (`Pol.ref`). The first run with an empty list
+   (`data/fs131/t5/runs/first-empty-list.out`) counted `theorem not_rationalDescent : ¬ RationalDescent` as taking
+   `RationalDescent`. A conclusion `¬ H` proves `H` fails; it is printed as `REFUTES H T` for a declared `H` and
+   counts toward no tally.
+2. **A fourth entry, `.premise`**, for a closed hypothesis that is not an assumption. `deGrey_bound_of_not_colorable`
+   takes `¬ (edgeGraph 1581 deGrey.edges).Colorable 4`, which **no theorem of the library states**: the library proves
+   it for the same graph in its rotated presentation (`deGreyRot_not_colorable_four`) and concludes `χ(ℝ²) ≥ 5` there.
+   The closed-hypothesis rule found it; it is a hand-off lemma kept for exposition, and nothing consumes it. And
+   `voronov11_of_forall_mu_lt (H : ∀ ε > 0, mu 6 ε < 1) : Voronov11` is half of FS106-COMP's equivalence. Each is
+   declared with its reason and printed every run (`CLOSED PREMISE`).
+3. **A bibliography key in a docstring is a source, not a kind.** As first written, the kind check read a
+   bracketed key as speaking for `outside`, and failed `Interface.MulStable` — declared `ours` from the landing's
+   table (J45 § 4.2 step 2), with a docstring that says "rests on J28V-7 (…; `[LevitzMott1972]`)". A hand result of
+   ours resting on a cited paper is the ordinary case (`Interface.PE2`, "over EL2021 Thm 1.2", unbracketed, passed), so
+   the key now supports a declared `outside` and contradicts nothing; `MulStable` reads `SILENT`. Changed before any
+   control was written; control `kind` plants both sides (`t5c_KC` fails, `t5c_CT` is silent).
+4. **`DERIVED` fails** (`undeclared-derived-only`), by the rule pre-decided in stage 2: on `main` it flagged one
+   former that is not an assumption (`SpectralInputs.IsHaarFourier`, whose one existence theorem takes
+   Herglotz–Bochner), which is at most ten. It is declared a `.condition`. With `Interface.MR` left out of the list
+   the same rule names it (its one producer, `mr_of_pe2_efPlus`, takes PE-2 and EF_F⁺).
+
+Also: theorems Lean states under a constructor's name (`S.mk.inj`, `.injEq`, `.sizeOf_spec`) are generated and not
+read — the self-test's own structure `t5c_Pack` showed them as three consumers of a field's type.
+
+## Stage 4 — SAVED (FS131-T5): make it fail, and watch it fail
+
+**`./scripts/assumptions.sh --self-test`: OK, 32 checks** at the stage's first green run
+(`data/fs131/t5/runs/selftest-2.out`; the planted copy, its ledger and its output are `data/fs131/t5/planted/`; the last
+run's receipt is `data/fs131/t5/receipts/assumptions-self-test.log`). All plants live in one copy of the audit,
+elaborated once beside the shipped list; planted names start `t5c_`; nothing is planted under `Proofs/`.
+
+| control | the fault, seen red | its silent partner |
+|---|---|---|
+| `closed_undeclared` (**the load-bearing one**) | a hypothesis nobody declared, written out in a binder, closed: `undeclared-closed-hypothesis` | `closed_site` — the same proposition in the same place, declared; `closed_established` |
+| `parametric_unseen` | — (the class the check cannot see: the same hypothesis over the theorem's variable reads clean, and no row names it) | — |
+| `closed_established` / `closed_unestablished` | a closed hypothesis whose only proof is conditional, or rests on a closed step whose own hypothesis is unproved | one proved directly, and one proved through a chain of closed steps |
+| `closed_refuted` | two closed hypotheses in one refutation | the one hypothesis of a refutation (`CLOSED REFUTED`) |
+| `closed_premise` | a premise with no reason (`no-reason`) | a premise with its reason (`CLOSED PREMISE`) |
+| `never_concluded` | a former taken and never concluded, in neither list | `concluded` — one a theorem concludes; `condition` — one declared a condition |
+| `condition` | a condition entry that is not needed (`stale-condition`) | a needed one, printed with its reason |
+| `by_docstring` | a former whose docstring says "a named hypothesis from outside the backlog", undeclared | the same docstring, declared |
+| `stale_declaration` | **a declared hypothesis no theorem takes** | `named_declared` |
+| `sources` | **no source**; **a source that is no key, row or id**; a source its kind does not admit; a key, a row and an entry id that are not in the records (`unresolved-source`) | a bibliography key, a ledger row, a grokking, a stub and an entry id that resolve |
+| `ledger` | **a theorem that takes a declared hypothesis and is missing from its list** (`unlisted-consumer`); a listed one the scan does not find | `named_declared` |
+| `shapes` | a wrapper taken at a closed binder (twice: the closed rule and `undeclared-never-concluded`) | under `∧`, in an implication's conclusion, `[Fact H]`, an arrow in the conclusion, under `∃`, through a wrapper definition and a structure's field — each found; an antecedent and a `¬` — neither read as taking |
+| `kind` | **a declared kind its docstring contradicts**; a condition whose docstring calls it a hypothesis | a docstring that says nothing (`SILENT`); a cited key (`SILENT`, no contradiction) |
+| `discharged` | a declared hypothesis a theorem proves in general | one proved at an instance (`PRODUCES … uncond`) |
+| `derived_only` | an undeclared former every proof of which takes a declared assumption | `concluded` |
+| `axioms` | an axiom's consumer missing from the ledger; an axiom with no source; an axiom whose key is not in the bibliography | an axiom with its source and its listed consumer |
+| `bad_entries` | an entry naming a theorem; a site with no such binder; a name declared twice; one label with two sources | — |
+| two-sided | every `FAIL` row naming a planted name is one a control predicts (the first run failed this: stage 3's last line) | |
+| accounting | the `TOTALS` line dropped; one `TAKES` row dropped; an untelescoped declaration; a missing ledger | the unmutated run |
+| digest | recorded counts stale in `CLAUDE.md`; partial (exit 3); doubled (exit 3); stale in the ledger's header | counts that match; counts absent, flagged with the sentence to add |
+
+**The controls are independent of what `main` assumes**: they plant their own axiom, formers, consumers and records,
+and a failure naming no planted name is the shipped list's own, counted and left to the gate (93 before the ledger
+existed; 3 since).
+
+**The mutation harness** (`tools/fs131_t5_mutate.py`, output `data/fs131/t5/runs/mutations.out`): eighteen mutations,
+each switching off one decision of the scan or of the shell, on a copy (no shipped file is edited; the harness
+checks the two shipped files' digests at the end). Each must make the self-test fail **and name the control built for
+it**. Its result is in stage 6. The run is about twenty-five minutes; one mutation is rerun with `--only <name>`.
+
+## Stage 5 — SAVED (FS131-T5): `main` declared
+
+**The gate on `main`'s tree as it stands is RED, by exactly three failures, each a bibliography row `main` lacks**
+(`data/fs131/t5/receipts/assumptions-main-as-shipped.log`; `data/fs131/t5/runs/gate-main-as-shipped.out`):
+
+    FAIL unresolved-source HadwigerNelson.SpectralChain.BochnerHerglotz :: its source bib:Rudin1962 is not in the records
+    FAIL unresolved-source HadwigerNelson.SpectralChain.InvariantMeasureOnClosed :: its source bib:Kakutani1938 is not in the records
+    FAIL unresolved-source HadwigerNelson.SpectralInputs.BochnerOn :: its source bib:Rudin1962 is not in the records
+
+Three hypotheses standing for outside theorems cite works with no entry in `BIBLIOGRAPHY.md` — one of them
+(`InvariantMeasureOnClosed`) cites no work at all in its docstring. `BIBLIOGRAPHY.md` is Keryx's file; the two rows are
+drafted below. **Against a copy of the file with those rows, and a copy of `CLAUDE.md` with the drafted sentence, the
+gate is GREEN** (`data/fs131/t5/receipts/assumptions-main-with-drafts.log`, `data/fs131/t5/runs/gate-main-with-drafts.out`;
+the copies are `data/fs131/t5/drafts/`), and the run says on its first lines which files it read:
+
+    ==> assumptions: OK — 1 outside theorem(s) as axioms, with 4 theorem(s) resting on them; 18 named and 15 inline
+        hypotheses (5 outside, 24 ours, 4 open), taken by 85 statement(s) and mentioned by 1
+
+`=== SCANNED === constants=13151 theorems=9613 formers=275 hypotheses=15948 closed=1468 untelescoped=0`;
+`=== TOTALS === axioms=1 rests=4 named=18 inline=15 outside=5 ours=24 open=4 takes=85 mentions=1 produces=3 sites=26
+conditions=31 declaredClosed=30 established=1433 premises=2 refuted=3 refutes=0 silent=11 derived=1 wrappers=0 cohyp=34
+hints=3 unseen=14112 fails=0`.
+
+### What `main` assumes, at `3bfc7d2e` — by kind, by name, with the count of statements on each
+
+**Outside theorems (six: one axiom, five hypotheses).**
+
+| assumption | form | source | statements |
+|---|---|---|---|
+| `Plane.falconer_lemma2_nonempty` | axiom | `[Falconer1981]` Lemma 2 (i) | 4 rest on it |
+| `SpectralChain.BochnerHerglotz` | named | `[Rudin1962]` 1.4.3, 1.3.6 — **no bibliography row** | 12 |
+| `SpectralChain.InvariantMeasureOnClosed` | named | `[Kakutani1938]` (Markov–Kakutani) — **no bibliography row; the docstring cites no work** | 7 |
+| `Bridge.RealAlgebraicDescent` | named | `[Lang1953]` (Artin–Lang; Tarski) | 6 |
+| `SpectralInputs.BochnerOn` | named | `[Rudin1962]` 1.4.3 — **no bibliography row** | 1 |
+| `Plane.Voronov11` | named | `[Voronov2023]` Thm 1.1 | 1 takes it (`mu_lt_of_voronov11`), 1 mentions it under `↔` |
+
+**Hand results of ours (twenty-four: thirteen named, eleven written out in a binder).**
+
+| assumption | form | source | statements |
+|---|---|---|---|
+| `SpectralChain.Interface.RU` | named | J45 § 5.4 | 6 |
+| `SpectralChain.Interface.PE2` | named | X02D, over `[EinsiedlerLindenstrauss2022]` Thm 1.2 | 6 |
+| `SpectralChain.Interface.EFPlus` | named | FS100-X01D | 6 |
+| `SpectralChain.Interface.APlus0` | named | J45 § 3 (row 113) | 3 |
+| `SpectralChain.Interface.APlusOfR88` | named | J45 | 3 |
+| `SpectralChain.Interface.Count` | named | X23D-TCA | 3 |
+| `StandingFive.StandingFloor` | named | G56 | 3 |
+| `CharacterColouring.OrderBound` | named | FS89-S0A-3 | 2 |
+| `SpectralChain.Interface.MR` | named | row 120 (measure rigidity, Fourier form) | 1 |
+| `SpectralChain.Interface.MulStable` | named | J45 § 4.2 step 2 | 1 |
+| `SpectralChain.Interface.NegCircle` | named | J45 § 4.2 step 3 | 1 |
+| `Plane.Row130M1` | named | row 130 | 1 |
+| `SevenConditional.G4` | named | row 103 (a solver refusal with no proof log) | 1 |
+| `inline:Row99` (`hRow99`) | inline | row 99 | 3 |
+| `inline:CLS` (`hCLS`) | inline | X23D-CLS | 3 |
+| `inline:UpperHalf` (`hUpper`) | inline | row 52 | 1 |
+| `inline:Row123Chain` (`hRow123`) | inline | row 123 | 1 |
+| `inline:RQ4`, `inline:RQ5` (`cl2`) | inline | FS89-D2-T1, FS89-D5-T2 | 1 each |
+| `inline:Alpha23`, `inline:Alpha83`, `inline:Alpha11` | inline | rows 71, 68, 68 (certificates outside the kernel) | 1 each |
+| `inline:Row78`, `inline:Row88` (`falconerFan_five_mem_eight`, `_mem_P`) | inline | rows 78, 88 | 1 each |
+
+**Open questions and design targets (four, all written out in a binder).** `inline:SixTarget` (row 43; 2 statements),
+`inline:SevenTarget` (row 61; 2), `inline:SixTargetOneTwo` (row 61; 1), `inline:FragmentsAtEveryRadius` (row 145; 1).
+
+**In all**: 33 hypotheses taken in 85 (assumption, statement) pairs by **40 distinct statements**, and 4 theorems on the
+axiom; the ledger lists each pair. **Not assumptions, declared with reasons and printed every run**: 31 conditions
+(formers taken as hypotheses and never concluded, or concluded only from an assumption) and 2 premises.
+
+**What the step counts but cannot decide, on `main`**: `cohyp=34` (the other hypotheses of the 40 consumers, each
+printed; by my reading all 34 are conditions on the theorem's parameters — `hL : localBound F ≤ 5`, `hfan`, `hσ`);
+`hints=3` (`flankQ_lower`, `flankQ_upper`, `flankQ_upper_of_qrOnly`, whose docstrings say "named hypothesis" of an `hQR`
+that wave 5 has since proved: the wording is stale, a docstring draft below); `silent=11` (declared formers whose
+docstrings say nothing of whose they are); and **`unseen=14112`: every other parametric hypothesis of the library,
+among which a hand result written out in a binder, in a theorem that declares nothing and says nothing, would not be
+told from a condition.** That class is real on `main` — `hRow99`, `hCLS`, `hUpper`, `hR78`, `hR88` were found by reading
+`SpectralChain.lean` and `Arith/FalconerField.lean`'s docstrings, not by the scan; they are declared now, and the scan
+holds them (`stale-declaration`, the ledger).
+
+**Against the records** (the brief's "a docstring and a record that disagree, or an assumption no record names"):
+every assumption above is named by some record of ours — a docstring, a ledger row, the landing's table or plan § 7.4.
+Three differences, none urgent, each held for the coordinator in the report:
+(i) `Plane.Voronov11`: its docstring says "Named here, not imported (FS106-COMP's clause is an equivalence, not a use)";
+inventory item 548 (2) counts it among the outside theorems assumed, with one consumer. Declared `outside`, with that
+consumer; (ii) plan § 7.4's `Row134Base` and `Row130Collapse` are taken by no statement on `main` (item 548 already
+says so of the first) — nothing to declare; (iii) the landing's table has `Interface.MulStable` as ours and its
+docstring cites `[LevitzMott1972]`: declared `ours`, stage 3 item 3.
+
+## What is on its way — how each landing meets the step
+
+- **A wave that brings a named hypothesis** (`WEqKLimit`, `ReduceToMap`, `MapNO`, `GammaFreeEmptyNS`,
+  `QArcsJoinOpposite`): if it is taken at a closed instance, concluded by no theorem, concluded only from assumptions,
+  or its docstring uses the words, the step fails and names it (`undeclared-closed-hypothesis`,
+  `undeclared-never-concluded`, `undeclared-derived-only`, `undeclared-by-docstring`) until the wave adds one `.former`
+  line; then every consumer fails as `unlisted-consumer` until `--write-ledger` is run and its added rows are read.
+  **What the step will not catch**: one of these written out in a binder over the theorem's variables, with a docstring
+  that does not say so — the wave declares it as a `.site`, on its own word.
+- **`KloostermanBound` becoming an axiom** (Weil's bound): while a hypothesis it is a `.former … .outside "[Weil1948] …"`
+  (the key is in `BIBLIOGRAPHY.md`); when the axiom replaces it the entry leaves (else `bad-entry`: an axiom is not a
+  former), `declareImport` gains its line in `scripts/Axioms.lean`, and this scan prints `AXIOM … ref=bib:Weil1948` with
+  a `RESTS` row for every theorem of the library whose stored axiom list holds it — all of them, not only the records
+  the audit is handed — each of which must be in the ledger.
+- **The job removing `falconer_lemma2_nonempty`**: its four `RESTS` rows go stale (`stale-consumer`) and
+  `--write-ledger` drops them; `axioms=1 rests=4` become `0 0`, in the ledger's header and in `CLAUDE.md`'s sentence.
+  **This step's controls do not move**: they plant their own axioms. **The axiom audit's do**:
+  `scripts/axioms-controls.txt`'s `baseline` and `imported_declared` expect `imported=4 declared=1 library=1` and
+  `5 / 2 / 2`, and `banner_dropped` expects two consequences of one declared import, all read from `main`'s state
+  (its header says so; inventory item 259's tool defect, owed). With no import declared those expectations must read
+  `0 / 0 / 0` and `1 / 1 / 1`, and with Weil's axiom in the same landing they may not move at all; the landing that
+  empties the list edits those three controls, or the audit's self-test is red for a reason that is not a fault. The
+  repair that ends it is the one used here: a control that plants what it counts.
+- **When an assumption is proved**: a theorem concluding a declared former over its own variables with no hypothesis
+  fails the step as `discharged` until the entry leaves; its consumers then fail as `stale-consumer`, and the theorems
+  that still take the hypothesis in their statements are restated or left, on the landing's reading.
+- **A join of two lines** runs the step on the joined tree, like the doubled-name check: each line's ledger rows are
+  kept (both sides), and `--write-ledger` on the joined tree settles the header.

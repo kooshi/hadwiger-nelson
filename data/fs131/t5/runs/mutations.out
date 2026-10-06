@@ -1,0 +1,5 @@
+slot: admitted python3: mem 16 GiB (hard cap), cpus 4,5,6,7
+unmutated: exit 0 — OK
+closed-rule-off: caught — self-test exit 1, and it names its control:     FAIL  closed_undeclared — THE LOAD-BEARING ONE: a hypothesis nobody declared, written out in a binder, closed: expected 'FAIL undeclared-closed-hy
+closure-unsound: caught — self-test exit 1, and it names its control:     FAIL  closed_unestablished — a closed hypothesis whose only proof in the library is conditional, or rests on a closed step whose own hypothesis is
+refutation-takes-any: caught — self-test exit 1, and it names its control:     FAIL  closed_refuted — the one closed hypothesis of a refutation is the claim refuted; two are not: expected 'FAIL undeclared-closed-hypothesis t5
