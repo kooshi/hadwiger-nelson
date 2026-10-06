@@ -6487,3 +6487,59 @@ reason by the close.*
      hypothesis declares it). (c) **The complete list I owe Kooshi (item 548 (2)) is this job's first result**, read
      from its receipt, not made by me with `grep` a second time. In flight: 3 (L6A, K10c, K7b) + the special-purpose
      slot (T5); the fourth closes at T5's hand-back.
+
+553. **FS131-K7b done at its Stage 7: wave 7's second planning pass — the four flags decided, the four-colour foundation
+     written, three of thirteen rows stated whole and three in part, nineteen new leaves; eight rows and the pinwheel left to a
+     third pass** (planner; harness 555k and 48 minutes by the task notice — past the line; record `fs131-w7`'s
+     `plans/FS131-w7-kernel-plan.md` Stages 5–7; report `data/fs131/reports/FS131-K7b.md`; commits `8954563d`, `6f9807b9`
+     (the granted merge), `cafd84c7`, `7baeafe8` (the foundation alone), `195c7855`; pushed, tree clean). **Modules, new**:
+     `Plane/FourColour/Basic` (no `sorry`: the frame of a Reuleaux triangle at a vertex, the tactic edge, the Reuleaux
+     cross and bowtie), `Local` (13 leaves), `Bowtie` (6). **Proved on the branch**: FS114-N3-FACE at the class its
+     argument reads, FS114-Y4-UPDOWN, FS114-N4-LENS's two clauses, N3-HALF (a), parts of N3-SEC and of N2-ENDS.
+     **Stated**: FS114-N3-LOCAL, -Y4-LUNE, -Y4-RSTOPALL whole; -N4-LEMMAS, -N7-QOPP, -Y6-HALF in part. **Not stated**:
+     FS114-N5-GRING, -Y2-BOWTIE, -Y3-RSTOP, -N6-NOQ, -Y5-PINALL, -Y6-E2RED, FS129-SR3-E2ONE, N3-PAY — arguments unread.
+     **FS114-Y2-BOWTIE's kernel route decided**: the map by formula, about 5,500 lines, four implementer jobs, a line of
+     its own. **The three statement defects of item 546 are now in its saved stage** (§ 5.4) — FS114-N3-FACE, -N4-LENS,
+     -N7-QOPP each lack in their entry a hypothesis their record's header states and their argument reads — **and are
+     reported to Kooshi as such** (item 526's rule met); a fourth, minor, is item 549's. **My receipt**: tip `195c7855`
+     equals `origin/fs131-w7`, tree clean; since the merge it added three Lean files and three registry files' lines,
+     nothing else outside `data/`, `plans/`, `tools/`; the last real build's full log
+     (`build/gate/build/20261006T174158Z-1895628.log`, 4 modules rebuilt) ends "Build completed successfully (5816
+     jobs)", 113 warnings, all `declaration uses sorry`; `sorry` by the handoff's grep: `FourColour/Basic` 0, `Local`
+     13, `Bowtie` 6, `RouteT/Count` 19, `Rainbow` 1 — the 39 reported; no `axiom`, no `native_decide`; `SimpleOn` and
+     the three route-T modules unchanged since `b5ef0e39` (`git diff` empty); `7baeafe8` is in the branch and holds
+     `FourColour/Basic` and its registry lines alone; the five statements for FS114-N7-QOPP read in its § 7.3 and found
+     at `Local.lean` ll. 217–243. Not checked by me: the nineteen statements against their rows beyond those five; the
+     proofs beyond the build; its three modeling passes. **A slip of its own, corrected in the report**: its mid-job
+     counterexample to an open-arc reading of N3-ODD was attributed to the wrong object; the disposition stands.
+     **A discrepancy between two filed records, raised and not resolved (its § 7.2 S1)**: the tool that builds
+     FS114-Y2-BOWTIE (`tools/fs114_y2_k1.py` ll. 107–110) gives the tile `t2` two arcs of the unit circle about the
+     centre, from 60° to 120°, as boundary — so that part of the centre's ring is an arc of `Γ` — while the ring survey
+     of the same object (`data/fs116/n1/ring-survey-bowtie.out` ll. 75–78) prints that ring as "off Gamma" there, and
+     the model lines of FS114-N4-D and FS114-N5-GRING (`plans/FS114-derivation.md` ll. 496, 547) call its lune rings
+     `Γ`-free. **Read by me**: the eight cited lines say what it quotes; which of the two is the object, and what the
+     survey means by "off Gamma", I did not determine. No statement of this pass rests on it; it bears on which rows
+     the fragment can be the inhabitant for, and on two filed model lines and an erratum sentence. **Predictions
+     scored**: three of four flags (met); rows stated whole 3 against a registered median of 8 (not met). **Slips,
+     the job's, disclosed**: the pinwheel's foundation and five rows unread; `rstopAll`'s last two steps planned from
+     one record without its two verifiers'; the foundation's commit not built by itself. **Credit**: three filed
+     statements each shown to lack a hypothesis with the line that decides it, one cleared with its reading fixed, a
+     counterexample of its own retracted in its report, and the discrepancy written with both sides quoted and no
+     side picked. **Rulings.** (a) **A third planning pass, FS131-K7c**: its first act is the discrepancy — which
+     object the tool builds, what the survey reads, and whether the two model lines and the erratum sentence stand
+     (a correction owed if not, to me by message); then the pinwheel's foundation and the eight rows of its § 7.7,
+     and whether `rstopAll`'s `SimpleOn` hypothesis narrows to the closed unit disc before an implementer starts
+     `Bowtie`. Alternative for the discrepancy: a deriver's job now. Why the planner: it reads the construction's
+     record for FS114-Y2-BOWTIE anyway, the question is which object is built, not a derivation, and a job of its
+     own costs about a job. Confidence: medium. Brief not written. (b) **Implementers by file**: FS131-I7A as
+     briefed (`RouteT/Count`, then `anchor`; its branch is at the merge, item 549); FS131-I7L (`FourColour/Local`,
+     13 leaves) and FS131-I7B (`Bowtie`, 6 leaves, priced at two jobs) on branches to cut from `195c7855`, `Bowtie`
+     after K7c's word on (a). `anchor` stays with I7A (ruling 527 (a)), not with `Local` as the planner proposes.
+     Briefs not written. (c) **The bowtie fragment in the kernel is a line of four jobs**, by its plan's § 7.5; it is
+     the inhabitant every structure-valued hypothesis of `Local`, `Bowtie` and wave 8's star rows names, so **wave 7
+     cannot pass the gate before it lands**. By lines (item 541) four jobs is what 5,500 lines cost. Briefs not
+     written; they follow K7c's answer to (a). (d) **FS114-N7-QOPP's final statement is in wave 8's second planner's
+     brief by quotation**, with the foundation's commit and N3-ODD's meeting point (`mk-k78b.py 8`; gate exit 0, 38
+     quotations). (e) The errata lines (three, and D1's) are held for the filing. (f) **Slot → FS131-IF1**
+     (Falconer's lemma, by Kooshi's word, item 550), launched 2026-10-06. In flight: 3 (L6A, K10c, IF1) + the
+     special-purpose slot (T5).
