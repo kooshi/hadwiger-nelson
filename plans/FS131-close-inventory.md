@@ -4741,3 +4741,12 @@ reason by the close.*
      the scan as it is. (e) **The gate has a new standing step from this landing on**: a landing reads the kernel's own list of the
      library's theorems against the audit's records (L5's `tools/fs131_l5_records.py`), since a registration read from the source misses
      declarations whose line does not begin with `theorem`. Confidence: high. (f) **Kooshi is notified by push.**
+
+476. **Slot → FS131-K6, wave 6's planner** (Keryx, 2026-10-06, after wave 5's landing; ruling). The thirty-five rows on saturated colourings
+     (`Plane/Saturated/{Pinch, Fragment, MapColouring, Ladder}`; FS-111, FS-116, FS-121; `plans/FS131-kernel-plan.md` § 7.1), on a new branch
+     `fs131-w6` cut from `main` at the landing (worktree made, build copied from the idle `fs131-w5c`, pushed); brief
+     `data/fs131/briefs/FS131-K6-wave6.md`, gate PASS, derived from wave 10's generator. Alternative weighed: the second planning pass for
+     E7's `F₀` and `F₁`, or the tidy moves. Why wave 6: it is the largest wave left and the plan names its definitions ("honest", "`D-NF`")
+     as where a statement defect is likeliest — the sooner read, the sooner a deriver can be asked. Confidence: medium-high. In flight: 1
+     (MB2) + 1 (K10) + 1 (K6) = 3. **A push to Kooshi for the landing was tried and not sent** (the harness: the terminal is active); the
+     landing is in this turn's report.
