@@ -1,0 +1,10 @@
+HEAD=b9b3a9e5af047e6a47d8b2128e400b987321b374  2026-10-06T10:25:18Z
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261006T102648Z-3278225.log
+    ⚠ [5722/5754] Replayed Proofs.HadwigerNelson.Plane.Models.Stuck
+    warning: Proofs/HadwigerNelson/Plane/Models/Stuck.lean:1362:8: declaration uses `sorry`
+    All targets up-to-date (5754 jobs).
+==> build: OK — all 1771 modules already up to date, nothing built, 1 module(s) with warnings, 2s
+    full output: build/gate/build/20261006T102648Z-3278225.log
+exit=0

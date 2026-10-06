@@ -1,0 +1,7 @@
+unplanted: PASS (17 records on exactly the three)
+plant — a record deleted: FIRED naming HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+plant — a record given sorryAx: FIRED naming HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+plant — a record given a native axiom: FIRED naming HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2
+plant — a record with Quot.sound removed: FIRED naming HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2
+plant — a record doubled: FIRED naming HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+SELF-TEST OK: every plant fired, the unplanted print passes

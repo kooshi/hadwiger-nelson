@@ -1,0 +1,10 @@
+records 132 (print commands in source 132): standard-three-or-fewer 125, through sorryAx 7, other 0
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.exists_vertexStep
+  HadwigerNelson.Plane.ArcMap.exists_arcStep
+  HadwigerNelson.Plane.ArcMap.exists_terminalSeq
+  HadwigerNelson.Plane.ArcMap.exists_terminalMap
+  HadwigerNelson.Plane.ArcMap.run_ends
+  HadwigerNelson.Plane.ArcMap.run_hornBoundsQR
+  HadwigerNelson.Plane.ArcMap.stuckRun_ne_univ
+OTHER:

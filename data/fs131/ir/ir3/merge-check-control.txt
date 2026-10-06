@@ -1,0 +1,14 @@
+FAIL data/fs131/is/ISAxioms62.lean: merged text is not the side it should be
+FAIL data/fs131/is/ISAxioms62.out: merged text is not the side it should be
+FAIL data/fs131/is/Scratch.lean: merged text is not the side it should be
+FAIL data/fs131/is/build-stage62.log: merged text is not the side it should be
+FAIL data/fs131/is/sorry-counts-after.txt: merged text is not the side it should be
+FAIL data/fs131/is/stmt-check-62-selftest.txt: merged text is not the side it should be
+FAIL data/fs131/is/stmt-check-62.txt: merged text is not the side it should be
+FAIL data/fs131/is/stmt-check-selftest.txt: merged text is not the side it should be
+FAIL data/fs131/is/stmt-check.txt: merged text is not the side it should be
+FAIL data/fs131/reports/FS131-IS1.md: merged text is not the side it should be
+FAIL plans/FS131-I5-implementation.md: merged text is not the side it should be
+FAIL tools/fs131_is_stmt_check.py: merged text is not the side it should be
+15815 files; 12 failure(s)
+FAIL

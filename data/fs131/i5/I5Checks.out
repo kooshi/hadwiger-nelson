@@ -1,0 +1,54 @@
+@sum_degrees_eq_twice_card_edges : ∀ {V : Type u_1} (G : SimpleGraph V) [inst : Fintype V]
+  [inst_1 : DecidableRel G.Adj], ∑ v, G.degree v = 2 * G.edgeFinset.card
+@SimpleGraph.even_card_odd_degree_vertices : ∀ {V : Type u_1} (G : SimpleGraph V) [inst : Fintype V]
+  [inst_1 : DecidableRel G.Adj], Even {v | Odd (G.degree v)}.card
+@IsPreconnected.prod : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β]
+  {s : Set α} {t : Set β}, IsPreconnected s → IsPreconnected t → IsPreconnected (s ×ˢ t)
+@IsPreconnected.image : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β]
+  {s : Set α}, IsPreconnected s → ∀ (f : α → β), ContinuousOn f s → IsPreconnected (f '' s)
+@IsPreconnected.Icc_subset : ∀ {α : Type u_1} [inst : LinearOrder α] [inst_1 : TopologicalSpace α]
+  [OrderClosedTopology α] {s : Set α}, IsPreconnected s → ∀ {a b : α}, a ∈ s → b ∈ s → Set.Icc a b ⊆ s
+@closure_prod_eq : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {s : Set X}
+  {t : Set Y}, closure (s ×ˢ t) = closure s ×ˢ closure t
+@Metric.mem_closure_iff : ∀ {α : Type u_1} [inst : PseudoMetricSpace α] {s : Set α} {a : α},
+  a ∈ closure s ↔ ∀ ε > 0, ∃ b ∈ s, dist a b < ε
+@Metric.closedBall_subset_closedBall : ∀ {α : Type u_1} [inst : PseudoMetricSpace α] {x : α} {ε₁ ε₂ : ℝ},
+  ε₁ ≤ ε₂ → Metric.closedBall x ε₁ ⊆ Metric.closedBall x ε₂
+@isClosed_le : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : Preorder α]
+  [t : OrderClosedTopology α] [inst_2 : TopologicalSpace β] {f g : β → α},
+  Continuous f → Continuous g → IsClosed {b | f b ≤ g b}
+@connectedComponentIn : {α : Type u_1} → [TopologicalSpace α] → Set α → α → Set α
+@IsOpen.connectedComponentIn : ∀ {α : Type u_1} [inst : TopologicalSpace α] [LocallyConnectedSpace α] {F : Set α}
+  {x : α}, IsOpen F → IsOpen (connectedComponentIn F x)
+@isPreconnected_connectedComponentIn : ∀ {α : Type u_1} [inst : TopologicalSpace α] {x : α} {F : Set α},
+  IsPreconnected (connectedComponentIn F x)
+@IsPreconnected.subset_connectedComponentIn : ∀ {α : Type u_1} [inst : TopologicalSpace α] {s : Set α} {x : α}
+  {F : Set α}, IsPreconnected s → x ∈ s → s ⊆ F → s ⊆ connectedComponentIn F x
+@Bornology.IsBounded : {α : Type u_1} → [Bornology α] → Set α → Prop
+@IsCompact.isBounded : ∀ {α : Type u_1} [inst : PseudoMetricSpace α] {s : Set α}, IsCompact s → Bornology.IsBounded s
+@Metric.isBounded_iff_subset_closedBall : ∀ {α : Type u_1} {s : Set α} [inst : PseudoMetricSpace α] (c : α),
+  Bornology.IsBounded s ↔ ∃ r, s ⊆ Metric.closedBall c r
+convexHull : (𝕜 : Type u_1) →
+  {E : Type u_2} →
+    [inst : Semiring 𝕜] → [PartialOrder 𝕜] → [inst_2 : AddCommMonoid E] → [Module 𝕜 E] → ClosureOperator (Set E)
+@Convex.isPreconnected : ∀ {E : Type u_1} [inst : AddCommGroup E] [inst_1 : Module ℝ E] [inst_2 : TopologicalSpace E]
+  [ContinuousAdd E] [ContinuousSMul ℝ E] {s : Set E}, Convex ℝ s → IsPreconnected s
+@IsCompact.elim_finite_subcover : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X} {ι : Type u_2},
+  IsCompact s → ∀ (U : ι → Set X), (∀ (i : ι), IsOpen (U i)) → s ⊆ ⋃ i, U i → ∃ t, s ⊆ ⋃ i ∈ t, U i
+@isCompact_closedBall : ∀ {α : Type u_1} {inst : PseudoMetricSpace α} [self : ProperSpace α] (x : α) (r : ℝ),
+  IsCompact (Metric.closedBall x r)
+@isCompact_sphere : ∀ {α : Type u_1} [inst : PseudoMetricSpace α] [ProperSpace α] (x : α) (r : ℝ),
+  IsCompact (Metric.sphere x r)
+@Set.Finite.subset : ∀ {α : Type u_1} {s : Set α}, s.Finite → ∀ {t : Set α}, t ⊆ s → t.Finite
+@Finset.card_union_add_card_inter : ∀ {α : Type u_1} [inst : DecidableEq α] (s t : Finset α),
+  (s ∪ t).card + (s ∩ t).card = s.card + t.card
+@Finset.card_sdiff_add_card_inter : ∀ {α : Type u_1} [inst : DecidableEq α] (s t : Finset α),
+  (s \ t).card + (s ∩ t).card = s.card
+@Finset.eq_of_subset_of_card_le : ∀ {α : Type u_1} {s t : Finset α}, s ⊆ t → t.card ≤ s.card → s = t
+@Finset.card_image_of_injective : ∀ {α : Type u_1} {β : Type u_2} {f : α → β} [inst : DecidableEq β] (s : Finset α),
+  Function.Injective f → (Finset.image f s).card = s.card
+@Finset.card_compl : ∀ {α : Type u_1} [inst : DecidableEq α] [inst_1 : Fintype α] (s : Finset α),
+  sᶜ.card = Fintype.card α - s.card
+@ENat.card_eq_top_of_infinite : ∀ {α : Type u_1} [Infinite α], ENat.card α = ⊤
+@IsClosed.frontier_eq : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X},
+  IsClosed s → frontier s = s \ interior s

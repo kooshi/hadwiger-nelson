@@ -1,0 +1,48 @@
+'HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.ratio_prod_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.ae_neg_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.ratio_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.ratio_mul_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.T_add_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.T_zero_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.T_neg_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.T_T_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.measurable_T_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.measurable_T_comp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.measurable_T_left' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.ae_T_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.nb' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.notMem_nb_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.nb_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.measurableSet_nb' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.ae_nb_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.prod_null_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.prod_apply_corr' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.measurable_corr' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.aeIndependent_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.pull' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.couple' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+EXIT=0

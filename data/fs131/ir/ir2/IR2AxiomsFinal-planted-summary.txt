@@ -1,0 +1,16 @@
+records 37 (print commands 37): standard-three-or-fewer 24, through sorryAx 12, other 1
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.exists_arcStep
+  HadwigerNelson.Plane.ArcMap.exists_mergeStep
+  HadwigerNelson.Plane.ArcMap.exists_openStep
+  HadwigerNelson.Plane.ArcMap.exists_procStep
+  HadwigerNelson.Plane.ArcMap.exists_rayStep
+  HadwigerNelson.Plane.ArcMap.exists_red
+  HadwigerNelson.Plane.ArcMap.exists_shaveStep
+  HadwigerNelson.Plane.ArcMap.exists_terminal
+  HadwigerNelson.Plane.ArcMap.exists_terminalMap
+  HadwigerNelson.Plane.ArcMap.exists_terminalSeq
+  HadwigerNelson.Plane.ArcMap.exists_vertexStep
+  HadwigerNelson.Plane.ArcMap.stuckRun_ne_univ
+OTHER AXIOM HadwigerNelson.Plane.ArcMap.not_isSite_of_curve ['Foreign.planted']
+FAIL

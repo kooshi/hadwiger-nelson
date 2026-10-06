@@ -1,0 +1,37 @@
+import Proofs.HadwigerNelson.Plane.ValidMap.Terminal
+open HadwigerNelson.Plane
+#print axioms HadwigerNelson.Plane.e_arg_sub_ne
+#print axioms HadwigerNelson.Plane.im_ne_zero_of_far
+#print axioms HadwigerNelson.Plane.mem_curveAt_of_dist_eq
+#print axioms HadwigerNelson.Plane.ArcMap.cleanKeep_Γ_subset
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_cleanKeep_Γ_of_const
+#print axioms HadwigerNelson.Plane.ArcMap.not_isSite_of_two_curves
+#print axioms HadwigerNelson.Plane.ArcMap.not_isSite_of_rim_junction
+#print axioms HadwigerNelson.Plane.ArcMap.not_isSite_of_branches
+#print axioms HadwigerNelson.Plane.exists_branchPt_near_lt
+#print axioms HadwigerNelson.Plane.exists_branchPt_near_gt
+#print axioms HadwigerNelson.Plane.ArcMap.Near.not_isSite_of_chart
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_rim_mem_sector
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_rim_mem_sector_before
+#print axioms HadwigerNelson.Plane.ArcMap.Near.move_not_mem_cleanKeep_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.Near.move_Γ_cases
+#print axioms HadwigerNelson.Plane.ArcMap.Near.RayConfig.exists_step
+#print axioms HadwigerNelson.Plane.ArcMap.exists_rayStep
+#print axioms HadwigerNelson.Plane.subset_connectedComponentIn_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.mem_cleanKeep_interiorPts_of_const
+#print axioms HadwigerNelson.Plane.ArcMap.surgery_step
+#print axioms HadwigerNelson.Plane.ArcMap.Near.move_step
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_shaveStep_aux
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_mergeStep_aux
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_openStep_aux
+#print axioms HadwigerNelson.Plane.ArcMap.exists_hasHornCount
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mergeStep
+#print axioms HadwigerNelson.Plane.ArcMap.exists_shaveStep
+#print axioms HadwigerNelson.Plane.ArcMap.exists_openStep
+#print axioms HadwigerNelson.Plane.ArcMap.exists_vertexStep
+#print axioms HadwigerNelson.Plane.ArcMap.exists_arcStep
+#print axioms HadwigerNelson.Plane.ArcMap.exists_procStep
+#print axioms HadwigerNelson.Plane.ArcMap.exists_terminalSeq
+#print axioms HadwigerNelson.Plane.ArcMap.exists_terminalMap
+#print axioms HadwigerNelson.Plane.ArcMap.exists_red
+#print axioms HadwigerNelson.Plane.ArcMap.exists_terminal

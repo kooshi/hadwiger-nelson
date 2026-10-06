@@ -475,7 +475,9 @@ picture of four or more sectors (so of four or five: the colours are distinct). 
 (`SectorsAt.exists_two_absent`) leaves at most five angles at which a point of `ω(v)` may keep all but one of `v`'s colours; an arc of length `2π/5`
 avoids them (`exists_Ioo_avoiding`), and by E1-COVER (`SectorsAt.false_of_ncard_le_two_on_arc`, at most one colour absent from `v`) it holds a point
 of three or more colours; that point lacks two of `v`'s colours, so it carries exactly three, its normal picture (from `hN`, FS131-E3) has three
-sectors, and `step6` excludes it. Replaces Woodall's steps 7–8 (FS131-E1's E1-Q2) and step 5's equality case (E1-Q1). -/
+sectors, and `step6` excludes it. Replaces Woodall's steps 7–8 (FS131-E1's E1-Q2) and step 5's equality case (E1-Q1).
+A refutation step: no model of the hypotheses is expected. Its background (`Valid`, `IsPlaneMap`; the normal form where it is assumed) is
+inhabited at seven colours by `sevenBrickMap_woodallModel` (`Plane/Woodall/Steps`). -/
 theorem false_of_four_le_sectors (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {n : ℕ}
     {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c) (hn : 4 ≤ n) (hc : Function.Injective c)
     (hang : ∀ i : Fin n, π / 3 ≤ d i.succ - d i.castSucc) (hN : F.WoodallNormal (sphere v 1)) : False := by

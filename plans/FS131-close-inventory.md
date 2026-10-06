@@ -4699,3 +4699,1548 @@ reason by the close.*
      on a new branch `fs131-w10` from `main`. Alternative weighed: the second planning pass for E7's `F₀` and `F₁`. Why wave 10: it is the
      milestone's own remaining work — 111 rows stand in waves 6–10 — and the only wave that waits on nothing; `F₀` and `F₁` close gate items
      on theorems that already have hand models. Confidence: medium-high. In flight: 1 (L5) + 1 (MB2) + 1 (K10) = 3.
+
+474. **Wave 5 is on `main`** (FS131-L5, the landing; harness ≈ 578k by the task notice; record `plans/FS131-L5-landing.md` Stages 1–6 with
+     "Drafts for the front page (FS131-L5)"; report `data/fs131/reports/FS131-L5.md`; the gated commit `1351ebc2`, the landed tip
+     `ad611866`, a fast-forward, differing from the gated commit in `plans/` and `data/` alone). **What landed**: the termination procedure
+     (`exists_terminalMap`: every valid map of the plane has a terminal valid modification), `exists_red`, `exists_terminal` with its clauses
+     about terminal maps, the vertex step and the arc step, both collar bends (`bend_toward_collar`, `bend_away_part`), the density half
+     (`exists_preBend`, `n3_base`, `localDense`, `dense3`, `bv_l3`, `row134BaseUA`), the planar chain and Thomassen's theorem — 1,309
+     hand-written theorems new to `main`, each with an audit record. **The merge** of `origin/fs131-w5z` (`d4f04ff3`): one conflict,
+     keep-both; after it 0 `sorry` under `Proofs/` and the wave's seven heads on exactly the standard three. **The tidies** (rulings
+     457 (b), 465 (a)): the unread `hF` out of seven lemmas, `ringPt_ne_of_abs_sub_lt` removed, 26 stale lines; exactly those by script.
+     **The gate on `1351ebc2`**: build exit 0 with 0 warnings; `sorry` 0; doubled names `doubled=0` (23 generated) and its 15 controls;
+     axioms "OK — 5196 clean, 16 axiom-free, 4 imported, 5 declared purchase(s)", 5,221 records, 23 controls; vacuity
+     `declarations=12999 refutations-skipped=182 sites=1130`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=1093 unknown=2`,
+     `untelescoped=0`, 62 controls; architecture PASS; the guarded lint silent (14 linters); the notes check 193 notes, 0 CONFLICT. No new
+     site vacuous, stale or unknown; no baseline entry. One record was missing from the audit and is registered (`LocalSeq.limit_dom`, a
+     line beginning `@[simp] theorem`), found by reading the kernel's list of theorems against the audit. **My receipt**: `main` pulled to
+     `ad611866`, equal to `origin/main`; `git diff --name-only 1351ebc2 HEAD` names nothing outside `plans/` and `data/`; `sorry` under
+     `Proofs/` by the handoff's grep: 0; `data/fs131/l5/receipt-vacuity-final.log` and `receipt-dupnames-final.log` read at their totals
+     lines (as above); `scripts/gate_report.py axioms` and `vacuity` run by me on the saved logs against OPEN's landing's — after the filing
+     both read "match" for `CLAUDE.md` (clean, purchases and imported; 9 of 9 counts) and for the baseline's header; the axioms digest's
+     removed records are the three names RP1 made one (`HasDegree.eq`, `sq_norm_eq_re_im`, `sq_norm_re_im`). **Items**: generalizations —
+     seven lemmas hold for every map with the collar's fit, valid or not. Corrections owed — my brief's list of what `main` changed since
+     the branch had it (it omitted OL1's registrations and the filings; no file under `Proofs/`). Questions for the tooling lane — four
+     predicates the vacuity scan holds OUT have closed refutations in the library (`UnitPairsNull`, `MergeAvailable`, `RayAvailable`,
+     `ShaveAvailable`); `ArcMap.BaseCtx` is empty at every instance and held OUT with the reason recorded — whether it should carry
+     `VACUITY DECLARED:`; the scan reads a refutation as evidence only when every binder is instance-implicit. Tool defects — two
+     self-tests that cannot run where their plant's target is absent. Slips, the job's, each disclosed (a record added while the first gate
+     pass ran: the final pass, on a committed clean tree, is the evidence). Predictions scored — its own count of `declarations` and
+     `refutations-skipped`, written before the scan, met exactly.
+475. **The landing's filing, and rulings** (Keryx, 2026-10-06). (a) **Filed, verbatim from L5's drafts 1, 2 and 4**: `CLAUDE.md` § Trust
+     ledger ("5196 clean and 5 declared purchases, and 4 imported (and 16 axiom-free; 5,221 records at wave 5's landing, FS131-L5,
+     2026-10-06)") and § The gate (the two count lines); `tools/claude_md_fact_audit.py`'s `GATE_CHANGES` entry `(("3889", "5"), ("5196",
+     "5"))`. `tools/claude_md_fact_audit.py --base 2a753bf0`: 13 losses, every one OPEN's superseded count, date or job id (read one by
+     one) — the expected result; `--dupes` as before. (b) **Held for the milestone's filing**: L5's draft 5 (a `LEAN.md` sentence: every
+     hand-written theorem of a landing has an audit record, checked against the kernel's list) and draft 6 (the open gate items at this
+     landing, 62 theorems by name in `data/fs131/l5/open-gate-items.txt`: the four moves and the stuck family until the example maps land,
+     the outward bend with `exists_arcStep`, E7's four); the ledger regrades (rows 134–137's unit-arc and termination entries to [kernel]
+     with their assumptions); the Proof Atlas rebuilt locally. (c) **The two gate scripts in `main`'s diff** were rightly read as scripts,
+     no message needed. (d) **The vacuity scan's three questions** go to a tooling job after the example maps land; default until then:
+     the scan as it is. (e) **The gate has a new standing step from this landing on**: a landing reads the kernel's own list of the
+     library's theorems against the audit's records (L5's `tools/fs131_l5_records.py`), since a registration read from the source misses
+     declarations whose line does not begin with `theorem`. Confidence: high. (f) **Kooshi is notified by push.**
+
+476. **Slot → FS131-K6, wave 6's planner** (Keryx, 2026-10-06, after wave 5's landing; ruling). The thirty-five rows on saturated colourings
+     (`Plane/Saturated/{Pinch, Fragment, MapColouring, Ladder}`; FS-111, FS-116, FS-121; `plans/FS131-kernel-plan.md` § 7.1), on a new branch
+     `fs131-w6` cut from `main` at the landing (worktree made, build copied from the idle `fs131-w5c`, pushed); brief
+     `data/fs131/briefs/FS131-K6-wave6.md`, gate PASS, derived from wave 10's generator. Alternative weighed: the second planning pass for
+     E7's `F₀` and `F₁`, or the tidy moves. Why wave 6: it is the largest wave left and the plan names its definitions ("honest", "`D-NF`")
+     as where a statement defect is likeliest — the sooner read, the sooner a deriver can be asked. Confidence: medium-high. In flight: 1
+     (MB2) + 1 (K10) + 1 (K6) = 3. **A push to Kooshi for the landing was tried and not sent** (the harness: the terminal is active); the
+     landing is in this turn's report.
+
+477. **FS131-K10, by message at its Stage 1 (`fs131-w10` at `6ca3fb4e`): a statement defect in a filed hand result, a gap, a generalization**
+     (source: K10's message to "main", 2026-10-06; not checked by me against the derivation files — its record's Stage 1 is the artifact).
+     **(1) TC1-STANDING-FIVE** (`plans/TC1-derivation.md:60`): "so `L(F) ≥ 7`, and given MR, `χ(F²) ≥ 5`" hides more than MR. Its own "uses
+     only" line names G56 (every usable plane from 59 up refuses six; `U₁₂₈`'s Hoffman floor), none of it in the kernel or the backlog;
+     `data/fs131/k1/dispositions.csv` line 179 files "so L(F) >= 7" among "its unconditional clauses". `SpectralChain.localBound F` is an
+     infimum over every stable prime and the field has infinitely many usable places (the least at 347 by K10's hand count), so both
+     clauses need a floor for an infinite family of finite targets: the Weil range and `U₁₂₈`. **(2) FS89-S0A-10**
+     (`plans/FS89-derivation.md:93`, "for every subfield F ⊆ ℝ, every band"): the order bound it reads is derived at `k = 4` (S0A-3), `5`
+     (J08-11) and `6` (J08-10) and at no other band; the gluing alone cannot supply it. **(3) FS89-S0A-2** generalizes to a commutative ring
+     with an invertible integer `m ≥ 2`, a module spanned by a multiplicatively stable set, any band, by a shorter route with no limit.
+     **A sizing note**: the eight J45 rows and the two X25B rows are spectral theory of a countable abelian group's action, absent from
+     Mathlib at the pin; stated with the classical inputs as named hypotheses in `SpectralChain`'s manner.
+478. **Rulings on item 477** (sent to K10 by message). (a) **TC1-STANDING-FIVE takes a second named hypothesis beside `Row123Chain`, the
+     finite-target floor**, a `Prop` argument, never an axiom; its unconditional clauses are formalized. Alternative: hold the row until the
+     floor is a kernel theorem. Why: the milestone's rule lets a hand result of ours stand as a named hypothesis, and no certificate on file
+     covers an infinite family. Confidence: high. K10 prices the floor's own formalization; whether it becomes a row is ruled then.
+     (b) **FS89-S0A-10 takes the band's order bound as a hypothesis**; the uniform equivalence is stated at every band; FS89-CL2 enters as
+     S0A-2 at two parameter values over named results. Alternative: a deriver on "every band" first. Why not first: the gap is located
+     exactly and the Lean statement is true as put. Confidence: high. (c) **The generalization of S0A-2 and its shorter route** are taken.
+     (d) **The spectral rows** are stated with named classical inputs, each with `LEAN.md` § Assumptions' four items and a price.
+     (e) **Corrections owed, for the filing's errata**: TC1-STANDING-FIVE's sentence and the dispositions file's line 179; FS89-S0A-10's
+     "every band". **Kooshi should know (1)**: a filed hand result — "`L(F) ≥ 7`" at the standing-five field — rests on G56's hand floor
+     for infinitely many finite planes, not on MR alone; nothing in the kernel is affected (the row was never there), and `LEDGER.md`'s row
+     for it is re-read at the filing. **A question for Poros** (the ask lane's next run): does the order bound hold at every band? (f) Item
+     476's launch stands: in flight 1 (MB2) + 1 (K10) + 1 (K6) = 3.
+
+479. **FS131-MB2 done: the example maps are whole on `fs131-wmb` but one declaration — `shadowModel` and `awayModel` built, the two halves
+     joined** (implementer; harness ≈ 489k by the task notice; record `fs131-wmb`'s `plans/FS131-MB1-implementation.md` Stages 5–8; report
+     `data/fs131/reports/FS131-MB2.md` on that branch; commits `969ab4d0`, `c56383d8`, `97c5d0fd` (the merge of `origin/fs131-wm` at
+     `87699974`, at my direction), `2f51d5cb`, `a004bb41`, `b9b3a9e5`; pushed, tree clean). **Results**, on the standard three:
+     `shadowModel_flank_ne` — `flank_ne_of_doublyShadowed` applied to a nine-colour map of the plane, its nine hypotheses at once, both
+     shadows live; `awayModel_hyps` — the five hypotheses of wave 5's `bend_away_part` at once on an eight-colour map of the plane, with
+     `awayModel_r2Contacts` (the contacts an interval strictly inside the arc's angles) and `awayModel_bend_toward` (a model of `bend_toward`
+     whose centre carries a colour); after the merge `stuckModel_hyps` (`Valid ∧ IsPlaneMap ∧ Covers plantPt 1 ∧ IsStuck plantPt`) reads the
+     standard three. **Left**: `stuckModel_terminal` (`Stuck` l. 1362, the lane's one `sorry`) and the sub-arc model of `bend_away_whole`,
+     both for after wave 5. **My receipt**: tip equals `origin/fs131-wmb`; `data/fs131/mb2/build-3.log` ends `exit=0` and its full log
+     "Build completed successfully (5754 jobs)", 0 warnings other than `sorry`, **one `sorry` warning in the build**, at
+     `Plane/Models/Stuck.lean:1362`; `sorry` by the handoff's grep: `Paint` 0, `Moves` 0, `Bends` 0, `Stuck` 1; its receipt's self-test
+     ends "4 of 4 plants fired; faithful run 0 finding(s) -> OK"; the receipt's classes read by `grep` (this item's commit shows the
+     counts). **Items**: generalizations — the shadow's witness by the intermediate value theorem on a parabola, rational coordinates, no
+     square root; a horn's three boundary arcs as point conditions. Corrections owed, tidies — `shadowModel_hornSet_not_mem_hornArcs` folds
+     over `Paint`'s `disjoint_hornSet_hornArcs`; `awayModel_dist_sq` beside `stuckModel_dist_sq`. Predictions scored — `Stuck` 1,500 lines
+     against 950–1,300, `Bends` 566 against 350–500. It edited one file of the other half's at my direction (the silenced control).
+     Slips, the job's, disclosed.
+480. **Rulings on MB2's held items, and its slot.** (a) **One job finishes the lane and lands it, FS131-MC1**, on `fs131-wmb`: merge
+     `main` (wave 5); the brick facts tidied to wave 5's `BrickMap`; `stuckModel_terminal` proved; the sub-arc model of `bend_away_whole` by
+     `IsRingArc.mono` (ruling 471 (c)); the wave-5 applications (`bend_away_part` at `awayModel`; the vertex step's and the holed tile's);
+     the docstring lines on the landed theorems (KM1's plan § 3.10, MB1's and MB2's drafts; the stuck family's notes name
+     `stuckModel_hyps`); the two tidies of item 479; the `ARCHITECTURE.md` rows; then the full gate with the doubled-name check and L5's
+     records check, and the fast-forward. Alternative weighed: land now without `stuckModel_terminal` and add the rest later. Why one job:
+     nothing with a `sorry` reaches `main`, removing a skeleton statement to land sooner would be a statement dropped for convenience, and
+     the docstring edits rebuild the library once either way. Confidence: medium-high; if `stuckModel_terminal` resists, the job lands the
+     lane without that declaration and says so — a ruling then, by message. (b) The merge and the edited control at my direction are
+     recorded as mine. (c) **Slot → FS131-MC1**, launched 2026-10-06. In flight: 1 (K10) + 1 (K6) + 1 (MC1) = 3. While it is in its
+     landing stage I commit nothing to `main` outside the exempt paths.
+
+481. **FS131-K6, by message mid-job (`fs131-w6` at `c3ffb4e7`, build OK by its word): five rows of wave 6 hold at a wider class than filed;
+     three definitions the derivations never fixed are fixed; one bridge has no derivation** (source: K6's message to "main", 2026-10-06; not
+     checked by me — its record and build are the artifact at its hand-back). **Generalizations, each proved in Lean on the branch**:
+     FS121-D3-FALLSAT reads no partition (every family of MUA sets is saturated; its proof needs the ball almost everywhere inside the set,
+     not the support identity alone — a correction owed to the entry); FS121-C1-BOUND reads no map and no second colour; FS121-C1-GMAP holds
+     for any class of families of open sets with null unit pairs (the Jordan-arc structure of a map colouring enters neither clause);
+     FS121-V2-EROSION-DIAM reads no sector and no colouring; FS111-M-HALF is about one measurable set with null unit pairs. **Definitions**:
+     "honest" is the type `AeColouring k` and "in D-NF" notation, never a hypothesis (no row of the 35 uses a pointwise normalisation);
+     M-PINCH's tangent type carries its contacts (`HasTwoDiscsAt`, `IsTangentAt`); **REG-J′ is stated in its fan form with end tangents,
+     which is stronger than the frozen words** — the end tangent is taken silently from C11 in the derivations and is not automatic (the
+     unit discs hold only inside a neighbourhood that shrinks toward the singular set); K6 found no entry deriving the bridge. **Scope**:
+     this pass ends with the dispositions for all 35 rows, the foundation, and the skeletons of `Pinch` (part) and `MapColouring`; the
+     ladder (17 rows), the fragment rows (6) and five more go to a second planning pass. **Rulings** (sent by message): (a) the five
+     generalizations and the first two definitions adopted; (b) **REG-J′'s fan form with end tangents stays in the hypothesis, named, each
+     consumer's docstring saying it is stronger than the frozen words**. Alternative: the literal form with a `sorry` bridge. Why: a `sorry`
+     child with no hand proof behind it is what this workflow does not carry. Confidence: high. (c) **The bridge — literal REG-J′ and
+     saturation give the fan with end tangents: derived, derivable or false — goes to a deriver, FS131-E8, at the next free slot**; K6
+     writes its exact statement into its record. This bears outside the milestone: REG-J′ is route M's regularity hypothesis (rows 140–144),
+     so a "false" would be a finding for FS-126 and FS-127's stubs. (d) A second planning pass, FS131-K6b, follows K6's hand-back.
+
+482. **FS131-MC1 asks, and is ruled: the example maps land without `stuckModel_terminal`** (source: MC1's message to "main", 2026-10-06; its
+     Stage 1 saved; `main` merged into `fs131-wmb` as `abe678bb`, one conflict, keep-both; the joined tree builds with one `sorry` warning;
+     `./scripts/dupnames.sh` on the joined tree `doubled=0` — by its word, to be read at its hand-back). **Its two findings**: (1) of the
+     nineteen stuck-family heads in `Terminal`, `F.Terminal` alone is a hypothesis of `n3_end_chain` only; `cv_l0`,
+     `hornBoundsQR_of_isChainVertex`, `horn_upper_ne_one`, `c_ends`, `run_ends` take `IsTerminalMap` (`Valid ∧ IsPlaneMap ∧ Terminal ∧
+     QROnly`), and `stuckModel.QROnly` is not in the skeleton — so the declaration alone would close no gate item; fifteen other heads are
+     served by `stuckModel_hyps` today. (2) Its size against wave 5's library: 500–650 lines (the plan said 300–500): "no colour has two
+     sectors" at every point of the planted disc and squares needs each class connected near each point, and three families are not convex.
+     **Ruling**: option (a) — the declaration is removed from `Stuck.lean`, its statement and route recorded for a successor whose target is
+     `stuckModel.IsTerminalMap` whole; the three heads that read it keep a corrected hand-model sentence; everything else lands. Alternative:
+     spend the job on it and let a successor land. Why: it closes nothing alone, and the landing closes the gate item on the four moves and
+     fifteen stuck heads today; ruling 480 (a)'s fallback. Confidence: high. **A slip, mine**: the brief's "`cv_l0` and its like name
+     `stuckModel_terminal` only if it is proved" omitted `QROnly`; MC1 read the statements and caught it. **Owed after the landing**: a
+     job on `stuckModel.IsTerminalMap` (with the second planning pass for `F₀`, `F₁`, ruling 461 (d)).
+483. **Kooshi asks whether the five-colour fields and the collapse to the plane are in this milestone; answered from the record** (2026-10-06).
+     They are not proved by FS-131: row 123's chain enters as the named hypothesis `Row123Chain` and row 130's equality as `Row130Collapse`
+     (`plans/FS131-kernel-plan.md` § 7.4, l. 583–584); their kernel milestones are FS-113 (measure rigidity in full, rank 15) and FS-101
+     (the main clause through five, rank 16), with the collapse's Lean phase under FS-103, his call (`plans/FRONTIER-STUBS.md` l. 59–60).
+     Wave 10 holds the spectral statements under row 121 and the standing-five field. **Offered, not ruled** (the order of milestones is
+     his): one planner pass on FS-113 at a free slot, to price it from its first leaves; default, his order stands (the backlog, then
+     FS-124). Awaiting his word.
+
+484. **FS131-K10 done at its Stage 5: wave 10 planned — dispositions for all fourteen rows, a foundation, a skeleton of eleven, four rows
+     proved on the way; three rows and part of a fourth not stated** (planner; harness ≈ 428k by the task notice; record `fs131-w10`'s
+     `plans/FS131-w10-kernel-plan.md`; report `data/fs131/reports/FS131-K10.md` on that branch; commits `6ca3fb4e`, `90e95f58`, `f919973e`;
+     pushed, tree clean). **Proved on the branch**: FS89-S0A-2 at a wider class (`CharacterColouring.gluing`); FS89-S0A-10 given the band's
+     order bound, and its uniform form at every band; FS89-CL2 as a composition over four named results from outside the backlog; J45-SP-oi
+     at a wider class. **TC1-STANDING-FIVE** stated with two named hypotheses, row 123's chain and the finite-target floor `StandingFloor n`
+     (at `U₁₂₈` and every `Γ_Q`, `Q ≡ 3 (mod 4)`, `Q ≥ 347`); nine leaves open; "the least usable residue field has 347 elements" by an
+     exact tool with a fault that fires. Stated with `sorry` leaves: J45-SP-if, -N2, -SI-4, X25B-PZ, X25B-L1, J45-N1 (c). **Not stated**:
+     J45-SI-5, -SI-J, -SI-C, J45-N1 (a)(b). **My receipt**: tip equals `origin/fs131-w10`; `data/fs131/k10/logs/build-2-skeleton.log` ends
+     `EXIT=0`; `sorry` by the handoff's grep: `CharacterColouring` 1, `SpectralInputs` 8, `StationaryRatio` 3, `StandingFive` 9 — the 21
+     leaves reported; `StandingFloor` and `seven_le_localBound (hFloor : StandingFloor 7)` read in `StandingFive.lean` l. 122–133: the floor
+     is a hypothesis, never an axiom. **Items**: six further generalizations (J45-N2's second sentence needs no spectral theory; J45-N1 (c)
+     by a Fourier-side route; J45-SI-4 for any countable graph; X25B without Haar measure; the standing field's arithmetic without a
+     decomposition law). Corrections owed — the dispositions file's line 179; statements not yet separate. Questions — for a deriver:
+     J45-SI-5 step (c) cites a pointwise ergodic theorem Mathlib lacks: is there a conditional-expectation argument? For Poros: the order
+     bound at every band. Prior-art debts (Rudin for `BochnerHerglotz`; Weil's bound). A kernel fact for `LEAN.md` (a `rfl` between
+     coercions out of `unitRing ⊥` times out). Slips, the job's, disclosed. **Its price for the wave**: three implementer jobs by file (I-A
+     `SpectralInputs` and `CharacterColouring`'s leaf, about 300k; I-B `StationaryRatio`, about 350k; I-C `StandingFive`, about 300k), a
+     second planning pass K10b (about 150k), one or two jobs after it. **The floor as a kernel row, priced**: `U₁₂₈` by Hoffman and an
+     exact integer spectrum, one job, no outside theorem; `Γ_Q`, `Q ≥ 347`, by Hoffman and Weil — one job with Weil's bound imported,
+     about 1M tokens without.
+485. **Rulings on K10's held items, and its slot.** (a) **Three implementers by file, as it splits them**; the first, FS131-I10A
+     (`SpectralInputs` and `CharacterColouring`'s leaf), takes this slot on `fs131-w10`; the others on branches cut from `f919973e`.
+     (b) **The finite-target floor becomes two rows of wave 10's second pass**: `U₁₂₈`'s floor formalized (no outside theorem); `Γ_Q`'s with
+     Weil's bound for the norm-one torus sums imported under `LEAN.md` § Assumptions' four items. Alternative weighed: leave the floor a
+     named hypothesis for good, or formalize Weil (about 1M tokens). Why: Kooshi's rule lets a milestone trust the literature with each
+     import documented, and an imported Weil is a far smaller assumption than a hand floor for infinitely many planes; the full
+     formalization is priced for the publication-cost measurement. Confidence: medium — it raises the audit's imported count, which Kooshi
+     sees in the next report. (c) **K10b** (the three unstated rows, J45-N1 (a)(b), the two floor rows) follows the implementers.
+     (d) **J45-SI-5's question** goes with FS131-E8's brief as a second question, or to K10b if it finds the argument. (e) The slips are
+     logged; no redo. In flight: 1 (MC1) + 1 (K6) + 1 (I10A) = 3.
+
+486. **FS131-K6 done at its Stage 7: wave 6's first planning pass — dispositions for all 35 rows, the foundation, four rows proved at a wider
+     class, eight leaves stated; 23 rows and five more go to a second pass** (planner; harness ≈ 459k by the task notice; record `fs131-w6`'s
+     `plans/FS131-w6-kernel-plan.md` Stages 1–7; report `data/fs131/reports/FS131-K6.md`; commits `b29f01e1`, `c3ffb4e7`, `714a972b`;
+     pushed, tree clean). **Proved on the branch**: FS121-D3-FALLSAT, -V2-EROSION-DIAM, -C1-BOUND, -C1-GMAP, each wider than filed;
+     FS111-M-HALF's dichotomy. Stated with `sorry`: FS111-M-PINCH, C11 (i) and (iii), FS121-C1-SAT (8 leaves). The foundation
+     `Plane/Saturated/Basic` with no `sorry` and an inhabitant (`sq9` at an edge point). **Statement defects in filed results**: the tangent
+     type needs its contacts; REG-J′'s frozen words are weaker than the fan every consumer reads, by four clauses (both ruled, item 481);
+     FS116-S1-KAPPA and -S1-PAIR hide `k = 6`. **My receipt**: tip equals `origin/fs131-w6`, tree clean; `sorry` by the handoff's grep:
+     `Basic` 0, `Pinch` 7, `MapColouring` 1 — the eight leaves reported; its final build log ends `EXIT 0`; `RegJLiteral`, `RegJFan`,
+     `RegJBridge` read in `data/fs131/k6/FanDesign.lean` l. 22–71. **Items**: slips, the job's, disclosed — 12 of 35 rows' arguments read in
+     full, 23 from their entries; `sat_inP` has no Lean model of all its hypotheses yet (`sq9` as an `ArcMap 9` owed before the wave's
+     gate). **What the second pass needs** is in its report: restate the foundation's pointwise predicates over a family of sets (the
+     fragment rows read PINCH on a fragment), the fan design, curves as sets.
+487. **Rulings on K6's held items, and two slots.** (a) FS121-D1-VT is declared under its own name as VT-W's `C¹` case (its merge condition
+     fails). (b) FS111-M2-HULLC: `∂U ⊆ {d_C = 1/2}` is formalized and the finite-perimeter step (Federer 4.5.11) is a named classical
+     hypothesis with `LEAN.md` § Assumptions' four items — default; it changes if the second pass finds the perimeter conclusion unread by
+     any row. (c) The proposed merges (W-NOBEND with C11; DB1-L7 with O1-OUT) are the second pass's to confirm. (d) **The order**: the second
+     planning pass, FS131-K6b, before any implementer on `pinch` (it changes `Basic`'s signatures). (e) FS116-S1-KAPPA and -S1-PAIR are
+     stated at `ArcMap 6`; a correction owed to their entries. (f) **Slots**: FS131-I10A (wave 10's `SpectralInputs`) launched on
+     `fs131-w10`; **FS131-E8**, the deriver on REG-J′'s bridge (ruling 481 (c); brief `data/fs131/briefs/FS131-E8-regj-bridge.md`, gate
+     PASS, with J45-SI-5's question as a second), launched on `main`'s `plans/` and `data/`. In flight: 1 (MC1) + 1 (I10A) + 1 (E8) = 3.
+     Queue: FS131-K6b; FS131-I10B and I10C (`mk-i10.py B`, `C`, each on a branch cut from `fs131-w10` at `f919973e`); K10b.
+
+488. **Kooshi rules on item 483's offer: no planner pass on measure rigidity, and no pricing of it, for now** (2026-10-06; his words): *"Let's
+     keep holding off on formalizing or pricing MR for now. That backlog is big enough that I might request community support for filling
+     it. I'm going to wait to do that too though. OpenAI is rumored to be releasing proofs of 400 previously open problems soon, and if HN
+     is one of them, then our project becomes a footnote for individual progress in AI assisted research."* **So**: the offer of item 483
+     is withdrawn; FS-113 and FS-101 stay where they are ranked; no job prices or opens them until he says so; a request for community
+     support on that backlog is his to make and is also on hold. FS-131 runs on as staffed (three slots). Not to be re-offered by a later
+     session.
+
+489. **A conditional instruction from Kooshi, on disk verbatim** (2026-10-06): *"Oh trust, if they release an HN proof, we will analyze the
+     hell out of it."* **Trigger**: a published or posted proof (or claimed proof) that decides the Hadwiger–Nelson problem or moves either
+     bound of `5 ≤ χ(ℝ²) ≤ 7`, from the rumoured outside release or anywhere else, brought to this session by Kooshi or found by the
+     Searcher's daily run. **Then**: stop launches at the next hand-backs, read it in full before anything else (bibliography entry the
+     same day, read status per section), and brief the lanes to analyze it against what the kernel and the ledger hold — the statement read
+     against row 33 and the regularity wall's rows, each step graded, what of it can be checked or formalized here. Its briefs are written
+     at the trigger, not before. Until then nothing changes.
+
+490. **FS131-E8, by message mid-job (its Stage 3 saved, `0310d854` on `main`, pushed): the bridge under REG-J′ is derived — the frozen
+     words with saturation give the fan with end tangents, at every `k`, and the frozen words' second clause is not read** (source: E8's
+     message to "main", 2026-10-06; `plans/FS131-E8-derivation.md` §§ 3.1–3.8, eight entries, each [hand], one mind, kernel pending).
+     **The entries**: FS131-E8-LOCAL (off Σ the interface set is locally one `C^{1,1}` graph with 1-Lipschitz tangent, one colour on
+     each side); -GAMMA, -BETA, -ALPHA, -DELTA (K6's four clauses (γ), (β), (α), (δ)); **FS131-E8-FAN** (a fan at every singular point
+     isolated in Σ, saturation read in a punctured disc only; at least two branches, neighbouring regions of different colours);
+     **FS131-E8-BRIDGE** (`Saturated c.cls → (∀ x, ∃ r > 0, (c.singularSet ∩ ball x r).Finite) → c.RegJFan`, so `RegJBridge k` holds for
+     every `k`); FS131-E8-CLAUSE2 (under saturation the frozen words' second clause follows from the first, and every bounded set meets
+     finitely many interface arcs). So under saturation "Σ locally finite", the frozen words and the fan with end tangents are one
+     hypothesis. **Two notes for the kernel statements, E8's**: FS111-M-PINCH must be stated with its two-colour ball as a neighbourhood
+     of the point, not centred at it (C11 (ii) and § 3.1 (2) read it at off-centre points of one ball); FS111-M-C11 (ii) should carry
+     "no cusp in `N`" — as filed it assumes M-PINCH's hypotheses at essential boundary points only, and its step "each normal line meets
+     the boundary once" needs the point found on the line to be no cusp (§ 3.1's *not claimed*). **My receipt**: the commit is on
+     `origin/main`; its derive-gate output `data/fs131/e8/gate-stage3.out` reads 8 entries, 8 derived, `GATE: PASS`; both controls run
+     by me with their faults — `e8_lens.py` prints 0 and 880 with `--C 1`, `e8_chord.py` prints 0 and 14232 with `--kappa 2`; steps
+     § 3.1 (3)(b) and § 3.3's inequality `(d/ds)|γ(s) − z|² ≥ 2 sin s` redone by hand; § 3.6's field-by-field reading compared with
+     `data/fs131/k6/FanDesign.lean` ll. 29–49 on `fs131-w6` — each of the structure's eleven fields has its step. Not checked by me:
+     § 3.1 (4)'s constants, § 3.4's covering argument beyond a reading. **Rulings.** (a) **E8's eight entries become rows of wave 6,
+     planned by FS131-K6b**: FS131-E8-FAN as the lemma that produces the planner's `Fan c z`, -BRIDGE and -CLAUSE2 as its corollaries,
+     -LOCAL as the form of C11 (ii) the kernel needs. Alternative weighed: leave `RegJFan` a bare named hypothesis and the bridge a hand
+     result outside the backlog (K6's design file calls it "not a backlog row"). Why: with the bridge in the kernel every wave-6
+     consumer's hypothesis is, under saturation, "Σ locally finite" — the frozen words' first clause, which is what rows 140–144 state
+     and what FS-127 asks; without it the wave would be held over a hypothesis stronger than the ledger's, joined to it by one mind's
+     hand argument. Confidence: high that it belongs; medium on its size, which K6b prices from its first leaves (curves with Lipschitz
+     tangent and their arclength have no home in Mathlib) — if it is large the consumers still land over the fan and the bridge after
+     them, since (b) changes no statement. (b) **Ruling 481 (b) stands in form**: the consumers take `Fan c z` or `RegJFan`; the
+     docstring line it asked for ("stronger than the frozen words") becomes "under saturation equivalent to Σ locally finite, by
+     FS131-E8-BRIDGE" with that entry's grade at the time. Alternative: restate every consumer over local finiteness now. Why not: the
+     fan is what each proof reads, and a consumer over the fan is the wider theorem. Confidence: high. (c) **E8's two statement notes
+     go to FS131-K6b's brief** (it restates `Pinch`'s predicates over a family first, by K6's report; nothing is proved over them);
+     **a correction owed** to FS111-M-C11's entry (the cusp hypothesis) and a generalization logged for FS111-M-PINCH (a neighbourhood,
+     not a centred ball) — held for the milestone's errata. (d) **Bearing outside the milestone**: REG-J′ is route M's regularity
+     hypothesis (rows 140–144); what is left open of it is its first clause alone (FS-127). E8 drafts the stub lines at its hand-back;
+     I file them then. Kooshi is told in the next report, not by a notification: no value moves and nothing waits on him.
+
+491. **FS131-E8 done: nine entries derived, none stalled — the bridge (item 490, its §§ 3.1–3.7 unchanged since), the consumers traced row by
+     row, and the second question answered: J45-SI-5's step (c) needs no pointwise ergodic theorem** (deriver; harness 441k by the task
+     notice; record `plans/FS131-E8-derivation.md` Stages 1–5; report `data/fs131/reports/FS131-E8.md`; commits `39d7b431`, `0310d854`,
+     `9fcac197`, `fe9d2479`, `49cc6bff`, all on `origin/main`, tree clean). **New since item 490**: **FS131-E8-SI5C** ([hand], one mind) —
+     a finite-valued `G` that every `c(x)` equals unless an indicator `ε(x)` of probability `p < 1/2` fires, the `ε` pairwise independent
+     over an infinite index set, is almost surely a function of `c`: majority decoding by Chebyshev and the closedness of `L²(σ(c))`; it
+     replaces "ergodic averages along a tempered Følner sequence" in J45-SI-5 (c), whose remainder was not re-derived. **The trace**
+     (§§ 4.2, 4.6): no filed result becomes true under the stronger hypothesis only; four rows need a fan at one point and no local
+     finiteness (FS111-W-KB-DIR, FS121-DB1-L3, -V2-SECTOR, -V3-CPI); **the planner's `Fan` lacks two facts those rows read** — the
+     curvature bound along a branch, and the convergence of a branch's unit tangent to `dir i` (`Fan.tendsto` is the polar angle's) —
+     both in the record (FS131-E8-LOCAL at branch points; -GAMMA with -BETA's last clause). The table's rows marked † were read from
+     entries only. **Its attack** (§ 4.1): the nearest false statements located (without saturation; at an accumulation point of Σ; in a
+     disc of radius above `1/2`); "the fan has a region of positive angle" not decided; on a cover, not decided. **My receipt**: the five
+     commits are ancestors of `origin/main`; the diff of the record from `0310d854` to `49cc6bff` removes no line (§§ 3.1–3.7 unchanged, by
+     `git diff`); `data/fs131/e8/gate-stage5.out` reads 9 entries, 9 derived, 3 controls fired, `GATE: PASS`; `e8_majority.py` run by me
+     prints 0, and 291 with `--p 2/3`; the Chebyshev line redone by hand (`(2n/9)/(n/6)² = 8/n`); four of § 4.6's quoted phrases found once
+     each in their sources (`plans/FS121-derivation.md`, `plans/FS111-derivation.md` l. 1020). Not checked by me: the table's rows against
+     the arguments (the planner reads them). **Items**: predictions scored — five of five met, Brier 0.014, all registered after a sketch
+     (its § 1.5 says so); prior-art debts — Schur's comparison theorem and Allard–Almgren named as recalled, nothing rests on either, no
+     literature search run, nothing claimed new beyond "not found in this project's records"; a slip, the job's — no token count readable
+     at its saved stages; drafts in its §§ 4.4 and 4.6 (two stub lines, two errata lines, a note for `data/fs121/claims.md`, G85's words,
+     a G92 instance). **Credit**: the off-centre reading of M-PINCH and the cusp gap in C11 (ii) were found by re-reading the held proofs
+     against the Lean statements, and the consumer table was added on one message's notice.
+492. **Rulings on E8's held items, and its slot.** (a) **REG-J′ and C121-REGJ keep their frozen words in the stubs' question sections and
+     on the front page until the bridge's module passes the gate**; the two bearing lines are filed today (`plans/STUB-lateral-extent.md`,
+     `plans/STUB-curved-pencils.md`, verbatim by script from E8's § 4.4), and the rewrite to "Σ locally finite" goes with the filing that
+     regrades the bridge, Poros asked at its next re-rank whether FS-127's card changes. Alternative: rewrite now. Why: "held" means
+     kernel-checked, and one mind's hand result does not rename a hypothesis in files every agent loads at launch; nothing there is wrong
+     today (`CLAUDE.md`'s theory paragraph already names the first clause alone, E8's § 4.4). Confidence: high. (b) **The `Fan`'s two
+     missing facts go to FS131-K6b's brief**: whether they are fields of the structure or lemmas exported beside it is the planner's
+     (the structure is a design, landed nowhere). (c) **The errata lines** (FS111-M-C11, FS111-M-PINCH), the note for
+     `data/fs121/claims.md`, G85's replacement words and the G92 instance are **held for the milestone's filing** with the other errata,
+     their texts at E8's §§ 4.4 and 4.6. Alternative: file each now. Why: one filing audits them together (`tools/claude_md_fact_audit.py`),
+     and the grokkings file is loaded at launch by two lanes. Confidence: high. (d) **FS131-E8-SI5C becomes a row of wave 10's second
+     pass** (K10b), under J45-SI-5; that job checks at the pin whether Mathlib's strong law serves or Chebyshev is written out. (e) No
+     bibliography row (E8's § 4.4: nothing rests on the two recalled theorems). (f) **Slot → FS131-K6b**, wave 6's second planner
+     (`debruijn`), its brief regenerated with E8's § 4.6 and re-gated, launched 2026-10-06. In flight: 1 (MC1) + 1 (I10A) + 1 (K6b) = 3.
+
+493. **FS131-I10A done: all nine leaves of wave 10's first file pair proved — `SpectralInputs` and `CharacterColouring` hold no `sorry`, over
+     the plan's named hypotheses only** (implementer, Opus; harness 404k by the task notice; record `fs131-w10`'s
+     `plans/FS131-I10A-implementation.md` Stages 1–5; report `data/fs131/reports/FS131-I10A.md`; commits `fd6ac689`, `7ea4a1b2`, `1b00a2a6`,
+     `ace98a35`; pushed, tree clean). **Proved** (rows J45-N2, J45-SI-4, J45-SP-if, J45-N1 (c), FS-89's erratum):
+     `measurableSet_factorSigma_iff`, `contVec_eq_lpMeas`, `measurableSet_preimage_factorSigma` (J45-N2 with no hypothesis from outside);
+     `spectral_carried_iff` over `BochnerOn t`; `contChars_haar_null` and `exists_isHaarFourier` over `SpectralChain.BochnerHerglotz`;
+     `si4`; `sp_if` over `BochnerHerglotz`, `Interface.MulStable`, `Interface.NegCircle`; `mem_archimedean_unitRing_iff` (by Mathlib's
+     Baer criterion, two new Mathlib imports). **New statements, one mind, owed the planner's read-back**: `condExpL2_mem_contVec`,
+     `condExpL2_eq_self_iff`, `inner_sub_condExpL2_eq_zero`, `si4_equivariant`, `condExp_comp_measurePreserving`. **My receipt**: tip
+     `ace98a35` equals `origin/fs131-w10`, tree clean; the full build log (`build/gate/build/20261006T112815Z-3611536.log` in the tree)
+     ends "Build completed successfully (5755 jobs)", 0 warnings other than `sorry`, and its `sorry` warnings are in `StandingFive` and
+     `StationaryRatio` only; `sorry` by the handoff's grep: `SpectralInputs` 0, `CharacterColouring` 0, `StationaryRatio` 3,
+     `StandingFive` 9; `data/fs131/i10a/logs/axioms-all.log` parsed by script: 34 records, 33 on the standard three and the control
+     (`StandingFive.usable_card_ge`) on `sorryAx`, the nine leaves and two of the new statements found by name; `sp_if`, `si4` and
+     `spectral_carried_iff` compared with `f919973e` by `cmp` of `awk` extractions — identical. **Items**: three generalizations —
+     `sp_if` does not read `[Countable (unitRing F)]`, `spectral_carried_iff` does not read `[IsProbabilityMeasure μ]` (each consumed by a
+     `have` as committed), `contChars t` is a subgroup for any topology (the planner's finding 6, now a proof); `sp_if`'s `NegCircle`
+     **has no Lean model** (the plan priced one at "an hour"; re-priced a job's stage; a cheaper candidate at `F = ℚ`, the point mass at
+     the parity character, not checked); to apply `si4_equivariant` at `factorSigma` one needs `comap (T x) = factorSigma`, which needs
+     the action by bijections — `𝒜.comap S ≤ 𝒜` alone fails (the one-sided shift, `g = ω₀`); a Chebyshev route for N2 (ii) fails at an
+     atom, found on paper; a Lean fact — `T ⁻¹' A ∆ A` parses as `T ⁻¹' (A ∆ A)`; a slip, the job's — stages 3–5 one commit, nothing
+     lost; the price — 1,550 lines planned, about 1,020 written; 300k planned, 404k by the harness. Drafts for the wave's landing in its
+     record's last section (`plans/LEAN-BACKLOG.md` rows, a `LEDGER.md` clause, a `LEAN.md` bullet, the plan's § 7.4 row).
+494. **Rulings on I10A's held items, and its slot.** (a) **The two unread instance arguments are dropped from the statements** —
+     `[Countable (unitRing F)]` from `sp_if`, `[IsProbabilityMeasure μ]` from `spectral_carried_iff` — by wave 10's joining job, which is
+     the next single writer of `SpectralInputs`. Alternative: keep them with the `have` that silences the linter (ruling 419 (c)'s
+     treatment). Why: 419 (c) was for a hypothesis a ruling had kept on purpose; here nothing asks for them, the plan's § 7.3 item 3 says a
+     row is stated at the class its argument reads, and before the landing the change costs a rebuild of one file's dependents.
+     Confidence: high. (b) **The five new statements are read back by wave 10's second planner (K10b)**, with `si4_equivariant`'s
+     application at `factorSigma` and **a Lean model for `Interface.NegCircle`** as rows of its pass: without the model `sp_if` is an
+     open gate item under the inhabitant rule (ruling 427 (d)). (c) The two Mathlib imports for Baer's criterion stand. Alternative: the
+     hand route by the `ℚ`-span. Why: Mathlib's lemma on the standard three, checked by the print; an import costs build time only.
+     Confidence: high. (d) The `LEAN.md` bullet and the other drafts are filed at wave 10's landing; `LEAN.md` is not an exempt path
+     while the example maps' landing is in flight. (e) **Slot → FS131-I10B** (`StationaryRatio`, three leaves, on `fs131-w10b`), its
+     brief regenerated with item 493 quoted and re-gated, launched 2026-10-06; FS131-I10C at the next free slot. In flight: 1 (MC1) + 1
+     (K6b) + 1 (I10B) = 3.
+
+495. **FS131-K6b, by message mid-job (`fs131-w6` at `3928644b`, pushed): wave 6's foundation is restated and saved — the statements of
+     `Plane/Saturated/Basic` and `Plane/Saturated/Pinch` are fixed from that commit** (source: K6b's message to "main", 2026-10-06; its
+     record's Stage 9, §§ 9.1–9.4). **What changed**: the pointwise predicates are over two sets on an open set (`TwoColourOn A B N`,
+     `IsSplitAt`, `HasTwoDiscsAt`, `IsTangentAt`, `IsCuspAt A x`, `H2On A N`) and over a family (`essBdry C`, `TwoColourNhd C N a b`,
+     `singularSet C`, `interfaceSet C`, `SaturatedOn C U`), the colouring's forms being the family's at `c.cls`; `pinch` takes any point of
+     any open `N` (E8's first note, item 490); `Pinch`'s seven open leaves are `half_upperDensity`, `sq9_isTangentAt`, `pinch`,
+     `pinch_not_in_in`, `TwoColourOn.essBoundary_inter_eq` (new), `c11_discs`, `c11_split`; `pinch_interface` and `c11_discs_interface`
+     are proved from them. **Generalizations** (§ 9.2): FS111-M-PINCH reads two measurable sets with null unit pairs on an open set — no
+     colouring, no third class, no family; its (in, in) clause reads only "`N` open and almost everywhere `A ∪ B`"; FS111-M-C11 (i) holds
+     at every point of the one `N` that has both contacts. **A wording note** (§ 9.1 item 1): the two frozen sentences differ —
+     `data/fs121/claims.md` § 0 says "(H1) at x: a ball N = B(x, ρ)", FS111-M-PINCH's statement "a neighbourhood N"; K6b kept Σ at the
+     centred ball and offers the open-neighbourhood reading, not adopted. Also § 9.1 item 2: the frozen (H2)'s clause `x ∈ cl P_a ∩ cl
+     P_b` is not a field — it follows at essential boundary points, by a leaf. **My receipt**: `origin/fs131-w6` is `3928644b`; `sorry`
+     by the handoff's grep at that commit: `Basic` 0, `Pinch` 7, `MapColouring` 1; the seven leaves' names found at `Pinch.lean` ll.
+     131–237, `sat_inP` at `MapColouring.lean` l. 194; the record's § 9.3 names its build log and two negative controls (not re-run by me:
+     the artifact is read at its hand-back). **Rulings.** (a) **Σ stays at the centred ball, as K6b has it.** Alternative: the
+     open-neighbourhood set, which makes "regular" an open condition and would reduce FS131-E8-LOCAL's hypothesis to "no cusp in `U`".
+     Why: the claim list's sentence is the centred ball and every hand result of FS-111 and FS-121 was derived under it; that the two
+     agree under saturation is itself an unproved hand argument ("one connectivity lemma beyond LOCAL"). It may be stated as a lemma when
+     the bridge is planned. Confidence: medium-high; it changes if the bridge's proof needs the open form as its working definition —
+     then K6b says so. (b) The generalizations are logged for the errata of FS111-M-PINCH and FS111-M-C11 (with E8's two lines, ruling
+     492 (c)). (c) **The implementers of wave 6's first leaves, split by file as the first pass proposed**: FS131-I6A on `Pinch`'s
+     seven leaves (branch `fs131-w6p`, cut from `3928644b`, tree made, build copied from `fs131-w6` with no `lake` running there), and
+     FS131-I6B on `MapColouring`'s `sat_inP` with its owed Lean model (`sq9` as an `ArcMap 9`; branch `fs131-w6m`); generator
+     `data/fs131/briefs/scripts/mk-i6.py A|B`. (d) **The queue's order is re-ruled**: FS131-K10b, FS131-I10C, FS131-I6A, FS131-I6B.
+     Alternative: the order they were prepared in (I10C first). Why: a planner's hand-back is what later implementers wait on, and wave
+     10's landing waits on K10b's rows longest. Confidence: medium; every one of the four is independent of the others.
+
+496. **FS131-MC1 done: the example maps are on `main` through the full gate — `a296e60d..edd6aa8d`, a fast-forward; gated commit
+     `d9347791`; `plans/` and `data/` only after it** (implementer, Opus; harness 625k by the task notice — past the line, not to be
+     resumed; record `plans/FS131-MC1-landing.md` Stages 1–5 with "Drafts for the front page"; report `data/fs131/reports/FS131-MC1.md`;
+     logs and receipts `data/fs131/mc/`, tag `final2`). **Landed**: the modules `Plane/Models/Paint`, `Moves`, `Stuck`, `Bends` and the
+     new `Applied` — 329 hand-written theorems, each with one audit record on exactly the standard three; `hornModel` and `twoHornModel`
+     (the four moves), `stuckModel` (nineteen stuck heads: ten of `Terminal`, nine of `FlankUA`), `shadowModel`, `awayModel`
+     (`awayModel_bend_away_part`, `awayModel_bend_away_whole` on the sub-arc `[1/5, 3/10]`, ruling 471 (c)), `hornModel_hole_disconnected`
+     (a valid map of the plane with a holed tile exists at eight colours — `cvb_hole_disconnected`'s docstring said its existence "is
+     not claimed" and now names the object); the brick facts re-proved from wave 5's `BrickMap`; both folds of item 479. **Not proved,
+     by ruling 482**: `stuckModel_terminal`, removed (131 of 132 skeleton statements verbatim); its route (500–650 lines, with
+     `stuckModel.QROnly`) is the record's § 3.2. **Not done**: `exists_vertexStep`'s application — `IsClean` is proved for no model.
+     **The gate on `d9347791`, every step exit 0**: build 0 warnings; `sorry` 0; doubled names OK; axioms "OK — 5525 clean, 16
+     axiom-free, 4 imported, 5 declared purchase(s)", 5,550 records; vacuity `declarations=13386 refutations-skipped=192 sites=1137`,
+     `vacuous=0 stale=0 declared=3 witnessed=37 generic=1095 unknown=2`; architecture PASS; lint passed; notes 196 read, 0 CONFLICT.
+     **Of wave 5's sixty-two open gate items: 33 closed, 29 remain** (the record's draft 5, by name: 3 wait on
+     `stuckModel.IsTerminalMap`, 1 on a contact fact, 11 on a clean map, 4 on a collar package for `awayModel`, 6 untouched by design,
+     3 on E7's `F₀`, `F₁`, 1 whose docstring says no note is owed). **My receipt**: `origin/main` held `4b46d755` = `origin/fs131-wmb`
+     at the hand-back, tree clean; `git diff --name-only d9347791 4b46d755` outside `plans/` and `data/` is empty; `sorry` by the
+     handoff's grep over `Proofs/` on `main`: 0; `data/fs131/mc/build-final2-full.log` ends "Build completed successfully (5808 jobs)"
+     with 0 warnings; the gate's head file names `HEAD=d9347791`; `scripts/gate_report.py axioms` and `vacuity` run by me against wave
+     5's receipts — 5550 records, 5525 clean, 329 records added and none removed (5196 + 329), `vacuous=0`, each recorded count "STALE"
+     before the filing and "match" after; `data/fs131/mc/records-final2.txt` — main 8330 theorems, landing 8677, 329 hand-written of the
+     wave each on exactly the three, `records: PASS`; `bend_away_part`'s statement compared with wave 5's landing (`ad611866`) by `cmp`
+     of `awk` extractions — identical, and `awayModel_bend_away_part` read (`Applied.lean` ll. 192–196: the theorem applied to
+     `awayModel_hyps`'s five conjuncts); no `stuckModel_terminal` under `Proofs/`. **Filed** (commit `1adf15ba`): `CLAUDE.md` § Trust
+     ledger and § The gate, the `GATE_CHANGES` entry; `tools/claude_md_fact_audit.py --base 27f31c0e` loses the twelve superseded
+     tokens only, `--dupes` exit 0. **Items**: tool defects — the vacuity scan reads no unconditional `X.Valid` and no conjunction as a
+     witness; wave 5's list of sixty-two came from a script not in the tree (`tools/fs131_mc_gateitems.py` reads the list's names
+     against the docstrings); slips, the job's, disclosed — "fifteen" stuck heads of `Terminal` in its mid-job message was ten (with
+     nine of `FlankUA`: nineteen landed), nineteen docstring lines named the wrong module on the first gated commit and the whole pass
+     was run again on `d9347791`, three smaller ones; not applied — the `HasHornCount` line (`OpenMove` l. 36), `tangentBrick` as
+     `brickCell 0 1`. **Credit**: it re-ran the entire gate rather than land a docstring correction ungated, and it counted the gate
+     items by script against the landed docstrings.
+497. **Rulings on MC1's held items, and its slot.** (a) **Ruling 482's "fifteen" is superseded by item 496's count**: nineteen stuck
+     heads have their Lean model; the open gate item on the four moves (rulings 419 (d), 427 (d)) is closed on `main`. (b) **Two closer
+     jobs are queued, after the planners and implementers already waiting**: FS131-MD1, `stuckModel.IsTerminalMap` whole (`Terminal`
+     and `QROnly`; closes `n3_end_chain`, `cv_l0`, `hornBoundsQR_of_isChainVertex`); FS131-MD2, the three smaller closers — `IsClean`
+     for `hornModel` (eleven `Procedure` items), the contact fact at `stuckModel`'s vertex, a named `CollarFitOut` on `awayModel`'s gap
+     (four). Alternative: one job for all four. Why two: the first is a job by its own count (500–650 lines) and the others are
+     independent of it; truth is not in question for any of them (the theorems are kernel-checked), so they queue behind the work that
+     states new results. Confidence: medium-high. (c) The vacuity scan's fourth observation joins ruling 475 (d)'s tooling job; the
+     two unapplied lines join the tidy moves. (d) **Waves 7–9's planners can now be cut from `main`**, which holds the example maps.
+     (e) **Slot → FS131-K10b** (wave 10's second planner, ruling 495 (d)), launched 2026-10-06. In flight: 1 (K6b) + 1 (I10B) + 1
+     (K10b) = 3. Kooshi notified of the landing.
+
+498. **The planners of waves 7, 8 and 9 are prepared, and can run at once: no wave among 6–9 waits on another but for four named rows**
+     (mine; 2026-10-06). Read from the backlog's own `needs` tags and the dispositions file by
+     `data/fs131/briefs/scripts/wave-deps.py`: wave 7 rests on waves 3, 4, 5; wave 8 on waves 1, 3, 4 and, in three rows
+     (FS116-N3-STAR2, FS116-N3-CROSS, FS116-RING-TRANSFER-QC), on wave 7's FS114-N7-QOPP; wave 9 on waves 1–5 and, in one row
+     (FS129-SR3-QFREE-NS), on wave 8's FS129-SR3-EMPTY-NS; none of 7–9 rests on wave 6. **Ruled**: each planner takes the one upstream
+     row of a wave not yet in Lean as a named hypothesis under a name of its own (`LEAN.md`'s rule on two branches and one lemma); the
+     join replaces it. Alternative: plan 7, then 8, then 9 in sequence. Why: three planners' hand-backs are what the implementers of
+     three waves wait on, and four hypotheses discharged at a join cost a few lines each. Confidence: high on the independence (the
+     tags are the plan's own checker's input), medium on the tags being complete — a planner that finds an untagged dependence says
+     so. Worktrees `fs131-w7`, `fs131-w8`, `fs131-w9` cut from `main` at `e6e7b312`, builds copied from `fs131-wmb`, pushed; briefs
+     `data/fs131/briefs/FS131-K7-wave7.md`, `FS131-K8-wave8.md`, `FS131-K9-wave9.md`, generator `mk-kw.py 7|8|9`, each gate PASS.
+     Wave 7's brief carries the plan's open word "simple" (a fragment's tiles that cross the domain's boundary) as that planner's
+     decision, to be relayed to wave 8's.
+
+499. **FS131-K6b, by message mid-job: findings on the bridge while stating it — none a refutation; the skeleton (`Curve`, `LocalGraph`,
+     `FanBridge`) elaborates** (source: K6b's message to "main", 2026-10-06; not checked by me against the branch — its record and build
+     are the artifact at its hand-back). (1) **A step of FS131-E8 § 3.1 (4) does not formalize as written** ("at a point where g″
+     exists … ψ is absolutely continuous": Rademacher and the fundamental theorem for Lipschitz functions), **and has a shorter route,
+     proved in Lean on the branch** (`norm_sub_le_of_discs`): if neither pair of opposite unit discs at two interface points overlaps,
+     the parallelogram law gives `‖ν′ − ν″‖ ≤ ‖x′ − x″‖`, the sharp constant with no second derivative; the non-overlap from § 3.1
+     (3)(c)'s crude `6δ` bound; the 1-Lipschitz tangent angle then by subdivision (a leaf). (2) The fan's existence reads only a crude
+     curvature bound, so FAN, BRIDGE and CLAUSE2 could land on § 3.1 (3)(c) alone; the sharp constant is read by the consumers' lens.
+     (3) **A generalization**: "at least two branches, the two sides of a branch differ in colour" reads no saturation — it follows
+     from the fan's fields and `z ∈ Σ` (`Fan.two_le_n`, `Fan.col_ne`; K6b's argument, one mind). (4) **Three statements of its own
+     assembly, for a deriver's eye**: `IsUnitCurve.one_le_dist` (a curve of length at most `π/2` with 1-Lipschitz tangent angle stays
+     outside the two open unit discs tangent at its start); `Fan.branch_contacts` (FS121-V2's Lemma T (ii) for any fan, with the claim
+     that a branch is of split type along its whole length or of tangent type along it); `fan_of_isolated` at every `z` with
+     `Σ ∩ B(z, R) ⊆ {z}`, singular or not. (5) On ruling 495 (a): FS131-E8-LOCAL is stated over `TwoColourOn A B N` and "no cusp in
+     `U ⊆ N`" and does not read Σ, so the centred-ball Σ serves; the agreement lemma is not stated (priced at about a day after LOCAL).
+     Also stated over the fan: FS121-V2-SECTOR (`Fan.sector_alone`) and FS121-DB1-L3 with FS111-W-NOREP as its case
+     (`Fan.sector_unique`, proved from it) — a fan at one point and saturation at its branch points, no local finiteness, confirming
+     E8's § 4.6 for those two rows. It hands back after its build; the ladder, the fragment, HULLC, KB-DIR, INTRAD and V3-CPI go to a
+     third pass. **My check of one**: `one_le_dist`'s derivative redone by hand — `(d/ds)|γ(s) − γ(0) ∓ i e(ψ₀)|² = 2⟨γ(s) − γ(0),
+     T(s)⟩ ∓ 2 sin(ψ(s) − ψ₀) ≥ 2 sin s − 2 sin s`, by E8's C2 and `|ψ(s) − ψ₀| ≤ s ≤ π/2`; it holds as written. **Ruling**: **the
+     deriver's check is a short job for the mind that holds the derivation** — FS131-E8 resumed (441k by the harness, below its line)
+     on a dated amendment to its brief, once K6b's record is committed and a slot is free at K6b's hand-back: items (1), (3), (4)
+     against its own entries, its record amended where a step is replaced (§ 3.1 (4)) and where an entry widens (FAN without
+     saturation for the two clauses; `fan_of_isolated` at non-singular points). Alternative weighed: a fresh deriver (it would re-read
+     the whole derivation first, about three times the cost), or no deriver, the implementer's proof being the check. Why: `Fan.branch_contacts`
+     carries a new claim every sector row will read, and a false leaf found by an implementer costs a job where a deriver's reading
+     costs a stage; the kernel remains the second check either way. Confidence: medium-high.
+
+500. **FS131-K10b, by message mid-job, before stating the floor's import: the bound for the circle sums is a theorem of the held
+     `[MMST1996]`, false as printed at `a = 0`; Weil's own paper is not held — and the import is ruled** (source: K10b's message to
+     "main", 2026-10-06). **What it read** (the held PDF, pp. 225–232): Theorem 3, p. 231, "`|λ_b| ≤ 2q^{(n−1)/2}`, for `b ≠ 0`", with
+     Prop. 2 (p. 230) `λ_b = Σ_{d(s,0)=a} e_b(s)`; at `n = 2` exactly the sum over the circle the planes' floor needs, for every odd
+     prime power; its proof a sketch citing Carlitz 1953 and Weil's Collected Works (or `[LiFeng1992]`), neither held. **A statement
+     defect in the printed theorem**: it carries no restriction on `a`, the paper allows `a = 0` (p. 227), and at `n = 2`, `a = 0`, `−1`
+     a square, `b` isotropic, `λ_b = q − 1 > 2√q` (`q = 13`, `b = (1, 5)`: 12 against 7.21; `tools/fs131_k10b_circle.py`, float,
+     [measured], finds it at `q = 9, 13, 17, 25, 49` and no violation with `a ≠ 0` on fourteen fields). An axiom copied from the
+     printed sentence would be inconsistent. No elementary bound replaces it at 347: the fourth moment gives `(2Q³)^{1/4}`, seven only
+     from about `Q ≥ 1250`. **My receipt**: the `q = 13` case redone by hand — the circle `x² + y² = 0` over `𝔽₁₃` is the two lines
+     `y = ±5x`; on `y = 5x` the pairing with `b = (1, 5)` vanishes (`1 + 25 = 26`), contributing 13; on `y = −5x` it is `2t`,
+     contributing 0; less the origin counted twice: `λ_b = 12`. Not checked by me: its reading of pp. 225–232. **Ruling: the import is
+     Weil's Kloosterman bound over a finite field, and the completion from the circle sum to the Kloosterman sum is formalized (K10b's
+     option (β)); in this pass the bound is a named hypothesis, never an axiom, until a held source's page is read back against it.**
+     Alternative weighed: `[MMST1996]` Thm 3 at `n = 2` with our restriction `a ≠ 0` (K10b's default, (α)). Why: (α)'s read-back would
+     be against a sentence we have had to correct, with an unread sketch behind it; (β)'s axiom is the smaller and the canonical one,
+     everything between it and the floor is kernel-checked (about 250 lines over Mathlib's Gauss sums, which also kernel-check FS-20's
+     open item R4), and `LEAN.md` § Assumptions says when unsure, formalize. Confidence: high on (β) over (α); medium on a held source
+     stating the bound for prime powers soon. This refines ruling 485 (b). **The fetch, mine**: `[Weil1948]` is free at PubMed Central
+     (PMC1079093) and `[LiFeng1992]` free at its publisher (doi 10.1016/0022-314X(92)90120-E), by OpenAlex; both answered a scripted
+     fetch with a proof-of-work or challenge page (four routes tried), so by the fetch notes' rule they are **asked of Kooshi as two
+     browser saves**, with target file names; default, the planes' floor stays a theorem over the named hypothesis. **Corrections
+     owed**: `BIBLIOGRAPHY.md`'s `[MMST1996]` row — the `a = 0` defect and what was read, from K10b's draft at its hand-back; the
+     `[Weil1948]` row's "for a prime `p`" against what the floor needs (prime powers). **Credit**: K10b stopped before the axiom and
+     read the page, and found the printed theorem false in a case.
+
+501. **FS131-K6b done at its Stage 12: wave 6's second planning pass — the foundation restated (item 495), the fan a library module with
+     its inhabitant, the bridge's eight rows stated and the bridge itself proved from the fan lemma; fourteen ladder rows, the
+     fragment's six and three more left to a third pass** (planner; harness 547k by the task notice — past the line, not to be resumed;
+     record `fs131-w6`'s `plans/FS131-w6-kernel-plan.md` Stages 8–12; report `data/fs131/reports/FS131-K6b.md`; commits `d02a8b4c`,
+     `3928644b`, `e35c3dc0`, `32f2ab4c`; pushed, tree clean). **New modules**: `Plane/Saturated/Fan` and `FanExamples` (no `sorry`;
+     `sq9Fan : sq9.Fan sqVertex`, the vertex proved singular); `Curve`, `LocalGraph`, `FanBridge` (the skeleton). **Proved**:
+     `norm_sub_le_of_discs` (the normal of a two-sided unit-disc condition is 1-Lipschitz, sharp, by the parallelogram law);
+     **`regJFan_of_saturated` — FS131-E8-BRIDGE, from `fan_of_isolated`**; `Fan.sector_unique` (FS121-DB1-L3 with FS111-W-NOREP, from
+     `sector_alone`); `pinch_interface`, `c11_discs_interface`, `TwoColourNhd.mem_essBoundary` (each from a leaf). **Stated**: the
+     bridge's rows; FS111-M-C11 (ii) and FS111-W-NOBEND as FS131-E8-LOCAL (`local_graph`, with "no cusp in `U`"); FS121-V5-LOC (i),
+     (ii); FS121-V2-SECTOR (`Fan.sector_alone`). The fan's two missing facts are theorems about any fan under saturation
+     (`Fan.branch_outside_discs`, `Fan.branch_contacts`), not fields. **Its price for the bridge**: about 23 agent-days, 80 % interval
+     [12, 40] (`Curve` 2.5, `LocalGraph` 6.5, `FanBridge` 14.5), the computational leaves likely high by a factor of two to three;
+     if `gamma` proves large, `fan_of_isolated` stays open and every consumer still lands over `Fan`. **My receipt**: tip `32f2ab4c`
+     equals `origin/fs131-w6`, tree clean; `sorry` by the handoff's grep: `Basic` 0, `Fan` 0, `FanExamples` 0, `Pinch` 7,
+     `MapColouring` 1, `Curve` 6, `LocalGraph` 5, `FanBridge` 12 — the 31 leaves reported; `git diff 3928644b 32f2ab4c` over `Basic`,
+     `Pinch`, `MapColouring` is empty (the implementers' branches stand); the full build log
+     (`build/gate/build/20261006T121157Z-3880314.log` in the tree) ends "Build completed successfully (5811 jobs)" with 0 warnings
+     other than `sorry`, in those five files only; `regJFan_of_saturated`'s statement read at `FanBridge.lean` l. 118 against E8's
+     hand-off line — `Saturated c.cls`, `c.SingLocallyFinite`, `c.RegJFan`. Not checked by me: an axioms print (none was made; the
+     gate's), the proofs of the proved declarations beyond the build. **Items**: six generalizations (PINCH on two sets at any point
+     of an open set; its (in, in) clause; C11 (i) at every point of one `N`; E8-LOCAL reads no singular set; E8-FAN's two clauses
+     without saturation; E8-GAMMA, -BETA, -ALPHA, -FAN do not read `z ∈ Σ`); a correction owed to E8 § 3.1 (4); two statement
+     notes on the frozen sentences (Σ's neighbourhood, ruled 495 (a); (H2)'s closure clause redundant); E8's § 4.6 confirmed against
+     the arguments for two rows, unchecked for the rest; predictions scored (its § 12.6: the bridge re-priced from 15 to 23; 4 rows
+     stated against a median of 9); slips, the job's, disclosed — of the brief's item 5 four rows and part of a fifth; FS131-E8-DELTA
+     left a leaf; `sq9.SingLocallyFinite` owed and not stated; no token count readable. **Credit**: it found the regularity step that
+     does not formalize and replaced it with a kernel-checked lemma of sharper constant, and it restated the foundation at the class
+     the argument reads without editing one proof.
+502. **Rulings on K6b's held items, and its slot.** (a) **The deriver's check runs now** (ruling 499): FS131-E8 resumed on a dated
+     amendment to its brief (`data/fs131/briefs/FS131-E8-regj-bridge.md`, gate PASS; generator `mk-e8-amend.py`) — `branch_contacts`
+     first, then `two_le_n` and `col_ne` without saturation, `one_le_dist` and `fan_of_isolated`, the erratum to its own § 3.1 (4),
+     the planner's read-backs; sized at about 60k, a hand-back by about 520k. (b) **Wave 6's implementers, four lines by file as K6b
+     splits them**: `Pinch` (FS131-I6A, ready) and `MapColouring` (FS131-I6B, ready) on their branches at `3928644b`; `Curve` then
+     `LocalGraph` (FS131-I6C) on a branch cut from `32f2ab4c`; `FanBridge` (FS131-I6D, and a second if it runs long), with
+     `sq9.SingLocallyFinite`, after the deriver's check. Alternative: wait for the third planning pass before any implementer. Why:
+     the files' leaves rest on each other's statements only, and those are fixed. Confidence: high. (c) **A third planning pass,
+     FS131-K6c**: the fourteen ladder rows, the fragment's six, FS111-M2-HULLC, -W-KB-DIR, -M2-INTRAD, FS121-V5-LOC (iii), every
+     argument K6b's § 12.4 lists as unread (with `plans/FS111-W-wild.md` for the NOBEND merge), and, if it is short, the agreement of
+     the two readings of Σ under saturation as a row. (d) The erratum to E8 § 3.1 (4) is E8's to write in its own record at the
+     check; the other generalizations are logged for the errata at the filing. (e) **Slot → FS131-E8's check**, resumed 2026-10-06.
+     In flight: 1 (I10B) + 1 (K10b) + 1 (E8) = 3. The queue after it: K7, I10C, K8, I6A, K9, I6B, K6c, I6C, I6D, MD1, MD2.
+
+503. **FS131-K10b, by message mid-job: J45-SI-J holds at a wider class by a shorter route — no spectral measure, no "Bernoulli has
+     Lebesgue spectrum", no convolution of spectral measures, no `Haar(E_S) = 0`** (source: K10b's message to "main", 2026-10-06; the
+     planner's argument, one mind, not yet a Lean proof). **The statement at the class the argument reads**: three independent systems
+     under maps indexed by `R` and any filter `l` on `R` — a finite system whose maps are eventually the identity along `l`, any
+     system, and a process with independent coordinates shifted by the maps; if `l` is not eventually inside a finite set, the
+     `l`-continuous vectors of the product are exactly the `L²` functions of the finite system and the `l`-factor of the second.
+     Identical distribution of the noise is not read. At `E_S` the hypothesis on `l` is "`τ′_S` is T₁ and not discrete", the part of
+     J45-N1 that weak approximation supplies. **What it drops**: `BochnerHerglotz`, the Bernoulli spectrum and the tensor/convolution
+     lemma — three foundation items the first pass listed for this row (its § 3.3). **My receipt**: the orthogonality step redone by
+     hand — for a cylinder `F′` in `L²(first two) ⊗ L²₀(noise)` on a finite coordinate set `A`, `⟨V_y F′, F′⟩ = 0` once `A + y` misses
+     `A` (independence, centred), so `‖V_y F′ − F′‖² = 2‖F′‖²` frequently along `l`, and with `‖F₁ − F′‖ < ε` continuity gives
+     `‖F₁‖ ≤ (1 + √2)ε`. Not checked by me: the fibrewise step for `F₀`. **Ruling**: adopted — stated in the filter form
+     (`Arith/ProductFactor`) with the row's reading as its instance; the read-back names which part of J45-N1 the instance rests on and
+     which downstream rows (SI-5, SI-C) are taken over the new form. Alternative: state the row as filed, over the spectral
+     foundation. Why: a row is stated at the class its argument reads (the plan's § 7.3 item 3), and three foundation items and one
+     named hypothesis leave the wave. Confidence: high. **Correction owed**: J45-SI-J's entry (the generalization), with the wave's
+     errata.
+
+504. **FS131-E8's check done (its Stage 6): the planner's statements of the bridge stand — `Fan.branch_contacts`, `Fan.two_le_n` and
+     `Fan.col_ne` without saturation, `IsUnitCurve.one_le_dist`, `fan_of_isolated` at every point; no refutation** (deriver, resumed on
+     the amendment of ruling 502 (a); harness 539k by the task notice — past the line, not to be resumed again; record
+     `plans/FS131-E8-derivation.md` Stage 6, §§ 6.1–6.5, twelve derived entries in all; report's second section in
+     `data/fs131/reports/FS131-E8.md`; commits `2bd0f64b`, `e8cc4d5a` on `origin/main`). **Entries**: FS131-E8-BRANCH
+     (`branch_contacts` at its exact Lean hypotheses: a common contact at one branch point puts the whole branch on the unit circle
+     about it, with `y = z ± i e(d)`; otherwise every branch point is of tangent type and the contacts converge to `z ± i e(d)`);
+     FS131-E8-TWOSIDES (the two clauses for every fan, no saturation); FS131-E8-OUTSIDE (`one_le_dist`; in polar form
+     `|φ_i(t) − dir i| ≤ arcsin(t/2)`; its § 4.6 offer `arcsin(t)/2` withdrawn). **A correction to the planner's wording**: "of split
+     type along its whole length or of tangent type along it" is true as an inclusive alternative and false as an exclusive one (a
+     unit arc with a further contact at the antipode is of both types); the Lean disjunction is inclusive, so the statement stands,
+     and its docstring's "either … or" is to say so. **For the implementers**: `beta` alone does not give a branch's tangent at `z`
+     — `branch_contacts` and `branch_outside_discs` go through `gamma` and `IsUnitCurve.exists_polarGraph`; `gamma` says injective on
+     the closed interval (more than "not closed", true by the chord bound); `local_graph`'s `bdry` is about one class's essential
+     boundary, the colouring form owing one line. **In its own record**: a dated erratum under FS131-E8-LOCAL (§ 3.1 (4)'s
+     regularity step replaced by `norm_sub_le_of_discs`; the planner's `3.5δ` right) and a dated note under FS131-E8-FAN; no entry's
+     text, statement or constant changed. **My receipt**: both commits are ancestors of `origin/main`; the diff of the record from
+     `49cc6bff` removes no line and adds four hunks (the summary, the erratum, the note, Stage 6); `data/fs131/e8/gate-stage6.out`
+     reads five controls fired, `GATE: PASS`; `e8_sq9_contacts.py` run by me prints 0 and 8 with `--swap`, `e8_outside.py` 0 and 6852
+     with `--kappa 2`; § 6.1 Case A's openness step redone against `pinch`'s Lean statement — with both contacts equal to `y` its
+     tangent alternative would need `y − x = −(y − x)`, so the point is of split type and `c11_split` puts the nearby boundary on the
+     circle. Not checked by me: Case B's orientation beyond its control; §§ 6.2–6.5 beyond a reading of the report. **Items**:
+     predictions scored (its § 6.1: one met, one half-met, both registered after a sketch and said so); a tool change
+     (`data/fs131/e8/quotes.py` reads a section name after a path); a slip, the job's, corrected before its commit.
+505. **Rulings on the check, and the slot.** (a) **The five `Fan` lemmas go to an implementer as stated** (FS131-I6E), whose brief
+     carries the check's three notes: the alternative is inclusive and the docstring of `branch_contacts` says so (a docstring line,
+     not a statement change); the tangent at `z` comes through `gamma` and `exists_polarGraph`; the first alternative needs no bound
+     `1/2`. Alternative: restate `branch_contacts` with the two alternatives made exclusive. Why not: the deriver shows the exclusive
+     form false. Confidence: high. (b) No relay of the erratum is owed: every reader of E8's §§ 3.1–3.7 before `2bd0f64b` has handed
+     back, and the briefs of the jobs to come point at the record as it stands. (c) The withdrawal of § 4.6's bound is in the third
+     planner's reading list by its brief (Stage 6). (d) **Slot → FS131-K7** (wave 7's planner), launched 2026-10-06. In flight: 1
+     (I10B) + 1 (K10b) + 1 (K7) = 3.
+
+506. **FS131-I10B done: all three leaves of wave 10's `StationaryRatio` proved, with no hypothesis from outside Mathlib** (implementer,
+     Opus; harness 449k by the task notice; record `fs131-w10b`'s `plans/FS131-I10B-implementation.md` Stages 1–4; report
+     `data/fs131/reports/FS131-I10B.md`; commits `3f262ca2`, `65e21c8f`, `9a7cf231`, `8cad5b7f`, `423cd8e8`; pushed, tree clean).
+     **Proved** (rows X25B-PZ, X25B-L1, and the derivation's lemma X25B-P): `ratio_prod_le` (the stationary ratio of a product is at
+     most the larger factor's, for measurable commutative groups and σ-finite symmetric connection measures),
+     `ratio_prod_le_iSup_levels`, `StationarySet.prob_le_ratio_mul`. **Models**: `StationarySet.parity` with
+     `ratio_dirac_one_zmod_two : ratio (Measure.dirac (1 : ZMod 2)) = 2⁻¹`; `cantorLevel` on `ℕ → ZMod 2` for X25B-L1's hypotheses.
+     **New statements, one mind, owed the planner's read-back**: the rows at the class their proofs read
+     (`prob_le_ratio_mul_of_symm`, `ratio_prod_le_of_symm`, `ratio_prod_le_iSup_levels_of_shrink`), `tendsto_measure_symmDiff_shift`,
+     `StationarySet.ae_majority`, `measure_le_majority_add`, `lintegral_prod_conv_cosetAverage`, `prob_le_max_ratio`,
+     `prob_le_ratio_level_add`. **My receipt**: tip `423cd8e8` equals `origin/fs131-w10b`, tree clean; `sorry` by the handoff's grep:
+     `StationaryRatio` 0 (the other three files 8, 1, 9 — this branch predates I10A's proofs); the full build log
+     (`build/gate/build/20261006T122714Z-3993653.log` in the tree) ends "Build completed successfully (5755 jobs)", 0 warnings other
+     than `sorry`, none in `StationaryRatio`; `data/fs131/i10b/logs/axioms-all.log` parsed by script: 52 records, 51 on the standard
+     three and the control (`StandingFive.usable_card_ge`) on `sorryAx`, the three leaves and two more found by name; the three leaves'
+     statements compared with `f919973e` by `cmp` of `awk` extractions — identical. **Items**: seven arguments of the three statements
+     unread by their proofs (`[MeasurableAdd₂ _]` four times, `[T2Space Y]`, `[SigmaFinite νX]`, `(hK : Antitone K)`), with
+     `[IsFiniteMeasure νY]` weakening to `[SFinite νY]` and the index `ℕ` to any type — each consumed by a `have` as committed, the
+     general forms proved beside them; the planner's finding 8 confirmed by proofs (no Haar measure read); **X25B-L1's Lean right-hand
+     side is the level pulled back to `X × Y`, and the comparison with the finite graphs on `Y/K_k` is stated nowhere in the wave** (a
+     route on paper, one mind: PZ first, then a count of the cosets with positive share); [hand], one mind — the symmetry hypotheses of
+     X25B-PZ cannot both be dropped (`ℤ/3`, `ℤ/5` with `δ₁`: ratios `1/3`, `2/5`, and `C₁₅` has `7/15`); a wording correction owed to
+     `plans/FS100-X25B-derivation.md` ll. 60–61 (step (2) also reads the symmetry of `ν_H`; no defect); `StationarySet G` is not a
+     tracked carrier of the vacuity scan; the price — 1,900 lines planned, about 660 written, because in the almost-sure normal form the
+     two rows contain no integral; three Lean facts (filed in `LEAN.md` § Searching — Lean today, with I10A's and K10's); slips, the
+     job's, disclosed — scratch elaborations outside the slot at 2.4 GiB for four seconds, proofs drafted before Stage 1's commit.
+507. **Rulings on I10B's held items, and its slot.** (a) **The seven unread arguments are dropped at the join, as ruling 494 (a) has
+     it for I10A's two**: each row keeps its name on the general statement and the `_of_symm` / `_of_shrink` twin is deleted; the
+     antitone hypothesis and the index `ℕ` go with them. Alternative: keep `(hK : Antitone K)` and `ℕ` because the row's words say
+     "its finite levels". Why: the plan's § 7.3 item 3 — a row is stated at the class its argument reads — and the row's own reading
+     is an instance. Confidence: high. (b) **The comparison of the pulled-back level with the finite quotient graph becomes a row of
+     wave 10's second pass** (sent to K10b by message, with I10B's route): without it X25B-L1 in Lean does not give the row's
+     "supremum over its finite levels" to a consumer. (c) The nine new statements and the two models are read back by K10b, with
+     I10A's five (ruling 494 (b)). (d) The joining job adds `StationarySet` to the vacuity scan's carriers with its three
+     inhabitants. (e) The wording correction is held with the wave's errata. (f) **Slot → FS131-I10C** (`StandingFive`, nine
+     leaves, on `fs131-w10c`), launched 2026-10-06. In flight: 1 (K10b) + 1 (K7) + 1 (I10C) = 3.
+
+508. **FS131-K7, by message mid-job: the plan's open word "simple" for a fragment is decided — the narrower reading, as a new predicate
+     `ArcMap.SimpleOn S`, the landed `ArcMap.Simple` untouched** (source: K7's message to "main", 2026-10-06; the module
+     `Proofs/HadwigerNelson/Plane/SimpleOn.lean` on `fs131-w7`, no `sorry`, checked with `lake env lean` by its word — its build and
+     commit are the artifact at its next saved stage). **The definition**: every tile whose closure meets `S` is a Jordan domain, and
+     the closures of two distinct such tiles meet in a preconnected set; a row about "a simple fragment on `B̄(p, R)`" takes
+     `F.SimpleOn (closedBall p R)`. **What each reading costs, proved there by its word**: `Simple.simpleOn` and
+     `simpleOn_univ : F.SimpleOn univ ↔ F.Simple` (so a row stated with `SimpleOn` implies the row as filed); `SimpleOn.mono`;
+     `simpleOn_ball_iff : F.SimpleOn (ball p ρ) ↔ (F.wholeRestrict p ρ).Simple` (the two readings differ by one application of
+     FS129-OR1-WHOLE's whole-tile restriction); the two facts the landed library reads from `Simple` hold under `SimpleOn S` at a
+     point of `S`, and `Simple`'s second clause has no reader on `main` yet. Not taken: a purely local form (the second clause is
+     about two whole closures). **Ruling**: adopted, with no deriver's reading asked (the plan's § 7.3 item 2 had named one).
+     Alternative weighed: the literal `Simple` over all tiles, or a deriver's job on which reading the hand arguments mean. Why: by
+     `Simple.simpleOn` every row proved under the narrow hypothesis gives the row as filed, so the choice cannot lose a result; a row
+     whose argument does read a tile off the disc will show at its proof, and is then a message. Confidence: high. **Relay**: wave
+     8's and wave 9's planners take the module by merging the one commit of `fs131-w7` that holds it (asked of K7 by message: a
+     commit of its own after a build, and the hash), and state their classes over it; their briefs carry this.
+
+509. **FS131-K10b done at its Stage 9: wave 10's second planning pass — the finite-target floor stated as two rows, the read-backs
+     done, one of the four unstated rows stated; three statements and one new row left for a third pass** (planner; harness 472k by
+     the task notice; record `fs131-w10k`'s `plans/FS131-w10-kernel-plan.md` Stages 6–9; report `data/fs131/reports/FS131-K10b.md`;
+     commits `83e1ef2c`, `256f5ccb`, `48672e2b`, `330d2f48`; pushed, tree clean). **Ten new modules** under `Arith/`. **Proved**: the
+     ratio bound for a finite abelian group by characters (`RatioBound.card_mul_le_of_indep`, `le_chromaticNumber_of_charSum`; not in
+     Mathlib or the library before); `si4_equivariant` at the factor σ-algebra for a map with a left inverse in the family
+     (`comap_factorSigma_eq`, `si4_equivariant_factorSigma`); J45-SI-C's finite facts and (G2) at 7 by `decide +kernel` (`GapSeven`,
+     eight theorems); `StandingFloor 7` from the two floor rows (`standingFloor_seven`, a composition over their leaves). **Floor (i)**:
+     `targetFloor_eight_128 : TargetFloor 8 128` — **the target at 128 needs eight colours** — proved over one leaf
+     (`charSum_128_ge`), its certificate (an irreducible polynomial, a generator, the exact spectrum bounded below by −19)
+     kernel-checked in 2.3 s; the spectrum −19 … 21 [tools, exact, two routes]; no outside theorem. **Floor (ii)**:
+     `targetFloor_seven_of_kloosterman` — `χ(Γ_Q) ≥ 7` for `Q ≡ 3 (mod 4)`, `Q ≥ 98` — over the named hypothesis `KloostermanBound F`
+     (a `Prop`, no axiom: ruling 500), six leaves. **Stated, not proved**: J45-SI-J at the filter form (`contVec_prod_eq`, item 503);
+     FS131-E8-SI5C at a wider class (`ae_eq_measurable_of_majority`: any infinite index set, events of probability at most `p < 1/2`);
+     a model of `Interface.NegCircle` at `F = ℚ` by the parity character (two leaves). **Not stated**: J45-SI-5, J45-SI-C's measure
+     part, J45-N1 (a)(b), the X25B level row (a disposition and a shape). **Read-backs**: I10A's five statements say what their
+     rows say (two differences, neither a defect: real `L²`; "almost surely" where J45-SI-4 says surely); I10B's nine by statement.
+     **My receipt**: tip `330d2f48` equals `origin/fs131-w10k`, tree clean; `sorry` by the handoff's grep: `NormOneTarget` 2,
+     `FloorPlanes` 4, `Floor128` 1, `ProductFactor` 1, `MajorityVote` 1, `NegCircleModel` 2 — the eleven reported — and 0 in
+     `FactorAction`, `RatioBound`, `TargetFloors`, `GapSeven`; no `axiom` and no `native_decide` in the ten modules, by grep; the full
+     build log (`build/gate/build/20261006T123652Z-4038296.log` in the tree) ends "Build completed successfully (5790 jobs)", 0
+     warnings other than `sorry`; `KloostermanBound` read at `FloorPlanes.lean` ll. 34–36 — every non-trivial additive character,
+     `a ≠ 0`, `b ≠ 0`, the sum over units of `ψ(a x + b x⁻¹)`, at most `2√q` — and `standingFloor_seven`'s hypothesis at
+     `TargetFloors.lean` ll. 32–35 (fields of `q ≡ 3 (mod 4)`, `q ≥ 347` elements). Not checked by me: the certificate, the spectrum,
+     the read-backs. **Items**: three generalizations; three corrections owed to J45 entries (SI-J's *uses only* line; SI-C's one
+     clause in spectral form; SI-4's "equivariant" almost surely); the `[MMST1996]` defect and the fallback written down with pages
+     (its § 7.3); the bibliography note filed today (`BIBLIOGRAPHY.md`, `[MMST1996]` and `[Weil1948]` rows, the note verbatim by
+     script); a question for a deriver, low priority (does X25B-T's chain read the finite level with the loop case excluded?);
+     predictions scored (its § 9.6); slips, the job's, disclosed (stages 7–9 one commit; no token count; a hash misnamed and
+     corrected); `./scripts/dupnames.sh` exits 1 on that branch at `Plane.conj_e` — the branch predates wave 5's remedy pass, which
+     made that one declaration on `main`; the join with `main` removes it.
+510. **Rulings on K10b's held items, and its slot.** (a) **Three implementers by file, as it splits them**, on branches cut from
+     `330d2f48`: FS131-I10D (`NormOneTarget` and `FloorPlanes`, six leaves — the completion from the circle sum to the Kloosterman
+     sum), FS131-I10E (`Floor128`, one leaf with six children — the target at 128), FS131-I10F (`ProductFactor`, `MajorityVote`,
+     `NegCircleModel`, four leaves). (b) **A third planning pass, FS131-K10c**: J45-SI-5, J45-SI-C's measure part, J45-N1 (a)(b)
+     or its two-fact interface, the X25B level row's statement in the form X25B-T reads (with the deriver's question as its own to
+     settle from the entry, or to send back). (c) **The read-back of the Kloosterman bound against a page waits on the two papers
+     asked of Kooshi** (item 500); until then the planes' floor is a theorem over the named hypothesis, and the wave can land so.
+     Alternative: hold the wave's landing for the import. Why not: a named hypothesis is visible in the statement and costs nothing
+     in the audit; the import is one small later commit through the gate. Confidence: high. (d) `sp_if` stays an open gate item
+     until `negCircle_trivial_bot` lands (I10F). (e) The join's list is its record's § 9.4, with rulings 494 (a) and 507 (a), (d).
+     (f) **Slot → FS131-I6A** (wave 6's `Pinch`, seven leaves, on `fs131-w6p`): wave 8's planner is next in the order but waits
+     for wave 7's planner to send the commit of the shared module (item 508). In flight: 1 (K7) + 1 (I10C) + 1 (I6A) = 3.
+
+511. **FS131-K7, by message: the shared module is whole at `611ffa39` on `fs131-w7`; waves 8 and 9 hold it by ancestry** (source: K7's
+     message to "main", 2026-10-06). **My receipt**: `611ffa39` is an ancestor of `origin/fs131-w7`; from `e6e7b312` it adds
+     `Proofs/HadwigerNelson/Plane/SimpleOn.lean` (157 lines, 0 `sorry` by the handoff's grep), one line of `Proofs.lean`, one row of
+     `ARCHITECTURE.md`, 13 lines of `scripts/Axioms.lean`, and K7's stage-1 record with one build log; the definition read at ll.
+     46–49 — as item 508 has it; `Simple.simpleOn`, `simpleOn_univ`, `SimpleOn.mono`, `simpleOn_ball_iff`, the two cone facts, an
+     inhabitant (`halfDisc_simpleOn`) and a refuting lemma (`not_simpleOn_of_not_jordan`) found by name. Not checked by me: its build
+     log (the artifact at K7's hand-back). **Done, mine**: `fs131-w8` and `fs131-w9` — both untouched at `e6e7b312`, no job in them —
+     fast-forwarded to `611ffa39` and pushed, so the module is one file on three branches by ancestry and nobody re-declares it;
+     their planners' briefs regenerated with it (`mk-kw.py 8 611ffa39`, `9 611ffa39`), each gate PASS. Alternative weighed: each
+     planner merges the commit itself. Why mine: the branches were empty, a fast-forward cannot conflict, and a planner's brief
+     then needs no exception to "you do not merge".
+
+512. **FS131-K7, by message mid-job: route T's rows — three proved on the way, six generalizations, three hypotheses the formal
+     statements add, and the outside theorem decided** (source: K7's message to "main", 2026-10-06; its record's Stages 3–4 on
+     `fs131-w7`, to be committed at its next push — not checked by me against the branch; the artifact is read at its hand-back).
+     **Proved on the branch, by its word**: FS114-N114-EULER's identity; FS114-Y-EDGE whole; FS114-N114-RD's display on contact sets
+     (its anchoring clause open). **Generalizations**: (1) FS114-N114-EULER holds at every Euler characteristic, with no hypothesis
+     on degrees — the torus is `χ = 0`; (2) FS114-N2-FIVE holds on every map of Euler characteristic at most 0, without the step
+     `d ≤ 5` (`2d² − 13d + 24 > 0` at every integer); (3) FS114-Y-EDGE needs no arcs; (4) FS114-N114-RD's cross-distance step reads
+     two far sets and one tile, no colour; (5) FS114-N3-JOINT's assignment form reads neither radius; (6) the tactic darts are
+     determined by the colouring, so "tactic" is a definition and K1 a statement about a colouring alone. **Hypotheses added**: (a)
+     FS114-N114-EULER's `μ ≥ 0` is for vertices of degree at least 3, the derivation's convention, and it is read (the sphere's
+     two-gon has `μ_f = −1`); (b) FS114-N2-FIVE needs a nonempty map; (c) "a torus map" enters as `V − E + F = 0` alone —
+     connectedness is never read. **The outside theorem**: Euler's formula is not imported — the counting rows are theorems about a
+     combinatorial map (a rotation system on darts) with `V − E + F = 0` a hypothesis; the passage from a doubly periodic `ArcMap`
+     to such a map is not formalized, and no backlog row reads the torus rows through it (their consumer FS114-ROUTE-T is a gap
+     verdict). No axiom. **Flags for its second pass, from the entries' own words, unverified**: FS114-N4-LEMMAS' N4-LENS is stated
+     without the non-Siamese hypothesis its own *not claimed* line says it needs; N3-FACE says "two distinct tiles of one colour"
+     where the conclusion holds for a far pair; N3-ODD's parity against FS116-N1-TWIST-LIT; four sentences about arguments have no
+     formal statement. **My check of one**: `2d² − 13d + 24` has discriminant `169 − 192 < 0`, so it is positive at every real `d`.
+     **Rulings**: (i) the six generalizations and the decision on Euler's formula are adopted. Alternative for the latter: import
+     Euler's formula for cellular torus maps and state the rows on periodic arc maps. Why not: no row of the backlog reads the
+     passage, a combinatorial hypothesis is no assumption at all, and an import nobody consumes is trust spent for nothing.
+     Confidence: high; **what the kernel then does not hold, to be said in the wave's read-backs: that a doubly periodic valid map
+     gives such a combinatorial map**. (ii) (b) is a correction owed to FS114-N2-FIVE's entry (the nonempty map), with the wave's
+     errata; (a) and (c) are readings, logged. (iii) The flag on N4-LENS, if its second pass confirms it, is a statement defect in
+     a filed entry and comes to me as a message then.
+
+513. **FS131-K7 done at its Stage 4: wave 7's first planning pass — route T's seven rows stated on a combinatorial map, three proved in
+     part or whole, the shared word "simple" fixed; the thirteen four-colour rows disposed and left to a second pass** (planner;
+     harness 474k by the task notice; record `fs131-w7`'s `plans/FS131-w7-kernel-plan.md` Stages 1–4; report
+     `data/fs131/reports/FS131-K7.md`; commits `ee497fcd`, `611ffa39`, `b5ef0e39`; pushed, tree clean). **Modules**: `Plane/SimpleOn`
+     (items 508, 511), `Plane/RouteT/Basic`, `Rainbow`, `Count`. **Proved**: FS114-N114-EULER's identity at every Euler
+     characteristic (`CMap.euler_count`), FS114-Y-EDGE whole at a wider class, FS114-N114-RD's display on contact sets. **Stated**:
+     FS114-N2-FIVE, -N114-ROOM, -N2-ENDS (the identity), -N3-JOINT (first clause and the assignment form) on `CountData`, 19 leaves
+     in `Count`, and RD's anchoring clause (one leaf). **Not stated**: the thirteen four-colour rows (their foundation — tactic
+     edge, Reuleaux bowtie, pinwheel — is the second pass's), FS114-N2-ENDS's second sentence, N3-PAY. Its mid-job findings are item
+     512. **My receipt**: tip `b5ef0e39` equals `origin/fs131-w7`, tree clean; `sorry` by the handoff's grep: `SimpleOn` 0, `Basic`
+     0, `Rainbow` 1, `Count` 19 — the twenty reported; `SimpleOn.lean` unchanged since `611ffa39` (`git diff`); the full build log
+     (`build/gate/build/20261006T130945Z-40504.log` in the tree) ends "Build completed successfully (5812 jobs)", 0 warnings other
+     than `sorry`; no `axiom`, no `native_decide` in the four modules, by grep; `euler_count` read at `Basic.lean` ll. 171–173 — the
+     identity of item 512 (1), with `−3·chi2` for `−6χ`. Not checked by me: the proofs beyond the build; the dispositions against
+     the arguments (it read thirteen rows from their entries only, and says so). **Items**: predictions scored (one not met — four
+     of six short rows proved; three met); slips, the job's, disclosed (a late push; thirteen arguments unread; `CountData` has no
+     Lean inhabitant yet — two derived by hand in its § 3.5, owed before the gate); a stub to mint only if route T is ever
+     published through its torus form ("periodic valid maps to combinatorial torus maps", priced about 1M tokens).
+514. **Rulings on K7's held items, and its slot.** (a) **Its plan's § 4.3, six dispositions, each at its stated default**: the
+     counting rows on a combinatorial map (ruled, 512 (i)); FS114-N4-LEMMAS closed by OWN, LENS, TOP, FIVE and ARC's first clause,
+     the two sentences about arguments recorded as readings; FS114-N5-GRING's two exclusions as corollaries of FS114-Y4-RSTOPALL
+     with N5-BENDG its own declaration; FS114-Y6-HALF merged into Y4-SIDES and Y4-W if the second pass's reading confirms the cone
+     hypotheses are all it adds; N3-FACE and Y4-UPDOWN one declaration; ROOM's first sentence and HALF's last as readings.
+     Alternative: hold each until its argument is read. Why defaults now: they are dispositions from entries, the second pass reads
+     every argument before stating the rows, and a default that fails there is a message, not a redo. Confidence: medium — they
+     rest on entries only. (b) **A second planning pass, FS131-K7b** (the four-colour foundation and the thirteen rows' skeleton;
+     the N4-LENS flag first), and **an implementer, FS131-I7A**, on `Plane/RouteT/Count`'s nineteen leaves with the two
+     `CountData` inhabitants, from a branch cut at `b5ef0e39`; RD's `anchor` rides with K7b's first implementer. Briefs not
+     written. (c) **Slot → FS131-K8** (wave 8's planner, on `fs131-w8` at `611ffa39`), launched 2026-10-06. In flight: 1 (I10C) + 1
+     (I6A) + 1 (K8) = 3.
+
+515. **Kooshi saved the two papers asked of him (item 500); both are in the library, and Weil's page states the bound the floor needs**
+     (2026-10-06; his words: "Done and done"). **Identity, checked by me**: `library/pdf/pnas-1948-weil-on-some-exponential-sums.pdf`
+     — "On some exponential sums", by André Weil, communicated March 9, 1948; 4 pages, PNAS 34 pp. 204–207; and
+     `library/pdf/jnt-1992-li-feng-character-sums-abelian-ramanujan-graphs.pdf` — "Character Sums and Abelian Ramanujan Graphs",
+     Wen-Ch'ing Winnie Li, with an appendix by Keqin Feng and Wen-Ch'ing Winnie Li, J. Number Theory 41, 199–217 (1992); 19 pages.
+     **A correction to our record**: the second paper's author is Li alone (the row said Li and Feng; I repeated it to Kooshi with
+     the caveat that it was unverified); the key keeps its form. **What Weil's p. 207 states, read from the page image**: `k` a
+     finite field of `q` elements, `ψ` a character of the additive group of `k` not everywhere equal to 1; "If the characteristic
+     p of k is not 2 … |Σψ(x)χ(x² − a)| ≤ 2√q"; with `χ` the character of order 2, "an elementary transformation [Davenport 1933,
+     Th. 5, p. 172] shows that the sum in the left-hand side is identical with the so-called Kloosterman sum Σψ(cx + dx⁻¹), for
+     4cd = a; hence |Σ_{x≠0} ψ(cx + dx⁻¹)| ≤ 2√q", and the prime case after it. So the page covers **every finite field of odd
+     characteristic — prime powers included — with `c`, `d` non-zero**, which is `KloostermanBound F` at `ringChar F ≠ 2`; the
+     floor reads it only at fields of `q ≡ 3 (mod 4)` elements. **What Li's abstract states**: `|Σ_{x∈N₂} χ(x)ψ(x)| ≤ 2q^{1/2}` for
+     all non-trivial characters of `N₂ × F₂` — the sum over the norm-one group that `normOne_charSum_ge` bounds, directly.
+     `BIBLIOGRAPHY.md`'s two rows brought current (what each states, the copy, what was read). **Rulings.** (a) **The import is
+     Weil's displayed inequality of p. 207, stated with characteristic not 2 as the page has it** (ruling 500 stands); the
+     alternative now in hand — Li's theorem for the norm-one sums, which would make the completion's four leaves unnecessary — is
+     not taken. Why: the Kloosterman bound is the smaller and the canonical axiom, the completion is already stated and about one
+     job, and it kernel-checks an identity this project has only verified numerically; Li's theorem stays the cross-check of
+     `normOne_charSum_ge`'s statement. Confidence: high. (b) **The read-back against the Lean statement, and the axiom with its
+     four items, are a planner's**: the first item of wave 10's third planning pass (FS131-K10c), which then discharges
+     `standingFloor_seven`'s hypothesis; my reading above locates the statement and is not the read-back. Until then
+     `KloostermanBound` stays a hypothesis, and FS131-I10D proves over it as briefed. (c) The audit's imported count goes from 4 to
+     5 when that lands; Kooshi has been told (the interim report, 2026-10-06).
+
+516. **FS131-I6A done: all seven leaves of wave 6's `Pinch` proved as stated — the pinch, its impossible case, the two tangent
+     discs, the split arc, the half-density bound, the essential boundary of a two-colour open set, and the model** (implementer,
+     Opus; harness 411k by the task notice; record `fs131-w6p`'s `plans/FS131-I6A-implementation.md` Stages 1–3; report
+     `data/fs131/reports/FS131-I6A.md`; commits `ce59c389`, `b53a2f46`, `d2abf84e`, `43ea4886`; pushed, tree clean). **Rows**:
+     FS111-M-PINCH (`pinch`, `pinch_not_in_in`), FS111-M-C11 (i) and (iii) (`c11_discs`, `c11_split`), FS111-M-HALF's density clause
+     (`half_upperDensity`); the planner's `pinch_interface`, `c11_discs_interface`, `TwoColourNhd.mem_essBoundary` are free of
+     `sorry` with them; six `example`s apply the theorems to an inhabitant of all their hypotheses at once (`sq9` at `sqEdgePt`).
+     **My receipt**: tip `43ea4886` equals `origin/fs131-w6p`, tree clean; no `sorry` anywhere in `Pinch.lean` (plain grep 0),
+     `MapColouring` 1 (the other implementer's); `Basic.lean` unchanged since `3928644b`; its last real build's full log
+     (`build/gate/build/20261006T131817Z-122361.log` in the tree, 464 of 464 batches, 2 modules rebuilt) ends "Build completed
+     successfully (5806 jobs)" with 0 warnings other than `sorry`, all three in `MapColouring`; `data/fs131/i6a/logs/axioms-2.raw`
+     parsed by script: 38 records, 37 on the standard three and the planted `sorry` on `sorryAx`, the seven leaves and the two
+     corollaries found by name; six of the seven statements compared with `3928644b` by `cmp` of `awk` extractions — identical; the
+     seventh (`TwoColourOn.essBoundary_inter_eq`) differs only in `:= by` against `:=`, its two statement lines read identical.
+     (A first pass of mine read a stale build log and one `:= by`; both resolved before this line.) **Items**: four
+     generalizations — `pinch` reads (H2) only as "almost everywhere one preconnected set of density points" (that (H2)'s set is
+     open and non-empty is never read); the two cells of the pinch's table need no (H2) and no measurability;
+     `essBoundary_inter_eq` never reads (H2); `c11_split` reads neither the point nor `dist x y = 1`; two routes changed from the
+     plan (`c11_split` by transfer to the disc and its exterior; `half_upperDensity` by a translation and a reflection); the second
+     planner's mutation audit agrees with the proofs; **the price — 22 agent-hours planned by two planners expecting to be high by
+     two to three; done in about thirty minutes after the readback**; slips, the job's, disclosed (its statement check keyed
+     examples by position; two queued builds stopped by PID before they ran); a correction owed at the join (the module
+     docstring's "Proved." lines); two Lean facts, filed in `LEAN.md` § Searching — Lean today; a pricing instance drafted for
+     `plans/GROKKING-INSTANCES.md`, held for the milestone's filing.
+517. **Rulings on I6A's held items, and its slot.** (a) **The weaker (H2) is offered to the wave's third planner, not adopted
+     now**: `H2On` and `Basic` stay as they are while four branches build on them; if the fragment rows or FS111-M2-HULLC's cover
+     form read the pinch with (H2) as "almost everywhere one preconnected set of density points", the third pass states that form
+     beside the present one, as a new predicate the present one implies. Alternative: weaken `H2On` at the join. Why not now: a
+     definition four jobs read is not changed for a generality no row has yet asked for. Confidence: medium-high. (b) The module
+     docstring's line and the `scripts/Axioms.lean` conflict are the wave's join's. (c) **Slot → FS131-I6B** (wave 6's
+     `MapColouring`: `sat_inP` and its Lean model, on `fs131-w6m`), launched 2026-10-06. In flight: 1 (I10C) + 1 (K8) + 1 (I6B)
+     = 3.
+
+518. **FS131-K8, by message mid-job: wave 8's foundation written, three rows proved on the way, five generalizations, a shorter
+     route, a wording defect, and a question on declared vacuity** (source: K8's message to "main", 2026-10-06; on `fs131-w8`,
+     uncommitted and elaborated with `lake env lean` only as it wrote — the build and commit are the artifact at its next saved
+     stage; not checked by me). **Proved, iteration-grade**: FS116-RING-GERM in tile form, all of FS116-N2-STAR, FS116-V6-ANTI.
+     **Generalizations**: (1) N2-STAR's flank clause holds for any tile of any valid map at any point and direction — no change
+     point, no colour count, no non-Siamese — and covers a tile bounded by a cusp, which the entry's step does not; (2) N2-RECIP
+     reads `y` as a change point of four colours, never a hub, never non-Siamese; (3) N2-ANTI reads "simple" only at the tiles of
+     `p` (`F.SimpleOn {p}`); (4) V6-ANTI is class-free, proved, so it carries no vacuity; (5) V6-COUNT's count is finite
+     combinatorics with no map in it (72 configurations, all satisfying the conclusion, by an exact tool whose planted fault
+     fires). **A shorter route** for V6-COUNT's last step: no sectors and no cyclic order — the closures of two non-empty groups
+     of tiles cover a connected circle about `p`, so two tiles of different groups share a closure point other than `p`, against
+     V6-ANTI's class-free form (stated, unproved, one mind). **A wording defect**: FS129-SR3-OUTERADJ's entry
+     (`plans/FS129-derivation.md` l. 795), "the only colour carried at y by a tile that is not a tile of p", is never met read
+     literally (the ring's own colours are so carried); its *not claimed* line fixes the meaning as `O_y = {c} = O_y′`, which is
+     what `outerAdj` states — a correction owed to the entry. **Its question**: the plan's § 7.3 item 5 asks a
+     `VACUITY DECLARED:` line on route lemmas over the empty class, while ruling 167 (b) made such a step `private` because the
+     scan does not track `ArcMap` binders. **Ruling**: `v6_hubs` and `v6_hug` stay public with the marker naming the emptiness
+     theorem, **and beside each a theorem deriving `False` from its exact hypotheses**, so the marker is a kernel fact whatever
+     the scan prints. Alternative: `private`, as 167 (b). Why not: these two are backlog rows cited by name, the plan prescribes
+     the marker for exactly them, and 167 (b)'s reason is met by the refutation. Confidence: medium-high; what the scan prints
+     for them joins the tooling job's questions (ruling 475 (d)). **Relay**: its foundation's names (`Plane/RingCalculus/Basic`:
+     `TileAt`, `IsTip`, `IsOuterTile`, `GammaFreeRing`, `QFreeRing`, `IsSemiHub`, and seventeen more) are what wave 9's planner
+     and wave 7's second pass will read; asked of K8 by message: commit that module alone after a build and send the hash, so
+     both take it by ancestry and re-declare nothing.
+
+519. **FS131-I10C done: all nine leaves of wave 10's `StandingFive` proved — with it every one of the wave's four first-pass files
+     holds no `sorry`, each on its own branch** (implementer, Opus; harness 444k by the task notice; record `fs131-w10c`'s
+     `plans/FS131-I10C-implementation.md` Stages 1–4; report `data/fs131/reports/FS131-I10C.md`; commits `ff01f137`, `429afe7d`,
+     `06420fee`, `057b769a`, `8ee0d85b`; pushed, tree clean). **Row TC1-STANDING-FIVE, clause by clause**: the standing field is a
+     number field of degree 28, totally real; exactly two primes above 2, neither split in `F(i)`, each of norm `128²` there
+     with conjugation moving an element; no usable residue field below 347 (`usable_card_ge`, by a `decide +kernel` over the
+     naturals below 347 that needs no primality); the same on the stable primes; `le_localBound` — "so `L(F) ≥ 7`" — over the
+     named hypothesis `StandingFloor n`, with `seven_le_localBound` and `five_le_chromaticNumber` (the latter also over
+     `Row123Chain`) resting on no `sorry`. **New statements, one mind, owed the planner's read-back**: `g_eta`, `cev_hvec`,
+     `finrank_E7_and_K`, `minpoly_eta`, `irreducible_gPoly`, `card_ge_of_usable`, `fourteen_dvd_of_char_two`,
+     `card_fixed_of_involution`, `two_sq_ne_of_isIntegral`, `dyadic_summary`, `exists_stablePrime_two`,
+     `im_eq_zero_of_aeval_gPoly`. **My receipt**: tip `8ee0d85b` equals `origin/fs131-w10c`, tree clean; no `sorry`, no `axiom`, no
+     `native_decide` anywhere in `StandingFive.lean` (1,283 lines), by grep; the full build log named by
+     `data/fs131/i10c/logs/build-3-final.log` ends "Build completed successfully (5754 jobs)", 0 warnings other than `sorry`, none
+     in `StandingFive` (the others are the three files proved on other branches); `axioms-final.log` parsed by script: 34
+     records, 32 on the standard three or a subset, one axiom-free, and the control (a leaf open on this branch) on `sorryAx`;
+     the nine leaves and the two compositions found by name; five statements compared with `f919973e` by `cmp` — identical.
+     **Items**: three generalizations (the usable clause and the dyadic clause hold at the maximal ideals of any commutative
+     ring holding the named elements; degree 28 and the irreducibility of `g` follow from the dyadic count, the plan's "mod 2
+     and mod 7" inputs unread); `StablePrime standingField` is inhabited, so `localBound` there is an infimum over a non-empty
+     family; **a correction owed to any front-page sentence: the kernel says "at least 347"; that a place attains 347 stays
+     [tools]**; a reading note (`card_quotient_of_two_mem` does not read its prime's stability; statement unchanged); slips, the
+     job's, disclosed (four, none reaching a commit's statements); three Lean facts, filed in `LEAN.md` today.
+520. **Rulings on I10C's held items, and its slot.** (a) **"347 is attained by a place of `F`" is not made a row**: the filed
+     row claims only that no usable residue field is small, the kernel's sentence is "at least 347", and the attainment stays a
+     [tools] remark in the module's docstring. Alternative: a row for the third planning pass (a prime above 347 of residue
+     degree 1). Why not: it is a sharpening no filed result states or uses. Confidence: high. (b) Whether
+     `NumberField standingField` becomes a global instance, and the read-back of the twelve new statements, go to wave 10's
+     third planning pass with the first two implementers' (rulings 494 (b), 507 (c)). (c) **Wave 10's first pass is ready to
+     land on its own**: a joining-and-landing job, FS131-L10A, merges `fs131-w10`, `fs131-w10b`, `fs131-w10c` and `main`,
+     drops the nine unread arguments (rulings 494 (a), 507 (a)), adds `StationarySet` to the vacuity scan's carriers, runs the
+     full gate and lands; the second pass's ten modules follow in a second landing when their leaves are proved. Alternative:
+     one landing for the whole wave. Why two: four files' results become held now instead of after three more implementers and
+     a planner, and the later branches then merge a `main` that already holds their imports. Confidence: medium-high. Brief not
+     written. (d) **Slot → FS131-K6c** (wave 6's third planner): wave 9's planner is next in the order but waits for wave 8's
+     shared module (item 518). In flight: 1 (K8) + 1 (I6B) + 1 (K6c) = 3.
+
+521. **The landing of wave 10's first pass is prepared; and a slip of mine** (2026-10-06). Branch `fs131-w10l` cut from `fs131-w10`
+     at `ace98a35`, its worktree made (build copied from `fs131-w10`, no `lake` running there), pushed; trial merges in the order
+     they will be made — `origin/fs131-w10b`, then `origin/fs131-w10c` — show one conflict each, `scripts/Axioms.lean` (three blocks
+     at one anchor); brief `data/fs131/briefs/FS131-L10A-wave10-land.md`, generator `mk-l10a.py`, gate PASS (the gate's own exit
+     status; a first run failed on two branch-only paths, replaced by full worktree paths). **The slip**: making that worktree I
+     changed directory into it inside one command, which the handoff's § 1 item 6 forbids for the top-level session (the harness
+     announces the change of directory); I returned to the main tree in the next command, no file was written from there, and no
+     running job has reported an effect. Compound commands on a worktree use `git -C` and absolute paths, as the rule says.
+
+522. **FS131-K6c, by message mid-job (its stage 13 saved at `66d688b6` on `fs131-w6`): a generalization of the pinch, a hidden
+     hypothesis in a filed result, and one open expectation settled** (source: K6c's message to "main", 2026-10-06). (1)
+     **FS111-M-PINCH reads no disjointness**: `TwoColourOn`'s field `disj` is never needed — with the cover alone the (in, in)
+     case is impossible, (in, out) gives one contact and the split type, and in (out, out) the two discs' intersection in `N` is
+     null by the cover, so they are tangent and each lies almost everywhere in the other set (source:
+     `plans/FS111-M2-regularity.md` § 2.2, "disjointness replaced by the one-component hypothesis", and its own check of each
+     cell). So the pinch holds on a cover's pinch set as it stands — FS111-M2-HULLC's clause (v). The second planner's
+     mutation-audit line "without `disj` its (out, out) case is false" is wrong; no statement is affected. It states the wider
+     form under its own name (`pinch_of_cover`), `pinch` its case. **My check**: the (out, out) cell redone by hand — a point of
+     both open discs in `N` would be almost everywhere in neither set, against the cover; it stands. (I6A's report had agreed
+     with that audit line because its proof of that cell used `disj`; a proof that uses a hypothesis does not show it is needed.)
+     (2) **A statement defect, a hidden hypothesis — FS121-DB1-L7** (`plans/FS121-derivation.md` l. 207), and through it
+     FS121-O1-OUT's first clause and FS111-M2-INTRAD's step (1): L7 says "at every point off Σ … REG-J′ is not used", and its
+     argument (`plans/FS121-DB1-verification.md` § 2.5) applies M-C11 (ii) on a neighbourhood of the parallel's point, which
+     with E8's erratum needs that neighbourhood free of cusps — the point off the *closure* of Σ, or Σ closed. Under REG-J′ Σ
+     is closed; without it nobody has derived that Σ is closed in a saturated colouring. **A gap at that step, not a
+     refutation; no counterexample.** L7 as filed is true at "the point has a neighbourhood missing Σ". Its shorter route for
+     the pointwise half: `pinch` at the partner point with the known contact gives its type at once. (3) Expectation X5 (b)
+     settled: FS121-O1-ENDS's "off a null set of normals" and FS121-DB1-L6's "finitely many" are both true (DB1 § 2.5 says the
+     bad normals are finite); no statement changes. **Rulings.** (a) `pinch_of_cover` as proposed; `TwoColourOn` unchanged.
+     Alternative: weaken the structure at the join. Why not: four branches read it, and the wider theorem costs one
+     declaration. Confidence: high. (b) **L7 is stated on an open set missing Σ with saturation there, and O1-OUT under local
+     finiteness**; **a correction owed** to FS121-DB1-L7's entry ("at every point off Σ" becomes "at every point with a
+     neighbourhood missing Σ"), with the wave's errata. (c) **A deriver's question, queued as FS131-E9**: is the singular set
+     closed in every saturated colouring, with no REG-J′? A yes restores the filed sentence; a no, or a stall, leaves three
+     filed results true only at the narrower class, and the rows that cite them "with no REG-J′" are then traced. Alternative:
+     leave it to the errata. Why a job: rows 142–144 lean on what holds without REG-J′, and this is the first place the
+     milestone has found one of those sentences resting on an underived step. Confidence: medium-high; brief not written — it
+     quotes K6c's record at its hand-back or at a saved stage.
+
+523. **FS131-K8, by message: wave 8's foundation is whole at `26b08395` on `fs131-w8`; wave 9 holds it by ancestry** (source: K8's
+     message to "main", 2026-10-06). **My receipt**: `26b08395` is an ancestor of `origin/fs131-w8`; from `611ffa39` it adds
+     `Proofs/HadwigerNelson/Plane/RingCalculus/Basic.lean` (372 lines; no `sorry`, no `axiom`, no `native_decide`, by grep), one
+     line of `Proofs.lean`, one row of `ARCHITECTURE.md`, 25 lines of `scripts/Axioms.lean`, and K8's stage-1 record with a rows
+     extract; the definitions read by name — `TileAt`, `IsTip`, `IsOuterTileAt`, `tipColours`, `outerTileColours`, `TipPairFree`,
+     `OuterPairFree`, `SemiKind`, `IsSemiHub`, `IsFullSemiHub`, `IsClosedChangePoint`, `GermOnQWith`, `GammaFreeRing`,
+     `QFreeRing`; it imports wave 7's `Plane/SimpleOn`. Not checked by me: a build of that exact commit (K8 built it in a tree that
+     also held two uncommitted modules; wave 9's planner builds the commit itself as its first act). **Its three name
+     corrections**: `IsOuterTile` became `IsOuterTileAt` (wave 5's `MapGraph` declares `ArcMap.IsOuterTile`);
+     `cos_nonpos_of_mem_coneAt` is wave 4's, not its own; `recip` and `anti` became `star_recip`, `star_anti` (`ArcMap.anti` is
+     landed) — the first caught by its second build at the root import, the slip in its record's § 5.8. **Done, mine**:
+     `fs131-w9`, untouched at `611ffa39`, fast-forwarded to `26b08395` and pushed; wave 9's planner's brief regenerated with a
+     paragraph naming the module and the two class predicates (`mk-kw.py 9 611ffa39`), gate PASS. **A slip of mine, again**: the
+     generator's edit put a block before the values it reads (the same mistake as before item 511's fix); one regeneration
+     failed with a `NameError`, caught by the generator's own exit, repaired by moving the block, and all three briefs
+     re-gated — the two launched planners' briefs left as committed.
+
+524. **FS131-K8 done at its Stage 5: wave 8's first planning pass — the foundation, three rows proved, eight rows stated with ten
+     leaves; the nine semi-hub rows and two more left to a second pass** (planner; harness 450k by the task notice; record
+     `fs131-w8`'s `plans/FS131-w8-kernel-plan.md` Stages 1–5; report `data/fs131/reports/FS131-K8.md`; commits `57a15317`,
+     `9e1c78f2`, `26b08395`, `f1c13612`; pushed, tree clean). **Proved**: FS116-RING-GERM in tile form, FS116-N2-STAR whole,
+     FS116-V6-ANTI class-free. **Stated, ten leaves** (`Star` 2, `Empty` 8): FS116-N2-RECIP, -N2-ANTI, -V6-HUBS, -V6-HUG,
+     -V6-COUNT, FS129-SR3-EMPTY-NS (carrying FS116-Y4-EMPTY and -Y4-OBST), FS129-SR3-OUTERADJ (carrying FS116-V6-ADJ),
+     FS129-MR1-DOUBLETIP. **Not stated, eleven rows**: the nine of `SemiHub`, FS116-N2-SIXRING, FS116-RING-TWIST-C — ten of them
+     disposed from their entries only. Its mid-job findings are items 518 and 523. **My receipt**: tip `f1c13612` equals
+     `origin/fs131-w8`, tree clean; `sorry` by the handoff's grep: `Basic` 0, `Star` 2, `Empty` 8 — the ten reported;
+     `Basic.lean` unchanged since `26b08395`; no line of `ARCHITECTURE.md`, `scripts/Axioms.lean` or `Proofs.lean` removed since
+     `611ffa39` (its repaired rename); the full build log named by `data/fs131/k8/logs/build-3-skeleton.log` ends "Build completed
+     successfully (5812 jobs)", 0 warnings other than `sorry`; no `axiom`, no `native_decide` in the three modules, by grep;
+     `v6_hubs_vacuous` and `v6_hug_vacuous` read at `Empty.lean` ll. 155–164 — each derives `False` from its lemma's class
+     hypotheses through `emptyNS`, as ruling 518 asked, and two `VACUITY DECLARED` markers stand. Not checked by me: the count
+     tool's 72 configurations; the dispositions against the unread arguments. **Items**: seven generalizations (item 518's five,
+     RING-GERM (ii) and STAR's outer clauses without non-Siamese in tile form, STAR right at "radius above 1"); a caution for
+     the route (V6-HUBS's count alone does not give `m ≤ 1`; the plan carries the colour argument as a child); two questions
+     for its second pass (is FS116-V5-OUT2 exactly `star_outer_cone`? two candidate narrowings, unverified); predictions scored
+     (its § 5.7); slips, the job's, disclosed — three names already on `main`, caught by the build; three landed registry lines
+     rewritten by its rename and restored by a second commit, no amend; twelve arguments unread; stages 2–5 one commit; a shell
+     removal of its own iteration files refused by the harness's safety check and not run, nothing deleted; a correction owed —
+     no Lean model yet for a change point of a four-colour vertex, and `emptyNS`'s model at a living parameter (a nine-colour
+     valid non-Siamese map with a Γ-free ring) is owed before the wave's gate.
+525. **Rulings on K8's held items, and its slot.** (a) **One implementer, FS131-I8A, on `Plane/RingCalculus/Empty`'s six leaves
+     on the route to `emptyNS`, then `Star`'s two if budget remains**, from a branch cut at `f1c13612`; `outerAdj` and
+     `doubleTip` wait for the second pass's plan. Alternative: two implementers by file. Why one: `Star`'s two leaves are about
+     400 lines by its count and no file is shared. Confidence: medium. (b) **A second planning pass, FS131-K8b**: the nine
+     semi-hub rows, SIXRING, RING-TWIST-C, the plans for `outerAdj` and `doubleTip`, the three words the foundation does not
+     define, and wave 7's FS114-N7-QOPP as a hypothesis under a name of wave 8's own. (c) **`emptyNS`'s nine-colour model
+     rests on wave 6's map**: FS131-I6B is building `sq9` as an `ArcMap 9` now; wave 8's implementer states the model's facts
+     in a module that imports it, taking that module by a merge of I6B's commit when it is in. Alternative: wave 8 builds its
+     own nine-colour map. Why not: one map, declared once. Confidence: high. (d) Briefs for I8A and K8b not written.
+     (e) **Slot → FS131-L10A**, the landing of wave 10's first pass (ruling 520 (c)), launched 2026-10-06; while it is in its
+     landing stage I commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`.
+     In flight: 1 (I6B) + 1 (K6c) + 1 (L10A) = 3.
+
+526. **FS131-K6c retracts item 522 (2): FS121-DB1-L7 stands as filed — "at every point off Σ", no REG-J′, no neighbourhood; the
+     defect was in the proof's route, not in the statement. Rulings 522 (b)'s correction and 522 (c)'s deriver job are
+     withdrawn** (source: K6c's message to "main", 2026-10-06; one retraction, K6c's, and one of mine). **Its four steps** for
+     the partner point `y = x + ν(x)` on the outward parallel of a tangent-type arc of radius `n` about `w`, with only `y ∉ Σ`
+     and saturation at `y`: (1) `y` is in the support of the inner colour `a` and is no density point of it; (2) off Σ it is no
+     cusp, so it is an essential boundary point with a centred two-colour ball; (3) the pinch at `y` with the known contact `x`
+     makes it split about `x` or tangent with normal along `x − y`; (4) split about `x` is excluded by the neighbouring parallel
+     points, each in the support of `a`, no density point of it, and strictly outside the closed unit disc about `x`. No
+     cusp-free neighbourhood, no M-C11 (ii), no straddle is read. **What does need a neighbourhood missing Σ**: only the
+     stronger local-structure clause ("near `y` the essential boundary is the arc of radius `n + 1`") — M-C11 (ii) at a point
+     whose two-colour ball may hold cusps, the question E8 already flagged under its erratum (item 491); every row K6c has
+     read that uses that clause does so under REG-J′, and FS121-D4-HOLE, which has no REG-J′, does not use it. **So no filed
+     result is at risk, and no consumer was found reading the clause without REG-J′.** **My check**: step (4)'s distance redone
+     by hand — `|(n+1)e(θ′) − n e(θ)|² = 1 + 2n(n+1)(1 − cos(θ′ − θ)) > 1`. **Owed instead**: one line under FS121-DB1-L7 that
+     its proof's appeal to M-C11 can be replaced by these steps (a shorter route), with the wave's errata. **Slips**: K6c's, as
+     it names it — it reported the defect from the proof's route before checking whether the statement needed it; **mine** —
+     I ruled a deriver's job and told Kooshi "a filed result rests on a step nobody has derived" on a mid-job message an hour
+     before its author's own check; the report said it was a gap and not a refutation, and it was still more than the record
+     supported. The correction goes to Kooshi in the next report. A statement defect reported mid-job by one mind is logged
+     and routed at once, and announced as a defect only when its reporter's saved stage carries it.
+
+527. **After a compaction (the fourth of this run): re-grounded from the handoff; two briefs written ahead of their slots —
+     FS131-I7A and FS131-I8A — and their trees made** (2026-10-06; main at `253818b8` = origin, clean; the three running
+     trees' tips equal origin: `fs131-w10l` `2a6bf3f2`, `fs131-w6` `66d688b6`, `fs131-w6m` `898f4443`). **FS131-I7A**
+     (`data/fs131/briefs/FS131-I7A-wave7-first.md`; tree `.claude/worktrees/fs131-w7a`, branch `fs131-w7a` from `b5ef0e39`,
+     build copied from `fs131-w7`, no `lake` running there): `Plane/RouteT/Count`'s nineteen leaves in K7's order, the two
+     `CountData` inhabitants its plan derives, then `Rainbow`'s `anchor` if budget remains. **FS131-I8A**
+     (`data/fs131/briefs/FS131-I8A-wave8-first.md`; tree `.claude/worktrees/fs131-w8a`, branch `fs131-w8a` from `f1c13612`,
+     build copied from `fs131-w8`): `Plane/RingCalculus/Empty`'s six leaves to `emptyNS`, then `Star`'s two (ruling 525 (a)).
+     Generator for both: `data/fs131/briefs/scripts/mk-i78.py 7|8 [<the commit holding sq9>]`; both gated, exit 0, 30
+     quotations each. **Rulings.** (a) **`anchor` goes to I7A as its last item, if budget remains.** Alternative: K7's
+     proposal, that it ride with the second planning pass's first implementer. Why this: no such implementer exists until
+     K7b hands back, `Rainbow` is nobody else's file, and K7 priced the leaf at about 60k on top of 200–250k. Confidence:
+     medium; if I7A's count is past about 350k at `Count`'s last stage it leaves the leaf and says so. (b) **I8A's brief is
+     regenerated with `sq9`'s commit once FS131-I6B is back** — the model of `emptyNS`'s hypotheses but six colours becomes
+     its last item (a module importing wave 6's map, by a merge of that commit); launched before then, the brief says the
+     model is owed and names it, and I send the commit by message. Alternative: hold I8A until I6B is back. Why not: its six
+     leaves read nothing of the map. Confidence: high. **A wording I corrected before the gate** (mine, in the draft):
+     `emptyNS` reads "at least four colours" and no simplicity — the brief now says what the statement says and cites row
+     148 and the entry, not a paraphrase of the row. **Still not written**: K10c, K7b, K8b, MD1, MD2.
+
+528. **Two more briefs written ahead of their slots: FS131-K7b and FS131-K8b, the second planning passes of waves 7 and 8**
+     (mine; 2026-10-06; generator `data/fs131/briefs/scripts/mk-k78b.py 7|8`; `data/fs131/briefs/FS131-K7b-wave7-second.md`,
+     `FS131-K8b-wave8-second.md`; each gate exit 0, 33 quotations). **K7b**, on `fs131-w7` at `b5ef0e39`, new modules only
+     under `Plane/FourColour/`: the four flagged places first (N3-FACE, N3-ODD, N4-LENS, N7-QOPP), each from its argument;
+     the four-colour foundation (the tactic edge, the degree-4 vertex, the lens, the Reuleaux bowtie, the pinwheel); the
+     thirteen rows, FS114-N2-ENDS's second sentence and N3-PAY; FS114-Y2-BOWTIE's kernel route priced. **K8b**, on `fs131-w8`
+     at `f1c13612`, new modules only under `Plane/RingCalculus/`: the first pass's questions first; the three undefined words;
+     the nine semi-hub rows, SIXRING, RING-TWIST-C; the plans for `outerAdj` and `doubleTip`; FS114-N7-QOPP as a hypothesis
+     under wave 8's own name. **Rulings.** (a) **Both planners state FS114-N7-QOPP's two forms to meet at the join, through
+     me**: K7b sends its statement of the row when fixed, K8b its definition of the hypothesis, and I relay each to the
+     other. Alternative: K8b waits for K7b. Why not: ruling 498 — a hypothesis discharged at the join costs a few lines, and
+     the relay keeps the two from drifting. Confidence: high. (b) **A shared module of the second passes travels by
+     ancestry, as before**: K7b commits its foundation alone after a build and sends the hash; a name K7b wants from wave
+     8's `Plane/RingCalculus/Basic` is a merge of `26b08395` that I ask of it by message, never a re-declaration.
+     Alternative: I merge `26b08395` into `fs131-w7` now. Why not: the two branches each added lines to `Proofs.lean`,
+     `ARCHITECTURE.md` and `scripts/Axioms.lean` after `611ffa39`, so it is no fast-forward, and a merge with registry
+     conflicts is a planner's build, not a coordinator's edit. Confidence: medium-high. (c) **K8b puts SIXRING and
+     RING-TWIST-C in a module of its own**, not in `Star` as the first pass assigned them. Why: FS131-I8A proves `Star`'s
+     two leaves on a branch of its own, and two branches do not edit one file where a new module serves. The one exception
+     in K8b's brief: the statements of `outerAdj` and `doubleTip` in `Empty`, the two leaves I8A leaves alone, which K8b
+     may correct after telling me. Confidence: high. **A lesson carried into both briefs** (item 526): a mid-job report
+     says whether it is a statement that lacks a hypothesis or a route that reads more than the statement needs.
+     **Corrected before the gate, mine**: three sentences of the drafts claimed more than their sources (that the top
+     three stubs read wave 7's rows; that both first passes lost a build to a doubled name — only wave 8's did; a quoted
+     phrase in prose) — replaced by what the records say. **Still not written**: K10c, MD1, MD2.
+
+529. **The last three briefs of the queue written and gated — FS131-MD1, FS131-MD2, FS131-K10c; every job in the handoff's
+     order now has a brief — and a correction owed to Kooshi, mine** (2026-10-06). **MD1** (`data/fs131/briefs/
+     FS131-MD1-closers.md`; tree `.claude/worktrees/fs131-wd1`, branch `fs131-wd1` from `main` at `1ed1cfd2`):
+     `stuckModel.IsTerminalMap` whole — `Terminal` by MC1's route (its record § 3.2), `QROnly` with no route written — in a
+     new module, then the three `example`s and the three heads' docstrings. **MD2** (`FS131-MD2-closers.md`; tree
+     `fs131-wd2`, same base): `hornModel.IsClean` and an honest list for `Procedure`'s other ten heads, the contact fact at
+     `stuckModel`'s vertex, a named `CollarFitOut` on `awayModel`'s gap — sixteen of the twenty-nine open gate items.
+     Generator `data/fs131/briefs/scripts/mk-md.py 1|2`; builds copied from `fs131-wmb` (idle; its Lean inputs equal
+     `main`'s, by `git diff`). **K10c** (`FS131-K10c-wave10-third.md`, generator `mk-k10c.py [<branch>=<tip> …]`; on
+     `fs131-w10k` at `330d2f48`, new modules only): the read-back of `[Weil1948]` p. 207 against `KloostermanBound` before
+     any Lean, the import with its four items in a module of its own, the floor's three theorems applied to it; then
+     J45-SI-5, J45-SI-C's measure part, J45-N1 (a)(b) or its interface, the level row; then the read-backs (I10C's twelve
+     statements, the second pass's implementers' as they return). Gates: exit 0 each (27, 23, 34 quotations); MD1's first
+     run failed on a bare file name, fixed. **Rulings.** (a) **The two closers do not land themselves; the next landing
+     job merges their branches.** Alternative: each runs the full gate and fast-forwards `main`. Why not: a full gate each
+     for docstring lines and a few hundred lines of models, with truth not in question and nothing waiting on them.
+     Confidence: medium-high. (b) **Each closer writes in a module of its own and edits `Applied` only at its own
+     `example`s** (MD1: the three that take `Terminal` / `IsTerminalMap`; MD2: the one that takes `IsClean`), and the
+     docstrings of its own heads, in disjoint files. Why: two branches, no shared region. Confidence: high. (c) **K10c
+     stops and messages before any axiom if the page and the statement differ in a way it cannot close**; the read-back's
+     verdict is its own. Alternative: I do the read-back. Why not: `LEAN.md` § Assumptions puts it in the planner's record,
+     and my reading (item 515) located the sentence without comparing it clause by clause. Confidence: high.
+     **A correction owed to Kooshi — slip, mine, in item 515 (c) and in two reports**: I said the import "raises the
+     audit's imported count from 4 to 5". The audit's "imported" count is of *records* that rest on a declared outside
+     theorem (`scripts/axioms.sh`, `imported++` per record under IMPORTED; `LEAN.md` § Trust ledger): today 4 records rest
+     on one axiom, `falconer_lemma2_nonempty` (`rg '^axiom '` over `Proofs/` finds it and the native-evaluation example
+     only). With Weil's bound the **declared outside theorems go from one to two**, and the imported count rises from 4 by
+     however many records rest on the new one — at least the three the floor states. Found while writing K10c's brief,
+     which now says so; the handoff's § 9 line corrected; to be told to Kooshi in the next report.
+
+530. **FS131-I6B done: `sat_inP` proved (FS121-C1-SAT), at a wider class than filed, with its Lean model — the nine-colour grid as
+     an arc map; `MapColouring` has no open leaf** (implementer, Opus; harness 407k by the task notice; record `fs131-w6m`'s
+     `plans/FS131-I6B-implementation.md`; report `data/fs131/reports/FS131-I6B.md`; commits `898f4443`, `8c1b238f`, `2e55a2d6`;
+     pushed, tree clean). **Proved**: `sat_inP` as fixed at `3928644b`; `sat_noPar` now free of `sorry` through it;
+     `ArcMap.bound_of_saturatedOn` — an arc map whose regions are a.e. a family saturated on an open set `U`: every point of
+     `U` in the domain and in the closures of two different colours' regions is in the unit shadow of the first's closure —
+     no colouring, no plane map, no order of the colours; `sat_bound_of_mem_closure`; two local facts on essential boundary
+     points of a region (`Plane/Saturated/MapEdge`, new). **The model**: `sq9Map : ArcMap 9` (`Plane/Saturated/Sq9Map`, new)
+     and `sq9Map_sat_model` — every hypothesis of `sat_inP` at once at `k = 9` with a separating point; four `example`s apply
+     the theorems to it. **My receipt**: tip `2e55a2d6` equals `origin/fs131-w6m`, tree clean; the last real build's full log
+     (`build/gate/build/20261006T142137Z-528180.log`, 3 modules rebuilt) ends "Build completed successfully (5808 jobs)",
+     21 warnings, all `declaration uses sorry` in `Pinch.lean` (the other implementer's file, proved on `fs131-w6p`), none
+     elsewhere; `sorry` by the handoff's grep: `MapColouring` 0, `MapEdge` 0, `Sq9Map` 0, `Basic` 0, `Pinch` 7; no `axiom`, no
+     `native_decide` in the three files; `data/fs131/i6b/logs/axioms-3.txt` parsed by script — 46 records, each on exactly the
+     standard three, and the planted control prints `sorryAx`; `Basic` and `Pinch` byte-identical to `3928644b` (`git diff`
+     empty); `MapColouring`'s fourteen earlier declarations compared head by head with `3928644b` — all the same, four added;
+     `sat_inP`'s statement read then and now — identical; `bound_of_saturatedOn`'s statement and proof read at ll. 196–217 —
+     it says what the report says, and its proof reads `SaturatedOn` on a ball inside `U`, closedness of the unit shadow,
+     and the accumulation lemma; `./scripts/dupnames.sh` log "OK — no name is declared by two modules". Not checked by me:
+     `MapEdge`'s 519 lines beyond the build; the three planted Lean faults' logs. **Findings**: (1) *a generalization* —
+     nothing in `MapColouring` reads the second clause of `SeparatesAt` (a ball in the union of the two closures): `sat_inP`
+     and the planner's `gmap_i` read the first clause only, so FS121-C1-GMAP and FS121-C1-SAT stand over a closure-level 𝒫_k
+     with a weaker C121-NOPAR; (2) *a correction owed* — the planners' record § 3.3 says the closure-level form "would make
+     FS121-C1-SAT false at a vertex where colour `i` has a cusp", and the kernel now proves it true there; (3)
+     `bound_of_saturatedOn` at `C = F.region`, `U = ball p ρ` is the bound FS116-O1-SATPIN's "saturated on a disc" reads;
+     (4) believed and not proved: `sat_inP` holds without `hF`. **Prediction scored**: the plan priced `sat_inP` at two days
+     ("its cost is wave 3's sector machinery"); leaf and model took under an hour by a route reading
+     `GoodAt.exists_local_curve` and no sector chart. **Slips, the job's, disclosed**: its statement check's first planted
+     fault changed a doc comment the check ignores and passed — caught from the exit status, the plant now asserts it changed
+     a read line. **Tidy items for wave 6's join**: `MapEdge.isPreconnected_puncturedBall` restates
+     `isPreconnected_ball_diff_singleton` (`Plane/ValidMap/Limit`, not upstream of `Plane/Saturated`), and four density
+     facts under `MapEdge` are generic. **Credit**: it stated the theorem at the class its argument reads and found the
+     definition's second clause idle, and it read its control's exit status instead of trusting the plant.
+     **Rulings.** (a) **`SeparatesAt` keeps its second clause for now; no statement changes on a branch.** The finding is
+     relayed to wave 6's third planner (running), who says in its handoff whether any row of its own reads the clause; the
+     weakening of C121-NOPAR is decided at the wave's join with that answer, and the errata line under FS121-C1-SAT joins
+     the wave's errata. Alternative: drop the clause now. Why not: four implementers' branches are cut from commits holding
+     the definition, the clause is a hypothesis of rows not yet read against it, and a weaker named hypothesis loses
+     nothing by waiting. Confidence: high. (b) **The correction to the planners' § 3.3 is the third planner's, as a dated
+     line in its own stage** (relayed by message, 2026-10-06, with (1) and (3)). (c) **Ruling 525 (c) and 527 (b) amended:
+     `emptyNS`'s nine-colour model is not FS131-I8A's item; it is a job after I8A, on a line that holds both waves.** What
+     changed: the map exists with `IsPlaneMap` only — `Valid`, `NonSiamese`, `Covers`, four colours at a lattice vertex and
+     the ring are five unproved facts about a new map, a job of its own size; and `fs131-w6m` carries `Pinch`'s seven open
+     leaves and three registry files' edits, which a merge would put in wave 8's implementer's tree. Alternative: as ruled,
+     I8A merges `2e55a2d6` and proves the model last. Confidence: medium-high; "one map, declared once" stands. I8A's brief
+     regenerated (`mk-i78.py 8 2e55a2d6`), gate exit 0. (d) The gate-side drafts (`LEDGER.md` row 143, the errata) are held
+     for the filing. (e) **Slot → FS131-K9** (wave 9's planner, on `fs131-w9` at `26b08395`), launched 2026-10-06, its
+     brief amended at launch with `emptyNS`'s statement, wave 7's state and item 526's lesson (`mk-k9-amend.py`; gate exit
+     0, 16 quotations). In flight: 1 (K6c) + 1 (L10A) + 1 (K9) = 3.
+
+531. **FS131-K6c done at its Stage 15: wave 6's third planning pass — seventeen of the twenty-three rows left, and one clause of
+     another, stated as thirty-four leaves in four new modules; the fragment's six left to a fourth pass** (planner; harness
+     523k by the task notice — past the line, not to be resumed; record `fs131-w6`'s `plans/FS131-w6-kernel-plan.md` Stages
+     13–15; report `data/fs131/reports/FS131-K6c.md`; commits `66d688b6`, `d9d8742f`, `6fc27fa1`; pushed, tree clean).
+     **Modules, all new**: `Plane/Saturated/CoverHull` (4 leaves), `Parallel` (13), `Centre` (7), `Accumulation` (10).
+     **Stated**: FS121-DB1-L7 and -O1-OUT (the outward parallel and its family), -DB1-L6 and -O1-ENDS (the chain inward and
+     its ends), FS111-M2-INTRAD (integer radii), FS121-V5-LOC (iii), -V3-CPI, -V2-VT-W with -D1-VT its `C¹` case,
+     -D1-EROSION, -D1-PENCILWIN, FS111-W-KB-DIR, FS121-V5-RAY, -D2-SYM, -D2-THIN, -D2-PERFIN, -D2-EXT, -D4-HOLE, FS111-M2-HULLC
+     with `pinch_of_cover` (ruling 522 (a)), and the agreement of the two readings of the singular set under saturation
+     (ruling 502 (c)). **Proved**: `IsRegularMUA.interior_inter_ball`, `SingLocallyFinite.isClosed`, four corollaries over
+     leaves. **Not stated**: FS116-O1-SATPIN, -N1-AXIS, -S1-RUNG, -V4-PARTNER, -S1-KAPPA, -S1-PAIR (arguments unread);
+     FS111-M-C11 on a cover; FS111-W-NOBEND's argument still unread. **My receipt**: tip `6fc27fa1` equals
+     `origin/fs131-w6`, tree clean; the wave's eight earlier modules untouched since `32f2ab4c` (`git diff` empty) — 862
+     lines added in the four new files and three registry files; the last real build's full log
+     (`build/gate/build/20261006T143138Z-602120.log`, 4 modules rebuilt) ends "Build completed successfully (5815 jobs)",
+     277 warnings, every one `declaration uses sorry`; `sorry` by the handoff's grep: `CoverHull` 4, `Parallel` 13, `Centre`
+     7, `Accumulation` 10 — the thirty-four — and 31 as given (`Curve` 6, `FanBridge` 12, `LocalGraph` 5, `MapColouring` 1,
+     `Pinch` 7); no `axiom`, no `native_decide` in the four; the driver log's `build exit 0`, `arch exit 0`, `dupnames exit
+     0`, and the doubled-name log's "OK"; two statements read against their rows — `pinch_of_cover` is `pinch` with
+     `TwoColourOn` replaced by measurability, an a.e. cover of `N` and the weak (H2) on each set, the same conclusion;
+     `tangent_parallel_out` asks of the partner point only `∉ c.singularSet` and saturation on a set holding it, as item 526
+     has FS121-DB1-L7. Not checked by me: the other thirty-two statements against their rows; its scratch axioms print; the
+     prices. **Findings, the job's** (its record § 14.2; each a dated erratum line drafted at § 15.4 item 2): FS111-M-PINCH
+     reads no disjointness; FS121-DB1-L7 stands with a shorter route (item 526); FS111-W-KB-DIR is a fact about one
+     measurable set with null unit pairs; FS121-D2-THIN is the contrapositive of -D2-SYM's main clause; FS121-O1-ENDS's two
+     cases have one conclusion in sectors; FS121-D2-EXT, -V5-RAY, -D2-PERFIN, -D1-EROSION each read less than filed;
+     FS111-M2-HULLC (iv)'s boundary clause needs no finiteness of components; **no row it read uses the local-structure
+     clause of L7 / O1-OUT / INTRAD without REG-J′**, so nothing waits on E8's flagged question (its § 14.3). **Its answer
+     to item 530's relay**: none of its rows reads `SeparatesAt` or `InP` (§ 15.7); the correction to § 3.3 is made by a
+     dated line. **Predictions scored** (its § 15.6): 0 standing statement defects against a registered 4 [1, 8] — below
+     the interval; 17 rows stated against 14 [8, 23]; 2 leaves proved against 2. **Its price**: about 49 agent-days for the
+     34 leaves on the planners' scale, which the two implementers measured so far have beaten by an order of magnitude.
+     **Slips, the job's, disclosed**: the defect reported and withdrawn (items 522, 526); `debruijn-domain-modeling` not
+     invoked fresh in this pass (nine new definitions, each with a spec example); it could not read the harness's count and
+     stopped by its own. **Owed before the wave's gate** (its § 14.6): `sq9.SingLocallyFinite` (FS131-I6D's), R7 as a
+     colouring with a fan, `sq9`'s two periods, a chart and a two-branch fan for `sq9`. **Credit**: seventeen rows read
+     from their arguments with nine found to read less than filed, and a table (§ 14.3) that answers which rows lean on
+     the flagged clause.
+     **Rulings.** (a) **FS111-M2-HULLC is stated at its level-set conclusion, with no hypothesis named for the
+     finite-perimeter step** (ruling 487 (b)'s condition, met as far as read). Alternative: name the classical hypothesis
+     now. Why not: no row read uses the conclusion it would give, and naming it later is one line. Confidence: medium —
+     the fragment's rows and wave 9's are unread by it; the fourth pass and wave 9's planner say if one reads it. (b)
+     **Four implementers by file, on branches to cut from `6fc27fa1`**: FS131-I6L (`Parallel`, 13 leaves), FS131-I6H
+     (`CoverHull`, 4), FS131-I6Z (`Centre`, 7), FS131-I6K (`Accumulation`, 10); I6L first, because the other two of the
+     ladder read its statements and a defect found there changes theirs. Briefs not written. (c) **The three cell lemmas
+     of a fan are FS131-I6E's to declare** (its brief exists and it launches earlier; `sector_alone` reads them); I6Z
+     takes them by ancestry from I6E's commit if it is in, else as hypotheses under names of its own. The fact "a
+     tangent-type point has positive upper density of each colour" is I6L's; I6Z takes it the same way. Alternative: the
+     planner's "whichever lands first". Why: a named owner needs no race, and the join then makes no choice. Confidence:
+     high. I6E's brief gets a dated amendment at its launch. (d) **A fourth planning pass, FS131-K6d**: the fragment's six
+     with their arguments, FS111-M-C11 on a cover, FS111-W-NOBEND's argument, the plan for the owed inhabitants — with
+     `ArcMap.bound_of_saturatedOn` and `sq9Map` (item 530) as inputs, and **a fresh domain-modeling pass over the third
+     pass's nine definitions as its first act** (the disclosed slip is met there, not by resuming a planner past its
+     line). Brief not written. (e) The deriver's question on `curvature_integer_ae` is sent only if I6L stalls there, as
+     drafted (record § 15.4 item 3). (f) The errata lines are held for the filing. (g) Ruling 530 (a) now has its answer:
+     the readers of `SeparatesAt`'s second clause are none; whether the clause and C121-NOPAR are weakened is decided at
+     the wave's join. (h) **Slot → FS131-I6C** (`Curve`, then `LocalGraph`, on `fs131-w6c`), launched 2026-10-06, its
+     brief amended at launch (one line asked of its report: where `local_graph`'s proof reads disjointness; gate exit 0).
+     In flight: 1 (L10A) + 1 (K9) + 1 (I6C) = 3.
+
+532. **The briefs that item 531 ruled are written and gated: FS131-I6L, FS131-I6Z, FS131-I6K and FS131-K6d; trees made** (mine;
+     2026-10-06). **I6L** (`data/fs131/briefs/FS131-I6L-wave6-third.md`; tree `fs131-w6l`): `CoverHull`'s four leaves, then
+     `Parallel`'s thirteen — seventeen. **I6Z** (`FS131-I6Z-wave6-third.md`; tree `fs131-w6z`): `Centre`'s seven. **I6K**
+     (`FS131-I6K-wave6-third.md`; tree `fs131-w6k`): `Accumulation`'s ten. All three branches cut from `6fc27fa1`, builds
+     copied from `fs131-w6` (idle), pushed; generator `data/fs131/briefs/scripts/mk-i6k.py L|Z|K [<the commit holding the
+     cell lemmas>]`, which reads each file's open leaves from the tree; gates exit 0 (I6L's first run failed on a bare file
+     name, fixed). **K6d** (`FS131-K6d-wave6-fourth.md`, generator `mk-k6d.py`; on `fs131-w6` at `6fc27fa1`): the join of
+     the two proved branches into the wave's line, a fresh modeling pass over the third pass's definitions, the fragment's
+     six rows, the pinch's consequences on a cover, FS111-W-NOBEND's argument, and the owed inhabitants stated as leaves;
+     gate exit 0. **Rulings.** (a) **Ruling 531 (b) amended: three implementers, not four** — `CoverHull`'s four leaves
+     ride first in I6L's job. Alternative: a job of its own (FS131-I6H). Why not: the planner prices them at 1.2 days on a
+     scale the wave's implementers have beaten tenfold, `pinch_of_cover` is an adaptation of a proof that exists, and four
+     set-algebra leaves re-price `Parallel` for the same mind. Confidence: medium-high. (b) **K6d's first act is the merge
+     of `43ea4886` (`Pinch` proved) and `2e55a2d6` (`MapColouring` proved, `MapEdge`, `Sq9Map`) into `fs131-w6`**, each
+     followed by a build, the doubled-name check and a statement check. Alternative: a joining job of its own, or I merge.
+     Why the planner: its rows and the owed inhabitants are stated over `sq9Map` and `ArcMap.bound_of_saturatedOn`, which
+     reach its branch only by that merge; the registry files conflict by adjacent additions, and a merge that needs a build
+     is not a coordinator's edit. Confidence: medium-high; a merge that conflicts in a Lean file stops and comes to me.
+     (c) **`sq9Map`'s unproved facts (`Valid`, `NonSiamese`) are stated by K6d in wave 6's line**, as leaves; wave 8's
+     model job (ruling 530 (c)) takes that module by ancestry. Why: the fragment rows' inhabitant lines and `emptyNS`'s
+     model need the same facts about one map. Confidence: high. (d) I6Z's brief has two forms: without the cell lemmas'
+     commit it takes them as hypotheses under its own names; regenerated with FS131-I6E's commit it merges that commit
+     first. **Corrected before the gate, mine**: three sentences of K6d's draft (a count of implementers; "stands on" for
+     the six rows' relation to the local exclusion; a gloss of the planner's name R7 that I could not source) replaced by
+     what the records say. **Disk**: 301 GB free of 1.9 TB after ten new trees today at 4.9 GB a build copy; the finished
+     trees' removal is held for the filing (handoff § 8) and becomes due earlier if free space falls under about 150 GB.
+     **Every job ruled so far has a gated brief.**
+
+533. **FS131-K9, by message mid-job: five findings from reading wave 9's eleven rows — no row refuted; a supporting lemma that
+     belongs to wave 6; a hypothesis from outside the backlog; two rows that are one theorem; a correction to a ruling of mine**
+     (source: K9's message to "main", 2026-10-06; its Stage 1 saved at `67c86f8f`, equal to `origin/fs131-w9` — checked; the
+     findings are not yet in a saved stage's Lean, and by item 526's rule none is announced as a defect: K9 labels each, and
+     none is a statement defect). **(1) FS111-M-REDUCE-I cannot be formalized on wave 9's branch**: its words (honest,
+     saturated, Σ, REG-J′) are wave 6's foundation and its `uses only` names wave 6's rows (`plans/FS111-derivation.md`
+     l. 619 — read by me: FS111-M-C11 off Σ, the finitely-many-arcs clause, FS111-W-NOBEND, FS111-M-EXTREME or V0-CLEAN's
+     island fill). FS129-OR1-TOP5 reads it only as an implication, so K9 states TOP5 for any predicate on five-colourings with
+     that implication as a hypothesis. **(2) A hypothesis from outside the backlog**: FS111-C1-PW rests on FS107-W-EQ-K's ⟹
+     (a compactness step), and FS-107 has no backlog row (`grep -c FS107 plans/LEAN-BACKLOG.md`: 0); it enters as the named
+     `Prop` `WEqKLimit K`. **(3) A shorter route**: over arc maps FS111-V0-CLEAN's cleaning and three steps of
+     FS111-M2-REDUCE-C are read by no consumer; one theorem carries both rows — an a.e. cover of the plane by `k` sets with
+     null unit pairs whose frontiers lie in a locally finite family of segments and circular arcs gives a valid `k`-coloured
+     arc map of the plane — reading no tightness and no six. **(4) A generalization**: FS111-C-SIX-M is FS111-V0-RESCALE's
+     contrapositive at every `k`. **(5)** FS129-OR1-DISCF-NS carries no outside hypothesis (its registered 0.8 that it
+     would was wrong); **and for a row that is an implication between two class statements, the `SimpleOn` form is not
+     formally stronger than the row as filed** — the hypothesis grows with the class — so it states each such row twice.
+     Also a route fact for FS129-SR1-BENDANY: the away bend on a fragment of radius below 2 is a new leaf. **Rulings.**
+     (a) **The plan's R13 is amended: FS111-M-REDUCE-I is stated in wave 6's tree, by its fourth planner; TOP5 is proved in
+     wave 9 at the abstract class, and its instance is made where the two waves meet.** Alternative: it stays a named
+     hypothesis of TOP5's instance and is not formalized in this milestone. Why: R13 ruled it formalized, its inputs are
+     wave 6's vocabulary, and that planner reads FS111-W-NOBEND's argument already. Confidence: medium-high; if the fourth
+     pass does not hold it, it is a named hypothesis and a row for a later pass. K9 is asked for the exact Lean form of
+     TOP5's hypothesis when its skeleton builds, for me to relay. (b) `WEqKLimit K` is adopted as a named hypothesis and
+     joins the plan's § 7.4 list at the filing; **a stub to mint**: FS107's compactness step in Lean (Blaschke selection
+     for arcs), unpriced. (c) The one theorem for V0-CLEAN and M2-REDUCE-C's first clause, and C-SIX-M at every `k`, are
+     adopted; each row's read-back says what the filed row had that the theorem does not read. (d) Rows that are
+     implications between two class statements are stated twice. **A correction to my ruling 508, mine**: its reason
+     ("by `Simple.simpleOn` every row proved under the narrow hypothesis gives the row as filed, so the choice cannot
+     lose a result") holds for non-existence rows only; the ruling stands, its sentence does not, and the second
+     planners of waves 7 and 8 are told in their briefs. **My check of one**: (5)'s logic — `SimpleOn S` is weaker than
+     `Simple`, so a hypothesis quantified over the `SimpleOn` class is the stronger hypothesis, and the implication over
+     the wide class does not entail the one over the narrow. **Relayed**: all five rulings to K9 by message.
+
+534. **FS131-K9, by message: the exact Lean form of FS129-OR1-TOP5's hypothesis — received, read at its source, and placed in
+     wave 6's fourth planner's brief by quotation** (source: K9's message to "main", 2026-10-06; its skeleton commit `045fada3`,
+     equal to `origin/fs131-w9`, tree clean — checked). **Read by me** at
+     `fs131-w9`'s `Proofs/HadwigerNelson/Plane/Reduction/Maps.lean` ll. 85–108 and `Basic.lean` l. 62: `ExistenceForm P :=
+     ∀ c : AeColouring k, c.Tight → ∃ c', P c'`; `ReduceToMap P RegJ := ExistenceForm P → RegJ → RegA k`; `RegA k := (∃ c :
+     AeColouring k, c.Tight) → ∃ F : ArcMap k, F.IsPlaneMap ∧ F.Valid`; `top5 (hRed : ReduceToMap P RegJ) (hJ : RegJ) :
+     ExistenceForm P ↔ 6 ≤ chiM0`, proved there from a general-`k` form — as its message has them. **Its three notes for
+     wave 6's planner**: `P` is on a colouring, not a family; `RegJ` is one bare `Prop` (REG-J′₅ of the produced colouring
+     goes inside `P`); the conclusion is an arc map, so M-REDUCE-I's map needs segment-and-arc interfaces, which integer
+     radii give under REG-J′. **Done**: K6d's brief regenerated with the four statements quoted from the tree and the notes
+     relayed as K9's (`mk-k6d.py`; gate exit 0, 36 quotations). **To read at K9's hand-back**: `top5` against row 154's
+     sentence — in particular that `ExistenceForm` records only that some colouring with `P` exists once a tight one does,
+     not a relation between the two.
+
+535. **FS131-L10A done: wave 10's first pass is on `main` through the full gate — `c70a1cf8..002c921a`, a fast-forward; gated
+     commit `999cde4a`; `plans/` and `data/` only after it** (implementer, Opus; harness 538k by the task notice — past the
+     line, not to be resumed; record `plans/FS131-L10A-landing.md` Stages 1–6 with "Drafts for the front page"; report
+     `data/fs131/reports/FS131-L10A.md`; logs and receipts `data/fs131/l10a/`, tag `first`). **Landed**: `Arith/
+     CharacterColouring`, `SpectralInputs`, `StationaryRatio`, `StandingFive` — 253 hand-written theorems, 0 `sorry`; the
+     rows FS89-S0A-2, -S0A-10, -CL2, the erratum's `A`, J45-SP-oi, -SP-if, -N2, -N1 (c), -SI-4, X25B-P, -PZ, -L1,
+     TC1-STANDING-FIVE, each at [kernel] with its named hypotheses listed by name (its draft 5: eleven of 244 theorems take
+     one; none is an axiom). **The ruled tidies made** (rulings 494 (a), 507 (a)): two unread instance arguments dropped,
+     three rows now carry their general twins' statements and the twins are deleted; `StationarySet` entered as a carrier
+     of the vacuity scan (507 (d)). **The gate on `999cde4a`, every step exit 0**: build 0 warnings; `sorry` 0; doubled
+     names OK; axioms 5,809 records — 5,783 clean, 17 axiom-free, 4 imported, 5 purchases; vacuity `declarations=13767
+     refutations-skipped=192 sites=1173`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1130 unknown=2`; architecture,
+     lint, notes, records and row checks pass. **My receipt**: `origin/main` = `origin/fs131-w10l` = `b344490e` at the
+     hand-back, tree clean; `git diff --name-only 999cde4a origin/main` outside `plans/` and `data/`: empty; the gate's
+     head file names `HEAD=999cde4a…` and its pass summary reads exit 0 at every step; `sorry` by the handoff's grep over
+     `Proofs/` on `main`: 0 (the five "wide" lines are the word in docstrings, read); `data/fs131/l10a/build-main-full.log`
+     ends "Build completed successfully (5814 jobs)", 0 warnings; `scripts/gate_report.py axioms` and `vacuity` run by me
+     against the example maps' receipts — 5,809 records, 259 added and 0 removed, every added record CLEAN (254 on exactly
+     the three, three on `[propext, Quot.sound]`, one on `[propext]`, one on none), one declared import still
+     (`falconer_lemma2_nonempty`), `vacuous=0`, each recorded count "STALE" before the filing and "match" after;
+     `vacuity-selftest-first.log` l. 71 "all 65 controls behaved". Not checked by me: the sixteen statement comparisons
+     across the merges; the record's table of named hypotheses against the signatures. **Filed** (commit `c6990ba5`):
+     `CLAUDE.md` § Trust ledger and § The gate, `LEAN.md`'s control count (sixty-five), the `GATE_CHANGES` entry;
+     `tools/claude_md_fact_audit.py --base 1adf15ba` loses the thirteen superseded tokens only, `--dupes` exit 0.
+     **Open gate items it lists** (its draft 6): `sp_if` at `Interface.NegCircle` (closes with FS131-I10F's
+     `negCircle_trivial_bot`); `contChars_haar_null`, `spectral_carried_iff`, `si4`, `si4_equivariant` — no inhabitant
+     note and no model of all hypotheses at once; **`usable_card_ge` and `no_small_usable` bound a family the kernel does
+     not know non-empty** — no usable place of the field is exhibited in Lean. **Tool defect**: the vacuity scan's own
+     procedure cannot be met for a carrier that is empty at no instance (`StationarySet` has no `VACUOUS` control).
+     **Slips, the job's, disclosed** (five; its record), and one note: its loaded copy of `CLAUDE.md` showed counts two
+     landings old — it reconciled against the file on disk. **Credit**: one clean pass of the gate, every statement
+     change shown by script to be exactly the ruled ones, and the open gate items named instead of passed over.
+     **Rulings.** (a) **`StationarySet` stays a tracked carrier, as landed.** Alternative: out — one name removed,
+     three controls and their lines with it, counts back to 1137 sites. Why not now: it changes the scan's inputs on
+     `main` and needs its own pass; whether the procedure's law or ruling 507 (d) is right is the tooling job's fifth
+     question (ruling 475 (d)). Confidence: medium. (b) **Its three lines in `scripts/vacuity.sh` stand**: the
+     procedure's step (3) puts them there; the omission from its touches was my brief's — a slip of mine. (c) **Ruling
+     520 (a) is amended: a usable place of the field is owed as a Lean inhabitant, or the two theorems stay an open
+     gate item by name.** Wave 10's third planner states it as a leaf with a plan and a price (a prime above 347 of
+     residue degree 1, or any usable prime) and plans the notes or models for the four J45 heads; the docstring lines go
+     in at the second landing. Alternative: a docstring sentence only. Why: `LEAN.md`'s inhabitant rule is a gate
+     condition whether or not a row states the attainment; 520 (a) answered a different question (is it a row).
+     Confidence: medium-high. (d) Drafts 7–8 (`plans/LEAN-BACKLOG.md` states, `LEDGER.md`, the plan's § 7.4, the atlas
+     grades) are held for the milestone's filing with the other waves'. (e) **Wave 10's third planner merges `main`
+     into the second pass's line as its first act** (the four first-pass files come from `main`, which alone changed
+     them; registry files keep both), so its rows and read-backs are against the landed statements. Why: the tidies
+     changed three statements its level row reads. Confidence: medium-high. (f) **Slots → FS131-I10D** (the planes'
+     floor, `fs131-w10d`) **and FS131-I6D** (`FanBridge`'s existence half, `fs131-w6f`), launched 2026-10-06.
+
+536. **FS131-K9 done at its Stage 5: wave 9's first planning pass — all eleven rows disposed and stated, five proved; five
+     leaves left** (planner; harness 528k by the task notice — past the line; record `fs131-w9`'s
+     `plans/FS131-w9-kernel-plan.md` Stages 1–5; report `data/fs131/reports/FS131-K9.md`; commits `a624439a`, `67c86f8f`,
+     `045fada3`, `50c0edc5`; pushed, tree clean). **Modules**: `Plane/Reduction/Basic`, `Maps` (no `sorry`), `Uniform`
+     (3), `Plane/Classes/Bend` (1, `bendAny`), `QFree` (1). **Proved with nothing open beneath**: FS111-C-SIX-M at every
+     `k`; FS129-OR1-TOP5 at the class its argument reads, over `ReduceToMap P RegJ` (items 533–534); FS111-V0-CLEAN and
+     FS111-M2-REDUCE-C as one theorem (`exists_arcMap_of_arcBounded`); FS111-C1-PW over `WEqKLimit K k` and Q-NO.
+     **Stated**: FS111-C1-UNIF (three leaves), FS129-SR1-BENDANY (`bendAny`, the wave's long leaf); proved from `bendAny`
+     and not theorems until it is: -BENDLE3, -OR1-QFREE-CLASS, -SR3-QFREE-NS (over `GammaFreeEmptyNS`, wave 8's `emptyNS`);
+     -OR1-DISCF-NS over one small leaf. **No statement defect found; no row refuted.** **My receipt**: tip `50c0edc5`
+     equals `origin/fs131-w9`, tree clean; the last real build's full log (`build/gate/build/20261006T150218Z-802849.log`,
+     6 modules rebuilt) ends "Build completed successfully (5815 jobs)", 11 warnings, all `declaration uses sorry`;
+     `sorry` by the handoff's grep: 0, 0, 3, 1, 1 — the five; no `axiom`, no `native_decide`; doubled-name log exit 0;
+     877 lines added in five new files and three registry files, nothing else; `exists_arcMap_of_arcBounded` read at
+     `Reduction/Basic.lean` ll. 109–118 — an arc system, frontiers on it, an a.e. cover, null unit pairs per set, giving
+     a plane map with those arcs, valid, each region inside its class's interior: what item 533 (3) says, and no
+     tightness or colour count in it; `top5`, `ReduceToMap`, `RegA` read (item 534); `bendAny`'s statement read. Not
+     checked by me: the other proofs beyond the build; the dispositions against the arguments it says it read only
+     through entries. **Predictions scored** (its Stage 5): four of eleven wrong, one cause — the reductions were priced
+     against a narrower map class than the kernel's. **Slips, the job's, disclosed**: `debruijn-obligation-modeling`
+     not invoked (budget) — `bendAny`'s decomposition is from the reading; four docstrings named models not held,
+     corrected before the commit; four arguments read through entries only; the harness count not readable. **A tool
+     note**: wave 4's `ArcMap.InMK` reads `0 ≤ ρ` at `K = 0`, harmless there; a line for `LEAN.md` drafted. **Owed
+     before the wave's gate**: five models (its § 4.3, M1–M5). **Credit**: two rows found to be one theorem with none
+     of the cleaning the hand proofs carry, and the limit of my ruling 508 found and stated exactly.
+     **Rulings.** (a) **A short second planning pass, FS131-K9b, before the long leaf's implementer**: `bendAny`
+     through a fresh obligation-modeling pass, its fourth child's route read against wave 5's source (a twin of a
+     landed statement, if needed, is a message), then a split of its children that fits implementers' budgets — the
+     planner prices the leaf at 450–800k, above one implementer's line. **FS131-I9B** (`Reduction/Uniform`'s three
+     leaves and the models M1–M3 in a new module) can run at any time. Briefs not written. (b) **Both readings of
+     "simple" land for FS129-OR1-DISCF-NS and -QFREE-CLASS**, under the planner's names (the `_literal` form is the row
+     as filed). Alternative: choose one and delete the other. Why both: neither implies the other, each has a reader,
+     and one argument proves both. Confidence: high. (c) **The five models are a condition of the wave's gate, assigned
+     as its handoff has them**; one not built at an implementer's hand-back is an open gate item named in that report.
+     (d) The plan's § 7.4 additions, the `LEAN.md` line and the stub (FS107's compactness step) are held for the
+     filing. In flight after both hand-backs: 1 (I6C) + 1 (I10D) + 1 (I6D) = 3.
+
+537. **FS131-I6C, by message mid-job: two generalizations, neither a defect, no statement touched; ten of its eleven leaves
+     proved** (source: I6C's message to "main", 2026-10-06; its Stage 3 saved at `6276989f` on `fs131-w6c`, pushed — not
+     checked by me; the artifact is read at its hand-back). **(1)** `AeColouring.ae_one_colour_of_isConnected`
+     (FS131-E8-DELTA) does not read `hW : IsOpen W`: any connected set meeting no essential boundary and no cusp is a.e.
+     of one colour; the hypothesis stays, named in the proof. **(2)** `IsUnitCurve.chord`, `.sin_le_inner`,
+     `.strictMonoOn_dist` hold for length up to `π`, not only `π/2` (proved at `π` as children); `one_le_dist` does read
+     `π/2`. **State, by its word**: `Curve`'s six leaves and three of `LocalGraph`'s on the standard three;
+     `local_graph` the one leaf left, in work. One edit outside its two files' proofs, as the plan's row asked:
+     `LocalGraph` imports `Plane/Saturated/Fan`, with `ARCHITECTURE.md`'s cell. **Ruling**: both are generalizations
+     for the wave's errata, statements unchanged (ruling 419 (c): an unread hypothesis a ruling kept stays, read by
+     `have _ :=`); no reply sent — it asks nothing, and a message would bill a working mind for an acknowledgement.
+
+538. **FS131-I10D done: the planes' floor is proved over the one named classical hypothesis — all six leaves, as stated; a
+     circle sum is a Kloosterman sum, in the kernel; and exactly where the held paper's printed bound fails** (implementer,
+     Opus; harness 353k by the task notice; record `fs131-w10d`'s `plans/FS131-I10D-implementation.md`; report
+     `data/fs131/reports/FS131-I10D.md`; commits `de072a7c`, `7d4395a9`, `7dace39e`, `a14f9ab0`; pushed, tree clean).
+     **Proved**: `involution_eq_pow` (by the Frobenius' powers, not the plan's route), `card_normOne`, `sum_quadratic_eq`,
+     `circle_sum_eq_kloosterman` (every finite field of odd characteristic, every radius, zero included — the identity
+     this project had only checked in floats, FS-20's open item R4), `circle_sum_le` and `normOne_charSum_ge` over
+     `KloostermanBound`; so the planner's `targetFloor_seven_of_kloosterman` now stands on proved leaves: for `Q ≡ 3
+     (mod 4)`, `Q ≥ 98`, the floor at seven given Weil's bound at the fields of `Q` elements. `KloostermanBound` is still
+     a hypothesis, never an axiom. **New, its own**: `circle_sum_le_of_ne` (the bound needs `a ≠ 0` **or** `b`
+     anisotropic), `circle_sum_zero_of_isotropic` (at radius 0 with `b` isotropic the sum is `χ(−1)(|F| − 1)`),
+     `two_sqrt_lt_circle_sum_zero` (so it exceeds `2√|F|` from six elements on): given Weil's bound, `[MMST1996]`
+     Theorem 3 at `n = 2` fails exactly there and nowhere else. **My receipt**: tip `a14f9ab0` equals
+     `origin/fs131-w10d`, tree clean; the last real build's full log (`build/gate/build/20261006T154452Z-1064729.log`, 3
+     modules rebuilt) ends "Build completed successfully (5790 jobs)", 79 warnings, all `declaration uses sorry` in six
+     other jobs' files, none in `NormOneTarget` or `FloorPlanes`; `sorry` by the handoff's grep in the two files: 0, 0; no
+     `axiom`, no `native_decide`; `data/fs131/i10d/logs/axioms-all.log` parsed by script — 22 records, 20 on exactly the
+     standard three, and the two with `sorryAx` are `usable_card_ge` (a leaf proved on another branch — the control) and
+     `standingFloor_seven` (over `Floor128`'s open leaf, as its report says); every declaration of the two files at
+     `330d2f48` compared head by head — none changed, twelve added; the three new statements and
+     `circle_sum_eq_kloosterman`'s read; **one checked by hand against an earlier receipt of mine**: item 500's `q = 13`,
+     `b = (1, 5)` gave the sum 12, and `circle_sum_zero_of_isotropic` gives `χ(−1)(13 − 1) = 12` (`13 ≡ 1 mod 4`). Not
+     checked by me: the proofs beyond the build; its five spec examples. **Prediction scored**: 442 lines against the
+     plan's 610. **Tool defect, another job's tool**: `tools/fs131_i10a_statements.py --self-test` prints a definition
+     fault "FIRED" on a file with no definition — a control passing where it did not run; joins the shared statement
+     checker owed (item 406 (c)). **Slip, the job's, disclosed**: its token counts are estimates. **Credit**: it turned
+     the planner's caution about the printed theorem into three kernel theorems that say exactly where it fails, and
+     named what it could not check. **Rulings.** (a) **The three new theorems are read back by wave 10's third planner
+     before `BIBLIOGRAPHY.md`'s `[MMST1996]` row cites them**; the row's correction, `LEDGER.md` row 53 and the
+     write-up stub's R4 line (drafts in its record) are held for that. (b) **`involution_eq_pow`'s docstring is corrected
+     to the proof the kernel holds at the second landing's join.** (c) **Whether the kernel links the floor's object
+     (`normOneCayley`, on `main` in `StandingFive`) to `finitePlane Q` is a read-back question for the third planner**:
+     `seven_le_localBound` type-checks against `StandingFloor` as defined, so no theorem is at risk; what is at stake is
+     the sentence "every usable plane refuses six". Confidence that nothing is at risk: high. (d) **FS131-I10E's
+     unstarted branch was fast-forwarded to `a14f9ab0`** (mine: `git merge --ff-only`, pushed), because two of its
+     leaf's children are I10D's `exists_mulShift_eq` and `card_normOne`: it cites them, and nobody declares them twice.
+     Alternative: it takes them as hypotheses under names of its own. Why: the branch was untouched and a fast-forward
+     cannot conflict (items 511, 523). Its brief carries a dated amendment (`mk-i10e-amend.py`; gate exit 0 after a bare
+     file name was fixed). (e) The floor at six from `Q ≥ 62` (ten lines, by its word) is the third planner's to state
+     if anything reads it. (f) K10c's brief regenerated with this branch's tip and these notes (`mk-k10c.py
+     fs131-w10d=a14f9ab0`; gate exit 0). (g) **Slot → FS131-I10E** (the target at 128), launched 2026-10-06. In
+     flight: 1 (I6C) + 1 (I6D) + 1 (I10E) = 3.
+
+539. **FS131-I6C done: `Curve` and `LocalGraph` are proved — all eleven leaves, as stated; the local graph theorem of the
+     bridge (FS131-E8-LOCAL) with its inhabitant on the nine-colour grid** (implementer, Opus; harness 546k by the task
+     notice — past the line, not to be resumed; record `fs131-w6c`'s `plans/FS131-I6C-implementation.md`; report
+     `data/fs131/reports/FS131-I6C.md`; eight commits, tip `d62406a2`; pushed, tree clean). **Proved on the standard
+     three**: `IsUnitCurve.chord`, `.sin_le_inner`, `.strictMonoOn_dist`, `.norm_sub_le`, `.one_le_dist` (the curve
+     stays outside the two unit discs tangent at its start), `lipschitzOnWith_of_chord`,
+     `AeColouring.ae_one_colour_of_isConnected` (FS131-E8-DELTA), `.closure_essBdry_subset`,
+     `.notMem_essBdry_of_mem_densitySet`, and 36 children. **Proved over two leaves of `Pinch` used as stated** (clean
+     once that branch is beneath them): `local_graph` — near an interface point with no cusp, the interface is the graph
+     of a function whose unit tangent is 1-Lipschitz in arclength, the two sides connected and each a.e. of one colour —
+     `AeColouring.local_graph`, three facts on the two tangent discs, and the inhabitant `sq9_exists_isInterfaceChart`.
+     **Its answer to the question asked in its amendment**: `local_graph`'s proof reads disjointness of the two classes
+     at four places through two lemmas, and three of them are false for overlapping sets as they stand — a version on a
+     cover is a different lemma. **My receipt**: tip `d62406a2` equals `origin/fs131-w6c`, tree clean; the last real
+     build's full log (`build/gate/build/20261006T154908Z-1100474.log`, 3 modules rebuilt) ends "Build completed
+     successfully (5811 jobs)", 62 warnings, all `declaration uses sorry` in `FanBridge`, `MapColouring`, `Pinch` (other
+     lines'), none in `Curve` or `LocalGraph`; `sorry` by the handoff's grep in the two files: 0, 0; no `axiom`, no
+     `native_decide`; `axioms-5-final.out` parsed by script — 52 records, 45 on exactly the standard three, 7 with
+     `sorryAx`: the control (`c11_discs`, another line's leaf) and the six it names as wired over `Pinch`'s leaves; the
+     sixteen declarations of the two files at `32f2ab4c` compared head by head — none changed, forty added;
+     `local_graph`'s statement read, and its two uses of `c11_discs` and `essBoundary_inter_eq` found at ll. 239, 757,
+     761; `ARCHITECTURE.md`'s diff is one cell. Not checked by me: the 1,380 added lines beyond the build; that the six
+     wired declarations go clean (the join shows it). **Generalizations** (item 537's two, and: the lens point reads two
+     of four inequalities). **Predictions scored**: the plan priced this line at nine agent-days; it was one job. **Slips,
+     the job's, disclosed**: one build started as a child of a wrapper that returned at once (it ran on and ended exit
+     0; no process left); no token count readable. **Credit**: the large leaf closed in the same job, an arclength
+     reparametrization Mathlib lacks written in fifty lines, and an exact answer on disjointness where one step was
+     expected. **Rulings.** (a) **DELTA's unread `IsOpen W` stays in the statement** (ruling 419 (c)); a generalization
+     for the wave's errata, with the length `π` and the chart's rectangle (its Drafts item 5). (b) **The cover's form of
+     `local_graph` is stated only if a row reads it**: the fourth planner has the answer in its brief. Alternative: ask
+     for it now. Why not: three of its four uses of disjointness fail on a cover, so it is new mathematics, not a
+     restatement. Confidence: high. (c) **The fourth planner's join takes three branches** — `Pinch`, `MapColouring`,
+     and this one — in that order; the six wired declarations' axioms lines are appended there. Brief regenerated
+     (`mk-k6d.py`; gate exit 0). (d) **FS131-I6E's unstarted branch was fast-forwarded to `d62406a2`** (mine, pushed):
+     its five lemmas read the curve facts, and the helpers are cited, not re-declared. Its brief carries a dated
+     amendment (the fast-forward; **it owns the three cell lemmas of a fan and names them in its report**, ruling
+     531 (c); the third planner's hand-back); gate exit 0. (e) **Relayed to FS131-I6D** (running, `FanBridge`'s
+     existence half) by message: `local_graph` stands as stated; what `IsInterfaceChart` does not export is a second
+     chart lemma to ask for, never a change to the structure; five helpers by name, to be merged on request and never
+     re-declared. (f) **Slot → FS131-I6E**, launched 2026-10-06. In flight: 1 (I6D) + 1 (I10E) + 1 (I6E) = 3.
+
+540. **FS131-I6D done: the existence half of the bridge is proved — all seven leaves, as stated — so the deriver's theorem "a
+     saturated colouring whose singular set is locally finite has a fan at every singular point" has every step in Lean, on
+     branches; and the model `sq9.SingLocallyFinite`** (implementer, Opus; harness 542k by the task notice — past the line;
+     record `fs131-w6f`'s `plans/FS131-I6D-implementation.md`; report `data/fs131/reports/FS131-I6D.md`; commits `17cb682e`,
+     `53648b40`, `e1dbd3e5`, `d93b1782`, `8e81fedd`; pushed, tree clean). **Proved**: `IsUnitCurve.exists_polarGraph`,
+     `AeColouring.gamma` (FS131-E8-GAMMA), `.beta`, `.alpha`, **`.fan_of_isolated`** (FS131-E8-FAN), `.regJLiteral_of_saturated`
+     and `.finite_arcs_of_isBounded` (-CLAUSE2); so the planner's `regJFan_of_saturated` and `regJFan_iff_singLocallyFinite`
+     (-BRIDGE) have no open leaf of this file beneath them; `sq9_singLocallyFinite` on the standard three with nothing
+     beneath, and `sq9_regJFan`. Four new modules (`CurveArc`, `ArcContinuation`, `FanArcs`, `FanBuild`), no `sorry`.
+     **My receipt**: tip `8e81fedd` equals `origin/fs131-w6f`, tree clean; the last real build's full log
+     (`build/gate/build/20261006T160816Z-1247380.log`, 3 modules rebuilt) ends "Build completed successfully (5815 jobs)",
+     146 warnings, all `declaration uses sorry`, in `Curve`, `LocalGraph`, `MapColouring`, `Pinch` (other lines') and
+     `FanBridge` (the five `Fan` leaves, FS131-I6E's); `sorry` by the handoff's grep: the four new modules 0, `FanExamples`
+     0, `FanBridge` 5; no `axiom`, no `native_decide`; its axioms listing (`axioms-3.txt`, its tool's own format — my
+     parser for the plain print read nothing until I read the file) re-parsed by script: 41 records, 15 on exactly the
+     standard three (`sq9_singLocallyFinite` among them), 26 with `sorryAx` and nothing else beyond the three — each of
+     the seven leaves among those, resting on `Curve`'s and `LocalGraph`'s leaves, which are proved on `fs131-w6c` with
+     identical statements (item 539); its three controls read; `FanBridge`'s seventeen and `FanExamples`' twenty-nine
+     earlier declarations compared head by head with `32f2ab4c` — none changed; `fan_of_isolated`'s statement compared by
+     `cmp` — the same: `0 < R`, `Σ ∩ B(z, R) ⊆ {z}`, saturation on the punctured disc, nothing else. Not checked by me:
+     the 1,685 lines of the four modules beyond the build; **that the 26 go clean — the join of the branches shows it,
+     and until then "proved" here means: proved over leaves that are proved elsewhere under the same statements**.
+     **Generalizations**: -CLAUSE2's first clause reads no saturation; its second needs no compactness off the fans;
+     -GAMMA is colour-free and reads seven of the chart's fields; `gamma` and `beta` do not read `IsolatedAt.pos`.
+     **A shorter route**: `gamma` with no Zorn and no gluing of charts. **Predictions scored**: the plan priced these
+     leaves at about twelve agent-days; one job. **Slips, the job's, disclosed**: a helper's name collided with a landed
+     theorem's, caught by its own names tool before the build; it ran the guarded lint once as iteration evidence (exit
+     0) — within the one `lake` call the rules allow, no slip. **Credit**: it answered item 526's question for every
+     statement it proved, built a names tool that checks its 67 new names against five other branches, and declined a
+     merge it did not need. **Rulings.** (a) **The fourth planner's join takes four branches** — `43ea4886`, `2e55a2d6`,
+     `d62406a2`, `8e81fedd` — and corrects the three stale "[hand], kernel pending" docstring phrases when the last
+     builds; brief regenerated. (b) **FS131-I6E** (running on the same file's other half) **is told by a second dated
+     amendment**: 21 names never to declare again, the three facts its two leaves want, and one merge of `8e81fedd` it
+     may make at a saved stage, its decision (`mk-i6e-amend2.py`; gate exit 0). Alternative: I ask for the merge. Why
+     its decision: it knows how far along it is, and either way the join makes one declaration. (c) The vacuity scan
+     meets three new structures at the wave's gate (`HasArcChart`, `ArcSetting`, `IsArcOf`), their inhabitant named —
+     a count to reconcile at the landing. (d) The drafts (E8's six grade lines, the Frontier line) wait for the wave's
+     gate; **ruling 492 (a) — REG-J′ rewritten to "Σ locally finite" — is due when the wave lands, not before.**
+     (e) **Slot → FS131-I10F** (wave 10's three measure-theoretic leaves and the model `sp_if` owes), launched
+     2026-10-06. In flight: 1 (I10E) + 1 (I6E) + 1 (I10F) = 3.
+
+541. **The price-against-plan factor, calibrated at Kooshi's word — the planners' line and token counts are right, their time
+     is not, and the factor depends on the unit a price was written in** (mine; 2026-10-06; his words: "Calibrate that price
+     against plan factor, because it matters for many implementations that get deferred."; the note is
+     `data/fs131/calibration/price-vs-actual.md`, the measurement `measure.py` and `measure.out` beside it). **Measured,
+     nineteen finished implementer jobs**: 259 to 3,122 lines of Lean inserted under `Proofs/` per job, median 1,341; tokens
+     by the harness (eight jobs) 353k to 546k, median about 430k — by least squares `tokens ≈ 311k + 129 per line`, so a job
+     at its 500k line holds about 1,500 lines; wall-clock by the harness (four jobs) 44 to 79 minutes, about half of it
+     builds. **The pairs, planned against measured** (each from a "prediction scored" line of this inventory, item numbers
+     in the note): priced in **tokens** — 1.18, 1.28, 1.35, 1.48 times the plan for four implementer jobs (3.1 for one
+     planning pass); in **lines** — thirteen pairs, median 0.75, proofs 0.21 to 0.72, explicit objects and models 0.9 to
+     1.8; in **sessions** (one session is one job) — seven pairs, 0.2 to 1.0, typically a half; in **agent-hours and
+     agent-days** (wave 6's planners) — 22 hours, 2 days, 9 days and 12 days each took one job, which on the clock is
+     between a sixteenth and an eighty-fifth of the plan at eight hours a day. **Reading**: a planner knows how much Lean a
+     result needs and misjudges time per line — wave 6's priced about 220 lines to a day, and its implementers wrote 700
+     to 1,700 lines an hour with builds. The same shape is already on file from two earlier milestones ("5× to ≥ 30× in
+     time, never in tokens", `plans/GROKKING-INSTANCES.md`). **Not measured by this**: planning passes (one to four per
+     wave, about 450k–550k each) and landings; leaves a planner marks as having no route (two in wave 6, none attempted);
+     results whose proof is missing, not merely unformalized; jobs that needed a successor. **Slips corrected by the
+     measurement, mine**: my reports today said "an order of magnitude" from two anecdotes and gave no unit; and a brief
+     sentence of mine ("a third to two thirds of their planners' line counts") was three wave-10 jobs, not the milestone.
+     **Rulings.** (a) **A price is read in lines and converted to jobs** — lines ÷ 1,500, rounded up, plus one planning
+     pass where the statements do not exist; a price in days goes through the line count behind it, or is divided by
+     ten. Alternative: keep the planners' units and a single factor. Why not: no single factor exists — 1.3 for tokens,
+     0.75 for lines, 0.5 for sessions, 0.1 for days. Confidence: high on the direction, medium on the constants (eight
+     token counts, four durations). (b) **Planners price in lines of Lean and in implementer jobs, never in days**: the
+     four queued planners' briefs say so (K10c, K7b, K8b, K6d regenerated, each gate exit 0). (c) **`LEAN.md` §
+     Assumptions' "about an hour of agent work" is read as one implementer job** — about 1,300 lines with its route
+     known; I apply that reading to rulings from here, and the wording of his rule is his (reported to him). (d)
+     **Staffing consequences in the queue**: wave 6's third pass is 49 planner-days in three implementers' briefs — by
+     (a) about five jobs — so each of FS131-I6L, I6Z, I6K is expected to hand back partway and be continued, and their
+     six hard leaves are outside the calibration; wave 9's long leaf, priced 450–800k tokens, is two jobs after its
+     second planning pass (ruling 536 (a) stands). (e) **Deferred items this re-prices, listed for Kooshi with no change
+     made**: the library's one assumed outside theorem (`falconer_lemma2_nonempty` — its planner wrote "no proof in
+     hand, more than an hour to formalize": the cost is a derivation first); the passage from periodic maps to
+     combinatorial torus maps (priced about 1M tokens by wave 7's planner — two jobs, and token prices have run a third
+     low); the classical named hypotheses with no line estimate yet (`BochnerHerglotz`, `WEqKLimit`, `Row134Base`).
+     Weil's bound is not re-priced by this (its cost is its mathematics). **Measure rigidity is not priced here, by
+     his word of 2026-10-06** (item 488).
+
+542. **FS131-I10F, by message mid-job: a generalization — the majority-vote lemma is proved as stated and reads less than it
+     carries** (source: I10F's message to "main", 2026-10-06; its Stage 2 saved at `d0b515ec` on `fs131-w10f`, an ancestor
+     of `origin/fs131-w10f` — checked; the artifact is read at its hand-back). `MajorityVote.ae_eq_measurable_of_majority`
+     does not read `hG : Measurable G` or `hc : ∀ x, Measurable (c x)`, and of `[Finite K]` only that `K` is countable:
+     almost-everywhere statements need no measurability, the σ-algebra generated by the maps is defined for any maps, and
+     a strict majority is unique in any type. Both hypotheses are kept in the statement and read by `have _ :=`. One
+     route change: Borel–Cantelli in place of a subsequence lemma. **Ruling**: **at wave 10's second landing the two
+     unread hypotheses are dropped and `[Finite K]` becomes `[Countable K]`**, the row keeping its name on the general
+     statement — the pattern of rulings 494 (a) and 507 (a). Alternative: keep the row's words. Why: the plan's § 7.3
+     item 3 — a row is stated at the class its argument reads. Confidence: high. The third planner's brief carries the
+     fact (`mk-k10c.py`; gate exit 0), so a consumer it states over the lemma asks for nothing the lemma does not read.
+     No reply sent: it asks none.
+
+543. **FS131-I10E done: the target at 128 needs eight colours, in the kernel with no outside theorem — the one leaf proved as
+     stated; with FS131-I10D's, the finite-target floor at seven now rests on Weil's bound alone** (implementer, Opus;
+     harness 424k and 58 minutes by the task notice; record `fs131-w10e`'s `plans/FS131-I10E-implementation.md`; report
+     `data/fs131/reports/FS131-I10E.md`; commits `8e5b85ff`, `aa6e0715`, `1148c21d`, `d4adcd40`; pushed, tree clean).
+     **Proved**: `charSum_128_ge` — in every field of `128²` elements every non-trivial additive character sums to real
+     part at least `−19` over the solutions of `u^129 = 1`; so the planner's `targetFloor_eight_128 : TargetFloor 8 128`
+     and `targetFloor_seven_128` stand on proved leaves, and on this branch `standingFloor_seven` and
+     `standingFloor_five` print the standard three, over the hypothesis `KloostermanBound` alone. The floor is run in
+     the file at a model of every hypothesis (`GaloisField 2 14` with the 128-th power map). Forty new theorems and one
+     definition, the bridge from the certificate: a root of the certificate's polynomial in every such field with no
+     splitting field; the basis read off a shift register's orbit (period exactly 16,383), not off the two Bézout
+     identities, which no proof now reads. **Not in the kernel, not claimed**: the exact spectrum and that `−19` is
+     attained ([tools]). **My receipt**: tip `d4adcd40` equals `origin/fs131-w10e`, tree clean; outside `data/`,
+     `plans/`, `tools/` it changed two files, `Arith/Floor128.lean` and `scripts/Axioms.lean` — inside its touches; the
+     last real build's full log (`build/gate/build/20261006T164609Z-1488605.log`, 3 modules rebuilt) ends "Build
+     completed successfully (5793 jobs)", 84 warnings, all `declaration uses sorry` in five other jobs' files, none in
+     `Floor128`; `sorry` in `Floor128` by the handoff's grep: 0; no `axiom`, no `native_decide` (ten `decide +kernel`
+     lines); `data/fs131/i10e/logs/axioms-all.log` parsed by script — 47 records, 45 within the standard three, the two
+     with `sorryAx` its controls (`usable_card_ge`, and `seven_le_localBound_of_kloosterman` over `StandingFive`'s
+     leaves, proved on `main`); `charSum_128_ge`, `targetFloor_eight_128`, `standingFloor_seven` each read
+     `[propext, Classical.choice, Quot.sound]`; the seventeen declarations of `Floor128` at `a14f9ab0` compared head by
+     head — none changed, forty added; `charSum_128_ge`'s statement read. The harness flagged that its automatic
+     review of this job's actions was unavailable; **the file list above is my check of what it touched**. Not checked
+     by me: the 543 added lines beyond the build; its three scratch measurements. **A kernel finding, measured**: a
+     closed `Nat` term rewritten by a lemma stated at other instances than its own is evaluated by the kernel (173 s to
+     a timeout and 8 GiB in 27 s, against 2 s) — **filed** in `LEAN.md` § The kernel's cost model from its draft, the
+     mechanism marked as its reading. **Prediction scored**: 486 lines against the plan's 520, 424k tokens against 300k
+     — one more pair for item 541, on its line. **Slips, the job's, disclosed**: three elaborations outside the memory
+     slot ran into that blow-up before it knew the cause; nothing lost. **Credit**: a certified bridge with no splitting
+     field and no minimal polynomial, the floor run at an actual field, and the kernel's cost measured and explained
+     instead of worked around. **Rulings.** (a) **The forty-one new statements are read back by the third planner**
+     (those a reader of the floor would cite); (b) **the two Bézout identities are kept or dropped by that planner,
+     with its reason** — alternative, keep by default: they cost under a second and the docstring says nothing reads
+     them; confidence either way: low stakes. (c) **The architecture cell for `Floor128`'s new import is made by the
+     third planner with its merge** (the file is in its touches, not the implementer's). Alternative: resume the
+     implementer for one line. Why not: a resume bills its whole context for a cell another job is about to touch.
+     (d) **The floor at six for the target with 64 elements** (the same bridge with constants made parameters) is the
+     third planner's to price in lines and to state if it judges it a row: the theory's window names that target.
+     (e) **The third planner's brief now opens with two merges** — `origin/main`, then `d4adcd40` — so its import's
+     consumers print the standard three and the import and nothing else; regenerated with both branches' tips
+     (`mk-k10c.py fs131-w10d=a14f9ab0 fs131-w10e=d4adcd40`; gate exit 0). (f) **Slot → FS131-K10c**, launched
+     2026-10-06. In flight: 1 (I6E) + 1 (I10F) + 1 (K10c) = 3.

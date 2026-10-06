@@ -1,0 +1,14 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261006T074220Z-2259178.log
+    ⚠ [5763/5802] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Procedure
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean:795:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean:812:8: declaration uses `sorry`
+    ⚠ [5784/5802] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Terminal
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:3592:8: declaration uses `sorry`
+    ⚠ [5794/5802] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BendGap
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean:984:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean:989:8: declaration uses `sorry`
+    All targets up-to-date (5802 jobs).
+==> build: OK — all 1795 modules already up to date, nothing built, 3 module(s) with warnings, 3s
+    full output: build/gate/build/20261006T074220Z-2259178.log
+exit=0

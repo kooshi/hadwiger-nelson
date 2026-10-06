@@ -1491,7 +1491,12 @@ theorem shaveAvailable_of_not_doublyShadowed (hF : F.Valid) (h5 : F.Condition5) 
 tip gives a valid map, agreeing with `F` off a small disc about `v` and creating no unit arc (Condition 5 kept when `F` has it),
 in which `c` has `n − 1` sectors at `v`, no colour is added at `v`, and the new points on the disc's rim carry at most three
 colours. Unit arcs are allowed (FS112-WALK, row 7: the split circle has curvature `σ ∈ [κ₁, κ₂] ⊆ [−1, 1]`, and `σ = ±1` puts it on
-the horn's own bounding arc); the curvature bounds are what keeps the move from creating a unit arc. -/
+the horn's own bounding arc); the curvature bounds are what keeps the move from creating a unit arc.
+Inhabitant: `hornModel` at `plantPt` (`Plane/Models/Moves`, `hornModel_shave`: this theorem applied) — a valid map of the plane with one
+horn of a spare colour in a brick of the seven-colour brick map. Both flanks are the brick's colour, so every split `σ` is admissible
+there, and the bounds `∓1/2` are strictly inside `(−1, 1)`: the unit-arc case is not exercised. Among the fragments,
+hypothesis by hypothesis only: `cuspFrag` at `0` satisfies all but `F.Covers 0 1` (FS131-QA4's QA4-B3), and `bowtie` at `0` fails
+`hclear` (`bowtie_not_shave_zero`) and `Covers`. -/
 theorem exists_shave (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ σ : ℝ} {c g h : Fin k}
     {n : ℕ} (hn : F.HasSectors v c (n + 1)) (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1)
     (hg : F.IsFlankAbove v α κ₂ g) (hh : F.IsFlankBelow v α κ₁ h) (hσ₁ : κ₁ ≤ σ) (hσ₂ : σ ≤ κ₂)
@@ -1505,7 +1510,10 @@ theorem exists_shave (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ�
 /-- **FS110-N4-SHAVE**, N4-RAY: two `c`-horns along one ray merge — the region between them is `c`-clear near `v`, and
 recolouring it gives a valid map, agreeing with `F` off a small disc about `v` and creating no unit arc, in which `c` has one
 sector fewer at `v`. Unit arcs are allowed and the outer bounds may be `±1` (FS112-WALK W3: the region between the horns is bounded
-by their inner arcs, of curvatures strictly inside `(−1, 1)`). -/
+by their inner arcs, of curvatures strictly inside `(−1, 1)`).
+Inhabitant: `twoHornModel` at `plantPt` (`Plane/Models/Moves`, `twoHornModel_rayMerge`: this theorem applied): two horns of one spare
+colour along `e 0` in a brick of the seven-colour brick map, curvatures `−3/4, −1/2` and `1/2, 3/4`; the outer bounds are strictly inside
+`[−1, 1]`. Among the fragments none (`bowtie`'s horns lie along `0` and `π`, and it fails `F.Covers 0 1`: hypothesis by hypothesis only). -/
 theorem exists_rayMerge (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c : Fin k}
     {n : ℕ} (hn : F.HasSectors v c (n + 1)) (h23 : κ₂ < κ₃) (hH : F.IsHorn v α κ₁ κ₂ c) (hH' : F.IsHorn v α κ₃ κ₄ c)
     (h1 : -1 ≤ κ₁) (h4 : κ₄ ≤ 1) :
@@ -1521,7 +1529,11 @@ theorem exists_rayMerge (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ �
 sectors at `v`, recolouring a gap inside `D_c(v)` near `v` gives a valid map, equal to `F` off a small disc about `v`, in which
 `c` has `n` sectors at `v`, `v` gains no colour, the new points on the rim carry at most three colours
 with none repeated, no other point's allowed cone for `c` changes, and no unit arc is created (so Condition 5 is kept). Condition 5 is not assumed
-(FS112-WALK). -/
+(FS112-WALK).
+Inhabitant: `twoHornModel` at `plantPt` (`Plane/Models/Moves`, `twoHornModel_merge`: this theorem applied), `n = 1`: the colour's two
+sectors are horns and its cone a half-plane (`twoHornModel_allowedCone`); a model whose two sectors are wedges of positive angle is not
+written. Among the fragments, hypothesis by hypothesis only: `bowtie` and `cuspFrag` at `0` fail `F.Covers 0 1` (FS131-QA4's QA4-B1,
+QA4-B3), `bowtie` also `hD` (`bowtie_not_merge_zero`), and `sevenBrickMap` has no colour with two sectors. -/
 theorem exists_merge (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)
     (hn : F.HasSectors v c (n + 1)) (hD : (interior (F.allowedCone v c)).Nonempty) :
     ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (closedBall v ρ) ∧ F'.RingArcsWithin F ∧
@@ -1992,7 +2004,11 @@ theorem false_of_third_point {v : ℂ} (hv : v ∈ F.dom) {α κ₁ κ₂ κ₃ 
 
 /-- **A doubly shadowed horn has two different flank colours** (N4-STUCK (i)'s `g_± ≠ h_±`, by N4-FLANK's mechanism — FS131-IC4's
 route): were the flanks one colour, the `g`-shadow reaching the horn would come from a `g`-sector at `S′` tangent to `+a`, whose
-shadow also covers the lower flank near `v`, of that same colour, against validity. -/
+shadow also covers the lower flank near `v`, of that same colour, against validity.
+Inhabitant of the hypotheses: `shadowModel` (`Plane/Models/Stuck`, `shadowModel_flank_ne`: this theorem applied) — the brick map in nine
+colours with a flank of `7` above and of `8` below a band at `plantPt`, a horn of `7` at the lower pole and of `8` at the upper
+(FS131-E7's `P₄`, `plans/FS131-E7-derivation.md` § 6), `κ₁ = −1/2`, `κ₂ = 1/2`, band `(−1/8, 1/8)`: every hypothesis holds on it at once,
+each shadow from a live class (`shadowModel_shadow`). -/
 theorem flank_ne_of_doublyShadowed (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ}
     {g h : Fin k} (h1 : -1 < κ₁) (h12 : κ₁ < κ₂) (h2 : κ₂ < 1) (hg : F.IsFlankAbove v α κ₂ g)
     (hh : F.IsFlankBelow v α κ₁ h) (hD : F.DoublyShadowed v α κ₁ κ₂ g h) : g ≠ h := by

@@ -1,0 +1,68 @@
+OK    FS131-close-inventory.md                 293. **Rulings on IP1's held items, and its slot.** (a) The last exit's `hK`, `hR` → `_hK`
+OK    FS131-close-inventory.md                 299. **Rulings on I5d's held items, and its slot.** (a) **`rot_noThird`'s block**: wave 5'
+OK    FS131-close-inventory.md                 303. **Rulings on IX1's held items.** (a) The generalization, the rewritten docstring and 
+OK    CLAUDE.md                                Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a
+OK    MapGraph.lean                            /-- **Locally Hamiltonian** (`[Thomassen1999]` p. 850): for each vertex `x`, `G` has a cyc
+OK    MapGraph.lean                            `D₁(x)`. -/
+OK    MapGraph.lean                            def LocallyHamiltonian : Prop :=
+OK    MapGraph.lean                              ∀ x, ∃ (a : V) (p : G.Walk a a), p.IsCycle ∧ ∀ y, y ∈ p.support ↔ G.Adj x y
+OK    MapGraph.lean                            /-- The vertices other than `x` and `y`. -/
+OK    MapGraph.lean                            def offTwo (x y : V) : Set V := {v | v ≠ x ∧ v ≠ y}
+OK    MapGraph.lean                            /-- **`int(G, x, y)`** (CVB B2 step 2, in place of Thomassen's curve `R`): the vertices of
+OK    MapGraph.lean                            def twoSepInterior (x y : V) : Set V :=
+OK    MapGraph.lean                              {v | ∃ hv : v ∈ offTwo x y, ((G.induce (offTwo x y)).connectedComponentMk ⟨v, hv⟩).supp.
+OK    MapGraph.lean                            /-- **A 2-separator** `{x, y}`: two distinct vertices whose removal leaves a finite compon
+OK    MapGraph.lean                            def IsTwoSep (x y : V) : Prop := x ≠ y ∧ (twoSepInterior G x y).Nonempty
+OK    MapGraph.lean                            /-- **A maximal 2-separator** (`[Thomassen1999]` p. 852): a 2-separator `{x, y}` such that
+OK    MapGraph.lean                            interior. -/
+OK    MapGraph.lean                            def IsMaximalTwoSep (x y : V) : Prop :=
+OK    MapGraph.lean                              IsTwoSep G x y ∧ ∀ u v, IsTwoSep G u v → x ∉ twoSepInterior G u v ∧ y ∉ twoSepInterior G
+OK    MapGraph.lean                            /-- The vertices of **`H`**: those in the interior of no maximal 2-separator. -/
+OK    MapGraph.lean                            def reducedVerts : Set V := {v | ∀ x y, IsMaximalTwoSep G x y → v ∉ twoSepInterior G x y}
+OK    MapGraph.lean                            /-- **`H`** (`[Thomassen1999]` p. 852): `G` with the interior of every maximal 2-separator
+OK    MapGraph.lean                            def reduced : SimpleGraph (reducedVerts G) := G.induce (reducedVerts G)
+OK    MapGraph.lean                            /-- **A ring at `x`** (the combinatorial shadow of `x`'s boundary walk, CVB B2 step 2 over
+OK    MapGraph.lean                            `r` whose entries are exactly `x`'s neighbours, cyclically consecutive entries equal or ad
+OK    MapGraph.lean                            `y` separate: an entry strictly between them and one strictly outside, both other than `y`
+OK    MapGraph.lean                            (The planar ring lists each repeated neighbour only at its edge contacts — Thomassen's rul
+OK    MapGraph.lean                            sides are adjacent and the separation fails.) -/
+OK    MapGraph.lean                            def IsRing (x : V) (r : List V) : Prop :=
+OK    MapGraph.lean                              (∀ y, y ∈ r ↔ G.Adj x y) ∧ (∀ (i : ℕ) (a b : V), r[i]? = some a → r[(i + 1) % r.length]?
+OK    MapGraph.lean                                ∀ (y : V) (i j : ℕ), i < j → r[i]? = some y → r[j]? = some y → ∀ (m n : ℕ) (a b : V), 
+OK    MapGraph.lean                                  r[m]? = some a → r[n]? = some b → ∀ (ha : a ∈ offTwo x y) (hb : b ∈ offTwo x y),
+OK    MapGraph.lean                                    ¬ (G.induce (offTwo x y)).Reachable ⟨a, ha⟩ ⟨b, hb⟩
+OK    MapGraph.lean                            /-- `y` appears at two positions of `r` that are not cyclically consecutive (`[Thomassen19
+OK    MapGraph.lean                            k − 1`"). -/
+OK    MapGraph.lean                            def TwiceApart (r : List V) (y : V) : Prop :=
+OK    MapGraph.lean                              ∃ i j : ℕ, i + 1 < j ∧ ¬ (i = 0 ∧ j + 1 = r.length) ∧ r[i]? = some y ∧ r[j]? = some y
+OK    MapGraph.lean                            /-- **The planar properties Thomassen's reduction reads** (FS131-KP plan § 4; CVB B2 steps
+OK    MapGraph.lean                            at every vertex, with `G − x − y` connected unless `y` appears twice apart in `x`'s ring; 
+OK    MapGraph.lean                            `G − x − y` (CVB step 2: "the complement of the compact connected `cl x̂ ∪ cl ŷ` has one u
+OK    MapGraph.lean                            `M − x − y` is finite"). The filled map graph of a valid plane map has them (`ArcMap.fille
+OK    MapGraph.lean                            `reduced_props_of_planarLike`. -/
+OK    MapGraph.lean                            structure PlanarLike : Prop where
+OK    MapGraph.lean                              /-- Locally finite. -/
+OK    MapGraph.lean                              locFin : ∀ x, (G.neighborSet x).Finite
+OK    MapGraph.lean                              /-- Connected. -/
+OK    MapGraph.lean                              conn : G.Connected
+OK    MapGraph.lean                              /-- Infinite. -/
+OK    MapGraph.lean                              inf : Infinite V
+OK    MapGraph.lean                              /-- A ring at every vertex, `G − x − y` connected unless `y` appears twice apart. -/
+OK    MapGraph.lean                              ring : ∀ x, ∃ r, IsRing G x r ∧ ∀ y, y ≠ x → ¬ TwiceApart r y → (G.induce (offTwo x y)).
+OK    MapGraph.lean                              /-- Exactly one infinite component of `G − x − y`. -/
+OK    MapGraph.lean                              oneInf : ∀ x y, x ≠ y → ∃ c : (G.induce (offTwo x y)).ConnectedComponent, ¬ c.supp.Finit
+OK    MapGraph.lean                            /-- **Thomassen's reduction, as pure graph theory** (`[Thomassen1999]` pp. 851–852 with CV
+OK    MapGraph.lean                            finiteness): for a graph with the planar properties, `H = reduced G` is connected, locally
+OK    MapGraph.lean                            proof (plan § 4, leaf T-GRAPH): 2-separators are pairs with finite components; interiors n
+OK    MapGraph.lean                            `x` or `y` lies in `int(M, u, v)`, from the rings' separation); a maximal 2-separator exis
+OK    MapGraph.lean                            chain of finite interiors containing a fixed vertex's neighbourhood is finite, by local fi
+OK    MapGraph.lean                            path never enters an interior), locally finite (an induced subgraph); locally Hamiltonian 
+OK    MapGraph.lean                            of 2-separators through `x`; the reduced cyclic sequence has no repetition and at least th
+OK    MapGraph.lean                            (every interior is finite and the maximal 2-separators' crucial edges are locally finite i
+OK    MapGraph.lean                            theorem reduced_props_of_planarLike (h : PlanarLike G) :
+OK    MapGraph.lean                                (reduced G).Connected ∧ (∀ x, ((reduced G).neighborSet x).Finite) ∧ LocallyHamiltonian
+OK    FS131-planar-kernel-plan.md              **an inhabitant is owed** — the triangular lattice (`triLattice`: rings the six-cycles, no
+OK    FS131-planar-kernel-plan.md              | `cvb_thom_reduced` | derives over `PlanarLike` | `= reduced_props_of_planarLike (filledG
+OK    FS131-planar-kernel-plan.md              **May:** add children (with spec examples; shared ones in `PlaneTopology` / `MapTopology`)
+control line MISS (as it must)
+66 quotation lines, 0 missing

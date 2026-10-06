@@ -1,0 +1,37 @@
+import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
+import Proofs.HadwigerNelson.Plane.ValidMap.Surgery
+-- FS131-KP2: every lemma the plan's routes cite, confirmed to exist with the shape the route uses
+open HadwigerNelson.Plane HadwigerNelson.Plane.ArcMap
+#check @lebesgue_number_lemma_of_metric
+#check @Homeomorph.image_closure
+#check @Real.one_sub_sq_div_two_le_cos
+#check @IsCompact.exists_thickening_subset_open
+#check @Complex.continuousAt_arg
+#check @IsPreconnected.constant
+#check @Real.cos_lt_cos_of_nonneg_of_le_pi
+#check @continuous_of_continuousOn_iUnion_of_isOpen
+#check @HadwigerNelson.Plane.isPreconnected_hornSet
+#check @HadwigerNelson.Plane.sectorBetween_eq_hornSet
+#check @HadwigerNelson.Plane.exists_germDir_ne_of_ne
+#check @HadwigerNelson.Plane.Arc.finite_inter_sphere_or_eq_circ
+#check @HadwigerNelson.Plane.ArcMap.ringArcsWithin_of_Γ_subset
+#check @HadwigerNelson.Plane.ArcMap.IsSectorChart.isSector_iff_of_zero
+#check @HadwigerNelson.Plane.eq_polar_frameDir
+#check @HadwigerNelson.Plane.dist_polar_polar_sq
+#check @HadwigerNelson.Plane.ArcMap.toward_clear
+#check @HadwigerNelson.Plane.ArcMap.lock
+#check @HadwigerNelson.Plane.ArcMap.Valid.dist_ne_one_of_isOpen_subset_closure
+#check @HadwigerNelson.Plane.localSectors_disj
+#check @HadwigerNelson.Plane.ArcMap.isSectorChart_of
+#check @HadwigerNelson.Plane.exists_eq_branchPt_curveGerm
+#check @HadwigerNelson.Plane.branchPt_curveGerm_mem
+#check @HadwigerNelson.Plane.carrier_germArc
+#check @HadwigerNelson.Plane.branchPt_eq_circle
+#check @HadwigerNelson.Plane.germArc_isUnitArc_iff
+#check @HadwigerNelson.Plane.ArcMap.IsSectorChart.encard_sectorsOf
+#check @HadwigerNelson.Plane.ArcMap.IsSectorChart.hasDegree
+#check @HadwigerNelson.Plane.ArcMap.exists_kept_of_mem_openArc
+#check @HadwigerNelson.Plane.ArcMap.mem_cutArcs_iff
+#check @HadwigerNelson.Plane.ArcMap.n2_env_toward
+#check @HadwigerNelson.Plane.ArcMap.n2_env_near
+#check @HadwigerNelson.Plane.ArcMap.l60_le

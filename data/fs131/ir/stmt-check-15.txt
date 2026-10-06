@@ -1,0 +1,3 @@
+CHANGED Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean exists_vertexStep
+CHANGED Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean exists_arcStep
+RESULT: FAIL (2)

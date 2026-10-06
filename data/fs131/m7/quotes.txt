@@ -1,0 +1,13 @@
+verbatim  CLAUDE.md  «Do not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-close-inventory.md  «449. **FS131-IR3 done: the vertex step is whole in the kernel — all fo»
+verbatim  FS131-close-inventory.md  «450. **Rulings on IR3's held items, and its slot.** (a) **Wave 5's lin»
+verbatim  FS131-close-inventory.md  «447. **FS131-IA2 done: the arc step's assembly upstream of `Procedure`»
+verbatim  FS131-close-inventory.md  «448. **Rulings on IA2's held items, and two slots.** (a) **At the merg»
+verbatim  FS131-close-inventory.md  «445. **FS131-KA1 done: the outward collar bend planned — its statement»
+verbatim  FS131-close-inventory.md  «443. **The W1/W2 lemma's exact text, relayed** (FS131-KA1's message to»
+verbatim  Procedure.lean  «theorem exists_arcStep (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsCl»
+verbatim  FS131-IA2.md  «## The last lines for `Procedure` (compiled as `data/fs131/ia2/Procedu»
+verbatim  ArcStep.lean  «theorem LocalStep.of_cutArcs {M : ArcMap k} {K : Set ℂ} {S : Set Arc} »
+verbatim  ArcStep.lean  «theorem ArcBend.of_away {M : ArcMap k} {h : ℂ ≃ₜ ℂ} {K : Set ℂ} {P : ℂ»
+verbatim  FS131-bendaway-kernel-plan.md  «### 3.0 The statement as it now stands, and the two weakenings (both p»
+12 quotations, 0 failures

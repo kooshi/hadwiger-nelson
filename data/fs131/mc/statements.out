@@ -1,0 +1,8 @@
+skeleton (fe9d6d32): 132 declarations, 131 verbatim in the tree, 1 gone ['stuckModel_terminal']
+as given (b9b3a9e5): 351 declarations; gone 4, changed 1, added 3
+  GONE    brick_floor_eq — unused after the tidy to wave 5's `brickCell` (`sevenBrick_col_val` holds the floors)
+  GONE    not_int_between — unused after the tidy (`sevenBrick_mem_interiorPts` holds the argument)
+  GONE    stuckModel_dist_sq — moved to `Paint` as `dist_sq_coords` (the fold of item 479; one declaration serves `Stuck` and `Bends`)
+  GONE    stuckModel_terminal — removed by ruling, inventory item 482
+  CHANGED shadowModel_hornSet_not_mem_hornArcs — its two curvature bounds `≤ 2` became `≤ 1`, so that its one-base-point case is `Paint`'s `disjoint_hornSet_hornArcs` (the fold of item 479); a helper of FS131-MB2's, no skeleton statement
+0 problem(s) -> OK

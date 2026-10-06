@@ -42,6 +42,15 @@ theorem e_add_two_pi (θ : ℝ) : e (θ + 2 * π) = e θ := by
     rw [e, show ((2 * π : ℝ) : ℂ) * I = 2 * π * I by push_cast; ring, Complex.exp_two_pi_mul_I]
   rw [e_add, h, mul_one]
 
+/-- Conjugation reverses the angle: `conj (e θ) = e (−θ)`. Declared here, in the one module every user imports
+(FS131-RP1: it stood under this name in both `Plane/Chord` and `Plane/SixFragment`). -/
+theorem conj_e (θ : ℝ) : (starRingEnd ℂ) (e θ) = e (-θ) := by
+  rw [e, e, ← Complex.exp_conj]; congr 1; simp [map_mul, Complex.conj_ofReal]
+
+/-- The squared norm in coordinates. The one name for this statement (FS131-RP1: it stood under four). -/
+theorem sq_norm_eq (z : ℂ) : ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := by
+  rw [Complex.sq_norm, Complex.normSq_apply]; ring
+
 /-- The point `r(θ)` of the ring `ω(p)`. -/
 noncomputable def ringPt (p : ℂ) (θ : ℝ) : ℂ := p + e θ
 

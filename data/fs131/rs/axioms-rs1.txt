@@ -1,0 +1,24 @@
+slot: admitted lake: mem 10 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Plane.mod_prev_succ' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_biUnion_Icc_mod' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.inter_nonempty_of_interleaved_exterior_of_isClosed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_union_insert_diff_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_isClosed_of_reachable_offTwo' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsEdgeOf.disjoint_closure_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.mod_succ_prev' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.exists_piece' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.sep' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.isRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_boundaryWalk' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.filledGraph_ringList' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.filledGraph_rings' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.filledGraph_oneInf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.filledGraph_finSep' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.filledGraph_planarLike' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cvb_thom_reduced' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cvb_thom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.rot_noThird' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

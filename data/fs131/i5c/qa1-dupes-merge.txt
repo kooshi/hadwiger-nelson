@@ -1,0 +1,7 @@
+HadwigerNelson.Plane.abs_dot_le w4:Plane/ValidMap/Contact.lean:351 | ww:Plane/Woodall/Collar.lean:387
+HadwigerNelson.Plane.conj_e w1:Plane/Chord.lean:276 | w2:Plane/Chord.lean:276 | w2:Plane/SixFragment.lean:342 | w3:Plane/Chord.lean:276 | w3:Plane/SixFragment.lean:342 | w4:Plane/Chord.lean:276 | w4:Plane/SixFragment.lean:342 | ww:Plane/Chord.lean:276 | ww:Plane/SixFragment.lean:342
+HadwigerNelson.Plane.dot_add_left w4:Plane/SVMap.lean:46 | ww:Plane/Woodall/Collar.lean:392
+HadwigerNelson.Plane.dot_e_e w4:Plane/SVMap.lean:36 | ww:Plane/Woodall/Collar.lean:404
+HadwigerNelson.Plane.framePt w2:Plane/Slack.lean:2800 | k4:Plane/ValidMap/Basic.lean:44 | w4:Plane/ValidMap/Basic.lean:44
+HadwigerNelson.Plane.isOpen_shadow w4:Plane/SVMap.lean:176 | ww:Plane/Woodall/Collar.lean:244
+total: 6 names declared in the own files of two bodies

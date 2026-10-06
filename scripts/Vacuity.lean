@@ -344,6 +344,95 @@ Two exclusions are worth their reasons, because both look like obvious additions
   `IsClear` OUT. `exists_open`'s hypotheses hold together on no map of the library yet (its docstring's inhabitant note: FS131-E6's
   twelve-colour map, at [hand]); that is a conjunction across binders, which this per-binder scan cannot see.
 
+* **Wave 5's carriers (FS131-L5, by the procedure below; the 29 modules of the limit, the procedure, the terminal maps, the bends, the
+  base's walk and the planar reduction, `Plane/ValidMap/Limit` to `Thomassen`).** **No new carrier IN.** The wave declares sixty
+  hypothesis-formers (every definition, structure and inductive of the `Plane` modules and of `Thomassen` whose type ends in a sort and
+  which `main`'s library did not hold, listed by `data/fs131/l5/census.lean` with what the library proves of each): none has an
+  unconditional `¬ P …` at a closed instance and none an `IsEmpty` instance — the two shapes `gather` reads as emptiness — so for none
+  could step (3)'s `VACUOUS` control be planted, and entering one would add `GENERIC` rows and no signal. **OUT**, by kind:
+  - **the base's context**: `ArcMap.BaseCtx` (26 binder sites, `BaseWalk` and `BaseDense`) bundles `Row134BaseUA`'s hypotheses at a
+    six-coloured fragment and is **empty at every instance** — `BaseCtx.false`, a refutation over variable `F`, `u`, which this scan
+    skips and cannot read as evidence. Every theorem taking it is a step inside that proof by contradiction and says so in its
+    docstring ("no model expected", naming `row134BaseUA`), which is what `LEAN.md` § The gate asks of such a step. Tracked, each
+    site would read `GENERIC`, which is false of a carrier known empty; it is kept out and the fact is recorded here. Its fields
+    `ArcMap.BaseHyp`, `NoInertNear`, `UnenclosedC` are predicates of a point of a variable map, each satisfied on `sevenBrickMap`
+    (`sevenBrick_baseHyp`, `sevenBrick_noInertNear`, `sevenBrick_unenclosedC`; `not_row134BaseUA_seven` reads all at once at seven
+    colours); `ArcMap.Unenclosed` is the stronger form of the last (`Unenclosed.unenclosedC`). `Row134BaseUA` is a closed
+    proposition, proved (`row134BaseUA`), never a binder;
+  - **clause packages, `Prop`-valued structures at a variable map at every site**, none refuted at a concrete instance by a theorem —
+    register one when it is: `ArcMap.ArcBend` (the arc step's interface; inhabited at `l60Frag`'s collar bend, `ArcStep`'s spec
+    example), `ArcMap.AwayBend` (`AwayBend.idle`), `ArcMap.CollarFit` (`collarModel`), `ArcMap.CollarFitOut` (`exists_collarFitOut`,
+    under `bend_away_gap`'s hypotheses, whose own model is owed: an open gate item), `ArcMap.LocalStep` and `ArcMap.IsModification`
+    (reflexive: `LocalStep.refl`, `IsModification.refl`), `ArcMap.ProcInv`, `ArcMap.ProcStep`, `ArcMap.IsBoundaryWalk`,
+    `ArcMap.IsPortGraph`, `Thomassen.PlanarLike` (`triLattice_planarLike`), `PushProfiles`, `PushOutProfiles` (`pushProfiles_collar`,
+    `pushOutProfiles_collar`);
+  - **data, written down**: `ArcMap.LocalSeq` (`LocalSeq.const`), `ArcMap.ProcRun` (`ProcRun.const`); the inductive `R2Subdiv` (a
+    finite subdivision, built by its constructors; `R2Subdiv.below` is its generated auxiliary);
+  - **facts about a point, an arc or a tile of a variable map**, decided where they occur, like `HasSectors` and `IsSectorChart`:
+    `ArcMap.IsClean`, `IsSite`, `IsChainVertex`, `StuckAlong`, `IsTerminalMap` (inhabited: `sevenBrickMap_isTerminalMap`), `QROnly`,
+    `IsMaxRingArc`, `MoveAt`, `Todo`, `HornBoundsQR`, `OnQR2Arc`, `GermPseudo`, `HexRing`, `RingProper`, `DoubleEvent`, `VIn`,
+    `IsEndpoint`, `IsRetArc`, `IsHoleOf`, `IsOuterTile`, `IsEdgeOf`, `EnclosesTile`, `BasedTrail`;
+  - **predicates of a circle colouring, a set, a point or a graph variable**: `CircleColouring.Removable`, `ChangeWith`, `IsHex`;
+    `HasCurveStar`, `IsCurve`, `IsRegularAt`, `IsRegOf`; `Thomassen.IsTwoSep`, `IsMaximalTwoSep`, `IsRing`, `LocallyHamiltonian`,
+    `NoInterleave`, `ReachIn`, `TwiceApart`.
+  `IsRegularAt`, `IsSite`, `IsHoleOf`, `EnclosesTile` and `IsMaximalTwoSep` are refuted only under hypotheses or over variables
+  (nine theorems), which is no evidence to this scan. Every other hypothesis the wave takes is a carrier decided above: its **346 new
+  sites** are 194 on `Valid`, 62 on `IsRingArc`, 58 on `IsHorn`, 26 on `IsStuck` and 6 on `IsQArc`, **all `GENERIC`** at a variable map
+  (`tools/fs131_l5_vacdiff.py`: no row of `main`'s scan lost, none added to a declaration `main` holds, no new evidence row). A binder
+  `(h : F.IsTerminalMap)` raises no site though the definition holds `F.Valid`: the scan reads a binder's head as written. What it
+  cannot see, as before: hypothesis sets that hold together on no map of the library — the stuck family, `exists_arcStep`,
+  `bend_away_part`, the base's steps — each of which says so in its docstring and is listed as an open gate item at the landing.
+* **The example maps' carriers (FS131-MC1, by the procedure below; `Plane/Models/{Paint, Moves, Stuck, Bends, Applied}`).** **No new
+  carrier, IN or OUT**: the lane defines maps (`ArcMap.relabel`, `ArcMap.paint`, `brickBase`, `hornModel`, `twoHornModel`, `stuckModel`,
+  `shadowModel`, `awayModel`), point sets, arc sets and colourings — no structure and no predicate a theorem may take as a hypothesis —
+  so no name is added to `trackedProps` and no control is planted. What this scan reads of the lane (`tools/fs131_l5_vacdiff.py`
+  against wave 5's gated scan: no row lost, none added to a declaration `main` held): **five witnesses**, each an unconditional
+  theorem at a closed instance and each also a `WITNESSED` site of its own statement — `IsHorn` (`hornModel_isHorn`,
+  `stuckModel_isHorn_pi`), `IsStuck` (`stuckModel_isStuck`), `IsRingArc` (`awayModel_isRingArc_gap`, `cuspFrag_isRingArc`) — and
+  **two `GENERIC` sites** on `Condition5` (`ArcMap.relabel_condition5`, `ArcMap.paint_condition5`). A statement that is a conjunction
+  (`stuckModel_isHorn`, `awayModel_hyps`) or an unconditional `X.Valid` (`hornModel_valid`; none of `main`'s 57 witnesses is one) is
+  not read as a witness. The sites those maps inhabit on the landed theorems stay `GENERIC`: a site on a variable map is the caller's
+  obligation by this scan's law, and no witness can be registered against it. That each model meets every hypothesis of a theorem at
+  once is checked where it can be, by elaboration (`Plane/Models/Applied` applies each theorem to its model), and said in that
+  theorem's docstring.
+
+* **Wave 10's first pass (FS131-L10A, by the procedure below; `Arith/{CharacterColouring, SpectralInputs, StationaryRatio,
+  StandingFive}`).** The four modules declare ten hypothesis-formers (`data/fs131/l10a/census.lean`, wave 5's census with its scope
+  changed, lists them with what the library proves of each): none has an unconditional `¬ P …` or an `IsEmpty` at a closed instance.
+  **IN, by ruling** (inventory item 507 (d)): `StationaryRatio.StationarySet` — a stationary random set as a system: a probability
+  space, a jointly measurable measure-preserving action of the group, an event. By step (1)'s law alone it would be OUT, like `UDCert`:
+  it is a record that exists at every group by construction (`StationarySet.empty G`, one point and the empty event), so no instance of
+  it is empty and **step (3)'s `VACUOUS` control cannot be planted** — there is nothing to refute. What entering it buys is the
+  inhabitant rule made mechanical for this one structure: a theorem taking `(W : StationarySet G)` at a CONCRETE group reads `UNKNOWN`
+  until a closed inhabitant at that group is a declaration (`StationarySet.empty` takes its group as an argument, so `gather` does not
+  read it as evidence); at a variable group it reads `GENERIC`, which is every site today. Its inhabitants: `StationarySet.empty`
+  (every group; a.e.-independent for every connection measure, `StationarySet.empty_aeIndependent`); `StationarySet.parity`
+  (`ZMod 2` on itself, the event `{0}`, `P(B) = 1/2`, a.e.-independent for `δ₁`: `parity_aeIndependent`, `parity_prob` — the one
+  closed inhabitant, and the scan's one witness for the family); and, for the other hypotheses of X25B-L1
+  (`ratio_prod_le_iSup_levels`), the levels `cantorLevel` of `ℕ → ZMod 2` (`exists_cantorLevel_subset`). Controls 63–65: `GENERIC`
+  at a variable group, `WITNESSED` at `ZMod 2` (by `parity`), and `UNKNOWN` at `ℤ` — inhabited (by `empty ℤ`) and proved so by no
+  closed declaration: the load-bearing half, the family at an instance the evidence does not reach, which must read `UNKNOWN` and
+  never `WITNESSED`. **OUT**, each a predicate with no refutation theorem to collect:
+  - `StationarySet.AEIndependent` — a predicate of a system and a connection measure, at a variable system at each of its four sites;
+    satisfied by `empty_aeIndependent` at every `ν` and by `parity_aeIndependent`; register it when a theorem refutes it at a closed
+    instance;
+  - **named hypotheses, closed propositions consumed as such** (`LEAN.md` § Assumptions: each leaves when discharged; the
+    `Row130M1` case again): `CharacterColouring.OrderBound` (the band's order bound — ours, FS89-S0A-3 at `k = 4`, J08-11, J08-10 —
+    taken at the closed instance `OrderBound (unitSet ⊥) (band 4) 168` by `cl2`) and `StandingFive.StandingFloor` (the finite-target
+    floor, G56 — taken at `7` and at `5` by `seven_le_localBound`, `five_le_chromaticNumber`; satisfiable at `0`,
+    `targetFloor_zero`), with its clause `StandingFive.TargetFloor` (no site). Tracked, each closed site would read `UNKNOWN` — true
+    of a hand result not yet in the kernel, and nothing the shrink-only baseline can hold; they are listed at the landing as the
+    hypotheses the theorems rest on;
+  - `SpectralInputs.BochnerOn` (a classical hypothesis about a topology; holds at the discrete one, `bochnerOn_bot`, at a variable
+    group, which is no evidence to this scan), `SpectralInputs.IsHaarFourier` (a predicate of a measure; satisfiable given
+    Herglotz–Bochner, `exists_isHaarFourier`), `SpectralInputs.IsSpectralMeasureOf` (a predicate of a vector and a measure) — at a
+    variable instance at every site;
+  - `SpectralChain.Interface.MulStable`, `SpectralChain.Interface.NegCircle` — predicates of an interface, each at one site
+    (`sp_if`), at a variable interface. `MulStable` holds at `Interface.trivial` (an empty `E`); **`NegCircle` has no Lean model on
+    file** (one is planned at `F = ℚ` on the wave's second pass), which `sp_if`'s docstring says and the landing lists as an open
+    gate item: a hypothesis set that holds together on no object of the library is a conjunction across binders, which this
+    per-binder scan cannot see.
+
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
 its reason, in the `UDCert` / `AeColouring` style — IN iff "does one exist" is a theorem rather than a
@@ -373,7 +462,9 @@ def trackedProps : List Name :=
    `HadwigerNelson.Plane.ArcMap.Condition5, `HadwigerNelson.Plane.AeProperRegions,
    -- Woodall's pictures and normal forms (FS131-WL1)
    `HadwigerNelson.Plane.ArcMap.SectorsAt, `HadwigerNelson.Plane.ArcMap.NiceAt,
-   `HadwigerNelson.Plane.ArcMap.WoodallMerged, `HadwigerNelson.Plane.ArcMap.WoodallNormal]
+   `HadwigerNelson.Plane.ArcMap.WoodallMerged, `HadwigerNelson.Plane.ArcMap.WoodallNormal,
+   -- wave 10's stationary systems (FS131-L10A, ruling 507 (d))
+   `HadwigerNelson.StationaryRatio.StationarySet]
 
 /-- A carrier or a statement as one line of text, for the report. Called where its binders are still in
 scope: outside the telescope a generic carrier's variables print as `_fvar.N`, whose numbering shifts

@@ -1,0 +1,9 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 16,17
+Proofs/HadwigerNelson/Plane/PlaneTopology.lean:33:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/PlaneTopology.lean:39:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/PlaneTopology.lean:46:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/PlaneTopology.lean:53:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/PlaneTopology.lean:62:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/PlaneTopology.lean:69:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/PlaneTopology.lean:76:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/PlaneTopology.lean:86:8: warning: declaration uses `sorry`

@@ -1,0 +1,8 @@
+ALLOWED TWICE (once from each side): #print axioms HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+unplanted: PASS
+plant — a byte of a THEIRS-only file (Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean): FIRED  ['Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean: merged text is not the side it should be']
+plant — a line added to an OURS-only file (Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean): FIRED  ['Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean: merged text is not the side it should be']
+plant — an import THEIRS added dropped (import Proofs.HadwigerNelson.Plane.ValidMap.BendAway): FIRED  ["Proofs.lean: merged lines are not ours + theirs − base: {'import Proofs.HadwigerNelson.Plane.ValidMap.BendAway': -1} blank-slack 0"]
+plant — a doubled axioms record: FIRED  ["scripts/Axioms.lean: merged lines are not ours + theirs − base: {'#print axioms HadwigerNelson.Plane.falconer_reduction': 1} blank-slack 0"]
+plant — a file changed by both outside KEEP_BOTH (Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean): FIRED  ['Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean: changed by both sides, not in KEEP_BOTH']
+SELF-TEST: every plant fired, the unplanted run passed

@@ -1,0 +1,10 @@
+plant hypothesis (moved theorem): FIRED — CollarFit.map_lens: statement differs from b2ccfb7b (Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean)
+plant docstring letter (RadialPush): FIRED — continuous_pushFun: statement differs from b2ccfb7b (Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean)
+plant definition body: FIRED — tent: statement differs from b2ccfb7b (Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean)
+plant section note: FIRED — section note `## The collar's fit to the map` not byte-identical in CollarMap
+plant BendCollar edit: FIRED — BendCollar.lean is not the skeleton's minus the moved lines plus the import
+plant axiom: FIRED — axiom in Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean
+plant native_decide: FIRED — native_decide in Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean
+plant duplicated in BendCollar: FIRED — CollarFit.map_valid: declared in ['Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean', 'Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean'] among the layout, expected [Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean]
+plant moved declaration deleted: FIRED — CollarFit.map_valid: declared in [] among the layout, expected [Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean]
+self-test: 9 of 9 plants fired; unplanted partner PASS

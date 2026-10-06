@@ -1,0 +1,4 @@
+remote: . Processing 1 references        
+remote: Processed 1 references in total        
+To a git remote
+   3f5765b6..936a82ab  HEAD -> main

@@ -1,0 +1,30 @@
+import Proofs
+-- FS131-I5h stage 28: axioms read from the build's oleans. Controls: `n3_end_of_not_inType` must read `sorryAx`; `linkage_dot_ne_zero` the standard three.
+#print axioms HadwigerNelson.Plane.frameY_add_pi
+#print axioms HadwigerNelson.Plane.tanAbove_add_pi_iff
+#print axioms HadwigerNelson.Plane.tanBelow_add_pi_iff
+#print axioms HadwigerNelson.Plane.neg_curvDown_neg
+#print axioms HadwigerNelson.Plane.e_add_pi_add_pi
+#print axioms HadwigerNelson.Plane.dist_eq_dist_of_frame
+#print axioms HadwigerNelson.Plane.tanAbove_S_of_dist_le_one
+#print axioms HadwigerNelson.Plane.tanBelow_N_of_dist_le_one
+#print axioms HadwigerNelson.Plane.shadow_hornSet_subset_S
+#print axioms HadwigerNelson.Plane.shadow_hornSet_add_pi_subset_S
+#print axioms HadwigerNelson.Plane.shadow_hornSet_subset_N
+#print axioms HadwigerNelson.Plane.shadow_hornSet_add_pi_subset_N
+#print axioms HadwigerNelson.Plane.isPreconnected_hornSet_unit
+#print axioms HadwigerNelson.Plane.exists_drop_height
+#print axioms HadwigerNelson.Plane.exists_near_hornSet_of_partner
+#print axioms HadwigerNelson.Plane.mem_shadow_hornSet_S
+#print axioms HadwigerNelson.Plane.mem_shadow_hornSet_add_pi_S
+#print axioms HadwigerNelson.Plane.mem_shadow_hornSet_N
+#print axioms HadwigerNelson.Plane.mem_shadow_hornSet_add_pi_N
+#print axioms HadwigerNelson.Plane.lt_of_tanAbove_tanBelow
+#print axioms HadwigerNelson.Plane.TanAbove.mono
+#print axioms HadwigerNelson.Plane.TanBelow.mono
+#print axioms HadwigerNelson.Plane.sep_S
+#print axioms HadwigerNelson.Plane.sep_add_pi_S
+#print axioms HadwigerNelson.Plane.sep_N
+#print axioms HadwigerNelson.Plane.sep_add_pi_N
+#print axioms HadwigerNelson.Plane.ArcMap.n3_end_of_not_inType
+#print axioms HadwigerNelson.Plane.ArcMap.linkage_dot_ne_zero

@@ -1,0 +1,3 @@
+2404 statements read at 8ca92376; allowed to change: ['ArcBend.of_away']; allowed gone: ['ArcStep.lean:LocalStep.of_cutArcs']; files that may differ: ['ArcStep.lean']
+added since 8ca92376: none
+RESULT: PASS

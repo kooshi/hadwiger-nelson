@@ -1,0 +1,16 @@
+### up-to-date check, lake build --no-build over 1771 modules: exit 0 after 3s
+⚠ [3703/3892] Replayed Proofs.HadwigerNelson.Arith.StationaryRatio
+warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:100:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:107:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:121:8: declaration uses `sorry`
+⚠ [5752/5755] Replayed Proofs.HadwigerNelson.Arith.StandingFive
+warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:62:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:66:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:70:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:74:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:79:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:85:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:91:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:102:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:128:8: declaration uses `sorry`
+All targets up-to-date (5755 jobs).

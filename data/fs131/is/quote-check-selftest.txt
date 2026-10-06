@@ -1,0 +1,9 @@
+MISMATCH  CLAUDE.md  «xo not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-close-inventory.md  «398. **FS131-M6 handed back: `fs131-w5` merged into `fs131-w5c`** (Sta»
+verbatim  FS131-close-inventory.md  «420. **FS131-IR1 handed back** (Stage 17 SAVED, harness ≈ 505k by the »
+verbatim  FS131-close-inventory.md  «421. **Rulings on IR1's held items, and its slot.** (a) **`clean` and »
+verbatim  Terminal.lean  «theorem stuckRun_ne_univ {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ}»
+verbatim  FS131-I5-implementation.md  «**Left — `stuckRun_ne_univ`**, not attempted (budget). Route, KL1's § »
+verbatim  FS131-limit-kernel-plan.md  «| `stuckRun_ne_univ` | derives **given one new child** | along `univ` »
+7 quotations, 1 failures
+SELF-TEST: FIRED (good)

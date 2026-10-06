@@ -1,0 +1,36 @@
+entry lint
+  claim FS131-E8-LOCAL: minds 1
+  claim FS131-E8-LOCAL: prior art partly
+  claim FS131-E8-GAMMA: minds 1
+  claim FS131-E8-GAMMA: prior art partly
+  claim FS131-E8-BETA: minds 1
+  claim FS131-E8-BETA: prior art partly
+  claim FS131-E8-ALPHA: minds 1
+  claim FS131-E8-ALPHA: prior art partly
+  claim FS131-E8-DELTA: minds 1
+  claim FS131-E8-DELTA: prior art partly
+  claim FS131-E8-FAN: minds 1
+  claim FS131-E8-FAN: prior art partly
+  claim FS131-E8-BRIDGE: minds 1
+  claim FS131-E8-BRIDGE: prior art partly
+  claim FS131-E8-CLAUSE2: minds 1
+  claim FS131-E8-CLAUSE2: prior art partly
+  claim FS131-E8-SI5C: minds 1
+  claim FS131-E8-SI5C: prior art known
+  claim FS131-E8-BRANCH: minds 1
+  claim FS131-E8-BRANCH: prior art partly
+  claim FS131-E8-TWOSIDES: minds 1
+  claim FS131-E8-TWOSIDES: prior art partly
+  claim FS131-E8-OUTSIDE: minds 1
+  claim FS131-E8-OUTSIDE: prior art partly
+  entries: 12  derived: 12  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    e8-lens: printed '0'; with the fault planted ('' → '--C 1') it printed '880' — it fires
+  ok    e8-chord: printed '0'; with the fault planted ('' → '--kappa 2') it printed '14232' — it fires
+  ok    e8-majority: printed '0'; with the fault planted ('' → '--p 2/3') it printed '291' — it fires
+  ok    e8-sq9-contacts: printed '0'; with the fault planted ('' → '--swap') it printed '8' — it fires
+  ok    e8-outside: printed '0'; with the fault planted ('' → '--kappa 2') it printed '6852' — it fires
+  controls: 5  fired on their faults: 5
+GATE: PASS (0 failures, 0 warnings)

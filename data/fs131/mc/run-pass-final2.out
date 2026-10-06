@@ -1,0 +1,15 @@
+count-modules exit=0
+dupnames exit=0
+dupnames-selftest exit=0
+axioms exit=0
+axioms-selftest exit=0
+vacuity exit=0
+vacuity-selftest exit=0
+arch exit=0
+lint exit=0
+notes exit=0
+sorry (narrow) lines=0
+sorry (wide) lines=5
+DONE
+run-gate exit=0
+pass-exit=done

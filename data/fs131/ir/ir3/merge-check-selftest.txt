@@ -1,0 +1,7 @@
+unplanted: PASS
+plant Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean: FIRED  ['Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean: merged text is not the side it should be']
+plant Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean: FIRED  ['Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean: merged text is not the side it should be']
+plant Proofs.lean: FIRED  ['Proofs.lean: merged text is not the side it should be']
+plant scripts/Axioms.lean: FIRED  ["scripts/Axioms.lean: merged lines are not ours + theirs − base: {'#print axioms HadwigerNelson.Plane.ArcMap.exists_open': 1} blank-slack 0"]
+plant Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean: FIRED  ['Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean: changed by both sides, not in KEEP_BOTH']
+SELF-TEST: every plant fired, the unplanted run passed

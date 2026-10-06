@@ -1,0 +1,4 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 4,5
+data/fs131/ir/scratch/Procedure14.lean:584:8: warning: declaration uses `sorry`
+data/fs131/ir/scratch/Procedure14.lean:601:8: warning: declaration uses `sorry`
+data/fs131/ir/scratch/Procedure14.lean:624:8: warning: declaration uses `sorry`

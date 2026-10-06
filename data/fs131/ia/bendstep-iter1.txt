@@ -1,0 +1,8 @@
+Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:82:25: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  (𝓝[{x | ?m.222 x}] β).NeBot
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:82:9: error: Tactic `rcases` failed: `x✝ : ?m.232` is not an inductive datatype
+Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:219:23: warning: `Set.diff_eq` has been deprecated: Use `Set.sdiff_eq` instead
+Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:275:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:297:8: warning: declaration uses `sorry`

@@ -1,0 +1,56 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 8,9
+'HadwigerNelson.Plane.ArcMap.hasHornCount_iff_of_agree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.hasHornCount_zero_of_mem_interiorPts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.branch_frequently_mem_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.branch_curv_eq_of_two_spheres' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.hasHornCount_zero_of_two_spheres' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.germ_eq_of_frequently_branchPt_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.hasHornCount_iff_of_germ_swap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_r2_crescent_free' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.conj_e_mul_e'' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.r2_frame' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.r2_coords' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.r2_dist_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.r2_dist_sq_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.r2_dist_sq_center' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.r2X_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.r2_coords_r2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.continuous_r2X' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.continuous_r2Y' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isOpen_r2Side' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.two_lt_dist_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_lt_of_mem_r2Crescent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_r2Crescent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.r2pt_mem_r2Side' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_closure_dist_gt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.under_point' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsRingArc.exists_inner_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.r2_side_dichotomy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_r2Subdiv' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_lensOut_clear' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_collarFitOut' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.CollarFitOut.map_ringArcsWithin' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R1' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.CollarFitOut.map_localStep' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.CollarFitOut.map_hornCount_le' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.CollarFit.map_hornCount_le' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

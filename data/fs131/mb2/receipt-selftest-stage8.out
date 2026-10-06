@@ -1,0 +1,5 @@
+plant: a WHOLE record (cuspFrag_isRingArc) given sorryAx: FIRED (1 finding(s); text changed: True)
+plant: an OPEN record (stuckModel_terminal) marked STANDARD-THREE: FIRED (1 finding(s); text changed: True)
+plant: the control pairing marked APPLIED: FIRED (1 finding(s); text changed: True)
+plant: a WHOLE record's line deleted (awayModel_bend_toward): FIRED (2 finding(s); text changed: True)
+self-test (stage 8): 4 of 4 plants fired; faithful run 0 finding(s) -> OK

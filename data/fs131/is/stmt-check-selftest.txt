@@ -1,0 +1,7 @@
+plant hypothesis dropped (stuckRun_ne_univ): FIRED ('CHANGED', 'Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean', 'stuckRun_ne_univ')
+plant conclusion changed (stuckRun_ne_univ): FIRED ('CHANGED', 'Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean', 'stuckRun_ne_univ')
+plant declaration renamed (cv_l0): FIRED ('MISSING', 'Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean', 'cv_l0')
+plant definition body changed (HornBoundsQR): FIRED ('CHANGED', 'Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean', 'HornBoundsQR')
+plant conclusion changed (shadow_hornSet_subset_S, HornShadow): FIRED ('CHANGED', 'Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean', 'shadow_hornSet_subset_S')
+plant hypothesis changed (mem_shadow_hornSet_N, HornShadow): FIRED ('CHANGED', 'Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean', 'mem_shadow_hornSet_N')
+unplanted control: PASS (133 statements read at ebb0b292)

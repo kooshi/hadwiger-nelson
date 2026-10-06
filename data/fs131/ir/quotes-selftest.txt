@@ -1,0 +1,26 @@
+MISMATCH  CLAUDE.md  «xo not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-close-inventory.md  «411. **Rulings: the three slots, filled from the queue of the handoff.»
+verbatim  FS131-close-inventory.md  «403. **Ruling on CG1's slot: `stuckRun_ne_univ` and the procedure's la»
+verbatim  FS131-close-inventory.md  «398. **FS131-M6 handed back: `fs131-w5` merged into `fs131-w5c`** (Sta»
+verbatim  FS131-close-inventory.md  «388. **FS131-IL2 done: the limit's lane A is complete** (harness ≈ 525»
+verbatim  FS131-close-inventory.md  «408. **FS131-IO3 done — OPEN held** (Stage 15 SAVED at Kooshi's halt, »
+verbatim  FS131-close-inventory.md  «382. **FS131-E6, by message (mid-job): F6 is real; `exists_vertexStep`»
+verbatim  FS131-close-inventory.md  «383. **Rulings on items 381–382.** (a) **E6's finding accepted** (real»
+verbatim  FS131-close-inventory.md  «384. **FS131-E6 done: F6 is real, and repaired with no backlog stateme»
+verbatim  FS131-close-inventory.md  «385. **Rulings on E6's held items, and its slot.** (a) **`exists_arcSt»
+verbatim  FS131-close-inventory.md  «372. **Rulings on item 371.** (a) **`ArcMap.clean` accepted** as the p»
+verbatim  Procedure.lean  «theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv »
+verbatim  Procedure.lean  «theorem exists_arcStep (hF : F.Valid) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ »
+verbatim  Procedure.lean  «theorem exists_terminalSeq (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.»
+verbatim  Terminal.lean  «theorem stuckRun_ne_univ {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ}»
+verbatim  FS131-E6-derivation.md  «theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv »
+verbatim  FS131-E6-derivation.md  «    (hhorn : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :»
+verbatim  FS131-E6-derivation.md  «      (∃ m' j', m' + j' < m + j ∧ F'.HasDegree v m' ∧ F'.HasHornCount »
+verbatim  FS131-E6-derivation.md  «"`(∀ x m, F.HasDegree x m → F'.HasDegree x m)`": `(∀ x j, F.HasHornCou»
+verbatim  FS131-E6-derivation.md  «At a site `v` of a clean valid map with an available move, for every `»
+verbatim  OpenMove.lean  «theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ»
+verbatim  OpenMove.lean  «def HasHornCount (v : ℂ) (j : ℕ) : Prop :=»
+verbatim  FS131-limit-kernel-plan.md  «| `stuckRun_ne_univ` | derives **given one new child** | along `univ` »
+verbatim  FS131-limit-kernel-plan.md  «Each is proved by re-opening a construction, after this branch merges »
+24 quotations, 1 failures
+SELF-TEST: FIRED (good)

@@ -1,0 +1,15 @@
+on sorryAx: HadwigerNelson.Plane.ArcMap.CollarFit.sides_eq
+on sorryAx: HadwigerNelson.Plane.ArcMap.CollarFit.map_R1
+on sorryAx: HadwigerNelson.Plane.ArcMap.CollarFit.map_R2
+on sorryAx: HadwigerNelson.Plane.ArcMap.CollarFit.map_inert
+on sorryAx: HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_and_repeated
+on sorryAx: HadwigerNelson.Plane.ArcMap.CollarFit.map_hasDegree
+on sorryAx: HadwigerNelson.Plane.ArcMap.CollarFit.map_hasRepeatedColour
+on sorryAx: HadwigerNelson.Plane.ArcMap.exists_collarFit
+on sorryAx: HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_lensCurve
+on sorryAx: HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_end
+on sorryAx: HadwigerNelson.Plane.ArcMap.CollarFit.sides_end
+on sorryAx: HadwigerNelson.Plane.ArcMap.bend_toward_collar
+on sorryAx: ccControlPlanted
+70 names, 70 records: 57 expected standard, 13 expected on sorryAx
+PASS

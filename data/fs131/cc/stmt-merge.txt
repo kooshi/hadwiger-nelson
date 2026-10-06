@@ -1,0 +1,27 @@
+new theorem in Pushforward.lean: HasDegree.unique
+new theorem in Pushforward.lean: HasDegree.iff_eq
+new theorem in Pushforward.lean: IsSectorChart.not_hasRepeatedColour_of_zero
+new theorem in Pushforward.lean: IsSectorChart.hasRepeatedColour_iff
+new theorem in Pushforward.lean: curveAt_one_sub_eq_sphere
+new theorem in Pushforward.lean: branchPt_congr
+new def in Pushforward.lean: circleGerms
+new theorem in Pushforward.lean: circleGerms_nextβ_zero
+new theorem in Pushforward.lean: circleGerms_nextβ_one
+new theorem in Pushforward.lean: circleGerms_nextκ_zero
+new theorem in Pushforward.lean: circleGerms_nextκ_one
+new theorem in Pushforward.lean: circleGerms_mem_sector_zero
+new theorem in Pushforward.lean: circleGerms_mem_sector_one
+new theorem in Pushforward.lean: isSectorChart_circle
+new theorem in Pushforward.lean: exists_two_le_encard_fin_two_iff
+new theorem in Pushforward.lean: degree_of_circle
+new theorem in Pushforward.lean: exists_sphere_inter_ball_subset_openArc
+new theorem in BendCollar.lean: isCompact_polarSet_Icc
+new theorem in BendCollar.lean: ringPt_not_mem_openArc_of_end
+new theorem in BendCollar.lean: CollarFit.lensProf_le_one
+new theorem in BendCollar.lean: CollarFit.isClosed_closedLens
+new theorem in BendCollar.lean: CollarFit.lens_subset_closedLens
+new theorem in BendCollar.lean: mem_closure_region_inter_iff_of_agree
+new theorem in BendCollar.lean: CollarFit.isClosed_collarK
+new theorem in BendCollar.lean: CollarFit.map_degree_and_repeated
+new theorem in BendCollar.lean: CollarFit.sides_eq
+PASS (85 skeleton declarations, each once, statements byte-identical to 2736ab8c; lane G's files as 5059983d)

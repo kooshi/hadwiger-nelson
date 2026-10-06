@@ -1,0 +1,2 @@
+EQUAL: 18 clauses, 877 characters after folding
+RESULT: PASS

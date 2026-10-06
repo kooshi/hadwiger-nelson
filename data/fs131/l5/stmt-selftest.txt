@@ -1,0 +1,7 @@
+plant 'an unruled statement change': FIRED — UNRULED-CHANGED Plane/ValidMap/Chain.lean:IsModification.refl
+plant 'an unruled deletion': FIRED — UNRULED-GONE Plane/ValidMap/Chain.lean:IsModification.refl
+plant 'an unruled addition': FIRED — UNRULED-ADDED Plane/ValidMap/Chain.lean:rp_planted
+plant 'a moved statement altered': SILENT — UNRULED-CHANGED Plane/Basic.lean:conj_e
+plant 'a change in a file outside the manifest': FIRED — UNRULED-ADDED Kempe.lean:rp_planted_far
+plant 'a manifest entry that did not happen': FIRED — STALE-CHANGED Plane/ValidMap/Chain.lean:IsModification.refl (in the manifest, did not happen)
+SELF-TEST FAILED

@@ -1,0 +1,4 @@
+planted: CollarFit.collarArcs_nondegenerate
+MISMATCH CollarFit.collarArcs_nondegenerate: merged {"(hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') : ∀ a ∈ collarArcs F P θ₁ θ₂ R, a.Nondegenerate PLANTED": 1} expected {"(hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') : ∀ a ∈ collarArcs F P θ₁ θ₂ R, a.Nondegenerate": 1}
+7681 names; bases 385b5ad3; renames []; 1 mismatches/conflicts, 0 base conflicts
+FAIL

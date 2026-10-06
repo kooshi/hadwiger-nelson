@@ -179,7 +179,7 @@ theorem falconerFan_five_field (F : Subfield ℝ) [NumberField F] {n : ℕ} (t :
 /-- **FS129-SA1-FALC-RES**, clause (ii): at every usable prime with residue field `𝔽₁₁` or `𝔽₁₉`, for **every** pair
 `(V, φ)` with PLACE-HOM's properties (the row: "with V and φ as in PLACE-HOM"), the tip minus the apex has coordinates in `V`
 and `φ` kills them. -/
-theorem falconerFan_five_placeHom (F : Subfield ℝ) [NumberField F] {n : ℕ} (t : Fin n → ℝ)
+theorem falconerFan_five_placeHom (F : Subfield ℝ) {n : ℕ} (t : Fin n → ℝ)
     (ht : AlgebraicIndependent F t) (W : Finset ℂ) (hW : (W : Set ℂ) ⊆ planeOver (pureTranscendental F t))
     (hconn : (udOn W).Connected) {a b : ℂ} (ha : a ∈ W) (hb : b ∈ W) (hfan : FalconerFan (udOn W) 5 ⟨a, ha⟩ ⟨b, hb⟩)
     {𝔭 : Ideal (𝓞 F)} (h𝔭 : IsUsablePrime 𝔭) (hq : Nat.card (𝓞 F ⧸ 𝔭) = 11 ∨ Nat.card (𝓞 F ⧸ 𝔭) = 19)

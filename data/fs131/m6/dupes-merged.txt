@@ -1,0 +1,6 @@
+STATEMENT-OLD HadwigerNelson.Plane.ArcMap.coloursAt_eq_singleton_of_interior (Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean:1266) = main's HadwigerNelson.Plane.ArcMap.coloursAt_eq_of_mem_interiorPts (Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean:581), declared at the fork
+STATEMENT-OLD HadwigerNelson.Plane.ArcMap.ringPt_add_int (Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean:54) = main's HadwigerNelson.Plane.ArcMap.ringPt_add_int_mul (Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:1471), declared at the fork
+CONCL HadwigerNelson.Plane.ArcMap.ringPt_add_int (Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean:54) ~ main's HadwigerNelson.Plane.ArcMap.ringPt_add_int_mul (Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:1471): ringPt p (θ + 2 * π * m) = ringPt p θ
+CONCL HadwigerNelson.Plane.isPreconnected_hornSet_of_abs_le (Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:109) ~ main's HadwigerNelson.Plane.isPreconnected_hornSet (Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean:1042): IsPreconnected (hornSet v α κ₁ κ₂ r)
+own files 5; 257 own declarations; 9694 names at 385b5ad3; 0 NAME/STATEMENT pair(s); 2 STATEMENT-OLD/PRIVATE; 2 CONCL candidate(s)
+exit 0

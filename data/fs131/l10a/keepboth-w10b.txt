@@ -1,0 +1,14 @@
+faithful: #print axioms lines 4015 = ours 3964 + theirs 3982 - base 3931; faults 0
+plant LOST: #print axioms lines 4014 = ours 3964 + theirs 3982 - base 3931; faults 2
+  LOST from theirs: '#print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul' (need 1, have 0)
+  COUNT #print axioms: have 4014, expected ours 3964 + theirs 3982 - base 3931 = 4015
+  plant LOST: fired
+plant TWICE: #print axioms lines 4016 = ours 3964 + theirs 3982 - base 3931; faults 2
+  COUNT #print axioms: have 4016, expected ours 3964 + theirs 3982 - base 3931 = 4015
+  TWICE HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul (2)
+  plant TWICE: fired
+plant MARKER: #print axioms lines 4015 = ours 3964 + theirs 3982 - base 3931; faults 1
+  MARKER '======='
+  plant MARKER: fired
+self-test: PASS
+exit=0

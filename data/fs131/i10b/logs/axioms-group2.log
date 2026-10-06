@@ -1,0 +1,31 @@
+'HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_level_add' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.majority' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.measurableSet_majority' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.ae_majority' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.measure_le_majority_add' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.cosetAverage_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.cosetAverage.instIsProbabilityMeasure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.cosetAverage_compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.ae_mem_cosetAverage' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.cosetAverage_preimage_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.lintegral_prod_conv_cosetAverage' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.tendsto_measure_symmDiff_shift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.ratio_prod_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.usable_card_ge' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+EXIT=0

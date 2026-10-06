@@ -1,0 +1,14 @@
+verbatim  CLAUDE.md  «Do not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-limit-kernel-plan.md  «- **`exists_clean`** (`Limit`, H). Design worked out, not built: `E :=»
+verbatim  FS131-limit-kernel-plan.md  «- **`treatPts_inter_finite`** (now with `hP`, M): sites — `IsClean.eve»
+verbatim  FS131-limit-kernel-plan.md  «- **`badCount_eq_zero_iff`** (now with `hP`, M): `←` is immediate (no »
+verbatim  FS131-limit-kernel-plan.md  «- **`badCount_lt_top`** (now with `hP`, M): maximal arcs have disjoint»
+verbatim  FS131-limit-kernel-plan.md  «- **`mergeAvailable_of_bothKind`** (M–H, one mind's hand proof): not s»
+verbatim  FS131-close-inventory.md  «381. **FS131-IL1 handed back** (Stage 8 SAVED, harness ≈ 437k by the t»
+verbatim  FS131-close-inventory.md  «380. **FS131-IL1, by message: three of `Procedure`'s finiteness childr»
+verbatim  FS131-close-inventory.md  «382. **FS131-E6, by message (mid-job): F6 is real; `exists_vertexStep`»
+verbatim  FS131-close-inventory.md  «383. **Rulings on items 381–382.** (a) **E6's finding accepted** (real»
+verbatim  FS131-close-inventory.md  «373. **FS131-KL1 done: the limit constructions planned** (planner; sta»
+verbatim  FS131-close-inventory.md  «374. **Rulings on KL1's held items, and its slot.** (a) **The moves' n»
+12 quotations, 0 failures
+exit=0

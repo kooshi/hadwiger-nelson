@@ -1,0 +1,8 @@
+Proofs/HadwigerNelson/Plane/Models/Bends.lean:24:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Bends.lean:28:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Bends.lean:32:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Bends.lean:66:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Bends.lean:71:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Bends.lean:82:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Bends.lean:89:8: warning: declaration uses `sorry`
+exit 0

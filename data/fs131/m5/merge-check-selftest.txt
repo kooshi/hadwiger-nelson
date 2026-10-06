@@ -1,0 +1,8 @@
+1783 files; base 111830c8; ours e6ba8923; theirs origin/main; 0 failure(s)
+PASS
+SELF-TEST plant on Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean: FIRED ["FAIL Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean: changed by main only, merged differs from main's"]
+SELF-TEST plant on Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean: FIRED ["FAIL Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean: changed by ours only, merged differs from ours' with the declared edits"]
+SELF-TEST plant on Proofs.lean: FIRED ["FAIL Proofs.lean: imports differ from the three-way union (missing ['import Proofs.HadwigerNelson.Plane.ValidMap.Moves'], extra [])"]
+SELF-TEST plant on scripts/Axioms.lean: FIRED ["FAIL scripts/Axioms.lean: a record occurs twice (['HadwigerNelson.Plane.ArcMap.exists_merge_aux'])"]
+SELF-TEST plant on ARCHITECTURE.md: FIRED ['FAIL ARCHITECTURE.md: row Plane/ValidMap/Dense is not the side that changed it (with the declared Imports edit)']
+SELF-TEST OK

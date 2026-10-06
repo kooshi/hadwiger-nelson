@@ -1,0 +1,20 @@
+import Proofs
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_flanks_ua
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_structure_ua
+#print axioms HadwigerNelson.Plane.ArcMap.cv_l0
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_angleIcc_add_pi
+#print axioms HadwigerNelson.Plane.ArcMap.shadow_of_not_shave
+#print axioms HadwigerNelson.Plane.ArcMap.not_outType_N_of_flankAbove_one
+#print axioms HadwigerNelson.Plane.ArcMap.not_outType_S_of_flankBelow_neg_one
+#print axioms HadwigerNelson.Plane.ArcMap.srcG_of_shadow
+#print axioms HadwigerNelson.Plane.ArcMap.srcH_of_shadow
+#print axioms HadwigerNelson.Plane.ArcMap.dot_nonneg_of_srcG
+#print axioms HadwigerNelson.Plane.ArcMap.dot_nonpos_of_srcH
+#print axioms HadwigerNelson.Plane.ArcMap.region_near_of_inType
+#print axioms HadwigerNelson.Plane.ArcMap.dist_N_S
+#print axioms HadwigerNelson.Plane.ArcMap.region_far_S_of_srcG
+#print axioms HadwigerNelson.Plane.ArcMap.region_far_N_of_srcH
+#print axioms HadwigerNelson.Plane.ArcMap.flank_ne_of_shadows
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isRingArc_of_onRingArc
+#print axioms HadwigerNelson.Plane.ArcMap.hasSectors_one_of_contacts
+#print axioms HadwigerNelson.Plane.ArcMap.n3_end

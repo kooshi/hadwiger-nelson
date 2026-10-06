@@ -15,6 +15,12 @@ and three single lemmas (`hornSet_mono_radius`, `not_mem_interiorPts_of_mem_clos
 chart sector and its flanks (`IsHorn.exists_chart_index`, `IsSectorChart.exists_col`, `IsSectorChart.exists_flank_after`/`_before`,
 `IsHorn.exists_flankAbove`/`_Below`).
 `tools/fs131_im_move_cone.py --check` holds the text byte-identical to its source lines in `Contact` at `d4f946ae`.
+
+**The model of the contact lemmas** (those assuming only `F.Valid`, `F.Covers v 1`, a contact and its cone): `sevenBrickMap`
+(`Plane/SVMap`) — valid (`sevenBrickMap_valid`), covering every disc (`covers_of_isPlaneMap` at `sevenBrickMap_isPlaneMap`); a
+contact there, at [hand]: a corner and the corner at distance `1` from it (FS131-QA4 § 4.1; inventory ruling 427 (d), F2). The
+lemmas about a cone with empty interior, a horn or a stuck vertex are not covered by this line: no Lean object satisfies their
+hypotheses with `Covers` (FS131-QA4 § 3.5).
 -/
 
 namespace HadwigerNelson.Plane

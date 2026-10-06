@@ -1,0 +1,4 @@
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: admitted run.sh: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,16,17,18,19
+all done
+exit 0

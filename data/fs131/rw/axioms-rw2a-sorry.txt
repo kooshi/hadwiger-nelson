@@ -1,0 +1,1 @@
+HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.sep HadwigerNelson.Plane.ArcMap.filledGraph_ringList HadwigerNelson.Plane.ArcMap.cvb_thom_reduced

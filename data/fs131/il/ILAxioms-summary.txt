@@ -1,0 +1,15 @@
+records 75: standard-three-or-fewer 63, through sorryAx 12, other 0
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.exists_clean
+  HadwigerNelson.Plane.ArcMap.badCount_eq_zero_iff
+  HadwigerNelson.Plane.ArcMap.badCount_lt_top
+  HadwigerNelson.Plane.ArcMap.treatPts_inter_finite
+  HadwigerNelson.Plane.ArcMap.mergeAvailable_of_bothKind
+  HadwigerNelson.Plane.ArcMap.exists_vertexStep
+  HadwigerNelson.Plane.ArcMap.exists_arcStep
+  HadwigerNelson.Plane.ArcMap.exists_terminalSeq
+  HadwigerNelson.Plane.ArcMap.exists_terminalMap
+  HadwigerNelson.Plane.ArcMap.run_ends
+  HadwigerNelson.Plane.ArcMap.run_hornBoundsQR
+  HadwigerNelson.Plane.ArcMap.stuckRun_ne_univ
+OTHER:

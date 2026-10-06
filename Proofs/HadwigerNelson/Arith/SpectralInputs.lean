@@ -42,7 +42,8 @@ Herglotz–Bochner's uniqueness clause (`ext_of_fourier`, over `posDef_fourier`)
 `factorSigma` take plain data; the identity family `T y = id` is a model (`contVec_id`). `BochnerOn` holds at the discrete
 topology (`bochnerOn_bot`). `sp_if`'s hypothesis — a non-Haar finite
 rotation-invariant `E`-null measure — is the open zero-entropy question over the arithmetic `E` (J45 §4.2, "Not claimed"); at
-`Interface.trivial` (`E = ∅`) it is met by the point mass at the trivial character.
+`Interface.trivial` (`E = ∅`) it is met by the point mass at the trivial character. **`Interface.NegCircle` has no Lean model on
+file** (one is planned at `F = ℚ`, `Arith/NegCircleModel` on the wave's second pass): `sp_if` is an open gate item until it lands.
 -/
 
 namespace HadwigerNelson.SpectralInputs
@@ -262,14 +263,17 @@ theorem rot_negOne_apply (χ : Dual F) (y : unitRing F) :
 /-- **J45-SP-if** (Lemma SP-if, §4.2): "If some finite positive `U`-invariant `ν` with `ν(E) = 0` is not a multiple of Haar,
 then some finite positive `U`-invariant `τ` has `τ(E) = 0` and `∫ Re χ(1) dτ < 0`." Over an interface with `MulStable` and
 `NegCircle`; Fourier uniqueness is Herglotz–Bochner's uniqueness clause. INHABITANT: over the arithmetic `E` the hypothesis is
-the open zero-entropy question; at `Interface.trivial` it is met by the point mass at the trivial character. -/
-theorem sp_if (I : Interface F) [Countable (unitRing F)] (hBH : BochnerHerglotz (unitRing F)) (hmul : I.MulStable)
+the open zero-entropy question; at `Interface.trivial` it is met by the point mass at the trivial character. **`hcirc :
+I.NegCircle` has no Lean model on file**: `Interface.trivial` meets `MulStable` (its `E` is empty) and, with that point mass
+for `ν`, the measure hypotheses, and no declaration proves `NegCircle` of it or of any interface — one is planned at `F = ℚ` by
+the parity character (`negCircle_trivial_bot`, `Arith/NegCircleModel`, on the wave's second pass and not on this line), and
+until it lands this theorem is an open gate item under the inhabitant rule (`LEAN.md` § The gate). `hBH` is the named
+classical hypothesis `BochnerHerglotz`, with no kernel model. -/
+theorem sp_if (I : Interface F) (hBH : BochnerHerglotz (unitRing F)) (hmul : I.MulStable)
     (hcirc : I.NegCircle) {ν m : Measure (Dual F)} (hfin : IsFiniteMeasure ν) (hrot : RotInv F ν) (hE : ν I.E = 0)
     (hm : IsHaarFourier m) (hnh : ∀ a : ENNReal, ν ≠ a • m) :
     ∃ τ : Measure (Dual F), IsFiniteMeasure τ ∧ RotInv F τ ∧ τ I.E = 0 ∧ ∫ χ, (χ 1 : ℂ).re ∂τ < 0 := by
   classical
-  -- the countability of `R` is not read by this argument
-  have _hcount : Countable (unitRing F) := inferInstance
   haveI := hm.1
   -- (1) a non-zero frequency with a non-zero coefficient: Fourier uniqueness
   obtain ⟨r₀, hr₀, hne⟩ : ∃ r₀ : unitRing F, r₀ ≠ 0 ∧ ∫ χ, (χ r₀ : ℂ) ∂ν ≠ 0 := by
@@ -845,14 +849,13 @@ theorem norm_comp_sub_sq (y : R) (f : Lp ℝ 2 μ) :
 end
 
 /-- **J45-N2, first sentence**: "`σ_f(R̂ ∖ E_S) = 0` iff `y ↦ V_y f` is `τ′_S`-continuous" — for a first-countable group topology
-`t` on `R` satisfying Bochner's theorem and an action by measure-preserving maps. -/
-theorem spectral_carried_iff [IsProbabilityMeasure μ] (t : TopologicalSpace R)
+`t` on `R` satisfying Bochner's theorem and an action by measure-preserving maps of any measure space (`σ` carries `‖f‖²`: that
+`μ` is a probability measure is not read). -/
+theorem spectral_carried_iff (t : TopologicalSpace R)
     (ht : @IsTopologicalAddGroup R t _) (hcount : (@nhds R t 0).IsCountablyGenerated) (hB : BochnerOn t)
     (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (hadd : ∀ x y, T (x + y) = T x ∘ T y)
     {f : Lp ℝ 2 μ} {σ : Measure (AddChar R Circle)} (hσ : IsSpectralMeasureOf T hT f σ) :
     σ (contChars t)ᶜ = 0 ↔ f ∈ contVec T hT (@nhds R t 0) := by
-  -- that `μ` is a probability measure is not read by this argument (`σ` carries `‖f‖²`)
-  have _hprob : IsProbabilityMeasure μ := inferInstance
   letI := t
   haveI := ht
   haveI := hcount

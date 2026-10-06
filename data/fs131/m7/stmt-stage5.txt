@@ -1,0 +1,3 @@
+2403 statements read at dcdeac13; allowed to change: none; allowed gone: none; files that may differ: ['Procedure.lean']
+added since dcdeac13: ['Procedure.lean:IsMaxRingArc.meet']
+RESULT: PASS

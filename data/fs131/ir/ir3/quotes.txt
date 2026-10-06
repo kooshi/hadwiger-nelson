@@ -1,0 +1,17 @@
+verbatim  CLAUDE.md  «Do not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-close-inventory.md  «435. **FS131-IR2 done at its Stage 21: the vertex step proved over fou»
+verbatim  FS131-close-inventory.md  «436. **Rulings on IR2's held items, and its slot.** (a) **The four cas»
+verbatim  FS131-close-inventory.md  «430. **Rulings on item 429** (sent to IA1 by message). (a) **D1**: the»
+verbatim  FS131-close-inventory.md  «431. **FS131-IS1 done: `stuckRun_ne_univ` proved as written; `Terminal»
+verbatim  FS131-close-inventory.md  «421. **Rulings on IR1's held items, and its slot.** (a) **`clean` and »
+verbatim  FS131-close-inventory.md  «423. **Ruling on item 422: `exists_vertexStep` takes `(hv : F.Covers v»
+verbatim  Procedure.lean  «theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv »
+verbatim  Procedure.lean  «theorem exists_rayStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F»
+verbatim  Procedure.lean  «theorem exists_shaveStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv :»
+verbatim  Procedure.lean  «theorem exists_mergeStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv :»
+verbatim  Procedure.lean  «theorem exists_openStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : »
+verbatim  FS131-limit-kernel-plan.md  «### 20.2 What is left: the four cases, each with its route (the next i»
+verbatim  FS131-limit-kernel-plan.md  «### 21.3 Next step for a successor starting cold»
+verbatim  Procedure.lean  «theorem exists_arcStep (hF : F.Valid) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ »
+verbatim  FS131-arcstep-implementation.md  «### 3.6 The repaired statement of `exists_arcStep` (rulings on D1 and »
+16 quotations, 0 failures

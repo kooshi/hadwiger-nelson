@@ -1,0 +1,4 @@
+records 15 (print commands 15): standard-three-or-fewer 14, through sorryAx 1, other 0
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.exists_vertexStep
+PASS

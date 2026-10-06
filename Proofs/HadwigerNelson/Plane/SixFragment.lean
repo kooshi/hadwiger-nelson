@@ -338,12 +338,7 @@ theorem mem_arcs_side₂ (m : ℤ) {ψ : ℝ} (hψ : ψ ∈ Icc (m * (π / 3) - 
 /-- `e 0 = 1`. -/
 theorem e_zero : e 0 = 1 := by simp [e]
 
-/-- The conjugate of `e θ` is `e (−θ)`. -/
-theorem conj_e (θ : ℝ) : (starRingEnd ℂ) (e θ) = e (-θ) := by
-  unfold e
-  rw [← Complex.exp_conj]
-  congr 1
-  simp [map_mul, Complex.conj_ofReal, Complex.conj_I]
+-- `conj_e` is `Plane/Basic`'s (this file's identical copy removed by FS131-RP1, inventory ruling 459 (c)).
 
 /-- Rotating by `e(−60°m)` carries the lens `m` to the lens `0`. -/
 theorem dist_rot (x y : ℂ) (t : ℝ) : dist (x * e t) (y * e t) = dist x y := by
@@ -1345,10 +1340,6 @@ theorem dist_sq_re_im (z w : ℂ) : dist z w ^ 2 = (z.re - w.re) ^ 2 + (z.im - w
   simp only [Complex.sub_re, Complex.sub_im]
   ring
 
-/-- The squared norm in coordinates. -/
-theorem sq_norm_re_im (z : ℂ) : ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := by
-  rw [Complex.sq_norm, Complex.normSq_apply]; ring
-
 /-- `e θ` in coordinates. -/
 theorem e_re_im (θ : ℝ) : (e θ).re = Real.cos θ ∧ (e θ).im = Real.sin θ := by
   rw [e_eq]
@@ -1456,7 +1447,7 @@ theorem sixPieceS_diam {x y : ℂ} (hx : sixPieceS x) (hy : sixPieceS y) : dist 
 theorem sixPieceS_sixPieceQ {x y : ℂ} (hx : sixPieceS x) (hy : sixPieceQ y) : 1 < dist x y := by
   obtain ⟨a1, a2, -⟩ := sixPieceS_coords hx
   obtain ⟨b1, b2⟩ := sixPieceQ_coords hy
-  have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_re_im]; nlinarith [hy.1]
+  have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_eq]; nlinarith [hy.1]
   apply one_lt_dist_of_sq
   rw [dist_sq_re_im]
   exact sixPair_sq _ _ _ _ a1 a2 b1 b2 hy1
@@ -1467,7 +1458,7 @@ theorem sixPieceS_sixPieceG {x y : ℂ} (hx : sixPieceS x) (hy : sixPieceG y) : 
   have hs0 : 0 < Real.sqrt 3 := by positivity
   obtain ⟨-, a2, a3⟩ := sixPieceS_coords hx
   obtain ⟨b1, b2⟩ := sixPieceG_coords hy
-  have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_re_im]; nlinarith [hy.1]
+  have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_eq]; nlinarith [hy.1]
   have hfar : 1 < y.re ^ 2 + (y.im - 1) ^ 2 := by
     rw [← dist_e_pi_div_two_sq]; nlinarith [hy.2.2.2.2.1, dist_nonneg (x := y) (y := e (π / 2))]
   apply one_lt_dist_of_sq
@@ -1479,11 +1470,11 @@ theorem sixPieceQ_sixPieceG {x y : ℂ} (hx : sixPieceQ x) (hy : sixPieceG y) : 
   have hs : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
   have hs0 : 0 < Real.sqrt 3 := by positivity
   obtain ⟨b1, b2⟩ := sixPieceG_coords hy
-  have hx1 : 1 < x.re ^ 2 + x.im ^ 2 := by rw [← sq_norm_re_im]; nlinarith [hx.1]
+  have hx1 : 1 < x.re ^ 2 + x.im ^ 2 := by rw [← sq_norm_eq]; nlinarith [hx.1]
   have hxd : x.re ^ 2 + (x.im + 1) ^ 2 < 1 := by
     rw [← dist_e_neg_pi_div_two_sq]; nlinarith [hx.2.2.2.2.2, dist_nonneg (x := x) (y := e (-(π / 2)))]
-  have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_re_im]; nlinarith [hy.1]
-  have hy2 : y.re ^ 2 + y.im ^ 2 < 9 / 4 := by rw [← sq_norm_re_im]; nlinarith [hy.2.1, norm_nonneg y]
+  have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_eq]; nlinarith [hy.1]
+  have hy2 : y.re ^ 2 + y.im ^ 2 < 9 / 4 := by rw [← sq_norm_eq]; nlinarith [hy.2.1, norm_nonneg y]
   have hfar : 1 < y.re ^ 2 + (y.im - 1) ^ 2 := by
     rw [← dist_e_pi_div_two_sq]; nlinarith [hy.2.2.2.2.1, dist_nonneg (x := y) (y := e (π / 2))]
   have hfar' : 1 < (y.re + Real.sqrt 3 / 2) ^ 2 + (y.im + 1 / 2) ^ 2 := by
@@ -1500,8 +1491,8 @@ noncomputable def sixGCentre : ℂ := ⟨-(7 * Real.sqrt 3 / 10), 7 / 10⟩
 theorem sixPieceG_near {y : ℂ} (hy : sixPieceG y) : dist y sixGCentre < 1 / 2 := by
   have hs : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
   obtain ⟨b1, b2⟩ := sixPieceG_coords hy
-  have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_re_im]; nlinarith [hy.1]
-  have hy2 : y.re ^ 2 + y.im ^ 2 < 9 / 4 := by rw [← sq_norm_re_im]; nlinarith [hy.2.1, norm_nonneg y]
+  have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_eq]; nlinarith [hy.1]
+  have hy2 : y.re ^ 2 + y.im ^ 2 < 9 / 4 := by rw [← sq_norm_eq]; nlinarith [hy.2.1, norm_nonneg y]
   have hfar : 1 < y.re ^ 2 + (y.im - 1) ^ 2 := by
     rw [← dist_e_pi_div_two_sq]; nlinarith [hy.2.2.2.2.1, dist_nonneg (x := y) (y := e (π / 2))]
   have hfar' : 1 < (y.re + Real.sqrt 3 / 2) ^ 2 + (y.im + 1 / 2) ^ 2 := by
@@ -1556,7 +1547,7 @@ theorem sixLensQ0_diam {z w : ℂ} (hz : z ∈ sixLensQ0) (hw : w ∈ sixLensQ0)
     have e2 : dist u (e (π / 6)) ^ 2 = u.re ^ 2 + u.im ^ 2 - Real.sqrt 3 * u.re - u.im + 1 := by
       rw [dist_sq_re_im, (e_re_im _).1, (e_re_im _).2, Real.cos_pi_div_six, Real.sin_pi_div_six]
       linear_combination (1 / 4) * hs
-    refine ⟨by rw [← sq_norm_re_im]; nlinarith, ?_, ?_⟩
+    refine ⟨by rw [← sq_norm_eq]; nlinarith, ?_, ?_⟩
     · nlinarith [dist_nonneg (x := u) (y := e (-(π / 6)))]
     · nlinarith [dist_nonneg (x := u) (y := e (π / 6))]
   obtain ⟨z1, z2, z3⟩ := hd z hz

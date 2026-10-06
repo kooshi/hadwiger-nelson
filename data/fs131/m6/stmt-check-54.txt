@@ -1,0 +1,2 @@
+CHANGED Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean badCount_lt_top
+RESULT: FAIL (1)

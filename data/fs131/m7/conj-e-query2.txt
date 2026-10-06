@@ -1,0 +1,4 @@
+SixFragment's environment imports Plane.Chord: false
+HadwigerNelson.Plane.conj_e  declared in module (some Proofs.HadwigerNelson.Plane.SixFragment)
+constants named …conj_e: 1
+HadwigerNelson.Plane.conj_e : ∀ (θ : ℝ), (starRingEnd ℂ) (HadwigerNelson.Plane.e θ) = HadwigerNelson.Plane.e (-θ)

@@ -1,0 +1,16 @@
+verbatim  CLAUDE.md  «Do not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-close-inventory.md  «445. **FS131-KA1 done: the outward collar bend planned — its statement»
+verbatim  FS131-close-inventory.md  «446. **Rulings on KA1's held items, and its slot.** (a) **Two implemen»
+verbatim  FS131-close-inventory.md  «444. **FS131-IA2, by message at its Stage 6: the interface between the»
+verbatim  FS131-close-inventory.md  «442. **FS131-KA1, by message at its Stage 2: no clause of `bend_away_p»
+verbatim  BendStep.lean  «theorem bend_away_part (hF : F.Valid) (hP : F.IsPlaneMap) {P : ℂ} {θ₁ »
+verbatim  R2Cap.lean  «theorem exists_r2_crescent_free (F : ArcMap k) {P : ℂ} {θE σ : ℝ} (hE »
+verbatim  R2Cap.lean  «theorem r2_side_dichotomy (hF : F.Valid) {P : ℂ} {θ₁ θ₂ θ₀ σ δ₀ : ℝ} {»
+verbatim  BendGap.lean  «theorem exists_lensOut_clear (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ »
+verbatim  BendGap.lean  «theorem bend_away_gap (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ c c') (»
+verbatim  HornChart.lean  «theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀»
+verbatim  BendStep.lean  «theorem CollarFit.map_hornCount_le (hF : F.Valid) (hfit : CollarFit F »
+verbatim  FS131-bendaway-kernel-plan.md  «### 3.1 The modules (all new but `BendStep`; `Proofs.lean` and `ARCHIT»
+verbatim  FS131-bendaway-kernel-plan.md  «### 3.3 The plan per child»
+verbatim  FS131-bendaway-kernel-plan.md  «### 3.6 The handoff: two implementers, split by file»
+15 quotations, 0 failures

@@ -1,0 +1,10 @@
+data/fs131/m7/LastLinesJoined-control.lean:83:58: error: Application type mismatch: The argument
+  hdeg
+has type
+  ∀ x ∈ T, ∀ (m : ℕ), F.HasDegree x m → ∃ m' ≤ m, M.HasDegree x m'
+but is expected to have type
+  ∀ (x : ℂ) (m : ℕ), F.HasDegree x m → M.HasDegree x m
+in the application
+  And.intro hdeg
+'HadwigerNelson.Plane.ArcMap.IsMaxRingArc.meet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_arcStep'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

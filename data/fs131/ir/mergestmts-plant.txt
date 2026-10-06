@@ -1,0 +1,4 @@
+planted: HasDegree.eq
+MISMATCH HasDegree.eq: merged {"{v : ℂ} {m m' : ℕ} (hm : F.HasDegree v m) (hm' : F.HasDegree v m') : m = m' PLANTED": 1} expected {"{v : ℂ} {m m' : ℕ} (hm : F.HasDegree v m) (hm' : F.HasDegree v m') : m = m'": 1}
+7460 names; bases 1be5d622; renames []; 1 mismatches/conflicts, 0 base conflicts
+FAIL

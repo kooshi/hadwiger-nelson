@@ -1021,7 +1021,9 @@ theorem exists_closure_colour_of_arc (hP : F.IsPlaneMap) {v : ℂ} {θ₁ θ₂ 
 /-- **E1-COVER** (`plans/FS131-E1-derivation.md` § 3.4), in E1-GEN6's form and on colour classes: in a valid map of the plane, at a point `v` whose
 picture has positive angles and at most one colour absent from its sectors, no open arc of `ω(v)` of angular length greater than `π/3` has at
 most two colours at each of its points (its points all lie in one class's closure, `exists_closure_colour_of_arc` with E1-CROSS; a closed sub-arc
-of length in `(π/3, π]` has chord `> 1`, against `dist_le_one_of_subset_closure`). -/
+of length in `(π/3, π]` has chord `> 1`, against `dist_le_one_of_subset_closure`).
+A refutation step: no model of the hypotheses is expected. Its background (`Valid`, `IsPlaneMap`; the normal form where it is assumed) is
+inhabited at seven colours by `sevenBrickMap_woodallModel` (`Plane/Woodall/Steps`). -/
 theorem SectorsAt.false_of_ncard_le_two_on_arc (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ}
     {c : Fin n → Fin k} (h : F.SectorsAt v n d c) (hpos : ∀ i : Fin n, 0 < d i.succ - d i.castSucc)
     (habs : ∀ X Y : Fin k, X ∉ Set.range c → Y ∉ Set.range c → X = Y) {θ₁ θ₂ : ℝ} (hlen : π / 3 < θ₂ - θ₁)

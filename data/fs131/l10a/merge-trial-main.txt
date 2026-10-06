@@ -1,0 +1,9 @@
+origin/main=294603ae HEAD=56e7456b base=ff377526
+4f02a2d8b6a440c1e47b6a3ad799fedd03353844
+scripts/Axioms.lean
+
+Auto-merging ARCHITECTURE.md
+Auto-merging Proofs.lean
+Auto-merging scripts/Axioms.lean
+CONFLICT (content): Merge conflict in scripts/Axioms.lean
+exit=1
