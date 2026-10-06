@@ -1,7 +1,7 @@
 exec(open("/home/kooshi/source/lean-dir/data/fs131/briefs/scripts/mkbrief.py").read())
 import sys
 LANE=sys.argv[1]   # "A" or "B"
-M=WT+"fs131-wm/"; MD=M+"Proofs/HadwigerNelson/Plane/Models/"
+M=WT+("fs131-wm/" if LANE=="A" else "fs131-wmb/"); MD=M+"Proofs/HadwigerNelson/Plane/Models/"
 KP=M+"plans/FS131-models-kernel-plan.md"
 if LANE=="A":
     JOB="FS131-MA1"; SLUG="FS131-MA1-models-moves.md"; TREE="fs131-wm"; FILES="`Proofs/HadwigerNelson/Plane/Models/Paint.lean`, `Proofs/HadwigerNelson/Plane/Models/Moves.lean`"
@@ -68,8 +68,11 @@ The plan (read it whole; § 2 is the construction, § 3 the plan per leaf, § 3.
 ## Done means
 
 1. **Your readback first**: check every quotation above against its source; read the planner's record whole, the general layer in `Paint`, and the
-   landed theorems your models apply. Build the branch once as given (expect it up to date: 59 distinct `sorry` warnings, all in the four model
-   files). Open your record with what you may and may not change. Commit and push.
+   landed theorems your models apply. Build the branch once as given (59 distinct `sorry` warnings, all in the four model files; half B's tree
+   was copied from a build of `main`'s line, so there the four model files compile at this first build). **One naming rule, new today**
+   (`LEAN.md` § Searching — Lean, last bullet; read it from the main checkout, `/home/kooshi/source/lean-dir/LEAN.md`): two branches never state
+   one lemma under one name. The other half works in the other two files of `Plane/Models` on a branch of its own; a general fact about `paint`
+   or `brickBase` that you need and `Paint` lacks goes in your own file under a name that begins with your model's name, and into your report. Open your record with what you may and may not change. Commit and push.
 2. **The leaves**, in the planner's order, saving after each group (a build, the axioms print for the group, the statement check, commit, push).
    Re-price after your first two leaves and say so. The three brick facts are stated in coordinates and re-proved here (wave 5's `BrickMap` is not
    on `main`); after wave 5 lands they become three lines each — note the names for that tidy, do not wait for it.
