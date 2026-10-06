@@ -1,0 +1,2 @@
+statement check against f1c13612: 23 base declarations compared in 2 modules; 0 changed or missing; 1 added since the base
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.intCast_zmod_six_of_half_le_cos

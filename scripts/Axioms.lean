@@ -6707,6 +6707,34 @@ their implementers close them. -/
 #print axioms HadwigerNelson.Plane.ArcMap.v6_anti
 -- FS131-K8 block end (Plane/RingCalculus)
 
+/-! ## FS131-I8A — FS-131 wave 8's first implementer: the route to `emptyNS` (`Plane/RingCalculus/Empty` and the helper
+modules `HubCount`, `TilesAt`). The leaves join this block as they close. -/
+-- FS131-I8A: Plane/RingCalculus/HubCount (FS116-V6-COUNT's count: the kernel table, by `decide +kernel`)
+#print axioms HadwigerNelson.Plane.V6Count.allZ_iff
+#print axioms HadwigerNelson.Plane.V6Count.anyZ_iff
+#print axioms HadwigerNelson.Plane.V6Count.allF_iff
+#print axioms HadwigerNelson.Plane.V6Count.anyF_iff
+#print axioms HadwigerNelson.Plane.V6Count.stmtB_sound
+#print axioms HadwigerNelson.Plane.V6Count.table
+#print axioms HadwigerNelson.Plane.V6Count.sub_one_not_cons
+#print axioms HadwigerNelson.Plane.V6Count.mem_shapes_single
+#print axioms HadwigerNelson.Plane.V6Count.mem_shapes_double
+#print axioms HadwigerNelson.Plane.V6Count.exists_shape
+#print axioms HadwigerNelson.Plane.V6Count.count
+#print axioms HadwigerNelson.Plane.V6Count.countModel_hyps
+-- FS131-I8A: Plane/RingCalculus/TilesAt
+#print axioms HadwigerNelson.Plane.isPreconnected_sphere_complex
+#print axioms HadwigerNelson.Plane.ArcMap.finite_tileAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_tileAt
+#print axioms HadwigerNelson.Plane.ArcMap.TileAt.inter_sphere_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.sphere_subset_iUnion_closure_tileAt
+-- FS131-I8A: Plane/RingCalculus/Empty (the leaves closed)
+#print axioms HadwigerNelson.Plane.ArcMap.intCast_zmod_six_of_half_le_cos
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_sixth_dist_le_one
+#print axioms HadwigerNelson.Plane.ArcMap.v6_count
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ne_mem_closure_inter_of_split
+-- FS131-I8A block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

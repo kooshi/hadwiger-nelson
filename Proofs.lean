@@ -237,6 +237,8 @@ import Proofs.HadwigerNelson.Plane.Models.Applied
 import Proofs.HadwigerNelson.Plane.SimpleOn
 import Proofs.HadwigerNelson.Plane.RingCalculus.Basic
 import Proofs.HadwigerNelson.Plane.RingCalculus.Star
+import Proofs.HadwigerNelson.Plane.RingCalculus.HubCount
+import Proofs.HadwigerNelson.Plane.RingCalculus.TilesAt
 import Proofs.HadwigerNelson.Plane.RingCalculus.Empty
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
