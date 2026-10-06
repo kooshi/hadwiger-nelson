@@ -1,0 +1,11 @@
+statement check against f1c13612: 23 base declarations compared in 2 modules; 0 changed or missing; 10 added since the base
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.GammaFreeRing.changePoint_gap
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.exists_int_of_three_dist_le_one
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.exists_two_double_tiles
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.fin_four_three_pairs
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.intCast_zmod_six_of_half_le_cos
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.not_double_two_classes
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.ringPt_mem_of_sixth
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.ringPt_sixth_congr
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: HadwigerNelson.Plane.ArcMap.sixth_cons_of_mem_closure
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/Star.lean: HadwigerNelson.Plane.ArcMap.exists_tileOf_of_germIn

@@ -17,7 +17,9 @@ validity, no colours.
 * `exists_fin_tileAt`: in a valid non-Siamese map the tiles of a point of at most `n` colours are listed by `Fin n`
   (for the counts of FS116-V6-HUBS and FS116-V6-COUNT, which read four tiles).
 
-Spec examples: `halfPlane2` at the origin (`Plane/LocalMapExamples`), at the end.
+Spec example: the split lemma these serve is applied to `halfPlane2` at its change point `r(0)` in
+`Plane/RingCalculus/Empty` (both groups of tiles inhabited); `exists_fin_tileAt`'s hypotheses are read on a valid
+non-Siamese map only in `emptyNS`'s class, whose Lean model is owed (`Empty`'s header).
 -/
 
 namespace HadwigerNelson.Plane
