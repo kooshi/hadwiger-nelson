@@ -244,6 +244,7 @@ import Proofs.HadwigerNelson.Plane.RingCalculus.RingColour
 import Proofs.HadwigerNelson.Plane.RingCalculus.Empty
 import Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub
 import Proofs.HadwigerNelson.Plane.RingCalculus.SemiHubPlaces
+import Proofs.HadwigerNelson.Plane.RingCalculus.StarChart
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.Topology.SpernerGrid

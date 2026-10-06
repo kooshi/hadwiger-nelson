@@ -6808,6 +6808,27 @@ leaves close. -/
 #print axioms HadwigerNelson.Plane.ArcMap.closure_inter_subset_sphere
 -- FS131-K8b block end
 
+/-! ## FS131-I8B — FS-131 wave 8's join: the lemmas `Plane/RingCalculus/SemiHub` and `SemiHubPlaces` share
+(`Plane/RingCalculus/StarChart`), and FS116-N2-ANTI (`Plane/RingCalculus/Star`). -/
+-- FS131-I8B: Plane/RingCalculus/StarChart
+#print axioms HadwigerNelson.Plane.exists_int_of_angleIcc_subset
+#print axioms HadwigerNelson.Plane.int_eq_zero_of_two_pi_mul_lt
+#print axioms HadwigerNelson.Plane.int_eq_zero_of_abs_two_pi_mul_lt
+#print axioms HadwigerNelson.Plane.segment_eq_image_ray
+#print axioms HadwigerNelson.Plane.Arc.InitialPiece.exists_param
+#print axioms HadwigerNelson.Plane.branchPt_mem_Rgn
+#print axioms HadwigerNelson.Plane.branchPt_curveGerm_add
+#print axioms HadwigerNelson.Plane.not_both_mem_Rgn_curveGerm
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_tile_of_near
+#print axioms HadwigerNelson.Plane.ArcMap.ncard_tileAt_eq
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.tileAt_equiv
+#print axioms HadwigerNelson.Plane.ArcMap.exists_sectorChart_tileAt
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_branch_of_isPreconnected
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_branch
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_between
+#print axioms HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three
+-- FS131-I8B block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

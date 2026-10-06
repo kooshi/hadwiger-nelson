@@ -1,0 +1,3 @@
+axioms print: 22 records (0 axiom-free), each a subset of the standard three: NO; control `FS131I8BControl.planted_sorry` prints ['sorryAx']
+BAD FS131I8BControl.planted_sorry: ['sorryAx']
+axioms fault exit=1
