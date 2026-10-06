@@ -4826,3 +4826,25 @@ reason by the close.*
      saturation give the fan with end tangents: derived, derivable or false — goes to a deriver, FS131-E8, at the next free slot**; K6
      writes its exact statement into its record. This bears outside the milestone: REG-J′ is route M's regularity hypothesis (rows 140–144),
      so a "false" would be a finding for FS-126 and FS-127's stubs. (d) A second planning pass, FS131-K6b, follows K6's hand-back.
+
+482. **FS131-MC1 asks, and is ruled: the example maps land without `stuckModel_terminal`** (source: MC1's message to "main", 2026-10-06; its
+     Stage 1 saved; `main` merged into `fs131-wmb` as `abe678bb`, one conflict, keep-both; the joined tree builds with one `sorry` warning;
+     `./scripts/dupnames.sh` on the joined tree `doubled=0` — by its word, to be read at its hand-back). **Its two findings**: (1) of the
+     nineteen stuck-family heads in `Terminal`, `F.Terminal` alone is a hypothesis of `n3_end_chain` only; `cv_l0`,
+     `hornBoundsQR_of_isChainVertex`, `horn_upper_ne_one`, `c_ends`, `run_ends` take `IsTerminalMap` (`Valid ∧ IsPlaneMap ∧ Terminal ∧
+     QROnly`), and `stuckModel.QROnly` is not in the skeleton — so the declaration alone would close no gate item; fifteen other heads are
+     served by `stuckModel_hyps` today. (2) Its size against wave 5's library: 500–650 lines (the plan said 300–500): "no colour has two
+     sectors" at every point of the planted disc and squares needs each class connected near each point, and three families are not convex.
+     **Ruling**: option (a) — the declaration is removed from `Stuck.lean`, its statement and route recorded for a successor whose target is
+     `stuckModel.IsTerminalMap` whole; the three heads that read it keep a corrected hand-model sentence; everything else lands. Alternative:
+     spend the job on it and let a successor land. Why: it closes nothing alone, and the landing closes the gate item on the four moves and
+     fifteen stuck heads today; ruling 480 (a)'s fallback. Confidence: high. **A slip, mine**: the brief's "`cv_l0` and its like name
+     `stuckModel_terminal` only if it is proved" omitted `QROnly`; MC1 read the statements and caught it. **Owed after the landing**: a
+     job on `stuckModel.IsTerminalMap` (with the second planning pass for `F₀`, `F₁`, ruling 461 (d)).
+483. **Kooshi asks whether the five-colour fields and the collapse to the plane are in this milestone; answered from the record** (2026-10-06).
+     They are not proved by FS-131: row 123's chain enters as the named hypothesis `Row123Chain` and row 130's equality as `Row130Collapse`
+     (`plans/FS131-kernel-plan.md` § 7.4, l. 583–584); their kernel milestones are FS-113 (measure rigidity in full, rank 15) and FS-101
+     (the main clause through five, rank 16), with the collapse's Lean phase under FS-103, his call (`plans/FRONTIER-STUBS.md` l. 59–60).
+     Wave 10 holds the spectral statements under row 121 and the standing-five field. **Offered, not ruled** (the order of milestones is
+     his): one planner pass on FS-113 at a free slot, to price it from its first leaves; default, his order stands (the backlog, then
+     FS-124). Awaiting his word.
