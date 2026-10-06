@@ -285,3 +285,53 @@ unread clauses stay in their statements; `fanAngle` beside `polarAngle` and `Map
   the tidied files is Stage 4's, with `main` merged — the tidies change three code lines, in one file, and that file was elaborated.
 
 ## Stage 3 — SAVED (FS131-L6A)
+
+## Stage 4 — SAVED (FS131-L6A): `main` merged in (`6272aeb2`); the joined tree builds; no doubled name
+
+- **The trial, before the merge** (`git merge-tree --write-tree --name-only HEAD origin/main` on Stage 3's commit;
+  `data/fs131/l6a/merge-trial-main.txt`; `origin/main` at `ac2e84ea`, merge base `a917d57f`, wave 5's landing): **three conflicts —
+  `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean`** — the three the brief foresaw, and the only paths both sides changed
+  since the base. `main` changed 20 files under `Proofs/` since the base (the example maps, wave 10's four, eleven of
+  `Plane/ValidMap`), this line the fourteen wave files; **no Lean file under `Proofs/` conflicts**.
+- **The merge `6272aeb2`** (`git -c merge.conflictStyle=diff3 merge --no-ff --no-commit`, resolved, checked, committed; two
+  parents). All three hunks are adjacent additions with no base. `scripts/Axioms.lean`: `main`'s blocks in their place and wave
+  6's seven after them, above the `=== PURCHASED ===` banner (`tools/fs131_l6a_keepboth.py resolve --theirs-first`).
+  `ARCHITECTURE.md` and `Proofs.lean`: `main`'s lines, then this line's, **with no blank line between** — the table's rows and the
+  import list stay contiguous (`data/fs131/l6a/resolve_join.py`, which refuses a hunk with a base). The three-way check on each
+  (`keepboth-main.txt`, each exit 0, its plants fired): `ARCHITECTURE.md` 725 non-blank lines, `Proofs.lean` 264,
+  `scripts/Axioms.lean` 6,871 with `#print axioms` lines **6,122 = this line's 5,534 + `main`'s 5,809 − the base's 5,221**; no
+  name printed twice. Against `main`'s files (`git diff --numstat ac2e84ea`): `ARCHITECTURE.md` 14 added, 0 removed; `Proofs.lean`
+  14, 0; `scripts/Axioms.lean` 323, 0.
+- **The index held the merge and nothing else** (`tools/fs131_l6a_mergeindex.py ac2e84ea ARCHITECTURE.md Proofs.lean
+  scripts/Axioms.lean`; `mergeindex-main.txt`): 519 staged paths, 3 changed by both sides, 516 taken whole from `main`; PASS. Its
+  control on this merge: with `Proofs.lean` not named, `BOTH sides changed, merged unread: Proofs.lean`, exit 1. **One thing the
+  check caught that was not a plant**: between two of its runs `origin/main` moved from `ac2e84ea` to `309f4de5` (another
+  session's fetch; the worktrees share refs), and the run that named the ref read `WRONG-MERGE` and two `NOT-THEIRS` lines. The
+  merge is of `ac2e84ea`; from there the check names the commit by hash. What `main` added after `ac2e84ea` is under `plans/`
+  alone (Stage 6 merges it).
+- **After the merge the Lean tree is `main`'s plus the wave**: `git diff --name-only ac2e84ea HEAD -- Proofs Proofs.lean
+  lakefile.toml lake-manifest.json lean-toolchain` names `Proofs.lean` and the fourteen wave files and nothing else; the wave files
+  are unchanged from Stage 3's commit `06568a43`.
+- **The build tree.** `main`'s compiled modules were copied in from the idle landing worktree of wave 10 before the build
+  (`rsync -a --update ../fs131-w10l/.lake/build/ .lake/build/`; `data/fs131/l6a/rsync-w10l-build.txt`: 304 files written, 38 of
+  them `.olean`, 72 new, none under `Plane/Saturated`; that tree is at `b344490e`, clean, its Lean inputs `main`'s — `git diff
+  --name-only b344490e ac2e84ea -- Proofs Proofs.lean lakefile.toml lake-manifest.json lean-toolchain` is empty — and no process
+  had its working directory there). `.lake/build` stays this worktree's own directory. Lake checks each module's trace by hash, so
+  a copied file that did not match its source would have been rebuilt.
+- **The build of the joined tree** (`data/fs131/l6a/build-main.log`, `HEAD=78311727`, whose Lean sources are `6272aeb2`'s; no
+  tracked file modified): **`build: OK — 469 of 469 batches, 12 module(s) rebuilt, 0 module(s) with warnings, 9m10s`,
+  `exit=0`**; the full log (`build-main-full.log`) holds **0 `warning` lines** and ends "Build completed successfully (5828
+  jobs)". The twelve rebuilt are the tidied wave modules, their dependents and the import surface: `MapEdge`, `Fan`, `Pinch`,
+  `CurveArc`, `FanExamples`, `MapColouring`, `LocalGraph`, `ArcContinuation`, `FanArcs`, `FanBuild`, `FanBridge`, `Proofs`. So
+  this is also the build of Stage 3's tidies: `FanBridge` compiles against `FanBuild`'s two lemmas, and no wave module broke under
+  `main`'s changes (`Basic`, `Curve`, `Sq9Map` were not rebuilt: nothing upstream of them moved).
+- **`./scripts/dupnames.sh` on the joined tree, before anything else** (`data/fs131/l6a/dupnames-joined.log`, `exit=0`):
+  **"dupnames: OK — no name is declared by two modules (23 generated on demand, listed above)"** — `main`'s own count of generated
+  names. The join of five lines and `main` made no doubled name: the one duplicate pair the lines held was renamed by its
+  author before any push and folded in Stage 3.
+- **The kernel's own list** (`data/fs131/l5/count-modules.lean` on the joined library; `count-modules-joined.out`): `TOTAL
+  declarations=14299 refutations=199 modules=1817 theorems=9336` — `main`'s 13,767 declarations, 192 refutations, 1,803 modules
+  and 8,956 theorems (`data/fs131/l10a/count-modules-first.out`) plus the wave's fourteen modules: **532 declarations, 7
+  refutations, 380 theorems** (Stage 2's 534 and 382 less the two folded lemmas); no theorem of `main` is gone.
+
+## Stage 4 — SAVED (FS131-L6A)

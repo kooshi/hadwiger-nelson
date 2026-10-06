@@ -7260,6 +7260,70 @@ list of the library's theorems (`data/fs131/l5/count-modules.lean`), by `tools/f
 #print axioms HadwigerNelson.Plane.sat_noPar
 #print axioms HadwigerNelson.Plane.sq9Map_separatesAt
 #print axioms HadwigerNelson.Plane.sq9Map_sat_model
+/-! ## FS131-L6A — wave 6's first landing: the theorems of `Plane/Saturated/*` that the planners' and the five implementers'
+blocks did not list. Read from the kernel's own list of the library's theorems (`data/fs131/l5/count-modules.lean`), by
+`tools/fs131_l6a_register.py`; checked by `tools/fs131_l5_records.py`. -/
+-- Plane/Saturated/ArcContinuation
+#print axioms HadwigerNelson.Plane.ArcSetting.chart_abs_le
+#print axioms HadwigerNelson.Plane.ArcSetting.exists_arc
+#print axioms HadwigerNelson.Plane.ArcSetting.exists_reparam
+#print axioms HadwigerNelson.Plane.HasArcChart.mem
+#print axioms HadwigerNelson.Plane.IsArcOf.abs_sub_lt
+#print axioms HadwigerNelson.Plane.IsArcOf.bounds
+#print axioms HadwigerNelson.Plane.IsArcOf.length_le
+#print axioms HadwigerNelson.Plane.IsArcOf.mem
+#print axioms HadwigerNelson.Plane.IsArcOf.reverse
+#print axioms HadwigerNelson.Plane.IsUnitCurve.angle_of_reparam
+#print axioms HadwigerNelson.Plane.exists_Icc_subset_of_mem_nhds
+-- Plane/Saturated/Basic
+#print axioms HadwigerNelson.Plane.dist_sqEdgePt
+#print axioms HadwigerNelson.Plane.sq9_h2_of_side
+#print axioms HadwigerNelson.Plane.sqEdgePt_mem_ball
+#print axioms HadwigerNelson.Plane.sqEdgePt_mem_closure_half
+#print axioms HadwigerNelson.Plane.sqEdge_coords
+#print axioms HadwigerNelson.Plane.sqEdge_side_of_disc
+#print axioms HadwigerNelson.Plane.volume_sqEdge_line
+-- Plane/Saturated/CurveArc
+#print axioms HadwigerNelson.Plane.IsUnitCurve.abs_angle_sub_le
+#print axioms HadwigerNelson.Plane.IsUnitCurve.continuousOn
+#print axioms HadwigerNelson.Plane.IsUnitCurve.sin_le_dist
+#print axioms HadwigerNelson.Plane.angleCurve_zero
+#print axioms HadwigerNelson.Plane.eq_add_of_sin_bounds
+#print axioms HadwigerNelson.Plane.hasDerivAt_angleCurve
+-- Plane/Saturated/Fan
+#print axioms HadwigerNelson.Plane.AeColouring.RegJFan.singLocallyFinite
+#print axioms HadwigerNelson.Plane.AeColouring.RegJLiteral.singLocallyFinite
+#print axioms HadwigerNelson.Plane.cyclicNext_of_lt
+#print axioms HadwigerNelson.Plane.cyclicNext_of_not_lt
+-- Plane/Saturated/FanArcs
+#print axioms HadwigerNelson.Plane.AeColouring.hasArcChart
+#print axioms HadwigerNelson.Plane.AeColouring.polarGraph_of_curve_from_center
+#print axioms HadwigerNelson.Plane.ArcSetting.exists_open_subset_component
+#print axioms HadwigerNelson.Plane.eq_or_mem_sphere_of_notMem
+-- Plane/Saturated/FanBridge
+#print axioms HadwigerNelson.Plane.AeColouring.regJFan_iff_singLocallyFinite
+-- Plane/Saturated/FanBuild
+#print axioms HadwigerNelson.Plane.isPreconnected_polarGraph
+#print axioms HadwigerNelson.Plane.polarGraph_sub_int
+#print axioms HadwigerNelson.Plane.polarPt_add_int
+#print axioms HadwigerNelson.Plane.polarPt_eq_polarPt
+#print axioms HadwigerNelson.Plane.polarPt_norm_arg
+#print axioms HadwigerNelson.Plane.polarRegion_nonempty
+-- Plane/Saturated/FanExamples
+#print axioms HadwigerNelson.Plane.abs_re_im_sub_lt_of_mem_ball
+#print axioms HadwigerNelson.Plane.cos_sin_quarter_turn
+#print axioms HadwigerNelson.Plane.cyclicNext_sq9Fanφ
+#print axioms HadwigerNelson.Plane.isClosed_sq9Sq
+#print axioms HadwigerNelson.Plane.sq9_essSupport_subset_sq
+#print axioms HadwigerNelson.Plane.sq9_mem_essBdry_of_quads
+#print axioms HadwigerNelson.Plane.sq9_polarGraph_eq
+#print axioms HadwigerNelson.Plane.sq9_pred_ne
+#print axioms HadwigerNelson.Plane.sqQuad_inj
+#print axioms HadwigerNelson.Plane.sqSg_decide_mul_nonneg
+#print axioms HadwigerNelson.Plane.sqVertex_coords
+#print axioms HadwigerNelson.Plane.volume_sqVertex_hline
+#print axioms HadwigerNelson.Plane.volume_sqVertex_vline
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
