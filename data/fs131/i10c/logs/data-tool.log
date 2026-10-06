@@ -1,0 +1,6 @@
+(a) Horner at 1_H: last vector constant: True  value 289
+(b) sign points: ['-4', '-2', '-5/4', '0', '1/5', '1', '2', '3']  values: ['-3323', '59', '-32521/16384', '1', '-2419/78125', '17', '-41', '289']  alternate: True
+(c) x^128 = x mod (g, 2): True  residues: [[1, 0, 1, 0, 1, 1, 1], [0, 0, 0, 1, 1, 1, 1], [1, 0, 0, 1, 0, 1, 0], [1, 1, 0, 0, 1, 1, 0], [0, 1, 0, 0, 0, 0, 0]]
+(d) naturals p < 347, p = 3 (mod 4), with 3, 11 squares and a root of g mod p: []  at 347: True
+(e) (g - 16x - 1) / (x^2 - x) = [25, 11, -17, -10, 2, 1]  remainder [0, 0]
+CHECK: PASS
