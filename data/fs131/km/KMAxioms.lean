@@ -5,12 +5,12 @@ import Proofs.HadwigerNelson.Plane.Models.Bends
 #print axioms HadwigerNelson.Plane.ArcMap.relabel_region_eq_empty
 #print axioms HadwigerNelson.Plane.ArcMap.relabel_valid
 #print axioms HadwigerNelson.Plane.ArcMap.interiorPts_paint
+#print axioms HadwigerNelson.Plane.ArcMap.region_paint
+#print axioms HadwigerNelson.Plane.ArcMap.paint_valid
 #print axioms HadwigerNelson.Plane.ArcMap.paint_condition5
 #print axioms HadwigerNelson.Plane.brickBase_valid
 #print axioms HadwigerNelson.Plane.brickBase_condition5
 #print axioms HadwigerNelson.Plane.brickBase_region_spare
-#print axioms HadwigerNelson.Plane.ArcMap.region_paint
-#print axioms HadwigerNelson.Plane.ArcMap.paint_valid
 #print axioms HadwigerNelson.Plane.brickBase_mem_interiorPts
 #print axioms HadwigerNelson.Plane.brickBase_col_eq
 #print axioms HadwigerNelson.Plane.brickBase_col_zero

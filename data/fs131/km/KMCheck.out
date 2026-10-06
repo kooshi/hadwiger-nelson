@@ -1,0 +1,109 @@
+@ArcMap.isSector_iff_of_partition : ∀ {k : ℕ} {F : ArcMap k} {ι : Type u_1} {A : ι → Set ℂ} {v : ℂ} {r : ℝ},
+  F.interiorPts ∩ Metric.ball v r = ⋃ i, A i →
+    (∀ (i : ι), IsOpen (A i)) →
+      (∀ (i : ι), IsPreconnected (A i)) →
+        (∀ (i j : ι), i ≠ j → Disjoint (A i) (A j)) →
+          (∀ (i : ι), (A i).Nonempty) → (∀ (i : ι), v ∈ closure (A i)) → ∀ {S : Set ℂ}, F.IsSector v r S ↔ ∃ i, S = A i
+@ArcMap.encard_sectors_of_partition : ∀ {k : ℕ} {F : ArcMap k} {n : ℕ} {A : Fin n → Set ℂ} {v : ℂ} {r : ℝ},
+  F.interiorPts ∩ Metric.ball v r = ⋃ i, A i →
+    (∀ (i : Fin n), IsOpen (A i)) →
+      (∀ (i : Fin n), IsPreconnected (A i)) →
+        (∀ (i j : Fin n), i ≠ j → Disjoint (A i) (A j)) →
+          (∀ (i : Fin n), (A i).Nonempty) → (∀ (i : Fin n), v ∈ closure (A i)) → {S | F.IsSector v r S}.encard = ↑n
+@ArcMap.encard_sectorsOf_of_partition : ∀ {k : ℕ} {F : ArcMap k} {ι : Type u_1} {A : ι → Set ℂ} {colA : ι → Fin k}
+  {v : ℂ} {r : ℝ},
+  F.interiorPts ∩ Metric.ball v r = ⋃ i, A i →
+    (∀ (i : ι), IsOpen (A i)) →
+      (∀ (i : ι), IsPreconnected (A i)) →
+        (∀ (i j : ι), i ≠ j → Disjoint (A i) (A j)) →
+          (∀ (i : ι), (A i).Nonempty → v ∈ closure (A i)) →
+            (∀ (i : ι), A i ⊆ F.col ⁻¹' {colA i}) →
+              ∀ (c : Fin k), (F.sectorsOf v r c).encard = {i | (A i).Nonempty ∧ colA i = c}.encard
+@ArcMap.coloursAt_congr : ∀ {k : ℕ} {F F' : ArcMap k} {w : ℂ} {U : Set ℂ},
+  U ∈ nhds w → (∀ (j : Fin k), F.region j ∩ U = F'.region j ∩ U) → F.coloursAt w = F'.coloursAt w
+@ArcMap.covers_of_isPlaneMap : ∀ {k : ℕ} {F : ArcMap k}, F.IsPlaneMap → ∀ (x : ℂ) (R : ℝ), F.Covers x R
+@ArcMap.recolour_region_diff : ∀ {k : ℕ} {F : ArcMap k} {W : Set ℂ} {B : Set Arc} {hB : ∀ a ∈ B, a.Nondegenerate}
+  {hBf : B.Finite} {hW : frontier W ⊆ ⋃ a ∈ B, a.carrier} {c : Fin k} (j : Fin k),
+  (F.recolour W B hB hBf hW c).region j \ (closure W ∪ ⋃ a ∈ B, a.carrier) =
+    F.region j \ (closure W ∪ ⋃ a ∈ B, a.carrier)
+@ArcMap.HasHornCount.eq : ∀ {k : ℕ} {F : ArcMap k} {v : ℂ} {j j' : ℕ}, F.HasHornCount v j → F.HasHornCount v j' → j = j'
+@ArcMap.HasDegree.eq : ∀ {k : ℕ} {F : ArcMap k} {v : ℂ} {m m' : ℕ}, F.HasDegree v m → F.HasDegree v m' → m = m'
+@ArcMap.cuspFrag_partition : ∀ {r : ℝ},
+  r ≤ 1 / 2 → ArcMap.cuspFrag.interiorPts ∩ Metric.ball 0 r = ⋃ i, ArcMap.cuspPiece r i
+@ArcMap.cuspPiece_data : ∀ {r : ℝ},
+  0 < r →
+    r ≤ 1 / 2 →
+      (∀ (i : Fin 4), IsOpen (ArcMap.cuspPiece r i)) ∧
+        (∀ (i : Fin 4), IsPreconnected (ArcMap.cuspPiece r i)) ∧
+          (∀ (i j : Fin 4), i ≠ j → Disjoint (ArcMap.cuspPiece r i) (ArcMap.cuspPiece r j)) ∧
+            (∀ (i : Fin 4), (ArcMap.cuspPiece r i).Nonempty) ∧ ∀ (i : Fin 4), 0 ∈ closure (ArcMap.cuspPiece r i)
+ArcMap.cuspFrag_isHorn : ArcMap.cuspFrag.IsHorn 0 0 (-1) 1 1
+ArcMap.cuspFrag_valid : ArcMap.cuspFrag.Valid
+@ArcMap.cuspFrag_mem_interiorPts : ∀ {z : ℂ},
+  z ∈ ArcMap.cuspFrag.interiorPts ↔ ‖z‖ < 1 / 2 ∧ ‖z - Complex.I‖ ≠ 1 ∧ ‖z + Complex.I‖ ≠ 1
+isOpen_hornSet : ∀ (v : ℂ) (α κ₁ κ₂ r : ℝ), IsOpen (hornSet v α κ₁ κ₂ r)
+isPreconnected_hornSet : ∀ (v : ℂ) (α : ℝ) {κ₁ κ₂ r : ℝ},
+  κ₁ < κ₂ → |κ₁| * r < 2 → |κ₂| * r < 2 → IsPreconnected (hornSet v α κ₁ κ₂ r)
+carrier_germArc : ∀ (v : ℂ) (β : ℝ) {κ ρ : ℝ},
+  0 ≤ ρ → |κ| * ρ ≤ 2 → (germArc v β κ ρ).carrier = branchPt v β κ '' Set.Icc 0 ρ
+germArc_nondegenerate : ∀ (v : ℂ) (β κ : ℝ) {ρ : ℝ}, 0 < ρ → (germArc v β κ ρ).Nondegenerate
+@mem_germArc_iff_of_mem_hornSet : ∀ {v z : ℂ} {α κ₁ κ₂ σ ρ : ℝ},
+  0 ≤ ρ →
+    |σ| * ρ ≤ 2 →
+      z ∈ hornSet v α κ₁ κ₂ ρ → (z ∈ (germArc v α σ ρ).carrier ↔ tanHeight σ (frameX v α z) (frameY v α z) = 0)
+tanAbove_one_iff : ∀ (v : ℂ) (α : ℝ) (z : ℂ), TanAbove v α 1 z ↔ dist z (v + e (α + Real.pi / 2)) < 1
+tanBelow_one_iff : ∀ (v : ℂ) (α : ℝ) (z : ℂ), TanBelow v α 1 z ↔ 1 < dist z (v + e (α + Real.pi / 2))
+tanAbove_neg_one_iff : ∀ (v : ℂ) (α : ℝ) (z : ℂ), TanAbove v α (-1) z ↔ 1 < dist z (v - e (α + Real.pi / 2))
+tanBelow_neg_one_iff : ∀ (v : ℂ) (α : ℝ) (z : ℂ), TanBelow v α (-1) z ↔ dist z (v - e (α + Real.pi / 2)) < 1
+tanHeight_polar : ∀ (v : ℂ) (α κ s φ : ℝ),
+  tanHeight κ (frameX v α (v + ↑s * e φ)) (frameY v α (v + ↑s * e φ)) = s * (Real.sin (φ - α) - κ * s / 2)
+sectorBetween_eq_hornSet : ∀ (v : ℂ) (β κ₁ κ₂ r : ℝ),
+  |κ₁| * r ≤ 2 → |κ₂| * r ≤ 2 → sectorBetween v β κ₁ β κ₂ r = hornSet v β κ₁ κ₂ r
+@ne_hornSet_of_interior_coneAt : ∀ {S : Set ℂ} {v : ℂ},
+  (interior (coneAt S v)).Nonempty → ∀ (α κ₁ κ₂ r : ℝ), S ≠ hornSet v α κ₁ κ₂ r
+@e_eq_of_mem_coneAt_hornSet : ∀ {v : ℂ} {α κ₁ κ₂ r β : ℝ}, β ∈ coneAt (hornSet v α κ₁ κ₂ r) v → e β = e α
+mem_coneAt_hornSet : ∀ (v : ℂ) (α : ℝ) {κ₁ κ₂ r : ℝ}, κ₁ < κ₂ → 0 < r → α ∈ coneAt (hornSet v α κ₁ κ₂ r) v
+@hornSet_curv_eq : ∀ {v : ℂ} {α κ₁ κ₂ κ₁' κ₂' r : ℝ},
+  κ₁ < κ₂ → κ₁' < κ₂' → 0 < r → hornSet v α κ₁ κ₂ r = hornSet v α κ₁' κ₂' r → κ₁ = κ₁' ∧ κ₂ = κ₂'
+@hornSet_mono : ∀ {v : ℂ} {α κ₁ κ₂ s₁ s₂ r : ℝ}, κ₁ ≤ s₁ → s₂ ≤ κ₂ → hornSet v α s₁ s₂ r ⊆ hornSet v α κ₁ κ₂ r
+ArcMap.eventually_not_two_rays_hornSet : ∀ (v : ℂ) (α κ₁ κ₂ : ℝ) {d₁ d₂ : ℂ},
+  (d₁ * (starRingEnd ℂ) d₂).im ≠ 0 →
+    ∀ᶠ (t : ℝ) in nhdsWithin 0 (Set.Ioi 0),
+      ∀ (r : ℝ), ¬(v + ↑t * d₁ ∈ hornSet v α κ₁ κ₂ r ∧ v + ↑t * d₂ ∈ hornSet v α κ₁ κ₂ r)
+frameX_add_pi : ∀ (v : ℂ) (α : ℝ) (z : ℂ), frameX v (α + Real.pi) z = -frameX v α z
+@not_mem_sevenBrickArcs : ∀ {z : ℂ},
+  (∀ (n : ℤ), z.im ≠ 3 / 5 * ↑n) →
+    (∀ (n : ℤ), z.re - 2 / 5 * ↑⌊z.im / (3 / 5)⌋ ≠ 4 / 5 * ↑n) → z ∉ ⋃ a ∈ sevenBrickArcs, a.carrier
+@sevenBrick_color_eq : ∀ {z : ℂ} {c r : ℤ},
+  ⌊z.im / (3 / 5)⌋ = r →
+    ⌊(z.re - 2 / 5 * ↑r) / (4 / 5)⌋ = c →
+      sevenBrickMap.col z =
+        HadwigerNelson.sevenBrick.table (HadwigerNelson.zmodIdx 7 ⋯ c) (HadwigerNelson.zmodIdx 7 ⋯ r)
+@sevenBrick_corner_col : ∀ {ρ : ℝ},
+  ρ ≤ 1 / 5 →
+    ∀ {z : ℂ},
+      (z ∈ brickCornerSector ρ 0 → sevenBrickMap.col z = 0) ∧
+        (z ∈ brickCornerSector ρ 1 → sevenBrickMap.col z = 6) ∧ (z ∈ brickCornerSector ρ 2 → sevenBrickMap.col z = 4)
+sevenBrickMap_condition5 : sevenBrickMap.Condition5
+Arc.finite_inter_sphere_or_eq_circ : ∀ (a : Arc),
+  a.Nondegenerate → ∀ (p : ℂ), (a.carrier ∩ Metric.sphere p 1).Finite ∨ ∃ θ₀ θ₁, a = Arc.circ p 1 θ₀ θ₁
+ArcMap.carrier_circ_full : ∀ (c : ℂ), (Arc.circ c 1 0 (2 * Real.pi)).carrier = Metric.sphere c 1
+ArcMap.hornSet_cusp_iff : ∀ (r : ℝ) (z : ℂ),
+  z ∈ hornSet 0 0 (-1) 1 r ↔ ‖z‖ < r ∧ 0 < z.re ∧ 1 < ‖z + Complex.I‖ ∧ 1 < ‖z - Complex.I‖
+ArcMap.hornSet_cusp_pi_eq : ∀ (r : ℝ), hornSet 0 Real.pi (-1) 1 r = ArcMap.cuspPiece r 1
+@frontier_union_subset : ∀ {X : Type u_1} [inst : TopologicalSpace X] (s t : Set X),
+  frontier (s ∪ t) ⊆ frontier s ∩ closure tᶜ ∪ closure sᶜ ∩ frontier t
+@IsPreconnected.union : ∀ {α : Type u_1} [inst : TopologicalSpace α] (x : α) {s t : Set α},
+  x ∈ s → x ∈ t → IsPreconnected s → IsPreconnected t → IsPreconnected (s ∪ t)
+@Convex.isPreconnected : ∀ {E : Type u_1} [inst : AddCommGroup E] [inst_1 : Module ℝ E] [inst_2 : TopologicalSpace E]
+  [ContinuousAdd E] [ContinuousSMul ℝ E] {s : Set E}, Convex ℝ s → IsPreconnected s
+@convex_ball : ∀ {E : Type u_1} [inst : SeminormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] (a : E) (r : ℝ),
+  Convex ℝ (Metric.ball a r)
+@frontier_ball : ∀ {E : Type u_1} [inst : SeminormedAddCommGroup E] [NormedSpace ℝ E] (x : E) {r : ℝ},
+  r ≠ 0 → frontier (Metric.ball x r) = Metric.sphere x r
+@closure_ball : ∀ {E : Type u_1} [inst : SeminormedAddCommGroup E] [NormedSpace ℝ E] (x : E) {r : ℝ},
+  r ≠ 0 → closure (Metric.ball x r) = Metric.closedBall x r
+@Real.arcsin_lt_arcsin : ∀ {x y : ℝ}, -1 ≤ x → x < y → y ≤ 1 → Real.arcsin x < Real.arcsin y
+@IsPreconnected.subset_connectedComponentIn : ∀ {α : Type u_1} [inst : TopologicalSpace α] {s : Set α} {x : α}
+  {F : Set α}, IsPreconnected s → x ∈ s → s ⊆ F → s ⊆ connectedComponentIn F x
+@Fin.castLE_injective : ∀ {n m : ℕ} (hmn : m ≤ n), Function.Injective (Fin.castLE hmn)

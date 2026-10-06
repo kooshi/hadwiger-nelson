@@ -141,13 +141,48 @@ theorem interiorPts_paint :
 theorem region_paint (j : Fin k) :
     (F.paint W B hB hBf hW g hg).region j =
       ((F.region j \ W) ∪ (F.interiorPts ∩ W ∩ g ⁻¹' {j})) \ ⋃ a ∈ B, a.carrier := by
-  sorry
+  classical
+  ext z
+  have hreg : z ∈ (F.paint W B hB hBf hW g hg).region j ↔
+      z ∈ (F.paint W B hB hBf hW g hg).interiorPts ∧ (F.paint W B hB hBf hW g hg).col z = j := Iff.rfl
+  rw [hreg, interiorPts_paint]
+  by_cases hz : z ∈ W
+  · rw [paint_col_of_mem hz]
+    constructor
+    · rintro ⟨⟨hzF, hzB⟩, hgz⟩
+      exact ⟨Or.inr ⟨⟨hzF, hz⟩, hgz⟩, hzB⟩
+    · rintro ⟨h | h, hzB⟩
+      · exact absurd hz h.2
+      · exact ⟨⟨h.1.1, hzB⟩, h.2⟩
+  · rw [paint_col_of_not_mem hz]
+    constructor
+    · rintro ⟨⟨hzF, hzB⟩, hcz⟩
+      exact ⟨Or.inl ⟨⟨hzF, hcz⟩, hz⟩, hzB⟩
+    · rintro ⟨h | h, hzB⟩
+      · exact ⟨⟨h.1.1, hzB⟩, h.1.2⟩
+      · exact absurd h.1.2 hz
 
-/-- **Validity of a painting** is a statement about `W`: no unit pair of one painted colour inside `W`, and none between a point of `W` and
-`F`'s class of its painted colour off `W`. With colours `F` does not use the second is empty (`relabel_region_eq_empty`). -/
-theorem paint_valid (hF : F.Valid) (hWW : ∀ x ∈ W, ∀ y ∈ W, dist x y = 1 → g x ≠ g y)
-    (hWc : ∀ x ∈ W, ∀ y ∈ F.region (g x), y ∉ W → dist x y ≠ 1) : (F.paint W B hB hBf hW g hg).Valid := by
-  sorry
+/-- **Validity of a painting** is a statement about `W`, read at the points off the new arcs: no unit pair of one painted colour inside
+`W`, and none between a point of `W` and `F`'s class of its painted colour off `W`. With colours `F` does not use the second is empty
+(`relabel_region_eq_empty`). -/
+theorem paint_valid (hF : F.Valid)
+    (hWW : ∀ x ∈ W, ∀ y ∈ W, x ∉ ⋃ a ∈ B, a.carrier → y ∉ ⋃ a ∈ B, a.carrier → dist x y = 1 → g x ≠ g y)
+    (hWc : ∀ x ∈ W, x ∉ ⋃ a ∈ B, a.carrier → ∀ y ∈ F.region (g x), y ∉ W → dist x y ≠ 1) :
+    (F.paint W B hB hBf hW g hg).Valid := by
+  classical
+  intro x hx y hy hxy
+  rw [interiorPts_paint] at hx hy
+  by_cases h1 : x ∈ W <;> by_cases h2 : y ∈ W
+  · rw [paint_col_of_mem h1, paint_col_of_mem h2]
+    exact hWW x h1 y h2 hx.2 hy.2 hxy
+  · rw [paint_col_of_mem h1, paint_col_of_not_mem h2]
+    intro hc
+    exact hWc x h1 hx.2 y ⟨hy.1, hc.symm⟩ h2 hxy
+  · rw [paint_col_of_not_mem h1, paint_col_of_mem h2]
+    intro hc
+    exact hWc y h2 hy.2 x ⟨hx.1, hc⟩ h1 (by rw [dist_comm]; exact hxy)
+  · rw [paint_col_of_not_mem h1, paint_col_of_not_mem h2]
+    exact hF x hx.1 y hy.1 hxy
 
 /-- **Condition 5 is kept** when no new arc meets a unit circle in infinitely many points. -/
 theorem paint_condition5 (h5 : F.Condition5) (hB5 : ∀ a ∈ B, ∀ p, (a.carrier ∩ sphere p 1).Finite) :

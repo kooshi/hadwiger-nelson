@@ -1,0 +1,22 @@
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:56:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:59:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:62:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:65:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:81:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:85:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:89:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:94:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:98:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:103:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:111:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:115:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:120:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:134:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:155:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:162:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:166:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:180:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:184:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:188:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Stuck.lean:193:8: warning: declaration uses `sorry`
+exit 0
