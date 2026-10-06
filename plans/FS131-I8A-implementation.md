@@ -23,6 +23,19 @@ namespace is given.
   `sphere_subset_iUnion_closure_tileAt`, `isPreconnected_sphere_complex`). Read against the module docstring's "the closures of the tiles
   of p cover a small circle about p; if those tiles are split into two non-empty groups … a tile of one group and a tile of the other
   share a closure point other than p".
+- **FS116-V6-HUG and FS129-MR1-DOUBLETIP, at the class the argument reads** — `not_sole_tip_of_adjacent_changePoints`
+  (`Plane/RingCalculus/SoleTip`): valid, non-Siamese, `Covers p 1`, at least four colours at `p` with at most two absent
+  (`k ≤ ncard + 2`), change points at `ψ` and `ψ + 60°`, one tile the only tip at each: `False`. From it `v6_hug` (its `hΓ` idle) and
+  `doubleTip` (its `hS`, `hv`, `hu` idle) (`…/Empty`). Read against "No tile T of p tips both y_0 and y_1 while being the only tip at
+  each" (`plans/FS116-V6-verification.md` l. 148) and against `doubleTip`'s docstring.
+- **FS116-V6-HUBS, `m = 1`** — `v6_hubs` (`…/Empty`), from `GammaFreeRing.changePoint_gap` and `Plane/RingCalculus/RingColour`. Read
+  against "the change points are y_k = r(ψ₀ + 60°k), six of them" (l. 141): the change points' angles are one coset of `(π/3)ℤ`.
+- **FS129-SR3-EMPTY-NS** (carrying FS116-Y4-EMPTY and FS116-Y4-OBST) — `emptyNS` (`…/Empty`): no valid non-Siamese six-coloured map
+  covering `B̄(p, 1)` about a point `p` of at least four colours has a ring with no arc of `Γ`. Read aloud against the row ("No
+  non-Siamese … valid six-coloured fragment on a closed disc of radius above 1 about a vertex of at least four colours has a ring carrying
+  no arc of Γ", l. 173, with *simple* removed by FS129-SR3): `F : ArcMap 6`, `F.Valid`, `F.NonSiamese`, `F.Covers p 1` (the open domain
+  holds `B̄(p, 1)`, which is "radius above 1": `covers_one_iff`), `4 ≤ (F.coloursAt p).ncard`, `F.GammaFreeRing p` (no sub-arc of `ω(p)`
+  of positive length lies in `Γ`) ⊢ `False`. With it `v6_hubs_vacuous` and `v6_hug_vacuous` are kernel facts.
 
 ## Stage 1 — SAVED (FS131-I8A): the readback, the branch built as given, the statement instrument
 
@@ -149,3 +162,97 @@ own stages, from their routes.
 
 `v6_hug`'s argument reads no Γ-free ring, and the same argument proves `doubleTip` without *simple* and without its two far-germ
 hypotheses. Stage 3 carries it.
+
+## Stage 3 — SAVED (FS131-I8A): the sole tip — `v6_hug`, and `doubleTip` by the coordinator's ruling
+
+*Stages 3 and 4 share one build and one commit (the helper modules of both were ready together); each is its own section.*
+
+### 3.1 The route is not the plan's
+
+The plan's route for `v6_hug` (its § 5.2: wave 3's `flank_cone`, `flank_edge_exists`, `flank_initialPieces`, then "the tiles beyond those
+edges are X′-tiles") needs a step it does not carry: that an initial piece of `T`'s edge at `y` lies in the closure of one `X′`-tile.
+With curved arcs a second arc may be tangent to that edge at `y`, and what lies between them is invisible to cones — so I did not take
+that route. The route taken reads no edge:
+
+1. `Valid.dist_le_one_of_near_germ` (FS116-N1-GERM-R, pointwise, the near side; the crossing lemma `Valid.false_of_crossing`): near
+   `y = r(ψ)` the class of the clockwise colour at `y' = r(ψ + 60°)` stays within `1` of `y'`.
+2. `exists_ball_subset_closure_region_of_sole_tip`: near `y`, an interior point of `B(p, 1)` outside `B̄(y', 1)` has a colour that is
+   not a colour of `p` (its tile would be a tile of `p` by the non-Siamese engine, a tile of `y` by `exists_ball_tileAt`, so the sole
+   tip `T`, which lies in `B(y', 1)`) and not that clockwise colour (1.); so it has the other ring colour, and that open region lies in
+   the closure of one colour class.
+3. The arc of `ω(y')` from `y` toward `p` is in the closure of that region (`mem_closure_diff_closedBall`), so in the closure of a tile
+   of the ring colour; mirror at `y'`. `twoCirc_cmp_one` (FS129-SR1-TWOCIRC, landed) puts points of the two arcs nearer than `1`; the
+   non-Siamese engine makes the two tiles one; it holds a ring point just clockwise of `y` and one just counter-clockwise of `y'`, more
+   than `1` apart (`dist_ringPt_shift_cmp`), against `IsTile.dist_lt_one`.
+
+About 260 lines with the docstring (the plan's price: 300); two elaborations.
+
+### 3.2 The finding (a generalization; sent mid-job, ruled on by the coordinator)
+
+`not_sole_tip_of_adjacent_changePoints` has `v6_hug`'s hypotheses **without `hΓ`** (the Γ-free ring) and `doubleTip`'s **without `hS`**
+(`SimpleOn (closedBall p 1)`), **`hv`** (`¬ GermOnQ p (ψ − π/3) .cw`) and **`hu`** (`¬ GermOnQ p (ψ + 2π/3) .ccw`), at every `k` with
+`k ≤ ncard + 2`. So FS116-V6-HUG is not confined to the empty class, and FS129-MR1-DOUBLETIP holds with neither simplicity nor a
+condition on the far germs. By the coordinator's ruling (mid-job, 2026-10-06) the two statements keep their hypotheses as filed, each
+idle one read by `have _ := …`, and `doubleTip` is closed here from the lemma; whether the rows are restated at the wider class is
+decided at the wave's landing.
+
+**Which of its hypotheses are jointly satisfiable short of the last** (my reading, one mind, a sentence and not a proof): a valid
+non-Siamese map with a vertex of four colours and two absent and a change point on its ring is held by hand (the bowtie's centre, the
+strip's `P₂`: `Plane/RingCalculus/Star`'s header), but **two change points `60°` apart are held by no fragment** (`Empty`'s header:
+"no held fragment has two adjacent change points of this kind"), so already "`hy` and `hy'`" together are not known satisfiable, and
+the lemma may be a refutation of hypotheses that contradict each other before the tip enters. No Lean model of any part of the class
+exists.
+
+Not checked: the entries' prose for why simplicity and the far germs were asked (the second planner reads that); any held fragment
+against the lemma.
+
+## Stage 4 — SAVED (FS131-I8A): `v6_hubs` and `emptyNS`
+
+### 4.1 `v6_hubs` — the plan's children, and where the route differs
+
+New module `Plane/RingCalculus/RingColour` (the germ colouring), the assembly in `Empty`. The plan's H1–H7, as built:
+
+- **H1 is not needed.** `germ_dichotomy` (landed, wave 3) gives every germ in one class or on a ring arc; a Γ-free ring has no ring arc
+  (`GammaFreeRing.exists_germIn`). No finiteness of `Γ ∩ ω(p)` is read anywhere.
+- **H2–H6** are `RingColour`'s lemmas over a germ colouring `κ` taken as data: `germCol_const` (H4, by `IsPreconnected.constant` on
+  an open interval), `germCol_rotate_ne` (H3), `germCol_change_rotate`/`germCol_change_int` (H5), `exists_germCol_change` (H6),
+  `exists_isChangePoint_iff` (a change point is a point whose two germs differ in colour — `r(ψ) ∈ Γ` follows).
+- **H7** (`GammaFreeRing.changePoint_gap`): no count of change points in a window, no finiteness, no parity as a number. Two change
+  points less than `60°` apart give a third in the window by H4 twice (`exists_third_change`). Then three classes of change points;
+  each class is six ring points `60°` apart covered by the four tiles of `p` (`exists_fin_tileAt`, `star_tip_nonempty`), so by a second
+  kernel table on the thirteen tip sets (`V6Count.twoDoubles`, 11.8 s) each class has two tiles holding two consecutive points of it;
+  no tile does so in two classes (`not_double_two_classes`: `cos δ = cos(δ + 60°) + cos(δ − 60°) ≥ 1` forces the two points equal);
+  `fin_four_three_pairs` ends it. **The plan's caution holds as it said**: the count alone gives `m ≤ 2`, and the third change point
+  is the colour argument.
+- The statement's `∃ ψ₀, ∀ ψ, … ↔ ∃ n : ℤ, ψ = ψ₀ + n * (π / 3)`: `ψ₀` from H6, `←` by H5 over `ℤ`, `→` by the floor of
+  `(ψ − ψ₀)/(π/3)` and H7.
+
+About 330 lines (`RingColour` 190 with examples, the assembly 140); the plan's price was 600–900. One elaboration found the one defect
+(an unused hypothesis of a helper).
+
+### 4.2 `emptyNS` — the composition
+
+As the plan: `ψ₀` from `v6_hubs`; four tiles by `exists_fin_tileAt`; `tip i a` := "some integer of the class `a` has its sixth in
+`cl (tile i)`" (so `ringPt_sixth_dist_le_one` applies with no case split on `ℤ/6`: `sixth_cons_of_mem_closure`); `hhug` from `v6_hug`;
+`v6_count` gives a hub `a` with every tile tipping `a` or `a + 3`; the split lemma on "tips `a`" / "tips `a + 3`" against `v6_anti`.
+**Only the first conjunct of `v6_count`'s conclusion is read** (every tile tips `a` or `a + 3`); the four others are idle in this
+composition. About 75 lines (the plan's price: 200).
+
+### 4.3 The model, the markers
+
+- `emptyNS`'s docstring and the module's say the Lean model is owed and name it: `sq9Map : ArcMap 9` (`Plane/Saturated/Sq9Map`, wave 6)
+  and the five facts (`Valid`, `NonSiamese`, `Covers` at a lattice vertex, four colours there, `GammaFreeRing` there). Not built here
+  (the brief's item 3).
+- `v6_hubs`, `v6_hug` are public with their `VACUITY DECLARED` lines; `v6_hubs_vacuous`, `v6_hug_vacuous` are untouched and now rest on
+  a proved `emptyNS` (axioms: the standard three).
+
+### 4.4 The save (stages 3 and 4)
+
+- Build: `data/fs131/i8a/logs/build-3-route.log` — "build: OK — 468 of 468 batches, 6 module(s) rebuilt, 2 module(s) with warnings",
+  `EXIT=0`. Rebuilt: `HubCount` (24 s: two kernel tables), `TilesAt`, `SoleTip`, `RingColour`, `Empty`, `Proofs`. Warnings: three
+  `declaration uses sorry` — `Star` ll. 211, 231 (`star_recip`, `star_anti`) and `Empty` l. 559 (`outerAdj`, the second planning pass's).
+- Statement check against `f1c13612` (`data/fs131/i8a/logs/stmt-3.log`): 23 base declarations, 0 changed or missing, 9 added in `Empty`.
+- Axioms (`data/fs131/i8a/logs/axioms-3.txt`): 64 records, each a subset of the standard three (`V6Count.table`, `V6Count.doublesTable`:
+  `[propext, Quot.sound]`); the control prints `sorryAx`; `--fault` exits 1 naming the control.
+- `./scripts/dupnames.sh`: OK (`data/fs131/i8a/logs/dupnames-3.log`). `tools/check_architecture.py`: PASS
+  (`data/fs131/i8a/logs/check-architecture-3.log`), with rows for `SoleTip` and `RingColour`.

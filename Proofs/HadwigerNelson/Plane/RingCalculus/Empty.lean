@@ -1,6 +1,8 @@
 import Proofs.HadwigerNelson.Plane.RingCalculus.Star
 import Proofs.HadwigerNelson.Plane.RingCalculus.HubCount
 import Proofs.HadwigerNelson.Plane.RingCalculus.TilesAt
+import Proofs.HadwigerNelson.Plane.RingCalculus.SoleTip
+import Proofs.HadwigerNelson.Plane.RingCalculus.RingColour
 import Mathlib.Data.ZMod.Basic
 
 /-!
@@ -14,15 +16,23 @@ proof is FS116-V6's route (`plans/FS116-V6-verification.md` § 2.2), which never
 
 | step | declaration | class it is stated at | state |
 |---|---|---|---|
-| V6-RING (two colours absent, four tiles) | `qfree4`, `germS_absent` (`Plane/RingGerm`); `NonSiamese.tile_eq_of_mem_closure` (`…/Basic`) | landed | proved |
+| V6-RING (two colours absent, four tiles) | `qfree4`, `germS_absent` (`Plane/RingGerm`); `GammaFreeRing.exists_absent_pair` (`…/RingColour`); `exists_fin_tileAt` (`…/TilesAt`) | landed; the Γ-free class; any valid non-Siamese map | proved |
 | V6-GERM, V6-TIP (every change point has a tip) | `germR_*` (`Plane/RingGerm`); `star_tip_nonempty` (`…/Star`) | landed; any change point with a free tip pair | proved |
-| FS116-V6-HUBS (`m = 1`) | `v6_hubs` | the Γ-free class | open |
-| FS116-V6-HUBS (a tile tips at most two, consecutive) | `IsTile.dist_le_one_of_mem_closure` (`Plane/Tiles`), `ringPt_sixth_dist_le_one` | any valid map; pure trigonometry | open (the trigonometry) |
+| V6-WIN (the ring's two colours, the sixth-of-a-turn swap, constancy between change points) | `Plane/RingCalculus/RingColour` | any ring every germ of which lies in one colour class | proved |
+| FS116-V6-HUBS (`m = 1`) | `v6_hubs`, from `GammaFreeRing.changePoint_gap` | the Γ-free class | proved |
+| FS116-V6-HUBS (a tile tips at most two, consecutive) | `IsTile.dist_le_one_of_mem_closure` (`Plane/Tiles`), `ringPt_sixth_dist_le_one`, `sixth_cons_of_mem_closure` | any valid map; pure trigonometry | proved |
 | FS116-V6-ANTI | `v6_anti` | any valid map, any two antipodal ring points | proved |
-| FS116-V6-HUG | `v6_hug` | the Γ-free class | open |
-| FS116-V6-COUNT, the count | `v6_count` | finite combinatorics, no map | open |
-| FS116-V6-COUNT, the last step | `exists_ne_mem_closure_inter_of_split` | any map, any point of the domain | open |
-| the composition | `emptyNS` | the Γ-free class | open |
+| FS116-V6-HUG | `v6_hug`, from `not_sole_tip_of_adjacent_changePoints` (`…/SoleTip`) | stated at the Γ-free class; the proof reads any two adjacent change points of a vertex of at least four colours with at most two absent | proved |
+| FS116-V6-COUNT, the count | `v6_count`, from `V6Count.count` (`…/HubCount`, a certified computation) | finite combinatorics, no map | proved |
+| FS116-V6-COUNT, the last step | `exists_ne_mem_closure_inter_of_split`, from `…/TilesAt` | any map, any point of the domain | proved |
+| the composition | `emptyNS` | the Γ-free class | proved |
+
+**How `m = 1` is proved** (`GammaFreeRing.changePoint_gap`; the count of FS116-V6-HUBS alone gives only `m ≤ 2`). Two change
+points less than a sixth of a turn apart have a third in the window (`exists_third_change`: constancy between change
+points, twice). The three classes of change points — within a class a sixth of a turn apart — are each covered by the four
+tiles of `p`, so each class has two tiles holding two consecutive points of it (`exists_two_double_tiles`, on
+`V6Count.twoDoubles`), and no tile is so in two classes (`not_double_two_classes`: four ring points pairwise within `1`):
+six tiles among four (`fin_four_three_pairs`).
 
 **The last step is not the row's.** FS116-V6-COUNT ends on the cyclic order of four sectors at `p` (*simple*), and
 FS129-SR3 reads it on sectors without simplicity. Here it is a connectedness statement with no sectors and no cyclic
@@ -40,11 +50,16 @@ proof and carries the gate's line in its docstring, and beside `emptyNS` stands 
 **Inhabitant of `emptyNS`'s hypotheses at a parameter the refutation leaves alive**: FS111-W-SQ9's lattice vertex at
 `k = 9` — valid, non-Siamese, four colours at the vertex, its ring carrying twelve points of `Γ` and no arc
 (`plans/FS116-V6-verification.md` § 2.2, control `v6-sq9`); five colours are absent there, where the refutation needs at
-most two. As a Lean term it is owed (`sq9 : ArcMap 9`, wave 6's debt, inventory item 486).
+most two. **The Lean model is owed**: the map exists as `sq9Map : ArcMap 9` (`Plane/Saturated/Sq9Map`, wave 6, with
+`IsPlaneMap` proved), and five facts about it are not yet proved — `Valid`, `NonSiamese`, `Covers` at a lattice vertex,
+four colours at that vertex, and `GammaFreeRing` there (a later job's, on a line holding both waves; inventory items
+525 (c), 530).
 
-**FS129-SR3-OUTERADJ** (`outerAdj`, carrying FS116-V6-ADJ) and **FS129-MR1-DOUBLETIP** (`doubleTip`) are stated for the
-wider ring classes they serve, with adjacent change points whose far germs lie off (Q) arcs; their hypotheses'
-satisfiability is the open (Q)-ring question of FS-124 (no held fragment has two adjacent change points of this kind).
+**FS129-SR3-OUTERADJ** (`outerAdj`, carrying FS116-V6-ADJ; open) and **FS129-MR1-DOUBLETIP** (`doubleTip`; proved) are
+stated for the wider ring classes they serve, with adjacent change points whose far germs lie off (Q) arcs; their
+hypotheses' satisfiability is the open (Q)-ring question of FS-124 (no held fragment has two adjacent change points of this
+kind). `doubleTip` is proved from `not_sole_tip_of_adjacent_changePoints` (`…/SoleTip`), which reads neither *simple* nor
+the far germs.
 -/
 
 namespace HadwigerNelson.Plane
@@ -144,6 +159,165 @@ example : ¬ dist (ringPt 0 (0 + ((2 : ℤ) : ℝ) * (π / 3))) (ringPt 0 (0 + (
   revert h'
   decide
 
+/-- Ring points at sixths of a turn whose indices agree modulo `6` are one point. -/
+theorem ringPt_sixth_congr (p : ℂ) (ψ : ℝ) {n m : ℤ} (h : (n : ZMod 6) = (m : ZMod 6)) :
+    ringPt p (ψ + n * (π / 3)) = ringPt p (ψ + m * (π / 3)) := by
+  obtain ⟨q, hq⟩ := (ZMod.intCast_eq_intCast_iff_dvd_sub n m 6).mp h
+  have hm : (m : ℝ) = n + 6 * q := by
+    have := congrArg (Int.cast : ℤ → ℝ) hq
+    push_cast at this
+    linarith
+  simp only [ringPt]
+  rw [hm, show ψ + ((n : ℝ) + 6 * q) * (π / 3) = ψ + n * (π / 3) + 2 * π * q by ring, e_add_int_mul]
+
+/-- Two chords of a ring: if `r(α + 60°)` is within `1` of `r(β)` and `r(α)` within `1` of `r(β + 60°)`, then
+`r(α) = r(β)` (`cos δ = cos(δ + 60°) + cos(δ − 60°) ≥ 1` for `δ = α − β`). -/
+theorem exists_int_of_three_dist_le_one {p : ℂ} {α β : ℝ}
+    (h2 : dist (ringPt p (α + π / 3)) (ringPt p β) ≤ 1) (h3 : dist (ringPt p α) (ringPt p (β + π / 3)) ≤ 1) :
+    ∃ q : ℤ, (q : ℝ) * (2 * π) = α - β := by
+  have key : ∀ a b : ℝ, dist (ringPt p a) (ringPt p b) ≤ 1 → 1 / 2 ≤ Real.cos (a - b) := by
+    intro a b h
+    have hsq : dist (ringPt p a) (ringPt p b) ^ 2 = 2 - 2 * Real.cos (a - b) := by
+      rw [dist_eq_norm, show ringPt p a - ringPt p b = e a - e b by simp only [ringPt]; ring, sq_norm_e_sub_e]
+    nlinarith [dist_nonneg (x := ringPt p a) (y := ringPt p b)]
+  have c2 := key _ _ h2
+  have c3 := key _ _ h3
+  rw [show α + π / 3 - β = (α - β) + π / 3 by ring, Real.cos_add, Real.cos_pi_div_three] at c2
+  rw [show α - (β + π / 3) = (α - β) - π / 3 by ring, Real.cos_sub, Real.cos_pi_div_three] at c3
+  exact (Real.cos_eq_one_iff _).mp (le_antisymm (Real.cos_le_one _) (by linarith))
+
+/-- **No tile tips two consecutive points of each of two classes** of ring points a sixth of a turn apart, when the
+classes' base angles differ by less than a sixth of a turn: the four points would be pairwise within `1`. -/
+theorem not_double_two_classes (hF : F.Valid) {p : ℂ} {T : Set ℂ} (hT : F.IsTile T) {α β : ℝ} (hαβ : α < β)
+    (hβα : β < α + π / 3) {n m : ℤ} (h1 : ringPt p (α + n * (π / 3)) ∈ closure T)
+    (h2 : ringPt p (α + n * (π / 3) + π / 3) ∈ closure T) (h3 : ringPt p (β + m * (π / 3)) ∈ closure T)
+    (h4 : ringPt p (β + m * (π / 3) + π / 3) ∈ closure T) : False := by
+  have d := hT.dist_le_one_of_mem_closure hF
+  obtain ⟨q, hq⟩ := exists_int_of_three_dist_le_one (d _ h2 _ h3) (d _ h1 _ h4)
+  have hj : β - α = ((n - m - 6 * q : ℤ) : ℝ) * (π / 3) := by
+    push_cast
+    linear_combination hq
+  have hπ3 : 0 < π / 3 := by positivity
+  have h0 : (0 : ℝ) < ((n - m - 6 * q : ℤ) : ℝ) := by
+    by_contra h
+    have := mul_nonpos_of_nonpos_of_nonneg (not_lt.mp h) hπ3.le
+    linarith
+  have h1' : ((n - m - 6 * q : ℤ) : ℝ) < 1 := by
+    by_contra h
+    have := le_mul_of_one_le_left hπ3.le (not_lt.mp h)
+    linarith
+  have a0 : (0 : ℤ) < n - m - 6 * q := by exact_mod_cast h0
+  have a1 : n - m - 6 * q < 1 := by exact_mod_cast h1'
+  omega
+
+/-- A ring point at a sixth of a turn, named by its index modulo `6`, is the point at any integer of that class. -/
+theorem ringPt_mem_of_sixth {p : ℂ} {α : ℝ} {S : Set ℂ} {a : ZMod 6}
+    (h : ∃ n : ℤ, (n : ZMod 6) = a ∧ ringPt p (α + n * (π / 3)) ∈ S) {m : ℤ} (hm : (m : ZMod 6) = a) :
+    ringPt p (α + m * (π / 3)) ∈ S := by
+  obtain ⟨n, hn, hS⟩ := h
+  rwa [ringPt_sixth_congr p α (hm.trans hn.symm)]
+
+/-- **A tile holds only equal or consecutive sixths of a ring** (FS116-V6-HUBS, second clause, in the form the counts
+read: hubs indexed by `ℤ/6`). -/
+theorem sixth_cons_of_mem_closure (hF : F.Valid) {p : ℂ} {α : ℝ} {T : Set ℂ} (hT : F.IsTile T) {a b : ZMod 6}
+    (ha : ∃ n : ℤ, (n : ZMod 6) = a ∧ ringPt p (α + n * (π / 3)) ∈ closure T)
+    (hb : ∃ n : ℤ, (n : ZMod 6) = b ∧ ringPt p (α + n * (π / 3)) ∈ closure T) : b = a ∨ b = a + 1 ∨ b = a - 1 := by
+  obtain ⟨n, rfl, hn⟩ := ha
+  obtain ⟨m, rfl, hm⟩ := hb
+  have h := ringPt_sixth_dist_le_one (hT.dist_le_one_of_mem_closure hF _ hm _ hn)
+  push_cast at h
+  rcases h with h | h | h
+  · exact Or.inl (by linear_combination h)
+  · exact Or.inr (Or.inl (by linear_combination h))
+  · exact Or.inr (Or.inr (by linear_combination h))
+
+/-- **A class of ring points a sixth of a turn apart, each in the closure of one of four tiles, has two double tiles**:
+two distinct tiles each holding two consecutive points of the class (`V6Count.twoDoubles`, with
+`ringPt_sixth_dist_le_one`). -/
+theorem exists_two_double_tiles (hF : F.Valid) {p : ℂ} {tile : Fin 4 → Set ℂ} (htile : ∀ i, F.IsTile (tile i)) {α : ℝ}
+    (hcov : ∀ n : ℤ, ∃ i, ringPt p (α + n * (π / 3)) ∈ closure (tile i)) :
+    ∃ i j, i ≠ j ∧
+      (∃ n : ℤ, ringPt p (α + n * (π / 3)) ∈ closure (tile i) ∧ ringPt p (α + n * (π / 3) + π / 3) ∈ closure (tile i)) ∧
+      ∃ n : ℤ, ringPt p (α + n * (π / 3)) ∈ closure (tile j) ∧ ringPt p (α + n * (π / 3) + π / 3) ∈ closure (tile j) := by
+  have hcover : ∀ a : ZMod 6, ∃ i, ∃ n : ℤ, (n : ZMod 6) = a ∧ ringPt p (α + n * (π / 3)) ∈ closure (tile i) := by
+    intro a
+    obtain ⟨n, rfl⟩ := ZMod.intCast_surjective a
+    obtain ⟨i, hi⟩ := hcov n
+    exact ⟨i, n, rfl, hi⟩
+  have step : ∀ i, (∃ a : ZMod 6, (∃ n : ℤ, (n : ZMod 6) = a ∧ ringPt p (α + n * (π / 3)) ∈ closure (tile i)) ∧
+      ∃ n : ℤ, (n : ZMod 6) = a + 1 ∧ ringPt p (α + n * (π / 3)) ∈ closure (tile i)) →
+      ∃ n : ℤ, ringPt p (α + n * (π / 3)) ∈ closure (tile i) ∧ ringPt p (α + n * (π / 3) + π / 3) ∈ closure (tile i) := by
+    rintro i ⟨a, ⟨n, rfl, hn⟩, h2⟩
+    refine ⟨n, hn, ?_⟩
+    have := ringPt_mem_of_sixth h2 (m := n + 1) (by push_cast; rfl)
+    rwa [show α + ((n + 1 : ℤ) : ℝ) * (π / 3) = α + n * (π / 3) + π / 3 by push_cast; ring] at this
+  obtain ⟨i, j, hij, hi, hj⟩ := V6Count.twoDoubles
+    (fun i a => ∃ n : ℤ, (n : ZMod 6) = a ∧ ringPt p (α + n * (π / 3)) ∈ closure (tile i))
+    (fun i _ _ ha hb => sixth_cons_of_mem_closure hF (htile i) ha hb) hcover
+  exact ⟨i, j, hij, step i hi, step j hj⟩
+
+/-- Three pairwise exclusive properties of four things cannot each hold of two of them. -/
+theorem fin_four_three_pairs {P Q R : Fin 4 → Prop} (hPQ : ∀ i, P i → Q i → False) (hPR : ∀ i, P i → R i → False)
+    (hQR : ∀ i, Q i → R i → False) (hP : ∃ i j, i ≠ j ∧ P i ∧ P j) (hQ : ∃ i j, i ≠ j ∧ Q i ∧ Q j)
+    (hR : ∃ i j, i ≠ j ∧ R i ∧ R j) : False := by
+  classical
+  obtain ⟨i₁, i₂, h12, p1, p2⟩ := hP
+  obtain ⟨i₃, i₄, h34, q1, q2⟩ := hQ
+  obtain ⟨i₅, i₆, h56, r1, r2⟩ := hR
+  have cA : 2 ≤ (Finset.univ.filter P).card :=
+    Finset.one_lt_card.mpr ⟨i₁, by simp [p1], i₂, by simp [p2], h12⟩
+  have cB : 2 ≤ (Finset.univ.filter Q).card :=
+    Finset.one_lt_card.mpr ⟨i₃, by simp [q1], i₄, by simp [q2], h34⟩
+  have cC : 2 ≤ (Finset.univ.filter R).card :=
+    Finset.one_lt_card.mpr ⟨i₅, by simp [r1], i₆, by simp [r2], h56⟩
+  have dAB : Disjoint (Finset.univ.filter P) (Finset.univ.filter Q) :=
+    Finset.disjoint_left.mpr fun i hi hi' => hPQ i (by simpa using hi) (by simpa using hi')
+  have dABC : Disjoint (Finset.univ.filter P ∪ Finset.univ.filter Q) (Finset.univ.filter R) :=
+    Finset.disjoint_union_left.mpr ⟨Finset.disjoint_left.mpr fun i hi hi' => hPR i (by simpa using hi) (by simpa using hi'),
+      Finset.disjoint_left.mpr fun i hi hi' => hQR i (by simpa using hi) (by simpa using hi')⟩
+  have hc := Finset.card_le_univ (Finset.univ.filter P ∪ Finset.univ.filter Q ∪ Finset.univ.filter R)
+  rw [Finset.card_union_of_disjoint dABC, Finset.card_union_of_disjoint dAB, Fintype.card_fin] at hc
+  omega
+
+/-- **No two change points of a Γ-free ring are less than a sixth of a turn apart** (H7; FS116-V6-HUBS, `m = 1`, without
+*simple*). Two such have a third in the window (`exists_third_change`); the three classes of change points, a sixth of a
+turn apart within each, are covered by the four tiles of `p` (every change point has a tip, `star_tip_nonempty`), so
+each class has two double tiles (`exists_two_double_tiles`), and no tile is double in two classes
+(`not_double_two_classes`): six tiles among four. (The count of FS116-V6-HUBS alone gives only `m ≤ 2`; the third
+change point is the colour argument.) -/
+theorem GammaFreeRing.changePoint_gap {p : ℂ} (hΓ : F.GammaFreeRing p) (hF : F.Valid) (hN : F.NonSiamese)
+    (hp : F.Covers p 1) (hn4 : (F.coloursAt p).ncard = 4) (hk : k ≤ 6) {κ : ℝ → Side → Fin k}
+    (hκ : ∀ θ s, GermIn p θ s (F.region (κ θ s))) {X X' : Fin k} (hr : ∀ θ s, κ θ s = X ∨ κ θ s = X') {ψ₁ ψ₂ : ℝ}
+    (h₁ : κ ψ₁ .ccw ≠ κ ψ₁ .cw) (h₂ : κ ψ₂ .ccw ≠ κ ψ₂ .cw) (h12 : ψ₁ < ψ₂) (hlt : ψ₂ < ψ₁ + π / 3) : False := by
+  obtain ⟨ψ₃, hψ₃, hne, h₃⟩ := exists_third_change hF hκ hr h₁ h₂ h12 hlt
+  have hpd : p ∈ F.dom := hp (mem_closedBall_self zero_le_one)
+  obtain ⟨tile, htile, hsurj⟩ := exists_fin_tileAt hF hN hpd hn4.le
+  have hcov : ∀ ψ, κ ψ .ccw ≠ κ ψ .cw → ∀ n : ℤ, ∃ i, ringPt p (ψ + n * (π / 3)) ∈ closure (tile i) := by
+    intro ψ hψ n
+    obtain ⟨Xc, Xc', hy⟩ := (exists_isChangePoint_iff hp hκ _).mpr ((germCol_change_int hF hκ hr ψ n).mpr hψ)
+    obtain ⟨c, T, -, hT⟩ := star_tip_nonempty hF hN hp (by omega) (by omega) hy
+      ⟨hΓ.qFreeRing.not_germOnQ _ _, hΓ.qFreeRing.not_germOnQ _ _⟩
+    obtain ⟨i, rfl⟩ := hsurj T ⟨hT.1, hT.2.1⟩
+    exact ⟨i, hT.2.2⟩
+  have hT : ∀ i, F.IsTile (tile i) := fun i => (htile i).1
+  refine fin_four_three_pairs
+    (P := fun i => ∃ n : ℤ, ringPt p (ψ₁ + n * (π / 3)) ∈ closure (tile i) ∧
+      ringPt p (ψ₁ + n * (π / 3) + π / 3) ∈ closure (tile i))
+    (Q := fun i => ∃ n : ℤ, ringPt p (ψ₂ + n * (π / 3)) ∈ closure (tile i) ∧
+      ringPt p (ψ₂ + n * (π / 3) + π / 3) ∈ closure (tile i))
+    (R := fun i => ∃ n : ℤ, ringPt p (ψ₃ + n * (π / 3)) ∈ closure (tile i) ∧
+      ringPt p (ψ₃ + n * (π / 3) + π / 3) ∈ closure (tile i))
+    ?_ ?_ ?_ (exists_two_double_tiles hF hT (hcov ψ₁ h₁)) (exists_two_double_tiles hF hT (hcov ψ₂ h₂))
+    (exists_two_double_tiles hF hT (hcov ψ₃ h₃))
+  · rintro i ⟨n, a1, a2⟩ ⟨m, b1, b2⟩
+    exact not_double_two_classes hF (hT i) h12 hlt a1 a2 b1 b2
+  · rintro i ⟨n, a1, a2⟩ ⟨m, b1, b2⟩
+    exact not_double_two_classes hF (hT i) hψ₃.1 hψ₃.2 a1 a2 b1 b2
+  · rintro i ⟨n, a1, a2⟩ ⟨m, b1, b2⟩
+    rcases lt_or_gt_of_ne hne with h | h
+    · exact not_double_two_classes hF (hT i) h (by linarith [hψ₃.1]) b1 b2 a1 a2
+    · exact not_double_two_classes hF (hT i) h (by linarith [hψ₃.2]) a1 a2 b1 b2
+
 /-- **FS116-V6-HUBS**, `m = 1` (without *simple*): in a valid non-Siamese six-coloured fragment on a closed disc of radius
 above 1 about a vertex `p` of at least four colours whose ring carries no arc of `Γ`, the change points of the ring are
 the six points `r(ψ₀ + 60°k)`.
@@ -153,7 +327,32 @@ nowhere else. -/
 theorem v6_hubs {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
     (h4 : 4 ≤ (F.coloursAt p).ncard) (hΓ : F.GammaFreeRing p) :
     ∃ ψ₀ : ℝ, ∀ ψ : ℝ, (∃ X X', F.IsChangePoint p ψ X X') ↔ ∃ n : ℤ, ψ = ψ₀ + n * (π / 3) := by
-  sorry
+  obtain ⟨X, X', -, hc⟩ := hΓ.exists_absent_pair hF hp h4 (by omega)
+  have hn4 : (F.coloursAt p).ncard = 4 := by
+    have := qfree4 hF hp h4 hΓ.qFreeRing
+    omega
+  choose κ hκ using fun θ s => hΓ.exists_germIn hp θ s
+  have hr : ∀ θ s, κ θ s = X ∨ κ θ s = X' := fun θ s => by
+    have hmem : κ θ s ∈ (F.coloursAt p)ᶜ := not_mem_coloursAt_of_germIn hF (hκ θ s)
+    rw [hc] at hmem
+    exact hmem
+  obtain ⟨ψ₀, hψ₀⟩ := exists_germCol_change hF hκ
+  refine ⟨ψ₀, fun ψ => ?_⟩
+  rw [exists_isChangePoint_iff hp hκ]
+  constructor
+  · intro hψ
+    have hπ3 : 0 < π / 3 := by positivity
+    refine ⟨⌊(ψ - ψ₀) / (π / 3)⌋, ?_⟩
+    have hfl := Int.floor_le ((ψ - ψ₀) / (π / 3))
+    have hlt := Int.lt_floor_add_one ((ψ - ψ₀) / (π / 3))
+    rw [le_div_iff₀ hπ3] at hfl
+    rw [div_lt_iff₀ hπ3] at hlt
+    by_contra hne
+    exact hΓ.changePoint_gap hF hN hp hn4 le_rfl hκ hr
+      ((germCol_change_int hF hκ hr ψ₀ ⌊(ψ - ψ₀) / (π / 3)⌋).mpr hψ₀) hψ
+      (lt_of_le_of_ne (by linarith) fun h => hne h.symm) (by linarith)
+  · rintro ⟨n, rfl⟩
+    exact (germCol_change_int hF hκ hr ψ₀ n).mpr hψ₀
 
 /-! ## FS116-V6-HUG -/
 
@@ -161,14 +360,17 @@ theorem v6_hubs {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp 
 adjacent change points `y = r(ψ)` and `y' = r(ψ + 60°)` while being the only tip at each.
 
 VACUITY DECLARED: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is a step of that refutation. Outside the
-Γ-free class the statement to use is `doubleTip`. -/
+Γ-free class the statement to use is `doubleTip`. (The proof reads no Γ-free ring: it is
+`not_sole_tip_of_adjacent_changePoints`, `Plane/RingCalculus/SoleTip`, which `emptyNS` consumes.) -/
 theorem v6_hug {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
     (h4 : 4 ≤ (F.coloursAt p).ncard) (hΓ : F.GammaFreeRing p) {ψ : ℝ} {X X' Y Y' : Fin 6}
     (hy : F.IsChangePoint p ψ X X') (hy' : F.IsChangePoint p (ψ + π / 3) Y Y') {T : Set ℂ}
     (hT : F.IsTip p (ringPt p ψ) T) (hT' : F.IsTip p (ringPt p (ψ + π / 3)) T)
     (h1 : ∀ S, F.IsTip p (ringPt p ψ) S → S = T) (h2 : ∀ S, F.IsTip p (ringPt p (ψ + π / 3)) S → S = T) :
     False := by
-  sorry
+  -- the argument reads no Γ-free ring: `not_sole_tip_of_adjacent_changePoints` (`Plane/RingCalculus/SoleTip`)
+  have _ := hΓ
+  exact not_sole_tip_of_adjacent_changePoints hF hN hp h4 (by omega) hy hy' hT hT' h1 h2
 
 /-! ## FS116-V6-COUNT -/
 
@@ -252,10 +454,79 @@ example : ∃ T, halfPlane2.TileOf 1 T ∧ ∃ T', ¬ halfPlane2.TileOf 1 T' ∧
 closed disc of radius above 1 about a vertex `p` of at least four colours has a ring carrying no arc of `Γ`.
 
 A refutation. Its hypotheses hold together at nine colours on FS111-W-SQ9's lattice vertex (module docstring), where five
-colours are absent; the Lean term `sq9 : ArcMap 9` is owed. -/
+colours are absent. **The Lean model is owed**: the map is `sq9Map : ArcMap 9` (`Plane/Saturated/Sq9Map`, wave 6); the
+facts owed about it are `Valid`, `NonSiamese`, `Covers` at a lattice vertex, four colours there, and `GammaFreeRing`
+there. -/
 theorem emptyNS {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
     (h4 : 4 ≤ (F.coloursAt p).ncard) (hΓ : F.GammaFreeRing p) : False := by
-  sorry
+  obtain ⟨ψ₀, hψ₀⟩ := v6_hubs hF hN hp h4 hΓ
+  have hn4 : (F.coloursAt p).ncard = 4 := by
+    have := qfree4 hF hp h4 hΓ.qFreeRing
+    omega
+  have hpd : p ∈ F.dom := hp (mem_closedBall_self zero_le_one)
+  obtain ⟨tile, htile, hsurj⟩ := exists_fin_tileAt hF hN hpd hn4.le
+  -- every hub is a change point, and has a tip among the four tiles
+  have hch : ∀ n : ℤ, ∃ X X', F.IsChangePoint p (ψ₀ + n * (π / 3)) X X' := fun n => (hψ₀ _).mpr ⟨n, rfl⟩
+  have hcover : ∀ a : ZMod 6, ∃ i, ∃ n : ℤ, (n : ZMod 6) = a ∧ ringPt p (ψ₀ + n * (π / 3)) ∈ closure (tile i) := by
+    intro a
+    obtain ⟨n, rfl⟩ := ZMod.intCast_surjective a
+    obtain ⟨X, X', hy⟩ := hch n
+    obtain ⟨c, T, -, hT⟩ := star_tip_nonempty hF hN hp h4 (by omega) hy
+      ⟨hΓ.qFreeRing.not_germOnQ _ _, hΓ.qFreeRing.not_germOnQ _ _⟩
+    obtain ⟨i, rfl⟩ := hsurj T ⟨hT.1, hT.2.1⟩
+    exact ⟨i, n, rfl, hT.2.2⟩
+  -- FS116-V6-HUG, in the count's form
+  have hhug : ∀ i (a : ZMod 6),
+      (∃ n : ℤ, (n : ZMod 6) = a ∧ ringPt p (ψ₀ + n * (π / 3)) ∈ closure (tile i)) →
+      (∃ n : ℤ, (n : ZMod 6) = a + 1 ∧ ringPt p (ψ₀ + n * (π / 3)) ∈ closure (tile i)) →
+      (∃ j, j ≠ i ∧ ∃ n : ℤ, (n : ZMod 6) = a ∧ ringPt p (ψ₀ + n * (π / 3)) ∈ closure (tile j)) ∨
+        ∃ j, j ≠ i ∧ ∃ n : ℤ, (n : ZMod 6) = a + 1 ∧ ringPt p (ψ₀ + n * (π / 3)) ∈ closure (tile j) := by
+    rintro i a ⟨n, rfl, hn⟩ h2
+    have e1 : ψ₀ + ((n + 1 : ℤ) : ℝ) * (π / 3) = ψ₀ + n * (π / 3) + π / 3 := by push_cast; ring
+    have hn' : ringPt p (ψ₀ + n * (π / 3) + π / 3) ∈ closure (tile i) := by
+      have := ringPt_mem_of_sixth h2 (m := n + 1) (by push_cast; rfl)
+      rwa [e1] at this
+    by_contra hcon
+    push Not at hcon
+    obtain ⟨X, X', hy⟩ := hch n
+    obtain ⟨Y, Y', hy'⟩ := hch (n + 1)
+    rw [e1] at hy'
+    refine v6_hug hF hN hp h4 hΓ hy hy' (T := tile i) ⟨(htile i).1, (htile i).2, hn⟩ ⟨(htile i).1, (htile i).2, hn'⟩
+      (fun S hS => ?_) fun S hS => ?_
+    · obtain ⟨j, rfl⟩ := hsurj S ⟨hS.1, hS.2.1⟩
+      by_contra hji
+      exact hcon.1 j (fun h => hji (h ▸ rfl)) n rfl hS.2.2
+    · obtain ⟨j, rfl⟩ := hsurj S ⟨hS.1, hS.2.1⟩
+      by_contra hji
+      refine hcon.2 j (fun h => hji (h ▸ rfl)) (n + 1) (by push_cast; rfl) ?_
+      rw [e1]
+      exact hS.2.2
+  -- the count: two antipodal hubs between them are tipped by every tile of `p`
+  obtain ⟨a, hor, -⟩ := v6_count
+    (fun i a => ∃ n : ℤ, (n : ZMod 6) = a ∧ ringPt p (ψ₀ + n * (π / 3)) ∈ closure (tile i)) hcover
+    (fun i _ _ ha hb => sixth_cons_of_mem_closure hF (htile i).1 ha hb) hhug
+  obtain ⟨n, rfl⟩ := ZMod.intCast_surjective a
+  have e3 : ψ₀ + ((n + 3 : ℤ) : ℝ) * (π / 3) = ψ₀ + n * (π / 3) + π := by push_cast; ring
+  -- split the tiles of `p` into tippers of the hub and tippers of its antipode; two of them share a closure point
+  -- other than `p` (`exists_ne_mem_closure_inter_of_split`), against FS116-V6-ANTI
+  obtain ⟨T, hTA, T', hT'B, hTp, hT'p, z, hzp, hz⟩ := exists_ne_mem_closure_inter_of_split hpd
+    (A := {T | ringPt p (ψ₀ + n * (π / 3)) ∈ closure T}) (B := {T | ringPt p (ψ₀ + n * (π / 3) + π) ∈ closure T})
+    (fun T hT => by
+      obtain ⟨i, rfl⟩ := hsurj T hT
+      rcases hor i with h | h
+      · exact Or.inl (ringPt_mem_of_sixth h rfl)
+      · refine Or.inr ?_
+        have := ringPt_mem_of_sixth h (m := n + 3) (by push_cast; rfl)
+        rwa [e3] at this)
+    (by
+      obtain ⟨i, h⟩ := hcover (n : ZMod 6)
+      exact ⟨tile i, ringPt_mem_of_sixth h rfl, htile i⟩)
+    (by
+      obtain ⟨i, h⟩ := hcover ((n : ZMod 6) + 3)
+      refine ⟨tile i, ?_, htile i⟩
+      have := ringPt_mem_of_sixth h (m := n + 3) (by push_cast; rfl)
+      rwa [e3] at this)
+  exact hzp (v6_anti hF hTp.1 hT'p.1 hTA hT'B hz)
 
 /-! ## The vacuity markers, as kernel facts (ruling, inventory item 518) -/
 
@@ -297,7 +568,10 @@ above 1 about a vertex `p` of at least four colours, let `y = r(ψ)` and `y' = r
 such that neither the germ just clockwise of `r(ψ − 60°)` nor the germ just counter-clockwise of `r(ψ + 120°)` lies on a
 (Q) arc. Then no tile of `p` is at once the only tip at `y` and the only tip at `y'`.
 
-The hypotheses' satisfiability is open (FS-124's (Q)-ring question; on a Γ-free ring there is none, `emptyNS`). -/
+The hypotheses' satisfiability is open (FS-124's (Q)-ring question; on a Γ-free ring there is none, `emptyNS`).
+
+Proved from `not_sole_tip_of_adjacent_changePoints` (`Plane/RingCalculus/SoleTip`), which reads neither *simple* (`hS`) nor
+the two germs (`hv`, `hu`): the statement holds at the wider class, and keeps its three hypotheses as filed. -/
 theorem doubleTip {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
     (hS : F.SimpleOn (closedBall p 1)) (h4 : 4 ≤ (F.coloursAt p).ncard) {ψ : ℝ} {X X' Y Y' : Fin 6}
     (hy : F.IsChangePoint p ψ X X') (hy' : F.IsChangePoint p (ψ + π / 3) Y Y')
@@ -305,7 +579,12 @@ theorem doubleTip {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (h
     (hT : F.IsTip p (ringPt p ψ) T) (hT' : F.IsTip p (ringPt p (ψ + π / 3)) T)
     (h1 : ∀ S, F.IsTip p (ringPt p ψ) S → S = T) (h2 : ∀ S, F.IsTip p (ringPt p (ψ + π / 3)) S → S = T) :
     False := by
-  sorry
+  -- the argument reads neither *simple* nor the two far germs: `not_sole_tip_of_adjacent_changePoints`
+  -- (`Plane/RingCalculus/SoleTip`); the three hypotheses stay in the statement (the coordinator's ruling, FS131-I8A)
+  have _ := hS
+  have _ := hv
+  have _ := hu
+  exact not_sole_tip_of_adjacent_changePoints hF hN hp h4 (by omega) hy hy' hT hT' h1 h2
 
 end ArcMap
 

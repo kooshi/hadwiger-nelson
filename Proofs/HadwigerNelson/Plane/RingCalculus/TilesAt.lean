@@ -14,6 +14,8 @@ validity, no colours.
   connected, has points near `p`, and does not fit in the disc).
 * `sphere_subset_iUnion_closure_tileAt`: a small circle about `p` lies in the union of the closures of the tiles of `p`.
 * `isPreconnected_sphere_complex`: a circle in the plane is connected.
+* `exists_fin_tileAt`: in a valid non-Siamese map the tiles of a point of at most `n` colours are listed by `Fin n`
+  (for the counts of FS116-V6-HUBS and FS116-V6-COUNT, which read four tiles).
 
 Spec examples: `halfPlane2` at the origin (`Plane/LocalMapExamples`), at the end.
 -/
@@ -25,6 +27,20 @@ open Complex Real Set Filter Topology Metric
 /-- A circle in the plane is connected. -/
 theorem isPreconnected_sphere_complex (p : ℂ) (r : ℝ) : IsPreconnected (sphere p r) :=
   isPreconnected_sphere (by rw [Complex.rank_real_complex]; norm_num) p r
+
+/-- A non-empty finite set of at most `n` elements is the range of a function on `Fin n`. -/
+theorem exists_fin_surj_of_card_le {β : Type*} (s : Finset β) (hne : s.Nonempty) {n : ℕ} (hn : s.card ≤ n) :
+    ∃ f : Fin n → β, (∀ i, f i ∈ s) ∧ ∀ x ∈ s, ∃ i, f i = x := by
+  obtain ⟨x₀, hx₀⟩ := hne
+  refine ⟨fun i => if h : i.val < s.card then (s.equivFin.symm ⟨i.val, h⟩ : β) else x₀, fun i => ?_, fun x hx => ?_⟩
+  · dsimp only
+    split_ifs with h
+    · exact (s.equivFin.symm ⟨i.val, h⟩).2
+    · exact hx₀
+  · refine ⟨⟨(s.equivFin ⟨x, hx⟩).val, lt_of_lt_of_le (s.equivFin ⟨x, hx⟩).2 hn⟩, ?_⟩
+    dsimp only
+    rw [dif_pos (s.equivFin ⟨x, hx⟩).2]
+    simp
 
 namespace ArcMap
 
@@ -74,6 +90,28 @@ theorem sphere_subset_iUnion_closure_tileAt {p : ℂ} {ρ₁ : ℝ} (hdom : ball
   obtain ⟨T, hT, hzT⟩ := F.mem_closure_tile (hdom hzb)
   obtain ⟨w, hwb, hwT⟩ := mem_closure_iff_nhds.mp hzT _ (isOpen_ball.mem_nhds hzb)
   exact mem_iUnion₂.mpr ⟨T, ⟨hT, hnear T hT ⟨w, hwT, hwb⟩⟩, hzT⟩
+
+/-- **The tiles of a point, enumerated**: in a valid non-Siamese map a point of the domain carrying at most `n` colours
+has its tiles listed by `Fin n` — one tile per colour (`NonSiamese.tile_eq_of_mem_closure`); the list may repeat. -/
+theorem exists_fin_tileAt (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hpd : p ∈ F.dom) {n : ℕ}
+    (hn : (F.coloursAt p).ncard ≤ n) :
+    ∃ tile : Fin n → Set ℂ, (∀ i, F.TileAt p (tile i)) ∧ ∀ T, F.TileAt p T → ∃ i, tile i = T := by
+  have hfin : (F.coloursAt p).Finite := Set.toFinite _
+  have hne : hfin.toFinset.Nonempty := by
+    obtain ⟨c, hc⟩ := F.exists_mem_coloursAt hpd
+    exact ⟨c, hfin.mem_toFinset.mpr hc⟩
+  have hcard : hfin.toFinset.card ≤ n := by rw [← Set.ncard_eq_toFinset_card _ hfin]; exact hn
+  obtain ⟨col, hcol, hsurj⟩ := exists_fin_surj_of_card_le hfin.toFinset hne hcard
+  have hex : ∀ i, ∃ T, F.TileOf (col i) T ∧ p ∈ closure T := fun i =>
+    (F.mem_coloursAt_iff_exists_tileOf hpd).mp (hfin.mem_toFinset.mp (hcol i))
+  choose tile htile using hex
+  refine ⟨tile, fun i => ⟨(htile i).1.1, (htile i).2⟩, fun T hT => ?_⟩
+  obtain ⟨z, hz⟩ := hT.1.nonempty
+  have hTc : F.TileOf (F.col z) T := hT.1.tileOf hz
+  obtain ⟨i, hi⟩ := hsurj (F.col z) (hfin.mem_toFinset.mpr (mem_coloursAt_of_tileOf hTc hT.2))
+  refine hN.tile_eq_of_mem_closure hF ?_ hTc (htile i).2 hT.2 |> fun h => ⟨i, h⟩
+  rw [← hi]
+  exact (htile i).1
 
 end ArcMap
 

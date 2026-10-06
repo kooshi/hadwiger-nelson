@@ -19,6 +19,10 @@ the kernel that hypothesis and no more. `stmtB_sound` reads the `Bool` back as t
 
 The exact tool `tools/fs131_k8_count.py` counts 72 quadruples meeting the hypotheses, none violating the conclusion;
 the kernel agrees that none violates it. One of the 72 is exhibited below (`countModel`).
+
+A second table on the same tip sets (`doublesTable`, 11.8 s) gives `twoDoubles`: six hubs covered by four tiles, each
+tipping only equal or consecutive hubs, leave two distinct tiles tipping two consecutive hubs each — the count
+FS116-V6-HUBS reads three times, once per class of change points.
 -/
 
 namespace HadwigerNelson.Plane.V6Count
@@ -221,6 +225,49 @@ theorem count (tip : Fin 4 → ZMod 6 → Prop) (hcons : ∀ i a b, tip i a → 
     fin_cases i <;> rfl
   rw [htip]
   exact stmtB_sound hB
+
+/-! ## A second count on the same tip sets: two double tiles (for FS116-V6-HUBS) -/
+
+/-- A relation tile–hub has **two double tiles**: two distinct tiles each tipping two consecutive hubs. -/
+def TwoDoubles (tip : Fin 4 → ZMod 6 → Prop) : Prop :=
+  (∀ a, ∃ i, tip i a) → ∃ i j, i ≠ j ∧ (∃ a, tip i a ∧ tip i (a + 1)) ∧ ∃ a, tip j a ∧ tip j (a + 1)
+
+/-- `TwoDoubles` at a `Bool`-valued relation, as a `Bool` (the hypothesis first). -/
+def doublesB (t : Fin 4 → ZMod 6 → Bool) : Bool :=
+  !(allZ fun a => anyF fun i => t i a) ||
+    anyF fun i => anyF fun j => (i != j) && ((anyZ fun a => t i a && t i (a + 1)) && anyZ fun a => t j a && t j (a + 1))
+
+/-- **The read-back** of `doublesB`. -/
+theorem doublesB_sound {t : Fin 4 → ZMod 6 → Bool} (h : doublesB t = true) : TwoDoubles fun i a => t i a = true := by
+  intro hcover
+  have h1 : (allZ fun a => anyF fun i => t i a) = true := by
+    simp only [allZ_iff, anyF_iff]; exact hcover
+  simp only [doublesB, h1, Bool.not_true, Bool.false_or] at h
+  simp only [anyZ_iff, anyF_iff, Bool.and_eq_true, bne_iff_ne, ne_eq] at h
+  exact h
+
+/-- **The certified computation**, second table: six hubs covered by four tip sets leave two double tiles — at each of
+the `13⁴` quadruples. -/
+theorem doublesTable : (shapes.all fun s0 => shapes.all fun s1 => shapes.all fun s2 => shapes.all fun s3 =>
+    doublesB (rel s0 s1 s2 s3)) = true := by decide +kernel
+
+/-- **Six hubs, four tiles, each tile tipping only equal or consecutive hubs: two distinct tiles tip two consecutive hubs
+each.** (With at most one double tile, four tiles tip at most five hubs.) -/
+theorem twoDoubles (tip : Fin 4 → ZMod 6 → Prop) (hcons : ∀ i a b, tip i a → tip i b → b = a ∨ b = a + 1 ∨ b = a - 1) :
+    TwoDoubles tip := by
+  have hsh : ∀ i, ∃ s ∈ shapes, ∀ b, tip i b ↔ smem s b = true := fun i => exists_shape (hcons i)
+  choose s hs hst using hsh
+  have htab := doublesTable
+  simp only [List.all_eq_true] at htab
+  have hB := htab (s 0) (hs 0) (s 1) (hs 1) (s 2) (hs 2) (s 3) (hs 3)
+  have htip : tip = fun i a => rel (s 0) (s 1) (s 2) (s 3) i a = true := by
+    funext i a
+    apply propext
+    rw [hst i a]
+    fin_cases i <;> rfl
+  rw [htip]
+  exact doublesB_sound hB
+
 
 /-! ## Spec examples: one of the 72 configurations, and an adversary -/
 

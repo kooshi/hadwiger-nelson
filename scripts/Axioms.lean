@@ -6708,7 +6708,7 @@ their implementers close them. -/
 -- FS131-K8 block end (Plane/RingCalculus)
 
 /-! ## FS131-I8A — FS-131 wave 8's first implementer: the route to `emptyNS` (`Plane/RingCalculus/Empty` and the helper
-modules `HubCount`, `TilesAt`). The leaves join this block as they close. -/
+modules `HubCount`, `TilesAt`, `SoleTip`, `RingColour`). -/
 -- FS131-I8A: Plane/RingCalculus/HubCount (FS116-V6-COUNT's count: the kernel table, by `decide +kernel`)
 #print axioms HadwigerNelson.Plane.V6Count.allZ_iff
 #print axioms HadwigerNelson.Plane.V6Count.anyZ_iff
@@ -6722,13 +6722,58 @@ modules `HubCount`, `TilesAt`). The leaves join this block as they close. -/
 #print axioms HadwigerNelson.Plane.V6Count.exists_shape
 #print axioms HadwigerNelson.Plane.V6Count.count
 #print axioms HadwigerNelson.Plane.V6Count.countModel_hyps
+#print axioms HadwigerNelson.Plane.V6Count.doublesB_sound
+#print axioms HadwigerNelson.Plane.V6Count.doublesTable
+#print axioms HadwigerNelson.Plane.V6Count.twoDoubles
 -- FS131-I8A: Plane/RingCalculus/TilesAt
+#print axioms HadwigerNelson.Plane.exists_fin_surj_of_card_le
+#print axioms HadwigerNelson.Plane.ArcMap.exists_fin_tileAt
 #print axioms HadwigerNelson.Plane.isPreconnected_sphere_complex
 #print axioms HadwigerNelson.Plane.ArcMap.finite_tileAt
 #print axioms HadwigerNelson.Plane.ArcMap.exists_ball_tileAt
 #print axioms HadwigerNelson.Plane.ArcMap.TileAt.inter_sphere_nonempty
 #print axioms HadwigerNelson.Plane.ArcMap.sphere_subset_iUnion_closure_tileAt
+-- FS131-I8A: Plane/RingCalculus/SoleTip (FS116-V6-HUG and FS129-MR1-DOUBLETIP at the class the argument reads)
+#print axioms HadwigerNelson.Plane.mem_closure_diff_closedBall
+#print axioms HadwigerNelson.Plane.ArcMap.germ_Icc_subset_closure
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_region_of_sole_tip
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_third_sub
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_third_sub_two
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_two_thirds
+#print axioms HadwigerNelson.Plane.ArcMap.not_sole_tip_of_adjacent_changePoints
+-- FS131-I8A: Plane/RingCalculus/RingColour
+#print axioms HadwigerNelson.Plane.ArcMap.germIn_of_mem_isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.germIn_region_unique
+#print axioms HadwigerNelson.Plane.ArcMap.GammaFreeRing.exists_germIn
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_germIn
+#print axioms HadwigerNelson.Plane.ArcMap.GammaFreeRing.exists_absent_pair
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_eq
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_right
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_left
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_const
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_rotate_ne
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isChangePoint_iff
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_change_rotate
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_change_int
+#print axioms HadwigerNelson.Plane.ArcMap.exists_germCol_change
+#print axioms HadwigerNelson.Plane.ArcMap.exists_third_change
+#print axioms HadwigerNelson.Plane.halfPlane2_covers
 -- FS131-I8A: Plane/RingCalculus/Empty (the leaves closed)
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_sixth_congr
+#print axioms HadwigerNelson.Plane.ArcMap.exists_int_of_three_dist_le_one
+#print axioms HadwigerNelson.Plane.ArcMap.not_double_two_classes
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_mem_of_sixth
+#print axioms HadwigerNelson.Plane.ArcMap.sixth_cons_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.exists_two_double_tiles
+#print axioms HadwigerNelson.Plane.ArcMap.fin_four_three_pairs
+#print axioms HadwigerNelson.Plane.ArcMap.GammaFreeRing.changePoint_gap
+#print axioms HadwigerNelson.Plane.ArcMap.v6_hubs
+#print axioms HadwigerNelson.Plane.ArcMap.v6_hug
+#print axioms HadwigerNelson.Plane.ArcMap.emptyNS
+#print axioms HadwigerNelson.Plane.ArcMap.v6_hubs_vacuous
+#print axioms HadwigerNelson.Plane.ArcMap.v6_hug_vacuous
+#print axioms HadwigerNelson.Plane.ArcMap.doubleTip
 #print axioms HadwigerNelson.Plane.ArcMap.intCast_zmod_six_of_half_le_cos
 #print axioms HadwigerNelson.Plane.ArcMap.ringPt_sixth_dist_le_one
 #print axioms HadwigerNelson.Plane.ArcMap.v6_count
