@@ -1,0 +1,16 @@
+MATCH   /home/kooshi/source/lean-dir/CLAUDE.md :: Do not consider Lean formalization a cost. It's practically mechanical
+MATCH   /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md :: 509. **FS131-K10b done at its Stage 9: wave 10's second planning pass 
+MATCH   /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md :: 510. **Rulings on K10b's held items, and its slot.** (a) **Three imple
+MATCH   /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md :: 500. **FS131-K10b, by message mid-job, before stating the floor's impo
+MATCH   /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md :: 503. **FS131-K10b, by message mid-job: J45-SI-J holds at a wider class
+MATCH   /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/Proofs/HadwigerNelson/Arith/Floor128.lean :: theorem charSum_128_ge {k : Type} [Field k] [Fintype k] [DecidableEq k
+MATCH   /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/Proofs/HadwigerNelson/Arith/Floor128.lean :: theorem targetFloor_eight_128 : TargetFloor 8 128 :=
+MATCH   /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/plans/FS131-w10-kernel-plan.md :: ### 7.2 Row (i) — the target at 128, no outside theorem: `Floor128.tar
+MATCH   /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/plans/FS131-w10-kernel-plan.md :: ### 7.1 The ratio bound — where it lives, and its class
+MATCH   /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/plans/FS131-w10-kernel-plan.md :: ### 9.3 Prices (re-priced from this pass's proved leaves: the ratio bo
+MATCH   /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/plans/FS131-w10-kernel-plan.md :: ### 9.4 For the joining job
+MATCH   /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/Proofs/HadwigerNelson/Arith/FloorPlanes.lean :: theorem exists_mulShift_eq {F : Type*} [Field F] [Finite F] (ψ₀ : AddC
+MATCH   /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/Proofs/HadwigerNelson/Arith/NormOneTarget.lean :: theorem card_normOne {k : Type*} [Field k] [Fintype k] [DecidableEq k]
+MATCH   /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/Proofs/HadwigerNelson/Arith/NormOneTarget.lean :: theorem card_filter_pow_eq_one {k : Type*} [Field k] [Fintype k] [Deci
+CONTROL  (planted string reads missing, as it must)
+14 of 14 match
