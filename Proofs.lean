@@ -232,6 +232,8 @@ import Proofs.HadwigerNelson.Plane.Woodall.Steps
 import Proofs.HadwigerNelson.Plane.Saturated.Basic
 import Proofs.HadwigerNelson.Plane.Saturated.Pinch
 import Proofs.HadwigerNelson.Plane.Saturated.MapColouring
+import Proofs.HadwigerNelson.Plane.Saturated.Fan
+import Proofs.HadwigerNelson.Plane.Saturated.FanExamples
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.Topology.SpernerGrid

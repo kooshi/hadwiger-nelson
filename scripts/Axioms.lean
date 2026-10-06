@@ -6337,6 +6337,37 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.hasTwoDiscsAt_comm
 #print axioms HadwigerNelson.Plane.isTangentAt_comm
 #print axioms HadwigerNelson.Plane.sq9_twoColourNhd
+#print axioms HadwigerNelson.Plane.dist_polarPt
+#print axioms HadwigerNelson.Plane.polarPt_re
+#print axioms HadwigerNelson.Plane.polarPt_im
+#print axioms HadwigerNelson.Plane.polarGraph_subset
+#print axioms HadwigerNelson.Plane.polarRegion_subset
+#print axioms HadwigerNelson.Plane.notMem_essClosure_of_mem_densitySet
+#print axioms HadwigerNelson.Plane.AeColouring.twoColourNhd_of_halves
+#print axioms HadwigerNelson.Plane.AeColouring.SingLocallyFinite.exists_ball_subset
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.branch_subset
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.branch_subset_interfaceSet
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.φ_lt_cyclicNext
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.tendsto_cyclicNext
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.dir_le_nextDir
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.hasSector_or_hasHorn
+#print axioms HadwigerNelson.Plane.sq9Col_near_vertex
+#print axioms HadwigerNelson.Plane.sq9_essClosure_of_quad
+#print axioms HadwigerNelson.Plane.sq9_essSupport_near_vertex
+#print axioms HadwigerNelson.Plane.sq9_not_isCuspAt_near_vertex
+#print axioms HadwigerNelson.Plane.sq9_mem_essBdry_of_re
+#print axioms HadwigerNelson.Plane.sq9_mem_essBdry_of_im
+#print axioms HadwigerNelson.Plane.sq9_axis_of_mem_essBdry
+#print axioms HadwigerNelson.Plane.sq9_twoColourNhd_of_re
+#print axioms HadwigerNelson.Plane.sq9_twoColourNhd_of_im
+#print axioms HadwigerNelson.Plane.sq9_singular_near_vertex
+#print axioms HadwigerNelson.Plane.sqVertex_mem_singularSet
+#print axioms HadwigerNelson.Plane.sq9_bdry_near_vertex
+#print axioms HadwigerNelson.Plane.sq9_region_near_vertex
+#print axioms HadwigerNelson.Plane.sq9Fan
+#print axioms HadwigerNelson.Plane.sq9Fan_dir_lt_nextDir
+#print axioms HadwigerNelson.Plane.sq9Fan_hasSector
+#print axioms HadwigerNelson.Plane.sq9Fan_not_hasHorn
 
 #eval IO.println "=== PURCHASED ==="
 
