@@ -510,3 +510,59 @@ OPEN), `exists_arcStep`, `exists_terminalSeq`; in `Terminal`, lane B's `run_horn
 - `germs_le_two_of_goodAt` is the at-most-two-germs argument inside IL1's `not_isSite_of_goodAt`, factored out; that proof can call it.
 
 ## Stage 11 — SAVED (FS131-IL2)
+
+---
+
+# FS131-IR1 — the implementer: the procedure's last steps (`fs131-wop` merged in, the two steps restated, the leaves under `exists_terminalMap` and in `Terminal`)
+
+*de Bruijn, the implementer (Opus), on branch `fs131-w5c` from `87e95385`. Brief: `data/fs131/briefs/FS131-IR1-procedure.md` (main tree).*
+
+## Theorems this phase proved (FS131-IR1)
+
+*(Filled at each saved stage; the handover stage carries the axioms print.)*
+
+## Stage 12 — SAVED (FS131-IR1): the readback and the as-given build
+
+### 12.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script, `tools/fs131_ir_quotes.py` (IL1's checker copied under this job's prefix; rule 7 bars editing another job's tool): **24
+quotations, 0 failures** (`data/fs131/ir/quotes.txt`) — `CLAUDE.md` § Counter-priors; the inventory's items 411, 403, 398, 388, 408, 382, 383, 384,
+385, 372 (main tree); the first lines of `exists_vertexStep`, `exists_arcStep`, `exists_terminalSeq` (`Procedure.lean`) and `stuckRun_ne_univ`
+(`Terminal.lean`) at `87e95385`; E6's § 4.5 drafts (three lines of the restated `exists_vertexStep`, the horn clause) and § 4.3's opening;
+`exists_open` and `HasHornCount` (`fs131-wop`'s `OpenMove.lean`, read at `a20bb6f5`'s text); this record's § 3.1 row for `stuckRun_ne_univ` and § 3.3's
+opening. `--self-test` (one letter planted in the first quotation): **fired** (1 failure; `data/fs131/ir/quotes-selftest.txt`). No mismatch.
+
+Read in full: the brief; `plans/STANDING-RULES.md`; `LEAN.md`; `RUNNING.md` §§ Building, Make the gate fail; this record (KL1's §§ 1–4, IL1's Stages
+5–8, IL2's Stages 9–11); M6's Stages 53–55 (`plans/FS131-I5-implementation.md`); E6's derivation §§ 3–4 (main tree); OPEN's record's Stage 15 and
+`OpenMove.lean`'s header, `HasHornCount`, `exists_open` (`fs131-wop`); `Procedure.lean` whole; `Limit.lean`'s `LocalStep`, `LocalSeq`, `IsClean`,
+`IsSite`, the clean section; `Basic.lean`'s and `Chain.lean`'s definitions; the three `…_aux` moves (`Moves.lean`) and `Contact`'s `exists_shave`,
+`exists_rayMerge`, `exists_merge`; inventory items 372, 382–385, 398–411.
+
+### 12.2 Two things the readback found (neither a mismatch of a quotation)
+
+- **`exists_open` as proved carries a hypothesis E6's draft did not**: `(h1 : F.HasSectors v c 1)` (the horn's colour has one sector at `v`; IO1's
+  settlement). E6-ROUTE (§ 4.3) calls OPEN only at a lone horn, so the vertex step's route is unchanged; the case "a horn of a repeated colour with
+  `int D_c(v) ≠ ∅`" is MERGE's (the colour then has two sectors and a non-empty interior), never OPEN's.
+- **The four moves' statements export neither `LocalStep`, nor a radius below `δ` (OPEN's apart), nor the points strictly inside the disc** (they
+  give `AgreesOff`, `RingArcsWithin`, the colour's sector count at `v`, the colours at `v`, and the rim's colours). So `exists_vertexStep` re-opens
+  each construction (`F.surgery v ρ …`), as KL1's § 3.3 planned; the brief's "new declarations downstream only" stands.
+
+### 12.3 The as-given build (`87e95385`)
+
+`/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any
+edit: **OK — all 1784 modules already up to date, nothing built, 5 modules with warnings**, exit 0, 2 s
+(`build/gate/build/20261006T023212Z-73259.log`; driver log `data/fs131/ir/build-stage12-asgiven.log`). `sorry` declarations in my files:
+`Procedure` 3 (`exists_vertexStep`, `exists_arcStep`, `exists_terminalSeq`), `Terminal` 1 (`stuckRun_ne_univ`).
+
+### 12.4 What I may and may not change (the brief's `touches` and § What is yours to decide)
+
+**May**: merge `a20bb6f5` (keeping both sides in `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`); restate `exists_vertexStep` (E6's form) and
+`exists_arcStep` (the horn clause), and settle their final form where the kernel shows the draft needs a change, recording the diff and the reason;
+prove `exists_terminalSeq`, `stuckRun_ne_univ` and children beside them; add supporting lemmas in `FlankUA` and `HornShadow`; add a module downstream
+of `Moves`, `MergeMove`, `OpenMove` for the moves' exported lemmas; a block of my own in `scripts/Axioms.lean`; `tools/fs131_ir_*.py`,
+`data/fs131/ir/`, this record, the report. **May not**: edit `OpenMove.lean`, or a statement or definition in `Moves`, `MergeMove`, `Contact`,
+`UnitArc` or any module on `main`; `BaseDense`, `BendCollar`, `HexRing`; `exists_terminalMap`'s statement (and `exists_terminalSeq`'s only after a
+message); `main`; the gate scripts' recorded counts; no new `axiom`, no `native_decide`. I do not merge into `fs131-w5`, take `main` beyond the merge
+above, or run the full gate.
+
+## Stage 12 — SAVED (FS131-IR1)
