@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–528 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–529 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -56,7 +56,7 @@ a fresh agent on the same brief.
    takes a second named hypothesis, the finite-target floor; FS89-S0A-10 takes its band's order bound as a hypothesis). In order, as slots free: **FS131-K6b is running** (§ 3; E8 handed back, items 491–492: nine entries derived, its stub lines filed, its errata held for the filing);
    next into free slots:
    **the order, planners and implementers alternating (rulings 495 (d), 497; a planner's hand-back is what implementers wait on, and planners
-   find the statement defects): K9, I6C, I10D, I6D, I10E, I6E, I10F, then K10c, K7b, I7A, I8A, K8b, MD1, MD2** (**I7A and I8A are written and gated, trees made**, item 527: `data/fs131/briefs/FS131-I7A-wave7-first.md` on `fs131-w7a` from `b5ef0e39`, `FS131-I8A-wave8-first.md` on `fs131-w8a` from `f1c13612`, generator `mk-i78.py 7|8 [<sq9's commit>]` — regenerate I8A's with I6B's commit once I6B is back; **K7b and K8b are written and gated** too, item 528: `FS131-K7b-wave7-second.md` on `fs131-w7` itself, `FS131-K8b-wave8-second.md` on `fs131-w8` itself, generator `mk-k78b.py 7|8` — new modules only, and each sends me its form of FS114-N7-QOPP to relay to the other; **K10c, MD1, MD2 not written**) (rulings 502, 505, 507, 510; K7, I10C and I6A are running). **Also ready, briefs gated**: FS131-K6c (wave 6's third planning pass, on `fs131-w6` itself, new modules only;
+   find the statement defects): K9, I6C, I10D, I6D, I10E, I6E, I10F, then K10c, K7b, I7A, I8A, K8b, MD1, MD2** (**I7A and I8A are written and gated, trees made**, item 527: `data/fs131/briefs/FS131-I7A-wave7-first.md` on `fs131-w7a` from `b5ef0e39`, `FS131-I8A-wave8-first.md` on `fs131-w8a` from `f1c13612`, generator `mk-i78.py 7|8 [<sq9's commit>]` — regenerate I8A's with I6B's commit once I6B is back; **K7b and K8b are written and gated** too, item 528: `FS131-K7b-wave7-second.md` on `fs131-w7` itself, `FS131-K8b-wave8-second.md` on `fs131-w8` itself, generator `mk-k78b.py 7|8` — new modules only, and each sends me its form of FS114-N7-QOPP to relay to the other; **K10c, MD1, MD2 are written and gated** too, item 529: `FS131-K10c-wave10-third.md` on `fs131-w10k` itself (generator `mk-k10c.py [<branch>=<tip> …]` — regenerate with the second pass's implementers' tips as they return), `FS131-MD1-closers.md` on `fs131-wd1` and `FS131-MD2-closers.md` on `fs131-wd2` (both from `main` at `1ed1cfd2`, generator `mk-md.py 1|2`; the closers do not land — the next landing job merges them); **every job in this order now has a gated brief**) (rulings 502, 505, 507, 510; K7, I10C and I6A are running). **Also ready, briefs gated**: FS131-K6c (wave 6's third planning pass, on `fs131-w6` itself, new modules only;
    `data/fs131/briefs/FS131-K6c-wave6-third.md`, generator `mk-k6c.py`), FS131-I6C (`Curve` then `LocalGraph`, tree `fs131-w6c`) and FS131-I6D
    (`FanBridge`'s existence half with `sq9.SingLocallyFinite`, tree `fs131-w6f`; `data/fs131/briefs/FS131-I6C-wave6-bridge.md`, `FS131-I6D-wave6-bridge.md`,
    generator `mk-i6b.py C|D`; both trees cut from `32f2ab4c`). FS131-I6E (`FanBridge`'s five `Fan` lemmas, tree `fs131-w6g` from `32f2ab4c`;
@@ -179,6 +179,7 @@ a fresh agent on the same brief.
 | `fs131-w8` (`f1c13612`, idle: wave 8's plan and skeleton after one pass, ten leaves), `fs131-w9` (`26b08395`: wave 7's and wave 8's shared modules) | from `611ffa39` | made for K8 and K9, fast-forwarded to wave 7's shared-module commit; builds copied from `fs131-wmb` (the first build compiles `SimpleOn`) |
 | `fs131-w10c` | `8ee0d85b` | idle: `StandingFive` proved (item 519) |
 | `fs131-w7a`, `fs131-w8a` | `b5ef0e39`, `f1c13612` | made for FS131-I7A and FS131-I8A (item 527); builds copied from `fs131-w7`, `fs131-w8` |
+| `fs131-wd1`, `fs131-wd2` | `1ed1cfd2` (`main`) | made for FS131-MD1 and FS131-MD2 (item 529); builds copied from `fs131-wmb` |
 | `fs131-w10l` | moving (L10A; from `ace98a35`) | wave 10's first pass, being joined and landed |
 
 ## 8. Held for the milestone's filing
@@ -206,7 +207,7 @@ FS110-W-MERGE to [kernel]); the Proof Atlas rebuilt and committed, not published
 - **The two papers asked of him are in the library** (item 515: Weil 1948 and Li 1992, identity checked; `BIBLIOGRAPHY.md` current). Weil's
   p. 207 states the Kloosterman bound at every finite field of odd characteristic. **Owed, a planner's**: the read-back against
   `KloostermanBound` and the axiom with its four items (stated with characteristic not 2) — the first item of FS131-K10c's brief when it is
-  written; it raises the audit's imported count from 4 to 5, which he has been told.
+  written (it now is: item 529). **Correction owed to him, not yet told** (item 529): the import takes the library's declared outside theorems from one to two; the audit's "imported" count is of records and rises from 4 by the records resting on the new axiom — not "from 4 to 5" as I told him twice.
 - The example maps landed without `stuckModel_terminal` (ruling 482); FS131-MD1 proves `stuckModel.IsTerminalMap` whole (ruling 497 (b)).
 
 - The external repositories (items 9, 105, 108–122): the outside repository's issue is written; nothing waits on it.

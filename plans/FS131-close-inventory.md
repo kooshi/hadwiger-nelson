@@ -5710,3 +5710,33 @@ reason by the close.*
      **Corrected before the gate, mine**: three sentences of the drafts claimed more than their sources (that the top
      three stubs read wave 7's rows; that both first passes lost a build to a doubled name — only wave 8's did; a quoted
      phrase in prose) — replaced by what the records say. **Still not written**: K10c, MD1, MD2.
+
+529. **The last three briefs of the queue written and gated — FS131-MD1, FS131-MD2, FS131-K10c; every job in the handoff's
+     order now has a brief — and a correction owed to Kooshi, mine** (2026-10-06). **MD1** (`data/fs131/briefs/
+     FS131-MD1-closers.md`; tree `.claude/worktrees/fs131-wd1`, branch `fs131-wd1` from `main` at `1ed1cfd2`):
+     `stuckModel.IsTerminalMap` whole — `Terminal` by MC1's route (its record § 3.2), `QROnly` with no route written — in a
+     new module, then the three `example`s and the three heads' docstrings. **MD2** (`FS131-MD2-closers.md`; tree
+     `fs131-wd2`, same base): `hornModel.IsClean` and an honest list for `Procedure`'s other ten heads, the contact fact at
+     `stuckModel`'s vertex, a named `CollarFitOut` on `awayModel`'s gap — sixteen of the twenty-nine open gate items.
+     Generator `data/fs131/briefs/scripts/mk-md.py 1|2`; builds copied from `fs131-wmb` (idle; its Lean inputs equal
+     `main`'s, by `git diff`). **K10c** (`FS131-K10c-wave10-third.md`, generator `mk-k10c.py [<branch>=<tip> …]`; on
+     `fs131-w10k` at `330d2f48`, new modules only): the read-back of `[Weil1948]` p. 207 against `KloostermanBound` before
+     any Lean, the import with its four items in a module of its own, the floor's three theorems applied to it; then
+     J45-SI-5, J45-SI-C's measure part, J45-N1 (a)(b) or its interface, the level row; then the read-backs (I10C's twelve
+     statements, the second pass's implementers' as they return). Gates: exit 0 each (27, 23, 34 quotations); MD1's first
+     run failed on a bare file name, fixed. **Rulings.** (a) **The two closers do not land themselves; the next landing
+     job merges their branches.** Alternative: each runs the full gate and fast-forwards `main`. Why not: a full gate each
+     for docstring lines and a few hundred lines of models, with truth not in question and nothing waiting on them.
+     Confidence: medium-high. (b) **Each closer writes in a module of its own and edits `Applied` only at its own
+     `example`s** (MD1: the three that take `Terminal` / `IsTerminalMap`; MD2: the one that takes `IsClean`), and the
+     docstrings of its own heads, in disjoint files. Why: two branches, no shared region. Confidence: high. (c) **K10c
+     stops and messages before any axiom if the page and the statement differ in a way it cannot close**; the read-back's
+     verdict is its own. Alternative: I do the read-back. Why not: `LEAN.md` § Assumptions puts it in the planner's record,
+     and my reading (item 515) located the sentence without comparing it clause by clause. Confidence: high.
+     **A correction owed to Kooshi — slip, mine, in item 515 (c) and in two reports**: I said the import "raises the
+     audit's imported count from 4 to 5". The audit's "imported" count is of *records* that rest on a declared outside
+     theorem (`scripts/axioms.sh`, `imported++` per record under IMPORTED; `LEAN.md` § Trust ledger): today 4 records rest
+     on one axiom, `falconer_lemma2_nonempty` (`rg '^axiom '` over `Proofs/` finds it and the native-evaluation example
+     only). With Weil's bound the **declared outside theorems go from one to two**, and the imported count rises from 4 by
+     however many records rest on the new one — at least the three the floor states. Found while writing K10c's brief,
+     which now says so; the handoff's § 9 line corrected; to be told to Kooshi in the next report.
