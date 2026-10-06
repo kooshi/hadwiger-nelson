@@ -3947,3 +3947,14 @@ reason by the close.*
      weighed: E7 or the models' planner first. Why: the arc step is the longest unexamined piece on wave 5's landing path, and `Procedure` itself is held
      by IR2. E7 takes the next slot, the models' planner the one after, `bend_away`'s planner when IA1 has fixed its statement. In flight after IA1's
      launch: 1 (IR2) + 1 (IS1) + 1 (IA1) = 3.
+
+428. **Two briefs written ahead of a freed slot, and the models' lane opened** (Keryx, 2026-10-06, after the compaction; the three jobs of item 427
+     (e) still running). (a) **FS131-E7** (`data/fs131/briefs/FS131-E7-models.md`, gate PASS, 19 quotations; claim list `data/fs131/claims-E7.md`,
+     fixed before launch: five statements and 26 definitions copied by script from `main` at `8d686f0b`, questions Q1–Q5; generator
+     `data/fs131/briefs/scripts/mk-e7.py`). Q3 asks `nb4p`'s background alone, with `hring`, and with `hnb`, so that an idle hypothesis shows. Its
+     scripts live under `data/fs131/e7/`, not `tools/` (ruling 415 (b): a `main` commit outside `plans/` and `data/` makes a landing re-run its gate).
+     (b) **FS131-KM1**, the models' planner (`data/fs131/briefs/FS131-KM1-models.md`, gate PASS, 21 quotations; generator `mk-km1.py`): QA4's ranks
+     4–6 on a new branch `fs131-wm` cut from `main` at `68a3db1d` (worktree `.claude/worktrees/fs131-wm`, build copied from the idle `fs131-wop`,
+     whose `Proofs/` and `scripts/` are `main`'s; pushed). New declarations only; the docstring lines naming the models are drafted in its record for
+     the implementer who lands the lane. (c) **A slip, mine, caught before launch**: KM1's draft named `IsSite` as on `main`; it is defined on
+     `fs131-w5c` (`Limit.lean` l. 811). Corrected in the brief. Commits `68a3db1d`, `80dac39b`.
