@@ -4123,3 +4123,15 @@ reason by the close.*
      in which case IA2's interface follows it. (d) **W6** (a horn iff horn count at least 1, at a chart) is IA2's, and IR3 is told of it only if
      its cases ask. (e) **The three doubled statements**: the final sync (ruling 434 (d)). (f) **Slot → FS131-KA1**, launched 2026-10-06 on
      `fs131-w5a`. In flight: 1 (IR3) + 1 (E7) + 1 (KA1) = 3. Queue: FS131-IA2, then FS131-KM1.
+
+439. **FS131-IA2's brief written ahead, and its lane opened** (Keryx, 2026-10-06; `data/fs131/briefs/FS131-IA2-arc-assembly.md`, gate PASS, 14
+     quotations; generator `data/fs131/briefs/scripts/mk-ia2.py`). Branch `fs131-w5y` cut from `fs131-w5a` at `78eba0b4` (worktree
+     `.claude/worktrees/fs131-w5y`; pushed; the build copied from `fs131-w5a`'s tree as FS131-KA1's first build was starting there, so IA2's
+     as-given build is the check on the copy). **A bound on ruling 438 (c), found while writing the brief**: `IsMaxRingArc` and `badCount` are
+     defined in `Procedure.lean` (l. 39, 46), which IA2 does not edit, so the two count clauses stop at the ring-arc level in IA2's module
+     (`IsRingArc`, `IsQArc`, `IsR2Arc`: R1–R3, W4, W7, question (5)); W5 and the `encard` step go with the last lines in `Procedure`. Alternative
+     weighed: have FS131-IR3 move the two definitions into a small upstream module now. Why not now: it is an edit to the file IR3 holds, and IA2's
+     branch would need a merge of IR3's line to see it; IA2 is asked to say if the move would save the last job real work, and it is then ruled.
+     Confidence: medium. IA2 writes only one new module (FS131-KA1 may add declarations to `BendStep` and the collar's four modules on
+     `fs131-w5a`). The interface between the two bends is the weakest clause family the step reads, fixed in IA2's second stage; a change to it by
+     either job comes through me.
