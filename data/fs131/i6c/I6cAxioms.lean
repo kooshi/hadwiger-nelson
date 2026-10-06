@@ -46,3 +46,18 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.HasTwoDiscsAt.one_le_norm_sub
 #print axioms HadwigerNelson.Plane.HasTwoDiscsAt.norm_sub_le
 #print axioms HadwigerNelson.Plane.HasTwoDiscsAt.normal_unique
+#eval IO.println "=== Stage 5: the graph theorem, the sides, the path ==="
+#print axioms HadwigerNelson.Plane.hasDerivAt_of_sq_bound
+#print axioms HadwigerNelson.Plane.abs_le_of_two_disc_bound
+#print axioms HadwigerNelson.Plane.hasDerivAt_of_two_disc_bound
+#print axioms HadwigerNelson.Plane.abs_inner_le_of_one_le
+#print axioms HadwigerNelson.Plane.im_ge_of_norm_sub_I_le
+#print axioms HadwigerNelson.Plane.e_neg_arcsin_re
+#print axioms HadwigerNelson.Plane.exists_unit_curve_of_two_discs
+#print axioms HadwigerNelson.Plane.isConnected_graph_side
+#print axioms HadwigerNelson.Plane.interior_densitySet_inter_ae_le
+#print axioms HadwigerNelson.Plane.HasTwoDiscsAt.subset_interior_densitySet
+#print axioms HadwigerNelson.Plane.TwoColourOn.exists_mem_essBoundary_of_continuous
+#print axioms HadwigerNelson.Plane.TwoColourOn.ae_le_of_isPreconnected
+#eval IO.println "=== Stage 5 WIRED (over Pinch's c11_discs and essBoundary_inter_eq: must show sorryAx) ==="
+#print axioms HadwigerNelson.Plane.local_graph

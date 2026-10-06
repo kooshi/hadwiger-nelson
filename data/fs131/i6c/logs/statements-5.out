@@ -1,0 +1,17 @@
+same    | structure IsUnitCurve (γ : ℝ → ℂ) (ψ : ℝ → ℝ) (I : Set ℝ) : Prop where | Curve.lean
+same    | theorem isUnitCurve_segment (I : Set ℝ) : IsUnitCurve (fun s : ℝ => (s : ℂ)) (fun _ => 0) I := | Curve.lean
+same    | theorem IsUnitCurve.mono {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {I J : Set ℝ} (h : IsUnitCurve γ ψ I) (hJ : J ⊆ I) : | Curve.lean
+same    | theorem IsUnitCurve.chord {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCurve γ ψ (Icc 0 ℓ)) (hℓ0 : 0 ≤ ℓ) | Curve.lean
+same    | theorem IsUnitCurve.sin_le_inner {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCurve γ ψ (Icc 0 ℓ)) | Curve.lean
+same    | theorem IsUnitCurve.strictMonoOn_dist {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCurve γ ψ (Icc 0 ℓ)) | Curve.lean
+same    | theorem IsUnitCurve.norm_sub_le {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCurve γ ψ (Icc 0 ℓ)) {s : ℝ} | Curve.lean
+same    | theorem IsUnitCurve.one_le_dist {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCurve γ ψ (Icc 0 ℓ)) | Curve.lean
+same    | theorem norm_sub_le_of_discs {x y νx νy : ℂ} (hx : ‖νx‖ = 1) (hy : ‖νy‖ = 1) | Curve.lean
+same    | theorem lipschitzOnWith_of_chord {ψ : ℝ → ℝ} {I : Set ℝ} (hI : I.OrdConnected) (hc : ContinuousOn ψ I) | Curve.lean
+same    | theorem AeColouring.notMem_essBdry_of_mem_densitySet (c : AeColouring k) {j : Fin k} {x : ℂ} | LocalGraph.lean
+same    | theorem AeColouring.ae_one_colour_of_isConnected (c : AeColouring k) {W : Set ℂ} (hW : IsOpen W) | LocalGraph.lean
+same    | theorem AeColouring.closure_essBdry_subset (c : AeColouring k) : closure c.essBdry ⊆ c.essBdry ∪ cuspSet c.cls | LocalGraph.lean
+same    | structure IsInterfaceChart (A B N : Set ℂ) (y : ℂ) (Q : Set ℂ) (γ : ℝ → ℂ) (ψ : ℝ → ℝ) (h : ℝ) : Prop where | LocalGraph.lean
+same    | theorem local_graph {A B N : Set ℂ} (hA : MeasurableSet A) (hAn : UnitPairsNull A) (hB : MeasurableSet B) | LocalGraph.lean
+same    | theorem AeColouring.local_graph (c : AeColouring k) {U : Set ℂ} (hU : IsOpen U) (hS : Disjoint U c.singularSet | LocalGraph.lean
+statements: 16  same: 16  failures: 0

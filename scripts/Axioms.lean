@@ -6406,6 +6406,18 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.TwoColourOn.mem_interior_densitySet_of_notMem
 #print axioms HadwigerNelson.Plane.TwoColourOn.mem_interior_densitySet_or
 #print axioms HadwigerNelson.Plane.exists_arclength_inverse
+#print axioms HadwigerNelson.Plane.hasDerivAt_of_sq_bound
+#print axioms HadwigerNelson.Plane.abs_le_of_two_disc_bound
+#print axioms HadwigerNelson.Plane.hasDerivAt_of_two_disc_bound
+#print axioms HadwigerNelson.Plane.abs_inner_le_of_one_le
+#print axioms HadwigerNelson.Plane.im_ge_of_norm_sub_I_le
+#print axioms HadwigerNelson.Plane.e_neg_arcsin_re
+#print axioms HadwigerNelson.Plane.exists_unit_curve_of_two_discs
+#print axioms HadwigerNelson.Plane.isConnected_graph_side
+#print axioms HadwigerNelson.Plane.interior_densitySet_inter_ae_le
+#print axioms HadwigerNelson.Plane.HasTwoDiscsAt.subset_interior_densitySet
+#print axioms HadwigerNelson.Plane.TwoColourOn.exists_mem_essBoundary_of_continuous
+#print axioms HadwigerNelson.Plane.TwoColourOn.ae_le_of_isPreconnected
 
 #eval IO.println "=== PURCHASED ==="
 

@@ -322,6 +322,418 @@ theorem exists_arclength_inverse {σ : ℝ → ℝ} {h : ℝ} (hh : 0 < h) (hσc
     exact HasDerivAt.of_local_left_inverse E.symm.continuous.continuousAt (hSd (E.symm s))
       (by linarith [h1 (E.symm s)]) (Eventually.of_forall fun t => E.apply_symm_apply t)
 
+/-! ### Children of `local_graph` (FS131-I6C): the graph theorem (FS131-E8 § 3.1 (4) in graph coordinates; no measure) -/
+
+/-- A function within `K (u − u₀)²` of the line of slope `c` through `(u₀, g u₀)`, near `u₀`, has derivative `c`
+there. -/
+theorem hasDerivAt_of_sq_bound {g : ℝ → ℝ} {u₀ c K ε : ℝ} (hε : 0 < ε)
+    (hb : ∀ u, |u - u₀| < ε → |g u - g u₀ - c * (u - u₀)| ≤ K * (u - u₀) ^ 2) : HasDerivAt g c u₀ := by
+  rw [hasDerivAt_iff_isLittleO_nhds_zero, Asymptotics.isLittleO_iff]
+  intro c' hc'
+  have hK : 0 < |K| + 1 := by positivity
+  have hδ : 0 < min ε (c' / (|K| + 1)) := lt_min hε (div_pos hc' hK)
+  filter_upwards [Metric.ball_mem_nhds (0 : ℝ) hδ] with t ht
+  rw [mem_ball, dist_zero_right, Real.norm_eq_abs, lt_min_iff] at ht
+  have h1 := hb (u₀ + t) (by rw [add_sub_cancel_left]; exact ht.1)
+  rw [add_sub_cancel_left] at h1
+  have h2 : |t| * (|K| + 1) < c' := (lt_div_iff₀ hK).1 ht.2
+  rw [Real.norm_eq_abs, Real.norm_eq_abs, smul_eq_mul, mul_comm t c]
+  have h3 : K * t ^ 2 ≤ |K| * (|t| * |t|) := by
+    rw [← pow_two, sq_abs]
+    exact mul_le_mul_of_nonneg_right (le_abs_self K) (sq_nonneg _)
+  nlinarith [abs_nonneg t, abs_nonneg K, mul_nonneg (abs_nonneg t) (abs_nonneg K)]
+
+/-- The two-disc inequality in graph coordinates gives a Lipschitz bound. -/
+theorem abs_le_of_two_disc_bound {a b n₁ n₂ : ℝ} (hn₁ : |n₁| ≤ 1) (hn₂ : 1 / 2 ≤ n₂) (ha : |a| ≤ 1)
+    (hb : |b| ≤ 1 / 2) (h : |n₁ * a + n₂ * b| ≤ (a ^ 2 + b ^ 2) / 2) : |b| ≤ 6 * |a| := by
+  have h1 : n₂ * |b| ≤ |n₁| * |a| + (a ^ 2 + b ^ 2) / 2 := by
+    have := abs_sub_abs_le_abs_sub (n₂ * b) (-(n₁ * a))
+    rw [sub_neg_eq_add, add_comm, abs_mul, abs_neg, abs_mul, abs_of_pos (by linarith : (0 : ℝ) < n₂)] at this
+    linarith
+  have h2 : a ^ 2 = |a| * |a| := by rw [← pow_two, sq_abs]
+  have h3 : b ^ 2 = |b| * |b| := by rw [← pow_two, sq_abs]
+  nlinarith [abs_nonneg a, abs_nonneg b, abs_nonneg n₁, mul_nonneg (abs_nonneg a) (abs_nonneg n₁)]
+
+/-- The two-disc inequality in graph coordinates gives the derivative of the graph: `g′ = −n₁/n₂`. -/
+theorem hasDerivAt_of_two_disc_bound {g : ℝ → ℝ} {u₀ n₁ n₂ ε : ℝ} (hε : 0 < ε) (hn₁ : |n₁| ≤ 1)
+    (hn₂ : 1 / 2 ≤ n₂) (hg : ∀ u, |u - u₀| < ε → |g u - g u₀| ≤ 1 / 2)
+    (hb : ∀ u, |u - u₀| < ε →
+      |n₁ * (u - u₀) + n₂ * (g u - g u₀)| ≤ ((u - u₀) ^ 2 + (g u - g u₀) ^ 2) / 2) :
+    HasDerivAt g (-n₁ / n₂) u₀ := by
+  have hn₂0 : 0 < n₂ := by linarith
+  refine hasDerivAt_of_sq_bound (K := 37) (lt_min hε one_pos) fun u hu => ?_
+  rw [lt_min_iff] at hu
+  have hL := abs_le_of_two_disc_bound hn₁ hn₂ hu.2.le (hg u hu.1) (hb u hu.1)
+  have h1 := hb u hu.1
+  have h2 : g u - g u₀ - -n₁ / n₂ * (u - u₀) = (n₁ * (u - u₀) + n₂ * (g u - g u₀)) / n₂ := by
+    field_simp; ring
+  rw [h2, abs_div, abs_of_pos hn₂0, div_le_iff₀ hn₂0]
+  have h3 : (g u - g u₀) ^ 2 ≤ 36 * (u - u₀) ^ 2 := by
+    rw [← sq_abs (g u - g u₀), ← sq_abs (u - u₀)]
+    nlinarith [abs_nonneg (g u - g u₀), abs_nonneg (u - u₀)]
+  nlinarith [sq_nonneg (u - u₀)]
+
+/-- The two-disc condition in coordinates: a point `d` outside the open unit discs about `±n` (a unit vector) has
+`|⟨d, n⟩| ≤ ‖d‖²/2`. -/
+theorem abs_inner_le_of_one_le {d n : ℂ} (hn : ‖n‖ = 1) (h1 : 1 ≤ ‖d - n‖) (h2 : 1 ≤ ‖d + n‖) :
+    |d.re * n.re + d.im * n.im| ≤ (d.re ^ 2 + d.im ^ 2) / 2 := by
+  have a := one_le_pow₀ (n := 2) h1
+  have b := one_le_pow₀ (n := 2) h2
+  have c : n.re ^ 2 + n.im ^ 2 = 1 := by rw [← sq_norm_eq, hn, one_pow]
+  rw [sq_norm_eq, Complex.sub_re, Complex.sub_im] at a
+  rw [sq_norm_eq, Complex.add_re, Complex.add_im] at b
+  rw [abs_le]
+  constructor <;> nlinarith
+
+/-- A unit vector within `r` of `i` has imaginary part at least `1 − r²/2`. -/
+theorem im_ge_of_norm_sub_I_le {n : ℂ} {r : ℝ} (hn : ‖n‖ = 1) (h : ‖n - I‖ ≤ r) : 1 - r ^ 2 / 2 ≤ n.im := by
+  have c : n.re ^ 2 + n.im ^ 2 = 1 := by rw [← sq_norm_eq, hn, one_pow]
+  have h2 : ‖n - I‖ ^ 2 ≤ r ^ 2 := pow_le_pow_left₀ (norm_nonneg _) h 2
+  rw [sq_norm_eq, Complex.sub_re, Complex.sub_im, Complex.I_re, Complex.I_im] at h2
+  nlinarith
+
+/-- For a unit vector `N` with non-negative imaginary part, `e (−arcsin (re N)) = im N − (re N) i`: the tangent whose
+normal is `N`. -/
+theorem e_neg_arcsin_re {N : ℂ} (hN : ‖N‖ = 1) (him : 0 ≤ N.im) :
+    e (-Real.arcsin N.re) = (N.im : ℂ) - (N.re : ℂ) * I := by
+  have c : N.re ^ 2 + N.im ^ 2 = 1 := by rw [← sq_norm_eq, hN, one_pow]
+  have h1 : -1 ≤ N.re := by nlinarith [sq_nonneg N.im]
+  have h2 : N.re ≤ 1 := by nlinarith [sq_nonneg N.im]
+  have h3 : 1 - N.re ^ 2 = N.im ^ 2 := by linarith
+  rw [e_neg, Real.cos_arcsin, Real.sin_arcsin h1 h2, h3, Real.sqrt_sq him]
+
+/-- **The graph theorem** (FS131-E8 § 3.1 (4), in graph coordinates; no measure, no colouring). Let `Zf` be a set with
+a field `n` of unit normals at its points near `0`, such that near `0`: each point of `Zf` is outside the two open unit
+discs about `z ± n z` at every other point `z` (§ 3.1 (3)(b)); `n` is 1-Lipschitz on `Zf` (the erratum's bound);
+`0 ∈ Zf` with `n 0 = i`; and every vertical segment over `|u| < h` meets `Zf` at height at most `h`. Then `Zf`, in a
+rectangle `(a, b) × (−h, h)`, is the image of an injective unit-speed curve `ζ` on `(−ℓ, ℓ)` with `ζ 0 = 0`, whose
+tangent angle `φ` is 1-Lipschitz and whose normal `i e(φ s)` is `n (ζ s)`; and it is the graph of a continuous
+`g`, `|g| < h/2`, over `(a, b)`. (Uniqueness on vertical segments, `|g u| ≤ u²`, `g′ = −n₁/n₂`,
+`exists_arclength_inverse`, `lipschitzOnWith_of_chord`.) -/
+theorem exists_unit_curve_of_two_discs {Zf : Set ℂ} {n : ℂ → ℂ} {h : ℝ} (hh : 0 < h) (hh1 : h ≤ 1 / 16)
+    (hn : ∀ z ∈ Zf, ‖z‖ < 2 * h → ‖n z‖ = 1)
+    (hb : ∀ z ∈ Zf, ∀ z' ∈ Zf, ‖z‖ < 2 * h → ‖z'‖ < 2 * h → 1 ≤ ‖z' - (z + n z)‖ ∧ 1 ≤ ‖z' - (z - n z)‖)
+    (hc : ∀ z ∈ Zf, ∀ z' ∈ Zf, ‖z‖ < 2 * h → ‖z'‖ < 2 * h → ‖n z - n z'‖ ≤ ‖z - z'‖)
+    (h0 : (0 : ℂ) ∈ Zf) (hn0 : n 0 = I)
+    (hex : ∀ u : ℝ, |u| < h → ∃ v : ℝ, |v| ≤ h ∧ (u : ℂ) + v * I ∈ Zf) :
+    ∃ (ℓ a b : ℝ) (ζ : ℝ → ℂ) (φ g : ℝ → ℝ), 0 < ℓ ∧ -h < a ∧ a < 0 ∧ 0 < b ∧ b < h ∧ ζ 0 = 0 ∧
+      (∀ s ∈ Ioo (-ℓ) ℓ, HasDerivAt ζ (e (φ s)) s ∧ I * e (φ s) = n (ζ s)) ∧
+      LipschitzOnWith 1 φ (Ioo (-ℓ) ℓ) ∧ InjOn ζ (Ioo (-ℓ) ℓ) ∧
+      ζ '' Ioo (-ℓ) ℓ = Zf ∩ (Ioo a b ×ℂ Ioo (-h) h) ∧
+      ContinuousOn g (Ioo a b) ∧ (∀ u ∈ Ioo a b, |g u| < h / 2) ∧
+      ∀ z ∈ Ioo a b ×ℂ Ioo (-h) h, z ∈ Zf ↔ z.im = g z.re := by
+  have hre : ∀ u v : ℝ, ((u : ℂ) + v * I).re = u := fun u v => by simp
+  have him : ∀ u v : ℝ, ((u : ℂ) + v * I).im = v := fun u v => by simp
+  have hnorm : ∀ z : ℂ, |z.re| < h → |z.im| ≤ h → ‖z‖ < 2 * h := fun z hu hv =>
+    lt_of_le_of_lt (Complex.norm_le_abs_re_add_abs_im z) (by linarith)
+  have hsmall : ∀ u v : ℝ, |u| < h → |v| ≤ h → ‖(u : ℂ) + v * I‖ < 2 * h := fun u v hu hv =>
+    hnorm _ (by rwa [hre]) (by rwa [him])
+  have h00 : ‖(0 : ℂ)‖ < 2 * h := by rw [norm_zero]; linarith
+  -- the normal near `0`
+  have himn : ∀ z ∈ Zf, ‖z‖ < 2 * h → 1 / 2 ≤ (n z).im ∧ |(n z).re| ≤ 1 ∧ (n z).im ≤ 1 := by
+    intro z hz hzs
+    have h1 := hc z hz 0 h0 hzs h00
+    rw [hn0, sub_zero] at h1
+    have h2 := im_ge_of_norm_sub_I_le (hn z hz hzs) h1
+    have h3 := Complex.abs_re_le_norm (n z)
+    have h4 := Complex.im_le_norm (n z)
+    rw [hn z hz hzs] at h3 h4
+    refine ⟨?_, h3, h4⟩
+    nlinarith [norm_nonneg z]
+  -- § 3.1 (3)(b) in coordinates
+  have hA : ∀ z ∈ Zf, ∀ z' ∈ Zf, ‖z‖ < 2 * h → ‖z'‖ < 2 * h →
+      |(n z).re * (z'.re - z.re) + (n z).im * (z'.im - z.im)| ≤
+        ((z'.re - z.re) ^ 2 + (z'.im - z.im) ^ 2) / 2 := by
+    intro z hz z' hz' hzs hzs'
+    obtain ⟨h1, h2⟩ := hb z hz z' hz' hzs hzs'
+    have e1 : z' - (z + n z) = z' - z - n z := by ring
+    have e2 : z' - (z - n z) = z' - z + n z := by ring
+    rw [e1] at h1
+    rw [e2] at h2
+    have h3 := abs_inner_le_of_one_le (hn z hz hzs) h1 h2
+    simp only [Complex.sub_re, Complex.sub_im] at h3
+    rwa [mul_comm (z'.re - z.re), mul_comm (z'.im - z.im)] at h3
+  -- uniqueness on vertical segments
+  have huniq : ∀ z ∈ Zf, ∀ z' ∈ Zf, z.re = z'.re → |z.re| < h → |z.im| ≤ h → |z'.im| ≤ h → z.im = z'.im := by
+    intro z hz z' hz' hre' hu hv hv'
+    have hzs := hnorm z hu hv
+    have hzs' := hnorm z' (hre' ▸ hu) hv'
+    have key := hA z hz z' hz' hzs hzs'
+    rw [hre', sub_self, mul_zero, zero_add, abs_mul, abs_of_pos (by linarith [(himn z hz hzs).1] : 0 < (n z).im)]
+      at key
+    have him' := (himn z hz hzs).1
+    by_contra hne
+    have hpos : 0 < |z'.im - z.im| := abs_pos.2 (sub_ne_zero.2 (Ne.symm hne))
+    have hd : |z'.im - z.im| ≤ 2 * h := by
+      rw [abs_le] at hv hv' ⊢
+      constructor <;> linarith
+    have hsq : (z'.im - z.im) ^ 2 = |z'.im - z.im| * |z'.im - z.im| := by rw [← pow_two, sq_abs]
+    nlinarith
+  -- the graph function
+  have hex' : ∀ u : ℝ, ∃ v : ℝ, |u| < h → |v| ≤ h ∧ (u : ℂ) + v * I ∈ Zf := fun u => by
+    by_cases hu : |u| < h
+    · obtain ⟨v, hv⟩ := hex u hu
+      exact ⟨v, fun _ => hv⟩
+    · exact ⟨0, fun h' => absurd h' hu⟩
+  choose g hg using hex'
+  have hG2 : ∀ z ∈ Zf, |z.re| < h → |z.im| ≤ h → z.im = g z.re := by
+    intro z hz hu hv
+    have := huniq z hz _ (hg z.re hu).2 (by rw [hre]) hu hv (by rw [him]; exact (hg z.re hu).1)
+    rwa [him] at this
+  have hG3 : ∀ u, |u| < h → |g u| ≤ u ^ 2 := by
+    intro u hu
+    have key := hA 0 h0 _ (hg u hu).2 h00 (hsmall u (g u) hu (hg u hu).1)
+    rw [hn0] at key
+    simp only [hre, him, Complex.zero_re, Complex.zero_im, sub_zero, Complex.I_re, Complex.I_im, zero_mul, one_mul,
+      zero_add] at key
+    have h1 := (hg u hu).1
+    have hsq : g u ^ 2 = |g u| * |g u| := by rw [← pow_two, sq_abs]
+    nlinarith [abs_nonneg (g u)]
+  have hgh : ∀ u, |u| < h → |g u| < h / 2 := fun u hu => by
+    have h1 := hG3 u hu
+    have h2 : u ^ 2 = |u| * |u| := by rw [← pow_two, sq_abs]
+    nlinarith [abs_nonneg u]
+  have hlt : ∀ u u₀ : ℝ, |u₀| < h → |u - u₀| < h - |u₀| → |u| < h := fun u u₀ _ hu => by
+    have := abs_sub_abs_le_abs_sub u u₀
+    linarith
+  have hgg : ∀ u u', |u| < h → |u'| < h → |g u' - g u| ≤ 1 / 2 := fun u u' hu hu' => by
+    have h1 := hgh u hu
+    have h2 := hgh u' hu'
+    rw [abs_lt] at h1 h2
+    rw [abs_le]
+    constructor <;> linarith
+  have hgd : ∀ u₀, |u₀| < h → HasDerivAt g (-(n ((u₀ : ℂ) + g u₀ * I)).re / (n ((u₀ : ℂ) + g u₀ * I)).im) u₀ := by
+    intro u₀ hu₀
+    have hz₀ := (hg u₀ hu₀).2
+    have hs₀ := hsmall u₀ (g u₀) hu₀ (hg u₀ hu₀).1
+    obtain ⟨i1, i2, -⟩ := himn _ hz₀ hs₀
+    refine hasDerivAt_of_two_disc_bound (sub_pos.2 hu₀) i2 i1 (fun u hu => hgg u₀ u hu₀ (hlt u u₀ hu₀ hu))
+      (fun u hu => ?_)
+    have hu' := hlt u u₀ hu₀ hu
+    have key := hA _ hz₀ _ (hg u hu').2 hs₀ (hsmall u (g u) hu' (hg u hu').1)
+    simpa only [hre, him] using key
+  have hglip : ∀ u u', |u| < h → |u'| < h → |g u' - g u| ≤ 6 * |u' - u| := by
+    intro u u' hu hu'
+    have hs := hsmall u (g u) hu (hg u hu).1
+    obtain ⟨i1, i2, -⟩ := himn _ (hg u hu).2 hs
+    have key := hA _ (hg u hu).2 _ (hg u' hu').2 hs (hsmall u' (g u') hu' (hg u' hu').1)
+    simp only [hre, him] at key
+    refine abs_le_of_two_disc_bound i2 i1 ?_ (hgg u u' hu hu') key
+    rw [abs_lt] at hu hu'
+    rw [abs_le]
+    constructor <;> linarith
+  have hNlip : ∀ u u', |u| < h → |u'| < h →
+      ‖n ((u : ℂ) + g u * I) - n ((u' : ℂ) + g u' * I)‖ ≤ 7 * |u - u'| := by
+    intro u u' hu hu'
+    have h1 := hc _ (hg u hu).2 _ (hg u' hu').2 (hsmall u (g u) hu (hg u hu).1)
+      (hsmall u' (g u') hu' (hg u' hu').1)
+    have e1 : (u : ℂ) + g u * I - ((u' : ℂ) + g u' * I) = ((u - u' : ℝ) : ℂ) + ((g u - g u' : ℝ) : ℂ) * I := by
+      push_cast; ring
+    have h2 := Complex.norm_le_abs_re_add_abs_im ((u : ℂ) + g u * I - ((u' : ℂ) + g u' * I))
+    rw [e1, hre, him] at h2
+    rw [e1] at h1
+    have h3 := hglip u' u hu' hu
+    linarith
+  have hNc : ContinuousOn (fun u : ℝ => n ((u : ℂ) + g u * I)) (Ioo (-h) h) :=
+    LipschitzOnWith.continuousOn (K := 7) (LipschitzOnWith.of_dist_le_mul fun u hu u' hu' => by
+      simpa [dist_eq_norm, Real.dist_eq] using hNlip u u' (abs_lt.2 hu) (abs_lt.2 hu'))
+  -- the arclength parameter
+  have hmem : ∀ u ∈ Icc (-(h / 2)) (h / 2), |u| < h := fun u hu => by
+    rw [abs_lt]; constructor <;> linarith [hu.1, hu.2]
+  have hσc : ContinuousOn (fun u : ℝ => ((n ((u : ℂ) + g u * I)).im)⁻¹) (Icc (-(h / 2)) (h / 2)) := by
+    refine ContinuousOn.inv₀ ((Complex.continuous_im.comp_continuousOn hNc).mono fun u hu => abs_lt.1 (hmem u hu))
+      fun u hu => ?_
+    have := (himn _ (hg u (hmem u hu)).2 (hsmall u (g u) (hmem u hu) (hg u (hmem u hu)).1)).1
+    exact ne_of_gt (by linarith)
+  have hσ1 : ∀ u ∈ Icc (-(h / 2)) (h / 2), 1 ≤ ((n ((u : ℂ) + g u * I)).im)⁻¹ := fun u hu => by
+    obtain ⟨i1, -, i3⟩ := himn _ (hg u (hmem u hu)).2 (hsmall u (g u) (hmem u hu) (hg u (hmem u hu)).1)
+    exact (one_le_inv₀ (by linarith)).2 i3
+  obtain ⟨ℓ, V, a, b, hℓ, ha, ha0, hb0, hbh, hV0, hVmono, hVimg, hVd⟩ :=
+    exists_arclength_inverse (half_pos hh) hσc hσ1
+  have hVab : ∀ s ∈ Ioo (-ℓ) ℓ, V s ∈ Ioo a b := fun s hs => hVimg ▸ mem_image_of_mem V hs
+  have habh : ∀ u ∈ Ioo a b, |u| < h := fun u hu => by
+    rw [abs_lt]; constructor <;> linarith [hu.1, hu.2]
+  have hVh : ∀ s ∈ Ioo (-ℓ) ℓ, |V s| < h := fun s hs => habh _ (hVab s hs)
+  have hζZ : ∀ s ∈ Ioo (-ℓ) ℓ, (V s : ℂ) + g (V s) * I ∈ Zf ∧ ‖(V s : ℂ) + g (V s) * I‖ < 2 * h := fun s hs =>
+    ⟨(hg _ (hVh s hs)).2, hsmall _ _ (hVh s hs) (hg _ (hVh s hs)).1⟩
+  have hg0 : g 0 = 0 := by
+    have := hG3 0 (by rw [abs_zero]; exact hh)
+    rw [zero_pow two_ne_zero] at this
+    exact abs_eq_zero.1 (le_antisymm this (abs_nonneg _))
+  -- the tangent and its angle
+  have hIe : ∀ s ∈ Ioo (-ℓ) ℓ,
+      I * e (-Real.arcsin (n ((V s : ℂ) + g (V s) * I)).re) = n ((V s : ℂ) + g (V s) * I) := by
+    intro s hs
+    obtain ⟨hz, hzs⟩ := hζZ s hs
+    rw [e_neg_arcsin_re (hn _ hz hzs) (by linarith [(himn _ hz hzs).1])]
+    apply Complex.ext <;> simp
+  have hζd : ∀ s ∈ Ioo (-ℓ) ℓ, HasDerivAt (fun s => (V s : ℂ) + g (V s) * I)
+      (e (-Real.arcsin (n ((V s : ℂ) + g (V s) * I)).re)) s := by
+    intro s hs
+    obtain ⟨hz, hzs⟩ := hζZ s hs
+    obtain ⟨i1, -, -⟩ := himn _ hz hzs
+    have hV := hVd s hs
+    rw [inv_inv] at hV
+    have hgV := (hgd (V s) (hVh s hs)).comp s hV
+    have hd := hV.ofReal_comp.add (hgV.ofReal_comp.mul_const I)
+    refine hd.congr_deriv ?_
+    have hr : -(n ((V s : ℂ) + g (V s) * I)).re / (n ((V s : ℂ) + g (V s) * I)).im *
+        (n ((V s : ℂ) + g (V s) * I)).im = -(n ((V s : ℂ) + g (V s) * I)).re :=
+      div_mul_cancel₀ _ (ne_of_gt (by linarith))
+    rw [e_neg_arcsin_re (hn _ hz hzs) (by linarith), hr]
+    push_cast
+    ring
+  have hζlip : ∀ s ∈ Ioo (-ℓ) ℓ, ∀ s' ∈ Ioo (-ℓ) ℓ,
+      ‖((V s : ℂ) + g (V s) * I) - ((V s' : ℂ) + g (V s') * I)‖ ≤ |s - s'| := by
+    intro s hs s' hs'
+    have := Convex.norm_image_sub_le_of_norm_hasDerivWithin_le (f := fun s => (V s : ℂ) + g (V s) * I)
+      (fun x hx => (hζd x hx).hasDerivWithinAt) (fun x _ => (norm_e _).le) (convex_Ioo (-ℓ) ℓ) hs' hs
+    simpa [Real.norm_eq_abs] using this
+  have hVc : ContinuousOn V (Ioo (-ℓ) ℓ) := fun s hs => (hVd s hs).continuousAt.continuousWithinAt
+  have hφc : ContinuousOn (fun s => -Real.arcsin (n ((V s : ℂ) + g (V s) * I)).re) (Ioo (-ℓ) ℓ) := by
+    have h1 : ContinuousOn (fun s => n ((V s : ℂ) + g (V s) * I)) (Ioo (-ℓ) ℓ) :=
+      hNc.comp hVc fun s hs => abs_lt.1 (hVh s hs)
+    exact (Real.continuous_arcsin.comp_continuousOn (Complex.continuous_re.comp_continuousOn h1)).neg
+  have hφlip : LipschitzOnWith 1 (fun s => -Real.arcsin (n ((V s : ℂ) + g (V s) * I)).re) (Ioo (-ℓ) ℓ) :=
+    lipschitzOnWith_of_chord ordConnected_Ioo hφc fun s hs s' hs' => by
+      have e1 : ∀ p q : ℂ, ‖p - q‖ = ‖I * p - I * q‖ := fun p q => by
+        rw [← mul_sub, norm_mul, Complex.norm_I, one_mul]
+      rw [e1, hIe s hs, hIe s' hs']
+      exact (hc _ (hζZ s hs).1 _ (hζZ s' hs').1 (hζZ s hs).2 (hζZ s' hs').2).trans (hζlip s hs s' hs')
+  refine ⟨ℓ, a, b, fun s => (V s : ℂ) + g (V s) * I, fun s => -Real.arcsin (n ((V s : ℂ) + g (V s) * I)).re, g,
+    hℓ, by linarith, ha0, hb0, by linarith, ?_, fun s hs => ⟨hζd s hs, hIe s hs⟩, hφlip, ?_, ?_, ?_,
+    fun u hu => hgh u (habh u hu), ?_⟩
+  · simp [hV0, hg0]
+  · intro s hs s' hs' heq
+    have h1 := congrArg Complex.re heq
+    simp only [hre] at h1
+    exact hVmono.injOn hs hs' h1
+  · ext z
+    constructor
+    · rintro ⟨s, hs, rfl⟩
+      refine ⟨(hζZ s hs).1, ?_⟩
+      rw [Complex.mem_reProdIm, hre, him]
+      have h1 := hgh _ (hVh s hs)
+      rw [abs_lt] at h1
+      exact ⟨hVab s hs, by linarith, by linarith⟩
+    · rintro ⟨hz, hzbox⟩
+      rw [Complex.mem_reProdIm] at hzbox
+      have hu := habh _ hzbox.1
+      obtain ⟨s, hs, hVs⟩ : z.re ∈ V '' Ioo (-ℓ) ℓ := hVimg ▸ hzbox.1
+      refine ⟨s, hs, ?_⟩
+      apply Complex.ext
+      · rw [hre, hVs]
+      · rw [him, hVs, hG2 z hz hu (abs_lt.2 hzbox.2).le]
+  · exact fun u hu => (hgd u (habh u hu)).continuousAt.continuousWithinAt
+  · intro z hzbox
+    rw [Complex.mem_reProdIm] at hzbox
+    have hu := habh _ hzbox.1
+    refine ⟨fun hz => hG2 z hz hu (abs_lt.2 hzbox.2).le, fun hzg => ?_⟩
+    have h1 := (hg z.re hu).2
+    rwa [← hzg, Complex.re_add_im] at h1
+
+/-! ### Children of `local_graph` (FS131-I6C): the two sides, and the essential boundary on a path -/
+
+/-- The part of the rectangle `(a, b) × (−h, h)` strictly above (`σ = 1`) or strictly below (`σ = −1`) the graph of a
+function `g` with `|g| < h/2` is connected: every point is joined, inside it, to the point over the middle at height
+`σ · 3h/4` by a vertical and a horizontal segment. -/
+theorem isConnected_graph_side {a b h σ : ℝ} {g : ℝ → ℝ} (hab : a < b) (hh : 0 < h) (hσ : σ = 1 ∨ σ = -1)
+    (hg : ∀ u ∈ Ioo a b, |g u| < h / 2) :
+    IsConnected {z : ℂ | z ∈ Ioo a b ×ℂ Ioo (-h) h ∧ 0 < σ * (z.im - g z.re)} := by
+  have hmid : (a + b) / 2 ∈ Ioo a b := ⟨by linarith, by linarith⟩
+  have key : ∀ u v : ℝ, u ∈ Ioo a b → v ∈ Ioo (-h) h → 0 < σ * (v - g u) →
+      (u : ℂ) + (v : ℂ) * I ∈ {z : ℂ | z ∈ Ioo a b ×ℂ Ioo (-h) h ∧ 0 < σ * (z.im - g z.re)} := by
+    intro u v hu hv hpos
+    refine ⟨?_, ?_⟩
+    · rw [Complex.mem_reProdIm]; simpa using ⟨hu, hv⟩
+    · simpa using hpos
+  have hanchor : ∀ u ∈ Ioo a b, σ * (3 * h / 4) ∈ Ioo (-h) h ∧ 0 < σ * (σ * (3 * h / 4) - g u) := by
+    intro u hu
+    have h1 := hg u hu
+    rw [abs_lt] at h1
+    rcases hσ with rfl | rfl
+    · exact ⟨⟨by linarith, by linarith⟩, by linarith⟩
+    · exact ⟨⟨by linarith, by linarith⟩, by linarith⟩
+  refine ⟨⟨_, key _ _ hmid (hanchor _ hmid).1 (hanchor _ hmid).2⟩,
+    isPreconnected_of_forall ((((a + b) / 2 : ℝ) : ℂ) + ((σ * (3 * h / 4) : ℝ) : ℂ) * I) fun z hz => ?_⟩
+  obtain ⟨hzbox, hzpos⟩ := hz
+  rw [Complex.mem_reProdIm] at hzbox
+  refine ⟨(fun v : ℝ => (z.re : ℂ) + (v : ℂ) * I) '' uIcc z.im (σ * (3 * h / 4)) ∪
+      (fun u : ℝ => (u : ℂ) + ((σ * (3 * h / 4) : ℝ) : ℂ) * I) '' uIcc z.re ((a + b) / 2), ?_, ?_, ?_, ?_⟩
+  · rintro w (⟨v, hv, rfl⟩ | ⟨u, hu, rfl⟩)
+    · have h1 := hg z.re hzbox.1
+      rw [abs_lt] at h1
+      rw [mem_uIcc] at hv
+      refine key _ _ hzbox.1 ?_ ?_
+      · rcases hσ with rfl | rfl <;> rcases hv with hv | hv <;>
+          exact ⟨by linarith [hzbox.2.1, hzbox.2.2], by linarith [hzbox.2.1, hzbox.2.2]⟩
+      · rcases hσ with rfl | rfl <;> rcases hv with hv | hv <;> linarith
+    · have hu' : u ∈ Ioo a b := by
+        rw [mem_uIcc] at hu
+        rcases hu with hu | hu
+        · exact ⟨lt_of_lt_of_le hzbox.1.1 hu.1, lt_of_le_of_lt hu.2 hmid.2⟩
+        · exact ⟨lt_of_lt_of_le hmid.1 hu.1, lt_of_le_of_lt hu.2 hzbox.1.2⟩
+      exact key _ _ hu' (hanchor u hu').1 (hanchor u hu').2
+  · exact Or.inr ⟨(a + b) / 2, right_mem_uIcc, rfl⟩
+  · exact Or.inl ⟨z.im, left_mem_uIcc, Complex.re_add_im z⟩
+  · exact IsPreconnected.union ((z.re : ℂ) + ((σ * (3 * h / 4) : ℝ) : ℂ) * I) ⟨_, right_mem_uIcc, rfl⟩
+      ⟨_, left_mem_uIcc, rfl⟩ (isPreconnected_uIcc.image _ (Continuous.continuousOn (by fun_prop)))
+      (isPreconnected_uIcc.image _ (Continuous.continuousOn (by fun_prop)))
+
+/-- The interior of the density set of a measurable set is almost everywhere inside the set. -/
+theorem interior_densitySet_inter_ae_le {A : Set ℂ} (hA : MeasurableSet A) (N : Set ℂ) :
+    (interior (densitySet A) ∩ N : Set ℂ) ≤ᵐ[volume] A := by
+  rw [ae_le_set]
+  exact measure_mono_null (show (interior (densitySet A) ∩ N) \ A ⊆ densitySet A \ A from
+    fun z hz => ⟨interior_subset hz.1.1, hz.2⟩) (volume_densitySet_diff hA)
+
+/-- The two open unit discs of `HasTwoDiscsAt`, within the open `N`, lie in the interiors of the two density sets. -/
+theorem HasTwoDiscsAt.subset_interior_densitySet {A B N : Set ℂ} (hN : IsOpen N) {x ν : ℂ}
+    (hd : HasTwoDiscsAt A B N x ν) :
+    ball (x + ν) 1 ∩ N ⊆ interior (densitySet B) ∧ ball (x - ν) 1 ∩ N ⊆ interior (densitySet A) :=
+  ⟨interior_maximal (subset_densitySet_of_isOpen_ae_subset (isOpen_ball.inter hN) hd.2.1) (isOpen_ball.inter hN),
+    interior_maximal (subset_densitySet_of_isOpen_ae_subset (isOpen_ball.inter hN) hd.2.2) (isOpen_ball.inter hN)⟩
+
+/-- **Existence on a path** (FS131-E8 § 3.1 (4), *Existence*): a path in a two-colour open set, with no cusp on it,
+from the interior of `S̃_A` to the interior of `S̃_B`, passes through the essential boundary — an interval is not the
+union of two disjoint non-empty relatively open sets. -/
+theorem TwoColourOn.exists_mem_essBoundary_of_continuous {A B N : Set ℂ} (hA : MeasurableSet A)
+    (hB : MeasurableSet B) (h : TwoColourOn A B N) {c : ℝ → ℂ} (hc : Continuous c) {α β : ℝ} (hαβ : α ≤ β)
+    (hcN : ∀ v ∈ Icc α β, c v ∈ N) (hcusp : ∀ v ∈ Icc α β, ¬ IsCuspAt A (c v) ∧ ¬ IsCuspAt B (c v))
+    (hα : c α ∈ interior (densitySet A)) (hβ : c β ∈ interior (densitySet B)) :
+    ∃ v ∈ Icc α β, c v ∈ essBoundary A := by
+  by_contra hno
+  push Not at hno
+  have hcover : Icc α β ⊆ c ⁻¹' interior (densitySet A) ∪ c ⁻¹' interior (densitySet B) := fun v hv =>
+    h.mem_interior_densitySet_or hA (hcN v hv) (hcusp v hv).1 (hcusp v hv).2 (hno v hv)
+  obtain ⟨v, hv, hvA, hvB⟩ := isPreconnected_Icc (c ⁻¹' interior (densitySet A)) (c ⁻¹' interior (densitySet B))
+    (isOpen_interior.preimage hc) (isOpen_interior.preimage hc) hcover ⟨α, left_mem_Icc.2 hαβ, hα⟩
+    ⟨β, right_mem_Icc.2 hαβ, hβ⟩
+  exact h.false_of_mem_inter isOpen_interior isOpen_interior (interior_densitySet_inter_ae_le hA N)
+    (interior_densitySet_inter_ae_le hB N) (hcN v hv) hvA hvB
+
+/-- **A side is of one colour** (FS131-E8 § 3.1 (4), *Sides*): a preconnected subset of a two-colour open set, off
+the essential boundary and the cusps, with one point interior to `S̃_B`, is almost everywhere in `B`. -/
+theorem TwoColourOn.ae_le_of_isPreconnected {A B N T : Set ℂ} (hA : MeasurableSet A) (hB : MeasurableSet B)
+    (h : TwoColourOn A B N) (hT : IsPreconnected T) (hTN : T ⊆ N)
+    (hcusp : ∀ x ∈ T, ¬ IsCuspAt A x ∧ ¬ IsCuspAt B x) (hTb : ∀ x ∈ T, x ∉ essBoundary A) {p : ℂ} (hpT : p ∈ T)
+    (hp : p ∈ interior (densitySet B)) : (T : Set ℂ) ≤ᵐ[volume] B := by
+  have hsub : T ⊆ interior (densitySet B) ∩ N := by
+    refine IsPreconnected.subset_left_of_subset_union (u := interior (densitySet B) ∩ N)
+      (v := interior (densitySet A) ∩ N) (isOpen_interior.inter h.isOpen) (isOpen_interior.inter h.isOpen) ?_ ?_
+      ⟨p, hpT, hp, hTN hpT⟩ hT
+    · rw [disjoint_left]
+      rintro z ⟨hzB, hzN⟩ ⟨hzA, -⟩
+      exact h.false_of_mem_inter isOpen_interior isOpen_interior (interior_densitySet_inter_ae_le hA N)
+        (interior_densitySet_inter_ae_le hB N) hzN hzA hzB
+    · intro z hz
+      rcases h.mem_interior_densitySet_or hA (hTN hz) (hcusp z hz).1 (hcusp z hz).2 (hTb z hz) with hz' | hz'
+      · exact Or.inr ⟨hz', hTN hz⟩
+      · exact Or.inl ⟨hz', hTN hz⟩
+  rw [ae_le_set]
+  exact measure_mono_null (show T \ B ⊆ densitySet B \ B from
+    fun z hz => ⟨interior_subset (hsub hz.1).1, hz.2⟩) (volume_densitySet_diff hB)
+
 /-- **FS131-E8-LOCAL** (FS111-M-C11 (ii) with "no cusp in the neighbourhood"; FS111-W-NOBEND), at the class its
 argument reads: `A`, `B` measurable with null unit pairs on a two-colour open set `N`; `U ⊆ N` open, with no cusp of
 `A` or of `B`, each essential boundary point of `U` a contact point of the set it bounds. Then every essential boundary
@@ -332,7 +744,233 @@ theorem local_graph {A B N : Set ℂ} (hA : MeasurableSet A) (hAn : UnitPairsNul
     (hcusp : ∀ x ∈ U, ¬ IsCuspAt A x ∧ ¬ IsCuspAt B x) (hsatA : ∀ x ∈ essBoundary A ∩ U, IsContactFor A x)
     (hsatB : ∀ x ∈ essBoundary B ∩ U, IsContactFor B x) {y : ℂ} (hy : y ∈ essBoundary A ∩ U) :
     ∃ Q γ ψ h', Q ⊆ U ∧ IsInterfaceChart A B N y Q γ ψ h' := by
-  sorry
+  obtain ⟨hyA, hyU⟩ := hy
+  have hkey := h.essBoundary_inter_eq hA hB
+  -- the two discs at every essential boundary point of `U` (FS111-M-C11 (i), in the one `N`)
+  have hdisc : ∀ x, ∃ ν, x ∈ essBoundary A ∩ U → HasTwoDiscsAt A B N x ν := fun x => by
+    by_cases hx : x ∈ essBoundary A ∩ U
+    · obtain ⟨ν, hν⟩ := c11_discs hA hAn hB hBn h (hUN hx.2) (hsatA x hx)
+        (hsatB x ⟨(hkey.subset ⟨hx.1, hUN hx.2⟩).1, hx.2⟩)
+      exact ⟨ν, fun _ => hν⟩
+    · exact ⟨0, fun hx' => absurd hx' hx⟩
+  choose ν hν using hdisc
+  obtain ⟨ρ, hρ, hρU⟩ := Metric.isOpen_iff.1 hU y hyU
+  set h₁ : ℝ := min ρ 1 / 32 with hh₁
+  have hh : 0 < h₁ := div_pos (lt_min hρ one_pos) (by norm_num)
+  have hh1 : h₁ ≤ 1 / 16 := by rw [hh₁]; linarith [min_le_right ρ 1]
+  have hhρ : 32 * h₁ ≤ ρ := by rw [hh₁]; linarith [min_le_left ρ 1]
+  have hν₀ := hν y ⟨hyA, hyU⟩
+  -- the frame at `y`: tangent `τ₀`, normal `i τ₀ = ν y`
+  set τ₀ : ℂ := -I * ν y with hτ₀
+  have hτ : ‖τ₀‖ = 1 := by rw [hτ₀, norm_mul, norm_neg, Complex.norm_I, one_mul, hν₀.1]
+  have hIτ : I * τ₀ = ν y := by rw [hτ₀, ← mul_assoc, mul_neg, Complex.I_mul_I, neg_neg, one_mul]
+  have hconj : τ₀ * (starRingEnd ℂ) τ₀ = 1 := by
+    rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, hτ]; simp
+  have hnc : ‖(starRingEnd ℂ) τ₀‖ = 1 := by rw [RCLike.norm_conj, hτ]
+  have hmulτ : ∀ w : ℂ, ‖w * τ₀‖ = ‖w‖ := fun w => by rw [norm_mul, hτ, mul_one]
+  set Φ : ℂ → ℂ := fun z => y + z * τ₀ with hΦ
+  set Ψ : ℂ → ℂ := fun p => (p - y) * (starRingEnd ℂ) τ₀ with hΨ
+  have hΦΨ : ∀ p, Φ (Ψ p) = p := fun p => by
+    simp only [hΦ, hΨ]; rw [mul_assoc, mul_comm ((starRingEnd ℂ) τ₀), hconj, mul_one]; ring
+  have hΨΦ : ∀ z, Ψ (Φ z) = z := fun z => by
+    simp only [hΦ, hΨ]; rw [add_sub_cancel_left, mul_assoc, hconj, mul_one]
+  have hΦnorm : ∀ z w : ℂ, ‖Φ z - Φ w‖ = ‖z - w‖ := fun z w => by
+    have e1 : Φ z - Φ w = (z - w) * τ₀ := by simp only [hΦ]; ring
+    rw [e1, norm_mul, hτ, mul_one]
+  have hΦy : Φ 0 = y := by simp only [hΦ]; ring
+  have hΦdist : ∀ z : ℂ, dist (Φ z) y = ‖z‖ := fun z => by
+    have := hΦnorm z 0
+    rwa [hΦy, sub_zero, ← dist_eq_norm] at this
+  have hΦU : ∀ z : ℂ, ‖z‖ < ρ → Φ z ∈ U := fun z hz => hρU (by rw [mem_ball, hΦdist]; exact hz)
+  have hΦc : Continuous Φ := by simp only [hΦ]; fun_prop
+  have hΨc : Continuous Ψ := by simp only [hΨ]; fun_prop
+  have htop : ∀ u v : ℝ, u ^ 2 + (v - 1) ^ 2 < 1 → Φ ((u : ℂ) + (v : ℂ) * I) ∈ ball (y + ν y) 1 := by
+    intro u v hlt
+    have e1 : Φ ((u : ℂ) + (v : ℂ) * I) - (y + ν y) = ((u : ℂ) + ((v - 1 : ℝ) : ℂ) * I) * τ₀ := by
+      rw [← hIτ]; simp only [hΦ]; push_cast; ring
+    rw [mem_ball, dist_eq_norm, e1, norm_mul, hτ, mul_one, ← sq_lt_one_iff₀ (norm_nonneg _), sq_norm_eq]
+    simpa using hlt
+  have hbot : ∀ u v : ℝ, u ^ 2 + (v + 1) ^ 2 < 1 → Φ ((u : ℂ) + (v : ℂ) * I) ∈ ball (y - ν y) 1 := by
+    intro u v hlt
+    have e1 : Φ ((u : ℂ) + (v : ℂ) * I) - (y - ν y) = ((u : ℂ) + ((v + 1 : ℝ) : ℂ) * I) * τ₀ := by
+      rw [← hIτ]; simp only [hΦ]; push_cast; ring
+    rw [mem_ball, dist_eq_norm, e1, norm_mul, hτ, mul_one, ← sq_lt_one_iff₀ (norm_nonneg _), sq_norm_eq]
+    simpa using hlt
+  have hsm : ∀ u v : ℝ, |u| < h₁ → |v| ≤ h₁ → ‖(u : ℂ) + (v : ℂ) * I‖ < 2 * h₁ := fun u v hu hv => by
+    have := Complex.norm_le_abs_re_add_abs_im ((u : ℂ) + (v : ℂ) * I)
+    simp only [Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.I_re, mul_zero, Complex.ofReal_im,
+      Complex.I_im, mul_one, sub_self, add_zero, Complex.add_im, Complex.mul_im, zero_add] at this
+    linarith
+  -- the essential boundary and its normal in graph coordinates
+  set Zf : Set ℂ := {z | Φ z ∈ essBoundary A ∩ U} with hZf
+  set n : ℂ → ℂ := fun z => ν (Φ z) * (starRingEnd ℂ) τ₀ with hn
+  have hnτ : ∀ z, n z * τ₀ = ν (Φ z) := fun z => by
+    simp only [hn]; rw [mul_assoc, mul_comm ((starRingEnd ℂ) τ₀), hconj, mul_one]
+  have hZd : ∀ z ∈ Zf, HasTwoDiscsAt A B N (Φ z) (n z * τ₀) := fun z hz => by rw [hnτ]; exact hν _ hz
+  have hZN : ∀ z ∈ Zf, Φ z ∈ essBoundary A ∩ N := fun z hz => ⟨hz.1, hUN hz.2⟩
+  -- existence on the normal segments
+  have hex : ∀ u : ℝ, |u| < h₁ → ∃ v : ℝ, |v| ≤ h₁ ∧ (u : ℂ) + v * I ∈ Zf := by
+    intro u hu
+    have hcU : ∀ v ∈ Icc (-h₁) h₁, Φ ((u : ℂ) + (v : ℂ) * I) ∈ U := fun v hv =>
+      hΦU _ (by linarith [hsm u v hu (abs_le.2 hv)])
+    have hu2 : u ^ 2 < h₁ ^ 2 := by
+      rw [← sq_abs u]; exact pow_lt_pow_left₀ hu (abs_nonneg u) two_ne_zero
+    obtain ⟨v, hv, hvb⟩ := h.exists_mem_essBoundary_of_continuous hA hB
+      (c := fun v : ℝ => Φ ((u : ℂ) + (v : ℂ) * I)) (hΦc.comp (by fun_prop)) (by linarith : -h₁ ≤ h₁)
+      (fun v hv => hUN (hcU v hv)) (fun v hv => hcusp _ (hcU v hv))
+      ((hν₀.subset_interior_densitySet h.isOpen).2
+        ⟨hbot u (-h₁) (by nlinarith), hUN (hcU _ (left_mem_Icc.2 (by linarith)))⟩)
+      ((hν₀.subset_interior_densitySet h.isOpen).1
+        ⟨htop u h₁ (by nlinarith), hUN (hcU _ (right_mem_Icc.2 (by linarith)))⟩)
+    exact ⟨v, abs_le.2 hv, hvb, hcU v hv⟩
+  -- the graph theorem
+  obtain ⟨ℓ, a, b, ζ, φ, g, hℓ, hah, ha0, hb0, hbh, hζ0, hζd, hφlip, hζinj, hζimg, hgc, hgh, hgraph⟩ :=
+    exists_unit_curve_of_two_discs (Zf := Zf) (n := n) hh hh1
+      (fun z hz _ => by simp only [hn]; rw [norm_mul, hnc, mul_one]; exact (hν _ hz).1)
+      (fun z hz z' hz' _ _ => by
+        have h1 := (hZd z hz).one_le_norm_sub hA hB h (hZN z' hz')
+        have e1 : Φ z' - (Φ z + n z * τ₀) = (z' - (z + n z)) * τ₀ := by simp only [hΦ]; ring
+        have e2 : Φ z' - (Φ z - n z * τ₀) = (z' - (z - n z)) * τ₀ := by simp only [hΦ]; ring
+        rwa [e1, e2, hmulτ, hmulτ] at h1)
+      (fun z hz z' hz' hzs hzs' => by
+        have h1 := (hZd z hz).norm_sub_le hA hB h (hZd z' hz') (hZN z hz) (hZN z' hz') (τ := 16 * h₁)
+          (by positivity)
+          (fun p hp => hUN (hρU (by
+            rw [mem_closedBall] at hp
+            rw [mem_ball]
+            have := dist_triangle p (Φ z) y
+            rw [hΦdist] at this
+            linarith)))
+          (by
+            rw [hΦnorm]
+            have := norm_sub_le z z'
+            linarith)
+        rwa [← sub_mul, hmulτ, hΦnorm] at h1)
+      (by simp only [hZf, mem_setOf_eq, hΦy]; exact ⟨hyA, hyU⟩)
+      (by simp only [hn, hΦy]; rw [← hIτ, mul_assoc, hconj, mul_one])
+      hex
+  obtain ⟨θ₀, hθ₀⟩ : ∃ θ₀ : ℝ, e θ₀ = τ₀ := ⟨Complex.arg τ₀, by
+    have := Complex.norm_mul_exp_arg_mul_I τ₀
+    rwa [hτ, Complex.ofReal_one, one_mul] at this⟩
+  -- the chart
+  have hboxs : ∀ z ∈ Ioo a b ×ℂ Ioo (-h₁) h₁, ‖z‖ < 2 * h₁ := fun z hz => by
+    rw [Complex.mem_reProdIm] at hz
+    have := Complex.norm_le_abs_re_add_abs_im z
+    have h1 : |z.re| < h₁ := abs_lt.2 ⟨by linarith [hz.1.1], by linarith [hz.1.2]⟩
+    have h2 : |z.im| < h₁ := abs_lt.2 hz.2
+    linarith
+  have hQU : Ψ ⁻¹' (Ioo a b ×ℂ Ioo (-h₁) h₁) ⊆ U := fun p hp => by
+    rw [← hΦΨ p]; exact hΦU _ (by linarith [hboxs _ hp])
+  have hζmem : ∀ s ∈ Ioo (-ℓ) ℓ, ζ s ∈ Zf ∩ (Ioo a b ×ℂ Ioo (-h₁) h₁) := fun s hs =>
+    hζimg ▸ mem_image_of_mem ζ hs
+  have hpre : ∀ R : Set ℂ, Ψ ⁻¹' R = Φ '' R := fun R => by
+    ext p
+    exact ⟨fun hp => ⟨Ψ p, hp, hΦΨ p⟩, by rintro ⟨z, hz, rfl⟩; show Ψ (Φ z) ∈ R; rwa [hΨΦ]⟩
+  have hcurve : ∀ p, Ψ p ∈ Ioo a b ×ℂ Ioo (-h₁) h₁ →
+      (p ∈ (fun s => Φ (ζ s)) '' Ioo (-ℓ) ℓ ↔ (Ψ p).im = g (Ψ p).re) := by
+    intro p hp
+    constructor
+    · rintro ⟨s, hs, rfl⟩
+      show (Ψ (Φ (ζ s))).im = g (Ψ (Φ (ζ s))).re
+      rw [hΨΦ]
+      exact (hgraph _ (hζmem s hs).2).1 (hζmem s hs).1
+    · intro heq
+      have hz : Ψ p ∈ Zf ∩ (Ioo a b ×ℂ Ioo (-h₁) h₁) := ⟨(hgraph _ hp).2 heq, hp⟩
+      rw [← hζimg] at hz
+      obtain ⟨s, hs, hsz⟩ := hz
+      exact ⟨s, hs, by show Φ (ζ s) = p; rw [hsz, hΦΨ]⟩
+  have hbdry : essBoundary A ∩ Ψ ⁻¹' (Ioo a b ×ℂ Ioo (-h₁) h₁) = (fun s => Φ (ζ s)) '' Ioo (-ℓ) ℓ := by
+    ext p
+    constructor
+    · rintro ⟨hpA, hpbox⟩
+      refine (hcurve p hpbox).2 ((hgraph _ hpbox).1 ?_)
+      show Φ (Ψ p) ∈ essBoundary A ∩ U
+      rw [hΦΨ]; exact ⟨hpA, hQU hpbox⟩
+    · rintro ⟨s, hs, rfl⟩
+      exact ⟨(hζmem s hs).1.1, by
+        show Ψ (Φ (ζ s)) ∈ Ioo a b ×ℂ Ioo (-h₁) h₁
+        rw [hΨΦ]; exact (hζmem s hs).2⟩
+  have hopen : ∀ σ : ℝ, IsOpen (Ψ ⁻¹' {z : ℂ | z ∈ Ioo a b ×ℂ Ioo (-h₁) h₁ ∧ 0 < σ * (z.im - g z.re)}) :=
+    fun σ => by
+      refine IsOpen.preimage hΨc ?_
+      have hcont : ContinuousOn (fun z : ℂ => σ * (z.im - g z.re)) (Ioo a b ×ℂ Ioo (-h₁) h₁) :=
+        continuousOn_const.mul (Complex.continuous_im.continuousOn.sub
+          (hgc.comp Complex.continuous_re.continuousOn fun z hz => (Complex.mem_reProdIm.1 hz).1))
+      exact hcont.isOpen_inter_preimage (isOpen_Ioo.reProdIm isOpen_Ioo) isOpen_Ioi
+  have hconn : ∀ σ : ℝ, σ = 1 ∨ σ = -1 →
+      IsConnected (Ψ ⁻¹' {z : ℂ | z ∈ Ioo a b ×ℂ Ioo (-h₁) h₁ ∧ 0 < σ * (z.im - g z.re)}) := fun σ hσ => by
+    rw [hpre]
+    exact (isConnected_graph_side (ha0.trans hb0) hh hσ hgh).image Φ hΦc.continuousOn
+  have hsideU : ∀ σ : ℝ, Ψ ⁻¹' {z : ℂ | z ∈ Ioo a b ×ℂ Ioo (-h₁) h₁ ∧ 0 < σ * (z.im - g z.re)} ⊆
+      Ψ ⁻¹' (Ioo a b ×ℂ Ioo (-h₁) h₁) := fun σ p hp => hp.1
+  have hsideb : ∀ σ : ℝ, ∀ p ∈ Ψ ⁻¹' {z : ℂ | z ∈ Ioo a b ×ℂ Ioo (-h₁) h₁ ∧ 0 < σ * (z.im - g z.re)},
+      p ∉ essBoundary A := fun σ p hp hpA => by
+    have h1 := (hcurve p hp.1).1 (hbdry ▸ (⟨hpA, hp.1⟩ : p ∈ essBoundary A ∩ Ψ ⁻¹' (Ioo a b ×ℂ Ioo (-h₁) h₁)))
+    have h2 : 0 < σ * ((Ψ p).im - g (Ψ p).re) := hp.2
+    rw [h1, sub_self, mul_zero] at h2
+    exact lt_irrefl _ h2
+  have hg0 := hgh 0 ⟨ha0, hb0⟩
+  rw [abs_lt] at hg0
+  have hanchor : ∀ σ : ℝ, σ = 1 ∨ σ = -1 → Φ (((0 : ℝ) : ℂ) + ((σ * (3 * h₁ / 4) : ℝ) : ℂ) * I) ∈
+      Ψ ⁻¹' {z : ℂ | z ∈ Ioo a b ×ℂ Ioo (-h₁) h₁ ∧ 0 < σ * (z.im - g z.re)} := fun σ hσ => by
+    rw [mem_preimage, hΨΦ]
+    refine ⟨?_, ?_⟩
+    · rw [Complex.mem_reProdIm]
+      rcases hσ with rfl | rfl <;> simp <;> exact ⟨⟨ha0, hb0⟩, by linarith, by linarith⟩
+    · rcases hσ with rfl | rfl <;> simp <;> linarith
+  refine ⟨Ψ ⁻¹' (Ioo a b ×ℂ Ioo (-h₁) h₁), fun s => Φ (ζ s), fun s => θ₀ + φ s, ℓ, hQU,
+    hℓ, (isOpen_Ioo.reProdIm isOpen_Ioo).preimage hΨc, ?_, hQU.trans hUN, ⟨fun s hs => ?_, ?_⟩, ?_, ?_, hbdry,
+    fun s hs => ?_, ?_⟩
+  · show Ψ y ∈ Ioo a b ×ℂ Ioo (-h₁) h₁
+    have : Ψ y = 0 := by simp only [hΨ]; rw [sub_self, zero_mul]
+    rw [this, Complex.mem_reProdIm]
+    exact ⟨⟨ha0, hb0⟩, by simp only [Complex.zero_im]; exact ⟨by linarith, hh⟩⟩
+  · have h1 := (((hζd s hs).1.mul_const τ₀).const_add y).hasDerivWithinAt (s := Ioo (-ℓ) ℓ)
+    rw [e_add, hθ₀, mul_comm]
+    exact h1
+  · rw [lipschitzOnWith_iff_dist_le_mul] at hφlip ⊢
+    intro s hs s' hs'
+    simpa using hφlip s hs s' hs'
+  · show Φ (ζ 0) = y
+    rw [hζ0, hΦy]
+  · intro s hs s' hs' heq
+    refine hζinj hs hs' ?_
+    rw [← hΨΦ (ζ s), ← hΨΦ (ζ s')]
+    exact congrArg Ψ heq
+  · show HasTwoDiscsAt A B N (Φ (ζ s)) (I * e (θ₀ + φ s))
+    have e1 : I * e (θ₀ + φ s) = n (ζ s) * τ₀ := by rw [← (hζd s hs).2, e_add, hθ₀]; ring
+    rw [e1]
+    exact hZd _ (hζmem s hs).1
+  · refine ⟨_, _, hopen (-1) , hopen 1, hconn (-1) (Or.inr rfl), hconn 1 (Or.inl rfl), ?_, ?_, ?_⟩
+    · ext p
+      constructor
+      · rintro ⟨hpbox, hpc⟩
+        have hne : (Ψ p).im ≠ g (Ψ p).re := fun heq => hpc ((hcurve p hpbox).2 heq)
+        rcases lt_or_gt_of_ne hne with hlt | hgt
+        · exact Or.inl ⟨hpbox, by linarith⟩
+        · exact Or.inr ⟨hpbox, by linarith⟩
+      · rintro (hp | hp)
+        · refine ⟨hp.1, fun hc => ?_⟩
+          have h1 := (hcurve p hp.1).1 hc
+          have h2 : 0 < (-1 : ℝ) * ((Ψ p).im - g (Ψ p).re) := hp.2
+          rw [h1] at h2; linarith
+        · refine ⟨hp.1, fun hc => ?_⟩
+          have h1 := (hcurve p hp.1).1 hc
+          have h2 : 0 < (1 : ℝ) * ((Ψ p).im - g (Ψ p).re) := hp.2
+          rw [h1] at h2; linarith
+    · refine h.symm.ae_le_of_isPreconnected hB hA (hconn (-1) (Or.inr rfl)).isPreconnected
+        ((hsideU (-1)).trans (hQU.trans hUN)) (fun x hx => (hcusp x (hQU (hsideU (-1) hx))).symm)
+        (fun x hx hxB => hsideb (-1) x hx (hkey.superset ⟨hxB, hUN (hQU (hsideU (-1) hx))⟩).1)
+        (hanchor (-1) (Or.inr rfl)) ?_
+      refine (hν₀.subset_interior_densitySet h.isOpen).2 ⟨?_, hUN (hQU (hsideU (-1) (hanchor (-1) (Or.inr rfl))))⟩
+      have := hbot 0 (-1 * (3 * h₁ / 4)) (by nlinarith)
+      simpa using this
+    · refine h.ae_le_of_isPreconnected hA hB (hconn 1 (Or.inl rfl)).isPreconnected
+        ((hsideU 1).trans (hQU.trans hUN)) (fun x hx => hcusp x (hQU (hsideU 1 hx)))
+        (fun x hx => hsideb 1 x hx) (hanchor 1 (Or.inl rfl)) ?_
+      refine (hν₀.subset_interior_densitySet h.isOpen).1 ⟨?_, hUN (hQU (hsideU 1 (hanchor 1 (Or.inl rfl))))⟩
+      have := htop 0 (1 * (3 * h₁ / 4)) (by nlinarith)
+      simpa using this
 
 /-- **FS131-E8-LOCAL for a colouring** (FS121-V5-LOC (ii)): if the open set `U` holds no singular point and the
 colouring is saturated on `U`, every essential boundary point `y` of `U` has a two-colour ball centred at it and a

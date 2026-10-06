@@ -41,6 +41,19 @@ children of `local_graph`, none a backlog row of its own:
 Wired over `Pinch`'s `TwoColourOn.essBoundary_inter_eq` only (Stage 4): `HasTwoDiscsAt.one_le_norm_sub` (E8 § 3.1 (3)(b)),
 `HasTwoDiscsAt.norm_sub_le` (**the normal is 1-Lipschitz, sharp** — § 3.1 (3)(c) with the erratum), `HasTwoDiscsAt.normal_unique`.
 
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]` (Stage 5; build `logs/build-4-local.log`, axioms `logs/axioms-4-local.out`),
+in `LocalGraph` — children of `local_graph`:
+- `HadwigerNelson.Plane.exists_unit_curve_of_two_discs` — **the graph theorem**: E8 § 3.1 (4) (*Uniqueness*, `|g(u)| ≤ u²`, *Regularity* by
+  the erratum's route) in graph coordinates, with no measure and no colouring in its statement;
+- `hasDerivAt_of_sq_bound`, `abs_le_of_two_disc_bound`, `hasDerivAt_of_two_disc_bound` (`g′ = −n₁/n₂` from (3)(b)), `abs_inner_le_of_one_le`,
+  `im_ge_of_norm_sub_I_le`, `e_neg_arcsin_re`; `isConnected_graph_side` (the two sides of a graph in a rectangle);
+  `interior_densitySet_inter_ae_le`, `HasTwoDiscsAt.subset_interior_densitySet`, `TwoColourOn.exists_mem_essBoundary_of_continuous`
+  (E8 § 3.1 (4), *Existence*), `TwoColourOn.ae_le_of_isPreconnected` (*Sides*).
+
+**Wired over two leaves of `Pinch` only** (Stage 5; axioms `[propext, sorryAx, Classical.choice, Quot.sound]`; `LocalGraph` and `Curve` hold
+no `sorry`): **`HadwigerNelson.Plane.local_graph` — FS131-E8-LOCAL** = FS111-M-C11 (ii) with "no cusp in the neighbourhood" =
+FS111-W-NOBEND. It becomes a kernel theorem when `c11_discs` and `TwoColourOn.essBoundary_inter_eq` land (line P).
+
 Wired (over `sorry` children; axioms `[propext, sorryAx, Classical.choice, Quot.sound]`): `HadwigerNelson.Plane.AeColouring.local_graph`
 (FS121-V5-LOC (ii)) — over `local_graph` (mine, open) and `TwoColourOn.essBoundary_inter_eq` (`Pinch`, another line's leaf) through
 `TwoColourNhd.mem_essBoundary`.
@@ -262,3 +275,63 @@ stated there. The final count is in the last stage.
 `g′ = −n₁/n₂` from `hasDerivAt_of_two_disc_bound`, the arclength inverse, `φ = −arcsin n₁`, `lipschitzOnWith_of_chord`) — elaborated with
 `#print axioms` reading the standard three under `lake env lean` (iteration only). Left: the frame transfer, existence on normal segments by
 connectedness, the two sides, the chart.
+
+## Stage 5 — SAVED (FS131-I6C): `local_graph` proved from its children — no `sorry` left in `Curve` or `LocalGraph`
+
+### 5.1 The proof, child by child (the plan's (a)–(i); E8 § 3.1 (1)–(4) with the erratum)
+
+| plan's child | as proved | E8's words |
+|---|---|---|
+| (a) the boundary in `U` | `TwoColourOn.mem_interior_densitySet_or`: off `∂_e A` and the cusps a point of `N` is interior to `S̃_A` or to `S̃_B` (the interiors play `O_a`, `O_b`); `essBoundary A ∩ N = essBoundary B ∩ N` is `Pinch`'s leaf, used as stated | § 3.1 (1): "`N = O_a ⊔ O_b ⊔ Z`" |
+| (b) the discs | `c11_discs` (`Pinch`'s leaf, as stated) at every point of `∂_e A ∩ U`, one `N`; the normal chosen by `choose`, unique by `HasTwoDiscsAt.normal_unique` | § 3.1 (2) |
+| (c) `|⟨x″ − x′, ν′⟩| ≤ δ²/2` | `HasTwoDiscsAt.one_le_norm_sub`, in coordinates `abs_inner_le_of_one_le` | § 3.1 (3)(b) |
+| (d), (e) the normal 1-Lipschitz | `exists_lens_point` and `HasTwoDiscsAt.norm_sub_le` (Stage 4): the crude `6δ` and the sharp bound in one statement | § 3.1 (3)(c); the erratum |
+| (f) existence | `TwoColourOn.exists_mem_essBoundary_of_continuous` on the normal segment `v ↦ Φ(u + iv)`, `|v| ≤ h₁`, its ends in the two tangent discs at `y` (`u² + (h₁ − 1)² < 1`) | § 3.1 (4) *Existence* |
+| (g) uniqueness, `|g u| ≤ u²` | inside `exists_unit_curve_of_two_discs` | § 3.1 (4) *Uniqueness* |
+| (h) the curve | inside `exists_unit_curve_of_two_discs`: `g′ = −n₁/n₂` (`hasDerivAt_of_two_disc_bound`: no "`O(|Δu|²)`" left informal — the constants are `|Δg| ≤ 6|Δu|`, remainder `37 Δu²`); `exists_arclength_inverse` with `σ = 1/n₂`; `ζ s = V s + i g(V s)`, `φ s = −arcsin n₁(V s)` so that `e(φ) = n₂ − i n₁` (`e_neg_arcsin_re`), no continuous lift needed; `lipschitzOnWith_of_chord` with the sharp normal bound and `‖ζ s − ζ s′‖ ≤ |s − s′|` | § 3.1 (4) *Regularity*, by the erratum: "No second derivative is taken" — and none is |
+| (i) the sides | `isConnected_graph_side` (each point joined to the point over the middle at height `±3h₁/4` by a vertical and a horizontal segment), `TwoColourOn.ae_le_of_isPreconnected` with the anchor points `Φ(±(3h₁/4) i)` in the two tangent discs at `y` | § 3.1 (4) *Sides* |
+
+**The frame.** `τ₀ = −i ν(y)`, `Φ z = y + z τ₀`, `Ψ p = (p − y) conj τ₀`; `Z_f = Φ⁻¹(∂_e A ∩ U)`, `n z = ν(Φ z) conj τ₀`; `h₁ = min(ρ, 1)/32` with
+`B(y, ρ) ⊆ U` (E8 takes `/24`: with the sharp bound read at `τ = 16h₁`, `2h₁ + 16h₁ < 32h₁ ≤ ρ`). **The chart**: `Q = Ψ⁻¹((a, b) × (−h₁, h₁))` — a
+rectangle, not E8's square, because `IsInterfaceChart` asks a symmetric parameter interval `(−ℓ, ℓ)` and the arclength of the graph over
+`(−h₁, h₁)` is not symmetric about `0`; `(a, b) = V((−ℓ, ℓ))`. `γ s = Φ(ζ s)`, `ψ s = θ₀ + φ s` with `e θ₀ = τ₀` (`Complex.arg`).
+
+### 5.2 `local_graph` read against FS131-E8-LOCAL
+
+"every point y of the interface set in U is the centre of an open square inside U in which the interface set is the graph, over the tangent
+line at y, of a C^{1,1} function whose unit tangent is 1-Lipschitz in arclength, the two sides of the graph in the square being connected open
+sets, each almost everywhere of one colour, of two different colours" — the Lean conclusion `∃ Q γ ψ h′, Q ⊆ U ∧ IsInterfaceChart A B N y Q γ ψ h′`
+gives: an open `Q ∋ y` inside `U` (a rectangle in the frame: the entry's "square" is the proof's, as the planner's read-back said); in `Q`
+the essential boundary of `A` is exactly the image of an injective unit-speed curve through `y` with 1-Lipschitz tangent angle (`bdry`,
+`curve`, `injOn`, `zero`); the two unit discs at each of its points with normal `i e(ψ s)` into `B` (`discs`: the planner's addition); `Q` off
+the curve is two connected open sets, one almost everywhere in `A` and one in `B` (`sides`). Hypotheses: two measurable sets with null unit
+pairs on a two-colour open set, no cusp in `U ⊆ N`, contacts at the essential boundary points of `U` — the statement as the planner fixed it,
+unchanged. Not claimed, and not proved: a lower bound on the chart's size; that `Q_a`, `Q_b` are disjoint (they are, but `sides` does not say
+so).
+
+### 5.3 Amendment 1, item 2 — where the proof of `local_graph` reads `TwoColourOn.disj`, by step
+
+**Not at one step: at four, through two lemmas** (and through `Pinch`'s two leaves, whose proofs are another line's).
+- `TwoColourOn.false_of_mem_inter` ("an open set is not almost everywhere of two colours" — `disj` read directly), used at:
+  1. **the lens** — `HasTwoDiscsAt.norm_sub_le` (§ 3.1 (3)(c), the erratum): the third planner's expected step;
+  2. **existence** — `exists_mem_essBoundary_of_continuous`: the two open sets `int S̃_A`, `int S̃_B` are disjoint in `N`, so the normal
+     segment cannot be covered by them (§ 3.1 (4): "two disjoint non-empty relatively open sets");
+  3. **the sides** — `ae_le_of_isPreconnected`: the same disjointness, to put a connected side in one of the two.
+- `TwoColourOn.notMem_essClosure_of_mem_densitySet` (`disj` read directly), used at:
+  4. **the trichotomy** — `mem_interior_densitySet_or` (§ 3.1 (1): a point of `N` off `∂_e A` and the cusps is interior to one density
+     set), read by steps 2 and 3.
+For two sets that may overlap: steps 2–4 are false as they stand (through an overlap region of positive measure a path passes from `int S̃_A`
+to `int S̃_B` without meeting `∂_e A`; there both have density 1), so a restatement is of a different lemma — its essential boundary would
+be that of `A ∖ B` or of the overlap. `cover` is read at `mem_interior_densitySet_of_notMem`; (H2) only inside `Pinch`'s leaves.
+
+### 5.4 Checks
+
+- **Build**: OK — 466 of 466 batches, 3 modules rebuilt (`LocalGraph`, `FanBridge`, `Proofs`), exit 0 (`logs/build-4-local.exit`,
+  `build-4-local.log`; `build/gate/build/20261006T153610Z-992176.log`). Warnings: **20**, every one `declaration uses sorry` — `FanBridge` 12,
+  `Pinch` 7, `MapColouring` 1; **`Curve` 0, `LocalGraph` 0** (31 − 11). `grep -c sorry` on the two files: 0, 0.
+- **Axioms** (`logs/axioms-4-local.out`): twelve new declarations on the standard three (in `scripts/Axioms.lean`'s block); `local_graph`
+  prints `sorryAx`. Its only references to open leaves are `c11_discs` and `essBoundary_inter_eq` (grep of the module: `hkey`, `hdisc` in
+  `local_graph`; `one_le_norm_sub`; `AeColouring.local_graph` through `TwoColourNhd.mem_essBoundary`) — every other declaration of the two
+  modules prints clean, so the `sorryAx` is theirs. This is an argument from the prints and the grep, not a print of its own: the join's audit
+  is the check.
+- **Statements**: 16 of 16 the same (`logs/statements-5.out`).
