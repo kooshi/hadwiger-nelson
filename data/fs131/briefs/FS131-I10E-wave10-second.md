@@ -100,3 +100,28 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-06, at launch) — your branch now holds the planes' floor, proved
+
+Nothing above is withdrawn; three facts changed.
+
+1. **Your branch was fast-forwarded** from `330d2f48` to `a14f9ab0`, the hand-back of the implementer of `NormOneTarget` and `FloorPlanes`
+   (FS131-I10D, inventory item 538) — your tree was untouched, so nothing of yours moved, and your one file is byte-identical. Your
+   statement check is against `a14f9ab0`; the branch as given now has seventeen `sorry` leaves, one yours. The first build recompiles
+   those two modules and what imports them.
+2. **Two of the children the plan names for `charSum_128_ge` are now theorems in your tree — cite them, declare neither again**: "every
+   non-trivial additive character is a shift of one" and the count of the norm-one set, which at `Q = 128` is the number of solutions of
+   `u ^ 129 = 1`:
+
+> theorem exists_mulShift_eq {F : Type*} [Field F] [Finite F] (ψ₀ : AddChar F ℂ) (hψ₀ : ψ₀ ≠ 1) (φ : AddChar F ℂ) :
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/Proofs/HadwigerNelson/Arith/FloorPlanes.lean
+
+> theorem card_normOne {k : Type*} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) :
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/Proofs/HadwigerNelson/Arith/NormOneTarget.lean
+
+> theorem card_filter_pow_eq_one {k : Type*} [Field k] [Fintype k] [DecidableEq k] {d : ℕ} (hd0 : d ≠ 0)
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10e/Proofs/HadwigerNelson/Arith/NormOneTarget.lean
+
+   If one does not fit your leaf as stated (its binders, its field), write a corollary under a name of your own and say so in your report.
+3. **A lesson from today, for your mid-job messages** (inventory item 526): when you report a defect, say which kind it is — a
+   *statement* that needs a hypothesis it lacks, or a *route* that reads more than the statement needs (a shorter-route note, no defect).

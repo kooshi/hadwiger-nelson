@@ -183,9 +183,15 @@ match, the model the second pass proved, the three theorems that carry the hypot
    interface (which of the two is yours to decide, with the reason — ruling 510 (b)); the level row, X25B-L1's pulled-back level against the
    finite quotient graph, in the form X25B-T's chain reads, which nobody has opened — settle it from the entry, or send it back as a
    deriver's question. Each with `sorry` at its leaves, read back against its row, with its inhabitant or vacuity line.
-5. **The read-backs.** None of the second pass's three implementers is back at this writing; I will send you each branch's tip by message as it hands back. Read their new *statements* (helpers and models, not proofs) against the sentences they serve, as the second pass did for the first two implementers (its §§ 6.4, 8.6); what is not back by your last stage is named in your handoff. Also the first pass's third implementer's twelve new statements in `StandingFive` (ruling 520 (b); on
+5. **The read-backs.** Back at this writing, each on `origin`: `fs131-w10d` at `a14f9ab0`. Read their new *statements* (helpers and models, not proofs) against the sentences they serve, as the second pass did for the first two implementers (its §§ 6.4, 8.6); a statement that says more or less than its sentence is a message. Also the first pass's third implementer's twelve new statements in `StandingFive` (ruling 520 (b); on
    `main` now), and whether `NumberField standingField` becomes a global instance
-   there — a recommendation with its reason; the edit, if any, is the second landing's. **Two open gate items the
+   there — a recommendation with its reason; the edit, if any, is the second landing's. **From the planes' floor's
+   implementer** (inventory item 538; `origin/fs131-w10d` at `a14f9ab0`): three theorems of its own that say exactly where the held
+   paper's printed bound fails — `circle_sum_le_of_ne`, `circle_sum_zero_of_isotropic`, `two_sqrt_lt_circle_sum_zero` — are one mind's
+   statements and owe your read-back before our bibliography cites them as the correction; and one thing it could not check: no Lean
+   statement in its files links the object `TargetFloor` speaks of (`normOneCayley`, in `StandingFive`) to the finite plane `finitePlane Q`
+   — say whether the kernel holds that link anywhere, and if not, what the floor's kernel sentence is. It also notes the same composition
+   gives the floor at six from `Q ≥ 62` in about ten lines: state it if a row or the bibliography's sentence reads it. **Two open gate items the
    landing named are yours to plan** (ruling 535 (c)): a usable place of the standing field as a Lean inhabitant, stated as a leaf with a
    plan and a price (the landing's record, `plans/FS131-L10A-landing.md`, draft 6: `usable_card_ge` and `no_small_usable` bound a family the
    kernel does not know non-empty); and for `contChars_haar_null`, `spectral_carried_iff`, `si4` and `si4_equivariant` the inhabitant note

@@ -6024,3 +6024,46 @@ reason by the close.*
      `LocalGraph` imports `Plane/Saturated/Fan`, with `ARCHITECTURE.md`'s cell. **Ruling**: both are generalizations
      for the wave's errata, statements unchanged (ruling 419 (c): an unread hypothesis a ruling kept stays, read by
      `have _ :=`); no reply sent — it asks nothing, and a message would bill a working mind for an acknowledgement.
+
+538. **FS131-I10D done: the planes' floor is proved over the one named classical hypothesis — all six leaves, as stated; a
+     circle sum is a Kloosterman sum, in the kernel; and exactly where the held paper's printed bound fails** (implementer,
+     Opus; harness 353k by the task notice; record `fs131-w10d`'s `plans/FS131-I10D-implementation.md`; report
+     `data/fs131/reports/FS131-I10D.md`; commits `de072a7c`, `7d4395a9`, `7dace39e`, `a14f9ab0`; pushed, tree clean).
+     **Proved**: `involution_eq_pow` (by the Frobenius' powers, not the plan's route), `card_normOne`, `sum_quadratic_eq`,
+     `circle_sum_eq_kloosterman` (every finite field of odd characteristic, every radius, zero included — the identity
+     this project had only checked in floats, FS-20's open item R4), `circle_sum_le` and `normOne_charSum_ge` over
+     `KloostermanBound`; so the planner's `targetFloor_seven_of_kloosterman` now stands on proved leaves: for `Q ≡ 3
+     (mod 4)`, `Q ≥ 98`, the floor at seven given Weil's bound at the fields of `Q` elements. `KloostermanBound` is still
+     a hypothesis, never an axiom. **New, its own**: `circle_sum_le_of_ne` (the bound needs `a ≠ 0` **or** `b`
+     anisotropic), `circle_sum_zero_of_isotropic` (at radius 0 with `b` isotropic the sum is `χ(−1)(|F| − 1)`),
+     `two_sqrt_lt_circle_sum_zero` (so it exceeds `2√|F|` from six elements on): given Weil's bound, `[MMST1996]`
+     Theorem 3 at `n = 2` fails exactly there and nowhere else. **My receipt**: tip `a14f9ab0` equals
+     `origin/fs131-w10d`, tree clean; the last real build's full log (`build/gate/build/20261006T154452Z-1064729.log`, 3
+     modules rebuilt) ends "Build completed successfully (5790 jobs)", 79 warnings, all `declaration uses sorry` in six
+     other jobs' files, none in `NormOneTarget` or `FloorPlanes`; `sorry` by the handoff's grep in the two files: 0, 0; no
+     `axiom`, no `native_decide`; `data/fs131/i10d/logs/axioms-all.log` parsed by script — 22 records, 20 on exactly the
+     standard three, and the two with `sorryAx` are `usable_card_ge` (a leaf proved on another branch — the control) and
+     `standingFloor_seven` (over `Floor128`'s open leaf, as its report says); every declaration of the two files at
+     `330d2f48` compared head by head — none changed, twelve added; the three new statements and
+     `circle_sum_eq_kloosterman`'s read; **one checked by hand against an earlier receipt of mine**: item 500's `q = 13`,
+     `b = (1, 5)` gave the sum 12, and `circle_sum_zero_of_isotropic` gives `χ(−1)(13 − 1) = 12` (`13 ≡ 1 mod 4`). Not
+     checked by me: the proofs beyond the build; its five spec examples. **Prediction scored**: 442 lines against the
+     plan's 610. **Tool defect, another job's tool**: `tools/fs131_i10a_statements.py --self-test` prints a definition
+     fault "FIRED" on a file with no definition — a control passing where it did not run; joins the shared statement
+     checker owed (item 406 (c)). **Slip, the job's, disclosed**: its token counts are estimates. **Credit**: it turned
+     the planner's caution about the printed theorem into three kernel theorems that say exactly where it fails, and
+     named what it could not check. **Rulings.** (a) **The three new theorems are read back by wave 10's third planner
+     before `BIBLIOGRAPHY.md`'s `[MMST1996]` row cites them**; the row's correction, `LEDGER.md` row 53 and the
+     write-up stub's R4 line (drafts in its record) are held for that. (b) **`involution_eq_pow`'s docstring is corrected
+     to the proof the kernel holds at the second landing's join.** (c) **Whether the kernel links the floor's object
+     (`normOneCayley`, on `main` in `StandingFive`) to `finitePlane Q` is a read-back question for the third planner**:
+     `seven_le_localBound` type-checks against `StandingFloor` as defined, so no theorem is at risk; what is at stake is
+     the sentence "every usable plane refuses six". Confidence that nothing is at risk: high. (d) **FS131-I10E's
+     unstarted branch was fast-forwarded to `a14f9ab0`** (mine: `git merge --ff-only`, pushed), because two of its
+     leaf's children are I10D's `exists_mulShift_eq` and `card_normOne`: it cites them, and nobody declares them twice.
+     Alternative: it takes them as hypotheses under names of its own. Why: the branch was untouched and a fast-forward
+     cannot conflict (items 511, 523). Its brief carries a dated amendment (`mk-i10e-amend.py`; gate exit 0 after a bare
+     file name was fixed). (e) The floor at six from `Q ≥ 62` (ten lines, by its word) is the third planner's to state
+     if anything reads it. (f) K10c's brief regenerated with this branch's tip and these notes (`mk-k10c.py
+     fs131-w10d=a14f9ab0`; gate exit 0). (g) **Slot → FS131-I10E** (the target at 128), launched 2026-10-06. In
+     flight: 1 (I6C) + 1 (I6D) + 1 (I10E) = 3.
