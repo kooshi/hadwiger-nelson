@@ -1015,7 +1015,8 @@ namespace Fan
 variable (F : c.Fan z)
 
 /-- **At a singular point a fan has at least two branches** (FS131-E8-FAN). Saturation is not read: with no branch
-the punctured disc is of one colour and `z` is a density point; with one, its points are density points. -/
+the punctured disc is of one colour and `z` is a density point; with one, its points are density points.
+Inhabitant: `sq9Fan` with `sqVertex_mem_singularSet` (the example below). -/
 theorem two_le_n (hz : z ∈ c.singularSet) : 2 ≤ F.n := by
   by_contra hlt
   rw [not_le] at hlt
@@ -1057,13 +1058,14 @@ theorem two_le_n (hz : z ∈ c.singularSet) : 2 ≤ F.n := by
         exact (hj'1 F.r F.r_pos).ne' h0
 
 /-- **The regions on the two sides of a branch have different colours** (FS131-E8-FAN): `j` is the region clockwise
-of branch `i`. Saturation is not read. -/
+of branch `i`. Saturation is not read. Inhabitant: `sq9Fan` (four regions of four colours; the example below). -/
 theorem col_ne {i j : Fin F.n} (hij : (j : ℕ) + 1 = i ∨ ((i : ℕ) = 0 ∧ (j : ℕ) + 1 = F.n)) : F.col j ≠ F.col i := by
   exact F.col_ne_aux hij
 
 /-- **The lens**: under saturation in the punctured disc, within distance `1/2` of `z` each branch stays outside the
 two open unit discs tangent to its limit direction at `z` — the comparison FS121-V2-SECTOR and FS121-V3's (F-c)
-make (`IsUnitCurve.one_le_dist` on the branch's arclength parametrization). -/
+make (`IsUnitCurve.one_le_dist` on the branch's arclength parametrization, `Fan.exists_unitCurve_branch`).
+Inhabitant: `sq9Fan` with `sq9_tight_saturated` (the example below). -/
 theorem branch_outside_discs (hsat : SaturatedOn c.cls (ball z F.r \ {z})) (i : Fin F.n) {t : ℝ}
     (ht : t ∈ Ioo 0 (min F.r (1 / 2))) :
     1 ≤ dist (polarPt z t (F.φ i t)) (z + I * e (F.dir i)) ∧
@@ -1081,7 +1083,8 @@ colours (split type, a unit arc of kind both), or of tangent type: `z + i e(dir 
 side, is in the support of the clockwise colour, and `z − i e(dir i)` in the support of the counter-clockwise one.
 **The alternative is inclusive** (FS131-E8 § 6.1): a unit arc about `y` whose colour has a further contact at the
 antipode `2x − y` of its points `x` is of both types, so no consumer may read the second alternative as excluding a
-unit arc. -/
+unit arc. Inhabitant: `sq9Fan` with `sq9_tight_saturated` (the second alternative; the deriver's control
+`e8-sq9-contacts`). -/
 theorem branch_contacts (hsat : SaturatedOn c.cls (ball z F.r \ {z})) {i j : Fin F.n}
     (hij : (j : ℕ) + 1 = i ∨ ((i : ℕ) = 0 ∧ (j : ℕ) + 1 = F.n)) :
     (∃ y, (y = z + I * e (F.dir i) ∨ y = z - I * e (F.dir i)) ∧ y ∈ essSupport (c.cls (F.col j)) ∧
@@ -1457,6 +1460,27 @@ sectors of positive angle at `z`, whatever zero-angle regions are present. A cas
 theorem sector_unique (hsat : SaturatedOn c.cls (ball z F.r \ {z})) {i i' : Fin F.n} (hi : F.dir i < F.nextDir i)
     (_hi' : F.dir i' < F.nextDir i') (hcol : F.col i = F.col i') : i = i' :=
   F.sector_alone hsat hi hcol
+
+/-! ### The model of the five lemmas: `sq9Fan` at the grid vertex (FS131-I6E) -/
+
+/-- `two_le_n` on its model: `sq9Fan` at the singular vertex `sqVertex` (it has four branches). -/
+example : 2 ≤ sq9Fan.n := sq9Fan.two_le_n sqVertex_mem_singularSet
+
+/-- `col_ne` on its model: the quadrants on the two sides of the first half-axis of `sq9Fan` have different colours. -/
+example : sq9Fan.col (3 : Fin 4) ≠ sq9Fan.col (0 : Fin 4) := sq9Fan.col_ne (Or.inr ⟨rfl, rfl⟩)
+
+/-- The saturation hypothesis of `branch_outside_discs`, `branch_contacts`, `sector_alone`, `sector_unique` on their
+model. -/
+example : SaturatedOn sq9.cls (ball sqVertex sq9Fan.r \ {sqVertex}) := sq9_tight_saturated.2.1.saturatedOn _
+
+/-- `branch_outside_discs` on its model: each half-axis of `sq9Fan` stays outside its two tangent unit discs. -/
+example (i : Fin 4) {t : ℝ} (ht : t ∈ Ioo 0 (min sq9Fan.r (1 / 2))) :
+    1 ≤ dist (polarPt sqVertex t (sq9Fan.φ i t)) (sqVertex + I * e (sq9Fan.dir i)) :=
+  (sq9Fan.branch_outside_discs (sq9_tight_saturated.2.1.saturatedOn _) i ht).1
+
+/-- `sector_alone` on its model: `sq9Fan` has four sectors of positive angle, so its four colours are different. -/
+example {i i' : Fin 4} (hcol : sq9Fan.col i = sq9Fan.col i') : i = i' :=
+  sq9Fan.sector_alone (sq9_tight_saturated.2.1.saturatedOn _) (sq9Fan_dir_lt_nextDir i) hcol
 
 end Fan
 

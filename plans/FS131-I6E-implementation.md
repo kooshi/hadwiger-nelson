@@ -43,6 +43,22 @@
   `gamma`, `exists_polarGraph`), `Fan.exists_twoColourNhd_branch` (over `TwoColourOn.essBoundary_inter_eq`),
   `Fan.dist_eq_one_of_common_contact` (§ 6.1 Case A; over `pinch`, `c11_split`), `Fan.contacts_of_no_common` (§ 6.1 Case B at one point;
   over `pinch`).
+- **`AeColouring.Fan.sector_alone`** — **FS121-V2-SECTOR** (`plans/FS121-V2-verification.md` § 2.3), and with it the planner's
+  **`AeColouring.Fan.sector_unique`** — **FS121-DB1-L3**, carrying FS111-W-NOREP. Over the same open leaves as `branch_contacts` and
+  `branch_outside_discs`, through them only. Children: `Fan.exists_contact_nextDir`, `Fan.exists_contact_dir` (Lemma T (ii) at the two
+  edges of a region), `Fan.sector_constraints`, `Fan.horn_false`, `Fan.false_of_horn_next`, `Fan.false_of_horn_dir`.
+
+**Kernel theorems, on `[propext, Classical.choice, Quot.sound]`** (Stage 5; `logs/axioms-4.out`) — children of `sector_alone` that rest on
+no open leaf: `in_in_or_out_out` (**FS121-V2's Lemma H**, for one set and two pieces — no colouring, no fan),
+`false_of_inside_of_outside`; `horn_of_sin_constraints` (**the angular lemma**, real variables); `AeColouring.Fan.sector_side` (Lemma H
+at a region of positive angle; no saturation), `Fan.sector_side_next`, `Fan.sector_side_dir`; `Fan.dir_mono`,
+`Fan.dir_le_dir_add_two_pi`, `Fan.nextDir_le_dir`, `Fan.nextDir_le_dir_add_two_pi` (the cyclic order of the limit directions),
+`Fan.exists_pred_branch`, `Fan.exists_succ_branch`; `dist_sq_polarPt_add_sign`, `two_mul_sin_le_of_one_le_dist`,
+`le_two_mul_sin_of_dist_le_one`, `eventually_sin_add_mul_gt`, `add_ofReal_one_mul`, `add_ofReal_neg_one_mul`.
+
+**Count**: 57 records on the standard three (2 leaves — `Fan.two_le_n`, `Fan.col_ne` — and 55 children); 14 wired (3 leaves —
+`Fan.branch_outside_discs`, `Fan.branch_contacts`, `Fan.sector_alone` — the planner's `Fan.sector_unique`, and 10 children). No `sorry`
+of mine is left in the tree.
 
 ## What I may and may not change
 
@@ -206,3 +222,62 @@ the branch — `FanBridge` 7 (the other implementer's, proved on `fs131-w6f`), `
 (`tools/fs131_i6e_axioms.py` on `logs/axioms-3.out`; `--plant` exits 1): control `sorryAx`; 57 records on the standard three; 14 wired.
 Statements: 17 verbatim, 0 failures. Names: 65 new, 0 collisions (`logs/names-5.out`) — after three renames the check asked for
 (`dir_mono`, `exists_pred_branch`, `exists_succ_branch`: their first names are used inside other namespaces of `ValidMap`).
+
+## Stage 6 — SAVED (FS131-I6E): the model examples, the final checks, the expectations scored, what is left
+
+**The model.** Five `example`s after `Fan.sector_unique` run the lemmas on `sq9Fan` — `two_le_n` with `sqVertex_mem_singularSet`;
+`col_ne` at the last region and the first; the saturation hypothesis from `sq9_tight_saturated`; `branch_outside_discs`; `sector_alone`
+with `sq9Fan_dir_lt_nextDir` — and the docstrings of `two_le_n`, `col_ne`, `branch_outside_discs`, `branch_contacts` name the model
+(`sector_alone`'s did). Negative control (`data/fs131/i6e/scratch/S7-control.lean`, output `logs/control-examples.out`): `col_ne`
+between two regions not beside one branch, and `sector_alone` with a non-strict angle hypothesis, are each refused (2 errors, exit 1).
+
+**The final checks.** Build **OK — 466 of 466 batches, 2 modules rebuilt, 3 modules with warnings, exit 0** (`logs/build-4-final.log`;
+the tool's output `build-4-final-full.log`): every warning is `declaration uses sorry`, 15 — `FanBridge` 7, `Pinch` 7, `MapColouring` 1
+— none mine. Axioms (`logs/axioms-4.out`, read by `tools/fs131_i6e_axioms.py`): control `sorryAx`; 57 on the standard three; 14 wired;
+0 failures. Statements (`logs/statements-6.out`): 17 verbatim against `d62406a2`, the seven other leaves still `sorry`, the seven files
+that are not mine byte-identical, no `axiom`, no `native_decide`. Names (`logs/names-6.out`): 65 new, 0 collisions. Quotations: 26 of
+26 exact (the brief with its second amendment). Not run, by the brief: the gate (`axioms.sh`, `vacuity.sh`, linters, `dupnames.sh`).
+No process of mine is left running.
+
+**Expectations scored** (Stage 1's table).
+
+| # | outcome |
+|---|---|
+| Z1 | **met** — no polar-coordinates integral: `volume_essBoundary` |
+| Z2 | **met** — the five statements are proved as stated; none false, none short of a hypothesis |
+| Z3 | **met for the bridge's leaves** (`gamma`, `IsUnitCurve.exists_polarGraph`; not `beta`, not `alpha`); not registered: `branch_contacts` also rests on `Pinch`'s `pinch`, `c11_split`, `TwoColourOn.essBoundary_inter_eq` |
+| Z4 | **met, and short**: the four leaves priced at 4.5 days closed inside one session, each after a handful of one-line fixes |
+| Z5 | **exceeded** — five of five (registered 0.5 for four) |
+| Z6 | **met** — `θ₁ ≤ π` is read nowhere |
+
+**What is left, and its route.** Of the five leaves: nothing. At the wave's join:
+1. With `fs131-w6f` (`8e81fedd`): delete `polarRegion_isOpen` and `polarRegion_isPreconnected` from `FanBridge` and point their uses
+   (`Fan.isOpen_cell`, `Fan.isPreconnected_polarRegion_of_le`, `Fan.exists_isOpen_subset_cells`) at `FanBuild`'s `isOpen_polarRegion`,
+   `isPreconnected_polarRegion` — the same statements, binder for binder. `FanBridge` gains that branch's import lines; my insertions
+   are below the header `## What every fan carries under saturation`, two unchanged lines below its last leaf.
+2. `scripts/Axioms.lean`, block "FS131-I6E": add the 14 wired records (the WIRED section of `data/fs131/i6e/I6eAxioms.lean` lists them)
+   once `gamma`, `IsUnitCurve.exists_polarGraph` and `Pinch`'s leaves are theorems; `dupnames.sh` on the joined tree first.
+3. One definition in two modules: `fanAngle` here and `polarAngle` in `Plane/ValidMap/RadialPush` (and the same angle inline in
+   `fs131-w6f`'s `FanBuild`) — a home beside `polarPt` in `Plane/LocalStructure` would make one. Not done: `LocalStructure` is not mine.
+
+## Drafts for the front page
+
+*Each names its slot. The gate was not run on this branch (the brief), so no count of `CLAUDE.md` § The gate or § Trust ledger moves
+here; they move at the wave's landing.*
+
+1. **`ARCHITECTURE.md` § 3.11, the row `Plane/Saturated/FanBridge`** — after the row's last sentence, add: "The five `Fan` lemmas are
+   proved (job FS131-I6E): `Fan.two_le_n`, `Fan.col_ne` with no saturation, over `volume_essBoundary` (the essential boundary of a
+   measurable set is null) and the cells of a fan (`Fan.isPreconnected_cell`, `Fan.cell_subset_densitySet`,
+   `Fan.exists_ray_subset_cell`; `polarRegion_isOpen`, `image_polarPt_mem_nhds`, `fanAngle`); `Fan.branch_outside_discs` and
+   `Fan.branch_contacts` over `Fan.exists_unitCurve_branch` (the branch as a unit-speed curve from `z`), `Fan.dist_eq_one_of_common_contact`,
+   `Fan.contacts_of_no_common`; `Fan.sector_alone` over `in_in_or_out_out` (FS121-V2's Lemma H), `Fan.sector_side`,
+   `horn_of_sin_constraints`, `Fan.horn_false`. Inhabitant: five examples on `sq9Fan`."
+2. **`plans/FS131-E8-derivation.md`, the entries' grades** (the deriver's file; for whoever files): FS131-E8-TWOSIDES — **[kernel]**:
+   `HadwigerNelson.Plane.AeColouring.Fan.two_le_n`, `.col_ne`, on `[propext, Classical.choice, Quot.sound]`, resting on no assumption.
+   FS131-E8-BRANCH (`Fan.branch_contacts`), FS131-E8-OUTSIDE on a branch (`Fan.branch_outside_discs`), and in
+   `plans/FS121-V2-verification.md` FS121-V2-SECTOR (`Fan.sector_alone`) with FS121-DB1-L3 and FS111-W-NOREP (`Fan.sector_unique`) —
+   **kernel pending the join**: proved here over `gamma`, `IsUnitCurve.exists_polarGraph` (proved on `fs131-w6f`) and `pinch`,
+   `c11_split`, `TwoColourOn.essBoundary_inter_eq` (line P), and over nothing else; they become [kernel] when those land, on the
+   standard three if those are.
+3. **`LEDGER.md`**: no row of its own for these (the wave's rows are filed at its landing).
+4. **Frontier line, Proof Atlas**: none from this branch alone; at the landing, the Atlas grades of item 2.
