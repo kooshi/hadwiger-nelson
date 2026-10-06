@@ -1,0 +1,114 @@
+@HadwigerNelson.Plane.ArcMap.bv_l3 : ∀
+  {F : HadwigerNelson.Plane.ArcMap (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6)))},
+  @HadwigerNelson.Plane.ArcMap.Valid (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))) F →
+    ∀ {u₁ u₂ : Complex},
+      @HadwigerNelson.Plane.ArcMap.Covers (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))) F u₁
+          (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)) →
+        @HadwigerNelson.Plane.ArcMap.Covers (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))) F u₂
+            (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)) →
+          @Eq.{1} Nat
+              (@Set.ncard.{0} (Fin (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))))
+                (@HadwigerNelson.Plane.ArcMap.coloursAt (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))) F
+                  u₁))
+              (@OfNat.ofNat.{0} Nat (nat_lit 3) (instOfNatNat (nat_lit 3))) →
+            @Eq.{1} (Set.{0} (Fin (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6)))))
+                (@HadwigerNelson.Plane.ArcMap.coloursAt (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))) F
+                  u₁)
+                (@HadwigerNelson.Plane.ArcMap.coloursAt (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))) F
+                  u₂) →
+              @LT.lt.{0} Real Real.instLT (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne))
+                  (@Dist.dist.{0} Complex
+                    (@PseudoMetricSpace.toDist.{0} Complex
+                      (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                        (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                          (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                            (@NormedField.toNormedCommRing.{0} Complex Complex.instNormedField)))))
+                    u₁ u₂) →
+                @LT.lt.{0} Real Real.instLT
+                    (@Dist.dist.{0} Complex
+                      (@PseudoMetricSpace.toDist.{0} Complex
+                        (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                          (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                            (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                              (@NormedField.toNormedCommRing.{0} Complex Complex.instNormedField)))))
+                      u₁ u₂)
+                    (@OfNat.ofNat.{0} Real (nat_lit 2) (@instOfNatAtLeastTwo.{0} Real (nat_lit 2) Real.instNatCast ⋯)) →
+                  @HadwigerNelson.Plane.ArcMap.RingProper (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6)))
+                      F u₁ →
+                    @HadwigerNelson.Plane.ArcMap.RingProper
+                        (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))) F u₂ →
+                      (∀ (x : Complex),
+                          Or
+                              (@Eq.{1} Real
+                                (@Dist.dist.{0} Complex
+                                  (@PseudoMetricSpace.toDist.{0} Complex
+                                    (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                                      (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                                        (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                                          (@NormedField.toNormedCommRing.{0} Complex Complex.instNormedField)))))
+                                  x u₁)
+                                (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)))
+                              (@Eq.{1} Real
+                                (@Dist.dist.{0} Complex
+                                  (@PseudoMetricSpace.toDist.{0} Complex
+                                    (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                                      (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                                        (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                                          (@NormedField.toNormedCommRing.{0} Complex Complex.instNormedField)))))
+                                  x u₂)
+                                (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne))) →
+                            x ∉
+                              @Union.union.{0} (Set.{0} Complex) (@Set.instUnion.{0} Complex)
+                                (@HadwigerNelson.Plane.ArcMap.fourSet
+                                  (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))) F)
+                                (@HadwigerNelson.Plane.ArcMap.repSet
+                                  (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))) F)) →
+                        False
+@HadwigerNelson.Plane.ArcMap.BaseCtx.l3_base : ∀
+  {F : HadwigerNelson.Plane.ArcMap (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6)))} {u : Complex},
+  F.BaseCtx u →
+    ∀ {u₁ u₂ : Complex},
+      @Membership.mem.{0, 0} Complex (Set.{0} Complex) (@Set.instMembership.{0} Complex)
+          (@Metric.closedBall.{0} Complex
+            (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+              (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                  (@NormedField.toNormedCommRing.{0} Complex Complex.instNormedField))))
+            u (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)))
+          u₁ →
+        @Membership.mem.{0, 0} Complex (Set.{0} Complex) (@Set.instMembership.{0} Complex)
+            (@Metric.closedBall.{0} Complex
+              (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                  (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                    (@NormedField.toNormedCommRing.{0} Complex Complex.instNormedField))))
+              u (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne)))
+            u₂ →
+          @HadwigerNelson.Plane.ArcMap.IsCubicTrichromatic (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6)))
+              F u₁ →
+            @HadwigerNelson.Plane.ArcMap.IsCubicTrichromatic
+                (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6))) F u₂ →
+              @Eq.{1} (Set.{0} (Fin (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6)))))
+                  (@HadwigerNelson.Plane.ArcMap.coloursAt (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6)))
+                    F u₁)
+                  (@HadwigerNelson.Plane.ArcMap.coloursAt (@OfNat.ofNat.{0} Nat (nat_lit 6) (instOfNatNat (nat_lit 6)))
+                    F u₂) →
+                @LT.lt.{0} Real Real.instLT (@OfNat.ofNat.{0} Real (nat_lit 1) (@One.toOfNat1.{0} Real Real.instOne))
+                    (@Dist.dist.{0} Complex
+                      (@PseudoMetricSpace.toDist.{0} Complex
+                        (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                          (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                            (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                              (@NormedField.toNormedCommRing.{0} Complex Complex.instNormedField)))))
+                      u₁ u₂) →
+                  @LT.lt.{0} Real Real.instLT
+                      (@Dist.dist.{0} Complex
+                        (@PseudoMetricSpace.toDist.{0} Complex
+                          (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                            (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                              (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                                (@NormedField.toNormedCommRing.{0} Complex Complex.instNormedField)))))
+                        u₁ u₂)
+                      (@OfNat.ofNat.{0} Real (nat_lit 2)
+                        (@instOfNatAtLeastTwo.{0} Real (nat_lit 2) Real.instNatCast ⋯)) →
+                    False

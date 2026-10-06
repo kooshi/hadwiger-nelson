@@ -5563,6 +5563,17 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.union_of_overlap
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.not_regularAt_of_max
 
+-- FS131-I5q (stage 58): `bv_l3` moved to `BaseWalk` and proved (its record is in the FS131-K5b block above); `l3_base` and `bv_l3` over `l3_core`
+#print axioms HadwigerNelson.Plane.ArcMap.l3_core
+#print axioms HadwigerNelson.Plane.ArcMap.bv_l3_dbl
+#print axioms HadwigerNelson.Plane.ArcMap.not_onRingArc_of_finite
+#print axioms HadwigerNelson.Plane.ArcMap.ringCircle_val_germ
+#print axioms HadwigerNelson.Plane.ArcMap.ringCircle_noSwap
+#print axioms HadwigerNelson.Plane.ArcMap.eq_or_eq_neg_of_dot_I_mul_e
+#print axioms HadwigerNelson.Plane.CircleColouring.link_bad_finite
+#print axioms HadwigerNelson.Plane.CircleColouring.link_val_right_side
+#print axioms HadwigerNelson.Plane.CircleColouring.link_val_left_side
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -393,7 +393,7 @@ theorem eq_of_ringArc_subset_sphere {Q P : ℂ} {s t : ℝ} (hst : s < t) (h : r
     exact ⟨θ, ⟨hθ.1, hθ.2.trans (min_le_left _ _)⟩, rfl⟩
   · exact (Arc.circ.inj heq).1
 
-/-- **Finitely many arcs meet a compact part of the domain** (local finiteness and compactness). -/
+/-- **Finitely many arcs meet a compact part of the domain** (local finiteness and compactness). `GENERIC`. -/
 theorem finite_arcs_meeting_compact (F : ArcMap k) {K : Set ℂ} (hK : IsCompact K) (hKd : K ⊆ F.dom) :
     {a | a ∈ F.arcs ∧ (a.carrier ∩ K).Nonempty}.Finite := by
   choose! t ht hfin using F.locallyFinite
@@ -412,7 +412,7 @@ theorem IsRingArc.shift {P : ℂ} {s t : ℝ} {c c' : Fin k} (hA : F.IsRingArc P
     rw [show θ - 2 * π * n = θ + 2 * π * ((-n : ℤ) : ℝ) by push_cast; ring, ringPt_add_int_mul]
   rwa [hr] at h
 
-/-- Two arcs of one unit circle with constant sides that share an interior point have the same sides. -/
+/-- Two arcs of one unit circle with constant sides that share an interior point have the same sides. `GENERIC`. -/
 theorem IsRingArc.sides_eq_of_ringPt_eq {p : ℂ} {a b a' b' : ℝ} {c c' d d' : Fin k} (h : F.IsRingArc p a b c c')
     (h' : F.IsRingArc p a' b' d d') {t t' : ℝ} (ht : t ∈ Ioo a b) (ht' : t' ∈ Ioo a' b') (he : ringPt p t = ringPt p t') :
     c = d ∧ c' = d' := by
@@ -421,7 +421,7 @@ theorem IsRingArc.sides_eq_of_ringPt_eq {p : ℂ} {a b a' b' : ℝ} {c c' d d' :
   rw [he] at h1
   exact ⟨singleton_eq_singleton_iff.mp (h1.1.symm.trans h2.1), singleton_eq_singleton_iff.mp (h1.2.symm.trans h2.2)⟩
 
-/-- Two arcs of one unit circle with the same constant sides whose parameter intervals overlap join into one. -/
+/-- Two arcs of one unit circle with the same constant sides whose parameter intervals overlap join into one. `GENERIC`. -/
 theorem IsRingArc.union_of_overlap {p : ℂ} {a b a' b' : ℝ} {c c' : Fin k} (h : F.IsRingArc p a b c c')
     (h' : F.IsRingArc p a' b' c c') (hov : max a a' < min b b') : F.IsRingArc p (min a a') (max b b') c c' := by
   obtain ⟨⟨h1, h3⟩, h2, h4⟩ : (a < b ∧ a' < b) ∧ a < b' ∧ a' < b' := by
@@ -448,7 +448,7 @@ theorem IsRingArc.union_of_overlap {p : ℂ} {a b a' b' : ℝ} {c c' : Fin k} (h
       · exact ⟨by linarith, by rcases hr with hr | hr <;> [linarith; exact hr]⟩
 
 /-- **The ends of a maximal arc are irregular angles**: at a regular end the arc would continue past it with the same sides
-(`RegularAt`, `IsRingArc.union_of_overlap`), and an arc of at most `60°` (`l60_le`) is not the set of a longer one. -/
+(`RegularAt`, `IsRingArc.union_of_overlap`), and an arc of at most `60°` (`l60_le`) is not the set of a longer one. `GENERIC`. -/
 theorem IsRingArc.not_regularAt_of_max (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
     (hmax : ∀ θ₁' θ₂', ringArc P θ₁ θ₂ ⊆ ringArc P θ₁' θ₂' → F.IsRingArc P θ₁' θ₂' c c' →
       ringArc P θ₁' θ₂' = ringArc P θ₁ θ₂) :

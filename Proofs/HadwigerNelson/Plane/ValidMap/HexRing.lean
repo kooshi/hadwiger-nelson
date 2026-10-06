@@ -20,8 +20,9 @@ colouring object:
 * `RingProper u` — BV-L3's "proper finite circle colouring": finitely many points of `ω(u)` on `Γ`, and property (ii) at `60°` pairs;
 * `DoubleEvent u₁ φ u₂ χ α β` — BV-ND's double event on the unit-distance linkage, read at one configuration through the two germs.
 
-Rows: **FS112-ROTHEX** (`rot_noThird`, `rot_out`, `rot_in`, `hex_regular`, `p17_ua`) and **FS114-BV-HEX** (`bv_hex`, `bv_l3`, `bv_nd`,
-`bv_nd1`, with BV-ND's step 1 as `linkage_dot_ne_zero`).
+Rows: **FS112-ROTHEX** (`rot_noThird`, `rot_out`, `rot_in`, `hex_regular`, `p17_ua`) and **FS114-BV-HEX** (`bv_hex`, `bv_nd`, `bv_nd1`, with
+BV-ND's step 1 as `linkage_dot_ne_zero`, and the linkage to first order, `bv_l3`'s children; `bv_l3` itself is in
+`Plane/ValidMap/BaseWalk`, downstream, where its route's inputs live — inventory item 370 (a)).
 -/
 
 namespace HadwigerNelson.Plane
@@ -1923,7 +1924,7 @@ theorem bv_nd1 (hF : F.Valid) {u : ℂ} {φ : ℝ} {α β : Fin k} (hαβ : α �
   · rw [hdiff, hdot]; exact hcos2
 
 
-/-! ### The linkage to first order (children for `bv_l3`'s double events) -/
+/-! ### The linkage to first order (children for `bv_l3`'s double events; `bv_l3` is in `Plane/ValidMap/BaseWalk`) -/
 
 /-- The displacement of a ring point, in the frame of `e a₀` (child of the linkage lemmas). -/
 theorem dot_ringPt_sub (u E : ℂ) (a₀ a : ℝ) :
@@ -2133,17 +2134,6 @@ theorem linkage_end (u₁ u₂ : ℂ) (a₀ b₀ : ℝ) (h1 : dist (ringPt u₁ 
     rw [hsq, hdx, hdy]
     nlinarith [norm_nonneg (X - Y), ht₁.1]
   nlinarith [dist_nonneg (x := ringPt u₁ (a₀ + s₁.sign * t₁)) (y := ringPt u₂ b)]
-
-/-- **FS114-BV-HEX, (BV-L3)** (`[SokolovVoronov2025]` Lemma 3, `plans/BASE-V-verification.md` § 1b.3): no two points `u₁`, `u₂` of one
-three-colour multicolour at distance in `(1, 2)` have rings that are proper finite circle colourings (in the complementary triple, which at
-six colours is the absent colours). Read at the class the argument reads: nothing about the sectors at `u₁`, `u₂` (cusps, double cusps,
-any degree); the double-event points' adjacency (BV-ND's hypothesis) supplied by the base's hypothesis on the two circles — narrower than
-BV-ND's adjacency, which also admits degree-4 bichromatic points (reported, N-BVL3). A refutation: no model expected. -/
-theorem bv_l3 {F : ArcMap 6} (hF : F.Valid) {u₁ u₂ : ℂ} (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1)
-    (h3 : (F.coloursAt u₁).ncard = 3) (hsame : F.coloursAt u₁ = F.coloursAt u₂) (ht : 1 < dist u₁ u₂) (ht' : dist u₁ u₂ < 2)
-    (hR₁ : F.RingProper u₁) (hR₂ : F.RingProper u₂)
-    (hH : ∀ x, (dist x u₁ = 1 ∨ dist x u₂ = 1) → x ∉ F.fourSet ∪ F.repSet) : False := by
-  sorry
 
 end ArcMap
 

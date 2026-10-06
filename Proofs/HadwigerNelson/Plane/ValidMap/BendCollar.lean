@@ -574,12 +574,15 @@ theorem exists_collar_free (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ c c')
       linarith [not_lt.mp hd2]
   exact hUΓ z (hδU (mem_thickening_iff.mpr ⟨ringPt P ψ, hxM, lt_of_le_of_lt hx (by linarith)⟩)) hzΓ
 
-/-- **The collar exists** (the F-dependent choice; plan § 4, child C1). Route: `R` close to `1` puts the lens under `bend_toward`'s
-profile (`one_sub_lensProf_le` against `n2_env_toward`, `n2_env_near` with `r` from `hout`), so `toward_clear` gives `clear`; `R'`, `R''`
-close to `1` make the collar thin (`one_sub_tangRad_le`, `tangRad_sub_one_le`): within `ε`, inside the domain (a compact arc in an open
-set), and `Γ`-free off the arc — in the middle by `hfree` and a Lebesgue number on a compact sub-arc, at each end by the end's sector
-chart (`localSectors_disj`): the collar near `A` is the horn between the germs `(θ₁ + π/2, 1/R'')` and `(θ₁ + π/2, 1/R')`, which holds no
-germ of `F` but `α`'s once both curvatures are nearer `1` than every other germ of that direction. `l60_le` gives `short`. -/
+/-- **The collar exists** (the F-dependent choice; plan § 4, child C1). The route proved (FS131-CC2, `plans/FS131-collar-C-implementation.md`
+§ 7.1): the radii are one parameter, `R' = 1 − τ`, `R = 1 − τ/2`, `R'' = 1 + τ`, and each clause of `CollarFit` holds for all small `τ > 0`, so
+one `τ` serves all. `clear` (`exists_lens_clear`): `hout` keeps the outer class a positive distance from `P`, and for small `τ` the lens lies
+under `bend_toward`'s two profiles (`one_sub_lensProf_le` against `n2_env_toward`, `n2_env_near`), so `toward_clear` applies. Thin
+(`collarK_thin`): a collar point is `P + t e(ψ)` with `ψ ∈ [θ₁, θ₂]` and `|1 − t| ≤ 2τ`, so the collar lies within `ε` of the arc and inside the
+domain (a compact arc in an open set). `Γ`-free off the arc (`exists_collar_free`): near each end by the end's sector chart (`localSectors`)
+read in the end's frame — a branch across the tangent leaves the crescent (`branch_transversal`), and a branch along it stays in the crescent
+only with the circle's curvature, so it is the circle (`branch_tangent`; `exists_end_free`) — and in the middle by `hfree` and a thickening of
+the arc's compact middle. `l60_le` gives `short`. -/
 theorem exists_collarFit (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ c c') (hout : c' ∉ F.coloursAt P)
     (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) (hε : 0 < ε) :
     ∃ R' R R'', CollarFit F P θ₁ θ₂ c c' ε R' R R'' := by
