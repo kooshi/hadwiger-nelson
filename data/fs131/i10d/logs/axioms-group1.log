@@ -1,0 +1,5 @@
+'HadwigerNelson.StandingFive.involution_eq_pow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.card_filter_pow_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.card_normOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.targetFloor_of_charSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.sum_quadratic_eq' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -52,3 +52,37 @@ Output at the base: 3 + 7 declarations kept, both self-tests as required (`data/
 `AddChar.card_eq`, `AddChar.exists_apply_ne_zero`.
 
 Token count at this stage: about 120k by my own estimate (the launch context is most of it).
+
+## Stage 2 — SAVED (FS131-I10D): `NormOneTarget` — P1 `involution_eq_pow`, P2 `card_normOne`
+
+**P1, by another route than the plan's** (said here, and in a `--` comment at the head of the proof; the theorem's docstring is the
+planner's and still describes the fixed-field argument, which is a true proof and not the one the kernel holds). The plan: the fixed
+field has `[k : k₀] = 2` by Artin (`FixedPoints.finrank_eq_card`), then the polynomial `(T − x)(T − σ x)`; hard part named, "the group
+action's instances". Taken instead: `σ` is an algebra endomorphism of `k` over its prime field (`ZMod.subsingleton_ringHom` gives
+`commutes'`), so it is `Frob ^ j` for one `j < n = [k : 𝔽_p]` (`FiniteField.bijective_frobeniusAlgHom_pow`, in Mathlib at the pin);
+`σ² = 1` gives `n ∣ 2j` (`FiniteField.orderOf_frobeniusAlgHom`), `σ ≠ 1` gives `j ≠ 0`, so `2j = n`, `Q² = p^n = (p^j)²`, `Q = p^j`
+and `σ x = x ^ p ^ j`. No group action, no fixed field, no polynomial. 43 lines against the plan's 120; one elaboration round.
+
+**P2** over a new helper, **`card_filter_pow_eq_one`**: in a finite field, `u ^ d = 1` has exactly `d` solutions when `d ∣ |k| − 1`,
+`d ≠ 0` (`IsCyclic.card_powMonoidHom_ker` on `kˣ`, carried to `k` by an explicit equivalence). `card_normOne` is its instance at
+`d = Q + 1`; Stage 3 reads it again at `d = Q − 1`. 30 lines for the two against the plan's 50; two rounds (one unknown constant,
+`Nat.sq_sub_sq'`, replaced by a two-line case split).
+
+**Re-priced from these two leaves** (the brief's item 2): 85 inserted lines in `NormOneTarget` — proofs, the helper, comments and one
+spec example — against the plan's 170 for P1 + P2, so **half the plan's line count**, as the wave's first two implementers found. The
+remaining four leaves, planned at 440 lines, are re-priced at about 220; the whole job at about 250k by the harness's count in place of
+the plan's 300k.
+
+**New imports** in `NormOneTarget.lean`: `Mathlib.Algebra.Algebra.ZMod`, `Mathlib.FieldTheory.Finite.Basic`,
+`Mathlib.GroupTheory.SpecificGroups.Cyclic` (none was reached through `StandingFive`; `lake env lean` said so by an unknown constant).
+
+**Evidence.** Build under the slot, exit 0, 454 of 454 batches, 5 modules rebuilt (`NormOneTarget`, `FloorPlanes`, `Floor128`,
+`TargetFloors`, `Proofs`), every warning a `sorry` of another leaf: 21 left — `FloorPlanes` 4 (mine), the eleven-less-six of this
+pass's other files (5), `StandingFive` 9, `StationaryRatio` 3 (`data/fs131/i10d/logs/build-1-p1-p2.log`). Axioms
+(`data/fs131/i10d/axioms-group1.lean`, log `data/fs131/i10d/logs/axioms-group1.log`): `involution_eq_pow`, `card_filter_pow_eq_one`,
+`card_normOne` and `targetFloor_of_charSum` (the planner's composition, now over proved leaves) each on
+`[propext, Classical.choice, Quot.sound]`; the control, `sum_quadratic_eq` (open at this stage), prints `sorryAx`, as it must.
+Statement check against `330d2f48`: 3 + 7 declarations kept, PASS (`data/fs131/i10d/logs/statements-1.txt`). `scripts/Axioms.lean`:
+block "FS131-I10D" opened with these four.
+
+Token count at this stage: about 190k by my own estimate.

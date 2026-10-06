@@ -4891,6 +4891,13 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.GapSeven.exists_adjacent_gapped
 #print axioms HadwigerNelson.GapSeven.card_edges
 
+/-! ## FS-131 wave 10 (job FS131-I10D) — the planes' floor: the norm-one target, and the completion of a circle sum to a Kloosterman sum -/
+-- FS131-I10D
+#print axioms HadwigerNelson.StandingFive.involution_eq_pow
+#print axioms HadwigerNelson.StandingFive.card_filter_pow_eq_one
+#print axioms HadwigerNelson.StandingFive.card_normOne
+#print axioms HadwigerNelson.StandingFive.targetFloor_of_charSum
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
