@@ -714,3 +714,48 @@ and **the branch is never rewritten**: `a20bb6f5` stays an ancestor of everythin
 and `plans/SESSION-HANDOFF-2026-10-04.md` — no Lean file, no script (`data/fs131/ol/main-since-base.txt`).
 
 ## Stage 16 — SAVED (FS131-OL1)
+
+## Stage 17 — SAVED (FS131-OL1): `main` merged (`dff76573`); the build green; the checkers written; the counts predicted
+
+**The merge** (`dff76573`: `git merge --no-ff origin/main` at `34a28786`, one merge base `11a34d9d`, no conflict). The files it changed on this
+branch (`git diff --name-only f8c6173e dff76573`): `BIBLIOGRAPHY.md`, ten briefs under `data/fs131/briefs/`, `plans/FS131-close-inventory.md`,
+`plans/SESSION-HANDOFF-2026-10-04.md` — **no Lean file, no script, no tool** (`git diff --name-only f8c6173e dff76573 -- '*.lean' scripts
+lakefile.toml lake-manifest.json lean-toolchain tools ARCHITECTURE.md CLAUDE.md LEAN.md`: empty). Against `origin/main`, outside `plans/` and
+`data/`, the branch differs in exactly its own six files: `ARCHITECTURE.md` (one row), `Proofs.lean` (one import), `OpenMove.lean`,
+`scripts/Axioms.lean` (OPEN's block), `tools/fs131_io_axioms.py`, `tools/fs131_io_decls.py`. `a20bb6f5` is an ancestor of `dff76573`. With
+no Lean source of `main` changed there is no name to collide and no statement to re-check against `main`: the Lean tree is `a20bb6f5`'s.
+
+**Build** of the merged tree (under the slot): **OK — "all 1767 modules already up to date, nothing built, 0 module(s) with warnings, 2s"**,
+exit 0 (`build/gate/build/20261006T023331Z-82931.log`, "All targets up-to-date (5750 jobs)"; driver `data/fs131/ol/build-merged.log`). The
+oleans it found current are IO3's last full build's (`build/gate/build/20261005T124448Z-133559.log`: 451 of 451 batches, `OpenMove` and
+`Proofs` rebuilt, "Build completed successfully (5750 jobs)"). **Warnings counted**: `grep -c warning` is 0 in both logs (the full log's one
+`error` line is the up-to-date probe's "target is out-of-date", which starts the walk). Control on the count: IO2's log of the tree with one
+`sorry` (`20261005T115945Z-4035875.log`) holds 2 `warning` lines, both `OpenMove.lean:2175:8: declaration uses 'sorry'`.
+
+**The checkers** (new, this job's):
+- **`tools/fs131_ol_axioms.py <axioms log>`**: three lists must agree — the theorems `OpenMove.lean` declares (its own parser; the same 105
+  names as `tools/fs131_io_decls.py` lists, compared as sets), the names in `scripts/Axioms.lean`'s OPEN block (which must stand between the
+  CLEAN and PURCHASED banners), and the gate's saved log (IMM4's `records`, imported) — each name once, printed under CLEAN, within the
+  standard three. Seen failing before any pass: on the banner-less IO print it fails all 105 on the banner check alone
+  (`data/fs131/ol/open-axioms-nobanner.txt`, exit 1); on `main`'s gated log, which holds no OPEN record, 105 × "no record in the log"
+  (`open-axioms-mainlog.txt`, exit 1). Its `--plant` is run on the gate's own log in Stage 18.
+- **`tools/fs131_ol_vacdiff.py <main log> <landing log>`** (after ML1's): every SITE and EVIDENCE row of `main`'s gated scan must be in
+  the landing scan; every added row must belong to a declaration of `OpenMove`; an added SITE row reading VACUOUS, STALE or UNKNOWN is
+  `FLAGGED` and fails (the brief's stop). `main`'s scan against itself: 845 rows, 0 lost, 0 added, PASS; `--plant` (a `main` row dropped, a
+  non-OPEN row added, an OPEN row added reading UNKNOWN): `LOST`, `NOT OPEN'S`, `FLAGGED`, exit 1 (`data/fs131/ol/vacdiff-plant-pre.txt`).
+- **`data/fs131/ol/count-open.lean`** (after ML1's `count-merge.lean`; `isRefutation`, `isNegationConcl`, `isGeneratedDecl` copied verbatim
+  from `scripts/Vacuity.lean`): the declarations of the module `OpenMove` as the scan counts them. **147 declarations, 5 refutations**
+  (`data/fs131/ol/count-open.out`): 105 theorems (the source's, name for name), 10 equation lemmas (`hornPos.eq_1`, `rayPos.eq_1`,
+  `openWedge.eq_1`, `openCol.eq_1`, `openRim.eq_1`, `openPiece.eq_1`, `openRest.eq_1`, `openRay.eq_1`, and `liftDir.eq_1`,
+  `sectorBetween.eq_1` realized here), 11 definitions, 5 matchers, the structure `Near.OpenConfig` and its 15 generated declarations (11
+  fields, `mk`, `rec`, `recOn`, `casesOn`). The five refutations (a stated conclusion that reduces to `… → False`): `Near.open_valid`,
+  `Near.openRay_nondegenerate`, `Near.OpenConfig.isClear_of_mem_openWedge`, `Near.OpenConfig.isClear_of_Icc`, and the generated projection
+  `Near.OpenConfig.clear`. Control: the same count over a module that does not exist prints `declarations=0` (`count-open-plant.out`).
+
+**The prediction, written before any gate run in this worktree** (`data/fs131/ol/prediction.txt`): axioms 3,912 records — 3,889 clean, 14
+axiom-free, 4 imported, 5 purchases (105 added, all CLEAN); vacuity `declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0
+stale=0 declared=3 witnessed=32 generic=747 unknown=2` — 14 new sites, all `GENERIC`: 11 on `F.Valid` (12 theorems bind `hF : F.Valid`;
+`open_valid` is a refutation, skipped), 2 on `F.IsHorn v α κ₁ κ₂ c` (`exists_openConfig`, `exists_open`), 1 on `F.Condition5`
+(`open_condition5`); no EVIDENCE row; both self-tests unchanged (23, 62).
+
+## Stage 17 — SAVED (FS131-OL1)

@@ -1,0 +1,16 @@
+LOST EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis :: HadwigerNelson.Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1
+NOT OPEN'S SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave_aux :: F.Valid
+added SITE UNKNOWN HadwigerNelson.Plane.ArcMap.exists_open :: F.Valid
+FLAGGED SITE UNKNOWN HadwigerNelson.Plane.ArcMap.exists_open :: F.Valid
+main rows 845, landing rows 846, lost 1, added 2 (117 names declared in OpenMove)
+  added SITE UNKNOWN on Valid: 1
+  declarations: 11026 -> 11026 (+0)
+  refutations-skipped: 113 -> 113 (+0)
+  sites: 770 -> 770 (+0)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 32 -> 32 (+0)
+  generic: 733 -> 733 (+0)
+  unknown: 2 -> 2 (+0)
+vacdiff: FAIL (3)
