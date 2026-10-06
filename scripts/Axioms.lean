@@ -6835,6 +6835,18 @@ leaves close. -/
 #print axioms HadwigerNelson.Plane.ArcMap.star_anti
 -- FS131-I8B block end
 
+/-! ## FS131-I8D — FS-131 wave 8's second implementer of the semi-hub rows: `Plane/RingCalculus/SemiHubPlaces`
+(FS116-N3-CROSS, FS116-N3-SEMI) and FS129-SR3-OUTERADJ. Until the wave's join each record here that cites a statement of
+`Plane/RingCalculus/SemiHub` rests on that module's open leaves (`tools/fs131_i8d_axioms.py` names them per record). -/
+-- FS131-I8D: Plane/RingCalculus/SemiHubPlaces
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_star_data
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_no_tip
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_outer
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_four
+-- FS131-I8D block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

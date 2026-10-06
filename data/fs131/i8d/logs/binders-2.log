@@ -1,0 +1,6 @@
+OK       crossed_four: now is its base statement with `4 ≤ (F.coloursAt p).ncard` replaced by `(F.coloursAt p).ncard = 4`
+OK       crossed_changePoint: now is its base statement with `4 ≤ (F.coloursAt p).ncard` replaced by `(F.coloursAt p).ncard = 4`
+OK       crossed_semiHub: now is its base statement with `4 ≤ (F.coloursAt p).ncard` replaced by `(F.coloursAt p).ncard = 4`
+OK       semiHub_places: now is its base statement with `4 ≤ (F.coloursAt p).ncard` replaced by `(F.coloursAt p).ncard = 4`
+OK       transferQC: now is its base statement with `4 ≤ (F.coloursAt p).ncard` replaced by `(F.coloursAt p).ncard = 4`
+binders: 5 of 5 as ruled

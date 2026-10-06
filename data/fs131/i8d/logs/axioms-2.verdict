@@ -1,0 +1,8 @@
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_star_data: the standard three and, until the join, 3 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_no_tip: the standard three and, until the join, 4 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed, qcol_inner_tile
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle: the standard three and, until the join, 4 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed, qcol_inner_tile
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_outer: the standard three and, until the join, 3 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_coloursAt: the standard three and, until the join, 3 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_four: the standard three and, until the join, 4 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed, qcol_inner_tile
+axioms print: 6 records — 0 on a subset of the standard three, 6 resting besides on open leaves of SemiHub only (4 distinct), 0 bad; control `FS131I8DControl.planted_sorry` prints ['sorryAx'] with root ['FS131I8DControl.planted_sorry@(this file)']
+exit=0

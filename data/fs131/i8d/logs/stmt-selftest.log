@@ -1,0 +1,6 @@
+with no fault the changed set is: HadwigerNelson.Plane.ArcMap.crossed_changePoint, HadwigerNelson.Plane.ArcMap.crossed_four, HadwigerNelson.Plane.ArcMap.crossed_semiHub, HadwigerNelson.Plane.ArcMap.semiHub_places, HadwigerNelson.Plane.ArcMap.transferQC
+control 'binder': changed set gains ['HadwigerNelson.Plane.ArcMap.star_recip'] — FIRED
+control 'include': changed set gains ['HadwigerNelson.Plane.ArcMap.ringPt_sixth_dist_le_one'] — FIRED
+control 'text': changed set gains ['HadwigerNelson.Plane.ArcMap.v6_count'] — FIRED
+self-test: OK — every planted fault fired, each adding exactly its culprit
+EXIT=0

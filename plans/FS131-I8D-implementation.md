@@ -60,3 +60,63 @@ No leaf lacks a hypothesis its row reads (inventory item 556's check); nothing t
 `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, log `data/fs131/i8d/logs/build-1-as-given.log`:
 "build: OK — all 1812 modules already up to date, nothing built, 3 module(s) with warnings", `EXIT=0`. `rg -c "^\s*sorry"` on
 `Proofs/HadwigerNelson/Plane/RingCalculus/`: `SemiHub` 17, `SemiHubPlaces` 6, `Empty` 1 — 24 leaves, seven of them this job's.
+
+## Stage 2 — SAVED (FS131-I8D): the statement defect and its ruling; `crossed_no_tip`, `crossed_outer`, `crossed_four`
+
+### 2.1 The first two leaves, and the re-pricing the brief asks for
+
+`crossed_no_tip` and `crossed_outer` closed at first elaboration, over one composition minted once (`crossed_star_data`: the two
+sub-arc lemmas and `fullSemiHub_star_crossed`): 30 and 22 lines against 120 and 80 priced. **Re-priced from them**: a leaf whose
+route exists costs a quarter to a third of its price here; the whole of `SemiHubPlaces` is one job, and `outerAdj` rides with it if
+the budget holds. Two routes are shorter than the plan's: a tip's exclusion from `t_a'`, `t_b'` needs no C1 (both cones hold the
+star's edge `e₃`, more than `90°` from `ψ`: `cos_nonneg_of_mem_coneAt`), and `crossed_outer` needs no "four distinct colours" child
+(the tile of an outer colour is one of the star's four).
+
+### 2.2 The statement defect (sent to the coordinator; ruled)
+
+**Found** at the third leaf: `crossed_four`, `crossed_changePoint`, `crossed_semiHub`, `semiHub_places` and the planner's `transferQC`
+read "`p` has exactly four colours" and were stated with `(h4 : 4 ≤ (F.coloursAt p).ncard) (hk : k ≤ (F.coloursAt p).ncard + 2)`.
+Wave 3's `germS_absent` gives `(F.coloursAt p).ncard + 2 = k` — two colours absent, so four present only at `k = 6` — and every route
+goes through a statement of `SemiHub` that asks `ncard = 4`. The sharp case, in Lean (`data/fs131/i8d/scratch/k6_remark.lean`,
+elaborated clean, `data/fs131/i8d/logs/k6-remark.log` empty): under `crossed_four`'s hypotheses its conclusion
+`(F.coloursAt (ringPt p ψ))ᶜ = {a, b}` implies `k = 6`; at `k ≥ 7` the leaf as written claimed that no such configuration exists,
+which no row does (FS116-N3-CROSS's *not claimed*: "anything at k ≥ 7"). No counterexample map is held: unprovable as stated, not
+shown false. The planner's sentence the slip comes from: `fullSemiHub_star_crossed`'s docstring, "four colours by `germS_absent`".
+
+**Ruled** (the coordinator's message, 2026-10-06; its inventory number is the coordinator's to give): form (i) — the five statements
+take `(h4 : (F.coloursAt p).ncard = 4)` in place of `(h4 : 4 ≤ (F.coloursAt p).ncard)`, `hk` kept; a docstring clause on each naming
+the class and why. Done exactly so:
+
+- `tools/fs131_i8d_stmt.py` (the form of the wave's statement check, over the ten modules of the ring calculus; elaborated
+  signatures, never text) against `6e0cf10d` with `--expect` the five names: 235 base declarations compared, **5 changed — exactly the
+  five**, 2 added (`crossed_star_data`, `crossed_coloursAt`), exit 0 (`data/fs131/i8d/logs/stmt-2-vs-6e0cf10d.log`).
+- `tools/fs131_i8d_binders.py` on that log: each of the five is its base statement with `4 ≤ (F.coloursAt p).ncard` replaced by
+  `(F.coloursAt p).ncard = 4` and nothing else (`binders-2.log`, exit 0); planted fault (`= 5` expected): five `MISMATCH`, exit 1
+  (`binders-2-fault.log`).
+- The statement check's self-test (`stmt-selftest.log`, exit 0): each of the three planted faults (a hypothesis altered in `Empty`, an
+  `include` adding `0 = 1 →` with the text unchanged, a binder added to `star_recip`) adds exactly its culprit to the changed set. The
+  join job's self-test judged a control by exit 1 alone, which the already-changed `star_anti` gave it; this one compares sets.
+
+### 2.3 `crossed_four`, at the ruled statement
+
+`y` has no tip (`crossed_no_tip`), so by `star_coloursAt` its colours are the two absent at `p` and its outer colours, which lie in
+`{a', b'}` (`crossed_outer`): four colours need both. The absent pair is `P ∖ {a', b'}` with `P = {a, a', b, b'}` and `a ≠ a'`,
+`b ≠ b'` (`crossed_coloursAt`: the star's first and third, second and fourth tiles are distinct tiles of `p`, one per colour).
+About 40 lines against 80.
+
+### 2.4 The save
+
+- Build: `data/fs131/i8d/logs/build-2-crossed-three.log` — "build: OK — 468 of 468 batches, 2 module(s) rebuilt, 3 module(s) with
+  warnings", `EXIT=0`; the full log's `declaration uses sorry` lines are in `SemiHub` (17 leaves), `SemiHubPlaces` (3:
+  `semiHub_places`, `crossed_changePoint`, `crossed_semiHub`) and `Empty` (1).
+- **Axioms, with the debt beneath each record named** (`tools/fs131_i8d_axioms.py`, `axioms-2.txt`, `axioms-2.verdict`): my leaves
+  cite statements the sibling implementer proves in a tree of its own, so `#print axioms` shows `sorryAx` and cannot say whose. The
+  tool prints, per record, its axioms and its *sorry roots* (the declarations beneath it whose own term mentions `sorryAx`, with their
+  module), and passes a record only if every root is in `Plane/RingCalculus/SemiHub`. Six records, each on the standard three and
+  resting besides on open leaves of `SemiHub` only — four distinct: `GermOnQWith.exists_isRingArc_ccw`, `…_cw`,
+  `fullSemiHub_star_crossed`, `qcol_inner_tile` (the first, second and fourth are proved on `origin/fs131-w8c` at `1e605b60`). The
+  planted control (a theorem proved by `sorry` in the scratch file) prints `sorryAx` with itself as its one root; `--fault` (the
+  control audited) exits 1 naming it (`axioms-2-fault.verdict`).
+- `./scripts/dupnames.sh`: OK, exit 0 (`dupnames-2.log`). My helper names scanned by declaration keyword on `origin/fs131-w8c`,
+  `-w6`, `-w7`, `-w9`, `main`: no hit; the scan fires on a known name of the sibling's. The sibling's names (the coordinator's relay)
+  are declared nowhere here.
