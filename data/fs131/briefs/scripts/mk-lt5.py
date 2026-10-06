@@ -97,6 +97,13 @@ The gate's recorded state on `main`, which your other counts are reconciled agai
    record names, or a docstring and a record that disagree, is a message to me before you declare it.** A hand result written out over
    a theorem's own variables is the one thing the step cannot find: the second landing's table says whether wave 10 has any; for wave
    6's first half, read its fourteen modules' docstrings for the words and say what you found.
+   **Two cases the second landing's table raises, pre-ruled so that you need not ask**: a named former that a theorem now proves
+   with no assumption in hypothesis form — `StandingFloor`, proved at 7 and 5 by theorems that rest on the declared import — is no
+   longer an assumption in hypothesis form: its entry leaves, by the step's own rule for a proved assumption, and the import's own
+   rows carry the dependence (every theorem resting on the axiom is listed under it). And `KloostermanBound`, the hypothesis form of
+   Weil's bound, which a theorem now concludes from the import at characteristic not 2, is declared only if the step asks for it;
+   if it does, it is an outside theorem under the key of the import. Say in your record what the step did with each. If the step's
+   rules and these two readings disagree, that is a message to me.
 5. **The second reading**: the branch declares 31 conditions and 2 premises, each with a reason that is one mind's. Read each against
    the definition and the statements that take it. In your record, a table: the entry, your reading, agree or not. Where you would
    class one as an assumption, message me with the definition and its consumers — do not change it alone, and do not let it pass.
@@ -116,7 +123,7 @@ The gate's recorded state on `main`, which your other counts are reconciled agai
    `/home/kooshi/source/lean-dir/scripts/slot.py --mem 16 --cpus 8 -- ./scripts/dupnames.sh`, then its `--self-test` under
    `--mem 4 --cpus 4`; `scripts/axioms.sh` and `--self-test` green, the record counts unchanged from the second landing's;
    `scripts/vacuity.sh` and `--self-test` green, its counts unchanged (say so with both lines); **`./scripts/assumptions.sh` and its
-   `--self-test` green, and the branch's mutation harness run once more on the joined tree** (`tools/fs131_t5_mutate.py`, as its
+   `--self-test` green, and the branch's mutation harness run once more on the joined tree** (`{T}tools/fs131_t5_mutate.py`, which the merge brings into your tree, as its
    record's Stage 6 ran it); `tools/check_architecture.py` exit 0; the guarded lint, `lake lint --no-build -- --no-build --trace` under
    the slot with `--mem 8`, silent; the notes check, `tools/fs131_qa4_notes.py`, no CONFLICT; the records check,
    `tools/fs131_l5_records.py`. Save every step's log under `data/fs131/lt5/` and name them.
