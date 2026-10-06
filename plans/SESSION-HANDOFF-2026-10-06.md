@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–573 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–574 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -20,20 +20,20 @@ ruling and receipt (items 1–573 at this writing; its first two sections are th
 6. **Never `cd` into another worktree** from the top-level session: the harness announces it to running agents as their working directory (item 424).
    Use `git -C <tree>` and absolute paths.
 
-## 2. Where the milestone stands
+## 2. Where the milestone stands (rewritten 2026-10-06, about 20:45 UTC, at Kooshi's word)
 
 | piece | state |
 |---|---|
-| waves 1–4, Lebesgue, `localSectors`, Woodall's chain, MERGE | **landed on `main`**, counts filed (items 29, 151, 157, 171, 270, 318, 326, 375) |
-| OPEN, the fifth move | **landed on `main`** (item 414: head `7189bdcf`, gated `68670175`); counts filed — 3,912 records, 3,889 clean, 14 axiom-free, 4 imported, 5 purchases; vacuity `declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=747 unknown=2` |
-| wave 5, the density half (`fs131-w5` at `8ca5fc67`) | **no open leaf of its own**: the planar chain, `row134BaseUA`, the collar bend (`bend_toward_collar`, item 416), `exists_preBend` and its children, `n3_base`, `localDense`, `dense3`, `bv_l3` (item 424) — all on the standard three; `cv_exists` and `Terminal` there are stale copies of the other line's |
-| wave 5, the `Terminal` half (`fs131-w5c`) | `Limit` done; `exists_terminalSeq` proved over two open steps (item 420); **the vertex step is whole in the kernel (item 449: all four cases proved; `Procedure` holds one `sorry`); open: `exists_arcStep` (IA1's groundwork done, item 437: question (5) proved, the statement repaired by ruling 430, one bend missing — `bend_away_part`, KA1 planning it; the assembly split by ruling 438 (c))**; `stuckRun_ne_univ` is **proved** on `fs131-w5s` at `facdf1c2` (item 431), to be merged at the final sync |
-| wave 6's first landing | **done** (item 558): fourteen modules of `Plane/Saturated/` on `main`, gated at `7e67af3b`; counts filed: 6,174 records, 6,148 clean; `declarations=14299 … sites=1269`, `vacuous=0`; the bridge (`regJFan_of_saturated`) in the kernel |
-| wave 10's first landing | **done** (item 535): `Arith/CharacterColouring`, `SpectralInputs`, `StationaryRatio`, `StandingFive` on `main`, gated at `999cde4a`; counts filed (`c6990ba5`): 5,809 records, 5,783 clean, 17 axiom-free; `declarations=13767 … sites=1173`, `vacuous=0`; open gate items named in the landing's draft 6 |
-| the example maps' landing | **done** (item 496): on `main`, gated at `d9347791`; counts filed (`1adf15ba`): 5,550 records, 5,525 clean; `declarations=13386 … sites=1137`, `vacuous=0`; of wave 5's 62 open gate items 33 closed, 29 remain (MC1's record, draft 5) |
-| wave 5's landing | **done** (item 474): on `main`, gated at `1351ebc2`; `CLAUDE.md` counts filed (item 475): 5,221 records, 5,196 clean; `declarations=12999 … sites=1130`, `vacuous=0` |
-| waves 6–10 (111 rows) | not started; wave 10 (arithmetic) depends on nothing in waves 4–9 |
-| `bend_away` (wave 4's tangent bend) | `sorry` on `fs131-w4ba` at `71cca146`; its planner waits for IA1 to say what statement the arc step needs (item 427 (e)) |
+| **on `main`** | waves 1–5, the example maps, wave 10's first pass, wave 6's first half (items 474, 496, 535, 558). Counts filed at `df61d748`: 6,174 records, 6,148 clean, 5 purchases, 4 imported, 17 axiom-free; vacuity `declarations=14299 refutations-skipped=199 sites=1269`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1226 unknown=2`. No `sorry`. |
+| **wave 10's second landing** (FS131-L10B, running) | both merges made (`main`, Falconer's lemma proved); the gate green on `e80221d3` at every step but one lint line; ruled (item 573): the unused instance binder is deleted and the whole gate re-run; that commit lands. After it: one outside axiom (Weil's bound), eight imported records, 6,334 records by its count. |
+| **the gate's step listing what the library assumes** (FS131-T5, done) | on `fs131-t5` at `4dd69014`, **not on `main`**; lands by **FS131-LT5** right after L10B (generator `mk-lt5.py` written and dry-checked; § 3's paragraph has the launch steps). On `main` as of `3bfc7d2e`: 34 assumptions — 6 outside theorems, 24 hand results of ours, 4 open questions (item 562). |
+| **wave 6, third and fourth passes** | `fs131-w6` at `2aa3f720`: 62 leaves — `CoverHull` 4 and `Parallel` 13 (**I6L running**), `Centre` 7 (**I6Z running**), `Accumulation` 10 (**I6K launch-ready**), and the fourth planner's `Fragment` 19, `ReduceI` 1, `Owed` 8 (three implementer jobs owed, its lines X, Y, W; briefs not written). A gap found in FS111-M-REDUCE-I (item 566): ledger row 154 owes an erratum. |
+| **wave 7** | `fs131-w7` at `195c7855`: 39 leaves stated (`Count` 19, `Rainbow` 1, `FourColour/Local` 13, `Bowtie` 6). **`Count` is proved** on `fs131-w7a` at `5777e8e7` (item 564), not yet merged into the wave's line. Left: `anchor`, `Local`, `Bowtie`; the pinwheel and eight rows unstated; the bowtie fragment's four jobs (item 553). |
+| **wave 8** | `fs131-w8` at `8d979793`: **`emptyNS`, `doubleTip` proved** (item 569; `star_recip` too, on `fs131-w8a` at `e1e0c74d`); 26 leaves — `SemiHub` 17, `SemiHubPlaces` 6, `Star` 2, `Empty` 1. **I8B launch-ready** (the merge, `star_anti` at its ruled statement, the shared lemmas). Two rows unstated. `emptyNS`'s nine-colour model owed. |
+| **wave 9** | `fs131-w9` at `50c0edc5`: five leaves after one pass (item 536); its second planner owed. |
+| **wave 10 beyond the landing** | `fs131-w10k` at `e09209e4`: `LevelGraph` 2 and `UsablePlace` 1 leaves; a fourth planning pass owed (item 555). |
+| **the example maps' closers** | FS131-MD1, FS131-MD2: briefs gated, trees `fs131-wd1`, `fs131-wd2` at `1ed1cfd2`; they do not land. |
+| `bend_away` (wave 4's tangent bend) | `sorry` on `fs131-w4ba` at `71cca146`; its planner waits on the arc step's statement (item 427 (e)) |
 
 **An open gate item on landed results** (items 419 (d), 426–427): `LEAN.md`'s inhabitant rule asks for a Lean object satisfying every hypothesis of a
 theorem at once. The four moves on `main` (`exists_merge`, `exists_rayMerge`, `exists_shave`, `exists_open`) have none in Lean; each has a hand model
@@ -53,56 +53,26 @@ planted-picture models land (queue item 2).
 Agent ids are in this session's scratch (`agents.txt`), never in a file. If the session restarted, resume a job from its record's last SAVED stage with
 a fresh agent on the same brief.
 
-## 4. Queue for the next freed slots, in order (item 427; re-ordered by ruling 434)
+## 4. Queue for the next freed slots (rewritten 2026-10-06, about 20:45 UTC; the superseded text is in git)
 
-0. **Order now** (rulings 473, 475): **wave 5 is on `main`** (item 474: gated at `1351ebc2`, landed `ad611866`; counts filed, item 475).
-   All three slots are full (MC1, I10A, E8); wave 10 and wave 6 are planned in a first pass (items 484–487). K10 has reported a statement defect in a filed hand result, ruled (items 477–478: TC1-STANDING-FIVE
-   takes a second named hypothesis, the finite-target floor; FS89-S0A-10 takes its band's order bound as a hypothesis). In order, as slots free: **FS131-K6b is running** (§ 3; E8 handed back, items 491–492: nine entries derived, its stub lines filed, its errata held for the filing);
-   next into free slots:
-   **the order, planners and implementers alternating (rulings 495 (d), 497; a planner's hand-back is what implementers wait on, and planners
-   find the statement defects): ~~K9~~, ~~K10c~~, ~~K7b~~ (done), ~~L6A~~, ~~IF1~~, ~~I7A~~ (done, item 564), ~~L10B~~ (**running**), ~~K8b~~ (**running**), ~~K6d~~ (done), ~~I6L~~ (**running**), ~~I6Z~~ (**running**), then **I6K (launch-ready)**, then **LT5 when L10B is back** (two landings never run at once), then **LT5 (the gate step's landing; brief not written, item 562)**, then I8A, K8b, then K6d, I6L, I6Z, I6K (**written and gated**, item 532: `FS131-K6d-wave6-fourth.md` on `fs131-w6` itself — its first act merges the two proved branches; `FS131-I6L-wave6-third.md` on `fs131-w6l` (`CoverHull` then `Parallel`; no separate I6H), `FS131-I6Z-wave6-third.md` on `fs131-w6z`, `FS131-I6K-wave6-third.md` on `fs131-w6k`, all from `6fc27fa1`; generators `mk-k6d.py`, `mk-i6k.py L|Z|K [<cell lemmas' commit>]`), then K9b, I9B, I9A (**these three not written**, item 536), K7c, I7L, I7B and the bowtie fragment's four jobs (**not written**, item 553), then MD1, MD2** (**I7A and I8A are written and gated, trees made**, item 527: `data/fs131/briefs/FS131-I7A-wave7-first.md` on `fs131-w7a` from `b5ef0e39`, `FS131-I8A-wave8-first.md` on `fs131-w8a` from `f1c13612`, generator `mk-i78.py 7|8 [<sq9's commit>]` — regenerate I8A's with I6B's commit once I6B is back; **K7b and K8b are written and gated** too, item 528: `FS131-K7b-wave7-second.md` on `fs131-w7` itself, `FS131-K8b-wave8-second.md` on `fs131-w8` itself, generator `mk-k78b.py 7|8` — new modules only, and each sends me its form of FS114-N7-QOPP to relay to the other; **K10c, MD1, MD2 are written and gated** too, item 529: `FS131-K10c-wave10-third.md` on `fs131-w10k` itself (generator `mk-k10c.py [<branch>=<tip> …]` — regenerate with the second pass's implementers' tips as they return), `FS131-MD1-closers.md` on `fs131-wd1` and `FS131-MD2-closers.md` on `fs131-wd2` (both from `main` at `1ed1cfd2`, generator `mk-md.py 1|2`; the closers do not land — the next landing job merges them); **every job in this order now has a gated brief**) (rulings 502, 505, 507, 510; K7, I10C and I6A are running). **Also ready, briefs gated**: FS131-K6c (wave 6's third planning pass, on `fs131-w6` itself, new modules only;
-   `data/fs131/briefs/FS131-K6c-wave6-third.md`, generator `mk-k6c.py`), FS131-I6C (`Curve` then `LocalGraph`, tree `fs131-w6c`) and FS131-I6D
-   (`FanBridge`'s existence half with `sq9.SingLocallyFinite`, tree `fs131-w6f`; `data/fs131/briefs/FS131-I6C-wave6-bridge.md`, `FS131-I6D-wave6-bridge.md`,
-   generator `mk-i6b.py C|D`; both trees cut from `32f2ab4c`). FS131-I6E (`FanBridge`'s five `Fan` lemmas, tree `fs131-w6g` from `32f2ab4c`;
-   `data/fs131/briefs/FS131-I6E-wave6-bridge.md`, `mk-i6b.py E`; I6D and I6E edit one file in disjoint regions, by their briefs). **Not written**: MD1, MD2. The other jobs ready: **FS131-I10C** (`debruijn-implementer`, `model: "opus"`; § 3's I10B row);
-   **FS131-I6A** (`Pinch`'s seven leaves, on `fs131-w6p`) and **FS131-I6B** (`MapColouring`'s `sat_inP` and its Lean model, on `fs131-w6m`) — both
-   implementers, briefs gated (`data/fs131/briefs/FS131-I6A-wave6.md`, `FS131-I6B-wave6.md`; generator `mk-i6.py A|B`), trees made at `3928644b`;
-   **the planners of waves 7–9, FS131-K7, K8, K9** (`debruijn`; **briefs gated, trees made** at `e6e7b312` — `data/fs131/briefs/FS131-K7-wave7.md`,
-   `FS131-K8-wave8.md`, `FS131-K9-wave9.md`, generator `mk-kw.py 7|8|9`; item 498: they are independent but for four named rows, so launch K7
-   before K8, and **relay K7's decision on the word "simple" to K8**); **FS131-MD1**
-   (`stuckModel.IsTerminalMap` whole; MC1's record § 3.2 is its work list) and **FS131-MD2** (`IsClean` for `hornModel`, the contact fact at
-   `stuckModel`'s vertex, a named `CollarFitOut` on `awayModel`'s gap) — ruling 497 (b), briefs not written. Then:
-   (i) **the example maps' landing** — running as FS131-MC1 (§ 3); it was: the landing job when FS131-MB2 is back — merge `fs131-wm` and `fs131-wmb` (MB2 is
-   merging A's half itself), merge `main` (wave 5: the brick facts become three lines; add `stuckModel_terminal`, the sub-arc model of
-   `bend_away_whole` by `IsRingArc.mono` (471 (c)), the wave-5 applications, `awayModel` read against `bend_away_part` and
-   `exists_arcStep`), apply the docstring lines (KM1's plan § 3.10; the stuck family's notes name `stuckModel_hyps`), the gate with
-   `scripts/dupnames.sh` and L5's records check (475 (e)), land; (ii) **wave 10's implementers** from FS131-K10's handoff; (iii) **the
-   planners of waves 7–9** (`plans/FS131-kernel-plan.md` § 7.1; wave 6's is running) — each on a branch from `main`, its brief derived from
-   `data/fs131/briefs/scripts/mk-k6.py` as that one was from `mk-k10.py`; (iv) the second planning pass for E7's `F₀`, `F₁` (461 (d));
-   (v) the tidy moves (the three same-fact pairs, item 468; the `Procedure` re-layout, 450 (d); ruling 421 (c)'s named forms; the stale
-   "skeleton" words, item 474; BA1's ten re-proved helpers; the self-test's plant directory, 467 (e)); a tooling job on the vacuity
-   scan's three questions (475 (d)). Held for the milestone's filing: 475 (b).
-1. **The freed lane's continuation**, if it left leaves on wave 5's path (IR2's will).
-2. **FS131-E7 — done** (items 440–441: a model for each of the four sets, no contradiction; a terminal plane map with a stuck vertex at twelve
-   colours; `nb4p` restated with one conjunct at the remedy pass; two questions held for Poros). It was: a short Ephodos job (`ephodos`): QA4's rank 9 and rank 10's question (`plans/FS131-QA4-audit.md` § 6.2) — a model or a contradiction
-   for the backgrounds of `a4six`, `straddlers_third`, `nb4p` (is `sixFrag` one?) and for a doubly shadowed horn under Condition 5 with `Covers`
-   (`flank_ne_of_doublyShadowed`); whether a terminal valid plane map with a stuck vertex exists at some `k ≥ 7`. **Brief written and gated**
-   (item 428): `data/fs131/briefs/FS131-E7-models.md`, claim list `data/fs131/claims-E7.md`; it writes on `main` under `plans/` and `data/` only.
-3. **The models' planner** (`debruijn`): QA4's ranks 4–6 — the planted picture (`sevenBrickMap` relabelled, fresh-coloured pictures by
-   `ArcMap.recolour`; models of the four moves, the vertex step, `cvb_hole_disconnected`), the completed bowtie (the stuck family with `Covers`), and
-   `cuspFrag.IsRingArc` for the two bends; one overlay construction or two; on a branch from `main`, landing on its own. **Brief written and gated**
-   (item 428): `data/fs131/briefs/FS131-KM1-models.md`; its tree `.claude/worktrees/fs131-wm` (branch `fs131-wm` from `main` at `68a3db1d`) is made,
-   built and pushed.
-4. **`exists_arcStep`'s assembly** in `Procedure` (after the vertex step; one file, one writer), from IA1's work list. It first makes the statement
-   repair of ruling 430: `(hP : F.IsPlaneMap)` added, the degree clause restricted to `x ∈ T` and weakened to `≤`, the consumer's three lines.
-5. **`bend_away`'s planner**, to the statement IA1 fixes (the repaired statement is on `fs131-w4ba` at `71cca146`; E5 § 4; plan it where the collar's
-   radial push lives — it may be reusable).
-6. **Wave 5's final sync and landing**: merge `fs131-w5s`, `fs131-w5a` and `fs131-w5c` into one line (I5q's note, item 424: `fs131-w5`'s side for
-   `BaseDense`'s children, `HexRing`, `BaseWalk`; `fs131-w5c`'s for `cv_exists`), then **the remedy pass** (ruling 427 (a)): the 17 `bowtie` notes
-   (QA4 § 3.5), `bend_toward_collar` without `hmax` and `hlen` with QA4-C1's conjunction named (`data/fs131/qa4/QA4Collar.lean`), rank 7's and rank
-   8's wave-5 docstring lines, the three `[NumberField _]` binders (item 419 (a)); then merge `main`, the full gate, the guarded lint, the notes
-   check, land, drafts.
-7. After wave 5 lands: the tidy moves (items 387 (a), 406 (a), 416, 421 (a), 424), then waves 6–10's planners.
+**Launch-ready, in this order** (each `debruijn-implementer`, `model: "opus"`, unless said):
+1. **The Searcher, on one request** — `data/search/briefs/SEARCH-2026-10-06.md` (generator `mk-search-1006.py`, gate exit 0), `subagent_type: "searcher"`, into the next free slot that is not a landing's. Kooshi's conditional word and my check of its two conditions: item 574. It counts as one of the three. On its hand-back: file its fate line in `plans/SEARCH-QUEUE.md` line 8; a model goes to wave 7's line as an inhabitant to state; a null goes to the wave's stub lines as a deriver's question.
+2. **FS131-LT5** — the gate step's landing, when L10B is back (two landings never run at once): § 3's paragraph.
+3. **FS131-I6K** — `data/fs131/briefs/FS131-I6K-wave6-third.md` (with Amendment 1), tree `fs131-w6k` at `2aa3f720`.
+4. **FS131-I8B** — `data/fs131/briefs/FS131-I8B-wave8-join.md`, tree `fs131-w8b` at `8d979793`. It messages the shared module's hash mid-job: then cut I8C's and I8D's branches.
+5. **FS131-MD1**, **FS131-MD2** — `data/fs131/briefs/FS131-MD1-closers.md`, `FS131-MD2-closers.md`, trees `fs131-wd1`, `fs131-wd2` (cut from `main` at `1ed1cfd2`: add a dated amendment at launch saying `main` has moved and they do not merge it).
+
+**Briefs to write, planners first** (a planner's hand-back is what implementers wait on):
+- **FS131-K7c** (`debruijn`, on `fs131-w7`): first act, merge `origin/fs131-w7a` (ruling 564 (f); my trial conflicts in `scripts/Axioms.lean` only) and fix `ARCHITECTURE.md`'s row for `Count`; then the discrepancy between `tools/fs114_y2_k1.py` and `data/fs116/n1/ring-survey-bowtie.out` about FS114-Y2-BOWTIE's ring (ruling 553 (a)); the pinwheel and eight rows; `rstopAll`'s `SimpleOn` narrowing; **item 571's relay** (four of its five QOPP theorems follow from wave 3's two cone lemmas; `qArc_inner`'s first clause is wave 8's `qcol_inner_tile`); `#check` every leaf it states (item 564: four of its predecessor's were false for a missing section variable).
+- **FS131-K9b** (`debruijn`, on `fs131-w9`): item 536's order (K9b before I9A; both readings of "simple" land; five models are a gate condition); **the join takes `reduce_i_of_arcInterfaces` over the named open statement `ArcInterfacesOfRegJ`** (ruling 566 (a)), by ancestry from `fs131-w6` at `2aa3f720`, and derives its own finding (3) (item 533) from wave 6's leaf or the reverse — one statement, one name.
+- **FS131-K10d** (`debruijn`, from `e09209e4`): J45-SI-5, SI-C over `IsPlaceFilter`; the link from `normOneCayley` to `finitePlane Q` as a row (ruling 555 (c)). **FS131-I10G**: `LevelGraph` 2 and `UsablePlace` 1 leaves, from `e09209e4` (about 730 lines); after L10B lands, cut from a merge of `main`.
+- **FS131-I8C** (`SemiHub`, 17 leaves, about 1,700 lines) and **FS131-I8D** (`SemiHubPlaces` 6 with `outerAdj`, about 1,800) — from I8B's tip, in parallel (ruling 572 (a)); the planner's § 9.8 calls them "I8B" and "I8C". **FS131-K8c**: FS116-N2-SIXRING and RING-TWIST-C (K8b's record § 9.7).
+- **Wave 6's lines X, Y, W** (K6d's record § 24: `Fragment`'s PARTNER, RUNG, SATPIN leaves; its AXIS, KAPPA, PAIR leaves; `ReduceI` and `Owed`), after the third pass's three.
+- **FS131-I7L** (`FourColour/Local`, with `anchor` first and its two import lines, ruling 564 (a)–(b)), **FS131-I7B** (`Bowtie`), the bowtie fragment's four jobs — after K7c. **FS131-I9B**, **I9A** — after K9b. `emptyNS`'s nine-colour model (needs wave 6's `sq9Map_valid`, a leaf of `Owed`). A tidy job for wave 6 (ruling 544 (d); the landed `Pinch` docstring, ruling 561 (c)).
+- **Landings**: wave 6's second, waves 7, 8, 9 — each brief adapted from `mk-l10b.py`, and each **carries T5's draft 7** (the line on declaring assumptions) once LT5 has landed. Then the milestone's filing (§ 8).
+- **Every implementer brief from now on** asks for the guarded lint at its last stage (item 573) and a `#check`-level statement check (item 556; the tools are `tools/fs131_i7a_stmt_check.py` on `fs131-w7a` and `tools/fs131_i8a_stmt.py` on `fs131-w8a`).
+
+**Generators** (`data/fs131/briefs/scripts/`): `mkbrief.py` (the helper), `mk-l10b.py`, `mk-lt5.py`, `mk-i8b.py`, `mk-i6k-amend.py` (re-runnable while unlaunched), `mk-k8b-amend.py`, `mk-search-1006.py`, `mk-i78.py`, `mk-k78b.py`, `mk-md.py`, `mk-i6k.py`, `mk-k6d.py`, `mk-l6a.py`, `mk-if1.py`, `mk-t5.py`.
 
 ## 5. Procedures
 
@@ -122,6 +92,8 @@ a fresh agent on the same brief.
 - **A hand-back's statement check must read the kernel's statements** (item 556): a section `variable` enters a theorem only if its
   statement mentions it, so a leaf can be stated without a hypothesis its file shows, and a textual check passes it. At a review,
   `#check` at least the row's heads (`lake env lean` on a three-line file under the slot); landing briefs ask it of every head.
+- **Learned 2026-10-06, afternoon** (items 560–574): **a brief not yet launched is rewritten, not amended** (regenerate its amendment; a launched one gets a dated amendment); **when a job of a wave hands back, fast-forward every unstarted branch of that wave onto its tip and copy its build** (no `lake` running in the source tree), so the next job has its lemmas by ancestry; **check the import direction before telling a job to cite a lemma** (a module that imports yours cannot lend you one: item 566 (d) — the lemma moves instead); **a planner's hypothesis can be wider than its row** — read the row's "not claimed" line against the binder (item 568: `interior` of a cone admitted the whole circle); **the harness's "completed" notice can be interim** ("stopped with background work still running"): a slot is free only when the hand-back message has arrived; **a hand-back past about 550k** happened three times today (planners and implementers at 524k–609k): brief planners at 400k with a hand-back line at 500k; an inventory append asserts on the file's last two words only (lines wrap); a `Q()` prefix holding braces is built outside the f-string.
+- **Usage** (item 574 (c)): The cap stays at three slots, the Searcher included; the coordinator's own context is the other lever.
 - **An implementer's last stage runs the guarded lint** (item 573: a landing's gate went red on an unused instance binder no branch had linted) — say so in every implementer brief written from now on: `lake lint --no-build -- --no-build --trace` under the slot with `--mem 8`, after its last green build.
 - **Prices, calibrated** (item 541; `data/fs131/calibration/price-vs-actual.md`): one implementer job is about an hour, about 430k
   tokens, about 1,300 lines of Lean (`tokens ≈ 311k + 129 per line`); read a planner's price in **lines** (÷ 1,500 = jobs, plus a planning

@@ -7115,3 +7115,21 @@ reason by the close.*
      high. Reply sent, one message. **For the briefs**: an implementer's brief does not ask for the lint, and an
      unused anonymous instance binder is exactly what the build's linters do not report — a tidy for the workflow:
      an implementer's last stage runs the guarded lint on its own files (to the next briefs I write).
+574. **Kooshi's word on the queued search, a conditional, 2026-10-06, verbatim: "If hardware can spare the resources, and if the search actually has a chance of returning, you can launch the searcher... otherwise we file its question as an open one for a deriver." And: "make sure to keep the handoff updated with anything learned as well as current state of the milestone. […]"** (source: his message of 2026-10-06, about 20:30 UTC, after my interim report; the search is `plans/SEARCH-QUEUE.md` line 8, item 564 (e)).
+     **The two conditions, each checked by me.** *Hardware*: 32 cores, 125 GiB of which 121 available, load average
+     about 3 (`nproc`, `free -g`, `uptime`, at 20:30 UTC), with three jobs building by turns under the slot — spare.
+     *A chance of returning*: `CountData M k` has one unknown, `col : F → Fin k`, and every other field is a local
+     condition on it (read by me in `Plane/RouteT/Count` on `fs131-w7a`), so on a fixed map it is a finite colouring
+     problem of a few hundred Boolean variables — seconds for a solver; a model returns the moment one exists on a
+     small map, and a null is a bounded statement (which maps, to what size). Two families are excluded by counting
+     before any run (mine, unchecked): all-hexagon maps (six edge-neighbours of distinct colours and the face's own
+     make seven) and maps with every vertex of degree 6 (`room`'s `3·V₆ ≤ V₄`). **Rulings.** (a) **Both conditions
+     hold: the Searcher is launched on line 8, into the next free slot that is not a landing's**, bounded — about
+     an hour, at most 16 GiB and 12 cores a run beside the builds, about 150k tokens as guidance. Alternative: file
+     the question for a deriver now. Why not: a model, if one exists on a small map, is found by a solver in
+     seconds and would be the first inhabitant of six theorems; a deriver's question is the right form only for
+     the non-existence side, and the search's null says how far that side has been tested. Confidence: high.
+     (b) **If it returns no model**, its null and any counting obstruction it sees go to the wave's stub lines as a
+     question for a deriver — his "otherwise". (c) **Staffing**: the cap stays at three, the Searcher takes a
+     slot and adds none, and my own context is the other lever (a compaction when he calls one; the handoff is kept
+     current for it). (d) The handoff's §§ 2–4 are rewritten to current state with a "learned" list.
