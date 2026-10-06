@@ -1,0 +1,43 @@
+import Proofs.HadwigerNelson.Arith.MajorityVote
+import Proofs.HadwigerNelson.Arith.ProductFactor
+import Proofs.HadwigerNelson.Arith.NegCircleModel
+theorem FS131I10F.control : (1 : Nat) = 1 + 0 := by sorry
+set_option pp.fullNames true
+#print axioms HadwigerNelson.MajorityVote.eq_of_lt_two_mul_card_filter
+#print axioms HadwigerNelson.MajorityVote.lt_two_mul_card_filter_of_bad
+#print axioms HadwigerNelson.MajorityVote.measure_half_le_sum_indicator_le
+#print axioms HadwigerNelson.MajorityVote.measurableSet_lt_two_mul_card_filter
+#print axioms HadwigerNelson.MajorityVote.exists_measurable_selector
+#print axioms HadwigerNelson.MajorityVote.ae_eq_measurable_of_majority
+#print axioms HadwigerNelson.SpectralInputs.mem_factorSets_of_ae_eq
+#print axioms HadwigerNelson.SpectralInputs.measureReal_prod_eq_integral_section
+#print axioms HadwigerNelson.SpectralInputs.measurable_measureReal_section
+#print axioms HadwigerNelson.SpectralInputs.integrable_measureReal_section
+#print axioms HadwigerNelson.SpectralInputs.integrable_section_var
+#print axioms HadwigerNelson.SpectralInputs.measureReal_mul_one_sub_le_symmDiff
+#print axioms HadwigerNelson.SpectralInputs.integral_section_var_le_add
+#print axioms HadwigerNelson.SpectralInputs.exists_fst_preimage_of_integral_section_var_eq_zero
+#print axioms HadwigerNelson.SpectralInputs.measurable_cylMap
+#print axioms HadwigerNelson.SpectralInputs.exists_cyl_of_subset
+#print axioms HadwigerNelson.SpectralInputs.univ_mem_cylSets
+#print axioms HadwigerNelson.SpectralInputs.isSetRing_cylSets
+#print axioms HadwigerNelson.SpectralInputs.generateFrom_cylSets
+#print axioms HadwigerNelson.SpectralInputs.integral_section_var_le_symmDiff_shift
+#print axioms HadwigerNelson.SpectralInputs.exists_fst_preimage_ae_eq_of_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.fibre_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.exists_measurableSet_prodFactorSigma_ae_eq
+#print axioms HadwigerNelson.SpectralInputs.contVec_prod_eq
+#print axioms HadwigerNelson.SpectralInputs.two_dvd_of_sq_add_sq_eq_four_mul
+#print axioms HadwigerNelson.SpectralInputs.re_im_of_mul_intCast_eq
+#print axioms HadwigerNelson.SpectralInputs.exists_odd_rep_of_unitVector
+#print axioms HadwigerNelson.SpectralInputs.exists_odd_rep_of_mem_unitRing
+#print axioms HadwigerNelson.SpectralInputs.intCast_zmod_two_of_odd
+#print axioms HadwigerNelson.SpectralInputs.parity_rep_unique
+#print axioms HadwigerNelson.SpectralInputs.exists_parityHom
+#print axioms HadwigerNelson.SpectralInputs.exists_signChar
+#print axioms HadwigerNelson.SpectralInputs.negCircle_trivial_bot
+#print axioms HadwigerNelson.SpectralInputs.countable_bot_subfield_real
+#print axioms HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot
+#print axioms HadwigerNelson.SpectralInputs.measurePreserving_shift_infinitePi
+#print axioms HadwigerNelson.SpectralInputs.contVec_prod_eq_coin
+#print axioms FS131I10F.control
