@@ -5926,3 +5926,101 @@ reason by the close.*
      relayed as K9's (`mk-k6d.py`; gate exit 0, 36 quotations). **To read at K9's hand-back**: `top5` against row 154's
      sentence — in particular that `ExistenceForm` records only that some colouring with `P` exists once a tight one does,
      not a relation between the two.
+
+535. **FS131-L10A done: wave 10's first pass is on `main` through the full gate — `c70a1cf8..002c921a`, a fast-forward; gated
+     commit `999cde4a`; `plans/` and `data/` only after it** (implementer, Opus; harness 538k by the task notice — past the
+     line, not to be resumed; record `plans/FS131-L10A-landing.md` Stages 1–6 with "Drafts for the front page"; report
+     `data/fs131/reports/FS131-L10A.md`; logs and receipts `data/fs131/l10a/`, tag `first`). **Landed**: `Arith/
+     CharacterColouring`, `SpectralInputs`, `StationaryRatio`, `StandingFive` — 253 hand-written theorems, 0 `sorry`; the
+     rows FS89-S0A-2, -S0A-10, -CL2, the erratum's `A`, J45-SP-oi, -SP-if, -N2, -N1 (c), -SI-4, X25B-P, -PZ, -L1,
+     TC1-STANDING-FIVE, each at [kernel] with its named hypotheses listed by name (its draft 5: eleven of 244 theorems take
+     one; none is an axiom). **The ruled tidies made** (rulings 494 (a), 507 (a)): two unread instance arguments dropped,
+     three rows now carry their general twins' statements and the twins are deleted; `StationarySet` entered as a carrier
+     of the vacuity scan (507 (d)). **The gate on `999cde4a`, every step exit 0**: build 0 warnings; `sorry` 0; doubled
+     names OK; axioms 5,809 records — 5,783 clean, 17 axiom-free, 4 imported, 5 purchases; vacuity `declarations=13767
+     refutations-skipped=192 sites=1173`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1130 unknown=2`; architecture,
+     lint, notes, records and row checks pass. **My receipt**: `origin/main` = `origin/fs131-w10l` = `b344490e` at the
+     hand-back, tree clean; `git diff --name-only 999cde4a origin/main` outside `plans/` and `data/`: empty; the gate's
+     head file names `HEAD=999cde4a…` and its pass summary reads exit 0 at every step; `sorry` by the handoff's grep over
+     `Proofs/` on `main`: 0 (the five "wide" lines are the word in docstrings, read); `data/fs131/l10a/build-main-full.log`
+     ends "Build completed successfully (5814 jobs)", 0 warnings; `scripts/gate_report.py axioms` and `vacuity` run by me
+     against the example maps' receipts — 5,809 records, 259 added and 0 removed, every added record CLEAN (254 on exactly
+     the three, three on `[propext, Quot.sound]`, one on `[propext]`, one on none), one declared import still
+     (`falconer_lemma2_nonempty`), `vacuous=0`, each recorded count "STALE" before the filing and "match" after;
+     `vacuity-selftest-first.log` l. 71 "all 65 controls behaved". Not checked by me: the sixteen statement comparisons
+     across the merges; the record's table of named hypotheses against the signatures. **Filed** (commit `c6990ba5`):
+     `CLAUDE.md` § Trust ledger and § The gate, `LEAN.md`'s control count (sixty-five), the `GATE_CHANGES` entry;
+     `tools/claude_md_fact_audit.py --base 1adf15ba` loses the thirteen superseded tokens only, `--dupes` exit 0.
+     **Open gate items it lists** (its draft 6): `sp_if` at `Interface.NegCircle` (closes with FS131-I10F's
+     `negCircle_trivial_bot`); `contChars_haar_null`, `spectral_carried_iff`, `si4`, `si4_equivariant` — no inhabitant
+     note and no model of all hypotheses at once; **`usable_card_ge` and `no_small_usable` bound a family the kernel does
+     not know non-empty** — no usable place of the field is exhibited in Lean. **Tool defect**: the vacuity scan's own
+     procedure cannot be met for a carrier that is empty at no instance (`StationarySet` has no `VACUOUS` control).
+     **Slips, the job's, disclosed** (five; its record), and one note: its loaded copy of `CLAUDE.md` showed counts two
+     landings old — it reconciled against the file on disk. **Credit**: one clean pass of the gate, every statement
+     change shown by script to be exactly the ruled ones, and the open gate items named instead of passed over.
+     **Rulings.** (a) **`StationarySet` stays a tracked carrier, as landed.** Alternative: out — one name removed,
+     three controls and their lines with it, counts back to 1137 sites. Why not now: it changes the scan's inputs on
+     `main` and needs its own pass; whether the procedure's law or ruling 507 (d) is right is the tooling job's fifth
+     question (ruling 475 (d)). Confidence: medium. (b) **Its three lines in `scripts/vacuity.sh` stand**: the
+     procedure's step (3) puts them there; the omission from its touches was my brief's — a slip of mine. (c) **Ruling
+     520 (a) is amended: a usable place of the field is owed as a Lean inhabitant, or the two theorems stay an open
+     gate item by name.** Wave 10's third planner states it as a leaf with a plan and a price (a prime above 347 of
+     residue degree 1, or any usable prime) and plans the notes or models for the four J45 heads; the docstring lines go
+     in at the second landing. Alternative: a docstring sentence only. Why: `LEAN.md`'s inhabitant rule is a gate
+     condition whether or not a row states the attainment; 520 (a) answered a different question (is it a row).
+     Confidence: medium-high. (d) Drafts 7–8 (`plans/LEAN-BACKLOG.md` states, `LEDGER.md`, the plan's § 7.4, the atlas
+     grades) are held for the milestone's filing with the other waves'. (e) **Wave 10's third planner merges `main`
+     into the second pass's line as its first act** (the four first-pass files come from `main`, which alone changed
+     them; registry files keep both), so its rows and read-backs are against the landed statements. Why: the tidies
+     changed three statements its level row reads. Confidence: medium-high. (f) **Slots → FS131-I10D** (the planes'
+     floor, `fs131-w10d`) **and FS131-I6D** (`FanBridge`'s existence half, `fs131-w6f`), launched 2026-10-06.
+
+536. **FS131-K9 done at its Stage 5: wave 9's first planning pass — all eleven rows disposed and stated, five proved; five
+     leaves left** (planner; harness 528k by the task notice — past the line; record `fs131-w9`'s
+     `plans/FS131-w9-kernel-plan.md` Stages 1–5; report `data/fs131/reports/FS131-K9.md`; commits `a624439a`, `67c86f8f`,
+     `045fada3`, `50c0edc5`; pushed, tree clean). **Modules**: `Plane/Reduction/Basic`, `Maps` (no `sorry`), `Uniform`
+     (3), `Plane/Classes/Bend` (1, `bendAny`), `QFree` (1). **Proved with nothing open beneath**: FS111-C-SIX-M at every
+     `k`; FS129-OR1-TOP5 at the class its argument reads, over `ReduceToMap P RegJ` (items 533–534); FS111-V0-CLEAN and
+     FS111-M2-REDUCE-C as one theorem (`exists_arcMap_of_arcBounded`); FS111-C1-PW over `WEqKLimit K k` and Q-NO.
+     **Stated**: FS111-C1-UNIF (three leaves), FS129-SR1-BENDANY (`bendAny`, the wave's long leaf); proved from `bendAny`
+     and not theorems until it is: -BENDLE3, -OR1-QFREE-CLASS, -SR3-QFREE-NS (over `GammaFreeEmptyNS`, wave 8's `emptyNS`);
+     -OR1-DISCF-NS over one small leaf. **No statement defect found; no row refuted.** **My receipt**: tip `50c0edc5`
+     equals `origin/fs131-w9`, tree clean; the last real build's full log (`build/gate/build/20261006T150218Z-802849.log`,
+     6 modules rebuilt) ends "Build completed successfully (5815 jobs)", 11 warnings, all `declaration uses sorry`;
+     `sorry` by the handoff's grep: 0, 0, 3, 1, 1 — the five; no `axiom`, no `native_decide`; doubled-name log exit 0;
+     877 lines added in five new files and three registry files, nothing else; `exists_arcMap_of_arcBounded` read at
+     `Reduction/Basic.lean` ll. 109–118 — an arc system, frontiers on it, an a.e. cover, null unit pairs per set, giving
+     a plane map with those arcs, valid, each region inside its class's interior: what item 533 (3) says, and no
+     tightness or colour count in it; `top5`, `ReduceToMap`, `RegA` read (item 534); `bendAny`'s statement read. Not
+     checked by me: the other proofs beyond the build; the dispositions against the arguments it says it read only
+     through entries. **Predictions scored** (its Stage 5): four of eleven wrong, one cause — the reductions were priced
+     against a narrower map class than the kernel's. **Slips, the job's, disclosed**: `debruijn-obligation-modeling`
+     not invoked (budget) — `bendAny`'s decomposition is from the reading; four docstrings named models not held,
+     corrected before the commit; four arguments read through entries only; the harness count not readable. **A tool
+     note**: wave 4's `ArcMap.InMK` reads `0 ≤ ρ` at `K = 0`, harmless there; a line for `LEAN.md` drafted. **Owed
+     before the wave's gate**: five models (its § 4.3, M1–M5). **Credit**: two rows found to be one theorem with none
+     of the cleaning the hand proofs carry, and the limit of my ruling 508 found and stated exactly.
+     **Rulings.** (a) **A short second planning pass, FS131-K9b, before the long leaf's implementer**: `bendAny`
+     through a fresh obligation-modeling pass, its fourth child's route read against wave 5's source (a twin of a
+     landed statement, if needed, is a message), then a split of its children that fits implementers' budgets — the
+     planner prices the leaf at 450–800k, above one implementer's line. **FS131-I9B** (`Reduction/Uniform`'s three
+     leaves and the models M1–M3 in a new module) can run at any time. Briefs not written. (b) **Both readings of
+     "simple" land for FS129-OR1-DISCF-NS and -QFREE-CLASS**, under the planner's names (the `_literal` form is the row
+     as filed). Alternative: choose one and delete the other. Why both: neither implies the other, each has a reader,
+     and one argument proves both. Confidence: high. (c) **The five models are a condition of the wave's gate, assigned
+     as its handoff has them**; one not built at an implementer's hand-back is an open gate item named in that report.
+     (d) The plan's § 7.4 additions, the `LEAN.md` line and the stub (FS107's compactness step) are held for the
+     filing. In flight after both hand-backs: 1 (I6C) + 1 (I10D) + 1 (I6D) = 3.
+
+537. **FS131-I6C, by message mid-job: two generalizations, neither a defect, no statement touched; ten of its eleven leaves
+     proved** (source: I6C's message to "main", 2026-10-06; its Stage 3 saved at `6276989f` on `fs131-w6c`, pushed — not
+     checked by me; the artifact is read at its hand-back). **(1)** `AeColouring.ae_one_colour_of_isConnected`
+     (FS131-E8-DELTA) does not read `hW : IsOpen W`: any connected set meeting no essential boundary and no cusp is a.e.
+     of one colour; the hypothesis stays, named in the proof. **(2)** `IsUnitCurve.chord`, `.sin_le_inner`,
+     `.strictMonoOn_dist` hold for length up to `π`, not only `π/2` (proved at `π` as children); `one_le_dist` does read
+     `π/2`. **State, by its word**: `Curve`'s six leaves and three of `LocalGraph`'s on the standard three;
+     `local_graph` the one leaf left, in work. One edit outside its two files' proofs, as the plan's row asked:
+     `LocalGraph` imports `Plane/Saturated/Fan`, with `ARCHITECTURE.md`'s cell. **Ruling**: both are generalizations
+     for the wave's errata, statements unchanged (ruling 419 (c): an unread hypothesis a ruling kept stays, read by
+     `have _ :=`); no reply sent — it asks nothing, and a message would bill a working mind for an acknowledgement.

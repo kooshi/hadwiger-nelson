@@ -14,11 +14,11 @@ brief: FS131-K10c
   channel: message the coordinator ("main") by SendMessage mid-job — **at once and before anything else if the page does not state what `KloostermanBound` states** (with the page's words and the difference: a hypothesis it carries and ours lacks, a case it excludes, a constant), and for a statement defect in a row (with the entry's address and the line of the argument), a change you find you need in a module that is fixed (below), a generalization or a shorter route, any further outside theorem you would import, or a question you cannot work around; the report goes to `data/fs131/reports/FS131-K10c.md` on your branch, and its text is your final message (if the harness refuses that file, say so and the coordinator files it from your hand-back)
   standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full (§ Assumptions and § Trust ledger: what an imported theorem carries and how the audit reads it; § The gate: the inhabitant rule and the doubled-name check; § Searching — Lean, last bullet), and `RUNNING.md` § Building before your first build
   record: `plans/FS131-w10-kernel-plan.md` (on branch `fs131-w10k`; the two passes' record — your stages from 10, headed FS131-K10c)
-  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10k` (branch `fs131-w10k`, at `330d2f48`): **new modules only** under `Proofs/HadwigerNelson/Arith/` (the import in a module of its own, which imports the floor's modules and nothing imports back), with `Proofs.lean` and `ARCHITECTURE.md` for them — `ARCHITECTURE.md` § Trust for the import's line; `scripts/Axioms.lean` (a block of your own, headed "FS131-K10c", and the import's registration where the audit's existing imported entries are registered), `plans/FS131-w10-kernel-plan.md`, `tools/fs131_k10c_*.py`, `data/fs131/k10c/`, `data/fs131/reports/FS131-K10c.md`; **not** the wave's fourteen existing modules (the four of the first pass are being landed on `main` by another job; the ten of the second pass are fixed — three implementers are proving them on branches cut from this one: a statement you need there is a message, a lemma beside them goes in a module of yours), any landed module beyond new declarations, `main`, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`, `BIBLIOGRAPHY.md` (drafts for those go in your record; I file them)
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10k` (branch `fs131-w10k`, at `330d2f48`): the one merge this brief names, then **new modules only** under `Proofs/HadwigerNelson/Arith/` (the import in a module of its own, which imports the floor's modules and nothing imports back), with `Proofs.lean` and `ARCHITECTURE.md` for them — `ARCHITECTURE.md` § Trust for the import's line; `scripts/Axioms.lean` (a block of your own, headed "FS131-K10c", and the import's registration where the audit's existing imported entries are registered), `plans/FS131-w10-kernel-plan.md`, `tools/fs131_k10c_*.py`, `data/fs131/k10c/`, `data/fs131/reports/FS131-K10c.md`; **not** the wave's fourteen existing modules (the four of the first pass are landed on `main` and reach your branch whole by that merge; the ten of the second pass are fixed — three implementers are proving them on branches cut from this one: a statement you need there is a message, a lemma beside them goes in a module of yours), any landed module beyond new declarations, `main`, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`, `BIBLIOGRAPHY.md` (drafts for those go in your record; I file them)
   budget: about 400k by the harness's count, as guidance; hand back at a saved stage before about 500k — read your token count at every saved stage
 
 Hello. You are finishing the plan of wave 10, the arithmetic wave of the Lean backlog. The milestone, FS-131, turns this project's
-hand-derived results into kernel-checked ones; waves 1–5 are on `main`, and wave 10's first four files are being landed as you start. Its
+hand-derived results into kernel-checked ones; waves 1–5 are on `main`, and so, since today, are wave 10's first four files. Its
 second planner stated the *finite-target floor* — certain finite graphs need seven colours, which a theorem about a degree-28 field leans
 on — as two rows. One of them rests on a classical inequality, Weil's bound for Kloosterman sums, which stands in Lean as a named
 hypothesis (`KloostermanBound`) because no page stating it had been read. The page is now held. Reading it against the Lean statement is
@@ -53,6 +53,9 @@ What the earlier passes handed back and the rulings in force (read each item who
 > — source: plans/FS131-close-inventory.md
 
 > 507. **Rulings on I10B's held items, and its slot.** (a) **The seven unread arguments are dropped at the join, as ruling 494 (a) has
+> — source: plans/FS131-close-inventory.md
+
+> 535. **FS131-L10A done: wave 10's first pass is on `main` through the full gate — `c70a1cf8..002c921a`, a fast-forward; gated
 > — source: plans/FS131-close-inventory.md
 
 The milestone's plan binds every wave's planning job (read its §§ 7.1–7.5 whole):
@@ -149,8 +152,13 @@ match, the model the second pass proved, the three theorems that carry the hypot
 
 1. **Your readback first**: check every quotation above against its source; read the two passes' record whole (Stages 1–9), the floor's
    modules (`FloorPlanes`, `NormOneTarget`, `TargetFloors`, `RatioBound`), and the plan's §§ 7.1–7.5. Build the branch once as given (its
-   `sorry` leaves are the three implementers'; none is yours). Open your stages in the record with what you may and may not change. Commit
-   and push.
+   `sorry` leaves are other jobs'; none is yours). Open your stages in the record with what you may and may not change. Commit and push.
+   **Then merge `origin/main` into your branch — the one merge this brief asks.** It brings the first pass as landed, with the tidies of
+   its landing (inventory item 535: two instance arguments dropped, three rows of `StationaryRatio` carrying their general statements,
+   the `_of_symm` / `_of_shrink` twins deleted). Your branch never edited those four files, so they come from `main` whole; `Proofs.lean`,
+   `ARCHITECTURE.md` and `scripts/Axioms.lean` keep both sides. After it: the build, `./scripts/dupnames.sh`, a statement check on the
+   second pass's ten modules (none may move), commit, push. A second-pass module that does not build against the landed statements is a
+   message to me with the call site, not an edit.
 2. **The page against the statement** — before any Lean. In your record, side by side: the page's hypotheses and inequality in its own
    words (the field, the characteristic, the character, the condition on the two coefficients, the range of summation, the constant), and
    `KloostermanBound F` clause by clause; then every way they could differ, each settled from the page — the characteristic (rulings 500,
@@ -176,8 +184,12 @@ match, the model the second pass proved, the three theorems that carry the hypot
    finite quotient graph, in the form X25B-T's chain reads, which nobody has opened — settle it from the entry, or send it back as a
    deriver's question. Each with `sorry` at its leaves, read back against its row, with its inhabitant or vacuity line.
 5. **The read-backs.** None of the second pass's three implementers is back at this writing; I will send you each branch's tip by message as it hands back. Read their new *statements* (helpers and models, not proofs) against the sentences they serve, as the second pass did for the first two implementers (its §§ 6.4, 8.6); what is not back by your last stage is named in your handoff. Also the first pass's third implementer's twelve new statements in `StandingFive` (ruling 520 (b); on
-   `origin/fs131-w10c`, and on `main` once the first landing is in), and whether `NumberField standingField` becomes a global instance
-   there — a recommendation with its reason; the edit, if any, is the second landing's.
+   `main` now), and whether `NumberField standingField` becomes a global instance
+   there — a recommendation with its reason; the edit, if any, is the second landing's. **Two open gate items the
+   landing named are yours to plan** (ruling 535 (c)): a usable place of the standing field as a Lean inhabitant, stated as a leaf with a
+   plan and a price (the landing's record, `plans/FS131-L10A-landing.md`, draft 6: `usable_card_ge` and `no_small_usable` bound a family the
+   kernel does not know non-empty); and for `contChars_haar_null`, `spectral_carried_iff`, `si4` and `si4_equivariant` the inhabitant note
+   each docstring owes, with a model stated as a leaf where one exists. The docstring edits themselves are the second landing's.
 6. **The skeleton**: builds through the worktree's `./scripts/build.sh` with only `sorry` warnings; `Proofs.lean`, `ARCHITECTURE.md`
    (`tools/check_architecture.py` exit 0) and `scripts/Axioms.lean` updated; no `axiom` but the one import, no `native_decide`;
    `./scripts/dupnames.sh` on your tree — no name declared by two modules (the second pass's § 9.4 lists the names it declared in existing
