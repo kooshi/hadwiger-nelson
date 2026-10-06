@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Limit
 import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
+import Proofs.HadwigerNelson.Plane.ValidMap.OpenMove
 
 /-!
 # The terminal procedure: FS112-N2-RED's bends with FS110-N4-TERM's moves, as one locally finite sequence (FS131-KL1)
@@ -7,16 +8,17 @@ import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 Wave 5's construction behind `exists_red` and `exists_terminal` (`plans/FS131-limit-kernel-plan.md` §§ 3–4): **every valid map of the
 plane has a modification that is a terminal valid map** (`exists_terminalMap`, every `k`). Clean the map (`exists_clean`), then run
 one procedure over its *treatment points* (`treatPts`: the sites and the centres of unit arcs, never created afterwards): at the
-least-index point with something to do, apply a **vertex step** (MERGE, MERGE-RAY or SHAVE at a site, then cleaned: its degree drops,
-`exists_vertexStep`) or an **arc step** (a toward or away bend of a maximal bad unit arc, then cleaned: the point's count of maximal
-bad arcs drops, `exists_arcStep`). A site is treated at most its initial degree times; a centre's bad count rises only at the finitely
-many vertex steps within distance `3` and at the at most `k` stages where it loses a colour, so it too is treated finitely often
+least-index point with something to do, apply a **vertex step** (MERGE, MERGE-RAY, SHAVE or OPEN at a site, then cleaned: its
+potential, degree plus number of horns, drops — FS131-E6-ROUTE, inventory items 382–385; `exists_vertexStep`) or an **arc step** (a
+toward or away bend of a maximal bad unit arc, then cleaned: the point's count of maximal bad arcs drops, `exists_arcStep`). A site is
+the centre of at most its initial potential many vertex steps; a centre's bad count rises only at the finitely many vertex steps
+within distance `4` and at the at most `k` stages where it loses a colour, so it too is treated finitely often
 (`exists_terminalSeq`). The supports are then locally finite, and the limit (`Plane/ValidMap/Limit`) is the terminal map.
 
-**Where the steps' proofs live** (inventory items 371–372): `exists_vertexStep` and `exists_arcStep` read the moves' constructions —
-`main`'s `Moves` (`exists_shave_aux`, `exists_rayMerge_aux` through `Near.move`), `MergeMove` (`exists_merge_aux`) and `UnitArc`
-(`bend_toward`, `bend_away_whole`, the N2-TAN bend) — followed by `exists_clean`; they are stated here and proved after this branch
-merges `main`, in this module with those imports (or a module between them; the plan's § 4.3). Until then they are `sorry`.
+**Where the steps' proofs live** (inventory items 371–372, 411): `exists_vertexStep` and `exists_arcStep` read the moves' constructions —
+`Moves` (`exists_shave_aux`, `exists_rayMerge_aux` through `Near.move`), `MergeMove` (`exists_merge_aux`), `OpenMove` (`exists_open`) and
+`UnitArc` (`bend_toward`, `bend_away_whole`, the N2-TAN bend) — followed by `exists_clean`; they are stated here, and are `sorry` until
+proved from those constructions (the plan's § 3.3; new declarations downstream only).
 -/
 
 namespace HadwigerNelson.Plane
@@ -567,23 +569,32 @@ theorem mergeAvailable_of_bothKind (hF : F.Valid) (hP : F.IsPlaneMap) {P : ℂ} 
 
 /-! ## The two steps (the strengthened moves, cleaned) -/
 
-/-- **The vertex step** (MERGE, MERGE-RAY or SHAVE at a site, then `exists_clean`): at a point of a clean valid map where a move is
-available, for every bound `δ > 0`, a clean valid modification that is a local step on `B̄(v, ρ)`, `ρ < δ`, in which `v`'s degree
-drops, `v` gains no colour, and no other point of the disc is a site. Proof after the merge with `main`: the move's construction
-(`exists_merge_aux`, `exists_rayMerge_aux`, `exists_shave_aux` — `Near.move`/`surgery`, whose arcs are `trimArcs` plus new arcs in the
-disc: `LocalStep` from `trimArcs_spec`), then `exists_clean` (which drops the kept germs that now have one colour on both sides and
-the one-coloured parts of the rim circle — FS131-KL1's finding: without it SHAVE raises `v`'s degree). -/
+/-- **The vertex step** (FS131-E6-ROUTE: MERGE; else MERGE-RAY; else SHAVE where the horn's colour has an allowed cone with empty
+interior; else OPEN — each followed by `exists_clean`): at a point of a clean valid map where a move is available, for every bound
+`δ > 0`, a clean valid modification that is a local step on `B̄(v, ρ)`, `ρ < δ`, in which `v`'s **potential — its degree plus its
+number of horns — drops**, `v` gains no colour, and no other point of the disc is a site. The degree alone need not drop: at
+FS131-E6's twelve-colour model (a lone horn shaveable only along a unit circle) no local step lowers it (E6-NODROP), and OPEN removes
+the horn at the same degree. Route: with MERGE available, `exists_merge_aux`; else two horns of one colour along one ray have outer
+bounds in `[−1, 1]` (`horn_bounds_of_noMerge`), `exists_rayMerge_aux`; else SHAVE is available through a `c`-horn — if
+`int D_c(v) = ∅` its bounds lie in `[−1, 1]` (`horn_bounds_of_interior_empty`), `exists_shave_aux`; otherwise `c` has one sector there
+(two would make MERGE available) and `exists_open` applies. Then `exists_clean` (it drops the kept germs that now have one colour on
+both sides and the one-coloured parts of the rim — FS131-KL1's finding: without it SHAVE raises `v`'s degree). `LocalStep` is read
+off each construction's `surgery` (`trimArcs_spec`). No Lean model of the hypotheses is on file (a clean valid map with a move
+available at a point): FS131-E6's twelve-colour map (derivation §§ 3.1–3.3) satisfies them at [hand] grade, as `exists_open`'s note says. -/
 theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : v ∈ F.dom)
-    (hav : F.MergeAvailable v ∨ F.RayAvailable v ∨ F.ShaveAvailable v) {m : ℕ} (hdeg : F.HasDegree v m) {δ : ℝ} (hδ : 0 < δ) :
+    (hav : F.MergeAvailable v ∨ F.RayAvailable v ∨ F.ShaveAvailable v) {m j : ℕ} (hdeg : F.HasDegree v m)
+    (hhorn : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :
     ∃ ρ, 0 < ρ ∧ ρ < δ ∧ ∃ F' : ArcMap k, F'.Valid ∧ F'.IsClean ∧ LocalStep F F' (closedBall v ρ) ∧ F.IsModification F' ∧
-      (∃ m' < m, F'.HasDegree v m') ∧ F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F'.IsSite x := by
+      (∃ m' j', m' + j' < m + j ∧ F'.HasDegree v m' ∧ F'.HasHornCount v j') ∧
+      F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F'.IsSite x := by
   sorry
 
 /-- **The arc step** (a bend of a maximal bad unit arc, then `exists_clean`): at a maximal unit arc about `P`, neither (Q) nor (R2),
 whose side colours are not both carried at `P`, for every `δ > 0` and every locally finite set `T` (the treatment points), a clean
 valid modification that is a local step on the closed `ε`-neighbourhood of the arc, `ε < δ`, lowering `P`'s bad count, creating no
-site and changing no site's degree, and at every other point of `T` adding no colour and — unless it loses one — raising no bad
-count. The toward bend (`bend_toward`) when the outer colour is absent at `P`; else the away bend (`bend_away_whole`, or N2-TAN's
+site, changing no point's degree and raising no point's horn count (FS131-E6's clause, inventory item 385 (a): the bent curve must
+not become tangent to another arc at an end vertex — a choice of the bend's profile), and at every other point of `T` adding no
+colour and — unless it loses one — raising no bad count. The toward bend (`bend_toward`) when the outer colour is absent at `P`; else the away bend (`bend_away_whole`, or N2-TAN's
 tangent bend on the parts of the arc with no radius-2 witness). **The last clause is FS131-KL1's question (5)** (inventory item 372):
 a bend's lens never cuts another arc's (R2) witness — a witness arc `R₂(β)` cannot cross the bent arc's open part, since past it
 `R₂(β)` would lie in the outer tile, outside the closure of the inner colour's class (one mind's sketch; this child is its check). -/
@@ -595,6 +606,7 @@ theorem exists_arcStep (hF : F.Valid) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ : 
       LocalStep F F' (cthickening ε (ringArc P θ₁ θ₂)) ∧ F.IsModification F' ∧
       F'.badCount P < F.badCount P ∧ (∀ x, F'.IsSite x → F.IsSite x) ∧
       (∀ x m, F.HasDegree x m → F'.HasDegree x m) ∧
+      (∀ x j, F.HasHornCount x j → ∃ j' ≤ j, F'.HasHornCount x j') ∧
       ∀ Q ∈ T, Q ≠ P → F'.coloursAt Q ⊆ F.coloursAt Q ∧
         (F'.coloursAt Q = F.coloursAt Q → F'.badCount Q ≤ F.badCount Q) := by
   sorry

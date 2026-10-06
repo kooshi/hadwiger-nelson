@@ -610,3 +610,44 @@ blocks, ours first, one blank line between. The other 40 files are `fs131-wop`'s
 No statement of either side changed; no `axiom`, no `native_decide`.
 
 ## Stage 13 — SAVED (FS131-IR1)
+
+## Stage 14 — SAVED (FS131-IR1): the two steps restated (rulings 383 (b), 385 (a)); both still `sorry`
+
+**`exists_vertexStep`** — E6's draft (§ 4.5 (2)) taken as it stands; the diff of the statement (`data/fs131/ir/restate.diff` has the whole file's):
+
+```
+-    (hav : F.MergeAvailable v ∨ F.RayAvailable v ∨ F.ShaveAvailable v) {m : ℕ} (hdeg : F.HasDegree v m) {δ : ℝ} (hδ : 0 < δ) :
++    (hav : F.MergeAvailable v ∨ F.RayAvailable v ∨ F.ShaveAvailable v) {m j : ℕ} (hdeg : F.HasDegree v m)
++    (hhorn : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :
+     ∃ ρ, 0 < ρ ∧ ρ < δ ∧ ∃ F' : ArcMap k, F'.Valid ∧ F'.IsClean ∧ LocalStep F F' (closedBall v ρ) ∧ F.IsModification F' ∧
+-      (∃ m' < m, F'.HasDegree v m') ∧ F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F'.IsSite x := by
++      (∃ m' j', m' + j' < m + j ∧ F'.HasDegree v m' ∧ F'.HasHornCount v j') ∧
++      F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F'.IsSite x := by
+```
+
+**`exists_arcStep`** — one clause added after the degree clause, nothing else changed:
+
+```
+       (∀ x m, F.HasDegree x m → F'.HasDegree x m) ∧
++      (∀ x j, F.HasHornCount x j → ∃ j' ≤ j, F'.HasHornCount x j') ∧
+       ∀ Q ∈ T, Q ≠ P → F'.coloursAt Q ⊆ F.coloursAt Q ∧
+```
+
+Docstrings: the vertex step's now names the four moves in E6-ROUTE's priority order (MERGE; else MERGE-RAY; else SHAVE where `int D_c(v) = ∅`; else
+OPEN), says why the potential and not the degree (E6-NODROP), and carries an inhabitant note (no Lean model on file; E6's map at [hand]); the arc
+step's names the horn clause and its reason (ruling 385 (a)); the module header reads "potential" and distance `4`. `Procedure` now imports
+`Plane/ValidMap/OpenMove` (for `HasHornCount`); `ARCHITECTURE.md`'s row's Imports cell updated — `tools/check_architecture.py` PASS
+(`data/fs131/ir/arch-stage14.txt`), and with the new import taken out of the cell it FAILED naming `Plane/ValidMap/Procedure`
+(`arch-stage14-control.txt`), then PASS again on the restored row.
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 6 modules rebuilt, 5 with warnings, all 9 warnings `declaration uses
+'sorry'`** (`Procedure` at `exists_vertexStep`, `exists_arcStep`, `exists_terminalSeq`; `Terminal` at `stuckRun_ne_univ`; `BaseDense` 3, `BendCollar`
+1, `HexRing` 1, none mine), 9 min 11 s, exit 0 (`build/gate/build/20261006T025905Z-360384.log`; driver log `data/fs131/ir/build-stage14-restate.log`).
+
+**The drafts settled against the kernel before this stage was saved** (iteration, `data/fs131/ir/scratch/Seq.lean`; the real build is Stage 15's):
+`exists_terminalSeq` elaborates over exactly these two statements, so **E6's draft of the vertex step and the horn clause of the arc step need no
+further change for their consumer**. Two things the consumer reads that the statements do not state, both derived from `LocalStep`: the colours at
+`P` after an arc step at `P` (the support, within `ε < 1/2` of `ω(P)`, misses `P`), and every clause at treatment points off a vertex step's disc
+(sectors, horns, sites and colours are read in small balls; the bad count in `B̄(·, 3)`).
+
+## Stage 14 — SAVED (FS131-IR1)
