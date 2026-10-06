@@ -3870,7 +3870,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.dist_le_one_of_touch
 #print axioms HadwigerNelson.Plane.ArcMap.l60_tile_dist_ne_one
 #print axioms HadwigerNelson.Plane.ArcMap.l60_side_tile
-#print axioms HadwigerNelson.Plane.ArcMap.cos_nonpos_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.cos_nonpos_of_coneAt_of_disjoint
 #print axioms HadwigerNelson.Plane.ArcMap.mem_angleIcc_of_two_cos
 #print axioms HadwigerNelson.Plane.ArcMap.mem_closure_ringArc_diff_finite
 #print axioms HadwigerNelson.Plane.ArcMap.ringArc_subset_Γ_of_finite
@@ -4548,7 +4548,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.filledGraph_reachable_of_subset
 #print axioms HadwigerNelson.Plane.ArcMap.eq_or_subset_hole_of_inter
 #print axioms HadwigerNelson.Plane.ArcMap.subset_fill_of_inter
-#print axioms HadwigerNelson.Plane.ArcMap.IsOuterTile.disjoint_closure_fill
+#print axioms HadwigerNelson.Plane.ArcMap.IsOuterTileAt.disjoint_closure_fill
 #print axioms HadwigerNelson.Plane.ArcMap.reachable_offTwo_of_inter
 #print axioms HadwigerNelson.Plane.ArcMap.subset_compl_of_inter_compl
 #print axioms HadwigerNelson.Plane.ArcMap.subset_compl_of_mem_offTwo
@@ -6668,6 +6668,31 @@ inventory item 508). Waves 8 and 9 merge the commit that adds this block. -/
 #print axioms HadwigerNelson.Plane.halfDisc_simpleOn
 #print axioms HadwigerNelson.Plane.ArcMap.not_simpleOn_of_not_jordan
 -- FS131-K7 block end (Plane/SimpleOn)
+
+/-! ## FS131-K8 — FS-131 wave 8's planner: the ring calculus (`Plane/RingCalculus/Basic`, `Star`, `Empty`). The foundation
+and the rows proved at the planning pass; the `sorry` leaves (`star_recip`, `star_anti`, and `Empty`'s eight) join this block as
+their implementers close them. -/
+-- FS131-K8: Plane/RingCalculus/Basic
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_inter_eq
+#print axioms HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_dist_lt
+#print axioms HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_tipColours_outerTileColours
+#print axioms HadwigerNelson.Plane.ArcMap.isTip_comm
+#print axioms HadwigerNelson.Plane.ArcMap.tipColours_comm
+#print axioms HadwigerNelson.Plane.ArcMap.mem_outerTileColours_iff
+#print axioms HadwigerNelson.Plane.ArcMap.cos_nonpos_of_coneAt_of_disjoint
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_subset_of_subset_closedBall
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_subset_of_disjoint_ball
+#print axioms HadwigerNelson.Plane.ArcMap.inter_ball_nonempty_of_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_not_mem_closedBall_of_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.inter_ball_nonempty_of_inward_cone
+#print axioms HadwigerNelson.Plane.ArcMap.IsTip.coneAt_subset
+#print axioms HadwigerNelson.Plane.ArcMap.isHub_iff
+#print axioms HadwigerNelson.Plane.ArcMap.GammaFreeRing.qFreeRing
+#print axioms HadwigerNelson.Plane.ArcMap.QFreeRing.isHub
+#print axioms HadwigerNelson.Plane.GermIn.ringPt_mem_closure
+#print axioms HadwigerNelson.Plane.halfPlane2_gammaFreeRing
+-- FS131-K8 block end (Plane/RingCalculus)
 
 #eval IO.println "=== PURCHASED ==="
 
