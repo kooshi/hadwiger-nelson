@@ -1,0 +1,23 @@
+counter vs the main scan: declarations 13386 / 13386, refutations 192 / 192: agree
+counter vs the landing scan: declarations 13767 / 13767, refutations 192 / 192: agree
+added-evidence EVIDENCE WITNESS HadwigerNelson.StationaryRatio.StationarySet.parity :: HadwigerNelson.StationaryRatio.StationarySet (ZMod 2)
+main rows 1217, landing rows 1254; lost 0 (0 with a removed declaration); added 37
+  added EVIDENCE WITNESS on (evidence): 1
+  added SITE GENERIC on StationarySet: 35
+  added SITE WITNESSED on StationarySet: 1
+  added rows in Arith.StationaryRatio: 37
+  declarations: 13386 -> 13767 (+381)
+  refutations-skipped: 192 -> 192 (+0)
+  sites: 1137 -> 1173 (+36)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 37 -> 38 (+1)
+  generic: 1095 -> 1130 (+35)
+  unknown: 2 -> 2 (+0)
+  module Arith.CharacterColouring: declarations 0 -> 39 (+39), refutations 0 -> 0 (+0)  [new module]
+  module Arith.SpectralInputs: declarations 0 -> 100 (+100), refutations 0 -> 0 (+0)  [new module]
+  module Arith.StandingFive: declarations 0 -> 161 (+161), refutations 0 -> 0 (+0)  [new module]
+  module Arith.StationaryRatio: declarations 0 -> 81 (+81), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +381, refutations +0: equal to the scans difference
+vacdiff: PASS

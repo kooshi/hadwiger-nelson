@@ -266,3 +266,151 @@ missing; the look-up's control, a cited name misspelt, fired). `tools/check_arch
   refutation**.
 
 ## Stage 4 — SAVED (FS131-L10A)
+
+## Stage 5 — SAVED (FS131-L10A): the full gate on `999cde4a` — green at every step
+
+**The gated commit is `999cde4a`**: Stage 4's tree (`main` at `294603ae` merged in) with the registrations of § 5.1. Runner
+`data/fs131/l10a/run-pass.sh first` → the build, the kernel's list, `run-gate.sh first` (FS131-MC1's runner with its log directory
+changed), then the two reconciliations and the digests — each step under the slot, each driver log ending in its exit status.
+`data/fs131/l10a/run-gate-first.head` records `HEAD=999cde4a…` and **no tracked file modified**; `run-pass-first.out` reads exit 0
+at every step. One pass: nothing was repaired between a red and a green.
+
+### 5.1 What this job registered, by the gate's own procedures
+
+- **`scripts/Axioms.lean`**: a block "FS131-L10A" of **128 records** — every theorem of the four modules that the planner's and
+  the three implementers' blocks did not list (`CharacterColouring` 11, `SpectralInputs` 43, `StandingFive` 74; `StationaryRatio`
+  none). The list is read from the kernel's own list of the library's theorems, not from the source
+  (`tools/fs131_l10a_register.py` on `data/fs131/l5/count-modules.lean`'s two outputs; `data/fs131/l10a/register-before.txt`,
+  `register-after.txt`: MISSING 128 → 0, STALE 0; its self-test: a record removed reads MISSING, a record naming nothing reads
+  STALE). 5,809 `#print axioms` lines = `main`'s 5,550 + the wave's 259.
+- **`scripts/Vacuity.lean`**: the entry "Wave 10's first pass (FS131-L10A …)", by the scan's procedure. The four modules declare
+  ten hypothesis-formers (`data/fs131/l10a/census.lean`, wave 5's census with its scope changed; `census.out`); none has an
+  unconditional `¬ P` or an `IsEmpty` at a closed instance.
+  - **IN, by ruling 507 (d): `StationaryRatio.StationarySet`**, added to `trackedProps`, with its inhabitants named
+    (`StationarySet.empty`, `StationarySet.parity`, and `cantorLevel` for X25B-L1's other hypotheses). **The entry says what the
+    procedure's own law says of it**: a record that exists at every group by construction, so step (1) alone would leave it OUT,
+    and **step (3)'s `VACUOUS` control cannot be planted** — no instance of it is empty. What entering it buys: a theorem taking
+    it at a concrete group reads `UNKNOWN` until a closed inhabitant at that group is a declaration.
+  - **OUT, nine**: `StationarySet.AEIndependent`; the named hypotheses `OrderBound`, `StandingFloor`, `TargetFloor` (closed
+    propositions consumed as such — tracked, `cl2`'s `OrderBound (unitSet ⊥) (band 4) 168` and `StandingFloor 7`, `StandingFloor 5`
+    would read `UNKNOWN`, true of a hand result not yet in the kernel and nothing the shrink-only baseline can hold: the `Row130M1`
+    precedent); `BochnerOn`, `IsHaarFourier`, `IsSpectralMeasureOf`; `Interface.MulStable`, `Interface.NegCircle`.
+- **`scripts/vacuity-controls.lean`, and three `expect` lines in `scripts/vacuity.sh`**: controls 63–65 — `GENERIC` at a variable
+  group, `WITNESSED` at `ZMod 2` (by `parity`), `UNKNOWN` at `ℤ` (inhabited by `empty ℤ`, a construction the scan does not read:
+  the load-bearing half). The self-test now plants 65.
+- **`scripts/vacuity-baseline.txt`**: the header's two count lines, from `scripts/gate_report.py header`. **No entry added.**
+- `scripts/axioms-controls.txt`: unchanged — the landing declares no axiom and no import, so the controls' counts (`imported=4`,
+  `declared=1`, `library=1`) are the library's still, and the self-test is green as it stands.
+- `ARCHITECTURE.md`, `Proofs.lean`: Stage 3's rows; the merge's four imports.
+
+### 5.2 The steps, each saved log read
+
+| step | result | log (`data/fs131/l10a/`) |
+|---|---|---|
+| build | `build: OK — all 1805 modules already up to date, nothing built, 0 module(s) with warnings`, exit 0; the full build of these Lean sources is Stage 4's: 467 of 467 batches, "Build completed successfully (5814 jobs)", **0 `warning` lines** | `build-first.log`; `build-main.log`, `build-main-full.log` |
+| `sorry` | narrow pattern: **0** lines; `\bsorry\b`: 5, all prose, the five `main` holds (`Packed` l. 266, `Plane/Cover` l. 33, `Plane/CoverExamples` l. 13 and 6541, `BendStep` l. 345) | `sorry-narrow-first.txt`, `sorry-wide-first.txt` |
+| doubled names, **before the audit** | **"dupnames: OK — no name is declared by two modules (23 generated on demand, listed above)"** | `dupnames-first.log`, `receipt-dupnames-first.log` |
+| its self-test | "OK — all 15 controls behaved: every planted fault fired, and every partner passed." | `dupnames-selftest-first.log` |
+| axioms | **"axioms: OK — 5783 clean, 17 axiom-free, 4 imported, 5 declared purchase(s)"**; "audited: 5809 records" | `axioms-first.log`, `receipt-axioms-first.log` |
+| its self-test | "OK — every planted fault fired, and every partner passed." (23 controls) | `axioms-selftest-first.log` |
+| vacuity | **"vacuity: OK"**; `declarations=13767 refutations-skipped=192`, `sites=1173 vacuous=0 stale=0 declared=3 witnessed=38 generic=1130 unknown=2`; baseline header "match (9 of 9 compared)" | `vacuity-first.log`, `receipt-vacuity-first.log` |
+| its self-test | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent." | `vacuity-selftest-first.log` |
+| architecture | "RESULT: PASS", exit 0 | `arch-first.txt` |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "Passed!" | `lint-first.log` |
+| notes | `notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58`, **0 CONFLICT** — `main`'s own count: the check reads the plane's audited modules, which this landing does not touch, and none of the four `Arith` files; `tools/fs131_qa4_notes.py --self-test`: "OK (6 controls, 1 planted)" | `notes-first.txt` (through `tools/fs131_l5_notes.py`, as the last two landings ran QA4's tool), `notes-qa4-selftest-first.txt` |
+
+### 5.3 The axioms, reconciled
+
+- **Against `main`'s gated audit** (`data/fs131/mc/receipt-axioms-final2.log`, 5,550 records) by `scripts/gate_report.py axioms`
+  (`digest-axioms-draft.txt`): **259 records added, every one CLEAN; 0 removed; 0 changed.** By axiom set: 254 on exactly
+  `[propext, Classical.choice, Quot.sound]`, 3 on `[propext, Quot.sound]` (`coe_inclusion_subring`, `anyBelow_of`, `twoZ_ne_bot`),
+  1 on `[propext]` (`usableBelow_347`, the `decide +kernel` below 347), 1 on no axiom (`squaresBelow_11`). 5,550 + 259 = 5,809;
+  clean 5,525 + 258 = 5,783; axiom-free 16 + 1 = 17. Imported 4 and purchases 5 unchanged: the wave has no `axiom` and no
+  `native_decide`.
+- **Every theorem of the landing is audited** (`tools/fs131_l5_records.py` on the kernel's own list, `count-modules-first.out`
+  against `data/fs131/mc/count-modules-final2.out`; `records-first.txt`, PASS): the library holds 8,956 theorems against `main`'s
+  8,677 — 279 new, 0 gone; 26 are generated by Lean (`eq_1` 19, `eq_2`, `eq_def`, `congr_simp` 2, `mk.inj`, `mk.injEq`,
+  `mk.sizeOf_spec`); **the 253 hand-written each have exactly one record under CLEAN: 248 on exactly the three, 3 on
+  `[propext, Quot.sound]`, 1 on `[propext]`, 1 on none** — `CharacterColouring` 24, `SpectralInputs` 78, `StandingFive` 107,
+  `StationaryRatio` 44. The other six of the 259 records are definitions that carry proofs, listed by I10B's block (`StationarySet.nb`,
+  `pull`, `couple`, `majority`, `parity`, `cantorLevel`), each on the three.
+- **The heads**, each "exactly the standard three" in that check — the 21 leaves of the skeleton (the list read from `f919973e` by
+  script, Stage 2), the planner's three compositions over them, and the planner's proved rows with `si4_equivariant`: 32 names,
+  `data/fs131/l10a/heads.txt`.
+
+### 5.4 The vacuity counts, reconciled — and how the scan classes every new site
+
+- **The counter agrees with both scans** (`tools/fs131_l5_vacdiff.py … --carriers-in
+  HadwigerNelson.StationaryRatio.StationarySet`, `vacdiff-first.txt`, PASS): `declarations` 13,386 → 13,767 (+381:
+  `CharacterColouring` 39, `SpectralInputs` 100, `StandingFive` 161, `StationaryRatio` 81 — four new modules, no count of a
+  module of `main` changed); `refutations-skipped` 192 → 192 (the wave states no refutation).
+- **Row for row against `main`'s gated scan** (1,217 rows): **0 rows lost; 37 added, every one in `Arith/StationaryRatio` and on
+  the carrier `StationarySet`**:
+  - **35 `SITE GENERIC`** — the 32 binders `(W : StationarySet G)` of the module's declarations, each at a variable group, and
+    the three constructions concluding one at a variable group (`StationarySet.empty`, `pull`, `couple`). `generic` 1,095 → 1,130;
+  - **1 `SITE WITNESSED`** — `StationarySet.parity : StationarySet (ZMod 2)`, a closed instance, witnessed by itself. `witnessed`
+    37 → 38;
+  - **1 `EVIDENCE WITNESS`** — `StationarySet.parity`.
+  `sites` 1,137 → 1,173 (+36). **No new site reads `VACUOUS`, `STALE` or `UNKNOWN`; nothing asks for a baseline entry.**
+- **What the scan does not read of the wave**: the nine hypothesis-formers left OUT raise no site, so the three closed hypotheses
+  of hand results (`cl2`'s order bound at band 4; `StandingFloor 7`; `StandingFloor 5`) are invisible to it — they are named in
+  the statements and listed in the drafts. A hypothesis set that holds together on no object of the library (`sp_if`'s) is a
+  conjunction across binders, which this per-binder scan cannot see.
+
+### 5.5 Each check's negative control, watched
+
+| check | the plant | what went red |
+|---|---|---|
+| build's warning count | the tree as given (Stage 1) | 12 `declaration uses 'sorry'` warnings, against 0 |
+| `sorry` scan | the tree as given (`git grep` at `ace98a35`, `sorry-narrow-asgiven.txt`) | 12 lines, against 0 |
+| doubled names | its 15 controls | each fired |
+| axioms | its 23 controls; the records check's five plants on this pass's log (`records-plant.txt`, exit 1: `sorryAx` on a head, a record dropped, doubled, moved under PURCHASED, a head on fewer axioms) | named each |
+| vacuity | its 65 controls; **live, the carrier's name mistyped in `trackedProps`** (`vacuity-selftest-plant-mistyped.log`, exit 1: "3 of 65 control(s) did not behave" — exactly controls 63–65, each "absent"); the row check's four plants (`vacdiff-plant.txt`, exit 1: LOST, NOT NEW, FLAGGED, COUNTER-DISAGREES) | named each |
+| architecture | live: `Arith/StandingFive`'s row with `SpectralChain` taken out of its imports column (`arch-plant-import.txt`) | "FAIL imports of Arith/StandingFive: stated-only [], real-only ['SpectralChain']", exit 1; restored by `git checkout`, PASS again |
+| notes | its self-test, and the wrapper's (`notes-selftest.txt`: a conflicting note planted in `BendGap`, CONFLICT 0 → 1) | fired |
+| lint | none at a landing (ruling 419 (b)); the wave's own control is I10B's: with the consuming `have`s removed the linter named exactly the seven arguments this landing dropped | — |
+| this job's tools | `tools/fs131_l10a_quotes.py`, `_keepboth.py`, `_statements.py`, `_leaves.py`, `_tidyshape.py`, `_hyps.py`, `_register.py` `--self-test`; `_mergeindex.py` by live controls (Stages 2, 4) | each plant fired beside a faithful run |
+
+### 5.6 The drafts, checked by the digest
+
+Drafts 1 and 2 below, applied to a scratch copy of `CLAUDE.md`, are read by `scripts/gate_report.py` against this pass's logs:
+§ Trust ledger "match (clean, purchases and imported compared)" (`digest-axioms-draft.txt`); § The gate "match (9 of 9 compared)"
+(`digest-vacuity-draft.txt`). The unedited `CLAUDE.md` is flagged STALE by both digests until the filing (5525 → 5783; 13386 →
+13767, 1137 → 1173, 37 → 38, 1095 → 1130).
+
+### 5.7 Read against the informal statement, aloud
+
+The three implementers read each of their leaves against its derivation entry (their records' theorem lists, quoted rows and
+all); the statements of every leaf but the five tidied ones are verbatim theirs (Stage 2, by script). The five this job changed,
+and the standing-five heads the front page will quote:
+
+- `StationarySet.prob_le_ratio_mul [MeasurableNeg G] (W) {ν} [SigmaFinite ν] (hsymm : ν.map Neg.neg = ν) (hW : W.AEIndependent ν)
+  : W.P W.B ≤ ratio ν * W.P (W.B ∪ W.nbhd ν)` — "for a stationary random set that is a.e.-independent for a σ-finite symmetric
+  connection measure, `P(0 ∈ A) ≤ r · P(0 ∈ N[A])`". The row's (X25B-P's) words; the group needs a measurable negation and no
+  measurable addition.
+- `ratio_prod_le … (hG : νG.map Neg.neg = νG) (hH : νH.map Neg.neg = νH) : ratio (νG.prod νH) ≤ max (ratio νG) (ratio νH)` — "the
+  stationary ratio of a product is at most the larger factor's". X25B-PZ. Not claimed, as in the row: equality. Both symmetry
+  hypotheses are read (I10B's `ℤ/3 × ℤ/5` example shows they cannot both go).
+- `ratio_prod_le_iSup_levels … (K : ι → OpenAddSubgroup Y) (hK0 : ∀ V ∈ nhds 0, ∃ k, (K k : Set Y) ⊆ V) : ratio (νX.prod νY) ≤
+  ⨆ k, ratio (νX.prod (νY ∗ cosetAverage (K k)))` — "for a compact second-countable factor `Y` with open subgroups entering every
+  neighbourhood of `0`, the ratio is at most the supremum over the levels". X25B-L1, **with the level pulled back to `X × Y`**: the
+  right-hand side is not the ratio of the finite graph on `X × Y/K_k`, and no statement of this landing compares the two (I10B's
+  finding 4; a row of the second pass, ruling 507 (b)). The hypothesis forces `ι` non-empty (take `V = univ`).
+- `sp_if (I) (hBH : BochnerHerglotz (unitRing F)) (hmul : I.MulStable) (hcirc : I.NegCircle) … (hnh : ∀ a, ν ≠ a • m) : ∃ τ,
+  IsFiniteMeasure τ ∧ RotInv F τ ∧ τ I.E = 0 ∧ ∫ χ, (χ 1 : ℂ).re ∂τ < 0` — "if some finite rotation-invariant `E`-null measure is
+  not a multiple of Haar, some such measure has negative mean at `1`". J45-SP-if **over three named hypotheses**, one of which
+  (`NegCircle`) no Lean object satisfies yet. What it is not: a statement about the arithmetic `E` — `I` is any interface.
+- `spectral_carried_iff (t) (ht) (hcount) (hB : BochnerOn t) (T) (hT) (hadd) (hσ : IsSpectralMeasureOf T hT f σ) : σ (contChars t)ᶜ
+  = 0 ↔ f ∈ contVec T hT (nhds 0)` — "the spectral measure of `f` is carried by the `t`-continuous characters iff `y ↦ V_y f` is
+  `t`-continuous at `0`". J45-N2's first sentence, over `BochnerOn t`; real `L²`; `μ` any measure.
+- `usable_card_ge (w) (hw : w.IsMaximal) (h : Nat.card (𝓞 F ⧸ w) % 4 = 3) : 347 ≤ Nat.card (𝓞 F ⧸ w)` — "**every usable residue
+  field of `F` has at least 347 elements**". Not: that one has exactly 347 — the kernel exhibits no usable place of `F` at all
+  (the attainment is [tools], ruling 520 (a)); the abstract clause's bound is attained at `ZMod 347` (a spec example).
+- `seven_le_localBound (hFloor : StandingFloor 7) : 7 ≤ localBound standingField` — "**given the finite-target floor at seven**,
+  `L(F) ≥ 7`". An implication from a hand result, not `L(F) ≥ 7`. `localBound` is an infimum over the stable primes of `F(i)`,
+  a family the kernel knows non-empty (`exists_stablePrime_two`).
+- `five_le_chromaticNumber (hFloor : StandingFloor 5) (hRow123 : min (localBound F) 5 ≤ χ(F²)) : 5 ≤ χ(F²)` — "given the floor
+  at five and row 123's chain, `χ(F²) ≥ 5`". Two named hypotheses; MR is inside the second and is not imported here.
+- What none of these is: a new value of `χ` of any plane; an unconditional `L(F) ≥ 7`.
+
+## Stage 5 — SAVED (FS131-L10A)
