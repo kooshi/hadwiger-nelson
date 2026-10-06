@@ -266,3 +266,66 @@ and through nothing else — not theorems until it lands): `stuckModel_hyps`, `s
 `stuckModel_shadow`, `stuckModel_sectorsOf_encard` and the rest of the helpers that read the partition at the vertex.
 
 **Open in this job's files** (12 `sorry`): `stuckModel_terminal`; `shadowModel`'s seven; `awayModel`'s four.
+
+---
+
+# FS131-MB2 — MB1's successor: `shadowModel` and `awayModel` (de Bruijn, the implementer)
+
+*Brief: `data/fs131/briefs/FS131-MB2-models-shadow.md` (on `main`). Same branch and worktree, from MB1's tip `b7fbe6f9`. Started 2026-10-06
+09:37 UTC. Stages continue MB1's numbering. What this job proved is listed in the section "Theorems this phase proved (FS131-MB2), at the
+last saved stage" at the end of this file.*
+
+## Stage 5 — SAVED (FS131-MB2): the readback
+
+### 5.1 The brief's quotations (standing rule 3)
+
+`tools/fs131_mb2_quotes.py` (MB1's reader pointed at this job's brief) — output `data/fs131/mb2/quotes.out`: **9 quotations, 9 found
+verbatim, each once; none missing**, exit 0. `--self-test`: `9 of 9 planted quotations reported missing; faithful run 0 missing -> OK`,
+exit 0.
+
+### 5.2 What was read, and how far
+
+| file | read |
+|---|---|
+| the brief; `plans/STANDING-RULES.md`; `LEAN.md` (main checkout) | whole |
+| `RUNNING.md` § Building, § Make the gate fail, and watch it fail | § Building whole; the second to its l. 275 |
+| this record, MB1's Stages 1–4 | whole |
+| `plans/FS131-models-kernel-plan.md` (FS131-KM1) | whole |
+| `plans/FS131-close-inventory.md` | items 470, 471 whole; 460, 461 by their heads (the brief's quotations) |
+| `plans/FS131-E7-derivation.md` (main checkout) | § 6 whole (l. 532–626) |
+| `plans/FS131-bendaway-kernel-plan.md` (`fs131-w5a`) | § 5 whole (l. 442–466) |
+| `Plane/Models/Paint`, `Bends` | whole |
+| `Plane/Models/Stuck` | l. 1–130, the declarations' heads (all), `shadowModel`'s section whole; MB1's helpers as each is used |
+| `Plane/ArcMap`, `Plane/ValidMap/Basic` l. 1–300 | whole |
+| `Plane/ValidMap/Surgery` | `germArc`, `carrier_germArc` |
+| `Plane/LocalMap` | the ring-arc definitions (l. 240–262) |
+| `Plane/ValidMap/Contact` | `flank_ne_of_doublyShadowed`'s statement |
+
+### 5.3 The build as given
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` in the worktree: `build: OK — all 1771 modules already up
+to date, nothing built, 4 module(s) with warnings, 2s`, exit 0 (`data/fs131/mb2/build-0.log`; the full log `build-0-full.log`). Warnings:
+43 distinct, **all** `declaration uses 'sorry'` (0 others) — `Paint` 13, `Moves` 18 (the other half's 31), `Stuck` 8, `Bends` 4. As the
+brief says.
+
+### 5.4 What I may and may not change
+
+**Mine**: the proofs of the eleven `sorry` leaves of `shadowModel` (7, in `Stuck.lean`) and `awayModel` (4, in `Bends.lean`); new helper
+declarations in those two files, named `shadowModel_…` and `awayModel_…`; a block "FS131-MB2" in `scripts/Axioms.lean`; this record;
+`tools/fs131_mb2_*.py`; `data/fs131/mb2/`; the report.
+
+**Not mine**: any statement or definition of the skeleton or of MB1 (`shadowWg`, `shadowWh`, `shadowArcs`, `shadowCol`, `shadowModel`,
+`awayP`, `awayW`, `awayArcs`, `awayModel` among them); `stuckModel_terminal` and the plane-map model of `bend_away_whole` (after wave 5:
+the brief's Done means 3); `Plane/Models/Paint.lean` and `Moves.lean` (the other half's — I read `Paint`'s open leaves by their
+statements); every landed module; `main`; the gate; MB1's tools (`tools/fs131_mb_*.py`: another job's). No new `axiom`, no
+`native_decide`.
+
+### 5.5 Tools, each with a planted fault watched to fire
+
+- `tools/fs131_mb2_quotes.py` — § 5.1.
+- `tools/fs131_mb2_statements.py` — **the statement check**, against two bases: every declaration of `Stuck` and `Bends` at MB1's tip
+  `b7fbe6f9` (115: the skeleton with MB1's helpers; a theorem by its head through the first `:=`, a definition whole) and every
+  declaration of the skeleton at `fe9d6d32` (53) occurs verbatim, once, in the working file; and no path differs from `b7fbe6f9` outside
+  this job's paths. Output `data/fs131/mb2/statements.out`: 0 and 0 not found, 0 forbidden paths, exit 0. `--self-test` changes one
+  character of each of the 115 heads in turn: `115 of 115 planted head changes reported; faithful run 0 missing -> OK`.
+- The receipt (`data/fs131/mb2/MB2Axioms.lean`, read by `tools/fs131_mb2_receipt.py`) is written at the first model's save (Stage 6).
