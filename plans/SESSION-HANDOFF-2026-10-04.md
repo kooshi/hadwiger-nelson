@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-06 by Keryx after the restart (inventory items 407, 410). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–419 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–421 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **419**. Kooshi restarted the work,
+> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **421**. Kooshi restarted the work,
 > back (item 412); `origin` is the backup remote, not GitHub. `/tmp` is a tmpfs: the pre-halt scratch is
 > in `/home/kooshi/source/lean-dir-tmp-rescue-2026-10-05/tmp/` (item 407), and a record citing `/tmp/claude-1000/…` reads it there.
 >
@@ -17,16 +17,23 @@ that judge the milestone, written before any job).*
 > **Running (3)** — each reports to "main" by hand-back; its report file is on its branch:
 > - **FS131-I5q** (`fs131-w5`, at `3b120cd3`): `exists_preBend`'s three children (`hfree_of_baseHyp`, `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`),
 >   then `bv_l3` moved to `BaseWalk` and proved; its record stages start at 56. Brief `data/fs131/briefs/FS131-I5q-prebend.md`.
-> - **FS131-IR1** (`fs131-w5c`): the procedure's last steps — merge `a20bb6f5` (OPEN) in, restate `exists_vertexStep` (degree + horns) and `exists_arcStep`
->   (horn clause), then `horn_bounds_of_interior_empty`, `exists_vertexStep`, `stuckRun_ne_univ`, `exists_terminalSeq`, `exists_arcStep` (over a `sorry`
->   child `bend_away_part` if it needs the tangent bend, item 411 (e)). More than one session: expect a successor. Brief
->   `data/fs131/briefs/FS131-IR1-procedure.md`.
+> - **FS131-IR2** (`fs131-w5c`, from `ebb0b292`): the vertex step `exists_vertexStep` by E6's route, each move then `cleanKeep` (items 420–421; new
+>   declarations allowed in the move modules, ruling 421 (c)). About two sessions: expect a successor. Brief `data/fs131/briefs/FS131-IR2-vertex-step.md`.
 > - **FS131-QA4** (read-only; writes `plans/FS131-QA4-audit.md`, `data/fs131/qa4/` on `main`): the impossible-assumption audit's third pass — every
 >   theorem landed since QA3 (`7abff9b9`) and wave 5's about to land, against `LEAN.md`'s inhabitant rule at its letter ("every hypothesis … at once"), an
 >   attack on each uninhabited set, a priced list of models owed (items 418–419). Brief `data/fs131/briefs/FS131-QA4-inhabitants.md`. **On its hand-back**:
 >   one remedy pass before wave 5's landing (the three `[NumberField _]` binders, item 419 (a); `bend_toward_collar` without `hmax`/`hlen`; the models it
 >   names). Then the slot goes to `bend_away`'s **planner** (the repaired statement on `fs131-w4ba` at `71cca146`, E5 § 4; plan it on a branch cut from
 >   `fs131-w5`, where the collar's radial push lives — it may be reusable).
+>
+> **Ready to launch at the next free slot**: **FS131-IS1** (`fs131-w5s`, a worktree already cut from `fs131-w5c` at `ebb0b292`, build copied):
+> `stuckRun_ne_univ` with `shadow_recursion`, in `Terminal` only; brief `data/fs131/briefs/FS131-IS1-stuck-run.md`, gated PASS, **not yet launched**.
+> After it: `exists_arcStep` (after the vertex step, same file; or its bend exports in a module of their own first), the audit's remedy pass, then
+> `bend_away`'s planner.
+>
+> **Done since the restart, on the procedure**: **FS131-IR1** (item 420): OPEN merged into `fs131-w5c`; the two steps restated; **`exists_terminalSeq`
+> proved over them**, so `exists_terminalMap` rests on `exists_vertexStep` and `exists_arcStep` alone; `horn_bounds_of_interior_empty`, `cleanKeep`,
+> `surgery_localStep` in the kernel.
 >
 > **Rules made since the restart**: every landing runs the guarded lint `lake lint --no-build -- --no-build --trace` after its green build (`--mem 8`;
 > `LEAN.md` § The gate; item 419 (b)); the linters found 3 findings in all (item 418).
@@ -142,7 +149,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-I5q (`exists_preBend`'s children and `bv_l3`, on `fs131-w5`) | Opus | `data/fs131/briefs/FS131-I5q-prebend.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-I5q.md` |
-| FS131-IR1 (the procedure's last steps on `fs131-w5c`) | Opus | `data/fs131/briefs/FS131-IR1-procedure.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-IR1.md` |
+| FS131-IR2 (the vertex step on `fs131-w5c`) | Opus | `data/fs131/briefs/FS131-IR2-vertex-step.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-IR2.md` |
 | FS131-QA4 (the impossible-assumption audit, third pass; read-only) | Opus | `data/fs131/briefs/FS131-QA4-inhabitants.md` | `data/fs131/reports/FS131-QA4.md` on `main` |
 
 
