@@ -1,0 +1,7 @@
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261006T175037Z-1964715.log
+    All targets up-to-date (5814 jobs).
+==> build: OK — all 1805 modules already up to date, nothing built, 0 module(s) with warnings, 3s
+    full output: build/gate/build/20261006T175037Z-1964715.log
+exit=0

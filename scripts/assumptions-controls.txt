@@ -1,0 +1,354 @@
+# The assumptions gate's controls (FS131-T5, 2026-10-06) — read by `./scripts/assumptions.sh --self-test`.
+#
+# Every control below is planted into ONE copy of the shipped `scripts/Assumptions.lean`: the lines of its
+# `## lean` sections go before the `planted` list, the lines of its `## entry` sections into that list (one entry
+# per line), its `## ledger` rows into a copy of the ledger. The copy is elaborated once, beside the shipped list,
+# and judged by the gate's own `check_receipt` against control records — the real ones plus `[Planted2026]`,
+# ledger row 99999, `G99999`, `FS-99999` and the entry id `T5C-ENTRY-1`.
+#
+# Directives: `## control <name> — <why>`; `## lean`; `## entry`; `## ledger <row>`;
+# `## expect FAIL <kind> <culprit>` (a FAIL row of that kind whose culprit, its third field, is exactly that);
+# `## expect CLEAN <culprit>` (no FAIL row names it, nor a site of it: the silent partner);
+# `## expect ROW <text>` / `## expect NOROW <text>` (some / no row of the output contains the text).
+# The self-test is two-sided: every FAIL row that names a planted name must be predicted by an `expect FAIL`
+# line here. Planted names start `t5c_`; planted labels start `T5c`. Lines starting `# ` are comments.
+
+## control named_declared — a declared named hypothesis with its source, kind and consumer: the partner of every refusal below
+## lean
+/-- Planted: an outside theorem, external; `[Planted2026]` p. 1. -/
+def t5c_H1 : Prop := ∀ n : ℕ, ∃ p, n < p ∧ Nat.Prime p ∧ Nat.Prime (p + 2)
+theorem t5c_user1 (h : t5c_H1) : True := trivial
+## entry
+  .former ``t5c_H1 .outside "[Planted2026] p. 1"
+## ledger TAKES t5c_H1 t5c_user1
+## expect CLEAN t5c_H1
+## expect CLEAN t5c_user1
+## expect ROW ASSUMPTION t5c_H1 form=named kind=outside ref=bib:Planted2026 consumers=
+## expect ROW TAKES t5c_H1 t5c_user1
+## expect ROW CLOSED DECLARED t5c_user1 h ::
+
+## control closed_undeclared — THE LOAD-BEARING ONE: a hypothesis nobody declared, written out in a binder, closed
+## lean
+theorem t5c_closed_user (h : ∀ n : ℕ, ∃ p, n < p ∧ Nat.Prime p ∧ Nat.Prime (p + 2)) : True := trivial
+## expect FAIL undeclared-closed-hypothesis t5c_closed_user:h
+
+## control closed_site — the same proposition in the same place, declared as a site: silent
+## lean
+theorem t5c_site_user (h : ∀ n : ℕ, ∃ p, n < p ∧ Nat.Prime p ∧ Nat.Prime (p + 2)) : True := trivial
+## entry
+  .site ``t5c_site_user `h "T5cTwin" .open "FS-99999 planted"
+## ledger TAKES inline:T5cTwin t5c_site_user
+## expect CLEAN t5c_site_user
+## expect ROW CLOSED DECLARED t5c_site_user h ::
+## expect ROW ASSUMPTION inline:T5cTwin form=inline kind=open ref=stub:FS-99999 consumers=1
+## expect ROW TAKES inline:T5cTwin t5c_site_user
+
+## control parametric_unseen — the class the check cannot see: the same hypothesis over the theorem's own variable reads clean, and is counted
+## lean
+theorem t5c_param_user (m : ℕ) (h : ∃ p, m < p ∧ Nat.Prime p ∧ Nat.Prime (p + 2)) : True := trivial
+## expect CLEAN t5c_param_user
+## expect NOROW t5c_param_user
+
+## control closed_established — a closed hypothesis the library proves, directly and through a chain of closed steps
+## lean
+theorem t5c_fact : (2 : ℕ) + 2 = 4 := rfl
+theorem t5c_step (h : (2 : ℕ) + 2 = 4) : (3 : ℕ) + 3 = 6 := rfl
+theorem t5c_est_user (h : (3 : ℕ) + 3 = 6) : True := trivial
+## expect ROW CLOSED ESTABLISHED t5c_step h ::
+## expect ROW CLOSED ESTABLISHED t5c_est_user h ::
+## expect CLEAN t5c_step
+## expect CLEAN t5c_est_user
+
+## control closed_unestablished — a closed hypothesis whose only proof in the library is conditional, or rests on a closed step whose own hypothesis is unproved, is not established
+## lean
+theorem t5c_cond_step (m : ℕ) (hm : 0 < m) : (5 : ℕ) + 5 = 10 := rfl
+theorem t5c_unest_user (h : (5 : ℕ) + 5 = 10) : True := trivial
+theorem t5c_bad_step (h : (7 : ℕ) + 7 = 14) : (6 : ℕ) + 6 = 12 := rfl
+theorem t5c_bad_user (h : (6 : ℕ) + 6 = 12) : True := trivial
+## expect FAIL undeclared-closed-hypothesis t5c_unest_user:h
+## expect FAIL undeclared-closed-hypothesis t5c_bad_step:h
+## expect FAIL undeclared-closed-hypothesis t5c_bad_user:h
+
+## control closed_refuted — the one closed hypothesis of a refutation is the claim refuted; two are not
+## lean
+theorem t5c_refuter (bad : ∀ n : ℕ, n < 3) : False := absurd (bad 5) (by decide)
+theorem t5c_refuter2 (a : ∀ n : ℕ, n < 3) (b : ∀ n : ℕ, 7 < n) : False := absurd (a 5) (by decide)
+## expect ROW CLOSED REFUTED t5c_refuter bad ::
+## expect CLEAN t5c_refuter
+## expect FAIL undeclared-closed-hypothesis t5c_refuter2:a
+## expect FAIL undeclared-closed-hypothesis t5c_refuter2:b
+
+## control closed_premise — a closed premise declared not an assumption, with its reason; and one with no reason
+## lean
+theorem t5c_prem_user (h : ∀ n : ℕ, n < 3) : (0 : ℕ) < 3 := h 0
+theorem t5c_prem_user2 (h : ∀ n : ℕ, n < 4) : (0 : ℕ) < 4 := h 0
+## entry
+  .premise ``t5c_prem_user `h "planted: the implication is the content"
+  .premise ``t5c_prem_user2 `h ""
+## expect ROW CLOSED PREMISE t5c_prem_user h ::
+## expect CLEAN t5c_prem_user
+## expect FAIL no-reason t5c_prem_user2:h
+
+## control never_concluded — a former taken as a hypothesis and concluded by no theorem, in neither list
+## lean
+def t5c_N (n : ℕ) : Prop := ∃ p, n < p ∧ Nat.Prime p ∧ Nat.Prime (p + 2)
+theorem t5c_n_user (n : ℕ) (h : t5c_N n) : True := trivial
+## expect FAIL undeclared-never-concluded t5c_N
+
+## control concluded — a former some theorem concludes with no declared assumption is an ordinary predicate: silent
+## lean
+def t5c_C (n : ℕ) : Prop := 0 < n
+theorem t5c_c_user (n : ℕ) (h : t5c_C n) : True := trivial
+theorem t5c_c_one : t5c_C 1 := Nat.one_pos
+## expect CLEAN t5c_C
+
+## control condition — a never-concluded former declared a condition, printed with its reason; and a condition entry that is not needed
+## lean
+def t5c_K (n : ℕ) : Prop := 1 < n
+theorem t5c_k_user (n : ℕ) (h : t5c_K n) : True := trivial
+def t5c_C2 (n : ℕ) : Prop := 2 < n
+theorem t5c_c2_user (n : ℕ) (h : t5c_C2 n) : True := trivial
+theorem t5c_c2_three : t5c_C2 3 := (by decide : 2 < 3)
+## entry
+  .condition ``t5c_K "planted: a condition on the theorem's n"
+  .condition ``t5c_C2 "planted: a condition on the theorem's n"
+## expect ROW CONDITION t5c_K ::
+## expect CLEAN t5c_K
+## expect FAIL stale-condition t5c_C2
+
+## control by_docstring — a former whose docstring uses the library's words for an assumption, undeclared; and the same declared
+## lean
+/-- Planted: a named hypothesis from outside the backlog. -/
+def t5c_D (n : ℕ) : Prop := 3 < n
+theorem t5c_d_user (n : ℕ) (h : t5c_D n) : True := trivial
+theorem t5c_d_four : t5c_D 4 := (by decide : 3 < 4)
+/-- Planted: a named hypothesis from outside the backlog. -/
+def t5c_D2 (n : ℕ) : Prop := 4 < n
+theorem t5c_d2_user (n : ℕ) (h : t5c_D2 n) : True := trivial
+## entry
+  .former ``t5c_D2 .ours "T5C-ENTRY-1 planted"
+## ledger TAKES t5c_D2 t5c_d2_user
+## expect FAIL undeclared-by-docstring t5c_D
+## expect CLEAN t5c_D2
+## expect ROW ASSUMPTION t5c_D2 form=named kind=ours ref=entry:T5C-ENTRY-1 consumers=1
+
+## control stale_declaration — a declared hypothesis that no theorem takes
+## lean
+/-- Planted, [hand]. -/
+def t5c_S : Prop := ∀ n : ℕ, n < n + 1
+## entry
+  .former ``t5c_S .ours "row 99999 planted"
+## expect FAIL stale-declaration t5c_S
+
+## control sources — no source; a source that is no key, row or id; a source its kind does not admit; three that do not resolve; and the partners that do
+## lean
+/-- Planted, [hand]. -/
+def t5c_NS : Prop := ∀ n : ℕ, n < n + 2
+theorem t5c_ns_user (h : t5c_NS) : True := trivial
+/-- Planted, external. -/
+def t5c_BS : Prop := ∀ n : ℕ, n < n + 3
+theorem t5c_bs_user (h : t5c_BS) : True := trivial
+/-- Planted, external. -/
+def t5c_BK : Prop := ∀ n : ℕ, n < n + 13
+theorem t5c_bk_user (h : t5c_BK) : True := trivial
+/-- Planted, external. -/
+def t5c_UR : Prop := ∀ n : ℕ, n < n + 14
+theorem t5c_ur_user (h : t5c_UR) : True := trivial
+/-- Planted, [hand]. -/
+def t5c_UR2 : Prop := ∀ n : ℕ, n < n + 15
+theorem t5c_ur2_user (h : t5c_UR2) : True := trivial
+/-- Planted, [hand]. -/
+def t5c_UR3 : Prop := ∀ n : ℕ, n < n + 16
+theorem t5c_ur3_user (h : t5c_UR3) : True := trivial
+/-- Planted, [hand]. -/
+def t5c_OK2 : Prop := ∀ n : ℕ, n < n + 17
+theorem t5c_ok2_user (h : t5c_OK2) : True := trivial
+/-- Planted, [hand]. -/
+def t5c_OK3 : Prop := ∀ n : ℕ, n < n + 18
+theorem t5c_ok3_user (h : t5c_OK3) : True := trivial
+## entry
+  .former ``t5c_NS .ours ""
+  .former ``t5c_BS .outside "Rudin, Fourier Analysis on Groups 1.4.3"
+  .former ``t5c_BK .outside "row 99999 planted"
+  .former ``t5c_UR .outside "[Unplanted2026] p. 1"
+  .former ``t5c_UR2 .ours "row 99998 planted"
+  .former ``t5c_UR3 .ours "T5C-NO-SUCH-9 planted"
+  .former ``t5c_OK2 .ours "row 99999 planted"
+  .former ``t5c_OK3 .ours "G99999 planted"
+## ledger TAKES t5c_NS t5c_ns_user
+## ledger TAKES t5c_BS t5c_bs_user
+## ledger TAKES t5c_BK t5c_bk_user
+## ledger TAKES t5c_UR t5c_ur_user
+## ledger TAKES t5c_UR2 t5c_ur2_user
+## ledger TAKES t5c_UR3 t5c_ur3_user
+## ledger TAKES t5c_OK2 t5c_ok2_user
+## ledger TAKES t5c_OK3 t5c_ok3_user
+## expect FAIL no-source t5c_NS
+## expect FAIL bad-source t5c_BS
+## expect FAIL bad-source t5c_BK
+## expect FAIL unresolved-source t5c_UR
+## expect FAIL unresolved-source t5c_UR2
+## expect FAIL unresolved-source t5c_UR3
+## expect CLEAN t5c_OK2
+## expect ROW ASSUMPTION t5c_OK2 form=named kind=ours ref=row:99999 consumers=1
+## expect CLEAN t5c_OK3
+## expect ROW ASSUMPTION t5c_OK3 form=named kind=ours ref=grokking:99999 consumers=1
+
+## control ledger — a theorem that takes a declared hypothesis and is missing from its list; and a listed one the scan does not find
+## lean
+theorem t5c_user1b (h : t5c_H1) : True := trivial
+## ledger TAKES t5c_H1 t5c_ghost
+## expect FAIL unlisted-consumer t5c_user1b
+## expect FAIL stale-consumer t5c_ghost
+
+## control shapes — every way a statement can take a declared hypothesis is found, and the ways it does not are not
+## lean
+theorem t5c_shape_and (n : ℕ) (h : t5c_H1 ∧ 0 ≤ n) : True := trivial
+theorem t5c_shape_arrow (n : ℕ) (h : 0 < n → t5c_H1) : True := trivial
+theorem t5c_shape_fact [Fact t5c_H1] : True := trivial
+theorem t5c_shape_concl : t5c_H1 → True := fun _ => trivial
+theorem t5c_shape_exists (n : ℕ) (h : ∃ m : ℕ, n < m ∧ t5c_H1) : True := trivial
+theorem t5c_shape_ante (n : ℕ) (h : t5c_H1 → n < 0) : True := trivial
+theorem t5c_shape_iff : t5c_H1 ↔ t5c_H1 := Iff.rfl
+theorem t5c_shape_not : ¬ (t5c_H1 ∧ False) := fun h => h.2
+def t5c_W : Prop := t5c_H1 ∧ True
+theorem t5c_shape_wrap (h : t5c_W) : True := trivial
+structure t5c_Pack where
+  n : ℕ
+  h : t5c_H1
+theorem t5c_shape_pack (p : t5c_Pack) : True := trivial
+theorem t5c_shape_closed_and (h : t5c_H1 ∧ True) : True := trivial
+## ledger TAKES t5c_H1 t5c_shape_and
+## ledger TAKES t5c_H1 t5c_shape_arrow
+## ledger TAKES t5c_H1 t5c_shape_fact
+## ledger TAKES t5c_H1 t5c_shape_concl
+## ledger TAKES t5c_H1 t5c_shape_exists
+## ledger TAKES t5c_H1 t5c_shape_wrap
+## ledger TAKES t5c_H1 t5c_shape_closed_and
+## ledger MENTIONS t5c_H1 t5c_shape_iff
+## ledger MENTIONS t5c_H1 t5c_shape_pack
+## expect ROW TAKES t5c_H1 t5c_shape_and
+## expect ROW TAKES t5c_H1 t5c_shape_arrow
+## expect ROW TAKES t5c_H1 t5c_shape_fact
+## expect ROW CLOSED DECLARED t5c_shape_fact
+## expect ROW TAKES t5c_H1 t5c_shape_concl
+## expect ROW TAKES t5c_H1 t5c_shape_exists
+## expect ROW TAKES t5c_H1 t5c_shape_wrap via t5c_W
+## expect ROW WRAPS t5c_W t5c_H1
+## expect ROW WRAPS t5c_Pack t5c_H1
+## expect ROW MENTIONS t5c_H1 t5c_shape_iff
+## expect ROW MENTIONS t5c_H1 t5c_shape_pack
+## expect ROW REFUTES t5c_H1 t5c_shape_not
+## expect NOROW TAKES t5c_H1 t5c_shape_ante
+## expect NOROW MENTIONS t5c_H1 t5c_shape_ante
+## expect NOROW TAKES t5c_H1 t5c_shape_not
+## expect CLEAN t5c_shape_and
+## expect CLEAN t5c_shape_fact
+## expect FAIL undeclared-closed-hypothesis t5c_shape_wrap:h
+## expect FAIL undeclared-never-concluded t5c_W
+## expect FAIL undeclared-closed-hypothesis t5c_shape_closed_and:h
+
+## control kind — a declared kind its docstring contradicts; a condition whose docstring calls it a hypothesis; a docstring that says nothing; a cited key that contradicts nothing
+## lean
+/-- Planted: a hand result of ours, [hand]. -/
+def t5c_KC : Prop := ∀ n : ℕ, n < n + 4
+theorem t5c_kc_user (h : t5c_KC) : True := trivial
+/-- Planted: a named hypothesis. -/
+def t5c_KD (n : ℕ) : Prop := 5 < n
+theorem t5c_kd_user (n : ℕ) (h : t5c_KD n) : True := trivial
+/-- Planted. -/
+def t5c_SL : Prop := ∀ n : ℕ, n < n + 5
+theorem t5c_sl_user (h : t5c_SL) : True := trivial
+/-- Planted: rests on `[Planted2026]` p. 4. -/
+def t5c_CT : Prop := ∀ n : ℕ, n < n + 6
+theorem t5c_ct_user (h : t5c_CT) : True := trivial
+## entry
+  .former ``t5c_KC .outside "[Planted2026] p. 2"
+  .condition ``t5c_KD "planted: a condition on the theorem's n"
+  .former ``t5c_SL .ours "row 99999 planted"
+  .former ``t5c_CT .ours "row 99999 planted"
+## ledger TAKES t5c_KC t5c_kc_user
+## ledger TAKES t5c_SL t5c_sl_user
+## ledger TAKES t5c_CT t5c_ct_user
+## expect FAIL kind-contradiction t5c_KC
+## expect FAIL kind-contradiction t5c_KD
+## expect ROW SILENT t5c_SL kind=ours
+## expect CLEAN t5c_SL
+## expect ROW SILENT t5c_CT kind=ours
+## expect CLEAN t5c_CT
+
+## control discharged — a declared hypothesis a theorem proves in general is no longer an assumption; one proved at an instance still is
+## lean
+/-- Planted, [hand]. -/
+def t5c_G (n : ℕ) : Prop := n = n
+theorem t5c_g_user (n : ℕ) (h : t5c_G n) : True := trivial
+theorem t5c_g_all (n : ℕ) : t5c_G n := rfl
+/-- Planted, [hand]. -/
+def t5c_P (n : ℕ) : Prop := 6 < n
+theorem t5c_p_user (n : ℕ) (h : t5c_P n) : True := trivial
+theorem t5c_p_seven : t5c_P 7 := (by decide : 6 < 7)
+## entry
+  .former ``t5c_G .ours "row 99999 planted"
+  .former ``t5c_P .ours "row 99999 planted"
+## ledger TAKES t5c_G t5c_g_user
+## ledger TAKES t5c_P t5c_p_user
+## expect FAIL discharged t5c_G
+## expect ROW PRODUCES t5c_G t5c_g_all general
+## expect ROW PRODUCES t5c_P t5c_p_seven uncond
+## expect CLEAN t5c_P
+
+## control derived_only — an undeclared former every proof of which takes a declared assumption
+## lean
+def t5c_DO (n : ℕ) : Prop := 7 < n
+theorem t5c_do_user (n : ℕ) (h : t5c_DO n) : True := trivial
+theorem t5c_do_from (h : t5c_H1) : t5c_DO 8 := (by decide : 7 < 8)
+## ledger TAKES t5c_H1 t5c_do_from
+## expect FAIL undeclared-derived-only t5c_DO
+## expect ROW DERIVED t5c_DO ::
+
+## control axioms — the other form: an axiom with its source and the theorems resting on it; one unlisted; one with no source; one whose key is not in the bibliography
+## lean
+/-- Planted: an outside theorem, `[Planted2026]` p. 3. -/
+axiom t5c_ax : (11 : ℕ) < 12
+theorem t5c_ax_user : (11 : ℕ) < 12 := t5c_ax
+theorem t5c_ax_user2 : (11 : ℕ) < 12 := t5c_ax
+axiom t5c_ax2 : (12 : ℕ) < 13
+theorem t5c_ax2_user : (12 : ℕ) < 13 := t5c_ax2
+/-- Planted: `[Unplanted2026]` p. 1. -/
+axiom t5c_ax3 : (13 : ℕ) < 14
+theorem t5c_ax3_user : (13 : ℕ) < 14 := t5c_ax3
+## ledger RESTS t5c_ax t5c_ax_user
+## ledger RESTS t5c_ax2 t5c_ax2_user
+## ledger RESTS t5c_ax3 t5c_ax3_user
+## expect ROW AXIOM t5c_ax ref=bib:Planted2026 theorems=2
+## expect ROW RESTS t5c_ax t5c_ax_user
+## expect CLEAN t5c_ax
+## expect CLEAN t5c_ax_user
+## expect FAIL unlisted-consumer t5c_ax_user2
+## expect FAIL axiom-no-source t5c_ax2
+## expect FAIL unresolved-source t5c_ax3
+
+## control bad_entries — an entry naming a theorem; a site with no such binder; a name declared twice; one label with two sources
+## lean
+theorem t5c_notformer : True := trivial
+theorem t5c_sitehost (n : ℕ) (h : 0 < n) : True := trivial
+/-- Planted, [hand]. -/
+def t5c_TW : Prop := ∀ n : ℕ, n < n + 7
+theorem t5c_tw_user (h : t5c_TW) : True := trivial
+theorem t5c_lab1 (n : ℕ) (h : 0 < n) : True := trivial
+theorem t5c_lab2 (n : ℕ) (h : 1 < n) : True := trivial
+## entry
+  .former ``t5c_notformer .ours "row 99999 planted"
+  .site ``t5c_sitehost `nosuch "T5cNoSuch" .ours "row 99999 planted"
+  .former ``t5c_TW .ours "row 99999 planted"
+  .former ``t5c_TW .ours "row 99999 planted"
+  .site ``t5c_lab1 `h "T5cConflict" .ours "row 99999 planted"
+  .site ``t5c_lab2 `h "T5cConflict" .open "FS-99999 planted"
+## ledger TAKES t5c_TW t5c_tw_user
+## ledger TAKES inline:T5cConflict t5c_lab1
+## ledger TAKES inline:T5cConflict t5c_lab2
+## expect FAIL bad-entry t5c_notformer
+## expect FAIL bad-entry t5c_sitehost:nosuch
+## expect FAIL declared-twice t5c_TW
+## expect FAIL label-conflict inline:T5cConflict
+## expect ROW SITE inline:T5cConflict t5c_lab1 h ::
