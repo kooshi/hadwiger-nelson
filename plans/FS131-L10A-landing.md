@@ -414,3 +414,210 @@ and the standing-five heads the front page will quote:
 - What none of these is: a new value of `χ` of any plane; an unconditional `L(F) ≥ 7`.
 
 ## Stage 5 — SAVED (FS131-L10A)
+
+## Drafts for the front page (FS131-L10A)
+
+The gated commit is `999cde4a`; the landed tip differs from it in `plans/` and `data/` alone (Stage 6). The saved gate logs are
+in this worktree under `build/gate/`; the copies are committed under `data/fs131/l10a/`: `receipt-axioms-first.log`,
+`receipt-vacuity-first.log`, `receipt-dupnames-first.log`, the three self-tests' (`receipt-<gate>-self-test-first.log`), and the
+full build `build-main-full.log`. To re-read: `python3 scripts/gate_report.py axioms data/fs131/l10a/receipt-axioms-first.log
+data/fs131/mc/receipt-axioms-final2.log CLAUDE.md` and `python3 scripts/gate_report.py vacuity
+data/fs131/l10a/receipt-vacuity-first.log data/fs131/mc/receipt-vacuity-final2.log scripts/vacuity-baseline.txt CLAUDE.md`.
+
+1. **`CLAUDE.md` § Trust ledger**, the words "the current audit reads 5525 clean and 5 declared purchases, and 4 imported (and 16
+   axiom-free; 5,550 records at the example maps' landing, FS131-MC1, 2026-10-06)" become: "the current audit reads 5783 clean and 5
+   declared purchases, and 4 imported (and 17 axiom-free; 5,809 records at wave 10's first landing, FS131-L10A, 2026-10-06)". From
+   `data/fs131/l10a/axioms-first.log`: "audited: 5809 records — 5783 clean on the standard axioms, 17 axiom-free, 4 imported
+   (resting on a declared outside theorem), 5 declared purchase(s)" and "==> axioms: OK — 5783 clean, 17 axiom-free, 4 imported, 5
+   declared purchase(s)". (The logs' UTC date: `20261006T145710Z`.)
+2. **`CLAUDE.md` § The gate**, the two count lines "`declarations=13386 refutations-skipped=192 sites=1137`, `vacuous=0 stale=0
+   declared=3 witnessed=37 generic=1095 unknown=2`" become "`declarations=13767 refutations-skipped=192 sites=1173`, `vacuous=0
+   stale=0 declared=3 witnessed=38 generic=1130 unknown=2`". From `data/fs131/l10a/vacuity-first.log`: "scanned:
+   declarations=13767  refutations-skipped=192" and "sites:   sites=1173  vacuous=0  stale=0  declared=3  witnessed=38
+   generic=1130  unknown=2". The baseline's two entries are unchanged (`hexShell_plane5`, `hexShell_plane6`).
+3. **`tools/claude_md_fact_audit.py`'s `GATE_CHANGES`**, after the `(("5196", "5"), ("5525", "5"))` entry:
+   `(("5525", "5"), ("5783", "5")): "FS-131, wave 10's first landing (FS131-L10A; .claude/worktrees/fs131-w10l/build/gate/axioms/20261006T145710Z-778814.log, copy
+   data/fs131/l10a/receipt-axioms-first.log, gated commit 999cde4a): 5,809 records, 5,783 clean, 17 axiom-free, 4 imported, 5 purchases",`
+4. **`LEAN.md` § The gate**, one count: "`--self-test` plants sixty-two controls" becomes "`--self-test` plants sixty-five controls"
+   (`vacuity-selftest-first.log`: "OK — all 65 controls behaved"). The axiom audit's 23 and the doubled-name check's fifteen stand.
+5. **The named hypotheses each landed theorem rests on, by name** (read from the signatures by `tools/fs131_l10a_hyps.py`,
+   `data/fs131/l10a/hyps-tidy.txt`: of the 244 theorems of the four files, eleven take one; the planner's § 5.5 table checked
+   against it — every row of that table has its consumers below, and no theorem takes a named hypothesis the table lacks). None is
+   an `axiom`: each is a `Prop` argument, visible in the statement, and `ARCHITECTURE.md` § Trust gains no purchase.
+
+   | named hypothesis | states | whose | the landed theorems that take it | a Lean model on `main` |
+   |---|---|---|---|---|
+   | `SpectralChain.BochnerHerglotz G` (on `main` since FS-100) | Herglotz–Bochner on a discrete abelian group, with uniqueness | classical (Rudin 1.4.3, 1.3.6; the read-back against the page is owed, the planner's § 5.5) | `SpectralInputs.ext_of_fourier`, `exists_isHaarFourier`, `IsHaarFourier.map_mulRight`, `contChars_haar_null`, `sp_if` | none in the kernel |
+   | `SpectralInputs.BochnerOn t` | a measure with `t`-continuous transform is carried by the `t`-continuous characters | classical, for a topology induced from an LCA group | `spectral_carried_iff` | `bochnerOn_bot` (the discrete topology) |
+   | `Interface.MulStable` | `m⁻¹(E) ⊆ E` | ours: J45 § 4.2 step 2, on J28V-7 | `sp_if` | true of `Interface.trivial` (empty `E`); not a declaration |
+   | `Interface.NegCircle` | a rotation-invariant probability with negative mean at `1`, carried by a set that does not leave `E`ᶜ | ours: J45 § 4.2 step 3 | `sp_if` | **none** (planned: `negCircle_trivial_bot`, second pass) |
+   | `CharacterColouring.OrderBound (unitSet ⊥) B N` — the order bound | band characters in `T + A` are in `T_N + A` | ours: FS89-S0A-3 (`k = 4`, `N = 168`, on Weil), J08-11 (5), J08-10 (6) | `gluing_iff_of_orderBound`; `cl2` (at band 4 with 168, and at band 5 with `N₅`) | none |
+   | RQ₄, RQ₅ (`cl2`'s `hRQ4`, `hRQ5`) | `Θ_k(ℤ[U_ℚ]) ⊆ T + A`, `k = 4, 5` | ours: FS89-D2-T1, FS89-D5-T2 | `cl2` | none |
+   | `StandingFive.StandingFloor n` | the floor at `U₁₂₈` and at every `Γ_Q`, `Q ≡ 3 (mod 4)`, `Q ≥ 347` | ours: G56 ([tools]/[hand], on Weil) | `le_localBound` (any `n`), `seven_le_localBound` (7), `five_le_chromaticNumber` (5) | at `n = 0` only (`targetFloor_zero`); at 7 the second pass states it over `KloostermanBound` and one leaf |
+   | `Row123Chain` (`five_le_chromaticNumber`'s `hRow123`) | `min (L(F)) 5 ≤ χ(F²)` at this field | ours: row 123; in the kernel over named hypotheses, `SpectralChain.min_localBound_five_le_chromaticNumber` | `five_le_chromaticNumber` | — |
+
+   **Resting on no named hypothesis**: every other theorem of the four files — among the rows, FS89-S0A-2 (`gluing`,
+   `gluing_field`), FS89-S0A-10's uniform form (`gluing_iff_uniform`), the erratum's `A` (`mem_archimedean_unitRing_iff`),
+   J45-SP-oi (`sp_only_if`, `sp_only_if_interface`), J45-N2's factor half (`measurableSet_factorSigma_iff`, `contVec_eq_lpMeas`,
+   `measurableSet_preimage_factorSigma`, the three `condExpL2` statements), J45-SI-4 (`si4`, `si4_equivariant`), X25B-P, X25B-PZ,
+   X25B-L1, and every unconditional clause of TC1-STANDING-FIVE.
+6. **The open gate items at this landing** — theorems whose hypotheses no Lean object on `main` satisfies at once. By reading,
+   one mind; the mechanical part is `data/fs131/l10a/gateitems.out` (each head's docstring searched for an inhabitant note: 5 of
+   the 32 heads carry one, 7 take no explicit hypothesis, 20 carry none of their own — most of those are covered by their module's
+   "Inhabitants" paragraph; the ones that are not are below).
+   - **`sp_if`** (`Arith/SpectralInputs`): `Interface.NegCircle` has no Lean model; its docstring now says so and names the planned
+     one (`negCircle_trivial_bot`, `Arith/NegCircleModel`, FS131-I10F's leaves on the second pass). Closed when that lands
+     (ruling 510 (d)). `MulStable` at `Interface.trivial` is true and is no declaration either.
+   - **`contChars_haar_null`**: a topology whose continuous characters are measurable, point-separating and proper has no model
+     in the file — the discrete topology fails `hproper` — and its docstring carries no inhabitant note. The arithmetic instance
+     is J45-N1 (a)–(b), not stated (the third planning pass, ruling 510 (b)).
+   - **`spectral_carried_iff`**: `BochnerOn` has `bochnerOn_bot` and the identity family has `contVec_id`, but no declaration
+     exhibits an `IsSpectralMeasureOf T hT f σ`, and the docstring carries no note.
+   - **`si4`, `si4_equivariant`**: the hypothesis `hdisj` (orthogonal conditional laws across every edge) has no named model; a
+     deterministic proper colouring satisfies it on paper. No note in either docstring.
+   - **`usable_card_ge`, `no_small_usable`** (`Arith/StandingFive`): **no usable place of `F` is exhibited in the kernel**, so
+     "every usable residue field has at least 347 elements" is, to the kernel, a bound over a family not known non-empty. The
+     module docstring says where the inhabitant is known ([tools]: 347 splits completely, `tools/fs131_k10_usable.py`); ruling
+     520 (a) left the attainment out of the rows. The abstract clause `card_ge_of_usable` has its model (`ZMod 347`, a spec example).
+   - **By design, said in the docstring**: `sp_only_if_interface` ("INHABITANT: none known — such a `τ` is the open sign
+     problem"); `sp_only_if` is satisfiable.
+   - **Hypotheses that are hand results, not structures** — `OrderBound`, RQ₄, RQ₅, `StandingFloor 7` and `5`, `Row123Chain`,
+     `BochnerHerglotz` — are draft 5's table: each leaves when discharged (`LEAN.md` § Assumptions).
+   - **Not on this list any more**: the three rows of `Arith/StationaryRatio`, each of which now names the inhabitant of its
+     hypotheses in its docstring and is instantiated at it in the file's Spec section.
+7. **The implementers' drafts, gathered, and corrected for what the join changed.** Each names its slot; "[kernel]" below means
+   on `main` after this landing, audited by the gate on `999cde4a` on the axioms shown.
+   - **`plans/LEAN-BACKLOG.md`, the rows' state** (replacing "stated, `sorry`" / "Grade as filed"):
+     - FS89-S0A-2 — [kernel], at a wider class: `CharacterColouring.gluing` (a ring with an invertible integer `m ≥ 2`, a module
+       spanned by a set stable under the base's units, any band), and the row `gluing_field`. Standard three; no hypothesis from
+       outside. (FS131-K10.)
+     - FS89-S0A-10 — [kernel]: the uniform form `gluing_iff_uniform` unconditional at every band; the row's form
+       `gluing_iff_of_orderBound` **over the band's order bound** (`OrderBound`, held at `k ∈ {4, 5, 6}` only). (FS131-K10.)
+     - FS89-CL2 — [kernel over named hypotheses]: `cl2` over RQ₄, N₀ (`OrderBound … (band 4) 168`), RQ₅ and J08-11's bound. A
+       composition; nothing of the rational statements is proved. (FS131-K10.)
+     - The erratum's `A` (C109) — [kernel]: `mem_archimedean_unitRing_iff`, `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`. (FS131-I10A.)
+     - J45-SP-oi — [kernel]: `sp_only_if` (at its class: one hypothesis of the row's four is read), `sp_only_if_interface` (the
+       row's words). (FS131-K10.)
+     - J45-SP-if — [kernel over named hypotheses]: `sp_if` over `SpectralChain.BochnerHerglotz`, `Interface.MulStable`,
+       `Interface.NegCircle`. **Corrected by the join**: it no longer takes `[Countable (unitRing F)]`. An open gate item
+       (`NegCircle`).
+     - J45-N2 — [kernel] whole: `measurableSet_factorSigma_iff`, `contVec_eq_lpMeas`, `measurableSet_preimage_factorSigma`,
+       `condExpL2_mem_contVec`, `condExpL2_eq_self_iff`, `inner_sub_condExpL2_eq_zero` with no hypothesis from outside;
+       `spectral_carried_iff` over `BochnerOn t`. **Corrected by the join**: `spectral_carried_iff` holds for any measure `μ`.
+     - J45-SI-4 — [kernel] whole: `si4`, `si4_equivariant` (almost surely, where the entry says surely: K10b's read-back), no
+       hypothesis from outside.
+     - J45-N1 — clause (c) [kernel over a named hypothesis]: `contChars_haar_null` over `SpectralChain.BochnerHerglotz`; (a), (b)
+       not stated.
+     - X25B-PZ — [kernel]: `StationaryRatio.ratio_prod_le`, standard three, no hypothesis from outside Mathlib, with its lemma
+       X25B-P (`StationarySet.prob_le_ratio_mul`). **Corrected by the join**: the row itself is now stated at the class its proof
+       reads (commutative groups with a σ-algebra and measurable negation, σ-finite symmetric connection measures; no measurable
+       addition) — there is no `ratio_prod_le_of_symm` any more.
+     - X25B-L1 — [kernel]: `StationaryRatio.ratio_prod_le_iSup_levels`, the same axioms, no hypothesis from outside Mathlib.
+       **Corrected by the join**: any family of open subgroups entering every neighbourhood of `0` (no `Antitone`, any index
+       type), `ν_Y` s-finite, any `ν_X`; there is no `…_of_shrink` any more. **The levels are the graphs pulled back to `X × Y`**
+       (`ν_Y ∗ m_{K_k}`): the comparison with the finite graphs on `X × Y/K_k` is not stated (ruling 507 (b)).
+     - TC1-STANDING-FIVE — its unconditional clauses [kernel]; "so `L(F) ≥ 7`" [kernel over `StandingFloor 7`]; "given MR,
+       `χ(F²) ≥ 5`" [kernel over `StandingFloor 5` and `Row123Chain`] (I10C's draft 1, below).
+   - **`LEDGER.md` § B, row `TC1-STANDING-FIVE`** (l. 1351; the cell "derived (PARI exact); one mind; given MR"), I10C's draft with
+     "on `fs131-w10c` (lands with wave 10)" struck: "[kernel]: `F = ℚ(√3, √11, η)`, `η = ζ + ζ¹² + ζ¹⁷ + ζ²⁸`
+     (`StandingFive.cev_hvec`), is a number field (`numberField_standingField`) of degree 28 (`finrank_standingField`), totally
+     real (`isTotallyReal_standingField`), containing `K` (`K_le`), with `[E₇:ℚ] = 7` (`finrank_E7_and_K`); exactly two primes of
+     `F(i)` lie above 2 (`ncard_primes_above_two`), both stable (`comap_conj_of_two_mem`), each with residue field of `128²`
+     elements on which conjugation is not the identity (`card_quotient_of_two_mem`); every usable residue field has at least 347
+     elements (`usable_card_ge`, `no_small_usable`). **Over the named hypothesis `StandingFloor n`** (G56's floor at `U₁₂₈` and
+     at every `Γ_Q`, `Q ≡ 3 (mod 4)`, `Q ≥ 347`; [tools]/[hand] on Weil): `L(F) ≥ n` (`le_localBound`, `seven_le_localBound`);
+     **and over `Row123Chain`** (`min (L(F)) 5 ≤ χ(F²)`, row 123, MR inside it): `χ(F²) ≥ 5` (`five_le_chromaticNumber`). Axioms:
+     the standard three. That 347 is attained stays [tools]." The row's own words "has L ≥ 7" and "needs five" stay conditional.
+   - **`LEDGER.md` § B, row `FS100-TCA`** (l. 972; after "`r(G × H) ≤ max`"), I10B's clause: "— in the kernel in stationary form,
+     `StationaryRatio.ratio_prod_le` (X25B-PZ) with its lemma `StationarySet.prob_le_ratio_mul` (X25B-P), standard three axioms".
+   - **`LEDGER.md` § B, row `FS89-S0A-2`** (l. 694; grade "hand", hand-off "stub"): "[kernel]: `CharacterColouring.gluing`,
+     `gluing_field`; with the erratum's `A` read back as `Hom_ℚ(F(i), ℝ) mod 1` (`mem_archimedean_unitRing_iff`); standard three
+     axioms". **A correction to I10A's draft**: its slot words ("after 'with `A(R_F)` they hold'") are not in `LEDGER.md` on
+     `main` (`grep -n 'they hold' LEDGER.md`: no line); the clause is offered for this row instead.
+   - **`plans/FS131-kernel-plan.md` § 7.4** (the named hypotheses' table): the rows of draft 5; the planner's price for
+     `Interface.NegCircle` "an hour" becomes I10A's "a job's stage: the circle measure, its invariance, and `J₀(π) < 0` with a
+     margin of 0.04 on the crude bound", beside K10b's cheaper model at `F = ℚ`. Its § 5.6 price rows: I-A 1,550 lines planned,
+     about 1,020 written; I-B 1,900 planned, about 660 written; I-C 1,300 planned, 1,283 in the file.
+   - **`plans/FS131-w10-kernel-plan.md` § 2.2 item 8** ("To be confirmed by the implementer's first pass"): "confirmed by proofs
+     (FS131-I10B): no Haar measure on the group is read; the pigeonhole holds for any probability on any parameter space" — and
+     since this landing the rows are stated so.
+   - **`data/fs131/k1/dispositions.csv` line 179**, reason (I10C's draft 5, with the branch name struck): "its unconditional
+     clauses (the field, degree 28, [E7:Q] = 7, its two places above 2, no usable residue field below 347) in the kernel; 'so L(F)
+     >= 7' as an implication from the finite-target floor (StandingFloor, outside the backlog); 'given MR, chi(F^2) >= 5' from
+     that floor at five with Row123Chain".
+   - **`LEAN.md` § Searching — Lean**: the three implementers' facts and the planner's are filed (inventory items 493–520); none
+     is drafted again here.
+   - **`BIBLIOGRAPHY.md`**: no new key used by the landed files. The debts stand: Rudin 1.4.3 / 1.3.6 read against the page (for
+     `BochnerHerglotz`, `BochnerOn`).
+8. **The Frontier line and the Proof Atlas.** No value moved and the milestone is not closed by one wave's landing; what moves is
+   grades: FS89-S0A-2, FS89-S0A-10 (uniform form), J45-SP-oi, J45-N2's factor half, J45-SI-4, X25B-PZ, X25B-L1 and the
+   unconditional clauses of TC1-STANDING-FIVE from [hand] or [derived] to **[kernel]**; FS89-S0A-10 (the row's form), FS89-CL2,
+   J45-SP-if, J45-N2's spectral half, J45-N1 (c), and TC1-STANDING-FIVE's two conditional clauses to **[kernel over named
+   hypotheses]**, each by the names of draft 5. `CLAUDE.md` § What the kernel holds may say, of this landing: "wave 10's first
+   pass — the gluing of character colourings from `ℚ` to every real field, the stationary ratio of a product and of a profinite
+   factor, the spectral inputs of row 123's chain over named classical hypotheses, and the standing-five field `K·E₇` (degree 28,
+   two inert places above 2 of norm 128, every usable residue field at least 347), with `L(F) ≥ 7` an implication from the
+   finite-target floor".
+9. **For the second pass's join** (`fs131-w10k` and the three branches cut from it; none was touched). What changes under it:
+   `StationarySet.prob_le_ratio_mul_of_symm`, `ratio_prod_le_of_symm`, `ratio_prod_le_iSup_levels_of_shrink` are gone (the row
+   names carry their statements); `ratio_prod_le_iSup_levels` takes no `hK` and its `K` is indexed by any type; `sp_if` and
+   `spectral_carried_iff` lost one instance argument each. No code on those four branches calls any of them (`git grep`: only
+   `NegCircleModel`'s module docstring names `sp_if`). `scripts/Axioms.lean`'s wave-10 blocks sit above the `=== PURCHASED ===`
+   banner, where the second pass's blocks will conflict again: keep both. `StationarySet` is now a tracked carrier: a theorem
+   taking one at a concrete group needs a closed inhabitant at that group, and each new binder at a variable group is one more
+   `GENERIC` site to reconcile. When `negCircle_trivial_bot` lands, `sp_if`'s docstring sentence and the module docstring's line
+   are to be rewritten to name it, and the item leaves draft 6.
+
+## Theorems this phase proved, final
+
+All **[kernel]**: built by this worktree's `./scripts/build.sh` (`data/fs131/l10a/build-main.log`, then `build-first.log` on the
+gated commit), each audited by `scripts/axioms.sh` on `999cde4a` under CLEAN on the axioms shown
+(`data/fs131/l10a/receipt-axioms-first.log`; `records-first.txt`). Addresses are `Proofs/HadwigerNelson/Arith/`.
+
+**New in this job: no theorem.** This job proved nothing of its own; it changed five statements by ruling, and each of the five is
+the theorem its implementer had already proved at that class:
+
+- `StationaryRatio.lean`: `StationarySet.prob_le_ratio_mul` (X25B-P), `ratio_prod_le` (X25B-PZ), `ratio_prod_le_iSup_levels`
+  (X25B-L1) — I10B's `…_of_symm` / `…_of_shrink` statements under the rows' names. [kernel], exactly
+  `[propext, Classical.choice, Quot.sound]`. Read against: § 5.7.
+- `SpectralInputs.lean`: `sp_if` (J45-SP-if; over `BochnerHerglotz`, `Interface.MulStable`, `Interface.NegCircle`),
+  `spectral_carried_iff` (J45-N2, spectral half; over `BochnerOn t`) — I10A's proofs less one unread instance argument each.
+  [kernel], exactly the three. Read against: § 5.7.
+
+**Landed by this job, proved by FS131-K10, -I10A, -I10B, -I10C** (their records hold the lists and the readings): the 253
+hand-written theorems of `CharacterColouring` (24), `SpectralInputs` (78), `StandingFive` (107), `StationaryRatio` (44) — 248 on
+exactly the three, `coe_inclusion_subring`, `anyBelow_of`, `twoZ_ne_bot` on `[propext, Quot.sound]`, `usableBelow_347` on
+`[propext]`, `squaresBelow_11` on no axiom. The heads, each on exactly the three (`records-first.txt`):
+- FS89: `gluing`, `gluing_field` (S0A-2); `gluing_iff_uniform`, `gluing_iff_of_orderBound` (S0A-10); `cl2` (CL2);
+  `mem_archimedean_unitRing_iff` (the erratum's `A`);
+- J45: `sp_only_if`, `sp_only_if_interface` (SP-oi); `sp_if` (SP-if); `measurableSet_factorSigma_iff`, `contVec_eq_lpMeas`,
+  `measurableSet_preimage_factorSigma`, `spectral_carried_iff` (N2); `contChars_haar_null`, `exists_isHaarFourier` (N1 (c));
+  `si4`, `si4_equivariant` (SI-4);
+- X25B: `StationarySet.prob_le_ratio_mul` (P), `ratio_prod_le` (PZ), `ratio_prod_le_iSup_levels` (L1);
+- TC1-STANDING-FIVE: `numberField_standingField`, `finrank_standingField`, `isTotallyReal_standingField`,
+  `ncard_primes_above_two`, `comap_conj_of_two_mem`, `card_quotient_of_two_mem`, `usable_card_ge`, `no_small_usable`,
+  `stablePrime_card`, `le_localBound`, `seven_le_localBound`, `five_le_chromaticNumber`.
+
+**Not proved, and not claimed**: any named hypothesis of draft 5 — in particular `StandingFloor 7`, so `L(F) ≥ 7` is an
+implication; that a usable place of `F` exists, or attains 347; a model of `Interface.NegCircle`; the comparison of X25B-L1's
+pulled-back level with the finite quotient graph; J45-N1 (a)–(b), J45-SI-5, J45-SI-J, J45-SI-C (the second and third passes).
+
+## Slips, my own
+
+- **A false alarm in my own check, on its first run against `main`**: `tools/fs131_l10a_keepboth.py` called three records LOST
+  that `main` had deleted with their declarations. The count line was right and the three were what the merge should drop; the
+  check now lists a line the other side deleted since the base as a note and fails only on a line the resolution lost (Stage 4).
+- **I edited one of my tracked tools while a merge was open**, which made the merge-index check read `DIRTY`. I set the edit
+  aside, ran the check clean, committed the merge and then the tool. Nothing reached the merge commit but the merge.
+- **One build after the two implementers' merges, not one after each.** I read "each checked before the next" as the script
+  checks (index, byte-identity with the owner's tip) and built once, the two merges changing disjoint Lean files. Said in § 2.3.
+- Two of my tools were wrong on their first run and repaired before any result was read from them: the statements tool's
+  rename plant could not be planted on `StationaryRatio` (it used the last component of a dotted name); the registration tool's
+  STALE test read 935 older records as stale (it compared short names printed under an `open` with full names) and is now scoped
+  to the wave's namespaces.
+- **`scripts/vacuity.sh` is not named in my brief's touches**; the scan's procedure, step (3), puts a control's `expect` line
+  there, and I added three. Held for the coordinator below.
+- The tidied build of Stage 3 ran on a tree with the tidies uncommitted (its log's `DIRTY` lines say so); the gate's own build
+  is on the gated commit.
+- I did not read the harness's token count at the saved stages; I have no instrument for it in this session and say so rather
+  than give a number I did not read.
