@@ -4806,3 +4806,23 @@ reason by the close.*
      lane without that declaration and says so — a ruling then, by message. (b) The merge and the edited control at my direction are
      recorded as mine. (c) **Slot → FS131-MC1**, launched 2026-10-06. In flight: 1 (K10) + 1 (K6) + 1 (MC1) = 3. While it is in its
      landing stage I commit nothing to `main` outside the exempt paths.
+
+481. **FS131-K6, by message mid-job (`fs131-w6` at `c3ffb4e7`, build OK by its word): five rows of wave 6 hold at a wider class than filed;
+     three definitions the derivations never fixed are fixed; one bridge has no derivation** (source: K6's message to "main", 2026-10-06; not
+     checked by me — its record and build are the artifact at its hand-back). **Generalizations, each proved in Lean on the branch**:
+     FS121-D3-FALLSAT reads no partition (every family of MUA sets is saturated; its proof needs the ball almost everywhere inside the set,
+     not the support identity alone — a correction owed to the entry); FS121-C1-BOUND reads no map and no second colour; FS121-C1-GMAP holds
+     for any class of families of open sets with null unit pairs (the Jordan-arc structure of a map colouring enters neither clause);
+     FS121-V2-EROSION-DIAM reads no sector and no colouring; FS111-M-HALF is about one measurable set with null unit pairs. **Definitions**:
+     "honest" is the type `AeColouring k` and "in D-NF" notation, never a hypothesis (no row of the 35 uses a pointwise normalisation);
+     M-PINCH's tangent type carries its contacts (`HasTwoDiscsAt`, `IsTangentAt`); **REG-J′ is stated in its fan form with end tangents,
+     which is stronger than the frozen words** — the end tangent is taken silently from C11 in the derivations and is not automatic (the
+     unit discs hold only inside a neighbourhood that shrinks toward the singular set); K6 found no entry deriving the bridge. **Scope**:
+     this pass ends with the dispositions for all 35 rows, the foundation, and the skeletons of `Pinch` (part) and `MapColouring`; the
+     ladder (17 rows), the fragment rows (6) and five more go to a second planning pass. **Rulings** (sent by message): (a) the five
+     generalizations and the first two definitions adopted; (b) **REG-J′'s fan form with end tangents stays in the hypothesis, named, each
+     consumer's docstring saying it is stronger than the frozen words**. Alternative: the literal form with a `sorry` bridge. Why: a `sorry`
+     child with no hand proof behind it is what this workflow does not carry. Confidence: high. (c) **The bridge — literal REG-J′ and
+     saturation give the fan with end tangents: derived, derivable or false — goes to a deriver, FS131-E8, at the next free slot**; K6
+     writes its exact statement into its record. This bears outside the milestone: REG-J′ is route M's regularity hypothesis (rows 140–144),
+     so a "false" would be a finding for FS-126 and FS-127's stubs. (d) A second planning pass, FS131-K6b, follows K6's hand-back.
