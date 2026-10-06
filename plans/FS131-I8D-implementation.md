@@ -7,10 +7,53 @@ Working files: `data/fs131/i8d/`. Tools: `tools/fs131_i8d_*.py`.*
 
 ## Theorems this phase proved
 
-*Filled stage by stage; each line is read against its row. Until the wave's join every leaf here that cites a statement of
-`Plane/RingCalculus/SemiHub` rests on that module's open leaves (FS131-I8C's, proved in a tree of its own): the line says which.*
+All [kernel] on branch `fs131-w8d` (built through `./scripts/build.sh`, log `data/fs131/i8d/logs/build-4-outeradj.log`; **not gated,
+not on `main`**). Axioms from the built modules (`data/fs131/i8d/logs/axioms-4.verdict`): `outerAdj` and its module on the standard
+three; every theorem of `SemiHubPlaces` on the standard three **and, until the wave's join, on the open leaves of
+`Plane/RingCalculus/SemiHub` it cites** (job FS131-I8C's, proved in a tree of its own: `sorryAx` here, by that route only — the tool
+names the leaves per record). So the first three lines below are kernel theorems *given `SemiHub`'s statements*, and become
+unconditional when that module holds no `sorry`.
 
-(none yet — Stage 1 is the readback)
+- **FS129-SR3-OUTERADJ** (carrying FS116-V6-ADJ) — `HadwigerNelson.Plane.ArcMap.outerAdj` (`Plane/RingCalculus/Empty`), from
+  `not_sole_outer_of_adjacent_changePoints` (`Plane/RingCalculus/OuterAdj`). Axioms: exactly `[propext, Classical.choice,
+  Quot.sound]`; no assumption. Read against the row ("in a non-Siamese valid six-coloured fragment on a closed disc of radius above 1
+  about a vertex p of at least four colours, let y = r(ψ) and y′ = r(ψ + 60°) be change points of the ring such that neither the arc of
+  ω(p) just counter-clockwise of r(ψ − 60°) nor the arc just clockwise of r(ψ + 120°) lies on a (Q) arc; then no colour of p is at once
+  the only colour carried at y by a tile that is not a tile of p and the only colour carried at y′ by a tile that is not a tile of p"):
+  `F : ArcMap 6`, `F.Valid`, `F.NonSiamese`, `F.Covers p 1`, `4 ≤ (F.coloursAt p).ncard`, `F.IsChangePoint p ψ X X'`,
+  `F.IsChangePoint p (ψ + π / 3) Y Y'`, `¬ F.GermOnQ p (ψ - π / 3) .ccw`, `¬ F.GermOnQ p (ψ + 2 * π / 3) .cw`, any colour `c` ⊢ not
+  both `F.outerTileColours p (ringPt p ψ) = {c}` and `F.outerTileColours p (ringPt p (ψ + π / 3)) = {c}`. "The only colour carried by
+  a tile that is not a tile of p" is `O_y = {c}`, the planner's reading (the ring's own two colours are not colours of `p`).
+- **FS116-N3-CROSS** — `crossed_no_tip` (with `crossed_tip_zeroAngle`), `crossed_outer`, `crossed_four`, `crossed_changePoint`,
+  `crossed_semiHub` (`Plane/RingCalculus/SemiHubPlaces`). Axioms: the standard three and `SemiHub`'s `GermOnQWith.exists_isRingArc_ccw`,
+  `…_cw`, `fullSemiHub_star_crossed`, `qcol_inner_tile`. Read against the row, clause by clause: "every tile of p at y has a cone at y of
+  zero angle" — `crossed_no_tip`: no tile of `p` has `y` in its closure (stronger; the filed wording is the corollary); "the outer
+  colours at y lie in {a′, b′}" — `crossed_outer`: `F.outerTileColours p (ringPt p ψ) ⊆ {a', b'}`; "if y has four colours and every tile
+  at y a cone of positive angle at y, its outer colours are a′ and b′ and its missing pair is {a, b}" — `crossed_four`: `O_y = {a', b'}`
+  and `(F.coloursAt (ringPt p ψ))ᶜ = {a, b}` (positive angle idle); "unless an edge of p runs along ω(y) at p, p is a change point of
+  the ring of y, that ring being b just counter-clockwise of p and a just clockwise" — `crossed_changePoint`:
+  `¬ F.OnRingArc (ringPt p ψ) p → F.IsChangePoint (ringPt p ψ) (ψ + π) b a`, on `F.Covers p 2`; "and p is a semi-hub of kind O of the
+  ring of y" — `crossed_semiHub`: `F.IsSemiHub (ringPt p ψ) (ψ + π) .O`. The row's "at least four colours" at `p` is **exactly four**
+  in the last three (`(F.coloursAt p).ncard = 4`, the ruling of § 2.2), as it already was in the first two.
+- **FS116-N3-SEMI** — `semiHub_places` (`Plane/RingCalculus/SemiHubPlaces`), from `semiHub_places_O`, `semiHub_places_T`; and
+  **FS116-RING-TRANSFER-QC**, its first clause — `transferQC` (the planner's proof over it). Axioms: the standard three and `SemiHub`'s
+  two sub-arc lemmas, the four `ringTile_*`, `isRingArc_of_edge`, `four_le_of_bothKind`, `germPair_dicho`,
+  `fullSemiHub_star_parallel`, `fullSemiHub_star_parallel_T`. Read against the row ("… let y = r(ψ) be a semi-hub of the ring of p; then
+  y is a vertex of at least four colours, or y is a vertex of exactly three colours one of whose edges at y is an arc of the unit circle
+  about r(ψ + 60°) or about r(ψ − 60°) whose two side colours are both carried at that centre, which is then a vertex of at least four
+  colours, or y is a full parallel semi-hub of exactly three colours — the two absent at p and the colour of the tile of p whose cone
+  holds ψ + 180° (kind O) or ψ (kind T) in its interior"): `F.Valid`, `F.NonSiamese`, `F.Covers p 1`, *simple* at the four points `p`,
+  `r(ψ)`, `r(ψ ± π/3)`, `(F.coloursAt p).ncard = 4` (the ruling), `k ≤ ncard + 2`, `F.IsSemiHub p ψ kind` ⊢ the three alternatives:
+  `4 ≤` colours at `y`; or three and `y` on an arc of `Γ` on `ω(w)` with constant sides both carried at `w` (`F.BothKind w θ₁ θ₂`,
+  `ringPt p ψ ∈ ringArc w θ₁ θ₂`), `w = r(ψ ± π/3)`, `4 ≤` colours at `w`; or three, `F.IsFullSemiHub p ψ kind`, the swapped pair as
+  two `GermOnQWith`, and a tile `T` of `p` of colour `c` with `C(y) = A(p) ∪ {c}` and cone `⊇ [ψ + 150°, ψ + 210°]` (kind O) or
+  `⊇ [ψ − 30°, ψ + 30°]` (kind T) — the planner's stronger form of "in its interior". "One of whose edges at y is an arc" is read as "`y`
+  lies on such an arc" (the planner's statement; the proof's arc is an edge at `y` between two tiles of `y`).
+- **Helpers, each on the standard three** (class-free or read one object; no row of their own): `GermIn.tangent_mem_coneAt`,
+  `e_add_sub_e_sub`, `IsRingArc.inner_ne_outer`, `eq_of_ncard_eq_four`, `eq_triple_of_ncard_le_three`,
+  `disjoint_ball_of_far_witness`, `mem_closure_of_coneAt_toward`, `ringPt_ringPt_four_thirds` (`SemiHubPlaces`);
+  `Valid.dist_le_one_of_near_germ_closure`, `exists_ball_subset_closure_of_sole_outer`, `not_germOnQ_of_germIn_region`,
+  `norm_e_add_e_sub_e_sq`, `one_lt_norm_e_add_e_sub_e`, `not_sole_outer_of_adjacent_changePoints` (`OuterAdj`).
 
 ## Stage 1 — SAVED (FS131-I8D): the readback, the branch built as given
 
@@ -189,7 +232,106 @@ shared lemma was needed, and no message about them.
   lemmas, the four `ringTile_*`, `isRingArc_of_edge`, `four_le_of_bothKind`, `germPair_dicho`, `fullSemiHub_star_parallel`,
   `fullSemiHub_star_parallel_T`. The control prints `sorryAx` rooted at itself; `--fault` exits 1 (`axioms-3-fault.verdict`).
 - The statement check against `6e0cf10d` (`stmt-3-vs-6e0cf10d.log`): 235 compared, exactly the five ruled declarations changed, each by
-  exactly the ruled binder (`binders-3.log`); 16 added, all mine.
+  exactly the ruled binder (`binders-3.log`); 14 added, all mine.
 - `./scripts/dupnames.sh`: OK, exit 0 (`dupnames-3.log`); `tools/check_architecture.py`: `RESULT: PASS`
   (`check-architecture-3.log`; the module now imports `StarChart` and `SoleTip` beside `SemiHub`). My names scanned by declaration
   keyword on `origin/fs131-w8c`, `-w6`, `-w7`, `-w9`, `main`: no hit (`name-scan.log`; its two hits are on my own `HEAD`).
+
+## Stage 4 — SAVED (FS131-I8D): `outerAdj`, the guarded lint, the drafts
+
+### 4.1 `outerAdj` — a new module, and one cell of the plan corrected (about 290 lines against 380)
+
+`Plane/RingCalculus/OuterAdj` (imports `SoleTip`, and `SemiHub` for the proved `qcol_ccw`, `qcol_cw`; imported by `Empty`, so `Empty`
+now has `SemiHub` beneath it — an edge of the import graph that was not there), on the template of the sole-tip lemma with the arcs run
+outward. `outerAdj` in `Empty` is one line over `not_sole_outer_of_adjacent_changePoints`, which reads `k ≤ ncard + 2` and never six.
+
+**The plan's § 9.4 A1 does not hold as written, and the proof needed its repair.** A1: "near `y`, every interior point outside
+`B̄(p, 1)` and outside `B̄(y′, 1)` has colour `c` … not `X′` (near `y` the class of `X′` stays in `B̄(v, 1)` … and the points in question
+are outside `B̄(v, 1)`)". To first order a point `y + s·e(θ)` is outside `B̄(p, 1)` for `θ ∈ (−90°, 90°)`, outside `B̄(y′, 1)` for
+`θ ∈ (−150°, 30°)` and outside `B̄(v, 1)` only for `θ ∈ (−30°, 150°)`: between `−90°` and `−30°` it is outside the first two discs and
+inside `B(v, 1)`, where the tile of `X′` may be. The lemma here (`exists_ball_subset_closure_of_sole_outer`) removes the third disc
+too, and the arc of `ω(y′)` leaving `y` away from `p` is then shown outside `B̄(v, 1)` — an inequality the plan did not list, on no
+common unit circle with a landed lemma: `|e(a) + e(b) − e(c)|² = 3 + 2cos(a − b) − 2cos(a − c) − 2cos(b − c)`
+(`norm_e_add_e_sub_e_sq`), and at mutual angles `120° − t`, `120°`, `t` that is `4 − 3cos t + 2 sin 120° sin t > 1`
+(`one_lt_norm_e_add_e_sub_e`); the same lemma serves the mirror at `y′` (the disc about `r(ψ + 120°)`). The row's own argument
+(`plans/FS129-SR3-audit.md` § 3.1) is at tile level and does not make the claim; the defect is the plan's region-level restatement.
+
+The rest is the plan's: A0 (`ringGerm_outward` at `y` puts `ψ` in the cone of the outer tile, which so leaves `B̄(y′, 1)`; its free
+outer pair is `hv` and the germ just clockwise of `y′`, which lies in a class — `not_germOnQ_of_germIn_region`), A2
+(`mem_closure_diff_closedBall`), A3 (`twoCirc_cmp_one` with `σ = −1`). The identification of the tiles needs no radius from A1: the
+tile of colour `c` holding the arc point is the outer tile at `y` because the point is nearer than `1` to `y`
+(`NonSiamese.tile_eq_of_dist_lt`, three times). `Valid.dist_le_one_of_near_germ_closure` is the closure form the plan asked for.
+
+### 4.2 The save
+
+- Build: `data/fs131/i8d/logs/build-4-outeradj.log` — "build: OK — 468 of 468 batches, 3 module(s) rebuilt, 1 module(s) with
+  warnings", `EXIT=0`; rebuilt `OuterAdj`, `Empty`, `Proofs`. Read in the full log (`build/gate/build/20261006T234047Z-4155575.log`,
+  1,034 lines), not in that line: its one `error` line (l. 21, "target is out-of-date and needs to be rebuilt", for `OuterAdj`) is
+  the script's `lake build --no-build` pre-check, before batch 1 — the stale signal that starts the walk, not a failure of it; its 85
+  warning lines are one class, `declaration uses sorry`, at 17 distinct positions of `SemiHub` (replayed for its dependents). **No
+  warning in `OuterAdj`, `Empty` or `SemiHubPlaces`.** `rg -c "^\s*sorry"` on the ring calculus: `SemiHub` 17 and nothing else — the
+  seven leaves of this job are closed.
+- Axioms (`axioms-4.txt`, `axioms-4.verdict`): 29 records — 15 on a subset of the standard three (`outerAdj` and the six of
+  `OuterAdj` among them: exactly `propext`, `Classical.choice`, `Quot.sound`), 14 resting besides on open leaves of `SemiHub` only (13
+  distinct), 0 bad; the control prints `sorryAx` rooted at itself; `--fault` exits 1 (`axioms-4-fault.verdict`).
+- The statement check against `6e0cf10d` (`stmt-4-vs-6e0cf10d.log`): 235 compared in ten modules, exactly the five ruled declarations
+  changed, by exactly the ruled binder (`binders-4.log`); `outerAdj`'s statement unchanged. The tool's list of modules does not hold
+  the new `OuterAdj` (every declaration of it is an addition).
+- `./scripts/dupnames.sh`: OK, exit 0 (`dupnames-4.log`). `tools/check_architecture.py`: `RESULT: PASS`
+  (`check-architecture-4.log`: a row for `OuterAdj`, `Empty`'s row and imports brought up to date).
+- **The guarded lint**, after the last green build (no Lean file changed since): `scripts/slot.py --mem 8 --cpus 2 -- lake lint
+  --no-build -- --no-build --trace`, `data/fs131/i8d/logs/lint.log`: exit 0, "-- Linting passed for Proofs.", fourteen `Passed!`
+  lines, no line with "fail" or "error". No control planted for it by this job (it needs a build of its own; the wave's gate has it).
+
+### 4.3 Slips, the job's
+
+- § 3.4 first said "16 added" for the statement check's additions; the log says 14; corrected in place.
+- A grep of the full build log was first run with a variable holding two lines (the script prints "full output" twice), so it also
+  searched a file named `this`; the counts came from the real log and were re-read with the path written out (§ 4.2).
+- No Lean model of a semi-hub, of a star, or of two adjacent change points: every docstring keeps the planner's line on what is
+  owed (§ 9.6 of the plan). No vacuity run (the gate is the wave's).
+- The proofs of Stage 3 and 4 were drafted in scratch copies (`data/fs131/i8d/scratch/SHP.lean`, `OuterAdj.lean`) elaborated by
+  `lake env lean` while a build held the module; the evidence is the builds, not those runs.
+- I cannot read the harness's token count; the hand-back is at this saved stage on my own estimate of the brief's line.
+
+## For the join
+
+- **What discharges at the join**: when `SemiHub` holds no `sorry`, the block "FS131-I8D" of `scripts/Axioms.lean` (29 records)
+  reads CLEAN throughout; until then 14 of them print `sorryAx`, by `SemiHub`'s leaves only (`tools/fs131_i8d_axioms.py` is the
+  check that says so; after the join it should report 29 on the standard three and no record resting).
+- **Statements of `SemiHub` this module reads** (a change to any of them is a change here): `GermOnQWith.exists_isRingArc_ccw`,
+  `…_cw`, `qcol_inner_tile`, `fullSemiHub_star_crossed`, `fullSemiHub_star_parallel`, `…_parallel_T`, `germPair_dicho`, the four
+  `ringTile_*`, `isRingArc_of_edge`, `four_le_of_bothKind`, and the proved `qcol_cw`, `qcol_ccw`, `IsStar4`'s fields,
+  `IsStar4.angleIcc_subset_cone₂`, `…_cone₄`, `GermOnQWith.germOnQ`.
+- **A docstring of `SemiHub` to correct** (the sibling's file, not touched): `fullSemiHub_star_crossed`'s "four colours by
+  `germS_absent`" — `germS_absent` gives `ncard + 2 = k`, four colours only at `k = 6`.
+- **Names**: mine are listed in § "Theorems this phase proved" and in the block; none is declared on `origin/fs131-w8c` (at
+  `1e605b60`), `-w6`, `-w7`, `-w9` or `main` by a declaration-keyword scan; `./scripts/dupnames.sh` on the joined tree is the check.
+
+## Drafts for the front page
+
+*For the coordinator to file; nothing here is filed by this job, which did not run the gate (the brief withholds it), so it drafts no
+gate counts and no trust-ledger counts.*
+
+1. **`CLAUDE.md` § The gate, § Trust ledger** — no draft. What the wave's landing will meet from this job: 29 records in the block
+   "FS131-I8D" of `scripts/Axioms.lean`, CLEAN once `SemiHub` is whole; no purchase; no `VACUITY DECLARED` line added.
+2. **`LEDGER.md` § B, FS129-SR3-OUTERADJ's line** (slot: its grade cell, "hand; one mind") — draft: "kernel on `fs131-w8d`, not
+   gated: `HadwigerNelson.Plane.ArcMap.outerAdj` (`Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean`), from
+   `not_sole_outer_of_adjacent_changePoints` (`…/OuterAdj.lean`), on the standard three axioms, no assumption imported; the argument
+   reads at most two colours absent at `p`, never six."
+3. **`LEDGER.md` § B, the lines of FS116-N3-CROSS, FS116-N3-SEMI, FS116-RING-TRANSFER-QC** (slot: each grade cell) — draft, to file
+   at the wave's join and not before: "kernel: `crossed_no_tip`, `crossed_outer`, `crossed_four`, `crossed_changePoint`,
+   `crossed_semiHub`; `semiHub_places`; `transferQC` (`Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean`), on the standard
+   three axioms once `…/SemiHub` holds no `sorry`; at a vertex of exactly four colours (`(F.coloursAt p).ncard = 4`); CROSS's last
+   clause, filed at one mind and a checking reading, is closed in the kernel and reads neither the freedom of `y`'s outer pair nor
+   *simple* at `y`."
+4. **`plans/FS116-derivation.md`, the entries of FS116-N3-CROSS and FS116-N3-SEMI — errata** (the deriver's file; drafts only):
+   CROSS, its minds line — "the last clause: kernel-checked (FS131-I8D), the stall of V5's blind verdict closed by the disjoint cones
+   of the two side classes at `y` and the connected half-circle of directions into `B(p, 1)`"; CROSS, its statement — "a crossed full
+   semi-hub *of kind O*": the kind enters no clause but the name (generalization: the clauses hold at a closed change point).
+5. **`plans/FS131-w8-kernel-plan.md` § 9.4, A1** (the planner's record; a draft) — "…outside `B̄(p, 1)`, outside `B̄(y′, 1)` **and
+   outside `B̄(v, 1)`**…; the arc of `ω(y′)` from `y` away from `p` is outside `B̄(v, 1)` (`one_lt_norm_e_add_e_sub_e`)".
+6. **`CLAUDE.md` § Frontier** — no change of state: FS-131 stays open; on wave 8's line `SemiHubPlaces`, `Empty` and `OuterAdj` hold
+   no `sorry`, and `SemiHub`'s leaves are the wave's remaining debt.
+7. **Proof Atlas grade changes** (on landing, not now): FS129-SR3-OUTERADJ → kernel; FS116-N3-CROSS, FS116-N3-SEMI,
+   FS116-RING-TRANSFER-QC → kernel at the join.

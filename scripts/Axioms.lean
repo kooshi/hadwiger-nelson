@@ -6861,6 +6861,14 @@ leaves close. -/
 #print axioms HadwigerNelson.Plane.ArcMap.semiHub_places_T
 #print axioms HadwigerNelson.Plane.ArcMap.semiHub_places
 #print axioms HadwigerNelson.Plane.ArcMap.transferQC
+-- FS131-I8D: Plane/RingCalculus/OuterAdj, and the leaf of Plane/RingCalculus/Empty
+#print axioms HadwigerNelson.Plane.norm_e_add_e_sub_e_sq
+#print axioms HadwigerNelson.Plane.one_lt_norm_e_add_e_sub_e
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ_closure
+#print axioms HadwigerNelson.Plane.ArcMap.not_germOnQ_of_germIn_region
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_of_sole_outer
+#print axioms HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints
+#print axioms HadwigerNelson.Plane.ArcMap.outerAdj
 -- FS131-I8D block end
 
 #eval IO.println "=== PURCHASED ==="
