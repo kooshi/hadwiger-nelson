@@ -6421,6 +6421,48 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.sq9_not_isCuspAt_near_edge
 #print axioms HadwigerNelson.Plane.sqEdgePt_mem_essBoundary
 
+/-! ## FS131-I6E — wave 6's bridge: what every fan carries (`Plane/Saturated/FanBridge`, the five `Fan` lemmas) — the two leaves that read no saturation (`Fan.two_le_n`, `Fan.col_ne`) and the children of the five that rest on no open leaf of another line; the records wired over `gamma`, `IsUnitCurve.exists_polarGraph` and `Pinch` are listed in `plans/FS131-I6E-implementation.md` and enter here at the join -/
+
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.two_le_n
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.col_ne
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.col_ne_aux
+#print axioms HadwigerNelson.Plane.fanAngle
+#print axioms HadwigerNelson.Plane.polarPt_dist_fanAngle
+#print axioms HadwigerNelson.Plane.fanAngle_polarPt
+#print axioms HadwigerNelson.Plane.continuousAt_fanAngle
+#print axioms HadwigerNelson.Plane.image_polarPt_mem_nhds
+#print axioms HadwigerNelson.Plane.isOpen_setOf_polar_lt
+#print axioms HadwigerNelson.Plane.polarRegion_eq_image
+#print axioms HadwigerNelson.Plane.polarRegion_isOpen
+#print axioms HadwigerNelson.Plane.polarRegion_isPreconnected
+#print axioms HadwigerNelson.Plane.polarPt_add_two_pi
+#print axioms HadwigerNelson.Plane.polarRegion_mono
+#print axioms HadwigerNelson.Plane.mem_closure_polarRegion
+#print axioms HadwigerNelson.Plane.volume_essBoundary
+#print axioms HadwigerNelson.Plane.AeColouring.volume_essBdry
+#print axioms HadwigerNelson.Plane.isConnected_ball_diff_singleton
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.continuousOn_cyclicNext
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.isOpen_cell
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.isPreconnected_polarRegion_of_le
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.isPreconnected_cell
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.cell_subset_densitySet
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_ray_subset_cell
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.mem_closure_polarRegion_of_le
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_lower_of_pred
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_isOpen_subset_cells
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_isOpen_ae_two_colours
+#print axioms HadwigerNelson.Plane.IsUnitCurve.reverse
+#print axioms HadwigerNelson.Plane.dist_sq_polarPt_add
+#print axioms HadwigerNelson.Plane.re_e_mul_conj_I_mul_e
+#print axioms HadwigerNelson.Plane.re_e_mul_conj_e_eq_cos
+#print axioms HadwigerNelson.Plane.dist_sq_polarPt_add_I
+#print axioms HadwigerNelson.Plane.dist_sq_polarPt_sub_I
+#print axioms HadwigerNelson.Plane.eq_I_mul_or_eq_neg_of_re_eq_zero
+#print axioms HadwigerNelson.Plane.dist_sq_polarPt_polarPt_add_I
+#print axioms HadwigerNelson.Plane.eventually_dist_polarPt_lt_one
+#print axioms HadwigerNelson.Plane.AeColouring.eq_or_eq_of_mem_essClosure
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.eq_add_or_eq_sub_of_dist_eq_one
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

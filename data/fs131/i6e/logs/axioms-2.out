@@ -1,0 +1,80 @@
+=== CONTROL (must show sorryAx) ===
+'HadwigerNelson.Plane.AeColouring.gamma' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+=== the two leaves that read no saturation, and their children (expected: the standard three) ===
+'HadwigerNelson.Plane.AeColouring.Fan.two_le_n' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.col_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.col_ne_aux' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.fanAngle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.polarPt_dist_fanAngle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.fanAngle_polarPt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.continuousAt_fanAngle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.image_polarPt_mem_nhds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isOpen_setOf_polar_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.polarRegion_eq_image' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.polarRegion_isOpen' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.polarRegion_isPreconnected' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.polarPt_add_two_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.polarRegion_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_closure_polarRegion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.volume_essBoundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.volume_essBdry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isConnected_ball_diff_singleton' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.continuousOn_cyclicNext' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.isOpen_cell' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.isPreconnected_polarRegion_of_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.isPreconnected_cell' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.cell_subset_densitySet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.exists_ray_subset_cell' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.mem_closure_polarRegion_of_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.exists_lower_of_pred' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.exists_isOpen_subset_cells' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.exists_isOpen_ae_two_colours' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+=== children of the two branch leaves that read no open leaf (expected: the standard three) ===
+'HadwigerNelson.Plane.IsUnitCurve.reverse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_sq_polarPt_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.re_e_mul_conj_I_mul_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.re_e_mul_conj_e_eq_cos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_sq_polarPt_add_I' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_sq_polarPt_sub_I' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.eq_I_mul_or_eq_neg_of_re_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_sq_polarPt_polarPt_add_I' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.eventually_dist_polarPt_lt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.eq_or_eq_of_mem_essClosure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.eq_add_or_eq_sub_of_dist_eq_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+=== WIRED over open leaves of other lines (expected: sorryAx until fs131-w6f and Pinch land) ===
+'HadwigerNelson.Plane.AeColouring.Fan.exists_unitCurve_branch' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.exists_twoColourNhd_branch' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.dist_eq_one_of_common_contact' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.contacts_of_no_common' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.branch_outside_discs' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.Fan.branch_contacts' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
