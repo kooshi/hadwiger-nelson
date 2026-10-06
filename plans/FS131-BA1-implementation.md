@@ -57,3 +57,23 @@ files**. `--self-test`: **ten plants, each FIRED for its own reason** (`data/fs1
 unplanted run PASS.
 
 ## Stage 1 — SAVED (FS131-BA1)
+
+## Stage 2 — SAVED (FS131-BA1): the one ruled statement change (`AwayBend.idle`), with D1 proved
+
+- **The change** (inventory ruling 446 (b)): `AwayBend.idle` loses `hA : F.IsRingArc P a b c c'` and `hε : 0 < ε`; with `hA` gone its
+  implicit `c'` binds nothing and goes too (it could not be inferred at a call). It now reads
+  `theorem AwayBend.idle (hF : F.Valid) {P : ℂ} {a b : ℝ} {c : Fin k} (hC : ∀ θ ∈ Ioo a b, P + 2 * e θ ∈ closure (F.region c)) {ε : ℝ} :
+  AwayBend F F (Homeomorph.refl ℂ) ∅ P a b c ε`. Its one call, `BendStep.lean` l. 312 in `bend_away_subdiv`'s `contact` case, drops
+  the two arguments. Nothing else in `BendStep` changed: the `intro` line above still names `hA` and `hε`, and the build prints no
+  unused-variable warning for them (read in the log, not assumed).
+- **D1 proved in the same edit** (it is the proof that shows the two hypotheses unread): every field by `rfl`, `Iff.rfl`,
+  `LocalStep.refl`, `isCompact_empty`; `rest` is the empty set by `hC`.
+- **Build**: OK — 459 of 459 batches, 5 modules rebuilt (`BendAway`, `R2Cap`, `BendGap`, `BendStep`, `Proofs`), exit 0, no warning
+  other than `declaration uses 'sorry'` (`build/gate/build/20261006T061935Z-1633795.log`; driver log `data/fs131/ba1/build1a.log`);
+  `BendAway` now 5 `sorry` warnings (was 6). The walk takes about 8 minutes whatever is rebuilt, so I build at group saves and
+  iterate under `lake env lean` (never evidence).
+- **Statements** (`tools/fs131_ba1_stmt.py`, base `dd8c2c33`): 0 failures; the one allowed change printed; `BendStep`'s changed
+  lines: `[312]` (`data/fs131/ba1/stmt-stage2.txt`). `--self-test` after the change: ten plants FIRED, unplanted PASS
+  (`data/fs131/ba1/stmt-selftest.txt`).
+
+## Stage 2 — SAVED (FS131-BA1)
