@@ -4848,6 +4848,9 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.StandingFive.dyadic_summary
 #print axioms HadwigerNelson.StandingFive.finrank_standingField
 #print axioms HadwigerNelson.StandingFive.finrank_E7_and_K
+#print axioms HadwigerNelson.StandingFive.minpoly_eta
+#print axioms HadwigerNelson.StandingFive.irreducible_gPoly
+#print axioms HadwigerNelson.StandingFive.cev_hvec
 #print axioms HadwigerNelson.StandingFive.ncard_primes_above_two
 #print axioms HadwigerNelson.StandingFive.comap_conj_of_two_mem
 #print axioms HadwigerNelson.StandingFive.card_quotient_of_two_mem

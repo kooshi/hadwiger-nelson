@@ -179,3 +179,89 @@ parsed by script: 29 records, 28 on a subset of the standard three (27 on all th
 (`StationaryRatio.ratio_prod_le`, open on this branch) prints `sorryAx`. Statements: `data/fs131/i10c/logs/statements-group2.log` — PASS, 37
 base declarations unchanged; self-test PASS. `grep -c sorry` on the file: 0; no `axiom`, no `native_decide`. Environment linters on a scratch
 copy with `#lint` appended (iteration only, not the gate's run): 0 errors in 146 declarations.
+
+## Stage 4 — SAVED (FS131-I10C): the row's last clause — `[E₇:ℚ] = 7`, `g` the minimal polynomial of `η`
+
+The row says "E₇ the degree-7 subfield of ℚ(ζ₂₉)"; the skeleton stated no degree for `E7`. Three new statements, each a consequence of
+`[F:ℚ] = 28`: **`finrank_E7_and_K`** (`28 ≤ [K:ℚ]·[E₇:ℚ] ≤ 4·7`, so both are attained); **`minpoly_eta`** (`minpoly ℚ η = g`: `g` is monic of
+degree `[ℚ(η):ℚ]` and kills `η`); **`irreducible_gPoly`** (`g` irreducible over `ℚ` — the plan's input, here an output). With `cev_hvec`
+(`η = ζ + ζ¹² + ζ¹⁷ + ζ²⁸`) the file now states every clause of the row's first sentence.
+
+**Evidence.** Build: `data/fs131/i10c/logs/build-3-final.log` (exit 0, 8m14s; `Arith.StandingFive` rebuilt in 14 s with **no
+warning**, and `Proofs`; the twelve `sorry` warnings in the tree are the wave's other three files). Axioms:
+`data/fs131/i10c/axioms-final.lean`, log `data/fs131/i10c/logs/axioms-final.log`, parsed by script: 34 records — 31 on exactly the standard
+three, `usableBelow_347` on `[propext]`, `squaresBelow_11` on no axiom, and the control (`StationaryRatio.ratio_prod_le`, open on this branch)
+on `sorryAx`. Statements: `data/fs131/i10c/logs/statements-final.log` — PASS, 37 base declarations unchanged; self-test PASS. `grep -c sorry`
+on the file: 0; no `axiom`, no `native_decide`. The file is 1,283 lines (the skeleton was 156). Environment linters on a scratch copy with
+`#lint` appended (iteration only, not the gate's run; the copy is not kept — it was this file plus one line): 0 errors in 146 declarations.
+`scripts/Axioms.lean`'s block "FS131-I10C" lists 31 of these records, above the PURCHASED banner.
+
+## Findings (for the report's inventory)
+
+1. **Every clause of the row that the ruling left unconditional is in the kernel on this branch**, and the two conditional ones rest on the
+   named hypotheses alone (`StandingFloor n`; `Row123Chain`). No statement of the skeleton changed.
+2. **The usable clause is a fact about a finite field, not about `𝓞 F`** (`card_ge_of_usable`): any finite field of `Q ≡ 3 (mod 4)` elements
+   holding square roots of 3 and 11 and a root of `g` has `Q ≥ 347`. So `usable_card_ge` holds verbatim for the maximal ideals of **every
+   commutative ring with such elements** — the order `ℤ[√3, √11, η]`, and `𝓞` of every number field containing `F`. The same for the dyadic
+   clause (`fourteen_dvd_of_char_two`): every finite residue field of characteristic 2 of such a ring that also holds a primitive cube root
+   of unity has `2^{14k}` elements. A generalization of the row, proved.
+3. **`[F:ℚ] = 28`, `[E₇:ℚ] = 7`, and the irreducibility of `g` over `ℚ` all follow from the dyadic count**; the plan's § 5.4 inputs "`g`
+   irreducible mod 2 and mod 7" and "`[K:ℚ] = 4` from the library" are not read. The plan's route would also have worked; this one has no
+   irreducibility test in it.
+4. **`StablePrime standingField` is inhabited** (`exists_stablePrime_two`), so `localBound standingField` is an infimum over a non-empty
+   family: for this field the caveat in `SpectralChain`'s module doc ("every real number field has one (Chebotarev), not proved here") is
+   discharged.
+5. **`card_quotient_of_two_mem` does not read the stability of its prime**: every maximal ideal above 2 is stable by the leaf before it. The
+   statement is unchanged; the join may want it on maximal ideals.
+6. **"The least usable residue field has 347 elements" is half in the kernel**: `usable_card_ge` is the lower bound; that a place of `F`
+   attains 347 stays [tools] (`tools/fs131_k10_usable.py`), as the module doc says. The abstract clause's bound is attained in the kernel
+   (`ZMod 347`: `95² = 3`, `59² = 11`, `g(8) = 0`). Putting the attainment at `F` in the kernel needs a prime of `𝓞 F` above 347 of residue
+   degree 1 — not a leaf, not done.
+7. **New statements, one mind, owed the planner's read-back**: the list under "Theorems this phase proved".
+8. **Lean facts met** (drafts below).
+
+## Slips, mine
+
+- My first proof of `numberField_standingField` used `where`, which removed the ` :=` the statement check reads; the check caught it before
+  any commit, and I restored the text. No statement changed at any commit.
+- The first run of the data tool's fault was read through `| tail` (its exit status was `tail`'s); re-run unpiped, exit 1
+  (`data/fs131/i10c/logs/data-tool-fault.log`).
+- After stage 2 I deleted the scratch file that stage's text cites (`data/fs131/i10c/scratch/Final.lean`) and restored it from git in the
+  same step, before the commit. It is kept: it is the file as it stood at stage 3's build, before `finrank_E7_and_K`'s docstring was
+  corrected and `minpoly_eta`, `irreducible_gPoly` were added.
+- Waits on builds used `sleep` in the foreground (three times, under four minutes each); the conditions read were the build log's last line.
+
+## Drafts for the front page
+
+Each names its slot. The branch does not run the gate (the brief), so no gate count is drafted: the counts are the landing's.
+
+1. **`LEDGER.md` § B, row `TC1-STANDING-FIVE`** (the cell that reads "derived (PARI exact); one mind; given MR"), regraded:
+   > [kernel] on `fs131-w10c` (lands with wave 10): `F = ℚ(√3, √11, η)`, `η = ζ + ζ¹² + ζ¹⁷ + ζ²⁸` (`StandingFive.cev_hvec`), is a number
+   > field (`numberField_standingField`) of degree 28 (`finrank_standingField`), totally real (`isTotallyReal_standingField`), containing `K`
+   > (`K_le`), with `[E₇:ℚ] = 7` (`finrank_E7_and_K`); exactly two primes of `F(i)` lie above 2 (`ncard_primes_above_two`), both stable
+   > (`comap_conj_of_two_mem`), each with residue field of `128²` elements on which conjugation is not the identity
+   > (`card_quotient_of_two_mem`); every usable residue field has at least 347 elements (`usable_card_ge`, `no_small_usable`). **Over the
+   > named hypothesis `StandingFloor n`** (G56's floor at `U₁₂₈` and at every `Γ_Q`, `Q ≡ 3 (mod 4)`, `Q ≥ 347`; [tools]/[hand] on Weil):
+   > `L(F) ≥ n` (`le_localBound`, `seven_le_localBound`); **and over `Row123Chain`** (`min (L(F)) 5 ≤ χ(F²)`, row 123, MR inside it):
+   > `χ(F²) ≥ 5` (`five_le_chromaticNumber`). Axioms: the standard three. That 347 is attained stays [tools].
+2. **`CLAUDE.md` § Frontier, the FS-131 line / the Proof Atlas**: TC1-STANDING-FIVE moves from [derived] to [kernel on its branch], its two
+   conditional clauses [kernel over `StandingFloor`, `Row123Chain`]; closed at the wave's join and gate.
+3. **`CLAUDE.md` § Trust ledger**: `scripts/Axioms.lean` gains a block "FS131-I10C" of 31 records, all under CLEAN, none purchased or
+   imported; the counts move at the landing's audit.
+4. **`plans/FS131-kernel-plan.md` § 7.4** (the planner's draft rows stand): `StandingFloor n` and `Row123Chain` are the only hypotheses of
+   this file; no new one was added.
+5. **`data/fs131/k1/dispositions.csv` line 179**, reason (the planner's draft, with the bound now proved): "its unconditional clauses (the
+   field, degree 28, [E7:Q] = 7, its two places above 2, no usable residue field below 347) kernel on fs131-w10c; 'so L(F) >= 7' as an
+   implication from the finite-target floor (StandingFloor, outside the backlog); 'given MR, chi(F^2) >= 5' from that floor at five with
+   Row123Chain".
+6. **`LEAN.md`**, three facts:
+   - § Building, after "`lake env lean <file>` is fine for iteration": *it also does not report a missing docstring on a public `def`
+     (the lakefile's linter options are not in force); the build does.*
+   - § Searching — Lean: *At the pin Mathlib holds two ramification APIs. The number-field lemmas — `Ideal.sum_ramification_inertia`
+     (`Σ e·f = [L:K]` over `IsDedekindDomain.primesOverFinset`), `Ideal.absNorm_eq_pow_inertiaDeg'`,
+     `Ideal.IsDedekindDomain.ramificationIdx'_eq_multiplicity` — are stated for the primed `Ideal.ramificationIdx'` / `Ideal.inertiaDeg'`
+     (`Mathlib/NumberTheory/RamificationInertia/`), over `Ideal.span {((p : ℕ) : ℤ)}`; the unprimed names are a newer definition in
+     `Mathlib/RingTheory/RamificationInertia/` with a different statement of the sum.* `[t½: about a month — a rename in flight]`
+   - § Searching — Lean: *`simp` does not rewrite the coercion of a numeral out of a subfield, `((3 : ↥S) : K)`; `map_ofNat S.subtype 3`
+     and `norm_cast` do. And dot notation on a `local notation` (`twoZ.inertiaDeg' P`) is an unknown identifier: make the object an `abbrev`.*
+7. **`BIBLIOGRAPHY.md`**: no new key used.

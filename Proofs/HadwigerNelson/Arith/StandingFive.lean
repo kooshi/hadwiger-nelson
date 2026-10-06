@@ -1005,8 +1005,7 @@ theorem finrank_standingField : Module.finrank ℚ standingField = 28 := by
   have h2 := finrank_standingField_le
   omega
 
-/-- **`[E₇:ℚ] = 7` and `[K:ℚ] = 4`** — "E₇ the degree-7 subfield", and `K` biquadratic: `28 = [F:ℚ] ≤ [K:ℚ]·[E₇:ℚ] ≤ 4·7`.
-So `g` is the minimal polynomial of `η`, with no irreducibility test. -/
+/-- **`[E₇:ℚ] = 7` and `[K:ℚ] = 4`** — "E₇ the degree-7 subfield", and `K` biquadratic: `28 = [F:ℚ] ≤ [K:ℚ]·[E₇:ℚ] ≤ 4·7`. -/
 theorem finrank_E7_and_K : Module.finrank ℚ E7 = 7 ∧
     Module.finrank ℚ (Subfield.closure ({Real.sqrt 3, Real.sqrt 11} : Set ℝ)) = 4 := by
   haveI h7fin : FiniteDimensional ℚ (IntermediateField.adjoin ℚ ({eta} : Set ℝ)) :=
@@ -1046,6 +1045,24 @@ theorem finrank_E7_and_K : Module.finrank ℚ E7 = 7 ∧
     rw [eK] at h28
     omega
   exact ⟨(finrank_closure {eta}).trans e7, (finrank_closure {Real.sqrt 3, Real.sqrt 11}).trans eK⟩
+
+/-- **`g` is the minimal polynomial of `η` over `ℚ`**, read off the degree `[ℚ(η):ℚ] = 7` — with no irreducibility test. -/
+theorem minpoly_eta : minpoly ℚ eta = gPoly.map (Int.castRingHom ℚ) := by
+  have hint : IsIntegral ℚ eta := isIntegral_eta.tower_top
+  haveI : FiniteDimensional ℚ (IntermediateField.adjoin ℚ ({eta} : Set ℝ)) :=
+    IntermediateField.finiteDimensional_adjoin (by rintro x rfl; exact hint)
+  have h7 : Module.finrank ℚ (IntermediateField.adjoin ℚ ({eta} : Set ℝ)) = 7 :=
+    (finrank_closure {eta}).symm.trans finrank_E7_and_K.1
+  have hdeg : (minpoly ℚ eta).natDegree = 7 := by
+    rw [← IntermediateField.adjoin.finrank hint]; exact h7
+  have h0 : Polynomial.aeval eta (gPoly.map (Int.castRingHom ℚ)) = 0 :=
+    (Polynomial.aeval_map_algebraMap ℚ eta gPoly).trans (by rw [aeval_gPoly, g_eta])
+  exact (Polynomial.eq_of_monic_of_dvd_of_natDegree_le (minpoly.monic hint) (gPoly_monic.map _) (minpoly.dvd ℚ eta h0)
+    (by rw [hdeg, gPoly_monic.natDegree_map, gPoly_natDegree])).symm
+
+/-- **`g` is irreducible over `ℚ`** (the plan read this off `g mod 2`; here it is a consequence of the dyadic count). -/
+theorem irreducible_gPoly : Irreducible (gPoly.map (Int.castRingHom ℚ)) :=
+  minpoly_eta ▸ minpoly.irreducible isIntegral_eta.tower_top
 
 /-- "a totally real field": every embedding of `F` into `ℂ` is real (`F/ℚ` is Galois and `F ⊆ ℝ`). -/
 theorem isTotallyReal_standingField (φ : standingField →+* ℂ) (x : standingField) : (φ x).im = 0 :=
