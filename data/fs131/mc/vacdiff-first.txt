@@ -1,0 +1,46 @@
+counter vs the main scan: declarations 12999 / 12999, refutations 182 / 182: agree
+counter vs the landing scan: declarations 13386 / 13386, refutations 192 / 192: agree
+added EVIDENCE WITNESS HadwigerNelson.Plane.awayModel_isRingArc_gap :: HadwigerNelson.Plane.awayModel.IsRingArc HadwigerNelson.Plane.awayP (1 / 5) (3 / 10) 7 0
+added-evidence EVIDENCE WITNESS HadwigerNelson.Plane.awayModel_isRingArc_gap :: HadwigerNelson.Plane.awayModel.IsRingArc HadwigerNelson.Plane.awayP (1 / 5) (3 / 10) 7 0
+added EVIDENCE WITNESS HadwigerNelson.Plane.cuspFrag_isRingArc :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsRingArc Complex.I (-(Real.pi / 2) + 1 / 10) (-(Real.pi / 2) + 2 / 5) 0 1
+added-evidence EVIDENCE WITNESS HadwigerNelson.Plane.cuspFrag_isRingArc :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsRingArc Complex.I (-(Real.pi / 2) + 1 / 10) (-(Real.pi / 2) + 2 / 5) 0 1
+added EVIDENCE WITNESS HadwigerNelson.Plane.hornModel_isHorn :: HadwigerNelson.Plane.hornModel.IsHorn HadwigerNelson.Plane.plantPt 0 (-1 / 2) (1 / 2) 7
+added-evidence EVIDENCE WITNESS HadwigerNelson.Plane.hornModel_isHorn :: HadwigerNelson.Plane.hornModel.IsHorn HadwigerNelson.Plane.plantPt 0 (-1 / 2) (1 / 2) 7
+added EVIDENCE WITNESS HadwigerNelson.Plane.stuckModel_isHorn_pi :: HadwigerNelson.Plane.stuckModel.IsHorn HadwigerNelson.Plane.plantPt (0 + Real.pi) (-1) 1 9
+added-evidence EVIDENCE WITNESS HadwigerNelson.Plane.stuckModel_isHorn_pi :: HadwigerNelson.Plane.stuckModel.IsHorn HadwigerNelson.Plane.plantPt (0 + Real.pi) (-1) 1 9
+added EVIDENCE WITNESS HadwigerNelson.Plane.stuckModel_isStuck :: HadwigerNelson.Plane.stuckModel.IsStuck HadwigerNelson.Plane.plantPt
+added-evidence EVIDENCE WITNESS HadwigerNelson.Plane.stuckModel_isStuck :: HadwigerNelson.Plane.stuckModel.IsStuck HadwigerNelson.Plane.plantPt
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.paint_condition5 :: F.Condition5
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.relabel_condition5 :: F.Condition5
+added SITE WITNESSED HadwigerNelson.Plane.awayModel_isRingArc_gap :: HadwigerNelson.Plane.awayModel.IsRingArc HadwigerNelson.Plane.awayP (1 / 5) (3 / 10) 7 0 [by HadwigerNelson.Plane.awayModel_isRingArc_gap]
+added SITE WITNESSED HadwigerNelson.Plane.cuspFrag_isRingArc :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsRingArc Complex.I (-(Real.pi / 2) + 1 / 10) (-(Real.pi / 2) + 2 / 5) 0 1 [by HadwigerNelson.Plane.cuspFrag_isRingArc]
+added SITE WITNESSED HadwigerNelson.Plane.hornModel_isHorn :: HadwigerNelson.Plane.hornModel.IsHorn HadwigerNelson.Plane.plantPt 0 (-1 / 2) (1 / 2) 7 [by HadwigerNelson.Plane.hornModel_isHorn]
+added SITE WITNESSED HadwigerNelson.Plane.stuckModel_isHorn_pi :: HadwigerNelson.Plane.stuckModel.IsHorn HadwigerNelson.Plane.plantPt (0 + Real.pi) (-1) 1 9 [by HadwigerNelson.Plane.stuckModel_isHorn_pi]
+added SITE WITNESSED HadwigerNelson.Plane.stuckModel_isStuck :: HadwigerNelson.Plane.stuckModel.IsStuck HadwigerNelson.Plane.plantPt [by HadwigerNelson.Plane.stuckModel_isStuck]
+main rows 1205, landing rows 1217; lost 0 (0 with a removed declaration); added 12
+  added EVIDENCE WITNESS on (evidence): 5
+  added SITE GENERIC on Condition5: 2
+  added SITE WITNESSED on IsHorn: 2
+  added SITE WITNESSED on IsRingArc: 2
+  added SITE WITNESSED on IsStuck: 1
+  added rows in Plane.Models.Applied: 4
+  added rows in Plane.Models.Bends: 2
+  added rows in Plane.Models.Moves: 2
+  added rows in Plane.Models.Paint: 2
+  added rows in Plane.Models.Stuck: 2
+  declarations: 12999 -> 13386 (+387)
+  refutations-skipped: 182 -> 192 (+10)
+  sites: 1130 -> 1137 (+7)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 32 -> 37 (+5)
+  generic: 1093 -> 1095 (+2)
+  unknown: 2 -> 2 (+0)
+  module Plane.Models.Applied: declarations 0 -> 15 (+15), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Models.Bends: declarations 0 -> 43 (+43), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Models.Moves: declarations 0 -> 86 (+86), refutations 0 -> 2 (+2)  [new module]
+  module Plane.Models.Paint: declarations 0 -> 127 (+127), refutations 0 -> 5 (+5)  [new module]
+  module Plane.Models.Stuck: declarations 0 -> 116 (+116), refutations 0 -> 3 (+3)  [new module]
+  by module: declarations +387, refutations +10: equal to the scans difference
+vacdiff: PASS

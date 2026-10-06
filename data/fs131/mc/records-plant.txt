@@ -1,0 +1,16 @@
+planted: sorryAx on HadwigerNelson.Plane.stuckModel_hyps; HadwigerNelson.Plane.ArcMap.IsSector.false_of_col dropped; HadwigerNelson.Plane.ArcMap.allowedCone_tangent doubled; HadwigerNelson.Plane.ArcMap.interiorPts_paint under PURCHASED; - on Quot.sound alone  (['dbl', 'drop', 'move', 'sorry'])
+main: 8330 theorems; landing: 8677; wave (landing only): 347 = 329 hand-written + 18 generated with no record asked; gone (main only): 0; records in the log: 5550
+  generated, by suffix: eq_1 18
+  wave records on exactly the three: 326
+  Plane.Models.Applied: 15
+  Plane.Models.Bends: 37
+  Plane.Models.Moves: 72
+  Plane.Models.Paint: 104
+  Plane.Models.Stuck: 98
+  head HadwigerNelson.Plane.stuckModel_hyps: FAILS
+FAIL MISSING HadwigerNelson.Plane.ArcMap.IsSector.false_of_col (0 records; module Proofs.HadwigerNelson.Plane.Models.Paint)
+FAIL DOUBLED HadwigerNelson.Plane.ArcMap.allowedCone_tangent (2 records; module Proofs.HadwigerNelson.Plane.Models.Paint)
+FAIL NOT-CLEAN-SECTION HadwigerNelson.Plane.ArcMap.interiorPts_paint: printed under PURCHASED
+FAIL FOREIGN HadwigerNelson.Plane.stuckModel_hyps: ['sorryAx']
+FAIL HEAD HadwigerNelson.Plane.stuckModel_hyps: axioms ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+records: FAIL (5)

@@ -385,12 +385,16 @@ Two exclusions are worth their reasons, because both look like obvious additions
 * **The example maps' carriers (FS131-MC1, by the procedure below; `Plane/Models/{Paint, Moves, Stuck, Bends, Applied}`).** **No new
   carrier, IN or OUT**: the lane defines maps (`ArcMap.relabel`, `ArcMap.paint`, `brickBase`, `hornModel`, `twoHornModel`, `stuckModel`,
   `shadowModel`, `awayModel`), point sets, arc sets and colourings — no structure and no predicate a theorem may take as a hypothesis —
-  so no name is added to `trackedProps` and no control is planted. What the lane gives this scan is evidence in the one form it
-  registers, an unconditional theorem at a closed instance: `Valid`, `IsHorn`, `IsStuck` and `IsRingArc` each gain witnesses at maps of
-  the plane (`hornModel_valid`, `stuckModel_isStuck`, `awayModel_isRingArc_gap`, …; the `EVIDENCE WITNESS` rows). The sites those maps
-  inhabit stay `GENERIC`: a site on a variable map is the caller's obligation by this scan's law, and no witness can be registered
-  against it. That each model meets every hypothesis of a theorem at once is checked where it can be, by elaboration
-  (`Plane/Models/Applied` applies each theorem to its model), and said in that theorem's docstring.
+  so no name is added to `trackedProps` and no control is planted. What this scan reads of the lane (`tools/fs131_l5_vacdiff.py`
+  against wave 5's gated scan: no row lost, none added to a declaration `main` held): **five witnesses**, each an unconditional
+  theorem at a closed instance and each also a `WITNESSED` site of its own statement — `IsHorn` (`hornModel_isHorn`,
+  `stuckModel_isHorn_pi`), `IsStuck` (`stuckModel_isStuck`), `IsRingArc` (`awayModel_isRingArc_gap`, `cuspFrag_isRingArc`) — and
+  **two `GENERIC` sites** on `Condition5` (`ArcMap.relabel_condition5`, `ArcMap.paint_condition5`). A statement that is a conjunction
+  (`stuckModel_isHorn`, `awayModel_hyps`) or an unconditional `X.Valid` (`hornModel_valid`; none of `main`'s 57 witnesses is one) is
+  not read as a witness. The sites those maps inhabit on the landed theorems stay `GENERIC`: a site on a variable map is the caller's
+  obligation by this scan's law, and no witness can be registered against it. That each model meets every hypothesis of a theorem at
+  once is checked where it can be, by elaboration (`Plane/Models/Applied` applies each theorem to its model), and said in that
+  theorem's docstring.
 
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
