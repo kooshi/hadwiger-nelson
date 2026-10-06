@@ -1380,8 +1380,113 @@ noncomputable def shadowCol (z : ℂ) : Fin 9 := by
   classical
   exact if z ∈ shadowWg then 7 else 8
 
+section ShadowHelpers
+
+open ArcMap
+
+/-! ### The boundary arcs of a horn as point conditions, and the four horn sets of `shadowModel` (FS131-MB2's helpers) -/
+
+/-- **A point of a horn's three boundary arcs** lies within the horn's radius of its base point, and on one of the two tangent circles or
+at the radius exactly. -/
+theorem shadowModel_mem_hornArcs {v : ℂ} {α κ₁ κ₂ ρ : ℝ} (hρ : 0 ≤ ρ) (h1 : |κ₁| * ρ ≤ 2) (h2 : |κ₂| * ρ ≤ 2) {z : ℂ}
+    (hz : z ∈ ⋃ a ∈ hornArcs v α κ₁ κ₂ ρ, a.carrier) :
+    dist z v ≤ ρ ∧ (tanHeight κ₁ (frameX v α z) (frameY v α z) = 0 ∨ tanHeight κ₂ (frameX v α z) (frameY v α z) = 0 ∨
+      dist z v = ρ) := by
+  have hg : ∀ κ : ℝ, |κ| * ρ ≤ 2 → ∀ w ∈ (germArc v α κ ρ).carrier,
+      dist w v ≤ ρ ∧ tanHeight κ (frameX v α w) (frameY v α w) = 0 := by
+    intro κ hκ w hw
+    rw [carrier_germArc v α hρ hκ] at hw
+    obtain ⟨s, hs, rfl⟩ := hw
+    refine ⟨by rw [dist_eq_norm, norm_branchPt_sub v α κ hs.1]; exact hs.2, ?_⟩
+    rw [tanHeight_branchPt v α κ κ (le_trans (mul_le_mul_of_nonneg_left hs.2 (abs_nonneg κ)) hκ) hs.1]
+    ring
+  simp only [hornArcs, biUnion_insert, biUnion_singleton, mem_union] at hz
+  rcases hz with hz | hz | hz
+  · exact ⟨(hg κ₁ h1 z hz).1, Or.inl (hg κ₁ h1 z hz).2⟩
+  · exact ⟨(hg κ₂ h2 z hz).1, Or.inr (Or.inl (hg κ₂ h2 z hz).2)⟩
+  · obtain ⟨θ, -, rfl⟩ := hz
+    have : dist (v + (ρ : ℂ) * e θ) v = ρ := by rw [dist_eq_norm, add_sub_cancel_left, norm_mul_e hρ]
+    exact ⟨this.le, Or.inr (Or.inr this)⟩
+
+/-- **A horn set misses another horn's boundary arcs** when the two horns share their base point and direction, the set's radius is at
+most the arcs', and neither of the arcs' curvatures is strictly inside the set's window — or when the base points are further apart than
+the two radii together. -/
+theorem shadowModel_hornSet_not_mem_hornArcs {v w : ℂ} {κ₁ κ₂ σ₁ σ₂ r ρ : ℝ} (hρ : 0 ≤ ρ) (h1 : |σ₁| * ρ ≤ 2) (h2 : |σ₂| * ρ ≤ 2)
+    (h : (v = w ∧ r ≤ ρ ∧ (σ₁ ≤ κ₁ ∨ κ₂ ≤ σ₁) ∧ (σ₂ ≤ κ₁ ∨ κ₂ ≤ σ₂)) ∨ r + ρ ≤ dist v w) {z : ℂ}
+    (hz : z ∈ hornSet v 0 κ₁ κ₂ r) : z ∉ ⋃ a ∈ hornArcs w 0 σ₁ σ₂ ρ, a.carrier := by
+  intro hza
+  obtain ⟨hd, hcase⟩ := shadowModel_mem_hornArcs hρ h1 h2 hza
+  obtain ⟨hzr, -, hA, hB⟩ := hz
+  rcases h with ⟨rfl, hrρ, hs1, hs2⟩ | hfar
+  · have key : ∀ σ : ℝ, (σ ≤ κ₁ ∨ κ₂ ≤ σ) → tanHeight σ (frameX v 0 z) (frameY v 0 z) ≠ 0 := by
+      rintro σ (hσ | hσ) h0
+      · have := tanHeight_anti hσ (frameX v 0 z) (frameY v 0 z)
+        unfold TanAbove at hA; linarith
+      · have := tanHeight_anti hσ (frameX v 0 z) (frameY v 0 z)
+        unfold TanBelow at hB; linarith
+    rcases hcase with h0 | h0 | h0
+    · exact key σ₁ hs1 h0
+    · exact key σ₂ hs2 h0
+    · linarith
+  · have := dist_triangle v z w
+    rw [dist_comm v z] at this
+    linarith
+
+/-- The distances between the planted points. -/
+theorem shadowModel_dists : dist plantPt plantN = 1 ∧ dist plantPt plantS = 1 ∧ dist plantN plantS = 2 ∧ dist plantN plantPt = 1 ∧
+    dist plantS plantPt = 1 ∧ dist plantS plantN = 2 := by
+  have h1 : dist plantPt plantN = 1 := by rw [dist_eq_norm, plantN, sub_add_cancel_left, norm_neg, Complex.norm_I]
+  have h2 : dist plantPt plantS = 1 := by rw [dist_eq_norm, plantS, sub_sub_cancel, Complex.norm_I]
+  have h3 : dist plantN plantS = 2 := by
+    rw [dist_eq_norm, plantN, plantS, show plantPt + I - (plantPt - I) = 2 * I by ring, norm_mul, Complex.norm_I]; norm_num
+  exact ⟨h1, h2, h3, by rw [dist_comm]; exact h1, by rw [dist_comm]; exact h2, by rw [dist_comm]; exact h3⟩
+
+/-- **The painted set of `shadowModel` misses its new arcs**: each of the four horn sets is open, off its own boundary and off the other
+three horns' boundaries. -/
+theorem shadowModel_not_mem_arcs {z : ℂ} (hz : z ∈ shadowWg ∪ shadowWh) : z ∉ ⋃ a ∈ shadowArcs, a.carrier := by
+  obtain ⟨d1, d2, d3, d4, d5, d6⟩ := shadowModel_dists
+  unfold shadowArcs
+  rw [biUnion_union, biUnion_union, biUnion_union]
+  rintro ((ha | ha) | (ha | ha)) <;> rcases hz with (hz | hz) | (hz | hz) <;> revert ha <;>
+    first
+    | exact shadowModel_hornSet_not_mem_hornArcs (by norm_num) (by norm_num) (by norm_num)
+        (Or.inl ⟨rfl, by norm_num, by norm_num, by norm_num⟩) hz
+    | exact shadowModel_hornSet_not_mem_hornArcs (by norm_num) (by norm_num) (by norm_num)
+        (Or.inr (by simp only [d1, d2, d3, d4, d5, d6]; norm_num)) hz
+
+/-- The two painted colours' sets are disjoint. -/
+theorem shadowModel_disjoint {z : ℂ} (hg : z ∈ shadowWg) (hh : z ∈ shadowWh) : False := by
+  obtain ⟨d1, d2, d3, d4, d5, d6⟩ := shadowModel_dists
+  have far : ∀ {v w : ℂ} {r ρ : ℝ}, dist z v < r → dist z w < ρ → r + ρ ≤ dist v w → False := fun {v w r ρ} h1 h2 h3 => by
+    have := dist_triangle v z w
+    rw [dist_comm v z] at this
+    linarith
+  rcases hg with hg | hg <;> rcases hh with hh | hh
+  · exact tanBelow_tanAbove_false (by norm_num : (-1 / 2 : ℝ) ≤ 1 / 2) hh.2.2.2 hg.2.2.1
+  · exact far hg.1 hh.1 (by rw [d1]; norm_num)
+  · exact far hg.1 hh.1 (by rw [d5]; norm_num)
+  · exact far hg.1 hh.1 (by rw [d6]; norm_num)
+
+/-- The painted colours' sets are open. -/
+theorem shadowModel_isOpen : IsOpen shadowWg ∧ IsOpen shadowWh :=
+  ⟨(isOpen_hornSet _ _ _ _ _).union (isOpen_hornSet _ _ _ _ _), (isOpen_hornSet _ _ _ _ _).union (isOpen_hornSet _ _ _ _ _)⟩
+
+/-- The painting on its two sets. -/
+theorem shadowModel_shadowCol {z : ℂ} : (z ∈ shadowWg → shadowCol z = 7) ∧ (z ∈ shadowWh → shadowCol z = 8) := by
+  classical
+  refine ⟨fun h => ?_, fun h => ?_⟩
+  · simp only [shadowCol, h, if_true]
+  · have : z ∉ shadowWg := fun hg => shadowModel_disjoint hg h
+    simp only [shadowCol, this, if_false]
+
+end ShadowHelpers
+
 theorem shadowArcs_nondegenerate : ∀ a ∈ shadowArcs, a.Nondegenerate := by
-  sorry
+  rintro a ((ha | ha) | (ha | ha))
+  · exact hornArcs_nondegenerate _ _ (by norm_num) (by norm_num) (by norm_num) (by norm_num) a ha
+  · exact hornArcs_nondegenerate _ _ (by norm_num) (by norm_num) (by norm_num) (by norm_num) a ha
+  · exact hornArcs_nondegenerate _ _ (by norm_num) (by norm_num) (by norm_num) (by norm_num) a ha
+  · exact hornArcs_nondegenerate _ _ (by norm_num) (by norm_num) (by norm_num) (by norm_num) a ha
 
 theorem shadowArcs_finite : shadowArcs.Finite :=
   ((hornArcs_finite _ _ _ _ _).union (hornArcs_finite _ _ _ _ _)).union
@@ -1389,11 +1494,26 @@ theorem shadowArcs_finite : shadowArcs.Finite :=
 
 theorem frontier_shadowW_subset :
     frontier (shadowWg ∪ shadowWh) ⊆ ⋃ a ∈ (brickBase 9 (by norm_num)).arcs ∪ shadowArcs, a.carrier := by
-  sorry
+  intro z hz
+  have hz' : z ∈ ⋃ a ∈ shadowArcs, a.carrier := by
+    unfold shadowArcs
+    rw [biUnion_union, biUnion_union, biUnion_union]
+    rcases frontier_union_subset _ _ hz with ⟨h, -⟩ | ⟨-, h⟩
+    · rcases frontier_union_subset _ _ h with ⟨h', -⟩ | ⟨-, h'⟩
+      · exact Or.inl (Or.inl (frontier_hornSet_subset _ _ (by norm_num) (by norm_num) (by norm_num) (by norm_num) h'))
+      · exact Or.inl (Or.inr (frontier_hornSet_subset _ _ (by norm_num) (by norm_num) (by norm_num) (by norm_num) h'))
+    · rcases frontier_union_subset _ _ h with ⟨h', -⟩ | ⟨-, h'⟩
+      · exact Or.inr (Or.inl (frontier_hornSet_subset _ _ (by norm_num) (by norm_num) (by norm_num) (by norm_num) h'))
+      · exact Or.inr (Or.inr (frontier_hornSet_subset _ _ (by norm_num) (by norm_num) (by norm_num) (by norm_num) h'))
+  rw [biUnion_union]; exact Or.inr hz'
 
 theorem shadowCol_locallyConstant : ∀ x ∈ shadowWg ∪ shadowWh,
     x ∉ ⋃ a ∈ (brickBase 9 (by norm_num)).arcs ∪ shadowArcs, a.carrier → ∀ᶠ y in 𝓝 x, shadowCol y = shadowCol x := by
-  sorry
+  rintro x (hx | hx) -
+  · filter_upwards [shadowModel_isOpen.1.mem_nhds hx] with y hy
+    rw [shadowModel_shadowCol.1 hy, shadowModel_shadowCol.1 hx]
+  · filter_upwards [shadowModel_isOpen.2.mem_nhds hx] with y hy
+    rw [shadowModel_shadowCol.2 hy, shadowModel_shadowCol.2 hx]
 
 /-- **The doubly shadowed band** (FS131-E7's `P₄`): the brick map in nine colours with `7` and `8` painted in three bricks. -/
 noncomputable def shadowModel : ArcMap 9 :=
@@ -1403,23 +1523,241 @@ noncomputable def shadowModel : ArcMap 9 :=
 /-- `shadowModel` is a map of the plane. -/
 theorem shadowModel_isPlaneMap : shadowModel.IsPlaneMap := ArcMap.paint_isPlaneMap (brickBase_isPlaneMap 9 _)
 
+section ShadowModelHelpers
+
+open ArcMap
+
+/-! ### The classes of `shadowModel`, its validity and its shadows (FS131-MB2's helpers) -/
+
+/-- The painted set lies among the base's interior points: each horn set is strictly inside one brick. -/
+theorem shadowModel_shadowW_subset : shadowWg ∪ shadowWh ⊆ (brickBase 9 (by norm_num)).interiorPts := by
+  have hv : ∀ z : ℂ, dist z plantPt < 1 / 10 → z ∈ (brickBase 9 (by norm_num)).interiorPts := fun z hz => by
+    obtain ⟨h1, h2⟩ := stuckModel_pieces.1 hz.le
+    rw [abs_le] at h1 h2
+    exact brickBase_mem_interiorPts _ (c := 0) (r := 0) (by constructor <;> push_cast <;> linarith)
+      (by constructor <;> push_cast <;> linarith)
+  have hN : ∀ z : ℂ, dist z plantN < 1 / 20 → z ∈ (brickBase 9 (by norm_num)).interiorPts := fun z hz => by
+    have hc := stuckModel_abs_coords_le z plantN
+    obtain ⟨h1, h2⟩ := stuckModel_pieces.2.1 ⟨hc.1.trans hz.le, hc.2.trans hz.le⟩
+    rw [abs_le] at h1 h2
+    exact brickBase_mem_interiorPts _ (c := -1) (r := 2) (by constructor <;> push_cast <;> linarith)
+      (by constructor <;> push_cast <;> linarith)
+  have hS : ∀ z : ℂ, dist z plantS < 1 / 20 → z ∈ (brickBase 9 (by norm_num)).interiorPts := fun z hz => by
+    have hc := stuckModel_abs_coords_le z plantS
+    obtain ⟨h1, h2⟩ := stuckModel_pieces.2.2 ⟨hc.1.trans hz.le, hc.2.trans hz.le⟩
+    rw [abs_le] at h1 h2
+    exact brickBase_mem_interiorPts _ (c := 1) (r := -2) (by constructor <;> push_cast <;> linarith)
+      (by constructor <;> push_cast <;> linarith)
+  rintro z ((hz | hz) | (hz | hz))
+  · exact hv z hz.1
+  · exact hS z hz.1
+  · exact hv z hz.1
+  · exact hN z hz.1
+
+/-- **The painted sets lie in their colours' classes**: a point of `shadowWg` is an interior point of colour `7`, one of `shadowWh` of
+colour `8`. -/
+theorem shadowModel_mem_region {z : ℂ} :
+    (z ∈ shadowWg → z ∈ shadowModel.region 7) ∧ (z ∈ shadowWh → z ∈ shadowModel.region 8) := by
+  have hI : ∀ w ∈ shadowWg ∪ shadowWh, w ∈ shadowModel.interiorPts := fun w hw => by
+    unfold shadowModel
+    rw [ArcMap.interiorPts_paint]
+    exact ⟨shadowModel_shadowW_subset hw, shadowModel_not_mem_arcs hw⟩
+  have hc : ∀ w ∈ shadowWg ∪ shadowWh, shadowModel.col w = shadowCol w := fun w hw => ArcMap.paint_col_of_mem hw
+  refine ⟨fun h => ⟨hI z (Or.inl h), ?_⟩, fun h => ⟨hI z (Or.inr h), ?_⟩⟩
+  · show shadowModel.col z = 7
+    rw [hc z (Or.inl h), shadowModel_shadowCol.1 h]
+  · show shadowModel.col z = 8
+    rw [hc z (Or.inr h), shadowModel_shadowCol.2 h]
+
+/-- The height above a tangent circle in the frame along `e 0`, in coordinates. -/
+theorem shadowModel_tanHeight (v z : ℂ) (κ : ℝ) : tanHeight κ (frameX v 0 z) (frameY v 0 z) =
+    (z.im - v.im) - κ * ((z.re - v.re) ^ 2 + (z.im - v.im) ^ 2) / 2 := by
+  rw [(stuckModel_frames v z).1, (stuckModel_frames v z).2.1, tanHeight]
+
+/-- Two points, one within `4` of a centre and one beyond `5` from it, are more than `1` apart. -/
+theorem shadowModel_apart {z p c : ℂ} (hz : dist z c < 4) (hp : 5 < dist p c) : 1 < dist z p := by
+  have := dist_triangle p z c
+  rw [dist_comm p z] at this
+  linarith
+
+/-- **Flank against source** (FS131-E7 § 6.2): a point above the arc of curvature `1/2` at the vertex is inside the circle of radius `4`
+about `plantPt + 4i`, and a point below the arc of curvature `1/5` at the lower pole is outside the concentric circle of radius `5`; so
+they are more than `1` apart. The mirror image for the other colour. -/
+theorem shadowModel_flank_source {z p : ℂ} :
+    (TanAbove plantPt 0 (1 / 2) z → TanBelow plantS 0 (1 / 5) p → 1 < dist z p) ∧
+    (TanBelow plantPt 0 (-1 / 2) z → TanAbove plantN 0 (-1 / 5) p → 1 < dist z p) := by
+  obtain ⟨c1, c2, c3, c4, c5, c6⟩ := stuckModel_plant_coords
+  have hsq : ∀ {d r : ℝ}, 0 ≤ d → 0 ≤ r → d ^ 2 < r ^ 2 → d < r := fun hd hr h => (lt_iff_sq_lt_sq' hd hr).mpr h
+  refine ⟨fun hz hp => ?_, fun hz hp => ?_⟩
+  · unfold TanAbove at hz; unfold TanBelow at hp
+    rw [shadowModel_tanHeight, c1, c2] at hz
+    rw [shadowModel_tanHeight, c5, c6] at hp
+    refine shadowModel_apart (c := plantPt + 4 * I) (hsq dist_nonneg (by norm_num) ?_) (hsq (by norm_num) dist_nonneg ?_)
+    · rw [stuckModel_dist_sq]; simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
+      norm_num
+      nlinarith [sq_nonneg (z.re - 2 / 5), sq_nonneg (z.im - 3 / 10)]
+    · rw [stuckModel_dist_sq]; simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
+      norm_num
+      nlinarith
+  · unfold TanBelow at hz; unfold TanAbove at hp
+    rw [shadowModel_tanHeight, c1, c2] at hz
+    rw [shadowModel_tanHeight, c3, c4] at hp
+    refine shadowModel_apart (c := plantPt - 4 * I) (hsq dist_nonneg (by norm_num) ?_) (hsq (by norm_num) dist_nonneg ?_)
+    · rw [stuckModel_dist_sq]; simp only [Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
+      norm_num
+      nlinarith [sq_nonneg (z.re - 2 / 5), sq_nonneg (z.im - 3 / 10)]
+    · rw [stuckModel_dist_sq]; simp only [Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, c1, c2]
+      norm_num
+      nlinarith
+
+/-- **No unit pair inside a painted colour's set.** -/
+theorem shadowModel_no_unit_pair {x y : ℂ} :
+    (x ∈ shadowWg → y ∈ shadowWg → dist x y ≠ 1) ∧ (x ∈ shadowWh → y ∈ shadowWh → dist x y ≠ 1) := by
+  have near : ∀ {c : ℂ} {r : ℝ}, r ≤ 1 / 10 → dist x c < r → dist y c < r → dist x y ≠ 1 := fun {c r} hr h1 h2 h => by
+    have := dist_triangle x c y
+    rw [dist_comm c y] at this
+    linarith
+  refine ⟨fun hx hy => ?_, fun hx hy => ?_⟩
+  · rcases hx with hx | hx <;> rcases hy with hy | hy
+    · exact near le_rfl hx.1 hy.1
+    · exact (shadowModel_flank_source.1 hx.2.2.1 hy.2.2.2).ne'
+    · rw [dist_comm]; exact (shadowModel_flank_source.1 hy.2.2.1 hx.2.2.2).ne'
+    · exact near (by norm_num) hx.1 hy.1
+  · rcases hx with hx | hx <;> rcases hy with hy | hy
+    · exact near le_rfl hx.1 hy.1
+    · exact (shadowModel_flank_source.2 hx.2.2.2 hy.2.2.1).ne'
+    · rw [dist_comm]; exact (shadowModel_flank_source.2 hy.2.2.2 hx.2.2.1).ne'
+    · exact near (by norm_num) hx.1 hy.1
+
+/-- No new arc of `shadowModel` is a unit arc: the radii are `2`, `4/3`, `10`, `5`, `1/10`, `1/20`. -/
+theorem shadowModel_not_isUnitArc : ∀ a ∈ shadowArcs, ¬ a.IsUnitArc := by
+  have key : ∀ (v : ℂ) (κ₁ κ₂ ρ : ℝ), |κ₁| ≠ 1 → |κ₂| ≠ 1 → ρ ≠ 1 → ∀ a ∈ hornArcs v 0 κ₁ κ₂ ρ, ¬ a.IsUnitArc := by
+    intro v κ₁ κ₂ ρ h1 h2 hρ a ha
+    simp only [hornArcs, mem_insert_iff, mem_singleton_iff] at ha
+    rcases ha with rfl | rfl | rfl
+    · rw [germArc_isUnitArc_iff]; exact h1
+    · rw [germArc_isUnitArc_iff]; exact h2
+    · exact hρ
+  rintro a ((ha | ha) | (ha | ha))
+  · exact key _ _ _ _ (by norm_num [abs_of_pos]) (by norm_num [abs_of_pos]) (by norm_num) a ha
+  · exact key _ _ _ _ (by norm_num [abs_of_pos]) (by norm_num [abs_of_pos]) (by norm_num) a ha
+  · exact key _ _ _ _ (by norm_num [abs_of_neg]) (by norm_num [abs_of_neg]) (by norm_num) a ha
+  · exact key _ _ _ _ (by norm_num [abs_of_neg]) (by norm_num [abs_of_neg]) (by norm_num) a ha
+
+/-- **The witness of a shadow, in real variables**: for a band point `(x, y)` near the vertex — `x > 0`, `|y| < (x² + y²)/16` — the curve
+`a ↦ (a, a²/14 − 1)` through the lower pole passes from further than `1` (at `a = 0`) to nearer than `1` (at `a = x`); so some point of
+it with `0 < a < x` is at distance exactly `1`. -/
+theorem shadowModel_witness_real {x y : ℝ} (hx : 0 < x) (hr : x ^ 2 + y ^ 2 < 1 / 10000) (h1 : -(x ^ 2 + y ^ 2) / 16 < y)
+    (h2 : y < (x ^ 2 + y ^ 2) / 16) : ∃ a, 0 < a ∧ a < x ∧ (x - a) ^ 2 + (y + 1 - a ^ 2 / 14) ^ 2 = 1 := by
+  set f : ℝ → ℝ := fun a => (x - a) ^ 2 + (y + 1 - a ^ 2 / 14) ^ 2 with hf
+  have hcont : ContinuousOn f (Icc 0 x) := by rw [hf]; fun_prop
+  have h0 : 1 < f 0 := by simp only [hf]; nlinarith [sq_nonneg x, sq_nonneg y]
+  have hx2 : x ^ 2 < 1 / 10000 := by nlinarith [sq_nonneg y]
+  have hy14 : 14 * y < x ^ 2 := by
+    rcases le_or_gt y 0 with hy | hy
+    · nlinarith [sq_pos_of_pos hx]
+    · have : y < 1 / 160000 := by linarith
+      nlinarith [mul_pos hy (by linarith : (0 : ℝ) < 1 / 160000 - y)]
+  have hxx : f x < 1 := by
+    simp only [hf, sub_self]
+    have ha : y - x ^ 2 / 14 < 0 := by linarith
+    have hb : -2 < y - x ^ 2 / 14 := by nlinarith [sq_nonneg y, sq_nonneg x]
+    nlinarith
+  obtain ⟨a, ha, hfa⟩ := intermediate_value_Ioo' hx.le hcont ⟨hxx, h0⟩
+  exact ⟨a, ha.1, ha.2, hfa⟩
+
+/-- **Every band point near the vertex is in both shadows** (FS131-E7 § 6.3.1, with the witness on the curve `b = a²/14` through the
+pole, between the source horn's two arcs, in place of the circle of radius `6`): a point of the horn of `7` at the lower pole and a
+point of the horn of `8` at the upper pole lie at distance exactly `1` from it. -/
+theorem shadowModel_shadow {z : ℂ} (hz : z ∈ hornSet plantPt 0 (-1 / 8) (1 / 8) (1 / 100)) :
+    (∃ p ∈ hornSet plantS 0 (1 / 10) (1 / 5) (1 / 20), dist z p = 1) ∧
+    (∃ q ∈ hornSet plantN 0 (-1 / 5) (-1 / 10) (1 / 20), dist z q = 1) := by
+  obtain ⟨c1, c2, c3, c4, c5, c6⟩ := stuckModel_plant_coords
+  obtain ⟨hd, hX, hA, hB⟩ := hz
+  unfold TanAbove at hA; unfold TanBelow at hB
+  rw [shadowModel_tanHeight, c1, c2] at hA hB
+  rw [(stuckModel_frames plantPt z).1, c1] at hX
+  have hd2 : (z.re - 2 / 5) ^ 2 + (z.im - 3 / 10) ^ 2 < 1 / 10000 := by
+    have := stuckModel_dist_sq z plantPt
+    rw [c1, c2] at this
+    rw [← this]; nlinarith [dist_nonneg (x := z) (y := plantPt)]
+  have hone : ∀ {w : ℂ}, dist z w ^ 2 = 1 → dist z w = 1 := fun {w} h => by
+    have := dist_nonneg (x := z) (y := w); nlinarith
+  have hsmall : ∀ {a : ℝ}, 0 < a → a < z.re - 2 / 5 → a ^ 2 < 1 / 10000 := fun {a} h0 h1 => by
+    nlinarith [sq_nonneg (z.im - 3 / 10)]
+  constructor
+  · obtain ⟨a, ha0, hax, hfa⟩ := shadowModel_witness_real hX hd2 (by linarith) (by linarith)
+    have ha2 := hsmall ha0 hax
+    refine ⟨⟨2 / 5 + a, -7 / 10 + a ^ 2 / 14⟩, ⟨?_, ?_, ?_, ?_⟩, hone ?_⟩
+    · refine (lt_iff_sq_lt_sq' dist_nonneg (by norm_num)).mpr ?_
+      rw [stuckModel_dist_sq, c5, c6]; ring_nf; nlinarith [sq_nonneg a, sq_nonneg (a ^ 2)]
+    · rw [(stuckModel_frames plantS _).1, c5]; simpa using ha0
+    · show 0 < tanHeight _ _ _
+      rw [shadowModel_tanHeight, c5, c6]; ring_nf; nlinarith [sq_pos_of_pos ha0, sq_nonneg (a ^ 2)]
+    · show tanHeight _ _ _ < 0
+      rw [shadowModel_tanHeight, c5, c6]; ring_nf; nlinarith [sq_pos_of_pos ha0, sq_nonneg (a ^ 2)]
+    · rw [stuckModel_dist_sq]; simp only; rw [← hfa]; ring
+  · obtain ⟨a, ha0, hax, hfa⟩ := shadowModel_witness_real (y := -(z.im - 3 / 10)) hX (by rw [neg_sq]; exact hd2)
+      (by rw [neg_sq]; linarith) (by rw [neg_sq]; linarith)
+    have ha2 := hsmall ha0 hax
+    refine ⟨⟨2 / 5 + a, 13 / 10 - a ^ 2 / 14⟩, ⟨?_, ?_, ?_, ?_⟩, hone ?_⟩
+    · refine (lt_iff_sq_lt_sq' dist_nonneg (by norm_num)).mpr ?_
+      rw [stuckModel_dist_sq, c3, c4]; ring_nf; nlinarith [sq_nonneg a, sq_nonneg (a ^ 2)]
+    · rw [(stuckModel_frames plantN _).1, c3]; simpa using ha0
+    · show 0 < tanHeight _ _ _
+      rw [shadowModel_tanHeight, c3, c4]; ring_nf; nlinarith [sq_pos_of_pos ha0, sq_nonneg (a ^ 2)]
+    · show tanHeight _ _ _ < 0
+      rw [shadowModel_tanHeight, c3, c4]; ring_nf; nlinarith [sq_pos_of_pos ha0, sq_nonneg (a ^ 2)]
+    · rw [stuckModel_dist_sq]; simp only; rw [← hfa]; ring
+
+end ShadowModelHelpers
+
 /-- `shadowModel` is valid (FS131-E7 § 6.2: the flank lies inside the circle of radius `4` about `plantPt + 4i`, the source outside the
 concentric circle of radius `5`). -/
 theorem shadowModel_valid : shadowModel.Valid := by
-  sorry
+  classical
+  unfold shadowModel
+  refine ArcMap.paint_valid (brickBase_valid 9 _) ?_ ?_
+  · intro x hx y hy _ _ hxy
+    by_cases hxg : x ∈ shadowWg <;> by_cases hyg : y ∈ shadowWg
+    · exact absurd hxy (shadowModel_no_unit_pair.1 hxg hyg)
+    · rw [shadowModel_shadowCol.1 hxg, shadowModel_shadowCol.2 (hy.resolve_left hyg)]; decide
+    · rw [shadowModel_shadowCol.2 (hx.resolve_left hxg), shadowModel_shadowCol.1 hyg]; decide
+    · exact absurd hxy (shadowModel_no_unit_pair.2 (hx.resolve_left hxg) (hy.resolve_left hyg))
+  · intro x hx _ y hy
+    have hsp : 7 ≤ ((shadowCol x : Fin 9) : ℕ) := by
+      rcases hx with hx | hx
+      · rw [shadowModel_shadowCol.1 hx]; decide
+      · rw [shadowModel_shadowCol.2 hx]; decide
+    rw [brickBase_region_spare _ hsp] at hy
+    exact absurd hy (notMem_empty y)
 
 /-- `shadowModel` has Condition 5: its new arcs have radii `2`, `4/3`, `5`, `10`, `1/10`, `1/20`. -/
 theorem shadowModel_condition5 : shadowModel.Condition5 := by
-  sorry
+  unfold shadowModel
+  refine ArcMap.paint_condition5 (brickBase_condition5 9 _) fun a ha p => ?_
+  rcases a.finite_inter_sphere_or_eq_circ (shadowArcs_nondegenerate a ha) p with h | ⟨θ₀, θ₁, rfl⟩
+  · exact h
+  · exact absurd rfl (shadowModel_not_isUnitArc _ ha)
 
 /-- The flanks at the vertex: `7` above the arc of curvature `1/2`, `8` below the arc of curvature `−1/2`. -/
 theorem shadowModel_flanks : shadowModel.IsFlankAbove plantPt 0 (1 / 2) 7 ∧ shadowModel.IsFlankBelow plantPt 0 (-1 / 2) 8 := by
-  sorry
+  have h10 : (0 : ℝ) < 1 / 10 := by norm_num
+  refine ⟨⟨3 / 4, by norm_num, ?_⟩, ⟨-3 / 4, by norm_num, ?_⟩⟩
+  · filter_upwards [Ioc_mem_nhdsGT h10] with r hr
+    exact fun z hz => shadowModel_mem_region.1 (Or.inl (hornSet_mono_radius hr.2 hz))
+  · filter_upwards [Ioc_mem_nhdsGT h10] with r hr
+    exact fun z hz => shadowModel_mem_region.2 (Or.inl (hornSet_mono_radius hr.2 hz))
 
 /-- **The band is doubly shadowed** (FS131-E7 § 6.3.1): between the curvatures `∓1/8` every point near the vertex is at distance `1` from
 a point of the horn of `7` at the lower pole and from a point of the horn of `8` at the upper pole. -/
 theorem shadowModel_doublyShadowed : shadowModel.DoublyShadowed plantPt 0 (-1 / 2) (1 / 2) 7 8 := by
-  sorry
+  have h100 : (0 : ℝ) < 1 / 100 := by norm_num
+  refine ⟨-1 / 8, 1 / 8, by norm_num, by norm_num, by norm_num, ?_⟩
+  filter_upwards [Ioc_mem_nhdsGT h100] with r hr
+  intro z hz
+  obtain ⟨⟨p, hp, hzp⟩, ⟨q, hq, hzq⟩⟩ := shadowModel_shadow (hornSet_mono_radius hr.2 hz)
+  exact ⟨⟨p, shadowModel_mem_region.1 (Or.inr hp), hzp⟩, ⟨q, shadowModel_mem_region.2 (Or.inr hq), hzq⟩⟩
 
 /-- **The model of `flank_ne_of_doublyShadowed`**: the theorem applied to `shadowModel` — every hypothesis holds on it at once. -/
 theorem shadowModel_flank_ne : (7 : Fin 9) ≠ 8 :=

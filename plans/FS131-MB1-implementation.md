@@ -329,3 +329,83 @@ statements); every landed module; `main`; the gate; MB1's tools (`tools/fs131_mb
   this job's paths. Output `data/fs131/mb2/statements.out`: 0 and 0 not found, 0 forbidden paths, exit 0. `--self-test` changes one
   character of each of the 115 heads in turn: `115 of 115 planted head changes reported; faithful run 0 missing -> OK`.
 - The receipt (`data/fs131/mb2/MB2Axioms.lean`, read by `tools/fs131_mb2_receipt.py`) is written at the first model's save (Stage 6).
+
+## Stage 6 — SAVED (FS131-MB2): `shadowModel` whole — its seven leaves proved; `shadowModel_flank_ne` rests on three leaves of `Paint` and on nothing of this job's
+
+*2026-10-06 09:58 UTC.* The seven leaves of `shadowModel` are proved, with 16 helpers (new declarations in `Stuck`, each named
+`shadowModel_…`; none declared in any other worktree's `Proofs/`, and none among the 198 names of the other half's `Paint` and `Moves` at
+`87699974`). `Stuck.lean` went from 1,430 to 1,768 lines: 55 lines in the seven leaves and 288 in the helpers. No statement changed.
+
+### 6.1 The leaves, and the route each took
+
+| leaf | route | lines |
+|---|---|---|
+| `shadowArcs_nondegenerate` | `Paint`'s `hornArcs_nondegenerate`, four times | 5 |
+| `frontier_shadowW_subset` | `frontier_union_subset` three times, then `Paint`'s `frontier_hornSet_subset` | 12 |
+| `shadowCol_locallyConstant` | the planner's: the two painted sets are open (`isOpen_hornSet`) and disjoint (`shadowModel_disjoint`); the hypothesis "off the arcs" is not read | 5 |
+| `shadowModel_valid` | `paint_valid`; `hWc` empty (`brickBase_region_spare`); `hWW` is `shadowModel_no_unit_pair`: each horn set in a disc of radius at most `1/10`, and flank against source by E7 § 6.2's concentric circles (`shadowModel_flank_source`: the flank within `4` of `plantPt ± 4i`, the source beyond `5`, one triangle inequality — `shadowModel_apart`) | 16 (+ 60) |
+| `shadowModel_condition5` | the planner's: `paint_condition5`, `Arc.finite_inter_sphere_or_eq_circ`, and no new arc is a unit arc (`shadowModel_not_isUnitArc`, by `germArc_isUnitArc_iff`) | 5 (+ 14) |
+| `shadowModel_flanks` | `κ′ = ±3/4`; for `r ≤ 1/10` the horn set is in the painted set, hence in the class (`shadowModel_mem_region`) | 6 |
+| `shadowModel_doublyShadowed` | band `(−1/8, 1/8)`, radius `1/100`; `shadowModel_shadow` — **a changed route**, below | 6 (+ 70) |
+
+**The class lemma** (`shadowModel_mem_region`: a point of `shadowWg` is an interior point of colour `7`, one of `shadowWh` of colour
+`8`) needs the painted set off the twelve new arcs. `shadowModel_mem_hornArcs` reads a horn's three boundary arcs as point conditions
+from the library alone (`carrier_germArc`, `tanHeight_branchPt`, `norm_branchPt_sub`): within the radius, and on one of the two tangent
+circles or at the radius exactly. `shadowModel_hornSet_not_mem_hornArcs` then separates a horn set from a horn's arcs in the two ways
+that occur — one base point with the arcs' curvatures off the set's window (`tanHeight_anti`), or base points further apart than the
+radii — and `shadowModel_not_mem_arcs` is its sixteen cases. So `Paint`'s `hornArcs_carrier_subset` is not read: **`shadowModel` reads
+three of `Paint`'s leaves, not the four MB1's handoff counted.**
+
+**One change of route, said as the brief asks.** E7 § 6.3.1 and the plan take the shadow's witness on the circle of radius `6` about
+`plantPt + 5i`, by the two-circle angle formula or by the intermediate value theorem on that circle. `shadowModel_shadow` takes it on
+**the curve `a ↦ S′ + (a, a²/14)`**, which lies between the source horn's two arcs for every small `a > 0` (`1/20 < 1/14 < 1/10`: its
+curvature at the pole is `1/7`, between `1/10` and `1/5`) and has rational coordinates. For a band point `z = v + (x, y)` — `x > 0`,
+`|y| < (x² + y²)/16`, `x² + y² < 10⁻⁴` — the squared distance `(x − a)² + (y + 1 − a²/14)²` is above `1` at `a = 0` (the pole is
+outside `ω(z)`: `x² + y² + 2y > 0`) and below `1` at `a = x` (`−2 < y − x²/14 < 0`), so it is `1` at some `0 < a < x`
+(`shadowModel_witness_real`, `intermediate_value_Ioo'`): no square root, no angle. The upper pole's witness is the same lemma at
+`(x, −y)`. The statement proved is the leaf's own; the band's radius is `1/100`.
+
+### 6.2 The build, the receipt, the checks
+
+**The build**: `data/fs131/mb2/build-1.log` — `build: OK — 452 of 452 batches, 2 module(s) rebuilt, 4 module(s) with warnings, 9m0s`, exit 0;
+the full log (`build-1-full.log`) ends `Build completed successfully (5754 jobs)`: **0 warnings other than `sorry`**; distinct `sorry`
+warnings **36** — `Paint` 13, `Moves` 18, `Stuck` **1** (`stuckModel_terminal`; was 8), `Bends` 4.
+
+**The receipt** (`data/fs131/mb2/MB2Axioms.lean`: MB1's two commands copied, MB1's records kept as a regression, this job's added;
+output `MB2Axioms-stage6.out`, read by `tools/fs131_mb2_receipt.py --stage 6` → `receipt-stage6.out`, exit 0: 51 records, 51 claimed,
+0 findings — 26 `STANDARD-THREE`, 22 `SORRY-VIA-PAINT-ONLY`, 3 `SORRY-IN-OWN-FILES`). The tool holds each record resting on `Paint` to
+**the exact set** of `Paint`'s open leaves it reads; the sets below were written before the output was read, and all nine were met:
+
+- **on exactly the standard three**: `shadowCol_locallyConstant` and fourteen helpers — `shadowModel_no_unit_pair`,
+  `shadowModel_flank_source`, `shadowModel_shadow`, `shadowModel_witness_real`, `shadowModel_not_mem_arcs`,
+  `shadowModel_not_isUnitArc` among them: the model's geometry is whole;
+- **`sorryAx` through `Paint` alone** (which of my theorems, and through what — the brief's Done means 2):
+  `shadowArcs_nondegenerate` through `hornArcs_nondegenerate`; `frontier_shadowW_subset` through `frontier_hornSet_subset`;
+  `shadowModel_shadowW_subset` through `brickBase_mem_interiorPts`; `shadowModel_valid` and `shadowModel_condition5` through the first
+  two (they read the definition `shadowModel`, whose proof arguments are the first two leaves); `shadowModel_mem_region`,
+  `shadowModel_flanks`, `shadowModel_doublyShadowed` and **`shadowModel_flank_ne`** through all three. Not theorems on this tree
+  until the other half joins (Stage 7);
+- **open**: `stuckModel_terminal` (not this job's), `awayModel`'s two records.
+
+**Controls, each watched to fire** (`receipt-selftest-stage6.out`: `6 of 6 plants fired; faithful run 0 finding(s) -> OK`): a whole
+record given `sorryAx`; an open record marked `STANDARD-THREE`; the wrong pairing marked `APPLIED`; a whole record's line deleted; a
+through-`Paint` record given a leaf in `Stuck`; a through-`Paint` record given a leaf of `Paint` outside its set. `#mb_applies` reads
+`shadowModel_flank_ne <- ArcMap.flank_ne_of_doublyShadowed | APPLIED`.
+
+**The statement check**: `statements.out` — 115 declarations of `b7fbe6f9` and 53 of the skeleton, 0 not found verbatim once; no path
+outside this job's differs; its self-test `115 of 115`. `tools/check_architecture.py`: exit 0, `RESULT: PASS` (`arch.out`).
+`scripts/Axioms.lean`: a block "FS131-MB2" above the `=== PURCHASED ===` banner, fourteen records.
+
+### 6.3 The statement read against the claim
+
+`shadowModel_flank_ne : (7 : Fin 9) ≠ 8` is `ArcMap.flank_ne_of_doublyShadowed` applied to `shadowModel` at `plantPt`, `α = 0`,
+`κ₁ = −1/2`, `κ₂ = 1/2`, `g = 7`, `h = 8`, each of its nine hypotheses supplied by a named fact: `shadowModel_valid`,
+`shadowModel_condition5`, `Covers` from `shadowModel_isPlaneMap`, the three numeric bounds, `shadowModel_flanks` (both), and
+`shadowModel_doublyShadowed`. Read against FS131-E7's `q4-doubly-shadowed-model` ("the hypotheses `hF`, `h5`, `hv`, `h1`, `h12`, `h2`,
+`hg`, `hh` and `hD` of `flank_ne_of_doublyShadowed` hold at once for `k = 9`, `F` the map `P₄` of § 6.1, `v = 2/5 + (3/10) i`, `α = 0`,
+`κ₁ = −1/2`, `κ₂ = 1/2`, `g = 7`, `h = 8`"): the same object (`shadowWg`, `shadowWh` are E7 § 6.1's `W_g`, `W_h` verbatim), the same
+parameters, all nine. **No clause holds for want of an object**: both flanks are non-empty open sets of their colours
+(`shadowModel_mem_region` on horn sets with `κ₁ < κ₂`), the band `(−1/8, 1/8)` is a non-empty horn, and each shadow is witnessed by a
+point of a live class (`shadowModel_shadow` exhibits it). The conclusion `7 ≠ 8` is true of the model for the reason E7 § 6.2 gives —
+the lower pole's horn shadows the flank below — and decidable without it; what the application shows is that the nine hypotheses are
+not jointly empty.

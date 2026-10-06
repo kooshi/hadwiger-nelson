@@ -1,0 +1,7 @@
+plant: a WHOLE record (cuspFrag_isRingArc) given sorryAx: FIRED (1 finding(s); text changed: True)
+plant: an OPEN record (stuckModel_terminal) marked STANDARD-THREE: FIRED (1 finding(s); text changed: True)
+plant: the control pairing marked APPLIED: FIRED (1 finding(s); text changed: True)
+plant: a WHOLE record's line deleted (shadowModel_shadow): FIRED (2 finding(s); text changed: True)
+plant: a VIA_PAINT record (frontier_shadowW_subset) given a leaf in Stuck: FIRED (1 finding(s); text changed: True)
+plant: a VIA_PAINT record (frontier_shadowW_subset) given a leaf of Paint outside its set (brickBase_col_zero): FIRED (1 finding(s); text changed: True)
+self-test (stage 6): 6 of 6 plants fired; faithful run 0 finding(s) -> OK

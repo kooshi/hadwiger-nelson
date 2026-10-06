@@ -115,4 +115,4 @@ Bends.lean	theorem	awayModel_hyps	count=1
 Bends.lean	theorem	awayModel_r2Contacts	count=1
 115 declarations of b7fbe6f9, 0 not found verbatim once
 53 skeleton declarations of fe9d6d32, 0 not found verbatim once
-6 path(s) differ from b7fbe6f9 or are new; outside this job's paths: 0
+18 path(s) differ from b7fbe6f9 or are new; outside this job's paths: 0

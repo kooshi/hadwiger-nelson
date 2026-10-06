@@ -4871,6 +4871,23 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.stuckModel_not_shaveAvailable
 #print axioms HadwigerNelson.Plane.stuckModel_isStuck
 
+/-! ## FS-131, the example maps, half B continued (job FS131-MB2) — `shadowModel`'s leaves (`Plane/Models/Stuck`) proved; the model theorem `shadowModel_flank_ne` is in FS131-KM1's block above -/
+-- FS131-MB2: the doubly shadowed band (Stuck)
+#print axioms HadwigerNelson.Plane.shadowArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.frontier_shadowW_subset
+#print axioms HadwigerNelson.Plane.shadowCol_locallyConstant
+#print axioms HadwigerNelson.Plane.shadowModel_not_mem_arcs
+#print axioms HadwigerNelson.Plane.shadowModel_mem_region
+#print axioms HadwigerNelson.Plane.shadowModel_flank_source
+#print axioms HadwigerNelson.Plane.shadowModel_no_unit_pair
+#print axioms HadwigerNelson.Plane.shadowModel_valid
+#print axioms HadwigerNelson.Plane.shadowModel_not_isUnitArc
+#print axioms HadwigerNelson.Plane.shadowModel_condition5
+#print axioms HadwigerNelson.Plane.shadowModel_flanks
+#print axioms HadwigerNelson.Plane.shadowModel_witness_real
+#print axioms HadwigerNelson.Plane.shadowModel_shadow
+#print axioms HadwigerNelson.Plane.shadowModel_doublyShadowed
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
