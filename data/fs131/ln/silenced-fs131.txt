@@ -1,0 +1,48 @@
+# FS131-LN1: hypotheses silenced on purpose in the 52 modules FS-131 added — by text pattern (rg -P), not by the environment
+# pattern A (a hypothesis referenced only to count as used):  ^\s*have _ := <identifier>\s*$
+Proofs/HadwigerNelson/Arith/FalconerField.lean:162:  have _ := hconn
+Proofs/HadwigerNelson/Arith/FalconerField.lean:189:  have _ := ht
+Proofs/HadwigerNelson/Arith/Dyadic.lean:269:  have _ := hdeg
+Proofs/HadwigerNelson/Arith/Dyadic.lean:320:  have _ := hdeg
+Proofs/HadwigerNelson/Plane/MaximalCover.lean:170:  have _ := hC
+Proofs/HadwigerNelson/Plane/MaximalCover.lean:304:  have _ := hxP
+Proofs/HadwigerNelson/Plane/Slack.lean:1526:  have _ := hh
+Proofs/HadwigerNelson/Plane/Woodall/Basic.lean:205:  have _ := hr
+Proofs/HadwigerNelson/Plane/Woodall/Basic.lean:206:  have _ := hθ
+Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean:1138:  have _ := hn
+Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean:1319:  have _ := hn
+Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:1456:  have _ := hgc
+Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:1457:  have _ := hhc
+Proofs/HadwigerNelson/Plane/YesLimit.lean:119:  have _ := h
+Proofs/HadwigerNelson/Plane/FalconerReduction.lean:237:  have _ := hx
+Proofs/HadwigerNelson/Plane/LocalStructure.lean:2655:  have _ := hs
+Proofs/HadwigerNelson/Plane/Woodall/Steps.lean:581:  have _ := h5
+Proofs/HadwigerNelson/Plane/Woodall/Merge.lean:610:  have _ := hd2
+Proofs/HadwigerNelson/Plane/Woodall/Merge.lean:1292:  have _ := h3
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:2206:  have _ := h12
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:2423:  have _ := h12
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:4640:  have _ := hκ'
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:4641:  have _ := hXv
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:5266:  have _ := hF
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:5267:  have _ := hg
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:5366:  have _ := hcN
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:5655:  have _ := hF
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:5656:  have _ := hh
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:5752:  have _ := hcS
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:5861:  have _ := hH
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:5862:  have _ := hXv
+# pattern B (an underscore-named binder, which unusedArguments exempts):  [({]_<name>… :
+Proofs/HadwigerNelson/Plane/RingBand.lean:1010:theorem ringband_vi_periodic {θ : ℝ} (_hθ : C.Good θ) : C.h (θ + π / 3) = C.h θ := by
+Proofs/HadwigerNelson/Plane/RingGerm.lean:486:theorem germS_absent (hF : F.Valid) {p : ℂ} (_hp : F.Covers p 1) (_h4 : 4 ≤ (F.coloursAt p).ncard)
+Proofs/HadwigerNelson/Plane/RingGerm.lean:887:theorem fiveRing_no_changePoint (hF : F.Valid) {p : ℂ} (_hp : F.Covers p 1) (_h4 : 4 ≤ (F.coloursAt p).ncard)
+Proofs/HadwigerNelson/Plane/RingGerm.lean:1119:theorem sixQ_sides {p : ℂ} (hall : F.coloursAt p = univ) {θ₁ θ₂ : ℝ} {c c' : Fin k} (_hA : F.IsRingArc p θ₁ θ₂ c c') :
+Proofs/HadwigerNelson/Plane/RingGerm.lean:1584:    (hccw : GermIn p ψ .ccw (F.region X)) (hX : X ∉ F.coloursAt p) (_hess : F.IsEssBoundary (ringPt p ψ))
+Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:606:theorem inv_curvDown_eq {μ : ℝ} (h0 : μ ≠ 0) (_h1 : 1 + μ ≠ 0) : 1 / curvDown μ = 1 + 1 / μ := by
+Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean:3450:theorem merge_allowedCone (hF : F.Valid) (_hv1 : F.Covers v 1) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ)
+Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:1304:theorem pair_ii (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromatic u₁) (_h₂ : F.IsCubicTrichromatic u₂)
+Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:1305:    (hc₁ : F.Covers u₁ 1) (_hc₂ : F.Covers u₂ 1) (hx : dist x u₁ = 1) (_hy : dist y u₂ = 1) (hxy : dist x y = 1)
+Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:1384:theorem pair_P' (hF : F.Valid) {u u' : ℂ} (_h : F.IsCubicTrichromatic u) (h' : F.IsCubicTrichromatic u') (hu : u ∈ F.dom)
+Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:1959:theorem open_coloursAt_self (cfg : X.OpenConfig c up s b ψ ρc) (h : X.Small ρ) (_hρc : ρ ≤ ρc) :
+Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:2080:theorem open_degree_horns (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (_h' : X.Small ρ') (_hρρ' : ρ < ρ') (h : X.Small ρ)
+Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:2430:    (_hρc : ρ ≤ ρc) :
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:1044:theorem l60_eq_third (_hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c') :

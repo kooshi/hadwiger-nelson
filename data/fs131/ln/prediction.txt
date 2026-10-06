@@ -1,0 +1,20 @@
+FS131-LN1 — predictions, written 2026-10-06T03:25:20Z, before the baseline run has printed anything
+(data/fs131/ln/lint-baseline.out is 0 bytes and lint-baseline.exit does not exist: the run is waiting for the slot).
+
+P1  the baseline exits 1 (at least one finding)                                   0.90
+P2  Lake rebuilds nothing (driver-before = driver-after, both newer-lists empty)   0.85
+P3  total findings: fewer than 20: 0.20 | 20 to 300: 0.60 | more than 300: 0.20
+P4  unusedArguments is the linter with the most findings                           0.60
+P5  at least 80 % of the findings are in the 52 modules FS-131 added               0.70
+P6  docBlame has no finding (the build's linter.missingDocs already covers it)     0.60
+P7  the number of linters is 14, as at the M2 close                                0.90
+P8  declarations linted: between 14,000 and 20,000 (11,817 at the M2 close)        0.70
+
+The plant (a documented def with one unused argument, appended to OpenMove.lean):
+C1  the build rebuilds exactly OpenMove and Proofs, exit 0, with exactly one module warning
+    (OpenMove: the syntax linter's unused variable `m`)                            0.85
+C2  the planted run exits 1 and differs from the baseline by exactly one finding:
+    unusedArguments on fs131LnLintPlant, in Proofs.HadwigerNelson.Plane.ValidMap.OpenMove,
+    at line 2876 (the docstring's line), column 1                                   0.80
+C3  the declaration count rises by exactly 1 and the automatic count by 0          0.60
+C4  after the restore and rebuild a third run's findings equal the baseline's      0.95

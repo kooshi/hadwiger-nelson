@@ -107,3 +107,134 @@ A second line is kept beside it, because it bears on the proposal: **the last re
 `Instances/SqrtOneSixSeven`, `Instances/SqrtOneSixSeven/Cert`, `SpectralChain`, `ThetaCert`, `ThetaPlane`, `ThreeColour`;
 `Transcendental` changed). I found no record of `lake lint` run over those; they are "older" by the first line and "never linted" by
 the second, and the count reports them as their own class.
+
+## Stage 2 — SAVED (FS131-LN1)
+
+*2026-10-06T03:27Z. The run, and the count.*
+
+### The run
+
+`data/fs131/ln/run-lint.sh baseline` (the script is the command of Stage 1, with its bookkeeping; it was run from a snapshot copy):
+
+```
+scripts/slot.py --mem 40 --cpus 8 -- /usr/bin/time -v -o … lake lint --no-build -- --no-build --trace
+```
+
+| what | value | where |
+|---|---|---|
+| exit status, read from the tool | **1** | `data/fs131/ln/lint-baseline.exit`; GNU time's own `Exit status: 1` in `lint-baseline.time` |
+| the driver's line | `-- Found 3 errors in 9643 declarations (plus 8414 automatically generated ones) in Proofs with 14 linters` | `lint-baseline.out:63` |
+| linters | 14: `checkType`, `defsWithUnderscore`, `deprecatedNoSince`, `docBlame`, `impossibleInstance`, `nonClassInstance`, `simpComm`, `simpNF`, `structureInType`, `subsetDotNotationLinter`, `synTaut`, `tacticDocs`, `unusedArguments`, `unusedHavesSuffices` — the M2 close's 14 | `lint-baseline.out:4–17` |
+| per-linter verdicts | 13 × `(2/2) Passed!`; `unusedArguments: (2/2) Failed with 3 messages` | `lint-baseline.out:32–59` |
+| wall clock, peak resident set | 4.89 s, 4.83 GB (4,828,476 kB) | `lint-baseline.time` |
+| the slot | waited from 03:21:53Z (two other trees held 80 of the ledger's 90 GiB), admitted, finished 03:27:03Z | `lint-baseline.err`, `.start`, `.end` |
+| `scripts/nolints.json` | absent; the driver's summary of it is empty | `lint-baseline.out:61–62` |
+
+**Nothing was rebuilt** — shown by effect, three ways: the driver's binary has the same sha256 before and after
+(`lint-baseline.driver-before` = `lint-baseline.driver-after` = `21bc14b3…16e2fcf3`); no file under the shared `.lake/packages` was
+modified between the run's start and its end (`lint-baseline.newer-packages`, 0 lines, written by a `find -newer` against a marker
+made before the run); none under this tree's `.lake/build` (`lint-baseline.newer-build`, 0 lines). Both lists exist and are empty,
+and both `find`s ran without error (their `.err` files are empty). Lake printed nothing of its own: `lint-baseline.err` holds only
+the slot's two lines.
+
+**The population.** 9,643 declarations and 8,414 automatically generated ones, 18,057 in all, against the M2 close's 11,817 "(the
+auto-generated ones included)" — 6,240 more.
+
+### The count
+
+Made by `tools/fs131_ln_count.py data/fs131/ln/lint-baseline.out --json data/fs131/ln/count-baseline.json --md
+data/fs131/ln/count-baseline.md` (exit 0). The script refuses to print a table unless what it parsed agrees with the driver's own
+numbers: per linter with the trace's `Failed with n messages`, in total with `-- Found N errors`, in number of linters with `with L
+linters`, and each finding's path with its `-- Module` header.
+
+| linter | findings | in FS-131's modules | in post-M2 modules | in older modules |
+|---|---:|---:|---:|---:|
+| `unusedArguments` | 3 | 3 | 0 | 0 |
+| each of the other 13 | 0 | 0 | 0 | 0 |
+| **all** | **3** | **3** | **0** | **0** |
+
+Modules: 52 added by FS-131, 8 post-M2 (7 added and 1 changed between the M2 close and FS-131), 1,706 older; **3 have a finding**,
+so the "ten modules with the most" are these three, one finding each:
+
+| # | module | class | findings |
+|---:|---|---|---:|
+| 1 | `Proofs.HadwigerNelson.Arith.Dyadic` | FS-131 (wave 2) | 1 |
+| 2 | `Proofs.HadwigerNelson.Arith.FalconerField` | FS-131 (wave 2) | 1 |
+| 3 | `Proofs.HadwigerNelson.Arith.PlaceHom` | FS-131 (wave 2) | 1 |
+
+The three findings, each quoted in full (`lint-baseline.out:68–78`; the paths are this worktree's):
+
+```
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/Proofs/HadwigerNelson/Arith/Dyadic.lean:36:1: error: @HadwigerNelson.Arith.DyadicSqrt3Conclusion 1 unused argument:
+  argument 5: [NumberField L]
+```
+```
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/Proofs/HadwigerNelson/Arith/FalconerField.lean:179:1: error: HadwigerNelson.Arith.falconerFan_five_placeHom 1 unused argument:
+  argument 2: [NumberField ↥F]
+```
+```
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/Proofs/HadwigerNelson/Arith/PlaceHom.lean:219:1: error: HadwigerNelson.Arith.placeHom_step 1 unused argument:
+  argument 2: [NumberField ↥F]
+```
+
+The position is the declaration's first line, its docstring's (`Dyadic.lean:36` is the `/--` above `def DyadicSqrt3Conclusion` at
+line 38).
+
+**The count script's control** (`tools/fs131_ln_count.py --self-test`, exit 0, `data/fs131/ln/count-selftest.txt`): two inputs
+counted exactly (a failing run with a two-line message, and a passing run); 13 plants, each refused for its own reason — a finding
+line deleted, one added, the trace's count altered, the `-- Found` total altered, a failed linter with no report section, a linter's
+trace line missing, a run with no trace at all, an empty file, a passing run cut before its last line, a `passed` line over a failed
+trace, a finding under the wrong module, a declaration reported twice, stray text inside a section; `--diff` names a planted finding
+alone; the three module classes are each inhabited and four named modules fall in the class they should (`OpenMove` FS-131,
+`ThetaCert` post-M2, `Transcendental` post-M2, `Kempe` older). **What the control does not reach**: a linter that silently skipped
+declarations. The driver's declaration count and the planted fault of Stage 3 are the instruments for that.
+
+### What the three findings are, read in the source
+
+All three are one shape: **a `[NumberField _]` instance argument that neither the statement nor the proof uses.**
+
+| declaration | kind | the unused binder | what uses the declaration |
+|---|---|---|---|
+| `HadwigerNelson.Arith.DyadicSqrt3Conclusion` (`Arith/Dyadic.lean:38`) | a `def … : Prop`, the conclusion of FS129-SA1-SQRT3-LOCAL | `[NumberField L]`: the body reads `𝓞 L`, which needs `[Field L]` only | five theorems of the same file state it (`Dyadic.lean:517, 638, 652, 671, 679`), each as `DyadicSqrt3Conclusion L P`; named as an OUT carrier in `scripts/Vacuity.lean:279` |
+| `HadwigerNelson.Arith.placeHom_step` (`Arith/PlaceHom.lean:222`) | a theorem, a child of `exists_isPlaceHom` | `[NumberField F]`: `IsPlaceHom F 𝔭 E₀ V₀ φ₀` (`PlaceHom.lean:34`) takes no such instance | one call, `placeHom_step F h₀ hlast` (`PlaceHom.lean:303`); an audited record (`scripts/Axioms.lean:3201`) |
+| `HadwigerNelson.Arith.falconerFan_five_placeHom` (`Arith/FalconerField.lean:182`) | a theorem, a milestone row: FS129-SA1-FALC-RES (ii) | `[NumberField F]` | no caller in the library; an audited record (`scripts/Axioms.lean:2993`); named in `ARCHITECTURE.md:546` |
+
+None of the three is on a hypothesis a ruling kept: `NumberField` occurs nowhere in `plans/FS131-close-inventory.md` nor in
+`plans/FS131-w2-kernel-plan.md` (`rg -n NumberField`, no line). `falconerFan_five_placeHom` does carry a hypothesis kept on purpose
+— `ht : AlgebraicIndependent F t`, referenced by `have _ := ht` under the comment "clause (ii) reads only the pair's properties, not
+the transcendence of `t` (a generalization; § 15)" — and the linter does not report it, because a referenced hypothesis is a used
+one.
+
+### What "linters silent" does not see here
+
+Two things the run cannot report, both read from the linter's source and both in use in this library:
+
+- **An underscore-named unused argument is exempt.** `unusedArguments` at this pin skips an argument whose name has a component
+  beginning with `_` (`.lake/packages/batteries/Batteries/Tactic/Lint/Misc.lean:55–58`: "We allow unused arguments whose names start
+  with `_`, similar to the syntax linter", by `Name.isInternal`, `Lean/Data/Name.lean:125`). So the binders renamed by rulings 185 and
+  244 (`_hF`, `_h`) are not findings and never will be at this pin.
+- **A hypothesis referenced by `have _ := h` is used.**
+
+By text pattern over the 52 FS-131 modules (`data/fs131/ln/silenced-fs131.txt`; a grep, not a reading of the environment): 31 lines
+of the form `have _ := <identifier>`, 12 of them in `Plane/ValidMap/UnitArc`; and 14 signature lines carrying an underscore-named
+binder (18 binders by the one-name pattern). These are the hypotheses kept on purpose; the linters are silent about all of them.
+
+### Predictions scored (`data/fs131/ln/prediction.txt`, written 03:25Z while the run waited for the slot, its output file empty)
+
+| | prediction | p | outcome |
+|---|---|---:|---|
+| P1 | the baseline exits 1 | 0.90 | met |
+| P2 | Lake rebuilds nothing | 0.85 | met |
+| P3 | total findings: < 20 at 0.20, 20–300 at 0.60, > 300 at 0.20 | — | **3: the 0.20 bucket.** I expected a debt in proportion to the new text; the build's own linters had already taken nearly all of it |
+| P4 | `unusedArguments` has the most | 0.60 | met (it has all of them) |
+| P5 | at least 80 % in FS-131's modules | 0.70 | met (3 of 3) |
+| P6 | `docBlame` has none | 0.60 | met |
+| P7 | 14 linters | 0.90 | met |
+| P8 | declarations between 14,000 and 20,000, against the M2 close's 11,817 | 0.70 | met on the comparable figure, 18,057 with the automatic ones; the driver's first number, 9,643, is the non-automatic part |
+
+### Before Stage 3
+
+Stage 3 plants a fault in `Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean` and takes it out (`data/fs131/ln/plant.sh`). **If
+this record ends here and `git status` shows that file modified**, the session stopped between the two: run `data/fs131/ln/plant.sh
+restore` (or `git checkout HEAD -- Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean`) and build through `scripts/build.sh` under
+the slot. The plant is never committed.
