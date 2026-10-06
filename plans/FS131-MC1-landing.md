@@ -327,3 +327,130 @@ Drafts 1 and 2 below, applied to a scratch copy of `CLAUDE.md`, are read by `scr
 - What none of these is: a statement at six colours, or that `stuckModel` is terminal.
 
 ## Stage 4 — SAVED (FS131-MC1)
+
+### 4.8 A correction after that pass, and the pass run again: the gated commit is `d9347791`
+
+Reading the applied lines once more before the landing I found nineteen of them wrong in one phrase: "every hypothesis a named fact of
+`Plane/Models/Stuck`", where seven of the facts the applications use are in `Plane/Models/Applied` (`stuckModel_ncard`,
+`stuckModel_contacts_frame`, `stuckModel_interior_allowedCone`, …). Corrected to "a named fact about the map" (`6d1f7d75`: `FlankUA` 9
+lines, `Terminal` 10; both files again equal to `origin/main`'s with docstrings blanked), the runner given its tag (`d9347791`,
+`data/` only), and **the build and the whole pass run again on `d9347791`** (logs tagged `final2`; `run-gate-final2.head`:
+`HEAD=d9347791…`, no tracked file modified):
+
+- build `OK — 466 of 466 batches, 9 module(s) rebuilt, 0 module(s) with warnings` (`build-final2.log`; full log 0 `warning` lines,
+  "Build completed successfully (5808 jobs)"); `sorry` narrow 0;
+- dupnames OK (23 generated) and 15 controls; axioms "OK — 5525 clean, 16 axiom-free, 4 imported, 5 declared purchase(s)", 5,550
+  records, 23 controls; vacuity OK, `declarations=13386 refutations-skipped=192 sites=1137`, `vacuous=0 stale=0 declared=3 witnessed=37
+  generic=1095 unknown=2`, header "match (9 of 9 compared)", 62 controls; architecture PASS; lint passed, 14 linters; notes 196 read, 0
+  CONFLICT; the records check PASS and the row check PASS on this pass's logs (`records-final2.txt`, `vacdiff-final2.txt`).
+- The scan's rows and the audit's records are identical to the pass on `3fe561a9` (`cmp` on the `SITE` / `EVIDENCE` / `TOTALS` lines
+  and on the sorted record lines): §§ 4.2–4.6 stand as written, with `final2` for `final` in the log names.
+
+## Stage 4 — SAVED (FS131-MC1), on `d9347791`
+
+## Drafts for the front page (FS131-MC1)
+
+The gated commit is `d9347791`; the landed tip differs from it in `plans/` and `data/` alone (Stage 5). The saved gate logs are in
+this worktree under `build/gate/`; the copies are committed under `data/fs131/mc/`: `receipt-axioms-final2.log`,
+`receipt-vacuity-final2.log`, `receipt-dupnames-final2.log`, the three self-tests', and the full build `build-final2-full.log`. To
+re-read: `python3 scripts/gate_report.py axioms data/fs131/mc/receipt-axioms-final2.log data/fs131/l5/receipt-axioms-final.log
+CLAUDE.md` and `python3 scripts/gate_report.py vacuity data/fs131/mc/receipt-vacuity-final2.log
+data/fs131/l5/receipt-vacuity-final.log scripts/vacuity-baseline.txt CLAUDE.md`.
+
+1. **`CLAUDE.md` § Trust ledger**, the words "the current audit reads 5196 clean and 5 declared purchases, and 4 imported (and 16
+   axiom-free; 5,221 records at wave 5's landing, FS131-L5, 2026-10-06)" become: "the current audit reads 5525 clean and 5 declared
+   purchases, and 4 imported (and 16 axiom-free; 5,550 records at the example maps' landing, FS131-MC1, 2026-10-06)". From
+   `data/fs131/mc/axioms-final2.log`: "audited: 5550 records — 5525 clean on the standard axioms, 16 axiom-free, 4 imported (resting
+   on a declared outside theorem), 5 declared purchase(s)" and "==> axioms: OK — 5525 clean, 16 axiom-free, 4 imported, 5 declared
+   purchase(s)". (The logs' UTC date: `20261006T114811Z`.)
+2. **`CLAUDE.md` § The gate**, the two count lines "`declarations=12999 refutations-skipped=182 sites=1130`, `vacuous=0 stale=0
+   declared=3 witnessed=32 generic=1093 unknown=2`" become "`declarations=13386 refutations-skipped=192 sites=1137`, `vacuous=0
+   stale=0 declared=3 witnessed=37 generic=1095 unknown=2`". From `data/fs131/mc/vacuity-final2.log`: "scanned: declarations=13386
+   refutations-skipped=192" and "sites:   sites=1137  vacuous=0  stale=0  declared=3  witnessed=37  generic=1095  unknown=2". The
+   baseline's two entries are unchanged (`hexShell_plane5`, `hexShell_plane6`).
+3. **`tools/claude_md_fact_audit.py`'s `GATE_CHANGES`**, after the `(("3889", "5"), ("5196", "5"))` entry:
+   `(("5196", "5"), ("5525", "5")): "FS-131, the example maps' landing (FS131-MC1; .claude/worktrees/fs131-wmb/build/gate/axioms/20261006T114811Z-3752274.log, copy
+   data/fs131/mc/receipt-axioms-final2.log, gated commit d9347791): 5,550 records, 5,525 clean, 16 axiom-free, 4 imported, 5 purchases",`
+4. **`LEAN.md`**: no change to § The gate's control counts (23, 62, 15: no carrier entered, no axiom declared).
+5. **The open gate items** (ruling 482's second request). Of the sixty-two of `data/fs131/l5/open-gate-items.txt`, read from the
+   landed docstrings by `tools/fs131_mc_gateitems.py` (`data/fs131/mc/gateitems.out`): **33 closed, 29 remain.**
+   - **Closed (33)** — each docstring now names the Lean model, and the theorem is applied to it in Lean:
+     - the four moves (7): `exists_shave`, `exists_rayMerge`, `exists_merge` (`Contact`); `exists_shave_aux`, `exists_rayMerge_aux`,
+       `exists_merge_aux` (`Moves`); `exists_open` (`OpenMove`) — `hornModel`, `twoHornModel`;
+     - the doubly shadowed band (1): `flank_ne_of_doublyShadowed` (`Contact`) — `shadowModel`;
+     - the stuck family (19) — `stuckModel` at `plantPt`: `FlankUA`'s `not_outType_N_of_flankAbove_one`,
+       `not_outType_S_of_flankBelow_neg_one`, `srcG_of_shadow`, `srcH_of_shadow`, `region_near_of_inType`, `flank_ne_of_shadows`,
+       `horn_poles_contact`, `horn_bounds_of_noMerge`, `horn_bounds_of_interior_empty`; `Terminal`'s `stuck_flanks_ua`,
+       `stuck_structure_ua`, `chainVertex_antipodal`, `exists_horn_of_mem_coneAt_of_stuck`, `upper_bounds_of_inType_N`,
+       `stuck_turned_frame`, `stuck_structure_at_axis`, `horn_flanks_of_isChainVertex`, `horn_colour_eq_of_isChainVertex`,
+       `eq_horn_colour_of_two_sectors`;
+     - the outward bend (6) — `awayModel`: `bend_away_part`, `bend_away_subdiv` (`BendStep`); `bend_away_gap`,
+       `exists_lensOut_clear` (`BendGap`); `r2_side_dichotomy`, `exists_r2Subdiv` (`R2Cap`).
+   - **Remain (29)**:
+     - a terminal map is assumed and not proved (3; ruling 482): `n3_end_chain` (all but `F.Terminal`), `cv_l0`,
+       `hornBoundsQR_of_isChainVertex` (all but `F.IsTerminalMap`) — successor's target `stuckModel.IsTerminalMap`, Stage 3 § 3.2;
+     - one hypothesis not a Lean fact (1): `hasSectors_one_of_contacts` (`FlankUA`: `hcont`, that `7` has no contact but the pole);
+     - a clean map (11, `Procedure`): `exists_vertexStep` (`hornModel` meets all but `IsClean`), `exists_mergeStep`,
+       `exists_mergeStep_aux`, `exists_rayStep`, `exists_shaveStep`, `exists_shaveStep_aux`, `exists_openStep`,
+       `exists_openStep_aux`, `surgery_step`, `not_isSite_of_branches`, `exists_arcStep`;
+     - a collar or bend package no declaration states for `awayModel` (4): `CollarFitOut.map_R1`, `CollarFitOut.map_R2` (`BendGap`),
+       `CollarFitOut.pushOutProfiles` (`CollarMapOut`), `AwayBend.idle` (`BendAway`);
+     - untouched as ruled, by design (6): `c_ends`, `run_ends` (six colours), `horn_upper_ne_one` (two chain vertices),
+       `n3_end_four_colours`, `n3_end_bothKind`, `n3_end_of_not_inType` (refutation steps: "no model expected");
+     - FS131-E7's `F₀`, `F₁` (3, `UnitArc`): `a4six`, `straddlers_third`, `nb4p` — no Lean object;
+     - listed by wave 5's pattern though its docstring says no note is owed (1): `CollarFit.map_hornCount_le` (`BendStep`).
+   - **Beside the sixty-two**, lines added where none stood: `bend_away_whole`, `bend_toward` (`UnitArc`), `cvb_hole_disconnected`
+     (`MapGraph`).
+6. **Ledger rows regraded to [kernel]**: none — the models are inhabitants owed by `LEAN.md` § The gate, not ledger rows. **The
+   Frontier line, the Proof Atlas**: no change; no result's grade moved.
+7. **For the inventory**: the open gate item on the four moves (rulings 419 (d), 427 (d)) is closed on `main`; of the stuck family's
+   twenty-nine heads nineteen are closed, one waits for a contact fact and three for `stuckModel.IsTerminalMap`. **A finding beside
+   the models**: a valid map of the plane with a holed tile exists (`hornModel`, eight colours; `hornModel_holedTile`,
+   `hornModel_hole_disconnected`) — `cvb_hole_disconnected`'s docstring said its existence "is not claimed"; it now names the object.
+   **For the tooling lane's three questions on the vacuity scan** (ruling 475 (d)), a fourth observation: the scan reads no
+   unconditional `X.Valid` and no conjunction as a witness (§ 4.4).
+
+## Theorems this phase proved, final
+
+All **[kernel]**: built by this worktree's `./scripts/build.sh` (`data/fs131/mc/build-final2.log`), each audited by
+`scripts/axioms.sh` on the gated commit under CLEAN on exactly `[propext, Classical.choice, Quot.sound]`
+(`data/fs131/mc/receipt-axioms-final2.log`; `records-final2.txt`). Addresses are `Proofs/HadwigerNelson/Plane/Models/`.
+
+**New in this job** (`Applied.lean` unless said):
+
+- `awayModel_bend_away_part` — wave 5's `ArcMap.bend_away_part` applied to `awayModel`'s arc of `ω(awayP)`. Read against: "the
+  outward bend's five hypotheses hold at once on a map of the plane, and the bend follows for it".
+- `awayModel_bend_away_whole`, with `awayModel_gap`, `awayModel_isRingArc_gap` — `ArcMap.bend_away_whole` applied to the sub-arc
+  over `[1/5, 3/10]` (ruling 471 (c)). Read against: "a plane-map model of the whole-arc away bend: a sub-arc that no radius-2
+  contact faces".
+- `hornModel_hole_disconnected` — `ArcMap.cvb_hole_disconnected` applied to `hornModel`. Read against: "a valid map of the plane
+  with a holed tile, and the hole clause on it".
+- `hornModel_isSite`, `twoHornModel_isSite`; `stuckModel_ncard`, `stuckModel_isChainVertex`, `stuckModel_isHorn_pi`,
+  `stuckModel_not_mem_interiorPts`, `stuckModel_interior_allowedCone`, `stuckModel_contacts_frame`, `stuckModel_horn_shadows`;
+  `awayModel_radiusTwoArc_subset`.
+- In `Paint.lean`: `mem_brickCell_of_coords`, `brickBase_col_val`, `dist_sq_coords`; `brickBase_mem_interiorPts`,
+  `brickBase_col_eq`, `brickBase_col_zero` re-proved from wave 5's `BrickMap` (statements unchanged).
+- Thirty-one `example`s (unnamed; compiled, not audit records): the landed theorems of Stage 3 § 3.4 applied to the models — four of
+  them with one hypothesis taken as given (`IsClean`; `Terminal`; `IsTerminalMap` twice).
+
+**Landed by this job, proved by FS131-KM1, MA1, MB1, MB2** (their records hold the lists): the 311 other theorems of `Paint`,
+`Moves`, `Stuck`, `Bends` (314 in the four modules, less the three new above) — among them the model theorems `hornModel_shave`, `hornModel_open`, `twoHornModel_rayMerge`,
+`twoHornModel_merge`, `stuckModel_hyps`, `shadowModel_flank_ne`, `awayModel_hyps`, `awayModel_r2Contacts`, `awayModel_bend_toward`,
+`cuspFrag_bend_away`, `cuspFrag_bend_toward`.
+
+**Not proved**: `stuckModel.Terminal` (removed by ruling; the route is Stage 3 § 3.2), `stuckModel.QROnly`, `IsClean` for any model,
+the uniqueness of `7`'s contact at `stuckModel`'s vertex.
+
+## Slips, my own
+
+- **A count in my message to the coordinator was wrong**: I wrote that "the fifteen other heads" of `Terminal`'s nineteen take
+  `Covers` or `IsPlaneMap` with `IsStuck`; the script's own output says ten (nineteen less the five that take `IsTerminalMap` and the
+  four that take `Terminal`). The ruling repeats "fifteen". What landed is ten of `Terminal`'s and nine of `FlankUA`'s: nineteen.
+- **Nineteen docstring lines said a wrong place** for the facts they cite, found by reading them after the gate's pass and before
+  the landing; corrected and the pass run again (§ 4.8). The pass on `3fe561a9` is therefore not the landing's evidence.
+- `tools/fs131_mc_gateitems.py`'s first pattern read `owed` inside "shadowed"; found because the count came out 23 where my edit
+  table said 33; repaired with a planted sentence in its self-test.
+- A first `Applied` named a theorem of a module it did not import and wrote `radiusTwoArc` without its namespace; the build refused
+  both.
+- I printed one gate log to my own context at length where its result lines would have done; no number came from misreading it.
+- The live notes CONFLICT of § 4.5 was not kept as a file.
