@@ -101,25 +101,128 @@ variable {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
 reaches the point from inside `ω(P)` or from outside. -/
 theorem IsRingArc.coloursAt_openArc (hA : F.IsRingArc P θ₁ θ₂ c c') {θ : ℝ} (hθ : θ ∈ Ioo θ₁ θ₂) :
     F.coloursAt (ringPt P θ) = {c, c'} := by
-  sorry
+  obtain ⟨hin, hout⟩ := hA.2.2 θ hθ
+  apply Subset.antisymm
+  · intro j hj
+    obtain ⟨δ, hδ, hsph⟩ := exists_sphere_inter_ball_subset_openArc (p := P) hθ
+    have h1 : ringPt P θ ∈ closure (ball (ringPt P θ) δ ∩ F.region j) :=
+      isOpen_ball.inter_closure ⟨mem_ball_self hδ, hj⟩
+    have h2 : ball (ringPt P θ) δ ∩ F.region j ⊆ (F.region j ∩ ball P 1) ∪ (F.region j \ closedBall P 1) := by
+      rintro y ⟨hyb, hyj⟩
+      rcases lt_trichotomy (dist y P) 1 with hlt | heq | hgt
+      · exact Or.inl ⟨hyj, mem_ball.mpr hlt⟩
+      · exfalso
+        obtain ⟨t, ht, rfl⟩ := hsph ⟨mem_sphere.mpr heq, hyb⟩
+        exact hyj.1.2 (hA.2.1 ⟨t, Ioo_subset_Icc_self ht, rfl⟩).2
+      · exact Or.inr ⟨hyj, fun h => absurd (mem_closedBall.mp h) (not_le.mpr hgt)⟩
+    have h3 := closure_mono h2 h1
+    rw [closure_union] at h3
+    rcases h3 with h3 | h3
+    · have : j ∈ F.innerColours P (ringPt P θ) := h3
+      rw [hin] at this
+      exact Or.inl this
+    · have : j ∈ F.outerColours P (ringPt P θ) := h3
+      rw [hout] at this
+      exact Or.inr this
+  · rintro j (rfl | rfl)
+    · have : j ∈ F.innerColours P (ringPt P θ) := by rw [hin]; rfl
+      exact closure_mono inter_subset_left this
+    · have : j ∈ F.outerColours P (ringPt P θ) := by rw [hout]; rfl
+      exact closure_mono sdiff_subset this
 
 /-- **In a clean map the two sides of a unit arc differ** (an interior point of the arc carries at least two colours). -/
 theorem IsRingArc.sides_ne_of_isClean (hc : F.IsClean) (hA : F.IsRingArc P θ₁ θ₂ c c') : c ≠ c' := by
-  sorry
+  intro hcc
+  obtain ⟨θ, hθ⟩ := nonempty_Ioo.mpr hA.1
+  have h2 := hc _ (hA.2.1 ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩)
+  rw [hA.coloursAt_openArc hθ, hcc] at h2
+  simp at h2
 
 /-- **`F` at an interior point of a constant-sided unit arc near which `Γ` is `ω(P)`**: degree `2`, and a repeated colour exactly when
 the two sides agree (`degree_of_circle`; `CollarFit.degree_openArc` is this at a collar's arc). -/
 theorem IsRingArc.degree_openArc (hA : F.IsRingArc P θ₁ θ₂ c c') {θ : ℝ} (hθ : θ ∈ Ioo θ₁ θ₂)
     (hfree : ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) :
     (∀ n, F.HasDegree (ringPt P θ) n ↔ n = 2) ∧ (F.HasRepeatedColour (ringPt P θ) ↔ c = c') := by
-  sorry
+  obtain ⟨r₁, hr₁, hfr⟩ := hfree
+  have hvΓ : ringPt P θ ∈ F.Γ := hA.2.1 ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩
+  obtain ⟨r₂, hr₂, hdom⟩ := Metric.isOpen_iff.mp F.isOpen_dom _ hvΓ.1
+  obtain ⟨r₃, hr₃, hsph⟩ := exists_sphere_inter_ball_subset_openArc (p := P) hθ
+  set r₀ := min (min r₁ r₂) (min r₃ 1) with hr₀
+  have h0 : 0 < r₀ := lt_min (lt_min hr₁ hr₂) (lt_min hr₃ one_pos)
+  have h1 : r₀ ≤ r₁ := (min_le_left _ _).trans (min_le_left _ _)
+  have h2 : r₀ ≤ r₂ := (min_le_left _ _).trans (min_le_right _ _)
+  have h3 : r₀ ≤ r₃ := (min_le_right _ _).trans (min_le_left _ _)
+  have h4 : r₀ ≤ 1 := (min_le_right _ _).trans (min_le_right _ _)
+  refine degree_of_circle (q := P) (φ := θ) one_pos (by simp [ringPt]) h0 (by linarith) ((ball_subset_ball h2).trans hdom) ?_
+    (fun d hd => ?_) (fun d hd => ?_)
+  · apply Subset.antisymm
+    · rintro z ⟨hzΓ, hzb⟩
+      exact ⟨hfr ⟨hzΓ, ball_subset_ball h1 hzb⟩, hzb⟩
+    · rintro z ⟨hzs, hzb⟩
+      obtain ⟨t, ht, rfl⟩ := hsph ⟨hzs, ball_subset_ball h3 hzb⟩
+      exact ⟨hA.2.1 ⟨t, Ioo_subset_Icc_self ht, rfl⟩, hzb⟩
+  · have : d ∈ F.innerColours P (ringPt P θ) := hd
+    rw [(hA.2.2 θ hθ).1] at this
+    exact this
+  · have : d ∈ F.outerColours P (ringPt P θ) := hd
+    rw [(hA.2.2 θ hθ).2] at this
+    exact this
 
 /-- **A unit arc about another centre misses the open arc** (FS131-IA1's W4): near an interior point of `α` with `Γ` free there, `Γ`
 lies on `ω(P)`, which a unit circle about `Q ≠ P` meets in finitely many points. -/
 theorem IsRingArc.disjoint_openArc_of_ne (hF : F.Valid) {Q : ℂ} {a b : ℝ} {d d' : Fin k} (hQP : Q ≠ P)
     (hD : F.IsRingArc Q a b d d') (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) :
     Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂) := by
-  sorry
+  rw [Set.disjoint_left]
+  rintro w ⟨β, hβ, rfl⟩ ⟨θ, hθ, hwθ⟩
+  obtain ⟨r, hr, hfr⟩ := hfree θ hθ
+  have hℓ := l60_le hF hD
+  have hπ := Real.pi_pos
+  have hcont : Continuous (ringPt Q) := continuous_const.add continuous_e
+  have hO : IsOpen (ringPt Q ⁻¹' ball (ringPt P θ) r) := isOpen_ball.preimage hcont
+  have hβO : β ∈ ringPt Q ⁻¹' ball (ringPt P θ) r := by
+    show ringPt Q β ∈ ball (ringPt P θ) r
+    rw [hwθ]; exact mem_ball_self hr
+  obtain ⟨η, hη, hball⟩ := Metric.isOpen_iff.mp hO β hβO
+  have hlt : max a (β - η) < min b (β + η) := by
+    rw [max_lt_iff, lt_min_iff, lt_min_iff]
+    exact ⟨⟨hD.1, by linarith [hβ.1]⟩, ⟨by linarith [hβ.2], by linarith⟩⟩
+  have hJ : (Ioo (max a (β - η)) (min b (β + η))).Infinite := Ioo_infinite hlt
+  have hmemI : ∀ t ∈ Ioo (max a (β - η)) (min b (β + η)), t ∈ Icc a b := fun t ht =>
+    ⟨(le_max_left _ _).trans ht.1.le, ht.2.le.trans (min_le_left _ _)⟩
+  have hsub : ringPt Q '' Ioo (max a (β - η)) (min b (β + η)) ⊆ (Arc.circ Q 1 a b).carrier ∩ sphere P 1 := by
+    rintro _ ⟨t, ht, rfl⟩
+    have hta := hmemI t ht
+    have htη : t ∈ ball β η := by
+      rw [Real.ball_eq_Ioo]
+      exact ⟨(le_max_right _ _).trans_lt ht.1, ht.2.trans_le (min_le_right _ _)⟩
+    have htb : ringPt Q t ∈ ball (ringPt P θ) r := hball htη
+    have htΓ : ringPt Q t ∈ F.Γ := hD.2.1 ⟨t, hta, rfl⟩
+    refine ⟨?_, hfr ⟨htΓ, htb⟩⟩
+    rw [carrier_circ_one]
+    exact ⟨t, hta, rfl⟩
+  have hfin : ((Arc.circ Q 1 a b).carrier ∩ sphere P 1).Finite := by
+    rcases (Arc.circ Q 1 a b).finite_inter_sphere_or_eq_circ ⟨one_pos, hD.1, by linarith⟩ P with h | ⟨θ₀, θ₁', h⟩
+    · exact h
+    · exact absurd (Arc.circ.inj h).1 hQP
+  have hinj : InjOn (ringPt Q) (Ioo (max a (β - η)) (min b (β + η))) := by
+    intro s hs t ht hst
+    have he : e s = e t := by
+      simp only [ringPt] at hst
+      exact add_left_cancel hst
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp he
+    have hs' := hmemI s hs
+    have ht' := hmemI t ht
+    have hn0 : n = 0 := by
+      by_contra hne
+      rcases lt_or_gt_of_ne hne with hneg | hpos
+      · have : (n : ℝ) ≤ -1 := by exact_mod_cast Int.le_sub_one_of_lt hneg
+        nlinarith [hs'.1, hs'.2, ht'.1, ht'.2]
+      · have : (1 : ℝ) ≤ n := by exact_mod_cast hpos
+        nlinarith [hs'.1, hs'.2, ht'.1, ht'.2]
+    rw [hn0] at hn
+    simpa using hn
+  exact (hJ.image hinj) (hfin.subset hsub)
 
 end RingArc
 
@@ -130,7 +233,44 @@ horn count exists, and it is at least `1` exactly when some horn has its tip the
 the number of consecutive germs sharing a direction, and such a pair bounds a horn). -/
 theorem exists_hasHornCount_isHorn_iff {v : ℂ} (hv : v ∈ F.dom) :
     ∃ j, F.HasHornCount v j ∧ ((∃ α κ₁ κ₂ c, F.IsHorn v α κ₁ κ₂ c) ↔ 1 ≤ j) := by
-  sorry
+  obtain ⟨X⟩ := exists_near hv
+  -- a horn gives a positive count
+  have hpos : ∀ j, F.HasHornCount v j → (∃ α κ₁ κ₂ c, F.IsHorn v α κ₁ κ₂ c) → 1 ≤ j := by
+    rintro j hj ⟨α, κ₁, κ₂, c, hκ, hH⟩
+    obtain ⟨r, hr, hS, -⟩ := (hj.and hH).exists
+    have h1 : (1 : ℕ∞) ≤ ({S | F.IsSector v r S ∧ ∃ α κ₁ κ₂, κ₁ < κ₂ ∧ S = hornSet v α κ₁ κ₂ r}).encard :=
+      Set.one_le_encard_iff_nonempty.mpr ⟨_, hS, α, κ₁, κ₂, hκ, rfl⟩
+    rw [hr] at h1
+    exact_mod_cast h1
+  rcases Nat.eq_zero_or_pos X.n with hn | hn
+  · have h0 : F.HasHornCount v 0 := by
+      filter_upwards [Ioc_mem_nhdsGT X.hC.pos] with r hr
+      rw [Nat.cast_zero, encard_eq_zero, eq_empty_iff_forall_notMem]
+      rintro S ⟨hS, α, κ₁, κ₂, -, rfl⟩
+      have hball := (X.hC.isSector_iff_of_zero hn hr).mp hS
+      have hv' : v ∈ hornSet v α κ₁ κ₂ r := hball ▸ mem_ball_self hr.1
+      have := hv'.2.1
+      simp [frameX] at this
+    exact ⟨0, h0, fun hH => hpos 0 h0 hH, fun h => absurd h (by norm_num)⟩
+  · refine ⟨_, X.hasHornCount_chart hn, hpos _ (X.hasHornCount_chart hn), fun h1 => ?_⟩
+    have hne : {i : Fin X.n | X.G.β i = X.G.nextβ i}.Nonempty := by
+      rw [← Set.ncard_pos]; omega
+    obtain ⟨i, hi⟩ := hne
+    have hi' : X.G.β i = X.G.nextβ i := hi
+    have hκ : X.G.κ i < X.G.nextκ i := by
+      rcases X.hC.sorted.2 i with hlt | ⟨-, hκ⟩
+      · exact absurd hi' hlt.ne
+      · exact hκ
+    refine ⟨X.G.β i, X.G.κ i, X.G.nextκ i, X.col i, hκ, ?_⟩
+    filter_upwards [Ioc_mem_nhdsGT X.hC.pos] with r hr
+    have hsec : X.G.sector v r i = hornSet v (X.G.β i) (X.G.κ i) (X.G.nextκ i) r := by
+      have h1 : |X.G.κ i| * r ≤ 2 := (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans (X.hC.curv i).le
+      have h2 : |X.G.nextκ i| * r ≤ 2 := (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans (X.hC.curv_next i).le
+      show sectorBetween v (X.G.β i) (X.G.κ i) (X.G.nextβ i) (X.G.nextκ i) r = _
+      rw [← hi']
+      exact sectorBetween_eq_hornSet v _ _ _ r h1 h2
+    rw [← hsec]
+    exact ⟨(X.hC.isSector_iff hn hr).mpr ⟨i, rfl⟩, fun z hz => (X.hcol i r hr hz).2⟩
 
 /-! ## The step's radius -/
 
@@ -138,7 +278,21 @@ theorem exists_hasHornCount_isHorn_iff {v : ℂ} (hv : v ∈ F.dom) :
 closed `ε`-neighbourhood of the arc on the arc. -/
 theorem exists_arcStep_radius {T : Set ℂ} (hT : ∀ K, IsCompact K → (K ∩ T).Finite) (P : ℂ) (θ₁ θ₂ : ℝ) {δ : ℝ} (hδ : 0 < δ) :
     ∃ ε, 0 < ε ∧ ε < δ ∧ ε < 1 ∧ cthickening ε (ringArc P θ₁ θ₂) ∩ T ⊆ ringArc P θ₁ θ₂ := by
-  sorry
+  have hα : IsCompact (ringArc P θ₁ θ₂) := isCompact_Icc.image (continuous_const.add continuous_e)
+  have hfin : ((cthickening 1 (ringArc P θ₁ θ₂) ∩ T) \ ringArc P θ₁ θ₂).Finite :=
+    (hT _ hα.cthickening).subset sdiff_subset
+  obtain ⟨η, hη, hηd⟩ := (disjoint_sdiff_right (s := ringArc P θ₁ θ₂)
+    (t := cthickening 1 (ringArc P θ₁ θ₂) ∩ T)).exists_cthickenings hα hfin.isClosed
+  refine ⟨min (min η (δ / 2)) (1 / 2), by positivity, ?_, ?_, ?_⟩
+  · exact lt_of_le_of_lt ((min_le_left _ _).trans (min_le_right _ _)) (by linarith)
+  · exact lt_of_le_of_lt (min_le_right _ _) (by norm_num)
+  · rintro x ⟨hxc, hxT⟩
+    by_contra hxα
+    have hx1 : x ∈ cthickening 1 (ringArc P θ₁ θ₂) :=
+      cthickening_mono ((min_le_right _ _).trans (by norm_num)) _ hxc
+    have hxη : x ∈ cthickening η (ringArc P θ₁ θ₂) :=
+      cthickening_mono ((min_le_left _ _).trans (min_le_left _ _)) _ hxc
+    exact Set.disjoint_left.mp hηd hxη (self_subset_cthickening _ ⟨⟨hx1, hxT⟩, hxα⟩)
 
 /-! ## The step's clauses from the interface -/
 
@@ -151,25 +305,65 @@ theorem dom_eq (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) : M.dom = F.dom :=
 
 /-- A point of the collar is at distance between `1 − ε` and `1 + ε` from `P`. -/
 theorem dist_of_mem (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) {z : ℂ} (hz : z ∈ K) : 1 - ε < dist z P ∧ dist z P < 1 + ε := by
-  sorry
+  obtain ⟨_, ⟨θ, -, rfl⟩, hd⟩ := mem_thickening_iff.mp (hB.sub_thick hz)
+  have h1 := dist_triangle z (ringPt P θ) P
+  have h2 := dist_triangle (ringPt P θ) z P
+  rw [dist_ringPt] at h1 h2
+  rw [dist_comm (ringPt P θ) z] at h2
+  exact ⟨by linarith, by linarith⟩
 
 /-- **The place of a preimage**: a point is fixed, or its preimage is an interior point of `F` in the collar or an interior point of
 the arc. -/
 theorem symm_cases (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) (x : ℂ) :
     h.symm x = x ∨ h.symm x ∈ F.interiorPts ∨ ∃ θ ∈ Ioo θ₁ θ₂, h.symm x = ringPt P θ := by
-  sorry
+  have hx : h (h.symm x) = x := h.apply_symm_apply x
+  by_cases hK : h.symm x ∈ K
+  · by_cases hI : h.symm x ∈ F.interiorPts
+    · exact Or.inr (Or.inl hI)
+    · have hΓ : h.symm x ∈ F.Γ := (F.mem_Γ_iff).mpr ⟨hB.sub_dom hK, hI⟩
+      by_cases hO : h.symm x ∈ ringPt P '' Ioo θ₁ θ₂
+      · obtain ⟨θ, hθ, hθx⟩ := hO
+        exact Or.inr (Or.inr ⟨θ, hθ, hθx.symm⟩)
+      · left
+        have := hB.fix_Γ _ hΓ hO
+        rw [hx] at this
+        exact this.symm
+  · left
+    have := hB.fix_off _ hK
+    rw [hx] at this
+    exact this.symm
 
 /-- The colours at a point off the collar are kept. -/
 theorem coloursAt_of_notMem (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) {x : ℂ} (hx : x ∉ K) : M.coloursAt x = F.coloursAt x := by
-  sorry
+  have := hB.coloursAt x
+  rwa [hB.fix_off x hx] at this
 
 /-- **The colours at the centre are kept** (`ε ≤ 1`: the centre is off the collar). -/
 theorem coloursAt_centre (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) (hε : ε ≤ 1) : M.coloursAt P = F.coloursAt P := by
-  sorry
+  refine hB.coloursAt_of_notMem fun hPK => ?_
+  have := (hB.dist_of_mem hPK).1
+  rw [dist_self] at this
+  linarith
 
 /-- **The bent map of a clean map is clean**: a point of its `Γ` is the image of a point of `F`'s, with the same colours. -/
 theorem isClean (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) (hc : F.IsClean) : M.IsClean := by
-  sorry
+  intro x hx
+  have hxx : h (h.symm x) = x := h.apply_symm_apply x
+  have hzΓ : h.symm x ∈ F.Γ := by
+    refine (F.mem_Γ_iff).mpr ⟨?_, fun hI => ?_⟩
+    · by_cases hK : h.symm x ∈ K
+      · exact hB.sub_dom hK
+      · have := hB.fix_off _ hK
+        rw [hxx] at this
+        rw [← this, ← hB.dom_eq]
+        exact hx.1
+    · have := hB.interior _ hI
+      rw [hxx] at this
+      exact ((M.mem_Γ_iff).mp hx).2 this
+  have := hB.coloursAt (h.symm x)
+  rw [hxx] at this
+  rw [this]
+  exact hc _ hzΓ
 
 /-- **The bend is a local step on the closed `ε`-neighbourhood of the arc.** -/
 theorem localStep (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) : LocalStep F M (cthickening ε (ringArc P θ₁ θ₂)) :=
@@ -178,41 +372,135 @@ theorem localStep (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) : LocalStep F M
 /-- **The bent map is a modification of `F`**: a point of at least four colours in it is fixed (a moved point's preimage is interior,
 one colour, or on the open arc, two). -/
 theorem isModification (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) : F.IsModification M := by
-  sorry
+  refine ⟨hB.dom_eq, hB.ringArcsWithin, fun x h4 => ?_⟩
+  have hxx : h (h.symm x) = x := h.apply_symm_apply x
+  have hcol : M.coloursAt x = F.coloursAt (h.symm x) := by
+    have := hB.coloursAt (h.symm x)
+    rwa [hxx] at this
+  rcases hB.symm_cases x with hfix | hI | ⟨θ, hθ, hz⟩
+  · rw [hfix] at hcol
+    exact hcol.subset
+  · exfalso
+    rw [hcol, coloursAt_eq_singleton_of_interior hI, Set.ncard_singleton] at h4
+    omega
+  · exfalso
+    rw [hcol, hz, hB.ring.coloursAt_openArc hθ] at h4
+    have := Set.ncard_insert_le c ({c'} : Set (Fin k))
+    rw [Set.ncard_singleton] at this
+    omega
+
+/-- **A point off the collar or on the closed arc is fixed, or an interior point of the arc turned to the gaining colour.** -/
+theorem fixed_or_gain (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) {x : ℂ} (hx : x ∉ K ∨ x ∈ ringArc P θ₁ θ₂) :
+    h x = x ∨ ∃ θ ∈ Ioo θ₁ θ₂, x = ringPt P θ ∧ ringPt P θ ∈ M.region g := by
+  rcases hx with hx | hx
+  · exact Or.inl (hB.fix_off x hx)
+  · by_cases hO : x ∈ ringPt P '' Ioo θ₁ θ₂
+    · obtain ⟨θ, hθ, rfl⟩ := hO
+      exact (hB.gain θ hθ).imp id fun hg => ⟨θ, hθ, rfl, hg⟩
+    · exact Or.inl (hB.fix_Γ x (hB.ring.2.1 hx) hO)
 
 /-- **No colour is added at a point off the collar or on the closed arc**: such a point is fixed, or an interior point of the arc
 turned to the gaining colour, a side colour of the arc there. -/
 theorem coloursAt_subset (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) {x : ℂ} (hx : x ∉ K ∨ x ∈ ringArc P θ₁ θ₂) :
     M.coloursAt x ⊆ F.coloursAt x := by
-  sorry
+  rcases hB.fixed_or_gain hx with hfix | ⟨θ, hθ, rfl, hg⟩
+  · have := hB.coloursAt x
+    rw [hfix] at this
+    exact this.subset
+  · rw [coloursAt_eq_singleton_of_interior hg.1, singleton_subset_iff, hB.ring.coloursAt_openArc hθ]
+    have hcol : M.col (ringPt P θ) = g := hg.2
+    rw [hcol]
+    rcases hB.side with hs | hs
+    · exact Or.inl hs
+    · exact Or.inr hs
 
 /-- **No degree rises at a point off the collar or on the closed arc** (the repaired degree clause of `exists_arcStep`, where it is
 read): a fixed point keeps its degree; an interior point of the arc turned to the gaining colour falls to degree `1`. -/
 theorem degree_le (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) (hc : F.IsClean) {x : ℂ} (hx : x ∉ K ∨ x ∈ ringArc P θ₁ θ₂) {m : ℕ}
     (hm : F.HasDegree x m) : ∃ m' ≤ m, M.HasDegree x m' := by
-  sorry
+  rcases hB.fixed_or_gain hx with hfix | ⟨θ, hθ, rfl, hg⟩
+  · refine ⟨m, le_rfl, ?_⟩
+    have := hB.degree x m hm
+    rwa [hfix] at this
+  · refine ⟨1, ?_, (hasDegree_iff_of_mem_interiorPts hg.1 1).mpr rfl⟩
+    have hm2 : m = 2 := ((hB.ring.degree_openArc hθ (hB.ring.free_of_isClean hc θ hθ)).1 m).mp hm
+    omega
 
 /-- **No site is created**: a repeated colour of the bent map sits at a fixed point (a moved point's preimage is interior, or on the
 open arc, whose two sides differ in a clean map); a horn of the bent map gives horn count at least `1` there, so in `F` too (`horn`),
 so a horn of `F` (`exists_hasHornCount_isHorn_iff`). -/
 theorem isSite (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) (hc : F.IsClean) {x : ℂ} (hx : M.IsSite x) : F.IsSite x := by
-  sorry
+  obtain ⟨hxd, hrep | ⟨α, κ₁, κ₂, c₀, hH⟩⟩ := hx
+  · have hxF : x ∈ F.dom := by rw [← hB.dom_eq]; exact hxd
+    refine ⟨hxF, Or.inl ?_⟩
+    have hxx : h (h.symm x) = x := h.apply_symm_apply x
+    have hrepF : F.HasRepeatedColour (h.symm x) := hB.repeated _ (by rw [hxx]; exact hrep)
+    rcases hB.symm_cases x with hfix | hI | ⟨θ, hθ, hz⟩
+    · rwa [hfix] at hrepF
+    · exfalso
+      obtain ⟨r₀, m, Gm, hC⟩ := localSectors F hI.1
+      have hm : m = 0 := by
+        by_contra hm
+        exact hI.2 (hC.mem_Γ.mpr (Nat.pos_of_ne_zero hm)).2
+      exact hC.not_hasRepeatedColour_of_zero hm hrepF
+    · exfalso
+      rw [hz] at hrepF
+      exact hB.ring.sides_ne_of_isClean hc
+        ((hB.ring.degree_openArc hθ (hB.ring.free_of_isClean hc θ hθ)).2.mp hrepF)
+  · have hxF : x ∈ F.dom := by rw [← hB.dom_eq]; exact hxd
+    refine ⟨hxF, Or.inr ?_⟩
+    obtain ⟨j, hj, hiff⟩ := exists_hasHornCount_isHorn_iff hxF
+    obtain ⟨j', hj', hjM⟩ := hB.horn x j hj
+    obtain ⟨jM, hjM', hiffM⟩ := exists_hasHornCount_isHorn_iff hxd
+    have h1 : 1 ≤ jM := hiffM.mp ⟨α, κ₁, κ₂, c₀, hH⟩
+    have h2 : jM = j' := hjM'.eq hjM
+    exact hiff.mpr (by omega)
 
 /-- **(Q) is kept** at a centre whose colours are kept, for an arc whose open arc misses `α°`. -/
 theorem isQArc_of (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) {Q : ℂ} {a b : ℝ} (hQ : F.IsQArc Q a b)
     (hd : Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂)) (hcol : M.coloursAt Q = F.coloursAt Q) : M.IsQArc Q a b := by
-  sorry
+  obtain ⟨d, d', hD, h1, h2, h4⟩ := hQ
+  exact ⟨d, d', hB.R2 _ _ _ _ _ hD hd, by rw [hcol]; exact h1, by rw [hcol]; exact h2, by rw [hcol]; exact h4⟩
 
 /-- **(R2) is kept** at a centre whose colours are kept, for an arc whose open arc misses `α°` (question (5), `isR2Arc_of_fixed`). -/
 theorem isR2Arc_of (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) (hF : F.Valid) (hc : F.IsClean) {Q : ℂ} {a b : ℝ} (hR : F.IsR2Arc Q a b)
     (hd : Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂)) (hcol : M.coloursAt Q = F.coloursAt Q) : M.IsR2Arc Q a b := by
-  sorry
+  exact isR2Arc_of_fixed hF hB.sub_dom hB.fix_off hB.fix_Γ hB.coloursAt (hB.ring.free_of_isClean hc)
+    (fun _ _ hD => hB.R2 _ _ _ _ _ hD hd) hcol hR
 
 /-- **What is left of the arc is (R2)** (FS131-IA1's W7): a unit arc of the bent map about `P` with `α`'s sides whose open arc lies in
 `α°` is an (R2) arc of the bent map (`left` at each interior angle; the ends by closedness; the radius-2 points are off the collar). -/
 theorem isR2Arc_left (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) (hε : ε ≤ 1) {a b : ℝ} (hM : M.IsRingArc P a b c c')
     (hsub : ringPt P '' Ioo a b ⊆ ringPt P '' Ioo θ₁ θ₂) : M.IsR2Arc P a b := by
-  sorry
+  have hcont : Continuous fun t : ℝ => P + 2 * e t := continuous_const.add (continuous_const.mul continuous_e)
+  have hon : ∀ t ∈ Ioo a b, ∀ θ, ringPt P θ = ringPt P t → M.OnRingArc P (ringPt P θ) := fun t ht θ hθt =>
+    ⟨a, b, hM.1, by rw [hθt]; exact ⟨t, Ioo_subset_Icc_self ht, rfl⟩, hM.2.1⟩
+  have hIoo : (fun t : ℝ => P + 2 * e t) '' Ioo a b ⊆ closure (M.region c) := by
+    rintro _ ⟨t, ht, rfl⟩
+    obtain ⟨θ, hθ, hθt⟩ := hsub ⟨t, ht, rfl⟩
+    have he : e θ = e t := by
+      simp only [ringPt] at hθt
+      exact add_left_cancel hθt
+    have h3 := (hB.left θ hθ (hon t ht θ hθt)).2.2
+    rw [he] at h3
+    have hnK : P + 2 * e t ∉ K := fun hK => by
+      have h := (hB.dist_of_mem hK).2
+      have hd : dist (P + 2 * e t) P = 2 := by simp [dist_eq_norm]
+      rw [hd] at h
+      linarith
+    have hmem : c ∈ M.coloursAt (P + 2 * e t) := by
+      rw [hB.coloursAt_of_notMem hnK]; exact h3
+    exact hmem
+  obtain ⟨t₀, ht₀⟩ := nonempty_Ioo.mpr hM.1
+  obtain ⟨θ₀, hθ₀, hθt₀⟩ := hsub ⟨t₀, ht₀, rfl⟩
+  obtain ⟨hc', hcn, -⟩ := hB.left θ₀ hθ₀ (hon t₀ ht₀ θ₀ hθt₀)
+  have hcolP := hB.coloursAt_centre hε
+  refine ⟨c, c', hM, by rw [hcolP]; exact hc', by rw [hcolP]; exact hcn, ?_⟩
+  calc radiusTwoArc P a b = (fun t : ℝ => P + 2 * e t) '' closure (Ioo a b) := by
+        rw [closure_Ioo hM.1.ne]; rfl
+    _ ⊆ closure ((fun t : ℝ => P + 2 * e t) '' Ioo a b) := image_closure_subset_closure_image hcont
+    _ ⊆ closure (closure (M.region c)) := closure_mono hIoo
+    _ = closure (M.region c) := closure_closure
 
 /-- **A maximal bad unit arc of the bent map is one of `F`, off `α°`** — the two count clauses of `exists_arcStep` at the ring-arc
 level. `Q` is a centre whose colours are kept; `hmeet` says that a unit arc of `F` about `Q` whose open arc meets `α°` is centred at
@@ -229,7 +517,20 @@ theorem maxBad (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) (hF : F.Valid) (hc
     (hQ : ¬ M.IsQArc Q a b) (hR : ¬ M.IsR2Arc Q a b) :
     Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂) ∧ F.IsRingArc Q a b d d' ∧
       (∀ a' b', a' ≤ a → b ≤ b' → F.IsRingArc Q a' b' d d' → a' = a ∧ b' = b) ∧ ¬ F.IsQArc Q a b ∧ ¬ F.IsR2Arc Q a b := by
-  sorry
+  have hFD : F.IsRingArc Q a b d d' := hB.R1 _ _ _ _ _ hM
+  have hdisj : Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂) := by
+    by_contra hnd
+    obtain ⟨hQP, ⟨hdc, hdc'⟩, hsub⟩ := hmeet a b d d' hFD hnd
+    subst hQP hdc hdc'
+    exact hR (hB.isR2Arc_left hε hM hsub)
+  refine ⟨hdisj, hFD, fun a' b' ha hb hD' => ?_, fun hQF => hQ (hB.isQArc_of hQF hdisj hcol),
+    fun hRF => hR (hB.isR2Arc_of hF hc hRF hdisj hcol)⟩
+  refine hmax a' b' ha hb (hB.R2 _ _ _ _ _ hD' ?_)
+  by_contra hnd
+  obtain ⟨-, -, hsub⟩ := hmeet a' b' d d' hD' hnd
+  obtain ⟨t, ht⟩ := nonempty_Ioo.mpr hM.1
+  have ht' : t ∈ Ioo a' b' := ⟨lt_of_le_of_lt ha ht.1, lt_of_lt_of_le ht.2 hb⟩
+  exact Set.disjoint_left.mp hdisj ⟨t, ht, rfl⟩ (hsub ⟨t, ht', rfl⟩)
 
 /-- **The count clause at the centre**, at the ring-arc level: given `α`'s maximality on point sets (`hmeet`), a maximal bad unit arc of
 the bent map about `P` is a maximal bad unit arc of `F` about `P` whose open arc misses `α°` — so it is not `α`. -/
@@ -264,7 +565,13 @@ theorem arcStep (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) (hc : F.IsClean) 
       (∀ x, M.IsSite x → F.IsSite x) ∧ (∀ x ∈ T, ∀ m, F.HasDegree x m → ∃ m' ≤ m, M.HasDegree x m') ∧
       (∀ x j, F.HasHornCount x j → ∃ j' ≤ j, M.HasHornCount x j') ∧ (∀ Q ∈ T, M.coloursAt Q ⊆ F.coloursAt Q) ∧
       M.coloursAt P = F.coloursAt P := by
-  sorry
+  have hsubK : ∀ x ∈ T, x ∉ K ∨ x ∈ ringArc P θ₁ θ₂ := fun x hxT => by
+    by_cases hxK : x ∈ K
+    · exact Or.inr (hT ⟨thickening_subset_cthickening _ _ (hB.sub_thick hxK), hxT⟩)
+    · exact Or.inl hxK
+  exact ⟨hB.valid, hB.isClean hc, hB.localStep, hB.isModification, fun x hx => hB.isSite hc hx,
+    fun x hx m hm => hB.degree_le hc (hsubK x hx) hm, hB.horn, fun Q hQ => hB.coloursAt_subset (hsubK Q hQ),
+    hB.coloursAt_centre hε⟩
 
 end ArcBend
 
