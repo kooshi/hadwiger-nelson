@@ -6338,6 +6338,55 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.isTangentAt_comm
 #print axioms HadwigerNelson.Plane.sq9_twoColourNhd
 
+/-! ## FS131-I6B — wave 6: `MapColouring`'s leaf `sat_inP` (FS121-C1-SAT) with its helpers (`Plane/Saturated/MapEdge`) and its model (`Plane/Saturated/Sq9Map`) -/
+
+#print axioms HadwigerNelson.Plane.MapEdge.densityRatio_congr_ae
+#print axioms HadwigerNelson.Plane.MapEdge.essBoundary_congr_ae
+#print axioms HadwigerNelson.Plane.MapEdge.essSupport_congr_ae
+#print axioms HadwigerNelson.Plane.MapEdge.notMem_densitySet_of_disjoint
+#print axioms HadwigerNelson.Plane.MapEdge.mem_ball_iff_sq
+#print axioms HadwigerNelson.Plane.MapEdge.push_real
+#print axioms HadwigerNelson.Plane.MapEdge.convex_halfDisc
+#print axioms HadwigerNelson.Plane.MapEdge.isPreconnected_puncturedBall
+#print axioms HadwigerNelson.Plane.mem_curveAt_iff_curveSide
+#print axioms HadwigerNelson.Plane.curveSide_eq
+#print axioms HadwigerNelson.Plane.curveSide_rebase
+#print axioms HadwigerNelson.Plane.normSq_rebase
+#print axioms HadwigerNelson.Plane.continuous_curveSide
+#print axioms HadwigerNelson.Plane.convex_curveSide_neg
+#print axioms HadwigerNelson.Plane.exists_segment_curveSide_pos
+#print axioms HadwigerNelson.Plane.isPreconnected_curveSide_pos
+#print axioms HadwigerNelson.Plane.isPreconnected_curveSide_neg
+#print axioms HadwigerNelson.Plane.curveSide_neg_of_mem_ball
+#print axioms HadwigerNelson.Plane.curveSide_pos_of_mem_ball
+#print axioms HadwigerNelson.Plane.ArcMap.subset_region_of_isPreconnected
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_interiorPts_diff_region
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_region
+#print axioms HadwigerNelson.Plane.ArcMap.mem_essBoundary_region_of_curve
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_essBoundary_region
+#print axioms HadwigerNelson.Plane.mem_sq9Arcs
+#print axioms HadwigerNelson.Plane.mem_sq9_bottom
+#print axioms HadwigerNelson.Plane.mem_sq9_left
+#print axioms HadwigerNelson.Plane.mem_sq9Grid_iff
+#print axioms HadwigerNelson.Plane.sq9Arcs_nondegenerate
+#print axioms HadwigerNelson.Plane.sq9Arcs_locallyFinite
+#print axioms HadwigerNelson.Plane.sq9Col_locallyConstant
+#print axioms HadwigerNelson.Plane.sq9Map_isPlaneMap
+#print axioms HadwigerNelson.Plane.mem_sq9Map_interiorPts
+#print axioms HadwigerNelson.Plane.volume_sq9Grid
+#print axioms HadwigerNelson.Plane.sq9Map_region_ae
+#print axioms HadwigerNelson.Plane.sqEdge_mem_interiorPts
+#print axioms HadwigerNelson.Plane.sqEdge_left_subset_region
+#print axioms HadwigerNelson.Plane.sqEdge_right_subset_region
+#print axioms HadwigerNelson.Plane.sqEdgePt_mem_closure_regions
+#print axioms HadwigerNelson.Plane.sqEdge_ball_subset_closure_regions
+#print axioms HadwigerNelson.Plane.ArcMap.bound_of_saturatedOn
+#print axioms HadwigerNelson.Plane.sat_bound_of_mem_closure
+#print axioms HadwigerNelson.Plane.sat_inP
+#print axioms HadwigerNelson.Plane.sat_noPar
+#print axioms HadwigerNelson.Plane.sq9Map_separatesAt
+#print axioms HadwigerNelson.Plane.sq9Map_sat_model
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
