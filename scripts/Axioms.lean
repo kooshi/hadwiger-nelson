@@ -3870,7 +3870,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.dist_le_one_of_touch
 #print axioms HadwigerNelson.Plane.ArcMap.l60_tile_dist_ne_one
 #print axioms HadwigerNelson.Plane.ArcMap.l60_side_tile
-#print axioms HadwigerNelson.Plane.ArcMap.cos_nonpos_of_coneAt_of_disjoint
+#print axioms HadwigerNelson.Plane.ArcMap.cos_nonpos_of_mem_coneAt
 #print axioms HadwigerNelson.Plane.ArcMap.mem_angleIcc_of_two_cos
 #print axioms HadwigerNelson.Plane.ArcMap.mem_closure_ringArc_diff_finite
 #print axioms HadwigerNelson.Plane.ArcMap.ringArc_subset_Γ_of_finite
@@ -4548,7 +4548,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.filledGraph_reachable_of_subset
 #print axioms HadwigerNelson.Plane.ArcMap.eq_or_subset_hole_of_inter
 #print axioms HadwigerNelson.Plane.ArcMap.subset_fill_of_inter
-#print axioms HadwigerNelson.Plane.ArcMap.IsOuterTileAt.disjoint_closure_fill
+#print axioms HadwigerNelson.Plane.ArcMap.IsOuterTile.disjoint_closure_fill
 #print axioms HadwigerNelson.Plane.ArcMap.reachable_offTwo_of_inter
 #print axioms HadwigerNelson.Plane.ArcMap.subset_compl_of_inter_compl
 #print axioms HadwigerNelson.Plane.ArcMap.subset_compl_of_mem_offTwo
