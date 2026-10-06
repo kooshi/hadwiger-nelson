@@ -119,6 +119,66 @@ three elaboration rounds (H1, H2, C1, H3, H4 on the first; C2's helpers on the s
   `ValidMap/Basic` with the factors the other way round; mine is `conj_e_mul_e'`), `IsOpen.inter` on a set-builder conjunction
   (`IsOpen.and`), a `set` that hid a rewrite target, an `obtain` pattern clearing a variable its neighbours depend on.
 
+## Stage 3 — SAVED (FS131-BA2): C4, the lens's clearance — the new mathematics — in the kernel; C5; C7, C9 and C6's first clause from the other half's children
+
+### 3.1 C4 `exists_lensOut_clear`: the planner's hand proof (§ 2.5) checked step by step, and it holds
+
+Statement unchanged. **On `[propext, Classical.choice, Quot.sound]`** (`data/fs131/ba2/BA2Axioms-stage3.out`; the control — expecting it
+through `sorryAx` — fails naming it as standard). I am this derivation's first check, so, by step:
+
+| step of § 2.5 | holds? | the Lean form |
+|---|---|---|
+| near or far (`n2_sign`), near is closer than `1` (`n2_env_near_away`, the class off a disc about `P` by `hin`) | yes | `away_clear`'s first case, inline |
+| far: within `r` of the radius-2 arc (`n2_env_away`) | yes | `r = min d₀ (η/2)` |
+| the arc's middle is a positive distance `d₀` from the class (compact against closed, `hgap`) | yes | `exists_gap_middle_far` (`Disjoint.exists_thickenings`), the middle being the angles `[θ₁ + η/4, θ₂ − η/4]` |
+| so the far point is within `η` of an end's radius-2 point | yes | the triangle inequality with `‖e θ − e θ'‖ ≤ |θ − θ'|` |
+| beyond the end: `claim_e`, no smallness | yes | `lens_end_far`, second case, in the frame coordinates `(r2X, r2Y)`: `z₁ < 1` because the lens point is strictly inside the end's circle and not inside `ω(P)` |
+| gap side: `dist y P ≥ 2` (N-c: "far" does the work) | yes | `two_le_dist_of_far`: the direction of `y` from `P` (`eq_polar_frameDir`, `Complex.arg`) is an angle of the closed arc once `η ≤ sin(θ₂ − θ₁)` and `η ≤ 1/2`, and `y` is at least `1` from the arc's point in that direction |
+| gap side: the dichotomy's "none" case gives the cap; "all" contradicts `hgap` | yes | `exists_gap_cap` (both ends through one `σ`) |
+| `end_cap` once `R = 1 + τ/2 ≤ ρ₀ − 1` | yes | `lens_end_far`, first case; `τ < 2(ρ₀ − 2)` at each end |
+
+Nothing in the statement had to move, and no extra smallness beyond the plan's (`η`, `r`, `τ`) was needed. The one thing § 2.5 left
+implicit and the kernel wanted: the far point's `-2 < r2Y` (it is on `P`'s far side of nothing — `p₁ > 0` in Claim E), from `η ≤ 1/2`.
+The proof is split into six lemmas because one declaration shares one heartbeat budget (`LEAN.md` § Searching; the first monolithic
+form died in `nlinarith` at 200,000 heartbeats — no limit was raised).
+
+### 3.2 The other children of this stage
+
+- **C5 `exists_collarFitOut`** — proved, on the standard three: `exists_collarFit`'s proof with `exists_lensOut_clear`, radii
+  `1 − τ`, `1 + τ/2`, `1 + τ`.
+- **C6, first clause, `CollarFitOut.map_ringArcsWithin`**; **C7 `CollarFitOut.map_localStep`**; **C9 `CollarFitOut.awayBend`** (every
+  field) — proved **from the other half's children**, which are `sorry` in this tree until the merge (`map_Γ`,
+  `collarOutArcs_carrier`, `collarOutArcs_nondegenerate`, `map_agreesOff`, `map_lens`, `map_valid`, `pushOutHomeo_polar`,
+  `pushOutHomeo_eq_self`, `LocalStep.of_cutArcs`), and — for `awayBend` — from my own still-open `map_R1`, `map_R2`,
+  `map_hornCount_le`. Nine access lemmas for the outward collar under names of their own (`CollarFitOut.prof_cases`,
+  `lensOutCurve_subset_collar`, `lensOutSet_subset_collar`, `ringArc_subset_collar`, `collar_isClosed`, `collar_inter_sphere`,
+  `homeo_off_collar`, `homeo_maps_collar`, `homeo_fix_Γ_off_arc`).
+- **Open after this stage**: `CollarFitOut.map_R1`, `CollarFitOut.map_R2` (C6's long mirrors), `CollarFitOut.map_hornCount_le` (C8),
+  `CollarFit.map_hornCount_le` (the toward bend's horn child).
+
+### 3.3 The coordinator's message of this stage (inventory item 452 (b)), and what I did with it
+
+Received while the build ran: FS131-BA1 has `LensOut` and `CollarMapOut` proved (`origin/fs131-w5a` at `66cb0314`) with public helpers
+the skeleton did not state; I am to **merge `origin/fs131-w5a` into this branch and use them, not re-prove them under other names**.
+Checked at once (a scan of my three files against the 33 names of the message): **no name of mine collides**. Four of my access lemmas
+re-prove a BA1 lemma under another name (`prof_cases` ≈ `PushOutProfiles.cases`, `lensOutCurve_subset_collar` ≈
+`CollarFitOut.lensOutCurve_subset`, `homeo_off_collar` ≈ `CollarFitOut.homeo_eq_self`, `homeo_fix_Γ_off_arc` ≈
+`CollarFitOut.homeo_fix_Γ`); they are replaced by BA1's at the merge (Stage 4). This stage is saved first, on the skeleton's base, so
+the merge is its own commit.
+
+### 3.4 The build and the receipts
+
+- **Build**: **OK — 459 of 459 batches, 3 modules rebuilt (`BendGap`, `BendStep`, `Proofs`), exit 0, no warning other than
+  `declaration uses sorry`** (`build/gate/build/20261006T065233Z-1853457.log`; driver log `data/fs131/ba2/build2.log`). **27 distinct
+  `sorry` warnings** (32 before): `BendGap` 8 → 3.
+- **Axioms** (`BA2Axioms.lean` → `BA2Axioms-stage3.out`, `BA2Axioms-stage3-summary.txt`, PASS): **49 records — 41 on the standard three
+  (with `exists_lensOut_clear`, `exists_collarFitOut` and their twelve helpers), 8 through `sorryAx`, exactly the expected ones**
+  (`exists_r2Subdiv`, `map_ringArcsWithin`, `map_localStep`, `awayBend` — from the other half's children — and the four open ones).
+  **Control**: expecting `exists_lensOut_clear` through `sorryAx` fails ("SORRY-EXPECTED-BUT-STANDARD").
+- **Statements**: `tools/fs131_ba2_stmt.py`: **0 failures over 1,795 base files** (`data/fs131/ba2/stmt-stage3.txt`).
+
+## Stage 3 — SAVED (FS131-BA2)
+
 ## Theorems this phase proved (the list the head of this record points to)
 
 Kernel-checked, on `[propext, Classical.choice, Quot.sound]` (`data/fs131/ba2/BA2Axioms-stage2.out`), namespace
@@ -131,7 +191,12 @@ Kernel-checked, on `[propext, Classical.choice, Quot.sound]` (`data/fs131/ba2/BA
   circle; all or none on each side, with the cap; with `isPreconnected_r2Crescent`, `ArcMap.IsRingArc.exists_inner_ball`, `under_point`,
   `mem_closure_dist_gt` and the frame lemmas (`r2_frame`, `r2_dist_sq`, …).
 
-Proved **from an open child of the other half** (through `sorryAx`; not a result yet): `ArcMap.exists_r2Subdiv` (from
-`R2Subdiv.of_local`, FS131-BA1's D6).
+- `ArcMap.exists_lensOut_clear` (`ValidMap/BendGap`) — **the lens's clearance over a gap, tangent ends included** (FS131-KA1's
+  § 2.5 over FS131-E5's two lemmas, now **[kernel]**); with `lens_end_far`, `two_le_dist_of_far`, `ArcMap.lens_far_end`,
+  `ArcMap.exists_gap_cap`, `ArcMap.exists_gap_middle_far`. `ArcMap.exists_collarFitOut` — the outward collar exists.
+
+Proved **from open children** (through `sorryAx`; not results yet): `ArcMap.exists_r2Subdiv` (from `R2Subdiv.of_local`, FS131-BA1's
+D6); `ArcMap.CollarFitOut.map_ringArcsWithin`, `.map_localStep`, `.awayBend` (Stage 3: from the other half's children, and `awayBend`
+also from `map_R1`, `map_R2`, `map_hornCount_le`).
 
 ## Stage 2 — SAVED (FS131-BA2)
