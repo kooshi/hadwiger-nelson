@@ -5664,3 +5664,23 @@ reason by the close.*
      before its author's own check; the report said it was a gap and not a refutation, and it was still more than the record
      supported. The correction goes to Kooshi in the next report. A statement defect reported mid-job by one mind is logged
      and routed at once, and announced as a defect only when its reporter's saved stage carries it.
+
+527. **After a compaction (the fourth of this run): re-grounded from the handoff; two briefs written ahead of their slots —
+     FS131-I7A and FS131-I8A — and their trees made** (2026-10-06; main at `253818b8` = origin, clean; the three running
+     trees' tips equal origin: `fs131-w10l` `2a6bf3f2`, `fs131-w6` `66d688b6`, `fs131-w6m` `898f4443`). **FS131-I7A**
+     (`data/fs131/briefs/FS131-I7A-wave7-first.md`; tree `.claude/worktrees/fs131-w7a`, branch `fs131-w7a` from `b5ef0e39`,
+     build copied from `fs131-w7`, no `lake` running there): `Plane/RouteT/Count`'s nineteen leaves in K7's order, the two
+     `CountData` inhabitants its plan derives, then `Rainbow`'s `anchor` if budget remains. **FS131-I8A**
+     (`data/fs131/briefs/FS131-I8A-wave8-first.md`; tree `.claude/worktrees/fs131-w8a`, branch `fs131-w8a` from `f1c13612`,
+     build copied from `fs131-w8`): `Plane/RingCalculus/Empty`'s six leaves to `emptyNS`, then `Star`'s two (ruling 525 (a)).
+     Generator for both: `data/fs131/briefs/scripts/mk-i78.py 7|8 [<the commit holding sq9>]`; both gated, exit 0, 30
+     quotations each. **Rulings.** (a) **`anchor` goes to I7A as its last item, if budget remains.** Alternative: K7's
+     proposal, that it ride with the second planning pass's first implementer. Why this: no such implementer exists until
+     K7b hands back, `Rainbow` is nobody else's file, and K7 priced the leaf at about 60k on top of 200–250k. Confidence:
+     medium; if I7A's count is past about 350k at `Count`'s last stage it leaves the leaf and says so. (b) **I8A's brief is
+     regenerated with `sq9`'s commit once FS131-I6B is back** — the model of `emptyNS`'s hypotheses but six colours becomes
+     its last item (a module importing wave 6's map, by a merge of that commit); launched before then, the brief says the
+     model is owed and names it, and I send the commit by message. Alternative: hold I8A until I6B is back. Why not: its six
+     leaves read nothing of the map. Confidence: high. **A wording I corrected before the gate** (mine, in the draft):
+     `emptyNS` reads "at least four colours" and no simplicity — the brief now says what the statement says and cites row
+     148 and the entry, not a paraphrase of the row. **Still not written**: K10c, K7b, K8b, MD1, MD2.
