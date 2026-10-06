@@ -217,15 +217,17 @@ exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false 
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
 
-## Amendment 1 (2026-10-06, at launch) — your branch now stands on wave 6's first half, landed and proved
+## Amendment 1 (2026-10-06, at launch) — your branch now stands on wave 6's first half, landed and proved, and on the fourth planner's pass
 
-Nothing above is withdrawn but where an item below says so; the base moved under you while this brief waited.
+Nothing above is withdrawn but where an item below says so; the base moved under you twice while this brief waited.
 
-1. **Your branch was fast-forwarded** from `6fc27fa1` to `4ae5bd36`: the wave's fourth planner merged `main` into the wave's line after
-   the wave's first half landed there (inventory items 558, 561). Your tree was untouched and unstarted, and the third pass's four
-   modules are byte-identical to `6fc27fa1` (`git diff`, mine). Every "statement check against `6fc27fa1`" above now reads **against
-   `4ae5bd36`**. The branch as given has **34** `sorry` leaves, not 65 — seventeen yours (four in `CoverHull`, thirteen in `Parallel`); the other thirty-one were proved by five implementers
-   and passed the full gate. Your tree's build is a copy of the planner's at `4ae5bd36`, so the build as given should rebuild nothing.
+1. **Your branch was fast-forwarded** from `6fc27fa1` to `2aa3f720`: the wave's fourth planner merged `main` into the wave's line after
+   the wave's first half landed there, then added four modules of its own and handed back (inventory items 558, 561, 566). Your tree
+   was untouched and unstarted, and the third pass's four modules are byte-identical to `6fc27fa1` (`git diff`, mine). Every "statement
+   check against `6fc27fa1`" above now reads **against `2aa3f720`**. The branch as given has **62** `sorry` leaves, not 65 — seventeen yours (four in `CoverHull`, thirteen in `Parallel`);
+   of the rest, twenty-eight are the fourth planner's in its new modules and not yours, and the thirty-one of the first two passes
+   were proved by five implementers and passed the full gate. Your tree's build is a copy of the planner's at `2aa3f720`, so the build
+   as given should rebuild nothing.
 2. **The fourteen modules beneath you are theorems now — cite them, re-declare nothing, edit none.** Two names changed at the landing,
    and the plan and records you read may still use the old ones: `polarRegion_isOpen` and `polarRegion_isPreconnected` were folded
    into these two, the same statements binder for binder:
@@ -240,23 +242,28 @@ Nothing above is withdrawn but where an item below says so; the base moved under
    `variable` enters a theorem only if its statement mentions it, so a leaf can lack a hypothesis its file shows, and a comparison of
    text cannot see it. `#check` each leaf before you prove it — with `lake env lean` under the slot, the output saved under your
    `data/` folder — and each head again at your last stage. A leaf whose kernel statement lacks a binder its row reads is a message to
-   me before you prove it: proving the wider statement is not the job.
-4. **The fourth planner is working on the wave's line now** — a fresh pass over the third pass's definitions and six more rows, in
-   modules of its own. It does not edit your files. If its pass finds that a statement of yours should change, I send it to you as a
-   second amendment; until then the statements stand as given.
-5. **Item 3 of "Done means" is superseded in one respect and sharpened in another.** `pinch` is no longer on another branch: it is
-   proved in your own tree, and the cell where the planner suspected its proof reads more than the cover gives is this one:
+   me before you prove it: proving the wider statement is not the job. Another implementer of this milestone found four leaves false
+   for exactly this reason today (item 564) and built a check that compares elaborated signatures, with controls; you may read it
+   and use it: `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w7a/tools/fs131_i7a_stmt_check.py`.
+4. **The fourth planner's pass over the third pass's definitions found none of them wrong** (its record's Stages 17–25, in your tree's
+   copy of the plan). Its four new modules — the fragment's six rows, the cover's two lemmas, a reduction, and owed inhabitants with
+   two bridges between this pass's notions — are not yours: do not prove their leaves, and do not edit them but as item 6 says.
+5. **A reading it settled, which you should hold too**: "saturated on a disc", for a map, is `SaturatedOn F.region U` and never wave
+   3's pointwise `SaturatedAt` at every point of the disc — that is false at every interior point of a tile of a valid map, so a
+   helper that assumes it is true of nothing.
+6. **Item 3 of "Done means" is superseded in one respect and sharpened in another.** `pinch` is no longer on another branch: it is
+   proved in your own tree, and the cell where the third planner suspected its proof reads more than the cover gives is this one:
 
 > theorem hasTwoDiscsAt_of_out_out {A B N : Set ℂ} (hN : IsOpen N) (hcover : (N : Set ℂ) ≤ᵐ[volume] (A ∪ B : Set ℂ))
 > — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6l/Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
 
-   The fourth planner has since read that cell (inventory item 561, quoted below; read it whole): it holds with the cover alone, and the
-   kernel route it names is the landed lemma applied to `A \ B` and `B`, then weakened. It is proving that under the name
-   `hasTwoDiscsAt_of_out_out_of_cover` in a module of its own on another branch — an argument until it is built, in its own words.
-   **Do not declare that name.** If I have sent you its commit by the time you reach `pinch_of_cover`, merge it and cite it; if not,
-   prove the cell as a helper under a name of your own and say so in your report — the join folds the pair. Attack the argument before
-   you lean on it: nobody but its author has checked it. You still do not edit the landed `Pinch` module.
+   The fourth planner has since settled it in the kernel (inventory items 561 and 566): the cell holds with the cover alone, by the
+   landed lemma applied to `A \ B` and `B` — proved, on the standard three, in a module of its own:
 
-> 561. **FS131-K6d, by message mid-job: its merge of the landed `main` is in, at `4ae5bd36`; and the whiff on `pinch_of_cover` is a route, not a statement defect** (source: K6d's message to "main", 2026-10-06; commit `4ae5bd36` on `origin/fs131-w6`, fetched).
-> — source: plans/FS131-close-inventory.md
+> theorem hasTwoDiscsAt_of_out_out_of_cover {A B N : Set ℂ} (hN : IsOpen N)
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6l/Proofs/HadwigerNelson/Plane/Saturated/CoverDiscs.lean
 
+   That module imports yours, so `CoverHull` cannot import it. **You may move that one lemma into `CoverHull`** — the same name,
+   statement and proof, deleted from the planner's module, which keeps its other theorem (`c11_discs_of_cover`, proved from your leaf
+   `pinch_of_cover`) — and that deletion is the only edit of that module you may make. One declaration, one name; say in your report
+   that you moved it. You still do not edit the landed `Pinch` module.
