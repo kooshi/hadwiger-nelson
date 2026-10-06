@@ -191,6 +191,37 @@ theorem paint_condition5 (h5 : F.Condition5) (hB5 : ∀ a ∈ B, ∀ p, (a.carri
   · exact h5 a ha p
   · exact (hB5 a ha p).subset fun z hz => ⟨hz.1.1, hz.2⟩
 
+/-- **The class of a colour the base does not use** is its painted set, off the new arcs. -/
+theorem region_paint_of_region_eq_empty {j : Fin k} (hj : F.region j = ∅) :
+    (F.paint W B hB hBf hW g hg).region j = (F.interiorPts ∩ W ∩ g ⁻¹' {j}) \ ⋃ a ∈ B, a.carrier := by
+  rw [region_paint, hj, Set.empty_sdiff, empty_union]
+
+/-- **The class of a colour that is not painted only shrinks**: it is the base's class off the painted set and the new arcs. -/
+theorem region_paint_subset {j : Fin k} (hj : ∀ x ∈ W, g x ≠ j) :
+    (F.paint W B hB hBf hW g hg).region j ⊆ F.region j \ W := by
+  rw [region_paint]
+  rintro z ⟨h | h, -⟩
+  · exact h
+  · exact absurd h.2 (hj z h.1.2)
+
+/-- **A point the base map has of colour `j`, in a valid base, is clear for `j` in a painting that does not paint `j`.** -/
+theorem isClear_paint_of_mem_region (hF : F.Valid) {j : Fin k} (hj : ∀ x ∈ W, g x ≠ j) {z : ℂ} (hz : z ∈ F.region j) :
+    (F.paint W B hB hBf hW g hg).IsClear j z :=
+  fun y hy => hF.region_dist_ne_one j z hz y (region_paint_subset hj hy).1
+
+/-- **The interior points of a painting near a fan**: where a ball of base interior points meets the new arcs exactly in a fan of
+tangent arcs, the painted map's interior points in the ball are the ball off the fan — the hypothesis of `isSector_fan_iff`. -/
+theorem interiorPts_paint_inter_ball {v : ℂ} {r : ℝ} {C : Set ℂ} (hball : ball v r ⊆ F.interiorPts)
+    (hC : ∀ z ∈ ball v r, z ∈ ⋃ a ∈ B, a.carrier ↔ z ∈ C) :
+    (F.paint W B hB hBf hW g hg).interiorPts ∩ ball v r = ball v r \ C := by
+  rw [interiorPts_paint]
+  ext z
+  constructor
+  · rintro ⟨⟨-, hzB⟩, hz⟩
+    exact ⟨hz, fun h => hzB ((hC z hz).mpr h)⟩
+  · rintro ⟨hz, hzC⟩
+    exact ⟨⟨hball hz, fun h => hzC ((hC z hz).mp h)⟩, hz⟩
+
 end ArcMap
 
 /-! ## The base: the brick map in `k` colours, and the planted points -/
@@ -821,5 +852,368 @@ theorem isSector_fan_iff {k : ℕ} {G : ArcMap k} {m : ℕ} (κ : Fin (m + 2) �
 theorem fanRest_ne_hornSet (v : ℂ) (α : ℝ) {κlo κhi r : ℝ} (hr : 0 < r) (α' κ₁ κ₂ : ℝ) :
     fanRest v α κlo κhi r ≠ hornSet v α' κ₁ κ₂ r :=
   ne_hornSet_of_interior_coneAt (interior_coneAt_fanRest_nonempty v α κlo κhi hr) α' κ₁ κ₂ r
+
+
+/-! ## Frames along `e 0`, horns against arcs, and the fan's pieces (FS131-MA1: what the models' leaves share) -/
+
+/-- The frame along `e 0` reads the real part. -/
+theorem frameX_zero (v z : ℂ) : frameX v 0 z = z.re - v.re := by simp [frameX, e_zero]
+
+/-- The frame along `e 0` reads the imaginary part. -/
+theorem frameY_zero (v z : ℂ) : frameY v 0 z = z.im - v.im := by simp [frameY, e_zero]
+
+/-- Two points' abscissae differ by at most their distance. -/
+theorem abs_re_sub_le_dist (z w : ℂ) : |z.re - w.re| ≤ dist z w := by
+  rw [dist_eq_norm, ← Complex.sub_re]; exact Complex.abs_re_le_norm _
+
+/-- Two points' ordinates differ by at most their distance. -/
+theorem abs_im_sub_le_dist (z w : ℂ) : |z.im - w.im| ≤ dist z w := by
+  rw [dist_eq_norm, ← Complex.sub_im]; exact Complex.abs_im_le_norm _
+
+/-- **Inside the open ball of its radius a horn's boundary is its two tangent arcs** (the rim piece is on the sphere). -/
+theorem mem_hornArcs_carrier_iff_of_mem_ball {v z : ℂ} {α κ₁ κ₂ ρ : ℝ} (hz : dist z v < ρ) :
+    z ∈ ⋃ a ∈ hornArcs v α κ₁ κ₂ ρ, a.carrier ↔ z ∈ (germArc v α κ₁ ρ).carrier ∨ z ∈ (germArc v α κ₂ ρ).carrier := by
+  have hρ : 0 ≤ ρ := dist_nonneg.trans hz.le
+  constructor
+  · intro h
+    obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp h
+    simp only [hornArcs, mem_insert_iff, mem_singleton_iff] at ha
+    rcases ha with rfl | rfl | rfl
+    · exact Or.inl hza
+    · exact Or.inr hza
+    · obtain ⟨θ, -, rfl⟩ := hza
+      rw [dist_eq_norm, add_sub_cancel_left, norm_mul_e hρ] at hz
+      exact absurd hz (lt_irrefl _)
+  · rintro (h | h)
+    · exact mem_iUnion₂.mpr ⟨_, by simp [hornArcs], h⟩
+    · exact mem_iUnion₂.mpr ⟨_, by simp [hornArcs], h⟩
+
+/-- **A horn set misses the tangent arc of a curvature outside its own.** -/
+theorem disjoint_hornSet_carrier_germArc {v : ℂ} {α κ₁ κ₂ κ r ρ : ℝ} (hρ : 0 ≤ ρ) (hκρ : |κ| * ρ ≤ 1)
+    (hκ : κ ≤ κ₁ ∨ κ₂ ≤ κ) : Disjoint (hornSet v α κ₁ κ₂ r) (germArc v α κ ρ).carrier := by
+  rw [disjoint_left]
+  rintro z ⟨-, -, hA, hB⟩ hz
+  have h0 := (frame_of_mem_carrier_germArc hρ hκρ hz).2 κ
+  rw [sub_self, mul_zero, zero_div] at h0
+  rcases hκ with h | h
+  · have := tanHeight_anti h (frameX v α z) (frameY v α z)
+    unfold TanAbove at hA; linarith
+  · have := tanHeight_anti h (frameX v α z) (frameY v α z)
+    unfold TanBelow at hB; linarith
+
+/-- **A horn set misses the boundary arcs of a horn of at least its radius whose curvatures lie outside its own** — its own among
+them. -/
+theorem disjoint_hornSet_hornArcs {v : ℂ} {α κ₁ κ₂ κ₃ κ₄ r ρ : ℝ} (hrρ : r ≤ ρ) (h3 : |κ₃| * ρ ≤ 1) (h4 : |κ₄| * ρ ≤ 1)
+    (hκ₃ : κ₃ ≤ κ₁ ∨ κ₂ ≤ κ₃) (hκ₄ : κ₄ ≤ κ₁ ∨ κ₂ ≤ κ₄) :
+    Disjoint (hornSet v α κ₁ κ₂ r) (⋃ a ∈ hornArcs v α κ₃ κ₄ ρ, a.carrier) := by
+  rw [disjoint_left]
+  intro z hz hza
+  have hd : dist z v < ρ := lt_of_lt_of_le hz.1 hrρ
+  have hρ : 0 ≤ ρ := dist_nonneg.trans hd.le
+  rcases (mem_hornArcs_carrier_iff_of_mem_ball hd).mp hza with h | h
+  · exact disjoint_left.mp (disjoint_hornSet_carrier_germArc hρ h3 hκ₃) hz h
+  · exact disjoint_left.mp (disjoint_hornSet_carrier_germArc hρ h4 hκ₄) hz h
+
+/-- The fan's rest misses a horn whose curvatures lie between the fan's ends. -/
+theorem disjoint_fanRest_hornSet {v : ℂ} {α κlo κhi κ₁ κ₂ r r' : ℝ} (h1 : κlo ≤ κ₁) (h2 : κ₂ ≤ κhi) :
+    Disjoint (fanRest v α κlo κhi r) (hornSet v α κ₁ κ₂ r') := by
+  rw [disjoint_left]
+  rintro z ⟨-, h⟩ ⟨-, hx, hA, hB⟩
+  unfold TanAbove at hA
+  unfold TanBelow at hB
+  rcases h with h | h | h
+  · exact lt_asymm h hx
+  · have := tanHeight_anti h1 (frameX v α z) (frameY v α z)
+    unfold TanBelow at h; linarith
+  · have := tanHeight_anti h2 (frameX v α z) (frameY v α z)
+    unfold TanAbove at h; linarith
+
+/-- Two horns along one ray, the first below the second, are disjoint. -/
+theorem disjoint_hornSet_hornSet {v : ℂ} {α κ₁ κ₂ κ₃ κ₄ r r' : ℝ} (h : κ₂ ≤ κ₃) :
+    Disjoint (hornSet v α κ₁ κ₂ r) (hornSet v α κ₃ κ₄ r') := by
+  rw [disjoint_left]
+  rintro z ⟨-, -, -, hB⟩ ⟨-, -, hA, -⟩
+  have := tanHeight_anti h (frameX v α z) (frameY v α z)
+  unfold TanAbove at hA
+  unfold TanBelow at hB
+  linarith
+
+/-- A fan's pieces grow with the radius. -/
+theorem fanPiece_mono_radius {m : ℕ} (κ : Fin (m + 2) → ℝ) (v : ℂ) (α : ℝ) {r r' : ℝ} (h : r ≤ r') (o : Option (Fin (m + 1))) :
+    fanPiece κ v α r o ⊆ fanPiece κ v α r' o := by
+  cases o with
+  | none => exact fun z hz => ⟨lt_of_lt_of_le hz.1 h, hz.2⟩
+  | some i => exact hornSet_mono_radius h
+
+/-- A fan's pieces lie in the ball. -/
+theorem fanPiece_subset_ball {m : ℕ} (κ : Fin (m + 2) → ℝ) (v : ℂ) (α r : ℝ) (o : Option (Fin (m + 1))) :
+    fanPiece κ v α r o ⊆ ball v r := by
+  cases o with
+  | none => exact fun z hz => hz.1
+  | some i => exact fun z hz => hz.1
+
+/-- A sector of one colour holds no point of another. -/
+theorem ArcMap.IsSector.false_of_col {k : ℕ} {G : ArcMap k} {v : ℂ} {r : ℝ} {S : Set ℂ} (hS : G.IsSector v r S) {c c' : Fin k}
+    (h : S ⊆ G.col ⁻¹' {c}) (h' : S ⊆ G.col ⁻¹' {c'}) (hne : c ≠ c') : False := by
+  obtain ⟨z, hz⟩ := hS.nonempty
+  have h1 : G.col z = c := h hz
+  have h2 : G.col z = c' := h' hz
+  exact hne (h1.symm.trans h2)
+
+/-! ## The brick base near the planted points: the small disc about the vertex, the tangent disc and its brick -/
+
+/-- The closed disc of radius `1/10` about the planted vertex lies strictly inside the brick `(0, 4/5) × (0, 3/5)`. -/
+theorem plantBall_subset_brick {z : ℂ} (hz : dist z plantPt ≤ 1 / 10) :
+    (0 < z.re ∧ z.re < 4 / 5) ∧ (0 < z.im ∧ z.im < 3 / 5) := by
+  have h1 := abs_le.mp ((abs_re_sub_le_dist z plantPt).trans hz)
+  have h2 := abs_le.mp ((abs_im_sub_le_dist z plantPt).trans hz)
+  rw [plantPt_re] at h1
+  rw [plantPt_im] at h2
+  exact ⟨⟨by linarith [h1.1], by linarith [h1.2]⟩, ⟨by linarith [h2.1], by linarith [h2.2]⟩⟩
+
+/-- A point strictly inside the brick `(0, 4/5) × (0, 3/5)` is an interior point of the base. -/
+theorem brickBase_mem_interiorPts_zero {k : ℕ} (h : 7 ≤ k) {z : ℂ} (hre : 0 < z.re ∧ z.re < 4 / 5)
+    (him : 0 < z.im ∧ z.im < 3 / 5) : z ∈ (brickBase k h).interiorPts :=
+  brickBase_mem_interiorPts h (c := 0) (r := 0) (by push_cast; constructor <;> linarith [hre.1, hre.2])
+    (by push_cast; constructor <;> linarith [him.1, him.2])
+
+/-- The disc of radius `1/10` about the planted vertex consists of interior points of the base. -/
+theorem plantBall_subset_interiorPts {k : ℕ} (h : 7 ≤ k) : closedBall plantPt (1 / 10) ⊆ (brickBase k h).interiorPts :=
+  fun _ hz => brickBase_mem_interiorPts_zero h (plantBall_subset_brick hz).1 (plantBall_subset_brick hz).2
+
+/-- The disc of radius `1/10` about the planted vertex is of the base's colour `0` (eight colours). -/
+theorem plantBall_subset_region_zero : closedBall plantPt (1 / 10) ⊆ (brickBase 8 (by norm_num)).region 0 :=
+  fun _ hz => ⟨plantBall_subset_interiorPts _ hz,
+    Fin.ext (brickBase_col_zero _ (plantBall_subset_brick hz).1 (plantBall_subset_brick hz).2)⟩
+
+/-- The open brick `(2/5, 6/5) × (3/5, 6/5)` (column `0`, row `1`), which holds the tangent disc. -/
+def tangentBrick : Set ℂ := {z | 2 / 5 < z.re ∧ z.re < 6 / 5 ∧ 3 / 5 < z.im ∧ z.im < 6 / 5}
+
+/-- The tangent brick consists of interior points of the base. -/
+theorem tangentBrick_subset_interiorPts {k : ℕ} (h : 7 ≤ k) : tangentBrick ⊆ (brickBase k h).interiorPts :=
+  fun z hz => brickBase_mem_interiorPts h (c := 0) (r := 1) (by push_cast; constructor <;> linarith [hz.1, hz.2.1])
+    (by push_cast; constructor <;> linarith [hz.2.2.1, hz.2.2.2])
+
+/-- The closed tangent disc lies in its brick, with room: within `3/40` of the centre is still inside. -/
+theorem closedBall_tangentCentre_subset_tangentBrick {z : ℂ} (hz : dist z (plantPt + 19 / 20 * plantDir) ≤ 3 / 40) :
+    z ∈ tangentBrick := by
+  have h1 := abs_le.mp ((abs_re_sub_le_dist z _).trans hz)
+  have h2 := abs_le.mp ((abs_im_sub_le_dist z _).trans hz)
+  rw [tangentCentre_re] at h1
+  rw [tangentCentre_im] at h2
+  exact ⟨by linarith [h1.1], by linarith [h1.2], by linarith [h2.1], by linarith [h2.2]⟩
+
+/-- The tangent disc consists of interior points of the base. -/
+theorem tangentDisc_subset_interiorPts {k : ℕ} (h : 7 ≤ k) : tangentDisc ⊆ (brickBase k h).interiorPts :=
+  fun _ hz => tangentBrick_subset_interiorPts h (closedBall_tangentCentre_subset_tangentBrick
+    ((le_of_lt (mem_ball.mp hz)).trans (by norm_num)))
+
+/-- The tangent brick is open. -/
+theorem isOpen_tangentBrick : IsOpen tangentBrick := by
+  have h : tangentBrick = {z : ℂ | 2 / 5 < z.re} ∩ {z | z.re < 6 / 5} ∩ {z | 3 / 5 < z.im} ∩ {z | z.im < 6 / 5} := by
+    ext z; simp only [tangentBrick, mem_setOf_eq, mem_inter_iff]; tauto
+  rw [h]
+  exact (((isOpen_lt continuous_const Complex.continuous_re).inter (isOpen_lt Complex.continuous_re continuous_const)).inter
+    (isOpen_lt continuous_const Complex.continuous_im)).inter (isOpen_lt Complex.continuous_im continuous_const)
+
+/-- The tangent brick is convex. -/
+theorem convex_tangentBrick : Convex ℝ tangentBrick := by
+  have h : tangentBrick = {z : ℂ | 2 / 5 < z.re} ∩ {z | z.re < 6 / 5} ∩ {z | 3 / 5 < z.im} ∩ {z | z.im < 6 / 5} := by
+    ext z; simp only [tangentBrick, mem_setOf_eq, mem_inter_iff]; tauto
+  rw [h]
+  exact (((convex_halfSpace_re_gt _).inter (convex_halfSpace_re_lt _)).inter (convex_halfSpace_im_gt _)).inter
+    (convex_halfSpace_im_lt _)
+
+/-- The closure of the tangent brick lies in the closed rectangle. -/
+theorem closure_tangentBrick_subset :
+    closure tangentBrick ⊆ {z : ℂ | 2 / 5 ≤ z.re ∧ z.re ≤ 6 / 5 ∧ 3 / 5 ≤ z.im ∧ z.im ≤ 6 / 5} := by
+  refine closure_minimal (fun z hz => ⟨hz.1.le, hz.2.1.le, hz.2.2.1.le, hz.2.2.2.le⟩) ?_
+  have h : {z : ℂ | 2 / 5 ≤ z.re ∧ z.re ≤ 6 / 5 ∧ 3 / 5 ≤ z.im ∧ z.im ≤ 6 / 5} =
+      {z : ℂ | 2 / 5 ≤ z.re} ∩ {z | z.re ≤ 6 / 5} ∩ {z | 3 / 5 ≤ z.im} ∩ {z | z.im ≤ 6 / 5} := by
+    ext z; simp only [mem_setOf_eq, mem_inter_iff]; tauto
+  rw [h]
+  exact (((isClosed_le continuous_const Complex.continuous_re).inter (isClosed_le Complex.continuous_re continuous_const)).inter
+    (isClosed_le continuous_const Complex.continuous_im)).inter (isClosed_le Complex.continuous_im continuous_const)
+
+/-- **The walls of the tangent brick are cell edges**: an interior point of the base in the closed rectangle is strictly inside. -/
+theorem mem_tangentBrick_of_mem_interiorPts {k : ℕ} (h : 7 ≤ k) {z : ℂ} (hz : z ∈ (brickBase k h).interiorPts)
+    (hrect : 2 / 5 ≤ z.re ∧ z.re ≤ 6 / 5 ∧ 3 / 5 ≤ z.im ∧ z.im ≤ 6 / 5) : z ∈ tangentBrick := by
+  have hz' : z ∉ ⋃ a ∈ sevenBrickArcs, a.carrier := hz.2
+  obtain ⟨h1, h2, h3, h4⟩ := hrect
+  refine ⟨lt_of_le_of_ne h1 fun he => hz' ?_, lt_of_le_of_ne h2 fun he => hz' ?_, lt_of_le_of_ne h3 fun he => hz' ?_,
+    lt_of_le_of_ne h4 fun he => hz' ?_⟩
+  · exact mem_sevenBrickArcs_of_left (c := 0) (r := 1) (by push_cast; linarith) (by push_cast; linarith) (by push_cast; linarith)
+  · exact mem_sevenBrickArcs_of_left (c := 1) (r := 1) (by push_cast; linarith) (by push_cast; linarith) (by push_cast; linarith)
+  · exact mem_sevenBrickArcs_of_bottom (c := 0) (r := 1) (by push_cast; linarith) (by push_cast; linarith)
+      (by push_cast; linarith)
+  · rcases le_total z.re (4 / 5) with h5 | h5
+    · exact mem_sevenBrickArcs_of_bottom (c := -1) (r := 2) (by push_cast; linarith) (by push_cast; linarith)
+        (by push_cast; linarith)
+    · exact mem_sevenBrickArcs_of_bottom (c := 0) (r := 2) (by push_cast; linarith) (by push_cast; linarith)
+        (by push_cast; linarith)
+
+/-- The closed tangent disc is far from the planted vertex: more than `1/10`. -/
+theorem tangentDisc_far {z : ℂ} (hz : dist z (plantPt + 19 / 20 * plantDir) ≤ 1 / 20) : 9 / 10 ≤ dist z plantPt := by
+  have := dist_triangle (plantPt + 19 / 20 * plantDir) z plantPt
+  rw [dist_tangentCentre, dist_comm _ z] at this
+  linarith
+
+/-- The tangent disc lies in its closed disc. -/
+theorem tangentDisc_subset_closedBall : tangentDisc ⊆ closedBall (plantPt + 19 / 20 * plantDir) (1 / 20) :=
+  ball_subset_closedBall
+
+/-- The tangent disc misses its circle. -/
+theorem disjoint_tangentDisc_sphere : Disjoint tangentDisc (sphere (plantPt + 19 / 20 * plantDir) (1 / 20)) := by
+  rw [disjoint_left]
+  intro z hz hs
+  rw [tangentDisc, mem_ball] at hz
+  rw [mem_sphere] at hs
+  linarith
+
+/-- A set inside the small disc about the planted vertex misses one inside the closed tangent disc. -/
+theorem disjoint_plantBall_tangent {X Y : Set ℂ} (hX : X ⊆ closedBall plantPt (1 / 10))
+    (hY : Y ⊆ closedBall (plantPt + 19 / 20 * plantDir) (1 / 20)) : Disjoint X Y := by
+  rw [disjoint_left]
+  intro z hx hy
+  have h1 := mem_closedBall.mp (hX hx)
+  have h2 := tangentDisc_far (mem_closedBall.mp (hY hy))
+  linarith
+
+/-- A horn set at the planted vertex within `1/10` lies in the small disc. -/
+theorem hornSet_subset_plantBall {α κ₁ κ₂ r : ℝ} (hr : r ≤ 1 / 10) :
+    hornSet plantPt α κ₁ κ₂ r ⊆ closedBall plantPt (1 / 10) :=
+  fun _ hz => mem_closedBall.mpr (hz.1.le.trans hr)
+
+/-- The tangent disc's circle. -/
+theorem tangentCircle_carrier :
+    (Arc.circ (plantPt + 19 / 20 * plantDir) (1 / 20) 0 (2 * π)).carrier = sphere (plantPt + 19 / 20 * plantDir) (1 / 20) :=
+  carrier_circ_full' _ (by norm_num)
+
+/-- The tangent disc's circle has positive length. -/
+theorem tangentCircle_nondegenerate : (Arc.circ (plantPt + 19 / 20 * plantDir) (1 / 20) 0 (2 * π)).Nondegenerate :=
+  ⟨by norm_num, by have := Real.pi_pos; linarith, by linarith⟩
+
+/-- The frontier of the tangent disc is its circle's carrier. -/
+theorem frontier_tangentDisc :
+    frontier tangentDisc = (Arc.circ (plantPt + 19 / 20 * plantDir) (1 / 20) 0 (2 * π)).carrier := by
+  rw [tangentCircle_carrier, tangentDisc, frontier_ball _ (by norm_num : (1 / 20 : ℝ) ≠ 0)]
+
+/-! ## A horn against the tangent disc, and the contact it makes -/
+
+/-- **A horn at the planted vertex along `e 0`, between curvatures in `[−3/4, 3/4]` and within `1/10`, lies in the closed disc of
+radius `19/20` about the tangent disc's centre** — the inequality behind the validity of the horn models: with `w = z − v = (x, y)` and
+`s = x² + y² < 1/100`, `|y| ≤ 3s/8` and `x > 0` give `s ≤ (19/10)(3x/5 + 4y/5)`. -/
+theorem horn_ineq {x y : ℝ} (hx : 0 < x) (hs : x ^ 2 + y ^ 2 < 1 / 100) (hlo : -(3 / 8) * (x ^ 2 + y ^ 2) ≤ y)
+    (hhi : y ≤ 3 / 8 * (x ^ 2 + y ^ 2)) : x ^ 2 + y ^ 2 ≤ 19 / 10 * (3 / 5 * x + 4 / 5 * y) := by
+  set s := x ^ 2 + y ^ 2 with hsdef
+  have hs0 : 0 < s := by positivity
+  have hy2 : y ^ 2 ≤ (3 / 8 * s) ^ 2 := sq_le_sq' (by linarith) hhi
+  have hss : s ^ 2 < s / 100 := by nlinarith
+  have hx2 : (157 / 114 * s) ^ 2 < x ^ 2 := by nlinarith
+  have hxs : 157 / 114 * s < x := lt_of_pow_lt_pow_left₀ 2 hx.le hx2
+  linarith
+
+theorem dist_tangentCentre_le_of_mem_hornSet {κ₁ κ₂ : ℝ} (h1 : -3 / 4 ≤ κ₁) (h2 : κ₂ ≤ 3 / 4) {z : ℂ}
+    (hz : z ∈ hornSet plantPt 0 κ₁ κ₂ (1 / 10)) : dist z (plantPt + 19 / 20 * plantDir) ≤ 19 / 20 := by
+  obtain ⟨hd, hx, hA, hB⟩ := hz
+  unfold TanAbove tanHeight at hA
+  unfold TanBelow tanHeight at hB
+  rw [frameX_zero, frameY_zero, plantPt_re, plantPt_im] at hA hB
+  rw [frameX_zero, plantPt_re] at hx
+  have hd2 : dist z plantPt ^ 2 < (1 / 10) ^ 2 := pow_lt_pow_left₀ hd dist_nonneg (by norm_num)
+  rw [dist_sq_re_im, plantPt_re, plantPt_im] at hd2
+  norm_num at hd2
+  set x := z.re - 2 / 5 with hxdef
+  set y := z.im - 3 / 10 with hydef
+  have hs0 : 0 ≤ x ^ 2 + y ^ 2 := by positivity
+  have hs : x ^ 2 + y ^ 2 < 1 / 100 := by linarith
+  have hlo : -(3 / 8) * (x ^ 2 + y ^ 2) ≤ y := by nlinarith [mul_nonneg hs0 (by linarith : (0 : ℝ) ≤ κ₁ + 3 / 4)]
+  have hhi : y ≤ 3 / 8 * (x ^ 2 + y ^ 2) := by nlinarith [mul_nonneg hs0 (by linarith : (0 : ℝ) ≤ 3 / 4 - κ₂)]
+  have key := horn_ineq hx hs hlo hhi
+  have hsq : dist z (plantPt + 19 / 20 * plantDir) ^ 2 ≤ (19 / 20) ^ 2 := by
+    rw [dist_sq_re_im, tangentCentre_re, tangentCentre_im]
+    have e1 : z.re - 97 / 100 = x - 57 / 100 := by rw [hxdef]; ring
+    have e2 : z.im - 106 / 100 = y - 76 / 100 := by rw [hydef]; ring
+    rw [e1, e2]
+    nlinarith
+  exact le_of_sq_le_sq hsq (by norm_num)
+
+/-- **Any two points of a horn zone and the tangent disc are less than `1` apart.** -/
+theorem dist_lt_one_of_hornZone {x y : ℂ}
+    (hx : (dist x plantPt < 1 / 10 ∧ dist x (plantPt + 19 / 20 * plantDir) ≤ 19 / 20) ∨ x ∈ tangentDisc)
+    (hy : (dist y plantPt < 1 / 10 ∧ dist y (plantPt + 19 / 20 * plantDir) ≤ 19 / 20) ∨ y ∈ tangentDisc) : dist x y < 1 := by
+  rcases hx with ⟨hx1, hx2⟩ | hx <;> rcases hy with ⟨hy1, hy2⟩ | hy
+  · have := dist_triangle_right x y plantPt
+    linarith
+  · have := dist_triangle_right x y (plantPt + 19 / 20 * plantDir)
+    rw [tangentDisc, mem_ball] at hy
+    linarith
+  · have := dist_triangle_right x y (plantPt + 19 / 20 * plantDir)
+    rw [tangentDisc, mem_ball] at hx
+    linarith
+  · have := dist_triangle_right x y (plantPt + 19 / 20 * plantDir)
+    rw [tangentDisc, mem_ball] at hx hy
+    linarith
+
+/-- **A set inside the small disc about the planted vertex and the tangent disc meets `ω(plantPt)`, in its closure, at the tangent
+point only.** -/
+theorem closure_inter_sphere_subset {W : Set ℂ} (hW : W ⊆ closedBall plantPt (1 / 10) ∪ tangentDisc) :
+    closure W ∩ sphere plantPt 1 ⊆ {plantPt + plantDir} := by
+  rintro z ⟨hz, hzs⟩
+  have h := closure_mono hW hz
+  rw [closure_union, isClosed_closedBall.closure_eq] at h
+  rcases h with h | h
+  · rw [mem_closedBall] at h
+    rw [mem_sphere] at hzs
+    linarith
+  · rw [← tangentDisc_subset_ball.2]
+    exact ⟨h, hzs⟩
+
+/-- **The contact and the cone of a colour whose class lies in `B(plantPt, 1)`, holds the tangent disc, and reaches `ω(plantPt)` at
+the tangent point only**: the tangent point is an in-type contact and no out-type one, so the allowed cone is the closed half-plane
+`d · plantDir ≥ 0` — it has interior points and does not hold `−plantDir`. -/
+theorem ArcMap.tangent_contact_cone {k : ℕ} {G : ArcMap k} {c : Fin k} (hc : c ∈ G.coloursAt plantPt)
+    (hsub : G.region c ⊆ ball plantPt 1) (hD : tangentDisc ⊆ G.region c)
+    (hcl : closure (G.region c) ∩ sphere plantPt 1 ⊆ {plantPt + plantDir}) :
+    G.IsContact plantPt c (plantPt + plantDir) ∧ G.InType plantPt c (plantPt + plantDir) ∧
+      -plantDir ∉ G.allowedCone plantPt c ∧ (interior (G.allowedCone plantPt c)).Nonempty := by
+  have hw : plantPt + plantDir ∈ closure tangentDisc ∩ sphere plantPt 1 := by rw [tangentDisc_subset_ball.2]; rfl
+  have hcontact : G.IsContact plantPt c (plantPt + plantDir) :=
+    ⟨hc, by rw [dist_eq_norm, add_sub_cancel_left, norm_plantDir], closure_mono hD hw.1⟩
+  have hin : ∀ w, G.InType plantPt c w := fun w T hT _ => hT.subset_region.trans hsub
+  -- the tile of the tangent disc has the tangent point in its closure and lies inside `B(plantPt, 1)`: no out-type contact
+  have hout : ¬ G.OutType plantPt c (plantPt + plantDir) := by
+    intro hO
+    have hq : plantPt + 19 / 20 * plantDir ∈ tangentDisc := mem_ball_self (by norm_num)
+    have hDI : tangentDisc ⊆ G.interiorPts := fun z hz => (hD hz).1
+    have hT : G.IsTile (connectedComponentIn G.interiorPts (plantPt + 19 / 20 * plantDir)) := ⟨_, hDI hq, rfl⟩
+    have hDT : tangentDisc ⊆ connectedComponentIn G.interiorPts (plantPt + 19 / 20 * plantDir) :=
+      (convex_ball _ _).isPreconnected.subset_connectedComponentIn hq hDI
+    have hTc : G.TileOf c (connectedComponentIn G.interiorPts (plantPt + 19 / 20 * plantDir)) := by
+      have h := hT.tileOf (hDT hq)
+      have hcq : G.col (plantPt + 19 / 20 * plantDir) = c := (hD hq).2
+      rwa [hcq] at h
+    have hdisj := hO _ hTc (closure_mono hDT hw.1)
+    exact disjoint_left.mp hdisj (hDT hq) (mem_closedBall.mpr (by rw [dist_tangentCentre]; norm_num))
+  have hcone : ∀ d, d ∈ G.allowedCone plantPt c ↔ 0 ≤ dot d plantDir := by
+    intro d
+    constructor
+    · intro hd
+      have := (hd _ hcontact).1 (hin _)
+      rwa [add_sub_cancel_left] at this
+    · intro hd w hw'
+      have hwe : w = plantPt + plantDir := hcl ⟨hw'.2.2, mem_sphere.mpr hw'.2.1⟩
+      subst hwe
+      exact ⟨fun _ => by rwa [add_sub_cancel_left], fun hO => absurd hO hout⟩
+  refine ⟨hcontact, hin _, ?_, ?_⟩
+  · rw [hcone, dot_neg_left, dot_self_eq, norm_plantDir]; norm_num
+  · refine ⟨plantDir, mem_interior.mpr ⟨ball plantDir (1 / 2), fun d hd => ?_, isOpen_ball, mem_ball_self (by norm_num)⟩⟩
+    rw [hcone]
+    have h1 : dot d plantDir = dot plantDir plantDir + dot (d - plantDir) plantDir := by rw [dot_sub]; ring
+    have h2 := abs_dot_le (d - plantDir) plantDir
+    rw [norm_plantDir, mul_one] at h2
+    have h3 : ‖d - plantDir‖ < 1 / 2 := by rw [← dist_eq_norm]; exact hd
+    rw [h1, dot_self_eq, norm_plantDir]
+    linarith [(abs_le.mp h2).1]
 
 end HadwigerNelson.Plane

@@ -23,9 +23,17 @@ SRC = os.path.join(ROOT, "data/fs131/ma/MAAxioms.lean")
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 
 
+def split_at_control(text):
+    """The text above and from the one line that begins `-- CONTROL` (a mention of the marker inside a sentence is not it)."""
+    marks = [m.start() for m in re.finditer(r"^-- CONTROL", text, flags=re.M)]
+    if len(marks) != 1:
+        raise SystemExit(f"FAIL: {len(marks)} lines begin `-- CONTROL` in the list; exactly one must")
+    return text[:marks[0]], text[marks[0]:]
+
+
 def check(src, say=print):
     text = open(src).read()
-    head, _, tail = text.partition("-- CONTROL")
+    head, tail = split_at_control(text)
     claimed = re.findall(r"^#print axioms (\S+)", head, flags=re.M)
     controls = re.findall(r"^#print axioms (\S+)", tail, flags=re.M)
     proc = subprocess.run(["lake", "env", "lean", "-DautoImplicit=false", "-DrelaxedAutoImplicit=false", src],
@@ -81,7 +89,8 @@ def self_test():
     listed as a control; a misspelt name. Each must fail, with its own message."""
     import tempfile
     text = open(SRC).read()
-    head, sep, tail = text.partition("-- CONTROL")
+    head, tail = split_at_control(text)
+    sep = ""
     control = re.findall(r"^#print axioms (\S+)", tail, flags=re.M)[0]
     claimed = re.findall(r"^#print axioms (\S+)", head, flags=re.M)[0]
     plants = [

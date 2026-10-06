@@ -4857,6 +4857,23 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.fanRest_ne_hornSet
 #print axioms HadwigerNelson.Plane.iUnion_fanPiece
 #print axioms HadwigerNelson.Plane.fanPiece_data
+#print axioms HadwigerNelson.Plane.ArcMap.region_paint_of_region_eq_empty
+#print axioms HadwigerNelson.Plane.ArcMap.region_paint_subset
+#print axioms HadwigerNelson.Plane.ArcMap.tangent_contact_cone
+-- FS131-MA1: the four moves' models (Moves) — the leaves KM1's block does not list, and the two class lemmas
+#print axioms HadwigerNelson.Plane.hornModel_valid
+#print axioms HadwigerNelson.Plane.hornModel_region_seven
+#print axioms HadwigerNelson.Plane.hornModel_isHorn
+#print axioms HadwigerNelson.Plane.hornModel_hasSectors
+#print axioms HadwigerNelson.Plane.hornModel_hasDegree
+#print axioms HadwigerNelson.Plane.hornModel_flanks
+#print axioms HadwigerNelson.Plane.hornModel_clear
+#print axioms HadwigerNelson.Plane.hornModel_cone
+#print axioms HadwigerNelson.Plane.twoHornModel_valid
+#print axioms HadwigerNelson.Plane.twoHornModel_region_seven
+#print axioms HadwigerNelson.Plane.twoHornModel_isHorn
+#print axioms HadwigerNelson.Plane.twoHornModel_hasSectors
+#print axioms HadwigerNelson.Plane.twoHornModel_cone
 
 #eval IO.println "=== PURCHASED ==="
 

@@ -145,3 +145,89 @@ shape `Moves`' sector leaves want), `iUnion_fanPiece` (its spec), `Ioo_subset_co
 `brickBase_mem_interiorPts`, `brickBase_col_eq`, `brickBase_col_zero`, `norm_plantDir`, `tangentDisc_subset_ball`,
 `hornArcs_nondegenerate`, `frontier_hornSet_subset`, `hornArcs_carrier_subset`, `isOpen_fanRest`, `isPreconnected_fanRest`,
 `ball_diff_fan`, `isSector_fan_iff`, `fanRest_ne_hornSet` — the 13 leaves — and the 26 helper theorems of § 2.2.
+
+## Stage 3 — SAVED (FS131-MA1): `Moves` whole — its 18 leaves proved; the four model theorems on the standard three
+
+### 3.1 What stands
+
+**Both models are whole.** `Plane/Models/Moves.lean` holds no `sorry`; the four model theorems — each the landed move applied to the
+model, every hypothesis a named fact about the one object — rest on exactly `[propext, Classical.choice, Quot.sound]`:
+
+| model theorem | the landed theorem it applies | the facts it is given |
+|---|---|---|
+| `hornModel_shave` | `ArcMap.exists_shave`, `n = 0`, `σ = 0` | `hornModel_valid`, `hornModel_covers`, `hornModel_hasSectors`, `hornModel_isHorn`, `−1 ≤ −1/2`, `1/2 ≤ 1`, `hornModel_flanks` (both), `−1/2 ≤ 0 ≤ 1/2`, `hornModel_clear` |
+| `hornModel_open` | `ArcMap.exists_open`, `δ = 1` | `hornModel_valid`, `hornModel_covers`, `hornModel_isHorn`, `hornModel_hasSectors`, `hornModel_cone`, `hornModel_hasDegree`, `hornModel_hasHornCount` |
+| `twoHornModel_rayMerge` | `ArcMap.exists_rayMerge`, `n = 1` | `twoHornModel_valid`, `twoHornModel_covers`, `twoHornModel_hasSectors.1`, `−1/2 < 1/2`, `twoHornModel_isHorn` (both), `−1 ≤ −3/4`, `3/4 ≤ 1` |
+| `twoHornModel_merge` | `ArcMap.exists_merge`, `n = 1` | `twoHornModel_valid`, `twoHornModel_covers`, `1 ≤ 1`, `twoHornModel_hasSectors.1`, `twoHornModel_cone.1` |
+
+The four heads were not touched: their text is the skeleton's, byte for byte (the statement check, § 3.4). So the open gate item on the
+four moves (`LEAN.md` § The gate, the inhabitant bullet; inventory rulings 419 (d), 427 (d)) has its Lean objects: a valid map of the
+plane in eight colours on which the hypotheses of SHAVE and OPEN hold at once, and one on which those of MERGE-RAY and MERGE do.
+
+### 3.2 The leaves, and the routes taken
+
+Three shared obligations closed most of them, as the plan's § 3.7 predicted; each is a named lemma now.
+
+1. **The painted class is the painted set**: `ArcMap.region_paint_of_region_eq_empty` (a colour the base does not use has the class
+   `(F.interiorPts ∩ W ∩ g⁻¹{j}) ∖ ⋃ B`) gives `hornModel_region_seven : hornModel.region 7 = hornW` and `twoHornModel_region_seven`;
+   `ArcMap.region_paint_subset` (a colour not painted only shrinks) gives clearness (`ArcMap.isClear_paint_of_mem_region`).
+2. **Near the vertex the map is a fan**: `ArcMap.interiorPts_paint_inter_ball` with `hornB_inter_ball` / `twoHornB_inter_ball` (inside
+   the open ball the new arcs are the fan's tangent arcs: the rim pieces are on the sphere, the tangent circle is `9/10` away) feeds
+   `isSector_fan_iff`, read as `hornModel_isSector_iff` (the rest, the horn) and `twoHornModel_isSector_iff` (the rest, the lower horn,
+   the gap, the upper horn) for every radius up to `1/10`. The counts are then explicit finite sets (`encard_singleton`, `encard_pair`).
+3. **The contact reads the class only**: `ArcMap.tangent_contact_cone` — for any map and colour whose class lies in `B(plantPt, 1)`,
+   holds the tangent disc and reaches `ω(plantPt)`, in its closure, at the tangent point only: the tangent point is an in-type contact
+   and no out-type one (the tangent disc's own tile is the witness), the allowed cone is the closed half-plane `d · plantDir ≥ 0`. One
+   lemma, applied to both models.
+
+| leaf | route | where it differs from the plan |
+|---|---|---|
+| `hornB_nondegenerate`, `frontier_hornW_subset`, `twoHornB_nondegenerate`, `frontier_twoHornW_subset` | `hornArcs_nondegenerate`; `frontier_union_subset`, `frontier_hornSet_subset`, `frontier_ball` | the general-radius circle lemma exists (`carrier_circ_full'`, `Surgery`): no child was needed |
+| `hornModel_valid`, `twoHornModel_valid` | `paint_valid`; horn against disc by `horn_ineq` (a real-variable lemma with its own context, as `LEAN.md` asks) → `dist_tangentCentre_le_of_mem_hornSet` → `dist_lt_one_of_hornZone` | the inequality is mine (§ 1.5): the horn lies in the closed disc of radius `19/20` about the tangent disc's centre, for any curvatures in `[−3/4, 3/4]`, so one lemma serves all three horns; the plan's `(z − v)·(q − v) ≥ 0.495 |z − v|` was not used |
+| `hornModel_isHorn`, `_hasSectors`, `_hasDegree`, `_hasHornCount`; `twoHornModel_isHorn`, `_hasSectors` | obligation 2; a sector of one colour holds no point of another (`ArcMap.IsSector.false_of_col`) | counts by explicit sets, not by `encard_sectorsOf_of_partition`: with two and four pieces the sets are shorter than the colour function |
+| `hornModel_flanks`, `hornModel_clear` | the flank horns lie in the fan's rest, which is of colour `0` (`hornModel_fanRest_subset_region`); obligation 1 | — |
+| `hornModel_contact`, `hornModel_cone`, `twoHornModel_cone` | obligation 3, with `closure_inter_sphere_subset` | one general lemma in place of three proofs |
+| `hornModel_holedTile` | open, in the interior points, connected (`isPreconnected_holedTile`), and closed in them (`mem_holedTile_of_mem_closure`: the brick's four walls are cell edges, `mem_tangentBrick_of_mem_interiorPts`); the last clause by `frontier_closedBall` and `IsOpen.inter_closure` | **the connectedness**: not four convex rectangles (a rectangle off a closed disc is no finite union of convex sets) but the four rectangles off the disc's bounding square, chained at three corners, and the radial segment `[y, c + (3/2)(y − c)]` from any other point (§ 1.5) |
+
+### 3.3 What is new beside the leaves
+
+78 declarations since stage 2: **41 in `Paint`** (general — the planted disc and the tangent disc's brick, horns against arcs and against
+each other, the fan's pieces in the radius, the contact lemma; implementer B's models read the same base and may use them) and **37 in
+`Moves`** (the two models' local pictures). Two definitions among them besides `fanPiece`: `tangentBrick` (the open cell
+`(2/5, 6/5) × (3/5, 6/5)`; `holedTile = tangentBrick ∖ B̄(c, 1/20)` is `holedTile_eq`), and the fans `hornFan = ![−1/2, 1/2]`,
+`twoHornFan = ![−3/4, −1/2, 1/2, 3/4]`. No name is declared elsewhere under `Proofs/` (`statements-2.out`).
+
+**Measured**: `Moves` 196 → 817 lines (661 inserted); `Paint` 825 → 1,219 (394 inserted, shared helpers the plan priced under `Moves`).
+Against the plan's `Moves` 500–700: the leaves and their own helpers are inside it; with the shared layer in `Paint` the two files
+together added 1,544 lines against the plan's 950–1,350 for both — **above the band by about 200 lines**, the holed tile's connectedness
+(105 lines) and the general helpers' docstrings being the difference.
+
+### 3.4 The receipts
+
+- **Build**: `data/fs131/ma/build-2.log` (2026-10-06 09:10 UTC, the tree as committed for `Proofs/`): `build: OK — 452 of 452 batches,
+  5 module(s) rebuilt, 2 module(s) with warnings, 8m28s`, exit 0. `declaration uses 'sorry'`: `Stuck` 21, `Bends` 7 — **28, none in
+  `Paint` or `Moves`**; 0 other warnings.
+- **Axioms**: `tools/fs131_ma_axioms.py` over `data/fs131/ma/MAAxioms.lean` → `MAAxioms-2.out`: **163 of 163 theorems of `Paint` (98)
+  and `Moves` (65) on the standard three**, the four model theorems on exactly the three. **4 of 4 controls fire**: implementer B's
+  `stuckModel_hyps` and `awayModel_hyps` (open on this branch), and two planted ones that stay valid after the lane lands —
+  `MAControl.planted_shave` (`hornModel_shave` re-proved over a `sorry` copy of the validity leaf) and `MAControl.planted_merge`
+  (`twoHornModel_merge` over a `sorry` copy of the cone leaf): a model theorem's print goes red when one leaf beneath it is reopened.
+  `--self-test`: three planted faults, each fails with its own message. **A defect of the instrument, found by its own failure and
+  repaired**: the list's header sentence mentioned the marker `-- CONTROL`, the tool split at the mention, and the run read "0 of 0
+  claimed, 4 of 167 controls fire, FAIL" — loud, not silent; the marker is now the one line that *begins* with it, and the tool
+  refuses a list with none or two.
+- **The statement check**: `tools/fs131_ma_statements.py --names --no-sorry Paint.lean Moves.lean` → `statements-2.out`: 132 skeleton
+  declarations compared against `fe9d6d32`, **0 problems**; 105 added (68 in `Paint`, 37 in `Moves`); 0 `sorry` in either file; no
+  added name declared elsewhere under `Proofs/`.
+- `tools/check_architecture.py`: exit 0, `RESULT: PASS` (`data/fs131/ma/arch.out`).
+- `scripts/Axioms.lean`: the "FS131-MA1" block now lists the `Moves` records KM1's block does not, and three of `Paint`'s.
+- **Not run**: the gate (`axioms.sh`, `vacuity.sh`, the linters) — the brief keeps it for the landing.
+
+### Theorems this phase proved, so far (all **[kernel]**, each on the standard three by `MAAxioms-2.out`)
+
+In `Plane/Models/Moves`: **`hornModel_shave`, `hornModel_open`, `twoHornModel_rayMerge`, `twoHornModel_merge`** (the four moves
+applied), `hornModel_shaveAvailable`, `twoHornModel_available`; the 18 leaves — `hornB_nondegenerate`, `frontier_hornW_subset`,
+`hornModel_valid`, `hornModel_isHorn`, `hornModel_hasSectors`, `hornModel_hasDegree`, `hornModel_hasHornCount`, `hornModel_flanks`,
+`hornModel_clear`, `hornModel_contact`, `hornModel_cone`, `hornModel_holedTile`, `twoHornB_nondegenerate`, `frontier_twoHornW_subset`,
+`twoHornModel_valid`, `twoHornModel_isHorn`, `twoHornModel_hasSectors`, `twoHornModel_cone` — and their helpers. In `Plane/Models/Paint`:
+stage 2's, and the 41 shared helpers of § 3.3.
