@@ -5824,6 +5824,27 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.horn_lower_ne_neg_one
 #print axioms HadwigerNelson.Plane.ArcMap.shadow_recursion
 
+/-! ## FS131-IR3 — the vertex step's four cases (`Plane/ValidMap/Procedure`): the two-curve kit, then one block per case -/
+
+-- FS131-IR3, stage 24: a point on two curves; the points of a move's disc in one statement; MERGE-RAY's case
+#print axioms HadwigerNelson.Plane.e_arg_sub_ne
+#print axioms HadwigerNelson.Plane.im_ne_zero_of_far
+#print axioms HadwigerNelson.Plane.mem_curveAt_of_dist_eq
+#print axioms HadwigerNelson.Plane.ArcMap.cleanKeep_Γ_subset
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_cleanKeep_Γ_of_const
+#print axioms HadwigerNelson.Plane.ArcMap.not_isSite_of_two_curves
+#print axioms HadwigerNelson.Plane.ArcMap.not_isSite_of_rim_junction
+#print axioms HadwigerNelson.Plane.ArcMap.not_isSite_of_branches
+#print axioms HadwigerNelson.Plane.exists_branchPt_near_lt
+#print axioms HadwigerNelson.Plane.exists_branchPt_near_gt
+#print axioms HadwigerNelson.Plane.ArcMap.Near.not_isSite_of_chart
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_rim_mem_sector
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_rim_mem_sector_before
+#print axioms HadwigerNelson.Plane.ArcMap.Near.move_not_mem_cleanKeep_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.Near.move_Γ_cases
+#print axioms HadwigerNelson.Plane.ArcMap.Near.RayConfig.exists_step
+#print axioms HadwigerNelson.Plane.ArcMap.exists_rayStep
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

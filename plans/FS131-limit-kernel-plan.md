@@ -1177,6 +1177,12 @@ current at each saved stage (the last stage's receipt is the one to read).
 - Stage 22 (the readback): none.
 - Stage 23 (the ruled restatement of `exists_arcStep`; the merge of `fs131-w5s`): none of mine. By the merge `ArcMap.stuckRun_ne_univ`
   (FS131-IS1's, `Terminal`) is in this tree on the standard three; `Terminal` holds no `sorry`.
+- **Stage 24 — a point on two curves, the points of a move's disc, MERGE-RAY's case** (`Plane/ValidMap/Procedure`):
+  `e_arg_sub_ne`, `im_ne_zero_of_far`, `mem_curveAt_of_dist_eq`, `exists_branchPt_near_lt`, `exists_branchPt_near_gt` (namespace
+  `HadwigerNelson.Plane`); `ArcMap.cleanKeep_Γ_subset`, `.not_mem_cleanKeep_Γ_of_const`, **`.not_isSite_of_two_curves`**,
+  **`.not_isSite_of_rim_junction`**, **`.not_isSite_of_branches`**, **`.Near.not_isSite_of_chart`**, `.Near.exists_rim_mem_sector`,
+  `.Near.exists_rim_mem_sector_before`, `.Near.move_not_mem_cleanKeep_Γ`, `.Near.move_Γ_cases`,
+  **`.Near.RayConfig.exists_step`**, **`ArcMap.exists_rayStep`** (the first of the four cases; its statement as IR2 wrote it).
 
 ## Stage 22 — SAVED (FS131-IR3): the readback, the as-given build, IR2's axioms check re-run
 
@@ -1269,3 +1275,73 @@ path; the index held the merge and nothing else, and my three check files were u
 - No `axiom`, no `native_decide`. I ran no gate and did not touch `main`.
 
 ## Stage 23 — SAVED (FS131-IR3)
+
+## Stage 24 — SAVED (FS131-IR3): MERGE-RAY's case proved; the kit the four cases share (two curves; a move's disc in one statement)
+
+### 24.1 What was proved ([kernel]; `Procedure`, subsection "A point on two curves, and the points of a move's disc in one statement", then "MERGE-RAY's case")
+
+- **`not_isSite_of_two_curves`** — the junction lemma in its two-curve form: a point of a clean map near which `Γ` lies on two
+  curves `curveAt x κ b`, `curveAt x κ' b'` through it with non-parallel normals (`(b * conj b').im ≠ 0`), with points of the two
+  curves off `Γ` arbitrarily near it, is no site and carries at most three colours. (`hasHornCount_zero_of_germs` with the four curve
+  germs; one of the four is dead — by contradiction, no identification of which; `not_hasRepeatedColour_of_degree_le_three`.)
+- **`not_isSite_of_rim_junction`** — the same at a branch from `v` meeting the circle of radius `ρ` about `v`: transversality is
+  `im_ne_zero_of_far` (the branch's curve passes through `v` and, at some `r > ρ` where it is still a graph, holds a point farther
+  from `v`; a curve tangent to the circle at `x` and through `v` is the circle on the diameter `[v, x]`, all of it within `ρ` of `v`).
+- **`not_isSite_of_branches`** — **the whole disc in one statement**: if the arcs of a clean map `M` in the punctured ball
+  `B(v, R)` lie on the circle of radius `ρ₁` and on finitely many branches from `v`, pairwise apart and graphs out to `R`, then
+  every `x ≠ v` of the ball is no site and carries at most three colours, given a dead branch where a branch meets the circle at
+  `x`. (The branches not through `x` are compact pieces away from it; off the circle or off every branch `x` is on at most one
+  curve, `not_isSite_of_curve`.) It mentions neither the map before the move nor a chart.
+- **`Near.not_isSite_of_chart`** — the same read in the chart of the map before the move, with a finite set `𝒠` of extra branches
+  apart from the germs (SHAVE's arc, OPEN's ray); `Near.exists_rim_mem_sector`, `_before` (points of the rim circle in the chart
+  sector after, before, a germ, arbitrarily near the germ's rim point); `Near.move_not_mem_cleanKeep_Γ` (a chart sector on which a
+  `Near.move` keeps the map's colour holds no arc of the cleaned move); `Near.move_Γ_cases` (the arcs of a `Near.move` near `v`).
+- **`Near.RayConfig.exists_step`** and **`exists_rayStep`** — MERGE-RAY's case, as stated by IR2, **proved**.
+
+### 24.2 The route, where it differs from § 20.2's (decisions of mine)
+
+- **No declaration was added to `Moves`** (ruling 421 (c) allowed it; it was not needed): `Near.move`, `rayKeep`, `rayCol`,
+  `RayConfig.hlc`, `move_valid` and the rest are public, so the map is named in `Procedure` and the two clauses read from
+  `RayConfig.exists_merge`'s body (validity, no colour gained at `v`; about 35 lines) are re-run there. A named form in `Moves`
+  would save those lines and cost a rebuild of every module downstream of `Moves`; if the coordinator prefers one proof, the split
+  is `RayConfig.exists_merge` at its `set F' := …`.
+- **The nearest-horn choice is not needed, and neither is the sector count.** `RayConfig.exists_merge` asks that the gap hold no
+  chart sector of colour `c` (`hfree`), which is why `exists_rayMerge_of_clear` picks the nearest `c`-horn and why § 20.2 excludes
+  the cut case by cleanness. `hfree` serves only the count `HasSectors v c n`; the step's count is the potential
+  (`pot_lt_of_interior` at the lower horn's upper germ), so `RayConfig.exists_step` takes the two given horns as they are, and
+  `exists_rayStep` does not read its hypothesis `hn` (kept in the statement; `have _ := hn`).
+- **A dead branch at every junction, by one of two reasons.** A kept germ: the chart sector after it is the lower horn (colour `c`
+  before and after) or misses the merged horn (`RayConfig.sector_disjoint`), so it has one colour on both sides of the rim — its
+  rim points are on no arc of the cleaned map. A dropped germ: its points inside the rim are interior to the merged horn.
+- `exists_hasHornCount` (IR1's) is moved up in the file, before the cases that read it; its statement is unchanged.
+
+### 24.3 For the arc step's assembly (the brief's question)
+
+`not_isSite_of_two_curves` is stated for any two curves `curveAt x κ b` through `x` — it does not know about `v`, a rim or a move —
+so a bend's new curve meeting an old arc at a point is an instance: its hypotheses are that near the point `Γ` lies on the two
+curves, that their normals are not parallel there, and that one of the four branches is dead. `not_isSite_of_branches` is the form
+for a point from which finitely many branches leave, with one concentric circle. I built nothing for the arc step.
+
+### 24.4 The build, the receipt, the checks
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 6 modules rebuilt, 4 with warnings, all 9 warnings `declaration
+  uses 'sorry'`**: `Procedure` 4 (`exists_mergeStep` l. 1837, `exists_shaveStep` l. 2027, `exists_openStep` l. 2041, `exists_arcStep`
+  l. 2111 — **not `exists_rayStep`**); `Terminal` 0; not mine: `BaseDense` 3, `BendCollar` 1, `HexRing` 1. 9 min 1 s, exit 0
+  (`build/gate/build/20261006T052839Z-1285243.log`, which ends "Build completed successfully (5792 jobs)"; driver log
+  `data/fs131/ir/ir3/build-stage24.log`).
+- **Axioms** against that build (`data/fs131/ir/ir3/IR3Axioms24.lean` → `.out`, exit 0; `tools/fs131_ir_axsum.py` with
+  `IR3Axioms24-expect.txt`; `IR3Axioms24-summary.txt`, PASS): **28 records — 18 on the standard three or fewer (the 17 of this stage
+  and `exists_hasHornCount`), 10 through `sorryAx`, exactly the ten expected, 0 other.** **`exists_rayStep` depends on `[propext,
+  Classical.choice, Quot.sound]`.** `exists_vertexStep` is on `sorryAx` through the three cases left. **Control**: the same output
+  read with Stage 23's expectation (which lists `exists_rayStep` among the `sorry` names) FAILS naming it
+  (`SORRY-EXPECTED-BUT-STANDARD`, `IR3Axioms24-control.txt`).
+- **Statements**: `tools/fs131_ir_stmt_check.py 2ead3ee3` (against Stage 23): PASS, 832 statements read, additions only
+  (`ir3/stmt-check-24.txt`). No `axiom`, no `native_decide`. `tools/check_architecture.py` PASS (`ir3/arch-stage24.txt`; no import
+  changed).
+- **Receipt**: a block "FS131-IR3" of 17 records in `scripts/Axioms.lean`, above `=== PURCHASED ===`.
+- No definition was added (no spec example is owed). The new theorems are parametric in their maps (the vacuity scan's GENERIC);
+  `Near.RayConfig.exists_step` and `exists_rayStep` have no Lean model on file, as `exists_vertexStep` (their docstrings say so).
+- Working files: `data/fs131/ir/ir3/scratch/Kit.lean` (the kit and the case as developed; it elaborated against Stage 23's build),
+  `scratch/transplant24.py` (the script that placed it in `Procedure`).
+
+## Stage 24 — SAVED (FS131-IR3)
