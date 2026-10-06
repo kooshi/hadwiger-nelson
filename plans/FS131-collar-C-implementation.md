@@ -212,3 +212,64 @@ the check was not loosened. (2) Lane G's `pushProfiles_collar` is the one leaf u
 proves it, `lensProf_le_one`, both closedness lemmas and `lens_subset_closedLens` come off `sorryAx` with no change here.
 
 ## Stage 3 — SAVED (FS131-CC1)
+
+---
+
+# FS131-CC2 — lane C of the collar bend, continued (de Bruijn, the implementer)
+
+*Job FS131-CC2, de Bruijn (Opus 5.5), launched 2026-10-06 on branch `fs131-w5k` at `bc168474` (CC1's report commit; worktree
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5k`). Brief `data/fs131/briefs/FS131-CC2-collar.md` (on `main`'s disk, untracked at
+launch), with `plans/STANDING-RULES.md`, `LEAN.md` and `RUNNING.md` § Building and § Make the gate fail. No fence. Working files
+`data/fs131/cc/`; tools `tools/fs131_cc_*.py`. Stages from 4 on are this job's.*
+
+## Theorems this phase proved (FS131-CC2)
+
+Filled at each saved stage below; the list as it stands is in the last saved stage's section.
+
+## Stage 4 — SAVED (FS131-CC2): the readback, the as-given build, and what this job may change
+
+### 4.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_cc_quotes2.py` (new; CC1's `fs131_cc_quotes.py` is left as it was) reads each quotation from the brief itself on `main`'s disk
+(the `> ` line above each `> — source:` line) and requires it verbatim in the source the brief names: `BendCollar.lean` and CC1's record on
+`fs131-w5k` at `bc168474`, KP2's plan on `fs131-w5` at `5059983d`, `CLAUDE.md` on `main`, the inventory from `main`'s disk and from `main`'s
+head (both). Result `data/fs131/cc/quotes-cc2.txt`: **PASS, 13 of 13 verbatim**. `--self-test` (`data/fs131/cc/quotes-cc2-selftest.txt`): one
+changed character in each quotation in turn, and one quotation pointed at a source that does not hold it — **14 of 14 plants fired**, the
+unplanted partner PASS.
+
+| # | quotation (opening words) | source | result |
+|---|---|---|---|
+| 1 | "Do not consider Lean formalization a cost. …" | `CLAUDE.md` § Counter-priors | verbatim |
+| 2–5 | the four open leaves' first lines (`map_degree_lensCurve`, `map_degree_end`, `sides_end`, `exists_collarFit`) | `BendCollar.lean` at `bc168474` | verbatim |
+| 6 | "theorem bend_toward_collar (hF : F.Valid) {P : ℂ} …" | `BendCollar.lean` at `bc168474` | verbatim |
+| 7 | "Four `sorry`s in `BendCollar` and the child B0, …" | CC1's record § 3.2 at `bc168474` | verbatim |
+| 8 | lane C's row of § 5.2 | KP2's plan at `5059983d` | verbatim |
+| 9–13 | items 405, 406, 402, 394, 390 (first lines) | `plans/FS131-close-inventory.md` on `main` (disk and head) | verbatim |
+
+No mismatch.
+
+Read in full: the brief, the standing rules, `LEAN.md`, `RUNNING.md` § Building and § Make the gate fail; CC1's record (Stages 1–3); KP2's
+plan with lane G's stages (on `fs131-w5` at `5059983d`); `BendCollar.lean` at `bc168474`; inventory items 405–407.
+
+### 4.2 The as-given build (`bc168474`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` at `bc168474`: **OK — all 1784 modules already up to date,
+nothing built, 6 modules with warnings**, exit 0, 9 s (`build/gate/build/20261006T023000Z-67729.log`; driver log
+`data/fs131/cc/build-asgiven-cc2.log`, which ends `EXIT=0`). As the brief expected.
+
+### 4.3 What this job may change, and what it may not
+
+**May change**: the files the merge of `origin/fs131-w5` (`5059983d`) brings, as the merge brings them; in
+`Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean` the proofs of lane C's four open leaves (`CollarFit.map_degree_lensCurve`,
+`CollarFit.map_degree_end`, `CollarFit.sides_end`, `exists_collarFit`), new children beside them, and the new child B0 `collarModel` with
+its statement (this lane's to write: KP2's plan § 4); `Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean` (supporting lemmas only);
+`scripts/Axioms.lean` (a block of my own, headed "FS131-CC2", above the `=== PURCHASED ===` banner; at the merge both sides' blocks kept);
+this record; `tools/fs131_cc_*.py` (with the fix to `fs131_cc_stmt.py` the brief orders, item 406 (c)); `data/fs131/cc/`;
+`data/fs131/reports/FS131-CC2.md`.
+
+**May not change**: any statement — a hypothesis, a conclusion, a docstring, a definition the statements use; no new `axiom`, no
+`native_decide`; `RadialPush.lean` and `CollarMap.lean` beyond what the merge brings (lane G's, finished); `BaseDense`, `HexRing`,
+`BaseWalk`, `Proofs.lean` and `ARCHITECTURE.md` (unless I add a module). No merge into `fs131-w5`, no `main` taken into this branch, no gate
+run, nothing on `main`. No agents of my own; no file edited while a build of it runs; no background process left running.
+
+## Stage 4 — SAVED (FS131-CC2)
