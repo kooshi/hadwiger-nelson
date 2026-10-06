@@ -56,10 +56,11 @@ a fresh agent on the same brief.
    takes a second named hypothesis, the finite-target floor; FS89-S0A-10 takes its band's order bound as a hypothesis). In order, as slots free: **FS131-K6b is running** (§ 3; E8 handed back, items 491–492: nine entries derived, its stub lines filed, its errata held for the filing);
    next into free slots:
    **the order, planners and implementers alternating (rulings 495 (d), 497; a planner's hand-back is what implementers wait on, and planners
-   find the statement defects): K7, I10C, K8, I6A, K9, I6B, K6c, I6C, I6D, then MD1, MD2** (ruling 502). **Not yet written**: FS131-K6c (wave 6's
-   third planning pass — K6b's record § 12.4 says exactly what it takes; derive the brief from `mk-k6b.py`), FS131-I6C (`Curve` then `LocalGraph`,
-   on a branch to cut from `32f2ab4c`) and FS131-I6D (`FanBridge` with `sq9.SingLocallyFinite`, after E8's check) — both from `mk-i6.py`'s pattern
-   and K6b's § 11.4 and § 12.1. The jobs ready: **FS131-I10C** (`debruijn-implementer`, `model: "opus"`; § 3's I10B row);
+   find the statement defects): K7, I10C, K8, I6A, K9, I6B, K6c, I6C, I6D, then MD1, MD2** (ruling 502). **Also ready, briefs gated**: FS131-K6c (wave 6's third planning pass, on `fs131-w6` itself, new modules only;
+   `data/fs131/briefs/FS131-K6c-wave6-third.md`, generator `mk-k6c.py`), FS131-I6C (`Curve` then `LocalGraph`, tree `fs131-w6c`) and FS131-I6D
+   (`FanBridge`'s existence half with `sq9.SingLocallyFinite`, tree `fs131-w6f`; `data/fs131/briefs/FS131-I6C-wave6-bridge.md`, `FS131-I6D-wave6-bridge.md`,
+   generator `mk-i6b.py C|D`; both trees cut from `32f2ab4c`). **Not written**: FS131-I6E (`FanBridge`'s five `Fan` lemmas — after E8's check, on
+   I6D's branch or with its helpers in a module of its own), MD1, MD2. The other jobs ready: **FS131-I10C** (`debruijn-implementer`, `model: "opus"`; § 3's I10B row);
    **FS131-I6A** (`Pinch`'s seven leaves, on `fs131-w6p`) and **FS131-I6B** (`MapColouring`'s `sat_inP` and its Lean model, on `fs131-w6m`) — both
    implementers, briefs gated (`data/fs131/briefs/FS131-I6A-wave6.md`, `FS131-I6B-wave6.md`; generator `mk-i6.py A|B`), trees made at `3928644b`;
    **the planners of waves 7–9, FS131-K7, K8, K9** (`debruijn`; **briefs gated, trees made** at `e6e7b312` — `data/fs131/briefs/FS131-K7-wave7.md`,
@@ -163,6 +164,7 @@ a fresh agent on the same brief.
 | `fs131-w10` | `ace98a35` | idle: wave 10's plan and skeleton, implementer A's two files proved (item 493); 12 leaves left in the other two files |
 | `fs131-w6` | `32f2ab4c` | idle: wave 6's plan and skeleton after two passes — 31 leaves in five files; the third pass and two implementers' branches are cut from it |
 | `fs131-w6p`, `fs131-w6m` | `3928644b` | made for FS131-I6A (`Pinch`) and FS131-I6B (`MapColouring`); builds copied from `fs131-w6` |
+| `fs131-w6c`, `fs131-w6f` | `32f2ab4c` | made for FS131-I6C (`Curve`, `LocalGraph`) and FS131-I6D (`FanBridge`); builds copied from `fs131-w6` |
 | `fs131-w10b` | moving (I10B) | cut from `f919973e`; its build was copied from `fs131-wop` |
 | `fs131-w10k` | moving (K10b; from `ace98a35`) | wave 10's second planning pass, new modules only |
 | `fs131-w7`, `fs131-w8`, `fs131-w9` | `e6e7b312` | made for the planners of waves 7–9; builds copied from `fs131-wmb` |
