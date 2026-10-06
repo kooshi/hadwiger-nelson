@@ -20,8 +20,8 @@ The local fact FS121-C1-SAT's argument reads (`plans/FS121-C1-proof.md` § 2.3: 
   connected, so some `z` is in the closure of `region i` and of the other colours; the two sides of the curve at `z` are in
   one region each, one of them `region i`, the other not, and each has lower density at least `1/16` at `z`.)
 
-The generic density facts used on the way are stated in the namespace `MapEdge` (names of this module's own: a second line
-may hold the same facts under other names until the wave's join).
+The generic density facts used on the way are stated in the namespace `MapEdge` (names of this module's own: giving each
+one home with the same facts of other modules is a tidy after wave 6's first landing).
 
 **Inhabitant.** `sq9Map` at the edge point `sqEdgePt`, colours `sqColA` and `sqColB`: the two `example`s after
 `sq9Map_sat_model` in `Plane/Saturated/MapColouring` instantiate `ArcMap.mem_essBoundary_region_of_curve` (the line

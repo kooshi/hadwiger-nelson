@@ -17,6 +17,10 @@ Rows of `plans/LEAN-BACKLOG.md`, each at the class its argument reads (`plans/FS
 * **FS121-V2-EROSION-DIAM** — `erosion_diam`, `erosion_diam_cot`: two straight pieces from `z` in the closure of one
   preconnected unit-distance-free set. No sector and no colouring is read. **Proved.**
 
+**Every row above is proved; the module holds no `sorry`**: the rows marked so by the planner, and `pinch`,
+`pinch_not_in_in`, `c11_discs`, `c11_split`, `half_upperDensity`, `TwoColourOn.essBoundary_inter_eq`, `sq9_isTangentAt`
+by FS131-I6A (`plans/FS131-I6A-implementation.md`), with `pinch_interface` and `c11_discs_interface` over them.
+
 **Inhabitants.** FALLSAT: `r7Cls` (`r7Cls_isMaximalCover` with `isMaximalCover_iff`, seven MUA sets). PINCH and C11:
 `sq9` at `sqEdgePt` (`sq9_twoColourNhd`; saturated by `sq9_tight_saturated`), of tangent type (`sq9_isTangentAt`).
 HALF: any class of `sq9` with a contact. EROSION-DIAM: an open square of side `1/2` at a corner.

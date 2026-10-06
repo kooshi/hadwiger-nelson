@@ -5,7 +5,7 @@ import Proofs.HadwigerNelson.Plane.Saturated.Fan
 /-!
 # The local structure off the singular set (FS-131 wave 6: FS131-E8-LOCAL, FS131-E8-DELTA)
 
-`plans/FS131-E8-derivation.md` §§ 3.1, 3.5 ([hand], one mind, until this module lands), at the class each argument
+`plans/FS131-E8-derivation.md` §§ 3.1, 3.5 (kernel-checked in this module), at the class each argument
 reads (`plans/FS131-w6-kernel-plan.md` § 11):
 
 * **FS131-E8-DELTA** — `ae_one_colour_of_isConnected`: a connected open set meeting no essential boundary and no cusp
@@ -31,7 +31,7 @@ frozen centred-ball `Σ` serves (ruling, inventory item 495).
 the segment `s ↦ sqEdgePt + i s`. The same object serves the children: `sq9_twoColourNhd.two` for `TwoColourOn`,
 `sq9_hasTwoDiscsAt` for `HasTwoDiscsAt`; `exists_unit_curve_of_two_discs` is applied to it inside `local_graph`.
 
-**Proofs** (FS131-I6C): no `sorry` in this module; `local_graph` rests on two leaves of `Plane/Saturated/Pinch`
+**Proofs** (FS131-I6C): no `sorry` in this module; `local_graph` rests on two theorems of `Plane/Saturated/Pinch`
 (`c11_discs`, `TwoColourOn.essBoundary_inter_eq`). The route is E8 § 3.1 with the dated erratum under FS131-E8-LOCAL:
 the lens point (`exists_lens_point`, `Plane/Saturated/Curve`), the normal 1-Lipschitz (`HasTwoDiscsAt.norm_sub_le`), the
 graph theorem in graph coordinates with no measure (`exists_unit_curve_of_two_discs`, over `exists_arclength_inverse`),

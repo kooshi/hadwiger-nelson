@@ -6,7 +6,7 @@ import Proofs.HadwigerNelson.Plane.Saturated.FanBuild
 /-!
 # The bridge: an isolated singular point of a saturated colouring has a fan (FS-131 wave 6: FS131-E8)
 
-`plans/FS131-E8-derivation.md` §§ 3.2–3.7, each entry **[hand], one mind, kernel pending** until this module lands
+`plans/FS131-E8-derivation.md` §§ 3.2–3.7, each entry kernel-checked in this module (no `sorry`)
 (`plans/FS131-w6-kernel-plan.md` § 11):
 
 * `c.IsolatedAt z R` — the setting: `0 < R ≤ 1/2`, `z` the only possible singular point of `B(z, R)`, the colouring
@@ -225,40 +225,6 @@ theorem polarRegion_eq_image (z : ℂ) (r : ℝ) (φ ψ : ℝ → ℝ) :
     exact ⟨(t, θ), ⟨ht, hθ.1, hθ.2⟩, rfl⟩
   · rintro ⟨⟨t, θ⟩, ⟨ht, h1, h2⟩, rfl⟩
     exact ⟨t, ht, θ, ⟨h1, h2⟩, rfl⟩
-
-/-- **A polar region between two continuous graphs is open.** -/
-theorem polarRegion_isOpen (z : ℂ) {r : ℝ} {φ ψ : ℝ → ℝ} (hφ : ContinuousOn φ (Ioo 0 r))
-    (hψ : ContinuousOn ψ (Ioo 0 r)) : IsOpen (polarRegion z r φ ψ) := by
-  rw [polarRegion_eq_image, isOpen_iff_mem_nhds]
-  rintro _ ⟨⟨t, θ⟩, hq, rfl⟩
-  exact image_polarPt_mem_nhds z hq.1.1 ((isOpen_setOf_polar_lt hφ hψ).mem_nhds hq)
-
-/-- **A polar region between two continuous graphs, one below the other, is preconnected.** -/
-theorem polarRegion_isPreconnected (z : ℂ) {r : ℝ} {φ ψ : ℝ → ℝ} (hφ : ContinuousOn φ (Ioo 0 r))
-    (hψ : ContinuousOn ψ (Ioo 0 r)) (hlt : ∀ t ∈ Ioo 0 r, φ t < ψ t) : IsPreconnected (polarRegion z r φ ψ) := by
-  have him : polarRegion z r φ ψ =
-      (fun q : ℝ × ℝ => polarPt z q.1 (φ q.1 + q.2 * (ψ q.1 - φ q.1))) '' (Ioo 0 r ×ˢ Ioo 0 1) := by
-    ext w
-    constructor
-    · rintro ⟨t, ht, θ, hθ, rfl⟩
-      have hpos : 0 < ψ t - φ t := sub_pos.2 (hlt t ht)
-      refine ⟨(t, (θ - φ t) / (ψ t - φ t)), ⟨ht, div_pos (sub_pos.2 hθ.1) hpos, ?_⟩, ?_⟩
-      · rw [div_lt_one hpos]; linarith [hθ.2]
-      · simp only
-        rw [div_mul_cancel₀ _ hpos.ne']; ring_nf
-    · rintro ⟨⟨t, s⟩, ⟨ht, hs⟩, rfl⟩
-      have hpos : 0 < ψ t - φ t := sub_pos.2 (hlt t ht)
-      refine ⟨t, ht, φ t + s * (ψ t - φ t), ⟨?_, ?_⟩, rfl⟩
-      · have := mul_pos hs.1 hpos; linarith
-      · have := mul_lt_mul_of_pos_right hs.2 hpos; linarith
-  rw [him]
-  refine (isPreconnected_Ioo.prod isPreconnected_Ioo).image _ ?_
-  have hm : MapsTo (Prod.fst : ℝ × ℝ → ℝ) (Ioo 0 r ×ˢ Ioo (0 : ℝ) 1) (Ioo 0 r) := fun q hq => hq.1
-  have h1 : ContinuousOn (fun q : ℝ × ℝ => (q.1, φ q.1 + q.2 * (ψ q.1 - φ q.1))) (Ioo 0 r ×ˢ Ioo (0 : ℝ) 1) :=
-    continuous_fst.continuousOn.prodMk ((hφ.comp continuous_fst.continuousOn hm).add
-      (continuous_snd.continuousOn.mul ((hψ.comp continuous_fst.continuousOn hm).sub
-        (hφ.comp continuous_fst.continuousOn hm))))
-  exact (continuous_polarPt z).comp_continuousOn h1
 
 /-- A polar point a full turn on is the same point. -/
 theorem polarPt_add_two_pi (z : ℂ) (t θ : ℝ) : polarPt z t (θ + 2 * Real.pi) = polarPt z t θ := by
@@ -632,12 +598,12 @@ theorem continuousOn_cyclicNext (i : Fin F.n) : ContinuousOn (cyclicNext F.φ i)
 
 /-- A cell of a fan is open. -/
 theorem isOpen_cell (i : Fin F.n) : IsOpen (F.cell i) :=
-  polarRegion_isOpen z (F.cont i) (F.continuousOn_cyclicNext i)
+  isOpen_polarRegion z (F.cont i) (F.continuousOn_cyclicNext i)
 
 /-- **A cell of a fan is preconnected** — out to any radius `ρ ≤ F.r` (the first of the three cell lemmas). -/
 theorem isPreconnected_polarRegion_of_le (i : Fin F.n) {ρ : ℝ} (hρ : ρ ≤ F.r) :
     IsPreconnected (polarRegion z ρ (F.φ i) (cyclicNext F.φ i)) :=
-  polarRegion_isPreconnected z ((F.cont i).mono (Ioo_subset_Ioo_right hρ))
+  isPreconnected_polarRegion z ((F.cont i).mono (Ioo_subset_Ioo_right hρ))
     ((F.continuousOn_cyclicNext i).mono (Ioo_subset_Ioo_right hρ))
     fun _ ht => F.φ_lt_cyclicNext i (Ioo_subset_Ioo_right hρ ht)
 
@@ -695,7 +661,7 @@ theorem exists_isOpen_subset_cells {i j : Fin F.n} (hij : (j : ℕ) + 1 = i ∨ 
     {t : ℝ} (ht : t ∈ Ioo 0 F.r) :
     ∃ O : Set ℂ, IsOpen O ∧ polarPt z t (F.φ i t) ∈ O ∧ O ⊆ F.cell j ∪ F.branch i ∪ F.cell i := by
   obtain ⟨lo, hlo, hlt, heq⟩ := F.exists_lower_of_pred hij
-  refine ⟨polarRegion z F.r lo (cyclicNext F.φ i), polarRegion_isOpen z hlo (F.continuousOn_cyclicNext i),
+  refine ⟨polarRegion z F.r lo (cyclicNext F.φ i), isOpen_polarRegion z hlo (F.continuousOn_cyclicNext i),
     ⟨t, ht, F.φ i t, ⟨hlt t ht, F.φ_lt_cyclicNext i ht⟩, rfl⟩, ?_⟩
   rintro w ⟨s, hs, θ, hθ, rfl⟩
   rcases lt_trichotomy θ (F.φ i s) with h | h | h
@@ -1425,7 +1391,7 @@ angle at `z` occupies no other region there, of positive or of zero angle
 (`plans/FS121-V2-verification.md` §§ 2.1–2.3: Lemmas C, H, T — `half_dichotomy`, `branch_contacts`,
 `branch_outside_discs`). Read: the fan at `z` and saturation at the branch points; not read: saturation at `z`, local
 finiteness of `Σ`, the number of colours. Under saturation the hypothesis "a fan at `z`" is equivalent to `Σ` being
-locally finite near `z`, by FS131-E8-BRIDGE ([hand], one mind, until `fan_of_isolated` is proved). Inhabitant:
+locally finite near `z`, by FS131-E8-BRIDGE (kernel-checked: `fan_of_isolated`). Inhabitant:
 `sq9Fan` with `sq9_tight_saturated` (four regions of four colours). -/
 theorem sector_alone (hsat : SaturatedOn c.cls (ball z F.r \ {z})) {i i' : Fin F.n} (hi : F.dir i < F.nextDir i)
     (hcol : F.col i = F.col i') : i = i' := by

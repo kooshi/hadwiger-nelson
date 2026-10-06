@@ -6421,7 +6421,15 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.sq9_not_isCuspAt_near_edge
 #print axioms HadwigerNelson.Plane.sqEdgePt_mem_essBoundary
 
-/-! ## FS131-I6E — wave 6's bridge: what every fan carries (`Plane/Saturated/FanBridge`, the five `Fan` lemmas) — the two leaves that read no saturation (`Fan.two_le_n`, `Fan.col_ne`) and the children of the five that rest on no open leaf of another line; the records wired over `gamma`, `IsUnitCurve.exists_polarGraph` and `Pinch` are listed in `plans/FS131-I6E-implementation.md` and enter here at the join -/
+-- entered at the join (FS131-L6A): proved over `Pinch`'s `c11_discs` and `TwoColourOn.essBoundary_inter_eq`
+#print axioms HadwigerNelson.Plane.HasTwoDiscsAt.one_le_norm_sub
+#print axioms HadwigerNelson.Plane.HasTwoDiscsAt.norm_sub_le
+#print axioms HadwigerNelson.Plane.HasTwoDiscsAt.normal_unique
+#print axioms HadwigerNelson.Plane.local_graph
+#print axioms HadwigerNelson.Plane.AeColouring.local_graph
+#print axioms HadwigerNelson.Plane.sq9_exists_isInterfaceChart
+
+/-! ## FS131-I6E — wave 6's bridge: what every fan carries (`Plane/Saturated/FanBridge`, the five `Fan` lemmas) — the two leaves that read no saturation (`Fan.two_le_n`, `Fan.col_ne`) and the children of the five that rest on no open leaf of another line; the fourteen records proved over `gamma`, `IsUnitCurve.exists_polarGraph` and `Pinch`'s leaves are the block's last section, entered at the join (FS131-L6A) -/
 
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.two_le_n
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.col_ne
@@ -6433,8 +6441,6 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.image_polarPt_mem_nhds
 #print axioms HadwigerNelson.Plane.isOpen_setOf_polar_lt
 #print axioms HadwigerNelson.Plane.polarRegion_eq_image
-#print axioms HadwigerNelson.Plane.polarRegion_isOpen
-#print axioms HadwigerNelson.Plane.polarRegion_isPreconnected
 #print axioms HadwigerNelson.Plane.polarPt_add_two_pi
 #print axioms HadwigerNelson.Plane.polarRegion_mono
 #print axioms HadwigerNelson.Plane.mem_closure_polarRegion
@@ -6482,7 +6488,23 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side_dir
 
 
-/-! ## FS131-I6D — wave 6, the bridge's existence half: the curve lemmas, the continuation, GAMMA, BETA, ALPHA (until `fs131-w6c` joins, the records that read `Curve`'s or `LocalGraph`'s leaves print `sorryAx` on this branch) -/
+-- entered at the join (FS131-L6A): proved over `gamma`, `IsUnitCurve.exists_polarGraph` and `Pinch`'s leaves
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_unitCurve_branch
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_twoColourNhd_branch
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.dist_eq_one_of_common_contact
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.contacts_of_no_common
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.branch_outside_discs
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.branch_contacts
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_contact_nextDir
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_contact_dir
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_constraints
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.horn_false
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.false_of_horn_next
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.false_of_horn_dir
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_alone
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_unique
+
+/-! ## FS131-I6D — wave 6, the bridge's existence half: the curve lemmas, the continuation, GAMMA, BETA, ALPHA (re-read at the join, FS131-L6A: nothing beneath them is open) -/
 #print axioms HadwigerNelson.Plane.IsUnitCurve.affine
 #print axioms HadwigerNelson.Plane.IsUnitCurve.sin_abs_le_dist
 #print axioms HadwigerNelson.Plane.IsUnitCurve.dist_le

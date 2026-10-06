@@ -22,8 +22,8 @@ discs tangent to its limit direction at `z`, and the contacts of its points conv
 saturation in the punctured disc and fail without it (a polygonal colouring has fans and no curvature bound). They are
 theorems about any fan (`Plane/Saturated/FanBridge`: `Fan.branch_outside_discs`, `Fan.branch_contacts`), not fields.
 
-**Under saturation `RegJFan` is equivalent to `SingLocallyFinite`**, by FS131-E8-BRIDGE ([hand], one mind, until
-`Plane/Saturated/FanBridge` lands): `regJFan_of_saturated`.
+**Under saturation `RegJFan` is equivalent to `SingLocallyFinite`**, by FS131-E8-BRIDGE (kernel-checked in
+`Plane/Saturated/FanBridge`): `regJFan_of_saturated`.
 
 **Inhabitant.** `sq9Fan` (`Plane/Saturated/FanExamples`): `sq9` at the grid vertex `1/2 + i/2`, four branches along
 the axes with constant angles, four colours, four sectors of angle `π/2`, no horn.

@@ -4,7 +4,8 @@
   tools/fs131_l6a_archrows.py [--self-test] [ARCHITECTURE.md]
 
 For each row `| `Plane/Saturated/<M>` | <description> | <imports> | … |`, every backticked token of the description
-that is shaped like a declaration name (letters, digits, `_`, `'`, `.`, subscripts; no space, no `/`) is looked up:
+that is shaped like a declaration name (letters, digits, `_`, `'`, `.`, subscripts; no space, no `/`; not one of the
+fourteen module names, not an abbreviated suffix beginning `_`) is looked up:
 
   module    declared in `Proofs/HadwigerNelson/Plane/Saturated/<M>.lean` (theorem, def, abbrev, structure, instance,
             lemma, inductive, class; by its last component, or as a field `  name :` of a structure there);
@@ -54,8 +55,8 @@ def check(path, quiet=False):
                 faults.append(f"STALE {m}: the row says {w.strip()!r}")
         t = {"module": 0, "wave": 0, "library": 0, "MISSING": []}
         for tok in re.findall(r"`([^`]+)`", desc):
-            if not NAME.match(tok) or tok in ("sorry",):
-                continue
+            if not NAME.match(tok) or tok in ("sorry",) or tok in MODS or tok.startswith("_"):
+                continue                         # a formula, a sibling module's name, or an abbreviated suffix (`_of_im`)
             short = tok.split(".")[-1]
             if len(short) < 2:
                 continue

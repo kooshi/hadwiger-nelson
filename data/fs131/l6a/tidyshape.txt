@@ -1,0 +1,15 @@
+check: statements compared 2; FanBridge code lines changed 3 (in ['exists_isOpen_subset_cells', 'isOpen_cell', 'isPreconnected_polarRegion_of_le']); records 5516 -> 5534 (-2, +20); faults 0
+plant (a use left on the old name): statements compared 2; FanBridge code lines changed 2 (in ['isOpen_cell', 'isPreconnected_polarRegion_of_le']); records 5516 -> 5534 (-2, +20); faults 2
+  OLD-NAME polarRegion_isOpen in Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+  USES the changed lines are in ['isOpen_cell', 'isPreconnected_polarRegion_of_le'], expected ['exists_isOpen_subset_cells', 'isOpen_cell', 'isPreconnected_polarRegion_of_le']
+  -> fired (OLD-NAME)
+plant (a binder of a deleted lemma changed at the comparison): statements compared 2; FanBridge code lines changed 3 (in ['exists_isOpen_subset_cells', 'isOpen_cell', 'isPreconnected_polarRegion_of_le']); records 5516 -> 5534 (-2, +20); faults 1
+  SHAPE polarRegion_isOpen against isOpen_polarRegion: '(z : ℂ) (r : ℝ) {φ ψ : ℝ → ℝ} (hφ : ContinuousOn φ (Ioo 0 r)) (hψ : ContinuousOn ψ (Ioo 0 r)) : IsOpen (polarRegion z r φ ψ)' / '(z : ℂ) {r : ℝ} {φ ψ : ℝ → ℝ} (hφ : ContinuousOn φ (Ioo 0 r)) (hψ : ContinuousOn ψ (Ioo 0 r)) : IsOpen (polarRegion z r φ ψ)'
+  -> fired (SHAPE)
+plant (a proof line changed in another file): statements compared 2; FanBridge code lines changed 3 (in ['exists_isOpen_subset_cells', 'isOpen_cell', 'isPreconnected_polarRegion_of_le']); records 5516 -> 5534 (-2, +20); faults 1
+  CODE FanBuild.lean: a line outside its doc comments differs from 17657aaf
+  -> fired (CODE)
+plant (a record no report lists): statements compared 2; FanBridge code lines changed 3 (in ['exists_isOpen_subset_cells', 'isOpen_cell', 'isPreconnected_polarRegion_of_le']); records 5516 -> 5535 (-2, +21); faults 1
+  RECORDS added, not the reports' twenty: ['HadwigerNelson.Plane.zz_planted']
+  -> fired (RECORDS)
+self-test: PASS

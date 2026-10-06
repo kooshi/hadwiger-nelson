@@ -1,0 +1,2 @@
+delta against 17657aaf over 14 file(s): 423 declarations before, 421 after; statements changed 0 []; removed 2 ['HadwigerNelson.Plane.polarRegion_isOpen', 'HadwigerNelson.Plane.polarRegion_isPreconnected']; added 0 []; docstring alone 1 ['HadwigerNelson.Plane.AeColouring.Fan.sector_alone']
+delta: PASS
