@@ -1,0 +1,13 @@
+BIBLIOGRAPHY.md
+data/fs131/briefs/FS131-CC1-collar.md
+data/fs131/briefs/FS131-CC2-collar.md
+data/fs131/briefs/FS131-CG1-collar.md
+data/fs131/briefs/FS131-IO1-open.md
+data/fs131/briefs/FS131-IO2-open.md
+data/fs131/briefs/FS131-IO3-open.md
+data/fs131/briefs/FS131-IR1-procedure.md
+data/fs131/briefs/FS131-KP2-collar.md
+data/fs131/briefs/FS131-M6-sync.md
+data/fs131/briefs/FS131-OL1-open-land.md
+plans/FS131-close-inventory.md
+plans/SESSION-HANDOFF-2026-10-04.md

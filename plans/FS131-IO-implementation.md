@@ -51,6 +51,9 @@ FS131-IO3 (Stages 11–15; build and axioms print in § 15.2):
 
 Nothing in `OpenMove` is left `sorry`.
 
+FS131-OL1 (Stages 16 on; OPEN's landing): **proves no theorem** — it brings the 105 records above through the full gate and onto `main`;
+the gate's counts are in its stages and in "Drafts for the front page (FS131-OL1)".
+
 ## Stage 1 — SAVED (FS131-IO1): the readback, the as-given build, and what this job may change
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -642,3 +645,72 @@ rebuilt and 0 warnings), re-run `data/fs131/io/iter.sh data/fs131/io/AxiomsIO.le
 `tools/fs131_io_axioms.py <file> --expect 105` (expect exit 0, 103 exactly standard), then hand `fs131-wop` to the gate.
 
 ## Stage 15 — SAVED (FS131-IO3)
+
+## Stage 16 — SAVED (FS131-OL1): the readback, the as-given build, and what this job may change
+
+*FS131-OL1 (de Bruijn, the implementer, on Opus) continues this record from here, on `fs131-wop` at `a20bb6f5`. Brief:
+`data/fs131/briefs/FS131-OL1-open-land.md` (on `main` at `34a28786`). Report: `data/fs131/reports/FS131-OL1.md`. Its job: OPEN's landing —
+merge `main` into `fs131-wop`, the full gate on one commit, a fast-forward of `main`, and the drafts for the filing. It proves no theorem.*
+
+### 16.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (`data/fs131/ol/quotes.py <brief> --root /home/kooshi/source/lean-dir`: every `> ` line of the brief followed by a
+`> — source:` line, searched as an exact substring of one line of its source; a relative source path is read under `main`'s tree, where the
+brief was written). Output `data/fs131/ol/quotes.txt`: **13 quotations, 0 mismatches**, each verbatim:
+
+| quotation (a prefix) | source | line |
+|---|---|---|
+| "408. **FS131-IO3 done — OPEN held** (Stage 15 SAVED at Kooshi's halt, …" | `plans/FS131-close-inventory.md` (`main`) | 3683 |
+| "409. **Ruling on OPEN: it lands on `main` by its own gate-and-land job on restart** …" | the same | 3698 |
+| "411. **Rulings: the three slots, filled from the queue of the handoff.** …" | the same | 3708 |
+| "384. **FS131-E6 done: F6 is real, and repaired with no backlog statement changed** …" | the same | 3411 |
+| "391. **FS131-IO1 handed back** (Stage 3 SAVED, …" | the same | 3507 |
+| "393. **FS131-IO2, by message: `open_allowedCone` is false as stated; a one-field repair to `OpenConfig`.** …" | the same | 3530 |
+| "397. **FS131-IO2, by message: `open_degree_horns` is also false as stated; a second one-field repair to `OpenConfig`.** …" | the same | 3569 |
+| "400. **FS131-IO2 handed back** (Stage 10 SAVED, …" | the same | 3605 |
+| "375. **MERGE LANDED on `main`, held in the kernel: FS131-ML1 done** …" | the same | 3302 |
+| "376. **MERGE's landing counts filed** (Keryx, drafts 1, 2, 4 verbatim): …" | the same | 3324 |
+| "Of this brief: nothing. Of OPEN's landing, for the coordinator (not this job's to run): the full gate on a branch carrying `fs131-wop`" | this record § 15.3 | 635 |
+| "theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c : Fin k}" | `OpenMove.lean` (`a20bb6f5`) | 2847 |
+| "def HasHornCount (v : ℂ) (j : ℕ) : Prop :=" | `OpenMove.lean` (`a20bb6f5`) | 36 |
+
+Controls on the checker: `--plant` (one character of the first quotation altered) reports exactly one `MISMATCH`, exit 1
+(`data/fs131/ol/quotes-plant.txt`); a file with no quotation exits 2. A defect found live: the first version read the relative path in this
+worktree, whose copy of the inventory is the branch point's (no item 384 or later), and reported 8 mismatches — the reason for `--root`.
+
+### 16.2 Read for this job
+
+`plans/STANDING-RULES.md` and `LEAN.md` in full; `RUNNING.md` § Building and § Make the gate fail, and watch it fail; inventory items 375–376
+and 408–411 in full; this record's header and Stages 10–15 in full; ML1's landing (`plans/FS131-IMM-implementation.md` Stages 13–16 and its
+drafts), whose order this landing follows; `exists_open` and `HasHornCount` whole, as they stand at `a20bb6f5`; `scripts/axioms.sh`,
+`scripts/Vacuity.lean` (the docstring's carrier list and procedure, and the scan) in full.
+
+### 16.3 The branch builds as given, and IO3's axioms check re-run
+
+- **Build** at `a20bb6f5`, under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK — "all 1767
+  modules already up to date, nothing built, 0 module(s) with warnings, 2s"**, exit 0; log `build/gate/build/20261006T023101Z-70425.log`
+  ("All targets up-to-date (5750 jobs)"), driver output `data/fs131/ol/build-asgiven.log`.
+- **Axioms** against those oleans (`data/fs131/io/iter.sh data/fs131/io/AxiomsIO.lean` → `data/fs131/ol/axioms-io-asgiven.txt`, exit 0),
+  classified by `tools/fs131_io_axioms.py … --expect 105` (`data/fs131/ol/axioms-io-asgiven-classified.txt`, exit 0): **105 records, 0
+  `sorryAx`, 0 foreign; 103 on exactly `[propext, Classical.choice, Quot.sound]`, 2 on fewer** (`BranchGerms.idx_idx` `[propext]`,
+  `BranchGerms.turns_idx` `[propext, Quot.sound]`). The classifier's own summary line reads `std=105`: its `STD` class is "within the
+  standard three", so the 103 is read from the classified lines (`grep -c` of the full triple: 103), as IO3 read it. The print is
+  byte-identical to IO3's `data/fs131/io/axioms-io3-final.txt` but for that file's first line, the slot's own "admitted" notice.
+
+### 16.4 What this job may and may not change
+
+**May**: the merge's files; `scripts/Axioms.lean` (OPEN's records, already registered as one block of 105 by IO1–IO3), `scripts/Vacuity.lean`
+(the carrier list's OPEN entry, by the procedure in its docstring), `scripts/vacuity-controls.lean` and `scripts/vacuity.sh`'s `expect` lines
+(a control, numbered after `main`'s last, 62, where the procedure asks for one), `scripts/vacuity-baseline.txt`'s header (its two count
+lines; **no entry** — a new entry is the coordinator's ruling), `scripts/axioms-controls.txt` (the controls' expected counts, if this state
+moves them); `Proofs.lean`, `ARCHITECTURE.md`; `OpenMove.lean` for a linter or docstring fix only; this record; `tools/fs131_ol_*.py`,
+`data/fs131/ol/`, `data/fs131/reports/FS131-OL1.md`; then `main`, by fast-forward only. **May not**: any statement — no hypothesis, no
+conclusion, no definition a statement uses (`OpenConfig` as IO2 left it); no `axiom`, no `native_decide`; `CLAUDE.md`, `LEAN.md`, `LEDGER.md`,
+`tools/claude_md_fact_audit.py` (drafts only); another job's tools (`tools/fs131_io_*.py`, `tools/fs131_ml_*.py` are run, never edited);
+and **the branch is never rewritten**: `a20bb6f5` stays an ancestor of everything pushed (FS131-IR1 merges it into wave 5 today, item 411 (d)).
+
+**`main` since the branch point** `11a34d9d` (one merge base, `git merge-base --all HEAD origin/main`), at `origin/main` = `34a28786`:
+`git diff --name-only 11a34d9d origin/main` names `BIBLIOGRAPHY.md`, ten briefs under `data/fs131/briefs/`, `plans/FS131-close-inventory.md`
+and `plans/SESSION-HANDOFF-2026-10-04.md` — no Lean file, no script (`data/fs131/ol/main-since-base.txt`).
+
+## Stage 16 — SAVED (FS131-OL1)
