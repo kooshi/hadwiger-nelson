@@ -130,3 +130,87 @@ of 451 batches, 3 module(s) rebuilt, 0 module(s) with warnings, 10m5s`, `exit=0`
   tree); the audit of every record of the wave is the gate's, after the doubled-name check (Stage 5).
 
 ## Stage 2 — SAVED (FS131-L10A)
+
+## Stage 3 — SAVED (FS131-L10A): the ruled tidies — nine arguments dropped, three twins folded into their rows
+
+### 3.1 What was ruled, and what changed (rulings 494 (a), 507 (a))
+
+Every edit is an exact text replacement that must match once (`data/fs131/l10a/tidy.py`; a file other than the one the edits were
+read against is refused). All of them went through as ruled; none is deferred.
+
+| statement | before (Stage 2's tip, `77e1f077`) | now |
+|---|---|---|
+| `SpectralInputs.sp_if` (J45-SP-if) | `(I : Interface F) [Countable (unitRing F)] (hBH : …)` | `[Countable (unitRing F)]` cut; the `have` that consumed it and its comment cut |
+| `SpectralInputs.spectral_carried_iff` (J45-N2, spectral half) | `[IsProbabilityMeasure μ] (t : TopologicalSpace R) …` | `[IsProbabilityMeasure μ]` cut; its `have` and comment cut |
+| `StationarySet.prob_le_ratio_mul` (X25B-P) | `[MeasurableAdd₂ G] [MeasurableNeg G]`, a one-line corollary of `…_of_symm` | the name is on the general statement (no `MeasurableAdd₂ G`); **`prob_le_ratio_mul_of_symm` deleted** |
+| `ratio_prod_le` (X25B-PZ) | `[MeasurableAdd₂ G]`, `[MeasurableAdd₂ H]`, a corollary of `ratio_prod_le_of_symm` | the name is on the general statement; **`ratio_prod_le_of_symm` deleted** |
+| `ratio_prod_le_iSup_levels` (X25B-L1) | `[MeasurableAdd₂ X]`, `[T2Space Y]`, `[SigmaFinite νX]`, `[IsFiniteMeasure νY]`, `(K : ℕ → OpenAddSubgroup Y) (hK : Antitone K)`, a corollary of `…_of_shrink` | the name is on the general statement: `{ι X Y : Type*}`, `[SFinite νY]`, `(K : ι → OpenAddSubgroup Y)`, no `hK`; **`ratio_prod_le_iSup_levels_of_shrink` deleted** |
+
+That is the two instance arguments of ruling 494 (a) and the seven of ruling 507 (a) — `[MeasurableAdd₂ _]` four times, `[T2Space Y]`,
+`[SigmaFinite νX]`, `(hK : Antitone K)` — with its two weakenings (`[IsFiniteMeasure νY]` to `[SFinite νY]`, the index `ℕ` to any type).
+
+**Callers.** None outside the two files, on this line, on `main`, or on the second pass's four branches (`origin/fs131-w10k`, `-w10d`,
+`-w10e`, `-w10f`: `git grep` finds the names only in `NegCircleModel`'s module docstring). Inside `StationaryRatio`: X25B-PZ's proof
+calls X25B-P in each factor (two lines, the name alone changed), and two Spec examples instantiated X25B-L1 with an antitone proof
+(`antitone_const`, `cantorLevel_antitone`) that the statement no longer takes — both now pass the family alone, and an example
+`Antitone cantorLevel := cantorLevel_antitone` keeps the fact that the Cantor levels do decrease. `cantorLevel_antitone` itself stays
+a theorem. **`scripts/Axioms.lean`**: the three twins' records deleted (4,046 − 3 = 4,043 `#print axioms` lines) and the block's
+heading says the twins were folded.
+
+**Docstring lines** (the brief's item 3, and the reports' "what the join must know"):
+- each of the three rows carries its row's words, the class its proof reads, and **the inhabitant of its hypotheses by name**
+  (`StationarySet.parity` with `map_neg_dirac_one` and `parity_aeIndependent`; `ZMod 2 × ZMod 2`; `cantorLevel` with
+  `exists_cantorLevel_subset`) — each instantiated there in the file's Spec section, which elaborates;
+- `StationaryRatio`'s module docstring: the rows are at the class their proofs read; the inhabitants are named as the declarations
+  they now are;
+- **`sp_if`'s docstring, the sentence `LEAN.md` § The gate asks**: "`hcirc : I.NegCircle` has no Lean model on file:
+  `Interface.trivial` meets `MulStable` (its `E` is empty) and, with that point mass for `ν`, the measure hypotheses, and no
+  declaration proves `NegCircle` of it or of any interface — one is planned at `F = ℚ` by the parity character
+  (`negCircle_trivial_bot`, `Arith/NegCircleModel`, on the wave's second pass and not on this line), and until it lands this theorem
+  is an open gate item under the inhabitant rule". The module docstring's inhabitants paragraph says the same in one line;
+- `spectral_carried_iff`'s docstring says that `μ` need not be a probability measure.
+
+### 3.2 Exactly the ruled statements changed, by script
+
+- **`tools/fs131_l10a_statements.py delta 77e1f077 --changed <the five> --removed <the three twins>`** over the four files
+  (`data/fs131/l10a/statements-tidies.txt`): 320 declarations before, 317 after; **statements changed: exactly the five; removed:
+  exactly the three twins; added: none; a docstring changed with its statement unchanged: none.** PASS, exit 0. Three controls on
+  the same run, each exit 1: one ruled change left off the list (`CHANGED, not ruled: …sp_if`); a twin not listed as removed
+  (`REMOVED, not ruled`); the ruled list given against an unchanged file (`NOT-CHANGED`, `NOT-REMOVED`, eight faults).
+- **Each change has the ruled shape** (`tools/fs131_l10a_tidyshape.py --self-test 77e1f077`; `data/fs131/l10a/tidyshape.txt`, exit
+  0): each row's statement is now its twin's statement of `77e1f077` with the name alone substituted, and the twin is gone; `sp_if`
+  and `spectral_carried_iff` are their old statements with the one instance argument cut and nothing else; none of
+  `MeasurableAdd₂`, `T2Space`, `SigmaFinite νX`, `Antitone`, `IsFiniteMeasure νY`, `ℕ → OpenAddSubgroup` is in a row. Three plants,
+  each fired: `[T2Space Y]` put back (ARG-KEPT), a row's conclusion changed (ROW-SHAPE), another instance argument put into `sp_if`
+  (CUT-SHAPE).
+
+So the proofs of the three rows are the proofs I10B's general forms had — moved, not rewritten — and the proofs of `sp_if` and
+`spectral_carried_iff` lost one `have` each.
+
+### 3.3 `ARCHITECTURE.md`
+
+The four rows rewritten (`data/fs131/l10a/arch_rows.py`): `Arith/SpectralInputs`, `Arith/StationaryRatio`, `Arith/StandingFive` read
+"**FS-131 wave 10 (FS131-K10; proved by FS131-I10A / -I10B / -I10C), no `sorry`.**" in place of "skeleton", each with what was added
+and which named hypotheses it rests on; `Arith/CharacterColouring`'s "Skeleton leaf" clause now says the leaf is proved. Every
+backticked declaration name in the four rows is declared in its module (`data/fs131/l10a/arch-rows.txt`: 13, 27, 11, 28 names, 0
+missing; the look-up's control, a cited name misspelt, fired). `tools/check_architecture.py`: `RESULT: PASS`, exit 0
+(`arch-tidy.txt`).
+
+### 3.4 The build and the checks of this stage
+
+- **Iteration first, on scratch copies** (`data/fs131/l10a/scratch/SR.lean`, `SI.lean`: the two files with `tidy.py` applied,
+  elaborated by `lake env lean` with both auto-implicit options off, under the slot — exit 0, no message; with `#lint` appended, "0
+  errors in 69 declarations" and "0 errors in 93 declarations", 14 linters). The real files are `cmp`-identical to those copies.
+  Iteration, not evidence.
+- **The build** (`data/fs131/l10a/build-tidy.log`; the tree was `77e1f077` with this stage's edits uncommitted, as the log's `DIRTY`
+  lines say): **`build: OK — 451 of 451 batches, 3 module(s) rebuilt, 0 module(s) with warnings, 9m44s`, `exit=0`**; the full log
+  (`build-tidy-full.log`) holds 0 `warning` lines and ends "Build completed successfully (5756 jobs)"; rebuilt:
+  `Arith.StationaryRatio`, `Arith.SpectralInputs`, `Proofs`. So no unused-argument or unused-variable warning arose from the cuts.
+- **The 24 leaves and compositions again, on the tidied tree** (`axioms-leaves-tidy.log`, `leaves-tidy.txt`): all 24 on exactly the
+  standard three; the control shows `sorryAx`.
+- `sorry` by the gate's narrow pattern over `Proofs/`: 0 lines.
+- **The named hypotheses, read from the signatures** (`tools/fs131_l10a_hyps.py`, `data/fs131/l10a/hyps-tidy.txt`; self-test: a
+  binder reads HYP, a conclusion reads CONCL, a docstring mention reads nothing): of the 244 theorems of the four files, **eleven
+  take a named hypothesis** — the table is in the drafts (Stage 6).
+
+## Stage 3 — SAVED (FS131-L10A)

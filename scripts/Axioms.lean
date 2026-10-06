@@ -4863,8 +4863,9 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.CharacterColouring.exists_ratLinear_extension
 #print axioms HadwigerNelson.CharacterColouring.mem_archimedean_unitRing_iff
 
-/-! ## FS-131 wave 10 (job FS131-I10B) — the stationary ratio: X25B-P, X25B-PZ, X25B-L1, their forms at the class the
-proofs read, the toolkit, and the models (`StationarySet.parity`, `cantorLevel`) -/
+/-! ## FS-131 wave 10 (job FS131-I10B) — the stationary ratio: X25B-P, X25B-PZ, X25B-L1 (each at the class its proof
+reads: the `_of_symm` / `_of_shrink` twins were folded into the rows at the join, FS131-L10A, ruling 507 (a)), the toolkit,
+and the models (`StationarySet.parity`, `cantorLevel`) -/
 -- FS131-I10B
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul
 #print axioms HadwigerNelson.StationaryRatio.ratio_prod_le
@@ -4888,9 +4889,7 @@ proofs read, the toolkit, and the models (`StationarySet.parity`, `cantorLevel`)
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.prod_apply_corr
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.measurable_corr
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.aeIndependent_iff
-#print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul_of_symm
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio
-#print axioms HadwigerNelson.StationaryRatio.ratio_prod_le_of_symm
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.measurableSet_majority
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.ae_majority
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.measure_le_majority_add
@@ -4902,7 +4901,6 @@ proofs read, the toolkit, and the models (`StationarySet.parity`, `cantorLevel`)
 #print axioms HadwigerNelson.StationaryRatio.lintegral_prod_conv_cosetAverage
 #print axioms HadwigerNelson.StationaryRatio.tendsto_measure_symmDiff_shift
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_level_add
-#print axioms HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels_of_shrink
 #print axioms HadwigerNelson.StationaryRatio.ratio_dirac_le
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.parity_prob
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.parity_aeIndependent
