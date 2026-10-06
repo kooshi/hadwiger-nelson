@@ -1,0 +1,16 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 8,9,10,11,12,13,14,15
+==> build: this run's full output: build/gate/build/20261006T125530Z-4155157.log
+    ⚠ [5654/5806] Replayed Proofs.HadwigerNelson.Plane.Saturated.MapColouring
+    warning: Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean:194:8: declaration uses `sorry`
+    ⚠ [5655/5806] Replayed Proofs.HadwigerNelson.Plane.Saturated.Pinch
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:131:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:140:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:150:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:162:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:169:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:218:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:237:8: declaration uses `sorry`
+    All targets up-to-date (5806 jobs).
+==> build: OK — all 1799 modules already up to date, nothing built, 2 module(s) with warnings, 9s
+    full output: build/gate/build/20261006T125530Z-4155157.log
+EXIT 0

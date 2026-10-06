@@ -1,0 +1,47 @@
+'HadwigerNelson.Plane.norm_sq_mul_sub_of_norm_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_add_mul_lt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.one_lt_dist_add_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_add_mul_mem_of_isOpen' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.real_inner_lt_one_of_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.neg_one_lt_real_inner_of_ne_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.subset_of_isOpen_ae_le_isClosed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.pinch_not_in_in' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isSplitAt_of_in_out' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.hasTwoDiscsAt_of_out_out' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.pinch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.densityRatio_add_of_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.TwoColourOn.essBoundary_inter_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.TwoColourOn.essBoundary_inter_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsSplitAt.hasTwoDiscsAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.c11_discs' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.densityRatio_eventuallyEq_of_ae_eq_inter' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.essBoundary_inter_congr' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_essBoundary_of_balls' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_ball_subset_ball_of_mem_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_ball_subset_compl_closedBall_of_mem_sphere' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.essBoundary_ball_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.essBoundary_compl_closedBall_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.c11_split' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.half_sq_norm_le_inner_of_mem_closedBall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.inner_le_half_sq_norm_of_notMem_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.volume_halfPlane_inter_closedBall_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.volume_shifted_halfPlane_inter_closedBall_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.densityRatio_le_of_subset_halfPlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.tendsto_ofReal_one_add_sq_div_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.half_upperDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sq9_isTangentAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_sqEdgePt_add_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isSplitAt_ball_compl_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.pinch_interface' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.c11_discs_interface' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.TwoColourNhd.mem_essBoundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/data/fs131/i6a/AxiomsScratch.lean:43:8: warning: declaration uses `sorry`
+'HadwigerNelson.Plane.fs131I6aPlantedSorry' depends on axioms: [sorryAx]
