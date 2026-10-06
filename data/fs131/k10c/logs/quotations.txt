@@ -1,0 +1,36 @@
+MATCH   '- **A milestone may assume the literature** (Kooshi, 2026-10-03). A pu'  in LEAN.md
+MATCH   "Do not consider Lean formalization a cost. It's practically mechanical"  in CLAUDE.md
+MATCH   "500. **FS131-K10b, by message mid-job, before stating the floor's impo"  in plans/FS131-close-inventory.md
+MATCH   '515. **Kooshi saved the two papers asked of him (item 500); both are i'  in plans/FS131-close-inventory.md
+MATCH   "510. **Rulings on K10b's held items, and its slot.** (a) **Three imple"  in plans/FS131-close-inventory.md
+MATCH   '520. **Rulings on I10C\'s held items, and its slot.** (a) **"347 is att'  in plans/FS131-close-inventory.md
+MATCH   "507. **Rulings on I10B's held items, and its slot.** (a) **The seven u"  in plans/FS131-close-inventory.md
+MATCH   "535. **FS131-L10A done: wave 10's first pass is on `main` through the "  in plans/FS131-close-inventory.md
+MATCH   "### 7.3 What each wave's planning job must hold"  in plans/FS131-kernel-plan.md
+MATCH   '3. **States every row at the class its argument reads** (G92), reports'  in plans/FS131-kernel-plan.md
+MATCH   '4. **Names every hypothesis from outside the backlog** in the declarat'  in plans/FS131-kernel-plan.md
+MATCH   '| **[Weil1948]** | A. Weil, *On some exponential sums*, Proc. Nat. Aca'  in BIBLIOGRAPHY.md
+MATCH   'def KloostermanBound (F : Type*) [Field F] [Fintype F] [DecidableEq F]'  in .claude/worktrees/fs131-w10k/Proofs/HadwigerNelson/Arith/FloorPlanes.lean
+MATCH   'theorem kloostermanBound_of_card_le_five {F : Type*} [Field F] [Fintyp'  in .claude/worktrees/fs131-w10k/Proofs/HadwigerNelson/Arith/FloorPlanes.lean
+MATCH   'theorem targetFloor_seven_of_kloosterman {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ'  in .claude/worktrees/fs131-w10k/Proofs/HadwigerNelson/Arith/FloorPlanes.lean
+MATCH   'theorem standingFloor_seven'  in .claude/worktrees/fs131-w10k/Proofs/HadwigerNelson/Arith/TargetFloors.lean
+MATCH   'theorem standingFloor_five'  in .claude/worktrees/fs131-w10k/Proofs/HadwigerNelson/Arith/TargetFloors.lean
+MATCH   'theorem seven_le_localBound_of_kloosterman'  in .claude/worktrees/fs131-w10k/Proofs/HadwigerNelson/Arith/TargetFloors.lean
+MATCH   '### 7.3 Row (ii) — the planes: `targetFloor_seven_of_kloosterman`, ove'  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   '**The exact statement the hypothesis carries** (`Arith/FloorPlanes.lea'  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   '**Which fields it must cover**: `standingFloor_seven` asks it at every'  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   '**Draft for `ARCHITECTURE.md` § Trust** (for the day the bound is an a'  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   '- **An imported theorem carries four things**, because an axiom that m'  in LEAN.md
+MATCH   '  1. its docstring names its `BIBLIOGRAPHY.md` key, the section and th'  in LEAN.md
+MATCH   "  2. its Lean statement is read back against the paper's own wording, "  in LEAN.md
+MATCH   '  3. one model of its hypotheses — a `theorem` or `example` in the sam'  in LEAN.md
+MATCH   '  4. a line in `ARCHITECTURE.md` § Trust, as a declared purchase.'  in LEAN.md
+MATCH   '### 8.3 J45-SI-C and J45-SI-5 — the finite facts proved; the measure-t'  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   '**Not stated — where K10c takes over.** Both rows are statements about'  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   '### 8.4 J45-N1 (a), (b) — not stated'  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   'Stating `τ′_S` needs the `S`-adic completions of `L` at split places a'  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   "### 8.7 The new row (ruling 507 (b)): X25B-L1's levels against the fin"  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   "It belongs to the wave: the row's words are about the graphs on `Y/K_k"  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   "### 8.6 The second implementer's statements read back (the coordinator"  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+MATCH   '### 9.4 For the joining job'  in .claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md
+35 match, 0 do not

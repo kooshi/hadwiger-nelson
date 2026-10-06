@@ -743,3 +743,39 @@ under a minute; proved here 0.2): the certificate is 2.3 s; the bridge re-priced
 (ii) one job; the import statable here, 0.6 then 0.85): **no — ruled a named hypothesis**, because the held paper's theorem is false as
 printed in a case; the registration did not price that. Y9 (avoidable at 347, 0.1): **no**, with the bound's constant computed. Y10
 (`NegCircle` model proved here, 0.35): **no**; the candidate checks on paper.
+
+---
+
+# FS131-K10c — wave 10's third planning pass (stages 10 on)
+
+*Job FS131-K10c (de Bruijn, the planner), 2026-10-06, branch `fs131-w10k` (from `330d2f48`). Brief:
+`data/fs131/briefs/FS131-K10c-wave10-third.md`. Stages 1–9 above are FS131-K10's and FS131-K10b's and are not changed.*
+
+**What I may change, and what I may not.** Mine: the two merges the brief names (`origin/main`, then `d4adcd40`); **new modules only**
+under `Proofs/HadwigerNelson/Arith/` — the import in a module of its own, which imports the floor's modules and which nothing imports
+back — with their lines in `Proofs.lean` and `ARCHITECTURE.md` (§ Trust for the import's line, and `Floor128`'s row for its new import,
+ruling 543 (c)); a block "FS131-K10c" in `scripts/Axioms.lean` and the import's `declareImport` line in its IMPORTED section; this record
+from here down; `tools/fs131_k10c_*.py`; `data/fs131/k10c/`; the report. Not mine: the wave's fourteen existing modules (the first pass's
+four come from `main` whole; the second pass's ten are fixed, and a statement I need there is a message), any landed module beyond new
+declarations, `main`, the gate, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`, `BIBLIOGRAPHY.md` (drafts here), any merge beyond the two.
+
+## Theorems this phase proved (FS131-K10c)
+
+Listed at the last saved stage (§ "Theorems" is rewritten there); until then: none.
+
+## Stage 10 — SAVED (FS131-K10c): the readback and the branch as given
+
+- **The brief's quotations** (standing rule 3): by script, `data/fs131/k10c/logs/quotations.py` (each quoted line looked up as a plain
+  substring of the file its source line names; output `data/fs131/k10c/logs/quotations.txt`): **thirty-five of thirty-five match** —
+  `LEAN.md` (six), `CLAUDE.md` § Counter-priors, inventory items 500, 515, 510, 520, 507, 535, the plan's § 7.3 heading and items 3, 4,
+  `BIBLIOGRAPHY.md`'s `[Weil1948]` row, the six Lean heads in `FloorPlanes` and `TargetFloors`, and the second pass's §§ 7.3, 8.3, 8.4,
+  8.6, 8.7, 9.4.
+- **Read whole**: the brief; `plans/STANDING-RULES.md`; `LEAN.md`; `RUNNING.md` § Building and § Make the gate fail; Stages 1–9 above;
+  inventory items 500, 507, 510, 515, 520, 535, 538, 541, 542, 543; the plan's §§ 7.1–7.5; `FloorPlanes`, `NormOneTarget`,
+  `TargetFloors` as given (`RatioBound` and `StandingFive` by their declaration heads). `[Weil1948]` pp. 204–207 from the held PDF, the
+  page images, and pp. 206–207 again at 300 dpi (Stage 12).
+- **The branch as given** (`330d2f48`): `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, exit 0, "all
+  1781 modules already up to date, nothing built, 8 module(s) with warnings"; 23 `declaration uses sorry` lines — `StandingFive` 9,
+  `StationaryRatio` 3 (proved on `main`, not yet on this branch), `FloorPlanes` 4, `NormOneTarget` 2, `Floor128` 1, `ProductFactor` 1,
+  `MajorityVote` 1, `NegCircleModel` 2 (`data/fs131/k10c/logs/build-0-as-given.log`, `.exit`). The count agrees with the second pass's
+  § 9.1.
