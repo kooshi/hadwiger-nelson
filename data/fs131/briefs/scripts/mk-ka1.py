@@ -48,6 +48,8 @@ pricing this work:
 {KOOSHI}
 The findings and rulings that launch you:
 
+{item(437)}
+{item(438)}
 {item(433)}
 {item(434)}
 {item(429)}
@@ -78,6 +80,7 @@ at an isolated contact, with an exact curvature threshold):
 IA1's reading, which chose this form (read its Stage 3 whole, and Stage 4 when it is there):
 
 {Q(IA,"## Stage 3 — SAVED (FS131-IA1): the reading")}
+{Q(IA,"### 4.3 The assembly's work list")}
 Wave 4's `bend_away` — the same conclusion without the homeomorphism, left `sorry` — is on branch `fs131-w4ba` at `71cca146` (no worktree; read it with
 `git show`), with the fragment `isoFrag`, the hand model with one isolated contact.
 
@@ -94,14 +97,17 @@ Wave 4's `bend_away` — the same conclusion without the homeomorphism, left `so
    arc step's `∃ j' ≤ j` form, which is all the assembly reads; (iii) every other clause against N2-AWAY, N2-TAN and E5's end case — the tangent lens
    at a contact end must lie between `ω(P)` and the unit circle about the contact, so its radius is above `1`: is every clause still true there?
    A clause that is false, or true only by a step with no hand derivation, is a message to me at once, with the configuration; a weaker statement
-   that the assembly can still read (IA1's work list says what it reads) is yours to propose in the same message.
+   that the assembly can still read (IA1's § 4.3 says what it reads) is yours to propose in the same message. **One weakening is pre-ruled**
+   (inventory item 438 (b)): the horn clause may become the arc step's `∃ j' ≤ j` form without a round trip — say so in one line when you do it.
+   A sibling job, FS131-IA2, will build the arc step's assembly over these clauses in a module of its own, so any other change to the clause
+   family reaches me the moment you decide it.
 3. **The skeleton**: `bend_away_part` reduced to named children with `sorry` at each, in new modules upstream of `BendStep`, building through the
    worktree's `./scripts/build.sh` with only `sorry` warnings; `Proofs.lean`, `ARCHITECTURE.md` (`tools/check_architecture.py` exit 0) and
    `scripts/Axioms.lean` updated; no statement of a proved declaration changed (checked by script, with a plant that fires); no new `axiom`, no
    `native_decide`. Say which of the toward bend's children are reused as they stand, which generalize to both directions (and whether that is worth
    doing now or is a tidy move), and which are new.
-4. **`CollarFit.map_hornCount_le`**: a plan (it needs the bent map's chart at an end, which the degree's proof avoided), or its proof if it is
-   short — unless IA1's hand-back says it is already proved.
+4. **`CollarFit.map_hornCount_le`** (open at IA1's hand-back): a plan (it needs the bent map's chart at an end, which the degree's proof
+   avoided), or its proof if it is short. The away bend needs the same fact, so plan the two together.
 5. **Your record**, `plans/FS131-bendaway-kernel-plan.md`: a plan per child (route, the Mathlib and library lemmas confirmed with `#check`, what is
    hard, a price), the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), **the inhabitant** — a named Lean object, or its plan,
    satisfying every hypothesis of `bend_away_part` at once on a plane map, with a radius-2 contact so that the last clause is exercised (`LEAN.md`

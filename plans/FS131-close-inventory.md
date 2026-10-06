@@ -4084,3 +4084,42 @@ reason by the close.*
      (ruling 432 (f) revised: the tree is quiet between IR2 and IR3; a trial merge by `git merge-tree` shows one conflict, `scripts/Axioms.lean`,
      keep-both). (e) **Ruling 421 (c)'s named forms** (the moves' maps exposed) are the cases', as new declarations in the move modules. (f) **Slot
      → FS131-IR3**, launched 2026-10-06. In flight: 1 (IR3) + 1 (IA1) + 1 (E7) = 3. Next freed slot: FS131-KA1 (ruling 434 (a)), then FS131-KM1.
+
+437. **FS131-IA1 done at its Stage 4: wave 5's two lines joined on `fs131-w5a`; question (5) proved; the arc step's toward half prepared; one bend
+     and one horn lemma left open, both stated** (implementer; harness ≈ 459k by the task notice; record `fs131-w5a`'s
+     `plans/FS131-arcstep-implementation.md` Stages 1–4, § 3.6 the repaired statement, § 4.3 the assembly's work list; report
+     `data/fs131/reports/FS131-IA1.md` on that branch; commits `661cafaf`, `90030972` (the merge), `43785c25`, `14d907c8` (the Lean source the build
+     read), `78eba0b4`; pushed, tree clean). **Results**, all in the new module `Plane/ValidMap/BendStep` (341 lines), on the standard three:
+     question (5) for every bend by a homeomorphism fixing `Γ` off the open arc (`isR2Arc_of_fixed`, with `r2_notMem_region`,
+     `radiusTwoArc_inter_dom_subset_Γ` — an (R2) witness arc lies in `Γ` wherever it lies in the domain, which is the argument that closes, not
+     KL1's sketch — `radiusTwoArc_disjoint_openArc`, `CollarFit.map_isR2Arc`); `IsRingArc.free_of_isClean` (the collar bend's `hfree` from
+     cleanness); `CollarFit.map_isClean` (a collar bend of a clean map is clean: the arc step needs no cleaning); `CollarFit.map_degree_le` (ruling
+     430 (a)'s clause for the collar bend); the no-go `Γ_eq_of_degree_clause`. **Open, stated**: `bend_away_part` (item 433) and
+     `CollarFit.map_hornCount_le`. **Not done from its Done-means 4**: `LocalStep` on the closed thickening for the collar bend (two `cutArcs`
+     lemmas, W1 and W2, stated in the work list) and "no site created" (waits on the horn child and W6). **The assembly's work list** (record
+     § 4.3): items 0–10, with seven owed lemmas W1–W7; item 10 — one assembly for both bends, stated once over `bend_away_part`'s clauses, which the
+     toward bend satisfies but for the horn count as an iff. Prices: the assembly M–H, one session; the horn child M; `bend_away_part` H, a planner
+     pass then one to two sessions. **My receipt**: tip equals `origin/fs131-w5a`; the build log `build/gate/build/20261006T050543Z-1193250.log`
+     ends "Build completed successfully (5796 jobs)", 0 warnings other than `sorry`, 5 distinct `sorry` warnings (`BendStep` 2, `Procedure` 2,
+     `Terminal` 1 — so the stale copies of the density half are gone from this line); `BendStep`'s `sorry` by the handoff's grep: 2;
+     `data/fs131/ia/IAAxioms4.out` parsed by script, 13 records: 10 on exactly the standard three (the nine new theorems and
+     `bend_toward_collar`), 3 with `sorryAx` alone beyond them (`CollarFit.map_hornCount_le`, `bend_away_part`, `exists_arcStep`);
+     `isR2Arc_of_fixed`'s statement read against the planner's question (5). **Items**: corrections owed — KL1's § 3.1 and § 3.3 rows and
+     `exists_arcStep`'s docstring (the step is a collar bend, uncleaned; not `bend_toward`/`bend_away_whole` "then `exists_clean`"); item 422's
+     remark (item 430 (d)). Generalization — `isR2Arc_of_fixed` and `r2_notMem_region` read no collar. Open gate item — no Lean model named for an
+     (R2) witness at a ring arc of a valid map, nor for a clean map carrying a ring arc (`BendStep`'s header; ruling 427 (d), F3). Question for
+     another lane — the vertex step and the arc step both need "a horn at `x` iff horn count at least 1" at a chart (`Near.hasHornCount_chart`,
+     `Near.horn_index`): one lemma, W6. Slips and a tool defect, the job's, each caught by its own check (record §§ 2.1, 4.2).
+438. **Rulings on IA1's held items, and its slot.** (a) **`CollarFit.map_hornCount_le` goes to the outward bend's planner, FS131-KA1** (ruling
+     434 (c) stands): the away bend needs the same fact. Alternative: the assembly's implementer. Confidence: high. (b) **`bend_away_part`'s horn
+     clause may be weakened by KA1 to the arc step's `∃ j' ≤ j` form without a round trip** — pre-ruled; KA1 says so in one line. Alternative: keep
+     the iff. Why: the assembly reads only the `≤` form (IA1's work list, item 3), and IA1 flags the iff as possibly costly at a pinch point.
+     Confidence: high. (c) **The arc step's assembly is split in two**: an abstract part in a module of its own on wave 5's arc line — the step's
+     conclusion from the clauses a bend exports, stated once over the weakest clauses the assembly reads, with W1–W7 and the toward case — which
+     needs neither `Procedure.lean` nor `bend_away_part`'s proof, so it can run beside the other jobs; and the last lines in `Procedure`, for
+     whoever holds that file then. Alternative weighed: one assembly job after everything else. Why: the abstract part is a session of work on
+     the landing path that waits on nothing. It takes the slot after KA1's (ahead of FS131-KM1, by ruling 434 (a)'s reason), as FS131-IA2, on a
+     branch cut from `fs131-w5a` at `78eba0b4`, new module only. Confidence: medium-high; it changes if KA1's readback changes the clause family,
+     in which case IA2's interface follows it. (d) **W6** (a horn iff horn count at least 1, at a chart) is IA2's, and IR3 is told of it only if
+     its cases ask. (e) **The three doubled statements**: the final sync (ruling 434 (d)). (f) **Slot → FS131-KA1**, launched 2026-10-06 on
+     `fs131-w5a`. In flight: 1 (IR3) + 1 (E7) + 1 (KA1) = 3. Queue: FS131-IA2, then FS131-KM1.

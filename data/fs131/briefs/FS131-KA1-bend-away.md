@@ -5,7 +5,7 @@
 brief: FS131-KA1
   identity: de Bruijn, the planner — your agent file (`.claude/agents/debruijn.md`) is your identity and your lane's workflow
   role: plan the one bend the arc step needs that is proved nowhere — attack its statement first (two points its author did not check), then lay `bend_away_part` out as named children with `sorry` at each over the collar machinery the toward bend was built on, read each back, a plan and a price per child, the obligation pass, its hypothesis set's inhabitant on a plane map, and a handoff that can split the work between two implementers; plan or prove the second open child `CollarFit.map_hornCount_le`; prove a child yourself where it is short
-  launch: now, in the tree FS131-IA1 has handed back, beside FS131-IR2 (the vertex step, on `fs131-w5c`, which holds `Procedure.lean`) and FS131-E7 (a deriver, on `main`)
+  launch: now, in the tree FS131-IA1 has handed back (`fs131-w5a` at `78eba0b4`), beside FS131-IR3 (the vertex step's cases, on `fs131-w5c`, which holds `Procedure.lean`) and FS131-E7 (a deriver, on `main`)
   mission: § Why this job
   statements: § The statements
   acceptance: § Done means
@@ -14,7 +14,7 @@ brief: FS131-KA1
   channel: message the coordinator ("main") by SendMessage mid-job for a clause of `bend_away_part` that is false or that the construction cannot meet (at once: the arc step's assembly reads this statement), a step with no hand derivation behind it (a deriver takes it), a piece of the collar machinery that is private where you need it, or a question you cannot work around; the report goes to `data/fs131/reports/FS131-KA1.md` on your branch, and its text is your final message (if the harness refuses that file, say so and the coordinator files it from your hand-back)
   standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full, and `RUNNING.md` § Building before your first build
   record: `plans/FS131-bendaway-kernel-plan.md` (new, on branch `fs131-w5a`)
-  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5a` (branch `fs131-w5a`, at `43785c25` when this brief was written): `Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean` (the two open children — `bend_away_part`'s proof from your children, `CollarFit.map_hornCount_le`; `bend_away_part`'s statement only after a message to me) and new modules upstream of it for the outward bend, with `Proofs.lean` and `ARCHITECTURE.md` for them; **new declarations only** in `RadialPush`, `CollarMap`, `Pushforward`, `BendCollar` and `UnitArc` (a named form that exposes a construction, or a `private` helper made public — no landed or proved statement or definition changed; ruling 421 (c)); `scripts/Axioms.lean` (a block of your own, headed "FS131-KA1", above the `=== PURCHASED ===` banner), `plans/FS131-bendaway-kernel-plan.md`, `tools/fs131_ka_*.py`, `data/fs131/ka/`, `data/fs131/reports/FS131-KA1.md`; **not** `Procedure.lean` (FS131-IR2 is proving the vertex step in it on `fs131-w5c`; the arc step's assembly there is a later job's), `Terminal.lean`, the move modules, `main`
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5a` (branch `fs131-w5a`, at `78eba0b4` when this brief was written): `Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean` (the two open children — `bend_away_part`'s proof from your children, `CollarFit.map_hornCount_le`; `bend_away_part`'s statement only after a message to me) and new modules upstream of it for the outward bend, with `Proofs.lean` and `ARCHITECTURE.md` for them; **new declarations only** in `RadialPush`, `CollarMap`, `Pushforward`, `BendCollar` and `UnitArc` (a named form that exposes a construction, or a `private` helper made public — no landed or proved statement or definition changed; ruling 421 (c)); `scripts/Axioms.lean` (a block of your own, headed "FS131-KA1", above the `=== PURCHASED ===` banner), `plans/FS131-bendaway-kernel-plan.md`, `tools/fs131_ka_*.py`, `data/fs131/ka/`, `data/fs131/reports/FS131-KA1.md`; **not** `Procedure.lean` (FS131-IR2 is proving the vertex step in it on `fs131-w5c`; the arc step's assembly there is a later job's), `Terminal.lean`, the move modules, `main`
   budget: about 400k by the harness's count, as guidance; hand back at a saved stage before about 500k — read your token count at every saved stage
 
 Hello. You are planning the last construction on wave 5's path that nobody has laid out. The milestone, FS-131, turns this project's hand-derived
@@ -36,6 +36,12 @@ pricing this work:
 > — source: CLAUDE.md § Counter-priors — read before pricing anything (Kooshi, 2026-09-26)
 
 The findings and rulings that launch you:
+
+> 437. **FS131-IA1 done at its Stage 4: wave 5's two lines joined on `fs131-w5a`; question (5) proved; the arc step's toward half prepared; one bend
+> — source: plans/FS131-close-inventory.md
+
+> 438. **Rulings on IA1's held items, and its slot.** (a) **`CollarFit.map_hornCount_le` goes to the outward bend's planner, FS131-KA1** (ruling
+> — source: plans/FS131-close-inventory.md
 
 > 433. **FS131-IA1, by message: the arc step needs one bend that is proved nowhere, and its statement is fixed** (`bend_away_part`, `sorry`, in
 > — source: plans/FS131-close-inventory.md
@@ -97,6 +103,9 @@ IA1's reading, which chose this form (read its Stage 3 whole, and Stage 4 when i
 > ## Stage 3 — SAVED (FS131-IA1): the reading — `exists_arcStep` clause by clause against the bends
 > — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5a/plans/FS131-arcstep-implementation.md
 
+> ### 4.3 The assembly's work list — what `exists_arcStep`'s proof in `Procedure` still needs, clause by clause
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5a/plans/FS131-arcstep-implementation.md
+
 Wave 4's `bend_away` — the same conclusion without the homeomorphism, left `sorry` — is on branch `fs131-w4ba` at `71cca146` (no worktree; read it with
 `git show`), with the fragment `isoFrag`, the hand model with one isolated contact.
 
@@ -113,14 +122,17 @@ Wave 4's `bend_away` — the same conclusion without the homeomorphism, left `so
    arc step's `∃ j' ≤ j` form, which is all the assembly reads; (iii) every other clause against N2-AWAY, N2-TAN and E5's end case — the tangent lens
    at a contact end must lie between `ω(P)` and the unit circle about the contact, so its radius is above `1`: is every clause still true there?
    A clause that is false, or true only by a step with no hand derivation, is a message to me at once, with the configuration; a weaker statement
-   that the assembly can still read (IA1's work list says what it reads) is yours to propose in the same message.
+   that the assembly can still read (IA1's § 4.3 says what it reads) is yours to propose in the same message. **One weakening is pre-ruled**
+   (inventory item 438 (b)): the horn clause may become the arc step's `∃ j' ≤ j` form without a round trip — say so in one line when you do it.
+   A sibling job, FS131-IA2, will build the arc step's assembly over these clauses in a module of its own, so any other change to the clause
+   family reaches me the moment you decide it.
 3. **The skeleton**: `bend_away_part` reduced to named children with `sorry` at each, in new modules upstream of `BendStep`, building through the
    worktree's `./scripts/build.sh` with only `sorry` warnings; `Proofs.lean`, `ARCHITECTURE.md` (`tools/check_architecture.py` exit 0) and
    `scripts/Axioms.lean` updated; no statement of a proved declaration changed (checked by script, with a plant that fires); no new `axiom`, no
    `native_decide`. Say which of the toward bend's children are reused as they stand, which generalize to both directions (and whether that is worth
    doing now or is a tidy move), and which are new.
-4. **`CollarFit.map_hornCount_le`**: a plan (it needs the bent map's chart at an end, which the degree's proof avoided), or its proof if it is
-   short — unless IA1's hand-back says it is already proved.
+4. **`CollarFit.map_hornCount_le`** (open at IA1's hand-back): a plan (it needs the bent map's chart at an end, which the degree's proof
+   avoided), or its proof if it is short. The away bend needs the same fact, so plan the two together.
 5. **Your record**, `plans/FS131-bendaway-kernel-plan.md`: a plan per child (route, the Mathlib and library lemmas confirmed with `#check`, what is
    hard, a price), the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), **the inhabitant** — a named Lean object, or its plan,
    satisfying every hypothesis of `bend_away_part` at once on a plane map, with a radius-2 contact so that the last clause is exercised (`LEAN.md`
