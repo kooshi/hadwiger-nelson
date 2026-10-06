@@ -105,3 +105,127 @@ the written derivations and their checks will confirm, not priors formed cold. E
 | P3b | Q3b: neither a model nor a contradiction is reached in this job; if decided later, a model exists | 0.7 that it stalls here; 0.6 for a model, given a decision | whether `hnb` is idle (it is, if Q3b is contradictory) |
 | P4 | Q4: a model at `k = 9`, two fresh colours planted in `sevenBrickMap`, each shadow coming from a horn at the pole on the far side; no contradiction | 0.85 | whether `flank_ne_of_doublyShadowed` is empty where N4-STUCK reads it |
 | P5 | Q5: yes, at `k = 12`: a small bowtie planted in three bricks of `sevenBrickMap`, terminal because no other point has a repeated colour or a horn | 0.75 | the bearing line for `plans/STUB-stuck-ray.md` and the stuck family's docstrings |
+
+## Stage 2 — SAVED (FS131-E7): recognition, run on the five claims before any derivation
+
+`ephodos-recognition` invoked fresh. For each claim: the stall read, the problem written for a stranger, the features sorted with their
+receipts, the homes tried, the description that forces the answer. The derivations are §§ 3–7; a receipt marked (§ n) is discharged there.
+
+### 2.1 Q1–Q3, one object: "which sets of diameter 1 hold both a point and part of its unit circle?"
+
+**The stall read.** The audit's wording is "a result proved only at instances, and no instance": the three theorems were derived inside a
+proof by cases about six-coloured maps, and the only exact six-coloured objects with a four-colour vertex on file (the strip, the disk) have
+a covering pair at it, so branch 1 of the dichotomy had no example. The candidate handed down, `sixFrag`, is the costume's neighbour: it was
+named because it is the six-coloured fragment the library holds, not because its vertex has two absent colours (it has none).
+
+**For a stranger (a convex geometer).** Colour an open neighbourhood of the closed unit disc with `k` colours, the classes bounded by finitely
+many segments and circular arcs, no class holding two points at distance exactly 1. At the centre `v` exactly `k − 2` colours accumulate. Can
+the two others, `a` and `b`, each occur near the unit circle `ω(v)` without ever both accumulating at one of its points (Q1)? Can they both
+accumulate at a point `y′ ∈ ω(v)` while no boundary arc of the colouring runs along the unit circle about `y′` through the point of `ω(v)`
+`60°` before it (Q2)? With `k = 6`: can `ω(v)` pass from `a` to `b` across a single boundary point (Q3a), with the six points of its
+`60°`-orbit all off the boundary arcs lying along `ω(v)` (Q3b), or with no boundary arc along the unit circle about one orbit point through
+its neighbour (Q3c)? Words the reader stops at: none.
+
+**This is a** covering problem for sets of diameter at most 1. A class that accumulates at `v` and reaches `ω(v)` from inside is a set of
+diameter at most 1 holding points near `v` and near `ω(v)`; the widest such set is the open Reuleaux triangle on `v` and two points of
+`ω(v)` `60°` apart (the three open unit discs about the vertices of a unit equilateral triangle), whose cone at `v` is `120°` wide and whose
+share of `ω(v)` is `60°`. So the ring's inner side is covered by one `60°` petal per colour of `v` and the rest by the absent colours.
+
+**Features, sorted.**
+
+| feature | sort | receipt |
+|---|---|---|
+| "a colour of `v` occupies at most `60°` of the ring's inner side, and then its sectors at `v` lie in a `120°` cone" | determines | FS112-L60 and FS112-U1 (kernel: `UnitArc`'s L60, U1 families); the flower attains both (§ 3) |
+| the number of colours at `v` being `k − 2`, i.e. exactly two absent | determines, through its consequence "the inner side has `360° − 60°·(k − 2)` to give to two colours" | at `k = 6`: `120°`, in four gaps (§ 3.5: fewer gaps force a horn of an absent colour at `v`, three force three absent colours) |
+| `k = 6` itself | accompanies Q1 and Q2 (their statements are for every `k`); determines Q3 (`G : ArcMap 6` is in the statement) | a model of Q1 with idle colours at `k = 8` (§ 3.6) and one at `k = 6` (§ 3) |
+| "no covering pair", union sense | consumed only as: `cl(region a) ∩ cl(region b) ∩ ω(v) = ∅` | § 3.4 — the two closures are separated by the petals' `60°` arcs |
+| the strip and the disk as the examples | accompanies | both have covering pairs at their four-colour vertices (FS112-A4SIX's own note); neither is needed |
+| `sixFrag` as the candidate | accompanies | § 3.6: no point of it has exactly two absent colours and `Covers v 1` |
+| whether the absent colours appear on the ring at all | **unsorted by the statement** — `hno` holds vacuously when they are idle | § 3.6 names the degenerate model so that nobody takes it for the meant one |
+
+**Homes.**
+
+1. *Convex geometry: sets of constant width, Reuleaux's triangle.* Name there: a complete set of diameter 1 through `v`. What the field holds:
+   every set of diameter `d` lies in a set of constant width `d` (Pál's completion theorem — **recalled, not read**; nothing below rests on it:
+   the one fact used, that the open Reuleaux triangle has no two points at distance 1, is proved in § 3.2 in two lines). Dictionary: colour of
+   `v` reaching the ring ↔ petal; cone of the colour at `v` ↔ the triangle's `120°` corner; ring arc of `Γ` with that inner colour ↔ the
+   triangle's far side. Test "predicts a neighbour": yes — it predicts that four petals leave four `30°` gaps whose inner apexes are
+   `2·2 sin 15° = 1.0353…` apart across the centre, barely above 1, so the picture exists and is nearly rigid (§ 3.5). **Adopted.**
+2. *This project's own: FS112's (E1)/(E2) and the ring's `60°` twist (G91).* Name there: a four-colour vertex whose ring's change points are
+   saved by arcs of its own circle. It supplies the reading of Q3: Q3c is (E1) with no (E2), Q3b is (E2) with no (E1). It supplies no object.
+   **Kept as the checklist the object is read against** (the ring of § 3's flower carries (Q) arcs, as row 149 requires of any four-colour
+   vertex that lives past `1 + ε` in the non-Siamese class; the flower is non-Siamese).
+3. *The audit's planted picture (fresh colours on a brick background).* It would give Q1 and Q2 at large `k` at once and cannot give Q3
+   (`k = 6` is in the statement). **Killed for this group** by home 1 giving `k = 6`; it is the home of Q4 and Q5.
+
+**Where the recognition differs from the brief** (a finding, as the workflow asks): the brief's candidate and its inference ("a model inside
+[`sixFrag`] would sit at a point other than `0`") are both set aside — the model is a new fragment, a flower of four petals where `sixFrag`
+has six sectors. And the question the brief did not pose is the one the statement leaves open: whether the model's absent colours are live.
+
+### 2.2 Q4: "the unit parallel of a circular arc is the concentric arc"
+
+**The stall read.** A known calculus almost applies: the audit found flanks under Condition 5 (E6's map) and found the double shadow failing
+there. The misplaced feature is *where the shadows come from*.
+
+**For a stranger (a differential geometer).** Two disjoint open sets `g`, `h` in the plane, neither holding two points at distance 1. Near a
+point `v`, `g` fills the thin region just above a circular arc through `v` of curvature `κ₂`, and `h` the thin region just below a tangent
+arc of curvature `κ₁ < κ₂`, both curvatures strictly between `−1` and `1`. Can some thin region between two further tangent arcs lie, near
+`v`, both in the set of points at distance exactly 1 from `g` and in the set of points at distance exactly 1 from `h`? No boundary arc may
+have radius 1.
+
+**This is a** statement about parallel curves (offsets): the points at distance 1 from a circle of radius `R` are the concentric circles of
+radii `R ± 1`. An arc of upward curvature `τ` through the pole `S′ = v − n` has its unit parallel through `v` with curvature
+`τ/(1 − τ)`, and one through `N = v + n` with curvature `τ/(1 + τ)` — the library's `curvUp` and `curvDown` (`ValidMap/Basic.lean` l. 65–70).
+
+**Features, sorted.**
+
+| feature | sort | receipt |
+|---|---|---|
+| the shadow of `g` on the band comes from a `g`-region at the pole **below**, bounded above by an arc tangent to the axis | determines | § 6.2: a `g`-region at the upper pole shadows everything above its parallel, the flank of `g` included, against validity |
+| `−1 < κ₁`, `κ₂ < 1` and Condition 5 | determine only through "no arc of radius 1", which the parallels respect when the poles' arcs have curvature in `(−1/2, 1/2)` | § 6.1's curvatures `1/5`, `1/10`, `1/2`, `3/4` |
+| `g ≠ h` | the theorem's conclusion; a model has it by construction | — |
+| a horn of a third colour between the flanks | accompanies — the statement has no `IsHorn` | § 6.4 gives the variant with one |
+| the stuck vertex N4-STUCK reads the theorem at | accompanies the question (the reader's further hypotheses are declared refuted under Condition 5) | `Contact.lean` l. 2395's docstring |
+| the number of colours | accompanies | two fresh colours on any valid Condition-5 background |
+
+**Homes.** (1) *The project's N4-SHADOW calculus*, in Lean as `curvDown`/`curvUp` — adopted; the transfer's changed step: the calculus is
+second-order in the hand records, and here both validity and the shadows are made exact by concentric circles (a triangle inequality about
+a common centre; an intermediate-value step on one circle). (2) *E6's twelve-colour map* — killed by the audit itself (its shadows are
+complementary). (3) *The bowtie* — killed by `h1`, `h2` (its horn bounds are `±1`) and Condition 5.
+
+### 2.3 Q5: "with spare colours, a stuck vertex is a local picture and terminality is a statement about where pictures were drawn"
+
+**The stall read.** A wall that describes a counterexample: the audit asks what the *completed bowtie* would have to satisfy everywhere. The
+description that moves it asks what `Terminal` reads at a point at all.
+
+**For a stranger (a combinatorial geometer).** A locally finite colouring of the plane by `k ≥ 7` colours with circular-arc boundaries, no
+class holding two points at distance 1. Call a point *eligible* if some colour has two or more sectors at it, or some sector at it is a cusp
+between two tangent arcs. A move is available only at eligible points (the three moves' definitions each start from a repeated colour or a
+horn). Is there such a colouring with an eligible point at which no move is available, and none available anywhere else?
+
+**This is a** planting problem: `Terminal` is vacuous at every non-eligible point, so a map whose eligible points are exactly one stuck
+vertex is terminal. Colours used once on a set of diameter below 1 constrain nothing; so the vertex's picture can be drawn in spare colours
+inside tiles of any valid plane map that has no eligible point.
+
+**Features, sorted.**
+
+| feature | sort | receipt |
+|---|---|---|
+| `Terminal` reads only points with a repeated colour or a horn | determines | the definitions of `MergeAvailable` (`2 ≤ n ∧ HasSectors v c n`), `RayAvailable` and `ShaveAvailable` (each an `IsHorn`), `ValidMap/Basic.lean` l. 143–160 |
+| `k ≥ 7` | determines only through "a valid plane map without eligible points exists, with colours to spare" | `sevenBrickMap` at 7; five more colours for the picture (§ 7); at `k = 6` the background is the open problem |
+| the bowtie's eleven tiles and its domain | accompany | § 7 uses three small discs: the vertex and its two poles |
+| unit arcs at the stuck vertex | determine | under Condition 5 a stuck vertex in a terminal map is refuted (`n4_fin`'s chain); the picture's horn is bounded by `ω(N)` and `ω(S′)` |
+| the completion's cells | accompany | no cell is needed when each disc lies inside one brick |
+
+**Homes.** (1) *The audit's § 3.2 (b), "a planted picture", with `ArcMap.recolour`* — adopted. (2) *The audit's § 3.5, "the completed
+bowtie"* — set aside, not killed: it would also work, at several times the size, and its terminality elsewhere is the unchecked part.
+(3) *FS-115's question (c)* — the six-colour form; this question's answer does not transfer to it (the spare colours are the whole mechanism).
+
+### 2.4 The grokkings that bear on this job's objects
+
+**bears**: G91 — its Do, "before building on a ring type's structure lemmas, ask whether the type is inhabited", is Q1–Q3 word for word;
+G83 — the flower is a valid fragment by formula about a four-colour vertex whose ring carries (Q) arcs, on a disc of radius `5/4`, below
+the killing test's `φ²/√2 ≈ 1.851`, so the test does not fire and the object is a datum for FS-124; G85/G84 — the unit parallel of an
+interface is Q4's whole mechanism; G92 — `nb4p`'s idle half of `hnb` and `a4six`'s reach to every `k` are instances; G21 — every model
+below pleases, so each gets a control that can fail and a note of what it does not exercise. **falsifiable here**: none (no reading's
+killing test is in reach). silent: every other entry.
