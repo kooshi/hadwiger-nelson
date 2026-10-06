@@ -1,0 +1,6 @@
+merge of 615c715ca71985294532117684a82a2ff82db609 (615c715c) into 2658107c, base c20b57a0: staged 326 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 323 taken whole from theirs
+  UNMERGED scripts/Axioms.lean
+  BOTH sides changed, merged unread: ARCHITECTURE.md
+  BOTH sides changed, merged unread: Proofs.lean
+  DIRTY (working tree differs from the index): scripts/Axioms.lean
+merge-index: FAIL (4 fault(s))
