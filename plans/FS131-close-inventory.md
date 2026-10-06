@@ -7350,3 +7350,115 @@ reason by the close.*
      whether that statement is the claim — the item "read the final statement aloud against the informal claim"
      is not replaced by it. An instance for `plans/GROKKING-INSTANCES.md` § The standard of evidence, at the filing.
      No reply sent: it asks none.
+583. **EXT-HN2, by message: Lean run — all three points of the first audit hold against the new commit `outside-commit-2`, at both of its toolchain pins, and the issue's Lean block compiles unchanged against both** (source: EXT-HN2's message to "main", 2026-10-06 — its staged commits and copies are read at its hand-back; nothing here is checked by me yet).
+     By its word: the root package now builds as shipped (Lean and Mathlib `v4.28.0`, exit 0, no warning) — the first
+     audit's build defect is fixed; `comparator/` (`v4.34.0`) builds its Challenge by default and its Solution by
+     name. The headline as the kernel holds it, the same at both pins: `∀ (r : ℝ) (C : OutsideColoring r), (∀ i,
+     OutsideDensity r (C.color i)) → ∑ i, outside_measure r (C.color i) < 2 * π`, on the standard three. **(1)** still
+     assumed: the headline re-proved in two lines from six reals each below π/3; **(2)** still false: radius 1/4 as
+     before, and **now in Lean at the paper's own radius 1/√3**, which the first audit had by hand; **(3)** still
+     applies to nothing at every radius `r ≥ 0`; new: at `r < 0`, where the circle is empty, the empty colouring
+     meets the hypotheses and nothing else does. Controls: a planted `sorry` and a planted axiom show at both pins.
+     Not run: the comparator tool itself. **Two departures, ratified**: it ran under `--mem 8` because the slot's
+     ledger stood at 80 of 90 GiB (nothing hit the cap); its Mathlib builds are at `~/.cache/ext-hn2/` (20 GB on
+     disk, since the scratch directory is memory) — **held, default keep** until Kooshi says the matter is closed,
+     then deleted. No reply sent: it asks none.
+584. **FS131-I8B, by message mid-job: the shared module is saved — `Plane/RingCalculus/StarChart`, commit `d635a30a` on `origin/fs131-w8b`, no `sorry`; the merge of the first implementer's branch made with no conflict** (source: I8B's message to "main", 2026-10-06 — the full review is at its hand-back).
+     **The three shared lemmas, as it prints them**: C1 `exists_int_of_angleIcc_subset` — an interval inside the union
+     of `2π`-translates of an interval shorter than `2π` lies in one — **a finding: it was not missing**, it is wave
+     3's `ArcMap.exists_lift_of_Icc_subset_angleIcc` in another form, stated as its one-line corollary; K1
+     `IsSectorChart.tileAt_equiv` — under `SimpleOn` at a point its tiles are its chart's sectors, one each, with
+     their cones — and the counted form both later jobs call, `exists_sectorChart_tileAt`; K2
+     `IsSectorChart.exists_initialPiece_between` — consecutive sectors share an initial piece of a map arc in both
+     closures — and `exists_initialPiece_of_ncard_le_three` for the three-tile case. With them C2, G1
+     (`mem_closure_tile_of_near`), `ncard_tileAt_eq` and two children of K2. By its word: 16 declarations on a
+     subset of the standard three, a control printing `sorryAx`, the doubled-name check and the module map passing;
+     and `star_anti` elaborates with the two ruled binders exactly — "they close the leaf" — not yet committed.
+     **Checked by me**: `d635a30a` is the tip of `origin/fs131-w8b`; `StarChart.lean` there is 578 lines with no
+     `sorry` and imports `TilesAt`, `ValidMap/HexRing`, `ValidMap/Surgery` (not `Star`: the two semi-hub modules can
+     import it); the seven named statements are present; `sorry` at that commit: `SemiHub` 17, `SemiHubPlaces` 6,
+     `Empty` 1, `Star` 1; its build log at that commit ends "OK — 468 of 468 batches", `EXIT=0`. **Rulings.**
+     (a) **The two parallel implementers' branches are cut from its hand-back tip, not from this hash**: its
+     `star_anti` save follows shortly and no slot is free before then. (b) Their briefs' generator is written and
+     its quotations dry-checked against its tree (`mk-i8cd.py C|D`); each brief quotes the seven shared statements
+     and asks for a `#check` of every leaf and the lint. No reply sent: it asks none.
+585. **Kooshi's second word on the outside repository, 2026-10-06 (verbatim in `data/external/EXT-HN2-request.md`): "Can the reviewer explicitly build a lean file into his codebase that shows his claim is false? I will fork it and push that."** (source: his message of 2026-10-06, about 22:30 UTC).
+     **Done**: a dated Amendment 1 appended to EXT-HN2's brief (gate exit 0 after three bare file names were
+     replaced by prose) and one message pointing at it. **What it asks**: one Lean file at the root of the outside
+     package, importing its headline file unchanged, proving — strongest first — that the headline's hypothesis is
+     met by no six-colouring of any circle of radius `r ≥ 0`, that the assumed bound is false at `1/4` and at
+     `1/√3`, that the headline follows from six numbers each below π/3, and if short a proper three-colouring of
+     the circle at `1/√3`; the smallest Lake change that builds it at the repository's own pin, sandboxed; the
+     axioms; the repository's own comparator shape for the first statement if its budget allows; a one-screen
+     plain note; a patch against `outside-commit-2` and the commands to apply it; the licence the repository declares.
+     **Rulings, mine.** (a) **The reviewer still posts nothing and makes no commit carrying an author line**: the
+     fork, the push and what it says are Kooshi's. Confidence: high. (b) **Every word written for the fork is about
+     Lean statements and what the kernel says of them** — nothing about the author or how the work was made (his
+     message carries a guess of his own about that; it is recorded verbatim in the request file and is not part of
+     what the job writes). (c) The negative-radius case is stated in the file, in a remark: an audit that
+     overstates is the thing being audited.
+586. **FS131-I8B done: wave 8's join — the two branches merged, the shared lemmas proved, and `star_anti` proved at its ruled statement** (implementer, Opus; harness 497k and 56 minutes by the task notice; record `fs131-w8b`'s `plans/FS131-I8B-implementation.md`; report `data/fs131/reports/FS131-I8B.md`; commits `bd694259`, the merge `9ddc32d2`, `d635a30a`, `216baaa4`, `6e0cf10d`; pushed, tree clean).
+     **Proved on the standard three** (built, not gated): the shared module `Plane/RingCalculus/StarChart` (item 584);
+     **`star_anti` (FS116-N2-ANTI) with the two binders of ruling 568 (a) exactly** — its stuck step needs no case on
+     a whole-circle cone once they are there; `star_anti_ne`, its first clause at any `k` with at most two colours
+     absent. **Corrections it names**: the plan's C1 was not missing (wave 3's lemma); the first implementer's
+     remark that the two binders add nothing at a proper interval is not checked in Lean and stays a hand remark;
+     one leaf of the next job (`isRingArc_of_edge`) has no chart among its hypotheses and must build its own.
+     **Owed by it, said**: a Lean model of the class "valid, non-Siamese, simple at a point" for three of the shared
+     lemmas (about 25 lines); no control planted for the lint. **My receipt**: tip `6e0cf10d` equals
+     `origin/fs131-w8b`, tree clean; `sorry` by the handoff's grep: `SemiHub` 17, `SemiHubPlaces` 6, `Empty` 1 —
+     `Star` and `StarChart` none; its last build log ends `EXIT=0`; its lint log reads "Linting passed for
+     Proofs."; its last axioms print parsed by script — 22 records, none outside the standard three but its planted
+     control on `sorryAx`; **`Star`'s thirteen base heads compared by my own script against the first
+     implementer's tip: twelve textually the same, one changed, `star_anti`, and the text inserted is exactly the
+     two ruled binders**. Not checked by me: the proofs beyond the build; its elaborated statement check over 214
+     declarations. **Credit**: a lemma found already proved under another name instead of proved twice; the ruled
+     change made to the letter and shown so; a hand remark of a colleague's marked as unchecked. **Slips, the
+     job's, disclosed**: a build launched with `&` inside a tool call; one shared statement restated before its
+     save. **Rulings.** (a) Its edit of `ARCHITECTURE.md`'s row for `Star` is ratified (the file is not one of the
+     coordinator's). (b) The owed 25-line model rides with FS131-I8C, whose first leaves call those lemmas.
+     (c) The erratum for FS116-N2-ANTI's entry (its "not claimed" line becomes a hypothesis) and the stub line are
+     held for the filing. (d) **`fs131-w8c` and `fs131-w8d` are cut from `6e0cf10d`** (builds copied; pushed) and
+     FS131-I8C's and I8D's briefs generated and gated (`mk-i8cd.py`). (e) **Slot → FS131-I7M** (the six-colour
+     model's kernel job, on `fs131-w7m`), launched 2026-10-06; I8C and I8D take the next two. In flight: 3 (LT5,
+     I6K, I7M) + the special-purpose slot (EXT-HN2).
+587. **EXT-HN2 done: the outside repository at its new commit still proves nothing about the plane; all three points of the first audit hold in Lean against it; the refutation is delivered as a patch that builds inside its own package** (`debruijn`, the special-purpose slot; harness 369k and 33 minutes by the task notice; record `plans/EXT-HN2-verification.md`; report `data/external/reports/EXT-HN2.md`; commits `dc738cec`, `729adcce`, `c5c44e89`, `d59b6a2f`, `91f78963` on `main`, under `plans/` and `data/external/` only).
+     **Findings, its**: items 582–583, and beyond them — **the comparator tool, run by it, accepts the repository's
+     pair** ("Your solution is okay!"; under two conditions: the tool's sandbox step replaced by its own stub, a
+     prebuilt exporter), with a control (a challenge with the assumption removed is rejected): the pass certifies
+     the Solution against a Challenge that carries the assumption, and bears on none of the three points; nothing
+     in any commit or file mentions the issue or narrows the claim; the Zenodo record has no new version.
+     **The deliverable of Amendment 1** (`data/external/hn2/fork/`): `Outside_Headline_Audit.lean` (319 lines),
+     a five-line addition to the Lake file, a 29-line note, a comparator pair for two of its statements, and a
+     patch against `outside-commit-2`. **My receipt**: the patch (sha256 `e519cd80…`) applied by me to a fresh checkout of
+     `outside-commit-2` — `git apply --check` exit 0; nine files, eight added and the Lake file changed; **the headline
+     file's hash after the patch equals the first audit's kept copy**; the patched Lean file equals the tree's; the
+     patch carries no author line; **the note read by me in full and every docstring and statement of the Lean
+     file**: they state (a) the hypothesis is met by no six-colouring at `r ≥ 0`, (b) the bound false at `1/4` and
+     at `1/√3`, (c) the headline from six numbers, (d) a proper colouring of the circle at `1/√3` with three
+     colours as a term of the repository's own structure, and the remark on `r < 0`; no `sorry` but the word in a
+     comment, no `axiom`, eight axiom prints; no sentence about the author or how the work was made. Not checked
+     by me: that it builds (its sandboxed build log and the eight printed lines are its word); the comparator
+     runs; the proofs. **Rulings.** (a) **The `[Outside2026]` row is replaced by its proposed text** (filed, verbatim
+     from its record § 4.3). (b) The two memory departures and the toolchain unpacked into its build area are
+     ratified. (c) **`~/.cache/ext-hn2/` (20 GB) is kept** until Kooshi says the matter is closed. (d) The note's
+     reading for this project's own publication plan — the challenge file is the text to read aloud — is an
+     instance for `plans/GROKKING-INSTANCES.md` at the filing (item 582). (e) **The special-purpose slot is
+     closed.** Where the patch, the note and the drafted account go is Kooshi's; handed to him in my report. In
+     flight: 3 (LT5, I6K, I7M).
+588. **Kooshi, 2026-10-06, verbatim: "Add a short header to his readme explaining that the fork is a refutation." — done, by me** (the special slot is closed and the reviewer has handed back; a text edit of one paragraph, so I took the implementer's role for it and am its author, not its reviewer).
+     **The edit**: one notice at the top of the fork's README, above the original text, which is unchanged beneath
+     it — that the fork is a refutation; that the claim that the repository formally verifies χ(ℝ²) = 7 does not
+     hold, because `outside_headline` assumes the bound it needs and the bound is false; where the Lean file and
+     the note are; **that this refutes the claimed proof and not the number, which is still known only to be 5, 6
+     or 7**; and that the additions are a reader's and are not endorsed by the original author (the repository's
+     licence, CC BY 4.0, asks for an indication of changes and forbids implying endorsement). The note's first
+     paragraph now names both changed files. **The patch regenerated** from a working tree with no commit made
+     (`git add -N`, `git diff`): ten files, sha256 `d2cffc5c11655e3b…`, replacing the nine-file patch at
+     `data/external/hn2/fork/audit-against-outside-commit-2.patch`; the tree beside it gains the README. **Checked, by
+     script**: it applies to a second fresh checkout of `outside-commit-2` (`git apply --check` exit 0); the headline
+     file's hash is the kept copy's; the Lean audit file, the Lake file and the comparator pair are byte-identical
+     to the ones the reviewer built and I read, so its build result carries over (no Lean changed); the README
+     below the notice is the original, line for line; no author line. Not checked: how GitHub renders the notice
+     above a title written in HTML. **A slip of mine**: this item's first append failed its tail check (a wrapped
+     line again) and the patch was committed one commit before the item.
