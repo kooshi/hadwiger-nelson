@@ -1,0 +1,3 @@
+ALLOWED TWICE (once from each side): #print axioms HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+16105 files (3 changed by both sides); 0 failure(s)
+PASS

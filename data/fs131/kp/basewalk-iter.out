@@ -1,0 +1,16 @@
+slot: admitted lake: mem 10 GiB (hard cap), cpus 16,17
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:103:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:113:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:135:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:141:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:148:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:156:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:167:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:173:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:183:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:190:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:217:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:287:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:294:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:320:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:327:8: warning: declaration uses `sorry`

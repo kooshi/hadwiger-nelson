@@ -1632,7 +1632,9 @@ variable {k : ℕ} {F : ArcMap k}
 
 /-- **FS110-N4-SHAVE**, the move (`exists_shave`'s statement, copied by `tools/fs131_im_statements.py`): where SHAVE is available at
 `v` for a colour `c` with `n + 1` sectors, recolouring the horn's tip by its flanks gives a valid map agreeing with `F` off a small
-disc about `v`, creating no unit arc, in which `c` has `n` sectors at `v`. `Contact`'s `exists_shave` cites it. -/
+disc about `v`, creating no unit arc, in which `c` has `n` sectors at `v`. `Contact`'s `exists_shave` cites it.
+Inhabitant: as `exists_shave` (`Plane/ValidMap/Contact`), whose hypotheses these are : `hornModel` at `plantPt` (`Plane/Models/Moves`;
+this form applied to it in `Plane/Models/Applied`). -/
 theorem exists_shave_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ σ : ℝ} {c g h : Fin k}
     {n : ℕ} (hn : F.HasSectors v c (n + 1)) (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1)
     (hg : F.IsFlankAbove v α κ₂ g) (hh : F.IsFlankBelow v α κ₁ h) (hσ₁ : κ₁ ≤ σ) (hσ₂ : σ ≤ κ₂)
@@ -1652,7 +1654,9 @@ theorem exists_shave_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ 
   exact exists_shave_recolour hF hv hn hH h1 h2 hg hh hσ₁ hσ₂ hgc hhc hclear
 
 /-- **FS110-N4-SHAVE**, N4-RAY (`exists_rayMerge`'s statement, copied by `tools/fs131_im_statements.py`): two `c`-horns along one
-ray merge. `Contact`'s `exists_rayMerge` cites it. -/
+ray merge. `Contact`'s `exists_rayMerge` cites it.
+Inhabitant: as `exists_rayMerge` (`Plane/ValidMap/Contact`), whose hypotheses these are : `twoHornModel` at `plantPt`
+(`Plane/Models/Moves`; this form applied to it in `Plane/Models/Applied`). -/
 theorem exists_rayMerge_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c : Fin k}
     {n : ℕ} (hn : F.HasSectors v c (n + 1)) (h23 : κ₂ < κ₃) (hH : F.IsHorn v α κ₁ κ₂ c) (hH' : F.IsHorn v α κ₃ κ₄ c)
     (h1 : -1 ≤ κ₁) (h4 : κ₄ ≤ 1) :
@@ -1664,7 +1668,9 @@ theorem exists_rayMerge_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ�
   exact ⟨hcl, exists_rayMerge_of_clear hF hv hn h23 hH hH' h1 h4 hcl⟩
 
 /-- **FS110-W-MERGE** (`exists_merge`'s statement, copied by `tools/fs131_im_statements.py`): if `int D_c(v)` is non-empty and `c`
-has `n + 1 ≥ 2` sectors at `v`, recolouring a gap inside `D_c(v)` near `v` merges two of them. `Contact`'s `exists_merge` cites it. -/
+has `n + 1 ≥ 2` sectors at `v`, recolouring a gap inside `D_c(v)` near `v` merges two of them. `Contact`'s `exists_merge` cites it.
+Inhabitant: as `exists_merge` (`Plane/ValidMap/Contact`), whose hypotheses these are : `twoHornModel` at `plantPt` (`Plane/Models/Moves`;
+this form applied to it in `Plane/Models/Applied`). -/
 theorem exists_merge_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)
     (hn : F.HasSectors v c (n + 1)) (hD : (interior (F.allowedCone v c)).Nonempty) :
     ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (closedBall v ρ) ∧ F'.RingArcsWithin F ∧

@@ -1,0 +1,5 @@
+plant hypothesis changed (BaseWalk): FIRED [('CHANGED', 'Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean', ('not_mem_coloursAt_of_tile_dist', 0))]
+plant declaration deleted (MapGraph): FIRED [('MISSING', 'Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean', ('cvb_thom_reduced', 0))]
+plant one-sided file changed (HexRing): FIRED [('FILE DIFFERS', 'Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean', 'HEAD')]
+unplanted: PASS (504 declaration keys, 17 one-sided files)
+SELF-TEST PASS

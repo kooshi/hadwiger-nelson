@@ -1,0 +1,49 @@
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261006T085527Z-2764942.log
+    ⚠ [5619/5803] Replayed Proofs.HadwigerNelson.Plane.ValidMap.LensOut
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean:48:18: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean:69:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean:88:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean:122:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean:133:8: declaration uses `sorry`
+    ⚠ [5639/5803] Replayed Proofs.HadwigerNelson.Plane.ValidMap.CollarMapOut
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean:57:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean:65:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean:81:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean:97:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean:104:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean:109:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean:116:8: declaration uses `sorry`
+    ⚠ [5747/5803] Replayed Proofs.HadwigerNelson.Plane.ValidMap.HornChart
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean:47:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean:55:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean:68:8: declaration uses `sorry`
+    ⚠ [5762/5803] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BendAway
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean:49:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean:97:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean:150:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean:158:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean:170:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean:179:8: declaration uses `sorry`
+    ⚠ [5782/5803] Replayed Proofs.HadwigerNelson.Plane.ValidMap.R2Cap
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean:31:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean:46:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean:59:8: declaration uses `sorry`
+    ⚠ [5792/5803] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BendGap
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean:34:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean:42:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean:50:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean:56:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean:68:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean:76:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean:86:8: declaration uses `sorry`
+    ⚠ [5795/5803] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BendStep
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:290:8: declaration uses `sorry`
+    All targets up-to-date (5803 jobs).
+==> build: OK — all 1796 modules already up to date, nothing built, 7 module(s) with warnings, 2s
+    full output: build/gate/build/20261006T085527Z-2764942.log

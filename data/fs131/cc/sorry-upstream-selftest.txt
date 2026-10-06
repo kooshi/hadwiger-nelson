@@ -1,0 +1,5 @@
+FIRED (an upstream warning): upstream `sorry`: Proofs/HadwigerNelson/Brick.lean:1
+PARTNER PASS (a warning that is not upstream)
+FIRED (a cut log): the log does not end in the build's success line
+PARTNER PASS (the unplanted log)
+self-test: 2 of 2 plants fired, 2 of 2 partners passed

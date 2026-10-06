@@ -1,0 +1,2 @@
+NAME-TWICE HadwigerNelson.Plane.conj_e  [theorem; statements identical]  Plane/Chord.lean:276  Plane/SixFragment.lean:342
+259 hand-written files read (0 over 3 MB skipped: []); 7446 public declarations; 1 name(s) declared at two places

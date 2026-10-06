@@ -1,0 +1,22 @@
+'HadwigerNelson.Plane.CircleColouring.reduce' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_leftVal_add_int_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_rightVal_add_int_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.Removable.add_int_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_nearOnly' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_exists_max' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_left_uncov' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_right_uncov' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_zmod3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_partner_noChange' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_leftVal_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_vals_of_const' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_locConst' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_proper_off' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.reduce_int_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CircleColouring.select' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,9 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Plane.ArcMap.not_hasRepeatedColour_of_mem_interiorPts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_preBend_step' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_preBend' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.n3_base' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.bend_toward_collar' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.row134BaseUA' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,15 @@
+verbatim  CLAUDE.md  «Do not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-close-inventory.md  «437. **FS131-IA1 done at its Stage 4: wave 5's two lines joined on `fs»
+verbatim  FS131-close-inventory.md  «438. **Rulings on IA1's held items, and its slot.** (a) **`CollarFit.m»
+verbatim  FS131-close-inventory.md  «430. **Rulings on item 429** (sent to IA1 by message). (a) **D1**: the»
+verbatim  FS131-close-inventory.md  «433. **FS131-IA1, by message: the arc step needs one bend that is prov»
+verbatim  Procedure.lean  «theorem exists_arcStep (hF : F.Valid) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ »
+verbatim  FS131-arcstep-implementation.md  «### 3.6 The repaired statement of `exists_arcStep` (rulings on D1 and »
+verbatim  FS131-arcstep-implementation.md  «### 4.3 The assembly's work list — what `exists_arcStep`'s proof in `P»
+verbatim  BendCollar.lean  «theorem bend_toward_collar (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : »
+verbatim  BendStep.lean  «theorem bend_away_part (hF : F.Valid) (hP : F.IsPlaneMap) {P : ℂ} {θ₁ »
+verbatim  BendStep.lean  «theorem CollarFit.map_hornCount_le (hF : F.Valid) (hfit : CollarFit F »
+verbatim  CollarMap.lean  «structure CollarFit (F : ArcMap k) (P : ℂ) (θ₁ θ₂ : ℝ) (c c' : Fin k) »
+verbatim  Procedure.lean  «def IsMaxRingArc (P : ℂ) (θ₁ θ₂ : ℝ) (c c' : Fin k) : Prop :=»
+verbatim  Procedure.lean  «noncomputable def badCount (P : ℂ) : ℕ∞ :=»
+14 quotations, 0 failures

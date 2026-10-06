@@ -1,0 +1,10 @@
+records 12 (print commands 12): standard-three-or-fewer 6, through sorryAx 6, other 0
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend
+  HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R1
+  HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2
+  HadwigerNelson.Plane.ArcMap.bend_away_gap
+  HadwigerNelson.Plane.ArcMap.bend_away_part
+  HadwigerNelson.Plane.ArcMap.bend_away_subdiv
+SORRY-EXPECTED-BUT-STANDARD HadwigerNelson.Plane.ArcMap.CollarFitOut.map_hornCount_le
+FAIL

@@ -1,0 +1,14 @@
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:224:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:230:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:238:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:259:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:263:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:275:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:285:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:290:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:299:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:304:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:310:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:318:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/Models/Paint.lean:326:8: warning: declaration uses `sorry`
+exit 0

@@ -1,0 +1,17 @@
+verbatim  l.   412  /home/kooshi/source/lean-dir/CLAUDE.md  |  - **The artifact is the certificate plus the checker, never the search.** Commit the data 
+verbatim  l.  4620  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  468. **FS131-RP1 done: the remedy pass — six ruled statement tidies, no name twice and no 
+verbatim  l.  4642  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  469. **Rulings on RP1's held items, and its slot.** (a) `collarModel_hyps` with four conju
+verbatim  l.  4558  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  464. **FS131-BA3 done: the outward bend is whole in the kernel — `bend_away_part` on the s
+verbatim  l.  4576  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  465. **Rulings on BA3's held items, and its slot.** (a) **The unread `hF` of the six R1/R2
+verbatim  l.  4441  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  458. **FS131-M7 done: wave 5 is one line on `fs131-w5c`; `Procedure` holds no `sorry`; and
+verbatim  l.  4469  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  459. **Rulings on M7's held items, and its slot.** (a) **What the doubled name costs, as I
+verbatim  l.  4522  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  462. **FS131-T4, by message: measured — with a doubled theorem name `#print axioms` can pr
+verbatim  l.  4396  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  455. **Rulings on BA1's held items, and its slot.** (a) **The inhabitant `awayModel` goes 
+verbatim  l.  3748  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  415. **Rulings on OL1's held items, and its slot.** (a) **Dates in filed counts are the ga
+verbatim  l.  3812  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  419. **Rulings on LN1's held items; a correction to ruling 417 (b); the slot.** (a) **The 
+verbatim  l.  3932  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md  |  427. **Rulings on QA4's list and the rule.** (a) **Before wave 5 lands, at its final sync*
+verbatim  l.  3340  /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c/Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean  |  theorem exists_terminalMap (hF : F.Valid) (hP : F.IsPlaneMap) :
+verbatim  l.  3816  /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c/Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean  |  theorem exists_terminal {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) :
+verbatim  l.   346  /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c/Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean  |  theorem bend_away_part (hF : F.Valid) (hP : F.IsPlaneMap) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin 
+verbatim  l.   504  /home/kooshi/source/lean-dir/CLAUDE.md  |  `declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0 stale=0 declared=3 witn
+quotations=16 mismatches=0

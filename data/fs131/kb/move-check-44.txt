@@ -1,0 +1,1 @@
+RESULT: PASS (bend_toward_collar, data/fs131/i5o/BendCollar.lean@4a0e5c28 -> Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean)

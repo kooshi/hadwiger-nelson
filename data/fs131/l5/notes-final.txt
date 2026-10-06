@@ -1,0 +1,34 @@
+QA4's tool read from /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c; sources from /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c
+main	Contact	1499	exists_shave	Covers	bowtie,cuspFrag	LOCAL-SAID:Covers
+main	Contact	1517	exists_rayMerge	Covers	bowtie	LOCAL-SAID:Covers
+main	Contact	1537	exists_merge	Covers	bowtie,cuspFrag,sevenBrick	LOCAL-SAID:Covers
+w5	FlankUA	80	not_outType_N_of_flankAbove_one	Covers	bowtie	LOCAL-SAID:Covers
+w5	FlankUA	108	not_outType_S_of_flankBelow_neg_one	Covers	bowtie	LOCAL-SAID:Covers
+w5	FlankUA	138	srcG_of_shadow	Covers	bowtie	LOCAL-SAID:Covers
+w5	FlankUA	189	srcH_of_shadow	Covers	bowtie	LOCAL-SAID:Covers
+w5	FlankUA	264	region_near_of_inType	Covers	bowtie	LOCAL-SAID:Covers
+w5	FlankUA	323	flank_ne_of_shadows	Covers	bowtie	LOCAL-SAID:Covers
+w5	FlankUA	571	horn_poles_contact	Covers	bowtie	LOCAL-SAID:Covers
+w5	FlankUA	721	horn_bounds_of_noMerge	Covers	bowtie	LOCAL-SAID:Covers
+w5	FlankUA	775	hasSectors_one_of_contacts	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	522	stuck_flanks_ua	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	776	stuck_structure_ua	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	795	chainVertex_antipodal	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	814	flankQ_upper_of_qrOnly	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	861	cv_l0	IsTerminalMap	bowtie	LOCAL-SAID:IsTerminalMap
+w5c	Terminal	1426	exists_horn_of_mem_coneAt_of_stuck	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	1948	n3_end_chain	IsPlaneMap	bowtie	LOCAL-SAID:IsPlaneMap
+w5c	Terminal	1994	upper_bounds_of_inType_N	IsPlaneMap	bowtie	LOCAL-SAID:IsPlaneMap
+w5c	Terminal	2025	stuck_turned_frame	IsPlaneMap	bowtie	LOCAL-SAID:IsPlaneMap
+w5c	Terminal	2319	horns_of_two_sectors_at	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	3068	cv_hd	IsTerminalMap	bowtie	LOCAL-SAID:IsTerminalMap
+w5c	Terminal	3097	c_double	IsTerminalMap	bowtie	LOCAL-SAID:IsTerminalMap
+w5c	Terminal	3161	cv_class	IsTerminalMap	bowtie	LOCAL-SAID:IsTerminalMap
+w5c	Terminal	3224	stuck_structure_at_axis	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	3536	horn_flanks_of_isChainVertex	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	3585	hornBoundsQR_of_isChainVertex	IsTerminalMap	bowtie	LOCAL-SAID:IsTerminalMap
+w5c	Terminal	3624	horn_colour_eq_of_isChainVertex	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	3664	eq_horn_colour_of_two_sectors	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Procedure	2779	exists_arcStep	IsPlaneMap	l60Frag	LOCAL-SAID:IsPlaneMap
+notes read: 193 LOCAL-SAID=31 NO-OBJECT=42 NONE-SAID=64 no-conflict=56
+exit=0

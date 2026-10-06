@@ -1,0 +1,26 @@
+import Proofs.HadwigerNelson.Plane.ValidMap.MapGraph
+set_option pp.fullNames true
+#print axioms HadwigerNelson.Plane.port_arc
+#print axioms HadwigerNelson.Plane.ArcMap.ray_piece
+#print axioms HadwigerNelson.Plane.ArcMap.isPreconnected_inter_ball_of_hasCurveStar
+#print axioms HadwigerNelson.Plane.ArcMap.exists_Ioo_of_preimage_ball
+#print axioms HadwigerNelson.Plane.ArcMap.IsPortGraph.exists_shared_vertex
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isPortGraph
+#print axioms HadwigerNelson.Plane.ArcMap.subset_of_isPreconnected_of_locally
+#print axioms HadwigerNelson.Plane.ArcMap.nonempty_frontier_closure_fill
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_hasCurveStar_pos
+#print axioms HadwigerNelson.Plane.ArcMap.closure_inter_subset_frontier_fill
+#print axioms HadwigerNelson.Plane.ArcMap.isOuterTile_of_closure_inter
+#print axioms HadwigerNelson.Plane.ArcMap.nextDir_two
+#print axioms HadwigerNelson.Plane.ArcMap.sector_inter_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_regular_local
+#print axioms HadwigerNelson.Plane.ArcMap.exists_edgeOf
+#print axioms HadwigerNelson.Plane.ArcMap.BasedTrail.map
+#print axioms HadwigerNelson.Plane.ArcMap.BasedTrail.insert_all
+#print axioms HadwigerNelson.Plane.ArcMap.isBoundaryWalk_of_trail
+#print axioms HadwigerNelson.Plane.port_pair
+#print axioms HadwigerNelson.Plane.even_sum_deg
+#print axioms HadwigerNelson.Plane.ArcMap.exists_boundaryWalk
+#print axioms HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.sep
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_ringList
+#print axioms HadwigerNelson.Plane.ArcMap.cvb_thom_reduced

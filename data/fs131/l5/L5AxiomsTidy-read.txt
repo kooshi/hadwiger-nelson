@@ -1,0 +1,22 @@
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.sides_end
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.sides_eq
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.map_R1
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.map_R2
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.map_hornCount_le
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R1
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.map_inert
+exactly the standard three   HadwigerNelson.Plane.ArcMap.bend_toward_collar
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.map_isR2Arc
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.arcBend
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend
+exactly the standard three   HadwigerNelson.Plane.ringPt_inj_of_abs_sub_lt
+exactly the standard three   HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.map_localStep
+exactly the standard three   HadwigerNelson.Plane.ArcMap.bend_away_part
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_arcStep
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_terminalMap
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_red
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_terminal
+exactly the standard three   HadwigerNelson.Plane.ArcMap.row134BaseUA
+RESULT: PASS — 21 of 21 asked records on exactly the standard three

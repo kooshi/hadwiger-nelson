@@ -1,0 +1,4 @@
+self-test: OK (6 controls, 1 planted)
+plant 'a conflicting note': CONFLICT count 21 -> 22 (FIRED)
+plant 'an unreadable tree': rows 0, missing 40 (FIRED)
+SELF-TEST OK (151 notes read unplanted)

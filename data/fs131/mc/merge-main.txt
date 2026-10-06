@@ -1,0 +1,5 @@
+Auto-merging ARCHITECTURE.md
+Auto-merging Proofs.lean
+Auto-merging scripts/Axioms.lean
+CONFLICT (content): Merge conflict in scripts/Axioms.lean
+Automatic merge failed; fix conflicts and then commit the result.

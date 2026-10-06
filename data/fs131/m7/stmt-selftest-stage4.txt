@@ -1,0 +1,8 @@
+plant — a hypothesis dropped (exists_vertexStep, Procedure): FIRED  ['CHANGED Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean exists_vertexStep']
+plant — a conclusion changed (ArcBend.dom_eq, ArcStep): FIRED  ['CHANGED Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean dom_eq']
+plant — a declaration renamed (IsMaxRingArc.not_regularAt, Procedure): FIRED  ['MISSING Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean IsMaxRingArc.not_regularAt']
+plant — a definition body changed (treatPts, Procedure): FIRED  ['CHANGED Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean treatPts']
+plant — a structure field changed (ArcBend.side, ArcStep): FIRED  ['CHANGED Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean ArcBend']
+plant — an allowance for a statement that did not change: FIRED  ['STALE ALLOWANCE exists_vertexStep: allowed to change, but its statement is unchanged (or it is not declared)']
+unplanted control: PASS (2404 statements read)  []
+SELF-TEST: every plant fired, the unplanted run passed

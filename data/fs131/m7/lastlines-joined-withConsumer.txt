@@ -1,0 +1,12 @@
+data/fs131/m7/LastLinesJoined-withConsumer.lean:34:8: error: `HadwigerNelson.Plane.ArcMap.IsMaxRingArc.meet` has already been declared
+data/fs131/m7/LastLinesJoined-withConsumer.lean:150:42: error: Application type mismatch: The argument
+  hGd t
+has type
+  t ∈ G.dom
+but is expected to have type
+  G.Covers ?m.497 1
+in the application
+  exists_vertexStep hG.valid hG.clean (hGd t)
+'HadwigerNelson.Plane.ArcMap.IsMaxRingArc.meet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_arcStep'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_procStep'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,2 @@
+MISSING Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean bv_l3
+RESULT: FAIL (1)

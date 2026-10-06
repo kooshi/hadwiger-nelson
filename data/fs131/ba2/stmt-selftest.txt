@@ -1,0 +1,33 @@
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: isR2Arc_of_fixed
+1795 base files, 0 new files, 1 failures
+PLANT [a changed hypothesis of a proved theorem (isR2Arc_of_fixed)]: FIRED
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_part
+1795 base files, 0 new files, 1 failures
+PLANT [bend_away_part's horn clause changed (no longer allowed)]: FIRED
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean: exists_r2_crescent_free
+1795 base files, 0 new files, 1 failures
+PLANT [a hypothesis added to an open child (exists_r2_crescent_free)]: FIRED
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap'
+FAIL MISSING Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+1795 base files, 0 new files, 1 failures
+PLANT [a deleted theorem (hasHornCount_iff_of_germ_swap renamed)]: FIRED
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+1795 base files, 0 new files, 1 failures
+PLANT [a weakened hypothesis of the swap lemma]: FIRED
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: exists_lensOut_clear
+1795 base files, 0 new files, 1 failures
+PLANT [a hypothesis dropped from the clearance (exists_lensOut_clear)]: FIRED
+FAIL CHANGED (not editable) Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean
+1795 base files, 0 new files, 1 failures
+PLANT [an edit to a file that is not editable (BendCollar)]: FIRED
+FAIL AXIOM in Proofs/Planted.lean
+1795 base files, 0 new files, 1 failures
+PLANT [an axiom in a new file]: FIRED
+FAIL AXIOM in Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean
+1795 base files, 0 new files, 1 failures
+PLANT [an axiom in an editable file]: FIRED
+FAIL native_decide in Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean
+1795 base files, 0 new files, 1 failures
+PLANT [native_decide in an editable file]: FIRED
+1795 base files, 0 new files, 0 failures
+UNPLANTED: PASS

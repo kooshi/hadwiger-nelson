@@ -1,0 +1,18 @@
+verbatim  CLAUDE.md  «Do not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-close-inventory.md  «427. **Rulings on QA4's list and the rule.** (a) **Before wave 5 lands»
+verbatim  FS131-close-inventory.md  «421. **Rulings on IR1's held items, and its slot.** (a) **`clean` and »
+verbatim  FS131-close-inventory.md  «420. **FS131-IR1 handed back** (Stage 17 SAVED, harness ≈ 505k by the »
+verbatim  FS131-close-inventory.md  «424. **FS131-I5q done: wave 5's non-`Terminal` lane holds no open leaf»
+verbatim  FS131-close-inventory.md  «416. **FS131-CC2 done: the collar bend is proved** (harness ≈ 514k by »
+verbatim  FS131-close-inventory.md  «385. **Rulings on E6's held items, and its slot.** (a) **`exists_arcSt»
+verbatim  FS131-close-inventory.md  «411. **Rulings: the three slots, filled from the queue of the handoff.»
+verbatim  FS131-close-inventory.md  «372. **Rulings on item 371.** (a) **`ArcMap.clean` accepted** as the p»
+verbatim  Procedure.lean  «theorem exists_arcStep (hF : F.Valid) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ »
+verbatim  Procedure.lean  «      ∀ Q ∈ T, Q ≠ P → F'.coloursAt Q ⊆ F.coloursAt Q ∧»
+verbatim  FS131-limit-kernel-plan.md  «| `exists_arcStep` | derives over three bends and **question (5)** | i»
+verbatim  FS131-limit-kernel-plan.md  «| `bend_step` (toward, away): `LocalStep F F' (cthickening ε (ringArc »
+verbatim  FS131-limit-kernel-plan.md  «**Left 2 — `exists_arcStep`** (`sorry`; H; not started). Its consumer »
+verbatim  UnitArc.lean  «theorem bend_toward (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} »
+verbatim  UnitArc.lean  «theorem bend_away_whole (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin»
+verbatim  BendCollar.lean  «theorem bend_toward_collar (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : »
+17 quotations, 0 failures

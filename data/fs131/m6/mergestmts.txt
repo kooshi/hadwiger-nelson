@@ -1,0 +1,7 @@
+MISMATCH IsHorn.isRingArc_lower_ua: merged {} expected {'{v : ℂ} (hv : F.Covers v 1) {α κ₂ : ℝ} {c h : Fin k} (hH : F.IsHorn v α (-1) κ₂ c) (hh : F.IsFlankBelow v α (-1) h) : ∃ θ₁, θ₁ < α + π / 2 ∧ F.IsRingArc (v - e (α + π / 2)) θ₁ (α + π / 2) h c': 1}
+MISMATCH branchPt_mem_closure_sector_pair: merged {} expected {'{n : ℕ} (G : BranchGerms n) {ρ : ℝ} (hord : ∀ s ∈ Ioo 0 ρ, ∀ i, G.dir i s < G.nextDir i s) (v : ℂ) (i : Fin n) {s : ℝ} (hs : s ∈ Ioo 0 ρ) : branchPt v (G.β i) (G.κ i) s ∈ closure (G.sector v ρ i) ∧ branchPt v (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s ∈ closure (G.sector v ρ i)': 1}
+MISMATCH isPreconnected_hornSet_unit: merged {} expected {'{v : ℂ} {α κ₁ κ₂ r : ℝ} (h12 : κ₁ < κ₂) (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1) (hr : r ≤ 1 / 2) : IsPreconnected (hornSet v α κ₁ κ₂ r)': 1}
+MISMATCH ringArc_add_int: merged {} expected {'(p : ℂ) (a b : ℝ) (m : ℤ) : ringArc p (a + 2 * π * m) (b + 2 * π * m) = ringArc p a b': 1}
+7358 names; bases 75689a4c; renames [('framePt', 'fromFrame'), ('ptL', 'pt'), ('paramsL', 'params'), ('subL', 'sub'), ('carrier_eq_imageL', 'carrier_eq_image')]; 4 mismatches/conflicts, 0 base conflicts
+FAIL
+exit 1

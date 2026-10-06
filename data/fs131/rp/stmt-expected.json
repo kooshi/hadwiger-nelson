@@ -1,0 +1,32 @@
+{
+  "changed": [
+    "Arith/Dyadic.lean:DyadicSqrt3Conclusion",
+    "Arith/PlaceHom.lean:placeHom_step",
+    "Arith/FalconerField.lean:falconerFan_five_placeHom",
+    "Plane/ValidMap/UnitArc.lean:nb4p",
+    "Plane/ValidMap/BendCollar.lean:bend_toward_collar",
+    "Plane/ValidMap/Procedure.lean:exists_rayStep",
+    "Plane/ValidMap/Procedure.lean:exists_shaveStep"
+  ],
+  "gone": [
+    "Plane/SixFragment.lean:conj_e",
+    "Plane/SixFragment.lean:sq_norm_re_im",
+    "Plane/ValidMap/UnitArc.lean:sq_norm_eq_re_im",
+    "Plane/ValidMap/HexRing.lean:norm_sq_eq_re_im",
+    "Plane/ValidMap/OpenMove.lean:HasDegree.eq",
+    "Plane/ValidMap/FlankUA.lean:coloursAt_eq_of_mem_interiorPts",
+    "Plane/ValidMap/BaseWalk.lean:dist_sq_re_im",
+    "Plane/ValidMap/BaseWalk.lean:ringArc_add_int_mul",
+    "Plane/ValidMap/BaseWalk.lean:ringPt_add_int_mul",
+    "Plane/ValidMap/BaseDense.lean:IsRingArc.union_of_overlap",
+    "Plane/ValidMap/BaseDense.lean:finite_arcs_meeting_compact"
+  ],
+  "added": [
+    "Plane/ValidMap/BendCollar.lean:collarModel_hyps"
+  ],
+  "moved": [
+    "Plane/Chord.lean:Plane/Basic.lean:conj_e",
+    "Plane/Chord.lean:Plane/Basic.lean:sq_norm_eq",
+    "Plane/ValidMap/Pushforward.lean:Plane/ValidMap/Basic.lean:HasDegree.unique"
+  ]
+}

@@ -1,0 +1,6 @@
+FIRED (a linter warning in a collar module): a warning other than `sorry` in a collar module: Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean:9:9: Variable name `h` is not explicitly referenced.
+FIRED (an upstream warning): upstream `sorry`: Proofs/HadwigerNelson/Brick.lean:1
+PARTNER PASS (a warning that is not upstream)
+FIRED (a cut log): the log does not end in the build's success line
+PARTNER PASS (the unplanted log)
+self-test: 3 of 3 plants fired, 2 of 2 partners passed

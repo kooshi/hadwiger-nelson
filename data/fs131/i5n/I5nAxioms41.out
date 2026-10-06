@@ -1,0 +1,26 @@
+slot: waiting (ledger 80 + 12 > budget 90 GiB)
+slot: admitted lake: mem 12 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Plane.ArcMap.flank_radial_N' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.flank_radial_S' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.coneAt_N_subset_of_flankAbove' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.coneAt_S_subset_of_flankBelow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_coneAt_of_e_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.not_mem_angleIcc_of_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_angleIoo_of_e_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_angleIoo_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.exists_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.exists_pred' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.Mono.false_of_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.card_le_encard_sectorsOf' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.mergeAvailable_of_two_sectors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_index_of_mem_coloursAt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cv_hd_main_inType' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cv_hd_main' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cv_hd' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.y3_end_needs' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_merge' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.upper_bounds_of_inType_N' depends on axioms: [propext, Classical.choice, Quot.sound]

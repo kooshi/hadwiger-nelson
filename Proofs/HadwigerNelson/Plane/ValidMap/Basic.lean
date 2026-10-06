@@ -240,6 +240,12 @@ namespace ArcMap
 
 variable {k : ℕ} {F F' : ArcMap k}
 
+/-- **A degree is unique**: two counts that hold for all small radii agree. Declared here, beside `HasDegree`, in the one module
+every user imports (FS131-RP1: it stood as `HasDegree.unique` in `Pushforward` and as `HasDegree.eq` in `OpenMove`). -/
+theorem HasDegree.unique {v : ℂ} {m m' : ℕ} (h : F.HasDegree v m) (h' : F.HasDegree v m') : m = m' := by
+  obtain ⟨r, h1, h2⟩ := (h.and h').exists
+  exact_mod_cast h1.symm.trans h2
+
 /-- **The validity transfer** (wave 4's engine 1): a map agreeing with a valid map off `U`, each of whose interior points in
 `U` is clear in the old map for its new colour, with no unit pair of one colour among its interior points in `U`, is valid.
 Every local move's validity is then its clearness. -/

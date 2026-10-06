@@ -1,0 +1,11 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Plane.ArcMap.rot_in' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.hex_side_far' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonpos_of_preconnected' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.dist_radial_hex_in' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.hex_point_in' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.rot_out' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.bv_nd' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.linkage_dot_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]

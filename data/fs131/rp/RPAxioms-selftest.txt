@@ -1,0 +1,6 @@
+plant 'a record deleted': FIRED — MISSING HadwigerNelson.Plane.ArcMap.nb4p (0 records)
+plant 'a clean record given sorryAx': FIRED — FOREIGN HadwigerNelson.Plane.ArcMap.nb4p: ['sorryAx']
+plant 'a clean record given a native axiom': FIRED — FOREIGN HadwigerNelson.Plane.ArcMap.nb4p: ['Foo._native.native_decide.ax_1_1']
+plant 'the control's sorryAx removed': FIRED — CONTROL-SILENT HadwigerNelson.Plane.ArcMap.exists_arcStep: expected sorryAx, got the standard three
+plant 'a record doubled': FIRED — DOUBLED HadwigerNelson.Plane.ArcMap.nb4p (2 records)
+SELF-TEST OK: 5 plants

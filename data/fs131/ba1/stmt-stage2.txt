@@ -1,0 +1,4 @@
+allowed statement change: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean: AwayBend.idle
+    now: theorem AwayBend.idle (hF : F.Valid) {P : ℂ} {a b : ℝ} {c : Fin k} (hC : ∀ θ ∈ Ioo a b, P + 2 * e θ ∈ closure (F.region c)) {ε : ℝ} : AwayBend F F (Homeomorph.refl ℂ) ∅ P a b c ε where valid
+changed line(s) of Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: [312]
+1795 base files, 0 new files, 0 failures

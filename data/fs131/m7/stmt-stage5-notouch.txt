@@ -1,0 +1,4 @@
+TOUCHED Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean: differs from dcdeac13, not in --touch
+2403 statements read at dcdeac13; allowed to change: none; allowed gone: none; files that may differ: none
+added since dcdeac13: ['Procedure.lean:IsMaxRingArc.meet']
+RESULT: FAIL (1)

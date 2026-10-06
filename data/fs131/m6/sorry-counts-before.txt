@@ -1,0 +1,10 @@
+Proofs/HadwigerNelson/Packed.lean:1
+Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:2
+Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:5
+Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:3
+Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean:1
+Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:6
+Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:3
+Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean:4
+Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:2
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:5

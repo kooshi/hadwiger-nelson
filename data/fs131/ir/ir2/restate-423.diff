@@ -1,0 +1,8 @@
+795c795
+< theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : v ∈ F.dom)
+---
+> theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Covers v 1)
+1079c1079
+<       exists_vertexStep hG.valid hG.clean (hGd t) hmv hdeg hhorn hδ0
+---
+>       exists_vertexStep hG.valid hG.clean (covers_of_isPlaneMap hG.plane t 1) hmv hdeg hhorn hδ0

@@ -1,0 +1,6 @@
+plant hypothesis changed (badCount_lt_top): FIRED
+plant conclusion changed (exists_clean): FIRED
+plant declaration renamed (mergeAvailable_of_bothKind): FIRED
+plant definition body changed (treatPts): FIRED
+plant definition changed (IsModification, Chain): FIRED
+unplanted control: PASS

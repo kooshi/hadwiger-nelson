@@ -1,0 +1,6 @@
+control (unplanted): PASS
+plant — sorryAx planted in a standard record: FIRED
+plant — the primed record dropped: FIRED
+plant — a foreign axiom: FIRED
+plant — an expected sorry that is standard: FIRED
+SELF-TEST: ok

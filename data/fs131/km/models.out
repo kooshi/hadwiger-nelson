@@ -1,0 +1,13 @@
+hornModel: unit pairs tried 70590, monochromatic in a painted colour: 0
+twoHornModel: unit pairs tried 70353, monochromatic in a painted colour: 0
+stuckModel: unit pairs tried 222812, monochromatic in a painted colour: 0
+shadowModel: unit pairs tried 180, monochromatic in a painted colour: 0
+awayModel: unit pairs tried 50625, monochromatic in a painted colour: 0
+B(plantPt,1/10): strictly inside brick (0, 0) with its margin: True
+square at N: strictly inside brick (-1, 2) with its margin: True
+square at S': strictly inside brick (1, -2) with its margin: True
+tangent disc: strictly inside brick (0, 1) with its margin: True
+|plantDir| = 1.000000000000; tangent disc inside the unit disc: True
+stuckModel: horn points within 1/50 of the vertex shadowed by the 7-wedge and by the 8-wedge: 75 of 75
+awayModel: radius-2 points in the closed second brick exactly for |theta| <= arcsin(3/20): True
+ALL HOLD

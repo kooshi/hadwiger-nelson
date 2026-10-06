@@ -43,10 +43,7 @@ theorem HasHornCount.eq {v : ℂ} {j j' : ℕ} (hj : F.HasHornCount v j) (hj' : 
   obtain ⟨r, hr⟩ := (hj.and hj').exists
   exact_mod_cast hr.1.symm.trans hr.2
 
-/-- The degree is unique. -/
-theorem HasDegree.eq {v : ℂ} {m m' : ℕ} (hm : F.HasDegree v m) (hm' : F.HasDegree v m') : m = m' := by
-  obtain ⟨r, hr⟩ := (hm.and hm').exists
-  exact_mod_cast hr.1.symm.trans hr.2
+-- The degree is unique: `HasDegree.unique` (`Plane/ValidMap/Basic`); this file's copy `HasDegree.eq` removed by FS131-RP1.
 
 end ArcMap
 
@@ -2086,7 +2083,7 @@ theorem open_degree_horns (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (_h' 
   classical
   have hn2 := cfg.two_le
   have hn : 0 < X.n := by omega
-  have hmn : m = X.n := by rw [hm.eq X.hC.hasDegree, max_eq_left (by omega)]
+  have hmn : m = X.n := by rw [hm.unique X.hC.hasDegree, max_eq_left (by omega)]
   have hjJ : j = {i : Fin X.n | X.G.β i = X.G.nextβ i}.ncard := hj.eq (hasHornCount_chart hn)
   have hpJ : X.G.β (BranchGerms.idx s (BranchGerms.hornPos up b)) = X.G.nextβ (BranchGerms.idx s (BranchGerms.hornPos up b)) := by
     have hc := cfg.cusp
@@ -2840,9 +2837,10 @@ where `D_c(v)` has interior directions, gives a valid map, equal to `F` off a sm
 Condition 5 is kept), in which `v` gains no colour, `v`'s degree does not rise and it has at least one horn fewer, the new points
 on the rim carry at most three colours with none repeated, and no other point's allowed cone for `c` changes.
 
-**Inhabitant** (`LEAN.md` § The gate): none in Lean yet. FS131-E6's model (`plans/FS131-E6-derivation.md` § 3.1–3.3: a valid plane map
-in twelve colours with `v = 0`, `IsHorn 0 0 0 2 c`, `HasSectors 0 c 1`, `D_c(0)` a closed half-plane, degree `3` and one horn) satisfies
-every hypothesis at once, at [hand] grade with exact checks, and is not formalized. `ArcMap.cuspFrag` is no model: its domain is
+**Inhabitant** (`LEAN.md` § The gate): `hornModel` at `plantPt` (`Plane/Models/Moves`, `hornModel_open`: this theorem applied): a lone
+horn of colour `7`, `D₇` the closed half-plane of its one in-type contact (`hornModel_contact`, the cone itself `hornModel_allowedCone`),
+degree `2`, one horn. FS131-E6's twelve-colour map (`plans/FS131-E6-derivation.md` §§ 3.1–3.3: `IsHorn 0 0 0 2 c`, degree `3`, one horn)
+is the hand model in which SHAVE has only the unit split; it is not formalized. `ArcMap.cuspFrag` is no model: its domain is
 `B(0, 1/2)`, so `hv` fails at `0`, and its colour `1` has two horn sectors there, so `h1` fails. -/
 theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c : Fin k}
     (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : F.HasSectors v c 1) (hD : (interior (F.allowedCone v c)).Nonempty) {m j : ℕ}

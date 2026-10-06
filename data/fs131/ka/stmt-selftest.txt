@@ -1,0 +1,66 @@
+allowed statement change: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_part
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_subdiv
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: isR2Arc_of_fixed
+1789 base files, 6 new files, 1 failures
+PLANT [a changed hypothesis of a proved theorem (isR2Arc_of_fixed)]: FIRED
+allowed statement change: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_part
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: r2_notMem_region'
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_subdiv
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean
+FAIL MISSING Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: r2_notMem_region
+1789 base files, 6 new files, 1 failures
+PLANT [a deleted theorem (r2_notMem_region renamed)]: FIRED
+allowed statement change: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_part
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_subdiv
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean
+FAIL CHANGED (not editable) Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean
+1789 base files, 6 new files, 1 failures
+PLANT [an edit to a file that is not editable (BendCollar)]: FIRED
+allowed statement change: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_part
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_subdiv
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean
+FAIL AXIOM in Proofs/Planted.lean
+1789 base files, 6 new files, 1 failures
+PLANT [an axiom in a new file]: FIRED
+allowed statement change: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_part
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_subdiv
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean
+FAIL native_decide in Proofs/Planted.lean
+1789 base files, 6 new files, 1 failures
+PLANT [native_decide in a new file]: FIRED
+allowed statement change: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_part
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_subdiv
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean
+1789 base files, 6 new files, 0 failures
+UNPLANTED: PASS

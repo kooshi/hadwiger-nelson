@@ -1,0 +1,16 @@
+exact    | 481. **FS131-K6, by message mid-job (`fs131-w6` at `c3ffb4e7`, build O | plans/FS131-close-inventory.md
+exact    | def RegJLiteral (c : AeColouring k) : Prop := | .claude/worktrees/fs131-w6/data/fs131/k6/FanDesign.lean
+exact    | def RegJFan (c : AeColouring k) : Prop := | .claude/worktrees/fs131-w6/data/fs131/k6/FanDesign.lean
+exact    | def RegJBridge (k : ℕ) : Prop := | .claude/worktrees/fs131-w6/data/fs131/k6/FanDesign.lean
+exact    | ## Stage 6 — SAVED: REG-J′, both forms, and the bridge (for the derive | .claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | ### 11.5 Findings on the bridge (sent to the coordinator mid-job) | .claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | 1. **A step that does not formalize as written, and a shorter route**  | .claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | 3. **A generalization**: FS131-E8-FAN's "at least two [curves]" and "r | .claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | 4. **Three statements are the planner's assembly**, for a deriver's ch | .claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | theorem IsUnitCurve.one_le_dist {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : I | .claude/worktrees/fs131-w6/Proofs/HadwigerNelson/Plane/Saturated/Curve.lean
+exact    | theorem norm_sub_le_of_discs {x y νx νy : ℂ} (hx : ‖νx‖ = 1) (hy : ‖νy | .claude/worktrees/fs131-w6/Proofs/HadwigerNelson/Plane/Saturated/Curve.lean
+exact    | theorem fan_of_isolated (c : AeColouring k) {z : ℂ} {R : ℝ} (hR : 0 <  | .claude/worktrees/fs131-w6/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+exact    | theorem two_le_n (hz : z ∈ c.singularSet) : 2 ≤ F.n := by | .claude/worktrees/fs131-w6/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+exact    | theorem col_ne {i j : Fin F.n} (hij : (j : ℕ) + 1 = i ∨ ((i : ℕ) = 0 ∧ | .claude/worktrees/fs131-w6/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+exact    | theorem branch_contacts (hsat : SaturatedOn c.cls (ball z F.r \ {z}))  | .claude/worktrees/fs131-w6/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+quotations: 15  exact: 15  mismatched: 0

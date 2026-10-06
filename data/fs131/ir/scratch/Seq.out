@@ -1,0 +1,3 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 4,5
+data/fs131/ir/scratch/Seq.lean:12:8: warning: declaration uses `sorry`
+data/fs131/ir/scratch/Seq.lean:20:8: warning: declaration uses `sorry`

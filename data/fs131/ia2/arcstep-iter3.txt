@@ -1,0 +1,6 @@
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:584:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:596:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:601:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:606:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:612:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean:633:8: warning: declaration uses `sorry`

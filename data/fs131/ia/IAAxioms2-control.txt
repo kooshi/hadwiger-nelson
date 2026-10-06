@@ -1,0 +1,9 @@
+records 12 (print commands 12): standard-three-or-fewer 7, through sorryAx 5, other 0
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.exists_arcStep
+  HadwigerNelson.Plane.ArcMap.exists_procStep
+  HadwigerNelson.Plane.ArcMap.exists_terminalMap
+  HadwigerNelson.Plane.ArcMap.exists_terminalSeq
+  HadwigerNelson.Plane.ArcMap.exists_vertexStep
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.exists_arcStep
+FAIL

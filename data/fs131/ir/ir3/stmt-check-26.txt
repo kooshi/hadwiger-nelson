@@ -1,0 +1,2 @@
+853 statements read at a6642d49; allowed to change: none
+RESULT: PASS
