@@ -4897,6 +4897,22 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.StandingFive.card_filter_pow_eq_one
 #print axioms HadwigerNelson.StandingFive.card_normOne
 #print axioms HadwigerNelson.StandingFive.targetFloor_of_charSum
+#print axioms HadwigerNelson.StandingFive.sum_addChar_mul_left
+#print axioms HadwigerNelson.StandingFive.sum_eq_zero_add_sum_units
+#print axioms HadwigerNelson.StandingFive.sum_units_addChar_mul
+#print axioms HadwigerNelson.StandingFive.sum_addChar_mul_sq
+#print axioms HadwigerNelson.StandingFive.sum_quadratic_eq
+#print axioms HadwigerNelson.StandingFive.sum_plane_quadratic
+#print axioms HadwigerNelson.StandingFive.circle_sum_eq_kloosterman
+#print axioms HadwigerNelson.StandingFive.circle_sum_le_of_ne
+#print axioms HadwigerNelson.StandingFive.circle_sum_le
+#print axioms HadwigerNelson.StandingFive.circle_sum_zero_of_isotropic
+#print axioms HadwigerNelson.StandingFive.two_sqrt_lt_circle_sum_zero
+#print axioms HadwigerNelson.StandingFive.exists_ringHom_pow
+#print axioms HadwigerNelson.StandingFive.card_filter_pow_eq_self
+#print axioms HadwigerNelson.StandingFive.exists_mulShift_eq
+#print axioms HadwigerNelson.StandingFive.normOne_charSum_ge
+#print axioms HadwigerNelson.StandingFive.targetFloor_seven_of_kloosterman
 
 #eval IO.println "=== PURCHASED ==="
 

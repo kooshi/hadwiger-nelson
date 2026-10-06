@@ -1,0 +1,15 @@
+Proofs/HadwigerNelson/Arith/NormOneTarget.lean: 3 base declarations, 3 with statement and docstring kept, 0 docstring(s) extended, 0 flagged
+EXTENDED Proofs/HadwigerNelson/Arith/FloorPlanes.lean: theorem circle_sum_eq_kloosterman — docstring gains: **Proved here: this is the kernel form
+of an identity the project had only ever checked numerically** (M58 §R1, in floats at the primes `p ≡ 3 (mod 4)` below 600;
+FS-20's open item R4) — at every finite field of odd characteristic, prime powers included, and at every radius `a`, zero
+included.
+Proofs/HadwigerNelson/Arith/FloorPlanes.lean: 7 base declarations, 7 with statement and docstring kept, 1 docstring(s) extended, 0 flagged
+STATEMENTS: PASS
+SELF-TEST Proofs/HadwigerNelson/Arith/FloorPlanes.lean: theorem statement fault on `circle_sum_le`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/FloorPlanes.lean: definition fault on `KloostermanBound`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/FloorPlanes.lean: docstring fault on `kloostermanBound_of_card_le_five`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/FloorPlanes.lean: docstring extension on `kloostermanBound_of_card_le_five` (partner): as required
+SELF-TEST Proofs/HadwigerNelson/Arith/NormOneTarget.lean: definition fault NOT RUN (the base file declares no definition)
+SELF-TEST Proofs/HadwigerNelson/Arith/NormOneTarget.lean: theorem statement fault on `card_normOne`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/NormOneTarget.lean: docstring fault on `involution_eq_pow`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/NormOneTarget.lean: docstring extension on `involution_eq_pow` (partner): as required
