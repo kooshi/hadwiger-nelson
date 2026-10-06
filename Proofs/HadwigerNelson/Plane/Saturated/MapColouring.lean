@@ -188,9 +188,10 @@ theorem gmap_ii (𝒞 : (Fin 6 → Set ℂ) → Prop)
 /-! ## FS121-C1-SAT -/
 
 /-- **FS121-C1-SAT**, first clause: a plane map bounded by segments and circular arcs (an `ArcMap`: locally finitely
-many of them), valid, whose classes `F.region j` are those of a saturated colouring `c` up to null sets, is in `𝒫_k`
-under every order of its colours. -/
-theorem sat_inP (F : ArcMap k) (hF : F.IsPlaneMap) (hv : F.Valid) (c : AeColouring k)
+many of them) whose classes `F.region j` are those of a saturated colouring `c` up to null sets is in `𝒫_k` under
+every order of its colours. (Validity of the map is not a hypothesis: open classes almost everywhere equal to classes
+with null unit pairs have none, `UnitPairsNull.congr_ae`.) -/
+theorem sat_inP (F : ArcMap k) (hF : F.IsPlaneMap) (c : AeColouring k)
     (hc : ∀ j, c.cls j =ᵐ[volume] F.region j) (hsat : Saturated c.cls) (σ : Equiv.Perm (Fin k)) :
     InP F.region σ := by
   sorry
@@ -199,9 +200,9 @@ theorem sat_inP (F : ArcMap k) (hF : F.IsPlaneMap) (hv : F.Valid) (c : AeColouri
 map bounded by segments and circular arcs (C121-NOPAR, a named open statement, for the locally finite map
 colourings), no saturated six-colouring is almost everywhere equal to such a map. A refutation; its hypotheses without
 `hNoPar` are `sat_inP`'s, whose satisfiability at `k = 6` is the open question (at `k = 7`: R7). -/
-theorem sat_noPar (𝒞 : (Fin 6 → Set ℂ) → Prop) (hNoPar : NoPar 𝒞) (F : ArcMap 6) (hF : F.IsPlaneMap) (hv : F.Valid)
+theorem sat_noPar (𝒞 : (Fin 6 → Set ℂ) → Prop) (hNoPar : NoPar 𝒞) (F : ArcMap 6) (hF : F.IsPlaneMap)
     (h𝒞 : 𝒞 F.region) (c : AeColouring 6) (hc : ∀ j, c.cls j =ᵐ[volume] F.region j) (hsat : Saturated c.cls) :
     False :=
-  hNoPar _ h𝒞 (Equiv.refl _) (sat_inP F hF hv c hc hsat _)
+  hNoPar _ h𝒞 (Equiv.refl _) (sat_inP F hF c hc hsat _)
 
 end HadwigerNelson.Plane

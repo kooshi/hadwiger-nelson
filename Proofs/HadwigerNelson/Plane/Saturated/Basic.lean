@@ -13,6 +13,8 @@ The vocabulary FS-111's route M and FS-121 read (`data/fs111/claims.md` § 0, `d
   `c : AeColouring k` and `c.cls`.
 * *In D-NF* is notation, never a hypothesis: every statement reads a class through `densitySet` (`S̃_j`), `essClosure`
   (`A*_j`), `essBoundary` (`∂_e S_j`) and `essSupport` (`supp S_j`), each unchanged by a null change of the class.
+  No row of wave 6's thirty-five uses a pointwise normalisation of the colouring (`col x = j` on `S̃_j`); a later row
+  that does is new, and needs that normalisation as a hypothesis of its own.
 * *Saturated* is `Saturated c.cls` (wave 2): for a colouring, "every essential boundary point is at distance exactly `1`
   from the support of each colour of its essential multicolour".
 
