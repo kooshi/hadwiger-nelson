@@ -1,6 +1,7 @@
 exec(open("/home/kooshi/source/lean-dir/data/fs131/briefs/scripts/mkbrief.py").read())
 import sys,subprocess
 N=sys.argv[1]  # 7, 8 or 9
+SHASH=sys.argv[2] if len(sys.argv)>2 else None  # for 8 and 9: the commit of fs131-w7 that holds Plane/SimpleOn (inventory item 508)
 KP="plans/FS131-kernel-plan.md"
 PIDENT="de Bruijn, the planner — your agent file (`.claude/agents/debruijn.md`) is your identity and your lane's workflow"
 T={
@@ -19,7 +20,7 @@ T={
    layout="`Plane/RingCalculus/` (the plan names `Star`, `SemiHub`, `Empty`)",
    ledger="rows 145–150",
    cross="By the backlog's own tags this wave rests on waves 1, 3 and 4, all on `main`, and three of its rows (FS116-N3-STAR2, FS116-N3-CROSS, FS116-RING-TRANSFER-QC) on one row of wave 7, FS114-N7-QOPP, which a sibling planner is stating now on `fs131-w7`. Take that row as a named hypothesis in those three statements, under a name of your own, read from its derivation entry (`LEAN.md` § Searching — Lean, last bullet: two branches never state one lemma under one name); the join replaces the hypothesis by wave 7's theorem.",
-   special="The plan's § 7.3 item 5 names this wave: a route lemma over a class the backlog proves empty (the V6 lemmas) carries its vacuity in its docstring, in `LEAN.md` § The gate's form. And § 7.3 item 2's open word \"simple\" (a fragment's tiles that cross the domain's boundary) is being decided by wave 7's planner: state your classes with that reading as a parameter or over the literal one, say which, and I relay its decision when it arrives."),
+   special="The plan's § 7.3 item 5 names this wave: a route lemma over a class the backlog proves empty (the V6 lemmas) carries its vacuity in its docstring, in `LEAN.md` § The gate's form."),
 "9":dict(title="the eleven rows of the reductions and the class statements",
    what="eleven rows of two kinds — the reductions behind \"six measurable colours do not suffice at bounded complexity\" (from FS-111, with FS-129's TOP5) and the class statements FS-129 composed (a bend for any arc, the (Q)-free class, DISC-F in the non-Siamese class)",
    rowhead="**Wave 9** (11 rows):",table="| 9 | the reductions",
@@ -30,6 +31,23 @@ T={
    special="The wave's table row names its hypothesis from outside the backlog: row 130's conclusion, `χ(ℝ²) = χ_m⁰(ℝ²)`, for the two rows that end \"hence χ(ℝ²) ≥ 6\" given measure rigidity. It enters as a named hypothesis (`Row130Collapse`, as the plan's § 7.4 has it), never an axiom; Kooshi has ruled that measure rigidity itself is not formalized or priced now (inventory item 488), so do not open it. Every \"given MR\" in a row is read for what it hides beyond that one hypothesis."),
 }[N]
 TREE="fs131-w"+N; JOB="FS131-K"+N
+if N in ("8","9"):
+    assert SHASH, "give the hash of fs131-w7's SimpleOn commit: mk-kw.py "+N+" <hash>"
+    SIMPLE=f"""
+
+**The word "simple" is fixed, and its module is shared** (inventory item 508). Wave 7's planner decided the plan's § 7.3 item 2 this morning:
+a fragment is simple *on a set* — `ArcMap.SimpleOn S`: every tile whose closure meets `S` is a Jordan domain, and the closures of two such
+tiles meet in a preconnected set — with the landed `ArcMap.Simple` untouched and `Simple.simpleOn`, `simpleOn_univ`, `simpleOn_ball_iff`
+proved beside it, so a row stated with `SimpleOn` implies the row as filed. It lives in one module on that planner's branch
+(`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/SimpleOn.lean`). **Take it by `git merge {SHASH}` into
+your branch as your first act after the readback** — the one exception to "you do not merge another branch": one module, declared once —
+and state a class on a fragment with `F.SimpleOn (closedBall p R)`. Never re-declare the predicate or its lemmas (`LEAN.md` § Searching —
+Lean, last bullet); a row whose argument reads a tile off the disc after all is a message to me. That planner did not take a purely local
+form: the second clause is about two whole closures."""
+    NOMERGE=f"You merge nothing into this branch but the one commit named above (`{SHASH}`); you do not run the gate or touch `main`."
+else:
+    SIMPLE=""
+    NOMERGE="You do not merge another branch into this one, run the gate, or touch `main`."
 W=WT+TREE+"/"
 TIP=subprocess.run(["git","-C",W,"rev-parse","--short","HEAD"],capture_output=True,text=True).stdout.strip()
 MODS="\n".join(Q(KP,p) for p in T["mods"])+"\n"
@@ -86,7 +104,7 @@ foundation and its hypotheses from outside:
 {MODS}{Q(KP,T["table"])}
 {T["cross"]}
 
-{T["special"]}
+{T["special"]}{SIMPLE}
 
 ## Done means
 
@@ -111,7 +129,7 @@ foundation and its hypotheses from outside:
    first two leaves you prove), the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), the hypotheses' inhabitants and
    the vacuity lines, and a handoff for implementers with how two could split the work by file. A leaf you can prove in about an hour, prove,
    and say so.
-6. The report, in standing rule 11's form. You do not merge another branch into this one, run the gate, or touch `main`. Leave no background
+6. The report, in standing rule 11's form. {NOMERGE} Leave no background
    process running, and keep what your record cites under `data/fs131/k{N}/`. The rows may be more than one planning pass holds: stopping
    at a saved stage with the dispositions and the foundation done and the skeleton for one module is a good report — say where a second pass
    takes over.

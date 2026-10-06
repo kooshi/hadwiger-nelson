@@ -5301,3 +5301,20 @@ reason by the close.*
      I10A's five (ruling 494 (b)). (d) The joining job adds `StationarySet` to the vacuity scan's carriers with its three
      inhabitants. (e) The wording correction is held with the wave's errata. (f) **Slot → FS131-I10C** (`StandingFive`, nine
      leaves, on `fs131-w10c`), launched 2026-10-06. In flight: 1 (K10b) + 1 (K7) + 1 (I10C) = 3.
+
+508. **FS131-K7, by message mid-job: the plan's open word "simple" for a fragment is decided — the narrower reading, as a new predicate
+     `ArcMap.SimpleOn S`, the landed `ArcMap.Simple` untouched** (source: K7's message to "main", 2026-10-06; the module
+     `Proofs/HadwigerNelson/Plane/SimpleOn.lean` on `fs131-w7`, no `sorry`, checked with `lake env lean` by its word — its build and
+     commit are the artifact at its next saved stage). **The definition**: every tile whose closure meets `S` is a Jordan domain, and
+     the closures of two distinct such tiles meet in a preconnected set; a row about "a simple fragment on `B̄(p, R)`" takes
+     `F.SimpleOn (closedBall p R)`. **What each reading costs, proved there by its word**: `Simple.simpleOn` and
+     `simpleOn_univ : F.SimpleOn univ ↔ F.Simple` (so a row stated with `SimpleOn` implies the row as filed); `SimpleOn.mono`;
+     `simpleOn_ball_iff : F.SimpleOn (ball p ρ) ↔ (F.wholeRestrict p ρ).Simple` (the two readings differ by one application of
+     FS129-OR1-WHOLE's whole-tile restriction); the two facts the landed library reads from `Simple` hold under `SimpleOn S` at a
+     point of `S`, and `Simple`'s second clause has no reader on `main` yet. Not taken: a purely local form (the second clause is
+     about two whole closures). **Ruling**: adopted, with no deriver's reading asked (the plan's § 7.3 item 2 had named one).
+     Alternative weighed: the literal `Simple` over all tiles, or a deriver's job on which reading the hand arguments mean. Why: by
+     `Simple.simpleOn` every row proved under the narrow hypothesis gives the row as filed, so the choice cannot lose a result; a row
+     whose argument does read a tile off the disc will show at its proof, and is then a message. Confidence: high. **Relay**: wave
+     8's and wave 9's planners take the module by merging the one commit of `fs131-w7` that holds it (asked of K7 by message: a
+     commit of its own after a build, and the hash), and state their classes over it; their briefs carry this.
