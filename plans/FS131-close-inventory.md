@@ -7050,3 +7050,22 @@ reason by the close.*
      Alternative: leave the header stale, which the scan tolerates. Why not: the digest then prints a stale line at
      every later landing, and the last two landings updated it. Confidence: high. (b) The example's dropped binder
      is ratified: the caller's line adjusted, its conclusion unchanged. Reply sent, one message.
+571. **FS131-K8b, by message mid-job: the nine semi-hub rows are stated with no hypothesis for FS114-N7-QOPP** (source: K8b's message to "main", 2026-10-06; by its word `Plane/RingCalculus/SemiHub`, 23 `sorry` leaves, elaborating, not yet built or committed — the artifact is read at its hand-back).
+     What FS116-N3-STAR2, -CROSS and RING-TRANSFER-QC read of QOPP is (i) FS112-U1's two cone windows, landed in wave
+     3 at class level (`ringArc_cone_inner`, `ringArc_cone_outer`, `Plane/RingGerm`), (ii) "the inner tile is p's tile
+     and holds the arc", which it states as `qcol_inner_tile`, and (iii) the cyclic position of two tiles among four,
+     which wave 7's five statements do not carry and it states as `ringArc_star` over a new `IsStar4`. So it defines
+     no `QArcsJoinOpposite`. **For wave 7's line, its reading**: `qArc_inner`'s cone clause and `qArc_outer` follow
+     from those two landed lemmas with non-Siamese idle; `qArc_cone_disjoint` and `qArc_ne` by angle arithmetic; only
+     `qArc_inner`'s first clause needs non-Siamese, and that clause is the same lemma as its `qcol_inner_tile`.
+     **Generalizations**: FS116-N3-PAIR reads no change point and no simple; FS116-V5-DICHO and FS116-N3-STAR2 read a
+     four-colour point simple at it and the two arcs, any `k`, and DICHO holds at closed change points (three cases
+     worked by it, one mind); FS116-V5-QCOL's carried-colour clause reads no non-Siamese (proved). **Not stated in
+     this pass**: FS116-N2-SIXRING and FS116-RING-TWIST-C (the second designed in its record). **Rulings.** (a) **No
+     named hypothesis for QOPP**: the rows are stated over the landed lemmas and its two new statements.
+     Alternative: keep `QArcsJoinOpposite`, as the plan's § 7.4 expected. Why not: an assumption that is not needed
+     is not carried — and the gate now lists every one. Confidence: high. No reply sent: it proceeds unless told.
+     (b) **For wave 7's third planner's brief (not written)**: its five QOPP theorems are to be re-read against this
+     — four as consequences of wave 3's two lemmas, and `qArc_inner`'s first clause and `qcol_inner_tile` as one
+     declaration at the waves' join (ruling 546's relay, completed from the other side). (c) A third planning pass
+     for wave 8 is owed (SIXRING, TWIST-C); brief not written. (d) Its generalizations go to the wave's errata.
