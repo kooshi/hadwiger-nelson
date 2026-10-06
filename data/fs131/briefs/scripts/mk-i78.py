@@ -49,12 +49,13 @@ milestones' case list starts from it.'''
     ORDER="the handoff's order for `Empty` — `ringPt_sixth_dist_le_one`, `v6_count`, `exists_ne_mem_closure_inter_of_split`, `v6_hug`, `v6_hubs`, then `emptyNS`; then `star_recip`, `star_anti` if budget remains"
     NLEAF="10 `sorry` leaves: eight in `Empty` (six yours; `outerAdj` and `doubleTip` wait for the second planning pass and stay), two in `Star`"
     if SQ9:
-        MODEL=f'''**The model is part of done** (ruling 525 (c)): `emptyNS` is a refutation at six colours, and the gate's inhabitant rule asks for a Lean
-   object meeting its hypotheses but the one it fails. That object is wave 6's nine-colour grid map, `sq9 : ArcMap 9`, which is on
-   `origin/fs131-w6m` at `{SQ9}`: merge that commit into your branch (`git merge --no-edit {SQ9}`; it brings wave 6's foundation by ancestry —
-   re-declare none of its names), and in a new module of your own that imports it state and prove, at the lattice vertex the plan names:
-   `Valid`, `NonSiamese`, `Covers`, four colours, `GammaFreeRing`. `emptyNS`'s docstring then names the theorem. One map, declared once: if a
-   fact you need about `sq9` is missing, add it in your module under a name of your own, and say so.'''
+        MODEL=f'''**The model is owed, and is not yours** (ruling 525 (c), amended by inventory item 530): `emptyNS` is a refutation at six colours, and the
+   gate's inhabitant rule asks for a Lean object meeting its hypotheses but the one it fails. That object is wave 6's nine-colour grid map,
+   which now exists: `sq9Map : ArcMap 9`
+   (`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6m/Proofs/HadwigerNelson/Plane/Saturated/Sq9Map.lean`, on `origin/fs131-w6m` at
+   `{SQ9}`), with `IsPlaneMap` proved and nothing yet about `Valid`, `NonSiamese`, `Covers`, the colours at a lattice vertex or its ring.
+   Those five facts are a job after yours, on a line that holds both waves: do not merge that branch (it carries another wave's open
+   leaves) and do not build a nine-colour map of your own. `emptyNS`'s docstring says the model is owed and names the map and the facts.'''
     else:
         MODEL='''**The model is owed, and is not yet yours** (ruling 525 (c)): `emptyNS` is a refutation at six colours, and the gate's inhabitant rule asks
    for a Lean object meeting its hypotheses but the one it fails — wave 6's nine-colour grid map, which another implementer is building now.

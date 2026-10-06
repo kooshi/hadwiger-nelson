@@ -5740,3 +5740,53 @@ reason by the close.*
      only). With Weil's bound the **declared outside theorems go from one to two**, and the imported count rises from 4 by
      however many records rest on the new one — at least the three the floor states. Found while writing K10c's brief,
      which now says so; the handoff's § 9 line corrected; to be told to Kooshi in the next report.
+
+530. **FS131-I6B done: `sat_inP` proved (FS121-C1-SAT), at a wider class than filed, with its Lean model — the nine-colour grid as
+     an arc map; `MapColouring` has no open leaf** (implementer, Opus; harness 407k by the task notice; record `fs131-w6m`'s
+     `plans/FS131-I6B-implementation.md`; report `data/fs131/reports/FS131-I6B.md`; commits `898f4443`, `8c1b238f`, `2e55a2d6`;
+     pushed, tree clean). **Proved**: `sat_inP` as fixed at `3928644b`; `sat_noPar` now free of `sorry` through it;
+     `ArcMap.bound_of_saturatedOn` — an arc map whose regions are a.e. a family saturated on an open set `U`: every point of
+     `U` in the domain and in the closures of two different colours' regions is in the unit shadow of the first's closure —
+     no colouring, no plane map, no order of the colours; `sat_bound_of_mem_closure`; two local facts on essential boundary
+     points of a region (`Plane/Saturated/MapEdge`, new). **The model**: `sq9Map : ArcMap 9` (`Plane/Saturated/Sq9Map`, new)
+     and `sq9Map_sat_model` — every hypothesis of `sat_inP` at once at `k = 9` with a separating point; four `example`s apply
+     the theorems to it. **My receipt**: tip `2e55a2d6` equals `origin/fs131-w6m`, tree clean; the last real build's full log
+     (`build/gate/build/20261006T142137Z-528180.log`, 3 modules rebuilt) ends "Build completed successfully (5808 jobs)",
+     21 warnings, all `declaration uses sorry` in `Pinch.lean` (the other implementer's file, proved on `fs131-w6p`), none
+     elsewhere; `sorry` by the handoff's grep: `MapColouring` 0, `MapEdge` 0, `Sq9Map` 0, `Basic` 0, `Pinch` 7; no `axiom`, no
+     `native_decide` in the three files; `data/fs131/i6b/logs/axioms-3.txt` parsed by script — 46 records, each on exactly the
+     standard three, and the planted control prints `sorryAx`; `Basic` and `Pinch` byte-identical to `3928644b` (`git diff`
+     empty); `MapColouring`'s fourteen earlier declarations compared head by head with `3928644b` — all the same, four added;
+     `sat_inP`'s statement read then and now — identical; `bound_of_saturatedOn`'s statement and proof read at ll. 196–217 —
+     it says what the report says, and its proof reads `SaturatedOn` on a ball inside `U`, closedness of the unit shadow,
+     and the accumulation lemma; `./scripts/dupnames.sh` log "OK — no name is declared by two modules". Not checked by me:
+     `MapEdge`'s 519 lines beyond the build; the three planted Lean faults' logs. **Findings**: (1) *a generalization* —
+     nothing in `MapColouring` reads the second clause of `SeparatesAt` (a ball in the union of the two closures): `sat_inP`
+     and the planner's `gmap_i` read the first clause only, so FS121-C1-GMAP and FS121-C1-SAT stand over a closure-level 𝒫_k
+     with a weaker C121-NOPAR; (2) *a correction owed* — the planners' record § 3.3 says the closure-level form "would make
+     FS121-C1-SAT false at a vertex where colour `i` has a cusp", and the kernel now proves it true there; (3)
+     `bound_of_saturatedOn` at `C = F.region`, `U = ball p ρ` is the bound FS116-O1-SATPIN's "saturated on a disc" reads;
+     (4) believed and not proved: `sat_inP` holds without `hF`. **Prediction scored**: the plan priced `sat_inP` at two days
+     ("its cost is wave 3's sector machinery"); leaf and model took under an hour by a route reading
+     `GoodAt.exists_local_curve` and no sector chart. **Slips, the job's, disclosed**: its statement check's first planted
+     fault changed a doc comment the check ignores and passed — caught from the exit status, the plant now asserts it changed
+     a read line. **Tidy items for wave 6's join**: `MapEdge.isPreconnected_puncturedBall` restates
+     `isPreconnected_ball_diff_singleton` (`Plane/ValidMap/Limit`, not upstream of `Plane/Saturated`), and four density
+     facts under `MapEdge` are generic. **Credit**: it stated the theorem at the class its argument reads and found the
+     definition's second clause idle, and it read its control's exit status instead of trusting the plant.
+     **Rulings.** (a) **`SeparatesAt` keeps its second clause for now; no statement changes on a branch.** The finding is
+     relayed to wave 6's third planner (running), who says in its handoff whether any row of its own reads the clause; the
+     weakening of C121-NOPAR is decided at the wave's join with that answer, and the errata line under FS121-C1-SAT joins
+     the wave's errata. Alternative: drop the clause now. Why not: four implementers' branches are cut from commits holding
+     the definition, the clause is a hypothesis of rows not yet read against it, and a weaker named hypothesis loses
+     nothing by waiting. Confidence: high. (b) **The correction to the planners' § 3.3 is the third planner's, as a dated
+     line in its own stage** (relayed by message, 2026-10-06, with (1) and (3)). (c) **Ruling 525 (c) and 527 (b) amended:
+     `emptyNS`'s nine-colour model is not FS131-I8A's item; it is a job after I8A, on a line that holds both waves.** What
+     changed: the map exists with `IsPlaneMap` only — `Valid`, `NonSiamese`, `Covers`, four colours at a lattice vertex and
+     the ring are five unproved facts about a new map, a job of its own size; and `fs131-w6m` carries `Pinch`'s seven open
+     leaves and three registry files' edits, which a merge would put in wave 8's implementer's tree. Alternative: as ruled,
+     I8A merges `2e55a2d6` and proves the model last. Confidence: medium-high; "one map, declared once" stands. I8A's brief
+     regenerated (`mk-i78.py 8 2e55a2d6`), gate exit 0. (d) The gate-side drafts (`LEDGER.md` row 143, the errata) are held
+     for the filing. (e) **Slot → FS131-K9** (wave 9's planner, on `fs131-w9` at `26b08395`), launched 2026-10-06, its
+     brief amended at launch with `emptyNS`'s statement, wave 7's state and item 526's lesson (`mk-k9-amend.py`; gate exit
+     0, 16 quotations). In flight: 1 (K6c) + 1 (L10A) + 1 (K9) = 3.

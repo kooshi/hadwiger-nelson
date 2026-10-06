@@ -148,3 +148,25 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-06, at launch) — what changed since this brief was written
+
+Information only; nothing above is withdrawn.
+
+1. **Wave 8's first planning pass has handed back.** The one row of another wave that a row of yours rests on, FS129-SR3-EMPTY-NS, is
+   now stated in Lean on `origin/fs131-w8` at `f1c13612` (not on your branch; read it with `git show f1c13612:<path>` or in the tree
+   below). State your named hypothesis for FS129-SR3-QFREE-NS so that this theorem discharges it at the join in a line:
+
+> theorem emptyNS {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w8/Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean
+
+>     (h4 : 4 ≤ (F.coloursAt p).ncard) (hΓ : F.GammaFreeRing p) : False := by
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w8/Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean
+
+   It is stated at `ArcMap 6` and reads no simplicity (inventory item 524). `GammaFreeRing` is in the foundation you already hold.
+2. **Wave 7's first pass has handed back too** (inventory item 513): its thirteen four-colour rows are not yet stated; a second pass
+   will state them on `fs131-w7`. If a row of yours reads one of them, take it as a named hypothesis under a name of your own, as
+   ruling 498 has it, and tell me which.
+3. **A lesson from today, for your mid-job messages** (inventory item 526): when you report a defect, say which kind it is — a
+   *statement* that needs a hypothesis its entry lacks, or a *route* that reads more than the statement needs (a shorter-route note, no
+   defect). One report this session was the second kind and was retracted by its reporter within the hour.
