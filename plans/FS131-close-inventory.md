@@ -6735,3 +6735,27 @@ reason by the close.*
      drafts. (d) **Slots → FS131-K6d** (wave 6's fourth planner: it merges the landed `main` first) **and FS131-I8A**
      (wave 8's empty class), launched 2026-10-06. In flight: 3 (I7A, K6d, I8A) + the special-purpose slot (T5).
      **Next into a free slot: FS131-L10B** — brief not written.
+560. **FS131-L10B's brief written and gated; its tree made** (mine, 2026-10-06, after the compaction; source: this item).
+     Brief `data/fs131/briefs/FS131-L10B-wave10-land.md` (generator `data/fs131/briefs/scripts/mk-l10b.py`; gate exit 0,
+     23 quotations, read from its own status). Tree `.claude/worktrees/fs131-w10m`, branch `fs131-w10m`, cut from the
+     import's commit `248f8f4f`, pushed; build copied from `fs131-w10k` (no `lake` running there, by `pgrep` and
+     `/proc/<pid>/cwd`). **Trial merges, mine** (`git merge-tree --write-tree`, no tree touched): `248f8f4f` with
+     `origin/main` at `f2ad1a4f` conflicts in `scripts/Axioms.lean` only; `origin/fs131-wf1` is clean against `main` and
+     conflicts against `248f8f4f` in `ARCHITECTURE.md` and `scripts/Axioms.lean`; `origin/fs131-t5` at `d182ed09`
+     (mid-job) is clean against both. **What the brief fixes**: the joined state of the registry files (one declared
+     import, eight imported records, Falconer's four under CLEAN); the one ruled statement change (ruling 542) and no
+     other; the tidies of rulings 538 (b), 547 (a), 555 (a) — the planner's § 16.6 quoted by address, its "two imports,
+     twelve records" marked superseded; a `#check` of every head (item 556); the previous receipts
+     (`data/fs131/l6a/`). **Rulings.** (a) **The gate's new step is merged last, after the wave's gate is green, and
+     only if I message that FS131-T5 is back and reviewed before the landing's push; if its step cannot go green
+     inside the landing's touches and budget, the commit before that merge lands** (it passed the whole gate).
+     Alternative: merge it first with the other two. Why not: the step fails on any named hypothesis nobody declared,
+     its enumeration was made before wave 6's first half landed, and a landing must not be held by a tool it is the
+     first to run. Confidence: medium-high; it changes if T5's hand-back shows the declarations are a few lines.
+     (b) A slip in my summary across the compaction, corrected here: commit `082f86c9` (the pattern for the controls
+     file) is the wave-2 job FS131-I2n's, on `main` — not IF1's; and the "two `haveI` lines" I carried as a tidy are
+     not in this landing's modules (`grep` at `248f8f4f`: the instance is supplied by hand nowhere under `Proofs/`),
+     so tidy (ii) is the one word the planner's § 15.3 names. (c) **FS131-K6d has not yet merged `main`** (its tip
+     `59ce6b0c` is its readback stage; `origin/main` is not its ancestor — checked): the three branches for I6L, I6Z,
+     I6K wait for its hash. In flight: 3 (I7A, K6d, I8A) + the special-purpose slot (T5). **Next into a free
+     standing slot: FS131-L10B**, launch-ready.
