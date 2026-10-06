@@ -168,3 +168,16 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-06, at launch) — your branch starts one merge later than the brief says
+
+Nothing above is withdrawn; two facts changed.
+
+1. **Your branch was fast-forwarded** from `b5ef0e39` to `6f9807b9` (inventory item 549): the wave's second planner merged wave 8's
+   foundation module (`Plane/RingCalculus/Basic`, no `sorry`) into the wave's line, and your unstarted branch was moved onto that merge.
+   Your two files and the wave's other three modules are byte-identical across it. Your statement check is against `6f9807b9`; the
+   branch as given still has twenty `sorry` leaves, nineteen in `Count` and one in `Rainbow`. The first build compiles that one module.
+2. **The second planner has handed back** (inventory item 553): it added three modules for the four-colour rows on the planner's
+   branch, after the commit yours starts from, and changed none of your files. One of its leaves reads `anchor` as it stands, so a
+   statement of yours that turns out false or short of a hypothesis is, as before, a message to me at once — and say which kind you
+   have: a *statement* that needs a hypothesis it lacks, or a *route* that reads more than the statement needs (inventory item 526).

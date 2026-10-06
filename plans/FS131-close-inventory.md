@@ -6578,3 +6578,48 @@ reason by the close.*
      landed), and **`fs131-t5` and `fs131-wf1` if they are back** — the gate's new step and Falconer's lemma — runs
      the full gate, lands. It launches after FS131-L6A has handed back: two landings do not run at once. Brief not
      written.
+
+555. **FS131-K10c done at its Stage 17: wave 10's third planning pass — the import whole, two of the four rows stated, the
+     other two designed and left to a fourth pass** (planner; harness 474k and 67 minutes by the task notice; record
+     `fs131-w10k`'s `plans/FS131-w10-kernel-plan.md` Stages 10–17; report `data/fs131/reports/FS131-K10c.md`; commits
+     `f502f00a`, three merges (`dd7fc1e2` `origin/main`, `6f1fcaec`, `f145798a`), **`248f8f4f` (the import; no `sorry` in
+     the tree)**, `04573c38`, `e09209e4`; pushed, tree clean). **The import**: item 554. **On it alone, in the kernel**:
+     `standingFloor_seven_weil : StandingFloor 7`, `seven_le_localBound_weil` (TC1-STANDING-FIVE's "so `L(F) ≥ 7`", no
+     hypothesis left), `five_le_chromaticNumber_weil`, the planes' floors at seven from 98 and **at six from 62**
+     (`targetFloor_six_weil`), `circle_sum_le_weil` (the held paper's Theorem 3 at `n = 2` in its true form).
+     **Stated**: the level row (X25B-L1 against the finite quotient graph, wider than the second pass's shape, two
+     leaves, settled from the entry with no deriver's question); J45-N1 (a)(b) as the two-fact interface
+     `IsPlaceFilter`, stated and inhabited; a usable place of the standing field as a leaf (`UsablePlace`, ruling
+     535 (c)). **Not stated**: J45-SI-5 and J45-SI-C's measure parts — designed (its § 14.3), with a gap named at one
+     step of SI-5. **Read-backs**: every implementer's statement it read says its sentence; **the kernel does not hold
+     a link from the floor's object to the finite plane** — the floor is about the norm-one Cayley graph of the field
+     of `Q²` elements, and "the plane `Γ_Q`" needs an isomorphism of about 150 lines that is not stated. **My
+     receipt**: tip `e09209e4` equals `origin/fs131-w10k`, tree clean; `sorry` at the tip by the handoff's grep:
+     `LevelGraph` 2, `UsablePlace` 1, every other file of `Arith/` 0; **at `248f8f4f`, zero `sorry` under `Proofs/`**
+     (`git grep` on that commit); the library's axioms at that commit by `git grep '^axiom '`: the new one, Falconer's,
+     and the native-evaluation example — no other; `axioms-import.log` parsed by script — 17 records, 8 on the
+     standard three and `kloosterman_bound` and nothing else (the eight it names), 9 on the standard three (the model
+     `kloosterman_bound_model` and the page-form translation among them); the `declareImport` line for it at
+     `scripts/Axioms.lean` l. 206 and the row in `ARCHITECTURE.md`; its last build log "OK — 469 of 469 batches";
+     the axiom's text and the page: item 554. Not checked by me: its exact-arithmetic tool's nine fields; the two new
+     statements against their rows; its read-backs. **Corrections owed, held for the filing**: G56's and `LEDGER.md`
+     row 53's "the plane" (the kernel's floor is the Cayley graph's until the link is proved); `BIBLIOGRAPHY.md`'s
+     `[Weil1948]` and `[MMST1996]` rows (what was read; the slip in print on p. 206; the correction now citable —
+     ruling 538 (a) is met: its read-back of the three theorems is in its § 15.1). **Slips, the job's, disclosed**:
+     the modeling passes not invoked fresh; no predictions registered; draft files in the import's commit. **Credit**:
+     the axiom stated as the page's sentence with the library's form derived in the kernel, a read-back with every
+     difference settled from the page, and the missing link to the finite plane said plainly. **Rulings.** (a) **The
+     second landing's edits are its § 16.6 list, adopted**: `NumberField standingField` a global instance; the two
+     Bézout identities kept, their docstring saying they are an independent witness; the docstring notes for the four
+     J45 heads and `sp_if`; the stale "never an axiom" and "skeleton" lines. (b) **One implementer, FS131-I10G**:
+     `LevelGraph`'s two leaves and `UsablePlace`'s one (about 730 lines), on a branch to cut from `e09209e4`. Brief
+     not written. (c) **A fourth planning pass, FS131-K10d, now and not after J45-N1 (a)(b)**: J45-SI-5 and J45-SI-C
+     over `IsPlaceFilter`; **and the link from the norm-one Cayley graph to the finite plane as a row** — it decides
+     whether the front page may say "every usable plane". Alternative: wait for the adic foundation. Why not: the
+     interface is inhabited, and the two rows land over it. Confidence: medium-high. Brief not written. (d) J45-N1
+     (a)(b) proper (one theorem, `IsPlaceFilter` at the arithmetic filter; a planning pass and about two jobs) and
+     the floor at six for the target with 64 elements (about 410 lines) are stubs for the milestone's filing, not
+     jobs now. (e) **A sentence for `LEAN.md` § Assumptions** — state an imported theorem in the paper's own form and
+     derive the library's form in the kernel — is filed with the second landing, from its § 16.7. (f) **Slot →
+     FS131-I7A** (wave 7, route T's count, on `fs131-w7a` at the merge `6f9807b9`), launched 2026-10-06 with a dated
+     amendment for its moved base (gate exit 0). In flight: 3 (L6A, IF1, I7A) + the special-purpose slot (T5).
