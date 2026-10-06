@@ -3717,3 +3717,7 @@ reason by the close.*
      in `~/source`"*. Staffing stays at three Opus slots (item 323); the budget is about 48 hours at that rate. **Slip, the coordinator's**: two reports
      said "pushed to GitHub"; `origin` is the backup remote (memory `push-policy`, on file since 2026-09-24). No file in the repository said it; the
      memory now carries the wording rule.
+413. **Kooshi, 2026-10-06, on published artifacts**: *"oh and one more minor note. […] When closing updates them, I guess
+     just keep it local […]."* Filed: `.claude/output-styles/keryx.md` § The filing's Proof Atlas line now says rebuilt and
+     kept local, nothing published; the memory `proof-atlas-keep-current` carries it. **For this milestone's filing**: the atlas is rebuilt and committed, not
+     republished; the report to Kooshi says the page at the old link is stale.

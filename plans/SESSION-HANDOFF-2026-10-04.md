@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-06 by Keryx after the restart (inventory items 407, 410). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–412 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–413 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **412**. Kooshi restarted the work,
+> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **413**. Kooshi restarted the work,
 > back (item 412); `origin` is the backup remote, not GitHub. `/tmp` is a tmpfs: the pre-halt scratch is
 > in `/home/kooshi/source/lean-dir-tmp-rescue-2026-10-05/tmp/` (item 407), and a record citing `/tmp/claude-1000/…` reads it there.
 >
@@ -166,4 +166,4 @@ filing, work the held list in the Latest block item by item.
   The outside repository's issue is written. The audit's Mathlib harness was deleted at Kooshi's word (item 123); the evidence is in `data/external/hn1/`.
 - From FS-129: the order (backlog, then FS-124 — stands); the finite-graph search (held); a blind second mind on FS129-OR1-QFREE (none); FS-129 closes when its 32
   compositions pass (spread across waves).
-- The Proof Atlas: two stale page notes and the zoomed labels (item 4), at the next atlas update.
+- The Proof Atlas: two stale page notes and the zoomed labels (item 4), at the next atlas update. **Publish nothing** (item 413): rebuild and commit locally.
