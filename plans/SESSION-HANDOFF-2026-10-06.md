@@ -99,6 +99,10 @@ a fresh agent on the same brief.
   a worked brief: `Q(path, prefix, heading)` quotes the unique line with that prefix, `item(n)` an inventory item's first line), gated with `python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>`; branch-only
   files need their full worktree path; the statements section needs at least one quotation. A mid-job change is a dated amendment appended to the
   brief, gated, then one message pointing at it.
+- **Brief hygiene learned this session** (items 453, 467 (g)): commit a brief only on the gate's **own exit status** (run it to a file, read
+  `$?`; a pipe through `tail` hides a FAIL); a bare file name or a backticked token beginning with a dot (`.toward`) fails the gate — write
+  full paths and full names; each job's generator is in `data/fs131/briefs/scripts/` (`mk-<job>.py`; `mk-i10.py B|C`, `mk-ma.py`, `mk-k6.py`
+  are reusable); **two branches never state one lemma under one name** — a line that needs another's lemma takes it as a hypothesis.
 - **A new worktree**: `git -C <root> worktree add -q -b <br> <root>/.claude/worktrees/<name> <base>`; `mkdir .lake`; symlink `.lake/packages` to the
   main tree's; `cp -a` `.lake/build` from a tree with **no `lake` running in it** (`pgrep -x lake`, then `readlink /proc/<pid>/cwd`); push with `-u`.
   Idle trees with green builds now: `fs131-w5k` (`fs131-w5`'s line at `3b120cd3`), `fs131-wop` (`main`'s line).
