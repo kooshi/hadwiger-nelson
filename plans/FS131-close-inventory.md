@@ -5643,3 +5643,24 @@ reason by the close.*
      (e) **Slot → FS131-L10A**, the landing of wave 10's first pass (ruling 520 (c)), launched 2026-10-06; while it is in its
      landing stage I commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`.
      In flight: 1 (I6B) + 1 (K6c) + 1 (L10A) = 3.
+
+526. **FS131-K6c retracts item 522 (2): FS121-DB1-L7 stands as filed — "at every point off Σ", no REG-J′, no neighbourhood; the
+     defect was in the proof's route, not in the statement. Rulings 522 (b)'s correction and 522 (c)'s deriver job are
+     withdrawn** (source: K6c's message to "main", 2026-10-06; one retraction, K6c's, and one of mine). **Its four steps** for
+     the partner point `y = x + ν(x)` on the outward parallel of a tangent-type arc of radius `n` about `w`, with only `y ∉ Σ`
+     and saturation at `y`: (1) `y` is in the support of the inner colour `a` and is no density point of it; (2) off Σ it is no
+     cusp, so it is an essential boundary point with a centred two-colour ball; (3) the pinch at `y` with the known contact `x`
+     makes it split about `x` or tangent with normal along `x − y`; (4) split about `x` is excluded by the neighbouring parallel
+     points, each in the support of `a`, no density point of it, and strictly outside the closed unit disc about `x`. No
+     cusp-free neighbourhood, no M-C11 (ii), no straddle is read. **What does need a neighbourhood missing Σ**: only the
+     stronger local-structure clause ("near `y` the essential boundary is the arc of radius `n + 1`") — M-C11 (ii) at a point
+     whose two-colour ball may hold cusps, the question E8 already flagged under its erratum (item 491); every row K6c has
+     read that uses that clause does so under REG-J′, and FS121-D4-HOLE, which has no REG-J′, does not use it. **So no filed
+     result is at risk, and no consumer was found reading the clause without REG-J′.** **My check**: step (4)'s distance redone
+     by hand — `|(n+1)e(θ′) − n e(θ)|² = 1 + 2n(n+1)(1 − cos(θ′ − θ)) > 1`. **Owed instead**: one line under FS121-DB1-L7 that
+     its proof's appeal to M-C11 can be replaced by these steps (a shorter route), with the wave's errata. **Slips**: K6c's, as
+     it names it — it reported the defect from the proof's route before checking whether the statement needed it; **mine** —
+     I ruled a deriver's job and told Kooshi "a filed result rests on a step nobody has derived" on a mid-job message an hour
+     before its author's own check; the report said it was a gap and not a refutation, and it was still more than the record
+     supported. The correction goes to Kooshi in the next report. A statement defect reported mid-job by one mind is logged
+     and routed at once, and announced as a defect only when its reporter's saved stage carries it.
