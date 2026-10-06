@@ -1,0 +1,6 @@
+exact    | 481. **FS131-K6, by message mid-job (`fs131-w6` at `c3ffb4e7`, build O | plans/FS131-close-inventory.md
+exact    | def RegJLiteral (c : AeColouring k) : Prop := | .claude/worktrees/fs131-w6/data/fs131/k6/FanDesign.lean
+exact    | def RegJFan (c : AeColouring k) : Prop := | .claude/worktrees/fs131-w6/data/fs131/k6/FanDesign.lean
+exact    | def RegJBridge (k : ℕ) : Prop := | .claude/worktrees/fs131-w6/data/fs131/k6/FanDesign.lean
+exact    | ## Stage 6 — SAVED: REG-J′, both forms, and the bridge (for the derive | .claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+quotations: 5  exact: 5  mismatched: 0
