@@ -6468,3 +6468,22 @@ reason by the close.*
      Assumptions' (outside theorems may enter as axioms with four items; our own hand results as explicit
      hypotheses), which my rulings 500 and 515 applied to Weil's bound; the named hypotheses that are outside
      theorems predate it.
+
+552. **FS131-T5 is briefed and launched in the special-purpose slot: the gate's enumeration of assumptions** (mine;
+     2026-10-06; item 551). Brief `data/fs131/briefs/FS131-T5-gate-assumptions.md` (generator
+     `data/fs131/briefs/scripts/mk-t5.py`; gate exit 0); tree `.claude/worktrees/fs131-wt5`, branch `fs131-t5` from
+     `main` at `3bfc7d2e`, build copied from `fs131-w10l` (idle). **What it asks**: a design written before any code —
+     what counts as an assumption and of which kind (an outside theorem, a hand result of ours, an open question); one
+     declared list with kind and source; the theorems that take each, read from their types as the kernel has them;
+     what happens to a hypothesis written out in a binder with no name; and how the gate notices an assumption nobody
+     declared, which like vacuity cannot be decided in general — what fails, and what is counted and printed every
+     run. Then the step in the gate's form with a receipt and a `--self-test` whose controls are each seen red;
+     `main` declared; a digest in `scripts/gate_report.py`; drafts for `CLAUDE.md`, `LEAN.md`, `ARCHITECTURE.md` and
+     the line every landing brief carries from now on. **Fixed by Kooshi, said in the brief as not the job's to
+     trade**: both forms are enumerated. **Not its to do**: any edit under `Proofs/`, a landing. **Rulings.** (a) **It
+     hands back on its branch and the next landing merges it and runs its step** — alternative: it lands itself.
+     Why not: a landing is in flight and three branches touch the audit's file; one gate for all of them.
+     Confidence: high. (b) **From its hand-back on, every landing brief carries its line** (a wave that brings a named
+     hypothesis declares it). (c) **The complete list I owe Kooshi (item 548 (2)) is this job's first result**, read
+     from its receipt, not made by me with `grep` a second time. In flight: 3 (L6A, K10c, K7b) + the special-purpose
+     slot (T5); the fourth closes at T5's hand-back.
