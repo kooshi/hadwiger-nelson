@@ -4911,3 +4911,11 @@ reason by the close.*
      is withdrawn; FS-113 and FS-101 stay where they are ranked; no job prices or opens them until he says so; a request for community
      support on that backlog is his to make and is also on hold. FS-131 runs on as staffed (three slots). Not to be re-offered by a later
      session.
+
+489. **A conditional instruction from Kooshi, on disk verbatim** (2026-10-06): *"Oh trust, if they release an HN proof, we will analyze the
+     hell out of it."* **Trigger**: a published or posted proof (or claimed proof) that decides the Hadwiger–Nelson problem or moves either
+     bound of `5 ≤ χ(ℝ²) ≤ 7`, from the rumoured outside release or anywhere else, brought to this session by Kooshi or found by the
+     Searcher's daily run. **Then**: stop launches at the next hand-backs, read it in full before anything else (bibliography entry the
+     same day, read status per section), and brief the lanes to analyze it against what the kernel and the ledger hold — the statement read
+     against row 33 and the regularity wall's rows, each step graded, what of it can be checked or formalized here. Its briefs are written
+     at the trigger, not before. Until then nothing changes.
