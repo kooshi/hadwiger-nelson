@@ -1,0 +1,7 @@
+QA4's tool read from /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6j; sources from /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6j
+self-test: OK (6 controls, 1 planted)
+plant 'a conflicting note': CONFLICT count 0 -> 1 (FIRED)
+plant 'an unreadable tree': rows 0, missing 47 (FIRED)
+SELF-TEST OK (196 notes read unplanted)
+plant 'a conflicting note in BendGap (an added module)': CONFLICT count 0 -> 1 (FIRED)
+L5 SELF-TEST OK

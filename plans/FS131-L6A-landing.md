@@ -335,3 +335,150 @@ unread clauses stay in their statements; `fanAngle` beside `polarAngle` and `Map
   refutations, 380 theorems** (Stage 2's 534 and 382 less the two folded lemmas); no theorem of `main` is gone.
 
 ## Stage 4 — SAVED (FS131-L6A)
+
+## Stage 5 — SAVED (FS131-L6A): the full gate on `7e67af3b` — green at every step, in one pass
+
+**The gated commit is `7e67af3b`**: Stage 4's tree (`main` at `ac2e84ea` merged in) with the registrations of § 5.1. Runner
+`data/fs131/l6a/run-pass.sh first` → the build, the kernel's list, `run-gate.sh first` (the last landing's runner with its log
+directory changed), then the two reconciliations against `main`'s gated receipts (`data/fs131/l10a/*-first.*`) and the digests —
+each step under the slot, each driver log ending in its exit status. `data/fs131/l6a/run-gate-first.head` records
+`HEAD=7e67af3b…` and **no tracked file modified**; `run-pass-first.out` reads exit 0 at every step. One pass: nothing was repaired
+between a red and a green.
+
+### 5.1 What this job registered, by the gate's own procedures
+
+- **`scripts/Axioms.lean`**: a block "FS131-L6A" of **52 records** — every hand-written theorem of the fourteen modules that the
+  planners' and the five implementers' blocks did not list (`ArcContinuation` 11, `Basic` 7, `CurveArc` 6, `Fan` 4, `FanArcs` 4,
+  `FanBridge` 1, `FanBuild` 6, `FanExamples` 13). The list is read from the kernel's own list of the library's theorems, not from
+  the source (`tools/fs131_l6a_register.py` on `data/fs131/l5/count-modules.lean`'s two outputs; `register-before.txt`,
+  `register-after.txt`: MISSING 52 → 0, STALE 0, FOREIGN-MODULE 0; its self-test: a record removed reads MISSING, a record naming
+  nothing in a wave block reads STALE). `#print axioms` lines: 6,122 + 52 = **6,174** = `main`'s 5,809 + the wave's 365 (363
+  hand-written theorems and two definitions that carry proofs, `fanAngle` and `sq9Fan`).
+- **`scripts/Vacuity.lean`**: the entry "Wave 6's first half (FS131-L6A …)", by the scan's procedure. **No new carrier IN**; no
+  name added to `trackedProps`, no control planted, `scripts/vacuity-controls.lean` and `scripts/vacuity.sh` untouched. The
+  census (`data/fs131/l6a/census.lean`, wave 5's with its scope changed; `census.out`) lists **twenty-seven hypothesis-formers** in
+  the fourteen modules: none has an unconditional `¬ P …` at a closed instance, none an `IsEmpty`, and none a binder site at a
+  closed instance (`refut=0`, `isEmpty=0`, `closedSites=0` on all 27) — so for none could step (3)'s `VACUOUS` control be planted.
+  The seven the brief names: `AeColouring.Fan` (51 sites), `IsUnitCurve` (33), `TwoColourOn` (16), `ArcSetting` (12), `IsArcOf`
+  (9), `HasArcChart` (1), `IsInterfaceChart` (0: it stands in conclusions only) — each OUT, with its inhabitant named in the entry.
+  - **`AeColouring.Fan`, said apart** (asked of the coordinator mid-job; ruled OUT, its reply of 2026-10-06): it is the one former
+    of the wave for which "does one exist" is a theorem rather than a construction (`fan_of_isolated`), so step (1)'s first clause
+    alone would enter it; no theorem of the library refutes a fan at a concrete point, so no `VACUOUS` control can be planted.
+    Entered, it would add 51 `GENERIC` sites and one `WITNESSED` (`sq9Fan`). The entry names `sq9Fan` and says when to register it.
+- **`scripts/vacuity-baseline.txt`**: the header's two count lines, from `scripts/gate_report.py header`, **on the coordinator's
+  word** (asked mid-job, the brief reserving this file; its reply: "update the two count lines … no entry added, as the last
+  landing did"). **No entry added.**
+- `scripts/axioms-controls.txt`: unchanged — the landing declares no axiom and no import, so the controls' counts are the
+  library's still, and the self-test is green as it stands.
+- `ARCHITECTURE.md`, `Proofs.lean`: Stage 3's rows; the merges' fourteen imports.
+
+### 5.2 The steps, each saved log read
+
+| step | result | log (`data/fs131/l6a/`) |
+|---|---|---|
+| build | `build: OK — all 1819 modules already up to date, nothing built, 0 module(s) with warnings`, exit 0; the full build of these Lean sources is Stage 4's: 469 of 469 batches, "Build completed successfully (5828 jobs)", **0 `warning` lines** | `build-first.log`; `build-main.log`, `build-main-full.log` |
+| `sorry` | narrow pattern: **0** lines; `\bsorry\b`: 8, all prose — the five `main` holds (`Packed` l. 266, `Plane/Cover` l. 33, `Plane/CoverExamples` l. 13 and 6541, `BendStep` l. 345) and three module docstrings of the wave that say "no `sorry`" (`Pinch` l. 20, `LocalGraph` l. 34, `FanBridge` l. 9) | `sorry-narrow-first.txt`, `sorry-wide-first.txt` |
+| doubled names, **before the audit** | **"dupnames: OK — no name is declared by two modules (23 generated on demand, listed above)"** | `dupnames-first.log`, `receipt-dupnames-first.log` |
+| its self-test | "OK — all 15 controls behaved: every planted fault fired, and every partner passed." | `dupnames-selftest-first.log` |
+| axioms | **"axioms: OK — 6148 clean, 17 axiom-free, 4 imported, 5 declared purchase(s)"**; "audited: 6174 records" | `axioms-first.log`, `receipt-axioms-first.log` |
+| its self-test | "OK — every planted fault fired, and every partner passed." (23 controls) | `axioms-selftest-first.log` |
+| vacuity | **"vacuity: OK"**; `declarations=14299 refutations-skipped=199`, `sites=1269 vacuous=0 stale=0 declared=3 witnessed=38 generic=1226 unknown=2`, `untelescoped=0`; baseline header "match (9 of 9 compared)" | `vacuity-first.log`, `receipt-vacuity-first.log` |
+| its self-test | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent." | `vacuity-selftest-first.log` |
+| architecture | "RESULT: PASS", exit 0 | `arch-first.txt` |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "(2/2) Passed!" | `lint-first.log` |
+| notes | `notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58`, **0 CONFLICT** — `main`'s own count: the check reads the audited modules of `Plane/ValidMap` and their kin and none of the fourteen, and no docstring of the fourteen names an object it knows (`bowtie`, `cuspFrag`, `l60Frag`, …: `grep`, none); `tools/fs131_qa4_notes.py --self-test`: "OK (6 controls, 1 planted)" | `notes-first.txt` (through `tools/fs131_l5_notes.py`, as the last three landings ran QA4's tool), `notes-qa4-selftest-first.txt` |
+
+### 5.3 The axioms, reconciled
+
+- **Against `main`'s gated audit** (`data/fs131/l10a/receipt-axioms-first.log`, 5,809 records) by `scripts/gate_report.py axioms`
+  (`digest-axioms-first.txt`): **365 records added, every one CLEAN; 0 removed; 0 changed.** By axiom set: 364 on exactly
+  `[propext, Classical.choice, Quot.sound]`, 1 on `[propext, Quot.sound]` (`sq9_pred_ne`). 5,809 + 365 = 6,174; clean 5,783 + 365 =
+  6,148. Axiom-free 17, imported 4 and purchases 5 unchanged: the wave has no `axiom` and no `native_decide`.
+- **Every theorem of the landing is audited** (`tools/fs131_l5_records.py` on the kernel's own list, `count-modules-first.out`
+  against `data/fs131/l10a/count-modules-first.out`; `records-first.txt`, PASS): the library holds 9,336 theorems against `main`'s
+  8,956 — 380 new, 0 gone; 17 are generated by Lean (`eq_1` 14, `mk.inj`, `mk.injEq`, `mk.sizeOf_spec`); **the 363 hand-written
+  each have exactly one record under CLEAN: 362 on exactly the three, 1 on `[propext, Quot.sound]`** — `ArcContinuation` 16,
+  `Basic` 30, `Curve` 23, `CurveArc` 16, `Fan` 18, `FanArcs` 8, `FanBridge` 79, `FanBuild` 14, `FanExamples` 34, `LocalGraph` 31,
+  `MapColouring` 10, `MapEdge` 24, `Pinch` 44, `Sq9Map` 16.
+- **The heads**, each "exactly the standard three" in that check — 61 names, `data/fs131/l6a/heads.txt`: the 31 leaves of the
+  skeleton (read from `32f2ab4c` by script, Stage 2), the planners' eight compositions over leaves, and the rows the planners and
+  the implementers proved outright (`saturated_of_forall_isMUA`, `erosion_diam`, `bound_iff`, `gmap_i`, `gmap_ii`,
+  `half_dichotomy`, `ArcMap.bound_of_saturatedOn`, `sq9Map_sat_model`, `sq9_singLocallyFinite`, the three cell lemmas of a fan, …).
+  **No record of the landing prints `sorryAx`**: the forty-six that did on their own branches are among the 364.
+
+### 5.4 The vacuity counts, reconciled — and how the scan classes every new site
+
+- **The counter agrees with both scans** (`tools/fs131_l5_vacdiff.py`, `vacdiff-first.txt`, PASS): `declarations` 13,767 →
+  14,299 (+532: the fourteen new modules — `ArcContinuation` 40, `Basic` 71, `Curve` 30, `CurveArc` 18, `Fan` 57, `FanArcs` 8,
+  `FanBridge` 91, `FanBuild` 14, `FanExamples` 44, `LocalGraph` 46, `MapColouring` 19, `MapEdge` 28, `Pinch` 45, `Sq9Map` 21; no
+  count of a module of `main` changed); `refutations-skipped` 192 → 199 (+7: `pinch_not_in_in`, `sat_noPar`,
+  `TwoColourOn.false_of_mem_inter`, `false_of_inside_of_outside`, `Fan.horn_false`, `Fan.false_of_horn_next`,
+  `Fan.false_of_horn_dir`).
+- **Row for row against `main`'s gated scan** (1,254 rows): **0 rows lost; 96 added, every one `SITE GENERIC` on `AeColouring` at a
+  variable number of colours** — the binders `(c : AeColouring k)` of the wave's declarations: `Basic` 7, `Fan` 24, `FanArcs` 5,
+  `FanBridge` 46, `FanBuild` 4, `LocalGraph` 7, `MapColouring` 2, `Pinch` 1. `sites` 1,173 → 1,269 (+96); `generic` 1,130 →
+  1,226 (+96); `witnessed` 38, `declared` 3, `unknown` 2 unchanged. **No new site reads `VACUOUS`, `STALE` or `UNKNOWN`; nothing
+  asks for a baseline entry; no new evidence row.** The scan run before any registration text was written read the same nine
+  counts and the same 96 rows (`vacuity-probe.log`, `vacdiff-probe.txt`).
+- **What the scan does not read of the wave**: the twenty-seven formers left OUT raise no site; the seven refutations are skipped,
+  `sat_noPar` among them, which binds `(c : AeColouring 6)` at a concrete number of colours; the named open statement `NoPar`
+  (C121-NOPAR) is a hypothesis of two theorems and invisible to it — listed in the drafts.
+
+### 5.5 Each check's negative control, watched
+
+| check | the plant | what went red |
+|---|---|---|
+| build's warning count | the tree as given (Stage 1) | 15 `declaration uses sorry` warnings, against 0 |
+| `sorry` scan | the tree as given (`sorry-narrow-asgiven.txt`) | 15 lines, against 0 |
+| doubled names | its 15 controls | each fired |
+| axioms | its 23 controls; the records check's five plants on this pass's log (`records-plant.txt`, exit 1: `sorryAx` on a head, a record dropped, doubled, moved under PURCHASED, a head on fewer axioms); the receipt's reader (Stage 2: BAD-AXIOM, NO-PRINT, CONTROL) | named each |
+| vacuity | its 65 controls; the row check's four plants (`vacdiff-plant.txt`, exit 1: LOST, NOT NEW, FLAGGED, COUNTER-DISAGREES) | named each |
+| architecture | live: `FanBridge`'s row with `Plane/Saturated/FanBuild` taken out of its imports column (`arch-plant-import.txt`) | "FAIL imports of Plane/Saturated/FanBridge: stated-only [], real-only ['Plane/Saturated/FanBuild']", exit 1; restored by `git checkout`, PASS again |
+| notes | its self-test, and the wrapper's (`notes-selftest.txt`: a conflicting note planted in `BendGap`, CONFLICT 0 → 1) | fired |
+| lint | none at a landing (ruling 419 (b)) | — |
+| the merges | the three-way check's plants on every both-changed path; the merge index's live controls (Stages 2, 4) — and one unplanted red: the moved ref of Stage 4 | each fired |
+| this job's tools | `tools/fs131_l6a_quotes.py`, `_keepboth.py`, `_statements.py`, `_leaves.py`, `_tidyshape.py`, `_archrows.py`, `_register.py` `--self-test`; `_mergeindex.py` by live controls | each plant fired beside a faithful run |
+
+### 5.6 The drafts, checked by the digest
+
+Drafts 1 and 2 below, applied to a scratch copy of `CLAUDE.md`, are read by `scripts/gate_report.py` against this pass's logs:
+§ Trust ledger "match (clean, purchases and imported compared)" (`digest-axioms-draft.txt`); § The gate "match (9 of 9 compared)"
+(`digest-vacuity-draft.txt`). The unedited `CLAUDE.md` is flagged STALE by both digests until the filing (5783 → 6148; 13767 →
+14299, 192 → 199, 1173 → 1269, 1130 → 1226).
+
+### 5.7 Read against the informal statement, aloud
+
+The five implementers read each leaf against its entry or row (their reports' lists, quoted words and all); every statement of
+the landing is verbatim theirs or the planners' (Stage 2, by script; Stage 3 changed none). The statements the front page will
+quote, read here once more on the joined tree, with what each is not:
+
+- `fan_of_isolated (c : AeColouring k) {z} {R} (hR : 0 < R) (hS : c.singularSet ∩ ball z R ⊆ {z}) (hsat : SaturatedOn c.cls
+  (ball z R \ {z})) : Nonempty (c.Fan z)` — "if `z` is the only possible singular point of a disc about it and the colouring is
+  saturated at the essential boundary points of the punctured disc, there is a fan at `z`": a radius, finitely many branches
+  `t ↦ z + t e(φᵢ(t))`, each continuous on `(0, r)` with a limit direction at `z`, in counter-clockwise order within one turn; the
+  essential boundary of the punctured disc exactly the branches; each region between consecutive branches almost everywhere of
+  one colour. FS131-E8-FAN. Not assumed: that `z` is singular; saturation at `z`; a bound on `R`. Not in the structure: any
+  curvature bound on a branch (those are the lemmas `Fan.branch_outside_discs`, `Fan.branch_contacts`, under saturation). `Σ` is
+  the Lean `singularSet`: the essential boundary points with no two-colour ball **centred there**, and the cusps.
+- `regJFan_of_saturated (c) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite) : c.RegJFan` — "a saturated colouring whose
+  singular set is locally finite has a fan at every singular point". FS131-E8-BRIDGE. `regJFan_iff_singLocallyFinite (c) (hsat) :
+  c.RegJFan ↔ c.SingLocallyFinite` — its left-to-right half is a projection (`RegJFan` is defined as "`Σ` locally finite, and a
+  fan at each of its points"); the content is the half above.
+- `regJLiteral_of_saturated … : c.RegJLiteral` — "under saturation, if `Σ` is locally finite then every point of `Σ` lies in the
+  closure of finitely many components of the interface set": the frozen words' second clause from their first.
+  `finite_arcs_of_isBounded … (hK : Bornology.IsBounded K) : {interface components meeting K}.Finite` — "a bounded set meets
+  finitely many interface arcs". FS131-E8-CLAUSE2.
+- `Fan.sector_alone (hsat : SaturatedOn c.cls (ball z F.r \ {z})) (hi : F.dir i < F.nextDir i) (hcol : F.col i = F.col i') : i =
+  i'` — "a colour that has a region of positive angle at `z` has no other region there". FS121-V2-SECTOR; `Fan.sector_unique`
+  its two-sector case (FS121-DB1-L3, FS111-W-NOREP).
+- `local_graph` — "for two sets on a two-colour open set `N` and an open `U ⊆ N` holding no cusp of either, saturated at its
+  essential boundary points: every essential boundary point of `U` has a chart in `U`" (an injective unit-speed curve with
+  1-Lipschitz tangent angle, the two tangent unit discs at each of its points, one set on each side). FS131-E8-LOCAL = FS111-M-C11
+  (ii) **with the hypothesis "no cusp in the neighbourhood"** = FS111-W-NOBEND. For two almost disjoint sets; not for a cover.
+- `pinch` — FS111-M-PINCH for two measurable sets with null unit pairs on an open set `N`, at any point of `N`, given contacts:
+  split one way or the other, or tangent. `sat_inP (F : ArcMap k) (hF : F.IsPlaneMap) (c) (hc : ∀ j, c.cls j =ᵐ F.region j) (hsat :
+  Saturated c.cls) (σ) : InP F.region σ` — FS121-C1-SAT's first clause, at every order of the colours.
+- What none of these is: a statement that any colouring but `sq9` (nine colours) satisfies the hypotheses; that the singular set
+  of every honest saturated colouring is locally finite (C121-REGJ, open: FS-127); a new value or bound of `χ` of anything.
+
+## Stage 5 — SAVED (FS131-L6A)

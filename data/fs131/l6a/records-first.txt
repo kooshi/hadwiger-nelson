@@ -1,0 +1,80 @@
+main: 8956 theorems; landing: 9336; wave (landing only): 380 = 363 hand-written + 17 generated with no record asked; gone (main only): 0; records in the log: 6174
+  generated, by suffix: eq_1 14, inj 1, injEq 1, sizeOf_spec 1
+  wave records on exactly the three: 362
+  wave records on fewer: [Quot.sound, propext]: 1
+  Plane.Saturated.ArcContinuation: 16
+  Plane.Saturated.Basic: 30
+  Plane.Saturated.Curve: 23
+  Plane.Saturated.CurveArc: 16
+  Plane.Saturated.Fan: 18
+  Plane.Saturated.FanArcs: 8
+  Plane.Saturated.FanBridge: 79
+  Plane.Saturated.FanBuild: 14
+  Plane.Saturated.FanExamples: 34
+  Plane.Saturated.LocalGraph: 31
+  Plane.Saturated.MapColouring: 10
+  Plane.Saturated.MapEdge: 24
+  Plane.Saturated.Pinch: 44
+  Plane.Saturated.Sq9Map: 16
+  head HadwigerNelson.Plane.IsUnitCurve.chord: exactly the standard three
+  head HadwigerNelson.Plane.IsUnitCurve.sin_le_inner: exactly the standard three
+  head HadwigerNelson.Plane.IsUnitCurve.strictMonoOn_dist: exactly the standard three
+  head HadwigerNelson.Plane.IsUnitCurve.norm_sub_le: exactly the standard three
+  head HadwigerNelson.Plane.IsUnitCurve.one_le_dist: exactly the standard three
+  head HadwigerNelson.Plane.lipschitzOnWith_of_chord: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.gamma: exactly the standard three
+  head HadwigerNelson.Plane.IsUnitCurve.exists_polarGraph: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.beta: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.alpha: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.fan_of_isolated: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.regJLiteral_of_saturated: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.finite_arcs_of_isBounded: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.Fan.two_le_n: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.Fan.col_ne: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.Fan.branch_outside_discs: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.Fan.branch_contacts: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.Fan.sector_alone: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.notMem_essBdry_of_mem_densitySet: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.ae_one_colour_of_isConnected: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.closure_essBdry_subset: exactly the standard three
+  head HadwigerNelson.Plane.local_graph: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.local_graph: exactly the standard three
+  head HadwigerNelson.Plane.sat_inP: exactly the standard three
+  head HadwigerNelson.Plane.half_upperDensity: exactly the standard three
+  head HadwigerNelson.Plane.sq9_isTangentAt: exactly the standard three
+  head HadwigerNelson.Plane.pinch: exactly the standard three
+  head HadwigerNelson.Plane.pinch_not_in_in: exactly the standard three
+  head HadwigerNelson.Plane.TwoColourOn.essBoundary_inter_eq: exactly the standard three
+  head HadwigerNelson.Plane.c11_discs: exactly the standard three
+  head HadwigerNelson.Plane.c11_split: exactly the standard three
+  head HadwigerNelson.Plane.TwoColourNhd.mem_essBoundary: exactly the standard three
+  head HadwigerNelson.Plane.pinch_interface: exactly the standard three
+  head HadwigerNelson.Plane.c11_discs_interface: exactly the standard three
+  head HadwigerNelson.Plane.sat_noPar: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.regJFan_of_saturated: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.regJFan_iff_singLocallyFinite: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.Fan.sector_unique: exactly the standard three
+  head HadwigerNelson.Plane.sq9_regJFan: exactly the standard three
+  head HadwigerNelson.Plane.saturated_of_forall_isMUA: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.saturated_of_idomatic: exactly the standard three
+  head HadwigerNelson.Plane.erosion_diam: exactly the standard three
+  head HadwigerNelson.Plane.erosion_diam_cot: exactly the standard three
+  head HadwigerNelson.Plane.bound_iff: exactly the standard three
+  head HadwigerNelson.Plane.gmap_i: exactly the standard three
+  head HadwigerNelson.Plane.gmap_ii: exactly the standard three
+  head HadwigerNelson.Plane.half_dichotomy: exactly the standard three
+  head HadwigerNelson.Plane.norm_sub_le_of_discs: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.bound_of_saturatedOn: exactly the standard three
+  head HadwigerNelson.Plane.sat_bound_of_mem_closure: exactly the standard three
+  head HadwigerNelson.Plane.sq9Map_sat_model: exactly the standard three
+  head HadwigerNelson.Plane.sq9_exists_isInterfaceChart: exactly the standard three
+  head HadwigerNelson.Plane.sq9_singLocallyFinite: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.Fan.isPreconnected_cell: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.Fan.cell_subset_densitySet: exactly the standard three
+  head HadwigerNelson.Plane.AeColouring.Fan.exists_ray_subset_cell: exactly the standard three
+  head HadwigerNelson.Plane.volume_essBoundary: exactly the standard three
+  head HadwigerNelson.Plane.in_in_or_out_out: exactly the standard three
+  head HadwigerNelson.Plane.horn_of_sin_constraints: exactly the standard three
+  head HadwigerNelson.Plane.isOpen_polarRegion: exactly the standard three
+  head HadwigerNelson.Plane.isPreconnected_polarRegion: exactly the standard three
+records: PASS
