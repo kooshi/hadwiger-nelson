@@ -4219,3 +4219,44 @@ reason by the close.*
      stronger statement whole. Why: one reader. Confidence: high. (b) (3) is welcome as offered; no reply sent (it asked for none). (c) **For the
      final sync**: `ArcBend` lives downstream of `BendStep`, so `bend_away_part` cannot conclude it today; whether the structure moves upstream
      and the bend concludes `∃ M h K, ArcBend …` is that job's choice.
+
+445. **FS131-KA1 done: the outward collar bend planned — its statement attacked and found true, `bend_away_part` proved from 36 open children
+     over six new modules, a plan and price per child, a handoff for two implementers** (planner; harness ≈ 544k by the task notice — past its
+     line; record `fs131-w5a`'s `plans/FS131-bendaway-kernel-plan.md` Stages 1–3, § 4 the horn child, § 5 the inhabitant; report
+     `data/fs131/reports/FS131-KA1.md` on that branch; commits `48342406`, `df62e70e`, `8e346278` (the Lean sources the build read), `dd8c2c33`;
+     pushed, tree clean). **Results**: no clause of `bend_away_part` false; every clause true at [hand], one mind (with E5's Stage 4 for the end
+     case). Its statement changed in two clauses, both pre-ruled — the horn clause to `∃ j' ≤ j` (438 (b)) and the last clause to
+     `∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) → P + 2 * e θ ∈ closure (F.region c)` (444 (a)); compactness, `K` into itself and the three
+     iffs kept. **The construction**: the outward bend is the toward bend on the same collar set with a different lens profile
+     (`exists_collar_free`, `exists_end_free`, `collarK_thin`, all of `Pushforward` and the `n2_env_*` lemmas reused as they stand); a finite
+     subdivision of the arc's angles by the radius-2 contacts (`R2Subdiv`), each gap bent on the map the previous bends produced, composed
+     through a clause package `AwayBend`. Modules: `BendAway`, `LensOut`, `CollarMapOut`, `R2Cap`, `HornChart`, `BendGap` (721 lines), and
+     `BendStep`. **Kernel-checked in the job**: `R2Subdiv.lt`, `LocalStep.union`, `claim_e`, `end_cap` (E5's Claim E and END-CAP),
+     `IsSectorChart.hasHornCount`, `collarOutArcs_locallyFinite`. **Planned, not proved**: `CollarFit.map_hornCount_le` (four shared children in
+     `HornChart`). **The new mathematics** is one child, `exists_lensOut_clear` (the gap's lens is clear for the inner colour; hand proof in
+     record § 2.5, KA1's own derivation over E5's two lemmas, not a reading of N2-3). **Five needs the docstring did not state** (record § 2.4),
+     among them: finitely many gaps (the only use of the plane map), by a hand argument the earlier records cite only as "local finiteness".
+     **My receipt**: tip equals `origin/fs131-w5a`; the build log `build/gate/build/20261006T060103Z-1476282.log` ends "Build completed
+     successfully (5802 jobs)", 0 warnings other than `sorry`, 39 distinct `sorry` warnings (the six new modules 35, `BendStep` 1, `Procedure` 2,
+     `Terminal` 1); `data/fs131/ka/KAAxioms.out` parsed by script, 47 records: 7 on exactly the standard three (the six proved and
+     `bend_toward_collar`), 40 with `sorryAx` alone beyond them; `bend_away_part`'s last eight lines read in `BendStep.lean` (the two changed
+     clauses as reported). **Items**: corrections owed — the brief's and the old docstring's lens constraint (item 442 (c)); IA1's and E5's
+     one-line source for the finiteness of the contacts' components. Generalizations — `LocalStep.of_cutArcs`; a base structure for `CollarFit`
+     and `CollarFitOut` (a tidy move, not done). Held — four lemmas sit in `Procedure`, downstream of every bend module
+     (`exists_hasHornCount`, `hasHornCount_iff_of_agreesOff`, `IsRingArc.mono`, `eventually_ball_subset_compl`): the plan works around them, and
+     the final sync may move them upstream. Not read by KA1, for budget — the toward bend's plan and implementation records beyond what the four
+     modules quote; N2-3 beyond its two rows. **The inhabitant** `awayModel : ArcMap 8` over `sevenBrickMap` is planned (record § 5), with a
+     contact interval; it does not exercise an isolated contact.
+446. **Rulings on KA1's held items, and its slot.** (a) **Two implementers, split by file as KA1's § 3.6 has it**: FS131-BA1 — `LensOut`,
+     `CollarMapOut`, `BendAway` (lanes G and D), on `fs131-w5a`; FS131-BA2 — `R2Cap`, `HornChart`, `BendGap` and `BendStep`'s horn child (lanes C
+     and H), on a new branch `fs131-w5z` cut from `fs131-w5a` at `dd8c2c33` (worktree made, build copied from the idle `fs131-w5a`, pushed).
+     BA1 takes this slot; **BA2 takes the next, ahead of FS131-KM1**. Alternative weighed: KM1 next, as the queue stood. Why: the outward bend
+     is priced at about two sessions for each implementer and is the longest piece before wave 5 can land; run one after the other it is four.
+     Confidence: high. (b) **`AwayBend.idle` loses `hA` and `hε`**, which its proof will not read (ruling 419's rule on unused binders); BA1
+     makes the change with the one call line in `BendStep`'s `bend_away_subdiv`, at its first stage. Alternative: leave it for the remedy pass.
+     Confidence: high. (c) **`LocalStep.of_cutArcs`** (BA1's file) is left for last by BA1: FS131-IA2 holds the same statement and may have the
+     proof (item 443); I relay which. (d) **The four lemmas in `Procedure`** stay where they are until the final sync, which may move them.
+     (e) **The inhabitant `awayModel`** is owed before wave 5 lands (ruling 419 (d)); it goes to whichever of the two implementers finishes
+     first, or to a short job of its own. (f) **KA1's own derivation of the clearance** (`exists_lensOut_clear`, record § 2.5) is one mind's
+     hand proof of new mathematics; the kernel is its check, and BA2 is told to stop and message if a step of it fails. (g) **Slot → FS131-BA1**,
+     launched 2026-10-06. In flight: 1 (IR3) + 1 (IA2) + 1 (BA1) = 3. Queue: FS131-BA2; the freed lanes' continuations; FS131-KM1.
