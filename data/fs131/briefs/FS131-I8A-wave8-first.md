@@ -137,10 +137,13 @@ sections quoted give a route per leaf, the lemmas it confirmed, what is hard, an
 2. **The leaves**, in this order — the handoff's order for `Empty` — `ringPt_sixth_dist_le_one`, `v6_count`, `exists_ne_mem_closure_inter_of_split`, `v6_hug`, `v6_hubs`, then `emptyNS`; then `star_recip`, `star_anti` if budget remains; saving after each leaf or group (a build, the axioms print for it with a control that fires, a
    statement check against `f1c13612`, commit, push). Re-price after your first two leaves and say so: this milestone's implementers have come in
    at a third to two thirds of their planners' line counts.
-3. **The model is owed, and is not yet yours** (ruling 525 (c)): `emptyNS` is a refutation at six colours, and the gate's inhabitant rule asks
-   for a Lean object meeting its hypotheses but the one it fails — wave 6's nine-colour grid map, which another implementer is building now.
-   If I send you its commit mid-job, the model becomes your last item (a new module importing it: `Valid`, `NonSiamese`, `Covers`, four
-   colours, `GammaFreeRing` at the lattice vertex the plan names); otherwise `emptyNS`'s docstring says the model is owed and names it.
+3. **The model is owed, and is not yours** (ruling 525 (c), amended by inventory item 530): `emptyNS` is a refutation at six colours, and the
+   gate's inhabitant rule asks for a Lean object meeting its hypotheses but the one it fails. That object is wave 6's nine-colour grid map,
+   which now exists: `sq9Map : ArcMap 9`
+   (`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6m/Proofs/HadwigerNelson/Plane/Saturated/Sq9Map.lean`, on `origin/fs131-w6m` at
+   `2e55a2d6`), with `IsPlaneMap` proved and nothing yet about `Valid`, `NonSiamese`, `Covers`, the colours at a lattice vertex or its ring.
+   Those five facts are a job after yours, on a line that holds both waves: do not merge that branch (it carries another wave's open
+   leaves) and do not build a nine-colour map of your own. `emptyNS`'s docstring says the model is owed and names the map and the facts.
 4. **Declared vacuity stays as the planner left it** (ruling 518): `v6_hubs` and `v6_hug` are public, each with its `VACUITY DECLARED` line and a
    companion (`v6_hubs_vacuous`, `v6_hug_vacuous`) deriving `False` from its exact hypotheses through `emptyNS`. Do not make them private, and
    do not weaken the companions: when `emptyNS` is proved they are kernel facts. The planner's caution on `v6_hubs` is in its plan — the count

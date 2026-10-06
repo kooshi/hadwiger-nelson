@@ -5740,3 +5740,175 @@ reason by the close.*
      only). With Weil's bound the **declared outside theorems go from one to two**, and the imported count rises from 4 by
      however many records rest on the new one — at least the three the floor states. Found while writing K10c's brief,
      which now says so; the handoff's § 9 line corrected; to be told to Kooshi in the next report.
+
+530. **FS131-I6B done: `sat_inP` proved (FS121-C1-SAT), at a wider class than filed, with its Lean model — the nine-colour grid as
+     an arc map; `MapColouring` has no open leaf** (implementer, Opus; harness 407k by the task notice; record `fs131-w6m`'s
+     `plans/FS131-I6B-implementation.md`; report `data/fs131/reports/FS131-I6B.md`; commits `898f4443`, `8c1b238f`, `2e55a2d6`;
+     pushed, tree clean). **Proved**: `sat_inP` as fixed at `3928644b`; `sat_noPar` now free of `sorry` through it;
+     `ArcMap.bound_of_saturatedOn` — an arc map whose regions are a.e. a family saturated on an open set `U`: every point of
+     `U` in the domain and in the closures of two different colours' regions is in the unit shadow of the first's closure —
+     no colouring, no plane map, no order of the colours; `sat_bound_of_mem_closure`; two local facts on essential boundary
+     points of a region (`Plane/Saturated/MapEdge`, new). **The model**: `sq9Map : ArcMap 9` (`Plane/Saturated/Sq9Map`, new)
+     and `sq9Map_sat_model` — every hypothesis of `sat_inP` at once at `k = 9` with a separating point; four `example`s apply
+     the theorems to it. **My receipt**: tip `2e55a2d6` equals `origin/fs131-w6m`, tree clean; the last real build's full log
+     (`build/gate/build/20261006T142137Z-528180.log`, 3 modules rebuilt) ends "Build completed successfully (5808 jobs)",
+     21 warnings, all `declaration uses sorry` in `Pinch.lean` (the other implementer's file, proved on `fs131-w6p`), none
+     elsewhere; `sorry` by the handoff's grep: `MapColouring` 0, `MapEdge` 0, `Sq9Map` 0, `Basic` 0, `Pinch` 7; no `axiom`, no
+     `native_decide` in the three files; `data/fs131/i6b/logs/axioms-3.txt` parsed by script — 46 records, each on exactly the
+     standard three, and the planted control prints `sorryAx`; `Basic` and `Pinch` byte-identical to `3928644b` (`git diff`
+     empty); `MapColouring`'s fourteen earlier declarations compared head by head with `3928644b` — all the same, four added;
+     `sat_inP`'s statement read then and now — identical; `bound_of_saturatedOn`'s statement and proof read at ll. 196–217 —
+     it says what the report says, and its proof reads `SaturatedOn` on a ball inside `U`, closedness of the unit shadow,
+     and the accumulation lemma; `./scripts/dupnames.sh` log "OK — no name is declared by two modules". Not checked by me:
+     `MapEdge`'s 519 lines beyond the build; the three planted Lean faults' logs. **Findings**: (1) *a generalization* —
+     nothing in `MapColouring` reads the second clause of `SeparatesAt` (a ball in the union of the two closures): `sat_inP`
+     and the planner's `gmap_i` read the first clause only, so FS121-C1-GMAP and FS121-C1-SAT stand over a closure-level 𝒫_k
+     with a weaker C121-NOPAR; (2) *a correction owed* — the planners' record § 3.3 says the closure-level form "would make
+     FS121-C1-SAT false at a vertex where colour `i` has a cusp", and the kernel now proves it true there; (3)
+     `bound_of_saturatedOn` at `C = F.region`, `U = ball p ρ` is the bound FS116-O1-SATPIN's "saturated on a disc" reads;
+     (4) believed and not proved: `sat_inP` holds without `hF`. **Prediction scored**: the plan priced `sat_inP` at two days
+     ("its cost is wave 3's sector machinery"); leaf and model took under an hour by a route reading
+     `GoodAt.exists_local_curve` and no sector chart. **Slips, the job's, disclosed**: its statement check's first planted
+     fault changed a doc comment the check ignores and passed — caught from the exit status, the plant now asserts it changed
+     a read line. **Tidy items for wave 6's join**: `MapEdge.isPreconnected_puncturedBall` restates
+     `isPreconnected_ball_diff_singleton` (`Plane/ValidMap/Limit`, not upstream of `Plane/Saturated`), and four density
+     facts under `MapEdge` are generic. **Credit**: it stated the theorem at the class its argument reads and found the
+     definition's second clause idle, and it read its control's exit status instead of trusting the plant.
+     **Rulings.** (a) **`SeparatesAt` keeps its second clause for now; no statement changes on a branch.** The finding is
+     relayed to wave 6's third planner (running), who says in its handoff whether any row of its own reads the clause; the
+     weakening of C121-NOPAR is decided at the wave's join with that answer, and the errata line under FS121-C1-SAT joins
+     the wave's errata. Alternative: drop the clause now. Why not: four implementers' branches are cut from commits holding
+     the definition, the clause is a hypothesis of rows not yet read against it, and a weaker named hypothesis loses
+     nothing by waiting. Confidence: high. (b) **The correction to the planners' § 3.3 is the third planner's, as a dated
+     line in its own stage** (relayed by message, 2026-10-06, with (1) and (3)). (c) **Ruling 525 (c) and 527 (b) amended:
+     `emptyNS`'s nine-colour model is not FS131-I8A's item; it is a job after I8A, on a line that holds both waves.** What
+     changed: the map exists with `IsPlaneMap` only — `Valid`, `NonSiamese`, `Covers`, four colours at a lattice vertex and
+     the ring are five unproved facts about a new map, a job of its own size; and `fs131-w6m` carries `Pinch`'s seven open
+     leaves and three registry files' edits, which a merge would put in wave 8's implementer's tree. Alternative: as ruled,
+     I8A merges `2e55a2d6` and proves the model last. Confidence: medium-high; "one map, declared once" stands. I8A's brief
+     regenerated (`mk-i78.py 8 2e55a2d6`), gate exit 0. (d) The gate-side drafts (`LEDGER.md` row 143, the errata) are held
+     for the filing. (e) **Slot → FS131-K9** (wave 9's planner, on `fs131-w9` at `26b08395`), launched 2026-10-06, its
+     brief amended at launch with `emptyNS`'s statement, wave 7's state and item 526's lesson (`mk-k9-amend.py`; gate exit
+     0, 16 quotations). In flight: 1 (K6c) + 1 (L10A) + 1 (K9) = 3.
+
+531. **FS131-K6c done at its Stage 15: wave 6's third planning pass — seventeen of the twenty-three rows left, and one clause of
+     another, stated as thirty-four leaves in four new modules; the fragment's six left to a fourth pass** (planner; harness
+     523k by the task notice — past the line, not to be resumed; record `fs131-w6`'s `plans/FS131-w6-kernel-plan.md` Stages
+     13–15; report `data/fs131/reports/FS131-K6c.md`; commits `66d688b6`, `d9d8742f`, `6fc27fa1`; pushed, tree clean).
+     **Modules, all new**: `Plane/Saturated/CoverHull` (4 leaves), `Parallel` (13), `Centre` (7), `Accumulation` (10).
+     **Stated**: FS121-DB1-L7 and -O1-OUT (the outward parallel and its family), -DB1-L6 and -O1-ENDS (the chain inward and
+     its ends), FS111-M2-INTRAD (integer radii), FS121-V5-LOC (iii), -V3-CPI, -V2-VT-W with -D1-VT its `C¹` case,
+     -D1-EROSION, -D1-PENCILWIN, FS111-W-KB-DIR, FS121-V5-RAY, -D2-SYM, -D2-THIN, -D2-PERFIN, -D2-EXT, -D4-HOLE, FS111-M2-HULLC
+     with `pinch_of_cover` (ruling 522 (a)), and the agreement of the two readings of the singular set under saturation
+     (ruling 502 (c)). **Proved**: `IsRegularMUA.interior_inter_ball`, `SingLocallyFinite.isClosed`, four corollaries over
+     leaves. **Not stated**: FS116-O1-SATPIN, -N1-AXIS, -S1-RUNG, -V4-PARTNER, -S1-KAPPA, -S1-PAIR (arguments unread);
+     FS111-M-C11 on a cover; FS111-W-NOBEND's argument still unread. **My receipt**: tip `6fc27fa1` equals
+     `origin/fs131-w6`, tree clean; the wave's eight earlier modules untouched since `32f2ab4c` (`git diff` empty) — 862
+     lines added in the four new files and three registry files; the last real build's full log
+     (`build/gate/build/20261006T143138Z-602120.log`, 4 modules rebuilt) ends "Build completed successfully (5815 jobs)",
+     277 warnings, every one `declaration uses sorry`; `sorry` by the handoff's grep: `CoverHull` 4, `Parallel` 13, `Centre`
+     7, `Accumulation` 10 — the thirty-four — and 31 as given (`Curve` 6, `FanBridge` 12, `LocalGraph` 5, `MapColouring` 1,
+     `Pinch` 7); no `axiom`, no `native_decide` in the four; the driver log's `build exit 0`, `arch exit 0`, `dupnames exit
+     0`, and the doubled-name log's "OK"; two statements read against their rows — `pinch_of_cover` is `pinch` with
+     `TwoColourOn` replaced by measurability, an a.e. cover of `N` and the weak (H2) on each set, the same conclusion;
+     `tangent_parallel_out` asks of the partner point only `∉ c.singularSet` and saturation on a set holding it, as item 526
+     has FS121-DB1-L7. Not checked by me: the other thirty-two statements against their rows; its scratch axioms print; the
+     prices. **Findings, the job's** (its record § 14.2; each a dated erratum line drafted at § 15.4 item 2): FS111-M-PINCH
+     reads no disjointness; FS121-DB1-L7 stands with a shorter route (item 526); FS111-W-KB-DIR is a fact about one
+     measurable set with null unit pairs; FS121-D2-THIN is the contrapositive of -D2-SYM's main clause; FS121-O1-ENDS's two
+     cases have one conclusion in sectors; FS121-D2-EXT, -V5-RAY, -D2-PERFIN, -D1-EROSION each read less than filed;
+     FS111-M2-HULLC (iv)'s boundary clause needs no finiteness of components; **no row it read uses the local-structure
+     clause of L7 / O1-OUT / INTRAD without REG-J′**, so nothing waits on E8's flagged question (its § 14.3). **Its answer
+     to item 530's relay**: none of its rows reads `SeparatesAt` or `InP` (§ 15.7); the correction to § 3.3 is made by a
+     dated line. **Predictions scored** (its § 15.6): 0 standing statement defects against a registered 4 [1, 8] — below
+     the interval; 17 rows stated against 14 [8, 23]; 2 leaves proved against 2. **Its price**: about 49 agent-days for the
+     34 leaves on the planners' scale, which the two implementers measured so far have beaten by an order of magnitude.
+     **Slips, the job's, disclosed**: the defect reported and withdrawn (items 522, 526); `debruijn-domain-modeling` not
+     invoked fresh in this pass (nine new definitions, each with a spec example); it could not read the harness's count and
+     stopped by its own. **Owed before the wave's gate** (its § 14.6): `sq9.SingLocallyFinite` (FS131-I6D's), R7 as a
+     colouring with a fan, `sq9`'s two periods, a chart and a two-branch fan for `sq9`. **Credit**: seventeen rows read
+     from their arguments with nine found to read less than filed, and a table (§ 14.3) that answers which rows lean on
+     the flagged clause.
+     **Rulings.** (a) **FS111-M2-HULLC is stated at its level-set conclusion, with no hypothesis named for the
+     finite-perimeter step** (ruling 487 (b)'s condition, met as far as read). Alternative: name the classical hypothesis
+     now. Why not: no row read uses the conclusion it would give, and naming it later is one line. Confidence: medium —
+     the fragment's rows and wave 9's are unread by it; the fourth pass and wave 9's planner say if one reads it. (b)
+     **Four implementers by file, on branches to cut from `6fc27fa1`**: FS131-I6L (`Parallel`, 13 leaves), FS131-I6H
+     (`CoverHull`, 4), FS131-I6Z (`Centre`, 7), FS131-I6K (`Accumulation`, 10); I6L first, because the other two of the
+     ladder read its statements and a defect found there changes theirs. Briefs not written. (c) **The three cell lemmas
+     of a fan are FS131-I6E's to declare** (its brief exists and it launches earlier; `sector_alone` reads them); I6Z
+     takes them by ancestry from I6E's commit if it is in, else as hypotheses under names of its own. The fact "a
+     tangent-type point has positive upper density of each colour" is I6L's; I6Z takes it the same way. Alternative: the
+     planner's "whichever lands first". Why: a named owner needs no race, and the join then makes no choice. Confidence:
+     high. I6E's brief gets a dated amendment at its launch. (d) **A fourth planning pass, FS131-K6d**: the fragment's six
+     with their arguments, FS111-M-C11 on a cover, FS111-W-NOBEND's argument, the plan for the owed inhabitants — with
+     `ArcMap.bound_of_saturatedOn` and `sq9Map` (item 530) as inputs, and **a fresh domain-modeling pass over the third
+     pass's nine definitions as its first act** (the disclosed slip is met there, not by resuming a planner past its
+     line). Brief not written. (e) The deriver's question on `curvature_integer_ae` is sent only if I6L stalls there, as
+     drafted (record § 15.4 item 3). (f) The errata lines are held for the filing. (g) Ruling 530 (a) now has its answer:
+     the readers of `SeparatesAt`'s second clause are none; whether the clause and C121-NOPAR are weakened is decided at
+     the wave's join. (h) **Slot → FS131-I6C** (`Curve`, then `LocalGraph`, on `fs131-w6c`), launched 2026-10-06, its
+     brief amended at launch (one line asked of its report: where `local_graph`'s proof reads disjointness; gate exit 0).
+     In flight: 1 (L10A) + 1 (K9) + 1 (I6C) = 3.
+
+532. **The briefs that item 531 ruled are written and gated: FS131-I6L, FS131-I6Z, FS131-I6K and FS131-K6d; trees made** (mine;
+     2026-10-06). **I6L** (`data/fs131/briefs/FS131-I6L-wave6-third.md`; tree `fs131-w6l`): `CoverHull`'s four leaves, then
+     `Parallel`'s thirteen — seventeen. **I6Z** (`FS131-I6Z-wave6-third.md`; tree `fs131-w6z`): `Centre`'s seven. **I6K**
+     (`FS131-I6K-wave6-third.md`; tree `fs131-w6k`): `Accumulation`'s ten. All three branches cut from `6fc27fa1`, builds
+     copied from `fs131-w6` (idle), pushed; generator `data/fs131/briefs/scripts/mk-i6k.py L|Z|K [<the commit holding the
+     cell lemmas>]`, which reads each file's open leaves from the tree; gates exit 0 (I6L's first run failed on a bare file
+     name, fixed). **K6d** (`FS131-K6d-wave6-fourth.md`, generator `mk-k6d.py`; on `fs131-w6` at `6fc27fa1`): the join of
+     the two proved branches into the wave's line, a fresh modeling pass over the third pass's definitions, the fragment's
+     six rows, the pinch's consequences on a cover, FS111-W-NOBEND's argument, and the owed inhabitants stated as leaves;
+     gate exit 0. **Rulings.** (a) **Ruling 531 (b) amended: three implementers, not four** — `CoverHull`'s four leaves
+     ride first in I6L's job. Alternative: a job of its own (FS131-I6H). Why not: the planner prices them at 1.2 days on a
+     scale the wave's implementers have beaten tenfold, `pinch_of_cover` is an adaptation of a proof that exists, and four
+     set-algebra leaves re-price `Parallel` for the same mind. Confidence: medium-high. (b) **K6d's first act is the merge
+     of `43ea4886` (`Pinch` proved) and `2e55a2d6` (`MapColouring` proved, `MapEdge`, `Sq9Map`) into `fs131-w6`**, each
+     followed by a build, the doubled-name check and a statement check. Alternative: a joining job of its own, or I merge.
+     Why the planner: its rows and the owed inhabitants are stated over `sq9Map` and `ArcMap.bound_of_saturatedOn`, which
+     reach its branch only by that merge; the registry files conflict by adjacent additions, and a merge that needs a build
+     is not a coordinator's edit. Confidence: medium-high; a merge that conflicts in a Lean file stops and comes to me.
+     (c) **`sq9Map`'s unproved facts (`Valid`, `NonSiamese`) are stated by K6d in wave 6's line**, as leaves; wave 8's
+     model job (ruling 530 (c)) takes that module by ancestry. Why: the fragment rows' inhabitant lines and `emptyNS`'s
+     model need the same facts about one map. Confidence: high. (d) I6Z's brief has two forms: without the cell lemmas'
+     commit it takes them as hypotheses under its own names; regenerated with FS131-I6E's commit it merges that commit
+     first. **Corrected before the gate, mine**: three sentences of K6d's draft (a count of implementers; "stands on" for
+     the six rows' relation to the local exclusion; a gloss of the planner's name R7 that I could not source) replaced by
+     what the records say. **Disk**: 301 GB free of 1.9 TB after ten new trees today at 4.9 GB a build copy; the finished
+     trees' removal is held for the filing (handoff § 8) and becomes due earlier if free space falls under about 150 GB.
+     **Every job ruled so far has a gated brief.**
+
+533. **FS131-K9, by message mid-job: five findings from reading wave 9's eleven rows — no row refuted; a supporting lemma that
+     belongs to wave 6; a hypothesis from outside the backlog; two rows that are one theorem; a correction to a ruling of mine**
+     (source: K9's message to "main", 2026-10-06; its Stage 1 saved at `67c86f8f`, equal to `origin/fs131-w9` — checked; the
+     findings are not yet in a saved stage's Lean, and by item 526's rule none is announced as a defect: K9 labels each, and
+     none is a statement defect). **(1) FS111-M-REDUCE-I cannot be formalized on wave 9's branch**: its words (honest,
+     saturated, Σ, REG-J′) are wave 6's foundation and its `uses only` names wave 6's rows (`plans/FS111-derivation.md`
+     l. 619 — read by me: FS111-M-C11 off Σ, the finitely-many-arcs clause, FS111-W-NOBEND, FS111-M-EXTREME or V0-CLEAN's
+     island fill). FS129-OR1-TOP5 reads it only as an implication, so K9 states TOP5 for any predicate on five-colourings with
+     that implication as a hypothesis. **(2) A hypothesis from outside the backlog**: FS111-C1-PW rests on FS107-W-EQ-K's ⟹
+     (a compactness step), and FS-107 has no backlog row (`grep -c FS107 plans/LEAN-BACKLOG.md`: 0); it enters as the named
+     `Prop` `WEqKLimit K`. **(3) A shorter route**: over arc maps FS111-V0-CLEAN's cleaning and three steps of
+     FS111-M2-REDUCE-C are read by no consumer; one theorem carries both rows — an a.e. cover of the plane by `k` sets with
+     null unit pairs whose frontiers lie in a locally finite family of segments and circular arcs gives a valid `k`-coloured
+     arc map of the plane — reading no tightness and no six. **(4) A generalization**: FS111-C-SIX-M is FS111-V0-RESCALE's
+     contrapositive at every `k`. **(5)** FS129-OR1-DISCF-NS carries no outside hypothesis (its registered 0.8 that it
+     would was wrong); **and for a row that is an implication between two class statements, the `SimpleOn` form is not
+     formally stronger than the row as filed** — the hypothesis grows with the class — so it states each such row twice.
+     Also a route fact for FS129-SR1-BENDANY: the away bend on a fragment of radius below 2 is a new leaf. **Rulings.**
+     (a) **The plan's R13 is amended: FS111-M-REDUCE-I is stated in wave 6's tree, by its fourth planner; TOP5 is proved in
+     wave 9 at the abstract class, and its instance is made where the two waves meet.** Alternative: it stays a named
+     hypothesis of TOP5's instance and is not formalized in this milestone. Why: R13 ruled it formalized, its inputs are
+     wave 6's vocabulary, and that planner reads FS111-W-NOBEND's argument already. Confidence: medium-high; if the fourth
+     pass does not hold it, it is a named hypothesis and a row for a later pass. K9 is asked for the exact Lean form of
+     TOP5's hypothesis when its skeleton builds, for me to relay. (b) `WEqKLimit K` is adopted as a named hypothesis and
+     joins the plan's § 7.4 list at the filing; **a stub to mint**: FS107's compactness step in Lean (Blaschke selection
+     for arcs), unpriced. (c) The one theorem for V0-CLEAN and M2-REDUCE-C's first clause, and C-SIX-M at every `k`, are
+     adopted; each row's read-back says what the filed row had that the theorem does not read. (d) Rows that are
+     implications between two class statements are stated twice. **A correction to my ruling 508, mine**: its reason
+     ("by `Simple.simpleOn` every row proved under the narrow hypothesis gives the row as filed, so the choice cannot
+     lose a result") holds for non-existence rows only; the ruling stands, its sentence does not, and the second
+     planners of waves 7 and 8 are told in their briefs. **My check of one**: (5)'s logic — `SimpleOn S` is weaker than
+     `Simple`, so a hypothesis quantified over the `SimpleOn` class is the stronger hypothesis, and the implication over
+     the wide class does not entail the one over the narrow. **Relayed**: all five rulings to K9 by message.

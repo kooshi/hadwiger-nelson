@@ -147,3 +147,17 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-06, at launch) — what changed since this brief was written
+
+Nothing above is withdrawn; one small addition to your report.
+
+1. **The wave's third planner has handed back** (inventory item 531). It added four modules downstream of yours on `fs131-w6`, at commits
+   after the one your branch is cut from; none of your files changed. Its new leaves read two of your statements as they stand —
+   `AeColouring.local_graph` and `closure_essBdry_subset` — so a statement of yours that turns out false or needs a hypothesis is, as
+   before, a message to me at once.
+2. **One line asked of your report**: where your proof of `local_graph` reads that the two classes are disjoint (`TwoColourOn.disj`), by
+   step. The third planner expects it is read at one step only (the lens step); a later planning pass wants to restate the lemma for two
+   sets that may overlap, and your proof is the first place anyone will know. If the answer is "nowhere", that is a generalization: say so.
+3. **A lesson from today, for your mid-job messages** (inventory item 526): when you report a defect, say which kind it is — a
+   *statement* that needs a hypothesis it lacks, or a *route* that reads more than the statement needs (a shorter-route note, no defect).
