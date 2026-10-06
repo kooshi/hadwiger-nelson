@@ -4673,3 +4673,29 @@ reason by the close.*
      item 467 (g) ended. Confidence: high. (d) **The docstring lines** wait as MB1 says: the stuck family's until `stuckModel_hyps` reads the
      standard three, `cv_l0`'s until `stuckModel_terminal`. (e) **Slot → FS131-MB2**, launched 2026-10-06. In flight: 1 (L5) + 1 (MA1) + 1
      (MB2) = 3.
+
+472. **FS131-MA1 done: the four local moves have Lean inhabitants — `Paint` and `Moves` whole, each model theorem the landed move applied**
+     (implementer; harness ≈ 552k by the task notice; record `fs131-wm`'s `plans/FS131-MA1-implementation.md` Stages 1–4; report
+     `data/fs131/reports/FS131-MA1.md` on that branch; commits `1861d8ec` … `ebc81905`, `87699974`; pushed, tree clean). **Results**:
+     `hornModel_shave`, `hornModel_open` (a valid eight-colour map of the plane on which SHAVE's and OPEN's hypotheses hold at once),
+     `twoHornModel_rayMerge`, `twoHornModel_merge` — on the standard three; all 31 leaves of the two files proved as stated; none of the
+     planner's three likeliest-false statements is false. New beyond the skeleton: the classes, sectors and allowed cones of the two models,
+     `twoHornModel_hasDegree` (`4`) and `twoHornModel_hasHornCount` (`3`) for wave 5's vertex step; `ArcMap.allowedCone_tangent`; the fan as
+     a counted partition. 119 declarations added, none with a name declared elsewhere under `Proofs/` (checked by its script). **My
+     receipt**: tip equals `origin/fs131-wm`; the build's log ends "Build completed successfully (5754 jobs)", 0 warnings other than `sorry`,
+     28 distinct `sorry` warnings, all in `Stuck` (21) and `Bends` (7) — the other half's files as this branch has them; `sorry` by the
+     handoff's grep: `Paint` 0, `Moves` 0; `data/fs131/ma/MAAxioms-4.out` read by `grep`: the four model theorems each "clean" on
+     `['Classical.choice', 'Quot.sound', 'propext']`, and its last line "177 of 177 claimed records on the standard three; 4 of 4 controls
+     fire; 0 problem(s) -> PASS". **So the open gate item on the four moves (rulings 419 (d), 427 (d)) closes when this lane lands.**
+     **Items**: correction owed — the plan's route for the holed tile's connectedness (a rectangle off a closed disc is no finite union of
+     convex sets); `ARCHITECTURE.md`'s two rows still say "skeleton" (text drafted). Generalization — `frontier_hornSet_subset` does not need
+     `h12`. Predictions scored — the two files 1,718 lines inserted against 950–1,350 planned. Slips and a tool defect, the job's own, each
+     found by its instrument and disclosed.
+473. **Rulings on MA1's held items, and its slot.** (a) **FS131-MB2 is told to merge `origin/fs131-wm` at `87699974`** (the proved `Paint`
+     layer and its shared lemmas), by message, with the naming rule restated; its branch was cut from the skeleton before MA1's work, so
+     MA1's "cut B's branch from my tip" is met by the merge. (b) **The two `ARCHITECTURE.md` rows** and the silenced control are the lane's
+     landing job's. (c) **Slot → FS131-K10, wave 10's planner** (`debruijn`): the fourteen arithmetic rows (`Arith/StandingFive`,
+     `CharacterColouring`, `SpectralInputs`, `StationaryRatio`), which depend on nothing in waves 4–9 (`plans/FS131-kernel-plan.md` § 7.1),
+     on a new branch `fs131-w10` from `main`. Alternative weighed: the second planning pass for E7's `F₀` and `F₁`. Why wave 10: it is the
+     milestone's own remaining work — 111 rows stand in waves 6–10 — and the only wave that waits on nothing; `F₀` and `F₁` close gate items
+     on theorems that already have hand models. Confidence: medium-high. In flight: 1 (L5) + 1 (MB2) + 1 (K10) = 3.
