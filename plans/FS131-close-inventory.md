@@ -7635,3 +7635,30 @@ reason by the close.*
      statement's shape, not only the other branches for its name** (to the handoff's learned list). No reply sent.
      (Slips of mine: this item took three attempts to append — a check on the file's last words, which wrap, and
      then a quoting error in my own script; the check is now on the last item's number.)
+597. **FS131-I8C done: wave 8's `SemiHub` — all seventeen leaves proved as the planner stated them** (implementer, Opus; harness 572k and 54 minutes by the task notice; record `fs131-w8c`'s `plans/FS131-I8C-implementation.md`; report `data/fs131/reports/FS131-I8C.md`; commits `7e236096`, `1e605b60`, `b0699c54`, `0bdf6ea9`; pushed, tree clean).
+     **Proved on the standard three** (built, not gated): FS116-V5-QCOL in every clause the planner stated (one
+     clause of the row, "a (Q) arc holding one germ and not the other ends there", was never stated in Lean and
+     stays at its filed grade), FS116-N3-PAIR, FS116-V5-DICHO, FS116-N3-CONE (a) and (c), FS116-N3-STAR2 at exactly
+     four colours, and `fullSemiHub_star_parallel_T` (no ledger row: the row's "not claimed" line excludes that
+     kind). **The model the join job owed is paid**: the half-disc map at the origin is valid, non-Siamese, simple,
+     two colours, and one `example` runs the three shared lemmas on it. **Not landed**: a Lean star or semi-hub —
+     the star rows' hypotheses are met by held fragments by hand only. Its generalization and corrections: items
+     593, 596. **The planner's twelve-case table for DICHO is neither confirmed nor refuted**: the proof took a
+     route without it. **My receipt**: tip `0bdf6ea9` equals `origin/fs131-w8c`, tree clean; outside `data/`,
+     `plans/`, `tools/` it changed `SemiHub` (828 lines added), `ARCHITECTURE.md`, `scripts/Axioms.lean`; no
+     `sorry` tactic in the module; its build log ends `EXIT=0`; its lint log reads "Linting passed for Proofs.";
+     its axioms print parsed by script — 36 records, none outside the standard three but its planted control;
+     **the 40 heads the base declared in `SemiHub` are textually unchanged, no `include` or `omit` added**. Not
+     checked by me: the proofs beyond the build; its elaborated check over 235 declarations. **Prediction
+     scored**: the planner's 1,700 lines — 605 of proof and helpers (0.36); two routes shortened because the
+     plan's hard child was already landed. **Credit**: its own generalization narrowed by itself when it read
+     the row's entry; two redundant helpers removed after a sibling's remark, and the other sixteen audited;
+     slips listed without softening. **Rulings.** (a) `fullSemiHub_star_parallel_T` stays a rowless helper of
+     FS116-N3-SEMI until the wave's landing; a row is the deriver's to mint at the filing. (b) The Lean star and
+     semi-hub are an owed inhabitant for the wave's landing (the vacuity scan will read these theorems as
+     generic or unknown): one job, with `emptyNS`'s nine-colour model (ruling 530 (c)). (c) The unstated clause
+     of QCOL goes to wave 8's third planner (K8c) with SIXRING and TWIST-C. (d) **The wave's join**: its trial of
+     this branch with the sibling's conflicts in `ARCHITECTURE.md` and `scripts/Axioms.lean` only, adjacency;
+     joined by the wave's landing job or K8c's first act, whichever is first. (e) Its drafts are held for the
+     filing. (f) **Slot → FS131-MD2** (the example maps' second closer, on `fs131-wd2`), launched 2026-10-06. In
+     flight: 3 (I8D, MD1, MD2). **Nothing launch-ready is left: the planners' briefs are owed.**
