@@ -6827,6 +6827,12 @@ leaves close. -/
 #print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_branch
 #print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_between
 #print axioms HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three
+-- FS131-I8B: Plane/RingCalculus/Star (FS116-N2-ANTI, at the ruled statement)
+#print axioms HadwigerNelson.Plane.ArcMap.mem_coneAt_add_int_mul_two_pi
+#print axioms HadwigerNelson.Plane.ArcMap.false_of_antipodal_gaps
+#print axioms HadwigerNelson.Plane.ArcMap.star_anti_ne
+#print axioms HadwigerNelson.Plane.ArcMap.star_anti_count
+#print axioms HadwigerNelson.Plane.ArcMap.star_anti
 -- FS131-I8B block end
 
 #eval IO.println "=== PURCHASED ==="

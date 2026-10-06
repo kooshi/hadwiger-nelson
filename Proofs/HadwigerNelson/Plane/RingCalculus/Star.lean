@@ -15,7 +15,7 @@ with that count, as in `Plane/RingGerm`. "On a closed disc of radius above 1 abo
 | FS116-RING-GERM | first clause: `germS_absent` (`Plane/RingGerm`); (i) `ringGerm_inward`; (ii) `ringGerm_outward`; (iii) `germS_four` (`Plane/RingGerm`) | proved |
 | FS116-N2-STAR | `star_coloursAt`, `star_absent`, `IsTip.coneAt_subset` (`…/Basic`), `star_outer_cone`, `star_flank`, `star_flank_interior`, `star_tip_nonempty`, `star_outer_nonempty` | proved |
 | FS116-N2-RECIP | `ringPt_ringPt_add_pi`, `exists_tileOf_of_germIn`, `star_recip` | proved (job FS131-I8A) |
-| FS116-N2-ANTI | `star_anti` | stated, open |
+| FS116-N2-ANTI | `mem_coneAt_add_int_mul_two_pi`, `false_of_antipodal_gaps`, `star_anti_ne`, `star_anti_count`, `star_anti` | proved (job FS131-I8B), with the two hypotheses of inventory item 568: no other tile of `p` approaches along `ψ ± 90°` |
 
 **What is wider than the rows** (each reported as a generalization):
 * RING-GERM (ii) and STAR's outer clause need no non-Siamese hypothesis in tile form: the tile approaching `y` from outside
@@ -256,11 +256,142 @@ theorem star_recip {F : ArcMap 6} (hF : F.Valid) {p : ℂ} (hp : F.Covers p 2) (
 
 /-! ## FS116-N2-ANTI -/
 
+/-- The cone is periodic under every whole turn. -/
+theorem mem_coneAt_add_int_mul_two_pi {S : Set ℂ} {y : ℂ} {β : ℝ} (m : ℤ) :
+    β + 2 * π * m ∈ coneAt S y ↔ β ∈ coneAt S y := by
+  simp only [coneAt, mem_setOf_eq, e_add_int_mul]
+
+/-- **FS116-N2-ANTI, the interval step**: an interval of directions `[b₁, b₂]` (at most a whole turn) holding `ψ + 90°`
+and `ψ − 90°` cannot leave room, off its open part, both for a direction strictly inside the half-circle about `ψ` and
+for one strictly inside the opposite half-circle. -/
+theorem false_of_antipodal_gaps {ψ b₁ b₂ g h : ℝ} (hpl : ψ + π / 2 ∈ angleIcc b₁ b₂)
+    (hmi : ψ - π / 2 ∈ angleIcc b₁ b₂) (hg : g ∈ Ioo (ψ - π / 2) (ψ - π / 2 + π)) (hg' : g ∉ angleIoo b₁ b₂)
+    (hh : h ∈ Ioo (ψ + π / 2) (ψ + π / 2 + π)) (hh' : h ∉ angleIoo b₁ b₂) : False := by
+  have hπ := Real.pi_pos
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hpl
+  obtain ⟨j, hj1, hj2⟩ := mem_iUnion.mp hmi
+  have hh2 : b₂ + 2 * π * m ≤ h := by
+    by_contra hc
+    push Not at hc
+    exact hh' (mem_iUnion.mpr ⟨m, by linarith [hh.1], hc⟩)
+  have hg2 : g ≤ b₁ + 2 * π * m := by
+    by_contra hc
+    push Not at hc
+    exact hg' (mem_iUnion.mpr ⟨m, hc, by linarith [hg.2]⟩)
+  have hjm : (j : ℝ) < m := by
+    by_contra hc
+    push Not at hc
+    have := mul_le_mul_of_nonneg_left hc hπ.le
+    linarith [hg.1]
+  have hjm' : (j : ℝ) + 1 ≤ m := by exact_mod_cast Int.add_one_le_iff.mpr (by exact_mod_cast hjm)
+  have := mul_le_mul_of_nonneg_left hjm' hπ.le
+  linarith [hh.2]
+
+/-- **FS116-N2-ANTI, `t⁺ ≠ t⁻`**: at a hub `y = r(ψ)` of a vertex `p` simple for the map, no single tile `t` of `p` whose
+colour is absent at `y` approaches `p` along both `ψ + 90°` and `ψ − 90°` when no other tile of `p` approaches along
+either: a tip of `y` and the tile of `p` of an outer colour of `y` are other tiles of `p`, with directions strictly
+inside the two half-circles, off the open part of the cone of `t`. -/
+theorem star_anti_ne (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1) (hS : F.SimpleOn {p})
+    (h4 : 4 ≤ (F.coloursAt p).ncard) (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} (hy : F.IsHub p ψ) {t : Set ℂ}
+    {c : Fin k} (ht : F.TileOf c t) (hpt : p ∈ closure t) (hc : c ∉ F.coloursAt (ringPt p ψ))
+    (hpl : ψ + π / 2 ∈ coneAt t p) (hmi : ψ - π / 2 ∈ coneAt t p)
+    (hp'' : ∀ T, F.TileAt p T → T ≠ t → ψ + π / 2 ∉ coneAt T p)
+    (hm'' : ∀ T, F.TileAt p T → T ≠ t → ψ - π / 2 ∉ coneAt T p) : False := by
+  have hπ := Real.pi_pos
+  have hpd : p ∈ F.dom := hp (mem_closedBall_self zero_le_one)
+  obtain ⟨⟨X, X', hch⟩, htf, hof⟩ := isHub_iff.mp hy
+  obtain ⟨b₁, b₂, -, -, hcone, hsep⟩ := hS.coneAt_eq_angleIcc_sep ht.1 hpd rfl hpt
+  rw [hcone] at hpl hmi
+  have key : ∀ T, F.TileAt p T → T ≠ t → ∀ lo, coneAt T p ⊆ angleIcc lo (lo + π) → lo ∉ coneAt T p →
+      lo + π ∉ coneAt T p → ∃ g ∈ Ioo lo (lo + π), g ∉ angleIoo b₁ b₂ := by
+    intro T hT hTt lo hsub hlo hhi
+    obtain ⟨β₁, β₂, hβ, -, hTc⟩ := hS.coneAt_eq_angleIcc hT.1 rfl hT.2
+    have hβ₁ : β₁ ∈ coneAt T p := by
+      rw [hTc]; exact Icc_subset_angleIcc _ _ ⟨le_rfl, hβ⟩
+    obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp (hsub hβ₁)
+    have hg : β₁ - 2 * π * m ∈ coneAt T p := by
+      have := (mem_coneAt_add_int_mul_two_pi (S := T) (y := p) (β := β₁) (-m)).mpr hβ₁
+      rwa [show β₁ + 2 * π * ((-m : ℤ) : ℝ) = β₁ - 2 * π * m by push_cast; ring] at this
+    refine ⟨β₁ - 2 * π * m, ⟨lt_of_le_of_ne (by linarith) fun h => hlo (by rw [h]; exact hg),
+      lt_of_le_of_ne (by linarith) fun h => hhi (by rw [← h]; exact hg)⟩, fun hmem => ?_⟩
+    exact Set.disjoint_left.mp (hsep T hT.1 hTt hT.2) hg hmem
+  have hcol : ∀ {c' : Fin k} {T : Set ℂ}, F.TileOf c' T → c' ∈ F.coloursAt (ringPt p ψ) → T ≠ t := by
+    rintro c' T hT hc' rfl
+    obtain ⟨z, hz⟩ := hT.1.nonempty
+    have h1 : F.col z = c' := hT.2 hz
+    have h2 : F.col z = c := ht.2 hz
+    exact hc (by rw [← h2, h1]; exact hc')
+  -- a tip of `y`
+  obtain ⟨a, Sa, hSa, hSt⟩ := star_tip_nonempty hF hN hp h4 hk hch htf
+  have hSne : Sa ≠ t := hcol hSa (tipColours_subset p _ ⟨Sa, hSa, hSt⟩).2
+  obtain ⟨g, hg, hg'⟩ := key Sa hSt.tileAt.1 hSne (ψ - π / 2)
+    (by rw [show ψ - π / 2 + π = ψ + π / 2 by ring]; exact hSt.coneAt_subset hF)
+    (hm'' Sa hSt.tileAt.1 hSne) (by rw [show ψ - π / 2 + π = ψ + π / 2 by ring]; exact hp'' Sa hSt.tileAt.1 hSne)
+  -- the tile of `p` of an outer colour of `y`
+  obtain ⟨c', hc'⟩ := star_outer_nonempty hF hp h4 hk hch hof
+  obtain ⟨Q, hQ, hpQ⟩ := (F.mem_coloursAt_iff_exists_tileOf hpd).mp hc'.1
+  have hQne : Q ≠ t := hcol hQ (outerTileColours_subset p _ hc').2
+  obtain ⟨h, hh, hh'⟩ := key Q ⟨hQ.1, hpQ⟩ hQne (ψ + π / 2)
+    (by rw [show ψ + π / 2 + π = ψ + 3 * π / 2 by ring]; exact star_outer_cone hF hN hc' hQ hpQ)
+    (hp'' Q ⟨hQ.1, hpQ⟩ hQne) (by
+      rw [show ψ + π / 2 + π = ψ - π / 2 + 2 * π by ring, mem_coneAt_add_two_pi]
+      exact hm'' Q ⟨hQ.1, hpQ⟩ hQne)
+  exact false_of_antipodal_gaps hpl hmi hg hg' hh hh'
+
+/-- **FS116-N2-ANTI, the count at one hub**: at a hub `y = r(ψ)` of a vertex `p` of four colours in a valid non-Siamese
+six-coloured map, if two distinct colours of `p` are absent at `y`, they are the colours absent at `y`, `y` carries four
+colours, and `T_y`, `O_y` are single colours — the other two colours of `p`. -/
+theorem star_anti_count {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
+    (h4 : (F.coloursAt p).ncard = 4) {ψ : ℝ} (hy : F.IsHub p ψ) {cp cm : Fin 6} (hne : cp ≠ cm)
+    (hcp : cp ∉ F.coloursAt (ringPt p ψ)) (hcm : cm ∉ F.coloursAt (ringPt p ψ)) :
+    (F.coloursAt (ringPt p ψ))ᶜ = {cp, cm} ∧ (F.coloursAt (ringPt p ψ)).ncard = 4 ∧
+      ∃ a b, a ≠ b ∧ F.tipColours p (ringPt p ψ) = {a} ∧ F.outerTileColours p (ringPt p ψ) = {b} ∧
+        F.coloursAt p \ {cp, cm} = {a, b} := by
+  obtain ⟨⟨X, X', hch⟩, htf, hof⟩ := isHub_iff.mp hy
+  have h4' : 4 ≤ (F.coloursAt p).ncard := h4.ge
+  have hk : 6 ≤ (F.coloursAt p).ncard + 2 := by omega
+  have hT := star_tip_nonempty hF hN hp h4' hk hch htf
+  have hO := star_outer_nonempty hF hp h4' hk hch hof
+  have habs := star_absent hF hp h4' hk hch
+  have hdisj := disjoint_tipColours_outerTileColours hN hF p (ringPt p ψ)
+  have hsub : F.tipColours p (ringPt p ψ) ∪ F.outerTileColours p (ringPt p ψ) ⊆ F.coloursAt p :=
+    union_subset (fun c hc => (tipColours_subset p _ hc).1) fun c hc => (outerTileColours_subset p _ hc).1
+  have hA2 : ({cp, cm} : Set (Fin 6)) ⊆ (F.coloursAt (ringPt p ψ))ᶜ := by
+    rintro c (rfl | rfl)
+    · exact hcp
+    · exact hcm
+  have hsum := Set.ncard_sdiff_add_ncard_of_subset hsub (Set.toFinite _)
+  rw [← habs, h4, Set.ncard_union_eq hdisj] at hsum
+  have hT1 := (Set.ncard_pos (Set.toFinite _)).mpr hT
+  have hO1 := (Set.ncard_pos (Set.toFinite _)).mpr hO
+  have hA := Set.ncard_le_ncard hA2 (Set.toFinite _)
+  rw [Set.ncard_pair hne] at hA
+  have hAeq : (F.coloursAt (ringPt p ψ))ᶜ = {cp, cm} :=
+    (Set.eq_of_subset_of_ncard_le hA2 (by rw [Set.ncard_pair hne]; omega) (Set.toFinite _)).symm
+  obtain ⟨a, ha⟩ := Set.ncard_eq_one.mp (show (F.tipColours p (ringPt p ψ)).ncard = 1 by omega)
+  obtain ⟨b, hb⟩ := Set.ncard_eq_one.mp (show (F.outerTileColours p (ringPt p ψ)).ncard = 1 by omega)
+  have hcard := Set.ncard_add_ncard_compl (F.coloursAt (ringPt p ψ))
+  rw [Nat.card_eq_fintype_card, Fintype.card_fin] at hcard
+  refine ⟨hAeq, by omega, a, b, fun hab => ?_, ha, hb, ?_⟩
+  · exact Set.disjoint_left.mp hdisj (by rw [ha]; rfl) (by rw [hb, hab]; rfl)
+  · rw [← hAeq, habs, Set.sdiff_sdiff_cancel_left hsub, ha, hb]; rfl
+
 /-- **FS116-N2-ANTI** (simple read at the tiles of `p` only): in a valid non-Siamese six-coloured fragment on a closed
 disc of radius above 1 about a vertex `p` of four colours whose tiles are Jordan domains, let `y = r(ψ)` and
 `y* = r(ψ + 180°)` be hubs of `p`, and let `ψ + 90°` and `ψ − 90°` lie in the interiors of the cones at `p` of tiles `t⁺`
-(of colour `c⁺`) and `t⁻` (of colour `c⁻`). Then `t⁺ ≠ t⁻`, `A(y) = A(y*) = {c⁺, c⁻}`, `T_y = O_(y*)` and `O_y = T_(y*)`,
-each a single colour, and `y` and `y*` have four colours and no more.
+(of colour `c⁺`) and `t⁻` (of colour `c⁻`), no other tile of `p` approaching `p` along `ψ + 90°` or along `ψ − 90°`.
+Then `t⁺ ≠ t⁻`, `A(y) = A(y*) = {c⁺, c⁻}`, `T_y = O_(y*)` and `O_y = T_(y*)`, each a single colour, and `y` and `y*` have
+four colours and no more.
+
+**The excluded case** (`hp''`, `hm''`; inventory item 568): the row's *not claimed* line is "anything when an edge of p
+leaves at ψ + 90° or ψ − 90°" (`plans/FS116-derivation.md` l. 719), and "in the interior of the cone", read as the
+interior of a set of directions, admits such an edge when one tile's cone is every direction: then `t⁺ = t⁻` with the
+other three tiles of `p` cusps along `ψ + 90°` or `ψ − 90°`, a configuration neither excluded nor constructed (open:
+"can a tile of a four-colour vertex have every direction in its cone, with two antipodal hubs?"). The two hypotheses say
+that no edge of `p` leaves along either direction (no `IsEdgeDir p t⁺ T (ψ + 90°)`, in `…/SemiHub`'s word); where the cone
+of `t⁺` is a proper interval they follow from `hp'` (`SimpleOn.coneAt_eq_angleIcc_sep`). The proof reads `hp'`, `hm` as
+interiors only for the two colours' absence at `y` and `y*` (`star_flank_interior`); `t⁺ ≠ t⁻` reads membership and the
+two new hypotheses (`star_anti_ne`).
 
 VACUITY: the hypotheses' satisfiability is open (two antipodal hubs: no held fragment has a hub, and on a Γ-free ring
 FS129-SR3-EMPTY-NS shows there is none); the strip's `P₀` meets every hypothesis but the interiority of the flank
@@ -268,12 +399,55 @@ directions and (Q)-freeness of the germs, and fails the conclusion (`plans/FS116
 theorem star_anti {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
     (hS : F.SimpleOn {p}) (h4 : (F.coloursAt p).ncard = 4) {ψ : ℝ} (hy : F.IsHub p ψ) (hy' : F.IsHub p (ψ + π))
     {tp tm : Set ℂ} {cp cm : Fin 6} (htp : F.TileOf cp tp) (htm : F.TileOf cm tm) (hptp : p ∈ closure tp)
-    (hptm : p ∈ closure tm) (hp' : ψ + π / 2 ∈ interior (coneAt tp p)) (hm : ψ - π / 2 ∈ interior (coneAt tm p)) :
+    (hptm : p ∈ closure tm) (hp' : ψ + π / 2 ∈ interior (coneAt tp p)) (hm : ψ - π / 2 ∈ interior (coneAt tm p))
+    (hp'' : ∀ T, F.TileAt p T → T ≠ tp → ψ + π / 2 ∉ coneAt T p)
+    (hm'' : ∀ T, F.TileAt p T → T ≠ tm → ψ - π / 2 ∉ coneAt T p) :
     tp ≠ tm ∧ (F.coloursAt (ringPt p ψ))ᶜ = {cp, cm} ∧ (F.coloursAt (ringPt p (ψ + π)))ᶜ = {cp, cm} ∧
       (∃ c, F.tipColours p (ringPt p ψ) = {c} ∧ F.outerTileColours p (ringPt p (ψ + π)) = {c}) ∧
       (∃ c, F.outerTileColours p (ringPt p ψ) = {c} ∧ F.tipColours p (ringPt p (ψ + π)) = {c}) ∧
       (F.coloursAt (ringPt p ψ)).ncard = 4 ∧ (F.coloursAt (ringPt p (ψ + π))).ncard = 4 := by
-  sorry
+  have h4' : 4 ≤ (F.coloursAt p).ncard := h4.ge
+  have hk : 6 ≤ (F.coloursAt p).ncard + 2 := by omega
+  have hcpy : cp ∉ F.coloursAt (ringPt p ψ) := star_flank_interior hF htp (Or.inl hp')
+  have hcmy : cm ∉ F.coloursAt (ringPt p ψ) := star_flank_interior hF htm (Or.inr hm)
+  have hring : ringPt p (ψ - π) = ringPt p (ψ + π) := by
+    simp only [ringPt]; rw [show ψ + π = ψ - π + 2 * π by ring, e_add_two_pi]
+  have hcpy' : cp ∉ F.coloursAt (ringPt p (ψ + π)) :=
+    star_flank_interior hF htp (Or.inr (by rwa [show ψ + π - π / 2 = ψ + π / 2 by ring]))
+  have hcmy' : cm ∉ F.coloursAt (ringPt p (ψ + π)) := by
+    rw [← hring]
+    exact star_flank_interior hF htm (Or.inl (by rwa [show ψ - π + π / 2 = ψ - π / 2 by ring]))
+  have hne : tp ≠ tm := by
+    rintro rfl
+    exact star_anti_ne hF hN hp hS h4' hk hy htp hptp hcpy (interior_subset hp') (interior_subset hm) hp'' hm''
+  have hcne : cp ≠ cm := by
+    rintro rfl
+    exact hne (hN.tile_eq_of_mem_closure hF htp htm hptp hptm)
+  obtain ⟨hA, hn4, a, b, -, hT, hO, hrest⟩ := star_anti_count hF hN hp h4 hy hcne hcpy hcmy
+  obtain ⟨hA', hn4', a', b', hab', hT', hO', hrest'⟩ := star_anti_count hF hN hp h4 hy' hcne hcpy' hcmy'
+  -- the tips of `y` and of `y*` have different colours: one tile of `p` would hold both, `2` apart
+  have haa : a ≠ a' := by
+    rintro rfl
+    obtain ⟨Sa, hSa, hSt⟩ : a ∈ F.tipColours p (ringPt p ψ) := by rw [hT]; rfl
+    obtain ⟨Sa', hSa', hSt'⟩ : a ∈ F.tipColours p (ringPt p (ψ + π)) := by rw [hT']; rfl
+    have hSS : Sa = Sa' := hN.tile_eq_of_mem_closure hF hSa hSa' hSt.2.1 hSt'.2.1
+    subst hSS
+    have hd := hSt.1.dist_le_one_of_mem_closure hF _ hSt.2.2 _ hSt'.2.2
+    have h2 : dist (ringPt p ψ) (ringPt p (ψ + π)) = 2 := by
+      simp only [ringPt, e_add_pi, dist_eq_norm]
+      rw [show p + e ψ - (p + -e ψ) = 2 * e ψ by ring, norm_mul, norm_e]; norm_num
+    linarith
+  have ha'b : a' = b := by
+    have h : a' ∈ ({a, b} : Set (Fin 6)) := by rw [← hrest, hrest']; exact Set.mem_insert _ _
+    rcases h with h | h
+    · exact absurd h.symm haa
+    · exact h
+  have hb'a : b' = a := by
+    have h : b' ∈ ({a, b} : Set (Fin 6)) := by rw [← hrest, hrest']; exact Set.mem_insert_of_mem _ rfl
+    rcases h with h | h
+    · exact h
+    · exact absurd (ha'b.trans h.symm) hab'
+  exact ⟨hne, hA, hA', ⟨a, hT, by rw [hO', hb'a]⟩, ⟨b, hO, by rw [hT', ha'b]⟩, hn4, hn4'⟩
 
 end ArcMap
 
