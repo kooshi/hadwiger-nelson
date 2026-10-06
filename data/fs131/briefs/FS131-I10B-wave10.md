@@ -46,6 +46,12 @@ The plan's hand-back and the rulings in force:
 > 478. **Rulings on item 477** (sent to K10 by message). (a) **TC1-STANDING-FIVE takes a second named hypothesis beside `Row123Chain`, the
 > — source: plans/FS131-close-inventory.md
 
+The first implementer's hand-back — its record (`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10/plans/FS131-I10A-implementation.md`, on
+branch `fs131-w10`, not merged into yours) has Lean facts met on the way that may save you time: a notation that parses against the eye, an
+action whose `T 0` need not be the identity, a route that fails at an atom:
+
+> 493. **FS131-I10A done: all nine leaves of wave 10's first file pair proved — `SpectralInputs` and `CharacterColouring` hold no `sorry`, over
+> — source: plans/FS131-close-inventory.md
 ## The statements
 
 No statement changes in this job. The plan's section for your file (read the whole record: § 2 the dispositions, § 3 the foundation, § 5 the plan
