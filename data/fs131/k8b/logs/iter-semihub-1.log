@@ -1,0 +1,27 @@
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:142:12: error(lean.unknownIdentifier): Unknown identifier `angleIcc_subset_angleIcc`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:148:12: error(lean.unknownIdentifier): Unknown identifier `angleIcc_subset_angleIcc`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:210:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:225:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:230:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:237:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:247:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:257:6: error: unexpected token 'Π'; expected ')'
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:271:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:282:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:290:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:298:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:306:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:367:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:376:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:384:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:395:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:413:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:429:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:441:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:466:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:487:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:503:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:513:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:525:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:541:8: warning: declaration uses `sorry`
+exit=1

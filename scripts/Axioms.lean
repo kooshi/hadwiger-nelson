@@ -6780,6 +6780,31 @@ modules `HubCount`, `TilesAt`, `SoleTip`, `RingColour`). -/
 #print axioms HadwigerNelson.Plane.ArcMap.exists_ne_mem_closure_inter_of_split
 -- FS131-I8A block end
 
+/-! ## FS131-K8b — FS-131 wave 8's second planner: the semi-hub rows (`Plane/RingCalculus/SemiHub`, `SemiHubPlaces`). The
+declarations with no `sorry` beneath them, all in `SemiHub`; `ringArc_dist_le_one`, `germPair_swap` (`SemiHub`),
+`crossed_tip_zeroAngle` and `transferQC` (`SemiHubPlaces`) are proved from stated leaves and join this block when those
+leaves close. -/
+-- FS131-K8b: Plane/RingCalculus/SemiHub
+#print axioms HadwigerNelson.Plane.ArcMap.IsEdgeDir.symm
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.isEdgeDir₁₂
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.isEdgeDir₂₃
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.isEdgeDir₃₄
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.angleIcc_subset_cone₂
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.angleIcc_subset_cone₄
+#print axioms HadwigerNelson.Plane.ArcMap.isSemiHub_iff_qSide
+#print axioms HadwigerNelson.Plane.ArcMap.isFullSemiHub_iff_qSide
+#print axioms HadwigerNelson.Plane.ArcMap.qcol_cw
+#print axioms HadwigerNelson.Plane.ArcMap.qcol_ccw
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.not_mem_closure_of_not_subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.germIn_closure
+#print axioms HadwigerNelson.Plane.ArcMap.GermOnQWith.germIn_closure
+#print axioms HadwigerNelson.Plane.ArcMap.germOnQ_bar_uPlus
+#print axioms HadwigerNelson.Plane.ArcMap.germOnQ_bar_vMinus
+#print axioms HadwigerNelson.Plane.ArcMap.germOnQ_bar_uMinus
+#print axioms HadwigerNelson.Plane.ArcMap.germOnQ_bar_vPlus
+#print axioms HadwigerNelson.Plane.ArcMap.closure_inter_subset_sphere
+-- FS131-K8b block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
