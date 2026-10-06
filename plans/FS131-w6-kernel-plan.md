@@ -357,3 +357,58 @@ docstring's reading names. `sat_inP`: owed (§ 7.1).
 | X8 | two of four modules, 0.6 | two: `Pinch` in part, `MapColouring` whole |
 | X9 | a row moved 0.3; two rows one theorem 0.5 | none moved; three pairs proposed as one theorem and a corollary (NOBEND/C11, L7/OUT, VT/VT-W) |
 | X10 | ≥ 3 uninhabited classes, 0.9 | five, by the rows' own model lines |
+
+---
+
+# FS131-K6b — the second planning pass (stages from 8)
+
+*Job FS131-K6b, de Bruijn (Opus 5.5), launched 2026-10-06 in the same worktree, on `fs131-w6` at `714a972b`. Brief
+`/home/kooshi/source/lean-dir/data/fs131/briefs/FS131-K6b-wave6-second.md` (on `main`), with `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md`
+§ Building. Working files `data/fs131/k6b/`; tools `tools/fs131_k6b_*.py`. Nothing in this milestone is blind (ruling 1). The deriver's record
+`plans/FS131-E8-derivation.md` is read on `main` and not written.*
+
+**What this pass may change, and what it may not.**
+- *May*: the signatures of `Plane/Saturated/Basic`'s predicates and the statements of the open leaves of `Pinch` and `MapColouring` — **until
+  stage 9 is saved**; new modules under `Plane/Saturated/`; `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean` (a block headed
+  "FS131-K6b"); this record from here on; `tools/fs131_k6b_*.py`; `data/fs131/k6b/`.
+- *May not*: the proof of any proved theorem of the first pass (each still builds, or the change is wrong); any declaration that is on `main`
+  (new declarations only in landed modules); after stage 9's commit, any statement of `Basic` or `Pinch` (a change needed then is a message to
+  the coordinator); the first pass's Stages 1–7 above (left standing; a correction to them is a line in a stage of mine); `main`, another wave's
+  branch, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`.
+
+## Stage 8 — SAVED: the readback, the as-given build, the registered expectations
+
+### 8.1 The brief's quotations against their sources (standing rule 3)
+
+By script (`tools/fs131_k6b_quotes.py`: exact substring match of each `>`-block against the file its `— source:` line names; output
+`data/fs131/k6b/logs/quotes.out`): **34 quotations, 34 exact, 0 mismatched**, exit 0. With one character of the first quotation altered
+(`--plant`) it reports 1 mismatch and exits 1 (`quotes-plant.out`). No finding about the brief.
+
+### 8.2 Read, in order
+
+The brief; `plans/STANDING-RULES.md`; `LEAN.md` whole; `RUNNING.md` § Building; this record's Stages 1–7 whole and the first pass's report
+(`data/fs131/reports/FS131-K6.md`); `Plane/Saturated/Basic`, `Pinch`, `MapColouring` whole; `data/fs131/k6/FanDesign.lean` whole; the deriver's
+record `plans/FS131-E8-derivation.md` whole (Stages 1–5, 711 lines); inventory items 481, 486–492; `plans/FS131-kernel-plan.md` §§ 7.1–7.5; the
+37 backlog entries (`data/fs131/k6/backlog-rows-w6.md`: statement, not claimed, handoff, notes). **Not yet read at this stage**: the arguments the
+first pass's § 7.2 item 4 lists (each is read in the stage that states its rows, and logged there).
+
+### 8.3 The branch builds as given
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`: **OK — all 1799 modules already up to date, nothing built,
+2 modules with warnings**, every warning `declaration uses sorry` (8: `Pinch` 7, `MapColouring` 1), exit 0
+(`build/gate/build/20261006T111946Z-3572998.log`; driver log `data/fs131/k6b/logs/build-0-as-given.log`).
+
+### 8.4 Registered expectations (written before the unread arguments are opened)
+
+Written after §§ 8.1–8.3; the deriver's record is read, the FS-116 and FS-121 job records are not. Scored in the last stage.
+
+| # | expectation | probability / interval |
+|---|---|---|
+| Y1 | **Rows that hide a statement defect**, ranked: (a) FS111-M2-INTRAD (three steps, the third one mind; "finitely many of each radius" and "almost everywhere" are two quantifiers the entry runs together) 0.5; (b) FS121-O1-ENDS against -DB1-L6 ("off a null set of normals" against "off finitely many"): a statement changes 0.5; (c) FS116-O1-SATPIN's "saturated on a disc" for a fragment needs a hypothesis its statement lacks 0.5; (d) FS121-D2-SYM's "in particular" clause 0.4; (e) FS121-V5-LOC (iii)'s "and its ends" has two readings that disagree 0.35; (f) FS121-D1-EROSION's second disjunct 0.3 | as listed; in total **3** defects among the rows I state, 80 % interval [1, 7] |
+| Y2 | **The bridge hides a step that does not formalize as written** (a constant off, a hypothesis a step reads that its entry does not name, or a step whose formal form needs a different argument): at least one | 0.6; the likeliest: § 3.1 (4)'s constants (`h = min(ρ₀, ρ₁)/24` against the 6-Lipschitz normal's domain `B(y, ρ₁/2)`, `δ ≤ ρ₁/8`); § 3.2 (2)'s "a unit-speed parametrization of a component" (no classification of one-manifolds in Mathlib) |
+| Y3 | **Short** (provable by me in about an hour): FS131-E8-DELTA; FS131-E8-BRIDGE from -FAN; the fan's inhabitant apart, nothing else of the bridge. Among the first pass's rows: FS121-DB1-L7's statement over `IsTangentAt`; FS121-V3-CPI from M-HALF | I prove **2** leaves in this pass beyond the inhabitants, 80 % interval [0, 4] |
+| Y4 | **Price of the bridge** (eight rows, implementer agent-days, before any leaf is stated): LOCAL 4, GAMMA 3, BETA 2, ALPHA 2, DELTA 0.2, FAN 3, BRIDGE 0.1, CLAUSE2 1 — **15 agent-days**, 80 % interval [6, 30]; about 5,000 lines | re-priced in the bridge's stage from its first two leaves |
+| Y5 | **How far this pass gets**: the foundation restated, the fan landed, the bridge's eight rows stated — certain to be attempted; beyond them, the rows stated with `sorry` | median **9** of the 28 left by the first pass, 80 % interval [4, 20]; all 28: 0.1 |
+| Y6 | **The curve notion**: one definition serves the bridge and the ladder — a unit-speed map on an interval with 1-Lipschitz derivative — rather than a graph over a line | 0.65 |
+| Y7 | Rows whose **argument reads a different class than the entry** (a fan at one point where the entry says REG-J′, or more than the fan gives): at least 3 of those I read | 0.7 |
+| Y8 | The restated foundation costs the four proved rows nothing (no proof edited beyond a name) | 0.85 |
