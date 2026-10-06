@@ -6149,3 +6149,42 @@ reason by the close.*
      gate; **ruling 492 (a) — REG-J′ rewritten to "Σ locally finite" — is due when the wave lands, not before.**
      (e) **Slot → FS131-I10F** (wave 10's three measure-theoretic leaves and the model `sp_if` owes), launched
      2026-10-06. In flight: 1 (I10E) + 1 (I6E) + 1 (I10F) = 3.
+
+541. **The price-against-plan factor, calibrated at Kooshi's word — the planners' line and token counts are right, their time
+     is not, and the factor depends on the unit a price was written in** (mine; 2026-10-06; his words: "Calibrate that price
+     against plan factor, because it matters for many implementations that get deferred."; the note is
+     `data/fs131/calibration/price-vs-actual.md`, the measurement `measure.py` and `measure.out` beside it). **Measured,
+     nineteen finished implementer jobs**: 259 to 3,122 lines of Lean inserted under `Proofs/` per job, median 1,341; tokens
+     by the harness (eight jobs) 353k to 546k, median about 430k — by least squares `tokens ≈ 311k + 129 per line`, so a job
+     at its 500k line holds about 1,500 lines; wall-clock by the harness (four jobs) 44 to 79 minutes, about half of it
+     builds. **The pairs, planned against measured** (each from a "prediction scored" line of this inventory, item numbers
+     in the note): priced in **tokens** — 1.18, 1.28, 1.35, 1.48 times the plan for four implementer jobs (3.1 for one
+     planning pass); in **lines** — thirteen pairs, median 0.75, proofs 0.21 to 0.72, explicit objects and models 0.9 to
+     1.8; in **sessions** (one session is one job) — seven pairs, 0.2 to 1.0, typically a half; in **agent-hours and
+     agent-days** (wave 6's planners) — 22 hours, 2 days, 9 days and 12 days each took one job, which on the clock is
+     between a sixteenth and an eighty-fifth of the plan at eight hours a day. **Reading**: a planner knows how much Lean a
+     result needs and misjudges time per line — wave 6's priced about 220 lines to a day, and its implementers wrote 700
+     to 1,700 lines an hour with builds. The same shape is already on file from two earlier milestones ("5× to ≥ 30× in
+     time, never in tokens", `plans/GROKKING-INSTANCES.md`). **Not measured by this**: planning passes (one to four per
+     wave, about 450k–550k each) and landings; leaves a planner marks as having no route (two in wave 6, none attempted);
+     results whose proof is missing, not merely unformalized; jobs that needed a successor. **Slips corrected by the
+     measurement, mine**: my reports today said "an order of magnitude" from two anecdotes and gave no unit; and a brief
+     sentence of mine ("a third to two thirds of their planners' line counts") was three wave-10 jobs, not the milestone.
+     **Rulings.** (a) **A price is read in lines and converted to jobs** — lines ÷ 1,500, rounded up, plus one planning
+     pass where the statements do not exist; a price in days goes through the line count behind it, or is divided by
+     ten. Alternative: keep the planners' units and a single factor. Why not: no single factor exists — 1.3 for tokens,
+     0.75 for lines, 0.5 for sessions, 0.1 for days. Confidence: high on the direction, medium on the constants (eight
+     token counts, four durations). (b) **Planners price in lines of Lean and in implementer jobs, never in days**: the
+     four queued planners' briefs say so (K10c, K7b, K8b, K6d regenerated, each gate exit 0). (c) **`LEAN.md` §
+     Assumptions' "about an hour of agent work" is read as one implementer job** — about 1,300 lines with its route
+     known; I apply that reading to rulings from here, and the wording of his rule is his (reported to him). (d)
+     **Staffing consequences in the queue**: wave 6's third pass is 49 planner-days in three implementers' briefs — by
+     (a) about five jobs — so each of FS131-I6L, I6Z, I6K is expected to hand back partway and be continued, and their
+     six hard leaves are outside the calibration; wave 9's long leaf, priced 450–800k tokens, is two jobs after its
+     second planning pass (ruling 536 (a) stands). (e) **Deferred items this re-prices, listed for Kooshi with no change
+     made**: the library's one assumed outside theorem (`falconer_lemma2_nonempty` — its planner wrote "no proof in
+     hand, more than an hour to formalize": the cost is a derivation first); the passage from periodic maps to
+     combinatorial torus maps (priced about 1M tokens by wave 7's planner — two jobs, and token prices have run a third
+     low); the classical named hypotheses with no line estimate yet (`BochnerHerglotz`, `WEqKLimit`, `Row134Base`).
+     Weil's bound is not re-priced by this (its cost is its mathematics). **Measure rigidity is not priced here, by
+     his word of 2026-10-06** (item 488).

@@ -153,8 +153,9 @@ list of what the foundation lacks, and its handoff. Read its record whole
 9. **The skeleton**: builds through the worktree's `./scripts/build.sh` with only `sorry` warnings; `Proofs.lean`, `ARCHITECTURE.md`
    (`tools/check_architecture.py` exit 0) and `scripts/Axioms.lean` updated; no new `axiom`, no `native_decide`; `./scripts/dupnames.sh` on
    your tree — no name declared by two modules (wave 8's first pass lost a build to three names already declared on `main`).
-10. **Your record**: a plan per leaf (route, the Mathlib and library lemmas confirmed with `#check`, what is hard, a price — re-priced from
-   the first two leaves you prove), the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), and a handoff for
+10. **Your record**: a plan per leaf (route, the Mathlib and library lemmas confirmed with `#check`, what is hard, a price **in lines of Lean
+   and in implementer jobs, never in days** (inventory item 541: this milestone's planners' line counts have been right to within a factor of
+   two and their day counts high by ten in jobs; one job proves about 1,300 lines) — re-priced from the first two leaves you prove), the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), and a handoff for
    implementers by file. A leaf you can prove in about an hour, prove, and say so.
 11. The report, in standing rule 11's form. You do not merge another branch into this one unless I ask it by message, run the gate, or touch
     `main`. Leave no background process running, and keep what your record cites under `data/fs131/k{N}b/`. {SCOPE}
