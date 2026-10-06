@@ -4539,3 +4539,16 @@ reason by the close.*
      the list of the constant the environment holds. (d) **Kooshi is told in this turn's report**; a push follows only if the scan finds a
      pair with a copy that is not clean. (e) **A slip, mine**: a ruling on a mechanism from a partial reading, stated at "medium-high" — the
      second of this kind (ruling 417 (b)); from here a ruling on what a tool does waits for the tool's run when a job is about to make it.
+
+463. **FS131-T4, by message: the kernel-side scan of `main`'s library — `conj_e` is the only name declared twice, both copies on exactly the
+     standard three; no audited axiom print on `main` is affected** (source: T4's message to "main", 2026-10-06; files in its worktree, to be
+     committed with its stage: `scripts/DupNames.lean`, `data/fs131/t4/logs/dupnames-first-run.out`, `data/fs131/t4/conj-e/`; not read by me
+     yet — its hand-back's review is the receipt). The scan read 7,257 imported modules, all 1,767 of the package's, 18,081 constants of ours
+     against 503,787 of the dependencies'; the tree's `Proofs/` and `Proofs.lean` are byte-identical to `origin/main` at `50cf44ec`. One
+     doubled name, `HadwigerNelson.Plane.conj_e`: `Plane.Chord` is the module the environment attributes it to (so the list a print reads),
+     `Plane.SixFragment` the copy the environment holds under `import Proofs`; each copy, read in a file importing its module alone, prints
+     the standard three; the two proof terms differ. Beside it, 22 names stand in two to six modules and are no failures: equation and
+     congruence lemmas Lean generates on demand (`….eq_1`, `….congr_simp`), reserved names no author can declare, every copy's axioms equal.
+     No instance and no other hand-written name is doubled. Grade, T4's: the scan has seen the known pair and the generated class; its planted
+     controls are not run yet. **Ruling**: no push to Kooshi (ruling 462 (d)'s condition is not met); the trust ledger's filed counts stand;
+     the check's controls and the rest of the table are T4's remaining work.
