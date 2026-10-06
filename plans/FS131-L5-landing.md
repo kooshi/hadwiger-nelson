@@ -131,3 +131,69 @@ walk over 464 batches. The times are real.
   the library holds about it (binder sites, closed refutations, closed witnesses), for `scripts/Vacuity.lean`'s IN/OUT procedure.
   Not run yet.
 - `data/fs131/l5/tidy_edits.py`: Stage 3's edits as data; `--dry` on the merged tree: 52 of 52 match once. Not applied.
+
+## Stage 2 — SAVED (FS131-L5)
+
+## Stage 3 — SAVED (FS131-L5): the tidies that waited for the merge — made as ruled, exactly those by script, one build
+
+*Rulings 457 (b), 465 (a), (b); FS131-RP1's closing list. The edits are data: `data/fs131/l5/tidy_edits.py`, 52 entries in 12
+files, each refused unless its old text stands exactly once (`--dry` on the merged tree: 52 of 52; then applied).*
+
+### 3.1 What was done
+
+- **A. The unread `hF : F.Valid`, out of seven lemmas**, each with its callers (20 entries):
+  - the toward four, `CollarFit.sides_end`, `sides_eq`, `map_R1`, `map_R2` (`BendCollar`) — `sides_end` held `have _ := hF`;
+    `sides_eq` and `map_R1` passed it to `sides_end` alone, `map_R2` to `sides_eq` alone. Callers re-pointed: `CollarFit.map_inert`
+    and `bend_toward_collar` (`BendCollar`), `CollarFit.map_isR2Arc` (`BendStep`), `CollarFit.arcBend` (`ArcStep`);
+  - `CollarFit.map_hornCount_le` (`BendStep`; `have _ := hF`), one caller, `CollarFit.arcBend`;
+  - the outward `CollarFitOut.map_R1`, `map_R2` (`BendGap`; `have _ := hF` each), two calls in `CollarFitOut.awayBend`.
+  No caller surprised: each keeps an `hF` it reads elsewhere (`side_ne_inner_of_mem_lens`, `map_valid`, `isR2Arc_of_fixed`), so
+  no statement beyond the seven moved. All seven are strictly stronger (for the errata, ruling 419 (a)'s form).
+- **B. `ringPt_ne_of_abs_sub_lt` and `ringPt_inj_of_abs_sub_lt` made one** (6 entries): the upstream one is kept
+  (`Plane.ringPt_inj_of_abs_sub_lt`, `BendAway`); `ArcMap.ringPt_ne_of_abs_sub_lt` (`BaseDense`) is removed with its audit record,
+  and its three uses, all in `BaseDense`, read the kept lemma (`have hψne : … ≠ …` then `refine hψne (ringPt_inj_of_abs_sub_lt …)`,
+  the remaining goal unchanged). The kept lemma's docstring no longer names the removed one.
+- **C. The stale "skeleton" and "open" lines** (26 entries): the six bend modules' title lines ("FS131-KA1's skeleton" → "FS131-KA1's
+  plan, proved by FS131-BA1 / BA2 / BA2 and BA3"); `BendStep`'s header line, section title and `bend_away_part`'s "**Proved from open
+  children**", and its "none in Lean on this branch" → "none in Lean yet"; three lines of `ArcStep` that called
+  `CollarFit.map_hornCount_le` an open child (the same kind, not on RP1's list); in `scripts/Axioms.lean` the headers of FS131-IA1's,
+  IA2's, KA1's and M7's blocks, which said the gate fails on their records; in `ARCHITECTURE.md` the rows of `BendAway`, `LensOut`,
+  `HornChart`, `CollarMapOut`, `R2Cap`, `BendGap`, `BendStep`, `ArcStep` ("**Open children (`sorry`)**" → "**Proved (FS131-BAn)**";
+  `BendAway`'s row named `AwayBend.r2_of_onRingArc`, which no file declares — the row now names `AwayBend.contact_of_onRingArc`) and
+  `Terminal`'s row ("skeleton" dropped, ruling 432 (b): `exists_arcStep` is on the standard three).
+
+### 3.2 The checks
+
+- **Statements** (`python3 tools/fs131_rp_stmt.py f1117627 data/fs131/l5/stmt-expected.json`, FS131-RP1's tool with this job's
+  manifest; `data/fs131/l5/stmt-tidy.txt`): 11,343 declarations in 1,796 files at the merge commit; **changed 7, gone 1, added 0 —
+  the manifest exactly, 0 deviations**. Before the edits the same tool with an empty manifest read 0 changes. Its `--self-test` on
+  this manifest (`stmt-selftest.txt`): five plants fire by name (an unruled change, deletion, addition, a change in a file the
+  manifest does not name, a manifest entry that did not happen); the sixth, "a moved statement altered", is written for a manifest
+  with a `moved` entry and reports SILENT on this one, which has none — the planted change is still refused, as UNRULED-CHANGED.
+  So the tool's exit status for the self-test is 1 here, for a plant that does not apply; said, not hidden.
+- **Iteration before the build** (never evidence): `BendCollar`, `BendGap`, `BaseDense`, `BendAway` under `lake env lean`, each
+  exit 0 with no output — the four whose upstream statements the oleans on disk still matched. `BendStep` and `ArcStep` call the
+  changed `BendCollar` lemmas and were left to the build (FS131-RP1's lesson: a stale olean reads green).
+- **The build** (driver `data/fs131/l5/build-tidy.log`; `build/gate/build/20261006T091411Z-2877053.log`, copy
+  `build-tidy-full.log`): **exit 0, "464 of 464 batches, 15 module(s) rebuilt, 0 module(s) with warnings, 10m19s", "Build completed
+  successfully (5803 jobs)"; 0 `warning` lines.** Rebuilt: `LensOut`, `CollarMapOut`, `BendCollar`, `HornChart`, `BendAway`,
+  `R2Cap`, `BendGap`, `BendStep`, `ArcStep`, `Procedure`, `Terminal`, `Dense`, `BaseWalk`, `BaseDense`, `Proofs`.
+- **Axioms** (`data/fs131/l5/L5AxiomsTidy.lean` → `.out`, `L5AxiomsTidy-read.txt`): **21 of 21 on exactly the standard three** —
+  the seven changed, five callers (`CollarFit.map_inert`, `bend_toward_collar`, `CollarFit.map_isR2Arc`, `CollarFit.arcBend`,
+  `CollarFitOut.awayBend`), `ringPt_inj_of_abs_sub_lt`, the brief's seven heads, `row134BaseUA` (`BaseDense`).
+- **The removed lemma is gone**: `#check @…ArcMap.ringPt_ne_of_abs_sub_lt` against the new oleans: "Unknown constant", exit 1
+  (`GoneCheck.out`). `scripts/Axioms.lean`: 5,220 records, none twice.
+- `tools/check_architecture.py`: PASS, exit 0 (`arch-tidy.txt`). `tools/fs131_m7_away_clause.py`: PASS. The notes check over the
+  tree with the bend's modules read (`tools/fs131_l5_notes.py`, FS131-RP1's wrapper with `EXTRA` extended to `ArcStep`, `BendStep`
+  and the six bend modules; `notes-tidy.txt`): **193 notes read, 0 CONFLICT** (RP1 read 175 without those seven).
+
+### 3.3 Left, and said
+
+- Not made, of FS131-RP1's "met on the way" list: BA1's ten `CollarFitOut` helpers that re-prove `CollarMap`'s lemmas (item 454;
+  no ruling names a form for them); `BendStep`'s l. 29 and l. 289 may name `collarModel_hyps` (they name `collarModel`, which is the
+  `CollarFit` inhabitant they speak of: left); `exists_arcStep`'s note waits for `awayModel`.
+- `BendStep` l. 347's "wave 4's `bend_away`, `sorry` on `fs131-w4ba`" is a remark on another branch, kept: it is the one line under
+  `Proofs/` beyond `main`'s four where the word `sorry` stands.
+- Other rows of `ARCHITECTURE.md` and other block headers of `scripts/Axioms.lean` still say "skeleton" or "sorry until … lands"
+  for modules that hold no `sorry` (waves 1–5; about twenty-five lines, most on `main` already). They were not on this job's list
+  and are not changed: a tidy for after the landing, listed in the report.

@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.RadialPush
 
 /-!
-# The outward radial push and the outward lens (FS131-KA1's skeleton for the away collar bend)
+# The outward radial push and the outward lens (for the away collar bend; FS131-KA1's plan, proved by FS131-BA1)
 
 Pure geometry, no arc map: the mirror of `Plane/ValidMap/RadialPush`'s second half for a lens **outside** `ω(P)`
 (`plans/FS131-bendaway-kernel-plan.md` § 3, lane G).

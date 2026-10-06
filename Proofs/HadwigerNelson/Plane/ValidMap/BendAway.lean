@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 import Proofs.HadwigerNelson.Plane.ValidMap.OpenMove
 
 /-!
-# The away bend's clause package and its composition over a subdivision (FS131-KA1's skeleton)
+# The away bend's clause package and its composition over a subdivision (FS131-KA1's plan; proved by FS131-BA1)
 
 `bend_away_part` (`Plane/ValidMap/BendStep`) bends a constant-sided unit arc away from its centre everywhere but on its radius-2
 contacts. The plan (`plans/FS131-bendaway-kernel-plan.md`): cut `[θ₁, θ₂]` at finitely many angles so that each open piece is wholly
@@ -118,8 +118,8 @@ example : R2Subdiv ({1} : Set ℝ) 0 2 :=
     · rw [not_and_or, not_lt, not_lt] at h1
       exact hgap huv h1⟩
 
-/-- Two angles less than a turn apart with one point of `ω(P)` are equal (`e_eq_e_iff`; `ringPt_ne_of_abs_sub_lt` of
-`Plane/ValidMap/BaseDense`, which this module is upstream of, is its contrapositive). -/
+/-- Two angles less than a turn apart with one point of `ω(P)` are equal (`e_eq_e_iff`). The one statement of this fact:
+`Plane/ValidMap/BaseDense`, downstream, reads it where it once held the contrapositive under a name of its own. -/
 theorem ringPt_inj_of_abs_sub_lt {P : ℂ} {θ θ' : ℝ} (h : |θ - θ'| < 2 * π) (he : ringPt P θ = ringPt P θ') : θ = θ' := by
   have hπ := Real.pi_pos
   have he' : e θ = e θ' := by simpa [ringPt] using he

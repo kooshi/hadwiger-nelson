@@ -19,7 +19,7 @@ site created, no rise of degree or horn count at a treatment point, and at every
 * **The collar bend's step forms** (`bend_toward_collar`'s construction, `CollarFit`): the hypothesis `hfree` from cleanness
   (`IsRingArc.free_of_isClean`), the bent map clean (`CollarFit.map_isClean`), (R2) arcs kept (`CollarFit.map_isR2Arc`), degrees at the
   points of the closed arc and off the collar (`CollarFit.map_degree_le`).
-* **The horn clause for the collar bend** (`CollarFit.map_hornCount_le`, open: its children are `Plane/ValidMap/HornChart`'s) and **the
+* **The horn clause for the collar bend** (`CollarFit.map_hornCount_le`, over `Plane/ValidMap/HornChart`'s children) and **the
   away bend with the tangent bend in collar form** (`bend_away_part`, FS112-N2-AWAY and N2-TAN), proved here from the children FS131-KA1
   laid out (`plans/FS131-bendaway-kernel-plan.md`): a finite subdivision of the arc's angles by the radius-2 contacts (`exists_r2Subdiv`),
   the outward collar bend of one gap (`bend_away_gap`), and the composition of the clause package `AwayBend` (`bend_away_subdiv`).
@@ -253,7 +253,7 @@ theorem CollarFit.map_isR2Arc (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c
     (hdisj : Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂)) (hcolQ : hfit.map.coloursAt Q = F.coloursAt Q)
     (hR : F.IsR2Arc Q a b) : hfit.map.IsR2Arc Q a b :=
   isR2Arc_of_fixed hF hfit.sub_dom (fun _ hz => (hfit.homeo_eq_self hz).1) (fun _ hz hzO => hfit.homeo_fix_Γ hz hzO)
-    (fun z => pushforward_coloursAt z) hfit.free_open (fun _ _ hA => hfit.map_R2 hF hA hdisj) hcolQ hR
+    (fun z => pushforward_coloursAt z) hfit.free_open (fun _ _ hA => hfit.map_R2 hA hdisj) hcolQ hR
 
 /-- **Degrees do not rise at a point off the collar or on the closed arc** (the repaired degree clause of `exists_arcStep`, where
 it is read: a treatment point of the support lies on the closed arc once `ε` is small). Off the collar and at the two ends the
@@ -287,10 +287,8 @@ bent map, on the lens boundary it has two germs of different directions (a circl
 `collarMid`) — horn count `0` (`Near.hasHornCount_chart`); at an end the chart is `F`'s with the arc's germ's curvature `1` replaced by
 `1/R` (`CollarFit.map_degree_end`'s chart surgery), the collar's crescent holds no other germ of that direction (`CollarFit.free`), so
 the indices with `β i = nextβ i` are the same and the count is kept. No inhabitant note is owed beyond `collarModel` (`CollarFit`'s). -/
-theorem CollarFit.map_hornCount_le (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ}
+theorem CollarFit.map_hornCount_le (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ}
     (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j' := by
-  -- validity is not read: the clause is geometry of `Γ` (reported: FS131-BA2's record)
-  have _ := hF
   obtain ⟨hR', hR'R, hR1, hR''⟩ := hfit.params
   have h12 := hfit.ring.1
   have hπ := Real.pi_pos
@@ -311,7 +309,7 @@ theorem CollarFit.map_hornCount_le (hF : F.Valid) (hfit : CollarFit F P θ₁ θ
 
 end Collar
 
-/-! ## The away bend, in the form the arc step reads (open) -/
+/-! ## The away bend, in the form the arc step reads -/
 
 /-- **The away bend over a subdivision** (FS131-KA1): by induction on a finite subdivision of `[a, b]` by a set `C` of angles that is
 the set of radius-2 contacts of the inner colour for the map at hand — a contact piece is left alone (`AwayBend.idle`), a gap is bent by
@@ -354,11 +352,11 @@ points with their colours, the colours at each point, degrees and repeated colou
 constant-sided unit arcs of `M` are `F`'s with the same sides, and `F`'s whose open arc misses `α°` survive; each interior point of `α`
 is fixed or becomes an interior point of colour `c`; and an interior point of `α` still on a unit arc of `M` about `P` has its
 radius-2 point in the closure of `c`'s class — so what is left of `α` is (R2) (**the last clause in the pointwise form the arc step
-reads**, inventory ruling 444; IA1's form asked a non-degenerate interval of `r2Contacts` about the angle). **Proved from open children**
-(`plans/FS131-bendaway-kernel-plan.md` § 3): the finite subdivision of `[θ₁, θ₂]` by the contacts (`exists_r2Subdiv`, where the plane
+reads**, inventory ruling 444; IA1's form asked a non-degenerate interval of `r2Contacts` about the angle). **Proved from FS131-KA1's children**
+(`plans/FS131-bendaway-kernel-plan.md` § 3; FS131-BA1, BA2, BA3): the finite subdivision of `[θ₁, θ₂]` by the contacts (`exists_r2Subdiv`, where the plane
 map is used), the bend over it (`bend_away_subdiv`), and the last clause from the package (`AwayBend.contact_of_onRingArc`). At a contact
 end of a gap the lens is tangent to `ω(P)` and must lie under FS131-E5's circle `Σ_Y` (§ 4.2 there: lens radius below `ρ_Y − 1`), not
-only under the unit circle about the contact. Model of the hypotheses: none in Lean on this branch; `isoFrag` (FS112-ISO) is the hand
+only under the unit circle about the contact. Model of the hypotheses: none in Lean yet; `isoFrag` (FS112-ISO) is the hand
 model with one isolated contact, a fragment — the plane-map inhabitant with a radius-2 contact is planned in the record's § 5 (open gate
 item, ruling 419 (d)). -/
 theorem bend_away_part (hF : F.Valid) (hP : F.IsPlaneMap) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}

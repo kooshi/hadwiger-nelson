@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.R2Cap
 import Proofs.HadwigerNelson.Plane.ValidMap.HornChart
 
 /-!
-# The away bend of one gap: the outward collar bend (FS131-KA1's skeleton; mirror of `Plane/ValidMap/BendCollar`)
+# The away bend of one gap: the outward collar bend (FS131-KA1's plan, proved by FS131-BA2 and FS131-BA3; mirror of `Plane/ValidMap/BendCollar`)
 
 `bend_away_gap`: on a valid map, a constant-sided unit arc whose inner colour is absent at the centre, near whose interior points `Γ`
 is `ω(P)` alone, whose radius-2 arc lies in the domain and **has no contact of the inner colour at an interior angle**, bends away
@@ -1208,10 +1208,8 @@ Route: the arc lies in `F`'s `Γ` (it meets the two lens arcs, of radius `R ≠ 
 points are off the open arc, which is interior in the bent map (`ringPt_notMem_map_Γ`), and at an end `Q ≠ P` for the same reason —
 `sides_eq`'s three hypotheses. **Proved (FS131-BA3)** (child C6). Inhabitant of the hypotheses: owed with the away bend's model, as
 `bend_away_gap`'s. -/
-theorem CollarFitOut.map_R1 (hF : F.Valid) (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
+theorem CollarFitOut.map_R1 (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
     (h : hfit.map.IsRingArc Q a b d d') : F.IsRingArc Q a b d d' := by
-  -- validity is not read: the clause is geometry of `Γ` and of the homeomorphism (reported: FS131-BA3's record)
-  have _ := hF
   obtain ⟨hab, hsub, hsides⟩ := h
   obtain ⟨-, -, hR1, -, -⟩ := hfit.params
   have hR : 0 < R := by linarith
@@ -1279,11 +1277,9 @@ theorem CollarFitOut.map_R1 (hF : F.Valid) (hfit : CollarFitOut F P θ₁ θ₂ 
 hypothesis; an end on `α°` would put an arc of `ω(Q) ≠ ω(P)` in `Γ` near a point of `α°`, against `free_open`), so it lies in the bent
 map's `Γ` (`map_Γ`); the sides by `sides_eq`, with `Q ≠ P` at an end because an arc of `ω(P)` through an end continues into `α°`.
 **Proved (FS131-BA3)** (child C6). Inhabitant of the hypotheses: owed with the away bend's model, as `bend_away_gap`'s. -/
-theorem CollarFitOut.map_R2 (hF : F.Valid) (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
+theorem CollarFitOut.map_R2 (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
     (h : F.IsRingArc Q a b d d') (hd : Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂)) :
     hfit.map.IsRingArc Q a b d d' := by
-  -- validity is not read: the clause is geometry of `Γ` and of the homeomorphism (reported: FS131-BA3's record)
-  have _ := hF
   obtain ⟨hab, hsub, hsides⟩ := h
   have h12 := hfit.ring.1
   -- no point of the closed arc lies on `α°`: near such a point `Γ` is `ω(P)` (`free_open`), whose points there are on `α°`, and the
@@ -1427,8 +1423,8 @@ theorem CollarFitOut.awayBend (hF : F.Valid) (hfit : CollarFitOut F P θ₁ θ�
       repeated := fun z => (hdeg z).2
       horn := fun x j hj => hfit.map_hornCount_le hj
       within := hfit.map_ringArcsWithin
-      r1 := fun Q a' b' d d' h => hfit.map_R1 hF h
-      r2 := fun Q a' b' d d' h hd => hfit.map_R2 hF h hd
+      r1 := fun Q a' b' d d' h => hfit.map_R1 h
+      r2 := fun Q a' b' d d' h hd => hfit.map_R2 h hd
       bent := fun θ hθ => Or.inr (hbent θ hθ)
       rest := Set.Finite.subset Set.finite_empty fun θ hθ => hθ.2.1 (hbent θ hθ.1) }
 

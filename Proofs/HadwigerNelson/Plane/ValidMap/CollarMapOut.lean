@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.CollarMap
 import Proofs.HadwigerNelson.Plane.ValidMap.LensOut
 
 /-!
-# The outward collar bend's map (FS131-KA1's skeleton; mirror of `Plane/ValidMap/CollarMap`)
+# The outward collar bend's map (FS131-KA1's plan, proved by FS131-BA1; mirror of `Plane/ValidMap/CollarMap`)
 
 The outward collar's fit to the map (`CollarFitOut`), its homeomorphism, the bent map `CollarFitOut.map` and the geometric clauses read
 off it (`map_Γ`, `map_lens`, `map_agreesOff`, `map_valid`): `plans/FS131-bendaway-kernel-plan.md` § 3, lane G. The collar is the toward

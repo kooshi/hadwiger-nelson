@@ -1011,10 +1011,9 @@ theorem CollarFit.homeo_mem_collarK (hfit : CollarFit F P θ₁ θ₂ c c' ε R'
 /-- **The sides of a unit circle through an end are kept**: near `A` the two maps differ only on the collar's horn (with `α`), which misses
 `ω(Q)` for `Q ≠ P` (its germs at `A` are `α`'s direction with curvature near `1`; `ω(Q)`'s there have another direction or curvature
 `−1`) and so lies on one side of it; on that side both maps carry `c` and `c'` up to `A`. -/
-theorem CollarFit.sides_end (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q x : ℂ} (hQ : Q ≠ P)
+theorem CollarFit.sides_end (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q x : ℂ} (hQ : Q ≠ P)
     (hx : x = ringPt P θ₁ ∨ x = ringPt P θ₂) :
     hfit.map.innerColours Q x = F.innerColours Q x ∧ hfit.map.outerColours Q x = F.outerColours Q x := by
-  have _ := hF
   have h12 := hfit.ring.1
   obtain ⟨ρ, hρ, hside⟩ := hfit.exists_one_side hQ hx
   -- the end is fixed
@@ -1084,7 +1083,7 @@ theorem CollarFit.sides_end (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c
 /-- **The sides at a point of `F.Γ` off the open arc are kept** (the common step of R1 and R2): off the closed lens the two maps agree
 near the point (`map_agreesOff`, closures being local); on it, such a point is an end of `α` (the open collar is interior in `F`), where
 `sides_end` applies for a centre other than `P`. -/
-theorem CollarFit.sides_eq (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q x : ℂ} (hxΓ : x ∈ F.Γ)
+theorem CollarFit.sides_eq (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q x : ℂ} (hxΓ : x ∈ F.Γ)
     (hxO : x ∉ ringPt P '' Ioo θ₁ θ₂) (hQ : (x = ringPt P θ₁ ∨ x = ringPt P θ₂) → Q ≠ P) :
     hfit.map.innerColours Q x = F.innerColours Q x ∧ hfit.map.outerColours Q x = F.outerColours Q x := by
   have hp := hfit.pushProfiles
@@ -1102,7 +1101,7 @@ theorem CollarFit.sides_eq (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c'
         rcases eq_or_lt_of_le hψ.1 with h1 | h1
         · exact Or.inl (hxe'.trans (by rw [h1]))
         · exact Or.inr (hxe'.trans (by rw [le_antisymm hψ.2 (not_lt.mp fun h2 => hψ' ⟨h1, h2⟩)]))
-      exact hfit.sides_end hF (hQ hend) hend
+      exact hfit.sides_end (hQ hend) hend
   · have hO : IsOpen (polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1)ᶜ := hfit.isClosed_closedLens.isOpen_compl
     have hag : ∀ z ∈ (polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1)ᶜ,
         (z ∈ hfit.map.interiorPts ↔ z ∈ F.interiorPts) ∧ hfit.map.col z = F.col z :=
@@ -1118,7 +1117,7 @@ theorem CollarFit.sides_eq (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c'
 /-- **R1** (clause 8). Route: the arc lies in `F`'s `Γ` (`map_ringArcsWithin`); its interior points are off `α°` (`α° ∩ M.Γ = ∅`) and off
 `β°` (`β° ⊆ F`'s interior points), so off the collar — where the maps agree near the point — or at an end (`sides_end`; `Q ≠ P`, since a
 ring arc of `ω(P)` in the bent map misses `α°` and lies in `F`'s). -/
-theorem CollarFit.map_R1 (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
+theorem CollarFit.map_R1 (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
     (h : hfit.map.IsRingArc Q a b d d') : F.IsRingArc Q a b d d' := by
   obtain ⟨hab, hsub, hsides⟩ := h
   obtain ⟨hR', hR'R, hR1, -⟩ := hfit.params
@@ -1199,7 +1198,7 @@ theorem CollarFit.map_R1 (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' �
         rcases hψe with rfl | rfl
         · exact Or.inl hxe'
         · exact Or.inr hxe'
-      obtain ⟨hin, hout⟩ := hfit.sides_end hF hQ hend
+      obtain ⟨hin, hout⟩ := hfit.sides_end hQ hend
       exact ⟨hin ▸ hMin, hout ▸ hMout⟩
   · -- off the closed lens the two maps agree near the point
     have hO : IsOpen (polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1)ᶜ := hfit.isClosed_closedLens.isOpen_compl
@@ -1221,7 +1220,7 @@ theorem CollarFit.map_R1 (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' �
 
 /-- **R2** (clause 9). Route: the closed arc misses `α°` (its open part by hypothesis; an end on `α°` would put an arc of `ω(Q) ≠ ω(P)` in
 `Γ` near a point of `α°`, against `free_open`), so it lies in the bent map's `Γ` (`map_Γ`); sides as in `map_R1`. -/
-theorem CollarFit.map_R2 (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
+theorem CollarFit.map_R2 (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
     (h : F.IsRingArc Q a b d d') (hd : Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂)) :
     hfit.map.IsRingArc Q a b d d' := by
   obtain ⟨hab, hsub, hsides⟩ := h
@@ -1277,7 +1276,7 @@ theorem CollarFit.map_R2 (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' �
         have hpt : ringPt Q (θ - s) = ringPt Q (θ₂ - s) := by simp only [ringPt, sub_eq_add_neg, e_add, he]
         exact disjoint_left.mp hd ⟨θ - s, ⟨by linarith, by linarith [hθ.2]⟩, rfl⟩
           ⟨θ₂ - s, ⟨by linarith, by linarith⟩, hpt.symm⟩
-    obtain ⟨hin, hout⟩ := hfit.sides_eq hF (hsub ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩) (hoff θ (Ioo_subset_Icc_self hθ)) hQ
+    obtain ⟨hin, hout⟩ := hfit.sides_eq (hsub ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩) (hoff θ (Ioo_subset_Icc_self hθ)) hQ
     rw [hin, hout]
     exact hsides θ hθ
 
@@ -1388,7 +1387,7 @@ theorem CollarFit.side_ne_inner_of_mem_lens (hF : F.Valid) (hfit : CollarFit F P
 theorem CollarFit.map_inert (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ}
     (h : hfit.map.Inert Q a b) : F.Inert Q a b := by
   obtain ⟨d, d', hA, hd, hd'⟩ := h
-  have hFA := hfit.map_R1 hF hA
+  have hFA := hfit.map_R1 hA
   have key : ∀ x, (x = d ∨ x = d') → x ∉ hfit.map.coloursAt Q → x ∉ F.coloursAt Q := by
     intro x hx hxM hxF
     have hxc : x = c := ((hfit.coloursAt_subset Q).1 hxF).resolve_left hxM
@@ -1432,7 +1431,7 @@ theorem bend_toward_collar (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : 
   refine ⟨hfit.map, hfit.homeo, hfit.map_valid hF, rfl, fun z hz => (hfit.homeo_eq_self fun hK => hz (hfit.sub_thick hK)).1,
     fun z hz hzO => hfit.homeo_fix_Γ hz hzO, fun z => ⟨pushforward_mem_interiorPts_iff z, fun _ => pushforward_col_apply z⟩,
     fun z => pushforward_coloursAt z, fun z n => hfit.map_hasDegree hF z n, fun z => hfit.map_hasRepeatedColour hF z,
-    fun Q a b d d' h => hfit.map_R1 hF h, fun Q a b d d' h hd => hfit.map_R2 hF h hd, fun θ hθ => hfit.map_R3 hθ,
+    fun Q a b d d' h => hfit.map_R1 h, fun Q a b d d' h hd => hfit.map_R2 h hd, fun θ hθ => hfit.map_R3 hθ,
     fun Q a b h => hfit.map_inert hF h⟩
 
 end ArcMap

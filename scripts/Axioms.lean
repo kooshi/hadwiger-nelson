@@ -6029,7 +6029,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 5 (job FS131-I5q) — `exists_preBend`'s last three children proved (their records are in the FS131-KB2 block above); helpers -/
 
-#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ne_of_abs_sub_lt
 #print axioms HadwigerNelson.Plane.ArcMap.exists_mem_ringArc_notMem
 #print axioms HadwigerNelson.Plane.ArcMap.eq_of_ringArc_subset_sphere
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.sides_eq_of_ringPt_eq
@@ -6048,7 +6047,8 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 5 (job FS131-IA1) — the bends in the form the arc step reads (`Plane/ValidMap/BendStep`)
 
-The last two records are open children (`sorry`): the horn clause for the collar bend, and the away bend in collar form. -/
+The last two records — the horn clause for the collar bend, and the away bend in collar form — were this module's open children;
+both are proved (FS131-BA2; FS131-BA1, BA2, BA3 over FS131-KA1's plan). -/
 
 #print axioms HadwigerNelson.Plane.ArcMap.Γ_eq_of_degree_clause
 #print axioms HadwigerNelson.Plane.ArcMap.r2_notMem_region
@@ -6064,8 +6064,8 @@ The last two records are open children (`sorry`): the horn clause for the collar
 
 /-! ## FS-131 wave 5 (job FS131-IA2) — the arc step from the clauses a bend exports (`Plane/ValidMap/ArcStep`)
 
-The last two records rest on the open child `CollarFit.map_hornCount_le` (`BendStep`, `sorry`): the toward collar bend's
-instance of the interface. -/
+The last two records are the toward collar bend's instance of the interface; its horn clause is `CollarFit.map_hornCount_le`
+(`BendStep`), proved by FS131-BA2. -/
 
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.coloursAt_openArc
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.sides_ne_of_isClean
@@ -6099,11 +6099,11 @@ instance of the interface. -/
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.arcBend
 #print axioms HadwigerNelson.Plane.ArcMap.exists_arcBend_toward
 
-/-! ## FS-131 wave 5 (job FS131-KA1) — the away bend's skeleton (`Plane/ValidMap/BendAway`, `LensOut`, `HornChart`, `CollarMapOut`, `R2Cap`, `BendGap`)
+/-! ## FS-131 wave 5 (job FS131-KA1) — the away bend as FS131-KA1 laid it out (`Plane/ValidMap/BendAway`, `LensOut`, `HornChart`, `CollarMapOut`, `R2Cap`, `BendGap`)
 
-The first six records are proved. The rest are the plan's open children (`sorry`) and the three theorems proved from them
-(`bend_away_gap`, `bend_away_subdiv`, `CollarFitOut.pushOutProfiles`; `bend_away_part` is in FS131-IA1's block above): the gate fails on
-each until its children land. -/
+The plan's children and the three theorems proved from them (`bend_away_gap`, `bend_away_subdiv`, `CollarFitOut.pushOutProfiles`;
+`bend_away_part` is in FS131-IA1's block above). Every record is proved: lanes G and D by FS131-BA1, lanes C and H by FS131-BA2,
+`CollarFitOut.map_R1` and `map_R2` by FS131-BA3 (their helpers are in those jobs' blocks below). -/
 
 #print axioms HadwigerNelson.Plane.R2Subdiv.lt
 #print axioms HadwigerNelson.Plane.ArcMap.LocalStep.union
@@ -6153,11 +6153,11 @@ each until its children land. -/
 /-! ## FS-131 wave 5 (job FS131-M7) — the join of wave 5's lines; the arc step proved from the bends (`Plane/ValidMap/Procedure`)
 
 One new declaration: `IsMaxRingArc.meet` (FS131-IA1's W5, FS131-IA2's proof), on which `exists_arcStep`'s proof reads the maximality
-of the bent arc. `exists_arcStep` itself has its record above (once); it holds no `sorry` of its own now and rests, through
-`bend_away_part` and `exists_arcBend_toward`, on the open declarations of the six bend modules (`BendAway`, `LensOut`,
-`CollarMapOut`, `R2Cap`, `HornChart`, `BendGap`) and on `BendStep`'s `CollarFit.map_hornCount_le`, so the gate fails on it, and on
-what is proved over it, until they land. Moved by the join, in FS131-IA2's block above: `CollarFit.map_localStep` is through `sorryAx` until
-`Plane/ValidMap/BendAway`'s `LocalStep.of_cutArcs` is proved (its proof stood in `ArcStep` on `fs131-w5y`; inventory item 448 (a)). -/
+of the bent arc. `exists_arcStep` itself has its record above (once); it rests, through `bend_away_part` and
+`exists_arcBend_toward`, on the six bend modules (`BendAway`, `LensOut`, `CollarMapOut`, `R2Cap`, `HornChart`, `BendGap`) and on
+`BendStep`'s `CollarFit.map_hornCount_le`, all proved since FS131-L5 merged `fs131-w5z`. Moved by the join, in FS131-IA2's block
+above: `CollarFit.map_localStep` reads `Plane/ValidMap/BendAway`'s `LocalStep.of_cutArcs` (its proof stood in `ArcStep` on
+`fs131-w5y`; inventory item 448 (a)). -/
 
 #print axioms HadwigerNelson.Plane.ArcMap.IsMaxRingArc.meet
 

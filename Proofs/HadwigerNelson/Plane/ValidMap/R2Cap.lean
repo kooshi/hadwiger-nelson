@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.BendCollar
 import Proofs.HadwigerNelson.Plane.ValidMap.BendAway
 
 /-!
-# The radius-2 circle over a constant-sided unit arc: the crescent, the dichotomy, the subdivision (FS131-KA1's skeleton)
+# The radius-2 circle over a constant-sided unit arc: the crescent, the dichotomy, the subdivision (FS131-KA1's plan, proved by FS131-BA2)
 
 What the away bend reads of the inner colour's class near the radius-2 arc `R₂(ᾱ)` over a constant-sided unit arc of a valid map
 (`plans/FS131-bendaway-kernel-plan.md` § 3, lane C):

@@ -24,8 +24,8 @@ This module proves the step's clauses **once, over the clauses a bend exports** 
   the step's radius (`exists_arcStep_radius`). The local step of a cut (`LocalStep.of_cutArcs`, W1 and W2 as one statement) is
   `Plane/ValidMap/BendAway`'s, upstream, read here by `CollarFit.map_localStep`.
 
-**Models.** `ArcBend`: the collar bend of `l60Frag` at `collarModel` (the spec example at the end), which rests on the open child
-`CollarFit.map_hornCount_le` (`BendStep`). No Lean model is named for a clean map carrying a ring arc (the hypothesis `hc` with `ring`),
+**Models.** `ArcBend`: the collar bend of `l60Frag` at `collarModel` (the spec example at the end; its horn clause is
+`CollarFit.map_hornCount_le`, `BendStep`). No Lean model is named for a clean map carrying a ring arc (the hypothesis `hc` with `ring`),
 as in `BendStep`'s header: an open gate item, owed with the arc step's model (inventory ruling 427 (d)).
 -/
 
@@ -613,16 +613,16 @@ theorem CollarFit.map_localStep (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R
       subst ha
       exact (subset_union_right.trans hβ.subset).trans hfit.lensCurve_subset
 
-/-- **The toward collar bend supplies the interface**, the outer colour gaining: `left` is vacuous (R3, `CollarFit.map_R3`). It rests
-on the open child `CollarFit.map_hornCount_le` (`BendStep`) for `horn`. -/
+/-- **The toward collar bend supplies the interface**, the outer colour gaining: `left` is vacuous (R3, `CollarFit.map_R3`); `horn` is
+`CollarFit.map_hornCount_le` (`BendStep`). -/
 theorem CollarFit.arcBend (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') :
     ArcBend F hfit.map hfit.homeo (collarK P θ₁ θ₂ R' R'') P θ₁ θ₂ c c' c' ε := by
   refine ⟨hfit.ring, Or.inr rfl, hfit.map_valid hF, hfit.sub_thick, hfit.sub_dom, hfit.free, hfit.map_localStep,
     fun z hz => (hfit.homeo_eq_self hz).1, fun z hz hzO => hfit.homeo_fix_Γ hz hzO,
     fun z hz => (pushforward_mem_interiorPts_iff z).mpr hz, fun z => pushforward_coloursAt z,
     fun z n hn => (hfit.map_hasDegree hF z n).mpr hn, fun z hz => (hfit.map_hasRepeatedColour hF z).mp hz,
-    fun x j hj => hfit.map_hornCount_le hF hj, hfit.map_ringArcsWithin, fun Q a b d d' hD => hfit.map_R1 hF hD,
-    fun Q a b d d' hD hd => hfit.map_R2 hF hD hd, fun θ hθ => Or.inr ?_, fun θ hθ hon => absurd hon (hfit.map_R3 hθ)⟩
+    fun x j hj => hfit.map_hornCount_le hj, hfit.map_ringArcsWithin, fun Q a b d d' hD => hfit.map_R1 hD,
+    fun Q a b d d' hD hd => hfit.map_R2 hD hd, fun θ hθ => Or.inr ?_, fun θ hθ hon => absurd hon (hfit.map_R3 hθ)⟩
   have hL : ringPt P θ ∈ lensSet P θ₁ θ₂ R :=
     ⟨θ, hθ, 1, ⟨(hfit.pushProfiles.inside θ hθ).2.2.1, le_rfl⟩, by simp [ringPt]⟩
   exact ⟨(hfit.map_lens hL).1, (hfit.map_lens hL).2⟩
@@ -671,7 +671,7 @@ theorem ArcBend.of_away {M : ArcMap k} {h : ℂ ≃ₜ ℂ} {K : Set ℂ} {P : �
 /-! ## Spec examples -/
 
 /-- The interface at a model: the collar bend of `l60Frag` (`collarModel`: the arc `r([π/8, 5π/24])` of `ω(0)`, sides `0` and `1`)
-satisfies it for every `ε`, the outer colour `1` gaining. (It rests on `CollarFit.map_hornCount_le`, open.) -/
+satisfies it for every `ε`, the outer colour `1` gaining. -/
 example {ε : ℝ} (hε : 0 < ε) :
     ∃ (R' R'' : ℝ) (M : ArcMap 4) (h : ℂ ≃ₜ ℂ), ArcBend l60Frag M h (collarK 0 (π / 8) (5 * π / 24) R' R'') 0 (π / 8) (5 * π / 24) 0 1 1 ε := by
   obtain ⟨R', R, R'', hfit⟩ := collarModel hε

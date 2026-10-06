@@ -351,24 +351,8 @@ example (u : ℂ) : (ArcMap.const univ isOpen_univ (0 : Fin 1)).maxRingArcs u = 
 
 /-! ### Helpers for the three children FS131-I5q proved: arcs of one unit circle, their ends, the arcs near a compact set -/
 
-/-- Ring points at angles less than a turn apart differ. -/
-theorem ringPt_ne_of_abs_sub_lt (p : ℂ) {s t : ℝ} (h0 : s ≠ t) (h : |s - t| < 2 * π) : ringPt p s ≠ ringPt p t := by
-  intro he
-  have he' : e s = e t := by simpa [ringPt] using he
-  obtain ⟨n, hn⟩ := e_eq_e_iff.mp he'
-  have hπ := Real.pi_pos
-  have h1 : |(n : ℝ)| * (2 * π) < 2 * π := by
-    have : s - t = n * (2 * π) := by linarith
-    rw [this, abs_mul, abs_of_pos (by positivity : 0 < 2 * π)] at h
-    exact h
-  have hn0 : n = 0 := by
-    by_contra hne
-    have : (1 : ℝ) ≤ |(n : ℝ)| := by
-      have : (1 : ℤ) ≤ |n| := Int.one_le_abs hne
-      exact_mod_cast this
-    nlinarith
-  rw [hn0] at hn
-  exact h0 (by simpa using hn)
+-- Ring points at angles less than a turn apart differ: `ringPt_inj_of_abs_sub_lt` (`Plane/ValidMap/BendAway`, upstream); this
+-- file's contrapositive copy `ringPt_ne_of_abs_sub_lt` was removed by FS131-L5 (inventory items 454, 465 (b)).
 
 /-- A closed sub-arc of positive length of a unit circle has a point off any finite set. -/
 theorem exists_mem_ringArc_notMem (p : ℂ) {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂) {C : Set ℂ} (hC : C.Finite) :
@@ -455,7 +439,8 @@ theorem IsRingArc.not_regularAt_of_max (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : �
       rw [← heq]; exact ⟨_, ⟨le_rfl, hU.1.le⟩, rfl⟩
     obtain ⟨ψ, hψ, hψe⟩ := hmem
     have hmin : min θ₁ a = a := min_eq_right haθ.le
-    refine ringPt_ne_of_abs_sub_lt P (s := ψ) (t := min θ₁ a) (by rw [hmin]; linarith [hψ.1]) ?_ hψe
+    have hψne : ψ ≠ min θ₁ a := by rw [hmin]; linarith [hψ.1]
+    refine hψne (ringPt_inj_of_abs_sub_lt (P := P) ?_ hψe)
     rw [abs_of_pos (by rw [hmin]; linarith [hψ.1])]
     linarith [hψ.2, le_max_left θ₂ b]
   · intro hreg
@@ -465,7 +450,8 @@ theorem IsRingArc.not_regularAt_of_max (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : �
       rw [← heq]; exact ⟨_, ⟨hU.1.le, le_rfl⟩, rfl⟩
     obtain ⟨ψ, hψ, hψe⟩ := hmem
     have hmaxb : max θ₂ b = b := max_eq_right hθb.le
-    refine ringPt_ne_of_abs_sub_lt P (s := max θ₂ b) (t := ψ) (by rw [hmaxb]; linarith [hψ.2]) ?_ hψe.symm
+    have hψne : max θ₂ b ≠ ψ := by rw [hmaxb]; linarith [hψ.2]
+    refine hψne (ringPt_inj_of_abs_sub_lt (P := P) ?_ hψe.symm)
     rw [abs_of_pos (by rw [hmaxb]; linarith [hψ.2])]
     linarith [hψ.1, min_le_left θ₁ a]
 
@@ -704,7 +690,8 @@ theorem hfree_of_baseHyp (hF : F.Valid) {u P : ℂ} (hu : F.Covers u 2) (hH : F.
   rw [hdist (-1) (Or.inr rfl)] at hj
   have hij : i ≠ j := by
     rintro rfl
-    refine ringPt_ne_of_abs_sub_lt P (s := θ + 1 * t) (t := θ + -1 * t) (by linarith) ?_ (hi.trans hj.symm)
+    have hθne : θ + 1 * t ≠ θ + -1 * t := by linarith
+    refine hθne (ringPt_inj_of_abs_sub_lt (P := P) (θ := θ + 1 * t) (θ' := θ + -1 * t) ?_ (hi.trans hj.symm))
     rw [abs_of_pos (by linarith)]; linarith
   obtain ⟨l, hl⟩ := hbr z hz hzx hsr
   have hlij : l = i ∨ l = j := by

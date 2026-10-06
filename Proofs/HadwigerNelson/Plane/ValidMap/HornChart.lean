@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.OpenMove
 import Proofs.HadwigerNelson.Plane.ValidMap.Pushforward
 
 /-!
-# Horn counts where a collar bend needs them (FS131-KA1's skeleton; both collar bends)
+# Horn counts where a collar bend needs them (FS131-KA1's plan, proved by FS131-BA2; both collar bends)
 
 The horn count is metric (`HasHornCount` counts the sectors that are `hornSet`s), so a homeomorphism does not carry it; a collar bend's
 horn clause (`CollarFit.map_hornCount_le`, and the away bend's, `plans/FS131-bendaway-kernel-plan.md` § 3, lane H) is read by the place
