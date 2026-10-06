@@ -119,3 +119,138 @@ to the predicate column; and "the docstring speaks of an inhabitant" matches the
 
 *Slip, my own, corrected in the next commit*: the three per-body rows of § 2.2 were first written from an estimate (139/468, 111/172, 68/5);
 the table now holds the script's counts. The totals were right.
+
+## Stage 3 — SAVED (FS131-QA4): the three known cases, and two findings met on the way
+
+Grades: **[scratch-kernel]** — a statement elaborated by `lake env lean` against an idle tree's oleans, its axioms printed (the standard three),
+a planted fault watched to fail; not the gate's build (`autoImplicit` is not in force under `lake env lean`). **[hand]** — read and argued
+here, clause by clause. **[read]** — read from the signatures.
+
+### 3.1 `bend_toward_collar` (`BendCollar.lean` l. 1400 at `3b120cd3`) — verdict: inhabited at once once `hmax` and `hlen` go; as stated, by nothing in `l60Frag`
+
+Its hypotheses: `hF : F.Valid`, `hA : F.IsRingArc P θ₁ θ₂ c c'`, `hout : c' ∉ F.coloursAt P`, `hlen : θ₂ - θ₁ < 2 * π`, `hmax` (maximality of the
+arc among ring arcs with the same sides), `hfree` (near each interior point of the arc `Γ` is `ω(P)`), `hε : 0 < ε`.
+
+`data/fs131/qa4/QA4Collar.lean` (output `QA4Collar.out`, exit 0; run in `fs131-w5k` under `scripts/slot.py --mem 12`), all on the standard three:
+
+| check | statement | result |
+|---|---|---|
+| QA4-C1 | on `l60Frag`'s sub-arc `r([π/8, 5π/24])`, centre `0`, sides `0`, `1`: `hF`, `hA`, `hout`, `hlen`, `hfree` hold **at once** (`l60Frag_valid`; `collarModel`'s `CollarFit.ring` and `.free_open`; `hout` copied from `collarModel`'s body, l. 635–651) | [scratch-kernel] |
+| QA4-C2 | `hmax` **fails** there: the whole arc `r([0, π/3])` (`l60Frag_isRingArc`) holds the sub-arc, has the same sides and a larger carrier | [scratch-kernel] |
+| QA4-C3 | `bend_toward_collar`'s whole conclusion without `hlen` and `hmax` (its own proof with the two `have _ :=` lines removed) | [scratch-kernel] — the kernel confirms neither is read |
+| QA4-C4 | the weakened theorem applied to the model of C1 | [scratch-kernel] |
+
+Planted fault (`QA4CollarPlant.lean`: the sides swapped in C1) — **fired**, "Application type mismatch", exit 1.
+
+**As stated (with `hmax`), no arc of `l60Frag` is an inhabitant** [hand]: the only maximal arc with sides `0`, `1` is the whole `r([0, π/3])`, and
+`hfree` fails on it at the two interior points where the circles of radius `1/4` about its ends cross it (`2 arcsin (1/8) ≈ 14.4°` from each end):
+`l60Arcs` holds those two circles whole (`.circ 1 (1/4) 0 (2π)`, `.circ (e (π/3)) (1/4) 0 (2π)`), so inside the lens they are arcs of `Γ` with one
+colour on both sides, and `Γ` near the crossing is not `ω(0)` alone. A sub-arc between the crossings is free and not maximal. So with `hmax` kept, a
+model needs a new fragment (a copy of `l60Frag` whose two small circles are drawn only outside the lens: its section is about 800 lines).
+
+**Remedy** (ruling 419 (d)(ii)'s, confirmed): drop `hmax` and `hlen` — the statement becomes strictly stronger and its hypothesis set is then
+`exists_collarFit`'s, inhabited at once by QA4-C1; and state the model's hypotheses as a named theorem beside `collarModel` (QA4-C1's statement,
+proof by splitting `collarModel`'s body), with a docstring line on `bend_toward_collar` naming it. **Who**: the implementer who next edits
+`BendCollar` (the statement change under the ruling). **Price**: about 30 lines moved, no new mathematics; QA4-C1 and C3 are the text.
+`exists_collarFit` (l. 583) needs only the note; its hypotheses are QA4-C1's.
+
+### 3.2 `exists_open` (`OpenMove.lean` l. 2847 on `main`) — verdict: a note that none exists in Lean; inhabited at once at [hand] by E6's map, re-read here clause by clause
+
+Hypotheses: `hF : F.Valid`, `hv : F.Covers v 1`, `hH : F.IsHorn v α κ₁ κ₂ c`, `h1 : F.HasSectors v c 1`, `hD : (interior (F.allowedCone v c)).Nonempty`,
+`hm : F.HasDegree v m`, `hj : F.HasHornCount v j`, `hδ : 0 < δ`. E6's map (`plans/FS131-E6-derivation.md` §§ 3.1–3.3), read against each [hand]:
+
+| hypothesis | at E6's map, `v = 0`, `α = 0`, `κ₁ = 0`, `κ₂ = 2`, `m = 3`, `j = 1` |
+|---|---|
+| `Valid` | § 3.2's five cases (V1–V5), by colour: background squares of side `3/5` in nine colours (same-colour gap `6/5`); `H` against `T_c` (`z·p > |z|²/2`); `G₀` against `T′`; `H₀` against `T` — each read, each right |
+| `Covers 0 1` | a map of the plane |
+| `IsHorn 0 0 0 2 c` | `hornSet 0 0 0 2 r = {|z| < r, x > 0, y > 0, y < x² + y²}` — the tile `H` within `B(0, r)` for `r < 1/10`, connected, bounded by the axis and `C₂`, both arcs of the map |
+| `HasSectors 0 c 1` | `c`'s other tile `T_c` is `2/5` away |
+| `hD` | `cl T_c` meets `ω(0)` at `w = (3/5, 4/5)` only, `T_c ⊆ B(0, 1)`: one contact, in-type and not out-type, so `allowedCone 0 c = {d : d·w ≥ 0}`, a half-plane — **the clause is exercised** (a contact exists; the cone is not `univ`) |
+| `HasDegree 0 3` | the sectors `H`, `G₀` (connected: its parts left of the axis and inside `C₂` overlap), `H₀` |
+| `HasHornCount 0 1` | `H` is a horn set; a half-disc is not one for small `r` (a point `(x′ → 0⁺, −r/2)` in the frame of any direction is above no arc of fixed curvature `κ₁` once `r < 4/|κ₁|`), nor is `G₀` |
+
+I could not break the set and I confirm the model [hand]. **No Lean object satisfies it**: `cuspFrag` fails `hv` (QA4-B3 below) and `h1`; `bowtie`
+fails `hv` (QA4-B1) and `h1`; `sevenBrickMap` has no horn.
+
+**What a Lean model would take.** Two routes, priced:
+
+- (a) *E6's map as written* — an `ArcMap 12` of the plane with four features and a nine-colour grid; validity in five cases; the seven facts above.
+  By the library's measured models (`sevenBrickMap` with its corner facts about 530 lines in `SVMap`; `l60Frag` about 840 in `UnitArc`; `bowtie`
+  about 2,700 in `BaseSteps`): **1,500–2,500 lines**, one implementer job of full size. It is also the model of F6 (the lone horn shaveable only at
+  `σ = 1`), which no theorem's hypotheses ask for.
+- (b) *A planted picture* — `exists_open` asks for none of F6: any valid map covering `B̄(v, 1)` with a lone horn of a colour whose cone has interior
+  will do. Take a valid plane map, give it spare colours, and recolour a small horn set (and one small disc internally tangent to `ω(v)`, for a
+  non-trivial cone) inside one tile with a fresh colour: every fresh class has diameter below `1`, so validity is immediate. The library has the
+  recolouring (`ArcMap.recolour`, `recolour_valid`, `recolour_isPlaneMap`, `Plane/Woodall/Merge` l. 679–689) and the base (`sevenBrickMap`); it lacks
+  a colour relabelling (`Fin 7 → Fin k′`, about 60 lines) and the local facts at `v` (one sector chart: about 200–400 lines by
+  `coloursAt_hasSectors_of_tiles`, `BaseSteps` l. 3116). **400–800 lines**, and **the same construction serves the other three moves** (§ 3.3).
+
+I recommend (b), with (a) left to the day F6 itself needs a kernel model. **Who**: a planner for a short plan (the planted pictures for the four
+moves, one construction), then an implementer. Grade of this pricing: an estimate from three measured models, not a measurement.
+
+### 3.3 `exists_merge`, `exists_rayMerge`, `exists_shave` (`Contact.lean` l. 1525, 1509, 1495 on `main`; the `_aux` forms in `Moves`) — verdict: nothing named; each inhabited only hypothesis by hypothesis in Lean; each inhabited at once at [hand]
+
+| theorem | hypotheses | named objects, and which hypothesis each fails | at-once model [hand] |
+|---|---|---|---|
+| `exists_merge` | `Valid`, `Covers v 1`, `1 ≤ n`, `HasSectors v c (n + 1)`, `hD` (cone has interior) | `bowtie` at `0`: fails `Covers 0 1` (QA4-B1) and `hD` (`bowtie_not_merge_zero`); `cuspFrag` at `0`: fails `Covers 0 1` (QA4-B3); `sevenBrickMap`: no colour with two sectors | QA3's own instance (`plans/FS131-QA3-audit.md` § 3.1): an X of two segments in `B(0, 1/4)`, quadrants I and III one colour, a grid of cells each its own colour to radius `2`; or the planted picture of § 3.2 (b) with two fresh-coloured wedges |
+| `exists_rayMerge` | `Valid`, `Covers v 1`, `HasSectors v c (n + 1)`, `κ₂ < κ₃`, two `c`-horns along one ray, `−1 ≤ κ₁`, `κ₄ ≤ 1` | no named map has two horns of one colour along one ray (`bowtie`'s are along `0` and `π`, and it fails `Covers`) | two fresh-coloured horn sets `hornSet v 0 (−1) (−1/2) r`, `hornSet v 0 (1/2) 1 r` planted in one tile |
+| `exists_shave` | `Valid`, `Covers v 1`, `HasSectors v c (n + 1)`, a `c`-horn with `−1 ≤ κ₁`, `κ₂ ≤ 1`, flanks `g`, `h`, `κ₁ ≤ σ ≤ κ₂`, `hclear` | `cuspFrag` at `0` satisfies all but `Covers` (its horn `IsHorn 0 0 (−1) 1 1`; everything is clear in `B(0, 1/2)`); `bowtie` at `0` fails `hclear` (`bowtie_not_shave_zero`) and `Covers` | one fresh-coloured horn planted in a tile of colour `c₀`: both flanks are `c₀`, and every horn point is `c₀`-clear because it was a `c₀` point of a valid map |
+
+None of the three docstrings carries an inhabitant note (`exists_merge`'s: IO3's correction, item 408, stands). I could not break any of the three
+sets: inside a small disc a picture in fresh colours is constrained by nothing, and `Covers v 1` is met by any valid background. **The one
+obstruction in Lean is the pair `Covers v 1` + a horn or a repeated colour: every named map with the second lacks the first.**
+
+`data/fs131/qa4/QA4Bowtie.lean` (output `QA4Bowtie.out`, exit 0; run in `fs131-wop`), on the standard three:
+
+| check | statement | result |
+|---|---|---|
+| QA4-B1 | `¬ bowtie.Covers 0 1` (every point of the bowtie's eleven tiles has real part at most `1/2`; the point `1` is outside the closure) | [scratch-kernel] |
+| QA4-B2 | `¬ bowtie.IsPlaneMap` | [scratch-kernel] |
+| QA4-B3 | `¬ cuspFrag.Covers 0 1` (its domain is `B(0, 1/2)`) | [scratch-kernel] |
+
+Planted fault (`QA4BowtiePlant.lean`: the bound `1/4` in place of `1/2`) — **fired**, `linarith failed`, exit 1.
+
+**Remedy**: § 3.2 (b)'s construction with three more pictures, and a docstring line on each move naming its model; **price**: within § 3.2 (b)'s
+400–800 lines plus about 100 per further picture.
+
+### 3.4 Finding QA4-1, sent at once: `exists_vertexStep` assumes `v ∈ F.dom` where every move it composes assumes `F.Covers v 1`
+
+`Procedure.lean` on `fs131-w5c` (l. 576 at `87e95385`; E6's draft § 4.5 (2); the restated form at `9489c44b`, l. 762, read by `git show`):
+`theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : v ∈ F.dom) (hav : F.MergeAvailable v ∨ F.RayAvailable v ∨ F.ShaveAvailable v) …`,
+against `exists_merge_aux`, `exists_rayMerge_aux`, `exists_shave_aux` (`Moves.lean` l. 1668, 1656, 1636) and `exists_open` (`OpenMove.lean` l. 2847),
+each `(hv : F.Covers v 1)`. As stated the step is claimed for every valid clean fragment; none of the four moves applies where the domain does not
+hold `B̄(v, 1)`. The source (E6-ROUTE; N2-TERM's procedure) is about plane maps. **Missing hypothesis**: `F.Covers v 1` (the one caller,
+`exists_terminalSeq`, has `IsPlaneMap`; `covers_of_isPlaneMap`, `Cone.lean` l. 1634). [read] — certain. **Not established**: that the statement
+is false on fragments; I tried a counterexample (a domain omitting one point `w` of `ω(v)` where tiles of the merged colour accumulate from
+outside beside one in-type tile at `w`, so that Lean's cone is an open half-plane while every recolouring toward `w` meets a unit pair) and did
+not finish it — the picture at `v` it needs is a stuck-like pair of horns tangent to the line across `w`, a derivation of its own. `exists_arcStep`
+does not share the gap: `bend_toward`, `bend_away_whole`, `bend_toward_collar` carry no domain hypothesis.
+
+*Ruled while I worked* (the coordinator's message; inventory items 422–423): the step now takes `(hv : F.Covers v 1)`; FS131-IR2 holds the leaf;
+E6's draft § 4.5 (2) and KL1's plan row are logged as corrections owed.
+
+### 3.5 Finding QA4-2: seventeen docstrings name `bowtie` as "the inhabitant of the hypotheses" of theorems that assume `F.Covers v 1` or `F.IsPlaneMap`
+
+`tools/fs131_qa4_notes.py` (self-test: 6 controls, 1 planted, OK) reads each of the 124 inhabitant notes against the global hypotheses of its
+theorem's signature (`data/fs131/qa4/notes.tsv`): **17 CONFLICT**, 8 where the docstring itself limits the claim ("local hypotheses", "a fragment",
+"`Covers` is the caller's"), 41 saying none is expected or known, 18 naming no object, 40 with no conflict.
+
+The 17, each "Inhabitant of the hypotheses: `bowtie` at `0`" (or "Model of the hypotheses"), each with `hv : F.Covers v 1` or `hP : F.IsPlaneMap`
+among its hypotheses, each refuted as a claim by QA4-B1 or QA4-B2:
+
+- `FlankUA` (`3b120cd3`): `not_outType_N_of_flankAbove_one` (l. 78), `not_outType_S_of_flankBelow_neg_one` (104), `srcG_of_shadow` (132),
+  `srcH_of_shadow` (180), `region_near_of_inType` (254), `flank_ne_of_shadows` (311), `horn_poles_contact` (557), `horn_bounds_of_noMerge` (715),
+  `hasSectors_one_of_contacts` (737);
+- `Terminal` (`87e95385`): `stuck_flanks_ua` (518), `stuck_structure_ua` (771), `chainVertex_antipodal` (788),
+  `exists_horn_of_mem_coneAt_of_stuck` (1416), `upper_bounds_of_inType_N` (1975, `IsPlaneMap`), `stuck_turned_frame` (2003, `IsPlaneMap`),
+  `stuck_structure_at_axis` (3200), `horn_flanks_of_isChainVertex` (3507).
+
+Sampled (`horn_poles_contact`, `horn_bounds_of_noMerge`, `hasSectors_one_of_contacts`, `not_outType_N_of_flankAbove_one`): the bowtie does satisfy
+every *other* hypothesis by the named `bowtie_*` theorems; `Covers` is the one that fails. So these are **inhabited hypothesis by hypothesis only**,
+with a note that claims more — the weakness QA2 found five times, now written into docstrings.
+
+**The set is satisfiable** [hand]: complete the bowtie to a valid fragment covering `B̄(0, 1)` (or to a map of the plane) by cells of diameter
+below `1` in fresh colours, with the bowtie's own arcs kept (its domain's frontier lies on them). For a colour `c < 6` the region and the tiles are
+the bowtie's, so the contacts of `c` at `0`, their types, `allowedCone 0 c`, the sectors, horns and flanks at `0`, and every `IsClear g z` for
+`g < 6` are unchanged; so `IsStuck 0`, `HasSectors 0 1 2`, the horns, the flanks and the in- and out-type contacts at `±i` all persist, at
+`k = 6 +` the number of cells. Not in Lean, and not a small job (§ 6).

@@ -1,0 +1,4 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 8,9
+'HadwigerNelson.Plane.ArcMap.qa4_bowtie_not_covers' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.qa4_bowtie_not_isPlaneMap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.qa4_cuspFrag_not_covers' depends on axioms: [propext, Classical.choice, Quot.sound]
