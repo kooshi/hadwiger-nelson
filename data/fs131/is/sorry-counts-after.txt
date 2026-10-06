@@ -1,0 +1,4 @@
+Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:3
+Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean:2
+Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:1
+Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean:1

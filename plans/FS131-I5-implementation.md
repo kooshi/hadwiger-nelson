@@ -3390,3 +3390,94 @@ built `Terminal` and `StuckChain` — elaborates under `lake env lean -DautoImpl
 (the positive signal that the run read the environment: a first run with no `#print` printed nothing in 2 s, and was not believed).
 
 ## Stage 61 — SAVED
+
+## Stage 62 — SAVED (FS131-IS1): the build green; `stuckRun_ne_univ` and `shadow_recursion` kernel theorems; `Terminal` holds no `sorry`; the hand-back
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`, from inside the worktree, on Stage 61's source `4f7115e3`; it waited about nine minutes
+behind two other builds and was admitted, no exit 75): **OK — 457 of 457 batches, 6 modules rebuilt** (`HornShadow` 18 s, `Terminal`
+17 s, `Dense`, `BaseWalk`, `BaseDense`, `Proofs`), **4 modules with warnings**, exit 0, 9 min 40 s
+(`build/gate/build/20261006T043454Z-976637.log`; driver log `data/fs131/is/build-stage62.log`). Read in the saved log, not from the
+verdict line: 34 warning lines, **0 that are not `declaration uses 'sorry'`**, at seven sites — `BaseDense` 356, 430, 480; `BendCollar`
+31; `HexRing` 2142; `Procedure` 795, 812 — **none in `Terminal`** (the as-given build had `Terminal.lean:3592:8`) **and none in
+`HornShadow`**; one `error:` line, the up-to-date probe's ("target is out-of-date and needs to be rebuilt").
+
+**Axioms** (`data/fs131/is/ISAxioms62.lean` → `.out`, 12 GiB slot, `import Proofs`, against this build): on
+`[propext, Classical.choice, Quot.sound]` — **`stuckRun_ne_univ`**, **`shadow_recursion`**, `le_curvDown_of_flankBelow_of_horn`,
+`curvUp_le_of_horn_of_flankAbove`, `horn_colour_eq_of_isChainVertex`, `eq_horn_colour_of_two_sectors`, `horn_upper_ne_one`,
+`horn_lower_ne_neg_one`; what they rest on and their siblings, `n4_fin`, `cv_class`, `run_hornBoundsQR`, `run_ends`. **Controls on
+`sorryAx`**: `exists_terminal`, `exists_red`, `exists_vertexStep` (the procedure's two steps, `Procedure`'s open leaves). The same
+instrument printed `sorryAx` for `stuckRun_ne_univ` itself before this job (`data/fs131/m6/M6Axioms54.out`; `data/fs131/is/Scratch.out`
+against the build at `ebb0b292`): the before and after of one record.
+
+**`sorry` by `grep -cw`**: `Terminal` **1 → 0** (before: Stage 60.2; after: `data/fs131/is/sorry-counts-after.txt`), `HornShadow` 0.
+Left under `Plane/ValidMap` on this branch: `BaseDense` 3, `Procedure` 2, `HexRing` 1, `BendCollar` 1 — none mine.
+
+**Statements** — `tools/fs131_is_stmt_check.py ebb0b292` (IL2's checker under my prefix, aimed at the two Lean files I edited): **133
+statements read, PASS** — every statement of `Terminal` and `HornShadow` at `ebb0b292` is in the tree unchanged, `stuckRun_ne_univ`'s
+among them (`data/fs131/is/stmt-check.txt`). `--self-test`: six plants, each **FIRED** naming its declaration — a hypothesis dropped
+and a conclusion changed in `stuckRun_ne_univ`, `cv_l0` renamed, `HornBoundsQR`'s body changed, a conclusion and a hypothesis changed in
+`HornShadow` — and the unplanted control passes (`stmt-check-selftest.txt`). A plant whose target text is missing stops the run and says
+so. IL2's own `tools/fs131_il_stmt_check.py ebb0b292` also passes (`stmt-check-62.txt`), but **its self-test exits 1 on this branch**
+(`stmt-check-62-selftest.txt`): its first plant rewrites `badCount_lt_top`'s hypothesis `hc`, which M6 removed by ruling 389 (a), so the
+plant changes nothing and does not fire — a tool defect of another job's tool, reported, not edited (standing rule 7). `git diff --numstat
+ebb0b292`: `HornShadow` +87 −0 (the new section, at the end of the file); `Terminal` +172 −6 (the six removed lines are the old docstring's
+route sentences and the `sorry`); `scripts/Axioms.lean` +10 −0; `ARCHITECTURE.md` +1 −1 (the Imports cell). No `axiom`, no
+`native_decide`.
+
+**Not run, and why**: the gate (`scripts/axioms.sh`, `./scripts/vacuity.sh`, `lake lint`) — the brief leaves it to the wave's landing.
+By reading: every hypothesis of the seven new theorems is used in its proof; `stuckRun_ne_univ`'s `h3` is referenced by `have _ := h3`
+(`LEAN.md` § The gate: not reported by the unused-argument linter). The build's own linters (`linter.missingDocs` among them) printed
+nothing for either file.
+
+**The scratch file** `data/fs131/is/Scratch.lean` is Stage 61's working copy: against this build it fails on "already declared" (its
+names are the library's now); its header says so.
+
+### Theorems this phase proved (FS131-IS1)
+
+All [kernel], `[propext, Classical.choice, Quot.sound]` (`data/fs131/is/ISAxioms62.out`):
+- `HadwigerNelson.Plane.ArcMap.stuckRun_ne_univ` (`Plane/ValidMap/Terminal`) — N2-TERM's clause 3, finiteness: in a terminal valid
+  six-coloured map, the stuck run through a vertex stuck along `e α` is not all of `ℤ` (no bi-infinite stuck chain; FS110-N4-FIN under
+  unit arcs). Its hypothesis `h3` is not read.
+- `HadwigerNelson.Plane.ArcMap.shadow_recursion` (`Terminal`) — FS110-N4-SHADOW's recursion: for neighbouring chain vertices `w`,
+  `w + n` of a terminal valid six-map with horns along `e α` between `a < b` and `a' < b'`: `a ≤ curvDown a'` and `curvUp b ≤ b'`.
+- `HadwigerNelson.Plane.ArcMap.horn_upper_ne_one`, `…horn_lower_ne_neg_one` (`Terminal`) — "no bound is `±1`": at a chain vertex of a
+  terminal map whose neighbour `w + n` (resp. `w − n`) is a chain vertex, a horn's upper bound is not `1` (resp. its lower bound not `−1`).
+- `HadwigerNelson.Plane.ArcMap.horn_colour_eq_of_isChainVertex` (`Terminal`) — all horns at a chain vertex of a valid map have one colour.
+- `HadwigerNelson.Plane.ArcMap.eq_horn_colour_of_two_sectors` (`Terminal`) — a colour with two or more sectors at a chain vertex is the
+  colour of its horns.
+- `HadwigerNelson.Plane.ArcMap.le_curvDown_of_flankBelow_of_horn` (`Plane/ValidMap/HornShadow`) — in a valid map, a lower flank of
+  colour `h` at bound `a` at `w` and an `h`-horn at `w + n` with `−1 < a' < b' ≤ 1` give `a ≤ a'/(1 + a')`.
+- `HadwigerNelson.Plane.ArcMap.curvUp_le_of_horn_of_flankAbove` (`HornShadow`) — the mirror: a `g`-horn at `w` with `−1 ≤ a < b < 1` and
+  an upper flank of colour `g` at bound `b'` at `w + n` give `b/(1 − b) ≤ b'`.
+
+With these, `Plane/ValidMap/Terminal` holds no `sorry` of its own; `exists_terminal` and `exists_red` still rest on `Procedure`'s
+`exists_vertexStep` and `exists_arcStep` (FS131-IR2's lane).
+
+### The route taken against the route on record
+
+M6's paragraph (Stage 55) and the planner's row (`plans/FS131-limit-kernel-plan.md` § 3.1) derive the recursion from "no SHAVE at a
+stuck vertex" (`shadow_of_not_shave`, `srcG_of_shadow`/`srcH_of_shadow`, then SH1). The proof here reads the hand proof's own sentence
+instead (N4 § 2.6: validity keeps the flank out of the next horn's shadow), with the colour placed by what `Terminal` already held:
+- "no bound is `±1`": as M6 wrote it (`hornBoundsQR_of_isChainVertex`, `cv_l0`), in two lemmas;
+- the colour: `cv_class`'s second case, forced once one bound is not `±1`, gives the flank twice at the pole; at a chain vertex that
+  colour is the horn's (`eq_horn_colour_of_two_sectors`, by Stage 54's four-germ count) — this replaces the step M6 named as still to
+  write;
+- the inequality: SH2 (`mem_shadow_hornSet_S`, `mem_shadow_hornSet_N`), not SH1, with `Valid` — SH1 (`shadow_hornSet_subset_S`/`_N`)
+  bounds where the shadow can lie, and the recursion needs the converse, that the region past the concentric circle is in the shadow.
+No-SHAVE still enters, inside `flank_two_sectors_at_S_gen` (hence `cv_class`). The form `λ_j ≤ curvDown λ_(j+1)` came out as the brief
+wrote it.
+
+### Drafts for the front page
+
+Wave 5 is not at its gate: no counts for `CLAUDE.md` § The gate or § Trust ledger, no ledger row, no Frontier line. For the wave's
+landing: this job adds seven library declarations and seven `#print axioms` records (the "FS131-IS1" block of `scripts/Axioms.lean`),
+all expected under CLEAN. Two description cells of `ARCHITECTURE.md`, drafted here and not edited (only the Imports cell was, Stage 61):
+- **`ARCHITECTURE.md`, the row `Plane/ValidMap/HornShadow`, "What it holds"** — after the words "`e_add_pi_add_pi`,
+  `dist_eq_dist_of_frame`)." add: " N4-SHADOW's two inequalities between stacked vertices (`le_curvDown_of_flankBelow_of_horn`,
+  `curvUp_le_of_horn_of_flankAbove`; job FS131-IS1)."
+- **`ARCHITECTURE.md`, the row `Plane/ValidMap/Terminal`, "What it holds"** — after the words "`stuckRun_ne_univ`; job FS131-KL1)" add:
+  ", the last proved over N4-SHADOW's recursion (`shadow_recursion`, with `horn_upper_ne_one`, `horn_lower_ne_neg_one`,
+  `horn_colour_eq_of_isChainVertex`, `eq_horn_colour_of_two_sectors`; `n4_fin` from `Plane/StuckChain`; job FS131-IS1)"; and the row's
+  opening "**FS-131 wave 5, skeleton**" no longer describes a module with a `sorry` of its own.
+
+## Stage 62 — SAVED

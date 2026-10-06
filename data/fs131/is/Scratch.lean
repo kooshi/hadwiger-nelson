@@ -1,7 +1,11 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Terminal
 import Proofs.HadwigerNelson.Plane.StuckChain
 
-/-! FS131-IS1 scratch: the children of `stuckRun_ne_univ`, developed against the built `Terminal` (iteration only, never evidence). -/
+/-! FS131-IS1 scratch: the children of `stuckRun_ne_univ`, developed against the built `Terminal` (iteration only, never evidence).
+
+Stage 61's working file, kept because the record cites it (`Scratch.out` is its output against the build at `ebb0b292`). Its declarations
+are in the library from Stage 61 on (`Plane/ValidMap/HornShadow`'s last section, `Plane/ValidMap/Terminal`), under the same names, so
+against a build of Stage 61 or later this file fails on "already declared": that is expected, and it is not to be repaired. -/
 
 namespace HadwigerNelson.Plane
 
