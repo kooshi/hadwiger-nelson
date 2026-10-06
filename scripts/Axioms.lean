@@ -5531,6 +5531,19 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.sides_eq
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_and_repeated
 
+-- FS131-CC2: lane C of the collar bend, continued — germ counts carried by a homeomorphism (`Pushforward`), the collar in an end's frame
+#print axioms HadwigerNelson.Plane.ArcMap.exists_subset_of_isPreconnected_iUnion
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_injective_of_homeo
+#print axioms HadwigerNelson.Plane.ArcMap.hasDegree_iff_of_homeo
+#print axioms HadwigerNelson.Plane.ArcMap.pushforward_hasDegree
+#print axioms HadwigerNelson.Plane.ArcMap.collarK_frame
+#print axioms HadwigerNelson.Plane.ArcMap.side_core_pos
+#print axioms HadwigerNelson.Plane.ArcMap.side_core_neg
+#print axioms HadwigerNelson.Plane.ArcMap.crescent_Y
+#print axioms HadwigerNelson.Plane.ArcMap.side_core
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.exists_one_side
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.homeo_mem_collarK
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

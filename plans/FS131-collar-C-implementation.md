@@ -335,3 +335,99 @@ The reader's self-test (`axioms-selftest.txt`): a name moved to the other sectio
 record of each kind — **5 of 5 fired, each naming its culprit**; the unplanted partner PASS.
 
 ## Stage 5 — SAVED (FS131-CC2)
+
+## Stage 6 — SAVED (FS131-CC2): three of the four leaves — `map_degree_lensCurve`, `map_degree_end`, `sides_end`; one statement they all derive from
+
+### 6.1 A better shape than the plan's, taken (the brief: "if you see a better shape, take it and say so")
+
+KP2's plan and CC1's § 3.2 priced the two degree leaves at about 650 lines: a second two-germ chart where the lens boundary's two
+circles cross, and at each end a chart surgery replacing `α`'s germ by the tangent circle's. Both rest on the plan's reading (§ 5.1) that
+"`h` carries sectors" is false, sectors being read in balls. That reading is right about sectors at a given radius and too strong about
+their **number**. Every point of every arc map's domain has a sector chart (`localSectors`), and the count of germs in a chart is a
+topological invariant of the point:
+
+> **`ArcMap.hasDegree_iff_of_homeo`** (`Plane/ValidMap/Pushforward`, new, [kernel]). Let `h` be a homeomorphism of the plane with
+> `h z ∈ F'.interiorPts ↔ z ∈ F.interiorPts` and `F'.col (h z) = F.col z` on interior points. Then at every `v ∈ F.dom` with
+> `h v ∈ F'.dom`: `F'.HasDegree (h v) m ↔ F.HasDegree v m` for all `m`, and `F'.HasRepeatedColour (h v) ↔ F.HasRepeatedColour v`.
+
+Proof (`IsSectorChart.exists_injective_of_homeo`): take charts at `v` and at `h v`. A small sector at `v` is connected, so `h` sends it
+into one sector at `h v` (connected sets among disjoint open ones: `exists_subset_of_isPreconnected_iUnion`); a smaller sector at `h v`
+comes back into one sector at `v`; and the second assignment undoes the first, because each sector reaches its base point. So sectors
+inject both ways, the two charts have the same number of germs, and the bijection carries colours. `pushforward_hasDegree` is the same
+for `F.pushforward h …`. About 120 lines, first elaboration clean.
+
+With it the two degree leaves are a few lines each, and no chart at the crossing or at an end is built:
+- **`CollarFit.map_degree_lensCurve`** — the point is `h (ringPt P θ)` (`homeo_ringPt`); `pushforward_hasDegree` and `degree_openArc`.
+- **`CollarFit.map_degree_end`** — an end is a point of `Γ` off the open arc, fixed by `h` (`homeo_fix_Γ`); `pushforward_hasDegree`.
+
+(`map_degree_and_repeated`, CC1's case split, now has a one-line proof by the same lemma for `z ∈ F.dom`; it is left as CC1 wrote it,
+since it also covers `z ∉ F.dom`.)
+
+### 6.2 `sides_end`, by the same idea
+
+`M.region d = h '' F.region d` (`pushforward_region`), so the side colours at a fixed end `x` are read from `F.region d` met with
+`h⁻¹(B(Q, 1))`. It is enough that near `x` the homeomorphism moves no point across `ω(Q)`. Off the collar it moves nothing; it maps the
+collar into itself (`CollarFit.homeo_mem_collarK`); and near `x` the collar minus `x` lies on one side of `ω(Q)`:
+
+> **`CollarFit.exists_one_side`** (`BendCollar`, new, [kernel]): for `Q ≠ P` and an end `x`, there is `ρ > 0` such that every collar
+> point `z ≠ x` within `ρ` of `x` has `dist z Q < 1`, or every such point has `1 < dist z Q`.
+
+Its geometry is one lemma, **`collarK_frame`**: in the frame at an end `E` (`z − E = (Y + X i) e(θ_E)`), a collar point has `X ≥ 0`
+at `θ₁` (`X ≤ 0` at `θ₂`) and lies between the tangent circles: `0 ≤ 2R'Y + |z − E|²` and `2R''Y + |z − E|² ≤ 0`. Those two are exactly
+`tangRad`'s quadratic at `R'` and `R''` (`tangRad_le_iff`, `le_tangRad_iff`) — no distance to a circle's centre is computed. The rest is
+real algebra (`side_core`, over `side_core_pos`, `side_core_neg`, `crescent_Y`, each on its own real variables, as `LEAN.md` advises for
+`nlinarith`): with `m = E − Q` of frame components `(α, β)`, `dist(z, Q)² − 1 = |w|² + 2(αY + βX)`; the crescent hugs the tangent
+(`|Y| ≤ |w|²`), so the sign is that of `βX` near `E`, and where `β = 0` the circle is the one tangent from outside (`α = −1`; `α = 1`
+is `Q = P`). No horn set, no `isPreconnected_hornSet`, no case on the colour `d`. About 290 lines with the algebra.
+
+`hF` is read by neither `map_degree_end` nor `sides_end` (`have _ := hF`, the repository's convention).
+
+### 6.3 The re-price (the brief: after the first two leaves)
+
+| child | CC1's price | spent | left |
+|---|---|---|---|
+| `map_degree_lensCurve`, `map_degree_end` | 650 | 135 (`Pushforward` +120, the two proofs 25) | — |
+| `sides_end` | 200 | 290 | — |
+| `exists_collarFit` | 450 | — | about 400: its children are written and elaborate in a scratch file but for one line (§ 7, next stage) |
+| B0 `collarModel` | 150 | — | 150–300 (an explicit arc map with a ring arc; not started) |
+
+### 6.4 The build, the axioms, the statements
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 3 modules rebuilt (`BendCollar`, `BaseDense`, `Proofs`), 4 with
+warnings**, exit 0, 8 min 27 s (driver log `data/fs131/cc/build-stage6b.log`, ending `EXIT=0`; full output
+`data/fs131/cc/build-stage6-full.log`, ending "Build completed successfully (5791 jobs)"). A build before it (`build-stage6.log`, OK, 5
+modules rebuilt with `Pushforward`) showed one warning that was not a `sorry`: `hF` unused in `map_degree_end`; fixed, and
+`tools/fs131_cc_sorry_upstream.py` now fails on any warning other than `sorry` in the collar's four modules (it fires on that build's
+log; plant in its self-test). On this build's log (`data/fs131/cc/sorry-upstream-6.txt`): **PASS — no `sorry` in any of the 28 modules
+`BendCollar` imports, no other warning in the collar's modules, and exactly one `sorry` declaration in `BendCollar`: `exists_collarFit`
+(line 120).**
+
+**Axioms** against this build's oleans (`data/fs131/cc/CCAxioms6.lean` → `.out`; `data/fs131/cc/axioms-6.txt`: **PASS, 33 names, 33
+records**): **30 on the standard three or fewer** — the eleven new supporting theorems; the three leaves `CollarFit.map_degree_lensCurve`,
+`CollarFit.map_degree_end`, `CollarFit.sides_end`; and every clause lemma of the assembly, off `sorryAx` now: `CollarFit.sides_eq`,
+`map_R1`, `map_R2`, `map_inert`, `map_degree_and_repeated`, `map_hasDegree`, `map_hasRepeatedColour`, `map_R3`, `coloursAt_subset`,
+`side_ne_inner_of_mem_lens`, `map_ringArcsWithin`, `map_valid`, `map_Γ`, `map_lens`, `map_agreesOff`, `degree_openArc`. **3 on
+`sorryAx`**: `exists_collarFit` (the one open leaf), `bend_toward_collar` (through it alone), and the planted control. The reader's
+self-test: 5 of 5 fired, partner PASS.
+
+**Statements**: `tools/fs131_cc_stmt.py`: **PASS** (`data/fs131/cc/stmt-stage6.txt`; 85 skeleton declarations, statements
+byte-identical to `2736ab8c`; lane G's files as `5059983d`); self-test 15 of 15 fired, 8 of 8 partners passed (`stmt-selftest6.txt`).
+`scripts/Axioms.lean`: a block headed "FS131-CC2" above the `=== PURCHASED ===` banner, the eleven new theorems.
+
+### 6.5 Theorems this stage proved
+
+Each [kernel], on exactly `[propext, Classical.choice, Quot.sound]` or fewer (`data/fs131/cc/CCAxioms6.out`); names under
+`HadwigerNelson.Plane.ArcMap`.
+- `Plane/ValidMap/Pushforward`: `exists_subset_of_isPreconnected_iUnion`, `IsSectorChart.exists_injective_of_homeo`,
+  **`hasDegree_iff_of_homeo`**, `pushforward_hasDegree`.
+- `Plane/ValidMap/BendCollar`, the skeleton's leaves: **`CollarFit.map_degree_lensCurve`**, **`CollarFit.map_degree_end`**,
+  **`CollarFit.sides_end`**; new: `collarK_frame`, `side_core_pos`, `side_core_neg`, `crescent_Y`, `side_core`,
+  `CollarFit.exists_one_side`, `CollarFit.homeo_mem_collarK`.
+- Kernel theorems now, with no change to their text (their open inputs landed): `CollarFit.sides_eq`, `map_R1`, `map_R2`,
+  `map_inert`, `map_degree_and_repeated`, `map_hasDegree`, `map_hasRepeatedColour` (CC1's), and by the merge `CollarFit.lensProf_le_one`,
+  `isClosed_closedLens`, `isClosed_collarK`, `lens_subset_closedLens`, `map_ringArcsWithin`, `map_R3`, `coloursAt_subset`,
+  `side_ne_inner_of_mem_lens`.
+
+**`hmax`, scored so far** (item 390): none of the three leaves reads it, nor `hlen`; `exists_collarFit`'s statement does not take it.
+
+## Stage 6 — SAVED (FS131-CC2)

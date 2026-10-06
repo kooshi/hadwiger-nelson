@@ -455,6 +455,148 @@ theorem exists_sphere_inter_ball_subset_openArc {p : ℂ} {θ₁ θ₂ θ : ℝ}
   · conv_rhs => rw [hpol]
     rfl
 
+/-! ## Germ counts are carried by a homeomorphism -/
+
+/-- A preconnected set inside a union of pairwise disjoint open sets lies in one of them. -/
+theorem exists_subset_of_isPreconnected_iUnion {ι : Type*} {S : Set ℂ} {T : ι → Set ℂ} (hS : IsPreconnected S)
+    (hne : S.Nonempty) (hT : ∀ j, IsOpen (T j)) (hd : ∀ i j, i ≠ j → Disjoint (T i) (T j)) (hsub : S ⊆ ⋃ j, T j) :
+    ∃ j, S ⊆ T j := by
+  obtain ⟨x, hx⟩ := hne
+  obtain ⟨j, hj⟩ := mem_iUnion.mp (hsub hx)
+  refine ⟨j, hS.subset_left_of_subset_union (hT j) (isOpen_iUnion fun i => isOpen_iUnion fun _ : i ≠ j => hT i) ?_ ?_ ⟨x, hx, hj⟩⟩
+  · rw [disjoint_iUnion_right]
+    intro i
+    rw [disjoint_iUnion_right]
+    intro hij
+    exact hd j i (Ne.symm hij)
+  · intro y hy
+    obtain ⟨i, hi⟩ := mem_iUnion.mp (hsub hy)
+    by_cases hij : i = j
+    · exact Or.inl (hij ▸ hi)
+    · exact Or.inr (mem_iUnion.mpr ⟨i, mem_iUnion.mpr ⟨hij, hi⟩⟩)
+
+/-- **A homeomorphism carrying interior points to interior points sends the sectors of one chart into the sectors of the other,
+injectively**: each small sector at `v` goes into one sector at `h v` (a connected set among disjoint open ones), each smaller sector
+at `h v` comes back into one sector at `v`, and the second assignment undoes the first, a sector reaching its base point. -/
+theorem IsSectorChart.exists_injective_of_homeo {F' : ArcMap k} {n n' : ℕ} {G : BranchGerms n} {G' : BranchGerms n'}
+    {v w : ℂ} {r₀ r₀' : ℝ} (hC : F.IsSectorChart G v r₀) (hC' : F'.IsSectorChart G' w r₀') (hn : 0 < n) (hn' : 0 < n')
+    (h : ℂ ≃ₜ ℂ) (hw : h v = w) (hI : ∀ z, h z ∈ F'.interiorPts ↔ z ∈ F.interiorPts) :
+    ∃ φ : Fin n → Fin n', Function.Injective φ ∧ ∃ r ∈ Ioc 0 r₀, ∀ i, h '' G.sector v r i ⊆ G'.sector w r₀' (φ i) := by
+  have hr₀' : r₀' ∈ Ioc 0 r₀' := ⟨hC'.pos, le_rfl⟩
+  -- a radius at `v` whose ball goes into the chart's ball at `w`
+  obtain ⟨δ, hδ, hδb⟩ := Metric.continuousAt_iff.mp h.continuous.continuousAt r₀' hC'.pos
+  set r := min δ r₀ with hrdef
+  have hr : r ∈ Ioc 0 r₀ := ⟨lt_min hδ hC.pos, min_le_right _ _⟩
+  -- a radius at `w` whose ball comes back into the ball at `v`
+  obtain ⟨δ', hδ', hδb'⟩ := Metric.continuousAt_iff.mp h.symm.continuous.continuousAt r hr.1
+  set r' := min δ' r₀' with hr'def
+  have hr' : r' ∈ Ioc 0 r₀' := ⟨lt_min hδ' hC'.pos, min_le_right _ _⟩
+  have hsv : h.symm w = v := by rw [← hw, h.symm_apply_apply]
+  have hfwd : ∀ i, ∃ j, h '' G.sector v r i ⊆ G'.sector w r₀' j := by
+    intro i
+    refine exists_subset_of_isPreconnected_iUnion ((hC.isPreconnected r hr i).image _ h.continuous.continuousOn)
+      ((hC.sector_nonempty hr i).image _) (hC'.isOpen r₀' hr₀') (hC'.disjoint r₀' hr₀') ?_
+    rintro _ ⟨x, hx, rfl⟩
+    rw [← hC'.cover r₀' hr₀' hn']
+    refine ⟨?_, (hI x).mpr (hC.sector_subset_interiorPts hn hr i hx)⟩
+    rw [mem_ball, ← hw]
+    exact hδb (lt_of_lt_of_le (mem_ball.mp (BranchGerms.sector_subset_ball i hx)) (min_le_left _ _))
+  have hbwd : ∀ j, ∃ i, h.symm '' G'.sector w r' j ⊆ G.sector v r i := by
+    intro j
+    refine exists_subset_of_isPreconnected_iUnion ((hC'.isPreconnected r' hr' j).image _ h.symm.continuous.continuousOn)
+      ((hC'.sector_nonempty hr' j).image _) (hC.isOpen r hr) (hC.disjoint r hr) ?_
+    rintro _ ⟨y, hy, rfl⟩
+    rw [← hC.cover r hr hn]
+    refine ⟨?_, ?_⟩
+    · rw [mem_ball, ← hsv]
+      exact hδb' (lt_of_lt_of_le (mem_ball.mp (BranchGerms.sector_subset_ball j hy)) (min_le_left _ _))
+    · have := hI (h.symm y)
+      rw [h.apply_symm_apply] at this
+      exact this.mp (hC'.sector_subset_interiorPts hn' hr' j hy)
+  choose φ hφ using hfwd
+  choose ψ hψ using hbwd
+  have hleft : ∀ i, ψ (φ i) = i := by
+    intro i
+    -- a point of `h(S_i)` in the small ball at `w`
+    have hcl : w ∈ closure (h '' G.sector v r i) := by
+      rw [← h.image_closure, ← hw]
+      exact mem_image_of_mem _ (hC.mem_closure_sector hr i)
+    obtain ⟨y, hyS, hyb⟩ := Metric.mem_closure_iff.mp hcl r' hr'.1
+    obtain ⟨x, hx, rfl⟩ := hyS
+    have hyI : h x ∈ F'.interiorPts := (hI x).mpr (hC.sector_subset_interiorPts hn hr i hx)
+    have hycov : h x ∈ ball w r' ∩ F'.interiorPts := ⟨by rw [mem_ball, dist_comm]; exact hyb, hyI⟩
+    rw [hC'.cover r' hr' hn'] at hycov
+    obtain ⟨j, hj⟩ := mem_iUnion.mp hycov
+    have hjφ : j = φ i := by
+      by_contra hne
+      exact disjoint_left.mp (hC'.disjoint r₀' hr₀' j (φ i) hne) (BranchGerms.sector_mono hr'.2 j hj)
+        (hφ i (mem_image_of_mem _ hx))
+    subst hjφ
+    have hx' : x ∈ G.sector v r (ψ (φ i)) := by
+      have := hψ (φ i) (mem_image_of_mem _ hj)
+      rwa [h.symm_apply_apply] at this
+    by_contra hne
+    exact disjoint_left.mp (hC.disjoint r hr _ _ hne) hx' hx
+  exact ⟨φ, Function.LeftInverse.injective hleft, r, hr, hφ⟩
+
+/-- **Degrees and repeated colours are carried by a homeomorphism** that carries interior points to interior points with their
+colours: at a point of the domain the two maps have sector charts (`localSectors`), whose sectors correspond one to one
+(`IsSectorChart.exists_injective_of_homeo`, both ways), colour by colour. Sector counts read balls, which a homeomorphism does not
+carry; the number of germs it does. -/
+theorem hasDegree_iff_of_homeo {F' : ArcMap k} (h : ℂ ≃ₜ ℂ) {v : ℂ} (hv : v ∈ F.dom) (hv' : h v ∈ F'.dom)
+    (hI : ∀ z, h z ∈ F'.interiorPts ↔ z ∈ F.interiorPts) (hc : ∀ z ∈ F.interiorPts, F'.col (h z) = F.col z) :
+    (∀ m, F'.HasDegree (h v) m ↔ F.HasDegree v m) ∧ (F'.HasRepeatedColour (h v) ↔ F.HasRepeatedColour v) := by
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hv
+  obtain ⟨r₀', n', G', hC'⟩ := localSectors F' hv'
+  have hΓ : ∀ {E : ArcMap k} {x : ℂ}, x ∈ E.dom → (x ∈ E.Γ ↔ x ∉ E.interiorPts) := fun {E x} hx =>
+    ⟨fun hΓ hi => hi.2 hΓ.2, fun hi => ⟨hx, by_contra fun hU => hi ⟨hx, hU⟩⟩⟩
+  have hnn : 0 < n ↔ 0 < n' := by
+    rw [← hC.mem_Γ, ← hC'.mem_Γ, hΓ hv, hΓ hv', hI]
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · have hn' : n' = 0 := by
+      by_contra h0
+      exact absurd (hnn.mpr (Nat.pos_of_ne_zero h0)) (by omega)
+    refine ⟨fun m => ?_, iff_of_false (hC'.not_hasRepeatedColour_of_zero hn') (hC.not_hasRepeatedColour_of_zero hn)⟩
+    rw [hC'.hasDegree.iff_eq, hC.hasDegree.iff_eq, hn, hn']
+  · have hn' : 0 < n' := hnn.mp hn
+    obtain ⟨φ, hφ, r, hr, hsub⟩ := hC.exists_injective_of_homeo hC' hn hn' h rfl hI
+    obtain ⟨φ', hφ', -⟩ := hC'.exists_injective_of_homeo hC hn' hn h.symm (h.symm_apply_apply v) (fun z => by
+      have := hI (h.symm z)
+      rw [h.apply_symm_apply] at this
+      exact this.symm)
+    have h1 : n ≤ n' := by simpa using Fintype.card_le_of_injective φ hφ
+    have h2 : n' ≤ n := by simpa using Fintype.card_le_of_injective φ' hφ'
+    obtain rfl : n = n' := le_antisymm h1 h2
+    have hbij : Function.Bijective φ := Finite.injective_iff_bijective.mp hφ
+    choose col hcol using hC.exists_col
+    choose col' hcol' using hC'.exists_col
+    have hcolφ : ∀ i, col' (φ i) = col i := by
+      intro i
+      obtain ⟨x, hx⟩ := hC.sector_nonempty hr i
+      have h1 : F.col x = col i := (hcol i r hr hx).2
+      have h2 : F'.col (h x) = col' (φ i) := (hcol' (φ i) r₀' ⟨hC'.pos, le_rfl⟩ (hsub i (mem_image_of_mem _ hx))).2
+      rw [← h2, hc x (hC.sector_subset_interiorPts hn hr i hx), h1]
+    refine ⟨fun m => by rw [hC'.hasDegree.iff_eq, hC.hasDegree.iff_eq], ?_⟩
+    rw [hC'.hasRepeatedColour_iff hn' hcol', hC.hasRepeatedColour_iff hn hcol]
+    refine exists_congr fun d => ?_
+    have : {i | col i = d} = φ ⁻¹' {j | col' j = d} := by
+      ext i
+      simp only [mem_setOf_eq, mem_preimage, hcolφ]
+    rw [this, Set.encard_preimage_of_bijective hbij]
+
+/-- **A pushforward carries degrees and repeated colours** at every point of the domain (`hasDegree_iff_of_homeo` with
+`pushforward_mem_interiorPts_iff`, `pushforward_col_apply`). -/
+theorem pushforward_hasDegree {h : ℂ ≃ₜ ℂ} {hdom : h '' F.dom = F.dom} {A' : Set Arc} {hnd : ∀ a ∈ A', a.Nondegenerate}
+    {hlf : ∀ x ∈ F.dom, ∃ t ∈ 𝓝 x, {a | a ∈ A' ∧ (a.carrier ∩ t).Nonempty}.Finite}
+    {hΓ : F.dom ∩ ⋃ a ∈ A', a.carrier = h '' F.Γ} {z : ℂ} (hz : z ∈ F.dom) :
+    (∀ m, (F.pushforward h hdom A' hnd hlf hΓ).HasDegree (h z) m ↔ F.HasDegree z m) ∧
+      ((F.pushforward h hdom A' hnd hlf hΓ).HasRepeatedColour (h z) ↔ F.HasRepeatedColour z) := by
+  have hz' : h z ∈ (F.pushforward h hdom A' hnd hlf hΓ).dom := by
+    show h z ∈ F.dom
+    rw [← hdom]
+    exact mem_image_of_mem h hz
+  exact hasDegree_iff_of_homeo h hz hz' (fun x => pushforward_mem_interiorPts_iff x) (fun x _ => pushforward_col_apply x)
+
 end ArcMap
 
 end HadwigerNelson.Plane

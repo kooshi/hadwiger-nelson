@@ -10,7 +10,8 @@ its own module and of the modules that one imports. So if no module `BendCollar`
 `BendCollar` declaration enters through `BendCollar`'s own `sorry` declarations, which are listed by line with their names.
 Exit 0 iff no upstream module has a `sorry` warning, the log covers every upstream module's build status (it ends with the build's
 success line), and, with `--expect N`, `BendCollar` has exactly N `sorry` declarations. `--self-test` plants a warning in an upstream
-module (must fail, naming it), plants one in a module that is not upstream (must pass), and truncates the log's last line (must fail).
+module (must fail, naming it), plants one in a module that is not upstream (must pass), truncates the log's last line (must fail), and
+plants a linter warning in a collar module (must fail). A warning other than `sorry` in the collar's four modules fails the check.
 """
 import pathlib
 import re
@@ -19,6 +20,7 @@ import sys
 TREE = pathlib.Path("/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5k")
 TARGET = "Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean"
 WARN = re.compile(r"warning: (Proofs/\S+\.lean):(\d+):\d+: declaration uses `sorry`")
+OTHER = re.compile(r"warning: (Proofs/HadwigerNelson/Plane/ValidMap/(?:RadialPush|Pushforward|CollarMap|BendCollar)\.lean:\d+:\d+): (.*)")
 
 
 def upstream():
@@ -49,6 +51,10 @@ def check(log_text, expect):
     for f, l in bad:
         errs.append(f"upstream `sorry`: {f}:{l}")
     mine = [(f, l) for f, l in warns if f == TARGET]
+    # linters silent: no warning other than `sorry` in the collar's four modules
+    for m in sorted(set(OTHER.findall(log_text))):
+        if "declaration uses `sorry`" not in m[1]:
+            errs.append(f"a warning other than `sorry` in a collar module: {m[0]}: {m[1][:80]}")
     if expect is not None and len(mine) != expect:
         errs.append(f"BendCollar has {len(mine)} `sorry` declarations, expected {expect}")
     return errs, up, mine, warns
@@ -69,12 +75,15 @@ def main():
         e2 = check(plant_down, expect)[0]
         e3 = [x for x in check(plant_cut, expect)[0] if "success line" in x]
         e0 = check(log_text, expect)[0]
+        plant_lint = log_text + "\nwarning: Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean:9:9: Variable name `h` is not explicitly referenced.\n"
+        e4 = [x for x in check(plant_lint, expect)[0] if "other than `sorry`" in x]
+        print(f"FIRED (a linter warning in a collar module): {e4[0]}" if e4 else "DID NOT FIRE (a linter warning)")
         print(f"FIRED (an upstream warning): {e1[0]}" if e1 else "DID NOT FIRE (an upstream warning)")
         print("PARTNER PASS (a warning that is not upstream)" if not e2 else f"PARTNER FAILED: {e2}")
         print(f"FIRED (a cut log): {e3[0]}" if e3 else "DID NOT FIRE (a cut log)")
         print("PARTNER PASS (the unplanted log)" if not e0 else f"PARTNER FAILED: {e0}")
-        ok = bool(e1) and not e2 and bool(e3) and not e0
-        print(f"self-test: {'2 of 2 plants fired, 2 of 2 partners passed' if ok else 'FAILED'}")
+        ok = bool(e1) and not e2 and bool(e3) and not e0 and bool(e4)
+        print(f"self-test: {'3 of 3 plants fired, 2 of 2 partners passed' if ok else 'FAILED'}")
         return 0 if ok else 1
     errs, up, mine, warns = check(log_text, expect)
     for e in errs:

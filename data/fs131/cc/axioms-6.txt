@@ -1,0 +1,5 @@
+on sorryAx: HadwigerNelson.Plane.ArcMap.exists_collarFit
+on sorryAx: HadwigerNelson.Plane.ArcMap.bend_toward_collar
+on sorryAx: ccControlPlanted
+33 names, 33 records: 30 expected standard, 3 expected on sorryAx
+PASS
