@@ -70,8 +70,8 @@ The gate's recorded state on `main`, which your counts are reconciled against:
    procedure (`plans/FS131-IO-implementation.md`, FS131-OL1's stages). Build the branch once as given. Open your record. Commit and push.
 2. **The merge**: `git merge origin/fs131-w5z` (at `{ZT}`; it holds `fs131-w5a`). **Trial it first, on this tree's tip as it is now**
    (`git merge-tree`), and name the conflicts before you make it; foreseen: `scripts/Axioms.lean` and `ARCHITECTURE.md`, adjacency, keep-both —
-   and wherever FS131-RP1 edited a file the bend's jobs also touched. Check it with FS131-M7's tools (`tools/fs131_m7_merge_check.py`,
-   `tools/fs131_m7_away_clause.py`). Commit it as a merge (the index holding the merge and nothing else, checked). Build. **The receipt that the
+   and wherever FS131-RP1 edited a file the bend's jobs also touched. Check it with FS131-M7's tools (`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c/tools/fs131_m7_merge_check.py`,
+   `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c/tools/fs131_m7_away_clause.py`). Commit it as a merge (the index holding the merge and nothing else, checked). Build. **The receipt that the
    wave is whole**: zero `sorry` under `Proofs/`; `LocalStep.of_cutArcs`, `CollarFit.map_localStep`, `bend_away_part`, `exists_arcStep`,
    `exists_terminalMap`, `exists_red`, `exists_terminal` on exactly the standard three, with a control that fires.
 3. **The tidies that waited for this merge** (rulings 457 (b), 465 (a), (b); FS131-RP1's closing list): the unread `hF` out of
