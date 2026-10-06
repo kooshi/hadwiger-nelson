@@ -6462,6 +6462,24 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.eventually_dist_polarPt_lt_one
 #print axioms HadwigerNelson.Plane.AeColouring.eq_or_eq_of_mem_essClosure
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.eq_add_or_eq_sub_of_dist_eq_one
+#print axioms HadwigerNelson.Plane.false_of_inside_of_outside
+#print axioms HadwigerNelson.Plane.in_in_or_out_out
+#print axioms HadwigerNelson.Plane.add_ofReal_one_mul
+#print axioms HadwigerNelson.Plane.add_ofReal_neg_one_mul
+#print axioms HadwigerNelson.Plane.dist_sq_polarPt_add_sign
+#print axioms HadwigerNelson.Plane.two_mul_sin_le_of_one_le_dist
+#print axioms HadwigerNelson.Plane.le_two_mul_sin_of_dist_le_one
+#print axioms HadwigerNelson.Plane.eventually_sin_add_mul_gt
+#print axioms HadwigerNelson.Plane.horn_of_sin_constraints
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.dir_mono
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.dir_le_dir_add_two_pi
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.nextDir_le_dir
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.nextDir_le_dir_add_two_pi
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_pred_branch
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_succ_branch
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side_next
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side_dir
 
 #eval IO.println "=== PURCHASED ==="
 

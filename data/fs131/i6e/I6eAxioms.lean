@@ -47,6 +47,25 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.eventually_dist_polarPt_lt_one
 #print axioms HadwigerNelson.Plane.AeColouring.eq_or_eq_of_mem_essClosure
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.eq_add_or_eq_sub_of_dist_eq_one
+#eval IO.println "=== children of sector_alone that read no open leaf (expected: the standard three) ==="
+#print axioms HadwigerNelson.Plane.false_of_inside_of_outside
+#print axioms HadwigerNelson.Plane.in_in_or_out_out
+#print axioms HadwigerNelson.Plane.add_ofReal_one_mul
+#print axioms HadwigerNelson.Plane.add_ofReal_neg_one_mul
+#print axioms HadwigerNelson.Plane.dist_sq_polarPt_add_sign
+#print axioms HadwigerNelson.Plane.two_mul_sin_le_of_one_le_dist
+#print axioms HadwigerNelson.Plane.le_two_mul_sin_of_dist_le_one
+#print axioms HadwigerNelson.Plane.eventually_sin_add_mul_gt
+#print axioms HadwigerNelson.Plane.horn_of_sin_constraints
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.dir_mono
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.dir_le_dir_add_two_pi
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.nextDir_le_dir
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.nextDir_le_dir_add_two_pi
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_pred_branch
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_succ_branch
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side_next
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side_dir
 #eval IO.println "=== WIRED over open leaves of other lines (expected: sorryAx until fs131-w6f and Pinch land) ==="
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_unitCurve_branch
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_twoColourNhd_branch
@@ -54,3 +73,11 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.contacts_of_no_common
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.branch_outside_discs
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.branch_contacts
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_contact_nextDir
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_contact_dir
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_constraints
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.horn_false
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.false_of_horn_next
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.false_of_horn_dir
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_alone
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_unique

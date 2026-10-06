@@ -156,3 +156,53 @@ branch point below `R` has a common contact of the two colours*, or none has).
 Axioms (`data/fs131/i6e/I6eAxioms.lean`, output `logs/axioms-2.out`): control `sorryAx`; 39 records on the standard three; 6 wired.
 Statement check against `d62406a2`: 17 statements verbatim, the seven other leaves still `sorry`, seven files byte-identical, 0 failures
 (`logs/statements-2.out`). `scripts/Axioms.lean`: a block "FS131-I6E" with the 39 clean records.
+
+## Stage 5 — SAVED (FS131-I6E): `sector_alone` (wired) — FS121-V2-SECTOR; `sector_unique` with it
+
+**The route** (`plans/FS121-V2-verification.md` §§ 2.1–2.3, with three changes, each said).
+- **Lemma H** is `in_in_or_out_out` — for one measurable set with null unit pairs and two preconnected pieces of its density set with
+  `z` in the closure of each: both in the closed unit disc about a point `y` of the support, or both outside the open one. `Pinch`'s
+  `half_dichotomy` gives each piece one of the two; the mixed case is V2's own step (`false_of_inside_of_outside`: a density point `q`
+  near `y` **off the unit circle about `z`** — the sphere is null and `A` has positive measure near `y` — where `hullset` puts one piece
+  strictly inside and the other strictly outside, so `|q − z| = 1`). No colouring, no fan.
+- **The side of a sector** (`Fan.sector_side`; no saturation, the contact is a hypothesis): region `i` holds the initial part of a ray
+  `θ₀` (the third cell lemma) on the side `τ` of a direction `δ`; with `y = z + σ i e(δ)` in the support of its colour, every piece of
+  that colour at `z` is inside the closed disc about `y` if `σ = τ` and outside the open one if `σ = −τ`. At the two edges
+  (`sector_side_next`, `sector_side_dir`) with the contacts of Lemma T (ii) — `Fan.exists_contact_nextDir`, `Fan.exists_contact_dir`,
+  from `branch_contacts` at the branch after `i` and at branch `i` — this is `Fan.sector_constraints`: **every piece of a sector's
+  colour at `z` misses the open unit disc about `z + i e(nextDir i)` and the one about `z − i e(dir i)`** (whichever sign the contact
+  has: a piece inside the closed disc about `z − i e(β)` misses the open one about `z + i e(β)`). In polar form:
+  `2 sin(θ − β) ≤ t` and `−t ≤ 2 sin(θ − α)` at every point `z + t e(θ)` of the piece.
+- **The angular lemma** (`horn_of_sin_constraints`, real variables only): at the mid-direction `m` of region `i'` the two inequalities
+  pass to the limit `t → 0` along the points `z + t e((φ_{i'}(t) + φ_{i'+1}(t))/2)` of the region — `sin(m − β) ≤ 0`, `sin(m − α) ≥ 0`
+  — and with the cyclic order (`Fan.nextDir_le_dir`, `Fan.nextDir_le_dir_add_two_pi`: `β ≤ dir i' ≤ nextDir i' ≤ α + 2π`, or the same a
+  turn back) they force `dir i' = nextDir i'` and that direction equal to `β` or `α` up to a turn. **Changed from V2 § 2.2**: the case
+  split on `θ₁ > π` is not made and `θ₁ ≤ π` is never derived — the type of the sector at each edge is read from one ray near that edge,
+  and `β > α` alone closes the positive-angle case; and one mid-direction serves for the positive-angle region and the zero-angle one
+  alike (V2 reads `D(W₂)` for the first and the tangent direction for the second).
+- **The zero-angle region** (`Fan.false_of_horn_next`, `Fan.false_of_horn_dir`, over `Fan.horn_false`): tangent to the sector's
+  counter-clockwise edge, its clockwise branch `i'` gives by `branch_contacts` a contact of the colour at `z − i e(β)` (tangent type, or
+  a unit arc with the colour outside) or at `z + i e(β)` with the branch on that unit circle. In the first the sector puts the region
+  inside the closed disc about `z − i e(β)` (`sector_side_next`, `σ = −1`), but the branch stays outside the open one
+  (`branch_outside_discs`) and a point of the region just counter-clockwise of it is strictly outside the closed one; in the second the
+  sector puts the region outside the open disc about `z + i e(β)`, but a point just counter-clockwise of a branch on that circle is
+  strictly inside. The clockwise edge is the mirror image with the branch after `i'`. **Changed from V2 § 2.3**: its three cases are
+  two — "tangent type" and "a unit arc of kind both with `a` outside" are one case, since `branch_outside_discs` holds for every branch
+  — and the comparison "`dφ/dx ≤ 1/cos φ` with the circle's equality" is replaced by `branch_outside_discs` at one point and the
+  monotonicity of the sine near `0` (`eventually_sin_add_mul_gt`); "an arc does not separate `a` from `a`", "at least one region of
+  another colour between" are not read.
+
+**Read aloud against the entry** (`plans/FS121-V2-verification.md` § 2.3, FS121-V2-SECTOR: "At a point `z` of Σ, a colour `a` that
+occupies a sector `W₁` of positive angle occupies no other region at `z`, of positive or of zero angle"): `hi : F.dir i < F.nextDir i` is
+"region `i` is a sector of positive angle"; `hcol : F.col i = F.col i'` is "the colour of region `i` is the colour of region `i'`", any
+region; the conclusion `i = i'`. Wider than the entry, as the planner's docstring says: `z ∈ Σ` is not a hypothesis, saturation is read
+in the fan's punctured disc only.
+
+**The model**: five `example`s after `sector_unique` run the five lemmas on `sq9Fan` (`sqVertex_mem_singularSet`,
+`sq9_tight_saturated`, `sq9Fan_dir_lt_nextDir`); the four leaves that did not name their model do so in their docstrings now.
+
+**Checks**: build **OK — 466 of 466 batches, 2 modules rebuilt, exit 0** (`logs/build-3-sector.log`); 15 `declaration uses sorry` left on
+the branch — `FanBridge` 7 (the other implementer's, proved on `fs131-w6f`), `Pinch` 7, `MapColouring` 1 — **none mine**. Axioms
+(`tools/fs131_i6e_axioms.py` on `logs/axioms-3.out`; `--plant` exits 1): control `sorryAx`; 57 records on the standard three; 14 wired.
+Statements: 17 verbatim, 0 failures. Names: 65 new, 0 collisions (`logs/names-5.out`) — after three renames the check asked for
+(`dir_mono`, `exists_pred_branch`, `exists_succ_branch`: their first names are used inside other namespaces of `ValidMap`).
