@@ -7314,3 +7314,18 @@ reason by the close.*
      `cake_lpr` in `RUNNING.md`'s toolchain row is owed (it reached a 4 GiB cap on a 30 MB formula): filed after
      the landing in flight, since that file is not among the exempt paths. (g) **Slot → FS131-I8B** (wave 8's
      join job, on `fs131-w8b` at `8d979793`), launched 2026-10-06. In flight: 3 (LT5, I6K, I8B).
+581. **Kooshi, 2026-10-06 (verbatim in `data/external/EXT-HN2-request.md`): the outside repository of items 108–122 has been updated and the issue he posted there — this project's audit — is no longer visible; "Please have a reviewer look into it in a special slot."** (source: his message of 2026-10-06, about 21:40 UTC).
+     **Staffing, his**: a special-purpose slot for this job alone, a fourth beside the three; it closes at the job's
+     hand-back and is not refilled. **Brief**: `data/external/briefs/EXT-HN2-outside-claim-updated.md` (generator
+     `data/fs131/briefs/scripts/mk-ext-hn2.py`; gate exit 0, 9 quotations) — `debruijn`, as the first audit was: the
+     pull pinned and anonymous (no stored login), every file read before anything runs, what changed since
+     `b3366b5` and what the headline states now, the first audit's three points each put to the new files by Lean
+     against the new definitions, a sandboxed build, the axioms, the issue's visibility recorded once as a fact,
+     copies kept under `data/external/hn2/`, and a drafted account for him to use where he chooses. **Rulings, mine.**
+     (a) **It reads and posts nothing** — no comment, fork or message; what is done with its account is his.
+     Confidence: high. (b) **It is told not to lean**: the update may have answered the audit, and what it fixed is
+     reported as plainly as what it did not; nothing in its record characterizes the author. (c) If the update
+     proves anything about the plane, that is an early message, and item 489's conditional is then read against it
+     (a claimed proof that decides the problem or moves a bound). (d) The first audit's Mathlib harness is no longer
+     on this machine (`~/.cache/ext-hn1` absent — checked): the job rebuilds one. Launched 2026-10-06. In flight: 3
+     (LT5, I6K, I8B) + the special-purpose slot (EXT-HN2).
