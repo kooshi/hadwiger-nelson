@@ -5736,6 +5736,30 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.open_inType_iff
 #print axioms HadwigerNelson.Plane.ArcMap.Near.open_outType_iff
 
+/-! ## FS131-IR1 — the procedure's run (`Plane/ValidMap/Procedure`): `exists_terminalSeq` over the two steps; E6-CONE (`FlankUA`) -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.horn_bounds_of_interior_empty
+#print axioms HadwigerNelson.Plane.ArcMap.eventually_ball_subset_compl
+#print axioms HadwigerNelson.Plane.ArcMap.hasDegree_iff_of_agreesOff
+#print axioms HadwigerNelson.Plane.ArcMap.hasHornCount_iff_of_agreesOff
+#print axioms HadwigerNelson.Plane.ArcMap.isSite_iff_of_agreesOff
+#print axioms HadwigerNelson.Plane.ArcMap.badCount_eq_of_agreesOff
+#print axioms HadwigerNelson.Plane.ArcMap.exists_hasHornCount
+#print axioms HadwigerNelson.Plane.ArcMap.pot_eq
+#print axioms HadwigerNelson.Plane.ArcMap.finite_strict_of_antitone_off
+#print axioms HadwigerNelson.Plane.ArcMap.ProcInv.mem_treatPts_of_todo
+#print axioms HadwigerNelson.Plane.ArcMap.ProcStep.refl
+#print axioms HadwigerNelson.Plane.ArcMap.isCompact_ringArc
+#print axioms HadwigerNelson.Plane.ArcMap.dist_of_mem_cthickening_ringArc
+#print axioms HadwigerNelson.Plane.ArcMap.exists_procStep
+#print axioms HadwigerNelson.Plane.ArcMap.ProcRun.finite_vert
+#print axioms HadwigerNelson.Plane.ArcMap.ProcRun.finite_colChange
+#print axioms HadwigerNelson.Plane.ArcMap.ProcRun.finite_arc
+#print axioms HadwigerNelson.Plane.ArcMap.ProcRun.finite_acted
+#print axioms HadwigerNelson.Plane.ArcMap.ProcRun.locallyFinite
+#print axioms HadwigerNelson.Plane.ArcMap.ProcRun.eventually_not_todo
+#print axioms HadwigerNelson.Plane.const_treatPts
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

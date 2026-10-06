@@ -651,3 +651,73 @@ further change for their consumer**. Two things the consumer reads that the stat
 (sectors, horns, sites and colours are read in small balls; the bad count in `B̄(·, 3)`).
 
 ## Stage 14 — SAVED (FS131-IR1)
+
+## Stage 15 — SAVED (FS131-IR1): `exists_terminalSeq` proved over the two steps; E6-CONE (`horn_bounds_of_interior_empty`) proved; the re-pricing
+
+### 15.1 `exists_terminalSeq` (`Procedure`; statement unchanged) — no `sorry` of its own
+
+The procedure as a run, in `Procedure`'s new section "The run" (about 520 lines):
+- **Locality off a step's closed support, at small radii** — `eventually_ball_subset_compl`, `hasDegree_iff_of_agreesOff`,
+  `hasHornCount_iff_of_agreesOff`, `isSite_iff_of_agreesOff` (sectors are read in small balls; IL1's locality lemmas ask for `B̄(·, 3)` inside the
+  agreement set, too coarse for a point just outside a small disc), and `badCount_eq_of_agreesOff` (ring arcs, (Q), (R2) in `B̄(·, 3)`).
+- **The potential** — `exists_hasHornCount` (every point of the domain has a horn count: the chart's number of cusps, `0` at a chart with no germ);
+  `pot` (degree plus horn count; a definition, `0` where either is undefined) with `pot_eq`.
+- **One counting lemma** — `finite_strict_of_antitone_off`: a sequence of naturals that rises only at finitely many stages falls at finitely many.
+- **The invariant** `ProcInv F G` (clean, valid, of the plane, a modification of `F`, sites among `F`'s treatment points;
+  `ProcInv.mem_treatPts_of_todo`: something to do only at `F`'s treatment points — a move needs a site, a bad arc a centre, and a modification
+  creates no centre) and **one step** `ProcStep T f G G' U a` (`a = none`: idle; `some (t, true)`: a vertex step at `t`; `some (t, false)`: an arc
+  step), nine clauses; `ProcStep.refl` (the idle step); **`exists_procStep`**: the step exists — at the least-index treatment point with something
+  to do, `exists_vertexStep` with `δ ≤ 1/2` below the distance to every other treatment point, else `exists_arcStep` at a bad maximal arc with
+  `δ = 1/2` (its sides are not both at the centre: a both-kind arc at a centre of four colours is (Q), and of at most three makes MERGE available,
+  `mergeAvailable_of_bothKind`).
+- **A run** `ProcRun F f` (`ProcRun.const`: the idle run, its inhabitant) and KL1's three children under other names: **`acted_finitely`** is
+  `ProcRun.finite_acted` (`finite_vert`: the potential never rises at a treatment point and falls at each vertex step at it; `finite_colChange`: its
+  colours only shrink; `finite_arc`: its bad count falls at each arc step at it and rises only where it loses a colour or a vertex step acts within
+  `4` of it — finitely many stages); **`supports_locallyFinite`** is `ProcRun.locallyFinite` (a support meeting `B(x, 1)` belongs to a step at a
+  treatment point within `3`); **`fair`** is `ProcRun.eventually_not_todo` (past the stages acting at the treatment points of index at most `v`'s,
+  a `v` with something to do would be the least-index choice).
+- `exists_terminalSeq`: an injective index on `treatPts F` (countable: finite in each `B̄(0, n)`), the run by `choose!` and iteration, the
+  `LocalSeq`, and `badCount_eq_zero_iff` at the end.
+
+**What the kernel settled about the two restated statements**: they suffice as drafted. No clause was added for the consumer, none is unused: of
+the vertex step, `LocalStep`, the potential drop, the colours at `v`, "no other site in the disc", `ρ < δ`, cleanness, validity, modification are
+each read; of the arc step, every clause is read, the horn clause in `pot_le`. The distance in `acted_finitely` is `4` where KL1 wrote `3` (a vertex
+step's disc of radius below `1/2` must miss `B̄(Q, 3)`).
+
+### 15.2 E6-CONE — `horn_bounds_of_interior_empty` (`FlankUA`, after `horn_bounds_of_noMerge`)
+
+E6's § 4.5 (1) statement as drafted; `horn_bounds_of_noMerge`'s proof from its line `have hD` on. An `example` beside it reads
+`horn_bounds_of_noMerge`'s statement off it (so that lemma's inhabitant, `bowtie` at `0`, satisfies the new hypotheses).
+
+### 15.3 The build, the receipt, the checks
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 8 modules rebuilt, 5 with warnings, all 8 warnings `declaration uses
+  'sorry'`** (`Procedure` now at `exists_vertexStep` and `exists_arcStep` only; `Terminal` at `stuckRun_ne_univ`), 9 min 43 s, exit 0
+  (`build/gate/build/20261006T031008Z-441105.log`; driver log `data/fs131/ir/build-stage15.log`).
+- **Axioms** against that build (`data/fs131/ir/IRAxioms15.lean` → `.out`; `tools/fs131_ir_axsum.py` with the expectation
+  `exists_vertexStep, exists_arcStep, exists_procStep, exists_terminalSeq, exists_terminalMap, exists_red, exists_terminal, stuckRun_ne_univ`;
+  `IRAxioms15-summary.txt`, PASS): **30 records — 22 on the standard three, 8 through `sorryAx`, exactly the eight expected, 0 other.** Standard:
+  `horn_bounds_of_interior_empty`, the five locality lemmas, `exists_hasHornCount`, `pot_eq`, `finite_strict_of_antitone_off`,
+  `ProcInv.mem_treatPts_of_todo`, `ProcStep.refl`, `isCompact_ringArc`, `dist_of_mem_cthickening_ringArc`, the six `ProcRun` theorems,
+  `const_treatPts`, and (re-read) `exists_open`, `horn_bounds_of_noMerge`. **`exists_terminalSeq` is on `sorryAx` through `exists_procStep`
+  alone, which cites the two steps**: every `ProcRun` theorem is standard, and the build's warnings name exactly two `sorry` declarations in
+  `Procedure`. `exists_terminalMap`, `exists_red`, `exists_terminal` follow it (`exists_terminal` also reads `stuckRun_ne_univ`).
+- **Statements**: `tools/fs131_il_stmt_check.py 87e95385` (IL2's, run): exactly two changed, `exists_vertexStep` and `exists_arcStep`, the ruled
+  restatements (`stmt-check-15.txt`, exit 1 as it must be); against Stage 14's commit `9489c44b`: PASS, additions only (`stmt-check-15b.txt`).
+  `FlankUA`'s diff is 27 added lines. `tools/check_architecture.py` PASS (`arch-stage15.txt`; `Procedure`'s row describes the run).
+- **Receipt**: a block "FS131-IR1" of 21 records in `scripts/Axioms.lean`, above `=== PURCHASED ===`.
+- **Spec examples** (`Procedure`'s Spec section): `Todo`/`MoveAt` (nothing to do on the one-colour plane, by the now-named `const_treatPts`; two
+  adversaries: a bad arc alone, an available MERGE alone), `pot` (it is the degree plus the horn count at every point of the domain, the degree at
+  least `1`), `ProcInv` (a clean valid plane map over itself), `ProcStep` (the idle step, with its acted point not a vertex step); `ProcRun.const` is
+  `ProcRun`'s named inhabitant.
+
+### 15.4 Re-pricing after the first two leaves (the brief's checkpoint)
+
+`horn_bounds_of_interior_empty`: minutes, as E6 said. `exists_terminalSeq`: KL1 priced H, "about 400 lines, one session"; it took about 520 lines
+in one pass with three rounds of local fixes — a quarter of a session, and no geometry. What is left re-prices as follows. `exists_vertexStep`
+stays **H, two sessions**: none of the four moves' statements exports `LocalStep`, a radius below `δ` (OPEN's apart) or the points strictly inside
+the disc, so each construction is re-opened; `LocalStep` from `surgery` is one generic lemma and the radius a line each, and the long part is the
+cleaned map's sectors at `v` (degree and horn count) and at every other point of the closed disc (no site). `exists_arcStep` stays **H**, with the
+N2-TAN bend as a child. `stuckRun_ne_univ` stays **M–H, one session** (M6's route), untouched.
+
+## Stage 15 — SAVED (FS131-IR1)

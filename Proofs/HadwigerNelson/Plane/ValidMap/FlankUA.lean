@@ -730,6 +730,33 @@ theorem horn_bounds_of_noMerge (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hM 
   obtain ⟨h1, h2⟩ := hornSet_curv_eq hH.1 hκ12 hr0' hSeq
   exact ⟨h1 ▸ hκ1, h2 ▸ hκ2⟩
 
+/-- **FS131-E6-CONE**: a horn of a colour whose allowed cone has empty interior has bounds in `[−1, 1]` (`woodallCone`: every sector of
+the colour is then a horn set along one axis with such bounds, and a horn's bounds are determined by its set, `hornSet_curv_eq`). So a
+horn with a bound outside `[−1, 1]` — every horn shaveable only along a unit circle strictly inside it — has `int D_c(v) ≠ ∅`.
+`horn_bounds_of_noMerge` is the case where the empty interior comes from two sectors and no MERGE (this is its proof with the cone
+hypothesis made direct; FS131-E6 § 4.1); that lemma's inhabitant, `bowtie` at `0`, satisfies these hypotheses too, by the example below. -/
+theorem horn_bounds_of_interior_empty (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {α κ₁ κ₂ : ℝ}
+    (hH : F.IsHorn v α κ₁ κ₂ c) (hD : interior (F.allowedCone v c) = ∅) : -1 ≤ κ₁ ∧ κ₂ ≤ 1 := by
+  have hcv : c ∈ F.coloursAt v := mem_closure_of_mem_coneAt hH.mem_coneAt_region
+  obtain ⟨α', -, -, hev⟩ := woodallCone hF hv hcv hD
+  obtain ⟨r, ⟨hr1, hr2⟩, hr0⟩ := ((hev.and hH.2).and self_mem_nhdsWithin).exists
+  obtain ⟨β, -, κ, κ', hκ1, hκ12, hκ2, hSeq⟩ := hr1 _ hr2
+  have hr0' : (0 : ℝ) < r := hr0
+  have heq : e α = e β := by
+    have := mem_coneAt_hornSet v α hH.1 hr0'
+    rw [hSeq] at this
+    exact e_eq_of_mem_coneAt_hornSet this
+  rw [hornSet_congr heq.symm κ κ' r] at hSeq
+  obtain ⟨h1, h2⟩ := hornSet_curv_eq hH.1 hκ12 hr0' hSeq
+  exact ⟨h1 ▸ hκ1, h2 ▸ hκ2⟩
+
+/-- `horn_bounds_of_noMerge`, read off E6-CONE (a check that the new lemma carries the old one). -/
+example (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hM : ¬ F.MergeAvailable v) {c : Fin k} {m : ℕ}
+    (hm : 2 ≤ m) (hc : F.HasSectors v c m) {α κ₁ κ₂ : ℝ} (hH : F.IsHorn v α κ₁ κ₂ c) : -1 ≤ κ₁ ∧ κ₂ ≤ 1 :=
+  horn_bounds_of_interior_empty hF hv hH (by
+    by_contra hne
+    exact hM ⟨c, m, hm, hc, nonempty_iff_ne_empty.mpr hne⟩)
+
 /-- **One sector, by a half-plane of contacts**: a colour carried at `v` whose every contact `w` on `ω(v)` is in-type with `w − v = u` or
 out-type with `w − v = −u` (`‖u‖ = 1`) has the open half-plane `d·u > 0` in its allowed cone, so `u` is interior to it; with no MERGE at
 `v` it has exactly one sector (wave 4's `stuck_structure_flanks` step `hone`, with an in-type contact allowed). Inhabitant of the
