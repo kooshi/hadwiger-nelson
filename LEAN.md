@@ -191,6 +191,11 @@ the characteristic failure here:
   refutation at `k ≤ 5` colours, a model at `k = 7` on a plane map; a model of one hypothesis on an object where another fails (a disc for
   a theorem about plane maps) is not a model of the theorem. Where none is expected (a step inside a proof by contradiction), the docstring
   says so with the theorem that refutes the configuration.
+  **A note names an object only for the hypotheses that object satisfies**: 'inhabitant of the hypotheses' is a claim and is
+  checked like one — a fragment that does not cover the unit disc about its vertex is no model of a theorem assuming `F.Covers v 1` (FS131-QA4:
+  seventeen notes named `bowtie` there). **Where the hypotheses' satisfiability is the open question at the stated parameter** (a valid six-map of the
+  plane; a stuck vertex in a terminal plane map), the docstring says so, names the question, and names an object satisfying the local hypotheses at
+  once together with the hypothesis it fails.
 - Every definition has a `#eval`/`example` that would fail if it drifted.
 - The Moser spindle's non-3-colourability is proved **twice** — by `decide` and through the SAT bridge — so the CNF encoding is
   checked against an independent oracle.

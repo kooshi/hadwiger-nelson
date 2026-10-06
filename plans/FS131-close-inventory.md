@@ -3906,3 +3906,44 @@ reason by the close.*
      on `fs131-w5s`** (`stuckRun_ne_univ`), as item 421 (e) queued; its brief was written and gated before the slot freed. In flight: 1 (QA4) + 1 (IR2) +
      1 (IS1) = 3. **Wave 5's open leaves now**: `exists_vertexStep` (IR2), `exists_arcStep` (queued), `stuckRun_ne_univ` (IS1); then the merges
      (`fs131-w5s` → `fs131-w5c`, `fs131-w5c` ↔ `fs131-w5`), the audit's remedy pass, and wave 5's landing.
+426. **FS131-QA4 done: the impossible-assumption audit, third pass** (harness ≈ 431k by the task notice; record `plans/FS131-QA4-audit.md`, Stages 1–6;
+     report `data/fs131/reports/FS131-QA4.md`; commits `35dfcdb2` … `49f706d2` on `main`; data `data/fs131/qa4/`). Read at `main` `d4403f09`, `fs131-w5`
+     `3b120cd3`, `fs131-w5c` `87e95385`: 2,590 theorems, 318 heads, 28 definitions new or changed since QA3. **No hypothesis set attacked is unsatisfiable
+     on real instances; no new definition fails at the kind of point its theorems quantify over.** **Findings**: **QA4-1** `exists_vertexStep`'s missing
+     `F.Covers v 1` (items 422–423). **QA4-2**: no Lean object is both stuck or horned and covers the unit disc about its vertex — `¬ bowtie.Covers 0 1`,
+     `¬ bowtie.IsPlaneMap`, `¬ cuspFrag.Covers 0 1` [scratch-kernel, standard three] — and **seventeen docstrings** (`FlankUA` 9, `Terminal` 8; record
+     § 3.5) name `bowtie` as "the inhabitant of the hypotheses" of theorems assuming `Covers v 1` or `IsPlaneMap`: false as claims; the sets are
+     satisfiable at [hand] (the bowtie completed by fresh-coloured cells). **The three known cases**: `bend_toward_collar` — as stated no arc of `l60Frag`
+     inhabits it; without `hmax` and `hlen` its hypotheses hold at once on `l60Frag`'s sub-arc `r([π/8, 5π/24])` and the conclusion holds
+     (`qa4_bend_toward_collar_weak`, [scratch-kernel]); `exists_open` — E6's twelve-colour map satisfies its seven hypotheses at once [hand], no Lean
+     object does; `exists_merge`, `exists_rayMerge`, `exists_shave` — nothing named, inhabited in Lean only hypothesis by hypothesis, each at once at
+     [hand] by a small fresh-coloured picture planted in a valid background. **GAP — neither model nor contradiction**: `a4six`, `straddlers_third`,
+     `nb4p` against `sixFrag`; `flank_ne_of_doublyShadowed`; and the OPEN class — 19 heads stated at six colours on a plane map (an inhabitant would be a
+     valid six-map of the plane), and a stuck vertex in a terminal plane map at any `k`. **Models owed, priced** (record § 6.2): the planted picture (the
+     four moves, the vertex step, `cvb_hole_disconnected`; 400–800 lines); the completed bowtie (the stuck family with `Covers`; 1,500–3,000 lines);
+     `cuspFrag.IsRingArc` (both bends; 60–120 lines). **Docstring lines owed** (ranks 7–8). **Receipt** (Keryx): the eight commits on `main`;
+     `data/fs131/qa4/QA4Collar.out` and `QA4Bowtie.out` read — six theorems on exactly the standard three, the planted file's on `sorryAx`; the record's
+     §§ 3.5, 6.2, 6.3 read whole. **Not read, named by QA4**: the bodies of the 645 cross-module children beyond their predicate sets; `reduce`, `select`;
+     `noBoth`, `iso`, `flank_incomplete_bowtie` beyond QA2's reading; `hex_regular`'s hypotheses against `threeSectorDisc`. **Filed** (this commit): QA4's
+     draft for `LEAN.md` § The gate (a note is a claim; open-question hypothesis sets say so), verbatim; the fact audit passes. Credit: QA4, for a missing
+     hypothesis caught before its proof, seventeen false notes, and a list with prices.
+427. **Rulings on QA4's list and the rule.** (a) **Before wave 5 lands, at its final sync** (one remedy pass, in the job that joins the branches, so no
+     running job's file is edited under it): rank 2's seventeen notes corrected; rank 3 — `bend_toward_collar` without `hmax` and `hlen`, a named theorem
+     stating QA4-C1's conjunction beside `collarModel`, a docstring line on it and on `exists_collarFit` (text in `data/fs131/qa4/QA4Collar.lean`); rank
+     7's line on `exists_arcStep`; rank 8's wave-5 lines; and item 419 (a)'s three binders. QA4's judgment adopted. Confidence: high. (b) **Rank 4, the
+     planted picture, and ranks 5–6**: a planner pass (one overlay construction for both, or two), then implementers, on a branch from `main`; they land
+     on their own and close the open gate item on MERGE and OPEN (item 419 (d)(iii)); queued after (c) and (d). (c) **Rank 9 and rank 10's question go
+     to a deriver, FS131-E7** (short): a model or a contradiction for `a4six`'s, `straddlers_third`'s and `nb4p`'s backgrounds and for a doubly shadowed
+     horn under Condition 5 with `Covers`; whether a terminal valid plane map with a stuck vertex exists at some `k ≥ 7`. Why ahead of (b): these are
+     landed or about-to-land theorems whose hypothesis sets nobody has inhabited or broken even by hand; (b)'s have hand models. Confidence: high. (d)
+     **The rule's four unclear cases**: F1 — a head whose inhabitant would be a valid six-map of the plane says so, names the question, and names an
+     object for its local hypotheses with the one it fails (the filed sentence); F2 — for heads assuming only universal hypotheses (`Valid`,
+     `IsPlaneMap`, `Covers`, a tile, a ring arc) one module-level line naming the model meets the rule; F3 — a note naming a hand model is an open gate
+     item, listed in the landing's report until a Lean model closes it; F4 — `tools/fs131_qa4_notes.py` runs at every landing, its table grown as models
+     and failures are proved, a conflict fixed before the push. Confidence: high on F1, F3, F4; medium on F2 (a module line is weaker than the rule's
+     letter; it changes if a module-level model turns out to miss a head's hypothesis). (e) **QA4's slot → the arc step's groundwork, FS131-IA1**, on a
+     new branch `fs131-w5a` cut from `fs131-w5c` at `ebb0b292`: what `exists_arcStep` needs from the bends, their step forms in a module of their own
+     upstream of `Procedure`, question (5), and whether the tangent bend is needed (the statement `bend_away`'s planner must then plan to). Alternative
+     weighed: E7 or the models' planner first. Why: the arc step is the longest unexamined piece on wave 5's landing path, and `Procedure` itself is held
+     by IR2. E7 takes the next slot, the models' planner the one after, `bend_away`'s planner when IA1 has fixed its statement. In flight after IA1's
+     launch: 1 (IR2) + 1 (IS1) + 1 (IA1) = 3.
