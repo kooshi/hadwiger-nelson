@@ -10,8 +10,11 @@ touched; the objects written are unreferenced) and runs the merge check on each 
   2. a Lean file OURS alone changed, replaced by THEIRS' blob             -> must FAIL naming it
   3. `scripts/Axioms.lean` with the last `#print axioms` record of THEIRS' additions dropped -> must FAIL naming it
   4. `scripts/Axioms.lean` with that record doubled                       -> must FAIL naming it
-Usage: fs131_l5_merge_plants.py BASE OURS THEIRS THEIRS_ONLY_FILE OURS_ONLY_FILE
-Exit 0 iff 0 passes and 1-4 each fail naming the planted file.
+  5. with `--both FILE` (a file both sides changed): FILE set to OURS' blob, THEIRS' change dropped -> must FAIL naming it
+Plants 3 and 4 need a record THEIRS added to `scripts/Axioms.lean`; on a merge where THEIRS added none they are reported as
+not applicable (and `--both` is then required, so that a both-changed file is still planted on).
+Usage: fs131_l5_merge_plants.py BASE OURS THEIRS THEIRS_ONLY_FILE OURS_ONLY_FILE [--both FILE]
+Exit 0 iff 0 passes and every applicable plant fails naming the planted file.
 """
 import os
 import subprocess
@@ -56,17 +59,23 @@ def main():
     theirs_ax = set(git('cat-file', 'blob', f'{theirs}:{AX}').split('\n'))
     ours_ax = set(git('cat-file', 'blob', f'{ours}:{AX}').split('\n'))
     added = [l for l in merged_ax.split('\n') if l.startswith('#print axioms ') and l in theirs_ax and l not in ours_ax]
-    assert added, 'THEIRS added no record'
-    rec = added[-1]
-    assert merged_ax.count(rec + '\n') == 1
-    dropped = git('hash-object', '-w', '--stdin', inp=merged_ax.replace(rec + '\n', '', 1))
-    doubled = git('hash-object', '-w', '--stdin', inp=merged_ax.replace(rec + '\n', rec + '\n' + rec + '\n', 1))
+    both = sys.argv[sys.argv.index('--both') + 1] if '--both' in sys.argv else None
     plants = [
         (f'1. {tfile} (THEIRS alone changed it) set to OURS\' blob', tfile, blob(ours, tfile)),
         (f'2. {ofile} (OURS alone changed it) set to THEIRS\' blob', ofile, blob(theirs, ofile)),
-        (f'3. {AX} with the record `{rec}` dropped', AX, dropped),
-        (f'4. {AX} with that record doubled', AX, doubled),
     ]
+    if added:
+        rec = added[-1]
+        assert merged_ax.count(rec + '\n') == 1
+        dropped = git('hash-object', '-w', '--stdin', inp=merged_ax.replace(rec + '\n', '', 1))
+        doubled = git('hash-object', '-w', '--stdin', inp=merged_ax.replace(rec + '\n', rec + '\n' + rec + '\n', 1))
+        plants += [(f'3. {AX} with the record `{rec}` dropped', AX, dropped), (f'4. {AX} with that record doubled', AX, doubled)]
+    else:
+        assert both, 'THEIRS added no record to scripts/Axioms.lean: give --both FILE'
+        print(f'3, 4. not applicable: THEIRS added no record to {AX}')
+    if both:
+        assert len({blob(base, both), blob(ours, both), blob(theirs, both)}) == 3, 'not a file both sides changed'
+        plants.append((f'5. {both} (both sides changed it) set to OURS\' blob', both, blob(ours, both)))
     for label, path, b in plants:
         rc, out = run(base, ours, theirs, planted_tree(real, path, b))
         fired = rc != 0 and path in out
