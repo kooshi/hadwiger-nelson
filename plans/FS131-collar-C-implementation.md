@@ -273,3 +273,65 @@ this record; `tools/fs131_cc_*.py` (with the fix to `fs131_cc_stmt.py` the brief
 run, nothing on `main`. No agents of my own; no file edited while a build of it runs; no background process left running.
 
 ## Stage 4 — SAVED (FS131-CC2)
+
+## Stage 5 — SAVED (FS131-CC2): lane G merged in; the statement checker fixed; what still rests on `sorryAx`, by name
+
+### 5.1 The merge
+
+`git merge origin/fs131-w5` (`5059983d`, lane G's last commit) into `fs131-w5k` at `6db9c5d8`. Git merged every file by itself; the one
+file both sides changed, `scripts/Axioms.lean`, merged with **both blocks kept**: the merged file is the base's (`2736ab8c`) plus 90 lines,
+27 from this branch (the block headed "FS131-CC1") and 63 from lane G (its lines in the block headed "FS131-I5g"), and no line of either
+side is missing (`diff` of each side against the merged file: 0 lines removed). `RadialPush.lean` and `CollarMap.lean` are byte-identical
+to `5059983d`; `Pushforward.lean` and `BendCollar.lean` byte-identical to `6db9c5d8`. The merge is committed with `git commit` and no path
+list (git refuses a path list on a merge); the index held the merge's files and this stage's files, each added by name.
+
+### 5.2 The statement checker, fixed (inventory item 406 (c))
+
+`tools/fs131_cc_stmt.py`, rewritten in three places:
+- **the split**: a theorem's statement now ends at its **top-level `:=`** — the first `:=` outside every bracket, comment and string
+  (`top_level_assign`), so `by …` or a term after it is proof and may change, and a `:=` inside a binder's default value does not end
+  the statement. It fails closed: with a `let`/`have` before that `:=`, the whole declaration is compared;
+- **the bases**: every statement of all four modules is compared with the skeleton at `2736ab8c` (so the merge is checked on lane G's
+  side too), and `RadialPush`/`CollarMap` must be byte-identical to `5059983d`;
+- **a name check** (lane G's finding, item 402): no new declaration of `Pushforward` or `BendCollar` has the full name of a
+  declaration in another file under `Proofs/` (namespaces read from the `namespace`/`section`/`end` lines; a first, name-only form
+  flagged `ArcMap.branchPt_congr` against `CurveGraph`'s `branchPt_congr` in another namespace, a false alarm, and was replaced).
+
+On the merged tree: **PASS — 85 skeleton declarations, each once, statements byte-identical to `2736ab8c`; lane G's files as `5059983d`;
+no other file under `Proofs/` changed; no `axiom`, no `native_decide`** (`data/fs131/cc/stmt-merge.txt`). So no statement of either side
+changed in the merge. `--self-test` (`data/fs131/cc/stmt-merge-selftest.txt`): **15 of 15 plants fired, each naming its culprit, and 8 of 8
+partners passed**. The term-mode controls the ruling asked for: *a term-mode proof under a changed statement* fires (`CollarFit.map_R3`
+with `Ioo` turned `Icc` and a one-line term proof); its partners pass — `:= by exact X` turned `:= X`, and a whole tactic block replaced
+by a term, both under an unchanged statement. On the splitter alone: a changed default value inside a binder fires; a binder `:=` with
+only the proof changed, a `:=` in a comment or a string, and a `let` (whole text compared) pass. CC1's two `:= by exact …` proofs stay.
+
+### 5.3 The build, and what rests on `sorryAx`
+
+**Build** of the merged tree (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 5 modules rebuilt (`RadialPush`, `CollarMap`,
+`BendCollar`, `BaseDense`, `Proofs`), 4 with warnings**, exit 0, 8 min 41 s (driver log `data/fs131/cc/build-merge.log`, ending `EXIT=0`;
+the build's full output copied to `data/fs131/cc/build-merge-full.log`, which ends "Build completed successfully (5791 jobs)").
+
+**Where `sorryAx` can enter** (`tools/fs131_cc_sorry_upstream.py`, new; `data/fs131/cc/sorry-upstream-merge.txt`): the full log's
+`declaration uses 'sorry'` warnings, set against `BendCollar`'s imports. `BendCollar` imports 28 modules of `Proofs/` transitively, and
+**none of them has a `sorry` declaration** (`RadialPush`, `CollarMap`, `Pushforward` among them); `BendCollar` has exactly four —
+`exists_collarFit` (line 120), `CollarFit.map_degree_lensCurve` (157), `CollarFit.map_degree_end` (168), `CollarFit.sides_end` (270). A
+declaration's axioms hold `sorryAx` only through a `sorry` declaration of its own module or of a module that one imports, so **every
+`sorryAx` in `BendCollar` enters through those four**. Self-test (`sorry-upstream-selftest.txt`): a planted warning in an upstream module
+fires and names it, a cut log fires; a warning in a module that is not upstream, and the unplanted log, pass.
+
+**Axioms** against this build's oleans (`data/fs131/cc/CCAxiomsMerge.lean` → `.out`, `pp.fullNames`; read by `tools/fs131_cc_axioms.py`,
+new, `data/fs131/cc/axioms-merge.txt`: **PASS, 70 names, 70 records**):
+- **57 on the standard three or fewer**: lane G's 32 children (KP2's 20 in `RadialPush`, 12 in `CollarMap`, `map_Γ`, `map_lens`,
+  `map_agreesOff`, `map_valid` among them — off `sorryAx` now that `Pushforward` is proved beneath them); `Pushforward`'s twelve (KP2's
+  ten, `isSectorChart_circle`, `degree_of_circle`); and thirteen of CC1's in `BendCollar`, eight of them newly off `sorryAx` by the
+  merge — `CollarFit.lensProf_le_one`, `isClosed_closedLens`, `isClosed_collarK`, `lens_subset_closedLens`, `map_ringArcsWithin`,
+  `map_R3`, `coloursAt_subset`, `side_ne_inner_of_mem_lens` — with `isCompact_polarSet_Icc`, `ringPt_not_mem_openArc_of_end`,
+  `mem_closure_region_inter_iff_of_agree`, `CollarFit.degree_openArc`, `CollarFit.pushProfiles`.
+- **13 on `sorryAx`**, and by § above only through lane C's four open leaves: of CC1's stage-3 lemmas, **`CollarFit.sides_eq`,
+  `map_R1`, `map_R2`, `map_inert`** (they read `sides_end`) and **`CollarFit.map_degree_and_repeated`, `map_hasDegree`,
+  `map_hasRepeatedColour`** (they read `map_degree_lensCurve` and `map_degree_end`); the four leaves themselves; `bend_toward_collar`;
+  and the control planted in the print file (`theorem ccControlPlanted : (1 : ℕ) = 2 := sorry`), which prints `sorryAx`.
+The reader's self-test (`axioms-selftest.txt`): a name moved to the other section (each way), a deleted record, a foreign axiom in a
+record of each kind — **5 of 5 fired, each naming its culprit**; the unplanted partner PASS.
+
+## Stage 5 — SAVED (FS131-CC2)

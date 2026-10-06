@@ -289,7 +289,20 @@ The first skeleton build (`build-skel1.log`, OK) showed two unused-variable warn
 
 ## Theorems this phase proved (FS131-CG1)
 
-None yet (filled at each saved stage).
+Axioms read from `data/fs131/cg/CGAxioms.out` (`lake env lean` against the oleans of the Stage 11 build, `pp.fullNames`); every line below is
+**[kernel], on `[propext, Classical.choice, Quot.sound]`** or a subset, unless it says otherwise. Names are under `HadwigerNelson.Plane`.
+
+- `Plane/ValidMap/RadialPush` — all 20 of KP2's `sorry` children: `push1_push1`, `push1_image_Ico`, `push1_image_Ioc`, `pushInv_pushFun`,
+  `pushFun_pushInv`, `continuous_pushFun`, `continuous_pushInv`, `pushHomeo_polar`, `pushHomeo_eq_self`, `pushHomeo_image_polarSet`,
+  `tangRad_spec`, `tangRad_lt_one`, `one_lt_tangRad`, `tangRad_lt_tangRad`, `one_sub_tangRad_le`, `tangRad_sub_one_le`, `pushProfiles_collar`,
+  `one_sub_lensProf_le`, `collarArcs_carrier`, `dist_lt_one_of_mem_polarSet` — each [kernel], standard three. The module has no `sorry`.
+- `Plane/ValidMap/CollarMap` — 8 of KP2's 12 lane-G children: `ArcMap.CollarFit.kin_subset`, `.kout_subset`, `.homeo_eq_self`,
+  `.homeo_ringPt`, `.homeo_fix_Γ`, `.homeo_image_dom`, `.collarArcs_nondegenerate`, `.collarArcs_Γ` — each [kernel], standard three.
+- `ArcMap.CollarFit.map_Γ`, `.map_lens`, `.map_agreesOff`, `.map_valid` — **proved with no `sorry` of their own, not yet kernel theorems**:
+  their axioms include `sorryAx`, through lane C's `ArcMap.pushforward_locallyConstant` (a field of the `pushforward` definition, so of
+  `CollarFit.map`) and `ArcMap.pushforward_interiorPts`. They become kernel theorems when lane C proves those two, with no change here.
+- 62 supporting theorems (listed in `data/fs131/cg/new-decls.txt`; 57 in `RadialPush`, 5 in `CollarMap`), each [kernel], standard three; and
+  one new definition, `radialMap`, with its spec theorem `radialMap_id`.
 
 ## Stage 7 — SAVED (FS131-CG1): the readback and the as-given build
 
@@ -357,3 +370,107 @@ with warnings, every warning `declaration uses 'sorry'`**, exit 0, 8 min 30 s (`
 completed successfully (5791 jobs)"; driver log `data/fs131/cg/build-move.log`).
 
 ## Stage 8 — SAVED (FS131-CG1)
+
+## Stage 9 — SAVED (FS131-CG1): the radial push proved, and the lane re-priced
+
+**Proved** (`Plane/ValidMap/RadialPush`, statements unchanged — `tools/fs131_cg_stmt.py` PASS, `data/fs131/cg/stmt-9.txt`): `push1_push1`,
+`push1_image_Ico`, `push1_image_Ioc`, `pushInv_pushFun`, `pushFun_pushInv`, `continuous_pushFun`, `continuous_pushInv`, `pushHomeo_polar`,
+`pushHomeo_eq_self`, `pushHomeo_image_polarSet` — so `pushHomeo` is a homeomorphism with no `sorry` beneath it. Evidence at this stage:
+`lake env lean` on the module, only the ten remaining `sorry` warnings (`data/fs131/cg/iter-9.txt`); the build is at Stage 10.
+
+**How** (33 new supporting declarations, listed in `stmt-9.txt`):
+- the one-dimensional push in closed form on each side of its peak (`push1_of_le_mid`, `push1_of_mid_le`, from `tent_of_le_mid`,
+  `tent_of_mid_le`); `push1_mem_Ico`/`_Ioc` map the sides into the image sides, and `push1_push1` is the affine inverse on each side;
+- **`polarAngle_polar`** (the plan's new child), stated on the whole window: `θ ∈ Ioc (φ − π) (φ + π)`, `0 < t` ⟹ `polarAngle P φ (P + t e θ)
+  = θ` (the plan's `|θ − φ| < π` misses the window's closed end, which `pushInv_pushFun` meets when `z` lies on the slit);
+- **`radialMap`** (a new def, with spec theorem `radialMap_id`): `pushFun` and `pushInv` are radial maps by `rfl`, and one lemma,
+  `radialMap_radialMap` (each ray to itself, the radius map inverted ray by ray, `0` and positivity kept), gives both inverses;
+- **continuity** through one lemma for both directions, `continuous_radialMap_push1`: the map is `z − (m − m')(θ)·tent(a θ, m θ, b θ,
+  |z − P|)·e θ` (`radialMap_push1_eq`); the displacement is `0` on the open half-plane behind `P` (there `|arg| > π/2`, so the angle is
+  more than `π/2` from the bisector and outside the sector) and on a ball about `P` (inside the inner profile's positive minimum,
+  `PushProfiles.exists_a_ge`); elsewhere the angle is continuous (`Complex.continuousAt_arg`), and either the angle is inside the sector
+  (every piece continuous, the tent's denominators nonzero) or `m = m'` there and the displacement is squeezed by `|m − m'| → 0`. No case
+  on the tent's knots, as the plan foresaw.
+
+**Re-price** (`LEAN.md`: from the first leaves). KP2 priced this part at about 670 lines (push1 60 + images 60 + inverses 150 + continuity
+250 + `pushHomeo_*` 150); it came in at 376 lines, every leaf on its first or second elaboration — about 0.55× the plan. Lane G's remaining
+price by the same ratio: the `tangRad` family and the profiles (plan ≈ 520) ≈ 300; `collarArcs_carrier` (plan 250, hard) ≈ 150–250; the
+map-level children in `CollarMap` (plan ≈ 650) ≈ 350–650 — those read `F`'s geometry, where the ratio is less certain. The lane fits this
+job's budget on that reading.
+
+## Stage 9 — SAVED (FS131-CG1)
+
+## Stage 10 — SAVED (FS131-CG1): `RadialPush` sorry-free — the tangent circles, the profiles, the lens boundary
+
+**Proved** (statements unchanged, `data/fs131/cg/stmt-10.txt` PASS): `tangRad_spec`, `tangRad_lt_one`, `one_lt_tangRad`, `tangRad_lt_tangRad`,
+`one_sub_tangRad_le`, `tangRad_sub_one_le`, `pushProfiles_collar`, `one_sub_lensProf_le`, **`collarArcs_carrier`** (the plan's second hard
+leaf), `dist_lt_one_of_mem_polarSet`. **`Plane/ValidMap/RadialPush` has no `sorry`**: `lake env lean` on it prints nothing
+(`data/fs131/cg/iter-10.txt`, empty). Spec example added: `pushProfiles_collar` at `R' = 3/4`, `R = 7/8`, `R'' = 5/4` over `[0, π/6]` (the
+plan's § 5.1 partition). The build is deferred to the next stage: the slot was full (two other lanes' builds), and the waiting build was
+stopped by its PID before it started (`slot: waiting`), so that work could continue.
+
+**How** (supporting declarations listed in `stmt-10.txt`):
+- **one quadratic** carries the whole `tangRad` family: `tangRad_quad` — `s² − 2(1 − R) s cos u − (2R − 1) = (s − tangRad R u)(s − t')`
+  with `t' < 0` — so for `s > 0` the sign of the quadratic is the sign of `s − tangRad R u` (`le_tangRad_iff`, `lt_tangRad_iff`,
+  `tangRad_le_iff`). Then: the sphere and disc (`tangRad_spec`) are the quadratic as a distance; `< 1` / `> 1` are its value at `s = 1`,
+  `2(1 − R)(1 − cos u)`; the order in `R` is its value at the smaller circle's root, `2(R − R')(s cos u − 1) < 0` (the smaller circle's
+  point projects below `1`); the depth and height bounds are the identity `(1 − t)(t + 2R − 1) = 2(1 − R) t (1 − cos u)`
+  (`tangRad_identity`) with `1 − cos u ≤ u²/2`; `tangRad_anti` (decreasing in `u` on `[0, π]`) is its value at another angle;
+- **`collarArcs_carrier`** by normal position: in the frame `w = (z − P) e(θ_E)‾` at an end the tangent circle is the circle about `1 − R`
+  of radius `R`; the germ arc is `s ↦ 1 + s e(π/2 + arcsin(s/2R))` (that is `branchPt`'s own formula), the lens curve `u ↦ tangRad R u · e u`.
+  Both lie on the circle's closed upper side (`germ_tangentCircle`, `polar_tangentCircle`), where a point is fixed by its chord from `1`
+  (`eq_of_tangentCircle`); the lens curve's chord `2R(1 − t cos u)` increases on `[0, π/2]`, from `0` to the germ arc's length, so the
+  intermediate value theorem matches every chord (`tangentArc_image`). At `B` the frame is the mirror `w‾` (`arcsin` is odd), so one lemma
+  serves both ends with no case on orientation. No inverse trigonometry beyond `branchPt`'s own `arcsin`.
+
+**Price**: the `tangRad` family, the profiles and the carrier came to about 350 lines against the plan's 770 (0.45×). `RadialPush` in all: 20
+children closed in ~810 lines against the plan's ~1,450.
+
+## Stage 10 — SAVED (FS131-CG1)
+
+## Stage 11 — SAVED (FS131-CG1): `CollarMap`'s lane-G children proved; build OK; axioms read; the handover
+
+**Proved** in `Plane/ValidMap/CollarMap` (statements unchanged: `tools/fs131_cg_stmt.py` PASS, `data/fs131/cg/stmt-11.txt`): all twelve of
+KP2's lane-G children — `kin_subset`, `kout_subset`, `homeo_eq_self`, `homeo_ringPt`, `homeo_fix_Γ`, `homeo_image_dom`,
+`collarArcs_nondegenerate`, `collarArcs_Γ`, `map_Γ`, `map_lens`, `map_agreesOff`, `map_valid`. **`CollarMap` has no `sorry`.** Routes, as
+the plan's except where said:
+- `kin_subset`/`kout_subset`: the inner (outer) collar is the image of the box `(θ₁, θ₂) × [0, 1)` (`× (0, 1]`) under the continuous map
+  `(θ, s) ↦ P + (a θ + s(1 − a θ)) e θ` (`(1 + s(b θ − 1))`), so preconnected; it is interior (`CollarFit.mem_interiorPts`: in the collar,
+  off the unit circle, and `free`); so one colour (`IsPreconnected.constant`), which the arc's inner (outer) side forces, the collar running
+  up to every point of `α°`;
+- `collarArcs_Γ` through one lemma, `CollarFit.homeo_image_Γ`: `h(Γ) = (Γ ∖ α°) ∪ β` (the ends lie on both sides); the cut's arcs carry
+  `Γ ∖ α°` off the ends (`mem_cutArcs_iff`), and no arc of `F` but `ω(P)`'s passes through `α°` (`CollarFit.not_kept`: near a point of `α°`
+  `Γ` is `ω(P)`, another arc meets `ω(P)` finitely, `Arc.finite_inter_sphere_or_eq_circ`, while an arc through the point has points at
+  every small distance, `Arc.exists_near`). `map_Γ` is the same lemma through `pushforward_Γ`;
+- `map_agreesOff`: on the collar off the closed lens the push back keeps a point in the inner collar (radius `< l θ` goes to `< 1`) or the
+  outer (radius `> 1` stays `> 1`), so both the point and its preimage are interior of one colour; the ends are fixed;
+- `map_valid` exactly as the plan: `Valid.of_agreesOff` on the closed lens, whose interior points in the bent map are the lens (the lens
+  curve is in `Γ`), clear for `c'` (`clear` inside; `ne1_region` on `α°`, which is in the closure of the outer class), no two `1` apart.
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 5 modules rebuilt (`RadialPush`, `CollarMap`, `BendCollar`,
+`BaseDense`, `Proofs`), 5 with warnings, every warning `declaration uses 'sorry'`; none in `RadialPush` or `CollarMap`** (`BendCollar` 14 and
+`Pushforward` 7, all lane C's), exit 0, 8 min 36 s; the log `build/gate/build/20261005T122643Z-11522.log` ends "Build completed successfully
+(5791 jobs)" (driver log `data/fs131/cg/build-11.log`). A first build of this stage failed at `Proofs.lean`: my new `polar_inj` clashed with
+`Woodall/Basic`'s `HadwigerNelson.Plane.polar_inj` (each module built alone; the clash shows only where both are imported). Renamed
+`polar_inj_window`; `tools/fs131_cg_stmt.py` now also fails on a new declaration whose name another file under `Proofs/` declares (plant:
+a `polar_inj` added to `RadialPush`, FIRED); `--self-test`: **10 of 10 plants fired, unplanted partner PASS** (`stmt-11-selftest.txt`). The
+same check's first form compared `:= by` as part of a statement, so a tactic proof turned term proof read as a statement change
+(`homeo_eq_self`); it now ends a statement at the `:=`, and the hypothesis plant still fires. `tools/check_architecture.py`: PASS.
+
+**Axioms** (`data/fs131/cg/CGAxioms.lean` → `CGAxioms.out`, against this build's oleans): 102 records — **95 within the standard three**
+(KP2's 23 `RadialPush` declarations with the three it had proved, 10 `CollarMap` declarations, the 62 supporting theorems); **7 on
+`sorryAx`**: `map_Γ`, `map_lens`, `map_agreesOff`, `map_valid` (lane C's `pushforward_locallyConstant` and `pushforward_interiorPts`, as
+predicted before the print), and the three controls — `exists_collarFit` (lane C's `sorry`), `bend_toward_collar`, and a planted
+`theorem cgControlPlanted : (1 : ℕ) = 2 := sorry` in the print file — each printing `sorryAx`. No other axiom. `scripts/Axioms.lean`'s block
+headed "FS131-I5g" gains one line per supporting theorem after KP2's lines (its diff against `b2ccfb7b` is additions only).
+
+**What is left of lane G**: nothing. **What is left of the collar bend**: lane C's children (`Plane/ValidMap/Pushforward`'s seven, fourteen in
+`BendCollar`, and the model map B0); when lane C proves `pushforward_locallyConstant` and `pushforward_interiorPts`, the four map-level
+children above become kernel theorems with no change on this branch. No gate run, no merge, nothing on `main` (as the brief says).
+
+**Front-page drafts**: none this job — the milestone closes at the gate, after lane C; the counts and ledger rows are drafted then.
+
+**Re-price, final**: lane G came in at ~1,190 lines of Lean (`git diff --stat b2ccfb7b`: `RadialPush` +905 −20, `CollarMap` 463 of which 156
+are the moved block; the tools aside) against the plan's 2,250 — about 0.53×.
+
+## Stage 11 — SAVED (FS131-CG1)

@@ -7,17 +7,20 @@ Reads the skeleton at `b2ccfb7b` (`RadialPush.lean`, `BendCollar.lean`) and the 
 1. every declaration of the skeleton's two files is declared in exactly one of the layout's files, the one it belongs in (G's block —
    `CollarFit` and `CollarFit.kin_subset` … `CollarFit.map_valid` — in `CollarMap`, the rest where they were), and in no other file under
    `Proofs/` that did not already declare that name at `b2ccfb7b`;
-2. its statement is byte-identical: for a theorem, the docstring and the header up to the `:=` that opens the proof; for a `def` or a
+2. its statement is byte-identical: for a theorem, the docstring and the header up to the `:=` that opens the proof (a `by` after it
+   is proof style, so a tactic proof may become a term proof); for a `def` or a
    `structure`, the whole declaration (a definition the statements use is part of the statement); each spec `example` verbatim;
 3. the section note `## The collar's fit to the map` moved byte-identical into `CollarMap`;
 4. `BendCollar.lean` is exactly the skeleton's with the moved lines deleted and one import line added (this branch never edits lane C's
    proofs), so `bend_toward_collar`'s block is unchanged with it;
-5. no `axiom` declaration and no `native_decide` in the four modules of the layout.
+5. no `axiom` declaration and no `native_decide` in the four modules of the layout;
+6. no new declaration of `RadialPush` or `CollarMap` has a name declared in another file under `Proofs/` (such a clash builds alone
+   and fails where both modules are imported — `Proofs.lean`).
 
 `--move` also requires the moved declarations' full text (proofs included) to be the skeleton's: the check of the move commit itself.
-New declarations (supporting lemmas) are allowed and listed. Exit 0 iff all hold. `--self-test` plants nine faults in memory — a changed
+New declarations (supporting lemmas) are allowed and listed. Exit 0 iff all hold. `--self-test` plants ten faults in memory — a changed
 hypothesis in a moved theorem, a changed docstring letter, a changed definition body, a moved declaration duplicated in `BendCollar`, a
-moved declaration deleted, a changed section note, an edit to `BendCollar`, an `axiom` line, a `native_decide` — requires each to fail
+moved declaration deleted, a changed section note, an edit to `BendCollar`, an `axiom` line, a `native_decide`, a new name clashing with the library — requires each to fail
 (naming the culprit) and the unplanted partner to pass.
 """
 import pathlib
@@ -76,7 +79,8 @@ def chunks(text):
         if kind in ("theorem", "lemma", "instance"):
             hdr = "\n".join(lines[start:head])
             rest = "\n".join(lines[head:e])
-            mm = re.search(r":=(?:[ \t]*by)?[ \t]*$", rest, re.M)
+            # the statement ends at the `:=` that opens the proof (a `by` after it is proof style, not statement)
+            mm = re.search(r":=(?=(?:[ \t]*by)?[ \t]*$)", rest, re.M)
             if mm is None:
                 mm = re.search(r":=", rest)
             stmt = (hdr + "\n" if hdr else "") + rest[:mm.end()] if mm else full
@@ -164,6 +168,14 @@ def check(base, cur, all_cur, base_decl, move_mode):
         errs.append("section note `## The collar's fit to the map` not byte-identical in CollarMap")
     if cur.get(BC) != expected_bendcollar(base[BC]):
         errs.append("BendCollar.lean is not the skeleton's minus the moved lines plus the import")
+    # a new declaration's name is declared in no other file under `Proofs/` (a clash fails only when both modules are imported)
+    base_names = {c[1] for g in (RP, BC) for c in base_ch[g]}
+    for g in (RP, CM):
+        for kind, name, _, _ in cur_ch.get(g, []):
+            if kind != "example" and name not in base_names:
+                elsewhere = {h for h in cur_decl.get(name, set()) if h != g}
+                if elsewhere:
+                    errs.append(f"new declaration {name} ({g}) also declared in {sorted(elsewhere)}")
     for f in LAYOUT:
         t = cur.get(f, "")
         if re.search(r"^\s*(private\s+|protected\s+)?axiom\s", t, re.M):
@@ -210,6 +222,8 @@ def main():
             "axiom": plant(RP, "\nend HadwigerNelson.Plane", "\naxiom bogus : False\nend HadwigerNelson.Plane"),
             "native_decide": plant(CM, "\nend Collar", "\nexample : 1 = 1 := by native_decide\nend Collar"),
         }
+        plants["new name clashing with the library"] = plant(RP, "\nend HadwigerNelson.Plane",
+                                                            "\ntheorem polar_inj : True := trivial\nend HadwigerNelson.Plane")
         # a moved declaration duplicated in BendCollar
         dup = [c for c in chunks(cur[CM]) if c[1] == "CollarFit.map_valid"][0][2]
         c2, a2 = dict(cur), dict(all_cur)
