@@ -1,0 +1,28 @@
+entry lint
+  claim FS131-E8-LOCAL: minds 1
+  claim FS131-E8-LOCAL: prior art partly
+  claim FS131-E8-GAMMA: minds 1
+  claim FS131-E8-GAMMA: prior art partly
+  claim FS131-E8-BETA: minds 1
+  claim FS131-E8-BETA: prior art partly
+  claim FS131-E8-ALPHA: minds 1
+  claim FS131-E8-ALPHA: prior art partly
+  claim FS131-E8-DELTA: minds 1
+  claim FS131-E8-DELTA: prior art partly
+  claim FS131-E8-FAN: minds 1
+  claim FS131-E8-FAN: prior art partly
+  claim FS131-E8-BRIDGE: minds 1
+  claim FS131-E8-BRIDGE: prior art partly
+  claim FS131-E8-CLAUSE2: minds 1
+  claim FS131-E8-CLAUSE2: prior art partly
+  claim FS131-E8-SI5C: minds 1
+  claim FS131-E8-SI5C: prior art known
+  entries: 9  derived: 9  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    e8-lens: printed '0'; with the fault planted ('' → '--C 1') it printed '880' — it fires
+  ok    e8-chord: printed '0'; with the fault planted ('' → '--kappa 2') it printed '14232' — it fires
+  ok    e8-majority: printed '0'; with the fault planted ('' → '--p 2/3') it printed '291' — it fires
+  controls: 3  fired on their faults: 3
+GATE: PASS (0 failures, 0 warnings)

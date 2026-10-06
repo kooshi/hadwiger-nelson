@@ -20,6 +20,8 @@ Each **[hand], one mind, kernel pending**; entries and arguments in § Stage 3. 
   frozen words' second clause unread: § 3.6.
 - **FS131-E8-CLAUSE2** — under saturation the frozen words' second clause follows from the first, and every bounded set meets finitely many
   interface arcs: § 3.7.
+- **FS131-E8-SI5C** — the brief's second question: J45-SI-5's step (c) holds by majority decoding — Chebyshev's inequality and a closed subspace
+  of `L²` — with no pointwise ergodic theorem: § 5.1.
 
 ## Stage 1 — SAVED: the readback, the question restated, the registered expectations
 
@@ -592,3 +594,117 @@ Registered at stage 1 after a sketch (§ 1.5's note): (α) derived at 0.88 — m
 0.95 — met; (δ) derived without Federer at 0.93 — met; "the second clause is not consumed" at 0.8 — met. Brier 0.014 over five, all informed.
 Neither registered break occurred as a failure; the first (M-PINCH off-centre) is the note of § 4.1 (i), and a break not registered — the cusp
 inside C11's ball — is § 4.1 (ii).
+
+### 4.6 Row by row, for wave 6's second planner (added on the coordinator's word, inventory item 490; §§ 3.1–3.7 unchanged)
+
+*Basis, as § 4.2: each row's `uses only` line, and the arguments of V2 §§ 2.1–2.3, V3 § 2.3, V5 § 3.1 and `plans/FS111-M2-regularity.md` § 4.1.
+A row marked † was read from its entry only.* Columns: **F** — a fan at named points (FS131-E8-FAN: the point isolated in Σ, saturation in a
+punctured ball); **Σ** — Σ locally finite on a bounded set; **C2** — finitely many interface arcs in a bounded set (FS131-E8-CLAUSE2); **L** — the
+local graph off Σ (FS131-E8-LOCAL, the form of C11 (ii)).
+
+| row | F | Σ | C2 | L | what it reads, in its own words |
+|---|---|---|---|---|---|
+| FS111-W-KB-DIR † | at the arc's centre | — | — | — | "the inner colour's sector points toward the arc" |
+| FS121-DB1-L3 (with FS111-W-NOREP) | at `z` | — | — | on `W₁`'s two edges | V2 § 2.1's fan; Lemma T at the edges |
+| FS121-V2-SECTOR | at `z` | — | — | on the edges and on `γ₃` | the same; the comparison of `γ₃` with a unit circle |
+| FS121-V3-CPI | at `z` | — | — | on a region's two edges | V3 § 2.3's Lemmas A, C |
+| FS121-D1-VT †, FS121-V2-VT-W † | at `Y` | near `Y` | — | along `I`, `L_Y` | "REG-J′'s local finiteness and FS111-M-C11's end tangents; FS121-V2-SECTOR at Y" |
+| FS121-D1-EROSION † | at the crossing point, through D1-VT | as D1-VT | — | — | "FS121-D1-VT on the straight branch" |
+| FS121-D1-PENCILWIN † | through D1-VT, V2-SECTOR | through O1-OUT | — | — | "one sector per colour (FS121-V2-SECTOR)" |
+| FS121-O1-ENDS † | at the last arc's centre (FS121-DB1-L3 there) | along the chain (a null set of normals) | — | — | "the chain toward the centre stops at radius 1 or at Σ" |
+| FS121-DB1-L6 † | — | along the chain (finitely many normals) | — | — | "REG-J′'s local finiteness (each point of Σ but the centre on one normal)" |
+| FS121-O1-OUT † | — | over the window | — | yes | the parallel is an interface "off Σ" |
+| FS111-M2-INTRAD | — | step (2): the normals that meet Σ | step (3), per-radius finiteness: "REG-J′'s second clause bounds the gaps" | steps (1)–(2) | § 4.1 there |
+| FS121-O1-LRA-LINE †, FS121-D2-THIN † | — | yes | through INTRAD (iii) | — | "its per-radius finiteness (iii)" |
+| FS121-D2-EXT † | — | "REG-J′", named whole | — | "two distinct circles … tangent at a point meet only there near it" | — |
+| FS121-D2-SYM † | — | — | the in-particular clause, through INTRAD (iii) | through FS121-V5-RAY | — |
+| FS121-D2-PERFIN † | — | — | by name: "finitely many interface arcs meet a compact set" | — | — |
+| FS111-M-REDUCE-I † | at each point of Σ (S–V's Condition 3) | yes | "the finitely-many-arcs clause" | off Σ | — |
+| FS121-V5-LOC, FS121-V5-RAY | — | Σ closed | — | it is this | V5 § 3.1 |
+| FS111-W-NOBEND † | — | — | — | it is C11 | — |
+| FS121-DB1-L7 †, FS121-D4-HOLE † | — | — | — | L7: yes | "REG-J′ is not used"; "REG-J′ (unused)" |
+
+**Rows that need a fan at one point and no local finiteness:** FS111-W-KB-DIR, FS121-DB1-L3, FS121-V2-SECTOR, FS121-V3-CPI — FS131-E8-FAN's
+hypotheses are theirs (`Σ ∩ ball z R ⊆ {z}`; saturation at the essential boundary points of the punctured ball, never at `z`).
+
+**No row reads more than FS131-E8 gives; four read more than the planner's `Fan` has fields for.** FS121-DB1-L3, -V2-SECTOR, -V3-CPI and, through
+them, D1-VT read two facts about a branch that `Fan` does not carry: (1) **the curvature bound along it** — V2-SECTOR compares `γ₃` with a unit
+circle, V3's (F-c) puts two tangent branches between the two unit circles tangent to their direction; (2) **the branch's unit tangent, hence its
+normal, converges to the direction `dir i`** — Lemma T (ii) and Lemma A take limits of contacts `x_n ± ν(x_n)` along the branch. `Fan.tendsto` is
+the convergence of the polar angle only. Both facts are in this record: (1) is FS131-E8-LOCAL at the branch points, which are interface points
+(`bdry` puts them on the essential boundary, `singular` off Σ); (2) is FS131-E8-GAMMA with FS131-E8-BETA's last clause ("convergent, as t → 0, to
+an angle of the component's limit tangent at z"). So the kernel lemma for FS131-E8-FAN should export, beside the `Fan`: each branch is a
+`C^{1,1}` curve with tangent 1-Lipschitz in arclength, and its unit tangent at `z + t e(φ i t)` tends to `±e(dir i)` as `t → 0`. Proved here, in
+addition, and offered: the chord of a branch from `z` makes an angle at most `s/2` with the end tangent for arclength `s ≤ π/3` (control
+`e8-chord`, C3; proof: `∫₀^s sin(ψ(u) − s/2) du ≤ ∫₀^s sin(u − s/2) du = 0`, the sine increasing on `[−π/2, π/2]`), which with `t ≥ sin s`
+gives `|φ i t − dir i| ≤ arcsin(t)/2`. V3's sharper lens bound `arcsin(t/2)` is its own comparison argument, not re-derived here.
+
+**Errata drafts for `plans/FS111-derivation.md`** (Keryx files; each a dated line under its entry, after the entry's "Rests on it" line, the
+entry's text left standing):
+
+- *Under FS111-M-C11:* "**Erratum, 2026-10-06** (FS131-E8, `plans/FS131-E8-derivation.md` §§ 3.1 (1), 4.1 (ii); one mind): the hypothesis
+  "M-PINCH's hypotheses hold at every essential boundary point in N" does not speak of a cusp of `a` or `b` inside `N` — a point of
+  `supp S_a ∩ supp S_b` where one of the two has density 0, which is no essential boundary point. The argument's step "each normal line near `x`
+  meet the boundary once" (`plans/FS111-M-regularity.md` § 3.2 (ii)) finds on each normal line a point of `supp S_a ∩ supp S_b`; it is an
+  essential boundary point only if it is no cusp. Read the statement with the added hypothesis "and neither colour has a cusp in N". Every
+  consumer applies it off a closed Σ, where the hypothesis holds, so nothing resting on it changes. Whether the added hypothesis follows from the
+  filed one is not derived (a sketch over Federer's criterion, recalled, not read, suggests it does)."
+- *Under FS111-M-PINCH:* "**Note, 2026-10-06** (FS131-E8, `plans/FS131-E8-derivation.md` §§ 3.1 (2), 4.1 (i); one mind): "a neighbourhood N" is
+  an open ball containing `x`, not a ball centred at `x`. The argument (`plans/FS111-M-regularity.md` § 3.1) reads `N` through `P_a`, `P_b` and
+  through open cones at `x`, never through its centre; FS111-M-C11 applies it at every boundary point of one ball ("with the same `N`, `P_a`,
+  `P_b`"), and FS131-E8-LOCAL does the same. A formal statement centred at `x` (`pinch` over `TwoColourAt x ρ a b`, `fs131-w6`) is the special
+  case and does not serve those two."
+
+## Stage 5 — SAVED: the second question — J45-SI-5's step (c) without a pointwise ergodic theorem
+
+**The step** (`plans/FS84-SI-D-derivation.md` § 2.2, SI-5 (c), verbatim): "`γ_Φ ∘ π_𝔓` is `c`-measurable (on each residue class its colour has
+frequency `≥ 2/3`, any other `≤ 1/3`: ergodic averages along a tempered Følner sequence)". Its setting, SI-5 (b), verbatim: "Independently: `Φ` a
+uniform translate `a ∈ O/𝔓` …; `c₂`; `ε` i.i.d. with `P(ε = 1) = 1/3`. Put `c(x) = m` if `x ∈ W_Φ`, `c₂(x) = j₀`, `ε(x) = 1`, and
+`c(x) = γ_Φ(π_𝔓 x)` otherwise."
+
+**Answer: yes — Chebyshev's inequality and the closedness of `L²(σ(c))` suffice; no ergodic theorem, no Følner sequence, and no independence of
+`ε` from `(Φ, c₂)`.**
+
+### 5.1 Majority decoding
+
+Fix a residue class `ρ ∈ O/𝔓` and put `G = γ_Φ(ρ) = γ(ρ + a)`, a random colour. The class `{x ∈ R : π_𝔓 x = ρ}` is infinite (a coset of a
+subgroup of finite index in the infinite group `R`); enumerate distinct points `x₁, x₂, …` of it. By the construction, `c(x_i) ≠ G` only if
+`ε(x_i) = 1`. Let `Maj_n` be the most frequent colour among `c(x₁), …, c(x_n)` (least index on a tie): a function of `c`. If fewer than `n/2` of
+`ε(x₁), …, ε(x_n)` are 1, then `G` is the strict majority and `Maj_n = G`. The `ε(x_i)` are pairwise independent with mean `1/3` and variance
+`2/9`, so by Chebyshev
+
+  `P(Maj_n ≠ G) ≤ P(Σ_{i ≤ n} ε(x_i) ≥ n/2) ≤ (2n/9)/(n/6)² = 8/n`.
+
+Hence `‖1[Maj_n = j] − 1[G = j]‖₂² ≤ 8/n → 0` for each colour `j`. Each `1[Maj_n = j]` lies in `L²(σ(c))`, a closed subspace; so `1[G = j]` does,
+that is `1[G = j] = E[1[G = j] | σ(c)]` a.s.: `G` is a.s. a function of `c`. This holds for each of the finitely many `ρ`, so
+`γ_Φ ∘ π_𝔓` is `c`-measurable. ∎ (Along `n = N²` the bound is summable, so `Maj_{N²} → G` almost surely by Borel–Cantelli, if a pointwise
+selector is wanted. The strong law for the i.i.d. `ε(x_i)` does the same in one line where the library has it.)
+
+The rest of step (c) — that a finite-valued `c`-measurable process permuted through `O/𝔓` is `𝒜_S(c)`-measurable — does not read the ergodic
+averages and is not touched.
+
+derivation: FS131-E8-SI5C
+  statement: let I be a countably infinite set, G a random variable with values in a finite set, c = (c(x)) for x in I random variables with
+    values in the same finite set, and ε = (ε(x)) for x in I indicator variables, pairwise independent, each of probability p < 1/2, such that
+    almost surely c(x) ≠ G implies ε(x) = 1 for every x in I; then G is almost surely equal to a function of c, measurable for the σ-algebra c
+    generates
+  uses only: Chebyshev's inequality for a sum of n pairwise independent indicators, P(sum ≥ n/2) ≤ p(1 − p)/(n(1/2 − p)²); that a strict
+    majority among c(x₁), …, c(x_n) is a function of c; that L² of a sub-σ-algebra is closed. Not read: any group structure on I, a Følner
+    sequence, an ergodic theorem, independence of ε from (G, c)
+  not claimed: the statement at p ≥ 1/2 (at p = 2/3 the recoloured value can be the majority); the remainder of J45-SI-5 (c) (measurability for
+    the E_S-factor), J45-SI-J, or SI-5 as a whole, none of which was re-derived here
+  argument: § 5.1 Majority decoding
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: I = ℕ, G uniform on {0, 1}, ε i.i.d. of probability 1/3, c(x) = 2 where ε(x) = 1 and c(x) = G elsewhere — the majority of
+    c(1), …, c(n) is G once fewer than half of the ε are 1; SI-5 (b)'s construction on one residue class is the instance the step needs
+  prior art: known: the weak law of large numbers by Chebyshev, and majority decoding of a repetition code (textbook; recalled, not read)
+  handoff: de Bruijn — it replaces "ergodic averages along a tempered Følner sequence" in J45-SI-5 (c) for wave 10's second planning pass:
+    Chebyshev and a closed subspace of L², or the strong law for i.i.d. indicators where Mathlib has it (not checked at the pin)
+
+control: e8-majority
+  of: FS131-E8-SI5C — the Chebyshev bound P(Bin(n, 1/3) ≥ n/2) ≤ 8/n, exactly, for n = 1 … 300
+  run: python3 ../data/fs131/e8/e8_majority.py
+  expect: 0
+  fault: python3 ../data/fs131/e8/e8_majority.py --p 2/3
