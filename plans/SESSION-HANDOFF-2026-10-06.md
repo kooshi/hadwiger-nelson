@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–465 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–467 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -43,7 +43,7 @@ planted-picture models land (queue item 2).
 |---|---|---|---|---|
 | **FS131-RP1** | `.claude/worktrees/fs131-w5c`, `fs131-w5c` (from `3381e47f`: wave 5 joined, item 458) | the remedy pass: the ruled statement tidies (`nb4p`, `bend_toward_collar`, `exists_rayStep`/`exists_shaveStep`, three `[NumberField _]` binders), the corrected inhabitant notes (17 `bowtie` notes; E7's lines), `conj_e` made one declaration and the statements under several names (ruling 459 (c)); it leaves the bend's modules alone | `data/fs131/briefs/FS131-RP1-remedy.md` | its report ends with the list for after the bend's merge; then: merge `origin/fs131-w5z` into `fs131-w5c` (trial first), that list, `main`, the gate with the doubled-name check, land |
 | **FS131-MA1** | `.claude/worktrees/fs131-wm`, `fs131-wm` (from `fe9d6d32`) | the example maps, half A: the general layer's open leaves (`Plane/Models/Paint`) and the models of the four moves (`Plane/Models/Moves`: `hornModel` for SHAVE and OPEN, `twoHornModel` for MERGE-RAY and MERGE) — each model theorem is the landed move applied | `data/fs131/briefs/FS131-MA1-models-moves.md` | then implementer B (`python3 data/fs131/briefs/scripts/mk-ma.py B`, on a branch `fs131-wmb` cut from A's tip); the lane lands on its own from `main` after wave 5 |
-| **FS131-T4** | `.claude/worktrees/fs131-wop`, branch `fs131-t4` (`main`'s line) | a tooling job: the gate's doubled-name check (a Lean-side scan of every module's constants, with a wrapper and controls) and the experiment that says which copy a downstream `#print axioms` follows when one name is declared twice (items 458–459) | `data/fs131/briefs/FS131-T4-dupnames.md` | file its `LEAN.md` bullet; bring its `scripts/` and `tools/` files to `main` (a fast-forward of tools only, before wave 5's landing merges `main`); the landing then runs the check; a second doubled pair or a wrong audited print is a message mid-job: rule at once and tell Kooshi |
+| **FS131-MB1** | `.claude/worktrees/fs131-wmb`, `fs131-wmb` (from the skeleton `fe9d6d32`) | the example maps, half B: the stuck vertex's model and the doubly shadowed band's (`Plane/Models/Stuck`), the bends' models (`Plane/Models/Bends`: `cuspFrag`'s arc, `awayModel`, a plane-map model of `bend_away_whole`, ruling 461 (c)) | `data/fs131/briefs/FS131-MB1-models-stuck.md` | merge with half A's branch `fs131-wm` (disjoint files; `scripts/Axioms.lean` keep-both; **run `scripts/dupnames.sh` on the joined tree**); the lane lands from `main` after wave 5 |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. If the session restarted, resume a job from its record's last SAVED stage with
 a fresh agent on the same brief.
@@ -56,7 +56,8 @@ a fresh agent on the same brief.
    `model: "opus"`, in `fs131-w5c`): on `fs131-w5c`, merge `origin/fs131-w5z` (it holds `fs131-w5a`; trial first; then
    `LocalStep.of_cutArcs` and `CollarFit.map_localStep` must print the standard three, 459 (d)); RP1's post-merge list with ruling 465 (a)'s (`hF` out of
    `CollarFit.map_hornCount_le` and the six R1/R2 and side lemmas, the stale headers and lines, the two `ringPt` forms); merge `main` (with T4's check, if it has landed); the full gate —
-   build with zero warnings, zero `sorry`, `scripts/axioms.sh`, `scripts/vacuity.sh`, `tools/check_architecture.py`, the guarded lint, the notes
+   build with zero warnings, zero `sorry`, **`scripts/dupnames.sh` and its `--self-test` before the axiom audit** (item 466: on `main` since
+   the merge of `fs131-t4`; `LEAN.md` § The gate), `scripts/axioms.sh`, `scripts/vacuity.sh`, `tools/check_architecture.py`, the guarded lint, the notes
    check, the doubled-name check; fast-forward `main`; drafts (item 6 below; `bend_away_part`'s inhabitant may be an open gate item, 455 (a));
    then implementer B (`mk-ma.py B`, on a branch `fs131-wmb` cut from A's tip: `Stuck`, `Bends`, and the 30-line plane-map model of
    `bend_away_whole`, 461 (c)); a second planning pass for E7's `F₀` and `F₁` (461 (d)).
@@ -101,7 +102,10 @@ a fresh agent on the same brief.
   now `data/fs131/ol/axioms-receipt-landed.log` and `data/fs131/ol/vacuity-scan-landed.log`); file the drafts (`CLAUDE.md` § Trust ledger and § The
   gate, a `GATE_CHANGES` entry in `tools/claude_md_fact_audit.py`); `tools/claude_md_fact_audit.py --base <last CLAUDE.md commit>` (losses should be
   only the superseded counts) and `--dupes` before committing; push-notify Kooshi. Dates in filed counts are the gate logs' UTC date.
-- **Rules a landing brief now carries**: the guarded lint after the green build, `lake lint --no-build -- --no-build --trace` under the slot with
+- **Rules a landing brief now carries**: **the doubled-name check on the joined tree, after the build and before the axiom audit** —
+  `scripts/slot.py --mem 16 --cpus 8 -- ./scripts/dupnames.sh`, then `scripts/slot.py --mem 4 --cpus 4 -- ./scripts/dupnames.sh --self-test`
+  (item 467 (b); with a doubled theorem name an axioms print can be clean over a `sorry` copy, item 466); two lines never state one lemma under
+  one name (467 (g)); the guarded lint after the green build, `lake lint --no-build -- --no-build --trace` under the slot with
   `--mem 8` (`LEAN.md` § The gate; items 418–419); `tools/fs131_qa4_notes.py` with a conflict fixed before the push (427 (d)); a re-run of the gate is
   not needed for new `main` commits touching only `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md` (415 (b)); and the coordinator commits
   nothing else to `main` while a landing is in flight.
@@ -126,7 +130,8 @@ a fresh agent on the same brief.
 | `main` | this commit | waves 1–4, Woodall, MERGE, OPEN; the inventory, briefs, audits |
 | `fs131-w5` | `8ca5fc67` | wave 5's density half, whole |
 | `fs131-w5c` | moving (RP1; M7 left it at `3381e47f`) | **wave 5's one line**: `fs131-w5s`, `fs131-w5y` and the bend's skeleton merged; `Procedure`, `Terminal`, `ArcStep`, the density half with no `sorry`; every open leaf is one of the outward bend's children (proved on `fs131-w5z` but two) |
-| `fs131-t4` | moving (T4) | `main`'s line, in worktree `.claude/worktrees/fs131-wop`: the doubled-name check |
+| `fs131-t4` | `f53b7bdf` | merged into `main` (item 467 (c)): the doubled-name check; its worktree `.claude/worktrees/fs131-wop` is idle, a green build of `main`'s line |
+| `fs131-wmb` | moving (MB1) | cut from `fs131-wm`'s skeleton: the example maps, half B |
 | `fs131-w5s` | `facdf1c2` | idle; cut from `fs131-w5c` at `ebb0b292`; `stuckRun_ne_univ` proved, `Terminal` with no `sorry` of its own |
 | `fs131-w5a` | `74fbdf16` | idle: the outward bend's first half proved (item 454: `LensOut`, `CollarMapOut`, `BendAway`, no `sorry`; Lean sources at `4559c106`); to be merged into `fs131-w5c` |
 | `fs131-w5z` | `d4f04ff3` | idle: **the outward bend whole** (item 464: all 36 children and the toward bend's horn child proved; `fs131-w5a` merged in); to be merged into `fs131-w5c` by the landing job |
