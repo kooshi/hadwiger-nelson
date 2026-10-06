@@ -7283,3 +7283,34 @@ reason by the close.*
      that `ends_centre` can stand upstream. (d) Its drafts are held for the filing. (e) **Slot → FS131-I6K**
      (wave 6's accumulation rows, on `fs131-w6k` at `2aa3f720`; Amendment 1 regenerated with the lint and the
      two siblings' hand-backs, gate exit 0), launched 2026-10-06. In flight: 3 (LT5, the Searcher, I6K).
+580. **The day's search done (SEARCH-2026-10-06): queue line 8 answered yes at [cert] — a six-colour count exists on a combinatorial map of Euler characteristic 0; it inhabits five of the six theorems, not `kill`** (the Searcher; harness 265k and 25 minutes by the task notice; record `plans/SEARCH-2026-10-06.md`; report `data/search/2026-10-06/report.md`; commits `a88a6741`, `068587cc`, `7dc8b162`, `93840f55` on `main`, under `plans/`, `data/search/` and `tools/search_20261006_*.py`).
+     **The model, SEARCH-1006-GRID12**: on `torusGrid 12 12`, `col (x, y) = (t[y mod 2][(x + y) mod 4] − 2·⌊((x + y) mod 12)/4⌋) mod 6`
+     with `t = [[0,4,2,5],[5,3,1,0]]`; every edge tactic (288 tactic darts). **It inhabits** the hypotheses of `room`,
+     `slack`, `ends_identity`, `joint_first` and `joint`'s count data; **not `kill`**: `hK1 : ∀ p, deg p = 4 → 2 ≤
+     nonTac p` fails on it, and `kill` still has no inhabitant. **Nulls, each a refutation verified by `cake_lpr`**:
+     65 of the 66 `torusGrid n m` with `3 ≤ n ≤ m ≤ 13`; every quotient of the square grid by a sublattice of index
+     at most 64 but four models of index 48; free-boundary windows of five other tilings. Confirmed: the two
+     families I read as excluded by counting (item 574), and more — no face of length six or more can occur.
+     **My receipt**: the four commits are on `origin/main` and touch only `data/search/2026-10-06/`, its record
+     and its four tools; **the formula it reports reproduces its certificate's table at 144 of 144 cells (my
+     script)**; three of the seven fields re-checked by me on the table (item 578); its checker run by me, exit
+     0; `kill`'s `hK1` read by me in `Count.lean` on `fs131-w7a`. Not checked by me: the refutations; the four
+     48-cell models; `mu_zero`, `repeat_one_side`, `partner_unique` independently; its reading that `kill` is
+     empty on every square grid (one mind, unchecked, its own words). **A correction of mine owed to Kooshi**: my
+     mid-run report said the model is an example for "the six theorems"; it is one for five — said in my next
+     report. **Slips, the job's, disclosed**: one control's expectation wrong and corrected; one checker run
+     killed by an under-declared memory cap (nothing lost); stages 1–3 committed together. **Credit**: a closed
+     formula for the model, a checker tied to the kernel's own numbers with a fault planted in every field, and
+     the omission in its own first message corrected in its report. **Rulings.** (a) **Its fate line is filed**
+     (`plans/SEARCH-QUEUE.md` line 8, verbatim). (b) **FS131-I7M states the model in Lean** — by the formula, as a
+     `CountData (torusGrid 12 12) 6` the kernel evaluates; the cost at 144 cells is unpriced, so its first act
+     measures one field, and the colouring's four-cell domain under 36 translations is offered as a shortening;
+     it corrects `Count`'s docstrings: five theorems inhabited, `kill` not. Brief not written. (c) **"Is `kill`
+     empty?" is filed as an open question for a deriver** — Kooshi's "otherwise", for the part the search did
+     not answer: a line for FS-117's stub at the filing, and a claim for a deriver's job if one opens on route T.
+     If K1 holds on no map, FS114-N3-JOINT's "under K1" clause says nothing; that is not established. (d) Its
+     pull-back argument (a window's refutation gives "no finite quotient of that tiling") is one mind's and is
+     filed with (c). (e) `proofs.tar` (10 MB) stays: the certificates are the artifact. (f) A memory figure for
+     `cake_lpr` in `RUNNING.md`'s toolchain row is owed (it reached a 4 GiB cap on a 30 MB formula): filed after
+     the landing in flight, since that file is not among the exempt paths. (g) **Slot → FS131-I8B** (wave 8's
+     join job, on `fs131-w8b` at `8d979793`), launched 2026-10-06. In flight: 3 (LT5, I6K, I8B).
