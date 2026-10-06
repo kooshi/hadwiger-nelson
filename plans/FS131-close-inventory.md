@@ -4516,3 +4516,26 @@ reason by the close.*
      `stuckModel_hyps` once `Stuck` lands. (f) **Slot → FS131-T4** (the doubled-name check; ruling 459 (b)), launched 2026-10-06 on branch
      `fs131-t4`. In flight: 1 (BA3) + 1 (RP1) + 1 (T4) = 3. Queue: the models' implementer A; wave 5's landing job when RP1 and BA3 are both
      back; the models' implementer B.
+
+462. **FS131-T4, by message: measured — with a doubled theorem name `#print axioms` can print clean while the copy the environment holds is
+     `sorry`; ruling 459 (a)'s reading is contradicted and withdrawn** (source: T4's message to "main", 2026-10-06; evidence in its worktree,
+     `data/fs131/t4/exp/` and `tools/fs131_t4_experiment.py` on branch `fs131-t4`, uncommitted at the message; not read by me — its stage's
+     commit is the artifact to check). **The rows**: sibling modules B (`theorem dup : 2 + 2 = 4`, a clean proof) and A (the same name and
+     type, `sorry`); a file importing B then A, `theorem down : 2 + 2 = 4 := dup`, builds, and prints "'down' does not depend on any axioms"
+     while `#print dup` shows `sorry`; with the imports in the other order the environment holds the clean proof and both prints say
+     `[sorryAx]`. **So the print follows the first-imported copy and the kernel keeps the last-imported one: never the same copy.** Why, read by
+     T4 in the pinned source: `Lean/Util/CollectAxioms.lean` does not walk an imported constant's proof; each module stores an axiom list per
+     declaration when its olean is written (`exportedAxiomsExt`), and a downstream print looks it up in the module
+     `Environment.getModuleIdxFor?` names — for a doubled name the first to declare it (`insertIfNew`, `Environment.lean` l. 2283), while the
+     constant kept is the later one (l. 2279–2280). **What it means**: the axiom audit is not faithful where a name is declared twice and one
+     copy is not clean; the `sorry` grep and the build's warning still see a `sorry` copy; no statement is certified that lacks a clean proof
+     somewhere in the library (a clean stored list belongs to a copy that is a clean proof of the same type) — the last by argument, not by
+     experiment. On `main`: one known pair, `conj_e`, each copy on the standard three by M7's reading; T4's kernel-side scan has not run yet.
+     **Rulings**: (a) **459 (a) is withdrawn** — I ruled which copy a print follows from thirteen lines of the importer and did not have the
+     axiom collector in view; the grade I report is T4's: hygiene of the audit, not soundness of any statement, by argument. (b) **T4 runs the
+     scan on `main` first**, ahead of the rest of its table, and messages the answer to "is any audited print on `main` affected"; told by
+     message. Alternative: the table first. Why: the filed trust-ledger counts rest on that answer. Confidence: high. (c) **The doubled-name
+     check is a gate step from wave 5's landing on**, not an option (459 (b) stands, stronger): with no name declared twice a stored list is
+     the list of the constant the environment holds. (d) **Kooshi is told in this turn's report**; a push follows only if the scan finds a
+     pair with a copy that is not clean. (e) **A slip, mine**: a ruling on a mechanism from a partial reading, stated at "medium-high" — the
+     second of this kind (ruling 417 (b)); from here a ruling on what a tool does waits for the tool's run when a job is about to make it.
