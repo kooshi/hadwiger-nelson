@@ -7446,3 +7446,19 @@ reason by the close.*
      instance for `plans/GROKKING-INSTANCES.md` at the filing (item 582). (e) **The special-purpose slot is
      closed.** Where the patch, the note and the drafted account go is Kooshi's; handed to him in my report. In
      flight: 3 (LT5, I6K, I7M).
+588. **Kooshi, 2026-10-06, verbatim: "Add a short header to his readme explaining that the fork is a refutation." — done, by me** (the special slot is closed and the reviewer has handed back; a text edit of one paragraph, so I took the implementer's role for it and am its author, not its reviewer).
+     **The edit**: one notice at the top of the fork's README, above the original text, which is unchanged beneath
+     it — that the fork is a refutation; that the claim that the repository formally verifies χ(ℝ²) = 7 does not
+     hold, because `outside_headline` assumes the bound it needs and the bound is false; where the Lean file and
+     the note are; **that this refutes the claimed proof and not the number, which is still known only to be 5, 6
+     or 7**; and that the additions are a reader's and are not endorsed by the original author (the repository's
+     licence, CC BY 4.0, asks for an indication of changes and forbids implying endorsement). The note's first
+     paragraph now names both changed files. **The patch regenerated** from a working tree with no commit made
+     (`git add -N`, `git diff`): ten files, sha256 `d2cffc5c11655e3b…`, replacing the nine-file patch at
+     `data/external/hn2/fork/audit-against-outside-commit-2.patch`; the tree beside it gains the README. **Checked, by
+     script**: it applies to a second fresh checkout of `outside-commit-2` (`git apply --check` exit 0); the headline
+     file's hash is the kept copy's; the Lean audit file, the Lake file and the comparator pair are byte-identical
+     to the ones the reviewer built and I read, so its build result carries over (no Lean changed); the README
+     below the notice is the original, line for line; no author line. Not checked: how GitHub renders the notice
+     above a title written in HTML. **A slip of mine**: this item's first append failed its tail check (a wrapped
+     line again) and the patch was committed one commit before the item.

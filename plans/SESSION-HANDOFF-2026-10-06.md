@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–587 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–588 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -49,7 +49,7 @@ planted-picture models land (queue item 2).
 
 **FS131-T5 is done (item 562)** — branch `fs131-t5` at `4dd69014`, tree `.claude/worktrees/fs131-wt5`, record `plans/FS131-T5-assumptions.md` there: the gate step `scripts/assumptions.sh` lists what the library assumes in both forms. It is **not on `main`**. **It lands in a job of its own, FS131-LT5, the next landing after FS131-L10B (ruling 562 (e)) — its generator is written and dry-checked (`data/fs131/briefs/scripts/mk-lt5.py`); once L10B has landed: make the tree (`git -C <root> worktree add -q -b fs131-lt5 <root>/.claude/worktrees/fs131-wlt origin/main`, `.lake` as usual with the build copied from `fs131-w10m`, push), run the generator, gate, launch (`debruijn-implementer`, `model: "opus"`)**. What the brief asks: merge `origin/fs131-t5` into `main`'s tip then; make its draft 8's docstring edits under `Proofs/` (a rebuild), with `Voronov11`'s sentence (ruling 562 (b)); declare what wave 6's first half and wave 10's second half brought (L10B's drafts carry a table for it; wave 6's first landing's record names its hypotheses); `--write-ledger` (Falconer's rows leave, Weil's arrive); read its 31 conditions and 2 premises as a second reader; make absent counts fail once filed (ruling 562 (d)); the full gate; land; then **I file its drafts 1, 3–6** (`CLAUDE.md` § Trust ledger's nine counts, `LEAN.md` § The gate, § Assumptions, § Trust ledger, `ARCHITECTURE.md` § 5) and add its draft 7 — the line every landing brief carries — to every landing brief written after. The two bibliography rows it needed are filed. Kooshi has the complete list he was owed (my report after item 563).
 
-**EXT-HN2 is done (item 587)**: the outside repository at `outside-commit-2` proves nothing about the plane; the patch for the outside repository is `data/external/hn2/fork/audit-against-outside-commit-2.patch` (tree beside it; note `AUDIT.md`), checked by me to apply to that commit; where it goes is his. Held: `~/.cache/ext-hn2/` (20 GB) until he says the matter is closed.
+**EXT-HN2 is done (item 587)**: the outside repository at `outside-commit-2` proves nothing about the plane; the patch for the outside repository is `data/external/hn2/fork/audit-against-outside-commit-2.patch` (tree beside it; note `AUDIT.md`; since item 588 it also puts a notice at the top of the README, at his word), checked by me to apply to that commit; where it goes is his. Held: `~/.cache/ext-hn2/` (20 GB) until he says the matter is closed.
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. If the session restarted, resume a job from its record's last SAVED stage with
 a fresh agent on the same brief.
