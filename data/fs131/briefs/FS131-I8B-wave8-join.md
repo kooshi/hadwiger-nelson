@@ -129,7 +129,10 @@ on `SemiHubPlaces` is FS131-I8D, and you are the job it says "starts first"**:
    controls: `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w8a/tools/fs131_i8a_stmt.py` is the wave's own) — exactly one
    declaration changed, `star_anti`, by exactly the two binders; your additions listed.
 6. No other statement or definition changed; no new `axiom`, no `native_decide`. Do not edit a file while a build of it runs. You do
-   not run the gate or touch `main`. `./scripts/dupnames.sh` before each push that adds names; `tools/check_architecture.py` exit 0.
+   not run the gate or touch `main`. `./scripts/dupnames.sh` before each push that adds names; `tools/check_architecture.py` exit 0. **After your last green build, the guarded
+   lint** — `lake lint --no-build -- --no-build --trace` under the slot with `--mem 8` (`LEAN.md` § The gate), its output saved: a
+   landing's gate went red today on an instance argument a proof did not read, which the build's own linters do not report
+   (inventory item 573). A line it reports in what you wrote is yours to repair if no statement of a leaf changes, and a message if one does.
    Leave no background process running, and keep what your record cites under your `data/` folder.
 7. **Your record**, stages headed "Stage n — SAVED (FS131-I8B)", "Theorems this phase proved", each read against its sentence; and a
    section **"For the two implementers who start from here"**: the shared lemmas with their statements, which use each serves, and

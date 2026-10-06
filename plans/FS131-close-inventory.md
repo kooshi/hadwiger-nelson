@@ -7133,3 +7133,220 @@ reason by the close.*
      question for a deriver — his "otherwise". (c) **Staffing**: the cap stays at three, the Searcher takes a
      slot and adds none, and my own context is the other lever (a compaction when he calls one; the handoff is kept
      current for it). (d) The handoff's §§ 2–4 are rewritten to current state with a "learned" list.
+575. **FS131-L10B done: wave 10's second landing is on `main` through the full gate — the library declares exactly one outside axiom** (landing implementer, Opus; harness 545k and 103 minutes by the task notice; record `plans/FS131-L10B-landing.md`; report `data/fs131/reports/FS131-L10B.md`; gated commit `f0cc3018`, landed `3b2e9848`, a fast-forward).
+     **Landed**: the wave's second pass proved (eleven modules of `Arith/`), the import of Weil's bound with its
+     eight theorems — `standingFloor_seven_weil`, `seven_le_localBound_weil`, `five_le_chromaticNumber_weil`,
+     `targetFloor_seven_weil`, `targetFloor_six_weil`, `circle_sum_le_weil`, `standingFloor_five_weil`,
+     `kloostermanBound_of_ringChar_ne_two` — `targetFloor_eight_128` on no import, the measure leaves, and
+     `Plane/MetricalBoundary` with Falconer's lemma a theorem. 160 hand-written theorems. Three statements changed,
+     each ruled: the majority vote (542), the standing field's instance (555 (a)), one unused instance binder
+     (573). **The gate, on `f0cc3018`, by its saved run**: every step exit 0, the lint included. **My receipt**:
+     since the gated commit `main` changed under `plans/` and `data/` only (`git diff --name-only`, empty outside
+     them); `sorry` under `Proofs/`: 0; `^axiom` under `Proofs/`: the native-evaluation example and
+     `kloosterman_bound`, no other; **both digests run by me against wave 6's first landing's receipts**: axioms —
+     "6334 records — 6304 clean on the standard axioms, 17 axiom-free, 8 imported, 5 declared purchase(s)",
+     "declared imports (1)", 160 added (152 CLEAN, 8 IMPORTED), 0 removed, 4 changed (Falconer's four, IMPORTED to
+     CLEAN); vacuity — `declarations=14501 refutations-skipped=199 sites=1269`, `vacuous=0 stale=0 declared=3
+     witnessed=38 generic=1226 unknown=2`, the baseline's header matching. Not checked by me: the proofs beyond the
+     gate; its kernel-signature table line by line; the three docstring notes it copied from the planner marked "not
+     a Lean declaration". **Filed, mine** (commit `e9a65a86`): `CLAUDE.md` § Trust ledger (its sentence, and the
+     new one on the one outside axiom) and § The gate; a `GATE_CHANGES` entry; `LEAN.md` — an import stated in its
+     paper's own form (ruling 555 (e)), the stale branch clause, the kernel-signature reading, IF1's `ENNReal`
+     bullet; after it both digests read "match"; the fact audit against `df61d748` loses six tokens, each a
+     superseded count or its landing's name; `--dupes` exit 0. `BIBLIOGRAPHY.md`: `[Weil1948]` (imported; read
+     status; the slip in print; "about the norm-one Cayley graph"), `[MMST1996]` (ruling 538 (a) met),
+     `[Falconer1981]` and the Croft debt row, from its drafts and IF1's. Its record, drafts and receipts merged to
+     `main` by me (`3c31d362`: `plans/` and `data/` only). **Prediction scored**: briefed at 450k; 545k.
+     **Credit**: the audit's self-test shown red at exactly the three controls before their edit; a new instrument
+     that reads every stored type's binders against its file and section variables; stopping at a statement
+     change and naming three options. **Slips, the job's, disclosed**: seven, listed in its record. **Rulings.**
+     (a) **The open gate items at this landing go to the wave's next implementer** (FS131-I10G, brief not written):
+     the usable place (`usable_card_ge`, `no_small_usable` wait on its leaf), the two Lean models the planner
+     priced at about 55 lines (`contChars_haar_null`, `spectral_carried_iff`, `si4`'s notes say "not a Lean
+     declaration"), and `FloorPlanes`' docstring paragraph that still says "the plane". `sp_if` stays open by one
+     classical theorem. (b) Two tool defects (the records check cannot read an imported record; the keep-both
+     check reads the controls file's print lines) join the shared checker's list (item 406 (c)). (c) Its drafts 8
+     and 9 (the wave's generalizations; `LEDGER.md` row 53 and G56 said of the norm-one Cayley graph, row 152,
+     `plans/LEAN-BACKLOG.md`, the plan's § 7.4, the Frontier clause, the atlas) are held for the milestone's filing.
+     (d) Its table of hypotheses (draft 6) is FS131-LT5's input; two of its cases are pre-ruled in that brief
+     (a former proved over the declared import leaves the list; `KloostermanBound` is declared only if the step
+     asks). (e) **Slot → FS131-LT5** (the gate step's landing; tree `fs131-wlt`, branch `fs131-lt5`, from the filed
+     `main` at `e9a65a86`; brief gated), launched 2026-10-06. **From now until it hands back I commit nothing to
+     `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`.** In flight: 3 (I6L,
+     I6Z, LT5); the Searcher takes the next free slot.
+576. **FS131-I6L done at its Stage 4: wave 6's cover hull and parallels — fifteen of seventeen leaves proved; the two left have no kernel route and are a deriver's question** (implementer, Opus; harness 588k and 61 minutes by the task notice; record `fs131-w6l`'s `plans/FS131-I6L-implementation.md`; report `data/fs131/reports/FS131-I6L.md`; seven commits, tip `b5b8f4be`; pushed, tree clean).
+     **Proved on the standard three** (built, not gated): `pinch_of_cover` (the pinch for two sets that cover, with no
+     disjointness — FS111-M2-HULLC (v)); three more clauses of HULLC (an exterior unit disc at every boundary point;
+     the boundary on the unit parallel); in `Parallel`: `partner_point`, the three tangent-parallel leaves
+     (FS121-DB1-L7 and INTRAD's step (1)), `finite_bad_directions`, `out_family` (FS121-O1-OUT), `chain_in`
+     (FS121-DB1-L6), **`radius_integer`** (FS111-M2-INTRAD (i) for a circular arc: its radius is an integer),
+     `arc_interior`, `segment_interior` (FS121-V5-LOC (iii)), `twoColourNhd_ball_of_open`. **The shared fact** of
+     ruling 531 (c): `HasTwoDiscsAt.mem_essClosure` and `AeColouring.IsTangentPt.mem_essClosure`. **Open**:
+     `curvature_integer_ae` (INTRAD (i) along a general chart — the derivation's step is two lines and lacks an
+     almost-everywhere argument; its own route, one mind, unformalized, in its record § 4, about 600–900 lines) and
+     `finite_pieces_of_radius` (INTRAD (iii) — its derivation passes through `Fan.ends_centre`, which is in a module
+     downstream of this one). **Four generalizations** (DB1-L7 reads no arc; V5-LOC (iii) reads no chart and
+     `local_graph` is used by no leaf of `Parallel`; DB1-L6's last clause reads no chain; ruling 502 (c)'s lemma is
+     about two sets). **A route of the plan that does not go** (not a statement): neighbouring arc points' two-colour
+     balls need not overlap; proved another way. **My receipt**: tip equals `origin/fs131-w6l`, tree clean; outside
+     `data/`, `plans/`, `tools/` it changed `CoverHull`, `Parallel` (1,423 lines added), `CoverDiscs` (16 lines
+     deleted: the moved lemma) and `scripts/Axioms.lean`; `sorry` by the handoff's grep: `Parallel` 2, `CoverHull`
+     and `CoverDiscs` 0; its last real build's full log ends "Build completed successfully (5836 jobs)", every
+     warning a `sorry`; its last axioms print parsed by script — 49 records, none outside the standard three but
+     its planted control on `sorryAx`; **the heads the base declared in `CoverHull` (7) and `Parallel` (21) are
+     textually unchanged, no `include` or `omit` added, and the moved lemma's statement in `CoverHull` is the one
+     `CoverDiscs` held at the base (by script)**. Not checked by me: the proofs beyond the build; its kernel
+     statement check's code; its § 4 route. **Predictions scored**: the plan priced `CoverHull` at 1.2 days and
+     `Parallel`'s eleven at about 9 — one job; 1,573 lines, for which the calibration's line gives 514k against
+     588k measured; handoff § 5's "expect continuation jobs" was wrong for this one. **Credit**: the two hard
+     leaves left untouched and said why, with a route for one and the layout fault of the other; four rows found
+     to read less than filed. **Rulings.** (a) **A deriver's job is launched on the cluster these two leaves and
+     item 566's gap share — FS131-E9; rulings 565 (b) and 566 (c) are amended.** Its three questions: INTRAD (i)
+     along a general chart (the implementer's route to confirm or replace); INTRAD (iii) without the terminal
+     centres' finiteness, or its right place after `Centre`; and whether a saturated colouring with locally
+     finite singular set has interfaces that are locally finitely many segments and circular arcs — what follows
+     from held entries, and what stays open (no accumulating radii). Alternative: keep all three as named open
+     statements to the landing. Why the change: three jobs have now reached the same missing mathematics from
+     three sides (wave 9's planner, wave 6's fourth planner, this implementer), one of them with a route written
+     out; a deriver's hour settles which parts are provable before two kernel jobs are spent on them. Confidence:
+     medium-high. Claim list and brief not written. (b) `finite_pieces_of_radius`'s move below `Centre` is decided
+     after E9. (c) The shared fact's commit is sent to the running `Centre` implementer (one message: merge or
+     keep its hypothesis, its choice). (d) `c11_discs_of_cover` appears in two audit blocks: one line at the join.
+     (e) Its drafts (five regrades, three errata lines, a `LEAN.md` bullet) are held for the filing; the inhabitant
+     notes it names (R7 as a seven-colouring) join the wave's owed list. (f) **Slot → the Searcher**
+     (`SEARCH-2026-10-06`, item 574), launched 2026-10-06. In flight: 3 (I6Z, LT5, the Searcher).
+577. **FS131-LT5, by message mid-job: the merge is made and the step is red by 22 on today's `main`, as expected; my pre-ruling on `StandingFloor` met the step's rules and one word was asked** (source: LT5's message to "main", 2026-10-06; its Stage 1 saved, merge `a95cd1ca` on `fs131-lt5` — the artifact is read at its hand-back).
+     By its word: the merge brings no file under `Proofs/`; the self-test 32 of 32 on the merged tree. **The
+     disagreement**: with `StandingFloor`'s entry present the step is silent (its rule for a proved assumption
+     fires on a former proved over its own variables, not at an instance); with the entry removed the two closed
+     takers read established through the `_weil` theorems, but the step fails on the former's docstring, which
+     still says "a named hypothesis from outside the backlog" — in a module outside its touches. **Decided by it
+     within the step's procedure**: `KloostermanBound` declared outside under `[Weil1948]`, with three closed
+     families as three sites under one label; `Plane.NoPar` open (open questions 4 to 5); `GrundyBound`, `H1On`
+     conditions; wave 6's fourteen modules and wave 10's read for the words, none written out over a theorem's own
+     variables beyond what the step finds; **its second reading agrees with all 31 conditions and 2 premises**.
+     **Rulings.** (a) **(A): the entry leaves, and it may edit docstrings only in `Arith/StandingFive`** — the
+     former's, `seven_le_localBound`'s and a section heading — to say "proved at 7 and at 5 over the library's one
+     declared import". Alternative: (B), the entry stays. Why not: the front page would count as a hand result of
+     ours something the kernel holds over the import. Confidence: high. **My brief's sentence was wrong about the
+     mechanism** (I wrote "by the step's own rule for a proved assumption"; that rule does not fire on an
+     instance) — a slip of mine, found by the job testing it. (b) Its four decisions are ratified; Weil's bound
+     appears in three forms (the axiom, a named hypothesis, one inline label), to be said in one sentence in the
+     enumeration. Reply sent, one message.
+578. **The Searcher, by message mid-run: a model exists — a six-colouring of `torusGrid 12 12` meets every field of `CountData` at Euler characteristic 0; a candidate until the kernel evaluates it** (source: the Searcher's message to "main", 2026-10-06, about a quarter of an hour after launch; `data/search/2026-10-06/MODEL-torusGrid-12-12.json`, on disk, its commit to follow — the run goes on inside its hour: sheared quotients, a formula, other tilings).
+     By its word: its exact checker (`tools/search_20261006_check.py`, a transcription of the two Lean files) passes
+     all seven fields; the checker reproduces the kernel's numbers on `grid9`, `grid15`, `oneFaceTorus` and the
+     digon, and a planted fault in each field fails (48 controls); every cell has exactly two tactic darts, 288 in
+     all — "the count's extreme case"; **every other `torusGrid n m` with 3 ≤ n ≤ m ≤ 13 is unsatisfiable** (65
+     instances, each proof verified by `cake_lpr`). **Checked by me, with a script of my own that shares nothing
+     with its checker**: on the 12 × 12 torus, no cell's colour repeats among its eight neighbours, every cell's
+     four edge-neighbours are pairwise distinct, no colour absent from a cell's edge-neighbours appears on more
+     than three of its diagonal neighbours, and each of the six colours is used 24 times; and its own checker, run
+     by me, prints PASS for the seven fields, "tactic darts: 288", exit 0. Not checked by me: `mu_zero`,
+     `repeat_one_side`, `partner_unique` (its checker only); the 65 refutations; that its transcription is the
+     Lean definitions (the kernel's evaluation is that check). **Grade**: a certified candidate — [cert] by its
+     checker and mine in part, not [kernel]. **Rulings.** (a) **The model is stated in Lean as an inhabitant** —
+     `CountData (torusGrid 12 12) 6` by the kernel's evaluation, as `grid9` and `grid15` are — **by a small
+     implementer job on wave 7's count branch** (FS131-I7M, from `fs131-w7a`; brief written when the run's report
+     is in: a smaller sheared quotient, if it finds one, is the cheaper object for the kernel). With it the six
+     theorems at six colours name an inhabitant and item 564's gap closes. Alternative: leave it a certificate.
+     Why not: the milestone's rule is the kernel, and the two existing models show the shape. Confidence: high.
+     (b) **What it bears on is the deriver's to read, not mine**: the count's conditions are consistent at six
+     colours on a combinatorial map — said at that grade and no further in my report to Kooshi; a line for
+     FS-117's stub at the filing. (c) Search-lane tool files on `main` are exempt from a landing's re-gating (a
+     message to the running landing). No reply sent to the Searcher: it asks none and its hour is running.
+579. **FS131-I6Z done at its Stage 4: wave 6's centres — four of seven leaves proved; three left, of a different kind** (implementer, Opus; harness 449k and 53 minutes by the task notice; record `fs131-w6z`'s `plans/FS131-I6Z-implementation.md`; report `data/fs131/reports/FS131-I6Z.md`; five commits, tip `94a98a58`; pushed, tree clean).
+     **Proved on the standard three** (`Plane/Saturated/Centre`; built, not gated): `inner_support_near_centre` and
+     `outer_support_near_centre` (FS121-DB1-L1's two halves), so the planner's `kb_dir` (FS111-W-KB-DIR) rests on
+     nothing open; `Fan.angle_le_pi` (FS121-V3-CPI: at a singular point every region of positive angle has angle
+     at most π); **`Fan.ends_centre`** (FS121-O1-ENDS's centre: the centre of the last arc is singular, with two
+     regions of two further colours) — one proof for two hand lemmas; and `mem_singularSet_of_three` (a point
+     carrying three colours is singular), exercised on the nine-colour map. **Not proved**: `vt_w` (first child
+     proved), `erosion`, `pencil_window` — charts, one-sided calculus on a Lipschitz angle, an area estimate.
+     **A route finding for the planner**: `vt` asks its hypotheses on a chart's whole interval while its two
+     consumers hold a segment or an arc only near the point, and no lemma restricts an `IsInterfaceChart` to a
+     shorter interval; a wider `vt_w` is a candidate, not made. **On the layout question of item 576**:
+     `ends_centre` reads nothing of `Parallel` but one definition. **My receipt**: tip equals `origin/fs131-w6z`,
+     tree clean; outside `data/`, `plans/`, `tools/` it changed `Centre` (446 lines added) and
+     `scripts/Axioms.lean`; `sorry` in `Centre`: 3; its last real build's full log ends "Build completed
+     successfully (5836 jobs)", every warning a `sorry`; its axioms print parsed by script — 22 records, 20 on
+     the standard three, and `vt_w` with `vt` on `sorryAx` as the open leaf and its consumer should be; the nine
+     heads the base declared in `Centre` are textually unchanged, no `include` or `omit` added. Not checked by me:
+     the proofs beyond the build; its elaborated statement check. **Prediction scored**: the plan priced the four
+     proved leaves at about four days; 446 lines, one job. **Credit**: a single argument for two hand lemmas that
+     needs no case split and no blow-up; a planner's mutation note sharpened; the chart-restriction cost found
+     before anyone paid it. **Rulings.** (a) **A continuation job, FS131-I6Z2, on the same branch**: `vt_w`, then
+     `erosion` and `pencil_window`, from its record § 4.3; its first child is the chart-restriction lemma, and a
+     wider `vt_w` is a message to me before it is made. Brief not written. (b) The tangent-type fact was not
+     merged (nothing of its four leaves reads it): the continuation takes it by merging `origin/fs131-w6l`.
+     (c) `finite_pieces_of_radius`'s place is decided after the deriver's job (ruling 576 (b)), with its answer
+     that `ends_centre` can stand upstream. (d) Its drafts are held for the filing. (e) **Slot → FS131-I6K**
+     (wave 6's accumulation rows, on `fs131-w6k` at `2aa3f720`; Amendment 1 regenerated with the lint and the
+     two siblings' hand-backs, gate exit 0), launched 2026-10-06. In flight: 3 (LT5, the Searcher, I6K).
+580. **The day's search done (SEARCH-2026-10-06): queue line 8 answered yes at [cert] — a six-colour count exists on a combinatorial map of Euler characteristic 0; it inhabits five of the six theorems, not `kill`** (the Searcher; harness 265k and 25 minutes by the task notice; record `plans/SEARCH-2026-10-06.md`; report `data/search/2026-10-06/report.md`; commits `a88a6741`, `068587cc`, `7dc8b162`, `93840f55` on `main`, under `plans/`, `data/search/` and `tools/search_20261006_*.py`).
+     **The model, SEARCH-1006-GRID12**: on `torusGrid 12 12`, `col (x, y) = (t[y mod 2][(x + y) mod 4] − 2·⌊((x + y) mod 12)/4⌋) mod 6`
+     with `t = [[0,4,2,5],[5,3,1,0]]`; every edge tactic (288 tactic darts). **It inhabits** the hypotheses of `room`,
+     `slack`, `ends_identity`, `joint_first` and `joint`'s count data; **not `kill`**: `hK1 : ∀ p, deg p = 4 → 2 ≤
+     nonTac p` fails on it, and `kill` still has no inhabitant. **Nulls, each a refutation verified by `cake_lpr`**:
+     65 of the 66 `torusGrid n m` with `3 ≤ n ≤ m ≤ 13`; every quotient of the square grid by a sublattice of index
+     at most 64 but four models of index 48; free-boundary windows of five other tilings. Confirmed: the two
+     families I read as excluded by counting (item 574), and more — no face of length six or more can occur.
+     **My receipt**: the four commits are on `origin/main` and touch only `data/search/2026-10-06/`, its record
+     and its four tools; **the formula it reports reproduces its certificate's table at 144 of 144 cells (my
+     script)**; three of the seven fields re-checked by me on the table (item 578); its checker run by me, exit
+     0; `kill`'s `hK1` read by me in `Count.lean` on `fs131-w7a`. Not checked by me: the refutations; the four
+     48-cell models; `mu_zero`, `repeat_one_side`, `partner_unique` independently; its reading that `kill` is
+     empty on every square grid (one mind, unchecked, its own words). **A correction of mine owed to Kooshi**: my
+     mid-run report said the model is an example for "the six theorems"; it is one for five — said in my next
+     report. **Slips, the job's, disclosed**: one control's expectation wrong and corrected; one checker run
+     killed by an under-declared memory cap (nothing lost); stages 1–3 committed together. **Credit**: a closed
+     formula for the model, a checker tied to the kernel's own numbers with a fault planted in every field, and
+     the omission in its own first message corrected in its report. **Rulings.** (a) **Its fate line is filed**
+     (`plans/SEARCH-QUEUE.md` line 8, verbatim). (b) **FS131-I7M states the model in Lean** — by the formula, as a
+     `CountData (torusGrid 12 12) 6` the kernel evaluates; the cost at 144 cells is unpriced, so its first act
+     measures one field, and the colouring's four-cell domain under 36 translations is offered as a shortening;
+     it corrects `Count`'s docstrings: five theorems inhabited, `kill` not. Brief not written. (c) **"Is `kill`
+     empty?" is filed as an open question for a deriver** — Kooshi's "otherwise", for the part the search did
+     not answer: a line for FS-117's stub at the filing, and a claim for a deriver's job if one opens on route T.
+     If K1 holds on no map, FS114-N3-JOINT's "under K1" clause says nothing; that is not established. (d) Its
+     pull-back argument (a window's refutation gives "no finite quotient of that tiling") is one mind's and is
+     filed with (c). (e) `proofs.tar` (10 MB) stays: the certificates are the artifact. (f) A memory figure for
+     `cake_lpr` in `RUNNING.md`'s toolchain row is owed (it reached a 4 GiB cap on a 30 MB formula): filed after
+     the landing in flight, since that file is not among the exempt paths. (g) **Slot → FS131-I8B** (wave 8's
+     join job, on `fs131-w8b` at `8d979793`), launched 2026-10-06. In flight: 3 (LT5, I6K, I8B).
+581. **Kooshi, 2026-10-06 (verbatim in `data/external/EXT-HN2-request.md`): the outside repository of items 108–122 has been updated and the issue he posted there — this project's audit — is no longer visible; "Please have a reviewer look into it in a special slot."** (source: his message of 2026-10-06, about 21:40 UTC).
+     **Staffing, his**: a special-purpose slot for this job alone, a fourth beside the three; it closes at the job's
+     hand-back and is not refilled. **Brief**: `data/external/briefs/EXT-HN2-outside-claim-updated.md` (generator
+     `data/fs131/briefs/scripts/mk-ext-hn2.py`; gate exit 0, 9 quotations) — `debruijn`, as the first audit was: the
+     pull pinned and anonymous (no stored login), every file read before anything runs, what changed since
+     `b3366b5` and what the headline states now, the first audit's three points each put to the new files by Lean
+     against the new definitions, a sandboxed build, the axioms, the issue's visibility recorded once as a fact,
+     copies kept under `data/external/hn2/`, and a drafted account for him to use where he chooses. **Rulings, mine.**
+     (a) **It reads and posts nothing** — no comment, fork or message; what is done with its account is his.
+     Confidence: high. (b) **It is told not to lean**: the update may have answered the audit, and what it fixed is
+     reported as plainly as what it did not; nothing in its record characterizes the author. (c) If the update
+     proves anything about the plane, that is an early message, and item 489's conditional is then read against it
+     (a claimed proof that decides the problem or moves a bound). (d) The first audit's Mathlib harness is no longer
+     on this machine (`~/.cache/ext-hn1` absent — checked): the job rebuilds one. Launched 2026-10-06. In flight: 3
+     (LT5, I6K, I8B) + the special-purpose slot (EXT-HN2).
+582. **EXT-HN2's early answer: the update changed neither the headline theorem nor its file, so the first audit's three points still apply by the text; nothing about the plane was proved; no build has run yet** (source: EXT-HN2's message to "main", 2026-10-06 — the artifact is read at its hand-back).
+     By its word (an anonymous clone, head `outside-commit-2`, nine commits all dated
+     2026-10-05; the first-audited commit `outside-commit-1` still an ancestor — history not rewritten):
+     `OutsideClaim.lean` is byte-identical to the copy the first audit kept; the headline is still
+     `outside_headline (r) (C : OutsideColoring r) (h_safe : ∀ i, OutsideDensity r (C.color i)) : (∑ i, outside_measure r
+     (C.color i)) < 2 * π` — no graph, no chromatic number, no `False`. **Added by the update**: a Lake configuration
+     that requires Mathlib at `v4.28.0` with a manifest (it answers the issue's remark that the build failed as
+     shipped; not yet run); a `comparator/` directory — a Challenge file with the two theorems stated with `sorry`,
+     a Solution file, a configuration permitting the standard three axioms, at Lean and Mathlib `v4.34.0`; and a
+     second README link, "Confirm Results with Comparator Live". The README's claim is unchanged ("exactly 7").
+     **Its reading, not yet run**: a comparator run would pass, because it checks that the Solution proves the
+     Challenge's statement, and the Challenge's statement already carries `h_safe`; it cannot see that the
+     statement is not the README's claim. No file executes code at configure or elaboration time beyond standard
+     Lake declarations. **The issue's visibility**: one anonymous API request at 2026-10-06 21:50:12 GMT — HTTP
+     410, "This issue was deleted". Pending: the sandboxed builds at both toolchains, the Lean checks of points 2
+     and 3 against the new commit, the axioms. **Not checked by me**: anything — relayed to Kooshi at that grade.
+     **A note for this project's own publication plan** (`CLAUDE.md` § Publication: the comparator shape): a
+     comparator certifies that a solution proves the challenge's statement on permitted axioms, and nothing about
+     whether that statement is the claim — the item "read the final statement aloud against the informal claim"
+     is not replaced by it. An instance for `plans/GROKKING-INSTANCES.md` § The standard of evidence, at the filing.
+     No reply sent: it asks none.

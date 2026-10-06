@@ -1,0 +1,8 @@
+slot: admitted python3: mem 6 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11
+tori ['square', '64']: 3403 instances, 1342 done, 2061 to run on 12 workers
+  {"key": "tor-square-12.4.4", "verdict": "SAT", "seconds": 0.033, "faces": 48, "darts": 192, "clauses": 66149, "map": "square", "lattice": [12, 4, 4], "degrees": {"4": 48}, "lengths": {"4": 48}, "cnf_sha256": "f0229b10f4fd2081137a9e73c72744c84681bac04f08897966fbe8199e7f9724", "checker": "ACCEPTED"}
+  {"key": "tor-square-12.8.4", "verdict": "SAT", "seconds": 0.049, "faces": 48, "darts": 192, "clauses": 66149, "map": "square", "lattice": [12, 8, 4], "degrees": {"4": 48}, "lengths": {"4": 48}, "cnf_sha256": "d6f36515db70981a79a8e3be84a9ddd7d9f4fb24f8e001b56739f0701aa5de2f", "checker": "ACCEPTED"}
+  {"key": "tor-square-24.10.2", "verdict": "SAT", "seconds": 0.023, "faces": 48, "darts": 192, "clauses": 66149, "map": "square", "lattice": [24, 10, 2], "degrees": {"4": 48}, "lengths": {"4": 48}, "cnf_sha256": "5e07cf41ca5fe175ce457db500a40abd67fa2560f6f56c110fae6eb0bd2faf74", "checker": "ACCEPTED"}
+  {"key": "tor-square-24.14.2", "verdict": "SAT", "seconds": 0.022, "faces": 48, "darts": 192, "clauses": 66149, "map": "square", "lattice": [24, 14, 2], "degrees": {"4": 48}, "lengths": {"4": 48}, "cnf_sha256": "0eba75b26552d91eccc2c5839b79ddd3ed19e1dc8287cd99ddd08f70f3805036", "checker": "ACCEPTED"}
+finished: {'MAP-EXCLUDED': 288, 'UNSAT': 1769, 'SAT': 4}
+rc=0
