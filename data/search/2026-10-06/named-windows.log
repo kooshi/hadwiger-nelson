@@ -1,0 +1,19 @@
+slot: admitted python3: mem 4 GiB (hard cap), cpus 0,1,2
+windows ['cairo', '8', '10', '12']: 3 instances, 0 done, 3 to run on 3 workers
+finished: {'UNSAT': 3}
+rc=0
+slot: admitted python3: mem 4 GiB (hard cap), cpus 0,1,2
+windows ['prismatic-pentagonal', '8', '10', '12']: 3 instances, 0 done, 3 to run on 3 workers
+finished: {'NO-WINDOW': 1, 'SAT': 1, 'UNSAT': 1}
+rc=0
+slot: admitted python3: mem 4 GiB (hard cap), cpus 0,1,2
+windows ['deltoidal', '8', '10', '12']: 3 instances, 0 done, 3 to run on 3 workers
+finished: {'UNSAT': 3}
+rc=0
+slot: admitted python3: mem 4 GiB (hard cap), cpus 0,1,2
+windows ['snub', '8', '10', '12']: 3 instances, 0 done, 3 to run on 3 workers
+rc=143
+slot: admitted python3: mem 4 GiB (hard cap), cpus 0,1,2
+windows ['elongated', '8', '10', '12']: 3 instances, 0 done, 3 to run on 3 workers
+finished: {'UNSAT': 3}
+rc=0
