@@ -51,8 +51,15 @@ FS131-IO3 (Stages 11–15; build and axioms print in § 15.2):
 
 Nothing in `OpenMove` is left `sorry`.
 
-FS131-OL1 (Stages 16 on; OPEN's landing): **proves no theorem** — it brings the 105 records above through the full gate and onto `main`;
-the gate's counts are in its stages and in "Drafts for the front page (FS131-OL1)".
+FS131-OL1 (Stages 16–20; OPEN's landing): **proves no new theorem** — it brought the 105 theorems above through the full gate and onto
+`main` (`7470222e`, gated commit `68670175`). Read from the gate's saved axioms log (`build/gate/axioms/20261006T030550Z-413723.log`, by
+`tools/fs131_ol_axioms.py`): **105 records of `OpenMove` — 103 on exactly `[propext, Classical.choice, Quot.sound]`, 2 on fewer
+(`BranchGerms.idx_idx` `[propext]`, `BranchGerms.turns_idx` `[propext, Quot.sound]`), 0 on none, 0 `sorryAx`**; among the 103:
+
+- `HadwigerNelson.Plane.ArcMap.exists_open` — [kernel], `[propext, Classical.choice, Quot.sound]` — FS131-E6-OPEN at a lone horn
+  (`plans/FS131-E6-derivation.md` § 4.2; the lone form by ruling 392 (a)), held on `main`
+- `HadwigerNelson.Plane.ArcMap.Near.open_allowedCone`, `Near.open_valid`, `Near.open_degree_horns`, `Near.open_rim`, `Near.open_hlc`,
+  `Near.exists_openConfig` — [kernel], each `[propext, Classical.choice, Quot.sound]` — its clauses and configuration, held on `main`
 
 ## Stage 1 — SAVED (FS131-IO1): the readback, the as-given build, and what this job may change
 
@@ -890,3 +897,68 @@ of `LEAN.md` § The gate, and `scripts/identities.py check` reads "IDENTITIES: P
 **The gated commit for the landing is `68670175`.** Stage 18's negative controls stand for it: nothing they exercise changed.
 
 ## Stage 19 — SAVED (FS131-OL1)
+
+## Stage 20 — SAVED (FS131-OL1): the landing — `main` fast-forwarded to `7470222e`
+
+Checked before the push, at `HEAD` = `7470222e` (Stage 19's commit): `origin/main` (`a01002f8`, unmoved since the second merge) an
+ancestor of `HEAD` (`git merge-base --is-ancestor`); `a20bb6f5` an ancestor of `HEAD` (the branch was never rewritten: FS131-IR1's merge
+of it into wave 5 meets no conflict from this landing); `git diff --name-only 68670175 HEAD -- . ':!plans' ':!data'` empty — nothing but
+this record and its logs changed after the gated commit. **`git push origin HEAD:main`: `a01002f8..7470222e`, a fast-forward**
+(`data/fs131/ol/push-main.txt`); after it `origin/main` = `origin/fs131-wop` = `7470222e`. No `sorry` reached `main`. No background
+process is left running: every build, gate script and scan ran in the foreground under the slot and exited.
+
+**What is on `main` now**: `Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean` (2,874 lines, 105 theorems, 0 `sorry`), its import in
+`Proofs.lean`, its row in `ARCHITECTURE.md`, its 105 records in `scripts/Axioms.lean`, its carrier entry in `scripts/Vacuity.lean`, the
+baseline header's new counts, IO1–IO3's and this job's tools and logs.
+
+## Stage 20 — SAVED (FS131-OL1)
+
+## Drafts for the front page (FS131-OL1)
+
+Each with its slot and the log line it comes from. The gated commit is `68670175`; its receipts are byte-identical to the run on
+`92529c5c`. **The saved gate logs, for `scripts/gate_report.py` to re-read** (the `build/gate/` files are in the worktree
+`.claude/worktrees/fs131-wop`; the copies are committed):
+
+- axioms: `build/gate/axioms/20261006T030550Z-413723.log`, copy `data/fs131/ol/axioms-receipt-landed.log` —
+  `python3 scripts/gate_report.py axioms data/fs131/ol/axioms-receipt-landed.log data/fs131/ml/axioms-receipt-final.log CLAUDE.md`
+  (the previous run being MERGE's landing: 105 records added, each CLEAN; `data/fs131/ol/axioms-vs-main-final.txt`);
+- vacuity: `build/gate/vacuity/20261006T030742Z-427710.log`, copy `data/fs131/ol/vacuity-scan-landed.log` —
+  `python3 scripts/gate_report.py vacuity data/fs131/ol/vacuity-scan-landed.log data/fs131/ml/vacuity-scan-final.log
+  scripts/vacuity-baseline.txt CLAUDE.md` (14 rows added; `data/fs131/ol/vacuity-vs-main-landed.txt`);
+- self-tests: `build/gate/axioms-self-test/20261006T030555Z-414206.log`, `build/gate/vacuity-self-test/20261006T030854Z-434391.log`
+  (drivers `data/fs131/ol/axioms-selftest-landed.log`, `vacuity-selftest-landed.log`); build:
+  `build/gate/build/20261006T030548Z-413449.log` over IO3's full build `build/gate/build/20261005T124448Z-133559.log`.
+
+Drafts 1 and 2 were applied to a scratch copy of `main`'s `CLAUDE.md` and read by `scripts/gate_report.py` against these logs: § Trust
+ledger "match (clean, purchases and imported compared)"; § The gate "match (9 of 9 compared)" (`data/fs131/ol/drafts-axioms-digest.txt`,
+`drafts-vacuity-digest.txt`).
+
+1. **`CLAUDE.md` § Trust ledger**, the words "the current audit reads 3784 clean and 5 declared purchases, and 4 imported (and 14
+   axiom-free; 3,807 records at MERGE's landing, FS131-ML1, 2026-10-05)" become: "the current audit reads 3889 clean and 5 declared
+   purchases, and 4 imported (and 14 axiom-free; 3,912 records at OPEN's landing, FS131-OL1, 2026-10-06)". From
+   `data/fs131/ol/axioms-landed.log`: "audited: 3912 records — 3889 clean on the standard axioms, 14 axiom-free, 4 imported (resting on a
+   declared outside theorem), 5 declared purchase(s)" and "==> axioms: OK — 3889 clean, 14 axiom-free, 4 imported, 5 declared
+   purchase(s)". (The date is the logs' UTC date.)
+2. **`CLAUDE.md` § The gate**, the two count lines "`declarations=11026 refutations-skipped=113 sites=770`, `vacuous=0 stale=0 declared=3
+   witnessed=32 generic=733 unknown=2`" become "`declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0 stale=0 declared=3
+   witnessed=32 generic=747 unknown=2`". From `data/fs131/ol/vacuity-landed.log`: "scanned: declarations=11173  refutations-skipped=118"
+   and "sites:   sites=784  vacuous=0  stale=0  declared=3  witnessed=32  generic=747  unknown=2". The baseline's two entries are unchanged
+   (`hexShell_plane5`, `hexShell_plane6`).
+3. **`scripts/vacuity-baseline.txt`'s header** (written by this job from `scripts/gate_report.py header`, now on `main`): "#
+   declarations=11173  refutations-skipped=118  sites=784" / "#   vacuous=0 stale=0 declared=3 witnessed=32 generic=747 unknown=2" — the
+   digest's "recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)". No entry added or removed.
+4. **`tools/claude_md_fact_audit.py`'s `GATE_CHANGES`**, after the `(("3633", "5"), ("3784", "5"))` entry:
+   `(("3784", "5"), ("3889", "5")): "FS-131 OPEN's landing (FS131-OL1; .claude/worktrees/fs131-wop/build/gate/axioms/20261006T030550Z-413723.log, copy
+   data/fs131/ol/axioms-receipt-landed.log, gated commit 68670175): 3,912 records, 3,889 clean, 14 axiom-free, 4 imported, 5 purchases",`
+5. **`LEAN.md` § The gate**: no change — the vacuity self-test still plants sixty-two controls ("==> vacuity self-test: OK — all 62
+   controls behaved", `data/fs131/ol/vacuity-selftest-landed.log`) and the axiom audit 23 ("==> axioms self-test: 23 controls",
+   `data/fs131/ol/axioms-selftest-landed.log`). No carrier of `OpenMove` is tracked, so no control was added.
+6. **Held for the milestone's filing** (as MERGE's draft 6): `plans/FS131-E6-derivation.md`'s entry **E6-OPEN** (the list line at l. 12,
+   "[hand, one mind; the clearness step is `clear_near_end`, kernel]", and the block `derivation: e6-open`, "grade: hand", "minds: 1")
+   gains **[kernel], in its lone form** — `HadwigerNelson.Plane.ArcMap.exists_open`
+   (`Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean`), with the added hypothesis `h1 : F.HasSectors v c 1` (ruling 392 (a)), on
+   exactly `[propext, Classical.choice, Quot.sound]`, resting on no outside theorem and on no hypothesis beyond its statement's
+   (FS131-IO1–IO3, landed by FS131-OL1, gated commit `68670175`). The block's "not claimed: … that the horn's colour has one sector (the
+   statement does not need it)" is the correction item 391 already owes: the kernel statement needs it. No row of `LEDGER.md` names
+   E6-OPEN (`grep`: none), so no ledger row is regraded; `CLAUDE.md`'s Frontier text names no count of FS-131's landings and needs no
+   new line for this one; the Proof Atlas grade for E6-OPEN, if it has a node, moves to kernel (lone form) with the derivation's.
