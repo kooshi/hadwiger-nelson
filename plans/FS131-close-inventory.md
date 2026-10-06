@@ -4175,3 +4175,22 @@ reason by the close.*
      `fs131-w5c`** (E7's § 7.5) are the remedy pass's. (f) **The two questions for Poros** (Q3b; how far `F₀` extends) are held for the ask lane's
      next run, with FS-124's stub; nothing is ranked on them now. (g) **Slot → FS131-IA2**, launched 2026-10-06 on the brief of item 439. In
      flight: 1 (IR3) + 1 (KA1) + 1 (IA2) = 3. Queue: FS131-KM1; then implementers from KA1's hand-back.
+
+442. **FS131-KA1, by message at its Stage 2: no clause of `bend_away_part` is false; one clause changes, the pre-ruled one** (source: KA1's message
+     to "main", 2026-10-06; its record `fs131-w5a`'s `plans/FS131-bendaway-kernel-plan.md` § Stage 2; not read by me beyond the message). (1) The
+     horn clause becomes `(∀ x j, F.HasHornCount x j → ∃ j' ≤ j, M.HasHornCount x j')` (ruling 438 (b)); every other clause stays. (2) IA1's
+     unchecked point, R1 at an interior pinch, holds and the worry is void: by `hfree` no unit arc about another centre passes through a pinch
+     point, and in the new map `Γ` near it lies on `ω(P)` and on lens circles of radius above `1`. (3) Every clause true by hand against N2-AWAY,
+     N2-TAN and E5's Stage 4 ([hand], one mind, with E5's); **a correction to my brief's and the docstring's reading**: "the lens between `ω(P)`
+     and the unit circle about the contact" is necessary and not sufficient — the bound is E5's § 4.2 threshold (lens radius `R < ρ_Y − 1` for a
+     far tile of boundary radius `ρ_Y > 2` at the contact). (4) One step with only a one-line hand derivation: the gaps of `[θ₁, θ₂] ∖ C₂` are
+     finitely many on a plane map (the crescent just outside the radius-2 circle is `Γ`-free, connected, one colour) — the only use of `hP`.
+     (5) W1 and W2 are needed inside `bend_away_part`'s own `LocalStep` clause, so KA1 states them once upstream of `BendStep`, as one lemma:
+     `LocalStep` for any map whose arcs are `F.cutArcs P θ₁ θ₂ ∪ S` with `S` inside `K`. (6) The construction bends the gaps one after another,
+     each by the mirror of the toward collar bend on the same collar set, composed by an induction over a subdivision; the toward bend satisfies
+     the same internal clause package. **Rulings**: (a) (4) is planned as a child; no deriver — the kernel is the second check (Workflow 3.1), and
+     IA1's `Arc.finite_inter_sphere_two_or_subset` is passed on. Alternative: an Ephodos job on it. Confidence: high. (b) (5) placed as KA1
+     proposes; FS131-IA2 told by message, and its brief amended on disk (gate PASS), to state its toward `LocalStep` as an instance of the general
+     form and to match KA1's text when it comes; KA1 asked for that text at its skeleton commit. Alternative: IA2 proves W1 and W2 separately and
+     the final sync reconciles. Why not: a fourth doubled statement, foreseen. Confidence: high. (c) The correction of (3) is mine to own: my brief
+     repeated the docstring's sentence as the constraint. Logged; no redo.

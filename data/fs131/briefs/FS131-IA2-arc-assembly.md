@@ -129,3 +129,17 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment, 2026-10-06 (sent to the job by message the same hour; inventory item 442)
+
+From the outward bend's planner, FS131-KA1, at its Stage 2 (`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5a/plans/FS131-bendaway-kernel-plan.md`):
+
+1. The horn clause both bends export is the arc step's form, as this brief already asks: KA1 took ruling 438 (b)'s weakening. Every other clause of
+   `bend_away_part` stays as IA1 wrote it.
+2. **W1 and W2 are stated once, by KA1, upstream of `BendStep`**, as one lemma: `LocalStep` for any map whose arcs are `F.cutArcs P θ₁ θ₂ ∪ S` with
+   `S` inside `K`. State your `LocalStep` result for the toward bend as an instance of that general form, not as two lemmas. Its exact text comes to
+   you by message when KA1's skeleton holds it; if you prove it first, write the general lemma in your own module, say so in your record, and match
+   the text when it arrives — the proof moves to KA1's upstream home at the merge. Take the other groups of clauses first if your order allows.
+3. KA1's construction bends the gaps one after another on the toward bend's own collar set, and the toward bend satisfies the same internal clause
+   package: "one assembly for both" stands. You start no agents of your own (standing rule 1: delegation is one level
+deep, because the coordinator can only review work it knows exists).
