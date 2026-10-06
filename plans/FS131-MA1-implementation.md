@@ -90,7 +90,7 @@ No statement was found false.
 
 ### 2.1 The leaves, in the planner's order
 
-| leaf | route taken | lines (planner's price) |
+| leaf | route taken | lines, about (planner's price) |
 |---|---|---|
 | `brickBase_mem_interiorPts`, `brickBase_col_eq`, `brickBase_col_zero` | one child `brick_floor_eq` (the two floors of a point strictly inside a brick are `r` and `c`), then `not_mem_sevenBrickArcs` with `not_int_between`; `sevenBrick_color_eq`; the cell `(0, 0)` by `decide` on the table, stated first without the free `k` | 12 + 6 + 5 + 7 (M, S, S — "about 120") |
 | `norm_plantDir`, `tangentDisc_subset_ball` | coordinates (`plantPt_re`, …, `tangentCentre_im`); the one tangent point from `(q − v)·u ≥ 1`, two `nlinarith` steps | 5 + 27 (S, M) |
@@ -100,10 +100,12 @@ No statement was found false.
 | `ball_diff_fan` | as planned, with `exists_sign_change` by `Fin.induction` (11 lines); a point of a germ's arc has `tanHeight κ' = ‖z − v‖²(κ − κ')/2` (`frame_of_mem_carrier_germArc`, over `tanHeight_branchPt`) | 50, helpers 30 (M–H) |
 | `isSector_fan_iff`, `fanRest_ne_hornSet` | the partition as a named family `fanPiece : Option (Fin (m + 1)) → Set ℂ` with `fanPiece_data` (open, connected, disjoint, non-empty, the vertex in each closure) and `iUnion_fanPiece`; the rest's cone holds the open half-turn behind the vertex (`Ioo_subset_coneAt_fanRest`), which gives its non-emptiness, its closure clause and `fanRest_ne_hornSet` at once | 13 + 2, helpers 95 (M, S) |
 
-**The re-pricing, from the first two leaves** (brief, Done means 2): the brick facts came to 30 lines against "about 120", and
+**The re-pricing, from the first two leaves** (brief, Done means 2): the brick facts came to about 30 lines against "about 120", and
 `tangentDisc_subset_ball` to 27 against "M (30–120)" — a quarter to a half of the plan's table. Re-priced on that: `Paint` 300–400 lines
-(plan: 450–650), `Moves` 350–500 (plan: 500–700). **Measured at this stage**: `Paint` grew from 330 to 715 lines, 385 added, inside the
-re-priced band and under the plan's.
+(plan: 450–650), `Moves` 350–500 (plan: 500–700). **Measured at this stage, and my re-pricing was low**: `Paint` went from 330 to 825
+lines (`git diff --stat`: 509 inserted, 14 deleted) — 495 net, **inside the plan's band and above mine**. The first two leaves were the
+cheap ones; the fan cost what the plan said (its helpers alone are about 155 lines). The per-leaf counts in the table are read off the
+file by eye, to within a few lines. `Moves` stays priced at the plan's 500–700.
 
 ### 2.2 What is new beside the leaves (helpers, all in `Paint`, all new names)
 
