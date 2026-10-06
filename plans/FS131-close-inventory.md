@@ -5850,3 +5850,31 @@ reason by the close.*
      the wave's join. (h) **Slot → FS131-I6C** (`Curve`, then `LocalGraph`, on `fs131-w6c`), launched 2026-10-06, its
      brief amended at launch (one line asked of its report: where `local_graph`'s proof reads disjointness; gate exit 0).
      In flight: 1 (L10A) + 1 (K9) + 1 (I6C) = 3.
+
+532. **The briefs that item 531 ruled are written and gated: FS131-I6L, FS131-I6Z, FS131-I6K and FS131-K6d; trees made** (mine;
+     2026-10-06). **I6L** (`data/fs131/briefs/FS131-I6L-wave6-third.md`; tree `fs131-w6l`): `CoverHull`'s four leaves, then
+     `Parallel`'s thirteen — seventeen. **I6Z** (`FS131-I6Z-wave6-third.md`; tree `fs131-w6z`): `Centre`'s seven. **I6K**
+     (`FS131-I6K-wave6-third.md`; tree `fs131-w6k`): `Accumulation`'s ten. All three branches cut from `6fc27fa1`, builds
+     copied from `fs131-w6` (idle), pushed; generator `data/fs131/briefs/scripts/mk-i6k.py L|Z|K [<the commit holding the
+     cell lemmas>]`, which reads each file's open leaves from the tree; gates exit 0 (I6L's first run failed on a bare file
+     name, fixed). **K6d** (`FS131-K6d-wave6-fourth.md`, generator `mk-k6d.py`; on `fs131-w6` at `6fc27fa1`): the join of
+     the two proved branches into the wave's line, a fresh modeling pass over the third pass's definitions, the fragment's
+     six rows, the pinch's consequences on a cover, FS111-W-NOBEND's argument, and the owed inhabitants stated as leaves;
+     gate exit 0. **Rulings.** (a) **Ruling 531 (b) amended: three implementers, not four** — `CoverHull`'s four leaves
+     ride first in I6L's job. Alternative: a job of its own (FS131-I6H). Why not: the planner prices them at 1.2 days on a
+     scale the wave's implementers have beaten tenfold, `pinch_of_cover` is an adaptation of a proof that exists, and four
+     set-algebra leaves re-price `Parallel` for the same mind. Confidence: medium-high. (b) **K6d's first act is the merge
+     of `43ea4886` (`Pinch` proved) and `2e55a2d6` (`MapColouring` proved, `MapEdge`, `Sq9Map`) into `fs131-w6`**, each
+     followed by a build, the doubled-name check and a statement check. Alternative: a joining job of its own, or I merge.
+     Why the planner: its rows and the owed inhabitants are stated over `sq9Map` and `ArcMap.bound_of_saturatedOn`, which
+     reach its branch only by that merge; the registry files conflict by adjacent additions, and a merge that needs a build
+     is not a coordinator's edit. Confidence: medium-high; a merge that conflicts in a Lean file stops and comes to me.
+     (c) **`sq9Map`'s unproved facts (`Valid`, `NonSiamese`) are stated by K6d in wave 6's line**, as leaves; wave 8's
+     model job (ruling 530 (c)) takes that module by ancestry. Why: the fragment rows' inhabitant lines and `emptyNS`'s
+     model need the same facts about one map. Confidence: high. (d) I6Z's brief has two forms: without the cell lemmas'
+     commit it takes them as hypotheses under its own names; regenerated with FS131-I6E's commit it merges that commit
+     first. **Corrected before the gate, mine**: three sentences of K6d's draft (a count of implementers; "stands on" for
+     the six rows' relation to the local exclusion; a gloss of the planner's name R7 that I could not source) replaced by
+     what the records say. **Disk**: 301 GB free of 1.9 TB after ten new trees today at 4.9 GB a build copy; the finished
+     trees' removal is held for the filing (handoff § 8) and becomes due earlier if free space falls under about 150 GB.
+     **Every job ruled so far has a gated brief.**
