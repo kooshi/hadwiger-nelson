@@ -1,0 +1,31 @@
+allowed statement change: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean: AwayBend.idle
+    now: theorem AwayBend.idle (hF : F.Valid) {P : ℂ} {a b : ℝ} {c : Fin k} (hC : ∀ θ ∈ Ioo a b, P + 2 * e θ ∈ closure (F.region c)) {ε : ℝ} : AwayBend F F (Homeomorph.refl ℂ) ∅ P a b c ε where valid
+changed line(s) of Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: [312]
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut.mem_interiorPts
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut.kin_subset
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut.kout_subset
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut.homeo_eq_self
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut.homeo_ringPt
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut.homeo_fix_Γ
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut.lensOutCurve_subset
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut.ringPt_mem_lensOutCurve
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut.not_kept
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut.homeo_image_Γ
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: PushOutProfiles.cases
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: PushOutProfiles.toward
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: PushOutProfiles.a_pos
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: PushOutProfiles.push1_zero
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: PushOutProfiles.push1_pos
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: PushOutProfiles.push1_push1
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: tangRad_mono
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: tangRad_mul_cos_anti
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: tangentArc_image_out
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: collarOutMid_eq
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: dist_collarOutMid_left
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: dist_collarOutMid_right
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: two_sin_half_le_of_gap
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: sq_div_two_lt_sin
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: outerProf_le_left
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: outerProf_le_right
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: dist_lt_one_of_mem_lensOutSet
+1795 base files, 0 new files, 0 failures

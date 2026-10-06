@@ -1,0 +1,76 @@
+{
+ "leaves_G": [
+  "HadwigerNelson.Plane.pushOutHomeo",
+  "HadwigerNelson.Plane.pushOutHomeo_polar",
+  "HadwigerNelson.Plane.pushOutHomeo_symm_polar",
+  "HadwigerNelson.Plane.pushOutHomeo_eq_self",
+  "HadwigerNelson.Plane.pushOutProfiles_collar",
+  "HadwigerNelson.Plane.collarOutArcs_carrier",
+  "HadwigerNelson.Plane.dist_lt_one_of_thin",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_image_dom",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.collarOutArcs_nondegenerate",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.collarOutArcs_Γ",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.map_Γ",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.map_lens",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.map_agreesOff",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.map_valid"
+ ],
+ "leaves_D": [
+  "HadwigerNelson.Plane.ArcMap.AwayBend.idle",
+  "HadwigerNelson.Plane.ArcMap.AwayBend.next",
+  "HadwigerNelson.Plane.ArcMap.AwayBend.join",
+  "HadwigerNelson.Plane.ArcMap.AwayBend.contact_of_onRingArc",
+  "HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs",
+  "HadwigerNelson.Plane.R2Subdiv.of_local"
+ ],
+ "helpers_G": [
+  "HadwigerNelson.Plane.PushOutProfiles.cases",
+  "HadwigerNelson.Plane.PushOutProfiles.toward",
+  "HadwigerNelson.Plane.PushOutProfiles.a_pos",
+  "HadwigerNelson.Plane.PushOutProfiles.push1_zero",
+  "HadwigerNelson.Plane.PushOutProfiles.push1_pos",
+  "HadwigerNelson.Plane.PushOutProfiles.push1_push1",
+  "HadwigerNelson.Plane.two_sin_half_le_of_gap",
+  "HadwigerNelson.Plane.sq_div_two_lt_sin",
+  "HadwigerNelson.Plane.tangRad_mono",
+  "HadwigerNelson.Plane.tangRad_mul_cos_anti",
+  "HadwigerNelson.Plane.tangentArc_image_out",
+  "HadwigerNelson.Plane.collarOutMid_eq",
+  "HadwigerNelson.Plane.dist_collarOutMid_left",
+  "HadwigerNelson.Plane.dist_collarOutMid_right",
+  "HadwigerNelson.Plane.outerProf_le_left",
+  "HadwigerNelson.Plane.outerProf_le_right",
+  "HadwigerNelson.Plane.dist_lt_one_of_mem_lensOutSet",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.mem_interiorPts",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.kin_subset",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.kout_subset",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_eq_self",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_ringPt",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_fix_Γ",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.lensOutCurve_subset",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.ringPt_mem_lensOutCurve",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.not_kept",
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_image_Γ"
+ ],
+ "helpers_D": [
+  "HadwigerNelson.Plane.ringPt_inj_of_abs_sub_lt",
+  "HadwigerNelson.Plane.ArcMap.AgreesOff.mem_Γ_iff_of_notMem",
+  "HadwigerNelson.Plane.ArcMap.AgreesOff.mem_region_iff_of_notMem",
+  "HadwigerNelson.Plane.ArcMap.AwayBend.dist_centre",
+  "HadwigerNelson.Plane.ArcMap.AwayBend.closure_region_iff",
+  "HadwigerNelson.Plane.ArcMap.AwayBend.ringPt_notMem"
+ ],
+ "ka_proved": [
+  "HadwigerNelson.Plane.R2Subdiv.lt",
+  "HadwigerNelson.Plane.ArcMap.LocalStep.union",
+  "HadwigerNelson.Plane.claim_e",
+  "HadwigerNelson.Plane.end_cap",
+  "HadwigerNelson.Plane.ArcMap.collarOutArcs_locallyFinite"
+ ],
+ "from_children": [
+  "HadwigerNelson.Plane.ArcMap.CollarFitOut.pushOutProfiles",
+  "HadwigerNelson.Plane.ArcMap.bend_away_gap",
+  "HadwigerNelson.Plane.ArcMap.bend_away_subdiv",
+  "HadwigerNelson.Plane.ArcMap.bend_away_part"
+ ]
+}
