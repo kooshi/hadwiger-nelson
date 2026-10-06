@@ -480,3 +480,39 @@ BA2's work list (§ 4.6) held as written for items 1–4; its item 1's second op
 - **Names**: none of the seven is declared on any `fs131-*` branch head at this writing (a `git grep` over each).
 
 ## Stage 7 — SAVED (FS131-BA3)
+
+## Stage 8 — SAVED (FS131-BA3): `CollarFitOut.map_R1` proved, on the standard three
+
+### 8.1 The proof, and where it leaves the toward one
+
+Statement unchanged. Route (mine; the toward `CollarFit.map_R1` repeats `sides_eq`'s case split inline, this one calls `sides_eq`):
+1. *The closed arc lies in `F.Γ`* — the toward step word for word with the outward lens arcs: `ringArc_subset_Γ_of_finite`, the arc
+   meeting `collarOutArcA`, `collarOutArcB` finitely because their curvature is `1/R ≠ 1` (`germArc_isUnitArc_iff`; `1 < R` here,
+   `R < 1` there), and `map_Γ` off them.
+2. *An interior point of the arc is off the open arc `α°`*: it is in the bent map's `Γ`, and `α°` is interior there
+   (`ringPt_notMem_map_Γ`).
+3. *At an end, `Q ≠ P`*: an arc of `ω(P)` in the bent map's `Γ` through an end continues into `α°` — the same fact again.
+4. `sides_eq` with 1–3, and the hypothesis's sides.
+
+**The planner's worry at a pinch (plan § 2.1) does not arise in this child**: `map_R1` is about one collar bend, where a pinch point
+of the composed bend is an end of the arc; the end case is `sides_end`, proved for every centre `Q ≠ P` with no smallness and no
+case on the lens's side. No clause of R1 is false for the outward lens.
+
+**A finding about the statement (none changed)**: `hF : F.Valid` is not read by this proof — R1 is geometry of `Γ` and of the
+homeomorphism. The binder is kept by `have _ := hF` with a comment (ruling 419 (c)'s form), as BA2 kept the three removed at Stage 6.
+The same holds of the toward `CollarFit.map_R1` (its only use of `hF` is `sides_end hF`, which opens with `have _ := hF`). Held for
+the coordinator.
+
+### 8.2 The build and the receipts
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`), of commit `e5532754`: **OK — 459 of 459 batches, 3 modules rebuilt (`BendGap`,
+  `BendStep`, `Proofs`), exit 0, no warning other than `declaration uses sorry`** (`build/gate/build/20261006T080733Z-2466966.log`,
+  ending "Build completed successfully (5802 jobs)"; driver log `data/fs131/ba3/build3.log`). **4 distinct `sorry` warnings** (5
+  before): `BendGap` 1 (l. 1279, `CollarFitOut.map_R2`), `Procedure` 2, `Terminal` 1.
+- **Axioms** (`data/fs131/ba3/BA3Axioms-stage7.lean` → `BA3Axioms-stage8.out`, `BA3Axioms-stage8-summary.txt`, PASS): **13 records — 8
+  on `[propext, Classical.choice, Quot.sound]` (`CollarFitOut.map_R1` and the 7 helpers), 5 through `sorryAx`, exactly the expected
+  ones** (`map_R2`, `awayBend`, `bend_away_gap`, `bend_away_subdiv`, `bend_away_part`), 0 other. **Control**: expecting
+  `CollarFitOut.map_R1` through `sorryAx` fails, naming it as standard (`BA3Axioms-stage8-control.txt`).
+- **Statements**: `tools/fs131_ba3_stmt.py`: **0 failures over 1,795 base files** (`data/fs131/ba3/stmt-stage8.txt`).
+
+## Stage 8 — SAVED (FS131-BA3)
