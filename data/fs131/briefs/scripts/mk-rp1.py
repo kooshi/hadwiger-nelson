@@ -49,6 +49,8 @@ The rulings that make the list (read each whole in the inventory; the letters ar
 {item(432)}
 {item(434)}
 {item(455)}
+{item(458)}
+{item(459)}
 ## The statements
 
 The statements ruled to change, as they stand in your tree (read each whole):
@@ -89,10 +91,14 @@ The audits' rows and the sources of each corrected text:
    `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c/plans/FS131-I5-implementation.md`). A note you correct is a claim you make: check each
    named object against each hypothesis it is said to satisfy, by the statement or by `tools/fs131_qa4_notes.py` (on `main`:
    `/home/kooshi/source/lean-dir/tools/fs131_qa4_notes.py`), and run that tool over the branch when you are done — no CONFLICT left.
-4. **The statements that stand twice** (ruling 434 (d)): `finite_arcs_inter_compact` and `finite_arcs_meeting_compact`; `HasDegree.eq` and
-   `HasDegree.unique`; `IsRingArc.union` and `IsRingArc.union_of_overlap`; and whatever {EXTRA}. For each: check the two statements are one, keep
-   the name further upstream, re-point the other's users, remove it and its `scripts/Axioms.lean` record. One that turns out to differ is a
-   message to me.
+4. **The name that stands twice, and the statements under several names** (rulings 434 (d), 459 (c)). First **`conj_e`**, declared by both
+   `Plane/Chord` and `Plane/SixFragment` — on `main` since 2026-10-04; Lean accepts it silently because the two are theorems of one type in
+   sibling modules: make it one declaration in a module both import, with `sq_norm_eq`/`sq_norm_re_im`, the same two files' second duplicate.
+   Then the list FS131-M7's report ends with ("Names that stand twice, and statements under two names, in the joined tree": seven statements,
+   each with its import relation), and `finite_arcs_inter_compact`/`finite_arcs_meeting_compact` (item 433). For each: check the statements are
+   one, keep the name furthest upstream, re-point the others' users, remove them and their `scripts/Axioms.lean` records. One that turns out to
+   differ is a message to me. The pairs the report marks "not duplicates" stay. Re-run M7's `tools/fs131_m7_dupes.py --whole` at the end: no name
+   twice.
 5. **The check**: a build with no warning but `sorry` (the outward bend's open children, nothing of yours); the axioms print for every statement
    you changed and every declaration you kept of a doubled pair; `tools/check_architecture.py` exit 0; your statement check with its plants fired.
    No new `axiom`, no `native_decide`. You do not run the gate, merge another branch, or touch `main`. Do not edit a file while a build of it

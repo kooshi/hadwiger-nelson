@@ -4435,3 +4435,47 @@ reason by the close.*
      mathematics by one mind's hand proof, and it stood its first check whole. (e) **Slot → FS131-BA3**, launched 2026-10-06. In flight: 1
      (M7) + 1 (KM1) + 1 (BA3) = 3. Queue: the remedy pass on `fs131-w5c` after M7; then the merges of `fs131-w5z` (which holds `fs131-w5a`)
      into `fs131-w5c`.
+
+458. **FS131-M7 done: wave 5 is one line on `fs131-w5c`; `Procedure` holds no `sorry`; and a gap in the gate found — Lean accepts one theorem
+     name declared by two modules, and `main` has such a pair** (implementer; harness ≈ 520k by the task notice; record `fs131-w5c`'s
+     `plans/FS131-M7-sync.md` Stages 1–6; report `data/fs131/reports/FS131-M7.md` on that branch; commits `c288c7ab`, `002b911f`, `b7a1bd08`
+     (merge 1), `26a6446c`, `8ca92376` (merge 2), `ce99c7ba`, `dcdeac13`, `fa44d637` (the Lean source the final build read), `955d8927`,
+     `3381e47f`; pushed, tree clean). **Results**: `origin/fs131-w5y` and the skeleton `dd8c2c33` merged, each checked file by file (16,070 and
+     16,105 files) with plants fired; three conflicts in all, keep-both. `exists_arcStep`'s `sorry` replaced by IA2's proof, statement unchanged
+     — proved from the outward bend's open children. `IsMaxRingArc.meet` (W5) and `ArcBend.of_away` (its hypothesis now `bend_away_part`'s
+     conclusion, ruling 448 (b)) on the standard three. `ArcStep`'s copy of `LocalStep.of_cutArcs` deleted (448 (a)), so `CollarFit.map_localStep`
+     is through `sorryAx` on this line until the proved `BendAway` arrives by merge. **The finding**: `HadwigerNelson.Plane.conj_e` is declared
+     at `Plane/Chord.lean:276` and at `Plane/SixFragment.lean:342` on `main` (since 2026-10-04), identical statements, each proved; the build
+     and the gate as run have not seen it. At import Lean accepts a second constant of one name when both are theorems of one type; the pair is
+     an error only when one declaring module is upstream of the other. So item 443's "a loud failure by design" was not guaranteed by Lean:
+     `LocalStep.of_cutArcs` was loud at this join only through an import edge. **Also found**: seven statements stand under two to four public
+     names (the report's last section lists each with its import relation). **My receipt**: tip equals `origin/fs131-w5c`; the build log
+     `build/gate/build/20261006T071443Z-2071643.log` ends "Build completed successfully (5803 jobs)", 0 warnings other than `sorry`, 36
+     distinct `sorry` warnings, all in the outward bend's six modules (35) and at `BendStep`'s horn child (1); `sorry` by the handoff's grep:
+     0 in each of `Procedure`, `Terminal`, `ArcStep`, `BaseDense`, `HexRing`, `BendCollar`; `data/fs131/m7/M7AxiomsFinal.out` parsed by script,
+     20 records: 8 on exactly the standard three (`exists_vertexStep`, `stuckRun_ne_univ`, `bend_toward_collar`, `exists_preBend`, `bv_l3`,
+     `exists_open`, `IsMaxRingArc.meet`, `ArcBend.of_away`), 12 with `sorryAx` alone beyond them; **`conj_e` read twice on `main` by `grep`**
+     (the two lines, one statement); **the importer read by me in the pinned source** (`Lean/Environment.lean`, v4.32.0, l. 2209–2221,
+     2279–2282): `subsumesInfo` holds for two theorems of one name, type and universe parameters — and for a theorem over an axiom of its name
+     and type — and the import throws only when neither constant subsumes the other; when the new one subsumes the old it replaces it.
+     **Items**: corrections owed to my brief — "keep every block" left a record twice; the second merge's conflict (item 451); `HexRing` is
+     upstream of `Procedure`, so "replaced without conflict" understated the rebuild; to IA2's report — its scratch consumer fails on this
+     line at `exists_vertexStep`'s restated hypothesis (no bearing on what was placed). Generalization — wave 5's tail is a chain of seven
+     modules, the density half downstream of `Procedure` and of every bend module (for ruling 450 (d)'s re-layout). Tool defect, the job's own —
+     its duplicate scanner's normalizer pairs `clean…` with `cleanKeep…`. Slips, the job's, each disclosed (a false premise about Lean held
+     through three probes among them). A `LEAN.md` bullet is drafted in its record.
+459. **Rulings on M7's held items, and its slot.** (a) **What the doubled name costs, as I read it — hygiene, not soundness**: the two merged
+     constants have one type and what is kept is a theorem, so no statement gains a proof it lacks; a `#print axioms` downstream follows the
+     copy the importer kept (the later one, when it subsumes), so a clean print could hide that another copy of the same statement rests on
+     `sorry` or a bought axiom — and the build's `sorry` warning and the audit's own record of each name still see that copy. Confidence:
+     medium-high on the reading (the source, l. 2209–2282; not tested on a planted pair by anyone yet). (b) **The gate gains a doubled-name
+     check** — a Lean-side scan of every module's constant names, with a planted pair watched to fail — as a tooling job, FS131-T4, at the
+     next free slot; from then every landing runs it. M7's drafted `LEAN.md` bullet is filed with T4's result, once a planted pair has shown
+     which copy a downstream print follows. Alternative weighed: a textual scan now. Why not only that: it cannot see instances or generated
+     declarations (M7's point); the textual scan M7 ran is the interim receipt — one pair, `conj_e`. Confidence: high. (c) **`conj_e` becomes
+     one declaration** in a module both `Chord` and `SixFragment` import, at the remedy pass, with `sq_norm_eq`/`sq_norm_re_im` (the same two
+     files) and the other statements under several names (ruling 434 (d), widened to M7's seven). (d) **Only `origin/fs131-w5z` is merged
+     into `fs131-w5c`** — it holds `fs131-w5a` — and at that merge `LocalStep.of_cutArcs` and `CollarFit.map_localStep` must print the
+     standard three. (e) **The `ARCHITECTURE.md` resolution** (item 451) stands. (f) **Kooshi is told in the next report** (a gap in the gate
+     on `main`, no theorem in doubt, the check queued); not by push at night. (g) **Slot → FS131-RP1**, the remedy pass, launched 2026-10-06 on
+     `fs131-w5c`. In flight: 1 (BA3) + 1 (KM1) + 1 (RP1) = 3. Queue: FS131-T4; the merge of `fs131-w5z`; the landing.
