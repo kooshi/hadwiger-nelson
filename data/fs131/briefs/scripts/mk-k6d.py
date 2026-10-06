@@ -5,6 +5,7 @@ W=WT+"fs131-w6/"
 TIP=subprocess.run(["git","-C",W,"rev-parse","--short","HEAD"],capture_output=True,text=True).stdout.strip()
 K6=W+"plans/FS131-w6-kernel-plan.md"
 M=WT+"fs131-w6m/Proofs/HadwigerNelson/Plane/Saturated/"
+N9=WT+"fs131-w9/Proofs/HadwigerNelson/Plane/Reduction/"
 S="Proofs/HadwigerNelson/Plane/Saturated/"
 PIDENT="de Bruijn, the planner — your agent file (`.claude/agents/debruijn.md`) is your identity and your lane's workflow"
 ROWS="\n".join(Q(K6,p) for p in ["| FS116-O1-SATPIN |","| FS116-N1-AXIS |","| FS116-S1-RUNG |","| FS116-V4-PARTNER |","| FS116-S1-KAPPA |","| FS116-S1-PAIR |"])
@@ -77,6 +78,13 @@ A supporting lemma that moved to this wave today (ruling 533 (a)) — its entry,
 {Q("plans/FS111-derivation.md","  statement: REG-I_k follows from the honest existence form of C-SAT-T at k together with REG-J′_k")}
 {Q("plans/FS111-derivation.md","  uses only: FS111-M-C11 off Σ;",None,"the finitely-many-arcs clause for S–V Condition 3 at Σ; FS111-M-EXTREME or V0-CLEAN")}
 {Q("plans/FS111-derivation.md","  not claimed: honest C-SAT-T at five;")}
+What your statement of it must meet — wave 9's hypothesis and the theorem that takes it, on `origin/fs131-w9` at `045fada3` (not on your
+branch; the names are wave 9's own, and you declare none of them):
+
+{Q(N9+"Maps.lean","def ExistenceForm ")}
+{Q(N9+"Maps.lean","def ReduceToMap ")}
+{Q(N9+"Maps.lean","theorem top5 ")}
+{Q(N9+"Basic.lean","def RegA ")}
 ## Done means
 
 1. **Your readback first**: check every quotation above against its source; read the three passes' record whole (Stages 1–15), the wave's
@@ -104,10 +112,15 @@ A supporting lemma that moved to this wave today (ruling 533 (a)) — its entry,
    arguments allow — the implementer proving `local_graph` now (FS131-I6C) is asked to say where its proof reads disjointness; I will
    send you its answer if it is back. And FS111-W-NOBEND's own argument, read, with its merge into FS131-E8-LOCAL confirmed or corrected.
 6. **FS111-M-REDUCE-I** (ruling 533 (a)): the implication its entry states, read from its argument and stated over this wave's foundation
-   (`SingLocallyFinite`, `RegJFan` for REG-J′; the rows its `uses only` names). Wave 9's planner proves the composition that reads it
-   (FS129-OR1-TOP5) for an abstract predicate with the implication as a hypothesis; I will send you that hypothesis's exact Lean form, and
-   yours is stated to meet it at the join. If it is not in hand when you reach this item, state yours from the entry and say so. If this
-   item is more than the pass holds, leave it stated as a named hypothesis with what a later pass reads.
+   (`SingLocallyFinite`, `RegJFan` for REG-J′; the rows its `uses only` names). Wave 9's planner has proved the composition that reads it
+   (`top5`, quoted above) for an abstract predicate `P` and a bare proposition `RegJ`: state yours so that at the join it gives a term of
+   `ReduceToMap P RegJ` at `k = 5` for your `P`. You cannot import wave 9's module, so write the conclusion out over landed names —
+   `(∃ c : AeColouring 5, c.Tight) → ∃ F : ArcMap 5, F.IsPlaneMap ∧ F.Valid`. That planner's three notes, relayed as it wrote them: `P` is
+   a predicate on a colouring (`AeColouring 5`), not on a family of classes, so "honest, saturated" is said of the colouring (through its
+   classes if your foundation speaks of families); `RegJ` is one bare `Prop`, so if REG-J′₅ is meant of the colouring the existence form
+   produces, put it inside `P` and take `RegJ := True`; and the conclusion is an arc map — segments and circular arcs — so the map
+   M-REDUCE-I builds must have such interfaces, which FS111-M2-INTRAD's integer radii give under REG-J′, and with Jordan interfaces only
+   it does not meet `RegA`. If this item is more than the pass holds, leave it stated as a named hypothesis with what a later pass reads.
 7. **The inhabitants the wave owes**, stated as leaves with a plan each (the third pass's § 14.6): the colouring that pass calls R7, with a
    fan at a lattice point; `sq9`'s two periods; a chart and a two-branch fan for `sq9` at a regular point; and, for `sq9Map`, the facts
    no one has proved — `Valid` and `NonSiamese` first — which the fragment rows' inhabitant lines and wave 8's main refutation both need (ruling 530 (c): one map, declared once; wave 8's job will take your module by ancestry).

@@ -5912,3 +5912,17 @@ reason by the close.*
      planners of waves 7 and 8 are told in their briefs. **My check of one**: (5)'s logic — `SimpleOn S` is weaker than
      `Simple`, so a hypothesis quantified over the `SimpleOn` class is the stronger hypothesis, and the implication over
      the wide class does not entail the one over the narrow. **Relayed**: all five rulings to K9 by message.
+
+534. **FS131-K9, by message: the exact Lean form of FS129-OR1-TOP5's hypothesis — received, read at its source, and placed in
+     wave 6's fourth planner's brief by quotation** (source: K9's message to "main", 2026-10-06; its skeleton commit `045fada3`,
+     equal to `origin/fs131-w9`, tree clean — checked). **Read by me** at
+     `fs131-w9`'s `Proofs/HadwigerNelson/Plane/Reduction/Maps.lean` ll. 85–108 and `Basic.lean` l. 62: `ExistenceForm P :=
+     ∀ c : AeColouring k, c.Tight → ∃ c', P c'`; `ReduceToMap P RegJ := ExistenceForm P → RegJ → RegA k`; `RegA k := (∃ c :
+     AeColouring k, c.Tight) → ∃ F : ArcMap k, F.IsPlaneMap ∧ F.Valid`; `top5 (hRed : ReduceToMap P RegJ) (hJ : RegJ) :
+     ExistenceForm P ↔ 6 ≤ chiM0`, proved there from a general-`k` form — as its message has them. **Its three notes for
+     wave 6's planner**: `P` is on a colouring, not a family; `RegJ` is one bare `Prop` (REG-J′₅ of the produced colouring
+     goes inside `P`); the conclusion is an arc map, so M-REDUCE-I's map needs segment-and-arc interfaces, which integer
+     radii give under REG-J′. **Done**: K6d's brief regenerated with the four statements quoted from the tree and the notes
+     relayed as K9's (`mk-k6d.py`; gate exit 0, 36 quotations). **To read at K9's hand-back**: `top5` against row 154's
+     sentence — in particular that `ExistenceForm` records only that some colouring with `P` exists once a tight one does,
+     not a relation between the two.
