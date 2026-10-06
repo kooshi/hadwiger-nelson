@@ -3,3 +3,22 @@ unmutated: exit 0 — OK
 closed-rule-off: caught — self-test exit 1, and it names its control:     FAIL  closed_undeclared — THE LOAD-BEARING ONE: a hypothesis nobody declared, written out in a binder, closed: expected 'FAIL undeclared-closed-hy
 closure-unsound: caught — self-test exit 1, and it names its control:     FAIL  closed_unestablished — a closed hypothesis whose only proof in the library is conditional, or rests on a closed step whose own hypothesis is
 refutation-takes-any: caught — self-test exit 1, and it names its control:     FAIL  closed_refuted — the one closed hypothesis of a refutation is the claim refuted; two are not: expected 'FAIL undeclared-closed-hypothesis t5
+polarity-and-flipped: caught — self-test exit 1, and it names its control:     FAIL  shapes — every way a statement can take a declared hypothesis is found, and the ways it does not are not: expected a row 'TAKES t5c_H1 t5c_s
+antecedent-not-flipped: caught — self-test exit 1, and it names its control:     FAIL  shapes — every way a statement can take a declared hypothesis is found, and the ways it does not are not: expected no row 'TAKES t5c_H1 t5c_
+wrappers-off: caught — self-test exit 1, and it names its control:     FAIL  shapes — every way a statement can take a declared hypothesis is found, and the ways it does not are not: expected a row 'TAKES t5c_H1 t5c_s
+never-concluded-off: caught — self-test exit 1, and it names its control:     FAIL  never_concluded — a former taken as a hypothesis and concluded by no theorem, in neither list: expected 'FAIL undeclared-never-concluded t5c
+docstring-words-off: caught — self-test exit 1, and it names its control:     FAIL  by_docstring — a former whose docstring uses the library's words for an assumption, undeclared; and the same declared: expected 'FAIL undecl
+kind-check-off: caught — self-test exit 1, and it names its control:     FAIL  kind — a declared kind its docstring contradicts; a condition whose docstring calls it a hypothesis; a docstring that says nothing; a cited 
+discharged-off: caught — self-test exit 1, and it names its control:     FAIL  discharged — a declared hypothesis a theorem proves in general is no longer an assumption; one proved at an instance still is: expected 'FAI
+derived-constant: caught — self-test exit 1, and it names its control:     FAIL  derived_only — an undeclared former every proof of which takes a declared assumption: expected 'FAIL undeclared-derived-only t5c_DO'
+stale-declaration-off: caught — self-test exit 1, and it names its control:     FAIL  stale_declaration — a declared hypothesis that no theorem takes: expected 'FAIL stale-declaration t5c_S'
+axiom-rests-off: caught — self-test exit 1, and it names its control:     FAIL  axioms — the other form: an axiom with its source and the theorems resting on it; one unlisted; one with no source; one whose key is not in 
+source-check-off: caught — self-test exit 1, and it names its control:     FAIL  sources — no source; a source that is no key, row or id; a source its kind does not admit; three that do not resolve; and the partners that 
+resolution-off: caught — self-test exit 1, and it names its control:     FAIL  sources — no source; a source that is no key, row or id; a source its kind does not admit; three that do not resolve; and the partners that 
+ledger-unlisted-off: caught — self-test exit 1, and it names its control:     FAIL  ledger — a theorem that takes a declared hypothesis and is missing from its list; and a listed one the scan does not find: expected 'FAIL un
+ledger-stale-off: caught — self-test exit 1, and it names its control:     FAIL  ledger — a theorem that takes a declared hypothesis and is missing from its list; and a listed one the scan does not find: expected 'FAIL st
+accounting-off: caught — self-test exit 1, and it names its control:     FAIL  accounting: the TOTALS line dropped (a scan that died before its end) — expected 'FAIL accounting' with 'did not run to its end'
+restore: the two shipped files are byte-identical to the start, and no mutant is left
+unmutated, again: exit 0 — OK
+mutations=18 survived-or-failed=0
+exit=0

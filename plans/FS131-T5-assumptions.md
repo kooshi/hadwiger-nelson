@@ -522,3 +522,34 @@ filer's key. (d) `Plane.Voronov11`: "Named here, not imported (FS106-COMP's clau
 `mu_lt_of_voronov11`, which takes it as a hypothesis — say which reading stands (the list has it `outside`, one
 consumer). (e) `Plane.ArcMap.flankQ_upper`, `flankQ_lower`, `flankQ_upper_of_qrOnly`: "a named hypothesis" of `hQR`, which
 wave 5 proved (`flankQ_upper_of_qrOnly`); reword, and the three `HINT` rows leave.
+
+## Stage 6 — SAVED (FS131-T5): the mutation harness's result, the last self-test, and what the step does not do
+
+**The mutation harness: 18 of 18 caught** (`data/fs131/t5/runs/mutations.out`, exit 0). With one decision switched off
+in a copy, the self-test failed and named the control built for that decision, every time: the closed rule
+(`closed_undeclared`); the closure made unsound (`closed_unestablished`); a refutation excusing any number of closed
+hypotheses (`closed_refuted`); `∧` read at the wrong polarity, an antecedent not flipped, the wrappers off (`shapes`,
+three times); never-concluded off; the docstring words off; the kind check off; discharge off; **the constant
+`derivedFails` set to `false`** (`derived_only`); stale declarations off; the axioms' `RESTS` off; the source check off
+and the resolution off (`sources`, twice); the ledger's two directions off (`ledger`, twice); the accounting off. Then:
+"restore: the two shipped files are byte-identical to the start, and no mutant is left", and the unmutated self-test
+passed again. No shipped file was edited by the harness (mutants are copies; `ASSUMPTIONS_AUDIT`).
+
+**The last self-test, on the committed files**: `OK — all 32 checks behaved` (`data/fs131/t5/runs/selftest-final.out`;
+receipt `data/fs131/t5/receipts/assumptions-self-test.log`; the planted copy as elaborated, its ledger and its output,
+`data/fs131/t5/planted/`). In that run the shipped list's own failures number 3 — the three unresolved sources of
+stage 5 — which the self-test counts and leaves to the gate.
+
+**What the step does not do, beside the unseen class** (each a limit of the instrument, said here once):
+
+- `ESTABLISHED` is by equality of expressions, not by definitional equality: a closed hypothesis the library proves in
+  another form reads undeclared, which is the safe direction and is how `deGrey_bound_of_not_colorable`'s premise was
+  found. A closed statement that is an `axiom`'s is established by that axiom; the theorem that supplies it then rests
+  on the axiom, and is a `RESTS` row.
+- A wrapper is found only when its body or its fields mention a **declared** former; a definition that wraps a
+  proposition nobody declared is one more former, and falls under the closed and never-concluded rules like any other.
+- `RESTS` reads the axiom list stored with each theorem (`Lean.collectAxioms`), so it inherits `LEAN.md` § The gate's
+  condition on doubled names: it is faithful only where `scripts/dupnames.sh` is green.
+- The docstring reading is by words. A `.condition` and a `.premise` are prose dispositions: 31 and 2 on `main`, each
+  my reading, one mind, printed every run so that each can be challenged.
+- The step is not called by any other script: the landing that merges this branch runs it and files drafts 1–7.

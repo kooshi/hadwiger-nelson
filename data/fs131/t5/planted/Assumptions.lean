@@ -875,6 +875,8 @@ theorem t5c_step (h : (2 : ℕ) + 2 = 4) : (3 : ℕ) + 3 = 6 := rfl
 theorem t5c_est_user (h : (3 : ℕ) + 3 = 6) : True := trivial
 theorem t5c_cond_step (m : ℕ) (hm : 0 < m) : (5 : ℕ) + 5 = 10 := rfl
 theorem t5c_unest_user (h : (5 : ℕ) + 5 = 10) : True := trivial
+theorem t5c_bad_step (h : (7 : ℕ) + 7 = 14) : (6 : ℕ) + 6 = 12 := rfl
+theorem t5c_bad_user (h : (6 : ℕ) + 6 = 12) : True := trivial
 theorem t5c_refuter (bad : ∀ n : ℕ, n < 3) : False := absurd (bad 5) (by decide)
 theorem t5c_refuter2 (a : ∀ n : ℕ, n < 3) (b : ∀ n : ℕ, 7 < n) : False := absurd (a 5) (by decide)
 theorem t5c_prem_user (h : ∀ n : ℕ, n < 3) : (0 : ℕ) < 3 := h 0

@@ -1,224 +1,224 @@
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:869:19: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:869:19: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:870:25: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:870:25: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:871:23: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:871:23: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:872:32: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:872:32: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:874:18: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:874:18: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:875:22: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:875:22: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:876:31: warning: Variable name `hm` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:876:31: warning: Variable name `hm` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:877:24: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:877:24: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:878:22: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:878:22: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:879:22: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:879:22: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:881:43: warning: Variable name `b` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:881:43: warning: Variable name `b` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:885:28: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:885:28: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:887:28: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:887:28: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:890:28: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:890:28: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:892:29: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:892:29: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:896:28: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:896:28: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:900:29: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:900:29: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:905:21: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:905:21: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:908:21: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:908:21: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:911:21: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:911:21: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:914:21: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:914:21: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:917:22: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:917:22: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:920:22: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:920:22: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:923:22: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:923:22: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:926:22: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:926:22: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:927:20: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:927:20: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:928:31: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:928:31: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:929:33: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:929:33: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:932:34: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:932:34: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:933:32: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:933:32: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:937:24: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:937:24: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:941:24: warning: Variable name `p` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:941:24: warning: Variable name `p` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:942:30: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:942:30: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:945:21: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:945:21: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:948:29: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:948:29: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:951:21: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:951:21: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:954:21: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:954:21: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:957:28: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:957:28: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:961:28: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:961:28: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:964:29: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:964:29: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:965:21: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:965:21: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:976:30: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:976:30: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:979:21: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:979:21: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:980:26: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:980:26: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-/tmp/tmp.Oyo43MbFY4/Assumptions.lean:981:26: warning: Variable name `h` is not explicitly referenced.
+/tmp/tmp.s4zA8LVLja/Assumptions.lean:981:26: warning: Variable name `h` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
 
@@ -1921,7 +1921,6 @@ CLOSED ESTABLISHED HadwigerNelson.zmod121FourJust004 h :: HadwigerNelson.Justifi
 CLOSED ESTABLISHED HadwigerNelson.zmod121FourJust005 h :: HadwigerNelson.Justified HadwigerNelson.zmod121FourClauseTable HadwigerNelson.zmod121FourCnf 15808
 CLOSED ESTABLISHED HadwigerNelson.zmod121FourJust006 h :: HadwigerNelson.Justified HadwigerNelson.zmod121FourClauseTable HadwigerNelson.zmod121FourCnf 15941
 CLOSED ESTABLISHED HadwigerNelson.zmod121FourJust007 h :: HadwigerNelson.Justified HadwigerNelson.zmod121FourClauseTable HadwigerNelson.zmod121FourCnf 16018
-CLOSED ESTABLISHED t5c_bad_user h :: 6 + 6 = 12
 CLOSED ESTABLISHED t5c_est_user h :: 3 + 3 = 6
 CLOSED ESTABLISHED t5c_step h :: 2 + 2 = 4
 CLOSED PREMISE HadwigerNelson.Plane.voronov11_of_forall_mu_lt H :: ∀ ε > 0, HadwigerNelson.Plane.mu 6 ε < 1 :: one half of FS106-COMP's equivalence (mu_lt_of_voronov11 is the other): the implication is the content
@@ -2037,6 +2036,7 @@ FAIL stale-condition t5c_C2 :: declared a condition, and it is concluded by [t5c
 FAIL stale-declaration t5c_S :: declared, and no constant's statement takes it
 FAIL undeclared-by-docstring t5c_D :: its docstring uses the library's words for an assumption and no entry declares it
 FAIL undeclared-closed-hypothesis t5c_bad_step:h :: the closed hypothesis `7 + 7 = 14` is proved by no library theorem and named by no entry
+FAIL undeclared-closed-hypothesis t5c_bad_user:h :: the closed hypothesis `6 + 6 = 12` is proved by no library theorem and named by no entry
 FAIL undeclared-closed-hypothesis t5c_closed_user:h :: the closed hypothesis `∀ (n : ℕ), ∃ p, n < p ∧ Nat.Prime p ∧ Nat.Prime (p + 2)` is proved by no library theorem and named by no entry
 FAIL undeclared-closed-hypothesis t5c_refuter2:a :: the closed hypothesis `∀ (n : ℕ), n < 3` is proved by no library theorem and named by no entry
 FAIL undeclared-closed-hypothesis t5c_refuter2:b :: the closed hypothesis `∀ (n : ℕ), 7 < n` is proved by no library theorem and named by no entry
@@ -2047,4 +2047,4 @@ FAIL undeclared-derived-only t5c_DO :: every theorem concluding it takes a decla
 FAIL undeclared-never-concluded t5c_N :: taken as a hypothesis by 1 constant(s) ([t5c_n_user]), concluded by none: an assumption (.former) or a condition (.condition)?
 FAIL undeclared-never-concluded t5c_W :: taken as a hypothesis by 1 constant(s) ([t5c_shape_wrap]), concluded by none: an assumption (.former) or a condition (.condition)?
 === SCANNED === constants=13243 theorems=9676 formers=300 hypotheses=15998 closed=1499 untelescoped=0
-=== TOTALS === axioms=4 rests=8 named=35 inline=18 outside=10 ours=38 open=5 takes=113 mentions=3 produces=5 sites=29 conditions=34 declaredClosed=48 established=1436 premises=4 refuted=4 refutes=1 silent=13 derived=2 wrappers=3 cohyp=34 hints=3 unseen=14123 fails=25
+=== TOTALS === axioms=4 rests=8 named=35 inline=18 outside=10 ours=38 open=5 takes=113 mentions=3 produces=5 sites=29 conditions=34 declaredClosed=48 established=1435 premises=4 refuted=4 refutes=1 silent=13 derived=2 wrappers=3 cohyp=34 hints=3 unseen=14123 fails=26
