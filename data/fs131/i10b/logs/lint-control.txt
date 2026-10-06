@@ -1,0 +1,23 @@
+data/fs131/i10b/scratch/SRlint2.lean:726:54: warning: Variable name `hK` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.ratio_prod_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels' depends on axioms: [propext, Classical.choice, Quot.sound]
+data/fs131/i10b/scratch/SRlint2.lean:760:0: error: -- Found 2 errors in 59 declarations (plus 53 automatically generated ones) in the current file with 14 linters
+
+/- The `unusedArguments` linter reports:
+UNUSED ARGUMENTS.
+This linter can be disabled with `@[nolint unusedArguments]`. -/
+#check @HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul /- 1 unused argument:
+  argument 4: [MeasurableAdd₂ G] -/
+#check @HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels /- 4 unused arguments:
+  argument 5: [MeasurableAdd₂ X]
+  argument 11: [T2Space Y]
+  argument 16: [MeasureTheory.SigmaFinite νX]
+  argument 20: (hK : Antitone K) -/
+exit=1
