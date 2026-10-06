@@ -234,6 +234,7 @@ import Proofs.HadwigerNelson.Plane.Models.Moves
 import Proofs.HadwigerNelson.Plane.Models.Stuck
 import Proofs.HadwigerNelson.Plane.Models.Bends
 import Proofs.HadwigerNelson.Plane.Models.Applied
+import Proofs.HadwigerNelson.Plane.SimpleOn
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.Topology.SpernerGrid

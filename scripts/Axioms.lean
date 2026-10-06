@@ -6656,6 +6656,19 @@ list by `tools/fs131_l5_records.py`. -/
 #print axioms HadwigerNelson.Plane.shadowModel_tanHeight
 #print axioms HadwigerNelson.Plane.shadowModel_apart
 
+/-! ## FS131-K7 — FS-131 wave 7's planner: `Plane/SimpleOn`, "simple" on a set (the class a fragment's argument reads;
+inventory item 508). Waves 8 and 9 merge the commit that adds this block. -/
+-- FS131-K7: Plane/SimpleOn
+#print axioms HadwigerNelson.Plane.ArcMap.Simple.simpleOn
+#print axioms HadwigerNelson.Plane.ArcMap.simpleOn_univ
+#print axioms HadwigerNelson.Plane.ArcMap.SimpleOn.mono
+#print axioms HadwigerNelson.Plane.ArcMap.simpleOn_ball_iff
+#print axioms HadwigerNelson.Plane.ArcMap.SimpleOn.coneAt_eq_angleIcc
+#print axioms HadwigerNelson.Plane.ArcMap.SimpleOn.coneAt_eq_angleIcc_sep
+#print axioms HadwigerNelson.Plane.halfDisc_simpleOn
+#print axioms HadwigerNelson.Plane.ArcMap.not_simpleOn_of_not_jordan
+-- FS131-K7 block end (Plane/SimpleOn)
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
