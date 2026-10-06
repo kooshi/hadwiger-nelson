@@ -4750,3 +4750,29 @@ reason by the close.*
      as where a statement defect is likeliest — the sooner read, the sooner a deriver can be asked. Confidence: medium-high. In flight: 1
      (MB2) + 1 (K10) + 1 (K6) = 3. **A push to Kooshi for the landing was tried and not sent** (the harness: the terminal is active); the
      landing is in this turn's report.
+
+477. **FS131-K10, by message at its Stage 1 (`fs131-w10` at `6ca3fb4e`): a statement defect in a filed hand result, a gap, a generalization**
+     (source: K10's message to "main", 2026-10-06; not checked by me against the derivation files — its record's Stage 1 is the artifact).
+     **(1) TC1-STANDING-FIVE** (`plans/TC1-derivation.md:60`): "so `L(F) ≥ 7`, and given MR, `χ(F²) ≥ 5`" hides more than MR. Its own "uses
+     only" line names G56 (every usable plane from 59 up refuses six; `U₁₂₈`'s Hoffman floor), none of it in the kernel or the backlog;
+     `data/fs131/k1/dispositions.csv` line 179 files "so L(F) >= 7" among "its unconditional clauses". `SpectralChain.localBound F` is an
+     infimum over every stable prime and the field has infinitely many usable places (the least at 347 by K10's hand count), so both
+     clauses need a floor for an infinite family of finite targets: the Weil range and `U₁₂₈`. **(2) FS89-S0A-10**
+     (`plans/FS89-derivation.md:93`, "for every subfield F ⊆ ℝ, every band"): the order bound it reads is derived at `k = 4` (S0A-3), `5`
+     (J08-11) and `6` (J08-10) and at no other band; the gluing alone cannot supply it. **(3) FS89-S0A-2** generalizes to a commutative ring
+     with an invertible integer `m ≥ 2`, a module spanned by a multiplicatively stable set, any band, by a shorter route with no limit.
+     **A sizing note**: the eight J45 rows and the two X25B rows are spectral theory of a countable abelian group's action, absent from
+     Mathlib at the pin; stated with the classical inputs as named hypotheses in `SpectralChain`'s manner.
+478. **Rulings on item 477** (sent to K10 by message). (a) **TC1-STANDING-FIVE takes a second named hypothesis beside `Row123Chain`, the
+     finite-target floor**, a `Prop` argument, never an axiom; its unconditional clauses are formalized. Alternative: hold the row until the
+     floor is a kernel theorem. Why: the milestone's rule lets a hand result of ours stand as a named hypothesis, and no certificate on file
+     covers an infinite family. Confidence: high. K10 prices the floor's own formalization; whether it becomes a row is ruled then.
+     (b) **FS89-S0A-10 takes the band's order bound as a hypothesis**; the uniform equivalence is stated at every band; FS89-CL2 enters as
+     S0A-2 at two parameter values over named results. Alternative: a deriver on "every band" first. Why not first: the gap is located
+     exactly and the Lean statement is true as put. Confidence: high. (c) **The generalization of S0A-2 and its shorter route** are taken.
+     (d) **The spectral rows** are stated with named classical inputs, each with `LEAN.md` § Assumptions' four items and a price.
+     (e) **Corrections owed, for the filing's errata**: TC1-STANDING-FIVE's sentence and the dispositions file's line 179; FS89-S0A-10's
+     "every band". **Kooshi should know (1)**: a filed hand result — "`L(F) ≥ 7`" at the standing-five field — rests on G56's hand floor
+     for infinitely many finite planes, not on MR alone; nothing in the kernel is affected (the row was never there), and `LEDGER.md`'s row
+     for it is re-read at the filing. **A question for Poros** (the ask lane's next run): does the order bound hold at every band? (f) Item
+     476's launch stands: in flight 1 (MB2) + 1 (K10) + 1 (K6) = 3.

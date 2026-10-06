@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–475 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–478 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -42,6 +42,7 @@ planted-picture models land (queue item 2).
 | job | tree and branch | what | brief | on its hand-back |
 |---|---|---|---|---|
 | **FS131-K10** | `.claude/worktrees/fs131-w10`, `fs131-w10` (`main`'s line) | a planner (`debruijn`): wave 10, the fourteen arithmetic rows (`Arith/StandingFive`, `CharacterColouring`, `SpectralInputs`, `StationaryRatio`; `plans/FS131-kernel-plan.md` § 7.1) — dispositions, a sorry-free foundation, a skeleton, a plan per leaf; it waits on nothing in waves 4–9 | `data/fs131/briefs/FS131-K10-wave10.md` | brief its implementers from its handoff; a row whose derivation does not support its statement is a message mid-job: an Ephodos job |
+| **FS131-K6** | `.claude/worktrees/fs131-w6`, `fs131-w6` (`main` with wave 5) | a planner (`debruijn`): wave 6, the thirty-five rows on saturated colourings (`Plane/Saturated/{Pinch, Fragment, MapColouring, Ladder}`); the plan names its definitions ("honest", "`D-NF`") as where a statement defect is likeliest | `data/fs131/briefs/FS131-K6-wave6.md` | likely a second planning pass, then implementers; a statement defect is a message mid-job: rule it, log the correction owed, an Ephodos job if a derivation is missing |
 | **FS131-MB2** | `.claude/worktrees/fs131-wmb`, `fs131-wmb` (from `b7fbe6f9`) | MB1's successor (item 470: the cusp arc's two bend models and `stuckModel_valid` are whole; `stuckModel_hyps` waits on one leaf of half A's): `shadowModel` (7 leaves, the model of `flank_ne_of_doublyShadowed`), then `awayModel` (4 leaves) | `data/fs131/briefs/FS131-MB2-models-shadow.md` | merge with half A's branch `fs131-wm` (disjoint files; `scripts/Axioms.lean` keep-both; run `scripts/dupnames.sh` on the joined tree); after wave 5 lands the lane's landing job adds `stuckModel_terminal`, the sub-arc model of `bend_away_whole` (ruling 471 (c)), the wave-5 applications and the docstring lines |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. If the session restarted, resume a job from its record's last SAVED stage with
@@ -50,13 +51,14 @@ a fresh agent on the same brief.
 ## 4. Queue for the next freed slots, in order (item 427; re-ordered by ruling 434)
 
 0. **Order now** (rulings 473, 475): **wave 5 is on `main`** (item 474: gated at `1351ebc2`, landed `ad611866`; counts filed, item 475).
-   One slot is free. In order: (i) **the example maps' landing job** when FS131-MB2 is back — merge `fs131-wm` and `fs131-wmb` (MB2 is
+   All three slots are full (MB2, K10, K6). K10 has reported a statement defect in a filed hand result, ruled (items 477–478: TC1-STANDING-FIVE
+   takes a second named hypothesis, the finite-target floor; FS89-S0A-10 takes its band's order bound as a hypothesis). In order, as slots free: (i) **the example maps' landing job** when FS131-MB2 is back — merge `fs131-wm` and `fs131-wmb` (MB2 is
    merging A's half itself), merge `main` (wave 5: the brick facts become three lines; add `stuckModel_terminal`, the sub-arc model of
    `bend_away_whole` by `IsRingArc.mono` (471 (c)), the wave-5 applications, `awayModel` read against `bend_away_part` and
    `exists_arcStep`), apply the docstring lines (KM1's plan § 3.10; the stuck family's notes name `stuckModel_hyps`), the gate with
    `scripts/dupnames.sh` and L5's records check (475 (e)), land; (ii) **wave 10's implementers** from FS131-K10's handoff; (iii) **the
-   planners of waves 6–9** (`plans/FS131-kernel-plan.md` § 7.1; they build on wave 5, now landed) — brief the wave-6 planner next, on a
-   branch from `main`, modelled on `data/fs131/briefs/scripts/mk-k10.py`; (iv) the second planning pass for E7's `F₀`, `F₁` (461 (d));
+   planners of waves 7–9** (`plans/FS131-kernel-plan.md` § 7.1; wave 6's is running) — each on a branch from `main`, its brief derived from
+   `data/fs131/briefs/scripts/mk-k6.py` as that one was from `mk-k10.py`; (iv) the second planning pass for E7's `F₀`, `F₁` (461 (d));
    (v) the tidy moves (the three same-fact pairs, item 468; the `Procedure` re-layout, 450 (d); ruling 421 (c)'s named forms; the stale
    "skeleton" words, item 474; BA1's ten re-proved helpers; the self-test's plant directory, 467 (e)); a tooling job on the vacuity
    scan's three questions (475 (d)). Held for the milestone's filing: 475 (b).
