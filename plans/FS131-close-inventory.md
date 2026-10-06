@@ -3958,3 +3958,29 @@ reason by the close.*
      whose `Proofs/` and `scripts/` are `main`'s; pushed). New declarations only; the docstring lines naming the models are drafted in its record for
      the implementer who lands the lane. (c) **A slip, mine, caught before launch**: KM1's draft named `IsSite` as on `main`; it is defined on
      `fs131-w5c` (`Limit.lean` l. 811). Corrected in the brief. Commits `68a3db1d`, `80dac39b`.
+
+429. **FS131-IA1, by message at its reading, before any proof: two clauses of `exists_arcStep` are false as stated** (source: IA1's message to "main",
+     2026-10-06; the statement on `fs131-w5a`'s `Procedure.lean` l. 812–822, the same text as `fs131-w5c`'s). **D1** — the degree clause
+     `(∀ x m, F.HasDegree x m → F'.HasDegree x m)` (l. 819) is false for every bend: an interior point of the bent arc has degree at least `2` in the
+     clean map and degree `1` inside the lens after it; with both maps clean the clause forces `Γ' = Γ`, so the bad count cannot drop. The consumer,
+     `exists_procStep`, reads it only for `pot_le : ∀ x ∈ T, …` (l. 1146–1150, `intro x _`). KL1's plan § 3.3 said "sites' degrees unchanged"; the
+     Lean clause says every point's. **D2** — `F'.badCount P < F.badCount P` is false on fragments: `badCount` is an `ℕ∞`, the step assumes only
+     `Valid` and `IsClean`, and on a punctured disc `B(Z, 1/4) \ {Z}`, `Z ∈ ω(P)`, with arcs of `ω(P)` accumulating at `Z` the count is `⊤` before and
+     after ([hand], one mind; IA1's configuration). First findings of its reading: question (5) looks true for a bend given by a homeomorphism fixing
+     `Γ` off the open arc (the collar bend), to be proved as a lemma; wave 4's `bend_toward` and `bend_away_whole` would need a general-position
+     argument, so it builds the step on the collar bend and a like construction outward, whose statement (`bend_away_part`) it will send.
+     **My receipt**: l. 819, l. 1146–1150, l. 46 (`ℕ∞`), l. 388 (`badCount_lt_top` takes `hP : F.IsPlaneMap`), l. 1134 and 1143 (the caller holds
+     `hG.plane`) read on `fs131-w5a`; the fragment of D2 not checked by me.
+430. **Rulings on item 429** (sent to IA1 by message). (a) **D1**: the degree clause becomes `(∀ x ∈ T, ∀ m, F.HasDegree x m → ∃ m' ≤ m,
+     F'.HasDegree x m')`. Alternative weighed: "every point off the open arc". Why: the consumer reads it on `T` alone and only as `≤`, and a bend moves
+     `Γ`, so no all-points form can hold. Confidence: high. The horn clause (l. 820) stays as stated; if its all-points form resists or fails, IA1
+     states the `∀ x ∈ T` form in `BendStep` and says so in one line — pre-ruled the same way, since the consumer reads it only on `T` (l. 1149).
+     (b) **D2**: `exists_arcStep` gains `(hP : F.IsPlaneMap)`. Alternative: `F.badCount P ≠ ⊤`. Why: the count's finiteness is proved only on plane
+     maps, the (R2) witness lemma reads the domain, and the one caller holds it. Confidence: high that the repair is safe (it adds a hypothesis the
+     caller has); IA1's fragment stands at [hand], one mind. (c) **Who edits `Procedure.lean`**: the arc step's assembly job, from IA1's work list
+     (the repaired statement whole; the call at l. 1136 passing `hG.plane`; the two changed lines of `pot_le`). Alternative weighed: an amendment to
+     FS131-IR2 now. Why not: the arc step is `sorry` there and its consumer reads only the weaker consequence, so nothing false is used meanwhile, and
+     IR2 is mid-proof in that file. Confidence: high; it changes if IR2 hands back first, in which case its successor's brief carries the edit.
+     (d) **Corrections owed, for the filing**: item 422's and QA4's § 3.4 remark that the arc step does not share the vertex step's domain gap (it
+     shares it through `⊤`); KL1's plan § 3.1 row for `exists_arcStep` (the two clauses). (e) **Credit**: the finding is IA1's, made at the reading
+     its brief asked for before any proof — the statement had passed the planner, the restating implementer (item 420), QA4 and me.
