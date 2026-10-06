@@ -493,8 +493,9 @@ is on the standard three. **It is the only doubled name in the 259 hand-written 
 agree and both are theorems ("we do not check whether the theorem `value` field match … relies on … proof irrelevance"); only
 otherwise `throwAlreadyImported`. **So the build catches a doubled theorem only when one declaring module is upstream of the other**
 (then the second is a redeclaration during elaboration). Two sibling modules stating one theorem under one name meet silently, and
-which proof a downstream module sees is decided by import order — harmless here (both proved, same axioms), but with one copy
-`sorry` and one proved, **a downstream `#print axioms` could report either**. That was the configuration of `LocalStep.of_cutArcs`
+which copy a downstream module keeps is decided by import order — harmless here (both proved, same axioms), but with one copy
+`sorry` and one proved, **a downstream `#print axioms` could follow either** (read from the importer's code; I did not test such a
+pair, and the module a constant is attributed to and the copy kept are held in two maps with different rules). That was the configuration of `LocalStep.of_cutArcs`
 at this join (proved in `ArcStep`, `sorry` in `BendAway`), and it was loud only because `ArcStep` happens to import `BendAway`
 through `BendStep`; inventory item 443 calls the collision "a loud failure by design", and by Lean's rule it is not guaranteed.
 
@@ -590,7 +591,7 @@ drifted"**, new bullet:
 
 > - **A theorem declared under one name by two modules, neither importing the other, builds in silence**: at import Lean accepts a
 >   second constant of the same name when both are theorems of the same type (`Lean/Environment.lean`, `subsumesInfo`, v4.32.0), and
->   import order decides which proof a downstream module sees. The build catches a doubled name only when one module is upstream of
->   the other. A join of two lines checks doubled names by script (`tools/fs131_m7_dupes.py --whole`), never by the build.
+>   by that code import order decides which copy a downstream module keeps (read, not tested on a `sorry`/proved pair). The build
+>   catches a doubled name only when one module is upstream of the other. A join of two lines checks doubled names by script (`tools/fs131_m7_dupes.py --whole`), never by the build.
 
 ## Stage 6 — SAVED (FS131-M7)
