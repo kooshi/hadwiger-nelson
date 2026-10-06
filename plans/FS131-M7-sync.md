@@ -225,3 +225,98 @@ answers the question from source:
 4. Merging in sequence moves the base, and with it the second conflict, from the I5 record to `ARCHITECTURE.md` (§ 3.2).
 
 ## Stage 3 — SAVED (FS131-M7)
+
+## Stage 4 — SAVED (FS131-M7): the doubled declaration gone, the one ruled edit made; the joined tree builds
+
+### 4.1 The edits (all of them: `ArcStep.lean` and one line of `scripts/Axioms.lean`)
+
+Made by a script that requires each anchor exactly once; the file as it stood is `data/fs131/m7/ArcStep-before-stage4.lean`.
+`git diff --stat`: `ArcStep.lean` 7 insertions, 97 deletions (772 → 682 lines) — the deleted block 88 lines, and outside it 9 lines
+out, 7 in.
+
+1. **`LocalStep.of_cutArcs` deleted from `ArcStep`** (inventory 448 (a)) — its section header, docstring, statement and proof, 88
+   lines; the script asserted the block holds exactly one `theorem`, that one. `ArcStep` reads `BendAway`'s through `BendStep`'s
+   imports (§ 3.4); `CollarFit.map_localStep`'s call is unchanged. **What the deletion forfeits**: this was the only *proved* copy in
+   the tree (`BendAway`'s is `sorry`; FS131-BA1 is copying the proof there on `fs131-w5a`). The proof is in git at `3f8270c0` and at
+   this branch's `8ca92376`, `ArcStep.lean` ll. 584–664, and in the saved copy above.
+2. **`ArcBend.of_away`'s hypothesis `hM` follows `bend_away_part`'s conclusion** (448 (b)) — its last clause only:
+   ```
+   -      (∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) →
+   -        ∃ a b, a < b ∧ θ ∈ Icc a b ∧ Icc a b ⊆ F.r2Contacts P θ₁ θ₂ c)) :
+   +      (∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) → P + 2 * e θ ∈ closure (F.region c))) :
+   ```
+   and the proof where it read the old clause: the last slot of the `refine` is now the term `⟨hout, hin, hleft θ hθ hon⟩` (three
+   lines became one); its docstring's last sentence says the clause is the pointwise form. The hypothesis is weaker (the interval
+   form gave the point), so the theorem is stronger; it had no caller yet.
+3. **Two sentences my own edits would have left false, corrected, and nothing else**: `ArcStep`'s module docstring listed
+   `LocalStep.of_cutArcs` among the module's lemmas — it now says the lemma is `Plane/ValidMap/BendAway`'s, read here by
+   `CollarFit.map_localStep`. (`CollarFit.map_localStep`'s own docstring cites the lemma by name and stays true: not touched. Any other
+   docstring is the remedy pass's.)
+4. **`scripts/Axioms.lean`**: this side's doubled record `#print axioms …LocalStep.of_cutArcs` removed from the FS131-IA2 block
+   (one line); it stands once, in FS131-KA1's block, the block of the module that declares the name. FS131-IA2's block header (prose:
+   "the last two records rest on the open child `CollarFit.map_hornCount_le`") is another job's text and is left; what moved is
+   stated in this job's block at Stage 6 and in 4.4 below.
+
+### 4.2 The scripted checks (each tool's first run was here; each with a control that fired)
+
+- **`hM` is `bend_away_part`'s conclusion** (`tools/fs131_m7_away_clause.py`): **EQUAL — 18 clauses, 877 characters after folding
+  whitespace** (`data/fs131/m7/away-clause.txt`). Control on the real before-state, the file as it stood at the merge commit:
+  **DIFFER at clause 18 of 18**, the interval form against the pointwise form (`away-clause-before.txt`) — so clauses 1–17 already
+  agreed (the horn clause was already the weakened one), and the edit is one place, as ruled. `--self-test`: three plants fired, at
+  clauses 18, 13 and a clause count of 17 (`away-clause-selftest.txt`).
+- **No other statement changed** (`tools/fs131_m7_stmt_check.py 8ca92376`, 36 Lean files of `Plane/ValidMap/`, **2,404 statements
+  read**): without allowances exactly three lines — `ArcStep.lean` TOUCHED, `LocalStep.of_cutArcs` MISSING from `ArcStep.lean`,
+  `ArcBend.of_away` CHANGED (`stmt-stage4-noallow.txt`); with `--allow ArcBend.of_away --gone ArcStep.lean:LocalStep.of_cutArcs
+  --touch ArcStep.lean`: **PASS**, neither allowance stale, none added (`stmt-stage4.txt`). `--self-test`: six plants fired — a
+  hypothesis dropped, a declaration renamed and a definition's body changed in `Procedure`; a conclusion and a structure field changed
+  in `ArcStep`; an allowance for a statement that did not change (`stmt-selftest-stage4.txt`).
+- **What differs from the merge commit in the whole tree**: under `Proofs/`, `ArcStep.lean` alone; `scripts/Axioms.lean` (one line);
+  this job's record, tools and outputs. **Nothing in the outward bend's six modules or in `BendStep.lean`.**
+
+### 4.3 The build (the first that can be read since the second merge)
+
+Expectation written before the run: 9 modules rebuilt (the six new, `BendStep`, `ArcStep`, `Proofs`), 1796 modules, 37 distinct
+`sorry` sites (the six modules 35 — FS131-KA1's total; `BendStep` 1; `Procedure` 1). **Each met.**
+`slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`: **OK — 459 of 459 batches, 9 modules rebuilt, 8 with
+warnings, 8 min 21 s, exit 0** (the status in `data/fs131/m7/build-stage4.rc`, written by the launching command on either outcome;
+saved log `build/gate/build/20261006T065635Z-1888387.log`, ending "Build completed successfully (5803 jobs)"; driver log
+`build-stage4.log`). No Lean file was modified after the build started (file times against the log's stamp).
+
+- **Rebuilt**: `BendAway`, `LensOut`, `CollarMapOut`, `R2Cap`, `HornChart`, `BendGap` — the skeleton's modules, elaborated in this
+  worktree for the first time — `BendStep`, `ArcStep`, `Proofs`. Not `Procedure`, not `Terminal` (they do not reach the bends yet).
+- **Warnings: 190 lines, all `declaration uses 'sorry'`, at 37 distinct sites**: `BendAway` 6, `LensOut` 7, `CollarMapOut` 7, `R2Cap`
+  3, `HornChart` 4, `BendGap` 8 (35); `BendStep` 1 (l. 290, `CollarFit.map_hornCount_le` — `bend_away_part` no longer warns, being
+  proved from children); `Procedure` 1 (`exists_arcStep`). None of another kind. No warning or error names `ArcStep`: it holds no
+  `sorry` of its own. (The per-module split is this build's; of FS131-KA1's receipt I compared the total only.)
+- The log's three `error:` lines are the pre-check's out-of-date notices again (lines 3, 5, 7, under its header on line 1).
+- **`tools/check_architecture.py`: exit 0, PASS** — 259 hand-written modules, 259 rows, missing none, extra none; 259 Imports cells
+  compared, 0 mismatches (`arch-stage4.txt`). So the resolution of the `ARCHITECTURE.md` conflict (§ 3.2) agrees with the import
+  graph. Controls, on copies of the map outside the tree: `BendGap` dropped from `BendStep`'s Imports cell — exit 1, "imports of
+  Plane/ValidMap/BendStep … real-only ['Plane/ValidMap/BendGap']"; `BendAway`'s row removed — exit 1, "missing:
+  ['Plane/ValidMap/BendAway']" (`arch-stage4-control-imports.txt`, `-norow.txt`).
+
+### 4.4 The axioms of what this stage touched — and one receipt that moved
+
+`data/fs131/m7/M7Axioms4.lean` (the 31 names of FS131-IA2's block of `scripts/Axioms.lean`, taken by script, with
+`LocalStep.of_cutArcs` and `bend_away_part`) → `M7Axioms4.out`, `slot.py --mem 12 --cpus 2 -- lake env lean`, exit 0, against this
+build's oleans; read by `tools/fs131_ir_axsum.py` (FS131-IR1's, unchanged). Expectation written before the run, met:
+**33 records for 33 print commands — 28 on the standard three or fewer, 5 through `sorryAx`, 0 other** (`M7Axioms4-summary.txt`).
+
+| through `sorryAx` | why |
+|---|---|
+| `LocalStep.of_cutArcs` | its own `sorry`, in `BendAway` — the only copy now |
+| `bend_away_part` | proved from the outward bend's open children |
+| `CollarFit.arcBend`, `exists_arcBend_toward` | as on `fs131-w5y` (the horn child), now also through the cut lemma |
+| **`CollarFit.map_localStep`** | **moved here from the standard three** by the deletion |
+
+`ArcBend.of_away`, the one statement changed: `[propext, Classical.choice, Quot.sound]`. **Control**: the same output read with
+FS131-IA2's expectation (its two names) FAILS, `SORRY-UNEXPECTED CollarFit.map_localStep` among its lines (`M7Axioms4-control.txt`).
+
+**The cost, said plainly.** On `fs131-w5y` `CollarFit.map_localStep` and `LocalStep.of_cutArcs` were kernel theorems on the standard
+three; in the joined tree both are through `sorryAx` until FS131-BA1's copy of the proof arrives by merge. It is ruled (448 (a)) and
+it loses no mathematics (4.1 item 1), but the joined line holds two standard-three theorems fewer than its parts did, and that is
+held for the coordinator with its test: **at the merge of `fs131-w5a`, `LocalStep.of_cutArcs` and `CollarFit.map_localStep` must
+print the standard three; if `BendAway`'s copy is still `sorry` then, the proof is restored from `3f8270c0`.** Moving the proof into
+`BendAway` here was not open to me: that file is FS131-BA1's while it works, and an edit would collide with its own.
+
+## Stage 4 — SAVED (FS131-M7)

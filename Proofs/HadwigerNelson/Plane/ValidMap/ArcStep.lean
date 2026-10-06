@@ -21,8 +21,8 @@ This module proves the step's clauses **once, over the clauses a bend exports** 
 * **Owed lemmas of FS131-IA1's work list**: the colours, degree and repeated colour at a point of an open ring arc
   (`IsRingArc.coloursAt_openArc`, `IsRingArc.degree_openArc`); a unit arc about another centre misses the open arc
   (`IsRingArc.disjoint_openArc_of_ne`, W4); a horn at a point iff its horn count is at least `1` (`exists_hasHornCount_isHorn_iff`, W6);
-  the step's radius (`exists_arcStep_radius`); the local step of a cut (`LocalStep.of_cutArcs`, W1 and W2 as one statement, FS131-KA1's
-  text).
+  the step's radius (`exists_arcStep_radius`). The local step of a cut (`LocalStep.of_cutArcs`, W1 and W2 as one statement) is
+  `Plane/ValidMap/BendAway`'s, upstream, read here by `CollarFit.map_localStep`.
 
 **Models.** `ArcBend`: the collar bend of `l60Frag` at `collarModel` (the spec example at the end), which rests on the open child
 `CollarFit.map_hornCount_le` (`BendStep`). No Lean model is named for a clean map carrying a ring arc (the hypothesis `hc` with `ring`),
@@ -575,94 +575,6 @@ theorem arcStep (hB : ArcBend F M h K P θ₁ θ₂ c c' g ε) (hc : F.IsClean) 
 
 end ArcBend
 
-/-! ## The local step of a cut (W1 and W2; FS131-KA1's statement) -/
-
-/-- **A map whose arcs are `F`'s cut at the open arc, with new arcs inside `K`, is a local step on `K`** (FS131-KA1's
-`LocalStep.of_cutArcs`, stated here with its signature — at the merge the two are one statement, in `BendAway`; FS131-IA1's W1 and W2):
-an arc of `F` missing `K` misses the closed arc, so it is in the cut whole; a piece of the cut that is no arc of `F` lies in an arc of
-`F` through an end of the arc, a point of `K`. -/
-theorem LocalStep.of_cutArcs {M : ArcMap k} {K : Set ℂ} {S : Set Arc} {P : ℂ} {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂)
-    (hag : M.AgreesOff F K) (harcs : M.arcs = F.cutArcs P θ₁ θ₂ ∪ S) (hS : ∀ a ∈ S, a.carrier ⊆ K)
-    (hK : ringArc P θ₁ θ₂ ⊆ K) : LocalStep F M K := by
-  have hπ := Real.pi_pos
-  have h2π : 0 < 2 * π := by positivity
-  have hturn : ∀ (t : ℝ) (m : ℤ), ringPt P (t + m * (2 * π)) = ringPt P t := fun t m => by
-    rw [ringPt, ringPt, show t + (m : ℝ) * (2 * π) = t + 2 * π * m by ring, e_add_int_mul]
-  refine ⟨hag, fun a ha hd => ?_, fun b hb hbF => ?_⟩
-  · rw [harcs]
-    left
-    by_cases hne : ∀ θa θb, a ≠ .circ P 1 θa θb
-    · exact Or.inl ⟨ha, hne⟩
-    · push Not at hne
-      obtain ⟨θa, θb, rfl⟩ := hne
-      obtain ⟨-, hab, -⟩ := F.nondegenerate _ ha
-      right
-      obtain ⟨m, hm⟩ : ∃ m : ℤ, m = ⌊(θa - θ₂) / (2 * π)⌋ := ⟨_, rfl⟩
-      have hm1 : (m : ℝ) * (2 * π) ≤ θa - θ₂ := by
-        have := Int.floor_le ((θa - θ₂) / (2 * π))
-        rw [← hm] at this
-        rwa [le_div_iff₀ h2π] at this
-      have hm2 : θa - θ₂ < ((m : ℝ) + 1) * (2 * π) := by
-        have := Int.lt_floor_add_one ((θa - θ₂) / (2 * π))
-        rw [← hm] at this
-        rwa [div_lt_iff₀ h2π] at this
-      have hlo : cutLo θ₂ θa m = θa := max_eq_left (by linarith)
-      have hhi : cutHi θ₁ θb m = θb := by
-        refine min_eq_left ?_
-        by_contra hlt
-        push Not at hlt
-        -- otherwise the arc holds a point of the closed arc, a point of `K`
-        have ht1 : max θa (θ₁ + ((m : ℝ) + 1) * (2 * π)) ≤ θb := max_le hab.le hlt.le
-        have ht2 : max θa (θ₁ + ((m : ℝ) + 1) * (2 * π)) ≤ θ₂ + ((m : ℝ) + 1) * (2 * π) :=
-          max_le (by linarith) (by linarith)
-        have ht3 : θ₁ + ((m : ℝ) + 1) * (2 * π) ≤ max θa (θ₁ + ((m : ℝ) + 1) * (2 * π)) := le_max_right _ _
-        have hmem : ringPt P (max θa (θ₁ + ((m : ℝ) + 1) * (2 * π))) ∈ (Arc.circ P 1 θa θb).carrier := by
-          rw [carrier_circ_one]
-          exact ⟨_, ⟨le_max_left _ _, ht1⟩, rfl⟩
-        have hK' : ringPt P (max θa (θ₁ + ((m : ℝ) + 1) * (2 * π))) ∈ K := by
-          have := hturn (max θa (θ₁ + ((m : ℝ) + 1) * (2 * π)) - ((m + 1 : ℤ) : ℝ) * (2 * π)) (m + 1)
-          rw [sub_add_cancel] at this
-          rw [this]
-          refine hK ⟨_, ⟨?_, ?_⟩, rfl⟩
-          · push_cast; linarith
-          · push_cast; linarith
-        exact Set.disjoint_left.mp hd hmem hK'
-      exact ⟨θa, θb, ha, m, by rw [hlo, hhi]; exact hab, by rw [hlo, hhi]⟩
-  · rw [harcs] at hb
-    rcases hb with hb | hb
-    · rcases hb with ⟨hb, -⟩ | ⟨θa, θb, ha, m, hlt, rfl⟩
-      · exact absurd hb hbF
-      · right
-        refine ⟨_, ha, ?_, ?_⟩
-        · have hne : cutLo θ₂ θa m ≠ θa ∨ cutHi θ₁ θb m ≠ θb := by
-            by_contra hcon
-            push Not at hcon
-            rw [hcon.1, hcon.2] at hbF
-            exact hbF ha
-          have hlo : θa ≤ cutLo θ₂ θa m := le_max_left _ _
-          have hhi : cutHi θ₁ θb m ≤ θb := min_le_left _ _
-          rcases hne with hne | hne
-          · have hlo' : cutLo θ₂ θa m = θ₂ + m * (2 * π) := by
-              rcases max_choice θa (θ₂ + m * (2 * π)) with h | h
-              · exact absurd h hne
-              · exact h
-            refine ⟨ringPt P θ₂, ?_, hK ⟨θ₂, ⟨h12.le, le_rfl⟩, rfl⟩⟩
-            rw [carrier_circ_one, ← hturn θ₂ m]
-            exact ⟨_, ⟨by rw [← hlo']; exact hlo, by rw [← hlo']; linarith⟩, rfl⟩
-          · have hhi' : cutHi θ₁ θb m = θ₁ + (m + 1) * (2 * π) := by
-              rcases min_choice θb (θ₁ + (m + 1) * (2 * π)) with h | h
-              · exact absurd h hne
-              · exact h
-            refine ⟨ringPt P θ₁, ?_, hK ⟨θ₁, ⟨le_rfl, h12.le⟩, rfl⟩⟩
-            have hθ₁ := hturn θ₁ (m + 1)
-            rw [carrier_circ_one, ← hθ₁]
-            refine ⟨_, ⟨?_, ?_⟩, rfl⟩
-            · push_cast; rw [← hhi']; linarith
-            · push_cast; rw [← hhi']; exact hhi
-        · rw [carrier_circ_one, carrier_circ_one]
-          exact image_mono (Icc_subset_Icc (le_max_left _ _) (min_le_left _ _))
-    · exact Or.inl (hS b hb)
-
 /-! ## The toward collar bend supplies the interface -/
 
 section Collar
@@ -730,8 +642,9 @@ end Collar
 
 /-- **The away bend's conclusion supplies the interface**, the inner colour gaining: the clauses of `bend_away_part`'s conclusion
 (`BendStep`; its horn clause in the arc step's form, inventory ruling 438 (b)) for a map `M`, a homeomorphism `h` and a collar `K`,
-at an arc of a plane map whose outer colour is carried at the centre and whose inner colour is not. `left` is the last clause read at
-the angle itself (FS131-IA1's W7 starts here). -/
+at an arc of a plane map whose outer colour is carried at the centre and whose inner colour is not. `left` is the last clause — the
+contact at the angle, the pointwise form FS131-KA1 left it in (inventory rulings 444 (a), 448 (b)) — with the two facts about the
+colours at `P` (FS131-IA1's W7 starts here). -/
 theorem ArcBend.of_away {M : ArcMap k} {h : ℂ ≃ₜ ℂ} {K : Set ℂ} {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} {ε : ℝ}
     (hP : F.IsPlaneMap) (hA : F.IsRingArc P θ₁ θ₂ c c') (hin : c ∉ F.coloursAt P) (hout : c' ∈ F.coloursAt P)
     (hM : M.Valid ∧ IsCompact K ∧ K ⊆ thickening ε (ringArc P θ₁ θ₂) ∧
@@ -748,15 +661,12 @@ theorem ArcBend.of_away {M : ArcMap k} {h : ℂ ≃ₜ ℂ} {K : Set ℂ} {P : �
       (∀ Q a b d d', F.IsRingArc Q a b d d' → Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂) →
         M.IsRingArc Q a b d d') ∧
       (∀ θ ∈ Ioo θ₁ θ₂, h (ringPt P θ) = ringPt P θ ∨ ringPt P θ ∈ M.region c) ∧
-      (∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) →
-        ∃ a b, a < b ∧ θ ∈ Icc a b ∧ Icc a b ⊆ F.r2Contacts P θ₁ θ₂ c)) :
+      (∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) → P + 2 * e θ ∈ closure (F.region c))) :
     ArcBend F M h K P θ₁ θ₂ c c' c ε := by
   obtain ⟨hV, -, hKε, hfree, hstep, hfix, -, hfixΓ, hint, hcol, hdeg, hrep, hhorn, hraw, hR1, hR2, hgain, hleft⟩ := hM
   refine ⟨hA, Or.inl rfl, hV, hKε, fun z _ => by rw [hP]; trivial, hfree, hstep, hfix, hfixΓ,
     fun z hz => (hint z).1.mpr hz, hcol, fun z n hn => (hdeg z n).mpr hn, fun z hz => (hrep z).mp hz, hhorn, hraw, hR1, hR2,
-    hgain, fun θ hθ hon => ?_⟩
-  obtain ⟨a, b, -, hθab, hsub⟩ := hleft θ hθ hon
-  exact ⟨hout, hin, (hsub hθab).2⟩
+    hgain, fun θ hθ hon => ⟨hout, hin, hleft θ hθ hon⟩⟩
 
 /-! ## Spec examples -/
 

@@ -1,0 +1,6 @@
+TOUCHED Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean: differs from 8ca92376, not in --touch
+MISSING Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean LocalStep.of_cutArcs
+CHANGED Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean ArcBend.of_away
+2404 statements read at 8ca92376; allowed to change: none; allowed gone: none; files that may differ: none
+added since 8ca92376: none
+RESULT: FAIL (3)

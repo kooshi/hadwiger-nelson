@@ -1,0 +1,5 @@
+unplanted: PASS — EQUAL: 18 clauses, 877 characters after folding
+plant — the last clause in its old form (the interval of r2Contacts): FIRED  DIFFER at clause 18 of 18/18:
+plant — the horn clause as an iff: FIRED  DIFFER at clause 13 of 18/18:
+plant — a clause dropped (IsCompact K): FIRED  DIFFER at clause 2 of 18/17:
+SELF-TEST: every plant fired, the unplanted run passed

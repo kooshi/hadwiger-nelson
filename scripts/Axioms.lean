@@ -6102,7 +6102,6 @@ instance of the interface. -/
 #print axioms HadwigerNelson.Plane.ArcMap.ArcBend.maxBad_centre
 #print axioms HadwigerNelson.Plane.ArcMap.ArcBend.maxBad_other
 #print axioms HadwigerNelson.Plane.ArcMap.ArcBend.arcStep
-#print axioms HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.ringArc_subset_collarK
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.lensSet_subset_collarK
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_localStep
