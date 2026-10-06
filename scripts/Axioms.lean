@@ -6853,6 +6853,25 @@ close, their helpers, and the declarations the planner proved from those leaves.
 #print axioms HadwigerNelson.Plane.ArcMap.ringTile_vMinus
 #print axioms HadwigerNelson.Plane.ArcMap.ringTile_vPlus
 #print axioms HadwigerNelson.Plane.ArcMap.ringTile_uPlus
+-- FS131-I8C: helpers that read no map
+#print axioms HadwigerNelson.Plane.two_pi_mul_int_le_of_neg
+#print axioms HadwigerNelson.Plane.two_pi_le_mul_int_of_pos
+#print axioms HadwigerNelson.Plane.BranchGerms.nextβ_four
+-- FS131-I8C: Plane/RingCalculus/SemiHub (FS116-N3-CONE (c), FS116-N3-STAR2, FS116-V5-DICHO)
+#print axioms HadwigerNelson.Plane.ArcMap.isRingArc_of_edge
+#print axioms HadwigerNelson.Plane.ArcMap.simpleOn_not_hasRepeatedColour
+#print axioms HadwigerNelson.Plane.ArcMap.four_le_of_bothKind
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.rotate
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.shift
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.exists_first
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.opposite_of_disjoint
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isStar4
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_star
+#print axioms HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed
+#print axioms HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel
+#print axioms HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint
+#print axioms HadwigerNelson.Plane.ArcMap.germPair_dicho
 -- FS131-I8C: the class of the shared lemmas, inhabited (`halfDisc` at `0`)
 #print axioms HadwigerNelson.Plane.halfDisc_valid
 #print axioms HadwigerNelson.Plane.halfDisc_nonSiamese
