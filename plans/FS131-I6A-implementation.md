@@ -20,7 +20,13 @@
 *(One line per kernel theorem, with its declaration and its axioms; filled as the stages save. Built by the worktree's
 `./scripts/build.sh`; the axiom audit is the gate's, the prints here are this job's own, on a scratch file with the module's imports.)*
 
-- none yet (Stage 1 is the readback).
+Each is in `Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean`, namespace `HadwigerNelson.Plane`; axioms by this job's print
+(`tools/fs131_i6a_axioms.py`, § 2.4): the standard three, `[propext, Classical.choice, Quot.sound]`, for every line below.
+
+- **FS111-M-PINCH, "(in, in) is impossible"** — `pinch_not_in_in` (Stage 2). Read against the row: "the case (in, in) is impossible".
+- **FS111-M-PINCH** — `pinch` (Stage 2), over the cells `isSplitAt_of_in_out` and `hasTwoDiscsAt_of_out_out` (new; each at a wider class
+  than `pinch`: no (H2), no measurability). Read against the row: split with one contact, either way round, or antipodal contacts and
+  the tangent type.
 
 ## Stage 1 — SAVED (FS131-I6A): the readback and the as-given build
 
@@ -65,3 +71,80 @@ My expectation, written before any leaf: all seven close in this job with probab
 `half_upperDensity` (the plan's "strip of width `r²`" needs an area estimate in `ENNReal`), then `c11_split` (two quarter-density bounds
 at a point of the circle); a statement defect among the seven: 0.15 (the likeliest: a boundary case of `c11_split` at a point of
 `sphere y 1 ∩ N` where `N` is small, or `half_upperDensity` at `P` unbounded).
+
+## Stage 2 — SAVED (FS131-I6A): `pinch_not_in_in` and `pinch`; the re-pricing
+
+### 2.1 The route, and where it left the plan
+
+The plan's "one real-variable identity serves all four cells" is kept, stated once with the real inner product of `ℂ`:
+`norm_sq_mul_sub_of_norm_eq_one` — for a unit `u`, `‖t w − u‖² = 1 − 2 t ⟨w, u⟩ + t² ‖w‖²`. Two consequences carry every cell:
+`dist_add_mul_lt_one` (from `x` on the unit circle about `y`, along `w` with `‖w‖² ≤ 2⟨w, y − x⟩` and `⟨w, y − x⟩ > 0`, the point
+`x + t w` is inside the open disc for `0 < t < 1`) and `one_lt_dist_add_mul` (along `w ≠ 0` with `⟨w, y − x⟩ ≤ 0` it is outside the
+closed disc for every `t > 0`). With `u = ya − x`, `v = yb − x`, `c = ⟨u, v⟩`, the directions are the plan's: (in, in) `w = −(u + v)`,
+or `i u` when `v = −u`; (in, out) `w = v − u`; (out, out) `w = u + v`. No coordinates and no `nlinarith` over a large context: each
+inequality is a small lemma with its own hypotheses (`LEAN.md` § Searching — Lean).
+
+**Changed from the plan:**
+1. *The two non-trivial cells are theorems of their own, at a wider class than `pinch`*: `isSplitAt_of_in_out` (reads `N` open, `cover`,
+   the two one-sided a.e. inclusions) and `hasTwoDiscsAt_of_out_out` (those and `disj`). Neither reads (H2) nor measurability; `pinch`
+   is Step 1 (`half_dichotomy` on (H2)'s `P` for each set) followed by the 2 × 2 table over them. The (out, in) cell is the (in, out)
+   cell with the sets exchanged.
+2. *`pinch_not_in_in` is moved above `pinch`* in the file (its docstring and statement byte-identical; `pinch` uses it). No declaration
+   was renamed or restated.
+3. *(P4) is one lemma*, `subset_of_isOpen_ae_le_isClosed`: an open set almost everywhere inside a closed set is inside it.
+
+**New declarations** (all in `Plane/Saturated/Pinch`, each with a docstring; names checked unused in the tree, on `origin/main`, on
+`origin/fs131-w6` and in Mathlib, 2026-10-06): `norm_sq_mul_sub_of_norm_eq_one`, `dist_add_mul_lt_one`, `one_lt_dist_add_mul`,
+`exists_add_mul_mem_of_isOpen`, `real_inner_lt_one_of_ne`, `neg_one_lt_real_inner_of_ne_neg`, `subset_of_isOpen_ae_le_isClosed`,
+`isSplitAt_of_in_out`, `hasTwoDiscsAt_of_out_out`.
+
+### 2.2 The two leaves against their row (`data/fs131/k6/backlog-rows-w6.md`, row 26, FS111-M-PINCH)
+
+The row, verbatim: "at a saturated point x of an honest a.e.-proper colouring with a neighbourhood N in which only two colours a, b have
+positive measure and each is a.e. one connected open set of density points (H1, H2): either N is split by one unit circle T₁(y) with a
+inside and b outside or the reverse, y a contact of both colours, or two open unit discs tangent at x from opposite sides lie a.e. in S_a
+and in S_b; the case (in, in) is impossible; no positive density of the partner is needed".
+
+- `pinch_not_in_in` — "the case (in, in) is impossible": with `N` open and a.e. `A ∪ B`, `x ∈ N` on both unit circles, `A ∩ N` a.e. in
+  `B̄(ya, 1)` and `B ∩ N` a.e. in `B̄(yb, 1)` give `False`. Read aloud: yes, that clause, at the class the planner fixed.
+- `pinch` — "either N is split by one unit circle … with a inside and b outside or the reverse, y a contact of both colours": the first
+  disjunct, `ya = yb ∧ (IsSplitAt A B N x ya ∨ IsSplitAt B A N x ya)`; "or two open unit discs tangent at x from opposite sides lie a.e.
+  in S_a and in S_b": the second, `yb − x = −(ya − x) ∧ IsTangentAt A B N x (ya − x)`, the tangent type carrying its contacts (ruled,
+  inventory item 481). "No positive density of the partner is needed": the contacts are points of `essSupport` only. Read aloud: yes.
+
+### 2.3 What the proofs read (against the second planner's mutation audit, its § 9.2)
+
+- `pinch_not_in_in` reads every hypothesis it has.
+- `pinch` reads `hA`, `hAn`, `hB`, `hBn` (through `half_dichotomy`), `h.isOpen`, `h.cover`, `h.disj` (in the (out, out) cell only, as the
+  audit says), `hx`, both contacts and both distances. **Of (H2) it reads less than `H2On` carries**: `P` preconnected, `P ⊆ densitySet A`
+  and `A ∩ N =ᵐ P`. That `P` is open and that `P` is non-empty are never read (`obtain ⟨Pa, -, hPac, …⟩`, and only
+  `hPac.isPreconnected`). A generalization, reported: the pinch holds with (H2) weakened to "within `N` the set is a.e. one preconnected
+  set of density points". (The derivation's own note on openness, `plans/FS111-M-regularity.md` § 3 l. 311, places its use at M-EXTREME,
+  not at the pinch.)
+
+### 2.4 The save
+
+- **Build**: `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` — **OK — 464 of 464 batches, 2 modules
+  rebuilt (`Pinch`, `Proofs`), 2 modules with warnings**, every warning `declaration uses sorry` (6: `Pinch` 5 — `half_upperDensity`,
+  `sq9_isTangentAt`, `TwoColourOn.essBoundary_inter_eq`, `c11_discs`, `c11_split`; `MapColouring` 1), 8m27s, exit 0
+  (`build/gate/build/20261006T130403Z-4185233.log`; driver log `data/fs131/i6a/logs/build-1-pinch.log`).
+- **Axioms** (this job's print, not the gate's audit): `tools/fs131_i6a_axioms.py` reads the names of `scripts/Axioms.lean`'s block
+  "FS131-I6A", prints each on a scratch file importing the module (`data/fs131/i6a/AxiomsScratch.lean`), and checks each record as a set.
+  11 records, 11 clean, each exactly `[propext, Classical.choice, Quot.sound]` (`data/fs131/i6a/logs/axioms-1.out`). **Controls that
+  fire**: the planted `theorem … := sorry` in the scratch file comes back `[sorryAx]` on every run (exit 3 if it does not); and with
+  `--also HadwigerNelson.Plane.c11_split` — a leaf still on `sorry` — the run reports `NOT CLEAN | … c11_split: ['sorryAx']` and exits 1
+  (`axioms-1-control.out`).
+- **Statement check** against `3928644b`: 19 base declarations, statements identical; 9 helpers; 5 `sorry` leaves; 0 failures, exit 0
+  (`data/fs131/i6a/logs/statements-1.out`).
+
+### 2.5 Re-priced from the first two leaves
+
+The plans priced these two at 1.5 h + 6 h. Measured: both, with their nine helpers, elaborated in two rounds of `lake env lean` (one
+error, a `simp` normal form in the orthogonality step), inside half an hour of agent time; the cost of the save was the build's walk
+(8m27s for two modules, 464 batches). **So the plan's prices for the pure leaves are high by an order of magnitude, not by two to
+three.** The remaining five (priced 3 + 1 + 4 + 6 + 0.5 = 14.5 h) are re-priced at under an hour together, and one build; their proofs
+already elaborate in scratch against this stage's module (§ 3). What the number measures: agent time to a proof that elaborates under
+`lake env lean` with `autoImplicit` off, for leaves whose statements were already right; it says nothing about leaves that need a
+statement changed, and there was none here.
+
+Own count at this stage: about 230k (the harness's is not visible to me).

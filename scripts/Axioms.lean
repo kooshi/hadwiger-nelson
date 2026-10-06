@@ -6338,6 +6338,20 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.isTangentAt_comm
 #print axioms HadwigerNelson.Plane.sq9_twoColourNhd
 
+/-! ## FS131-I6A — wave 6, `Plane/Saturated/Pinch`: the leaves the first implementer proved, and its helpers -/
+
+#print axioms HadwigerNelson.Plane.norm_sq_mul_sub_of_norm_eq_one
+#print axioms HadwigerNelson.Plane.dist_add_mul_lt_one
+#print axioms HadwigerNelson.Plane.one_lt_dist_add_mul
+#print axioms HadwigerNelson.Plane.exists_add_mul_mem_of_isOpen
+#print axioms HadwigerNelson.Plane.real_inner_lt_one_of_ne
+#print axioms HadwigerNelson.Plane.neg_one_lt_real_inner_of_ne_neg
+#print axioms HadwigerNelson.Plane.subset_of_isOpen_ae_le_isClosed
+#print axioms HadwigerNelson.Plane.pinch_not_in_in
+#print axioms HadwigerNelson.Plane.isSplitAt_of_in_out
+#print axioms HadwigerNelson.Plane.hasTwoDiscsAt_of_out_out
+#print axioms HadwigerNelson.Plane.pinch
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -141,6 +141,211 @@ theorem sq9_isTangentAt :
     IsTangentAt (sq9.cls sqColA) (sq9.cls sqColB) (ball sqEdgePt (1 / 8)) sqEdgePt 1 := by
   sorry
 
+/-! ### The pinch's geometry: one identity for the four cells (FS131-I6A) -/
+
+/-- **The identity all four cells of the pinch read**: for a unit `u`, a direction `w` and a real `t`,
+`‖t w − u‖² = 1 − 2 t ⟨w, u⟩ + t² ‖w‖²`. -/
+theorem norm_sq_mul_sub_of_norm_eq_one {u : ℂ} (hu : ‖u‖ = 1) (w : ℂ) (t : ℝ) :
+    ‖(t : ℂ) * w - u‖ ^ 2 = 1 - 2 * t * inner ℝ w u + t ^ 2 * ‖w‖ ^ 2 := by
+  rw [← Complex.real_smul, norm_sub_sq_real, norm_smul, real_inner_smul_left, hu, Real.norm_eq_abs, mul_pow, sq_abs]
+  ring
+
+/-- Moving from a point `x` of the unit circle about `y` along a direction `w` with `‖w‖² ≤ 2 ⟨w, y − x⟩` and
+`⟨w, y − x⟩ > 0` enters the open unit disc: `x + t w ∈ B(y, 1)` for `0 < t < 1`. -/
+theorem dist_add_mul_lt_one {x y w : ℂ} (hxy : dist x y = 1) (hw : ‖w‖ ^ 2 ≤ 2 * inner ℝ w (y - x))
+    (hpos : 0 < inner ℝ w (y - x)) {t : ℝ} (ht0 : 0 < t) (ht1 : t < 1) : dist (x + (t : ℂ) * w) y < 1 := by
+  have hu : ‖y - x‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact hxy
+  have h := norm_sq_mul_sub_of_norm_eq_one hu w t
+  have he : x + (t : ℂ) * w - y = (t : ℂ) * w - (y - x) := by ring
+  rw [dist_eq_norm, he]
+  have hlt : ‖(t : ℂ) * w - (y - x)‖ ^ 2 < 1 := by
+    rw [h]; nlinarith [mul_pos ht0 hpos, mul_pos (mul_pos ht0 hpos) (sub_pos.2 ht1), sq_nonneg t]
+  have h0 := norm_nonneg ((t : ℂ) * w - (y - x))
+  nlinarith
+
+/-- Moving from a point `x` of the unit circle about `y` along a non-zero direction `w` with `⟨w, y − x⟩ ≤ 0` leaves the
+closed unit disc: `1 < |x + t w − y|` for `t > 0`. -/
+theorem one_lt_dist_add_mul {x y w : ℂ} (hxy : dist x y = 1) (hw : w ≠ 0) (hle : inner ℝ w (y - x) ≤ 0) {t : ℝ}
+    (ht0 : 0 < t) : 1 < dist (x + (t : ℂ) * w) y := by
+  have hu : ‖y - x‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact hxy
+  have h := norm_sq_mul_sub_of_norm_eq_one hu w t
+  have he : x + (t : ℂ) * w - y = (t : ℂ) * w - (y - x) := by ring
+  rw [dist_eq_norm, he]
+  have hwpos : 0 < ‖w‖ ^ 2 := by positivity
+  have hlt : 1 < ‖(t : ℂ) * w - (y - x)‖ ^ 2 := by
+    rw [h]; nlinarith [mul_nonneg ht0.le (neg_nonneg.2 hle), mul_pos (sq_pos_of_pos ht0) hwpos]
+  have h0 := norm_nonneg ((t : ℂ) * w - (y - x))
+  nlinarith
+
+/-- From a point of an open set one can move a little along any direction and stay in the set: some `t ∈ (0, 1)`. -/
+theorem exists_add_mul_mem_of_isOpen {N : Set ℂ} (hN : IsOpen N) {x : ℂ} (hx : x ∈ N) (w : ℂ) :
+    ∃ t : ℝ, 0 < t ∧ t < 1 ∧ x + (t : ℂ) * w ∈ N := by
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.1 hN x hx
+  have hden : 0 < 2 * (‖w‖ + 1) := by positivity
+  refine ⟨min (1 / 2) (ε / (2 * (‖w‖ + 1))), lt_min (by norm_num) (div_pos hε hden),
+    lt_of_le_of_lt (min_le_left _ _) (by norm_num), hball ?_⟩
+  set t := min (1 / 2) (ε / (2 * (‖w‖ + 1))) with ht
+  have ht0 : 0 < t := lt_min (by norm_num) (div_pos hε hden)
+  have ht2 : t ≤ ε / (2 * (‖w‖ + 1)) := min_le_right _ _
+  rw [mem_ball, dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_of_nonneg ht0.le]
+  rw [le_div_iff₀ hden] at ht2
+  nlinarith [norm_nonneg w]
+
+/-- For unit vectors `u ≠ v`, `⟨u, v⟩ < 1`. -/
+theorem real_inner_lt_one_of_ne {u v : ℂ} (hu : ‖u‖ = 1) (hv : ‖v‖ = 1) (h : u ≠ v) : inner ℝ u v < 1 := by
+  have h1 := norm_sub_sq_real u v
+  have h2 : 0 < ‖u - v‖ ^ 2 := by
+    have : u - v ≠ 0 := sub_ne_zero.2 h
+    positivity
+  rw [hu, hv] at h1
+  nlinarith
+
+/-- For unit vectors with `u ≠ −v`, `−1 < ⟨u, v⟩`. -/
+theorem neg_one_lt_real_inner_of_ne_neg {u v : ℂ} (hu : ‖u‖ = 1) (hv : ‖v‖ = 1) (h : u ≠ -v) : -1 < inner ℝ u v := by
+  have := real_inner_lt_one_of_ne hu (by rwa [norm_neg] : ‖-v‖ = 1) h
+  rw [inner_neg_right] at this
+  linarith
+
+/-- **An open set almost everywhere inside a closed set is inside it** (the difference is open and null). -/
+theorem subset_of_isOpen_ae_le_isClosed {U F : Set ℂ} (hU : IsOpen U) (hF : IsClosed F) (h : U ≤ᵐ[volume] F) : U ⊆ F := by
+  have h0 : volume (U \ F) = 0 := ae_le_set.1 h
+  have h1 : U \ F = ∅ := ((hU.sdiff hF).measure_eq_zero_iff volume).1 h0
+  exact sdiff_eq_empty.1 h1
+
+/-- **FS111-M-PINCH**, "the case (in, in) is impossible", at the class its argument reads: if an open set `N` is
+almost everywhere `A ∪ B`, no point `x` of `N` on the unit circles about `ya` and `yb` has `A` and `B` both, within
+`N`, in the closed unit discs about them. Neither (H2), nor almost-disjointness, nor measurability is read.
+A refutation; its hypotheses without the last are met by `sq9` at `sqEdgePt` (`sq9_twoColourNhd`, with
+`ya = sqEdgePt + 1`, `yb = sqEdgePt - 1`), where the last fails. -/
+theorem pinch_not_in_in {A B N : Set ℂ} (hN : IsOpen N) (hcover : (N : Set ℂ) ≤ᵐ[volume] (A ∪ B : Set ℂ))
+    {x ya yb : ℂ} (hx : x ∈ N) (hxa : dist x ya = 1) (hxb : dist x yb = 1)
+    (hin : (A ∩ N : Set ℂ) ≤ᵐ[volume] closedBall ya 1 ∧ (B ∩ N : Set ℂ) ≤ᵐ[volume] closedBall yb 1) : False := by
+  have hsub : N ⊆ closedBall ya 1 ∪ closedBall yb 1 := by
+    refine subset_of_isOpen_ae_le_isClosed hN (isClosed_closedBall.union isClosed_closedBall) ?_
+    filter_upwards [hcover, hin.1, hin.2] with z hz ha hb hzN
+    rcases hz hzN with h | h
+    · exact Or.inl (ha ⟨h, hzN⟩)
+    · exact Or.inr (hb ⟨h, hzN⟩)
+  have hu : ‖ya - x‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact hxa
+  have hv : ‖yb - x‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact hxb
+  -- a direction leaving both closed discs: `−(u + v)`, or `i u` when `v = −u`
+  obtain ⟨w, hw0, hwa, hwb⟩ : ∃ w : ℂ, w ≠ 0 ∧ inner ℝ w (ya - x) ≤ 0 ∧ inner ℝ w (yb - x) ≤ 0 := by
+    by_cases hs : (ya - x) + (yb - x) = 0
+    · have hvu : yb - x = -(ya - x) := (neg_eq_of_add_eq_zero_right hs).symm
+      have h0 : inner ℝ (I * (ya - x)) (ya - x) = 0 := by
+        rw [Complex.inner]; simp only [map_mul, conj_I, mul_re, mul_im, neg_re, neg_im, I_re, I_im, conj_re, conj_im]; ring
+      refine ⟨I * (ya - x), mul_ne_zero I_ne_zero (norm_ne_zero_iff.1 (by rw [hu]; norm_num)), h0.le, ?_⟩
+      rw [hvu, inner_neg_right, h0, neg_zero]
+    · have hc := neg_one_le_real_inner_of_norm_eq_one hu hv
+      refine ⟨-((ya - x) + (yb - x)), neg_ne_zero.2 hs, ?_, ?_⟩
+      · rw [inner_neg_left, inner_add_left, real_inner_self_eq_norm_sq, hu, real_inner_comm]; linarith
+      · rw [inner_neg_left, inner_add_left, real_inner_self_eq_norm_sq, hv]; linarith
+  obtain ⟨t, ht0, -, htN⟩ := exists_add_mul_mem_of_isOpen hN hx w
+  have h1 := one_lt_dist_add_mul hxa hw0 hwa ht0
+  have h2 := one_lt_dist_add_mul hxb hw0 hwb ht0
+  rcases hsub htN with h | h <;> rw [mem_closedBall] at h <;> linarith
+
+/-- **FS111-M-PINCH, the cell (in, out)**, at the class it reads: if an open set `N` is almost everywhere `A ∪ B`, and
+within `N` the set `A` lies in the closed unit disc about `ya` and `B` misses the open unit disc about `yb`, then at a
+point `x` of `N` on both unit circles the centres agree and `x` is of split type, `A` inside. Neither (H2), nor
+almost-disjointness, nor measurability is read. -/
+theorem isSplitAt_of_in_out {A B N : Set ℂ} (hN : IsOpen N) (hcover : (N : Set ℂ) ≤ᵐ[volume] (A ∪ B : Set ℂ))
+    {x ya yb : ℂ} (hx : x ∈ N) (hxa : dist x ya = 1) (hxb : dist x yb = 1)
+    (ha : (A ∩ N : Set ℂ) ≤ᵐ[volume] closedBall ya 1) (hb : (B ∩ N : Set ℂ) ≤ᵐ[volume] (ball yb 1)ᶜ) :
+    ya = yb ∧ IsSplitAt A B N x ya := by
+  have h1 : (ball yb 1 ∩ N : Set ℂ) ≤ᵐ[volume] A := by
+    filter_upwards [hcover, hb] with z hz hbz hzb
+    rcases hz hzb.2 with h | h
+    · exact h
+    · exact absurd hzb.1 (hbz ⟨h, hzb.2⟩)
+  have h2 : ball yb 1 ∩ N ⊆ closedBall ya 1 := by
+    refine subset_of_isOpen_ae_le_isClosed (isOpen_ball.inter hN) isClosed_closedBall ?_
+    filter_upwards [h1, ha] with z hz haz hzb using haz ⟨hz hzb, hzb.2⟩
+  have heq : ya = yb := by
+    by_contra hne
+    have hu : ‖ya - x‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact hxa
+    have hv : ‖yb - x‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact hxb
+    have huv : ya - x ≠ yb - x := fun h => hne (sub_left_injective h)
+    have hc := real_inner_lt_one_of_ne hu hv huv
+    have hnorm := norm_sub_sq_real (yb - x) (ya - x)
+    rw [hu, hv, real_inner_comm] at hnorm
+    obtain ⟨t, ht0, ht1, htN⟩ := exists_add_mul_mem_of_isOpen hN hx ((yb - x) - (ya - x))
+    have hin : dist (x + (t : ℂ) * ((yb - x) - (ya - x))) yb < 1 := by
+      refine dist_add_mul_lt_one hxb ?_ ?_ ht0 ht1
+      · rw [inner_sub_left, real_inner_self_eq_norm_sq, hv, hnorm]; linarith
+      · rw [inner_sub_left, real_inner_self_eq_norm_sq, hv]; linarith
+    have hout : 1 < dist (x + (t : ℂ) * ((yb - x) - (ya - x))) ya := by
+      refine one_lt_dist_add_mul hxa (sub_ne_zero.2 huv.symm) ?_ ht0
+      rw [inner_sub_left, real_inner_self_eq_norm_sq, hu, real_inner_comm]; linarith
+    have := h2 ⟨mem_ball.2 hin, htN⟩
+    rw [mem_closedBall] at this
+    linarith
+  subst heq
+  have hsph : ∀ᵐ z ∂(volume : Measure ℂ), z ∉ sphere ya 1 :=
+    measure_eq_zero_iff_ae_notMem.1 (Measure.addHaar_sphere volume ya 1)
+  refine ⟨rfl, hxa, Filter.EventuallyLE.antisymm ?_ ?_, Filter.EventuallyLE.antisymm ?_ ?_⟩
+  · filter_upwards [ha, hsph] with z hz hzs hzA
+    exact ⟨mem_ball.2 (lt_of_le_of_ne (mem_closedBall.1 (hz hzA)) fun h => hzs (mem_sphere.2 h)), hzA.2⟩
+  · filter_upwards [h1] with z hz hzb using ⟨hz hzb, hzb.2⟩
+  · filter_upwards [hb, hsph] with z hz hzs hzB
+    refine ⟨hzB.2, fun hc => ?_⟩
+    rcases (mem_closedBall.1 hc).lt_or_eq with h | h
+    · exact hz hzB (mem_ball.2 h)
+    · exact hzs (mem_sphere.2 h)
+  · filter_upwards [hcover, ha] with z hz haz hzN
+    rcases hz hzN.1 with h | h
+    · exact absurd (haz ⟨h, hzN.1⟩) hzN.2
+    · exact ⟨h, hzN.1⟩
+
+/-- **FS111-M-PINCH, the cell (out, out)**, at the class it reads: if an open set `N` is almost everywhere `A ∪ B`, the
+two sets are almost disjoint in `N`, and within `N` each misses the open unit disc about its own contact, then at a point
+`x` of `N` on both unit circles the contacts are antipodal and the two open unit discs lie, within `N`, each in the other
+set. Neither (H2) nor measurability is read; almost-disjointness is (two overlapping sets may fill a lens). -/
+theorem hasTwoDiscsAt_of_out_out {A B N : Set ℂ} (hN : IsOpen N) (hcover : (N : Set ℂ) ≤ᵐ[volume] (A ∪ B : Set ℂ))
+    (hdisj : volume (A ∩ B ∩ N) = 0) {x ya yb : ℂ} (hx : x ∈ N) (hxa : dist x ya = 1) (hxb : dist x yb = 1)
+    (ha : (A ∩ N : Set ℂ) ≤ᵐ[volume] (ball ya 1)ᶜ) (hb : (B ∩ N : Set ℂ) ≤ᵐ[volume] (ball yb 1)ᶜ) :
+    yb - x = -(ya - x) ∧ HasTwoDiscsAt A B N x (ya - x) := by
+  have hu : ‖ya - x‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact hxa
+  have hv : ‖yb - x‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact hxb
+  have h1 : (ball ya 1 ∩ N : Set ℂ) ≤ᵐ[volume] B := by
+    filter_upwards [hcover, ha] with z hz haz hzb
+    rcases hz hzb.2 with h | h
+    · exact absurd hzb.1 (haz ⟨h, hzb.2⟩)
+    · exact h
+  have h2 : (ball yb 1 ∩ N : Set ℂ) ≤ᵐ[volume] A := by
+    filter_upwards [hcover, hb] with z hz hbz hzb
+    rcases hz hzb.2 with h | h
+    · exact h
+    · exact absurd hzb.1 (hbz ⟨h, hzb.2⟩)
+  have h3 : ball ya 1 ∩ ball yb 1 ∩ N = ∅ := by
+    refine (((isOpen_ball.inter isOpen_ball).inter hN).measure_eq_zero_iff volume).1 ?_
+    refine nonpos_iff_eq_zero.1 ((measure_mono_ae ?_).trans_eq hdisj)
+    filter_upwards [h1, h2] with z hz1 hz2 hz
+    exact ⟨⟨hz2 ⟨hz.1.2, hz.2⟩, hz1 ⟨hz.1.1, hz.2⟩⟩, hz.2⟩
+  have hneg : yb - x = -(ya - x) := by
+    by_contra hne
+    have hne' : ya - x ≠ -(yb - x) := fun h => hne (by rw [h, neg_neg])
+    have hc := neg_one_lt_real_inner_of_ne_neg hu hv hne'
+    have hnorm : ‖(ya - x) + (yb - x)‖ ^ 2 = 2 + 2 * inner ℝ (ya - x) (yb - x) := by
+      rw [norm_add_sq_real, hu, hv]; ring
+    obtain ⟨t, ht0, ht1, htN⟩ := exists_add_mul_mem_of_isOpen hN hx ((ya - x) + (yb - x))
+    have hina : dist (x + (t : ℂ) * ((ya - x) + (yb - x))) ya < 1 := by
+      refine dist_add_mul_lt_one hxa ?_ ?_ ht0 ht1
+      · rw [inner_add_left, real_inner_self_eq_norm_sq, hu, hnorm, real_inner_comm]; linarith
+      · rw [inner_add_left, real_inner_self_eq_norm_sq, hu, real_inner_comm]; linarith
+    have hinb : dist (x + (t : ℂ) * ((ya - x) + (yb - x))) yb < 1 := by
+      refine dist_add_mul_lt_one hxb ?_ ?_ ht0 ht1
+      · rw [inner_add_left, real_inner_self_eq_norm_sq, hv, hnorm]; linarith
+      · rw [inner_add_left, real_inner_self_eq_norm_sq, hv]; linarith
+    have hmem : x + (t : ℂ) * ((ya - x) + (yb - x)) ∈ ball ya 1 ∩ ball yb 1 ∩ N :=
+      ⟨⟨mem_ball.2 hina, mem_ball.2 hinb⟩, htN⟩
+    rw [h3] at hmem
+    exact hmem
+  have hyb : x - (ya - x) = yb := by linear_combination -hneg
+  refine ⟨hneg, hu, ?_, ?_⟩
+  · rw [add_sub_cancel]; exact h1
+  · rw [hyb]; exact h2
+
 /-- **FS111-M-PINCH**, at the class its argument reads: two measurable sets `A`, `B` with null unit pairs, an open set
 `N` on which they satisfy the row's hypotheses (`TwoColourOn`: (H1) as "cover and almost disjoint", (H2) for each), a
 point `x` of `N` — any point, `N` is not centred at it — and contacts `ya` of `A`, `yb` of `B` (points of the supports
@@ -152,17 +357,33 @@ theorem pinch {A B N : Set ℂ} (hA : MeasurableSet A) (hAn : UnitPairsNull A) (
     (hya : ya ∈ essSupport A) (hxa : dist x ya = 1) (hyb : yb ∈ essSupport B) (hxb : dist x yb = 1) :
     (ya = yb ∧ (IsSplitAt A B N x ya ∨ IsSplitAt B A N x ya)) ∨
       (yb - x = -(ya - x) ∧ IsTangentAt A B N x (ya - x)) := by
-  sorry
-
-/-- **FS111-M-PINCH**, "the case (in, in) is impossible", at the class its argument reads: if an open set `N` is
-almost everywhere `A ∪ B`, no point `x` of `N` on the unit circles about `ya` and `yb` has `A` and `B` both, within
-`N`, in the closed unit discs about them. Neither (H2), nor almost-disjointness, nor measurability is read.
-A refutation; its hypotheses without the last are met by `sq9` at `sqEdgePt` (`sq9_twoColourNhd`, with
-`ya = sqEdgePt + 1`, `yb = sqEdgePt - 1`), where the last fails. -/
-theorem pinch_not_in_in {A B N : Set ℂ} (hN : IsOpen N) (hcover : (N : Set ℂ) ≤ᵐ[volume] (A ∪ B : Set ℂ))
-    {x ya yb : ℂ} (hx : x ∈ N) (hxa : dist x ya = 1) (hxb : dist x yb = 1)
-    (hin : (A ∩ N : Set ℂ) ≤ᵐ[volume] closedBall ya 1 ∧ (B ∩ N : Set ℂ) ≤ᵐ[volume] closedBall yb 1) : False := by
-  sorry
+  obtain ⟨Pa, -, hPac, hPaA, hAPa⟩ := h.h2a
+  obtain ⟨Pb, -, hPbc, hPbB, hBPb⟩ := h.h2b
+  have hya' : ya ∈ closure (densitySet A) := by rwa [← essSupport_eq_closure_densitySet]
+  have hyb' : yb ∈ closure (densitySet B) := by rwa [← essSupport_eq_closure_densitySet]
+  -- Step 1: each set, within `N`, is on one side of the unit circle about its contact
+  have inA : Pa ⊆ closedBall ya 1 → (A ∩ N : Set ℂ) ≤ᵐ[volume] closedBall ya 1 := fun hs =>
+    hAPa.le.trans (Eventually.of_forall hs)
+  have inB : Pb ⊆ closedBall yb 1 → (B ∩ N : Set ℂ) ≤ᵐ[volume] closedBall yb 1 := fun hs =>
+    hBPb.le.trans (Eventually.of_forall hs)
+  have outA : Disjoint Pa (ball ya 1) → (A ∩ N : Set ℂ) ≤ᵐ[volume] (ball ya 1)ᶜ := fun hd =>
+    hAPa.le.trans (Eventually.of_forall fun z hz hzb => Set.disjoint_left.1 hd hz hzb)
+  have outB : Disjoint Pb (ball yb 1) → (B ∩ N : Set ℂ) ≤ᵐ[volume] (ball yb 1)ᶜ := fun hd =>
+    hBPb.le.trans (Eventually.of_forall fun z hz hzb => Set.disjoint_left.1 hd hz hzb)
+  have hcover' : (N : Set ℂ) ≤ᵐ[volume] (B ∪ A : Set ℂ) := by rw [union_comm]; exact h.cover
+  -- Step 2: the 2 × 2 table
+  rcases half_dichotomy hA hAn hya' hPac.isPreconnected hPaA with ha | ha <;>
+    rcases half_dichotomy hB hBn hyb' hPbc.isPreconnected hPbB with hb | hb
+  · exact (pinch_not_in_in h.isOpen h.cover hx hxa hxb ⟨inA ha, inB hb⟩).elim
+  · obtain ⟨he, hs⟩ := isSplitAt_of_in_out h.isOpen h.cover hx hxa hxb (inA ha) (outB hb)
+    exact Or.inl ⟨he, Or.inl hs⟩
+  · obtain ⟨he, hs⟩ := isSplitAt_of_in_out h.isOpen hcover' hx hxb hxa (inB hb) (outA ha)
+    exact Or.inl ⟨he.symm, Or.inr (he ▸ hs)⟩
+  · obtain ⟨hneg, hd⟩ := hasTwoDiscsAt_of_out_out h.isOpen h.cover h.disj hx hxa hxb (outA ha) (outB hb)
+    refine Or.inr ⟨hneg, hd, ?_, ?_⟩
+    · rw [add_sub_cancel]; exact hya
+    · have hyb'' : x - (ya - x) = yb := by linear_combination -hneg
+      rw [hyb'']; exact hyb
 
 /-- In a two-colour open set the two sets have the same essential boundary: where one is neither of density `1` nor
 of density `0`, so is the other (the density ratios of `A` and `B` sum to `1` in small balls). -/
