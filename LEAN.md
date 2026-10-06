@@ -141,6 +141,12 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - At the pin `push_neg` is deprecated; write `push Not`.
 - `nlinarith` exhausts its heartbeats in a large context even when the certificate is small, and one declaration shares one heartbeat budget: state each
   inequality as a small real-variable lemma carrying only its own hypotheses, then apply it (FS131-I4h, five leaves).
+- `T ⁻¹' A ∆ A` parses as `T ⁻¹' (A ∆ A)`: write `(T ⁻¹' A) ∆ A`. `s ∆ t` on sets needs `open scoped symmDiff` (FS131-I10A, -I10B).
+- At the pin `add_le_add_left h a : b + a ≤ c + a` and `add_le_add_right h a : a + b ≤ a + c` (and `mul_le_mul_left/right` alike): the name
+  says which side varies. `#check` before use (FS131-I10B).
+- A `rfl` for `((Subring.inclusion h a : unitRing F) : ℂ) = a` at the concrete pair `unitRing ⊥ ≤ unitRing F` is accepted by the elaborator
+  and times out in the kernel, which compares the two subtypes and descends into `F =?= ⊥`. Stated generically in the two subrings
+  (`coe_inclusion_subring`) it is checked once with variables (FS131-K10).
 
 - **A failed `exact?` is not an absence.** It proves the shape you asked for was not found; vary the statement (`= true` versus
   `decide (…)`, an iff versus an implication) first. **And Mathlib is not the whole library:** `grep -rn "<name-fragment>" $(lean

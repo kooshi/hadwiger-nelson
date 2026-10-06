@@ -5264,3 +5264,40 @@ reason by the close.*
      back, and the briefs of the jobs to come point at the record as it stands. (c) The withdrawal of § 4.6's bound is in the third
      planner's reading list by its brief (Stage 6). (d) **Slot → FS131-K7** (wave 7's planner), launched 2026-10-06. In flight: 1
      (I10B) + 1 (K10b) + 1 (K7) = 3.
+
+506. **FS131-I10B done: all three leaves of wave 10's `StationaryRatio` proved, with no hypothesis from outside Mathlib** (implementer,
+     Opus; harness 449k by the task notice; record `fs131-w10b`'s `plans/FS131-I10B-implementation.md` Stages 1–4; report
+     `data/fs131/reports/FS131-I10B.md`; commits `3f262ca2`, `65e21c8f`, `9a7cf231`, `8cad5b7f`, `423cd8e8`; pushed, tree clean).
+     **Proved** (rows X25B-PZ, X25B-L1, and the derivation's lemma X25B-P): `ratio_prod_le` (the stationary ratio of a product is at
+     most the larger factor's, for measurable commutative groups and σ-finite symmetric connection measures),
+     `ratio_prod_le_iSup_levels`, `StationarySet.prob_le_ratio_mul`. **Models**: `StationarySet.parity` with
+     `ratio_dirac_one_zmod_two : ratio (Measure.dirac (1 : ZMod 2)) = 2⁻¹`; `cantorLevel` on `ℕ → ZMod 2` for X25B-L1's hypotheses.
+     **New statements, one mind, owed the planner's read-back**: the rows at the class their proofs read
+     (`prob_le_ratio_mul_of_symm`, `ratio_prod_le_of_symm`, `ratio_prod_le_iSup_levels_of_shrink`), `tendsto_measure_symmDiff_shift`,
+     `StationarySet.ae_majority`, `measure_le_majority_add`, `lintegral_prod_conv_cosetAverage`, `prob_le_max_ratio`,
+     `prob_le_ratio_level_add`. **My receipt**: tip `423cd8e8` equals `origin/fs131-w10b`, tree clean; `sorry` by the handoff's grep:
+     `StationaryRatio` 0 (the other three files 8, 1, 9 — this branch predates I10A's proofs); the full build log
+     (`build/gate/build/20261006T122714Z-3993653.log` in the tree) ends "Build completed successfully (5755 jobs)", 0 warnings other
+     than `sorry`, none in `StationaryRatio`; `data/fs131/i10b/logs/axioms-all.log` parsed by script: 52 records, 51 on the standard
+     three and the control (`StandingFive.usable_card_ge`) on `sorryAx`, the three leaves and two more found by name; the three leaves'
+     statements compared with `f919973e` by `cmp` of `awk` extractions — identical. **Items**: seven arguments of the three statements
+     unread by their proofs (`[MeasurableAdd₂ _]` four times, `[T2Space Y]`, `[SigmaFinite νX]`, `(hK : Antitone K)`), with
+     `[IsFiniteMeasure νY]` weakening to `[SFinite νY]` and the index `ℕ` to any type — each consumed by a `have` as committed, the
+     general forms proved beside them; the planner's finding 8 confirmed by proofs (no Haar measure read); **X25B-L1's Lean right-hand
+     side is the level pulled back to `X × Y`, and the comparison with the finite graphs on `Y/K_k` is stated nowhere in the wave** (a
+     route on paper, one mind: PZ first, then a count of the cosets with positive share); [hand], one mind — the symmetry hypotheses of
+     X25B-PZ cannot both be dropped (`ℤ/3`, `ℤ/5` with `δ₁`: ratios `1/3`, `2/5`, and `C₁₅` has `7/15`); a wording correction owed to
+     `plans/FS100-X25B-derivation.md` ll. 60–61 (step (2) also reads the symmetry of `ν_H`; no defect); `StationarySet G` is not a
+     tracked carrier of the vacuity scan; the price — 1,900 lines planned, about 660 written, because in the almost-sure normal form the
+     two rows contain no integral; three Lean facts (filed in `LEAN.md` § Searching — Lean today, with I10A's and K10's); slips, the
+     job's, disclosed — scratch elaborations outside the slot at 2.4 GiB for four seconds, proofs drafted before Stage 1's commit.
+507. **Rulings on I10B's held items, and its slot.** (a) **The seven unread arguments are dropped at the join, as ruling 494 (a) has
+     it for I10A's two**: each row keeps its name on the general statement and the `_of_symm` / `_of_shrink` twin is deleted; the
+     antitone hypothesis and the index `ℕ` go with them. Alternative: keep `(hK : Antitone K)` and `ℕ` because the row's words say
+     "its finite levels". Why: the plan's § 7.3 item 3 — a row is stated at the class its argument reads — and the row's own reading
+     is an instance. Confidence: high. (b) **The comparison of the pulled-back level with the finite quotient graph becomes a row of
+     wave 10's second pass** (sent to K10b by message, with I10B's route): without it X25B-L1 in Lean does not give the row's
+     "supremum over its finite levels" to a consumer. (c) The nine new statements and the two models are read back by K10b, with
+     I10A's five (ruling 494 (b)). (d) The joining job adds `StationarySet` to the vacuity scan's carriers with its three
+     inhabitants. (e) The wording correction is held with the wave's errata. (f) **Slot → FS131-I10C** (`StandingFive`, nine
+     leaves, on `fs131-w10c`), launched 2026-10-06. In flight: 1 (K10b) + 1 (K7) + 1 (I10C) = 3.
