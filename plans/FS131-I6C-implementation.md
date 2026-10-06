@@ -21,6 +21,18 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]` (Stage 2; build `d
   `IsUnitCurve.hasDerivWithinAt_norm_sq`, `IsUnitCurve.abs_sub_le`, `IsUnitCurve.one_le_dist_of_sign`, `two_sin_le_norm_e_sub_e`,
   `lt_mul_of_two_sin_le`, `le_add_of_chord`; `isUnitCurve_circle` (the unit circle, the sharpness example the plan's § 12.2 owed).
 
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]` (Stage 3; build `data/fs131/i6c/logs/build-2-small.log`, axioms
+`logs/axioms-2-small.out`, same control), in `Plane/Saturated/LocalGraph` unless said:
+- `HadwigerNelson.Plane.AeColouring.ae_one_colour_of_isConnected` — **FS131-E8-DELTA** (E8 § 3.5).
+- `HadwigerNelson.Plane.AeColouring.closure_essBdry_subset` — E8 § 3.1 (0); FS121-V5-OFF; FS121-V5-LOC (i).
+- `HadwigerNelson.Plane.AeColouring.notMem_essBdry_of_mem_densitySet` — a density point of a class is no essential boundary point.
+- Children (mine): `AeColouring.exists_densitySet_of_notMem`, `AeColouring.isOpen_setOf_forall_notMem_essSupport`,
+  `AeColouring.mem_densitySet_of_forall_notMem_essSupport`; in `Curve`: `IsUnitCurve.strictMonoOn_dist_of_le_pi` (the leaf at length `π`).
+
+Wired (over `sorry` children; axioms `[propext, sorryAx, Classical.choice, Quot.sound]`): `HadwigerNelson.Plane.AeColouring.local_graph`
+(FS121-V5-LOC (ii)) — over `local_graph` (mine, open) and `TwoColourOn.essBoundary_inter_eq` (`Pinch`, another line's leaf) through
+`TwoColourNhd.mem_essBoundary`.
+
 ## What I may and may not change (the brief's `touches:` and § Done means, item 4)
 
 - **May**: the proofs of the eleven leaves of `Proofs/HadwigerNelson/Plane/Saturated/Curve.lean` (six) and `.../LocalGraph.lean` (five); new
@@ -145,3 +157,59 @@ three"; **they are high by more than ten** (Z2 met). For what is left, re-priced
 plan) — about an hour; `local_graph`'s children (a)–(g), (i) (27 h in the plan) are of the same computational kind and I price them at half a
 day together; (h), the curve by arclength (2 d in the plan), is the one I do not re-price down from these leaves — its difficulty is a missing
 construction (an arclength reparametrization), not a computation — and it carries the width.
+
+## Stage 3 — SAVED (FS131-I6C): `LocalGraph`'s three small leaves; the colouring form wired; two generalizations
+
+### 3.1 What was proved, and by which route
+
+| leaf | route (as proved) | against its entry |
+|---|---|---|
+| `AeColouring.notMem_essBdry_of_mem_densitySet` | the class itself by the definition of `essBoundary`; another class by `notMem_essClosure_of_mem_densitySet` (`Plane/Saturated/Fan`) | the plan's row, as stated |
+| `AeColouring.ae_one_colour_of_isConnected` | the sets `O_j = {y : ∀ i ≠ j, y ∉ supp (cls i)}` are open in the plane (supports are closed), `O_j ⊆ S̃_j` (so pairwise disjoint), and every point of `W` lies in one (`exists_densitySet_of_notMem`: no essential boundary, no cusp); a preconnected `W` lies in one `O_j` (`IsPreconnected.subset_left_of_subset_union`); then `W ∖ cls j ⊆ S̃_j ∖ cls j`, null (`volume_densitySet_diff`) | E8 § 3.5, sentence by sentence: "some `j(x)` has `x ∈ S̃_{j(x)}`; every other class … is null near `x`" is `exists_densitySet_of_notMem`; "`j(·)` is locally constant on `W`, hence constant" is the open cover. FS131-E8-DELTA: "a connected open set that meets the essential boundary of no class and holds no cusp of any class is almost everywhere of one colour" — as stated |
+| `AeColouring.closure_essBdry_subset` | **shorter than the plan's and the entry's**: no sequence and no pigeonhole. If `x` is neither an essential boundary point nor a cusp, `x ∈ O_j` for one `j`; `O_j` is open and every point of it is a density point of `cls j` (`mem_densitySet_of_forall_notMem_essSupport`), so it misses the essential boundary; so `x` is not in its closure | E8 § 3.1 (0): "The closure of the essential boundary lies in `∂_e ∪ Σ`" — stated with the cusps in place of `Σ` (stronger: the cusps lie in `Σ`), as the planner read it |
+
+`AeColouring.local_graph` (the colouring's form) is **wired** from `local_graph` as the plan's row says: the two-colour ball at an interface
+point (`exists_twoColourNhd_of_mem_interfaceSet`), `U′ = U ∩ ball y ρ`, cusps lie in `Σ`, `TwoColourNhd.mem_essBoundary`, then `local_graph`.
+It carries `sorryAx` until `local_graph` and `Pinch`'s `essBoundary_inter_eq` land.
+
+### 3.2 Two generalizations (sent to the coordinator mid-job; neither is a defect)
+
+1. **`ae_one_colour_of_isConnected` does not read `hW : IsOpen W`.** The sets `O_j` are open *in the plane*, so any connected `W` — open
+   or not — that meets no essential boundary and no cusp is almost everywhere of one colour. The hypothesis stays in the statement (fixed), and
+   the proof names it with `have _ := hW` and a comment, so the unused-variable linter is silent (`LEAN.md` § The gate, the linters' bullet).
+   Kind: *the statement carries a hypothesis its proof does not read* — a generalization, for the errata; no consumer is hurt (`FanBridge` applies
+   it to open regions).
+2. **`IsUnitCurve.chord`, `.sin_le_inner`, `.strictMonoOn_dist` hold for `ℓ ≤ π`** (Stage 2's note), now all three kernel-checked at that
+   length: `sin_add_sin_le`, `strictMonoOn_dist_of_le_pi`. Same kind.
+
+### 3.3 An import added, and the module map
+
+`LocalGraph` now imports `Plane/Saturated/Fan` (for `notMem_essClosure_of_mem_densitySet`; the plan's § 11.4 row says "import it"). `Fan` imports
+`Basic` only and `FanBridge` already reaches it through `FanExamples`, so the import graph gains no cycle. `ARCHITECTURE.md`'s row for
+`Plane/Saturated/LocalGraph` gained the import in its imports cell — one cell, nothing else — and `tools/check_architecture.py` reads PASS with
+it (`data/fs131/i6c/logs/check-architecture-1.log`) and FAIL without it, naming the module and the import
+(`check-architecture-1-control.log`: "imports of Plane/Saturated/LocalGraph: stated-only [], real-only ['Plane/Saturated/Fan']").
+
+### 3.4 Checks
+
+- **Build**: OK — 466 of 466 batches, 4 modules rebuilt, exit 0 (`logs/build-2-small.exit`, `build-2-small.log`;
+  `build/gate/build/20261006T150524Z-820491.log`). Warnings: 21, every one `declaration uses sorry` — `LocalGraph` 1 (`local_graph`),
+  `FanBridge` 12, `Pinch` 7, `MapColouring` 1.
+- **Axioms** (`logs/axioms-2-small.out`): the control `c11_discs` and the wired `AeColouring.local_graph` print `sorryAx`; the seven new
+  declarations print the standard three; their lines are in `scripts/Axioms.lean`'s block (the wired one is not, until it is clean).
+- **Statements** (`logs/statements-3.out`): 16 of 16 the same.
+
+### 3.5 Where the job stands, and the plan for `local_graph`
+
+Ten of my eleven leaves are closed or wired; `local_graph` is the one `sorry` left in my two files. Its decomposition, fixed here before any
+of it is written into the module (children under names of my own; each proved child is a kernel theorem or wired over `Pinch`'s two leaves):
+
+| child | statement (informal) | status at this stage |
+|---|---|---|
+| L1 `exists_lens_point` (`Curve`, no measure) | unit normals at `x`, `x′` with `‖ν − ν′‖ > ‖x − x′‖`, each point outside two of the open unit discs at the other, `4‖x − x′‖ ≤ τ`: a point within `τ` of `x` in two opposite open discs. Far regime (`> 6‖x − x′‖`): E8 § 3.1 (3)(c)'s point `x + s(ν′ − ν)`; near regime: the midpoint of two centres less than 2 apart (`norm_sub_le_of_discs`) | elaborated on a scratch copy (`data/fs131/i6c/scratch/lens.lean`), not yet in the module |
+| L2 `TwoColourOn` facts | an open subset of `N` is not a.e. in both sets (**the one place `disj` is read so far**); a density point of `A` in `N` is outside `B`'s essential closure; off the essential boundary and the cusps a point of `N` is interior to `S̃_A` or to `S̃_B` | planned |
+| L3 `HasTwoDiscsAt.norm_sub_le` | the normal of the two discs is 1-Lipschitz on the common essential boundary, at pairs with `closedBall x (4‖x − x′‖) ⊆ N` — E8 § 3.1 (3)(b), (c) and the erratum, in one statement; in particular the normal is unique | planned (L1, L2, `Pinch`'s `essBoundary_inter_eq`) |
+| L4 the graph | in the frame of `ν(y)`: each normal segment over `|u| < h` holds exactly one essential boundary point, at height `|g u| ≤ u²` (E8 § 3.1 (4) existence, uniqueness) | planned |
+| L5 `g` differentiable | `g′ = −n₁/n₂` from (b) at the graph's points; `n₁`, `n₂` continuous | planned |
+| L6 arclength | `S u = ∫₀^u 1/n₂` (clamped to a global continuous integrand), an order isomorphism of `ℝ`; its inverse has derivative `n₂`; `γ = y + (U s + i g (U s)) τ₀`, `ψ = θ₀ − arcsin (n₁ ∘ U)`; `lipschitzOnWith_of_chord` with L3 | planned — the plan's (h) |
+| L7 the chart | `Q` a rectangle in the frame, `bdry`, `injOn`, `discs`, the two sides connected (each a union of normal segments meeting one convex strip) | planned — the plan's (i) |

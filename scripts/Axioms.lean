@@ -6390,6 +6390,13 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.lt_mul_of_two_sin_le
 #print axioms HadwigerNelson.Plane.le_add_of_chord
 #print axioms HadwigerNelson.Plane.lipschitzOnWith_of_chord
+#print axioms HadwigerNelson.Plane.IsUnitCurve.strictMonoOn_dist_of_le_pi
+#print axioms HadwigerNelson.Plane.AeColouring.notMem_essBdry_of_mem_densitySet
+#print axioms HadwigerNelson.Plane.AeColouring.exists_densitySet_of_notMem
+#print axioms HadwigerNelson.Plane.AeColouring.isOpen_setOf_forall_notMem_essSupport
+#print axioms HadwigerNelson.Plane.AeColouring.mem_densitySet_of_forall_notMem_essSupport
+#print axioms HadwigerNelson.Plane.AeColouring.ae_one_colour_of_isConnected
+#print axioms HadwigerNelson.Plane.AeColouring.closure_essBdry_subset
 
 #eval IO.println "=== PURCHASED ==="
 

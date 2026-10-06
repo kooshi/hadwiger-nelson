@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.Saturated.Pinch
 import Proofs.HadwigerNelson.Plane.Saturated.Curve
+import Proofs.HadwigerNelson.Plane.Saturated.Fan
 
 /-!
 # The local structure off the singular set (FS-131 wave 6: FS131-E8-LOCAL, FS131-E8-DELTA)
@@ -40,19 +41,86 @@ variable {k : ℕ}
 /-- A density point of a class of a colouring is no essential boundary point of the colouring. -/
 theorem AeColouring.notMem_essBdry_of_mem_densitySet (c : AeColouring k) {j : Fin k} {x : ℂ}
     (hx : x ∈ densitySet (c.cls j)) : x ∉ c.essBdry := by
-  sorry
+  intro hmem
+  obtain ⟨i, hi⟩ := mem_iUnion.1 hmem
+  by_cases hij : i = j
+  · subst hij
+    exact hi.2 hx
+  · exact notMem_essClosure_of_mem_densitySet (c.measurableSet_cls j) (c.pairwise_disjoint_cls (Ne.symm hij)) hx hi.1
+
+/-- Off the essential boundary and the cusps, a point is a density point of one class and outside the support of
+every other (FS131-E8 § 3.5's first three sentences). -/
+theorem AeColouring.exists_densitySet_of_notMem (c : AeColouring k) {x : ℂ} (hb : x ∉ c.essBdry)
+    (hcusp : x ∉ cuspSet c.cls) : ∃ j, x ∈ densitySet (c.cls j) ∧ ∀ i, i ≠ j → x ∉ essSupport (c.cls i) := by
+  obtain ⟨j, hj⟩ := exists_mem_essClosure_of_cover c.measurableSet_cls c.pairwise_disjoint_cls c.iUnion_cls x
+  have hjd : x ∈ densitySet (c.cls j) := by
+    by_contra hnd
+    exact hb (mem_iUnion.2 ⟨j, hj, hnd⟩)
+  refine ⟨j, hjd, fun i hij hsupp => hcusp ⟨i, hsupp, ?_⟩⟩
+  exact notMem_essClosure_of_mem_densitySet (c.measurableSet_cls j) (c.pairwise_disjoint_cls (Ne.symm hij)) hjd
+
+/-- The points outside the support of every class but `j` form an open set. -/
+theorem AeColouring.isOpen_setOf_forall_notMem_essSupport (c : AeColouring k) (j : Fin k) :
+    IsOpen {y : ℂ | ∀ i, i ≠ j → y ∉ essSupport (c.cls i)} := by
+  have h : {y : ℂ | ∀ i, i ≠ j → y ∉ essSupport (c.cls i)} = ⋂ i, ⋂ (_ : i ≠ j), (essSupport (c.cls i))ᶜ := by
+    ext y; simp
+  rw [h]
+  exact isOpen_iInter_of_finite fun i => isOpen_iInter_of_finite fun _ => (isClosed_essSupport _).isOpen_compl
+
+/-- A point outside the support of every class but `j` is a density point of the class `j`: that class alone has
+positive upper density there, and an essential boundary point of it would see a second class. -/
+theorem AeColouring.mem_densitySet_of_forall_notMem_essSupport (c : AeColouring k) {j : Fin k} {y : ℂ}
+    (h : ∀ i, i ≠ j → y ∉ essSupport (c.cls i)) : y ∈ densitySet (c.cls j) := by
+  obtain ⟨b, hb⟩ := exists_mem_essClosure_of_cover c.measurableSet_cls c.pairwise_disjoint_cls c.iUnion_cls y
+  have hbj : b = j := by
+    by_contra hne
+    exact h b hne (essClosure_subset_essSupport _ hb)
+  subst hbj
+  by_contra hnd
+  obtain ⟨b', hb'ne, hb'⟩ := exists_ne_mem_essClosure c.measurableSet_cls c.pairwise_disjoint_cls c.iUnion_cls
+    (show y ∈ essBoundary (c.cls b) from ⟨hb, hnd⟩)
+  exact h b' hb'ne (essClosure_subset_essSupport _ hb')
 
 /-- **FS131-E8-DELTA.** In a measurable colouring, a connected open set that meets the essential boundary of no class
 and holds no cusp of any class is almost everywhere of one colour. Unit pairs and saturation are not read. -/
 theorem AeColouring.ae_one_colour_of_isConnected (c : AeColouring k) {W : Set ℂ} (hW : IsOpen W)
     (hWc : IsConnected W) (hb : Disjoint W c.essBdry) (hcusp : Disjoint W (cuspSet c.cls)) :
     ∃ j, (W : Set ℂ) ≤ᵐ[volume] c.cls j := by
-  sorry
+  -- `hW` is not read: the sets `{y | ∀ i ≠ j, y ∉ supp (cls i)}` are open in the plane, pairwise disjoint, and cover
+  -- `W`, so a connected `W`, open or not, lies in one of them (FS131-I6C, a generalization; the statement is fixed).
+  have _ := hW
+  obtain ⟨x₀, hx₀⟩ := hWc.nonempty
+  obtain ⟨j, -, hj⟩ := c.exists_densitySet_of_notMem (disjoint_left.1 hb hx₀) (disjoint_left.1 hcusp hx₀)
+  refine ⟨j, ?_⟩
+  have hsub : W ⊆ {y : ℂ | ∀ i, i ≠ j → y ∉ essSupport (c.cls i)} := by
+    refine IsPreconnected.subset_left_of_subset_union (c.isOpen_setOf_forall_notMem_essSupport j)
+      (isOpen_iUnion fun j' => isOpen_iUnion fun (_ : j' ≠ j) => c.isOpen_setOf_forall_notMem_essSupport j')
+      ?_ ?_ ⟨x₀, hx₀, hj⟩ hWc.isPreconnected
+    · rw [disjoint_left]
+      intro y hy hy'
+      simp only [mem_iUnion] at hy'
+      obtain ⟨j', hj'j, hy'⟩ := hy'
+      exact densitySet_disjoint (c.measurableSet_cls j) (c.pairwise_disjoint_cls (Ne.symm hj'j))
+        (c.mem_densitySet_of_forall_notMem_essSupport hy) (c.mem_densitySet_of_forall_notMem_essSupport hy')
+    · intro y hy
+      obtain ⟨j', -, hj'⟩ := c.exists_densitySet_of_notMem (disjoint_left.1 hb hy) (disjoint_left.1 hcusp hy)
+      by_cases hjj : j' = j
+      · subst hjj; exact Or.inl hj'
+      · exact Or.inr (mem_iUnion.2 ⟨j', mem_iUnion.2 ⟨hjj, hj'⟩⟩)
+  rw [ae_le_set]
+  exact measure_mono_null
+    (sdiff_subset_sdiff_left fun y hy => c.mem_densitySet_of_forall_notMem_essSupport (hsub hy))
+    (volume_densitySet_diff (c.measurableSet_cls j))
 
 /-- **The closure of the essential boundary lies in the essential boundary and the cusps** (FS131-E8 § 3.1 (0);
 FS121-V5-OFF; FS121-V5-LOC (i): `cl 𝓘 ∖ Σ ⊆ 𝓘`, since the cusps lie in `Σ`). No saturation. -/
 theorem AeColouring.closure_essBdry_subset (c : AeColouring k) : closure c.essBdry ⊆ c.essBdry ∪ cuspSet c.cls := by
-  sorry
+  intro x hx
+  by_contra hnot
+  rw [mem_union, not_or] at hnot
+  obtain ⟨j, -, hj⟩ := c.exists_densitySet_of_notMem hnot.1 hnot.2
+  obtain ⟨y, hy, hyb⟩ := mem_closure_iff.1 hx _ (c.isOpen_setOf_forall_notMem_essSupport j) hj
+  exact c.notMem_essBdry_of_mem_densitySet (c.mem_densitySet_of_forall_notMem_essSupport hy) hyb
 
 /-! ## The chart, and FS131-E8-LOCAL -/
 
@@ -102,6 +170,16 @@ theorem AeColouring.local_graph (c : AeColouring k) {U : Set ℂ} (hU : IsOpen U
     (hsat : SaturatedOn c.cls U) {y : ℂ} (hy : y ∈ c.essBdry ∩ U) :
     ∃ ρ a b Q γ ψ h, TwoColourNhd c.cls (ball y ρ) a b ∧ Q ⊆ U ∧
       IsInterfaceChart (c.cls a) (c.cls b) (ball y ρ) y Q γ ψ h := by
-  sorry
+  have hyS : y ∉ c.singularSet := disjoint_left.1 hS hy.2
+  obtain ⟨ρ, a, b, hN⟩ := exists_twoColourNhd_of_mem_interfaceSet (C := c.cls) ⟨hy.1, hyS⟩
+  have hyN : y ∈ ball y ρ := mem_ball_self hN.radius_pos
+  have hya := (hN.mem_essBoundary c.measurableSet_cls hyN hy.1).1
+  obtain ⟨Q, γ, ψ, h, hQ, hchart⟩ := Plane.local_graph (c.measurableSet_cls a) (c.unitPairsNull a)
+    (c.measurableSet_cls b) (c.unitPairsNull b) hN.two (hU.inter isOpen_ball) inter_subset_right
+    (fun x hx => ⟨fun hc => disjoint_left.1 hS hx.1 (cuspSet_subset_singularSet _ ⟨a, hc⟩),
+      fun hc => disjoint_left.1 hS hx.1 (cuspSet_subset_singularSet _ ⟨b, hc⟩)⟩)
+    (fun x hx => hsat a x ⟨hx.1, hx.2.1⟩) (fun x hx => hsat b x ⟨hx.1, hx.2.1⟩)
+    (show y ∈ essBoundary (c.cls a) ∩ (U ∩ ball y ρ) from ⟨hya, hy.2, hyN⟩)
+  exact ⟨ρ, a, b, Q, γ, ψ, h, hN, hQ.trans inter_subset_left, hchart⟩
 
 end HadwigerNelson.Plane

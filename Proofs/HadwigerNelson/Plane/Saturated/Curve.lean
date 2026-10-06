@@ -125,21 +125,28 @@ theorem IsUnitCurve.sin_le_inner {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : �
   have := h.sin_add_sin_le (by linarith [Real.pi_pos]) hs hs
   simpa using this
 
-/-- The distance from the start is strictly increasing along a curve of length at most `π/2`. -/
-theorem IsUnitCurve.strictMonoOn_dist {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCurve γ ψ (Icc 0 ℓ))
-    (hℓ : ℓ ≤ Real.pi / 2) : StrictMonoOn (fun s => dist (γ s) (γ 0)) (Icc 0 ℓ) := by
+/-- The distance from the start is strictly increasing along a curve of length at most `π` — the leaf
+`IsUnitCurve.strictMonoOn_dist` at the length its proof reads (`sin u > 0` on `(0, π)`). -/
+theorem IsUnitCurve.strictMonoOn_dist_of_le_pi {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCurve γ ψ (Icc 0 ℓ))
+    (hℓ : ℓ ≤ Real.pi) : StrictMonoOn (fun s => dist (γ s) (γ 0)) (Icc 0 ℓ) := by
   have hsq : StrictMonoOn (fun s => ‖γ s - γ 0‖ ^ 2) (Icc 0 ℓ) := by
     refine strictMonoOn_of_hasDerivWithinAt_pos (convex_Icc 0 ℓ)
       (fun u hu => (h.hasDerivWithinAt_norm_sq (γ 0) hu).continuousWithinAt)
       (fun u hu => (h.hasDerivWithinAt_norm_sq (γ 0) (interior_subset hu)).mono interior_subset) (fun u hu => ?_)
     have hu' : u ∈ Ioo 0 ℓ := by rwa [interior_Icc] at hu
-    have h1 := h.sin_le_inner hℓ (Ioo_subset_Icc_self hu')
-    have h2 : 0 < Real.sin u := Real.sin_pos_of_pos_of_lt_pi hu'.1 (by linarith [hu'.2, Real.pi_pos])
+    have h1 := h.sin_add_sin_le hℓ (Ioo_subset_Icc_self hu') (Ioo_subset_Icc_self hu')
+    rw [sub_self, Real.sin_zero, zero_add] at h1
+    have h2 : 0 < Real.sin u := Real.sin_pos_of_pos_of_lt_pi hu'.1 (lt_of_lt_of_le hu'.2 hℓ)
     linarith
   intro a ha b hb hab
   have := hsq ha hb hab
   simp only [dist_eq_norm]
   exact lt_of_pow_lt_pow_left₀ 2 (norm_nonneg _) this
+
+/-- The distance from the start is strictly increasing along a curve of length at most `π/2`. -/
+theorem IsUnitCurve.strictMonoOn_dist {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCurve γ ψ (Icc 0 ℓ))
+    (hℓ : ℓ ≤ Real.pi / 2) : StrictMonoOn (fun s => dist (γ s) (γ 0)) (Icc 0 ℓ) := by
+  exact h.strictMonoOn_dist_of_le_pi (by linarith [Real.pi_pos])
 
 /-- The curve leaves its initial tangent line at most quadratically (FS131-E8 § 3.3). -/
 theorem IsUnitCurve.norm_sub_le {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCurve γ ψ (Icc 0 ℓ)) {s : ℝ}
