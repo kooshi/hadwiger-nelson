@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–588 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–589 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -96,6 +96,7 @@ a fresh agent on the same brief.
   statement mentions it, so a leaf can be stated without a hypothesis its file shows, and a textual check passes it. At a review,
   `#check` at least the row's heads (`lake env lean` on a three-line file under the slot); landing briefs ask it of every head.
 - **Learned 2026-10-06, afternoon** (items 560–574): **a brief not yet launched is rewritten, not amended** (regenerate its amendment; a launched one gets a dated amendment); **when a job of a wave hands back, fast-forward every unstarted branch of that wave onto its tip and copy its build** (no `lake` running in the source tree), so the next job has its lemmas by ancestry; **check the import direction before telling a job to cite a lemma** (a module that imports yours cannot lend you one: item 566 (d) — the lemma moves instead); **a planner's hypothesis can be wider than its row** — read the row's "not claimed" line against the binder (item 568: `interior` of a cone admitted the whole circle); **the harness's "completed" notice can be interim** ("stopped with background work still running"): a slot is free only when the hand-back message has arrived; **a hand-back past about 550k** happened three times today (planners and implementers at 524k–609k): brief planners at 400k with a hand-back line at 500k; an inventory append asserts on the file's last two words only (lines wrap); a `Q()` prefix holding braces is built outside the f-string.
+- **A job that commits to `main` while a landing is in flight** (the Searcher, an outside audit) costs the landing a full re-run of the gate for each tool file it adds, unless the landing was told the path is exempt (item 589: two passes of sixteen minutes): name the job's `tools/` paths to the landing before it starts, or have it keep its tools on a branch.
 - **Usage** (item 574 (c)): The cap stays at three slots, the Searcher included; the coordinator's own context is the other lever.
 - **An implementer's last stage runs the guarded lint** (item 573: a landing's gate went red on an unused instance binder no branch had linted) — say so in every implementer brief written from now on: `lake lint --no-build -- --no-build --trace` under the slot with `--mem 8`, after its last green build.
 - **Prices, calibrated** (item 541; `data/fs131/calibration/price-vs-actual.md`): one implementer job is about an hour, about 430k

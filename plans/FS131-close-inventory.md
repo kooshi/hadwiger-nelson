@@ -7462,3 +7462,17 @@ reason by the close.*
      below the notice is the original, line for line; no author line. Not checked: how GitHub renders the notice
      above a title written in HTML. **A slip of mine**: this item's first append failed its tail check (a wrapped
      line again) and the patch was committed one commit before the item.
+589. **FS131-LT5, by message at its landing step: the gate is green on the merged tree, twice; one word asked on a path my exemption did not name** (source: LT5's message to "main", 2026-10-06 — the artifact is read at its hand-back).
+     By its word: the full gate passed on `50ad7266` and again on `c5a4565f` (a merge of `main` that brought an
+     outside-audit tool, so it re-ran everything, to the letter); the axiom audit and the vacuity scan unchanged
+     from the second landing's; **the assumptions step OK against its draft copy of the front page —
+     `axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1`** — its self-test 33 of
+     33, its mutation harness 18 of 18; lint, architecture, notes, records passing; the kernel's list of 14,501
+     declarations byte-identical to the second landing's. A third pass is running on `5a62be0a`, and it pushes
+     when green. **Rulings.** (a) **`tools/ext_hn2_*.py` are exempt from re-gating**, on the ground of the search
+     lane's scripts. Alternative: the letter of the brief. Why not: no gate step reads them, and each pass is
+     sixteen minutes. Confidence: high. (b) **The first filing of the nine counts is the first thing I do after
+     its push**: until then the step exits 1 on `main`, which is ruling 562 (d) working. Reply sent, one message.
+     **A cost of mine**: two re-runs of the gate were caused by other lanes' tool files reaching `main` during a
+     landing; a brief for a job that commits to `main` while a landing is in flight should name its tool paths as
+     exempt to the landing beforehand, or keep its tools on a branch (to the handoff's procedures).
