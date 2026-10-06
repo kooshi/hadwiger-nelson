@@ -1380,7 +1380,7 @@ theorem exists_openStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Covers
 /-! ## The two steps (the strengthened moves, cleaned) -/
 
 /-- **The vertex step** (FS131-E6-ROUTE: MERGE; else MERGE-RAY; else SHAVE where the horn's colour has an allowed cone with empty
-interior; else OPEN — each followed by `exists_clean`): at a point of a clean valid map whose closed unit disc lies in the domain
+interior; else OPEN — each followed by `cleanKeep`): at a point of a clean valid map whose closed unit disc lies in the domain
 (`F.Covers v 1`, what each of the four moves takes — inventory item 423) and where a move is available, for every bound
 `δ > 0`, a clean valid modification that is a local step on `B̄(v, ρ)`, `ρ < δ`, in which `v`'s **potential — its degree plus its
 number of horns — drops**, `v` gains no colour, and no other point of the disc is a site. The degree alone need not drop: at
@@ -1426,23 +1426,27 @@ theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Cove
       subst hn0
       exact exists_openStep hF hc hv hH hn hD' hdeg hhorn hδ
 
-/-- **The arc step** (a bend of a maximal bad unit arc, then `exists_clean`): at a maximal unit arc about `P`, neither (Q) nor (R2),
+/-- **The arc step** (a bend of a maximal bad unit arc, then `exists_clean`): on a plane map (inventory item 430 (b): the bad
+count is an `ℕ∞`, finite only there — `badCount_lt_top`), at a maximal unit arc about `P`, neither (Q) nor (R2),
 whose side colours are not both carried at `P`, for every `δ > 0` and every locally finite set `T` (the treatment points), a clean
 valid modification that is a local step on the closed `ε`-neighbourhood of the arc, `ε < δ`, lowering `P`'s bad count, creating no
-site, changing no point's degree and raising no point's horn count (FS131-E6's clause, inventory item 385 (a): the bent curve must
+site, raising the degree of no point of `T` (inventory item 430 (a): a bend moves `Γ`, so an interior point of the bent arc loses its
+degree, and no clause about every point's degree can hold) and raising no point's horn count (FS131-E6's clause, inventory item
+385 (a): the bent curve must
 not become tangent to another arc at an end vertex — a choice of the bend's profile), and at every other point of `T` adding no
 colour and — unless it loses one — raising no bad count. The toward bend (`bend_toward`) when the outer colour is absent at `P`; else the away bend (`bend_away_whole`, or N2-TAN's
 tangent bend on the parts of the arc with no radius-2 witness). **The last clause is FS131-KL1's question (5)** (inventory item 372):
 a bend's lens never cuts another arc's (R2) witness — a witness arc `R₂(β)` cannot cross the bent arc's open part, since past it
-`R₂(β)` would lie in the outer tile, outside the closure of the inner colour's class (one mind's sketch; this child is its check). -/
-theorem exists_arcStep (hF : F.Valid) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
+`R₂(β)` would lie in the outer tile, outside the closure of the inner colour's class (one mind's sketch; this child is its check).
+Inhabitant: no Lean model on file; `l60Frag` cleaned, its whole arc, at [hand] (FS131-QA4 § 6.2, rank 7). -/
+theorem exists_arcStep (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
     (hmax : F.IsMaxRingArc P θ₁ θ₂ c c') (hQ : ¬ F.IsQArc P θ₁ θ₂) (hR : ¬ F.IsR2Arc P θ₁ θ₂)
     (hnb : ¬ (c ∈ F.coloursAt P ∧ c' ∈ F.coloursAt P)) {T : Set ℂ}
     (hT : ∀ K, IsCompact K → (K ∩ T).Finite) {δ : ℝ} (hδ : 0 < δ) :
     ∃ ε, 0 < ε ∧ ε < δ ∧ ∃ F' : ArcMap k, F'.Valid ∧ F'.IsClean ∧
       LocalStep F F' (cthickening ε (ringArc P θ₁ θ₂)) ∧ F.IsModification F' ∧
       F'.badCount P < F.badCount P ∧ (∀ x, F'.IsSite x → F.IsSite x) ∧
-      (∀ x m, F.HasDegree x m → F'.HasDegree x m) ∧
+      (∀ x ∈ T, ∀ m, F.HasDegree x m → ∃ m' ≤ m, F'.HasDegree x m') ∧
       (∀ x j, F.HasHornCount x j → ∃ j' ≤ j, F'.HasHornCount x j') ∧
       ∀ Q ∈ T, Q ≠ P → F'.coloursAt Q ⊆ F.coloursAt Q ∧
         (F'.coloursAt Q = F.coloursAt Q → F'.badCount Q ≤ F.badCount Q) := by
@@ -1759,7 +1763,7 @@ theorem exists_procStep (hP : F.IsPlaneMap) (hc : F.IsClean) (f : ℂ → ℕ) {
       · exact hQ ⟨c, c', hmax.1, h1, h2, h4⟩
       · exact hmv (Or.inl (mergeAvailable_of_bothKind hG.valid hG.plane hmax.1 h1 h2 (by omega)))
     obtain ⟨ε, hε0, hε2, G', hV, hC, hstep, hmod, hbad, hsites, hdegs, hhorns, hQs⟩ :=
-      exists_arcStep hG.valid hG.clean hmax hQ hR hnb hT (show (0 : ℝ) < 1 / 2 by norm_num)
+      exists_arcStep hG.valid hG.plane hG.clean hmax hQ hR hnb hT (show (0 : ℝ) < 1 / 2 by norm_num)
     have hUc : IsClosed (cthickening ε (ringArc t θ₁ θ₂)) := isClosed_cthickening
     have htU : t ∉ cthickening ε (ringArc t θ₁ θ₂) := fun h => by
       have := (dist_of_mem_cthickening_ringArc hε0.le h).1
@@ -1769,11 +1773,12 @@ theorem exists_procStep (hP : F.IsPlaneMap) (hc : F.IsClean) (f : ℂ → ℕ) {
       ⟨hstep, (isCompact_ringArc t θ₁ θ₂).cthickening, ?_, ?_, fun h => absurd h (by simp), ?_, fun _ h => absurd h (by simp), ?_, ?_⟩⟩
     · show G'.dom = univ
       rw [← hstep.agreesOff.1]; exact hG.plane
-    · intro x _
+    · intro x hx
       obtain ⟨mx, -, hmx⟩ := exists_hasDegree_of_mem_dom (hGd x)
       obtain ⟨jx, hjx⟩ := exists_hasHornCount (hGd x)
+      obtain ⟨m', hm', hdeg'⟩ := hdegs x hx mx hmx
       obtain ⟨j', hj', hjx'⟩ := hhorns x jx hjx
-      rw [pot_eq (hdegs x mx hmx) hjx', pot_eq hmx hjx]
+      rw [pot_eq hdeg' hjx', pot_eq hmx hjx]
       omega
     · intro x hx
       by_cases hxt : x = t
