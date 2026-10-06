@@ -175,7 +175,7 @@ run `exists_root` and `charSum_128_ge` at the same field.
 
 **The final build** (`data/fs131/i10e/logs/build-2-final.log`): `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
 ./scripts/build.sh`, exit 0, 455 of 455 batches, 3 modules rebuilt (`Arith.Floor128` 6.6 s, `Arith.TargetFloors` 1.5 s, `Proofs`
-1.7 s), 8 m 18 s after 9 minutes queued on the slot's ledger. **Sixteen `sorry` warnings on the branch, none in `Floor128`**:
+1.7 s), 8 m 18 s, after about two minutes queued on the slot's ledger behind two other builds. **Sixteen `sorry` warnings on the branch, none in `Floor128`**:
 `MajorityVote` 1, `NegCircleModel` 2, `ProductFactor` 1, `StandingFive` 9, `StationaryRatio` 3 (distinct `file:line` warnings of the
 full output). The one line reading "error: target is out-of-date" in the full output is `build.sh`'s opening `lake build
 --no-build` probe finding `Floor128` stale, as it must after an edit. The module as built is the module as committed.
@@ -248,4 +248,11 @@ brings FS131-I10D's two files with it. `Floor128` now imports `FloorPlanes`. New
 another file of `Proofs/` (Stage 2). `scripts/Axioms.lean` gains one block, above the `=== PURCHASED ===` banner, after
 FS131-I10D's. `bezout4`, `bezout128` and their four literals are read by no proof: keeping them costs under a second of kernel
 time and they are in FS131-K10b's audit block; dropping them is a statement change, so it is the planner's and the coordinator's.
+
+## Stage 4 — SAVED (FS131-I10E): the report
+
+`data/fs131/reports/FS131-I10E.md`, in standing rule 11's form, ending with what is left and its route; its text is the hand-back.
+One item is held for the coordinator beyond the drafts: `tools/check_architecture.py` exits 1 on this branch until
+`ARCHITECTURE.md`'s Imports cell for `Arith/Floor128` gains `Arith/FloorPlanes`. Nothing of this job is left running: no background
+process, no slot held (`scripts/slot.py --status` at the close).
 
