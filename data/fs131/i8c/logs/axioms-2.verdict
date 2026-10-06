@@ -1,0 +1,2 @@
+axioms print: 18 records (0 axiom-free), each a subset of the standard three: yes; control `FS131I8CControl.planted_sorry` prints ['sorryAx']
+EXIT=0

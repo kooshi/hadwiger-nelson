@@ -1,0 +1,9 @@
+statement check against 6e0cf10d: 235 base declarations compared in 10 modules; 0 changed or missing; 7 added since the base
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.IsRingArc.exists_sub_of_germIn
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_germ
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.exists_far_of_germPair
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.germIn_closure_tile_of_near
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.halfDisc_ncard_coloursAt_zero
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.halfDisc_nonSiamese
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.halfDisc_valid
+EXIT=0

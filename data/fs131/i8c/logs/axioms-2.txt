@@ -1,0 +1,22 @@
+/tmp/tmpfo0_i5fw.lean:3:8: warning: declaration uses `sorry`
+'HadwigerNelson.Plane.ArcMap.qcol_inner_tile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsRingArc.exists_sub_of_germIn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_ccw' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_cw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_far_of_germPair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.qcol_not_one_arc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.germPair_inner_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.germPair_swap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.germIn_closure_tile_of_near' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_germ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ringTile_uMinus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ringTile_vMinus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ringTile_vPlus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ringTile_uPlus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.halfDisc_valid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.halfDisc_nonSiamese' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.halfDisc_ncard_coloursAt_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131I8CControl.planted_sorry' depends on axioms: [sorryAx]

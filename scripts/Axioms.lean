@@ -6835,6 +6835,30 @@ leaves close. -/
 #print axioms HadwigerNelson.Plane.ArcMap.star_anti
 -- FS131-I8B block end
 
+/-! ## FS131-I8C — FS-131 wave 8's semi-hub rows, first module (`Plane/RingCalculus/SemiHub`): the planner's leaves as they
+close, their helpers, and the declarations the planner proved from those leaves. -/
+-- FS131-I8C: Plane/RingCalculus/SemiHub (FS116-V5-QCOL, FS116-N3-PAIR, FS116-N3-CONE (a))
+#print axioms HadwigerNelson.Plane.ArcMap.qcol_inner_tile
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.exists_sub_of_germIn
+#print axioms HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_ccw
+#print axioms HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_cw
+#print axioms HadwigerNelson.Plane.ArcMap.exists_far_of_germPair
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one
+#print axioms HadwigerNelson.Plane.ArcMap.qcol_not_one_arc
+#print axioms HadwigerNelson.Plane.ArcMap.germPair_inner_ne
+#print axioms HadwigerNelson.Plane.ArcMap.germPair_swap
+#print axioms HadwigerNelson.Plane.ArcMap.germIn_closure_tile_of_near
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_germ
+#print axioms HadwigerNelson.Plane.ArcMap.ringTile_uMinus
+#print axioms HadwigerNelson.Plane.ArcMap.ringTile_vMinus
+#print axioms HadwigerNelson.Plane.ArcMap.ringTile_vPlus
+#print axioms HadwigerNelson.Plane.ArcMap.ringTile_uPlus
+-- FS131-I8C: the class of the shared lemmas, inhabited (`halfDisc` at `0`)
+#print axioms HadwigerNelson.Plane.halfDisc_valid
+#print axioms HadwigerNelson.Plane.halfDisc_nonSiamese
+#print axioms HadwigerNelson.Plane.halfDisc_ncard_coloursAt_zero
+-- FS131-I8C block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.RingCalculus.Star
+import Proofs.HadwigerNelson.Plane.RingCalculus.StarChart
 import Proofs.HadwigerNelson.Plane.ValidMap.HexRing
 import Proofs.HadwigerNelson.Plane.Woodall.Basic
 
@@ -213,7 +214,16 @@ stated there with `sorry` on a branch this one does not hold: one declaration at
 theorem qcol_inner_tile (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
     (hA : F.IsRingArc p θ₁ θ₂ c c') {T : Set ℂ} (hT : F.TileOf c T) (hpT : p ∈ closure T) :
     ringArc p θ₁ θ₂ ⊆ closure T := by
-  sorry
+  have hsub : F.region c ∩ ball p 1 ⊆ closure T := fun z hz =>
+    mem_closure_tile_of_near hF hN hT (F.interiorPts_subset_dom hz.1.1) (subset_closure hz.1) hpT (mem_ball.mp hz.2)
+  have hcont : Continuous fun θ : ℝ => ringPt p θ := by unfold ringPt e; fun_prop
+  have h1 : ringPt p '' Icc θ₁ θ₂ ⊆ closure (ringPt p '' Ioo θ₁ θ₂) := by
+    rw [← closure_Ioo hA.1.ne]
+    exact image_closure_subset_closure_image hcont
+  refine h1.trans (closure_minimal ?_ isClosed_closure)
+  rintro _ ⟨φ, hφ, rfl⟩
+  have : c ∈ F.innerColours p (ringPt p φ) := by rw [(hA.2.2 φ hφ).1]; rfl
+  exact closure_minimal hsub isClosed_closure this
 
 /-- **FS116-V5-QCOL**, "… and whose outer tile is not a tile of `p`", at the class it reads (any valid map, any tile): a
 tile with a point outside `B(p, 1)` is no tile of `p`. -/
@@ -221,18 +231,95 @@ theorem IsTile.not_mem_closure_of_not_subset_ball (hF : F.Valid) {T : Set ℂ} (
     (h : ¬ T ⊆ ball p 1) : p ∉ closure T :=
   fun hp => h (hT.subset_ball hF hp)
 
+/-- **A germ on a ring arc, on either side, is a sub-arc with the same sides**: if the germ on side `s` of `r(θ)` lies on
+an arc of `Γ` on `ω(p)` with sides `a`, `a'`, then for some `ℓ > 0` the points `r(φ)` with `φ` on side `s` of `θ` and
+`|φ − θ| ≤ ℓ` lie in `Γ` (the end `φ = θ` included) and, for `0 < |φ − θ| < ℓ`, carry `a` alone inside and `a'` alone
+outside. (The angles modulo `2π` are wave 3's `exists_germ_interior`; no map hypothesis is read. Helper of the two sub-arc
+lemmas below; job FS131-I8C.) -/
+theorem IsRingArc.exists_sub_of_germIn {p : ℂ} {θ₁ θ₂ : ℝ} {a a' : Fin k} (hA : F.IsRingArc p θ₁ θ₂ a a') {θ : ℝ}
+    {s : Side} (hg : GermIn p θ s (ringArc p θ₁ θ₂)) :
+    ∃ ℓ > 0, (∀ φ, |φ - θ| ≤ ℓ → 0 ≤ s.sign * (φ - θ) → ringPt p φ ∈ F.Γ) ∧
+      ∀ φ, |φ - θ| < ℓ → 0 < s.sign * (φ - θ) →
+        F.innerColours p (ringPt p φ) = {a} ∧ F.outerColours p (ringPt p φ) = {a'} := by
+  have hσ : s.sign = 1 ∨ s.sign = -1 := by cases s <;> simp [Side.sign]
+  obtain ⟨δ, hδ, hint⟩ := exists_germ_interior hg
+  have hbase := mem_ringArc_of_germIn hg
+  have key : ∀ φ, |φ - θ| < δ → 0 < s.sign * (φ - θ) → ∃ ψ ∈ Ioo θ₁ θ₂, ringPt p ψ = ringPt p φ := by
+    intro φ h1 h2
+    have ht : s.sign * (φ - θ) ∈ Ioo (0 : ℝ) δ := by
+      refine ⟨h2, ?_⟩
+      rcases hσ with h | h <;> rw [h] <;> have := abs_lt.mp h1 <;> linarith
+    obtain ⟨ψ, hψ, hψe⟩ := hint _ ht
+    refine ⟨ψ, hψ, ?_⟩
+    have : θ + s.sign * (s.sign * (φ - θ)) = φ := by
+      rcases hσ with h | h <;> rw [h] <;> ring
+    rw [this] at hψe
+    simp only [ringPt, hψe]
+  refine ⟨δ / 2, by linarith, fun φ h1 h2 => ?_, fun φ h1 h2 => ?_⟩
+  · rcases h2.eq_or_lt with h0 | h0
+    · have : φ = θ := by
+        rcases hσ with h | h <;> rw [h] at h0 <;> linarith
+      rw [this]; exact hA.2.1 hbase
+    · obtain ⟨ψ, hψ, hψe⟩ := key φ (by linarith) h0
+      rw [← hψe]; exact hA.2.1 ⟨ψ, Ioo_subset_Icc_self hψ, rfl⟩
+  · obtain ⟨ψ, hψ, hψe⟩ := key φ (by linarith) h2
+    rw [← hψe]; exact hA.2.2 ψ hψ
+
 /-- **A germ on a ring arc, counter-clockwise, is a ring arc starting at its point**: if the germ just counter-clockwise of
 `r(θ)` lies on a (Q) arc of inner colour `a` and outer colour `a'`, then for some `ℓ > 0` the arc `r([θ, θ + ℓ])` is an arc
 of `Γ` on `ω(p)` with those side colours. (FS116-V5-QCOL's "a (Q) arc holding `u⁺` and not `u⁻` ends at `u`", in the form
 the rows consume: the sub-arc from `u`; no map hypothesis is read.) -/
 theorem GermOnQWith.exists_isRingArc_ccw {p : ℂ} {θ : ℝ} {a a' : Fin k} (h : F.GermOnQWith p θ .ccw a a') :
     ∃ ℓ > 0, F.IsRingArc p θ (θ + ℓ) a a' := by
-  sorry
+  obtain ⟨θ₁, θ₂, hA, -, -, -, hg⟩ := h
+  obtain ⟨ℓ, hℓ, hΓ, hside⟩ := hA.exists_sub_of_germIn hg
+  refine ⟨ℓ / 2, by linarith, by linarith, ?_, fun φ hφ => hside φ ?_ ?_⟩
+  · rintro _ ⟨φ, hφ, rfl⟩
+    refine hΓ φ ?_ ?_
+    · rw [abs_of_nonneg (by linarith [hφ.1])]; linarith [hφ.2]
+    · simp only [Side.sign, one_mul]; linarith [hφ.1]
+  · rw [abs_of_pos (by linarith [hφ.1])]; linarith [hφ.2]
+  · simp only [Side.sign, one_mul]; linarith [hφ.1]
 
 /-- **A germ on a ring arc, clockwise, is a ring arc ending at its point.** -/
 theorem GermOnQWith.exists_isRingArc_cw {p : ℂ} {θ : ℝ} {a a' : Fin k} (h : F.GermOnQWith p θ .cw a a') :
     ∃ ℓ > 0, F.IsRingArc p (θ - ℓ) θ a a' := by
-  sorry
+  obtain ⟨θ₁, θ₂, hA, -, -, -, hg⟩ := h
+  obtain ⟨ℓ, hℓ, hΓ, hside⟩ := hA.exists_sub_of_germIn hg
+  refine ⟨ℓ / 2, by linarith, by linarith, ?_, fun φ hφ => hside φ ?_ ?_⟩
+  · rintro _ ⟨φ, hφ, rfl⟩
+    refine hΓ φ ?_ ?_
+    · rw [abs_of_nonpos (by linarith [hφ.2])]; linarith [hφ.1]
+    · simp only [Side.sign]; linarith [hφ.2]
+  · rw [abs_of_neg (by linarith [hφ.2])]; linarith [hφ.1]
+  · simp only [Side.sign]; linarith [hφ.2]
+
+/-- **The two germs of one pair hold points more than `1` apart**: for the germ on side `s` of `u = r(ψ + 60°)` and the
+germ on side `s.flip` of `v = r(ψ − 60°)`, of any positive lengths, some point of the first and some point of the second are
+more than `1` apart (their angular distance is `120° ± 2t`). No map. (Helper of `qcol_not_one_arc` and
+`germPair_inner_ne`; job FS131-I8C.) -/
+theorem exists_far_of_germPair (p : ℂ) (ψ : ℝ) (s : Side) {δ δ' : ℝ} (hδ : 0 < δ) (hδ' : 0 < δ') :
+    ∃ x ∈ germ p (ψ + π / 3) s δ, ∃ y ∈ germ p (ψ - π / 3) s.flip δ', 1 < dist x y := by
+  have hπ := Real.pi_gt_three
+  have hπ4 := Real.pi_lt_four
+  set t : ℝ := min (min δ δ') (1 / 2) / 2 with ht
+  have ht0 : 0 < t := by rw [ht]; exact half_pos (lt_min (lt_min hδ hδ') (by norm_num))
+  have htδ : t < δ := by
+    have := (min_le_left (min δ δ') (1 / 2)).trans (min_le_left δ δ'); rw [ht]; linarith
+  have htδ' : t < δ' := by
+    have := (min_le_left (min δ δ') (1 / 2)).trans (min_le_right δ δ'); rw [ht]; linarith
+  have ht4 : t ≤ 1 / 4 := by
+    have := min_le_right (min δ δ') (1 / 2); rw [ht]; linarith
+  refine ⟨_, ⟨t, ⟨ht0, htδ⟩, rfl⟩, _, ⟨t, ⟨ht0, htδ'⟩, rfl⟩, ?_⟩
+  have hσ : s.sign = 1 ∨ s.sign = -1 := by cases s <;> simp [Side.sign]
+  have hdiff : ψ + π / 3 + s.sign * t - (ψ - π / 3 + s.flip.sign * t) = 2 * π / 3 + 2 * s.sign * t := by
+    rw [Side.sign_flip]; ring
+  have habs : |ψ + π / 3 + s.sign * t - (ψ - π / 3 + s.flip.sign * t)| = 2 * π / 3 + 2 * s.sign * t := by
+    rw [hdiff]; rcases hσ with h | h <;> rw [h] <;> exact abs_of_pos (by linarith)
+  have hle : |ψ + π / 3 + s.sign * t - (ψ - π / 3 + s.flip.sign * t)| ≤ π := by
+    rw [habs]; rcases hσ with h | h <;> rw [h] <;> linarith
+  refine (dist_ringPt_ringPt_cmp_one p hle).2.2.mpr ?_
+  rw [habs]; rcases hσ with h | h <;> rw [h] <;> linarith
 
 /-- **No arc of `Γ` on `ω(p)` whose inner colour is carried at `p` holds two points more than `1` apart** (valid,
 non-Siamese): the whole arc lies in the closure of one tile of `p` (`qcol_inner_tile`). So such an arc is at most `60°`
@@ -251,7 +338,11 @@ valid non-Siamese map, no (Q) arc of `ω(p)` holds the germ on side `s` of `u = 
 theorem qcol_not_one_arc (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hpd : p ∈ F.dom) {ψ : ℝ} (s : Side) {θ₁ θ₂ : ℝ}
     (hQ : F.IsQArc p θ₁ θ₂) (hu : GermIn p (ψ + π / 3) s (ringArc p θ₁ θ₂))
     (hv : GermIn p (ψ - π / 3) s.flip (ringArc p θ₁ θ₂)) : False := by
-  sorry
+  obtain ⟨c, c', hA, hc, -, -⟩ := hQ
+  obtain ⟨δ, hδ, hsub⟩ := hu
+  obtain ⟨δ', hδ', hsub'⟩ := hv
+  obtain ⟨x, hx, y, hy, hxy⟩ := exists_far_of_germPair p ψ s hδ hδ'
+  exact absurd (ringArc_dist_le_one hF hN hpd hA hc (hsub hx) (hsub' hy)) (not_le.mpr hxy)
 
 /-! ## FS116-N3-PAIR and FS116-V5-DICHO -/
 
@@ -261,7 +352,13 @@ lie on (Q) arcs, the two arcs' inner colours differ: one tile of `p` would hold 
 theorem germPair_inner_ne (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hpd : p ∈ F.dom) {ψ : ℝ} (s : Side)
     {a a' b b' : Fin k} (hu : F.GermOnQWith p (ψ + π / 3) s a a') (hv : F.GermOnQWith p (ψ - π / 3) s.flip b b') :
     a ≠ b := by
-  sorry
+  rintro rfl
+  obtain ⟨θ₁, θ₂, hA, ha, -, -, δ, hδ, hsub⟩ := hu
+  obtain ⟨φ₁, φ₂, hB, -, -, -, δ', hδ', hsub'⟩ := hv
+  obtain ⟨T, hT, hpT⟩ := (F.mem_coloursAt_iff_exists_tileOf hpd).mp ha
+  obtain ⟨x, hx, y, hy, hxy⟩ := exists_far_of_germPair p ψ s hδ hδ'
+  exact absurd (hT.1.dist_le_one_of_mem_closure hF x (qcol_inner_tile hF hN hA hT hpT (hsub hx)) y
+    (qcol_inner_tile hF hN hB hT hpT (hsub' hy))) (not_le.mpr hxy)
 
 /-- **FS116-N3-PAIR**: if both germs of one pair lie on (Q) arcs and the two arcs have the same pair of colours, the inner
 colour of each is the outer colour of the other. (Model: FS114-Y2-BOWTIE's centre at `top`, arcs `3 | 1` and `1 | 3`; no
@@ -290,6 +387,53 @@ theorem germPair_dicho (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hpd : p ∈
 
 /-! ## FS116-N3-CONE: the cone lemmas at the unit rhombus `p, u, y, v` -/
 
+/-- **A germ in the closure of a class, near a tile of that colour, lies in the tile's closure** (valid, non-Siamese): if
+the germ on side `s` of `r(θ)` lies in the closure of the class of `c`, and its points are nearer than `1` to a closure
+point `w` of a tile `R` of colour `c`, the germ lies in `closure R`. -/
+theorem germIn_closure_tile_of_near (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1) {c : Fin k}
+    {R : Set ℂ} (hR : F.TileOf c R) {θ : ℝ} {s : Side} (hg : GermIn p θ s (closure (F.region c))) {w : ℂ}
+    (hw : w ∈ closure R) {δ₀ : ℝ} (hδ₀ : 0 < δ₀)
+    (hnear : ∀ t ∈ Ioo (0 : ℝ) δ₀, dist (ringPt p (θ + s.sign * t)) w < 1) : GermIn p θ s (closure R) := by
+  obtain ⟨δ, hδ, hsub⟩ := hg
+  refine ⟨min δ δ₀, lt_min hδ hδ₀, ?_⟩
+  rintro _ ⟨t, ht, rfl⟩
+  exact mem_closure_tile_of_near hF hN hR (hp (mem_closedBall.mpr (dist_ringPt p _).le))
+    (hsub ⟨t, ⟨ht.1, lt_of_lt_of_le ht.2 (min_le_left _ _)⟩, rfl⟩) hw
+    (hnear t ⟨ht.1, lt_of_lt_of_le ht.2 (min_le_right _ _)⟩)
+
+/-- **A germ in the closure of a class, far from a tile of that colour, keeps the tile out of its point's unit disc** (valid,
+non-Siamese): if the germ on side `s` of `r(θ)` lies in the closure of the class of `c`, and its points are farther than `1`
+from a closure point `w` of a tile `R` of colour `c`, then `R` misses `B(r(θ), 1)` — the germ's points lie in closures of
+other tiles of colour `c`, each far from `R`. -/
+theorem disjoint_ball_of_far_germ (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1) {c : Fin k}
+    {R : Set ℂ} (hR : F.TileOf c R) {θ : ℝ} {s : Side} (hg : GermIn p θ s (closure (F.region c))) {w : ℂ}
+    (hw : w ∈ closure R) {δ₀ : ℝ} (hδ₀ : 0 < δ₀)
+    (hfar : ∀ t ∈ Ioo (0 : ℝ) δ₀, 1 < dist (ringPt p (θ + s.sign * t)) w) : Disjoint R (ball (ringPt p θ) 1) := by
+  obtain ⟨δ, hδ, hsub⟩ := hg
+  rw [Set.disjoint_left]
+  intro r hr hrb
+  have hd : dist r (ringPt p θ) < 1 := mem_ball.mp hrb
+  set t : ℝ := min (min δ δ₀) (1 - dist r (ringPt p θ)) / 2 with ht
+  have ht0 : 0 < t := by rw [ht]; exact half_pos (lt_min (lt_min hδ hδ₀) (by linarith))
+  have htδ : t < δ := by
+    have := (min_le_left (min δ δ₀) (1 - dist r (ringPt p θ))).trans (min_le_left δ δ₀); rw [ht]; linarith
+  have htδ₀ : t < δ₀ := by
+    have := (min_le_left (min δ δ₀) (1 - dist r (ringPt p θ))).trans (min_le_right δ δ₀); rw [ht]; linarith
+  have htη : t < 1 - dist r (ringPt p θ) := by
+    have := min_le_right (min δ δ₀) (1 - dist r (ringPt p θ)); rw [ht]; linarith
+  have hzd : ringPt p (θ + s.sign * t) ∈ F.dom := hp (mem_closedBall.mpr (dist_ringPt p _).le)
+  obtain ⟨T, hT, hzT⟩ := (F.mem_coloursAt_iff_exists_tileOf hzd).mp (hsub ⟨t, ⟨ht0, htδ⟩, rfl⟩)
+  have hzw := hfar t ⟨ht0, htδ₀⟩
+  rcases unitNear_or_unitFar hF hT hR with hn | hf
+  · have hTR : T = R := hN.eq_of_unitNear hT hR hn
+    rw [hTR] at hzT
+    exact absurd (hR.1.dist_le_one_of_mem_closure hF _ hzT _ hw) (not_le.mpr hzw)
+  · have h1 := UnitFar.one_le_dist_of_mem_closure hf hzT (subset_closure hr)
+    have h2 := dist_ringPt_germ_le p θ s ht0.le
+    have h3 := dist_triangle (ringPt p (θ + s.sign * t)) (ringPt p θ) r
+    rw [dist_comm (ringPt p (θ + s.sign * t)) (ringPt p θ), dist_comm (ringPt p θ) r] at h3
+    linarith
+
 /-- **FS116-N3-CONE (a)**, `u⁻`: at a change point `y = r(ψ)` of the ring of a vertex `p` of at least four colours with at
 most two absent, in a valid non-Siamese map, if the germ just clockwise of `u = r(ψ + 60°)` lies on no (Q) arc, the tile `R`
 of the ring's counter-clockwise colour `X` at `y` has `u` in its closure, so lies in `B̄(u, 1)`. No *simple*. -/
@@ -297,7 +441,15 @@ theorem ringTile_uMinus (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Cov
     (h4 : 4 ≤ (F.coloursAt p).ncard) (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k}
     (hy : F.IsChangePoint p ψ X X') (hQ : ¬ F.GermOnQ p (ψ + π / 3) .cw) {R : Set ℂ} (hR : F.TileOf X R)
     (hyR : ringPt p ψ ∈ closure R) : ringPt p (ψ + π / 3) ∈ closure R ∧ R ⊆ closedBall (ringPt p (ψ + π / 3)) 1 := by
-  sorry
+  have hπ := Real.pi_gt_three
+  have hg := germIn_closure_tile_of_near hF hN hp hR (qcol_cw hF hp h4 hk hy (Or.inl rfl) hQ) hyR one_pos
+    fun t ht => by
+      have habs : |ψ + π / 3 + Side.cw.sign * t - ψ| = π / 3 - t := by
+        rw [show ψ + π / 3 + Side.cw.sign * t - ψ = π / 3 - t by simp only [Side.sign]; ring]
+        exact abs_of_pos (by linarith [ht.2])
+      exact (dist_ringPt_ringPt_cmp_one p (by rw [habs]; linarith [ht.1])).2.1.mpr (by rw [habs]; linarith [ht.1])
+  have hu : ringPt p (ψ + π / 3) ∈ closure R := closure_closure (s := R) ▸ hg.ringPt_mem_closure
+  exact ⟨hu, (hR.1.subset_ball hF hu).trans ball_subset_closedBall⟩
 
 /-- **FS116-N3-CONE (a)**, `v⁻`: if the germ just clockwise of `v = r(ψ − 60°)` lies on no (Q) arc, `R` misses `B(v, 1)`
 (another tile of colour `X` holds `v`, and the two are far apart). -/
@@ -305,7 +457,12 @@ theorem ringTile_vMinus (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Cov
     (h4 : 4 ≤ (F.coloursAt p).ncard) (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k}
     (hy : F.IsChangePoint p ψ X X') (hQ : ¬ F.GermOnQ p (ψ - π / 3) .cw) {R : Set ℂ} (hR : F.TileOf X R)
     (hyR : ringPt p ψ ∈ closure R) : Disjoint R (ball (ringPt p (ψ - π / 3)) 1) := by
-  sorry
+  have hπ := Real.pi_gt_three
+  refine disjoint_ball_of_far_germ hF hN hp hR (qcol_cw hF hp h4 hk hy (Or.inr rfl) hQ) hyR one_pos fun t ht => ?_
+  have habs : |ψ - π / 3 + Side.cw.sign * t - ψ| = π / 3 + t := by
+    rw [show ψ - π / 3 + Side.cw.sign * t - ψ = -(π / 3 + t) by simp only [Side.sign]; ring, abs_neg]
+    exact abs_of_pos (by linarith [ht.1])
+  exact (dist_ringPt_ringPt_cmp_one p (by rw [habs]; linarith [ht.2])).2.2.mpr (by rw [habs]; linarith [ht.1])
 
 /-- **FS116-N3-CONE (a)**, `v⁺`: if the germ just counter-clockwise of `v` lies on no (Q) arc, the tile `R'` of the ring's
 clockwise colour `X'` at `y` has `v` in its closure, so lies in `B̄(v, 1)`. -/
@@ -314,14 +471,27 @@ theorem ringTile_vPlus (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Cove
     (hy : F.IsChangePoint p ψ X X') (hQ : ¬ F.GermOnQ p (ψ - π / 3) .ccw) {R' : Set ℂ} (hR' : F.TileOf X' R')
     (hyR' : ringPt p ψ ∈ closure R') :
     ringPt p (ψ - π / 3) ∈ closure R' ∧ R' ⊆ closedBall (ringPt p (ψ - π / 3)) 1 := by
-  sorry
+  have hπ := Real.pi_gt_three
+  have hg := germIn_closure_tile_of_near hF hN hp hR' (qcol_ccw hF hp h4 hk hy (Or.inr rfl) hQ) hyR' one_pos
+    fun t ht => by
+      have habs : |ψ - π / 3 + Side.ccw.sign * t - ψ| = π / 3 - t := by
+        rw [show ψ - π / 3 + Side.ccw.sign * t - ψ = -(π / 3 - t) by simp only [Side.sign]; ring, abs_neg]
+        exact abs_of_pos (by linarith [ht.2])
+      exact (dist_ringPt_ringPt_cmp_one p (by rw [habs]; linarith [ht.1])).2.1.mpr (by rw [habs]; linarith [ht.1])
+  have hv : ringPt p (ψ - π / 3) ∈ closure R' := closure_closure (s := R') ▸ hg.ringPt_mem_closure
+  exact ⟨hv, (hR'.1.subset_ball hF hv).trans ball_subset_closedBall⟩
 
 /-- **FS116-N3-CONE (a)**, `u⁺`: if the germ just counter-clockwise of `u` lies on no (Q) arc, `R'` misses `B(u, 1)`. -/
 theorem ringTile_uPlus (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
     (h4 : 4 ≤ (F.coloursAt p).ncard) (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k}
     (hy : F.IsChangePoint p ψ X X') (hQ : ¬ F.GermOnQ p (ψ + π / 3) .ccw) {R' : Set ℂ} (hR' : F.TileOf X' R')
     (hyR' : ringPt p ψ ∈ closure R') : Disjoint R' (ball (ringPt p (ψ + π / 3)) 1) := by
-  sorry
+  have hπ := Real.pi_gt_three
+  refine disjoint_ball_of_far_germ hF hN hp hR' (qcol_ccw hF hp h4 hk hy (Or.inl rfl) hQ) hyR' one_pos fun t ht => ?_
+  have habs : |ψ + π / 3 + Side.ccw.sign * t - ψ| = π / 3 + t := by
+    rw [show ψ + π / 3 + Side.ccw.sign * t - ψ = π / 3 + t by simp only [Side.sign]; ring]
+    exact abs_of_pos (by linarith [ht.1])
+  exact (dist_ringPt_ringPt_cmp_one p (by rw [habs]; linarith [ht.2])).2.2.mpr (by rw [habs]; linarith [ht.1])
 
 /-- **A germ on a ring arc lies in the closures of the arc's two side classes** (any map: the bridge from a germ on an
 arc of `Γ` on `ω(p)` to FS116-N1-GERM-R's hypothesis). -/
@@ -518,5 +688,88 @@ example (kind : ArcMap.SemiKind) :
       ¬ (¬ halfPlane2.GermOnQ 0 (0 + π / 3) kind.qSide ∧ ¬ halfPlane2.GermOnQ 0 (0 - π / 3) kind.qSide.flip)) :=
   fun h => (halfPlane2_gammaFreeRing.qFreeRing.isHub halfPlane2_isChangePoint).not_isSemiHub kind
     (ArcMap.isSemiHub_iff_qSide.mpr h)
+
+/-! ### The class of the shared lemmas, inhabited: `halfDisc` at `0` -/
+
+/-- `halfDisc` is valid: its domain has diameter below `1`. -/
+theorem halfDisc_valid : halfDisc.Valid := by
+  intro x hx y hy hxy
+  have hx' := (halfDisc_mem_interiorPts.mp hx).1
+  have hy' := (halfDisc_mem_interiorPts.mp hy).1
+  have := dist_triangle x 0 y
+  rw [dist_comm 0 y, dist_zero_right, dist_zero_right] at this
+  linarith
+
+/-- `halfDisc` has no Siamese pair: its two tiles have different colours. (The unnamed example of `Plane/ArcMap`, named.) -/
+theorem halfDisc_nonSiamese : halfDisc.NonSiamese := by
+  rintro T T' ⟨⟨x, hx, rfl⟩, ⟨y, hy, rfl⟩, hne, hcol, -⟩
+  have hxy := hcol x (mem_connectedComponentIn hx) y (mem_connectedComponentIn hy)
+  have hx0 := (halfDisc_mem_interiorPts.mp hx).2
+  have hy0 := (halfDisc_mem_interiorPts.mp hy).2
+  simp only [halfDisc] at hxy
+  rcases lt_or_gt_of_ne hx0 with hxn | hxp <;> rcases lt_or_gt_of_ne hy0 with hyn | hyp
+  · exact hne (by rw [halfDisc_component_lower hx hxn, halfDisc_component_lower hy hyn])
+  · simp [not_lt.mpr hxn.le, hyp] at hxy
+  · simp [hxp, not_lt.mpr hyn.le] at hxy
+  · exact hne (by rw [halfDisc_component_upper hx hxp, halfDisc_component_upper hy hyp])
+
+/-- The origin of `halfDisc` carries exactly two colours. -/
+theorem halfDisc_ncard_coloursAt_zero : (halfDisc.coloursAt 0).ncard = 2 := by
+  have hmem : ∀ (s : ℝ) (j : Fin 2), (s = 1 ∨ s = -1) → (∀ t : ℝ, 0 < s * t → halfDisc.col ((t : ℂ) * I) = j) →
+      j ∈ halfDisc.coloursAt 0 := by
+    intro s j hs hcol
+    simp only [ArcMap.coloursAt, mem_setOf_eq, Metric.mem_closure_iff]
+    intro ε hε
+    have hm : 0 < min (ε / 2) (1 / 6) := lt_min (half_pos hε) (by norm_num)
+    have habs : |s * min (ε / 2) (1 / 6)| = min (ε / 2) (1 / 6) := by
+      rcases hs with rfl | rfl
+      · rw [one_mul, abs_of_pos hm]
+      · rw [neg_one_mul, abs_neg, abs_of_pos hm]
+    have hpos : 0 < s * (s * min (ε / 2) (1 / 6)) := by
+      rcases hs with rfl | rfl <;> linarith
+    refine ⟨((s * min (ε / 2) (1 / 6) : ℝ) : ℂ) * I, ⟨halfDisc_I_mul_mem ?_ ?_, hcol _ hpos⟩, ?_⟩
+    · intro h0; rw [h0, mul_zero] at hpos; exact lt_irrefl _ hpos
+    · rw [habs]; exact lt_of_le_of_lt (min_le_right _ _) (by norm_num)
+    · rw [dist_comm, dist_zero_right, Complex.norm_mul, Complex.norm_I, mul_one, Complex.norm_real, Real.norm_eq_abs,
+        habs]
+      exact lt_of_le_of_lt (min_le_left _ _) (by linarith)
+  have h1 : (1 : Fin 2) ∈ halfDisc.coloursAt 0 := hmem 1 1 (Or.inl rfl) fun t ht => by
+    simp only [halfDisc, mul_im, ofReal_re, I_im, mul_one, ofReal_im, I_re, mul_zero, add_zero]
+    rw [if_pos (by linarith)]
+  have h0 : (0 : Fin 2) ∈ halfDisc.coloursAt 0 := hmem (-1) 0 (Or.inr rfl) fun t ht => by
+    simp only [halfDisc, mul_im, ofReal_re, I_im, mul_one, ofReal_im, I_re, mul_zero, add_zero]
+    rw [if_neg (by linarith)]
+  have huniv : halfDisc.coloursAt 0 = univ := by
+    ext j; simp only [mem_univ, iff_true]; fin_cases j
+    · exact h0
+    · exact h1
+  rw [huniv, Set.ncard_univ, Nat.card_eq_fintype_card, Fintype.card_fin]
+
+/-- **The class of the shared lemmas is inhabited** (owed by the join job, inventory item 586 (b)): `halfDisc` is valid,
+has no Siamese pair, is simple at `0`, a point of its domain carrying two colours — so `ncard_tileAt_eq` counts two tiles
+at `0`, `exists_sectorChart_tileAt` gives a chart with two germs whose sectors are those tiles, and
+`exists_initialPiece_of_ncard_le_three` gives the two tiles an initial piece of an arc of the map in both closures. -/
+example : halfDisc.Valid ∧ halfDisc.NonSiamese ∧ (0 : ℂ) ∈ halfDisc.dom ∧ halfDisc.SimpleOn {0} ∧
+    {T | halfDisc.TileAt 0 T}.ncard = 2 ∧
+    (∃ r₀, ∃ G : BranchGerms 2, halfDisc.IsSectorChart G 0 r₀ ∧ ∃ τ : Fin 2 → Set ℂ, Function.Injective τ ∧
+      (∀ T, halfDisc.TileAt 0 T ↔ ∃ i, τ i = T) ∧ ∀ i, coneAt (τ i) 0 = angleIcc (G.β i) (G.nextβ i)) ∧
+    ∃ T₁ T₂, halfDisc.TileAt 0 T₁ ∧ halfDisc.TileAt 0 T₂ ∧ T₁ ≠ T₂ ∧
+      ∃ α ∈ halfDisc.arcs, ∃ δ B, α.InitialPiece 0 δ B ∧ B ⊆ closure T₁ ∩ closure T₂ := by
+  have h0 : (0 : ℂ) ∈ halfDisc.dom := mem_ball_self (by norm_num)
+  have hS := halfDisc_simpleOn {(0 : ℂ)}
+  have hcount : {T | halfDisc.TileAt 0 T}.ncard = 2 :=
+    (ArcMap.ncard_tileAt_eq halfDisc_valid halfDisc_nonSiamese h0).trans halfDisc_ncard_coloursAt_zero
+  obtain ⟨r₀, G, hC, -, τ, hinj, htile, -, hcone⟩ :=
+    ArcMap.exists_sectorChart_tileAt halfDisc_valid halfDisc_nonSiamese h0 hS halfDisc_ncard_coloursAt_zero le_rfl
+  obtain ⟨T₁, T₂, hne, hpair⟩ := Set.ncard_eq_two.mp hcount
+  have hT₁ : halfDisc.TileAt 0 T₁ := by
+    have : T₁ ∈ {T | halfDisc.TileAt 0 T} := by rw [hpair]; exact mem_insert _ _
+    exact this
+  have hT₂ : halfDisc.TileAt 0 T₂ := by
+    have : T₂ ∈ {T | halfDisc.TileAt 0 T} := by rw [hpair]; exact mem_insert_of_mem _ rfl
+    exact this
+  exact ⟨halfDisc_valid, halfDisc_nonSiamese, h0, hS, hcount, ⟨r₀, G, hC, τ, hinj, htile, hcone⟩, T₁, T₂, hT₁, hT₂, hne,
+    ArcMap.exists_initialPiece_of_ncard_le_three halfDisc_valid halfDisc_nonSiamese h0 hS
+      (by rw [halfDisc_ncard_coloursAt_zero]; norm_num) hT₁ hT₂ hne⟩
 
 end HadwigerNelson.Plane
