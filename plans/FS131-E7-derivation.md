@@ -6,9 +6,15 @@ job; no search is run (standing rule 5): every object below is given by formula 
 
 ## Theorems this phase proved
 
-Filled as the stages land; each line carries its grade and its address in this record.
+Each at [hand], one mind, kernel pending; none is a new theorem about the plane's chromatic number — five are models of hypothesis sets.
 
-- (stage 1) none — the readback.
+- **nb4p-half-hnb** — `nb4p`'s proof uses `hnb` only through its first conjunct; by the mirror, either half suffices [hand; § 1.4, § 5.4].
+- **q1-a4six-model** — `a4six`'s five hypotheses hold at once at six colours on the four-petal flower `F₀`, both absent colours live [hand; § 3].
+- **q2-straddlers-model** — `straddlers_third`'s six hypotheses hold at once at six colours on `F₁` (the flower with one rectangle recoloured) [hand; § 4].
+- **q3a-q3c-nb4p-model** — `nb4p`'s `hF`, `hv`, `h4`, `hy`, `hnb` hold at once on `F₁`; `hring` is not idle [hand; § 5.1].
+- **q3b-hring** — not derived; stalls at a six-change-point ring with (E2) and no (E1) [§ 5.3].
+- **q4-doubly-shadowed-model** — `flank_ne_of_doublyShadowed`'s nine hypotheses hold at once at nine colours on `P₄` [hand; § 6].
+- **q5-terminal-stuck-model** — at twelve colours `P₅` is a terminal valid map of the plane with a stuck vertex, every unit arc (Q) [hand; § 7].
 
 ## Stage 1 — SAVED (FS131-E7): the readback, the questions restated, what was read, the predictions
 
@@ -757,3 +763,43 @@ audit …*"):
 > planted in fresh colours in three bricks of the seven-colour brick map, every unit arc (Q) (`plans/FS131-E7-derivation.md` § 7). It moves
 > nothing here: the five spare colours are its whole mechanism, so (b′), (b″) and (c) at six colours are unchanged; what it retires is the
 > sentence "no model of a stuck vertex in a terminal valid plane map is known" for statements at any `k`.
+
+## Stage 8 — SAVED (FS131-E7): the close of this job — predictions scored, what was not done, slips
+
+### 8.1 Predictions scored
+
+| id | prediction | outcome |
+|---|---|---|
+| P1 (0.85) | Q1: a model at `k = 6` with both absent colours live | **met** (§ 3) |
+| P2 (0.8) | Q2: the flower with one cell recoloured | **met** (§ 4) |
+| P3a, P3c (0.8) | Q3a, Q3c: the same object | **met** (§ 5.1) |
+| P3b (0.7 that it stalls) | Q3b: no verdict in this job | **met as a stall** (§ 5.3); the conditional half (a model exists, 0.6) is unscored |
+| P4 (0.85) | Q4: a model at `k = 9`, sources at the far poles | **met** (§ 6) |
+| P5 (0.75) | Q5: yes at `k = 12` by a planted bowtie | **met** (§ 7) |
+
+Six of six met; as § 1.5 said, they were registered after the constructions were found in thought, so the score measures the checks, not
+foresight. One thing the predictions got wrong in detail: the first cell I chose for `F₁` (`−10° < θ < 0`) was invalid — within `60°` of the
+`5`-tile's outer corner at `292.5°` — and was replaced by the rectangle before anything was written; the control's `--plant-cell` fault is
+that error, kept.
+
+### 8.2 What was not done
+
+- **No scratch-kernel check.** Nothing here was elaborated in Lean: every verdict is [hand] with numerical controls. The cheapest kernel
+  check available is nb4p-half-hnb's (delete the second conjunct of `hnb` and the `.1`, re-elaborate `nb4p`: about a minute under a slot).
+- **Not read**: `plans/FS110-N-proof.md` § 2.2 beyond its statement of N4-FLANK and N4-SHAVE (l. 717–718, 806–825: read after § 6 was written,
+  and it agrees — "out-type `g`-tiles at `S′` tangent to `a` (shadow below `σ_g`)" is § 6.2's far pole); `plans/FS131-E6-derivation.md`
+  §§ 3.1–3.3 (the audit's verdict on E6's map was taken from the audit); the body of `bowtie` in `BaseSteps.lean`; the stuck family's
+  statements on `fs131-w5c` beyond `cv_l0`, `n3_end_four_colours`, `IsTerminalMap` and `QROnly`.
+- **Prior art**: owed on every entry. The four-petal flower and the two planted pictures were not searched for outside this repository
+  (Polymath16's threads on tile-based six-colourings of discs are where a flower of Reuleaux petals would be, if anywhere).
+- **Q3b**: open (§ 5.3).
+- **How far `F₀` extends** past radius `5/4`: not examined. It is a valid fragment by formula about a four-colour vertex whose ring carries
+  (Q) arcs — FS-124's object — and G83's killing test asks for radius above `φ²/√2 ≈ 1.851`.
+
+### 8.3 Slips, my own
+
+- § 2.1's table cited § 3.5 for a claim § 3.5 does not prove in general (corrected in § 3.5, dated).
+- § 3.2's first bullet was first drafted with an argument abandoned mid-sentence; rewritten before its commit (the committed text is the
+  polar-coordinate proof).
+- The quotation check failed once mid-job on a line number in another job's live worktree; the script now reports such drift as a note
+  (§ 1.1).
