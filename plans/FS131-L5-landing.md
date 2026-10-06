@@ -458,3 +458,10 @@ digests (§ 5.6).
    no hypothesis beyond its statement's. The wave's full row list is `ARCHITECTURE.md`'s rows of its 29 modules. FS131-BA2's and
    BA3's records (`plans/FS131-BA2-implementation.md`) hold their own drafted ledger lines for the away bend. No Frontier line and
    no Proof Atlas grade is drafted here: the milestone is not closed by one wave's landing.
+
+## After the landing (FS131-L5)
+
+Stage 6, the drafts and the report were committed as `936a82ab` and pushed to `fs131-w5c` and to `main` — `3f5765b6..936a82ab`,
+a fast-forward (`data/fs131/l5/push-main-2.txt`); `git diff --name-only 1351ebc2 936a82ab -- . ':!plans' ':!data'` is empty, so
+`main`'s gate inputs are the gated commit's. This note and that push's log go in one last commit, pushed the same way. The
+report is `data/fs131/reports/FS131-L5.md`.
