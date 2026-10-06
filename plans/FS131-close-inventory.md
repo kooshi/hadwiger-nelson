@@ -7069,3 +7069,34 @@ reason by the close.*
      — four as consequences of wave 3's two lemmas, and `qArc_inner`'s first clause and `qcol_inner_tile` as one
      declaration at the waves' join (ruling 546's relay, completed from the other side). (c) A third planning pass
      for wave 8 is owed (SIXRING, TWIST-C); brief not written. (d) Its generalizations go to the wave's errata.
+572. **FS131-K8b done at its Stage 10: wave 8's second planning pass — nine semi-hub rows stated in two new modules with no hypothesis from wave 7; two rows left for a third pass** (planner; harness 609k and 48 minutes by the task notice; record `fs131-w8`'s `plans/FS131-w8-kernel-plan.md` Stages 6–10; report `data/fs131/reports/FS131-K8b.md`; commits `5d4e4d12`, `8d979793`; pushed, tree clean).
+     **Stated**: `Plane/RingCalculus/SemiHub` (17 leaves) and `SemiHubPlaces` (6): FS116-V5-QCOL (its carried-colour
+     clause proved, Siamese pairs allowed), -N3-PAIR, -V5-DICHO, -N3-CONE ((b) proved over wave 3), -N3-STAR2, -N3-SEMI,
+     -N3-CROSS (in six, its first clause at its truth), RING-TRANSFER-QC's first clause (proved from a leaf);
+     FS116-V5-OUT2 is a citation of `star_outer_cone`. **Not stated**: FS116-N2-SIXRING, FS116-RING-TWIST-C (the
+     second designed). **Plans**: `outerAdj` (about 380 lines, on the sole-tip lemma's template); prices —
+     `SemiHub` about 1,700 lines, `SemiHubPlaces` with `outerAdj` about 1,800; three shared children (C1, K1, K2).
+     Its mid-job answers: items 568, 571. **My receipt**: tip `8d979793` equals `origin/fs131-w8`, tree clean; since
+     `368a2c1a` it added the two modules and registry lines and changed no existing module (`git diff --stat`);
+     `sorry` by the handoff's grep: 17, 6, and as given `Star` 2, `Empty` 1; its last real build's full log ends
+     "Build completed successfully (5818 jobs)" with 78 warning lines, each a `sorry`, none other; the two modules'
+     section variables are `{k} {F : ArcMap k}`, explicit only over three definitions, and its saved kernel
+     signatures show `semiHub_places` with `F` and its hypotheses bound. Not checked by me: the rows against their
+     entries; the three hand-worked cases of DICHO; the other signatures line by line. **Predictions scored**: 9
+     rows of 11 stated (its median 8); no row with a statement defect; the `star_anti` gap a hypothesis (it had
+     0.3). **Slips, the job's, disclosed**: two rows unstated; no Lean model of a star or a semi-hub; Stage 9's
+     plans unelaborated; one commit for four stages; 609k is past its line. **Credit**: a hand result's three
+     uses separated so that an assumption the plan expected is not needed; a skeleton's defect traced to the row's
+     own "not claimed" line; a verification's "cases written in my working" written out. **Rulings.** (a) **Wave
+     8's next job is one implementer, FS131-I8B**: it cuts from `8d979793`, merges `origin/fs131-w8a` (`e1e0c74d`:
+     `star_recip` and the last stage), makes ruling 568 (a)'s change and proves `star_anti`, and writes the three
+     shared children as a helper module, saved first. **Then two implementers in parallel from its tip**:
+     FS131-I8C (`SemiHub`) and FS131-I8D (`SemiHubPlaces` with `outerAdj`). Alternative: the planner's — whichever
+     of the two starts first writes the helper. Why not: two jobs that both need a module one of them is writing
+     wait on a mid-job hash; a first job that owns the shared part does not. Confidence: medium-high. Briefs not
+     written. (b) A third planning pass (FS131-K8c: SIXRING, TWIST-C) after those; brief not written. (c) "No
+     named hypothesis for FS114-N7-QOPP" stands (ruling 571 (a)). (d) The restatement of the hug and the double tip
+     as one theorem and two corollaries is recommended to the wave's landing (ruling 563 (b)). (e) Its
+     generalizations and two corrections go to the wave's errata; the stub line of ruling 568 (c) stands.
+     (f) **Slot → FS131-I6Z** (wave 6's centres, on `fs131-w6z` at `2aa3f720`), launched 2026-10-06. In flight: 3
+     (L10B, I6L, I6Z).
