@@ -4369,3 +4369,37 @@ reason by the close.*
      path that does not exist**. Fixed within minutes (the names written out; the gate's exit status read directly; PASS); the job had the
      content by message, so nothing reached it wrong. For agent-forge (`forge/STATUS.md` under Keryx), with the repro: a brief line holding
      `` `.toward` ``. From here on the gate's own exit status gates a brief's commit.
+
+454. **FS131-BA1 done: the outward bend's lens, map and composition are proved — all 20 leaves of lanes G and D, in one session against a price
+     of two** (implementer; harness ≈ 481k by the task notice; record `fs131-w5a`'s `plans/FS131-BA1-implementation.md` Stages 1–4; report
+     `data/fs131/reports/FS131-BA1.md` on that branch; commits `79efdf00`, `1d1ed4d8`, `c036110a`, `66cb0314`, `4a8be4de`, `4559c106` (the Lean
+     sources the green build read), `48d0adc5`, `74fbdf16`; pushed, tree clean). **Results**: `LensOut` (532 lines), `CollarMapOut` (458),
+     `BendAway` (575) with no `sorry`; the 20 leaves and 33 helpers on the standard three; `LocalStep.of_cutArcs` is IA2's proof, copied with
+     credit. `bend_away_gap`, `bend_away_subdiv`, `bend_away_part` rest on `sorryAx` through the other half's 16 children alone. Two statements
+     changed, both ruled (446 (b), 452 (a)). **My receipt**: tip equals `origin/fs131-w5a`; the build log
+     `build/gate/build/20261006T070053Z-1951503.log` ends "Build completed successfully (5802 jobs)", 0 warnings other than `sorry`, 19 distinct
+     `sorry` warnings (`BendGap` 8, `HornChart` 4, `R2Cap` 3, `BendStep` 1, `Procedure` 2, `Terminal` 1), none in the three modules; `sorry` by
+     the handoff's grep: 0 in each of the three; `data/fs131/ba1/BA1Axioms.out` parsed by script, 62 records: 59 on exactly the standard
+     three, 3 with `sorryAx` alone beyond them (the three named); the two ruled statement changes read in the diff against `dd8c2c33` —
+     `AwayBend.idle` lost `hA`, `hε`, `c'` and nothing else; `dist_lt_one_of_thin` lost `hκ0` and nothing else; `BendStep` changed in one line.
+     **Items**: corrections owed to KA1's plan — D3's route for `rest` (the clause is `AwayBend.closure_region_iff`); D2's `polar_inj_window`
+     is not imported by `BendAway`; G3's "re-derive each direction" (for `R > 1` the chord grows by `tangRad_mul_cos_anti`); KA1's block header
+     in `scripts/Axioms.lean` and the three modules' headers still say "skeleton" (the remedy pass). Generalizations —
+     `AwayBend.closure_region_iff` (a bend within `ε ≤ 1/2` keeps the closure of every colour's class at distance `2` from `P`); the frame
+     lemmas under `collarArcs_carrier` hold for every `R > 1/2`. For the final sync — `ringPt_inj_of_abs_sub_lt` (`BendAway`) is the
+     contrapositive of `ringPt_ne_of_abs_sub_lt` (`BaseDense`); ten `CollarFitOut` helpers are `CollarMap`'s lemmas re-proved (KA1's base
+     structure would state them once). A build stopped by the job on its own judgment (so that a ruled edit was not made under a running
+     build), by PID, checked by effect, the cause written in its record. Slip, the job's, disclosed — one build for lane G's three groups.
+     Prediction scored — priced at about two sessions; one.
+455. **Rulings on BA1's held items, and its slot.** (a) **The inhabitant `awayModel` goes to the models' planner, FS131-KM1, with the other
+     example maps** — its brief gains KA1's § 5 by address — and is built by KM1's implementers. Ruling 446 (e) is revised: it is no longer
+     "owed before wave 5 lands"; if wave 5 is ready first it lands with `bend_away_part`'s docstring naming the hand model and the open gate
+     item listed in the landing's report (ruling 427 (d), F3), as MERGE and OPEN did. Alternative weighed: a short job of its own on
+     `fs131-w5a` now. Why KM1: `awayModel` is the seven-colour brick map with one planted colour — KM1's construction — and built alone it
+     would write its own relabelling and local facts, to be superseded within days. Confidence: medium-high; it changes if KM1's plan puts the
+     shared construction more than a session away from an implementer. (b) **The stopped build** was the job's to stop and was stopped rightly
+     (`RUNNING.md`: by PID, the cause recorded). (c) **The stale headers** and the two doubled forms go to the remedy pass's list. (d) **FS131-BA2
+     is told the commit to merge** (`4559c106`), with the two statement changes as read in the diff and the count corrected (item 452's slip).
+     (e) **Slot → FS131-KM1**, launched 2026-10-06 on `fs131-wm`. In flight: 1 (BA2) + 1 (M7) + 1 (KM1) = 3. Queue: the remedy pass on
+     `fs131-w5c` after M7; BA2's successor if it leaves children; then the merges of `fs131-w5a` (at `74fbdf16`) and `fs131-w5z` into
+     `fs131-w5c`, `main`, the gate.

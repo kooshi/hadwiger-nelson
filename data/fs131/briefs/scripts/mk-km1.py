@@ -57,6 +57,7 @@ and 7 whole; each ends in a handoff for the implementer):
 
 {item(440)}
 {item(441)}
+{item(455)}
 {Q(E7,"### 3.7 Handoff: what an implementer needs")}
 {Q(E7,"### 6.5 Handoff")}
 {Q(E7,"### 7.6 Handoff, and the bearing line for the stub")}
@@ -107,7 +108,12 @@ Read both; plan your objects so that each is a short application once wave 5 has
    centre for `bend_away_whole`, and `bend_toward`'s model; the objects the two wave-5 theorems will apply to; and **E7's four**: the flower `F₀`
    for `a4six`, its recolouring `F₁` for `straddlers_third` and for `nb4p`'s background, `P₄` for `flank_ne_of_doublyShadowed`, and `P₅` — which is
    `Valid ∧ Covers v 1 ∧ IsStuck v` at a fraction of the completed bowtie's size, and a terminal map of the plane besides — in place of the completed
-   bowtie unless you find a reason to keep both (ruling 441 (c)). Say which clause of each hypothesis set your object exercises non-trivially and
+   bowtie unless you find a reason to keep both (ruling 441 (c)); and **one more, from wave 5's newest theorem**: `awayModel`, a plane map with a
+   unit arc whose inner colour is absent at its centre and reaches the circle of radius 2 over an interval strictly inside the arc's angles — the
+   inhabitant of the outward bend `bend_away_part`, planned by that bend's planner over the same brick map
+   (`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5a/plans/FS131-bendaway-kernel-plan.md` § 5; the theorem is in
+   `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5a/Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean`, not on `main` yet — plan the
+   object here, its application there). Say which clause of each hypothesis set your object exercises non-trivially and
    which it meets only degenerately. E7's verdicts are one mind's, at hand grade, with numerical controls and nothing kernel-checked: your skeleton
    is their first independent reading, and a clause that fails on one of its objects is a message to me.
 4. **Your record**, `plans/FS131-models-kernel-plan.md`: a plan per leaf (route, the Mathlib and library lemmas confirmed with `#check`, what is hard,
