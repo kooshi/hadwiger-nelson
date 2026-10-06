@@ -214,3 +214,55 @@ missing; the look-up's control, a cited name misspelt, fired). `tools/check_arch
   take a named hypothesis** — the table is in the drafts (Stage 6).
 
 ## Stage 3 — SAVED (FS131-L10A)
+
+## Stage 4 — SAVED (FS131-L10A): `main` merged in (`f036f563`); the joined tree builds; no doubled name
+
+- **The trial, before the merge** (`git merge-tree --write-tree --name-only HEAD origin/main` on Stage 3's tip `56e7456b`;
+  `data/fs131/l10a/merge-trial-main.txt`; `origin/main` at `294603ae`, merge base `ff377526`): **one conflict,
+  `scripts/Axioms.lean`**; `ARCHITECTURE.md` and `Proofs.lean`, which both sides changed, merge by themselves. Those three are the
+  only paths both sides changed since the base — the three the brief foresaw. `main` changed 52 paths under `Proofs/` since the base,
+  this line the four wave files and `Proofs.lean`; no Lean file under `Proofs/` conflicts.
+- **The merge `f036f563`** (`git merge --no-ff --no-commit`, resolved, checked, committed; two parents).
+  `scripts/Axioms.lean`, keep-both with **`main`'s blocks in their place and wave 10's four blocks after them**, above the
+  `=== PURCHASED ===` banner (`tools/fs131_l10a_keepboth.py resolve --theirs-first`; `data/fs131/l10a/keepboth-main.txt`, exit 0):
+  `#print axioms` lines **5,681 = this line's 4,043 + `main`'s 5,550 − the base's 3,912**; `git diff --numstat origin/main --
+  scripts/Axioms.lean` reads 145 added, 0 removed; no name printed twice; the three plants fire.
+  - **Three records of this line are gone, by `main`'s deletion and not by the resolution** — the check lists each as a note:
+    `Plane.sq_norm_re_im`, `Plane.ArcMap.sq_norm_eq_re_im`, `Plane.ArcMap.HasDegree.eq`. This line held them unchanged from the base;
+    wave 5's remedy pass on `main` deleted those declarations (`git grep` on `294603ae`: none of the three is declared; `main`'s
+    `scripts/Axioms.lean` l. 6172 names the fold), so their records went with them. My first form of the check called these LOST;
+    it now tells a line the other side deleted since the base from a line the resolution dropped, and still fails on the second.
+  - **`Plane.conj_e`**: declared twice on this line (`Plane/SixFragment` l. 342, `Plane/Chord` l. 276), once on `main`
+    (`Plane/Basic` l. 47). This line never changed those files, so the merge took `main`'s: after it `rg 'theorem conj_e\b' Proofs`
+    finds the one declaration in `Plane/Basic`.
+- **The index held the merge and nothing else** (`tools/fs131_l10a_mergeindex.py 294603ae scripts/Axioms.lean ARCHITECTURE.md
+  Proofs.lean`; `data/fs131/l10a/mergeindex-main.txt`): 1,542 staged paths, 3 changed by both sides, 1,539 taken whole from `main`;
+  PASS. Its control on this merge: with only the conflict path named it reports the two paths that merged by themselves (`BOTH sides
+  changed, merged unread`), exit 1. Those two were then read against `main` (same log): `Proofs.lean` is `main`'s plus the four
+  `Arith` imports (numstat 4, 0); `ARCHITECTURE.md` is `main`'s plus the four rows (4, 0). A wrinkle, said: my own tool
+  `tools/fs131_l10a_keepboth.py` was edited for this merge and so differed from the index (the check's `DIRTY`); a merge cannot be
+  committed by path, so I set the edited tool aside, ran the check clean, committed the merge, and committed the tool by path after
+  it (`e7f2f833`).
+- **After the merge the Lean tree is `main`'s plus the wave**: `git diff --name-only 294603ae HEAD -- Proofs Proofs.lean
+  lakefile.toml lake-manifest.json lean-toolchain` names `Proofs.lean` and the four wave files and nothing else; the four wave files
+  are unchanged from Stage 3's tip.
+- **The build tree.** `main`'s compiled modules were copied in from the idle landing worktree of the example maps before the build
+  (`rsync -a --update .claude/worktrees/fs131-wmb/.lake/build/ .lake/build/`; `data/fs131/l10a/rsync-wmb-build.txt`: 648 files
+  written, 81 of them `.olean`, 29 new; that tree is at `4b46d755`, whose Lean inputs are `main`'s — `git diff --name-only
+  4b46d755 294603ae -- Proofs Proofs.lean lakefile.toml lake-manifest.json lean-toolchain` is empty — and no `lean` or `lake` process
+  was running in it). `.lake/build` stays this worktree's own directory. Lake checks each module's trace by hash, so a copied file
+  that did not match its source would have been rebuilt.
+- **The build of the joined tree** (`data/fs131/l10a/build-main.log`, `HEAD=e7f2f833`, no tracked file modified): **`build: OK — 467
+  of 467 batches, 1 module(s) rebuilt, 0 module(s) with warnings, 8m22s`, `exit=0`**; the full log (`build-main-full.log`) holds 0
+  `warning` lines and ends "Build completed successfully (5814 jobs)". The one rebuilt is `Proofs` (the import surface): the four
+  wave modules import `SpectralChain` and Mathlib, which `main` did not change, so their compiled files stood.
+- **`./scripts/dupnames.sh` on the joined tree, before anything else** (`data/fs131/l10a/dupnames-joined.log`, `exit=0`):
+  **"dupnames: OK — no name is declared by two modules (23 generated on demand, listed above)"** — `main`'s own count of generated
+  names. Before the merge this line would have failed it at `Plane.conj_e` (the planner's and the second planner's reports say so).
+- **The kernel's own list** (`data/fs131/l5/count-modules.lean` on the joined library; `data/fs131/l10a/count-modules-joined.out`):
+  `TOTAL declarations=13767 refutations=192 modules=1803 theorems=8956` — `main`'s 13,386 declarations and 8,677 theorems
+  (`data/fs131/mc/count-modules-final2.out`) plus the wave's four modules: `CharacterColouring` 39 declarations and 25 theorems,
+  `SpectralInputs` 100 and 83, `StandingFive` 161 and 121, `StationaryRatio` 81 and 50 — **381 declarations, 279 theorems, and no
+  refutation**.
+
+## Stage 4 — SAVED (FS131-L10A)
