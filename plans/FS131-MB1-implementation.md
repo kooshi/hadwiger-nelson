@@ -180,3 +180,89 @@ four conjuncts; `F.Terminal` is `stuckModel_terminal`, open. **Each negative cla
 for want of an object: `9` has two sectors (`stuckModel_hasSectors`) and its cone fails only by having no interior
 (`stuckModel_contacts`: two out-type contacts); two horns of `9` exist, on different rays (`stuckModel_isHorn`); each horn has both flanks
 (`stuckModel_flanks`) and fails only the clear split (`stuckModel_shadow`).
+
+## Stage 4 — SAVED (FS131-MB1): the close of this session — what is left and its route, the drafts, slips
+
+*2026-10-06 09:35 UTC.* I stop here, at a saved stage, on the budget line (standing rules 1 and 12): two models whole (the cusp arc; the stuck
+vertex but for `stuckModel_terminal`), two not begun. Nothing is half done. `data/fs131/mb/scratch/StuckScratch.lean` (the working copy
+of `Stuck.lean` while builds ran) is removed in this commit: it was the file itself.
+
+### 4.1 What is left, and its route
+
+| what | leaves | route, and what this job leaves for it |
+|---|---|---|
+| `stuckModel_terminal` | 1 (H) | after wave 5, as the plan's § 3.8 has it. At the vertex: `stuckModel_not_mergeAvailable`, `_not_rayAvailable`, `_not_shaveAvailable`. On the three painted pieces `Γ` is known pointwise: `stuckModel_mem_arcs_ball_iff` (the two unit circles), `stuckModel_mem_arcs_sq_iff` (the diagonals), `stuckModel_arcs_union`; the classes by `stuckModel_region_subset` / `stuckModel_mem_region_of`; the painting by `stuckModel_stuckCol_ball`, `_sqN`, `_sqS`. Off the pieces: `BrickMap`'s sector and horn lemmas through locality |
+| `shadowModel` | 7: `shadowArcs_nondegenerate`, `frontier_shadowW_subset`, `shadowCol_locallyConstant`, `shadowModel_condition5`, `shadowModel_flanks` (S each), `shadowModel_valid` (M), `shadowModel_doublyShadowed` (H) | not begun; the plan's § 3.5 routes stand, unread against proofs. It reads four of `Paint`'s open leaves (`hornArcs_nondegenerate`, `frontier_hornSet_subset`, `hornArcs_carrier_subset`, `brickBase_mem_interiorPts`). Reusable as they stand: `stuckModel_plant_coords`, `stuckModel_dist_sq`, `stuckModel_abs_coords_le`, `stuckModel_frames`, `stuckModel_poles`, `stuckModel_eventually_lt_iff`, `stuckModel_radial`; the same three bricks hold its pieces, so `stuckModel_stuckW_subset`'s three calls of `brickBase_mem_interiorPts` are its pattern, and `stuckModel_region_subset` the pattern of its class lemma. FS131-E7 § 6 was not read by me |
+| `awayModel` | 4: `awayArcs_nondegenerate` (S), `frontier_awayW_subset` (M), `awayModel_hyps` (H), `awayModel_r2Contacts` (M) | not begun; KA1's plan § 5 and the plan's § 3.5 |
+| ruling 461 (c): a plane-map model of `bend_away_whole`; the plan's `awayModel_bend_toward` | new declarations | **not on `awayModel`'s whole arc** — see § 4.2 |
+
+### 4.2 A note on ruling 461 (c), for whoever builds it
+
+`bend_away_whole` asks `hR2 : Disjoint (radiusTwoArc P θ₁ θ₂) (closure (F.region c))`. On `awayModel`'s arc as `awayModel_hyps` states
+it (`[−arcsin(3/10), arcsin(3/10)]`, inner colour `7`) that fails by the skeleton's own leaf: `awayModel_r2Contacts` says the radius-2
+contacts are `[−arcsin(3/20), arcsin(3/20)]`, not empty — the object was designed for `bend_away_part`. A model of `bend_away_whole` on
+`awayModel` is therefore **a sub-arc inside one of the two gaps**, e.g. `[1/5, 3/10]` (`arcsin(3/20) < 1/5` and `3/10 < arcsin(3/10)`):
+there `P + 2 e θ` has height `3/10 + 2 sin θ > 3/5`, above the brick that holds the outer piece. It needs the ring arc restricted to
+the sub-arc (no `IsRingArc` restriction lemma is in the library by that name: `rg "theorem IsRingArc\."` lists five, none of them; it
+is three lines from the definition) and `hR2` there. Read, not built: one mind, no proof.
+
+### 4.3 Slips, my own
+
+- The first draft of `tools/fs131_mb_receipt.py` split the receipt's messages on a `file:line:col:` prefix the output does not carry,
+  parsed nothing, and its faithful run reported 36 findings while all four plants "fired". Caught by the self-test's own second half
+  (the faithful run must pass beside the plants): without that pair it would have read as four working controls. Repaired before any
+  number from it was recorded.
+- Its first expectation table put `frontier_stuckW_subset`, `stuckCol_locallyConstant` and `stuckModel_valid` among the records resting
+  on `Paint`; measured, they are on the standard three. The table now states what was measured, which makes it a regression check
+  and no longer a prediction; the prediction it replaced was wrong in the direction that undersold the work.
+- A `rw [← hsq]` with `hsq : … = 1` rewrote every `1` of the goal; found at the first elaboration, proof restated.
+
+## Drafts for the front page
+
+*Each names its slot. This job ran no gate (the brief keeps it for the landing) and its branch carries `sorry` — `Paint`'s and `Moves`'
+leaves, and twelve of its own files' — so it files no count.*
+
+1. **`CLAUDE.md` § The gate, § Trust ledger — the counts**: no draft. The counts move when the lane lands on `main`; the landing job
+   reads them from its own gate run.
+2. **Ledger rows regraded to [kernel]**: none. The models are inhabitants owed by `LEAN.md` § The gate's inhabitant bullet, not ledger
+   rows.
+3. **The docstring lines the models earn** (the plan's § 3.10; applied by whoever lands the lane, none applied here). Read against
+   what is now proved:
+   - the seventeen notes of QA4-2 and `cv_l0`'s — slot and text as the plan's § 3.10 rows 8–9 have them, with one addition after
+     "`stuckModel_isHorn`, `_flanks`, `_contacts`": "; `stuckModel_hasSectors` and `stuckModel_coloursAt` for the sector counts and
+     the colours". **To be applied only when `stuckModel_hyps` reads the standard three**, that is after implementer A's
+     `brickBase_mem_interiorPts` lands; `cv_l0`'s line names `stuckModel_terminal`, which is open.
+   - `bend_away_whole`, `bend_toward` (`UnitArc`) — slot: the end of each docstring. Text, the plan's with its second sentence held
+     back: "**Inhabitant**: `cuspFrag`'s arc of `ω(i)` (`Plane/Models/Bends`, `cuspFrag_bend_away` / `cuspFrag_bend_toward`); its
+     centre is off the fragment and carries no colour — a model of the hypotheses' letter." The sentence "On a map of the plane:
+     `awayModel` …" waits for `awayModel`.
+4. **The Frontier line, the Proof Atlas**: no change — no result's grade moved.
+5. **`LEAN.md` § The gate** (a draft for Keryx, to follow the `dupnames.sh` bullet's last sentence, if wanted): "A branch that holds a
+   sibling branch's leaves open reads its own records with `#mb_receipt` (`data/fs131/mb/MBAxioms.lean`): beside the axioms it lists
+   the `sorry`-proved declarations of the record's dependency closure by module, so 'rests on `sorryAx` through the sibling's file
+   alone' is read off the term and not asserted."
+
+## Theorems this phase proved, at the last saved stage
+
+All in the worktree's build of `fs131-wmb` at `16a8082e`'s Lean source (`data/fs131/mb/build-2.log`, exit 0); axioms as stored in the
+built `.olean`s and printed by `lake env lean data/fs131/mb/MBAxioms.lean` (`MBAxioms-stage3.out`) — the gate's audit
+(`scripts/axioms.sh`) was not run.
+
+**[kernel], on exactly `[propext, Classical.choice, Quot.sound]`:**
+
+- `HadwigerNelson.Plane.cuspFrag_bend_away`, `cuspFrag_bend_toward` (`Plane/Models/Bends`) — `ArcMap.bend_away_whole` and
+  `ArcMap.bend_toward` applied to the cusp fragment's arc of `ω(i)` over `[−π/2 + 1/10, −π/2 + 2/5]`; with their leaves
+  `cuspFrag_isRingArc`, `cuspFrag_coloursAt_I`, `cuspFrag_radiusTwo_disjoint` and helpers `cuspArc_sin`, `cuspArc_pt`, `cuspArc_mem`,
+  `cuspFrag_closure_region_subset`.
+- `HadwigerNelson.Plane.stuckModel_valid` (`Plane/Models/Stuck`) — the twelve-colour planted bowtie is valid; with
+  `stuckModel_no_unit_pair`, the four real lemmas `stuckModel_near_real`, `_near_real'`, `_far_real`, `_far_real'`, and the
+  structural leaves `stuckArcs_nondegenerate`, `stuckArcs_finite`, `frontier_stuckW_subset`, `stuckCol_locallyConstant` (so the
+  definition `stuckModel` itself is free of `sorry`).
+
+**Proved from one open leaf of implementer A's** (`Plane.Models.Paint:brickBase_mem_interiorPts`; each rests on `sorryAx` through it
+and through nothing else — not theorems until it lands): `stuckModel_hyps`, `stuckModel_isStuck`, `stuckModel_coloursAt`,
+`stuckModel_hasSectors`, `stuckModel_isHorn`, `stuckModel_flanks`, `stuckModel_contacts`, `stuckModel_not_mergeAvailable`,
+`stuckModel_not_rayAvailable`, `stuckModel_not_shaveAvailable`, with `stuckModel_partition`, `stuckModel_horn_cases`,
+`stuckModel_shadow`, `stuckModel_sectorsOf_encard` and the rest of the helpers that read the partition at the vertex.
+
+**Open in this job's files** (12 `sorry`): `stuckModel_terminal`; `shadowModel`'s seven; `awayModel`'s four.
