@@ -4919,3 +4919,38 @@ reason by the close.*
      same day, read status per section), and brief the lanes to analyze it against what the kernel and the ledger hold — the statement read
      against row 33 and the regularity wall's rows, each step graded, what of it can be checked or formalized here. Its briefs are written
      at the trigger, not before. Until then nothing changes.
+
+490. **FS131-E8, by message mid-job (its Stage 3 saved, `0310d854` on `main`, pushed): the bridge under REG-J′ is derived — the frozen
+     words with saturation give the fan with end tangents, at every `k`, and the frozen words' second clause is not read** (source: E8's
+     message to "main", 2026-10-06; `plans/FS131-E8-derivation.md` §§ 3.1–3.8, eight entries, each [hand], one mind, kernel pending).
+     **The entries**: FS131-E8-LOCAL (off Σ the interface set is locally one `C^{1,1}` graph with 1-Lipschitz tangent, one colour on
+     each side); -GAMMA, -BETA, -ALPHA, -DELTA (K6's four clauses (γ), (β), (α), (δ)); **FS131-E8-FAN** (a fan at every singular point
+     isolated in Σ, saturation read in a punctured disc only; at least two branches, neighbouring regions of different colours);
+     **FS131-E8-BRIDGE** (`Saturated c.cls → (∀ x, ∃ r > 0, (c.singularSet ∩ ball x r).Finite) → c.RegJFan`, so `RegJBridge k` holds for
+     every `k`); FS131-E8-CLAUSE2 (under saturation the frozen words' second clause follows from the first, and every bounded set meets
+     finitely many interface arcs). So under saturation "Σ locally finite", the frozen words and the fan with end tangents are one
+     hypothesis. **Two notes for the kernel statements, E8's**: FS111-M-PINCH must be stated with its two-colour ball as a neighbourhood
+     of the point, not centred at it (C11 (ii) and § 3.1 (2) read it at off-centre points of one ball); FS111-M-C11 (ii) should carry
+     "no cusp in `N`" — as filed it assumes M-PINCH's hypotheses at essential boundary points only, and its step "each normal line meets
+     the boundary once" needs the point found on the line to be no cusp (§ 3.1's *not claimed*). **My receipt**: the commit is on
+     `origin/main`; its derive-gate output `data/fs131/e8/gate-stage3.out` reads 8 entries, 8 derived, `GATE: PASS`; both controls run
+     by me with their faults — `e8_lens.py` prints 0 and 880 with `--C 1`, `e8_chord.py` prints 0 and 14232 with `--kappa 2`; steps
+     § 3.1 (3)(b) and § 3.3's inequality `(d/ds)|γ(s) − z|² ≥ 2 sin s` redone by hand; § 3.6's field-by-field reading compared with
+     `data/fs131/k6/FanDesign.lean` ll. 29–49 on `fs131-w6` — each of the structure's eleven fields has its step. Not checked by me:
+     § 3.1 (4)'s constants, § 3.4's covering argument beyond a reading. **Rulings.** (a) **E8's eight entries become rows of wave 6,
+     planned by FS131-K6b**: FS131-E8-FAN as the lemma that produces the planner's `Fan c z`, -BRIDGE and -CLAUSE2 as its corollaries,
+     -LOCAL as the form of C11 (ii) the kernel needs. Alternative weighed: leave `RegJFan` a bare named hypothesis and the bridge a hand
+     result outside the backlog (K6's design file calls it "not a backlog row"). Why: with the bridge in the kernel every wave-6
+     consumer's hypothesis is, under saturation, "Σ locally finite" — the frozen words' first clause, which is what rows 140–144 state
+     and what FS-127 asks; without it the wave would be held over a hypothesis stronger than the ledger's, joined to it by one mind's
+     hand argument. Confidence: high that it belongs; medium on its size, which K6b prices from its first leaves (curves with Lipschitz
+     tangent and their arclength have no home in Mathlib) — if it is large the consumers still land over the fan and the bridge after
+     them, since (b) changes no statement. (b) **Ruling 481 (b) stands in form**: the consumers take `Fan c z` or `RegJFan`; the
+     docstring line it asked for ("stronger than the frozen words") becomes "under saturation equivalent to Σ locally finite, by
+     FS131-E8-BRIDGE" with that entry's grade at the time. Alternative: restate every consumer over local finiteness now. Why not: the
+     fan is what each proof reads, and a consumer over the fan is the wider theorem. Confidence: high. (c) **E8's two statement notes
+     go to FS131-K6b's brief** (it restates `Pinch`'s predicates over a family first, by K6's report; nothing is proved over them);
+     **a correction owed** to FS111-M-C11's entry (the cusp hypothesis) and a generalization logged for FS111-M-PINCH (a neighbourhood,
+     not a centred ball) — held for the milestone's errata. (d) **Bearing outside the milestone**: REG-J′ is route M's regularity
+     hypothesis (rows 140–144); what is left open of it is its first clause alone (FS-127). E8 drafts the stub lines at its hand-back;
+     I file them then. Kooshi is told in the next report, not by a notification: no value moves and nothing waits on him.
