@@ -5607,3 +5607,39 @@ reason by the close.*
      generator's edit put a block before the values it reads (the same mistake as before item 511's fix); one regeneration
      failed with a `NameError`, caught by the generator's own exit, repaired by moving the block, and all three briefs
      re-gated — the two launched planners' briefs left as committed.
+
+524. **FS131-K8 done at its Stage 5: wave 8's first planning pass — the foundation, three rows proved, eight rows stated with ten
+     leaves; the nine semi-hub rows and two more left to a second pass** (planner; harness 450k by the task notice; record
+     `fs131-w8`'s `plans/FS131-w8-kernel-plan.md` Stages 1–5; report `data/fs131/reports/FS131-K8.md`; commits `57a15317`,
+     `9e1c78f2`, `26b08395`, `f1c13612`; pushed, tree clean). **Proved**: FS116-RING-GERM in tile form, FS116-N2-STAR whole,
+     FS116-V6-ANTI class-free. **Stated, ten leaves** (`Star` 2, `Empty` 8): FS116-N2-RECIP, -N2-ANTI, -V6-HUBS, -V6-HUG,
+     -V6-COUNT, FS129-SR3-EMPTY-NS (carrying FS116-Y4-EMPTY and -Y4-OBST), FS129-SR3-OUTERADJ (carrying FS116-V6-ADJ),
+     FS129-MR1-DOUBLETIP. **Not stated, eleven rows**: the nine of `SemiHub`, FS116-N2-SIXRING, FS116-RING-TWIST-C — ten of them
+     disposed from their entries only. Its mid-job findings are items 518 and 523. **My receipt**: tip `f1c13612` equals
+     `origin/fs131-w8`, tree clean; `sorry` by the handoff's grep: `Basic` 0, `Star` 2, `Empty` 8 — the ten reported;
+     `Basic.lean` unchanged since `26b08395`; no line of `ARCHITECTURE.md`, `scripts/Axioms.lean` or `Proofs.lean` removed since
+     `611ffa39` (its repaired rename); the full build log named by `data/fs131/k8/logs/build-3-skeleton.log` ends "Build completed
+     successfully (5812 jobs)", 0 warnings other than `sorry`; no `axiom`, no `native_decide` in the three modules, by grep;
+     `v6_hubs_vacuous` and `v6_hug_vacuous` read at `Empty.lean` ll. 155–164 — each derives `False` from its lemma's class
+     hypotheses through `emptyNS`, as ruling 518 asked, and two `VACUITY DECLARED` markers stand. Not checked by me: the count
+     tool's 72 configurations; the dispositions against the unread arguments. **Items**: seven generalizations (item 518's five,
+     RING-GERM (ii) and STAR's outer clauses without non-Siamese in tile form, STAR right at "radius above 1"); a caution for
+     the route (V6-HUBS's count alone does not give `m ≤ 1`; the plan carries the colour argument as a child); two questions
+     for its second pass (is FS116-V5-OUT2 exactly `star_outer_cone`? two candidate narrowings, unverified); predictions scored
+     (its § 5.7); slips, the job's, disclosed — three names already on `main`, caught by the build; three landed registry lines
+     rewritten by its rename and restored by a second commit, no amend; twelve arguments unread; stages 2–5 one commit; a shell
+     removal of its own iteration files refused by the harness's safety check and not run, nothing deleted; a correction owed —
+     no Lean model yet for a change point of a four-colour vertex, and `emptyNS`'s model at a living parameter (a nine-colour
+     valid non-Siamese map with a Γ-free ring) is owed before the wave's gate.
+525. **Rulings on K8's held items, and its slot.** (a) **One implementer, FS131-I8A, on `Plane/RingCalculus/Empty`'s six leaves
+     on the route to `emptyNS`, then `Star`'s two if budget remains**, from a branch cut at `f1c13612`; `outerAdj` and
+     `doubleTip` wait for the second pass's plan. Alternative: two implementers by file. Why one: `Star`'s two leaves are about
+     400 lines by its count and no file is shared. Confidence: medium. (b) **A second planning pass, FS131-K8b**: the nine
+     semi-hub rows, SIXRING, RING-TWIST-C, the plans for `outerAdj` and `doubleTip`, the three words the foundation does not
+     define, and wave 7's FS114-N7-QOPP as a hypothesis under a name of wave 8's own. (c) **`emptyNS`'s nine-colour model
+     rests on wave 6's map**: FS131-I6B is building `sq9` as an `ArcMap 9` now; wave 8's implementer states the model's facts
+     in a module that imports it, taking that module by a merge of I6B's commit when it is in. Alternative: wave 8 builds its
+     own nine-colour map. Why not: one map, declared once. Confidence: high. (d) Briefs for I8A and K8b not written.
+     (e) **Slot → FS131-L10A**, the landing of wave 10's first pass (ruling 520 (c)), launched 2026-10-06; while it is in its
+     landing stage I commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`.
+     In flight: 1 (I6B) + 1 (K6c) + 1 (L10A) = 3.
