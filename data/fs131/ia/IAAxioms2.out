@@ -1,0 +1,13 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Plane.ArcMap.bend_toward_collar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_collarFit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_preBend' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.bv_l3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_open' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_clean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.LocalStep.cleanKeep' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_procStep' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_terminalSeq' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_terminalMap' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_vertexStep' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_arcStep' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

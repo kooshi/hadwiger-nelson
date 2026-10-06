@@ -1,0 +1,8 @@
+unplanted: PASS
+plant Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean: FIRED  ['Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean: merged text is not the side it should be']
+plant Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean: FIRED  ["Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean: merged lines are not ours + theirs − base: {'pre-bend keeps it (`exists_preBenx`, E4-BEND-UN); `localDense` chooses its vertex by E4-OUTERMOST (`exists_unenclosed_or_bad`) in place of': 1, 'pre-bend keeps it (`exists_preBend`, E4-BEND-UN); `localDense` chooses its vertex by E4-OUTERMOST (`exists_unenclosed_or_bad`) in place of': -1} blank-slack 0"]
+plant Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean: FIRED  ['Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean: merged text is not the side it should be']
+plant Proofs.lean: FIRED  ["Proofs.lean: merged lines are not ours + theirs − base: {'import Proofs.HadwigerNelson.Plane.ValidMap.Pushforward': -1} blank-slack 0"]
+plant scripts/Axioms.lean: FIRED  ["scripts/Axioms.lean: merged lines are not ours + theirs − base: {'#print axioms HadwigerNelson.Plane.ArcMap.exists_preBend': 1} blank-slack 0"]
+plant Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean: FIRED  ['Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean: changed by both sides, not in KEEP_BOTH']
+SELF-TEST: every plant fired, the unplanted run passed
