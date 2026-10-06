@@ -163,3 +163,89 @@ each ran about three minutes to the kernel timeout above with their memory unmea
 
 Token count at this stage: own estimate ≈ 300k of the harness's.
 
+## Stage 3 — SAVED (FS131-I10E): the floor run at a model, the final build, the checks on it
+
+**A model of every hypothesis of `TargetFloor 8 128`, in the file** (the Spec's last example): `GaloisField 2 14` with
+`iterateFrobenius (GaloisField 2 14) 2 7`, the map `x ↦ x ^ 128`. It is an involution (`x ^ (128·128) = x`,
+`FiniteField.pow_card`) and not the identity (it fixes exactly 128 of the 16,384 elements: FS131-I10D's
+`StandingFive.card_filter_pow_eq_self`), so `targetFloor_eight_128` applies and gives
+`(8 : ℕ∞) ≤ (normOneCayley (GaloisField 2 14) _).chromaticNumber` — the floor as a statement about one actual graph, which is what
+"`TargetFloor n 128` does not quantify over an empty domain" (the module docstring, a note until now) asks for. Two more examples
+run `exists_root` and `charSum_128_ge` at the same field.
+
+**The final build** (`data/fs131/i10e/logs/build-2-final.log`): `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
+./scripts/build.sh`, exit 0, 455 of 455 batches, 3 modules rebuilt (`Arith.Floor128` 6.6 s, `Arith.TargetFloors` 1.5 s, `Proofs`
+1.7 s), 8 m 18 s after 9 minutes queued on the slot's ledger. **Sixteen `sorry` warnings on the branch, none in `Floor128`**:
+`MajorityVote` 1, `NegCircleModel` 2, `ProductFactor` 1, `StandingFive` 9, `StationaryRatio` 3 (distinct `file:line` warnings of the
+full output). The one line reading "error: target is out-of-date" in the full output is `build.sh`'s opening `lake build
+--no-build` probe finding `Floor128` stale, as it must after an edit. The module as built is the module as committed.
+
+**On the final build**:
+- axioms (`logs/axioms-all.log`, re-run): 47 records — the 43 of this job's block and `standingFloor_seven`, `standingFloor_five`
+  within the standard three (33 on all three, 12 on a proper subset); the two controls outside it, each printing `sorryAx`;
+- the negative controls (`logs/controls.log`, re-run): exit 1 with three errors, at lines 19, 24, 30 of `Controls.lean` — the three
+  controls — and none at the partners;
+- statements: `logs/statements-1.txt` is of the final source (PASS; self-test as required);
+- **the environment linters, run as a check of this module and not as the gate** (`scripts/slot.py --mem 8 --cpus 2 -- lake lint
+  --no-build -- --no-build --trace`, `logs/lint.log`): 13 of 14 linters pass on the library; `unusedArguments` reports three
+  declarations, all in wave 2's `Arith/` (`DyadicSqrt3Conclusion`, `falconerFan_five_placeHom`, `placeHom_step`: the unused
+  `[NumberField _]` binders the inventory already holds). **Nothing of `Floor128` is reported by any linter.**
+
+**Not done, by the brief**: the gate (`axioms.sh`, `vacuity.sh`, `dupnames.sh`), any merge, `main`. **Not done, and said**:
+`ARCHITECTURE.md`'s Imports cell (not in my `touches`; drafted below, item 3).
+
+Token count at this stage: own estimate ≈ 330k of the harness's.
+
+## Drafts for the front page
+
+*I ran no gate, so no count below is a gate's count; each is what this branch adds, for the landing to confirm.*
+
+1. **`CLAUDE.md` § Trust ledger**, the sentence "the current audit reads … clean and 5 declared purchases, and 4 imported …": the
+   landing of this branch adds **43 records, each on a subset of the standard three axioms** (the "FS131-I10E" block of
+   `scripts/Axioms.lean`; `#print axioms` on this branch, `data/fs131/i10e/logs/axioms-all.log`): 31 on all three, 12 on a proper
+   subset (`[propext, Quot.sound]` or `[propext]`), none axiom-free; **no purchase and nothing under IMPORTED**. With both floors
+   proved on this branch the planner's `StandingFive.standingFloor_seven` and `standingFloor_five` (`Arith/TargetFloors`) also
+   print the standard three, and can enter the landing's block.
+2. **`CLAUDE.md` § The gate**, the vacuity counts: this branch adds 40 theorems and one definition (`Floor128.ev`) beyond the
+   skeleton's declarations, and 6 `example`s; their sites and verdicts are the landing's to count (every binder is a ring, a field,
+   a natural number or a character; no colouring binder). The hypotheses `ev g P = 0` and `Fintype.card k = 128 ^ 2` are inhabited
+   in the file: the Spec's last three examples run `exists_root`, `charSum_128_ge` and `targetFloor_eight_128` at `GaloisField 2 14`.
+3. **`ARCHITECTURE.md` § 3, the row `Arith/Floor128`** (the check fails on this branch until its Imports cell is edited: Stage 1).
+   Imports cell, replacing `` `Arith/NormOneTarget` ``: `` `Arith/NormOneTarget`, `Arith/FloorPlanes` ``. Description cell,
+   replacing "**FS-131 wave 10 (FS131-K10b), skeleton.**" by "**FS-131 wave 10 (FS131-K10b; the bridge FS131-I10E).**", and "the
+   bridge `charSum_128_ge` (the leaf); `targetFloor_eight_128`, `targetFloor_seven_128` (proved over it)." by "the bridge
+   `charSum_128_ge`, proved with no outside theorem: `ev` (a code read as a polynomial; `ev_xor`, `ev_clmul`), `exists_root`,
+   `minimalPeriod_step` and `exists_iterate_step_eq` (the register's 16,383 states are the non-zero codes), `ev_ne_zero`,
+   `exists_code`, `exists_root_pow_eq` (`P` is primitive), `class_le`, `exists_addChar`; `targetFloor_eight_128`,
+   `targetFloor_seven_128`. `bezout4`, `bezout128` are kernel-checked and not read by the bridge."
+4. **`LEAN.md` § The kernel's cost model**, a new bullet after "Data the kernel must *build* …": "**A closed `Nat` term rewritten by
+   a lemma stated at other instances than its own is evaluated by the kernel.** `0 + S` with `S` a closed sum of 16,383 register
+   states, rewritten by Mathlib's `zero_add`: elaboration succeeds, the kernel runs 173 s to `deterministic timeout`, and passes
+   8 GiB in 27 s; with one variable free in `S`, or with core's `Nat.zero_add` on the closed term, 2 s
+   (`data/fs131/i10e/lean/closed-term/`). State the lemma that does the algebra with the term's parameters free and instantiate it
+   last (`Floor128.pass_class`, `class_le`); a `(kernel) deterministic timeout` is a memory event too, so bisect one under a slot."
+5. **`LEDGER.md` § B, the row `FS91-J10-T9`** (`λ_min(U₆₄, U₁₂₈, U₂₅₆) = −15, −19, −31`, "tools exact (one computation)"), after it:
+   "**`λ_min(U₁₂₈) ≥ −19` [kernel]**: `Floor128.charSum_128_ge` — in every field of `2¹⁴` elements every non-trivial additive
+   character sums to real part at least `−19` over `{u : u¹²⁹ = 1}`; and **`χ(U₁₂₈) ≥ 8` [kernel]**:
+   `Floor128.targetFloor_eight_128 : StandingFive.TargetFloor 8 128` (`Arith/Floor128.lean`), standard three axioms, no outside
+   theorem, no named hypothesis. Rests on, by name (all kernel): the certificate `clmul_P_qBig`, `order_checks`, `counts_ok`;
+   `RatioBound.le_chromaticNumber_of_charSum`; `StandingFive.involution_eq_pow`, `card_normOne`, `exists_mulShift_eq`. That `−19`
+   is attained, and the other ten values, stay tools exact."
+6. **`.claude/skills/grokkings/SKILL.md`, G56**, at "Q = 128 has floor 8 (`data/fs54/char2/`)": "Q = 128 has floor 8
+   (`data/fs54/char2/`; **[kernel]**, `Floor128.targetFloor_eight_128`, FS131-I10E)".
+7. **`plans/FS131-kernel-plan.md` § 7.4** (the named-hypotheses table), the `StandingFloor` row: its first half, `TargetFloor n 128`
+   at `n ≤ 8`, is a theorem on this branch; with FS131-I10D's planes the whole of `StandingFloor 7` is
+   `StandingFive.standingFloor_seven`, over `KloostermanBound` alone.
+8. **The Frontier line** (`CLAUDE.md` § Frontier, "Last filed"), when the wave lands: "wave 10's floor at 128: `χ(U₁₂₈) ≥ 8` in the
+   kernel on the standard three axioms, with no outside theorem (`Floor128.targetFloor_eight_128`)". **Proof Atlas grade changes**:
+   G56's "Q = 128 has floor 8" — [tools] → [kernel]; `λ_min(U₁₂₈) = −19` (FS91-J10-T9) — the inequality `≥ −19` [tools] → [kernel],
+   the equality unchanged; "`P = x¹⁴ + x⁵ + x³ + x + 1` is primitive over `𝔽₂`" — new, [kernel] in the form `exists_root_pow_eq`
+   (a root of `P` in a field of `2¹⁴` elements generates its multiplicative group).
+
+**For the joining job** (beside the plan's § 9.4): `fs131-w10e` contains `fs131-w10d` (the amendment's fast-forward), so merging it
+brings FS131-I10D's two files with it. `Floor128` now imports `FloorPlanes`. New names, all in the namespace
+`HadwigerNelson.Floor128`, which no other module opens: the 41 listed under "Theorems this phase proved"; none is declared in
+another file of `Proofs/` (Stage 2). `scripts/Axioms.lean` gains one block, above the `=== PURCHASED ===` banner, after
+FS131-I10D's. `bezout4`, `bezout128` and their four literals are read by no proof: keeping them costs under a second of kernel
+time and they are in FS131-K10b's audit block; dropping them is a statement change, so it is the planner's and the coordinator's.
+
