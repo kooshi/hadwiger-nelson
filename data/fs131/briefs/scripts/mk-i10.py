@@ -5,6 +5,7 @@ T={"A":("fs131-w10","FS131-I10A","`Proofs/HadwigerNelson/Arith/SpectralInputs.le
    "B":("fs131-w10b","FS131-I10B","`Proofs/HadwigerNelson/Arith/StationaryRatio.lean` (three leaves)","5.3 `StationaryRatio`","the stationary ratio"),
    "C":("fs131-w10c","FS131-I10C","`Proofs/HadwigerNelson/Arith/StandingFive.lean` (nine leaves, one certificate)","5.4 `StandingFive`","the standing-five field")}[LANE]
 TREE,JOB,FILES,SEC,WHAT=T
+FIRST="" if LANE=="A" else ("The first implementer's hand-back — its record (`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10/plans/FS131-I10A-implementation.md`, on\nbranch `fs131-w10`, not merged into yours) has Lean facts met on the way that may save you time: a notation that parses against the eye, an\naction whose `T 0` need not be the identity, a route that fails at an atom:\n\n"+item(493))
 BUILDNOTE="" if LANE=="A" else " — your tree's build was copied from an idle tree on `main`'s line that predates the wave's four modules, so this first build compiles them: let it, and say what it rebuilt"
 W=WT+TREE+"/"; KP=W+"plans/FS131-w10-kernel-plan.md"
 b=f'''# Brief {JOB} — wave 10, {WHAT}: the open leaves of one file of the arithmetic wave, on `{TREE}`
@@ -45,7 +46,7 @@ The plan's hand-back and the rulings in force:
 {item(485)}
 {item(477)}
 {item(478)}
-## The statements
+{FIRST}## The statements
 
 No statement changes in this job. The plan's section for your file (read the whole record: § 2 the dispositions, § 3 the foundation, § 5 the plan
 per leaf with the named hypotheses' four items in § 5.5), and every leaf's docstring in the file, which states its route:

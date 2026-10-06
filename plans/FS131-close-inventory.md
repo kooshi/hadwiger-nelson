@@ -4992,3 +4992,40 @@ reason by the close.*
      pass** (K10b), under J45-SI-5; that job checks at the pin whether Mathlib's strong law serves or Chebyshev is written out. (e) No
      bibliography row (E8's § 4.4: nothing rests on the two recalled theorems). (f) **Slot → FS131-K6b**, wave 6's second planner
      (`debruijn`), its brief regenerated with E8's § 4.6 and re-gated, launched 2026-10-06. In flight: 1 (MC1) + 1 (I10A) + 1 (K6b) = 3.
+
+493. **FS131-I10A done: all nine leaves of wave 10's first file pair proved — `SpectralInputs` and `CharacterColouring` hold no `sorry`, over
+     the plan's named hypotheses only** (implementer, Opus; harness 404k by the task notice; record `fs131-w10`'s
+     `plans/FS131-I10A-implementation.md` Stages 1–5; report `data/fs131/reports/FS131-I10A.md`; commits `fd6ac689`, `7ea4a1b2`, `1b00a2a6`,
+     `ace98a35`; pushed, tree clean). **Proved** (rows J45-N2, J45-SI-4, J45-SP-if, J45-N1 (c), FS-89's erratum):
+     `measurableSet_factorSigma_iff`, `contVec_eq_lpMeas`, `measurableSet_preimage_factorSigma` (J45-N2 with no hypothesis from outside);
+     `spectral_carried_iff` over `BochnerOn t`; `contChars_haar_null` and `exists_isHaarFourier` over `SpectralChain.BochnerHerglotz`;
+     `si4`; `sp_if` over `BochnerHerglotz`, `Interface.MulStable`, `Interface.NegCircle`; `mem_archimedean_unitRing_iff` (by Mathlib's
+     Baer criterion, two new Mathlib imports). **New statements, one mind, owed the planner's read-back**: `condExpL2_mem_contVec`,
+     `condExpL2_eq_self_iff`, `inner_sub_condExpL2_eq_zero`, `si4_equivariant`, `condExp_comp_measurePreserving`. **My receipt**: tip
+     `ace98a35` equals `origin/fs131-w10`, tree clean; the full build log (`build/gate/build/20261006T112815Z-3611536.log` in the tree)
+     ends "Build completed successfully (5755 jobs)", 0 warnings other than `sorry`, and its `sorry` warnings are in `StandingFive` and
+     `StationaryRatio` only; `sorry` by the handoff's grep: `SpectralInputs` 0, `CharacterColouring` 0, `StationaryRatio` 3,
+     `StandingFive` 9; `data/fs131/i10a/logs/axioms-all.log` parsed by script: 34 records, 33 on the standard three and the control
+     (`StandingFive.usable_card_ge`) on `sorryAx`, the nine leaves and two of the new statements found by name; `sp_if`, `si4` and
+     `spectral_carried_iff` compared with `f919973e` by `cmp` of `awk` extractions — identical. **Items**: three generalizations —
+     `sp_if` does not read `[Countable (unitRing F)]`, `spectral_carried_iff` does not read `[IsProbabilityMeasure μ]` (each consumed by a
+     `have` as committed), `contChars t` is a subgroup for any topology (the planner's finding 6, now a proof); `sp_if`'s `NegCircle`
+     **has no Lean model** (the plan priced one at "an hour"; re-priced a job's stage; a cheaper candidate at `F = ℚ`, the point mass at
+     the parity character, not checked); to apply `si4_equivariant` at `factorSigma` one needs `comap (T x) = factorSigma`, which needs
+     the action by bijections — `𝒜.comap S ≤ 𝒜` alone fails (the one-sided shift, `g = ω₀`); a Chebyshev route for N2 (ii) fails at an
+     atom, found on paper; a Lean fact — `T ⁻¹' A ∆ A` parses as `T ⁻¹' (A ∆ A)`; a slip, the job's — stages 3–5 one commit, nothing
+     lost; the price — 1,550 lines planned, about 1,020 written; 300k planned, 404k by the harness. Drafts for the wave's landing in its
+     record's last section (`plans/LEAN-BACKLOG.md` rows, a `LEDGER.md` clause, a `LEAN.md` bullet, the plan's § 7.4 row).
+494. **Rulings on I10A's held items, and its slot.** (a) **The two unread instance arguments are dropped from the statements** —
+     `[Countable (unitRing F)]` from `sp_if`, `[IsProbabilityMeasure μ]` from `spectral_carried_iff` — by wave 10's joining job, which is
+     the next single writer of `SpectralInputs`. Alternative: keep them with the `have` that silences the linter (ruling 419 (c)'s
+     treatment). Why: 419 (c) was for a hypothesis a ruling had kept on purpose; here nothing asks for them, the plan's § 7.3 item 3 says a
+     row is stated at the class its argument reads, and before the landing the change costs a rebuild of one file's dependents.
+     Confidence: high. (b) **The five new statements are read back by wave 10's second planner (K10b)**, with `si4_equivariant`'s
+     application at `factorSigma` and **a Lean model for `Interface.NegCircle`** as rows of its pass: without the model `sp_if` is an
+     open gate item under the inhabitant rule (ruling 427 (d)). (c) The two Mathlib imports for Baer's criterion stand. Alternative: the
+     hand route by the `ℚ`-span. Why: Mathlib's lemma on the standard three, checked by the print; an import costs build time only.
+     Confidence: high. (d) The `LEAN.md` bullet and the other drafts are filed at wave 10's landing; `LEAN.md` is not an exempt path
+     while the example maps' landing is in flight. (e) **Slot → FS131-I10B** (`StationaryRatio`, three leaves, on `fs131-w10b`), its
+     brief regenerated with item 493 quoted and re-gated, launched 2026-10-06; FS131-I10C at the next free slot. In flight: 1 (MC1) + 1
+     (K6b) + 1 (I10B) = 3.
