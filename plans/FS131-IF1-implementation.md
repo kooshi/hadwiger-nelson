@@ -111,6 +111,49 @@ definition: the ratio is written out, in the shape of Besicovitch's theorem in M
 `ratio_two_mul_ge` and the continuity lemma are where the lines go. The working file stays out of the library (and of
 `Proofs.lean`) until it has no `sorry`; snapshots are committed under `data/fs131/if1/lean/`.
 
+## Stage 3 — SAVED (FS131-IF1): the general theorem, proved and in the library
+
+`Proofs/HadwigerNelson/Plane/MetricalBoundary.lean` (new; 340 lines, Mathlib imports only; in `Proofs.lean` and in
+`ARCHITECTURE.md` § 3.11): every leaf of Stage 2's skeleton closed, no `sorry`, no statement of the skeleton changed. One child
+added, `measure_compl_inter_closedBall_div_eq_half` (ratio one half for `S` gives ratio one half for `Sᶜ`; used twice). Three
+theorems carry `omit [BorelSpace E] in` (the build's unused-section-variable linter named them). Spec examples at the foot: a
+model of the hypotheses in dimension one (`Ioi 0 ⊆ ℝ`), an adversary (`S = univ`: the conclusion fails, so `μ Sᶜ ≠ 0` cannot be
+dropped), and the quantitative constant at dimension one (`1/4`).
+
+The proofs went through as Stage 2 priced them; the first elaboration of the whole file failed at five leaves, each a name or a
+rewrite target (`ENNReal.one_half_lt_one` is stated at `2⁻¹`; `ENNReal.div_eq_iff` does not exist — `ENNReal.eq_div_iff`;
+`Set.diff_eq` deprecated for `sdiff_eq`; a `rw` with `addHaar_closedBall'` took `closedBall 0 1` for its target; a
+`rw [← ENNReal.add_halves 1]` rewrote every `1`), none an obstacle of the mathematics.
+
+**Build**: `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, exit 0, "467 of 467 batches, 2
+module(s) rebuilt, 0 module(s) with warnings, 8m19s" (`data/fs131/if1/build-stage3a.log`; rebuilt: `Plane/MetricalBoundary`,
+`Proofs`). `tools/check_architecture.py`: `RESULT: PASS`, exit 0 (`data/fs131/if1/check-architecture-stage3a.log`).
+
+**Axioms, with a control that fires**: `data/fs131/if1/lean/AxiomsPrint.lean` prints the fifteen theorems and one planted
+theorem resting on `sorry`; `tools/fs131_if1_axioms_check.py <output> 15` judges both with one predicate — fifteen records, each
+exactly `[propext, Classical.choice, Quot.sound]`, and the control prints `[sorryAx]` and fires
+(`data/fs131/if1/axioms-print-stage3a.out`). The tool's own faults, each watched (`data/fs131/if1/axioms-check-controls.log`):
+(a) a dirty record judged as a library record → exit 1; (b) one record missing → exit 1, `count: 14 … expected 15`; (c) a
+control made clean → exit 1, `did NOT fire`; (d) the unmodified output → exit 0. This is iteration evidence
+(`lake env lean`); the gate's receipt is Stage 4's `scripts/axioms.sh`.
+
 ## Theorems this phase proved
 
-*(none yet — Stage 1 is the readback)*
+*Kernel theorems, each `[propext, Classical.choice, Quot.sound]` (Stage 3's print; Stage 4's audit for the receipt). All in
+`Proofs/HadwigerNelson/Plane/MetricalBoundary.lean`, namespace `HadwigerNelson.Plane`, for a finite-dimensional real normed
+space `E` with an additive Haar measure `μ`.*
+
+- `exists_not_tendsto_ratio_and_compl` [kernel] — **`[Falconer1981]` Lemma 2 (i) in any finite dimension**: a `μ`-null-measurable
+  `S` with `μ S ≠ 0`, `μ Sᶜ ≠ 0` has a point that is a density point neither of `S` nor of `Sᶜ`.
+- `exists_ratio_ge_and_compl_ge` [kernel] — the quantitative form: at some point, along radii tending to `0`, `S` and `Sᶜ`
+  both have ratio at least `1 / (2 · 2 ^ dim E)`.
+- `exists_closedBall_ratio_eq_half` [kernel] — the step: a ball of ratio exactly `1/2` and radius at most `δ` inside a closed
+  ball whose interior holds a density point of `S` and one of `Sᶜ`.
+- `exists_nested_closedBalls_ratio_eq_half` [kernel] — nested closed balls of ratio `1/2`, radii at least halving.
+- `continuous_measure_inter_closedBall` [kernel] — `c ↦ μ (S ∩ B̄(c, ρ))` is continuous, any `S`, `ρ > 0`.
+- `not_tendsto_ratio_compl_of_ratio_ge` [kernel] — ratio at least `κ > 0` along radii tending to `0` excludes density `1` of
+  the complement.
+- Children [kernel]: `measure_inter_closedBall_le_add`, `tendsto_measure_closedBall_sub`,
+  `measure_inter_closedBall_div_add_compl`, `measure_compl_inter_closedBall_div_eq_half`, `exists_mem_ball_tendsto_ratio`,
+  `measure_inter_ball_ne_zero_of_ratio_eq_half`, `exists_closedBall_subset_ratio_eq_half`,
+  `exists_closedBall_ratio_eq_half_of_measure_ne_zero`, `ratio_two_mul_ge`.

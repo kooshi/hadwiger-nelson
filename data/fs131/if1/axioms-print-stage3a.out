@@ -1,0 +1,27 @@
+=== IF1 RECORDS ===
+'HadwigerNelson.Plane.measure_inter_closedBall_le_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.tendsto_measure_closedBall_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.continuous_measure_inter_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.measure_inter_closedBall_div_add_compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.measure_compl_inter_closedBall_div_eq_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.exists_mem_ball_tendsto_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.measure_inter_ball_ne_zero_of_ratio_eq_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.exists_closedBall_ratio_eq_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_closedBall_subset_ratio_eq_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_closedBall_ratio_eq_half_of_measure_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.exists_nested_closedBalls_ratio_eq_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ratio_two_mul_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_ratio_ge_and_compl_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.not_tendsto_ratio_compl_of_ratio_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_not_tendsto_ratio_and_compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== IF1 CONTROL ===
+data/fs131/if1/lean/AxiomsPrint.lean:28:8: warning: declaration uses `sorry`
+'if1_control_sorry' depends on axioms: [sorryAx]

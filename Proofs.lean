@@ -168,6 +168,7 @@ import Proofs.HadwigerNelson.Plane.CPColouring
 import Proofs.HadwigerNelson.Plane.MaximalCover
 import Proofs.HadwigerNelson.Plane.Slack
 import Proofs.HadwigerNelson.Plane.Stationary
+import Proofs.HadwigerNelson.Plane.MetricalBoundary
 import Proofs.HadwigerNelson.Plane.FalconerReduction
 import Proofs.HadwigerNelson.Plane.YesLimit
 import Proofs.HadwigerNelson.Plane.CoverExamples
