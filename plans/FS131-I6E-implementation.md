@@ -129,7 +129,7 @@ other (and `fs131-w6f`'s `FanBuild` re-derives the same angle inline): a shared 
 written against `gamma` and `IsUnitCurve.exists_polarGraph` as stated, so the three facts it offers were not needed. Two of my names were
 on its list — `isOpen_polarRegion`, `isPreconnected_polarRegion`, **the same statements** as `fs131-w6f`'s in `FanBuild` — and are renamed
 `polarRegion_isOpen`, `polarRegion_isPreconnected` here; `IsUnitCurve.continuousOn` was in my scratch file only and is not declared (its
-three uses are inlined). **At the join**: delete my two `polarRegion_*` lemmas and point their six uses at `FanBuild`'s
+three uses are inlined). **At the join**: delete my two `polarRegion_*` lemmas and point their three uses at `FanBuild`'s
 (`isOpen_polarRegion`, `isPreconnected_polarRegion`); nothing else of mine meets a name of that branch.
 
 **Re-pricing** (the brief's ask). The plan priced `two_le_n` and `col_ne` at a day each; they closed, with the three cell lemmas and the
