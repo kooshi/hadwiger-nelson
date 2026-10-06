@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–505 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–507 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -42,7 +42,7 @@ planted-picture models land (queue item 2).
 
 | job | tree and branch | what | brief | on its hand-back |
 |---|---|---|---|---|
-| **FS131-I10B** | `.claude/worktrees/fs131-w10b`, `fs131-w10b` (from the planner's `f919973e`) | wave 10, implementer B: `Arith/StationaryRatio`'s three leaves (I10A is done, items 493–494: `SpectralInputs` and `CharacterColouring` with no `sorry`, on `fs131-w10` at `ace98a35`) | `data/fs131/briefs/FS131-I10B-wave10.md` | **FS131-I10C** (`StandingFive`, nine leaves) launches at the next free slot — brief gated (`data/fs131/briefs/FS131-I10C-wave10.md`), tree `.claude/worktrees/fs131-w10c` made; then **K10b** (wave 10's second planner, `debruijn`: **brief written and gated**, `data/fs131/briefs/FS131-K10b-wave10-second.md`, generator `mk-k10b.py`; tree `.claude/worktrees/fs131-w10k` cut from `ace98a35`, built-from-copy and pushed — the unstated rows, the two floor rows of ruling 485 (b), the read-back of I10A's five new statements, a Lean model for `Interface.NegCircle`, FS131-E8-SI5C under J45-SI-5 — rulings 492 (d), 494 (b)); then a joining job for the three branches, which also drops the two unread instance arguments (ruling 494 (a)) |
+| **FS131-I10C** | `.claude/worktrees/fs131-w10c`, `fs131-w10c` (from the planner's `f919973e`) | wave 10, implementer C: `Arith/StandingFive`'s nine leaves and one certificate (I10A and I10B are done, items 493–494, 506–507: three of the wave's four files hold no `sorry`, on `fs131-w10` at `ace98a35` and `fs131-w10b` at `423cd8e8`) | `data/fs131/briefs/FS131-I10C-wave10.md` | then, when K10b is back too: **the wave's joining job** — merge `fs131-w10`, `fs131-w10b`, `fs131-w10c` and K10b's `fs131-w10k` into one line; drop the unread arguments (rulings 494 (a), 507 (a): I10A's two, I10B's seven, each row keeping its name on the general statement); add `StationarySet` to the vacuity scan's carriers; `dupnames`; the drafts in the three implementers' records; then implementers for K10b's rows |
 | **FS131-K7** | `.claude/worktrees/fs131-w7`, `fs131-w7` (from `main` at `e6e7b312`) | wave 7's planner: the twenty rows on four-colour vertices (route T's count, bowties and lunes, pinwheels) | `data/fs131/briefs/FS131-K7-wave7.md` | **relay its decision on the word "simple" (a fragment's tiles that cross the domain's boundary) to wave 8's planner** — in K8's brief if K8 is not yet launched, by message if it is; implementers by file as its handoff says. (E8's check is done, items 504–505: the planner's statements of the bridge stand; E8 is past its line.) |
 | **FS131-K10b** | `.claude/worktrees/fs131-w10k`, `fs131-w10k` (from I10A's `ace98a35`) | wave 10's second planner: the four rows not stated, the finite-target floor as two rows (ruling 485 (b)), FS131-E8-SI5C under J45-SI-5, the read-back of I10A's five statements, a Lean model for `Interface.NegCircle` — new modules only | `data/fs131/briefs/FS131-K10b-wave10-second.md` | implementers for its rows, split by file as its handoff says; a prior-art debt on Weil's bound is a bibliography row filed that day; then the wave's joining job (three branches and its own; drops the two unread instance arguments, ruling 494 (a)) |
 
@@ -56,7 +56,7 @@ a fresh agent on the same brief.
    takes a second named hypothesis, the finite-target floor; FS89-S0A-10 takes its band's order bound as a hypothesis). In order, as slots free: **FS131-K6b is running** (§ 3; E8 handed back, items 491–492: nine entries derived, its stub lines filed, its errata held for the filing);
    next into free slots:
    **the order, planners and implementers alternating (rulings 495 (d), 497; a planner's hand-back is what implementers wait on, and planners
-   find the statement defects): I10C, K8, I6A, K9, I6B, K6c, I6C, I6D, I6E, then MD1, MD2** (rulings 502, 505; K7 is running). **Also ready, briefs gated**: FS131-K6c (wave 6's third planning pass, on `fs131-w6` itself, new modules only;
+   find the statement defects): K8, I6A, K9, I6B, K6c, I6C, I6D, I6E, then MD1, MD2** (rulings 502, 505, 507; K7 and I10C are running). **Also ready, briefs gated**: FS131-K6c (wave 6's third planning pass, on `fs131-w6` itself, new modules only;
    `data/fs131/briefs/FS131-K6c-wave6-third.md`, generator `mk-k6c.py`), FS131-I6C (`Curve` then `LocalGraph`, tree `fs131-w6c`) and FS131-I6D
    (`FanBridge`'s existence half with `sq9.SingLocallyFinite`, tree `fs131-w6f`; `data/fs131/briefs/FS131-I6C-wave6-bridge.md`, `FS131-I6D-wave6-bridge.md`,
    generator `mk-i6b.py C|D`; both trees cut from `32f2ab4c`). FS131-I6E (`FanBridge`'s five `Fan` lemmas, tree `fs131-w6g` from `32f2ab4c`;
@@ -165,10 +165,10 @@ a fresh agent on the same brief.
 | `fs131-w6` | `32f2ab4c` | idle: wave 6's plan and skeleton after two passes — 31 leaves in five files; the third pass and two implementers' branches are cut from it |
 | `fs131-w6p`, `fs131-w6m` | `3928644b` | made for FS131-I6A (`Pinch`) and FS131-I6B (`MapColouring`); builds copied from `fs131-w6` |
 | `fs131-w6c`, `fs131-w6f`, `fs131-w6g` | `32f2ab4c` | made for FS131-I6C (`Curve`, `LocalGraph`), FS131-I6D (`FanBridge`'s existence half) and FS131-I6E (its five `Fan` lemmas); builds copied from `fs131-w6` |
-| `fs131-w10b` | moving (I10B) | cut from `f919973e`; its build was copied from `fs131-wop` |
+| `fs131-w10b` | `423cd8e8` | idle: `StationaryRatio` proved (item 506) |
 | `fs131-w10k` | moving (K10b; from `ace98a35`) | wave 10's second planning pass, new modules only |
 | `fs131-w7`, `fs131-w8`, `fs131-w9` | `e6e7b312` | made for the planners of waves 7–9; builds copied from `fs131-wmb` |
-| `fs131-w10c` | `f919973e` | made for FS131-I10C; build copied from `fs131-wop` (so its first build compiles wave 10's four modules) |
+| `fs131-w10c` | moving (I10C; from `f919973e`) | `StandingFive` in progress |
 
 ## 8. Held for the milestone's filing
 
