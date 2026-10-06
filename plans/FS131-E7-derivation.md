@@ -373,3 +373,70 @@ half I checked only at gaps `(40, 40, 40, 0)` (apexes `0.53` and `0.68` apart, r
 - **Docstring line for `a4six`**: "Inhabitant of the hypotheses at six colours: the four-petal flower `fourFlower` at `0` with `a = 4`,
   `b = 5` (FS131-E7 § 3): both absent colours are carried on `ω(0)` and no ring point carries both; its ring arcs total `240°`. (With two
   idle colours `sixFrag` at `0` is a degenerate inhabitant at `k = 8`.)"
+
+## Stage 4 — SAVED (FS131-E7): Q2 — `straddlers_third`'s hypotheses hold at once, at six colours, on the flower with one cell recoloured
+
+derivation: q2-straddlers-model
+  statement: the hypotheses `hF`, `hv`, `hcompl`, `hX`, `hX'` and `hna` of `straddlers_third` hold at once for `k = 6`, `F` the map `F₁` of § 4.1, `v = 0`, `θ = −π/3`, `X = 4`, `X' = 5`
+  uses only: q1-a4six-model's object and its validity; `recolour_valid`'s two conditions for one rectangle of diameter `√5/20`; that a sub-arc of positive length of a circle meets a segment or a different circle in at most two points
+  not claimed: a model in which `X = X'` (the statement allows a five-colour vertex; not examined); that `ω(y′)` carries arcs of `Γ` elsewhere and `hna` holds only at this `θ` — on `F₁` the unit circle about `y′ = 1` carries no arc of `Γ` at all, so `hna` is exercised in its simplest way (see § 4.3)
+  argument: § 4.2 The six hypotheses, clause by clause
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `F₁` — § 4.1; the theorem's conclusion read on it gives `i = 3`, `o = 1` (§ 4.3)
+  prior art: owed — as q1-a4six-model
+  handoff: de Bruijn — `F₁ = F₀.recolour R B 5` (§ 4.4) and `straddlers_third`'s docstring line
+
+control: flower-orbit
+  of: q2-straddlers-model — on `F₁`: the germs of the ring at `1`, the unit-arc centres against the orbit of `1`, the ring arcs through the orbit, the side colours at `e(−60°)`
+  run: python3 ../data/fs131/e7/e7_flower.py orbit
+  expect: germs at 1: ccw 4, cw 5; least distance from an orbit point to the centre of a unit arc of the map: 0.261; orbit points on a ring arc of Gamma: [1, 2, 4, 5]; at e(-60): inner 3, outer 1
+  fault: python3 ../data/fs131/e7/e7_flower.py orbit --plant-cell
+
+### 4.1 The object: `F₁`, the flower with a rectangle of its gap tile `M_0` recoloured
+
+`R = {z : 19/20 < Re z < 21/20, −1/20 < Im z < 0}`, an open rectangle just below the point `1 = e(0)` of the ring; `B` its four sides.
+`F₁ = F₀.recolour R B 5` (`ArcMap.recolour`, `Plane/Woodall/Merge.lean` l. 642): the domain and arcs of `F₀` with `B` added, colour `5` on `R`
+and `F₀`'s colour elsewhere. `R` lies inside `M_0` (its points have `|arg z| < 3.02°` and `0.95 < |z| < 1.052`, and `M_0` holds every
+`r e(φ)` with `|φ| < 15°`, `0.618 ≤ r < 5/4`), away from `F₀`'s arcs.
+
+**Validity** (`recolour_valid`: no unit pair in `R`; none between `R` and `F₀`'s class of `5`). `R` has diameter `√5/20 < 1`. `F₀`'s class of
+`5` is `M_1 ∪ M_3`, and every point `p = r e(θ)` of `M_1` has `|p − 1|² = r² + 1 − 2r cos θ ≥ 2 − 2 cos 67.5° ≈ 1.2346`: on `E_1` (`r ≥ 1`,
+`|θ − 90| < 22.5`) the expression increases with `r` and is least at `r = 1`, `θ = 67.5`; on `L_1` with `θ ≥ 90` it is at least
+`1 + ρ₀² = 3 − √3`; on `L_1` with `75 < θ < 90` it increases with `r ≥ 2 cos(θ − 15) > cos θ`, and at `r = 2 cos(θ − 15)` it equals
+`3 + 2 cos(2θ − 30) − 2 cos(2θ − 15) − 2 cos 15`, decreasing in `θ` there (its derivative is `8 cos(2θ − 22.5) sin 7.5 < 0`), so at least its
+value `3 − √3 ≈ 1.268` at `θ = 90`. `M_3` is the mirror image. So `M_1 ∪ M_3` misses `B(1, 1.111)`, while `R ⊂ B(1, √2/20)`:
+every point of `R` is more than `1.111 − 0.071 > 1` from the class (control `flower-exact`, rows 7–8; `flower-valid`'s second half samples
+`F₁`; with the cell moved `12°` clockwise, within `60°` of `E_3`, it finds monochromatic pairs).
+
+### 4.2 The six hypotheses, clause by clause
+
+| hypothesis | on `F₁`, `v = 0`, `θ = −π/3`, `X = 4`, `X' = 5` |
+|---|---|
+| `hF : F.Valid` | § 4.1 |
+| `hv : F.Covers v 1` | the domain is `F₀`'s |
+| `hcompl : (F.coloursAt v)ᶜ = {X, X'}` | `R` is at distance above `0.9` from `0`, so the colours at `0` are `F₀`'s: `{0, 1, 2, 3}` |
+| `hX : X ∈ F.coloursAt (ringPt v (θ + π/3))` | `ringPt 0 0 = 1`; the ring points `e(t)`, `0 < t < 15°`, have `Im > 0`, lie off `R`, its sides and `F₀`'s arcs, and are points of `M_0`: colour `4`, accumulating at `1` |
+| `hX' : X' ∈ F.coloursAt (ringPt v (θ + π/3))` | the ring points `e(−t)`, `0 < t < arcsin(1/20)`, lie in `R`: colour `5`, accumulating at `1` |
+| `hna : ¬ F.OnRingArc (ringPt v (θ + π/3)) (ringPt v θ)` | `Γ` lies in the carriers of 28 arcs: 16 segments and 12 circular arcs, on the circles `ω(0)`, `ω(u_j)`, `ω(w_j)`. A sub-arc of positive length of `ω(1)` meets a segment in at most two points and a circle other than `ω(1)` in at most two; `1` is none of `0, u_j, w_j`. So no sub-arc of `ω(1)` lies in `Γ`, through `e(−60°)` or through any other point |
+
+So the set is satisfiable at six colours, with `X ≠ X'`, a four-colour vertex and a ring point carrying both absent colours.
+
+### 4.3 The conclusion read on the model, and what the model does not exercise
+
+`y_k = e(−60°) = e(300°)` lies on the ring arc `[285°, 345°]`, inside which the inner side is the petal `T_3` and the outer side, at `300°`,
+the outer tile `O_1` (window `(292.5°, 337.5°)`). The circle `ω(1)` crosses the ring there transversally; its germ inside `B(0, 1)` lies in
+`T_3` and its germ outside in `O_1`. So `i = 3`, `o = 1`: different, both colours of `0`, neither carried at `1` (whose colours are `4, 5`),
+both carried at `e(300°)`; the cone of `3` at `0` is `[270°, 360°]`, on which `cos(β − 300°) ≥ cos 60° > 0`; the cone of `1` is
+`[90°, 180°]`, on which `cos(β − 300°) ≤ cos 120° < 0`. Every clause of the conclusion holds, as it must.
+
+Not exercised: a circle `ω(y′)` that does carry arcs of `Γ` with `y_k` avoiding them. On `F₁` no orbit point is a unit-arc centre, so
+`hna` holds for want of any arc. A model in which `ω(y′)` carries arcs is exactly what Q3b asks for (§ 5.3).
+
+### 4.4 Handoff
+
+`F₁ := F₀.recolour R B 5` with `B` the four sides of `R` as `Arc.seg`s; `recolour_valid` needs the two facts of § 4.1; the colours at `0`
+transfer because `F₁` and `F₀` agree on `B(0, 9/10)`. Docstring line for `straddlers_third`: "Inhabitant of the hypotheses at six colours:
+`fourFlowerCell` (the four-petal flower with the rectangle `19/20 < Re < 21/20`, `−1/20 < Im < 0` recoloured `5`) at `v = 0`, `θ = −π/3`,
+`X = 4`, `X' = 5` (FS131-E7 § 4); the conclusion holds there with `i = 3`, `o = 1`. `ω(y′)` carries no arc of `Γ` on it."
