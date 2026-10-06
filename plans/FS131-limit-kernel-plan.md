@@ -1175,6 +1175,8 @@ the four cases close: `exists_vertexStep` joins the declarations under `exists_t
 Each [kernel] on `[propext, Classical.choice, Quot.sound]` or a subset, read against the build of the stage that names it; the list is kept
 current at each saved stage (the last stage's receipt is the one to read).
 - Stage 22 (the readback): none.
+- Stage 23 (the ruled restatement of `exists_arcStep`; the merge of `fs131-w5s`): none of mine. By the merge `ArcMap.stuckRun_ne_univ`
+  (FS131-IS1's, `Terminal`) is in this tree on the standard three; `Terminal` holds no `sorry`.
 
 ## Stage 22 — SAVED (FS131-IR3): the readback, the as-given build, IR2's axioms check re-run
 
@@ -1211,3 +1213,59 @@ the merge of `origin/fs131-w5s`; prove the four cases and add children beside th
 build of it runs; start an agent.
 
 ## Stage 22 — SAVED (FS131-IR3)
+
+## Stage 23 — SAVED (FS131-IR3): the two small edits — `exists_arcStep` restated by ruling 430; `origin/fs131-w5s` merged
+
+### 23.1 The ruled restatement of `exists_arcStep` (inventory items 429–430, 436 (d); FS131-IA1's § 3.6), commit `57b6d9c7`
+
+Copied from IA1's § 3.6 (`fs131-w5a`, `plans/FS131-arcstep-implementation.md`). The statement's diff (whole diff: `data/fs131/ir/ir3/restate-430.diff`;
+the file before it: `ir3/Procedure-before-430.lean`):
+
+```
+-theorem exists_arcStep (hF : F.Valid) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
++theorem exists_arcStep (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
+-      (∀ x m, F.HasDegree x m → F'.HasDegree x m) ∧
++      (∀ x ∈ T, ∀ m, F.HasDegree x m → ∃ m' ≤ m, F'.HasDegree x m') ∧
+```
+
+Its one caller, in `exists_procStep`: the call passes `hG.plane`; the `pot_le` bullet takes `hx`, obtains `⟨m', hm', hdeg'⟩ := hdegs x hx mx
+hmx` and rewrites with `pot_eq hdeg' hjx'` (IA1's text, compiled here: it elaborates as written). It stays `sorry`. **Docstrings**:
+`exists_arcStep`'s now names the plane-map hypothesis (item 430 (b)) and the degree clause on `T` (430 (a)) in place of "changing no point's
+degree", and ends "Inhabitant: no Lean model on file; `l60Frag` cleaned, its whole arc, at [hand] (FS131-QA4 § 6.2, rank 7)";
+`exists_vertexStep`'s opens "each followed by `cleanKeep`". **No other statement changed**: `tools/fs131_ir_stmt_check.py a5a12a0b` over
+nine files (`Limit`, `Procedure`, `Terminal`, `Chain`, `Surgery`, `Moves`, `MergeMove`, `OpenMove`, `FlankUA`; 827 statements read):
+exactly one changed, `exists_arcStep` (exit 1, as it must be; `ir3/stmt-check-23.txt`); with `--allow exists_arcStep`: PASS
+(`ir3/stmt-check-23-allow.txt`).
+
+**A tool defect found** (another job's tool; not edited): `tools/fs131_il_stmt_check.py --self-test` exits 1 on this tree with its
+unplanted control passing — its first plant names a hypothesis `(hc : F.IsClean)` that `badCount_lt_top` does not have, so the
+replace is a no-op and the plant cannot fire (`DID NOT FIRE`). The checker's plain run is sound (it reported the ruled change); only
+its self-test is stale. **`tools/fs131_ir_stmt_check.py`** is this job's copy: the move modules added to the file list, the head
+pattern reading a declaration behind an attribute or `private`, six plants each raising if its target text is absent, `--allow` for
+a ruled change. Its `--self-test`: six plants FIRED, the unplanted control PASS, exit 0 (`ir3/stmt-check-selftest.txt`).
+
+### 23.2 The merge of `origin/fs131-w5s` (`facdf1c2`), commit `77acd5c5`
+
+One conflict, `scripts/Axioms.lean`, as the brief's trial merge said: both blocks kept (IR2's block, then FS131-IS1's seven records);
+`ARCHITECTURE.md` merged by itself. `tools/fs131_ir_merge_check.py ebb0b292 57b6d9c7 facdf1c2` (IR1's tool; base, ours, theirs; the
+merged side read from the index): **15,815 files, 0 failures, PASS** (`ir3/merge-check.txt`); its `--self-test` with these refs: five
+plants FIRED, the unplanted run PASS (`ir3/merge-check-selftest.txt`); the same check told a wrong "theirs" (`4f7115e3`, two commits
+back on that branch): 12 failures, FAIL (`ir3/merge-check-control.txt`). The merge is its own commit (a merge cannot be committed by
+path; the index held the merge and nothing else, and my three check files were untracked at the time).
+
+### 23.3 The build, the axioms print, the checks
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 7 modules rebuilt, 4 with warnings, all 10 warnings `declaration
+  uses 'sorry'`**: `Procedure` 5 (the four cases l. 1334, 1346, 1358, 1372; `exists_arcStep` l. 1442); **`Terminal` 0**; not mine:
+  `BaseDense` 3, `BendCollar` 1, `HexRing` 1. 9 min 22 s, exit 0 (`build/gate/build/20261006T050823Z-1209628.log`, which ends "Build
+  completed successfully (5792 jobs)"; driver log `data/fs131/ir/ir3/build-stage23.log`).
+- **Axioms** against that build (`data/fs131/ir/ir3/IR3Axioms23.lean` → `.out`, `slot.py --mem 12 --cpus 2 -- lake env lean`, exit 0;
+  `tools/fs131_ir_axsum.py` with `IR3Axioms23-expect.txt`; `IR3Axioms23-summary.txt`, PASS): **15 records — 4 on the standard three
+  (`stuckRun_ne_univ`, `shadow_recursion`, `horn_upper_ne_one`, `horn_lower_ne_neg_one`), 11 through `sorryAx`, exactly the eleven
+  expected, 0 other.** `exists_terminal` is on `sorryAx` through the five open leaves alone (the four cases and `exists_arcStep`:
+  the build names no other `sorry` under it). **Control**: the same output read with IR2's expectation, which lists
+  `stuckRun_ne_univ` among the `sorry` names, FAILS naming it (`SORRY-EXPECTED-BUT-STANDARD`, `IR3Axioms23-control.txt`).
+- **The map**: `tools/check_architecture.py` PASS (`ir3/arch-stage23.txt`).
+- No `axiom`, no `native_decide`. I ran no gate and did not touch `main`.
+
+## Stage 23 — SAVED (FS131-IR3)

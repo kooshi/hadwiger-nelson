@@ -1,0 +1,1 @@
+exists_mergeStep,exists_rayStep,exists_shaveStep,exists_openStep,exists_vertexStep,exists_arcStep,exists_procStep,exists_terminalSeq,exists_terminalMap,exists_red,exists_terminal
