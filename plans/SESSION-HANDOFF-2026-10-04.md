@@ -1,5 +1,7 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
+> **SUPERSEDED (2026-10-06) by `plans/SESSION-HANDOFF-2026-10-06.md` — read that one.** This file is kept for its list of jobs done before the restart.
+
 *Rewritten 2026-10-06 by Keryx after the restart (inventory items 407, 410). Current state only. A successor arriving with nothing
 reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–427 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
