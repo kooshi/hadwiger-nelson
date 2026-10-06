@@ -5853,6 +5853,10 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.exists_shaveStep_aux
 #print axioms HadwigerNelson.Plane.ArcMap.exists_shaveStep
 
+-- FS131-IR3, stage 26: MERGE's case
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_mergeStep_aux
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mergeStep
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

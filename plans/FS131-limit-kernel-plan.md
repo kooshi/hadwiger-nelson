@@ -1186,6 +1186,8 @@ current at each saved stage (the last stage's receipt is the one to read).
 - **Stage 25 — the assembly the cases share, SHAVE's case** (`Procedure`): `subset_connectedComponentIn_of_mem_closure` (namespace
   `HadwigerNelson.Plane`), `ArcMap.mem_cleanKeep_interiorPts_of_const`, **`ArcMap.surgery_step`**, `ArcMap.Near.move_step`,
   **`ArcMap.Near.exists_shaveStep_aux`**, **`ArcMap.exists_shaveStep`** (the second case; its statement as IR2 wrote it).
+- **Stage 26 — MERGE's case** (`Procedure`): **`ArcMap.Near.exists_mergeStep_aux`**, **`ArcMap.exists_mergeStep`** (the third
+  case; its statement as IR2 wrote it).
 
 ## Stage 22 — SAVED (FS131-IR3): the readback, the as-given build, IR2's axioms check re-run
 
@@ -1395,3 +1397,43 @@ for a point from which finitely many branches leave, with one concentric circle.
 - Working files: `data/fs131/ir/ir3/scratch/Shave.lean`, `scratch/transplant25.py`.
 
 ## Stage 25 — SAVED (FS131-IR3)
+
+## Stage 26 — SAVED (FS131-IR3): MERGE's case proved
+
+### 26.1 What was proved ([kernel]; `Procedure`, subsection "MERGE's case")
+
+**`Near.exists_mergeStep_aux`** and **`exists_mergeStep`**, as stated by IR2. The map is `MergeMove`'s surgery at radius `ρ` for
+the gap `Near.exists_gap` gives; the radius is `min (min (ρ'/2) (ρc/2)) (δ/2)` (§ 20.2 (a): `exists_merge_aux`'s body re-run with
+`δ/2`; no declaration added to `MergeMove`). Through `surgery_step`:
+- validity `merge_valid`, no colour gained `merge_coloursAt_self`, no unit arc `merge_ringArcsWithin`;
+- **the arcs**: a point of the surgery's `Γ` is on `F`'s `Γ` or on the rim arc (`mem_merge_interiorPts_of_mem`, read backwards),
+  so in the punctured ball the arcs lie on the chart's branches and the circle of radius `ρ/2` — the junctions are on that circle,
+  as § 20.2 located them, and the points of `sphere v ρ` need no separate argument (they are points of `B(v, ρ')` off that circle);
+- **the dead branch**: at a gap germ, its branch inside `ρ/2` is interior to the surgery (`mem_mergeArcs_inner`: the arcs kept
+  inside `ρ/2` are germs off the gap); at any other germ the sector after it is no gap sector, so its points on the circle are off
+  the rim arc (`gapSec_of_mem_rimArc`) and interior to the surgery;
+- **the count**: `pot_lt_of_interior` at the gap's first germ `idx s (a + 1) = next (idx s a)`.
+
+### 26.2 The route, where it differs from § 20.2's
+
+No colour function is read at the junctions (§ 20.2 proposed `mergeCol_of_mem_sector`, `mergeCol_of_mem_sector_out`): every dead
+branch is a set of points interior to the surgery itself. Neither "the gap holds no `c`-sector" (`exists_gap`'s fifth clause, dropped
+at the `obtain`), nor `a + 1 < b`, nor the absence of phantom germs is used — the three sub-cases § 20.2 removes by cleanness
+never needed separating.
+
+### 26.3 The build, the receipt, the checks
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 6 modules rebuilt, 4 with warnings, all 7 warnings `declaration
+  uses 'sorry'`**: `Procedure` 2 (`exists_openStep` l. 2511, `exists_arcStep` l. 2581); `Terminal` 0; not mine: `BaseDense` 3,
+  `BendCollar` 1, `HexRing` 1. 9 min 11 s, exit 0 (`build/gate/build/20261006T055146Z-1390179.log`, which ends "Build completed
+  successfully (5792 jobs)"; driver log `data/fs131/ir/ir3/build-stage26.log`).
+- **Axioms** against that build (`data/fs131/ir/ir3/IR3Axioms26.lean` → `.out`, exit 0; `IR3Axioms26-summary.txt`, PASS): **34
+  records — 26 on the standard three or fewer, 8 through `sorryAx`, exactly the eight expected, 0 other.** **`exists_mergeStep`
+  depends on `[propext, Classical.choice, Quot.sound]`.** **Control**: read with Stage 25's expectation (which lists
+  `exists_mergeStep`), the summarizer FAILS naming it (`IR3Axioms26-control.txt`).
+- **Statements**: `tools/fs131_ir_stmt_check.py a6642d49` (against Stage 25): PASS, 853 read, additions only
+  (`ir3/stmt-check-26.txt`). No `axiom`, no `native_decide`. `tools/check_architecture.py` PASS (`ir3/arch-stage26.txt`).
+- **Receipt**: two records more in the "FS131-IR3" block of `scripts/Axioms.lean` (25 in all).
+- Working files: `data/fs131/ir/ir3/scratch/Merge.lean`, `scratch/transplant26.py` (run with `merge`).
+
+## Stage 26 — SAVED (FS131-IR3)
