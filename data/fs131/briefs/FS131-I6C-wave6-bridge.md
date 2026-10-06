@@ -88,7 +88,7 @@ No statement changes in this job. Your leaves, as they stand in your tree (read 
 The plan (the planners' record, `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/plans/FS131-w6-kernel-plan.md`: read Stages 9–12 whole —
 § 11.3 reads each statement against the deriver's entry, § 11.4 is the plan and the price per leaf, § 11.5 the planner's findings) and the
 argument it formalizes (the deriver's record on `main`, `/home/kooshi/source/lean-dir/plans/FS131-E8-derivation.md`, Stage 3: read §§ 3.1–3.7
-whole — it may gain a Stage 6 while you work, a check of the planner's statements):
+whole, with the dated erratum under its § 3.1; its Stage 6 is the deriver's check of the planner's statements, read-backs included):
 
 > ## Stage 11 — SAVED: the bridge's eight rows — the curve notion, the skeleton, the plan and the price (`debruijn-obligation-modeling`, invoked fresh)
 > — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/plans/FS131-w6-kernel-plan.md
