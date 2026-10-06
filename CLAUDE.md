@@ -452,6 +452,14 @@ declared outside theorem (`LEAN.md` § Trust ledger). The library declares one o
 bound for Kloosterman sums, `[Weil1948]` p. 207, read against its page by two readers — and the eight imported records are the theorems
 that rest on it; its first import, `[Falconer1981]` Lemma 2 (i), is a theorem since FS131-IF1. Rung B holds none.
 
+**What the library assumes, in both forms** (`scripts/assumptions.sh`, whose digest reads these counts and fails if
+they are absent): `axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — one outside theorem declared as
+an axiom, with eight theorems resting on it; thirty-five hypotheses, nineteen named and sixteen written out in a
+binder — seven standing for outside theorems, twenty-three for hand results of ours and five for open questions — taken in
+98 (hypothesis, statement) pairs by 51 statements (`scripts/assumptions-ledger.txt` lists each pair; FS131-LT5,
+2026-10-06). Weil's bound is counted in each form it takes — the axiom, the named hypothesis `KloostermanBound`, and that
+hypothesis written out at a family of fields: one outside theorem, three entries.
+
 What the audit accepts and what it buys — the ledger's entries, `native_decide`'s per-declaration axioms, an imported theorem's four
 items, `lean4checker` as the publication gate — is `LEAN.md` § Trust ledger.
 
