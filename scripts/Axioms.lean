@@ -4891,6 +4891,15 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.GapSeven.exists_adjacent_gapped
 #print axioms HadwigerNelson.GapSeven.card_edges
 
+/-! ## FS-131 wave 10 (job FS131-I10F) — the second pass's three measure-theoretic files: the majority vote, the product's factor, the `NegCircle` model -/
+-- FS131-I10F (sorry-free declarations only)
+#print axioms HadwigerNelson.MajorityVote.eq_of_lt_two_mul_card_filter
+#print axioms HadwigerNelson.MajorityVote.lt_two_mul_card_filter_of_bad
+#print axioms HadwigerNelson.MajorityVote.measure_half_le_sum_indicator_le
+#print axioms HadwigerNelson.MajorityVote.measurableSet_lt_two_mul_card_filter
+#print axioms HadwigerNelson.MajorityVote.exists_measurable_selector
+#print axioms HadwigerNelson.MajorityVote.ae_eq_measurable_of_majority
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

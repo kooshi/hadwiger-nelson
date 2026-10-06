@@ -1,0 +1,12 @@
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10f/data/fs131/i10f/AxiomsScratch.lean:4:8: warning: declaration uses `sorry`
+'HadwigerNelson.MajorityVote.eq_of_lt_two_mul_card_filter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.MajorityVote.lt_two_mul_card_filter_of_bad' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.MajorityVote.measure_half_le_sum_indicator_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.MajorityVote.measurableSet_lt_two_mul_card_filter' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.MajorityVote.exists_measurable_selector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.MajorityVote.ae_eq_measurable_of_majority' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131I10F.control' depends on axioms: [sorryAx]

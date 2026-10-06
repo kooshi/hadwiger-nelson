@@ -1,0 +1,15 @@
+same      Proofs/HadwigerNelson/Arith/ProductFactor.lean :: preimage_mem_factorSets
+same      Proofs/HadwigerNelson/Arith/ProductFactor.lean :: comap_factorSigma_le
+same      Proofs/HadwigerNelson/Arith/ProductFactor.lean :: prodMap₃
+same      Proofs/HadwigerNelson/Arith/ProductFactor.lean :: measurePreserving_prodMap₃
+same      Proofs/HadwigerNelson/Arith/ProductFactor.lean :: prodFactorSigma
+same      Proofs/HadwigerNelson/Arith/ProductFactor.lean :: contVec_prod_eq
+CHANGED   Proofs/HadwigerNelson/Arith/MajorityVote.lean :: ae_eq_measurable_of_majority
+new       Proofs/HadwigerNelson/Arith/MajorityVote.lean :: eq_of_lt_two_mul_card_filter
+new       Proofs/HadwigerNelson/Arith/MajorityVote.lean :: lt_two_mul_card_filter_of_bad
+new       Proofs/HadwigerNelson/Arith/MajorityVote.lean :: measure_half_le_sum_indicator_le
+new       Proofs/HadwigerNelson/Arith/MajorityVote.lean :: measurableSet_lt_two_mul_card_filter
+new       Proofs/HadwigerNelson/Arith/MajorityVote.lean :: exists_measurable_selector
+same      Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: exists_parityHom
+same      Proofs/HadwigerNelson/Arith/NegCircleModel.lean :: negCircle_trivial_bot
+compared 9 base statements (4 of 4 leaves among them); differences: 1

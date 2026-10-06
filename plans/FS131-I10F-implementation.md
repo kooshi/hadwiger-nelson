@@ -18,7 +18,18 @@ beyond new declarations; `main`. No new `axiom`, no `native_decide`. I do not me
 ## Theorems this phase proved
 
 *(filled at each saved stage; every line is [kernel on this branch] by the build its stage names — the branch does not run the gate, so
-the axiom audit is the landing's; the axioms printed here are from `lake env lean` on a scratch file importing the built module.)*
+the axiom audit is the landing's; the axioms printed here are from `tools/fs131_i10f_axioms.py`, `lake env lean` on a scratch file
+importing the built modules, with a planted `sorry` that must print `sorryAx`.)*
+
+- **`MajorityVote.ae_eq_measurable_of_majority`** — FS131-E8-SI5C, majority decoding: a `K`-valued `G` that every `c x` equals unless an
+  event `E x` of probability at most `p < 1/2` occurs, the `E x` pairwise independent over an infinite index set, is almost surely equal
+  to a function measurable for the σ-algebra the `c x` generate. [kernel on this branch]
+  `Proofs/HadwigerNelson/Arith/MajorityVote.lean`; axioms `[propext, Classical.choice, Quot.sound]`. Read against
+  `plans/FS131-E8-derivation.md` § 5.1, entry FS131-E8-SI5C (Stage 2 below).
+  - its children, same file, same axioms: `measure_half_le_sum_indicator_le` (the weak law written out: at least half of the first `n`
+    events occur with probability at most `1/(4(1/2 − p)²)/n`), `lt_two_mul_card_filter_of_bad`, `eq_of_lt_two_mul_card_filter` (the
+    strict majority exists off the bad set, and is unique), `measurableSet_lt_two_mul_card_filter`, `exists_measurable_selector`
+    (countably many measurable sets, no point in two, are the fibres of a measurable map).
 
 ## Stage 1 — SAVED (FS131-I10F): the readback, the branch as given
 
@@ -60,3 +71,51 @@ continuity factor: `contVec`, `factorSets`, `factorSigma`, `mem_factorSets_iff`,
   `(a + bi)/c ↦ a + b mod 2` is a ring homomorphism and sends unit vectors to `1`. True.
 - **`negCircle_trivial_bot`.** The point mass at `χ₀ = ψ ∘ π` (`ψ` the non-trivial character of `ZMod 2`): rotation-invariant because
   `π (u·r) = π r`; `S = univ`, `E = ∅`; `∫ Re χ(1) = Re ψ(1) = −1`. True.
+
+## Stage 2 — SAVED (FS131-I10F): `ae_eq_measurable_of_majority` proved
+
+**The statement, unchanged** (`tools/fs131_i10f_stmt.py`: nine base statements of the three files compared with `330d2f48`, 0
+differences, `data/fs131/i10f/logs/stmt-leaf1.txt`; its planted fault — `p < 1/2` made `p ≤ 1/2` inside the leaf's statement — exits 1
+naming the leaf, `logs/stmt-fault.txt`. **The fault's first version did not fire**: it replaced the first occurrence of the hypothesis
+text, which is in a helper stated earlier in the file, a new declaration the check does not compare; the fault now lands inside the
+leaf's own statement.)
+
+**Read aloud against the entry** (FS131-E8-SI5C, `plans/FS131-E8-derivation.md:711–729`): "let I be a countably infinite set, G a random
+variable with values in a finite set, c = (c(x)) for x in I random variables with values in the same finite set, and ε = (ε(x)) for x in
+I indicator variables, pairwise independent, each of probability p < 1/2, such that almost surely c(x) ≠ G implies ε(x) = 1 for every x
+in I; then G is almost surely equal to a function of c, measurable for the σ-algebra c generates". Lean: for an infinite `I`, a finite
+`K` with measurable singletons, measurable `G : Ω → K` and `c x : Ω → K`, measurable events `E x` with `μ.real (E x) ≤ p < 1/2` and
+`μ (E x ∩ E y) = μ (E x) μ (E y)` for `x ≠ y`, and for each `x` almost surely `c x ω ≠ G ω → ω ∈ E x`: there is `g`, measurable for
+`⨆ x, comap (c x)`, with `G =ᵐ[μ] g`. It says the entry at the planner's wider class (any infinite `I`; probabilities at most `p`; "almost
+surely" one `x` at a time). The model: the spec example (no error event), and the entry's own (`I = ℕ`, i.i.d. errors of probability
+`1/3`), not built — an infinite product measure.
+
+**The route**, the plan's M1–M4 with one change: **Borel–Cantelli in place of `TendstoInMeasure.exists_seq_tendsto_ae`** (and in place of
+the entry's closed subspace of `L²`). M1 `Infinite.natEmbedding`. M2 `measure_half_le_sum_indicator_le`: pairwise independent sets give
+pairwise independent indicators (`indepSet_iff_measure_inter_eq_mul`, `indep_of_indep_of_le_left/right`), `IndepFun.variance_sum`,
+`variance_le_sq_of_bounded` (each variance at most `1/4`), `meas_ge_le_variance_div_sq`. M3 `measurableSet_lt_two_mul_card_filter`. M4:
+positive `δ j` with `∑ δ j < 1` (`ENNReal.exists_pos_sum_of_countable`), `n j` with `μ (Bad (n j)) < δ j`, `ae_eventually_notMem`; off
+the bad set `G` is the strict majority (`lt_two_mul_card_filter_of_bad`), a strict majority is unique
+(`eq_of_lt_two_mul_card_filter`), and `exists_measurable_selector` turns "the eventual strict majority along `n j`" into a measurable
+map. One elaboration error on the way, a mechanism worth its line: `set m : MeasurableSpace Ω := ⨆ …` inside the proof makes `m` a local
+instance, and every later `MeasurableSet (E i)` then elaborates against `m` ("synthesized `m`, inferred `inst`"); the two measurability
+children are stated for one σ-algebra `{m : MeasurableSpace Ω}` and applied at `(m := ⨆ y, comap (c y) _)`.
+
+**A finding — the argument reads less than the statement carries (a generalization, not a defect).** The proof reads neither
+`hG : Measurable G` nor `hc : ∀ x, Measurable (c x)`, and of `[Finite K]` only that `K` is countable: the linter reported both
+hypotheses unused on the first clean elaboration, and they are referenced by `have _hG := hG`, `have _hc := hc` with a comment (the
+statement is not mine to change). Why it is true: `∀ᵐ` and `=ᵐ` need no measurability, the σ-algebra `⨆ x, comap (c x)` is defined for
+any maps, and a strict majority is unique in any type. The consumer (J45-SI-5 (c), where `G = γ_Φ(ρ)` and `c` are measurable) reads
+nothing of it. **For the join**: drop `hG`, `hc`, weaken `[Finite K]` to `[Countable K]` (the pattern of ruling 494 (a)), or keep the
+row's words; the spec example and any caller pass fewer arguments.
+
+**Evidence.** Build: `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, exit 0, 454 of 454 batches, 2
+modules rebuilt (`Arith.MajorityVote`, `Proofs`), 22 `sorry` warnings (23 as given), no other warning
+(`data/fs131/i10f/logs/build-1-majority.log`). Axioms: `tools/fs131_i10f_axioms.py`, six declarations, each
+`[propext, Classical.choice, Quot.sound]`, the control `FS131I10F.control` prints `sorryAx` (`logs/axioms-leaf1.txt`); `--fault`
+(the control listed among the checked) exits 1 naming it (`logs/axioms-fault.txt`). `scripts/Axioms.lean`: block "FS131-I10F", six
+lines, above the `=== PURCHASED ===` banner.
+
+**Re-price (first leaf).** The plan: 150 lines. Mine: 204 lines added to the file, docstrings and the module note included (about 150
+of proof), in three elaboration rounds. At the plan's price, not under it. `contVec_prod_eq` is re-priced at Stage 3 from its first
+child.
