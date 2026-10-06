@@ -4,6 +4,7 @@ P="Proofs/HadwigerNelson/Plane/"
 CO=P+"ValidMap/Contact.lean"; OM=P+"ValidMap/OpenMove.lean"; UA=P+"ValidMap/UnitArc.lean"; MG=P+"Woodall/Merge.lean"
 SV=P+"SVMap.lean"; BS=P+"ValidMap/BaseSteps.lean"; SE=P+"ValidMap/Sectors.lean"
 QA="plans/FS131-QA4-audit.md"
+E7="plans/FS131-E7-derivation.md"
 H62="6.2 The list of what is owed, ranked by what rests on the theorem"
 PIDENT="de Bruijn, the planner — your agent file (`.claude/agents/debruijn.md`) is your identity and your lane's workflow"
 b=f'''# Brief FS131-KM1 — the example maps planned: Lean objects on which the four moves' hypotheses, the stuck vertex's and the two bends' hold at once
@@ -22,7 +23,7 @@ brief: FS131-KM1
   channel: message the coordinator ("main") by SendMessage mid-job for a hypothesis set that turns out to have no model (a statement finding: at once), a piece of the library that is private where you need it, or a question you cannot work around; the report goes to `data/fs131/reports/FS131-KM1.md` on your branch, and its text is your final message (if the harness refuses that file, say so and the coordinator files it from your hand-back)
   standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full, and `RUNNING.md` § Building before your first build
   record: `plans/FS131-models-kernel-plan.md` (new, on branch `fs131-wm`)
-  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wm` (branch `fs131-wm`, cut from `main` at `68a3db1d`): new modules under `Proofs/HadwigerNelson/Plane/` for the models, downstream of everything they are models of, with `Proofs.lean` and `ARCHITECTURE.md` for them; `scripts/Axioms.lean` (a block of your own, headed "FS131-KM1", above the `=== PURCHASED ===` banner); `plans/FS131-models-kernel-plan.md`, `tools/fs131_km_*.py`, `data/fs131/km/`, `data/fs131/reports/FS131-KM1.md`; **new declarations only** — no statement, definition or docstring of a landed declaration is edited in this job (the docstring lines that will name your models are drafted in your record, with their slots, for the implementer who lands the lane); not `main`, not wave 5's branches
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wm` (branch `fs131-wm`, cut from `main` at `68a3db1d`; `main` has moved since only under `plans/` and `data/`, which you read at their paths in the main tree): new modules under `Proofs/HadwigerNelson/Plane/` for the models, downstream of everything they are models of, with `Proofs.lean` and `ARCHITECTURE.md` for them; `scripts/Axioms.lean` (a block of your own, headed "FS131-KM1", above the `=== PURCHASED ===` banner); `plans/FS131-models-kernel-plan.md`, `tools/fs131_km_*.py`, `data/fs131/km/`, `data/fs131/reports/FS131-KM1.md`; **new declarations only** — no statement, definition or docstring of a landed declaration is edited in this job (the docstring lines that will name your models are drafted in your record, with their slots, for the implementer who lands the lane); not `main`, not wave 5's branches
   budget: {BUDGET}
 
 Hello. You are planning the Lean objects that show this milestone's central theorems are about something. The milestone, FS-131, turns this project's
@@ -49,6 +50,16 @@ The audit's rows you are planning to (read its §§ 3.1–3.5 and 6 whole: the h
 {item(426)}
 {item(427)}
 {item(419)}
+Since the audit, a deriver (FS131-E7) has answered its two open ranks, and its answer changes your construction: it exhibits by hand a model for
+each of four more hypothesis sets and a stuck vertex in a terminal map of the plane, and it finds they are **one construction** — the seven-colour
+brick map relabelled into more colours, with small pictures planted by `recolour` — plus one new fragment, a four-petal flower (read its §§ 3, 4, 6
+and 7 whole; each ends in a handoff for the implementer):
+
+{item(440)}
+{item(441)}
+{Q(E7,"### 3.7 Handoff: what an implementer needs")}
+{Q(E7,"### 6.5 Handoff")}
+{Q(E7,"### 7.6 Handoff, and the bearing line for the stub")}
 ## The statements
 
 No landed statement changes in this job. The theorems your objects are models of, each on `main` and on your branch (read each whole, with its
@@ -93,8 +104,12 @@ Read both; plan your objects so that each is a short application once wave 5 has
    the four moves (two wedges; two horns on a ray; one horn; one lone horn with a tangent disc, so that OPEN's cone clause is exercised); a positive
    inhabitant of `HasHornCount v 1` (and, for after wave 5, of `IsSite`, which is defined on `fs131-w5c` in
    `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c/Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean`); a valid map covering `B̄(v, 1)` with `IsStuck v`; a ring arc whose inner colour is absent at its
-   centre for `bend_away_whole`, and `bend_toward`'s model; and the objects the two wave-5 theorems will apply to. Say which clause of each hypothesis
-   set your object exercises non-trivially and which it meets only degenerately.
+   centre for `bend_away_whole`, and `bend_toward`'s model; the objects the two wave-5 theorems will apply to; and **E7's four**: the flower `F₀`
+   for `a4six`, its recolouring `F₁` for `straddlers_third` and for `nb4p`'s background, `P₄` for `flank_ne_of_doublyShadowed`, and `P₅` — which is
+   `Valid ∧ Covers v 1 ∧ IsStuck v` at a fraction of the completed bowtie's size, and a terminal map of the plane besides — in place of the completed
+   bowtie unless you find a reason to keep both (ruling 441 (c)). Say which clause of each hypothesis set your object exercises non-trivially and
+   which it meets only degenerately. E7's verdicts are one mind's, at hand grade, with numerical controls and nothing kernel-checked: your skeleton
+   is their first independent reading, and a clause that fails on one of its objects is a message to me.
 4. **Your record**, `plans/FS131-models-kernel-plan.md`: a plan per leaf (route, the Mathlib and library lemmas confirmed with `#check`, what is hard,
    a price), the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), the docstring line each model earns on the theorem it serves
    (text and slot, for the implementer), and a handoff — with how two implementers could split the work by file, and which model to build first if only
@@ -107,9 +122,9 @@ Read both; plan your objects so that each is a short application once wave 5 has
 The construction, the modules and their names, the form of each model theorem, the number of colours, and the order. The audit's two constructions are
 one mind's proposal, priced from three measured models and not measured; if a different object is cheaper or exercises more clauses — E6's twelve-colour
 map as written (`plans/FS131-E6-derivation.md` §§ 3.1–3.3), a map built from `sixFrag`, a general "overlay" lemma — take it and say why. If a hypothesis
-set resists every model you try, stop on it and message me: that is the finding this rule exists to catch. A deriver, FS131-E7, is working on four more
-hypothesis sets for which the audit has no hand model (`data/fs131/claims-E7.md`); if it exhibits one, I will send it to you as a dated amendment to
-this brief. Three failed attempts on one route is a dispatch to the companion your identity names, never a fourth. {NOSPAWN}
+set resists every model you try, stop on it and message me: that is the finding this rule exists to catch. The list is long for one plan: order it
+by what rests on each theorem (the four moves first, then the stuck vertex, then E7's four, then the bends), and say where a second planning pass
+should take over if one does not hold it all. Three failed attempts on one route is a dispatch to the companion your identity names, never a fourth. {NOSPAWN}
 
 {MACHINE}'''
 open(ROOT+"data/fs131/briefs/FS131-KM1-models.md","w").write(b)
