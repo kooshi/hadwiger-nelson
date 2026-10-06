@@ -31,7 +31,6 @@ T={
    special="The wave's table row names its hypothesis from outside the backlog: row 130's conclusion, `χ(ℝ²) = χ_m⁰(ℝ²)`, for the two rows that end \"hence χ(ℝ²) ≥ 6\" given measure rigidity. It enters as a named hypothesis (`Row130Collapse`, as the plan's § 7.4 has it), never an axiom; Kooshi has ruled that measure rigidity itself is not formalized or priced now (inventory item 488), so do not open it. Every \"given MR\" in a row is read for what it hides beyond that one hypothesis."),
 }[N]
 TREE="fs131-w"+N; JOB="FS131-K"+N
-CUT=("cut from `main` at `e6e7b312` and fast-forwarded to `"+TIP+"`, wave 7's commit that adds the shared module `SimpleOn`") if N in ("8","9") else ("cut from `main` at `"+TIP+"`")
 BUILDX="; the build copied into your tree predates the shared module `SimpleOn`, so this first build compiles it" if N in ("8","9") else ""
 if N in ("8","9"):
     assert SHASH, "give the hash of fs131-w7's SimpleOn commit: mk-kw.py "+N+" <hash>"
@@ -53,6 +52,7 @@ else:
     NOMERGE="You do not merge another branch into this one, run the gate, or touch `main`."
 W=WT+TREE+"/"
 TIP=subprocess.run(["git","-C",W,"rev-parse","--short","HEAD"],capture_output=True,text=True).stdout.strip()
+CUT=("cut from `main` at `e6e7b312` and fast-forwarded to `"+TIP+"`, wave 7's commit that adds the shared module `SimpleOn`") if N in ("8","9") else ("cut from `main` at `"+TIP+"`")
 MODS="\n".join(Q(KP,p) for p in T["mods"])+"\n"
 b=f'''# Brief {JOB} — wave {N} planned: {T["title"]}
 
