@@ -1,0 +1,8 @@
+exit 1
+- T4Exp.S5.TopAB
+Some required targets logged failures:
+error: Lean exited with code 1
+error: T4Exp/S5/TopAB.lean:1:0: import T4Exp.S5.B failed, environment already contains 'T4.S5.dup' from T4Exp.S5.A
+error: build failed
+trace: .> LEAN_PATH=.lake/build/lib/lean /home/kooshi/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean T4Exp/S5/TopAB.lean -o .lake/build/lib/lean/T4Exp/S5/TopAB.olean -i .lake/build/lib/lean/T4Exp/S5/TopAB.ilean -c .lake/build/ir/T4Exp/S5/TopAB.c --setup .lake/build/ir/T4Exp/S5/TopAB.setup.json --json
+✖ Building T4Exp.S5.TopAB

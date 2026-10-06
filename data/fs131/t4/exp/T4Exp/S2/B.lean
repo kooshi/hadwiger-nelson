@@ -1,0 +1,7 @@
+import T4Exp.Base
+/-! FS131-T4 scenario S2: (ii) A is `sorry`, B clean. Written by `tools/fs131_t4_experiment.py`. -/
+namespace T4.S2
+open T4
+theorem markB : 2 + 2 = 4 := rfl
+theorem dup : 2 + 2 = 4 := markB
+end T4.S2

@@ -1,0 +1,8 @@
+exit 0
+PROBE T4.fn.eq_1 DECLARED-BY T4Exp.S12.B kind=theorem uses=[Nat, instOfNatNat, Eq.refl, OfNat.ofNat, T4.fn]
+PROBE T4.fn.eq_1 DECLARED-BY T4Exp.S12.A kind=theorem uses=[Nat, instOfNatNat, Eq.refl, OfNat.ofNat, T4.fn]
+PROBE T4.fn.eq_1 ENV-HOLDS kind=theorem uses=[Nat, instOfNatNat, Eq.refl, OfNat.ofNat, T4.fn] copy-of=[T4Exp.S12.B, T4Exp.S12.A]
+PROBE T4.fn.eq_1 ATTRIBUTED-TO T4Exp.S12.B
+PROBE T4.fn.eq_1 AXIOMS-PRINTED []
+PROBE T4.fn.eq_1 AXIOMS-OF-HELD-VALUE []
+'T4.S12.useB' does not depend on any axioms

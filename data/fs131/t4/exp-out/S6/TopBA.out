@@ -1,0 +1,8 @@
+exit 0
+PROBE T4.S6.dup DECLARED-BY T4Exp.S6.B kind=axiom uses=[]
+PROBE T4.S6.dup DECLARED-BY T4Exp.S6.A kind=axiom uses=[]
+PROBE T4.S6.dup ENV-HOLDS kind=axiom uses=[] copy-of=[T4Exp.S6.B, T4Exp.S6.A]
+PROBE T4.S6.dup ATTRIBUTED-TO T4Exp.S6.B
+PROBE T4.S6.dup AXIOMS-PRINTED [T4.S6.dup]
+PROBE T4.S6.dup AXIOMS-OF-HELD-VALUE [T4.S6.dup]
+'T4.S6.down' depends on axioms: [T4.S6.dup]

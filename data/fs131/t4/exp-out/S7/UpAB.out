@@ -1,0 +1,8 @@
+exit 1
+T4Exp/S7/UpAB.lean:7:8: error: `T4.S7.dup` has already been declared
+PROBE T4.S7.dup DECLARED-BY T4Exp.S7.A kind=theorem uses=[Eq, Nat, instAddNat, instDecidableEqNat, instHAdd, instOfNatNat, of_decide_eq_true, HAdd.hAdd, OfNat.ofNat, T4.S7.dup._native.native_decide.ax_1_1]
+PROBE T4.S7.dup ENV-HOLDS kind=theorem uses=[Eq, Nat, instAddNat, instDecidableEqNat, instHAdd, instOfNatNat, of_decide_eq_true, HAdd.hAdd, OfNat.ofNat, T4.S7.dup._native.native_decide.ax_1_1] copy-of=[T4Exp.S7.A]
+PROBE T4.S7.dup ATTRIBUTED-TO T4Exp.S7.A
+PROBE T4.S7.dup AXIOMS-PRINTED [T4.S7.dup._native.native_decide.ax_1_1]
+PROBE T4.S7.dup AXIOMS-OF-HELD-VALUE [T4.S7.dup._native.native_decide.ax_1_1]
+LOCALS [T4.S7.markB]

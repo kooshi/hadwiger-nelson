@@ -1,0 +1,2 @@
+exit 1
+T4Exp/S5/UseA_B.lean:1:0: error: import T4Exp.S5.B failed, environment already contains 'T4.S5.dup' from T4Exp.S5.A

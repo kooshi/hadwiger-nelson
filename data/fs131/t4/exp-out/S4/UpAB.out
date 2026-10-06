@@ -1,0 +1,8 @@
+exit 1
+T4Exp/S4/UpAB.lean:7:8: error: `T4.S4.dup` has already been declared
+PROBE T4.S4.dup DECLARED-BY T4Exp.S4.A kind=axiom uses=[]
+PROBE T4.S4.dup ENV-HOLDS kind=axiom uses=[] copy-of=[T4Exp.S4.A]
+PROBE T4.S4.dup ATTRIBUTED-TO T4Exp.S4.A
+PROBE T4.S4.dup AXIOMS-PRINTED [T4.S4.dup]
+PROBE T4.S4.dup AXIOMS-OF-HELD-VALUE [T4.S4.dup]
+LOCALS [T4.S4.markB]

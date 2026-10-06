@@ -1,0 +1,8 @@
+exit 0
+PROBE T4.S2.dup DECLARED-BY T4Exp.S2.B kind=theorem uses=[T4.S2.markB]
+PROBE T4.S2.dup DECLARED-BY T4Exp.S2.A kind=theorem uses=[Eq, Nat, instAddNat, instHAdd, instOfNatNat, sorryAx, Bool.false, HAdd.hAdd, Lean.Name, OfNat.ofNat, Lean.Name.anonymous, Lean.Name.num, Lean.Name.str]
+PROBE T4.S2.dup ENV-HOLDS kind=theorem uses=[Eq, Nat, instAddNat, instHAdd, instOfNatNat, sorryAx, Bool.false, HAdd.hAdd, Lean.Name, OfNat.ofNat, Lean.Name.anonymous, Lean.Name.num, Lean.Name.str] copy-of=[T4Exp.S2.A]
+PROBE T4.S2.dup ATTRIBUTED-TO T4Exp.S2.B
+PROBE T4.S2.dup AXIOMS-PRINTED []
+PROBE T4.S2.dup AXIOMS-OF-HELD-VALUE [sorryAx]
+'T4.S2.useA' depends on axioms: [sorryAx]

@@ -1,0 +1,55 @@
+exit 0
+Build completed successfully (51 jobs).
+warning: T4Exp/S10/UseA.lean:5:0: Definition `T4.S10.useA` of class type must be marked with `@[reducible]` or `@[implicit_reducible]`
+warning: T4Exp/S10/UseB.lean:5:0: Definition `T4.S10.useB` of class type must be marked with `@[reducible]` or `@[implicit_reducible]`
+warning: T4Exp/S2/A.lean:5:8: declaration uses `sorry`
+⚠ Built T4Exp.S10.UseA
+⚠ Built T4Exp.S10.UseB
+⚠ Built T4Exp.S2.A
+✔ Built T4Exp.Base
+✔ Built T4Exp.Probe
+✔ Built T4Exp.S1.A
+✔ Built T4Exp.S1.B
+✔ Built T4Exp.S1.UseA
+✔ Built T4Exp.S1.UseB
+✔ Built T4Exp.S10.A
+✔ Built T4Exp.S10.B
+✔ Built T4Exp.S11.A
+✔ Built T4Exp.S11.B
+✔ Built T4Exp.S11.UseA
+✔ Built T4Exp.S11.UseB
+✔ Built T4Exp.S12.A
+✔ Built T4Exp.S12.B
+✔ Built T4Exp.S12.UseA
+✔ Built T4Exp.S12.UseB
+✔ Built T4Exp.S2.B
+✔ Built T4Exp.S2.UseA
+✔ Built T4Exp.S2.UseB
+✔ Built T4Exp.S3.A
+✔ Built T4Exp.S3.B
+✔ Built T4Exp.S3.UseA
+✔ Built T4Exp.S3.UseB
+✔ Built T4Exp.S4.A
+✔ Built T4Exp.S4.B
+✔ Built T4Exp.S4.UseA
+✔ Built T4Exp.S4.UseB
+✔ Built T4Exp.S5.A
+✔ Built T4Exp.S5.B
+✔ Built T4Exp.S5.UseA
+✔ Built T4Exp.S5.UseB
+✔ Built T4Exp.S6.A
+✔ Built T4Exp.S6.B
+✔ Built T4Exp.S6.UseA
+✔ Built T4Exp.S6.UseB
+✔ Built T4Exp.S7.A
+✔ Built T4Exp.S7.B
+✔ Built T4Exp.S7.UseA
+✔ Built T4Exp.S7.UseB
+✔ Built T4Exp.S8.A
+✔ Built T4Exp.S8.B
+✔ Built T4Exp.S8.UseA
+✔ Built T4Exp.S8.UseB
+✔ Built T4Exp.S9.A
+✔ Built T4Exp.S9.B
+✔ Built T4Exp.S9.UseA
+✔ Built T4Exp.S9.UseB
