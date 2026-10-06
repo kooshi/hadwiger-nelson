@@ -522,3 +522,99 @@ isometry, so `G′` is valid, covers `B̄(v, 1)` and has the colours of `G` at `
 become clockwise, so `G.IsChangePoint v ψ X X'` gives `G′.IsChangePoint v (−ψ) X' X`. The orbit point `y′_j = ringPt v (−ψ + 60°j)` of `G′`
 is the mirror image of `y_{−j} = y_{6 − j}`, so `G′`'s `hring` is `G`'s, and "`y′_j` is on no arc of `Γ′` on `ω(y′_{j+1})`" is
 "`y_{6−j}` is on no arc of `Γ` on `ω(y_{6−j−1})`": `G′`'s first half of `hnb` is `G`'s second half. Apply nb4p-half-hnb to `G′`.
+
+## Stage 6 — SAVED (FS131-E7): Q4 — `flank_ne_of_doublyShadowed`'s hypotheses hold at once: a doubly shadowed band under Condition 5
+
+derivation: q4-doubly-shadowed-model
+  statement: the hypotheses `hF`, `h5`, `hv`, `h1`, `h12`, `h2`, `hg`, `hh` and `hD` of `flank_ne_of_doublyShadowed` hold at once for `k = 9`, `F` the map `P₄` of § 6.1, `v = 2/5 + (3/10) i`, `α = 0`, `κ₁ = −1/2`, `κ₂ = 1/2`, `g = 7`, `h = 8`
+  uses only: `sevenBrickMap` valid, of the plane and with Condition 5, and `v`, `v ± i` interior to bricks; that the points at distance 1 from a circle of radius `R` lie on the concentric circles of radii `R ± 1` (a triangle inequality about the common centre for validity; two circles of radii 1 and 6 with centres between 5 and 7 apart meet, for the shadow); `recolour_valid`
+  not claimed: a horn of a third colour between the flanks (the statement has no `IsHorn`; § 6.4 gives the variant); a stuck vertex (the reader at `Contact.lean` l. 2395 assumes one, and under Condition 5 that set is declared refuted); any model at six or seven colours — two fresh colours are the mechanism
+  argument: § 6.2 Validity, and why the sources sit at the far poles
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `P₄` itself — § 6.1; every clause is exercised: both flanks are live, both shadows come from live regions, the band is non-empty, no arc has radius 1, and `g ≠ h` as the theorem concludes
+  prior art: owed — not searched; the shadow calculus is this project's (FS110-N4-SHADOW, `curvDown`/`curvUp`)
+  handoff: de Bruijn — two `recolour`s on `sevenBrickMap` relabelled into `Fin 9` (§ 6.5) and the docstring line
+
+control: band-shadow
+  of: q4-doubly-shadowed-model — the flank against its own colour's source, and the band's two witnesses by closed formula
+  run: python3 ../data/fs131/e7/e7_plant.py q4
+  expect: q4: flank-source pairs closer than 1: 0 of 4000000; concentric chain |z-4i|<4<5<|p-4i|: True; band points with a g-source and an h-source at distance exactly 1: 40000 of 40000
+  fault: python3 ../data/fs131/e7/e7_plant.py q4 --plant-curv
+
+control: band-placement
+  of: q4-doubly-shadowed-model — the band must lie below the unit parallel of the g-source: moved above it, the g-witnesses vanish
+  run: python3 ../data/fs131/e7/e7_plant.py q4 | sed 's/.*exactly 1: //'
+  expect: 40000 of 40000
+  fault: python3 ../data/fs131/e7/e7_plant.py q4 --plant-band | sed 's/.*exactly 1: //'
+
+### 6.1 The object: `P₄ : ArcMap 9`, two colours planted in three bricks
+
+Base: `sevenBrickMap` with its colours read in `Fin 9` (bricks of width `4/5`, height `3/5`, row `r` shifted by `2r/5`; valid, of the
+plane, Condition 5: `sevenBrickMap_valid`, `sevenBrickMap_isPlaneMap`, `sevenBrickMap_condition5`). Put `v = 2/5 + (3/10) i`,
+`N = v + i`, `S′ = v − i`: the centre of the brick `[0, 4/5] × [0, 3/5]`, and points of the bricks `[0, 4/5] × [6/5, 9/5]` (row 2) and
+`[0, 4/5] × [−6/5, −3/5]` (row −2), each `1/10` from its brick's nearest edge. With `hornSet p α κ κ′ r` as in the claim list:
+
+- colour `7` (`g`) on `W_g = hornSet v 0 (1/2) (3/4) (1/10) ∪ hornSet S′ 0 (1/10) (1/5) (1/20)` — the flank above the horn at `v`, and a
+  horn at the **lower** pole;
+- colour `8` (`h`) on `W_h = hornSet v 0 (−3/4) (−1/2) (1/10) ∪ hornSet N 0 (−1/5) (−1/10) (1/20)` — the mirror images in the axis through `v`;
+- arcs added: the boundary of each of the four horn sets — two pieces of circles tangent to the axis at `v`, `S′` or `N`, of radii `2`,
+  `4/3`, `5`, `10`, and a piece of the circle of radius `1/10` or `1/20` about the point.
+
+Everything else keeps its brick colour; in particular the region between the flanks at `v` is the brick's.
+
+### 6.2 Validity, and why the sources sit at the far poles
+
+`recolour_valid` asks, for each of `W_g`, `W_h`: no unit pair inside, and none with the earlier class of the colour, which is empty.
+
+- Each horn set lies in a disc of radius `1/10`: no unit pair inside one.
+- **Flank against source, exactly.** `TanAbove v 0 (1/2) z` is `y − (x² + y²)/4 > 0`, i.e. `|z − (v + 2i)| < 2`; so the flank lies in
+  `B(v + 2i, 2) ⊂ B(v + 4i, 4)`. `TanBelow S′ 0 (1/5) p` is `|p − (S′ + 5i)| > 5`, i.e. `|p − (v + 4i)| > 5`. Hence
+  `|z − p| ≥ |p − (v + 4i)| − |z − (v + 4i)| > 5 − 4 = 1` for every flank point `z` and source point `p`. The circle of radius 5 about
+  `v + 4i` is the source's upper arc, and its unit parallel through `v`, of radius 4 and curvature `1/4 = curvUp (1/5)`, passes below the
+  flank's lower arc of curvature `1/2`: that is the whole content. The class of `8` is the mirror image.
+
+**Why the lower pole.** A region of `g` at `N` bounded below by an arc of curvature `τ` shadows, near `v`, everything *above* the parallel of
+curvature `curvDown τ = τ/(1 + τ) < 1`, the flank of `g` included: invalid. A region of `g` at `S′` bounded above by an arc of curvature `τ`
+shadows everything *below* the parallel of curvature `curvUp τ`: the band, and the flank of `h` — which is why `h` must differ from `g`,
+the theorem's conclusion, visible on the model.
+
+### 6.3 The nine hypotheses, clause by clause
+
+| hypothesis | on `P₄` |
+|---|---|
+| `hF : F.Valid` | § 6.2 |
+| `h5 : F.Condition5` | the base has it; the added arcs have radii `2, 4/3, 5, 10, 1/10, 1/20`, none `1`, so each meets every unit circle in at most two points |
+| `hv : F.Covers v 1` | a map of the plane |
+| `h1`, `h12`, `h2` | `−1 < −1/2 < 1/2 < 1` |
+| `hg : F.IsFlankAbove v α κ₂ g` | with `κ′ = 3/4`: for `r ≤ 1/10`, `hornSet v 0 (1/2) (3/4) r ⊆ W_g`, an open set off every arc, of colour `7` |
+| `hh : F.IsFlankBelow v α κ₁ h` | the mirror image, `κ′ = −3/4` |
+| `hD : F.DoublyShadowed v α κ₁ κ₂ g h` | `s₁ = −1/8`, `s₂ = 1/8`; § 6.3.1 |
+
+**6.3.1 The band is in both shadows.** Let `z ∈ hornSet v 0 (−1/8) (1/8) r`, `r` small, and `c* = v + 5i`. The circle `C*` of radius 6
+about `c*` is the arc through `S′` tangent to the axis with curvature `1/6`; on it `tanHeight κ = (1/6 − κ)·|p − S′|²/2`, positive for
+`κ = 1/10` and negative for `κ = 1/5`, so its points with `0 < frameX S′ 0 p` and `|p − S′| < 1/20` lie in the source horn, of colour `7`.
+`TanBelow v 0 (1/8) z` is `|z − (v + 8i)| > 8`, and `B̄(v + 5i, 5) ⊂ B̄(v + 8i, 8)`, so `d := |z − c*| > 5`; and `d < 5 + r < 7`. Two
+circles of radii 1 and 6 whose centres are between 5 and 7 apart meet in two points, at angles `ψ_z ± δ` from `c*` (measured from the
+downward direction toward `+a`), where `tan ψ_z = x/(5 − y) > 0` because `0 < frameX v 0 z`, and `cos δ = (d² + 35)/(12 d)`. The point
+`p₊` at `ψ_z + δ ∈ (0, π)` has `frameX S′ 0 p₊ = 6 sin(ψ_z + δ) > 0` and `|p₊ − S′| = 12 sin((ψ_z + δ)/2)`, which tends to `0` with `r`.
+So for small `r` the point `p₊` is a point of `region 7` at distance exactly 1 from `z`. The mirror image gives a point of `region 8`,
+using `TanAbove v 0 (−1/8) z`. ∎ (Control `band-shadow`: 40,000 of 40,000 sampled band points, each with its witness by this formula.)
+
+### 6.4 What it does to the theorem and its reader, and the variant with a horn
+
+**`flank_ne_of_doublyShadowed` is not empty**: its hypotheses hold together, at nine colours, on an explicit map, and its conclusion
+`g ≠ h` is what the model's validity forces (§ 6.2's last paragraph). The audit's note "`DoublyShadowed` there fails (its shadows are
+complementary)" is about E6's map only. *Variant*: recolour `hornSet v 0 (−1/2) (1/2) (1/10)` with a tenth colour; then
+`F.IsHorn v 0 (−1/2) (1/2) 9` holds as well and the picture is the reader's (`stuck_structure`, `Contact.lean` l. 2395) minus stuckness —
+which under Condition 5 nobody expects a model of. The model does not say whether the remaining hypotheses of that reader are jointly
+satisfiable; its docstring's "no model expected" stands.
+
+### 6.5 Handoff
+
+`P₄ := ((sevenBrickMap relabelled into Fin 9).recolour W_g B_g 7).recolour W_h B_h 8`. Needed and not in the library: the relabelling
+`Fin 7 → Fin 9` of an `ArcMap` (QA4 § 3.2 (b) prices it at about 60 lines) and the three "interior to its brick" facts. `recolour_valid`'s
+inputs are § 6.2's two bullets (each a `nlinarith` about two discs). `hD` is § 6.3.1. Docstring line for `flank_ne_of_doublyShadowed`:
+"Inhabitant of the hypotheses: `sevenBrickMap` with a `g`-flank and a `g`-horn at the lower pole, an `h`-flank and an `h`-horn at the upper
+pole planted in fresh colours (FS131-E7 § 6), `κ₁ = −1/2`, `κ₂ = 1/2`, band `(−1/8, 1/8)`."
