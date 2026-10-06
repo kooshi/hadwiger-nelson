@@ -5057,3 +5057,48 @@ reason by the close.*
      `data/fs131/briefs/scripts/mk-i6.py A|B`. (d) **The queue's order is re-ruled**: FS131-K10b, FS131-I10C, FS131-I6A, FS131-I6B.
      Alternative: the order they were prepared in (I10C first). Why: a planner's hand-back is what later implementers wait on, and wave
      10's landing waits on K10b's rows longest. Confidence: medium; every one of the four is independent of the others.
+
+496. **FS131-MC1 done: the example maps are on `main` through the full gate — `a296e60d..edd6aa8d`, a fast-forward; gated commit
+     `d9347791`; `plans/` and `data/` only after it** (implementer, Opus; harness 625k by the task notice — past the line, not to be
+     resumed; record `plans/FS131-MC1-landing.md` Stages 1–5 with "Drafts for the front page"; report `data/fs131/reports/FS131-MC1.md`;
+     logs and receipts `data/fs131/mc/`, tag `final2`). **Landed**: the modules `Plane/Models/Paint`, `Moves`, `Stuck`, `Bends` and the
+     new `Applied` — 329 hand-written theorems, each with one audit record on exactly the standard three; `hornModel` and `twoHornModel`
+     (the four moves), `stuckModel` (nineteen stuck heads: ten of `Terminal`, nine of `FlankUA`), `shadowModel`, `awayModel`
+     (`awayModel_bend_away_part`, `awayModel_bend_away_whole` on the sub-arc `[1/5, 3/10]`, ruling 471 (c)), `hornModel_hole_disconnected`
+     (a valid map of the plane with a holed tile exists at eight colours — `cvb_hole_disconnected`'s docstring said its existence "is
+     not claimed" and now names the object); the brick facts re-proved from wave 5's `BrickMap`; both folds of item 479. **Not proved,
+     by ruling 482**: `stuckModel_terminal`, removed (131 of 132 skeleton statements verbatim); its route (500–650 lines, with
+     `stuckModel.QROnly`) is the record's § 3.2. **Not done**: `exists_vertexStep`'s application — `IsClean` is proved for no model.
+     **The gate on `d9347791`, every step exit 0**: build 0 warnings; `sorry` 0; doubled names OK; axioms "OK — 5525 clean, 16
+     axiom-free, 4 imported, 5 declared purchase(s)", 5,550 records; vacuity `declarations=13386 refutations-skipped=192 sites=1137`,
+     `vacuous=0 stale=0 declared=3 witnessed=37 generic=1095 unknown=2`; architecture PASS; lint passed; notes 196 read, 0 CONFLICT.
+     **Of wave 5's sixty-two open gate items: 33 closed, 29 remain** (the record's draft 5, by name: 3 wait on
+     `stuckModel.IsTerminalMap`, 1 on a contact fact, 11 on a clean map, 4 on a collar package for `awayModel`, 6 untouched by design,
+     3 on E7's `F₀`, `F₁`, 1 whose docstring says no note is owed). **My receipt**: `origin/main` held `4b46d755` = `origin/fs131-wmb`
+     at the hand-back, tree clean; `git diff --name-only d9347791 4b46d755` outside `plans/` and `data/` is empty; `sorry` by the
+     handoff's grep over `Proofs/` on `main`: 0; `data/fs131/mc/build-final2-full.log` ends "Build completed successfully (5808 jobs)"
+     with 0 warnings; the gate's head file names `HEAD=d9347791`; `scripts/gate_report.py axioms` and `vacuity` run by me against wave
+     5's receipts — 5550 records, 5525 clean, 329 records added and none removed (5196 + 329), `vacuous=0`, each recorded count "STALE"
+     before the filing and "match" after; `data/fs131/mc/records-final2.txt` — main 8330 theorems, landing 8677, 329 hand-written of the
+     wave each on exactly the three, `records: PASS`; `bend_away_part`'s statement compared with wave 5's landing (`ad611866`) by `cmp`
+     of `awk` extractions — identical, and `awayModel_bend_away_part` read (`Applied.lean` ll. 192–196: the theorem applied to
+     `awayModel_hyps`'s five conjuncts); no `stuckModel_terminal` under `Proofs/`. **Filed** (commit `1adf15ba`): `CLAUDE.md` § Trust
+     ledger and § The gate, the `GATE_CHANGES` entry; `tools/claude_md_fact_audit.py --base 27f31c0e` loses the twelve superseded
+     tokens only, `--dupes` exit 0. **Items**: tool defects — the vacuity scan reads no unconditional `X.Valid` and no conjunction as a
+     witness; wave 5's list of sixty-two came from a script not in the tree (`tools/fs131_mc_gateitems.py` reads the list's names
+     against the docstrings); slips, the job's, disclosed — "fifteen" stuck heads of `Terminal` in its mid-job message was ten (with
+     nine of `FlankUA`: nineteen landed), nineteen docstring lines named the wrong module on the first gated commit and the whole pass
+     was run again on `d9347791`, three smaller ones; not applied — the `HasHornCount` line (`OpenMove` l. 36), `tangentBrick` as
+     `brickCell 0 1`. **Credit**: it re-ran the entire gate rather than land a docstring correction ungated, and it counted the gate
+     items by script against the landed docstrings.
+497. **Rulings on MC1's held items, and its slot.** (a) **Ruling 482's "fifteen" is superseded by item 496's count**: nineteen stuck
+     heads have their Lean model; the open gate item on the four moves (rulings 419 (d), 427 (d)) is closed on `main`. (b) **Two closer
+     jobs are queued, after the planners and implementers already waiting**: FS131-MD1, `stuckModel.IsTerminalMap` whole (`Terminal`
+     and `QROnly`; closes `n3_end_chain`, `cv_l0`, `hornBoundsQR_of_isChainVertex`); FS131-MD2, the three smaller closers — `IsClean`
+     for `hornModel` (eleven `Procedure` items), the contact fact at `stuckModel`'s vertex, a named `CollarFitOut` on `awayModel`'s gap
+     (four). Alternative: one job for all four. Why two: the first is a job by its own count (500–650 lines) and the others are
+     independent of it; truth is not in question for any of them (the theorems are kernel-checked), so they queue behind the work that
+     states new results. Confidence: medium-high. (c) The vacuity scan's fourth observation joins ruling 475 (d)'s tooling job; the
+     two unapplied lines join the tidy moves. (d) **Waves 7–9's planners can now be cut from `main`**, which holds the example maps.
+     (e) **Slot → FS131-K10b** (wave 10's second planner, ruling 495 (d)), launched 2026-10-06. In flight: 1 (K6b) + 1 (I10B) + 1
+     (K10b) = 3. Kooshi notified of the landing.
