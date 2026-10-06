@@ -28,7 +28,9 @@ certificate. **Nothing in `tools/` is trusted**: a generator bug can only produc
 - **An imported theorem carries four things**, because an axiom that misstates its paper can be inconsistent, and then every theorem
   built on it is provable, false ones included, and the kernel cannot see it:
   1. its docstring names its `BIBLIOGRAPHY.md` key, the section and the page;
-  2. its Lean statement is read back against the paper's own wording, in the planner's record;
+  2. its Lean statement is read back against the paper's own wording, in the planner's record. State the axiom in the paper's own
+     form and derive the form the library uses: the translation is then kernel-checked and the read-back is symbol against symbol
+     (`StandingFive.kloosterman_bound`, with `kloostermanBound_of_ringChar_ne_two` and `kloosterman_page_of_kloostermanBound`);
   3. one model of its hypotheses — a `theorem` or `example` in the same file exhibiting an object that satisfies them;
   4. a line in `ARCHITECTURE.md` § Trust, as a declared purchase.
 - **Our own hand results** that a module needs before their own module lands enter as explicit hypotheses of the theorems that use
@@ -127,7 +129,7 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - **A closed `Nat` term rewritten by a lemma stated at other instances than its own is evaluated by the kernel.** `0 + S` with `S` a
   closed sum of 16,383 register states, rewritten by Mathlib's `zero_add`: elaboration succeeds, the kernel runs 173 s to
   `deterministic timeout`, and passes 8 GiB in 27 s; with one variable free in `S`, or with core's `Nat.zero_add` on the closed term,
-  2 s (`data/fs131/i10e/lean/closed-term/`, on branch `fs131-w10e` until wave 10's second landing). State the lemma that does the algebra with the term's parameters free and instantiate it
+  2 s (`data/fs131/i10e/lean/closed-term/`). State the lemma that does the algebra with the term's parameters free and instantiate it
   last (`Floor128.pass_class`, `class_le`); a `(kernel) deterministic timeout` is a memory event too, so bisect one under a slot.
   (Measured by FS131-I10E; the mechanism is its reading, one mind, not checked against the kernel's source.)
 - **A `∀ x ∈ l, P x` under `decide` costs an order of magnitude more than the same check as a `Bool`** (31.9 GB and a timeout against
@@ -150,6 +152,11 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - `T ⁻¹' A ∆ A` parses as `T ⁻¹' (A ∆ A)`: write `(T ⁻¹' A) ∆ A`. `s ∆ t` on sets needs `open scoped symmDiff` (FS131-I10A, -I10B).
 - At the pin `add_le_add_left h a : b + a ≤ c + a` and `add_le_add_right h a : a + b ≤ a + c` (and `mul_le_mul_left/right` alike): the name
   says which side varies. `#check` before use (FS131-I10B).
+- `ENNReal`: `ENNReal.one_half_lt_one` is stated at `2⁻¹`, not `1 / 2` (`ENNReal.half_lt_self` gives `a / 2 < a`);
+  there is no `ENNReal.div_eq_iff` — `ENNReal.eq_div_iff : b = c / a ↔ a * b = c`. `Measure.exists_mem_of_measure_ne_zero_of_ae`
+  is under `Measure`. `Measure.addHaar_sphere` asks `Nontrivial E`; `addHaar_sphere_of_ne_zero` does not. A `rw` with
+  `Measure.addHaar_closedBall'` takes the first closed ball about `0` in the goal, `closedBall 0 1` included: name the radius.
+  An intermediate value on a convex set needs no path: `(convex_closedBall c r).isPreconnected.intermediate_value` (FS131-IF1).
 - A `rfl` for `((Subring.inclusion h a : unitRing F) : ℂ) = a` at the concrete pair `unitRing ⊥ ≤ unitRing F` is accepted by the elaborator
   and times out in the kernel, which compares the two subtypes and descends into `F =?= ⊥`. Stated generically in the two subrings
   (`coe_inclusion_subring`) it is checked once with variables (FS131-K10).
@@ -182,7 +189,9 @@ the `.olean` would. Settle every hand-written module before starting a long gene
   such leaves — each false of a one-face torus, each a `sorry` from which the next leaves were to be proved (FS131-I7A, inventory
   item 556). `include C in` above the theorem adds the binder and leaves the text unchanged; `omit [...] in` drops instance binders a
   proved theorem does not read (with a `sorry` body the `unusedSectionVars` linter stays quiet). **Read a leaf as the kernel has it —
-  `#check` — never as the file prints it; a statement check that compares text passes this whole class.**
+  `#check` — never as the file prints it; a statement check that compares text passes this whole class.** `data/fs131/l10b/kernel-sigs.lean` with
+  `tools/fs131_l10b_kernelsig.py` is that reading for a list of modules: the binders of each stored type against the file's own
+  signature and every `variable` in scope (FS131-L10B).
 
 ## The package
 
