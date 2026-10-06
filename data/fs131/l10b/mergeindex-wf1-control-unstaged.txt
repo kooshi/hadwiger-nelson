@@ -1,0 +1,6 @@
+merge of a61f0d141a437d3482d4e1bb5e6eda5f5200748e (a61f0d14) into 74814a95, base ca598960: staged 31 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 28 taken whole from theirs
+  UNMERGED ARCHITECTURE.md
+  UNMERGED scripts/Axioms.lean
+  DIRTY (working tree differs from the index): ARCHITECTURE.md
+  DIRTY (working tree differs from the index): scripts/Axioms.lean
+merge-index: FAIL (4 fault(s))
