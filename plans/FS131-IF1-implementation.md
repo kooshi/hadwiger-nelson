@@ -198,6 +198,77 @@ then goes), and those control lines.
 move — the new module adds fifteen theorems, whose hypotheses are parametric (a set, a measure, radii), and
 `falconer_lemma2_nonempty` is now a theorem with a model in its file (`upperHalfPlane_falconer_hyp`).
 
+## Stage 5 — SAVED (FS131-IF1): the statements read aloud, the drafts, the report
+
+**The final statements, read against the informal claim.**
+
+- `HadwigerNelson.Plane.falconer_lemma2_nonempty` — "for a (Borel) measurable `S ⊆ ℂ` with `volume S ≠ 0` and `volume Sᶜ ≠ 0`
+  there is `x` with `x ∉ densitySet S` and `x ∉ densitySet Sᶜ`", `densitySet A = {x | the ratio volume (A ∩ B̄(x, r)) / volume
+  B̄(x, r) → 1 as r → 0⁺}`. Against `[Falconer1981]` p. 185, Lemma 2 (i), first clause, "∂S is non-empty": **the same at
+  `n = 2` for Borel `S`** (Stage 1's reading). Unchanged from the axiom, character for character.
+- `HadwigerNelson.Plane.exists_not_tendsto_ratio_and_compl` — "`E` a finite-dimensional real normed space with its Borel
+  σ-algebra, `μ` an additive Haar measure, `S` `μ`-null-measurable with `μ S ≠ 0`, `μ Sᶜ ≠ 0`: there is `x` at which neither
+  `μ (S ∩ B̄(x, r)) / μ B̄(x, r)` nor `μ (Sᶜ ∩ B̄(x, r)) / μ B̄(x, r)` tends to `1` as `r → 0⁺`". Against the paper's sentence in
+  full ("a measurable subset of Rⁿ", Lebesgue measurable by the paragraph above it): **the same, in every dimension and for
+  every norm**, since the two ratios sum to `1` — "not `1`" for `Sᶜ` is "not `0`" for `S`. A model of the hypotheses and an
+  adversary (`S = univ`) are in the module.
+- `HadwigerNelson.Plane.exists_ratio_ge_and_compl_ge` — the same hypotheses; "there are `x` and radii `sₙ > 0`, `sₙ → 0`, with
+  both ratios at `(x, sₙ)` at least `1 / (2 · 2 ^ dim E)` for every `n`". Not in the paper: it says `S` and `Sᶜ` both have
+  upper density at least that constant at `x`. At `E = ℂ` the constant is `1/8`.
+
+**The report**: `data/fs131/reports/FS131-IF1.md`, in standing rule 11's form; its text is the job's hand-back. Wall clock, from
+the commits: launch about 12:50, Stage 1 saved 12:58, Stage 3 (the general theorem built) 13:16, Stage 4 (the audited swap)
+13:33 — about 45 minutes, 19 of them two builds. No background process is left running; everything this record cites is under
+`data/fs131/if1/` or in the tree.
+
+## Drafts for the front page
+
+*For Keryx to file; I edited none of these files. Counts are this branch's, at `d64a78a7`, cut from `main` at `ca598960`;
+at the landing they are added to whatever `main` then reads.*
+
+1. **`CLAUDE.md` § Trust ledger** — the sentence "the current audit reads 5783 clean and 5 declared purchases, and 4 imported
+   (and 17 axiom-free; 5,809 records at wave 10's first landing, FS131-L10A, 2026-10-06)". From this branch alone it reads:
+   **"the current audit reads 5803 clean and 5 declared purchases, and 0 imported (and 17 axiom-free; 5,825 records at
+   `[Falconer1981]` Lemma 2 (i)'s proof, FS131-IF1, 2026-10-06)"**. The deltas, to apply to `main`'s numbers at the landing:
+   clean **+20** (the four records moved from IMPORTED, `falconer_lemma2_nonempty` itself, fifteen new theorems), imported
+   **−4** (to 0 if no other import has landed), records **+16**, purchases and axiom-free unchanged; declared imports 1 → 0,
+   library axioms 1 → 0. The clause "an imported record rests on a declared outside theorem (`LEAN.md` § Trust ledger)" stays:
+   it defines the count, and the Weil import will use it.
+2. **`CLAUDE.md` § The gate** — the vacuity counts will move (fifteen new declarations in `Plane/MetricalBoundary`, and
+   `falconer_lemma2_nonempty` now a theorem). **Not measured here**: the brief keeps the full gate with the landing.
+3. **`CLAUDE.md` § Frontier, "What the kernel holds"** — after the clause on FS-101's first slot, or wherever the landing's line
+   for wave 2 sits: *"the library declares no axiom: `[Falconer1981]` Lemma 2 (i), its one import, is proved — in any finite
+   dimension, for null-measurable sets and any additive Haar measure (`Plane.exists_not_tendsto_ratio_and_compl`, FS131-IF1), so
+   Falconer's reduction (`falconer_reduction`, `le_chiM_of_falconerFan`; FS129-SA1-FALC-RED) reads the standard three"*.
+4. **`LEDGER.md` row 152** (Falconer's fan at every number of colours; "kernel pending" today) — when wave 2's landing
+   regrades its FALC-RED clause to [kernel]: declaration `Plane.falconer_reduction` / `Plane.le_chiM_of_falconerFan`
+   (`Proofs/HadwigerNelson/Plane/FalconerReduction.lean`), axioms `[propext, Classical.choice, Quot.sound]`, **resting on no
+   import and no named hypothesis** — the assumption `Plane.falconer_lemma2_nonempty` it carried is the theorem of that name.
+5. **`BIBLIOGRAPHY.md`, the `[Falconer1981]` row** (line 169), appended to its third cell: *"Lemma 2 (i) — the metrical boundary
+   of a measurable set neither null nor conull is nonempty — was imported as an axiom by FS-131 wave 2 and is no longer
+   assumed: FS131-IF1 proved it in the kernel (`Plane.exists_not_tendsto_ratio_and_compl`: any finite-dimensional real normed
+   space, any additive Haar measure, null-measurable sets, with a quantitative form, `exists_ratio_ge_and_compl_ge`;
+   `Plane.falconer_lemma2_nonempty` is its instance at `ℂ`), by an argument derived here — nested balls in which the set has
+   ratio one half — which has not been compared with Croft's Lemma 4 (the paper's ref. [1], unheld) and is not claimed new:
+   the statement is classical."* And its read status gains *"p. 185 re-read first-hand for the statement (FS131-IF1)"*.
+   **The Croft debt row** (line 882, "the source of `[Falconer1981]`'s Lemmas 1 and 3"): add *"and of its Lemma 2 (i) (Croft's
+   Lemma 4), which the library no longer needs from it (FS131-IF1)"*. **No work was read for the density theorem**: it is
+   Mathlib's `Besicovitch.ae_tendsto_measure_inter_div`, so no new row. The planner's attribution of the classical statement
+   (the density topology on `ℝⁿ` is connected; Goffman–Neugebauer–Nishiura 1961) stays **recalled, not read** — a prior-art
+   debt, below.
+6. **`LEAN.md` § Trust ledger** — no line needed: the section describes the mechanism (an import, its four items, the
+   `declareImport` line), which is unchanged; the state is `CLAUDE.md`'s sentence and `ARCHITECTURE.md` § 5. **`LEAN.md`
+   § Searching — Lean**, one bullet offered, after the `add_le_add_left` bullet:
+   *"`ENNReal`: `ENNReal.one_half_lt_one` is stated at `2⁻¹`, not `1 / 2` (`ENNReal.half_lt_self` gives `a / 2 < a`);
+   there is no `ENNReal.div_eq_iff` — `ENNReal.eq_div_iff : b = c / a ↔ a * b = c`. `Measure.exists_mem_of_measure_ne_zero_of_ae`
+   is under `Measure`. `Measure.addHaar_sphere` asks `Nontrivial E`; `addHaar_sphere_of_ne_zero` does not. A `rw` with
+   `Measure.addHaar_closedBall'` takes the first closed ball about `0` in the goal, `closedBall 0 1` included: name the radius.
+   An intermediate value on a convex set needs no path: `(convex_closedBall c r).isPreconnected.intermediate_value` (FS131-IF1)."*
+7. **`ARCHITECTURE.md`** — edited on this branch (it is in the brief's touch list): § 3.11 rows for `Plane/MetricalBoundary`
+   (new) and `Plane/FalconerReduction`; § 5 "Imported outside theorems", the row gone and one line of current state.
+8. **The Proof Atlas** — `falconer_lemma2_nonempty` changes kind (axiom → theorem); `exists_mem_falconerE`, `fan_tip_ae_mem`,
+   `falconer_reduction`, `le_chiM_of_falconerFan` lose their dependence on an import; one new module, fifteen theorems.
+
 ## Theorems this phase proved
 
 *Kernel theorems, each `[propext, Classical.choice, Quot.sound]` (Stage 3's print; Stage 4's audit for the receipt). All in
