@@ -1,0 +1,25 @@
+exact    | Do not consider Lean formalization a cost. It's practically mechanical for us, | CLAUDE.md
+exact    | 501. **FS131-K6b done at its Stage 12: wave 6's second planning pass — the fou | plans/FS131-close-inventory.md
+exact    | 502. **Rulings on K6b's held items, and its slot.** (a) **The deriver's check  | plans/FS131-close-inventory.md
+exact    | 490. **FS131-E8, by message mid-job (its Stage 3 saved, `0310d854` on `main`,  | plans/FS131-close-inventory.md
+exact    | 499. **FS131-K6b, by message mid-job: findings on the bridge while stating it  | plans/FS131-close-inventory.md
+exact    | theorem IsUnitCurve.chord {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCurve γ ψ | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/Curve.lean
+exact    | theorem IsUnitCurve.sin_le_inner {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCu | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/Curve.lean
+exact    | theorem IsUnitCurve.strictMonoOn_dist {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsU | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/Curve.lean
+exact    | theorem IsUnitCurve.norm_sub_le {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCur | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/Curve.lean
+exact    | theorem IsUnitCurve.one_le_dist {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {ℓ : ℝ} (h : IsUnitCur | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/Curve.lean
+exact    | theorem lipschitzOnWith_of_chord {ψ : ℝ → ℝ} {I : Set ℝ} (hI : I.OrdConnected) | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/Curve.lean
+exact    | theorem AeColouring.notMem_essBdry_of_mem_densitySet (c : AeColouring k) {j :  | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean
+exact    | theorem AeColouring.ae_one_colour_of_isConnected (c : AeColouring k) {W : Set  | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean
+exact    | theorem AeColouring.closure_essBdry_subset (c : AeColouring k) : closure c.ess | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean
+exact    | theorem local_graph {A B N : Set ℂ} (hA : MeasurableSet A) (hAn : UnitPairsNul | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean
+exact    | theorem AeColouring.local_graph (c : AeColouring k) {U : Set ℂ} (hU : IsOpen U | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean
+exact    | ## Stage 11 — SAVED: the bridge's eight rows — the curve notion, the skeleton, | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/plans/FS131-w6-kernel-plan.md
+exact    | ### 11.4 The plan per leaf | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/plans/FS131-w6-kernel-plan.md
+exact    | | `Plane/Saturated/Curve` (imports `Plane/Chord` only; no measure) | the curve | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/plans/FS131-w6-kernel-plan.md
+exact    | | `Plane/Saturated/LocalGraph` (imports `Pinch`, `Curve`) | **FS131-E8-DELTA** | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/plans/FS131-w6-kernel-plan.md
+exact    | | `local_graph` | E8 § 3.1 (1)–(4). Children: (a) in `U`: `essBoundary A = ess | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/plans/FS131-w6-kernel-plan.md
+exact    | ### 12.1 For implementers: the split by file (statements fixed; children under | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/plans/FS131-w6-kernel-plan.md
+exact    | ### 12.2 Vacuity and inhabitants (`LEAN.md` § The gate's form) | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6c/plans/FS131-w6-kernel-plan.md
+exact    | ## Stage 3 — SAVED: the derivation — the four clauses, the fan, the bridge | plans/FS131-E8-derivation.md
+quotations: 24  exact: 24  mismatched: 0
