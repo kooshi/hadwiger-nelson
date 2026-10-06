@@ -1,0 +1,13 @@
+2026-10-06T03:30:37Z control: start, pid 587992
+planted: bab8c2491bed73efbe046c23e975e52ad4ae77f817839562b4c3adc3edb75ab4 -> e12c4fa830d838587eceab8a4f34bb53095078358a48ccb0c9ca7ca95f8fa804; the def is at line 2877
+2026-10-06T03:30:37Z plant: exit 0
+2026-10-06T03:38:54Z build plant: try 1, exit 0
+exit=1
+2026-10-06T03:39:00Z lint plant: exit 1
+restored: sha256 bab8c2491bed73efbe046c23e975e52ad4ae77f817839562b4c3adc3edb75ab4 = before; git diff empty; the plant's name absent
+2026-10-06T03:39:00Z restore: exit 0
+2026-10-06T03:47:21Z build restored: try 1, exit 0
+exit=1
+2026-10-06T03:47:28Z lint restored: exit 1
+2026-10-06T03:47:28Z control: git status over Proofs/, Proofs.lean, scripts/, lakefile.toml has 0 line(s)
+2026-10-06T03:47:28Z control: end

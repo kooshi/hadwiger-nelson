@@ -1,0 +1,4 @@
+data/fs131/ln/lint-baseline.out: 3 findings; data/fs131/ln/lint-plant.out: 4 findings
++ [unusedArguments] /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:2876:1: error: fs131LnLintPlant 1 unused argument:
+  argument 2: (m : ℕ)
+added 1, removed 0, changed text 0

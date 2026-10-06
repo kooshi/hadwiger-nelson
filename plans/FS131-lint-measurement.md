@@ -238,3 +238,154 @@ Stage 3 plants a fault in `Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean` a
 this record ends here and `git status` shows that file modified**, the session stopped between the two: run `data/fs131/ln/plant.sh
 restore` (or `git checkout HEAD -- Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean`) and build through `scripts/build.sh` under
 the slot. The plant is never committed.
+
+## Stage 3 — SAVED (FS131-LN1)
+
+*2026-10-06T03:48Z. The control, watched to fire, and the file put back.*
+
+`data/fs131/ln/control.sh`, run from a snapshot copy, does plant → build → lint → restore → build → lint, with the restore also on
+an `EXIT` trap; every step's exit status is in `data/fs131/ln/control.log`. The plant (`data/fs131/ln/plant.diff`), appended to
+`Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean`, which `Proofs.lean` alone imports:
+
+```lean
+
+/-- FS131-LN1's planted fault, for the linters' negative control: `m` is unused. Never committed. -/
+def fs131LnLintPlant (n m : ℕ) : ℕ := n
+```
+
+| step | exit | what it showed | where |
+|---|---:|---|---|
+| plant | 0 | sha256 `bab8c249…db75ab4` → `e12c4fa8…5f8fa804`; the `def` at line 2877, its docstring at 2876 | `plant.sha256-before`, `plant.sha256-planted` |
+| build, planted (`scripts/build.sh` under the slot, `MEMMAX=40G BATCH=4`) | 0 | `2 module(s) rebuilt, 1 module(s) with warnings, 8m15s`: `Plane.ValidMap.OpenMove` (10 s) and `Proofs` (1.5 s). **The build's own linter fired too**: `warning: Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:2877:24: Variable name `m` is not explicitly referenced.` | `build-plant.out:446–464`, `build-plant.exit`, `build-plant.gate.log` |
+| lint, planted | **1** | `-- Found 4 errors in 9644 declarations (plus 8414 automatically generated ones) in Proofs with 14 linters`; `unusedArguments: (2/2) Failed with 4 messages`; 4.94 s, 4.78 GB | `lint-plant.out:57, 63`, `lint-plant.exit`, `lint-plant.time` |
+| restore | 0 | sha256 back to `bab8c249…db75ab4`, `git diff` empty, the plant's name absent from the file | `plant.sha256-after`, `control.log` |
+| build, restored | 0 | `2 module(s) rebuilt, 0 module(s) with warnings, 8m18s` | `build-restored.out`, `build-restored.exit`, `build-restored.gate.log` |
+| lint, restored | 1 | the baseline again: `lint-restored.out` is **byte-identical** to `lint-baseline.out` (`cmp`) | `lint-restored.out`, `diff-baseline-restored.txt` |
+| `git status` over `Proofs/`, `Proofs.lean`, `scripts/`, `lakefile.toml` | — | 0 lines | `control.git-status` |
+
+**The plant, named at its source position among the rest** (`tools/fs131_ln_count.py --diff lint-baseline.out lint-plant.out`,
+`data/fs131/ln/diff-baseline-plant.txt`): added 1, removed 0, changed 0 —
+
+```
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wop/Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:2876:1: error: fs131LnLintPlant 1 unused argument:
+  argument 2: (m : ℕ)
+```
+
+under `-- Proofs.HadwigerNelson.Plane.ValidMap.OpenMove` (`lint-plant.out:80–82`). The declaration count rose by exactly one
+(9,643 → 9,644) and fell back: the linters read the newest landing's module, and a count is not an empty scan.
+
+**Neither lint run rebuilt anything**: the driver's sha256 is unchanged across all three runs, and each run's two `find -newer`
+lists are empty. The only writes into `.lake/build` were `scripts/build.sh`'s, for the two modules named.
+
+The three predictions for the control were met exactly (C1: two modules, exit 0, one warning module; C2: one added finding,
+`unusedArguments` on `fs131LnLintPlant` at `OpenMove.lean:2876:1`; C3: declarations +1, automatic +0), and C4 (the third run equals
+the baseline) to the byte. No background process is left: nothing holds `control.log` open, and the slot ledger shows no slot of
+this job.
+
+## Stage 4 — SAVED (FS131-LN1)
+
+*2026-10-06T03:49Z. The proposal.*
+
+### What clearing a finding takes
+
+All three findings are an unused anonymous instance binder, `[NumberField _]`. There are three ways to clear one, and they differ in
+what they do to the statement.
+
+| way | the edit | the statement | needs a ruling |
+|---|---|---|---|
+| **remove** | delete the binder | **changes**: the two theorems lose a hypothesis and become strictly stronger; the definition loses an argument, so the five statements that mention it elaborate to a different term from the same text | yes |
+| **underscore** | name the binder: `[_hL : NumberField L]` | the type is unchanged (a binder's name is not part of it); the linter exempts the name | the form of rulings 185 and 244, extended from an explicit hypothesis to an instance one |
+| **nolint** | `@[nolint unusedArguments]`, the reason in the docstring | unchanged | no; but it switches a linter off where the underscore says why |
+
+**Checked, not only read**: `data/fs131/ln/UnderscoreInst.lean`, a scratch file outside the library run by `lake env lean` (exit 1,
+`UnderscoreInst.out`), has three theorems with an unused `NumberField F` instance: anonymous, underscore-named, and referenced by
+`have _ := hF`. `#lint only unusedArguments` reports the anonymous one alone — `Found 1 error in 3 declarations`, `#check fs131LnAnon
+/- 1 unused argument: argument 3: [NumberField F] -/`. The anonymous theorem is the control that fires; the other two pass.
+
+**The count the brief asks for.** Cleared by removal, 3 of 3 change a statement and need a ruling: two theorems
+(`placeHom_step`; `falconerFan_five_placeHom`, which is the milestone row FS129-SA1-FALC-RES (ii)) and one definition that
+statements use (`DyadicSqrt3Conclusion`). **None of the three sits on a hypothesis a ruling kept on purpose**; no docstring is
+owed; no `simp` form is wrong.
+
+**As the kernel reads them, the two theorems are proved without the hypothesis.** The linter reports an argument when the proof
+term and the type do not mention it, so the same term proves each statement with `[NumberField F]` deleted: `placeHom_step` and
+`falconerFan_five_placeHom` hold for every subfield `F` of `ℝ`. That is a generalization of each (small: `𝓞 F ⧸ 𝔭` of cardinality 11
+or 19 is where the content is), and it is the reason I recommend removal over the other two ways for them: a statement weaker than
+what was proved is the wrong record. For `DyadicSqrt3Conclusion` the unused instance is an obligation every later mention of the
+definition must discharge for nothing.
+
+### The price
+
+- **The edit**: three binders in three files (`Arith/Dyadic.lean:38`, `Arith/PlaceHom.lean:222`, `Arith/FalconerField.lean:182`).
+  No call site names the argument: the definition is used as `DyadicSqrt3Conclusion L P` five times in its own file, `placeHom_step`
+  once as `placeHom_step F h₀ hlast`, `falconerFan_five_placeHom` nowhere.
+- **The build**: four modules at most — `Arith.Dyadic` (imported by `Proofs.lean` alone), `Arith.PlaceHom` (by
+  `Arith.FalconerField` and `Proofs.lean`), `Arith.FalconerField` (by `Proofs.lean` alone), `Proofs`. Measured in Stage 3: when
+  anything is stale `scripts/build.sh` takes about 8 minutes of wall clock for its walk over 451 batches at `BATCH=4`, however small
+  the change (the two rebuilt modules took 11.5 s of it).
+- **The gate**: by underscore or nolint the types are unchanged, so the axiom and vacuity receipts should not move — to be read, not
+  assumed, by whoever makes the edit. By removal three types change: the two records in `scripts/Axioms.lean` (lines 2993, 3201)
+  keep their names; whether the vacuity scan counts an instance binder as a site I did not check, so its counts in `CLAUDE.md` § The
+  gate may move by up to three and would be refiled.
+- **Agent cost** (my estimate, not a measurement): as one more line in a landing job that already runs the gate, about 10k tokens
+  and no extra gate run. As a job of its own, the launch context and a full gate run dominate: 40–60k.
+
+### When
+
+**Not as a job of its own, and not left to the close: with the next landing, and the guarded lint added to every landing's gate.**
+
+1. **The debt is three, all in wave 2's `Arith/` modules.** The other 49 modules FS-131 added, the 8 post-M2 ones and the 1,706
+   older ones have none. "Wave by wave" has one wave to do.
+2. **Why so few**: the build's own linters (`linter.unusedVariables`, `linter.missingDocs`), read at every landing as "0 warnings",
+   already take what `unusedArguments` and `docBlame` would report. What they do not see is exactly the kind found here. An anonymous
+   instance binder has no name for the syntax linter to warn about: the full walk of Stage 3's restored build reports `0 module(s) with warnings`
+   over all 1,767 modules, these three among them, while the plant's explicit `(m : ℕ)` got a build warning and a lint finding both. So the debt that accrues silently between two runs of `lake
+   lint` is unused instance arguments, plus whatever the other 13 linters watch, which over 18,057 declarations is nothing.
+3. **The reason to run it only at the close has been measured away.** Ruling 415 (c) weighed running it at every landing and
+   declined because "it starts Lake outside `scripts/build.sh`". With both `--no-build` flags it cannot start a build: Lake exits
+   instead of rebuilding the driver, and the driver exits instead of spawning `lake build +Proofs`. Three runs here, beside two other
+   trees' builds: about 4.9 s and 4.8 GB each, the driver's binary and both `.lake` trees untouched. At that price a landing can run
+   it after its green build, and the close then has nothing to find. The command, for a landing brief:
+
+   ```
+   scripts/slot.py --mem 8 --cpus 8 -- lake lint --no-build -- --no-build --trace
+   ```
+
+   read as: exit 0 and `-- Linting passed for Proofs.`, and 14 lines `(2/2) Passed!`. (`--mem 8` is my proposal for a measured
+   4.8 GB peak, **not run at that cap**: the three runs here were under the brief's 40, which made the first wait five minutes for
+   another tree's build to leave the ledger.) The firing control costs two eight-minute builds, so it
+   belongs at the close and wherever the driver or the pin changes, not at every landing; `tools/fs131_ln_count.py` reads any
+   run's output and refuses one that did not finish or was made without `--trace`.
+4. **For the planner's lane**, one habit removes the kind at its source: a skeleton that carries `[NumberField F]`-style instance
+   binders from a row's wording checks, at the first green build, that each is used — or names it with an underscore.
+
+**What I would rule, were it mine** (it is the coordinator's): remove the binder in the two theorems, as generalizations, each
+with a one-line note in its docstring that the row's number-field hypothesis is not needed; remove it in `DyadicSqrt3Conclusion`;
+do all three in the next landing's tree before its gate run. If no statement may move before the close, the underscore form clears
+all three with no type changed.
+
+## Drafts for the front page
+
+*For Keryx to file or decline; I write none of these files. This job proved no theorem, so there is no ledger row, no Frontier
+line and no Proof Atlas grade change.*
+
+1. **`LEAN.md` § The gate**, after the sentence ending "linters silent, spec examples passing." — a new bullet in the list below it:
+
+   > - **The environment linters** are `lake lint --no-build -- --no-build --trace` under the slot (about 5 s, 4.8 GB): Lake's
+   >   `--no-build` exits instead of rebuilding the driver, the driver's exits instead of building the library, and `--trace` prints
+   >   one verdict per linter. Green is exit 0, `-- Linting passed for Proofs.`, and every linter `(2/2) Passed!`. An unused argument
+   >   named with an underscore, or referenced by `have _ := h`, is not reported; an unused anonymous instance binder is, and the
+   >   build's own linters do not warn about it.
+
+2. **`plans/FS131-close-inventory.md`**, a new item:
+
+   > **`lake lint` over `main` at `333ecaa1`, measured: FS131-LN1 done** (record `plans/FS131-lint-measurement.md`, data
+   > `data/fs131/ln/`). Exit 1: 3 findings in 9,643 declarations (plus 8,414 automatically generated) with 14 linters, 13 of them
+   > passing; all three `unusedArguments`, each an unused anonymous `[NumberField _]` instance binder, all in wave 2's `Arith/`
+   > (`DyadicSqrt3Conclusion`, `placeHom_step`, `falconerFan_five_placeHom`); none on a hypothesis a ruling kept. 4.9 s, 4.8 GB,
+   > nothing rebuilt. Control: a planted unused argument in `OpenMove` reported at `OpenMove.lean:2876:1`, exit 1, the file restored
+   > byte for byte, the third run byte-identical to the first.
+
+3. **`CLAUDE.md` § The gate**: no count of mine belongs there today. If the guarded lint becomes a landing's gate item, its
+   recorded state would be one clause after the vacuity counts — "environment linters: 14, passing over N declarations" — filed
+   by the landing that first sees it pass.
