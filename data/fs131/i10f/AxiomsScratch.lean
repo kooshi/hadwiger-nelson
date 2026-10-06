@@ -38,4 +38,6 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.SpectralInputs.negCircle_trivial_bot
 #print axioms HadwigerNelson.SpectralInputs.countable_bot_subfield_real
 #print axioms HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot
+#print axioms HadwigerNelson.SpectralInputs.measurePreserving_shift_infinitePi
+#print axioms HadwigerNelson.SpectralInputs.contVec_prod_eq_coin
 #print axioms FS131I10F.control

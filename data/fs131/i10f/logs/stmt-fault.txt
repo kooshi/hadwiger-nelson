@@ -23,6 +23,8 @@ new       Proofs/HadwigerNelson/Arith/ProductFactor.lean :: integral_section_var
 new       Proofs/HadwigerNelson/Arith/ProductFactor.lean :: exists_fst_preimage_ae_eq_of_mem_factorSets
 new       Proofs/HadwigerNelson/Arith/ProductFactor.lean :: fibre_mem_factorSets
 new       Proofs/HadwigerNelson/Arith/ProductFactor.lean :: exists_measurableSet_prodFactorSigma_ae_eq
+new       Proofs/HadwigerNelson/Arith/ProductFactor.lean :: measurePreserving_shift_infinitePi
+new       Proofs/HadwigerNelson/Arith/ProductFactor.lean :: contVec_prod_eq_coin
 CHANGED   Proofs/HadwigerNelson/Arith/MajorityVote.lean :: ae_eq_measurable_of_majority
 new       Proofs/HadwigerNelson/Arith/MajorityVote.lean :: eq_of_lt_two_mul_card_filter
 new       Proofs/HadwigerNelson/Arith/MajorityVote.lean :: lt_two_mul_card_filter_of_bad

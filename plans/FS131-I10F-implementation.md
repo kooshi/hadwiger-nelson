@@ -55,6 +55,11 @@ importing the built modules, with a planted `sorry` that must print `sorryAx`.)*
   `F = ℚ`, `I = Interface.trivial` (`MulStable`, `NegCircle`, and `ν` the point mass at the trivial character: finite,
   rotation-invariant, `E`-null, no multiple of Haar measure). [kernel on this branch] same file, same axioms; with
   `countable_bot_subfield_real`. Not a leaf of the plan: **the declaration for `sp_if`'s docstring** (Stage 4).
+- **`SpectralInputs.contVec_prod_eq_coin`** — a model of every hypothesis of `contVec_prod_eq` at once: one-point first and second
+  systems, coin tosses of any law indexed by `ℤ` under the shift, the cofinite filter. [kernel on this branch]
+  `Proofs/HadwigerNelson/Arith/ProductFactor.lean`; axioms `[propext, Classical.choice, Quot.sound]`; over
+  `measurePreserving_shift_infinitePi` (the shift of an i.i.d. process indexed by an additive group preserves its law). Not a leaf
+  of the plan (Stage 5).
 
 ## Stage 1 — SAVED (FS131-I10F): the readback, the branch as given
 
@@ -232,3 +237,107 @@ theorem itself does not mention countability and stands as it is. Draft for `sp_
 branch's 23 less my four** — no other warning (`data/fs131/i10f/logs/build-3-model.log`). Axioms: 35 declarations of this job, each
 `[propext, Classical.choice, Quot.sound]`, the control prints `sorryAx` (`logs/axioms-leaf34.txt`); `--fault` exits 1. No `sorry`, no
 `native_decide`, no `axiom` in the three files (grep).
+
+## Stage 5 — SAVED (FS131-I10F): the model of `contVec_prod_eq`, the final evidence, the drafts, what is left
+
+### 5.1 A model of `contVec_prod_eq`'s hypotheses, built
+
+The plan left it named and not built ("needs an infinite product measure"). Mathlib at the pin holds the three ingredients
+(`Measure.infinitePi`, `ProbabilityTheory.iIndepFun_infinitePi`, `Measure.infinitePi_map_piCongrLeft`), so it is two declarations:
+`measurePreserving_shift_infinitePi` and **`contVec_prod_eq_coin`** — `R = ℤ`, `Ω₃ = ℤ → Bool` under `Measure.infinitePi (fun _ => ρ)`
+for any probability `ρ` on `Bool`, `T₃ y ω = ω (· + y)`, `ε x ω = ω x`, `l = Filter.cofinite`, `Ω₁ = Ω₂ = Unit`. It elaborated in
+one round. **What it exercises and what it does not**: with a non-degenerate `ρ`, `hgen`, `hind`, `hshift` and `hl` in earnest;
+`h₁` and `[Finite Ω₁]` are met by a point, so the row's own model (a non-trivial finite translation system, with `l` eventually in
+its kernel) is not built. `contVec_prod_eq`'s docstring gained one sentence naming it (`INHABITANT: …`); its statement is unchanged.
+
+### 5.2 Final evidence
+
+- **Build** (the tree as committed at this stage): `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`,
+  exit 0, 454 of 454 batches, **19 `sorry` warnings, none in my three files** (`StandingFive` 9, `StationaryRatio` 3, `FloorPlanes` 4,
+  `NormOneTarget` 2, `Floor128` 1 — the other branches'), no other warning (`data/fs131/i10f/logs/build-4-final.log`). Four builds
+  in all, `logs/build-1-majority.log` … `build-4-final.log`, 23 → 22 → 21 → 19 → 19 `sorry` warnings.
+- **Axioms**: `tools/fs131_i10f_axioms.py`, **37 declarations, each `[propext, Classical.choice, Quot.sound]`**; the planted
+  `sorry` prints `sorryAx`; `--fault` exits 1 (`logs/axioms-final-digest.txt`, `logs/axioms-final.txt`, `logs/axioms-fault.txt`).
+  `scripts/Axioms.lean`, block "FS131-I10F": the same 37 names (set equality by script), above the `=== PURCHASED ===` banner.
+  This is iteration-grade (`lake env lean`); the trust receipt is `scripts/axioms.sh` at the landing.
+- **Statements**: `tools/fs131_i10f_stmt.py` against `330d2f48`: nine base statements of the three files, four leaves among them,
+  0 differences (`logs/stmt-final.txt`); `--fault` exits 1 naming the leaf (`logs/stmt-fault.txt`).
+- `tools/check_architecture.py`: PASS (`logs/arch-final.log`; no new module, two Mathlib imports added to `ProductFactor`:
+  `Mathlib.MeasureTheory.Measure.MeasuredSets`, `Mathlib.Probability.Independence.InfinitePi`).
+- No `sorry`, no `native_decide`, no `axiom` in the three files (grep). Names: none of the 39 new names (37 theorems, `cylMap`,
+  `cylSets`) is declared under `Proofs/` on `origin/main` or on the 48 other `origin/fs131-w*` branches (`git grep`).
+- Not run, by the brief: the gate (`axioms.sh`, `vacuity.sh`, `dupnames.sh`, the linters). The build's own linters are silent on
+  the three files.
+
+### 5.3 Findings, each with its kind (inventory item 526's two kinds, and where neither applies)
+
+1. **`ae_eq_measurable_of_majority` — a generalization; neither of the two defect kinds.** The statement carries two hypotheses and
+   one class its proof does not read (`hG`, `hc`; `[Finite K]` where `[Countable K]` suffices). Not "a hypothesis it lacks", not "a
+   route reading more than the statement needs": the statement assumes more than the route reads. Stage 2; sent to the coordinator
+   mid-job after the stage was saved.
+2. **No step of the three hand arguments failed.** The majority vote's Chebyshev step formalizes as written; the product's
+   orthogonality step is true and was proved in a different form (independent sections, no centring); the fibrewise step the
+   coordinator's receipt had not checked is `fibre_mem_factorSets`; the model's paper check stands.
+3. **Three routes changed, none a defect of the plan's statements**: Borel–Cantelli for the subsequence lemma; events and the mean
+   section variance for the plan's C1–C4; odd denominators for the `(1 + i)`-adic valuation subring.
+4. **A tool defect, mine, caught by its own control**: the statement check's planted fault first landed in a helper the check does
+   not compare and did not fire (Stage 2).
+5. **A Lean fact for `LEAN.md` § Searching — Lean** (draft below): a `set`/`let`/`have` of type `MeasurableSpace Ω` inside a proof is
+   a local instance and silently changes what later `MeasurableSet …` elaborate against.
+
+### 5.4 Left, with its route
+
+- **Nothing of the four leaves.** All proved as stated.
+- **The join**: (a) `ae_eq_measurable_of_majority` — drop `hG`, `hc` and weaken `[Finite K]` to `[Countable K]`, or keep them; then
+  delete the two `have _ :=` lines. (b) `NegCircleModel`'s spec example — on `main`'s `sp_if` (no `[Countable (unitRing F)]`) delete
+  its two `haveI` lines and, if wanted, `countable_bot_subfield_real`. (c) `sp_if`'s docstring: name
+  `sp_if_hypotheses_trivial_bot` (draft below). (d) run `dupnames.sh` on the joined tree: this job declares in `SpectralInputs` from
+  two modules that do not import each other (`ProductFactor`, `NegCircleModel`) — 31 names, listed in
+  `data/fs131/i10f/axioms-names.txt` — and in `MajorityVote` (6).
+- **A fuller model of `contVec_prod_eq`** (a non-trivial `Ω₁`): `Ω₁ = ZMod 2` with the uniform measure, `T₁ y` translation by
+  `y mod 2`, `l = Filter.map (2 * ·) Filter.cofinite` on `ℤ` (eventually even, frequently outside every finite set). About 40 lines
+  beside `contVec_prod_eq_coin`; not done.
+- **The instance of SI-J at `E_S`** waits on J45-N1 (a)(b) or its two-fact interface (the planner's § 8.1, § 8.4), K10c's.
+
+## Drafts for the front page
+
+*Slots named; counts are the landing's, since this branch does not run the gate.*
+
+- **`CLAUDE.md` § Trust ledger**, the sentence "the current audit reads … clean and … declared purchases, and … imported": this
+  job adds **37 records, all clean** (the standard three; none purchased, none imported), in `scripts/Axioms.lean`'s block
+  "FS131-I10F". The new totals are the joined tree's `scripts/axioms.sh` print.
+- **`CLAUDE.md` § The gate**, the vacuity counts line: this job adds 39 declarations (37 theorems, 2 definitions) to
+  `declarations=`; none concludes `False`; expected verdicts `GENERIC` except `sp_if_hypotheses_trivial_bot`,
+  `negCircle_trivial_bot`, `exists_parityHom`, `exists_signChar`, `contVec_prod_eq_coin`, which are existence statements or closed
+  instances — whatever the scan prints is the count to file.
+- **Open gate items closed by this job** (for `plans/FS131-close-inventory.md`, item 535's list): `sp_if` at `Interface.NegCircle` —
+  closed by `SpectralInputs.negCircle_trivial_bot`, with every hypothesis at once in `SpectralInputs.sp_if_hypotheses_trivial_bot`
+  (over `BochnerHerglotz`); `contVec_prod_eq`'s unbuilt model — built, `SpectralInputs.contVec_prod_eq_coin`.
+- **`Proofs/HadwigerNelson/Arith/SpectralInputs.lean`, `sp_if`'s docstring, the sentence beginning "INHABITANT:"** — replace by:
+  "INHABITANT: over the arithmetic `E` the hypothesis is the open zero-entropy question; at `F = ℚ`, `I = Interface.trivial`, every
+  hypothesis but Herglotz–Bochner holds at once (`SpectralInputs.sp_if_hypotheses_trivial_bot`, in `Arith/NegCircleModel.lean`:
+  `NegCircle` by the point mass at the parity character, `ν` the point mass at the trivial character)."
+- **`plans/LEAN-BACKLOG.md`**, J45-SI-J's state (after the planner's § 9.5 draft): "[kernel on `fs131-w10f`]
+  `SpectralInputs.contVec_prod_eq`, axioms the standard three, no named hypothesis; rests on no assumption beyond its stated
+  hypotheses; inhabitant `contVec_prod_eq_coin`. Proved on events (the mean variance of sections), not by the conditional
+  expectation of the plan." J45-SI-5 (c)'s lemma, FS131-E8-SI5C: "[kernel on `fs131-w10f`]
+  `MajorityVote.ae_eq_measurable_of_majority`, axioms the standard three; holds with `G` and `c` not assumed measurable and `K`
+  countable (FS131-I10F)."
+- **`plans/FS131-E8-derivation.md`, entry FS131-E8-SI5C** (the deriver's to accept): a line "generalization (FS131-I10F, kernel): no
+  measurability of G or of the c(x) is read, and the value set need only be countable".
+- **`LEDGER.md`**: no row is regraded by this job alone — the three results are components of row 123's chain (J45), which stays at
+  its grade until the chain's other rows land; for the row's note: "J45-SI-J and the majority-vote step of J45-SI-5 (c)
+  kernel-checked on `fs131-w10f`; `Interface.NegCircle` has a kernel model at `F = ℚ`."
+- **The Frontier line**: no change (no value moved; a backlog milestone's leaves).
+- **Proof Atlas**: J45-SI-J [hand, one mind] → [kernel on branch] at the landing; FS131-E8-SI5C [hand] → [kernel on branch];
+  `sp_if` (J45-SP-if): its inhabitant note from "open gate item" to "modelled over Herglotz–Bochner".
+- **`LEAN.md` § Searching — Lean**, a new bullet after the `nlinarith` one: "A `set`, `let` or `have` of type `MeasurableSpace Ω`
+  inside a proof is a local instance: every later `MeasurableSet s`, `Measurable f` or `μ s` written without `[m]` elaborates against
+  it ('synthesized `m`, inferred `inst`'). State the sub-σ-algebra facts as lemmas over one `{m : MeasurableSpace Ω}` and apply them
+  at `(m := …)` (FS131-I10F, `Arith/MajorityVote`)."
+
+## Budget
+
+The harness's count is not visible to me. My own reading: the launch context and the files read came to roughly 150k before the
+first proof; the four leaves, four builds and this record roughly as much again. Handed back here, at a saved stage, with nothing
+of the brief's list left.

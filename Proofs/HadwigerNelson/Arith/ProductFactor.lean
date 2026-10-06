@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Arith.SpectralInputs
 import Mathlib.Probability.Independence.Basic
 import Mathlib.MeasureTheory.Measure.MeasuredSets
+import Mathlib.Probability.Independence.InfinitePi
 
 /-!
 # The factor of an independent product (J45-SI-J), at the class its argument reads (FS-131 wave 10, second planning pass)
@@ -47,7 +48,11 @@ eventually fixed, and the second system's factor pulls back (`comap_factorSigma_
 **Inhabitants.** `prodMap₃` of three identity families is the identity family; with `l = ⊥` every hypothesis on `l` but
 `hl` holds and `hl` fails (the empty filter is eventually everywhere), so the model the row names is the honest one:
 `Φ` a uniform translate on a finite group, fair bits on `R → Bool` (`Measure.infinitePi`), `l` the cofinite filter on an
-infinite `R` — not built here; the docstring of `contVec_prod_eq` says what it must satisfy.
+infinite `R`. **Built (FS131-I10F): `contVec_prod_eq_coin`** — every hypothesis of `contVec_prod_eq` at once, at `R = ℤ`,
+coin tosses of any law indexed by `ℤ` under the shift (`measurePreserving_shift_infinitePi`,
+`ProbabilityTheory.iIndepFun_infinitePi`), the cofinite filter, and one-point first and second systems. With a
+non-degenerate coin it exercises `hgen`, `hind`, `hshift` and `hl` in earnest; `h₁` and `[Finite Ω₁]` are met by a point,
+so the row's non-trivial finite translation system is not built.
 -/
 
 namespace HadwigerNelson.SpectralInputs
@@ -492,7 +497,8 @@ vectors of the product system are exactly the vectors of `L²` measurable for `�
 `SpectralInputs.contVec_eq_lpMeas` this says the two σ-algebras agree up to null sets. Identical distribution of the
 coordinates is not read. MODEL: `Ω₁` a finite group with its uniform measure and translations through a homomorphism
 `R → Ω₁` with kernel in `l`; `Ω₃ = R → Bool` under `Measure.infinitePi` of fair coins with the shift; `l` the
-neighbourhoods of `0` for a T₁ group topology that is not discrete. -/
+neighbourhoods of `0` for a T₁ group topology that is not discrete. INHABITANT: `contVec_prod_eq_coin` (every hypothesis
+at once, with a one-point first system). -/
 theorem contVec_prod_eq [AddCommGroup R] [Finite Ω₁] [MeasurableSingletonClass Ω₁] [IsProbabilityMeasure μ₁]
     [IsProbabilityMeasure μ₂] [IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃}
     (hT₁ : ∀ y, MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ y, MeasurePreserving (T₂ y) μ₂ μ₂)
@@ -542,6 +548,45 @@ theorem contVec_prod_eq [AddCommGroup R] [Finite Ω₁] [MeasurableSingletonClas
   · exact (isClosed_aestronglyMeasurable hle0).preimage continuous_subtype_val
 
 end Product
+
+/-! ## A model of every hypothesis of `contVec_prod_eq` at once -/
+
+/-- The shift of an i.i.d. process indexed by an additive group preserves its law. -/
+theorem measurePreserving_shift_infinitePi {R B : Type*} [AddCommGroup R] [MeasurableSpace B] (ρ : Measure B)
+    [IsProbabilityMeasure ρ] (y : R) :
+    MeasurePreserving (fun (ω : R → B) (x : R) => ω (x + y)) (Measure.infinitePi fun _ : R => ρ)
+      (Measure.infinitePi fun _ : R => ρ) := by
+  refine ⟨measurable_pi_lambda _ fun x => measurable_pi_apply _, ?_⟩
+  have h : (fun (ω : R → B) (x : R) => ω (x + y)) =
+      ⇑(MeasurableEquiv.piCongrLeft (fun _ : R => B) (Equiv.subRight y)) := by
+    funext ω x
+    have h1 := Equiv.piCongrLeft_apply_apply (P := fun _ : R => B) (Equiv.subRight y) ω (x + y)
+    have h2 : (Equiv.subRight y) (x + y) = x := by simp
+    rw [h2] at h1
+    exact h1.symm
+  rw [h]
+  exact Measure.infinitePi_map_piCongrLeft (μ := fun _ : R => ρ) (Equiv.subRight y)
+
+/-- **A model of every hypothesis of `contVec_prod_eq` at once**: one-point first and second systems, coin tosses of
+any law `ρ` indexed by `ℤ` under the shift, and the cofinite filter. For a non-degenerate `ρ` the coordinates are
+independent in earnest; the conclusion then says the shift of an i.i.d. process has no vector continuous along the
+cofinite filter beyond the constants. -/
+theorem contVec_prod_eq_coin (ρ : Measure Bool) [IsProbabilityMeasure ρ] :
+    contVec (prodMap₃ (fun _ : ℤ => (id : Unit → Unit)) (fun _ : ℤ => (id : Unit → Unit))
+        (fun (y : ℤ) (ω : ℤ → Bool) (x : ℤ) => ω (x + y)))
+      (measurePreserving_prodMap₃ (μ₁ := Measure.dirac ()) (μ₂ := Measure.dirac ())
+        (fun _ => MeasurePreserving.id _) (fun _ => MeasurePreserving.id _) (measurePreserving_shift_infinitePi ρ))
+      Filter.cofinite =
+      (lpMeas ℝ ℝ (prodFactorSigma (Ω₁ := Unit) (Ω₃ := ℤ → Bool) (fun _ : ℤ => (id : Unit → Unit))
+          (fun _ => MeasurePreserving.id (Measure.dirac ())) Filter.cofinite) 2
+        ((Measure.dirac ()).prod ((Measure.dirac ()).prod (Measure.infinitePi fun _ : ℤ => ρ))) :
+        Set (Lp ℝ 2 ((Measure.dirac ()).prod ((Measure.dirac ()).prod (Measure.infinitePi fun _ : ℤ => ρ))))) :=
+  contVec_prod_eq (fun _ => MeasurePreserving.id _) (fun _ => MeasurePreserving.id _)
+    (measurePreserving_shift_infinitePi ρ) Filter.cofinite (Filter.Eventually.of_forall fun _ => rfl)
+    (fun (x : ℤ) (ω : ℤ → Bool) => ω x) (fun x => measurable_pi_apply x) rfl
+    (ProbabilityTheory.iIndepFun_infinitePi (P := fun _ : ℤ => ρ) (X := fun _ => id) fun _ => measurable_id)
+    (fun _ _ _ => rfl)
+    (fun D hD => (Filter.eventually_cofinite.mpr (by simpa using hD)).frequently)
 
 /-! ## Spec -/
 

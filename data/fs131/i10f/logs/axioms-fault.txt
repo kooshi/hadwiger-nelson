@@ -58,4 +58,8 @@
 'HadwigerNelson.SpectralInputs.negCircle_trivial_bot' depends on axioms: [propext, Classical.choice, Quot.sound]
 'HadwigerNelson.SpectralInputs.countable_bot_subfield_real' depends on axioms: [propext, Classical.choice, Quot.sound]
 'HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.measurePreserving_shift_infinitePi' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.contVec_prod_eq_coin' depends on axioms: [propext, Classical.choice, Quot.sound]
 'FS131I10F.control' depends on axioms: [sorryAx]
