@@ -308,8 +308,8 @@ Atlas grade change. Two drafts for files Keryx writes:
      read today), and `tools/fs131_rp_stmt.py` with the manifest extended by BA3's ruled changes.
 5. Tidies of the same kind that no ruling names — listed, not made:
    - `re_e`, `im_e` (`Plane/Chord`) against `e_re_im` (`Plane/SixFragment`): the same two facts, apart and as a conjunction.
-   - `e_zero` and `e_add_int_mul_two_pi` live in `Plane/SixFragment`, downstream of users that re-derive them (`Plane/Basic`'s spec
-     example proves `e 0 = 1` inline).
+   - `e_add_int_mul_two_pi` (`Plane/SixFragment`: `e (θ + k * (2π)) = e θ`) and `e_add_int_mul` (`Plane/LocalStructure`: `e (x + 2π * m) = e x`): one fact with the product commuted, in sibling modules.
+   - `e_zero` (`Plane/SixFragment`) is the fact `Plane/Basic`'s spec example proves inline.
    - `tools/fs131_qa4_notes.py` reads its phrases with a literal space, so a line break inside "local hypotheses" turns
      LOCAL-SAID into CONFLICT (a tool defect, failing toward the alarm).
    - `tools/fs131_im_move_cone.py --check` holds the working `Contact` to a fixed commit and has failed since `Contact` last
