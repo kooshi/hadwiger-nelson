@@ -4135,3 +4135,43 @@ reason by the close.*
      Confidence: medium. IA2 writes only one new module (FS131-KA1 may add declarations to `BendStep` and the collar's four modules on
      `fs131-w5a`). The interface between the two bends is the weakest clause family the step reads, fixed in IA2's second stage; a change to it by
      either job comes through me.
+
+440. **FS131-E7 done: a model for each of the four hypothesis sets, no contradiction; a terminal valid plane map with a stuck vertex exists at
+     twelve colours; one sub-question open at a named step** (deriver; harness ≈ 514k by the task notice — past its line, logged as guidance only;
+     record `plans/FS131-E7-derivation.md` Stages 1–8; report `data/fs131/reports/FS131-E7.md`; commits `732762f4` … `4ce02e91` on `main`, pushed;
+     scripts under `data/fs131/e7/`). All [hand], one mind, with numerical and exact controls; nothing kernel-checked. **Q1 `a4six`** — MODEL at
+     `k = 6`: the four-petal flower `F₀` on `B(0, 5/4)`, `v = 0`, both absent colours live, every clause exercised (§ 3); `sixFrag` is no model at
+     six colours at any point, and padded to eight colours only a degenerate one. **Q2 `straddlers_third`** — MODEL at `k = 6`: `F₁`, the flower
+     with one rectangle recoloured (§ 4); `hna` holds the weak way. **Q3 `nb4p`** — `F₁` satisfies the first four with `hnb`; `hring` fails there, so
+     `hring` is not idle (§ 5.1). **Q3b** (the first four with `hring`) — GAP: stalls at a valid six-coloured fragment on `B̄(v, 1)` about a
+     four-colour vertex whose ring has six change points `60°` apart; whether `hnb` is idle is this question (§ 5.3). **Q4
+     `flank_ne_of_doublyShadowed`** — MODEL at `k = 9`: `P₄`, `sevenBrickMap` with two fresh colours planted in three bricks, the shadows' sources
+     at the far poles (§ 6). **Q5** — YES at `k = 12`: `P₅`, `sevenBrickMap` with a three-colour bowtie in `B(v, 1/10)` and four quarter-disc
+     wedges in a small disc at each pole, five fresh colours: `Valid`, `IsPlaneMap`, `Terminal`, `IsStuck v`, and an `IsTerminalMap` (§ 7); it says
+     nothing at six colours. **Finding**: `nb4p`'s proof reads `hnb` only through its first conjunct (`(hnb k hk).1`). **My receipt**: the commits
+     are on `origin/main`; the derive gate re-run, PASS, 9 controls each fired on its planted fault, 0 failures, 6 warnings (prior art owed);
+     `nb4p`'s body read by script (l. 6317–6477 of `UnitArc.lean`): `hnb` occurs once after the binder, as `(hnb k hk).1`; `rg` finds no reader
+     of `nb4p` in `Proofs/` on `main`, `fs131-w5a` or `fs131-w5c`; § 7.1's table read (the five planted colours and where each sits). **Items**:
+     corrections owed — QA4's § 4.1 rows "A4SIX, NB4P" and "horns and flanks under Condition 5", § 4.4's "for which I have none", § 4.3's row and
+     § 6.2 rank 10's any-`k` part; the docstrings on `fs131-w5c` saying "No model of a stuck vertex in a terminal valid plane map is known"
+     (`cv_l0` and its like; E7's § 7.5 has the guidance; the seventeen at `ArcMap 6` stay open). Statement note — `(F.coloursAt v)ᶜ = {a, b}`
+     admits idle colours, so a padded `sixFrag` inhabits `a4six` degenerately: a docstring remark. Prior-art debt — owed on all seven entries.
+     Questions for Poros — Q3b's smallest open form; `F₀` as a valid six-coloured fragment by formula about a four-colour vertex whose ring
+     carries (Q) arcs and no covering pair, on radius `5/4` (FS-124's object; how far it extends is unexamined). For the planner — one
+     construction serves four needs (`sevenBrickMap` relabelled plus `recolour` gives `P₄`, `P₅` and QA4's ranks 4 and 5; `P₅` is
+     `Valid ∧ Covers v 1 ∧ IsStuck v` at a fraction of the completed bowtie's size). Slips, the job's, disclosed — the reading list not completed
+     before deriving; no mid-job message for the models; predictions registered after the constructions were found in thought.
+441. **Rulings on E7's held items, and its slot.** (a) **`nb4p` is restated with the one conjunct its proof reads**, at wave 5's remedy pass (the
+     one rebuild that touches `main`'s files). Alternative weighed: a docstring note on the idle half. Why: the statement becomes strictly stronger,
+     the proof changes by a binder, and no theorem in `Proofs/` reads `nb4p`, so nothing else moves. Confidence: high; E7's "either half alone
+     suffices, by the mirror" stays [hand] and goes in the docstring as such. (b) **`a4six`'s docstring names `F₀`** as a hand model (an open gate
+     item until its Lean model lands, ruling 427 (d) F3), and says the padded `sixFrag` is degenerate; `straddlers_third` and `nb4p` name `F₁`,
+     `flank_ne_of_doublyShadowed` names `P₄`; E7's drafted lines (§§ 3.7, 4.4, 5, 6.5) are applied at the remedy pass. Default taken. (c) **The
+     Lean models `F₀`, `F₁`, `P₄`, `P₅` go to the models' planner, FS131-KM1**, in its brief (rewritten before launch): `P₅` in place of the
+     completed bowtie for QA4's rank 5 unless the planner finds a reason to keep both. Alternative: a separate planner for E7's models. Why: E7
+     shows they are one construction. Confidence: high. (d) **The bearing line for `plans/STUB-stuck-ray.md`** is filed (E7's § 7.6 draft, at its
+     slot) — **with one word corrected by me against the record's own table**: the draft said "two quarter-disc wedges at each pole"; § 7.1 and
+     § 7.4 give four in each small disc, and E7's report says four. Correction owed in the record's § 7.6. (e) **The stuck family's docstrings on
+     `fs131-w5c`** (E7's § 7.5) are the remedy pass's. (f) **The two questions for Poros** (Q3b; how far `F₀` extends) are held for the ask lane's
+     next run, with FS-124's stub; nothing is ranked on them now. (g) **Slot → FS131-IA2**, launched 2026-10-06 on the brief of item 439. In
+     flight: 1 (IR3) + 1 (KA1) + 1 (IA2) = 3. Queue: FS131-KM1; then implementers from KA1's hand-back.

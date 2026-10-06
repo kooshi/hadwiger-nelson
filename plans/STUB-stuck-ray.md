@@ -93,6 +93,12 @@ inhabits that class), which a NO there decides; the line form is not needed. Its
   chains' pencil), its use is this stub's sub-question N3-ALPH, and its bearing is this stub's; a separate stub would split one object across two files.
   FS-126 holds the saturated side, where O1-OUT is held.
 
+*At FS131-E7 (2026-10-06; [hand], one mind, kernel pending).* The any-`k` form of (c) is answered: at twelve colours a terminal valid map
+of the plane with a stuck vertex exists by formula — a bowtie of three colours in `B(v, 1/10)` and four quarter-disc wedges at each pole,
+planted in fresh colours in three bricks of the seven-colour brick map, every unit arc (Q) (`plans/FS131-E7-derivation.md` § 7). It moves
+nothing here: the five spare colours are its whole mechanism, so (b′), (b″) and (c) at six colours are unchanged; what it retires is the
+sentence "no model of a stuck vertex in a terminal valid plane map is known" for statements at any `k`.
+
 ## What FS-112 established (addresses in `plans/FS112-derivation.md`)
 
 - **Why chains can end** (FS112-FLANK, FS112-N2-FLANK-Q, FS112-N2-RAY): at a horn bound of exactly `±1`, FS-110's list of flank shadows gains an in-type
