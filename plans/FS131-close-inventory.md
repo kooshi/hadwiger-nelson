@@ -6315,3 +6315,34 @@ reason by the close.*
      stage I commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`,
      `LEAN.md`.** **A slip in form, mine**: the trial's command line carried a `cd` (to a path that is no
      directory, so it changed nothing; `pwd` checked after) — the rule is no `cd` in a compound command at all.
+
+546. **FS131-K7b, by message mid-job: three of the four flagged statements confirmed as lacking a hypothesis their own records
+     carry, one cleared; and a merge of wave 8's foundation asked and granted** (source: K7b's message to "main",
+     2026-10-06; not yet in a saved stage — by item 526's rule these go to Kooshi as defects when its saved stage carries
+     them; K7b labels each as a *statement* that needs a hypothesis, none as a route). **Confirmed**: FS114-N3-FACE (the
+     entry says "two distinct tiles of one colour"; the argument reads that the pair is far, and without it the sentence
+     is false — two tangent open discs of one colour, radii 0.4 and 0.1); FS114-N4-LENS (no class in the entry; its own
+     not-claimed line says the statement without non-Siamese is false); FS114-N7-QOPP (no class in the entry; the record
+     reads non-Siamese twice, and simple with four colours once). **Cleared**: FS114-N3-ODD — not FS116-N1-TWIST-LIT's
+     refuted clause; stated with closed arcs; it reads neither non-Siamese nor simple; it is the arc-free case of
+     FS116-RING-TWIST-C's last clause. **In each confirmed case the same mechanism**: the derivation entry's sentence
+     drops the standing setting its record's header carries. **My check of the sources**: `plans/FS114-derivation.md`
+     ll. 420, 505–506, 794 carry no class, and l. 514 reads "N4-LENS without the non-Siamese hypothesis (FALSE: NB4)";
+     `plans/FS114-N3-proof.md` l. 9, `-N4-proof.md` l. 92, `-N7-proof.md` ll. 11–12 each read "non-Siamese" as the
+     standing setting; the counterexample's arithmetic redone — centres 0 and 0.5, radii 0.4 and 0.1: the open discs
+     are disjoint (tangent at 0.4), every cross distance is below 1, and the points −0.4 and 0.6 are 1 apart with the
+     first disc on the side of the second. **Generalizations it found**: N3-FACE needs only a far pair and no tiles
+     (wave 8's `cos_nonpos_of_coneAt_of_disjoint`); N4-LENS's first clause is one line from
+     `NonSiamese.tile_eq_of_dist_lt` and reads no "simple"; N7-QOPP's cone clauses hold with no "simple" and any number
+     of colours. **Its prediction**: three of four confirmed, registered at 0.6 — met. **Rulings.** (a) **The merge of
+     `26b08395` into `fs131-w7` is granted** — that commit only; my trial conflicts in the three registry files and no
+     Lean file; every name it lists is in the module at that commit (checked). Why: two of its rows are wave 8's
+     lemmas with a line added, and re-stating them is the doubled name the gate forbids. It sends the merge's hash;
+     **FS131-I7A's unstarted branch is fast-forwarded to it**. (b) **The three statements are formalized at the class
+     their arguments read, with the hypotheses their records carry; no deriver's job** — alternative: a deriver
+     re-derives each. Why not: no step fails, and the repair is each record's own header. **Three errata lines owed**
+     under the entries, held for the filing. (c) **N7-QOPP is stated as two explicit cone windows with the absence
+     clause** (its (i)–(iv)); wave 8's second planner's brief carries the form as provisional and its N3-ODD note
+     (`mk-k78b.py 8`; gate exit 0); the final Lean text is relayed when K7b's skeleton builds. (d) Confidence in (b):
+     high — I read the lines; what I did not check is whether any other filed result quotes one of the three entries
+     without its class: asked of K7b for its saved stage.

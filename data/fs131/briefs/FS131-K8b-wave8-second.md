@@ -161,8 +161,17 @@ list of what the foundation lacks, and its handoff. Read its record whole
 5. **The rows, stated**: the nine semi-hub rows, FS116-N2-SIXRING and FS116-RING-TWIST-C, each with `sorry` at its leaves and read back
    against its row. **FS114-N7-QOPP enters three of them as a hypothesis under a name of this wave's own** (ruling 498; the first pass
    proposed `QArcsJoinOpposite F p`, from the first sentence of `plans/FS114-derivation.md` l. 793) — a `Prop`-valued definition, never an
-   axiom. Wave 7's second planner will state the row itself: send me your definition when it is fixed, so the two are stated to meet at the
-   join. FS116-RING-TRANSFER-QC is a conjunction of four of the others: a bundling theorem, or no declaration, by your reading.
+   axiom. Wave 7's second planner is stating the row itself, and has sent me the form it intends — **provisional, from its mid-job message
+   of 2026-10-06 (inventory item 546), not yet in a saved stage; I relay the final Lean text when its skeleton builds**. In its words: for
+   `hA : F.IsRingArc p u v c c'`, `c ∈ coloursAt p`, `c' ∈ coloursAt p`, in a valid non-Siamese map, any `k`, any number of colours at
+   `p`, no "simple": (i) every tile `T` of colour `c` with `p` in its closure has `coneAt T p ⊆ angleIcc (v − π/2) (u + π/2)` and holds
+   the whole arc in its closure; (ii) every tile `T′` of colour `c′` with `p` in its closure has `coneAt T′ p ⊆ angleIcc (v + π/2)
+   (u + 3π/2)`; (iii) hence `c ≠ c′` and the two cones share no direction; and, adding `(coloursAt p).ncard = 4` and `SimpleOn` at `p`:
+   (iv) every colour of `p` other than `c`, `c′` is absent at `ringPt p θ` for `θ ∈ Ioo u v`. So "opposite" arrives as two explicit cone
+   windows, not as a position in a cyclic order: define yours so that this discharges it, and if your three rows consume another form
+   (a cyclic position among four tiles), send me that form — it asked. **A second meeting point** (the same message): its FS114-N3-ODD,
+   stated with closed arcs, is the case "no arc of `Γ` meets the window" of FS116-RING-TWIST-C's last clause — state TWIST-C so that the
+   two are one theorem and a corollary at the join. Send me your definition when it is fixed. FS116-RING-TRANSFER-QC is a conjunction of four of the others: a bundling theorem, or no declaration, by your reading.
 6. **The plans for `outerAdj` and `doubleTip`**: their arguments read (`plans/FS129-SR3-audit.md` §§ 2.2–2.3, `plans/FS129-MR1-audit.md`), a
    plan per child, and each statement confirmed or corrected (`outerAdj` is already stated at the corrected reading of inventory item 518).
 7. **Vacuity and inhabitants**: the first pass's § 5.5 says which hypotheses have no Lean term yet (a change point of a four-colour vertex
