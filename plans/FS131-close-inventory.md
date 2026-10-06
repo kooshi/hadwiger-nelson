@@ -6382,3 +6382,49 @@ reason by the close.*
      hypothesis. (e) **Slot → FS131-L6A** (wave 6's first landing, item 545), launched 2026-10-06; **from now until it
      hands back I commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`,
      `LEAN.md`.** In flight: 1 (K10c) + 1 (K7b) + 1 (L6A) = 3.
+
+548. **Kooshi's word, 2026-10-06: Falconer's lemma is pulled into this milestone; and two questions of his, answered with a
+     correction of mine.** His message, verbatim: "Agree, pull in Falconer's.
+
+     I thought we have several other external-theorems-as-axioms though? What do you mean it's the only one?
+
+     And what was the forbidden `cd` for?" **(1) The decision**: `falconer_lemma2_nonempty` (`[Falconer1981]` Lemma 2 (i),
+     the library's one declared `axiom` from outside) is formalized in FS-131, not deferred to the pre-publication pass.
+     Trigger: now. Route (ruling): a deriver's job first — FS131-E10, the proof (its planner wrote "no proof in hand";
+     the paper's is Croft's, unheld) — then a planner-and-implementer job that replaces the axiom by the theorem, removes
+     its `declareImport` line, and moves its four records from IMPORTED to CLEAN through a gate. Alternative: send it
+     straight to a planner. Why not: the missing thing is the argument, and a planner's lane does not derive.
+     Confidence: high. E10 takes the next free slot. **(2) A correction, mine**: I told him Falconer's lemma is "the
+     only outside theorem the library assumes". It is the only one declared as an **axiom** (`rg '^axiom '` over
+     `Proofs/`; the gate's digest: "declared imports (1)"). Outside theorems are also assumed as **named hypotheses** —
+     `Prop` arguments of the theorems that use them — and on `main` those are, with the number of theorem signatures
+     that take each (by `grep` over `Proofs/`, 2026-10-06): `SpectralChain.BochnerHerglotz` (Herglotz–Bochner on a
+     discrete abelian group, with uniqueness) 12; `SpectralChain.InvariantMeasureOnClosed` (an invariant measure on
+     every non-empty closed invariant set of colourings — classical) 7; `SpectralInputs.BochnerOn` (Bochner's theorem
+     for a given topology) 1; `SpectralChain.Interface.MR` (measure rigidity, in Fourier form — held by his word) 1;
+     `Plane.Voronov11` (`[Voronov2023]` Thm 1.1) 1. Weil's bound is a named hypothesis on a branch and becomes the
+     second axiom when its read-back passes. My list of deferred items in item 541 (e) named three classical
+     hypotheses and was neither complete nor right: `Row134Base` is taken by no theorem on `main` (0 signatures), and
+     `BochnerOn`, `InvariantMeasureOnClosed` and `Voronov11` were missing. **Owed**: one complete, script-made list of
+     every outside theorem assumed in either form, with where each is used and a line estimate where a planner has
+     one — to be made before any further is pulled in. **(3) The `cd`**: in the trial-merge command of item 545 I
+     wrote `cd /dev/null` at the head of a line whose every command already used `git -C` with absolute paths. It
+     had no purpose that survives reading it; the target is not a directory, so the shell refused it and stayed
+     where it was (`pwd` checked after).
+
+549. **FS131-K7b, by message: the granted merge is pushed; two findings from the arguments, neither blocking** (source:
+     K7b's message to "main", 2026-10-06; merge commit `6f9807b9` on `origin/fs131-w7` — an ancestor of its tip,
+     checked by the fast-forward below). **The merge**: conflicts in the three registry files only, both sides kept;
+     build OK with the same twenty `sorry`; `dupnames` OK; the four fixed modules byte-identical before and after, by
+     its word. **Done, mine**: `fs131-w7a` (unstarted at `b5ef0e39`) fast-forwarded to `6f9807b9` and pushed, so the
+     route-T implementer starts on the merged line; its brief gets a dated amendment at launch (the statement check
+     moves to `6f9807b9`). **Finding 1, a shorter route**: FS114-Y4-LUNE's last step is FS114-Y-EDGE (`edge_rainbow`,
+     proved by the first pass), and LUNE reads no tactic edge — it is stated for two Reuleaux tiles corner to corner,
+     with no "simple". **Finding 2, a statement kind, minor, one mind, no counter-map built**: FS114-N3-LOCAL's N3-HALF,
+     last clause — the entry drops an exception ("unless it contains `p`") that its record states and each later use
+     handles; the Lean clause is FS114-Y4-UPDOWN, which carries the exception, and no separate declaration is made
+     for the unexcepted sentence. **Rulings.** (a) Finding 1 adopted. (b) **No deriver's job on finding 2 now**: the
+     kernel's statement carries the exception, no consumer it read uses the sentence without it, and whether the
+     unexcepted sentence is false is not known — its question (at a tactic edge at `p` with centre `q` and inner tile
+     `x`, can a second tile of `p` hold `q` in its closure?) is logged for the wave's errata and for Poros.
+     Alternative: launch a deriver. Why not: nothing formal waits on the answer. Confidence: medium.
