@@ -29,6 +29,9 @@ ALLOWED = [
     r"^tools/fs131_mb2_[A-Za-z0-9_]*\.py$",
     r"^data/fs131/mb2/",
     r"^data/fs131/reports/FS131-MB2\.md$",
+    # one file of the other half's data, edited at the coordinator's direction (2026-10-06): its receipt's control 1 — two lines
+    # expecting `stuckModel_hyps` and `awayModel_hyps` on `sorryAx` — dropped when both read the standard three (Stage 8)
+    r"^data/fs131/ma/MAAxioms\.lean$",
 ]
 DECL = re.compile(r"^(?:noncomputable )?(theorem|def) (\S+)")
 

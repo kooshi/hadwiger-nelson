@@ -4905,7 +4905,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.stuckModel_not_shaveAvailable
 #print axioms HadwigerNelson.Plane.stuckModel_isStuck
 
-/-! ## FS-131, the example maps, half B continued (job FS131-MB2) — `shadowModel`'s leaves (`Plane/Models/Stuck`) proved; the model theorem `shadowModel_flank_ne` is in FS131-KM1's block above -/
+/-! ## FS-131, the example maps, half B continued (job FS131-MB2) — `shadowModel`'s leaves (`Plane/Models/Stuck`) and `awayModel`'s (`Plane/Models/Bends`) proved; the model theorems `shadowModel_flank_ne`, `awayModel_hyps` are in FS131-KM1's block above -/
 -- FS131-MB2: the doubly shadowed band (Stuck)
 #print axioms HadwigerNelson.Plane.shadowArcs_nondegenerate
 #print axioms HadwigerNelson.Plane.frontier_shadowW_subset
@@ -4921,6 +4921,16 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.shadowModel_witness_real
 #print axioms HadwigerNelson.Plane.shadowModel_shadow
 #print axioms HadwigerNelson.Plane.shadowModel_doublyShadowed
+-- FS131-MB2: the outward bend's plane map (Bends) — `awayModel_hyps` and `awayModel_r2Contacts` are in FS131-KM1's block
+#print axioms HadwigerNelson.Plane.awayArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.frontier_awayW_subset
+#print axioms HadwigerNelson.Plane.awayModel_no_unit_pair
+#print axioms HadwigerNelson.Plane.awayModel_region_seven
+#print axioms HadwigerNelson.Plane.awayModel_brick
+#print axioms HadwigerNelson.Plane.awayModel_approach_real
+#print axioms HadwigerNelson.Plane.awayModel_centre_brick
+#print axioms HadwigerNelson.Plane.awayModel_coloursAt
+#print axioms HadwigerNelson.Plane.awayModel_bend_toward
 
 #eval IO.println "=== PURCHASED ==="
 

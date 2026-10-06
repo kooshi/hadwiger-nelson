@@ -5,10 +5,10 @@ import Proofs.HadwigerNelson.Plane.Models.Bends
 FS131-MB2's receipt, printed by `lake env lean` (iteration evidence; the gate's audit is `scripts/axioms.sh`). The two commands are
 FS131-MB1's (`data/fs131/mb/MBAxioms.lean`), copied unchanged; the records are MB1's, kept as a regression, and this job's.
 
-For each record: its axioms, and — because this branch holds `Plane/Models/Paint` with its leaves open (they are
-implementer A's) — **which declarations of its dependency closure are themselves proved by `sorry`, with their
-modules**. A record whose only such declarations are in `Plane.Models.Paint` is whole in this job's files and will
-read the standard three once A's leaves land; one that names a declaration of `Stuck` or `Bends` is not.
+For each record: its axioms, and **which declarations of its dependency closure are themselves proved by `sorry`, with
+their modules** — written while this branch held `Plane/Models/Paint` with its leaves open (implementer A's), when a record
+whose only such declarations were in `Plane.Models.Paint` was whole in this job's files (Stage 6); since the other half
+joined (Stage 7) no record names a leaf of `Paint`, and one that names a declaration of `Stuck` or `Bends` is open.
 
 The closure is walked through declarations of the `Proofs` library only (Mathlib and core declare no `sorry`).
 -/
@@ -69,6 +69,7 @@ end MB
 #mb_applies HadwigerNelson.Plane.cuspFrag_bend_toward HadwigerNelson.Plane.ArcMap.bend_toward
 #mb_applies HadwigerNelson.Plane.cuspFrag_bend_away HadwigerNelson.Plane.ArcMap.bend_toward
 #mb_applies HadwigerNelson.Plane.shadowModel_flank_ne HadwigerNelson.Plane.ArcMap.flank_ne_of_doublyShadowed
+#mb_applies HadwigerNelson.Plane.awayModel_bend_toward HadwigerNelson.Plane.ArcMap.bend_toward
 
 -- FS131-MB1's records (regression)
 #mb_receipt HadwigerNelson.Plane.cuspFrag_isRingArc
@@ -121,6 +122,31 @@ end MB
 #mb_receipt HadwigerNelson.Plane.shadowModel_not_isUnitArc
 #mb_receipt HadwigerNelson.Plane.shadowModel_witness_real
 #mb_receipt HadwigerNelson.Plane.shadowModel_shadow
--- the outward bend's plane map
+-- FS131-MB2: the outward bend's plane map — the four leaves, the helpers, the centre's colour, the toward bend applied
+#mb_receipt HadwigerNelson.Plane.awayArcs_nondegenerate
+#mb_receipt HadwigerNelson.Plane.frontier_awayW_subset
 #mb_receipt HadwigerNelson.Plane.awayModel_hyps
 #mb_receipt HadwigerNelson.Plane.awayModel_r2Contacts
+#mb_receipt HadwigerNelson.Plane.awayModel_P_coords
+#mb_receipt HadwigerNelson.Plane.awayModel_dist_sq
+#mb_receipt HadwigerNelson.Plane.awayModel_circPt
+#mb_receipt HadwigerNelson.Plane.awayModel_mem_circ
+#mb_receipt HadwigerNelson.Plane.awayModel_arcs_subset
+#mb_receipt HadwigerNelson.Plane.awayModel_isOpen_rect
+#mb_receipt HadwigerNelson.Plane.awayModel_closure_rect
+#mb_receipt HadwigerNelson.Plane.awayModel_frontier_rect
+#mb_receipt HadwigerNelson.Plane.awayModel_wall_mem
+#mb_receipt HadwigerNelson.Plane.awayModel_mem_awayW
+#mb_receipt HadwigerNelson.Plane.awayModel_rect_subset
+#mb_receipt HadwigerNelson.Plane.awayModel_rect_dist
+#mb_receipt HadwigerNelson.Plane.awayModel_not_mem_arcs
+#mb_receipt HadwigerNelson.Plane.awayModel_no_unit_pair
+#mb_receipt HadwigerNelson.Plane.awayModel_isPlaneMap
+#mb_receipt HadwigerNelson.Plane.awayModel_region_seven
+#mb_receipt HadwigerNelson.Plane.awayModel_brick
+#mb_receipt HadwigerNelson.Plane.awayModel_trig
+#mb_receipt HadwigerNelson.Plane.awayModel_ringPt_mem
+#mb_receipt HadwigerNelson.Plane.awayModel_approach_real
+#mb_receipt HadwigerNelson.Plane.awayModel_centre_brick
+#mb_receipt HadwigerNelson.Plane.awayModel_coloursAt
+#mb_receipt HadwigerNelson.Plane.awayModel_bend_toward

@@ -457,3 +457,167 @@ Stage 8, when both are whole, as MA1's record and the coordinator's message say.
   `mem_hornArcs_carrier_iff_of_mem_ball` overlaps `shadowModel_mem_hornArcs`; mine were written before the merge, read the library
   alone, and also carry the far case. Two statements of one fact under two names — no merged declaration, nothing for `dupnames.sh` —
   and a candidate for folding once the lane is on `main`.
+
+## Stage 8 — SAVED (FS131-MB2): `awayModel` whole — its four leaves proved, and `bend_toward` applied to it; one `sorry` is left in the lane
+
+*2026-10-06 10:22 UTC.* The four leaves of `awayModel` are proved, with 22 helpers and one new model theorem (new declarations in
+`Bends`, each named `awayModel_…`; none declared in any other worktree's `Proofs/`). `Bends.lean` went from 190 to 666 lines: 149 lines
+in the four leaves, 319 in the helpers, 3 in `awayModel_bend_toward`. No statement changed.
+
+### 8.1 The leaves, and the route each took
+
+| leaf | route | lines |
+|---|---|---|
+| `awayArcs_nondegenerate` | the two arcs; `0 < arcsin s ≤ π/2` | 10 |
+| `frontier_awayW_subset` | the planner's: `frontier_union_subset`, `frontier_inter_subset`; a frontier point of an open brick is on one of its four walls (`awayModel_frontier_rect`), and the walls are brick edges — its own bottom and left, the next brick's left, and **the bottoms of the two bricks of the row above** (`awayModel_wall_mem`, by `mem_sevenBrickArcs_of_bottom`, `_of_left`); a point of the circle of radius `ρ` in the closed brick is on the new arc (`awayModel_mem_circ`: the angle is `arcsin` of the height over `ρ`, no `arg`) | 25 (+ 100) |
+| `awayModel_hyps` | *Valid*: `paint_valid`, with `awayModel_no_unit_pair` (each brick open of diameter `1`; the two pieces inside the unit circle and outside the circle of radius `2`). *Ring arc*: `cuspFrag_isRingArc`'s pattern (MB1's), with the open brick `(0, 4/5) × (0, 3/5)` as the neighbourhood: every interior point of the arc is strictly inside it (`awayModel_ringPt_mem`), and in it the map is the circle's two sides (`awayModel_brick`: `7` inside, the base's `0` outside, by `brickBase_col_zero`). *`7` not at the centre*: the class of `7` is the painted set (`awayModel_region_seven`), right of the line `re = 0`. *`Γ` near the arc*: the brick holds no base edge, and the other new arc is `2` from the centre | 66 (+ 110) |
+| `awayModel_r2Contacts` | `⊆`: the class's closure lies in the strip `0 ≤ im ≤ 3/5`, so `\|sin θ\| ≤ 3/20`, and `arcsin` is monotone. `⊇`: the point at the angle `θ` is a limit of the class along **the segment toward `(3/2, 3/10)`** (`awayModel_approach_real`): at an end angle the point is on the brick's top or bottom wall, where the radial direction leaves the brick, and the segment does not — its points are strictly inside the brick and further than `2` from the centre because `(q − P)·(m − q) = (21/5) cos θ − 4 > 0` | 48 (+ 52) |
+
+**The stronger model of `bend_toward`, as the planner's § 3.4 authorizes** (new declarations): `awayModel_coloursAt :
+awayModel.coloursAt awayP = {6}` — the centre is strictly inside the brick `(−4/5, 0) × (0, 3/5)`, where the map is the base, of the
+brick map's colour `6` (`awayModel_centre_brick`, by MA1's `brick_floor_eq` and `sevenBrick_color_eq`) — and `awayModel_bend_toward`,
+`ArcMap.bend_toward` applied to `awayModel`'s arc: a map of the plane whose centre **carries a colour** and neither side colour of the
+arc, where `cuspFrag_bend_toward`'s centre carries none.
+
+### 8.2 The build, the receipt, the checks
+
+**The build**: `data/fs131/mb2/build-3.log` — `build: OK — 452 of 452 batches, 2 module(s) rebuilt, 1 module(s) with warnings, 8m5s`, exit 0;
+the full log (`build-3-full.log`) ends `Build completed successfully (5754 jobs)`: **0 warnings other than `sorry`**, and **one `sorry`
+warning in the whole build: `Stuck.lean:1362`, `stuckModel_terminal`** (`Paint` 0, `Moves` 0, `Bends` 0).
+
+**The receipt** (`MB2Axioms-stage8.out` → `receipt-stage8.out`, `--stage 8`, exit 0: 76 records, 76 claimed, 0 findings): **75 on
+exactly the standard three with no `sorry`-proved declaration in the closure** — MB1's 24 that were whole or waited on `Paint`,
+`shadowModel`'s 24, and `awayModel`'s 27 (`awayModel_hyps`, `awayModel_r2Contacts`, `awayModel_bend_toward`, the two structural leaves,
+22 helpers); 1 open, `stuckModel_terminal`. `#mb_applies`: `awayModel_bend_toward <- ArcMap.bend_toward | APPLIED`, beside the three
+earlier pairings and the control pairing `NOT-APPLIED`. Controls (`receipt-selftest-stage8.out`): `4 of 4 plants fired; faithful run 0
+finding(s) -> OK`. (The plant "a record's line deleted" fires with two findings, not one: the parser glues the mangled line onto the
+record before it, so that one is unread too — the path that must fire, "no record", fires, with one collateral finding from the
+plant's own shape.)
+
+**The statement check**: `statements.out` — 115 declarations of `b7fbe6f9` and 53 of the skeleton, 0 not found verbatim once; 19 paths
+outside this job's, 19 byte-identical to the merged half; its self-test `115 of 115 … 19 of 19 … 0 -> OK`. `tools/check_architecture.py`:
+exit 0, `RESULT: PASS`. `scripts/Axioms.lean`: this job's block now 23 records (14 + 9); the file holds 4,019 `#print axioms` lines =
+3,948 + 30 (MA1) + 18 (MB1) + 23.
+
+**FS131-MA1's control 1, dropped as its record and the coordinator's message direct** — the one edit this job makes outside its own
+paths: `data/fs131/ma/MAAxioms.lean` loses the two lines `#print axioms …stuckModel_hyps`, `…awayModel_hyps` (MA1's control expecting
+implementer B's two model theorems on `sorryAx`), replaced by a two-line comment saying who dropped them and why. MA1's tool, run and
+not edited: before the drop `177 of 177 claimed records on the standard three; 2 of 4 controls fire; 2 problem(s) -> FAIL`
+(`data/fs131/mb2/ma-axioms-stage8-before.out`: both lines `CONTROL SILENT`, red by design); after it `177 of 177 …; 2 of 2 controls
+fire; 0 problem(s) -> PASS` (`ma-axioms-stage8-after.out`), and its `--self-test` `OK` (three plants fire). The statement check lists
+that one path among this job's, with the reason beside it.
+
+### 8.3 The statements read against the claims
+
+- **`awayModel_hyps`** is `Valid ∧ IsPlaneMap ∧ IsRingArc awayP (−arcsin(3/10)) (arcsin(3/10)) 7 0 ∧ 7 ∉ coloursAt awayP ∧ ∀ θ ∈ Ioo …,
+  ∃ r > 0, Γ ∩ ball (ringPt awayP θ) r ⊆ sphere awayP 1`. Read against wave 5's `bend_away_part` (`fs131-w5a` at `74fbdf16`,
+  `Plane/ValidMap/BendStep.lean` l. 346–348: `(hF : F.Valid) (hP : F.IsPlaneMap) … (hA : F.IsRingArc P θ₁ θ₂ c c') (hin : c ∉
+  F.coloursAt P) (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1)`): its five hypotheses, in order, at `c = 7`,
+  `c' = 0`. The theorem is not on this branch, so the application is one line for the landing after wave 5 (the plan's § 3.8).
+  **No clause holds for want of an object**: `innerColours = {7}` and `outerColours = {0}` are equalities, so both sides are live at
+  every interior point of the arc; the centre carries a colour, `6` (`awayModel_coloursAt`); `Γ` near the arc is the arc.
+- **`awayModel_r2Contacts`** — the contacts are `[−arcsin(3/20), arcsin(3/20)]`, strictly inside the arc's `[−arcsin(3/10),
+  arcsin(3/10)]`: two gaps and a contact piece, FS131-KA1 § 5's "what it exercises", verbatim in its numbers. Not exercised, as KA1
+  says: an isolated contact.
+- **`awayModel_bend_toward`** — `∃ F', F'.Valid ∧ ∀ θ ∈ Ioo …, ¬ F'.OnRingArc awayP (ringPt awayP θ)`, `cuspFrag_bend_toward`'s form:
+  `bend_toward`'s first and fourth conclusions, its hypotheses `hF`, `hA`, `hout` supplied by `awayModel_hyps` and
+  `awayModel_coloursAt`.
+
+### 8.4 What is left in the lane, and its route
+
+| what | route |
+|---|---|
+| `stuckModel_terminal` (`Stuck`, the lane's one `sorry`) | after wave 5, as the plan's § 3.8 and MB1's § 4.1 have it; **nothing with a `sorry` reaches `main`**, so the lane's landing waits for it or lands without that declaration — a ruling (HELD) |
+| a plane-map model of `bend_away_whole` | ruling 471 (c): a sub-arc of `awayModel`'s arc inside a gap, e.g. `[1/5, 3/10]`, after wave 5 (`IsRingArc.mono`). This job leaves for it: `awayModel_hyps` (the ring arc to restrict), `awayModel_r2Contacts` (so `hR2` on a sub-arc inside `(arcsin(3/20), arcsin(3/10)]` is "no contact there": `1/5 > arcsin(3/20)` needs `sin(1/5) > 3/20`), `awayModel_region_seven` |
+| `bend_away_part awayModel_hyps.1 awayModel_hyps.2.1 awayModel_hyps.2.2.1 awayModel_hyps.2.2.2.1 awayModel_hyps.2.2.2.2 one_pos` | the application, one line, when wave 5 and the lane meet |
+| the fold of § 7.3 (`shadowModel_hornSet_not_mem_hornArcs` over `disjoint_hornSet_hornArcs`); `awayModel_dist_sq` beside `stuckModel_dist_sq` (`Bends` does not import `Stuck`, so the squared distance in coordinates is stated in both, under two names) | a tidy for the landing; no doubled name |
+
+### 8.5 Slips, my own
+
+- **A waiter armed on the wrong event.** I launched the joined tree's build (`build-2`) with an inner `&` under the harness's
+  background flag, so the task's notice fired two seconds later, while the build ran on. Caught when the notice arrived (the slot's
+  ledger showed the build alive); from then the build was watched by the `exit=` line of its log — a line both its success and its
+  failure write — with the line asserted absent at arming. No number in this record came from the early notice.
+- `shadowModel_hornSet_not_mem_hornArcs` was written before I knew the other half held `disjoint_hornSet_hornArcs` (§ 7.3): a second
+  statement of one fact, found at the merge by reading MA1's handoff, not by a search of mine beforehand — the other branch was not
+  yet fetched.
+- First drafts that the elaborator refused, each at its first run: a `first | … ; norm_num` whose `;` bound to the last alternative
+  only; a `closure_minimal` whose anonymous-constructor argument had no expected type; `arcsin ≤ π/2` missing from two contexts.
+
+## Drafts for the front page (FS131-MB2)
+
+*Each names its slot. This job ran no gate (the brief keeps it for the landing); the numbers below are counts of lines and of receipt
+records I read, never gate counts.*
+
+1. **`CLAUDE.md` § Trust ledger** (the sentence "the current audit reads … clean and … declared purchases, and … imported"): no number
+   drafted — read it off `scripts/axioms.sh` at the landing. What the lane adds to `scripts/Axioms.lean` over `main`'s 3,912 records:
+   36 (FS131-KM1) + 30 (FS131-MA1) + 18 (FS131-MB1) + 23 (FS131-MB2) = 107, of which on this branch today 106 read the standard three
+   by the two jobs' receipts and one, `stuckModel_terminal`, rests on `sorryAx`. No purchase, no import.
+2. **`CLAUDE.md` § The gate** (the vacuity counts): unread. This job adds 39 theorems and no definition (16 in `Stuck`, 23 in `Bends`);
+   none concludes `False`, none has a colouring binder; `shadowModel_flank_ne` concludes `(7 : Fin 9) ≠ 8`.
+3. **Ledger rows regraded to [kernel]**: none — the models are inhabitants owed by `LEAN.md` § The gate's inhabitant bullet, not rows.
+4. **`ARCHITECTURE.md`**, the rows `Plane/Models/Stuck` and `Plane/Models/Bends` (not mine to edit under this brief):
+   - `Stuck`: for "**FS-131, the example maps, skeleton** (FS131-KM1; hand objects FS131-E7's `P₅`, `P₄`)" read "**FS-131, the example
+     maps** (FS131-KM1; proved by FS131-MB1 and FS131-MB2; hand objects FS131-E7's `P₅`, `P₄`)"; for "`sorry` at the leaf facts" read
+     "`stuckModel_hyps` and `shadowModel_flank_ne` on the standard three; one `sorry`, `stuckModel_terminal` (after wave 5)".
+   - `Bends`: for "**FS-131, the example maps, skeleton** (FS131-KM1)" read "**FS-131, the example maps** (FS131-KM1; proved by FS131-MB1
+     and FS131-MB2)"; for "`sorry` at the leaf facts" read "no `sorry`; also `awayModel_coloursAt` (the centre carries `6` alone) and
+     `awayModel_bend_toward` (`bend_toward` applied on a map of the plane)".
+5. **The docstring lines the models earn** (applied by whoever lands the lane; none applied here):
+   - `flank_ne_of_doublyShadowed` (`Plane/ValidMap/Contact`) — slot: the end of its docstring. "**Inhabitant**: `shadowModel`
+     (`Plane/Models/Stuck`, `shadowModel_flank_ne`) — the brick map in nine colours with a flank of `7` above and of `8` below a band at
+     `plantPt`, a horn of `7` at the lower pole and of `8` at the upper (FS131-E7 § 6), `κ₁ = −1/2`, `κ₂ = 1/2`, band `(−1/8, 1/8)`:
+     every hypothesis holds on it at once, each shadow from a live class (`shadowModel_shadow`)."
+   - `bend_toward` (`Plane/ValidMap/UnitArc`) — slot: after MB1's draft 3 sentence ("… a model of the hypotheses' letter."). "On a map
+     of the plane: `awayModel` (`awayModel_bend_toward`), whose centre carries `6` and neither side colour (`awayModel_coloursAt`)."
+   - `bend_away_whole` — MB1's sentence stands alone; its plane-map model is ruling 471 (c)'s, after wave 5.
+   - wave 5's `bend_away_part` (`Plane/ValidMap/BendStep`; and the five siblings FS131-KA1 § 5 names as owing the same line:
+     `bend_away_subdiv`, `bend_away_gap`, `r2_side_dichotomy`, `exists_r2Subdiv`, `exists_lensOut_clear`) — slot: in place of "Model of
+     the hypotheses: none in Lean on this branch; … (open gate item, ruling 419 (d))". "**Inhabitant**: `awayModel`
+     (`Plane/Models/Bends`, `awayModel_hyps`: the five hypotheses at once, `P = awayP`, `c = 7`, `c' = 0`), a map of the plane whose
+     radius-2 contacts are the interval `[−arcsin(3/20), arcsin(3/20)]` strictly inside the arc's angles (`awayModel_r2Contacts`): two
+     gaps and a contact piece. An isolated contact is not exercised (`isoFrag`, a fragment, is the hand model of one)." Each sibling's
+     line is re-read against that theorem's own hypotheses by whoever edits it.
+   - the seventeen notes of QA4-2 (MB1's draft 3, first bullet): its condition — "to be applied only when `stuckModel_hyps` reads the
+     standard three" — **is met on this branch since Stage 7**; `cv_l0`'s line still waits for `stuckModel_terminal`.
+6. **The inventory** (`plans/FS131-close-inventory.md`, Keryx's): the open gate items on `flank_ne_of_doublyShadowed`'s inhabitant
+   (FS131-E7's `P₄`, hand) and on `bend_away_part`'s (ruling 419 (d)) have their Lean objects on `fs131-wmb` — `shadowModel` with
+   `shadowModel_flank_ne`, the theorem applied, and `awayModel` with `awayModel_hyps` — each on the standard three; they close when
+   the lane lands on `main` (and, for `bend_away_part`, when the one-line application is stated beside wave 5).
+7. **The Frontier line, the Proof Atlas**: no change — no result's grade moved; what closes is gate items about kernel theorems.
+
+## Theorems this phase proved (FS131-MB2), at the last saved stage
+
+All in the worktree's build of `fs131-wmb` at Stage 8's Lean source (`data/fs131/mb2/build-3.log`, exit 0); axioms as stored in the built
+`.olean`s and printed by `lake env lean data/fs131/mb2/MB2Axioms.lean` (`MB2Axioms-stage8.out`) — the gate's audit
+(`scripts/axioms.sh`) was not run.
+
+**[kernel], on exactly `[propext, Classical.choice, Quot.sound]`:**
+
+- `HadwigerNelson.Plane.shadowModel_flank_ne` (`Plane/Models/Stuck`) — `ArcMap.flank_ne_of_doublyShadowed` applied to `shadowModel`
+  at `plantPt`, `α = 0`, `κ₁ = −1/2`, `κ₂ = 1/2`, `g = 7`, `h = 8`: its nine hypotheses hold at once on a map of the plane. Its leaves,
+  this job's: `shadowArcs_nondegenerate`, `frontier_shadowW_subset`, `shadowCol_locallyConstant` (so the definition `shadowModel` is
+  free of `sorry`), `shadowModel_valid`, `shadowModel_condition5`, `shadowModel_flanks`, `shadowModel_doublyShadowed`; with the helpers
+  `shadowModel_mem_hornArcs`, `shadowModel_hornSet_not_mem_hornArcs`, `shadowModel_dists`, `shadowModel_not_mem_arcs`,
+  `shadowModel_disjoint`, `shadowModel_isOpen`, `shadowModel_shadowCol`, `shadowModel_shadowW_subset`, `shadowModel_mem_region`,
+  `shadowModel_tanHeight`, `shadowModel_apart`, `shadowModel_flank_source`, `shadowModel_no_unit_pair`, `shadowModel_not_isUnitArc`,
+  `shadowModel_witness_real`, `shadowModel_shadow`.
+- `HadwigerNelson.Plane.awayModel_hyps` (`Plane/Models/Bends`) — `awayModel` is a valid map of the plane; the arc of `ω(awayP)` over
+  `[−arcsin(3/10), arcsin(3/10)]` is a ring arc with inner colour `7` and outer colour `0`; `7` is not carried at `awayP`; near each
+  interior point of the arc `Γ` lies on `ω(awayP)` — the five hypotheses of wave 5's `bend_away_part`, at once.
+- `HadwigerNelson.Plane.awayModel_r2Contacts` — the radius-2 contacts of `7` on that arc are `[−arcsin(3/20), arcsin(3/20)]`.
+- `HadwigerNelson.Plane.awayModel_coloursAt` — `awayModel.coloursAt awayP = {6}`; and `awayModel_bend_toward` — `ArcMap.bend_toward`
+  applied to `awayModel`'s arc.
+- Their leaves and helpers: `awayArcs_nondegenerate`, `frontier_awayW_subset` (so the definition `awayModel` is free of `sorry`);
+  `awayModel_P_coords`, `awayModel_dist_sq`, `awayModel_circPt`, `awayModel_mem_circ`, `awayModel_arcs_subset`,
+  `awayModel_isOpen_rect`, `awayModel_closure_rect`, `awayModel_frontier_rect`, `awayModel_wall_mem`, `awayModel_mem_awayW`,
+  `awayModel_rect_subset`, `awayModel_rect_dist`, `awayModel_not_mem_arcs`, `awayModel_no_unit_pair`, `awayModel_isPlaneMap`,
+  `awayModel_region_seven`, `awayModel_brick`, `awayModel_trig`, `awayModel_ringPt_mem`, `awayModel_approach_real`,
+  `awayModel_centre_brick`.
+
+**MB1's theorems that waited on the other half, on the standard three since Stage 7's merge** (MB1's proofs, unchanged; read by this
+job's receipt): `stuckModel_hyps`, `stuckModel_isStuck`, `stuckModel_coloursAt`, `stuckModel_hasSectors`, `stuckModel_isHorn`,
+`stuckModel_flanks`, `stuckModel_contacts`, `stuckModel_not_mergeAvailable`, `stuckModel_not_rayAvailable`,
+`stuckModel_not_shaveAvailable`, `stuckModel_partition`, `stuckModel_horn_cases`, `stuckModel_shadow`.
+
+**Open in this half's files** (1 `sorry`): `stuckModel_terminal` (not this job's: after wave 5).

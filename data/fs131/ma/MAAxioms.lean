@@ -215,9 +215,8 @@ theorem planted_merge : ∃ ρ > 0, ∃ F' : ArcMap 8, F'.Valid ∧ F'.AgreesOff
 end MAControl
 
 -- CONTROL (each must carry sorryAx)
--- control 1: implementer B's models, open on this branch (drop these two lines when `Stuck` and `Bends` are whole)
-#print axioms HadwigerNelson.Plane.stuckModel_hyps
-#print axioms HadwigerNelson.Plane.awayModel_hyps
+-- control 1 (implementer B's two model theorems, open while `Stuck` and `Bends` were) was dropped by FS131-MB2 at its Stage 8, when
+-- `stuckModel_hyps` and `awayModel_hyps` read the standard three: MA1's note, and the coordinator's direction (2026-10-06)
 -- controls 2 and 3: a model theorem of each model with one leaf reopened beneath it (stay valid after the lane lands)
 #print axioms MAControl.planted_shave
 #print axioms MAControl.planted_merge

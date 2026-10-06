@@ -1,0 +1,234 @@
+APPLIES HadwigerNelson.Plane.cuspFrag_bend_away <- HadwigerNelson.Plane.ArcMap.bend_away_whole | APPLIED
+APPLIES HadwigerNelson.Plane.cuspFrag_bend_toward <- HadwigerNelson.Plane.ArcMap.bend_toward | APPLIED
+APPLIES HadwigerNelson.Plane.cuspFrag_bend_away <- HadwigerNelson.Plane.ArcMap.bend_toward | NOT-APPLIED
+APPLIES HadwigerNelson.Plane.shadowModel_flank_ne <- HadwigerNelson.Plane.ArcMap.flank_ne_of_doublyShadowed | APPLIED
+APPLIES HadwigerNelson.Plane.awayModel_bend_toward <- HadwigerNelson.Plane.ArcMap.bend_toward | APPLIED
+RECORD HadwigerNelson.Plane.cuspFrag_isRingArc | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.cuspFrag_coloursAt_I | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.cuspFrag_radiusTwo_disjoint | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.cuspFrag_bend_away | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.cuspFrag_bend_toward | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckArcs_nondegenerate | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckArcs_finite | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.frontier_stuckW_subset | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckCol_locallyConstant | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_valid | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_coloursAt | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_hasSectors | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_isHorn | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_flanks | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_contacts | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_not_mergeAvailable | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_not_rayAvailable | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_not_shaveAvailable | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_isStuck | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_hyps | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_terminal | SORRY-IN-OWN-FILES | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Stuck:HadwigerNelson.Plane.stuckModel_terminal]
+RECORD HadwigerNelson.Plane.stuckModel_no_unit_pair | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_partition | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_horn_cases | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_shadow | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowArcs_nondegenerate | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.frontier_shadowW_subset | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowCol_locallyConstant | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_valid | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_condition5 | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_flanks | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_doublyShadowed | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_flank_ne | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_mem_hornArcs | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_hornSet_not_mem_hornArcs | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_dists | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_not_mem_arcs | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_disjoint | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_isOpen | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_shadowCol | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_shadowW_subset | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_mem_region | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_tanHeight | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_apart | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_flank_source | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_no_unit_pair | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_not_isUnitArc | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_witness_real | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_shadow | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayArcs_nondegenerate | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.frontier_awayW_subset | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_hyps | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_r2Contacts | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_P_coords | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_dist_sq | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_circPt | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_mem_circ | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_arcs_subset | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_isOpen_rect | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_closure_rect | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_frontier_rect | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_wall_mem | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_mem_awayW | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_rect_subset | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_rect_dist | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_not_mem_arcs | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_no_unit_pair | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_isPlaneMap | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_region_seven | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_brick | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_trig | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_ringPt_mem | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_approach_real | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_centre_brick | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_coloursAt | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_bend_toward | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
