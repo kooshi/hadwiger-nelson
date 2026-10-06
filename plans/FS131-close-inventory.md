@@ -7100,3 +7100,18 @@ reason by the close.*
      generalizations and two corrections go to the wave's errata; the stub line of ruling 568 (c) stands.
      (f) **Slot → FS131-I6Z** (wave 6's centres, on `fs131-w6z` at `2aa3f720`), launched 2026-10-06. In flight: 3
      (L10B, I6L, I6Z).
+573. **FS131-L10B, by message mid-job: the gate is green at every step but the guarded lint — one unused instance argument; a word asked and given** (source: L10B's message to "main", 2026-10-06; its gated commit `e80221d3` on `fs131-w10m` — the artifact is read at its hand-back).
+     By its word, on `e80221d3`, each exit 0: the build with no warning; `sorry` 0; the doubled-name check and its
+     self-test; the axiom audit ("audited: 6334 records"; exactly eight under IMPORTED, none on Falconer's lemma as an
+     axiom) and its self-test after the controls edit; the vacuity scan and its self-test (no site added;
+     `declarations` 14299 to 14501); architecture; notes; the records check (160 hand-written theorems of the
+     landing); the kernel's signature of every head. **Red**: the lint, at
+     `SpectralInputs.fibre_mem_factorSets` (`Arith/ProductFactor`), "argument 11: [MeasurableSingletonClass Ω₁]"
+     unused — a child lemma of the third implementer's with no backlog row; no branch had run the lint on that file.
+     **Ruling**: **the binder is deleted** — the pattern of rulings 494 (a) and 507 (a); exactly one declaration
+     changes, by that binder; the callers keep theirs; if a second line appears it stops and tells me; then the
+     build and the whole gate again on the new commit, which is the one that lands. Alternatives: land with the
+     lint red, or a `nolint`. Why not: the lint is part of the gate, and neither option leaves it one. Confidence:
+     high. Reply sent, one message. **For the briefs**: an implementer's brief does not ask for the lint, and an
+     unused anonymous instance binder is exactly what the build's linters do not report — a tidy for the workflow:
+     an implementer's last stage runs the guarded lint on its own files (to the next briefs I write).

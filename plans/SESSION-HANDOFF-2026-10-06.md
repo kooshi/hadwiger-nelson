@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–572 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–573 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -122,6 +122,7 @@ a fresh agent on the same brief.
 - **A hand-back's statement check must read the kernel's statements** (item 556): a section `variable` enters a theorem only if its
   statement mentions it, so a leaf can be stated without a hypothesis its file shows, and a textual check passes it. At a review,
   `#check` at least the row's heads (`lake env lean` on a three-line file under the slot); landing briefs ask it of every head.
+- **An implementer's last stage runs the guarded lint** (item 573: a landing's gate went red on an unused instance binder no branch had linted) — say so in every implementer brief written from now on: `lake lint --no-build -- --no-build --trace` under the slot with `--mem 8`, after its last green build.
 - **Prices, calibrated** (item 541; `data/fs131/calibration/price-vs-actual.md`): one implementer job is about an hour, about 430k
   tokens, about 1,300 lines of Lean (`tokens ≈ 311k + 129 per line`); read a planner's price in **lines** (÷ 1,500 = jobs, plus a planning
   pass if unstated) — token prices run a third low, line counts are right, sessions are twice high, day-prices ten times high in jobs.
