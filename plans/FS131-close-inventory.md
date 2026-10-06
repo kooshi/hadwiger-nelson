@@ -4646,3 +4646,30 @@ reason by the close.*
      practice, filed once. (f) The three further same-fact pairs are a tidy move after the landing. (g) **Slot → FS131-L5, wave 5's landing**,
      launched 2026-10-06 in `fs131-w5c`. While it is in flight I commit nothing to `main` outside `plans/`, `data/`, `.claude/`,
      `BIBLIOGRAPHY.md`, `LEDGER.md` (ruling 415 (b)). In flight: 1 (L5) + 1 (MA1) + 1 (MB1) = 3.
+
+470. **FS131-MB1 done at its Stage 4: two example maps whole — the cusp fragment's arc for the two older bends, and the twelve-colour stuck
+     map valid; two not begun** (implementer; harness ≈ 518k by the task notice; record `fs131-wmb`'s `plans/FS131-MB1-implementation.md`
+     Stages 1–4; report `data/fs131/reports/FS131-MB1.md` on that branch; commits `36122003`, `5965c3ca`, `16a8082e` (the Lean source the
+     build read), `b7fbe6f9`; pushed, tree clean). **Results**: `cuspFrag_bend_away`, `cuspFrag_bend_toward` — `bend_away_whole` and
+     `bend_toward` applied to the cusp fragment's arc, on the standard three (a model of the hypotheses' letter: the arc's centre carries no
+     colour). `stuckModel_valid` on the standard three; `stuckModel_hyps : Valid ∧ IsPlaneMap ∧ Covers plantPt 1 ∧ IsStuck plantPt` proved
+     from every leaf of this half and resting on `sorryAx` through one leaf of the other half's, `brickBase_mem_interiorPts`. Not begun:
+     `shadowModel` (7 leaves), `awayModel` (4), `stuckModel_terminal` (after wave 5). No statement changed (53 skeleton declarations
+     verbatim, by script); no leaf found false. **My receipt**: tip equals `origin/fs131-wmb`; `data/fs131/mb/build-2.log` ends "build: OK —
+     452 of 452 batches … EXIT 0" and its full log "Build completed successfully (5754 jobs)", 0 warnings other than `sorry`, distinct
+     `sorry` warnings 43 (`Moves` 18 and `Paint` 13, the other half's; `Stuck` 8, `Bends` 4); the job's receipt
+     (`data/fs131/mb/MBAxioms-stage3.out`, read by `grep`): 32 records — 11 STANDARD-THREE (the two cusp bends and `stuckModel_valid` among
+     them), 13 SORRY-VIA-PAINT-ONLY (`stuckModel_hyps` among them), 8 SORRY-IN-OWN-FILES; `receipt-stage3.out` ends "32 records, 4 pairings;
+     findings: 0". **Items**: generalization — a horn set that is a sector at the stuck vertex is forced by cones and `hornSet_curv_eq`,
+     shorter than the bowtie's ray argument. Predictions scored — `stuckModel` 1,157 lines against 950–1,300 planned. A finding on ruling
+     461 (c) — a model of `bend_away_whole` cannot be `awayModel`'s whole arc (its radius-2 contacts are an interval, by the skeleton's own
+     `awayModel_r2Contacts`); it must be a sub-arc inside a gap, and no restriction lemma for `IsRingArc` is in the library on `main`. A tool
+     — its receipt lists, per record, the `sorry`-proved declarations of its dependency closure by module. Slips, the job's, disclosed.
+471. **Rulings on MB1's held items, and its slot.** (a) **Its order stands** (the cusp arc first: the one model whose receipt read the
+     standard three on that branch). (b) **A successor, FS131-MB2, takes `shadowModel` then `awayModel`** on `fs131-wmb`, from its record
+     § 4.1. (c) **Ruling 461 (c) is revised**: the plane-map model of `bend_away_whole` is a sub-arc of `awayModel`'s arc inside a gap, and
+     it is built by the lane's landing job after wave 5 is on `main`, where `IsRingArc.mono` lives (in `Procedure`). Alternative: MB2 writes
+     the restriction lemma on `main`'s line now. Why not: it would state a lemma wave 5 already has under a name of its own — the practice
+     item 467 (g) ended. Confidence: high. (d) **The docstring lines** wait as MB1 says: the stuck family's until `stuckModel_hyps` reads the
+     standard three, `cv_l0`'s until `stuckModel_terminal`. (e) **Slot → FS131-MB2**, launched 2026-10-06. In flight: 1 (L5) + 1 (MA1) + 1
+     (MB2) = 3.
