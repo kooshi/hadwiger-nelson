@@ -1,0 +1,2 @@
+declarations of the skeleton checked: 76; new declarations: 0
+PASS (--move: moved text byte-identical)

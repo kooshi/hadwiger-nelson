@@ -1,0 +1,11 @@
+`bv_l3`: statement 4 lines, 416 bytes, identical; after `BaseCtx.l3_base`; `BaseCtx.l3_base`'s statement identical; no `sorry` in the body
+control (as is): PASS
+plant 'a hypothesis of bv_l3 changed': fired — `bv_l3`'s statement differs
+plant 'a hypothesis of bv_l3 dropped': fired — `bv_l3`'s statement differs
+plant 'bv_l3's conclusion changed': fired — `bv_l3`'s statement differs
+plant 'still in the old module': fired — the old module still declares `bv_l3`
+plant 'declared twice': fired — expected one declaration of `bv_l3` under Proofs/, found 2: ['Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean', 'planted']
+plant 'declared before l3_base': fired — `bv_l3` (line 3508) is declared before `BaseCtx.l3_base` (line 3557)
+plant 'l3_base's statement changed': fired — `BaseCtx.l3_base`'s statement differs from the ref's
+plant 'a sorry in bv_l3's body': fired — `bv_l3`'s body holds a `sorry`
+SELF-TEST PASS

@@ -1,0 +1,2 @@
+`bv_l3`: statement 4 lines, 416 bytes, identical; after `BaseCtx.l3_base`; `BaseCtx.l3_base`'s statement identical; no `sorry` in the body
+PASS

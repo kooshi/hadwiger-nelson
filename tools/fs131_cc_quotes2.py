@@ -1,0 +1,113 @@
+#!/usr/bin/env python3
+"""FS131-CC2's readback (standing rule 3): every quotation in the brief, checked verbatim against its source.
+
+Each quotation is read from the brief itself (the `> ` line before its `> — source:` line), so a mistyped copy here cannot
+hide a mismatch. The brief is read from the main tree's disk (it was untracked at launch). A quotation's source is the file
+the brief names, at the revision the brief names: `BendCollar.lean` and CC1's record on `fs131-w5k` at `bc168474`; KP2's
+plan on `fs131-w5` at `5059983d`; `CLAUDE.md` on `main`; the inventory from the main tree's disk and from `main`'s head
+(both checked, and both reported).
+Exit 0 iff every quotation is found verbatim. `--self-test` plants one changed character in each quotation in turn and
+requires every plant to fail, and a quotation pointed at the wrong source to fail; the unplanted set must pass.
+"""
+import subprocess
+import sys
+
+MAIN = "/home/kooshi/source/lean-dir"
+W5K = MAIN + "/.claude/worktrees/fs131-w5k"
+W5 = MAIN + "/.claude/worktrees/fs131-w5"
+BRIEF_PATH = MAIN + "/data/fs131/briefs/FS131-CC2-collar.md"
+W5K_REV = "bc168474"
+W5_REV = "5059983d"
+EXPECTED = 13
+
+
+def git_show(repo, rev, path):
+    return subprocess.run(["git", "-C", repo, "show", f"{rev}:{path}"], check=True, capture_output=True,
+                          text=True).stdout
+
+
+def read(path):
+    with open(path, encoding="utf-8") as f:
+        return f.read()
+
+
+def sources(inventory_from_disk=True):
+    """Map a brief's source string to the text it names."""
+    inv = read(MAIN + "/plans/FS131-close-inventory.md") if inventory_from_disk else \
+        git_show(MAIN, "main", "plans/FS131-close-inventory.md")
+    return {
+        "CLAUDE.md § Counter-priors — read before pricing anything (Kooshi, 2026-09-26)":
+            git_show(MAIN, "main", "CLAUDE.md"),
+        W5K + "/Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean":
+            git_show(W5K, W5K_REV, "Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean"),
+        W5K + "/plans/FS131-collar-C-implementation.md 3.2 What is left in lane C, with the route each is ready for":
+            git_show(W5K, W5K_REV, "plans/FS131-collar-C-implementation.md"),
+        W5 + "/plans/FS131-collar-kernel-plan.md 5.2 The handoff (two implementers, split by file)":
+            git_show(W5K, W5_REV, "plans/FS131-collar-kernel-plan.md"),
+        "plans/FS131-close-inventory.md": inv,
+    }
+
+
+def quotations():
+    lines = read(BRIEF_PATH).splitlines()
+    out = []
+    for i, line in enumerate(lines):
+        if line.startswith("> — source: ") and i > 0 and lines[i - 1].startswith("> "):
+            out.append((lines[i - 1][2:], line[len("> — source: "):]))
+    return out
+
+
+def check(quotes, src):
+    bad = []
+    for q, s in quotes:
+        text = src.get(s)
+        if text is None:
+            bad.append(("no source", s, q))
+        elif q not in text:
+            bad.append(("not verbatim", s, q))
+    return bad
+
+
+def main():
+    quotes = quotations()
+    if len(quotes) != EXPECTED:
+        print(f"FAIL: expected {EXPECTED} quotations in the brief, read {len(quotes)}")
+        return 1
+    src = sources()
+    if "--self-test" in sys.argv:
+        fired = 0
+        plants = 0
+        for j, (q, s) in enumerate(quotes):
+            planted = q[:-3] + ("X" if q[-3] != "X" else "Y") + q[-2:]
+            mod = list(quotes)
+            mod[j] = (planted, s)
+            plants += 1
+            if check(mod, src):
+                fired += 1
+            else:
+                print(f"PLANT {j} DID NOT FIRE: {s}")
+        plants += 1
+        q0, _ = quotes[0]
+        if check([(q0, "plans/FS131-close-inventory.md")], src):
+            fired += 1
+        else:
+            print("PLANT wrong-source DID NOT FIRE")
+        partner = not check(quotes, src)
+        print(f"self-test: {fired} of {plants} plants fired; unplanted partner {'PASS' if partner else 'FAIL'}")
+        return 0 if fired == plants and partner else 1
+    bad = check(quotes, src)
+    bad_head = check(quotes, sources(inventory_from_disk=False))
+    for kind, s, q in bad:
+        print(f"MISMATCH, inventory from disk ({kind}) [{s}]: {q}")
+    for kind, s, q in bad_head:
+        print(f"MISMATCH, inventory at main's head ({kind}) [{s}]: {q}")
+    for q, s in quotes:
+        print(f"ok  [{s[-70:]}]  {q[:70]}…")
+    ok = not bad and not bad_head
+    print(f"PASS, {len(quotes)} of {len(quotes)} verbatim" if ok else
+          f"FAIL: {len(bad)} with the inventory from disk, {len(bad_head)} with it at main's head")
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

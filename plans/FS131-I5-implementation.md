@@ -3290,3 +3290,218 @@ concentric-circle bound; then `n4_fin`. Price: M–H, one session.
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 55 — SAVED
+
+## Stage 56 — SAVED (FS131-I5q): the readback, and the as-given build
+
+*FS131-I5q, wave 5's non-`Terminal` lane (Opus), continuing this record from Stage 51 (`ae881022`; branch head `3b120cd3`, the collar whole; Stages 52–55 are
+FS131-M6's, on `fs131-w5c`'s copy of this record). Brief: `data/fs131/briefs/FS131-I5q-prebend.md` (main tree). My set: `exists_preBend`'s three children
+(`hfree_of_baseHyp`, `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`), then `bv_l3` moved to `BaseWalk` (ruling 370 (a)) and proved, and
+`exists_collarFit`'s docstring (ruling 417 (c)).*
+
+### 56.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_i5_quote_check.py` (I5j's, run, not edited) on the brief: **15 quotations, 15 verbatim**, exit 0 (`data/fs131/i5q/quote-check.txt`); `--plant`
+reports 1 not verbatim, exit 0 as the control expects (`quote-check-plant.txt`). The fifteen: `CLAUDE.md` § Counter-priors; inventory items 416, 417, 378, 386,
+369, 370; the first lines of `hfree_of_baseHyp`, `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`, `exists_preBend` (`BaseDense` at `3b120cd3`) and of `bv_l3`
+(`HexRing`); this record's M5 "Left" paragraph, § 41.4 and Stage 37's `bv_l3` route. Read in full: this record's Stages 37, 41, 45, 49–51; `plans/STANDING-RULES.md`;
+`LEAN.md`; `RUNNING.md` § Building and § Make the gate fail; `data/fs131/i5o/RingScratch.lean`; the sibling's `treatPts_inter_finite`, `badCount_lt_top`,
+`finite_centres_inter_compact`, `IsMaxRingArc.not_regularAt` (`fs131-w5c`'s `Procedure`, for the idea; nothing copied).
+
+### 56.2 The as-given build (`3b120cd3`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — 455 of 455 batches, 5
+modules rebuilt** (`Pushforward`, `CollarMap`, `BendCollar`, `BaseDense`, `Proofs` — the collar's modules, which the fast-forward brought without a build),
+**3 with warnings, every warning `declaration uses 'sorry'`** (`HexRing` 1, `Terminal` 9, `BaseDense` 4), exit 0, 8 min 43 s after about nine minutes'
+wait for the slot (two other builds held 80 GiB) (`build/gate/build/20261006T034133Z-671937.log`; driver log `data/fs131/i5q/build-asgiven.log`).
+
+### 56.3 What I may and may not change
+
+May: `BaseDense` (the three children and helpers beside them; not `cv_exists`); `HexRing` (`bv_l3` removed by the move, its linkage children stay);
+`BaseWalk` (`bv_l3` after `l3_base`, `l3_base`'s argument extracted, its statement unchanged); `BendCollar` for `exists_collarFit`'s docstring only;
+`scripts/Axioms.lean` (a block headed "FS131-I5q" above the `=== PURCHASED ===` banner); `ARCHITECTURE.md` if a row's text names `bv_l3`'s home; this record;
+`tools/fs131_i5_*.py`; `data/fs131/i5q/`; the report. May not: `Terminal`, `RadialPush`, `CollarMap`, `Pushforward`, `Proofs.lean`, any statement, any `axiom`,
+`native_decide`; no merge of `fs131-w5c` or `main`, no gate run, nothing on `main`.
+
+`sorry` by file before (`grep -rcw`, `data/fs131/i5q/sorry-counts-before.txt`): `BaseDense` 4 (`finite_maxRingArcs`, `hfree_of_baseHyp`,
+`maxRingArcs_subset_of_bend`, and `cv_exists`, the `Terminal` lane's stale copy), `HexRing` 1 (`bv_l3`), `Terminal` 9 (not mine); `Packed` 1, `Cover` 1,
+`CoverExamples` 2 are docstring words, not terms.
+
+## Stage 56 — SAVED
+
+## Stage 57 — SAVED (FS131-I5q): `exists_preBend`'s three children proved — `hfree_of_baseHyp`, `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`
+
+Statements unchanged (`tools/fs131_i5_stmt_check.py 3b120cd3`: PASS, `data/fs131/i5q/stmt-check-57.txt`; `--self-test`: its three plants FIRED, the
+unplanted control PASS, `stmt-check-57-selftest.txt`). Two declarations moved inside `BaseDense`, text unchanged, so that each proof follows what it
+cites: `IsRingArc.shift` above `finite_maxRingArcs`, and `hfree_of_baseHyp` below `ncard_coloursAt_le_two_of_mem_openArc`. The three docstrings now state
+the route proved. Iterated first in `data/fs131/i5q/scratch/PreBend.lean` (imports `BaseWalk`, with `BaseDense`'s own lemmas restated; kept for the record).
+
+- **`hfree_of_baseHyp`** — not M5's route (no tangent or curvature is compared). At `x = r(θ)`: `BaseHyp u` gives a chart with distinct sector colours
+  (`exists_chart_of_noRep`), each carried at `x`, which carries at most the arc's two side colours (`ncard_coloursAt_le_two_of_mem_openArc`): **at most two
+  germs**. For each small `s` the two points `r(θ ± t)`, `t = 2 arcsin(s/2)`, of the arc are at distance `s` from `x`, in `Γ`, and distinct, so they are
+  branch points of two different germs at parameter `s` (a branch has one point at each distance, `norm_branchPt_sub`); with at most two germs every
+  point of `Γ` at distance `s` from `x` is one of the two, on `ω(P)`. The radius is `min(r₀, 2 sin(δ/2))`, `δ` the angle's room inside the arc.
+- **`finite_maxRingArcs`** — the sibling's idea (`fs131-w5c`'s `badCount_lt_top`), re-proved here for a fragment and for set-maximality. Centres: a unit arc
+  of positive length in `Γ ∩ B̄(u, 2)` lies on one of the finitely many arcs meeting `B̄(u, 2)` (`finite_arcs_meeting_compact`), which is then an arc of
+  its circle (`Arc.finite_inter_sphere_or_eq_circ`; else the arc would lie in a finite set, `exists_mem_ringArc_notMem`) — finitely many centres. About
+  one centre `P` (`Covers P 1` from `Covers u 2`): a maximal arc, read in the lift starting in `[0, 2π)`, ends at two irregular angles below `4π`
+  (`IsRingArc.not_regularAt_of_max`: at a regular end an arc through it has the same sides, `sides_eq_of_ringPt_eq`, joins it,
+  `union_of_overlap`, and the union, at most `60°` by `l60_le`, is not the same set, `ringPt_ne_of_abs_sub_lt`), and those are finitely many
+  (`finite_not_regular`, wave 3's). So the maximal arcs lie in a finite union of images of finite products.
+- **`maxRingArcs_subset_of_bend`** — record § 41.3's argument, with the centres compared by `hfree`: a maximal `β` of `M` is an arc of `F` (R1) inside a
+  maximal `γ` of `F` (`exists_maxRingArc`); at a common point of the open arcs of `γ` and `α`, `hfree` puts a short arc of `γ`'s circle on `α`'s, so the
+  centres agree (`eq_of_ringArc_subset_sphere`), the sides agree there, the two maximal arcs overlap and are one set, and then `β ⊆ α` has a point in the
+  open bent arc on a unit arc of `M` — against R3. So `γ` is an arc of `M` (R2), `β = γ` by `β`'s maximality, and `β ≠ α` by R3 at `α`'s midpoint.
+
+**New helpers**, all in `BaseDense` before `finite_maxRingArcs` (names free on `HEAD`, `origin/main`, `origin/fs131-w5c`, `origin/fs131-wop` by `git grep`;
+chosen apart from the sibling's `IsRingArc.union`, `sides_eq`, `infinite_ringArc`, `finite_arcs_inter_compact`, so the later merge meets no collision — the
+shared home is a tidy move for after the landing, as the brief says): `ringPt_ne_of_abs_sub_lt`, `exists_mem_ringArc_notMem`,
+`eq_of_ringArc_subset_sphere`, `finite_arcs_meeting_compact`, `IsRingArc.sides_eq_of_ringPt_eq`, `IsRingArc.union_of_overlap`,
+`IsRingArc.not_regularAt_of_max`.
+
+**Idle hypotheses, found by the linter and kept (statements are not mine to change)**: `hfree_of_baseHyp` does not read `hF : F.Valid`;
+`maxRingArcs_subset_of_bend` reads neither `hM : M.Valid` nor `hMu : M.Covers u 2`. Each is bound by `have _ := …` with a comment, the library's practice
+(`Lens`, `Woodall/Basic`). The statements are true without them; whether to drop them is the planner's.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 2 modules rebuilt (`BaseDense`, `Proofs`), 3 with warnings, every warning
+`declaration uses 'sorry'`** (`HexRing` 1: `bv_l3`; `BaseDense` 1: `cv_exists`; `Terminal` 9), exit 0, 8 min 33 s
+(`build/gate/build/20261006T035232Z-754627.log`; driver log `data/fs131/i5q/build-stage57.log`). **Axioms** (`data/fs131/i5q/I5qAxioms57.lean` → `.out`,
+12 GiB slot, against this build): **on `[propext, Classical.choice, Quot.sound]`, 17 records** — `hfree_of_baseHyp`, `finite_maxRingArcs`,
+`maxRingArcs_subset_of_bend`, the seven helpers, and **`exists_preBend_step`, `exists_preBend`, `n3_base`, `localDense`, `dense3`, `row134BaseUA`,
+`bend_toward_collar`**; **controls on `sorryAx`**: `bv_l3`, `cv_exists`. `scripts/Axioms.lean`: a block headed "FS131-I5q" above the `=== PURCHASED ===`
+banner, the seven helpers (the three children's records are in KB2's block). `tools/check_architecture.py`: PASS (`arch-check-57.txt`). `BaseDense`'s
+`sorry` 4 → 1 (`cv_exists`, the `Terminal` lane's stale copy).
+
+**The re-price** (the brief: after the first two). The three children took one scratch pass each and one round of small fixes (seven errors, all
+numerals of `π` or a hypothesis's order); about 370 lines with helpers. `bv_l3`, priced "about a session", is already compiled in scratch
+(`data/fs131/i5q/scratch/BvL3.lean`, no error, no warning): the core cut from `l3_base` by script, I5o's three steps, the double switch (about 210 lines)
+and the theorem. A dry run of the move on copies of `BaseWalk` and `HexRing` elaborates clean. What is left of it is the move itself, one build, and its
+checks: Stage 58. The working files a successor would need are committed with this stage: the scratch, `scratch/apply_bvl3.py` and `apply_docs.py` (run
+once from the worktree root; they edit `BaseWalk`, `HexRing`, `BendCollar`'s docstring, `BaseDense`'s helper docstrings and `ARCHITECTURE.md`),
+`tools/fs131_i5_bvl3_move.py`, and `bvl3-types-before.txt` (both statements as elaborated before the move, from `BvL3Types.lean`).
+
+**An observation about the session, for the coordinator**: while the stage-57 build ran, the harness reported that the session's primary working
+directory had become `.claude/worktrees/fs131-w5s` (branch `fs131-w5s`, at `ebb0b292`, the `Terminal` lane's line) and asked that commands run there.
+My brief's tree is `fs131-w5`, and every command of mine names it by absolute path; I wrote nothing in `fs131-w5s` (`git status` there: clean) and went
+on in `fs131-w5`. Held for the coordinator in the report.
+
+## Stage 57 — SAVED
+
+## Stage 58 — SAVED (FS131-I5q): `bv_l3` moved to `BaseWalk` (ruling 370 (a)) and proved; `l3_base`'s argument extracted as `l3_core`; `exists_collarFit`'s docstring
+
+### 58.1 The move, and its checks
+
+`bv_l3` is taken out of `Plane/ValidMap/HexRing` (its linkage children stay there) and declared in `Plane/ValidMap/BaseWalk` after `BaseCtx.l3_base`,
+statement verbatim; its docstring is kept and gains a paragraph on the move and the route. The edit was made by script from the compiled scratch
+(`data/fs131/i5q/scratch/apply_bvl3.py`, after a dry run on copies that elaborated clean). Checked three ways:
+- **The text** — new tool `tools/fs131_i5_bvl3_move.py` (I5e's `fs131_i5_cor3_move.py` is the model): `bv_l3`'s statement, from `theorem bv_l3` to its
+  `:= by`, in `HexRing` at `3b120cd3` equals the one in `BaseWalk` byte for byte (4 lines, 416 bytes); `HexRing` no longer declares it and one file under
+  `Proofs/` does; it follows `l3_base`; `l3_base`'s statement equals the ref's; no `sorry` in `bv_l3`'s body. **PASS** (`data/fs131/i5q/bvl3-move.txt`).
+  `--self-test`: eight plants, each FIRED naming its fault — a hypothesis changed, a hypothesis dropped, the conclusion changed, still in the old module,
+  declared twice, declared before `l3_base`, `l3_base`'s statement changed, a `sorry` in the body — and the unplanted control PASS
+  (`bvl3-move-selftest.txt`).
+- **The elaborated statements** — a text check cannot see a statement that reads differently in a new context (`BaseWalk`'s `variable {F : ArcMap 6}
+  {u : ℂ}` against `HexRing`'s), so `data/fs131/i5q/BvL3Types.lean` prints `@bv_l3` and `@BaseCtx.l3_base` with `pp.explicit`, `pp.universes`,
+  `pp.fullNames`, before the move (against the stage-57 build) and after it (against this one): **identical, 8,161 bytes**
+  (`bvl3-types-before.txt`, `-after.txt`, `bvl3-types-cmp.txt`). Three plants on the comparison fired (a bound, a relation, a hypothesis). *A slip, mine:*
+  my first control here was a `sed` whose pattern matched nothing, so it could not fire; I saw it by its exit status and replaced it with the three.
+- **The lane's statement checker** (`tools/fs131_i5_stmt_check.py 3b120cd3`, `stmt-check-58.txt`): one line, `MISSING … HexRing.lean bv_l3`, and nothing
+  else — the declared move (the checker matches by name within a file; the two checks above are the move's). Every other statement of `Cor3`, `BaseWalk`,
+  `BaseDense`, `HexRing`, `Dense` is unchanged.
+
+### 58.2 The extraction: `l3_core`
+
+`l3_base`'s proof from its band on — the band of `L₂` at `P`'s partners, the linkage run twice round `P`, the flips, the closing `omega`, about 200
+lines — is now **`ArcMap.l3_core`**, cut by script (no line retyped), over the two inputs that differ:
+- `hgen`, pointwise: two angles whose ring points are `1` apart, both off the generic sets, never have heights congruent mod `3`;
+- `hdbl`, along any continuous unit-distance path `(φ, χ)` with finite fibres: at a parameter with `|y − u₁| ≠ 2`, a double switch between one pair of
+  heights makes `χ` turn. (The case `|y − u₁| = 2` is the core's own, by `exists_linkage`'s turning clause.)
+`hdbl` keeps the path because `bv_l3`'s proof reads it (its conclusion is the turn); `l3_base` ignores the path and refutes the switch outright
+(`pair_ii`, no sense of motion), so its proof is its old first half, `hgen` restated pointwise, and the old `exfalso` branch verbatim. `l3_base`'s
+statement is unchanged (both checks above).
+
+### 58.3 `bv_l3` — a kernel theorem (I5m's route, Stage 37, as written but for two shortcuts)
+
+New in `BaseWalk`, after `l3_base` (names free on `HEAD`, `origin/main`, `origin/fs131-w5c`, `origin/fs131-wop`):
+- I5o's three compiled steps, brought in with `{k} {F : ArcMap k}` written into each statement: `not_onRingArc_of_finite`, `ringCircle_val_germ`,
+  `ringCircle_noSwap`.
+- `CircleColouring.link_bad_finite` (the bad parameters of a path are finitely many — `link_path`'s own first step, restated; `link_path` is untouched),
+  `link_val_right_side`, `link_val_left_side` (`link_val_right/left` with the side named: a `Side` `σ`, the height read, `0 < σ.sign (f s − f s₀)`).
+- `eq_or_eq_neg_of_dot_I_mul_e`: a unit vector perpendicular to `i e(θ)` is `± e(θ)`.
+- **`bv_l3_dbl`** (step 5, the velocity reading), abstract over the two circle colourings and a labelling injective on a set `A`: the sides of `x` and of
+  `y` just after and just before `s₀` are four `Side`s; if `y`'s agree, `χ` turns. Else, by `hgen` at a generic parameter on each side and sixteen cases
+  closed by `omega`, `x` crosses too, against `y` under `l₁ ≡ l₂, r₁ ≡ r₂` and with it under `l₁ ≡ r₂, r₁ ≡ l₂`. Then: `D₁ = 0` puts `y₀` at `u₁` or at
+  distance `2` from it; `D₂ = 0` forbids `x` its lengthening side (`linkage_end`), which it visits; opposite signs are refuted just after `s₀`
+  (`linkage_cmp`); equal signs are a `DoubleEvent` — the after-sides if both products are positive, their flips if both are negative — refuted by
+  `bv_nd` under H. One relation covers the four germ cases: `y`'s germ on a side has the colour of `x`'s on the same side under the first pairing, on the
+  other under the second.
+- **`bv_l3`**: `g` from `Set.Finite.exists_injOn_of_encard_le` (three absent colours into `ℤ/3`; no relabelling, both rings read through it); the two
+  `ringCircleColouring`s; no swap on the second; `hgen` (two interior points of one absent colour at distance `1`, against validity; no `pair_i`);
+  `l3_core`.
+Shortcuts against Stage 37's text: the generic sets are the change sets themselves (no `N` sets), and step 3's swap lemma and step 1 were already
+compiled by I5o. Every hypothesis of `bv_l3` is read (no idle one).
+
+### 58.4 In passing
+
+- **`exists_collarFit`'s docstring** (ruling 417 (c)) now states the route CC2 proved (its record § 7.1): one parameter `τ`; `exists_lens_clear`;
+  `collarK_thin`; `exists_collar_free` over `exists_end_free` (`localSectors` in the end's frame, `branch_transversal`, `branch_tangent`) and `hfree` in
+  the middle. The statement is not touched (the diff's changed lines hold no `theorem` and no `:= by`).
+- `ARCHITECTURE.md`: `HexRing`'s row no longer lists `bv_l3`; `BaseWalk`'s row gains it with `l3_core`. `tools/check_architecture.py`: PASS
+  (`arch-check-58.txt`; no import changed).
+- `BaseDense`: `GENERIC` added to four helper docstrings of Stage 57.
+
+### 58.5 The build, the axioms, the `sorry` count
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 8 modules rebuilt** (`BendCollar`, `HexRing`, `MapTopology`, `MapGraph`,
+`Dense`, `BaseWalk`, `BaseDense`, `Proofs`), **2 with warnings, every warning `declaration uses 'sorry'`** (`BaseDense` 1: `cv_exists`; `Terminal` 9),
+exit 0, 9 min 24 s (`build/gate/build/20261006T040344Z-813531.log`; driver log `data/fs131/i5q/build-stage58.log`). **Axioms**
+(`data/fs131/i5q/I5qAxioms58.lean` → `.out`, 12 GiB slot, against this build): **on `[propext, Classical.choice, Quot.sound]`, 16 records** — `bv_l3`,
+`bv_l3_dbl`, `l3_core`, `BaseCtx.l3_base`, the three ring lemmas, `eq_or_eq_neg_of_dot_I_mul_e`, the three `link_` helpers, and `row134BaseUA`,
+`exists_preBend`, `n3_base`, `localDense`, `dense3`; **control on `sorryAx`**: `cv_exists`. `scripts/Axioms.lean`: nine records added to the "FS131-I5q"
+block (`bv_l3`'s own record is in K5b's block, its name unchanged). No `axiom`, no `native_decide`.
+
+**`sorry` by file** (`grep -rcw`; `sorry-counts-before.txt` → `sorry-counts-after.txt`): `BaseDense` 4 → 1 (`cv_exists`, the `Terminal` lane's stale
+copy, proved on `fs131-w5c`), `HexRing` 1 → 0, `Terminal` 9 → 9 (not this lane's); `Packed` 1, `Cover` 1, `CoverExamples` 2 are docstring words. **This
+lane's four leaves are closed: wave 5's non-`Terminal` half holds no `sorry` of its own.**
+
+## Stage 58 — SAVED
+
+## Stage 59 — SAVED (FS131-I5q): the hand-back
+
+### Theorems this phase proved (FS131-I5q)
+
+All [kernel], `[propext, Classical.choice, Quot.sound]`, against the stage-58 build; each read against the informal statement named.
+- `HadwigerNelson.Plane.ArcMap.hfree_of_baseHyp` (`BaseDense`) — record § 41.2 item 4: near each interior point of a unit arc centred in `B̄(u, 1)`, under
+  `BaseHyp u`, `Γ` is the arc's circle.
+- `HadwigerNelson.Plane.ArcMap.finite_maxRingArcs` (`BaseDense`) — record § 41.3's finiteness child: in a valid fragment covering `B̄(u, 2)` the maximal
+  constant-sided unit arcs centred in `B̄(u, 1)` are finitely many.
+- `HadwigerNelson.Plane.ArcMap.maxRingArcs_subset_of_bend` (`BaseDense`) — record § 41.3 "the count drops": the bent map's maximal arcs are `F`'s, less
+  the bent one.
+- So, now on the standard three with nothing open beneath them: `HadwigerNelson.Plane.ArcMap.exists_preBend` (FS112-N3-BASE's pre-bend, E4-BEND-UN's
+  iteration), `exists_preBend_step`, `n3_base` (FS112-N3-BASE with E4's hypothesis), `localDense` (FS129-OR1-LOCALDENSE), `dense3` (FS112-N3-DENSE3);
+  `row134BaseUA` as before.
+- `HadwigerNelson.Plane.ArcMap.bv_l3` (`BaseWalk`) — FS114-BV-HEX's (BV-L3), `[SokolovVoronov2025]` Lemma 3 as `plans/BASE-V-verification.md` § 1b.3 reads
+  it: no two points of one three-colour multicolour at distance in `(1, 2)` have proper finite rings, under H on the two circles.
+- `HadwigerNelson.Plane.ArcMap.l3_core` (`BaseWalk`) — Lemma 3's band-and-linkage argument (BASE-V § 1b.3 steps 1 and 4) over `hgen` and `hdbl`;
+  `HadwigerNelson.Plane.ArcMap.BaseCtx.l3_base` re-proved over it, statement unchanged; `HadwigerNelson.Plane.ArcMap.bv_l3_dbl` — the double switch by
+  the linkage's velocities.
+- Helpers: in `BaseDense`, `ArcMap.ringPt_ne_of_abs_sub_lt`, `exists_mem_ringArc_notMem`, `eq_of_ringArc_subset_sphere`, `finite_arcs_meeting_compact`,
+  `IsRingArc.sides_eq_of_ringPt_eq`, `IsRingArc.union_of_overlap`, `IsRingArc.not_regularAt_of_max`; in `BaseWalk`, `ArcMap.not_onRingArc_of_finite`,
+  `ringCircle_val_germ`, `ringCircle_noSwap`, `eq_or_eq_neg_of_dot_I_mul_e`, `CircleColouring.link_bad_finite`, `link_val_right_side`,
+  `link_val_left_side`.
+
+**Left in this lane**: nothing. `cv_exists` in `BaseDense` is the `Terminal` lane's (its proof is on `fs131-w5c`).
+
+**For the merge of `fs131-w5c` into this branch** (not mine to make): `BaseDense` changed here in the children's region (two declarations moved, seven
+helpers added) — take this branch's side there and `fs131-w5c`'s for `cv_exists`; `HexRing` lost `bv_l3` and `BaseWalk` gained it with `l3_core` — if
+`fs131-w5c` touched `l3_base`'s proof, it is now two declarations. My helper names were chosen apart from `Procedure`'s (`IsRingArc.union`, `sides_eq`,
+`infinite_ringArc`, `finite_arcs_inter_compact`), so no name collides; the pairs are near-copies with different hypotheses (a fragment and
+set-maximality here, the plane there), and a shared home is a move for after the landing.
+
+## Drafts for the front page
+
+None to file — wave 5 is not at its gate, and this job did not run it. For the filing that does: this branch adds 16 records to `scripts/Axioms.lean`'s
+CLEAN section in the "FS131-I5q" block (seven at stage 57, nine at stage 58: the helpers and engines above; the theorems' own records were already listed), and takes
+`exists_preBend`, `exists_preBend_step`, `n3_base`, `localDense`, `dense3`, `hfree_of_baseHyp`, `finite_maxRingArcs`, `maxRingArcs_subset_of_bend` and
+`bv_l3` off `sorryAx`. The counts for `CLAUDE.md` § The gate and § Trust ledger are the gate's to give, after the two halves are joined.
+
+## Stage 59 — SAVED
