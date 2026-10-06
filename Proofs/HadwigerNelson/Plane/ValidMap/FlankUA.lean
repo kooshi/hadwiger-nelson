@@ -577,19 +577,8 @@ theorem horn_poles_contact (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hM : ¬
   · exact ⟨hN, hS⟩
   · rw [add_e_add_pi_add, sub_e_add_pi_add]; exact ⟨hS, hN⟩
 
-/-- **An interior point carries exactly its own colour**: its tile is an open neighbourhood of one colour. -/
-theorem coloursAt_eq_of_mem_interiorPts {x : ℂ} (hx : x ∈ F.interiorPts) : F.coloursAt x = {F.col x} := by
-  ext j
-  simp only [mem_singleton_iff]
-  constructor
-  · intro hj
-    obtain ⟨hT, hxT⟩ := tileOf_component (⟨hx, mem_singleton _⟩ : x ∈ F.region (F.col x))
-    obtain ⟨z, hzT, hzj⟩ := (_root_.mem_closure_iff.mp hj) _ hT.1.isOpen hxT
-    have h1 : F.col z = j := hzj.2
-    have h2 : F.col z = F.col x := hT.2 hzT
-    rw [← h1, h2]
-  · rintro rfl
-    exact subset_closure ⟨hx, mem_singleton _⟩
+-- An interior point carries exactly its own colour: `coloursAt_eq_singleton_of_interior` (`Plane/ValidMap/Limit`); this file's
+-- copy `coloursAt_eq_of_mem_interiorPts`, which nothing here read, was removed by FS131-RP1 (inventory ruling 459 (c)).
 
 /-- `‖e s − 1‖` controls `|s|` on `(−π, π]`: `|s| ≤ (π/2) ‖e s − 1‖`. -/
 theorem abs_le_norm_e_sub_one {s : ℝ} (h1 : -π < s) (h2 : s ≤ π) : |s| ≤ π / 2 * ‖e s - 1‖ := by

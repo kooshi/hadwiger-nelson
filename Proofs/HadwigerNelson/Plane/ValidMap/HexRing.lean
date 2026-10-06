@@ -715,9 +715,6 @@ theorem dist_eFrame (u : ℂ) (φ : ℝ) (w w' : ℂ) : dist (u + e φ * w) (u +
 
 theorem ringPt_frame (u : ℂ) (φ α : ℝ) : ringPt u (φ + α) = u + e φ * e α := by simp only [ringPt, e_add]
 
-theorem norm_sq_eq_re_im (w : ℂ) : ‖w‖ ^ 2 = w.re ^ 2 + w.im ^ 2 := by
-  rw [Complex.sq_norm, Complex.normSq_apply]; ring
-
 /-- The `e` values of the hexagon's angles, in coordinates. -/
 theorem e_hex_re_im : (e (π / 3)).re = 1 / 2 ∧ (e (π / 3)).im = √3 / 2 ∧ (e (-(π / 3))).re = 1 / 2 ∧
     (e (-(π / 3))).im = -(√3 / 2) ∧ (e (π / 6)).re = √3 / 2 ∧ (e (π / 6)).im = 1 / 2 ∧
@@ -735,7 +732,7 @@ theorem dist_radial_hex (u : ℂ) (φ : ℝ) {s : ℝ} (hs : 0 < s) {α : ℝ} (
   have hxs : ringPt u φ + s * e φ = u + e φ * ((1 + s : ℝ) : ℂ) := by simp only [ringPt]; push_cast; ring
   rw [hxs, ringPt_frame, dist_eFrame]
   have hsq : ‖((1 + s : ℝ) : ℂ) - e α‖ ^ 2 = 1 + s + s ^ 2 := by
-    rw [norm_sq_eq_re_im]
+    rw [sq_norm_eq]
     obtain ⟨a1, a2, a3, a4, -, -, -, -⟩ := e_hex_re_im
     rcases hα with rfl | rfl <;> simp only [Complex.sub_re, Complex.sub_im, Complex.ofReal_re, Complex.ofReal_im, a1, a2, a3, a4] <;>
       nlinarith [Real.sq_sqrt (show (0 : ℝ) ≤ 3 by norm_num)]
@@ -748,7 +745,7 @@ theorem dist_radial_hex_in (u : ℂ) (φ : ℝ) {s : ℝ} (hs : 0 < s) (hs1 : s 
   have hxs : ringPt u φ - s * e φ = u + e φ * ((1 - s : ℝ) : ℂ) := by simp only [ringPt]; push_cast; ring
   rw [hxs, ringPt_frame, dist_eFrame]
   have hsq : ‖((1 - s : ℝ) : ℂ) - e α‖ ^ 2 = 1 - s + s ^ 2 := by
-    rw [norm_sq_eq_re_im]
+    rw [sq_norm_eq]
     obtain ⟨a1, a2, a3, a4, -, -, -, -⟩ := e_hex_re_im
     rcases hα with rfl | rfl <;> simp only [Complex.sub_re, Complex.sub_im, Complex.ofReal_re, Complex.ofReal_im, a1, a2, a3, a4] <;>
       nlinarith [Real.sq_sqrt (show (0 : ℝ) ≤ 3 by norm_num)]
@@ -1065,21 +1062,21 @@ theorem hex_adjacent (hF : F.Valid) {u : ℂ} {φ : ℝ} {c c' : Fin k} {ρ ρ' 
     · have : ringPt u φ = u + e φ * 1 := by simp [ringPt]
       rw [this, dist_eFrame]; simp only [w₁, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real,
         Real.norm_eq_abs, abs_of_pos hs0]; exact hsρ
-    · rw [norm_sq_eq_re_im]; simp only [w₁, Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re,
+    · rw [sq_norm_eq]; simp only [w₁, Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re,
         Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.one_re, Complex.one_im, a1, a2, a5, a6]; nlinarith [h3, h3s, hs0]
-    · rw [norm_sq_eq_re_im]; simp only [w₁, Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re,
+    · rw [sq_norm_eq]; simp only [w₁, Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re,
         Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.one_re, Complex.one_im, a3, a4, a5, a6]; nlinarith [h3, h3s, hs0]
   have hz₂ : u + e φ * w₂ ∈ O' := by
     refine ⟨?_, ?_, ?_⟩
     · rw [ringPt_frame, dist_eFrame]; simp only [w₂, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real,
         Real.norm_eq_abs, abs_of_pos hs0]; exact hsρ'
     · rw [add_assoc]; apply hlt
-      rw [norm_sq_eq_re_im]; simp only [w₂, Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re,
+      rw [sq_norm_eq]; simp only [w₂, Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re,
         Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, a1, a2, a5, a6, a7, a8]; nlinarith [h3, h3s, hs0]
     · have : ringPt u φ = u + e φ * 1 := by simp [ringPt]
       rw [this, dist_eFrame]
       have : 1 < ‖w₂ - 1‖ ^ 2 := by
-        rw [norm_sq_eq_re_im]; simp only [w₂, Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re,
+        rw [sq_norm_eq]; simp only [w₂, Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re,
           Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.one_re, Complex.one_im, a1, a2, a5, a6]; nlinarith [h3, h3s, hs0]
       nlinarith [norm_nonneg (w₂ - 1)]
   have h1 : dist (u + e φ * w₁) (u + e φ * w₂) = 1 := by
@@ -1087,7 +1084,7 @@ theorem hex_adjacent (hF : F.Valid) {u : ℂ} {φ : ℝ} {c c' : Fin k} {ρ ρ' 
     have : w₁ - w₂ = 1 - e (π / 3) := by simp only [w₁, w₂]; ring
     rw [this]
     have hsq : ‖(1 : ℂ) - e (π / 3)‖ ^ 2 = 1 := by
-      rw [norm_sq_eq_re_im]; simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, a1, a2]; nlinarith
+      rw [sq_norm_eq]; simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, a1, a2]; nlinarith
     nlinarith [norm_nonneg ((1 : ℂ) - e (π / 3))]
   exact hF.dist_ne_one_of_isOpen_subset_closure (hO hz₁) (hopen _ _ _ _) hO' hz₂ h1
 
@@ -1552,10 +1549,10 @@ theorem sq_dist_germ (u x : ℂ) (χ : ℝ) (σ : Side) (t : ℝ) (h1 : dist x (
     dist x (ringPt u (χ + σ.sign * t)) ^ 2 = 1 + 2 * (1 + ((x - ringPt u χ) * starRingEnd ℂ (e χ)).re) * (1 - Real.cos t) -
       2 * dot ((σ.sign : ℂ) * (I * e χ)) (x - ringPt u χ) * Real.sin t := by
   have hE : ‖x - ringPt u χ‖ ^ 2 = 1 := by rw [← dist_eq_norm, h1]; norm_num
-  rw [norm_sq_eq_re_im] at hE
+  rw [sq_norm_eq] at hE
   have hχ : Real.cos χ ^ 2 + Real.sin χ ^ 2 = 1 := Real.cos_sq_add_sin_sq χ
   have ht : Real.cos t ^ 2 + Real.sin t ^ 2 = 1 := Real.cos_sq_add_sin_sq t
-  rw [dist_eq_norm, norm_sq_eq_re_im]
+  rw [dist_eq_norm, sq_norm_eq]
   set p := (x - ringPt u χ).re with hp
   set q := (x - ringPt u χ).im with hq
   have hx : x - ringPt u (χ + σ.sign * t) = (x - ringPt u χ) + (e χ - e (χ + σ.sign * t)) := by
@@ -1773,17 +1770,17 @@ theorem tangent_pair_ne_one {x y P Q : ℂ} (h : dist x y = 1) {s : ℝ} (hs : 0
   set b := ((P - y) * starRingEnd ℂ E).im
   set c := ((Q - y) * starRingEnd ℂ E).re
   set d := ((Q - y) * starRingEnd ℂ E).im
-  have e1 : a ^ 2 + b ^ 2 = 1 := by rw [← norm_sq_eq_re_im, hP1]; norm_num
+  have e1 : a ^ 2 + b ^ 2 = 1 := by rw [← sq_norm_eq, hP1]; norm_num
   have e2 : (a - 1) ^ 2 + b ^ 2 = s ^ 2 := by
-    rw [← hP2, norm_sq_eq_re_im]; simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, sub_zero]; rfl
+    rw [← hP2, sq_norm_eq]; simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, sub_zero]; rfl
   have e3 : (c - 1) ^ 2 + d ^ 2 = 1 := by
     have := congrArg (· ^ 2) hQ1
-    simp only [one_pow, norm_sq_eq_re_im, Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, sub_zero] at this
+    simp only [one_pow, sq_norm_eq, Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, sub_zero] at this
     exact this
-  have e4 : c ^ 2 + d ^ 2 = s ^ 2 := by rw [← norm_sq_eq_re_im, hQ2]
+  have e4 : c ^ 2 + d ^ 2 = s ^ 2 := by rw [← sq_norm_eq, hQ2]
   have e5 : (a - c) ^ 2 + (b - d) ^ 2 = 1 := by
     have := congrArg (· ^ 2) hPQ'
-    simp only [one_pow, norm_sq_eq_re_im, Complex.sub_re, Complex.sub_im] at this
+    simp only [one_pow, sq_norm_eq, Complex.sub_re, Complex.sub_im] at this
     exact this
   have ha : a = 1 - s ^ 2 / 2 := by linear_combination (e1 - e2) / 2
   have hc : c = s ^ 2 / 2 := by linear_combination (e4 - e3) / 2

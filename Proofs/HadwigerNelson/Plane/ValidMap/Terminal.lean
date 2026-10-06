@@ -1269,7 +1269,7 @@ theorem flank_two_sectors_at_S (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {α 
     by_contra hΓ
     have hSi : S ∈ F.interiorPts := ⟨hvC S (mem_closedBall_self zero_le_one), fun hS => hΓ ⟨hvC S
       (mem_closedBall_self zero_le_one), hS⟩⟩
-    have h1 := coloursAt_eq_of_mem_interiorPts hSi
+    have h1 := coloursAt_eq_singleton_of_interior hSi
     rw [h1] at hcSc hgSc
     exact hgc (hgSc.trans hcSc.symm)
   have hfar := far_of_outType_chart hgS.2 hC hn
@@ -1522,7 +1522,7 @@ theorem flank_coneAt_S (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {α κ₂ : 
     by_contra hΓ
     have hSi : S ∈ F.interiorPts := ⟨hvC S (mem_closedBall_self zero_le_one), fun hS => hΓ ⟨hvC S
       (mem_closedBall_self zero_le_one), hS⟩⟩
-    have h1 := coloursAt_eq_of_mem_interiorPts hSi
+    have h1 := coloursAt_eq_singleton_of_interior hSi
     rw [h1] at hcSc hgSc
     exact hgc (hgSc.trans hcSc.symm)
   have hfar := far_of_outType_chart hgS.2 hC hn
@@ -1590,7 +1590,7 @@ theorem flank_two_sectors_at_S_of_flanks (hF : F.Valid) (hP : F.IsPlaneMap) {v :
     by_contra hΓ
     have hSi : S ∈ F.interiorPts := ⟨hvC S (mem_closedBall_self zero_le_one), fun hS => hΓ ⟨hvC S
       (mem_closedBall_self zero_le_one), hS⟩⟩
-    have h1 := coloursAt_eq_of_mem_interiorPts hSi
+    have h1 := coloursAt_eq_singleton_of_interior hSi
     rw [h1] at hcSc hgSc
     exact hgc (hgSc.trans hcSc.symm)
   have hfar := far_of_outType_chart hgS.2 hC hn
@@ -1818,7 +1818,7 @@ theorem n3_end_bothKind (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v 
     exact_mod_cast this
   have hwI : w ∉ F.interiorPts := by
     intro hI
-    have h1 := coloursAt_eq_of_mem_interiorPts hI
+    have h1 := coloursAt_eq_singleton_of_interior hI
     have hcw : c ∈ F.coloursAt w := hcS.1.2.2
     have hgw : g' ∈ F.coloursAt w := mem_closure_of_mem_coneAt hαg'
     rw [h1] at hcw hgw

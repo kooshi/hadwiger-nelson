@@ -582,7 +582,8 @@ under `bend_toward`'s two profiles (`one_sub_lensProf_le` against `n2_env_toward
 domain (a compact arc in an open set). `Γ`-free off the arc (`exists_collar_free`): near each end by the end's sector chart (`localSectors`)
 read in the end's frame — a branch across the tangent leaves the crescent (`branch_transversal`), and a branch along it stays in the crescent
 only with the circle's curvature, so it is the circle (`branch_tangent`; `exists_end_free`) — and in the middle by `hfree` and a thickening of
-the arc's compact middle. `l60_le` gives `short`. -/
+the arc's compact middle. `l60_le` gives `short`. Inhabitant of the hypotheses, at once: `collarModel_hyps` (a sub-arc of
+`l60Frag`'s unit arc, sides `0` and `1`). -/
 theorem exists_collarFit (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ c c') (hout : c' ∉ F.coloursAt P)
     (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) (hε : 0 < ε) :
     ∃ R' R R'', CollarFit F P θ₁ θ₂ c c' ε R' R R'' := by
@@ -618,15 +619,17 @@ theorem quarter_lt_chord {x : ℝ} (h1 : π / 8 < x) (h2 : x < π / 3) : 1 / 4 <
     rw [Real.sin_pi_div_six] at h
     linarith
 
-/-- **The model `collarModel` (B0): `CollarFit` is inhabited, with two different side colours.** On the valid four-colour fragment
-`l60Frag` of L60-REAL (`Plane/ValidMap/UnitArc`: the arc `r([0, 60°])` of `ω(0)` with sides `0` inside and `1` outside), the sub-arc
-`r([π/8, 5π/24])` satisfies every hypothesis of `exists_collarFit`: it is a constant-sided unit arc (a sub-arc of
+/-- **The collar's model, hypothesis by hypothesis and at once** (FS131-QA4's QA4-C1, without its idle length clause). On the
+valid four-colour fragment `l60Frag` of L60-REAL (`Plane/ValidMap/UnitArc`: the arc `r([0, 60°])` of `ω(0)` with sides `0` inside and
+`1` outside), the sub-arc `r([π/8, 5π/24])` satisfies every hypothesis of `exists_collarFit` and of `bend_toward_collar` together
+(`hF`, `hA`, `hout`, `hfree`; `ε` is free): it is a constant-sided unit arc (a sub-arc of
 `l60Frag_isRingArc`), the outer colour `1` is not carried at the centre `0` (its class lies in `B(1 + e 60°, 1)`, which is `√3` from
 `0`), and near each of its points `Γ` is `ω(0)` (the other four arcs are circles about `1` and `e 60°` of radii `1` and `1/4`, and the
-points of the sub-arc are at distance strictly between `1/4` and `1` from both: `quarter_lt_chord`). So every clause lemma that takes a
-`CollarFit` has a model, with `c = 0 ≠ 1 = c'`. The sub-arc is not maximal: the model is of `exists_collarFit`'s hypotheses, not of
-`bend_toward_collar`'s `hmax`, which the construction never reads. -/
-theorem collarModel {ε : ℝ} (hε : 0 < ε) : ∃ R' R R'', CollarFit l60Frag 0 (π / 8) (5 * π / 24) 0 1 ε R' R R'' := by
+points of the sub-arc are at distance strictly between `1/4` and `1` from both: `quarter_lt_chord`). The sub-arc is not maximal
+(the whole arc `r([0, π/3])` holds it), and neither theorem asks for a maximal one. -/
+theorem collarModel_hyps :
+    l60Frag.Valid ∧ l60Frag.IsRingArc 0 (π / 8) (5 * π / 24) 0 1 ∧ (1 : Fin 4) ∉ l60Frag.coloursAt 0 ∧
+      (∀ θ ∈ Ioo (π / 8) (5 * π / 24), ∃ r > 0, l60Frag.Γ ∩ ball (ringPt 0 θ) r ⊆ sphere 0 1) := by
   have hπ := Real.pi_pos
   have hA := l60Frag_isRingArc
   -- the sub-arc
@@ -647,7 +650,7 @@ theorem collarModel {ε : ℝ} (hε : 0 < ε) : ∃ R' R R'', CollarFit l60Frag 
     have h0 : (0 : ℂ) ∈ closedBall (1 + e (π / 3)) 1 := closure_minimal hreg isClosed_closedBall h
     rw [mem_closedBall, dist_eq_norm, zero_sub, norm_neg] at h0
     have h3 : ‖(1 : ℂ) + e (π / 3)‖ ^ 2 = 3 := by
-      rw [sq_norm_eq_re_im]
+      rw [sq_norm_eq]
       simp only [Complex.add_re, Complex.one_re, re_e, Complex.add_im, Complex.one_im, im_e, Real.cos_pi_div_three,
         Real.sin_pi_div_three]
       nlinarith [Real.sq_sqrt (show (0 : ℝ) ≤ 3 by norm_num)]
@@ -697,7 +700,13 @@ theorem collarModel {ε : ℝ} (hε : 0 < ε) : ∃ R' R R'', CollarFit l60Frag 
       linarith
     · have := hcirc (e (π / 3)) (1 / 4) _ _ (by norm_num) hza
       linarith
-  exact exists_collarFit l60Frag_valid hsub hout hfree hε
+  exact ⟨l60Frag_valid, hsub, hout, hfree⟩
+
+/-- **The model `collarModel` (B0): `CollarFit` is inhabited, with two different side colours** — `exists_collarFit` at
+`collarModel_hyps`, for every `ε > 0`. So every clause lemma that takes a `CollarFit` has a model, with `c = 0 ≠ 1 = c'`. -/
+theorem collarModel {ε : ℝ} (hε : 0 < ε) : ∃ R' R R'', CollarFit l60Frag 0 (π / 8) (5 * π / 24) 0 1 ε R' R R'' := by
+  obtain ⟨hF, hA, hout, hfree⟩ := collarModel_hyps
+  exact exists_collarFit hF hA hout hfree hε
 
 /-- **`F` at a point of the open arc**: degree `2`, its sectors coloured `c` (inside) and `c'` (outside). Route: `Γ` near the point is
 `ω(P)` (`free_open`), a two-germ sector chart (`isSectorChart_of` with the germs `(θ + π/2, 1)`, `(θ − π/2, −1)`; branches by
@@ -1392,18 +1401,18 @@ theorem CollarFit.map_inert (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c
 
 end Collar
 
-/-- **The collar bend** (E4-BEND-UN with R1–R3; FS131-I5o's form): a whole maximal arc `α = r([θ₁, θ₂])` of `Γ` on `ω(P)` with constant
-sides `c` (inner), `c'` (outer), `c'` not carried at `P`, shorter than the circle, whose open arc meets no other arc of `Γ` (`hfree`: near
-each interior point `Γ` is `ω(P)`), bends toward `P` inside a collar of `α` in its inner tile. The bent map `M` is the image of `F` under a
+/-- **The collar bend** (E4-BEND-UN with R1–R3; FS131-I5o's form): an arc `α = r([θ₁, θ₂])` of `Γ` on `ω(P)` with constant
+sides `c` (inner), `c'` (outer), `c'` not carried at `P`, whose open arc meets no other arc of `Γ` (`hfree`: near
+each interior point `Γ` is `ω(P)`), bends toward `P` inside a collar of `α` in its inner tile. The arc need not be maximal and no
+bound on its length is assumed: the proof read neither, and FS131-RP1 removed `hmax` and `hlen` (inventory rulings 419 (d),
+427 (a)). Inhabitant of the hypotheses, at once: `collarModel_hyps` (a sub-arc of `l60Frag`'s unit arc, sides `0` and `1`). The bent map `M` is the image of `F` under a
 homeomorphism `h` of the plane supported in `thickening ε α`, fixing every point of `Γ` off `α°` (so the ends `A`, `B` and every vertex),
 carrying interior points to interior points of the same colour; so colours, degrees and repeated colours are carried point by point.
 Metrically: `M` is valid, on `F`'s domain; its constant-sided unit arcs are `F`'s with the same sides (R1); `F`'s whose open arc misses `α°`
 survive in `M` (R2); no point of `α°` is on a unit arc of `M` centred at `P` (R3); and no inert arc is created (validity forbids a unit
 arc centred on `α°` or in the lens to carry `c` on a side, so the colours lost there make nothing inert). -/
 theorem bend_toward_collar (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
-    (hout : c' ∉ F.coloursAt P) (hlen : θ₂ - θ₁ < 2 * π)
-    (hmax : ∀ θ₁' θ₂', ringArc P θ₁ θ₂ ⊆ ringArc P θ₁' θ₂' → F.IsRingArc P θ₁' θ₂' c c' →
-      ringArc P θ₁' θ₂' = ringArc P θ₁ θ₂)
+    (hout : c' ∉ F.coloursAt P)
     (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) {ε : ℝ} (hε : 0 < ε) :
     ∃ (M : ArcMap k) (h : ℂ ≃ₜ ℂ), M.Valid ∧ M.dom = F.dom ∧
       (∀ z ∉ thickening ε (ringArc P θ₁ θ₂), h z = z) ∧
@@ -1417,9 +1426,8 @@ theorem bend_toward_collar (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : 
         M.IsRingArc Q a b d d') ∧
       (∀ θ ∈ Ioo θ₁ θ₂, ¬ M.OnRingArc P (ringPt P θ)) ∧
       (∀ Q a b, M.Inert Q a b → F.Inert Q a b) := by
-  -- `hlen` follows from `l60_le` and `hmax` is not read: the construction bends any constant-sided arc with a free interior (plan § 2)
-  have _ := hlen
-  have _ := hmax
+  -- the construction bends any constant-sided arc with a free interior (plan § 2): no length bound (`l60_le` gives one) and no
+  -- maximality is assumed
   obtain ⟨R', R, R'', hfit⟩ := exists_collarFit hF hA hout hfree hε
   refine ⟨hfit.map, hfit.homeo, hfit.map_valid hF, rfl, fun z hz => (hfit.homeo_eq_self fun hK => hz (hfit.sub_thick hK)).1,
     fun z hz hzO => hfit.homeo_fix_Γ hz hzO, fun z => ⟨pushforward_mem_interiorPts_iff z, fun _ => pushforward_col_apply z⟩,

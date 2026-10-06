@@ -1,0 +1,5 @@
+Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean:108:16: error(lean.invalidField): Invalid field `unique`: The environment does not contain `Exists.unique`, so it is not possible to project the field `unique` from an expression
+  h'
+of type
+  ∃ a ∈ 𝓝 0, ∃ b ∈ 𝓟 (Ioi 0), {x | (fun r => {S | F.IsSector v r S}.encard = ↑n) x} = a ∩ b
+exit 1

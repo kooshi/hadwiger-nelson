@@ -2635,7 +2635,6 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.floor_arg_bounds
 #print axioms HadwigerNelson.Plane.sixCol_zero_cases
 #print axioms HadwigerNelson.Plane.dist_sq_re_im
-#print axioms HadwigerNelson.Plane.sq_norm_re_im
 #print axioms HadwigerNelson.Plane.e_re_im
 #print axioms HadwigerNelson.Plane.cos_five_pi_div_six
 #print axioms HadwigerNelson.Plane.sin_five_pi_div_six
@@ -3895,7 +3894,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.frame_polar_add
 #print axioms HadwigerNelson.Plane.ArcMap.exists_dir_of_within
 #print axioms HadwigerNelson.Plane.ArcMap.reul_bound_real
-#print axioms HadwigerNelson.Plane.ArcMap.sq_norm_eq_re_im
 #print axioms HadwigerNelson.Plane.ArcMap.norm_sub_le_one_of_cone
 #print axioms HadwigerNelson.Plane.ArcMap.eq_cramer
 #print axioms HadwigerNelson.Plane.ArcMap.dist_le_one_of_mem_reul
@@ -4312,7 +4310,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.eq_of_dist_le_one_antipodal
 #print axioms HadwigerNelson.Plane.ArcMap.exists_mem_region_ne
 #print axioms HadwigerNelson.Plane.ArcMap.exists_tileOf_of_mem_coloursAt
-#print axioms HadwigerNelson.Plane.ArcMap.dist_sq_re_im
 #print axioms HadwigerNelson.Plane.ArcMap.antipodal_neg
 #print axioms HadwigerNelson.Plane.ArcMap.exists_near_far_antipodal
 #print axioms HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_tile_dist
@@ -4349,7 +4346,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.not_antipodal_coneAt_N_of_horn
 #print axioms HadwigerNelson.Plane.ArcMap.not_antipodal_coneAt_S_of_horn
 #print axioms HadwigerNelson.Plane.ArcMap.horn_poles_contact
-#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_eq_of_mem_interiorPts
 #print axioms HadwigerNelson.Plane.ArcMap.abs_le_norm_e_sub_one
 #print axioms HadwigerNelson.Plane.ArcMap.sphere_near_mem_ringArc
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.coloursAt_eq
@@ -4380,9 +4376,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.CircleColouring.mem_S_of_ne
 #print axioms HadwigerNelson.Plane.CircleColouring.leftVal_of_not_mem
 #print axioms HadwigerNelson.Plane.ArcMap.germ_add_int_mul
-#print axioms HadwigerNelson.Plane.ArcMap.ringPt_add_int_mul
 #print axioms HadwigerNelson.Plane.ArcMap.germPseudo_add_int_mul
-#print axioms HadwigerNelson.Plane.ArcMap.ringArc_add_int_mul
 #print axioms HadwigerNelson.Plane.ArcMap.IsRetArc.add_int_mul
 #print axioms HadwigerNelson.Plane.ArcMap.IsRetArc.exists_Ico
 #print axioms HadwigerNelson.Plane.ArcMap.exists_eq_of_absent
@@ -4902,7 +4896,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.hex_side
 #print axioms HadwigerNelson.Plane.ArcMap.dist_eFrame
 #print axioms HadwigerNelson.Plane.ArcMap.ringPt_frame
-#print axioms HadwigerNelson.Plane.ArcMap.norm_sq_eq_re_im
 #print axioms HadwigerNelson.Plane.ArcMap.e_hex_re_im
 #print axioms HadwigerNelson.Plane.ArcMap.hex_point
 #print axioms HadwigerNelson.Plane.ArcMap.hex_adjacent
@@ -5754,7 +5747,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 /-! ## FS-131, `OpenMove` (jobs FS131-IO1, IO2, IO3) — OPEN, the fifth move -/
 -- FS131-IO1
 #print axioms HadwigerNelson.Plane.ArcMap.HasHornCount.eq
-#print axioms HadwigerNelson.Plane.ArcMap.HasDegree.eq
 #print axioms HadwigerNelson.Plane.ne_hornSet_of_interior_coneAt
 #print axioms HadwigerNelson.Plane.exists_small_arcsin
 #print axioms HadwigerNelson.Plane.ArcMap.Near.col_mem_coloursAt
@@ -6040,9 +6032,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.ringPt_ne_of_abs_sub_lt
 #print axioms HadwigerNelson.Plane.ArcMap.exists_mem_ringArc_notMem
 #print axioms HadwigerNelson.Plane.ArcMap.eq_of_ringArc_subset_sphere
-#print axioms HadwigerNelson.Plane.ArcMap.finite_arcs_meeting_compact
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.sides_eq_of_ringPt_eq
-#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.union_of_overlap
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.not_regularAt_of_max
 
 -- FS131-I5q (stage 58): `bv_l3` moved to `BaseWalk` and proved (its record is in the FS131-K5b block above); `l3_base` and `bv_l3` over `l3_core`
@@ -6170,6 +6160,22 @@ what is proved over it, until they land. Moved by the join, in FS131-IA2's block
 `Plane/ValidMap/BendAway`'s `LocalStep.of_cutArcs` is proved (its proof stood in `ArcStep` on `fs131-w5y`; inventory item 448 (a)). -/
 
 #print axioms HadwigerNelson.Plane.ArcMap.IsMaxRingArc.meet
+
+/-! ## FS-131 wave 5 (job FS131-RP1) — the remedy pass: the ruled statement tidies, the statements that stood under several names
+
+One new declaration: `collarModel_hyps` (`Plane/ValidMap/BendCollar`; FS131-QA4's QA4-C1), the hypotheses of `exists_collarFit` and
+of `bend_toward_collar` at once on `l60Frag`'s sub-arc — `collarModel`'s old body; `collarModel` is now `exists_collarFit` at it.
+Statements changed, each ruled, their records above: `nb4p` (441 (a)), `bend_toward_collar` (419 (d), 427 (a)), `exists_rayStep`,
+`exists_shaveStep` (450 (c)), `placeHom_step`, `falconerFan_five_placeHom` and the definition `DyadicSqrt3Conclusion` (419 (a)).
+Moved, names and records unchanged: `conj_e`, `sq_norm_eq` (`Plane/Chord` → `Plane/Basic`), `HasDegree.unique` (`Pushforward` →
+`Plane/ValidMap/Basic`). Removed with their records, each a second name for a statement kept (rulings 434 (d), 459 (c)):
+`sq_norm_re_im`, `ArcMap.sq_norm_eq_re_im`, `ArcMap.norm_sq_eq_re_im` (kept: `sq_norm_eq`); `SixFragment`'s `conj_e` (the name
+that stood twice); `HasDegree.eq` (kept: `HasDegree.unique`); `coloursAt_eq_of_mem_interiorPts` (kept:
+`coloursAt_eq_singleton_of_interior`); `ArcMap.dist_sq_re_im` (kept: `dist_sq_re_im`); `ringArc_add_int_mul` (kept:
+`ringArc_add_two_pi_mul`); `ringPt_add_int_mul` (kept: `ringPt_add_int`); `IsRingArc.union_of_overlap` (kept: `IsRingArc.union`);
+`finite_arcs_meeting_compact` (kept: `finite_arcs_inter_compact`). -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.collarModel_hyps
 
 #eval IO.println "=== PURCHASED ==="
 

@@ -71,3 +71,63 @@ after N1–N12 (docstrings: the same elaboration, so it cannot fail on mathemati
 replacement script and applied only when it has ended — no file is edited while a build of it runs.
 
 **Not done by this job** (the brief's fence): the seven modules of the outward bend and `BendStep`. Their list is the report's last section.
+
+## Stage 2 — SAVED (FS131-RP1): the statement tidies and the statements under several names — edited, checked by script, elaborated for iteration; the build follows
+
+*The Lean sources of this stage are elaborated under `lake env lean` only (iteration, never evidence). The build that reads them is
+Stage 3's.*
+
+### 2.1 What was done (rows S1–S6, D1–D8 of § 1.4, all of them)
+
+- **S1–S3**: `[NumberField _]` out of `DyadicSqrt3Conclusion`, `placeHom_step`, `falconerFan_five_placeHom`. No caller's text changed.
+- **S4** `nb4p`: `hnb` is now `∀ j < 6, ¬ G.OnRingArc (ringPt v (ψ + (j + 1)·π/3)) (ringPt v (ψ + j·π/3))`; the proof's one use
+  `(hnb k hk).1` is `hnb k hk`. The docstring says the removed clause alone suffices too, by the mirror, at [hand] (E7 § 5.4), and
+  carries E7's model line (§ 5.1) with its grade.
+- **S5** `bend_toward_collar`: `hlen`, `hmax` and the two `have _ :=` lines out. **`collarModel_hyps`** is new: `collarModel`'s old body
+  up to its last line, concluding `l60Frag.Valid ∧ l60Frag.IsRingArc 0 (π/8) (5π/24) 0 1 ∧ 1 ∉ l60Frag.coloursAt 0 ∧ hfree`;
+  `collarModel` is now `exists_collarFit` at it (statement unchanged). **A decision of mine, held for the coordinator**: QA4-C1's
+  conjunction has a fifth conjunct, `5π/24 − π/8 < 2π`, which was `hlen`; with `hlen` gone it corresponds to no hypothesis, and the
+  theorem states the four that remain. `bend_toward_collar` and `exists_collarFit` each name `collarModel_hyps`.
+- **S6** `exists_rayStep`, `exists_shaveStep`: `{n : ℕ}`, `hn` and `have _ := hn` out; `exists_vertexStep`'s two calls lose the argument.
+- **D1** `conj_e` and `sq_norm_eq` are declared in `Plane/Basic` (the only `Proofs` module both `Chord` and `SixFragment` import) and
+  removed from `Chord`; `SixFragment`'s `conj_e` and `sq_norm_re_im`, `UnitArc`'s `ArcMap.sq_norm_eq_re_im`, `HexRing`'s
+  `ArcMap.norm_sq_eq_re_im` removed; users re-pointed to `sq_norm_eq`: `SixFragment` 8, `UnitArc` 10, `BendCollar` 1, `HexRing` 14
+  (§ 1.4's counts were of lines including each declaration; these are the uses).
+- **D2** `HasDegree.unique` moved from `Pushforward` to `Plane/ValidMap/Basic`, beside `HasDegree`; `OpenMove`'s `HasDegree.eq` removed;
+  users: `OpenMove` 1, `Procedure` 4. `HasHornCount.eq` is another statement and stays.
+- **D3** `FlankUA`'s `coloursAt_eq_of_mem_interiorPts` removed (nothing in `FlankUA` read it); users → `coloursAt_eq_singleton_of_interior`:
+  `Terminal` 4, `BaseWalk` 1, `BaseDense` 2.
+- **D4–D6** `BaseWalk`'s `ArcMap.dist_sq_re_im`, `ringArc_add_int_mul`, `ringPt_add_int_mul` removed; users → `dist_sq_re_im` (text
+  unchanged), `ringArc_add_two_pi_mul` (`BaseDense` 1), `ringPt_add_int` (`BaseWalk` 4, `BaseDense` 1).
+- **D7–D8** `BaseDense`'s `IsRingArc.union_of_overlap`, `finite_arcs_meeting_compact` removed; users → `IsRingArc.union` (2),
+  `finite_arcs_inter_compact` (1); two docstring mentions follow.
+- Each pair's two statements were read side by side before removal (same binders, same conclusion; § 1.4's D5 "if" is met).
+- `scripts/Axioms.lean`: ten records removed (the removed names), one added in a block "FS131-RP1" above the PURCHASED banner
+  (`collarModel_hyps`); moved declarations keep their names and records.
+
+### 2.2 The statement check (`tools/fs131_rp_stmt.py`, manifest `data/fs131/rp/stmt-expected.json`)
+
+Every declaration of every Lean file under `Proofs/` at `3381e47f` against the working tree: **11,258 declarations in 1,796 files;
+changed 7, gone 14, added 4 — exactly the manifest's** (7 changed; 11 gone and 3 moved away; 1 added and 3 moved in; each moved
+statement identical in its new file), 0 deviations (`data/fs131/rp/stmt-stage2.txt`). `--self-test`: six plants, each refused by
+name — an unruled statement change, deletion, addition; a moved statement altered; an addition in a file outside the manifest; a
+manifest entry that did not happen (`stmt-selftest.txt`). What it does not see: a proof's text (by design), and an attribute or
+`variable` line changed above a declaration.
+
+### 2.3 Iteration, not evidence
+
+`lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false` on the 16 edited files that the oleans on disk can check
+(`data/fs131/rp/lean-check/`): 15 exit 0 with no warning; `Pushforward` fails as it must against the old `ValidMap/Basic`
+(`HasDegree.unique` not yet there). The three files that read a moved declaration (`SixFragment`, `Pushforward`, `OpenMove`) were
+elaborated against an overlay — a symlink copy of the built library under `build/rp-overlay` with `Plane/Basic` and `ValidMap/Basic`
+compiled over their links (`overlay.sh`): all three exit 0. The overlay is removed; the built library was not written to (olean
+times checked).
+
+### 2.4 Slips, mine
+
+- Three edit scripts stopped at an occurrence count I had predicted from `rg`'s line count, which included the declaration itself
+  (9 for 8, 16 for 14) or my own new comment (4 for 5); each stopped before writing that file, and was re-run with the count read.
+- A back-quoted word inside a double-quoted `rg` pattern was read by the shell as a command ("GENERIC: command not found");
+  nothing ran.
+- The first overlay had only the two new oleans; Lean takes every `Proofs.*` module from the first path entry holding `Proofs/`,
+  so all three checks failed at import. Rebuilt as a symlink copy.

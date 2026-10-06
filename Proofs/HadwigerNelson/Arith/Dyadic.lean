@@ -35,7 +35,7 @@ variable {F L : Type*} [Field F] [NumberField F] [Field L] [NumberField L] [Alge
 
 /-- The conclusion of SQRT3-LOCAL at a dyadic prime `P` of `F`: unramified in `L`, split iff `f(P|2)` is even, and inert of
 norm `2^f` with `f` odd when it does not split. -/
-def DyadicSqrt3Conclusion (L : Type*) [Field L] [NumberField L] [Algebra F L] (P : HeightOneSpectrum (𝓞 F)) : Prop :=
+def DyadicSqrt3Conclusion (L : Type*) [Field L] [Algebra F L] (P : HeightOneSpectrum (𝓞 F)) : Prop :=
   (∀ Q ∈ P.asIdeal.primesOver (𝓞 L), Ideal.ramificationIdx Q (𝓞 F) = 1) ∧
     ((P.asIdeal.primesOver (𝓞 L)).ncard = 2 ↔ Even (Ideal.inertiaDeg P.asIdeal ℤ)) ∧
     ((P.asIdeal.primesOver (𝓞 L)).ncard ≠ 2 →

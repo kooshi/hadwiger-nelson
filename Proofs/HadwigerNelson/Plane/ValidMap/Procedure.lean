@@ -1090,7 +1090,7 @@ theorem not_hasRepeatedColour_of_degree_le_three {F : ArcMap k} (hc : F.IsClean)
     (hm : F.HasDegree x m) (h3 : m ≤ 3) : ¬ F.HasRepeatedColour x := by
   obtain ⟨X⟩ := exists_near hx
   have hn3 : X.n ≤ 3 := by
-    have := hm.eq X.hC.hasDegree
+    have := hm.unique X.hC.hasDegree
     omega
   rintro ⟨c, hrep⟩
   obtain ⟨r, h2, hr⟩ := (hrep.and (Ioc_mem_nhdsGT X.hC.pos)).exists
@@ -1213,10 +1213,10 @@ theorem hasHornCount_zero_of_germs {M : ArcMap k} {x : ℂ} (hx : x ∈ M.dom) (
       have h := X.hasHornCount_chart hn
       rw [h0, ncard_empty] at h
       exact h
-  · have h1 := hm.eq X.hC.hasDegree
+  · have h1 := hm.unique X.hC.hasDegree
     have h2 := hcard _ hhalf 𝒟 (fun g hg _ => hg)
     omega
-  · have h1 := hm.eq X.hC.hasDegree
+  · have h1 := hm.unique X.hC.hasDegree
     obtain ⟨s, hsdead, hs⟩ := (hdead.and_eventually (Ioo_mem_nhdsGT hmin)).exists
     have h2 := hcard s hs (𝒟.erase g₀) (fun g hg hgΓ => Finset.mem_erase.mpr ⟨fun h => hsdead (h ▸ hgΓ), hg⟩)
     rw [Finset.card_erase_of_mem hg₀] at h2
@@ -2211,16 +2211,16 @@ end Near
 
 /-- **The vertex step, MERGE-RAY's case** (FS110-N4-RAY, cleaned): `exists_rayMerge_aux`'s hypotheses at a point of a clean map.
 Its map is `Moves`' ray merge of the two given horns (`Near.move` with the kept germs `rayKeep` and the colouring `rayCol`,
-`Near.RayConfig.exists_step`) at a radius also below `δ`, then `cleanKeep`; the gap is clear by `ray_clear`. The sector count `hn`
-is not read: the step's count is the potential, and the merge needs no choice of a nearest horn. Inhabitant: none in Lean (as
+`Near.RayConfig.exists_step`) at a radius also below `δ`, then `cleanKeep`; the gap is clear by `ray_clear`. No sector count is
+assumed (FS131-RP1 removed the unread `hn`, inventory ruling 450 (c)): the step's count is the potential, and the merge needs no
+choice of a nearest horn. Inhabitant: none in Lean (as
 `exists_vertexStep`). -/
-theorem exists_rayStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c : Fin k} {n : ℕ}
-    (hn : F.HasSectors v c (n + 1)) (h23 : κ₂ < κ₃) (hH : F.IsHorn v α κ₁ κ₂ c) (hH' : F.IsHorn v α κ₃ κ₄ c)
+theorem exists_rayStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c : Fin k}
+    (h23 : κ₂ < κ₃) (hH : F.IsHorn v α κ₁ κ₂ c) (hH' : F.IsHorn v α κ₃ κ₄ c)
     (h1 : -1 ≤ κ₁) (h4 : κ₄ ≤ 1) {m j : ℕ} (hdeg : F.HasDegree v m) (hhorn : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :
     ∃ ρ, 0 < ρ ∧ ρ < δ ∧ ∃ F' : ArcMap k, F'.Valid ∧ F'.IsClean ∧ LocalStep F F' (closedBall v ρ) ∧ F.IsModification F' ∧
       (∃ m' j', m' + j' < m + j ∧ F'.HasDegree v m' ∧ F'.HasHornCount v j') ∧
       F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F'.IsSite x := by
-  have _ := hn
   obtain ⟨X⟩ := exists_near (hv (mem_closedBall_self zero_le_one))
   obtain ⟨i₀, hβ₀, hnβ₀, hκ₀, hnκ₀, hci₀, hsec₀⟩ := X.horn_index hH
   obtain ⟨i₁, hβ₁, hnβ₁, hκ₁', hnκ₁, hci₁, hsec₁⟩ := X.horn_index hH'
@@ -2512,10 +2512,11 @@ end Near
 /-- **The vertex step, SHAVE's case** (FS110-N4-SHAVE, cleaned): `exists_shave_aux`'s hypotheses at a point of a clean map. Its
 map is `exists_shave_recolour`'s (`Near.move` with every germ kept, `shaveArcs` and `shaveCol`, `Near.exists_shaveStep_aux`) at a
 radius also below `δ`, then `cleanKeep`; the count is `pot_lt_of_sectors` with `H` the shaved horn. Neither flank colour need differ
-from the horn's and the sector count `hn` is not read: `Moves`' two cut cases are not separated. Inhabitant: none in Lean (as
+from the horn's and no sector count is assumed (FS131-RP1 removed the unread `hn`, inventory ruling 450 (c)): `Moves`' two cut cases
+are not separated. Inhabitant: none in Lean (as
 `exists_vertexStep`). -/
-theorem exists_shaveStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ σ : ℝ} {c g h : Fin k} {n : ℕ}
-    (hn : F.HasSectors v c (n + 1)) (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1)
+theorem exists_shaveStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ σ : ℝ} {c g h : Fin k}
+    (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1)
     (hg : F.IsFlankAbove v α κ₂ g) (hh : F.IsFlankBelow v α κ₁ h) (hσ₁ : κ₁ ≤ σ) (hσ₂ : σ ≤ κ₂)
     (hclear : ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ z ∈ hornSet v α κ₁ κ₂ r,
       (TanAbove v α σ z → F.IsClear g z) ∧ (¬ TanAbove v α σ z → F.IsClear h z))
@@ -2523,7 +2524,6 @@ theorem exists_shaveStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Cover
     ∃ ρ, 0 < ρ ∧ ρ < δ ∧ ∃ F' : ArcMap k, F'.Valid ∧ F'.IsClean ∧ LocalStep F F' (closedBall v ρ) ∧ F.IsModification F' ∧
       (∃ m' j', m' + j' < m + j ∧ F'.HasDegree v m' ∧ F'.HasHornCount v j') ∧
       F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F'.IsSite x := by
-  have _ := hn
   obtain ⟨X⟩ := exists_near (hv (mem_closedBall_self zero_le_one))
   obtain ⟨i₀, hβ, hnβ, hκ, hnκ, -, hsec⟩ := X.horn_index hH
   obtain ⟨p, hp⟩ := Near.exists_next_eq (X := X) i₀
@@ -2746,7 +2746,7 @@ theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Cove
     obtain ⟨n, hn⟩ := exists_hasSectors hvd c
     have hn2 : 2 ≤ n := two_le_of_isHorn_of_isHorn hvd hH hH' (by linarith [hH.1]) hn
     obtain ⟨n', rfl⟩ : ∃ n', n = n' + 1 := ⟨n - 1, by omega⟩
-    exact exists_rayStep hF hc hv hn h23 hH hH' (horn_bounds_of_noMerge hF hv hM hn2 hn hH).1
+    exact exists_rayStep hF hc hv h23 hH hH' (horn_bounds_of_noMerge hF hv hM hn2 hn hH).1
       (horn_bounds_of_noMerge hF hv hM hn2 hn hH').2 hdeg hhorn hδ
   · obtain ⟨c, g, h, α, κ₁, κ₂, σ, hH, hg, hh, hσ₁, hσ₂, hclear⟩ := hS
     obtain ⟨n, hn⟩ := exists_hasSectors hvd c
@@ -2754,7 +2754,7 @@ theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Cove
     obtain ⟨n', rfl⟩ : ∃ n', n = n' + 1 := ⟨n - 1, by omega⟩
     by_cases hD : interior (F.allowedCone v c) = ∅
     · obtain ⟨h1, h2⟩ := horn_bounds_of_interior_empty hF hv hH hD
-      exact exists_shaveStep hF hc hv hn hH h1 h2 hg hh hσ₁ hσ₂ hclear hdeg hhorn hδ
+      exact exists_shaveStep hF hc hv hH h1 h2 hg hh hσ₁ hσ₂ hclear hdeg hhorn hδ
     · have hD' : (interior (F.allowedCone v c)).Nonempty := nonempty_iff_ne_empty.mpr hD
       have hn0 : n' = 0 := by
         by_contra h0
@@ -2910,7 +2910,7 @@ theorem pot_eq {v : ℂ} {m j : ℕ} (hm : F.HasDegree v m) (hj : F.HasHornCount
   unfold pot
   rw [dif_pos h]
   obtain ⟨m', j', hm', hj', hs⟩ := h.choose_spec
-  rw [hs, hm.eq hm', hj.eq hj']
+  rw [hs, hm.unique hm', hj.eq hj']
 
 /-- **A sequence of naturals that rises only at finitely many stages falls at finitely many stages.** -/
 theorem finite_strict_of_antitone_off (b : ℕ → ℕ) {R : Set ℕ} (hR : R.Finite) (h : ∀ n ∉ R, b (n + 1) ≤ b n) :

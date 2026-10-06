@@ -200,7 +200,7 @@ theorem BaseCtx.false (B : F.BaseCtx u) : False := by
     intro x hx s t hst hmem
     obtain ⟨-, hnot, -⟩ := hC' x hx
     obtain ⟨m, hm, hst'⟩ := hst.exists_Ico
-    rw [← ringArc_add_int_mul u s t m] at hmem
+    rw [← ringArc_add_two_pi_mul u s t m] at hmem
     obtain ⟨θ, hθ, hθx⟩ := hmem
     have he : e θ = e x := by simpa [ringPt] using hθx
     exact hnot (s + 2 * π * m, t + 2 * π * m) ⟨hm, hst'⟩ ⟨θ, hθ, he⟩
@@ -393,15 +393,8 @@ theorem eq_of_ringArc_subset_sphere {Q P : ℂ} {s t : ℝ} (hst : s < t) (h : r
     exact ⟨θ, ⟨hθ.1, hθ.2.trans (min_le_left _ _)⟩, rfl⟩
   · exact (Arc.circ.inj heq).1
 
-/-- **Finitely many arcs meet a compact part of the domain** (local finiteness and compactness). `GENERIC`. -/
-theorem finite_arcs_meeting_compact (F : ArcMap k) {K : Set ℂ} (hK : IsCompact K) (hKd : K ⊆ F.dom) :
-    {a | a ∈ F.arcs ∧ (a.carrier ∩ K).Nonempty}.Finite := by
-  choose! t ht hfin using F.locallyFinite
-  obtain ⟨S, hSK, hcov⟩ := hK.elim_nhds_subcover t fun y hy => ht y (hKd hy)
-  refine (S.finite_toSet.biUnion fun y hy => hfin y (hKd (hSK y hy))).subset ?_
-  rintro a ⟨ha, z, hza, hzK⟩
-  obtain ⟨y, hyS, hzy⟩ := mem_iUnion₂.mp (hcov hzK)
-  exact mem_iUnion₂.mpr ⟨y, hyS, ha, z, hza, hzy⟩
+-- Finitely many arcs meet a compact part of the domain: `finite_arcs_inter_compact` (`Plane/ValidMap/Limit`); this file's copy
+-- `finite_arcs_meeting_compact` was removed by FS131-RP1 (inventory rulings 434 (d), 459 (c)).
 
 /-- A ring arc read in another lift: shifting both ends by a multiple of `2π` keeps it. -/
 theorem IsRingArc.shift {P : ℂ} {s t : ℝ} {c c' : Fin k} (hA : F.IsRingArc P s t c c') (n : ℤ) :
@@ -409,7 +402,7 @@ theorem IsRingArc.shift {P : ℂ} {s t : ℝ} {c c' : Fin k} (hA : F.IsRingArc P
   refine ⟨by linarith [hA.1], by rw [ringArc_add_two_pi_mul]; exact hA.2.1, fun θ hθ => ?_⟩
   have h := hA.2.2 (θ - 2 * π * n) ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
   have hr : ringPt P (θ - 2 * π * n) = ringPt P θ := by
-    rw [show θ - 2 * π * n = θ + 2 * π * ((-n : ℤ) : ℝ) by push_cast; ring, ringPt_add_int_mul]
+    rw [show θ - 2 * π * n = θ + 2 * π * ((-n : ℤ) : ℝ) by push_cast; ring, ringPt_add_int]
   rwa [hr] at h
 
 /-- Two arcs of one unit circle with constant sides that share an interior point have the same sides. `GENERIC`. -/
@@ -421,34 +414,11 @@ theorem IsRingArc.sides_eq_of_ringPt_eq {p : ℂ} {a b a' b' : ℝ} {c c' d d' :
   rw [he] at h1
   exact ⟨singleton_eq_singleton_iff.mp (h1.1.symm.trans h2.1), singleton_eq_singleton_iff.mp (h1.2.symm.trans h2.2)⟩
 
-/-- Two arcs of one unit circle with the same constant sides whose parameter intervals overlap join into one. `GENERIC`. -/
-theorem IsRingArc.union_of_overlap {p : ℂ} {a b a' b' : ℝ} {c c' : Fin k} (h : F.IsRingArc p a b c c')
-    (h' : F.IsRingArc p a' b' c c') (hov : max a a' < min b b') : F.IsRingArc p (min a a') (max b b') c c' := by
-  obtain ⟨⟨h1, h3⟩, h2, h4⟩ : (a < b ∧ a' < b) ∧ a < b' ∧ a' < b' := by
-    simpa only [max_lt_iff, lt_min_iff] using hov
-  refine ⟨lt_of_le_of_lt (min_le_left _ _) (lt_of_lt_of_le h1 (le_max_left _ _)), ?_, fun θ hθ => ?_⟩
-  · rintro _ ⟨θ, hθ, rfl⟩
-    have hl := min_le_iff.mp hθ.1
-    have hr := le_max_iff.mp hθ.2
-    by_cases hin : θ ∈ Icc a b
-    · exact h.2.1 ⟨θ, hin, rfl⟩
-    · refine h'.2.1 ⟨θ, ?_, rfl⟩
-      rw [mem_Icc, not_and_or, not_le, not_le] at hin
-      rcases hin with hin | hin
-      · exact ⟨by rcases hl with hl | hl <;> [linarith; exact hl], by linarith⟩
-      · exact ⟨by linarith, by rcases hr with hr | hr <;> [linarith; exact hr]⟩
-  · have hl := min_lt_iff.mp hθ.1
-    have hr := lt_max_iff.mp hθ.2
-    by_cases hin : θ ∈ Ioo a b
-    · exact h.2.2 θ hin
-    · refine h'.2.2 θ ?_
-      rw [mem_Ioo, not_and_or, not_lt, not_lt] at hin
-      rcases hin with hin | hin
-      · exact ⟨by rcases hl with hl | hl <;> [linarith; exact hl], by linarith⟩
-      · exact ⟨by linarith, by rcases hr with hr | hr <;> [linarith; exact hr]⟩
+-- Two ring arcs with the same sides whose parameter intervals overlap unite: `IsRingArc.union` (`Plane/ValidMap/Procedure`);
+-- this file's copy `IsRingArc.union_of_overlap` was removed by FS131-RP1 (inventory rulings 434 (d), 459 (c)).
 
 /-- **The ends of a maximal arc are irregular angles**: at a regular end the arc would continue past it with the same sides
-(`RegularAt`, `IsRingArc.union_of_overlap`), and an arc of at most `60°` (`l60_le`) is not the set of a longer one. `GENERIC`. -/
+(`RegularAt`, `IsRingArc.union`), and an arc of at most `60°` (`l60_le`) is not the set of a longer one. `GENERIC`. -/
 theorem IsRingArc.not_regularAt_of_max (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
     (hmax : ∀ θ₁' θ₂', ringArc P θ₁ θ₂ ⊆ ringArc P θ₁' θ₂' → F.IsRingArc P θ₁' θ₂' c c' →
       ringArc P θ₁' θ₂' = ringArc P θ₁ θ₂) :
@@ -473,7 +443,7 @@ theorem IsRingArc.not_regularAt_of_max (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : �
       refine ⟨(max θ₁ a + min θ₂ b) / 2, ⟨?_, ?_⟩, ⟨?_, ?_⟩⟩ <;>
         linarith [le_max_left θ₁ a, le_max_right θ₁ a, min_le_left θ₂ b, min_le_right θ₂ b]
     obtain ⟨rfl, rfl⟩ := hA.sides_eq_of_ringPt_eq hD' ht ht' rfl
-    have hU := hA.union_of_overlap hD' hov
+    have hU := hA.union hD' hov
     refine ⟨a, b, haθ, hθb, hU, hmax _ _ ?_ hU⟩
     rintro _ ⟨ψ, hψ, rfl⟩
     exact ⟨ψ, ⟨(min_le_left _ _).trans hψ.1, hψ.2.trans (le_max_left _ _)⟩, rfl⟩
@@ -501,14 +471,14 @@ theorem IsRingArc.not_regularAt_of_max (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : �
 
 /-- **Finitely many maximal arcs** (record § 41.3's finiteness child): in a valid fragment covering `B̄(u, 2)` the maximal constant-sided
 unit arcs centred in `B̄(u, 1)` are finitely many. Their centres are centres of the finitely many arcs meeting `B̄(u, 2)` that are unit
-circles (`finite_arcs_meeting_compact`, `Arc.finite_inter_sphere_or_eq_circ`: a unit arc of positive length lies on no other curve); about
+circles (`finite_arcs_inter_compact`, `Arc.finite_inter_sphere_or_eq_circ`: a unit arc of positive length lies on no other curve); about
 one centre, a maximal arc read in the lift that starts in `[0, 2π)` ends at two irregular angles of the ring below `4π`
 (`IsRingArc.not_regularAt_of_max`, `l60_le`), finitely many (`finite_not_regular`). `GENERIC`. -/
 theorem finite_maxRingArcs (hF : F.Valid) {u : ℂ} (hu : F.Covers u 2) : (F.maxRingArcs u).Finite := by
   have hπ := Real.pi_pos
   -- the arcs meeting `B̄(u, 2)`, and the centres of the unit circles among them
   set 𝒜 : Set Arc := {a | a ∈ F.arcs ∧ (a.carrier ∩ closedBall u 2).Nonempty} with h𝒜def
-  have h𝒜 : 𝒜.Finite := F.finite_arcs_meeting_compact (isCompact_closedBall u 2) hu
+  have h𝒜 : 𝒜.Finite := F.finite_arcs_inter_compact (isCompact_closedBall u 2) hu
   set 𝒞 : Set ℂ := ⋃ a ∈ 𝒜, {v | ∃ θ₀ θ₁, a = Arc.circ v 1 θ₀ θ₁} with h𝒞def
   have h𝒞 : 𝒞.Finite := by
     refine h𝒜.biUnion fun a _ => Set.Subsingleton.finite ?_
@@ -766,7 +736,7 @@ theorem not_hasRepeatedColour_of_mem_interiorPts {x : ℂ} (hx : x ∈ F.interio
 /-- **The measure drops by the bent arc** (record § 41.3): a maximal arc `β` of the bent map `M` is one of `F`'s (R1), inside a maximal
 `γ` of `F` (`exists_maxRingArc`). The open arcs of `γ` and of the bent arc `α` are disjoint: at a common point `hfree` puts a short arc of
 `γ`'s circle on `α`'s, so the centres agree (`eq_of_ringArc_subset_sphere`), the sides agree there, and two maximal arcs with the same sides
-that overlap are one (`IsRingArc.union_of_overlap`) — then `β ⊆ α` would put a point of the open bent arc on a unit arc of `M`, against R3. So
+that overlap are one (`IsRingArc.union`) — then `β ⊆ α` would put a point of the open bent arc on a unit arc of `M`, against R3. So
 `γ` is an arc of `M` (R2), `β = γ` by `β`'s maximality in `M`, and `β ≠ α` by R3. `hM`, `hMu` are idle. `GENERIC`. -/
 theorem maxRingArcs_subset_of_bend (hF : F.Valid) {M : ArcMap k} (hM : M.Valid) {u P : ℂ} (hu : F.Covers u 2)
     (hMu : M.Covers u 2) (hP : P ∈ closedBall u 1) {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
@@ -811,7 +781,7 @@ theorem maxRingArcs_subset_of_bend (hF : F.Valid) {M : ArcMap k} (hM : M.Valid) 
     have hov : max a' (θ₁ + 2 * π * n) < min b' (θ₂ + 2 * π * n) := by
       rw [max_lt_iff, lt_min_iff, lt_min_iff]
       exact ⟨⟨hG.1, by linarith [hψ.1, hθ.2]⟩, by linarith [hψ.2, hθ.1], by linarith [hA.1]⟩
-    have hU := hG.union_of_overlap hA' hov
+    have hU := hG.union hA' hov
     have e1 := hGmax _ _ (by
       rintro _ ⟨φ, hφ, rfl⟩
       exact ⟨φ, ⟨(min_le_left _ _).trans hφ.1, hφ.2.trans (le_max_left _ _)⟩, rfl⟩) hU
@@ -898,7 +868,7 @@ theorem exists_preBend_step (hF : F.Valid) {u : ℂ} (hu2 : F.Covers u 2) (hu : 
     by_contra hΓ
     have hI' : u ∈ F.interiorPts := ⟨hud, fun h' => hΓ ⟨hud, h'⟩⟩
     have h3 := hu.2
-    rw [coloursAt_eq_of_mem_interiorPts hI', Set.ncard_singleton] at h3
+    rw [coloursAt_eq_singleton_of_interior hI', Set.ncard_singleton] at h3
     omega
   have huα : u ∉ ringPt P '' Ioo a b := by
     rintro ⟨θ, hθ, hθu⟩
@@ -941,7 +911,7 @@ theorem exists_preBend_step (hF : F.Valid) {u : ℂ} (hu2 : F.Covers u 2) (hu : 
           linarith
         · exact hmoved (hfix _ ⟨hwd, hwa⟩ hwα)
       rcases hzbad with ⟨-, h4⟩ | ⟨-, hr⟩
-      · rw [hcw, coloursAt_eq_of_mem_interiorPts hwI, Set.ncard_singleton] at h4; omega
+      · rw [hcw, coloursAt_eq_singleton_of_interior hwI, Set.ncard_singleton] at h4; omega
       · exact not_hasRepeatedColour_of_mem_interiorPts hwI (hrw.mp hr)
   have hME : M.UnenclosedC u :=
     unenclosedC_of_homeomorph hαc.isBounded.thickening (fun z hz => hsupp z hz) hhu hint hcol hE

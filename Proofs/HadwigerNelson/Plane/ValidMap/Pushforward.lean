@@ -101,10 +101,7 @@ end Pushforward
 
 variable {F}
 
-/-- **A degree is unique**: two counts that hold for all small radii agree. -/
-theorem HasDegree.unique {v : ℂ} {m m' : ℕ} (h : F.HasDegree v m) (h' : F.HasDegree v m') : m = m' := by
-  obtain ⟨r, h1, h2⟩ := (h.and h').exists
-  exact_mod_cast h1.symm.trans h2
+-- `HasDegree.unique` is `Plane/ValidMap/Basic`'s, beside the definition (moved there by FS131-RP1, inventory ruling 459 (c)).
 
 /-- With one degree known, a degree is that one. -/
 theorem HasDegree.iff_eq {v : ℂ} {m : ℕ} (h : F.HasDegree v m) (n : ℕ) : F.HasDegree v n ↔ n = m :=

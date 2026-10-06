@@ -1396,7 +1396,7 @@ theorem BaseCtx.pseudo_finite (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ closedBall
     have hI : ringPt p θ ∈ F.interiorPts := ⟨hxd, fun h => hΓ ⟨hxd, h⟩⟩
     have hab : F.col (ringPt p θ) ∉ F.coloursAt p :=
       not_mem_coloursAt_of_mem_sphere hF (by rw [mem_sphere, dist_ringPt]) ⟨hI, mem_singleton _⟩
-    rw [pseudoColours, coloursAt_eq_of_mem_interiorPts hI]
+    rw [pseudoColours, coloursAt_eq_singleton_of_interior hI]
     refine Set.ncard_eq_one.mpr ⟨F.col (ringPt p θ), ?_⟩
     ext j
     simp only [Set.mem_sdiff, mem_singleton_iff]
@@ -1507,24 +1507,14 @@ theorem germ_add_int_mul (p : ℂ) (θ : ℝ) (m : ℤ) (s : Side) (δ : ℝ) : 
   simp only [ringPt]
   rw [show θ + 2 * π * m + s.sign * t = (θ + s.sign * t) + 2 * π * m by ring, e_add_int_mul]
 
-/-- Ring points read angles modulo `2π`. -/
-theorem ringPt_add_int_mul (p : ℂ) (θ : ℝ) (m : ℤ) : ringPt p (θ + 2 * π * m) = ringPt p θ := by
-  simp only [ringPt, e_add_int_mul]
+-- Ring points and closed ring arcs read their angles modulo `2π`: `ringPt_add_int` (`Plane/ValidMap/Procedure`) and
+-- `ringArc_add_two_pi_mul` (`Plane/ValidMap/MapTopology`); this file's copies `ringPt_add_int_mul` and `ringArc_add_int_mul`
+-- were removed by FS131-RP1 (inventory ruling 459 (c)).
 
 /-- A germ's pseudo-colour reads its angle modulo `2π`. -/
 theorem germPseudo_add_int_mul {k : ℕ} {F : ArcMap k} {p : ℂ} {θ : ℝ} (m : ℤ) {s : Side} {a : Fin k} :
     F.GermPseudo p (θ + 2 * π * m) s a ↔ F.GermPseudo p θ s a := by
   simp only [GermPseudo, GermIn, germ_add_int_mul]
-
-/-- Closed ring arcs read their angles modulo `2π`. -/
-theorem ringArc_add_int_mul (p : ℂ) (s t : ℝ) (m : ℤ) : ringArc p (s + 2 * π * m) (t + 2 * π * m) = ringArc p s t := by
-  ext z
-  constructor
-  · rintro ⟨θ, hθ, rfl⟩
-    refine ⟨θ - 2 * π * m, ⟨by linarith [hθ.1], by linarith [hθ.2]⟩, ?_⟩
-    rw [← ringPt_add_int_mul p (θ - 2 * π * m) m, sub_add_cancel]
-  · rintro ⟨θ, hθ, rfl⟩
-    exact ⟨θ + 2 * π * m, ⟨by linarith [hθ.1], by linarith [hθ.2]⟩, ringPt_add_int_mul p θ m⟩
 
 /-- Returning arcs read their angles modulo `2π`. -/
 theorem IsRetArc.add_int_mul {k : ℕ} {F : ArcMap k} {p : ℂ} {s t : ℝ} (h : F.IsRetArc p s t) (m : ℤ) :
@@ -1532,8 +1522,8 @@ theorem IsRetArc.add_int_mul {k : ℕ} {F : ArcMap k} {p : ℂ} {s t : ℝ} (h :
   obtain ⟨hst, hst', a, c, hac, h1, h2, h3, h4, T₁, T₂, hT₁, hT₂, K, hK, hsK, htK, hKsub⟩ := h
   refine ⟨by linarith, by linarith, a, c, hac, (germPseudo_add_int_mul m).mpr h1, (germPseudo_add_int_mul m).mpr h2,
     (germPseudo_add_int_mul m).mpr h3, (germPseudo_add_int_mul m).mpr h4, T₁, T₂, hT₁, hT₂, K, hK, ?_, ?_, hKsub⟩
-  · rw [ringPt_add_int_mul]; exact hsK
-  · rw [ringPt_add_int_mul]; exact htK
+  · rw [ringPt_add_int]; exact hsK
+  · rw [ringPt_add_int]; exact htK
 
 /-- Every returning arc is a translate by a multiple of `2π` of one starting in `[0, 2π)`. -/
 theorem IsRetArc.exists_Ico {k : ℕ} {F : ArcMap k} {p : ℂ} {s t : ℝ} (h : F.IsRetArc p s t) :
@@ -1597,8 +1587,8 @@ theorem BaseCtx.exists_germPseudo (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ closed
       · have h1 := Int.lt_floor_add_one (φ / (2 * π))
         have h2 : φ < ((⌊φ / (2 * π)⌋ : ℝ) + 1) * (2 * π) := by rwa [div_lt_iff₀ (by positivity)] at h1
         push_cast; nlinarith
-    refine ⟨_, ⟨hm, ?_⟩, ringPt_add_int_mul p φ _⟩
-    rwa [ringPt_add_int_mul]
+    refine ⟨_, ⟨hm, ?_⟩, ringPt_add_int p φ _⟩
+    rwa [ringPt_add_int]
   obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp (hZfin.sdiff (t := {ringPt p θ})).isClosed.isOpen_compl (ringPt p θ)
     (fun h => h.2 rfl)
   set δ := min ε π with hδ
@@ -2492,9 +2482,7 @@ theorem exists_tileOf_of_mem_coloursAt {k : ℕ} {F : ArcMap k} {q : ℂ} (hq : 
   obtain ⟨X, hX, -, hqX⟩ := sector_subset_tile hSj
   exact ⟨X, hX, hqX⟩
 
-/-- Squared distances in coordinates. -/
-theorem dist_sq_re_im (z w : ℂ) : dist z w ^ 2 = (z.re - w.re) ^ 2 + (z.im - w.im) ^ 2 := by
-  rw [Complex.dist_eq_re_im, Real.sq_sqrt (by positivity)]
+-- Squared distances in coordinates: `dist_sq_re_im` (`Plane/SixFragment`); this file's copy in `ArcMap` removed by FS131-RP1.
 
 /-- Real arithmetic: two antipodal unit vectors `a`, `b` (`|a − b| = 2`) satisfy `b = −a`. -/
 theorem antipodal_neg {a1 a2 b1 b2 : ℝ} (h1 : a1 ^ 2 + a2 ^ 2 = 1) (h2 : b1 ^ 2 + b2 ^ 2 = 1)

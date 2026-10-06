@@ -1288,21 +1288,17 @@ theorem reul_bound_real {D1 D2 Q1 Q2 u1 u2 w1 w2 a b : ℝ} (ha : 0 ≤ a) (hb :
       _ ≤ _ := mul_le_mul_of_nonneg_left hP h0
   nlinarith
 
-/-- `‖z‖² = (re z)² + (im z)²`. -/
-theorem sq_norm_eq_re_im (z : ℂ) : ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := by
-  rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]; ring
-
 /-- The Reuleaux bound at a vertex `V`: if `q ∈ B̄(W₁, 1) ∩ B̄(W₂, 1)` with `|W₁ − V| = |W₂ − V| = 1`, `p ∈ B̄(V, 1)`, and `p − q` is a
 nonnegative combination of `W₁ − V` and `W₂ − V`, then `|p − q| ≤ 1`. -/
 theorem norm_sub_le_one_of_cone {V W₁ W₂ p q : ℂ} (h₁ : ‖W₁ - V‖ = 1) (h₂ : ‖W₂ - V‖ = 1) (hp : ‖p - V‖ ≤ 1)
     (hq₁ : ‖q - W₁‖ ≤ 1) (hq₂ : ‖q - W₂‖ ≤ 1) {a b : ℝ} (ha : 0 ≤ a) (hb : 0 ≤ b)
     (hd : p - q = (a : ℂ) * (W₁ - V) + (b : ℂ) * (W₂ - V)) : ‖p - q‖ ≤ 1 := by
-  have e1 := sq_norm_eq_re_im (W₁ - V); rw [h₁] at e1
-  have e2 := sq_norm_eq_re_im (W₂ - V); rw [h₂] at e2
+  have e1 := sq_norm_eq (W₁ - V); rw [h₁] at e1
+  have e2 := sq_norm_eq (W₂ - V); rw [h₂] at e2
   have ep : ‖p - V‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (p - V)]
   have eq1 : ‖q - W₁‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (q - W₁)]
   have eq2 : ‖q - W₂‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (q - W₂)]
-  rw [sq_norm_eq_re_im] at ep eq1 eq2
+  rw [sq_norm_eq] at ep eq1 eq2
   have hre : p.re - q.re = a * (W₁.re - V.re) + b * (W₂.re - V.re) := by
     have := congrArg Complex.re hd; simpa using this
   have him : p.im - q.im = a * (W₁.im - V.im) + b * (W₂.im - V.im) := by
@@ -1315,7 +1311,7 @@ theorem norm_sub_le_one_of_cone {V W₁ W₂ p q : ℂ} (h₁ : ‖W₁ - V‖ =
   have hP : ((p.re - q.re) + (q.re - V.re)) ^ 2 + ((p.im - q.im) + (q.im - V.im)) ^ 2 ≤ 1 := by
     simp only [sub_add_sub_cancel]; exact ep
   have := reul_bound_real ha hb hre him hQu hQw hP
-  have h2 : ‖p - q‖ ^ 2 ≤ 1 := by rw [sq_norm_eq_re_im]; simpa using this
+  have h2 : ‖p - q‖ ^ 2 ≤ 1 := by rw [sq_norm_eq]; simpa using this
   nlinarith [norm_nonneg (p - q)]
 
 /-- `d = a u + b w` by Cramer's rule, for `u`, `w` not parallel. -/
@@ -1339,7 +1335,7 @@ theorem dist_le_one_of_mem_reul {X Y Z p q : ℂ} (hXY : ‖Y - X‖ = 1) (hXZ :
   have hZY : ‖Y - Z‖ = 1 := by rw [norm_sub_rev]; exact hYZ
   set u := Y - X with hu
   set w := Z - X with hw
-  have sq := sq_norm_eq_re_im
+  have sq := sq_norm_eq
   have hc : u.re * w.im - u.im * w.re ≠ 0 := by
     have e1 := sq u; rw [hXY] at e1
     have e2 := sq w; rw [hXZ] at e2
@@ -1408,7 +1404,7 @@ theorem dist_lt_one_of_mem_reul {X Y Z p q : ℂ} (hXY : ‖Y - X‖ = 1) (hXZ :
 theorem norm_e_pi_div_three_sub_one : ‖e (π / 3) - 1‖ = 1 := by
   obtain ⟨er, ei⟩ := e_pi_div_three_re_im
   have hs3 : √3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
-  have h := sq_norm_eq_re_im (e (π / 3) - 1)
+  have h := sq_norm_eq (e (π / 3) - 1)
   simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, er, ei] at h
   have h2 : ‖e (π / 3) - 1‖ ^ 2 = 1 := by rw [h]; nlinarith
   nlinarith [norm_nonneg (e (π / 3) - 1)]
@@ -1432,7 +1428,7 @@ theorem l60_cap_mem_ball {x : ℂ} (h1 : ‖x - 1‖ < 1) (h2 : ‖x - e (π / 3
   have q1 : ‖x - 1‖ ^ 2 < 1 := by nlinarith [norm_nonneg (x - 1)]
   have q2 : ‖x - e (π / 3)‖ ^ 2 < 1 := by nlinarith [norm_nonneg (x - e (π / 3))]
   have q0 : 1 < ‖x‖ ^ 2 := by nlinarith
-  rw [sq_norm_eq_re_im] at q1 q2 q0
+  rw [sq_norm_eq] at q1 q2 q0
   simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, er, ei] at q1 q2
   have g1 : 0 < 2 * x.re - (x.re ^ 2 + x.im ^ 2) := by nlinarith
   have g2 : 0 < x.re + √3 * x.im - (x.re ^ 2 + x.im ^ 2) := by nlinarith
@@ -1441,7 +1437,7 @@ theorem l60_cap_mem_ball {x : ℂ} (h1 : ‖x - 1‖ < 1) (h2 : ‖x - e (π / 3
     nlinarith [mul_pos g1 g2, mul_pos g1 g3, mul_pos g2 g3, sq_nonneg (x.re - 3 / 2), sq_nonneg (x.im - √3 / 2),
       sq_nonneg (√3 * x.re - x.im)]
   have : ‖x - (1 + e (π / 3))‖ ^ 2 < 1 := by
-    rw [sq_norm_eq_re_im]
+    rw [sq_norm_eq]
     simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.one_re, Complex.one_im, er, ei]
     nlinarith
   nlinarith [norm_nonneg (x - (1 + e (π / 3)))]
@@ -1488,7 +1484,7 @@ theorem l60_cap_mem_closedBall {x : ℂ} (h1 : ‖x - 1‖ ≤ 1) (h2 : ‖x - e
   have q1 : ‖x - 1‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (x - 1)]
   have q2 : ‖x - e (π / 3)‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (x - e (π / 3))]
   have q0 : 1 < ‖x‖ ^ 2 := by nlinarith
-  rw [sq_norm_eq_re_im] at q1 q2 q0
+  rw [sq_norm_eq] at q1 q2 q0
   simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, er, ei] at q1 q2
   have g1 : 0 ≤ 2 * x.re - (x.re ^ 2 + x.im ^ 2) := by nlinarith
   have g2 : 0 ≤ x.re + √3 * x.im - (x.re ^ 2 + x.im ^ 2) := by nlinarith
@@ -1497,7 +1493,7 @@ theorem l60_cap_mem_closedBall {x : ℂ} (h1 : ‖x - 1‖ ≤ 1) (h2 : ‖x - e
     nlinarith [mul_nonneg g1 g2, mul_nonneg g1 g3.le, mul_nonneg g2 g3.le, sq_nonneg (x.re - 3 / 2), sq_nonneg (x.im - √3 / 2),
       sq_nonneg (√3 * x.re - x.im)]
   have : ‖x - (1 + e (π / 3))‖ ^ 2 ≤ 1 := by
-    rw [sq_norm_eq_re_im]
+    rw [sq_norm_eq]
     simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.one_re, Complex.one_im, er, ei]
     nlinarith
   nlinarith [norm_nonneg (x - (1 + e (π / 3)))]
@@ -6312,14 +6308,19 @@ theorem straddlers_third (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {θ : ℝ}
 
 /-- **FS112-NB4P** (NB-4 corrected): at a point `v` of exactly four colours of a valid six-coloured map, let `y₀ = r(ψ)` be a change
 point of its ring (a covering pair with `v`, automatically) and `y_j = r(ψ + j·60°)` its `σ_v`-orbit. If no orbit point lies on an arc
-of `Γ` on `ω(v)` (closed arcs, so ends included), and no arc of `Γ` on `ω(y_{j±1})` has `y_j` on it, contradiction. The bound on the
-colours at `y_j` is not needed (not a hypothesis). -/
+of `Γ` on `ω(v)` (closed arcs, so ends included), and no arc of `Γ` on `ω(y_{j+1})` has `y_j` on it, contradiction. The bound on the
+colours at `y_j` is not needed (not a hypothesis). `hnb` is one rotational sense only: the proof never read the clause about
+`ω(y_{j−1})`, which FS131-RP1 removed (inventory ruling 441 (a)); that clause alone suffices too, by the mirror
+`z ↦ v + conj (z − v)`, at [hand] and not in Lean (`plans/FS131-E7-derivation.md` § 5.4).
+Inhabitant, at [hand], no Lean object yet (an open gate item): on FS131-E7's `F₁` — the four-petal flower with one cell recoloured,
+§ 4.1 — at `v = 0`, `ψ = 0`, `X = 4`, `X' = 5`, the hypotheses `hF`, `hv`, `h4`, `hy`, `hnb` hold at once (§ 5.1; `hnb` holds because
+no circle `ω(y_{j+1})` carries an arc of `Γ` there) and `hring` fails at `j = 1, 2, 4, 5`: so `hring` is not idle. Whether `hF`,
+`hv`, `h4`, `hy`, `hring` hold at once on some map is open (§ 5.3). -/
 theorem nb4p {G : ArcMap 6} (hF : G.Valid) {v : ℂ} (hv : G.Covers v 1) (h4 : (G.coloursAt v).ncard = 4) {ψ : ℝ}
     {X X' : Fin 6} (hy : G.IsChangePoint v ψ X X')
     (hring : ∀ j : ℕ, j < 6 → ¬ G.OnRingArc v (ringPt v (ψ + j * (π / 3))))
     (hnb : ∀ j : ℕ, j < 6 →
-      ¬ G.OnRingArc (ringPt v (ψ + ((j : ℝ) + 1) * (π / 3))) (ringPt v (ψ + j * (π / 3))) ∧
-        ¬ G.OnRingArc (ringPt v (ψ + ((j : ℝ) - 1) * (π / 3))) (ringPt v (ψ + j * (π / 3)))) :
+      ¬ G.OnRingArc (ringPt v (ψ + ((j : ℝ) + 1) * (π / 3))) (ringPt v (ψ + j * (π / 3)))) :
     False := by
   classical
   have hπ := Real.pi_pos
@@ -6381,7 +6382,7 @@ theorem nb4p {G : ArcMap 6} (hF : G.Valid) {v : ℂ} (hv : G.Covers v 1) (h4 : (
     rcases Nat.lt_or_ge k 6 with hk | hk
     · have hX2 := hXy (k + 1) (by omega)
       rw [hangle] at hX2 ⊢
-      have hna := (hnb k hk).1
+      have hna := hnb k hk
       rw [show ψ + ((k : ℝ) + 1) * (π / 3) = ψ + k * (π / 3) + π / 3 by ring] at hna
       obtain ⟨i, o, h⟩ := straddlers_third hF hv hcompl hX2.1 hX2.2 hna
       exact ⟨i, o, fun _ => h⟩
