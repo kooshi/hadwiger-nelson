@@ -5560,3 +5560,33 @@ reason by the close.*
      changed directory into it inside one command, which the handoff's § 1 item 6 forbids for the top-level session (the harness
      announces the change of directory); I returned to the main tree in the next command, no file was written from there, and no
      running job has reported an effect. Compound commands on a worktree use `git -C` and absolute paths, as the rule says.
+
+522. **FS131-K6c, by message mid-job (its stage 13 saved at `66d688b6` on `fs131-w6`): a generalization of the pinch, a hidden
+     hypothesis in a filed result, and one open expectation settled** (source: K6c's message to "main", 2026-10-06). (1)
+     **FS111-M-PINCH reads no disjointness**: `TwoColourOn`'s field `disj` is never needed — with the cover alone the (in, in)
+     case is impossible, (in, out) gives one contact and the split type, and in (out, out) the two discs' intersection in `N` is
+     null by the cover, so they are tangent and each lies almost everywhere in the other set (source:
+     `plans/FS111-M2-regularity.md` § 2.2, "disjointness replaced by the one-component hypothesis", and its own check of each
+     cell). So the pinch holds on a cover's pinch set as it stands — FS111-M2-HULLC's clause (v). The second planner's
+     mutation-audit line "without `disj` its (out, out) case is false" is wrong; no statement is affected. It states the wider
+     form under its own name (`pinch_of_cover`), `pinch` its case. **My check**: the (out, out) cell redone by hand — a point of
+     both open discs in `N` would be almost everywhere in neither set, against the cover; it stands. (I6A's report had agreed
+     with that audit line because its proof of that cell used `disj`; a proof that uses a hypothesis does not show it is needed.)
+     (2) **A statement defect, a hidden hypothesis — FS121-DB1-L7** (`plans/FS121-derivation.md` l. 207), and through it
+     FS121-O1-OUT's first clause and FS111-M2-INTRAD's step (1): L7 says "at every point off Σ … REG-J′ is not used", and its
+     argument (`plans/FS121-DB1-verification.md` § 2.5) applies M-C11 (ii) on a neighbourhood of the parallel's point, which
+     with E8's erratum needs that neighbourhood free of cusps — the point off the *closure* of Σ, or Σ closed. Under REG-J′ Σ
+     is closed; without it nobody has derived that Σ is closed in a saturated colouring. **A gap at that step, not a
+     refutation; no counterexample.** L7 as filed is true at "the point has a neighbourhood missing Σ". Its shorter route for
+     the pointwise half: `pinch` at the partner point with the known contact gives its type at once. (3) Expectation X5 (b)
+     settled: FS121-O1-ENDS's "off a null set of normals" and FS121-DB1-L6's "finitely many" are both true (DB1 § 2.5 says the
+     bad normals are finite); no statement changes. **Rulings.** (a) `pinch_of_cover` as proposed; `TwoColourOn` unchanged.
+     Alternative: weaken the structure at the join. Why not: four branches read it, and the wider theorem costs one
+     declaration. Confidence: high. (b) **L7 is stated on an open set missing Σ with saturation there, and O1-OUT under local
+     finiteness**; **a correction owed** to FS121-DB1-L7's entry ("at every point off Σ" becomes "at every point with a
+     neighbourhood missing Σ"), with the wave's errata. (c) **A deriver's question, queued as FS131-E9**: is the singular set
+     closed in every saturated colouring, with no REG-J′? A yes restores the filed sentence; a no, or a stall, leaves three
+     filed results true only at the narrower class, and the rows that cite them "with no REG-J′" are then traced. Alternative:
+     leave it to the errata. Why a job: rows 142–144 lean on what holds without REG-J′, and this is the first place the
+     milestone has found one of those sentences resting on an underived step. Confidence: medium-high; brief not written — it
+     quotes K6c's record at its hand-back or at a saved stage.
