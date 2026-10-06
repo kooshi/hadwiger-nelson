@@ -203,6 +203,18 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.Plane.exists_mem_falconerE
 #print axioms HadwigerNelson.Plane.fan_tip_ae_mem
 
+#eval AxiomAudit.declareImport ``HadwigerNelson.StandingFive.kloosterman_bound
+
+-- FS131-K10c: wave 10's records resting on `kloosterman_bound` (`[Weil1948]` p. 207; TC1-STANDING-FIVE's floor)
+#print axioms HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two
+#print axioms HadwigerNelson.StandingFive.targetFloor_seven_weil
+#print axioms HadwigerNelson.StandingFive.targetFloor_six_weil
+#print axioms HadwigerNelson.StandingFive.circle_sum_le_weil
+#print axioms HadwigerNelson.StandingFive.standingFloor_seven_weil
+#print axioms HadwigerNelson.StandingFive.standingFloor_five_weil
+#print axioms HadwigerNelson.StandingFive.seven_le_localBound_weil
+#print axioms HadwigerNelson.StandingFive.five_le_chromaticNumber_weil
+
 #eval IO.println "=== CLEAN ==="
 
 /-! ## M01 — the reduction and its API -/
@@ -7073,6 +7085,15 @@ list of the library's theorems (`data/fs131/l5/count-modules.lean`), by `tools/f
 #print axioms HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot
 #print axioms HadwigerNelson.SpectralInputs.measurePreserving_shift_infinitePi
 #print axioms HadwigerNelson.SpectralInputs.contVec_prod_eq_coin
+
+/-! ## FS-131 wave 10 (job FS131-K10c) — the third planning pass: around the import (the page's form against `KloostermanBound`, the model), no axiom -/
+-- FS131-K10c
+#print axioms HadwigerNelson.StandingFive.sum_units_eq_sum_ne_zero
+#print axioms HadwigerNelson.StandingFive.four_mul_mul_ne_zero_iff
+#print axioms HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound
+#print axioms HadwigerNelson.StandingFive.kloosterman_bound_model
+#print axioms HadwigerNelson.StandingFive.ringChar_ne_two_of_card_mod_four
+#print axioms HadwigerNelson.StandingFive.targetFloor_six_of_kloosterman
 
 #eval IO.println "=== PURCHASED ==="
 

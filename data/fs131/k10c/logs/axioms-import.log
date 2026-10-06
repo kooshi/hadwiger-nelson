@@ -1,0 +1,48 @@
+'HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.targetFloor_seven_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.targetFloor_six_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.circle_sum_le_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.standingFloor_seven_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.standingFloor_five_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.seven_le_localBound_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.five_le_chromaticNumber_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.sum_units_eq_sum_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.four_mul_mul_ne_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StandingFive.kloosterman_bound_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.ringChar_ne_two_of_card_mod_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StandingFive.targetFloor_six_of_kloosterman' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.standingFloor_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.seven_le_localBound_of_kloosterman' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Floor128.targetFloor_eight_128' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0

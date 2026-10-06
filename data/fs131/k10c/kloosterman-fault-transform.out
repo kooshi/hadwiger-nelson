@@ -1,0 +1,8 @@
+  MISMATCH q=7: l=(1,) c=(1,) d=(1,): sum psi(x)chi(x^2 - 2cd) = [-1, -1, 1, 0, 0, 1, -1] against K = [0, 2, 1, 0, 0, 1, 2]
+  MISMATCH q=7: l=(1,) c=(1,) d=(2,): sum psi(x)chi(x^2 - 2cd) = [-1, 1, 0, -1, -1, 0, 1] against K = [0, 1, 0, 2, 2, 0, 1]
+q=  7 (p=7, modulus (0, 1)): 6 characters x 36 pairs = 216 sums; violations of the bound 0; equalities 0; transformation mismatches 216; 4cd != 0 <=> c, d != 0: True  ->  FAIL
+  MISMATCH q=9: l=(0, 1) c=(1, 0) d=(1, 0): sum psi(x)chi(x^2 - 2cd) = [3, -2, -2] against K = [4, 2, 2]
+  MISMATCH q=9: l=(0, 1) c=(1, 0) d=(2, 0): sum psi(x)chi(x^2 - 2cd) = [1, -1, -1] against K = [6, 1, 1]
+q=  9 (p=3, modulus (1, 0, 1)): 8 characters x 64 pairs = 512 sums; violations of the bound 0; equalities 0; transformation mismatches 384; 4cd != 0 <=> c, d != 0: True  ->  FAIL
+RESULT: FAIL
+exit 1

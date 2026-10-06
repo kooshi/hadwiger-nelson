@@ -1,0 +1,90 @@
+import Proofs.HadwigerNelson.Arith.ProductFactor
+import Mathlib.GroupTheory.Index
+
+/-!
+# What the wave's rows read of J45-N1 (a), (b): two facts about a filter (FS-131 wave 10, third pass)
+
+**Read aloud, against the informal claim.** J45-N1 (`plans/FS84-SI-D-derivation.md:105–124`): (a) "`E_S = T + A + Fin_S` is
+exactly the group of characters continuous for `R → R̂_prof × (L⊗ℝ) × ∏_{v∈S} L_v`", (b) "`R` is dense there". The topology
+`τ′_S` this induces on `R = ℤ[U]` is not built in the library (it needs the `S`-adic completions of `L` against
+`unitRing F ⊆ ℂ`, and the row's (a) needs the extension of characters from a closed subgroup of an LCA group). **This module
+does not state (a), (b). It names what the other rows of the wave read of them** — J45-SI-J's instance at `E_S`, J45-SI-5,
+J45-SI-C — which is two facts about the filter `l = 𝓝[τ′_S] 0`:
+
+* `finiteIndex_mem`: every subgroup of finite index is a neighbourhood of `0` — **by the definition of `τ′_S`** (its
+  profinite component); it makes a finite translation system eventually the identity (`eventually_map_eq_zero`,
+  `contVec_prod_eq`'s `h₁`) and a finite-valued process moved through a finite quotient `l`-continuous;
+* `frequently_notMem`: `l` is not eventually inside a finite set — "`τ′_S` is T₁ and not discrete", which **is J45-N1
+  (b)'s content** (weak approximation on the norm-one torus); it is `contVec_prod_eq`'s `hl`, verbatim.
+
+Every row stated over `IsPlaceFilter l` holds for `τ′_S` once `IsPlaceFilter (𝓝[τ′_S] 0)` is proved, and that instance is
+what remains of J45-N1 (a), (b) for this wave's consumers; R-U, the one reader of the Borel isomorphism, is not a row here.
+
+**Inhabitant.** The profinite filter of any infinite commutative group — the subgroups of finite index as a basis — satisfies
+both facts (`isPlaceFilter_profiniteFilter`, proved): the case `S = ∅` with no archimedean part, where the continuous characters are
+the torsion characters `T`. On a finite group no filter satisfies the second fact (the Spec).
+-/
+
+namespace HadwigerNelson.SpectralInputs
+
+open Filter
+
+variable {R : Type*} [AddCommGroup R]
+
+/-- **The two facts the wave's rows read of `𝓝[τ′_S] 0`** (J45-N1 (a), (b) as an interface): every subgroup of finite index
+belongs to the filter, and the filter is not eventually inside any finite set. -/
+structure IsPlaceFilter (l : Filter R) : Prop where
+  /-- Every subgroup of finite index is in the filter (the profinite component of `τ′_S`, by definition). -/
+  finiteIndex_mem : ∀ H : AddSubgroup R, H.FiniteIndex → (H : Set R) ∈ l
+  /-- The filter is not eventually inside a finite set (`τ′_S` is T₁ and not discrete: J45-N1 (b)). -/
+  frequently_notMem : ∀ D : Set R, D.Finite → ∃ᶠ y in l, y ∉ D
+
+/-- The profinite filter of a commutative group: the subgroups of finite index, as a filter at `0`. -/
+def profiniteFilter (R : Type*) [AddCommGroup R] : Filter R :=
+  ⨅ H : {H : AddSubgroup R // H.FiniteIndex}, 𝓟 (H.1 : Set R)
+
+/-- **A finite quotient is eventually trivial along a place filter**: for a homomorphism to a finite group, `π y = 0`
+eventually — so the translations of a finite system through `π` are eventually the identity (J45-SI-J's `h₁`). -/
+theorem IsPlaceFilter.eventually_map_eq_zero {l : Filter R} (hl : IsPlaceFilter l) {V : Type*} [AddCommGroup V] [Finite V]
+    (π : R →+ V) : ∀ᶠ y in l, π y = 0 :=
+  hl.finiteIndex_mem π.ker (AddSubgroup.finiteIndex_ker π)
+
+/-- Every member of a place filter is infinite. -/
+theorem IsPlaceFilter.infinite_of_mem {l : Filter R} (hl : IsPlaceFilter l) {s : Set R} (hs : s ∈ l) : s.Infinite := by
+  intro hfin
+  obtain ⟨y, hys, hy⟩ := (Filter.frequently_iff.mp (hl.frequently_notMem s hfin)) hs
+  exact hy hys
+
+/-- **The inhabitant**: the profinite filter of an infinite commutative group is a place filter. -/
+theorem isPlaceFilter_profiniteFilter [Infinite R] : IsPlaceFilter (profiniteFilter R) := by
+  refine ⟨fun H hH => mem_iInf_of_mem ⟨H, hH⟩ (mem_principal_self _), fun D hD => ?_⟩
+  rw [Filter.frequently_iff]
+  intro s hs
+  have hdir : Directed (· ≥ ·) fun H : {H : AddSubgroup R // H.FiniteIndex} => 𝓟 (H.1 : Set R) := by
+    intro H K
+    haveI := H.2
+    haveI := K.2
+    exact ⟨⟨H.1 ⊓ K.1, inferInstance⟩, principal_mono.mpr (SetLike.coe_subset_coe.mpr inf_le_left),
+      principal_mono.mpr (SetLike.coe_subset_coe.mpr inf_le_right)⟩
+  haveI : Nonempty {H : AddSubgroup R // H.FiniteIndex} := ⟨⟨⊤, inferInstance⟩⟩
+  obtain ⟨H, hH⟩ := (mem_iInf_of_directed hdir s).mp hs
+  rw [mem_principal] at hH
+  have hinf : (H.1 : Set R).Infinite := by
+    intro hfin
+    haveI : Finite H.1 := hfin.to_subtype
+    exact not_finite_iff_infinite.mpr ‹Infinite R›
+      ((AddSubgroup.finite_iff_finite_and_finiteIndex H.1).mpr ⟨inferInstance, H.2⟩)
+  obtain ⟨y, hyH, hyD⟩ := (hinf.sdiff hD).nonempty
+  exact ⟨y, hH hyH, hyD⟩
+
+/-! ## Spec -/
+
+-- on a finite group no filter is a place filter: the second fact fails at `D = univ`.
+example (l : Filter (ZMod 6)) : ¬ IsPlaceFilter l := fun hl =>
+  (hl.frequently_notMem Set.univ Set.finite_univ).exists.elim fun _ h => h (Set.mem_univ _)
+
+-- the kernel of reduction mod 7 is eventually hit along any place filter on `ℤ`.
+example (l : Filter ℤ) (hl : IsPlaceFilter l) : ∀ᶠ y in l, (Int.castAddHom (ZMod 7)) y = 0 :=
+  hl.eventually_map_eq_zero _
+
+end HadwigerNelson.SpectralInputs

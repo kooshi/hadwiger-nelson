@@ -1,0 +1,10 @@
+  VIOLATION q=7: l=(0,) c=(1,) d=(1,) exponent counts [6, 0, 0, 0, 0, 0, 0]: |K|^2 > 28
+  VIOLATION q=7: l=(0,) c=(1,) d=(2,) exponent counts [6, 0, 0, 0, 0, 0, 0]: |K|^2 > 28
+  VIOLATION q=7: l=(0,) c=(1,) d=(3,) exponent counts [6, 0, 0, 0, 0, 0, 0]: |K|^2 > 28
+q=  7 (p=7, modulus (0, 1)): 7 characters x 36 pairs = 252 sums; violations of the bound 36; equalities 0; transformation mismatches 0; 4cd != 0 <=> c, d != 0: True  ->  FAIL
+  VIOLATION q=9: l=(0, 0) c=(1, 0) d=(1, 0) exponent counts [8, 0, 0]: |K|^2 > 36
+  VIOLATION q=9: l=(0, 0) c=(1, 0) d=(2, 0) exponent counts [8, 0, 0]: |K|^2 > 36
+  VIOLATION q=9: l=(0, 0) c=(1, 0) d=(0, 1) exponent counts [8, 0, 0]: |K|^2 > 36
+q=  9 (p=3, modulus (1, 0, 1)): 9 characters x 64 pairs = 576 sums; violations of the bound 64; equalities 0; transformation mismatches 0; 4cd != 0 <=> c, d != 0: True  ->  FAIL
+RESULT: FAIL
+exit 1

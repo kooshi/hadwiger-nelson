@@ -1,0 +1,4 @@
+q=  7 (p=7, modulus (0, 1)): 6 characters x 36 pairs = 216 sums; violations of the bound 0; equalities 0; transformation mismatches 0; 4cd != 0 <=> c, d != 0: True  ->  PASS
+q=  9 (p=3, modulus (1, 0, 1)): 8 characters x 64 pairs = 512 sums; violations of the bound 0; equalities 0; transformation mismatches 0; 4cd != 0 <=> c, d != 0: True  ->  PASS
+RESULT: PASS — the bound, the transformation and the coefficient condition hold at every field named
+exit 0

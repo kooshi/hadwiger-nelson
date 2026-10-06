@@ -779,3 +779,181 @@ Listed at the last saved stage (§ "Theorems" is rewritten there); until then: n
   `StationaryRatio` 3 (proved on `main`, not yet on this branch), `FloorPlanes` 4, `NormOneTarget` 2, `Floor128` 1, `ProductFactor` 1,
   `MajorityVote` 1, `NegCircleModel` 2 (`data/fs131/k10c/logs/build-0-as-given.log`, `.exit`). The count agrees with the second pass's
   § 9.1.
+
+## Stage 11 — SAVED (FS131-K10c): the three merges
+
+| merge | commit | conflicts | after it |
+|---|---|---|---|
+| `origin/main` (`c20b57a0`: the first pass as landed) | `dd7fc1e2` | `ARCHITECTURE.md` (main's rows for the four first-pass modules, this branch's ten kept), `scripts/Axioms.lean` (both blocks kept) | build exit 0, 469 batches, 91 modules rebuilt, **11 `sorry` leaves, all the second pass's** (`build-1-merge-main.log`); `dupnames` OK (the old pair `Plane.conj_e` is gone on `main`); the ten second-pass modules **byte-identical** to `330d2f48` (`git diff --stat` empty; `statements-1-merge-main.txt`, 0 changed); architecture PASS |
+| `d4adcd40` (`fs131-w10e` ⊇ `fs131-w10d`: the two floors, proved) | `6f1fcaec` | none | `ARCHITECTURE.md`'s row for `Floor128` edited with the merge (imports `Arith/FloorPlanes`; description names the bridge — FS131-I10E's draft 3, ruling 543 (c)), architecture PASS; build exit 0, **4 leaves left** (`ProductFactor` 1, `MajorityVote` 1, `NegCircleModel` 2); `dupnames` OK; no head of the ten modules changed or removed, 53 added (`statements-2-merge-w10e.txt`) |
+| `f65c2aa5` (`fs131-w10f`: the three measure-theoretic files, proved) — **the brief's Amendment 1**, read mid-job | `f145798a` | `scripts/Axioms.lean` (both blocks kept) | build exit 0, **no module with a warning: the tree holds no `sorry`** (`build-3-merge-w10f.log`); `dupnames` OK; 0 heads changed or removed (`statements-3-merge-w10f.txt`); architecture PASS |
+
+No second-pass module failed to build against the landed statements. The statement check is `tools/fs131_k10c_statements.py`
+(declaration heads at a base commit against the tree; `--self-test`: three faults fire — a hypothesis dropped, a declaration
+removed, a conclusion changed — a partner passes, and a file with no declaration is an error, never a pass). **Amendment 1,
+item 3**: the two `haveI` lines of `sp_if`'s spec example in `NegCircleModel` were not touched — the build does not object
+(0 warnings); the lint is the landing's, and they go there if it objects.
+
+## Stage 12 — SAVED (FS131-K10c): the page against the statement — `[Weil1948]` p. 207 and `KloostermanBound`
+
+**Verdict: the page states the bound the floor needs, at every finite field of characteristic not 2, and the Lean statement
+differs from it in exactly one way — it carries no hypothesis on the characteristic. The axiom is stated in the page's own
+form, with that hypothesis; `KloostermanBound F` is derived from it in the kernel.** Nothing was left that I could not close.
+
+### 12.1 What was read, and how
+
+The held PDF `~/source/library/pdf/pnas-1948-weil-on-some-exponential-sums.pdf` (4 pages, PNAS 34, pp. 204–207): all four
+pages as page images; pp. 206–207 again rendered at 300 dpi and cropped to the displays (the PDF's text layer garbles every
+formula — `|E0(x)x(x2* a)l 42 Nq` for the first display of p. 207 — so no formula below is taken from it). The note has no
+sections and no numbered theorem; its numbered displays are (1)–(5), and the bound is an unnumbered display.
+
+### 12.2 The page's own words
+
+- p. 204, last two lines: "Let `k` be a finite field of `q` elements; consider the field `k(t)` of rational functions …".
+- p. 205: "Let `χ` be a character of the multiplicative group `k*` of the non-zero elements in `k`. Let `𝔡` be a finite
+  divisor, consisting of the points `ξ_ν` with the coefficients `a_ν` … We shall assume that no `a_ν` is a multiple of the
+  order of `χ`." And of the characters `ω`: "the values of `ω` are `p^s`-th roots of unity, if `p` is the characteristic of
+  `k`".
+- p. 206, display (5): "`|Σλ(x)χ[R_𝔡(x)]| ≤ (N + d − 2)√q`", then: "For instance, we can define a character `ω`, of
+  conductor `(T²)`, by putting, for every series of constant term 1: `ω(1 + x₁T + x₂T² + …) = −ψ(x₁)`, where `ψ` is a
+  character of the additive group of `k`, not everywhere equal to 1. This gives `|Σψ(x)χ[R_𝔡(x)]| ≤ d√q`. If the
+  characteristic `p` of `k` is not 2, we have `d = 2` for `R_𝔡(t) = t² − a`, `a ≠ 0`; hence, in that case,"
+- p. 207: "`|Σψ(x)χ(x² − a)| ≤ 2√q`. If, in this, we take for `χ` the character of `k*` of order 2 (equal to 1 for squares,
+  and to −1 for non-squares, in `k*`), an elementary transformation⁴ shows that the sum in the left-hand side is identical
+  with the so-called Kloosterman sum `Σψ(cx + dx⁻¹)`, for `4cd = a`; hence `|Σ_{x≠0} ψ(cx + dx⁻¹)| ≤ 2√q`, and, in the case
+  of a prime field of `p` elements, with `p ≠ 2`: `|Σ_{x=1}^{p−1} e^{2πi/p (cx + d/x)}| ≤ 2√p`." Footnote 4: "Davenport, H.,
+  Crelles J., 169, 158–176 (1933); cf. in particular Th. 5, p. 172."
+
+### 12.3 Side by side
+
+| the page | `KloostermanBound F` (`Arith/FloorPlanes.lean`) | the axiom `StandingFive.kloosterman_bound` (`Arith/WeilKloosterman.lean`) |
+|---|---|---|
+| "`k` a finite field of `q` elements" | `(F : Type*) [Field F] [Fintype F]`; `q` is `Fintype.card F` | the same, `F : Type u` |
+| "If the characteristic `p` of `k` is not 2 … in that case" | **absent** | `(hp : ringChar F ≠ 2)` |
+| "`ψ` is a character of the additive group of `k`, not everywhere equal to 1" | `ψ : AddChar F ℂ`, `ψ ≠ 1` | `(ψ : AddChar F ℂ) (hψ : ∃ x, ψ x ≠ 1)` |
+| "for `4cd = a`", with "`a ≠ 0`" (p. 206) | `a b : F`, `a ≠ 0`, `b ≠ 0` (its `a`, `b` are the page's `c`, `d`) | `(c d a : F) (h4 : 4 * c * d = a) (ha : a ≠ 0)` |
+| "`Σ_{x≠0} ψ(cx + dx⁻¹)`" | `∑ x : Fˣ, ψ (a * ↑x + b * ↑x⁻¹)` | `∑ x ∈ univ.filter (fun x : F => x ≠ 0), ψ (c * x + d * x⁻¹)` |
+| "`| … | ≤ 2√q`" | `‖…‖ ≤ 2 * Real.sqrt (Fintype.card F)` | the same |
+
+### 12.4 Every way they could differ, each settled from the page
+
+1. **The characteristic.** The display sits under "If the characteristic `p` of `k` is not 2 … hence, in that case", so the
+   page states nothing at characteristic 2 (there `t² − a` is a square and `4cd = 0`). `KloostermanBound F` has no such
+   hypothesis: an axiom `∀ F, KloostermanBound F` would say more than the page. **Settled: the axiom carries
+   `ringChar F ≠ 2`** (rulings 500, 515). The floor loses nothing: it reads the bound at fields of `q ≡ 3 (mod 4)` elements
+   (`ringChar_ne_two_of_card_mod_four`, proved). *Chosen over restricting the axiom to those fields*: the page's own class is
+   the form a reader can check against the page with no arithmetic of ours in between, and the next consumer (the order
+   bound FS89-S0A-3 "on Weil", the floor at other residues) may read other odd fields. (At the even fields of 4, 8 and 16
+   elements the inequality itself holds by exact computation, § 12.5; the page's route does not exist there, and nothing here
+   assumes it.)
+2. **`4cd = a ≠ 0` against `a ≠ 0 ∧ b ≠ 0`.** In characteristic not 2, `4 ≠ 0`, so `4cd ≠ 0 ⟺ c ≠ 0 ∧ d ≠ 0`: the two
+   ranges of coefficient pairs are the same set. Kernel: `four_mul_mul_ne_zero_iff` (proved); exact arithmetic: check (C).
+   Every `a ≠ 0` occurs, square or not: for a non-square `a` the two zeros of `t² − a` are conjugate points, which the page
+   admits ("divisors which are rational over `k`, i.e., such that conjugate points over `k` have the same coefficient",
+   p. 205), each with coefficient 1, not a multiple of the order 2 of `χ`; `a = 0` would give one point with coefficient 2
+   and is the case the page's assumption excludes.
+3. **"for `4cd = a`" — every such pair, or some?** Every: the transformation is the count `#{x ≠ 0 : cx + d/x = u} = 1 +
+   χ(u² − 4cd)` (a quadratic `cx² − ux + d` with `c, d ≠ 0`), so `Σ_{x≠0} ψ(cx + d/x) = Σ_u ψ(u)(1 + χ(u² − a)) =
+   Σ_u ψ(u)χ(u² − a)` because `Σ_u ψ(u) = 0` for `ψ` not everywhere 1 — for each pair with `4cd = a` [hand, mine, three
+   lines]. Exact arithmetic: check (I), the identity in `ℤ[ζ_p]` at every character and every pair, nine fields; the fault
+   `2cd = a` breaks it.
+4. **"a character … not everywhere equal to 1" against `ψ ≠ 1`.** `AddChar F ℂ` is the monoid homomorphisms
+   `Multiplicative F → ℂ`: `ψ 0 = 1`, `ψ (x + y) = ψ x * ψ y`. On a finite field `ψ(x)^p = ψ(p·x) = 1`, so the values are
+   `p`-th roots of unity — the page's characters ("the values … are `p^s`-th roots of unity"), no more and no fewer.
+   `ψ ≠ 1 ⟺ ∃ x, ψ x ≠ 1` is `AddChar.ne_one_iff` (Mathlib; `DFunLike.ne_iff`). The axiom is stated with `∃ x, ψ x ≠ 1`,
+   the page's words.
+5. **The range of summation.** `x ≠ 0` in `k`, against `x : Fˣ` with `↑(x⁻¹)`: `sum_units_eq_sum_ne_zero` (proved, by
+   `unitsEquivNeZero`) and `Units.val_inv_eq_inv_val`. Lean's `0⁻¹ = 0` never enters: `0` is not summed. The axiom sums
+   over `univ.filter (· ≠ 0)`, the page's subscript.
+6. **The constant.** `2√q`, `q` the number of elements of `k` — not `p`: the prime case is displayed separately with `√p`.
+   `Fintype.card F` is `q`. The inequality is non-strict in print and in Lean.
+7. **Prime powers.** "a finite field of `q` elements" from p. 204 governs the display; the prime field is "the case of a
+   prime field". The floor reads `p^f`, `p ≡ 3 (mod 4)`, `f` odd: inside the page.
+8. **The absolute value** is the complex modulus; `‖·‖` on `ℂ`.
+9. **Which `ψ`?** All of them: the character `ω` of conductor `(T²)` is defined from any `ψ` not everywhere 1. **A slip in
+   print, outside the imported sentence**: "`ω(1 + x₁T + …) = −ψ(x₁)`" cannot be meant as printed (at the series 1 it gives
+   `−1`); with `λ(x) = ω(1 − xT)` (p. 205) the reading that yields the next display, `Σψ(x)χ[…]`, is `ψ(−x₁)`. Either way
+   the displayed inequality quantifies over every `ψ` not everywhere 1, and `ψ ↦ ψ(−·)` permutes those, so the sentence
+   imported does not depend on the reading.
+10. **Instances and universes.** `[DecidableEq F]` forms the filter (or, in `KloostermanBound`, the `Fintype Fˣ`) and carries
+    no content; the axiom is universe-polymorphic in `F`, and its consumers instantiate it at `Type`.
+11. **Is the sentence a theorem of the note, or a remark?** A consequence the note derives ("hence") from its (5), which rests
+    on "the Riemann hypothesis" for function fields (footnote 3, Weil's 1948 monograph) and class-field theory. It is the
+    classical Weil bound; the import is the sentence, not the derivation.
+
+### 12.5 The sentence, checked by exact arithmetic (`tools/fs131_k10c_kloosterman.py`; no floats)
+
+Characters are enumerated as the `𝔽_p`-linear functionals of the field (all the characters of an elementary abelian
+`p`-group, with no appeal to the trace form); a sum is a vector of exponent counts in `ℤ[ζ_p]`; `|K|² ≤ 4q` is decided in
+rational interval arithmetic on `2cos(2π/p)`, the largest root of an integer polynomial isolated by sign changes (exact at
+`p = 3`, where the sums are integers), with an exact zero test where an interval straddles 0.
+
+| field | sums checked (every `ψ ≠ 1`, every `c, d ≠ 0`) | violations | equalities | the transformation (I) | (C) |
+|---|---|---|---|---|---|
+| 7 | 216 | 0 | 0 | holds, all | holds |
+| 9 | 512 | 0 | 0 | holds, all | holds |
+| 3, 5, 11, 13, 25, 27, 49 (`--all`) | 8; 64; 1,000; 1,728; 13,824; 17,576; 110,592 | 0 | 0 | holds, all | holds |
+| 4, 8, 16 (`--char2`; outside the page, reported only) | 27; 343; 3,375 | 0 | 0 | fails (as it must: `4cd = 0`) | fails |
+
+Outputs: `data/fs131/k10c/kloosterman-7-9.out` (exit 0), `kloosterman-all.out` (exit 0). **Faults, each watched to fire**
+(exit 1): `--fault trivial` (admit `ψ = 1`: `K = q − 1`, 36 violations at 7 and 64 at 9), `--fault zero` (admit `c = d = 0`),
+`--fault const` (test `|K| ≤ √q`: 192 violations at 9 — the check sees the constant), `--fault transform` (the
+transformation at `2cd = a`: 384 mismatches at 9 — the check sees the 4); `data/fs131/k10c/kloosterman-fault-*.out`.
+Grade: [tools]. It shows the sentence true at nine odd fields, two of them the brief's; it is no proof beyond them.
+
+## Stage 13 — SAVED (FS131-K10c): the import, with its four items, and the floor on it
+
+**Module**: `Proofs/HadwigerNelson/Arith/WeilKloosterman.lean` (imports `Arith/TargetFloors`; nothing imports it). One `axiom`,
+no `sorry`, no `native_decide`.
+
+```
+axiom kloosterman_bound.{u} (F : Type u) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 2)
+    (ψ : AddChar F ℂ) (hψ : ∃ x, ψ x ≠ 1) (c d a : F) (h4 : 4 * c * d = a) (ha : a ≠ 0) :
+    ‖∑ x ∈ univ.filter (fun x : F => x ≠ 0), ψ (c * x + d * x⁻¹)‖ ≤ 2 * Real.sqrt (Fintype.card F)
+```
+
+**Its form, and why** (the brief: mine to decide). (i) **The page's own sentence, not `KloostermanBound F`**: the three
+translations between them (`∃ x, ψ x ≠ 1` / `ψ ≠ 1`; `4cd = a ≠ 0` / `c, d ≠ 0`; `x ≠ 0` / units) are then theorems the kernel
+checks (`kloostermanBound_of_ringChar_ne_two`, and back, `kloosterman_page_of_kloostermanBound`), not part of what is trusted;
+a reader checks the axiom against p. 207 symbol by symbol. (ii) **Characteristic not 2, the page's class**, not the fields the
+floor reads (§ 12.4 item 1).
+
+**The four items** (`LEAN.md` § Assumptions):
+1. *Docstring*: names `[Weil1948]`, says the note has no sections, and gives p. 207 (the second displayed inequality) with
+   the hypotheses' pages (204, 206).
+2. *Read-back*: Stage 12.
+3. *Model, in the same file*: `kloosterman_bound_model` — `ZMod 3`, `ZMod.stdAddChar`, `c = d = a = 1`: `ringChar ≠ 2`, a value
+   of the character other than 1, `4·1·1 = 1`, `1 ≠ 0`, **and the conclusion there, proved with no axiom** (from
+   `kloostermanBound_of_card_le_five`, the second pass's model, through `kloosterman_page_of_kloostermanBound`). So the axiom's
+   hypotheses are met at a field where its conclusion is independently a theorem.
+4. *`ARCHITECTURE.md` § Trust*: the row `StandingFive.kloosterman_bound` under "Imported outside theorems", and the module's
+   row in § 3.
+
+**Declared to the gate** (`scripts/Axioms.lean`, IMPORTED): `#eval AxiomAudit.declareImport
+``HadwigerNelson.StandingFive.kloosterman_bound`, and under it the **eight records that rest on it**:
+`kloostermanBound_of_ringChar_ne_two`, `targetFloor_seven_weil`, `targetFloor_six_weil`, `circle_sum_le_weil`,
+`standingFloor_seven_weil`, `standingFloor_five_weil`, `seven_le_localBound_weil`, `five_le_chromaticNumber_weil`. Six records
+of the module carry no axiom beyond the standard three and sit in a CLEAN block "FS131-K10c": `sum_units_eq_sum_ne_zero`,
+`four_mul_mul_ne_zero_iff`, `kloosterman_page_of_kloostermanBound`, `kloosterman_bound_model`,
+`ringChar_ne_two_of_card_mod_four`, `targetFloor_six_of_kloosterman`.
+
+**The consumers, read aloud.**
+- `standingFloor_seven_weil : StandingFloor 7` — every field of `128²` elements, and every field of `Q²` elements with
+  `Q ≡ 3 (mod 4)`, `Q ≥ 347`, with a non-trivial involution `σ`, has `χ(Cay(k, {x : x·σ(x) = 1})) ≥ 7`. No hypothesis.
+- `seven_le_localBound_weil : 7 ≤ localBound standingField` — TC1-STANDING-FIVE's "so `L(F) ≥ 7`", no hypothesis.
+- `five_le_chromaticNumber_weil (hRow123)` — "and given MR, `χ(F²) ≥ 5`", over row 123's chain alone.
+- `targetFloor_seven_weil` (`Q ≡ 3 (mod 4)`, `Q ≥ 98`), `targetFloor_six_weil` (`Q ≥ 62`; the bibliography's "`> 5` for
+  `p ≥ 62`"; the threshold sharp for the argument, Spec: `62 < 8√61`), stated for every `Q`, empty of content where `Q` is no
+  prime power.
+- `circle_sum_le_weil` — `[MMST1996]` Theorem 3 at `n = 2` in the form that is true (§ 15.1).
+
+**Evidence for Stage 13** (this branch runs no gate). Build: `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
+./scripts/build.sh`, exit 0, 469 batches, 2 modules rebuilt, **0 modules with warnings** (`data/fs131/k10c/logs/build-4-import.log`).
+`#print axioms` in a scratch file (`data/fs131/k10c/lean/AxiomsImport.lean`, log `logs/axioms-import.log`, parsed by script):
+the eight consumers print **exactly** `propext`, `Classical.choice`, `Quot.sound`, `HadwigerNelson.StandingFive.kloosterman_bound`;
+the six of the CLEAN block, the hypothesis forms `standingFloor_seven` and `seven_le_localBound_of_kloosterman`, and
+`Floor128.targetFloor_eight_128` print within the standard three — **the model's conclusion does not use the import**. The
+audit file's IMPORTED section elaborates on its own (`logs/axioms-declare.log`: two `DECLARED IMPORT` lines, twelve records);
+its planted fault — declaring the theorem `kloosterman_bound_model` as an import — is refused ("is not an `axiom`",
+`logs/axioms-declare-fault.log`, exit 1). `./scripts/dupnames.sh`: OK. `tools/check_architecture.py`: PASS. The module holds
+one `axiom`, no `sorry`, no `native_decide` (grep).
