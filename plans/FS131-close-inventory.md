@@ -5231,3 +5231,36 @@ reason by the close.*
      foundation. Why: a row is stated at the class its argument reads (the plan's § 7.3 item 3), and three foundation items and one
      named hypothesis leave the wave. Confidence: high. **Correction owed**: J45-SI-J's entry (the generalization), with the wave's
      errata.
+
+504. **FS131-E8's check done (its Stage 6): the planner's statements of the bridge stand — `Fan.branch_contacts`, `Fan.two_le_n` and
+     `Fan.col_ne` without saturation, `IsUnitCurve.one_le_dist`, `fan_of_isolated` at every point; no refutation** (deriver, resumed on
+     the amendment of ruling 502 (a); harness 539k by the task notice — past the line, not to be resumed again; record
+     `plans/FS131-E8-derivation.md` Stage 6, §§ 6.1–6.5, twelve derived entries in all; report's second section in
+     `data/fs131/reports/FS131-E8.md`; commits `2bd0f64b`, `e8cc4d5a` on `origin/main`). **Entries**: FS131-E8-BRANCH
+     (`branch_contacts` at its exact Lean hypotheses: a common contact at one branch point puts the whole branch on the unit circle
+     about it, with `y = z ± i e(d)`; otherwise every branch point is of tangent type and the contacts converge to `z ± i e(d)`);
+     FS131-E8-TWOSIDES (the two clauses for every fan, no saturation); FS131-E8-OUTSIDE (`one_le_dist`; in polar form
+     `|φ_i(t) − dir i| ≤ arcsin(t/2)`; its § 4.6 offer `arcsin(t)/2` withdrawn). **A correction to the planner's wording**: "of split
+     type along its whole length or of tangent type along it" is true as an inclusive alternative and false as an exclusive one (a
+     unit arc with a further contact at the antipode is of both types); the Lean disjunction is inclusive, so the statement stands,
+     and its docstring's "either … or" is to say so. **For the implementers**: `beta` alone does not give a branch's tangent at `z`
+     — `branch_contacts` and `branch_outside_discs` go through `gamma` and `IsUnitCurve.exists_polarGraph`; `gamma` says injective on
+     the closed interval (more than "not closed", true by the chord bound); `local_graph`'s `bdry` is about one class's essential
+     boundary, the colouring form owing one line. **In its own record**: a dated erratum under FS131-E8-LOCAL (§ 3.1 (4)'s
+     regularity step replaced by `norm_sub_le_of_discs`; the planner's `3.5δ` right) and a dated note under FS131-E8-FAN; no entry's
+     text, statement or constant changed. **My receipt**: both commits are ancestors of `origin/main`; the diff of the record from
+     `49cc6bff` removes no line and adds four hunks (the summary, the erratum, the note, Stage 6); `data/fs131/e8/gate-stage6.out`
+     reads five controls fired, `GATE: PASS`; `e8_sq9_contacts.py` run by me prints 0 and 8 with `--swap`, `e8_outside.py` 0 and 6852
+     with `--kappa 2`; § 6.1 Case A's openness step redone against `pinch`'s Lean statement — with both contacts equal to `y` its
+     tangent alternative would need `y − x = −(y − x)`, so the point is of split type and `c11_split` puts the nearby boundary on the
+     circle. Not checked by me: Case B's orientation beyond its control; §§ 6.2–6.5 beyond a reading of the report. **Items**:
+     predictions scored (its § 6.1: one met, one half-met, both registered after a sketch and said so); a tool change
+     (`data/fs131/e8/quotes.py` reads a section name after a path); a slip, the job's, corrected before its commit.
+505. **Rulings on the check, and the slot.** (a) **The five `Fan` lemmas go to an implementer as stated** (FS131-I6E), whose brief
+     carries the check's three notes: the alternative is inclusive and the docstring of `branch_contacts` says so (a docstring line,
+     not a statement change); the tangent at `z` comes through `gamma` and `exists_polarGraph`; the first alternative needs no bound
+     `1/2`. Alternative: restate `branch_contacts` with the two alternatives made exclusive. Why not: the deriver shows the exclusive
+     form false. Confidence: high. (b) No relay of the erratum is owed: every reader of E8's §§ 3.1–3.7 before `2bd0f64b` has handed
+     back, and the briefs of the jobs to come point at the record as it stands. (c) The withdrawal of § 4.6's bound is in the third
+     planner's reading list by its brief (Stage 6). (d) **Slot → FS131-K7** (wave 7's planner), launched 2026-10-06. In flight: 1
+     (I10B) + 1 (K10b) + 1 (K7) = 3.
