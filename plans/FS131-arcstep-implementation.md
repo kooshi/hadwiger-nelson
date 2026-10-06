@@ -337,3 +337,72 @@ vertex step's domain gap (D2), and to KL1's § 3.1 row and § 3.3's `bend_step` 
 the step is a collar bend, uncleaned.
 
 ## Stage 4 — SAVED (FS131-IA1)
+
+---
+
+# FS131-IA2 — the arc step's assembly upstream of `Procedure`: the record (stages from 5)
+
+*de Bruijn, the implementer, on branch `fs131-w5y` (cut from `fs131-w5a` at `78eba0b4`). Brief:
+`data/fs131/briefs/FS131-IA2-arc-assembly.md` (on `main`'s tree). Working files: `data/fs131/ia2/`. Tools: `tools/fs131_ia2_*.py`.
+The module: `Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean`. "Theorems this phase proved (FS131-IA2)" is at the end of this part.*
+
+## Stage 5 — SAVED (FS131-IA2): the readback, the as-given build, what I may change, two amendments received
+
+### 5.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_ia2_quotes.py` (a copy of IA1's checker under this job's prefix) on the brief: **14 quotations, 0 failures**, exit 0
+(`data/fs131/ia2/quotes.txt`); its self-test plants a one-letter change in the first quotation and exits non-zero naming it
+(`data/fs131/ia2/quotes-selftest.txt`: "14 quotations, 1 failures", "SELF-TEST: FIRED (good)"). No mismatch.
+
+### 5.2 Read for this job
+
+IA1's record whole (Stages 1–4 above); `BendStep.lean` whole; `CollarMap.lean` whole; `BendCollar.lean`: the header lemmas,
+`exists_collarFit`, `degree_openArc` to `map_ringArcsWithin`, `homeo_mem_collarK`, `map_R1`–`map_R3`, `coloursAt_subset`, `map_inert`,
+`bend_toward_collar` (statements and docstrings; the proofs of `map_R3`, `map_degree_end`, `map_degree_and_repeated` read);
+`Procedure.lean` l. 1–412 and l. 780–1171 (`IsMaxRingArc`, `badCount`, the ring-arc lemmas, `exists_arcStep`, the locality lemmas,
+`pot`, `exists_procStep`); the definitions `LocalStep`, `IsModification`, `AgreesOff`, `RingArcsWithin`, `IsSite`, `IsHorn`,
+`HasHornCount`, `HasDegree`, `HasRepeatedColour`, `IsRingArc`, `IsQArc`, `IsR2Arc`, `OnRingArc`, `r2Contacts`, `cutArcs`, `Near`,
+`Near.horn_index`, `Near.sector_eq_hornSet_iff`, `Near.hasHornCount_chart`; inventory items 429, 430, 433, 437–439.
+
+### 5.3 The as-given build (`78eba0b4`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`: **OK — all 1789 modules already up to date, nothing
+built, 3 modules with warnings, 3 s, exit 0** (`build/gate/build/20261006T053913Z-1329009.log`; driver log
+`data/fs131/ia2/build-stage1-asgiven.log`). So the copied `.lake/build` is whole. The five warnings are `declaration uses 'sorry'`:
+`BendStep` l. 285 (`CollarFit.map_hornCount_le`), l. 307 (`bend_away_part`); `Procedure` l. 795, l. 812; `Terminal` l. 3592 — as IA1's
+Stage 4 left them.
+
+### 5.4 What I may and may not change
+
+- **May**: one new module `Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean` (imports `BendStep`; not imported by `Procedure`) with its
+  `Proofs.lean` line and `ARCHITECTURE.md` row; a block "FS131-IA2" in `scripts/Axioms.lean` above `=== PURCHASED ===`; this record from
+  Stage 5; `tools/fs131_ia2_*.py`; `data/fs131/ia2/`; `data/fs131/reports/FS131-IA2.md`.
+- **May not**: any statement or definition anywhere; `Procedure.lean`, `BendStep.lean`, the collar's four modules (`RadialPush`,
+  `Pushforward`, `CollarMap`, `BendCollar`), `Terminal.lean`, `main`; no merge, no gate, no `axiom`, no `native_decide`.
+
+### 5.5 A bound found at the reading: `Procedure`'s ring-arc lemmas are downstream too
+
+`IsRingArc.sides_eq`, `IsRingArc.mono`, `IsRingArc.union`, `ringPt_add_int`, `isRingArc_add_int`, `isCompact_ringArc`,
+`dist_of_mem_cthickening_ringArc`, `exists_hasHornCount` and the locality lemmas (`hasDegree_iff_of_agreesOff` …) are declared in
+`Procedure.lean` (l. 58–170, 842–915, 1028–1041), so this module cannot cite them, and a copy here under the same name would collide
+when `Procedure` imports it. What follows from it: the statements here use no whole turn of an arc's parameters — every "the open arcs
+meet" is read on point sets (`ringPt Q '' Ioo a b`), W5 (the one step that needs `isRingArc_add_int` and `IsRingArc.union`) stays with
+the last lines in `Procedure` as the brief says, and W6 is stated with the horn count's existence inside it so that it is no second copy
+of `exists_hasHornCount`.
+
+### 5.6 Two amendments from the coordinator, received during this stage (2026-10-06, by message)
+
+1. **The horn clause both bends export is the arc step's form**, `(∀ x j, F.HasHornCount x j → ∃ j' ≤ j, M.HasHornCount x j')`: KA1
+   took ruling 438 (b)'s weakening; every other clause of `bend_away_part` stays as IA1 wrote it. On this branch `BendStep.lean` still
+   carries the iff (I do not edit it).
+2. **W1 and W2 are one lemma, KA1's `ArcMap.LocalStep.of_cutArcs`** (its new module `BendAway.lean` on `fs131-w5a`, not yet pushed), to
+   be stated here with exactly this signature, as a `sorry` child or proved:
+   ```lean
+   theorem LocalStep.of_cutArcs {M : ArcMap k} {K : Set ℂ} {S : Set Arc} {P : ℂ} {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂)
+       (hag : M.AgreesOff F K) (harcs : M.arcs = F.cutArcs P θ₁ θ₂ ∪ S) (hS : ∀ a ∈ S, a.carrier ⊆ K)
+       (hK : ringArc P θ₁ θ₂ ⊆ K) : LocalStep F M K
+   ```
+   At the merge the two are one statement and a proof of mine moves to `BendAway`. Also: the other groups first, `LocalStep` last;
+   `LocalStep.union` (KA1's, proved there) is not importable yet — not needed here.
+
+## Stage 5 — SAVED (FS131-IA2)
