@@ -229,3 +229,147 @@ the killing test's `φ²/√2 ≈ 1.851`, so the test does not fire and the obje
 interface is Q4's whole mechanism; G92 — `nb4p`'s idle half of `hnb` and `a4six`'s reach to every `k` are instances; G21 — every model
 below pleases, so each gets a control that can fail and a note of what it does not exercise. **falsifiable here**: none (no reading's
 killing test is in reach). silent: every other entry.
+
+## Stage 3 — SAVED (FS131-E7): Q1 — `a4six`'s hypotheses hold at once, at six colours, with both absent colours live
+
+derivation: q1-a4six-model
+  statement: the hypotheses `hF`, `hv`, `hab`, `habs` and `hno` of `a4six` hold at once for `k = 6`, `F` the four-petal flower `F₀` of § 3.1, `v = 0`, `a = 4`, `b = 5`
+  uses only: that the open intersection of the three unit discs about the vertices of a unit equilateral triangle holds no two points at distance 1; four explicit inequalities between distances (§ 3.2); that the closures of the classes of `4` and of `5` lie in disjoint closed angular sectors about `0`
+  not claimed: that `F₀` extends beyond `B(0, 5/4)` (not examined; G83's killing test asks for radius above `φ²/√2`); that every model at six colours is a flower; anything about `a4six`'s second disjunct (six arcs in six windows), which `F₀` does not exercise — its ring arcs total `240°`
+  argument: § 3.2 Validity, class by class
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `F₀` itself — § 3.1; every clause of the five is exercised (§ 3.3): two colours are absent at `0`, both are carried on `ω(0)`, on both of its sides, and the nearest ring points carrying `4` and carrying `5` are `45°` apart
+  prior art: owed — not searched outside this repository; inside it, neither the strip, the disk nor `sixFrag` is such an object (FS112-A4SIX's own note; § 3.6)
+  handoff: de Bruijn — `F₀` as a new `ArcMap 6` (§ 3.7), `a4six`'s docstring line, and the five hypotheses as a named theorem beside it
+
+control: flower-valid
+  of: q1-a4six-model — validity of `F₀` (and of § 4's `F₁`) on twelve batches of random unit pairs
+  run: python3 ../data/fs131/e7/e7_flower.py valid
+  expect: F0: unit pairs 6183k monochromatic 0 | F1: unit pairs 6183k monochromatic 0
+  fault: python3 ../data/fs131/e7/e7_flower.py valid --plant-wide
+
+control: flower-ring
+  of: q1-a4six-model — `habs` and `hno` read on `F₀` by formula: the colours at `0`, the ring points carrying both absent colours, `Γ` on the ring
+  run: python3 ../data/fs131/e7/e7_flower.py ring
+  expect: colours at 0: [0, 1, 2, 3]; ring angles carrying both a and b: 0; least angle between a-carrying and b-carrying ring points: 45.0; Gamma on the ring: 240 deg
+  fault: python3 ../data/fs131/e7/e7_flower.py ring --plant-swap
+
+control: flower-exact
+  of: q1-a4six-model — the margins § 3.2 and § 4.1 use, in exact arithmetic
+  run: python3 ../data/fs131/e7/e7_flower.py exact | tail -1
+  expect: exact margins: 8 of 8 hold
+  fault: python3 ../data/fs131/e7/e7_flower.py exact --plant-wide | tail -1
+
+### 3.1 The object: the four-petal flower `F₀ : ArcMap 6`
+
+Angles in degrees, `e(θ)` the unit vector at angle `θ`, indices `j` modulo 4. Put `u_j = e(90j + 15)`, `w_j = e(90j + 75)` and
+`ρ₀ = 2 sin 15° = (√6 − √2)/2 ≈ 0.5176`.
+
+- **Domain**: `B(0, 5/4)`.
+- **Petals** `T_j` (colour `j ∈ {0, 1, 2, 3}`): `{z : |z| < 1, 90j < arg z < 90j + 90, |z − u_j| < 1, |z − w_j| < 1}` — the open Reuleaux
+  triangle on `0, u_j, w_j` cut to its quadrant.
+- **Gap tiles** `M_j` (colour `4` for even `j`, `5` for odd `j`), about the axis `e(90j)`: the union of
+  `L_j = {z : |z| < 1, |arg z − 90j| < 15, z ∉ cl T_{j−1} ∪ cl T_j}` (inside the ring; explicitly `r e(90j + φ)` with `|φ| < 15` and
+  `2 cos(75 − |φ|) ≤ r < 1`), the open ring arc `{e(θ) : |θ − 90j| < 15}`, and `E_j = {z : 1 ≤ |z| < 5/4, |arg z − 90j| < 22.5}`.
+- **Outer tiles** `O_j` (colour `j`): `{z : 1 < |z| < 5/4, 90j + 202.5 < arg z < 90j + 247.5}` — outside the ring, opposite its petal.
+- **Colour, by formula**, for `z = r e(θ)`, `m = round(θ/90)`, `q = ⌊θ/90⌋`: if `r < 1`: `q mod 4` when `|z − u_q| < 1` and `|z − w_q| < 1`,
+  else `4 + (m mod 2)`; if `1 ≤ r < 5/4`: `4 + (m mod 2)` when `|θ − 90m| < 22.5`, else `(q + 2) mod 4`
+  (`data/fs131/e7/e7_flower.py`, `col0`).
+- **Arcs** (24): the four segments `[0, ρ₀ e(90j)]`; the four arcs of `ω(w_j)` from `ρ₀ e(90j)` to `u_j` and the four of `ω(u_j)` from
+  `ρ₀ e(90j + 90)` to `w_j` (the petals' sides); the four ring arcs `.circ 0 1` from `90j + 15` to `90j + 75`; the eight segments
+  `[e(90j ± 22.5), (5/4) e(90j ± 22.5)]`.
+
+The partition: in the quadrant `90j < θ < 90j + 90` a point of the unit disc is outside `B(w_j, 1)` only if `θ − 90j < 15` and
+`r ≥ 2 cos(75 − (θ − 90j))`, and outside `B(u_j, 1)` only if `θ − 90j > 75` (for `r e(θ)` and a unit vector `e(γ)`,
+`|r e(θ) − e(γ)| < 1 ⟺ r < 2 cos(θ − γ)`: `dist_polar_lt_one_iff`, `SixFragment.lean`). So the unit disc is the four petals, the four
+`L_j` and the arcs between them; outside the ring the eight `45°` windows alternate `E_j` and `O_{j+2}`. On the ring: `M_j` crosses it on
+`|θ − 90j| < 15`; on `[90j + 15, 90j + 75]` the inner side is `T_j` and the outer side is `E_j` (to `22.5`), `O_{j+2}` (to `67.5`), `E_{j+1}`.
+
+### 3.2 Validity, class by class
+
+Each colour's class is two pieces; a class is valid when each piece holds no unit pair and the two pieces are more than 1 apart.
+
+- **A petal holds no unit pair.** `T_j` lies in the open set `K = B(0, 1) ∩ B(u_j, 1) ∩ B(w_j, 1)`, and `0, u_j, w_j` are pairwise at distance
+  1. *Claim: any two points of `K` are less than 1 apart.* Write `a, b, c` for the three vertices and `cl K` for the intersection of the three
+  closed discs, a compact convex set. (i) *A boundary point `p` of `cl K` has `cl K ⊆ B̄(p, 1)`.* By the symmetry of the triangle take `p` on
+  the arc centred `c`: `p = c + e(t)` with `t` between the directions `t_a ≤ t_b = t_a + 60` of `a` and `b` from `c`. A point of `cl K` is
+  `q = c + ρ e(τ)` with `0 ≤ ρ ≤ 1`, and `|q − p| ≤ 1 ⟺ ρ ≤ 2 cos(τ − t)`. If `t_a ≤ τ ≤ t_b` then `|τ − t| ≤ 60` and `2 cos(τ − t) ≥ 1 ≥ ρ`.
+  If `τ < t_a` then `q ∈ B̄(b, 1)` gives `ρ ≤ 2 cos(t_b − τ)` with `60 < t_b − τ ≤ 90` (a point with `t_b − τ > 90` is outside `B̄(b, 1)` unless
+  `ρ = 0`), and `0 ≤ t − τ ≤ t_b − τ` gives `2 cos(t − τ) ≥ 2 cos(t_b − τ) ≥ ρ`. The case `τ > t_b` is its mirror, with `a`. (ii) For `p ≠ q`
+  in the open set `K`, the line through them meets the boundary of `cl K` in two points `p′, q′` with `[p, q]` strictly inside `[p′, q′]`
+  (both are interior points), so `|p − q| < |p′ − q′| ≤ 1` by (i). ∎
+- **An outer tile holds no unit pair.** `O_j` and `E_j` lie in annular sectors of half-width `22.5°` and outer radius `5/4`; the diameter of
+  such a sector is `(5/2) sin 22.5° ≈ 0.957 < 1` (control `flower-exact`, row 3).
+- **A petal and its outer tile are more than 1 apart.** For `z = r e(θ) ∈ O_j` and `p = s e(β) ∈ T_j`: `θ − β ∈ (112.5, 247.5)`, so
+  `cos(θ − β) < 0` and `|z − p|² = r² + s² − 2rs cos(θ − β) > r² > 1`.
+- **A gap tile holds no unit pair.** `M_0` lies in the convex set `{|arg z| ≤ 22.5, |z| ≤ 5/4, Re z ≥ 1/2}` (`Re z ≥ ρ₀ > 1/2` on `L_0`,
+  since `r cos φ ≥ 2 cos(75 − |φ|) cos φ = cos(75 − 2|φ|) + cos 75 ≥ 2 cos 75 = ρ₀`; `Re z ≥ cos 22.5` on `E_0`). Its diameter is attained
+  at extreme points: two points of the arc (at most the `45°` chord, `0.957`), or an arc point and a corner `(1/2, ∓(1/2) tan 22.5)` (at most
+  `0.948`, at the arc's far end: control `flower-exact`, row 4). The other `M_j` are its rotations.
+- **Opposite gap tiles are more than 1 apart.** `Re z ≥ ρ₀` on `M_0` and `Re z ≤ −ρ₀` on `M_2`, and `2ρ₀ = √6 − √2 ≈ 1.0353 > 1`
+  (control `flower-exact`, row 2). The margin is `0.035`: the two apexes `±ρ₀` are the closest pair.
+
+So no two interior points of one colour are at distance 1: `F₀.Valid`. The sampling control `flower-valid` is a check on this argument, not
+part of it: 6.18 million random unit pairs, none monochromatic; with one outer window widened to `31°` it finds monochromatic pairs.
+
+### 3.3 The five hypotheses, clause by clause
+
+| hypothesis | on `F₀`, `v = 0`, `a = 4`, `b = 5` |
+|---|---|
+| `hF : F.Valid` | § 3.2 |
+| `hv : F.Covers v 1` | `closedBall 0 1 ⊆ ball 0 (5/4)` |
+| `hab : a ≠ b` | `4 ≠ 5` |
+| `habs : (F.coloursAt v)ᶜ = {a, b}` | `t e(90j + 45) ∈ T_j` for small `t > 0`, so `j ∈ coloursAt 0` for `j < 4`; the classes of `4` and `5` lie in `{|z| ≥ ρ₀}` (`r ≥ 2 cos(75 − |φ|) ≥ ρ₀` on `L_j`, `r ≥ 1` on `E_j`), so neither is carried at `0`. Exactly two colours absent |
+| `hno : ∀ y ∈ sphere v 1, ¬ F.IsCoveringPair v y` | `coloursAt 0 ∪ coloursAt y = univ` iff `4, 5 ∈ coloursAt y`. The closure of the class of `4` lies in `{|arg z| ≤ 22.5} ∪ {|arg z − 180| ≤ 22.5}` and that of `5` in the same sets about `90` and `270`; away from `0` these four closed sectors are disjoint. So no point of `ω(0)` carries both — **and the hypothesis is not vacuous**: `4` is carried at every `e(θ)` with `|θ| ≤ 22.5` or `|θ − 180| ≤ 22.5`, `5` at every one with `|θ − 90| ≤ 22.5` or `|θ − 270| ≤ 22.5` |
+
+**The conclusion, read on the model** (a consistency check on the object, since `a4six` is kernel-checked): `OnRingArc 0 (ringPt 0 θ)` holds
+for `θ ∈ [90j + 15, 90j + 75]`, total `240° ≥ 60°` — the first disjunct. A model on which the conclusion failed would have been a wrong model.
+
+### 3.4 What the model shows about the derivation's case
+
+FS112-A4SIX's branch — a four-colour vertex of a six-coloured fragment with no covering pair on its ring — is **inhabited at the readers'
+parameter**, on a disc of radius `5/4`. Its ring is the picture the count describes: the two absent colours alternate round the ring
+(`4, 5, 4, 5` at `0°, 90°, 180°, 270°`) and each change between them is taken by an arc of `Γ` centred at the vertex, here four arcs of `60°`,
+each with a colour of the vertex inside along its whole length and, over its middle `45°`, a colour of the vertex outside: a (Q) arc in the
+sense of `IsQArc` (`F₀.IsRingArc 0 (90j + 22.5) (90j + 67.5) j (j + 2)`, both colours at `0`, four colours there). That agrees with row 149:
+a four-colour vertex whose ring carries no (Q) arc dies at `1 + ε` in the non-Siamese class, and `F₀` is non-Siamese (two same-coloured
+tiles are more than 1 apart) and lives to `5/4` on (Q) arcs.
+
+### 3.5 How rigid the flower is, and a correction to § 2.1's table
+
+Within flowers of four full petals (ring arcs `[α_j, α_j + 60]`, gaps `g_j ≥ 0` summing to `120°`): petal `j`'s cone at `0` is the open
+interval `(α_j − 30, α_j + 90)`, so a gap of `60°` or more leaves the direction between two cones uncovered — the gap tile reaches `0` as a
+horn and its colour is carried there. With every gap below `60°` at least three are positive. In the symmetric choice (four gaps of `30°`)
+opposite gap tiles are `2ρ₀ ≈ 1.035` apart at their apexes; widening one opposite pair of gaps to `g` each narrows that to
+`4 cos(60 + g/2)`, which is `1` at `g ≈ 31.0°`. *Correction (2026-10-06) to § 2.1's features table*, whose second row cites this section for
+"fewer gaps force a horn of an absent colour at `v`, three force three absent colours": the first half is the sentence above; the second
+half I checked only at gaps `(40, 40, 40, 0)` (apexes `0.53` and `0.68` apart, ring ends above 1) and do not claim in general.
+
+### 3.6 `sixFrag`, the candidate handed down, and the model with idle colours
+
+- **No point of `sixFrag` is a model at six colours.** `sixFrag.dom = ball 0 (3/2)`, so `Covers v 1` forces `|v| < 1/2`; such a point lies in
+  the sector flower, where the colours at a point are the six sectors' (at `0`), two (on a radial segment) or one. The complement of
+  `coloursAt v` has `0`, `4` or `5` elements, never `2`. [hand, from the header of `SixFragment.lean`]
+- **`sixFrag` relabelled into eight colours is a model of the letter.** Take `ι : Fin 6 ↪ Fin 8`, the map `F` with `sixFrag`'s domain and
+  arcs and colour `ι ∘ sixCol`, `v = 0`, and `a ≠ b` the two colours outside `ι`'s range. Then `hF` (`sixFrag_valid`), `hv`
+  (`sixFrag_covers`), `hab`, `habs` (`sixFrag_coloursAt_zero`) and `hno` hold — the last because the classes of `a` and `b` are **empty**.
+  This is a model in which nothing the derivation meant is exercised, and it exists for every theorem whose hypothesis counts colours
+  through a complement: `(F.coloursAt v)ᶜ = {a, b}` does not say that `a` and `b` are colours of the map. I state it so that it is not
+  later offered as *the* inhabitant; § 3.1's `F₀` is the one to name. Inventory kind: statement defect, minor — a remark for the docstring,
+  no change of statement proposed (the theorem is true as stated and its conclusion is then about a ring lying wholly in `Γ`).
+
+### 3.7 Handoff: what an implementer needs
+
+- **The object**: § 3.1's formulas. The file to imitate is `SixFragment.lean` (about 2,200 lines for six sectors, six lenses, six gaps);
+  `F₀` has four petals, four gap tiles, four outer tiles, 24 arcs, and one four-fold symmetry (`z ↦ iz`, colours `j ↦ j + 1`, `4 ↔ 5`) that
+  cuts every class check to one petal class and one gap class.
+- **Library pieces that carry over**: `dist_polar_sq`, `dist_polar_lt_one_iff`, `dist_polar_eq_one_iff`, `arg_polar`, `norm_polar`
+  (`SixFragment.lean` l. 100–140) — every membership test above is `r < 2 cos(φ − γ)` or a bound on `arg`.
+- **The one lemma that is not a transcription**: "the intersection of three open unit discs about the vertices of a unit triangle holds no two
+  points at distance 1" — § 3.2's claim, proved there in polar coordinates about a vertex with `dist_polar_lt_one_iff` as its only tool and
+  one convexity step (ii). `sixFrag`'s sector lemma is its special case `t_a ≤ τ ≤ t_b`. Proved once, it serves every later Reuleaux tile.
+- **Docstring line for `a4six`**: "Inhabitant of the hypotheses at six colours: the four-petal flower `fourFlower` at `0` with `a = 4`,
+  `b = 5` (FS131-E7 § 3): both absent colours are carried on `ω(0)` and no ring point carries both; its ring arcs total `240°`. (With two
+  idle colours `sixFrag` at `0` is a degenerate inhabitant at `k = 8`.)"
