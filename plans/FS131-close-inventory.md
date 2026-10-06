@@ -5170,3 +5170,46 @@ reason by the close.*
      owed**: `BIBLIOGRAPHY.md`'s `[MMST1996]` row — the `a = 0` defect and what was read, from K10b's draft at its hand-back; the
      `[Weil1948]` row's "for a prime `p`" against what the floor needs (prime powers). **Credit**: K10b stopped before the axiom and
      read the page, and found the printed theorem false in a case.
+
+501. **FS131-K6b done at its Stage 12: wave 6's second planning pass — the foundation restated (item 495), the fan a library module with
+     its inhabitant, the bridge's eight rows stated and the bridge itself proved from the fan lemma; fourteen ladder rows, the
+     fragment's six and three more left to a third pass** (planner; harness 547k by the task notice — past the line, not to be resumed;
+     record `fs131-w6`'s `plans/FS131-w6-kernel-plan.md` Stages 8–12; report `data/fs131/reports/FS131-K6b.md`; commits `d02a8b4c`,
+     `3928644b`, `e35c3dc0`, `32f2ab4c`; pushed, tree clean). **New modules**: `Plane/Saturated/Fan` and `FanExamples` (no `sorry`;
+     `sq9Fan : sq9.Fan sqVertex`, the vertex proved singular); `Curve`, `LocalGraph`, `FanBridge` (the skeleton). **Proved**:
+     `norm_sub_le_of_discs` (the normal of a two-sided unit-disc condition is 1-Lipschitz, sharp, by the parallelogram law);
+     **`regJFan_of_saturated` — FS131-E8-BRIDGE, from `fan_of_isolated`**; `Fan.sector_unique` (FS121-DB1-L3 with FS111-W-NOREP, from
+     `sector_alone`); `pinch_interface`, `c11_discs_interface`, `TwoColourNhd.mem_essBoundary` (each from a leaf). **Stated**: the
+     bridge's rows; FS111-M-C11 (ii) and FS111-W-NOBEND as FS131-E8-LOCAL (`local_graph`, with "no cusp in `U`"); FS121-V5-LOC (i),
+     (ii); FS121-V2-SECTOR (`Fan.sector_alone`). The fan's two missing facts are theorems about any fan under saturation
+     (`Fan.branch_outside_discs`, `Fan.branch_contacts`), not fields. **Its price for the bridge**: about 23 agent-days, 80 % interval
+     [12, 40] (`Curve` 2.5, `LocalGraph` 6.5, `FanBridge` 14.5), the computational leaves likely high by a factor of two to three;
+     if `gamma` proves large, `fan_of_isolated` stays open and every consumer still lands over `Fan`. **My receipt**: tip `32f2ab4c`
+     equals `origin/fs131-w6`, tree clean; `sorry` by the handoff's grep: `Basic` 0, `Fan` 0, `FanExamples` 0, `Pinch` 7,
+     `MapColouring` 1, `Curve` 6, `LocalGraph` 5, `FanBridge` 12 — the 31 leaves reported; `git diff 3928644b 32f2ab4c` over `Basic`,
+     `Pinch`, `MapColouring` is empty (the implementers' branches stand); the full build log
+     (`build/gate/build/20261006T121157Z-3880314.log` in the tree) ends "Build completed successfully (5811 jobs)" with 0 warnings
+     other than `sorry`, in those five files only; `regJFan_of_saturated`'s statement read at `FanBridge.lean` l. 118 against E8's
+     hand-off line — `Saturated c.cls`, `c.SingLocallyFinite`, `c.RegJFan`. Not checked by me: an axioms print (none was made; the
+     gate's), the proofs of the proved declarations beyond the build. **Items**: six generalizations (PINCH on two sets at any point
+     of an open set; its (in, in) clause; C11 (i) at every point of one `N`; E8-LOCAL reads no singular set; E8-FAN's two clauses
+     without saturation; E8-GAMMA, -BETA, -ALPHA, -FAN do not read `z ∈ Σ`); a correction owed to E8 § 3.1 (4); two statement
+     notes on the frozen sentences (Σ's neighbourhood, ruled 495 (a); (H2)'s closure clause redundant); E8's § 4.6 confirmed against
+     the arguments for two rows, unchecked for the rest; predictions scored (its § 12.6: the bridge re-priced from 15 to 23; 4 rows
+     stated against a median of 9); slips, the job's, disclosed — of the brief's item 5 four rows and part of a fifth; FS131-E8-DELTA
+     left a leaf; `sq9.SingLocallyFinite` owed and not stated; no token count readable. **Credit**: it found the regularity step that
+     does not formalize and replaced it with a kernel-checked lemma of sharper constant, and it restated the foundation at the class
+     the argument reads without editing one proof.
+502. **Rulings on K6b's held items, and its slot.** (a) **The deriver's check runs now** (ruling 499): FS131-E8 resumed on a dated
+     amendment to its brief (`data/fs131/briefs/FS131-E8-regj-bridge.md`, gate PASS; generator `mk-e8-amend.py`) — `branch_contacts`
+     first, then `two_le_n` and `col_ne` without saturation, `one_le_dist` and `fan_of_isolated`, the erratum to its own § 3.1 (4),
+     the planner's read-backs; sized at about 60k, a hand-back by about 520k. (b) **Wave 6's implementers, four lines by file as K6b
+     splits them**: `Pinch` (FS131-I6A, ready) and `MapColouring` (FS131-I6B, ready) on their branches at `3928644b`; `Curve` then
+     `LocalGraph` (FS131-I6C) on a branch cut from `32f2ab4c`; `FanBridge` (FS131-I6D, and a second if it runs long), with
+     `sq9.SingLocallyFinite`, after the deriver's check. Alternative: wait for the third planning pass before any implementer. Why:
+     the files' leaves rest on each other's statements only, and those are fixed. Confidence: high. (c) **A third planning pass,
+     FS131-K6c**: the fourteen ladder rows, the fragment's six, FS111-M2-HULLC, -W-KB-DIR, -M2-INTRAD, FS121-V5-LOC (iii), every
+     argument K6b's § 12.4 lists as unread (with `plans/FS111-W-wild.md` for the NOBEND merge), and, if it is short, the agreement of
+     the two readings of Σ under saturation as a row. (d) The erratum to E8 § 3.1 (4) is E8's to write in its own record at the
+     check; the other generalizations are logged for the errata at the filing. (e) **Slot → FS131-E8's check**, resumed 2026-10-06.
+     In flight: 1 (I10B) + 1 (K10b) + 1 (E8) = 3. The queue after it: K7, I10C, K8, I6A, K9, I6B, K6c, I6C, I6D, MD1, MD2.
