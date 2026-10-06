@@ -5,6 +5,8 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 import Mathlib.Dynamics.Ergodic.MeasurePreserving
 import Mathlib.MeasureTheory.Measure.ContinuousPreimage
 import Mathlib.MeasureTheory.Integral.Lebesgue.DominatedConvergence
+import Mathlib.MeasureTheory.Measure.Count
+import Mathlib.Topology.Instances.ZMod
 
 /-!
 # The stationary ratio of a Cayley graph on a measurable group (FS-131 wave 10; X25B-PZ, X25B-L1)
@@ -245,13 +247,11 @@ noncomputable def couple (S W : StationarySet G) (C : Set (S.Ω × W.Ω)) (hC : 
 
 end StationarySet
 
-/-- **X25B-P** (Zhang's Prop. 1.7, stationary form; a child of X25B-PZ, not a backlog row): "If `A` is a `G`-stationary random
-a.e.-independent set, `P(0 ∈ A) ≤ r(G,T)·P(0 ∈ N[A])`." -/
-theorem StationarySet.prob_le_ratio_mul [MeasurableAdd₂ G] [MeasurableNeg G] (W : StationarySet G) {ν : Measure G}
+/-- X25B-P at the class its proof reads (FS131-I10B): a measurable negation and a σ-finite symmetric `ν`; the group's
+addition need not be measurable. `prob_le_ratio_mul` is this with one more instance argument. -/
+theorem StationarySet.prob_le_ratio_mul_of_symm [MeasurableNeg G] (W : StationarySet G) {ν : Measure G}
     [SigmaFinite ν] (hsymm : ν.map Neg.neg = ν) (hW : W.AEIndependent ν) :
     W.P W.B ≤ ratio ν * W.P (W.B ∪ W.nbhd ν) := by
-  -- `MeasurableAdd₂ G` is not read by the proof (FS131-I10B, a finding): consumed here for the unused-arguments linter.
-  have _ := ‹MeasurableAdd₂ G›
   have hA : MeasurableSet W.B := W.measurableSet_B
   have hM : MeasurableSet (W.nbhd ν) := W.measurableSet_nb ν measurable_neg hA
   have hN : MeasurableSet (W.B ∪ W.nbhd ν) := hA.union hM
@@ -310,10 +310,20 @@ theorem StationarySet.prob_le_ratio_mul [MeasurableAdd₂ G] [MeasurableNeg G] (
     ENNReal.mul_ne_top (ne_top_of_le_ne_top ENNReal.one_ne_top (ratio_le_one ν)) (measure_ne_top _ _)
   exact (ENNReal.add_le_add_iff_left hfin).mp (h2.trans_eq h3)
 
+/-- **X25B-P** (Zhang's Prop. 1.7, stationary form; a child of X25B-PZ, not a backlog row): "If `A` is a `G`-stationary random
+a.e.-independent set, `P(0 ∈ A) ≤ r(G,T)·P(0 ∈ N[A])`." -/
+theorem StationarySet.prob_le_ratio_mul [MeasurableAdd₂ G] [MeasurableNeg G] (W : StationarySet G) {ν : Measure G}
+    [SigmaFinite ν] (hsymm : ν.map Neg.neg = ν) (hW : W.AEIndependent ν) :
+    W.P W.B ≤ ratio ν * W.P (W.B ∪ W.nbhd ν) := by
+  -- `MeasurableAdd₂ G` is not read by the proof (FS131-I10B, a finding; the form without it is
+  -- `prob_le_ratio_mul_of_symm`): consumed here for the unused-arguments linter.
+  have _ := ‹MeasurableAdd₂ G›
+  exact W.prob_le_ratio_mul_of_symm hsymm hW
+
 /-- X25B-PZ at one stationary set: Zhang's count at the origin. -/
-theorem StationarySet.prob_le_max_ratio {H : Type*} [AddCommGroup H] [MeasurableSpace H] [MeasurableAdd₂ G]
-    [MeasurableNeg G] [MeasurableAdd₂ H] [MeasurableNeg H] (νG : Measure G) (νH : Measure H) [SigmaFinite νG]
-    [SigmaFinite νH] (hG : νG.map Neg.neg = νG) (hH : νH.map Neg.neg = νH) (W : StationarySet (G × H))
+theorem StationarySet.prob_le_max_ratio {H : Type*} [AddCommGroup H] [MeasurableSpace H] [MeasurableNeg G]
+    [MeasurableNeg H] (νG : Measure G) (νH : Measure H) [SigmaFinite νG] [SigmaFinite νH]
+    (hG : νG.map Neg.neg = νG) (hH : νH.map Neg.neg = νH) (W : StationarySet (G × H))
     (hW : W.AEIndependent (νG.prod νH)) : W.P W.B ≤ max (ratio νG) (ratio νH) := by
   have hB := W.measurableSet_B
   have hW' := (W.aeIndependent_iff _).mp hW
@@ -364,8 +374,8 @@ theorem StationarySet.prob_le_max_ratio {H : Type*} [AddCommGroup H] [Measurable
     filter_upwards [hs] with ω hω h1 h2
     exact hω h2.1 h1.2
   -- X25B-P in each factor.
-  have hPY := (W.pull (AddMonoidHom.inr G H) hinr _ hY).prob_le_ratio_mul hH hWH
-  have hPA := (W.pull (AddMonoidHom.inl G H) hinl _ hA).prob_le_ratio_mul hG hWG
+  have hPY := (W.pull (AddMonoidHom.inr G H) hinr _ hY).prob_le_ratio_mul_of_symm hH hWH
+  have hPA := (W.pull (AddMonoidHom.inl G H) hinl _ hA).prob_le_ratio_mul_of_symm hG hWG
   change W.P (W.B \ W.nb νH (fun t : H => ((0 : G), -t)) W.B) ≤ ratio νH *
     W.P ((W.B \ W.nb νH (fun t : H => ((0 : G), -t)) W.B) ∪
       W.nb νH (fun t : H => ((0 : G), -t)) (W.B \ W.nb νH (fun t : H => ((0 : G), -t)) W.B)) at hPY
@@ -439,13 +449,24 @@ theorem StationarySet.prob_le_max_ratio {H : Type*} [AddCommGroup H] [Measurable
         exact mul_le_mul_right hsum _
     _ = max (ratio νG) (ratio νH) := mul_one _
 
+/-- X25B-PZ at the class its proof reads (FS131-I10B): measurable negations and σ-finite symmetric connection measures;
+neither addition need be measurable. `ratio_prod_le` is this with two more instance arguments. -/
+theorem ratio_prod_le_of_symm {H : Type*} [AddCommGroup H] [MeasurableSpace H] [MeasurableNeg G] [MeasurableNeg H]
+    (νG : Measure G) (νH : Measure H) [SigmaFinite νG] [SigmaFinite νH] (hG : νG.map Neg.neg = νG)
+    (hH : νH.map Neg.neg = νH) : ratio (νG.prod νH) ≤ max (ratio νG) (ratio νH) :=
+  iSup₂_le fun W hW => W.prob_le_max_ratio νG νH hG hH hW
+
 /-- **X25B-PZ**: "the stationary ratio of a categorical product of two LCA Cayley graphs is at most the larger factor's"
 (Zhang 2012 §2's argument, measure form) — for measurable groups and σ-finite symmetric connection measures. -/
 theorem ratio_prod_le {H : Type*} [AddCommGroup H] [MeasurableSpace H] [MeasurableAdd₂ G] [MeasurableNeg G]
     [MeasurableAdd₂ H] [MeasurableNeg H] (νG : Measure G) (νH : Measure H) [SigmaFinite νG] [SigmaFinite νH]
     (hG : νG.map Neg.neg = νG) (hH : νH.map Neg.neg = νH) :
     ratio (νG.prod νH) ≤ max (ratio νG) (ratio νH) := by
-  exact iSup₂_le fun W hW => W.prob_le_max_ratio νG νH hG hH hW
+  -- `MeasurableAdd₂ G` and `MeasurableAdd₂ H` are not read by the proof (FS131-I10B, a finding; the form without them
+  -- is `ratio_prod_le_of_symm`): consumed here for the unused-arguments linter.
+  have _ := ‹MeasurableAdd₂ G›
+  have _ := ‹MeasurableAdd₂ H›
+  exact ratio_prod_le_of_symm νG νH hG hH
 
 /-- The Haar probability of a compact open subgroup `K` of `Y`, as a measure on `Y`. -/
 noncomputable def cosetAverage {Y : Type*} [AddCommGroup Y] [TopologicalSpace Y] [IsTopologicalAddGroup Y]
@@ -663,7 +684,7 @@ measure, and carries all of `P(B)` but the mean displacement over the level. -/
 theorem StationarySet.prob_le_ratio_level_add {X Y : Type*} [AddCommGroup X] [MeasurableSpace X] [AddCommGroup Y]
     [TopologicalSpace Y] [IsTopologicalAddGroup Y] [CompactSpace Y] [LocallyCompactSpace Y]
     [SecondCountableTopology Y] [MeasurableSpace Y] [BorelSpace Y] (νX : Measure X) (νY : Measure Y)
-    [IsFiniteMeasure νY] (K : OpenAddSubgroup Y) (W : StationarySet (X × Y)) (hW : W.AEIndependent (νX.prod νY)) :
+    [SFinite νY] (K : OpenAddSubgroup Y) (W : StationarySet (X × Y)) (hW : W.AEIndependent (νX.prod νY)) :
     W.P W.B ≤ ratio (νX.prod (Measure.conv νY (cosetAverage K)))
       + ∫⁻ u, W.P ((W.T (0, u) ⁻¹' W.B) ∆ W.B) ∂cosetAverage K := by
   have hB := W.measurableSet_B
@@ -716,21 +737,14 @@ theorem StationarySet.prob_le_ratio_level_add {X Y : Type*} [AddCommGroup X] [Me
   rw [← hJdef] at hmass
   exact hmass.trans (add_le_add_left hPJ _)
 
-/-- **X25B-L1**: "a profinite factor's stationary ratio in a product is at most the supremum over its finite levels (fibre
-shares above `1/2` form an a.e.-independent set)". `Y` compact with open subgroups `K k` shrinking to `0`; the level-`k` graph is
-`X × Y` with `ν_Y` smoothed by the Haar probability of `K k` (the pull-back of `X × Y/K_k`). -/
-theorem ratio_prod_le_iSup_levels {X Y : Type*} [AddCommGroup X] [MeasurableSpace X] [MeasurableAdd₂ X]
-    [AddCommGroup Y] [TopologicalSpace Y] [IsTopologicalAddGroup Y] [CompactSpace Y] [LocallyCompactSpace Y] [T2Space Y]
-    [SecondCountableTopology Y] [MeasurableSpace Y] [BorelSpace Y] (νX : Measure X) [SigmaFinite νX] (νY : Measure Y)
-    [IsFiniteMeasure νY] (K : ℕ → OpenAddSubgroup Y) (hK : Antitone K)
-    (hK0 : ∀ V ∈ nhds (0 : Y), ∃ k, (K k : Set Y) ⊆ V) :
+/-- X25B-L1 at the class its proof reads (FS131-I10B): any family of open subgroups of a compact second-countable group
+`Y` that enters every neighbourhood of `0` — not a decreasing sequence — an s-finite `ν_Y`, any `ν_X` on any measurable
+group `X`, and no separation axiom on `Y`. `ratio_prod_le_iSup_levels` is the case of a decreasing sequence. -/
+theorem ratio_prod_le_iSup_levels_of_shrink {ι X Y : Type*} [AddCommGroup X] [MeasurableSpace X] [AddCommGroup Y]
+    [TopologicalSpace Y] [IsTopologicalAddGroup Y] [CompactSpace Y] [LocallyCompactSpace Y]
+    [SecondCountableTopology Y] [MeasurableSpace Y] [BorelSpace Y] (νX : Measure X) (νY : Measure Y) [SFinite νY]
+    (K : ι → OpenAddSubgroup Y) (hK0 : ∀ V ∈ nhds (0 : Y), ∃ k, (K k : Set Y) ⊆ V) :
     ratio (νX.prod νY) ≤ ⨆ k, ratio (νX.prod (Measure.conv νY (cosetAverage (K k)))) := by
-  -- Not read by the proof (FS131-I10B, findings): `MeasurableAdd₂ X`, `SigmaFinite νX`, `T2Space Y`, and that `K` is
-  -- antitone — one level inside a small neighbourhood of `0` is enough. Consumed here for the unused-arguments linters.
-  have _ := ‹MeasurableAdd₂ X›
-  have _ := ‹SigmaFinite νX›
-  have _ := ‹T2Space Y›
-  have _ := hK
   refine iSup₂_le fun W hW => ?_
   refine ENNReal.le_of_forall_pos_le_add fun ε hε _ => ?_
   have hB := W.measurableSet_B
@@ -751,6 +765,118 @@ theorem ratio_prod_le_iSup_levels {X Y : Type*} [AddCommGroup X] [MeasurableSpac
       _ = ε := by rw [lintegral_const, measure_univ, mul_one]
   exact (W.prob_le_ratio_level_add νX νY (K k) hW).trans
     (add_le_add (le_iSup (fun k => ratio (νX.prod (Measure.conv νY (cosetAverage (K k))))) k) hint)
+
+/-- **X25B-L1**: "a profinite factor's stationary ratio in a product is at most the supremum over its finite levels (fibre
+shares above `1/2` form an a.e.-independent set)". `Y` compact with open subgroups `K k` shrinking to `0`; the level-`k` graph is
+`X × Y` with `ν_Y` smoothed by the Haar probability of `K k` (the pull-back of `X × Y/K_k`). -/
+theorem ratio_prod_le_iSup_levels {X Y : Type*} [AddCommGroup X] [MeasurableSpace X] [MeasurableAdd₂ X]
+    [AddCommGroup Y] [TopologicalSpace Y] [IsTopologicalAddGroup Y] [CompactSpace Y] [LocallyCompactSpace Y] [T2Space Y]
+    [SecondCountableTopology Y] [MeasurableSpace Y] [BorelSpace Y] (νX : Measure X) [SigmaFinite νX] (νY : Measure Y)
+    [IsFiniteMeasure νY] (K : ℕ → OpenAddSubgroup Y) (hK : Antitone K)
+    (hK0 : ∀ V ∈ nhds (0 : Y), ∃ k, (K k : Set Y) ⊆ V) :
+    ratio (νX.prod νY) ≤ ⨆ k, ratio (νX.prod (Measure.conv νY (cosetAverage (K k)))) := by
+  -- Not read by the proof (FS131-I10B, findings; the form without them is `ratio_prod_le_iSup_levels_of_shrink`):
+  -- `MeasurableAdd₂ X`, `SigmaFinite νX`, `T2Space Y`, and that `K` is antitone — one level inside a small neighbourhood
+  -- of `0` is enough. Consumed here for the unused-arguments linters.
+  have _ := ‹MeasurableAdd₂ X›
+  have _ := ‹SigmaFinite νX›
+  have _ := ‹T2Space Y›
+  have _ := hK
+  exact ratio_prod_le_iSup_levels_of_shrink νX νY K hK0
+
+/-! ## A model with an edge (FS131-I10B): `ZMod 2` acting on itself, and the value `r(ZMod 2, δ₁) = 1/2` -/
+
+/-- **An edge halves the set**: for the connection measure `δ_g`, the event and its shift by `g` are almost surely disjoint,
+so a stationary a.e.-independent set has probability at most `1/2`. -/
+theorem ratio_dirac_le [MeasurableSingletonClass G] (g : G) : ratio (Measure.dirac g) ≤ 2⁻¹ := by
+  refine iSup₂_le fun W hW => ?_
+  have h := (W.aeIndependent_iff _).mp hW
+  rw [ae_dirac_eq, Filter.eventually_pure] at h
+  have hd : AEDisjoint W.P W.B (W.T g ⁻¹' W.B) := by
+    rw [AEDisjoint, measure_eq_zero_iff_ae_notMem]
+    filter_upwards [h] with ω hω hω'
+    exact hω hω'.1 hω'.2
+  have hsum : W.P W.B + W.P W.B ≤ 1 :=
+    calc W.P W.B + W.P W.B = W.P W.B + W.P (W.T g ⁻¹' W.B) := by
+          rw [(W.preserving g).measure_preimage W.measurableSet_B.nullMeasurableSet]
+      _ = W.P (W.B ∪ W.T g ⁻¹' W.B) :=
+          (measure_union₀ (W.measurable_T_apply g W.measurableSet_B).nullMeasurableSet hd).symm
+      _ ≤ 1 := prob_le_one
+  rw [ENNReal.le_inv_iff_mul_le, mul_two]
+  exact hsum
+
+/-- **The two-point model**: `ZMod 2` acting on itself by translation, the uniform probability, the event `{0}`. With the
+connection measure `δ₁` it is the complete graph `K₂`: `{0}` is a.e.-independent, of probability `1/2`. -/
+noncomputable def StationarySet.parity : StationarySet (ZMod 2) where
+  Ω := ZMod 2
+  P := (2⁻¹ : ENNReal) • Measure.count
+  isProb := ⟨by
+    rw [Measure.smul_apply, Measure.count_apply_finite _ Set.finite_univ, smul_eq_mul]
+    simp [ENNReal.inv_mul_cancel]⟩
+  T x ω := x + ω
+  measurable_T := Measurable.of_discrete
+  preserving x := (measurePreserving_add_left Measure.count x).smul_measure _
+  T_zero := funext fun ω => zero_add ω
+  T_add x y := funext fun ω => add_assoc x y ω
+  B := {0}
+  measurableSet_B := measurableSet_singleton 0
+
+theorem StationarySet.parity_prob : StationarySet.parity.P StationarySet.parity.B = 2⁻¹ := by
+  show ((2⁻¹ : ENNReal) • Measure.count) ({0} : Set (ZMod 2)) = 2⁻¹
+  rw [Measure.smul_apply, Measure.count_singleton, smul_eq_mul, mul_one]
+
+theorem StationarySet.parity_aeIndependent : StationarySet.parity.AEIndependent (Measure.dirac (1 : ZMod 2)) := by
+  rw [StationarySet.aeIndependent_iff, ae_dirac_eq, Filter.eventually_pure]
+  refine Filter.Eventually.of_forall fun (ω : ZMod 2) (hω : ω ∈ ({0} : Set (ZMod 2))) => ?_
+  show (1 : ZMod 2) + ω ∉ ({0} : Set (ZMod 2))
+  rw [Set.mem_singleton_iff] at hω ⊢
+  rw [hω]
+  decide
+
+/-- `δ₁` on `ZMod 2` is symmetric. -/
+theorem map_neg_dirac_one : (Measure.dirac (1 : ZMod 2)).map Neg.neg = Measure.dirac 1 := by
+  rw [Measure.map_dirac' measurable_neg]
+  rfl
+
+/-- **The ratio of `K₂`**: `r(ZMod 2, δ₁) = 1/2` — the model from below, the edge from above. -/
+theorem ratio_dirac_one_zmod_two : ratio (Measure.dirac (1 : ZMod 2)) = 2⁻¹ :=
+  le_antisymm (ratio_dirac_le 1)
+    (StationarySet.parity_prob ▸ StationarySet.parity.prob_le_ratio StationarySet.parity_aeIndependent)
+
+/-! ## A profinite model for X25B-L1 (FS131-I10B): the Cantor group `ℕ → ZMod 2` and its levels -/
+
+/-- **The levels of the Cantor group**: `K k = {f | f i = 0 for i < k}`, an open subgroup of `ℕ → ZMod 2`. -/
+def cantorLevel (k : ℕ) : OpenAddSubgroup (ℕ → ZMod 2) where
+  carrier := Set.pi (Set.Iio k) fun _ => {0}
+  add_mem' := by
+    intro f g hf hg i hi
+    have h1 : f i = 0 := hf i hi
+    have h2 : g i = 0 := hg i hi
+    show f i + g i = 0
+    rw [h1, h2, add_zero]
+  zero_mem' := fun _ _ => rfl
+  neg_mem' := by
+    intro f hf i hi
+    have h1 : f i = 0 := hf i hi
+    show -f i = 0
+    rw [h1, neg_zero]
+  isOpen' := isOpen_set_pi (Set.finite_Iio k) fun _ _ => isOpen_discrete _
+
+theorem mem_cantorLevel {k : ℕ} {f : ℕ → ZMod 2} : f ∈ cantorLevel k ↔ ∀ i < k, f i = 0 := Iff.rfl
+
+/-- The levels decrease … -/
+theorem cantorLevel_antitone : Antitone cantorLevel := fun _ _ hkl _ hf i hi => hf i (lt_of_lt_of_le hi hkl)
+
+/-- … and shrink to `0`: a neighbourhood of `0` in the product topology constrains finitely many coordinates. -/
+theorem exists_cantorLevel_subset {V : Set (ℕ → ZMod 2)} (hV : V ∈ nhds (0 : ℕ → ZMod 2)) :
+    ∃ k, (cantorLevel k : Set (ℕ → ZMod 2)) ⊆ V := by
+  obtain ⟨U, hUV, hU, h0⟩ := mem_nhds_iff.mp hV
+  obtain ⟨I, u, hu, hIu⟩ := isOpen_pi_iff.mp hU 0 h0
+  refine ⟨I.sup id + 1, fun f hf => hUV (hIu fun i hi => ?_)⟩
+  have hlt : i < I.sup id + 1 := Nat.lt_succ_of_le (Finset.le_sup (f := id) hi)
+  have hfi : f i = 0 := mem_cantorLevel.mp hf i hlt
+  rw [hfi]
+  exact (hu i hi).2
 
 /-! ## Spec -/
 
@@ -785,5 +911,45 @@ example : (StationarySet.empty ℤ).P (StationarySet.empty ℤ).B
     ≤ ratio (Measure.dirac (0 : ℤ)) * (StationarySet.empty ℤ).P
       ((StationarySet.empty ℤ).B ∪ (StationarySet.empty ℤ).nbhd (Measure.dirac (0 : ℤ))) :=
   (StationarySet.empty ℤ).prob_le_ratio_mul (by simp [Measure.map_dirac]) (StationarySet.empty_aeIndependent _)
+
+-- FS131-I10B: the majority event over the one-point system; the level average is a probability carried by its level.
+example : (StationarySet.empty ℤ).majority (Measure.dirac (0 : ℤ)) id Set.univ = Set.univ := by
+  ext ω
+  simp [StationarySet.majority]
+example (κ : Measure ℤ) : (StationarySet.empty ℤ).majority κ id ∅ = ∅ := by
+  ext ω
+  simp [StationarySet.majority]
+example : cosetAverage (⊤ : OpenAddSubgroup (ZMod 2)) Set.univ = 1 := measure_univ
+example : cosetAverage (⟨⊥, isOpen_discrete _⟩ : OpenAddSubgroup (ZMod 2)) ({0}ᶜ) = 0 :=
+  cosetAverage_compl (⟨⊥, isOpen_discrete _⟩ : OpenAddSubgroup (ZMod 2))
+-- the three rows at the two-point model, where the event has probability `1/2` and an edge:
+-- X25B-P reads `1/2 ≤ r · P(N[A])`;
+example : (2⁻¹ : ENNReal) ≤ ratio (Measure.dirac (1 : ZMod 2)) *
+    StationarySet.parity.P (StationarySet.parity.B ∪ StationarySet.parity.nbhd (Measure.dirac 1)) := by
+  have h := StationarySet.parity.prob_le_ratio_mul map_neg_dirac_one StationarySet.parity_aeIndependent
+  rwa [StationarySet.parity_prob] at h
+-- X25B-PZ reads `r(K₂ × K₂) ≤ 1/2`;
+example : ratio ((Measure.dirac (1 : ZMod 2)).prod (Measure.dirac (1 : ZMod 2))) ≤ 2⁻¹ := by
+  have h := ratio_prod_le (Measure.dirac (1 : ZMod 2)) (Measure.dirac (1 : ZMod 2)) map_neg_dirac_one map_neg_dirac_one
+  rwa [ratio_dirac_one_zmod_two, max_self] at h
+-- X25B-L1's hypotheses hold at once at `X = Y = ZMod 2` with the levels `K k = {0}` (open: `ZMod 2` is discrete).
+example : ratio ((Measure.dirac (1 : ZMod 2)).prod (Measure.dirac (1 : ZMod 2))) ≤
+    ⨆ _ : ℕ, ratio ((Measure.dirac (1 : ZMod 2)).prod
+      (Measure.conv (Measure.dirac (1 : ZMod 2)) (cosetAverage (⟨⊥, isOpen_discrete _⟩ : OpenAddSubgroup (ZMod 2))))) :=
+  ratio_prod_le_iSup_levels _ _ (fun _ => ⟨⊥, isOpen_discrete _⟩) antitone_const
+    (fun V hV => ⟨0, fun y hy => by
+      rw [show y = 0 from AddSubgroup.mem_bot.mp hy]
+      exact mem_of_mem_nhds hV⟩)
+-- X25B-L1 at a profinite factor that is not finite: `X = ZMod 2`, `Y = ℕ → ZMod 2` with the levels `cantorLevel`.
+example : cantorLevel 0 = ⊤ := by
+  ext f
+  simp [mem_cantorLevel]
+example : (fun i => if i = 0 then 1 else 0 : ℕ → ZMod 2) ∈ cantorLevel 0 ∧
+    (fun i => if i = 0 then 1 else 0 : ℕ → ZMod 2) ∉ cantorLevel 1 :=
+  ⟨fun _ hi => absurd hi (Nat.not_lt_zero _), fun h => absurd (h 0 Nat.one_pos) (by decide)⟩
+example : ratio ((Measure.dirac (1 : ZMod 2)).prod (Measure.dirac (fun _ : ℕ => (1 : ZMod 2)))) ≤
+    ⨆ k, ratio ((Measure.dirac (1 : ZMod 2)).prod
+      (Measure.conv (Measure.dirac (fun _ : ℕ => (1 : ZMod 2))) (cosetAverage (cantorLevel k)))) :=
+  ratio_prod_le_iSup_levels _ _ cantorLevel cantorLevel_antitone fun _ hV => exists_cantorLevel_subset hV
 
 end HadwigerNelson.StationaryRatio
