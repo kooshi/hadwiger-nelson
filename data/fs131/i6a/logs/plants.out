@@ -1,0 +1,8 @@
+green | the unplanted copy elaborates with no error
+red   | false: 1 error(s); first: line 913:28: error: Tactic `decide` proved that the proposition
+red   | contact: 1 error(s); first: line 812:2: error: Type mismatch
+red   | half: 1 error(s); first: line 820:26: error: Application type mismatch: The argument
+red   | split: 4 error(s); first: line 841:10: error: unsolved goals
+red   | hdisj: 2 error(s); first: line 456:63: error: Application type mismatch: The argument
+red   | cover: 4 error(s); first: line 359:20: error: Application type mismatch: The argument
+plants: 6  red: 6  green (failures): 0

@@ -139,6 +139,23 @@ list of what the foundation lacks, and its handoff. Read its record whole
 > - **The second planning pass (K8b)** takes: the nine SemiHub rows (arguments `plans/FS116-N3-proof.md`, `plans/FS116-V5-verification.md`,
 > — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md
 
+Wave 7's statement of FS114-N7-QOPP, final, on `origin/fs131-w7` at `195c7855` (not on your branch; the names are wave 7's own):
+
+> theorem qArc_inner (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} {u v : ℝ} {c c' : Fin k} (hA : F.IsRingArc p u v c c')
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean
+
+> theorem qArc_outer (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} {u v : ℝ} {c c' : Fin k} (hA : F.IsRingArc p u v c c')
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean
+
+> theorem qArc_ne (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} {u v : ℝ} {c c' : Fin k} (hA : F.IsRingArc p u v c c')
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean
+
+> theorem qArc_cone_disjoint (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} {u v : ℝ} {c c' : Fin k}
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean
+
+> theorem qArc_others_absent (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hS : F.SimpleOn {p}) (hpd : p ∈ F.dom)
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean
+
 ## Done means
 
 1. **Your readback first**: check every quotation above against its source; read the first pass's record whole, the wave's modules, and the
@@ -161,8 +178,16 @@ list of what the foundation lacks, and its handoff. Read its record whole
 5. **The rows, stated**: the nine semi-hub rows, FS116-N2-SIXRING and FS116-RING-TWIST-C, each with `sorry` at its leaves and read back
    against its row. **FS114-N7-QOPP enters three of them as a hypothesis under a name of this wave's own** (ruling 498; the first pass
    proposed `QArcsJoinOpposite F p`, from the first sentence of `plans/FS114-derivation.md` l. 793) — a `Prop`-valued definition, never an
-   axiom. Wave 7's second planner will state the row itself: send me your definition when it is fixed, so the two are stated to meet at the
-   join. FS116-RING-TRANSFER-QC is a conjunction of four of the others: a bundling theorem, or no declaration, by your reading.
+   axiom. Wave 7's second planner has stated the row itself: five theorems, quoted above from its branch (inventory item 553) —
+   the inner tile's cone window and the whole arc in its closure, the outer tile's cone window, the two colours different, the two cones
+   disjoint, and, under four colours and `SimpleOn` at `p`, the other colours of `p` absent along the open arc. "Opposite" arrives as
+   two disjoint cones, not as a position in a cyclic order; the first four read no "simple" and any number of colours at `p`. Define
+   yours so that these discharge it at the join; if your three rows consume a cyclic position among four tiles, derive it on your side
+   from `qArc_cone_disjoint`, and tell me if that does not go. **A second meeting point**: its FS114-N3-ODD (`ring_odd`, stated with
+   closed arcs) is the case "no arc of `Γ` meets the window" of FS116-RING-TWIST-C's last clause — state TWIST-C so that the two are one
+   theorem and a corollary at the join. **And its foundation**: `Plane/FourColour/Basic` (the tactic edge, the Reuleaux cross and
+   bowtie) is whole at `7baeafe8` on `origin/fs131-w7`; if a row of yours wants one of its names, tell me before you re-state anything
+   — the answer is a merge of that commit, which I will ask of you then. Send me your definition when it is fixed. FS116-RING-TRANSFER-QC is a conjunction of four of the others: a bundling theorem, or no declaration, by your reading.
 6. **The plans for `outerAdj` and `doubleTip`**: their arguments read (`plans/FS129-SR3-audit.md` §§ 2.2–2.3, `plans/FS129-MR1-audit.md`), a
    plan per child, and each statement confirmed or corrected (`outerAdj` is already stated at the corrected reading of inventory item 518).
 7. **Vacuity and inhabitants**: the first pass's § 5.5 says which hypotheses have no Lean term yet (a change point of a four-colour vertex

@@ -1,0 +1,13 @@
+'HadwigerNelson.Plane.norm_sq_mul_sub_of_norm_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_add_mul_lt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.one_lt_dist_add_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_add_mul_mem_of_isOpen' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.real_inner_lt_one_of_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.neg_one_lt_real_inner_of_ne_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.subset_of_isOpen_ae_le_isClosed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.pinch_not_in_in' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isSplitAt_of_in_out' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.hasTwoDiscsAt_of_out_out' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.pinch' depends on axioms: [propext, Classical.choice, Quot.sound]
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/data/fs131/i6a/AxiomsScratch.lean:17:8: warning: declaration uses `sorry`
+'HadwigerNelson.Plane.fs131I6aPlantedSorry' depends on axioms: [sorryAx]

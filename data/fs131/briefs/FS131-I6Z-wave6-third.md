@@ -119,7 +119,7 @@ the planners' scale):
 1. **Your readback first**: check the quotations against their sources; read the record's Stages 13–15, your files and the modules they
    import, and for each leaf the argument the plan's row names. Build the branch once as given (65 `sorry` leaves on the branch: seven yours). Open your record with what
    you may and may not change. Commit and push.
-2. **The leaves**, in this order — `inner_support_near_centre` and `outer_support_near_centre` (facts about one measurable set: they re-price the rest), `angle_le_pi`, `ends_centre`, then `vt_w`, `erosion`, `pencil_window`; saving after each leaf or group (a build, the axioms print for it with a control that
+2. **The leaves**, in this order — `inner_support_near_centre` and `outer_support_near_centre` (facts about one measurable set: they re-price the rest), `angle_le_pi`, `ends_centre`, then `vt_w`, `erosion`, `pencil_window` — and before you prove those last two, `#check` them: the file's section variable `(F : c.Fan z)` appears in neither statement, so the kernel's `erosion` and `pencil_window` take no fan (`LEAN.md` § Searching — Lean, last bullet; inventory item 556). The planner says `erosion` reads none; confirm that `pencil_window` is meant so too, and message me if its row reads the fan; saving after each leaf or group (a build, the axioms print for it with a control that
    fires, a statement check against `6fc27fa1`, commit, push). Re-price after your first two leaves and say so: the planner's prices are on
    a scale this wave's first two implementers beat by an order of magnitude on set-algebra leaves, and not on the hard ones.
 3. **The three cell lemmas of a fan are another implementer's** (ruling 531 (c)): a cell is preconnected, lies in its colour's density set,
@@ -153,3 +153,45 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-06, at launch) — your branch now stands on wave 6's first half, landed and proved
+
+Nothing above is withdrawn but where an item below says so; the base moved under you while this brief waited.
+
+1. **Your branch was fast-forwarded** from `6fc27fa1` to `4ae5bd36`: the wave's fourth planner merged `main` into the wave's line after
+   the wave's first half landed there (inventory items 558, 561). Your tree was untouched and unstarted, and the third pass's four
+   modules are byte-identical to `6fc27fa1` (`git diff`, mine). Every "statement check against `6fc27fa1`" above now reads **against
+   `4ae5bd36`**. The branch as given has **34** `sorry` leaves, not 65 — seven yours, in `Centre`; the other thirty-one were proved by five implementers
+   and passed the full gate. Your tree's build is a copy of the planner's at `4ae5bd36`, so the build as given should rebuild nothing.
+2. **The fourteen modules beneath you are theorems now — cite them, re-declare nothing, edit none.** Two names changed at the landing,
+   and the plan and records you read may still use the old ones: `polarRegion_isOpen` and `polarRegion_isPreconnected` were folded
+   into these two, the same statements binder for binder:
+
+> theorem isOpen_polarRegion (z : ℂ) {r : ℝ} {φ ψ : ℝ → ℝ} (hφ : ContinuousOn φ (Ioo 0 r))
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6z/Proofs/HadwigerNelson/Plane/Saturated/FanBuild.lean
+
+> theorem isPreconnected_polarRegion (z : ℂ) {r : ℝ} {φ ψ : ℝ → ℝ} (hφ : ContinuousOn φ (Ioo 0 r))
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6z/Proofs/HadwigerNelson/Plane/Saturated/FanBuild.lean
+
+3. **Your statement check reads the kernel's statements** (inventory item 556; `LEAN.md` § Searching — Lean, last bullet): a section
+   `variable` enters a theorem only if its statement mentions it, so a leaf can lack a hypothesis its file shows, and a comparison of
+   text cannot see it. `#check` each leaf before you prove it — with `lake env lean` under the slot, the output saved under your
+   `data/` folder — and each head again at your last stage. A leaf whose kernel statement lacks a binder its row reads is a message to
+   me before you prove it: proving the wider statement is not the job.
+4. **The fourth planner is working on the wave's line now** — a fresh pass over the third pass's definitions and six more rows, in
+   modules of its own. It does not edit your files. If its pass finds that a statement of yours should change, I send it to you as a
+   second amendment; until then the statements stand as given.
+5. **Item 3 of "Done means" is superseded: the three cell lemmas of a fan are in your tree, proved — cite them, declare none of them
+   again, and take no hypothesis in their place** (they are the fifth implementer's, landed):
+
+> theorem isPreconnected_cell (i : Fin F.n) : IsPreconnected (F.cell i) :=
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6z/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+
+> theorem cell_subset_densitySet (i : Fin F.n) : F.cell i ⊆ densitySet (c.cls (F.col i)) :=
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6z/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+
+> theorem exists_ray_subset_cell (i : Fin F.n) {θ : ℝ} (h1 : F.dir i < θ) (h2 : θ < F.nextDir i) :
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6z/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+
+   If one does not fit a leaf as stated, write a corollary under a name of your own and say so. Item 4 stands as written: the
+   tangent-type fact is still the `Parallel` implementer's, a hypothesis under a name of your own unless I send its commit.

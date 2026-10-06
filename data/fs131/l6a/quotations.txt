@@ -1,0 +1,21 @@
+MATCH     n=1  '- **The artifact is the certificate plus the checker, never the search'  <- CLAUDE.md § The standard of evidence above rung B
+MATCH     n=1  "516. **FS131-I6A done: all seven leaves of wave 6's `Pinch` proved as "  <- plans/FS131-close-inventory.md
+MATCH     n=1  "517. **Rulings on I6A's held items, and its slot.** (a) **The weaker ("  <- plans/FS131-close-inventory.md
+MATCH     n=1  '530. **FS131-I6B done: `sat_inP` proved (FS121-C1-SAT), at a wider cla'  <- plans/FS131-close-inventory.md
+MATCH     n=1  '539. **FS131-I6C done: `Curve` and `LocalGraph` are proved — all eleve'  <- plans/FS131-close-inventory.md
+MATCH     n=1  '540. **FS131-I6D done: the existence half of the bridge is proved — al'  <- plans/FS131-close-inventory.md
+MATCH     n=1  "544. **FS131-I6E done: `FanBridge`'s five lemmas about any fan are pro"  <- plans/FS131-close-inventory.md
+MATCH     n=1  '491. **FS131-E8 done: nine entries derived, none stalled — the bridge '  <- plans/FS131-close-inventory.md
+MATCH     n=1  "492. **Rulings on E8's held items, and its slot.** (a) **REG-J′ and C1"  <- plans/FS131-close-inventory.md
+MATCH     n=1  "535. **FS131-L10A done: wave 10's first pass is on `main` through the "  <- plans/FS131-close-inventory.md
+MATCH     n=1  'theorem pinch {A B N : Set ℂ} (hA : MeasurableSet A) (hAn : UnitPairsN'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
+MATCH     n=1  'theorem sat_inP (F : ArcMap k) (hF : F.IsPlaneMap) (c : AeColouring k)'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6m/Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean
+MATCH     n=1  'theorem local_graph {A B N : Set ℂ} (hA : MeasurableSet A) (hAn : Unit'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6j/Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean
+MATCH     n=1  'theorem fan_of_isolated (c : AeColouring k) {z : ℂ} {R : ℝ} (hR : 0 < '  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6f/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+MATCH     n=1  'theorem regJFan_of_saturated (c : AeColouring k) (hsat : Saturated c.c'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6f/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+MATCH     n=1  'theorem sector_alone (hsat : SaturatedOn c.cls (ball z F.r \\ {z})) {i '  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6j/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+MATCH     n=1  '`declarations=13767 refutations-skipped=192 sites=1173`, `vacuous=0 st'  <- CLAUDE.md § The gate
+pairs=17 match=17 multi=0 bad=0
+plant 1 (one character changed): MISSING -> fired
+plant 2 (a source that does not exist): NO-SOURCE -> fired
+self-test: PASS

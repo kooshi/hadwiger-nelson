@@ -1,10 +1,10 @@
-# Brief FS131-K6d — wave 6's fourth planning pass: the proved branches joined into the wave's line, the fragment's six rows stated, the pinch's consequences on a cover, and the plan for the inhabitants the wave owes
+# Brief FS131-K6d — wave 6's fourth planning pass: the landed half of the wave merged into its line, the fragment's six rows stated, the pinch's consequences on a cover, and the plan for the inhabitants the wave owes
 
 *Written 2026-10-06 by Keryx, the coordinator (the top-level session). Launch line: "Your brief is on disk: read it in full first."*
 
 brief: FS131-K6d
   identity: de Bruijn, the planner — your agent file (`.claude/agents/debruijn.md`) is your identity and your lane's workflow
-  role: wave 6's fourth planner — first bring the wave's four proved branches into its line and model the third pass's new definitions afresh; then read the arguments nobody in this milestone has read and state the six rows about a saturated fragment of an arc map, and the two consequences of the pinch for sets that may overlap, as new modules, `sorry` at each leaf, each statement read back against its row; state the facts the wave's example objects still owe; a plan and a price per leaf, and a handoff implementers can split by file
+  role: wave 6's fourth planner — first merge the landed half of the wave into its line and model the third pass's new definitions afresh; then read the arguments nobody in this milestone has read and state the six rows about a saturated fragment of an arc map, and the two consequences of the pinch for sets that may overlap, as new modules, `sorry` at each leaf, each statement read back against its row; state the facts the wave's example objects still owe; a plan and a price per leaf, and a handoff implementers can split by file
   launch: when a slot frees, in the tree the third pass (FS131-K6c) handed back; the wave's implementers prove the earlier passes' files on branches of their own, cut from commits of this branch
   mission: § Why this job
   statements: § The statements
@@ -14,7 +14,7 @@ brief: FS131-K6d
   channel: message the coordinator ("main") by SendMessage mid-job for a statement defect in a row (at once, with the entry's address and the line of the argument: it goes to a deriver — and say which kind you have: a *statement* that needs a hypothesis its entry lacks, or a *route* that reads more than the statement needs), a definition of the third pass that your modeling pass finds wrong (at once: three implementers are building on it), a change you find you need in a module that is fixed (below), a generalization or a shorter route, an outside theorem you would import, the hash of a module another wave reads, or a question you cannot work around; the report goes to `data/fs131/reports/FS131-K6d.md` on your branch, and its text is your final message (if the harness refuses that file, say so and the coordinator files it from your hand-back)
   standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full (§ The gate: the inhabitant rule and the doubled-name check; § Searching — Lean, last bullet: two branches never state one lemma under one name), and `RUNNING.md` § Building before your first build
   record: `plans/FS131-w6-kernel-plan.md` (on branch `fs131-w6`; the three passes' record — your stages from 16, headed FS131-K6d)
-  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6` (branch `fs131-w6`, at `6fc27fa1`): the four merges this brief names, and no other; then **new modules only** under `Proofs/HadwigerNelson/Plane/Saturated/` (the plan names `Fragment`; the layout is yours), with `Proofs.lean` and `ARCHITECTURE.md` for them; `scripts/Axioms.lean` (a block of your own, headed "FS131-K6d", above the `=== PURCHASED ===` banner), `plans/FS131-w6-kernel-plan.md`, `tools/fs131_k6d_*.py`, `data/fs131/k6d/`, `data/fs131/reports/FS131-K6d.md`; **not** the wave's existing modules beyond what the merges bring (eighteen after the merges: implementers have proved them, are proving them, or are queued to, each on a branch cut from this one — a statement you need there is a message, a lemma you need beside them goes in a module of your own), any landed module beyond new declarations, `main`, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6` (branch `fs131-w6`, at `6fc27fa1`): the one merge this brief names, and no other; then **new modules only** under `Proofs/HadwigerNelson/Plane/Saturated/` (the plan names `Fragment`; the layout is yours), with `Proofs.lean` and `ARCHITECTURE.md` for them; `scripts/Axioms.lean` (a block of your own, headed "FS131-K6d", above the `=== PURCHASED ===` banner), `plans/FS131-w6-kernel-plan.md`, `tools/fs131_k6d_*.py`, `data/fs131/k6d/`, `data/fs131/reports/FS131-K6d.md`; **not** the wave's existing modules beyond what that merge brings (eighteen after the merge: implementers have proved them, are proving them, or are queued to, each on a branch cut from this one — a statement you need there is a message, a lemma you need beside them goes in a module of your own), any landed module beyond new declarations, `main`, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`
   budget: about 400k by the harness's count, as guidance; hand back at a saved stage before about 500k — read your token count at every saved stage
 
 Hello. You are finishing the plan of wave 6 of the Lean backlog. The milestone, FS-131, turns this project's hand-derived results into
@@ -47,6 +47,9 @@ What the earlier passes and the implementers handed back, and the rulings in for
 > — source: plans/FS131-close-inventory.md
 
 > 540. **FS131-I6D done: the existence half of the bridge is proved — all seven leaves, as stated — so the deriver's theorem "a
+> — source: plans/FS131-close-inventory.md
+
+> 544. **FS131-I6E done: `FanBridge`'s five lemmas about any fan are proved, as stated — with the three cell lemmas of a fan as
 > — source: plans/FS131-close-inventory.md
 
 > 526. **FS131-K6c retracts item 522 (2): FS121-DB1-L7 stands as filed — "at every point off Σ", no REG-J′, no neighbourhood; the
@@ -126,8 +129,8 @@ What the third pass leaves, in its words (its record's §§ 14.4, 14.6, 15.3, 15
 > 2. **`ArcMap.bound_of_saturatedOn`** (the bound lemma on an open set, for a family) is read by no row of this pass; it is the fourth
 > — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
 
-The two things an implementer proved that these rows may read, on `origin/fs131-w6m` at `2e55a2d6` (they reach your branch by the second
-merge below):
+The two things an implementer proved that these rows may read, on `origin/fs131-w6m` at `2e55a2d6` (they reach your branch by the merge
+below, from `main`):
 
 > theorem ArcMap.bound_of_saturatedOn (F : ArcMap k) {C : Fin k → Set ℂ} (hC : ∀ j, C j =ᵐ[volume] F.region j)
 > — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6m/Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean
@@ -170,18 +173,15 @@ branch; the names are wave 9's own, and you declare none of them):
    modules, and the plan's §§ 7.1–7.5. Register, before reading the unread arguments: which of the six you expect to hide a statement
    defect, which pairs to be one theorem, and how many you will state. Open your stages in the record with what you may and may not change.
    Commit and push.
-2. **The join of the four proved branches, first** — the one place this brief asks a merge of you: into `fs131-w6`, merge `43ea4886`
-   (`origin/fs131-w6p`: `Pinch` proved), then `2e55a2d6` (`origin/fs131-w6m`: `MapColouring` proved, with the new `MapEdge` and
-   `Sq9Map`), then `d62406a2` (`origin/fs131-w6c`: `Curve` and `LocalGraph` proved; its record names six declarations whose axioms
-   lines are appended to its block of `scripts/Axioms.lean` once `Pinch`'s proof is beneath them), then `8e81fedd` (`origin/fs131-w6f`:
-   the existence half of `FanBridge` proved, in four new modules — `CurveArc`, `ArcContinuation`, `FanArcs`, `FanBuild` — with the model
-   `sq9_singLocallyFinite`; inventory item 540; its record lists three docstring phrases that say "[hand], kernel pending" and are
-   stale once this merge builds: correct them then). Both were cut from an ancestor of your tip and touch `Proofs.lean`, `ARCHITECTURE.md` and `scripts/Axioms.lean` beside the
-   planners' lines: keep both sides. After each merge: the build (the `sorry` count falls from 65 by seven, by one, by eleven, then by seven),
-   `./scripts/dupnames.sh` (the second implementer names two helpers that restate lemmas held elsewhere — inventory item 530 — which is
-   fine while their names differ), a statement check that no statement of the wave moved, commit, push. If a merge does not go cleanly
-   in the Lean files, stop and message me. Send me the hash when all four are in: the wave's other planners and one of wave 8's jobs take
-   `sq9Map` from it.
+2. **Merge `origin/main` first** — the one merge this brief asks. The wave's first fourteen modules are landed there, proved, through
+   the full gate (FS131-L6A; inventory items 544–545): `Pinch`, `MapColouring` with `MapEdge` and `Sq9Map`, `Curve`, `LocalGraph`, the
+   whole of `FanBridge` with four new modules beside it. Your branch holds the first eight as the skeleton they were, unchanged since
+   the second pass, so they come from `main` whole; `Proofs.lean`, `ARCHITECTURE.md` and `scripts/Axioms.lean` keep both sides (the
+   third pass's four modules and their lines stay). After it: the build (the `sorry` count falls from 65 to the third pass's 34),
+   `./scripts/dupnames.sh`, a statement check on the third pass's four modules (none may move), commit, push. A conflict in a Lean
+   file, or a third-pass module that does not build against the landed statements, is a message to me with the call site, not an edit.
+   **Send me the hash at once**: three implementers' unstarted branches are fast-forwarded to it, so that their proofs stand on proved
+   leaves.
 3. **A fresh domain-modeling pass over the third pass's new definitions** (`debruijn-domain-modeling`, invoked fresh; the definitions are
    listed in its § 14.4): that pass was not run there — its planner disclosed it, and was past its budget. Each definition against the
    arguments that read it, with its spec example. A definition you find wrong is a message to me at once and not an edit: three
@@ -221,13 +221,13 @@ branch; the names are wave 9's own, and you declare none of them):
    leaves), the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), and a handoff for implementers by file. A leaf
    you can prove in about an hour, prove, and say so.
 11. The report, in standing rule 11's form. You do not merge any other branch, run the gate, or touch `main`. Leave no background process
-    running, and keep what your record cites under `data/fs131/k6d/`. If this is more than one pass holds: the join, the modeling pass and
+    running, and keep what your record cites under `data/fs131/k6d/`. If this is more than one pass holds: the merge, the modeling pass and
     the six rows first, the inhabitants after; stopping at a saved stage and saying exactly what is left is a good report.
 
 ## What is yours to decide
 
 The modules and their layout, the form of each statement within what its row claims, which rows are one theorem and its corollary, what
-is formalized and what is named as a hypothesis, the inhabitants' statements, and the order after the join. Three minds planned what you
+is formalized and what is named as a hypothesis, the inhabitants' statements, and the order after the merge. Three minds planned what you
 stand on and none read these six arguments: where the foundation does not carry what a row reads, say so by message before working
 around it. Attack the rows: a statement true only at a narrower class than its entry says is the finding this job is best placed to make.
 Three failed attempts on one route is a dispatch to the companion your identity names, never a fourth. You start no agents of your own (standing rule 1: delegation is one level

@@ -51,6 +51,7 @@ milestone to read their arguments.'''
    docstring says so in `LEAN.md` § The gate's form and names the object meeting the local hypotheses but one. Every other structure-valued
    hypothesis has a named Lean inhabitant or an owed one named.'''
     SCOPE="Thirteen rows over a foundation nobody has written may be more than this pass holds: the four flags, the foundation and the bowtie rows first, the pinwheel after; stopping at a saved stage and saying exactly where a third pass takes over is a good report."
+    XQ=""
     YOURS="The modules and their layout, the form of each statement within what its row claims, which rows are one theorem and its corollary (the first pass proposed three merges), what is formalized and what is named as a hypothesis, the bowtie's kernel route, and the order after the four flags."
 else:
     TITLE="the nine semi-hub rows and two more, the plans for two stated leaves, and the hypothesis from wave 7"
@@ -83,8 +84,16 @@ the first mind in this milestone to read their arguments.'''
 5. **The rows, stated**: the nine semi-hub rows, FS116-N2-SIXRING and FS116-RING-TWIST-C, each with `sorry` at its leaves and read back
    against its row. **FS114-N7-QOPP enters three of them as a hypothesis under a name of this wave's own** (ruling 498; the first pass
    proposed `QArcsJoinOpposite F p`, from the first sentence of `plans/FS114-derivation.md` l. 793) — a `Prop`-valued definition, never an
-   axiom. Wave 7's second planner will state the row itself: send me your definition when it is fixed, so the two are stated to meet at the
-   join. FS116-RING-TRANSFER-QC is a conjunction of four of the others: a bundling theorem, or no declaration, by your reading.
+   axiom. Wave 7's second planner has stated the row itself: five theorems, quoted above from its branch (inventory item 553) —
+   the inner tile's cone window and the whole arc in its closure, the outer tile's cone window, the two colours different, the two cones
+   disjoint, and, under four colours and `SimpleOn` at `p`, the other colours of `p` absent along the open arc. "Opposite" arrives as
+   two disjoint cones, not as a position in a cyclic order; the first four read no "simple" and any number of colours at `p`. Define
+   yours so that these discharge it at the join; if your three rows consume a cyclic position among four tiles, derive it on your side
+   from `qArc_cone_disjoint`, and tell me if that does not go. **A second meeting point**: its FS114-N3-ODD (`ring_odd`, stated with
+   closed arcs) is the case "no arc of `Γ` meets the window" of FS116-RING-TWIST-C's last clause — state TWIST-C so that the two are one
+   theorem and a corollary at the join. **And its foundation**: `Plane/FourColour/Basic` (the tactic edge, the Reuleaux cross and
+   bowtie) is whole at `7baeafe8` on `origin/fs131-w7`; if a row of yours wants one of its names, tell me before you re-state anything
+   — the answer is a merge of that commit, which I will ask of you then. Send me your definition when it is fixed. FS116-RING-TRANSFER-QC is a conjunction of four of the others: a bundling theorem, or no declaration, by your reading.
 6. **The plans for `outerAdj` and `doubleTip`**: their arguments read (`plans/FS129-SR3-audit.md` §§ 2.2–2.3, `plans/FS129-MR1-audit.md`), a
    plan per child, and each statement confirmed or corrected (`outerAdj` is already stated at the corrected reading of inventory item 518).'''
     VAC='''7. **Vacuity and inhabitants**: the first pass's § 5.5 says which hypotheses have no Lean term yet (a change point of a four-colour vertex
@@ -92,6 +101,8 @@ the first mind in this milestone to read their arguments.'''
    docstring says which, in `LEAN.md` § The gate's form, with the object meeting the local hypotheses but one. FS116-RING-TWIST-C's hypotheses
    have no held model at six colours, by its entry: say so there.'''
     SCOPE="Eleven rows and two plans may be more than this pass holds: the questions and the three words first, then the rows in the order of their dependencies; stopping at a saved stage and saying exactly where a third pass takes over is a good report."
+    W7L=WT+"fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean"
+    XQ="Wave 7's statement of FS114-N7-QOPP, final, on `origin/fs131-w7` at `195c7855` (not on your branch; the names are wave 7's own):\n\n"+"\n".join(Q(W7L,"theorem "+n+" ") for n in ["qArc_inner","qArc_outer","qArc_ne","qArc_cone_disjoint","qArc_others_absent"])+"\n"
     YOURS="The modules and their layout, the form of each statement within what its row claims, the three definitions, which rows are one theorem and its corollary or a citation of a proved one, what is formalized and what is named as a hypothesis, and the order after the first pass's questions."
 ITEMQ="\n".join(item(n) for n in ITEMS)+"\n"
 RECQ="\n".join(Q(REC,p) for p in RQ)+"\n"
@@ -135,7 +146,7 @@ What is yours, in the first pass's words — its dispositions of your rows (each
 list of what the foundation lacks, and its handoff. Read its record whole
 (`/home/kooshi/source/lean-dir/.claude/worktrees/{TREE}/plans/FS131-w{N}-kernel-plan.md`); these are the lines that are yours:
 
-{RECQ}## Done means
+{RECQ}{XQ}## Done means
 
 1. **Your readback first**: check every quotation above against its source; read the first pass's record whole, the wave's modules, and the
    plan's §§ 7.1–7.5. Register, before reading the unread arguments: which rows you expect to hide a statement defect, which to be one

@@ -1,0 +1,3 @@
+ARCHITECTURE.md, the row Plane/Saturated/CurveArc, one more exact replacement after tidy.py (found by tools/fs131_l6a_archrows.py's STALE check):
+- Unit-speed curves beyond `Curve`'s leaves, no measure and no colouring:
++ Unit-speed curves beyond `Curve`'s theorems, no measure and no colouring:

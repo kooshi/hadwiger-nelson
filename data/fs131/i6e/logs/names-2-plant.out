@@ -1,0 +1,3 @@
+allowed   | IsUnitCurve.reverse | IsUnitCurve.reverse here, IsArcOf.reverse on the other branch: two full names
+COLLISION | polarAngle | polarAngle in Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean
+new names: 42  collisions: 1  (tree: Proofs/ less FanBridge; other branch: 8e81fedd)

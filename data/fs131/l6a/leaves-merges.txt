@@ -1,0 +1,65 @@
+faithful: 384 distinct names; 383 on exactly the standard three, 1 on a proper subset; control shows sorryAx; faults 0
+  block:FS131-I6A: exact 37
+  block:FS131-I6B: exact 46
+  block:FS131-I6C: exact 45
+  block:FS131-I6D: exact 41
+  block:FS131-I6E: exact 57, not a theorem of the kernel's list (a definition carrying a proof) 1
+  block:FS131-K6: exact 16
+  block:FS131-K6b: exact 53, not a theorem of the kernel's list (a definition carrying a proof) 1
+  kernel: exact 381, subset 1
+  leaf: exact 31
+  wired:FS131-I6C: exact 6
+  wired:FS131-I6E: exact 14
+  wired:planners: exact 8
+  subset: HadwigerNelson.Plane.sq9_pred_ne ['Quot.sound', 'propext']
+plant BAD-AXIOM: 384 distinct names; 382 on exactly the standard three, 1 on a proper subset; control shows sorryAx; faults 1
+  block:FS131-I6A: exact 37
+  block:FS131-I6B: exact 46
+  block:FS131-I6C: exact 44
+  block:FS131-I6D: exact 41
+  block:FS131-I6E: exact 57, not a theorem of the kernel's list (a definition carrying a proof) 1
+  block:FS131-K6: exact 16
+  block:FS131-K6b: exact 53, not a theorem of the kernel's list (a definition carrying a proof) 1
+  kernel: exact 380, subset 1
+  leaf: exact 30
+  wired:FS131-I6C: exact 6
+  wired:FS131-I6E: exact 14
+  wired:planners: exact 8
+  subset: HadwigerNelson.Plane.sq9_pred_ne ['Quot.sound', 'propext']
+  BAD-AXIOM HadwigerNelson.Plane.IsUnitCurve.chord (kernel): ['sorryAx']
+  -> fired (BAD-AXIOM)
+plant NO-PRINT: 384 distinct names; 382 on exactly the standard three, 1 on a proper subset; control shows sorryAx; faults 3
+  block:FS131-I6A: exact 37
+  block:FS131-I6B: exact 46
+  block:FS131-I6C: exact 44
+  block:FS131-I6D: exact 41
+  block:FS131-I6E: exact 57, not a theorem of the kernel's list (a definition carrying a proof) 1
+  block:FS131-K6: exact 16
+  block:FS131-K6b: exact 53, not a theorem of the kernel's list (a definition carrying a proof) 1
+  kernel: exact 380, subset 1
+  leaf: exact 30
+  wired:FS131-I6C: exact 6
+  wired:FS131-I6E: exact 14
+  wired:planners: exact 8
+  subset: HadwigerNelson.Plane.sq9_pred_ne ['Quot.sound', 'propext']
+  NO-PRINT HadwigerNelson.Plane.IsUnitCurve.chord (kernel)
+  NO-PRINT HadwigerNelson.Plane.IsUnitCurve.chord (leaf)
+  NO-PRINT HadwigerNelson.Plane.IsUnitCurve.chord (block:FS131-I6C)
+  -> fired (NO-PRINT)
+plant CONTROL: 384 distinct names; 383 on exactly the standard three, 1 on a proper subset; control SILENT; faults 1
+  block:FS131-I6A: exact 37
+  block:FS131-I6B: exact 46
+  block:FS131-I6C: exact 45
+  block:FS131-I6D: exact 41
+  block:FS131-I6E: exact 57, not a theorem of the kernel's list (a definition carrying a proof) 1
+  block:FS131-K6: exact 16
+  block:FS131-K6b: exact 53, not a theorem of the kernel's list (a definition carrying a proof) 1
+  kernel: exact 381, subset 1
+  leaf: exact 31
+  wired:FS131-I6C: exact 6
+  wired:FS131-I6E: exact 14
+  wired:planners: exact 8
+  subset: HadwigerNelson.Plane.sq9_pred_ne ['Quot.sound', 'propext']
+  CONTROL HadwigerNelson.fs131_l6a_control: its print does not show sorryAx (['propext'])
+  -> fired (CONTROL)
+self-test: PASS

@@ -1,0 +1,23 @@
+resolved 1 hunk(s) in scripts/Axioms.lean
+faithful: scripts/Axioms.lean: 6175 non-blank lines; #print axioms lines 5470 = ours 5433 + theirs 5292 - base 5255; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): scripts/Axioms.lean: 6174 non-blank lines; #print axioms lines 5470 = ours 5433 + theirs 5292 - base 5255; faults 1
+  LOST '/-! ## FS131-I6A — wave 6, `Plane/Saturated/Pinch`: the leaves the first implementer proved, and its' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): scripts/Axioms.lean: 6176 non-blank lines; #print axioms lines 5470 = ours 5433 + theirs 5292 - base 5255; faults 1
+  EXTRA '/-! ## FS131-I6A — wave 6, `Plane/Saturated/Pinch`: the leaves the first implementer proved, and its' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): scripts/Axioms.lean: 6176 non-blank lines; #print axioms lines 5470 = ours 5433 + theirs 5292 - base 5255; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+plant (a record of theirs doubled): scripts/Axioms.lean: 6176 non-blank lines; #print axioms lines 5471 = ours 5433 + theirs 5292 - base 5255; faults 3
+  COUNT #print axioms: have 5471, expected ours 5433 + theirs 5292 - base 5255
+  EXTRA '#print axioms HadwigerNelson.Plane.norm_sq_mul_sub_of_norm_eq_one' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  TWICE HadwigerNelson.Plane.norm_sq_mul_sub_of_norm_eq_one (2)
+  -> fired (TWICE)
+plant (a record of theirs dropped): scripts/Axioms.lean: 6174 non-blank lines; #print axioms lines 5469 = ours 5433 + theirs 5292 - base 5255; faults 2
+  COUNT #print axioms: have 5469, expected ours 5433 + theirs 5292 - base 5255
+  LOST '#print axioms HadwigerNelson.Plane.norm_sq_mul_sub_of_norm_eq_one' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (COUNT)
+self-test: PASS
+exit=0

@@ -1,0 +1,35 @@
+MISMATCH | Do not consider Lean formalization a cost. It's practically mechanical for us, | CLAUDE.md
+exact    | 486. **FS131-K6 done at its Stage 7: wave 6's first planning pass — dispositio | plans/FS131-close-inventory.md
+exact    | 487. **Rulings on K6's held items, and two slots.** (a) FS121-D1-VT is declare | plans/FS131-close-inventory.md
+exact    | 481. **FS131-K6, by message mid-job (`fs131-w6` at `c3ffb4e7`, build OK by its | plans/FS131-close-inventory.md
+exact    | 490. **FS131-E8, by message mid-job (its Stage 3 saved, `0310d854` on `main`,  | plans/FS131-close-inventory.md
+exact    | 491. **FS131-E8 done: nine entries derived, none stalled — the bridge (item 49 | plans/FS131-close-inventory.md
+exact    | 492. **Rulings on E8's held items, and its slot.** (a) **REG-J′ and C121-REGJ  | plans/FS131-close-inventory.md
+exact    | ### 7.3 What each wave's planning job must hold | plans/FS131-kernel-plan.md
+exact    | 1. **Reads its rows' derivation entries in full** (the CSV gives each row's ad | plans/FS131-kernel-plan.md
+exact    | 3. **States every row at the class its argument reads** (G92), reports each wi | plans/FS131-kernel-plan.md
+exact    | 4. **Names every hypothesis from outside the backlog** in the declaration's do | plans/FS131-kernel-plan.md
+exact    | ### 7.2 For the second planning pass (the Ladder, the Fragment rows, C11 (ii), | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | 1. **First decision: state the pinch locally, over a family.** `Basic` is over | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | 2. **The fan**: § 6's design, to land as `Plane/Saturated/Fan` with an inhabit | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | 3. **Curves**: the Ladder's rows speak of circular arcs and segments inside `c | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | 4. **Read the FS-116 and FS-121 arguments** (not read here): `plans/FS121-DB1- | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | 5. Unresolved from § 1.4: X5 (b) (ENDS's "null set of normals" against L6's "f | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/plans/FS131-w6-kernel-plan.md
+exact    | structure Fan (c : AeColouring k) (z : ℂ) where | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/data/fs131/k6/FanDesign.lean
+exact    | def RegJFan (c : AeColouring k) : Prop := | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/data/fs131/k6/FanDesign.lean
+exact    | def RegJBridge (k : ℕ) : Prop := | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6/data/fs131/k6/FanDesign.lean
+exact    | - **FS131-E8-LOCAL** — off Σ the interface set of a saturated colouring is the | plans/FS131-E8-derivation.md
+exact    | - **FS131-E8-GAMMA** — clause (γ): near an isolated point `z` of Σ, in a disc  | plans/FS131-E8-derivation.md
+exact    | - **FS131-E8-BETA** — clause (β): a component with an end at `z` has increasin | plans/FS131-E8-derivation.md
+exact    | - **FS131-E8-ALPHA** — clause (α): finitely many components meet the half disc | plans/FS131-E8-derivation.md
+exact    | - **FS131-E8-DELTA** — clause (δ): a connected open set meeting no essential b | plans/FS131-E8-derivation.md
+exact    | - **FS131-E8-FAN** — the class: a fan with end tangents at every singular poin | plans/FS131-E8-derivation.md
+exact    | - **FS131-E8-BRIDGE** — the instance: saturated with Σ locally finite gives th | plans/FS131-E8-derivation.md
+exact    | - **FS131-E8-CLAUSE2** — under saturation the frozen words' second clause foll | plans/FS131-E8-derivation.md
+exact    |   handoff: de Bruijn — the statement as a lemma producing the planner's Fan at | plans/FS131-E8-derivation.md
+exact    |   handoff: de Bruijn — ∀ c : AeColouring k, Saturated c.cls → (∀ x, ∃ r > 0, ( | plans/FS131-E8-derivation.md
+exact    |   handoff: de Bruijn — c.RegJLiteral follows from Saturated c.cls and local fi | plans/FS131-E8-derivation.md
+exact    | ### 4.6 Row by row, for wave 6's second planner (added on the coordinator's wo | plans/FS131-E8-derivation.md
+exact    | **Rows that need a fan at one point and no local finiteness:** FS111-W-KB-DIR, | plans/FS131-E8-derivation.md
+exact    | **No row reads more than FS131-E8 gives; four read more than the planner's `Fa | plans/FS131-E8-derivation.md
+quotations: 34  exact: 33  mismatched: 1

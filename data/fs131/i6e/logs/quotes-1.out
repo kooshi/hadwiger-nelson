@@ -1,0 +1,24 @@
+exact    | Do not consider Lean formalization a cost. It's practically mechanical for us, | CLAUDE.md
+exact    | 501. **FS131-K6b done at its Stage 12: wave 6's second planning pass — the fou | plans/FS131-close-inventory.md
+exact    | 502. **Rulings on K6b's held items, and its slot.** (a) **The deriver's check  | plans/FS131-close-inventory.md
+exact    | 490. **FS131-E8, by message mid-job (its Stage 3 saved, `0310d854` on `main`,  | plans/FS131-close-inventory.md
+exact    | 499. **FS131-K6b, by message mid-job: findings on the bridge while stating it  | plans/FS131-close-inventory.md
+exact    | 504. **FS131-E8's check done (its Stage 6): the planner's statements of the br | plans/FS131-close-inventory.md
+exact    | 505. **Rulings on the check, and the slot.** (a) **The five `Fan` lemmas go to | plans/FS131-close-inventory.md
+exact    | theorem two_le_n (hz : z ∈ c.singularSet) : 2 ≤ F.n := by | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+exact    | theorem col_ne {i j : Fin F.n} (hij : (j : ℕ) + 1 = i ∨ ((i : ℕ) = 0 ∧ (j : ℕ) | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+exact    | theorem branch_outside_discs (hsat : SaturatedOn c.cls (ball z F.r \ {z})) (i  | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+exact    | theorem branch_contacts (hsat : SaturatedOn c.cls (ball z F.r \ {z})) {i j : F | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+exact    | theorem sector_alone (hsat : SaturatedOn c.cls (ball z F.r \ {z})) {i i' : Fin | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+exact    | ## Stage 11 — SAVED: the bridge's eight rows — the curve notion, the skeleton, | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/plans/FS131-w6-kernel-plan.md
+exact    | ### 11.4 The plan per leaf | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/plans/FS131-w6-kernel-plan.md
+exact    | | `Plane/Saturated/FanBridge` (imports `LocalGraph`, `FanExamples`) | **FS131- | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/plans/FS131-w6-kernel-plan.md
+exact    | | `Fan.two_le_n`, `Fan.col_ne` | § 11.5 (3): a continuous polar graph is null  | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/plans/FS131-w6-kernel-plan.md
+exact    | | `Fan.branch_outside_discs` | a branch is a component with `z` in its closure | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/plans/FS131-w6-kernel-plan.md
+exact    | | `Fan.branch_contacts` | at branch points `pinch_interface`'s two types; a sp | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/plans/FS131-w6-kernel-plan.md
+exact    | | `Fan.sector_alone` | `plans/FS121-V2-verification.md` §§ 2.2–2.3 verbatim: L | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/plans/FS131-w6-kernel-plan.md
+exact    | ### 10.2 The two facts the design's `Fan` has no field for: lemmas about any f | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/plans/FS131-w6-kernel-plan.md
+exact    | ### 12.1 For implementers: the split by file (statements fixed; children under | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/plans/FS131-w6-kernel-plan.md
+exact    | ### 12.2 Vacuity and inhabitants (`LEAN.md` § The gate's form) | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6g/plans/FS131-w6-kernel-plan.md
+exact    | ## Stage 3 — SAVED: the derivation — the four clauses, the fan, the bridge | plans/FS131-E8-derivation.md
+quotations: 23  exact: 23  mismatched: 0

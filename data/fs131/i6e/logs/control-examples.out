@@ -1,0 +1,17 @@
+data/fs131/i6e/scratch/S7-control.lean:6:89: error: Application type mismatch: The argument
+  rfl
+has type
+  ?m.28 = ?m.28
+but is expected to have type
+  ↑2 + 1 = sq9Fan.n
+in the application
+  ⟨rfl, rfl⟩
+data/fs131/i6e/scratch/S7-control.lean:8:62: error: Application type mismatch: The argument
+  le_of_eq rfl
+has type
+  ?m.30 ≤ ?m.30
+but is expected to have type
+  sq9Fan.dir i < sq9Fan.nextDir i
+in the application
+  AeColouring.Fan.sector_alone sq9Fan
+    (Saturated.saturatedOn sq9_tight_saturated.right.left (ball sqVertex sq9Fan.r \ {sqVertex})) (le_of_eq rfl)

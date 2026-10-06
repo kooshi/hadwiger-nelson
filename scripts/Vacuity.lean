@@ -433,6 +433,50 @@ Two exclusions are worth their reasons, because both look like obvious additions
     gate item: a hypothesis set that holds together on no object of the library is a conjunction across binders, which this
     per-binder scan cannot see.
 
+* **Wave 6's first half (FS131-L6A, by the procedure below; the fourteen modules `Plane/Saturated/{Basic, Pinch, MapEdge, Sq9Map,
+  MapColouring, Fan, FanExamples, Curve, CurveArc, ArcContinuation, FanArcs, FanBuild, LocalGraph, FanBridge}`).** **No new carrier
+  IN.** The modules declare twenty-seven hypothesis-formers (`data/fs131/l6a/census.lean`, wave 5's census with its scope changed,
+  lists them with what the library proves of each): none has an unconditional `¬ P …` at a closed instance, none an `IsEmpty`
+  instance, and none a binder site at a closed instance — so for none could step (3)'s `VACUOUS` control be planted, and entering
+  one would add `GENERIC` rows and no signal. **OUT**, by kind:
+  - **the fan** — `AeColouring.Fan` (a `Type`-valued structure: a radius, `n` branches as polar graphs with limit directions, the
+    regions' colours, and the proofs; 51 binder sites, each at a variable colouring and point). **This is the one former of the wave
+    for which "does one exist" is a theorem rather than a construction** (FS131-E8-FAN, `AeColouring.fan_of_isolated`: at a point
+    isolated in `Σ` of a colouring saturated in the punctured disc), so by step (1)'s first clause alone it would be IN, like
+    `AeColouring`. It is kept OUT by the law as wave 5 applied it (the coordinator's ruling on FS131-L6A's question, 2026-10-06):
+    no theorem of the library refutes a fan at a concrete point, so no `VACUOUS` control can be planted — the `StationarySet` case
+    again, and the second instance of "a hypothesis-former whose existence is a theorem, with no `VACUOUS` control plantable".
+    Its closed inhabitant: `sq9Fan : sq9.Fan sqVertex` (`Plane/Saturated/FanExamples`), on which the five `Fan` lemmas are run
+    (the examples after `Fan.sector_unique`). Register it when a theorem refutes a fan at a closed instance (a colouring with a
+    wild point). With it OUT: `Fan.HasSector`, `Fan.HasHorn` (facts about one region of a variable fan);
+  - **the regularity hypotheses, predicates of a variable colouring**: `AeColouring.SingLocallyFinite` (`Σ` locally finite; 6
+    sites), `AeColouring.RegJFan`, `AeColouring.RegJLiteral` (REG-J′ in its fan form and in its frozen words; one site each),
+    `AeColouring.IsolatedAt` (the bridge's setting; 3 sites) — each satisfied at the closed instance `sq9`
+    (`sq9_singLocallyFinite`, `sq9_regJFan`, `sq9_isolatedAt` at `sqVertex`), none refuted at one. Whether every honest saturated
+    colouring satisfies the first is the open question C121-REGJ; the theorems take it as a hypothesis and say so;
+  - **the foundation's predicates of set variables** (`Plane/Saturated/Basic`), `GENERIC` at every site, like `UnitPairsNull` and
+    `IsMUA`: `TwoColourOn` (FS111-M-PINCH's hypotheses for two sets on an open set; 16 sites), `TwoColourNhd`, `H1On`, `H2On`,
+    `SaturatedOn` (24 sites), `IsCuspAt`, `IsSplitAt`, `HasTwoDiscsAt`, `IsTangentAt` — inhabited together on `sq9` at `sqEdgePt`
+    (`sq9_twoColourNhd`, `sq9_hasTwoDiscsAt`, `sq9_isTangentAt`, `sq9_tight_saturated`; `isSplitAt_ball_compl_closedBall` for the
+    split type). `IsCuspAt` is refuted over variables only (`sq9_not_isCuspAt`, at every point and colour of `sq9`), which is no
+    evidence to this scan;
+  - **curves and charts, predicates of function and set variables**: `IsUnitCurve` (a unit-speed curve with 1-Lipschitz tangent
+    angle; 33 sites; `isUnitCurve_segment`, `isUnitCurve_circle`), `IsInterfaceChart` (the conclusion of `local_graph`; no binder
+    site; `sq9_exists_isInterfaceChart`), `HasArcChart`, `ArcSetting`, `IsArcOf` (FS131-E8-GAMMA's colour-free setting; 1, 12 and 9
+    sites; inhabited by `AeColouring.arcSetting_of_isolated` at `sq9_isolatedAt`, as `Plane/Saturated/ArcContinuation`'s module
+    docstring says);
+  - **the class `𝒫_k`** (`Plane/Saturated/MapColouring`): `SeparatesAt` (`sq9Map_separatesAt`), `InP`, `OnLevel`, `GFin`,
+    `GrundyBound` — predicates of a variable family of sets; and **`NoPar`, a named open statement consumed as a hypothesis**
+    (C121-NOPAR; `gmap_ii`, `sat_noPar`), proved nowhere and listed at the landing as the hypothesis those two rest on.
+  What this scan reads of the wave (`tools/fs131_l5_vacdiff.py` against wave 10's gated scan: no row lost, none added to a
+  declaration `main` held, no new evidence row): **96 new sites, every one `GENERIC` on `AeColouring` at a variable number of
+  colours** (`Basic` 7, `Fan` 24, `FanArcs` 5, `FanBridge` 46, `FanBuild` 4, `LocalGraph` 7, `MapColouring` 2, `Pinch` 1), and
+  **seven refutations skipped** (`pinch_not_in_in`, `sat_noPar`, `TwoColourOn.false_of_mem_inter`, `false_of_inside_of_outside`,
+  `Fan.horn_false`, `Fan.false_of_horn_next`, `Fan.false_of_horn_dir`), each a step inside a proof by contradiction or a row whose
+  docstring names the model of the hypotheses it does not refute. `sat_noPar` binds `(c : AeColouring 6)` and `(F : ArcMap 6)`;
+  being a refutation it raises no site, and its docstring says that the joint satisfiability of its hypotheses at six colours is
+  the open question. What it cannot see, as before: hypothesis sets that hold together on no object of the library.
+
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
 its reason, in the `UDCert` / `AeColouring` style — IN iff "does one exist" is a theorem rather than a

@@ -1,0 +1,21 @@
+-**Under saturation `RegJFan` is equivalent to `SingLocallyFinite`**, by FS131-E8-BRIDGE ([hand], one mind, until
+-`Plane/Saturated/FanBridge` lands): `regJFan_of_saturated`.
++**Under saturation `RegJFan` is equivalent to `SingLocallyFinite`**, by FS131-E8-BRIDGE (kernel-checked in
++`Plane/Saturated/FanBridge`): `regJFan_of_saturated`.
+-`plans/FS131-E8-derivation.md` §§ 3.1, 3.5 ([hand], one mind, until this module lands), at the class each argument
++`plans/FS131-E8-derivation.md` §§ 3.1, 3.5 (kernel-checked in this module), at the class each argument
+-**Proofs** (FS131-I6C): no `sorry` in this module; `local_graph` rests on two leaves of `Plane/Saturated/Pinch`
++**Proofs** (FS131-I6C): no `sorry` in this module; `local_graph` rests on two theorems of `Plane/Saturated/Pinch`
+-The generic density facts used on the way are stated in the namespace `MapEdge` (names of this module's own: a second line
+-may hold the same facts under other names until the wave's join).
++The generic density facts used on the way are stated in the namespace `MapEdge` (names of this module's own: giving each
++one home with the same facts of other modules is a tidy after wave 6's first landing).
++**Every row above is proved; the module holds no `sorry`**: the rows marked so by the planner, and `pinch`,
++`pinch_not_in_in`, `c11_discs`, `c11_split`, `half_upperDensity`, `TwoColourOn.essBoundary_inter_eq`, `sq9_isTangentAt`
++by FS131-I6A (`plans/FS131-I6A-implementation.md`), with `pinch_interface` and `c11_discs_interface` over them.
++
++`plans/FS131-E8-derivation.md` §§ 3.2–3.7, each entry kernel-checked in this module (no `sorry`)
++  isOpen_polarRegion z (F.cont i) (F.continuousOn_cyclicNext i)
++  isPreconnected_polarRegion z ((F.cont i).mono (Ioo_subset_Ioo_right hρ))
++  refine ⟨polarRegion z F.r lo (cyclicNext F.φ i), isOpen_polarRegion z hlo (F.continuousOn_cyclicNext i),
++locally finite near `z`, by FS131-E8-BRIDGE (kernel-checked: `fan_of_isolated`). Inhabitant:

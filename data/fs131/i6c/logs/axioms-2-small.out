@@ -1,0 +1,38 @@
+=== CONTROL (must show sorryAx) ===
+'HadwigerNelson.Plane.c11_discs' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+=== Curve ===
+'HadwigerNelson.Plane.IsUnitCurve.hasDerivWithinAt_re_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsUnitCurve.hasDerivWithinAt_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsUnitCurve.abs_sub_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsUnitCurve.sin_add_sin_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsUnitCurve.chord' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsUnitCurve.sin_le_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsUnitCurve.strictMonoOn_dist' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsUnitCurve.norm_sub_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsUnitCurve.one_le_dist_of_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsUnitCurve.one_le_dist' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isUnitCurve_circle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.two_sin_le_norm_e_sub_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.lt_mul_of_two_sin_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.le_add_of_chord' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.lipschitzOnWith_of_chord' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsUnitCurve.strictMonoOn_dist_of_le_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== LocalGraph: the three small leaves and their children ===
+'HadwigerNelson.Plane.AeColouring.notMem_essBdry_of_mem_densitySet' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.exists_densitySet_of_notMem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.isOpen_setOf_forall_notMem_essSupport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.mem_densitySet_of_forall_notMem_essSupport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.ae_one_colour_of_isConnected' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeColouring.closure_essBdry_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== WIRED (over local_graph and Pinch's leaves: must show sorryAx) ===
+'HadwigerNelson.Plane.AeColouring.local_graph' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

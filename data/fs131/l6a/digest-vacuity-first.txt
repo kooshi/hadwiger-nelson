@@ -1,0 +1,144 @@
+    scanned: declarations=14299  refutations-skipped=199
+    sites:   sites=1269  vacuous=0  stale=0  declared=3  witnessed=38  generic=1226  unknown=2
+    evidence: 18 emptiness proof(s), 63 witness(es)
+    recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)
+    RECORDED COUNTS ARE STALE in CLAUDE.md § The gate — update it: declarations 13767 → 14299, refutations-skipped 192 → 199, sites 1173 → 1269, generic 1130 → 1226
+    --- witnessed (38), with the evidence behind each ---
+    WITNESSED HadwigerNelson.AritySpec.p5_compels_rainbow :: HadwigerNelson.Compels HadwigerNelson.AritySpec.P5 3 ![1, 3, 4] id [by HadwigerNelson.AritySpec.p5_compels_rainbow]
+    WITNESSED HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsHorn 0 0 (-1) 1 1 [by HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn]
+    WITNESSED HadwigerNelson.Plane.ArcMap.halfDisc_simple :: HadwigerNelson.Plane.halfDisc.Simple [by HadwigerNelson.Plane.ArcMap.halfDisc_simple]
+    WITNESSED HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc :: HadwigerNelson.Plane.ArcMap.l60Frag.IsRingArc 0 0 (Real.pi / 3) 0 1 [by HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.NiceAt 0 [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 5 ![0, 2 * Real.pi / 3, 2 * Real.pi / 3, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 0, 1, 2] [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 3 ![0, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 2] [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt]
+    WITNESSED HadwigerNelson.Plane.awayModel_isRingArc_gap :: HadwigerNelson.Plane.awayModel.IsRingArc HadwigerNelson.Plane.awayP (1 / 5) (3 / 10) 7 0 [by HadwigerNelson.Plane.awayModel_isRingArc_gap]
+    WITNESSED HadwigerNelson.Plane.cuspFrag_isRingArc :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsRingArc Complex.I (-(Real.pi / 2) + 1 / 10) (-(Real.pi / 2) + 2 / 5) 0 1 [by HadwigerNelson.Plane.cuspFrag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.halfDisc_niceAt :: HadwigerNelson.Plane.halfDisc.NiceAt 0 [by HadwigerNelson.Plane.halfDisc_niceAt]
+    WITNESSED HadwigerNelson.Plane.halfDisc_sectorsAt :: HadwigerNelson.Plane.halfDisc.SectorsAt 0 2 ![0, Real.pi, 2 * Real.pi] ![1, 0] [by HadwigerNelson.Plane.halfDisc_sectorsAt]
+    WITNESSED HadwigerNelson.Plane.halfPlane2_isChangePoint :: HadwigerNelson.Plane.halfPlane2.IsChangePoint 0 0 1 0 [by HadwigerNelson.Plane.halfPlane2_isChangePoint]
+    WITNESSED HadwigerNelson.Plane.hornModel_isHorn :: HadwigerNelson.Plane.hornModel.IsHorn HadwigerNelson.Plane.plantPt 0 (-1 / 2) (1 / 2) 7 [by HadwigerNelson.Plane.hornModel_isHorn]
+    WITNESSED HadwigerNelson.Plane.quadRing_isQArc :: HadwigerNelson.Plane.quadRing.IsQArc 0 0 (Real.pi / 2) [by HadwigerNelson.Plane.quadRing_isQArc]
+    WITNESSED HadwigerNelson.Plane.quadRing_isRingArc :: HadwigerNelson.Plane.quadRing.IsRingArc 0 0 (Real.pi / 2) 0 2 [by HadwigerNelson.Plane.quadRing_isRingArc]
+    WITNESSED HadwigerNelson.Plane.sevenBrickRegions :: HadwigerNelson.Plane.AeProperRegions 7 [by HadwigerNelson.Plane.sevenBrickRegions]
+    WITNESSED HadwigerNelson.Plane.sixFrag_isRingArc :: HadwigerNelson.Plane.sixFrag.IsRingArc 0 0 (Real.pi / 6) 0 2 [by HadwigerNelson.Plane.sixFrag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.sq9 :: HadwigerNelson.Plane.AeColouring 9 [by HadwigerNelson.Plane.sq9]
+    WITNESSED HadwigerNelson.Plane.stuckModel_isHorn_pi :: HadwigerNelson.Plane.stuckModel.IsHorn HadwigerNelson.Plane.plantPt (0 + Real.pi) (-1) 1 9 [by HadwigerNelson.Plane.stuckModel_isHorn_pi]
+    WITNESSED HadwigerNelson.Plane.stuckModel_isStuck :: HadwigerNelson.Plane.stuckModel.IsStuck HadwigerNelson.Plane.plantPt [by HadwigerNelson.Plane.stuckModel_isStuck]
+    WITNESSED HadwigerNelson.StationaryRatio.StationarySet.parity :: HadwigerNelson.StationaryRatio.StationarySet (ZMod 2) [by HadwigerNelson.StationaryRatio.StationarySet.parity]
+    WITNESSED HadwigerNelson.core122_pigeonhole :: (HadwigerNelson.edgeGraph 122 HadwigerNelson.core122Edges).Coloring (Fin 4) [by HadwigerNelson.core122_colorable_four]
+    WITNESSED HadwigerNelson.core9_pigeonhole :: (HadwigerNelson.edgeGraph 9 HadwigerNelson.core9Edges).Coloring (Fin 4) [by HadwigerNelson.core9_colorable_four]
+    WITNESSED HadwigerNelson.finitePlane11Colouring.toColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+    WITNESSED HadwigerNelson.finitePlane11DoubleGapColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+    WITNESSED HadwigerNelson.finitePlane19QuotColoring :: (HadwigerNelson.finitePlane 19).Coloring (Fin 5) [by HadwigerNelson.finitePlane19QuotColoring]
+    WITNESSED HadwigerNelson.finitePlane3Colouring.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+    WITNESSED HadwigerNelson.finitePlane3ColouringDiff.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+    WITNESSED HadwigerNelson.finitePlane7QuotColoring :: (HadwigerNelson.finitePlane 7).Coloring (Fin 4) [by HadwigerNelson.finitePlane7QuotColoring]
+    WITNESSED HadwigerNelson.hexColoring :: (SimpleGraph.cycleGraph 6).Coloring (Fin 3) [by HadwigerNelson.hexColoring]
+    WITNESSED HadwigerNelson.pathColoring3 :: (SimpleGraph.pathGraph 3).Coloring (Fin 3) [by HadwigerNelson.pathColoring3]
+    WITNESSED HadwigerNelson.pathGraph_additivelyRigid :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+    WITNESSED HadwigerNelson.pathGraph_three_coloring_two :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+    WITNESSED HadwigerNelson.rhombus_forces :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+    WITNESSED HadwigerNelson.rhombus_forces_of_gadget :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+    WITNESSED HadwigerNelson.twoAdicFiveColouring :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    WITNESSED HadwigerNelson.twoAdicFive_forces_delta :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    WITNESSED HadwigerNelson.twoAdicFive_forces_of_ker :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    --- changes since the previous complete run ---
+    previous: data/fs131/l10a/receipt-vacuity-first.log
+    counts: declarations 13767 → 14299, refutations-skipped 192 → 199, sites 1173 → 1269, generic 1130 → 1226
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.HasHorn :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.HasSector :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.branch :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.branch_contacts :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.branch_outside_discs :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.branch_subset :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.branch_subset_interfaceSet :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.cell :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.cell.eq_1 :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.cell_subset_densitySet :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.col_ne :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.col_ne_aux :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.contacts_of_no_common :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.continuousOn_cyclicNext :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.dir_le_dir_add_two_pi :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.dir_le_nextDir :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.dir_mono :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.dist_eq_one_of_common_contact :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.eq_add_or_eq_sub_of_dist_eq_one :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_contact_dir :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_contact_nextDir :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_isOpen_ae_two_colours :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_isOpen_subset_cells :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_lower_of_pred :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_pred_branch :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_ray_subset_cell :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_succ_branch :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_twoColourNhd_branch :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_unitCurve_branch :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.finite_arcs_meeting_ball :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.hasSector_or_hasHorn :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.isOpen_cell :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.isPreconnected_cell :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.isPreconnected_polarRegion_of_le :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.mem_closure_polarRegion_of_le :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.mk.inj :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.mk.injEq :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.mk.sizeOf_spec :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.nextDir :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.nextDir.eq_1 :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.nextDir_le_dir :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.nextDir_le_dir_add_two_pi :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_alone :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_constraints :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_side :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_side_dir :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_side_next :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_unique :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.tendsto_cyclicNext :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.two_le_n :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.φ_lt_cyclicNext :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.IsolatedAt :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.RegJFan :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.RegJFan.singLocallyFinite :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.RegJLiteral :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.RegJLiteral.singLocallyFinite :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.SingLocallyFinite :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.SingLocallyFinite.exists_ball_subset :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.ae_one_colour_of_isConnected :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.alpha :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.arcSetting_of_isolated :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.arcsAt :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.beta :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.closure_essBdry_subset :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.eq_or_eq_of_mem_essClosure :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.essBdry :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_arc_of_isolated :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_densitySet_of_notMem :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_fan_of_isolated :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_polarGraph_of_isolated :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.fan_of_isolated :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.finite_arcs_of_bounded :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.finite_arcs_of_isBounded :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.finite_components_of_isolated :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.gamma :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.hasArcChart :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.interfaceSet :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.isOpen_openPart :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.isOpen_setOf_forall_notMem_essSupport :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.local_graph :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.mem_densitySet_of_forall_notMem_essSupport :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.notMem_essBdry_of_mem_densitySet :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.openPart :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.openPart_subset_densitySet :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.regJFan_iff_singLocallyFinite :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.regJFan_of_saturated :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.regJLiteral_of_locallyFinite :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.regJLiteral_of_saturated :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.saturated_of_idomatic :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.singularSet :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.twoColourNhd_of_h1 :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.twoColourNhd_of_halves :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.volume_essBdry :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.sat_bound_of_mem_closure :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.sat_inP :: HadwigerNelson.Plane.AeColouring k
+    every site and piece of evidence: rg '^(SITE|EVIDENCE) ' data/fs131/l6a/receipt-vacuity-first.log
