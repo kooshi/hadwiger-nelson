@@ -5781,6 +5781,16 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.surgery_cleanKeep_localStep
 #print axioms HadwigerNelson.Plane.ArcMap.ProcInv.refl
 
+-- FS131-IS1: `stuckRun_ne_univ`'s children — N4-SHADOW's two inequalities (`Plane/ValidMap/HornShadow`), the chain's colours and bounds
+-- and the recursion (`Plane/ValidMap/Terminal`); `stuckRun_ne_univ` itself is recorded with KL1's block above
+#print axioms HadwigerNelson.Plane.ArcMap.le_curvDown_of_flankBelow_of_horn
+#print axioms HadwigerNelson.Plane.ArcMap.curvUp_le_of_horn_of_flankAbove
+#print axioms HadwigerNelson.Plane.ArcMap.horn_colour_eq_of_isChainVertex
+#print axioms HadwigerNelson.Plane.ArcMap.eq_horn_colour_of_two_sectors
+#print axioms HadwigerNelson.Plane.ArcMap.horn_upper_ne_one
+#print axioms HadwigerNelson.Plane.ArcMap.horn_lower_ne_neg_one
+#print axioms HadwigerNelson.Plane.ArcMap.shadow_recursion
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

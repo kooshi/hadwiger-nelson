@@ -7,6 +7,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.FlankUA
 import Proofs.HadwigerNelson.Plane.ValidMap.HornShadow
 import Proofs.HadwigerNelson.Plane.ValidMap.Procedure
 import Proofs.HadwigerNelson.Plane.ValidMap.HexRing
+import Proofs.HadwigerNelson.Plane.StuckChain
 
 /-!
 # The terminal modification `M*` and the stuck chains' ends (FS112-N2-TERM, -C-ENDS, -C-DOUBLE, FS114-CV-HD)
@@ -3583,15 +3584,180 @@ theorem run_hornBoundsQR {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : �
   exact ⟨hornBoundsQR_of_isChainVertex hM (isChainVertex_of_mem_stuckRun hj) α,
     hornBoundsQR_of_isChainVertex hM (isChainVertex_of_mem_stuckRun hj) (α + π)⟩
 
+/-! ### The stuck chain's colours and bounds, and N4-SHADOW's recursion (FS131-IS1) -/
+
+/-- **All horns at a chain vertex have one colour**: at a stuck vertex with at most three colours, a horn of any colour along any
+direction has the colour of `stuck_structure_ua`'s two horns — the chart has four germs, and a sector between two germs of one direction
+is one of those two (`BranchGerms.horn_cases_four`, as in `horn_flanks_of_isChainVertex`). Inhabitant of the hypotheses: `bowtie` at `0`
+(`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`). -/
+theorem horn_colour_eq_of_isChainVertex (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1) (hw : F.IsChainVertex w)
+    {β a b β' a' b' : ℝ} {d d' : Fin k} (H : F.IsHorn w β a b d) (H' : F.IsHorn w β' a' b' d') : d = d' := by
+  obtain ⟨hst, h3⟩ := hw
+  obtain ⟨c, m, hm, hc⟩ := hst.2.2.2
+  obtain ⟨α₀, κ₁, κ₂, κ₃, κ₄, g, h, Hu, Hd, -, -, -, -, -, hdeg, -⟩ := stuck_structure_ua hF hv hst h3 hm hc
+  have hwd : w ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  obtain ⟨X⟩ := exists_near hwd
+  -- the chart has four germs: the degree is `4`
+  have hn4 : X.n = 4 := by
+    obtain ⟨r, h1, h2⟩ := (hdeg.and X.hC.hasDegree).exists
+    rw [h1] at h2
+    have : (4 : ℕ) = max X.n 1 := by exact_mod_cast h2
+    omega
+  obtain ⟨iu, hβu, hnβu, -, -, hcu, -⟩ := X.horn_index Hu
+  obtain ⟨ip, hβp, hnβp, -, -, hcp, -⟩ := X.horn_index Hd
+  classical
+  let P : Fin X.n → Bool := fun j => decide (e (X.G.β j) = e α₀)
+  have hnext : ∀ j, X.G.nextβ j = X.G.β j → e (X.G.β (BranchGerms.next j)) = e (X.G.β j) := fun j hj => by
+    rw [← BranchGerms.e_nextβ, hj]
+  have hpne : e (α₀ + π) ≠ e α₀ := e_add_pi_ne α₀
+  have hPu : P iu = true := by simp [P, hβu]
+  have hPu' : P (BranchGerms.next iu) = true := by simp [P, hnext iu hnβu, hβu]
+  have hPp : P ip = false := by simp [P, hβp, hpne]
+  have hPp' : P (BranchGerms.next ip) = false := by simp [P, hnext ip hnβp, hβp, hpne]
+  -- every horn's colour is `c`
+  have key : ∀ {γ p q : ℝ} {j : Fin k}, F.IsHorn w γ p q j → j = c := by
+    intro γ p q j Hj
+    obtain ⟨i, -, hnβi, -, -, hci, -⟩ := X.horn_index Hj
+    have hPi : P (BranchGerms.next i) = P i := by simp [P, hnext i hnβi]
+    rcases BranchGerms.horn_cases_four hn4 P iu ip i hPu hPu' hPp hPp' hPi with rfl | rfl
+    · exact hci.symm.trans hcu
+    · exact hci.symm.trans hcp
+  exact (key H).trans (key H').symm
+
+/-- **A colour carried twice at a chain vertex is the colour of its horns**: a colour with at least two sectors at a stuck vertex has a
+horn there (N4-STUCK (i), `stuck_horns_ua`), and all horns at a chain vertex have one colour (`horn_colour_eq_of_isChainVertex`).
+Inhabitant of the hypotheses: `bowtie` at `0`, the horn's own colour. -/
+theorem eq_horn_colour_of_two_sectors (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1) (hw : F.IsChainVertex w)
+    {β a b : ℝ} {d j : Fin k} (H : F.IsHorn w β a b d)
+    (h2 : ∀ᶠ r in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf w r j).encard) : j = d := by
+  have hwd : w ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  obtain ⟨m, hm⟩ := exists_hasSectors hwd j
+  have hm2 : 2 ≤ m := by
+    obtain ⟨r, hr1, hr2⟩ := (hm.and h2).exists
+    have : (2 : ℕ∞) ≤ m := hr1 ▸ hr2
+    exact_mod_cast this
+  obtain ⟨β', μ₁, μ₂, μ₃, μ₄, Hu, -⟩ := stuck_horns_ua hF hv hw.1 hm2 hm
+  exact horn_colour_eq_of_isChainVertex hF hv hw Hu H
+
+/-- **No upper horn bound is `1` below a chain vertex**: in a terminal map, at a chain vertex `w` whose neighbour `N = w + n`
+(`n = e (β + π/2)`) is a chain vertex, a horn along `e β` has upper bound `≠ 1` — a bound `1` is the start of a (Q) or (R2) arc of
+`ω(N)` (`hornBoundsQR_of_isChainVertex`), an arc of `Γ` centred at the chain vertex `N`, which centres none (`cv_l0`). No model of two
+neighbouring chain vertices in a terminal valid plane map is known (`GENERIC`, FS-115). -/
+theorem horn_upper_ne_one (hM : F.IsTerminalMap) {w : ℂ} {β : ℝ} (hw : F.IsChainVertex w)
+    (hN : F.IsChainVertex (w + e (β + π / 2))) {a b : ℝ} {d : Fin k} (H : F.IsHorn w β a b d) : b ≠ 1 := by
+  rintro rfl
+  obtain ⟨θ₂, hθ, hQR⟩ := (hornBoundsQR_of_isChainVertex hM hw β).1 a d H
+  have hR : ∃ c c', F.IsRingArc (w + e (β + π / 2)) (β - π / 2) θ₂ c c' := by
+    rcases hQR with ⟨c, c', hR, -⟩ | ⟨c, c', hR, -⟩ <;> exact ⟨c, c', hR⟩
+  obtain ⟨c, c', hR⟩ := hR
+  exact (cv_l0 hM hN.1 hN.2).1 (ringPt (w + e (β + π / 2)) (β - π / 2))
+    ⟨β - π / 2, θ₂, hθ, ⟨β - π / 2, ⟨le_rfl, hθ.le⟩, rfl⟩, hR.2.1⟩
+
+/-- **No lower horn bound is `−1` above a chain vertex** (the mirror of `horn_upper_ne_one`): at a chain vertex `w` of a terminal map
+whose neighbour `S = w − n` is a chain vertex, a horn along `e β` has lower bound `≠ −1`. No model known (`GENERIC`, FS-115). -/
+theorem horn_lower_ne_neg_one (hM : F.IsTerminalMap) {w : ℂ} {β : ℝ} (hw : F.IsChainVertex w)
+    (hS : F.IsChainVertex (w - e (β + π / 2))) {a b : ℝ} {d : Fin k} (H : F.IsHorn w β a b d) : a ≠ -1 := by
+  rintro rfl
+  obtain ⟨θ₁, hθ, hQR⟩ := (hornBoundsQR_of_isChainVertex hM hw β).2 b d H
+  have hR : ∃ c c', F.IsRingArc (w - e (β + π / 2)) θ₁ (β + π / 2) c c' := by
+    rcases hQR with ⟨c, c', hR, -⟩ | ⟨c, c', hR, -⟩ <;> exact ⟨c, c', hR⟩
+  obtain ⟨c, c', hR⟩ := hR
+  exact (cv_l0 hM hS.1 hS.2).1 (ringPt (w - e (β + π / 2)) θ₁)
+    ⟨θ₁, β + π / 2, hθ, ⟨θ₁, ⟨le_rfl, hθ.le⟩, rfl⟩, hR.2.1⟩
+
+/-- **FS110-N4-SHADOW's recursion between two neighbouring chain vertices** (`plans/FS110-N-proof.md` § Continuation — FS110-N4, § 2.6:
+`λ_k ≤ f(λ_{k+1})` and `f̃(υ_{k−1}) ≤ υ_k`; `plans/FS110-derivation.md`, FS110-N4-SHADOW: "curvature `f(λ) = λ/(1 + λ)` going down,
+`f̃(υ) = υ/(1 − υ)` going up"). In a terminal valid six-coloured map, let `w` and `N = w + n` (`n = e (α + π/2)`) be chain vertices with
+horns along `e α`, between the upward curvatures `a < b` at `w` and `a' < b'` at `N`. Then `a ≤ f(a')` and `f̃(b) ≤ b'` — with `w = P_k`,
+`N = P_{k+1}`: `λ_k ≤ f(λ_{k+1})`, and `f̃(υ_k) ≤ υ_{k+1}`, which is N4-FIN's second inequality at the index `k + 1`. Read against the hand
+statement: there the chain is given (N4-PROP) under Condition 5, the bounds lie in `(−1, 1)`, and the horn at `P_{k+1}` has the colour of
+`P_k`'s lower flank by N4-STUCK (iv); here unit arcs are allowed, no run is assumed — two neighbouring chain vertices suffice — and each
+step is derived: no bound between the two vertices is `±1` (`horn_upper_ne_one`, `horn_lower_ne_neg_one`), so CV-CLASS at each is not the
+bowtie (`cv_class`): the lower flank of `w` is carried twice at `N` and the upper flank of `N` twice at `w`, hence each is the other
+vertex's horn colour (`eq_horn_colour_of_two_sectors`); then validity against the horn's shadow at the pole
+(`le_curvDown_of_flankBelow_of_horn`, `curvUp_le_of_horn_of_flankAbove`, over SH2). A step of `stuckRun_ne_univ`'s refutation; no model of
+two neighbouring chain vertices in a terminal valid plane map is known (`GENERIC`, FS-115). -/
+theorem shadow_recursion {F : ArcMap 6} (hM : F.IsTerminalMap) {w : ℂ} {α : ℝ} (hw : F.IsChainVertex w)
+    (hN : F.IsChainVertex (w + e (α + π / 2))) {a b a' b' : ℝ} {d d' : Fin 6} (H : F.IsHorn w α a b d)
+    (H' : F.IsHorn (w + e (α + π / 2)) α a' b' d') :
+    a ≤ curvDown a' ∧ curvUp b ≤ b' := by
+  obtain ⟨hF, hP, -, -⟩ := id hM
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  have hNS : w + e (α + π / 2) - e (α + π / 2) = w := by ring
+  -- the structure at `w`
+  obtain ⟨hd2, g, h, hg, hh⟩ := horn_flanks_of_isChainVertex hF (hvC w) hw H
+  obtain ⟨κ₃, κ₄, Hd, -, -⟩ := exists_horn_add_pi_of_stuck hF (hvC w) hw.1 hd2 H
+  obtain ⟨h1, h2⟩ := horn_bounds_of_noMerge hF (hvC w) hw.1.1 le_rfl hd2 H
+  obtain ⟨-, -, -, -, -, -, -, -, -, h3w, -, -⟩ := stuck_structure_at_axis hF (hvC w) hw.1 hw.2 le_rfl hd2 H
+  -- the structure at `N = w + n`
+  obtain ⟨hd2', g', h', hg', hh'⟩ := horn_flanks_of_isChainVertex hF (hvC _) hN H'
+  obtain ⟨μ₃, μ₄, Hd', -, -⟩ := exists_horn_add_pi_of_stuck hF (hvC _) hN.1 hd2' H'
+  obtain ⟨h1', h2'⟩ := horn_bounds_of_noMerge hF (hvC _) hN.1.1 le_rfl hd2' H'
+  obtain ⟨-, -, -, -, -, -, -, -, -, h3N, -, -⟩ := stuck_structure_at_axis hF (hvC _) hN.1 hN.2 le_rfl hd2' H'
+  -- no bound `±1` between two chain vertices
+  have hb : b ≠ 1 := horn_upper_ne_one hM hw hN H
+  have ha' : a' ≠ -1 := horn_lower_ne_neg_one hM hN (by rw [hNS]; exact hw) H'
+  -- CV-CLASS at `w` is not the bowtie: the lower flank `h` is carried twice at `N`, so it is the horn's colour there
+  have hhd' : h = d' := by
+    rcases cv_class hM hw.1 h3w hd2 H Hd hg hh with ⟨hk2, -⟩ | ⟨-, hhN, -, -⟩
+    · exact absurd hk2 hb
+    · exact eq_horn_colour_of_two_sectors hF (hvC _) hN H' hhN
+  -- CV-CLASS at `N` likewise: the upper flank `g'` is carried twice at `N − n = w`, so it is the horn's colour there
+  have hg'd : g' = d := by
+    rcases cv_class hM hN.1 h3N hd2' H' Hd' hg' hh' with ⟨-, -, hk1, -⟩ | ⟨hgS, -, -, -⟩
+    · exact absurd hk1 ha'
+    · rw [hNS] at hgS
+      exact eq_horn_colour_of_two_sectors hF (hvC w) hw H hgS
+  subst hhd' hg'd
+  exact ⟨le_curvDown_of_flankBelow_of_horn hF hh H' (lt_of_le_of_ne h1' (Ne.symm ha')) h2',
+    curvUp_le_of_horn_of_flankAbove hF H hg' h1 (lt_of_le_of_ne h2 hb)⟩
+
 /-- **N2-TERM's clause 3, finiteness, in every terminal six-map: no stuck run is bi-infinite** (FS110-N4-FIN under unit arcs,
-FS112-N2-RAY). Along a bi-infinite run every vertex is stuck along `±e α` (`stuckAlong_of_mem_stuckRun`); no horn bound is `±1`, for
-its arc would be a unit arc centred at the neighbouring chain vertex, which centres none (`cv_l0`); so the bounds `λ_j < υ_j` lie in
-`(−1, 1)` and satisfy N4-SHADOW's `λ_j ≤ f(λ_{j+1})`, `f̃(υ_{j−1}) ≤ υ_j` (no SHAVE at a stuck vertex: the horn is doubly shadowed by
-its flanks, whose shadows at the next vertex are the concentric circles, `shadow_hornSet_subset_S`/`_N`), which `n4_fin` refutes.
-No model expected (`GENERIC`, FS-115). -/
+FS112-N2-RAY). Along a bi-infinite run every vertex is stuck along `±e α` (`stuckAlong_of_mem_stuckRun`), so it carries a horn along
+`e α`, with bounds `λ_j < υ_j`; no horn bound is `±1`, for its arc would be a unit arc centred at the neighbouring chain vertex, which
+centres none (`horn_upper_ne_one`, `horn_lower_ne_neg_one`, over `cv_l0`); so the bounds lie in `(−1, 1)` and satisfy N4-SHADOW's
+`λ_j ≤ f(λ_{j+1})`, `f̃(υ_{j−1}) ≤ υ_j` (`shadow_recursion`: each vertex's flank is the next vertex's horn colour, and validity keeps it
+out of that horn's shadow, the concentric circle of SH2), which `n4_fin` refutes. The colour count `h3` at `v` is not read: on a
+bi-infinite run `v` is a chain vertex already. No model expected (`GENERIC`, FS-115). -/
 theorem stuckRun_ne_univ {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : ℝ} (hv : F.StuckAlong v α)
     (h3 : (F.coloursAt v).ncard ≤ 3) : F.stuckRun v α ≠ univ := by
-  sorry
+  -- the colour count at `v` is not read: on a bi-infinite run `v` is a chain vertex already
+  have _ := h3
+  intro hU
+  obtain ⟨hF, hP, -, -⟩ := id hM
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  have hrun : ∀ j : ℤ, j ∈ F.stuckRun v α := fun j => hU ▸ mem_univ j
+  have hcv : ∀ j : ℤ, F.IsChainVertex (v + (j : ℂ) * e (α + π / 2)) := fun j =>
+    isChainVertex_of_mem_stuckRun (hrun j)
+  -- a horn along `e α` at every vertex of the line
+  have hhorn : ∀ j : ℤ, ∃ a b : ℝ, ∃ d : Fin 6, F.IsHorn (v + (j : ℂ) * e (α + π / 2)) α a b d := by
+    intro j
+    rcases stuckAlong_of_mem_stuckRun hF hP hv (hrun j) with
+      ⟨-, c, m, κ₁, κ₂, -, -, hH⟩ | ⟨hst, c, m, κ₁, κ₂, hm, hc, hH⟩
+    · exact ⟨κ₁, κ₂, c, hH⟩
+    · obtain ⟨-, -, κ₃, κ₄, -, -, -, hH', -⟩ := stuck_structure_at_axis hF (hvC _) hst (hcv j).2 hm hc hH
+      exact ⟨κ₃, κ₄, c, hH'.congr (e_add_pi_add_pi α)⟩
+  choose l u c H using hhorn
+  have hstep : ∀ j : ℤ,
+      v + ((j + 1 : ℤ) : ℂ) * e (α + π / 2) = v + (j : ℂ) * e (α + π / 2) + e (α + π / 2) := fun j => by
+    push_cast; ring
+  have hback : ∀ j : ℤ,
+      v + ((j - 1 : ℤ) : ℂ) * e (α + π / 2) = v + (j : ℂ) * e (α + π / 2) - e (α + π / 2) := fun j => by
+    push_cast; ring
+  -- N4-SHADOW's two inequalities between consecutive vertices
+  have hrec : ∀ j : ℤ, l j ≤ curvDown (l (j + 1)) ∧ curvUp (u j) ≤ u (j + 1) := fun j =>
+    shadow_recursion hM (hcv j) (by rw [← hstep j]; exact hcv (j + 1)) (H j) (by rw [← hstep j]; exact H (j + 1))
+  -- the bounds lie in `[−1, 1]` and are not `±1`
+  have hbd : ∀ j : ℤ, -1 < l j ∧ u j < 1 := fun j => by
+    obtain ⟨hd2, -⟩ := horn_flanks_of_isChainVertex hF (hvC _) (hcv j) (H j)
+    obtain ⟨h1, h2⟩ := horn_bounds_of_noMerge hF (hvC _) (hcv j).1.1 le_rfl hd2 (H j)
+    have hl : l j ≠ -1 := horn_lower_ne_neg_one hM (hcv j) (by rw [← hback j]; exact hcv (j - 1)) (H j)
+    have hu : u j ≠ 1 := horn_upper_ne_one hM (hcv j) (by rw [← hstep j]; exact hcv (j + 1)) (H j)
+    exact ⟨lt_of_le_of_ne h1 (Ne.symm hl), lt_of_le_of_ne h2 hu⟩
+  -- FS110-N4-FIN
+  refine n4_fin ⟨l, u, fun k => ⟨(hbd k).1, (H k).1, (hbd k).2, (hrec k).1, ?_⟩⟩
+  have := (hrec (k - 1)).2
+  rwa [sub_add_cancel] at this
 
 /-! ## FS112-N2-TERM, with FS112-N2-RED as its lemma -/
 
