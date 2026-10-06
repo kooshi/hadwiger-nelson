@@ -1,0 +1,20 @@
+MATCH  | CLAUDE.md | Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a
+MATCH  | FS131-close-inventory.md | 484. **FS131-K10 done at its Stage 5: wave 10 planned — dispositions for all fourteen rows
+MATCH  | FS131-close-inventory.md | 485. **Rulings on K10's held items, and its slot.** (a) **Three implementers by file, as i
+MATCH  | FS131-close-inventory.md | 493. **FS131-I10A done: all nine leaves of wave 10's first file pair proved — `SpectralInp
+MATCH  | FS131-close-inventory.md | 494. **Rulings on I10A's held items, and its slot.** (a) **The two unread instance argumen
+MATCH  | FS131-close-inventory.md | 491. **FS131-E8 done: nine entries derived, none stalled — the bridge (item 490, its §§ 3.
+MATCH  | FS131-close-inventory.md | 492. **Rulings on E8's held items, and its slot.** (a) **REG-J′ and C121-REGJ keep their f
+MATCH  | FS131-kernel-plan.md | ### 7.3 What each wave's planning job must hold
+MATCH  | FS131-kernel-plan.md | 3. **States every row at the class its argument reads** (G92), reports each widening to Ke
+MATCH  | FS131-kernel-plan.md | 4. **Names every hypothesis from outside the backlog** in the declaration's docstring and 
+MATCH  | FS131-w10-kernel-plan.md | ### 3.3 The rows not stated, and what stating them needs
+MATCH  | FS131-w10-kernel-plan.md | - **J45-N1 (a), (b)**: the topology `τ′_S` on `R = unitRing F` as an infimum of three indu
+MATCH  | FS131-w10-kernel-plan.md | - **J45-SI-J**: complex `L²`, spectral measures of vectors, the spectral measure of a tens
+MATCH  | FS131-w10-kernel-plan.md | - **J45-SI-5**: SI-J, SI-3 (not a row), rotation by `U`, and the frequency argument "its c
+MATCH  | FS131-w10-kernel-plan.md | - **J45-SI-C**: SI-J with no `c₂`, and four finite facts about `γ = ⌊4(2x + 3y)/7⌋` on `Γ₇
+MATCH  | FS131-w10-kernel-plan.md | **What proving the floor in Lean would take** (Keryx's ask; a candidate row for a later wa
+MATCH  | FS131-E8-derivation.md | derivation: FS131-E8-SI5C
+MATCH  | FS131-E8-derivation.md |   handoff: de Bruijn — it replaces "ergodic averages along a tempered Følner sequence" in 
+MATCH  | FS131-I10A-implementation.md | 2. **`sp_if`'s hypothesis `hcirc : I.NegCircle` has no model in the file.** The plan's § 5
+MATCH  | FS131-I10A-implementation.md | 3. **To apply `si4_equivariant` to `𝒜 = factorSigma`** one needs `(factorSigma T hT l).com
