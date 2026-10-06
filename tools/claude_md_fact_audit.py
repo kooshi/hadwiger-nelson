@@ -670,6 +670,7 @@ GATE_CHANGES: dict[tuple, str] = {
     (("2512", "5"), ("3376", "5")): "FS-131 wave 4's landing (FS131-G4; .claude/worktrees/fs131-w4/build/gate/axioms/20261005T030529Z-856603.log, gated commit 5816a11a): 3,397 records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases",
     (("3376", "5"), ("3633", "5")): "FS-131 Woodall's landing (FS131-WL1; .claude/worktrees/fs131-ww/build/gate/axioms/20261005T041304Z-1297413.log, copy data/fs131/wl/axioms-receipt-final.log, gated commit 08e64ae5): 3,654 records, 3,633 clean, 12 axiom-free, 4 imported, 5 purchases",
     (("3633", "5"), ("3784", "5")): "FS-131 MERGE's landing (FS131-ML1; .claude/worktrees/fs131-w4mm/build/gate/axioms/20261005T092312Z-2984691.log, copy data/fs131/ml/axioms-receipt-final.log, gated commit df473bfe): 3,807 records, 3,784 clean, 14 axiom-free, 4 imported, 5 purchases",
+    (("3784", "5"), ("3889", "5")): "FS-131 OPEN's landing (FS131-OL1; .claude/worktrees/fs131-wop/build/gate/axioms/20261006T030550Z-413723.log, copy data/fs131/ol/axioms-receipt-landed.log, gated commit 68670175): 3,912 records, 3,889 clean, 14 axiom-free, 4 imported, 5 purchases",
 }
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")

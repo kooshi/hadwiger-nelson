@@ -3721,3 +3721,39 @@ reason by the close.*
      just keep it local […]."* Filed: `.claude/output-styles/keryx.md` § The filing's Proof Atlas line now says rebuilt and
      kept local, nothing published; the memory `proof-atlas-keep-current` carries it. **For this milestone's filing**: the atlas is rebuilt and committed, not
      republished; the report to Kooshi says the page at the old link is stale.
+414. **OPEN LANDED on `main`, held in the kernel: FS131-OL1 done** (harness ≈ 342k by the task notice; record `plans/FS131-IO-implementation.md`, Stages 16–20
+     and "Drafts for the front page (FS131-OL1)", on `main`; report `data/fs131/reports/FS131-OL1.md`; commits `f8c6173e`, `dff76573`, `3b7a42df`, `92529c5c`,
+     `5b014f02`, `68670175` (the gated commit, `main` at `a01002f8` merged in), `7470222e` (the landing), `a94f30e7`, `7189bdcf`). **`ArcMap.exists_open`
+     (`Plane/ValidMap/OpenMove`) — [kernel], exactly the standard three, no outside theorem** — read by OL1 against FS131-E6-OPEN clause for clause: it is
+     E6-OPEN **in its lone form** (`h1 : F.HasSectors v c 1`, ruling 392 (a)), not for a horn whose colour has further sectors at `v`. `OpenMove`: 105
+     records, 103 on exactly the standard three, 2 on fewer. **The gate on `68670175`**: axioms 3,912 records, 3,889 clean, 14 axiom-free, 4 imported, 5
+     purchases (105 added since MERGE's landing, each CLEAN, none removed or changed), self-test 23 of 23; vacuity `declarations=11173 refutations-skipped=118
+     sites=784`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=747 unknown=2` (14 sites added, all `SITE GENERIC` on `OpenMove` declarations), self-test
+     62 of 62; build 0 warnings; 0 `sorry` in `Proofs/`; architecture PASS. No carrier added (`HasHornCount`, `Near.OpenConfig` OUT, by the procedure in
+     `scripts/Vacuity.lean`). **Prediction scored**: OL1's 13 counts, written before the first gate run (`data/fs131/ol/prediction.txt`), met exactly.
+     **Receipt** (Keryx): the main tree pulled by fast-forward to `7189bdcf`; `a20bb6f5` is its ancestor; `git diff --name-only 68670175 HEAD` names only
+     `data/` and `plans/`; the committed gate logs are byte-identical (`cmp`) to the worktree's `build/gate/axioms/20261006T030550Z-413723.log` and
+     `build/gate/vacuity/20261006T030742Z-427710.log`; `scripts/gate_report.py axioms` and `vacuity` re-run by Keryx against MERGE's logs give the counts
+     above; `sorry` by grep over `Proofs/` 0. **Filed** (this commit, drafts 1, 2, 4 verbatim; draft 3 was landed by OL1; `LEAN.md` unchanged): `CLAUDE.md`
+     § Trust ledger and § The gate, `GATE_CHANGES` in `tools/claude_md_fact_audit.py`; after filing both digests read "match"; the fact audit against
+     `3ff3ea7b` loses only MERGE's superseded counts, date and job id (15 tokens). **Corrections owed** (for the filing): E6's record block `derivation:
+     e6-open`'s "not claimed … that the horn's colour has one sector" (the kernel statement needs it; with item 391's); E6-OPEN regraded to [kernel] in its
+     lone form (OL1's draft 6). **Gate-rule gap, not a falsity** (OL1): no map of the library satisfies `exists_open`'s hypotheses together, and the per-binder
+     vacuity scan cannot see a conjunction across binders — the model owed by item 408. **Tool defect** (IO2's, found by OL1): `tools/fs131_io_axioms.py`'s
+     summary prints `std=105` (its class is "within the standard three"). **Finding, OL1's**: `lake lint` (the environment linters, `lakefile.toml`'s lint
+     driver) has been run by no FS-131 landing; "linters silent" was read from the build's warnings. Credit: OL1, for a landing predicted to the row and for
+     the linter finding.
+415. **Rulings on OL1's held items, and its slot.** (a) **Dates in filed counts are the gate logs' UTC date** (as the inventory's). (b) **A landing's
+     exemption from re-running the gate** covers commits that touch only `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md` and `LEDGER.md` (files no gate
+     reads); OL1 re-ran the gate when my commit `a01002f8` touched `.claude/output-styles/keryx.md`, rightly under its brief. Later landing briefs carry this
+     list; and I commit nothing else to `main` while a landing is in flight. (c) **`lake lint` is the gate's "linters silent" item and runs once at the
+     milestone's close**, right after the green build, under the slot, with a firing control — the precedent of M2's close
+     (`data/crunch-2026-09-25/briefs/J23b-M2-close-math.md`, "the owner's ruling: it runs at M2's close only"); landings go on reading the build's warnings,
+     and their briefs say so. Alternative weighed: run it at every landing. Why: the precedent, and it starts Lake outside `scripts/build.sh`. **But
+     FS-131 has added several thousand declarations with it never run**, so its size is measured now, not found at the close: (d) **OL1's slot → FS131-LN1,
+     a short measurement job** in the idle tree `fs131-wop` (now `main`): `lake lint` once under the slot with a firing control, findings counted by linter
+     and by module, nothing in `Proofs/` changed, a proposal for when and how to clear them. Alternative weighed: the three remaining `exists_preBend`
+     children with `bv_l3` (the queue's next), which take the slot after it. Why: the measurement is short, every landing adds to an unmeasured debt, and
+     nothing waits on the `exists_preBend` children today. Confidence: medium-high. (e) **What "held" means is unchanged**: a landed result is checked by
+     the kernel (build, zero `sorry`, axioms, vacuity); the environment linters are hygiene (unused arguments, docstrings, simp forms), not truth. In flight
+     after LN1's launch: 1 (CC2) + 1 (IR1) + 1 (LN1) = 3.
