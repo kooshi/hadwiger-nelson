@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.Cover
+import Proofs.HadwigerNelson.Plane.MetricalBoundary
 import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.UnitDistance
 import Mathlib.NumberTheory.Real.Irrational
@@ -271,27 +272,29 @@ theorem falconer_lemma1 {E : Set ℂ} (hEm : MeasurableSet E) (hE : E.Nonempty) 
     exact slice_slice_null hEm hE0 p₀ (sub_ne_zero.2 hy₀x.symm.symm) (sub_ne_zero.2 hy.2)
   exact hpos (nonpos_iff_eq_zero.1 ((Measure.le_iff'.1 Measure.restrict_le_self _).trans hnull.le))
 
-/-! ## FS131-K2c: Lemmas 2–4 and the assembly (each proved but the import, `falconer_lemma2_nonempty`; plan `plans/FS131-w2-kernel-plan.md` § 12)
+/-! ## FS131-K2c: Lemmas 2–4 and the assembly (each proved; `falconer_lemma2_nonempty`, an import until FS131-IF1, from `Plane/MetricalBoundary`; plan `plans/FS131-w2-kernel-plan.md` § 12)
 
 FS129-MA1 § 2.2's order: disjointify the cover; `E` (the points that are density points of no class) is null, measurable
-and — by `[Falconer1981]` Lemma 2 (i), imported below — nonempty; `falconer_lemma1` places the apex at a point of `E` with
+and — by `[Falconer1981]` Lemma 2 (i), proved below — nonempty; `falconer_lemma1` places the apex at a point of `E` with
 almost every rotation sending every other vertex into some class's density set; two classes are present at the apex (D2);
 the density-set colouring of `H − a` is proper and avoids those two classes on `N(a)` (Lemma 3,
 `essClosure_dist_ne_one_of_mem_densitySet`); the fan puts the tip's circle a.e. in the two density sets; Lemma 4 (an
 irrational rotation) refutes that. -/
 
-/-- **`[Falconer1981]` Lemma 2 (i), p. 185 — imported** (`LEAN.md` § Assumptions; a declared purchase,
-`ARCHITECTURE.md` § Trust): a measurable `S ⊆ ℝ²` with `v(S) > 0` and `v(ℝ² ∖ S) > 0` has a nonempty metrical boundary — a
-point where the density of `S` fails to exist or exists with a value other than `0` or `1`. Here: a point that is neither a
-density point of `S` nor of `Sᶜ` (for measurable `S` the density of `Sᶜ` is `1` minus that of `S`). The paper's proof is
-Croft's (its ref. [1], Lemma 4, unheld); equivalently, the density topology on `ℝ²` is connected. Read-back and model:
-`plans/FS131-w2-kernel-plan.md` § 12; the model is `upperHalfPlane_falconer_hyp` below. To be formalized before
-publication (a separate planner-and-implementer job). -/
-axiom falconer_lemma2_nonempty {S : Set ℂ} (hS : MeasurableSet S) (h1 : volume S ≠ 0) (h2 : volume Sᶜ ≠ 0) :
-    ∃ x : ℂ, x ∉ densitySet S ∧ x ∉ densitySet Sᶜ
+/-- **`[Falconer1981]` Lemma 2 (i), p. 185 — proved** (FS131-IF1; an imported axiom until then): a measurable `S ⊆ ℝ²`
+with `v(S) > 0` and `v(ℝ² ∖ S) > 0` has a nonempty metrical boundary — a point where the density of `S` fails to exist or
+exists with a value other than `0` or `1`. Here: a point that is neither a density point of `S` nor of `Sᶜ` (for measurable
+`S` the density of `Sᶜ` is `1` minus that of `S`). The paper defers its proof to Croft's Lemma 4 (its ref. [1], unheld); the
+proof here is this project's, `exists_not_tendsto_ratio_and_compl` (`Plane/MetricalBoundary`: nested balls in which `S` has
+ratio one half, for null-measurable sets in any finite dimension), read at `E = ℂ`, `μ = volume` by unfolding `densitySet`.
+Read-back against the paper's page: `plans/FS131-w2-kernel-plan.md` § 12 and `plans/FS131-IF1-implementation.md`; a model of
+the hypotheses is `upperHalfPlane_falconer_hyp` below. -/
+theorem falconer_lemma2_nonempty {S : Set ℂ} (hS : MeasurableSet S) (h1 : volume S ≠ 0) (h2 : volume Sᶜ ≠ 0) :
+    ∃ x : ℂ, x ∉ densitySet S ∧ x ∉ densitySet Sᶜ :=
+  exists_not_tendsto_ratio_and_compl volume hS.nullMeasurableSet h1 h2
 
-/-- **Model of the import's hypotheses** (`LEAN.md` § Assumptions, item 3): the open upper half-plane is measurable, and it
-and its complement have positive (indeed infinite) measure. -/
+/-- **Model of `falconer_lemma2_nonempty`'s hypotheses** (kept from its time as an import, `LEAN.md` § Assumptions, item 3):
+the open upper half-plane is measurable, and it and its complement have positive (indeed infinite) measure. -/
 theorem upperHalfPlane_falconer_hyp :
     MeasurableSet {z : ℂ | 0 < z.im} ∧ volume {z : ℂ | 0 < z.im} ≠ 0 ∧ volume {z : ℂ | 0 < z.im}ᶜ ≠ 0 := by
   have ho : IsOpen {z : ℂ | 0 < z.im} := isOpen_lt continuous_const Complex.continuous_im

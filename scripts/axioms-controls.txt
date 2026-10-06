@@ -16,28 +16,31 @@
 # `declareImport` and `#print axioms` lines that use it. Lines starting with `# ` outside a block are comments.
 # Planted names start `t3c_`.
 #
-# The `baseline` and `imported_declared` counts, and `banner_dropped`'s two consequences, read the library's state: one declared
-# import (`falconer_lemma2_nonempty`, FS-131 wave 2) with four IMPORTED records (FS131-I2n, inventory items 259–260). A later
-# import moves them again (item 259's tool defect owed).
+# The `baseline` and `imported_declared` counts, and `banner_dropped`'s consequences, read the library's state: no declared
+# import (FS131-IF1: the first, `falconer_lemma2_nonempty`, is a theorem), so the shipped audit's IMPORTED section is empty and
+# every IMPORTED control plants its own axiom. A later import moves them again — per declared import, `declared` and `library`
+# rise by one in both controls and `imported` by its records, the `old` digests' texts follow, and `banner_dropped` gains
+# `FAIL outside-banners <one of its records>` and `FAIL stale-declaration <the axiom>` (FS131-I2n's edit, `082f86c9`, is the
+# pattern; item 259's tool defect owed).
 
 ## control baseline
 ## expect PASS
-## expect COUNT imported=4
-## expect COUNT declared=1
-## expect COUNT library=1
-## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 4 imported
+## expect COUNT imported=0
+## expect COUNT declared=0
+## expect COUNT library=0
+## digest old 0 match (clean and purchases compared; the sentence is in its older form
 ## digest new 0 match (clean, purchases and imported compared)
 ## digest doubled 3 not one
 
 ## control imported_declared
 ## expect PASS
-## expect COUNT imported=5
-## expect COUNT declared=2
-## expect COUNT library=2
+## expect COUNT imported=1
+## expect COUNT declared=1
+## expect COUNT library=1
 ## arch t3c_import
 ## digest new 0 match (clean, purchases and imported compared)
 ## digest off 0 RECORDED COUNT IS STALE
-## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 5 imported
+## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 1 imported
 ## at PRE
 /-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, `[Planted2026]` p. 1. -/
 axiom t3c_import : True
@@ -203,6 +206,4 @@ theorem t3c_mixed : True := (And.intro t3c_ax_c moserSpindle_cnf_unsat).1
 
 ## control banner_dropped
 ## expect FAIL banners IMPORTED
-## expect FAIL outside-banners falconer_reduction
-## expect FAIL stale-declaration falconer_lemma2_nonempty
 ## drop-banner IMPORTED

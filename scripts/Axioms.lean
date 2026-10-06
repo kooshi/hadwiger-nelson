@@ -164,16 +164,17 @@ four items `LEAN.md` § Assumptions requires of it, the gate checks two: its doc
 bibliography key (item 1; `declareImport` refuses otherwise) and `ARCHITECTURE.md` § Trust names it in
 backticks (item 4; `arch-missing`). Any other axiom fails wherever it appears — under CLEAN, here,
 under PURCHASED — and so does any axiom the library declares without a `declareImport` line, audited or
-not (`undeclared-library-axiom`, from `libraryAxioms`, the file's last command). `main` declares no
-import yet, so this section is empty there.
+not (`undeclared-library-axiom`, from `libraryAxioms`, the file's last command). The library
+declares one import at present, wave 10's `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207, FS131-K10c), with
+eight records below; its first, wave 2's `falconer_lemma2_nonempty`, is a theorem since FS131-IF1 (FS131-L10B's join).
 
 **Why this section comes first.** The gate reads the sections in any order, but two things do not move:
 PURCHASED stays last, because `tools/check_architecture.py` reads every `#print axioms` after its banner
 as a purchase; and the waves append their CLEAN records just above the PURCHASED banner, so a section
 placed there would meet every landing's merge in the same lines.
 
-**How a wave declares an import, at its landing** (written for wave 2's `falconer_lemma2_nonempty`; the
-same for any later one): (1) check the four items of `LEAN.md` § Assumptions are done — the docstring
+**How a wave declares an import, at its landing** (written for wave 2's `falconer_lemma2_nonempty`, since
+proved; the same for any later one): (1) check the four items of `LEAN.md` § Assumptions are done — the docstring
 names its bibliography key, section and page; the statement is read back against the paper in the
 planner's record; a model of its hypotheses sits in the same file; and `ARCHITECTURE.md` § Trust has its
 row, naming the axiom in backticks — `` `Plane.falconer_lemma2_nonempty` `` or the full name (the gate
@@ -194,14 +195,6 @@ imports and the IMPORTED records; the clean count falls by exactly the records m
 rises by the same, and nothing else moves; draft `CLAUDE.md` § Trust ledger's sentence with the new
 counts for Keryx. A mistyped name does not elaborate (the double backtick resolves it); an import
 declared that no audited record carries fails as `stale-declaration`. -/
-
-#eval AxiomAudit.declareImport ``HadwigerNelson.Plane.falconer_lemma2_nonempty
-
--- FS131-I2h: wave 2's records resting on `falconer_lemma2_nonempty` (FS129-SA1-FALC-RED)
-#print axioms HadwigerNelson.Plane.falconer_reduction
-#print axioms HadwigerNelson.Plane.le_chiM_of_falconerFan
-#print axioms HadwigerNelson.Plane.exists_mem_falconerE
-#print axioms HadwigerNelson.Plane.fan_tip_ae_mem
 
 #eval AxiomAudit.declareImport ``HadwigerNelson.StandingFive.kloosterman_bound
 
@@ -3192,6 +3185,28 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.dist_circle_rotate
 #print axioms HadwigerNelson.Plane.not_rotate_ae_eq_compl
 #print axioms HadwigerNelson.Plane.falconer_lemma4
+-- FS131-IF1: `[Falconer1981]` Lemma 2 (i) proved (`Plane/MetricalBoundary`); the axiom `falconer_lemma2_nonempty` is a theorem,
+-- and the four records that rested on it moved here from IMPORTED
+#print axioms HadwigerNelson.Plane.measure_inter_closedBall_le_add
+#print axioms HadwigerNelson.Plane.tendsto_measure_closedBall_sub
+#print axioms HadwigerNelson.Plane.continuous_measure_inter_closedBall
+#print axioms HadwigerNelson.Plane.measure_inter_closedBall_div_add_compl
+#print axioms HadwigerNelson.Plane.measure_compl_inter_closedBall_div_eq_half
+#print axioms HadwigerNelson.Plane.exists_mem_ball_tendsto_ratio
+#print axioms HadwigerNelson.Plane.measure_inter_ball_ne_zero_of_ratio_eq_half
+#print axioms HadwigerNelson.Plane.exists_closedBall_ratio_eq_half
+#print axioms HadwigerNelson.Plane.exists_closedBall_subset_ratio_eq_half
+#print axioms HadwigerNelson.Plane.exists_closedBall_ratio_eq_half_of_measure_ne_zero
+#print axioms HadwigerNelson.Plane.exists_nested_closedBalls_ratio_eq_half
+#print axioms HadwigerNelson.Plane.ratio_two_mul_ge
+#print axioms HadwigerNelson.Plane.exists_ratio_ge_and_compl_ge
+#print axioms HadwigerNelson.Plane.not_tendsto_ratio_compl_of_ratio_ge
+#print axioms HadwigerNelson.Plane.exists_not_tendsto_ratio_and_compl
+#print axioms HadwigerNelson.Plane.falconer_lemma2_nonempty
+#print axioms HadwigerNelson.Plane.falconer_reduction
+#print axioms HadwigerNelson.Plane.le_chiM_of_falconerFan
+#print axioms HadwigerNelson.Plane.exists_mem_falconerE
+#print axioms HadwigerNelson.Plane.fan_tip_ae_mem
 #print axioms HadwigerNelson.Plane.exists_isMaxIn
 #print axioms HadwigerNelson.Plane.isMaxIn_maxIn
 #print axioms HadwigerNelson.Plane.grundyTaken_eq

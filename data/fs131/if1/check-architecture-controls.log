@@ -1,0 +1,5 @@
+control 1 (row lacks the new import): exit=1 (want 1)
+3:FAIL imports of Plane/FalconerReduction: stated-only [], real-only ['Plane/MetricalBoundary']
+control 2 (new module has no row): exit=1 (want 1)
+2:FAIL module coverage
+unmodified: exit=0 (want 0)
