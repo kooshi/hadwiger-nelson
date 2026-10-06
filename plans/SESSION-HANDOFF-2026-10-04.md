@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-06 by Keryx after the restart (inventory items 407, 410). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–415 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–417 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **415**. Kooshi restarted the work,
+> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **417**. Kooshi restarted the work,
 > back (item 412); `origin` is the backup remote, not GitHub. `/tmp` is a tmpfs: the pre-halt scratch is
 > in `/home/kooshi/source/lean-dir-tmp-rescue-2026-10-05/tmp/` (item 407), and a record citing `/tmp/claude-1000/…` reads it there.
 >
@@ -15,18 +15,18 @@ that judge the milestone, written before any job).*
 > three run now, and every slot that frees from here is refilled from the queue.
 >
 > **Running (3)** — each reports to "main" by hand-back; its report file is on its branch:
-> - **FS131-CC2** (`fs131-w5k`): the collar bend's lane C, continued — merge `origin/fs131-w5` in, then `map_degree_lensCurve`, the hard pair
->   (`map_degree_end` with `exists_collarFit`'s C4), `sides_end`, B0 `collarModel`; fix `tools/fs131_cc_stmt.py`. Brief
->   `data/fs131/briefs/FS131-CC2-collar.md`. On its hand-back: fast-forward `fs131-w5` to `fs131-w5k` (Keryx's word).
+> - **FS131-I5q** (`fs131-w5`, at `3b120cd3`): `exists_preBend`'s three children (`hfree_of_baseHyp`, `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`),
+>   then `bv_l3` moved to `BaseWalk` and proved; its record stages start at 56. Brief `data/fs131/briefs/FS131-I5q-prebend.md`.
 > - **FS131-IR1** (`fs131-w5c`): the procedure's last steps — merge `a20bb6f5` (OPEN) in, restate `exists_vertexStep` (degree + horns) and `exists_arcStep`
 >   (horn clause), then `horn_bounds_of_interior_empty`, `exists_vertexStep`, `stuckRun_ne_univ`, `exists_terminalSeq`, `exists_arcStep` (over a `sorry`
 >   child `bend_away_part` if it needs the tangent bend, item 411 (e)). More than one session: expect a successor. Brief
 >   `data/fs131/briefs/FS131-IR1-procedure.md`.
 > - **FS131-LN1** (`fs131-wop`, which is `main`'s line): a short measurement — `lake lint` once under the slot with a firing control, counted by linter and
->   module, nothing in `Proofs/` changed (items 414–415). Brief `data/fs131/briefs/FS131-LN1-lint.md`. On its hand-back the slot goes to the three
->   remaining `exists_preBend` children with `bv_l3` (a branch cut from `fs131-w5` after CC2's fast-forward, or from `fs131-w5` now if CC2 still runs).
+>   module, nothing in `Proofs/` changed (items 414–415). Brief `data/fs131/briefs/FS131-LN1-lint.md`. On its hand-back the slot goes to `bend_away`'s implementer
+>   (branch `fs131-w4ba` at `71cca146`, E5 § 4; ruling 417 (d)), and the unused-argument policy is ruled from its count (417 (b)).
 >
-> **Landed since the restart**: **OPEN** (item 414: `main` at `7189bdcf`, gated `68670175`; counts filed — 3,912 records, 3,889 clean; vacuity
+> **Done since the restart**: **FS131-CC2** (items 416–417: **the collar bend proved** — `bend_toward_collar` on the standard three; `fs131-w5`
+> fast-forwarded to `fs131-w5k` at `3b120cd3`). **Landed since the restart**: **OPEN** (item 414: `main` at `7189bdcf`, gated `68670175`; counts filed — 3,912 records, 3,889 clean; vacuity
 > `declarations=11173 refutations-skipped=118 sites=784`, `generic=747`). `lake lint` runs once at the milestone's close (ruling 415 (c)); a landing's
 > gate re-run is not needed for commits touching only `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md` (415 (b)).
 >
@@ -135,7 +135,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 
 | job | model | brief | reports to |
 |---|---|---|---|
-| FS131-CC2 (the collar bend's lane C on `fs131-w5k`) | Opus | `data/fs131/briefs/FS131-CC2-collar.md` | branch `fs131-w5k`'s `data/fs131/reports/FS131-CC2.md` |
+| FS131-I5q (`exists_preBend`'s children and `bv_l3`, on `fs131-w5`) | Opus | `data/fs131/briefs/FS131-I5q-prebend.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-I5q.md` |
 | FS131-IR1 (the procedure's last steps on `fs131-w5c`) | Opus | `data/fs131/briefs/FS131-IR1-procedure.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-IR1.md` |
 | FS131-LN1 (the environment linters measured, on `fs131-wop`) | Opus | `data/fs131/briefs/FS131-LN1-lint.md` | branch `fs131-wop`'s `data/fs131/reports/FS131-LN1.md` |
 
