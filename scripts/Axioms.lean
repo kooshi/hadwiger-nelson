@@ -5553,6 +5553,16 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.quarter_lt_chord
 #print axioms HadwigerNelson.Plane.ArcMap.collarModel
 
+/-! ## FS-131 wave 5 (job FS131-I5q) — `exists_preBend`'s last three children proved (their records are in the FS131-KB2 block above); helpers -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ne_of_abs_sub_lt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_ringArc_notMem
+#print axioms HadwigerNelson.Plane.ArcMap.eq_of_ringArc_subset_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.finite_arcs_meeting_compact
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.sides_eq_of_ringPt_eq
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.union_of_overlap
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.not_regularAt_of_max
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
