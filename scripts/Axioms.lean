@@ -6043,6 +6043,48 @@ each until its children land. -/
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.map_hornCount_le
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend
 
+/-! ## FS-131 wave 5 (job FS131-BA1) — the outward bend's lens, map and composition (`Plane/ValidMap/LensOut`, `CollarMapOut`, `BendAway`)
+
+Lanes G and D of FS131-KA1's plan are proved: the twenty leaves of those three modules listed in FS131-KA1's block above (from
+`R2Subdiv.of_local` to `CollarFitOut.map_valid`, `CollarFitOut.pushOutProfiles` with them) no longer rest on `sorryAx`. This block holds
+the helpers the proofs added — the outward push's profile lemmas, the two real inequalities under `dist_lt_one_of_thin`, the mirrors
+for `R > 1` of the tangent circle's lemmas, the mirrors of `CollarMap`'s collar lemmas for `CollarFitOut`, and what the composition
+reads of one bend. -/
+
+#print axioms HadwigerNelson.Plane.PushOutProfiles.cases
+#print axioms HadwigerNelson.Plane.PushOutProfiles.toward
+#print axioms HadwigerNelson.Plane.PushOutProfiles.a_pos
+#print axioms HadwigerNelson.Plane.PushOutProfiles.push1_zero
+#print axioms HadwigerNelson.Plane.PushOutProfiles.push1_pos
+#print axioms HadwigerNelson.Plane.PushOutProfiles.push1_push1
+#print axioms HadwigerNelson.Plane.two_sin_half_le_of_gap
+#print axioms HadwigerNelson.Plane.sq_div_two_lt_sin
+#print axioms HadwigerNelson.Plane.tangRad_mono
+#print axioms HadwigerNelson.Plane.tangRad_mul_cos_anti
+#print axioms HadwigerNelson.Plane.tangentArc_image_out
+#print axioms HadwigerNelson.Plane.collarOutMid_eq
+#print axioms HadwigerNelson.Plane.dist_collarOutMid_left
+#print axioms HadwigerNelson.Plane.dist_collarOutMid_right
+#print axioms HadwigerNelson.Plane.outerProf_le_left
+#print axioms HadwigerNelson.Plane.outerProf_le_right
+#print axioms HadwigerNelson.Plane.dist_lt_one_of_mem_lensOutSet
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.mem_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.kin_subset
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.kout_subset
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_eq_self
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_ringPt
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_fix_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.lensOutCurve_subset
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.ringPt_mem_lensOutCurve
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.not_kept
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.homeo_image_Γ
+#print axioms HadwigerNelson.Plane.ringPt_inj_of_abs_sub_lt
+#print axioms HadwigerNelson.Plane.ArcMap.AgreesOff.mem_Γ_iff_of_notMem
+#print axioms HadwigerNelson.Plane.ArcMap.AgreesOff.mem_region_iff_of_notMem
+#print axioms HadwigerNelson.Plane.ArcMap.AwayBend.dist_centre
+#print axioms HadwigerNelson.Plane.ArcMap.AwayBend.closure_region_iff
+#print axioms HadwigerNelson.Plane.ArcMap.AwayBend.ringPt_notMem
+
 /-! ## FS-131 wave 5 (job FS131-BA2) — the away bend's lanes C and H: new helper declarations (`Plane/ValidMap/HornChart`, `R2Cap`, `BendGap`)
 
 The children themselves are in FS131-KA1's block above; these are the helpers this job minted. All proved. -/

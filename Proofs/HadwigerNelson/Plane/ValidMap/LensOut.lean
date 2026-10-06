@@ -146,6 +146,16 @@ theorem pushOutHomeo_eq_self (hp : PushOutProfiles θ₁ θ₂ a l b) {z : ℂ}
     exact key (m' := fun _ => 1) (fun θ h => ⟨by linarith [hp.inside θ h], (hp.inside θ h).2.2.2⟩)
       (fun θ h => (hp.off θ h).2.1)
 
+/-- Spec for `pushOutHomeo`: on each ray of the sector the push sends the point of `ω(P)` to the middle profile's point (`push1_mid`),
+and its inverse brings that point back — so the arc goes onto the lens curve and nothing else does. -/
+example (hp : PushOutProfiles θ₁ θ₂ a l b) {θ : ℝ} (hθ : θ ∈ Ioo θ₁ θ₂) :
+    pushOutHomeo P θ₁ θ₂ a l b hp (P + ((1 : ℝ) : ℂ) * e θ) = P + (l θ : ℂ) * e θ ∧
+      (pushOutHomeo P θ₁ θ₂ a l b hp).symm (P + (l θ : ℂ) * e θ) = P + ((1 : ℝ) : ℂ) * e θ := by
+  obtain ⟨h0, ha1, h1l, hlb⟩ := hp.inside θ hθ
+  rw [pushOutHomeo_polar hp hθ one_pos, pushOutHomeo_symm_polar hp hθ (one_pos.trans h1l), push1_mid ha1 (h1l.trans hlb),
+    push1_mid (ha1.trans h1l) hlb]
+  exact ⟨rfl, rfl⟩
+
 end PushOut
 
 /-- **The outward collar's profiles are push profiles** for `1/2 < R' < 1 < R < R''` and an arc of at most `60°` (mirror of
@@ -430,12 +440,11 @@ theorem sq_div_two_lt_sin {w : ℝ} (hw0 : 0 < w) (hw : w ≤ π / 6) : w ^ 2 / 
 apply to an outward lens). `|z₁ − z₂| ≤ (t₁ − 1) + (t₂ − 1) + 2 sin ((φ₂ − φ₁)/2)`, and with `u = φ₁ − α₁`, `v = α₂ − φ₂`,
 `w = (u + v)/2 ∈ (0, π/6]`: `2 sin ((φ₂ − φ₁)/2) ≤ 2 sin (π/6 − w) ≤ 1 − sin w` (`two_sin_half_le_of_gap`), while
 `κ (u² + v²) ≤ (u + v)²/8 = w²/2 < sin w` (`sq_div_two_lt_sin`). The route differs from the plan's in its constants only (`√3 ≥ 1`
-in place of `√3/π`): the inequality is the same. -/
+in place of `√3/π`): the inequality is the same. No `0 ≤ κ` is asked: it follows from `1 ≤ t₁ ≤ 1 + κ (φ₁ − α₁)²` and
+`α₁ < φ₁`, and the proof does not read it (the skeleton's `hκ0`, removed under inventory ruling 452 (a)). -/
 theorem dist_lt_one_of_thin {P : ℂ} {α₁ α₂ φ₁ φ₂ t₁ t₂ κ : ℝ} (hℓ : α₂ - α₁ ≤ π / 3) (h1 : α₁ < φ₁) (h12 : φ₁ ≤ φ₂)
-    (h2 : φ₂ < α₂) (hκ0 : 0 ≤ κ) (hκ : κ ≤ 1 / 8) (ht₁ : 1 ≤ t₁) (ht₁' : t₁ ≤ 1 + κ * (φ₁ - α₁) ^ 2) (ht₂ : 1 ≤ t₂)
+    (h2 : φ₂ < α₂) (hκ : κ ≤ 1 / 8) (ht₁ : 1 ≤ t₁) (ht₁' : t₁ ≤ 1 + κ * (φ₁ - α₁) ^ 2) (ht₂ : 1 ≤ t₂)
     (ht₂' : t₂ ≤ 1 + κ * (α₂ - φ₂) ^ 2) : dist (P + (t₁ : ℂ) * e φ₁) (P + (t₂ : ℂ) * e φ₂) < 1 := by
-  -- `hκ0` is not read: it follows from `ht₁`, `ht₁'` and `h1` (kept by the statement; inventory ruling 419 (c)'s form)
-  have _ := hκ0
   have hπ := Real.pi_pos
   have hu0 : 0 < φ₁ - α₁ := sub_pos.mpr h1
   have hv0 : 0 < α₂ - φ₂ := sub_pos.mpr h2
@@ -462,7 +471,7 @@ theorem dist_lt_one_of_thin {P : ℂ} {α₁ α₂ φ₁ φ₂ t₁ t₂ κ : �
 example : dist ((0 : ℂ) + ((1 + 1 / 8 * (1 / 100 - 0) ^ 2 : ℝ) : ℂ) * e (1 / 100))
     (0 + ((1 + 1 / 8 * (π / 3 - (π / 3 - 1 / 100)) ^ 2 : ℝ) : ℂ) * e (π / 3 - 1 / 100)) < 1 :=
   dist_lt_one_of_thin (α₁ := 0) (α₂ := π / 3) (κ := 1 / 8) (by linarith) (by norm_num) (by linarith [Real.pi_gt_three])
-    (by linarith) (by norm_num) le_rfl (by norm_num) le_rfl (by nlinarith [Real.pi_pos]) le_rfl
+    (by linarith) le_rfl (by norm_num) le_rfl (by nlinarith [Real.pi_pos]) le_rfl
 
 /-- The outward profile lies under the first end's enclosing circle. -/
 theorem outerProf_le_left {θ₁ θ₂ R θ : ℝ} (hθ : θ ∈ Icc θ₁ θ₂) : outerProf θ₁ θ₂ R θ ≤ tangRad R (θ - θ₁) := by
@@ -482,7 +491,7 @@ theorem dist_lt_one_of_mem_lensOutSet {P : ℂ} {θ₁ θ₂ R : ℝ} (hR : 1 �
   have key : ∀ {θ t θ' t' : ℝ}, θ ∈ Ioo θ₁ θ₂ → t ∈ Ico 1 (outerProf θ₁ θ₂ R θ) → θ' ∈ Ioo θ₁ θ₂ →
       t' ∈ Ico 1 (outerProf θ₁ θ₂ R θ') → θ ≤ θ' → dist (P + (t : ℂ) * e θ) (P + (t' : ℂ) * e θ') < 1 := by
     intro θ t θ' t' hθ ht hθ' ht' hle
-    refine dist_lt_one_of_thin (α₁ := θ₁) (α₂ := θ₂) (κ := R - 1) hℓ hθ.1 hle hθ'.2 (by linarith) (by linarith) ht.1 ?_ ht'.1 ?_
+    refine dist_lt_one_of_thin (α₁ := θ₁) (α₂ := θ₂) (κ := R - 1) hℓ hθ.1 hle hθ'.2 (by linarith) ht.1 ?_ ht'.1 ?_
     · have := tangRad_sub_one_le hR (θ - θ₁)
       linarith [ht.2, outerProf_le_left (R := R) (Ioo_subset_Icc_self hθ)]
     · have := tangRad_sub_one_le hR (θ₂ - θ')
