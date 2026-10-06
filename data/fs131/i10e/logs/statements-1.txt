@@ -1,0 +1,10 @@
+EXTENDED Proofs/HadwigerNelson/Arith/Floor128.lean: theorem charSum_128_ge — docstring gains: **As proved (FS131-I10E)**: the basis is read from the register's orbit — on codes `step` has period exactly `16383` at
+1 (`minimalPeriod_step`: `counts_ok`, `order_checks`), so its states are every non-zero code below `2¹⁴`, and such a
+code has the value `gʲ ≠ 0` (`ev_ne_zero`); `bezout4` and `bezout128` are not read. "Every non-trivial `ψ` is
+`ψ₀(a ·)`" is `StandingFive.exists_mulShift_eq`, and `{u : u¹²⁹ = 1}` has 129 elements by `StandingFive.card_normOne`.
+Proofs/HadwigerNelson/Arith/Floor128.lean: 14 base declarations, 14 with statement and docstring kept, 1 docstring(s) extended, 0 flagged
+STATEMENTS: PASS
+SELF-TEST Proofs/HadwigerNelson/Arith/Floor128.lean: theorem statement fault on `counts_ok`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/Floor128.lean: definition fault on `clmul`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/Floor128.lean: docstring fault on `clmul_P_qBig`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/Floor128.lean: docstring extension on `clmul_P_qBig` (partner): as required

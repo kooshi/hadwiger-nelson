@@ -6965,6 +6965,75 @@ list of the library's theorems (`data/fs131/l5/count-modules.lean`), by `tools/f
 #print axioms HadwigerNelson.GapSeven.exists_adjacent_gapped
 #print axioms HadwigerNelson.GapSeven.card_edges
 
+/-! ## FS-131 wave 10 (job FS131-I10D) — the planes' floor: the norm-one target, and the completion of a circle sum to a Kloosterman sum -/
+-- FS131-I10D
+#print axioms HadwigerNelson.StandingFive.involution_eq_pow
+#print axioms HadwigerNelson.StandingFive.card_filter_pow_eq_one
+#print axioms HadwigerNelson.StandingFive.card_normOne
+#print axioms HadwigerNelson.StandingFive.targetFloor_of_charSum
+#print axioms HadwigerNelson.StandingFive.sum_addChar_mul_left
+#print axioms HadwigerNelson.StandingFive.sum_eq_zero_add_sum_units
+#print axioms HadwigerNelson.StandingFive.sum_units_addChar_mul
+#print axioms HadwigerNelson.StandingFive.sum_addChar_mul_sq
+#print axioms HadwigerNelson.StandingFive.sum_quadratic_eq
+#print axioms HadwigerNelson.StandingFive.sum_plane_quadratic
+#print axioms HadwigerNelson.StandingFive.circle_sum_eq_kloosterman
+#print axioms HadwigerNelson.StandingFive.circle_sum_le_of_ne
+#print axioms HadwigerNelson.StandingFive.circle_sum_le
+#print axioms HadwigerNelson.StandingFive.circle_sum_zero_of_isotropic
+#print axioms HadwigerNelson.StandingFive.two_sqrt_lt_circle_sum_zero
+#print axioms HadwigerNelson.StandingFive.exists_ringHom_pow
+#print axioms HadwigerNelson.StandingFive.card_filter_pow_eq_self
+#print axioms HadwigerNelson.StandingFive.exists_mulShift_eq
+#print axioms HadwigerNelson.StandingFive.normOne_charSum_ge
+#print axioms HadwigerNelson.StandingFive.targetFloor_seven_of_kloosterman
+
+/-! ## FS-131 wave 10 (job FS131-I10E) — the floor at 128: the bridge from the certificate to the character sums of the norm-one target -/
+-- FS131-I10E (`Floor128`: the bridge's helpers, the leaf `charSum_128_ge`, and the two floors proved over it)
+#print axioms HadwigerNelson.Floor128.ev_zero
+#print axioms HadwigerNelson.Floor128.ev_eq
+#print axioms HadwigerNelson.Floor128.ev_one
+#print axioms HadwigerNelson.Floor128.ev_two_mul
+#print axioms HadwigerNelson.Floor128.ev_shiftLeft_one
+#print axioms HadwigerNelson.Floor128.ev_two_pow
+#print axioms HadwigerNelson.Floor128.ev_two
+#print axioms HadwigerNelson.Floor128.map_ev
+#print axioms HadwigerNelson.Floor128.coeff_ev_X
+#print axioms HadwigerNelson.Floor128.ev_xor
+#print axioms HadwigerNelson.Floor128.ev_clmul
+#print axioms HadwigerNelson.Floor128.ev_step
+#print axioms HadwigerNelson.Floor128.ev_iterate_step
+#print axioms HadwigerNelson.Floor128.qBig_lt
+#print axioms HadwigerNelson.Floor128.qBig_testBit_one
+#print axioms HadwigerNelson.Floor128.charP_two
+#print axioms HadwigerNelson.Floor128.exists_root
+#print axioms HadwigerNelson.Floor128.step_lt
+#print axioms HadwigerNelson.Floor128.step_ne_zero
+#print axioms HadwigerNelson.Floor128.pass_fst
+#print axioms HadwigerNelson.Floor128.pass_snd
+#print axioms HadwigerNelson.Floor128.iterate_step_lt
+#print axioms HadwigerNelson.Floor128.iterate_step_ne_zero
+#print axioms HadwigerNelson.Floor128.iterate_step_period
+#print axioms HadwigerNelson.Floor128.eq_of_dvd_of_not_dvd
+#print axioms HadwigerNelson.Floor128.minimalPeriod_step
+#print axioms HadwigerNelson.Floor128.iterate_step_injOn
+#print axioms HadwigerNelson.Floor128.exists_iterate_step_eq
+#print axioms HadwigerNelson.Floor128.digit_sum
+#print axioms HadwigerNelson.Floor128.sum_range_mul_eq
+#print axioms HadwigerNelson.Floor128.pass_class
+#print axioms HadwigerNelson.Floor128.class_le
+#print axioms HadwigerNelson.Floor128.root_pow_eq_one
+#print axioms HadwigerNelson.Floor128.ev_ne_zero
+#print axioms HadwigerNelson.Floor128.ev_inj
+#print axioms HadwigerNelson.Floor128.root_pow_inj
+#print axioms HadwigerNelson.Floor128.exists_code
+#print axioms HadwigerNelson.Floor128.exists_root_pow_eq
+#print axioms HadwigerNelson.Floor128.normOne_eq_image
+#print axioms HadwigerNelson.Floor128.exists_addChar
+#print axioms HadwigerNelson.Floor128.charSum_128_ge
+#print axioms HadwigerNelson.Floor128.targetFloor_eight_128
+#print axioms HadwigerNelson.Floor128.targetFloor_seven_128
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
