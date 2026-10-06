@@ -376,14 +376,35 @@ so on every run: it lists every library axiom with every theorem whose stored ax
 result written out over a theorem's own variables under a silent docstring is in `unseen=15214` and is not listed. So "in both
 forms" is true of the axioms without qualification and of the hypotheses up to that class, whose only instrument is a reader.
 
+## Stage 10 — SAVED (FS131-LT5): the landing — `main` fast-forwarded to `befb51d3`
+
+- **`main` moved twice more while the gate ran.** To `fb4a064e` (11 commits): `plans/`, `data/`, `BIBLIOGRAPHY.md`, and one file
+  outside the paths then exempt, `tools/ext_hn2_sandbox.py` (`data/fs131/lt5/merge-main2-nonexempt.txt`). Merged as `5a62be0a`, and
+  on the letter of the rule **the whole gate ran a third time, on `5a62be0a`** (tag `landed2`): every step exit 0 but the assumptions
+  step against the repository's own `CLAUDE.md`; every quoted line of stage 9's table the same; the scan's rows identical to the
+  second pass's (`cmp` on every `TOTALS`, `TAKES`, `RESTS`, `ASSUMPTION`, `COHYP`, `CLOSED`, `CONDITION` and `SILENT` row). The
+  two mutation runs are the second pass's, on `c5a4565f`; nothing under `scripts/` or `Proofs/` differs between the two commits.
+  Meanwhile the coordinator's word: `tools/ext_hn2_*.py` are exempt on the same ground as the search lane's scripts.
+- **Then to `bd608a11`** (3 commits): two files, both under `plans/` (`data/fs131/lt5/main-since-gate.txt`: `git diff --name-only
+  fb4a064e origin/main`). Merged with no re-run, as the brief allows.
+- **The gated commit is `5a62be0a`.** The landed tip differs from it in `plans/` and `data/` alone (`git diff --name-only 5a62be0a
+  HEAD`, filtered: nothing outside them).
+- **The push**: `git push origin HEAD:main` — `bd608a11..befb51d3`, a fast-forward (`origin/main` was an ancestor of `HEAD`); no
+  force, no rejection. After a fetch `origin/main` is `befb51d3`.
+- **What is red on `main` now, by design**: `./scripts/assumptions.sh` exits 1 until draft 1's paragraph is in `CLAUDE.md` § Trust
+  ledger; against the copy with the paragraph it is green on this tree (`assumptions-draft-claude-landed2.log`). The coordinator's
+  word: it is filed first.
+- No background process is left running; no mutant file is in `scripts/`.
+
 ## Drafts for the front page (FS131-LT5)
 
-Each names its slot and the log line it comes from. The gated commit is `c5a4565f`; the receipts are under
-`data/fs131/lt5/gate/` (`receipt-assumptions-landed.log` is the scan's full output on it).
+Each names its slot and the log line it comes from. The gated commit is `5a62be0a`; the receipts are under
+`data/fs131/lt5/gate/` (`receipt-assumptions-landed2.log` is the scan's full output on it; `-landed` and `-final` are the two
+earlier passes', row for row the same).
 
 **1. `CLAUDE.md` § Trust ledger** — a new paragraph after the paragraph that ends "Rung B holds none." and before "What the audit
 accepts and what it buys". **File it first: until it is there `./scripts/assumptions.sh` exits 1 on `main`** (stage 7). Its nine
-counts are `receipt-assumptions-landed.log`'s `=== TOTALS ===` line (`axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5
+counts are `receipt-assumptions-landed2.log`'s `=== TOTALS ===` line (`axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5
 takes=98 mentions=1 …`), written by `tools/fs131_lt5_claude_draft.py` and never typed; the whole file with it is
 `data/fs131/lt5/drafts/CLAUDE-with-sentence.md`, against which the gate passed ("match (9 of 9 compared)"):
 
@@ -401,7 +422,7 @@ vacuity scan's nine are `main`'s (stage 9).
 
 **3. `LEAN.md` § The gate.** In the first sentence, after "`./scripts/axioms.sh --self-test` green (23 planted faults, each watched to
 fire, two of them partners that must pass)": ", `./scripts/assumptions.sh` and `./scripts/assumptions.sh --self-test` green (21
-controls planted in one copy of the audit, 33 checks)" — from `assumptions-selftest-landed.log`: "21 controls, planted together",
+controls planted in one copy of the audit, 33 checks)" — from `assumptions-selftest-landed2.log`: "21 controls, planted together",
 "OK — all 33 checks behaved". And a bullet after the `dupnames` bullet:
 
 > - **`./scripts/assumptions.sh` and `./scripts/assumptions.sh --self-test` are green** — everything a theorem rests on
@@ -485,7 +506,7 @@ statement and regrades no row; the atlas gains no node (docstrings only under `P
 
 ## The enumeration, for the owner — what `main` assumes after this landing
 
-*From the gated receipt (`data/fs131/lt5/gate/receipt-assumptions-landed.log`) and the ledger (`scripts/assumptions-ledger.txt`).
+*From the gated receipt (`data/fs131/lt5/gate/receipt-assumptions-landed2.log`) and the ledger (`scripts/assumptions-ledger.txt`).
 "Statements" counts the theorems whose own statement takes the hypothesis, or — for the axiom — whose kernel-stored axiom list
 holds it.*
 
