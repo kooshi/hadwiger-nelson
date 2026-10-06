@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-06 by Keryx after the restart (inventory items 407, 410). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–417 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–419 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **417**. Kooshi restarted the work,
+> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **419**. Kooshi restarted the work,
 > back (item 412); `origin` is the backup remote, not GitHub. `/tmp` is a tmpfs: the pre-halt scratch is
 > in `/home/kooshi/source/lean-dir-tmp-rescue-2026-10-05/tmp/` (item 407), and a record citing `/tmp/claude-1000/…` reads it there.
 >
@@ -21,9 +21,15 @@ that judge the milestone, written before any job).*
 >   (horn clause), then `horn_bounds_of_interior_empty`, `exists_vertexStep`, `stuckRun_ne_univ`, `exists_terminalSeq`, `exists_arcStep` (over a `sorry`
 >   child `bend_away_part` if it needs the tangent bend, item 411 (e)). More than one session: expect a successor. Brief
 >   `data/fs131/briefs/FS131-IR1-procedure.md`.
-> - **FS131-LN1** (`fs131-wop`, which is `main`'s line): a short measurement — `lake lint` once under the slot with a firing control, counted by linter and
->   module, nothing in `Proofs/` changed (items 414–415). Brief `data/fs131/briefs/FS131-LN1-lint.md`. On its hand-back the slot goes to `bend_away`'s implementer
->   (branch `fs131-w4ba` at `71cca146`, E5 § 4; ruling 417 (d)), and the unused-argument policy is ruled from its count (417 (b)).
+> - **FS131-QA4** (read-only; writes `plans/FS131-QA4-audit.md`, `data/fs131/qa4/` on `main`): the impossible-assumption audit's third pass — every
+>   theorem landed since QA3 (`7abff9b9`) and wave 5's about to land, against `LEAN.md`'s inhabitant rule at its letter ("every hypothesis … at once"), an
+>   attack on each uninhabited set, a priced list of models owed (items 418–419). Brief `data/fs131/briefs/FS131-QA4-inhabitants.md`. **On its hand-back**:
+>   one remedy pass before wave 5's landing (the three `[NumberField _]` binders, item 419 (a); `bend_toward_collar` without `hmax`/`hlen`; the models it
+>   names). Then the slot goes to `bend_away`'s **planner** (the repaired statement on `fs131-w4ba` at `71cca146`, E5 § 4; plan it on a branch cut from
+>   `fs131-w5`, where the collar's radial push lives — it may be reusable).
+>
+> **Rules made since the restart**: every landing runs the guarded lint `lake lint --no-build -- --no-build --trace` after its green build (`--mem 8`;
+> `LEAN.md` § The gate; item 419 (b)); the linters found 3 findings in all (item 418).
 >
 > **Done since the restart**: **FS131-CC2** (items 416–417: **the collar bend proved** — `bend_toward_collar` on the standard three; `fs131-w5`
 > fast-forwarded to `fs131-w5k` at `3b120cd3`). **Landed since the restart**: **OPEN** (item 414: `main` at `7189bdcf`, gated `68670175`; counts filed — 3,912 records, 3,889 clean; vacuity
@@ -137,7 +143,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 |---|---|---|---|
 | FS131-I5q (`exists_preBend`'s children and `bv_l3`, on `fs131-w5`) | Opus | `data/fs131/briefs/FS131-I5q-prebend.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-I5q.md` |
 | FS131-IR1 (the procedure's last steps on `fs131-w5c`) | Opus | `data/fs131/briefs/FS131-IR1-procedure.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-IR1.md` |
-| FS131-LN1 (the environment linters measured, on `fs131-wop`) | Opus | `data/fs131/briefs/FS131-LN1-lint.md` | branch `fs131-wop`'s `data/fs131/reports/FS131-LN1.md` |
+| FS131-QA4 (the impossible-assumption audit, third pass; read-only) | Opus | `data/fs131/briefs/FS131-QA4-inhabitants.md` | `data/fs131/reports/FS131-QA4.md` on `main` |
 
 
 **Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.
