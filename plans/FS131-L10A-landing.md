@@ -645,3 +645,10 @@ commit (this section, the report, the push's log) `main` is fast-forwarded once 
 until drafts 1 and 2 are filed; both gates' digests flag them STALE and name the new numbers.
 
 ## Stage 6 — SAVED (FS131-L10A)
+
+## After the landing (FS131-L10A)
+
+Stage 6 and the report were committed as `8d64d7fb` and pushed to `fs131-w10l` and to `main` — `002c921a..8d64d7fb`, a fast-forward
+(`data/fs131/l10a/push-main-2.txt`); `git diff --name-only 999cde4a 8d64d7fb -- . ':!plans' ':!data'` is empty, so `main`'s gate
+inputs are the gated commit's. This note and that push's log go in one last commit, pushed the same way. The report is
+`data/fs131/reports/FS131-L10A.md`.
