@@ -7662,3 +7662,33 @@ reason by the close.*
      joined by the wave's landing job or K8c's first act, whichever is first. (e) Its drafts are held for the
      filing. (f) **Slot → FS131-MD2** (the example maps' second closer, on `fs131-wd2`), launched 2026-10-06. In
      flight: 3 (I8D, MD1, MD2). **Nothing launch-ready is left: the planners' briefs are owed.**
+598. **FS131-I8D done: wave 8's `SemiHubPlaces` and `outerAdj` — all seven leaves proved; with its sibling's branch the wave's line holds no open leaf** (implementer, Opus; harness 590k and 58 minutes by the task notice; record `fs131-w8d`'s `plans/FS131-I8D-implementation.md`; report `data/fs131/reports/FS131-I8D.md`; commits `46ba22e6`, `7376b9b7`, `1e6b71d9`, `989a0393`; pushed, tree clean).
+     **Proved** (built, not gated): on the standard three — **`outerAdj`** (FS129-SR3-OUTERADJ, carrying FS116-V6-ADJ),
+     from a lemma that reads `k ≤ ncard + 2` and never six; over the sibling module's statements — FS116-N3-CROSS in
+     every clause (**its last clause, filed at one mind and a checking reading with a blind second mind's gap,
+     closes with no gap**), FS116-N3-SEMI (`semiHub_places`), RING-TRANSFER-QC's first clause. Ruling 592 applied.
+     **Corrections it names**: the plan's § 9.4 A1 is false as written (an inequality the plan did not list is
+     needed; the row's own argument does not make the claim); two children the plan priced are landed lemmas.
+     **Not done, said**: Lean models of a semi-hub, a star, two adjacent change points. **A tool note**: the join
+     job's statement-check self-test judges a control by exit status alone. **My receipt**: tip `989a0393` equals
+     `origin/fs131-w8d`, tree clean; outside `data/`, `plans/`, `tools/` it changed `SemiHubPlaces` (906 lines
+     added), a new `OuterAdj` (323), `Empty` (13), registry files; **`sorry` under `Proofs/` on its branch: the
+     sibling module's 17 only; on the sibling's branch: this job's 7 only — so the joined line holds none**; its
+     last build log ends `EXIT=0`; its lint log reads "Linting passed for Proofs."; **the five changed statements,
+     compared by my own script against the base: each differs by exactly `4 ≤ ncard` → `ncard = 4`, and no other
+     head of `SemiHubPlaces` or `Empty` moved**. Not checked by me: the proofs beyond the build; its axioms print
+     (14 of its 29 records rest on the sibling's leaves until the join, by its word). **Prediction scored**: 855
+     lines against 1,430 priced, and `outerAdj` 323 against 380. **Credit**: a statement defect pinned by a Lean
+     remark before a line was proved on it; a clause a blind second mind had left open closed in the kernel; an
+     audit tool that names the open leaves beneath each record instead of assuming them. **Rulings.** (a) **Wave 8
+     lands now: FS131-L8A** — it joins `fs131-w8c` and `fs131-w8d` (my trial: `ARCHITECTURE.md`, `scripts/Axioms.lean`),
+     merges `main` (my trial: those two and `Proofs.lean`), runs the full gate with the assumptions step, and
+     fast-forwards `main`. Alternative: wait for the third planning pass and the owed models. Why not: the line
+     holds no open leaf, the unstated rows are new modules that land later, and the owed models are open gate items
+     to be named, as at every landing so far. Confidence: medium-high. (b) **No restatement at this landing**
+     (ruling 563 (b) decided): `v6_hug`, `doubleTip` and `outerAdj` keep their statements; the wider lemmas land
+     beside them under their own names, and the errata name them. (c) `Empty` importing `SemiHub` through
+     `OuterAdj` stays; a layout tidy later. (d) The docstring corrections it and its sibling list ride in the
+     landing. (e) **Slot → FS131-L8A**, launched 2026-10-06. In flight: 3 (MD1, MD2, L8A). **A landing is in
+     flight: I commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`,
+     `LEAN.md`.**
