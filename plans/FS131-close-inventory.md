@@ -7617,3 +7617,21 @@ reason by the close.*
      by no model held) join item 580 (c). (e) **Slot → FS131-MD1** (the example maps' first closer, on
      `fs131-wd1`; a dated Amendment 1 appended to both closers' briefs, gate exit 0), launched 2026-10-06. In
      flight: 3 (I8C, I8D, MD1).
+596. **FS131-I8C, by message: three corrections to its note of item 593** (source: I8C's message to "main", 2026-10-06; nothing of its third stage is committed yet).
+     **(1) Its generalization of FS116-V5-DICHO was worded too widely**: what holds for any two (Q) arcs of a
+     four-colour vertex is the dichotomy clause alone — the two colour pairs are equal as sets or disjoint
+     (`ringArc_pair_eq_or_disjoint`, statement unchanged); the row's parenthesis, that the inner colour of each is
+     the outer colour of the other, does **not** generalize — it is FS116-N3-PAIR's conclusion and reads the
+     position of the two germs — so that row's "not claimed" line stands as filed. Its exact sentence: "FS116-V5-DICHO's
+     dichotomy holds for any two (Q) arcs; its swap is read at a germ pair only." **Item 593 (3) as I logged it
+     states the dichotomy clause only and stands; this item fixes what must not be added to it.** **(2) Two helpers
+     it listed no longer exist** — `disjoint_angleIcc_antipodal` and `branch_on_unit_circle` were weaker copies of
+     landed wave 4 theorems (`IsRingArc.disjoint_coneAt`; `germ_eq_of_two_on_circle`) and are removed, the first
+     found through the sibling's remark; it then audited its other sixteen helpers by statement shape and found
+     no landed form. Its slip, said: it had searched for names, not for shapes. **(3) State**: all seventeen
+     leaves written and elaborating; the build running; nine pushed. **Rulings.** (a) The corrected sentence is
+     what goes to the wave's errata. (b) No relay to the sibling: it declared neither name and uses the landed
+     lemma. (c) **For every implementer's brief from here: before proving a helper, search the tree for the
+     statement's shape, not only the other branches for its name** (to the handoff's learned list). No reply sent.
+     (Slips of mine: this item took three attempts to append — a check on the file's last words, which wrap, and
+     then a quoting error in my own script; the check is now on the last item's number.)
