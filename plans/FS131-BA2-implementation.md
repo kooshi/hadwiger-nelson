@@ -448,3 +448,35 @@ new file and in an editable one, `native_decide` in an editable one. Each plant 
   the build ran once.
 
 ## Stage 6 — SAVED (FS131-BA3)
+
+## Stage 7 — SAVED (FS131-BA3): the helpers of the two mirrors — the one-side lemma for the collar set, the closed outward lens, `sides_end`, `sides_eq`
+
+### 7.1 What landed (seven new declarations in `BendGap.lean`, section `Gap`, before the two children; each elaborated on its first run)
+
+| declaration | mirrors | what differs from the toward form |
+|---|---|---|
+| `ArcMap.collarK_one_side` | `CollarFit.exists_one_side` | **stated for the set** `collarK P θ₁ θ₂ R' R''` under `1/2 < R'`, `1 < R''`, `θ₂ − θ₁ ≤ π/3` — all the toward proof reads of its fit; the proof is the toward one with `hfit.short` replaced by the hypothesis. A spec example at numbers (`P = 0`, `[0, π/6]`, radii `3/4`, `5/4`, `Q = 2`) |
+| `ArcMap.CollarFitOut.one_le_outerProf` | `CollarFit.lensProf_le_one` | the profile is **at least** `1` (the lens is outside `ω(P)`) |
+| `ArcMap.CollarFitOut.isClosed_closedLensOut` | `CollarFit.isClosed_closedLens` | the closed lens is `polarSet P (Icc θ₁ θ₂) fun θ => Icc 1 (outerProf θ₁ θ₂ R θ)`: the constant profile is the lower one |
+| `ArcMap.CollarFitOut.lensOut_subset_closedLensOut` | `CollarFit.lens_subset_closedLens` | — |
+| `ArcMap.CollarFitOut.sides_end` | `CollarFit.sides_end` | **no `hF`** (the toward proof does not read its own); `homeo_maps_collar` (BA2's) for `homeo_mem_collarK`. No colour is named: the lens's colour plays no part at an end |
+| `ArcMap.CollarFitOut.sides_eq` | `CollarFit.sides_eq` | **no `hF`**; the one step that is not a flipped inequality: over the open sector a point of the closed lens off `ω(P)` lies in the **outer** collar (`kout_subset`, colour `c'`, through `outerProf R < outerProf R''`), where the toward proof reads the inner collar (`kin_subset`) |
+| `ArcMap.CollarFitOut.ringPt_notMem_map_Γ` | (inline in the toward `map_R1`, three times) | the open arc is interior in the bent map (`map_lens` at `t = 1`, the lower end of the lens's interval here, the upper end there) |
+
+BA2's work list (§ 4.6) held as written for items 1–4; its item 1's second option (state it once for `collarK`) is the one taken.
+
+### 7.2 The build and the receipts
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`), of commit `6405a3cb`: **OK — 459 of 459 batches, 3 modules rebuilt (`BendGap`,
+  `BendStep`, `Proofs`), exit 0, no warning other than `declaration uses sorry`** (`build/gate/build/20261006T075736Z-2396067.log`,
+  ending "Build completed successfully (5802 jobs)"; driver log `data/fs131/ba3/build2.log`). **5 distinct `sorry` warnings**:
+  `BendGap` 2 (l. 1208, 1213), `Procedure` 2, `Terminal` 1.
+- **Axioms** (`data/fs131/ba3/BA3Axioms-stage7.lean` → `BA3Axioms-stage7.out`, `BA3Axioms-stage7-summary.txt`, PASS): **13 records —
+  the 7 helpers on `[propext, Classical.choice, Quot.sound]`, 6 through `sorryAx`, exactly the expected ones**, 0 other.
+  **Control**: expecting `CollarFitOut.sides_eq` through `sorryAx` fails, naming it as standard (`BA3Axioms-stage7-control.txt`).
+- **Statements**: `tools/fs131_ba3_stmt.py`: **0 failures over 1,795 base files**, the three ruled names exactly as ruled, 7 new
+  declarations listed (`data/fs131/ba3/stmt-stage7.txt`).
+- **Receipt**: a block "FS131-BA3" of 7 records in `scripts/Axioms.lean`, above `=== PURCHASED ===`.
+- **Names**: none of the seven is declared on any `fs131-*` branch head at this writing (a `git grep` over each).
+
+## Stage 7 — SAVED (FS131-BA3)
