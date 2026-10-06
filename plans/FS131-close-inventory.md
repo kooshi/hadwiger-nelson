@@ -5029,3 +5029,31 @@ reason by the close.*
      while the example maps' landing is in flight. (e) **Slot → FS131-I10B** (`StationaryRatio`, three leaves, on `fs131-w10b`), its
      brief regenerated with item 493 quoted and re-gated, launched 2026-10-06; FS131-I10C at the next free slot. In flight: 1 (MC1) + 1
      (K6b) + 1 (I10B) = 3.
+
+495. **FS131-K6b, by message mid-job (`fs131-w6` at `3928644b`, pushed): wave 6's foundation is restated and saved — the statements of
+     `Plane/Saturated/Basic` and `Plane/Saturated/Pinch` are fixed from that commit** (source: K6b's message to "main", 2026-10-06; its
+     record's Stage 9, §§ 9.1–9.4). **What changed**: the pointwise predicates are over two sets on an open set (`TwoColourOn A B N`,
+     `IsSplitAt`, `HasTwoDiscsAt`, `IsTangentAt`, `IsCuspAt A x`, `H2On A N`) and over a family (`essBdry C`, `TwoColourNhd C N a b`,
+     `singularSet C`, `interfaceSet C`, `SaturatedOn C U`), the colouring's forms being the family's at `c.cls`; `pinch` takes any point of
+     any open `N` (E8's first note, item 490); `Pinch`'s seven open leaves are `half_upperDensity`, `sq9_isTangentAt`, `pinch`,
+     `pinch_not_in_in`, `TwoColourOn.essBoundary_inter_eq` (new), `c11_discs`, `c11_split`; `pinch_interface` and `c11_discs_interface`
+     are proved from them. **Generalizations** (§ 9.2): FS111-M-PINCH reads two measurable sets with null unit pairs on an open set — no
+     colouring, no third class, no family; its (in, in) clause reads only "`N` open and almost everywhere `A ∪ B`"; FS111-M-C11 (i) holds
+     at every point of the one `N` that has both contacts. **A wording note** (§ 9.1 item 1): the two frozen sentences differ —
+     `data/fs121/claims.md` § 0 says "(H1) at x: a ball N = B(x, ρ)", FS111-M-PINCH's statement "a neighbourhood N"; K6b kept Σ at the
+     centred ball and offers the open-neighbourhood reading, not adopted. Also § 9.1 item 2: the frozen (H2)'s clause `x ∈ cl P_a ∩ cl
+     P_b` is not a field — it follows at essential boundary points, by a leaf. **My receipt**: `origin/fs131-w6` is `3928644b`; `sorry`
+     by the handoff's grep at that commit: `Basic` 0, `Pinch` 7, `MapColouring` 1; the seven leaves' names found at `Pinch.lean` ll.
+     131–237, `sat_inP` at `MapColouring.lean` l. 194; the record's § 9.3 names its build log and two negative controls (not re-run by me:
+     the artifact is read at its hand-back). **Rulings.** (a) **Σ stays at the centred ball, as K6b has it.** Alternative: the
+     open-neighbourhood set, which makes "regular" an open condition and would reduce FS131-E8-LOCAL's hypothesis to "no cusp in `U`".
+     Why: the claim list's sentence is the centred ball and every hand result of FS-111 and FS-121 was derived under it; that the two
+     agree under saturation is itself an unproved hand argument ("one connectivity lemma beyond LOCAL"). It may be stated as a lemma when
+     the bridge is planned. Confidence: medium-high; it changes if the bridge's proof needs the open form as its working definition —
+     then K6b says so. (b) The generalizations are logged for the errata of FS111-M-PINCH and FS111-M-C11 (with E8's two lines, ruling
+     492 (c)). (c) **The implementers of wave 6's first leaves, split by file as the first pass proposed**: FS131-I6A on `Pinch`'s
+     seven leaves (branch `fs131-w6p`, cut from `3928644b`, tree made, build copied from `fs131-w6` with no `lake` running there), and
+     FS131-I6B on `MapColouring`'s `sat_inP` with its owed Lean model (`sq9` as an `ArcMap 9`; branch `fs131-w6m`); generator
+     `data/fs131/briefs/scripts/mk-i6.py A|B`. (d) **The queue's order is re-ruled**: FS131-K10b, FS131-I10C, FS131-I6A, FS131-I6B.
+     Alternative: the order they were prepared in (I10C first). Why: a planner's hand-back is what later implementers wait on, and wave
+     10's landing waits on K10b's rows longest. Confidence: medium; every one of the four is independent of the others.
