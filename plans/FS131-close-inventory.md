@@ -4403,3 +4403,35 @@ reason by the close.*
      (e) **Slot → FS131-KM1**, launched 2026-10-06 on `fs131-wm`. In flight: 1 (BA2) + 1 (M7) + 1 (KM1) = 3. Queue: the remedy pass on
      `fs131-w5c` after M7; BA2's successor if it leaves children; then the merges of `fs131-w5a` (at `74fbdf16`) and `fs131-w5z` into
      `fs131-w5c`, `main`, the gate.
+
+456. **FS131-BA2 done at its Stage 4: 14 of the outward bend's other 16 children proved, the new mathematics among them; two long mirrors
+     left** (implementer; harness ≈ 662k by the task notice — past its line; record `fs131-w5z`'s `plans/FS131-BA2-implementation.md`; report
+     `data/fs131/reports/FS131-BA2.md` on that branch; commits `30d20aaf`, `ef00b722`, `84b5f6b2`, `9b665413` and `43dfeb6e` (the merges of
+     `fs131-w5a` at `66cb0314` and `4559c106`, ruling 452 (b)), `dae3d93e`; pushed, tree clean). **Results**, on the standard three: **C4,
+     `exists_lensOut_clear`** — the gap's lens is clear for the inner colour — true as stated; BA2 was the first check of KA1's hand proof
+     (plan § 2.5) and every step of it holds. **`CollarFit.map_hornCount_le`**, the toward bend's horn child, with the away bend's, from one
+     lemma for both (`hornCount_le_of_collarBend`); W6 was not needed. Lane H whole (`HornChart`). The radius-2 half of lane C (`R2Cap`:
+     `exists_r2_crescent_free`, `r2_side_dichotomy` by a Cartesian route of its own, `exists_r2Subdiv`). `exists_collarFitOut`,
+     `CollarFitOut.map_ringArcsWithin`, `map_localStep`. `CollarFitOut.awayBend` proved from open children. **Left**: `CollarFitOut.map_R1`,
+     `map_R2` (`BendGap` l. 984, 989) — not started, not found false; `bend_away_gap`, `bend_away_subdiv`, `bend_away_part` rest on these two
+     alone. **My receipt**: tip equals `origin/fs131-w5z`; the build log `build/gate/build/20261006T072828Z-2178943.log` ends "Build completed
+     successfully (5802 jobs)", 0 warnings other than `sorry`, 5 distinct `sorry` warnings (`BendGap` 2 at l. 984 and 989; `Procedure` 2 and
+     `Terminal` 1, this line's old copies); `sorry` by the handoff's grep: `BendGap` 2, and 0 in `R2Cap`, `HornChart`, `BendStep`, `LensOut`,
+     `CollarMapOut`, `BendAway`; `data/fs131/ba2/BA2Axioms-stage4.out` parsed by script, 71 records: 65 on exactly the standard three
+     (`exists_lensOut_clear`, both horn-count theorems, `r2_side_dichotomy`, `exists_r2Subdiv` among them), 6 with `sorryAx` alone beyond them
+     (the two left, `awayBend` and the three above it); `exists_lensOut_clear`'s statement compared with the skeleton's (`dd8c2c33`) by `cmp` —
+     identical. **Items**: generalizations, unruled — `hasHornCount_zero_of_two_spheres` does not read `hρ`, `hρ'`;
+     `hasHornCount_iff_of_germ_swap` does not read `hκ`; `CollarFit.map_hornCount_le` and `CollarFitOut.map_hornCount_le` do not read `hF`.
+     Correction owed — `BendStep`'s module header still calls the horn child open. Prediction scored — lanes H and C1–C3 landed about five
+     times cheaper than the plan's table. Merge note — four of BA2's access lemmas duplicated BA1's and were deleted in favour of BA1's; no
+     name collided. Drafts for the front page in its record (a ledger regrade of KA1's § 2.5 to [kernel]). Slips, the job's, disclosed.
+457. **Rulings on BA2's held items, and its slot.** (a) **The two mirrors go to a successor, FS131-BA3**, on `fs131-w5z`, from BA2's record
+     § 4.6 (about 350 lines of `BendCollar` l. 866–1275 mirrored, one stage). The continuation takes the slot first (the handoff's queue
+     rule). Confidence: high. (b) **The unread hypotheses**: BA3 removes `hρ`, `hρ'` (`hasHornCount_zero_of_two_spheres`), `hκ`
+     (`hasHornCount_iff_of_germ_swap`) and `hF` (`CollarFitOut.map_hornCount_le`) with their calls, all inside this lane's files, at its first
+     stage; `CollarFit.map_hornCount_le`'s `hF` goes at the remedy pass on the joined line, where its callers in `ArcStep` live. Alternative:
+     all four at the remedy pass. Why: three of them have every caller in the files BA3 holds. Confidence: high (ruling 446 (b)'s reason).
+     (c) **KA1's § 2.5 is kernel-checked**: its regrade and the stale header are the filing's and the remedy pass's. (d) **Credit**: C4 was new
+     mathematics by one mind's hand proof, and it stood its first check whole. (e) **Slot → FS131-BA3**, launched 2026-10-06. In flight: 1
+     (M7) + 1 (KM1) + 1 (BA3) = 3. Queue: the remedy pass on `fs131-w5c` after M7; then the merges of `fs131-w5z` (which holds `fs131-w5a`)
+     into `fs131-w5c`.
