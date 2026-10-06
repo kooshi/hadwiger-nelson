@@ -1275,11 +1275,71 @@ theorem CollarFitOut.map_R1 (hF : F.Valid) (hfit : CollarFitOut F P θ₁ θ₂ 
   obtain ⟨hMin, hMout⟩ := hsides θ hθ
   exact ⟨hin ▸ hMin, hout ▸ hMout⟩
 
-/-- **R2** for the outward bend (mirror of `CollarFit.map_R2`). **Open — `sorry`** (child C6). -/
+/-- **R2** for the outward bend (mirror of `CollarFit.map_R2`). Route: the closed arc misses the open arc `α°` (its open part by
+hypothesis; an end on `α°` would put an arc of `ω(Q) ≠ ω(P)` in `Γ` near a point of `α°`, against `free_open`), so it lies in the bent
+map's `Γ` (`map_Γ`); the sides by `sides_eq`, with `Q ≠ P` at an end because an arc of `ω(P)` through an end continues into `α°`.
+**Proved (FS131-BA3)** (child C6). Inhabitant of the hypotheses: owed with the away bend's model, as `bend_away_gap`'s. -/
 theorem CollarFitOut.map_R2 (hF : F.Valid) (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
     (h : F.IsRingArc Q a b d d') (hd : Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂)) :
     hfit.map.IsRingArc Q a b d d' := by
-  sorry
+  -- validity is not read: the clause is geometry of `Γ` and of the homeomorphism (reported: FS131-BA3's record)
+  have _ := hF
+  obtain ⟨hab, hsub, hsides⟩ := h
+  have h12 := hfit.ring.1
+  -- no point of the closed arc lies on `α°`: near such a point `Γ` is `ω(P)` (`free_open`), whose points there are on `α°`, and the
+  -- open arc of `ω(Q)` reaches it
+  have hoff : ∀ θ ∈ Icc a b, ringPt Q θ ∉ ringPt P '' Ioo θ₁ θ₂ := by
+    intro θ hθ hmem
+    obtain ⟨ψ, hψ, hψe⟩ := hmem
+    obtain ⟨r₁, hr₁, hfr⟩ := hfit.free_open ψ hψ
+    obtain ⟨r₃, hr₃, hsph⟩ := exists_sphere_inter_ball_subset_openArc (p := P) hψ
+    have hr : 0 < min r₁ r₃ := lt_min hr₁ hr₃
+    obtain ⟨θ', hθ', hd'⟩ : ∃ θ' ∈ Ioo a b, dist (ringPt Q θ') (ringPt Q θ) < min r₁ r₃ := by
+      have hba : 0 < b - a := by linarith
+      set t := min 1 (min r₁ r₃ / (b - a)) with ht
+      have ht0 : 0 < t := lt_min one_pos (div_pos hr hba)
+      have ht1 : t ≤ 1 := min_le_left _ _
+      have htr : t * (b - a) ≤ min r₁ r₃ := by
+        have := min_le_right 1 (min r₁ r₃ / (b - a))
+        rw [le_div_iff₀ hba] at this
+        linarith
+      refine ⟨θ + t * ((a + b) / 2 - θ), ⟨?_, ?_⟩, ?_⟩
+      · nlinarith [mul_pos ht0 hba, mul_nonneg (sub_nonneg.mpr ht1) (sub_nonneg.mpr hθ.1)]
+      · nlinarith [mul_pos ht0 hba, mul_nonneg (sub_nonneg.mpr ht1) (sub_nonneg.mpr hθ.2)]
+      · refine lt_of_le_of_lt (dist_ringPt_ringPt_le Q _ _) ?_
+        rw [show θ + t * ((a + b) / 2 - θ) - θ = t * ((a + b) / 2 - θ) by ring, abs_mul, abs_of_pos ht0]
+        have : |(a + b) / 2 - θ| ≤ (b - a) / 2 := abs_le.mpr ⟨by linarith [hθ.2], by linarith [hθ.1]⟩
+        nlinarith
+    have hz : ringPt Q θ' ∈ F.Γ := hsub ⟨θ', Ioo_subset_Icc_self hθ', rfl⟩
+    rw [← hψe] at hd'
+    have h1 : ringPt Q θ' ∈ sphere P 1 := hfr ⟨hz, lt_of_lt_of_le hd' (min_le_left _ _)⟩
+    exact disjoint_left.mp hd ⟨θ', hθ', rfl⟩ (hsph ⟨h1, lt_of_lt_of_le hd' (min_le_right _ _)⟩)
+  refine ⟨hab, fun y ⟨θ, hθ, hy⟩ => ?_, fun θ hθ => ?_⟩
+  · rw [hfit.map_Γ, ← hy]
+    exact Or.inl ⟨hsub ⟨θ, hθ, rfl⟩, hoff θ hθ⟩
+  · -- the sides: `sides_eq`, with `Q ≠ P` at an end (an arc of `ω(P)` through an end continues into `α°`)
+    have hQ : (ringPt Q θ = ringPt P θ₁ ∨ ringPt Q θ = ringPt P θ₂) → Q ≠ P := by
+      rintro hend rfl
+      rcases hend with hxe | hxe
+      · have he : e θ = e θ₁ := add_left_cancel hxe
+        set s := min ((b - θ) / 2) ((θ₂ - θ₁) / 2) with hs
+        have hs0 : 0 < s := lt_min (by linarith [hθ.2]) (by linarith)
+        have hs1 : s < b - θ := lt_of_le_of_lt (min_le_left _ _) (by linarith [hθ.2])
+        have hs2 : s < θ₂ - θ₁ := lt_of_le_of_lt (min_le_right _ _) (by linarith)
+        have hpt : ringPt Q (θ + s) = ringPt Q (θ₁ + s) := by simp only [ringPt, e_add, he]
+        exact disjoint_left.mp hd ⟨θ + s, ⟨by linarith [hθ.1], by linarith⟩, rfl⟩
+          ⟨θ₁ + s, ⟨by linarith, by linarith⟩, hpt.symm⟩
+      · have he : e θ = e θ₂ := add_left_cancel hxe
+        set s := min ((θ - a) / 2) ((θ₂ - θ₁) / 2) with hs
+        have hs0 : 0 < s := lt_min (by linarith [hθ.1]) (by linarith)
+        have hs1 : s < θ - a := lt_of_le_of_lt (min_le_left _ _) (by linarith [hθ.1])
+        have hs2 : s < θ₂ - θ₁ := lt_of_le_of_lt (min_le_right _ _) (by linarith)
+        have hpt : ringPt Q (θ - s) = ringPt Q (θ₂ - s) := by simp only [ringPt, sub_eq_add_neg, e_add, he]
+        exact disjoint_left.mp hd ⟨θ - s, ⟨by linarith, by linarith [hθ.2]⟩, rfl⟩
+          ⟨θ₂ - s, ⟨by linarith, by linarith⟩, hpt.symm⟩
+    obtain ⟨hin, hout⟩ := hfit.sides_eq (hsub ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩) (hoff θ (Ioo_subset_Icc_self hθ)) hQ
+    rw [hin, hout]
+    exact hsides θ hθ
 
 /-- **The outward bend is a local step on its collar** (`LocalStep.of_cutArcs` with the two lens arcs, inside the collar by the mirror
 of `CollarFit.lensCurve_subset` and `collarOutArcs_carrier`; `map_agreesOff` weakened to the collar). **Proved (FS131-BA2)** (child C7). -/
