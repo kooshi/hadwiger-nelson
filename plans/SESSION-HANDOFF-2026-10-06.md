@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–457 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–459 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -41,7 +41,7 @@ planted-picture models land (queue item 2).
 
 | job | tree and branch | what | brief | on its hand-back |
 |---|---|---|---|---|
-| **FS131-M7** | `.claude/worktrees/fs131-w5c`, `fs131-w5c` (from `9f28e42a`) | wave 5's join (ruling 450 (a)): merges `origin/fs131-w5y` (`3f8270c0`) and the outward bend's skeleton commit `dd8c2c33` (pinned) into the branch that holds `Procedure`; deletes `ArcStep`'s copy of `LocalStep.of_cutArcs`; one edit to `ArcBend.of_away`; writes the arc step's last lines into `Procedure` from FS131-IA2's report. After it every open leaf of wave 5 is one of the outward bend's children | `data/fs131/briefs/FS131-M7-join.md` | then the remedy pass on `fs131-w5c` (queue 0); BA1's and BA2's branches are merged into `fs131-w5c` at their hand-backs (M7's report says what those merges meet) |
+| **FS131-RP1** | `.claude/worktrees/fs131-w5c`, `fs131-w5c` (from `3381e47f`: wave 5 joined, item 458) | the remedy pass: the ruled statement tidies (`nb4p`, `bend_toward_collar`, `exists_rayStep`/`exists_shaveStep`, three `[NumberField _]` binders), the corrected inhabitant notes (17 `bowtie` notes; E7's lines), `conj_e` made one declaration and the statements under several names (ruling 459 (c)); it leaves the bend's modules alone | `data/fs131/briefs/FS131-RP1-remedy.md` | its report ends with the list for after the bend's merge; then: merge `origin/fs131-w5z` into `fs131-w5c` (trial first), that list, `main`, the gate with the doubled-name check, land |
 | **FS131-BA3** | `.claude/worktrees/fs131-w5z`, `fs131-w5z` (from `dae3d93e`; it holds `fs131-w5a` merged) | BA2's successor: three ruled removals of unread hypotheses (457 (b)), then the outward bend's last two children, `CollarFitOut.map_R1` and `map_R2` (mirrors of `BendCollar` l. 866–1275; BA2's record § 4.6). With them `bend_away_part` is whole. About one stage | `data/fs131/briefs/FS131-BA3-bend-away-mirrors.md` | merge `origin/fs131-w5z` into `fs131-w5c` (after M7; trial it first, item 451); then every leaf of wave 5 is proved and the landing sequence starts |
 | **FS131-KM1** | `.claude/worktrees/fs131-wm`, `fs131-wm` (`main`'s line) | a planner (`debruijn`): the example maps — Lean objects on which the four moves' hypotheses, the stuck vertex's, the two bends', FS131-E7's four sets and the outward bend's (`awayModel`) hold at once; one construction (the brick map relabelled, pictures planted by `recolour`) or two; a skeleton, a plan per leaf, a handoff | `data/fs131/briefs/FS131-KM1-models.md` | brief implementers from its handoff; the lane lands on its own from `main` |
 
@@ -50,16 +50,15 @@ a fresh agent on the same brief.
 
 ## 4. Queue for the next freed slots, in order (item 427; re-ordered by ruling 434)
 
-0. **Order now** (rulings 450, 455): **the remedy pass** on the joined line `fs131-w5c` once FS131-M7 has handed back — ruling 427 (a)'s
-   list (the 17 `bowtie` notes, QA4 § 3.5; `bend_toward_collar` without `hmax` and `hlen`; rank 7's and rank 8's docstring lines; the three
-   `[NumberField _]` binders), plus `nb4p` restated with one conjunct and E7's docstring lines (441 (a), (b), (e)), `hn` out of
-   `exists_rayStep` and `exists_shaveStep` (450 (c)), the doubled statements (434 (d); 454's two), the stale "skeleton" headers (455 (c)),
-   IS1's two `ARCHITECTURE.md` cells (432 (b)); **its brief's generator is written** (`data/fs131/briefs/scripts/mk-rp1.py`, job FS131-RP1):
-   run it at M7's hand-back, when the joined tree holds the statements it quotes, gate it on the gate's own exit status (item 453), launch;
-   it leaves the bend modules alone (BA3 holds them) and ends with the list for after that merge (457 (b); the stale headers);
-   FS131-BA2's successor if it leaves children; KM1's implementers. Then: merge `fs131-w5a` (done, at `74fbdf16`) and `fs131-w5z` into
-   `fs131-w5c` — trial the merges in the order they will be made (item 451) — merge `main`, the full gate, the guarded lint, the notes
-   check, land (item 6 below); `bend_away_part`'s inhabitant may be an open gate item at the landing (455 (a)).
+0. **Order now** (rulings 457, 459): **FS131-T4, the gate's doubled-name check** (brief written and gated,
+   `data/fs131/briefs/FS131-T4-dupnames.md`; tree `.claude/worktrees/fs131-wop` on branch `fs131-t4` from `main`; `debruijn-implementer`,
+   `model: "opus"`) at the next free slot — item 458: Lean accepts one theorem name declared by two sibling modules, and `main` holds such a
+   pair, `conj_e`; no theorem is in doubt (ruling 459 (a)); when T4 hands back, file its `LEAN.md` bullet and bring its tools to `main`
+   before wave 5's landing, which then runs the check; BA3's successor if it leaves a mirror; KM1's implementers. **Then the landing
+   sequence**, one job (brief not written): merge `origin/fs131-w5z` into `fs131-w5c` (it holds `fs131-w5a`; `LocalStep.of_cutArcs` and
+   `CollarFit.map_localStep` must then print the standard three, 459 (d)); RP1's post-merge list (`hF` out of `CollarFit.map_hornCount_le`,
+   the stale headers, the two `ringPt` forms); merge `main`; the full gate, the guarded lint, the notes check, the doubled-name check; land;
+   drafts (item 6 below; `bend_away_part`'s inhabitant may be an open gate item, 455 (a)).
 1. **The freed lane's continuation**, if it left leaves on wave 5's path (IR2's will).
 2. **FS131-E7 — done** (items 440–441: a model for each of the four sets, no contradiction; a terminal plane map with a stuck vertex at twelve
    colours; `nb4p` restated with one conjunct at the remedy pass; two questions held for Poros). It was: a short Ephodos job (`ephodos`): QA4's rank 9 and rank 10's question (`plans/FS131-QA4-audit.md` § 6.2) — a model or a contradiction
@@ -125,13 +124,14 @@ a fresh agent on the same brief.
 |---|---|---|
 | `main` | this commit | waves 1–4, Woodall, MERGE, OPEN; the inventory, briefs, audits |
 | `fs131-w5` | `8ca5fc67` | wave 5's density half, whole |
-| `fs131-w5c` | moving (M7; IR3 left it at `9f28e42a`) | wave 5's trunk: `Terminal` (no `sorry`), `Procedure` (the vertex step proved; `exists_arcStep` restated, `sorry`), `fs131-w5s` merged; M7 is joining the arc lines into it |
+| `fs131-w5c` | moving (RP1; M7 left it at `3381e47f`) | **wave 5's one line**: `fs131-w5s`, `fs131-w5y` and the bend's skeleton merged; `Procedure`, `Terminal`, `ArcStep`, the density half with no `sorry`; every open leaf is one of the outward bend's children (proved on `fs131-w5z` but two) |
+| `fs131-t4` | `main`'s head | new, idle until FS131-T4 launches (worktree `.claude/worktrees/fs131-wop`) |
 | `fs131-w5s` | `facdf1c2` | idle; cut from `fs131-w5c` at `ebb0b292`; `stuckRun_ne_univ` proved, `Terminal` with no `sorry` of its own |
 | `fs131-w5a` | `74fbdf16` | idle: the outward bend's first half proved (item 454: `LensOut`, `CollarMapOut`, `BendAway`, no `sorry`; Lean sources at `4559c106`); to be merged into `fs131-w5c` |
 | `fs131-w5z` | moving (BA3; BA2 left it at `dae3d93e`) | the outward bend whole but two children (item 456): `fs131-w5a` merged in, 34 of 36 children proved, the toward bend's horn child proved |
 | `fs131-w5y` | `3f8270c0` | idle: the arc step's assembly `ArcStep` proved (item 447), the last lines for `Procedure` in its report |
 | `fs131-w5k` | `3b120cd3` | idle (the collar's lane; `fs131-w5` was fast-forwarded past it) |
-| `fs131-wop` | `4b68d47d` | idle (`main`'s line plus the lint measurement's files, merged into `main`) |
+| `fs131-wop` | `4b68d47d` | the branch is merged into `main`; its worktree now holds branch `fs131-t4` |
 | `fs131-w4ba` | `71cca146` | no worktree; `bend_away`'s repaired statement |
 | `fs131-wm` | moving (KM1) | `main`'s line, for the example maps |
 
