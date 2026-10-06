@@ -49,6 +49,9 @@ What the two passes and the deriver handed back, and the rulings in force (read 
 {item(501)}
 {item(502)}
 {item(491)}
+{item(504)}
+{item(516)}
+{item(517)}
 The milestone's plan binds every wave's planning job (read its §§ 7.1–7.5 whole):
 
 {Q(KP,"### 7.3 What each wave's planning job must hold")}

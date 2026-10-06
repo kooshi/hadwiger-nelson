@@ -5456,3 +5456,36 @@ reason by the close.*
      `standingFloor_seven`'s hypothesis; my reading above locates the statement and is not the read-back. Until then
      `KloostermanBound` stays a hypothesis, and FS131-I10D proves over it as briefed. (c) The audit's imported count goes from 4 to
      5 when that lands; Kooshi has been told (the interim report, 2026-10-06).
+
+516. **FS131-I6A done: all seven leaves of wave 6's `Pinch` proved as stated — the pinch, its impossible case, the two tangent
+     discs, the split arc, the half-density bound, the essential boundary of a two-colour open set, and the model** (implementer,
+     Opus; harness 411k by the task notice; record `fs131-w6p`'s `plans/FS131-I6A-implementation.md` Stages 1–3; report
+     `data/fs131/reports/FS131-I6A.md`; commits `ce59c389`, `b53a2f46`, `d2abf84e`, `43ea4886`; pushed, tree clean). **Rows**:
+     FS111-M-PINCH (`pinch`, `pinch_not_in_in`), FS111-M-C11 (i) and (iii) (`c11_discs`, `c11_split`), FS111-M-HALF's density clause
+     (`half_upperDensity`); the planner's `pinch_interface`, `c11_discs_interface`, `TwoColourNhd.mem_essBoundary` are free of
+     `sorry` with them; six `example`s apply the theorems to an inhabitant of all their hypotheses at once (`sq9` at `sqEdgePt`).
+     **My receipt**: tip `43ea4886` equals `origin/fs131-w6p`, tree clean; no `sorry` anywhere in `Pinch.lean` (plain grep 0),
+     `MapColouring` 1 (the other implementer's); `Basic.lean` unchanged since `3928644b`; its last real build's full log
+     (`build/gate/build/20261006T131817Z-122361.log` in the tree, 464 of 464 batches, 2 modules rebuilt) ends "Build completed
+     successfully (5806 jobs)" with 0 warnings other than `sorry`, all three in `MapColouring`; `data/fs131/i6a/logs/axioms-2.raw`
+     parsed by script: 38 records, 37 on the standard three and the planted `sorry` on `sorryAx`, the seven leaves and the two
+     corollaries found by name; six of the seven statements compared with `3928644b` by `cmp` of `awk` extractions — identical; the
+     seventh (`TwoColourOn.essBoundary_inter_eq`) differs only in `:= by` against `:=`, its two statement lines read identical.
+     (A first pass of mine read a stale build log and one `:= by`; both resolved before this line.) **Items**: four
+     generalizations — `pinch` reads (H2) only as "almost everywhere one preconnected set of density points" (that (H2)'s set is
+     open and non-empty is never read); the two cells of the pinch's table need no (H2) and no measurability;
+     `essBoundary_inter_eq` never reads (H2); `c11_split` reads neither the point nor `dist x y = 1`; two routes changed from the
+     plan (`c11_split` by transfer to the disc and its exterior; `half_upperDensity` by a translation and a reflection); the second
+     planner's mutation audit agrees with the proofs; **the price — 22 agent-hours planned by two planners expecting to be high by
+     two to three; done in about thirty minutes after the readback**; slips, the job's, disclosed (its statement check keyed
+     examples by position; two queued builds stopped by PID before they ran); a correction owed at the join (the module
+     docstring's "Proved." lines); two Lean facts, filed in `LEAN.md` § Searching — Lean today; a pricing instance drafted for
+     `plans/GROKKING-INSTANCES.md`, held for the milestone's filing.
+517. **Rulings on I6A's held items, and its slot.** (a) **The weaker (H2) is offered to the wave's third planner, not adopted
+     now**: `H2On` and `Basic` stay as they are while four branches build on them; if the fragment rows or FS111-M2-HULLC's cover
+     form read the pinch with (H2) as "almost everywhere one preconnected set of density points", the third pass states that form
+     beside the present one, as a new predicate the present one implies. Alternative: weaken `H2On` at the join. Why not now: a
+     definition four jobs read is not changed for a generality no row has yet asked for. Confidence: medium-high. (b) The module
+     docstring's line and the `scripts/Axioms.lean` conflict are the wave's join's. (c) **Slot → FS131-I6B** (wave 6's
+     `MapColouring`: `sat_inP` and its Lean model, on `fs131-w6m`), launched 2026-10-06. In flight: 1 (I10C) + 1 (K8) + 1 (I6B)
+     = 3.

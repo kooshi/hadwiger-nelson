@@ -52,6 +52,15 @@ What the two passes and the deriver handed back, and the rulings in force (read 
 > 491. **FS131-E8 done: nine entries derived, none stalled — the bridge (item 490, its §§ 3.1–3.7 unchanged since), the consumers traced row by
 > — source: plans/FS131-close-inventory.md
 
+> 504. **FS131-E8's check done (its Stage 6): the planner's statements of the bridge stand — `Fan.branch_contacts`, `Fan.two_le_n` and
+> — source: plans/FS131-close-inventory.md
+
+> 516. **FS131-I6A done: all seven leaves of wave 6's `Pinch` proved as stated — the pinch, its impossible case, the two tangent
+> — source: plans/FS131-close-inventory.md
+
+> 517. **Rulings on I6A's held items, and its slot.** (a) **The weaker (H2) is offered to the wave's third planner, not adopted
+> — source: plans/FS131-close-inventory.md
+
 The milestone's plan binds every wave's planning job (read its §§ 7.1–7.5 whole):
 
 > ### 7.3 What each wave's planning job must hold

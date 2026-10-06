@@ -147,6 +147,12 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - A `rfl` for `((Subring.inclusion h a : unitRing F) : ℂ) = a` at the concrete pair `unitRing ⊥ ≤ unitRing F` is accepted by the elaborator
   and times out in the kernel, which compares the two subtypes and descends into `F =?= ⊥`. Stated generically in the two subrings
   (`coe_inclusion_subring`) it is checked once with variables (FS131-K10).
+- The reflection `z ↦ g − z` preserves an invariant measure: `MeasureTheory.Measure.measurePreserving_sub_left` (the name is under
+  `Measure`, not under `MeasureTheory`). With a translation it bounds a half-disc or a strip without rotating the plane: an open
+  half of a disc and its mirror image are disjoint (FS131-I6A, `volume_halfPlane_inter_closedBall_le`).
+- For sets, `s ≤ᵐ[μ] t` is `∀ᵐ z, z ∈ s → z ∈ t`: prove it with `filter_upwards […] with z … hz`, or from an inclusion as
+  `Eventually.of_forall fun z hz => h hz`; `Eventually.of_forall h` with `h : s ⊆ t` does not elaborate, and
+  `HasSubset.Subset.eventuallyLE` is deprecated at the pin (FS131-I6A).
 
 - **A failed `exact?` is not an absence.** It proves the shape you asked for was not found; vary the statement (`= true` versus
   `decide (…)`, an iff versus an implication) first. **And Mathlib is not the whole library:** `grep -rn "<name-fragment>" $(lean
