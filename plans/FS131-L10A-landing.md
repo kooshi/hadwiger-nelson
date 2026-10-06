@@ -211,7 +211,7 @@ missing; the look-up's control, a cited name misspelt, fired). `tools/check_arch
 - `sorry` by the gate's narrow pattern over `Proofs/`: 0 lines.
 - **The named hypotheses, read from the signatures** (`tools/fs131_l10a_hyps.py`, `data/fs131/l10a/hyps-tidy.txt`; self-test: a
   binder reads HYP, a conclusion reads CONCL, a docstring mention reads nothing): of the 244 theorems of the four files, **eleven
-  take a named hypothesis** — the table is in the drafts (Stage 6).
+  take a named hypothesis** — the table is the drafts' item 5.
 
 ## Stage 3 — SAVED (FS131-L10A)
 
@@ -453,7 +453,7 @@ data/fs131/l10a/receipt-vacuity-first.log data/fs131/mc/receipt-vacuity-final2.l
    | `Interface.NegCircle` | a rotation-invariant probability with negative mean at `1`, carried by a set that does not leave `E`ᶜ | ours: J45 § 4.2 step 3 | `sp_if` | **none** (planned: `negCircle_trivial_bot`, second pass) |
    | `CharacterColouring.OrderBound (unitSet ⊥) B N` — the order bound | band characters in `T + A` are in `T_N + A` | ours: FS89-S0A-3 (`k = 4`, `N = 168`, on Weil), J08-11 (5), J08-10 (6) | `gluing_iff_of_orderBound`; `cl2` (at band 4 with 168, and at band 5 with `N₅`) | none |
    | RQ₄, RQ₅ (`cl2`'s `hRQ4`, `hRQ5`) | `Θ_k(ℤ[U_ℚ]) ⊆ T + A`, `k = 4, 5` | ours: FS89-D2-T1, FS89-D5-T2 | `cl2` | none |
-   | `StandingFive.StandingFloor n` | the floor at `U₁₂₈` and at every `Γ_Q`, `Q ≡ 3 (mod 4)`, `Q ≥ 347` | ours: G56 ([tools]/[hand], on Weil) | `le_localBound` (any `n`), `seven_le_localBound` (7), `five_le_chromaticNumber` (5) | at `n = 0` only (`targetFloor_zero`); at 7 the second pass states it over `KloostermanBound` and one leaf |
+   | `StandingFive.StandingFloor n` | the floor at `U₁₂₈` and at every `Γ_Q`, `Q ≡ 3 (mod 4)`, `Q ≥ 347` | ours: G56 ([tools]/[hand], on Weil) | `le_localBound` (any `n`), `seven_le_localBound` (7), `five_le_chromaticNumber` (5) | at `n = 0` only (`targetFloor_zero`); at 7 the second pass derives it (`standingFloor_seven`) from its two floor rows, over `KloostermanBound` and their open leaves |
    | `Row123Chain` (`five_le_chromaticNumber`'s `hRow123`) | `min (L(F)) 5 ≤ χ(F²)` at this field | ours: row 123; in the kernel over named hypotheses, `SpectralChain.min_localBound_five_le_chromaticNumber` | `five_le_chromaticNumber` | — |
 
    **Resting on no named hypothesis**: every other theorem of the four files — among the rows, FS89-S0A-2 (`gluing`,
