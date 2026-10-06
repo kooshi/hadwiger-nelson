@@ -1,14 +1,14 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-06 by Keryx after the restart (inventory items 407, 410). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–413 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–415 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **413**. Kooshi restarted the work,
+> **Latest (2026-10-06, after the restart; inventory items 410–411):** inventory items run to **415**. Kooshi restarted the work,
 > back (item 412); `origin` is the backup remote, not GitHub. `/tmp` is a tmpfs: the pre-halt scratch is
 > in `/home/kooshi/source/lean-dir-tmp-rescue-2026-10-05/tmp/` (item 407), and a record citing `/tmp/claude-1000/…` reads it there.
 >
-> **Held in the kernel, on `main`**: **MERGE** (item 375: `main` at `ca4dcfa2`, gated `df473bfe`, counts filed, item 376 — 3,807 records, 3,784 clean); waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
+> **Held in the kernel, on `main`**: **OPEN** (item 414); **MERGE** (item 375: `main` at `ca4dcfa2`, gated `df473bfe`, counts filed, item 376 — 3,807 records, 3,784 clean); waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
 >
 > **Staffing (item 323)**: **three slots** again (Kooshi's word). The first slot to free (IP4's, item 325) was not refilled;
@@ -22,9 +22,13 @@ that judge the milestone, written before any job).*
 >   (horn clause), then `horn_bounds_of_interior_empty`, `exists_vertexStep`, `stuckRun_ne_univ`, `exists_terminalSeq`, `exists_arcStep` (over a `sorry`
 >   child `bend_away_part` if it needs the tangent bend, item 411 (e)). More than one session: expect a successor. Brief
 >   `data/fs131/briefs/FS131-IR1-procedure.md`.
-> - **FS131-OL1** (`fs131-wop`): OPEN's landing on `main` — merge `main`, the full gate, fast-forward, drafts for the filing. Brief
->   `data/fs131/briefs/FS131-OL1-open-land.md`. **On its hand-back**: read the saved gate logs, run `scripts/gate_report.py axioms|vacuity`, file the counts
->   (`CLAUDE.md` § Trust ledger and § The gate, `GATE_CHANGES`), run the fact audit before committing, `git pull --ff-only` in the main tree first.
+> - **FS131-LN1** (`fs131-wop`, which is `main`'s line): a short measurement — `lake lint` once under the slot with a firing control, counted by linter and
+>   module, nothing in `Proofs/` changed (items 414–415). Brief `data/fs131/briefs/FS131-LN1-lint.md`. On its hand-back the slot goes to the three
+>   remaining `exists_preBend` children with `bv_l3` (a branch cut from `fs131-w5` after CC2's fast-forward, or from `fs131-w5` now if CC2 still runs).
+>
+> **Landed since the restart**: **OPEN** (item 414: `main` at `7189bdcf`, gated `68670175`; counts filed — 3,912 records, 3,889 clean; vacuity
+> `declarations=11173 refutations-skipped=118 sites=784`, `generic=747`). `lake lint` runs once at the milestone's close (ruling 415 (c)); a landing's
+> gate re-run is not needed for commits touching only `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md` (415 (b)).
 >
 > **Done at the halt**: **FS131-CC1** (item 405: `Pushforward` free of `sorry`; four leaves and B0 left; rulings 406); **FS131-IO3** (item 408: **OPEN held**
 > on `fs131-wop` at `a20bb6f5`; ruling 409).
@@ -133,7 +137,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 |---|---|---|---|
 | FS131-CC2 (the collar bend's lane C on `fs131-w5k`) | Opus | `data/fs131/briefs/FS131-CC2-collar.md` | branch `fs131-w5k`'s `data/fs131/reports/FS131-CC2.md` |
 | FS131-IR1 (the procedure's last steps on `fs131-w5c`) | Opus | `data/fs131/briefs/FS131-IR1-procedure.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-IR1.md` |
-| FS131-OL1 (OPEN's landing, on `fs131-wop` then `main`) | Opus | `data/fs131/briefs/FS131-OL1-open-land.md` | branch `fs131-wop`'s `data/fs131/reports/FS131-OL1.md` |
+| FS131-LN1 (the environment linters measured, on `fs131-wop`) | Opus | `data/fs131/briefs/FS131-LN1-lint.md` | branch `fs131-wop`'s `data/fs131/reports/FS131-LN1.md` |
 
 
 **Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.
