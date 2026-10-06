@@ -618,3 +618,142 @@ satisfiable; its docstring's "no model expected" stands.
 inputs are § 6.2's two bullets (each a `nlinarith` about two discs). `hD` is § 6.3.1. Docstring line for `flank_ne_of_doublyShadowed`:
 "Inhabitant of the hypotheses: `sevenBrickMap` with a `g`-flank and a `g`-horn at the lower pole, an `h`-flank and an `h`-horn at the upper
 pole planted in fresh colours (FS131-E7 § 6), `κ₁ = −1/2`, `κ₂ = 1/2`, band `(−1/8, 1/8)`."
+
+## Stage 7 — SAVED (FS131-E7): Q5 — yes at twelve colours: a terminal valid map of the plane with a stuck vertex
+
+derivation: q5-terminal-stuck-model
+  statement: for `k = 12`, `F` the map `P₅` of § 7.1 and `v = 2/5 + (3/10) i`: `F.Valid`, `F.IsPlaneMap`, `F.Terminal` and `F.IsStuck v`
+  uses only: `sevenBrickMap` valid, of the plane, with at most three sectors of distinct colours and no horn at any point, and `v`, `v ± i` interior to bricks; the definitions of the three moves (each needs a colour with two sectors, or a horn, at its point); three explicit distance inequalities (§ 7.2); that a point below `ω(N)` near `v` is at distance exactly 1 from a point of the axis below `N`
+  not claimed: anything at six colours (FS-115's question (c) and `exists_terminal`'s class stay open: the five spare colours are the whole mechanism); any `k` between 7 and 11 (not examined; fewer spare colours may do); that `P₅` satisfies the hypothesis `hno` of the `n3_end*` theorems (it does not: § 7.5)
+  argument: § 7.3 Stuck at `v`
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `P₅` itself — § 7.1; it is also a model of `F.IsTerminalMap` (every unit arc is (Q): § 7.4) with a stuck vertex of three colours
+  prior art: owed — not searched outside the repository; inside it the local picture is FS112-BOWTIE's (the Lean `bowtie`), whose completion QA4 § 3.5 proposed and did not build; the planting is QA4 § 3.2 (b)'s device
+  handoff: de Bruijn — five `recolour`s on `sevenBrickMap` relabelled into `Fin 12` (§ 7.6); it is also the Lean model QA4's rank 5 asks for (`Valid ∧ Covers v 1 ∧ IsStuck v`), at a fraction of the completed bowtie's size
+
+control: bowtie-plant
+  of: q5-terminal-stuck-model — § 7.2's validity inequalities on samples, and § 7.3's double shadow by closed formula
+  run: python3 ../data/fs131/e7/e7_plant.py q5
+  expect: q5: g pairs (flank, wedge at N) at distance 1 or more: 0; c pairs (horn, wedge at N) at distance 1 or less: 0; horn points shadowed by the g-wedge and by the h-wedge: 20000 of 20000
+  fault: python3 ../data/fs131/e7/e7_plant.py q5 --plant-wedge
+
+### 7.1 The object: `P₅ : ArcMap 12`, a small bowtie planted in three bricks
+
+Base and points as in § 6.1: `sevenBrickMap` read in `Fin 12`; `v = 2/5 + (3/10) i`, `N = v + i`, `S′ = v − i`, the discs `B(v, 1/10)`,
+`B(N, 1/20)`, `B(S′, 1/20)` each inside one brick. Five colours are planted; write `(a, b)` for coordinates relative to `N` or to `S′`.
+
+| colour | at `v`, inside `B(v, 1/10)` | at `N`, inside `B(N, 1/20)` | at `S′`, inside `B(S′, 1/20)` |
+|---|---|---|---|
+| `7` (`g`) | `G_v = B(v, 1/10) ∩ B(N, 1)` | the wedge `b < −|a|` (toward `v`) | — |
+| `8` (`h`) | `H_v = B(v, 1/10) ∩ B(S′, 1)` | — | the wedge `b > |a|` (toward `v`) |
+| `9` (`c`) | `C_v = B(v, 1/10) ∖ (B̄(N, 1) ∪ B̄(S′, 1))`: the two horns `hornSet v 0 (−1) 1 (1/10)`, `hornSet v π (−1) 1 (1/10)` | the wedge `b > |a|` (away from `v`) | the wedge `b < −|a|` (away from `v`) |
+| `10` | — | the wedge `a > |b|` | the wedge `a > |b|` |
+| `11` | — | the wedge `a < −|b|` | the wedge `a < −|b|` |
+
+Arcs added: the three circles; the arcs of `ω(N)` and `ω(S′)` inside `B̄(v, 1/10)`; the two diameters of slopes `±1` of each small disc.
+Every added arc separates two different colours (so no tile is cut in two of one colour), and the three discs are disjoint from the
+bricks' edges, so each brick that holds a disc keeps one tile, the brick minus the closed disc.
+
+### 7.2 Validity
+
+Five `recolour`s; each new class had no earlier points, so `recolour_valid` asks only for no unit pair inside the class.
+
+- **`7`**: both pieces are small. For `p ∈ G_v` (`|p − N| < 1`, `p − v = (x, y)`, `|x|, |y| < 1/10`) and `q = N + (a, b)` in the wedge
+  (`b < −|a|`, `a² + b² < 1/400`): `|p − q|² = |p − N|² − 2xa + 2(1 − y)b + a² + b² < 1 + (1/5)|a| − (9/5)|b| + |b|/10 < 1`, since
+  `|a| < |b|` and `a² + b² < 2b² ≤ |b|/10`. All distances below 1.
+- **`8`**: the mirror image.
+- **`9`**: for `p ∈ C_v` (`|p − N| > 1`) and `q = N + (a, b)` with `b > |a|`:
+  `|p − q|² ≥ |p − N|² − (1/5)|a| + (9/5) b > 1`. All distances above 1; the wedge at `S′` likewise; the two far wedges are at least
+  `2 − 1/10` apart; `C_v` has diameter below `1/5`.
+- **`10`, `11`**: two small wedges at least `19/10` apart.
+- The seven brick colours: each class shrank.
+
+### 7.3 Stuck at `v`
+
+For `ρ ≤ 1/10` the interior points in `B(v, ρ)` have four components, each with `v` in its closure: `B(v, ρ) ∩ B(N, 1)` (colour `7`),
+`B(v, ρ) ∩ B(S′, 1)` (`8`), and the right and left parts of the rest (`9`), which are `hornSet v 0 (−1) 1 ρ` and `hornSet v π (−1) 1 ρ`
+(`TanAbove v 0 (−1) z ⟺ |z − S′| > 1`, `TanBelow v 0 1 z ⟺ |z − N| > 1`). So `coloursAt v = {7, 8, 9}`, `HasSectors v 9 2`, and the horns at `v`
+are these two (the other two sectors fill a half-disc's angle, and a horn set's angular width tends to `0` with `ρ`).
+
+- **No MERGE.** Only `9` has two sectors. Its contacts at `v` — points of `ω(v)` in the closure of its class — are `N` and `S′` alone: the
+  class is `C_v` (within `1/10` of `v`) and the two far wedges, and a point `N + (a, b)` with `b ≥ |a|` has `|·− v|² = a² + (1 + b)² ≥ 1`
+  with equality only at `N`. The one tile of `9` with `N` in its closure is the wedge `b > |a|`, disjoint from `B̄(v, 1)`: `OutType v 9 N`
+  holds and `InType v 9 N` fails; the same at `S′`. So `allowedCone v 9 ⊆ {d : d·(N − v) ≤ 0, d·(S′ − v) ≤ 0} = {d : d·i = 0}`, a line:
+  empty interior.
+- **No MERGE-RAY.** The two horns of `9` lie along `e(0)` and `e(π)`, each with bounds `(−1, 1)`; two horns along one ray would need
+  bounds `κ₂ < κ₃`, i.e. `1 < −1`.
+- **No SHAVE.** A horn at `v` is one of the two; take the right one (the left is its image under the half-turn about `v`, which swaps
+  `7` and `8`). Its flanks are `7` above (`hornSet v 0 1 κ′ ρ ⊂ B(N, 1)`) and `8` below. **Every point of the horn is in the shadow of
+  both**: for `z − v = (x, y)` in the horn put `β = (1 − √(1 − x²)) − y`; `β > 0` because `z` is below `ω(N)`, `β < ρ + ρ²`, and
+  `|z − (N − iβ)|² = x² + (1 − x²) = 1`; the point `N − iβ` lies on the axis of the wedge `b < −|a|`, of colour `7`. Likewise
+  `S′ + iβ′`, `β′ = y + 1 − √(1 − x²) > 0`, of colour `8`. So for any `σ` and any small `ρ` a horn point `z` is clear neither for `7`
+  nor for `8`, and SHAVE's condition `(TanAbove v 0 σ z → IsClear 7 z) ∧ (¬ TanAbove v 0 σ z → IsClear 8 z)` fails at it.
+- **A repeated colour**: `HasSectors v 9 2`.
+
+So `P₅.IsStuck v`.
+
+### 7.4 Terminal everywhere, and (Q) arcs only
+
+Each of the three moves needs, at its point, a colour with two or more sectors (MERGE) or a sector that is a horn set (MERGE-RAY,
+SHAVE: both take an `IsHorn`). So it is enough that **`v` is the only point of the plane with a repeated colour or a horn**, § 7.3 having
+shown no move available at `v`. Point by point:
+
+| where `u` is | sectors at `u` | colours | a horn? |
+|---|---|---|---|
+| off the three closed discs | `sevenBrickMap`'s: one, two, or three at a T-junction | distinct (`sevenBrickMap_tJunction`, `SectorsAt`'s consecutive colours differ) | no: straight sides at `90°` or `180°` |
+| on a disc's circle, not at an arc's end | inside piece, outside brick | two, distinct | no: one smooth arc through `u` |
+| the four points where `ω(N)`, `ω(S′)` cross `|u − v| = 1/10` | two pieces inside, the brick outside | three, distinct (`7` or `8`, `9`, a brick colour) | no: the circles cross transversally (`9/10 < |N − v| = 1 < 11/10`) |
+| inside `B(v, 1/10)`, not `v` | one, or two across `ω(N)` or `ω(S′)` | distinct | no |
+| `N`; `S′` | four quarter-discs | `7, 9, 10, 11`; `8, 9, 10, 11` | no: right angles |
+| on a diameter inside a small disc; at a diameter's end on its circle | two; three | distinct | no |
+
+So `P₅.Terminal`. **And `P₅.QROnly`** (`Chain.lean` l. 71 on `fs131-w5c`): the only arcs of the map on unit circles are those of `ω(N)`
+and `ω(S′)` inside `B̄(v, 1/10)`; a ring arc with constant sides on `ω(N)` has inner colour `7` and outer colour `9`, both carried at `N`,
+where four colours meet — a (Q) arc; the same at `S′` with `8` and `9`. Hence `P₅.IsTerminalMap` with a stuck vertex of three colours.
+
+### 7.5 What it does to the stuck family's docstrings, read against three of its theorems
+
+A wrong model would break a kernel-checked theorem; `P₅` was read against the three of the family I could check from their statements:
+
+- `cv_l0` (`Terminal.lean` l. 853 on `fs131-w5c`: a stuck vertex with at most three colours in a terminal valid map centres no unit arc and
+  `Γ ∩ ω(E)` is finite) — on `P₅`: no arc of the map lies on `ω(v)`; `Γ ∩ ω(v)` is `N`, `S′` and finitely many crossings of brick edges
+  and small circles. Holds. **`P₅` satisfies all of `cv_l0`'s hypotheses**, whose docstring says "No model of a stuck vertex in a terminal
+  valid plane map is known".
+- `n3_end_four_colours` (claim list): its hypotheses `hF`, `hP`, `hT`, `hst`, `h3`, `hc2`, `hH` (`α = 0`, `κ₂ = 1`, `c = 9`) hold on `P₅`;
+  **`hno` fails**: the upper flank `7` is a contact at `N` and in-type there (its one tile at `N`, the wedge `b < −|a|`, lies in `B(v, 1)`:
+  `a² + (1 + b)² < 1 + 2b(1 + b) < 1`). The conclusion holds anyway: `coloursAt S′ = {8, 9, 10, 11}`. So the theorem stays what its
+  docstring says, a step inside a refutation; its *background* is now inhabited.
+- FS112-C-DOUBLE (hand: a bowtie end with four unit horn arcs has four-colour neighbours) — `N` and `S′` carry four colours each. Agrees.
+
+**For the docstrings on `fs131-w5c`** (the brief's item 5; the lines are the implementers', through Keryx):
+
+- the any-`k` theorems whose hypotheses are a terminal valid plane map with a stuck vertex and nothing `P₅` fails (`cv_l0` and its like):
+  **a model** — "Inhabitant at [hand]: FS131-E7's planted bowtie `P₅`, twelve colours (`plans/FS131-E7-derivation.md` § 7); no Lean object yet";
+- the `n3_end*` theorems, which also assume `hno`: **"a refutation step: no model expected"** stays, with "the hypotheses without `hno` hold
+  on FS131-E7's `P₅`, whose flank is in-type at `N`" in place of "no model of a stuck vertex in a terminal valid plane map is known";
+- the seventeen at `ArcMap 6` on a plane map: **open**, unchanged — `P₅` is not six-coloured and its mechanism is the spare colours.
+
+I did not read the family's other statements one by one (about forty heads); each docstring should be re-read against `P₅` by whoever
+edits it, with § 7.1's table in hand: the facts are `coloursAt v = {7, 8, 9}`, two `9`-horns with bounds `±1`, flanks `7`, `8` in-type at
+`N`, `S′`, `9` out-type at both, four colours at each pole, no other eligible point, every unit arc (Q).
+
+### 7.6 Handoff, and the bearing line for the stub
+
+`P₅ := sevenBrickMap` relabelled into `Fin 12`, then `recolour` five times with `W` the class of each new colour (§ 7.1's rows) and `B` its
+boundary arcs. Lean facts needed beyond `recolour_valid`'s (§ 7.2): the sector decomposition at `v` (`bowtie_partition`,
+`bowtie_isSector_cuspPiece` in `BaseSteps.lean` are the same statements for `bowtie` at `0` and can be imitated at a fifth of their size:
+there are no neighbouring tiles to carry), the two contacts and their types, § 7.3's shadow formula, and § 7.4's table (the longest part: a
+statement about every point of the plane; `sevenBrickMap_isTerminalMap` on `fs131-w5c` already does the brick part). Reusable as is:
+`ArcMap.recolour`, `recolour_valid`, `recolour_isPlaneMap`, `sevenBrickMap` and its corner theorems. **One construction serves QA4's ranks
+4 and 5**: § 6's and § 7's objects are the same base with different planted sets.
+
+*Bearing line drafted for `plans/STUB-stuck-ray.md`* (Keryx files it; slot: after the stub's last dated bearing paragraph, "*At FS-129's
+audit …*"):
+
+> *At FS131-E7 (2026-10-06; [hand], one mind, kernel pending).* The any-`k` form of (c) is answered: at twelve colours a terminal valid map
+> of the plane with a stuck vertex exists by formula — a bowtie of three colours in `B(v, 1/10)` and two quarter-disc wedges at each pole,
+> planted in fresh colours in three bricks of the seven-colour brick map, every unit arc (Q) (`plans/FS131-E7-derivation.md` § 7). It moves
+> nothing here: the five spare colours are its whole mechanism, so (b′), (b″) and (c) at six colours are unchanged; what it retires is the
+> sentence "no model of a stuck vertex in a terminal valid plane map is known" for statements at any `k`.
