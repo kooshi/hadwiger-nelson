@@ -1,0 +1,16 @@
+MISMATCH  "Do not consider Lean formalization a cost. It's practicaly mechanical for us, it's just a "  <- CLAUDE.md
+verbatim  '416. **FS131-CC2 done: the collar bend is proved** (harness ≈ 514k by the task notice; rec'  <- plans/FS131-close-inventory.md
+verbatim  "417. **Rulings on CC2's held items, and its slot.** (a) **`fs131-w5` fast-forwarded to `fs"  <- plans/FS131-close-inventory.md
+verbatim  '378. **FS131-KB2 handed back** (Stage 46 SAVED, harness ≈ 420k by the task notice; record '  <- plans/FS131-close-inventory.md
+verbatim  '386. **FS131-M5 done: `main` merged into `fs131-w5`** (harness ≈ 368k by the task notice; '  <- plans/FS131-close-inventory.md
+verbatim  '369. **FS131-I5o handed back: `row134BaseUA` is held on `fs131-w5`** (Stage 42 SAVED, harn'  <- plans/FS131-close-inventory.md
+verbatim  "370. **Rulings on I5o's held items, and its slot.** (a) **`bv_l3` moves**, statement verba"  <- plans/FS131-close-inventory.md
+verbatim  'theorem hfree_of_baseHyp (hF : F.Valid) {u P : ℂ} (hu : F.Covers u 2) (hH : F.BaseHyp u) ('  <- .claude/worktrees/fs131-w5/Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean
+verbatim  'theorem finite_maxRingArcs (hF : F.Valid) {u : ℂ} (hu : F.Covers u 2) : (F.maxRingArcs u).'  <- .claude/worktrees/fs131-w5/Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean
+verbatim  'theorem maxRingArcs_subset_of_bend (hF : F.Valid) {M : ArcMap k} (hM : M.Valid) {u P : ℂ} '  <- .claude/worktrees/fs131-w5/Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean
+verbatim  'theorem bv_l3 {F : ArcMap 6} (hF : F.Valid) {u₁ u₂ : ℂ} (hc₁ : F.Covers u₁ 1) (hc₂ : F.Cov'  <- .claude/worktrees/fs131-w5/Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean
+verbatim  'theorem exists_preBend {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hu2 : F.Covers u 2) (hu : F.'  <- .claude/worktrees/fs131-w5/Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean
+verbatim  '**Left**: `hfree_of_baseHyp` — route, not attempted for budget: at `x = r(θ)`, `BaseHyp u`'  <- .claude/worktrees/fs131-w5/plans/FS131-I5-implementation.md
+verbatim  '`bv_l3` is in `Plane/ValidMap/HexRing`, which imports neither `Plane/RingBand` (`ringCircl'  <- .claude/worktrees/fs131-w5/plans/FS131-I5-implementation.md
+verbatim  "- **`bv_l3`** (H; off the walk's path). The route, every input named:"  <- .claude/worktrees/fs131-w5/plans/FS131-I5-implementation.md
+15 quotations, 1 not verbatim

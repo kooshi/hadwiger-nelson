@@ -2217,3 +2217,40 @@ germs at `x` are germs of the chart (the arc near `x` lies in `Γ`), so the bran
 construction (ruling 379 (c): a planner pass first). **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 51 — SAVED
+
+## Stage 56 — SAVED (FS131-I5q): the readback, and the as-given build
+
+*FS131-I5q, wave 5's non-`Terminal` lane (Opus), continuing this record from Stage 51 (`ae881022`; branch head `3b120cd3`, the collar whole; Stages 52–55 are
+FS131-M6's, on `fs131-w5c`'s copy of this record). Brief: `data/fs131/briefs/FS131-I5q-prebend.md` (main tree). My set: `exists_preBend`'s three children
+(`hfree_of_baseHyp`, `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`), then `bv_l3` moved to `BaseWalk` (ruling 370 (a)) and proved, and
+`exists_collarFit`'s docstring (ruling 417 (c)).*
+
+### 56.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_i5_quote_check.py` (I5j's, run, not edited) on the brief: **15 quotations, 15 verbatim**, exit 0 (`data/fs131/i5q/quote-check.txt`); `--plant`
+reports 1 not verbatim, exit 0 as the control expects (`quote-check-plant.txt`). The fifteen: `CLAUDE.md` § Counter-priors; inventory items 416, 417, 378, 386,
+369, 370; the first lines of `hfree_of_baseHyp`, `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`, `exists_preBend` (`BaseDense` at `3b120cd3`) and of `bv_l3`
+(`HexRing`); this record's M5 "Left" paragraph, § 41.4 and Stage 37's `bv_l3` route. Read in full: this record's Stages 37, 41, 45, 49–51; `plans/STANDING-RULES.md`;
+`LEAN.md`; `RUNNING.md` § Building and § Make the gate fail; `data/fs131/i5o/RingScratch.lean`; the sibling's `treatPts_inter_finite`, `badCount_lt_top`,
+`finite_centres_inter_compact`, `IsMaxRingArc.not_regularAt` (`fs131-w5c`'s `Procedure`, for the idea; nothing copied).
+
+### 56.2 The as-given build (`3b120cd3`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — 455 of 455 batches, 5
+modules rebuilt** (`Pushforward`, `CollarMap`, `BendCollar`, `BaseDense`, `Proofs` — the collar's modules, which the fast-forward brought without a build),
+**3 with warnings, every warning `declaration uses 'sorry'`** (`HexRing` 1, `Terminal` 9, `BaseDense` 4), exit 0, 8 min 43 s after about nine minutes'
+wait for the slot (two other builds held 80 GiB) (`build/gate/build/20261006T034133Z-671937.log`; driver log `data/fs131/i5q/build-asgiven.log`).
+
+### 56.3 What I may and may not change
+
+May: `BaseDense` (the three children and helpers beside them; not `cv_exists`); `HexRing` (`bv_l3` removed by the move, its linkage children stay);
+`BaseWalk` (`bv_l3` after `l3_base`, `l3_base`'s argument extracted, its statement unchanged); `BendCollar` for `exists_collarFit`'s docstring only;
+`scripts/Axioms.lean` (a block headed "FS131-I5q" above the `=== PURCHASED ===` banner); `ARCHITECTURE.md` if a row's text names `bv_l3`'s home; this record;
+`tools/fs131_i5_*.py`; `data/fs131/i5q/`; the report. May not: `Terminal`, `RadialPush`, `CollarMap`, `Pushforward`, `Proofs.lean`, any statement, any `axiom`,
+`native_decide`; no merge of `fs131-w5c` or `main`, no gate run, nothing on `main`.
+
+`sorry` by file before (`grep -rcw`, `data/fs131/i5q/sorry-counts-before.txt`): `BaseDense` 4 (`finite_maxRingArcs`, `hfree_of_baseHyp`,
+`maxRingArcs_subset_of_bend`, and `cv_exists`, the `Terminal` lane's stale copy), `HexRing` 1 (`bv_l3`), `Terminal` 9 (not mine); `Packed` 1, `Cover` 1,
+`CoverExamples` 2 are docstring words, not terms.
+
+## Stage 56 — SAVED
