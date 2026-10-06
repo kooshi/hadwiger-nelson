@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–550 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–551 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -10,7 +10,7 @@ ruling and receipt (items 1–550 at this writing; its first two sections are th
 2. **The milestone**: FS-131, the Lean backlog (`plans/STUB-lean-backlog.md`; input `plans/LEAN-BACKLOG.md`, 259 rows). Plan: `plans/FS131-kernel-plan.md`
    (ten waves, § 7.1; gate design § 7.5 — nothing with a `sorry` on `main`, a branch and worktree per lane, land by merging `main` in and fast-forwarding
    at a green gate).
-3. **Staffing** (Kooshi; items 323, 410, 412): **three Opus slots**; every slot that frees is refilled from § 4's queue. The work runs on a second
+3. **Staffing** (Kooshi; items 323, 410, 412, 551): **three Opus slots, plus one special-purpose slot for FS131-T5 only** (the gate's enumeration of assumptions; his word, 2026-10-06 — it closes at T5's hand-back and is not refilled); every slot that frees is refilled from § 4's queue. The work runs on a second
    account. Implementers launch with `model: "opus"`.
    A full halt can come at any time: at one, stop launches, have running jobs save and push, copy `/tmp` out (item 407).
 4. **Kooshi's standing words since the restart**: `origin` is the backup remote, not GitHub (item 412). Published artifacts stay local — rebuild and

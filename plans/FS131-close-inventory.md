@@ -6450,3 +6450,21 @@ reason by the close.*
      (idle; its Lean inputs equal `main`'s, by `git diff`). It takes the next free slot. **A seam named in the brief**:
      Weil's bound adds a declared import on another branch while this job removes the only one; the audit's self-test
      may need an import to exercise its IMPORTED controls, and the two branches meet at a landing.
+
+551. **Kooshi's word, 2026-10-06: the gate is to enumerate both kinds of assumption; a special-purpose staff slot for that job;
+     and the coordinator may contribute.** His message, verbatim: "One of your rulings a while back in this session stated
+     that external theorems would be imported as axioms, and internal hand proofs as hypotheses. I don't have a strong
+     opinion on how either comes in, but our gate should enumerate both. Please have an implementer add that to the gate
+     script. I authorize a special purpose staff slot for it, which closes after.
+
+     On your contribution: I have no issue with you contributing if you see an opportunity. Your rules are to preserve
+     context so you can operate in longer stretches. Seeing a proof saved us a whole agent session, so that's a great
+     tradeoff." **(1) The job**: FS131-T5, a tooling job for de Bruijn's implementer — the gate enumerates every
+     assumption a theorem rests on, in both forms: outside theorems declared as axioms (the audit lists those today)
+     and named hypotheses, outside or our own hand results (nothing lists those today; item 548 (2) found five outside
+     ones on `main` by `grep`). **(2) Staffing, his**: a fourth slot, for this job only; it closes at T5's hand-back,
+     and the cap is three again. **(3) On contributing**: recorded in the auto-memory as feedback on how I work (no
+     milestone verdict in it); item 550's contribution stands as made. The rule he refers to is `LEAN.md` §
+     Assumptions' (outside theorems may enter as axioms with four items; our own hand results as explicit
+     hypotheses), which my rulings 500 and 515 applied to Weil's bound; the named hypotheses that are outside
+     theorems predate it.
