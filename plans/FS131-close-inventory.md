@@ -7174,3 +7174,44 @@ reason by the close.*
      `main` at `e9a65a86`; brief gated), launched 2026-10-06. **From now until it hands back I commit nothing to
      `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`.** In flight: 3 (I6L,
      I6Z, LT5); the Searcher takes the next free slot.
+576. **FS131-I6L done at its Stage 4: wave 6's cover hull and parallels — fifteen of seventeen leaves proved; the two left have no kernel route and are a deriver's question** (implementer, Opus; harness 588k and 61 minutes by the task notice; record `fs131-w6l`'s `plans/FS131-I6L-implementation.md`; report `data/fs131/reports/FS131-I6L.md`; seven commits, tip `b5b8f4be`; pushed, tree clean).
+     **Proved on the standard three** (built, not gated): `pinch_of_cover` (the pinch for two sets that cover, with no
+     disjointness — FS111-M2-HULLC (v)); three more clauses of HULLC (an exterior unit disc at every boundary point;
+     the boundary on the unit parallel); in `Parallel`: `partner_point`, the three tangent-parallel leaves
+     (FS121-DB1-L7 and INTRAD's step (1)), `finite_bad_directions`, `out_family` (FS121-O1-OUT), `chain_in`
+     (FS121-DB1-L6), **`radius_integer`** (FS111-M2-INTRAD (i) for a circular arc: its radius is an integer),
+     `arc_interior`, `segment_interior` (FS121-V5-LOC (iii)), `twoColourNhd_ball_of_open`. **The shared fact** of
+     ruling 531 (c): `HasTwoDiscsAt.mem_essClosure` and `AeColouring.IsTangentPt.mem_essClosure`. **Open**:
+     `curvature_integer_ae` (INTRAD (i) along a general chart — the derivation's step is two lines and lacks an
+     almost-everywhere argument; its own route, one mind, unformalized, in its record § 4, about 600–900 lines) and
+     `finite_pieces_of_radius` (INTRAD (iii) — its derivation passes through `Fan.ends_centre`, which is in a module
+     downstream of this one). **Four generalizations** (DB1-L7 reads no arc; V5-LOC (iii) reads no chart and
+     `local_graph` is used by no leaf of `Parallel`; DB1-L6's last clause reads no chain; ruling 502 (c)'s lemma is
+     about two sets). **A route of the plan that does not go** (not a statement): neighbouring arc points' two-colour
+     balls need not overlap; proved another way. **My receipt**: tip equals `origin/fs131-w6l`, tree clean; outside
+     `data/`, `plans/`, `tools/` it changed `CoverHull`, `Parallel` (1,423 lines added), `CoverDiscs` (16 lines
+     deleted: the moved lemma) and `scripts/Axioms.lean`; `sorry` by the handoff's grep: `Parallel` 2, `CoverHull`
+     and `CoverDiscs` 0; its last real build's full log ends "Build completed successfully (5836 jobs)", every
+     warning a `sorry`; its last axioms print parsed by script — 49 records, none outside the standard three but
+     its planted control on `sorryAx`; **the heads the base declared in `CoverHull` (7) and `Parallel` (21) are
+     textually unchanged, no `include` or `omit` added, and the moved lemma's statement in `CoverHull` is the one
+     `CoverDiscs` held at the base (by script)**. Not checked by me: the proofs beyond the build; its kernel
+     statement check's code; its § 4 route. **Predictions scored**: the plan priced `CoverHull` at 1.2 days and
+     `Parallel`'s eleven at about 9 — one job; 1,573 lines, for which the calibration's line gives 514k against
+     588k measured; handoff § 5's "expect continuation jobs" was wrong for this one. **Credit**: the two hard
+     leaves left untouched and said why, with a route for one and the layout fault of the other; four rows found
+     to read less than filed. **Rulings.** (a) **A deriver's job is launched on the cluster these two leaves and
+     item 566's gap share — FS131-E9; rulings 565 (b) and 566 (c) are amended.** Its three questions: INTRAD (i)
+     along a general chart (the implementer's route to confirm or replace); INTRAD (iii) without the terminal
+     centres' finiteness, or its right place after `Centre`; and whether a saturated colouring with locally
+     finite singular set has interfaces that are locally finitely many segments and circular arcs — what follows
+     from held entries, and what stays open (no accumulating radii). Alternative: keep all three as named open
+     statements to the landing. Why the change: three jobs have now reached the same missing mathematics from
+     three sides (wave 9's planner, wave 6's fourth planner, this implementer), one of them with a route written
+     out; a deriver's hour settles which parts are provable before two kernel jobs are spent on them. Confidence:
+     medium-high. Claim list and brief not written. (b) `finite_pieces_of_radius`'s move below `Centre` is decided
+     after E9. (c) The shared fact's commit is sent to the running `Centre` implementer (one message: merge or
+     keep its hypothesis, its choice). (d) `c11_discs_of_cover` appears in two audit blocks: one line at the join.
+     (e) Its drafts (five regrades, three errata lines, a `LEAN.md` bullet) are held for the filing; the inhabitant
+     notes it names (R7 as a seven-colouring) join the wave's owed list. (f) **Slot → the Searcher**
+     (`SEARCH-2026-10-06`, item 574), launched 2026-10-06. In flight: 3 (I6Z, LT5, the Searcher).
