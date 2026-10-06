@@ -4880,3 +4880,26 @@ reason by the close.*
      sees in the next report. (c) **K10b** (the three unstated rows, J45-N1 (a)(b), the two floor rows) follows the implementers.
      (d) **J45-SI-5's question** goes with FS131-E8's brief as a second question, or to K10b if it finds the argument. (e) The slips are
      logged; no redo. In flight: 1 (MC1) + 1 (K6) + 1 (I10A) = 3.
+
+486. **FS131-K6 done at its Stage 7: wave 6's first planning pass — dispositions for all 35 rows, the foundation, four rows proved at a wider
+     class, eight leaves stated; 23 rows and five more go to a second pass** (planner; harness ≈ 459k by the task notice; record `fs131-w6`'s
+     `plans/FS131-w6-kernel-plan.md` Stages 1–7; report `data/fs131/reports/FS131-K6.md`; commits `b29f01e1`, `c3ffb4e7`, `714a972b`;
+     pushed, tree clean). **Proved on the branch**: FS121-D3-FALLSAT, -V2-EROSION-DIAM, -C1-BOUND, -C1-GMAP, each wider than filed;
+     FS111-M-HALF's dichotomy. Stated with `sorry`: FS111-M-PINCH, C11 (i) and (iii), FS121-C1-SAT (8 leaves). The foundation
+     `Plane/Saturated/Basic` with no `sorry` and an inhabitant (`sq9` at an edge point). **Statement defects in filed results**: the tangent
+     type needs its contacts; REG-J′'s frozen words are weaker than the fan every consumer reads, by four clauses (both ruled, item 481);
+     FS116-S1-KAPPA and -S1-PAIR hide `k = 6`. **My receipt**: tip equals `origin/fs131-w6`, tree clean; `sorry` by the handoff's grep:
+     `Basic` 0, `Pinch` 7, `MapColouring` 1 — the eight leaves reported; its final build log ends `EXIT 0`; `RegJLiteral`, `RegJFan`,
+     `RegJBridge` read in `data/fs131/k6/FanDesign.lean` l. 22–71. **Items**: slips, the job's, disclosed — 12 of 35 rows' arguments read in
+     full, 23 from their entries; `sat_inP` has no Lean model of all its hypotheses yet (`sq9` as an `ArcMap 9` owed before the wave's
+     gate). **What the second pass needs** is in its report: restate the foundation's pointwise predicates over a family of sets (the
+     fragment rows read PINCH on a fragment), the fan design, curves as sets.
+487. **Rulings on K6's held items, and two slots.** (a) FS121-D1-VT is declared under its own name as VT-W's `C¹` case (its merge condition
+     fails). (b) FS111-M2-HULLC: `∂U ⊆ {d_C = 1/2}` is formalized and the finite-perimeter step (Federer 4.5.11) is a named classical
+     hypothesis with `LEAN.md` § Assumptions' four items — default; it changes if the second pass finds the perimeter conclusion unread by
+     any row. (c) The proposed merges (W-NOBEND with C11; DB1-L7 with O1-OUT) are the second pass's to confirm. (d) **The order**: the second
+     planning pass, FS131-K6b, before any implementer on `pinch` (it changes `Basic`'s signatures). (e) FS116-S1-KAPPA and -S1-PAIR are
+     stated at `ArcMap 6`; a correction owed to their entries. (f) **Slots**: FS131-I10A (wave 10's `SpectralInputs`) launched on
+     `fs131-w10`; **FS131-E8**, the deriver on REG-J′'s bridge (ruling 481 (c); brief `data/fs131/briefs/FS131-E8-regj-bridge.md`, gate
+     PASS, with J45-SI-5's question as a second), launched on `main`'s `plans/` and `data/`. In flight: 1 (MC1) + 1 (I10A) + 1 (E8) = 3.
+     Queue: FS131-K6b; FS131-I10B and I10C (`mk-i10.py B`, `C`, each on a branch cut from `fs131-w10` at `f919973e`); K10b.
