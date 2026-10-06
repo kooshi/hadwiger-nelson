@@ -235,6 +235,9 @@ import Proofs.HadwigerNelson.Plane.Saturated.MapColouring
 import Proofs.HadwigerNelson.Plane.Saturated.Fan
 import Proofs.HadwigerNelson.Plane.Saturated.FanExamples
 import Proofs.HadwigerNelson.Plane.Saturated.Curve
+import Proofs.HadwigerNelson.Plane.Saturated.CurveArc
+import Proofs.HadwigerNelson.Plane.Saturated.ArcContinuation
+import Proofs.HadwigerNelson.Plane.Saturated.FanArcs
 import Proofs.HadwigerNelson.Plane.Saturated.LocalGraph
 import Proofs.HadwigerNelson.Plane.Saturated.FanBridge
 import Proofs.HadwigerNelson.Arith.NoAffine

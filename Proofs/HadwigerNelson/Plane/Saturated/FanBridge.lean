@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.Saturated.LocalGraph
 import Proofs.HadwigerNelson.Plane.Saturated.FanExamples
+import Proofs.HadwigerNelson.Plane.Saturated.FanArcs
 
 /-!
 # The bridge: an isolated singular point of a saturated colouring has a fan (FS-131 wave 6: FS131-E8)
@@ -67,8 +68,8 @@ each end: `IsUnitCurve` on the closed interval. Not closed: `γ` is injective on
 theorem gamma (h : c.IsolatedAt z R) {y : ℂ} (hy : y ∈ c.essBdry ∩ (ball z R \ {z})) :
     ∃ (L : ℝ) (γ : ℝ → ℂ) (ψ : ℝ → ℝ), 0 < L ∧ L ≤ Real.pi / 2 ∧ IsUnitCurve γ ψ (Icc 0 L) ∧ InjOn γ (Icc 0 L) ∧
       connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) y = γ '' Ioo 0 L ∧
-      (γ 0 = z ∨ γ 0 ∈ sphere z R) ∧ (γ L = z ∨ γ L ∈ sphere z R) := by
-  sorry
+      (γ 0 = z ∨ γ 0 ∈ sphere z R) ∧ (γ L = z ∨ γ L ∈ sphere z R) :=
+  exists_arc_of_isolated h.le h.sing h.sat hy
 
 end AeColouring
 
@@ -78,8 +79,8 @@ angle that tends to the initial tangent angle. -/
 theorem IsUnitCurve.exists_polarGraph {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {L : ℝ} (h : IsUnitCurve γ ψ (Icc 0 L)) (hL : 0 < L)
     (hLπ : L ≤ Real.pi / 2) :
     ∃ φ : ℝ → ℝ, ContinuousOn φ (Ioo 0 (dist (γ L) (γ 0))) ∧ Tendsto φ (𝓝[>] 0) (𝓝 (ψ 0)) ∧
-      γ '' Ioo 0 L = polarGraph (γ 0) (dist (γ L) (γ 0)) φ := by
-  sorry
+      γ '' Ioo 0 L = polarGraph (γ 0) (dist (γ L) (γ 0)) φ :=
+  h.exists_polar_angle hL hLπ
 
 namespace AeColouring
 
@@ -91,8 +92,8 @@ on the circle; no component has both ends at `z`). -/
 theorem beta (h : c.IsolatedAt z R) {y : ℂ} (hy : y ∈ c.essBdry ∩ (ball z R \ {z}))
     (hz : z ∈ closure (connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) y)) :
     ∃ (φ : ℝ → ℝ) (d : ℝ), ContinuousOn φ (Ioo 0 R) ∧ Tendsto φ (𝓝[>] 0) (𝓝 d) ∧
-      connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) y = polarGraph z R φ := by
-  sorry
+      connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) y = polarGraph z R φ :=
+  exists_polarGraph_of_isolated h.le h.sing h.sat hy hz
 
 /-- **FS131-E8-ALPHA.** In the setting `IsolatedAt`, finitely many components of the essential boundary in the
 punctured disc meet the closed disc of radius `R/2`, and there is `r ∈ (0, R/2]` such that every essential boundary
@@ -101,8 +102,8 @@ theorem alpha (h : c.IsolatedAt z R) :
     {K : Set ℂ | ∃ y ∈ c.essBdry ∩ (ball z R \ {z}),
         K = connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) y ∧ (K ∩ closedBall z (R / 2)).Nonempty}.Finite ∧
       ∃ r, 0 < r ∧ r ≤ R / 2 ∧ ∀ w ∈ c.essBdry ∩ (ball z r \ {z}),
-        z ∈ closure (connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) w) := by
-  sorry
+        z ∈ closure (connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) w) :=
+  finite_components_of_isolated h.pos h.le h.sing h.sat
 
 /-! ## FS131-E8-FAN, -BRIDGE, -CLAUSE2 -/
 

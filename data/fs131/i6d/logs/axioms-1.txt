@@ -1,0 +1,31 @@
+ok     Proofs/HadwigerNelson/Plane/Saturated/CurveArc.lean: 0 `sorry` token(s)
+ok     Proofs/HadwigerNelson/Plane/Saturated/ArcContinuation.lean: 0 `sorry` token(s)
+ok     Proofs/HadwigerNelson/Plane/Saturated/FanArcs.lean: 0 `sorry` token(s)
+note   Proofs/HadwigerNelson/Plane/Saturated/FanBuild.lean: not on disk yet
+CLEAN    HadwigerNelson.Plane.IsUnitCurve.affine: ['Classical.choice', 'Quot.sound', 'propext']
+UPSTREAM HadwigerNelson.Plane.IsUnitCurve.sin_abs_le_dist: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+CLEAN    HadwigerNelson.Plane.IsUnitCurve.dist_le: ['Classical.choice', 'Quot.sound', 'propext']
+UPSTREAM HadwigerNelson.Plane.IsUnitCurve.injOn_of_abs_le: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.IsUnitCurve.abs_sub_lt_of_dist_lt_one: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+CLEAN    HadwigerNelson.Plane.isUnitCurve_angleCurve: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN    HadwigerNelson.Plane.IsUnitCurve.eqOn_angleCurve: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN    HadwigerNelson.Plane.eq_affine_of_sin_bounds: ['Classical.choice', 'Quot.sound', 'propext']
+UPSTREAM HadwigerNelson.Plane.IsUnitCurve.reparam: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.IsUnitCurve.exists_polar_angle: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.IsArcOf.eqOn: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.ArcSetting.exists_max_arc: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.IsArcOf.left_end_notMem: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.IsArcOf.right_end_notMem: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.ArcSetting.exists_component_arc: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.AeColouring.arcSetting_of_isolated: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.AeColouring.exists_arc_of_isolated: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.AeColouring.exists_polarGraph_of_isolated: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.AeColouring.finite_components_of_isolated: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.AeColouring.gamma: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.IsUnitCurve.exists_polarGraph: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.AeColouring.beta: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+UPSTREAM HadwigerNelson.Plane.AeColouring.alpha: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+control (an upstream sorry leaf reads sorryAx): fires
+control (a proved upstream lemma reads clean): passes, as it must
+control (a missing declaration is an error): fires
+records 23: clean 5, resting on upstream sorry leaves 18; OK

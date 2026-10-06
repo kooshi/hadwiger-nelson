@@ -6373,6 +6373,32 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.norm_sub_le_of_discs
 #print axioms HadwigerNelson.Plane.sq9_isolatedAt
 
+/-! ## FS131-I6D — wave 6, the bridge's existence half: the curve lemmas, the continuation, GAMMA, BETA, ALPHA (until `fs131-w6c` joins, the records that read `Curve`'s or `LocalGraph`'s leaves print `sorryAx` on this branch) -/
+
+#print axioms HadwigerNelson.Plane.IsUnitCurve.affine
+#print axioms HadwigerNelson.Plane.IsUnitCurve.sin_abs_le_dist
+#print axioms HadwigerNelson.Plane.IsUnitCurve.dist_le
+#print axioms HadwigerNelson.Plane.IsUnitCurve.injOn_of_abs_le
+#print axioms HadwigerNelson.Plane.IsUnitCurve.abs_sub_lt_of_dist_lt_one
+#print axioms HadwigerNelson.Plane.isUnitCurve_angleCurve
+#print axioms HadwigerNelson.Plane.IsUnitCurve.eqOn_angleCurve
+#print axioms HadwigerNelson.Plane.eq_affine_of_sin_bounds
+#print axioms HadwigerNelson.Plane.IsUnitCurve.reparam
+#print axioms HadwigerNelson.Plane.IsUnitCurve.exists_polar_angle
+#print axioms HadwigerNelson.Plane.IsArcOf.eqOn
+#print axioms HadwigerNelson.Plane.ArcSetting.exists_max_arc
+#print axioms HadwigerNelson.Plane.IsArcOf.left_end_notMem
+#print axioms HadwigerNelson.Plane.IsArcOf.right_end_notMem
+#print axioms HadwigerNelson.Plane.ArcSetting.exists_component_arc
+#print axioms HadwigerNelson.Plane.AeColouring.arcSetting_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.exists_arc_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.exists_polarGraph_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.finite_components_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.gamma
+#print axioms HadwigerNelson.Plane.IsUnitCurve.exists_polarGraph
+#print axioms HadwigerNelson.Plane.AeColouring.beta
+#print axioms HadwigerNelson.Plane.AeColouring.alpha
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
