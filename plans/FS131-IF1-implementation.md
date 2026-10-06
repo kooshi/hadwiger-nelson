@@ -63,6 +63,54 @@ live in `scripts/axioms-controls.txt`, which I will edit in Stage 4 (held for th
 **Build as given**: `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, exit 0, "all 1805 modules
 already up to date, nothing built, 0 module(s) with warnings" (`data/fs131/if1/build-stage1.log`).
 
+## Stage 2 — SAVED (FS131-IF1): the route attacked, the lemmas confirmed, the skeleton stated, the price
+
+**The candidate route, step by step** (the brief's § A candidate route; `φ_S(c, r) = |S ∩ B̄(c, r)| / |B̄(c, r)|`).
+
+| step | what it reads | verdict |
+|---|---|---|
+| (1) both `S` and `Sᶜ` have density points | Lebesgue's density theorem, `Besicovitch.ae_tendsto_measure_inter_div` (closed balls, `𝓝[>] 0`, any set) with `Measure.exists_mem_of_measure_ne_zero_of_ae` | **accepted** |
+| (2) the step: a ball of ratio `1/2` and radius `≤ δ` inside `B` | at small `ρ`, `φ_S(a, ρ) > 1/2` and `φ_{Sᶜ}(b, ρ) > 1/2`, hence `φ_S(b, ρ) < 1/2` (the two ratios sum to `1`: this is where measurability is read); `c ↦ φ_S(c, ρ)` continuous; intermediate value | **accepted, one change**: the centres allowed are the whole convex ball `B̄(c₀, R − ρ)` (`convex_closedBall`, `Convex.isPreconnected`, `IsPreconnected.intermediate_value`), not the segment — no parametrization, and `B̄(c, ρ) ⊆ B̄(c₀, R)` is one triangle inequality |
+| (2′) continuity in the centre | `S ∩ B̄(c′, ρ) ⊆ (S ∩ B̄(c, ρ)) ∪ (B̄(c, ρ + d) ∖ B̄(c, ρ))`, `d = dist c′ c`; the annulus has measure `|B̄(0, ρ + d)| − |B̄(0, ρ)| → 0` (`Measure.addHaar_closedBall'`); both directions by symmetry; `ENNReal.tendsto_nhds` | **accepted**; needs no measurability of `S` |
+| (3) a ball of ratio `1/2` holds a density point of each in its interior | positive measure of `S` and `Sᶜ` in the open ball (`Measure.addHaar_sphere_of_ne_zero`), then (1) in the open ball | **accepted** |
+| (3′) the sequence | dependent choice on the subtype of balls of ratio `1/2` (`choose` on the step, `Nat.iterate`) | **accepted** |
+| (4) the common point | nested compact sets (`IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed`, `ProperSpace`); `B̄(cₙ, rₙ) ⊆ B̄(x, 2 rₙ)` and `|B̄(x, 2 rₙ)| = 2^d |B̄(cₙ, rₙ)|` (`Measure.addHaar_closedBall_mul`), so both ratios at `x` along `2 rₙ` are at least `1 / (2 · 2^d)`; neither tends to `1` | **accepted**; at `d = 2` the bound is the brief's `1/8` |
+
+No step refuted. Two things the attack added, both the brief's "better outcomes":
+
+- **Any dimension, and the paper's hypothesis.** Nothing in the argument reads the plane: it runs in a finite-dimensional real
+  normed space `E` with an additive Haar measure `μ`, for a `μ`-null-measurable `S` (for Lebesgue measure, a Lebesgue measurable
+  set — the paper's "measurable"). The axiom's statement is the instance `E = ℂ`, `μ = volume`, `S` Borel, **by unfolding**:
+  `data/fs131/if1/lean/Bridge.lean` elaborates `H hS.nullMeasurableSet h1 h2` against the axiom's conclusion.
+- **A quantitative form**: at the point found, along radii `→ 0`, `S` and `Sᶜ` both have ratio `≥ 1 / (2 · 2^d)` — both have
+  positive upper density there, with an explicit constant. The paper's statement is its corollary.
+
+**Lemmas confirmed with `#check` at the pin** (`data/fs131/if1/lean/Checks.lean`, `lake env lean`):
+`Besicovitch.ae_tendsto_measure_inter_div`, `MeasureTheory.Measure.addHaar_closedBall`, `…addHaar_closedBall'`,
+`…addHaar_closedBall_center`, `…addHaar_sphere` (needs `Nontrivial E`; `addHaar_sphere_of_ne_zero` does not),
+`…addHaar_closedBall_mul`, `MeasureTheory.measure_inter_add_diff₀` (deprecated at the pin for `measure_inter_add_sdiff₀`),
+`MeasureTheory.measure_diff` (deprecated for `measure_sdiff`), `IsPreconnected.intermediate_value`, `convex_closedBall`
+(`Mathlib/Analysis/Normed/Module/Convex.lean`), `Convex.isPreconnected`, `ENNReal.tendsto_nhds`, `ENNReal.Tendsto.sub`,
+`IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed`, `Metric.closedBall_subset_closedBall'`,
+`MeasureTheory.ae_restrict_of_ae_restrict_of_subset`, `Metric.ball_union_sphere`, `MeasureTheory.Measure.restrict_apply`;
+by grep, `MeasureTheory.Measure.exists_mem_of_measure_ne_zero_of_ae` (`Mathlib/MeasureTheory/Measure/Restrict.lean:414` — under
+`Measure`). Instances resolved: `HasBesicovitchCovering E`, `ProperSpace E`, `SecondCountableTopology E` for finite-dimensional
+real normed `E`; `(volume : Measure ℂ).IsAddHaarMeasure`, `FiniteDimensional ℝ ℂ`.
+
+**The skeleton** (`data/fs131/if1/lean/MetricalBoundary.skeleton.lean`; elaborates with 13 `sorry`s, the last theorem's
+assembly from its two children already a proof): `measure_inter_closedBall_le_add`, `tendsto_measure_closedBall_sub`,
+`continuous_measure_inter_closedBall`, `measure_inter_closedBall_div_add_compl`, `exists_mem_ball_tendsto_ratio`,
+`measure_inter_ball_ne_zero_of_ratio_eq_half`, `exists_closedBall_ratio_eq_half` (the step),
+`exists_closedBall_subset_ratio_eq_half`, `exists_closedBall_ratio_eq_half_of_measure_ne_zero`,
+`exists_nested_closedBalls_ratio_eq_half`, `ratio_two_mul_ge`, `exists_ratio_ge_and_compl_ge` (the quantitative form),
+`not_tendsto_ratio_compl_of_ratio_ge`, `exists_not_tendsto_ratio_and_compl` (the paper's statement, any dimension). No new
+definition: the ratio is written out, in the shape of Besicovitch's theorem in Mathlib.
+
+**Price, after the attack**: about 250 lines of Lean in one new module `Proofs/HadwigerNelson/Plane/MetricalBoundary.lean`
+(imports Mathlib only), one line of proof and one import in `FalconerReduction`; the `ENNReal` arithmetic of
+`ratio_two_mul_ge` and the continuity lemma are where the lines go. The working file stays out of the library (and of
+`Proofs.lean`) until it has no `sorry`; snapshots are committed under `data/fs131/if1/lean/`.
+
 ## Theorems this phase proved
 
 *(none yet — Stage 1 is the readback)*
