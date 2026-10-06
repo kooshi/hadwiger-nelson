@@ -164,7 +164,7 @@ Hypotheses: `hF : F.Valid`, `hv : F.Covers v 1`, `hH : F.IsHorn v α κ₁ κ₂
 | `Valid` | § 3.2's five cases (V1–V5), by colour: background squares of side `3/5` in nine colours (same-colour gap `6/5`); `H` against `T_c` (`z·p > |z|²/2`); `G₀` against `T′`; `H₀` against `T` — each read, each right |
 | `Covers 0 1` | a map of the plane |
 | `IsHorn 0 0 0 2 c` | `hornSet 0 0 0 2 r = {|z| < r, x > 0, y > 0, y < x² + y²}` — the tile `H` within `B(0, r)` for `r < 1/10`, connected, bounded by the axis and `C₂`, both arcs of the map |
-| `HasSectors 0 c 1` | `c`'s other tile `T_c` is `2/5` away |
+| `HasSectors 0 c 1` | `c`'s other tile `T_c` lies at least `7/10` from `0` (its centre is `9/10` away, its radius `1/10`) |
 | `hD` | `cl T_c` meets `ω(0)` at `w = (3/5, 4/5)` only, `T_c ⊆ B(0, 1)`: one contact, in-type and not out-type, so `allowedCone 0 c = {d : d·w ≥ 0}`, a half-plane — **the clause is exercised** (a contact exists; the cone is not `univ`) |
 | `HasDegree 0 3` | the sectors `H`, `G₀` (connected: its parts left of the axis and inside `C₂` overlap), `H₀` |
 | `HasHornCount 0 1` | `H` is a horn set; a half-disc is not one for small `r` (a point `(x′ → 0⁺, −r/2)` in the frame of any direction is above no arc of fixed curvature `κ₁` once `r < 4/|κ₁|`), nor is `G₀` |
@@ -254,3 +254,106 @@ below `1` in fresh colours, with the bowtie's own arcs kept (its domain's fronti
 the bowtie's, so the contacts of `c` at `0`, their types, `allowedCone 0 c`, the sectors, horns and flanks at `0`, and every `IsClear g z` for
 `g < 6` are unchanged; so `IsStuck 0`, `HasSectors 0 1 2`, the horns, the flanks and the in- and out-type contacts at `±i` all persist, at
 `k = 6 +` the number of cells. Not in Lean, and not a small job (§ 6).
+
+## Stage 4 — SAVED (FS131-QA4): the heads, by family, each with its line
+
+Classes (brief, Done means 2): **AT-ONCE** — one named Lean object satisfies every hypothesis the theorem does not refute, every clause
+exercised; **AT-ONCE, unnamed** — such an object is in the library and the theorem's file or docstring does not name it (the rule's R1 unmet,
+R3 met); **BY-HYPOTHESIS** — each hypothesis has a named inhabitant, no named object has all; **NOTE-NONE** — the docstring says no model is
+held or known; **DECLARED** — a step inside a proof by contradiction, the docstring says so with the refuting theorem; **OPEN** — the
+hypotheses' satisfiability is itself the open question at the stated parameter (flagged in § 6.3: the rule has no line for it);
+**PARAMETRIC** — outside the rule. Heads are counted by the script (`heads.tsv`); the class is from reading the statements named, and a family's
+children inherit it (§ 2.3). "Hand model" is graded [hand] and is mine unless attributed.
+
+### 4.1 `main` (`d4403f09`): 145 heads
+
+| family (module; heads) | hypotheses, in words | class | named object; what is missing | attack / hand model |
+|---|---|---|---|---|
+| sector charts (`LocalStructure`; 3) | a point of the domain | AT-ONCE | `localSectors_disj` is a universal existence theorem; `halfDisc_sectorChart` | — |
+| FS106-L, TS-T (`SVMap`; 11) | plane sets; `Valid ∧ IsPlaneMap` | PARAMETRIC (L); AT-ONCE, unnamed (TS-T) | `sevenBrickMap` (same file) satisfies `ts_t`, `ts_t_trichromatic`, `ts_t_degree_three` (three colours, degree 3 at each corner); no docstring names it | — |
+| N4-FIN, N2-RAY (`StuckChain`; 5) | reals | PARAMETRIC | — | — |
+| ring-arc theorems: LOCK, N2-SIGN, L60-LE/EQ, N2-ENV, U1, ISO (`UnitArc`; 19) | `Valid ∧ IsRingArc P θ₁ θ₂ c c′` (L60-EQ: an arc of exactly `π/3`) | AT-ONCE, unnamed | `l60Frag` (`l60_real`, same file): valid, `IsRingArc 0 0 (π/3) 0 1`, exactly `60°` | — |
+| the toward bend `bend_toward` (`UnitArc`; 1) | `Valid`, a ring arc, outer colour not at the centre | AT-ONCE, unnamed | `l60Frag`'s arc; `1 ∉ l60Frag.coloursAt 0` is proved only inside `collarModel` (wave 5) | QA4-C1 [scratch-kernel] on the sub-arc |
+| the away bend `bend_away_whole` (`UnitArc`; 1) | `Valid`, a ring arc, inner colour not at the centre, `R₂(ᾱ)` off the inner class's closure | nothing named | no named map has a ring arc whose inner colour is absent at its centre | **hand**: `cuspFrag`'s arc of `ω(i)` on one side of `0` — the centre `i` is outside the closure of the domain `B(0, 1/2)`, so no colour is carried there, and `R₂` (near `−i`) is `1/2` from the domain; needs one lemma, `cuspFrag.IsRingArc I θ₁ θ₂ 0 1` |
+| FLANK-Q (`flankQ_upper/lower/both` and shadows; `UnitArc`; 5) | `Valid ∧ Covers v 1`, a horn with a flank, out-type contact, the horn bound's arc (Q) or (R2) | BY-HYPOTHESIS; nothing named | `bowtie` at `0` has all but `Covers` (QA4-B1) | the completed bowtie (§ 3.5) |
+| A4SIX, NB4P (`a4six`, `straddlers_third`, `nb4p` [R]; `UnitArc`; 3) | `Valid ∧ Covers v 1`, ring structure on `ω(v)`, a covering pair | nothing named | `sixFrag` (`sixFrag_covers`) is the candidate QA2 named; nobody has checked it against these sets | not attacked beyond QA2's reading (the hypotheses are the derivation's own case) |
+| N3-PAIRS, N3-FAIL, N3-ANTI (`BaseSteps`; 7) | `Valid ∧ Covers u 1`, cubic trichromatic vertices, pseudo-colours, strips, M-in points | `anti` [R]: AT-ONCE for all but its refuted clause (`sevenBrick_corner_isCubicTrichromatic`, `sevenBrick_corner_mIn`); `pair_P'`: AT-ONCE by periodicity, one corner named; **`pair_ii`, `fail_leavingCentre`, `fail_colours`: BY-HYPOTHESIS** | the note names `sevenBrick_corner_isCubicTrichromatic`, an inhabitant of one hypothesis: **on `sevenBrickMap` the other hypotheses cannot hold with it**, since each conclusion (a four-colour point, a both-kind arc, a leaving centre) is false there (no unit arc, no four-colour point) | satisfiable only on a map with a unit arc ending at a cubic vertex; none named; `pair_i` [R] is a refutation whose note names one hypothesis' inhabitant |
+| the three moves (`Contact`, `Moves`; 6 with the `_aux` forms) and their children (`Surgery`, `MergeMove`; 6 row heads, 134 cited children) | § 3.3 | nothing named; BY-HYPOTHESIS | § 3.3 | § 3.3: hand models; not breakable |
+| OPEN (`OpenMove`; 2 heads, 103 children) | § 3.2 | NOTE-NONE | E6's map at [hand] | § 3.2: re-read, confirmed |
+| stuck under Condition 5 (`stuck_pole_N`, `stuck_structure_flanks`, `stuck_structure`, `stuck_neighbour`, `stuck_flip`, `stuck_step`, `stuck_chain`; `Contact`; 7) | `Valid ∧ Covers ∧ Condition5 ∧ IsStuck …` | DECLARED | "no model expected … a step inside FS110-N4-PROP's proof by contradiction" (refuted with `n4_fin`); `stuck_structure`'s reason names `bowtie_isStuck` failing Condition 5 | QA2-5, closed by the docstrings; consistent with QA4-B1 |
+| horns and flanks under Condition 5 (`woodallCone_isHorn`, `horn_unique_of_stuck`, `flank_shadows`, `shaveAvailable_of_not_doublyShadowed`, `flank_ne_of_doublyShadowed`; `Contact`; 5) | `Valid ∧ Covers ∧ Condition5`, a horn with flanks | nothing named; BY-HYPOTHESIS | `cuspFrag` and `bowtie` have horns bounded by unit arcs, so both fail Condition 5, and both fail `Covers` | **hand**: E6's map — no arc of radius `1` (Condition 5), a horn with both flanks at `0`, a plane map; `DoublyShadowed` there fails (its shadows are complementary), so `flank_ne_of_doublyShadowed` has no model I know |
+| N3-CONF, N3-DEG, N4-SHADOW (`Cone`; 13) | `Valid ∧ Covers`, contacts and cones | AT-ONCE, unnamed for the contact lemmas (`sevenBrickMap` at a corner: the far corner at distance `1`); `woodallCone` (cone with empty interior): BY-HYPOTHESIS (`bowtie` minus `Covers`); `shaveAvailable_of_adjacent_horns`: DECLARED | — | the completed bowtie |
+| Woodall's chain (`Woodall/*`; 43) | `Valid ∧ IsPlaneMap ∧ WoodallNormal/Merged`; collars; `SectorsAt` | AT-ONCE at `k = 7` | `sevenBrickMap_woodallModel`, `sevenBrickMap_thm6Model` (`Steps` l. 1118, 1127): QA2-1 is closed; `not_woodall_step4_two_thirds` for the collars | the refutations `SectorsAt.false_of_ncard_le_two_on_arc`, `false_of_four_le_sectors`, `woodall_step4`, `townsend_lemma` carry no line "a refutation step: no model expected" (R4's letter), though the file's models cover their background |
+
+### 4.2 Wave 5 (`3b120cd3`): 129 heads
+
+| family (module; heads) | hypotheses, in words | class | named object; what is missing | attack / hand model |
+|---|---|---|---|---|
+| plane topology, curve graphs (`PlaneTopology`, `CurveGraph`; 8) | sets of the plane | PARAMETRIC; `HasCurveStar`: AT-ONCE (`halfLine_hasCurveStar`) | — | — |
+| Thomassen (`Thomassen`; 2 heads, 79 children) | a locally finite, connected, locally Hamiltonian infinite graph; `PlanarLike` | AT-ONCE | `triLattice_hyps`, `triLattice_planarLike` ("every field is exercised") | — |
+| E4-OUTERMOST, E4-RIM (`MapTopology`; 17) | `Valid`, tiles, `EnclosesTile`; base hypotheses for `exists_eleventh_of`, `exists_far_end` | AT-ONCE, unnamed (universal over tiles of a valid map); the two base lemmas: DECLARED through `BaseCtx` | `sevenBrick_unenclosedC` (`BrickMap`) | — |
+| the planar reduction (`MapGraph`; 47) | `Valid ∧ IsPlaneMap`, outer tiles, boundary walks, port graphs | AT-ONCE | `cvb_thom`, `cvb_thom_reduced`, `cvb_pinch_connected` name `sevenBrickMap`; `IsBoundaryWalk`, `IsEdgeOf`, `IsPortGraph` are supplied by existence theorems on every plane map (`exists_boundaryWalk`, `exists_edgeOf`, `exists_isPortGraph`) | **`cvb_hole_disconnected`** (`Valid ∧ IsPlaneMap ∧ IsTile T ∧ IsHoleOf T Hc`): BY-HYPOTHESIS — the one holed model, `exists_holed_valid_fragment`, is a fragment; **hand**: a fresh-coloured disc planted inside a brick (§ 3.2 (b) gives it in Lean) |
+| `Chain` (5) | definitions' lemmas | AT-ONCE, degenerate (`IsModification.refl`, `const_qrOnly`) | a non-degenerate modification: any proved move's output, none yet composed | — |
+| COR3 (`Cor3`; 4) | a cubic vertex, a both-kind leaving centre | NOTE-NONE ("No inhabitant: a valid fragment with such a pair is FS112-STOP's object; `GENERIC`") | — | not attacked: FS112-STOP's object is a derivation's question |
+| DISC1, TS-T on squares (`Dense`; 6) | `Valid ∧ IsPlaneMap` | AT-ONCE | `sevenBrickMap` named in three docstrings; `not_row134BaseUA_seven` is the base's seven-colour control | — |
+| FLANK, shadows with unit arcs (`FlankUA`; 2 row heads, 23 cited children) | `Valid ∧ Covers v 1`, horn, flanks, contacts, no MERGE | **BY-HYPOTHESIS, with a note that says AT-ONCE** (QA4-2: 9 docstrings) | `bowtie` minus `Covers` | the completed bowtie |
+| ROT-HEX, BV-HEX (`HexRing`; 10) | base hypotheses; ring colourings | `bv_hex`, `p17_ua`, `bv_nd`, `bv_nd1`, `bv_l3` [R]: DECLARED ("a refutation: no model expected"); `rot_noThird`: DECLARED; **`rot_out`, `rot_in`: nothing said** (they sit under the same base hypotheses); `hex_regular`: a model named in words ("the regular vertex of the hexagonal tiling"), no Lean object | — | `hex_regular`'s set is a cubic vertex with three `120°` sectors: `threeSectorDisc`'s centre has that picture on a disc of radius `1/3`; whether the statement's other hypotheses hold there I did not read |
+| the base's walk (`BaseWalk`, `BaseDense`; 31) | `BaseCtx F u` at six colours | DECLARED, in the rule's best form | the structure's docstring: "Refuted by `row134BaseUA`; every theorem of this file is a step of that refutation (no model expected)"; the live parameter is exhibited — `not_row134BaseUA_seven`: at `k = 7`, `sevenBrickMap` at its corner satisfies every hypothesis | — |
+| the dense steps (`exists_preBend`, `n3_base` [R], `exists_unenclosed_or_bad`, `localDense`, `dense3`, `cv_exists`; `BaseDense`; 6) | a valid six-coloured fragment or plane map | `exists_unenclosed_or_bad`: AT-ONCE at seven (`sevenBrickMap`, named); `localDense`: NOTE-NONE ("no valid six-coloured fragment on a disc of radius 3 is known"); `dense3`, `cv_exists`: OPEN, nothing said | — | — |
+| the collar (`RadialPush`, `CollarMap`, `Pushforward`, `BendCollar`; 10 heads) | § 3.1 | `CollarFit` lemmas: AT-ONCE (`collarModel`); `bend_toward_collar`: BY-HYPOTHESIS as stated | § 3.1 | § 3.1 [scratch-kernel] |
+
+### 4.3 Wave 5c (`87e95385`): 44 heads
+
+| family (module; heads) | hypotheses, in words | class | named object; what is missing | attack / hand model |
+|---|---|---|---|---|
+| stuck structure with unit arcs, any `k` (`stuck_flanks_ua`, `stuck_structure_ua`, `woodallCone_isHorn_ua`, `flankQ_*_of_qrOnly`, `mergeAvailable_of_not_mem_pole`, …; `Terminal`; about 10 and their children) | `Valid ∧ Covers v 1 ∧ IsStuck v`, at most three colours | **BY-HYPOTHESIS, with a note that says AT-ONCE** (QA4-2: 8 docstrings); three say it rightly ("local hypotheses", "`Covers` is the caller's") | `bowtie` minus `Covers` | the completed bowtie [hand] |
+| N3-END, Y3-END-NEEDS, CV-HD, C-DOUBLE, CV-CLASS, C-ENDS, the runs (`Terminal`; 17 at `ArcMap 6` on a plane map, and `n3_end*` at any `k` on a terminal plane map) | a terminal valid plane map with a stuck vertex | OPEN at six colours; NOTE-NONE at any `k` ("No model of a stuck vertex in a terminal valid plane map is known (`GENERIC`: FS-115's question)"); the refutations inside say "no model expected" | the local hypotheses on `bowtie`, said as such | **neither broken nor inhabited**: at six colours a model is a valid six-map of the plane; at seven or more, a terminal plane map with a stuck vertex is a construction nobody has made (the completed bowtie is valid and stuck at `0`, but terminal everywhere and (Q)/(R2)-only is not checked) |
+| `exists_red`, `exists_terminalMap`, `exists_terminalSeq` (`Terminal`, `Procedure`; 3) | `Valid ∧ IsPlaneMap` (and `IsClean`) | AT-ONCE | `sevenBrickMap` named | — |
+| `exists_terminal` (`Terminal`; 1) | a valid **six**-coloured plane map | OPEN, said ("none at six colours is known … the statement's class at seven colours is inhabited by `sevenBrickMap`") | the statement is fixed at `ArcMap 6`, so the seven-colour object is not an inhabitant of it | see § 6.3 |
+| horn shadows (`HornShadow`; 4 row heads) | frames, tangency; flanks at a point | PARAMETRIC (3); AT-ONCE for the flank lemmas (`bowtie` at `0`, `bowtie_flanks`; no `Covers` in these four) | — | — |
+| the limit (`Limit`; 10 cited) | a locally finite sequence of local steps | AT-ONCE, degenerate | `LocalStep.refl`, `LocalSeq.const` (idle steps on empty supports: `LocalStep.new` is vacuous there; the docstring's "every clause exercised" overstates); `exists_clean` is universal | a non-degenerate sequence: `exists_terminalSeq`'s, once the two steps are proved |
+| the two steps (`Procedure`; 2, both `sorry`) | `exists_vertexStep`: a clean valid map, a move available at `v`; `exists_arcStep`: a maximal bad unit arc, sides not both at `P` | NOTE-NONE (`exists_vertexStep`, restated form); nothing said (`exists_arcStep`) | QA4-1 for the first | `exists_vertexStep`: the planted pictures of § 3.3 (their arcs separate different colours, so the map stays clean); `exists_arcStep`: **hand** — `l60Frag` cleaned (`exists_clean`), its whole arc `r([0, π/3])`: maximal by `l60_le`, inner colour `0` at the centre and outer `1` not, so neither (Q) nor (R2) and not both-kind |
+
+### 4.4 The count
+
+Of the 318 heads: about 60 are PARAMETRIC; about 150 are AT-ONCE or AT-ONCE, unnamed (the universal hypotheses `Valid`, `IsPlaneMap`, `Covers`,
+a tile, a point, met by `sevenBrickMap`, `l60Frag` or an existence theorem); **about 45 are BY-HYPOTHESIS or nothing named** (the four moves' six
+heads, FLANK-Q's five, A4SIX/NB4P's three, three of N3-PAIRS/FAIL, five horn lemmas under Condition 5, `woodallCone`, `bend_away_whole`,
+`cvb_hole_disconnected`, `bend_toward_collar`, the stuck family with `Covers` in `FlankUA` and `Terminal`, the two steps); about 45 are DECLARED
+(the base's walk, the stuck chain under Condition 5, the refutations of `HexRing` and `Terminal`); **19 are OPEN** (stated at six colours on a
+plane map: `dense3`, `cv_exists`, and 17 in `Terminal`); 8 are NOTE-NONE besides (`exists_open`, COR3's four, `localDense`, `cv_l0`, the
+restated vertex step). The counts by class are from my reading by family, not from a script; the per-head evidence is `heads.tsv` and
+`notes.tsv`. **No hypothesis set I attacked is unsatisfiable**: every BY-HYPOTHESIS set has a hand model above, but A4SIX/NB4P's and
+`flank_ne_of_doublyShadowed`'s, for which I have none and no contradiction.
+
+**Not read** (named, per the brief): the bodies of the 645 theorems cited across modules and not row heads, beyond their predicate sets;
+`reduce` and `select` (`BaseWalk`; hypotheses on circle colourings); `noBoth`, `iso`, `flank_incomplete_bowtie` beyond QA2's reading; A4SIX and
+NB4P against `sixFrag`.
+
+## Stage 5 — SAVED (FS131-QA4): the definitions new or changed since `7abff9b9`
+
+28 Prop-valued definitions are NEW or CHANGED against the nine commits QA2 and QA3 read (`defs.tsv`; the other 80 Prop-valued ones are
+byte-identical up to whitespace and comments to a body one of those passes read, and keep its verdict). Evidence classes as QA2's: **U** a
+proved theorem gives an instance at every object of its kind; **N** a proved, named, non-degenerate inhabitant; **D** only a degenerate one;
+**S** supplied only under a head's hypotheses (inherits the head's line); **H** none in the library, a hand instance.
+
+| definition (module l.) | taken by | class | instance | note |
+|---|---|---|---|---|
+| `Near` (`Surgery` 1377), `Small` (1416) | 11, 130 | U | `exists_near` (every point of every domain), `eventually_small` | — |
+| `RayConfig` (`Moves` 1187) | 12 | S | under `exists_rayMerge`'s hypotheses | inherits § 3.3 |
+| `Phantom` (`MergeMove` 1285) | 5 | U | germ-level (two consecutive germs' sectors of one colour) | — |
+| `HasHornCount` (`OpenMove` 36) | 4 | N | `cuspFrag.HasHornCount 0 2`, with a failing control (IO3) | read against E6 § 4.5's draft: verbatim |
+| `OpenConfig` (`OpenMove` 318) | 54 | S | `exists_openConfig`, under `exists_open`'s hypotheses | inherits § 3.2: no Lean inhabitant |
+| `IsCurve`, `IsRegularAt`, `HasCurveStar` (`CurveGraph` 26–35) | 7, 14, 17 | N | `halfLine_hasCurveStar` ("every clause exercised"); `frontier_fill_hasCurveStar_pos` on plane maps | — |
+| `IsRing`, `TwiceApart`, `PlanarLike`, `ReachIn`, `NoInterleave` (`Thomassen` 60–237) | 8, 3, 24, 23, 3 | N | `triLattice_planarLike` | — |
+| `EnclosesTile` (`MapTopology` 363) | 6 | H | a positive instance: a tile with an island (`exists_holed_valid_fragment`'s object); used negatively (`UnenclosedC`) with `sevenBrick_unenclosedC` | — |
+| `IsHoleOf` (`MapGraph` 59) — **CHANGED** (item 242's repair) | 20 | N | `exists_holed_valid_fragment` | read against QA3's note 2.4 f, which bound the repair both ways: the new form (`Hc` nonempty, bounded, in `(cl T)ᶜ`, its closure disjoint from the closure of the rest of `(cl T)ᶜ`) holds of a whole cluster of bounded components (so `cvb_pinch_connected`'s "no hole" excludes clusters) and of nothing that is not a union of bounded components cut off from the rest (so `cvb_hole_disconnected`'s hypothesis is a hole): **both directions met** [read] |
+| `IsEdgeOf`, `IsBoundaryWalk`, `BasedTrail`, `IsPortGraph` (`MapGraph` 1315–2758) | 3, 6, 8, 3 | U | `exists_edgeOf`, `exists_boundaryWalk`, `exists_isPortGraph` on every valid plane map | — |
+| `IsRegOf` (`Dense` 25) | 4 | U | every component of a class | — |
+| `PushProfiles` (`RadialPush` 177), `CollarFit` (`CollarMap` 41) | 17, 41 | N | `pushProfiles_collar`; `collarModel` (`c = 0 ≠ 1 = c′`) | § 3.1 |
+| `LocalStep` (`Limit` 357), `LocalSeq` (378) | 4, 1 | **D** | `LocalStep.refl`, `LocalSeq.const`: idle steps, empty supports — `new` is vacuous | the docstring of `LocalSeq.const` says "every clause exercised"; it is not (minor) |
+| `IsClean` (`Limit` 807) | 9 | U | `exists_clean`: every valid map has a clean modification | adversary: `l60Frag` is not clean (its two small circles inside the lens) |
+| `IsSite` (`Limit` 811) | 6 | H | `bowtie` at `0` (a repeated colour: `bowtie_coloursAt_zero`); the spec example is negative (the one-colour plane has none) | minor |
+| `IsMaxRingArc` (`Procedure` 35) | 3 | H | the spec example is negative; a positive one: `l60Frag`'s whole arc (maximal by `l60_le`) | minor; it is `exists_arcStep`'s hypothesis |
+
+No new definition is unsatisfiable on real objects, and none fails at the kind of point its theorems quantify over (the class of item 158).
