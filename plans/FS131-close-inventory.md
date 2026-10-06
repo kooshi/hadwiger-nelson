@@ -7215,3 +7215,21 @@ reason by the close.*
      (e) Its drafts (five regrades, three errata lines, a `LEAN.md` bullet) are held for the filing; the inhabitant
      notes it names (R7 as a seven-colouring) join the wave's owed list. (f) **Slot → the Searcher**
      (`SEARCH-2026-10-06`, item 574), launched 2026-10-06. In flight: 3 (I6Z, LT5, the Searcher).
+577. **FS131-LT5, by message mid-job: the merge is made and the step is red by 22 on today's `main`, as expected; my pre-ruling on `StandingFloor` met the step's rules and one word was asked** (source: LT5's message to "main", 2026-10-06; its Stage 1 saved, merge `a95cd1ca` on `fs131-lt5` — the artifact is read at its hand-back).
+     By its word: the merge brings no file under `Proofs/`; the self-test 32 of 32 on the merged tree. **The
+     disagreement**: with `StandingFloor`'s entry present the step is silent (its rule for a proved assumption
+     fires on a former proved over its own variables, not at an instance); with the entry removed the two closed
+     takers read established through the `_weil` theorems, but the step fails on the former's docstring, which
+     still says "a named hypothesis from outside the backlog" — in a module outside its touches. **Decided by it
+     within the step's procedure**: `KloostermanBound` declared outside under `[Weil1948]`, with three closed
+     families as three sites under one label; `Plane.NoPar` open (open questions 4 to 5); `GrundyBound`, `H1On`
+     conditions; wave 6's fourteen modules and wave 10's read for the words, none written out over a theorem's own
+     variables beyond what the step finds; **its second reading agrees with all 31 conditions and 2 premises**.
+     **Rulings.** (a) **(A): the entry leaves, and it may edit docstrings only in `Arith/StandingFive`** — the
+     former's, `seven_le_localBound`'s and a section heading — to say "proved at 7 and at 5 over the library's one
+     declared import". Alternative: (B), the entry stays. Why not: the front page would count as a hand result of
+     ours something the kernel holds over the import. Confidence: high. **My brief's sentence was wrong about the
+     mechanism** (I wrote "by the step's own rule for a proved assumption"; that rule does not fire on an
+     instance) — a slip of mine, found by the job testing it. (b) Its four decisions are ratified; Weil's bound
+     appears in three forms (the axiom, a named hypothesis, one inline label), to be said in one sentence in the
+     enumeration. Reply sent, one message.
