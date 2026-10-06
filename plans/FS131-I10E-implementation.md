@@ -16,7 +16,45 @@ edit it needs is drafted below); the planner's record; any landed module; `main`
 
 ## Theorems this phase proved
 
-*(filled at the stage that proves them; at Stage 1: none yet.)*
+**The one leaf of the brief is proved; `Floor128.lean` has no `sorry`, no `axiom`, no `native_decide`.** Kernel-checked on this
+branch by `./scripts/build.sh` under the slot (Stage 3's log); axioms a subset of `[propext, Classical.choice, Quot.sound]` for each
+of the 43 records of the "FS131-I10E" block of `scripts/Axioms.lean`, printed with two controls that show `sorryAx`
+(`data/fs131/i10e/logs/axioms-all.log`). The branch does not run the gate, so the audit is the landing's. All in
+`Proofs/HadwigerNelson/Arith/Floor128.lean`, namespace `HadwigerNelson.Floor128`, each [kernel on this branch]:
+
+- **`charSum_128_ge`** (the leaf) — informal: "The character sums of `μ₁₂₉` in a field of `2¹⁴` elements are at least `−19`" (its
+  docstring); the plan's § 7.2: "in a field of `2¹⁴` elements every non-trivial additive character sums to at least `−19` over
+  `{u : u¹²⁹ = 1}`". Lean, read aloud: for every field `k : Type` with `Fintype.card k = 128 ^ 2` and every additive character
+  `ψ : AddChar k ℂ` with `ψ ≠ 1`: `−19 ≤ Re Σ_{u ∈ k, u ^ (128 + 1) = 1} ψ(u)`. Says the sentence, no more: "at least" is read on
+  the real part (the sums are real, `ψ` being `±1`-valued in characteristic 2; the statement does not say so and no consumer reads
+  it). Axioms: the standard three. **No outside theorem and no named hypothesis.**
+- **`targetFloor_eight_128 : StandingFive.TargetFloor 8 128`** (the planner's composition; now over proved leaves) — the row: G56,
+  "Q = 128 has floor 8" (`.claude/skills/grokkings/SKILL.md`), which the plan reads as "U₁₂₈'s Hoffman floor is 8". Lean, read
+  aloud: every field `k : Type` of `128²` elements (`Finite`, `Nat.card k = 128 ^ 2`) with a ring endomorphism `σ`, `σ (σ x) = x`
+  for every `x`, `σ ≠ RingHom.id k`, has `(8 : ℕ∞) ≤ (normOneCayley k σ).chromaticNumber`. Axioms: the standard three. **Run at a
+  model of every hypothesis** (the Spec's last example): `GaloisField 2 14` with `x ↦ x ^ 128` — eight colours for an actual graph.
+- **`targetFloor_seven_128 : TargetFloor 7 128`** (the planner's; the form `StandingFloor 7` reads). Axioms: the standard three.
+- New, the bridge's joints (each with a docstring in the file):
+  - the code — **`ev`** (a definition: the value at `t` of the polynomial coded by `n`), `ev_zero`, `ev_eq`, `ev_one`,
+    `ev_two_mul`, `ev_shiftLeft_one`, `ev_two_pow`, `ev_two`, `map_ev` (natural in ring homomorphisms), `coeff_ev_X` (at `t = X` the
+    coefficient of `Xⁱ` is bit `i`), **`ev_xor`**, **`ev_clmul`** (in characteristic 2, `^^^` is the sum and `clmul` the product),
+    `ev_step`, `ev_iterate_step` (at a root of `P`, a step of the register multiplies by `g`);
+  - a root — `qBig_lt`, `qBig_testBit_one` (two `decide +kernel` on the certificate's literal), `charP_two`, **`exists_root`**:
+    `P` has a root in every field of `2¹⁴` elements;
+  - the register on codes — `step_lt`, `step_ne_zero`, `pass_fst`, `pass_snd`, `iterate_step_lt`, `iterate_step_ne_zero`,
+    `iterate_step_period`, `eq_of_dvd_of_not_dvd`, **`minimalPeriod_step`** (`Function.minimalPeriod step 1 = 16383`),
+    `iterate_step_injOn`, **`exists_iterate_step_eq`** (every non-zero code below `2¹⁴` is a state of the register);
+  - the counters — `digit_sum`, `sum_range_mul_eq`, `pass_class`, **`class_le`** (for `r < 127`, at most 74 of the 129 states
+    `127 j + r` have their low bit set);
+  - the field — `root_pow_eq_one`, **`ev_ne_zero`**, `ev_inj`, `root_pow_inj`, `exists_code` (the codes below `2¹⁴` are the
+    elements: `1, g, …, g¹³` is a basis), **`exists_root_pow_eq`** (a root of `P` generates the multiplicative group: `P` is
+    primitive), `normOne_eq_image` (`{u : u¹²⁹ = 1} = {g^(127 j) : j < 129}`), **`exists_addChar`** (the coordinate-0 character).
+- Also printed, the planner's compositions of `Arith/TargetFloors` (not my file; both floors are proved on this branch):
+  `StandingFive.standingFloor_seven`, `standingFloor_five` — the standard three, over the hypothesis `KloostermanBound` alone.
+
+**Not in the kernel, and not claimed**: the exact spectrum `−19, −15, …, 21` stays [tools] (`tools/fs131_k10b_u128.py`, re-run
+here: `data/fs131/i10e/logs/u128-rerun.log`, max class count 74, as the kernel theorem's bound); the kernel holds the lower bound
+`−19` at every non-trivial character, not that it is attained (the Spec's `countsOk 73 = false` says some counter exceeds 73).
 
 ## Stage 1 — SAVED (FS131-I10E): the readback, and the branch as given
 
@@ -62,3 +100,66 @@ definition fault and a docstring fault, each caught, and a docstring extension, 
 `exists_mulShift_eq`. Until that cell is edited `tools/check_architecture.py` reports one import mismatch on this branch, this row.
 
 Token count at this stage: own estimate ≈ 140k of the harness's (the launch context is most of it).
+
+## Stage 2 — SAVED (FS131-I10E): the bridge proved
+
+**The children, in the plan's order** (§ 7.2), each compiled before the next was written, in a working file against the built
+module so that the certificate's kernel checks did not re-run at every round, then moved into `Floor128.lean` above the leaf:
+
+| the plan's child | as proved | plan's lines | lines |
+|---|---|---|---|
+| B1 the code | `ev` by the bit recursion (`ev t n = bit₀ + t·ev t (n/2)`), `ev_xor`, `ev_clmul` by induction on the fuel, `map_ev`, `coeff_ev_X` | 80 | 112 |
+| B2 a root | `exists_root`: at each `a ∈ k`, `ev a P · ev a qBig = a^(2¹⁴) + a = 0`; if `P` had no root the cofactor would vanish on all of `k`, and it is a non-zero polynomial of degree below `2¹⁴` (`Polynomial.eq_zero_of_natDegree_lt_card_of_eval_eq_zero`; `qBig_lt`, `qBig_testBit_one`). No splitting field, no product formula | 60 | 41 |
+| B3 the basis | **by the register's orbit** (Stage 1's route note): `minimalPeriod_step`, `exists_iterate_step_eq`, then `ev_ne_zero`, `ev_inj`, `exists_code`. `bezout4`, `bezout128` not read | 120 | 63 + 58 |
+| B4 the register | `pass_fst`, `pass_snd` (induction on the fuel), `pass_class` (regrouping by residue, then `digit_sum`), `class_le` | 120 | 56 + 62 |
+| B5 the characters | `exists_addChar` (the code of `x`, by choice from `exists_code`; additive because `ev` turns `^^^` into `+`); the second half cited: `StandingFive.exists_mulShift_eq` | 60 | 32 |
+| B6 the sum | `normOne_eq_image` (over the cited `StandingFive.card_normOne`); the leaf: a shift by `gⁱ` is a shift by `g^(i mod 127)` up to an element of the norm-one set (`Finset.sum_equiv` along `Equiv.mulLeft₀`), then `129 − 2·c ≥ −19` | 80 | 62 |
+
+**Re-priced after the first two children, and it held to the end: the plan's line count stands** — the module grew from 120 lines to
+657: 486 lines of the bridge's declarations (the plan: 520) and about 50 of module docstring and Spec — unlike the wave's first two implementers' third to two thirds. The token cost came
+in under the plan's 300k: about 150k of work beyond the launch context. Elaboration rounds: three for the code and the root, three for
+the register and the counters (one of them the kernel finding below), four for the field and the leaf.
+
+**A kernel finding (measured), for `LEAN.md` § The kernel's cost model.** A rewrite of a *closed* natural-number term by a lemma
+stated at other instances than the term's own sends the kernel to evaluate the term. `counts.2 = 0 + Σ_{m < 16383} …` rewritten by
+`pass_snd` alone: 2 s. The same goal with Mathlib's `zero_add` after it (the `0 + _` of `AddZeroClass`): elaboration succeeds and
+the **kernel** runs to "deterministic timeout" after 173 s (unslotted, memory unmeasured); under a slot of 8 GiB the same file is
+killed at the cap after 27.6 s (the kernel journal: `Memory cgroup out of memory: Killed process (lean) … anon-rss:8184052kB`).
+Two variants each differing in one thing: with the length and the seed as **variables**, Mathlib's `zero_add` — 2.1 s; the closed term
+with core's `Nat.zero_add`, stated at the goal's own instances — 2.3 s (registered before the run at 0.8: it passes).
+`data/fs131/i10e/lean/closed-term/` holds the three files and their outputs. *The mechanism is a reading, one mind, from memory of
+the kernel's source, not read today*: comparing `0 + S` at two instance paths, the kernel unfolds both to `Nat.add 0 S`, and on a
+closed `Nat.add` it normalizes the arguments to literals — here a sum of 16,383 register states. Hence `pass_class` is stated with
+the seed and the block count free, and `class_le` instantiates it; its docstring says so.
+
+**Evidence at this stage.**
+- **Build 1** (`data/fs131/i10e/logs/build-1-bridge.log`): `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
+  ./scripts/build.sh`, exit 0, 455 of 455 batches, 3 modules rebuilt (`Arith.Floor128` 6.8 s — the planner's skeleton was 6.4 s —
+  `Arith.TargetFloors`, `Proofs`), 16 `sorry` warnings on the branch, none in `Floor128` (17 at Stage 1). It covers the module as
+  committed at this stage **less** the Spec's last example (`targetFloor_eight_128` at `GaloisField 2 14`) and one sentence of the
+  module docstring, both added after it and elaborated by `lake env lean` with the lakefile's options (clean); the final build is
+  Stage 3's.
+- **Axioms** (`lake env lean data/fs131/i10e/axioms-all.lean`, output `logs/axioms-all.log`): 43 records of this job's block and the
+  two compositions of `TargetFloors`, 45 in all — 33 print `[propext, Classical.choice, Quot.sound]`, 12 a subset of it. The two
+  controls print `sorryAx`, as they must: `StandingFive.usable_card_ge` and `StandingFive.seven_le_localBound_of_kloosterman`
+  (both rest on `StandingFive`'s leaves, open on this branch).
+- **Statements** (`tools/fs131_i10e_statements.py a14f9ab0 …`, `logs/statements-1.txt`): PASS, 14 of 14 base chunks verbatim, one
+  docstring extended and listed (`charSum_128_ge`: the paragraph "As proved (FS131-I10E)"); `--self-test`: three faults caught, the
+  partner passed. The certificate block is the generator's (`tools/fs131_k10b_gen128.py --check` exit 0, `--fault` exit 1:
+  `logs/gen128-check.log`).
+- **Negative controls of the bridge** (`data/fs131/i10e/lean/Controls.lean`, output `logs/controls.log`): `class_le` restated at
+  73 with `class_le`'s own proof — type mismatch at its last line; the leaf's last inequality at `−18` — `linarith` fails;
+  `step^[5461] 1 = 1` from `order_checks` — type mismatch. Three errors, at the three controls and nowhere else; the three partners
+  at the true values pass.
+- **The tool agrees with the kernel**: `tools/fs131_k10b_u128.py` re-run (`logs/u128-rerun.log`): `lambda_min = −19`, "max count
+  c_i = 74".
+- **Names**: each of the 41 new names is declared in one file of `Proofs/`, this one (`rg`, by declaration keyword); the namespace
+  `HadwigerNelson.Floor128` is opened by this module alone. `tools/check_architecture.py`: exit 1 with the one mismatch Stage 1
+  foretold — "imports of Arith/Floor128: … real-only ['Arith/FloorPlanes']" (`logs/arch.log`); nothing else.
+
+**A slip, mine**: the first elaboration of the counters and two bisection runs (`lake env lean`, unslotted, two of them at once)
+each ran about three minutes to the kernel timeout above with their memory unmeasured; the slotted re-run shows the blow-up passes
+8 GiB in under half a minute. From the bisection on, every run that could reach that term went under a slot. Nothing was lost.
+
+Token count at this stage: own estimate ≈ 300k of the harness's.
+

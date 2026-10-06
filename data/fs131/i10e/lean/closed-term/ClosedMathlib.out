@@ -1,0 +1,4 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 16
+Command exited with non-zero status 143
+ClosedMathlib: 27.61 s wall, 842528 KiB peak, exit 143
+RUN EXIT 143

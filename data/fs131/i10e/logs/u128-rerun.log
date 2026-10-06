@@ -1,0 +1,10 @@
+P = 16427 = 0b100000000101011  (taps [0, 1, 3, 5, 14])
+spectrum (value: multiplicity among the 127 classes): {-19: 7, -15: 14, -11: 14, -7: 7, -3: 21, 1: 14, 5: 7, 9: 21, 13: 8, 17: 7, 21: 7}
+lambda_min = -19, lambda_max(non-trivial) = 21; sum of squares = 16255 (expect 2^14 - 129 = 16255)
+Hoffman: chi >= 1 + 129/19 = 7.7895; 5m = 95 < 129: True; 6m = 114 < 129: True
+max count c_i = 74 (the Lean check: every c_i <= 74)
+QBIG bits = 16371, A4 bits = 4, A128 bits = 127, ACC bits = 1014
+
+real	0m0.462s
+user	0m0.451s
+sys	0m0.009s
