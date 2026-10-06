@@ -139,3 +139,89 @@ invisible to a file-by-file merge check and to a pairwise duplicate check keyed 
   coordinator by message, with the resolution I am taking; it is Stage 3's.
 
 ## Stage 2 — SAVED (FS131-M7)
+
+## Stage 3 — SAVED (FS131-M7): `dd8c2c33` merged — the outward bend's skeleton; a commit that does not build until Stage 4
+
+### 3.1 Before the merge
+
+The pinned commit `dd8c2c33`, not `origin/fs131-w5a`'s moving tip; base `78eba0b4` (the first merge moved it there), ours `26a6446c`.
+The tree free of builds first: no slot of mine in the ledger, no `lean` process with this worktree as its working directory (found
+by `/proc/<pid>/cwd`, not by a command line).
+
+**The pairwise duplicate check** (`fs131_m7_dupes.py HEAD dd8c2c33 78eba0b4`; expectation written before the run: one NAME pair, the
+named one, and nothing else): **exactly one pair** — `NAME HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs`, this side's
+`ArcStep.lean:584` against the skeleton's `BendAway.lean:97`; no STATEMENT pair, no STATEMENT-NORM pair; 4 own files, 92 own
+declarations (59 + `ArcStep`'s 33) against 10,382 names (`data/fs131/m7/dupes-merge2-pre.txt`, exit 1 as it must be). **No name is
+declared by both sides other than the one the brief names.** Its plant at these refs, on `R2Subdiv.lt` (new in `BendAway`): **fired**,
+the three planted pairs beyond the one real pair, the docstring line not reported (`dupes-merge2-plant.txt`). Two of its
+informational conclusion-matches are new and go to the remedy pass's list (Stage 6): `IsRingArc.degree_openArc` (`ArcStep`) with
+`CollarFit.degree_openArc` (`BendCollar`) — the collar-free form and its special case; `CollarFit.map_localStep` (`ArcStep`) with
+`CollarFitOut.map_localStep` (`BendGap`) — the two bends' mirrored lemmas, two theorems over two structures.
+
+### 3.2 The merge: two conflicts, one of them not the brief's
+
+`git merge --no-commit --no-ff dd8c2c33` (`data/fs131/m7/merge2-git.txt`): conflicts in `scripts/Axioms.lean` (named) and
+**`ARCHITECTURE.md` (not named)**; `Proofs.lean` merged by itself; `plans/FS131-I5-implementation.md` does not conflict in this order —
+the first merge settled it. The brief's trial merged each ref against this branch's tip separately; in sequence the base moves and the
+conflict moves with it. Sent to the coordinator by message before the merge, with the resolution I was taking. **No reply had come
+when I went on, and none is recorded here as agreement**: the resolution is mechanical and checked (3.3; `check_architecture` at
+Stage 4), and it is held for the coordinator in the report.
+
+- **`ARCHITECTURE.md`** — adjacency only, in the module table: after `BendStep`'s row this side had added `ArcStep`'s; at the same
+  place the skeleton inserted six rows and rewrote `BendStep`'s. `BendStep`'s row is changed by the skeleton alone (this side's is the
+  base's — my first comparison by `grep` said otherwise, because `ArcStep`'s row names `BendStep` in its Imports cell and matched
+  too; read sentence by sentence, the difference was that second row). Resolved: the skeleton's seven rows as they stand, then this
+  side's `ArcStep` row; the row keys asserted by the resolving script (`BendAway`, `LensOut`, `HornChart`, `CollarMapOut`, `R2Cap`,
+  `BendGap`, `BendStep`, `ArcStep`).
+- **`scripts/Axioms.lean`** — this side's block (FS131-IA2, 37 lines), a blank line, the skeleton's (FS131-KA1, 50 lines). **Literal
+  keep-both leaves one record twice**: `#print axioms HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs` is in both blocks (ll. 6105,
+  6129), because both sides declare the name. Kept so in the merge commit, which then holds the two sides and nothing of mine; this
+  side's line leaves in Stage 4 with the declaration it prints. (The alternative weighed: drop it in the resolution. Not taken — it
+  hides a judgement inside a conflict, and the check then flags a missing line instead of a doubled one.)
+
+### 3.3 The check, and an allowance made before the result
+
+`tools/fs131_m7_merge_check.py` gained `--allow-twice LINE` **before it was run on this merge**, for the reason in 3.2 (read off the
+conflict's text): one keyed line may stand twice, once from each side; every allowance used is printed; one not used fails (STALE
+ALLOWANCE); the self-test doubles a record chosen among the lines not allowed and raises if there is none. Run on the index, the
+working tree equal to it (the patched tool run from a copy outside the tree, so that the index held no change of mine; the copy and
+the tool now in `tools/` are byte-identical, `cmp` exit 0). Expectations written before the three runs; each met:
+
+| run | result |
+|---|---|
+| no allowance | **FAIL, exactly one failure**: `scripts/Axioms.lean: twice after the merge: […LocalStep.of_cutArcs]` — 16,105 files, 3 changed by both sides (`merge2-check-noallow.txt`) |
+| that line allowed | **PASS**, the allowance printed (`merge2-check.txt`) |
+| a wrong line allowed (`ArcBend.of_away`'s record) | **FAIL twice**: the doubling unexcused, and STALE ALLOWANCE (`merge2-check-wrongallow.txt`) |
+
+So one deviation from "each file the side it should be", the expected one, and nothing else in 16,105 files; the three KEEP_BOTH files
+are ours + theirs − base line for line. `--self-test` at these refs, the allowance in force: **five plants fired** — a byte of
+`BendAway.lean` (theirs only), a line added to `ArcStep.lean` (ours only), `Proofs.lean`'s `BendAway` import dropped (caught by the
+multiset rule here, `Proofs.lean` being changed by both sides in this merge), a doubled record (`falconer_reduction`'s, not the
+allowed line), a file changed by both outside KEEP_BOTH (`merge2-check-selftest.txt`). **The index held the merge and nothing else**:
+the 30 staged paths are exactly the 30 paths the skeleton changed since the base (compared as sets, both differences empty); no
+unstaged change; no unmerged path; `MERGE_HEAD` = `dd8c2c33`. Committed as a merge: **`8ca92376`**, parents `26a6446c` and `dd8c2c33`;
+the same check on the commit: PASS (`merge2-check-rev.txt`).
+
+### 3.4 This commit does not build, and why that is the right unit
+
+At `8ca92376` `LocalStep.of_cutArcs` is declared at `ArcStep.lean:584` and `BendAway.lean:97`, in one namespace, and `ArcStep`'s
+imports reach `BendAway` (below), so one environment would hold the name twice. The brief sequences it so — the merges, each its own
+commit, then the doubled declaration — and the commit's message says it in capitals. **So this merge is checked by script here and by
+a build only after Stage 4**; the first merge had both. I did not test the prediction with `lake env lean` on `ArcStep`: the six new
+modules have no `.olean` in this worktree yet, so it would fail for a missing import — a red for the wrong reason. The import graph
+answers the question from source:
+
+- `ArcStep` reaches `BendStep` and all six new modules (`BendAway`, `LensOut`, `CollarMapOut`, `R2Cap`, `HornChart`, `BendGap`); so
+  after the deletion it reads `BendAway`'s `LocalStep.of_cutArcs` **through `BendStep`'s imports — no import of its own** (the brief's
+  choice, taken this way: one edge fewer, and `ARCHITECTURE.md`'s `ArcStep` row stays true as it stands);
+- **no bend module reaches `Procedure` or `Terminal`** (`BendAway`, `LensOut`, `CollarMapOut`, `R2Cap`, `HornChart`, `BendGap`,
+  `BendStep`, `ArcStep`, `BendCollar`: none), so `Procedure` importing `ArcStep` (Stage 5) makes no cycle — read on the joined tree.
+
+### 3.5 What the join showed that no line could see from its own branch (so far)
+
+1. `HexRing` is upstream of `Limit`, `Procedure` and `Terminal`, and the first merge replaced it under them (§ 2.3–2.4).
+2. `bv_l3` changed files across the first merge, statement and qualified name unchanged (§ 2.4).
+3. "Keep every block" of `scripts/Axioms.lean` doubles the record of a declaration both sides state (§ 3.2).
+4. Merging in sequence moves the base, and with it the second conflict, from the I5 record to `ARCHITECTURE.md` (§ 3.2).
+
+## Stage 3 — SAVED (FS131-M7)

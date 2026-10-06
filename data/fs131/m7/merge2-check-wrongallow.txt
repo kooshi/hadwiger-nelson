@@ -1,0 +1,4 @@
+FAIL scripts/Axioms.lean: twice after the merge: ['#print axioms HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs']
+FAIL STALE ALLOWANCE: allowed to stand twice, but it does not (once from each side): #print axioms HadwigerNelson.Plane.ArcMap.ArcBend.of_away
+16105 files (3 changed by both sides); 2 failure(s)
+FAIL

@@ -17,8 +17,12 @@ working tree must equal (or from `--rev`); blobs are compared by hash, so a syml
   - changed by both: allowed only for KEEP_BOTH, where the merged file's lines, as a multiset, are OURS' + THEIRS' − BASE's (every
     line either side added is there once per addition, nothing dropped), with one blank line of slack for the joint between two kept
     blocks; and no `import` line, `#print axioms` record or module-table row occurs twice unless a side already had it twice.
-Usage: fs131_m7_merge_check.py BASE OURS THEIRS [--rev MERGED] [--self-test]
-Exit 0 only on PASS. `--self-test` requires each of five plants to FAIL naming its file, and the unplanted run to PASS.
+  `--allow-twice LINE` (repeatable) names one keyed line that MAY stand twice after the merge — for a record both sides hold
+  because both declare the name until a later commit removes one. Every allowance used is printed; an allowance NOT used fails
+  (STALE ALLOWANCE), so it cannot outlive the doubling it excuses; it excuses nothing else (the multiset rule still applies).
+Usage: fs131_m7_merge_check.py BASE OURS THEIRS [--rev MERGED] [--allow-twice LINE]... [--self-test]
+Exit 0 only on PASS. `--self-test` requires each of five plants to FAIL naming its file, and the unplanted run to PASS; its doubled
+record is never an allowed line (asserted), so an allowance cannot swallow the plant.
 """
 import collections
 import re
@@ -58,10 +62,11 @@ def keyed_lines(path, text):
     return c
 
 
-def check(base, ours, theirs, mtree, mread, extra_both=()):
-    """mtree: path -> blob hash of the merged side; mread: path -> its bytes (or None)."""
+def check(base, ours, theirs, mtree, mread, extra_both=(), allow_twice=(), used=None):
+    """mtree: path -> blob hash of the merged side; mread: path -> its bytes (or None). `used` collects the allowances used."""
     tb, to, tt = tree(base), tree(ours), tree(theirs)
     bad = []
+    used = set() if used is None else used
     n = 0
     nboth = 0
     for path in sorted(set(tb) | set(to) | set(tt) | set(mtree)):
@@ -100,6 +105,11 @@ def check(base, ours, theirs, mtree, mread, extra_both=()):
             kb = keyed_lines(path, blob(base, path).decode()) if b else collections.Counter()
             # a side may already hold a repeat; only a repeat the merge created fails
             twice = [k for k, c in keyed.items() if c > 1 and c > max(kb[k], ko[k], kt[k])]
+            # an allowed line may stand exactly twice, once from each side
+            for k in list(twice):
+                if k in allow_twice and keyed[k] == 2 and ko[k] == 1 and kt[k] == 1:
+                    used.add(k)
+                    twice.remove(k)
             if twice:
                 bad.append(f"{path}: twice after the merge: {twice[:3]}")
             continue
@@ -109,10 +119,16 @@ def check(base, ours, theirs, mtree, mread, extra_both=()):
 
 
 def main():
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    argv = sys.argv[1:]
+    allow = []
+    while "--allow-twice" in argv:
+        i = argv.index("--allow-twice")
+        allow.append(argv[i + 1])
+        del argv[i:i + 2]
+    args = [a for a in argv if not a.startswith("--")]
     rev = None
-    if "--rev" in sys.argv:
-        rev = sys.argv[sys.argv.index("--rev") + 1]
+    if "--rev" in argv:
+        rev = argv[argv.index("--rev") + 1]
         args = [a for a in args if a != rev]
     if len(args) != 3:
         print("usage: fs131_m7_merge_check.py BASE OURS THEIRS [--rev MERGED] [--self-test]")
@@ -138,7 +154,13 @@ def main():
 
         def read(path):
             return git("show", f":{path}", text=False) if path in mtree else None
-    n, nboth, bad = check(base, ours, theirs, mtree, read)
+    used = set()
+    n, nboth, bad = check(base, ours, theirs, mtree, read, allow_twice=allow, used=used)
+    for a in allow:
+        if a in used:
+            print(f"ALLOWED TWICE (once from each side): {a}")
+        else:
+            bad.append(f"STALE ALLOWANCE: allowed to stand twice, but it does not (once from each side): {a}")
     if "--self-test" not in sys.argv:
         for line in bad:
             print("FAIL", line)
@@ -175,7 +197,7 @@ def main():
 
     def dbl(m):
         lines = m.decode().split("\n")
-        i = next(j for j, l in enumerate(lines) if l.startswith("#print axioms "))
+        i = next(j for j, l in enumerate(lines) if l.startswith("#print axioms ") and l not in allow)
         return "\n".join(lines[:i] + [lines[i]] + lines[i:]).encode()
 
     plants = [
@@ -187,7 +209,7 @@ def main():
         (f"a file changed by both outside KEEP_BOTH ({ou})", ou, (mtree, read), (ou,)),
     ]
     for name, path, (mt, r), extra in plants:
-        _, _, b2 = check(base, ours, theirs, mt, r, extra_both=extra)
+        _, _, b2 = check(base, ours, theirs, mt, r, extra_both=extra, allow_twice=allow)
         # fired: at least one failure, and every failure names the planted file (a doubled record trips two checks of one file)
         fired = bool(b2) and all(x.startswith(path + ":") for x in b2)
         print(f"plant — {name}: {'FIRED' if fired else 'DID NOT FIRE'}  {b2[:1]}")
