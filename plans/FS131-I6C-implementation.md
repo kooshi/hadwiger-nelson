@@ -54,6 +54,10 @@ in `LocalGraph` — children of `local_graph`:
 no `sorry`): **`HadwigerNelson.Plane.local_graph` — FS131-E8-LOCAL** = FS111-M-C11 (ii) with "no cusp in the neighbourhood" =
 FS111-W-NOBEND. It becomes a kernel theorem when `c11_discs` and `TwoColourOn.essBoundary_inter_eq` land (line P).
 
+Stage 6, in `LocalGraph`: kernel theorems `sq9_not_isCuspAt_near_edge` (no cusp of the two classes in the edge ball: the fact the
+inhabitant note owed), `sqEdgePt_mem_essBoundary`; wired over `local_graph`: `sq9_exists_isInterfaceChart` (the inhabitant: every hypothesis of
+`local_graph` at once on `sq9`).
+
 Wired (over `sorry` children; axioms `[propext, sorryAx, Classical.choice, Quot.sound]`): `HadwigerNelson.Plane.AeColouring.local_graph`
 (FS121-V5-LOC (ii)) — over `local_graph` (mine, open) and `TwoColourOn.essBoundary_inter_eq` (`Pinch`, another line's leaf) through
 `TwoColourNhd.mem_essBoundary`.
@@ -335,3 +339,92 @@ be that of `A ∖ B` or of the overlap. `cover` is read at `mem_interior_density
   modules prints clean, so the `sorryAx` is theirs. This is an argument from the prints and the grep, not a print of its own: the join's audit
   is the check.
 - **Statements**: 16 of 16 the same (`logs/statements-5.out`).
+
+## Stage 6 — SAVED (FS131-I6C): the inhabitant, the final checks, the expectations scored
+
+### 6.1 The inhabitant of `local_graph` (the plan's § 12.2, "owed")
+
+`sq9_not_isCuspAt_near_edge`: for `x ∈ B(sqEdgePt, 1/8)` neither `sq9.cls sqColA` nor `sq9.cls sqColB` has a cusp at `x` — on its own closed
+side a class has positive upper density (`sq9Sq_subset_essClosure`, wave 2), strictly on the other side it is absent from a ball about `x`
+(`sq9Col_near_edge`). `sqEdgePt_mem_essBoundary`: both squares have positive upper density at the edge point. **`sq9_exists_isInterfaceChart`**
+applies `local_graph` to `sq9.cls sqColA`, `sq9.cls sqColB`, `N = U = B(sqEdgePt, 1/8)`, `y = sqEdgePt`: `sq9_twoColourNhd.two`, the classes'
+measurability and null unit pairs, no cusp, `sq9_tight_saturated.2.1` for both contact hypotheses — every hypothesis at once, at `k = 9`. It is
+wired (it is `local_graph`). The module docstring's inhabitant paragraph now names these in place of "owed".
+
+### 6.2 Final checks
+
+- **Build**: OK — 466 of 466 batches, 3 modules rebuilt, exit 0 (`logs/build-5-inhabitant.exit`, `build-5-inhabitant.log`;
+  `build/gate/build/20261006T154908Z-1100474.log`). Warnings: 20, every one `declaration uses sorry`: `FanBridge` 12, `Pinch` 7,
+  `MapColouring` 1. **`Curve` and `LocalGraph`: none.**
+- **Axioms** (`data/fs131/i6c/I6cAxioms.lean` → `logs/axioms-5-final.out`): 52 prints, no error — **45 on the standard three**, **7 with
+  `sorryAx`**: the control `c11_discs`, and the six wired declarations (`HasTwoDiscsAt.one_le_norm_sub`, `.norm_sub_le`, `.normal_unique`,
+  `local_graph`, `AeColouring.local_graph`, `sq9_exists_isInterfaceChart`). `scripts/Axioms.lean`'s block "FS131-I6C" holds the 45 clean
+  lines and none of the wired ones (counted: 45).
+- **Statements** against `32f2ab4c` (`logs/statements-6.out`): 16 of 16 the same; no `axiom`, no `native_decide`. The brief's quotations
+  re-run: 24 of 24 exact.
+- **Module map**: `tools/check_architecture.py` PASS (`logs/check-architecture-2.log`).
+- **Not run, not mine**: the gate (`axioms.sh`, `vacuity.sh`, `dupnames.sh`, linters). `lake env lean` on both files prints no warning of
+  any linter; every new name was grepped over `Proofs/` and `scripts/` before it was added.
+- **Processes**: none left; the five builds each wrote an exit file, read directly.
+
+### 6.3 Expectations scored (§ 1.5)
+
+| # | registered | outcome |
+|---|---|---|
+| Z1 | `Curve`'s six close, no statement defect, 0.9 | met |
+| Z2 | the plan's price for `Curve` high by at least five, 0.7 | met — more than ten |
+| Z3 | `LocalGraph`'s three small leaves close, 0.85 | met |
+| Z4 | `local_graph` closes in this job, 0.35 | **met, against the odds I gave**: the plan's five days (its (h) two) were one stage. What I mispriced: (h) was a missing construction, and it was fifty lines once the integrand was clamped to make the arclength an order isomorphism of the line |
+| Z5 | a statement defect among my eleven, 0.2 | none. Generalizations only (§ 3.2; Stage 4's "two of the four disc conditions") |
+| Z6 | `disj` read at exactly one step, 0.6 | **not met** — four steps through two lemmas (§ 5.3) |
+
+**Price, for the planners' next table**: the plan priced lines C at 9 agent-days (`Curve` 2.5, `LocalGraph` 6.5). Done in one job, six stages,
+five builds of about nine minutes each; about 1,300 lines added to the two modules. Its "computational leaves high by two to three" was low by
+an order of magnitude, and so was "the large ones are not re-priced by them".
+
+## Drafts for the front page
+
+*For Keryx's pen; I edit none of these files. The gate was not run on this branch (not mine, and `Pinch`, `MapColouring`, `FanBridge` hold
+`sorry`), so no gate count is drafted: the counts are the join's.*
+
+1. **`CLAUDE.md` § Trust ledger, the audit sentence** — at the join that lands wave 6: the clean count grows by this job's **45** records
+   (`scripts/Axioms.lean`, block "FS131-I6C"); six more become clean, and are to be appended to that block, when `Pinch`'s `c11_discs` and
+   `TwoColourOn.essBoundary_inter_eq` land: `HasTwoDiscsAt.one_le_norm_sub`, `HasTwoDiscsAt.norm_sub_le`, `HasTwoDiscsAt.normal_unique`,
+   `local_graph`, `AeColouring.local_graph`, `sq9_exists_isInterfaceChart` (each `HadwigerNelson.Plane.`…). No purchase, no import.
+2. **Grades, for the wave's rows when it is filed** (`plans/FS131-E8-derivation.md`'s entries; each on `[propext, Classical.choice, Quot.sound]`
+   with no assumption beyond its stated hypotheses unless said):
+   - FS131-E8-DELTA → **[kernel]**: `HadwigerNelson.Plane.AeColouring.ae_one_colour_of_isConnected` (its `IsOpen W` is not read).
+   - FS131-E8-OUTSIDE → **[kernel]**: `HadwigerNelson.Plane.IsUnitCurve.one_le_dist`.
+   - FS121-V5-OFF and FS121-V5-LOC (i) → **[kernel]**: `AeColouring.closure_essBdry_subset`, `AeColouring.notMem_essBdry_of_mem_densitySet`.
+   - The curve parts of FS131-E8-GAMMA and -BETA (C1, C2, the growth of the distance, the `s²/2` bound) → **[kernel]** as lemmas:
+     `IsUnitCurve.chord`, `.sin_le_inner`, `.strictMonoOn_dist`, `.norm_sub_le`; the entries themselves are `FanBridge`'s (`gamma`, `beta`), open.
+   - FS131-E8-LOCAL = FS111-M-C11 (ii) (with "no cusp in the neighbourhood") = FS111-W-NOBEND, and FS121-V5-LOC (ii): **proved over two
+     named leaves** — `local_graph`, `AeColouring.local_graph` rest on `c11_discs` (FS111-M-C11 (i)) and `TwoColourOn.essBoundary_inter_eq`
+     (`Plane/Saturated/Pinch`), and on nothing else open; [kernel] when those land.
+3. **`ARCHITECTURE.md` § 3.11, two rows** (the imports cell of the second is already updated on this branch; the descriptions still say
+   "skeleton"): in the row `Plane/Saturated/Curve`, replace "**FS-131 wave 6, skeleton** (job FS131-K6b;" by "**FS-131 wave 6** (jobs
+   FS131-K6b, FS131-I6C: every leaf proved;" and after "proved: `norm_sub_le_of_discs`" add "; `IsUnitCurve.sin_add_sin_le` (C1 and C2 as one
+   inequality, at length `π`), `exists_lens_point`, `isUnitCurve_circle`". In the row `Plane/Saturated/LocalGraph`, replace "**FS-131 wave 6,
+   skeleton** (job FS131-K6b)." by "**FS-131 wave 6** (jobs FS131-K6b, FS131-I6C: every leaf proved, `local_graph` over `Pinch`'s `c11_discs` and
+   `essBoundary_inter_eq`); children `HasTwoDiscsAt.norm_sub_le`, `exists_arclength_inverse`, `exists_unit_curve_of_two_discs`,
+   `isConnected_graph_side`; inhabitant `sq9_exists_isInterfaceChart`."
+4. **Frontier line and Proof Atlas**: no change of state from this job alone (FS-131 in flight; wave 6 lands at its gate). Atlas grade changes
+   are item 2's.
+5. **Errata for `plans/FS131-E8-derivation.md`** (the deriver's pen): under FS131-E8-DELTA, "connected open set" — openness is not read;
+   under FS131-E8-GAMMA's § 3.2 (1) and -BETA's § 3.3, the inequalities C1, C2 and the growth of the distance hold for length at most `π`;
+   under FS131-E8-LOCAL's § 3.1 (3)(c), the lens point reads two of (b)'s four inequalities (`x″ ∉ B(x′ + ν′, 1)`, `x′ ∉ B(x″ − ν″, 1)`); under
+   § 3.1 (4), the chart with a symmetric arclength interval is a rectangle `(a, b) × (−h, h)` in the frame, `h = min(ρ, 1)/32`.
+
+## What is left, and its route
+
+- **In `Curve` and `LocalGraph`: nothing.** Eleven of eleven leaves closed; ten are kernel theorems or will be at the join; `local_graph` and
+  its colouring form wait on line P's `c11_discs` and `TwoColourOn.essBoundary_inter_eq` — used exactly as stated at `32f2ab4c`.
+- **For line F (`FanBridge`)**, tools this job leaves beyond the statements it was promised: `IsUnitCurve.sin_add_sin_le` (the chord bound
+  between any two parameters `u₀`, `s` of a curve of length at most `π` — `gamma`'s injectivity on the closed interval is its case
+  `s₂ − s₁`); `exists_unit_curve_of_two_discs` and `isConnected_graph_side` (no measure); `HasTwoDiscsAt.norm_sub_le`, `.normal_unique`;
+  `TwoColourOn.mem_interior_densitySet_or`, `.ae_le_of_isPreconnected` (a connected set off the essential boundary and the cusps is of one
+  colour, for two sets — DELTA's two-set form). **What `IsInterfaceChart` does not export** and `gamma`'s gluing may want: that `Q_a`, `Q_b`
+  are disjoint; that `Q` is a rectangle in a frame; the graph function. They are in `local_graph`'s proof; if a consumer needs one, the
+  cheap route is a second chart lemma beside `local_graph` with the richer conclusion (the proof is the same up to its last `refine`), never
+  a change to `IsInterfaceChart`.
+- **Not stated, the planner's § 11.5 (5)**: the agreement of the two readings of `Σ` under saturation; `local_graph` is now available for it.

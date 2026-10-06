@@ -61,3 +61,8 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.TwoColourOn.ae_le_of_isPreconnected
 #eval IO.println "=== Stage 5 WIRED (over Pinch's c11_discs and essBoundary_inter_eq: must show sorryAx) ==="
 #print axioms HadwigerNelson.Plane.local_graph
+#eval IO.println "=== Stage 6: the inhabitant ==="
+#print axioms HadwigerNelson.Plane.sq9_not_isCuspAt_near_edge
+#print axioms HadwigerNelson.Plane.sqEdgePt_mem_essBoundary
+#eval IO.println "=== Stage 6 WIRED (local_graph applied to sq9: must show sorryAx) ==="
+#print axioms HadwigerNelson.Plane.sq9_exists_isInterfaceChart

@@ -6418,6 +6418,8 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.HasTwoDiscsAt.subset_interior_densitySet
 #print axioms HadwigerNelson.Plane.TwoColourOn.exists_mem_essBoundary_of_continuous
 #print axioms HadwigerNelson.Plane.TwoColourOn.ae_le_of_isPreconnected
+#print axioms HadwigerNelson.Plane.sq9_not_isCuspAt_near_edge
+#print axioms HadwigerNelson.Plane.sqEdgePt_mem_essBoundary
 
 #eval IO.println "=== PURCHASED ==="
 
