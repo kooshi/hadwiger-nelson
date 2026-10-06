@@ -29,6 +29,18 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]` (Stage 3; build `d
 - Children (mine): `AeColouring.exists_densitySet_of_notMem`, `AeColouring.isOpen_setOf_forall_notMem_essSupport`,
   `AeColouring.mem_densitySet_of_forall_notMem_essSupport`; in `Curve`: `IsUnitCurve.strictMonoOn_dist_of_le_pi` (the leaf at length `π`).
 
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]` (Stage 4; build `logs/build-3-lens.log`, axioms `logs/axioms-3-lens.out`) —
+children of `local_graph`, none a backlog row of its own:
+- in `Curve`: `HadwigerNelson.Plane.exists_lens_point` (E8 § 3.1 (3)(c) and the erratum's midpoint, one statement), `exists_lens_point_far`,
+  `lens_point_real`, `lens_ineq_real`;
+- in `LocalGraph`: `TwoColourOn.false_of_mem_inter` ("an open set is not almost everywhere of two colours"),
+  `TwoColourOn.notMem_essClosure_of_mem_densitySet`, `TwoColourOn.mem_interior_densitySet_of_notMem`,
+  `TwoColourOn.mem_interior_densitySet_or` (E8 § 3.1 (1): `N = O_a ⊔ O_b ⊔ Z` off the cusps), `exists_arclength_inverse` (the arclength
+  reparametrization the plan's (h) names as missing from Mathlib).
+
+Wired over `Pinch`'s `TwoColourOn.essBoundary_inter_eq` only (Stage 4): `HasTwoDiscsAt.one_le_norm_sub` (E8 § 3.1 (3)(b)),
+`HasTwoDiscsAt.norm_sub_le` (**the normal is 1-Lipschitz, sharp** — § 3.1 (3)(c) with the erratum), `HasTwoDiscsAt.normal_unique`.
+
 Wired (over `sorry` children; axioms `[propext, sorryAx, Classical.choice, Quot.sound]`): `HadwigerNelson.Plane.AeColouring.local_graph`
 (FS121-V5-LOC (ii)) — over `local_graph` (mine, open) and `TwoColourOn.essBoundary_inter_eq` (`Pinch`, another line's leaf) through
 `TwoColourNhd.mem_essBoundary`.
@@ -213,3 +225,40 @@ of it is written into the module (children under names of my own; each proved ch
 | L5 `g` differentiable | `g′ = −n₁/n₂` from (b) at the graph's points; `n₁`, `n₂` continuous | planned |
 | L6 arclength | `S u = ∫₀^u 1/n₂` (clamped to a global continuous integrand), an order isomorphism of `ℝ`; its inverse has derivative `n₂`; `γ = y + (U s + i g (U s)) τ₀`, `ψ = θ₀ − arcsin (n₁ ∘ U)`; `lipschitzOnWith_of_chord` with L3 | planned — the plan's (h) |
 | L7 the chart | `Q` a rectangle in the frame, `bdry`, `injOn`, `discs`, the two sides connected (each a union of normal segments meeting one convex strip) | planned — the plan's (i) |
+
+## Stage 4 — SAVED (FS131-I6C): `local_graph`'s children L1–L3 and the arclength inverse
+
+**L1, the lens point** (`Curve`, no measure): `exists_lens_point` — unit normals `ν`, `ν′` at `x`, `x′` with `‖ν − ν′‖ > ‖x − x′‖`, `x′`
+outside the open unit disc about `x + ν`, `x` outside the one about `x′ − ν′`, and `4‖x − x′‖ ≤ τ`: a point within `τ` of `x` in two opposite
+open unit discs. Far regime (`> 6‖x − x′‖`, `exists_lens_point_far`): E8 § 3.1 (3)(c)'s point, written `x + s(ν′ − ν)` with
+`s = min(L/2, τ)/L`, the two squared distances being `1 − s(1 − s)L²` and at most `1 + 2δ² − s(1 − s)L²` (`lens_point_real`: two
+`linear_combination`s and one five-variable inequality, `lens_ineq_real`, kept apart from the large context as `LEAN.md` § Searching says).
+Near regime: the midpoint of two centres less than `2` apart (`norm_sub_le_of_discs`' contrapositive), within `3.5‖x − x′‖` of `x`.
+**Read of the four disc conditions: two** — the far point reads only `x′ ∉ B(x + ν, 1)` and `x ∉ B(x′ − ν′, 1)` (the two lower bounds on the
+inner products); E8's (3)(c) quotes (b) "at `x″`" for both signs. A route note.
+
+**L2, L3** (`LocalGraph`): as the table of § 3.5. `HasTwoDiscsAt.norm_sub_le` is E8 § 3.1 (3)(c) and the erratum in one statement:
+`‖ν − ν′‖ ≤ ‖x − x′‖` for essential boundary points of `N` with their two discs, whenever `closedBall x τ ⊆ N` with `τ ≥ 4‖x − x′‖` — the
+crude `6δ` is inside `exists_lens_point` and is exported nowhere.
+
+**The arclength inverse** (`exists_arclength_inverse`, no measure in its statement): for a continuous `σ ≥ 1` on `[−h, h]`, an inverse `V` of
+`u ↦ ∫₀^u σ` on a symmetric `(−ℓ, ℓ)`, onto an interval `(a, b) ∋ 0` in `[−h, h]`, with `V′ = 1/σ ∘ V`. The integrand is `σ` clamped to
+`[−h, h]`, so the arclength is an order isomorphism of the line (`StrictMono.orderIsoOfSurjective`) and its inverse is continuous for free
+(`HasDerivAt.of_local_left_inverse`). About fifty lines; the plan priced (h) at two days.
+
+**Amendment 1, item 2 — where `TwoColourOn.disj` is read, so far**: in `TwoColourOn.false_of_mem_inter` (two opposite open discs cannot share a
+point of `N`: the lens step, as the third planner expected) and in `TwoColourOn.notMem_essClosure_of_mem_densitySet` (a density point of `A`
+is outside `B`'s essential closure — read by `mem_interior_densitySet_or`, i.e. by "off the essential boundary a point is interior to one
+density set": E8 § 3.1 (1)'s `N = O_a ⊔ O_b ⊔ Z`). **Two steps, not one.** Also through `Pinch`'s `essBoundary_inter_eq` and `c11_discs`, as
+stated there. The final count is in the last stage.
+
+**Checks.** Build OK — 466 of 466 batches, 4 modules rebuilt, exit 0 (`logs/build-3-lens.exit`, `build-3-lens.log`;
+`build/gate/build/20261006T151942Z-892855.log`); 21 warnings, every one `declaration uses sorry` (`LocalGraph` 1). Axioms
+(`logs/axioms-3-lens.out`): nine declarations on the standard three, in `scripts/Axioms.lean`'s block; three wired ones print `sorryAx`
+(not in the block). Statements: 16 of 16 the same (`logs/statements-4.out`). Names grepped before adding (0 hits each).
+
+**Next** (elaborated on scratch copies under `data/fs131/i6c/scratch/`, not yet in the module): `graph.lean` holds
+`exists_unit_curve_of_two_discs` — E8 § 3.1 (4) in graph coordinates with no measure (uniqueness on vertical segments, `|g u| ≤ u²`,
+`g′ = −n₁/n₂` from `hasDerivAt_of_two_disc_bound`, the arclength inverse, `φ = −arcsin n₁`, `lipschitzOnWith_of_chord`) — elaborated with
+`#print axioms` reading the standard three under `lake env lean` (iteration only). Left: the frame transfer, existence on normal segments by
+connectedness, the two sides, the chart.

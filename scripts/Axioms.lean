@@ -6397,6 +6397,15 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.AeColouring.mem_densitySet_of_forall_notMem_essSupport
 #print axioms HadwigerNelson.Plane.AeColouring.ae_one_colour_of_isConnected
 #print axioms HadwigerNelson.Plane.AeColouring.closure_essBdry_subset
+#print axioms HadwigerNelson.Plane.lens_ineq_real
+#print axioms HadwigerNelson.Plane.lens_point_real
+#print axioms HadwigerNelson.Plane.exists_lens_point_far
+#print axioms HadwigerNelson.Plane.exists_lens_point
+#print axioms HadwigerNelson.Plane.TwoColourOn.false_of_mem_inter
+#print axioms HadwigerNelson.Plane.TwoColourOn.notMem_essClosure_of_mem_densitySet
+#print axioms HadwigerNelson.Plane.TwoColourOn.mem_interior_densitySet_of_notMem
+#print axioms HadwigerNelson.Plane.TwoColourOn.mem_interior_densitySet_or
+#print axioms HadwigerNelson.Plane.exists_arclength_inverse
 
 #eval IO.println "=== PURCHASED ==="
 

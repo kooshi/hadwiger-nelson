@@ -32,3 +32,17 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.AeColouring.closure_essBdry_subset
 #eval IO.println "=== WIRED (over local_graph and Pinch's leaves: must show sorryAx) ==="
 #print axioms HadwigerNelson.Plane.AeColouring.local_graph
+#eval IO.println "=== Stage 4: the lens point, the two-set children, the arclength inverse ==="
+#print axioms HadwigerNelson.Plane.lens_ineq_real
+#print axioms HadwigerNelson.Plane.lens_point_real
+#print axioms HadwigerNelson.Plane.exists_lens_point_far
+#print axioms HadwigerNelson.Plane.exists_lens_point
+#print axioms HadwigerNelson.Plane.TwoColourOn.false_of_mem_inter
+#print axioms HadwigerNelson.Plane.TwoColourOn.notMem_essClosure_of_mem_densitySet
+#print axioms HadwigerNelson.Plane.TwoColourOn.mem_interior_densitySet_of_notMem
+#print axioms HadwigerNelson.Plane.TwoColourOn.mem_interior_densitySet_or
+#print axioms HadwigerNelson.Plane.exists_arclength_inverse
+#eval IO.println "=== Stage 4 WIRED (over Pinch's essBoundary_inter_eq: must show sorryAx) ==="
+#print axioms HadwigerNelson.Plane.HasTwoDiscsAt.one_le_norm_sub
+#print axioms HadwigerNelson.Plane.HasTwoDiscsAt.norm_sub_le
+#print axioms HadwigerNelson.Plane.HasTwoDiscsAt.normal_unique

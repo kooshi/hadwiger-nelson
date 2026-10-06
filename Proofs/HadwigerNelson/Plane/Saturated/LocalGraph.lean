@@ -151,6 +151,177 @@ structure IsInterfaceChart (A B N : Set ℂ) (y : ℂ) (Q : Set ℂ) (γ : ℝ �
   sides : ∃ Qa Qb : Set ℂ, IsOpen Qa ∧ IsOpen Qb ∧ IsConnected Qa ∧ IsConnected Qb ∧
     Q \ γ '' Ioo (-h) h = Qa ∪ Qb ∧ (Qa : Set ℂ) ≤ᵐ[volume] A ∧ (Qb : Set ℂ) ≤ᵐ[volume] B
 
+/-! ### Children of `local_graph` (FS131-I6C): two sets on a two-colour open set
+
+`plans/FS131-E8-derivation.md` § 3.1 (1)–(3) and the erratum under FS131-E8-LOCAL, at the class each step reads. -/
+
+/-- **An open subset of a two-colour open set is not almost everywhere in both sets**: a point of `N` lies in no two
+open sets, one almost everywhere in `A` within `N` and one in `B`. (This is where `TwoColourOn.disj` is read.) -/
+theorem TwoColourOn.false_of_mem_inter {A B N : Set ℂ} (h : TwoColourOn A B N) {O₁ O₂ : Set ℂ} (hO₁ : IsOpen O₁)
+    (hO₂ : IsOpen O₂) (h1 : (O₁ ∩ N : Set ℂ) ≤ᵐ[volume] A) (h2 : (O₂ ∩ N : Set ℂ) ≤ᵐ[volume] B) {p : ℂ}
+    (hpN : p ∈ N) (hp1 : p ∈ O₁) (hp2 : p ∈ O₂) : False := by
+  have hpos : 0 < volume (O₁ ∩ O₂ ∩ N) :=
+    ((hO₁.inter hO₂).inter h.isOpen).measure_pos volume ⟨p, ⟨hp1, hp2⟩, hpN⟩
+  have hle : (O₁ ∩ O₂ ∩ N : Set ℂ) ≤ᵐ[volume] (A ∩ B ∩ N : Set ℂ) := by
+    filter_upwards [h1, h2] with z hzA hzB hz
+    exact ⟨⟨hzA ⟨hz.1.1, hz.2⟩, hzB ⟨hz.1.2, hz.2⟩⟩, hz.2⟩
+  have := measure_mono_ae hle
+  rw [h.disj] at this
+  exact absurd hpos (not_lt.2 this)
+
+/-- In a two-colour open set, a density point of `A` is outside the essential closure of `B`: near it `B` lies in the
+complement of `A` up to the null overlap. -/
+theorem TwoColourOn.notMem_essClosure_of_mem_densitySet {A B N : Set ℂ} (hA : MeasurableSet A)
+    (h : TwoColourOn A B N) {x : ℂ} (hxN : x ∈ N) (hx : x ∈ densitySet A) : x ∉ essClosure B := by
+  have h0 := tendsto_densityRatio_compl_of_mem hA hx
+  obtain ⟨r₀, hr₀, hsub⟩ := Metric.isOpen_iff.1 h.isOpen x hxN
+  have hle : ∀ᶠ r in 𝓝[>] (0 : ℝ), densityRatio B x r ≤ densityRatio Aᶜ x r := by
+    filter_upwards [Ioo_mem_nhdsGT hr₀] with r hr
+    refine ENNReal.div_le_div_right ?_ _
+    have hcb : closedBall x r ⊆ N := (closedBall_subset_ball hr.2).trans hsub
+    have hsubset : B ∩ closedBall x r ⊆ (Aᶜ ∩ closedBall x r) ∪ (A ∩ B ∩ N) := by
+      rintro z ⟨hzB, hzc⟩
+      by_cases hzA : z ∈ A
+      · exact Or.inr ⟨⟨hzA, hzB⟩, hcb hzc⟩
+      · exact Or.inl ⟨hzA, hzc⟩
+    calc volume (B ∩ closedBall x r) ≤ volume ((Aᶜ ∩ closedBall x r) ∪ (A ∩ B ∩ N)) := measure_mono hsubset
+      _ ≤ volume (Aᶜ ∩ closedBall x r) + volume (A ∩ B ∩ N) := measure_union_le _ _
+      _ = volume (Aᶜ ∩ closedBall x r) := by rw [h.disj, add_zero]
+  have h1 : upperDensityAt B x ≤ 0 := by
+    rw [upperDensityAt, ← h0.limsup_eq]
+    exact limsup_le_limsup hle
+  intro hB
+  exact lt_irrefl _ (lt_of_lt_of_le hB h1)
+
+/-- In a two-colour open set, a point outside the support of `B` is interior to the density set of `A`: `B` is null
+near it, so a ball about it is almost everywhere in `A`. Only `cover` is read. -/
+theorem TwoColourOn.mem_interior_densitySet_of_notMem {A B N : Set ℂ} (h : TwoColourOn A B N) {x : ℂ}
+    (hxN : x ∈ N) (hx : x ∉ essSupport B) : x ∈ interior (densitySet A) := by
+  obtain ⟨r₀, hr₀, hsub⟩ := Metric.isOpen_iff.1 h.isOpen x hxN
+  simp only [essSupport, mem_setOf_eq, not_forall, not_lt, nonpos_iff_eq_zero] at hx
+  obtain ⟨r, hr, hnull⟩ := hx
+  have hsubN : ball x (min r r₀) ⊆ N := (ball_subset_ball (min_le_right _ _)).trans hsub
+  have hae : (ball x (min r r₀) : Set ℂ) ≤ᵐ[volume] A := by
+    rw [ae_le_set]
+    refine measure_mono_null (t := (N \ (A ∪ B)) ∪ (B ∩ ball x r)) ?_
+      (measure_union_null (ae_le_set.1 h.cover) hnull)
+    rintro z ⟨hz, hzA⟩
+    by_cases hzB : z ∈ B
+    · exact Or.inr ⟨hzB, ball_subset_ball (min_le_left _ _) hz⟩
+    · exact Or.inl ⟨hsubN hz, fun hu => hu.elim hzA hzB⟩
+  exact mem_interior.2 ⟨_, subset_densitySet_of_isOpen_ae_subset isOpen_ball hae, isOpen_ball,
+    mem_ball_self (lt_min hr hr₀)⟩
+
+/-- **Off the essential boundary and the cusps, a point of a two-colour open set is interior to one of the two
+density sets** (FS131-E8 § 3.1 (1): `N = O_a ⊔ O_b ⊔ Z`). -/
+theorem TwoColourOn.mem_interior_densitySet_or {A B N : Set ℂ} (hA : MeasurableSet A) (h : TwoColourOn A B N)
+    {x : ℂ} (hxN : x ∈ N) (hcA : ¬ IsCuspAt A x) (hcB : ¬ IsCuspAt B x) (hx : x ∉ essBoundary A) :
+    x ∈ interior (densitySet A) ∨ x ∈ interior (densitySet B) := by
+  by_cases hd : x ∈ densitySet A
+  · exact Or.inl (h.mem_interior_densitySet_of_notMem hxN fun hs =>
+      hcB ⟨hs, h.notMem_essClosure_of_mem_densitySet hA hxN hd⟩)
+  · exact Or.inr (h.symm.mem_interior_densitySet_of_notMem hxN fun hs => hcA ⟨hs, fun hc => hx ⟨hc, hd⟩⟩)
+
+/-- **FS131-E8 § 3.1 (3)(b), set form**: a point of the common essential boundary in `N` lies in neither of the two
+open unit discs at another point. -/
+theorem HasTwoDiscsAt.one_le_norm_sub {A B N : Set ℂ} (hA : MeasurableSet A) (hB : MeasurableSet B)
+    (h : TwoColourOn A B N) {x ν x' : ℂ} (hd : HasTwoDiscsAt A B N x ν) (hx' : x' ∈ essBoundary A ∩ N) :
+    1 ≤ ‖x' - (x + ν)‖ ∧ 1 ≤ ‖x' - (x - ν)‖ := by
+  have hxB : x' ∈ essBoundary B := ((h.essBoundary_inter_eq hA hB).subset hx').1
+  constructor
+  · by_contra hlt
+    rw [not_le, ← dist_eq_norm, ← mem_ball] at hlt
+    exact hxB.2 (subset_densitySet_of_isOpen_ae_subset (isOpen_ball.inter h.isOpen) hd.2.1 ⟨hlt, hx'.2⟩)
+  · by_contra hlt
+    rw [not_le, ← dist_eq_norm, ← mem_ball] at hlt
+    exact hx'.1.2 (subset_densitySet_of_isOpen_ae_subset (isOpen_ball.inter h.isOpen) hd.2.2 ⟨hlt, hx'.2⟩)
+
+/-- **The normal of the two discs is 1-Lipschitz on the common essential boundary** (FS131-E8 § 3.1 (3)(c) and the
+erratum under FS131-E8-LOCAL, in one statement, sharp): for two essential boundary points `x`, `x'` of `N` with their
+two discs, `‖ν − ν'‖ ≤ ‖x − x'‖` as soon as the closed ball of radius `τ ≥ 4 ‖x − x'‖` about `x` lies in `N`. Otherwise
+`exists_lens_point` puts a point of `N` in two opposite open discs, almost everywhere of both sets. -/
+theorem HasTwoDiscsAt.norm_sub_le {A B N : Set ℂ} (hA : MeasurableSet A) (hB : MeasurableSet B)
+    (h : TwoColourOn A B N) {x x' ν ν' : ℂ} (hd : HasTwoDiscsAt A B N x ν) (hd' : HasTwoDiscsAt A B N x' ν')
+    (hx : x ∈ essBoundary A ∩ N) (hx' : x' ∈ essBoundary A ∩ N) {τ : ℝ} (hτ : 0 < τ) (hball : closedBall x τ ⊆ N)
+    (hδ : 4 * ‖x - x'‖ ≤ τ) : ‖ν - ν'‖ ≤ ‖x - x'‖ := by
+  by_contra hlt
+  rw [not_le] at hlt
+  obtain ⟨p, hp, hcase⟩ := exists_lens_point hd.1 hd'.1 (hd.one_le_norm_sub hA hB h hx').1
+    (hd'.one_le_norm_sub hA hB h hx).2 hτ hδ hlt
+  have hpN : p ∈ N := hball (by rwa [mem_closedBall, dist_eq_norm])
+  rcases hcase with ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · exact h.symm.false_of_mem_inter isOpen_ball isOpen_ball hd'.2.1 hd.2.2 hpN
+      (by rwa [mem_ball, dist_eq_norm]) (by rwa [mem_ball, dist_eq_norm])
+  · exact h.symm.false_of_mem_inter isOpen_ball isOpen_ball hd.2.1 hd'.2.2 hpN
+      (by rwa [mem_ball, dist_eq_norm]) (by rwa [mem_ball, dist_eq_norm])
+
+/-- The normal of the two discs at an essential boundary point of `N` is unique. -/
+theorem HasTwoDiscsAt.normal_unique {A B N : Set ℂ} (hA : MeasurableSet A) (hB : MeasurableSet B)
+    (h : TwoColourOn A B N) {x ν ν' : ℂ} (hd : HasTwoDiscsAt A B N x ν) (hd' : HasTwoDiscsAt A B N x ν')
+    (hx : x ∈ essBoundary A ∩ N) : ν = ν' := by
+  obtain ⟨r, hr, hsub⟩ := Metric.isOpen_iff.1 h.isOpen x hx.2
+  have := hd.norm_sub_le hA hB h hd' hx hx (half_pos hr) ((closedBall_subset_ball (half_lt_self hr)).trans hsub)
+    (by rw [sub_self, norm_zero, mul_zero]; exact (half_pos hr).le)
+  rw [sub_self, norm_zero] at this
+  exact sub_eq_zero.1 (norm_le_zero_iff.1 this)
+
+/-! ### Children of `local_graph` (FS131-I6C): the arclength reparametrization (no measure, no colouring) -/
+
+/-- **The arclength reparametrization** (FS131-I6C; Mathlib has none): for a continuous speed `σ ≥ 1` on `[−h, h]`,
+the inverse `V` of the arclength `u ↦ ∫₀^u σ` is defined on a symmetric interval `(−ℓ, ℓ)`, maps it increasingly onto
+an interval `(a, b)` about `0` inside `[−h, h]`, and has derivative `1/σ (V s)`. (The integrand is `σ` clamped to
+`[−h, h]`, so the arclength is an order isomorphism of the line and its inverse is continuous for free.) -/
+theorem exists_arclength_inverse {σ : ℝ → ℝ} {h : ℝ} (hh : 0 < h) (hσc : ContinuousOn σ (Icc (-h) h))
+    (hσ1 : ∀ u ∈ Icc (-h) h, 1 ≤ σ u) :
+    ∃ (ℓ : ℝ) (V : ℝ → ℝ) (a b : ℝ), 0 < ℓ ∧ -h ≤ a ∧ a < 0 ∧ 0 < b ∧ b ≤ h ∧ V 0 = 0 ∧
+      StrictMonoOn V (Ioo (-ℓ) ℓ) ∧ V '' Ioo (-ℓ) ℓ = Ioo a b ∧ ∀ s ∈ Ioo (-ℓ) ℓ, HasDerivAt V (σ (V s))⁻¹ s := by
+  have hclamp : ∀ u : ℝ, max (-h) (min h u) ∈ Icc (-h) h := fun u =>
+    ⟨le_max_left _ _, max_le (by linarith) (min_le_left _ _)⟩
+  set σ' : ℝ → ℝ := fun u => σ (max (-h) (min h u)) with hσ'
+  have hc : Continuous σ' := hσc.comp_continuous (by fun_prop) hclamp
+  have h1 : ∀ u, 1 ≤ σ' u := fun u => hσ1 _ (hclamp u)
+  have heq : ∀ u ∈ Icc (-h) h, σ' u = σ u := fun u hu => by
+    simp only [hσ', min_eq_right hu.2, max_eq_right hu.1]
+  set S : ℝ → ℝ := fun u => ∫ t in (0 : ℝ)..u, σ' t with hS
+  have hSd : ∀ u, HasDerivAt S (σ' u) u := fun u => (hc.integral_hasStrictDerivAt 0 u).hasDerivAt
+  have hS0 : S 0 = 0 := by simp [hS]
+  have hmono : StrictMono S := strictMono_of_deriv_pos fun u => by
+    rw [(hSd u).deriv]; linarith [h1 u]
+  have hDd : ∀ u, HasDerivAt (fun u => S u - u) (σ' u - 1) u := fun u => (hSd u).sub (hasDerivAt_id' u)
+  have hD : Monotone fun u => S u - u :=
+    monotone_of_deriv_nonneg (fun u => (hDd u).differentiableAt) fun u => by
+      rw [(hDd u).deriv]; linarith [h1 u]
+  have hge : ∀ u, 0 ≤ u → u ≤ S u := fun u hu => by
+    have h2 : S 0 - 0 ≤ S u - u := hD hu
+    linarith
+  have hle : ∀ u, u ≤ 0 → S u ≤ u := fun u hu => by
+    have h2 : S u - u ≤ S 0 - 0 := hD hu
+    linarith
+  have hsurj : Function.Surjective S :=
+    (continuous_iff_continuousAt.2 fun u => (hSd u).continuousAt).surjective
+      (tendsto_atTop_mono' atTop ((eventually_ge_atTop 0).mono fun u hu => hge u hu) tendsto_id)
+      (tendsto_atBot_mono' atBot ((eventually_le_atBot 0).mono fun u hu => hle u hu) tendsto_id)
+  set E : ℝ ≃o ℝ := hmono.orderIsoOfSurjective S hsurj with hE
+  have hES : ∀ u, E u = S u := fun u => rfl
+  have hV0 : E.symm 0 = 0 := E.symm_apply_eq.2 hS0.symm
+  set ℓ : ℝ := min (S h) (-S (-h)) with hℓ
+  have hℓ0 : 0 < ℓ := lt_min (lt_of_lt_of_le hh (hge h hh.le)) (by linarith [hle (-h) (by linarith)])
+  have ha : -h ≤ E.symm (-ℓ) := by
+    rw [← E.symm_apply_apply (-h)]
+    exact E.symm.monotone (by rw [hES]; linarith [min_le_right (S h) (-S (-h))])
+  have hb : E.symm ℓ ≤ h := by
+    rw [← E.symm_apply_apply h]
+    exact E.symm.monotone (by rw [hES]; exact min_le_left _ _)
+  refine ⟨ℓ, E.symm, E.symm (-ℓ), E.symm ℓ, hℓ0, ha, ?_, ?_, hb, hV0, E.symm.strictMono.strictMonoOn _,
+    E.symm.image_Ioo _ _, fun s hs => ?_⟩
+  · rw [← hV0]; exact E.symm.strictMono (by linarith)
+  · rw [← hV0]; exact E.symm.strictMono hℓ0
+  · have hmem : E.symm s ∈ Icc (-h) h :=
+      ⟨ha.trans (E.symm.monotone hs.1.le), (E.symm.monotone hs.2.le).trans hb⟩
+    rw [← heq _ hmem]
+    exact HasDerivAt.of_local_left_inverse E.symm.continuous.continuousAt (hSd (E.symm s))
+      (by linarith [h1 (E.symm s)]) (Eventually.of_forall fun t => E.apply_symm_apply t)
+
 /-- **FS131-E8-LOCAL** (FS111-M-C11 (ii) with "no cusp in the neighbourhood"; FS111-W-NOBEND), at the class its
 argument reads: `A`, `B` measurable with null unit pairs on a two-colour open set `N`; `U ⊆ N` open, with no cusp of
 `A` or of `B`, each essential boundary point of `U` a contact point of the set it bounds. Then every essential boundary
