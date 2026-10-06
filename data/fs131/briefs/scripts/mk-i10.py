@@ -5,6 +5,7 @@ T={"A":("fs131-w10","FS131-I10A","`Proofs/HadwigerNelson/Arith/SpectralInputs.le
    "B":("fs131-w10b","FS131-I10B","`Proofs/HadwigerNelson/Arith/StationaryRatio.lean` (three leaves)","5.3 `StationaryRatio`","the stationary ratio"),
    "C":("fs131-w10c","FS131-I10C","`Proofs/HadwigerNelson/Arith/StandingFive.lean` (nine leaves, one certificate)","5.4 `StandingFive`","the standing-five field")}[LANE]
 TREE,JOB,FILES,SEC,WHAT=T
+BUILDNOTE="" if LANE=="A" else " — your tree's build was copied from an idle tree on `main`'s line that predates the wave's four modules, so this first build compiles them: let it, and say what it rebuilt"
 W=WT+TREE+"/"; KP=W+"plans/FS131-w10-kernel-plan.md"
 b=f'''# Brief {JOB} — wave 10, {WHAT}: the open leaves of one file of the arithmetic wave, on `{TREE}`
 
@@ -54,7 +55,7 @@ per leaf with the named hypotheses' four items in § 5.5), and every leaf's docs
 ## Done means
 
 1. **Your readback first**: check the quotations against their sources; read the planner's record whole, your file, the foundation it rests on,
-   and each row's derivation entry at the address the record gives. Build the branch once as given (21 `sorry` leaves over the four files). Open
+   and each row's derivation entry at the address the record gives. Build the branch once as given (21 `sorry` leaves over the four files){BUILDNOTE}. Open
    your record with what you may and may not change. Commit and push.
 2. **The leaves**, in the plan's order, saving after each group (a build, the axioms print for the group with a control that fires, a statement
    check against `f919973e`, commit, push). Re-price after your first two leaves and say so.
