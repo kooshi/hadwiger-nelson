@@ -1,0 +1,8 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 16,17
+data/fs131/ln/UnderscoreInst.lean:18:0: error: -- Found 1 error in 3 declarations (plus 0 automatically generated ones) in the current file with 1 linters
+
+/- The `unusedArguments` linter reports:
+UNUSED ARGUMENTS.
+This linter can be disabled with `@[nolint unusedArguments]`. -/
+#check fs131LnAnon /- 1 unused argument:
+  argument 3: [NumberField F] -/

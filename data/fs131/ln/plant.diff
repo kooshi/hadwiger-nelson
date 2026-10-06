@@ -1,0 +1,11 @@
+diff --git a/Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean b/Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean
+index 5d67f570..594a7b09 100644
+--- a/Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean
++++ b/Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean
+@@ -2872,3 +2872,6 @@ theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂
+ end ArcMap
+ 
+ end HadwigerNelson.Plane
++
++/-- FS131-LN1's planted fault, for the linters' negative control: `m` is unused. Never committed. -/
++def fs131LnLintPlant (n m : ℕ) : ℕ := n
