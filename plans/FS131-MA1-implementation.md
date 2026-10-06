@@ -262,7 +262,7 @@ stage 2's, and the 41 shared helpers of § 3.3.
   warnings, 8m44s`, exit 0. `declaration uses 'sorry'`: `Stuck` 21, `Bends` 7 — **28, all implementer B's; none in `Paint` or
   `Moves`**; 0 other warnings, 0 errors. (An intermediate build of this stage, before the fan's counts were added, was also green; its
   log described a tree never committed and is not kept.)
-- **Axioms**: `MAAxioms-4.out`: **177 of 177 theorems of `Paint` (115) and `Moves` (62) on the standard three**; `hornModel_shave`,
+- **Axioms**: `MAAxioms-4.out`: **177 of 177 theorems of `Paint` (105) and `Moves` (72) on the standard three**; `hornModel_shave`,
   `hornModel_open`, `twoHornModel_rayMerge`, `twoHornModel_merge` each on exactly `[propext, Classical.choice, Quot.sound]`; **4 of 4
   controls fire**; `--self-test` OK.
 - **The statement check**: `statements-4.out`: 132 skeleton declarations against `fe9d6d32`, **0 problems**; 119 added (75 in `Paint`,
@@ -305,8 +305,8 @@ read off the gate's own output at the landing.*
 1. **`CLAUDE.md` § Trust ledger** (the sentence "the current audit reads … clean and … declared purchases, and … imported"): at the
    landing of this lane the clean count rises by the records of the two blocks in `scripts/Axioms.lean` — 36 (FS131-KM1) + 30
    (FS131-MA1) = 66, of which 57 are clean on this branch today and 9 wait for implementer B. No purchase, no import.
-2. **`CLAUDE.md` § The gate** (the vacuity counts): unread; the lane adds 119 declarations in `Paint` and `Moves` (77 theorems beyond the
-   skeleton's, 4 definitions), none concluding `False`, none with a colouring binder.
+2. **`CLAUDE.md` § The gate** (the vacuity counts): unread; the lane adds 119 declarations in `Paint` and `Moves` (115 theorems and 4
+   definitions beyond the skeleton's), none concluding `False`, none with a colouring binder.
 3. **`ARCHITECTURE.md`**, the rows `Plane/Models/Paint` and `Plane/Models/Moves` (not mine to edit under this brief):
    - `Paint`: for "**FS-131, the example maps, skeleton** (job FS131-KM1; record `plans/FS131-models-kernel-plan.md`)" read "**FS-131,
      the example maps** (FS131-KM1 the construction; FS131-MA1 its leaves and what the models share; records
@@ -352,10 +352,10 @@ All **[kernel]**: built by the worktree's `./scripts/build.sh` (`build-4.log`), 
 **Beyond the skeleton** (new statements, this job's): in `Moves` — `hornModel_region_seven`, `twoHornModel_region_seven` (the class of
 `7` is the painted set), `hornModel_isSector_iff`, `twoHornModel_isSector_iff` (the sectors at every radius up to `1/10`),
 `hornModel_allowedCone`, `twoHornModel_allowedCone` (the closed half-plane), `twoHornModel_hasDegree` (`4`),
-`twoHornModel_hasHornCount` (`3`), `isPreconnected_holedTile`, and 35 further helpers; in `Paint` — `ArcMap.region_paint_of_region_eq_empty`,
+`twoHornModel_hasHornCount` (`3`), `isPreconnected_holedTile`, and 33 further helper theorems; in `Paint` — `ArcMap.region_paint_of_region_eq_empty`,
 `ArcMap.region_paint_subset`, `ArcMap.isClear_paint_of_mem_region`, `ArcMap.interiorPts_paint_inter_ball`, `fanPiece_data`,
 `encard_sectors_fan`, `encard_horns_fan`, `ArcMap.allowedCone_tangent`, `ArcMap.tangent_contact_cone`,
-`dist_tangentCentre_le_of_mem_hornSet`, and 61 further helpers. The full list with each one's axioms is `MAAxioms-4.out`.
+`dist_tangentCentre_le_of_mem_hornSet`, and 63 further helper theorems. The full list with each one's axioms is `MAAxioms-4.out`.
 
 **The informal statement each model theorem was read against** (aloud, at the close): *there is a valid map of the plane on which every
 hypothesis of the move holds at once, and the move's conclusion follows for it* — for SHAVE and OPEN the eight-colour brick map with a
