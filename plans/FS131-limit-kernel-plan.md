@@ -938,3 +938,52 @@ One-line pointers to § 17.4 at the heads of §§ 3.1 and 3.3 of this record (KL
 `data/fs131/ir/ir2/build-stage18.log`).
 
 ## Stage 18 — SAVED (FS131-IR2)
+
+## Stage 19 — SAVED (FS131-IR2): the potential under a step — the comparison of sectors (the brief's item 2, in the form the counts read)
+
+### 19.1 What was proved ([kernel]; `Procedure`, section "Comparing the sectors of two maps at a point", before "The two steps")
+
+The count `degree + horns` at `v`, for every move, without a chart of the new map:
+- **`pot_le_of_sectors`** — if, at every small radius, every sector of `F₂` at `v` contains a sector of `F₁`, then `F₂`'s degree and
+  horn count at `v` are at most `F₁`'s. (Distinct sectors of `F₂` are disjoint, so the contained sectors are distinct —
+  `encard_le_of_forall_exists_subset`; a sector of `F₁` inside a horn set is a horn set — `IsSector.hornSet_of_subset`, from `Moves`'
+  `Near.horn_of_sector_subset_hornSet`.)
+- **`pot_lt_of_sectors`** — if moreover one sector `H` of `F₁` is never needed (every sector of `F₂` contains a sector of `F₁` other than
+  `H`), the degree drops, so `m₂ + j₂ < m₁ + j₁`. This is the form SHAVE's count reads (`H` the shaved horn).
+- `exists_isSector_subset` — the first hypothesis holds whenever `F₁`'s interior points near `v` are interior points of `F₂`;
+  `exists_isSector_ne_subset`, **`pot_lt_of_interior`** — and the second when, besides, the points near `v` of one germ of `F₁` are interior
+  to `F₂` and `F₁` has at least two germs there: the form MERGE's and MERGE-RAY's counts read (a germ inside the recoloured gap).
+- **`cleanKeep_pot_le`** — cleaning raises neither the degree nor the horn count (`interiorPts_subset_cleanKeep`): OPEN's count is then
+  `exists_open`'s clause (`m' ≤ m`, `j' < j`) and this line.
+- `hasRepeatedColour_of_cleanKeep` (cleaning creates no repeated colour) and **`not_isSite_cleanKeep`** (a point with horn count `0` and no
+  repeated colour is no site after cleaning) — clause (d)'s reduction to the uncleaned map, where a move's statement exports
+  `¬ HasRepeatedColour` on its rim.
+
+### 19.2 The form, and what was not proved (a decision of mine, for the coordinator's eye)
+
+The brief's item 2 names the lemma "the sectors of a kept-colour cleaning at a point with a sector chart are the maximal runs of
+consecutive chart sectors of one colour". **I did not prove it in that form.** What every count reads is one direction of it — every
+sector of the cleaned map contains a chart sector, and a germ with one colour on both sides joins its two sectors — and that direction
+is what Stage 19 proves, as a comparison between two maps' sectors as sets. The converse (two chart sectors lie in one cleaned sector
+only if every sector between them, one way round, has their colour) is a separation statement: it needs the cleaned map's own chart (the
+sub-family of colour-change germs, re-indexed over `Fin n'` with the wrap-around clause of `BranchGerms.Sorted`), which I priced at
+several hundred lines and which no clause of `exists_vertexStep` reads. Reasons the comparison form is the better child: it never
+indexes the new map's germs; it covers SHAVE and OPEN, whose new maps are not sub-families of the old chart (a new arc inside a sector);
+and it gives the horn count with the degree in one argument. If a later consumer needs the exact description, the route is
+`isSectorChart_of` on `cleanKeep` with the kept germs — not started.
+
+### 19.3 The build, the receipt, the checks
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 6 modules rebuilt, 5 with warnings, all 8 warnings `declaration uses
+  'sorry'`** (`Procedure` at the two steps, now l. 1029 and l. 1046; `Terminal` 1; not mine: `BaseDense` 3, `BendCollar` 1, `HexRing` 1), 9 min
+  20 s, exit 0 (`build/gate/build/20261006T042529Z-904698.log`; driver log `data/fs131/ir/ir2/build-stage19.log`).
+- **Axioms** against that build (`data/fs131/ir/ir2/IR2Axioms19.lean` → `.out`, `slot.py --mem 12 --cpus 2 -- lake env lean`, exit 0;
+  `tools/fs131_ir_axsum.py … --expect-sorry exists_vertexStep,exists_terminalMap`, `IR2Axioms19-summary.txt`, PASS): **16 records — the 14
+  new ones on the standard three or fewer; the two controls on `sorryAx`**, 0 other.
+- **Statements**: `tools/fs131_il_stmt_check.py d7954838` (against Stage 18): PASS, additions only (`ir2/stmt-check-19.txt`).
+- **Receipt**: a block "FS131-IR2" of 14 records in `scripts/Axioms.lean`, above `=== PURCHASED ===`.
+- No definition was added (so no spec example is owed); each theorem is parametric in its maps (the vacuity scan's GENERIC), and
+  `cleanKeep_pot_le`'s and `not_isSite_cleanKeep`'s hypotheses are inhabited by any map at a point of its domain with its own counts
+  (`exists_hasDegree_of_mem_dom`, `exists_hasHornCount`).
+
+## Stage 19 — SAVED (FS131-IR2)
