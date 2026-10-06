@@ -3880,3 +3880,29 @@ reason by the close.*
      about fragments that hold the unit disc. Confidence: high. **Routed at once** to FS131-IR2, which holds the leaf (IR1 handed back before the finding):
      a dated amendment to its brief, and a message. No backlog statement changes (`exists_terminalSeq` and `exists_terminalMap` take `IsPlaneMap`).
      **Correction owed**, for the filing: E6's draft § 4.5 (2) and KL1's plan row carry the same omission.
+424. **FS131-I5q done: wave 5's non-`Terminal` lane holds no open leaf of its own** (harness ≈ 574k by the task notice, past its line; record `fs131-w5`'s
+     `plans/FS131-I5-implementation.md`, Stages 56–59; report `data/fs131/reports/FS131-I5q.md`; commits `158bfadd`, `8f3811bd`, `bfbc8650`, `8ca5fc67`,
+     pushed). **[kernel], standard three, statements unchanged**: `hfree_of_baseHyp`, `finite_maxRingArcs`, `maxRingArcs_subset_of_bend` — so
+     **`exists_preBend`, `exists_preBend_step`, `n3_base` (FS112-N3-BASE with E4's hypothesis), `localDense` (FS129-OR1-LOCALDENSE), `dense3`
+     (FS112-N3-DENSE3)** have nothing open beneath them; **`bv_l3`** (FS114-BV-HEX's BV-L3, `[SokolovVoronov2025]` Lemma 3 as `plans/BASE-V-verification.md`
+     § 1b.3 reads it), moved to `BaseWalk` after `l3_base` (ruling 370 (a)), statement verbatim; `l3_core` (Lemma 3's band-and-linkage argument over
+     `hgen` and `hdbl`), with `BaseCtx.l3_base` re-proved over it, statement unchanged; `bv_l3_dbl`. `exists_collarFit`'s docstring brought to the route
+     proved (417 (c)). **Receipt** (Keryx): `origin/fs131-w5` is `8ca5fc67`, the tree clean; the build log (`build/gate/build/20261006T040344Z-813531.log`
+     in that tree) ends "Build completed successfully (5791 jobs)", 0 warnings other than `sorry`, the `sorry` warnings in `BaseDense` (`cv_exists`'s stale
+     copy) and `Terminal` (stale copies) only; `sorry` by grep `BaseDense` 1, `HexRing` 0, `BaseWalk` 0, `BendCollar` 0; `data/fs131/i5q/I5qAxioms58.out`
+     parsed: 17 records, 16 within the standard three (`exists_preBend`, `n3_base`, `localDense`, `dense3`, `row134BaseUA`, `bv_l3`, `l3_core`, `l3_base` by
+     name), the control `cv_exists` on `sorryAx`; `bv_l3`'s statement `diff`ed between `HexRing` at `3b120cd3` and `BaseWalk` now — identical;
+     `BaseCtx.l3_base`'s likewise. **Generalizations**: `l3_core` for any two circle colourings with lifts; `hfree_of_baseHyp` does not read `hF`,
+     `maxRingArcs_subset_of_bend` reads neither `hM` nor `hMu` (kept, `have _ :=`). **A route other than the record's** for `hfree_of_baseHyp` (no tangent
+     or curvature compared). **Corrections owed**: four near-copies across `fs131-w5` and `fs131-w5c` with different hypotheses and names (one home after
+     the landing). **For the merge of `fs131-w5c` and `fs131-w5`**: this branch's side for `BaseDense`'s children, `HexRing`, `BaseWalk`; `fs131-w5c`'s for
+     `cv_exists`. **Tool note**: `tools/fs131_i5_stmt_check.py` reports the move as one `MISSING` line against any base before `bfbc8650`. **Slips, its
+     own, caught**: a negative control whose pattern matched nothing, replaced by three that fire; a record line written before a docstring changed.
+     **Slip, the coordinator's** (reported by I5q): while cutting `fs131-w5s` I ran `cd` into that worktree, and the harness announced it to I5q as the
+     session's working directory; I5q kept to its own tree by absolute path and wrote nothing there. I use `git -C` and absolute paths for other trees
+     from here. Credit: I5q, for four leaves, the extraction that made Lemma 3 one argument with two instances, and for holding its tree.
+425. **Rulings on I5q's held items, and its slot.** (a) **The three idle hypotheses stay** (ruling 419 (c)); logged as generalizations for the errata.
+     (b) **`bv_l3` has no consumer**: closed for the wave's count; whether a later wave reads it is the planner's of that wave. (c) **I5q's slot → FS131-IS1
+     on `fs131-w5s`** (`stuckRun_ne_univ`), as item 421 (e) queued; its brief was written and gated before the slot freed. In flight: 1 (QA4) + 1 (IR2) +
+     1 (IS1) = 3. **Wave 5's open leaves now**: `exists_vertexStep` (IR2), `exists_arcStep` (queued), `stuckRun_ne_univ` (IS1); then the merges
+     (`fs131-w5s` → `fs131-w5c`, `fs131-w5c` ↔ `fs131-w5`), the audit's remedy pass, and wave 5's landing.
