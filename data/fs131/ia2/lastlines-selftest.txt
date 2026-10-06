@@ -1,0 +1,4 @@
+plant (pattern removed): FIRED — FAIL: pattern occurs 0 times, must occur once: '      exists_arcStep hG.valid hG.clean hmax hQ hR hnb hT (show (0 : ℝ) < 1 / 2 by norm_num)'
+plant (pattern doubled): FIRED — FAIL: pattern occurs 2 times, must occur once: '    · intro x _'
+unplanted: PASS
+SELF-TEST: PASS

@@ -486,3 +486,155 @@ read it take `hc : F.IsClean`.
 (`PushProfiles.cases`). Nothing is off in the signature.
 
 ## Stage 6 — SAVED (FS131-IA2)
+
+## Stage 7 — SAVED (FS131-IA2): every statement of the skeleton proved; the module holds no `sorry`
+
+### 7.1 What is proved (all in `Plane/ValidMap/ArcStep`, namespace `HadwigerNelson.Plane.ArcMap`; 32 theorems, one structure)
+
+In the brief's order (amendment 2: `LocalStep` last), each group elaborated under `lake env lean` before the next
+(`data/fs131/ia2/arcstep-iter2.txt` … `arcstep-iter5.txt`; iteration only — the build and the axioms print are 7.3):
+
+1. **At a ring arc's interior points**: `IsRingArc.coloursAt_openArc` (the colours there are the two sides — no freeness is read: near
+   the point `ω(P)` lies in `Γ`, so a class reaches it from inside or from outside), `IsRingArc.sides_ne_of_isClean`,
+   `IsRingArc.degree_openArc` (`degree_of_circle`), **W4** `IsRingArc.disjoint_openArc_of_ne` (the proof of
+   `radiusTwoArc_disjoint_openArc` with `Arc.circ Q 1 a b`, as IA1 said: the second alternative of
+   `Arc.finite_inter_sphere_or_eq_circ` is `Q = P`).
+2. **W6** `exists_hasHornCount_isHorn_iff`: at a chart (`Near`) with no germ the count is `0` and no horn exists; with germs the count is
+   the number of indices with `β i = nextβ i` (`Near.hasHornCount_chart`), and such an index bounds a horn at every chart radius
+   (`sectorBetween_eq_hornSet`, `IsSectorChart.isSector_iff`, `Near.hcol`); a horn always gives count `≥ 1` (it is a member of the
+   counted set).
+3. **The radius** `exists_arcStep_radius`: the points of `T` in `cthickening 1 α` off `α` are finitely many (`hT`), a closed set
+   disjoint from the compact `α` (`Disjoint.exists_cthickenings`).
+4. **Validity and cleanness; `LocalStep` on the closed thickening; `IsModification`**: `ArcBend.isClean` (a point of the bent map's `Γ`
+   is the image of a point of `F`'s with the same colours), `ArcBend.localStep` (`LocalStep.mono`), `ArcBend.isModification` — **no
+   cleanness and no validity is read**: a point of at least four colours in the bent map is fixed, a moved point's preimage being
+   interior (one colour) or on the open arc (two; `symm_cases`).
+5. **No site created** `ArcBend.isSite` (W6 with `horn`; a repeated colour sits at a fixed point, since a moved point's preimage is
+   interior or on the open arc, whose sides differ in a clean map).
+6. **Degree, horn and colours at the points off the collar or on the closed arc**: `ArcBend.fixed_or_gain`, `ArcBend.degree_le`,
+   `ArcBend.coloursAt_subset`; the horn clause is the field `horn`. The package: `ArcBend.arcStep` (for a set `T` whose points in
+   `cthickening ε α` lie on `α`).
+7. **The two count clauses at the ring-arc level**: `ArcBend.isQArc_of`, `ArcBend.isR2Arc_of` (question (5), `isR2Arc_of_fixed`),
+   **W7** `ArcBend.isR2Arc_left` (a unit arc of the bent map about `P` with `α`'s sides inside `α°` is (R2): `left` at each interior
+   angle, the radius-2 points off the collar since `ε ≤ 1`, the ends by closedness), and `ArcBend.maxBad` with its corollaries
+   `maxBad_centre` and `maxBad_other`.
+8. **The instances**: `CollarFit.ringArc_subset_collarK`, **W3** `CollarFit.lensSet_subset_collarK`, `CollarFit.map_localStep`,
+   `CollarFit.arcBend`, `exists_arcBend_toward` (the toward case of the step is `ArcBend.arcStep` and `maxBad_*` applied to it);
+   `ArcBend.of_away`.
+9. **W1 and W2, as KA1's one statement** `LocalStep.of_cutArcs` — **proved here**, with exactly the signature of amendment 2. `keep`:
+   an arc `circ P 1 θa θb` of `F` missing `K` is its own piece at `m = ⌊(θa − θ₂)/(2π)⌋` (`cutLo = θa`; `cutHi = θb`, since otherwise
+   `[θa, θb]` and `[θ₁, θ₂] + 2π(m + 1)` share an angle, a point of the closed arc on the arc); `new`: a piece that is no arc of `F` has
+   `cutLo ≠ θa` or `cutHi ≠ θb`, so its arc holds `r(θ₂)` or `r(θ₁)`. No length hypothesis is read, as KA1's hand check said. At the
+   merge this proof moves to `BendAway` and the copy here goes.
+
+**Changed from IA1's work list, and why.**
+- **W1 and W2** are one lemma (amendment 2). **W5 is not here** (the brief; § 5.5): it needs `isRingArc_add_int` and `IsRingArc.union`,
+  `Procedure`'s; it is proved in the scratch file of Stage 8, for the last job.
+- **W7's second half is not needed** ("`(θ₁, θ₂)` itself is no ring arc of `M`"): `maxBad_centre` says a bad maximal arc of the bent
+  map has its open arc off `α°`, and `α`'s own open arc is not off itself.
+- **The away bend's contact intervals are not read**, only the contact at the angle (`left`, § 6.2).
+- **`coloursAt_subset` of `IsModification` needs neither `map_degree_lensCurve` nor a case split on the lens** (IA1's table): it is read
+  at the preimage.
+- **The degree clause at a point of `T ∩ α°`** reads `gain` and that `F`'s degree there is `2` (`degree_openArc`).
+
+### 7.2 What rests on what
+
+`CollarFit.arcBend` and `exists_arcBend_toward` rest on the open child `CollarFit.map_hornCount_le` (`BendStep`, `sorry`, KA1's by
+ruling 438 (a)) — through the field `horn` alone — and on nothing else open. Every other theorem of the module is closed.
+`ArcBend.of_away` takes the away bend's conclusion as a hypothesis, so it rests on nothing open; the step's away case rests on
+`bend_away_part` at the call in `Procedure`.
+
+### 7.3 The build and the receipt
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`), the real one (the lakefile's options in force): **OK — 457 of 457 batches, 2 modules
+  rebuilt (`ArcStep`, 2.5 s; `Proofs`), 3 with warnings, 8 min 14 s, exit 0** (`build/gate/build/20261006T055730Z-1436630.log`; driver
+  log `data/fs131/ia2/build-stage7.log`). The five warnings are `declaration uses 'sorry'` and none is this module's: `BendStep` l. 285,
+  l. 307; `Procedure` l. 795, l. 812; `Terminal` l. 3592. `grep -c sorry ArcStep.lean` is `0`.
+- **Axioms** against that build's oleans (`data/fs131/ia2/IA2Axioms.lean` → `IA2Axioms.out`, `slot.py --mem 12 --cpus 2 -- lake env
+  lean`, exit 0; IR1's `tools/fs131_ir_axsum.py … --expect-sorry CollarFit.arcBend,exists_arcBend_toward`, `IA2Axioms-summary.txt`,
+  PASS): **32 records (32 print commands) — 30 on the standard three or fewer, 2 through `sorryAx`, exactly the two expected
+  (`CollarFit.arcBend`, `exists_arcBend_toward`: the open horn child), 0 other.** **Control**: with `exists_arcBend_toward` left off
+  the expectation list the summarizer exits 1 naming it (`IA2Axioms-control.txt`).
+- **The map**: `ARCHITECTURE.md` row `Plane/ValidMap/ArcStep` (imports `Plane/ValidMap/BendStep`); `tools/check_architecture.py` PASS
+  (`data/fs131/ia2/arch-stage7.txt`); on a copy with the row's Imports cell changed to `Plane/ValidMap/Limit` it FAILED naming
+  `Plane/ValidMap/ArcStep` (`arch-stage7-control.txt`).
+- **Receipt**: a block "FS131-IA2" of 32 records in `scripts/Axioms.lean`, above `=== PURCHASED ===`; the last two rest on the open
+  child, so the gate fails on them until `CollarFit.map_hornCount_le` is proved, as it should. I ran no gate.
+- **Statements**: `git diff --stat 78eba0b4 -- Proofs Proofs.lean` is `ArcStep.lean` (new, 772 lines) and one import line. No
+  statement or definition changed anywhere; no `axiom`, no `native_decide`. **Names**: none of the module's 33 declared names occurs
+  as a declaration elsewhere under `Proofs/` (a scan by name), and `Procedure` with `ArcStep` load into one environment (Stage 8's
+  scratch file imports both).
+- **Notes** (LEAN.md § The gate, the inhabitant rule): `ArcBend`'s inhabitant is the collar bend at `collarModel` (the spec example at
+  the module's end), on `sorryAx` through the horn child; for a *clean* map carrying a ring arc — `hc` together with `ring`, the
+  hypotheses of `isClean`, `isSite`, `degree_le`, `maxBad*`, `arcStep` — and for a bent map with a maximal bad arc left
+  (`maxBad*`'s `hM`, `hmax`, `hQ`, `hR` at once) no Lean model is named: open gate items, with IA1's (ruling 427 (d)).
+
+## Stage 7 — SAVED (FS131-IA2)
+
+## Stage 8 — SAVED (FS131-IA2): the last lines for `Procedure`, compiled in a scratch file
+
+`data/fs131/ia2/ProcedureLastLines.lean` (not a module of the library; it imports `Procedure` and `ArcStep`) holds, in this order:
+
+1. `bend_away_part_weak` — a **stand-in**, `sorry`: `bend_away_part` with its horn clause in the arc step's form (ruling 438 (b),
+   amendment 1; this branch's `BendStep` still has the iff). In `Procedure` the call is to `bend_away_part` itself.
+2. **W5**, `IsMaxRingArc.meet`: `F.IsMaxRingArc P θ₁ θ₂ c c' → F.IsRingArc P a b d d' → ¬ Disjoint (ringPt P '' Ioo a b) (ringPt P ''
+   Ioo θ₁ θ₂) → (d = c ∧ d' = c') ∧ ringPt P '' Ioo a b ⊆ ringPt P '' Ioo θ₁ θ₂` — by `e_eq_e_iff`, `isRingArc_add_int`,
+   `IsRingArc.sides_eq`, `IsRingArc.union`, the maximality and `ringPt_add_int`. On the standard three.
+3. **`exists_arcStep'`**: the repaired statement of § 3.6, verbatim, proved: the radius (`exists_arcStep_radius`); the split on
+   `c' ∈ F.coloursAt P` (away: `bend_away_part`, `ArcBend.of_away`; toward: `exists_arcBend_toward`); `ArcBend.arcStep`; `P`'s count
+   by `badCount_lt_top`, `ArcBend.maxBad_centre` with `hmax.meet`, and `Set.Finite.encard_lt_encard`; the count at `Q ≠ P` by
+   `ArcBend.maxBad_other` and `Set.encard_le_encard`. `IsMaxRingArc` unfolds by itself where `maxBad_*` read its last clause
+   (`hM.2.2`).
+4. **`exists_procStep'`**: `Procedure`'s `exists_procStep` with the two changed places — the call (`hG.plane`) and the `pot_le` bullet
+   (IA1's lines of § 3.6) — generated from `Procedure.lean` by `tools/fs131_ia2_lastlines.py` (each pattern must occur exactly once;
+   `--self-test`: a pattern removed and a pattern doubled both exit 1, `data/fs131/ia2/lastlines-selftest.txt`).
+
+**It elaborates**: `lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/ia2/ProcedureLastLines.lean`, exit 0,
+one warning (the stand-in's `sorry`); its prints: `IsMaxRingArc.meet` on `[propext, Classical.choice, Quot.sound]`, `exists_arcStep'`
+and `exists_procStep'` through `sorryAx` (the stand-in and the horn child) (`data/fs131/ia2/lastlines-compile.txt`). **This is
+iteration-grade evidence only** — `lake env lean` on a file outside the build; the evidence is the last job's build of `Procedure`.
+**Control**: with the withdrawn degree clause `(∀ x m, F.HasDegree x m → F'.HasDegree x m)` put back into `exists_arcStep'`'s
+statement the same command exits 1 with three errors (`data/fs131/ia2/lastlines-control.txt`).
+
+**What the last job does in `Procedure.lean`** (the report carries the text): add `import
+Proofs.HadwigerNelson.Plane.ValidMap.ArcStep` (and the `ARCHITECTURE.md` row's Imports cell); add `IsMaxRingArc.meet` after
+`IsMaxRingArc.not_regularAt`; replace `exists_arcStep`'s statement by § 3.6's and its `sorry` by the lines between `-- BEGIN last
+lines` and `-- END last lines` with `bend_away_part` for `bend_away_part_weak`; rewrite its docstring (the step is a collar bend,
+uncleaned); change the two places of `exists_procStep`. After the merge of KA1's line, `LocalStep.of_cutArcs` stands in `BendAway`
+and here: the copy here goes (its proof moves, if KA1's is still open).
+
+## Stage 8 — SAVED (FS131-IA2)
+
+## Theorems this phase proved (FS131-IA2)
+
+All in `Proofs/HadwigerNelson/Plane/ValidMap/ArcStep.lean`, namespace `HadwigerNelson.Plane.ArcMap`; each **[kernel]** on
+`[propext, Classical.choice, Quot.sound]` or fewer (Stage 7's print, `data/fs131/ia2/IA2Axioms.out`) unless marked:
+
+- `IsRingArc.coloursAt_openArc` — the colours at an interior point of a constant-sided unit arc are its two sides.
+- `IsRingArc.sides_ne_of_isClean` — in a clean map the two sides differ.
+- `IsRingArc.degree_openArc` — degree `2` there, and a repeated colour iff the sides agree (where `Γ` is `ω(P)` nearby).
+- `IsRingArc.disjoint_openArc_of_ne` — **W4**: a unit arc about another centre misses the open arc.
+- `exists_hasHornCount_isHorn_iff` — **W6**: the horn count exists, and a horn sits at the point iff it is at least `1`.
+- `exists_arcStep_radius` — the step's radius.
+- `ArcBend.dom_eq`, `dist_of_mem`, `symm_cases`, `fixed_or_gain`, `coloursAt_of_notMem`, `coloursAt_centre` — the interface's first
+  consequences.
+- `ArcBend.isClean`, `ArcBend.localStep`, `ArcBend.isModification`, `ArcBend.isSite`, `ArcBend.degree_le`,
+  `ArcBend.coloursAt_subset`, `ArcBend.arcStep` — the step's clauses from the interface.
+- `ArcBend.isQArc_of`, `ArcBend.isR2Arc_of`, `ArcBend.isR2Arc_left` (**W7**), `ArcBend.maxBad`, `ArcBend.maxBad_centre`,
+  `ArcBend.maxBad_other` — the two count clauses at the ring-arc level.
+- `LocalStep.of_cutArcs` — **W1 and W2** (FS131-KA1's statement).
+- `CollarFit.ringArc_subset_collarK`, `CollarFit.lensSet_subset_collarK` (**W3**), `CollarFit.map_localStep`.
+- `ArcBend.of_away` — the away bend's conclusion supplies the interface.
+- `CollarFit.arcBend`, `exists_arcBend_toward` — the toward collar bend supplies the interface: **through `sorryAx`**, by the open
+  child `CollarFit.map_hornCount_le` alone.
+
+Defined: the structure `ArcBend`. Not in the library (scratch, `lake env lean` only): `IsMaxRingArc.meet` (**W5**), `exists_arcStep'`,
+`exists_procStep'` (Stage 8).
+
+## Drafts for the front page (FS131-IA2)
+
+None for `CLAUDE.md`: wave 5 is not at its gate and this job ran none; no ledger row regrades (the arc step is `sorry` in `Procedure`
+until the last lines land, and then rests on `bend_away_part` and `CollarFit.map_hornCount_le`). For the filing that does: the
+corrections IA1 listed (§ 4.5) stand, and `Procedure`'s module docstring (l. 18–23: "`UnitArc` (`bend_toward`, `bend_away_whole`, the
+N2-TAN bend) — each cleaned with its colour kept") is wrong for the arc step, which is a collar bend, uncleaned, read through
+`Plane/ValidMap/ArcStep`.
