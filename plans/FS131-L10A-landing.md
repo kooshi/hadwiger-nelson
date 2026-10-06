@@ -621,3 +621,27 @@ pulled-back level with the finite quotient graph; J45-N1 (a)–(b), J45-SI-5, J4
   is on the gated commit.
 - I did not read the harness's token count at the saved stages; I have no instrument for it in this session and say so rather
   than give a number I did not read.
+
+## Stage 6 — SAVED (FS131-L10A): the landing — `main` fast-forwarded to `002c921a`
+
+`origin/main` had moved after the gated merge, from `294603ae` to `c70a1cf8` — `data/fs131/l10a/main-since-gate.txt`: 14 paths
+under `data/`, 2 under `plans/`, **nothing else**, so by the brief's item 6 the gate was not run again. Merged as `e39567a8`
+(`git merge --no-ff`, no conflict; the index checked, `mergeindex-main2.txt`: 16 paths, none changed by both sides, each taken
+whole from `main`). Checked before the push, at `002c921a` (`data/fs131/l10a/pre-push.txt`): `origin/main` (`c70a1cf8`) an
+ancestor of `HEAD`; the branch as given (`ace98a35`), the two implementers' tips (`423cd8e8`, `8ee0d85b`) and the gated commit
+(`999cde4a`) ancestors of `HEAD` — no line was rewritten; `git diff --name-only 999cde4a HEAD -- . ':!plans' ':!data'` empty — the
+gate's inputs are the gated commit's; no tracked file modified; `sorry` under `Proofs/` by the gate's narrow pattern: 0.
+**`git push origin HEAD:main`: `c70a1cf8..002c921a`, a fast-forward** (`data/fs131/l10a/push-main.txt`); after it `origin/main` =
+`origin/fs131-w10l` = `002c921a`. No background process is left running: every build and pass ran under the slot and exited; the
+two slots the ledger shows now belong to `fs131-w6c` and `fs131-w9`.
+
+**What is on `main` now**: wave 10's first pass — `Arith/{CharacterColouring, SpectralInputs, StationaryRatio, StandingFive}`,
+253 hand-written theorems, 0 `sorry`, each with an audit record within the standard three; their four imports in `Proofs.lean`,
+their rows in `ARCHITECTURE.md`; the scan's entry in `scripts/Vacuity.lean` with `StationarySet` tracked, controls 63–65, and the
+baseline header's counts; the planner's and the three implementers' records, tools and logs, and this job's. After this stage's
+commit (this section, the report, the push's log) `main` is fast-forwarded once more, in `plans/` and `data/` alone.
+
+**What `main`'s front page does not say yet**: `CLAUDE.md` § Trust ledger and § The gate hold the counts of the previous landing
+until drafts 1 and 2 are filed; both gates' digests flag them STALE and name the new numbers.
+
+## Stage 6 — SAVED (FS131-L10A)
