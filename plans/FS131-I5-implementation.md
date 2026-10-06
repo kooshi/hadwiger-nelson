@@ -3463,7 +3463,8 @@ instead (N4 § 2.6: validity keeps the flank out of the next horn's shadow), wit
   colour is the horn's (`eq_horn_colour_of_two_sectors`, by Stage 54's four-germ count) — this replaces the step M6 named as still to
   write;
 - the inequality: SH2 (`mem_shadow_hornSet_S`, `mem_shadow_hornSet_N`), not SH1, with `Valid` — SH1 (`shadow_hornSet_subset_S`/`_N`)
-  bounds where the shadow can lie, and the recursion needs the converse, that the region past the concentric circle is in the shadow.
+  bounds where the shadow can lie; N4 § 2.6's sentence is the converse, that the region past the concentric circle is in the shadow, and
+  that is what the proof reads. Whether a route through SH1 and the double shadow also reaches the two inequalities was not tried.
 No-SHAVE still enters, inside `flank_two_sectors_at_S_gen` (hence `cv_class`). The form `λ_j ≤ curvDown λ_(j+1)` came out as the brief
 wrote it.
 
