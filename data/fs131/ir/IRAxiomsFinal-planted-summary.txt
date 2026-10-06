@@ -1,0 +1,12 @@
+records 48 (print commands 48): standard-three-or-fewer 40, through sorryAx 8, other 1
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.exists_arcStep
+  HadwigerNelson.Plane.ArcMap.exists_procStep
+  HadwigerNelson.Plane.ArcMap.exists_red
+  HadwigerNelson.Plane.ArcMap.exists_terminal
+  HadwigerNelson.Plane.ArcMap.exists_terminalMap
+  HadwigerNelson.Plane.ArcMap.exists_terminalSeq
+  HadwigerNelson.Plane.ArcMap.exists_vertexStep
+  HadwigerNelson.Plane.ArcMap.stuckRun_ne_univ
+OTHER AXIOM HadwigerNelson.Plane.ArcMap.exists_terminalSeq ['sorryAx', 'sorryAxPLANT']
+FAIL

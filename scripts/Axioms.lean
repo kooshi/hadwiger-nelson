@@ -5776,6 +5776,11 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.LocalStep.cleanKeep
 #print axioms HadwigerNelson.Plane.ArcMap.LocalStep.exists_clean
 
+-- FS131-IR1, stage 17: a surgery is a local step; the invariant's inhabitant
+#print axioms HadwigerNelson.Plane.ArcMap.surgery_localStep
+#print axioms HadwigerNelson.Plane.ArcMap.surgery_cleanKeep_localStep
+#print axioms HadwigerNelson.Plane.ArcMap.ProcInv.refl
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

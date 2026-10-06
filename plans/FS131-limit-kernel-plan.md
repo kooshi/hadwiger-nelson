@@ -519,7 +519,25 @@ OPEN), `exists_arcStep`, `exists_terminalSeq`; in `Terminal`, lane B's `run_horn
 
 ## Theorems this phase proved (FS131-IR1)
 
-*(Filled at each saved stage; the handover stage carries the axioms print.)*
+All [kernel], read against the Stage-17 build's oleans (`data/fs131/ir/IRAxiomsFinal.out`): each on `[propext, Classical.choice, Quot.sound]` or a
+subset unless marked. Statements unchanged but the two ruled restatements.
+- **`ArcMap.horn_bounds_of_interior_empty`** (`Plane/ValidMap/FlankUA`) — FS131-E6-CONE: a horn of a colour whose allowed cone has empty interior
+  has bounds in `[−1, 1]`.
+- **`ArcMap.exists_terminalSeq`** (`Plane/ValidMap/Procedure`) — the procedure: **proved over open children** (no `sorry` of its own; on `sorryAx`
+  through `ArcMap.exists_procStep` alone, which cites `exists_vertexStep` and `exists_arcStep`).
+- The run, in `Procedure`: `ArcMap.eventually_ball_subset_compl`, `.hasDegree_iff_of_agreesOff`, `.hasHornCount_iff_of_agreesOff`,
+  `.isSite_iff_of_agreesOff`, `.badCount_eq_of_agreesOff`, `.exists_hasHornCount`, `.pot_eq`, `.finite_strict_of_antitone_off`, `.ProcInv.refl`,
+  `.ProcInv.mem_treatPts_of_todo`, `.ProcStep.refl`, `.isCompact_ringArc`, `.dist_of_mem_cthickening_ringArc`, `.ProcRun.finite_vert`,
+  `.ProcRun.finite_colChange`, `.ProcRun.finite_arc`, `.ProcRun.finite_acted`, `.ProcRun.locallyFinite`, `.ProcRun.eventually_not_todo`;
+  `const_treatPts`.
+- Cleaning a step, in `Procedure`: `Arc.exists_params_eq_Icc`, `ordConnectedComponent_Icc`, `ArcMap.cleanKeep_Γ`, `.cleanKeep_interiorPts`,
+  `.cleanKeep_col`, `.cleanKeep_col_of_not_mem`, `.cleanKeep_region`, `.coloursAt_cleanKeep`, `.cleanKeep_valid`, `.cleanKeep_isClean`,
+  `.cleanKeep_isModification`, `.essParams_eq_params_of_disjoint`, **`.LocalStep.cleanKeep`**, `.LocalStep.exists_clean`,
+  **`.surgery_localStep`**, `.surgery_cleanKeep_localStep`.
+- Definitions (each with a spec example or a named inhabitant): `ArcMap.pot`, `.MoveAt`, `.Todo`, `.ProcInv`, `.ProcStep`, `.ProcRun`,
+  `.ProcRun.const`, `.cleanKeep`.
+- On this branch after the merge (proved on `fs131-wop`; standard three against this branch's build, Stage 13): `ArcMap.exists_open` and
+  `OpenMove`'s theorems.
 
 ## Stage 12 — SAVED (FS131-IR1): the readback and the as-given build
 
@@ -749,3 +767,81 @@ Spec examples: `halfDiscMono.cleanKeep.Γ = ∅`; the adversary (on the essentia
 map is an idle step (`LocalStep.cleanKeep`'s hypotheses inhabited by `LocalStep.refl`).
 
 ## Stage 16 — SAVED (FS131-IR1)
+
+## Stage 17 — SAVED (FS131-IR1): a surgery is a local step; the handover
+
+### 17.1 Added in this stage ([kernel], `Procedure`)
+
+- **`surgery_localStep`** — every `F.surgery v ρ A col' …` whose new arcs lie in `B̄(v, ρ)` and whose colouring is `F`'s off it is a
+  `LocalStep F _ (closedBall v ρ)`: an arc of `F` missing the closed ball misses `v` and is kept whole by `trimArcs`; a trimmed arc that is no arc
+  of `F` is an outer piece of an arc through `v` (`Arc.outer_spec`). All four moves are of this form (MERGE's and OPEN's `surgery`; MERGE-RAY's and
+  SHAVE's `Near.move`), so KL1 § 3.3's `LocalStep` clause is one lemma, not four. `surgery_cleanKeep_localStep`: the same after cleaning, from a
+  clean map.
+- `ProcInv.refl` (the invariant's named inhabitant; `exists_terminalSeq` cites it). The module header no longer says "followed by `exists_clean`".
+
+### 17.2 The build and the receipt (the handover)
+
+- **Build** of this stage's code (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 6 modules rebuilt, 5 with warnings, all 8 warnings
+  `declaration uses 'sorry'`**, 9 min 14 s, exit 0 (`build/gate/build/20261006T034742Z-719788.log`, which ends "Build completed successfully (5792
+  jobs)"; driver log `data/fs131/ir/build-stage17-final.log`). The `sorry` declarations: `Procedure` 2 (`exists_vertexStep` l. 795,
+  `exists_arcStep` l. 812), `Terminal` 1 (`stuckRun_ne_univ` l. 3592); not mine: `BaseDense` 3, `BendCollar` 1, `HexRing` 1. By `grep -cw`:
+  `Procedure` 2, `Terminal` 1, `FlankUA` 0, `Limit` 0, `OpenMove` 0.
+- **Axioms** against that build's oleans (`data/fs131/ir/IRAxiomsFinal.lean` → `.out`, `slot.py --mem 12 --cpus 2 -- lake env lean`, exit 0;
+  `tools/fs131_ir_axsum.py` with the expectation list; `IRAxiomsFinal-summary.txt`, PASS): **48 records — 40 on the standard three or fewer, 8
+  through `sorryAx`, exactly the eight expected, 0 other.** By name: **`exists_terminalMap` is on `sorryAx`**, through `exists_terminalSeq`, which
+  is on it through `exists_procStep`, which cites `exists_vertexStep` and `exists_arcStep` — the only two `sorry` declarations under it;
+  `exists_red` follows `exists_terminalMap`; `exists_terminal` follows it and `stuckRun_ne_univ`. On the standard three: my 38 receipt records but
+  `exists_procStep`, and `exists_open`, `exists_clean`, `run_hornBoundsQR`. **Control**: the same output with a foreign axiom planted in
+  `exists_terminalSeq`'s record makes the summarizer exit 1, naming it (`IRAxiomsFinal-planted-summary.txt`); the eight `sorryAx` records are
+  themselves the print's positive control.
+- **Statements**: `tools/fs131_il_stmt_check.py 87e95385`: exactly two changed, the ruled restatements (`stmt-check-final.txt`). No `axiom`, no
+  `native_decide`. `scripts/Axioms.lean`: a block "FS131-IR1" of 38 records above `=== PURCHASED ===`. `tools/check_architecture.py` PASS
+  (`arch-stage17.txt`). I ran no gate, merged nothing into `fs131-w5`, took nothing of `main` beyond Stage 13's merge, and left no process running.
+
+### 17.3 What is proved, and what is left (three leaves), each with the route it is ready for
+
+**Proved**: `exists_terminalSeq` over the two steps, so `exists_terminalMap` now rests on exactly `exists_vertexStep` and `exists_arcStep`;
+E6-CONE; the cleaned-step machinery.
+
+**Left 1 — `exists_vertexStep`** (`sorry`; H, two sessions). E6-ROUTE's case split (its docstring). For each move, with `F'` its surgery at radius
+`ρ` and `F'' := F'.cleanKeep`, these clauses are now one line each: `F''.Valid` (`cleanKeep_valid`), `F''.IsClean` (`cleanKeep_isClean`),
+`LocalStep F F'' (closedBall v ρ)` (`surgery_cleanKeep_localStep`, with the move's `…Arcs_subset_closedBall` and its colouring off the ball),
+`F''.coloursAt v ⊆ F.coloursAt v` (`coloursAt_cleanKeep` and the move's clause). Left, per move:
+  (a) **`ρ < δ`**: OPEN has it; MERGE's assembly (`exists_merge_aux`'s body) re-run with `ρ` also below `δ/2`; MERGE-RAY's and SHAVE's
+  assemblies pass through `Near.exists_cut`, `RayConfig.exists_merge`, `exists_shave_recolour`, `exists_shave_of_flankAbove`/`_flankBelow`, which
+  hide their map behind `∃ F'` — each needs a form that names its `X.move …` (new declarations downstream; a `private` detail in the way is a
+  message to the coordinator, KL1 § 3.3).
+  (b) **`F.IsModification F''`**: `dom_eq`, `ringArcsWithin` from the move's clauses and `cleanKeep_isModification`; `coloursAt_subset` off the
+  closed disc by locality, at `v` by the move's clause, on the rim by its `ncard ≤ 3` — and **strictly inside the disc off `v` no move's statement
+  says anything**: "at most three colours there" has to be read off each construction.
+  (c) **the potential at `v`**: the sectors of `G.cleanKeep` at a point with a sector chart of `G` are the maximal runs of consecutive chart
+  sectors of one colour (KL1's `degree_lt_of_clean_step`; not written) — state that first, then count per move as E6 § 4.3.
+  (d) **no other site in `B̄(v, ρ)`**: at each `x ≠ v` of the closed disc, no repeated colour and no horn in `F''`. A point of a clean map near
+  which `Γ` lies on one curve through it is no site (`not_isSite_of_goodAt`, `germs_le_two_of_goodAt`); what is left is the finitely many rim
+  points where germs or new arcs meet the rim (and OPEN's inner rim at `ρ/2`). (c) and (d) are where the lines go.
+
+**Left 2 — `exists_arcStep`** (`sorry`; H; not started). Its consumer reads every clause as stated (Stage 15), the horn clause included. Ready:
+`LocalStep.cleanKeep` on the closed thickening (`isClosed_cthickening`). Not examined by me: whether `bend_toward` and `bend_away_whole` export
+enough for `LocalStep` on `cthickening ε (ringArc …)` (KL1 § 3.3: `bendMap`'s arc set is a private detail — a message when reached); the horn
+clause against `bendMap`'s profile (ruling 385 (a)); question (5); and whether the out-only case with a partial witness needs N2-TAN's bend — if
+so, `bend_away_part` as a `sorry` child (ruling 411 (e)). I state no `bend_away_part` here: I did not reach the case that would fix its statement.
+
+**Left 3 — `stuckRun_ne_univ`** (`Terminal`, `sorry`; M–H, one session; not started). M6's route stands (`plans/FS131-I5-implementation.md` Stage 55):
+no bound is `±1` (`hornBoundsQR_of_isChainVertex`, `cv_l0`), then the child `shadow_recursion`, then `n4_fin`.
+
+**Next step for a successor starting cold**: read Stages 14–17; check out `fs131-w5c` at this stage's commit; build once under the slot (expect
+"all … up to date"); re-run `data/fs131/ir/IRAxiomsFinal.lean` through `tools/fs131_ir_axsum.py` with Stage 17's expectation list (expect PASS,
+40 and 8); then take one of the three leaves.
+
+### 17.4 Corrections owed to this record's earlier parts (KL1's text, left standing)
+
+- § 3.1's rows for both steps and § 3.3's table end "then `exists_clean`": the cleaned step is `cleanKeep` (Stage 16).
+- § 3.1's `exists_terminalSeq` row: "vertex steps within `3`" is within `4`; the potential is degree plus horns (E6).
+- § 3.3's `shave_step_gen`: not needed (E6 § 4.3); its `LocalStep` clauses are one lemma, `surgery_localStep` (Stage 17).
+
+### 17.5 Drafts for the front page
+
+None: wave 5 is not at its gate, and my brief runs no gate. For the filing, when `exists_terminalMap` closes: `LEDGER.md`'s rows for N2-TERM's
+`exists_red` and `exists_terminal` regrade to [kernel] only after the three leaves above; nothing regrades now.
+
+## Stage 17 — SAVED (FS131-IR1)

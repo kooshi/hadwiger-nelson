@@ -17,8 +17,10 @@ within distance `4` and at the at most `k` stages where it loses a colour, so it
 
 **Where the steps' proofs live** (inventory items 371–372, 411): `exists_vertexStep` and `exists_arcStep` read the moves' constructions —
 `Moves` (`exists_shave_aux`, `exists_rayMerge_aux` through `Near.move`), `MergeMove` (`exists_merge_aux`), `OpenMove` (`exists_open`) and
-`UnitArc` (`bend_toward`, `bend_away_whole`, the N2-TAN bend) — followed by `exists_clean`; they are stated here, and are `sorry` until
-proved from those constructions (the plan's § 3.3; new declarations downstream only).
+`UnitArc` (`bend_toward`, `bend_away_whole`, the N2-TAN bend) — each cleaned with its colour kept (`cleanKeep`, `LocalStep.cleanKeep`:
+`ArcMap.clean` itself is no local step, its colour function being a choice on the arcs); they are stated here and are open until
+proved from those constructions (the plan's § 3.3; new declarations downstream only). A move's surgery is a local step on its closed
+ball (`surgery_localStep`).
 -/
 
 namespace HadwigerNelson.Plane
@@ -681,7 +683,8 @@ theorem essParams_eq_params_of_disjoint {F' : ArcMap k} {U : Set ℂ} (hc : F.Is
 
 /-- **Cleaning a step.** A local step from a clean map, on a closed support, is still a local step after the new map is cleaned
 with its colour kept (`cleanKeep`): off the support the new interior is the old one (the old map is clean), with its colours; an
-old arc missing the support stays whole (each of its points keeps its two colours); a clean arc is a piece of an arc of the step. -/
+old arc missing the support stays whole (each of its points keeps its two colours); a clean arc is a piece of an arc of the step.
+Inhabitant of the hypotheses: the idle step of a clean map (`LocalStep.refl`; the spec example below). -/
 theorem LocalStep.cleanKeep {F' : ArcMap k} {U : Set ℂ} (hc : F.IsClean) (hU : IsClosed U) (h : LocalStep F F' U) :
     LocalStep F F'.cleanKeep U where
   agreesOff := by
@@ -743,6 +746,36 @@ theorem LocalStep.exists_clean {F' : ArcMap k} {U : Set ℂ} (hc : F.IsClean) (h
       (∀ x, F''.coloursAt x = F'.coloursAt x) ∧ F''.Γ ⊆ F'.Γ :=
   ⟨F'.cleanKeep, cleanKeep_isClean, cleanKeep_valid hF', h.cleanKeep hc hU, cleanKeep_isModification, coloursAt_cleanKeep,
     cleanKeep_Γ.symm ▸ essSet_subset_Γ⟩
+
+/-- **A surgery is a local step on its closed ball** (the moves' constructions — MERGE's and OPEN's `surgery`, MERGE-RAY's and
+SHAVE's `Near.move` — are all of this form, their new arcs inside the closed ball: `mergeArcs_subset_closedBall`,
+`openArcs_subset_closedBall`, `newArcs_subset_closedBall`): an arc of `F` missing the closed ball misses `v` and is kept whole by
+`trimArcs`; a trimmed arc that is not an arc of `F` is an outer piece of an arc through `v`; a new arc lies in the closed ball. Inhabitants of the hypotheses:
+each move's construction, e.g. OPEN's (`openArcs_subset_closedBall`, and its colouring off the ball as in `Near.open_agreesOff`). -/
+theorem surgery_localStep {v : ℂ} {ρ : ℝ} {A : Set Arc} {col' : ℂ → Fin k} {hv : v ∈ F.dom} {hρ : 0 < ρ}
+    {hA : ∀ a ∈ A, a.Nondegenerate} {hAf : A.Finite}
+    {hlc : ∀ x ∈ F.dom, x ∉ ⋃ a ∈ F.trimArcs v ρ ∪ A, a.carrier → ∀ᶠ y in 𝓝 x, col' y = col' x}
+    (hAin : ∀ a ∈ A, a.carrier ⊆ closedBall v ρ) (hcol : ∀ z ∉ closedBall v ρ, col' z = F.col z) :
+    LocalStep F (F.surgery v ρ A col' hv hρ hA hAf hlc) (closedBall v ρ) where
+  agreesOff := surgery_agreesOff hAin hcol
+  keep := fun a ha hd => Or.inl (Or.inl ⟨ha, fun hva => Set.disjoint_left.mp hd hva (mem_closedBall_self hρ.le)⟩)
+  new := by
+    rintro b (hb | hb) hbF
+    · rcases hb with ⟨hb, -⟩ | hb
+      · exact absurd hb hbF
+      · obtain ⟨a, ⟨ha, hva⟩, hba⟩ := mem_iUnion₂.mp hb
+        obtain ⟨h1, -⟩ := Arc.outer_spec (F.nondegenerate a ha) hva hρ
+        exact Or.inr ⟨a, ha, ⟨v, hva, mem_closedBall_self hρ.le⟩, (h1 b hba).2.1⟩
+    · exact Or.inl (hAin b hb)
+
+/-- **A cleaned surgery is a local step on its closed ball**, from a clean map (`surgery_localStep`, `LocalStep.cleanKeep`): the form
+in which each of the four moves enters `exists_vertexStep`. -/
+theorem surgery_cleanKeep_localStep (hc : F.IsClean) {v : ℂ} {ρ : ℝ} {A : Set Arc} {col' : ℂ → Fin k} {hv : v ∈ F.dom} {hρ : 0 < ρ}
+    {hA : ∀ a ∈ A, a.Nondegenerate} {hAf : A.Finite}
+    {hlc : ∀ x ∈ F.dom, x ∉ ⋃ a ∈ F.trimArcs v ρ ∪ A, a.carrier → ∀ᶠ y in 𝓝 x, col' y = col' x}
+    (hAin : ∀ a ∈ A, a.carrier ⊆ closedBall v ρ) (hcol : ∀ z ∉ closedBall v ρ, col' z = F.col z) :
+    LocalStep F (F.surgery v ρ A col' hv hρ hA hAf hlc).cleanKeep (closedBall v ρ) :=
+  (surgery_localStep hAin hcol).cleanKeep hc isClosed_closedBall
 
 /-! ## The two steps (the strengthened moves, cleaned) -/
 
@@ -946,6 +979,10 @@ structure ProcInv (F G : ArcMap k) : Prop where
   modif : F.IsModification G
   /-- No site but at an initial treatment point. -/
   sites : ∀ x, G.IsSite x → x ∈ F.treatPts
+
+/-- A clean valid map of the plane satisfies the invariant over itself (the inhabitant of `ProcInv`; the run's first stage). -/
+theorem ProcInv.refl (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) : ProcInv F F :=
+  ⟨hF, hc, hP, IsModification.refl F, fun _ hx => Or.inl hx⟩
 
 /-- Under the invariant, something is left to do only at the initial map's treatment points. -/
 theorem ProcInv.mem_treatPts_of_todo {G : ArcMap k} (h : ProcInv F G) {v : ℂ} (hv : G.Todo v) : v ∈ F.treatPts := by
@@ -1280,7 +1317,7 @@ theorem exists_terminalSeq (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) :
     exact countable_iUnion fun n =>
       (treatPts_inter_finite hP hc (isCompact_closedBall 0 n) (by rw [hP]; exact subset_univ _)).countable
   obtain ⟨f, hf⟩ := Set.countable_iff_exists_injOn.mp hcount
-  have hInv0 : ProcInv F F := ⟨hF, hc, hP, IsModification.refl F, fun x hx => Or.inl hx⟩
+  have hInv0 : ProcInv F F := ProcInv.refl hF hP hc
   haveI : Nonempty (ArcMap k) := ⟨F⟩
   choose! nG nU na hn using fun (G : ArcMap k) (hG : ProcInv F G) => exists_procStep hP hc f hG
   let Gs : ℕ → ArcMap k := fun n => nG^[n] F
@@ -1414,8 +1451,9 @@ example {k : ℕ} (F : ArcMap k) {v : ℂ} (hv : v ∈ F.dom) :
 
 /-- A clean valid map of the plane satisfies the procedure's invariant over itself (a spec example for `ProcInv`; the run's
 first stage). -/
-example {k : ℕ} {F : ArcMap k} (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) : ProcInv F F :=
-  ⟨hF, hc, hP, IsModification.refl F, fun _ hx => Or.inl hx⟩
+example {k : ℕ} {F : ArcMap k} (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) :
+    ProcInv F F ∧ ∀ x, F.IsSite x → x ∈ F.treatPts :=
+  ⟨ProcInv.refl hF hP hc, (ProcInv.refl hF hP hc).sites⟩
 
 /-- **Adversary** for `ProcStep`: an idle step is not a vertex step — its acted point is `none`, so no potential is claimed to
 fall (the `vert` clause is read only at `some (t, true)`). -/
