@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """FS131-L10A: resolve a keep-both conflict in scripts/Axioms.lean, and check a resolution.
 
-  tools/fs131_l10a_keepboth.py resolve <file>
-      Every conflict hunk `<<<<<<< / ======= / >>>>>>>` becomes: ours, a blank line, theirs.
+  tools/fs131_l10a_keepboth.py resolve [--theirs-first] <file>
+      Every conflict hunk `<<<<<<< / ======= / >>>>>>>` becomes: ours, a blank line, theirs — or,
+      with --theirs-first, theirs, a blank line, ours (the merge of `main`: its blocks keep their
+      place and this line's blocks follow them, as the previous landings wrote the file).
       Refuses a diff3-style hunk (`|||||||`) and a file with no hunk.
 
   tools/fs131_l10a_keepboth.py check <file> <ours-ref> <theirs-ref> <base-ref> [<path-in-git>]
       The resolved <file> must hold no conflict marker; every line of the file at <ours-ref> and at
-      <theirs-ref>, with its multiplicity, must be in it (blank lines apart); and its count of
-      `#print axioms` lines must be ours + theirs - base. No `#print axioms` name may occur twice.
-      Exit 0 iff all hold.
+      <theirs-ref>, with its multiplicity, must be in it (blank lines apart) — but for a line of the
+      base that one side deleted and the other left alone, which the merge drops and this check
+      lists as a note; and its count of `#print axioms` lines must be ours + theirs - base. No
+      `#print axioms` name may occur twice. Exit 0 iff all hold.
 
   tools/fs131_l10a_keepboth.py --self-test <file> <ours-ref> <theirs-ref> <base-ref>
       Runs `check` on the file, then on three plants written to a scratch copy: a record of theirs
@@ -29,19 +32,26 @@ def show(ref, path):
                           text=True).stdout
 
 
-def resolve(path):
+def resolve(path, theirs_first=False):
     out, state, n = [], None, 0
+    ours, theirs = [], []
     for ln in open(path, encoding="utf-8").read().split("\n"):
         if ln.startswith("<<<<<<< "):
             assert state is None, "nested hunk"
             state, n = "ours", n + 1
+            ours, theirs = [], []
         elif ln.startswith("||||||| "):
             sys.exit("refused: a diff3-style hunk")
         elif ln == "=======" and state == "ours":
             state = "theirs"
-            out.append("")
         elif ln.startswith(">>>>>>> ") and state == "theirs":
             state = None
+            first, second = (theirs, ours) if theirs_first else (ours, theirs)
+            out.extend(first + [""] + second)
+        elif state == "ours":
+            ours.append(ln)
+        elif state == "theirs":
+            theirs.append(ln)
         else:
             out.append(ln)
     if state is not None:
@@ -49,7 +59,7 @@ def resolve(path):
     if n == 0:
         sys.exit("refused: no conflict hunk in the file")
     open(path, "w", encoding="utf-8").write("\n".join(out))
-    print(f"resolved {n} hunk(s) in {path}")
+    print(f"resolved {n} hunk(s) in {path}" + (" (theirs first)" if theirs_first else ""))
 
 
 def check_text(text, ours, theirs, base):
@@ -59,11 +69,22 @@ def check_text(text, ours, theirs, base):
         if ln.startswith(("<<<<<<< ", ">>>>>>> ", "||||||| ")) or ln == "=======":
             faults.append(f"MARKER {ln[:40]!r}")
     have = collections.Counter(l for l in lines if l.strip())
-    for name, side in (("ours", ours), ("theirs", theirs)):
-        need = collections.Counter(l for l in side.split("\n") if l.strip())
+    in_base = collections.Counter(l for l in base.split("\n") if l.strip())
+    sides = {"ours": collections.Counter(l for l in ours.split("\n") if l.strip()),
+             "theirs": collections.Counter(l for l in theirs.split("\n") if l.strip())}
+    notes = []
+    for name, need in sides.items():
+        other = sides["theirs" if name == "ours" else "ours"]
         for l, k in need.items():
             if have[l] < k:
-                faults.append(f"LOST from {name}: {l[:90]!r} (need {k}, have {have[l]})")
+                # a line of the base that the other side deleted and this side left alone is gone by
+                # the merge's own rule: listed, never silent, and not a fault
+                if in_base[l] >= k and other[l] < in_base[l]:
+                    notes.append(f"dropped by the other side since the base (in {name} unchanged): {l[:90]!r}")
+                else:
+                    faults.append(f"LOST from {name}: {l[:90]!r} (need {k}, have {have[l]})")
+    for nt in notes:
+        print("  note: " + nt)
     cnt = lambda t: sum(1 for l in t.split("\n") if l.startswith("#print axioms "))
     exp = cnt(ours) + cnt(theirs) - cnt(base)
     if cnt(text) != exp:
@@ -89,7 +110,7 @@ def check(path, ours_ref, theirs_ref, base_ref, gitpath=PATH, label="check"):
 
 def main(argv):
     if len(argv) >= 2 and argv[0] == "resolve":
-        resolve(argv[1])
+        resolve(argv[-1], theirs_first="--theirs-first" in argv)
         return 0
     if len(argv) >= 5 and argv[0] == "check":
         faults = check(argv[1], argv[2], argv[3], argv[4], *(argv[5:6] or [PATH]))
