@@ -431,3 +431,69 @@ Each [kernel], on exactly `[propext, Classical.choice, Quot.sound]` or fewer (`d
 **`hmax`, scored so far** (item 390): none of the three leaves reads it, nor `hlen`; `exists_collarFit`'s statement does not take it.
 
 ## Stage 6 — SAVED (FS131-CC2)
+
+## Stage 7 — SAVED (FS131-CC2): `exists_collarFit` proved; **`bend_toward_collar` is a kernel theorem**
+
+### 7.1 `exists_collarFit` (statement unchanged), and its children
+
+The collar's radii are one parameter: `R' = 1 − τ`, `R = 1 − τ/2`, `R'' = 1 + τ`, and each clause of `CollarFit` holds for all small
+`τ > 0` (`∀ᶠ τ in 𝓝[>] 0`), so one `τ` serves all. New children in `BendCollar`, each proved:
+- **`collarK_thin`** (C2) — for `0 < τ ≤ 1/4` a collar point is `P + t e(ψ)`, `ψ ∈ [θ₁, θ₂]`, `|1 − t| ≤ 2τ` (`one_sub_lensProf_le`,
+  `tangRad_sub_one_le`); so the collar lies in `thickening η α` for every `η > 2τ`: within `ε`, and inside the domain (a compact arc in
+  an open set, `IsCompact.exists_thickening_subset_open`).
+- **`exists_lens_clear`** (C1) — `hout` keeps the outer class a distance `r > 0` from `P`; `n2_env_toward`, `n2_env_near` give two
+  profiles; for `τ` below both the lens lies under them (`one_sub_lensProf_le`) and `toward_clear` applies.
+- **`exists_end_free`** (C4) — at any point `E = ringPt P θ_E` of the domain and either side `σ = ±1`: there are `ρ, τ₀ > 0` such that
+  for `τ < τ₀` every point of `Γ` within `ρ` of `E` that lies in the crescent of the frame at `E` (`collarK_frame`'s three
+  inequalities) is on `ω(P)`. Route, not the docstring's horn sets: `localSectors` lists `Γ` near `E` as finitely many branches
+  `E + s e(β + arcsin(κ s/2))`; in `E`'s frame a branch point is `s e(γ + a)` with `γ = β − θ_E`. A branch across the tangent
+  (`cos γ ≠ 0`) leaves the crescent for small `s` (`branch_transversal`: the crescent has `|Y| ≤ s²`); a branch along it has `sin γ = σ`
+  (the other sign is on the wrong side) and `Y = −σκ s²/2`, so `(1 − τ)σκ ≤ 1 ≤ (1 + τ)σκ`, which forces `σκ = 1` once `τ` is below
+  `|σκ − 1|/(|σκ| + 1)`; and `σκ = 1` is `2Y + |z − E|² = 0`, the unit circle about `P` (`branch_tangent`). The finitely many bounds
+  have a positive minimum (`exists_pos_forall_le`). No angle is compared modulo `2π`; the trigonometry is `cos_add`, `sin_add`,
+  `sin_arcsin`.
+- **`exists_collar_free`** (C3 with C4) — a collar point is within `2τ` of the arc; within `ρ` of an end, `exists_end_free`; otherwise
+  it is within `2τ` of the compact middle `{x ∈ α : dist x A ≥ ρ₁/2, dist x B ≥ ρ₂/2}`, which lies in the open set where `Γ` is `ω(P)`
+  (`hfree`), with a thickening inside it. A point of `Γ ∩ K` on `ω(P)` is on the arc by the collar's own polar form.
+- the assembly: `l60_le` gives `short`; one `τ` from the three eventual statements.
+
+`exists_collarFit`'s docstring (part of its statement, unchanged) names `localSectors_disj` and the horn between two germs; the proof
+uses `localSectors` and the frame algebra instead. A docstring correction is the planner's to make, if wanted (held for the
+coordinator). Mutation notes from KP2's § 5.1: `hfree` is read by `exists_collar_free` (the middle) and `hout` by `exists_lens_clear`,
+each once and nowhere else.
+
+### 7.2 The build, the axioms, the statements
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 3 modules rebuilt (`BendCollar`, `BaseDense`, `Proofs`), 3 with
+warnings** (`HexRing`, `BaseDense`, `Terminal`: other lanes' `sorry`s), exit 0, 8 min 34 s (driver log
+`data/fs131/cc/build-stage7.log`, ending `EXIT=0`; full output `data/fs131/cc/build-stage7-full.log`, ending "Build completed
+successfully (5791 jobs)"). `tools/fs131_cc_sorry_upstream.py --expect 0` on it (`sorry-upstream-7.txt`): **PASS — no `sorry`
+declaration in `BendCollar` or in any of the 28 modules it imports, and no other warning in the collar's four modules.** By grep, `sorry`
+occurs 0 times in `RadialPush`, `Pushforward`, `CollarMap`, `BendCollar`.
+
+**Axioms** against this build's oleans (`data/fs131/cc/CCAxioms7.lean` → `.out`; `axioms-7.txt`: **PASS, 33 names, 33 records, 32 on the
+standard three or fewer**):
+- `'HadwigerNelson.Plane.ArcMap.bend_toward_collar' depends on axioms: [propext, Classical.choice, Quot.sound]`
+- `'HadwigerNelson.Plane.ArcMap.exists_collarFit' depends on axioms: [propext, Classical.choice, Quot.sound]`
+- the seven new children, and every lemma the assembly cites (`map_valid`, `homeo_eq_self`, `homeo_fix_Γ`, `map_hasDegree`,
+  `map_hasRepeatedColour`, `map_R1`, `map_R2`, `map_R3`, `map_inert`, the pushforward lemmas) with the leaves beneath them;
+- the control, `theorem ccControlPlanted : (1 : ℕ) = 2 := sorry` in the print file, prints `sorryAx` — the one record that does. The
+  reader's self-test: 5 of 5 fired, partner PASS.
+
+**Statements**: `tools/fs131_cc_stmt.py`: **PASS** (`data/fs131/cc/stmt-stage7.txt`): 85 skeleton declarations, each once, statements
+byte-identical to `2736ab8c`; `bend_toward_collar`'s whole text (assembly included) unchanged; lane G's files as `5059983d`; no other
+file under `Proofs/` changed; no `axiom`, no `native_decide`. Self-test 15 of 15, partners 8 of 8. `scripts/Axioms.lean`: the seven new
+theorems added to the "FS131-CC2" block.
+
+### 7.3 Theorems this stage proved
+
+Each [kernel], on exactly `[propext, Classical.choice, Quot.sound]` (`data/fs131/cc/CCAxioms7.out`); under `HadwigerNelson.Plane.ArcMap`:
+**`bend_toward_collar`** (FS131-KB2's statement, I5o's form; proved by KP2's assembly, every child beneath it now proved),
+**`exists_collarFit`**, `collarK_thin`, `exists_lens_clear`, `exists_pos_forall_le`, `branch_transversal`, `branch_tangent`,
+`exists_end_free`, `exists_collar_free`.
+
+**`hmax`, scored** (item 390): KP2's reading holds. `bend_toward_collar` is proved and its proof reads `hmax` only in the line
+`have _ := hmax`; no child takes it, and the same is true of `hlen`. The construction bends any constant-sided unit arc whose open part is
+free of other arcs and whose outer colour is not carried at the centre.
+
+## Stage 7 — SAVED (FS131-CC2)

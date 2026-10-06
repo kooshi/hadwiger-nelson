@@ -5543,6 +5543,13 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.side_core
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.exists_one_side
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.homeo_mem_collarK
+#print axioms HadwigerNelson.Plane.ArcMap.collarK_thin
+#print axioms HadwigerNelson.Plane.ArcMap.exists_lens_clear
+#print axioms HadwigerNelson.Plane.ArcMap.exists_pos_forall_le
+#print axioms HadwigerNelson.Plane.ArcMap.branch_transversal
+#print axioms HadwigerNelson.Plane.ArcMap.branch_tangent
+#print axioms HadwigerNelson.Plane.ArcMap.exists_end_free
+#print axioms HadwigerNelson.Plane.ArcMap.exists_collar_free
 
 #eval IO.println "=== PURCHASED ==="
 

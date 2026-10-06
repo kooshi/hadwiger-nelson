@@ -111,6 +111,469 @@ theorem mem_closure_region_inter_iff_of_agree {F' : ArcMap k} {x : ℂ} {O : Set
     ⟨fun h => hO.inter_closure ⟨hx, h⟩, fun h => closure_mono inter_subset_right h⟩
   rw [key, heq, ← key]
 
+/-! ## The collar at an end, in the end's frame (FS131-CC2) -/
+
+/-- **A collar point in the frame at each end.** With `z − E = (Y + X i) e(θ_E)` at the end `E = ringPt P θ_E` (`Y` along the outward
+normal, `X` along the tangent `i e(θ_E)`): the point lies on the arc's side of the end (`X ≥ 0` at `θ₁`, `X ≤ 0` at `θ₂`), outside the
+open disc of the tangent circle of radius `R'` (`0 ≤ 2R'Y + |z − E|²`) and inside the closed disc of the one of radius `R''`
+(`2R''Y + |z − E|² ≤ 0`) — the two are `tangRad`'s quadratic at `R'` and `R''` (`tangRad_le_iff`, `le_tangRad_iff`). -/
+theorem collarK_frame (hR' : 1 / 2 < R') (hR'' : 1 < R'') (hℓ : θ₂ - θ₁ ≤ π / 3) {z : ℂ}
+    (hz : z ∈ collarK P θ₁ θ₂ R' R'') :
+    (∃ X Y : ℝ, z - ringPt P θ₁ = ((Y : ℂ) + (X : ℂ) * I) * e θ₁ ∧ 0 ≤ X ∧ 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) ∧
+        2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0) ∧
+      ∃ X Y : ℝ, z - ringPt P θ₂ = ((Y : ℂ) + (X : ℂ) * I) * e θ₂ ∧ X ≤ 0 ∧ 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) ∧
+        2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0 := by
+  obtain ⟨ψ, hψ, t, ht, rfl⟩ := hz
+  have hπ := Real.pi_pos
+  have hcl : clampAngle θ₁ θ₂ ψ = ψ := by unfold clampAngle; rw [min_eq_left hψ.2, max_eq_right hψ.1]
+  have hlo : ∀ u, u = ψ - θ₁ ∨ u = θ₂ - ψ → tangRad R' u ≤ t := by
+    intro u hu
+    refine le_trans ?_ ht.1
+    unfold lensProf
+    rw [hcl]
+    rcases hu with rfl | rfl
+    · exact le_max_left _ _
+    · exact le_max_right _ _
+  have hhi : ∀ u, u = ψ - θ₁ ∨ u = θ₂ - ψ → t ≤ tangRad R'' u := by
+    intro u hu
+    refine le_trans ht.2 ?_
+    unfold outerProf
+    rw [hcl]
+    rcases hu with rfl | rfl
+    · exact min_le_left _ _
+    · exact min_le_right _ _
+  have ht0 : 0 < t := (tangRad_pos hR' _).trans_le (hlo _ (Or.inl rfl))
+  have key : ∀ u : ℝ, 0 ≤ u → u ≤ π / 3 → tangRad R' u ≤ t → t ≤ tangRad R'' u →
+      0 ≤ t * Real.sin u ∧ 0 ≤ 2 * R' * (t * Real.cos u - 1) + ((t * Real.sin u) ^ 2 + (t * Real.cos u - 1) ^ 2) ∧
+        2 * R'' * (t * Real.cos u - 1) + ((t * Real.sin u) ^ 2 + (t * Real.cos u - 1) ^ 2) ≤ 0 := by
+    intro u hu0 hu1 h1 h2
+    have hs : 0 ≤ Real.sin u := Real.sin_nonneg_of_nonneg_of_le_pi hu0 (by linarith)
+    have hq1 := (tangRad_le_iff hR' u ht0).mp h1
+    have hq2 := (le_tangRad_iff (show (1 : ℝ) / 2 < R'' by linarith) u ht0).mp h2
+    have hsc := Real.sin_sq_add_cos_sq u
+    have e1 : ∀ ρ : ℝ, 2 * ρ * (t * Real.cos u - 1) + ((t * Real.sin u) ^ 2 + (t * Real.cos u - 1) ^ 2) =
+        t ^ 2 - 2 * (1 - ρ) * t * Real.cos u - (2 * ρ - 1) := fun ρ => by linear_combination t ^ 2 * hsc
+    refine ⟨mul_nonneg ht0.le hs, ?_, ?_⟩
+    · rw [e1]; exact hq1
+    · rw [e1]; exact hq2
+  refine ⟨?_, ?_⟩
+  · obtain ⟨hX, h1, h2⟩ := key (ψ - θ₁) (by linarith [hψ.1]) (by linarith [hψ.2]) (hlo _ (Or.inl rfl)) (hhi _ (Or.inl rfl))
+    refine ⟨t * Real.sin (ψ - θ₁), t * Real.cos (ψ - θ₁) - 1, ?_, hX, h1, h2⟩
+    have : e ψ = e θ₁ * e (ψ - θ₁) := by rw [← e_add]; congr 1; ring
+    rw [this, e_eq (ψ - θ₁), ringPt]
+    push_cast
+    ring
+  · obtain ⟨hX, h1, h2⟩ := key (θ₂ - ψ) (by linarith [hψ.2]) (by linarith [hψ.1]) (hlo _ (Or.inr rfl)) (hhi _ (Or.inr rfl))
+    refine ⟨-(t * Real.sin (θ₂ - ψ)), t * Real.cos (θ₂ - ψ) - 1, ?_, by linarith, by nlinarith, by nlinarith⟩
+    have : e ψ = e θ₂ * e (-(θ₂ - ψ)) := by rw [← e_add]; congr 1; ring
+    rw [this, e_neg (θ₂ - ψ), ringPt]
+    push_cast
+    ring
+
+/-- The crescent's tangential term decides, outside: with `b > 0`, `A ≥ 0`, `A² = N − Y²`, `−N ≤ Y ≤ 0`, `|α| ≤ 1` and `N` small,
+`N + 2(αY + bA) > 0`. Stated on real variables alone (`nlinarith` in a small context). -/
+theorem side_core_pos {b A N Y α : ℝ} (hb0 : 0 < b) (hA : 0 ≤ A) (hAN : A ^ 2 = N - Y ^ 2) (hY0 : Y ≤ 0) (hYN : -N ≤ Y)
+    (hN : 0 < N) (hN1 : N < 1 / 2) (hN2 : N < 2 * b ^ 2) (hα1 : α ≤ 1) : 0 < N + 2 * (α * Y + b * A) := by
+  by_contra hD
+  push Not at hD
+  have hαY : Y ≤ α * Y := by
+    have := mul_nonneg (sub_nonneg.mpr hα1) (neg_nonneg.mpr hY0)
+    linarith [show (1 - α) * -Y = α * Y - Y by ring]
+  have h3 : 2 * b * A ≤ N := by linarith
+  have h4 : (2 * b * A) ^ 2 ≤ N ^ 2 := pow_le_pow_left₀ (mul_nonneg (mul_nonneg (by norm_num) hb0.le) hA) h3 2
+  have hY2 : 0 ≤ N ^ 2 - Y ^ 2 := by
+    have := mul_nonneg (show 0 ≤ N + Y by linarith) (show 0 ≤ N - Y by linarith)
+    linarith [show (N + Y) * (N - Y) = N ^ 2 - Y ^ 2 by ring]
+  have e : (2 * b * A) ^ 2 = 4 * b ^ 2 * (N - Y ^ 2) := by rw [← hAN]; ring
+  have h5 : 4 * b ^ 2 * (N - N ^ 2) ≤ N ^ 2 := by
+    have := mul_nonneg (sq_nonneg b) hY2
+    linarith [show 4 * b ^ 2 * (N - N ^ 2) = 4 * b ^ 2 * (N - Y ^ 2) - 4 * (b ^ 2 * (N ^ 2 - Y ^ 2)) by ring]
+  have h6 : 4 * b ^ 2 * (1 - N) ≤ N := by
+    by_contra h
+    push Not at h
+    have := mul_pos hN (sub_pos.mpr h)
+    linarith [show N * (4 * b ^ 2 * (1 - N) - N) = 4 * b ^ 2 * (N - N ^ 2) - N ^ 2 by ring]
+  have := mul_nonneg (sq_nonneg b) (show (0 : ℝ) ≤ 1 / 2 - N by linarith)
+  linarith [show 4 * b ^ 2 * (1 - N) = 2 * b ^ 2 + 4 * (b ^ 2 * (1 / 2 - N)) by ring]
+
+/-- The crescent's tangential term decides, inside: with `b < 0` and `N` small, `N + 2(αY + bA) < 0`. -/
+theorem side_core_neg {b A N Y α : ℝ} (hb0 : b < 0) (hA : 0 ≤ A) (hAN : A ^ 2 = N - Y ^ 2) (hY0 : Y ≤ 0) (hYN : -N ≤ Y)
+    (hN : 0 < N) (hN1 : N < 1 / 2) (hN2 : N < 2 * b ^ 2 / 9) (hα2 : -1 ≤ α) : N + 2 * (α * Y + b * A) < 0 := by
+  by_contra hD
+  push Not at hD
+  have hαY : α * Y ≤ -Y := by
+    have := mul_nonneg (show 0 ≤ α + 1 by linarith) (neg_nonneg.mpr hY0)
+    linarith [show (α + 1) * -Y = -(α * Y) - Y by ring]
+  have h3 : 2 * -b * A ≤ 3 * N := by linarith
+  have h4 : (2 * -b * A) ^ 2 ≤ (3 * N) ^ 2 :=
+    pow_le_pow_left₀ (mul_nonneg (mul_nonneg (by norm_num) (by linarith)) hA) h3 2
+  have hY2 : 0 ≤ N ^ 2 - Y ^ 2 := by
+    have := mul_nonneg (show 0 ≤ N + Y by linarith) (show 0 ≤ N - Y by linarith)
+    linarith [show (N + Y) * (N - Y) = N ^ 2 - Y ^ 2 by ring]
+  have e : (2 * -b * A) ^ 2 = 4 * b ^ 2 * (N - Y ^ 2) := by rw [← hAN]; ring
+  have h5 : 4 * b ^ 2 * (N - N ^ 2) ≤ 9 * N ^ 2 := by
+    have := mul_nonneg (sq_nonneg b) hY2
+    linarith [show 4 * b ^ 2 * (N - N ^ 2) = 4 * b ^ 2 * (N - Y ^ 2) - 4 * (b ^ 2 * (N ^ 2 - Y ^ 2)) by ring,
+      show (3 * N) ^ 2 = 9 * N ^ 2 by ring]
+  have h6 : 4 * b ^ 2 * (1 - N) ≤ 9 * N := by
+    by_contra h
+    push Not at h
+    have := mul_pos hN (sub_pos.mpr h)
+    linarith [show N * (4 * b ^ 2 * (1 - N) - 9 * N) = 4 * b ^ 2 * (N - N ^ 2) - 9 * N ^ 2 by ring]
+  have := mul_nonneg (sq_nonneg b) (show (0 : ℝ) ≤ 1 / 2 - N by linarith)
+  linarith [show 4 * b ^ 2 * (1 - N) = 2 * b ^ 2 + 4 * (b ^ 2 * (1 / 2 - N)) by ring]
+
+/-- A crescent point has `−N ≤ Y ≤ 0` (`N = X² + Y²`): between the tangent circles of radii `R' > 1/2` and `R'' > 1`. -/
+theorem crescent_Y {X Y R' R'' : ℝ} (hR' : 1 / 2 < R') (hR'' : 1 < R'') (h1 : 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2))
+    (h2 : 2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0) : Y ≤ 0 ∧ -(X ^ 2 + Y ^ 2) ≤ Y := by
+  have hN : 0 ≤ X ^ 2 + Y ^ 2 := by positivity
+  have hY0 : Y ≤ 0 := by
+    by_contra h
+    push Not at h
+    have := mul_pos (show (0 : ℝ) < R'' by linarith) h
+    linarith
+  refine ⟨hY0, ?_⟩
+  have := mul_nonneg (show (0 : ℝ) ≤ 2 * R' - 1 by linarith) (neg_nonneg.mpr hY0)
+  linarith [show (2 * R' - 1) * -Y = -(2 * R' * Y) + Y by ring]
+
+/-! ## The collar's choice: thin, clear, and free of `Γ` off the arc (FS131-CC2) -/
+
+/-- **A thin collar lies near the arc**: with radii `1 − τ` and `1 + τ` (`0 < τ ≤ 1/4`) every collar point is `P + t e(ψ)` with
+`ψ ∈ [θ₁, θ₂]` and `|1 − t| ≤ 2τ` (`one_sub_lensProf_le`, `tangRad_sub_one_le`). -/
+theorem collarK_thin {τ : ℝ} (hτ : 0 < τ) (hτ' : τ ≤ 1 / 4) (hℓ : θ₂ - θ₁ ≤ π / 3) {z : ℂ}
+    (hz : z ∈ collarK P θ₁ θ₂ (1 - τ) (1 + τ)) : ∃ ψ ∈ Icc θ₁ θ₂, ∃ t : ℝ, 0 < t ∧ z = P + (t : ℂ) * e ψ ∧ |1 - t| ≤ 2 * τ := by
+  obtain ⟨ψ, hψ, t, ht, rfl⟩ := hz
+  have hπ4 : π < 4 := Real.pi_lt_four
+  have hπ0 := Real.pi_pos
+  have hcl : clampAngle θ₁ θ₂ ψ = ψ := by unfold clampAngle; rw [min_eq_left hψ.2, max_eq_right hψ.1]
+  have hR' : (1 : ℝ) / 2 < 1 - τ := by linarith
+  have ht0 : 0 < t := by
+    refine lt_of_lt_of_le (tangRad_pos hR' (ψ - θ₁)) (le_trans ?_ ht.1)
+    unfold lensProf; rw [hcl]; exact le_max_left _ _
+  refine ⟨ψ, hψ, t, ht0, rfl, abs_le.mpr ⟨?_, ?_⟩⟩
+  · -- `t − 1 ≤ τ (ψ − θ₁)² ≤ 2τ`
+    have h1 : t ≤ tangRad (1 + τ) (ψ - θ₁) := by
+      refine le_trans ht.2 ?_
+      unfold outerProf; rw [hcl]; exact min_le_left _ _
+    have h2 := tangRad_sub_one_le (show (1 : ℝ) ≤ 1 + τ by linarith) (ψ - θ₁)
+    have h3 : (ψ - θ₁) ^ 2 ≤ 2 := by
+      have : ψ - θ₁ ≤ 4 / 3 := by linarith [hψ.2]
+      nlinarith [hψ.1]
+    nlinarith
+  · -- `1 − t ≤ τ/(1 − τ) · min ≤ 2τ`
+    have h1 := one_sub_lensProf_le hR' (show 1 - τ < 1 by linarith) hψ hℓ
+    have h2 : min (ψ - θ₁) (θ₂ - ψ) ≤ 1 := by
+      have := min_le_left (ψ - θ₁) (θ₂ - ψ)
+      have := min_le_right (ψ - θ₁) (θ₂ - ψ)
+      linarith
+    have h3 : 0 ≤ min (ψ - θ₁) (θ₂ - ψ) := le_min (by linarith [hψ.1]) (by linarith [hψ.2])
+    have h4 : (1 - (1 - τ)) / (1 - τ) ≤ 2 * τ := by
+      rw [div_le_iff₀ (by linarith)]
+      nlinarith
+    have h5 : (1 - (1 - τ)) / (1 - τ) * min (ψ - θ₁) (θ₂ - ψ) ≤ 2 * τ * 1 :=
+      mul_le_mul h4 h2 h3 (by linarith)
+    linarith [ht.1]
+
+/-- **A thin lens is clear for the outer colour** (C1): the outer class stays a positive distance from `P` (`hout`), so for `R = 1 − τ/2`
+close to `1` the lens lies under both envelope profiles (`one_sub_lensProf_le` against `n2_env_toward`, `n2_env_near`), and
+`toward_clear` applies. -/
+theorem exists_lens_clear (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ c c') (hout : c' ∉ F.coloursAt P) :
+    ∀ᶠ τ in 𝓝[>] (0 : ℝ), ∀ z ∈ polarSet P (Ioo θ₁ θ₂) (fun θ => Ioo (lensProf θ₁ θ₂ (1 - τ / 2) θ) 1), F.IsClear c' z := by
+  have h12 := hA.1
+  have hℓ := l60_le hF hA
+  obtain ⟨r, hr0, hr⟩ : ∃ r > 0, ∀ y ∈ F.region c', r ≤ dist y P := by
+    have hP : P ∉ closure (F.region c') := hout
+    rw [Metric.mem_closure_iff] at hP
+    push Not at hP
+    obtain ⟨r, hr0, hr⟩ := hP
+    exact ⟨r, hr0, fun y hy => by rw [dist_comm]; exact hr y hy⟩
+  obtain ⟨ψ₁, hψ₁, henv⟩ := n2_env_toward P h12 hℓ hr0
+  obtain ⟨ψ₂, hψ₂, hnear⟩ := n2_env_near P h12 hℓ
+  refine Filter.eventually_of_mem (Ioo_mem_nhdsGT (show (0 : ℝ) < min 1 (min ψ₁ ψ₂) from lt_min one_pos (lt_min hψ₁ hψ₂))) ?_
+  rintro τ ⟨hτ0, hτ⟩ z ⟨φ, hφ, t, ht, rfl⟩
+  have hτ1 : τ < 1 := lt_of_lt_of_le hτ (min_le_left _ _)
+  have hτψ₁ : τ < ψ₁ := lt_of_lt_of_le hτ ((min_le_right _ _).trans (min_le_left _ _))
+  have hτψ₂ : τ < ψ₂ := lt_of_lt_of_le hτ ((min_le_right _ _).trans (min_le_right _ _))
+  have hl := one_sub_lensProf_le (show (1 : ℝ) / 2 < 1 - τ / 2 by linarith) (show 1 - τ / 2 < 1 by linarith)
+    (Ioo_subset_Icc_self hφ) hℓ
+  have hm0 : 0 ≤ min (φ - θ₁) (θ₂ - φ) := le_min (by linarith [hφ.1]) (by linarith [hφ.2])
+  have hk : (1 - (1 - τ / 2)) / (1 - τ / 2) ≤ τ := by
+    rw [div_le_iff₀ (by linarith)]
+    nlinarith
+  have hs : 1 - t ≤ τ * min (φ - θ₁) (θ₂ - φ) :=
+    le_trans (by linarith [ht.1]) (le_trans hl (mul_le_mul_of_nonneg_right hk hm0))
+  have hcl := toward_clear F hF hA hr henv hnear hφ (show 0 < 1 - t by linarith [ht.2])
+    (hs.trans (mul_le_mul_of_nonneg_right hτψ₁.le hm0)) (hs.trans (mul_le_mul_of_nonneg_right hτψ₂.le hm0))
+  have : P + (1 - ((1 - t : ℝ) : ℂ)) * e φ = P + (t : ℂ) * e φ := by push_cast; ring
+  rw [← this]
+  exact hcl
+
+/-- Finitely many positive numbers have a positive lower bound. -/
+theorem exists_pos_forall_le {n : ℕ} (f : Fin n → ℝ) (hf : ∀ i, 0 < f i) : ∃ m > 0, ∀ i, m ≤ f i := by
+  rcases Nat.eq_zero_or_pos n with rfl | hn
+  · exact ⟨1, one_pos, fun i => i.elim0⟩
+  · obtain ⟨i₀, -, h⟩ := Finset.exists_min_image Finset.univ f ⟨⟨0, hn⟩, Finset.mem_univ _⟩
+    exact ⟨f i₀, hf i₀, fun i => h i (Finset.mem_univ i)⟩
+
+/-- **A germ across the arc's tangent has no point in the crescent near the end** (real variables): the crescent hugs the tangent
+(`|Y| ≤ s²`), a germ of direction `(gx, gy)`, `gx ≠ 0`, leaves it at rate `|gx|`. -/
+theorem branch_transversal {gx gy κ s ca sa X Y R' R'' : ℝ} (hg : gx ^ 2 + gy ^ 2 = 1) (hs : 0 < s)
+    (hs1 : s * (2 + |κ|) < |gx|) (hs2 : s * (1 + |κ|) < 1) (hca : 0 < ca) (hcs : ca ^ 2 + sa ^ 2 = 1) (hsa : sa = κ * s / 2)
+    (hY : Y = s * (gx * ca - gy * sa)) (hN : X ^ 2 + Y ^ 2 = s ^ 2) (hR' : 1 / 2 < R') (hR'' : 1 < R'')
+    (h1 : 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2)) (h2 : 2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0) : False := by
+  obtain ⟨hY0, hYN⟩ := crescent_Y hR' hR'' h1 h2
+  rw [hN] at hYN
+  have hκ0 := abs_nonneg κ
+  -- `|gx ca − gy sa| ≤ s`
+  have hd : |gx * ca - gy * sa| ≤ s := by
+    rw [abs_le]
+    constructor
+    · by_contra h
+      push Not at h
+      have := mul_pos hs (show 0 < -s - (gx * ca - gy * sa) by linarith)
+      nlinarith
+    · by_contra h
+      push Not at h
+      have := mul_pos hs (show 0 < gx * ca - gy * sa by linarith)
+      nlinarith
+  have hsa' : |sa| = |κ| * s / 2 := by rw [hsa, abs_div, abs_mul, abs_of_pos hs, abs_of_pos (show (0 : ℝ) < 2 by norm_num)]
+  have hgy : |gy| ≤ 1 := by rw [← sq_le_one_iff_abs_le_one]; nlinarith [sq_nonneg gx]
+  have hsa1 : |sa| < 1 / 2 := by rw [hsa']; nlinarith
+  have hca1 : 1 / 2 < ca := by
+    by_contra h
+    push Not at h
+    have h3 : sa ^ 2 < 1 / 4 := by
+      have := abs_nonneg sa
+      rw [← sq_abs]; nlinarith
+    nlinarith
+  have hgs : |gy * sa| ≤ |κ| * s / 2 := by
+    rw [abs_mul, ← hsa']
+    exact mul_le_of_le_one_left (abs_nonneg _) hgy
+  have h3 : |gx| * ca ≤ s + |κ| * s / 2 := by
+    have : |gx * ca| ≤ |gx * ca - gy * sa| + |gy * sa| := by
+      have := abs_add_le (gx * ca - gy * sa) (gy * sa)
+      rwa [sub_add_cancel] at this
+    rw [abs_mul, abs_of_pos hca] at this
+    linarith
+  have h4 : |gx| * (1 / 2) ≤ |gx| * ca := mul_le_mul_of_nonneg_left hca1.le (abs_nonneg _)
+  linarith
+
+/-- **A germ along the arc's tangent that meets the crescent on the arc's side is the unit circle's**, once the crescent's radii
+`1 − τ`, `1 + τ` are closer to `1` than the germ's curvature allows (real variables). -/
+theorem branch_tangent {gy κ σ s ca sa τ X Y : ℝ} (hgy : gy = 1 ∨ gy = -1) (hσ : σ = 1 ∨ σ = -1) (hs : 0 < s) (hca : 0 < ca)
+    (hsa : sa = κ * s / 2) (hX : X = s * (gy * ca)) (hY : Y = s * -(gy * sa)) (hN : X ^ 2 + Y ^ 2 = s ^ 2) (hσX : 0 ≤ σ * X)
+    (hτ : 0 < τ) (hτ' : σ * κ = 1 ∨ τ * (|σ * κ| + 1) < |σ * κ - 1|)
+    (h1 : 0 ≤ 2 * (1 - τ) * Y + (X ^ 2 + Y ^ 2)) (h2 : 2 * (1 + τ) * Y + (X ^ 2 + Y ^ 2) ≤ 0) :
+    2 * Y + (X ^ 2 + Y ^ 2) = 0 := by
+  have hsc : 0 < s * ca := mul_pos hs hca
+  have hgσ : gy = σ := by
+    rcases hgy with rfl | rfl <;> rcases hσ with rfl | rfl
+    · rfl
+    · rw [hX] at hσX; nlinarith
+    · rw [hX] at hσX; nlinarith
+    · rfl
+  have hσ2 : σ * σ = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  have hs2 : 0 < s ^ 2 := by positivity
+  have hYv : Y = -(σ * κ) * s ^ 2 / 2 := by rw [hY, hsa, hgσ]; ring
+  rw [hN, hYv] at h1 h2 ⊢
+  set v := σ * κ with hv
+  have hv1 : (1 - τ) * v ≤ 1 := by
+    by_contra h
+    push Not at h
+    have := mul_pos hs2 (sub_pos.mpr h)
+    nlinarith
+  have hv2 : 1 ≤ (1 + τ) * v := by
+    by_contra h
+    push Not at h
+    have := mul_pos hs2 (sub_pos.mpr h)
+    nlinarith
+  rcases hτ' with h | h
+  · rw [h]; ring
+  · exfalso
+    have ha : τ * v ≤ τ * |v| := mul_le_mul_of_nonneg_left (le_abs_self v) hτ.le
+    have hb : |v - 1| ≤ τ * |v| := abs_le.mpr ⟨by linarith, by linarith⟩
+    nlinarith [abs_nonneg v]
+
+/-- **Near an end, the arcs of `Γ` in the collar's crescent lie on `ω(P)`** (C4, at any point `E = ringPt P θ_E` of the domain and
+either side `σ`): `F`'s sector chart at `E` (`localSectors`) lists the arcs near `E` as finitely many branches; in `E`'s frame a branch
+across the tangent leaves the crescent (`branch_transversal`), one along it backwards is on the wrong side, and one along it forwards
+has its curvature between `1/(1 + τ)` and `1/(1 − τ)`, so is the unit circle's once `τ` is small (`branch_tangent`). -/
+theorem exists_end_free (F : ArcMap k) {P : ℂ} {θE σ : ℝ} (hE : ringPt P θE ∈ F.dom) (hσ : σ = 1 ∨ σ = -1) :
+    ∃ ρ > 0, ∃ τ₀ > 0, ∀ τ, 0 < τ → τ < τ₀ → ∀ z ∈ F.Γ, dist z (ringPt P θE) < ρ → ∀ X Y : ℝ,
+      z - ringPt P θE = ((Y : ℂ) + (X : ℂ) * I) * e θE → 0 ≤ σ * X → 0 ≤ 2 * (1 - τ) * Y + (X ^ 2 + Y ^ 2) →
+        2 * (1 + τ) * Y + (X ^ 2 + Y ^ 2) ≤ 0 → dist z P = 1 := by
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hE
+  obtain ⟨s₀, hs₀, hs₀i⟩ := exists_pos_forall_le
+    (fun i : Fin n => min (if Real.cos (G.β i - θE) = 0 then 1 else |Real.cos (G.β i - θE)| / (2 + |G.κ i|)) (1 / (1 + |G.κ i|)))
+    (fun i => by
+      have hκ := abs_nonneg (G.κ i)
+      refine lt_min ?_ (by positivity)
+      split_ifs with h
+      · exact one_pos
+      · exact div_pos (abs_pos.mpr h) (by positivity))
+  obtain ⟨τ₀, hτ₀, hτ₀i⟩ := exists_pos_forall_le
+    (fun i : Fin n => if σ * G.κ i = 1 then 1 else |σ * G.κ i - 1| / (|σ * G.κ i| + 1))
+    (fun i => by
+      have hκ := abs_nonneg (σ * G.κ i)
+      split_ifs with h
+      · exact one_pos
+      · exact div_pos (abs_pos.mpr (sub_ne_zero.mpr h)) (by positivity))
+  refine ⟨min r₀ s₀, lt_min hC.pos hs₀, min (1 / 2) τ₀, lt_min (by norm_num) hτ₀, ?_⟩
+  intro τ hτ hττ z hzΓ hzd X Y hz hσX h1 h2
+  have hτ2 : τ < 1 / 2 := lt_of_lt_of_le hττ (min_le_left _ _)
+  have hττ₀ : τ < τ₀ := lt_of_lt_of_le hττ (min_le_right _ _)
+  -- on `ω(P)` exactly when `2Y + N = 0`
+  have hdP : dist z P ^ 2 = 2 * Y + (X ^ 2 + Y ^ 2) + 1 := by
+    have hzP : z - P = ((Y : ℂ) + (X : ℂ) * I + 1) * e θE := by
+      rw [add_mul, ← hz, ringPt]; ring
+    rw [dist_eq_norm, hzP, norm_mul, norm_e, mul_one, ← Complex.normSq_eq_norm_sq, Complex.normSq_apply]
+    simp
+    ring
+  suffices h : 2 * Y + (X ^ 2 + Y ^ 2) = 0 by
+    rw [h, zero_add] at hdP
+    have h0 := dist_nonneg (x := z) (y := P)
+    nlinarith
+  by_cases hzE : z = ringPt P θE
+  · have h0 : ((Y : ℂ) + (X : ℂ) * I) * e θE = 0 := by rw [← hz, hzE, sub_self]
+    have h0' : (Y : ℂ) + (X : ℂ) * I = 0 := (mul_eq_zero.mp h0).resolve_right (e_ne_zero θE)
+    have hY0 : Y = 0 := by simpa using congrArg Complex.re h0'
+    have hX0 : X = 0 := by simpa using congrArg Complex.im h0'
+    rw [hY0, hX0]; ring
+  · have hmem : z ∈ (F.Γ ∩ ball (ringPt P θE) r₀) \ {ringPt P θE} :=
+      ⟨⟨hzΓ, lt_of_lt_of_le hzd (min_le_left _ _)⟩, hzE⟩
+    rw [hC.branches] at hmem
+    obtain ⟨i, s, hs, rfl⟩ := mem_iUnion.mp hmem
+    have hds : dist (branchPt (ringPt P θE) (G.β i) (G.κ i) s) (ringPt P θE) = s := by
+      rw [dist_eq_norm, norm_branchPt_sub _ _ _ hs.1.le]
+    rw [hds] at hzd
+    have hss₀ : s < s₀ := lt_of_lt_of_le hzd (min_le_right _ _)
+    have hκs : |G.κ i| * s < 2 := lt_of_le_of_lt (mul_le_mul_of_nonneg_left hs.2.le (abs_nonneg _)) (hC.curv i)
+    have hx1 : -1 < G.κ i * s / 2 ∧ G.κ i * s / 2 < 1 := by
+      have := abs_lt.mp (show |G.κ i * s| < 2 by rw [abs_mul, abs_of_pos hs.1]; exact hκs)
+      constructor <;> linarith [this.1, this.2]
+    set a := Real.arcsin (G.κ i * s / 2) with ha
+    have hsa : Real.sin a = G.κ i * s / 2 := Real.sin_arcsin hx1.1.le hx1.2.le
+    have hca : 0 < Real.cos a :=
+      Real.cos_pos_of_mem_Ioo ⟨Real.neg_pi_div_two_lt_arcsin.mpr hx1.1, Real.arcsin_lt_pi_div_two.mpr hx1.2⟩
+    -- the frame coordinates of the branch point
+    have hW : (Y : ℂ) + (X : ℂ) * I = (s : ℂ) * e (G.β i - θE + a) := by
+      have h3 : ((Y : ℂ) + (X : ℂ) * I) * e θE = (s : ℂ) * e (G.β i + a) := by
+        rw [← hz, branchPt]; ring
+      have h4 : e (G.β i + a) = e (G.β i - θE + a) * e θE := by rw [← e_add]; congr 1; ring
+      rw [h4, ← mul_assoc] at h3
+      exact mul_right_cancel₀ (e_ne_zero θE) h3
+    have hYe : Y = s * Real.cos (G.β i - θE + a) := by
+      have := congrArg Complex.re hW
+      simpa [re_e] using this
+    have hXe : X = s * Real.sin (G.β i - θE + a) := by
+      have := congrArg Complex.im hW
+      simpa [im_e] using this
+    rw [Real.cos_add] at hYe
+    rw [Real.sin_add] at hXe
+    have hN : X ^ 2 + Y ^ 2 = s ^ 2 := by
+      rw [hXe, hYe]
+      linear_combination s ^ 2 * (Real.cos a ^ 2 + Real.sin a ^ 2) * Real.sin_sq_add_cos_sq (G.β i - θE) +
+        s ^ 2 * Real.sin_sq_add_cos_sq a
+    have hs₀' := hs₀i i
+    have hs2 : s * (1 + |G.κ i|) < 1 := by
+      have h5 : s < 1 / (1 + |G.κ i|) := lt_of_lt_of_le hss₀ (hs₀'.trans (min_le_right _ _))
+      rwa [lt_div_iff₀ (by positivity)] at h5
+    by_cases hgx : Real.cos (G.β i - θE) = 0
+    · -- along the tangent
+      have hgy : Real.sin (G.β i - θE) = 1 ∨ Real.sin (G.β i - θE) = -1 := by
+        have h5 := Real.sin_sq_add_cos_sq (G.β i - θE)
+        rw [hgx] at h5
+        have h6 : (Real.sin (G.β i - θE) - 1) * (Real.sin (G.β i - θE) + 1) = 0 := by ring_nf; linarith
+        rcases mul_eq_zero.mp h6 with h | h
+        · exact Or.inl (by linarith)
+        · exact Or.inr (by linarith)
+      rw [hgx] at hYe hXe
+      refine branch_tangent hgy hσ hs.1 hca hsa (by rw [hXe]; ring) (by rw [hYe]; ring) hN hσX hτ ?_ h1 h2
+      by_cases hv : σ * G.κ i = 1
+      · exact Or.inl hv
+      · right
+        have h5 := hτ₀i i
+        simp only [if_neg hv] at h5
+        have h6 : τ < |σ * G.κ i - 1| / (|σ * G.κ i| + 1) := lt_of_lt_of_le hττ₀ h5
+        rwa [lt_div_iff₀ (by positivity)] at h6
+    · -- across the tangent
+      exfalso
+      have h5 : s < |Real.cos (G.β i - θE)| / (2 + |G.κ i|) := by
+        have h6 := hs₀'.trans (min_le_left _ _)
+        simp only [if_neg hgx] at h6
+        exact lt_of_lt_of_le hss₀ h6
+      rw [lt_div_iff₀ (by positivity)] at h5
+      exact branch_transversal (gy := Real.sin (G.β i - θE)) (Real.cos_sq_add_sin_sq _) hs.1 h5 hs2 hca
+        (Real.cos_sq_add_sin_sq a) hsa hYe hN (show (1 : ℝ) / 2 < 1 - τ by linarith)
+        (show (1 : ℝ) < 1 + τ by linarith) h1 h2
+
+/-- **A thin collar meets `Γ` only on the arc** (C3 with C4): near each end by `exists_end_free` in the end's frame (`collarK_frame`);
+in between, the collar is within `2τ` of a compact middle of the arc, which lies in the open set where `Γ` is `ω(P)` (`hfree`). -/
+theorem exists_collar_free (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ c c')
+    (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) :
+    ∀ᶠ τ in 𝓝[>] (0 : ℝ), F.Γ ∩ collarK P θ₁ θ₂ (1 - τ) (1 + τ) ⊆ ringArc P θ₁ θ₂ := by
+  have h12 := hA.1
+  have hℓ := l60_le hF hA
+  have hA1 : ringPt P θ₁ ∈ F.dom := (hA.2.1 ⟨θ₁, ⟨le_rfl, h12.le⟩, rfl⟩).1
+  have hA2 : ringPt P θ₂ ∈ F.dom := (hA.2.1 ⟨θ₂, ⟨h12.le, le_rfl⟩, rfl⟩).1
+  obtain ⟨ρ₁, hρ₁, τ₁, hτ₁, hend₁⟩ := exists_end_free F hA1 (σ := 1) (Or.inl rfl)
+  obtain ⟨ρ₂, hρ₂, τ₂, hτ₂, hend₂⟩ := exists_end_free F hA2 (σ := -1) (Or.inr rfl)
+  -- the open set where `Γ` is `ω(P)`, and the compact middle of the arc inside it
+  set U : Set ℂ := {y | ∃ θ ∈ Ioo θ₁ θ₂, ∃ r : ℝ, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1 ∧ y ∈ ball (ringPt P θ) r} with hU
+  have hUo : IsOpen U := by
+    rw [isOpen_iff_mem_nhds]
+    rintro y ⟨θ, hθ, r, hr, hy⟩
+    exact Filter.mem_of_superset (isOpen_ball.mem_nhds hy) fun y' hy' => ⟨θ, hθ, r, hr, hy'⟩
+  have hUΓ : ∀ y ∈ U, y ∈ F.Γ → dist y P = 1 := by
+    rintro y ⟨θ, -, r, hr, hy⟩ hyΓ
+    exact hr ⟨hyΓ, hy⟩
+  set M : Set ℂ := ringArc P θ₁ θ₂ ∩ {y | ρ₁ / 2 ≤ dist y (ringPt P θ₁) ∧ ρ₂ / 2 ≤ dist y (ringPt P θ₂)} with hM
+  have hMc : IsCompact M := by
+    refine (isCompact_Icc.image (by unfold ringPt e; fun_prop) : IsCompact (ringArc P θ₁ θ₂)).inter_right ?_
+    exact (isClosed_le continuous_const (continuous_id.dist continuous_const)).inter
+      (isClosed_le continuous_const (continuous_id.dist continuous_const))
+  have hMU : M ⊆ U := by
+    rintro y ⟨⟨θ, hθ, rfl⟩, hy1, hy2⟩
+    have hθo : θ ∈ Ioo θ₁ θ₂ := by
+      refine ⟨lt_of_le_of_ne hθ.1 ?_, lt_of_le_of_ne hθ.2 ?_⟩
+      · rintro rfl
+        rw [dist_self] at hy1; linarith
+      · rintro rfl
+        rw [dist_self] at hy2; linarith
+    obtain ⟨r, hr, hsub⟩ := hfree θ hθo
+    exact ⟨θ, hθo, r, hsub, mem_ball_self hr⟩
+  obtain ⟨δ, hδ, hδU⟩ := hMc.exists_thickening_subset_open hUo hMU
+  have hpos : (0 : ℝ) < min (min (1 / 4) (δ / 2)) (min (min τ₁ τ₂) (min (ρ₁ / 4) (ρ₂ / 4))) :=
+    lt_min (lt_min (by norm_num) (by linarith)) (lt_min (lt_min hτ₁ hτ₂) (lt_min (by linarith) (by linarith)))
+  refine Filter.eventually_of_mem (Ioo_mem_nhdsGT hpos) ?_
+  rintro τ ⟨hτ0, hτ⟩ z ⟨hzΓ, hzK⟩
+  have hτa : τ < 1 / 4 := lt_of_lt_of_le hτ ((min_le_left _ _).trans (min_le_left _ _))
+  have hτb : τ < δ / 2 := lt_of_lt_of_le hτ ((min_le_left _ _).trans (min_le_right _ _))
+  have hτc : τ < τ₁ := lt_of_lt_of_le hτ ((min_le_right _ _).trans ((min_le_left _ _).trans (min_le_left _ _)))
+  have hτd : τ < τ₂ := lt_of_lt_of_le hτ ((min_le_right _ _).trans ((min_le_left _ _).trans (min_le_right _ _)))
+  have hτe : τ < ρ₁ / 4 := lt_of_lt_of_le hτ ((min_le_right _ _).trans ((min_le_right _ _).trans (min_le_left _ _)))
+  have hτf : τ < ρ₂ / 4 := lt_of_lt_of_le hτ ((min_le_right _ _).trans ((min_le_right _ _).trans (min_le_right _ _)))
+  obtain ⟨⟨X₁, Y₁, hz₁, hX₁, h11, h12'⟩, ⟨X₂, Y₂, hz₂, hX₂, h21, h22⟩⟩ :=
+    collarK_frame (show (1 : ℝ) / 2 < 1 - τ by linarith) (show (1 : ℝ) < 1 + τ by linarith) hℓ hzK
+  obtain ⟨ψ, hψ, t, ht0, hzt, htτ⟩ := collarK_thin hτ0 hτa.le hℓ hzK
+  -- it suffices that the point is on `ω(P)`
+  suffices hd : dist z P = 1 by
+    rw [hzt, dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg ht0.le] at hd
+    exact ⟨ψ, hψ, by rw [hzt, hd]; simp [ringPt]⟩
+  by_cases hd1 : dist z (ringPt P θ₁) < ρ₁
+  · exact hend₁ τ hτ0 hτc z hzΓ hd1 X₁ Y₁ hz₁ (by linarith) h11 h12'
+  by_cases hd2 : dist z (ringPt P θ₂) < ρ₂
+  · exact hend₂ τ hτ0 hτd z hzΓ hd2 X₂ Y₂ hz₂ (by linarith) h21 h22
+  -- the middle
+  have hx : dist z (ringPt P ψ) ≤ 2 * τ := by rw [hzt, dist_polar_ringPt]; exact htτ
+  have hxM : ringPt P ψ ∈ M := by
+    refine ⟨⟨ψ, hψ, rfl⟩, ?_, ?_⟩
+    · have := dist_triangle z (ringPt P ψ) (ringPt P θ₁)
+      linarith [not_lt.mp hd1]
+    · have := dist_triangle z (ringPt P ψ) (ringPt P θ₂)
+      linarith [not_lt.mp hd2]
+  exact hUΓ z (hδU (mem_thickening_iff.mpr ⟨ringPt P ψ, hxM, lt_of_le_of_lt hx (by linarith)⟩)) hzΓ
+
 /-- **The collar exists** (the F-dependent choice; plan § 4, child C1). Route: `R` close to `1` puts the lens under `bend_toward`'s
 profile (`one_sub_lensProf_le` against `n2_env_toward`, `n2_env_near` with `r` from `hout`), so `toward_clear` gives `clear`; `R'`, `R''`
 close to `1` make the collar thin (`one_sub_tangRad_le`, `tangRad_sub_one_le`): within `ε`, inside the domain (a compact arc in an open
@@ -120,7 +583,22 @@ germ of `F` but `α`'s once both curvatures are nearer `1` than every other germ
 theorem exists_collarFit (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ c c') (hout : c' ∉ F.coloursAt P)
     (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) (hε : 0 < ε) :
     ∃ R' R R'', CollarFit F P θ₁ θ₂ c c' ε R' R R'' := by
-  sorry
+  have h12 := hA.1
+  have hℓ := l60_le hF hA
+  obtain ⟨δ, hδ, hδdom⟩ := (isCompact_Icc.image (by unfold ringPt e; fun_prop) :
+    IsCompact (ringArc P θ₁ θ₂)).exists_thickening_subset_open F.isOpen_dom (fun y hy => (hA.2.1 hy).1)
+  have hpos : (0 : ℝ) < min (1 / 4) (min (ε / 2) (δ / 2)) := lt_min (by norm_num) (lt_min (by linarith) (by linarith))
+  obtain ⟨τ, ⟨hclear, hfr⟩, hτ0, hτ⟩ :=
+    (((exists_lens_clear hF hA hout).and (exists_collar_free hF hA hfree)).and (Ioo_mem_nhdsGT hpos)).exists
+  have hτ4 : τ < 1 / 4 := lt_of_lt_of_le hτ (min_le_left _ _)
+  have hτε : τ < ε / 2 := lt_of_lt_of_le hτ ((min_le_right _ _).trans (min_le_left _ _))
+  have hτδ : τ < δ / 2 := lt_of_lt_of_le hτ ((min_le_right _ _).trans (min_le_right _ _))
+  have hthin : ∀ η, 2 * τ < η → collarK P θ₁ θ₂ (1 - τ) (1 + τ) ⊆ thickening η (ringArc P θ₁ θ₂) := by
+    intro η hη z hz
+    obtain ⟨ψ, hψ, t, -, hzt, ht⟩ := collarK_thin hτ0 hτ4.le hℓ hz
+    exact mem_thickening_ringArc_of_polar hψ hzt (lt_of_le_of_lt ht hη)
+  exact ⟨1 - τ, 1 - τ / 2, 1 + τ, ⟨hA, hℓ, ⟨by linarith, by linarith, by linarith, by linarith⟩, hfree, hthin ε (by linarith),
+    (hthin δ (by linarith)).trans hδdom, hfr, hclear⟩⟩
 
 /-- **`F` at a point of the open arc**: degree `2`, its sectors coloured `c` (inside) and `c'` (outside). Route: `Γ` near the point is
 `ω(P)` (`free_open`), a two-germ sector chart (`isSectorChart_of` with the germs `(θ + π/2, 1)`, `(θ − π/2, −1)`; branches by
@@ -281,131 +759,6 @@ theorem CollarFit.map_ringArcsWithin (hfit : CollarFit F P θ₁ θ₂ c c' ε R
       rcases hzL with h | h
       · exact mem_iUnion₂.mpr ⟨_, Or.inl rfl, h⟩
       · exact mem_iUnion₂.mpr ⟨_, Or.inr rfl, h⟩
-
-/-! ## The collar at an end, in the end's frame (FS131-CC2) -/
-
-/-- **A collar point in the frame at each end.** With `z − E = (Y + X i) e(θ_E)` at the end `E = ringPt P θ_E` (`Y` along the outward
-normal, `X` along the tangent `i e(θ_E)`): the point lies on the arc's side of the end (`X ≥ 0` at `θ₁`, `X ≤ 0` at `θ₂`), outside the
-open disc of the tangent circle of radius `R'` (`0 ≤ 2R'Y + |z − E|²`) and inside the closed disc of the one of radius `R''`
-(`2R''Y + |z − E|² ≤ 0`) — the two are `tangRad`'s quadratic at `R'` and `R''` (`tangRad_le_iff`, `le_tangRad_iff`). -/
-theorem collarK_frame (hR' : 1 / 2 < R') (hR'' : 1 < R'') (hℓ : θ₂ - θ₁ ≤ π / 3) {z : ℂ}
-    (hz : z ∈ collarK P θ₁ θ₂ R' R'') :
-    (∃ X Y : ℝ, z - ringPt P θ₁ = ((Y : ℂ) + (X : ℂ) * I) * e θ₁ ∧ 0 ≤ X ∧ 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) ∧
-        2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0) ∧
-      ∃ X Y : ℝ, z - ringPt P θ₂ = ((Y : ℂ) + (X : ℂ) * I) * e θ₂ ∧ X ≤ 0 ∧ 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) ∧
-        2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0 := by
-  obtain ⟨ψ, hψ, t, ht, rfl⟩ := hz
-  have hπ := Real.pi_pos
-  have hcl : clampAngle θ₁ θ₂ ψ = ψ := by unfold clampAngle; rw [min_eq_left hψ.2, max_eq_right hψ.1]
-  have hlo : ∀ u, u = ψ - θ₁ ∨ u = θ₂ - ψ → tangRad R' u ≤ t := by
-    intro u hu
-    refine le_trans ?_ ht.1
-    unfold lensProf
-    rw [hcl]
-    rcases hu with rfl | rfl
-    · exact le_max_left _ _
-    · exact le_max_right _ _
-  have hhi : ∀ u, u = ψ - θ₁ ∨ u = θ₂ - ψ → t ≤ tangRad R'' u := by
-    intro u hu
-    refine le_trans ht.2 ?_
-    unfold outerProf
-    rw [hcl]
-    rcases hu with rfl | rfl
-    · exact min_le_left _ _
-    · exact min_le_right _ _
-  have ht0 : 0 < t := (tangRad_pos hR' _).trans_le (hlo _ (Or.inl rfl))
-  have key : ∀ u : ℝ, 0 ≤ u → u ≤ π / 3 → tangRad R' u ≤ t → t ≤ tangRad R'' u →
-      0 ≤ t * Real.sin u ∧ 0 ≤ 2 * R' * (t * Real.cos u - 1) + ((t * Real.sin u) ^ 2 + (t * Real.cos u - 1) ^ 2) ∧
-        2 * R'' * (t * Real.cos u - 1) + ((t * Real.sin u) ^ 2 + (t * Real.cos u - 1) ^ 2) ≤ 0 := by
-    intro u hu0 hu1 h1 h2
-    have hs : 0 ≤ Real.sin u := Real.sin_nonneg_of_nonneg_of_le_pi hu0 (by linarith)
-    have hq1 := (tangRad_le_iff hR' u ht0).mp h1
-    have hq2 := (le_tangRad_iff (show (1 : ℝ) / 2 < R'' by linarith) u ht0).mp h2
-    have hsc := Real.sin_sq_add_cos_sq u
-    have e1 : ∀ ρ : ℝ, 2 * ρ * (t * Real.cos u - 1) + ((t * Real.sin u) ^ 2 + (t * Real.cos u - 1) ^ 2) =
-        t ^ 2 - 2 * (1 - ρ) * t * Real.cos u - (2 * ρ - 1) := fun ρ => by linear_combination t ^ 2 * hsc
-    refine ⟨mul_nonneg ht0.le hs, ?_, ?_⟩
-    · rw [e1]; exact hq1
-    · rw [e1]; exact hq2
-  refine ⟨?_, ?_⟩
-  · obtain ⟨hX, h1, h2⟩ := key (ψ - θ₁) (by linarith [hψ.1]) (by linarith [hψ.2]) (hlo _ (Or.inl rfl)) (hhi _ (Or.inl rfl))
-    refine ⟨t * Real.sin (ψ - θ₁), t * Real.cos (ψ - θ₁) - 1, ?_, hX, h1, h2⟩
-    have : e ψ = e θ₁ * e (ψ - θ₁) := by rw [← e_add]; congr 1; ring
-    rw [this, e_eq (ψ - θ₁), ringPt]
-    push_cast
-    ring
-  · obtain ⟨hX, h1, h2⟩ := key (θ₂ - ψ) (by linarith [hψ.2]) (by linarith [hψ.1]) (hlo _ (Or.inr rfl)) (hhi _ (Or.inr rfl))
-    refine ⟨-(t * Real.sin (θ₂ - ψ)), t * Real.cos (θ₂ - ψ) - 1, ?_, by linarith, by nlinarith, by nlinarith⟩
-    have : e ψ = e θ₂ * e (-(θ₂ - ψ)) := by rw [← e_add]; congr 1; ring
-    rw [this, e_neg (θ₂ - ψ), ringPt]
-    push_cast
-    ring
-
-/-- The crescent's tangential term decides, outside: with `b > 0`, `A ≥ 0`, `A² = N − Y²`, `−N ≤ Y ≤ 0`, `|α| ≤ 1` and `N` small,
-`N + 2(αY + bA) > 0`. Stated on real variables alone (`nlinarith` in a small context). -/
-theorem side_core_pos {b A N Y α : ℝ} (hb0 : 0 < b) (hA : 0 ≤ A) (hAN : A ^ 2 = N - Y ^ 2) (hY0 : Y ≤ 0) (hYN : -N ≤ Y)
-    (hN : 0 < N) (hN1 : N < 1 / 2) (hN2 : N < 2 * b ^ 2) (hα1 : α ≤ 1) : 0 < N + 2 * (α * Y + b * A) := by
-  by_contra hD
-  push Not at hD
-  have hαY : Y ≤ α * Y := by
-    have := mul_nonneg (sub_nonneg.mpr hα1) (neg_nonneg.mpr hY0)
-    linarith [show (1 - α) * -Y = α * Y - Y by ring]
-  have h3 : 2 * b * A ≤ N := by linarith
-  have h4 : (2 * b * A) ^ 2 ≤ N ^ 2 := pow_le_pow_left₀ (mul_nonneg (mul_nonneg (by norm_num) hb0.le) hA) h3 2
-  have hY2 : 0 ≤ N ^ 2 - Y ^ 2 := by
-    have := mul_nonneg (show 0 ≤ N + Y by linarith) (show 0 ≤ N - Y by linarith)
-    linarith [show (N + Y) * (N - Y) = N ^ 2 - Y ^ 2 by ring]
-  have e : (2 * b * A) ^ 2 = 4 * b ^ 2 * (N - Y ^ 2) := by rw [← hAN]; ring
-  have h5 : 4 * b ^ 2 * (N - N ^ 2) ≤ N ^ 2 := by
-    have := mul_nonneg (sq_nonneg b) hY2
-    linarith [show 4 * b ^ 2 * (N - N ^ 2) = 4 * b ^ 2 * (N - Y ^ 2) - 4 * (b ^ 2 * (N ^ 2 - Y ^ 2)) by ring]
-  have h6 : 4 * b ^ 2 * (1 - N) ≤ N := by
-    by_contra h
-    push Not at h
-    have := mul_pos hN (sub_pos.mpr h)
-    linarith [show N * (4 * b ^ 2 * (1 - N) - N) = 4 * b ^ 2 * (N - N ^ 2) - N ^ 2 by ring]
-  have := mul_nonneg (sq_nonneg b) (show (0 : ℝ) ≤ 1 / 2 - N by linarith)
-  linarith [show 4 * b ^ 2 * (1 - N) = 2 * b ^ 2 + 4 * (b ^ 2 * (1 / 2 - N)) by ring]
-
-/-- The crescent's tangential term decides, inside: with `b < 0` and `N` small, `N + 2(αY + bA) < 0`. -/
-theorem side_core_neg {b A N Y α : ℝ} (hb0 : b < 0) (hA : 0 ≤ A) (hAN : A ^ 2 = N - Y ^ 2) (hY0 : Y ≤ 0) (hYN : -N ≤ Y)
-    (hN : 0 < N) (hN1 : N < 1 / 2) (hN2 : N < 2 * b ^ 2 / 9) (hα2 : -1 ≤ α) : N + 2 * (α * Y + b * A) < 0 := by
-  by_contra hD
-  push Not at hD
-  have hαY : α * Y ≤ -Y := by
-    have := mul_nonneg (show 0 ≤ α + 1 by linarith) (neg_nonneg.mpr hY0)
-    linarith [show (α + 1) * -Y = -(α * Y) - Y by ring]
-  have h3 : 2 * -b * A ≤ 3 * N := by linarith
-  have h4 : (2 * -b * A) ^ 2 ≤ (3 * N) ^ 2 :=
-    pow_le_pow_left₀ (mul_nonneg (mul_nonneg (by norm_num) (by linarith)) hA) h3 2
-  have hY2 : 0 ≤ N ^ 2 - Y ^ 2 := by
-    have := mul_nonneg (show 0 ≤ N + Y by linarith) (show 0 ≤ N - Y by linarith)
-    linarith [show (N + Y) * (N - Y) = N ^ 2 - Y ^ 2 by ring]
-  have e : (2 * -b * A) ^ 2 = 4 * b ^ 2 * (N - Y ^ 2) := by rw [← hAN]; ring
-  have h5 : 4 * b ^ 2 * (N - N ^ 2) ≤ 9 * N ^ 2 := by
-    have := mul_nonneg (sq_nonneg b) hY2
-    linarith [show 4 * b ^ 2 * (N - N ^ 2) = 4 * b ^ 2 * (N - Y ^ 2) - 4 * (b ^ 2 * (N ^ 2 - Y ^ 2)) by ring,
-      show (3 * N) ^ 2 = 9 * N ^ 2 by ring]
-  have h6 : 4 * b ^ 2 * (1 - N) ≤ 9 * N := by
-    by_contra h
-    push Not at h
-    have := mul_pos hN (sub_pos.mpr h)
-    linarith [show N * (4 * b ^ 2 * (1 - N) - 9 * N) = 4 * b ^ 2 * (N - N ^ 2) - 9 * N ^ 2 by ring]
-  have := mul_nonneg (sq_nonneg b) (show (0 : ℝ) ≤ 1 / 2 - N by linarith)
-  linarith [show 4 * b ^ 2 * (1 - N) = 2 * b ^ 2 + 4 * (b ^ 2 * (1 / 2 - N)) by ring]
-
-/-- A crescent point has `−N ≤ Y ≤ 0` (`N = X² + Y²`): between the tangent circles of radii `R' > 1/2` and `R'' > 1`. -/
-theorem crescent_Y {X Y R' R'' : ℝ} (hR' : 1 / 2 < R') (hR'' : 1 < R'') (h1 : 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2))
-    (h2 : 2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0) : Y ≤ 0 ∧ -(X ^ 2 + Y ^ 2) ≤ Y := by
-  have hN : 0 ≤ X ^ 2 + Y ^ 2 := by positivity
-  have hY0 : Y ≤ 0 := by
-    by_contra h
-    push Not at h
-    have := mul_pos (show (0 : ℝ) < R'' by linarith) h
-    linarith
-  refine ⟨hY0, ?_⟩
-  have := mul_nonneg (show (0 : ℝ) ≤ 2 * R' - 1 by linarith) (neg_nonneg.mpr hY0)
-  linarith [show (2 * R' - 1) * -Y = -(2 * R' * Y) + Y by ring]
 
 /-- **The side of a second unit circle, in an end's frame** (pure algebra). A unit vector `m` with frame components `(α, β)`,
 `(α, β) ≠ (1, 0)`; points `(X, Y)` of the collar's crescent on the arc's side (`σ X ≥ 0`). Close to the end, the sign of
