@@ -200,6 +200,10 @@ import Proofs.HadwigerNelson.Plane.Woodall.Collar
 import Proofs.HadwigerNelson.Plane.Woodall.NoFourFive
 import Proofs.HadwigerNelson.Plane.Woodall.Merge
 import Proofs.HadwigerNelson.Plane.Woodall.Steps
+import Proofs.HadwigerNelson.Plane.Models.Paint
+import Proofs.HadwigerNelson.Plane.Models.Moves
+import Proofs.HadwigerNelson.Plane.Models.Stuck
+import Proofs.HadwigerNelson.Plane.Models.Bends
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.Topology.SpernerGrid
