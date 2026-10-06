@@ -29,6 +29,7 @@ else:
     STM=[(MOD,"theorem "+n+" ") for n in L]+[("Empty.lean","theorem "+n+" ") for n in L2]
     NOTE="its § 9.3 has a route per leaf and § 9.4 the plan for `outerAdj` (about 380 lines, on the template of the sole-tip lemma in `SoleTip`); the order: `crossed_no_tip`, `crossed_outer`, `crossed_four`, `crossed_changePoint`, `semiHub_places` (the largest leaf), `crossed_semiHub` last, then `outerAdj`"
     PRICE="about 1,430 and 380 lines by the planner, one job or two; expect to hand back with part of it and say what is left"
+OWED=(" **One model is owed by the join job and is yours, first** (ruling 586 (b)): a Lean object of the class the shared lemmas speak of — valid, non-Siamese, simple at a point — for `ncard_tileAt_eq`, `exists_sectorChart_tileAt` and `exists_initialPiece_of_ncard_le_three`; its record names the half-disc map at the origin, about 25 lines, as an `example` in a module of yours." if LANE=="C" else "")
 STMTS="\n".join(Q(V+f,p) for f,p in STM)+"\n"
 PLAN="\n".join(Q(KP,p) for p in PLANQ)+"\n"
 SH="\n".join(Q(SC,"theorem "+n+" ") for n in ["exists_int_of_angleIcc_subset","int_eq_zero_of_two_pi_mul_lt","mem_closure_tile_of_near","IsSectorChart.tileAt_equiv","exists_sectorChart_tileAt","IsSectorChart.exists_initialPiece_between","exists_initialPiece_of_ncard_le_three"])+"\n"
@@ -69,6 +70,7 @@ What the planner and the join job handed back, and the rulings in force (read ea
 {item(571)}
 {item(568)}
 {item(584)}
+{item(586)}
 ## The statements
 
 No statement changes in this job. Your leaves, as they stand in your tree (read each whole, with its docstring):
@@ -93,7 +95,7 @@ No statement changes in this job. Your leaves, as they stand in your tree (read 
 3. **The planner's own cautions, which are yours to test**: its plans for the shared lemmas' uses were written before those lemmas
    had Lean statements — where a route asks of a shared lemma something its statement does not give, write a corollary under a name of
    your own and say so, or message me if the other implementer needs it too; and no Lean model of a star or of a semi-hub exists, so
-   each leaf's docstring keeps the planner's line on what is owed.
+   each leaf's docstring keeps the planner's line on what is owed.{OWED}
 4. No statement or definition changed; no new `axiom`, no `native_decide`. Do not edit a file while a build of it runs. You do not
    merge another branch, run the gate, or touch `main`. **After your last green build, the guarded lint** — `lake lint --no-build --
    --no-build --trace` under the slot with `--mem 8` (`LEAN.md` § The gate), its output saved (inventory item 573). Leave no background

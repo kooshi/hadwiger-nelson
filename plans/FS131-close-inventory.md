@@ -7397,3 +7397,28 @@ reason by the close.*
      message carries a guess of his own about that; it is recorded verbatim in the request file and is not part of
      what the job writes). (c) The negative-radius case is stated in the file, in a remark: an audit that
      overstates is the thing being audited.
+586. **FS131-I8B done: wave 8's join — the two branches merged, the shared lemmas proved, and `star_anti` proved at its ruled statement** (implementer, Opus; harness 497k and 56 minutes by the task notice; record `fs131-w8b`'s `plans/FS131-I8B-implementation.md`; report `data/fs131/reports/FS131-I8B.md`; commits `bd694259`, the merge `9ddc32d2`, `d635a30a`, `216baaa4`, `6e0cf10d`; pushed, tree clean).
+     **Proved on the standard three** (built, not gated): the shared module `Plane/RingCalculus/StarChart` (item 584);
+     **`star_anti` (FS116-N2-ANTI) with the two binders of ruling 568 (a) exactly** — its stuck step needs no case on
+     a whole-circle cone once they are there; `star_anti_ne`, its first clause at any `k` with at most two colours
+     absent. **Corrections it names**: the plan's C1 was not missing (wave 3's lemma); the first implementer's
+     remark that the two binders add nothing at a proper interval is not checked in Lean and stays a hand remark;
+     one leaf of the next job (`isRingArc_of_edge`) has no chart among its hypotheses and must build its own.
+     **Owed by it, said**: a Lean model of the class "valid, non-Siamese, simple at a point" for three of the shared
+     lemmas (about 25 lines); no control planted for the lint. **My receipt**: tip `6e0cf10d` equals
+     `origin/fs131-w8b`, tree clean; `sorry` by the handoff's grep: `SemiHub` 17, `SemiHubPlaces` 6, `Empty` 1 —
+     `Star` and `StarChart` none; its last build log ends `EXIT=0`; its lint log reads "Linting passed for
+     Proofs."; its last axioms print parsed by script — 22 records, none outside the standard three but its planted
+     control on `sorryAx`; **`Star`'s thirteen base heads compared by my own script against the first
+     implementer's tip: twelve textually the same, one changed, `star_anti`, and the text inserted is exactly the
+     two ruled binders**. Not checked by me: the proofs beyond the build; its elaborated statement check over 214
+     declarations. **Credit**: a lemma found already proved under another name instead of proved twice; the ruled
+     change made to the letter and shown so; a hand remark of a colleague's marked as unchecked. **Slips, the
+     job's, disclosed**: a build launched with `&` inside a tool call; one shared statement restated before its
+     save. **Rulings.** (a) Its edit of `ARCHITECTURE.md`'s row for `Star` is ratified (the file is not one of the
+     coordinator's). (b) The owed 25-line model rides with FS131-I8C, whose first leaves call those lemmas.
+     (c) The erratum for FS116-N2-ANTI's entry (its "not claimed" line becomes a hypothesis) and the stub line are
+     held for the filing. (d) **`fs131-w8c` and `fs131-w8d` are cut from `6e0cf10d`** (builds copied; pushed) and
+     FS131-I8C's and I8D's briefs generated and gated (`mk-i8cd.py`). (e) **Slot → FS131-I7M** (the six-colour
+     model's kernel job, on `fs131-w7m`), launched 2026-10-06; I8C and I8D take the next two. In flight: 3 (LT5,
+     I6K, I7M) + the special-purpose slot (EXT-HN2).
