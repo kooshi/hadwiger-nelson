@@ -3290,3 +3290,49 @@ concentric-circle bound; then `n4_fin`. Price: M–H, one session.
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 55 — SAVED
+
+## Stage 60 — SAVED (FS131-IS1): the readback, the as-given build, the scope
+
+*FS131-IS1, `Terminal`'s last implementer (Opus), continuing this record on branch `fs131-w5s` in
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5s`, cut from `fs131-w5c` at `ebb0b292`. Brief:
+`data/fs131/briefs/FS131-IS1-stuck-run.md` (main tree). Numbered 60 on: Stages 56–59 are kept for FS131-I5q's on `fs131-w5`, so the later
+merges join the copies cleanly. My set: `stuckRun_ne_univ` (the last `sorry` of `Terminal`), with "no bound is `±1`" first and the child
+`shadow_recursion`.*
+
+### 60.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_is_quotes.py` (a copy of M6's checker under this job's prefix): **7 quotations, 0 failures**, exit 0
+(`data/fs131/is/quote-check.txt`) — `CLAUDE.md` § Counter-priors; inventory items 398, 420, 421; the first line of `stuckRun_ne_univ`
+(`Terminal` at `ebb0b292`); M6's "Left" paragraph (this record, Stage 55); the planner's row (`plans/FS131-limit-kernel-plan.md` § 3.1).
+`--self-test` (a one-letter plant in the first quotation): **fired**, 1 failure (`quote-check-selftest.txt`). No mismatch. Read in full:
+this record's Stages 52–55; inventory item 421; `plans/FS110-derivation.md`'s entries FS110-N4-SHADOW, -N4-SHAVE, -N4-STUCK, -N4-FIN;
+`plans/FS110-N-proof.md` § Continuation — FS110-N4, §§ 2.1–2.6 (the proof file the entries name); `Plane/StuckChain` (`n4_fin`),
+`Plane/ValidMap/HornShadow` (SH1, SH2, SEP), `Plane/ValidMap/Basic`, `Plane/ValidMap/Chain`, and `Terminal` from `cv_l0` on.
+
+### 60.2 The as-given build (`ebb0b292`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1785
+modules already up to date, nothing built, 5 modules with warnings**, exit 0 (`build/gate/build/20261006T041943Z-883493.log`; driver log
+`data/fs131/is/build-asgiven.log`); every warning `declaration uses 'sorry'` (`BendCollar` 1, `HexRing` 1, `Procedure` 2, `Terminal` 1 at
+`3592:8` = `stuckRun_ne_univ`, `BaseDense` 3), no `error:` line. `Terminal`'s `sorry` by `grep -cw`: **1** (line 3594).
+
+### 60.3 What I may and may not change
+
+May: `Plane/ValidMap/Terminal` — `stuckRun_ne_univ`'s proof, and new declarations beside it (before it, after `run_hornBoundsQR`);
+`Plane/ValidMap/HornShadow` and `Plane/ValidMap/FlankUA` — supporting lemmas **added at the end of the file** only (FS131-IR2 may add to
+`FlankUA` on `fs131-w5c`); `scripts/Axioms.lean` — a block of my own headed "FS131-IS1" above the `=== PURCHASED ===` banner; this record;
+`tools/fs131_is_*.py`; `data/fs131/is/`; `data/fs131/reports/FS131-IS1.md`. May not: `Procedure`, `Limit`, the move modules, `BaseDense`,
+`BendCollar`, `HexRing`, `Proofs.lean`; any statement, any definition a statement uses; no `axiom`, no `native_decide`; no merge into
+`fs131-w5c`, no gate run, nothing on `main`.
+
+### 60.4 The route as read (before any proof)
+
+The hand proof (N4 § 2.6) takes both inequalities "from validity of the flanks alone" once the colours are placed: the horn at `P_{k+1}` has
+the colour of `P_k`'s lower flank, and its shadow at `P_k` is everything above the circle of curvature `f(λ_{k+1})`; the lower flank reaches
+up to the arc `λ_k`. In this module's terms: (1) no bound `±1` at a chain vertex whose neighbour is a chain vertex (`hornBoundsQR_of_isChainVertex`
+against `cv_l0` at the neighbour); (2) so `cv_class` is in its second case there — the upper flank twice at `S′`, the lower flank twice at
+`N`; (3) at the chain vertex `N` the twice-carried colour is the colour of the horn along `e α` (one horn per direction at a chain vertex:
+the four-germ count of Stage 54); (4) SH2 (`mem_shadow_hornSet_S`, `mem_shadow_hornSet_N`) and `Valid` give the two inequalities; (5) `n4_fin`.
+`shadow_of_not_shave` and `srcG_of_shadow` are not read on this route: `flank_two_sectors_at_S_gen` (inside `cv_class`) already carries them.
+
+## Stage 60 — SAVED
