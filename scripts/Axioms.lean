@@ -4827,6 +4827,20 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.StandingFive.K_le
 #print axioms HadwigerNelson.StandingFive.targetFloor_zero
 
+/-! ## FS-131 wave 10 (job FS131-I10A) — the spectral inputs and the character colouring's last leaf -/
+-- FS131-I10A
+#print axioms HadwigerNelson.SpectralInputs.mem_factorSets_iff
+#print axioms HadwigerNelson.SpectralInputs.isClosed_contVec
+#print axioms HadwigerNelson.SpectralInputs.lipschitz_comp_mem_contVec
+#print axioms HadwigerNelson.SpectralInputs.iUnion_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.measurableSet_factorSigma_iff
+#print axioms HadwigerNelson.SpectralInputs.setOf_lt_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.contVec_eq_lpMeas
+#print axioms HadwigerNelson.SpectralInputs.measurableSet_preimage_factorSigma
+#print axioms HadwigerNelson.SpectralInputs.condExpL2_mem_contVec
+#print axioms HadwigerNelson.SpectralInputs.condExpL2_eq_self_iff
+#print axioms HadwigerNelson.SpectralInputs.inner_sub_condExpL2_eq_zero
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

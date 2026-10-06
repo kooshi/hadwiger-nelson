@@ -141,22 +141,382 @@ theorem factorSigma_le [IsFiniteMeasure μ] (T : R → Ω → Ω) (hT : ∀ y, M
     factorSigma T hT l ≤ ‹MeasurableSpace Ω› :=
   MeasurableSpace.generateFrom_le fun _ hA => hA.1
 
+/-! ### The proof of N2 (i)–(iii): the `l`-continuous vectors are a closed sublattice containing the constants
+
+The statement the three leaves derive from: `contVec` is a closed subspace of `L²(μ)`, stable under `f ↦ φ ∘ f` for `φ`
+Lipschitz with `φ 0 = 0`, and an indicator `1_A` lies in it iff `μ (T y ⁻¹' A ∆ A) → 0` along `l`. -/
+
+section FactorProofs
+
+open scoped symmDiff
+
+/-- `‖1_A‖₂ = √μ(A)`, with a constant. -/
+theorem norm_indicatorConstLp_two {A : Set Ω} (hA : MeasurableSet A) (hμA : μ A ≠ ⊤) (c : ℝ) :
+    ‖indicatorConstLp 2 hA hμA c‖ = ‖c‖ * Real.sqrt (μ.real A) := by
+  rw [norm_indicatorConstLp (by norm_num) (by simp), Real.sqrt_eq_rpow]
+  simp
+
+theorem tendsto_sqrt_toReal_iff {ι : Type*} {l : Filter ι} {a : ι → ENNReal} (ha : ∀ y, a y ≠ ⊤) :
+    Filter.Tendsto (fun y => Real.sqrt (a y).toReal) l (nhds 0) ↔ Filter.Tendsto a l (nhds 0) := by
+  rw [← ENNReal.tendsto_toReal_zero_iff ha]
+  constructor
+  · intro h
+    have := h.pow 2
+    simpa [Real.sq_sqrt ENNReal.toReal_nonneg] using this
+  · intro h
+    have := (Real.continuous_sqrt.tendsto 0).comp h
+    simpa [Function.comp_def] using this
+
+section
+variable {T : R → Ω → Ω} {hT : ∀ y, MeasurePreserving (T y) μ μ} {l : Filter R}
+
+theorem add_mem_contVec {f g : Lp ℝ 2 μ} (hf : f ∈ contVec T hT l) (hg : g ∈ contVec T hT l) :
+    f + g ∈ contVec T hT l := by
+  refine squeeze_zero (fun y => norm_nonneg _) (fun y => ?_) (by simpa using Filter.Tendsto.add hf hg)
+  rw [map_add, add_sub_add_comm]
+  exact norm_add_le _ _
+
+theorem neg_mem_contVec {f : Lp ℝ 2 μ} (hf : f ∈ contVec T hT l) : -f ∈ contVec T hT l := by
+  refine squeeze_zero (fun y => norm_nonneg _) (fun y => ?_) hf
+  rw [map_neg, ← neg_sub', norm_neg]
+
+theorem sub_mem_contVec {f g : Lp ℝ 2 μ} (hf : f ∈ contVec T hT l) (hg : g ∈ contVec T hT l) :
+    f - g ∈ contVec T hT l := by
+  rw [sub_eq_add_neg]
+  exact add_mem_contVec hf (neg_mem_contVec hg)
+
+variable (T hT l) in
+theorem isClosed_contVec : IsClosed (contVec T hT l) := by
+  refine isClosed_of_closure_subset fun f hf => ?_
+  show Filter.Tendsto (fun y => ‖Lp.compMeasurePreserving (T y) (hT y) f - f‖) l (nhds 0)
+  rw [Metric.tendsto_nhds]
+  intro ε hε
+  obtain ⟨g, hg, hfg⟩ := Metric.mem_closure_iff.mp hf (ε / 3) (by positivity)
+  have hg' : ∀ᶠ y in l, ‖Lp.compMeasurePreserving (T y) (hT y) g - g‖ < ε / 3 := by
+    have := (Metric.tendsto_nhds.mp hg) (ε / 3) (by positivity)
+    simpa using this
+  filter_upwards [hg'] with y hy
+  rw [Real.dist_eq, sub_zero, abs_norm]
+  have h1 : Lp.compMeasurePreserving (T y) (hT y) f - f =
+      Lp.compMeasurePreserving (T y) (hT y) (f - g) + (Lp.compMeasurePreserving (T y) (hT y) g - g) - (f - g) := by
+    rw [map_sub]
+    abel
+  have h2 : ‖Lp.compMeasurePreserving (T y) (hT y) (f - g)‖ = ‖f - g‖ := Lp.norm_compMeasurePreserving _ _
+  rw [dist_eq_norm] at hfg
+  calc ‖Lp.compMeasurePreserving (T y) (hT y) f - f‖
+      ≤ ‖Lp.compMeasurePreserving (T y) (hT y) (f - g)‖ + ‖Lp.compMeasurePreserving (T y) (hT y) g - g‖ + ‖f - g‖ := by
+        rw [h1]
+        exact (norm_sub_le _ _).trans (add_le_add_left (norm_add_le _ _) _)
+    _ < ε := by rw [h2]; linarith
+
+theorem compMeasurePreserving_compLp {c : NNReal} {φ : ℝ → ℝ} (hφ : LipschitzWith c φ) (h0 : φ 0 = 0) {S : Ω → Ω}
+    (hS : MeasurePreserving S μ μ) (f : Lp ℝ 2 μ) :
+    Lp.compMeasurePreserving S hS (hφ.compLp h0 f) = hφ.compLp h0 (Lp.compMeasurePreserving S hS f) := by
+  apply Lp.ext
+  have h1 := Lp.coeFn_compMeasurePreserving (hφ.compLp h0 f) hS
+  have h2 := (hφ.coeFn_compLp h0 f).comp_tendsto hS.quasiMeasurePreserving.tendsto_ae
+  have h3 := hφ.coeFn_compLp h0 (Lp.compMeasurePreserving S hS f)
+  have h4 := Lp.coeFn_compMeasurePreserving f hS
+  filter_upwards [h1, h2, h3, h4] with ω e1 e2 e3 e4
+  rw [e1, e3]
+  simp only [Function.comp_apply] at e2 e4 ⊢
+  rw [e2, e4]
+
+theorem lipschitz_comp_mem_contVec {c : NNReal} {φ : ℝ → ℝ} (hφ : LipschitzWith c φ) (h0 : φ 0 = 0) {f : Lp ℝ 2 μ}
+    (hf : f ∈ contVec T hT l) : hφ.compLp h0 f ∈ contVec T hT l := by
+  have hbound : ∀ y, ‖Lp.compMeasurePreserving (T y) (hT y) (hφ.compLp h0 f) - hφ.compLp h0 f‖ ≤
+      c * ‖Lp.compMeasurePreserving (T y) (hT y) f - f‖ := fun y => by
+    rw [compMeasurePreserving_compLp]
+    exact hφ.norm_compLp_sub_le h0 _ _
+  refine squeeze_zero (fun y => norm_nonneg _) hbound ?_
+  simpa using Filter.Tendsto.const_mul (c : ℝ) hf
+
+end
+
+/-- `‖V 1_A − 1_A‖₂ = √μ(T⁻¹A ∆ A)`, with a constant. -/
+theorem norm_comp_indicator_sub [IsFiniteMeasure μ] {S : Ω → Ω} (hS : MeasurePreserving S μ μ) {A : Set Ω}
+    (hA : MeasurableSet A) (c : ℝ) :
+    ‖Lp.compMeasurePreserving S hS (indicatorConstLp 2 hA (measure_ne_top μ A) c) -
+        indicatorConstLp 2 hA (measure_ne_top μ A) c‖ = ‖c‖ * Real.sqrt (μ.real ((S ⁻¹' A) ∆ A)) := by
+  rw [Lp.indicatorConstLp_compMeasurePreserving hA (measure_ne_top μ A) c hS, ← dist_eq_norm,
+    dist_indicatorConstLp_eq_norm, norm_indicatorConstLp_two]
+
+section
+variable [IsFiniteMeasure μ] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (l : Filter R)
+
+theorem indicatorConstLp_mem_contVec_iff {A : Set Ω} (hA : MeasurableSet A) {c : ℝ} (hc : c ≠ 0) :
+    indicatorConstLp 2 hA (measure_ne_top μ A) c ∈ contVec T hT l ↔
+      Filter.Tendsto (fun y => μ ((T y ⁻¹' A) ∆ A)) l (nhds 0) := by
+  rw [← tendsto_sqrt_toReal_iff (fun y => measure_ne_top μ _)]
+  show Filter.Tendsto (fun y => ‖Lp.compMeasurePreserving (T y) (hT y) _ - _‖) l (nhds 0) ↔ _
+  simp only [norm_comp_indicator_sub (hT _) hA]
+  have hc' : ‖c‖ ≠ 0 := norm_ne_zero_iff.mpr hc
+  constructor
+  · intro h
+    have := h.const_mul ‖c‖⁻¹
+    simpa only [inv_mul_cancel_left₀ hc', mul_zero, measureReal_def] using this
+  · intro h
+    have := h.const_mul ‖c‖
+    simpa only [mul_zero, measureReal_def] using this
+
+theorem mem_factorSets_iff {A : Set Ω} :
+    A ∈ factorSets T hT l ↔ MeasurableSet A ∧ Filter.Tendsto (fun y => μ ((T y ⁻¹' A) ∆ A)) l (nhds 0) :=
+  ⟨fun ⟨hA, h⟩ => ⟨hA, (indicatorConstLp_mem_contVec_iff T hT l hA one_ne_zero).mp h⟩,
+    fun ⟨hA, h⟩ => ⟨hA, (indicatorConstLp_mem_contVec_iff T hT l hA one_ne_zero).mpr h⟩⟩
+
+variable {T hT l}
+
+theorem indicatorConstLp_mem_contVec {A : Set Ω} (hA : MeasurableSet A)
+    (h : Filter.Tendsto (fun y => μ ((T y ⁻¹' A) ∆ A)) l (nhds 0)) (c : ℝ) :
+    indicatorConstLp 2 hA (measure_ne_top μ A) c ∈ contVec T hT l := by
+  by_cases hc : c = 0
+  · subst hc
+    show Filter.Tendsto (fun y => ‖Lp.compMeasurePreserving (T y) (hT y) _ - _‖) l (nhds 0)
+    simp only [norm_comp_indicator_sub (hT _) hA, norm_zero, zero_mul]
+    exact tendsto_const_nhds
+  · exact (indicatorConstLp_mem_contVec_iff T hT l hA hc).mpr h
+
+theorem const_mem_contVec (c : ℝ) :
+    indicatorConstLp 2 MeasurableSet.univ (measure_ne_top μ Set.univ) c ∈ contVec T hT l :=
+  indicatorConstLp_mem_contVec MeasurableSet.univ (by simpa using tendsto_const_nhds) c
+
+theorem empty_mem_factorSets : ∅ ∈ factorSets T hT l :=
+  (mem_factorSets_iff T hT l).mpr ⟨MeasurableSet.empty, by simpa using tendsto_const_nhds⟩
+
+theorem compl_mem_factorSets {A : Set Ω} (hA : A ∈ factorSets T hT l) : Aᶜ ∈ factorSets T hT l := by
+  obtain ⟨hAm, h⟩ := (mem_factorSets_iff T hT l).mp hA
+  refine (mem_factorSets_iff T hT l).mpr ⟨hAm.compl, ?_⟩
+  simpa only [Set.preimage_compl, compl_symmDiff_compl] using h
+
+theorem union_mem_factorSets {A B : Set Ω} (hA : A ∈ factorSets T hT l) (hB : B ∈ factorSets T hT l) :
+    A ∪ B ∈ factorSets T hT l := by
+  obtain ⟨hAm, hA'⟩ := (mem_factorSets_iff T hT l).mp hA
+  obtain ⟨hBm, hB'⟩ := (mem_factorSets_iff T hT l).mp hB
+  refine (mem_factorSets_iff T hT l).mpr ⟨hAm.union hBm, ?_⟩
+  refine tendsto_of_tendsto_of_tendsto_of_le_of_le (h := fun y => μ ((T y ⁻¹' A) ∆ A) + μ ((T y ⁻¹' B) ∆ B))
+    tendsto_const_nhds (by simpa using hA'.add hB') (fun y => zero_le) fun y => ?_
+  refine (measure_mono ?_).trans (measure_union_le _ _)
+  intro ω hω
+  simp only [Set.mem_symmDiff, Set.mem_preimage, Set.mem_union] at hω ⊢
+  tauto
+
+theorem iUnion_mem_factorSets {f : ℕ → Set Ω} (hf : ∀ i, f i ∈ factorSets T hT l) :
+    (⋃ i, f i) ∈ factorSets T hT l := by
+  have hfm : ∀ i, MeasurableSet (f i) := fun i => ((mem_factorSets_iff T hT l).mp (hf i)).1
+  have hacc : ∀ n, Set.accumulate f n ∈ factorSets T hT l := by
+    intro n
+    induction n with
+    | zero => simpa [Set.accumulate] using hf 0
+    | succ n ih =>
+      rw [Set.accumulate_succ]
+      exact union_mem_factorSets ih (hf (n + 1))
+  have hU : MeasurableSet (⋃ i, f i) := MeasurableSet.iUnion hfm
+  have haccm : ∀ n, MeasurableSet (Set.accumulate f n) := fun n => ((mem_factorSets_iff T hT l).mp (hacc n)).1
+  refine ⟨hU, ?_⟩
+  have hlim : Filter.Tendsto (fun n => indicatorConstLp 2 (haccm n) (measure_ne_top μ _) (1 : ℝ)) Filter.atTop
+      (nhds (indicatorConstLp 2 hU (measure_ne_top μ _) (1 : ℝ))) := by
+    refine tendsto_indicatorConstLp_set (by simp) ?_
+    have hsub : ∀ n, Set.accumulate f n ⊆ ⋃ i, f i := fun n => Set.accumulate_subset_iUnion n
+    have h1 : ∀ n, μ (Set.accumulate f n ∆ ⋃ i, f i) = μ (⋃ i, f i) - μ (Set.accumulate f n) := by
+      intro n
+      rw [Set.symmDiff_def, Set.sdiff_eq_empty.mpr (hsub n), Set.empty_union,
+        measure_sdiff (hsub n) (haccm n).nullMeasurableSet (measure_ne_top μ _)]
+    simp only [h1]
+    have h2 := tendsto_measure_iUnion_accumulate (μ := μ) (f := f)
+    have := ENNReal.Tendsto.sub (tendsto_const_nhds (x := μ (⋃ i, f i))) h2 (Or.inl (measure_ne_top μ _))
+    simpa using this
+  refine (isClosed_contVec T hT l).mem_of_tendsto hlim (Filter.Eventually.of_forall fun n => ?_)
+  obtain ⟨_, h⟩ := hacc n
+  exact h
+
+variable (T hT l) in
+/-- The events with `l`-continuous indicators, as a σ-algebra. -/
+@[reducible] def factorSetsSpace : MeasurableSpace Ω where
+  MeasurableSet' A := A ∈ factorSets T hT l
+  measurableSet_empty := empty_mem_factorSets
+  measurableSet_compl _ h := compl_mem_factorSets h
+  measurableSet_iUnion _ h := iUnion_mem_factorSets h
+
+end
+
+end FactorProofs
+
 /-- **J45-N2 (i)**: the events with `l`-continuous indicators are a σ-algebra. -/
 theorem measurableSet_factorSigma_iff [IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ)
     (l : Filter R) {A : Set Ω} : MeasurableSet[factorSigma T hT l] A ↔ A ∈ factorSets T hT l := by
-  sorry
+  refine ⟨fun h => ?_, fun h => MeasurableSpace.measurableSet_generateFrom h⟩
+  exact MeasurableSpace.generateFrom_le (m := factorSetsSpace T hT l) (fun _ h => h) A h
+
+section FactorProofs
+
+/-- The clamp `ψ_n(x) = max 0 (min 1 ((n + 1) x))`: `(n + 1)`-Lipschitz, `0` at `0`, and within `1_{0 < x < 1/(n+1)}` of the
+indicator of `(0, ∞)`. -/
+def clamp (n : ℕ) (x : ℝ) : ℝ := max 0 (min 1 ((n + 1 : ℝ) * x))
+
+theorem clamp_zero (n : ℕ) : clamp n 0 = 0 := by simp [clamp]
+
+theorem lipschitzWith_clamp (n : ℕ) : LipschitzWith (n + 1 : NNReal) (clamp n) := by
+  have h1 : LipschitzWith (n + 1 : NNReal) (fun x : ℝ => (n + 1 : ℝ) * x) :=
+    LipschitzWith.of_dist_le_mul fun x y => by
+      rw [Real.dist_eq, Real.dist_eq, ← mul_sub, abs_mul, abs_of_nonneg (by positivity : (0 : ℝ) ≤ n + 1)]
+      push_cast
+      exact le_rfl
+  exact (h1.const_min 1).const_max 0
+
+theorem abs_clamp_sub_le (n : ℕ) (t a : ℝ) :
+    |clamp n (a - t) - (if t < a then 1 else 0)| ≤ |if t < a ∧ (n + 1 : ℝ) * (a - t) < 1 then (1 : ℝ) else 0| := by
+  unfold clamp
+  have hn : (0 : ℝ) < n + 1 := by positivity
+  by_cases hx : t < a
+  · have hpos : 0 < a - t := sub_pos.mpr hx
+    by_cases hx1 : (n + 1 : ℝ) * (a - t) < 1
+    · rw [if_pos hx, if_pos ⟨hx, hx1⟩, min_eq_right hx1.le, max_eq_right (mul_pos hn hpos).le, abs_one, abs_le]
+      constructor <;> nlinarith [mul_pos hn hpos]
+    · rw [if_pos hx, if_neg (fun h => hx1 h.2), min_eq_left (not_lt.mp hx1), max_eq_right zero_le_one]
+      simp
+  · rw [if_neg hx, if_neg (fun h => hx h.1)]
+    have h0 : (n + 1 : ℝ) * (a - t) ≤ 0 := mul_nonpos_of_nonneg_of_nonpos hn.le (sub_nonpos.mpr (not_lt.mp hx))
+    rw [min_eq_right (h0.trans zero_le_one), max_eq_left h0]
+    simp
+
+section
+variable [IsProbabilityMeasure μ] {T : R → Ω → Ω} {hT : ∀ y, MeasurePreserving (T y) μ μ} {l : Filter R}
+
+/-- A superlevel set of an `l`-continuous vector has an `l`-continuous indicator: `1_{f > t}` is the `L²`-limit of the clamps
+of `f − t`. -/
+theorem setOf_lt_mem_factorSets {f : Lp ℝ 2 μ} (hf : f ∈ contVec T hT l) (t : ℝ) :
+    {ω | t < f ω} ∈ factorSets T hT l := by
+  have hfm : Measurable (f : Ω → ℝ) := (Lp.stronglyMeasurable f).measurable
+  have hm : MeasurableSet {ω | t < f ω} := measurableSet_lt measurable_const hfm
+  refine ⟨hm, ?_⟩
+  have hh : f - indicatorConstLp 2 MeasurableSet.univ (measure_ne_top μ Set.univ) t ∈ contVec T hT l :=
+    sub_mem_contVec hf (const_mem_contVec t)
+  set h : Lp ℝ 2 μ := f - indicatorConstLp 2 MeasurableSet.univ (measure_ne_top μ Set.univ) t with hdef
+  have hh_ae : ∀ᵐ ω ∂μ, h ω = f ω - t := by
+    filter_upwards [Lp.coeFn_sub f (indicatorConstLp 2 MeasurableSet.univ (measure_ne_top μ Set.univ) t),
+      indicatorConstLp_coeFn (p := 2) (hs := MeasurableSet.univ) (hμs := measure_ne_top μ Set.univ) (c := t)]
+      with ω h1 h2
+    rw [hdef, h1, Pi.sub_apply, h2]
+    simp
+  let D : ℕ → Set Ω := fun n => {ω | t < f ω ∧ (n + 1 : ℝ) * (f ω - t) < 1}
+  have hDm : ∀ n, MeasurableSet (D n) := fun n =>
+    hm.inter (measurableSet_lt (measurable_const.mul (hfm.sub measurable_const)) measurable_const)
+  have hbound : ∀ n, ‖(lipschitzWith_clamp n).compLp (clamp_zero n) h - indicatorConstLp 2 hm (measure_ne_top μ _) (1 : ℝ)‖ ≤
+      ‖indicatorConstLp 2 (hDm n) (measure_ne_top μ _) (1 : ℝ)‖ := by
+    intro n
+    refine Lp.norm_le_norm_of_ae_le ?_
+    filter_upwards [Lp.coeFn_sub ((lipschitzWith_clamp n).compLp (clamp_zero n) h)
+        (indicatorConstLp 2 hm (measure_ne_top μ _) (1 : ℝ)),
+      (lipschitzWith_clamp n).coeFn_compLp (clamp_zero n) h, hh_ae,
+      indicatorConstLp_coeFn (p := 2) (hs := hm) (hμs := measure_ne_top μ _) (c := (1 : ℝ)),
+      indicatorConstLp_coeFn (p := 2) (hs := hDm n) (hμs := measure_ne_top μ _) (c := (1 : ℝ))] with ω e1 e2 e3 e4 e5
+    rw [e1, Pi.sub_apply, e2, Function.comp_apply, e3, e4, e5, Real.norm_eq_abs, Real.norm_eq_abs]
+    simp only [Set.indicator_apply, Set.mem_setOf_eq, D]
+    exact abs_clamp_sub_le n t (f ω)
+  have hD0 : Filter.Tendsto (fun n => ‖indicatorConstLp 2 (hDm n) (measure_ne_top μ _) (1 : ℝ)‖) Filter.atTop (nhds 0) := by
+    have hanti : Antitone D := by
+      intro n k hnk ω hω
+      refine ⟨hω.1, lt_of_le_of_lt ?_ hω.2⟩
+      have h1 : (n : ℝ) ≤ k := Nat.cast_le.mpr hnk
+      have h2 : 0 < f ω - t := sub_pos.mpr hω.1
+      nlinarith
+    have hInter : ⋂ n, D n = ∅ := by
+      ext ω
+      simp only [Set.mem_iInter, Set.mem_empty_iff_false, iff_false, not_forall]
+      by_cases h1 : t < f ω
+      · obtain ⟨n, hn⟩ := exists_nat_gt (1 / (f ω - t))
+        refine ⟨n, fun h2 => ?_⟩
+        have hpos : 0 < f ω - t := sub_pos.mpr h1
+        rw [div_lt_iff₀ hpos] at hn
+        have := h2.2
+        nlinarith
+      · exact ⟨0, fun h => h1 h.1⟩
+    have h := tendsto_measure_iInter_atTop (μ := μ) (fun n => (hDm n).nullMeasurableSet) hanti ⟨0, measure_ne_top μ _⟩
+    rw [hInter, measure_empty] at h
+    have h' := (tendsto_sqrt_toReal_iff (fun n => measure_ne_top μ (D n))).mpr h
+    simpa [norm_indicatorConstLp_two, measureReal_def] using h'
+  have hlim : Filter.Tendsto (fun n => (lipschitzWith_clamp n).compLp (clamp_zero n) h) Filter.atTop
+      (nhds (indicatorConstLp 2 hm (measure_ne_top μ _) (1 : ℝ))) := by
+    rw [tendsto_iff_norm_sub_tendsto_zero]
+    exact squeeze_zero (fun n => norm_nonneg _) hbound hD0
+  exact (isClosed_contVec T hT l).mem_of_tendsto hlim
+    (Filter.Eventually.of_forall fun n => lipschitz_comp_mem_contVec _ _ hh)
+
+theorem aestronglyMeasurable_of_mem_contVec {f : Lp ℝ 2 μ} (hf : f ∈ contVec T hT l) :
+    AEStronglyMeasurable[factorSigma T hT l] f μ := by
+  have hmeas : Measurable[factorSigma T hT l] (f : Ω → ℝ) :=
+    measurable_of_Ioi fun t => (measurableSet_factorSigma_iff T hT l).mpr (setOf_lt_mem_factorSets hf t)
+  exact hmeas.stronglyMeasurable.aestronglyMeasurable
+
+theorem mem_contVec_of_aestronglyMeasurable {f : Lp ℝ 2 μ} (hf : AEStronglyMeasurable[factorSigma T hT l] f μ) :
+    f ∈ contVec T hT l := by
+  refine Lp.induction_stronglyMeasurable (factorSigma_le T hT l) (by simp) (fun g => g ∈ contVec T hT l) ?_ ?_ ?_ f hf
+  · intro c s hs hμs
+    rw [Lp.simpleFunc.coe_indicatorConst]
+    obtain ⟨hsm, h⟩ := (mem_factorSets_iff T hT l).mp ((measurableSet_factorSigma_iff T hT l).mp hs)
+    exact indicatorConstLp_mem_contVec hsm h c
+  · intro f g hf hg _ _ _ hPf hPg
+    exact add_mem_contVec hPf hPg
+  · exact (isClosed_contVec T hT l).preimage continuous_subtype_val
+
+end
+
+end FactorProofs
 
 /-- **J45-N2 (ii)**: "these `f` form `L²(𝒜)`" — the `l`-continuous vectors are exactly the `𝒜_l`-measurable ones; so the
 orthogonal projection onto them is `E[· | 𝒜_l]` (Mathlib's `condExpL2` is the projection onto `lpMeas`). -/
 theorem contVec_eq_lpMeas [IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (l : Filter R) :
     contVec T hT l = (lpMeas ℝ ℝ (factorSigma T hT l) 2 μ : Set (Lp ℝ 2 μ)) := by
-  sorry
+  ext f
+  rw [SetLike.mem_coe, mem_lpMeas_iff_aestronglyMeasurable]
+  exact ⟨aestronglyMeasurable_of_mem_contVec, mem_contVec_of_aestronglyMeasurable⟩
 
 /-- **J45-N2 (iii)**: "for a translation-invariant σ-algebra" — when the maps commute, `𝒜_l` is invariant under each. -/
 theorem measurableSet_preimage_factorSigma [IsProbabilityMeasure μ] (T : R → Ω → Ω)
     (hT : ∀ y, MeasurePreserving (T y) μ μ) (hcomm : ∀ x y, T x ∘ T y = T y ∘ T x) (l : Filter R) (x : R) {A : Set Ω}
     (hA : MeasurableSet[factorSigma T hT l] A) : MeasurableSet[factorSigma T hT l] (T x ⁻¹' A) := by
-  sorry
+  rw [measurableSet_factorSigma_iff] at hA ⊢
+  obtain ⟨hAm, h⟩ := (mem_factorSets_iff T hT l).mp hA
+  refine (mem_factorSets_iff T hT l).mpr ⟨hAm.preimage (hT x).measurable, ?_⟩
+  have key : ∀ y, μ (symmDiff (T y ⁻¹' (T x ⁻¹' A)) (T x ⁻¹' A)) = μ (symmDiff (T y ⁻¹' A) A) := by
+    intro y
+    have e1 : T y ⁻¹' (T x ⁻¹' A) = T x ⁻¹' (T y ⁻¹' A) := by
+      rw [← Set.preimage_comp, ← Set.preimage_comp, hcomm x y]
+    have e : symmDiff (T y ⁻¹' (T x ⁻¹' A)) (T x ⁻¹' A) = T x ⁻¹' (symmDiff (T y ⁻¹' A) A) := by
+      rw [e1]
+      rfl
+    rw [e, (hT x).measure_preimage ((hAm.preimage (hT y).measurable).symmDiff hAm).nullMeasurableSet]
+  simpa only [key] using h
+
+/-! ### "`Π(E_S) = E[· | 𝒜_S]`": Mathlib's `condExpL2` is the orthogonal projection onto the continuous vectors -/
+
+section
+variable [IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (l : Filter R)
+
+/-- **J45-N2, last clause — "`Π(E_S) = E[· | 𝒜_S]`"**, first of three: Mathlib's `condExpL2` for the factor σ-algebra `𝒜_l`
+takes its values among the `l`-continuous vectors. -/
+theorem condExpL2_mem_contVec (f : Lp ℝ 2 μ) :
+    (condExpL2 ℝ ℝ (factorSigma_le T hT l) f : Lp ℝ 2 μ) ∈ contVec T hT l := by
+  rw [contVec_eq_lpMeas T hT l]
+  exact (condExpL2 ℝ ℝ (factorSigma_le T hT l) f).2
+
+/-- Second: `E[· | 𝒜_l]` fixes exactly the `l`-continuous vectors. -/
+theorem condExpL2_eq_self_iff (f : Lp ℝ 2 μ) :
+    (condExpL2 ℝ ℝ (factorSigma_le T hT l) f : Lp ℝ 2 μ) = f ↔ f ∈ contVec T hT l := by
+  haveI : Fact (factorSigma T hT l ≤ ‹MeasurableSpace Ω›) := ⟨factorSigma_le T hT l⟩
+  have h := Submodule.starProjection_eq_self_iff (K := lpMeas ℝ ℝ (factorSigma T hT l) 2 μ) (v := f)
+  rw [contVec_eq_lpMeas T hT l]
+  exact h
+
+/-- Third: the residual `f − E[f | 𝒜_l]` is orthogonal to every `l`-continuous vector. So `E[· | 𝒜_l]` is the orthogonal
+projection of `L²(μ)` onto the `l`-continuous vectors. -/
+theorem inner_sub_condExpL2_eq_zero (f : Lp ℝ 2 μ) {g : Lp ℝ 2 μ} (hg : g ∈ contVec T hT l) :
+    inner ℝ (f - (condExpL2 ℝ ℝ (factorSigma_le T hT l) f : Lp ℝ 2 μ)) g = 0 := by
+  haveI : Fact (factorSigma T hT l ≤ ‹MeasurableSpace Ω›) := ⟨factorSigma_le T hT l⟩
+  rw [contVec_eq_lpMeas T hT l] at hg
+  exact Submodule.starProjection_inner_eq_zero (K := lpMeas ℝ ℝ (factorSigma T hT l) 2 μ) f g hg
+
+end
 
 /-- The model: under the identity family every vector is continuous along every filter. -/
 theorem contVec_id (l : Filter R) :
@@ -264,5 +624,15 @@ example : contChars (⊥ : TopologicalSpace ℤ) = Set.univ :=
 example (m : Measure (AddChar ℤ Circle)) (hm : IsHaarFourier m) : ∫ χ, (χ 0 : ℂ) ∂m = 1 := by
   haveI := hm.1
   simp
+
+-- `clamp` would drift if its slope or its two cut-offs moved.
+example : clamp 0 (1 / 2) = 1 / 2 := by norm_num [clamp]
+example : clamp 3 1 = 1 := by norm_num [clamp]
+example : clamp 3 (-1) = 0 := by norm_num [clamp]
+
+-- `factorSetsSpace` is the σ-algebra whose measurable sets are exactly `factorSets`.
+example {R Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsFiniteMeasure μ] (T : R → Ω → Ω)
+    (hT : ∀ y, MeasurePreserving (T y) μ μ) (l : Filter R) (A : Set Ω) :
+    MeasurableSet[factorSetsSpace T hT l] A ↔ A ∈ factorSets T hT l := Iff.rfl
 
 end HadwigerNelson.SpectralInputs
