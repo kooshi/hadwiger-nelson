@@ -4338,3 +4338,12 @@ reason by the close.*
      the landing's risk is lower with fewer moving files. Confidence: medium. (e) **The cases' Lean models** are QA4's rank 4, FS131-KM1's.
      (f) **Slot → FS131-M7**, launched 2026-10-06. In flight: 1 (BA1) + 1 (BA2) + 1 (M7) = 3. Queue: the remedy pass (ruling 427 (a), with items
      441 (a)–(b), (e), 450 (c), 434 (d)) on the joined line; the inhabitant `awayModel`; FS131-KM1.
+
+451. **FS131-M7, by message: the second merge meets a conflict its brief did not name, `ARCHITECTURE.md`, resolved keep-both** (source: M7's
+     message to "main", 2026-10-06). Merge 1 (`origin/fs131-w5y` at `3f8270c0`) is committed as `b7a1bd08` and pushed, the two named conflicts
+     kept both, its check over 16,070 files passing with five plants fired. In the trial of merge 2 on top of it (`dd8c2c33`; the base is now
+     `78eba0b4`) the module table conflicts by adjacency: after the `BendStep` row one side added the `ArcStep` row and the other six rows and a
+     rewritten `BendStep` row. M7 takes the skeleton's seven rows, then the `ArcStep` row — every added line once — checked by its merge check
+     and by `tools/check_architecture.py`. **No objection; no reply sent** (it asked for none). **A slip, mine**: the brief's "a trial of each
+     shows two conflicts" came from trialling each merge against `fs131-w5c` alone; I did not trial the second on top of the first, where the
+     base differs. Cost: one message. For the later merges of `fs131-w5a` and `fs131-w5z`, trial them in the order they will be made.
