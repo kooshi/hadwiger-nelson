@@ -31,6 +31,8 @@ T={
    special="The wave's table row names its hypothesis from outside the backlog: row 130's conclusion, `χ(ℝ²) = χ_m⁰(ℝ²)`, for the two rows that end \"hence χ(ℝ²) ≥ 6\" given measure rigidity. It enters as a named hypothesis (`Row130Collapse`, as the plan's § 7.4 has it), never an axiom; Kooshi has ruled that measure rigidity itself is not formalized or priced now (inventory item 488), so do not open it. Every \"given MR\" in a row is read for what it hides beyond that one hypothesis."),
 }[N]
 TREE="fs131-w"+N; JOB="FS131-K"+N
+CUT=("cut from `main` at `e6e7b312` and fast-forwarded to `"+TIP+"`, wave 7's commit that adds the shared module `SimpleOn`") if N in ("8","9") else ("cut from `main` at `"+TIP+"`")
+BUILDX="; the build copied into your tree predates the shared module `SimpleOn`, so this first build compiles it" if N in ("8","9") else ""
 if N in ("8","9"):
     assert SHASH, "give the hash of fs131-w7's SimpleOn commit: mk-kw.py "+N+" <hash>"
     SIMPLE=f"""
@@ -39,12 +41,13 @@ if N in ("8","9"):
 a fragment is simple *on a set* — `ArcMap.SimpleOn S`: every tile whose closure meets `S` is a Jordan domain, and the closures of two such
 tiles meet in a preconnected set — with the landed `ArcMap.Simple` untouched and `Simple.simpleOn`, `simpleOn_univ`, `simpleOn_ball_iff`
 proved beside it, so a row stated with `SimpleOn` implies the row as filed. It lives in one module on that planner's branch
-(`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/SimpleOn.lean`). **Take it by `git merge {SHASH}` into
-your branch as your first act after the readback** — the one exception to "you do not merge another branch": one module, declared once —
-and state a class on a fragment with `F.SimpleOn (closedBall p R)`. Never re-declare the predicate or its lemmas (`LEAN.md` § Searching —
+(`fs131-w7`), **and it is already in yours**: your branch was fast-forwarded by the coordinator to that planner's commit `{SHASH}`, which holds
+the module (`/home/kooshi/source/lean-dir/.claude/worktrees/{TREE}/Proofs/HadwigerNelson/Plane/SimpleOn.lean`, no `sorry`, built there) and
+nothing else of its work but its stage-1 record and one build log — one module, declared once, on both branches by ancestry. State a class
+on a fragment with `F.SimpleOn (closedBall p R)`; the module's statements are fixed (that planner builds on them too). Never re-declare the predicate or its lemmas (`LEAN.md` § Searching —
 Lean, last bullet); a row whose argument reads a tile off the disc after all is a message to me. That planner did not take a purely local
 form: the second clause is about two whole closures."""
-    NOMERGE=f"You merge nothing into this branch but the one commit named above (`{SHASH}`); you do not run the gate or touch `main`."
+    NOMERGE="You do not merge another branch into this one, run the gate, or touch `main`."
 else:
     SIMPLE=""
     NOMERGE="You do not merge another branch into this one, run the gate, or touch `main`."
@@ -67,7 +70,7 @@ brief: {JOB}
   channel: message the coordinator ("main") by SendMessage mid-job for a statement defect in a row (at once, with the entry's address: it goes to a deriver), a definition you fix that another wave's planner reads, a generalization or a shorter route, an outside theorem you would import, a row that cannot be stated at the class its argument reads, or a question you cannot work around; the report goes to `data/fs131/reports/{JOB}.md` on your branch, and its text is your final message (if the harness refuses that file, say so and the coordinator files it from your hand-back)
   standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full (§ The gate: the inhabitant rule and the doubled-name check; § Searching — Lean, last bullet: two branches never state one lemma under one name), and `RUNNING.md` § Building before your first build
   record: `plans/FS131-w{N}-kernel-plan.md` (new, on branch `{TREE}`)
-  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/{TREE}` (branch `{TREE}`, cut from `main` at `{TIP}`): new modules under {T["layout"]} — the layout is yours — with `Proofs.lean` and `ARCHITECTURE.md` for them; **new declarations only** in landed modules (no statement, definition or docstring of a landed declaration is edited); `scripts/Axioms.lean` (a block of your own, headed "{JOB}", above the `=== PURCHASED ===` banner), `plans/FS131-w{N}-kernel-plan.md`, `tools/fs131_k{N}_*.py`, `data/fs131/k{N}/`, `data/fs131/reports/{JOB}.md`; **not** `main`, another wave's branch, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/{TREE}` (branch `{TREE}`, {CUT}): new modules under {T["layout"]} — the layout is yours — with `Proofs.lean` and `ARCHITECTURE.md` for them; **new declarations only** in landed modules (no statement, definition or docstring of a landed declaration is edited); `scripts/Axioms.lean` (a block of your own, headed "{JOB}", above the `=== PURCHASED ===` banner), `plans/FS131-w{N}-kernel-plan.md`, `tools/fs131_k{N}_*.py`, `data/fs131/k{N}/`, `data/fs131/reports/{JOB}.md`; **not** `main`, another wave's branch, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`
   budget: {BUDGET}
 
 Hello. You are opening wave {N} of the Lean backlog. The milestone, FS-131, turns this project's hand-derived results into kernel-checked ones:
@@ -112,7 +115,7 @@ foundation and its hypotheses from outside:
    row's entry in `plans/LEAN-BACKLOG.md` and its derivation entry in full, with errata; what `Proofs/HadwigerNelson/Plane/` already holds
    that the rows reuse (read `ARCHITECTURE.md`'s rows for waves 3–5 and for `Proofs/HadwigerNelson/Plane/Models/`). Register, before reading the derivations
    closely, which rows you expect to be short, which to need an outside theorem, and which to hide a statement defect. Build the branch once
-   as given (no `sorry`). Open your record. Commit and push.
+   as given (no `sorry`{BUILDX}). Open your record. Commit and push.
 2. **The dispositions**: for each row — the statement at the class its argument reads (G92), what it rests on inside the backlog, every
    hypothesis from outside it (named, with `LEAN.md` § Assumptions' four items for an imported theorem; formalize anything that is about an
    hour of work), and whether it is a theorem, a named-hypothesis implication, or a certified computation (`LEAN.md` § The kernel's cost

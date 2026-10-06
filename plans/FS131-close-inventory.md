@@ -5362,3 +5362,15 @@ reason by the close.*
      until `negCircle_trivial_bot` lands (I10F). (e) The join's list is its record's § 9.4, with rulings 494 (a) and 507 (a), (d).
      (f) **Slot → FS131-I6A** (wave 6's `Pinch`, seven leaves, on `fs131-w6p`): wave 8's planner is next in the order but waits
      for wave 7's planner to send the commit of the shared module (item 508). In flight: 1 (K7) + 1 (I10C) + 1 (I6A) = 3.
+
+511. **FS131-K7, by message: the shared module is whole at `611ffa39` on `fs131-w7`; waves 8 and 9 hold it by ancestry** (source: K7's
+     message to "main", 2026-10-06). **My receipt**: `611ffa39` is an ancestor of `origin/fs131-w7`; from `e6e7b312` it adds
+     `Proofs/HadwigerNelson/Plane/SimpleOn.lean` (157 lines, 0 `sorry` by the handoff's grep), one line of `Proofs.lean`, one row of
+     `ARCHITECTURE.md`, 13 lines of `scripts/Axioms.lean`, and K7's stage-1 record with one build log; the definition read at ll.
+     46–49 — as item 508 has it; `Simple.simpleOn`, `simpleOn_univ`, `SimpleOn.mono`, `simpleOn_ball_iff`, the two cone facts, an
+     inhabitant (`halfDisc_simpleOn`) and a refuting lemma (`not_simpleOn_of_not_jordan`) found by name. Not checked by me: its build
+     log (the artifact at K7's hand-back). **Done, mine**: `fs131-w8` and `fs131-w9` — both untouched at `e6e7b312`, no job in them —
+     fast-forwarded to `611ffa39` and pushed, so the module is one file on three branches by ancestry and nobody re-declares it;
+     their planners' briefs regenerated with it (`mk-kw.py 8 611ffa39`, `9 611ffa39`), each gate PASS. Alternative weighed: each
+     planner merges the commit itself. Why mine: the branches were empty, a fast-forward cannot conflict, and a planner's brief
+     then needs no exception to "you do not merge".

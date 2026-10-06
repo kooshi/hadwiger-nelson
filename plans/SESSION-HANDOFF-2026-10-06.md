@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–510 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–511 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -43,7 +43,7 @@ planted-picture models land (queue item 2).
 | job | tree and branch | what | brief | on its hand-back |
 |---|---|---|---|---|
 | **FS131-I10C** | `.claude/worktrees/fs131-w10c`, `fs131-w10c` (from the planner's `f919973e`) | wave 10, implementer C: `Arith/StandingFive`'s nine leaves and one certificate (I10A and I10B are done, items 493–494, 506–507: three of the wave's four files hold no `sorry`, on `fs131-w10` at `ace98a35` and `fs131-w10b` at `423cd8e8`) | `data/fs131/briefs/FS131-I10C-wave10.md` | then, when K10b is back too: **the wave's joining job** — merge `fs131-w10`, `fs131-w10b`, `fs131-w10c` and K10b's `fs131-w10k` into one line; drop the unread arguments (rulings 494 (a), 507 (a): I10A's two, I10B's seven, each row keeping its name on the general statement); add `StationarySet` to the vacuity scan's carriers; `dupnames`; the drafts in the three implementers' records; then implementers for K10b's rows |
-| **FS131-K7** | `.claude/worktrees/fs131-w7`, `fs131-w7` (from `main` at `e6e7b312`) | wave 7's planner: the twenty rows on four-colour vertices (route T's count, bowties and lunes, pinwheels) | `data/fs131/briefs/FS131-K7-wave7.md` | **its decision on the word "simple" is in and adopted (item 508: `ArcMap.SimpleOn S`, a module of its own)**; it was asked to commit that module alone after a build and **send the hash** — then, before launching K8 or K9, regenerate their briefs with it: `python3 data/fs131/briefs/scripts/mk-kw.py 8 <hash>` (and `9 <hash>`), re-gate; each merges that one commit first. Do not launch K8 or K9 on the briefs as committed. Implementers by file as K7's handoff says. (E8's check is done, items 504–505: the planner's statements of the bridge stand; E8 is past its line.) |
+| **FS131-K7** | `.claude/worktrees/fs131-w7`, `fs131-w7` (from `main` at `e6e7b312`) | wave 7's planner: the twenty rows on four-colour vertices (route T's count, bowties and lunes, pinwheels) | `data/fs131/briefs/FS131-K7-wave7.md` | **its decision on the word "simple" is in and adopted (item 508: `ArcMap.SimpleOn S`, a module of its own)**; the module is whole at `611ffa39` (item 511), **`fs131-w8` and `fs131-w9` are fast-forwarded to it, and K8's and K9's briefs are regenerated and gated** — both are ready to launch. Implementers by file as K7's handoff says. (E8's check is done, items 504–505: the planner's statements of the bridge stand; E8 is past its line.) |
 | **FS131-I6A** | `.claude/worktrees/fs131-w6p`, `fs131-w6p` (from the foundation's `3928644b`) | wave 6, the pinch: `Plane/Saturated/Pinch`'s seven leaves | `data/fs131/briefs/FS131-I6A-wave6.md` | review, log; its branch joins wave 6's line with the other implementers' at the wave's join. (**K10b is done**, items 509–510: `fs131-w10k` at `330d2f48` — the floor stated as two rows, eleven leaves in six new modules; three implementers are **ready, briefs gated, trees made** at `330d2f48`: FS131-I10D (`NormOneTarget`, `FloorPlanes`; tree `fs131-w10d`), I10E (`Floor128`; `fs131-w10e`), I10F (`ProductFactor`, `MajorityVote`, `NegCircleModel`; `fs131-w10f`) — `data/fs131/briefs/FS131-I10D-wave10-second.md`, `-I10E-`, `-I10F-`, generator `mk-i10d.py D|E|F`; **not written**: FS131-K10c, from `mk-k10b.py`'s pattern and K10b's §§ 8.3, 8.4, 8.7.) |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. If the session restarted, resume a job from its record's last SAVED stage with
@@ -56,7 +56,7 @@ a fresh agent on the same brief.
    takes a second named hypothesis, the finite-target floor; FS89-S0A-10 takes its band's order bound as a hypothesis). In order, as slots free: **FS131-K6b is running** (§ 3; E8 handed back, items 491–492: nine entries derived, its stub lines filed, its errata held for the filing);
    next into free slots:
    **the order, planners and implementers alternating (rulings 495 (d), 497; a planner's hand-back is what implementers wait on, and planners
-   find the statement defects): K8 and K9 (each once K7's hash is in), I6B, K6c, I6C, I10D, I6D, I10E, I6E, I10F, then K10c, MD1, MD2 (these three not written)** (rulings 502, 505, 507, 510; K7, I10C and I6A are running). **Also ready, briefs gated**: FS131-K6c (wave 6's third planning pass, on `fs131-w6` itself, new modules only;
+   find the statement defects): K8, I6B, K9, K6c, I6C, I10D, I6D, I10E, I6E, I10F, then K10c, MD1, MD2 (these three not written)** (rulings 502, 505, 507, 510; K7, I10C and I6A are running). **Also ready, briefs gated**: FS131-K6c (wave 6's third planning pass, on `fs131-w6` itself, new modules only;
    `data/fs131/briefs/FS131-K6c-wave6-third.md`, generator `mk-k6c.py`), FS131-I6C (`Curve` then `LocalGraph`, tree `fs131-w6c`) and FS131-I6D
    (`FanBridge`'s existence half with `sq9.SingLocallyFinite`, tree `fs131-w6f`; `data/fs131/briefs/FS131-I6C-wave6-bridge.md`, `FS131-I6D-wave6-bridge.md`,
    generator `mk-i6b.py C|D`; both trees cut from `32f2ab4c`). FS131-I6E (`FanBridge`'s five `Fan` lemmas, tree `fs131-w6g` from `32f2ab4c`;
@@ -167,7 +167,8 @@ a fresh agent on the same brief.
 | `fs131-w6c`, `fs131-w6f`, `fs131-w6g` | `32f2ab4c` | made for FS131-I6C (`Curve`, `LocalGraph`), FS131-I6D (`FanBridge`'s existence half) and FS131-I6E (its five `Fan` lemmas); builds copied from `fs131-w6` |
 | `fs131-w10b` | `423cd8e8` | idle: `StationaryRatio` proved (item 506) |
 | `fs131-w10k` | `330d2f48` | idle: wave 10's second planning pass — ten new modules, eleven leaves (item 509); its implementers' branches are cut from it |
-| `fs131-w7`, `fs131-w8`, `fs131-w9` | `e6e7b312` | made for the planners of waves 7–9; builds copied from `fs131-wmb` |
+| `fs131-w7` | moving (K7) | wave 7's plan; `Plane/SimpleOn` whole at `611ffa39` |
+| `fs131-w8`, `fs131-w9` | `611ffa39` | made for K8 and K9, fast-forwarded to wave 7's shared-module commit; builds copied from `fs131-wmb` (the first build compiles `SimpleOn`) |
 | `fs131-w10c` | moving (I10C; from `f919973e`) | `StandingFive` in progress |
 
 ## 8. Held for the milestone's filing
