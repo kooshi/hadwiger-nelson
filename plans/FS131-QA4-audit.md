@@ -92,9 +92,9 @@ Outputs (committed): `data/fs131/qa4/theorems.tsv` (2,590 theorems), `heads.tsv`
 
 | body | modules | theorems | row or construction heads | cited from another module only | refutation-shaped | with `sorry` | docstring speaks of an inhabitant |
 |---|---|---|---|---|---|---|---|
-| `main` (`d4403f09`) | 18 | 1,563 | 139 | 468 | 32 | 0 | 26 |
-| wave 5 (`3b120cd3`) | 17 | 775 | 111 | 172 | 23 | 5 | 48 |
-| wave 5c (`87e95385`) | 4 | 252 | 68 | 5 | 7 | 4 | 50 |
+| `main` (`d4403f09`) | 18 | 1,563 | 145 | 462 | 32 | 0 | 26 |
+| wave 5 (`3b120cd3`) | 17 | 775 | 129 | 154 | 23 | 5 | 48 |
+| wave 5c (`87e95385`) | 4 | 252 | 44 | 29 | 7 | 4 | 50 |
 | total | 39 | 2,590 | 318 | 645 | 62 | 9 | 124 |
 
 Definitions: 319, of which 108 are Prop-valued (predicates and structures); **28 Prop-valued definitions are new or changed since the commits QA2
@@ -116,3 +116,6 @@ and QA3 read** (27 NEW, 1 CHANGED: `IsHoleOf`, item 242's repair); they are tabl
 The census is textual. Its two known blind spots, both in the safe direction for a head count and not for an inhabitant verdict, so every
 verdict below is from reading the statement itself: a hypothesis that is not a named predicate (an inline `∀ᶠ`, a cone's interior) is invisible
 to the predicate column; and "the docstring speaks of an inhabitant" matches the words, not the claim.
+
+*Slip, my own, corrected in the next commit*: the three per-body rows of § 2.2 were first written from an estimate (139/468, 111/172, 68/5);
+the table now holds the script's counts. The totals were right.
