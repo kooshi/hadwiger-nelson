@@ -7550,3 +7550,19 @@ reason by the close.*
      the shared checker's list: the notes check's wrapper is the working-tree one; the step does not report a
      former proved only at instances. (g) **Slot → FS131-I8D** (wave 8's `SemiHubPlaces` with `outerAdj`, on
      `fs131-w8d` at `6e0cf10d`), launched 2026-10-06. In flight: 3 (I7M, I8C, I8D). **No landing is in flight.**
+592. **FS131-I8D, by message mid-job: a statement defect — five statements of `SemiHubPlaces` read "exactly four colours at `p`" and were stated with "at least four", which is four only at six colours** (source: I8D's message to "main", 2026-10-06 — the artifact is read at its hand-back).
+     `crossed_four`, `crossed_changePoint`, `crossed_semiHub`, `semiHub_places` and the planner's `transferQC` carry
+     `(h4 : 4 ≤ (F.coloursAt p).ncard) (hk : k ≤ (F.coloursAt p).ncard + 2)` over a general `k`; wave 3's
+     `germS_absent` gives two colours absent at a change point, so `k − 2` present: four at `k = 6`, five at
+     `k = 7`. Its Lean remark (elaborated, in its scratch): under `crossed_four`'s hypotheses the conclusion forces
+     `k = 6` — so at `k ≥ 7` the leaf claimed that no such change point exists, which no row does. Unprovable as
+     stated, not shown false (no map at `k = 7` is held). `outerAdj` is unaffected; it proved `crossed_no_tip` and
+     `crossed_outer` meanwhile and is proving each affected leaf's content under a name of its own. **Read by me**
+     in its tree: the five statements have `4 ≤`, and `crossed_no_tip` has `= 4`. **Ruling**: **its form (i) —
+     `(h4 : (F.coloursAt p).ncard = 4)` in the five, `hk` kept.** Alternative: `{F : ArcMap 6}`. Why (i): the
+     smaller change, the form its two proved leaves and the sibling module's star rows already have, and `k` stays
+     free for the join. Confidence: high. Its statement check must show exactly five declarations changed by that
+     one binder; a sixth is a message first. Reply sent, one message. **For the planner's record** (K8b, its own
+     registered expectation was "no statement defect in a row"): the defect is in the skeleton's binders, not the
+     rows — the second of this wave's (item 568 was the first); both were caught by an implementer at its first
+     leaves. An erratum is not owed to the rows; a line for the wave's landing.
