@@ -331,3 +331,67 @@ the wave's final sync, when its gate passes — each slot named, nothing filed b
 - **`BendStep.lean`'s module header** (not mine to edit): "`CollarFit.map_hornCount_le`, open: its children are …" → "proved, over
   `hornCount_le_of_collarBend` (`Plane/ValidMap/BendGap`)".
 - **Frontier line, Proof Atlas**: no change owed by this job alone — the wave's closing filing carries them.
+
+---
+
+# FS131-BA3 — the outward bend's last two children (the successor's stages, from 5)
+
+*de Bruijn, the implementer, on branch `fs131-w5z` (at `dae3d93e` when the job began). Brief:
+`data/fs131/briefs/FS131-BA3-bend-away-mirrors.md` (on `main`'s tree). Working files: `data/fs131/ba3/`. Tools: `tools/fs131_ba3_*.py`.
+The stages above are FS131-BA2's and are not redone.*
+
+## Stage 5 — SAVED (FS131-BA3): the readback, the as-given build, what I may and may not change
+
+### 5.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_ba3_quotes.py` (BA2's checker under this job's prefix) on the brief: **13 quotations, 0 failures**, exit 0
+(`data/fs131/ba3/quotes.txt`); its self-test plants a one-letter change in the first quotation and exits non-zero naming it
+(`data/fs131/ba3/quotes-selftest.txt`: "13 quotations, 1 failures", "SELF-TEST: FIRED (good)"). No mismatch.
+
+### 5.2 Read for this job
+
+- The brief; `plans/STANDING-RULES.md`; `LEAN.md` in full; `RUNNING.md` § Building and § Make the gate fail, and watch it fail.
+- This record whole (BA2's Stages 1–4, § 4.6 the work list); BA1's record §§ 3–4 (`plans/FS131-BA1-implementation.md` on `fs131-w5a`);
+  the planner's § 2 (`plans/FS131-bendaway-kernel-plan.md` on `fs131-w5a`: § 2.1, R1 at a pinch, and §§ 2.2–2.6).
+- `BendCollar.lean` l. 56–172 and 855–1290 whole (`isClosed_closedLens`, `lens_subset_closedLens`,
+  `mem_closure_region_inter_iff_of_agree`, `collarK_frame`, `side_core`, `exists_one_side`, `homeo_mem_collarK`, `sides_end`,
+  `sides_eq`, `map_R1`, `map_R2`, `map_R3`); `CollarMapOut.lean` whole; `LensOut.lean` by its definitions and statements;
+  `BendGap.lean` l. 868–1101 whole (the fit, the access lemmas, the two open children, the assembly).
+
+### 5.3 The as-given build (`dae3d93e`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`: **OK — all 1795 modules already up to date, nothing
+built, 3 modules with warnings, exit 0** (`build/gate/build/20261006T074220Z-2259178.log`; driver log `data/fs131/ba3/build0.log`).
+**5 distinct `declaration uses sorry` warnings**, as the brief expects: `BendGap` 2 (l. 984 `CollarFitOut.map_R1`, l. 989
+`CollarFitOut.map_R2`), `Procedure` 2, `Terminal` 1.
+
+### 5.4 What I may and may not change
+
+- **Mine to prove**: `CollarFitOut.map_R1`, `CollarFitOut.map_R2` (`BendGap.lean`).
+- **Mine to change, exactly as ruled** (inventory ruling 457 (b)): `hasHornCount_zero_of_two_spheres` loses `hρ`, `hρ'`;
+  `hasHornCount_iff_of_germ_swap` loses `hκ`; `CollarFitOut.map_hornCount_le` loses `hF` — each with its calls, which a search of
+  `Proofs/` and `scripts/` puts in `HornChart` and `BendGap` alone (one call each: `BendGap` l. 658, l. 561, l. 1080).
+- **May**: new helpers as new declarations in `BendGap.lean`; a block "FS131-BA3" in `scripts/Axioms.lean` above
+  `=== PURCHASED ===`; this record; `tools/fs131_ba3_*.py`; `data/fs131/ba3/`; the report.
+- **May not**: any other statement or definition, anywhere; `BendStep.lean` (its horn child keeps `hF`); `LensOut`, `CollarMapOut`,
+  `BendAway`; the toward bend's modules (a helper a mirror needs is a new declaration in `BendGap`); `Procedure.lean`, `Terminal.lean`;
+  `main`; a merge; the gate. No `axiom`, no `native_decide`.
+
+### 5.5 The statement check, armed
+
+`tools/fs131_ba3_stmt.py` — BA1's pinned-rewrite checker under this job's prefix: base `dae3d93e`, `EDITABLE` = `HornChart`,
+`BendGap`; the three ruled names must each equal the base statement with exactly the ruled rewrite; every other file under `Proofs/`
+byte-identical to the base. At the tree as given: `--before-ruled` (no statement may differ) **0 failures over 1,795 base files**
+(`data/fs131/ba3/stmt-stage1.txt`); the pinned form is **red on exactly the three ruled names**, as it must be before the removals
+(`data/fs131/ba3/stmt-stage1-pinned-red.txt`: a ruled change left undone fails). Its `--self-test` is run at Stage 6, on the tree the
+removals leave.
+
+### 5.6 The route I take for the mirrors (BA2's § 4.6, with two changes of mine)
+
+1. `exists_one_side` **stated once for the collar set** (`collarK_one_side`: `1/2 < R'`, `1 < R''`, an arc of at most 60°), since the
+   toward proof reads the fit through nothing else; the outward form is then one line.
+2. `map_R1` **through `sides_eq`**, not by repeating its case split as the toward proof does: R1's point is on `F.Γ`
+   (`ringArc_subset_Γ_of_finite`), off the open arc (the open arc is interior in the bent map: `map_lens` at `t = 1`), and at an end
+   `Q ≠ P` for the same reason — which are `sides_eq`'s three hypotheses.
+
+## Stage 5 — SAVED (FS131-BA3)

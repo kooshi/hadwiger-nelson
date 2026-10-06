@@ -1,0 +1,14 @@
+verbatim  CLAUDE.md  «Do not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-close-inventory.md  «456. **FS131-BA2 done at its Stage 4: 14 of the outward bend's other 1»
+verbatim  FS131-close-inventory.md  «457. **Rulings on BA2's held items, and its slot.** (a) **The two mirr»
+verbatim  FS131-close-inventory.md  «454. **FS131-BA1 done: the outward bend's lens, map and composition ar»
+verbatim  FS131-close-inventory.md  «445. **FS131-KA1 done: the outward collar bend planned — its statement»
+verbatim  BendGap.lean  «theorem CollarFitOut.map_R1 (hF : F.Valid) (hfit : CollarFitOut F P θ₁»
+verbatim  BendGap.lean  «theorem CollarFitOut.map_R2 (hF : F.Valid) (hfit : CollarFitOut F P θ₁»
+verbatim  BendCollar.lean  «theorem CollarFit.map_R1 (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c »
+verbatim  BendCollar.lean  «theorem CollarFit.map_R2 (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c »
+verbatim  FS131-BA2-implementation.md  «### 4.6 What is left, and its route for a successor»
+verbatim  HornChart.lean  «theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx»
+verbatim  HornChart.lean  «theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀»
+verbatim  BendGap.lean  «theorem CollarFitOut.map_hornCount_le (hF : F.Valid) (hfit : CollarFit»
+13 quotations, 0 failures
