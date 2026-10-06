@@ -5102,3 +5102,17 @@ reason by the close.*
      two unapplied lines join the tidy moves. (d) **Waves 7–9's planners can now be cut from `main`**, which holds the example maps.
      (e) **Slot → FS131-K10b** (wave 10's second planner, ruling 495 (d)), launched 2026-10-06. In flight: 1 (K6b) + 1 (I10B) + 1
      (K10b) = 3. Kooshi notified of the landing.
+
+498. **The planners of waves 7, 8 and 9 are prepared, and can run at once: no wave among 6–9 waits on another but for four named rows**
+     (mine; 2026-10-06). Read from the backlog's own `needs` tags and the dispositions file by
+     `data/fs131/briefs/scripts/wave-deps.py`: wave 7 rests on waves 3, 4, 5; wave 8 on waves 1, 3, 4 and, in three rows
+     (FS116-N3-STAR2, FS116-N3-CROSS, FS116-RING-TRANSFER-QC), on wave 7's FS114-N7-QOPP; wave 9 on waves 1–5 and, in one row
+     (FS129-SR3-QFREE-NS), on wave 8's FS129-SR3-EMPTY-NS; none of 7–9 rests on wave 6. **Ruled**: each planner takes the one upstream
+     row of a wave not yet in Lean as a named hypothesis under a name of its own (`LEAN.md`'s rule on two branches and one lemma); the
+     join replaces it. Alternative: plan 7, then 8, then 9 in sequence. Why: three planners' hand-backs are what the implementers of
+     three waves wait on, and four hypotheses discharged at a join cost a few lines each. Confidence: high on the independence (the
+     tags are the plan's own checker's input), medium on the tags being complete — a planner that finds an untagged dependence says
+     so. Worktrees `fs131-w7`, `fs131-w8`, `fs131-w9` cut from `main` at `e6e7b312`, builds copied from `fs131-wmb`, pushed; briefs
+     `data/fs131/briefs/FS131-K7-wave7.md`, `FS131-K8-wave8.md`, `FS131-K9-wave9.md`, generator `mk-kw.py 7|8|9`, each gate PASS.
+     Wave 7's brief carries the plan's open word "simple" (a fragment's tiles that cross the domain's boundary) as that planner's
+     decision, to be relayed to wave 8's.

@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–497 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–498 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -58,7 +58,9 @@ a fresh agent on the same brief.
    **in this order (rulings 495 (d), 497): FS131-I10C** (`debruijn-implementer`, `model: "opus"`; § 3's I10B row);
    **FS131-I6A** (`Pinch`'s seven leaves, on `fs131-w6p`) and **FS131-I6B** (`MapColouring`'s `sat_inP` and its Lean model, on `fs131-w6m`) — both
    implementers, briefs gated (`data/fs131/briefs/FS131-I6A-wave6.md`, `FS131-I6B-wave6.md`; generator `mk-i6.py A|B`), trees made at `3928644b`;
-   **the planners of waves 7–9** (each on a branch cut from `main`, which now holds the example maps; brief from `mk-k6.py`'s pattern); **FS131-MD1**
+   **the planners of waves 7–9, FS131-K7, K8, K9** (`debruijn`; **briefs gated, trees made** at `e6e7b312` — `data/fs131/briefs/FS131-K7-wave7.md`,
+   `FS131-K8-wave8.md`, `FS131-K9-wave9.md`, generator `mk-kw.py 7|8|9`; item 498: they are independent but for four named rows, so launch K7
+   before K8, and **relay K7's decision on the word "simple" to K8**); **FS131-MD1**
    (`stuckModel.IsTerminalMap` whole; MC1's record § 3.2 is its work list) and **FS131-MD2** (`IsClean` for `hornModel`, the contact fact at
    `stuckModel`'s vertex, a named `CollarFitOut` on `awayModel`'s gap) — ruling 497 (b), briefs not written. Then:
    (i) **the example maps' landing** — running as FS131-MC1 (§ 3); it was: the landing job when FS131-MB2 is back — merge `fs131-wm` and `fs131-wmb` (MB2 is
@@ -159,6 +161,7 @@ a fresh agent on the same brief.
 | `fs131-w6p`, `fs131-w6m` | `3928644b` | made for FS131-I6A (`Pinch`) and FS131-I6B (`MapColouring`); builds copied from `fs131-w6` |
 | `fs131-w10b` | moving (I10B) | cut from `f919973e`; its build was copied from `fs131-wop` |
 | `fs131-w10k` | moving (K10b; from `ace98a35`) | wave 10's second planning pass, new modules only |
+| `fs131-w7`, `fs131-w8`, `fs131-w9` | `e6e7b312` | made for the planners of waves 7–9; builds copied from `fs131-wmb` |
 | `fs131-w10c` | `f919973e` | made for FS131-I10C; build copied from `fs131-wop` (so its first build compiles wave 10's four modules) |
 
 ## 8. Held for the milestone's filing
