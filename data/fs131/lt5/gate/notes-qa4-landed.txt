@@ -1,0 +1,125 @@
+main	LocalStructure	4969	halfDisc_sectorChart		halfDisc	
+main	SVMap	1356	sevenBrick_corner_isCubicTrichromatic			NO-OBJECT
+main	Basic	661	const_isSector_ball			NO-OBJECT
+main	Sectors	431	halfDisc_simple		halfDisc	
+main	BaseSteps	1283	pair_i	Covers	sevenBrick	
+main	BaseSteps	1304	pair_ii	Covers	sevenBrick	
+main	BaseSteps	1384	pair_P'		sevenBrick	
+main	BaseSteps	1433	fail_leavingCentre	Covers	sevenBrick	
+main	BaseSteps	1580	anti	Covers	sevenBrick	
+main	Contact	2038	stuck_pole_N	Covers,Condition5		NONE-SAID
+main	Contact	2314	stuck_structure_flanks	Covers,Condition5		NONE-SAID
+main	Contact	2622	stuck_structure	Covers,Condition5		NONE-SAID
+main	Contact	2645	stuck_neighbour	IsPlaneMap,Condition5		NONE-SAID
+main	Contact	2694	stuck_flip	IsPlaneMap,Condition5		NONE-SAID
+main	Contact	2707	stuck_step	IsPlaneMap,Condition5		NONE-SAID
+main	Contact	2734	stuck_chain	IsPlaneMap,Condition5		NONE-SAID
+main	Cone	1642	shaveAvailable_of_adjacent_horns			NONE-SAID
+main	OpenMove	2847	exists_open	Covers		NONE-SAID
+main	Basic	320	const_sectorsAt			NO-OBJECT
+main	Basic	578	threeSectorDisc_woodallMerged		threeSectorDisc	
+main	Basic	585	threeSectorDisc_woodallNormal		threeSectorDisc	
+main	Basic	686	halfDisc_niceAt		halfDisc	
+main	Steps	1099	sevenBrickMap_woodallNormal		sevenBrick	
+main	Steps	1106	sevenBrickMap_woodallMerged		sevenBrick	
+main	Steps	1118	sevenBrickMap_woodallModel		sevenBrick	
+main	Steps	1127	sevenBrickMap_thm6Model	IsPlaneMap	sevenBrick	
+w5	CurveGraph	1209	halfLine_hasCurveStar			NO-OBJECT
+w5	Thomassen	1257	lemma1		triLattice	
+w5	Thomassen	1513	triLattice_hyps			NO-OBJECT
+w5	Thomassen	1674	triLattice_planarLike			NO-OBJECT
+w5	MapGraph	1446	IsEdgeOf.disjoint_closure_ball			NO-OBJECT
+w5	MapGraph	1472	IsBoundaryWalk.exists_piece			NO-OBJECT
+w5	MapGraph	4116	cvb_thom_reduced	IsPlaneMap	sevenBrick	
+w5	MapGraph	4125	cvb_thom	IsPlaneMap	sevenBrick	
+w5	MapGraph	4133	cvb_pinch_connected	IsPlaneMap	sevenBrick	
+w5	Chain	175	IsModification.refl			NO-OBJECT
+w5	Chain	231	const_qrOnly			NO-OBJECT
+w5	Cor3	263	exists_tangent_colour		sevenBrick	
+w5	Cor3	298	cor3_half			NONE-SAID
+w5	Cor3	344	cor3_at			NONE-SAID
+w5	Cor3	447	cor3_local			NONE-SAID
+w5	Cor3	478	cor3	Covers		NONE-SAID
+w5	Dense	259	disc1ts	IsPlaneMap	sevenBrick	
+w5	Dense	278	exists_three_le_coloursAt_square		sevenBrick	
+w5	Dense	320	disc1_local	Covers	sevenBrick	
+w5	FlankUA	57	shadow_of_not_shave		bowtie	
+w5	FlankUA	78	not_outType_N_of_flankAbove_one	Covers	bowtie	CONFLICT:Covers
+w5	FlankUA	104	not_outType_S_of_flankBelow_neg_one	Covers	bowtie	CONFLICT:Covers
+w5	FlankUA	132	srcG_of_shadow	Covers	bowtie	CONFLICT:Covers
+w5	FlankUA	180	srcH_of_shadow	Covers	bowtie	CONFLICT:Covers
+w5	FlankUA	254	region_near_of_inType	Covers	bowtie	CONFLICT:Covers
+w5	FlankUA	311	flank_ne_of_shadows	Covers	bowtie	CONFLICT:Covers
+w5	FlankUA	345	exists_isRingArc_of_onRingArc			NO-OBJECT
+w5	FlankUA	380	horn_radial_N		bowtie	
+w5	FlankUA	557	horn_poles_contact	Covers	bowtie	CONFLICT:Covers
+w5	FlankUA	667	IsRingArc.coloursAt_eq			NO-OBJECT
+w5	FlankUA	703	IsFlankAbove.unique		bowtie	
+w5	FlankUA	715	horn_bounds_of_noMerge	Covers	bowtie	CONFLICT:Covers
+w5	FlankUA	737	hasSectors_one_of_contacts	Covers	bowtie	CONFLICT:Covers
+w5	HexRing	445	coneAt_of_cubic		sevenBrick	
+w5	HexRing	1102	rot_noThird	Covers		NO-OBJECT
+w5	HexRing	1344	hex_regular			NO-OBJECT
+w5	HexRing	1404	bv_hex	Covers		NONE-SAID
+w5	HexRing	1480	p17_ua	Covers		NONE-SAID
+w5	HexRing	1808	bv_nd			NONE-SAID
+w5	HexRing	1895	bv_nd1			NONE-SAID
+w5	HexRing	2142	bv_l3	Covers		NONE-SAID
+w5	BaseDense	335	row134BaseUA			NONE-SAID
+w5	BaseDense	534	exists_preBend_step	Covers		NONE-SAID
+w5	BaseDense	614	exists_preBend	Covers		NONE-SAID
+w5	BaseDense	638	n3_base	Covers		NONE-SAID
+w5	BaseDense	649	exists_unenclosed_or_bad		sevenBrick	
+w5	BaseDense	677	localDense	Covers		NONE-SAID
+w5	BendCollar	626	collarModel		l60Frag	
+w5c	Terminal	518	stuck_flanks_ua	Covers	bowtie	CONFLICT:Covers
+w5c	Terminal	771	stuck_structure_ua	Covers	bowtie	CONFLICT:Covers
+w5c	Terminal	788	chainVertex_antipodal	Covers	bowtie	CONFLICT:Covers
+w5c	Terminal	807	flankQ_upper_of_qrOnly	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	853	cv_l0	IsTerminalMap	bowtie	LOCAL-SAID:IsTerminalMap
+w5c	Terminal	890	IsFlankBelow.unique		bowtie	
+w5c	Terminal	1416	exists_horn_of_mem_coneAt_of_stuck	Covers	bowtie	CONFLICT:Covers
+w5c	Terminal	1440	not_outType_v_of_flankBelow_neg_one		bowtie	
+w5c	Terminal	1476	isStuck_of_hasRepeatedColour			NONE-SAID
+w5c	Terminal	1488	flank_coneAt_S	IsPlaneMap		NONE-SAID
+w5c	Terminal	1543	flank_two_sectors_at_S_of_flanks	IsPlaneMap		NONE-SAID
+w5c	Terminal	1746	flank_two_sectors_at_S_gen	IsPlaneMap		NONE-SAID
+w5c	Terminal	1767	n3_end_four_colours	IsPlaneMap		NONE-SAID
+w5c	Terminal	1792	n3_end_bothKind	IsPlaneMap		NONE-SAID
+w5c	Terminal	1884	n3_end_of_not_inType	IsPlaneMap		NO-OBJECT
+w5c	Terminal	1932	n3_end_chain	IsPlaneMap	bowtie	LOCAL-SAID:IsPlaneMap
+w5c	Terminal	1975	upper_bounds_of_inType_N	IsPlaneMap	bowtie	CONFLICT:IsPlaneMap
+w5c	Terminal	2003	stuck_turned_frame	IsPlaneMap	bowtie	CONFLICT:IsPlaneMap
+w5c	Terminal	2224	not_inType_S_of_flankAbove		bowtie	
+w5c	Terminal	2259	not_inType_N_of_flankBelow		bowtie	
+w5c	Terminal	2297	horns_of_two_sectors_at	Covers	bowtie	LOCAL-SAID:Covers
+w5c	Terminal	2331	lower_flank_horns_at_N_of	IsPlaneMap		NONE-SAID
+w5c	Terminal	2391	lower_flank_horns_at_N	IsTerminalMap		NONE-SAID
+w5c	Terminal	2414	seven_colours_at_N	IsPlaneMap		NONE-SAID
+w5c	Terminal	2630	y3_end_needs_of_not_mem	IsPlaneMap		NONE-SAID
+w5c	Terminal	2993	y3_end_needs	IsPlaneMap		NONE-SAID
+w5c	Terminal	3011	cv_hd_main_inType	IsTerminalMap		NONE-SAID
+w5c	Terminal	3023	cv_hd_main	IsTerminalMap		NO-OBJECT
+w5c	Terminal	3046	cv_hd	IsTerminalMap	bowtie	LOCAL-SAID:IsTerminalMap
+w5c	Terminal	3075	c_double	IsTerminalMap	bowtie	LOCAL-SAID:IsTerminalMap
+w5c	Terminal	3139	cv_class	IsTerminalMap	bowtie	LOCAL-SAID:IsTerminalMap
+w5c	Terminal	3200	stuck_structure_at_axis	Covers	bowtie	CONFLICT:Covers
+w5c	Terminal	3221	stuckAlong_of_run	IsPlaneMap		NO-OBJECT
+w5c	Terminal	3324	c_ends	IsTerminalMap		NONE-SAID
+w5c	Terminal	3376	chainVertex_neighbours_of_noFour	IsTerminalMap		NONE-SAID
+w5c	Terminal	3414	stuckRun_eq_univ_of_noFour	IsTerminalMap		NONE-SAID
+w5c	Terminal	3466	terminal_vertices	IsTerminalMap	sevenBrick	
+w5c	Terminal	3481	run_ends	IsTerminalMap		NONE-SAID
+w5c	Terminal	3507	horn_flanks_of_isChainVertex	Covers	bowtie	CONFLICT:Covers
+w5c	Terminal	3555	hornBoundsQR_of_isChainVertex	IsTerminalMap	bowtie	LOCAL-SAID:IsTerminalMap
+w5c	Terminal	3575	run_hornBoundsQR	IsTerminalMap		NONE-SAID
+w5c	Terminal	3592	stuckRun_ne_univ	IsTerminalMap		NONE-SAID
+w5c	Terminal	3602	exists_red	IsPlaneMap	sevenBrick	
+w5c	Terminal	3616	exists_terminal	IsPlaneMap	sevenBrick	
+w5c	Terminal	3639	sevenBrickMap_isTerminalMap			NO-OBJECT
+w5c	HornShadow	881	flank_radial_N		bowtie	
+w5c	HornShadow	952	flank_radial_S		bowtie	
+w5c	HornShadow	1022	coneAt_N_subset_of_flankAbove		bowtie	
+w5c	HornShadow	1044	coneAt_S_subset_of_flankBelow		bowtie	
+w5c	Procedure	622	exists_terminalMap	IsPlaneMap	sevenBrick	
+exit=0

@@ -312,3 +312,281 @@ written (107 rows)" (`data/fs131/lt5/runs/write-ledger.out`). 90 rows before; **
 The header: `axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` (8 + 98 + 1 = 107 rows).
 
 **Token count at this stage**: no reading of the harness's count; own estimate about 420k.
+
+## Stage 9 — SAVED (FS131-LT5): the full gate on one commit — twice, on `50ad7266` and on the merge of `main`, `c5a4565f`
+
+One pass is every step in order, one at a time under the slot (`data/fs131/lt5/run-gate.sh <tag>`; every log under
+`data/fs131/lt5/gate/` with its exit status on its last line; `run-gate-<tag>.head` records the commit and that **no tracked file
+was modified**; `run-pass-<tag>.out` holds every step's exit).
+
+- **First pass, tag `final`, on `50ad7266`** (the commit of stages 4–8): every step exit 0 but the one that is red by design.
+- **`main` had moved** (15 commits, to `dc738cec`): merged as `c5a4565f`. The merge brings 62 files — `plans/`, `data/`,
+  `BIBLIOGRAPHY.md` (four rows amended; the set of `**[Key]**` rows is unchanged, by `diff`), the search lane's four tools, and
+  **one file outside the exempt paths, `tools/ext_hn2_links.py`** (another job's reader of an outside repository's README; no gate
+  step reads it) — and no file under `Proofs/` or `scripts/` (`data/fs131/lt5/merge-main-nonexempt.txt`). The coordinator's
+  word exempts `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md` and `tools/search_20261006_*.py`, and
+  "anything else under `tools/` or `scripts/` still" calls for a re-run; so:
+- **Second pass, tag `landed`, on `c5a4565f`**: the whole gate again. **Every quoted line of the table below is the same in both
+  passes** (the logs are `<step>-final.*` and `<step>-landed.*`).
+
+| step | result, read from its saved log | log (`data/fs131/lt5/gate/`) |
+|---|---|---|
+| build | "build: OK — all 1831 modules already up to date, nothing built, 0 module(s) with warnings"; the rebuild of these Lean sources is stage 6's — 471 of 471 batches, 62 modules rebuilt, **0 modules with warnings** (the one line holding the word "warning" in each log is that sentence) | `build-final.log`; `../build-docstrings.log` |
+| `sorry` | narrow pattern (`^\s*sorry\s*$`, `:= sorry`, `by sorry`): **0** lines; `\bsorry\b`: 8, all prose, the eight `main` holds | `sorry-narrow-final.txt`, `sorry-wide-final.txt` |
+| doubled names, **before the audit** | "dupnames: OK — no name is declared by two modules (23 generated on demand, listed above)" | `dupnames-final.log` |
+| its self-test | "OK — all 15 controls behaved: every planted fault fired, and every partner passed." | `dupnames-selftest-final.log` |
+| axioms | "audited: 6334 records — 6304 clean on the standard axioms, 17 axiom-free, 8 imported (resting on a declared outside theorem), 5 declared purchase(s)"; "declared imports (1): HadwigerNelson.StandingFive.kloosterman_bound"; "axioms: OK" — **the record counts unchanged from the second landing's**, and the digest against its receipt (`data/fs131/l10b/receipt-axioms-final.log`): `CLAUDE.md` "match (clean, purchases and imported compared)" | `axioms-final.log`, `receipt-axioms-final.log`, `digest-axioms-final.txt` |
+| its self-test | "OK — every planted fault fired, and every partner passed." (23 controls) | `axioms-selftest-final.log` |
+| vacuity | "scanned: declarations=14501  refutations-skipped=199"; "sites:   sites=1269  vacuous=0  stale=0  declared=3  witnessed=38  generic=1226  unknown=2"; "vacuity: OK"; the baseline's header and `CLAUDE.md` § The gate each "match (9 of 9 compared)" — **both lines unchanged**, and against the second landing's receipt "counts: unchanged", "rows: none changed" | `vacuity-final.log`, `receipt-vacuity-final.log`, `digest-vacuity-final.txt` |
+| its self-test | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent." | `vacuity-selftest-final.log` |
+| **assumptions**, against the draft copy of `CLAUDE.md` | "assumptions: OK — 1 outside theorem(s) as axioms, with 8 theorem(s) resting on them; 19 named and 16 inline hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s) and mentioned by 1"; the ledger's header and the draft each "match (9 of 9 compared)" | `assumptions-draft-claude-final.log`, `receipt-assumptions-final.log` |
+| **assumptions**, against the repository's own `CLAUDE.md` | **exit 1, by design** (stage 7): the scan's `fails=0`, then "assumptions: FAIL — a recorded count is absent or could not be read"; green at the filing of draft 1 | `assumptions-repo-claude-final.log` |
+| its self-test | "OK — all 33 checks behaved: every planted fault fired, and every partner stayed silent." (21 controls in one planted copy, the two-sided check, 4 accounting, 7 digest) | `assumptions-selftest-final.log`, `receipt-assumptions-self-test-final.log` |
+| architecture | "RESULT: PASS" | `arch-final.txt` |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "(2/2) Passed!" | `lint-final.log` |
+| notes | on this tree (`tools/fs131_l5_notes.py --only-flagged`, QA4's check through its working-tree wrapper, exit 1 on a CONFLICT): "notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58", **0 CONFLICT** — `main`'s count, unchanged; `tools/fs131_qa4_notes.py --self-test`: "OK (6 controls, 1 planted)". (`tools/fs131_qa4_notes.py list`, run too, reads QA4's own fixed commits with `git show` and never a working tree: its 17 CONFLICT lines are that audit's finding, repaired since — `notes-qa4-final.txt`.) | `notes-l5-final.txt`, `notes-qa4-selftest-final.txt` |
+| records, against the kernel's own list | "main: 9513 theorems; landing: 9513; wave (landing only): 0 …; gone (main only): 0; records in the log: 6334", "records: PASS"; and the kernel's list of declarations (`data/fs131/l5/count-modules.lean`, 14,501 `DECL` lines) is, sorted, byte-identical to the second landing's (`cmp`, exit 0): **this landing adds no declaration and removes none** | `records-final.txt`, `count-modules-final.out` |
+
+**Each check's negative control, watched.** The four self-tests above (15, 23, 65 and 33 controls, each a planted fault seen to
+fire with its silent partner). This job's own tools, each with a `--self-test` that plants faults (stages 1, 3, 6). And two
+mutation runs, where a decision of the instrument is switched off in a copy and the self-test must fail **and name the control
+built for that decision**:
+
+- **The digest's decisions about the recorded counts** (`tools/fs131_lt5_digest_mutate.py`, on `c5a4565f`;
+  `data/fs131/lt5/gate/digest-mutations.out`, exit 0): **4 of 4 caught.** With "absence fails" switched off the self-test fails and
+  names `digest absent` ("expected exit 3 and 'RECORDED COUNTS ABSENT', got exit 0"); with the refusal's sentence cut it names
+  `digest absent-says-what-to-add`; with a doubled record let through, `digest doubled`; with a partial record read as an absent
+  one, `digest partial`. Then "restore: scripts/gate_report.py is byte-identical to the start, and no mutant is left", and the
+  unmutated self-test passes again.
+- **The step's own mutation harness, once more on the joined tree** (`tools/fs131_t5_mutate.py`, as its record's Stage 6 ran it, on
+  `c5a4565f`; `data/fs131/lt5/gate/t5-mutations.out`, exit 0): **18 of 18 caught** — each of the scan's and the shell's eighteen
+  decisions switched off in a copy, the self-test failed and named its control each time; "restore: the two shipped files are
+  byte-identical to the start, and no mutant is left"; "unmutated, again: exit 0 — OK".
+
+**The 24 co-hypotheses this landing added** (`data/fs131/lt5/cohyp-added.txt`: the `COHYP` rows of the declared scan against the
+scan at the merge), read one by one: each restricts the theorem's own objects — `a ≠ 0`, `b ≠ 0`, `ψ ≠ 1`, `ringChar F ≠ 2`,
+`4 * c * d = a`, `Fintype.card k = Q ^ 2`, `Q % 4 = 3`, `98 ≤ Q`, `62 ≤ Q`, `𝒞 F.region`, `F.IsPlaneMap`, `Saturated c.cls`, the
+classes' agreement almost everywhere, and `gmap_ii`'s condition that the class consists of open families with null unit pairs.
+None is a hand result or an outside theorem.
+
+**Read aloud against the informal claim.** The claim this landing makes is about the instrument, not a theorem: "the gate lists
+everything a theorem rests on that the kernel did not check, in both forms". What the step checks is narrower, and its output says
+so on every run: it lists every library axiom with every theorem whose stored axiom list holds it — complete, given no doubled name
+(`dupnames` green) — and every hypothesis **that is declared, or closed, or a never-concluded or docstring-marked former**; a hand
+result written out over a theorem's own variables under a silent docstring is in `unseen=15214` and is not listed. So "in both
+forms" is true of the axioms without qualification and of the hypotheses up to that class, whose only instrument is a reader.
+
+## Drafts for the front page (FS131-LT5)
+
+Each names its slot and the log line it comes from. The gated commit is `c5a4565f`; the receipts are under
+`data/fs131/lt5/gate/` (`receipt-assumptions-landed.log` is the scan's full output on it).
+
+**1. `CLAUDE.md` § Trust ledger** — a new paragraph after the paragraph that ends "Rung B holds none." and before "What the audit
+accepts and what it buys". **File it first: until it is there `./scripts/assumptions.sh` exits 1 on `main`** (stage 7). Its nine
+counts are `receipt-assumptions-landed.log`'s `=== TOTALS ===` line (`axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5
+takes=98 mentions=1 …`), written by `tools/fs131_lt5_claude_draft.py` and never typed; the whole file with it is
+`data/fs131/lt5/drafts/CLAUDE-with-sentence.md`, against which the gate passed ("match (9 of 9 compared)"):
+
+> **What the library assumes, in both forms** (`scripts/assumptions.sh`, whose digest reads these counts and fails if
+> they are absent): `axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — one outside theorem declared as
+> an axiom, with eight theorems resting on it; thirty-five hypotheses, nineteen named and sixteen written out in a
+> binder — seven standing for outside theorems, twenty-three for hand results of ours and five for open questions — taken in
+> 98 (hypothesis, statement) pairs by 51 statements (`scripts/assumptions-ledger.txt` lists each pair; FS131-LT5,
+> 2026-10-06). Weil's bound is counted in each form it takes — the axiom, the named hypothesis `KloostermanBound`, and that
+> hypothesis written out at a family of fields: one outside theorem, three entries.
+
+The digest reads every `key=value` of the nine in § Trust ledger, each exactly once: a second mention of, say, `open=5` in that
+section is a failure (exit 3, "recorded more than once"). No other count of `CLAUDE.md` moves: the axiom audit's three and the
+vacuity scan's nine are `main`'s (stage 9).
+
+**3. `LEAN.md` § The gate.** In the first sentence, after "`./scripts/axioms.sh --self-test` green (23 planted faults, each watched to
+fire, two of them partners that must pass)": ", `./scripts/assumptions.sh` and `./scripts/assumptions.sh --self-test` green (21
+controls planted in one copy of the audit, 33 checks)" — from `assumptions-selftest-landed.log`: "21 controls, planted together",
+"OK — all 33 checks behaved". And a bullet after the `dupnames` bullet:
+
+> - **`./scripts/assumptions.sh` and `./scripts/assumptions.sh --self-test` are green** — everything a theorem rests on
+>   that the kernel did not check is listed, in both forms it takes. An outside theorem declared as an `axiom` shows in
+>   `#print axioms`; a hypothesis does not — a theorem that says "if Herglotz–Bochner holds, then …" prints the standard
+>   three — so `scripts/Assumptions.lean` reads every hand-written statement as the kernel holds it and prints every
+>   library axiom with the theorems whose stored axiom lists hold it (`RESTS`), and every declared hypothesis with its
+>   kind (`outside`, `ours`, `open`), its source and the statements that take it (`TAKES`, `MENTIONS`). Whether a
+>   hypothesis is an assumption or a condition on the theorem's parameters is intent, which no type records, so the
+>   check **requires evidence**: the one list is `AssumptionAudit.declared`. **It fails** on a *closed* hypothesis (no
+>   free variable: a statement about the world) that is neither declared, nor proved by the library, nor the one claim
+>   a refutation refutes — a closed family `∀ F, … → H F` of a declared `H` included: the binder is declared as a site;
+>   on a `Prop`-former taken as a hypothesis that no theorem concludes, or that is concluded only from declared
+>   assumptions, or whose docstring uses the words "named hypothesis", "outside the backlog" or "external", when neither
+>   list holds it; on a source that is not in `BIBLIOGRAPHY.md`, `LEDGER.md`, the grokkings, the stubs or the
+>   derivations; on a declared kind its docstring contradicts; on a declared hypothesis no statement takes, or one a
+>   theorem proves over its own variables; on any consumer that `scripts/assumptions-ledger.txt` does not list, or lists
+>   and the scan does not find; and **when the nine counts are absent from `CLAUDE.md` § Trust ledger** (a recorded count
+>   whose deletion passes is no record; counts that have drifted are flagged, not failed). **It counts and prints, and
+>   cannot decide**: the other hypotheses of every consumer (`COHYP`), and `unseen=` — every other hypothesis over a
+>   theorem's own variables, among which a hand result written out in a binder, undeclared and unremarked in its
+>   docstring, is not told from a condition. **A former proved at the instances where it is taken closed** (not over its
+>   own variables) is not reported: its entry leaves on the landing's reading, its docstring is reworded to say over what
+>   it is proved, and its closed takers then read `ESTABLISHED` (`StandingFive.StandingFloor`, FS131-LT5). The nine counts
+>   are recorded in `CLAUDE.md` § Trust ledger and in the ledger's header, where `scripts/gate_report.py` reads them.
+
+**4. `LEAN.md` § Assumptions: outside theorems and our own.** The third bullet gains a sentence, and a fourth bullet follows it:
+
+> - **Our own hand results** that a module needs before their own module lands enter as explicit hypotheses of the
+>   theorems that use them, never as axioms, so they disappear when discharged. **So may an outside theorem** (five do on
+>   `main`, in seven entries: Herglotz–Bochner in two forms, Markov–Kakutani, Artin–Lang, Voronov's Thm 1.1, and Weil's
+>   bound in the hypothesis forms its modules were proved over), when its statement is better carried as a named `Prop`
+>   than as an axiom.
+> - **Every assumption in hypothesis form is declared to the gate**, in `AssumptionAudit.declared` at the end of
+>   `scripts/Assumptions.lean`, by the landing that brings it: a named one by `.former ``Full.Name kind "source"`; one
+>   written out in a binder by `.site ``Theorem `binder "Label" kind "source"`, once per theorem that takes it (sites
+>   with one label carry one source, character for character); a former that is only a condition on a theorem's
+>   parameters by `.condition ``Full.Name "reason"`; a closed premise that is not an assumption by `.premise ``Theorem
+>   `binder "reason"`. The kind is `outside` (source: a `BIBLIOGRAPHY.md` key in brackets), `ours` (a ledger row `row N`,
+>   a grokking `G N`, or a derivation entry id) or `open` (those, or a stub `FS-N`); the source opens with that
+>   reference. The definition's docstring says whose it is in the words the gate reads — "external" or "classical" or
+>   its bracketed key; "[hand]", "[tools]", "[cert]" or "outside the backlog"; "open question" — or it is counted
+>   `SILENT`; and a former that is **not** assumed must not use the words "named hypothesis", "outside the backlog" or
+>   "external" in its docstring. Then `./scripts/assumptions.sh --self-test`, `./scripts/assumptions.sh`,
+>   `./scripts/assumptions.sh --write-ledger` (read the rows it adds: each is a statement that is now conditional), and
+>   the nine counts for `CLAUDE.md` § Trust ledger, which the step reads as stale — flagged, not failed — until they are
+>   refiled. A hand result written out in a binder over the theorem's own variables is the one thing the gate cannot find
+>   by itself: the landing declares it on its own word.
+
+**5. `LEAN.md` § Trust ledger**, the table — a fifth row: "| a hypothesis standing for an outside theorem, a hand result of ours
+or an open question | **declared**, with its kind and source, by one line of `AssumptionAudit.declared` in
+`scripts/Assumptions.lean`; every statement that takes it listed in `scripts/assumptions-ledger.txt` |". And § Trust ledger's first
+sentence ("The audit's counts are recorded in `CLAUDE.md` § Trust ledger, where `scripts/gate_report.py` reads them.") gains: "So are
+the assumptions step's nine."
+
+**6. `ARCHITECTURE.md` § 5 Trust** — written on this branch, in the gated commit: the subsection "### Assumed as hypotheses
+(`scripts/assumptions.sh`; declared in `scripts/Assumptions.lean`)", after "Imported outside theorems", with the three tables as
+they stand on the landed tree (seven, twenty-three, five). Nothing to file.
+
+**7. The line every landing brief carries from now on** (the step's draft 7; the procedure moved in two places — a closed family
+needs its binder declared, and the recorded counts must exist):
+
+> A wave that brings an assumption in hypothesis form — a named `Prop` standing for an outside theorem, a hand result
+> of ours or an open question, or one written out in a binder — declares it in `AssumptionAudit.declared`
+> (`scripts/Assumptions.lean`; the procedure is `LEAN.md` § Assumptions), or `./scripts/assumptions.sh` fails; a closed
+> hypothesis `∀ x, … → H x` of a declared `H` is declared at its binder too. The landing runs
+> `./scripts/assumptions.sh --self-test`, `./scripts/assumptions.sh` and `--write-ledger` on the merged tree, reads
+> every ledger row it gains or loses, and drafts the nine counts for `CLAUDE.md` § Trust ledger (until they are refiled
+> the step flags them stale and does not fail; it fails if they are absent). A wave that removes or proves an
+> assumption removes its entry and rewords the docstring that called it one.
+
+**8. Docstrings still owed** (not this job's to make). `Plane.NoPar` (`Plane/Saturated/MapColouring.lean`): add "an open question"
+to its docstring, and the one `SILENT` row leaves. `Arith/TargetFloors.lean`'s module doc still calls `StandingFloor` "the
+hypothesis TC1-STANDING-FIVE's 'so `L(F) ≥ 7`' hid" and is right as history; no edit asked.
+
+**9. `plans/FS131-kernel-plan.md` § 7.4** (the table of named hypotheses): `StandingFloor` is discharged over the import and
+`KloostermanBound` is the import's hypothesis form — as FS131-L10B's draft 9 says; the step's list is now the current table.
+
+**10. The Frontier line, the ledger rows and the Proof Atlas**: nothing moves. This landing proves no theorem, changes no
+statement and regrades no row; the atlas gains no node (docstrings only under `Proofs/`).
+
+## The enumeration, for the owner — what `main` assumes after this landing
+
+*From the gated receipt (`data/fs131/lt5/gate/receipt-assumptions-landed.log`) and the ledger (`scripts/assumptions-ledger.txt`).
+"Statements" counts the theorems whose own statement takes the hypothesis, or — for the axiom — whose kernel-stored axiom list
+holds it.*
+
+**In one sentence.** Of the library's 10,173 theorems, 58 are conditional on something the kernel did not check: 8 rest on the one
+outside axiom, 51 take one or more of 35 declared hypotheses in their statements, and one does both. The other theorems rest on
+`[propext, Classical.choice, Quot.sound]` (or the five declared native purchases) and on the hypotheses a user of the theorem
+supplies about its own objects.
+
+**Weil's bound appears three times below and is one outside theorem**: as the axiom, as a named hypothesis, and as that hypothesis
+written out at a family of fields. Counting theorems of the literature and not entries, the library assumes **six**: Weil's bound,
+Bochner's theorem (in two forms), Markov–Kakutani, Tarski / Artin–Lang, and Voronov's Theorem 1.1.
+
+### A. Outside theorems — one axiom and seven hypotheses
+
+| what is assumed, in plain words | how it enters | from | statements |
+|---|---|---|---|
+| **Weil's bound for Kloosterman sums**: over a finite field of `q` elements and odd characteristic, a non-trivial additive character summed over `x ≠ 0` at `cx + d/x` has absolute value at most `2√q` | the axiom `StandingFive.kloosterman_bound` | `[Weil1948]` p. 207, read against the page by two readers | **8 rest on it**: the floors at seven (`Q ≥ 98`) and six (`Q ≥ 62`) of the norm-one targets, `StandingFloor 7` and `5`, `7 ≤ L(F)` at the standing field, `χ(F²) ≥ 5` there, the circle-sum bound, and the passage to the hypothesis form |
+| the same bound at the theorem's own field | the named hypothesis `StandingFive.KloostermanBound` | `[Weil1948]` p. 207; the axiom proves it at odd characteristic | 9 (the hypothesis forms wave 10 kept beside the eight) |
+| the same bound at every field of `q ≡ 3 (mod 4)`, `q ≥ 347` elements | written out in the binder `hK` | `[Weil1948]` p. 207 | 3 (three of the nine) |
+| **Herglotz–Bochner**: every positive-definite function on a discrete abelian group is the Fourier transform of exactly one finite measure on its dual | `SpectralChain.BochnerHerglotz` | `[Rudin1962]` 1.4.3 and 1.3.6 — **not read**: cited from memory, the read-back owed | 13 (row 123's chain, `sp_if`, the Haar-in-Fourier-form lemmas, `χ(ℚ(√47)²) = 5` over the chain) |
+| **Bochner's theorem for a topology**: a finite measure whose Fourier transform is continuous for a group topology is carried by the continuous characters | `SpectralInputs.BochnerOn` | `[Rudin1962]` 1.4.3 — not read | 1 (`spectral_carried_iff`) |
+| **Markov–Kakutani**: every non-empty closed set of four-colourings of `ℤ[U]`, stable under shifts and rotations, carries a probability measure invariant under both | `SpectralChain.InvariantMeasureOnClosed` | `[Kakutani1938]` — **not read** | 7 |
+| **Tarski / Artin–Lang**: a finite system of rational polynomial equations with a real solution has a real algebraic one | `Bridge.RealAlgebraicDescent` | `[Lang1953]` — not read, cited through `[GoelPatilVerma2022]` | 6 (the bridge `χ(ℝ²) = sup_F χ(F²)`, row 107) |
+| **Voronov's Theorem 1.1**: for every `ε > 0` no six-colouring of the plane avoids every distance in `[1 − ε, 1 + ε]` | `Plane.Voronov11` | `[Voronov2023]` Thm 1.1 (an unrefereed preprint, its proof repaired locally: row 132) | 1 takes it (`mu_lt_of_voronov11`); 1 states it under `↔` |
+
+### B. Hand results of ours — twenty-three, none in the kernel
+
+| what is assumed | how it enters | from | statements |
+|---|---|---|---|
+| R-U: every finite rotation-invariant measure on the dual gives `E ∖ (T + A)` measure 0 | `Interface.RU` | J45 § 5.4 [hand] | 6 |
+| PE-2: every rotation-invariant measure is a Haar multiple plus a part of zero entropy | `Interface.PE2` | X02D [hand], over Einsiedler–Lindenstrauss Thm 1.2 by statement | 6 |
+| EF_F⁺: a rotation-invariant measure of zero entropy lives on `T + A` | `Interface.EFPlus` | FS100-X01D [hand] | 6 |
+| A⁺ at `S = ∅`: the spectral inequality is strict for every invariant random four-colouring | `Interface.APlus0` | J45 § 3 [hand]; row 113 | 3 |
+| A⁺ follows from R88-TCA | `Interface.APlusOfR88` | J45 [hand] | 3 |
+| the count: T-C(A) gives R88-TCA in the class | `Interface.Count` | X23D-TCA [hand] | 3 |
+| a band character in `T + A` has order dividing 168 (the band at 4) | `CharacterColouring.OrderBound` | FS89-S0A-3 [hand], two derivations | 2 |
+| measure rigidity for the unit-vector group, in Fourier form | `Interface.MR` | row 120 [hand] | 1 |
+| `m⁻¹(E) ⊆ E`; and the negative circle | `Interface.MulStable`; `Interface.NegCircle` | J45 § 4.2 steps 2, 3 [hand] | 1 each |
+| `χ_CP ≤ χ_m⁰` (the hard direction of row 130) | `Plane.Row130M1` | row 130 [hand] | 1 |
+| a finite unit-distance graph over `ℚ(√3,√11)` forces two points `8/3` apart to one colour at four colours | `SevenConditional.G4` | row 103: one solver refusal with no proof log | 1 |
+| `χ(F²) = L(F)` where `L(F) ≤ 4` | written out (`hRow99`) | row 99 | 3 |
+| `L(F) ≥ 5` implies T-C(A) | written out (`hCLS`) | X23D-CLS | 3 |
+| `min(L(F), 5) ≤ χ(F²)` at the standing field (row 123's chain, measure rigidity inside it) | written out (`hRow123`) | row 123 | 2 |
+| `χ(F²) ≤ L(F)` | written out (`hUpper`) | row 52 | 1 |
+| `Θ₄(ℤ[U_ℚ]) ⊆ T + A`; `Θ₅(ℤ[U_ℚ]) ⊆ T + A` | written out (`hRQ4`, `hRQ5`, one theorem) | FS89-D2-T1; FS89-D5-T2 | 1 each |
+| `α(Γ₂₃) ≤ 105`; `α(Γ₈₃) ≤ 1148`; `α(Γ₁₁) ≤ 29` | written out | rows 71, 68, 68: certificates checked outside the kernel | 1 each |
+| two facts of the Falconer fan's lattice (a forced difference lies in `8Λ`; the forced group is `0` or `P`) | written out (`hR78`; `hR88`, `hR88per`) | rows 78; 88 | 1 each |
+
+### C. Open questions and design targets — five
+
+| what the theorem is conditional on | how it enters | from | statements |
+|---|---|---|---|
+| no member of the theorem's class of map colourings lies in `𝒫₆` — at the locally finite map colourings, the open statement C121-NOPAR | `Plane.NoPar` | C121-NOPAR (FS-121) | 2 (`gmap_ii`, `sat_noPar`) |
+| every `√3`-pair and every distance-2 pair is separated by every proper five-colouring of the plane | written out (`h3`, `h2`) | row 43 (G26) | 2 |
+| the same at six colours | written out | row 61 | 2 |
+| its form for the plane of the distances 1 and 2 | written out | row 61 | 1 |
+| valid six-coloured fragments exist on discs of every radius | written out | row 145 | 1 |
+
+### What left the list, and what never was on it
+
+- **Falconer's Lemma 2 (i)** was the library's one axiom when the step was written; it is a theorem since FS131-IF1, and its four
+  consumers are unconditional.
+- **`StandingFive.StandingFloor`** was a hand result of ours taken as a hypothesis; it is proved at 7 and at 5 over Weil's bound,
+  so the dependence is now on the axiom, where it is listed.
+- **Thirty-three formers are declared conditions, and two closed hypotheses premises**, each with a reason printed every run and
+  each read twice (stage 5): a condition restricts the objects a theorem is about and asks nothing to be taken on anyone's word.
+
+### What the step counts and cannot decide
+
+- **`unseen=15214`**: every hypothesis over a theorem's own variables in a statement that takes nothing declared. A hand result or
+  an outside theorem written out there, with a docstring that does not say so, **is not told from a condition** — no type separates
+  them. The eleven such hand results above were found by reading docstrings, not by the scan. For the two landings since the list
+  was made I read every doc comment of their twenty-nine modules for the words (stage 3) and found none; for the rest of the
+  library the reading is the step's first author's.
+- **`cohyp=58`**: the other hypotheses of the 51 consumers, printed in full on every run — where an undeclared one would most likely
+  sit beside a declared one. The 24 rows this landing added I read (stage 9): each restricts the theorem's own objects (`a ≠ 0`,
+  `ψ ≠ 1`, `ringChar F ≠ 2`, `Q % 4 = 3`, `98 ≤ Q`, `F.IsPlaneMap`, `Saturated c.cls`, …); the 34 older ones are the step's first
+  author's reading.
+- **`silent=1`** (`Plane.NoPar`: its docstring does not say whose it is in the words the step reads); **`hints=0`**.
+- **A former proved only at instances** is not reported by the step (stage 4, case 1): the landing that proves it must remove it.
+- **The step lists; it does not grade.** "Not read" beside four of the six outside theorems is the bibliography's status, repeated
+  here because an assumed theorem whose page nobody has read against the Lean statement is the weakest kind of entry on this list.
+
+## Theorems this phase proved, final
+
+**None.** This landing proves no theorem and changes no statement, definition or proof: the kernel's list of the library's 14,501
+declarations is, sorted, byte-identical to the second landing's, and the stored type of every one of the 1,453 constants in the
+nine modules whose docstrings changed is what it was (stages 6, 9). The audit's counts are the second landing's: 6,334 records —
+6,304 clean, 17 axiom-free, 8 imported, 5 declared purchases; one library axiom, `StandingFive.kloosterman_bound`. What it lands
+is an instrument and a list: `scripts/assumptions.sh` with `scripts/Assumptions.lean`, its controls, its ledger of 107 rows and a
+third digest in `scripts/gate_report.py`; 22 doc comments; `ARCHITECTURE.md` § 5's new subsection.
+
+## Slips, my own
+
+1. A reading aid of mine (a script that printed each declared condition's definition) ran without an end for two minutes over the
+   whole of `Proofs/`, generated modules included; I stopped it by its process id and rewrote it with `rg` and a size limit. No
+   result was taken from the first one.
+2. The first run of `data/fs131/lt5/condition-takers.lean` stopped at the default heartbeat limit after 34 of 36 formers; the limit
+   is lifted for that one read-only `#eval` and the run repeated. The 34 printed before agree with the second run.
+3. I queued the two mutation runs behind a full slot ledger and then stopped them, before either was admitted, to merge `main`
+   first and run them once on the merged commit; nothing had run and nothing was forfeited.
+4. `tools/fs131_qa4_notes.py list` is in my runner beside the working-tree wrapper; it reads fixed commits and its 17 CONFLICT lines
+   are not this tree's. The gate's notes check is the wrapper's line (0 CONFLICT), as the two landings before ran it.
+5. No token count was read at any saved stage: I have no instrument for the harness's count, and wrote my own estimate each time.

@@ -1,0 +1,29 @@
+    audited: 6334 records — 6304 clean on the standard axioms, 17 axiom-free, 8 imported (resting on a declared outside theorem), 5 declared purchase(s)
+    clean records, by axiom set:
+       6142  [propext, Classical.choice, Quot.sound]
+         83  [propext, Quot.sound]
+         78  [propext]
+          1  [Quot.sound]
+         17  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.PartialColoring.map, HadwigerNelson.Plane.ArcMap.fin_two_eq_of_ne, HadwigerNelson.Plane.BranchGerms.fin3_adj, HadwigerNelson.Plane.BranchGerms.mem_gapGerm, HadwigerNelson.Plane.BranchGerms.mem_gapSec, HadwigerNelson.Q4.approx, HadwigerNelson.StandingFive.squaresBelow_11, HadwigerNelson.Stripe.wheel_all, HadwigerNelson.Thomassen.ReachIn.mono, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    declared imports (1): HadwigerNelson.StandingFive.kloosterman_bound
+    imported records (8):
+      HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.targetFloor_seven_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.targetFloor_six_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.circle_sum_le_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.standingFloor_seven_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.standingFloor_five_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.seven_le_localBound_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.five_le_chromaticNumber_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+    library axioms other than native auxiliaries (1): HadwigerNelson.StandingFive.kloosterman_bound; native auxiliaries: 10
+    recorded count in CLAUDE.md § Trust ledger: match (clean, purchases and imported compared)
+    --- changes since the previous complete run ---
+    previous: data/fs131/l10b/receipt-axioms-final.log
+    no record appeared, disappeared or changed its axioms
+exit=0
