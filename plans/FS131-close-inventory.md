@@ -6244,3 +6244,74 @@ reason by the close.*
      consumers print the standard three and the import and nothing else; regenerated with both branches' tips
      (`mk-k10c.py fs131-w10d=a14f9ab0 fs131-w10e=d4adcd40`; gate exit 0). (f) **Slot → FS131-K10c**, launched
      2026-10-06. In flight: 1 (I6E) + 1 (I10F) + 1 (K10c) = 3.
+
+544. **FS131-I6E done: `FanBridge`'s five lemmas about any fan are proved, as stated — with the three cell lemmas of a fan as
+     declarations of their own; every leaf of wave 6's first two planning passes is now proved on some branch** (implementer,
+     Opus; harness 507k and 59 minutes by the task notice — at the line, not to be resumed; record `fs131-w6g`'s
+     `plans/FS131-I6E-implementation.md`; report `data/fs131/reports/FS131-I6E.md`; five commits, tip `b3b67f23`; pushed,
+     tree clean). **Proved on the standard three**: `Fan.two_le_n`, `Fan.col_ne` (FS131-E8-TWOSIDES, no saturation), and
+     55 children, among them `Fan.isPreconnected_cell`, `Fan.cell_subset_densitySet`, `Fan.exists_ray_subset_cell`
+     (ruling 531 (c)). **Proved over leaves that are proved on other branches under the same statements**:
+     `Fan.branch_outside_discs` (-OUTSIDE), `Fan.branch_contacts` (-BRANCH, its alternative inclusive),
+     `Fan.sector_alone` (FS121-V2-SECTOR), and the planner's `Fan.sector_unique` (FS121-DB1-L3, FS111-W-NOREP) with it.
+     **My receipt**: tip `b3b67f23` equals `origin/fs131-w6g`, tree clean; outside `data/`, `plans/`, `tools/` it
+     changed two files, `FanBridge.lean` and `scripts/Axioms.lean`; the last real build's full log
+     (`build/gate/build/20261006T165132Z-1529137.log`) ends "Build completed successfully (5811 jobs)", 52 warnings, all
+     `declaration uses sorry`; `sorry` by the handoff's grep: `FanBridge` 7 — by name the seven leaves of the other half
+     (`gamma` … `finite_arcs_of_isBounded`), none of its five — `Pinch` 7, `MapColouring` 1; no `axiom`, no
+     `native_decide`; `axioms-4.out` parsed by script — 72 records, 57 on exactly the standard three (the two leaves and
+     the three cell lemmas among them), 15 with `sorryAx` and nothing else beyond the three (its 14 wired and the
+     control); `FanBridge`'s seventeen declarations at `d62406a2` compared head by head — none changed, 65 added. Not
+     checked by me: the 1,308 added lines beyond the build. **A trial of the join, mine** (`git merge-tree`, nothing
+     checked out): the five finished branches merge with conflicts in `ARCHITECTURE.md` and `scripts/Axioms.lean` only
+     — **the two halves of `FanBridge.lean` merge clean** — and `origin/main` on top adds `Proofs.lean` to those.
+     **Generalizations**: the essential boundary of a measurable set is null (so the plan's "a polar graph is null" is
+     not needed); a common contact puts the whole branch on a unit circle with no saturation; FS121-V2's Lemma H for one
+     set and two pieces; two of FS121-V2's cases are not needed and three are two. **Corrections owed at the join, its
+     own**: its `polarRegion_isOpen` and `polarRegion_isPreconnected` are the other half's `isOpen_polarRegion`,
+     `isPreconnected_polarRegion` binder for binder (declared before the amendment reached it, renamed before any
+     push): delete its two, repoint three uses; `fanAngle` is `Plane/ValidMap/RadialPush`'s `polarAngle` again. Its 14
+     wired records are not yet in `scripts/Axioms.lean`. **Predictions scored**: seven planner-days, one job — item
+     541's fifth such pair. **Slips, the job's, disclosed**: one build lost to a helper named like a landed
+     definition; its names tool now checks every added name against `Proofs/` and the sibling branch. **Its decision
+     under Amendment 2**: not merged — its proofs were already written against the statements — and no hypothesis
+     taken. **Credit**: the cell lemmas stated where two files can share them, two hand cases shown unnecessary, and a
+     duplicate it created reported with the exact repair. **Rulings.** (a) **Wave 6 lands in two steps, as wave 10
+     does: a first landing now, FS131-L6A, of the fourteen modules the first two planning passes produced** — join
+     `fs131-w6g` (which holds `fs131-w6c`), `-w6f`, `-w6p`, `-w6m` on a branch cut from before the third pass's
+     modules, the ruled tidies, `main` merged, the full gate, `main` fast-forwarded. Alternative: the fourth planner
+     joins them on the wave's line (rulings 532 (b), 539 (c), 540 (a)) and everything lands together later. Why now:
+     twelve rows and the deriver's bridge become held today instead of after three more implementers and a planner; the
+     join has grown to five branches with a duplicate to delete and forty records to move — an implementer's job, not
+     a planner's first act; and the later branches then merge a `main` that holds their imports. Confidence: high.
+     Brief and tree: item 545. (b) **The fourth planner's join is withdrawn**: its first act becomes one merge of
+     `main` after this landing, and FS131-K6d moves behind FS131-L6A in the order. (c) **`SeparatesAt` keeps its
+     second clause** (rulings 530 (a), 531 (g) decided): the filed class is defined with it, no row reads the weaker
+     form, and the weaker theorem is already beside it (`sat_bound_of_mem_closure`). Confidence: high. (d)
+     **`fanAngle` against `polarAngle`, and `MapEdge`'s restated puncture lemma, are tidy moves after the landing**:
+     one home for each needs an edit to a landed module that everything imports. (e) **Slot → FS131-K7b** (wave 7's
+     second planner, on `fs131-w7`), launched 2026-10-06; FS131-L6A takes the next free slot. In flight: 1 (I10F) +
+     1 (K10c) + 1 (K7b) = 3.
+
+545. **FS131-L6A, wave 6's first landing, is briefed and its tree made; the fourth planner's brief no longer joins anything**
+     (mine; 2026-10-06; ruling 544 (a)–(b)). **L6A** (`data/fs131/briefs/FS131-L6A-wave6-land.md`, generator
+     `data/fs131/briefs/scripts/mk-l6a.py`, after wave 10's landing brief; tree `.claude/worktrees/fs131-w6j`, branch
+     `fs131-w6j` cut from the fifth implementer's `b3b67f23` — which holds the third's `d62406a2` — build copied from
+     `fs131-w6g`, idle; pushed): merge `origin/fs131-w6f` (`8e81fedd`), `-w6p` (`43ea4886`), `-w6m` (`2e55a2d6`); the
+     ruled tidies (the two duplicated lemmas deleted and three uses repointed; forty wired records appended; the stale
+     "[hand], kernel pending" sentences and "skeleton" rows corrected; nothing else); `main` merged; the full gate with
+     the doubled-name check, the guarded lint, the notes and records checks; the fast-forward; drafts — among them the
+     front page's sentence for REG-J′ as "the singular set is locally finite" (ruling 492 (a)). **My trial on its tip**
+     (`git merge-tree`): the three merges conflict in `ARCHITECTURE.md` and `scripts/Axioms.lean` only, `origin/main`
+     adds `Proofs.lean`; no Lean file. Gate exit 0 (17 quotations; the first run failed on two bare file names).
+     **What this landing is for, said in its brief**: forty-six audit records of this wave print `sorryAx` on their
+     own branches only because the leaf beneath them is proved on another; the join is where that becomes a kernel
+     fact or shows a seam, and a declaration still on `sorryAx` after it is a message to me at once. **K6d**
+     (`mk-k6d.py`, regenerated; gate exit 0): its first act is one merge of `origin/main` after L6A has landed, and it
+     sends the hash at once. **Order**: L6A takes the next free slot; K6d follows L6A's hand-back; **when K6d sends
+     its merge's hash, `fs131-w6l`, `-w6z`, `-w6k` (unstarted at `6fc27fa1`) are fast-forwarded to it** and
+     FS131-I6L, I6Z, I6K launch from there with a dated amendment each (their statement checks move to that commit;
+     I6Z needs no separate commit for the cell lemmas — they are on `main` by then). **While L6A is in its landing
+     stage I commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`,
+     `LEAN.md`.** **A slip in form, mine**: the trial's command line carried a `cd` (to a path that is no
+     directory, so it changed nothing; `pwd` checked after) — the rule is no `cd` in a compound command at all.
