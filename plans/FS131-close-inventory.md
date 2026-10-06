@@ -4016,3 +4016,35 @@ reason by the close.*
      `stuckRun_ne_univ`. Confidence: high. (g) **The tool defect** joins the list owed (the shared statement checker of item 406 (c) replaces the
      per-job copies). (h) **Slot → FS131-E7**, launched 2026-10-06 on the brief of item 428 (a) (`ephodos`). In flight: 1 (IR2) + 1 (IA1) + 1 (E7)
      = 3. Next freed slot: FS131-KM1 (item 428 (b)), unless the freed lane leaves leaves on wave 5's path.
+
+433. **FS131-IA1, by message: the arc step needs one bend that is proved nowhere, and its statement is fixed** (`bend_away_part`, `sorry`, in
+     `fs131-w5a`'s new `Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean`; copy at `data/fs131/ia/bend_away_part-statement.txt` on that branch;
+     not yet committed at this writing — the branch's last commit is the merge, `90030972`). **The cases**: outer colour absent at `P` — the toward
+     collar bend (`exists_collarFit`), `hfree` from cleanness (`IsRingArc.free_of_isClean`, proved). Inner colour absent at `P` and the arc not (R2) —
+     no bend on file can be read by the step: `bend_away_whole` uses wave 4's chord lens (it swallows a horn's tip at an end vertex, makes a vertex
+     where it crosses a tangent germ, and is no homeomorphic image), and `bend_away` (`sorry`, `fs131-w4ba`) has the same hidden-map form.
+     **`bend_away_part`**: on a valid plane map, a ring arc whose inner colour is absent at its centre and near whose interior points `Γ` is `ω(P)`
+     alone has, for every `ε`, a valid map `M`, the image of `F` under a homeomorphism supported in a compact collar within `ε` of the arc — the
+     clauses of `bend_toward_collar` plus the collar `K`, `LocalStep F M K`, horn counts carried, `RingArcsWithin`, each interior point fixed or
+     turned to the inner colour, and what is left on `ω(P)` inside non-degenerate intervals of radius-2 contacts. Grade of its truth: [hand], one
+     mind (IA1's); **not checked by IA1**: R1 at an interior pinch point for unit arcs about other centres through it; whether the horn clause is
+     wanted as an iff or as `∃ j' ≤ j`. **A second open child**: `CollarFit.map_hornCount_le` (the horn clause for the toward collar bend, in the
+     step's `∃ j' ≤ j` form; true by hand at every point, so E6's flag does not bite for the collar bend; it needs the bent map's chart at an end).
+     **Proved so far in `BendStep`** (under `lake env lean`; the build and the axioms print come with its Stage 4): question (5)
+     (`radiusTwoArc_inter_dom_subset_Γ`, `isR2Arc_of_fixed`, `CollarFit.map_isR2Arc`), `CollarFit.map_isClean` (no cleaning is needed after a collar
+     bend), `CollarFit.map_degree_le` (ruling 430 (a)'s clause where it is read), the no-go `Γ_eq_of_degree_clause`. The merge of `origin/fs131-w5`
+     is in (`90030972`). **Held from the merge's checks**: three statements stand under two names, one on each line —
+     `finite_arcs_inter_compact` (`Limit`) = `finite_arcs_meeting_compact` (`BaseDense`); `HasDegree.eq` (`OpenMove`) = `HasDegree.unique`
+     (`Pushforward`); `IsRingArc.union` (`Procedure`) = `IsRingArc.union_of_overlap` (`BaseDense`). **My receipt**: the statement and its docstring
+     read in the worktree (`BendStep.lean` l. 286–319); `bend_away`'s statement read from `fs131-w4ba` (`git show`); E5's Stage 4 read (the end
+     case by a tangent start). Nothing built by me.
+434. **Rulings on item 433.** (a) **`bend_away_part`'s planner takes the next freed slot, ahead of the models' planner FS131-KM1** — a `debruijn`
+     job, FS131-KA1, on `fs131-w5a` once IA1 has handed back (or, if another slot frees first, on a branch cut from IA1's last pushed stage, new
+     modules only). Alternative weighed: the queue as it stood (KM1 next). Why: the outward collar bend is now the longest piece on wave 5's landing
+     path — the toward bend it mirrors was a plan and two implementer sessions — and KM1's models, each with a hand model, hold up no landing.
+     Confidence: high. (b) **The planner's first stage attacks the statement**: IA1's two unchecked points, and the clauses against FS112-N2-AWAY
+     and N2-TAN (`plans/FS112-N-proof.md`) and E5's Stage 4; a clause that fails is a message to me, and a step with no hand derivation goes to a
+     deriver. Its plan includes the hypothesis set's inhabitant on a plane map (ruling 419 (d)); `isoFrag` is the fragment at hand. (c) **The second
+     open child, `CollarFit.map_hornCount_le`**, goes to the same planner unless IA1 proves it first. (d) **The three doubled statements** are a
+     tidy move at the final sync: one name kept per statement, the other an alias or removed, by that job. Default taken. (e) **Credit**: the
+     reading that found the missing bend, and that wave 4's two away bends cannot carry "no site created", is IA1's.
