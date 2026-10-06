@@ -4853,6 +4853,23 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.cuspFrag_isRingArc
 #print axioms HadwigerNelson.Plane.cuspFrag_coloursAt_I
 #print axioms HadwigerNelson.Plane.cuspFrag_radiusTwo_disjoint
+-- FS131-MB1: the stuck vertex (Stuck) — `stuckModel_hyps`, `_contacts`, `_flanks` are in FS131-KM1's block; what reads the partition at the
+-- vertex rests on `Paint`'s leaf `brickBase_mem_interiorPts` until implementer A's branch joins
+#print axioms HadwigerNelson.Plane.stuckArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.frontier_stuckW_subset
+#print axioms HadwigerNelson.Plane.stuckCol_locallyConstant
+#print axioms HadwigerNelson.Plane.stuckModel_no_unit_pair
+#print axioms HadwigerNelson.Plane.stuckModel_valid
+#print axioms HadwigerNelson.Plane.stuckModel_partition
+#print axioms HadwigerNelson.Plane.stuckModel_coloursAt
+#print axioms HadwigerNelson.Plane.stuckModel_hasSectors
+#print axioms HadwigerNelson.Plane.stuckModel_isHorn
+#print axioms HadwigerNelson.Plane.stuckModel_horn_cases
+#print axioms HadwigerNelson.Plane.stuckModel_shadow
+#print axioms HadwigerNelson.Plane.stuckModel_not_mergeAvailable
+#print axioms HadwigerNelson.Plane.stuckModel_not_rayAvailable
+#print axioms HadwigerNelson.Plane.stuckModel_not_shaveAvailable
+#print axioms HadwigerNelson.Plane.stuckModel_isStuck
 
 #eval IO.println "=== PURCHASED ==="
 

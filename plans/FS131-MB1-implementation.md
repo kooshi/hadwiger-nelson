@@ -114,3 +114,69 @@ and 330 for the helpers every later leaf of `stuckModel` reads (the arcs of a sq
 circles about the poles inside `B(v, 1/10)`, the three pieces in coordinates). **`stuckModel` without `stuckModel_terminal` re-prices
 to about 900–1,000 lines**, inside the plan's 950–1,300 for the same leaves. `shadowModel` and `awayModel` are not re-priced: neither is
 begun.
+
+## Stage 3 — SAVED (FS131-MB1): `stuckModel` — the thirteen leaves of `stuckModel_hyps` proved; `Valid` on the standard three, `IsStuck` through one leaf of `Paint`
+
+*2026-10-06 09:33 UTC.* Every leaf of `stuckModel` but `stuckModel_terminal` (the plan places it after wave 5: § 3.8) is proved. `Stuck.lean` went from
+202 to 1,430 lines: 321 lines in the thirteen leaves and 836 in 58 helpers (new declarations, each named `stuckModel_…` or
+`stuckModelPiece…`; 97 names in the file, none declared in any other worktree's `Proofs/` outside the planner's own copy of the skeleton).
+
+### 3.1 The leaves, and the route each took
+
+| leaf | route | lines |
+|---|---|---|
+| `stuckArcs_nondegenerate`, `stuckArcs_finite` | explicit lists; the squares' corners rewritten as pairs of coordinates (`stuckModel_corners`) | 19, 6 |
+| `frontier_stuckW_subset` | `frontier_union_subset` twice; the frontier of an open square is its closure off itself, hence on a side (`stuckModel_mem_poleSqArcs_iff`); the circle by `stuckModel_carrier_circ` (a full circle at any radius: the library's `carrier_circ_full` is radius `1`) | 28 |
+| `stuckCol_locallyConstant` | by piece; each strict comparison in `stuckCol` is locally constant where its two sides differ (`stuckModel_eventually_lt_iff`), which off the arcs they do: near the vertex `dist · N ≠ 1`, `dist · S′ ≠ 1` (`stuckModel_mem_arcs_ball_iff`), in a square `|a| ≠ |b|` (`stuckModel_mem_arcs_sq_iff`) | 43 |
+| `stuckModel_valid` | `paint_valid`; `hWc` empty (`brickBase_region_spare`, `stuckModel_stuckCol_spare`); `hWW` is `stuckModel_no_unit_pair`: nine pairs of pieces, the four that matter being E7 § 7.2's inequalities as four real lemmas (`stuckModel_near_real`, `_near_real'`, `_far_real`, `_far_real'`), each a linear combination of five or three named products | 8 (+ 170) |
+| `stuckModel_coloursAt`, `_hasSectors`, `_isHorn`, `_flanks` | the plan's translation: `stuckModelPiece r i = (· + plantPt) '' cuspPiece r i`, the partition `stuckModel_partition` from `cuspFrag_partition`, the pieces' data from `cuspPiece_data` through the translation; **the sector count of every colour** (`stuckModel_sectorsOf_encard`, by `encard_sectorsOf_of_partition`) | 24, 19, 13, 21 |
+| `stuckModel_contacts` | the class of a painted colour is its painted set off the new arcs (`stuckModel_region_subset`, `stuckModel_mem_region_of`); the four wedges lie in their classes (`stuckModel_wedges`) and inside or outside the unit disc about the vertex (`stuckModel_wedge_dist`); a tile with a pole in its closure lies in that pole's square (`stuckModel_tile_subset_sq`: the three pieces are separated open sets) | 53 |
+| `stuckModel_not_mergeAvailable` | only `9` has two sectors (`stuckModel_hasSectors_two`); its cone lies in the line `im d = 0` by the two out-type contacts | 18 |
+| `stuckModel_not_rayAvailable` | `stuckModel_horn_cases` — **the plan's route, not the bowtie's**: a horn set that is a sector at the vertex is a piece; the two lens pieces are no horn sets (`ne_hornSet_of_interior_coneAt`: each approaches the vertex along the directions within `1/2` of `±π/2`); a horn piece fixes `e α` (`e_eq_of_mem_coneAt_hornSet`) and the curvatures `(−1, 1)` (`hornSet_curv_eq`). Two horns on one ray would have `κ₂ = 1 < −1 = κ₃` | 10 (+ 75) |
+| `stuckModel_not_shaveAvailable` | the horn is fixed as above; each flank colour is `7` or `8`; **every horn point within `1/20` of the vertex is at distance exactly `1` from a point of `7`'s class and from one of `8`'s** (`stuckModel_shadow`) | 59 (+ 55) |
+
+**One change of route, said as the brief asks.** `stuckModel_shadow`'s witness is the point at distance `1` from `z` **toward the pole**
+(`z + (N − z)/|z − N|`), where E7 § 7.3 and the plan take the point on the pole's axis (`N − iβ`, `β = 1 − √(1 − x²) − y`). The radial
+point is `(1 − 1/d)(z − N)` from `N`, `d = |z − N|`: inside the square because its norm is `d − 1 < 1/20`, inside the wedge toward the
+vertex because `z − N` is. No square root. The statement proved is the leaf's own; the radius is `1/20` where the plan says `1/50`.
+
+**What was not hard, against the plan's list** (§ 3.7 names `stuckModel_valid` and `stuckModel_shadow` as carrying real geometry): both
+went in one pass each once stated in real variables with their products named (`LEAN.md`: `nlinarith` wants its own context).
+
+### 3.2 The build, the receipt, the checks
+
+**The build**: `data/fs131/mb/build-2.log` — `build: OK — 452 of 452 batches, 2 module(s) rebuilt, 4 module(s) with warnings, 8m18s`, exit
+0; the full log (`build-2-full.log`): **0 warnings other than `sorry`**; distinct `sorry` warnings **43** — `Paint` 13, `Moves` 18, `Stuck`
+**8** (was 21), `Bends` 4.
+
+**The receipt** (`data/fs131/mb/MBAxioms-stage3.out`, read by `tools/fs131_mb_receipt.py` → `receipt-stage3.out`, exit 0, 32 records,
+0 findings):
+
+- **on exactly the standard three** (no `sorry`-proved declaration in the closure): `stuckModel_valid`, `stuckModel_no_unit_pair`,
+  `stuckArcs_nondegenerate`, `stuckArcs_finite`, `frontier_stuckW_subset`, `stuckCol_locallyConstant`, and the cusp group's five;
+- **`sorryAx` through `Plane.Models.Paint:brickBase_mem_interiorPts` and nothing else** (`SORRY-VIA-PAINT-ONLY`, one leaf named):
+  `stuckModel_hyps`, `stuckModel_isStuck`, `stuckModel_coloursAt`, `_hasSectors`, `_isHorn`, `_flanks`, `_contacts`,
+  `_not_mergeAvailable`, `_not_rayAvailable`, `_not_shaveAvailable`, and the helpers `stuckModel_partition`, `_horn_cases`, `_shadow`.
+  That leaf — "a point strictly inside a brick is an interior point of the base" — is implementer A's; when A's branch joins, these read
+  the standard three, and until then **`stuckModel_hyps` is not a theorem on this branch**;
+- **open** (`SORRY-IN-OWN-FILES`, each naming its own leaves): `stuckModel_terminal`, `shadowModel`'s five records, `awayModel`'s two.
+
+**Controls, each watched to fire** (`receipt-selftest.out`: `4 of 4 plants fired; faithful run 0 finding(s) -> OK`): a whole record
+given `sorryAx`; a through-`Paint` record given a leaf in `Stuck`; an open record marked `STANDARD-THREE`; the wrong pairing
+`cuspFrag_bend_away <- ArcMap.bend_toward` marked `APPLIED`. The open records are the receipt tool's own standing control: eight read
+`SORRY-IN-OWN-FILES`.
+
+**The statement check**: `statements.out` — 53 skeleton declarations, 0 not found verbatim once; no path outside this job's differs
+from `fe9d6d32`. `tools/check_architecture.py`: exit 0, `RESULT: PASS`. `scripts/Axioms.lean`: fifteen records of the stuck vertex added
+to the block "FS131-MB1".
+
+### 3.3 The statement read against the claim
+
+`stuckModel_hyps : stuckModel.Valid ∧ stuckModel.IsPlaneMap ∧ stuckModel.Covers plantPt 1 ∧ stuckModel.IsStuck plantPt`, with
+`IsStuck v = ¬ MergeAvailable v ∧ ¬ RayAvailable v ∧ ¬ ShaveAvailable v ∧ ∃ c n, 2 ≤ n ∧ HasSectors v c n`. Read against FS131-E7's
+`q5-terminal-stuck-model` ("for `k = 12`, `F` the map `P₅` … and `v = 2/5 + (3/10) i`: `F.Valid`, `F.IsPlaneMap`, `F.Terminal` and
+`F.IsStuck v`"): the same object with squares for discs at the poles (the planner's variation, § 2.3 (2)), the same vertex, three of its
+four conjuncts; `F.Terminal` is `stuckModel_terminal`, open. **Each negative clause is met with its positive part live**, so none holds
+for want of an object: `9` has two sectors (`stuckModel_hasSectors`) and its cone fails only by having no interior
+(`stuckModel_contacts`: two out-type contacts); two horns of `9` exist, on different rays (`stuckModel_isHorn`); each horn has both flanks
+(`stuckModel_flanks`) and fails only the clear split (`stuckModel_shadow`).

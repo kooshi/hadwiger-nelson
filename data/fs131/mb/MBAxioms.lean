@@ -92,6 +92,11 @@ end MB
 #mb_receipt HadwigerNelson.Plane.stuckModel_isStuck
 #mb_receipt HadwigerNelson.Plane.stuckModel_hyps
 #mb_receipt HadwigerNelson.Plane.stuckModel_terminal
+-- the helpers the stuck vertex's leaves stand on
+#mb_receipt HadwigerNelson.Plane.stuckModel_no_unit_pair
+#mb_receipt HadwigerNelson.Plane.stuckModel_partition
+#mb_receipt HadwigerNelson.Plane.stuckModel_horn_cases
+#mb_receipt HadwigerNelson.Plane.stuckModel_shadow
 -- the doubly shadowed band
 #mb_receipt HadwigerNelson.Plane.shadowModel_valid
 #mb_receipt HadwigerNelson.Plane.shadowModel_condition5
