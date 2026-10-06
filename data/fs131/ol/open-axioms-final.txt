@@ -1,0 +1,4 @@
+  on fewer: HadwigerNelson.Plane.BranchGerms.idx_idx ['propext']
+  on fewer: HadwigerNelson.Plane.BranchGerms.turns_idx ['Quot.sound', 'propext']
+OPEN records: 105 theorems in the source, 105 names in the audit block, 3912 records in the log — 103 on exactly the standard three, 2 on fewer, 0 on none; exists_open ['Classical.choice', 'Quot.sound', 'propext']
+open axioms: PASS

@@ -1,0 +1,28 @@
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.OpenConfig.exists_clearSet :: F.Valid
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_openConfig :: F.IsHorn v α κ₁ κ₂ c
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_openConfig :: F.Valid
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_openConfig_down :: F.Valid
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_openConfig_up :: F.Valid
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_allowedCone :: F.Valid
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_condition5 :: F.Condition5
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_inType_iff :: F.Valid
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_isContact_iff :: F.Valid
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_outType_iff :: F.Valid
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_tile_cover :: F.Valid
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_tile_split :: F.Valid
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_open :: F.IsHorn v α κ₁ κ₂ c
+added SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_open :: F.Valid
+main rows 845, landing rows 859, lost 0, added 14 (117 names declared in OpenMove)
+  added SITE GENERIC on Condition5: 1
+  added SITE GENERIC on IsHorn: 2
+  added SITE GENERIC on Valid: 11
+  declarations: 11026 -> 11173 (+147)
+  refutations-skipped: 113 -> 118 (+5)
+  sites: 770 -> 784 (+14)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 32 -> 32 (+0)
+  generic: 733 -> 747 (+14)
+  unknown: 2 -> 2 (+0)
+vacdiff: PASS

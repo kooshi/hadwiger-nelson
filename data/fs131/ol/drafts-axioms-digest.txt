@@ -1,0 +1,23 @@
+    audited: 3912 records — 3889 clean on the standard axioms, 14 axiom-free, 4 imported (resting on a declared outside theorem), 5 declared purchase(s)
+    clean records, by axiom set:
+       3768  [propext, Classical.choice, Quot.sound]
+         62  [propext]
+         58  [propext, Quot.sound]
+          1  [Quot.sound]
+         14  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.PartialColoring.map, HadwigerNelson.Plane.BranchGerms.fin3_adj, HadwigerNelson.Plane.BranchGerms.mem_gapGerm, HadwigerNelson.Plane.BranchGerms.mem_gapSec, HadwigerNelson.Q4.approx, HadwigerNelson.Stripe.wheel_all, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    declared imports (1): HadwigerNelson.Plane.falconer_lemma2_nonempty
+    imported records (4):
+      HadwigerNelson.Plane.falconer_reduction  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+      HadwigerNelson.Plane.le_chiM_of_falconerFan  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+      HadwigerNelson.Plane.exists_mem_falconerE  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+      HadwigerNelson.Plane.fan_tip_ae_mem  [propext, Classical.choice, Quot.sound, HadwigerNelson.Plane.falconer_lemma2_nonempty]
+    library axioms other than native auxiliaries (1): HadwigerNelson.Plane.falconer_lemma2_nonempty; native auxiliaries: 10
+    recorded count in CLAUDE.md § Trust ledger (read from /tmp/claude-1000/-home-kooshi-source-lean-dir/97d700e3-0ed0-4032-8dcd-cebbe8c929fe/scratchpad/CLAUDE.drafted.md): match (clean, purchases and imported compared)
+    --- changes since the previous complete run ---
+    no previous complete run on record; the next run is compared with this one
