@@ -534,7 +534,6 @@ theorem AwayBend.contact_of_onRingArc {M : ArcMap k} {h : ℂ ≃ₜ ℂ} {K : S
     (hb : AwayBend F M h K P θ₁ θ₂ c ε) {θ : ℝ} (hθ : θ ∈ Ioo θ₁ θ₂) (hon : M.OnRingArc P (ringPt P θ)) :
     P + 2 * e θ ∈ closure (F.region c) := by
   obtain ⟨a₀, b₀, hab, ⟨t, ht, hte⟩, hsub⟩ := hon
-  have hπ := Real.pi_pos
   have het : e t = e θ := by simpa [ringPt] using hte
   obtain ⟨n, hn⟩ := e_eq_e_iff.mp het
   -- an angle `φ` with `φ + n · 2π ∈ [a₀, b₀]` is on `Γ_M`, so not in the class

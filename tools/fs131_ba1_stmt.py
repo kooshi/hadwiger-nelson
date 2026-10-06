@@ -12,7 +12,10 @@ Checks, for every `.lean` file under `Proofs/` (and `Proofs.lean`) that exists a
 2. in an EDITABLE file, every declaration of the base is declared exactly once with an identical statement — for a theorem the header
    up to its first `:=` (no theorem of these files has a `:=` inside a binder), for a `def`/`structure`/`inductive` the whole
    declaration — except:
-   * the names in ALLOW (`AwayBend.idle`: it loses `hA` and `hε`, inventory ruling 446 (b)), whose new statement is printed;
+   * the names in ALLOW, each with the rewrites a ruling made: the new statement must be EXACTLY the base's with those rewrites
+     applied (so a ruled change left undone fails, and so does any other change to the same declaration) —
+     `AwayBend.idle` loses `hA` and `hε`, and with `hA` its implicit `c'` (inventory ruling 446 (b));
+     `dist_lt_one_of_thin` loses `hκ0` (inventory ruling 452 (a));
    * the names in DEF_UPTO, defs whose proof fields this job fills: the declaration is compared up to the marker (for `pushOutHomeo`,
      up to `left_inv`: its `toFun` and `invFun` are the definition, the four fields after them are proofs);
 3. in `BendStep.lean` the only changed line is the call of `AwayBend.idle` in `bend_away_subdiv`;
@@ -25,7 +28,10 @@ import sys
 from pathlib import Path
 
 V = "Proofs/HadwigerNelson/Plane/ValidMap/"
-ALLOW = {"AwayBend.idle"}
+ALLOW = {
+    "AwayBend.idle": [("{c c' : Fin k} (hA : F.IsRingArc P a b c c') ", "{c : Fin k} "), ("{ε : ℝ} (hε : 0 < ε) :", "{ε : ℝ} :")],
+    "dist_lt_one_of_thin": [("(hκ0 : 0 ≤ κ) ", "")],
+}
 DEF_UPTO = {"pushOutHomeo": "left_inv"}
 EDITABLE = {V + "LensOut.lean", V + "CollarMapOut.lean", V + "BendAway.lean", V + "BendStep.lean"}
 ONE_LINE = {V + "BendStep.lean": "AwayBend.idle"}
@@ -44,7 +50,8 @@ def decls(text):
         nxt = STOP.search(text, m.end())
         block = text[m.start(): nxt.start() if nxt else len(text)]
         if kind in ("theorem", "lemma"):
-            block = block.split(":=", 1)[0]
+            block = re.sub(r"\s+", " ", block.split(":=", 1)[0])
+            block = re.split(r" (?:where|by)\b", block, maxsplit=1)[0] if name in ALLOW else block
         elif name in DEF_UPTO:
             if DEF_UPTO[name] not in block:
                 block = block + " <<MARKER MISSING>>"
@@ -77,10 +84,18 @@ def check(base, tree_text=None, extra=None):
                 bad.append(f"MISSING {f}: {name}")
             elif len(dn[name]) != len(stmts):
                 bad.append(f"COUNT {f}: {name} declared {len(dn[name])} time(s), base {len(stmts)}")
-            elif dn[name] != stmts and name not in ALLOW:
-                bad.append(f"STATEMENT {f}: {name}")
+            elif name in ALLOW:
+                want = stmts[0]
+                for a, b in ALLOW[name]:
+                    if a not in want:
+                        bad.append(f"ALLOW {f}: {name}: the base statement does not hold {a!r}")
+                    want = want.replace(a, b, 1)
+                if dn[name][0] != want:
+                    bad.append(f"STATEMENT {f}: {name} is not the base's with the ruled rewrites\n    want: {want}\n    have: {dn[name][0]}")
+                else:
+                    print(f"ruled statement change, exactly as ruled: {f}: {name}\n    now: {dn[name][0]}")
             elif dn[name] != stmts:
-                print(f"allowed statement change: {f}: {name}\n    now: {dn[name][0]}")
+                bad.append(f"STATEMENT {f}: {name}")
         for name in dn:
             if name not in do:
                 print(f"new declaration: {f}: {name}")
@@ -127,7 +142,10 @@ def main():
             assert a in T[f], f"the plant's anchor is gone: {a!r} in {f}"
             return {f: T[f].replace(a, b, 1)}
         plants = {
-            "a changed hypothesis of a theorem (dist_lt_one_of_thin)": (rep(lo, "(hκ : κ ≤ 1 / 8)", "(hκ : κ ≤ 1 / 4)"), None),
+            "a changed hypothesis of a theorem (collarOutArcs_carrier)": (rep(lo, "theorem collarOutArcs_carrier {P : ℂ} {θ₁ θ₂ R : ℝ} (hR : 1 < R)", "theorem collarOutArcs_carrier {P : ℂ} {θ₁ θ₂ R : ℝ} (hR : 1 ≤ R)"), None),
+            "a ruled change left undone (dist_lt_one_of_thin with hκ0 back)": (rep(lo, "(h2 : φ₂ < α₂) (hκ : κ ≤ 1 / 8)", "(h2 : φ₂ < α₂) (hκ0 : 0 ≤ κ) (hκ : κ ≤ 1 / 8)"), None),
+            "a second change to a ruled statement (dist_lt_one_of_thin's bound)": (rep(lo, "(h2 : φ₂ < α₂) (hκ : κ ≤ 1 / 8)", "(h2 : φ₂ < α₂) (hκ : κ ≤ 1 / 4)"), None),
+            "a second change to a ruled statement (AwayBend.idle's conclusion)": (rep(ba, "AwayBend F F (Homeomorph.refl ℂ) ∅ P a b c ε where", "AwayBend F F (Homeomorph.refl ℂ) ∅ P a a c ε where"), None),
             "a changed data field of a def with proof fields (pushOutHomeo.toFun)":
                 (rep(lo, "toFun := radialMap P ((θ₁ + θ₂) / 2) (fun θ t => push1 (a θ) 1 (l θ) (b θ) t)",
                      "toFun := radialMap P ((θ₁ + θ₂) / 2) (fun θ t => push1 (a θ) 1 (b θ) (b θ) t)"), None),
