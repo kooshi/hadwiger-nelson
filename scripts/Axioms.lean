@@ -4827,6 +4827,21 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.StandingFive.K_le
 #print axioms HadwigerNelson.StandingFive.targetFloor_zero
 
+/-! ## FS-131 wave 10 (job FS131-I10C) — the standing-five field: the leaves of `Arith/StandingFive` -/
+-- FS131-I10C
+#print axioms HadwigerNelson.StandingFive.g_eta
+#print axioms HadwigerNelson.StandingFive.dvd_of_pow_pow_eq
+#print axioms HadwigerNelson.StandingFive.fourteen_dvd_of_char_two
+#print axioms HadwigerNelson.StandingFive.usableBelow_347
+#print axioms HadwigerNelson.StandingFive.card_ge_of_usable
+#print axioms HadwigerNelson.StandingFive.card_fixed_of_involution
+#print axioms HadwigerNelson.StandingFive.finrank_standingField_le
+#print axioms HadwigerNelson.StandingFive.im_eq_zero_of_aeval_gPoly
+#print axioms HadwigerNelson.StandingFive.numberField_standingField
+#print axioms HadwigerNelson.StandingFive.isTotallyReal_standingField
+#print axioms HadwigerNelson.StandingFive.usable_card_ge
+#print axioms HadwigerNelson.StandingFive.no_small_usable
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
