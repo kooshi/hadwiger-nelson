@@ -70,3 +70,49 @@ line, at `4b68d47d`) and `.claude/worktrees/fs131-w5k` (`3b120cd3`), reading the
 Mine: this record, `data/fs131/qa4/`, `tools/fs131_qa4_*.py`, `data/fs131/reports/FS131-QA4.md`, on `main`, committed by explicit path. Not mine:
 any `Proofs/` file, any worktree, any other branch, any statement, any file Keryx alone writes (`LEAN.md`, the inventory) — edits to those are
 drafted here with their slot. I prove nothing in `Proofs/`. I start no agent and run no search.
+
+## Stage 2 — SAVED (FS131-QA4): the census instrument, and where the boundary is drawn
+
+### 2.1 The instrument
+
+`tools/fs131_qa4_census.py` (imports FS131-QA1's parser read-only; reads each module with `git show <commit>:<path>`): for every theorem of
+the 39 audited modules — its head reasons (a backlog row named in its docstring; its name used in another audited module; the brief's list of
+construction heads), whether its statement concludes `False`, whether its body holds `sorry`, the named predicates in its signature, and the
+sentence of its docstring that speaks of an inhabitant or model; for every definition — NEW, CHANGED or SAME against every body the nine
+commits of QA2 and QA3 hold under that name, and the number of audited theorems whose signature takes it.
+
+`--self-test`: 15 controls, 4 of them planted faults inside the test (a citing module emptied, a module missing, a definition changed, a
+definition new), exit 0. **Two faults planted in the tool itself and watched to fire** (on a copy in the session's scratch): with the arrow
+chain's last target not taken, "arrow-form refutation missed", exit 1; with a theorem's own module counted as a citation, "a child read as a
+head" and "citation still reported after the citing module was emptied", exit 1.
+
+Outputs (committed): `data/fs131/qa4/theorems.tsv` (2,590 theorems), `heads.tsv` (963), `defs.tsv` (319 definitions).
+
+### 2.2 The census in numbers
+
+| body | modules | theorems | row or construction heads | cited from another module only | refutation-shaped | with `sorry` | docstring speaks of an inhabitant |
+|---|---|---|---|---|---|---|---|
+| `main` (`d4403f09`) | 18 | 1,563 | 139 | 468 | 32 | 0 | 26 |
+| wave 5 (`3b120cd3`) | 17 | 775 | 111 | 172 | 23 | 5 | 48 |
+| wave 5c (`87e95385`) | 4 | 252 | 68 | 5 | 7 | 4 | 50 |
+| total | 39 | 2,590 | 318 | 645 | 62 | 9 | 124 |
+
+Definitions: 319, of which 108 are Prop-valued (predicates and structures); **28 Prop-valued definitions are new or changed since the commits QA2
+and QA3 read** (27 NEW, 1 CHANGED: `IsHoleOf`, item 242's repair); they are tabled in Stage 5.
+
+### 2.3 The boundary (brief, Done means 2: "say where you drew that boundary")
+
+- **A head** is a theorem whose docstring names a backlog row or a derivation's entry (318 by the script: 315 by a row, 3 more from the brief's
+  list of construction heads). These are read one by one, by family (Stage 4).
+- **A theorem cited from another module and not a row** (645) is an internal child in the brief's sense unless its signature takes a named
+  predicate no head of its family takes. The script lists each one's predicates; a child whose predicate set is a subset of its head's
+  **inherits its head's line** (its hypotheses are among the head's, so the head's inhabitant is its inhabitant). The ones that take a
+  predicate set no head takes are read with the family.
+- **Everything else** (1,627 theorems used only in their own module) inherits its module's heads.
+- **Parametric theorems** — every hypothesis a parameter or an (in)equality on reals and complex numbers, no carried object (`n4_fin`,
+  `curvUp_curvDown`, the lens and lune inequalities, `PlaneTopology`'s lemmas about sets of the plane) — are outside the rule (§ 1.2) and are
+  counted, not read.
+
+The census is textual. Its two known blind spots, both in the safe direction for a head count and not for an inhabitant verdict, so every
+verdict below is from reading the statement itself: a hypothesis that is not a named predicate (an inline `∀ᶠ`, a cone's interior) is invisible
+to the predicate column; and "the docstring speaks of an inhabitant" matches the words, not the claim.

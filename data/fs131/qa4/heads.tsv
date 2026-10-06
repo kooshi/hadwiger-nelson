@@ -1,0 +1,963 @@
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	80	Icc_subset_angleIcc	cited:Cone,Contact,HexRing,HornShadow		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	84	Ioo_subset_angleIoo	cited:UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	235	exists_shift_Ico	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	246	periodic_int	cited:Basic,Merge		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	308	isClosed_coneAt	cited:Basic,Merge		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	325	mem_coneAt_of_mem_isOpen	cited:Sectors		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	348	coneAt_nonempty	cited:Cone,Sectors		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	457	Arc.finite_inter_sphere_or_eq_circ	cited:BaseSteps,Basic,BendCollar,CollarMap		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	571	continuous_polarPt	cited:MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	575	norm_polarPt_sub	cited:MapGraph,MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	579	dist_polarPt_ringPt_le	cited:MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	596	polar_nbhd	cited:MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	628	e_eq_e_iff	cited:BaseDense,BaseWalk,Basic,Cone		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	639	exists_mem_Icc_e_eq	cited:BaseWalk,CurveGraph,MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	650	e_ne_one	cited:CurveGraph,MapGraph,MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	700	isPreconnected_germ	cited:HexRing,UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	769	coneAt_biUnion_finite	cited:Cor3,Sectors,Steps,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	789	coneAt_inter_ball	cited:Merge,Sectors,Steps,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1176	Arc.curveData_kappa	cited:Limit,Merge		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1180	Arc.curveData_ne	cited:Limit,Merge		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1198	Arc.carrier_subset_curve	cited:Limit,Merge		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1230	exists_notMem_curveAt	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1274	finite_perp_circle	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1429	dense_interiorPts	cited:BaseSteps,BaseWalk,Collar,Cor3		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1602	mem_closure_tile	cited:MapGraph,MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1619	exists_ball_finite	cited:Cone,Contact		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1651	exists_goodAt	cited:Limit,Merge,Surgery		0			GoodAt
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1711	IsTile.subset_of_preconnected	cited:MapTopology,Merge,MergeMove,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1718	GoodAt.exists_local_curve	cited:Merge		0			GoodAt
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1752	GoodAt.not_tile_subset_ball	cited:MergeMove	REFUT	0			GoodAt
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1845	injOn_spherePt	cited:Basic,UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1865	GoodAt.finite_tiles_sphere	cited:MergeMove		0			GoodAt
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1964	finite_tiles_near	cited:Cone,Dense,MapTopology,SVMap		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	1988	mem_coloursAt_iff_exists_tileOf	cited:BaseSteps,BaseWalk,Cone,Contact		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	2009	coneAt_region_eq_biUnion	cited:Cone,NoFourFive,UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	2026	exists_mem_coneAt_region	cited:Contact,Merge,Terminal,UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	2319	germ_dichotomy	cited:UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	2546	isPreconnected_Rgn_lev	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	2601	conj_mul_self_e	cited:MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	2765	GoodAt.exists_wedge	cited:Merge		0			GoodAt,Tang
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	2896	e_sub_eq	cited:Merge,RadialPush		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	2987	sin_half_ge	cited:FlankUA		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3357	isClosed_curveAt	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3628	branchPt_eq	cited:BaseSteps,Contact,Cor3,Limit		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3630	germDir_zero	cited:Limit,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3632	germDir_add_two_pi	cited:MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3635	continuous_germDir	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3638	continuous_branchPt	cited:BaseSteps,CurveGraph,MapGraph,MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3643	norm_mul_e	cited:CurveGraph,Limit,MapGraph,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3646	norm_branchPt_sub	cited:BaseSteps,BendCollar,BrickMap,Cone		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3650	polar_eq_iff	cited:BaseSteps,CurveGraph,MapGraph,MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3665	eq_polar_arg	cited:BaseSteps,BaseWalk,Contact,Cor3		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3670	e_add_int_mul	cited:BaseWalk,Cone,Contact,MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3675	eq_polar_local	cited:OpenMove,Pushforward		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3690	continuousAt_arg_div	cited:OpenMove,Pushforward		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3699	arg_div_self	cited:OpenMove,Pushforward		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3703	sq_norm_e_sub_e	cited:CurveGraph,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3719	sector_eq	cited:MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3730	nextDir_eq	cited:MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3734	continuous_dir	cited:MapTopology,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3736	continuous_nextDir	cited:MapTopology,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3741	Sorted.mono	cited:BaseSteps,BaseWalk,Basic,BendCollar		0			BranchGerms,Mono,Sorted
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3754	Mono.le_of_le	cited:Surgery		0			Mono
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3759	Mono.le_two_pi	cited:Surgery		0			Mono
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3772	Mono.zero_le	cited:MapGraph,MapTopology,Merge,NoFourFive		0			Mono
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3784	Mono.disjoint	cited:Cone,Contact,HexRing,MapTopology		0			Mono
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3813	exists_angle	cited:MergeMove		0			BranchGerms
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3866	e_nextDir	cited:BaseSteps,Contact,Cor3,HexRing		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3873	nextDir_of_next_eq	cited:Moves		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3887	dir_lt_nextDir	cited:BaseSteps,Cor3,HexRing,Limit		0			Sorted
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3941	mem_sector_iff	cited:Contact,Moves,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3951	sector_mono	cited:Contact,HexRing,Limit,MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3955	sector_subset_ball	cited:MapTopology,Moves,Pushforward,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3960	sector_disjoint	cited:MapTopology,MergeMove,Moves,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	3980	isOpen_sector	cited:MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4005	isPreconnected_sector	cited:MapTopology,Sectors,Surgery,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4036	mem_coneAt_of_ray	cited:OpenMove,Sectors		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4164	e_toIcoMod_add	cited:CurveGraph,Limit,Pushforward,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4171	branchPt_curveGerm	cited:CurveGraph		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4187	branchPt_curveGerm_mem	cited:CurveGraph,Pushforward		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4211	exists_eq_branchPt_curveGerm	cited:CurveGraph,Limit,Pushforward		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4244	exists_germDir_ne	cited:Surgery		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4401	Arc.exists_near	cited:CollarMap,Moves,OpenMove,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4519	isSectorChart_of	cited:Pushforward		0			BranchGerms,IsSectorChart,Sorted
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4608	localSectors_disj	row;cited:BaseSteps,HexRing,Limit		0		FS131-I4k	BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4766	localSectors	cited:BaseSteps,BendCollar,Cone,Contact		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4777	IsTile.eq_of_mem	cited:Cone,Contact,MapGraph,MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4784	IsSectorChart.sector_subset_interiorPts	cited:BaseSteps,Cone,Contact,HexRing		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4792	IsSectorChart.sector_nonempty	cited:BaseSteps,Cone,Contact,Cor3		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4803	IsSectorChart.exists_tile_inter_ball	row		0		FS131-E2-ONESECT,FS131-E2-derivation	BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/LocalStructure.lean	4850	Simple.coneAt_eq_angleIcc_sep	row		0		FS131-E2-SEP,FS131-E2-derivation	
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	36	dot_e_e	cited:Collar,Cone,Contact,HexRing		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	42	dot_ofReal_mul	cited:Cone,Contact,HexRing,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	46	dot_add_left	cited:Cone,Merge,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	87	exists_double_unit_circle	row		0		FS106-L,FS131-I4c	
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	176	isOpen_shadow	cited:Collar		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	207	lemmaL	row;cited:Collar		0		FS106-L,FS106-V-verification,FS131-I4c	
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	261	not_lemmaL_of_not_mem	row		0		FS106-L's	
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	492	lebesgue_covering_square	row;cited:Dense		0		FS106-SB-verification,FS131-LEB	
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	522	IsRegion.subset	cited:BaseDense,BaseSteps,BaseWalk,Basic		0			IsRegion
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	525	IsRegion.isPreconnected	cited:BaseDense,BaseSteps,BaseWalk,Basic		0			IsRegion
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	530	IsRegion.chain_step	cited:Dense		0			IsRegion
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	536	IsRegion.dist_lt_one	row;cited:Dense		0		FS106-DIAM	IsRegion
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	547	exists_three_le_multicolour	row		0		FS106-SB-verification,FS106-TS-T	
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	742	exists_three_le_multicolour_lt_one	row		0		FS106-TS-T,FS106-TS-derivation	
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	804	ts_t	row;cited:Dense,Steps		0		FS106-TS-T	
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	810	exists_hasDegree_of_mem_dom	cited:Dense		0			HasDegree
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	816	ts_t_trichromatic	row		0		FS106-TS-T,FS110-N4-STUCK,FS110-NB-4's	HasDegree
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	825	ts_t_degree_three	row		0		FS106-TS-T	Condition6,HasDegree
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	860	brickCorner_re	cited:Steps		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	864	brickCorner_im	cited:Steps		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	1032	sevenBrickMap_isPlaneMap	cited:Steps,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	1035	sevenBrickMap_valid	cited:Dense,Steps,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	1047	not_mem_sevenBrickArcs	cited:BaseSteps,BrickMap,Steps		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	1078	mem_sevenBrickArcs_of_bottom	cited:BrickMap,Steps		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	1091	mem_sevenBrickArcs_of_left	cited:BrickMap,Steps		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	1253	sevenBrick_color_eq	cited:BaseSteps,BrickMap,Steps		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	1307	sevenBrick_corner_coloursAt	cited:BaseSteps,Steps		0			
+main	Proofs/HadwigerNelson/Plane/SVMap.lean	1356	sevenBrick_corner_isCubicTrichromatic	row;cited:Dense,HexRing		0	matic vertex** (FS131-QA2's QA2-2): the inhabitant of `IsCubicTrichromatic` on a valid map of the plane at `k = 7`, for `pair_i`, `pair_ii`, `pair_P'`, `fail_*`, `anti`. -/	FS131-QA2's	IsCubicTrichromatic
+main	Proofs/HadwigerNelson/Plane/StuckChain.lean	51	n4_fin	row		0		FS110-N4-FIN	
+main	Proofs/HadwigerNelson/Plane/StuckChain.lean	81	curvUp_curvDown	row		0		FS110-N4-SHADOW's	
+main	Proofs/HadwigerNelson/Plane/StuckChain.lean	108	ray_chain	row		0		FS112-N2-RAY	
+main	Proofs/HadwigerNelson/Plane/StuckChain.lean	119	exists_oneSided_chain	row		0		FS112-N2-RAY	
+main	Proofs/HadwigerNelson/Plane/StuckChain.lean	127	rayLower_pencil	row		0		FS112-N2-RAY	
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	246	Valid.of_agreesOff	cited:CollarMap,MergeMove,OpenMove,Surgery		0			AgreesOff,IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	271	mem_closure_ringArc_diff_finite	cited:UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	364	e_add_pi_div_two	cited:Cone,HexRing,Terminal,UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	370	frame_normSq	cited:Cone,Contact,FlankUA,HornShadow		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	378	sq_dist_normalPt	cited:Cone,HornShadow,StuckChain		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	395	sq_dist_N	cited:Cone,Contact,HornShadow,UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	402	sq_dist_S	cited:Cone,Contact,HornShadow,UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	414	tanAbove_one_iff	cited:BaseSteps,Cone,Contact,FlankUA		0			TanAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	421	tanBelow_one_iff	cited:BaseSteps,Cone,Contact,OpenMove		0			TanBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	428	tanAbove_neg_one_iff	cited:BaseSteps,Cone,Contact,OpenMove		0			TanAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	436	tanBelow_neg_one_iff	cited:BaseSteps,Cone,Contact,FlankUA		0			TanBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	444	tanHeight_eq_of_ne_zero	cited:StuckChain		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	452	tanAbove_iff_of_pos	cited:Cone		0			TanAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	462	tanBelow_iff_of_pos	cited:Cone		0			TanBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	472	conj_e_mul_e	cited:BaseSteps,FlankUA,HornShadow,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	476	frameX_sub	cited:Cone		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	486	sq_dist_frame	cited:Cone,Contact,HornShadow,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	494	frameX_add_normal	cited:Cone,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	506	frameY_add_normal	cited:Cone,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	518	frameX_self	cited:Cone,Contact,HornShadow,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	520	frameY_self	cited:Cone,HornShadow,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	523	frameX_N	cited:Cone		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	526	frameY_N	cited:Cone		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	529	frameX_S	cited:Cone,HornShadow		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	532	frameY_S	cited:Cone,HornShadow		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	536	tanAbove_iff_of_neg	cited:Cone		0			TanAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	548	tanBelow_iff_of_neg	cited:Cone		0			TanBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	560	inv_curvUp	cited:Cone,StuckChain		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	566	inv_curvDown	cited:StuckChain		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	572	frameX_base_N	cited:Cone,Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	579	frameY_base_N	cited:Cone,Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	586	frameX_base_S	cited:Cone,Contact,HornShadow,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	593	frameY_base_S	cited:Cone,Contact,HornShadow		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	600	frameX_normalPt	cited:Cone		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean	606	inv_curvDown_eq	cited:Cone		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	26	connectedComponentIn_eq_of_iUnion	cited:BrickMap,OpenMove,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	50	frame_polar	cited:Cone,Contact,MergeMove,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	59	tanHeight_polar	cited:Cone,MergeMove,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	67	half_curv_mem_Icc	cited:BrickMap,Cone,Contact,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	76	sectorBetween_eq_hornSet	cited:Cone,Contact,Moves,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	135	IsSectorChart.mem_closure_sector	cited:BaseSteps,Contact,HexRing,Limit		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	143	isSector_iff_of_partition	cited:BaseSteps,OpenMove		0			IsSector
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	160	injective_of_disjoint	cited:Cone,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	168	encard_sectors_of_partition	cited:SVMap		0			IsSector
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	181	IsSectorChart.isSector_iff	cited:BaseSteps,Cone,Contact,HexRing		0			BranchGerms,IsSector,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	187	IsSectorChart.isSector_iff_of_zero	cited:Cone,Contact,Limit,Pushforward		0			BranchGerms,IsSector,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	216	IsSectorChart.hasDegree	cited:BaseSteps,HexRing,MapTopology,OpenMove		0			BranchGerms,HasDegree,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	222	IsSectorChart.ncard_coloursAt_le	cited:HexRing,Limit,Procedure,UnitArc		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	258	exists_hasDegree_of_chart	cited:BrickMap,SVMap		0			HasDegree
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	263	coneAt_ball_self	cited:Cone,Contact,Limit		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	270	IsSectorChart.curv_next	cited:Cone,Contact,Moves,OpenMove		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	300	IsSectorChart.exists_sector_of_mem_coneAt_region	cited:BaseSteps,HexRing,Procedure,UnitArc		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	317	coneAt_region_nonempty	cited:BaseSteps,Procedure,UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	431	halfDisc_simple	row		0	mple** (FS131-QA2's QA2-3, the two-tile model of `Simple`): its tiles are the two open half-discs, each a Jordan domain, and their closures, both convex, meet in a convex (so preconnected) set — the diameter. -/	FS131-QA2's	
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	476	norm_sub_I_sq_add	cited:BaseSteps		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	517	cuspFrag_mem_interiorPts	cited:BaseSteps		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	536	hornSet_cusp_iff	cited:BaseSteps		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	580	mem_cuspPiece_one	cited:BaseSteps,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	600	cuspFrag_partition	cited:BaseSteps,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	641	cuspPiece_data	cited:BaseSteps,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean	731	cuspFrag_isHorn	row		0		FS131-QA2's	IsHorn
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	30	frameX_fromFrame	cited:FlankUA,HornShadow,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	39	frameY_fromFrame	cited:FlankUA,HornShadow,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	67	exists_mem_hornSet_aboveBelow	cited:BaseSteps,Terminal		0			TanAbove,TanBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	255	Valid.dist_ne_one_of_isOpen_subset_closure	row;cited:BaseSteps,BendCollar,HexRing		0		FS112-LOCK	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	306	lock	row;cited:BendCollar		0		FS112-LOCK,FS131-I4d's	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	416	n2_sign	row		0		FS112-N2-BENDS	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	446	l60_le	row;cited:BaseDense,BendCollar,Procedure		0		FS114-L60-LE	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	507	noBoth	row;cited:BaseSteps,BaseWalk,MapTopology		0		FS112-N3-NOBOTH,FS116-V5-U1's	BothKind,HasRepeatedColour
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	688	isRingArc_of_clean	cited:BaseSteps		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	828	ringArc_subset_ringArc	cited:FlankUA,Procedure		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	907	dist_ringPt_ringPt_le	cited:BaseSteps,BendCollar		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	912	ringPt_arg_sub	cited:BaseSteps		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	935	u1_shadow	row		0		FS112-U1,FS116-V5-U1's	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	1044	l60_eq_third	row		0		FS114-L60-LE	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	1292	sq_norm_eq_re_im	cited:BendCollar		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	1563	l60_eq_inner	row		0		FS114-L60-LE	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	1588	l60_eq_outer	row		0		FS114-L60-LE	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	1662	l60_eq_corners	row		0		FS114-L60-LE	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	1726	l60_interior_cases	cited:BendCollar		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	1759	l60Frag_valid	cited:BendCollar		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	1822	l60Frag_isRingArc	cited:BendCollar		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	1891	l60_real	row		0		FS114-L60-LE	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	2203	n2_env_toward	row;cited:BendCollar		0		FS112-N2-BENDS	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	2420	n2_env_away	row		0		FS112-N2-BENDS	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	2560	n2_env_near	row;cited:BendCollar		0		FS112-N2-BENDS	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	2599	n2_env_near_away	row		0		FS112-N2-BENDS	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	2804	eq_polar_frameDir	cited:RadialPush		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	2843	dist_polar_ringPt	cited:BendCollar		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	2885	dist_polar_polar_sq	cited:RadialPush		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	3091	cutArcs_nondegenerate	cited:CollarMap		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	3129	cutArcs_locallyFinite	cited:CollarMap		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	3159	ringPt_mem_openArc_iff	cited:BendCollar		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	3220	mem_cutArcs_iff	cited:CollarMap		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	3236	exists_kept_of_mem_openArc	cited:CollarMap		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	3502	mem_thickening_ringArc_of_polar	cited:BendCollar		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	3511	toward_clear	cited:BendCollar		0			IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	3776	bend_toward	row;construction		0		FS112-BEND's,FS112-N2-BENDS	AgreesOff,RingArcsWithin
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	3968	bend_away_whole	row;construction		0		FS112-N2-BENDS	AgreesOff,RingArcsWithin
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	4142	isOpen_isoDom	row		0		FS112-ISO's	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	4149	mem_isoArc_of_norm_one	row		0		FS112-ISO	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	4184	isoCol_locallyConstant	row		0		FS112-ISO's	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	4313	iso	row		0		FS112-ISO	IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	4607	inType_shadows_horn	row		0		FS112-FLANK	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	4636	flank_siamese_of_inType	row		0		FS112-FLANK	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	4662	normalPt_add_eq_fromFrame	cited:FlankUA,HornShadow		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	5262	flankQ_upper_shadow	row		0		FS112-N2-FLANK-Q's	IsFlankAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	5355	flankQ_upper	row;cited:Terminal		0		FS112-N2-FLANK-Q,FS112-N2-TERM's	IsContact,IsFlankAbove,IsHorn,IsR2Arc,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	5473	IsHorn.isRingArc_lower	cited:Terminal		0			IsFlankBelow,IsHorn
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	5651	flankQ_lower_shadow	row		0		FS112-N2-FLANK-Q's	IsFlankBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	5741	flankQ_lower	row;cited:Terminal		0		FS112-N2-FLANK-Q	IsContact,IsFlankBelow,IsHorn,IsR2Arc,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	5853	flankQ_both	row		0		FS112-N2-FLANK-Q	IsContact,IsHorn,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	5947	exists_shift_avoiding	row		0		FS112-A4SIX	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	6022	countable_ringPt_preimage	cited:BaseSteps,BendCollar		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	6081	a4six	row		0		FS112-A4SIX	IsCoveringPair
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	6203	straddlers_third	row		0		FS112-N-proof	
+main	Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean	6317	nb4p	row	REFUT	0		FS112-NB4P	
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	67	const_univ_coloursAt	cited:HexRing		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	185	exists_ball_col_mem_coloursAt	cited:HexRing		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	261	BranchGerms.mem_closure_sector_of_lt	cited:Cor3,HexRing		0			BranchGerms
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	303	germ_eq_of_two_on_circle	cited:Cor3		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	407	IsCubicTrichromatic.chart	cited:Cor3,HexRing		0			BranchGerms,IsCubicTrichromatic,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	597	IsSectorChart.exists_isRingArc_of_along	cited:Cor3		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	748	closure_sector_subset_of_side	cited:Cor3		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	1135	pair_i_of_transversal	row	REFUT	0		FS112-N3-PAIRS	IsCubicTrichromatic
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	1283	pair_i	row;cited:BaseWalk	REFUT	0	257); beyond `3` there is no unit pair. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/	FS112-N3-PAIRS,FS131-I4k	IsCubicTrichromatic
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	1304	pair_ii	row;cited:BaseWalk		0	is the centre of a both-kind unit arc. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/	FS112-N3-PAIRS	BothKind,IsCubicTrichromatic
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	1384	pair_P'	row;cited:BaseDense		0	multicolour are never at distance `1`. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/	FS112-N3-PAIRS	IsCubicTrichromatic
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	1433	fail_leavingCentre	row		0	ly when `q` is a leaving centre of `u`. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/	FS112-N3-FAIL	IsCubicTrichromatic,IsLeavingCentre,StripHolds
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	1466	fail_colours	row		0		FS112-N3-FAIL	IsCubicTrichromatic,StripHolds
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	1580	anti	row	REFUT	0	f `ω(u)` at distance `2` are both M-in. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). With one M-in point: `sevenBrick_corner_mIn` (the antipodal second is the refu	FS112-N3-ANTI	IsCubicTrichromatic,MIn
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	2762	bowtie_valid	row		0		FS112-BOWTIE	
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	3606	IsSector.subset	cited:BaseDense,BaseWalk,Basic,BendCollar		0			IsSector
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	3611	IsSector.nonempty	cited:BaseDense,BaseWalk,Basic,Cone		0			IsSector
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	3655	HasSectors.eq	cited:CurveGraph,Limit,OpenMove,Thomassen		0			HasSectors
+main	Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean	4307	flank_incomplete_bowtie	row		0		FS112-FLANK	IsContact,OutType,ShaveAvailable
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	35	woodallCone_isHorn	row		0		FS131-IC2's	Condition5,IsContact,IsHorn,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	69	horn_unique_of_stuck	row;cited:Terminal		0		FS131-IC2's	IsHorn,RayAvailable,ShaveAvailable
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	248	outType_S_of_mem_closure	cited:FlankUA		0			IsFlankAbove,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	274	IsSectorChart.sector_subset_tile	cited:BaseWalk,Cone		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	868	outType_N_of_mem_closure	cited:FlankUA		0			IsFlankBelow,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1046	IsSectorChart.branchPt_not_mem	cited:Moves		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1450	flank_shadows	row		0		FS110-N4-SHADOW	Condition5,IsFlankAbove,IsFlankBelow,IsHorn,TanAbove,TanBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1467	shaveAvailable_of_not_doublyShadowed	row		0		FS110-N4-SHAVE	Condition5,DoublyShadowed,IsFlankAbove,IsFlankBelow,IsHorn,ShaveAvailable
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1495	exists_shave	row;construction		0		FS110-N4-SHAVE,FS112-WALK	AgreesOff,Condition5,HasSectors,IsClear,IsFlankAbove,IsFlankBelow,IsHorn,RingArcsWithin,TanAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1509	exists_rayMerge	row;construction		0		FS110-N4-SHAVE,FS112-WALK	AgreesOff,Condition5,HasSectors,IsClear,IsHorn,RingArcsWithin
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1525	exists_merge	row;cited:Moves;construction		0		FS110-W-MERGE,FS112-WALK	AgreesOff,Condition5,HasRepeatedColour,HasSectors,RingArcsWithin
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1572	frameX_add_pi	cited:HornShadow,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1576	sub_e_add_pi_add	cited:FlankUA,HornShadow,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1580	add_e_add_pi_add	cited:FlankUA,HornShadow,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1670	IsSector.subset_region	cited:BaseWalk,Cone,LocalStructure,MergeMove		0			IsSector
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1681	IsSector.col_mem_coloursAt	cited:MapTopology,OpenMove		0			IsSector
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1686	exists_sector_of_mem	cited:BaseWalk		0			IsSector
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1697	eventually_one_le_sectorsOf	cited:FlankUA		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1748	region_far_of_outType	cited:FlankUA,Terminal		0			IsContact,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1774	eventually_col_mem_coloursAt	cited:BaseWalk,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1788	outType_N_of_flankAbove	cited:Terminal		0			IsFlankAbove,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1817	outType_S_of_flankBelow	cited:Terminal		0			IsFlankBelow,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1942	IsFlankAbove.congr	cited:BaseWalk,Basic,BendCollar,Collar		0			IsFlankAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1948	IsFlankBelow.congr	cited:BaseWalk,Basic,BendCollar,Collar		0			IsFlankBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1954	DoublyShadowed.congr	cited:BaseWalk,Basic,BendCollar,Collar		0			DoublyShadowed
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1961	false_of_third_point	cited:Terminal	REFUT	0			HasSectors,IsHorn
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	1996	flank_ne_of_doublyShadowed	row		0		FS131-IC4's	Condition5,DoublyShadowed,IsFlankAbove,IsFlankBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	2038	stuck_pole_N	row		0	or `H₋`, or it overlaps the `h`-sector. No model of its hypotheses is held in the library: like `stuck_structure`, whose step it is, it reads a stuck configuration with Condition 5, and the one stuck fragment held (`bowtie_isStuck`) has uni	FS110-N4-FIN	Condition5,DoublyShadowed,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	2263	hasDegree_of_three_colours	cited:Terminal		0			HasDegree,HasSectors
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	2314	stuck_structure_flanks	row		0	`stuck_pole_N`, at `α` and at `α + π`. No model of its hypotheses is held in the library (the one stuck fragment held, `bowtie_isStuck`, has unit arcs and fails Condition 5), and none is expected: on a whole terminal plane map they are ref	FS110-N4-FIN,FS110-N4-STUCK,FS131-IC4's	Condition5,HasDegree,HasSectors,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	2622	stuck_structure	row		0	the sides as `stuck_structure_flanks`. No model of its hypotheses is held in the library (the one stuck fragment held, `bowtie_isStuck`, has unit arcs and fails Condition 5), and none is expected: it is a step inside FS110-N4-PROP's proof	FS110-N4-FIN,FS110-N4-PROP's,FS110-N4-STUCK,FS110-NB-4	Condition5,HasDegree,HasSectors,IsContact,IsHorn,IsStuck,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	2645	stuck_neighbour	row		0	, so they are perpendicular to `v − P`. No model of its hypotheses is expected: like `stuck_chain`, it is a step inside FS110-N4-PROP's proof by contradiction. -/	FS110-N4-PROP's	Condition5,HasSectors,IsHorn,IsStuck,Terminal
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	2694	stuck_flip	row		0	a horn of that colour along `e(α + π)`. No model of its hypotheses is expected: like `stuck_chain`, it is a step inside FS110-N4-PROP's proof by contradiction. -/	FS110-N4-PROP's	Condition5,HasSectors,IsHorn,IsStuck
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	2707	stuck_step	row		0	colour with at least two sectors there. No model of its hypotheses is expected: like `stuck_chain`, it is a step inside FS110-N4-PROP's proof by contradiction. -/	FS110-N4-PROP's	Condition5,HasSectors,IsHorn,IsStuck,Terminal
+main	Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean	2734	stuck_chain	row		0	v + jn`, `j ∈ ℤ`, of its normal line. **No model of its hypotheses is expected** (FS131-QA2's QA2-5): it is a step inside FS110-N4-PROP's proof by contradiction — along the chain the horns' bounding curvatures form a bi-infinite sequence `−	FS110-N4-FIN,FS110-N4-PROP's,FS110-N4-STUCK,FS131-QA2's	Condition5,HasSectors,IsHorn,IsStuck,Terminal
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	151	shadow_farSide_above	row;cited:Contact,HornShadow		0		FS110-N4-SHADOW	TanAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	247	shadow_farSide_below	row;cited:Contact		0		FS110-N4-SHADOW	TanBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	343	norm_sub_sq_eq_dot	cited:Contact,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	349	abs_dot_le	cited:Collar,Contact,Merge,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	355	dot_sub	cited:Contact,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	382	dot_nonpos_of_coneAt_subset	cited:Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	407	dot_comm'	cited:MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	412	dot_self_eq	cited:Contact,FlankUA,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	430	contact_inType_or_outType	row;cited:Contact,FlankUA,MergeMove,Terminal		0		FS110-N3-CONF	InType,IsContact,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	505	coneAt_subset_allowedCone	row;cited:Contact,FlankUA,HornShadow,MergeMove		0		FS110-N3-CONF	
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	542	exists_ball_tiles_mem_closure	cited:MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	561	tileOf_component	cited:BaseWalk,Contact,FlankUA,HornShadow		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	570	clear_of_subset_interior_allowedCone	row;cited:MergeMove		0		FS110-N3-CONF	IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	683	lens_dist_lt_one_of_up	row;cited:MergeMove		0		FS110-N3-CONF	
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	748	lune_dist_le_of_up	row;cited:MergeMove		0		FS110-N3-CONF	
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	786	hornSet_congr	cited:Contact,FlankUA,HornShadow,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	791	tanHeight_branchPt	cited:BrickMap,Contact,HornShadow,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	798	frameX_branchPt_pos	cited:Contact,MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	809	branchPt_mem_hornSet	cited:Contact,HornShadow,Moves,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	823	exists_small_s	cited:Contact,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	832	sin_zero_of_two	cited:Contact	REFUT	0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	844	e_eq_or_of_sin_sub_eq_zero	cited:Contact,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	855	dot_neg_right	cited:Contact,FlankUA,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	859	e_add_pi'	cited:Contact,HornShadow,Pushforward,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	875	interior_nonempty_of_not_mem	row		0		FS110-N3-DEG	
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	964	continuous_branchPt_curv	cited:Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	973	branchPt_mem_closure_hornSet_upper	cited:BrickMap,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	984	branchPt_mem_closure_hornSet_lower	cited:BrickMap,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	995	dist_branchPt_one	cited:Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1005	dist_branchPt_neg_one	cited:Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1015	tanHeight_anti	cited:Contact,Surgery		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1020	hornSet_mono	cited:Contact,FlankUA,Moves,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1025	mem_coneAt_hornSet	cited:FlankUA,Moves,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1057	hornSet_mono_radius	cited:Contact,FlankUA,Moves,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1065	not_mem_interiorPts_of_mem_closure_sector	cited:BrickMap,Moves		0			IsSector
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1080	IsSector.eq_of_mem	cited:Contact,LocalStructure,MapGraph,MapTopology		0			IsSector
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1089	e_eq_of_mem_coneAt_hornSet	cited:FlankUA,Limit,Moves,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1166	dot_neg_left	cited:Contact,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1248	woodall_contacts	row		0		FS110-N3-DEG's	IsContact,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1345	sector_subset_tile	cited:BaseWalk,Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1405	false_of_branch_on_sphere	cited:Contact	REFUT	0			Condition5
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1430	woodallCone	row;cited:FlankUA,Procedure,Terminal		0		FS110-N3-DEG	IsContact,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1473	woodallCone_strict	row;cited:Contact		0		FS110-N3-DEG	Condition5,IsContact,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1521	IsHorn.congr	cited:BaseWalk,Basic,BendCollar,Collar		0			IsHorn
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1530	IsHorn.eventually_subset_region	cited:Contact,FlankUA,Terminal		0			IsHorn
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1540	IsHorn.mem_coneAt_region	cited:Contact,FlankUA,Terminal		0			IsHorn
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1546	exists_hasSectors	cited:Contact,FlankUA,Procedure,Terminal		0			HasSectors
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1599	e_eq_or_of_two_horns	cited:Contact,Terminal		0			HasSectors,IsHorn
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1634	covers_of_isPlaneMap	cited:Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1642	shaveAvailable_of_adjacent_horns	row;cited:Contact		0	needs a gap `κ₂ < κ₃`, does not cover). No model of all three hypotheses at once is held: it is a step inside N4-STUCK (i)'s proof by contradiction (finding 1 of `plans/FS131-IC-implementation.md` Stage 5). -/	FS131-IC-implementation	IsFlankBelow,IsHorn,ShaveAvailable
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1659	abs_frameX_sub_le	cited:Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1665	abs_frameY_le_norm	cited:Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1671	abs_frameY_le_of_mem_hornSet	cited:Contact,FlankUA,HornShadow,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1684	half_norm_le_frameX	cited:Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1885	false_of_pole	cited:Contact,FlankUA	REFUT	0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1892	IsFlankAbove.mem_coneAt	cited:Contact,FlankUA,HornShadow,Merge		0			IsFlankAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1899	IsFlankBelow.mem_coneAt	cited:Contact,FlankUA,HornShadow,Merge		0			IsFlankBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1909	horn_not_shadowed_near_N	cited:FlankUA		0			IsFlankAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1935	horn_not_shadowed_near_S	cited:FlankUA		0			IsFlankBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1961	dot_e_sub_eq_frameX	cited:Contact,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1983	norm_pos_of_frameX_pos	cited:Contact		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	1992	eq_N_or_S_of_frameX_eq_zero	cited:Contact,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2089	shadow_source_near_poles	cited:FlankUA,HornShadow		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2144	horn_shadow_near_S	cited:Contact,FlankUA,HornShadow		0			IsFlankAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2159	horn_shadow_near_N	cited:Contact,FlankUA,HornShadow		0			IsFlankBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2175	exists_mem_hornSet_near	cited:Contact,FlankUA,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2188	outType_S_of_shadow	cited:Contact		0			IsContact,IsFlankAbove,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2223	outType_N_of_shadow	cited:Contact		0			IsContact,IsFlankBelow,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2263	not_tanBelow_branchPt	cited:Moves		0			TanBelow
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2271	not_tanAbove_branchPt	cited:Moves		0			TanAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2280	hornSet_curv_eq	cited:Contact,FlankUA,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2311	e_add_pi_ne	cited:Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2320	exists_abs_arcsin_lt	cited:Contact,MergeMove,OpenMove,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2327	abs_half_lt	cited:Contact,Terminal		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2382	IsSectorChart.exists_col	cited:Contact,Pushforward,Surgery,Terminal		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2494	IsHorn.exists_flankAbove	row;cited:Contact,Terminal		0		FS131-IC2's	IsFlankAbove,IsHorn
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2518	IsHorn.exists_flankBelow	cited:Contact,Terminal		0			IsFlankBelow,IsHorn
+main	Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean	2560	IsSectorChart.index_of_isSector_hornSet	cited:Contact,Moves,Terminal		0			BranchGerms,IsSector,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	46	horn_index	cited:OpenMove,Terminal		0			IsHorn
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	59	encard_col_eq	cited:OpenMove		0			HasSectors
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	562	frameX_fromFrame	cited:FlankUA,HornShadow,UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	571	frameY_fromFrame	cited:FlankUA,HornShadow,UnitArc		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	1240	RayConfig.branchPt_not_mem	cited:Contact		0			RayConfig
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	1310	RayConfig.sector_disjoint	cited:LocalStructure,MapTopology,MergeMove,OpenMove		0			RayConfig
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	1335	RayConfig.ne	cited:BaseDense,BaseSteps,BaseWalk,Basic		0			RayConfig
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	1447	RayConfig.hlc	cited:BaseWalk,MergeMove,OpenMove,Surgery		0			RayConfig
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	1482	RayConfig.exists_merge	cited:Contact;construction		0			AgreesOff,Condition5,HasSectors,IsClear,RayConfig,RingArcsWithin
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	1636	exists_shave_aux	row;cited:Contact;construction		0		FS110-N4-SHAVE	AgreesOff,Condition5,HasSectors,IsClear,IsFlankAbove,IsFlankBelow,IsHorn,RingArcsWithin,TanAbove
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	1656	exists_rayMerge_aux	row;cited:Contact;construction		0		FS110-N4-SHAVE	AgreesOff,Condition5,HasSectors,IsClear,IsHorn,RingArcsWithin
+main	Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean	1668	exists_merge_aux	row;cited:Contact;construction		0		FS110-W-MERGE	AgreesOff,Condition5,HasRepeatedColour,HasSectors,RingArcsWithin
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	60	carrier_germArc	cited:Moves,RadialPush		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	176	germArc_nondegenerate	cited:CollarMap,MergeMove,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	201	germArc_isUnitArc_iff	cited:BendCollar,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	233	isClear_of_mem_closure	cited:MergeMove,Moves,OpenMove		0			IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	348	BranchGerms.mem_closure_sector	cited:BaseSteps,Contact,HexRing,Limit		0			BranchGerms
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	379	BranchGerms.next_injective	cited:MapGraph,MapTopology,MergeMove,Moves		0			BranchGerms
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	389	coloursAt_subset_of_mem_interiorPts	cited:MapTopology		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	404	IsSectorChart.exists_branchPt_eq	cited:MergeMove,OpenMove		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	416	eq_of_branchPt_eq	cited:MergeMove,Moves,OpenMove		0			BranchGerms
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	425	_root_.HadwigerNelson.Plane.BranchGerms.closure_sector_cases	cited:MergeMove,Moves,OpenMove		0			BranchGerms
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	443	IsSectorChart.eq_or_next_eq_of_mem_closure	cited:Moves		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	459	IsSectorChart.eq_of_mem_closure_of_mem	cited:Moves		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	476	IsSectorChart.coloursAt_subset_image	cited:Moves		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	508	IsSectorChart.ncard_coloursAt_le_two	cited:Merge,MergeMove,Moves,OpenMove		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	566	continuous_pt	cited:Limit		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	572	carrier_eq_image	cited:Limit		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	581	carrier_sub	cited:Limit		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	607	nondegenerate_sub	cited:Limit		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	652	finite_outer	cited:MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	660	norm_e_sub_e_eq	cited:BendCollar		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	717	outer_spec	row;cited:MergeMove		0		FS131-IM1's	
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	876	trimArcs_spec	cited:MergeMove,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	958	surgery_mem_arcs_iff_of_mem	cited:MergeMove,OpenMove		0			GoodAt
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	970	surgery_agreesOff	cited:MergeMove,OpenMove		0			AgreesOff
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	979	surgery_ringArcsWithin	cited:MergeMove,OpenMove		0			RingArcsWithin
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	993	surgery_condition5	cited:MergeMove,OpenMove		0			Condition5
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1005	surgery_hlc_of	cited:Moves		0			GoodAt
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1032	isOpen_hornSet	cited:Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1042	isPreconnected_hornSet	cited:HornShadow,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1069	hornSet_eq_empty	cited:Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1076	eq_branchPt_of_tanHeight_eq_zero	cited:MergeMove,Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1109	isClear_col	cited:MergeMove,Moves,OpenMove		0			IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1115	encard_sectorsOf_of_partition	cited:MergeMove,Moves,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1147	IsSectorChart.encard_sectorsOf	cited:MergeMove,Moves,Pushforward		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1250	IsSectorChart.col_eq_of_flankAbove	cited:Moves		0			BranchGerms,IsFlankAbove,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1264	IsSectorChart.col_eq_of_flankBelow	cited:Moves		0			BranchGerms,IsFlankBelow,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1278	IsSectorChart.branchPt_mem_closure_sector_after	cited:MergeMove,Moves,OpenMove		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1293	IsSectorChart.branchPt_mem_closure_sector_before	cited:MergeMove,OpenMove		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1311	IsSectorChart.exists_ball_subset_of_branchPt	cited:MergeMove,OpenMove		0			BranchGerms,IsSectorChart
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1404	exists_near	cited:CollarMap,LocalStructure,Moves,OpenMove		0			Near
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1419	eventually_small	cited:Moves,OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1427	mem_dom	cited:MergeMove,Moves,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1435	Small.mem_Ioc	cited:MergeMove,Moves,OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1438	Small.curv	cited:BaseSteps,BendCollar,Cone,Contact		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1452	carrier_germ	cited:MergeMove,OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1473	mem_interiorPts_iff	cited:Moves		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1533	sphere_subset_newArcs	cited:Moves		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1574	mem_newArcs_iff	cited:Moves		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1613	mem_move_interiorPts_iff	cited:Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1634	move_agreesOff	cited:Moves		0			AgreesOff
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1639	move_ringArcsWithin	cited:Moves		0			RingArcsWithin
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1643	move_condition5	cited:Moves		0			Condition5
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1648	move_valid	cited:Moves		0			IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1682	move_coloursAt_self	cited:Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1704	move_coloursAt_sphere	cited:Moves		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1771	cutSet_subset_ball	cited:MergeMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	1785	cutSet_subset_closure	cited:MergeMove,OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean	2019	exists_cut	cited:Moves		0			AgreesOff,BranchGerms,Condition5,HasSectors,RingArcsWithin,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	45	dist_ne_one_of_isOpen_isClear	cited:OpenMove		0			IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	57	add_mem_allowedCone	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	67	smul_mem_allowedCone	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	94	clear_of_push	row		0		FS110-W-MERGE's	InType,IsClear,IsContact,OutType
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	530	clear_near_end	row;cited:OpenMove		0		FS110-W-MERGE's	IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	623	idx_zero	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	627	lift_zero	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	629	next_idx	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	660	lift_succ	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	680	e_lift	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	697	branchPt_idx	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	705	mem_sector_idx	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	725	liftDir_mono	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	729	lift_mono	cited:OpenMove		0			Mono
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	732	idx_add_n	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	738	lift_add_n	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	751	idx_ne	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	888	cone_mem_interior_of_between	row		0		FS110-W-MERGE's	
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	932	cone_side	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1028	pos_of_hasSectors	cited:Moves		0			HasSectors
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1046	e_mem_allowedCone_of_col	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1059	base_before	cited:OpenMove		0			BranchGerms
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1069	base_after	cited:OpenMove		0			BranchGerms
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1080	gap_clear	row		0		FS110-W-MERGE's	BranchGerms,IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1158	exists_gap	row;cited:Moves		0		FS110-W-MERGE	BranchGerms,HasSectors,IsClear
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1310	exists_rep	cited:OpenMove,Thomassen		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1334	idx_mem_gapSec_iff	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1399	Small.half	cited:MapGraph,OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1403	Small.mono	cited:BaseSteps,BaseWalk,Basic,BendCollar		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1407	dist_branchPt	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1411	outer_subset	cited:OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1436	norm_of_mem_sector	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1441	mem_sector_of_lt	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1449	sector_mono	cited:Contact,HexRing,Limit,LocalStructure		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1453	sector_subset_interiorPts	cited:BaseSteps,Cone,Contact,HexRing		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1466	sector_disjoint	cited:LocalStructure,MapTopology,Moves,OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1481	branchPt_not_mem_sector	cited:OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1488	mem_gapSet_of_mem_sector	cited:OpenMove		0			BranchGerms,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1501	branchPt_mem_gapSet_iff	cited:OpenMove		0			BranchGerms,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1519	mergeCol_of_mem_sector	cited:OpenMove		0			BranchGerms,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1534	mergeCol_branchPt	cited:OpenMove		0			BranchGerms,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1546	mergeCol_of_not_mem	cited:OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1567	liftDir_add_n	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1592	mem_mergeArcs	cited:OpenMove		0			BranchGerms,Phantom
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1620	mergeArcs_cases	cited:OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1633	mergeArcs_nondegenerate	cited:Moves,OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1643	mergeArcs_finite	cited:Moves,OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1649	mergeArcs_subset_closedBall	cited:OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1660	mergeArcs_unit	cited:OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1668	mergeArcs_condition5	cited:OpenMove		0			Condition5,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1690	exists_next_eq	cited:OpenMove		0			BranchGerms
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1694	ball_cases	cited:OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1714	branchPt_mem_mergeArcs_inner	cited:OpenMove		0			BranchGerms,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1720	branchPt_mem_mergeArcs_outer	cited:OpenMove		0			BranchGerms,Phantom,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1726	mem_mergeArcs_rim	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1731	liftDir_gap_germ	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1736	exists_dir_of_mem_gapSec	cited:OpenMove		0			BranchGerms,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1750	branchPt_rim_mem_trimArcs	cited:OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	1804	merge_hlc	cited:Moves		0			BranchGerms,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2095	merge_agreesOff	cited:Moves		0			AgreesOff,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2102	merge_ringArcsWithin	cited:Moves		0			RingArcsWithin,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2107	merge_condition5	cited:Moves		0			Condition5,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2113	merge_coloursAt_self	cited:Moves		0			BranchGerms,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2129	merge_valid	cited:Moves		0			IsClear,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2163	merge_hasSectors	cited:Moves		0			BranchGerms,HasSectors,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2388	merge_ncard_coloursAt_rim	cited:Moves		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2564	sides_preconnected	cited:OpenMove		0			BranchGerms,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2649	_root_.HadwigerNelson.Plane.ArcMap.encard_sectorsOf_le_one	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2656	norm_of_mem_rimArc	cited:OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2662	mergeCol_of_mem_sector_out	cited:OpenMove		0			Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2755	exists_step_of_strictMono	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2774	finite_tiles_ball_of_goodAt	cited:OpenMove		0			GoodAt
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2795	IsTile.mem_of_mem_closure	cited:OpenMove		0			
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	2811	gapSec_of_mem_rimArc	cited:OpenMove		0			BranchGerms,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	3285	merge_not_hasRepeatedColour_rim	cited:Moves		0			HasRepeatedColour,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean	3450	merge_allowedCone	cited:Moves		0			BranchGerms,IsClear,Small
+main	Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean	42	HasHornCount.eq	cited:BaseSteps,CurveGraph,Limit,Thomassen		0			HasHornCount
+main	Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean	47	HasDegree.eq	cited:BaseSteps,CurveGraph,Limit,Thomassen		0			HasDegree
+main	Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean	348	col_mem_coloursAt	cited:Contact,MapTopology		0			Near
+main	Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean	624	exists_openConfig	row		0		E6-OPEN'	HasSectors,IsHorn,Near,OpenConfig
+main	Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean	2847	exists_open	row;construction		0	oint's allowed cone for `c` changes. **Inhabitant** (`LEAN.md` § The gate): none in Lean yet. FS131-E6's model (`plans/FS131-E6-derivation.md` § 3.1–3.3: a valid plane map in twelve colours with `v = 0`, `IsHorn 0 0 0 2 c`, `HasSectors 0 c	FS131-E6's,FS131-E6-OPEN,FS131-E6-derivation	AgreesOff,Condition5,HasDegree,HasHornCount,HasRepeatedColour,HasSectors,IsHorn,RingArcsWithin
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	168	norm_real_mul_e	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	172	polar_inj	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	183	e_ne_e_of_lt	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	203	closure_annSector_subset	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	213	mem_coneAt_annSector	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	232	coneAt_annSector_eq	cited:Steps		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	258	eq_norm_mul_e_pi_add_arg	cited:Steps		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	268	pi_add_arg_neg_mem	cited:Steps		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	484	threeSectorDisc_sectorsAt	cited:Steps		0			SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	507	threeSectorDisc_phantom	row		0		E3-PHANTOM	SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Basic.lean	599	threeSectorDisc_not_forall_merged	row		0		FS131-E3	SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	34	eq_add_norm_mul_e	cited:Merge,NoFourFive		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	50	eventually_abs_arg_lt	cited:Merge,NoFourFive		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	68	eventually_norm_sub_mem	cited:NoFourFive		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	77	isOpen_annSector	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	92	isPreconnected_annSector	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	97	isOpen_collar	cited:Steps		0			Rim
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	103	collar_subset_collar	cited:NoFourFive,Steps		0			Rim
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	124	mem_collar_iff	cited:NoFourFive		0			Rim
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	135	exists_pos_le_finset	cited:NoFourFive,Steps		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	373	dot_eq	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	376	dot_sub_left	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	379	dot_sub_right	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	382	dot_real_mul_left	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	393	mem_shadow_of_preconnected	cited:NoFourFive		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	439	CollarAt.interior	cited:BaseSteps,Basic,Cone,Contact		0			CollarAt,Rim
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	568	woodall_step4	row;cited:Steps	REFUT	0		FS106-WO	CollarAt,Rim
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	742	townsend_lemma	row;cited:Steps	REFUT	0		FS106-TW	CollarAt,Rim
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	800	collarAt_shadow_outer	cited:NoFourFive		0			CollarAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	845	collarAt_shadow_inner	cited:NoFourFive		0			CollarAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Collar.lean	902	subset_closure_of_subset_shadow	cited:Steps		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	318	clear_wedge	row		0		E3-W,FS131-E3-derivation	
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	748	wedgeMerge_valid	row		0		E3-W,E3-W'	
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	973	GoodAt.ncard_coloursAt_le_two	cited:MergeMove,Moves,OpenMove,Surgery		0			GoodAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	1112	DirColourAt.mem_coneAt	cited:Cone,Contact,FlankUA,HornShadow		0			DirColourAt,OffDirs
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	1285	niceAt_of_dirColourAt	row		0		E3-NICE'	DirColourAt,NiceAt,OffDirs
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	1867	niceAt_of_crossing	row		0		E3-NICE'	NiceAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	2146	GoodAt.exists_sides	cited:BaseWalk		0			GoodAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	2360	wedgeMerge_niceAt	row		0		E3-NICE'	GoodAt,NiceAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	2464	DirColourAt.exists_merge_dirs	row		0		E3-NICE'	DirColourAt,OffDirs
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	2538	exists_merge_at	row		0		E3-NICE,FS131-E3-derivation	Condition5,WoodallMerged
+main	Proofs/HadwigerNelson/Plane/Woodall/Merge.lean	2675	exists_woodallMerged	row;cited:Steps;construction		0		E3-BALL,FS131-E3's,FS131-E3-derivation	Condition5,WoodallMerged
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	48	dist_le_one_of_subset_closure	row		0		E1-COVER,E1-NOBRANCH,FS106-DIAM	
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	94	exists_Ioo_avoiding	row;cited:Steps		0		E1-COVER,E1-NO45	
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	154	collarAt_shadow_of_parabola	row		0		FS131-W-kernel-plan	CollarAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	279	e_add_two_pi_mul_int	cited:Merge,Steps		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	286	one_sub_e_two_mul	cited:Merge		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	300	CollarAt.mono	cited:BaseSteps,BaseWalk,Basic,BendCollar		0			CollarAt,Rim
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	310	CollarAt.inter	cited:BaseSteps,BaseWalk,BendCollar,BrickMap		0			CollarAt,Rim
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	345	d_prev_succ	cited:Steps		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	512	sum_width	cited:Steps		0			
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	586	not_mem_coloursAt_of_dist_eq_one	row		0		E1-SEE,FS106-DIAM's,FS131-E1-derivation	
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	630	not_mem_coloursAt_of_collarAt	row		0		E1-SEE	CollarAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	678	exists_preconnected_of_mem_coneAt	row		0		E1-RAY,FS131-IWb's	
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	686	collarAt_shadow_inner_of_mem_coneAt	cited:Steps		0			CollarAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	692	collarAt_shadow_outer_of_mem_coneAt	cited:Steps		0			CollarAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	698	SectorsAt.mem_coneAt_of_mem_Icc	cited:Steps		0			SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	709	SectorsAt.collarAt_shadow_inner_of_mem	row		0		E1-RAY,FS131-E1-derivation	CollarAt,SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	715	SectorsAt.collarAt_shadow_outer_of_mem	row		0		E1-RAY	CollarAt,SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	723	SectorsAt.not_mem_range_of_crossesAt	row		0		E1-CROSS,FS131-E1-derivation	CrossesAt,SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	764	exists_side_colours_of_not_crossesAt	row		0		E1-COVER	CrossesAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	907	exists_closure_colour_of_arc	row		0		E1-COVER	CrossesAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1025	SectorsAt.false_of_ncard_le_two_on_arc	row;cited:Steps	REFUT	0		E1-COVER,E1-CROSS,E1-GEN6',FS131-E1-derivation	SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1058	SectorsAt.exists_mem_Ico	row		0		E1-BAD'	SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1091	SectorsAt.not_mem_coloursAt_of_mem_Ioo	row		0		E1-BAD,E1-RAY	SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1227	SectorsAt.exists_prev_dir	row		0		E1-RAY'	SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1244	SectorsAt.collarAt_prev_inner	row		0		E1-RAY	CollarAt,SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1254	SectorsAt.collarAt_prev_outer	row		0		E1-RAY	CollarAt,SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1274	SectorsAt.collarAt_cur_inner	row		0		E1-RAY	CollarAt,SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1284	SectorsAt.collarAt_cur_outer	row		0		E1-RAY	CollarAt,SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1296	SectorsAt.exists_normal_collarAt	row;cited:Steps		0		E1-BAD',E1-RAY	CollarAt,SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1313	SectorsAt.absent_at_normal	row		0		E1-BAD,E1-RAY	CollarAt,SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean	1336	SectorsAt.exists_two_absent	row;cited:Steps		0		E1-BAD,FS131-E1-derivation	SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Steps.lean	171	SectorsAt.coloursAt_eq	cited:BaseWalk,FlankUA		0			SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Steps.lean	452	NiceAt.normal	row		0		FS131-E3's	NiceAt,SectorsAt
+main	Proofs/HadwigerNelson/Plane/Woodall/Steps.lean	479	false_of_four_le_sectors	row	REFUT	0		E1-BAD,E1-COVER,E1-NO45,E1-Q1,E1-Q2,FS131-E1's,FS131-E1-derivation,FS131-E3	SectorsAt,WoodallNormal
+main	Proofs/HadwigerNelson/Plane/Woodall/Steps.lean	545	aeMap6_normal	row	REFUT	0		E1-MAPS6,E3-CHAIN,FS131-E1's,FS131-E3's	WoodallNormal
+main	Proofs/HadwigerNelson/Plane/Woodall/Steps.lean	566	aeMap6_merged	row	REFUT	0		FS131-E3's	WoodallMerged
+main	Proofs/HadwigerNelson/Plane/Woodall/Steps.lean	574	aeMap6	row;construction	REFUT	0		E1-MAPS6,E1-NO45,E3-BALL,E3-CHAIN,FS106-AE-MAP6,FS106-TS-T,FS131-E1's,FS131-E3's	
+main	Proofs/HadwigerNelson/Plane/Woodall/Steps.lean	580	aeMap6_of_condition5	row	REFUT	0		FS106-AE-MAP6,FS131-E1	Condition5
+main	Proofs/HadwigerNelson/Plane/Woodall/Steps.lean	590	woodall_thm6	row;construction	REFUT	0		FS106-WO	
+main	Proofs/HadwigerNelson/Plane/Woodall/Steps.lean	1118	sevenBrickMap_woodallModel	row		0	/-- **The model of Woodall's chain's hypotheses on a plane map** (FS131-QA2's QA2-1; `LEAN.md` § The gate's inhabitant rule): at `k = 7`, a parameter the refutations (`k ≤ 5`) leave alive, `sevenBrickMap` is va	FS131-QA2's	Condition5,WoodallMerged,WoodallNormal
+main	Proofs/HadwigerNelson/Plane/Woodall/Steps.lean	1192	puncturedThreeSectorDisc_not_woodallMerged	row		0		FS131-QA2's	WoodallMerged
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	94	IsCurve.eq_of_three	cited:MapGraph		0			IsCurve
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	306	star_local_ray	cited:MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	356	HasCurveStar.isRegularAt	cited:MapGraph		0			HasCurveStar,IsRegularAt
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	404	port_arc	row;cited:MapGraph		0		FS131-RW2	IsRegularAt
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	859	exists_finset_even_sum_deg	cited:BaseWalk,MapTopology		0			HasCurveStar,IsRegularAt
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	917	branchPt_congr	row;cited:Pushforward		0		FS131-M5	
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	966	branch_locally_curve	cited:MapGraph,MapTopology		0			IsCurve
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	1046	hasCurveStar_of_branch	cited:MapTopology		0			HasCurveStar
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	1058	HasCurveStar.connectedComponentIn	cited:BaseDense,BaseSteps,BaseWalk,Basic		0			HasCurveStar
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	1090	IsCurve.exists_two_mem_sphere	cited:MapGraph		0			IsCurve
+w5	Proofs/HadwigerNelson/Plane/CurveGraph.lean	1161	not_isRegularAt_of_hasCurveStar_one	cited:BaseWalk,MapTopology		0			HasCurveStar,IsRegularAt
+w5	Proofs/HadwigerNelson/Plane/PlaneTopology.lean	64	isPreconnected_inter_of_union_eq_univ	cited:MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/PlaneTopology.lean	193	frontier_connectedComponentIn_subset	cited:MapGraph,MapTopology		0			
+w5	Proofs/HadwigerNelson/Plane/PlaneTopology.lean	240	isPreconnected_frontier_connectedComponentIn	row;cited:MapTopology		0		FS131-E4's	
+w5	Proofs/HadwigerNelson/Plane/PlaneTopology.lean	253	exists_inter_of_finite_closed_cover	row;cited:MapTopology		0		E4-RIM	
+w5	Proofs/HadwigerNelson/Plane/PlaneTopology.lean	273	isPreconnected_compl_closedBall	cited:MapGraph,MapTopology		0			
+w5	Proofs/HadwigerNelson/Plane/PlaneTopology.lean	312	isBounded_connectedComponentIn_of_frontier_subset	row;cited:MapTopology		0		E4-OUTERMOST,E4-RIM	
+w5	Proofs/HadwigerNelson/Plane/PlaneTopology.lean	328	connectedComponentIn_eq_of_not_isBounded	cited:MapTopology		0			
+w5	Proofs/HadwigerNelson/Plane/PlaneTopology.lean	348	e_mul_e_neg	row		0		FS131-M5	
+w5	Proofs/HadwigerNelson/Plane/PlaneTopology.lean	577	inter_nonempty_of_interleaved	row;cited:BaseWalk		0		FS131-IP1's,FS131-IX1	
+w5	Proofs/HadwigerNelson/Plane/PlaneTopology.lean	607	inter_nonempty_of_interleaved_of_isClosed_left	row;cited:MapTopology		0		FS131-IX1	
+w5	Proofs/HadwigerNelson/Thomassen.lean	105	ReachIn.refl	cited:Chain,Dense,Limit,MapGraph		0			ReachIn
+w5	Proofs/HadwigerNelson/Thomassen.lean	108	ReachIn.symm	cited:BaseDense,BaseSteps,BaseWalk,Basic		0			ReachIn
+w5	Proofs/HadwigerNelson/Thomassen.lean	113	ReachIn.trans	cited:BaseDense,BaseSteps,BaseWalk,BendCollar		0			ReachIn
+w5	Proofs/HadwigerNelson/Thomassen.lean	130	ReachIn.mono	cited:BaseSteps,BaseWalk,Basic,BendCollar		0			ReachIn
+w5	Proofs/HadwigerNelson/Thomassen.lean	507	PlanarLike.offTwo_infinite	cited:MapGraph		0			PlanarLike
+w5	Proofs/HadwigerNelson/Thomassen.lean	1111	reduced_props_of_planarLike	row;cited:MapGraph		0		FS131-IT1,FS131-KP	LocallyHamiltonian,PlanarLike
+w5	Proofs/HadwigerNelson/Thomassen.lean	1257	lemma1	cited:MapGraph;construction		0	rk line, and "when unsure, formalize"). Model of the hypotheses: the triangular lattice (`triLattice`, infinite, every neighbourhood a hexagon). -/		LocallyHamiltonian
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	40	eventually_dir_lt_nextDir	cited:MapGraph		0			BranchGerms,Sorted
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	67	dir_lt_dir	cited:MapGraph		0			BranchGerms
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	85	dir_le_dir	cited:MapGraph		0			BranchGerms
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	92	dir_lt_dir_zero_add	cited:MapGraph		0			BranchGerms
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	198	branchPt_mem_closure_sector	cited:Limit,MapGraph		0			BranchGerms
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	218	eq_or_next_eq_of_mem_closure_sector	cited:MapGraph		0			BranchGerms
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	243	IsTile.subset_compl_closure	cited:BaseWalk,MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	251	IsTile.subset_or_subset_of_separated	cited:MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	264	exists_tile_inter_of_isOpen	cited:MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	294	exists_tile_mem_closure_of_mem_closure	cited:MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	311	mem_of_touch_closed	cited:MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	346	finite_tiles_closure_inter	cited:MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	366	isOpen_outerDom	cited:BaseDense		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	383	exists_not_mem_closedBall_zero	cited:MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	505	compl_outerDom_subset_closedBall	cited:MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	523	outerDom_subset_of_encloses	row;cited:MapGraph		0		E4-OUTERMOST,FS131-E4	EnclosesTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	559	not_encloses_of_hull_eq	cited:MapGraph		0			EnclosesTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	637	exists_outermost	row;cited:BaseDense		0		E4-OUTERMOST	EnclosesTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	675	exists_rim_vertex	row;cited:BaseDense		0		E4-OUTERMOST	EnclosesTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	760	hasRepeatedColour_of_two_tiles	cited:BaseWalk		0			HasRepeatedColour
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	788	isCubicTrichromatic_of_three_tiles	row;cited:BaseDense,BaseWalk		0		E4-OUTERMOST,E4-RIM	IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	826	unenclosed_of_rim_vertex	row;cited:BaseDense		0		E4-OUTERMOST	EnclosesTile,IsCubicTrichromatic,Unenclosed
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	938	tileOf_subset_ball	row		0		E4-RIM,FS110-CD	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	987	exists_isRingArc_of_touch	row		0		E4-RIM	IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	1181	exists_eleventh_of	row;cited:BaseWalk		0		E4-RIM,FS131-E4	BaseHyp,IsCubicTrichromatic,UnenclosedC
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	1382	IsSectorChart.col_mem_coloursAt	cited:Contact,OpenMove		0			BranchGerms,IsSectorChart
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	1514	hasCurveStar_of_branches	cited:MapGraph		0			BranchGerms,HasCurveStar
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	1817	exists_far_end	row;cited:BaseWalk		0		FS110-CD	BaseHyp,GermPseudo
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	1953	GermPseudo.eq_of_cw	cited:BaseWalk		0			GermPseudo
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	1966	ringArc_add_two_pi_mul	cited:BaseDense,Procedure		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	1977	ringArc_cases	cited:BaseWalk		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2039	ringPt_eq_polarPt	cited:BaseWalk		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2043	polarPt_ne_of_sub	cited:BaseWalk		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2098	orient_aux	row	REFUT	0		FS131-IP4	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2374	orient	cited:BaseWalk	REFUT	0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2396	IsSectorChart.sector_subset_tile_of_mem	cited:MapGraph		0			BranchGerms,IsSectorChart
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2406	tile_side	cited:BaseWalk		0			HasRepeatedColour
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2449	germ_side	cited:BaseWalk		0			GermPseudo,HasRepeatedColour
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2493	TileOf.eq_colour	cited:BaseWalk		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2498	GermPseudo.congr_e	cited:BaseWalk		0			GermPseudo
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2506	GermPseudo.eq_of_same	cited:BaseWalk		0			GermPseudo
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2590	subset_or_subset_of_closed	cited:MapGraph		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2696	exists_Ico_ringPt	cited:BaseWalk		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2712	disjoint_closedBall_of_isOpen	cited:BaseWalk		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2764	IsSectorChart.mem_closure_some_sector	cited:MapGraph		0			BranchGerms,IsSectorChart
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2784	germ_side_cw	cited:BaseWalk		0			GermPseudo,HasRepeatedColour
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2806	germPseudo_of_side	cited:BaseWalk		0			GermPseudo,HasRepeatedColour
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2839	inner_star	cited:BaseWalk		0			HasCurveStar,HasRepeatedColour
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	2873	circ_local	row;cited:BaseWalk		0		FS110-CD	HasCurveStar,HasRepeatedColour
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	3394	isPreconnected_diff_ball	row		0		FS131-RL1	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	3445	inter_nonempty_of_interleaved_exterior	row		0		FS131-RL1	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	3490	mod_prev_succ	row;cited:MapGraph		0		FS131-RS1	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	3506	isPreconnected_biUnion_Icc_mod	row;cited:MapGraph		0		FS131-RS1	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	3520	inter_nonempty_of_interleaved_exterior_of_isClosed	row;cited:MapGraph		0		FS131-RS1	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean	3581	isPreconnected_union_insert_diff_ball	row;cited:MapGraph		0		FS131-RS1	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	82	isOpen	cited:BaseSteps,BaseWalk,Cone,Cor3		0			IsHoleOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	107	connectedComponentIn_subset	cited:BaseDense,BaseSteps,BaseWalk,Cone		0			IsHoleOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	259	not_isHoleOf_chain	row		0		FS131-I5b's	IsHoleOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	542	exists_outer_fill	row		0		FS131-IP5	IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	582	filledGraph_locallyFinite	row		0		FS131-KP	IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	701	offTwo_infinite	cited:Thomassen		0			IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	714	exists_far_component	row		0		FS131-IP5	IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	929	not_isHoleOf_union	row		0		FS131-IP5	IsHoleOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1051	not_isHoleOf_closure_fill	row		0		FS131-IP5	IsHoleOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1112	mem_of_touch_closed_of_not_isHoleOf	row		0		FS131-IP5	IsHoleOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1211	filledGraph_offTwo_connected	row		0		FS131-IP5	IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1260	isRing_flatMap_replicate_four	row		0		FS131-IP5	IsRing
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1349	filledGraph_adj_iff	row		0		FS131-RL1	IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1413	IsBoundaryWalk.cons	row;cited:Thomassen		0		FS131-RL1	IsBoundaryWalk,IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1425	exists_isClosed_of_reachable_offTwo	row		0		FS131-RS1	IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1446	IsEdgeOf.disjoint_closure_ball	row		0	d an open set meeting `cl x` meets `x`. Inhabitant of `IsEdgeOf`: `exists_edgeOf` (every edge of the port graph of `∂ cl x̂`). -/	FS131-RS1	IsEdgeOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1459	mod_succ_prev	row		0		FS131-RS1	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1472	IsBoundaryWalk.exists_piece	row		0	j` (likewise, at the disc about `p j`). Inhabitant: `exists_boundaryWalk`. -/	FS131-RS1	IsBoundaryWalk,IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1520	IsBoundaryWalk.sep	row;cited:BaseSteps		0		FS131-RL1,FS131-RS1	IsBoundaryWalk,IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1687	IsBoundaryWalk.isRing	row		0		FS131-RL1	IsBoundaryWalk,IsOuterTile,IsRing
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1704	BasedTrail.append	cited:Thomassen		0			BasedTrail
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	1729	BasedTrail.insert	cited:BaseDense,BaseWalk,Basic,Collar		0			BasedTrail
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2008	frontier_closure_fill_subset	row		0		FS131-RW1	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2027	isPreconnected_frontier_closure_fill	row		0		FS131-RW1	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2133	frontier_fill_branch_iff	row		0		FS131-RW1	BranchGerms,IsSectorChart
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2250	frontier_fill_inter_ball	row		0		FS131-RW1	BranchGerms,IsSectorChart
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2335	IsSectorChart.eq_two_of_isRegularAt	row		0		FS131-RW1	BranchGerms,IsRegularAt,IsSectorChart
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2395	frontier_fill_exists_ray	row		0		FS131-RW1	BranchGerms,IsSectorChart
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2438	frontier_fill_isRegularAt	row		0		FS131-RW1	IsRegularAt
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2481	finite_frontier_fill_nonRegular	row		0		FS131-RW1	IsRegularAt
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2511	ray_piece	row		0		FS131-RW2	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2567	isPreconnected_inter_ball_of_hasCurveStar	row		0		FS131-RW2	HasCurveStar
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2617	exists_Ioo_of_preimage_ball	row		0		FS131-RW2	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2806	IsPortGraph.exists_shared_vertex	row		0		FS131-RW2	IsPortGraph
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	2845	exists_isPortGraph	row		0		FS131-RW2	HasCurveStar,IsPortGraph,IsRegularAt
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	3327	subset_of_isPreconnected_of_locally	row		0		FS131-RW2	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	3364	frontier_fill_hasCurveStar_pos	row		0		FS131-RW2	HasCurveStar
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	3402	isOuterTile_of_closure_inter	row		0		FS131-RW2	IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	3429	sector_inter_sphere	row		0		FS131-RW2	BranchGerms
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	3447	frontier_fill_regular_local	row		0		FS131-RW2	IsRegularAt
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	3641	exists_edgeOf	row		0		FS131-RW2	IsEdgeOf,IsOuterTile,IsPortGraph,IsRegularAt
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	3705	BasedTrail.map	cited:BendCollar,CollarMap,LocalStructure,Merge		0			BasedTrail
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	3714	BasedTrail.insert_all	row		0		FS131-RW2	BasedTrail
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	3742	isBoundaryWalk_of_trail	row		0		FS131-RW2	BasedTrail,IsBoundaryWalk,IsEdgeOf,IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	3825	exists_boundaryWalk	row		0		FS131-RL1,FS131-RW1's,FS131-RW2	IsBoundaryWalk,IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	4002	filledGraph_ringList	row		0		FS131-IP5's,FS131-RL1's	IsOuterTile,IsRing
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	4061	filledGraph_finSep	row		0		FS131-IT1's	IsOuterTile
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	4116	cvb_thom_reduced	row;construction		0	one_of_forall_dist_ne_one`). Every `k`. Model of the hypotheses: `sevenBrickMap` (valid, of the plane, `k = 7`). -/	FS114-CVB-THOM,FS114-CVB-verification	LocallyHamiltonian
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	4125	cvb_thom	row;construction		0	ps: FS114-N114-RD's types (A) and (B)). Model of the hypotheses: `sevenBrickMap` (`k = 7`; its bricks have six neighbours each). -/	FS114-CVB-THOM,FS114-N114-RD's	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	4133	cvb_pinch_connected	row		0	assen's own case is the unpinched one). Model of the hypotheses: a brick of `sevenBrickMap`. -/	FS114-CVB-PINCH	IsHoleOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	4271	cvb_hole_disconnected	row		0		FS114-CVB-PINCH	IsHoleOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean	4557	exists_holed_valid_fragment	row		0		FS114-CVB-PINCH's	IsHoleOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BrickMap.lean	264	sevenBrick_not_mergeAvailable	cited:Terminal		0			MergeAvailable
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BrickMap.lean	411	sevenBrick_not_isHorn	cited:Terminal		0			IsHorn
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BrickMap.lean	461	sevenBrick_not_isRingArc	cited:Terminal		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BrickMap.lean	507	sevenBrick_unenclosedC	row;cited:Dense		0		FS131-E4's	UnenclosedC
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BrickMap.lean	511	sevenBrick_baseHyp	cited:Dense		0			BaseHyp
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BrickMap.lean	518	sevenBrick_noInertNear	cited:Dense		0			NoInertNear
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Chain.lean	142	mem_stuckRun_of_between	cited:Terminal		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Chain.lean	152	isChainVertex_of_mem_stuckRun	cited:Terminal		0			IsChainVertex
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Chain.lean	175	IsModification.refl	cited:Dense,Limit,MapGraph,PlaneTopology		0	ry map is a modification of itself (the inhabitant of `IsModification`, every clause exercised). -/		IsModification
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Chain.lean	179	IsModification.trans	cited:BaseDense,BaseSteps,BaseWalk,BendCollar		0			IsModification
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Chain.lean	192	Unenclosed.unenclosedC	cited:BaseDense		0			Unenclosed,UnenclosedC
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Cor3.lean	39	IsRingArc.disjoint_coneAt	row		0		FS116-V5-U1	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Cor3.lean	344	cor3_at	row		0	ith such a pair is FS112-STOP's object (no model; `GENERIC`, as `cor3_local`). -/	FS112-STOP's	BothKind,IsCubicTrichromatic,IsLeavingCentre
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Cor3.lean	447	cor3_local	row;cited:HexRing		0	of_baseHyp`). Six colours are spent. No inhabitant: a valid fragment with such a pair is FS112-STOP's object; `GENERIC`, as `cor3`. -/	FS112-N3-COR3,FS112-NB3-verification,FS112-STOP's	BothKind,IsCubicTrichromatic,IsLeavingCentre
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Cor3.lean	478	cor3	row;cited:BaseWalk		0	e complement of `c(u′)` is `c(u)`"). No inhabitant: a valid fragment with such a pair is FS112-STOP's object (the strip's printed colouring violates it); `GENERIC`. -/	FS112-N3-COR3,FS112-STOP's	BothKind,IsCubicTrichromatic,IsLeavingCentre
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean	31	IsRegOf.subset	cited:BaseDense,BaseSteps,BaseWalk,Basic		0			IsRegOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean	34	IsRegOf.isPreconnected	cited:BaseDense,BaseSteps,BaseWalk,Basic		0			IsRegOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean	38	IsRegOf.chain_step	cited:SVMap		0			IsRegOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean	44	IsRegOf.dist_lt_one	cited:SVMap		0			IsRegOf
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean	67	exists_three_le_multicolour_square	row		0		FS106-TS-T	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean	259	disc1ts	row		0	degree at least 3" (`disc1ts_degree`). Inhabitant: `sevenBrickMap` (valid, of the plane). -/	FS106-TS-T's,FS112-DISC1's,FS129-SR2-DISC1TS	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean	269	disc1ts_degree	row		0		FS112-DISC1,FS129-SR2-DISC1TS	HasDegree
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean	278	exists_three_le_coloursAt_square	row		0	_interiorPts` and `finite_tiles_near`). Inhabitant: `sevenBrickMap` (valid, of the plane). -/	FS106-TS-T	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean	320	disc1_local	row		0	the class LOCALDENSE's argument reads). Inhabitant: `sevenBrickMap`. -/	FS112-DISC1,FS129-OR1-LOCALDENSE's	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean	335	not_row134BaseUA_seven	row	REFUT	0		FS131-E4's	BaseHyp,IsCubicTrichromatic,NoInertNear,UnenclosedC
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	37	not_mem_angleIcc_add_pi	cited:Terminal		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	57	shadow_of_not_shave	cited:Terminal		0	ture bound and no Condition 5 are read. Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_isStuck`, `bowtie_isHorn`, `bowtie_flanks`, in `Plane/ValidMap/BaseSteps`). -/		IsFlankAbove,IsFlankBelow,IsHorn,ShaveAvailable
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	78	not_outType_N_of_flankAbove_one	cited:Terminal		0	and an out-type tile misses `B̄(v, 1)`. Inhabitant of the hypotheses: `bowtie` at `0`, `α = 0` (`bowtie_flanks`, `bowtie_inType`: its `g` is in-type at `N = i`). -/		IsFlankAbove,OutType
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	104	not_outType_S_of_flankBelow_neg_one	cited:Terminal		0	of `not_outType_N_of_flankAbove_one`). Inhabitant of the hypotheses: `bowtie` at `0`, `α = 0` (`bowtie_flanks`, `bowtie_inType`: its `h` is in-type at `S′ = −i`). -/		IsFlankBelow,OutType
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	132	srcG_of_shadow	row;cited:Terminal		0	` the second, by `horn_shadow_near_S`). Inhabitant of the hypotheses: `bowtie` at `0`, `α = 0` (`bowtie_flanks`; its tip is in the shadow of both flanks, `bowtie_doublyShadowed`). -/	FS114-CV	InType,IsContact,IsFlankAbove,OutType
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	180	srcH_of_shadow	cited:Terminal		0	at `S′` or an out-type contact at `N`. Inhabitant of the hypotheses: `bowtie` at `0`, `α = 0` (`bowtie_flanks`, `bowtie_doublyShadowed`). -/		InType,IsContact,IsFlankBelow,OutType
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	228	dot_nonneg_of_srcG	cited:Terminal		0			InType,IsContact,OutType
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	240	dot_nonpos_of_srcH	cited:Terminal		0			InType,IsContact,OutType
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	254	region_near_of_inType	cited:Terminal		0	ile, and closure points are within `1`. Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_inType`). -/		InType,IsContact
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	278	region_far_S_of_srcG	cited:Terminal		0			InType,IsContact,OutType
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	292	region_far_N_of_srcH	cited:Terminal		0			InType,IsContact,OutType
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	311	flank_ne_of_shadows	row;cited:Terminal		0	`) — against the shadow at every scale. Inhabitant of the hypotheses: `bowtie` at `0`, `α = 0` (`bowtie_flanks`, `bowtie_doublyShadowed`; its flanks are `0` and `2`). -/	FS114-CV	IsFlankAbove,IsFlankBelow
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	345	exists_isRingArc_of_onRingArc	cited:BaseWalk,Terminal		0	the arc within `ε/2` of `x` in angle). Inhabitant of the hypotheses: `quadRing` at `0` (`quadRing_isRingArc`, `Plane/LocalMapExamples`). -/		
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	363	S_add_eq_fromFrame	cited:HornShadow		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	372	fromFrame_normSq_aux	cited:HornShadow		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	380	horn_radial_N	cited:HornShadow		0	in the horn, so in its colour's class. Inhabitant of the hypotheses: `bowtie` at `0`, `α = 0` (`bowtie_isHorn`). -/		IsHorn
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	443	horn_radial_S	cited:HornShadow		0			IsHorn
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	503	not_antipodal_coneAt_N_of_horn	cited:Terminal		0			IsHorn
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	529	not_antipodal_coneAt_S_of_horn	cited:Terminal		0			IsHorn
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	557	horn_poles_contact	cited:Terminal		0	lCone`'s axis is the horn's up to `π`). Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_not_merge_zero`, `bowtie_coloursAt_zero`, `bowtie_isHorn`). -/		HasSectors,IsContact,IsHorn,MergeAvailable,OutType
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	581	coloursAt_eq_of_mem_interiorPts	cited:BaseDense,BaseWalk,Terminal		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	667	IsRingArc.coloursAt_eq	cited:BaseWalk,Steps		0	from inside or from outside the circle. Inhabitant of the hypotheses: `quadRing` (`quadRing_isRingArc`). -/		
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	703	IsFlankAbove.unique	cited:BaseWalk,Pushforward,Terminal		0	it and the lower of their upper limits. Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_flanks`). -/		IsFlankAbove
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	715	horn_bounds_of_noMerge	cited:Terminal		0	ermined by its set, `hornSet_curv_eq`). Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_not_merge_zero`, `bowtie_isHorn`). -/		HasSectors,IsHorn,MergeAvailable
+w5	Proofs/HadwigerNelson/Plane/ValidMap/FlankUA.lean	737	hasSectors_one_of_contacts	cited:Terminal		0	one`, with an in-type contact allowed). Inhabitant of the hypotheses: `bowtie` at `0` with `j = 0`, `u = i` (`bowtie_not_merge_zero`, `bowtie_inType`). -/		HasSectors,InType,IsContact,MergeAvailable,OutType
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	129	isCubicTrichromatic_of_three_of_noRep	cited:BaseWalk,MapTopology,Terminal		0			HasRepeatedColour,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	179	GermPseudo.mem_pseudoColours	cited:BaseDense,BaseWalk		0			GermPseudo
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	196	pseudo_ncard_le_two_of_baseHyp	row;cited:BaseWalk		0		FS112-N3-3's	BaseHyp,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	1102	rot_noThird	row;cited:BaseDense,BaseWalk		0	(`P_cl(u) ∪ {p, q, r}` is all of them). Inhabitant of the change-point hypotheses on a map: none under the base's hypothesis is expected (the base refutes it); the statement is a step inside `row134BaseUA`'s proof (`GENERIC`). -/	FS110-N-proof,FS110-N2-ROT,FS112-N3-COR3,FS112-ROTHEX	BaseHyp,GermPseudo,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	1116	rot_out	row		0		FS112-ROTHEX	BaseHyp,GermPseudo,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	1226	rot_in	row		0		FS112-ROTHEX	BaseHyp,GermPseudo,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	1344	hex_regular	row		0	at a purely rotating ring (`rot_out`). Model of the hypotheses: the regular vertex of the hexagonal tiling (any map with a vertex of three `120°` sectors). **The proof establishes the first disjunct always** (FS131-I5j): at a cubic vertex	FS110-N-proof,FS110-N2-HEX,FS110-N2-HEX's,FS112-ROTHEX,FS131-I5j	IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	1404	bv_hex	row	REFUT	0	nt with horn angles `0`). A refutation: no model expected. -/	FS114-BV-HEX	HexRing,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	1480	p17_ua	row;cited:BaseDense,BaseWalk	REFUT	0	-ROT, N2-HEX nor NOBOTH). A refutation: no model expected. -/	FS110-N-proof,FS110-N3-P17's,FS112-N3-NOBOTH,FS112-ROTHEX,FS114-BV-HEX	BaseHyp,HexRing,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	1808	bv_nd	row	REFUT	0	ance `u₁ = u₂` is BV-ND1. A refutation: no model expected. **The proof reads one sense** (FS131-I5m): only the component of `ω(u₂)`'s velocity at `y₀` along `x₀ − y₀`, which puts a point of the `α`-sector at `y₀` within `1` of `x₀` and a po	FS114-BV-HEX,FS131-I5m	DoubleEvent
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	1895	bv_nd1	row	REFUT	0	er H with no Condition 5. A refutation: no model expected. -/	FS114-BV-HEX	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean	2142	bv_l3	row	REFUT	1	oints (reported, N-BVL3). A refutation: no model expected. -/	FS114-BV-HEX	RingProper
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	130	Removable.add_int_mul	cited:Terminal		0			Removable
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	209	reduce_partner_noChange	row		0		FS131-I5f's	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	340	reduce	row;cited:BaseDense;construction		0		FS110-CD	Removable
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	837	select	row;cited:BaseDense;construction		0		FS110-CD	ChangeWith,IsHex
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1263	BaseCtx.cubic_of_three	cited:BaseDense		0			BaseCtx,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1270	BaseCtx.pseudo_nonempty	row		0		FS112-N3-3	BaseCtx,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1336	BaseCtx.pseudo_ncard_le_two	row		0		FS112-N3-3	BaseCtx,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1343	BaseCtx.pseudo_finite	row		0		FS112-N3-3	BaseCtx,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1471	ringPt_add_int_mul	cited:BaseDense		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1480	ringArc_add_int_mul	cited:BaseDense		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1490	IsRetArc.add_int_mul	cited:Terminal		0			IsRetArc
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1499	IsRetArc.exists_Ico	cited:BaseDense		0			IsRetArc
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1641	BaseCtx.exists_pseudoCircle	row;cited:BaseDense		0		FS112-N3-II	BaseCtx,GermPseudo,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1791	BaseCtx.retArc_partner	row;cited:BaseDense		0		FS110-CD	BaseCtx,GermPseudo,IsRetArc
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1819	BaseCtx.retArcs_finite	row;cited:BaseDense		0		FS110-CD	BaseCtx,IsRetArc
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1870	BaseCtx.retArcs_not_interleaved	row	REFUT	0		FS110-CB,FS131-IP4,FS131-KP	BaseCtx,IsRetArc
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	1974	BaseCtx.retArcs_not_abut	row	REFUT	0		FS131-IP4,FS131-KP	BaseCtx,IsRetArc
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	2022	BaseCtx.retArcs_nested	row;cited:BaseDense		0		FS110-CB,FS110-CD,FS131-KP	BaseCtx,IsRetArc
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	2079	BaseCtx.endpoint_of_far_end	row		0		FS110-CD,FS110-CE,FS131-IP4,FS131-KP	BaseCtx,GermPseudo,IsEndpoint,IsRetArc
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	2321	BaseCtx.exists_endpoint	row;cited:BaseDense;construction		0		FS110-CD,FS110-CE,FS131-KP	BaseCtx,GermPseudo,IsEndpoint,IsRetArc
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	2336	BaseCtx.exists_eleventh	row;cited:BaseDense;construction		0		E4-RIM,FS110-CD,FS112-N3-3,FS131-E4,FS131-E4-derivation	BaseCtx
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	2346	endpoint_dist_ge	row;cited:BaseDense		0		FS110-CB,FS110-CD	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	2379	dist_le_one_of_mem_region	row		0		FS110-CD	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	2498	BaseCtx.vin_antipodal	row;cited:BaseDense		0		FS110-CD,FS110-CE's	BaseCtx
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	2518	BaseCtx.eleventh_antipodal	row;cited:BaseDense		0		FS110-CD	BaseCtx,VIn
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	2592	BaseCtx.cor3_base	row;cited:BaseDense		0		FS112-N3-COR3	BaseCtx,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	3243	BaseCtx.l3_base	cited:BaseDense	REFUT	0			BaseCtx,IsCubicTrichromatic
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean	3602	eleventh_type	cited:BaseDense		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	61	BaseCtx.removable	row		0		FS110-CD	BaseCtx,GermPseudo,IsRetArc,Removable
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	123	BaseCtx.third_ne	row	REFUT	0		FS110-CB	BaseCtx,VIn
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	174	BaseCtx.false	row;cited:BrickMap,Moves,OpenMove,SVMap	REFUT	0		FS112-N3-BASE	BaseCtx
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	335	row134BaseUA	row		0	edC u` (E4-RIM). A refutation's engine: no model expected (`not_row134BaseUA_seven` shows six colours are spent). -/	E4-RIM,FS112-N-proof,FS112-N3-BASE's,FS131-E4's	Row134BaseUA
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	494	unenclosedC_of_homeomorph	row		0		E4-BEND-UN'	UnenclosedC
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	614	exists_preBend	row;construction		0	osedC u`"). A step inside a refutation: no model expected. -/	E4-BEND-UN,FS112-N2-BENDS',FS112-N3-BASE's,FS131-E4	BaseHyp,IsCubicTrichromatic,NoInertNear,UnenclosedC
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	638	n3_base	row;construction	REFUT	0	t is open (E4-Q1, E4-Q2). A refutation: no model expected. -/	E4-N3BASE-UN,E4-Q1,E4-Q2,FS112-N3-BASE,FS129-OR1-LOCALDENSE's,FS131-E4's	BaseHyp,IsCubicTrichromatic,UnenclosedC
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	649	exists_unenclosed_or_bad	row;construction		0	); its consumers are refutations, and a model at seven colours is `sevenBrickMap` (a corner within `1` of any point). -/	E4-OUTERMOST,FS112-DISC1's,FS131-E4,FS131-E4-derivation	IsCubicTrichromatic,Unenclosed
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	677	localDense	row;construction		0	se` at `v` reads `B̄(v, 2) ⊆ B̄(x, 3)`. No model held (no valid six-coloured fragment on a disc of radius `3` is known — the row's own model line); `GENERIC`. -/	E4-LOCALDENSE,FS129-OR1-LOCALDENSE,FS131-E4's	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	692	dense3	row;construction		0		FS112-N3-DENSE3	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean	703	cv_exists	row;construction		1		FS114-CV-EXISTS,FS114-CVB's,FS114-CVB-verification,FS114-L60-WALK	
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	46	push1_mid	cited:CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	114	push1_mem_Ico	cited:CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	123	push1_mem_Ioc	cited:CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	212	PushProfiles.cases	cited:BaseWalk,Basic,Collar,CollarMap		0			PushProfiles
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	219	PushProfiles.a_pos	cited:CollarMap		0			PushProfiles
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	490	pushHomeo_polar	cited:BendCollar,CollarMap		0			PushProfiles
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	497	pushHomeo_eq_self	cited:BendCollar,CollarMap		0			PushProfiles
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	559	tangRad_pos	cited:BendCollar		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	565	le_tangRad_iff	cited:BendCollar		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	574	tangRad_le_iff	cited:BendCollar		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	681	tangRad_sub_one_le	cited:BendCollar		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	712	pushProfiles_collar	cited:CollarMap		0			PushProfiles
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	765	one_sub_lensProf_le	cited:BendCollar		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	949	dist_collarMid_left	cited:CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	957	dist_collarMid_right	cited:CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	966	norm_tangRad_sub_one_pos	cited:CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	977	collarArcs_carrier	cited:BendCollar,CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	1062	dist_lt_one_of_mem_polarSet	cited:CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	1082	polarSet_mono	cited:CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	1099	polar_not_mem_polarSet	cited:CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	1106	ringPt_not_mem_openArc	cited:BendCollar,CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	1114	push1_mem_Ioo	cited:BendCollar,CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean	1132	pushHomeo_symm_polar	cited:CollarMap		0			PushProfiles
+w5	Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean	75	CollarFit.kin_subset	cited:BendCollar		0			CollarFit
+w5	Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean	188	CollarFit.pushProfiles	cited:BendCollar		0			CollarFit,PushProfiles
+w5	Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean	197	CollarFit.homeo_eq_self	cited:BendCollar		0			CollarFit
+w5	Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean	202	CollarFit.homeo_ringPt	cited:BendCollar		0			CollarFit
+w5	Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean	246	CollarFit.collarArcs_nondegenerate	cited:BendCollar		0			CollarFit
+w5	Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean	376	CollarFit.map_lens	cited:BendCollar		0			CollarFit
+w5	Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean	389	CollarFit.map_agreesOff	cited:BendCollar		0			AgreesOff,CollarFit
+w5	Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean	433	CollarFit.map_valid	cited:BendCollar		0			CollarFit
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	70	pushforward_mem_interiorPts_iff	cited:BendCollar,CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	76	pushforward_col_apply	cited:BendCollar,CollarMap		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	81	pushforward_region	cited:BendCollar		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	93	pushforward_coloursAt	cited:BendCollar		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	105	HasDegree.unique	cited:BaseWalk,FlankUA,Terminal		0			HasDegree
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	114	IsSectorChart.not_hasRepeatedColour_of_zero	cited:BendCollar		0			BranchGerms,HasRepeatedColour,IsSectorChart
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	138	hasDegree_iff_of_agree	cited:BendCollar		0			HasDegree,HasRepeatedColour
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	192	hasDegree_iff_of_mem_interiorPts	cited:BendCollar		0			HasDegree
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	214	branchPt_congr	cited:CurveGraph		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	400	degree_of_circle	cited:BendCollar		0			HasDegree,HasRepeatedColour
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	434	exists_sphere_inter_ball_subset_openArc	cited:BendCollar		0			
+w5	Proofs/HadwigerNelson/Plane/ValidMap/Pushforward.lean	589	pushforward_hasDegree	cited:BendCollar		0			HasDegree,HasRepeatedColour
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean	583	exists_collarFit	construction		0			CollarFit
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean	1075	CollarFit.sides_eq	cited:Procedure		0			CollarFit
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean	1282	CollarFit.coloursAt_subset	cited:Chain,Limit		0			CollarFit
+w5	Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean	1400	bend_toward_collar	row;cited:BaseDense;construction		0		E4-BEND-UN,FS131-I5o's	HasDegree,HasRepeatedColour,Inert
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	404	woodallCone_isHorn_ua	row		0		FS110-N3-DEG's	IsContact,IsHorn,OutType
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	518	stuck_flanks_ua	row		0	A step of `stuck_structure_ua`'s proof. Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_isStuck`, `bowtie_coloursAt_zero`), with the horns `stuck_horns_ua` gives there. -/	FS110-N4-FLANK,FS114-CV	HasDegree,HasSectors,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,OutType
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	771	stuck_structure_ua	row		0	ts, kept beside it by the same ruling). Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_isStuck`, `bowtie_coloursAt_zero`). -/	FS112-WALK,FS114-CV's,FS114-CVB-verification	HasDegree,HasSectors,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,OutType
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	807	flankQ_upper_of_qrOnly	row		0	its named hypothesis `hQR` discharged. Inhabitant of the local hypotheses: `bowtie` at `0` (its arcs at `i` are (Q)); `QROnly` on the whole map is inhabited by the one-colour plane (`const_qrOnly`). -/	FS112-N2-FLANK-Q	IsContact,IsFlankAbove,IsHorn,IsR2Arc,OutType,QROnly
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	819	flankQ_lower_of_qrOnly	row		0		FS112-N2-FLANK-Q	IsContact,IsFlankBelow,IsHorn,IsR2Arc,OutType,QROnly
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	831	IsQArc.add_int_mul	cited:BaseWalk		0			
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	853	cv_l0	row		0	s no unit arc, so `Γ ∩ ω(E)` is finite. No model of a stuck vertex in a terminal valid plane map is known (`GENERIC`: FS-115's question); `bowtie` inhabits the local hypotheses on a fragment. -/	FS114-CV-HD	IsStuck,IsTerminalMap
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	890	IsFlankBelow.unique	cited:BaseWalk,FlankUA,Pushforward		0	t and the higher of their lower limits. Model of the hypotheses: `bowtie` at `0` (`bowtie_flanks`). -/		IsFlankBelow
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	1543	flank_two_sectors_at_S_of_flanks	row		0	A step inside a refutation-shaped row: no model expected. -/	FS131-I5p	HasSectors,InType,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	1767	n3_end_four_colours	row		0	A step inside a refutation-shaped row: no model expected. -/	FS112-NB3-verification,FS131-I5k	HasSectors,InType,IsContact,IsFlankAbove,IsHorn,IsStuck,Terminal
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	1792	n3_end_bothKind	row		0	A step inside a refutation-shaped row: no model expected. -/	FS112-NB3-verification,FS131-I5k	BothKind,HasSectors,InType,IsContact,IsFlankAbove,IsHorn,IsStuck,Terminal
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	1884	n3_end_of_not_inType	row		0	step inside a refutation-shaped row: no model expected. -/	FS112-N3-END,FS112-NB3-verification,FS131-I4m's,FS131-I5d	BothKind,HasRepeatedColour,HasSectors,InType,IsContact,IsFlankAbove,IsHorn,IsStuck,Terminal
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	1897	n3_end	row		0		FS112-N3-END	BothKind,HasRepeatedColour,HasSectors,InType,IsContact,IsFlankAbove,IsHorn,IsStuck,Terminal
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	1932	n3_end_chain	row		0	`: neither neighbour is a chain vertex. Model of the local hypotheses: `bowtie` at `0` (`bowtie_isStuck`: `E` stuck, `±i` not). -/	FS112-N3-END's	HasSectors,InType,IsContact,IsFlankAbove,IsHorn,IsStuck,Terminal
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	1975	upper_bounds_of_inType_N	row		0	`'s second branch, at any lower bounds. Inhabitant of the hypotheses: `bowtie` at `0`. -/	FS114-CVB-verification	HasSectors,InType,IsContact,IsFlankAbove,IsHorn,IsStuck
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	2024	dot_eq_zero_of_antipodal_contact	row		0		FS131-I5l	
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	2040	mergeAvailable_of_not_mem_pole	row		0		FS114-CVB,FS131-I5l	HasSectors,MergeAvailable
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	2224	not_inType_S_of_flankAbove	row		0	one`). FS131-I5p, for YB3 § 3.1 Step 4. Model of the hypotheses: `bowtie` at `0`, `α = 0`, colour `0` (`bowtie_flanks`). -/	FS131-I5p	InType,IsFlankAbove
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	2259	not_inType_N_of_flankBelow	row		0	ove`). FS131-I5p, for YB3 § 3.1 Step 4. Model of the hypotheses: `bowtie` at `0`, `α = 0`, colour `2` (`bowtie_flanks`). -/	FS131-I5p	InType,IsFlankBelow
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	2297	horns_of_two_sectors_at	row		0	oint (FS131-I5p, for YB3 § 3.1 Step 4). Model of the hypotheses at the point: `bowtie` at `0`, colour `1`, `α = 0` (`bowtie_valid`, `bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_outType_one`); `Covers` is the caller's (every point of a	FS131-I5p	HasSectors,IsContact,IsHorn,IsStuck,OutType
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	2331	lower_flank_horns_at_N_of	row		0	unchanged). A step inside a refutation: no model expected. -/	FS131-I5n	HasSectors,InType,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,OutType,Terminal
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	2391	lower_flank_horns_at_N	row		0	FS131-I5l). A step inside a refutation: no model expected. -/	FS114-CVB,FS131-I5l	HasSectors,InType,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,IsTerminalMap,OutType
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	2414	seven_colours_at_N	row	REFUT	0	A step inside a proof by contradiction: no model expected. -/	FS114-CVB,FS131-I5n	HasSectors,InType,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,Terminal
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	2630	y3_end_needs_of_not_mem	row	REFUT	0	A step inside a proof by contradiction: no model expected. -/	FS112-Y3-END-NEEDS,FS112-YB3-verification,FS131-I5p	HasSectors,InType,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,Terminal
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	2993	y3_end_needs	row	REFUT	0	A step inside a proof by contradiction: no model expected. -/	FS112-Y3-END-NEEDS,FS112-YB3-verification,FS114-CVB's,FS114-CVB-verification	HasSectors,InType,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,Terminal
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3011	cv_hd_main_inType	row	REFUT	0	a step inside a proof by contradiction: no model expected. -/	FS114-CV-HD's,FS114-CVB-verification,FS131-I5l,FS131-I5n	HasSectors,InType,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,IsTerminalMap
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3023	cv_hd_main	row	REFUT	0	nside a proof by contradiction where no model is expected (`cv_hd`'s cycle consumes it). -/	FS114-CV-HD	HasSectors,InType,IsContact,IsFlankBelow,IsHorn,IsStuck,IsTerminalMap
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3046	cv_hd	row		0	κ₄ = 1`: both `S`-side arcs on `ω(S)`). Model of the local hypotheses with all four conditions: `bowtie` at `0` (a fragment; `GENERIC` on terminal plane maps). -/	FS114-CV-HD	HasSectors,InType,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,IsTerminalMap
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3075	c_double	row		0	(Q) arcs — the four horn-bounding arcs. Model of the local hypotheses: `bowtie` at `0` (a fragment; on terminal plane maps `GENERIC`, FS-115). -/	FS112-C-DOUBLE	HasSectors,InType,IsContact,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,IsTerminalMap
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3139	cv_class	row		0	ur stuck or with at least four colours. Model of the local hypotheses (the bowtie case): `bowtie` at `0`. Route (FS131-I5k, E5 § 3.5): CV-HD's equivalences (`cv_hd`) split the cases; with all four conditions, C-DOUBLE's (Q) arcs give both-k	FS114-CV-HD,FS131-I5k	BothKind,HasSectors,IsFlankAbove,IsFlankBelow,IsHorn,IsStuck,IsTerminalMap
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3192	StuckAlong.congr	cited:BaseWalk,Basic,BendCollar,Collar		0			StuckAlong
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3324	c_ends	row		0	ower end a member with `j − 1` outside. No model of a stuck chain in a terminal valid plane map is known (`GENERIC`, FS-115). Route (FS114-CVB § 1.8, CV-ENDS): the end vertex is a chain vertex whose axis is `±e α` (`stuckAlong_of_mem_stuckR	FS112-C-ENDS,FS114-CV-HD's,FS114-CVB	IsTerminalMap,StuckAlong
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3376	chainVertex_neighbours_of_noFour	row		0	rs. A step of `cv_exists`'s refutation: no model expected (`GENERIC`; no valid six-map of the plane is known). -/	FS114-CVB	IsChainVertex,IsTerminalMap,StuckAlong
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3414	stuckRun_eq_univ_of_noFour	row		0	|`. A step of `cv_exists`'s refutation: no model expected. -/	FS114-CVB	IsTerminalMap,StuckAlong
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3481	run_ends	row		0	`c_ends`, FS112-C-ENDS's erratum form). No model of a stuck chain in a terminal valid plane map is known (`GENERIC`, FS-115). -/	FS112-C-ENDS's	IsTerminalMap,OnQR2Arc,StuckAlong
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3575	run_hornBoundsQR	row		0	kQ_lower_of_qrOnly` (FS112-N2-FLANK-Q). No model expected (`GENERIC`, FS-115). -/	FS112-N2-FLANK-Q	HornBoundsQR,IsTerminalMap,StuckAlong
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3592	stuckRun_ne_univ	row		1	ubset_S`/`_N`), which `n4_fin` refutes. No model expected (`GENERIC`, FS-115). -/	FS110-N4-FIN,FS112-N2-RAY	IsTerminalMap,StuckAlong
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3602	exists_red	row;construction		0	ication is the limit of the procedure). Inhabitant of the hypotheses: `sevenBrickMap` at seven colours (no unit arc: itself). -/	FS112-N2-RED,FS112-N2-TERM	IsModification,QROnly
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean	3616	exists_terminal	row;construction		0	d clause: nothing is stated about them. Inhabitant of the hypotheses: none at six colours is known (a valid six-map of the plane is FS-114's open question); the statement's class at seven colours is inhabited by `sevenBrickMap`. -/	FS112-N2-TERM	HasRepeatedColour,HornBoundsQR,IsCubicTrichromatic,IsModification,IsStuck,IsTerminalMap,OnQR2Arc,StuckAlong
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	26	frameY_add_pi	cited:Terminal		0			
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	64	tanAbove_S_of_dist_le_one	row		0		FS131-E5's,FS131-E5-derivation	TanAbove
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	283	mem_shadow_hornSet_S	row		0		FS131-E5's,FS131-E5-derivation	TanAbove
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	432	TanAbove.mono	cited:BaseSteps,BaseWalk,Basic,BendCollar		0			TanAbove
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	438	TanBelow.mono	cited:BaseSteps,BaseWalk,Basic,BendCollar		0			TanBelow
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	448	sep_S	row;cited:Terminal		0		FS131-E5's,FS131-E5-derivation	TanAbove,TanBelow
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	461	sep_add_pi_S	cited:Terminal		0			TanAbove,TanBelow
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	671	angle_pinch_false	cited:Terminal	REFUT	0			
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	687	coneAt_subset_of_far	cited:Terminal		0			
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	730	exists_witness_dir	cited:Terminal		0			
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	764	witness_near_S_upper	cited:Terminal		0			IsFlankAbove
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	785	witness_near_S_lower	cited:Terminal		0			IsFlankBelow
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	811	far_of_outType_chart	cited:Terminal		0			BranchGerms,IsSectorChart,OutType
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	833	coneAt_S_subset_of_horn	cited:Terminal		0			IsHorn
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	856	coneAt_N_subset_of_horn	cited:Terminal		0			IsHorn
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	1022	coneAt_N_subset_of_flankAbove	row;cited:Terminal		0	131-I5n, for CVB § 1.6's branch `G_N`). Model of the hypotheses: `bowtie` at `0` (`bowtie_valid`, `bowtie_flanks`). -/	FS131-I5n	IsFlankAbove
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/HornShadow.lean	1044	coneAt_S_subset_of_flankBelow	cited:Terminal		0	`[α, α + π − φ]` for some `φ ∈ (0, π)`. Model of the hypotheses: `bowtie` at `0` (`bowtie_valid`, `bowtie_flanks`). -/		IsFlankBelow
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean	39	finite_arcs_inter_compact	cited:Procedure		0			
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean	61	AgreesOff.symm	cited:BaseDense,BaseSteps,BaseWalk,Basic		0			AgreesOff
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean	126	IsSector.subset_ball	cited:UnitArc		0			IsSector
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean	366	LocalStep.refl	cited:Chain,Dense,MapGraph,PlaneTopology		0			LocalStep
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean	370	LocalStep.mono	cited:BaseSteps,BaseWalk,Basic,BendCollar		0			LocalStep
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean	403	dom_eq	cited:Chain,Procedure		0			
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean	654	limit_isModification	cited:Procedure		0			IsModification
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean	679	limit_isTerminalMap	cited:Procedure		0			IsR2Arc,IsTerminalMap,MergeAvailable,RayAvailable,ShaveAvailable
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean	1000	IsClean.eventually_not_isSite	cited:Procedure		0			IsClean,IsSite
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Limit.lean	1715	exists_clean	cited:Procedure		0			IsClean,IsModification
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean	95	IsRingArc.sides_eq	cited:BendCollar		0			
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean	102	IsRingArc.mono	cited:BaseSteps,BaseWalk,Basic,BendCollar		0			
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean	128	IsRingArc.union	cited:BaseDense,BaseSteps,BaseWalk,BendCollar		0			
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean	361	badCount_eq_zero_iff	row		0		FS131-IL1	IsR2Arc
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean	576	exists_vertexStep	row;construction		1		FS131-KL1's	HasDegree,IsClean,IsModification,IsSite,LocalStep,MergeAvailable,RayAvailable,ShaveAvailable
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean	590	exists_arcStep	row;construction		1		FS131-KL1's	HasDegree,IsClean,IsMaxRingArc,IsModification,IsR2Arc,IsSite,LocalStep
+w5c	Proofs/HadwigerNelson/Plane/ValidMap/Procedure.lean	622	exists_terminalMap	row;cited:Terminal		0	tion`, `LocalSeq.limit_isTerminalMap`). Inhabitant of the hypotheses: `sevenBrickMap` at seven colours (`sevenBrickMap_valid`, `sevenBrickMap_isPlaneMap`). -/	FS112-N2-TERM's,FS131-KL1	IsModification,IsTerminalMap

@@ -1,0 +1,9 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 8,9
+/home/kooshi/source/lean-dir/data/fs131/qa4/QA4Collar.lean:82:28: warning: Variable name `h` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'HadwigerNelson.Plane.ArcMap.qa4_collar_hyps' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.qa4_collar_not_hmax' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.qa4_bend_toward_collar_weak' depends on axioms: [propext, Classical.choice, Quot.sound]
