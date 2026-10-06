@@ -20,7 +20,8 @@ None. This is a tooling job: it adds no declaration under `Proofs/` and changes 
 4. **`main`'s library holds one doubled name, `HadwigerNelson.Plane.conj_e`**, both copies on the standard three, each read where
    it was compiled; and 22 names Lean generates on demand in several modules, which are not failures (§ Stage 3). No audited print
    is affected.
-5. **The check**: `scripts/DupNames.lean` with `scripts/dupnames.sh` (§ Stages 3–4).
+5. **The check**: `scripts/DupNames.lean` with `scripts/dupnames.sh` and `scripts/dupnames-controls.txt`; seen to fail on a planted
+   pair, on `main`'s library, and — with the tool itself broken eight ways — through its own controls (§ Stages 3–4).
 
 ## Stage 1 — SAVED (FS131-T4): the readback, the as-given build
 
@@ -207,7 +208,9 @@ TOTALS doubled=1 generated=22 generated-axioms-differ=0
   outputs beside them): both print `[propext, Classical.choice, Quot.sound]`; the two proof terms differ (`rw [e, e, …]` against
   `unfold e`).
 - **22 generated names**, in two to six modules each: 17 `….eq_1` / `….eq_2`, 5 `….congr_simp`; every copy a theorem, one type, the
-  copies of each identical (every `COPY` line reads `held=true`), their axioms equal. Four are for dependencies' definitions; three
+  copies of each identical here (every `COPY` line reads `held=true`), their axioms equal. Identical copies are not a law: in the
+  controls' library `T4P.fn.eq_def`'s two generated copies are different terms (§ 4.2), which is why the class asks for equal
+  axioms and not for one term. Four are for dependencies' definitions; three
   of those have a copy in a Mathlib or Std module (`Nonempty.some.congr_simp`, five Mathlib modules and one of ours;
   `LinearEquiv.toContinuousLinearEquiv.congr_simp`; `Std.Sat.CNF.Clause.eval.eq_1`), and `SimpleGraph.Coloring.mk.congr_simp` has
   both copies in ours. (My message to the coordinator said all four have a dependency's copy: a slip, three do.)
@@ -223,3 +226,156 @@ the other, the same three. The vacuity scan's `declarations=` counts names of th
 is. **What would have moved a count**: a pair with one copy not clean (§ 2.5).
 
 ## Stage 3 — SAVED (FS131-T4)
+
+## Stage 4 — SAVED (FS131-T4): the wrapper, the controls, and the check watched to fail three ways
+
+### 4.1 The wrapper
+
+`scripts/dupnames.sh` (in the form of `scripts/axioms.sh`): runs `lake env lean scripts/DupNames.lean` with the status read
+directly, saves the complete output under `build/gate/dupnames/` (`scripts/gate-log.sh`), and judges it in one function,
+`check_scan`, which the self-test also runs. Failure kinds, one `FAIL <kind> <detail>` line each: `doubled` (the line names every
+declaring module, its kind there, whether it is the copy held, whether its list is the one `#print axioms` reads, and that copy's
+axioms); `generated-axioms-differ`; `coverage` (the scan read a different number of the package's modules than `Proofs/` and
+`Proofs.lean` hold source files, counted as `scripts/build_order.py` counts — a module `Proofs.lean` does not import was not
+scanned); `banners`, `scanned`, `accounting` (an output that is not whole, or totals that disagree with the lines). A scan that does
+not elaborate fails. It prints every count, every generated name, and the names that appeared or disappeared since the previous
+complete run. Exit 0 only with `doubled=0` and no other failure; the gate takes no option. **No count is recorded in `CLAUDE.md`**:
+the generated names come and go with the proofs that ask for them, and the condition is `doubled=0`.
+
+Cost, measured on this tree: the gate about 3 s once admitted by the slot (the library is memory-mapped; `--mem 16` is ample);
+`--self-test` about 17 s (`--mem 4`).
+
+**Compared with the dependencies' names too** (the brief left this to me): yes — a name of ours that a Mathlib or Std module also
+declares is the same hazard with one copy ours, and costs nothing more to see. **Not reported**: a name two dependencies' modules
+share and no module of ours declares (§ Drafts, the open item).
+
+### 4.2 The controls
+
+`scripts/dupnames-controls.txt`: fifteen planted modules (written to `data/fs131/t4/plant/`, a Lake package of core Lean only with
+two roots — `T4Plant`, the package under audit, and `T4Dep`, standing for a dependency — and built there from nothing at every run)
+and fifteen controls, each elaborating a copy of the shipped scan with the control's imports and root. Each is two-sided: every
+`FAIL` kind raised must be one the control predicts. `./scripts/dupnames.sh --self-test` → exit 0, 15 of 15
+(`data/fs131/t4/logs/self-test.log`):
+
+| control | what is planted | what must happen |
+|---|---|---|
+| `baseline` | two modules, no repeated name | PASS; the counts read |
+| `doubled_theorem` | two siblings, one theorem name and type | `FAIL doubled`, naming the name and both modules |
+| `doubled_axioms_differ` | one copy through a planted `axiom` | `FAIL doubled` with `axioms=differ` and the axiom's name |
+| `doubled_axiom_theorem` | an `axiom` and a theorem of one name | `FAIL doubled` with both kinds |
+| `doubled_prop_instance` | `instance : Nonempty Tok` in two siblings — neither file writes the name | `FAIL doubled T4P.instNonemptyTok` |
+| `shared_with_dependency` | one copy in the package, one outside its root | `FAIL doubled`, the outside module named, `package=false` |
+| `generated_only` | `T4P.fn.eq_1` asked for in two siblings | PASS; `generated=3`, `doubled=0` |
+| `generated_beside_doubled` | the same beside a hand-written pair | `FAIL doubled`: the exclusion shelters nothing |
+| `dependencies_only_pair` | a pair in two modules outside the root | PASS (theirs, not reported) |
+| `module_not_imported` | one module of a pair not imported | `FAIL coverage`, and no `doubled` |
+| `scan_reads_nothing` | a root no module lies under | the scan refuses: "nothing was scanned" |
+| `scan_cut_short` | the END banner dropped | `FAIL banners` |
+| `lost_doubled_line`, `lost_copy_line`, `lost_totals_line` | one output line dropped | `FAIL accounting` |
+
+**One control was wrong at its first run, and it was the control**: `generated_only` and `generated_beside_doubled` expected
+`generated=1` and read 3. Asking for `fn.eq_1` makes Lean generate `fn.eq_1`, `fn.eq_2` and `fn.eq_def` in each asking module — read
+from the control's own output, three `GENERATED` lines — so the count was my guess about Lean, not a property of the gate; both now
+expect 3, and the controls file says why. What the gate must do there (pass; count them; fail the hand-written pair beside them) was
+right at the first run and is unchanged. The same output shows `fn.eq_def`'s two copies are different terms (`held=false` and
+`held=true`).
+
+### 4.3 Watched to fail, three ways
+
+1. **On a planted pair**: `doubled_theorem` and its four siblings above — each `FAIL doubled` names the pair and both modules.
+2. **On `main` as it stands**: `scripts/slot.py --mem 16 --cpus 8 -- ./scripts/dupnames.sh` on this tree → **exit 1**
+   (`data/fs131/t4/logs/gate-on-main-line.log`): "scanned 7257 modules, 1767 of them the package's (1767 source files)", the 22
+   generated names listed, and
+   `FAIL doubled HadwigerNelson.Plane.conj_e is declared by 2 modules (types=same axioms=same): Proofs.HadwigerNelson.Plane.Chord
+   kind=theorem held=false attributed=true … | Proofs.HadwigerNelson.Plane.SixFragment kind=theorem held=true attributed=false …`.
+   **It reports nothing else.** This is the tree's own evidence, not a gate run on `main`.
+3. **With the check itself broken**: `tools/fs131_t4_mutate.py` → exit 0 (`data/fs131/t4/logs/mutations.log`, each run's output
+   under `data/fs131/t4/logs/mutations/`). Eight one-line faults, each in a copy of the tool and each in the direction that makes
+   the gate pass, each caught by the control written for it with `baseline` still green where the fault does not concern it:
+
+   | the fault | caught by |
+   |---|---|
+   | the scan forgets a second declaring module | `doubled_theorem`, `doubled_prop_instance` (and seven more) |
+   | the scan calls every pair of theorems of one type generated | `doubled_theorem`, `doubled_prop_instance` (and six more) |
+   | the scan does not look in the dependencies' modules | `shared_with_dependency`, alone |
+   | the scan reports a constant count of package modules | `module_not_imported` (and `baseline`, as named) |
+   | the wrapper does not fail on a `DOUBLED` line | the five `doubled_*` and `shared_with_dependency` |
+   | the wrapper does not compare modules read with source files | `module_not_imported`, alone |
+   | the wrapper does not compare `TOTALS` with the lines | `lost_doubled_line`, alone |
+   | the wrapper does not require the END banner | `scan_cut_short`, alone |
+
+   Afterwards: the shipped files' digests unchanged, no mutant file left in `scripts/`, the shipped self-test exit 0 with 15 ok.
+
+### 4.4 What this check does not see
+
+- A name declared twice by two dependencies' modules and by none of ours (out of scope by design; the open item below).
+- Two statements under two names (FS131-M7's seven): duplicates, not collisions; this check is about one name.
+- A name containing a space would break the wrapper's field reading; it would fail `accounting`, not pass.
+- The check reads the **built** library: it runs after the build, on the tree being landed. A doubled name is made by a join, so
+  neither joined line's own run can see it.
+
+## Stage 4 — SAVED (FS131-T4)
+
+## Drafts for the front page
+
+**`CLAUDE.md` § The gate and § Trust ledger: no count moves.** No gate ran on `main`, no declaration under `Proofs/` changed, the
+audit's record count is as filed. No ledger row regrades; no Frontier line; no Proof Atlas grade.
+
+**1. `LEAN.md` § The gate — slot: a new bullet after "Every definition has a `#eval`/`example` that would fail if it drifted."**
+(FS131-M7's slot; its draft is replaced by this, which says what the experiment showed):
+
+> - **`./scripts/dupnames.sh` and `./scripts/dupnames.sh --self-test` are green** — no name is declared by two modules. Two modules,
+>   neither importing the other, that each declare a theorem of one name and type build in silence: at import Lean accepts the second
+>   constant when both are theorems of one type (up to bound-variable names), a theorem and an axiom of one type, or two axioms of one
+>   proposition (`Lean/Environment.lean`, `subsumesInfo`, v4.32.0), and refuses only otherwise (two definitions, even identical; types
+>   that differ). The build sees a doubled name only when one module is upstream of the other — and not even then for an anonymous
+>   instance, which gets a fresh name. **Measured** (`data/fs131/t4/experiment-table.md`): the environment then holds the proof of the
+>   module imported **last**, and `#print axioms` reads the axiom list stored by the module imported **first**
+>   (`Lean/Util/CollectAxioms.lean`: one list per declaration, written with each `.olean`) — never the same copy. So the axiom audit
+>   can print a record clean while the proof the environment holds rests on `sorry`, on an axiom or on a native purchase, and an
+>   `axiom` shadowed by a theorem of its name is absent from `libraryAxioms`. The print of an imported theorem is the list stored when
+>   its own module was compiled, whatever else is imported. No statement gains a proof it lacks — a clean list belongs to a copy that
+>   is a clean proof of the same type (an argument, one mind; no experiment can show it) — what is lost is the audit's faithfulness to
+>   the proof the environment holds. With no name declared twice, every module saw one copy of each name, so each stored list is the
+>   list of the proof the kernel checked. The scan reads each module's own compiled constants (`scripts/DupNames.lean`), so it sees
+>   what no scan of the source can: a `Prop`-valued instance is a theorem to the kernel, and two siblings' `instance : C T` merge in
+>   silence under one generated name. One class is counted and listed without failing: theorems Lean generates on demand in whichever
+>   module asks (`f.eq_1`, `f.congr_simp`; reserved names, which no author can declare) — failing only if their copies' axioms differ.
+>   `--self-test` plants fifteen controls in a scratch library (`scripts/dupnames-controls.txt`). **A join of two lines runs it on the
+>   joined tree, before the axiom audit**: the join makes the doubled name, and neither line's own gate can see it.
+
+**2. `LEAN.md` § The gate — slot: the first paragraph, after "`#print axioms` clean on the public surface (`scripts/axioms.sh`)"**,
+insert: ", no name declared by two modules (`scripts/dupnames.sh`, run before the audit, whose prints are faithful only then)".
+
+**3. `LEAN.md` § Searching — Lean — slot: a new bullet at the end** (the rule for whoever names a lemma; why here and not in
+`plans/STANDING-RULES.md` is below):
+
+> - **Never state one lemma under one name in two modules that do not import each other** — on two branches least of all. It is not
+>   a loud failure at the join: the two theorems merge in silence and the axiom audit then reads one copy while the kernel holds the
+>   other (§ The gate, `scripts/dupnames.sh`). A line that needs another line's lemma before they meet takes it as a hypothesis, or
+>   states it under a name of its own and says so in its report; the join then makes one declaration.
+
+**4. The landing procedure — slot: the gate's command list wherever a landing or a join names `./scripts/axioms.sh`, immediately
+before it** (I did not find the procedure's home on this branch; the line is written to be placed by the coordinator):
+
+> - **Doubled names, on the joined tree, after the build and before the axiom audit**:
+>   `scripts/slot.py --mem 16 --cpus 8 -- ./scripts/dupnames.sh` (about 3 s once admitted), then
+>   `scripts/slot.py --mem 4 --cpus 4 -- ./scripts/dupnames.sh --self-test` (about 17 s). Green is exit 0 and
+>   "no name is declared by two modules". A `FAIL doubled` line names every declaring module: make the name one declaration in a module
+>   both import, rebuild, and run it again before reading any axiom print.
+
+**5. `plans/STANDING-RULES.md`: no line.** The lanes that declare Lean names are the two de Bruijn lanes, and both read `LEAN.md` in
+full at launch, where draft 3 puts the rule; a line in the standing rules would be loaded by every other lane, none of which can act
+on it. What does reach beyond those lanes is a briefing practice, and it is the coordinator's: inventory item 443 planned for two
+lines to state one lemma under one name so that they "will collide by name … a loud failure by design" — by the table that
+collision is silent whenever neither module imports the other (HELD, below).
+
+**6. `ARCHITECTURE.md`**: none needed for the import graph (no module under `Proofs/` added). If its text lists the gate's scripts,
+`scripts/DupNames.lean`, `scripts/dupnames.sh` and `scripts/dupnames-controls.txt` join `Axioms` and `Vacuity` there.
+
+**The open item, stated so it is not lost** (a generalization, not built): the scan reports a repeated name only when a module of
+ours declares it. A name two **dependencies'** modules share is merged by the same rule, and a print of one of our theorems that
+uses it reads the first-imported copy's list. That can move a printed axiom *set* but not its section, as long as the dependencies
+declare no axiom beyond the standard three (Mathlib declares none; not re-checked here). One more pass of the scan — every repeated
+name, with a line counting the dependency-only ones whose copies' axioms differ — would make "the audit is faithful" a checked
+statement for the exact sets as well. It needs a map over all 521,868 constants instead of 18,081.

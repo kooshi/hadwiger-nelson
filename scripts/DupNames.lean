@@ -75,6 +75,10 @@ planted libraries exercise):
 * `TOTALS doubled=… generated=… generated-axioms-differ=…`.
 -/
 
+-- `lake env lean` does not apply the lakefile's options (`LEAN.md` § Building).
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
+
 open Lean Elab Command
 
 namespace DupNames

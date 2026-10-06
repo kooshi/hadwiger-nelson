@@ -1,0 +1,36 @@
+slot: admitted dupnames.sh: mem 4 GiB (hard cap), cpus 0,1,2,3
+==> dupnames-self-test: this run's full output: build/gate/dupnames-self-test/20261006T083916Z-2672295.log
+==> dupnames self-test: 15 controls over a planted library of 15 modules (data/fs131/t4/plant/)
+    ok    baseline — passed
+    ok    doubled_theorem — failed (1 FAIL line(s))
+            FAIL doubled T4P.dup is declared by 2 modules (types=same axioms=same): T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[] | T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+    ok    doubled_axioms_differ — failed (1 FAIL line(s))
+            FAIL doubled T4P.dup_ax is declared by 2 modules (types=same axioms=differ): T4Plant.AxA kind=theorem held=false attributed=true package=true axioms=[T4P.planted_ax] | T4Plant.AxB kind=theorem held=true attributed=false package=tr
+    ok    doubled_axiom_theorem — failed (1 FAIL line(s))
+            FAIL doubled T4P.dup_kind is declared by 2 modules (types=same axioms=differ): T4Plant.KindA kind=axiom held=false attributed=true package=true axioms=[T4P.dup_kind] | T4Plant.KindB kind=theorem held=true attributed=false package=
+    ok    doubled_prop_instance — failed (1 FAIL line(s))
+            FAIL doubled T4P.instNonemptyTok is declared by 2 modules (types=same axioms=same): T4Plant.InstA kind=theorem held=false attributed=true package=true axioms=[] | T4Plant.InstB kind=theorem held=true attributed=false package=true 
+    ok    shared_with_dependency — failed (1 FAIL line(s))
+            FAIL doubled T4P.shared is declared by 2 modules (types=same axioms=same): T4Dep.X kind=theorem held=false attributed=true package=false axioms=[] | T4Plant.Shared kind=theorem held=true attributed=false package=true axioms=[]
+    ok    generated_only — passed
+    ok    generated_beside_doubled — failed (1 FAIL line(s))
+            FAIL doubled T4P.dup is declared by 2 modules (types=same axioms=same): T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[] | T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+    ok    dependencies_only_pair — passed
+    ok    module_not_imported — failed (1 FAIL line(s))
+            FAIL coverage the scan read 2 module(s) of the package and the package has 3 source file(s): a module the root does not import was not scanned, or the scan was told the wrong root
+    ok    scan_reads_nothing — did not elaborate
+            /tmp/tmp.QNL7FmAs9O/scan_reads_nothing.lean:188:0: error: DupNames.scan: no imported module lies under [NoSuchRoot]; nothing was scanned
+    ok    scan_cut_short — failed (2 FAIL line(s))
+            FAIL banners === END === printed 0 time(s), not once: the scan did not run to its end
+            FAIL doubled T4P.dup is declared by 2 modules (types=same axioms=same): T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[] | T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+    ok    lost_doubled_line — failed (3 FAIL line(s))
+            FAIL accounting a COPY line for T4P.dup, which no DOUBLED or GENERATED line names
+            FAIL accounting a COPY line for T4P.dup, which no DOUBLED or GENERATED line names
+            FAIL accounting TOTALS reads doubled=1 generated=0 generated-axioms-differ=0 and the lines read give 0, 0, 0
+    ok    lost_copy_line — failed (2 FAIL line(s))
+            FAIL accounting T4P.dup is listed with modules=2 and 1 COPY line(s) were read
+            FAIL doubled T4P.dup is declared by 2 modules (types=same axioms=same): T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+    ok    lost_totals_line — failed (1 FAIL line(s))
+            FAIL accounting TOTALS printed 0 time(s), not once
+==> dupnames self-test: OK — all 15 controls behaved: every planted fault fired, and every partner passed.
+    every control's output: build/gate/dupnames-self-test/20261006T083916Z-2672295.log
