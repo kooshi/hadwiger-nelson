@@ -76,3 +76,41 @@ dependencies is mine by the brief; nothing downstream reads the order.
   closure that are themselves proved by `sorry`, with their modules**, so that "rests on `sorryAx` through `Paint` alone" is read off,
   not asserted. Verdicts `STANDARD-THREE`, `SORRY-VIA-PAINT-ONLY`, `SORRY-IN-OWN-FILES`, `OTHER-AXIOM`. Its control is the skeleton
   itself: every record still open must read `SORRY-IN-OWN-FILES` and name its own leaf.
+
+## Stage 2 — SAVED (FS131-MB1): the cusp fragment's ring arc — `cuspFrag_bend_away` and `cuspFrag_bend_toward` whole, on the standard three
+
+*2026-10-06 09:09 UTC.* Three leaves of `Bends` proved, with four helpers (new declarations in `Bends`: `cuspArc_sin`, `cuspArc_pt`, `cuspArc_mem`,
+`cuspFrag_closure_region_subset`; each name checked absent from every worktree's `Proofs/`).
+
+| leaf | route taken | lines |
+|---|---|---|
+| `cuspFrag_isRingArc` | the planner's (`l60Frag_isRingArc`'s pattern), without `dense_interiorPts`: on `O = B(0, 1/2) ∩ {1 < ‖w + i‖}`, an open neighbourhood of each arc point, the interior points are the points off `ω(i)` and the colour is the side of `ω(i)`; each side's closure by `IsOpen.inter_closure`. The arc's points: `‖i + e θ‖² = 2 + 2 sin θ < 1/4` and `‖2i + e θ‖² = 5 + 4 sin θ > 1` from `−1 < sin θ ≤ −23/25` (`cos t ≥ 1 − t²/2` at `t = θ + π/2 ≤ 2/5`) | 52 (+ 30 of helpers) |
+| `cuspFrag_coloursAt_I` | every class lies in `B̄(0, 1/2)`, and `‖i‖ = 1` | 8 |
+| `cuspFrag_radiusTwo_disjoint` | `‖i + 2 e θ‖ ≥ 2 − 1` | 10 |
+
+**The build**: `data/fs131/mb/build-1.log` — `build: OK — 452 of 452 batches, 2 module(s) rebuilt, 4 module(s) with warnings, 8m13s`, exit 0;
+the full log (`build-1-full.log`): 0 warnings other than `sorry`; distinct `sorry` warnings **56** — `Paint` 13, `Moves` 18, `Stuck` 21,
+`Bends` **4** (was 7).
+
+**The receipt** (`data/fs131/mb/MBAxioms-stage2.out`, by `lake env lean` on the built tree): `cuspFrag_isRingArc`,
+`cuspFrag_coloursAt_I`, `cuspFrag_radiusTwo_disjoint`, `cuspFrag_bend_away`, `cuspFrag_bend_toward` each read `STANDARD-THREE`
+(`[propext, Classical.choice, Quot.sound]`, no `sorry`-proved declaration in the closure). **Controls**: the 23 records still open
+each read `SORRY-IN-OWN-FILES` and name their own leaves (the verdict that must fire, fires); `#mb_applies` reads the model theorems
+as the landed theorems applied — `cuspFrag_bend_away <- ArcMap.bend_away_whole | APPLIED`, `cuspFrag_bend_toward <- ArcMap.bend_toward |
+APPLIED` — and the planted wrong pairing `cuspFrag_bend_away <- ArcMap.bend_toward` reads `NOT-APPLIED`.
+
+**The statement check**: `data/fs131/mb/statements.out` — 53 skeleton declarations, 0 not found verbatim once; no path outside this
+job's differs from `fe9d6d32`. `tools/check_architecture.py`: exit 0, `RESULT: PASS` (`arch.out`). `scripts/Axioms.lean`: a block
+"FS131-MB1" above the `=== PURCHASED ===` banner, with the three cusp leaves (the two model theorems are already in FS131-KM1's block).
+
+**What this model is and is not** (the planner's § 3.4, unchanged by the proof): the arc's centre `i` is outside the closure of the
+fragment's domain and carries no colour, so `hin` and `hout` hold for want of any colour — a model of the hypotheses' letter on a
+fragment. Ruling 461 (c)'s plane-map model of `bend_away_whole` rests on `awayModel`, which is the last group of this job's order.
+
+**Re-priced from the first leaves** (the brief's Done means 2). The cusp group: 95 lines against the plan's M + S + S (up to 180).
+`stuckModel`'s first group (the arcs as point sets, `stuckArcs_nondegenerate`, `_finite`, `frontier_stuckW_subset`,
+`stuckCol_locallyConstant`), drafted and elaborating in `data/fs131/mb/scratch/` but for one line: about 100 lines for the four leaves
+and 330 for the helpers every later leaf of `stuckModel` reads (the arcs of a square by coordinates, the tangent arcs as the unit
+circles about the poles inside `B(v, 1/10)`, the three pieces in coordinates). **`stuckModel` without `stuckModel_terminal` re-prices
+to about 900–1,000 lines**, inside the plan's 950–1,300 for the same leaves. `shadowModel` and `awayModel` are not re-priced: neither is
+begun.

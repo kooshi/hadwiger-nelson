@@ -4848,6 +4848,12 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.awayModel_hyps
 #print axioms HadwigerNelson.Plane.awayModel_r2Contacts
 
+/-! ## FS-131, the example maps, half B (job FS131-MB1) — the leaves of `Plane/Models/{Stuck, Bends}` proved; the model theorems themselves are in FS131-KM1's block above -/
+-- FS131-MB1: the cusp fragment's ring arc (Bends) — reads nothing of `Paint`
+#print axioms HadwigerNelson.Plane.cuspFrag_isRingArc
+#print axioms HadwigerNelson.Plane.cuspFrag_coloursAt_I
+#print axioms HadwigerNelson.Plane.cuspFrag_radiusTwo_disjoint
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

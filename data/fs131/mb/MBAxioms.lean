@@ -51,7 +51,23 @@ elab "#mb_receipt " id:ident : command => do
     else "OTHER-AXIOM"
   logInfo m!"RECORD {n} | {verdict} | axioms: {axs.toList} | sorry leaves ({rows.length}): {rows}"
 
+/-- `#mb_applies d t` says whether the proof term of `d` calls the declaration `t` directly: a model theorem of this lane *is* the landed
+theorem applied to the model, and this reads it off the term. -/
+elab "#mb_applies " id:ident thm:ident : command => do
+  let n ← liftCoreM <| realizeGlobalConstNoOverloadWithInfo id
+  let t ← liftCoreM <| realizeGlobalConstNoOverloadWithInfo thm
+  let env ← getEnv
+  let some ci := env.find? n | throwError "unknown declaration {n}"
+  let deps := ((ci.value? (allowOpaque := true)).map (·.getUsedConstants)).getD #[]
+  logInfo m!"APPLIES {n} <- {t} | {if deps.contains t then "APPLIED" else "NOT-APPLIED"}"
+
 end MB
+
+-- the model theorems are the landed theorems applied (the third line is the control: the wrong theorem must read NOT-APPLIED)
+#mb_applies HadwigerNelson.Plane.cuspFrag_bend_away HadwigerNelson.Plane.ArcMap.bend_away_whole
+#mb_applies HadwigerNelson.Plane.cuspFrag_bend_toward HadwigerNelson.Plane.ArcMap.bend_toward
+#mb_applies HadwigerNelson.Plane.cuspFrag_bend_away HadwigerNelson.Plane.ArcMap.bend_toward
+#mb_applies HadwigerNelson.Plane.shadowModel_flank_ne HadwigerNelson.Plane.ArcMap.flank_ne_of_doublyShadowed
 
 -- the cusp fragment's ring arc and the two bends applied
 #mb_receipt HadwigerNelson.Plane.cuspFrag_isRingArc
