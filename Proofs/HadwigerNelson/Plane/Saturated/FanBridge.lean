@@ -1,5 +1,7 @@
 import Proofs.HadwigerNelson.Plane.Saturated.LocalGraph
 import Proofs.HadwigerNelson.Plane.Saturated.FanExamples
+import Proofs.HadwigerNelson.Plane.Saturated.FanArcs
+import Proofs.HadwigerNelson.Plane.Saturated.FanBuild
 
 /-!
 # The bridge: an isolated singular point of a saturated colouring has a fan (FS-131 wave 6: FS131-E8)
@@ -67,8 +69,8 @@ each end: `IsUnitCurve` on the closed interval. Not closed: `γ` is injective on
 theorem gamma (h : c.IsolatedAt z R) {y : ℂ} (hy : y ∈ c.essBdry ∩ (ball z R \ {z})) :
     ∃ (L : ℝ) (γ : ℝ → ℂ) (ψ : ℝ → ℝ), 0 < L ∧ L ≤ Real.pi / 2 ∧ IsUnitCurve γ ψ (Icc 0 L) ∧ InjOn γ (Icc 0 L) ∧
       connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) y = γ '' Ioo 0 L ∧
-      (γ 0 = z ∨ γ 0 ∈ sphere z R) ∧ (γ L = z ∨ γ L ∈ sphere z R) := by
-  sorry
+      (γ 0 = z ∨ γ 0 ∈ sphere z R) ∧ (γ L = z ∨ γ L ∈ sphere z R) :=
+  exists_arc_of_isolated h.le h.sing h.sat hy
 
 end AeColouring
 
@@ -78,8 +80,8 @@ angle that tends to the initial tangent angle. -/
 theorem IsUnitCurve.exists_polarGraph {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {L : ℝ} (h : IsUnitCurve γ ψ (Icc 0 L)) (hL : 0 < L)
     (hLπ : L ≤ Real.pi / 2) :
     ∃ φ : ℝ → ℝ, ContinuousOn φ (Ioo 0 (dist (γ L) (γ 0))) ∧ Tendsto φ (𝓝[>] 0) (𝓝 (ψ 0)) ∧
-      γ '' Ioo 0 L = polarGraph (γ 0) (dist (γ L) (γ 0)) φ := by
-  sorry
+      γ '' Ioo 0 L = polarGraph (γ 0) (dist (γ L) (γ 0)) φ :=
+  h.exists_polar_angle hL hLπ
 
 namespace AeColouring
 
@@ -91,8 +93,8 @@ on the circle; no component has both ends at `z`). -/
 theorem beta (h : c.IsolatedAt z R) {y : ℂ} (hy : y ∈ c.essBdry ∩ (ball z R \ {z}))
     (hz : z ∈ closure (connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) y)) :
     ∃ (φ : ℝ → ℝ) (d : ℝ), ContinuousOn φ (Ioo 0 R) ∧ Tendsto φ (𝓝[>] 0) (𝓝 d) ∧
-      connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) y = polarGraph z R φ := by
-  sorry
+      connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) y = polarGraph z R φ :=
+  exists_polarGraph_of_isolated h.le h.sing h.sat hy hz
 
 /-- **FS131-E8-ALPHA.** In the setting `IsolatedAt`, finitely many components of the essential boundary in the
 punctured disc meet the closed disc of radius `R/2`, and there is `r ∈ (0, R/2]` such that every essential boundary
@@ -101,20 +103,22 @@ theorem alpha (h : c.IsolatedAt z R) :
     {K : Set ℂ | ∃ y ∈ c.essBdry ∩ (ball z R \ {z}),
         K = connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) y ∧ (K ∩ closedBall z (R / 2)).Nonempty}.Finite ∧
       ∃ r, 0 < r ∧ r ≤ R / 2 ∧ ∀ w ∈ c.essBdry ∩ (ball z r \ {z}),
-        z ∈ closure (connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) w) := by
-  sorry
+        z ∈ closure (connectedComponentIn (c.essBdry ∩ (ball z R \ {z})) w) :=
+  finite_components_of_isolated h.pos h.le h.sing h.sat
 
 /-! ## FS131-E8-FAN, -BRIDGE, -CLAUSE2 -/
 
 /-- **FS131-E8-FAN.** If `z` is the only possible singular point of `B(z, R)` and the colouring is saturated at the
 essential boundary points of the punctured disc, then `z` has a fan. Not read: saturation at `z` or outside the
-punctured disc; any clause about arcs meeting `z`; that `z` is singular; the number of colours. -/
+punctured disc; any clause about arcs meeting `z`; that `z` is singular; the number of colours.
+Inhabitant of the hypotheses: `sq9` at the grid vertex, `R = 1/4` (`sq9_isolatedAt`). -/
 theorem fan_of_isolated (c : AeColouring k) {z : ℂ} {R : ℝ} (hR : 0 < R) (hS : c.singularSet ∩ ball z R ⊆ {z})
-    (hsat : SaturatedOn c.cls (ball z R \ {z})) : Nonempty (c.Fan z) := by
-  sorry
+    (hsat : SaturatedOn c.cls (ball z R \ {z})) : Nonempty (c.Fan z) :=
+  c.exists_fan_of_isolated hR hS hsat
 
 /-- **FS131-E8-BRIDGE.** A saturated colouring whose singular set is locally finite satisfies REG-J′ in its fan form:
-every singular point has a fan with end tangents. The frozen words' second clause is not read. -/
+every singular point has a fan with end tangents. The frozen words' second clause is not read.
+Inhabitant of the hypotheses: `sq9` (`sq9_tight_saturated`, `sq9_singLocallyFinite`) — `sq9_regJFan`. -/
 theorem regJFan_of_saturated (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite) : c.RegJFan :=
   ⟨hS, fun z _ => by
     obtain ⟨R, hR, hsub⟩ := hS.exists_ball_subset z
@@ -125,18 +129,26 @@ theorem regJFan_iff_singLocallyFinite (c : AeColouring k) (hsat : Saturated c.cl
     c.RegJFan ↔ c.SingLocallyFinite :=
   ⟨fun h => h.1, regJFan_of_saturated c hsat⟩
 
+/-- **The model of REG-J′'s fan form** (FS131-I6D): `sq9` — saturated (`sq9_tight_saturated`), its singular set the
+grid's vertices, locally finite (`sq9_singLocallyFinite`) — has a fan at every singular point. The inhabitant of every
+theorem that takes `RegJFan`, or `Saturated` with `SingLocallyFinite`, at `k = 9`. -/
+theorem _root_.HadwigerNelson.Plane.sq9_regJFan : sq9.RegJFan :=
+  regJFan_of_saturated sq9 sq9_tight_saturated.2.1 sq9_singLocallyFinite
+
 /-- **FS131-E8-CLAUSE2**, first clause: under saturation the frozen words of REG-J′ follow from their first clause —
-every singular point lies in the closure of finitely many components of the interface set. -/
+every singular point lies in the closure of finitely many components of the interface set.
+Inhabitant of the hypotheses: `sq9` (`sq9_tight_saturated`, `sq9_singLocallyFinite`). -/
 theorem regJLiteral_of_saturated (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite) :
-    c.RegJLiteral := by
-  sorry
+    c.RegJLiteral :=
+  c.regJLiteral_of_locallyFinite hsat hS
 
 /-- **FS131-E8-CLAUSE2**, second clause: in a saturated colouring with locally finite singular set, a bounded set
-meets finitely many components of the interface set. -/
+meets finitely many components of the interface set.
+Inhabitant of the hypotheses: `sq9` (`sq9_tight_saturated`, `sq9_singLocallyFinite`). -/
 theorem finite_arcs_of_isBounded (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite)
     {K : Set ℂ} (hK : Bornology.IsBounded K) :
-    {A : Set ℂ | (∃ y ∈ c.interfaceSet, A = connectedComponentIn c.interfaceSet y) ∧ (A ∩ K).Nonempty}.Finite := by
-  sorry
+    {A : Set ℂ | (∃ y ∈ c.interfaceSet, A = connectedComponentIn c.interfaceSet y) ∧ (A ∩ K).Nonempty}.Finite :=
+  c.finite_arcs_of_bounded hsat hS hK
 
 /-! ## What every fan carries under saturation -/
 

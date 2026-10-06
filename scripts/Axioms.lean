@@ -6481,6 +6481,49 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side_next
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side_dir
 
+
+/-! ## FS131-I6D — wave 6, the bridge's existence half: the curve lemmas, the continuation, GAMMA, BETA, ALPHA (until `fs131-w6c` joins, the records that read `Curve`'s or `LocalGraph`'s leaves print `sorryAx` on this branch) -/
+#print axioms HadwigerNelson.Plane.IsUnitCurve.affine
+#print axioms HadwigerNelson.Plane.IsUnitCurve.sin_abs_le_dist
+#print axioms HadwigerNelson.Plane.IsUnitCurve.dist_le
+#print axioms HadwigerNelson.Plane.IsUnitCurve.injOn_of_abs_le
+#print axioms HadwigerNelson.Plane.IsUnitCurve.abs_sub_lt_of_dist_lt_one
+#print axioms HadwigerNelson.Plane.isUnitCurve_angleCurve
+#print axioms HadwigerNelson.Plane.IsUnitCurve.eqOn_angleCurve
+#print axioms HadwigerNelson.Plane.eq_affine_of_sin_bounds
+#print axioms HadwigerNelson.Plane.IsUnitCurve.reparam
+#print axioms HadwigerNelson.Plane.IsUnitCurve.exists_polar_angle
+#print axioms HadwigerNelson.Plane.IsArcOf.eqOn
+#print axioms HadwigerNelson.Plane.ArcSetting.exists_max_arc
+#print axioms HadwigerNelson.Plane.IsArcOf.left_end_notMem
+#print axioms HadwigerNelson.Plane.IsArcOf.right_end_notMem
+#print axioms HadwigerNelson.Plane.ArcSetting.exists_component_arc
+#print axioms HadwigerNelson.Plane.AeColouring.arcSetting_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.exists_arc_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.exists_polarGraph_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.finite_components_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.gamma
+#print axioms HadwigerNelson.Plane.IsUnitCurve.exists_polarGraph
+#print axioms HadwigerNelson.Plane.AeColouring.beta
+#print axioms HadwigerNelson.Plane.AeColouring.alpha
+#print axioms HadwigerNelson.Plane.isOpen_polarRegion
+#print axioms HadwigerNelson.Plane.isPreconnected_polarRegion
+#print axioms HadwigerNelson.Plane.exists_ordered_lifts
+#print axioms HadwigerNelson.Plane.polarRegion_disjoint_polarGraph
+#print axioms HadwigerNelson.Plane.AeColouring.exists_fan_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.Fan.finite_arcs_meeting_ball
+#print axioms HadwigerNelson.Plane.AeColouring.regJLiteral_of_locallyFinite
+#print axioms HadwigerNelson.Plane.AeColouring.finite_arcs_of_bounded
+#print axioms HadwigerNelson.Plane.AeColouring.fan_of_isolated
+#print axioms HadwigerNelson.Plane.AeColouring.regJFan_of_saturated
+#print axioms HadwigerNelson.Plane.AeColouring.regJLiteral_of_saturated
+#print axioms HadwigerNelson.Plane.AeColouring.finite_arcs_of_isBounded
+#print axioms HadwigerNelson.Plane.sq9_not_isCuspAt
+#print axioms HadwigerNelson.Plane.sq9_twoColourNhd_of_re_grid
+#print axioms HadwigerNelson.Plane.sq9_twoColourNhd_of_im_grid
+#print axioms HadwigerNelson.Plane.sq9_singularSet_subset_grid
+#print axioms HadwigerNelson.Plane.sq9_singLocallyFinite
+#print axioms HadwigerNelson.Plane.sq9_regJFan
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
