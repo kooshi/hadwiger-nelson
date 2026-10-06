@@ -1,0 +1,1 @@
+'HadwigerNelson.Plane.ArcMap.IsMaxRingArc.meet' depends on axioms: [propext, Classical.choice, Quot.sound]

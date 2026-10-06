@@ -5,7 +5,21 @@ worktree `.claude/worktrees/fs131-w5c`. Stages are headed "Stage n — SAVED (FS
 
 ## Theorems this phase proved
 
-*(filled at the stage that proves them; none yet)*
+This job joined three lines; it derived no new mathematics. All in `HadwigerNelson.Plane.ArcMap`, read against the build of
+`fa44d637` (`data/fs131/m7/M7AxiomsFinal.out`):
+
+- `IsMaxRingArc.meet` (`Plane/ValidMap/Procedure`) — **[kernel]**, `[propext, Classical.choice, Quot.sound]`. New in the library by
+  this job's placement; the statement is FS131-IA1's W5 and **the proof is FS131-IA2's**, copied by script from the file it compiled.
+  Read against: "a constant-sided unit arc about `P` whose open arc meets a maximal one's has that arc's sides and lies in it".
+- `ArcBend.of_away` (`Plane/ValidMap/ArcStep`) — **[kernel]**, the standard three. FS131-IA2's theorem with its hypothesis `hM`
+  changed in one clause by ruling 448 (b) (the last clause in FS131-KA1's pointwise form) and its proof's last step changed with it.
+- `exists_arcStep` (`Plane/ValidMap/Procedure`) — **proved from open children; not a kernel theorem on the standard three**:
+  `[propext, sorryAx, Classical.choice, Quot.sound]`. Its own `sorry` is replaced by FS131-IA2's proof; it rests, through
+  `bend_away_part` and `exists_arcBend_toward`, on the open declarations of the six bend modules and `CollarFit.map_hornCount_le`.
+  Statement unchanged (FS131-IR3's restatement under ruling 430).
+
+Moved the other way by the join, until FS131-BA1's proof arrives by merge: `CollarFit.map_localStep` and `LocalStep.of_cutArcs`,
+on the standard three on `fs131-w5y`, are through `sorryAx` here (§ 4.4).
 
 ## Stage 1 — SAVED (FS131-M7): the readback, the as-given build, what I may change
 
@@ -205,7 +219,11 @@ the same check on the commit: PASS (`merge2-check-rev.txt`).
 ### 3.4 This commit does not build, and why that is the right unit
 
 At `8ca92376` `LocalStep.of_cutArcs` is declared at `ArcStep.lean:584` and `BendAway.lean:97`, in one namespace, and `ArcStep`'s
-imports reach `BendAway` (below), so one environment would hold the name twice. The brief sequences it so — the merges, each its own
+imports reach `BendAway` (below), so `ArcStep` declares a name its own imports already hold — which Lean rejects while elaborating
+the module ("has already been declared"; seen in this job at § 5.1). *Corrected at Stage 6: I first wrote here that "one
+environment would hold the name twice", as if that alone were an error. It is not — two modules neither of which imports the
+other may declare one theorem with one type and meet silently (§ 6.3); the failure here comes from the import edge.* The brief
+sequences it so — the merges, each its own
 commit, then the doubled declaration — and the commit's message says it in capitals. **So this merge is checked by script here and by
 a build only after Stage 4**; the first merge had both. I did not test the prediction with `lake env lean` on `ArcStep`: the six new
 modules have no `.olean` in this worktree yet, so it would fail for a missing import — a red for the wrong reason. The import graph
@@ -417,3 +435,162 @@ warnings, 9 min 17 s, exit 0** (`data/fs131/m7/build-stage5.rc`; saved log `buil
   both, first (this machine's `grep` under-matches some forms toward a clean negative).
 
 ## Stage 5 — SAVED (FS131-M7)
+
+## Stage 6 — SAVED (FS131-M7): the check; what stands twice; what the later merges will meet
+
+No build after Stage 5's: this stage edits no Lean module (`scripts/Axioms.lean` is the receipt, not a module of `Proofs`). I ran no
+gate (`scripts/axioms.sh`, `vacuity.sh` are the gate's), touched nothing on `main`, and left no process running.
+
+### 6.1 The axioms print (against the build of `fa44d637`)
+
+Twenty names, each resolved from source to one qualified declaration by script (`data/fs131/m7/final-names.txt`) →
+`M7AxiomsFinal.lean` → `M7AxiomsFinal.out` (`slot.py --mem 12 --cpus 2 -- lake env lean`, exit 0, no error line), read by
+`tools/fs131_ir_axsum.py` (FS131-IR1's, unchanged). Expectation written before the run, met:
+**20 records for 20 print commands — 8 on the standard three, 12 through `sorryAx`, 0 with any other axiom; PASS**
+(`M7AxiomsFinal-summary.txt`).
+
+- **`[propext, Classical.choice, Quot.sound]`** (each record read verbatim): `exists_vertexStep`, `stuckRun_ne_univ`,
+  `bend_toward_collar`, `exists_preBend`, `bv_l3`, `exists_open` — the brief's six — and `IsMaxRingArc.meet`, `ArcBend.of_away`.
+  Four of these were open questions, not formalities: `exists_vertexStep` and `stuckRun_ne_univ` are re-taken against the `HexRing`
+  the first merge put under them and a `Procedure` that now imports the bend modules; `exists_preBend` and `bv_l3` are now
+  downstream of `Procedure`. None moved. `bv_l3`, `sorry` in this line's `HexRing` at the start, is a kernel theorem in `BaseWalk`.
+- **Through `sorryAx`, and nothing else foreign**: `exists_arcStep`, `exists_procStep`, `exists_terminalSeq`, `exists_terminalMap`,
+  `exists_red`, `exists_terminal` — the brief's six — and `LocalStep.of_cutArcs`, `CollarFit.map_localStep`, `bend_away_part`,
+  `CollarFit.map_hornCount_le`, `exists_arcBend_toward`, `CollarFit.arcBend`.
+- **What the print cannot say, and what bounds it**: which open declarations a record rests on. The build's warnings bound it — the
+  tree's only `sorry` in wave 5's modules are the six bend modules' 35 and `CollarFit.map_hornCount_le` — and `Procedure` and
+  `Terminal` hold none, with `exists_vertexStep` on the standard three; so, as an inference from those two facts, `exists_terminalMap`
+  is open through `exists_arcStep` alone among `Procedure`'s own leaves.
+- **Controls**: `exists_arcStep` left off the expectation — FAIL, `SORRY-UNEXPECTED …exists_arcStep`; `exists_vertexStep` added to it
+  — FAIL, `SORRY-EXPECTED-BUT-STANDARD …exists_vertexStep` (`M7AxiomsFinal-control.txt`, `-control2.txt`); the summarizer's
+  `--self-test`: ok (`axsum-selftest.txt`).
+
+### 6.2 The receipt
+
+A block "FS131-M7" in `scripts/Axioms.lean` above `=== PURCHASED ===`: **one record, `IsMaxRingArc.meet`** — the only one of the
+twenty names that had none (checked by script). The file holds 5,138 records, none twice. The block alone, with its import,
+elaborates (exit 0, its record on the standard three: `data/fs131/m7/M7Block.out`); the whole file's run is the gate's. *A sentence
+of the block as I first wrote it said `exists_arcStep`'s record was "in FS131-IR1's block"; the nearest header above that record
+names another job. I had written it from assumption; it now says "has its record above (once)".*
+
+### 6.3 What stands twice in the joined tree (for the remedy pass)
+
+`tools/fs131_m7_dupes.py --whole Proofs/HadwigerNelson/Plane a20bb6f5` (`a20bb6f5`: where wave 5 left `main`): 72 files, 4,286
+public declarations (`data/fs131/m7/dupes-whole.txt`); its plant fired — a re-declared name NAME-TWICE, its copy STATEMENT-TWICE
+(`dupes-whole-plant.txt`). And every hand-written Lean file of the library, names only: 259 files, 7,446 public declarations
+(`dupes-names-library.txt`; the generated `Instances/*/(Cnf|HalfA|Critical)/` not scanned).
+
+**One name is declared twice — and it is on `main`, older than this job, and it builds.**
+`HadwigerNelson.Plane.conj_e`, `theorem conj_e (θ : ℝ) : (starRingEnd ℂ) (e θ) = e (-θ)`, at `Plane/Chord.lean:276` (commit
+`500c4c88`, FS131-I3c) and `Plane/SixFragment.lean:342` (`e0679dd4`, FS131-I3f), both 2026-10-04; present on `origin/main`. Neither
+module imports the other. Lean's own account: `SixFragment` alone holds the constant declared in `SixFragment`
+(`conj-e-query2.txt`); an environment importing both holds one, reported from `Chord`, with no error (`conj-e-query.txt`); each copy
+is on the standard three. **It is the only doubled name in the 259 hand-written modules.** No name was doubled by the join:
+`bv_l3` and `LocalStep.of_cutArcs` each stand once.
+
+**Why the build does not see it** — read in the pinned toolchain's source, not recalled: `Lean/Environment.lean` (v4.32.0),
+`subsumesInfo`, called where modules are imported: a constant already present is accepted when name, type and universe parameters
+agree and both are theorems ("we do not check whether the theorem `value` field match … relies on … proof irrelevance"); only
+otherwise `throwAlreadyImported`. **So the build catches a doubled theorem only when one declaring module is upstream of the other**
+(then the second is a redeclaration during elaboration). Two sibling modules stating one theorem under one name meet silently, and
+which proof a downstream module sees is decided by import order — harmless here (both proved, same axioms), but with one copy
+`sorry` and one proved, **a downstream `#print axioms` could report either**. That was the configuration of `LocalStep.of_cutArcs`
+at this join (proved in `ArcStep`, `sorry` in `BendAway`), and it was loud only because `ArcStep` happens to import `BendAway`
+through `BendStep`; inventory item 443 calls the collision "a loud failure by design", and by Lean's rule it is not guaranteed.
+
+*How I came to it, because the next reader of this tool's output will be tempted the same way.* The tool reported the pair on its
+first whole-tree run and I did not believe it, holding that "Lean rejects two declarations of one name in one environment". I tried
+three times to fault the instrument — the second site is inside a comment (a scan: no); its olean is stale (git and Lake's hashes:
+no); my Lean query is wrong (a second query: no) — before reading the importer. The belief was false as I held it, and I had used
+it at Stage 3 (§ 3.4, corrected in place).
+
+**Statements under two or more public names** (at least one new since the fork; read one by one):
+
+| statement | names |
+|---|---|
+| the degree is unique | `HasDegree.eq` (`OpenMove`) = `HasDegree.unique` (`Pushforward`) |
+| the colours at an interior point | `coloursAt_eq_of_mem_interiorPts` (`FlankUA`) = `coloursAt_eq_singleton_of_interior` (`Limit`) |
+| `dist²` by coordinates — **one short name in both files**, apart only by namespace | `ArcMap.dist_sq_re_im` (`BaseWalk`) = `dist_sq_re_im` (`SixFragment`) |
+| `‖z‖²` by coordinates — **four names** | `ArcMap.norm_sq_eq_re_im` (`HexRing`) = `ArcMap.sq_norm_eq_re_im` (`UnitArc`) = `sq_norm_eq` (`Chord`) = `sq_norm_re_im` (`SixFragment`) |
+| a ring arc under whole turns | `ArcMap.ringArc_add_int_mul` (`BaseWalk`) = `ringArc_add_two_pi_mul` (`MapTopology`) |
+| a ring point under whole turns | `ArcMap.ringPt_add_int` (`Procedure`) = `ArcMap.ringPt_add_int_mul` (`BaseWalk`) |
+| the union of two overlapping ring arcs — word for word | `IsRingArc.union` (`Procedure`) = `IsRingArc.union_of_overlap` (`BaseDense`) |
+
+In the last two, `BaseWalk` and `BaseDense` are downstream of `Procedure` since Stage 5, so their copies are the redundant ones;
+`IsMaxRingArc.meet` reads `Procedure`'s. **The import relation of each group, computed from the graph** (I had first ordered the pairs by which
+module I took to be older, and was wrong for two): `SixFragment` is upstream of `BaseWalk`, `MapTopology` of `BaseWalk`,
+`Procedure` of `BaseWalk` and `BaseDense`; in the four-way `Chord` and `SixFragment` are each upstream of `UnitArc`, itself
+upstream of `HexRing`; **`OpenMove`/`Pushforward`, `FlankUA`/`Limit` and `Chord`/`SixFragment` are siblings** — the configuration
+in which a doubled name is silent. These pairs differ in name, so they are duplicates, not collisions; `Chord` and `SixFragment`
+hold the one collision and a second duplicate (`sq_norm_eq` / `sq_norm_re_im`) between them. **Not duplicates, though a tool line pairs them**: `IsRingArc.degree_openArc` (`ArcStep`)
+with `CollarFit.degree_openArc` (`BendCollar`) — the collar-free form and its special case, one conclusion (a generalization:
+FS131-IA2's); `CollarFit.map_localStep` with `CollarFitOut.map_localStep` — the two bends' mirrored lemmas.
+
+**A defect of my own tool, not repaired**: its NORM-TWICE class deletes dotted qualifiers, and so equates `F.clean.Valid` with
+`F.cleanKeep.Valid` and five models' `X.Valid` with one another — **five of its six lines are false** (read at the statements); the
+sixth is the `union` pair above. The class is informational and never fails a run; I did not change the normalizer, since a hasty
+fix could hide a true pair. What it would take for a gate: a Lean-side scan of each module's constant names for a name present in
+two modules — the kernel-side form, which also sees what a textual scan cannot (instances, derived and macro-made declarations).
+
+### 6.4 What the two later merges will meet (observed 2026-10-06 02:37; both tips move)
+
+Read-only but for one unreferenced commit object made for the two-step trial (no ref moved, no working-tree file changed).
+
+- **`origin/fs131-w5a`** at `74fbdf16` (FS131-BA1, 8 commits past `dd8c2c33`): `BendAway`, `BendStep`, `CollarMapOut`, `LensOut`, its
+  record, tools, data, `scripts/Axioms.lean`. **`origin/fs131-w5z`** at `43dfeb6e` (FS131-BA2, 11 commits): `BendGap`, `HornChart`,
+  `R2Cap`, `BendStep`, its record — **and it has merged `fs131-w5a` twice** (at `66cb0314` and `4559c106`; 6 of that branch's 8
+  commits), so the two tips agree byte for byte on `BendStep.lean` and `BendAway.lean`. The two are not independent merges: `fs131-w5z`
+  brings most of `fs131-w5a` with it.
+- **Trial merges into this line: each alone clean; both, `fs131-w5a` then `fs131-w5z`, clean.** The only file either shares with this
+  line's changes is `scripts/Axioms.lean`, and it merges by itself today. Foreseen as the tips move: `scripts/Axioms.lean` and
+  `ARCHITECTURE.md` (their rows for the six modules sit beside `BendStep`'s and `ArcStep`'s, which I edited) — adjacency, keep-both.
+  No Lean file of theirs is one I edited; `ArcStep.lean` does not exist on their branches.
+- **The statements this line reads from the bends are unchanged on both tips**: `bend_away_part` (its conclusion equal to
+  `ArcBend.of_away`'s `hM`, 18 clauses; its whole statement equal), `CollarFit.map_hornCount_le` (still `sorry` on both),
+  `LocalStep.of_cutArcs`. Their merge messages name two ruled statement changes on their side, `AwayBend.idle`'s (446 (b)) and
+  `dist_lt_one_of_thin`'s — inside the bend modules; I did not read them. **To re-run at each merge**: `python3
+  tools/fs131_m7_away_clause.py` (a second), and `tools/fs131_m7_merge_check.py BASE OURS THEIRS`.
+- **`LocalStep.of_cutArcs` is proved on `fs131-w5a`'s tip** (its body opens with the first line of the proof deleted here; I read no
+  further and ran nothing there). If that holds at the merge, `LocalStep.of_cutArcs` and `CollarFit.map_localStep` return to the
+  standard three; the test is the print of those two names.
+- **After both, by today's count, wave 5's open leaves would be FS131-BA2's**: `CollarFit.map_hornCount_le` and whatever of `BendGap`,
+  `HornChart`, `R2Cap` is still open on its tip — not counted by me.
+
+### 6.5 What the join showed that no line could see from its own branch
+
+1. `HexRing` is upstream of `Limit`, `Procedure`, `Terminal`; the first merge replaced it under them (§ 2.3).
+2. `bv_l3` changed files, statement and name unchanged (§ 2.4).
+3. "Keep every block" of `scripts/Axioms.lean` doubles the record of a declaration both sides state (§ 3.2).
+4. Merging in sequence moves the base, and the second conflict with it, to `ARCHITECTURE.md` (§ 3.2).
+5. The join costs two standard-three receipts until FS131-BA1's merge (§ 4.4).
+6. FS131-IA2's scratch copy of the consumer does not compile on this line: `exists_vertexStep` was restated here (§ 5.1).
+7. With `Procedure` importing `ArcStep`, wave 5's tail is a chain of seven modules, and the density half (`BaseWalk`, `BaseDense`)
+   is downstream of `Procedure` and of every bend module (§ 5.3).
+8. A doubled theorem name builds silently unless one module imports the other; one such pair is on `main` (§ 6.3).
+
+### 6.6 Slips of mine, in one place
+
+A waiter armed on a command-line pattern, stopped before it decided anything (§ 2.5). A count mislabelled and a cause guessed, both
+corrected from the log and the import graph (§ 2.5). `ArcStep`'s row of `ARCHITECTURE.md` left listing a lemma I had deleted, for
+one commit, under a passing check (§ 5.2). A job's block named from assumption in the receipt, removed (§ 6.2). A scratch run's
+output overwritten, reproduced under its own name (§ 5.1). A batch count predicted wrong (§ 5.3). A false premise about Lean's
+importer held through three probes and used at Stage 3 (§ 6.3, § 3.4). The merges were committed with `git commit` and no path, as
+a merge must be, the index compared with the merge first (§ 2.2, § 3.3).
+
+## Drafts for the front page
+
+**None for `CLAUDE.md` § The gate or § Trust ledger: no gate ran in this job, and wave 5 is not at its gate.** No ledger row
+regrades — `exists_terminalMap` is through `sorryAx`. No Frontier line and no Proof Atlas grade moves. For the filing that follows
+the outward bend: this job adds one record to `scripts/Axioms.lean` (`IsMaxRingArc.meet`) and removes one that stood twice
+(`LocalStep.of_cutArcs`); the corrections FS131-IA1 and FS131-IA2 listed stand, less the two this job made (`Procedure.lean`'s module
+docstring and `exists_arcStep`'s docstring).
+
+For `LEAN.md`, a draft, **slot: § The gate, after the bullet "Every definition has a `#eval`/`example` that would fail if it
+drifted"**, new bullet:
+
+> - **A theorem declared under one name by two modules, neither importing the other, builds in silence**: at import Lean accepts a
+>   second constant of the same name when both are theorems of the same type (`Lean/Environment.lean`, `subsumesInfo`, v4.32.0), and
+>   import order decides which proof a downstream module sees. The build catches a doubled name only when one module is upstream of
+>   the other. A join of two lines checks doubled names by script (`tools/fs131_m7_dupes.py --whole`), never by the build.
+
+## Stage 6 — SAVED (FS131-M7)
