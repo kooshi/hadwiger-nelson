@@ -4848,6 +4848,40 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.awayModel_hyps
 #print axioms HadwigerNelson.Plane.awayModel_r2Contacts
 
+/-! ## FS-131, the example maps, half A (job FS131-MA1) — `Plane/Models/Paint`'s leaves proved, and the two models of the four local moves (`Plane/Models/Moves`). Records the FS131-KM1 block above already lists are not repeated here. -/
+-- FS131-MA1: the construction (Paint) — the leaves KM1's block does not list, and the fan's partition
+#print axioms HadwigerNelson.Plane.norm_plantDir
+#print axioms HadwigerNelson.Plane.hornArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.hornArcs_carrier_subset
+#print axioms HadwigerNelson.Plane.isOpen_fanRest
+#print axioms HadwigerNelson.Plane.fanRest_ne_hornSet
+#print axioms HadwigerNelson.Plane.iUnion_fanPiece
+#print axioms HadwigerNelson.Plane.fanPiece_data
+#print axioms HadwigerNelson.Plane.encard_sectors_fan
+#print axioms HadwigerNelson.Plane.encard_horns_fan
+#print axioms HadwigerNelson.Plane.ArcMap.region_paint_of_region_eq_empty
+#print axioms HadwigerNelson.Plane.ArcMap.region_paint_subset
+#print axioms HadwigerNelson.Plane.ArcMap.allowedCone_tangent
+#print axioms HadwigerNelson.Plane.ArcMap.tangent_contact_cone
+-- FS131-MA1: the four moves' models (Moves) — the leaves KM1's block does not list, and the two class lemmas
+#print axioms HadwigerNelson.Plane.hornModel_valid
+#print axioms HadwigerNelson.Plane.hornModel_region_seven
+#print axioms HadwigerNelson.Plane.hornModel_isHorn
+#print axioms HadwigerNelson.Plane.hornModel_hasSectors
+#print axioms HadwigerNelson.Plane.hornModel_hasDegree
+#print axioms HadwigerNelson.Plane.hornModel_flanks
+#print axioms HadwigerNelson.Plane.hornModel_clear
+#print axioms HadwigerNelson.Plane.hornModel_cone
+#print axioms HadwigerNelson.Plane.hornModel_allowedCone
+#print axioms HadwigerNelson.Plane.twoHornModel_valid
+#print axioms HadwigerNelson.Plane.twoHornModel_region_seven
+#print axioms HadwigerNelson.Plane.twoHornModel_isHorn
+#print axioms HadwigerNelson.Plane.twoHornModel_hasSectors
+#print axioms HadwigerNelson.Plane.twoHornModel_cone
+#print axioms HadwigerNelson.Plane.twoHornModel_allowedCone
+#print axioms HadwigerNelson.Plane.twoHornModel_hasDegree
+#print axioms HadwigerNelson.Plane.twoHornModel_hasHornCount
+
 /-! ## FS-131, the example maps, half B (job FS131-MB1) — the leaves of `Plane/Models/{Stuck, Bends}` proved; the model theorems themselves are in FS131-KM1's block above -/
 -- FS131-MB1: the cusp fragment's ring arc (Bends) — reads nothing of `Paint`
 #print axioms HadwigerNelson.Plane.cuspFrag_isRingArc

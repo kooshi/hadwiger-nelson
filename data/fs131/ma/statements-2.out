@@ -1,0 +1,8 @@
+Paint.lean: 42 skeleton declarations compared, 68 added, 0 problem(s)
+Moves.lean: 37 skeleton declarations compared, 37 added, 0 problem(s)
+Stuck.lean: 39 skeleton declarations compared, 0 added, 0 problem(s)
+Bends.lean: 14 skeleton declarations compared, 0 added, 0 problem(s)
+Paint.lean: 0 occurrence(s) of `sorry`
+Moves.lean: 0 occurrence(s) of `sorry`
+names: 105 added declarations; 0 whose short name is declared elsewhere under Proofs/
+RESULT: 132 skeleton declarations compared against fe9d6d32, 105 added, 0 problem(s) -> PASS
