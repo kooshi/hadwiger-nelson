@@ -24,8 +24,8 @@ STUCK_E2 = (r"At \[hand\] all hold on FS131-E7's `P₅` at its stuck vertex(?P<p
 def stuck_e2(m):
     par = m.group("par").rstrip()
     pre = " (the cone of `9` there lies in a line: `stuckModel_interior_allowedCone`)" if m.group("pre") else ""
-    return ("On `stuckModel`" + par + pre + ": " + APPL + " applies this theorem to it, every hypothesis a named fact of "
-            "`Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the "
+    return ("On `stuckModel`" + par + pre + ": " + APPL + " applies this theorem to it, every hypothesis a named fact about the map. "
+            "The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the "
             "discs at its poles.")
 
 

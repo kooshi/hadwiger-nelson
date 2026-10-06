@@ -76,7 +76,7 @@ theorem shadow_of_not_shave {v : ℂ} {α κ₁ κ₂ : ℝ} {c g h : Fin k} (hS
 is unit-near the flank, hence within `1` of `v` — and an out-type tile misses `B̄(v, 1)`. Inhabitant: `stuckModel` at `plantPt`
 (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0`, `α = 0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
 (`bowtie_flanks`, `bowtie_inType`: its `g` is in-type at `N = i`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `α = 0`,
-`g = 7`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of `Plane/Models/Stuck`. The map is FS131-E7's
+`g = 7`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact about the map. The map is FS131-E7's
 `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its poles. -/
 theorem not_outType_N_of_flankAbove_one (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α : ℝ} {g : Fin k}
     (hg : F.IsFlankAbove v α 1 g) (hNcl : v + e (α + π / 2) ∈ closure (F.region g)) :
@@ -105,7 +105,7 @@ theorem not_outType_N_of_flankAbove_one (hF : F.Valid) {v : ℂ} (hv : F.Covers 
 /-- **A lower flank on `ω(S′)` is never out-type at `S′`** (the mirror of `not_outType_N_of_flankAbove_one`). Inhabitant: `stuckModel` at
 `plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0`, `α = 0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
 (`bowtie_flanks`, `bowtie_inType`: its `h` is in-type at `S′ = −i`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `α = 0`,
-`h = 8`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of `Plane/Models/Stuck`. The map is FS131-E7's
+`h = 8`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact about the map. The map is FS131-E7's
 `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its poles. -/
 theorem not_outType_S_of_flankBelow_neg_one (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α : ℝ} {h : Fin k}
     (hh : F.IsFlankBelow v α (-1) h) (hScl : v - e (α + π / 2) ∈ closure (F.region h)) :
@@ -137,7 +137,7 @@ at `κ₂ < 1` the second, by `horn_shadow_near_S`). Inhabitant: `stuckModel` at
 of the plane; among the fragments, `bowtie` at `0`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` satisfies every hypothesis but `F.Covers 0 1` —
 the local hypotheses (`bowtie_flanks`; its tip is in the shadow of both flanks, `bowtie_doublyShadowed`); `Covers` fails there by
 FS131-QA4's QA4-B1. On `stuckModel`, `α = 0`, `κ₁ = −1`, `κ₂ = 1`, `g = 7`: `Plane/Models/Applied` applies this theorem to it, every
-hypothesis a named fact of `Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with
+hypothesis a named fact about the map. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with
 squares for the discs at its poles. -/
 theorem srcG_of_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {g : Fin k}
     (h1 : -1 ≤ κ₁) (h12 : κ₁ < κ₂) (h2 : κ₂ ≤ 1) (hg : F.IsFlankAbove v α κ₂ g)
@@ -188,7 +188,7 @@ theorem srcG_of_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ
 /-- **The lower flank's shadow comes from a `−n` source** (the mirror of `srcG_of_shadow`): an in-type contact at `S′` or an out-type
 contact at `N`. Inhabitant: `stuckModel` at `plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` satisfies every hypothesis but `F.Covers 0 1` —
 the local hypotheses (`bowtie_flanks`, `bowtie_doublyShadowed`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `α = 0`, `κ₁
-= −1`, `κ₂ = 1`, `h = 8`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of `Plane/Models/Stuck`. The
+= −1`, `κ₂ = 1`, `h = 8`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact about the map. The
 map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its poles. -/
 theorem srcH_of_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {h : Fin k}
     (h1 : -1 ≤ κ₁) (h12 : κ₁ < κ₂) (h2 : κ₂ ≤ 1) (hh : F.IsFlankBelow v α κ₁ h)
@@ -265,7 +265,7 @@ theorem dot_nonpos_of_srcH {v : ℂ} {α : ℝ} {j : Fin k}
 of a point of the in-type tile (inside `B(v, 1)`), so its tile is unit-near that tile, and closure points are within `1`. Inhabitant:
 `stuckModel` at `plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
 (`bowtie_inType`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `j = 7`, `w` its upper pole: `Plane/Models/Applied`
-applies this theorem to it, every hypothesis a named fact of `Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours;
+applies this theorem to it, every hypothesis a named fact about the map. The map is FS131-E7's `P₅` (twelve colours;
 `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its poles. -/
 theorem region_near_of_inType (hF : F.Valid) {v w : ℂ} {j : Fin k} (hv : F.Covers v 1)
     (hcont : F.IsContact v j w) (hin : F.InType v j w) :
@@ -326,7 +326,7 @@ near both poles (`horn_not_shadowed_near_N`, `_S`) — against the shadow at eve
 (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` satisfies every hypothesis but `F.Covers 0 1` —
 the local hypotheses (`bowtie_flanks`, `bowtie_doublyShadowed`; its flanks are `0` and `2`); `Covers` fails there by FS131-QA4's QA4-B1.
 On `stuckModel`, `α = 0`, `κ₁ = −1`, `κ₂ = 1`, `g = 7`, `h = 8`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a
-named fact of `Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the
+named fact about the map. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the
 discs at its poles. -/
 theorem flank_ne_of_shadows (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {g h : Fin k}
     (h1 : -1 ≤ κ₁) (h12 : κ₁ < κ₂) (h2 : κ₂ ≤ 1) (hg : F.IsFlankAbove v α κ₂ g) (hh : F.IsFlankBelow v α κ₁ h)
@@ -575,8 +575,8 @@ theorem not_antipodal_coneAt_S_of_horn (hF : F.Valid) {v : ℂ} {α κ₂ : ℝ}
 wave 4's `woodallCone`, read at the horn's own axis: `woodallCone`'s axis is the horn's up to `π`). Inhabitant: `stuckModel` at `plantPt`
 (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
 (`bowtie_not_merge_zero`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `c = 9`,
-`m = 2`, `α = 0`, `κ₁ = −1`, `κ₂ = 1`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of
-`Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its
+`m = 2`, `α = 0`, `κ₁ = −1`, `κ₂ = 1`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact about
+the map. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its
 poles. -/
 theorem horn_poles_contact (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hM : ¬ F.MergeAvailable v) {c : Fin k} {m : ℕ}
     (hm : 2 ≤ m) (hc : F.HasSectors v c m) {α κ₁ κ₂ : ℝ} (hH : F.IsHorn v α κ₁ κ₂ c) :
@@ -727,8 +727,8 @@ theorem IsFlankAbove.unique {v : ℂ} {α κ : ℝ} {g g' : Fin k} (hg : F.IsFla
 is a horn along the axis with such bounds, and a horn's bounds are determined by its set, `hornSet_curv_eq`). Inhabitant: `stuckModel` at
 `plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane; among the fragments, `bowtie` at `0` satisfies every hypothesis but `F.Covers 0 1` — the local hypotheses
 (`bowtie_not_merge_zero`, `bowtie_coloursAt_zero`, `bowtie_isHorn`); `Covers` fails there by FS131-QA4's QA4-B1. On `stuckModel`, `c = 9`,
-`m = 2`, `α = 0`, `κ₁ = −1`, `κ₂ = 1`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of
-`Plane/Models/Stuck`. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its
+`m = 2`, `α = 0`, `κ₁ = −1`, `κ₂ = 1`: `Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact about
+the map. The map is FS131-E7's `P₅` (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its
 poles. -/
 theorem horn_bounds_of_noMerge (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hM : ¬ F.MergeAvailable v) {c : Fin k} {m : ℕ}
     (hm : 2 ≤ m) (hc : F.HasSectors v c m) {α κ₁ κ₂ : ℝ} (hH : F.IsHorn v α κ₁ κ₂ c) : -1 ≤ κ₁ ∧ κ₂ ≤ 1 := by
@@ -755,7 +755,7 @@ horn with a bound outside `[−1, 1]` — every horn shaveable only along a unit
 hypothesis made direct; FS131-E6 § 4.1); that lemma's local hypotheses give these by the example below, so `bowtie` at `0` satisfies every hypothesis here but `F.Covers 0 1`
 (FS131-QA4's QA4-B1). Inhabitant: `stuckModel` at `plantPt` (`Plane/Models/Stuck`, `stuckModel_hyps`), a map of the plane. On
 `stuckModel`, `c = 9`, `α = 0`, `κ₁ = −1`, `κ₂ = 1` (the cone of `9` there lies in a line: `stuckModel_interior_allowedCone`):
-`Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact of `Plane/Models/Stuck`. The map is FS131-E7's `P₅`
+`Plane/Models/Applied` applies this theorem to it, every hypothesis a named fact about the map. The map is FS131-E7's `P₅`
 (twelve colours; `plans/FS131-E7-derivation.md` § 7) with squares for the discs at its poles. -/
 theorem horn_bounds_of_interior_empty (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {α κ₁ κ₂ : ℝ}
     (hH : F.IsHorn v α κ₁ κ₂ c) (hD : interior (F.allowedCone v c) = ∅) : -1 ≤ κ₁ ∧ κ₂ ≤ 1 := by
