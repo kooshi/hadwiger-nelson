@@ -7566,3 +7566,19 @@ reason by the close.*
      registered expectation was "no statement defect in a row"): the defect is in the skeleton's binders, not the
      rows — the second of this wave's (item 568 was the first); both were caught by an implementer at its first
      leaves. An erratum is not owed to the rows; a line for the wave's landing.
+593. **FS131-I8C, by message mid-job: nine of `SemiHub`'s seventeen leaves built and pushed (`1e605b60`), the other eight written and elaborating; a wave 9 leaf has a short proof there; helpers its sibling may want** (source: I8C's message to "main", 2026-10-06 — everything past `1e605b60` is "elaborated, not yet built", its words; the artifact is read at its hand-back).
+     **(1) Wave 9's leaf `not_hasRepeatedColour_of_simpleOn`** (`Plane/Classes/QFree` on `fs131-w9`, a `sorry`) is
+     proved in `SemiHub` in about twenty lines under a name of its own, `simpleOn_not_hasRepeatedColour` — the same
+     statement — by the join job's sector lemma, where wave 9's docstring plans a longer route. **(2) Names it has
+     taken** that the sibling's plan names or may want (`disjoint_angleIcc_antipodal`, four `IsStar4` lemmas, two
+     integer halves, `branch_on_unit_circle`, and four pushed at stage 2). **(3) A generalization of FS116-V5-DICHO**:
+     the dichotomy reads no position of the two arcs (`ringArc_pair_eq_or_disjoint`: two ring arcs at a four-colour
+     point simple at it have equal or disjoint colour pairs) — the planner's twelve-case table (one mind, its
+     § 8.4) is not what the kernel checks. No statement of its own changed or looked false. **Rulings.** (a) **The
+     names are relayed to the sibling implementer** (one message: declare none; merge the pushed commit or take a
+     hypothesis under its own name for the unpushed). (b) **Wave 9's leaf is not proved a second time**: FS131-K9b's
+     brief (not written) says the leaf is `simpleOn_not_hasRepeatedColour` at the join of waves 8 and 9 — one of
+     the two names becomes a one-line corollary there — and wave 9's implementers take it as a hypothesis until
+     then. Alternative: merge wave 8's branch into wave 9's now. Why not: wave 8's line is mid-flight on two
+     branches. Confidence: high. (c) (3) goes to the wave's errata; announced as a result when its saved stage
+     carries it (item 526). No reply sent to it: it needs none.

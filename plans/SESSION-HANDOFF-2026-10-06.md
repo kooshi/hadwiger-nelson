@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–592 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–593 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -65,7 +65,7 @@ a fresh agent on the same brief.
 
 **Briefs to write, planners first** (a planner's hand-back is what implementers wait on):
 - **FS131-K7c** (`debruijn`, on `fs131-w7`): first act, merge `origin/fs131-w7a` (ruling 564 (f); my trial conflicts in `scripts/Axioms.lean` only) and fix `ARCHITECTURE.md`'s row for `Count`; then the discrepancy between `tools/fs114_y2_k1.py` and `data/fs116/n1/ring-survey-bowtie.out` about FS114-Y2-BOWTIE's ring (ruling 553 (a)); the pinwheel and eight rows; `rstopAll`'s `SimpleOn` narrowing; **item 571's relay** (four of its five QOPP theorems follow from wave 3's two cone lemmas; `qArc_inner`'s first clause is wave 8's `qcol_inner_tile`); `#check` every leaf it states (item 564: four of its predecessor's were false for a missing section variable).
-- **FS131-K9b** (`debruijn`, on `fs131-w9`): item 536's order (K9b before I9A; both readings of "simple" land; five models are a gate condition); **the join takes `reduce_i_of_arcInterfaces` over the named open statement `ArcInterfacesOfRegJ`** (ruling 566 (a)), by ancestry from `fs131-w6` at `2aa3f720`, and derives its own finding (3) (item 533) from wave 6's leaf or the reverse — one statement, one name.
+- **FS131-K9b** (`debruijn`, on `fs131-w9`): **its leaf `not_hasRepeatedColour_of_simpleOn` is proved in wave 8's `SemiHub` as `simpleOn_not_hasRepeatedColour` (item 593): do not have it proved again — a hypothesis until the waves' join, then a one-line corollary**; item 536's order (K9b before I9A; both readings of "simple" land; five models are a gate condition); **the join takes `reduce_i_of_arcInterfaces` over the named open statement `ArcInterfacesOfRegJ`** (ruling 566 (a)), by ancestry from `fs131-w6` at `2aa3f720`, and derives its own finding (3) (item 533) from wave 6's leaf or the reverse — one statement, one name.
 - **FS131-K10d** (`debruijn`, from `e09209e4`): J45-SI-5, SI-C over `IsPlaceFilter`; the link from `normOneCayley` to `finitePlane Q` as a row (ruling 555 (c)). **FS131-I10G**: `LevelGraph` 2 and `UsablePlace` 1 leaves, from `e09209e4` (about 730 lines); after L10B lands, cut from a merge of `main`.
 - **FS131-I8C** (`SemiHub`, 17 leaves, about 1,700 lines) and **FS131-I8D** (`SemiHubPlaces` 6 with `outerAdj`, about 1,800) — from I8B's tip, in parallel (ruling 572 (a)); the planner's § 9.8 calls them "I8B" and "I8C". **FS131-K8c**: FS116-N2-SIXRING and RING-TWIST-C (K8b's record § 9.7).
 - **Wave 6's lines X, Y, W** (K6d's record § 24: `Fragment`'s PARTNER, RUNG, SATPIN leaves; its AXIS, KAPPA, PAIR leaves; `ReduceI` and `Owed`), after the third pass's three.
