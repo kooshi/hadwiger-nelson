@@ -1,0 +1,4 @@
+main: 9513 theorems; landing: 9513; wave (landing only): 0 = 0 hand-written + 0 generated with no record asked; gone (main only): 0; records in the log: 6334
+  generated, by suffix: 
+records: PASS
+exit=0

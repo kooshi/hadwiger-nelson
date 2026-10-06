@@ -1,0 +1,136 @@
+######## the planted library: lake build of 15 modules (exit 0)
+info: t4plant: no previous manifest, creating one from scratch
+info: toolchain not updated; already up-to-date
+✔ [2/16] Built T4Plant.Base (192ms)
+✔ [3/16] Built T4Plant.Shared (161ms)
+✔ [4/16] Built T4Dep.X (160ms)
+✔ [5/16] Built T4Dep.Z (160ms)
+✔ [6/16] Built T4Plant.InstA (340ms)
+✔ [7/16] Built T4Plant.GenA (337ms)
+✔ [8/16] Built T4Plant.Clean (437ms)
+✔ [9/16] Built T4Plant.DupA (448ms)
+✔ [10/16] Built T4Plant.DupB (438ms)
+✔ [11/16] Built T4Plant.AxA (422ms)
+✔ [12/16] Built T4Plant.AxB (435ms)
+✔ [13/16] Built T4Plant.KindA (440ms)
+✔ [14/16] Built T4Plant.KindB (460ms)
+✔ [15/16] Built T4Plant.InstB (441ms)
+✔ [16/16] Built T4Plant.GenB (470ms)
+Build completed successfully (16 jobs).
+######## control baseline (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2272 package-modules=2 package-constants=24 other-constants=204731
+TOTALS doubled=0 generated=0 generated-axioms-differ=0
+=== END ===
+######## control doubled_theorem (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2273 package-modules=3 package-constants=25 other-constants=204731
+DOUBLED T4P.dup :: modules=2 types=same axioms=same reserved=false
+COPY T4P.dup :: T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[]
+COPY T4P.dup :: T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+TOTALS doubled=1 generated=0 generated-axioms-differ=0
+=== END ===
+######## control doubled_axioms_differ (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2273 package-modules=3 package-constants=26 other-constants=204731
+DOUBLED T4P.dup_ax :: modules=2 types=same axioms=differ reserved=false
+COPY T4P.dup_ax :: T4Plant.AxA kind=theorem held=false attributed=true package=true axioms=[T4P.planted_ax]
+COPY T4P.dup_ax :: T4Plant.AxB kind=theorem held=true attributed=false package=true axioms=[]
+TOTALS doubled=1 generated=0 generated-axioms-differ=0
+=== END ===
+######## control doubled_axiom_theorem (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2273 package-modules=3 package-constants=25 other-constants=204731
+DOUBLED T4P.dup_kind :: modules=2 types=same axioms=differ reserved=false
+COPY T4P.dup_kind :: T4Plant.KindA kind=axiom held=false attributed=true package=true axioms=[T4P.dup_kind]
+COPY T4P.dup_kind :: T4Plant.KindB kind=theorem held=true attributed=false package=true axioms=[]
+TOTALS doubled=1 generated=0 generated-axioms-differ=0
+=== END ===
+######## control doubled_prop_instance (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2273 package-modules=3 package-constants=25 other-constants=204731
+DOUBLED T4P.instNonemptyTok :: modules=2 types=same axioms=same reserved=false
+COPY T4P.instNonemptyTok :: T4Plant.InstA kind=theorem held=false attributed=true package=true axioms=[]
+COPY T4P.instNonemptyTok :: T4Plant.InstB kind=theorem held=true attributed=false package=true axioms=[]
+TOTALS doubled=1 generated=0 generated-axioms-differ=0
+=== END ===
+######## control shared_with_dependency (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2272 package-modules=1 package-constants=1 other-constants=204733
+DOUBLED T4P.shared :: modules=2 types=same axioms=same reserved=false
+COPY T4P.shared :: T4Dep.X kind=theorem held=false attributed=true package=false axioms=[]
+COPY T4P.shared :: T4Plant.Shared kind=theorem held=true attributed=false package=true axioms=[]
+TOTALS doubled=1 generated=0 generated-axioms-differ=0
+=== END ===
+######## control generated_only (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2273 package-modules=3 package-constants=37 other-constants=204731
+GENERATED T4P.fn.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY T4P.fn.eq_1 :: T4Plant.GenA kind=theorem held=true attributed=true package=true axioms=[]
+COPY T4P.fn.eq_1 :: T4Plant.GenB kind=theorem held=true attributed=false package=true axioms=[]
+GENERATED T4P.fn.eq_2 :: modules=2 types=same axioms=same reserved=true
+COPY T4P.fn.eq_2 :: T4Plant.GenA kind=theorem held=true attributed=true package=true axioms=[]
+COPY T4P.fn.eq_2 :: T4Plant.GenB kind=theorem held=true attributed=false package=true axioms=[]
+GENERATED T4P.fn.eq_def :: modules=2 types=same axioms=same reserved=true
+COPY T4P.fn.eq_def :: T4Plant.GenA kind=theorem held=false attributed=true package=true axioms=[]
+COPY T4P.fn.eq_def :: T4Plant.GenB kind=theorem held=true attributed=false package=true axioms=[]
+TOTALS doubled=0 generated=3 generated-axioms-differ=0
+=== END ===
+######## control generated_beside_doubled (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2275 package-modules=5 package-constants=39 other-constants=204731
+DOUBLED T4P.dup :: modules=2 types=same axioms=same reserved=false
+COPY T4P.dup :: T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[]
+COPY T4P.dup :: T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+GENERATED T4P.fn.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY T4P.fn.eq_1 :: T4Plant.GenA kind=theorem held=true attributed=true package=true axioms=[]
+COPY T4P.fn.eq_1 :: T4Plant.GenB kind=theorem held=true attributed=false package=true axioms=[]
+GENERATED T4P.fn.eq_2 :: modules=2 types=same axioms=same reserved=true
+COPY T4P.fn.eq_2 :: T4Plant.GenA kind=theorem held=true attributed=true package=true axioms=[]
+COPY T4P.fn.eq_2 :: T4Plant.GenB kind=theorem held=true attributed=false package=true axioms=[]
+GENERATED T4P.fn.eq_def :: modules=2 types=same axioms=same reserved=true
+COPY T4P.fn.eq_def :: T4Plant.GenA kind=theorem held=false attributed=true package=true axioms=[]
+COPY T4P.fn.eq_def :: T4Plant.GenB kind=theorem held=true attributed=false package=true axioms=[]
+TOTALS doubled=1 generated=3 generated-axioms-differ=0
+=== END ===
+######## control dependencies_only_pair (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2274 package-modules=2 package-constants=24 other-constants=204734
+TOTALS doubled=0 generated=0 generated-axioms-differ=0
+=== END ===
+######## control module_not_imported (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2272 package-modules=2 package-constants=24 other-constants=204731
+TOTALS doubled=0 generated=0 generated-axioms-differ=0
+=== END ===
+######## control scan_reads_nothing (lean exit 1)
+/tmp/tmp.iSBd7muyDw/scan_reads_nothing.lean:188:0: error: DupNames.scan: no imported module lies under [NoSuchRoot]; nothing was scanned
+######## control scan_cut_short (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2273 package-modules=3 package-constants=25 other-constants=204731
+DOUBLED T4P.dup :: modules=2 types=same axioms=same reserved=false
+COPY T4P.dup :: T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[]
+COPY T4P.dup :: T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+TOTALS doubled=1 generated=0 generated-axioms-differ=0
+=== END ===
+######## control lost_doubled_line (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2273 package-modules=3 package-constants=25 other-constants=204731
+DOUBLED T4P.dup :: modules=2 types=same axioms=same reserved=false
+COPY T4P.dup :: T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[]
+COPY T4P.dup :: T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+TOTALS doubled=1 generated=0 generated-axioms-differ=0
+=== END ===
+######## control lost_copy_line (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2273 package-modules=3 package-constants=25 other-constants=204731
+DOUBLED T4P.dup :: modules=2 types=same axioms=same reserved=false
+COPY T4P.dup :: T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[]
+COPY T4P.dup :: T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+TOTALS doubled=1 generated=0 generated-axioms-differ=0
+=== END ===
+######## control lost_totals_line (lean exit 0)
+=== DUPNAMES ===
+SCANNED modules=2272 package-modules=2 package-constants=24 other-constants=204731
+TOTALS doubled=0 generated=0 generated-axioms-differ=0
+=== END ===
