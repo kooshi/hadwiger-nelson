@@ -5489,3 +5489,28 @@ reason by the close.*
      docstring's line and the `scripts/Axioms.lean` conflict are the wave's join's. (c) **Slot → FS131-I6B** (wave 6's
      `MapColouring`: `sat_inP` and its Lean model, on `fs131-w6m`), launched 2026-10-06. In flight: 1 (I10C) + 1 (K8) + 1 (I6B)
      = 3.
+
+518. **FS131-K8, by message mid-job: wave 8's foundation written, three rows proved on the way, five generalizations, a shorter
+     route, a wording defect, and a question on declared vacuity** (source: K8's message to "main", 2026-10-06; on `fs131-w8`,
+     uncommitted and elaborated with `lake env lean` only as it wrote — the build and commit are the artifact at its next saved
+     stage; not checked by me). **Proved, iteration-grade**: FS116-RING-GERM in tile form, all of FS116-N2-STAR, FS116-V6-ANTI.
+     **Generalizations**: (1) N2-STAR's flank clause holds for any tile of any valid map at any point and direction — no change
+     point, no colour count, no non-Siamese — and covers a tile bounded by a cusp, which the entry's step does not; (2) N2-RECIP
+     reads `y` as a change point of four colours, never a hub, never non-Siamese; (3) N2-ANTI reads "simple" only at the tiles of
+     `p` (`F.SimpleOn {p}`); (4) V6-ANTI is class-free, proved, so it carries no vacuity; (5) V6-COUNT's count is finite
+     combinatorics with no map in it (72 configurations, all satisfying the conclusion, by an exact tool whose planted fault
+     fires). **A shorter route** for V6-COUNT's last step: no sectors and no cyclic order — the closures of two non-empty groups
+     of tiles cover a connected circle about `p`, so two tiles of different groups share a closure point other than `p`, against
+     V6-ANTI's class-free form (stated, unproved, one mind). **A wording defect**: FS129-SR3-OUTERADJ's entry
+     (`plans/FS129-derivation.md` l. 795), "the only colour carried at y by a tile that is not a tile of p", is never met read
+     literally (the ring's own colours are so carried); its *not claimed* line fixes the meaning as `O_y = {c} = O_y′`, which is
+     what `outerAdj` states — a correction owed to the entry. **Its question**: the plan's § 7.3 item 5 asks a
+     `VACUITY DECLARED:` line on route lemmas over the empty class, while ruling 167 (b) made such a step `private` because the
+     scan does not track `ArcMap` binders. **Ruling**: `v6_hubs` and `v6_hug` stay public with the marker naming the emptiness
+     theorem, **and beside each a theorem deriving `False` from its exact hypotheses**, so the marker is a kernel fact whatever
+     the scan prints. Alternative: `private`, as 167 (b). Why not: these two are backlog rows cited by name, the plan prescribes
+     the marker for exactly them, and 167 (b)'s reason is met by the refutation. Confidence: medium-high; what the scan prints
+     for them joins the tooling job's questions (ruling 475 (d)). **Relay**: its foundation's names (`Plane/RingCalculus/Basic`:
+     `TileAt`, `IsTip`, `IsOuterTile`, `GammaFreeRing`, `QFreeRing`, `IsSemiHub`, and seventeen more) are what wave 9's planner
+     and wave 7's second pass will read; asked of K8 by message: commit that module alone after a build and send the hash, so
+     both take it by ancestry and re-declare nothing.
