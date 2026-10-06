@@ -482,3 +482,311 @@ quote, read here once more on the joined tree, with what each is not:
   of every honest saturated colouring is locally finite (C121-REGJ, open: FS-127); a new value or bound of `χ` of anything.
 
 ## Stage 5 — SAVED (FS131-L6A)
+
+## Stage 6 — SAVED (FS131-L6A): the landing — `main` fast-forwarded to `409b0877`
+
+`origin/main` had moved after the gated merge, from `ac2e84ea` to `aed29ad4` — `data/fs131/l6a/main-since-gate.txt`: `LEAN.md`,
+three paths under `data/`, two under `plans/`, **nothing else**, so by the brief's item 6 the gate was not run again. Merged as
+`d8eace55` (`git merge --no-ff`, by hash, no conflict; the index checked, `mergeindex-main2.txt`: 6 paths, none changed by both
+sides, each taken whole from `main`). Checked before the push, at `d8eace55` (`data/fs131/l6a/pre-push.txt`): `origin/main`
+(`aed29ad4`) an ancestor of `HEAD`; the branch as given (`b3b67f23`), the four other tips (`d62406a2`, `8e81fedd`, `43ea4886`,
+`2e55a2d6`) and the gated commit (`7e67af3b`) ancestors of `HEAD` — no line was rewritten; `git diff --name-only 7e67af3b HEAD --
+. ':!plans' ':!data'` names `LEAN.md` alone (`main`'s own filing) and nothing under `Proofs/`, `Proofs.lean`, `scripts/`, the
+lakefile, the manifest, the toolchain or `ARCHITECTURE.md` — the gate's inputs are the gated commit's; no tracked file modified;
+`sorry` under `Proofs/` by the gate's narrow pattern: 0. **`git push origin HEAD:main`: `aed29ad4..409b0877`, a fast-forward**
+(`data/fs131/l6a/push-main.txt`); after it `origin/main` = `origin/fs131-w6j` = `409b0877`. No background process is left
+running: every build and pass ran under the slot and exited.
+
+**What is on `main` now**: wave 6's first half — the fourteen modules of `Plane/Saturated/`, 363 hand-written theorems, 0 `sorry`,
+each with an audit record within the standard three; their imports in `Proofs.lean`, their rows in `ARCHITECTURE.md`; the scan's
+entry in `scripts/Vacuity.lean` (no new carrier) and the baseline header's counts; the planners' and the five implementers'
+records, tools and logs, and this job's. **What `main`'s front page does not say yet**: `CLAUDE.md` § Trust ledger and § The gate
+hold the counts of the previous landing until drafts 1 and 2 are filed; both gates' digests flag them STALE and name the new numbers.
+
+## Stage 6 — SAVED (FS131-L6A)
+
+## Drafts for the front page (FS131-L6A)
+
+The gated commit is `7e67af3b`; the landed tip differs from it in `plans/`, `data/` and `main`'s `LEAN.md` alone (Stage 6). The
+saved gate logs are in this worktree under `build/gate/`; the copies are committed under `data/fs131/l6a/`:
+`receipt-axioms-first.log`, `receipt-vacuity-first.log`, `receipt-dupnames-first.log`, the three self-tests'
+(`receipt-<gate>-self-test-first.log`), and the full build `build-main-full.log`. To re-read: `python3 scripts/gate_report.py
+axioms data/fs131/l6a/receipt-axioms-first.log data/fs131/l10a/receipt-axioms-first.log CLAUDE.md` and `python3
+scripts/gate_report.py vacuity data/fs131/l6a/receipt-vacuity-first.log data/fs131/l10a/receipt-vacuity-first.log
+scripts/vacuity-baseline.txt CLAUDE.md`.
+
+1. **`CLAUDE.md` § Trust ledger**, the words "the current audit reads 5783 clean and 5 declared purchases, and 4 imported (and 17
+   axiom-free; 5,809 records at wave 10's first landing, FS131-L10A, 2026-10-06)" become: "the current audit reads 6148 clean and 5
+   declared purchases, and 4 imported (and 17 axiom-free; 6,174 records at wave 6's first landing, FS131-L6A, 2026-10-06)". From
+   `data/fs131/l6a/axioms-first.log`: "audited: 6174 records — 6148 clean on the standard axioms, 17 axiom-free, 4 imported
+   (resting on a declared outside theorem), 5 declared purchase(s)" and "==> axioms: OK — 6148 clean, 17 axiom-free, 4 imported, 5
+   declared purchase(s)". (The log's UTC stamp: `20261006T182241Z`.)
+2. **`CLAUDE.md` § The gate**, the two count lines "`declarations=13767 refutations-skipped=192 sites=1173`, `vacuous=0 stale=0
+   declared=3 witnessed=38 generic=1130 unknown=2`" become "`declarations=14299 refutations-skipped=199 sites=1269`, `vacuous=0
+   stale=0 declared=3 witnessed=38 generic=1226 unknown=2`". From `data/fs131/l6a/vacuity-first.log`: "scanned:
+   declarations=14299  refutations-skipped=199" and "sites:   sites=1269  vacuous=0  stale=0  declared=3  witnessed=38
+   generic=1226  unknown=2". The baseline's two entries are unchanged (`hexShell_plane5`, `hexShell_plane6`); its header's two
+   count lines are already these (Stage 5, on the coordinator's word).
+3. **`tools/claude_md_fact_audit.py`'s `GATE_CHANGES`**, after the `(("5525", "5"), ("5783", "5"))` entry:
+   `(("5783", "5"), ("6148", "5")): "FS-131, wave 6's first landing (FS131-L6A; .claude/worktrees/fs131-w6j/build/gate/axioms/20261006T182241Z-2171829.log, copy
+   data/fs131/l6a/receipt-axioms-first.log, gated commit 7e67af3b): 6,174 records, 6,148 clean, 17 axiom-free, 4 imported, 5 purchases",`
+4. **`LEAN.md` § The gate**: no count moves — the self-tests plant 23, 65 and 15 controls, as recorded.
+5. **The named hypotheses each landed theorem rests on, by name** (by reading the signatures of the fourteen files: the heads of
+   every `(h… : …)` binder were listed by `grep` and sorted — the wave's own formers, Mathlib's, and five of earlier waves,
+   `Saturated`, `UnitPairsNull`, `IsContactFor`, `IsAdmissible`, `IsMUA`, `IsPlaneMap`; one mind).
+   - **One named open statement is taken as a hypothesis: `NoPar 𝒞`** (`Plane/Saturated/MapColouring`; C121-NOPAR is this at `k =
+     6` for the locally finite map colourings — ours, proved nowhere). The theorems that take it: **`gmap_ii`** (FS121-C1-GMAP
+     (ii): given `NoPar 𝒞`, `GFin 𝒞 ↔ 7 ≤ χ_m⁰`) and **`sat_noPar`** (FS121-C1-SAT's "so" clause, a refutation). `GFin 𝒞` (G-FIN₆)
+     is the other named open statement of that row; it stands on one side of `gmap_ii`'s equivalence and is no hypothesis. Neither
+     is an `axiom`: each is a `Prop` argument visible in the statement, and `ARCHITECTURE.md` § Trust gains no purchase.
+   - **A regularity hypothesis whose truth for every honest saturated colouring is the open claim C121-REGJ**:
+     `c.SingLocallyFinite` — taken by `regJFan_of_saturated`, `regJLiteral_of_saturated`, `finite_arcs_of_isBounded`; satisfied
+     by `sq9` (`sq9_singLocallyFinite`). The local form `c.singularSet ∩ ball z R ⊆ {z}` is taken by `fan_of_isolated` and, as
+     `IsolatedAt`, by `gamma`, `beta`, `alpha` (`sq9_isolatedAt`).
+   - **Resting on no named hypothesis**: every other theorem of the fourteen files — among the rows, FS121-D3-FALLSAT,
+     FS121-V2-EROSION-DIAM, FS121-C1-BOUND, FS121-C1-GMAP (i), FS121-C1-SAT's first clause, FS111-M-HALF, FS111-M-PINCH, FS111-M-C11
+     (i)–(iii), FS111-W-NOBEND, FS121-V5-OFF, FS121-V5-LOC (i)–(ii), FS121-V2-SECTOR, FS121-DB1-L3 with FS111-W-NOREP, and every
+     entry of FS131-E8's bridge.
+6. **The open gate items at this landing** — theorems whose hypotheses no Lean object on `main` satisfies at once, and notes the
+   gate's rule asks for that are not there. By reading, one mind; the mechanical part is `data/fs131/l6a/gateitems.out` (each of
+   the 61 heads' docstrings searched for an inhabitant note: 14 carry one, 7 take no explicit hypothesis, 39 are covered by their
+   module docstring's inhabitants paragraph and no head lacks both; one head, `sq9_regJFan`, is itself a model). Read by hand:
+   - **`gmap_i`** (FS121-C1-GMAP (i)): **no Lean family is shown `GrundyBound`**, so its hypothesis set (a Grundy-bound family
+     almost everywhere equal to a family of open sets with null unit pairs) has no model on file, and neither its docstring nor
+     `MapColouring`'s module docstring names one. The expected model is R7's classes with the open hexagons (`r7Cls`; believed, not
+     proved here). An inhabitant, or a note, is owed.
+   - **`sat_noPar`**: a refutation at six colours whose docstring says that the satisfiability of its hypotheses without `hNoPar`
+     at `k = 6` is the open question, and names R7 at `k = 7` in words; the Lean model of those hypotheses is at `k = 9`
+     (`sq9Map_sat_model`). By design; listed by name.
+   - **Five refutations inside proofs by contradiction carry no note**: `TwoColourOn.false_of_mem_inter` (`LocalGraph`),
+     `false_of_inside_of_outside`, `Fan.horn_false`, `Fan.false_of_horn_next`, `Fan.false_of_horn_dir` (`FanBridge`). `LEAN.md`
+     § The gate asks each to say that no model is expected and name the theorem that refutes the configuration, or to name the
+     model of the hypotheses it does not refute (for the three `Fan` ones: `sq9Fan` with `i' = i`, where the last hypothesis
+     fails). Five docstring lines owed; no statement is in question. `pinch_not_in_in` carries its note.
+   - **`bound_iff`** (FS121-C1-BOUND): the `example` the first planner's § 7.1 owed ("any open disc of radius `1/3`") was not
+     added; its hypotheses are predicates of one set and are instantiated through `sat_inP` on `sq9Map` (the examples after
+     `sq9Map_sat_model`). A note or an example of its own is owed.
+   - **Models that are words, not declarations** (the module docstring of `Pinch`): HALF's `half_dichotomy` — "any class of `sq9`
+     with a contact" (an `example` exists for `half_upperDensity`, none for the dichotomy); EROSION-DIAM — "an open square of side
+     `1/2` at a corner" (the file's example checks the bound's numbers, not an instance of the hypotheses).
+   - **Not on this list**: every theorem over `Fan` (`sq9Fan`, five examples), over `IsolatedAt` (`sq9_isolatedAt`), over
+     `Saturated` with `SingLocallyFinite` (`sq9`, `sq9_regJFan`), `local_graph` (`sq9_exists_isInterfaceChart`), PINCH, C11 (i),
+     (iii) and HALF's density clause (six examples on `sq9` at `sqEdgePt` and on a disc), `sat_inP` (`sq9Map_sat_model`),
+     FALLSAT (`r7Cls`), the `ArcSetting` family (`arcSetting_of_isolated` at `sq9_isolatedAt`).
+   - **Owed before the wave's gate, from the third planner's hand-back** (inventory item 531; not this landing's): R7 as a
+     colouring with a fan, `sq9`'s two periods, a chart and a two-branch fan for `sq9`. The model of everything landed here is
+     nine-coloured; no model at seven colours is in Lean for the bridge.
+7. **The implementers' and the deriver's drafts, gathered, and corrected for what the join changed.** "[kernel]" below means on
+   `main` after this landing, audited by the gate on `7e67af3b`, on exactly `[propext, Classical.choice, Quot.sound]`, with no
+   assumption beyond the statement's hypotheses unless said.
+   - **`plans/FS131-E8-derivation.md`, the `grade:` and `minds:` lines of the entries** (each "grade: hand / minds: 1"), and its
+     § 3.8's "[hand], one mind, kernel pending" — **corrected by the join: none is "kernel pending the join" any more**:
+     - FS131-E8-LOCAL → [kernel]: `local_graph`, `AeColouring.local_graph` (`Plane/Saturated/LocalGraph`), with the erratum's
+       hypothesis "no cusp in the neighbourhood".
+     - FS131-E8-DELTA → [kernel]: `AeColouring.ae_one_colour_of_isConnected` (its `IsOpen W` is not read).
+     - FS131-E8-GAMMA → [kernel]: `AeColouring.gamma`; -BETA → `IsUnitCurve.exists_polarGraph`, `AeColouring.beta`; -ALPHA →
+       `AeColouring.alpha`; -FAN → `AeColouring.fan_of_isolated`; -BRIDGE → `AeColouring.regJFan_of_saturated`,
+       `regJFan_iff_singLocallyFinite`; -CLAUSE2 → `AeColouring.regJLiteral_of_saturated`, `AeColouring.finite_arcs_of_isBounded`
+       (`Plane/Saturated/FanBridge`, over `FanArcs`, `FanBuild`, `ArcContinuation`, `CurveArc`). FS131-E8-CLAUSE2's "uses only"
+       line can lose "FS131-E8-LOCAL (off Σ each interface point has a neighbourhood in one component); compactness" for "a fan
+       at every point (FS131-E8-FAN at singular and non-singular points alike); a bounded set is covered by finitely many fans'
+       discs" (FS131-I6D's draft).
+     - FS131-E8-TWOSIDES → [kernel]: `AeColouring.Fan.two_le_n`, `Fan.col_ne` (no saturation). FS131-E8-OUTSIDE → [kernel]:
+       `IsUnitCurve.one_le_dist`, and on a branch `Fan.branch_outside_discs`. FS131-E8-BRANCH → [kernel]:
+       `Fan.branch_contacts` (its alternative inclusive).
+     - The curve parts (C1, C2, the growth of the distance, the `s²/2` bound) → [kernel] as lemmas: `IsUnitCurve.chord`,
+       `.sin_le_inner`, `.strictMonoOn_dist`, `.norm_sub_le`.
+   - **`plans/FS121-V2-verification.md`**: FS121-V2-SECTOR → [kernel]: `Fan.sector_alone`; FS121-DB1-L3 with FS111-W-NOREP →
+     [kernel]: `Fan.sector_unique` — each for a fan at one point with saturation at its branch points, no local finiteness.
+   - **`LEDGER.md` § B, row 140's lines** (l. 1289, 1290, 1291, 1292, 1296; FS131-I6A's draft, corrected):
+     - FS111-M-PINCH — **[kernel]**: `pinch`, `pinch_not_in_in`, `pinch_interface` (`Plane/Saturated/Pinch`); at a wider class
+       than filed (two measurable sets with null unit pairs on an open set; no colouring, no third class).
+     - FS111-M-C11 — **[kernel], all three clauses. Corrected by the join**: FS131-I6A's draft left clause (ii) at [derived]
+       "until FS131-E8-LOCAL's module lands"; it has landed — (i) `c11_discs`, `c11_discs_interface`; (ii) `local_graph`, **with
+       the added hypothesis "no cusp of either set in the neighbourhood"** (the deriver's erratum; whether it follows from the
+       filed hypotheses is not derived); (iii) `c11_split`.
+     - FS111-W-NOBEND — [kernel] as FS111-M-C11 (ii): `local_graph` (the curve is `C¹`, its tangent angle 1-Lipschitz).
+     - FS111-W-NOREP — [kernel] with FS121-DB1-L3: `Fan.sector_unique`.
+     - FS111-M-HALF — **[kernel]**: `half_dichotomy`, `half_sq_norm_le_inner_of_mem_closedBall`,
+       `inner_le_half_sq_norm_of_notMem_ball`, `half_upperDensity`; for one measurable set with null unit pairs.
+     - Row 140's own text: its grade for the pinch, the two discs, the split arc and — since the join — the `C^{1,1}` clause
+       becomes [kernel].
+   - **`LEDGER.md` § B, rows 142–144's lines**: FS121-DB1-L3 (l. 1359), FS121-V2-SECTOR (l. 1377) → [kernel] as above;
+     FS121-V2-EROSION-DIAM (l. 1368) → [kernel]: `erosion_diam`, `erosion_diam_cot` (no sector read); FS121-D3-FALLSAT (l. 1380)
+     → [kernel]: `saturated_of_forall_isMUA`, `AeColouring.saturated_of_idomatic` (no partition read); FS121-C1-BOUND (l. 1391) →
+     [kernel]: `bound_iff` (one open set); FS121-C1-GMAP (l. 1392) → (i) [kernel]: `gmap_i`; (ii) **[kernel over the named
+     hypothesis `NoPar`]**: `gmap_ii`; FS121-C1-SAT (l. 1393; FS131-I6B's draft) → "[kernel]: `sat_inP`, `sat_noPar`
+     (`Plane/Saturated/MapColouring`); wider: `ArcMap.bound_of_saturatedOn` (a family saturated on an open set; no neighbourhood
+     free of other colours). Assumptions by name: `sat_noPar` takes C121-NOPAR as the hypothesis `NoPar 𝒞` (a named open
+     statement, proved nowhere); `sat_inP` none. Inhabitant: `sq9Map_sat_model`."; FS121-V5-LOC (l. 1412) → clauses (i), (ii)
+     [kernel]: `AeColouring.closure_essBdry_subset`, `AeColouring.notMem_essBdry_of_mem_densitySet`, `AeColouring.local_graph`;
+     clause (iii) is the third pass's, not landed.
+   - **`plans/LEAN-BACKLOG.md`, the rows' `grade` and `handoff` lines**: the same states for rows 25 (FS111-M-HALF), 26
+     (FS111-M-PINCH), 27 (FS111-M-C11), 35 (FS111-W-NOBEND) and the FS-121 rows named above; the bridge's entries are FS131-E8's
+     and have no row of their own.
+   - **`plans/FS131-w6-kernel-plan.md` § 3.3** (FS131-I6B's correction; the third planner made it by a dated line on its own
+     branch, inventory item 531): the sentence "would make FS121-C1-SAT false at a vertex where colour `i` has a cusp" is refuted
+     for arc maps by `ArcMap.bound_of_saturatedOn`.
+   - **`plans/GROKKING-INSTANCES.md` § What compute actually helps** (FS131-I6A's instance, with the four that followed): seven
+     leaves priced at 22 agent-hours closed in thirty minutes of wall time; the wave's first two passes priced at about 45
+     agent-days by their planners (`Pinch` 22 h, `sat_inP` 2 d, line C 9 d, the bridge's existence half 12 d, the five `Fan`
+     lemmas 7 d) were five implementer jobs.
+   - **`LEAN.md` § Searching — Lean**: FS131-I6A's two facts are filed (they are on `main`); none is drafted again here.
+     **`BIBLIOGRAPHY.md`**: no key is used by the landed files.
+8. **The generalizations the five reports found, for the wave's errata** (each kernel-checked where a declaration is named;
+   none changed a statement):
+   - FS111-M-PINCH: `pinch` reads (H2) only as "within `N` the set is almost everywhere one preconnected set of density points"
+     (that (H2)'s set is open and non-empty is never read); the two cells of its table hold with no (H2) and no measurability
+     (`isSplitAt_of_in_out`, `hasTwoDiscsAt_of_out_out`; the second reads almost-disjointness, the first does not).
+   - `TwoColourOn.essBoundary_inter_eq` never reads (H2). FS111-M-C11 (iii): `c11_split` reads neither `dist x y = 1` nor the
+     point `x`, and no measurability (`essBoundary_inter_congr`).
+   - FS121-C1-SAT and -GMAP: no proof in `MapColouring` reads the second clause of `SeparatesAt`; `ArcMap.bound_of_saturatedOn`
+     holds for a family saturated on an open set, with no colouring, no plane map and no order of the colours (the bound
+     FS116-O1-SATPIN's "saturated on a disc" reads). Believed, not proved: `sat_inP` without `hF`.
+   - FS131-E8-DELTA does not read "open" (`IsOpen W` kept in the statement, ruling 539 (a)). FS131-E8 §§ 3.2 (1), 3.3: C1, C2 and
+     the growth of the distance hold for length at most `π` (`IsUnitCurve.sin_add_sin_le`, `.strictMonoOn_dist_of_le_pi`). § 3.1
+     (3)(c): the lens point reads two of (b)'s four inequalities. § 3.1 (4): the chart is a rectangle `(a, b) × (−h, h)` in the
+     frame, `h = min(ρ, 1)/32`. `local_graph` reads disjointness at four places through two lemmas, three of them false on a
+     cover: a cover's form is a different lemma (ruling 539 (b)).
+   - FS131-E8-CLAUSE2: its first clause reads no saturation (`Fan.finite_arcs_meeting_ball`: any fan's disc meets finitely many
+     interface arcs, so `RegJFan → RegJLiteral` for every colouring — not stated as a theorem); its second needs no compactness
+     off the fans and no chart. FS131-E8-GAMMA is colour-free (`ArcSetting.exists_component_arc`) and reads seven of the chart's
+     fields; `gamma` and `beta` do not read `IsolatedAt.pos`; `gamma`'s route uses no Zorn and no gluing of charts.
+   - FS131-E8-TWOSIDES reads no saturation. The essential boundary of a measurable set is null (`volume_essBoundary`), which
+     replaces "a continuous polar graph is null". `Fan.dist_eq_one_of_common_contact`: a common contact puts the whole branch on a
+     unit circle, with no saturation. FS121-V2's Lemma H holds for one set and two pieces (`in_in_or_out_out`); its § 2.2's case
+     `θ₁ > π` and the bound `θ₁ ≤ π` are not needed, and § 2.3's three cases are two.
+   - The planners' wider classes, as landed: FALLSAT (no partition), EROSION-DIAM (no sector), C1-BOUND (one open set), C1-GMAP
+     (any class of open families), C11 (i) (every point of one `N`), E8-LOCAL (no `Σ` read), E8-FAN and E8-GAMMA (no `z ∈ Σ`).
+9. **The two tidy moves left for after the landing** (ruling 544 (d); `./scripts/dupnames.sh` passes because the names differ):
+   - **`fanAngle`** (`Plane/Saturated/FanBridge`) is `polarAngle` (`Plane/ValidMap/RadialPush`) again, and the same angle is
+     inline in `FanBuild`; one home beside `polarPt` in `Plane/LocalStructure` makes one definition (FS131-I6E's report).
+   - **`MapEdge.isPreconnected_puncturedBall`** restates `isPreconnected_ball_diff_singleton` (`Plane/ValidMap/Limit` l. 1215,
+     not upstream of `Plane/Saturated`); `isConnected_ball_diff_singleton` (`FanBridge`, FS131-I6E) is a third statement of the
+     punctured disc; `MapEdge`'s four generic density facts (`MapEdge.densityRatio_congr_ae`, `.essBoundary_congr_ae`,
+     `.essSupport_congr_ae`, `.notMem_densitySet_of_disjoint`) and the local `eventually_floor_eq` of `sq9Col_locallyConstant`
+     (`Plane/SVMap` l. 871) are the other candidates FS131-I6B lists.
+   - With them, from draft 6: the five refutations' notes, `gmap_i`'s and `bound_iff`'s inhabitant.
+10. **The front page's draft — REG-J′ as "the singular set is locally finite"** (ruling 492 (a); the deriver's texts,
+    `plans/FS131-E8-derivation.md` §§ 4.4, 4.6). The frozen claim C121-REGJ reads (`data/fs121/claims.md` l. 105): "in every honest
+    saturated colouring in D-NF, with any number of colours, the singular set Σ is locally finite and each point of Σ meets
+    finitely many interface arcs." Each sentence below with the Lean theorem that licenses the change:
+    - **`CLAUDE.md` § Where the problem stands, item 31**, the words "at five, given REG-J′₅, the honest existence form of
+      C-SAT-T is equivalent to `χ_m⁰(ℝ²) ≥ 6` (row 154)" become "at five, given that a saturated five-colouring's singular set is
+      locally finite (REG-J′₅), the honest existence form of C-SAT-T is equivalent to `χ_m⁰(ℝ²) ≥ 6` (row 154)". Licensed by
+      `AeColouring.regJLiteral_of_saturated` (under saturation the frozen words' second clause follows from the first) and
+      `AeColouring.regJFan_of_saturated` (so does the fan the rows read). **Row 154 itself stays [hand]**: only the wording of
+      its hypothesis moves.
+    - **`CLAUDE.md` § Grokkings, the theory paragraph**, "off a locally finite singular set its interfaces are segments and arcs
+      of integer radius, that finiteness open (rows 140–141, G84, G85; [hand])": **no change** — it already names the first
+      clause alone (the deriver's § 4.4), and "integer radius" is FS111-M2-INTRAD, a row of the third pass, not landed.
+    - **`CLAUDE.md` § What the kernel holds**, a clause to add: "**the saturated lane's first half (FS-131 wave 6)** — the pinch
+      at an interface point with its two tangent discs and split arc, the local `C^{1,1}` graph off the cusps, and the bridge:
+      in a saturated colouring a point isolated in the singular set has a fan with end tangents (`fan_of_isolated`), so REG-J′
+      is 'the singular set is locally finite' (`regJFan_iff_singLocallyFinite`, `regJLiteral_of_saturated`), a bounded set meets
+      finitely many interface arcs (`finite_arcs_of_isBounded`), and at a fan no colour holds a sector and another region
+      (`Fan.sector_alone`); model: the nine-colour grid (`sq9_regJFan`)".
+    - **`plans/FRONTIER-STUBS.md`, row 8 (FS-127)**, after "is the singular set of every honest saturated colouring of the plane
+      locally finite (C121-REGJ)?": "— since FS-131's wave 6 this is all of REG-J′: under saturation its second clause and its
+      fan reading follow from the first, in the kernel (`AeColouring.regJLiteral_of_saturated`, `regJFan_iff_singLocallyFinite`,
+      `finite_arcs_of_isBounded`)".
+    - **`plans/STUB-lateral-extent.md` and `plans/STUB-curved-pencils.md`, the two bearing lines filed from the deriver's § 4.4**:
+      "[hand], one mind, kernel pending" becomes "[kernel]: `AeColouring.regJFan_of_saturated`,
+      `AeColouring.regJLiteral_of_saturated`, `AeColouring.finite_arcs_of_isBounded`, standard three axioms"; the same in the
+      note for `data/fs121/claims.md` ("C121-REGJ's second clause follows from its first") and under G85's replacement words.
+      `plans/STUB-top-colour.md` l. 77, "Given REG-J′₅ (FS-127 at five)": "Given that the singular set is locally finite at five
+      (REG-J′₅, FS-127 at five)".
+    - **What the kernel holds, plainly.** For every `k` and every measurable almost-everywhere-proper `k`-colouring whose classes
+      are saturated: (a) at a point with no other singular point in a disc about it, a fan exists (`fan_of_isolated`; saturation is
+      read in the punctured disc only); (b) if the singular set is locally finite, every singular point has a fan, every singular
+      point lies in the closure of finitely many interface arcs, and every bounded set meets finitely many interface arcs
+      (`regJFan_of_saturated`, `regJLiteral_of_saturated`, `finite_arcs_of_isBounded`); (c) at any fan, under saturation in its
+      punctured disc: each branch stays outside the two unit discs tangent to its limit direction, its contacts are as FS121-V2's
+      Lemma T (ii) says, a singular point has at least two branches with different colours on their two sides, and a colour with
+      a sector of positive angle has no other region (`Fan.branch_outside_discs`, `.branch_contacts`, `.two_le_n`, `.col_ne`,
+      `.sector_alone`); (d) off the cusps a two-colour interface is locally a `C^{1,1}` graph (`local_graph`). One model satisfies
+      every hypothesis at once: the nine-colour grid `sq9` (`sq9_regJFan`).
+    - **What it does not hold.** That the singular set of any saturated colouring other than `sq9` is locally finite — **C121-REGJ
+      itself is open** (FS-127), and the kernel takes it as a hypothesis; anything at seven colours or fewer beyond what is
+      proved for every `k` (no model at `k = 7` is in Lean, and no value or bound of `χ` moved); **the rows of the third planning
+      pass, which are not landed** — the outward and inward parallels and their ends (FS121-DB1-L6, -L7, -O1-OUT, -O1-ENDS),
+      integer radii (FS111-M2-INTRAD), FS121-V5-LOC (iii), -V3-CPI, -V2-VT-W, -D1-VT, -D1-EROSION, -D1-PENCILWIN, FS111-W-KB-DIR,
+      FS121-V5-RAY, the four FS121-D2 rows, -D4-HOLE, FS111-M2-HULLC, and the agreement of the two readings of the singular set
+      (thirty-four `sorry` leaves on `fs131-w6`, by inventory item 531); the fragment's six rows, not stated. The Lean singular set
+      is the centred-ball reading (ruled, inventory item 495); that it agrees with the other reading under saturation is one of
+      those unlanded rows.
+11. **The Frontier line and the Proof Atlas.** No value moved and the milestone is not closed by one landing. Grades that move to
+    **[kernel]**: FS111-M-PINCH, FS111-M-HALF, FS111-M-C11 (i)–(iii) (the second with its no-cusp hypothesis), FS111-W-NOBEND,
+    FS111-W-NOREP, FS121-D3-FALLSAT, FS121-V2-EROSION-DIAM, FS121-C1-BOUND, FS121-C1-GMAP (i), FS121-C1-SAT, FS121-V2-SECTOR,
+    FS121-DB1-L3, FS121-V5-OFF, FS121-V5-LOC (i)–(ii), and the eleven entries of FS131-E8's bridge (LOCAL, DELTA, GAMMA, BETA,
+    ALPHA, FAN, BRIDGE, CLAUSE2, TWOSIDES, OUTSIDE, BRANCH); to **[kernel over a named hypothesis]**: FS121-C1-GMAP (ii) and
+    FS121-C1-SAT's "so" clause, over `NoPar`. For `CLAUDE.md` § Frontier's open-milestones sentence, of this landing: "wave 6's
+    first half is on `main` (FS131-L6A): fourteen modules of `Plane/Saturated`, 363 theorems, the bridge among them".
+12. **For the tooling lane's question on the scan's procedure** (ruling 535 (a), and the coordinator's reply to this job):
+    **`AeColouring.Fan` is the second case, beside `StationaryRatio.StationarySet`, of a hypothesis-former whose existence is a
+    theorem, with no `VACUOUS` control plantable.** `StationarySet` exists at every group by construction and is IN by ruling
+    (507 (d)); `Fan` exists at a point by a theorem (`fan_of_isolated`), fails to exist at a wild point of some colouring, has no
+    refutation in the library, and is OUT by the law as wave 5 applied it. One question for both: does step (1)'s first clause
+    ("'does one exist' is a theorem rather than a construction") enter a carrier when step (3)'s `VACUOUS` control cannot be
+    planted? The numbers for `Fan`: 51 binder sites, all `GENERIC`; one closed inhabitant, `sq9Fan`.
+13. **For the join of the wave's later modules** (`fs131-w6` and the branches cut from it; none was touched). What changes under
+    them: `polarRegion_isOpen` and `polarRegion_isPreconnected` are gone (cite `isOpen_polarRegion`, `isPreconnected_polarRegion`,
+    `Plane/Saturated/FanBuild`; no code on those branches cites the old names); Stage 3's docstring edits touch four of the
+    eight modules those branches hold (`Fan`, `FanBridge`, `LocalGraph`, `Pinch`), so their dependents re-elaborate. `scripts/Axioms.lean`'s wave-6 blocks sit after wave 10's and above
+    the `=== PURCHASED ===` banner, where the later blocks will conflict again: keep both. `ARCHITECTURE.md`'s rows and
+    `Proofs.lean`'s imports for the four later modules will conflict by adjacency at the end of the `Plane/Saturated` run: keep
+    both, with no blank line between (a blank line splits the table). The three cell lemmas of a fan are on `main`
+    (`Fan.isPreconnected_cell`, `Fan.cell_subset_densitySet`, `Fan.exists_ray_subset_cell`).
+
+## Theorems this phase proved, final
+
+All **[kernel]**: built by this worktree's `./scripts/build.sh` (`data/fs131/l6a/build-main.log`, then `build-first.log` on the
+gated commit), each audited by `scripts/axioms.sh` on `7e67af3b` under CLEAN on the axioms shown
+(`data/fs131/l6a/receipt-axioms-first.log`; `records-first.txt`). Addresses are `Proofs/HadwigerNelson/Plane/Saturated/`.
+
+**New in this job: no theorem.** This job proved nothing of its own and changed no statement. It deleted two theorems that
+duplicated two others (`polarRegion_isOpen`, `polarRegion_isPreconnected`) and repointed their three uses.
+
+**Landed by this job, proved by FS131-K6, -K6b, -I6A, -I6B, -I6C, -I6D, -I6E** (their records hold the lists and the readings): the
+363 hand-written theorems of the fourteen modules — 362 on exactly `[propext, Classical.choice, Quot.sound]`, `sq9_pred_ne` on
+`[propext, Quot.sound]`. The heads, each on exactly the three (`records-first.txt`, 61 names), read against their rows by the
+implementers and, for the bridge, in § 5.7:
+- FS111: `pinch`, `pinch_not_in_in`, `pinch_interface` (M-PINCH); `c11_discs`, `c11_discs_interface`, `c11_split` (M-C11 (i),
+  (iii)); `local_graph` (M-C11 (ii) with no cusp, W-NOBEND); `half_dichotomy`, `half_upperDensity` (M-HALF);
+  `TwoColourOn.essBoundary_inter_eq`, `TwoColourNhd.mem_essBoundary`;
+- FS121: `saturated_of_forall_isMUA`, `AeColouring.saturated_of_idomatic` (D3-FALLSAT); `erosion_diam`, `erosion_diam_cot`
+  (V2-EROSION-DIAM); `bound_iff` (C1-BOUND); `gmap_i`, `gmap_ii` (C1-GMAP; the second over `NoPar`); `sat_inP`, `sat_noPar`,
+  `ArcMap.bound_of_saturatedOn`, `sat_bound_of_mem_closure` (C1-SAT; `sat_noPar` over `NoPar`); `AeColouring.closure_essBdry_subset`,
+  `AeColouring.notMem_essBdry_of_mem_densitySet`, `AeColouring.local_graph` (V5-OFF, V5-LOC (i), (ii)); `Fan.sector_alone`
+  (V2-SECTOR); `Fan.sector_unique` (DB1-L3, FS111-W-NOREP);
+- FS131-E8, the bridge: `AeColouring.ae_one_colour_of_isConnected` (DELTA); `IsUnitCurve.chord`, `.sin_le_inner`,
+  `.strictMonoOn_dist`, `.norm_sub_le`, `.one_le_dist` (OUTSIDE), `lipschitzOnWith_of_chord`, `norm_sub_le_of_discs`;
+  `AeColouring.gamma` (GAMMA); `IsUnitCurve.exists_polarGraph`, `AeColouring.beta` (BETA); `AeColouring.alpha` (ALPHA);
+  **`AeColouring.fan_of_isolated`** (FAN); **`AeColouring.regJFan_of_saturated`**, `regJFan_iff_singLocallyFinite` (BRIDGE);
+  `AeColouring.regJLiteral_of_saturated`, `AeColouring.finite_arcs_of_isBounded` (CLAUSE2); `Fan.two_le_n`, `Fan.col_ne`
+  (TWOSIDES); `Fan.branch_outside_discs`, `Fan.branch_contacts` (BRANCH); the three cell lemmas of a fan;
+- the models: `sq9_isTangentAt`, `sq9_exists_isInterfaceChart`, `sq9Fan`, `sq9_isolatedAt`, `sq9_singLocallyFinite`, `sq9_regJFan`,
+  `sq9Map_sat_model`.
+
+**Not proved, and not claimed**: `NoPar` at any class (C121-NOPAR); that the singular set of every honest saturated colouring is
+locally finite (C121-REGJ); a model of the bridge at seven colours; a model of `gmap_i`'s hypotheses; the wave's third pass
+(thirty-four leaves on another branch) and the fragment's six rows.
+
+## Slips, my own
+
+- **The first run of my rows check was wrong**: `tools/fs131_l6a_archrows.py` read five sibling-module names and one abbreviated
+  suffix as missing declarations. Repaired before any result was read from it (Stage 3).
+- **A ref moved under a check**: I named `origin/main` by ref in the merge-index check while another session fetched; the check
+  fired on the moved ref. From then on merges and checks name `main` by hash (Stage 4).
+- **I wrote an inventory item number I did not know into `scripts/Vacuity.lean`'s entry** ("item 548") and took it out before the
+  commit; the entry cites the coordinator's reply by date instead.
+- **One build after the three implementers' merges, not one after each**, and **no separate build of the tidied tree before
+  `main` was merged**: the tidies' three changed code lines were elaborated in `FanBridge` (iteration) and built with `main`'s
+  merge. Said in §§ 2.3, 3.2, Stage 4.
+- **The statement tool's self-test does not apply to a file with two owners** (`FanBridge` against one half's tip): I ran it there
+  first, read its FAIL, and moved it to two one-owner files. The comparison itself was right.
+- **The background commands that ran the builds and the gate pass were launched with the harness's ten-minute ceiling**; each
+  ended inside it (the pass in about five minutes). Had one been cut, its steps were separately logged and resumable by step, but
+  I did not write the resume command down beforehand.
+- I did not read the harness's token count at the saved stages; I have no instrument for it in this session and say so rather
+  than give a number I did not read.
