@@ -5318,3 +5318,47 @@ reason by the close.*
      whose argument does read a tile off the disc will show at its proof, and is then a message. Confidence: high. **Relay**: wave
      8's and wave 9's planners take the module by merging the one commit of `fs131-w7` that holds it (asked of K7 by message: a
      commit of its own after a build, and the hash), and state their classes over it; their briefs carry this.
+
+509. **FS131-K10b done at its Stage 9: wave 10's second planning pass — the finite-target floor stated as two rows, the read-backs
+     done, one of the four unstated rows stated; three statements and one new row left for a third pass** (planner; harness 472k by
+     the task notice; record `fs131-w10k`'s `plans/FS131-w10-kernel-plan.md` Stages 6–9; report `data/fs131/reports/FS131-K10b.md`;
+     commits `83e1ef2c`, `256f5ccb`, `48672e2b`, `330d2f48`; pushed, tree clean). **Ten new modules** under `Arith/`. **Proved**: the
+     ratio bound for a finite abelian group by characters (`RatioBound.card_mul_le_of_indep`, `le_chromaticNumber_of_charSum`; not in
+     Mathlib or the library before); `si4_equivariant` at the factor σ-algebra for a map with a left inverse in the family
+     (`comap_factorSigma_eq`, `si4_equivariant_factorSigma`); J45-SI-C's finite facts and (G2) at 7 by `decide +kernel` (`GapSeven`,
+     eight theorems); `StandingFloor 7` from the two floor rows (`standingFloor_seven`, a composition over their leaves). **Floor (i)**:
+     `targetFloor_eight_128 : TargetFloor 8 128` — **the target at 128 needs eight colours** — proved over one leaf
+     (`charSum_128_ge`), its certificate (an irreducible polynomial, a generator, the exact spectrum bounded below by −19)
+     kernel-checked in 2.3 s; the spectrum −19 … 21 [tools, exact, two routes]; no outside theorem. **Floor (ii)**:
+     `targetFloor_seven_of_kloosterman` — `χ(Γ_Q) ≥ 7` for `Q ≡ 3 (mod 4)`, `Q ≥ 98` — over the named hypothesis `KloostermanBound F`
+     (a `Prop`, no axiom: ruling 500), six leaves. **Stated, not proved**: J45-SI-J at the filter form (`contVec_prod_eq`, item 503);
+     FS131-E8-SI5C at a wider class (`ae_eq_measurable_of_majority`: any infinite index set, events of probability at most `p < 1/2`);
+     a model of `Interface.NegCircle` at `F = ℚ` by the parity character (two leaves). **Not stated**: J45-SI-5, J45-SI-C's measure
+     part, J45-N1 (a)(b), the X25B level row (a disposition and a shape). **Read-backs**: I10A's five statements say what their
+     rows say (two differences, neither a defect: real `L²`; "almost surely" where J45-SI-4 says surely); I10B's nine by statement.
+     **My receipt**: tip `330d2f48` equals `origin/fs131-w10k`, tree clean; `sorry` by the handoff's grep: `NormOneTarget` 2,
+     `FloorPlanes` 4, `Floor128` 1, `ProductFactor` 1, `MajorityVote` 1, `NegCircleModel` 2 — the eleven reported — and 0 in
+     `FactorAction`, `RatioBound`, `TargetFloors`, `GapSeven`; no `axiom` and no `native_decide` in the ten modules, by grep; the full
+     build log (`build/gate/build/20261006T123652Z-4038296.log` in the tree) ends "Build completed successfully (5790 jobs)", 0
+     warnings other than `sorry`; `KloostermanBound` read at `FloorPlanes.lean` ll. 34–36 — every non-trivial additive character,
+     `a ≠ 0`, `b ≠ 0`, the sum over units of `ψ(a x + b x⁻¹)`, at most `2√q` — and `standingFloor_seven`'s hypothesis at
+     `TargetFloors.lean` ll. 32–35 (fields of `q ≡ 3 (mod 4)`, `q ≥ 347` elements). Not checked by me: the certificate, the spectrum,
+     the read-backs. **Items**: three generalizations; three corrections owed to J45 entries (SI-J's *uses only* line; SI-C's one
+     clause in spectral form; SI-4's "equivariant" almost surely); the `[MMST1996]` defect and the fallback written down with pages
+     (its § 7.3); the bibliography note filed today (`BIBLIOGRAPHY.md`, `[MMST1996]` and `[Weil1948]` rows, the note verbatim by
+     script); a question for a deriver, low priority (does X25B-T's chain read the finite level with the loop case excluded?);
+     predictions scored (its § 9.6); slips, the job's, disclosed (stages 7–9 one commit; no token count; a hash misnamed and
+     corrected); `./scripts/dupnames.sh` exits 1 on that branch at `Plane.conj_e` — the branch predates wave 5's remedy pass, which
+     made that one declaration on `main`; the join with `main` removes it.
+510. **Rulings on K10b's held items, and its slot.** (a) **Three implementers by file, as it splits them**, on branches cut from
+     `330d2f48`: FS131-I10D (`NormOneTarget` and `FloorPlanes`, six leaves — the completion from the circle sum to the Kloosterman
+     sum), FS131-I10E (`Floor128`, one leaf with six children — the target at 128), FS131-I10F (`ProductFactor`, `MajorityVote`,
+     `NegCircleModel`, four leaves). (b) **A third planning pass, FS131-K10c**: J45-SI-5, J45-SI-C's measure part, J45-N1 (a)(b)
+     or its two-fact interface, the X25B level row's statement in the form X25B-T reads (with the deriver's question as its own to
+     settle from the entry, or to send back). (c) **The read-back of the Kloosterman bound against a page waits on the two papers
+     asked of Kooshi** (item 500); until then the planes' floor is a theorem over the named hypothesis, and the wave can land so.
+     Alternative: hold the wave's landing for the import. Why not: a named hypothesis is visible in the statement and costs nothing
+     in the audit; the import is one small later commit through the gate. Confidence: high. (d) `sp_if` stays an open gate item
+     until `negCircle_trivial_bot` lands (I10F). (e) The join's list is its record's § 9.4, with rulings 494 (a) and 507 (a), (d).
+     (f) **Slot → FS131-I6A** (wave 6's `Pinch`, seven leaves, on `fs131-w6p`): wave 8's planner is next in the order but waits
+     for wave 7's planner to send the commit of the shared module (item 508). In flight: 1 (K7) + 1 (I10C) + 1 (I6A) = 3.
