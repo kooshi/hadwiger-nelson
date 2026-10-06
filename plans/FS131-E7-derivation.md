@@ -440,3 +440,85 @@ Not exercised: a circle `ω(y′)` that does carry arcs of `Γ` with `y_k` avoid
 transfer because `F₁` and `F₀` agree on `B(0, 9/10)`. Docstring line for `straddlers_third`: "Inhabitant of the hypotheses at six colours:
 `fourFlowerCell` (the four-petal flower with the rectangle `19/20 < Re < 21/20`, `−1/20 < Im < 0` recoloured `5`) at `v = 0`, `θ = −π/3`,
 `X = 4`, `X' = 5` (FS131-E7 § 4); the conclusion holds there with `i = 3`, `o = 1`. `ω(y′)` carries no arc of `Γ` on it."
+
+## Stage 5 — SAVED (FS131-E7): Q3 — `nb4p`: the first four hold at once, and with `hnb`; with `hring` neither a model nor a contradiction is reached
+
+derivation: q3a-q3c-nb4p-model
+  statement: for `G = F₁` of § 4.1, `v = 0`, `ψ = 0`, `X = 4`, `X' = 5`, the hypotheses `hF`, `hv`, `h4`, `hy` and `hnb` of `nb4p` hold at once (so Q3a and Q3c are both answered by one object), and `hring` fails at `j = 1, 2, 4, 5`
+  uses only: q2-straddlers-model's object, validity and its "no sub-arc of a unit circle about a point other than `0, u_j, w_j` lies in `Γ`"; that `e(60°j)` is none of `0, u_j, w_j`
+  not claimed: Q3b; that `hnb` is exercised against arcs that miss — on `F₁` no circle `ω(y_{j±1})` carries any arc of `Γ`, so `hnb` holds because the set of such arcs is empty (a weaker model of `hnb`, said as the brief asks)
+  argument: § 5.1 The five hypotheses on `F₁`
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `F₁` at `ψ = 0` — the change point is `1`, where the ring passes from the recoloured rectangle (`5`, clockwise) to `M_0` (`4`, counter-clockwise)
+  prior art: owed — as q1-a4six-model
+  handoff: de Bruijn — `nb4p`'s docstring: the hypotheses minus `hring` are inhabited by `fourFlowerCell`; `hring` is therefore not idle
+
+derivation: q3b-hring
+  statement: there is a `G : ArcMap 6` with `v`, `ψ`, `X`, `X'` satisfying `hF`, `hv`, `h4`, `hy` and `hring` of `nb4p` at once
+  uses only: nothing yet — no object and no refutation
+  not claimed: that the five are contradictory (no local obstruction was found: § 5.3); that a model exists
+  argument: § 5.3 Q3b: what a model must carry, and where the derivation stops
+  verdict: stalls at: a valid six-coloured fragment on `B̄(v, 1)` with four colours at `v` whose ring changes between the two absent colours at six points `60°` apart — by nb4p-half-hnb and its mirror it must have an arc of `Γ` on `ω(y_{j+1})` through `y_j` for some `j` and one on `ω(y_{j′−1})` through `y_{j′}` for some `j′`; no flower of full petals is one (§ 5.3), and I built no other
+  grade: hand
+  minds: 1
+  model: none — the question is whether one exists
+  prior art: owed — FS112's records hold no (E2)-only four-colour vertex: the strip's `P_1` and the disk's `A_0` both escape by (E1) (FS112-BUDGET2)
+  handoff: none — a stall; its smallest open form goes to the report as a question for Poros (it is FS-124's ground: a ring with change points and no arc of its own circle at them)
+
+### 5.1 The five hypotheses on `F₁`
+
+| hypothesis | on `F₁`, `v = 0`, `ψ = 0`, `X = 4`, `X' = 5` |
+|---|---|
+| `hF`, `hv` | § 4.1, § 4.2 |
+| `h4 : (G.coloursAt v).ncard = 4` | `coloursAt 0 = {0, 1, 2, 3}` |
+| `hy : G.IsChangePoint v ψ X X'` | `ringPt 0 0 = 1` lies on the rectangle's top side `[19/20, 21/20]`, an arc of `F₁` inside the domain: `1 ∈ Γ`; `4 ≠ 5`; `GermIn 0 0 .ccw (region 4)` — the ring points `e(t)`, `0 < t < 15°`, are interior points of `M_0`; `GermIn 0 0 .cw (region 5)` — the ring points `e(−t)`, `0 < t < arcsin(1/20)`, are interior points of `R` (§ 4.2's rows for `hX`, `hX'`) |
+| `hnb` | for `j < 6` the two circles are `ω(e(60°(j + 1)))` and `ω(e(60°(j − 1)))`; their centres are sixth roots of unity, none of them `0`, `e(90i + 15)` or `e(90i + 75)` (`60m mod 90 ∈ {0, 30, 60}`), so by § 4.2's last row neither circle holds a sub-arc of `Γ` of positive length: both conjuncts hold at every `j` |
+| `hring` — **fails**, as the theorem requires | `e(60°) ∈ [15°, 75°]`, `e(120°) ∈ [105°, 165°]`, `e(240°) ∈ [195°, 255°]`, `e(300°) ∈ [285°, 345°]`: four of the six orbit points lie on the petals' ring arcs. (`e(180°)` is an interior point of `M_2`.) This is FS112's escape (E1), realised with no (E2) |
+
+**So `hring` is not idle**: the other five hypotheses hold together. And `nb4p`'s hypotheses are the derivation's case with one of its two
+escapes closed by `hnb` and the other left open here.
+
+### 5.2 What Q3a and Q3c exercise
+
+Q3a's four are fully exercised (a live change point between two live absent colours at a four-colour vertex of a valid six-coloured
+fragment covering the unit disc). Q3c's `hnb` is met in the weak way named in the entry. A model in which some `ω(y_{j±1})` carries arcs of
+`Γ` that miss `y_j` would be stronger; moving the rectangle along a gap stretch does not give one (the map's unit-arc centres on the ring are the petals' corners, at
+`90i ± 15`; an orbit `ψ + 60°ℤ` holds one only if `ψ ≡ ±15 (mod 30)`, and a change point made inside an open gap stretch has
+`|ψ − 90i| < 15`).
+
+### 5.3 Q3b: what a model must carry, and where the derivation stops
+
+**Forced by the five** (each step is in `nb4p`'s own proof, which uses `hring` and not `hnb` up to this point: `halt`, l. 6340–6352):
+every orbit point `y_j = ringPt v (ψ + 60°j)` is a change point, the ring's two germs at `y_j` being the two absent colours, swapped from
+one orbit point to the next. So `ω(v)` has at least six change points, `60°` apart, and every `y_j` carries both absent colours.
+
+**Forced by the theorem and its half** (nb4p-half-hnb, § 1.4): some `y_j` lies on an arc of `Γ` on `ω(y_{j+1})`. **And by the mirror**
+(§ 5.4): some `y_{j′}` lies on an arc of `Γ` on `ω(y_{j′−1})`. So a model has unit arcs centred at orbit points through their neighbours in
+both rotational senses: (E2) twice, and (E1) nowhere on the orbit.
+
+**No flower of full petals is a model.** A closed ring arc of `60°` holds a point of every orbit `ψ + 60°ℤ`; a petal of § 3's kind owns such
+an arc; so `hring` fails on every such flower at every `ψ`. More generally a model's arcs of `Γ` on `ω(v)` are each shorter than `60°` and
+placed between orbit points.
+
+**No local obstruction found.** At an (E2) point the arc of `ω(y_{j+1})` through `y_j` separates the ring's two colours there, the one of
+the window toward `y_{j+1}` inside `B(y_{j+1}, 1)`; both are carried at `y_{j+1}` (a change point), the inner one on its clockwise germ,
+which faces `y_j` (the angle between the clockwise tangent at `y_{j+1}` and `y_j − y_{j+1}` is `30°`), the outer one on its
+counter-clockwise germ, which faces away (`210°`): FS112-U1's cones are met. What I did not do is build the fragment: the two same-coloured
+windows next to an orbit point cannot both hug the neighbours' unit circles (a point of `ω(y_2)` near `y_1` and its mirror image on `ω(y_1)`
+near `y_2` are `2 cos t − 1 < 1` apart), so the design is asymmetric and global, and it is not a variation of § 3's object.
+
+**The smallest open form**: *is there a valid six-coloured fragment on a closed unit disc about a four-colour vertex `v` whose ring has no
+arc of `Γ` of its own circle through any point of one `60°`-orbit of change points?* A yes makes `hnb` (in one sense) the live hypothesis
+of `nb4p`; a no makes `hnb` idle and turns `nb4p` into "every `60°`-orbit of a change point of a four-colour vertex meets a closed arc of
+`Γ` on `ω(v)`" — a stronger and simpler theorem, whose proof would have to exclude the (E2) picture. *A step a search could decide*: none
+of fixed size — the object is not a finite configuration; the question is for a deriver.
+
+### 5.4 The mirror: `nb4p` with the second half of `hnb` alone [hand]
+
+Let `G′` be `G` reflected in the real axis through `v` (domain, arcs and colour composed with `z ↦ v + conj(z − v)`); reflection is an
+isometry, so `G′` is valid, covers `B̄(v, 1)` and has the colours of `G` at `v`. `ringPt v θ ↦ ringPt v (−θ)`, counter-clockwise germs
+become clockwise, so `G.IsChangePoint v ψ X X'` gives `G′.IsChangePoint v (−ψ) X' X`. The orbit point `y′_j = ringPt v (−ψ + 60°j)` of `G′`
+is the mirror image of `y_{−j} = y_{6 − j}`, so `G′`'s `hring` is `G`'s, and "`y′_j` is on no arc of `Γ′` on `ω(y′_{j+1})`" is
+"`y_{6−j}` is on no arc of `Γ` on `ω(y_{6−j−1})`": `G′`'s first half of `hnb` is `G`'s second half. Apply nb4p-half-hnb to `G′`.
