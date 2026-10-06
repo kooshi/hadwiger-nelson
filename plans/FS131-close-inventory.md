@@ -6543,3 +6543,38 @@ reason by the close.*
      quotations). (e) The errata lines (three, and D1's) are held for the filing. (f) **Slot → FS131-IF1**
      (Falconer's lemma, by Kooshi's word, item 550), launched 2026-10-06. In flight: 3 (L6A, K10c, IF1) + the
      special-purpose slot (T5).
+
+554. **FS131-K10c, by message: the import is committed — Weil's bound for Kloosterman sums, stated as the page states it;
+     and my own reading of the page against the axiom** (source: K10c's message to "main", 2026-10-06; commit `248f8f4f`
+     on `origin/fs131-w10k`, fetched; its record's Stages 11–13 — the artifact beyond the axiom is read at its
+     hand-back). **The axiom**, read by me at `248f8f4f:Proofs/HadwigerNelson/Arith/WeilKloosterman.lean` ll. 42–53:
+     `StandingFive.kloosterman_bound (F) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 2) (ψ : AddChar F ℂ)
+     (hψ : ∃ x, ψ x ≠ 1) (c d a : F) (h4 : 4 * c * d = a) (ha : a ≠ 0) : ‖∑ x ∈ univ.filter (· ≠ 0), ψ (c * x + d * x⁻¹)‖
+     ≤ 2 * √(card F)`; its docstring names `[Weil1948]`, p. 207's second displayed inequality, and the pages of each
+     hypothesis. **The page, read by me from the held PDF** (pp. 206–207, the image): p. 206, "where ψ is a character of
+     the additive group of k, not everywhere equal to 1 … If the characteristic p of k is not 2, we have d = 2 for
+     R_b(t) = t² − a, a ≠ 0; hence, in that case," p. 207, "|Σψ(x)χ(x² − a)| ≤ 2√q. If, in this, we take for χ the
+     character of k* of order 2 … an elementary transformation shows that the sum in the left-hand side is identical
+     with the so-called Kloosterman sum Σψ(cx + dx⁻¹), for 4cd = a; hence |Σ_{x≠0} ψ(cx + dx⁻¹)| ≤ 2√q, and, in the
+     case of a prime field of p elements, with p ≠ 2: …". **Clause by clause, mine**: finite field of `q` elements —
+     `[Field F] [Fintype F]`, `card F`; characteristic not 2 — `ringChar F ≠ 2`; a character not everywhere 1 —
+     `∃ x, ψ x ≠ 1`; `a ≠ 0` and `4cd = a` — `ha`, `h4`; the sum over `x ≠ 0` — the filter; `2√q` — the bound. The
+     quantification over `c`, `d` is the page's: the transformation it cites holds for every pair with `4cd = a`
+     (checked by me: `cx + d/x = y` has `1 + χ(y² − 4cd)` solutions, so the Kloosterman sum is `Σψ(y) + Σψ(y)χ(y² − a)`
+     and the first term vanishes). **So the axiom says what the page says, and no more**; it is the page's sentence and
+     not `KloostermanBound`, and the translation between the two is a kernel theorem in both directions
+     (`kloostermanBound_of_ringChar_ne_two`, `kloosterman_page_of_kloostermanBound` — read by name, not by proof).
+     **By its word, to be read at its hand-back**: the four items done (the model `kloosterman_bound_model` at `ZMod 3`,
+     with the conclusion proved there with no axiom); eight records under IMPORTED, each on the standard three and the
+     import; the three merges beneath it built with no second-pass head changed; the sentence true by exact arithmetic
+     at nine fields with four faults that fire. **At the landing**: declared outside axioms one → two (or one → one if
+     Falconer's is removed in the same landing), imported records 4 → 12. A slip in print on p. 206, outside the
+     imported sentence, for the bibliography row. **Rulings.** (a) **The import is accepted as stated** — two readings
+     of the page agree with it, the planner's and mine, made separately. Confidence: high. (b) **Wave 10's second
+     landing, FS131-L10B, is cut from `248f8f4f`**, which holds `main` as of its merge, the two floors, the three
+     measure leaves and the import, with no `sorry`: its tidies are the majority vote's two hypotheses and class
+     (ruling 542), `involution_eq_pow`'s docstring (538 (b)), `sp_if`'s docstring naming its model and the one
+     hypothesis left (547 (a)), and what K10c's hand-back adds; it merges `main` again (wave 6's first half, once
+     landed), and **`fs131-t5` and `fs131-wf1` if they are back** — the gate's new step and Falconer's lemma — runs
+     the full gate, lands. It launches after FS131-L6A has handed back: two landings do not run at once. Brief not
+     written.
