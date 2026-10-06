@@ -6067,3 +6067,44 @@ reason by the close.*
      if anything reads it. (f) K10c's brief regenerated with this branch's tip and these notes (`mk-k10c.py
      fs131-w10d=a14f9ab0`; gate exit 0). (g) **Slot → FS131-I10E** (the target at 128), launched 2026-10-06. In
      flight: 1 (I6C) + 1 (I6D) + 1 (I10E) = 3.
+
+539. **FS131-I6C done: `Curve` and `LocalGraph` are proved — all eleven leaves, as stated; the local graph theorem of the
+     bridge (FS131-E8-LOCAL) with its inhabitant on the nine-colour grid** (implementer, Opus; harness 546k by the task
+     notice — past the line, not to be resumed; record `fs131-w6c`'s `plans/FS131-I6C-implementation.md`; report
+     `data/fs131/reports/FS131-I6C.md`; eight commits, tip `d62406a2`; pushed, tree clean). **Proved on the standard
+     three**: `IsUnitCurve.chord`, `.sin_le_inner`, `.strictMonoOn_dist`, `.norm_sub_le`, `.one_le_dist` (the curve
+     stays outside the two unit discs tangent at its start), `lipschitzOnWith_of_chord`,
+     `AeColouring.ae_one_colour_of_isConnected` (FS131-E8-DELTA), `.closure_essBdry_subset`,
+     `.notMem_essBdry_of_mem_densitySet`, and 36 children. **Proved over two leaves of `Pinch` used as stated** (clean
+     once that branch is beneath them): `local_graph` — near an interface point with no cusp, the interface is the graph
+     of a function whose unit tangent is 1-Lipschitz in arclength, the two sides connected and each a.e. of one colour —
+     `AeColouring.local_graph`, three facts on the two tangent discs, and the inhabitant `sq9_exists_isInterfaceChart`.
+     **Its answer to the question asked in its amendment**: `local_graph`'s proof reads disjointness of the two classes
+     at four places through two lemmas, and three of them are false for overlapping sets as they stand — a version on a
+     cover is a different lemma. **My receipt**: tip `d62406a2` equals `origin/fs131-w6c`, tree clean; the last real
+     build's full log (`build/gate/build/20261006T154908Z-1100474.log`, 3 modules rebuilt) ends "Build completed
+     successfully (5811 jobs)", 62 warnings, all `declaration uses sorry` in `FanBridge`, `MapColouring`, `Pinch` (other
+     lines'), none in `Curve` or `LocalGraph`; `sorry` by the handoff's grep in the two files: 0, 0; no `axiom`, no
+     `native_decide`; `axioms-5-final.out` parsed by script — 52 records, 45 on exactly the standard three, 7 with
+     `sorryAx`: the control (`c11_discs`, another line's leaf) and the six it names as wired over `Pinch`'s leaves; the
+     sixteen declarations of the two files at `32f2ab4c` compared head by head — none changed, forty added;
+     `local_graph`'s statement read, and its two uses of `c11_discs` and `essBoundary_inter_eq` found at ll. 239, 757,
+     761; `ARCHITECTURE.md`'s diff is one cell. Not checked by me: the 1,380 added lines beyond the build; that the six
+     wired declarations go clean (the join shows it). **Generalizations** (item 537's two, and: the lens point reads two
+     of four inequalities). **Predictions scored**: the plan priced this line at nine agent-days; it was one job. **Slips,
+     the job's, disclosed**: one build started as a child of a wrapper that returned at once (it ran on and ended exit
+     0; no process left); no token count readable. **Credit**: the large leaf closed in the same job, an arclength
+     reparametrization Mathlib lacks written in fifty lines, and an exact answer on disjointness where one step was
+     expected. **Rulings.** (a) **DELTA's unread `IsOpen W` stays in the statement** (ruling 419 (c)); a generalization
+     for the wave's errata, with the length `π` and the chart's rectangle (its Drafts item 5). (b) **The cover's form of
+     `local_graph` is stated only if a row reads it**: the fourth planner has the answer in its brief. Alternative: ask
+     for it now. Why not: three of its four uses of disjointness fail on a cover, so it is new mathematics, not a
+     restatement. Confidence: high. (c) **The fourth planner's join takes three branches** — `Pinch`, `MapColouring`,
+     and this one — in that order; the six wired declarations' axioms lines are appended there. Brief regenerated
+     (`mk-k6d.py`; gate exit 0). (d) **FS131-I6E's unstarted branch was fast-forwarded to `d62406a2`** (mine, pushed):
+     its five lemmas read the curve facts, and the helpers are cited, not re-declared. Its brief carries a dated
+     amendment (the fast-forward; **it owns the three cell lemmas of a fan and names them in its report**, ruling
+     531 (c); the third planner's hand-back); gate exit 0. (e) **Relayed to FS131-I6D** (running, `FanBridge`'s
+     existence half) by message: `local_graph` stands as stated; what `IsInterfaceChart` does not export is a second
+     chart lemma to ask for, never a change to the structure; five helpers by name, to be merged on request and never
+     re-declared. (f) **Slot → FS131-I6E**, launched 2026-10-06. In flight: 1 (I6D) + 1 (I10E) + 1 (I6E) = 3.

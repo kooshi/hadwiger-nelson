@@ -144,3 +144,23 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-06, at launch) — your branch now holds `Curve` and `LocalGraph` proved, and you own three shared lemmas
+
+Nothing above is withdrawn; three facts changed.
+
+1. **Your branch was fast-forwarded** from `32f2ab4c` to `d62406a2`, the hand-back of the implementer of `Curve` and `LocalGraph`
+   (FS131-I6C, inventory item 539) — your tree was untouched, so nothing of yours moved, and the file you prove in is byte-identical.
+   Every statement of those two modules is as it was; their leaves are now theorems, with helpers you may cite and must not declare again
+   (among them `IsUnitCurve.sin_add_sin_le`, `IsUnitCurve.strictMonoOn_dist_of_le_pi`, `exists_arclength_inverse`,
+   `exists_unit_curve_of_two_discs`, `isConnected_graph_side`). Your statement check is against `d62406a2`; the branch as given now has
+   twenty `sorry` leaves — twelve in the file you share (five yours, seven the other implementer's), seven in `Pinch` and one in
+   `MapColouring`, both proved on other branches. The first build recompiles those two modules and what imports them.
+2. **You own the three cell lemmas of a fan** (ruling 531 (c)): a cell is preconnected; it lies in its colour's density set; it holds the
+   initial part of each ray strictly between its two directions. The plan names them as children of `sector_alone`. Declare each as a
+   lemma of its own under a name of your choice — not inline in a proof — and list the three names in your report: the implementer of a
+   later file (`Centre`) reads the same three and will take them from your branch by ancestry, so that nobody states them twice.
+3. **The wave's third planner has handed back** (inventory item 531): it added four modules downstream of yours on the planner's branch
+   and changed none of your file; its leaves read `Fan.branch_contacts`, `Fan.branch_outside_discs` and `Fan.sector_alone` as they stand,
+   so a statement of yours that turns out false or short of a hypothesis is a message to me at once — and say which kind you have: a
+   *statement* that needs a hypothesis it lacks, or a *route* that reads more than the statement needs (inventory item 526).
