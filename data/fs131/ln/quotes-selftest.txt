@@ -1,0 +1,1 @@
+SELF-TEST OK: 9 plants, one per quoted line, each reported alone at its line
