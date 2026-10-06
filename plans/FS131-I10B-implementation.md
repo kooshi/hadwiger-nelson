@@ -101,3 +101,37 @@ the file. Written: about 330 lines for the two with their toolkit (toolkit 130, 
 (the file imports Mathlib only, so a round is 4 s), one build. At that rate the third leaf is about 250 lines, and the job stays well inside the
 brief's guidance. **Why the plan was high by three**: it priced the derivation's sets and integrals; in the almost-sure normal form there is no
 integral in X25B-P or X25B-PZ at all — Tonelli is used once, inside `ae_nb_iff`.
+
+## Stage 3 — SAVED (FS131-I10B): group 2 — X25B-L1 (`ratio_prod_le_iSup_levels`)
+
+**All three leaves are proved; `StationaryRatio.lean` has no `sorry`.** The leaf in four children, each general in the parameter space `(Z, κ, e)`
+(here `Z = Y`, `κ` the level average, `e u = (0, u)`):
+
+- `majority κ e D = {ω | κ{z | T (e z) ω ∈ D} > 1/2}` — the fibre share above `1/2`. **`ae_majority`, the pigeonhole** (the plan's finding 8, now a
+  proof): if almost surely the shift by `g` joins no two points of `D`, it joins no two points of the majority event — the two parameter sets
+  have measure above `1/2` under one probability, so they meet in positive measure, and a common parameter is an edge inside `D`
+  (`ae_nb_iff` at `C = univ`, `D ∩ T g⁻¹ D`). No integral bound over cosets, and no group structure on `Z`.
+- `measure_le_majority_add`: `P(D) ≤ P(majority) + ∫ P(T_{e z}⁻¹ D ∆ D) dκ(z)` — where at most half the shifts land in `D`, the share is at most
+  the share of shifts that disagree with the origin (Tonelli twice, `prob_compl_eq_one_sub`).
+- `lintegral_prod_conv_cosetAverage`: smoothing by the level average does not change the integral of a function invariant under `K` in the
+  second coordinate (`Measure.lintegral_conv`); with `cosetAverage_preimage_add` (the level average is `K`-invariant) the majority event is
+  a.e.-independent for `ν_X × (ν_Y ∗ m_K)` (`prob_le_ratio_level_add`).
+- **`tendsto_measure_symmDiff_shift`** — a jointly measurable measure-preserving action of a compact second-countable group is continuous at `0`
+  on events, `P(T_u⁻¹ C ∆ C) → 0`. The plan's hard child (`continuous_translate_L1`, bump functions dense by Fubini) is replaced: by stationarity
+  `m(Y) · P(T_u⁻¹ C ∆ C) = ∫ m((u + A_ω) ∆ A_ω) dP(ω)`, `A_ω = {v | T_v ω ∈ C}`; each integrand tends to `0` by Mathlib's
+  `tendsto_measure_symmDiff_preimage_nhds_zero` (translation `u ↦ (u + ·)` is continuous into `C(Y, Y)`, by `ContinuousMap.curry`), boundedly by
+  `m(Y)`, and `𝓝 0` is countably generated: `tendsto_lintegral_filter_of_dominated_convergence`. 70 lines.
+
+The theorem: given `ε`, continuity gives a neighbourhood of `0`, `hK0` a level inside it, and `P(B) ≤ ratio(level) + ε`
+(`ENNReal.le_of_forall_pos_le_add`). **One level suffices, so `hK : Antitone K` is not read**; nor are `[SigmaFinite νX]` (Tonelli is only ever
+applied with `P` or a finite measure in the second slot), `[MeasurableAdd₂ X]`, `[T2Space Y]` (a topological group is regular, and Haar measure
+regular, without it).
+
+**Evidence.** Build: `data/fs131/i10b/logs/build-2-group2.log` — exit 0, 451 batches, 2 modules rebuilt (`Arith.StationaryRatio` 3.9 s, `Proofs`),
+8 m 4 s; **no warning names `StationaryRatio.lean`**; the run's 18 warnings are all `declaration uses 'sorry'` in the wave's other files
+(`CharacterColouring` 1, `SpectralInputs` 8, `StandingFive` 9 — other implementers', open on this branch). Axioms:
+`data/fs131/i10b/axioms-group2.lean`, log `data/fs131/i10b/logs/axioms-group2.log` — 16 records: 15 on a subset of the standard three (the leaf,
+its children, and group 1's two leaves again), and the control (`StandingFive.usable_card_ge`, open on this branch) prints `sorryAx`. Statements:
+`tools/fs131_i10b_statements.py f919973e` — PASS, 11 base declarations and 140 base lines; five faults fire. `scripts/Axioms.lean`: the block now
+holds 36 records. Two Mathlib imports added to the module (`Mathlib.MeasureTheory.Measure.ContinuousPreimage`,
+`Mathlib.MeasureTheory.Integral.Lebesgue.DominatedConvergence`) and `open scoped symmDiff`.

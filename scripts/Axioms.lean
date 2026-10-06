@@ -4827,7 +4827,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.StandingFive.K_le
 #print axioms HadwigerNelson.StandingFive.targetFloor_zero
 
-/-! ## FS-131 wave 10 (job FS131-I10B) — the stationary ratio: X25B-P, X25B-PZ (group 1) -/
+/-! ## FS-131 wave 10 (job FS131-I10B) — the stationary ratio: X25B-P, X25B-PZ (group 1), X25B-L1 (group 2) -/
 -- FS131-I10B
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio
@@ -4853,6 +4853,18 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.aeIndependent_iff
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.pull
 #print axioms HadwigerNelson.StationaryRatio.StationarySet.couple
+#print axioms HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_level_add
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.measurableSet_majority
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.ae_majority
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.measure_le_majority_add
+#print axioms HadwigerNelson.StationaryRatio.cosetAverage_apply
+#print axioms HadwigerNelson.StationaryRatio.cosetAverage.instIsProbabilityMeasure
+#print axioms HadwigerNelson.StationaryRatio.cosetAverage_compl
+#print axioms HadwigerNelson.StationaryRatio.ae_mem_cosetAverage
+#print axioms HadwigerNelson.StationaryRatio.cosetAverage_preimage_add
+#print axioms HadwigerNelson.StationaryRatio.lintegral_prod_conv_cosetAverage
+#print axioms HadwigerNelson.StationaryRatio.tendsto_measure_symmDiff_shift
 
 #eval IO.println "=== PURCHASED ==="
 

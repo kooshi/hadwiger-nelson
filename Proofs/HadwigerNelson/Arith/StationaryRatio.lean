@@ -3,6 +3,8 @@ import Mathlib.MeasureTheory.Group.Convolution
 import Mathlib.MeasureTheory.Measure.Haar.Basic
 import Mathlib.Topology.Algebra.OpenSubgroup
 import Mathlib.Dynamics.Ergodic.MeasurePreserving
+import Mathlib.MeasureTheory.Measure.ContinuousPreimage
+import Mathlib.MeasureTheory.Integral.Lebesgue.DominatedConvergence
 
 /-!
 # The stationary ratio of a Cayley graph on a measurable group (FS-131 wave 10; X25B-PZ, X25B-L1)
@@ -33,6 +35,8 @@ and σ-finite symmetric `ν`, a wider class than the entry's "LCA Cayley graphs"
 namespace HadwigerNelson.StationaryRatio
 
 open MeasureTheory
+
+open scoped symmDiff
 
 /-- **A stationary random set in `G`**: a probability space with a jointly measurable measure-preserving action of `G` and an
 event `B`; the random set is `W_ω = {x | T x ω ∈ B}`. -/
@@ -448,6 +452,270 @@ noncomputable def cosetAverage {Y : Type*} [AddCommGroup Y] [TopologicalSpace Y]
     [LocallyCompactSpace Y] [MeasurableSpace Y] [BorelSpace Y] (K : OpenAddSubgroup Y) : Measure Y :=
   (Measure.addHaar (K : Set Y))⁻¹ • (Measure.addHaar : Measure Y).restrict (K : Set Y)
 
+/-! ## The majority event and the level average (FS131-I10B) -/
+
+namespace StationarySet
+
+variable (W : StationarySet G) {Z : Type*} [MeasurableSpace Z] (κ : Measure Z) {e : Z → G} {D : Set W.Ω}
+
+/-- The event "more than half of the shifts `T (e z)`, `z` drawn from `κ`, land in `D`": for `κ` the Haar probability of a
+subgroup, the fibre share above `1/2`. -/
+def majority (W : StationarySet G) {Z : Type*} [MeasurableSpace Z] (κ : Measure Z) (e : Z → G) (D : Set W.Ω) :
+    Set W.Ω :=
+  {ω | 2⁻¹ < κ {z | W.T (e z) ω ∈ D}}
+
+theorem measurableSet_majority [SFinite κ] (he : Measurable e) (hD : MeasurableSet D) :
+    MeasurableSet (W.majority κ e D) :=
+  measurableSet_lt measurable_const (measurable_measure_prodMk_right (W.measurable_T_comp he hD))
+
+/-- **The pigeonhole**: if almost surely the shift by `g` joins no two points of `D`, it joins no two points of the
+majority event — two majorities under one probability meet, and a common parameter gives an edge inside `D`. -/
+theorem ae_majority [IsProbabilityMeasure κ] (he : Measurable e) (hD : MeasurableSet D) {g : G}
+    (h : ∀ᵐ ω ∂W.P, ω ∈ D → W.T g ω ∉ D) :
+    ∀ᵐ ω ∂W.P, ω ∈ W.majority κ e D → W.T g ω ∉ W.majority κ e D := by
+  have hD' : MeasurableSet (D ∩ W.T g ⁻¹' D) := hD.inter (W.measurable_T_apply g hD)
+  have h0 : ∀ᵐ ω ∂W.P, ω ∈ (Set.univ : Set W.Ω) → ω ∉ W.nb κ e (D ∩ W.T g ⁻¹' D) := by
+    refine (W.ae_nb_iff κ he MeasurableSet.univ hD').mpr (Filter.Eventually.of_forall fun z => ?_)
+    have h1 : ∀ᵐ ω ∂W.P, ω ∉ D ∩ W.T g ⁻¹' D := by
+      filter_upwards [h] with ω hω hω'
+      exact hω hω'.1 hω'.2
+    have h2 := (W.ae_T_iff (e z) (p := fun ω => ω ∉ D ∩ W.T g ⁻¹' D)).mpr h1
+    filter_upwards [h2] with ω hω _
+    exact hω
+  filter_upwards [h0] with ω hω hmaj hmaj'
+  have hnull : κ ({z | W.T (e z) ω ∈ D} ∩ {z | W.T (e z) (W.T g ω) ∈ D}) = 0 := by
+    have h3 := (W.notMem_nb_iff κ).mp (hω (Set.mem_univ ω))
+    refine measure_mono_null ?_ (ae_iff.mp h3)
+    rintro z ⟨hz1, hz2⟩
+    simp only [Set.mem_setOf_eq, not_not]
+    refine ⟨hz1, ?_⟩
+    show W.T g (W.T (e z) ω) ∈ D
+    rw [← W.T_add_apply, add_comm, W.T_add_apply]
+    exact hz2
+  have hS2 : MeasurableSet {z | W.T (e z) (W.T g ω) ∈ D} := W.measurable_T_left he _ hD
+  have hsum := measure_union_add_inter (μ := κ) {z | W.T (e z) ω ∈ D} hS2
+  rw [hnull, add_zero] at hsum
+  have hle : κ ({z | W.T (e z) ω ∈ D} ∪ {z | W.T (e z) (W.T g ω) ∈ D}) ≤ 1 := prob_le_one
+  rw [hsum] at hle
+  have hlt : (1 : ENNReal) < 1 :=
+    calc (1 : ENNReal) = 2⁻¹ + 2⁻¹ := ENNReal.inv_two_add_inv_two.symm
+      _ < κ {z | W.T (e z) ω ∈ D} + κ {z | W.T (e z) (W.T g ω) ∈ D} := ENNReal.add_lt_add hmaj hmaj'
+      _ ≤ 1 := hle
+  exact lt_irrefl _ hlt
+
+/-- **The mass of the majority event**: `P(D) ≤ P(majority) + ∫ P(T_{e z}⁻¹ D ∆ D) dκ(z)` — where at most half of the
+shifts land in `D`, the share is at most the share of shifts that disagree with the origin. -/
+theorem measure_le_majority_add [IsProbabilityMeasure κ] (he : Measurable e) (hD : MeasurableSet D) :
+    W.P D ≤ W.P (W.majority κ e D) + ∫⁻ z, W.P ((W.T (e z) ⁻¹' D) ∆ D) ∂κ := by
+  have hE1 : MeasurableSet {p : Z × W.Ω | W.T (e p.1) p.2 ∈ D} := W.measurable_T_comp he hD
+  have hE2 : MeasurableSet {p : Z × W.Ω | p.2 ∈ (W.T (e p.1) ⁻¹' D) ∆ D} := by
+    have : {p : Z × W.Ω | p.2 ∈ (W.T (e p.1) ⁻¹' D) ∆ D}
+        = {p : Z × W.Ω | W.T (e p.1) p.2 ∈ D} ∆ (Prod.snd ⁻¹' D) := by
+      ext p
+      simp only [Set.mem_setOf_eq, Set.mem_symmDiff, Set.mem_preimage]
+    rw [this]
+    exact hE1.symmDiff (measurable_snd hD)
+  have hJ := W.measurableSet_majority κ he hD
+  have e1 : W.P D = ∫⁻ ω, κ {z | W.T (e z) ω ∈ D} ∂W.P :=
+    calc W.P D = ∫⁻ _, W.P D ∂κ := by rw [lintegral_const, measure_univ, mul_one]
+      _ = ∫⁻ z, W.P (Prod.mk z ⁻¹' {p : Z × W.Ω | W.T (e p.1) p.2 ∈ D}) ∂κ :=
+          lintegral_congr fun z => ((W.preserving (e z)).measure_preimage hD.nullMeasurableSet).symm
+      _ = (κ.prod W.P) {p : Z × W.Ω | W.T (e p.1) p.2 ∈ D} := (Measure.prod_apply hE1).symm
+      _ = ∫⁻ ω, κ {z | W.T (e z) ω ∈ D} ∂W.P := Measure.prod_apply_symm hE1
+  have e2 : ∫⁻ z, W.P ((W.T (e z) ⁻¹' D) ∆ D) ∂κ = ∫⁻ ω, κ {z | ω ∈ (W.T (e z) ⁻¹' D) ∆ D} ∂W.P :=
+    calc ∫⁻ z, W.P ((W.T (e z) ⁻¹' D) ∆ D) ∂κ
+        = (κ.prod W.P) {p : Z × W.Ω | p.2 ∈ (W.T (e p.1) ⁻¹' D) ∆ D} := (Measure.prod_apply hE2).symm
+      _ = ∫⁻ ω, κ {z | ω ∈ (W.T (e z) ⁻¹' D) ∆ D} ∂W.P := Measure.prod_apply_symm hE2
+  rw [e1, e2, ← lintegral_indicator_one hJ, ← lintegral_add_left (measurable_one.indicator hJ)]
+  refine lintegral_mono fun ω => ?_
+  by_cases hω : ω ∈ W.majority κ e D
+  · rw [Set.indicator_of_mem hω]
+    exact le_add_right prob_le_one
+  · rw [Set.indicator_of_notMem hω, zero_add]
+    have hhalf : κ {z | W.T (e z) ω ∈ D} ≤ 2⁻¹ := not_lt.mp hω
+    by_cases hωD : ω ∈ D
+    · have hS : MeasurableSet {z | W.T (e z) ω ∈ D} := W.measurable_T_left he ω hD
+      calc κ {z | W.T (e z) ω ∈ D} ≤ 2⁻¹ := hhalf
+        _ = 1 - 2⁻¹ := ENNReal.one_sub_inv_two.symm
+        _ ≤ 1 - κ {z | W.T (e z) ω ∈ D} := tsub_le_tsub_left hhalf 1
+        _ = κ {z | W.T (e z) ω ∈ D}ᶜ := (prob_compl_eq_one_sub hS).symm
+        _ ≤ κ {z | ω ∈ (W.T (e z) ⁻¹' D) ∆ D} :=
+            measure_mono fun z hz => Set.mem_symmDiff.mpr (Or.inr ⟨hωD, hz⟩)
+    · exact measure_mono fun z hz => Set.mem_symmDiff.mpr (Or.inl ⟨hz, hωD⟩)
+
+end StationarySet
+
+section CosetAverage
+
+variable {Y : Type*} [AddCommGroup Y] [TopologicalSpace Y] [IsTopologicalAddGroup Y] [LocallyCompactSpace Y]
+  [MeasurableSpace Y] [BorelSpace Y] (K : OpenAddSubgroup Y)
+
+theorem cosetAverage_apply {S : Set Y} (hS : MeasurableSet S) :
+    cosetAverage K S = (Measure.addHaar (K : Set Y))⁻¹ * Measure.addHaar (S ∩ (K : Set Y)) := by
+  rw [cosetAverage, Measure.smul_apply, Measure.restrict_apply hS, smul_eq_mul]
+
+/-- The level average is a probability measure (`Y` compact: Haar measure is finite, and positive on the open `K`). -/
+instance cosetAverage.instIsProbabilityMeasure [CompactSpace Y] : IsProbabilityMeasure (cosetAverage K) := by
+  refine ⟨?_⟩
+  rw [cosetAverage_apply K MeasurableSet.univ, Set.univ_inter]
+  exact ENNReal.inv_mul_cancel (K.isOpen.measure_pos _ ⟨0, K.zero_mem⟩).ne' (measure_ne_top _ _)
+
+/-- It is carried by `K`. -/
+theorem cosetAverage_compl : cosetAverage K ((K : Set Y)ᶜ) = 0 := by
+  rw [cosetAverage_apply K K.isOpen.measurableSet.compl, Set.compl_inter_self, measure_empty, mul_zero]
+
+theorem ae_mem_cosetAverage : ∀ᵐ u ∂cosetAverage K, u ∈ (K : Set Y) := by
+  rw [ae_iff]
+  exact cosetAverage_compl K
+
+/-- It is invariant under translation by an element of `K`. -/
+theorem cosetAverage_preimage_add {u : Y} (hu : u ∈ K) {S : Set Y} (hS : MeasurableSet S) :
+    cosetAverage K ((fun v => u + v) ⁻¹' S) = cosetAverage K S := by
+  rw [cosetAverage_apply K (measurable_const_add u hS), cosetAverage_apply K hS]
+  have h : (fun v => u + v) ⁻¹' S ∩ (K : Set Y) = (fun v => u + v) ⁻¹' (S ∩ (K : Set Y)) := by
+    ext v
+    have hcancel : u + v ∈ (K : AddSubgroup Y) ↔ v ∈ (K : AddSubgroup Y) :=
+      (K : AddSubgroup Y).add_mem_cancel_left hu
+    exact and_congr_right fun _ => hcancel.symm
+  rw [h, measure_preimage_add]
+
+/-- **Smoothing by the level average** does not change the integral of a function invariant under `K` in the second
+coordinate. -/
+theorem lintegral_prod_conv_cosetAverage [CompactSpace Y] [SecondCountableTopology Y] {X : Type*} [MeasurableSpace X]
+    (νX : Measure X) (νY : Measure Y) [SFinite νY] {q : X × Y → ENNReal} (hq : Measurable q)
+    (hinv : ∀ s y, ∀ u ∈ K, q (s, y + u) = q (s, y)) :
+    ∫⁻ p, q p ∂(νX.prod (Measure.conv νY (cosetAverage K))) = ∫⁻ p, q p ∂(νX.prod νY) := by
+  rw [lintegral_prod _ hq.aemeasurable, lintegral_prod _ hq.aemeasurable]
+  refine lintegral_congr fun s => ?_
+  have hqs : Measurable fun y => q (s, y) := hq.comp measurable_prodMk_left
+  rw [Measure.lintegral_conv hqs]
+  refine lintegral_congr fun y => ?_
+  have hae : ∀ᵐ u ∂cosetAverage K, q (s, y + u) = q (s, y) := by
+    filter_upwards [ae_mem_cosetAverage K] with u hu using hinv s y u hu
+  rw [lintegral_congr_ae hae, lintegral_const, measure_univ, mul_one]
+
+/-- **A jointly measurable measure-preserving action of a compact second-countable group is `L¹`-continuous at `0`** on
+events: by stationarity `P(T_u⁻¹ C ∆ C)` is the mean over `ω` of the Haar measure of `(u + A_ω) ∆ A_ω`,
+`A_ω = {v | T_v ω ∈ C}`, and each of these tends to `0` (translation is continuous in measure), boundedly. -/
+theorem tendsto_measure_symmDiff_shift [CompactSpace Y] [SecondCountableTopology Y] (V : StationarySet Y)
+    {C : Set V.Ω} (hC : MeasurableSet C) :
+    Filter.Tendsto (fun u => V.P ((V.T u ⁻¹' C) ∆ C)) (nhds 0) (nhds 0) := by
+  -- translation by `u`, as a continuous map, continuous in `u`
+  let f : Y → C(Y, Y) := fun u => ⟨fun v => u + v, continuous_const.add continuous_id⟩
+  have hf : Continuous f := (ContinuousMap.curry ⟨fun p : Y × Y => p.1 + p.2, continuous_add⟩).continuous
+  have hf0 : f 0 = ContinuousMap.id Y := by
+    ext v
+    simp [f]
+  have hpt : ∀ S : Set Y, MeasurableSet S →
+      Filter.Tendsto (fun u => (Measure.addHaar : Measure Y) (((fun v => u + v) ⁻¹' S) ∆ S)) (nhds 0) (nhds 0) := by
+    intro S hS
+    have h := tendsto_measure_symmDiff_preimage_nhds_zero (μ := (Measure.addHaar : Measure Y))
+      (ν := (Measure.addHaar : Measure Y)) (f := f) (g := ContinuousMap.id Y) (l := nhds 0) (s := S)
+      (by rw [← hf0]; exact hf.tendsto 0)
+      (Filter.Eventually.of_forall fun u => measurePreserving_add_left _ u) (MeasurePreserving.id _)
+      hS.nullMeasurableSet (measure_ne_top _ _)
+    simpa [f] using h
+  have hE : ∀ u, MeasurableSet {p : Y × V.Ω | V.T p.1 p.2 ∈ (V.T u ⁻¹' C) ∆ C} := fun u =>
+    V.measurable_T ((V.measurable_T_apply u hC).symmDiff hC)
+  have hsec : ∀ u ω, (fun v => (v, ω)) ⁻¹' {p : Y × V.Ω | V.T p.1 p.2 ∈ (V.T u ⁻¹' C) ∆ C}
+      = ((fun v => u + v) ⁻¹' {v | V.T v ω ∈ C}) ∆ {v | V.T v ω ∈ C} := by
+    intro u ω
+    ext v
+    simp only [Set.mem_preimage, Set.mem_setOf_eq, Set.mem_symmDiff, V.T_add_apply]
+  have hint : ∀ u, ∫⁻ ω, (Measure.addHaar : Measure Y)
+        ((fun v => (v, ω)) ⁻¹' {p : Y × V.Ω | V.T p.1 p.2 ∈ (V.T u ⁻¹' C) ∆ C}) ∂V.P
+      = (Measure.addHaar : Measure Y) Set.univ * V.P ((V.T u ⁻¹' C) ∆ C) := by
+    intro u
+    calc ∫⁻ ω, (Measure.addHaar : Measure Y)
+          ((fun v => (v, ω)) ⁻¹' {p : Y × V.Ω | V.T p.1 p.2 ∈ (V.T u ⁻¹' C) ∆ C}) ∂V.P
+        = ((Measure.addHaar : Measure Y).prod V.P) {p : Y × V.Ω | V.T p.1 p.2 ∈ (V.T u ⁻¹' C) ∆ C} :=
+          (Measure.prod_apply_symm (hE u)).symm
+      _ = ∫⁻ v, V.P (Prod.mk v ⁻¹' {p : Y × V.Ω | V.T p.1 p.2 ∈ (V.T u ⁻¹' C) ∆ C}) ∂Measure.addHaar :=
+          Measure.prod_apply (hE u)
+      _ = ∫⁻ _, V.P ((V.T u ⁻¹' C) ∆ C) ∂(Measure.addHaar : Measure Y) :=
+          lintegral_congr fun v => (V.preserving v).measure_preimage
+            ((V.measurable_T_apply u hC).symmDiff hC).nullMeasurableSet
+      _ = (Measure.addHaar : Measure Y) Set.univ * V.P ((V.T u ⁻¹' C) ∆ C) := by
+          rw [lintegral_const, mul_comm]
+  have hlim : Filter.Tendsto (fun u => ∫⁻ ω, (Measure.addHaar : Measure Y)
+      ((fun v => (v, ω)) ⁻¹' {p : Y × V.Ω | V.T p.1 p.2 ∈ (V.T u ⁻¹' C) ∆ C}) ∂V.P) (nhds 0)
+      (nhds (∫⁻ _, 0 ∂V.P)) := by
+    refine tendsto_lintegral_filter_of_dominated_convergence (fun _ => (Measure.addHaar : Measure Y) Set.univ)
+      (Filter.Eventually.of_forall fun u => measurable_measure_prodMk_right (hE u))
+      (Filter.Eventually.of_forall fun u => Filter.Eventually.of_forall fun ω => measure_mono (Set.subset_univ _))
+      ?_ (Filter.Eventually.of_forall fun ω => ?_)
+    · rw [lintegral_const, measure_univ (μ := V.P), mul_one]
+      exact measure_ne_top _ _
+    · simp only [hsec]
+      exact hpt _ (V.measurable_T_left measurable_id ω hC)
+  simp only [hint, lintegral_zero] at hlim
+  have hm0 : (Measure.addHaar : Measure Y) Set.univ ≠ 0 :=
+    (isOpen_univ.measure_pos (Measure.addHaar : Measure Y) ⟨0, trivial⟩).ne'
+  have hmt : (Measure.addHaar : Measure Y) Set.univ ≠ ⊤ := measure_ne_top _ _
+  have h := ENNReal.Tendsto.const_mul (a := ((Measure.addHaar : Measure Y) Set.univ)⁻¹) hlim
+    (Or.inr (ENNReal.inv_ne_top.mpr hm0))
+  simpa only [← mul_assoc, ENNReal.inv_mul_cancel hm0 hmt, one_mul, mul_zero] using h
+
+end CosetAverage
+
+/-- X25B-L1 at one stationary set and one level: the majority event of the level is a.e.-independent for the smoothed
+measure, and carries all of `P(B)` but the mean displacement over the level. -/
+theorem StationarySet.prob_le_ratio_level_add {X Y : Type*} [AddCommGroup X] [MeasurableSpace X] [AddCommGroup Y]
+    [TopologicalSpace Y] [IsTopologicalAddGroup Y] [CompactSpace Y] [LocallyCompactSpace Y]
+    [SecondCountableTopology Y] [MeasurableSpace Y] [BorelSpace Y] (νX : Measure X) (νY : Measure Y)
+    [IsFiniteMeasure νY] (K : OpenAddSubgroup Y) (W : StationarySet (X × Y)) (hW : W.AEIndependent (νX.prod νY)) :
+    W.P W.B ≤ ratio (νX.prod (Measure.conv νY (cosetAverage K)))
+      + ∫⁻ u, W.P ((W.T (0, u) ⁻¹' W.B) ∆ W.B) ∂cosetAverage K := by
+  have hB := W.measurableSet_B
+  have he : Measurable fun u : Y => ((0 : X), u) := measurable_const.prodMk measurable_id
+  -- `J`: the fibre share over `K` exceeds `1/2`.
+  obtain ⟨J, hJdef⟩ : ∃ J, J = W.majority (cosetAverage K) (fun u : Y => ((0 : X), u)) W.B := ⟨_, rfl⟩
+  have hJ : MeasurableSet J := hJdef ▸ W.measurableSet_majority _ he hB
+  have hW' := (W.aeIndependent_iff _).mp hW
+  -- (1) `J` is a.e.-independent for `ν_X × ν_Y` (the pigeonhole) …
+  have hJ1 : ∀ᵐ p ∂(νX.prod νY), ∀ᵐ ω ∂W.P, ω ∈ J → W.T p ω ∉ J := by
+    filter_upwards [hW'] with p hp
+    rw [hJdef]
+    exact W.ae_majority _ he hB hp
+  -- (2) … and invariant under `K` …
+  have hinv : ∀ u ∈ K, ∀ ω, W.T (0, u) ω ∈ J ↔ ω ∈ J := by
+    intro u hu ω
+    rw [hJdef]
+    show 2⁻¹ < cosetAverage K {v | W.T ((0 : X), v) (W.T (0, u) ω) ∈ W.B} ↔
+      2⁻¹ < cosetAverage K {v | W.T ((0 : X), v) ω ∈ W.B}
+    have h : {v : Y | W.T ((0 : X), v) (W.T (0, u) ω) ∈ W.B}
+        = (fun v => u + v) ⁻¹' {v | W.T ((0 : X), v) ω ∈ W.B} := by
+      ext v
+      simp only [Set.mem_setOf_eq, Set.mem_preimage]
+      rw [← W.T_add_apply, show ((0 : X), v) + (0, u) = (0, u + v) by simp [add_comm]]
+    have h' := cosetAverage_preimage_add K hu (S := {v | W.T ((0 : X), v) ω ∈ W.B}) (W.measurable_T_left he ω hB)
+    rw [h, h']
+  -- (3) … so it is a.e.-independent for the smoothed measure.
+  have hqinv : ∀ s y, ∀ u ∈ K, W.P (J ∩ W.T (s, y + u) ⁻¹' J) = W.P (J ∩ W.T (s, y) ⁻¹' J) := by
+    intro s y u hu
+    congr 1
+    ext ω
+    have h : W.T (s, y + u) ω = W.T (0, u) (W.T (s, y) ω) := by
+      rw [← W.T_add_apply, show ((0 : X), u) + (s, y) = (s, y + u) by simp [add_comm]]
+    simp only [Set.mem_inter_iff, Set.mem_preimage, h, hinv u hu]
+  have hJ2 : (W.pull (AddMonoidHom.id (X × Y)) measurable_id J hJ).AEIndependent
+      (νX.prod (Measure.conv νY (cosetAverage K))) := by
+    show ((νX.prod (Measure.conv νY (cosetAverage K))).prod W.P) {p : (X × Y) × W.Ω | p.2 ∈ J ∧ W.T p.1 p.2 ∈ J} = 0
+    calc ((νX.prod (Measure.conv νY (cosetAverage K))).prod W.P) {p : (X × Y) × W.Ω | p.2 ∈ J ∧ W.T p.1 p.2 ∈ J}
+        = ∫⁻ p, W.P (J ∩ W.T p ⁻¹' J) ∂(νX.prod (Measure.conv νY (cosetAverage K))) :=
+          W.prod_apply_corr _ measurable_id hJ hJ
+      _ = ∫⁻ p, W.P (J ∩ W.T p ⁻¹' J) ∂(νX.prod νY) :=
+          lintegral_prod_conv_cosetAverage K νX νY (W.measurable_corr measurable_id hJ hJ) hqinv
+      _ = ((νX.prod νY).prod W.P) {p : (X × Y) × W.Ω | p.2 ∈ J ∧ W.T p.1 p.2 ∈ J} :=
+          (W.prod_apply_corr _ measurable_id hJ hJ).symm
+      _ = 0 := (W.prod_null_iff (νX.prod νY) measurable_id hJ hJ).mpr hJ1
+  -- the mass.
+  have hPJ : W.P J ≤ ratio (νX.prod (Measure.conv νY (cosetAverage K))) :=
+    (W.pull (AddMonoidHom.id (X × Y)) measurable_id J hJ).prob_le_ratio hJ2
+  have hmass := W.measure_le_majority_add (cosetAverage K) he hB
+  rw [← hJdef] at hmass
+  exact hmass.trans (add_le_add_left hPJ _)
+
 /-- **X25B-L1**: "a profinite factor's stationary ratio in a product is at most the supremum over its finite levels (fibre
 shares above `1/2` form an a.e.-independent set)". `Y` compact with open subgroups `K k` shrinking to `0`; the level-`k` graph is
 `X × Y` with `ν_Y` smoothed by the Haar probability of `K k` (the pull-back of `X × Y/K_k`). -/
@@ -457,7 +725,32 @@ theorem ratio_prod_le_iSup_levels {X Y : Type*} [AddCommGroup X] [MeasurableSpac
     [IsFiniteMeasure νY] (K : ℕ → OpenAddSubgroup Y) (hK : Antitone K)
     (hK0 : ∀ V ∈ nhds (0 : Y), ∃ k, (K k : Set Y) ⊆ V) :
     ratio (νX.prod νY) ≤ ⨆ k, ratio (νX.prod (Measure.conv νY (cosetAverage (K k)))) := by
-  sorry
+  -- Not read by the proof (FS131-I10B, findings): `MeasurableAdd₂ X`, `SigmaFinite νX`, `T2Space Y`, and that `K` is
+  -- antitone — one level inside a small neighbourhood of `0` is enough. Consumed here for the unused-arguments linters.
+  have _ := ‹MeasurableAdd₂ X›
+  have _ := ‹SigmaFinite νX›
+  have _ := ‹T2Space Y›
+  have _ := hK
+  refine iSup₂_le fun W hW => ?_
+  refine ENNReal.le_of_forall_pos_le_add fun ε hε _ => ?_
+  have hB := W.measurableSet_B
+  have hinr : Measurable (AddMonoidHom.inr X Y) := by
+    show Measurable fun u : Y => ((0 : X), u)
+    exact measurable_const.prodMk measurable_id
+  -- the `Y`-action is continuous at `0` on the event: a level `k` inside the `ε`-neighbourhood.
+  have hcont : Filter.Tendsto (fun u : Y => W.P ((W.T (0, u) ⁻¹' W.B) ∆ W.B)) (nhds 0) (nhds 0) :=
+    tendsto_measure_symmDiff_shift (W.pull (AddMonoidHom.inr X Y) hinr W.B hB) hB
+  have hU : {u : Y | W.P ((W.T (0, u) ⁻¹' W.B) ∆ W.B) < ε} ∈ nhds (0 : Y) :=
+    hcont (Iio_mem_nhds (ENNReal.coe_pos.mpr hε))
+  obtain ⟨k, hk⟩ := hK0 _ hU
+  have hint : ∫⁻ u, W.P ((W.T (0, u) ⁻¹' W.B) ∆ W.B) ∂cosetAverage (K k) ≤ ε :=
+    calc ∫⁻ u, W.P ((W.T (0, u) ⁻¹' W.B) ∆ W.B) ∂cosetAverage (K k)
+        ≤ ∫⁻ _, (ε : ENNReal) ∂cosetAverage (K k) := by
+          refine lintegral_mono_ae ?_
+          filter_upwards [ae_mem_cosetAverage (K k)] with u hu using (hk hu).le
+      _ = ε := by rw [lintegral_const, measure_univ, mul_one]
+  exact (W.prob_le_ratio_level_add νX νY (K k) hW).trans
+    (add_le_add (le_iSup (fun k => ratio (νX.prod (Measure.conv νY (cosetAverage (K k))))) k) hint)
 
 /-! ## Spec -/
 
