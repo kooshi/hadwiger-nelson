@@ -1,0 +1,16 @@
+origin/main at 2026-10-06T18:31:26Z: aed29ad474515809c98afe82798db1654393ea5e; merged at the gate: ac2e84ea
+--- git diff --name-status ac2e84ea aed29ad474515809c98afe82798db1654393ea5e
+M	LEAN.md
+M	data/fs131/briefs/FS131-I6Z-wave6-third.md
+M	data/fs131/briefs/FS131-I7A-wave7-first.md
+M	data/fs131/briefs/scripts/mk-i6k.py
+M	plans/FS131-close-inventory.md
+M	plans/SESSION-HANDOFF-2026-10-06.md
+--- outside plans/ data/ .claude/ BIBLIOGRAPHY.md LEDGER.md LEAN.md:
+(end)
+--- commits:
+aed29ad4 FS-131: inventory item 557 (wave 6's landing, before its gated commit: the join whole; two questions answered); handoff current
+4f090f58 FS-131: inventory item 556 (a skeleton defect found by wave 7's implementer: four leaves stated without a section variable; ruled; the Lean fact filed; a sweep of the open skeletons); handoff
+d284919c FS-131: handoff — the queue's order brought current
+3d88b2f8 FS-131: inventory item 555 (wave 10's third planner back: receipt and rulings; wave 7's route-T implementer launched); handoff current
+309f4de5 FS-131: inventory item 554 (wave 10's third planner, mid-job: the import committed; the page read against the axiom by a second reader); handoff current
