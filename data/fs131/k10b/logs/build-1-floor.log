@@ -1,0 +1,560 @@
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261006T122017Z-3946335.log
+==> up-to-date check: exit 3 after 2s (3 means something needs building) — walking the batches
+==> 454 batches of at most 4 modules, capped at 40G
+==> [1/454] 4 modules  07:20:19
+==> [2/454] 4 modules  07:20:20
+    ⚠ [2905/2968] Replayed Proofs.HadwigerNelson.Arith.StationaryRatio
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:100:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:107:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:121:8: declaration uses `sorry`
+    rebuilt: Arith.RatioBound (2.0s)
+==> [3/454] 4 modules  07:20:24
+==> [4/454] 4 modules  07:20:24
+==> [5/454] 4 modules  07:20:25
+==> [6/454] 3 modules  07:20:26
+==> [7/454] 4 modules  07:20:26
+==> [8/454] 4 modules  07:20:27
+==> [9/454] 4 modules  07:20:28
+==> [10/454] 4 modules  07:20:29
+==> [11/454] 4 modules  07:20:30
+==> [12/454] 4 modules  07:20:30
+==> [13/454] 4 modules  07:20:31
+==> [14/454] 4 modules  07:20:31
+==> [15/454] 4 modules  07:20:32
+==> [16/454] 4 modules  07:20:32
+==> [17/454] 4 modules  07:20:33
+==> [18/454] 4 modules  07:20:33
+==> [19/454] 4 modules  07:20:34
+==> [20/454] 4 modules  07:20:34
+==> [21/454] 4 modules  07:20:35
+==> [22/454] 4 modules  07:20:36
+==> [23/454] 4 modules  07:20:36
+==> [24/454] 4 modules  07:20:37
+==> [25/454] 4 modules  07:20:38
+==> [26/454] 4 modules  07:20:38
+==> [27/454] 4 modules  07:20:39
+==> [28/454] 4 modules  07:20:39
+==> [29/454] 4 modules  07:20:40
+==> [30/454] 4 modules  07:20:40
+==> [31/454] 1 modules  07:20:41
+==> [32/454] 4 modules  07:20:42
+==> [33/454] 4 modules  07:20:43
+==> [34/454] 4 modules  07:20:44
+==> [35/454] 4 modules  07:20:44
+==> [36/454] 4 modules  07:20:45
+==> [37/454] 4 modules  07:20:46
+==> [38/454] 1 modules  07:20:47
+==> [39/454] 4 modules  07:20:48
+==> [40/454] 4 modules  07:20:49
+==> [41/454] 4 modules  07:20:49
+==> [42/454] 4 modules  07:20:50
+==> [43/454] 4 modules  07:20:51
+==> [44/454] 4 modules  07:20:51
+==> [45/454] 4 modules  07:20:52
+==> [46/454] 2 modules  07:20:53
+==> [47/454] 4 modules  07:20:54
+==> [48/454] 4 modules  07:20:55
+==> [49/454] 4 modules  07:20:56
+==> [50/454] 4 modules  07:20:57
+==> [51/454] 4 modules  07:20:57
+==> [52/454] 4 modules  07:20:58
+==> [53/454] 4 modules  07:20:59
+==> [54/454] 1 modules  07:21:00
+==> [55/454] 4 modules  07:21:01
+==> [56/454] 4 modules  07:21:02
+==> [57/454] 4 modules  07:21:02
+==> [58/454] 4 modules  07:21:03
+==> [59/454] 4 modules  07:21:04
+==> [60/454] 4 modules  07:21:05
+==> [61/454] 4 modules  07:21:06
+==> [62/454] 4 modules  07:21:07
+==> [63/454] 4 modules  07:21:08
+==> [64/454] 4 modules  07:21:09
+==> [65/454] 4 modules  07:21:09
+==> [66/454] 4 modules  07:21:10
+==> [67/454] 4 modules  07:21:11
+==> [68/454] 4 modules  07:21:12
+==> [69/454] 4 modules  07:21:13
+==> [70/454] 4 modules  07:21:14
+==> [71/454] 4 modules  07:21:14
+==> [72/454] 4 modules  07:21:15
+==> [73/454] 4 modules  07:21:16
+==> [74/454] 4 modules  07:21:17
+==> [75/454] 4 modules  07:21:18
+==> [76/454] 4 modules  07:21:18
+==> [77/454] 4 modules  07:21:19
+==> [78/454] 4 modules  07:21:20
+==> [79/454] 4 modules  07:21:21
+==> [80/454] 4 modules  07:21:22
+==> [81/454] 4 modules  07:21:23
+==> [82/454] 4 modules  07:21:24
+==> [83/454] 4 modules  07:21:24
+==> [84/454] 4 modules  07:21:25
+==> [85/454] 4 modules  07:21:26
+==> [86/454] 4 modules  07:21:27
+==> [87/454] 4 modules  07:21:28
+==> [88/454] 4 modules  07:21:28
+==> [89/454] 4 modules  07:21:29
+==> [90/454] 4 modules  07:21:30
+==> [91/454] 4 modules  07:21:31
+==> [92/454] 4 modules  07:21:32
+==> [93/454] 4 modules  07:21:32
+==> [94/454] 4 modules  07:21:33
+==> [95/454] 4 modules  07:21:34
+==> [96/454] 4 modules  07:21:35
+==> [97/454] 4 modules  07:21:36
+==> [98/454] 4 modules  07:21:36
+==> [99/454] 4 modules  07:21:37
+==> [100/454] 4 modules  07:21:38
+==> [101/454] 4 modules  07:21:39
+==> [102/454] 4 modules  07:21:40
+==> [103/454] 4 modules  07:21:41
+==> [104/454] 4 modules  07:21:41
+==> [105/454] 4 modules  07:21:42
+==> [106/454] 4 modules  07:21:42
+==> [107/454] 4 modules  07:21:43
+==> [108/454] 3 modules  07:21:44
+==> [109/454] 4 modules  07:21:45
+==> [110/454] 4 modules  07:21:46
+==> [111/454] 4 modules  07:21:47
+==> [112/454] 4 modules  07:21:48
+==> [113/454] 4 modules  07:21:49
+==> [114/454] 4 modules  07:21:50
+==> [115/454] 4 modules  07:21:51
+==> [116/454] 4 modules  07:21:53
+==> [117/454] 4 modules  07:21:54
+==> [118/454] 4 modules  07:21:55
+==> [119/454] 4 modules  07:21:56
+==> [120/454] 4 modules  07:21:57
+==> [121/454] 4 modules  07:21:58
+==> [122/454] 4 modules  07:22:00
+==> [123/454] 4 modules  07:22:01
+==> [124/454] 4 modules  07:22:02
+==> [125/454] 4 modules  07:22:03
+==> [126/454] 4 modules  07:22:04
+==> [127/454] 4 modules  07:22:05
+==> [128/454] 4 modules  07:22:07
+==> [129/454] 4 modules  07:22:08
+==> [130/454] 4 modules  07:22:09
+==> [131/454] 4 modules  07:22:10
+==> [132/454] 4 modules  07:22:11
+==> [133/454] 4 modules  07:22:12
+==> [134/454] 4 modules  07:22:13
+==> [135/454] 4 modules  07:22:15
+==> [136/454] 4 modules  07:22:16
+==> [137/454] 4 modules  07:22:17
+==> [138/454] 4 modules  07:22:18
+==> [139/454] 4 modules  07:22:19
+==> [140/454] 4 modules  07:22:20
+==> [141/454] 4 modules  07:22:22
+==> [142/454] 4 modules  07:22:23
+==> [143/454] 4 modules  07:22:24
+==> [144/454] 4 modules  07:22:25
+==> [145/454] 4 modules  07:22:26
+==> [146/454] 4 modules  07:22:27
+==> [147/454] 4 modules  07:22:28
+==> [148/454] 4 modules  07:22:30
+==> [149/454] 4 modules  07:22:31
+==> [150/454] 4 modules  07:22:32
+==> [151/454] 4 modules  07:22:33
+==> [152/454] 4 modules  07:22:34
+==> [153/454] 4 modules  07:22:36
+==> [154/454] 4 modules  07:22:37
+==> [155/454] 4 modules  07:22:38
+==> [156/454] 4 modules  07:22:39
+==> [157/454] 4 modules  07:22:40
+==> [158/454] 4 modules  07:22:42
+==> [159/454] 4 modules  07:22:43
+==> [160/454] 4 modules  07:22:44
+==> [161/454] 4 modules  07:22:45
+==> [162/454] 4 modules  07:22:46
+==> [163/454] 4 modules  07:22:47
+==> [164/454] 4 modules  07:22:49
+==> [165/454] 4 modules  07:22:50
+==> [166/454] 4 modules  07:22:51
+==> [167/454] 4 modules  07:22:52
+==> [168/454] 4 modules  07:22:53
+==> [169/454] 4 modules  07:22:54
+==> [170/454] 4 modules  07:22:55
+==> [171/454] 4 modules  07:22:56
+==> [172/454] 4 modules  07:22:58
+==> [173/454] 4 modules  07:22:59
+==> [174/454] 4 modules  07:23:00
+==> [175/454] 4 modules  07:23:01
+==> [176/454] 4 modules  07:23:02
+==> [177/454] 4 modules  07:23:03
+==> [178/454] 4 modules  07:23:04
+==> [179/454] 4 modules  07:23:06
+==> [180/454] 4 modules  07:23:07
+==> [181/454] 4 modules  07:23:08
+==> [182/454] 4 modules  07:23:09
+==> [183/454] 4 modules  07:23:10
+==> [184/454] 4 modules  07:23:12
+==> [185/454] 4 modules  07:23:13
+==> [186/454] 4 modules  07:23:14
+==> [187/454] 4 modules  07:23:15
+==> [188/454] 4 modules  07:23:16
+==> [189/454] 4 modules  07:23:17
+==> [190/454] 4 modules  07:23:18
+==> [191/454] 4 modules  07:23:20
+==> [192/454] 4 modules  07:23:21
+==> [193/454] 4 modules  07:23:22
+==> [194/454] 4 modules  07:23:23
+==> [195/454] 4 modules  07:23:24
+==> [196/454] 4 modules  07:23:25
+==> [197/454] 4 modules  07:23:26
+==> [198/454] 4 modules  07:23:28
+==> [199/454] 4 modules  07:23:29
+==> [200/454] 4 modules  07:23:30
+==> [201/454] 4 modules  07:23:31
+==> [202/454] 4 modules  07:23:32
+==> [203/454] 4 modules  07:23:33
+==> [204/454] 4 modules  07:23:34
+==> [205/454] 4 modules  07:23:36
+==> [206/454] 4 modules  07:23:37
+==> [207/454] 4 modules  07:23:38
+==> [208/454] 4 modules  07:23:39
+==> [209/454] 4 modules  07:23:40
+==> [210/454] 4 modules  07:23:41
+==> [211/454] 4 modules  07:23:43
+==> [212/454] 4 modules  07:23:44
+==> [213/454] 4 modules  07:23:45
+==> [214/454] 4 modules  07:23:46
+==> [215/454] 4 modules  07:23:47
+==> [216/454] 4 modules  07:23:48
+==> [217/454] 4 modules  07:23:50
+==> [218/454] 4 modules  07:23:51
+==> [219/454] 4 modules  07:23:52
+==> [220/454] 4 modules  07:23:53
+==> [221/454] 4 modules  07:23:54
+==> [222/454] 4 modules  07:23:55
+==> [223/454] 4 modules  07:23:57
+==> [224/454] 4 modules  07:23:58
+==> [225/454] 4 modules  07:23:59
+==> [226/454] 4 modules  07:24:00
+==> [227/454] 4 modules  07:24:01
+==> [228/454] 4 modules  07:24:02
+==> [229/454] 4 modules  07:24:04
+==> [230/454] 4 modules  07:24:05
+==> [231/454] 4 modules  07:24:06
+==> [232/454] 4 modules  07:24:07
+==> [233/454] 4 modules  07:24:08
+==> [234/454] 4 modules  07:24:09
+==> [235/454] 4 modules  07:24:10
+==> [236/454] 4 modules  07:24:11
+==> [237/454] 4 modules  07:24:12
+==> [238/454] 4 modules  07:24:14
+==> [239/454] 4 modules  07:24:15
+==> [240/454] 4 modules  07:24:16
+==> [241/454] 4 modules  07:24:17
+==> [242/454] 4 modules  07:24:18
+==> [243/454] 4 modules  07:24:19
+==> [244/454] 4 modules  07:24:20
+==> [245/454] 4 modules  07:24:22
+==> [246/454] 4 modules  07:24:23
+==> [247/454] 4 modules  07:24:24
+==> [248/454] 4 modules  07:24:25
+==> [249/454] 4 modules  07:24:26
+==> [250/454] 4 modules  07:24:27
+==> [251/454] 4 modules  07:24:28
+==> [252/454] 4 modules  07:24:30
+==> [253/454] 4 modules  07:24:31
+==> [254/454] 4 modules  07:24:32
+==> [255/454] 4 modules  07:24:33
+==> [256/454] 4 modules  07:24:34
+==> [257/454] 4 modules  07:24:35
+==> [258/454] 4 modules  07:24:36
+==> [259/454] 4 modules  07:24:37
+==> [260/454] 4 modules  07:24:38
+==> [261/454] 4 modules  07:24:40
+==> [262/454] 4 modules  07:24:41
+==> [263/454] 4 modules  07:24:42
+==> [264/454] 4 modules  07:24:43
+==> [265/454] 4 modules  07:24:44
+==> [266/454] 4 modules  07:24:45
+==> [267/454] 4 modules  07:24:46
+==> [268/454] 4 modules  07:24:47
+==> [269/454] 4 modules  07:24:49
+==> [270/454] 4 modules  07:24:50
+==> [271/454] 4 modules  07:24:51
+==> [272/454] 4 modules  07:24:52
+==> [273/454] 4 modules  07:24:53
+==> [274/454] 4 modules  07:24:54
+==> [275/454] 4 modules  07:24:55
+==> [276/454] 4 modules  07:24:57
+==> [277/454] 4 modules  07:24:58
+==> [278/454] 4 modules  07:24:59
+==> [279/454] 4 modules  07:25:00
+==> [280/454] 4 modules  07:25:01
+==> [281/454] 4 modules  07:25:02
+==> [282/454] 4 modules  07:25:04
+==> [283/454] 4 modules  07:25:05
+==> [284/454] 4 modules  07:25:06
+==> [285/454] 4 modules  07:25:07
+==> [286/454] 4 modules  07:25:08
+==> [287/454] 4 modules  07:25:10
+==> [288/454] 4 modules  07:25:11
+==> [289/454] 4 modules  07:25:12
+==> [290/454] 4 modules  07:25:13
+==> [291/454] 4 modules  07:25:14
+==> [292/454] 4 modules  07:25:15
+==> [293/454] 4 modules  07:25:16
+==> [294/454] 4 modules  07:25:18
+==> [295/454] 4 modules  07:25:19
+==> [296/454] 4 modules  07:25:20
+==> [297/454] 4 modules  07:25:21
+==> [298/454] 4 modules  07:25:22
+==> [299/454] 4 modules  07:25:23
+==> [300/454] 4 modules  07:25:25
+==> [301/454] 4 modules  07:25:26
+==> [302/454] 4 modules  07:25:27
+==> [303/454] 4 modules  07:25:28
+==> [304/454] 4 modules  07:25:29
+==> [305/454] 4 modules  07:25:30
+==> [306/454] 4 modules  07:25:31
+==> [307/454] 4 modules  07:25:33
+==> [308/454] 4 modules  07:25:34
+==> [309/454] 4 modules  07:25:35
+==> [310/454] 4 modules  07:25:36
+==> [311/454] 4 modules  07:25:37
+==> [312/454] 4 modules  07:25:38
+==> [313/454] 4 modules  07:25:40
+==> [314/454] 4 modules  07:25:41
+==> [315/454] 4 modules  07:25:42
+==> [316/454] 4 modules  07:25:43
+==> [317/454] 4 modules  07:25:44
+==> [318/454] 4 modules  07:25:45
+==> [319/454] 4 modules  07:25:46
+==> [320/454] 4 modules  07:25:48
+==> [321/454] 4 modules  07:25:49
+==> [322/454] 4 modules  07:25:50
+==> [323/454] 4 modules  07:25:51
+==> [324/454] 4 modules  07:25:52
+==> [325/454] 4 modules  07:25:53
+==> [326/454] 4 modules  07:25:54
+==> [327/454] 4 modules  07:25:56
+==> [328/454] 4 modules  07:25:57
+==> [329/454] 4 modules  07:25:58
+==> [330/454] 4 modules  07:25:59
+==> [331/454] 4 modules  07:26:00
+==> [332/454] 4 modules  07:26:01
+==> [333/454] 4 modules  07:26:02
+==> [334/454] 4 modules  07:26:04
+==> [335/454] 4 modules  07:26:05
+==> [336/454] 4 modules  07:26:06
+==> [337/454] 4 modules  07:26:07
+==> [338/454] 4 modules  07:26:08
+==> [339/454] 4 modules  07:26:09
+==> [340/454] 4 modules  07:26:10
+==> [341/454] 4 modules  07:26:12
+==> [342/454] 4 modules  07:26:13
+==> [343/454] 4 modules  07:26:14
+==> [344/454] 4 modules  07:26:15
+==> [345/454] 4 modules  07:26:16
+==> [346/454] 4 modules  07:26:17
+==> [347/454] 4 modules  07:26:18
+==> [348/454] 4 modules  07:26:19
+==> [349/454] 4 modules  07:26:21
+==> [350/454] 4 modules  07:26:22
+==> [351/454] 4 modules  07:26:23
+==> [352/454] 4 modules  07:26:24
+==> [353/454] 4 modules  07:26:25
+==> [354/454] 4 modules  07:26:26
+==> [355/454] 4 modules  07:26:27
+==> [356/454] 4 modules  07:26:28
+==> [357/454] 4 modules  07:26:30
+==> [358/454] 4 modules  07:26:31
+==> [359/454] 4 modules  07:26:32
+==> [360/454] 4 modules  07:26:33
+==> [361/454] 4 modules  07:26:34
+==> [362/454] 4 modules  07:26:35
+==> [363/454] 4 modules  07:26:36
+==> [364/454] 4 modules  07:26:38
+==> [365/454] 4 modules  07:26:39
+==> [366/454] 4 modules  07:26:40
+==> [367/454] 4 modules  07:26:41
+==> [368/454] 4 modules  07:26:42
+==> [369/454] 4 modules  07:26:43
+==> [370/454] 4 modules  07:26:45
+==> [371/454] 4 modules  07:26:46
+==> [372/454] 4 modules  07:26:47
+==> [373/454] 4 modules  07:26:48
+==> [374/454] 4 modules  07:26:49
+==> [375/454] 4 modules  07:26:50
+==> [376/454] 4 modules  07:26:51
+==> [377/454] 4 modules  07:26:53
+==> [378/454] 4 modules  07:26:54
+==> [379/454] 4 modules  07:26:55
+==> [380/454] 4 modules  07:26:56
+==> [381/454] 4 modules  07:26:57
+==> [382/454] 4 modules  07:26:58
+==> [383/454] 4 modules  07:27:00
+==> [384/454] 4 modules  07:27:01
+==> [385/454] 4 modules  07:27:02
+==> [386/454] 4 modules  07:27:03
+==> [387/454] 4 modules  07:27:04
+==> [388/454] 4 modules  07:27:06
+==> [389/454] 4 modules  07:27:07
+==> [390/454] 4 modules  07:27:08
+==> [391/454] 4 modules  07:27:09
+==> [392/454] 4 modules  07:27:10
+==> [393/454] 4 modules  07:27:12
+==> [394/454] 4 modules  07:27:13
+==> [395/454] 4 modules  07:27:14
+==> [396/454] 4 modules  07:27:15
+==> [397/454] 4 modules  07:27:16
+==> [398/454] 4 modules  07:27:18
+==> [399/454] 4 modules  07:27:19
+==> [400/454] 4 modules  07:27:20
+==> [401/454] 4 modules  07:27:21
+==> [402/454] 4 modules  07:27:22
+==> [403/454] 4 modules  07:27:23
+==> [404/454] 4 modules  07:27:25
+==> [405/454] 4 modules  07:27:26
+==> [406/454] 4 modules  07:27:27
+==> [407/454] 4 modules  07:27:28
+==> [408/454] 4 modules  07:27:29
+==> [409/454] 4 modules  07:27:30
+==> [410/454] 4 modules  07:27:32
+==> [411/454] 4 modules  07:27:33
+==> [412/454] 4 modules  07:27:34
+==> [413/454] 4 modules  07:27:35
+==> [414/454] 4 modules  07:27:36
+==> [415/454] 4 modules  07:27:38
+==> [416/454] 4 modules  07:27:39
+==> [417/454] 4 modules  07:27:40
+==> [418/454] 4 modules  07:27:41
+==> [419/454] 4 modules  07:27:42
+==> [420/454] 4 modules  07:27:42
+==> [421/454] 4 modules  07:27:43
+==> [422/454] 4 modules  07:27:44
+==> [423/454] 1 modules  07:27:45
+==> [424/454] 4 modules  07:27:46
+==> [425/454] 4 modules  07:27:48
+==> [426/454] 4 modules  07:27:49
+==> [427/454] 4 modules  07:27:50
+==> [428/454] 4 modules  07:27:51
+==> [429/454] 2 modules  07:27:52
+==> [430/454] 4 modules  07:27:53
+==> [431/454] 4 modules  07:27:54
+==> [432/454] 2 modules  07:27:55
+==> [433/454] 4 modules  07:27:56
+==> [434/454] 4 modules  07:27:58
+==> [435/454] 4 modules  07:27:59
+==> [436/454] 4 modules  07:28:00
+==> [437/454] 4 modules  07:28:02
+==> [438/454] 2 modules  07:28:03
+==> [439/454] 4 modules  07:28:07
+==> [440/454] 4 modules  07:28:10
+==> [441/454] 2 modules  07:28:12
+==> [442/454] 4 modules  07:28:13
+==> [443/454] 4 modules  07:28:14
+==> [444/454] 1 modules  07:28:15
+==> [445/454] 4 modules  07:28:16
+==> [446/454] 2 modules  07:28:17
+==> [447/454] 4 modules  07:28:18
+==> [448/454] 4 modules  07:28:19
+==> [449/454] 4 modules  07:28:20
+==> [450/454] 4 modules  07:28:21
+    ⚠ [3440/3509] Replayed Proofs.HadwigerNelson.Arith.StandingFive
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:70:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:85:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:91:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:102:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:128:8: declaration uses `sorry`
+==> [451/454] 2 modules  07:28:22
+    ⚠ [3531/3531] Built Proofs.HadwigerNelson.Arith.NormOneTarget (2.2s)
+    warning: Proofs/HadwigerNelson/Arith/NormOneTarget.lean:30:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/NormOneTarget.lean:35:8: declaration uses `sorry`
+    rebuilt: Arith.FactorAction (2.1s), Arith.NormOneTarget (2.2s)
+==> [452/454] 2 modules  07:28:26
+    !! batch failed with status 1. What it printed, before the retry:
+    ✖ [3450/3451] Building Proofs.HadwigerNelson.Arith.FloorPlanes (2.1s)
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:36:7: failed to synthesize instance of type class
+      Fintype Fˣ
+    
+    Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:42:15: failed to synthesize instance of type class
+      Fintype Fˣ
+    
+    Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:42:67: failed to synthesize instance of type class
+      Fintype Fˣ
+    
+    Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:67:33: Unknown identifier `quadraticChar`
+    
+    Note: It is not possible to treat `quadraticChar` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:68:19: Unknown identifier `quadraticChar`
+    
+    Note: It is not possible to treat `quadraticChar` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:77:8: Unknown identifier `quadraticChar`
+    
+    Note: It is not possible to treat `quadraticChar` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+    warning: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:83:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:95:8: declaration uses `sorry`
+    error: Lean exited with code 1
+    ⚠ [3451/3451] Built Proofs.HadwigerNelson.Arith.Floor128 (6.5s)
+    warning: Proofs/HadwigerNelson/Arith/Floor128.lean:41:4: missing doc string for public def P
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/Arith/Floor128.lean:42:4: missing doc string for public def qBig
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/Arith/Floor128.lean:43:4: missing doc string for public def a4
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/Arith/Floor128.lean:44:4: missing doc string for public def b4
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/Arith/Floor128.lean:45:4: missing doc string for public def a128
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/Arith/Floor128.lean:46:4: missing doc string for public def b128
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/Arith/Floor128.lean:88:8: declaration uses `sorry`
+    Some required targets logged failures:
+    - Proofs.HadwigerNelson.Arith.FloorPlanes
+    error: build failed
+    !! retrying ONCE. If this line is common, the machine is unwell and the build is not the
+       thing to fix.
+    ✖ [3451/3451] Building Proofs.HadwigerNelson.Arith.FloorPlanes (2.1s)
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:36:7: failed to synthesize instance of type class
+      Fintype Fˣ
+    
+    Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:42:15: failed to synthesize instance of type class
+      Fintype Fˣ
+    
+    Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:42:67: failed to synthesize instance of type class
+      Fintype Fˣ
+    
+    Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:67:33: Unknown identifier `quadraticChar`
+    
+    Note: It is not possible to treat `quadraticChar` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:68:19: Unknown identifier `quadraticChar`
+    
+    Note: It is not possible to treat `quadraticChar` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+    error: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:77:8: Unknown identifier `quadraticChar`
+    
+    Note: It is not possible to treat `quadraticChar` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+    warning: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:83:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:95:8: declaration uses `sorry`
+    error: Lean exited with code 1
+    Some required targets logged failures:
+    - Proofs.HadwigerNelson.Arith.FloorPlanes
+    error: build failed
+    BATCH FAILED. Once it is fixed, rerun ./scripts/build.sh — modules that already built are
+    skipped. Never a bare or named lake build (RUNNING.md § Building).
+==> build: FAIL — 452 of 454 batches, 3 module(s) rebuilt, 4 module(s) with warnings, 8m18s
+    full output: build/gate/build/20261006T122017Z-3946335.log
+EXIT=1

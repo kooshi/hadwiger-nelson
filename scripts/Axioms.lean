@@ -4863,6 +4863,34 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.CharacterColouring.exists_ratLinear_extension
 #print axioms HadwigerNelson.CharacterColouring.mem_archimedean_unitRing_iff
 
+/-! ## FS-131 wave 10 (job FS131-K10b) — the second planning pass: the ratio bound, the factor action, the floors' certificate -/
+-- FS131-K10b (sorry-free declarations only; the compositions over open leaves are left for the landing's audit)
+#print axioms HadwigerNelson.SpectralInputs.comap_factorSigma_eq
+#print axioms HadwigerNelson.SpectralInputs.comap_factorSigma_eq_of_action
+#print axioms HadwigerNelson.SpectralInputs.si4_equivariant_factorSigma
+#print axioms HadwigerNelson.SpectralInputs.preimage_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.comap_factorSigma_le
+#print axioms HadwigerNelson.RatioBound.sum_fourier_sq_mul_charSum_eq_zero
+#print axioms HadwigerNelson.RatioBound.sum_fourier_sq
+#print axioms HadwigerNelson.RatioBound.card_mul_le_of_indep
+#print axioms HadwigerNelson.RatioBound.le_chromaticNumber_of_charSum
+#print axioms HadwigerNelson.StandingFive.kloostermanBound_of_card_le_five
+#print axioms HadwigerNelson.StandingFive.targetFloor_mono
+#print axioms HadwigerNelson.StandingFive.standingFloor_mono
+#print axioms HadwigerNelson.Floor128.clmul_P_qBig
+#print axioms HadwigerNelson.Floor128.bezout4
+#print axioms HadwigerNelson.Floor128.bezout128
+#print axioms HadwigerNelson.Floor128.order_checks
+#print axioms HadwigerNelson.Floor128.counts_ok
+#print axioms HadwigerNelson.GapSeven.gamma_proper
+#print axioms HadwigerNelson.GapSeven.gapped_iff
+#print axioms HadwigerNelson.GapSeven.gapped_eq_three
+#print axioms HadwigerNelson.GapSeven.zbar_iff
+#print axioms HadwigerNelson.GapSeven.zbar_indep
+#print axioms HadwigerNelson.GapSeven.supp_disjoint
+#print axioms HadwigerNelson.GapSeven.exists_adjacent_gapped
+#print axioms HadwigerNelson.GapSeven.card_edges
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

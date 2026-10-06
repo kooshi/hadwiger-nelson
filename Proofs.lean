@@ -178,6 +178,16 @@ import Proofs.HadwigerNelson.Arith.CharacterColouring
 import Proofs.HadwigerNelson.Arith.SpectralInputs
 import Proofs.HadwigerNelson.Arith.StationaryRatio
 import Proofs.HadwigerNelson.Arith.StandingFive
+import Proofs.HadwigerNelson.Arith.FactorAction
+import Proofs.HadwigerNelson.Arith.RatioBound
+import Proofs.HadwigerNelson.Arith.NormOneTarget
+import Proofs.HadwigerNelson.Arith.FloorPlanes
+import Proofs.HadwigerNelson.Arith.Floor128
+import Proofs.HadwigerNelson.Arith.TargetFloors
+import Proofs.HadwigerNelson.Arith.GapSeven
+import Proofs.HadwigerNelson.Arith.ProductFactor
+import Proofs.HadwigerNelson.Arith.MajorityVote
+import Proofs.HadwigerNelson.Arith.NegCircleModel
 import Proofs.HadwigerNelson.Plane.LocalMap
 import Proofs.HadwigerNelson.Plane.LocalMapExamples
 import Proofs.HadwigerNelson.Plane.CircleColouring

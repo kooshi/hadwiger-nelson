@@ -433,3 +433,313 @@ the second inclusion reads (`A = (T x)⁻¹((T x')⁻¹A)`). New module `Arith/F
 move the three into `SpectralInputs.lean`; the names are new).
 
 **No statement says less or more than its row in a way that changes a consumer**; nothing here was a message to the coordinator.
+
+## Stage 7 — SAVED (FS131-K10b): the floor, two rows (`debruijn-obligation-modeling`, invoked fresh, for the leaves)
+
+Mathlib names marked ✓ were found by `grep` in the pinned source (2026-10-06); the rest are **to be confirmed by the implementer**.
+
+### 7.1 The ratio bound — where it lives, and its class
+
+Neither Mathlib (0 files mention Hoffman or "ratio bound") nor this library (0 declarations) holds it. It now lives in
+`Arith/RatioBound.lean`, **proved**, stated once at the class its argument reads: a finite abelian group, any finite `S` (no symmetry),
+`Re Σ_{s∈S} ψ(s) ≥ −m` at every non-trivial character. No adjacency matrix and no spectral theorem: orthogonality of characters
+(`AddChar.sum_apply_eq_ite` ✓) gives `Σ_ψ |f̂|² λ_ψ = 0` and Parseval; `card_mul_le_of_indep`, `le_chromaticNumber_of_charSum`. Two
+elaboration rounds, 170 lines. `NormOneTarget.targetFloor_of_charSum` (proved over two leaves) carries it to `StandingFive.TargetFloor`.
+
+### 7.2 Row (i) — the target at 128, no outside theorem: `Floor128.targetFloor_eight_128 : TargetFloor 8 128`
+
+**The statement, read back.** G56: "U₁₂₈'s Hoffman floor is 8". Lean: every field of `128²` elements with a non-trivial involution has a
+level-one target needing at least 8 colours (and 7, the form `StandingFloor 7` reads). Both are proved over one leaf, the bridge
+`charSum_128_ge`: in a field of `2¹⁴` elements every non-trivial additive character sums to at least `−19` over `{u : u¹²⁹ = 1}`.
+
+**The spectrum** ([tools], `tools/fs131_k10b_u128.py`, exact; `data/fs131/k10b/logs/u128.out`): the 127 non-trivial classes take the
+values `−19` (7 classes), `−15` (14), `−11` (14), `−7` (7), `−3` (21), `1` (14), `5` (7), `9` (21), `13` (8), `17` (7), `21` (7); sum of
+squares `16255 = 2¹⁴ − 129`. Two routes agree (the shift register's coordinate-0 bit; the absolute trace with field multiplication). Fault
+(`--fault`, a non-primitive irreducible modulus): the order check fails, exit 1. So `1 + 129/19 > 7.78`: the floor is 8, and Weil is not
+needed at 128 (it would give only `−21`, i.e. 8 as well).
+
+**The certificate's shape and its cost** (`LEAN.md` § The kernel's cost model; measured, `data/fs131/k10b/lean/U128Cost.lean`,
+`logs/u128cost.log`): `𝔽₂[x]` coded in `Nat`; one pass of the shift register over the 16,383 powers of `g`, the bit added into 127 packed
+8-bit counters (one `Nat` accumulator, no table built, 127 comparisons at the end) — **2.31 s in the kernel** (141 µs a step), 1.2 GB.
+The whole module with its five checks (`clmul_P_qBig` on a 16,371-bit literal, `bezout4`, `bezout128`, `order_checks`, `counts_ok`)
+elaborates in 6.4 s, 4.4 GB (`logs/f128-1.log`). The control `countsOk 73 = false` is in the Spec. Literals are written by
+`tools/fs131_k10b_gen128.py` from `data/fs131/k10b/u128-certificate.json`; `--check` passes and `--fault` (one bit of `qBig` flipped) fails.
+
+**The bridge, per child** (each strictly smaller; the statement each derives from in italics):
+- B1 `code`: `φ_t(n) = Σ bit_i(n) tⁱ` in a commutative ring of characteristic 2. *`φ_t` turns `^^^` into `+`, `<<< 1` into `t·`, and
+  `clmul fuel a b` into a product for `a < 2^fuel`* — induction on `fuel` generalizing `a b` (the recursor of `clmul`). 80 lines.
+- B2 a root: at `t = X` in `k[X]`, `clmul_P_qBig` reads `φ_X(P)·φ_X(qBig) = X^(2¹⁴) + X = ∏_{a∈k}(X − a)`; a divisor of positive degree of a
+  split polynomial has a root `g` (the product formula for a finite field: name to be confirmed). 60 lines.
+- B3 a basis: *`φ_g(n) = 0 ∧ n < 2¹⁴ → n = 0`*. Else `𝔽₂[g]` is a subfield of `2^d` elements, `d | 14`, `d < 14`, so `g⁴ = g` or
+  `g¹²⁸ = g`; `bezout4`, `bezout128` evaluated at `g` give `1 = 0`. **Hard**: the subfield's size. 120 lines.
+- B4 the register: *`pass n x i acc = (step^[n] x, acc + Σ_{j<n} (bit₀(step^[j] x)) <<< (8·((i + j) mod 127)))` for `i < 127`,
+  `x < 2¹⁴`*, generalizing `x i acc` (`fun_induction pass`); `φ_g(step x) = g·φ_g(x)`; `orderOf g = 16383` from `order_checks` and B3.
+  **Hard**: the packed-counter read-out (no carry: counters ≤ 129 < 256). 120 lines.
+- B5 the characters: `ψ₀ = (−1)^(coordinate 0)` is a non-trivial additive character; every `ψ ≠ 1` is `ψ₀(a ·)`, `a ≠ 0`
+  (`AddChar.IsPrimitive.of_ne_one` ✓, `AddChar.to_mulShift_inj_of_isPrimitive` ✓, `AddChar.card_eq` ✓). 60 lines.
+- B6 the sum: `{u : u¹²⁹ = 1} = {g^(127j) : j < 129}`; `Σ ψ₀(gⁱ u) = 129 − 2·c_{i mod 127} ≥ −19` by `counts_ok`. 80 lines.
+
+**Price**: about 520 lines, one implementer job, about 300k — the file `Arith/Floor128.lean` alone.
+
+### 7.3 Row (ii) — the planes: `targetFloor_seven_of_kloosterman`, over one named classical hypothesis
+
+**The ruling in force** (the coordinator, mid-job, on my message): the import is Weil's bound for Kloosterman sums over a finite field;
+the completion from the circle sum is formalized; **no `axiom` in this pass** — the bound is the `Prop` `StandingFive.KloostermanBound F`
+and becomes an imported axiom with the four items only when a held source's page has been read back against it (the fetch is the
+coordinator's: `[Weil1948]` first, then a source stating it at prime powers).
+
+**The exact statement the hypothesis carries** (`Arith/FloorPlanes.lean`):
+`KloostermanBound F : Prop := ∀ ψ : AddChar F ℂ, ψ ≠ 1 → ∀ a b : F, a ≠ 0 → b ≠ 0 → ‖∑ x : Fˣ, ψ (a * x + b * x⁻¹)‖ ≤ 2 * √(card F)`,
+for a finite field `F` with decidable equality (the instance is what makes `Fˣ` a `Fintype`; it carries no content).
+**Which fields it must cover**: `standingFloor_seven` asks it at every finite field with `q ≡ 3 (mod 4)` and `q ≥ 347` elements — so at
+**prime powers** `p^f`, `p ≡ 3 (mod 4)`, `f` odd, not only primes (the standing field's own usable residue fields are `p ≥ 347` and
+`p⁷ ≥ 11⁷`, but `StandingFloor` quantifies over every `Q`). The row's theorem is stated at the class the argument reads, `Q ≥ 98`. Model:
+`kloostermanBound_of_card_le_five` (proved: `q − 1 ≤ 2√q` for `q ≤ 5`), instantiated at `ZMod 3`.
+
+**The read-back of the row.** G56: "every usable plane … refuses six by Weil from 98". Lean, `targetFloor_seven_of_kloosterman`: for
+`Q ≡ 3 (mod 4)`, `Q ≥ 98`, if Weil's bound holds at the fields of `Q` elements then every field of `Q²` elements with a non-trivial
+involution has a level-one target needing 7 colours. Differences: empty of content at a `Q` that is no prime power (no field of `Q²`
+elements); the threshold 98 is sharp for the argument (Spec: `98 < 10√97`).
+
+**The fallback (α), written down.** `[MMST1996]` (held; pp. 225–232 read by me from the PDF, 2026-10-06). p. 225: "Let 𝔽_q be a finite
+field with q = p^r elements, where p is an odd prime"; formula (2), `d(x, y) = Σ(x_j − y_j)²`. p. 226, Definition: "Given a ∈ 𝔽_q, the
+Euclidean graph … E_q(n, a) … Two vertices are adjacent iff d(x, y) = a"; p. 227: "when a = 0 we are allowing the graph to have loops".
+p. 230: `e(u) = exp{2πi Tr(u)/p}`, `e_b(x) = e(ᵗb·x)` (6); Proposition 2: "For b ∈ 𝔽_qⁿ, e_b is an eigenfunction of A_a corresponding to
+the eigenvalue λ_b = Σ_{d(s,0)=a} e_b(s)." p. 231, **Theorem 3**: "Let λ_b denote the eigenvalue of the adjacency operator A_a of the graph
+E_q(n,a) corresponding to the eigenfunction e_b(x) defined in (6). Then |λ_b| ≤ 2q^{(n−1)/2}, for b ≠ 0 in 𝔽_qⁿ. Moreover, the eigenvalues
+λ_b, for b ≠ 0, are expressed as generalized Kloosterman sums in Eq. (11)." Its proof (pp. 231–232) is a sketch: (7)–(9) complete the
+square, (11) `λ_{2b} = (1/q)·G₁ⁿ·K(χⁿ | a, d(b,0))`, (13) "The Kloosterman sum is bounded as in [42, pp. 386–389] (or see [34], or [23,
+Theorem 16])" — Weil's Collected Works, i.e. `[Weil1948]`, and `[LiFeng1992]`; neither held. As an axiom (α) would read: `F` of odd
+characteristic `p`, `a ≠ 0`, `b ≠ 0 : F × F`: `‖Σ_{s₁²+s₂²=a} e(b₁s₁ + b₂s₂)‖ ≤ 2√|F|`. It is the fallback if no held page states the
+Kloosterman bound at prime powers; in Lean it is `circle_sum_le` with `hK` discharged.
+
+**Statement defect in the printed theorem** (draft note for `BIBLIOGRAPHY.md`'s `[MMST1996]` row, after "…used with Weil's bound."):
+"**Theorem 3 (p. 231) is false as printed at `a = 0`**: it carries no restriction on `a`, the paper allows `a = 0` (p. 227), and at `n = 2`,
+`−1` a square, `b ≠ 0` isotropic, `λ_b = q − 1 > 2√q` (`q = 13`, `b = (1, 5)`: 12 > 7.22; its inequality (13) fails when `a = d(b,0) = 0`).
+It holds with `a ≠ 0` on `𝔽_3 … 𝔽_23`, `𝔽_9`, `𝔽_25`, `𝔽_27`, `𝔽_49` [measured, `tools/fs131_k10b_circle.py`; `--fault` finds the
+violation at `q = 9, 13, 17, 25, 49`]. Read 2026-10-06 (FS131-K10b): pp. 225–232." The row's status moves from "held, not read" to
+"read: §§ 2–3 (pp. 225–232)". The identity `λ(c) = −K(1, c/4)` (FS-20's item R4) is `circle_sum_eq_kloosterman` once proved.
+
+**Result: no elementary bound replaces the import at 347.** The fourth moment, with the multiplicity `Q + 1` of each class, gives
+`|λ| ≤ (2Q³ − 2Q² − 3Q − 1)^{1/4} < (2Q³)^{1/4}` (two circles meet in at most two points, so `E₄ ≤ 3d² − 2d`); seven needs
+`|λ| < (Q + 1)/5`, which this reaches only from about `Q ≥ 1250` (at 347 it gives 95.6 against 69.6). The first pass's `2Q^{3/4}` is this
+bound without the multiplicity. The sixth moment would suffice at 347 (`≈ 1.31·Q^{2/3} = 64.6`) but its evaluation is not elementary
+(a point count on a threefold). [hand, one mind]
+
+**The leaves, per child:**
+- P1 `involution_eq_pow` (`NormOneTarget`): the fixed field `k₀` has `[k : k₀] = 2` (`FixedPoints.finrank_eq_card` ✓ for the group
+  `{1, σ}`), so `Q` elements; *`x ^ Q` is a root of `(T − x)(T − σ x) ∈ k₀[T]`*, and `x ^ Q = x` only on `k₀`. 120 lines. **Hard**: the
+  group action's instances.
+- P2 `card_normOne`: `kˣ` cyclic of order `(Q − 1)(Q + 1)` (`IsCyclic.card_powMonoidHom_ker` ✓). 50 lines.
+- P3 `sum_quadratic_eq`: `r y² + c y = r(y + c/(2r))² − c²/(4r)`, re-index, then `Σ_y ψ(r y²) = Σ_x (1 + χ(x)) ψ(r x) = χ(r)·G`
+  (`quadraticChar_card_sqrts` ✓, `gaussSum_mulShift` ✓). 80 lines.
+- P4 `circle_sum_eq_kloosterman`: *`q·LHS = Σ_r Σ_s ψ(r(s₁² + s₂² − a) + b·s)`* (`AddChar.sum_mulShift` ✓); `r = 0` gives 0; `r ≠ 0` is two
+  P3's and `G² = χ(−1) q` (`gaussSum_sq` ✓, `quadraticChar_sq_one` ✓). 120 lines. **Hard**: the two re-indexings.
+- P5 `circle_sum_le`: P4 and `hK`; when `b₁² + b₂² = 0` the sum is `Σ_{x≠0} ψ(−a x) = −1`. 40 lines.
+- P6 `normOne_charSum_ge`: `k₀ = {x : x ^ Q = x}` has `Q` elements; `−1` is a square in `k`, not in `k₀`
+  (`FiniteField.isSquare_neg_one_iff` ✓), so `k = k₀ ⊕ k₀·ι`, `u ^ (Q + 1) = u₁² + u₂²`; a non-trivial character of `k` is
+  `ψ₀(b₁u₁ + b₂u₂)`, `b ≠ 0` (counting, `AddChar.card_eq` ✓); re-index; P5 at `a = 1`. 200 lines. **Hard**: the coordinates.
+
+**Price**: about 610 lines; one implementer job, about 300k — `Arith/NormOneTarget.lean` and `Arith/FloorPlanes.lean` together.
+
+### 7.4 `StandingFloor 7` from the two (`Arith/TargetFloors.lean`, compositions, proved over the leaves)
+
+`standingFloor_seven`, `standingFloor_five`, `seven_le_localBound_of_kloosterman`: over
+`∀ F` finite field, `card F % 4 = 3 → 347 ≤ card F → KloostermanBound F`. At the join `StandingFive.seven_le_localBound` and
+`five_le_chromaticNumber` are applied to them and lose the hypothesis `StandingFloor`.
+
+**Draft for `ARCHITECTURE.md` § Trust** (for the day the bound is an axiom, not before): "`StandingFive.kloosterman_bound` — Weil's bound
+for Kloosterman sums over a finite field, `|Σ_{x≠0} ψ(ax + b/x)| ≤ 2√q` for `ψ ≠ 1`, `ab ≠ 0` ([source key, section, page]); read back
+against the page in `plans/FS131-w10-kernel-plan.md` § 7.3; model `kloostermanBound_of_card_le_five` at `ZMod 3`; rests on it:
+`standingFloor_seven`, `seven_le_localBound_of_kloosterman` and what the join derives from them."
+
+## Stage 8 — SAVED (FS131-K10b): the four rows, the majority vote, the model, and the two additions (`debruijn-domain-modeling`, invoked fresh)
+
+### 8.1 J45-SI-J — stated at a wider class, by a route with no spectral theory (`Arith/ProductFactor.lean`)
+
+**The row**: "the `E_S`-factor of an independent product of a finite translation system, a Bernoulli process and `c₂` is `σ(Φ) ∨ 𝒜_S(c₂)`".
+**Lean, read aloud** (`contVec_prod_eq`, the leaf): for a finite discrete system whose maps are eventually the identity along a filter
+`l`, any second system, and a third whose σ-algebra is generated by independent coordinates indexed by `R` that the maps shift, if `l` is
+not eventually inside a finite set, the `l`-continuous vectors of the product are the `L²` vectors measurable for
+`prodFactorSigma = σ(first coordinate) ⊔ (second coordinate)⁻¹(𝒜_l)`. **Differences**: any filter (the row: `𝓝 0` for `τ′_S`); "is" is
+equality of the two `L²` spaces, i.e. of the σ-algebras up to null sets (with `contVec_eq_lpMeas`); real `L²`; identical distribution not
+read. Reported and adopted (inventory item 503).
+
+**What the instance at `E_S` discharges, and from where** (the coordinator's ask): `h₁` (eventually the identity) — the kernel of `R →
+O/𝔓` has finite index, hence is open for `τ′_S` *by the definition of `τ′_S`* (its profinite component); no theorem. `hl` (not eventually
+finite) — "`τ′_S` is T₁ and not discrete": T₁ from `R ↪ L ⊗ ℝ` (definition), non-discrete from weak approximation on the norm-one torus,
+**which is J45-N1 (b)'s content**. So **the instance of SI-J at `E_S` rests on N1 (b)**, not on N1 (c) as the row's route did; N1 (a)(b)
+is not stated in this pass (§ 8.4), so neither is the instance — the join and K10c see this dependency here.
+
+**Downstream readers of SI-J** (the coordinator's ask): J45-SI-5 (c) and (d) read `𝒜_S(c) ⊆ σ(Φ) ∨ 𝒜_S(c₂)` — the σ-algebra form, which
+is `contVec_prod_eq` with `comap_factorSigma_le` (proved here: the factor of a factor system); SI-5 (c)'s "its `L²` is spanned by
+eigenfunctions of torsion characters" becomes "a finite-valued process moved through a finite quotient is eventually fixed along `l`"
+(`mem_factorSets_iff`), also filter-form. J45-SI-C reads the same inclusion with no `c₂`, **and its last clause, `σ_μ(R̂ ∖ E) > 0`, is the
+one place a row reads the spectral form** ("spectral measure `≪ Haar`, which gives `E` measure 0 (N1 (c))"): in the kernel's vocabulary
+it is "the centred noise `1[c(0) = 3] − p₃(0)` is a non-zero vector orthogonal to `L²(𝒜_S)` for every `S`", and the literal clause
+follows from that only through a spectral projection the library does not define. K10c states SI-C's clause in the orthogonality form and
+says so.
+
+**Children**: C1 the splitting `F = F₀ + F₁` by the conditional expectation on the first two coordinates, preserved by the maps; C2
+cylinders on finite coordinate sets are dense in the `L²₀` part (**hard**: a density over a directed family of σ-algebras); C3 *shifted
+cylinders on disjoint coordinate sets are orthogonal when centred* (`iIndepFun.indepFun_finset` ✓); C4 `‖V_y F′ − F′‖ = √2‖F′‖`
+frequently, so `F₁ = 0`; C5 the fibre lemma on a finite `Ω₁`; C6 measurability for `prodFactorSigma` is fibrewise (**hard**). About 500
+lines, one job with § 8.2.
+
+### 8.2 The deriver's lemma FS131-E8-SI5C (`Arith/MajorityVote.lean`, `ae_eq_measurable_of_majority`, the leaf)
+
+Stated at the class its argument reads, wider than the entry's in three ways (an infinite index set; probabilities **at most** `p < 1/2`;
+"almost surely" one index at a time), reported here as a generalization. **Attacked, it stands**: no step fails to formalize as written;
+the one care is that the entry's "strict majority" needs `2·#{errors among n} < n`, which Chebyshev gives with probability
+`≥ 1 − 1/(4n(1/2 − p)²)` for pairwise uncorrelated indicators of probability `≤ p`. **Mathlib's strong law at the pin**
+(`ProbabilityTheory.strong_law_ae` ✓, Etemadi's: pairwise independent **identically distributed**) serves the entry's class (equal
+probabilities) and not the wider one, so **the Chebyshev route is written out**: `ProbabilityTheory.meas_ge_le_variance_div_sq` ✓,
+`ProbabilityTheory.IndepFun.variance_sum` ✓, then a subsequence converging almost surely
+(`TendstoInMeasure.exists_seq_tendsto_ae` ✓) in place of the closedness of `L²(σ(c))`. Children: M1 an injective sequence in `I`; M2 the
+Chebyshev bound; M3 `Maj_n` is measurable for `⨆ x, comap (c x)`; M4 the limit. About 150 lines. **Step (c) over it**: `G = γ_Φ(ρ)` for
+each of the finitely many residue classes `ρ`, `E x = {ε(x) = 1}`, `p = 1/3` — stated with SI-5 (§ 8.3).
+
+### 8.3 J45-SI-C and J45-SI-5 — the finite facts proved; the measure-theoretic statements not stated
+
+**Proved** (`Arith/GapSeven.lean`, each a `decide +kernel` against `finitePlane 7`; 16 s, 5.3 GB for the module): C9's `γ = ⌊4θ⌋` is
+proper (`gamma_proper`); the gapped vertices are exactly those with `7θ ∈ {0, 5}` (`gapped_iff`), all missing colour 3
+(`gapped_eq_three`); `Z̄ = {θ = 0}` is the set of gapped vertices of colour 0 (`zbar_iff`) and is independent (`zbar_indep`); the supports
+are disjoint on every edge (`supp_disjoint`); (G2)'s adjacent gapped pair exists (`exists_adjacent_gapped`); 392 directed edges, 28
+between gapped vertices (`card_edges`). **These confirm `tools/crunch_j45_gap7.py`'s items (1)–(5) in the kernel**: SI-C's grade loses
+its tools half, and (G2) at 7 is a theorem about the plane `Γ₇`.
+
+**Not stated — where K10c takes over.** Both rows are statements about translation-invariant random proper four-colourings of
+`Cay(R, U)`, and need, beyond what stands: (i) the shift system on `R → Fin 4` and "`μ` over `F`" (`SpectralChain.InvariantColouring`
+is the candidate); (ii) "equality at `S`" as `si4`'s `hdisj` at `𝒜 = factorSigma shift (𝓝[τ′_S] 0)` — which needs `τ′_S`, § 8.4; a
+statement **parametrized by an arbitrary filter `l`** in place of `τ′_S` is available today and is the form I recommend (SI-5's argument
+reads of `l` exactly SI-J's two hypotheses and `U`-invariance); (iii) the reduction `R → O/𝔓 ≅` the residue plane (wave 2's
+`exists_hom_finitePlane_of_card`); (iv) the noisy colouring as a factor of `prodMap₃` (`comap_factorSigma_le`). Dispositions revised:
+SI-5 a theorem over SI-J, the majority vote and (G2) as a hypothesis on a finite coloured graph (met at 7 by `GapSeven`); SI-C a theorem
+over SI-J and `GapSeven`, its last clause in the orthogonality form (§ 8.1). Price: about 700 lines for the two, one job after K10c's
+statements.
+
+### 8.4 J45-N1 (a), (b) — not stated
+
+Stating `τ′_S` needs the `S`-adic completions of `L` at split places against `unitRing F ⊆ ℂ`
+(`IsDedekindDomain.HeightOneSpectrum.adicCompletion` over `𝓞 (fieldI F)`), the profinite topology on `R`, and the three continuity
+groups; the first pass's list stands. Two things this pass adds: **what the wave's other rows read of N1 (a)(b) is two facts about the
+filter `𝓝[τ′_S] 0`** — every subgroup of finite index is a neighbourhood of 0, and it is not eventually finite (§ 8.1) — so a K10c that
+states those two as the interface (`contChars` and `BochnerOn` are already stated over an arbitrary topology) lets SI-J's instance, SI-5
+and SI-C land without the adic foundation; and (a)'s "`T`" is safe from the C109 defect — the `τ′_S`-continuous archimedean characters are
+`Hom_ℝ(L ⊗ ℝ, ℝ) mod 1`, the erratum's `A`.
+
+### 8.5 A model of `Interface.NegCircle` (`Arith/NegCircleModel.lean`; two leaves, not proved)
+
+**The cheaper candidate, checked on paper: it works.** Over `F = ℚ`, the valuation subring of `ℚ(i)` at `1 + i` is fixed by conjugation
+(the prime is ramified), so it contains `unitRing ⊥` (`UnitRing.normOne_subset_valuationSubring`, in the library); its residue field has
+two elements, and `u·ū = 1` forces `u ↦ 1`. So `χ₀(r) = (−1)^(r mod (1+i))` is a character with `χ₀(u·) = χ₀` for every unit vector and
+`χ₀(1) = −1`; the point mass at `χ₀` is a rotation-invariant probability with `∫ Re χ(1) = −1 < 0`; at `Interface.trivial` the carrier
+clause holds with `S = univ` (`E = ∅`). No analysis, no Bessel value, margin 1 instead of 0.04. Leaves: `exists_parityHom` (about 150
+lines: the `(1 + i)`-adic valuation subring and its residue field; **the library holds no `unitRing ⊥ →+* ZMod 2` today** — searched) and
+`negCircle_trivial_bot` (60 lines: `Measure.dirac`, `Measure.map_dirac`, `integral_dirac`). **Until they land `sp_if` stays an open gate
+item under the inhabitant rule.** The same character is Woodall's two-colouring of `ℚ²`, so row 63's modules may shorten the first leaf.
+
+### 8.6 The second implementer's statements read back (the coordinator's addition, ruling 507 (c); statements read on `fs131-w10b` at `423cd8e8`, proofs not read)
+
+| statement | sentence | verdict |
+|---|---|---|
+| `StationarySet.prob_le_ratio_mul_of_symm` | X25B-P: "`P(0 ∈ A) ≤ r(G,T)·P(0 ∈ N[A])`" | says it: `W.P W.B ≤ ratio ν * W.P (W.B ∪ W.nbhd ν)`, `ν` σ-finite and symmetric, no `MeasurableAdd₂` |
+| `StationarySet.prob_le_max_ratio`, `ratio_prod_le_of_symm` | X25B-PZ: "at most the larger factor's" | say it, per stationary set and as a supremum; both symmetries are hypotheses and its finding 5 (`ℤ/3 × ℤ/5`) shows they bite — **a hypothesis the row's words do not carry** ("LCA Cayley graphs" are symmetric by convention; no defect) |
+| `StationarySet.prob_le_ratio_level_add`, `ratio_prod_le_iSup_levels_of_shrink` | X25B-L1: "at most the supremum over its finite levels" | say it **for the levels pulled back to `X × Y`** (`νY ∗ cosetAverage (K k)`), any family of open subgroups entering every neighbourhood of 0; the comparison with the graphs on `Y/K_k` is § 8.7's row |
+| `tendsto_measure_symmDiff_shift` | "martingale convergence on the fibres" (the entry), as the first pass re-read it | says the replacement: `P(T_u⁻¹C ∆ C) → 0` as `u → 0`, for a compact second-countable group |
+| `StationarySet.ae_majority`, `measure_le_majority_add`, `lintegral_prod_conv_cosetAverage` | "fibre shares above `1/2` form an a.e.-independent set" and its two companions | say them: the pigeonhole on `{ω : κ{z : T_{e z}ω ∈ D} > 1/2}`; `P(D) ≤ P(majority) + ∫ P(T⁻¹D ∆ D) dκ`; a `K`-invariant integrand does not see the smoothing |
+| models `StationarySet.parity` (`parity_aeIndependent`, `parity_prob`), `ratio_dirac_one_zmod_two`, `cantorLevel` (`exists_cantorLevel_subset`) | the inhabitant rule | `ratio (δ₁ on ZMod 2) = 1/2` evaluates the definition at `K₂` and would fail if `ratio` drifted; `cantorLevel` is L1's hypothesis at an infinite profinite group. Not read: `cantorLevel_antitone`, the Spec instantiations |
+
+**None says less or more than its sentence beyond the pulled-back level**, by statement; the proofs are the kernel's.
+
+### 8.7 The new row (ruling 507 (b)): X25B-L1's levels against the finite graphs — disposition, not stated
+
+It belongs to the wave: the row's words are about the graphs on `Y/K_k` and nothing states the comparison. **Shape**: for `Y` as in L1,
+`K` an open subgroup, `νY` finite and symmetric with `νY(K) = 0`, and `S̄ = {c ∈ Y ⧸ K : νY(π⁻¹c) > 0}`:
+`ratio (νY ∗ cosetAverage K) ≤ (Cay(Y ⧸ K, S̄)).indepNum / |Y ⧸ K|` (`SimpleGraph.indepNum` is Mathlib's; with `νY(K) > 0` the left side
+is 0 and the finite graph would have a loop). With X25B-PZ applied first it bounds the level in the product. Leaves (the implementer's
+route, its finding 4, which I read and find sound on paper): L-a almost surely the cosets of positive share form an `S̄`-independent set;
+L-b `P(B) = E[share of the origin's coset] ≤ P(0̄ ∈ I_ω)`; L-c stationarity makes `P(c ∈ I_ω)` constant in `c`, so it is
+`E|I_ω|/|Y ⧸ K| ≤ α/|Y ⧸ K|`. About 300 lines. **Left**: the Lean statement (K10c; my budget ended here), and the form X25B-T's chain
+reads, which I did not open.
+
+## Stage 9 — SAVED (FS131-K10b): the skeleton's evidence, the prices, the hand-off
+
+### 9.1 Evidence
+
+- **Build**: `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, exit 0, 454 of 454 batches
+  (`data/fs131/k10b/logs/build-2-skeleton.log`); every warning is `declaration uses 'sorry'`: this pass's eleven (`NormOneTarget` 2,
+  `FloorPlanes` 4, `Floor128` 1, `ProductFactor` 1, `MajorityVote` 1, `NegCircleModel` 2) and the twelve of the two files proved on other
+  branches (`StandingFive` 9, `StationaryRatio` 3). An earlier build failed on `FloorPlanes` (a missing `Fintype Fˣ` instance and a missing
+  import), `logs/build-1-floor.log`: the control that the build reads these files.
+- `tools/check_architecture.py`: PASS (`logs/arch-final.log`). `./scripts/dupnames.sh`: exit 1 on the one pair known before this job,
+  `Plane.conj_e` (`Plane/Chord`, `Plane/SixFragment`); nothing of this pass's ten modules is listed (`logs/dupnames.log`).
+- No `native_decide`, no `axiom` in the ten modules (grep). `scripts/Axioms.lean` block "FS131-K10b": 25 sorry-free declarations for
+  the landing's audit; nothing under IMPORTED.
+- Tools, each with its fault watched to fire: `fs131_k10b_circle.py` (`--fault`: exit 1, five violations), `fs131_k10b_u128.py`
+  (`--fault`: exit 1), `fs131_k10b_gen128.py` (`--fault`: exit 1).
+
+### 9.2 Leaves proved in this pass (each [kernel on this branch], by the build above)
+
+Stage 6: `RatioBound.card_mul_le_of_indep`, `le_chromaticNumber_of_charSum` (with `fourier_sq_mul_charSum`,
+`sum_fourier_sq_mul_charSum_eq_zero`, `sum_fourier_sq`); `comap_factorSigma_eq`, `comap_factorSigma_eq_of_action`,
+`si4_equivariant_factorSigma`. Stage 7: `kloostermanBound_of_card_le_five`; the certificate `clmul_P_qBig`, `bezout4`, `bezout128`,
+`order_checks`, `counts_ok`; `targetFloor_mono`, `standingFloor_mono`. Stage 8: `preimage_mem_factorSets`, `comap_factorSigma_le`; the
+eight theorems of `GapSeven`. **Proved over open leaves** (not in the Axioms block): `targetFloor_of_charSum`,
+`targetFloor_seven_of_kloosterman`, `targetFloor_eight_128`, `targetFloor_seven_128`, `standingFloor_seven`, `standingFloor_five`,
+`seven_le_localBound_of_kloosterman`.
+
+### 9.3 Prices (re-priced from this pass's proved leaves: the ratio bound, 170 lines in two rounds; `GapSeven`, eight facts in one)
+
+| job | files (no two jobs share one) | leaves | lines, about | harness tokens, about |
+|---|---|---|---|---|
+| I-D1 | `Arith/NormOneTarget`, `Arith/FloorPlanes` | 6 | 610 | 300k |
+| I-D2 | `Arith/Floor128` | 1 (six children) | 520 | 300k |
+| I-D3 | `Arith/ProductFactor`, `Arith/MajorityVote`, `Arith/NegCircleModel` | 4 | 860 | 350k (cut `NegCircleModel` off if it runs long) |
+| K10c, then I-D4 | J45-SI-5, J45-SI-C (measure part), J45-N1 (a)(b) or its two-fact interface, the X25B level row | — | planner 150k; one implementer job | — |
+
+I-D1, I-D2, I-D3 are independent: no file and no lemma shared (`Floor128`'s leaf does not read `NormOneTarget`'s leaves; the shared
+`RatioBound` and `targetFloor_of_charSum` are already proved). `Arith/TargetFloors`, `Arith/GapSeven`, `Arith/FactorAction`,
+`Arith/RatioBound` have no open leaf.
+
+### 9.4 For the joining job
+
+- Merge order is free (new modules only; `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean` are append-only conflicts).
+  **Run `./scripts/dupnames.sh` on the joined tree before the axiom audit.** This pass declares in three existing namespaces from new
+  modules: `SpectralInputs` (`comap_factorSigma_eq`, `comap_factorSigma_eq_of_action`, `si4_equivariant_factorSigma`,
+  `preimage_mem_factorSets`, `comap_factorSigma_le`, `prodMap₃`, `measurePreserving_prodMap₃`, `prodFactorSigma`, `contVec_prod_eq`,
+  `exists_parityHom`, `negCircle_trivial_bot`) and `StandingFive` (`involution_eq_pow`, `card_normOne`, `targetFloor_of_charSum`,
+  `KloostermanBound`, `kloostermanBound_of_card_le_five`, `sum_quadratic_eq`, `circle_sum_eq_kloosterman`, `circle_sum_le`,
+  `normOne_charSum_ge`, `targetFloor_seven_of_kloosterman`, `targetFloor_mono`, `standingFloor_mono`, `standingFloor_seven`,
+  `standingFloor_five`, `seven_le_localBound_of_kloosterman`) — none may be re-declared by the branches proving those files.
+- **Drop the two unread instance arguments** (ruling 494 (a)): `[Countable (unitRing F)]` from `sp_if`, `[IsProbabilityMeasure μ]` from
+  `spectral_carried_iff`. **Drop the seven arguments `StationaryRatio`'s proofs do not read**, each row keeping its name on the general
+  statement, and track `StationarySet` as a carrier of the vacuity scan with its three inhabitants (ruling 507 (a), (d)).
+- Apply `StandingFive.seven_le_localBound` and `five_le_chromaticNumber` to `standingFloor_seven` / `standingFloor_five`
+  (§ 7.4), so the wave's statements carry `KloostermanBound` in place of `StandingFloor`.
+- `sp_if` is an open gate item until `negCircle_trivial_bot` lands; `contVec_prod_eq`'s docstring names its model and does not build it.
+- Nothing with a `sorry` reaches `main`.
+
+### 9.5 Drafts for files this job does not write
+
+- `BIBLIOGRAPHY.md`, `[MMST1996]`: § 7.3's note, and the status "read: pp. 225–232 (FS131-K10b)". `[Weil1948]`: unchanged until fetched;
+  its row's "`≤ 2√p`" is the prime case and the floor needs prime powers.
+- `plans/FS131-kernel-plan.md` § 7.4, new rows: `KloostermanBound` (states: Weil's bound at a finite field; used: `standingFloor_seven`;
+  path: an imported axiom with the four items once a page is read back, or `circle_sum_le`'s fallback (α)); `StandingFloor` leaves the
+  table at the join. § 7.2, wave 10: the ten new modules of § 9.3.
+- `plans/LEAN-BACKLOG.md`: J45-SI-J's state — stated at a wider class (`contVec_prod_eq`), its route's inputs "Bernoulli shifts have
+  Lebesgue spectrum; spectral measures of independent tensor products convolve; J45-N1 (c)" no longer read; J45-SI-C — finite facts
+  [kernel on branch], `GapSeven`; J45-SI-4 — the equivariance clause holds almost surely, and at the factor σ-algebra for a map with a
+  left inverse in the family.
+- `LEDGER.md`, G56's row: "`U₁₂₈`: non-trivial spectrum `−19 … 21` exactly [tools]; certificate kernel-checked on `fs131-w10k`."
+
+### 9.6 Registered expectations, scored
+
+Y1 (N1 (a)(b) hides a defect, 0.4): **not scored** — not stated. Y2 (SI-J, 0.35): **no defect; a generalization instead**. Y3 (SI-5,
+0.5), Y4 (SI-C, 0.4): **not scored** — measure parts not stated; SI-C's finite facts hold as filed. Y5 (at least one of the four, 0.8):
+**not met in what was stated** (one of four stated). Y6 (the majority vote formalizes as written, 0.75): **yes on paper**; (the strong law
+serves as it stands, 0.4): **yes for the entry's class, no for the class stated**. Y7 (floor (i): one job, 500 lines, 200–250k, kernel
+under a minute; proved here 0.2): the certificate is 2.3 s; the bridge re-priced at 520 lines and 300k; **not proved here**. Y8 (floor
+(ii) one job; the import statable here, 0.6 then 0.85): **no — ruled a named hypothesis**, because the held paper's theorem is false as
+printed in a case; the registration did not price that. Y9 (avoidable at 347, 0.1): **no**, with the bound's constant computed. Y10
+(`NegCircle` model proved here, 0.35): **no**; the candidate checks on paper.
