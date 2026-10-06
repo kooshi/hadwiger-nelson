@@ -2,11 +2,12 @@ import Proofs.HadwigerNelson.Plane.Models.Moves
 import Proofs.HadwigerNelson.Plane.Models.Stuck
 import Proofs.HadwigerNelson.Plane.Models.Bends
 
-/-! FS131-MA1: the axioms print of this job's records, read by `tools/fs131_ma_axioms.py`.
-Above the line `-- CONTROL`: every theorem of `Plane/Models/Paint` and `Plane/Models/Moves`; each must rest on a subset of the
-standard three axioms. Below it: the controls, each of which must be reported with `sorryAx`. -/
+/-! FS131-MA1: the axioms print of this job's records, read by `tools/fs131_ma_axioms.py` (which also writes the claimed
+part: `--write-list`). Claimed: every theorem of `Plane/Models/Paint` and `Plane/Models/Moves`; each must rest on a subset
+of the standard three axioms. The controls are the last block, after the planted declarations; each must be reported with
+`sorryAx`. -/
 
--- Plane/Models/Paint: the general layer (FS131-KM1), its 13 leaves and the helpers (FS131-MA1)
+-- Proofs/HadwigerNelson/Plane/Models/Paint.lean
 #print axioms HadwigerNelson.Plane.ArcMap.relabel_interiorPts
 #print axioms HadwigerNelson.Plane.ArcMap.relabel_Γ
 #print axioms HadwigerNelson.Plane.ArcMap.relabel_isPlaneMap
@@ -69,6 +70,8 @@ standard three axioms. Below it: the controls, each of which must be reported wi
 #print axioms HadwigerNelson.Plane.fanPiece_data
 #print axioms HadwigerNelson.Plane.isSector_fan_iff
 #print axioms HadwigerNelson.Plane.fanRest_ne_hornSet
+#print axioms HadwigerNelson.Plane.encard_sectors_fan
+#print axioms HadwigerNelson.Plane.encard_horns_fan
 #print axioms HadwigerNelson.Plane.frameX_zero
 #print axioms HadwigerNelson.Plane.frameY_zero
 #print axioms HadwigerNelson.Plane.abs_re_sub_le_dist
@@ -86,6 +89,9 @@ standard three axioms. Below it: the controls, each of which must be reported wi
 #print axioms HadwigerNelson.Plane.plantBall_subset_interiorPts
 #print axioms HadwigerNelson.Plane.plantBall_subset_region_zero
 #print axioms HadwigerNelson.Plane.tangentBrick_subset_interiorPts
+#print axioms HadwigerNelson.Plane.re_add_mul_I
+#print axioms HadwigerNelson.Plane.im_add_mul_I
+#print axioms HadwigerNelson.Plane.mk_mem_tangentBrick
 #print axioms HadwigerNelson.Plane.closedBall_tangentCentre_subset_tangentBrick
 #print axioms HadwigerNelson.Plane.tangentDisc_subset_interiorPts
 #print axioms HadwigerNelson.Plane.isOpen_tangentBrick
@@ -104,9 +110,11 @@ standard three axioms. Below it: the controls, each of which must be reported wi
 #print axioms HadwigerNelson.Plane.dist_tangentCentre_le_of_mem_hornSet
 #print axioms HadwigerNelson.Plane.dist_lt_one_of_hornZone
 #print axioms HadwigerNelson.Plane.closure_inter_sphere_subset
+#print axioms HadwigerNelson.Plane.ArcMap.allowedCone_tangent
+#print axioms HadwigerNelson.Plane.halfPlane_plantDir
 #print axioms HadwigerNelson.Plane.ArcMap.tangent_contact_cone
 
--- Plane/Models/Moves: the two models, their 18 leaves, the four moves applied
+-- Proofs/HadwigerNelson/Plane/Models/Moves.lean
 #print axioms HadwigerNelson.Plane.hornB_nondegenerate
 #print axioms HadwigerNelson.Plane.hornB_finite
 #print axioms HadwigerNelson.Plane.frontier_hornW_subset
@@ -133,6 +141,8 @@ standard three axioms. Below it: the controls, each of which must be reported wi
 #print axioms HadwigerNelson.Plane.hornModel_flanks
 #print axioms HadwigerNelson.Plane.hornModel_clear
 #print axioms HadwigerNelson.Plane.hornW_subset
+#print axioms HadwigerNelson.Plane.hornModel_tangent
+#print axioms HadwigerNelson.Plane.hornModel_allowedCone
 #print axioms HadwigerNelson.Plane.hornModel_contact_cone
 #print axioms HadwigerNelson.Plane.hornModel_contact
 #print axioms HadwigerNelson.Plane.hornModel_cone
@@ -144,6 +154,7 @@ standard three axioms. Below it: the controls, each of which must be reported wi
 #print axioms HadwigerNelson.Plane.closure_holedTile_subset
 #print axioms HadwigerNelson.Plane.holedTile_subset_interiorPts
 #print axioms HadwigerNelson.Plane.mem_holedTile_of_mem_closure
+#print axioms HadwigerNelson.Plane.holedTile_base_mem
 #print axioms HadwigerNelson.Plane.isPreconnected_holedTile
 #print axioms HadwigerNelson.Plane.hornModel_holedTile
 #print axioms HadwigerNelson.Plane.twoHornB_nondegenerate
@@ -167,12 +178,15 @@ standard three axioms. Below it: the controls, each of which must be reported wi
 #print axioms HadwigerNelson.Plane.twoHornModel_rest_gap_subset_col
 #print axioms HadwigerNelson.Plane.twoHornModel_isHorn
 #print axioms HadwigerNelson.Plane.twoHornModel_hasSectors
+#print axioms HadwigerNelson.Plane.twoHornModel_hasDegree
+#print axioms HadwigerNelson.Plane.twoHornModel_hasHornCount
 #print axioms HadwigerNelson.Plane.twoHornW_subset
+#print axioms HadwigerNelson.Plane.twoHornModel_tangent
+#print axioms HadwigerNelson.Plane.twoHornModel_allowedCone
 #print axioms HadwigerNelson.Plane.twoHornModel_cone
 #print axioms HadwigerNelson.Plane.twoHornModel_available
 #print axioms HadwigerNelson.Plane.twoHornModel_rayMerge
 #print axioms HadwigerNelson.Plane.twoHornModel_merge
-
 namespace MAControl
 
 open HadwigerNelson.Plane Metric

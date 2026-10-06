@@ -10,7 +10,9 @@ parses every answer, and fails if
   * a claimed record carries any axiom outside the standard three (it names the axiom),
   * a control does not carry `sorryAx` (the instrument could not see an open leaf),
   * the number of answers differs from the number of `#print axioms` lines, or Lean printed an error (a misspelt name must
-    not read as a pass).
+    not read as a pass),
+  * the claimed list is not exactly the theorems of `Plane/Models/Paint` and `Plane/Models/Moves` (a theorem added to a file
+    and not to the list must not go unprinted; `--write-list` rewrites the claimed part from the files).
 
 Exit 0 iff none of these. Output: one line per record, then the counts. `--self-test` plants three faults in copies of the
 list (an open record listed as claimed, a clean record listed as a control, a misspelt name) and requires each to fail with
@@ -21,6 +23,43 @@ import os, re, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "data/fs131/ma/MAAxioms.lean")
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
+
+
+FILES = ["Proofs/HadwigerNelson/Plane/Models/Paint.lean", "Proofs/HadwigerNelson/Plane/Models/Moves.lean"]
+
+
+def file_theorems(path):
+    """The full names of the theorems a model file declares, by its `namespace` / `end` lines."""
+    out, ns = [], []
+    for line in open(os.path.join(ROOT, path)):
+        m = re.match(r"^namespace (\S+)", line)
+        if m:
+            ns.append(m.group(1))
+        m = re.match(r"^end (\S+)", line)
+        if m and ns and ns[-1] == m.group(1):
+            ns.pop()
+        m = re.match(r"^theorem\s+(\S+)", line)
+        if m:
+            out.append(".".join(ns + [m.group(1)]))
+    return out
+
+
+def write_list():
+    """Rewrite the claimed part of the list from the two files; the part from `-- CONTROL` on, and the planted
+    declarations above it (the `namespace MAControl` block), are kept as they stand."""
+    text = open(SRC).read()
+    start = text.index("namespace MAControl")
+    head = ["import Proofs.HadwigerNelson.Plane.Models.Moves", "import Proofs.HadwigerNelson.Plane.Models.Stuck",
+            "import Proofs.HadwigerNelson.Plane.Models.Bends", "",
+            "/-! FS131-MA1: the axioms print of this job's records, read by `tools/fs131_ma_axioms.py` (which also writes the claimed",
+            "part: `--write-list`). Claimed: every theorem of `Plane/Models/Paint` and `Plane/Models/Moves`; each must rest on a subset",
+            "of the standard three axioms. The controls are the last block, after the planted declarations; each must be reported with",
+            "`sorryAx`. -/", ""]
+    for path in FILES:
+        head.append(f"-- {path}")
+        head += [f"#print axioms {n}" for n in file_theorems(path)]
+        head.append("")
+    open(SRC, "w").write("\n".join(head) + text[start:])
 
 
 def split_at_control(text):
@@ -79,6 +118,14 @@ def check(src, say=print):
     if not controls:
         say("NO CONTROL LISTED: the print has nothing that must go red")
         bad += 1
+    if src == SRC:
+        want = [n for path in FILES for n in file_theorems(path)]
+        missing = sorted(set(want) - set(claimed))
+        extra = sorted(set(claimed) - set(want))
+        if missing or extra:
+            say(f"LIST STALE: {len(missing)} theorem(s) of the files not listed {missing[:5]}, {len(extra)} listed and not in the "
+                f"files {extra[:5]} (rewrite with --write-list)")
+            bad += 1
     say(f"RESULT: {clean} of {len(claimed)} claimed records on the standard three; {fired} of {len(controls)} controls fire; "
           f"{bad} problem(s) -> {'PASS' if not bad else 'FAIL'}")
     return bad
@@ -116,6 +163,10 @@ def self_test():
 
 
 def main():
+    if "--write-list" in sys.argv:
+        write_list()
+        print("list rewritten:", SRC)
+        return
     if "--self-test" in sys.argv:
         sys.exit(0 if self_test() else 1)
     sys.exit(1 if check(SRC) else 0)

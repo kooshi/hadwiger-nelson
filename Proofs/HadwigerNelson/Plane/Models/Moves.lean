@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Plane.Models.Paint
 
 /-!
-# Models of the four local moves: one horn and two horns in a brick, with a tangent disc (FS131-KM1, skeleton)
+# Models of the four local moves: one horn and two horns in a brick, with a tangent disc (FS131-KM1; its leaves FS131-MA1)
 
 `plans/FS131-models-kernel-plan.md` § 3. Two maps of the plane in eight colours, each the brick map with one spare colour `7` painted on
 small sets inside two bricks:
@@ -17,6 +17,11 @@ small sets inside two bricks:
 
 Each model theorem is the move applied to the map: it elaborates only if every hypothesis of the move is one of the facts proved here, at
 once, on the one object. What each exercises and what it meets only degenerately is in the record, § 3.4.
+
+**How the facts are read off the picture** (FS131-MA1, `plans/FS131-MA1-implementation.md` § 3.2). The class of `7` is the painted set
+(`hornModel_region_seven`); near the planted vertex the new arcs are a fan of tangent arcs, so the sectors are the fan's rest and its
+horns for every radius up to `1/10` (`hornModel_isSector_iff`, `twoHornModel_isSector_iff`); and the class reaches `ω(plantPt)` at the
+tangent point only, so the allowed cone is the closed half-plane `d · plantDir ≥ 0` (`hornModel_allowedCone`).
 -/
 
 namespace HadwigerNelson.Plane
@@ -63,21 +68,31 @@ theorem hornModel_isPlaneMap : hornModel.IsPlaneMap := ArcMap.paint_isPlaneMap (
 /-- `hornModel` covers the closed unit disc about the planted vertex. -/
 theorem hornModel_covers : hornModel.Covers plantPt 1 := ArcMap.covers_of_isPlaneMap hornModel_isPlaneMap _ _
 
-/-- The base of the two horn models. -/
+/-- `hornModel`, unfolded: the painting it is. -/
 theorem hornModel_eq_paint : hornModel = (brickBase 8 (by norm_num)).paint hornW hornB hornB_nondegenerate hornB_finite
     frontier_hornW_subset (fun _ => 7) (fun _ _ _ => Filter.Eventually.of_forall fun _ => rfl) := rfl
 
 /-- The fan of `hornModel` at the planted vertex: the tangent arcs of curvatures `∓1/2`. -/
 noncomputable def hornFan : Fin 2 → ℝ := ![-1 / 2, 1 / 2]
 
+-- spec example for `hornFan`
+example : hornFan 0 = -1 / 2 ∧ hornFan 1 = 1 / 2 := ⟨rfl, rfl⟩
+
+/-- The fan's curvatures increase. -/
 theorem hornFan_strictMono : StrictMono hornFan := by
   rw [Fin.strictMono_iff_lt_succ]
   intro i
   fin_cases i
-  simp [hornFan]; norm_num
+  show (-1 / 2 : ℝ) < 1 / 2
+  norm_num
 
+/-- The fan's arcs out to `1/10` are graphs over the radius. -/
 theorem hornFan_bound (i : Fin 2) : |hornFan i| * (1 / 10) ≤ 1 := by
-  fin_cases i <;> simp [hornFan, abs_of_pos] <;> norm_num
+  fin_cases i
+  · show |(-1 / 2 : ℝ)| * (1 / 10) ≤ 1
+    rw [abs_of_neg (by norm_num)]; norm_num
+  · show |(1 / 2 : ℝ)| * (1 / 10) ≤ 1
+    rw [abs_of_pos (by norm_num)]; norm_num
 
 /-- **Near the planted vertex the new arcs of `hornModel` are its fan.** -/
 theorem hornB_inter_ball {r : ℝ} (hr : r ≤ 1 / 10) {z : ℂ} (hz : z ∈ ball plantPt r) :
@@ -92,6 +107,7 @@ theorem hornB_inter_ball {r : ℝ} (hr : r ≤ 1 / 10) {z : ℂ} (hz : z ∈ bal
       linarith
   · exact fun h => Or.inl h
 
+/-- The interior points of `hornModel` near the planted vertex are the ball off the fan. -/
 theorem hornModel_interiorPts_inter_ball {r : ℝ} (hr : r ≤ 1 / 10) :
     hornModel.interiorPts ∩ ball plantPt r = ball plantPt r \ ⋃ i, (germArc plantPt 0 (hornFan i) (1 / 10)).carrier :=
   ArcMap.interiorPts_paint_inter_ball
@@ -258,11 +274,11 @@ theorem hornW_subset : hornW ⊆ closedBall plantPt (1 / 10) ∪ tangentDisc := 
   · exact Or.inl (mem_closedBall.mpr hz.1.le)
   · exact Or.inr hz
 
-/-- **The contact and the cone of `7` in `hornModel`.** -/
-theorem hornModel_contact_cone : hornModel.IsContact plantPt 7 (plantPt + plantDir) ∧
-    hornModel.InType plantPt 7 (plantPt + plantDir) ∧ -plantDir ∉ hornModel.allowedCone plantPt 7 ∧
-    (interior (hornModel.allowedCone plantPt 7)).Nonempty := by
-  refine ArcMap.tangent_contact_cone ?_ ?_ ?_ ?_
+/-- **The class of `7` against `ω(plantPt)`**: `7` is carried at the planted vertex, its class lies in `B(plantPt, 1)`, holds the tangent
+disc, and reaches `ω(plantPt)` at the tangent point only — the hypotheses of `ArcMap.allowedCone_tangent`. -/
+theorem hornModel_tangent : 7 ∈ hornModel.coloursAt plantPt ∧ hornModel.region 7 ⊆ ball plantPt 1 ∧
+    tangentDisc ⊆ hornModel.region 7 ∧ closure (hornModel.region 7) ∩ sphere plantPt 1 ⊆ {plantPt + plantDir} := by
+  refine ⟨?_, ?_, ?_, ?_⟩
   · show plantPt ∈ closure (hornModel.region 7)
     rw [hornModel_region_seven]
     exact closure_mono subset_union_left (mem_closure_of_mem_coneAt
@@ -275,6 +291,17 @@ theorem hornModel_contact_cone : hornModel.IsContact plantPt 7 (plantPt + plantD
     exact subset_union_right
   · rw [hornModel_region_seven]
     exact closure_inter_sphere_subset hornW_subset
+
+/-- **The allowed cone of `7` at the planted vertex is the closed half-plane `d · plantDir ≥ 0`**: one contact, in-type and not
+out-type. -/
+theorem hornModel_allowedCone : hornModel.allowedCone plantPt 7 = {d | 0 ≤ dot d plantDir} :=
+  (ArcMap.allowedCone_tangent hornModel_tangent.1 hornModel_tangent.2.1 hornModel_tangent.2.2.1 hornModel_tangent.2.2.2).2.2.2
+
+/-- **The contact and the cone of `7` in `hornModel`.** -/
+theorem hornModel_contact_cone : hornModel.IsContact plantPt 7 (plantPt + plantDir) ∧
+    hornModel.InType plantPt 7 (plantPt + plantDir) ∧ -plantDir ∉ hornModel.allowedCone plantPt 7 ∧
+    (interior (hornModel.allowedCone plantPt 7)).Nonempty :=
+  ArcMap.tangent_contact_cone hornModel_tangent.1 hornModel_tangent.2.1 hornModel_tangent.2.2.1 hornModel_tangent.2.2.2
 
 /-- **The contact**: the tangent point is an in-type contact of `7` at the planted vertex, and the opposite direction is not allowed —
 the allowed cone is not the whole plane. -/
@@ -315,6 +342,7 @@ theorem holedTile_eq : holedTile = tangentBrick \ closedBall (plantPt + 19 / 20 
   rw [holedTile, tangentDisc, closure_ball _ (by norm_num : (1 / 20 : ℝ) ≠ 0)]
   rfl
 
+/-- The holed tile is open. -/
 theorem isOpen_holedTile : IsOpen holedTile := by
   rw [holedTile_eq]
   exact isOpen_tangentBrick.sdiff isClosed_closedBall
@@ -356,6 +384,14 @@ theorem mem_holedTile_of_mem_closure {z : ℂ} (hzI : z ∈ hornModel.interiorPt
   rw [hornB, biUnion_union, biUnion_singleton, tangentCircle_carrier]
   exact Or.inr hs
 
+/-- A point of the holed tile: `1/2 + (7/10) i`, in the brick's lower left corner. -/
+theorem holedTile_base_mem : ((1 / 2 : ℝ) : ℂ) + ((7 / 10 : ℝ) : ℂ) * I ∈ holedTile := by
+  rw [holedTile_eq]
+  refine ⟨mk_mem_tangentBrick (by norm_num) (by norm_num), fun h => ?_⟩
+  have h1 := abs_le.mp ((abs_re_sub_le_dist _ _).trans (mem_closedBall.mp h))
+  rw [tangentCentre_re, re_add_mul_I] at h1
+  linarith [h1.1]
+
 /-- **The holed tile is connected**: the four rectangles of the brick off the disc's bounding square are convex and chained at the
 corners, and every other point `y` is joined to them by the radial segment `[y, c + (3/2)(y − c)]`. -/
 theorem isPreconnected_holedTile : IsPreconnected holedTile := by
@@ -382,23 +418,26 @@ theorem isPreconnected_holedTile : IsPreconnected holedTile := by
   -- the four convex pieces, chained at three corners
   have hconv : ∀ H : Set ℂ, Convex ℝ H → IsPreconnected (tangentBrick ∩ H) := fun H hH =>
     (convex_tangentBrick.inter hH).isPreconnected
-  have hp12 : (11 / 10 + 23 / 20 * I : ℂ) ∈ tangentBrick := by
-    refine ⟨?_, ?_, ?_, ?_⟩ <;> simp <;> norm_num
-  have hp23 : (1 / 2 + 23 / 20 * I : ℂ) ∈ tangentBrick := by
-    refine ⟨?_, ?_, ?_, ?_⟩ <;> simp <;> norm_num
-  have hp34 : (1 / 2 + 7 / 10 * I : ℂ) ∈ tangentBrick := by
-    refine ⟨?_, ?_, ?_, ?_⟩ <;> simp <;> norm_num
+  have hp12 : ((11 / 10 : ℝ) : ℂ) + ((23 / 20 : ℝ) : ℂ) * I ∈ tangentBrick := mk_mem_tangentBrick (by norm_num) (by norm_num)
+  have hp23 : ((1 / 2 : ℝ) : ℂ) + ((23 / 20 : ℝ) : ℂ) * I ∈ tangentBrick := mk_mem_tangentBrick (by norm_num) (by norm_num)
+  have hp34 : ((1 / 2 : ℝ) : ℂ) + ((7 / 10 : ℝ) : ℂ) * I ∈ tangentBrick := mk_mem_tangentBrick (by norm_num) (by norm_num)
+  have hx0D : ((1 / 2 : ℝ) : ℂ) + ((7 / 10 : ℝ) : ℂ) * I ∈ {z : ℂ | z.im < 101 / 100} := by
+    show (_ : ℂ).im < 101 / 100
+    rw [im_add_mul_I]; norm_num
   have hUpre : IsPreconnected U := by
     rw [hU, inter_union_distrib_left, inter_union_distrib_left, inter_union_distrib_left]
-    refine IsPreconnected.union (1 / 2 + 7 / 10 * I) (Or.inr ⟨hp34, ?_⟩) ⟨hp34, ?_⟩
-      (IsPreconnected.union (1 / 2 + 23 / 20 * I) (Or.inr ⟨hp23, ?_⟩) ⟨hp23, ?_⟩
-        (IsPreconnected.union (11 / 10 + 23 / 20 * I) ⟨hp12, ?_⟩ ⟨hp12, ?_⟩
+    exact IsPreconnected.union _
+        (Or.inr ⟨hp34, by show (_ : ℂ).re < 92 / 100; rw [re_add_mul_I]; norm_num⟩) ⟨hp34, hx0D⟩
+      (IsPreconnected.union _
+          (Or.inr ⟨hp23, by show 111 / 100 < (_ : ℂ).im; rw [im_add_mul_I]; norm_num⟩)
+          ⟨hp23, by show (_ : ℂ).re < 92 / 100; rw [re_add_mul_I]; norm_num⟩
+        (IsPreconnected.union _
+            ⟨hp12, by show 51 / 50 < (_ : ℂ).re; rw [re_add_mul_I]; norm_num⟩
+            ⟨hp12, by show 111 / 100 < (_ : ℂ).im; rw [im_add_mul_I]; norm_num⟩
           (hconv _ (convex_halfSpace_re_gt _)) (hconv _ (convex_halfSpace_im_gt _)))
         (hconv _ (convex_halfSpace_re_lt _))) (hconv _ (convex_halfSpace_im_lt _))
-    all_goals simp
-    all_goals norm_num
-  refine isPreconnected_of_forall (1 / 2 + 7 / 10 * I) fun y hy => ?_
-  have hx0 : (1 / 2 + 7 / 10 * I : ℂ) ∈ U := ⟨hp34, Or.inr (by simp; norm_num)⟩
+  refine isPreconnected_of_forall (((1 / 2 : ℝ) : ℂ) + ((7 / 10 : ℝ) : ℂ) * I) fun y hy => ?_
+  have hx0 : ((1 / 2 : ℝ) : ℂ) + ((7 / 10 : ℝ) : ℂ) * I ∈ U := ⟨hp34, Or.inr hx0D⟩
   by_cases hyU : y ∈ U
   · exact ⟨U, hUsub, hx0, hyU, hUpre⟩
   -- `y` is in the disc's bounding square: push it radially out of the square
@@ -464,15 +503,8 @@ theorem isPreconnected_holedTile : IsPreconnected holedTile := by
 four clauses of wave 5's `IsHoleOf holedTile tangentDisc` (`Plane/ValidMap/MapGraph`), written out. -/
 theorem hornModel_holedTile : hornModel.IsTile holedTile ∧ tangentDisc.Nonempty ∧ tangentDisc ⊆ (closure holedTile)ᶜ ∧
     Bornology.IsBounded tangentDisc ∧ Disjoint (closure tangentDisc) (closure ((closure holedTile)ᶜ \ tangentDisc)) := by
-  have hx0 : (1 / 2 + 7 / 10 * I : ℂ) ∈ holedTile := by
-    rw [holedTile_eq]
-    refine ⟨by refine ⟨?_, ?_, ?_, ?_⟩ <;> simp <;> norm_num, fun h => ?_⟩
-    have h1 := abs_le.mp ((abs_re_sub_le_dist _ _).trans (mem_closedBall.mp h))
-    rw [tangentCentre_re] at h1
-    simp at h1
-    linarith [h1.1]
-  refine ⟨⟨1 / 2 + 7 / 10 * I, holedTile_subset_interiorPts hx0, ?_⟩, ⟨_, mem_ball_self (by norm_num)⟩, ?_,
-    Metric.isBounded_ball, ?_⟩
+  have hx0 := holedTile_base_mem
+  refine ⟨⟨_, holedTile_subset_interiorPts hx0, ?_⟩, ⟨_, mem_ball_self (by norm_num)⟩, ?_, Metric.isBounded_ball, ?_⟩
   · -- the tile through `x₀` is the holed brick
     refine Subset.antisymm (isPreconnected_holedTile.subset_connectedComponentIn hx0 holedTile_subset_interiorPts) ?_
     refine IsPreconnected.subset_left_of_subset_union isOpen_holedTile isClosed_closure.isOpen_compl
@@ -559,13 +591,32 @@ theorem twoHornModel_eq_paint : twoHornModel = (brickBase 8 (by norm_num)).paint
 /-- The fan of `twoHornModel` at the planted vertex: the tangent arcs of curvatures `−3/4, −1/2, 1/2, 3/4`. -/
 noncomputable def twoHornFan : Fin 4 → ℝ := ![-3 / 4, -1 / 2, 1 / 2, 3 / 4]
 
+-- spec example for `twoHornFan`
+example : twoHornFan 0 = -3 / 4 ∧ twoHornFan 1 = -1 / 2 ∧ twoHornFan 2 = 1 / 2 ∧ twoHornFan 3 = 3 / 4 := ⟨rfl, rfl, rfl, rfl⟩
+
+/-- The fan's curvatures increase. -/
 theorem twoHornFan_strictMono : StrictMono twoHornFan := by
   rw [Fin.strictMono_iff_lt_succ]
   intro i
-  fin_cases i <;> simp [twoHornFan] <;> norm_num
+  fin_cases i
+  · show (-3 / 4 : ℝ) < -1 / 2
+    norm_num
+  · show (-1 / 2 : ℝ) < 1 / 2
+    norm_num
+  · show (1 / 2 : ℝ) < 3 / 4
+    norm_num
 
+/-- The fan's arcs out to `1/10` are graphs over the radius. -/
 theorem twoHornFan_bound (i : Fin 4) : |twoHornFan i| * (1 / 10) ≤ 1 := by
-  fin_cases i <;> simp [twoHornFan, abs_of_pos] <;> norm_num
+  fin_cases i
+  · show |(-3 / 4 : ℝ)| * (1 / 10) ≤ 1
+    rw [abs_of_neg (by norm_num)]; norm_num
+  · show |(-1 / 2 : ℝ)| * (1 / 10) ≤ 1
+    rw [abs_of_neg (by norm_num)]; norm_num
+  · show |(1 / 2 : ℝ)| * (1 / 10) ≤ 1
+    rw [abs_of_pos (by norm_num)]; norm_num
+  · show |(3 / 4 : ℝ)| * (1 / 10) ≤ 1
+    rw [abs_of_pos (by norm_num)]; norm_num
 
 /-- **Near the planted vertex the new arcs of `twoHornModel` are its fan.** -/
 theorem twoHornB_inter_ball {r : ℝ} (hr : r ≤ 1 / 10) {z : ℂ} (hz : z ∈ ball plantPt r) :
@@ -588,6 +639,7 @@ theorem twoHornB_inter_ball {r : ℝ} (hr : r ≤ 1 / 10) {z : ℂ} (hz : z ∈ 
     · exact Or.inl (Or.inr (Or.inl hi))
     · exact Or.inl (Or.inr (Or.inr hi))
 
+/-- The interior points of `twoHornModel` near the planted vertex are the ball off the fan. -/
 theorem twoHornModel_interiorPts_inter_ball {r : ℝ} (hr : r ≤ 1 / 10) :
     twoHornModel.interiorPts ∩ ball plantPt r =
       ball plantPt r \ ⋃ i, (germArc plantPt 0 (twoHornFan i) (1 / 10)).carrier :=
@@ -762,6 +814,19 @@ theorem twoHornModel_hasSectors : twoHornModel.HasSectors plantPt 7 2 ∧ twoHor
     rw [h, encard_pair (fanRest_ne_hornSet plantPt 0 hr.1 0 (-1 / 2) (1 / 2))]
     rfl
 
+/-- The planted vertex of `twoHornModel` has degree `4`: the rest, the two horns and the gap between them. -/
+theorem twoHornModel_hasDegree : twoHornModel.HasDegree plantPt 4 := by
+  filter_upwards [Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 10 by norm_num)] with r hr
+  exact encard_sectors_fan twoHornFan twoHornFan_strictMono hr.1 hr.2 twoHornFan_bound (by show (-3 / 4 : ℝ) < 0; norm_num)
+    (by show (0 : ℝ) < 3 / 4; norm_num) (twoHornModel_interiorPts_inter_ball hr.2)
+
+/-- The planted vertex of `twoHornModel` has three horns: the two painted ones and the gap between them, which is a horn set of the
+brick's colour. -/
+theorem twoHornModel_hasHornCount : twoHornModel.HasHornCount plantPt 3 := by
+  filter_upwards [Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 10 by norm_num)] with r hr
+  exact encard_horns_fan twoHornFan twoHornFan_strictMono hr.1 hr.2 twoHornFan_bound (by show (-3 / 4 : ℝ) < 0; norm_num)
+    (by show (0 : ℝ) < 3 / 4; norm_num) (twoHornModel_interiorPts_inter_ball hr.2)
+
 /-- The painted set lies in the small disc about the planted vertex and the tangent disc. -/
 theorem twoHornW_subset : twoHornW ⊆ closedBall plantPt (1 / 10) ∪ tangentDisc := by
   rintro z ((hz | hz) | hz)
@@ -769,27 +834,35 @@ theorem twoHornW_subset : twoHornW ⊆ closedBall plantPt (1 / 10) ∪ tangentDi
   · exact Or.inl (hornSet_subset_plantBall le_rfl hz)
   · exact Or.inr hz
 
+/-- **The class of `7` against `ω(plantPt)`** in `twoHornModel`: the hypotheses of `ArcMap.allowedCone_tangent`. -/
+theorem twoHornModel_tangent : 7 ∈ twoHornModel.coloursAt plantPt ∧ twoHornModel.region 7 ⊆ ball plantPt 1 ∧
+    tangentDisc ⊆ twoHornModel.region 7 ∧ closure (twoHornModel.region 7) ∩ sphere plantPt 1 ⊆ {plantPt + plantDir} := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · show plantPt ∈ closure (twoHornModel.region 7)
+    rw [twoHornModel_region_seven]
+    exact closure_mono (subset_union_left.trans subset_union_left) (mem_closure_of_mem_coneAt
+      (mem_coneAt_hornSet plantPt 0 (by norm_num : (-3 / 4 : ℝ) < -1 / 2) (by norm_num : (0 : ℝ) < 1 / 10)))
+  · rw [twoHornModel_region_seven]
+    rintro z ((hz | hz) | hz)
+    · exact mem_ball.mpr (hz.1.trans (by norm_num))
+    · exact mem_ball.mpr (hz.1.trans (by norm_num))
+    · exact tangentDisc_subset_ball.1 hz
+  · rw [twoHornModel_region_seven]
+    exact subset_union_right
+  · rw [twoHornModel_region_seven]
+    exact closure_inter_sphere_subset twoHornW_subset
+
+/-- **The allowed cone of `7` at the planted vertex of `twoHornModel` is the closed half-plane `d · plantDir ≥ 0`.** -/
+theorem twoHornModel_allowedCone : twoHornModel.allowedCone plantPt 7 = {d | 0 ≤ dot d plantDir} :=
+  (ArcMap.allowedCone_tangent twoHornModel_tangent.1 twoHornModel_tangent.2.1 twoHornModel_tangent.2.2.1
+    twoHornModel_tangent.2.2.2).2.2.2
+
 /-- The allowed cone of `7` at the planted vertex has interior points, and is not the whole plane (the tangent point is an in-type
 contact). -/
 theorem twoHornModel_cone : (interior (twoHornModel.allowedCone plantPt 7)).Nonempty ∧
     twoHornModel.IsContact plantPt 7 (plantPt + plantDir) ∧ -plantDir ∉ twoHornModel.allowedCone plantPt 7 := by
-  have h : twoHornModel.IsContact plantPt 7 (plantPt + plantDir) ∧
-      twoHornModel.InType plantPt 7 (plantPt + plantDir) ∧ -plantDir ∉ twoHornModel.allowedCone plantPt 7 ∧
-      (interior (twoHornModel.allowedCone plantPt 7)).Nonempty := by
-    refine ArcMap.tangent_contact_cone ?_ ?_ ?_ ?_
-    · show plantPt ∈ closure (twoHornModel.region 7)
-      rw [twoHornModel_region_seven]
-      exact closure_mono (subset_union_left.trans subset_union_left) (mem_closure_of_mem_coneAt
-        (mem_coneAt_hornSet plantPt 0 (by norm_num : (-3 / 4 : ℝ) < -1 / 2) (by norm_num : (0 : ℝ) < 1 / 10)))
-    · rw [twoHornModel_region_seven]
-      rintro z ((hz | hz) | hz)
-      · exact mem_ball.mpr (hz.1.trans (by norm_num))
-      · exact mem_ball.mpr (hz.1.trans (by norm_num))
-      · exact tangentDisc_subset_ball.1 hz
-    · rw [twoHornModel_region_seven]
-      exact subset_union_right
-    · rw [twoHornModel_region_seven]
-      exact closure_inter_sphere_subset twoHornW_subset
+  have h := ArcMap.tangent_contact_cone twoHornModel_tangent.1 twoHornModel_tangent.2.1 twoHornModel_tangent.2.2.1
+    twoHornModel_tangent.2.2.2
   exact ⟨h.2.2.2, h.1, h.2.2.1⟩
 
 /-- MERGE and MERGE-RAY are both available at the planted vertex of `twoHornModel`. -/

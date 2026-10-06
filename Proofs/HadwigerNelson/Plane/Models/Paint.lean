@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
 import Proofs.HadwigerNelson.Plane.Woodall.Steps
 
 /-!
-# The models' construction: a plane map with spare colours, painted on small sets (FS131-KM1, skeleton)
+# The models' construction: a plane map with spare colours, painted on small sets (FS131-KM1; its leaves FS131-MA1)
 
 `plans/FS131-models-kernel-plan.md` § 2. Every model of this lane is one object: the seven-colour brick map read in more colours
 (`brickBase`), with a picture painted on small open sets, each inside one brick (`ArcMap.paint`), in colours the bricks do not use — so
@@ -19,8 +19,14 @@ partition (`isSector_iff_of_partition`, `encard_sectorsOf_of_partition`: `Plane/
 * **Horn patches** (`hornArcs`, `frontier_hornSet_subset`): the boundary of a horn set as three arcs; **the fan** (`fanRest`,
   `ball_diff_fan`, `isSector_fan_iff`): the sectors of a ball cut by tangent arcs of increasing curvatures along one ray.
 
+* **What the models share** (FS131-MA1): the small disc about the planted vertex and the tangent disc's cell (`plantBall_subset_brick`,
+  `tangentBrick`), horns against arcs and against each other (`disjoint_hornSet_hornArcs`, `disjoint_fanRest_hornSet`), the classes of a
+  painting (`ArcMap.region_paint_of_region_eq_empty`, `ArcMap.region_paint_subset`), a horn against the tangent disc
+  (`dist_tangentCentre_le_of_mem_hornSet`), and the contact the tangent disc makes (`ArcMap.allowedCone_tangent`).
+
 **Inhabitants.** `relabel` and `paint` are defined for every arc map; the base is `sevenBrickMap`'s (valid, of the plane, Condition 5); the
-models built on them are `Plane/Models/Moves`, `Stuck`, `Bends`.
+models built on them are `Plane/Models/Moves`, `Stuck`, `Bends`. Every lemma here that takes a map as a hypothesis is applied to
+`hornModel` and `twoHornModel` in `Plane/Models/Moves` (valid maps of the plane in eight colours); each such docstring names its use.
 -/
 
 namespace HadwigerNelson.Plane
@@ -191,12 +197,14 @@ theorem paint_condition5 (h5 : F.Condition5) (hB5 : ∀ a ∈ B, ∀ p, (a.carri
   · exact h5 a ha p
   · exact (hB5 a ha p).subset fun z hz => ⟨hz.1.1, hz.2⟩
 
-/-- **The class of a colour the base does not use** is its painted set, off the new arcs. -/
+/-- **The class of a colour the base does not use** is its painted set, off the new arcs. Used at `hornModel` (`hornModel_region_seven`,
+`Plane/Models/Moves`), where the class is the painted set itself. -/
 theorem region_paint_of_region_eq_empty {j : Fin k} (hj : F.region j = ∅) :
     (F.paint W B hB hBf hW g hg).region j = (F.interiorPts ∩ W ∩ g ⁻¹' {j}) \ ⋃ a ∈ B, a.carrier := by
   rw [region_paint, hj, Set.empty_sdiff, empty_union]
 
-/-- **The class of a colour that is not painted only shrinks**: it is the base's class off the painted set and the new arcs. -/
+/-- **The class of a colour that is not painted only shrinks**: it is the base's class off the painted set and the new arcs. Used through
+`isClear_paint_of_mem_region`. -/
 theorem region_paint_subset {j : Fin k} (hj : ∀ x ∈ W, g x ≠ j) :
     (F.paint W B hB hBf hW g hg).region j ⊆ F.region j \ W := by
   rw [region_paint]
@@ -204,13 +212,15 @@ theorem region_paint_subset {j : Fin k} (hj : ∀ x ∈ W, g x ≠ j) :
   · exact h
   · exact absurd h.2 (hj z h.1.2)
 
-/-- **A point the base map has of colour `j`, in a valid base, is clear for `j` in a painting that does not paint `j`.** -/
+/-- **A point the base map has of colour `j`, in a valid base, is clear for `j` in a painting that does not paint `j`.** Inhabitant of the
+hypotheses: `brickBase 8` painted as `hornModel` (`hornModel_clear`, `Plane/Models/Moves`). -/
 theorem isClear_paint_of_mem_region (hF : F.Valid) {j : Fin k} (hj : ∀ x ∈ W, g x ≠ j) {z : ℂ} (hz : z ∈ F.region j) :
     (F.paint W B hB hBf hW g hg).IsClear j z :=
   fun y hy => hF.region_dist_ne_one j z hz y (region_paint_subset hj hy).1
 
 /-- **The interior points of a painting near a fan**: where a ball of base interior points meets the new arcs exactly in a fan of
-tangent arcs, the painted map's interior points in the ball are the ball off the fan — the hypothesis of `isSector_fan_iff`. -/
+tangent arcs, the painted map's interior points in the ball are the ball off the fan — the hypothesis of `isSector_fan_iff`. Used at
+`hornModel` and `twoHornModel` (`hornModel_interiorPts_inter_ball`, `twoHornModel_interiorPts_inter_ball`, `Plane/Models/Moves`). -/
 theorem interiorPts_paint_inter_ball {v : ℂ} {r : ℝ} {C : Set ℂ} (hball : ball v r ⊆ F.interiorPts)
     (hC : ∀ z ∈ ball v r, z ∈ ⋃ a ∈ B, a.carrier ↔ z ∈ C) :
     (F.paint W B hB hBf hW g hg).interiorPts ∩ ball v r = ball v r \ C := by
@@ -333,11 +343,15 @@ theorem plantDir_im : plantDir.im = 4 / 5 := by simp [plantDir]
 
 /-- The abscissa of the tangent disc's centre `97/100 + (106/100) i`. -/
 theorem tangentCentre_re : (plantPt + 19 / 20 * plantDir).re = 97 / 100 := by
-  simp [plantPt, plantDir]; norm_num
+  have h : (19 / 20 : ℂ) = ((19 / 20 : ℝ) : ℂ) := by norm_num
+  rw [Complex.add_re, h, Complex.re_ofReal_mul, plantPt_re, plantDir_re]
+  norm_num
 
 /-- The ordinate of the tangent disc's centre. -/
 theorem tangentCentre_im : (plantPt + 19 / 20 * plantDir).im = 106 / 100 := by
-  simp [plantPt, plantDir]; norm_num
+  have h : (19 / 20 : ℂ) = ((19 / 20 : ℝ) : ℂ) := by norm_num
+  rw [Complex.add_im, h, Complex.im_ofReal_mul, plantPt_im, plantDir_im]
+  norm_num
 
 /-- `plantDir` is a unit vector. -/
 theorem norm_plantDir : ‖plantDir‖ = 1 := by
@@ -853,6 +867,49 @@ theorem fanRest_ne_hornSet (v : ℂ) (α : ℝ) {κlo κhi r : ℝ} (hr : 0 < r)
     fanRest v α κlo κhi r ≠ hornSet v α' κ₁ κ₂ r :=
   ne_hornSet_of_interior_coneAt (interior_coneAt_fanRest_nonempty v α κlo κhi hr) α' κ₁ κ₂ r
 
+/-- **The number of sectors at a fan** of `m + 2` tangent arcs is `m + 2`: the rest and the `m + 1` horns. Used at `twoHornModel`
+(`twoHornModel_hasDegree`, `Plane/Models/Moves`). -/
+theorem encard_sectors_fan {k : ℕ} {G : ArcMap k} {m : ℕ} (κ : Fin (m + 2) → ℝ) (hκ : StrictMono κ) {v : ℂ} {α ρ r : ℝ}
+    (hr : 0 < r) (hrρ : r ≤ ρ) (hκρ : ∀ i, |κ i| * ρ ≤ 1) (hlo : κ 0 < 0) (hhi : 0 < κ (Fin.last (m + 1)))
+    (hI : G.interiorPts ∩ ball v r = ball v r \ ⋃ i, (germArc v α (κ i) ρ).carrier) :
+    {S | G.IsSector v r S}.encard = (m + 2 : ℕ) := by
+  have hU : G.interiorPts ∩ ball v r = ⋃ o, fanPiece κ v α r o := by
+    rw [hI, ball_diff_fan κ hκ v α hr hrρ hκρ, iUnion_fanPiece]
+  obtain ⟨ho, hp, hd, hn, hc⟩ := fanPiece_data κ hκ v α hr hrρ hκρ hlo hhi
+  have h : {S | G.IsSector v r S} = range (fanPiece κ v α r) := by
+    ext S
+    simp only [mem_setOf_eq, mem_range]
+    rw [ArcMap.isSector_iff_of_partition hU ho hp hd hn hc]
+    exact ⟨fun ⟨i, h⟩ => ⟨i, h.symm⟩, fun ⟨i, h⟩ => ⟨i, h.symm⟩⟩
+  rw [h, ← image_univ, (ArcMap.injective_of_disjoint hd hn).encard_image, encard_univ, ENat.card_eq_coe_fintype_card,
+    Fintype.card_option, Fintype.card_fin]
+
+/-- **The number of horns at a fan** is `m + 1`: every piece but the rest, which is no horn set. Used at `twoHornModel`
+(`twoHornModel_hasHornCount`, `Plane/Models/Moves`). -/
+theorem encard_horns_fan {k : ℕ} {G : ArcMap k} {m : ℕ} (κ : Fin (m + 2) → ℝ) (hκ : StrictMono κ) {v : ℂ} {α ρ r : ℝ}
+    (hr : 0 < r) (hrρ : r ≤ ρ) (hκρ : ∀ i, |κ i| * ρ ≤ 1) (hlo : κ 0 < 0) (hhi : 0 < κ (Fin.last (m + 1)))
+    (hI : G.interiorPts ∩ ball v r = ball v r \ ⋃ i, (germArc v α (κ i) ρ).carrier) :
+    {S | G.IsSector v r S ∧ ∃ α' κ₁ κ₂, κ₁ < κ₂ ∧ S = hornSet v α' κ₁ κ₂ r}.encard = (m + 1 : ℕ) := by
+  have hU : G.interiorPts ∩ ball v r = ⋃ o, fanPiece κ v α r o := by
+    rw [hI, ball_diff_fan κ hκ v α hr hrρ hκρ, iUnion_fanPiece]
+  obtain ⟨ho, hp, hd, hn, hc⟩ := fanPiece_data κ hκ v α hr hrρ hκρ hlo hhi
+  have hsec := @ArcMap.isSector_iff_of_partition k G _ _ v r hU ho hp hd hn hc
+  have h : {S | G.IsSector v r S ∧ ∃ α' κ₁ κ₂, κ₁ < κ₂ ∧ S = hornSet v α' κ₁ κ₂ r} =
+      (fun i : Fin (m + 1) => fanPiece κ v α r (some i)) '' univ := by
+    ext S
+    simp only [mem_setOf_eq, mem_image, mem_univ, true_and]
+    constructor
+    · rintro ⟨hS, α', κ₁, κ₂, -, hSh⟩
+      obtain ⟨o, rfl⟩ := hsec.mp hS
+      cases o with
+      | none => exact absurd hSh (fanRest_ne_hornSet v α hr α' κ₁ κ₂)
+      | some i => exact ⟨i, rfl⟩
+    · rintro ⟨i, rfl⟩
+      exact ⟨hsec.mpr ⟨some i, rfl⟩, α, κ i.castSucc, κ i.succ, hκ Fin.castSucc_lt_succ, rfl⟩
+  have hinj : Function.Injective (fun i : Fin (m + 1) => fanPiece κ v α r (some i)) := fun i j hij =>
+    Option.some.inj (ArcMap.injective_of_disjoint hd hn hij)
+  rw [h, hinj.encard_image, encard_univ, ENat.card_eq_coe_fintype_card, Fintype.card_fin]
+
 
 /-! ## Frames along `e 0`, horns against arcs, and the fan's pieces (FS131-MA1: what the models' leaves share) -/
 
@@ -952,7 +1009,8 @@ theorem fanPiece_subset_ball {m : ℕ} (κ : Fin (m + 2) → ℝ) (v : ℂ) (α 
   | none => exact fun z hz => hz.1
   | some i => exact fun z hz => hz.1
 
-/-- A sector of one colour holds no point of another. -/
+/-- A sector of one colour holds no point of another (a sector is non-empty). Used at `twoHornModel`'s four sectors
+(`twoHornModel_hasSectors`, `Plane/Models/Moves`). -/
 theorem ArcMap.IsSector.false_of_col {k : ℕ} {G : ArcMap k} {v : ℂ} {r : ℝ} {S : Set ℂ} (hS : G.IsSector v r S) {c c' : Fin k}
     (h : S ⊆ G.col ⁻¹' {c}) (h' : S ⊆ G.col ⁻¹' {c'}) (hne : c ≠ c') : False := by
   obtain ⟨z, hz⟩ := hS.nonempty
@@ -994,6 +1052,18 @@ theorem tangentBrick_subset_interiorPts {k : ℕ} (h : 7 ≤ k) : tangentBrick �
   fun z hz => brickBase_mem_interiorPts h (c := 0) (r := 1) (by push_cast; constructor <;> linarith [hz.1, hz.2.1])
     (by push_cast; constructor <;> linarith [hz.2.2.1, hz.2.2.2])
 
+/-- The real part of `x + y i`. -/
+theorem re_add_mul_I (x y : ℝ) : ((x : ℂ) + (y : ℂ) * I).re = x := by simp
+
+/-- The imaginary part of `x + y i`. -/
+theorem im_add_mul_I (x y : ℝ) : ((x : ℂ) + (y : ℂ) * I).im = y := by simp
+
+/-- A point `x + y i` with `2/5 < x < 6/5` and `3/5 < y < 6/5` is in the tangent brick. -/
+theorem mk_mem_tangentBrick {x y : ℝ} (hx : 2 / 5 < x ∧ x < 6 / 5) (hy : 3 / 5 < y ∧ y < 6 / 5) :
+    (x : ℂ) + (y : ℂ) * I ∈ tangentBrick :=
+  ⟨by rw [re_add_mul_I]; exact hx.1, by rw [re_add_mul_I]; exact hx.2, by rw [im_add_mul_I]; exact hy.1,
+    by rw [im_add_mul_I]; exact hy.2⟩
+
 /-- The closed tangent disc lies in its brick, with room: within `3/40` of the centre is still inside. -/
 theorem closedBall_tangentCentre_subset_tangentBrick {z : ℂ} (hz : dist z (plantPt + 19 / 20 * plantDir) ≤ 3 / 40) :
     z ∈ tangentBrick := by
@@ -1002,6 +1072,15 @@ theorem closedBall_tangentCentre_subset_tangentBrick {z : ℂ} (hz : dist z (pla
   rw [tangentCentre_re] at h1
   rw [tangentCentre_im] at h2
   exact ⟨by linarith [h1.1], by linarith [h1.2], by linarith [h2.1], by linarith [h2.2]⟩
+
+-- spec examples for `tangentBrick`: it holds the tangent disc's centre, and not the planted vertex (which is a cell lower)
+example : plantPt + 19 / 20 * plantDir ∈ tangentBrick :=
+  closedBall_tangentCentre_subset_tangentBrick (by rw [dist_self]; norm_num)
+
+example : plantPt ∉ tangentBrick := fun h => by
+  have := h.2.2.1
+  rw [plantPt_im] at this
+  norm_num at this
 
 /-- The tangent disc consists of interior points of the base. -/
 theorem tangentDisc_subset_interiorPts {k : ℕ} (h : 7 ≤ k) : tangentDisc ⊆ (brickBase k h).interiorPts :=
@@ -1169,14 +1248,16 @@ theorem closure_inter_sphere_subset {W : Set ℂ} (hW : W ⊆ closedBall plantPt
   · rw [← tangentDisc_subset_ball.2]
     exact ⟨h, hzs⟩
 
-/-- **The contact and the cone of a colour whose class lies in `B(plantPt, 1)`, holds the tangent disc, and reaches `ω(plantPt)` at
-the tangent point only**: the tangent point is an in-type contact and no out-type one, so the allowed cone is the closed half-plane
-`d · plantDir ≥ 0` — it has interior points and does not hold `−plantDir`. -/
-theorem ArcMap.tangent_contact_cone {k : ℕ} {G : ArcMap k} {c : Fin k} (hc : c ∈ G.coloursAt plantPt)
+/-- **The allowed cone at the tangent disc's contact is a closed half-plane.** For a colour carried at the planted vertex whose class
+lies in `B(plantPt, 1)`, holds the tangent disc, and reaches `ω(plantPt)`, in its closure, at the tangent point only: the tangent point
+is a contact, in-type and not out-type (the tangent disc's own tile has it in its closure and lies inside the unit disc), and the
+allowed cone is `{d : d · plantDir ≥ 0}`. Inhabitant of the hypotheses: `hornModel` with the colour `7` (`hornModel_tangent`,
+`Plane/Models/Moves`), and `twoHornModel` (`twoHornModel_tangent`). -/
+theorem ArcMap.allowedCone_tangent {k : ℕ} {G : ArcMap k} {c : Fin k} (hc : c ∈ G.coloursAt plantPt)
     (hsub : G.region c ⊆ ball plantPt 1) (hD : tangentDisc ⊆ G.region c)
     (hcl : closure (G.region c) ∩ sphere plantPt 1 ⊆ {plantPt + plantDir}) :
     G.IsContact plantPt c (plantPt + plantDir) ∧ G.InType plantPt c (plantPt + plantDir) ∧
-      -plantDir ∉ G.allowedCone plantPt c ∧ (interior (G.allowedCone plantPt c)).Nonempty := by
+      ¬ G.OutType plantPt c (plantPt + plantDir) ∧ G.allowedCone plantPt c = {d | 0 ≤ dot d plantDir} := by
   have hw : plantPt + plantDir ∈ closure tangentDisc ∩ sphere plantPt 1 := by rw [tangentDisc_subset_ball.2]; rfl
   have hcontact : G.IsContact plantPt c (plantPt + plantDir) :=
     ⟨hc, by rw [dist_eq_norm, add_sub_cancel_left, norm_plantDir], closure_mono hD hw.1⟩
@@ -1195,25 +1276,42 @@ theorem ArcMap.tangent_contact_cone {k : ℕ} {G : ArcMap k} {c : Fin k} (hc : c
       rwa [hcq] at h
     have hdisj := hO _ hTc (closure_mono hDT hw.1)
     exact disjoint_left.mp hdisj (hDT hq) (mem_closedBall.mpr (by rw [dist_tangentCentre]; norm_num))
-  have hcone : ∀ d, d ∈ G.allowedCone plantPt c ↔ 0 ≤ dot d plantDir := by
-    intro d
-    constructor
-    · intro hd
-      have := (hd _ hcontact).1 (hin _)
-      rwa [add_sub_cancel_left] at this
-    · intro hd w hw'
-      have hwe : w = plantPt + plantDir := hcl ⟨hw'.2.2, mem_sphere.mpr hw'.2.1⟩
-      subst hwe
-      exact ⟨fun _ => by rwa [add_sub_cancel_left], fun hO => absurd hO hout⟩
-  refine ⟨hcontact, hin _, ?_, ?_⟩
-  · rw [hcone, dot_neg_left, dot_self_eq, norm_plantDir]; norm_num
+  refine ⟨hcontact, hin _, hout, ?_⟩
+  ext d
+  constructor
+  · intro hd
+    have := (hd _ hcontact).1 (hin _)
+    rwa [add_sub_cancel_left] at this
+  · intro hd w hw'
+    have hwe : w = plantPt + plantDir := hcl ⟨hw'.2.2, mem_sphere.mpr hw'.2.1⟩
+    subst hwe
+    exact ⟨fun _ => by rw [add_sub_cancel_left]; exact hd, fun hO => absurd hO hout⟩
+
+/-- The closed half-plane `d · plantDir ≥ 0` does not hold `−plantDir`, and has interior points (the disc of radius `1/2` about
+`plantDir`). -/
+theorem halfPlane_plantDir :
+    -plantDir ∉ {d : ℂ | 0 ≤ dot d plantDir} ∧ (interior {d : ℂ | 0 ≤ dot d plantDir}).Nonempty := by
+  constructor
+  · show ¬ 0 ≤ dot (-plantDir) plantDir
+    rw [dot_neg_left, dot_self_eq, norm_plantDir]; norm_num
   · refine ⟨plantDir, mem_interior.mpr ⟨ball plantDir (1 / 2), fun d hd => ?_, isOpen_ball, mem_ball_self (by norm_num)⟩⟩
-    rw [hcone]
+    show 0 ≤ dot d plantDir
     have h1 : dot d plantDir = dot plantDir plantDir + dot (d - plantDir) plantDir := by rw [dot_sub]; ring
     have h2 := abs_dot_le (d - plantDir) plantDir
     rw [norm_plantDir, mul_one] at h2
     have h3 : ‖d - plantDir‖ < 1 / 2 := by rw [← dist_eq_norm]; exact hd
     rw [h1, dot_self_eq, norm_plantDir]
     linarith [(abs_le.mp h2).1]
+
+/-- **The contact and the cone at the tangent disc**, in the form the moves' hypotheses read: the tangent point is an in-type contact,
+the allowed cone does not hold `−plantDir` and has interior points. Inhabitants as for `ArcMap.allowedCone_tangent`. -/
+theorem ArcMap.tangent_contact_cone {k : ℕ} {G : ArcMap k} {c : Fin k} (hc : c ∈ G.coloursAt plantPt)
+    (hsub : G.region c ⊆ ball plantPt 1) (hD : tangentDisc ⊆ G.region c)
+    (hcl : closure (G.region c) ∩ sphere plantPt 1 ⊆ {plantPt + plantDir}) :
+    G.IsContact plantPt c (plantPt + plantDir) ∧ G.InType plantPt c (plantPt + plantDir) ∧
+      -plantDir ∉ G.allowedCone plantPt c ∧ (interior (G.allowedCone plantPt c)).Nonempty := by
+  obtain ⟨h1, h2, -, h4⟩ := ArcMap.allowedCone_tangent hc hsub hD hcl
+  rw [h4]
+  exact ⟨h1, h2, halfPlane_plantDir.1, halfPlane_plantDir.2⟩
 
 end HadwigerNelson.Plane
