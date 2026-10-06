@@ -1,0 +1,148 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 0,1,10,11
+'HadwigerNelson.Plane.ArcMap.HasHornCount.eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.HasDegree.eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ne_hornSet_of_interior_coneAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_small_arcsin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.col_mem_coloursAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.exists_openConfig_up' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.idx_idx' depends on axioms: [propext]
+'HadwigerNelson.Plane.BranchGerms.turns_idx' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.liftDir_idx' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.lift_idx' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.exists_openConfig_down' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.exists_openConfig' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.openWedge_subset_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openRay_subset_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openRay_nondegenerate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.openRim_subset_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openRim_nondegenerate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openArcs_subset_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openArcs_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openArcs_nondegenerate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_hlc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_agreesOff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_ringArcsWithin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_condition5' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_valid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_coloursAt_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_degree_horns' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_rim' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_allowedCone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_open' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.mem_openWedge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.mem_openPiece' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.mem_openRest' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isOpen_sectorBetween' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.polar_eq_of_abs_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.isOpen_openWedge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.isOpen_openPiece' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.isOpen_openRest' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.mem_openRay' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.mem_openRim' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.two_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.liftDir_succ_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openWedge_subset_sector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.mem_openPiece_of_Icc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openWedge_subset_openPiece' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.disjoint_openWedge_openRest' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.sector_rayPos_cases' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openCol_of_mem_openPiece' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.isClear_of_Icc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.isClear_of_mem_openWedge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openCol_of_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openCol_of_not_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.v_mem_openArcs' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_sectorBetween_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_sectorBetween' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.Ioo_subset_coneAt_sectorBetween' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.eq_of_mem_openRay' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.mem_openPiece_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.mem_openRest_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.exists_other' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.exists_germ_off' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.not_mem_openArcs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.sector_eq_hornSet_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.hasHornCount_chart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.isSector_iff_of_partition'' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.injOn_of_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openSectors_cases' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.idx_facts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.cone_piece_rest' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.facts_of_cone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.isPreconnected_piece_rest' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.disjoint_piece_rest' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.disjoint_piece_other' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.horn_subset_piece' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.mem_piece_of_Icc' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.mem_openPiece_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.mem_openRest_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.rest_subset_sector' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.disjoint_openSectors' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.openSectors_facts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.mem_open_interiorPts_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.mem_interiorPts_of_open_rim' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.mem_open_interiorPts_of_sector' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_partition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.mem_open_interiorPts_of_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.branchPt_mem_open_interiorPts_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.openCol_of_mem_sector_out' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_coloursAt_rim' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_not_hasRepeatedColour_rim' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.closure_sectorBetween_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.closure_gapSet_subset_gapSet' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.exists_clearSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.OpenConfig.v_mem_closure_region' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.mem_open_interiorPts_of_sector_off' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_region_of_region' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_region_cases' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_region_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_isContact_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_exists_tile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_tile_split' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.v_mem_closure_open_tile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_tile_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_inType_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.open_outType_iff' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,5 @@
+arcs: 7 circular radii (plus segments: the grid, the axis, T's two rays, T''s ray, the opening's ray); unit arcs: 0
+valid: 6 of 6 lemma inequalities hold
+sigma: below 1 refuted 6/6; above 1 refuted 4/4; admissible {1}
+nodrop witnesses: 4 of 4
+open: wedge c-clear; far ray inside D_c(v); v after: 3 sectors, 0 horns

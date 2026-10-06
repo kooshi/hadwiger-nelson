@@ -3369,3 +3369,42 @@ reason by the close.*
      `IsClean.eventually_not_isSite`, `exists_clean`. **Ruling**: the repair accepted — `hP` added to the three (not the weaker domain clauses: the consumer
      has `hP`, and the plane form is the simplest true statement). Alternative weighed: `closedBall P 1 ⊆ F.dom` / `cthickening 1 K ⊆ F.dom`. Why not: no
      consumer needs a non-plane map. Confidence: high. Credit: IL1, for a counterexample built by hand before anyone proved toward it. Sent to IL1 by message.
+381. **FS131-IL1 handed back** (Stage 8 SAVED, harness ≈ 437k by the task notice; record `fs131-w5c`'s `plans/FS131-limit-kernel-plan.md`, Stages 5–8; report
+     `data/fs131/reports/FS131-IL1.md`; commits `334e981a` … `6a792494`, pushed). **Results, [kernel] on the standard three** (in `Plane/ValidMap/Limit`):
+     `LocalStep.mono`; `LocalSeq.exists_stab`, `.frozen`, `.limitArcs_locallyFinite`, `.limitCol_locallyConstant`, `.eventually_agreesOn`, `.limit_valid`,
+     `.limit_isModification`, `.limit_isTerminalMap` (the definition `LocalSeq.limit` is `sorry`-free) — **validity, "no unit arc created, four-colour points keep
+     their colours", and terminality pass to the limit of a locally finite sequence of local steps**, at every point, the domain's edge included; the six locality
+     lemmas (two maps agreeing on an open `W ⊇ B̄(v, 3)` have the same colours, ring arcs, (Q)/(R2) kinds and move availability at `v`; MERGE's needs both valid,
+     through tile size alone); `not_available_of_not_isSite`, `IsClean.eventually_not_isSite`; 38 children. **Item 380's repair made** (`hP` on the three
+     finiteness lemmas; old and new statements in record Stage 7). **Receipt** (Keryx): `origin/fs131-w5c` is `6a792494`; the build log
+     (`build/gate/build/20261005T095506Z-3150087.log`) ends "Build completed successfully (5372 jobs)", 0 warnings other than `sorry`; `Limit`'s only `sorry` by grep
+     is `exists_clean`; `data/fs131/il/ILAxioms.out` parsed: 75 records, 63 standard (the named among them), 12 on `sorryAx` through the open leaves;
+     `tools/fs131_i5h_stmt_check.py da09c260`: PASS. **Prediction scored**: `frozen` and its consumers took about a fifth of the planned session;
+     `IsClean.eventually_not_isSite` was H, not M (planar geometry at a point of `Γ`). **Generalization**: the limit agrees with every late stage on any set the
+     late supports miss (`LocalSeq.agreesOn_of_disjoint`). **For the merge with `main`**: `Limit` imports this branch's stale `Contact` only for
+     `e_eq_of_mem_coneAt_hornSet` — the merge must keep that name or move the call. **Kept warts**: KL1's unused binders in four locality lemmas, referenced by
+     `have _ := …` (to drop when a planner next touches them). **Left (lane A)**: `exists_clean` (H, design in record § 8.2), the three `hP` lemmas (M each),
+     `mergeAvailable_of_bothKind` (M–H). Credit: IL1, for the limit in one pass and the counterexample of item 380.
+382. **FS131-E6, by message (mid-job): F6 is real; `exists_vertexStep`'s degree clause is false at an exact model; the repair is a fifth move.** (1) **Realized**
+     (stage 3, commit `6c0fb2a2`, `plans/FS131-E6-derivation.md` § 3; `tools/fs131_e6_model.py`, 5 controls each firing on its plant): a valid, clean plane map
+     with 12 colours (`c`, `g`, `h` and a 9-colour square background) and no arc of radius 1 (Condition 5 holds); at `v = 0` a lone `c`-horn between the axis
+     (`κ₁ = 0`) and `C₂` (`κ₂ = 2`), flanks `g` above, `h` below; an out-type `h` corner at `N = (0, 1)` whose shadow near `v` is exactly `B(N, 1)`, and a
+     `g`-region at `S′` bounded by the circle of radius 2 about `N`, whose shadow near `v` is exactly the outside of `B̄(N, 1)` — so `σ = 1` is the only
+     admissible split; `v` is the only site, and SHAVE the only move available there; shaving along `ω(N)` creates an (R2) arc (`IsModification` forbids it);
+     `exists_shave` needs `κ₂ ≤ 1`, and `shave_step_gen` needs `|σ| ≠ 1` or `σ ∈ {κ₁, κ₂}`. (2) **A defect in KL1's child `exists_vertexStep`** (not a landed
+     statement): adding an in-type `c` tile touching `ω(v)` at `w = (3/5, 4/5)`, no local modification lowers `v`'s degree without creating a unit arc or
+     adding a colour at `v` (E6-NODROP, § 3.4) — so "∃ m′ < m, F′.HasDegree v m′" is false at the model, every hypothesis holding. (3) **The repair**, to be
+     derived in E6's next stage: F6 forces `interior (allowedCone v c) ≠ ∅` (the contrapositive of `woodallCone`); at a lone horn with that interior nonempty,
+     **OPEN** applies — recolour with `c` a thin wedge beside the horn on the interior side of `D_c(v)` (FS110 § 2.8's sketched wedge-opening, a one-sector
+     W-MERGE) — valid, no unit arc, no colour added at `v`, degree not raised, one horn removed; in the model it gives a terminal map. The lone-horn case of
+     `exists_vertexStep` becomes: `int D_c(v) = ∅` → `exists_shave` with `woodallCone`'s bounds; otherwise OPEN; the descent counts degree plus horns at `v`
+     (NB4's D3: "count Φ + #horns"). `exists_vertexStep`'s degree clause and `acted_finitely` change; **`exists_terminal`, `exists_terminalMap` and
+     `IsTerminalMap` do not**. **Coordinator's slip**: E6's brief said `horn_bounds_of_noMerge` is on `main`; it is on `fs131-w5c` and `fs131-w5` (`FlankUA`).
+     Credit: E6, for the exact model with controls and a repair that keeps every backlog statement.
+383. **Rulings on items 381–382.** (a) **E6's finding accepted** (realized, controls firing): no backlog statement changes; N4-TERM as filed has a gap at a
+     lone horn (a correction owed to FS110-N-proof's N4 rows and FS112-WALK row 7 for the filing); E6 goes on to derive OPEN and the repaired
+     `exists_vertexStep` statement, with Lean-level forms. (b) **`exists_vertexStep`'s degree clause is held**: no implementer proves it as stated; it is
+     restated after E6's derivation lands (measure: degree plus horns). (c) **OPEN is a new move to formalize** — its construction after E6's derivation (likely
+     over MERGE's `MergeMove` machinery, a one-sector form); queued. (d) **IL1's slot → lane A's continuation, FS131-IL2, on `fs131-w5c`** (`exists_clean`, the
+     three `hP` lemmas, `mergeAvailable_of_bothKind`), none of which reads `exists_vertexStep`. Alternative weighed: lane B (`Terminal`'s two children). Why: the
+     freed lane's own continuation, on the limit's chain. Confidence: high. In flight after IL2's launch: 1 (E6) + 1 (M5) + 1 (IL2) = 3.

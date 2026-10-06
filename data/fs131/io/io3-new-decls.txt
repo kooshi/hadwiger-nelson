@@ -1,0 +1,15 @@
+HadwigerNelson.Plane.closure_sectorBetween_subset
+HadwigerNelson.Plane.ArcMap.Near.closure_gapSet_subset_gapSet
+HadwigerNelson.Plane.ArcMap.Near.OpenConfig.exists_clearSet
+HadwigerNelson.Plane.ArcMap.Near.OpenConfig.v_mem_closure_region
+HadwigerNelson.Plane.ArcMap.Near.mem_open_interiorPts_of_sector_off
+HadwigerNelson.Plane.ArcMap.Near.open_region_of_region
+HadwigerNelson.Plane.ArcMap.Near.open_region_cases
+HadwigerNelson.Plane.ArcMap.Near.open_region_subset
+HadwigerNelson.Plane.ArcMap.Near.open_isContact_iff
+HadwigerNelson.Plane.ArcMap.Near.open_exists_tile
+HadwigerNelson.Plane.ArcMap.Near.open_tile_split
+HadwigerNelson.Plane.ArcMap.Near.v_mem_closure_open_tile
+HadwigerNelson.Plane.ArcMap.Near.open_tile_cover
+HadwigerNelson.Plane.ArcMap.Near.open_inType_iff
+HadwigerNelson.Plane.ArcMap.Near.open_outType_iff
