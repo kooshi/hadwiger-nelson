@@ -236,6 +236,9 @@ Own count at this stage: about 230k (the harness's is not visible to me).
   rebuilt (`Pinch`, `Proofs`), 1 module with warnings**: `MapColouring.lean:194`, `declaration uses sorry` (the other implementer's
   `sat_inP`), 8m22s, exit 0 (`build/gate/build/20261006T131817Z-122361.log`; driver log
   `data/fs131/i6a/logs/build-2-all-leaves.log`). `Pinch`: no warning, no `sorry` (`grep -c sorry` reads 0).
+  **The committed tree is the built tree**: after stage 3's commit (`d2abf84e`, the working file identical to `HEAD`) the same
+  command reads "OK — all 1799 modules already up to date, nothing built, 1 module(s) with warnings", exit 0
+  (`build/gate/build/20261006T133230Z-240785.log`; driver log `build-3-confirm.log`).
 - **Axioms** (this job's print): 37 records, 37 clean, each exactly the standard three; the planted `sorry` fired
   (`data/fs131/i6a/logs/axioms-2.out`). The block "FS131-I6A" of `scripts/Axioms.lean` lists the seven leaves, the 27 named helpers and
   the planner's three theorems the leaves freed (`pinch_interface`, `c11_discs_interface`, `TwoColourNhd.mem_essBoundary`, which no
@@ -275,7 +278,7 @@ was needed. No statement defect among the seven (registered 0.15). Price: the pl
 time** from the stage-1 commit (12:57:02 UTC) to the end of the final build (13:26:41 UTC) for the seven leaves, their 27 named helpers
 and six models — seventeen of those minutes the two builds' walks (8m27s, 8m22s), and some of the rest two waits on the slot.
 
-Own count at this stage: about 330k (the harness's is not visible to me).
+Own count at this stage: about 340k (the harness's is not visible to me).
 
 ## Drafts for the front page
 
