@@ -1,0 +1,11 @@
+MATCH  CLAUDE.md :: Do not consider Lean formalization a cost. It's practically mechanical
+MATCH  plans/FS131-kernel-plan.md :: ### 7.3 What each wave's planning job must hold
+MATCH  plans/FS131-kernel-plan.md :: 1. **Reads its rows' derivation entries in full** (the CSV gives each 
+MATCH  plans/FS131-kernel-plan.md :: 3. **States every row at the class its argument reads** (G92), reports
+MATCH  plans/FS131-kernel-plan.md :: 4. **Names every hypothesis from outside the backlog** in the declarat
+MATCH  plans/FS131-kernel-plan.md :: **Wave 10** (14 rows):
+MATCH  plans/FS131-kernel-plan.md :: - `Arith/StandingFive`: TC1-STANDING-FIVE
+MATCH  plans/FS131-kernel-plan.md :: - `Arith/CharacterColouring`: FS89-CL2, FS89-S0A-10, FS89-S0A-2
+MATCH  plans/FS131-kernel-plan.md :: - `Arith/SpectralInputs`: J45-N1, J45-N2, J45-SI-4, J45-SI-5, J45-SI-C
+MATCH  plans/FS131-kernel-plan.md :: - `Arith/StationaryRatio`: X25B-L1, X25B-PZ
+MATCH  plans/FS131-kernel-plan.md :: | `Row123Chain` | row 123's chain (`min(L(F), 5) ≤ χ(F²)` for every re
