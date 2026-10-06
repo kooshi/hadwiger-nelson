@@ -6368,6 +6368,10 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.sq9Fan_dir_lt_nextDir
 #print axioms HadwigerNelson.Plane.sq9Fan_hasSector
 #print axioms HadwigerNelson.Plane.sq9Fan_not_hasHorn
+#print axioms HadwigerNelson.Plane.isUnitCurve_segment
+#print axioms HadwigerNelson.Plane.IsUnitCurve.mono
+#print axioms HadwigerNelson.Plane.norm_sub_le_of_discs
+#print axioms HadwigerNelson.Plane.sq9_isolatedAt
 
 #eval IO.println "=== PURCHASED ==="
 

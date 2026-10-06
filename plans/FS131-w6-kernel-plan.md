@@ -19,6 +19,19 @@ listed in `scripts/Axioms.lean`'s block "FS131-K6". Grade: [kernel] once the wav
 - Supporting: `essSupport_eq_closure_of_isOpen`; `sat_noPar` from the leaf `sat_inP`; the foundation's inhabitants `sq9_twoColourAt`,
   `sq9_hasTwoDiscsAt` (`Plane/Saturated/Basic`).
 
+**FS131-K6b (the second pass, stages 8–12).** Kernel-checked by the worktree's build (§ 12.3); grade: built, [kernel] at the wave's gate. No
+row of the backlog was proved whole by this pass. Proved:
+- `norm_sub_le_of_discs` (`Plane/Saturated/Curve`) — the normal of a two-sided unit-disc condition is 1-Lipschitz, by the parallelogram law: the
+  kernel's replacement for FS131-E8 § 3.1 (4)'s regularity step.
+- `sq9Fan : sq9.Fan sqVertex`, with `sq9_singular_near_vertex`, `sq9_bdry_near_vertex`, `sq9_region_near_vertex`, `sqVertex_mem_singularSet`,
+  `sq9_not_isCuspAt_near_vertex`, `sq9_twoColourNhd_of_re`, `_of_im` (`Plane/Saturated/FanExamples`) — the fan's inhabitant; `sq9_isolatedAt`.
+- The foundation's and the fan's API: `AeColouring.twoColourNhd_of_h1`, `AeColouring.twoColourNhd_of_halves`,
+  `notMem_essClosure_of_mem_densitySet`, `TwoColourNhd.ne`, `TwoColourOn.nonempty`, `Fan.dir_le_nextDir`, `Fan.hasSector_or_hasHorn`,
+  `Fan.branch_subset_interfaceSet`, `SingLocallyFinite.exists_ball_subset`, `isUnitCurve_segment`.
+- From leaves still `sorry` (so not yet theorems on the standard three): `TwoColourNhd.mem_essBoundary`, `pinch_interface`,
+  `c11_discs_interface` (FS111-M-PINCH and C11 (i) at interface points), `regJFan_of_saturated` and `regJFan_iff_singLocallyFinite`
+  (**FS131-E8-BRIDGE**, from `fan_of_isolated`), `Fan.sector_unique` (**FS121-DB1-L3**, from `Fan.sector_alone`).
+
 ## Stage 1 — SAVED: the readback and the registered expectations
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -560,3 +573,210 @@ first pass priced leaves of this kind (floor computations on `sq9`) at 2 h each.
 **Build**: OK — 466 of 466 batches, 3 modules rebuilt (`Fan`, `FanExamples`, `Proofs`), 2 modules with warnings, every warning
 `declaration uses sorry` (8, as at stage 9: the two new modules have none), exit 0 (`build/gate/build/20261006T115937Z-3809849.log`; driver log
 `data/fs131/k6b/logs/build-3-fan.log`). `tools/check_architecture.py`: PASS (`check-architecture-1.log`).
+
+## Stage 11 — SAVED: the bridge's eight rows — the curve notion, the skeleton, the plan and the price (`debruijn-obligation-modeling`, invoked fresh)
+
+**Read for this stage**: `plans/FS131-E8-derivation.md` whole (stage 8); `plans/FS121-V2-verification.md` §§ 1.4–2.4 in full (Lemmas C, H, T;
+DB1-L3; V2-SECTOR; the attack). Not read: every other argument of the first pass's § 7.2 item 4.
+
+### 11.1 The space, and the statements the proofs derive from
+
+No induction over data: the argument is *local to global by connectedness and compactness*. The local obligations, each a goal of its own:
+(L) a chart at every interface point; (C) three real-variable inequalities on a unit-speed curve; (G) a component is one such curve (the
+continuation); (K) compactness on a circle; (O) the angular order of the lifts. The statements are shaped around them:
+
+- **One curve notion** (`Plane/Saturated/Curve`): `IsUnitCurve γ ψ I` — `γ' = e ∘ ψ` on `I`, the tangent angle `ψ` 1-Lipschitz. Unit speed
+  and "curvature at most 1" in the only form any argument reads (`|ψ s − ψ u| ≤ |s − u|`); every inequality of E8 §§ 3.2–3.3 is then one integral
+  of a cosine. A graph over a line was refused: the inequalities are in arclength, and a graph form would re-derive the reparametrization at
+  every use. The ladder's circular arcs and segments are `IsUnitCurve`s with `ψ` affine (`ψ s = ψ₀ + s/n`, or constant); the first pass's
+  "curves as sets with a pointwise type" stays the consumers' form — `IsInterfaceChart.discs` carries `HasTwoDiscsAt` at every point of the curve.
+- **Components of the essential boundary in the punctured disc**, never "interface arcs": under `IsolatedAt` the two sets are equal
+  (`Σ ∩ B(z, R) ⊆ {z}`), and the statements read `c.essBdry ∩ (ball z R \ {z})` to save every proof that step.
+- **The fan's consumers' facts as set-level lemmas** (§ 10.2).
+
+### 11.2 The modules and the rows
+
+| module | rows | leaves (`sorry`) | proved here |
+|---|---|---|---|
+| `Plane/Saturated/Curve` (imports `Plane/Chord` only; no measure) | the curve part of FS131-E8-GAMMA, -BETA | `IsUnitCurve.chord` (C1), `.sin_le_inner` (C2), `.strictMonoOn_dist`, `.norm_sub_le`, `.one_le_dist` (the lens), `lipschitzOnWith_of_chord` | `isUnitCurve_segment` (the inhabitant), `IsUnitCurve.mono`, **`norm_sub_le_of_discs`** |
+| `Plane/Saturated/LocalGraph` (imports `Pinch`, `Curve`) | **FS131-E8-DELTA**; **FS131-E8-LOCAL** = FS111-M-C11 (ii) = FS111-W-NOBEND; FS121-V5-LOC (i), (ii) with V5-OFF | `AeColouring.ae_one_colour_of_isConnected`, `.closure_essBdry_subset`, `.notMem_essBdry_of_mem_densitySet`, `local_graph`, `AeColouring.local_graph` | the structure `IsInterfaceChart` |
+| `Plane/Saturated/FanBridge` (imports `LocalGraph`, `FanExamples`) | **FS131-E8-GAMMA, -BETA, -ALPHA, -FAN, -BRIDGE, -CLAUSE2**; FS121-V2-SECTOR, FS121-DB1-L3 (with FS111-W-NOREP) | `gamma`, `IsUnitCurve.exists_polarGraph`, `beta`, `alpha`, `fan_of_isolated`, `regJLiteral_of_saturated`, `finite_arcs_of_isBounded`, `Fan.two_le_n`, `Fan.col_ne`, `Fan.branch_outside_discs`, `Fan.branch_contacts`, `Fan.sector_alone` | `sq9_isolatedAt`; **`regJFan_of_saturated`** (BRIDGE, from `fan_of_isolated`), `regJFan_iff_singLocallyFinite`; `Fan.sector_unique` (DB1-L3, from `sector_alone`) |
+
+**Which of the first pass's rows became corollaries** (the brief's question): **FS111-M-C11 (ii)** is `local_graph` (with "no cusp in `U`", the
+deriver's erratum); **FS111-W-NOBEND** is its curve clause — no corner is `HasDerivWithinAt` at every point, curvature at most 1 is `lip` — the
+merge of ruling 487 (c) **confirmed, from its entry and the deriver's § 4.6** (its own argument, `plans/FS111-W-wild.md`, not read: a third
+pass's line); **FS121-V5-LOC (i)** is `closure_essBdry_subset` with `notMem_essBdry_of_mem_densitySet`, **(ii)** is `AeColouring.local_graph`;
+clause (iii) is not stated. **FS121-DB1-L3** is a case of **FS121-V2-SECTOR** (`sector_unique` from `sector_alone`), so FS111-W-NOREP rides on it.
+
+### 11.3 Each statement against its entry (`plans/FS131-E8-derivation.md`, verbatim words in quotes)
+
+| entry | declaration | read-back |
+|---|---|---|
+| FS131-E8-DELTA | `ae_one_colour_of_isConnected (hW : IsOpen W) (hWc : IsConnected W) (hb : Disjoint W c.essBdry) (hcusp : Disjoint W (cuspSet c.cls)) : ∃ j, W ≤ᵐ c.cls j` | "a connected open set that meets the essential boundary of no class and holds no cusp of any class is almost everywhere of one colour" — verbatim; `IsConnected` includes non-empty (for `W = ∅` every `j` serves) |
+| FS131-E8-LOCAL | `local_graph … (h : TwoColourOn A B N) (hU : IsOpen U) (hUN : U ⊆ N) (hcusp : ∀ x ∈ U, ¬ IsCuspAt A x ∧ ¬ IsCuspAt B x) (hsatA) (hsatB) (hy : y ∈ essBoundary A ∩ U) : ∃ Q γ ψ h', Q ⊆ U ∧ IsInterfaceChart A B N y Q γ ψ h'` | "an open set that holds no point of the singular set Σ": the argument reads of it only "no cusp" (§ 3.1 (1): "no cusp (it is off Σ)") and the one two-colour ball — so two sets, and `Σ` is not read (**wider**; the centred-ball `Σ` serves: ruling 495 (a) needs no change). "an open square … in which the interface set is the graph, over the tangent line at y, of a C^{1,1} function whose unit tangent is 1-Lipschitz in arclength": an open `Q ∋ y` in which `essBoundary A` is the image of an injective `IsUnitCurve` — the square and the graph are the proof's, the chart is what consumers read; "the two sides … connected open sets, each almost everywhere of one colour, of two different colours": `sides`, with `A`, `B` almost disjoint in `N`. Added: `discs` (the two unit discs at every point of the curve, normal `i e(ψ s)` into `B` — § 3.1 (2)). Not claimed (the chart's size bounded below; anything at `Σ`): not stated. `AeColouring.local_graph` is the entry's own form |
+| FS131-E8-GAMMA | `gamma (h : c.IsolatedAt z R) (hy) : ∃ L γ ψ, 0 < L ∧ L ≤ π/2 ∧ IsUnitCurve γ ψ (Icc 0 L) ∧ InjOn γ (Icc 0 L) ∧ component = γ '' Ioo 0 L ∧ (γ 0 = z ∨ γ 0 ∈ sphere z R) ∧ (γ L = z ∨ γ L ∈ sphere z R)` | "0 < R ≤ 1/2 such that B(z, R) holds no other point of Σ and every essential boundary point of B(z, R) other than z has … a point of that class's support at distance 1": `IsolatedAt`; "an open arc of length at most π/2, not closed": `L ≤ π/2`, injective on the closed interval; "each of whose two ends converges to z or to a point of the circle": the two disjunctions; "whose unit tangent has a limit at each end": `IsUnitCurve` on `[0, L]`. `z ∈ Σ` is not a hypothesis (the entry's "let z be a point of the singular set" is not read by §§ 3.2–3.4) |
+| FS131-E8-BETA | `IsUnitCurve.exists_polarGraph` (no colouring); `beta (h) (hy) (hz : z ∈ closure component) : ∃ φ d, ContinuousOn φ (Ioo 0 R) ∧ Tendsto φ (𝓝[>] 0) (𝓝 d) ∧ component = polarGraph z R φ` | "the distance from z is strictly increasing": `IsUnitCurve.strictMonoOn_dist`; "its other end lies on the circle", "a polar graph {z + t e(φ(t)) : 0 < t < R} with φ continuous on (0, R) and convergent": `beta`; "to an angle of the component's limit tangent at z": `exists_polarGraph`'s limit is `ψ 0` |
+| FS131-E8-ALPHA | `alpha (h) : {components meeting closedBall z (R/2)}.Finite ∧ ∃ r, 0 < r ∧ r ≤ R/2 ∧ ∀ w ∈ c.essBdry ∩ (ball z r \ {z}), z ∈ closure (component of w)` | verbatim, "has an end at z" read as `z` in the component's closure |
+| FS131-E8-FAN | `fan_of_isolated (hR : 0 < R) (hS : c.singularSet ∩ ball z R ⊆ {z}) (hsat : SaturatedOn c.cls (ball z R \ {z})) : Nonempty (c.Fan z)`; `Fan.two_le_n (hz : z ∈ c.singularSet) : 2 ≤ F.n`; `Fan.col_ne` | the entry's hypotheses verbatim, without "z a point of Σ" (read only for "at least two", `two_le_n`) and without `R ≤ 1/2` (pass to `min R (1/2)`); the conclusion is the first pass's structure, field by field as § 3.6 reads it. "at least two", "regions on the two sides of a curve being of different colours": for **any** fan, no saturation (**wider**, the planner's argument, § 11.5 (3)) |
+| FS131-E8-BRIDGE | `regJFan_of_saturated (hsat : Saturated c.cls) (hS : c.SingLocallyFinite) : c.RegJFan` (**proved** from FAN) | the deriver's hand-off line verbatim; `RegJBridge k` of the first pass's design follows with `RegJLiteral`'s second conjunct unread |
+| FS131-E8-CLAUSE2 | `regJLiteral_of_saturated`, `finite_arcs_of_isBounded (hK : Bornology.IsBounded K)` | "every point of Σ lies in the closure of finitely many connected components of the interface set, and every bounded set meets finitely many": the two declarations |
+
+**The docstring line of ruling 490 (b)** is on every theorem that takes a `Fan` (`sector_alone`; the module docstring of `Fan`): "under
+saturation … equivalent to `Σ` being locally finite, by FS131-E8-BRIDGE ([hand], one mind, until `fan_of_isolated` is proved)".
+
+### 11.4 The plan per leaf
+
+Mathlib names confirmed at the pin by the proofs built here or by `#check` (`data/fs131/k6b/K6bChecks.lean`): `parallelogram_law_with_norm`,
+`HasDerivWithinAt.ofReal_comp`, `LipschitzWith.const`, `le_of_tendsto_of_tendsto`, `Ioo_mem_nhdsGT`, `isClosed_iUnion_of_finite`,
+`tendsto_densityRatio_compl_of_mem`, `nonempty_of_measure_ne_zero`, `Real.cos_neg_of_pi_div_two_lt_of_lt`, `Real.sin_neg_of_neg_of_neg_pi_lt`,
+`Real.cos_pos_of_mem_Ioo`, `Measure.addHaar_affineSubspace`, `convex_halfSpace_im_lt`. Prices are implementer agent-hours (h) or days (d).
+
+| leaf | route and children | hard part | price |
+|---|---|---|---|
+| `IsUnitCurve.chord` | `γ ℓ − γ 0 = ∫₀^ℓ e(ψ s) ds` (`intervalIntegral.integral_eq_sub_of_hasDeriv_right` or the `Icc` form; `e ∘ ψ` continuous); the inner product with `e(ψ 0)` is `∫ cos(ψ s − ψ 0)`; `cos(ψ s − ψ 0) ≥ cos s` (`Real.cos_le_cos_of_nonneg_of_le_pi` after `Real.cos_abs`) | one-sided derivatives at the ends of `Icc` | 4 h |
+| `.sin_le_inner` | the same with `e(ψ s)`: `∫₀^s cos(ψ s − ψ u) du ≥ ∫₀^s cos(s − u) du = sin s` | — | 3 h |
+| `.strictMonoOn_dist` | `(d/ds)‖γ s − γ 0‖² = 2⟨γ s − γ 0, e(ψ s)⟩ ≥ 2 sin s > 0` on `(0, ℓ]`; `strictMonoOn_of_deriv_pos` on the square, then the square root | positivity at `s = 0` is not needed (strict on the interior) | 3 h |
+| `.norm_sub_le` | `‖∫₀^s (e(ψ u) − e(ψ 0)) du‖ ≤ ∫₀^s u du` (`norm_e_sub_e_le`, wave 1) | — | 2 h |
+| `.one_le_dist` | `f s = ‖γ s − γ 0 ∓ i e(ψ 0)‖²`, `f 0 = 1`, `f' = 2⟨γ s − γ 0, e(ψ s)⟩ ∓ 2 sin(ψ s − ψ 0) ≥ 2 sin s − 2 sin s` (`sin_le_inner`; `Real.sin_le_sin_of_le_of_le_pi_div_two` with `|ψ s − ψ 0| ≤ s ≤ π/2`); monotone | the planner's derivation — § 11.5 (4) | 3 h |
+| `lipschitzOnWith_of_chord` | for `u < s` in `I` and `n` pieces: `|ψ sᵢ₊₁ − ψ sᵢ| ≤ 2 arcsin(Δ/2)` once `|Δψ| < π` (uniform continuity on `[u, s]`), sum, `n → ∞` | the limit `n · 2 arcsin(d/2n) → d`; or: `ψ` is locally Lipschitz with constant `1 + ε` for every `ε` | 5 h |
+| `notMem_essBdry_of_mem_densitySet` | `notMem_essClosure_of_mem_densitySet` (`Plane/Saturated/Fan`; import it) for the other classes; `essBoundary` excludes the class's own density points | — | 0.5 h |
+| `ae_one_colour_of_isConnected` | E8 § 3.5: for `x ∈ W` some `j(x)` has `x ∈ densitySet (cls j)` (`exists_mem_essClosure_of_cover`, wave 2; no essential boundary); the other classes are null near `x` (no cusp: not in their support); so `{x ∈ W | ball about x a.e. in cls j}` is open for each `j`, the sets partition `W`, and `IsPreconnected` makes one of them all of `W` (`isPreconnected_iff_subset_of_disjoint`); then a.e. by a countable cover (`ae_le_set` through `IsOpen` and Lindelöf, or density points: `W ⊆ densitySet (cls j)` and `volume_densitySet_diff`) | the finish — use `volume_densitySet_diff` (wave 2), no cover | 5 h |
+| `closure_essBdry_subset` | E8 § 3.1 (0): `x ∈ closure (essBoundary (cls j))` for one `j` (finite union); `exists_ne_mem_essClosure` (wave 2) gives `b ≠ j` at each approximant, one `b` on a subsequence (pigeonhole on `Fin k`, or `closure` of a finite union twice); `essSupport` closed; not a cusp of either gives both in `essClosure`; `notMem_essClosure_of_mem_densitySet` | the two finite pigeonholes: write `essBdry = ⋃ j, ⋃ b ≠ j, essBoundary (cls j) ∩ essClosure (cls b)` first | 5 h |
+| `local_graph` | E8 § 3.1 (1)–(4). Children: (a) in `U`: `essBoundary A = essBoundary B = supp A ∩ supp B` (`TwoColourOn.essBoundary_inter_eq`; no cusp) — 3 h; (b) `c11_discs` at every such point, one `N` — given; (c) § 3.1 (3)(b) `|⟨x″ − x′, ν′⟩| ≤ δ²/2` — 2 h; (d) § 3.1 (3)(c), the crude `6δ` (the lens point; control `e8_lens.py`) — 5 h; (e) **sharp**: `norm_sub_le_of_discs`, the midpoint of the centres within `3.5δ` — 3 h; (f) existence on each normal segment (a segment is connected; its ends in the two open sets) — 4 h; (g) uniqueness and `|g u| ≤ u²` — 4 h; (h) the curve: `g` differentiable with `g' = −ν₁/ν₂`, arclength `s(u) = ∫√(1 + g'²)` strictly increasing with a `C¹` inverse, `γ = (u(s), g(u(s)))`, `ψ` a continuous lift of the tangent angle, `lipschitzOnWith_of_chord` with (e) — 2 d; (i) the two sides connected, their colours — 6 h | (h): Mathlib has no arclength reparametrization; **do not** follow § 3.1 (4)'s "where `g″` exists … absolutely continuous" (§ 11.5 (1)) | 5 d |
+| `AeColouring.local_graph` | `exists_twoColourNhd_of_mem_interfaceSet` (`y ∉ Σ`), `U' = U ∩ ball y ρ`, cusps lie in `Σ`, `TwoColourNhd.mem_essBoundary`, `local_graph` | — | 1 h |
+| `gamma` | E8 § 3.2, by its kernel note: no classification of one-manifolds. From a chart at `y`, the family of injective `IsUnitCurve`s through `y` inside the component, ordered by extension; lengths are at most `π/2` (`chord`: a sub-arc of length `π/2` has chord `≥ 1 > 2R`); the union of a chain is a curve (`ψ` extends: 1-Lipschitz); a maximal one is open and closed in the component (charts at its points; at an end inside the punctured disc the chart extends it — § 3.2 (3)) | gluing two charts along an overlap (two `IsUnitCurve`s with the same image near a point agree up to the parameter's shift and sign) | 4 d |
+| `IsUnitCurve.exists_polarGraph` | `t(s) = dist (γ s) (γ 0)` strictly increasing and continuous (`strictMonoOn_dist`), so a homeomorphism of `[0, L]` onto `[0, t(L)]`; `φ(t)` a continuous lift of `arg (γ(s(t)) − γ 0)` chosen near `ψ 0` (`norm_sub_le`: the direction is within `s/2 · (1 + o(1))` of `e(ψ 0)`, so one branch of the argument serves for small `t`, and on `(0, t(L))` the direction stays in the open half-plane about `e(ψ 0)`? — **check**: it holds while `s < π/2` by `chord`, whose inner product is positive) | the lift: use `chord` to keep `(γ s − γ 0) · conj (e (ψ 0))` in the right half-plane, where `Complex.arg` is continuous, and put `φ = ψ 0 + arg(…)` | 1.5 d |
+| `beta` | `gamma`; `z` in the closure forces an end at `z` (the other points of the closure are in the punctured disc or on the circle); `strictMonoOn_dist` forces the other end on the circle; `exists_polarGraph` with `dist (γ L) z = R` | — | 4 h |
+| `alpha` | E8 § 3.4 (a)–(e): every component meeting the half disc meets the circle of radius `R/2` (continuity of the distance along `γ`); `essBdry ∩ sphere z (R/2)` compact (`closure_essBdry_subset`, no cusp there); each of its points has a chart lying in one component; finite subcover; the least distance of the finitely many components that miss `z` | (c): a chart's image is connected, so in one component | 1.5 d |
+| `fan_of_isolated` | E8 § 3.6 with `R' = min R (1/2)`: `alpha`'s `r`; the components with `z` in their closure are finitely many polar graphs (`beta`) pairwise disjoint; lifts ordered within `(φ₀, φ₀ + 2π)` (continuous and never equal mod `2π`); `Fin n` by sorting at one `t`; regions by `ae_one_colour_of_isConnected` (a polar region between two continuous graphs is open and connected) | the ordered lifts; connectedness of `polarRegion` | 3 d |
+| `regJLiteral_of_saturated`, `finite_arcs_of_isBounded` | E8 § 3.7: a component with `z` in its closure meets the fan's disc on a branch, and a branch lies in one component; compactness off the fans | — | 0.5 d, 1 d |
+| `Fan.two_le_n`, `Fan.col_ne` | § 11.5 (3): a continuous polar graph is null (the image of a graph in `(t, θ)` under the polar map, locally Lipschitz); near a branch point every point is on the branch or in one of the two neighbouring cells; so equal colours make it a density point, against `F.bdry` and `notMem_essBdry_of_mem_densitySet`; `n = 0`: `ae_one_colour_of_isConnected` on the punctured disc | the null graph (`MeasureTheory.addHaar_image_eq_zero_of_differentiableOn_of_addHaar_eq_zero` for the polar map) | 1 d each |
+| `Fan.branch_outside_discs` | a branch is a component with `z` in its closure (§ 10.2 (2)); `gamma`'s curve from `z`; `one_le_dist`; `F.dir i ≡ ψ 0` mod `2π` (`exists_polarGraph`'s limit and `F.tendsto`) | identifying the fan's `φ i` with the curve's polar angle | 1 d |
+| `Fan.branch_contacts` | at branch points `pinch_interface`'s two types; a split point makes the whole branch a unit arc (§ 11.5 (4)); else all tangent, the normals `i e(ψ s)` converge (`IsUnitCurve` on the closed interval), contacts `x ± ν(x)` converge, supports are closed | the propagation of the split type | 1.5 d |
+| `Fan.sector_alone` | `plans/FS121-V2-verification.md` §§ 2.2–2.3 verbatim: Lemma C is `half_dichotomy`; Lemma H from it on two cells of one colour (a cell is preconnected, in the density set: `subset_densitySet_of_isOpen_ae_subset`); the directions `D(W)` of a cell of positive angle are the open arc `(dir i, nextDir i)` (`F.tendsto`); the angular lemma; the zero-angle case by `branch_contacts`' three cases and `branch_outside_discs` | `D(W)` for a cell from the fan's fields; the angular case analysis (V2's control `fs121-v2-sectors` is a half-degree grid) | 2.5 d |
+
+**The price of the bridge**: `Curve` 2.5 d, `LocalGraph` 6.5 d, `FanBridge` without the two sector rows 14.5 d — **about 23 agent-days**, 80 %
+interval [12, 40]; registered 15 [6, 30] (Y4). Re-priced from the first two leaves closed here: `norm_sub_le_of_discs` (planned at an hour,
+closed in one elaboration) and the fan's inhabitant (§ 10.3) — the *computational* leaves (`Curve`'s six, the two colouring lemmas of
+`LocalGraph`) are likely high by a factor of two to three; `local_graph` (h), `gamma` and `fan_of_isolated` are not re-priced by them and carry
+the interval's width. **Order of landing**: `Curve` and `LocalGraph`'s first three leaves at once; `local_graph`; then `FanBridge`. If
+`gamma` proves large, `fan_of_isolated` stays a `sorry` and every consumer still lands over `Fan` (ruling 490 (a)).
+
+### 11.5 Findings on the bridge (sent to the coordinator mid-job)
+
+1. **A step that does not formalize as written, and a shorter route** — E8 § 3.1 (4), *Regularity*: "At a point where `g″` exists the graph stays
+   outside two open unit discs tangent to it there, so its curvature is at most 1 in absolute value; the tangent angle `ψ = arctan g′` is
+   absolutely continuous with `dψ/ds = κ`, so `ψ` is 1-Lipschitz in arclength." In the kernel that is Rademacher's theorem and the fundamental
+   theorem for Lipschitz functions. **Replacement, proved** (`norm_sub_le_of_discs`): with `w = x′ − x″`, `s = ν′ + ν″`, non-overlap of the
+   opposite discs is `‖w + s‖ ≥ 2`, `‖w − s‖ ≥ 2`; the parallelogram law twice gives `‖ν′ − ν″‖² = 4 − ‖s‖² ≤ ‖w‖²`. The non-overlap holds
+   because the midpoint of two overlapping opposite discs' centres, `x′ + (x″ − x′)/2 + (ν′ − ν″)/2`, lies within `3.5δ` of `x′` by § 3.1 (3)(c)'s
+   crude bound, hence in `N`, where the two discs are a.e. of two almost disjoint sets. The chordal bound then gives the angle's
+   (`lipschitzOnWith_of_chord`). One mind (the planner's); the algebra is kernel-checked, the lens-in-`N` step is `local_graph`'s child (e).
+2. **The fan's existence reads only a crude curvature bound** (its `r` is existential): with § 3.1 (3)(c)'s constant 6 alone, lengths are at most
+   `π/12` in a disc of radius `1/12`, and §§ 3.2–3.6 run. The sharp constant is read by the consumers' lens only. Not used to restate anything.
+3. **A generalization**: FS131-E8-FAN's "at least two [curves]" and "regions on the two sides of a curve being of different colours" read no
+   saturation — they follow from the fan's fields and, for the first, `z ∈ Σ` (§ 11.4, `Fan.two_le_n`, `Fan.col_ne`). The planner's argument.
+4. **Three statements are the planner's assembly**, for a deriver's check: `IsUnitCurve.one_le_dist` (E8's § 4.6 offered
+   `|φ i t − dir i| ≤ arcsin(t)/2`, which does not put the branch outside the unit disc; the three lines of § 11.4 do, from E8's C2);
+   `Fan.branch_contacts` (V2's Lemma T (ii), with the claim that a branch is of split type along its whole length or of tangent type along it:
+   at a point with a common contact `y` of both colours `pinch` gives the split type — its other case needs antipodal contacts — and
+   `c11_split` carries the unit circle about `y` along the connected branch); `fan_of_isolated` at every `z` isolated from `Σ ∖ {z}`.
+5. **Ruling 495 (a)**: `local_graph` reads `TwoColourOn A B N` and "no cusp in `U`", never `Σ`; the centred-ball `Σ` serves. The agreement of
+   the two readings under saturation is not stated; priced at a day after `local_graph` (small centred balls about a chart's point are cut by the
+   curve into two connected pieces).
+
+**Mutation audit** (statement level, by hand): `fan_of_isolated` without `hsat` is false (E8 § 4.1: circles of radii `2⁻ⁿ`, a spiral);
+without `hS`, false at an accumulation point of `Σ`; `gamma` without `le : R ≤ 1/2`, false (a unit circle of interface in a disc of radius
+above 1); `ae_one_colour_of_isConnected` without `hcusp`, false (E8's not-claimed line); `local_graph` without `hcusp` is the gap the deriver's
+erratum names; `sector_alone` without `hsat`, false (V2 § 2.4: the bow-tie blocks); `norm_sub_le_of_discs` without `h2`, false (two points of a
+line with normals tilted the same way toward each other).
+
+## Stage 12 — SAVED: the hand-off, the builds, what a third pass takes, the expectations scored
+
+### 12.1 For implementers: the split by file (statements fixed; children under names of their own)
+
+Thirty-one `sorry` leaves on the branch (`Pinch` 7, `MapColouring` 1, `Curve` 6, `LocalGraph` 5, `FanBridge` 12). No two of these files' leaves depend on each other's *proofs*, only on statements, so all four lines can
+run at once on branches cut from this stage's commit (`fs131-w6p` and `fs131-w6m`, cut at stage 9, hold the first two already).
+
+| line | file | leaves | imports it needs proved | plan |
+|---|---|---|---|---|
+| P | `Plane/Saturated/Pinch` | 7 | — | § 5, § 9.4 |
+| M | `Plane/Saturated/MapColouring` | 1 (`sat_inP`), with `sq9` as an `ArcMap 9` (§ 7.1) | — | § 5 |
+| C | `Plane/Saturated/Curve`, then `LocalGraph` | 6 + 5 | `c11_discs`, `TwoColourOn.essBoundary_inter_eq` as statements | § 11.4 |
+| F | `Plane/Saturated/FanBridge` (and `sq9.SingLocallyFinite` in `FanExamples`, § 10.3) | 12 | `LocalGraph`'s and `Curve`'s statements | § 11.4 |
+
+Line F is the largest and may be two implementers: one on `gamma`, `exists_polarGraph`, `beta`, `alpha`, `fan_of_isolated`, the CLAUSE2 pair;
+one on the `Fan` lemmas (`two_le_n`, `col_ne`, `branch_outside_discs`, `branch_contacts`, `sector_alone`), which take `gamma` and `beta` as
+statements. Build and iteration as § 7.1. Each leaf proved gets its `#print axioms` line in `scripts/Axioms.lean`'s block "FS131-K6b".
+
+### 12.2 Vacuity and inhabitants (`LEAN.md` § The gate's form)
+
+- `pinch`, `c11_discs`, `c11_split`, `TwoColourOn.essBoundary_inter_eq`, `pinch_interface`, `c11_discs_interface`: `sq9` at `sqEdgePt`
+  (`sq9_twoColourNhd`, `sqEdgePt_mem_ball`, `sq9_tight_saturated`; the contacts by `sq9_isTangentAt`, a leaf). `pinch_not_in_in` concludes `False`;
+  its docstring names the model of the other hypotheses.
+- `IsUnitCurve`'s theorems: `isUnitCurve_segment`. The unit circle (`γ s = e s`, `ψ s = s + π/2`), where `chord`, `sin_le_inner` and
+  `one_le_dist` are equalities, is owed as the sharpness example with `chord`'s proof.
+- `local_graph`: `sq9` at `sqEdgePt`, `N = U = B(sqEdgePt, 1/8)`; **owed**: no cusp of the two classes in that ball (the docstring says so).
+- `gamma`, `beta`, `alpha`, and every theorem over `IsolatedAt`: `sq9_isolatedAt`. `fan_of_isolated`: the same. `regJFan_of_saturated`,
+  `regJLiteral_of_saturated`, `finite_arcs_of_isBounded`: `sq9` once `sq9.SingLocallyFinite` is proved (owed, § 10.3) — until then the note
+  names `sq9` for `Saturated` only.
+- `Fan.two_le_n`: `sq9Fan` with `sqVertex_mem_singularSet`. `Fan.col_ne`, `Fan.branch_outside_discs`, `Fan.branch_contacts`,
+  `Fan.sector_alone`, `Fan.sector_unique`: `sq9Fan` with `sq9_tight_saturated.2.1.saturatedOn _`. In `sq9Fan` no colour repeats, so
+  `sector_alone`'s `hcol` holds only at `i = i'`; an object with a repeated colour on two regions that satisfies everything but the conclusion
+  is what the theorem refutes (V2 § 2.4: none exists under saturation).
+- No theorem of this pass quantifies over a class that no held object inhabits. The first pass's § 2 list of uninhabited classes (D2-EXT,
+  D2-THIN, D1-PENCILWIN, V5-RAY, D4-HOLE, O1-OUT's curved case) is the third pass's.
+
+### 12.3 The builds
+
+- As given: § 8.3. The foundation: § 9.3.
+- With `Fan` and `FanExamples`: § 10 (OK, 466 of 466 batches, 8 `sorry` warnings; `data/fs131/k6b/logs/build-3-fan.log`).
+- With `Curve`, `LocalGraph`, `FanBridge` (the final build): **OK — 466 of 466 batches, 4 modules rebuilt, 5 modules with warnings, 31 warnings, every one `declaration uses sorry`**, exit 0 (`build/gate/build/20261006T121157Z-3880314.log`; driver log `data/fs131/k6b/logs/build-4-bridge.log`). Before it the five new modules were elaborated as one scratch file with `lake env lean` (iteration only).
+- `./scripts/dupnames.sh` (under the slot, after the final build): **OK — no name is declared by two modules** (23 generated on demand, the listed class; `data/fs131/k6b/logs/dupnames-1.log`). `tools/check_architecture.py`: PASS (five rows added to § 3.11). No `axiom`, no `native_decide`. The gate
+  (axioms, vacuity, linters) is not a planning job's and was not run.
+
+### 12.4 What a third planning pass takes, exactly
+
+**Not stated by this pass, with what was and was not read:**
+- **The ladder, 14 of its 17 rows**: FS121-D2-EXT, -D2-THIN, -D2-SYM, -D2-PERFIN, -O1-ENDS, -O1-OUT, -DB1-L6, -DB1-L7, -D1-EROSION, -V5-RAY,
+  -D4-HOLE, -V3-CPI, -V2-VT-W with FS121-D1-VT (under its own name, ruling 487 (a)), -D1-PENCILWIN; and FS121-V5-LOC's clause (iii).
+  Stated here: FS121-DB1-L3 (`Fan.sector_unique`), FS121-V2-SECTOR (`Fan.sector_alone`), FS121-V5-LOC (i), (ii).
+- **The fragment's six**: FS116-O1-SATPIN, -N1-AXIS, -S1-RUNG, -V4-PARTNER, -S1-KAPPA, -S1-PAIR (the last two at `ArcMap 6`, ruling 487 (e)).
+  The foundation is ready for them: SATPIN reads `pinch` and `local_graph` for the family `F.region` on an open `N` inside the fragment's
+  disc, with `SaturatedOn F.region (ball p ρ)` — "the inner-disc reading" is that predicate; whether SATPIN's statement lacks a hypothesis
+  (X5 (d)) is still open, its argument unread.
+- **FS111-M2-HULLC** (on a cover `disj` can fail: read `plans/FS111-M2-regularity.md` § 2.2 first; ruling 487 (b)), **FS111-W-KB-DIR** (a fan
+  at the centre of a split arc: `Fan.branch_contacts`' first case is its setting), **FS111-M2-INTRAD**.
+- **Arguments not read by either pass**: `plans/FS121-DB1-verification.md` §§ 2.3, 2.5; `FS121-V2-verification.md` §§ 2.5–2.9;
+  `FS121-V3-verification.md` § 2.3; `FS121-D1-proof.md` §§ 2.1–3.1; `FS121-D2-proof.md` § 2; `FS121-V5-verification.md` § 3.1;
+  `FS121-D4-proof.md` § 2.3; `FS121-C1-proof.md` § 2.3; `FS121-map-step.md` §§ 3.2–3.3; `plans/FS111-M2-regularity.md` §§ 2.2, 4.1;
+  `plans/FS111-W-wild.md` (W-NOBEND, W-KB-DIR); the six FS-116 entries' arguments. Read by this pass: `FS121-V2-verification.md` §§ 1.4–2.4.
+- **Unresolved expectations**: X5 (b) (ENDS's "null set of normals" against L6's "finitely many"), (d), (e).
+- **What the third pass can lean on**: rows over a fan at one point take `(F : c.Fan z) (hsat : SaturatedOn c.cls (ball z F.r \ {z}))`
+  and read a branch through `F.tendsto`, `Fan.branch_outside_discs`, `Fan.branch_contacts`; rows over `RegJFan` take `c.RegJFan` (or
+  `Saturated c.cls` and `c.SingLocallyFinite`, by `regJFan_of_saturated`) and "finitely many arcs in a bounded set" from
+  `finite_arcs_of_isBounded`; curves are `IsUnitCurve`s (a circular arc of radius `n` about `w`: `γ s = w + n e(θ₀ + s/n)`,
+  `ψ s = θ₀ + s/n + π/2`), with the pointwise type from `IsInterfaceChart.discs` and `IsTangentAt`. The deriver's § 4.6 table is confirmed
+  for two of its rows (DB1-L3, V2-SECTOR: a fan at one point, saturation at its branch points, no local finiteness) and unchecked for the rest.
+
+### 12.5 Held for the coordinator
+
+1. The three planner-assembled statements and the generalization of § 11.5 (3), (4): a deriver's check before `Fan.branch_contacts`,
+   `IsUnitCurve.one_le_dist`, `Fan.two_le_n`, `Fan.col_ne` are implemented.
+2. The erratum line for E8 § 3.1 (4) (the regularity step; § 11.5 (1)), with the deriver's two lines.
+3. § 9.1 item 1 (the two readings of `Σ`): ruled (inventory item 495); the agreement lemma is a row candidate, priced at a day, not stated.
+4. FS111-W-NOBEND's merge into FS111-M-C11 (ii) / FS131-E8-LOCAL: confirmed from its entry, its argument unread.
+5. `sq9.SingLocallyFinite` (and with it `sq9.RegJFan`) is owed before the wave's gate, as the model of every theorem over `RegJFan`.
+
+### 12.6 Expectations scored (§ 8.4)
+
+| # | registered | outcome |
+|---|---|---|
+| Y1 | 3 defects among the rows I state, [1, 7] | among the rows stated: (a)–(f) concern rows not reached; found instead: the two frozen sentences on `Σ`'s neighbourhood differ (§ 9.1); the frozen (H2)'s closure clause is redundant at essential boundary points; E8-FAN's "at least two / neighbours differ" over-hypothesized. 3, none a falsehood |
+| Y2 | a bridge step that does not formalize as written, 0.6 | **yes** — § 3.1 (4)'s regularity step (neither of the two registered as likeliest: the constants were not reached, and § 3.2 (2)'s parametrization is `gamma`, priced not proved) |
+| Y3 | I prove 2 leaves beyond the inhabitants, [0, 4] | `norm_sub_le_of_discs`; `regJFan_of_saturated`, `pinch_interface`, `c11_discs_interface`, `TwoColourNhd.mem_essBoundary`, `Fan.sector_unique` (each from a leaf); `AeColouring.twoColourNhd_of_h1`, `twoColourNhd_of_halves`, `notMem_essClosure_of_mem_densitySet`. FS131-E8-DELTA was registered short and was not proved |
+| Y4 | the bridge 15 agent-days, [6, 30] | re-priced 23, [12, 40] (§ 11.4) |
+| Y5 | 9 of the 28 left rows stated, [4, 20] | **4** stated or made corollaries (C11 (ii), W-NOBEND, DB1-L3, V2-SECTOR) and V5-LOC in part, beside the bridge's eight: at the interval's lower end. The fan's inhabitant took the stage the ladder would have |
+| Y6 | one curve notion, unit-speed with 1-Lipschitz angle, 0.65 | yes |
+| Y7 | ≥ 3 rows read a different class than their entry, 0.7 | of those read: PINCH (two sets), C11 (i) (every point of one `N`), E8-LOCAL (no `Σ`), E8-FAN (no `z ∈ Σ`; two clauses without saturation), E8-GAMMA (no `z ∈ Σ`): yes |
+| Y8 | the restated foundation costs the proved rows nothing, 0.85 | yes — no proof edited |

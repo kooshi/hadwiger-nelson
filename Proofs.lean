@@ -234,6 +234,9 @@ import Proofs.HadwigerNelson.Plane.Saturated.Pinch
 import Proofs.HadwigerNelson.Plane.Saturated.MapColouring
 import Proofs.HadwigerNelson.Plane.Saturated.Fan
 import Proofs.HadwigerNelson.Plane.Saturated.FanExamples
+import Proofs.HadwigerNelson.Plane.Saturated.Curve
+import Proofs.HadwigerNelson.Plane.Saturated.LocalGraph
+import Proofs.HadwigerNelson.Plane.Saturated.FanBridge
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.Topology.SpernerGrid
