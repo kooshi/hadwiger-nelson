@@ -595,23 +595,48 @@ variable {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} {ε R' R R'' : ℝ}
 /-- The closed arc lies in the collar. -/
 theorem CollarFit.ringArc_subset_collarK (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') :
     ringArc P θ₁ θ₂ ⊆ collarK P θ₁ θ₂ R' R'' := by
-  sorry
+  rintro _ ⟨θ, hθ, rfl⟩
+  refine ⟨θ, hθ, 1, ?_, by simp [ringPt]⟩
+  rcases hfit.pushProfiles.cases θ with ⟨-, -, h1, h2, h3⟩ | ⟨-, h1, -, h3⟩
+  · exact ⟨by linarith, h3.le⟩
+  · exact ⟨h1.le, h3.ge⟩
 
 /-- The lens lies in the collar (FS131-IA1's W3). -/
 theorem CollarFit.lensSet_subset_collarK (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') :
     lensSet P θ₁ θ₂ R ⊆ collarK P θ₁ θ₂ R' R'' := by
-  sorry
+  refine polarSet_mono Ioo_subset_Icc_self fun θ hθ t ht => ?_
+  obtain ⟨-, h1, -, h3⟩ := hfit.pushProfiles.inside θ hθ
+  exact ⟨by linarith [ht.1], by linarith [ht.2]⟩
 
 /-- **The collar bend is a local step on the collar** (`LocalStep.of_cutArcs`: its arcs are the cut's and the lens boundary's two). -/
 theorem CollarFit.map_localStep (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') :
     LocalStep F hfit.map (collarK P θ₁ θ₂ R' R'') := by
-  sorry
+  have hR : 1 / 2 < R := by linarith [hfit.params.1, hfit.params.2.1]
+  have hβ := collarArcs_carrier (P := P) hR hfit.params.2.2.1 hfit.ring.1 hfit.short
+  refine LocalStep.of_cutArcs (S := {collarArcA P θ₁ θ₂ R, collarArcB P θ₁ θ₂ R}) hfit.ring.1 ?_ rfl ?_
+    hfit.ringArc_subset_collarK
+  · exact ⟨hfit.map_agreesOff.1, fun z hz => hfit.map_agreesOff.2 z fun hzU =>
+      hz (hzU.elim (fun h => hfit.lensSet_subset_collarK h) (fun h => hfit.lensCurve_subset h))⟩
+  · intro a ha
+    rcases ha with rfl | ha
+    · exact (subset_union_left.trans hβ.subset).trans hfit.lensCurve_subset
+    · rw [mem_singleton_iff] at ha
+      subst ha
+      exact (subset_union_right.trans hβ.subset).trans hfit.lensCurve_subset
 
 /-- **The toward collar bend supplies the interface**, the outer colour gaining: `left` is vacuous (R3, `CollarFit.map_R3`). It rests
 on the open child `CollarFit.map_hornCount_le` (`BendStep`) for `horn`. -/
 theorem CollarFit.arcBend (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') :
     ArcBend F hfit.map hfit.homeo (collarK P θ₁ θ₂ R' R'') P θ₁ θ₂ c c' c' ε := by
-  sorry
+  refine ⟨hfit.ring, Or.inr rfl, hfit.map_valid hF, hfit.sub_thick, hfit.sub_dom, hfit.free, hfit.map_localStep,
+    fun z hz => (hfit.homeo_eq_self hz).1, fun z hz hzO => hfit.homeo_fix_Γ hz hzO,
+    fun z hz => (pushforward_mem_interiorPts_iff z).mpr hz, fun z => pushforward_coloursAt z,
+    fun z n hn => (hfit.map_hasDegree hF z n).mpr hn, fun z hz => (hfit.map_hasRepeatedColour hF z).mp hz,
+    fun x j hj => hfit.map_hornCount_le hF hj, hfit.map_ringArcsWithin, fun Q a b d d' hD => hfit.map_R1 hF hD,
+    fun Q a b d d' hD hd => hfit.map_R2 hF hD hd, fun θ hθ => Or.inr ?_, fun θ hθ hon => absurd hon (hfit.map_R3 hθ)⟩
+  have hL : ringPt P θ ∈ lensSet P θ₁ θ₂ R :=
+    ⟨θ, hθ, 1, ⟨(hfit.pushProfiles.inside θ hθ).2.2.1, le_rfl⟩, by simp [ringPt]⟩
+  exact ⟨(hfit.map_lens hL).1, (hfit.map_lens hL).2⟩
 
 /-- **The toward bend, in the arc step's form**: a constant-sided unit arc of a valid map whose outer colour is not carried at its
 centre, with `Γ` free near its interior points, has for every `ε > 0` a bend within `ε` satisfying the interface, the outer colour
@@ -649,7 +674,12 @@ theorem ArcBend.of_away {M : ArcMap k} {h : ℂ ≃ₜ ℂ} {K : Set ℂ} {P : �
       (∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) →
         ∃ a b, a < b ∧ θ ∈ Icc a b ∧ Icc a b ⊆ F.r2Contacts P θ₁ θ₂ c)) :
     ArcBend F M h K P θ₁ θ₂ c c' c ε := by
-  sorry
+  obtain ⟨hV, -, hKε, hfree, hstep, hfix, -, hfixΓ, hint, hcol, hdeg, hrep, hhorn, hraw, hR1, hR2, hgain, hleft⟩ := hM
+  refine ⟨hA, Or.inl rfl, hV, hKε, fun z _ => by rw [hP]; trivial, hfree, hstep, hfix, hfixΓ,
+    fun z hz => (hint z).1.mpr hz, hcol, fun z n hn => (hdeg z n).mpr hn, fun z hz => (hrep z).mp hz, hhorn, hraw, hR1, hR2,
+    hgain, fun θ hθ hon => ?_⟩
+  obtain ⟨a, b, -, hθab, hsub⟩ := hleft θ hθ hon
+  exact ⟨hout, hin, (hsub hθab).2⟩
 
 /-! ## Spec examples -/
 
