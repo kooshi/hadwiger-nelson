@@ -54,7 +54,9 @@ a fresh agent on the same brief.
    list (the 17 `bowtie` notes, QA4 § 3.5; `bend_toward_collar` without `hmax` and `hlen`; rank 7's and rank 8's docstring lines; the three
    `[NumberField _]` binders), plus `nb4p` restated with one conjunct and E7's docstring lines (441 (a), (b), (e)), `hn` out of
    `exists_rayStep` and `exists_shaveStep` (450 (c)), the doubled statements (434 (d); 454's two), the stale "skeleton" headers (455 (c)),
-   IS1's two `ARCHITECTURE.md` cells (432 (b)); **brief not written yet** — write it from M7's report, which lists what stands twice;
+   IS1's two `ARCHITECTURE.md` cells (432 (b)); **its brief's generator is written** (`data/fs131/briefs/scripts/mk-rp1.py`, job FS131-RP1):
+   run it at M7's hand-back, when the joined tree holds the statements it quotes, gate it on the gate's own exit status (item 453), launch;
+   it leaves the bend modules alone (BA3 holds them) and ends with the list for after that merge (457 (b); the stale headers);
    FS131-BA2's successor if it leaves children; KM1's implementers. Then: merge `fs131-w5a` (done, at `74fbdf16`) and `fs131-w5z` into
    `fs131-w5c` — trial the merges in the order they will be made (item 451) — merge `main`, the full gate, the guarded lint, the notes
    check, land (item 6 below); `bend_away_part`'s inhabitant may be an open gate item at the landing (455 (a)).
