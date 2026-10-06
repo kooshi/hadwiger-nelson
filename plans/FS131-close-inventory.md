@@ -5790,3 +5790,63 @@ reason by the close.*
      for the filing. (e) **Slot → FS131-K9** (wave 9's planner, on `fs131-w9` at `26b08395`), launched 2026-10-06, its
      brief amended at launch with `emptyNS`'s statement, wave 7's state and item 526's lesson (`mk-k9-amend.py`; gate exit
      0, 16 quotations). In flight: 1 (K6c) + 1 (L10A) + 1 (K9) = 3.
+
+531. **FS131-K6c done at its Stage 15: wave 6's third planning pass — seventeen of the twenty-three rows left, and one clause of
+     another, stated as thirty-four leaves in four new modules; the fragment's six left to a fourth pass** (planner; harness
+     523k by the task notice — past the line, not to be resumed; record `fs131-w6`'s `plans/FS131-w6-kernel-plan.md` Stages
+     13–15; report `data/fs131/reports/FS131-K6c.md`; commits `66d688b6`, `d9d8742f`, `6fc27fa1`; pushed, tree clean).
+     **Modules, all new**: `Plane/Saturated/CoverHull` (4 leaves), `Parallel` (13), `Centre` (7), `Accumulation` (10).
+     **Stated**: FS121-DB1-L7 and -O1-OUT (the outward parallel and its family), -DB1-L6 and -O1-ENDS (the chain inward and
+     its ends), FS111-M2-INTRAD (integer radii), FS121-V5-LOC (iii), -V3-CPI, -V2-VT-W with -D1-VT its `C¹` case,
+     -D1-EROSION, -D1-PENCILWIN, FS111-W-KB-DIR, FS121-V5-RAY, -D2-SYM, -D2-THIN, -D2-PERFIN, -D2-EXT, -D4-HOLE, FS111-M2-HULLC
+     with `pinch_of_cover` (ruling 522 (a)), and the agreement of the two readings of the singular set under saturation
+     (ruling 502 (c)). **Proved**: `IsRegularMUA.interior_inter_ball`, `SingLocallyFinite.isClosed`, four corollaries over
+     leaves. **Not stated**: FS116-O1-SATPIN, -N1-AXIS, -S1-RUNG, -V4-PARTNER, -S1-KAPPA, -S1-PAIR (arguments unread);
+     FS111-M-C11 on a cover; FS111-W-NOBEND's argument still unread. **My receipt**: tip `6fc27fa1` equals
+     `origin/fs131-w6`, tree clean; the wave's eight earlier modules untouched since `32f2ab4c` (`git diff` empty) — 862
+     lines added in the four new files and three registry files; the last real build's full log
+     (`build/gate/build/20261006T143138Z-602120.log`, 4 modules rebuilt) ends "Build completed successfully (5815 jobs)",
+     277 warnings, every one `declaration uses sorry`; `sorry` by the handoff's grep: `CoverHull` 4, `Parallel` 13, `Centre`
+     7, `Accumulation` 10 — the thirty-four — and 31 as given (`Curve` 6, `FanBridge` 12, `LocalGraph` 5, `MapColouring` 1,
+     `Pinch` 7); no `axiom`, no `native_decide` in the four; the driver log's `build exit 0`, `arch exit 0`, `dupnames exit
+     0`, and the doubled-name log's "OK"; two statements read against their rows — `pinch_of_cover` is `pinch` with
+     `TwoColourOn` replaced by measurability, an a.e. cover of `N` and the weak (H2) on each set, the same conclusion;
+     `tangent_parallel_out` asks of the partner point only `∉ c.singularSet` and saturation on a set holding it, as item 526
+     has FS121-DB1-L7. Not checked by me: the other thirty-two statements against their rows; its scratch axioms print; the
+     prices. **Findings, the job's** (its record § 14.2; each a dated erratum line drafted at § 15.4 item 2): FS111-M-PINCH
+     reads no disjointness; FS121-DB1-L7 stands with a shorter route (item 526); FS111-W-KB-DIR is a fact about one
+     measurable set with null unit pairs; FS121-D2-THIN is the contrapositive of -D2-SYM's main clause; FS121-O1-ENDS's two
+     cases have one conclusion in sectors; FS121-D2-EXT, -V5-RAY, -D2-PERFIN, -D1-EROSION each read less than filed;
+     FS111-M2-HULLC (iv)'s boundary clause needs no finiteness of components; **no row it read uses the local-structure
+     clause of L7 / O1-OUT / INTRAD without REG-J′**, so nothing waits on E8's flagged question (its § 14.3). **Its answer
+     to item 530's relay**: none of its rows reads `SeparatesAt` or `InP` (§ 15.7); the correction to § 3.3 is made by a
+     dated line. **Predictions scored** (its § 15.6): 0 standing statement defects against a registered 4 [1, 8] — below
+     the interval; 17 rows stated against 14 [8, 23]; 2 leaves proved against 2. **Its price**: about 49 agent-days for the
+     34 leaves on the planners' scale, which the two implementers measured so far have beaten by an order of magnitude.
+     **Slips, the job's, disclosed**: the defect reported and withdrawn (items 522, 526); `debruijn-domain-modeling` not
+     invoked fresh in this pass (nine new definitions, each with a spec example); it could not read the harness's count and
+     stopped by its own. **Owed before the wave's gate** (its § 14.6): `sq9.SingLocallyFinite` (FS131-I6D's), R7 as a
+     colouring with a fan, `sq9`'s two periods, a chart and a two-branch fan for `sq9`. **Credit**: seventeen rows read
+     from their arguments with nine found to read less than filed, and a table (§ 14.3) that answers which rows lean on
+     the flagged clause.
+     **Rulings.** (a) **FS111-M2-HULLC is stated at its level-set conclusion, with no hypothesis named for the
+     finite-perimeter step** (ruling 487 (b)'s condition, met as far as read). Alternative: name the classical hypothesis
+     now. Why not: no row read uses the conclusion it would give, and naming it later is one line. Confidence: medium —
+     the fragment's rows and wave 9's are unread by it; the fourth pass and wave 9's planner say if one reads it. (b)
+     **Four implementers by file, on branches to cut from `6fc27fa1`**: FS131-I6L (`Parallel`, 13 leaves), FS131-I6H
+     (`CoverHull`, 4), FS131-I6Z (`Centre`, 7), FS131-I6K (`Accumulation`, 10); I6L first, because the other two of the
+     ladder read its statements and a defect found there changes theirs. Briefs not written. (c) **The three cell lemmas
+     of a fan are FS131-I6E's to declare** (its brief exists and it launches earlier; `sector_alone` reads them); I6Z
+     takes them by ancestry from I6E's commit if it is in, else as hypotheses under names of its own. The fact "a
+     tangent-type point has positive upper density of each colour" is I6L's; I6Z takes it the same way. Alternative: the
+     planner's "whichever lands first". Why: a named owner needs no race, and the join then makes no choice. Confidence:
+     high. I6E's brief gets a dated amendment at its launch. (d) **A fourth planning pass, FS131-K6d**: the fragment's six
+     with their arguments, FS111-M-C11 on a cover, FS111-W-NOBEND's argument, the plan for the owed inhabitants — with
+     `ArcMap.bound_of_saturatedOn` and `sq9Map` (item 530) as inputs, and **a fresh domain-modeling pass over the third
+     pass's nine definitions as its first act** (the disclosed slip is met there, not by resuming a planner past its
+     line). Brief not written. (e) The deriver's question on `curvature_integer_ae` is sent only if I6L stalls there, as
+     drafted (record § 15.4 item 3). (f) The errata lines are held for the filing. (g) Ruling 530 (a) now has its answer:
+     the readers of `SeparatesAt`'s second clause are none; whether the clause and C121-NOPAR are weakened is decided at
+     the wave's join. (h) **Slot → FS131-I6C** (`Curve`, then `LocalGraph`, on `fs131-w6c`), launched 2026-10-06, its
+     brief amended at launch (one line asked of its report: where `local_graph`'s proof reads disjointness; gate exit 0).
+     In flight: 1 (L10A) + 1 (K9) + 1 (I6C) = 3.
