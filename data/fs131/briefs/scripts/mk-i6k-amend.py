@@ -76,6 +76,15 @@ Nothing above is withdrawn but where an item below says so; the base moved under
    3's pointwise `SaturatedAt` at every point of the disc — that is false at every interior point of a tile of a valid map, so a
    helper that assumes it is true of nothing.
 {extra}
+7. **Your last stage runs the guarded lint on what you wrote** (inventory item 573: a landing's gate went red today on an instance
+   argument a proof did not read — exactly what the build's own linters do not report, and no branch had linted that file): after
+   your last green build, `lake lint --no-build -- --no-build --trace` under the slot with `--mem 8` (`LEAN.md` § The gate), its
+   output saved; a line it reports in your module is yours to repair if the repair changes no statement, and a message to me if it
+   does (an unused instance binder in a helper of your own is yours; in a leaf, mine to rule).
+8. **Two sibling jobs have handed back since this brief was written** (items 576, 579), on branches of their own that yours does not
+   hold: fifteen of the cover's and the parallels' seventeen leaves are proved on `origin/fs131-w6l`, four of the centres' seven on
+   `origin/fs131-w6z`. In your tree those statements are still `sorry` leaves, and you use them as stated — do not merge either
+   branch, and do not prove a leaf of theirs. If a leaf of yours needs a *helper* one of them added, tell me its name.
 '''
     open(B,"w").write(s.rstrip("\n")+a)
     print("amended",j)

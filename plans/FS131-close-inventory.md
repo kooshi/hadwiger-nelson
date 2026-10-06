@@ -7255,3 +7255,31 @@ reason by the close.*
      colours on a combinatorial map — said at that grade and no further in my report to Kooshi; a line for
      FS-117's stub at the filing. (c) Search-lane tool files on `main` are exempt from a landing's re-gating (a
      message to the running landing). No reply sent to the Searcher: it asks none and its hour is running.
+579. **FS131-I6Z done at its Stage 4: wave 6's centres — four of seven leaves proved; three left, of a different kind** (implementer, Opus; harness 449k and 53 minutes by the task notice; record `fs131-w6z`'s `plans/FS131-I6Z-implementation.md`; report `data/fs131/reports/FS131-I6Z.md`; five commits, tip `94a98a58`; pushed, tree clean).
+     **Proved on the standard three** (`Plane/Saturated/Centre`; built, not gated): `inner_support_near_centre` and
+     `outer_support_near_centre` (FS121-DB1-L1's two halves), so the planner's `kb_dir` (FS111-W-KB-DIR) rests on
+     nothing open; `Fan.angle_le_pi` (FS121-V3-CPI: at a singular point every region of positive angle has angle
+     at most π); **`Fan.ends_centre`** (FS121-O1-ENDS's centre: the centre of the last arc is singular, with two
+     regions of two further colours) — one proof for two hand lemmas; and `mem_singularSet_of_three` (a point
+     carrying three colours is singular), exercised on the nine-colour map. **Not proved**: `vt_w` (first child
+     proved), `erosion`, `pencil_window` — charts, one-sided calculus on a Lipschitz angle, an area estimate.
+     **A route finding for the planner**: `vt` asks its hypotheses on a chart's whole interval while its two
+     consumers hold a segment or an arc only near the point, and no lemma restricts an `IsInterfaceChart` to a
+     shorter interval; a wider `vt_w` is a candidate, not made. **On the layout question of item 576**:
+     `ends_centre` reads nothing of `Parallel` but one definition. **My receipt**: tip equals `origin/fs131-w6z`,
+     tree clean; outside `data/`, `plans/`, `tools/` it changed `Centre` (446 lines added) and
+     `scripts/Axioms.lean`; `sorry` in `Centre`: 3; its last real build's full log ends "Build completed
+     successfully (5836 jobs)", every warning a `sorry`; its axioms print parsed by script — 22 records, 20 on
+     the standard three, and `vt_w` with `vt` on `sorryAx` as the open leaf and its consumer should be; the nine
+     heads the base declared in `Centre` are textually unchanged, no `include` or `omit` added. Not checked by me:
+     the proofs beyond the build; its elaborated statement check. **Prediction scored**: the plan priced the four
+     proved leaves at about four days; 446 lines, one job. **Credit**: a single argument for two hand lemmas that
+     needs no case split and no blow-up; a planner's mutation note sharpened; the chart-restriction cost found
+     before anyone paid it. **Rulings.** (a) **A continuation job, FS131-I6Z2, on the same branch**: `vt_w`, then
+     `erosion` and `pencil_window`, from its record § 4.3; its first child is the chart-restriction lemma, and a
+     wider `vt_w` is a message to me before it is made. Brief not written. (b) The tangent-type fact was not
+     merged (nothing of its four leaves reads it): the continuation takes it by merging `origin/fs131-w6l`.
+     (c) `finite_pieces_of_radius`'s place is decided after the deriver's job (ruling 576 (b)), with its answer
+     that `ends_centre` can stand upstream. (d) Its drafts are held for the filing. (e) **Slot → FS131-I6K**
+     (wave 6's accumulation rows, on `fs131-w6k` at `2aa3f720`; Amendment 1 regenerated with the lint and the
+     two siblings' hand-backs, gate exit 0), launched 2026-10-06. In flight: 3 (LT5, the Searcher, I6K).
