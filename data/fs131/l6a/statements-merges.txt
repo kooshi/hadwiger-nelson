@@ -1,0 +1,166 @@
+### byte-identity of each one-owner file with its owner's tip (git diff --quiet; 0 = identical)
+Pinch vs fs131-w6p: 0
+MapColouring vs fs131-w6m: 0
+MapEdge vs fs131-w6m: 0
+Sq9Map vs fs131-w6m: 0
+CurveArc vs fs131-w6f: 0
+ArcContinuation vs fs131-w6f: 0
+FanArcs vs fs131-w6f: 0
+FanBuild vs fs131-w6f: 0
+FanExamples vs fs131-w6f: 0
+Curve vs fs131-w6g: 0
+Curve vs fs131-w6c: 0
+LocalGraph vs fs131-w6g: 0
+LocalGraph vs fs131-w6c: 0
+Basic vs fs131-w6g: 0
+Basic vs fs131-w6f: 0
+Fan vs fs131-w6g: 0
+Fan vs fs131-w6f: 0
+Basic vs fs131-w6p: 0
+Basic vs fs131-w6m: 0
+
+### every declaration of each tip present verbatim in the joined tree (a docstring differing from the ref's must be the one an owner's tip holds)
+== origin/fs131-w6g
+Proofs/HadwigerNelson/Plane/Saturated/Basic.lean against origin/fs131-w6g: 50 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/Curve.lean against origin/fs131-w6g: 24 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/Fan.lean against origin/fs131-w6g: 31 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.fan_of_isolated
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.regJFan_of_saturated
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.regJLiteral_of_saturated
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.finite_arcs_of_isBounded
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean against origin/fs131-w6g: 81 declarations, 0 flagged, 4 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/FanExamples.lean against origin/fs131-w6g: 31 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean against origin/fs131-w6g: 32 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6m Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean: theorem HadwigerNelson.Plane.sat_inP
+Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean against origin/fs131-w6g: 14 declarations, 0 flagged, 1 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.half_upperDensity
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.pinch
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean against origin/fs131-w6g: 17 declarations, 0 flagged, 2 docstring(s) an owner changed
+present: PASS
+exit=0
+== origin/fs131-w6c
+Proofs/HadwigerNelson/Plane/Saturated/Basic.lean against origin/fs131-w6c: 50 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/Curve.lean against origin/fs131-w6c: 24 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/Fan.lean against origin/fs131-w6c: 31 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.fan_of_isolated
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.regJFan_of_saturated
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.regJLiteral_of_saturated
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.finite_arcs_of_isBounded
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.two_le_n
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.col_ne
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.branch_outside_discs
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.branch_contacts
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean against origin/fs131-w6c: 17 declarations, 0 flagged, 8 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/FanExamples.lean against origin/fs131-w6c: 31 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean against origin/fs131-w6c: 32 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6m Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean: theorem HadwigerNelson.Plane.sat_inP
+Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean against origin/fs131-w6c: 14 declarations, 0 flagged, 1 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.half_upperDensity
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.pinch
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean against origin/fs131-w6c: 17 declarations, 0 flagged, 2 docstring(s) an owner changed
+present: PASS
+exit=0
+== origin/fs131-w6f
+Proofs/HadwigerNelson/Plane/Saturated/ArcContinuation.lean against origin/fs131-w6f: 19 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/Basic.lean against origin/fs131-w6f: 50 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/Curve.lean: theorem HadwigerNelson.Plane.lipschitzOnWith_of_chord
+Proofs/HadwigerNelson/Plane/Saturated/Curve.lean against origin/fs131-w6f: 10 declarations, 0 flagged, 1 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/CurveArc.lean against origin/fs131-w6f: 17 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/Fan.lean against origin/fs131-w6f: 31 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/FanArcs.lean against origin/fs131-w6f: 8 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.two_le_n
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.col_ne
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.branch_outside_discs
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.branch_contacts
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean against origin/fs131-w6f: 18 declarations, 0 flagged, 4 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/FanBuild.lean against origin/fs131-w6f: 14 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/FanExamples.lean against origin/fs131-w6f: 40 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean against origin/fs131-w6f: 6 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6m Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean: theorem HadwigerNelson.Plane.sat_inP
+Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean against origin/fs131-w6f: 14 declarations, 0 flagged, 1 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.half_upperDensity
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.pinch
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean against origin/fs131-w6f: 17 declarations, 0 flagged, 2 docstring(s) an owner changed
+present: PASS
+exit=0
+== origin/fs131-w6p
+Proofs/HadwigerNelson/Plane/Saturated/Basic.lean against origin/fs131-w6p: 50 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6m Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean: theorem HadwigerNelson.Plane.sat_inP
+Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean against origin/fs131-w6p: 14 declarations, 0 flagged, 1 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean against origin/fs131-w6p: 44 declarations, 0 flagged, 0 docstring(s) an owner changed
+present: PASS
+exit=0
+== origin/fs131-w6m
+Proofs/HadwigerNelson/Plane/Saturated/Basic.lean against origin/fs131-w6m: 50 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean against origin/fs131-w6m: 18 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/MapEdge.lean against origin/fs131-w6m: 25 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.half_upperDensity
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.pinch
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean against origin/fs131-w6m: 17 declarations, 0 flagged, 2 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/Sq9Map.lean against origin/fs131-w6m: 19 declarations, 0 flagged, 0 docstring(s) an owner changed
+present: PASS
+exit=0
+== 32f2ab4c
+Proofs/HadwigerNelson/Plane/Saturated/Basic.lean against 32f2ab4c: 50 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/Curve.lean: theorem HadwigerNelson.Plane.lipschitzOnWith_of_chord
+Proofs/HadwigerNelson/Plane/Saturated/Curve.lean against 32f2ab4c: 10 declarations, 0 flagged, 1 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/Fan.lean against 32f2ab4c: 31 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.fan_of_isolated
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.regJFan_of_saturated
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.regJLiteral_of_saturated
+  DOC-OWNER origin/fs131-w6f Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.finite_arcs_of_isBounded
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.two_le_n
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.col_ne
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.branch_outside_discs
+  DOC-OWNER origin/fs131-w6g Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: theorem HadwigerNelson.Plane.AeColouring.Fan.branch_contacts
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean against 32f2ab4c: 17 declarations, 0 flagged, 8 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/FanExamples.lean against 32f2ab4c: 31 declarations, 0 flagged, 0 docstring(s) an owner changed
+Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean against 32f2ab4c: 6 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6m Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean: theorem HadwigerNelson.Plane.sat_inP
+Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean against 32f2ab4c: 14 declarations, 0 flagged, 1 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.half_upperDensity
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.pinch
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean against 32f2ab4c: 17 declarations, 0 flagged, 2 docstring(s) an owner changed
+present: PASS
+exit=0
+== 3928644b
+Proofs/HadwigerNelson/Plane/Saturated/Basic.lean against 3928644b: 50 declarations, 0 flagged, 0 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6m Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean: theorem HadwigerNelson.Plane.sat_inP
+Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean against 3928644b: 14 declarations, 0 flagged, 1 docstring(s) an owner changed
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.half_upperDensity
+  DOC-OWNER origin/fs131-w6p Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: theorem HadwigerNelson.Plane.pinch
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean against 3928644b: 17 declarations, 0 flagged, 2 docstring(s) an owner changed
+present: PASS
+exit=0
+### self-test, on two one-owner files (Pinch against fs131-w6p, FanBuild against fs131-w6f)
+faithful present: 44 declarations, 0 flagged
+faithful delta: 44 declarations before, 44 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 0 []
+plant (one character of a statement): 44 declarations before, 44 after; statements changed 1 ['HadwigerNelson.Plane.pinch']; removed 0 []; a
+  -> fired (CHANGED)
+plant (a disjunct appended to a conclusion): 44 declarations before, 44 after; statements changed 1 ['HadwigerNelson.Plane.pinch']; removed 
+  -> fired (CHANGED)
+plant (a declaration renamed away): 44 declarations before, 44 after; statements changed 0 []; removed 1 ['HadwigerNelson.Plane.pinch']; add
+  -> fired (REMOVED)
+plant (a declaration added): 44 declarations before, 45 after; statements changed 0 []; removed 0 []; added 1 ['zz_planted_new']; docstring 
+  -> fired (ADDED)
+plant (a docstring edited): 44 declarations before, 44 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 1 ['Hadwige
+  -> fired (DOC)
+  owner holds the edited docstring -> DOC-OWNER owner: as expected
+  no owner holds it -> DOC: fired
+self-test: PASS
+exit=0
+faithful present: 14 declarations, 0 flagged
+faithful delta: 14 declarations before, 14 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 0 []
+plant (one character of a statement): 14 declarations before, 14 after; statements changed 1 ['HadwigerNelson.Plane.exists_ordered_lifts']; 
+  -> fired (CHANGED)
+plant (a disjunct appended to a conclusion): 14 declarations before, 14 after; statements changed 1 ['HadwigerNelson.Plane.exists_ordered_li
+  -> fired (CHANGED)
+plant (a declaration renamed away): 14 declarations before, 14 after; statements changed 0 []; removed 1 ['HadwigerNelson.Plane.exists_order
+  -> fired (REMOVED)
+plant (a declaration added): 14 declarations before, 15 after; statements changed 0 []; removed 0 []; added 1 ['zz_planted_new']; docstring 
+  -> fired (ADDED)
+plant (a docstring edited): 14 declarations before, 14 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 1 ['Hadwige
+  -> fired (DOC)
+  owner holds the edited docstring -> DOC-OWNER owner: as expected
+  no owner holds it -> DOC: fired
+self-test: PASS

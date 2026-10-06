@@ -97,3 +97,118 @@ mine: any statement; `SeparatesAt`'s second clause; the hypotheses the implement
 `LEAN.md`, `BIBLIOGRAPHY.md` (drafted here); a new `axiom`; `native_decide`.
 
 ## Stage 1 — SAVED (FS131-L6A)
+
+## Stage 2 — SAVED (FS131-L6A): the three merges; the first half is whole — no declaration rests on `sorryAx`
+
+### 2.1 The merges, each its own commit
+
+Each was made with `git -c merge.conflictStyle=diff3 merge --no-ff --no-commit`, resolved, checked, and then committed as a merge
+(two parents each). The trial of each was repeated on the commit it was merged into (`data/fs131/l6a/merge-trial-fs131-w6{f,p,m}.txt`).
+
+| merge | commit | conflicts | merged by itself, both sides having changed it |
+|---|---|---|---|
+| `origin/fs131-w6f` (`8e81fedd`) into `361a891b` | **`c4bda502`** | `ARCHITECTURE.md` (one hunk, not adjacent additions: § 1.5), `scripts/Axioms.lean` (one hunk, adjacent blocks) | **`FanBridge.lean`** |
+| `origin/fs131-w6p` (`43ea4886`) into `0fbdce04` | **`aa8f9312`** | `scripts/Axioms.lean` (one hunk; on the first merge's commit the block FS131-I6D stands at the anchor, so the clean merge of § 1.5's trial is a conflict here) | — |
+| `origin/fs131-w6m` (`2e55a2d6`) into `d55f872d` | **`89abcd1c`** | `ARCHITECTURE.md` (one hunk: nine rows of this line after `MapColouring`'s row, theirs' two rows before it and its rewriting), `scripts/Axioms.lean` (one hunk) | `Proofs.lean` |
+
+- **The resolutions, by script** (`tools/fs131_l6a_keepboth.py resolve`): a hunk with no base is two adjacent blocks — ours, a blank
+  line, theirs; a hunk with a base is resolved by key (a row of `ARCHITECTURE.md` by its first cell): theirs' order, ours' line where
+  theirs left the base's alone, theirs' line where ours did, refused where both changed one row (none was). `scripts/Axioms.lean`'s
+  blocks now stand in the order FS131-K6, -K6b, -I6C, -I6E, -I6D, -I6A, -I6B, above the `=== PURCHASED ===` banner; `ARCHITECTURE.md`'s
+  fourteen rows in the order `Basic`, `Pinch`, `MapEdge`, `Sq9Map`, `MapColouring`, `Fan`, `FanExamples`, `Curve`, `CurveArc`,
+  `ArcContinuation`, `FanArcs`, `FanBuild`, `LocalGraph`, `FanBridge`; `Proofs.lean` holds the fourteen imports in that order.
+- **The check, on every path both sides changed — the ones that merged by themselves included**
+  (`tools/fs131_l6a_keepboth.py --self-test <file> HEAD <theirs> <base> <path>`; `data/fs131/l6a/keepboth-w6{f,p,m}.txt`, each exit 0):
+  no marker; every line stands exactly `ours + theirs − base` times; in `scripts/Axioms.lean` the `#print axioms` lines number
+  ours + theirs − base and no name is printed twice.
+
+  | merge | path | non-blank lines | `#print axioms` lines |
+  |---|---|---|---|
+  | `fs131-w6f` | `ARCHITECTURE.md` | 714 | — |
+  | | `scripts/Axioms.lean` | 6,137 | 5,433 = 5,392 + 5,331 − 5,290 |
+  | | **`FanBridge.lean`** | 1,381 | — |
+  | `fs131-w6p` | `scripts/Axioms.lean` | 6,175 | 5,470 = 5,433 + 5,292 − 5,255 |
+  | `fs131-w6m` | `ARCHITECTURE.md` | 716 | — |
+  | | `scripts/Axioms.lean` | 6,222 | 5,516 = 5,470 + 5,301 − 5,255 |
+  | | `Proofs.lean` | 255 | — |
+
+  Its plants fire on each file beside the faithful run: a line of theirs dropped (LOST), doubled (EXTRA), a marker left in
+  (MARKER); on `ARCHITECTURE.md` and `FanBridge.lean` at the first merge, **the base's line put back beside this line's rewriting
+  (EXTRA)** — the stale row a plain keep-both would have kept; on `scripts/Axioms.lean`, a record doubled (TWICE) and one dropped
+  (COUNT).
+- **The index held the merge and nothing else** (`tools/fs131_l6a_mergeindex.py <theirs> <the paths both sides changed>`;
+  `mergeindex-w6{f,p,m}.txt`): `MERGE_HEAD` the named tip; no path unmerged; the staged paths exactly those theirs changed since the
+  base (23, 32, 28); every one but the named paths taken whole from theirs; the working tree equal to the index. Controls run live,
+  each exit 1 before the faithful run's exit 0: the resolved paths not yet staged (UNMERGED, DIRTY: first and second merge); **the
+  path that merged by itself not named** (`BOTH sides changed, merged unread: …FanBridge.lean` at the first merge, `Proofs.lean` at
+  the third) — so no such path was committed without the three-way check above having read it.
+- A merge cannot be committed by path; each was committed whole after that check, and this job's logs went in commits of their own
+  by path (`0fbdce04`, `d55f872d`, `2b72f821`).
+
+### 2.2 No statement of any side changed
+
+- **Thirteen of the fourteen files are byte-identical to their owner's tip** (`git diff --quiet`, 19 comparisons, each exit 0;
+  `data/fs131/l6a/statements-merges.txt`): `Pinch` = `fs131-w6p`'s; `MapColouring`, `MapEdge`, `Sq9Map` = `fs131-w6m`'s; `CurveArc`,
+  `ArcContinuation`, `FanArcs`, `FanBuild`, `FanExamples` = `fs131-w6f`'s; `Curve`, `LocalGraph` = `fs131-w6g`'s and `fs131-w6c`'s;
+  `Basic`, `Fan` = every tip's. The fourteenth, `FanBridge`, is the three-way merge of its two halves, line for line (§ 2.1).
+- **By script, against each branch's tip and the two planners' tips** (`tools/fs131_l6a_statements.py present <ref> --doc-owners …`
+  over every wave file the ref holds): every declaration of `origin/fs131-w6g` (8 files, 280 declarations), `origin/fs131-w6c` (8,
+  216), `origin/fs131-w6f` (12, 244), `origin/fs131-w6p` (3, 108), `origin/fs131-w6m` (5, 129), `32f2ab4c` (8, 176) and `3928644b`
+  (3, 81) appears verbatim in the joined tree — a theorem's text to its first ` :=` followed by ` :=`, anything else whole.
+  **1,234 comparisons, 0 flagged.** In 44 of them the docstring differs from the ref's while the statement is verbatim; each of
+  those is, word for word, the docstring the declaration has at its owner's tip (the implementer who proved a leaf added its
+  inhabitant line: `FanBridge` 24 across the two halves, `Pinch` 12, `MapColouring` 6, `Curve` 2) — the tool prints them as
+  `DOC-OWNER <ref>` and fails on a docstring no owner holds. Its self-test on two one-owner files (`Pinch` against `fs131-w6p`,
+  `FanBuild` against `fs131-w6f`): five plants fired (a character of a statement; a disjunct appended to a conclusion; a declaration
+  renamed away; one added; a docstring edited), and the owner rule read both ways (a docstring an owner holds: DOC-OWNER; one no
+  owner holds: DOC).
+
+### 2.3 The build of the joined line
+
+`data/fs131/l6a/build-merges.log` (`HEAD=2b72f821`, whose Lean sources are `89abcd1c`'s; no tracked file modified): **`build: OK — 466
+of 466 batches, 12 module(s) rebuilt, 0 module(s) with warnings, 9m23s`, `exit=0`**. The full log (`build-merges-full.log`) holds
+**0 `warning` lines** and ends "Build completed successfully (5817 jobs)"; its five lines with the word `error` are the build
+script's own pre-check (`error: target is out-of-date and needs to be rebuilt`, as FS131-I6E's report describes). Rebuilt: `MapEdge`,
+`Sq9Map`, `Pinch`, `CurveArc`, `FanExamples`, `MapColouring`, `LocalGraph`, `ArcContinuation`, `FanArcs`, `FanBuild`, `FanBridge`,
+`Proofs`. One build after the three merges, not one after each: the three change disjoint Lean files (§ 1.3), so a failure would
+have named its side; each merge was checked by script before the next was made.
+
+**This is the first tree to hold the whole chain, and the kernel accepts it**: `FanBridge`'s two halves elaborate as one file with
+no name declared twice in it, and the fifteen `sorry` leaves of Stage 1 are gone with nothing in their place.
+
+### 2.4 The receipt that the first half is whole
+
+- **Zero `sorry`**: the gate's narrow pattern over `Proofs/` and `Proofs.lean` reads 0 lines; `grep -c sorry` reads 0 in thirteen
+  of the fourteen files and 1 in `LocalGraph` (the word, in its module docstring: "no `sorry` in this module"). Its control is
+  Stage 1's tree: fifteen warnings, fifteen lines.
+- **The kernel's own list** (`data/fs131/l5/count-modules.lean` on the joined library; `data/fs131/l6a/count-modules-merges.out`):
+  the fourteen modules hold **534 declarations, 382 theorems, 7 refutations** — `ArcContinuation` 40 / 16, `Basic` 71 / 32,
+  `Curve` 30 / 23, `CurveArc` 18 / 17, `Fan` 57 / 23, `FanArcs` 8 / 8, `FanBridge` 93 / 83, `FanBuild` 14 / 14, `FanExamples`
+  44 / 35, `LocalGraph` 46 / 31, `MapColouring` 19 / 10, `MapEdge` 28 / 27, `Pinch` 45 / 45, `Sq9Map` 21 / 18.
+- **Every theorem of the fourteen modules, and every name the reports give, on the standard three or a subset**
+  (`tools/fs131_l6a_leaves.py`; `data/fs131/l6a/axioms-wave.lean`, its names `axioms-wave.lean.names`, its output
+  `axioms-wave-merges.log`, the reading `leaves-merges.txt`, exit 0). The names are not written by hand; four lists are read:
+  - **kernel** — the 382 theorems of the kernel's list above;
+  - **leaf** — every declaration of the wave's files at the second planner's tip `32f2ab4c` whose text holds `sorry`: **31**, the
+    count the planners report (`Pinch` 7, `MapColouring` 1, `Curve` 6, `LocalGraph` 5, `FanBridge` 12);
+  - **block** — the `#print axioms` names of the seven blocks of `scripts/Axioms.lean`: FS131-K6 16, -K6b 53, -I6A 37, -I6B 46,
+    -I6C 45, -I6D 41, -I6E 57 (295);
+  - **wired** — the names the reports list as proved over another line's leaf: FS131-I6E's fourteen (the `WIRED` section of
+    `data/fs131/i6e/I6eAxioms.lean`), FS131-I6C's six (its Drafts item 1), and the planners' eight compositions over leaves
+    (`TwoColourNhd.mem_essBoundary`, `pinch_interface`, `c11_discs_interface`, `sat_noPar`, `regJFan_of_saturated`,
+    `regJFan_iff_singLocallyFinite`, `Fan.sector_unique`, `sq9_regJFan`); FS131-I6D's twenty-six are inside its block.
+
+  **384 distinct names: 383 print exactly `[propext, Classical.choice, Quot.sound]`, one a proper subset (`sq9_pred_ne`, on
+  `[propext, Quot.sound]`), none anything else.** Every leaf (31 of 31), every block record (295 of 295), every wired name (28 of
+  28). Two block names are definitions that carry proofs, not theorems of the kernel's list (`fanAngle`, `sq9Fan`), each on the
+  three. **Exactly one print of the file holds `sorryAx`: the control**, a theorem of that file proved by `sorry`. The reader's
+  three plants fire: a leaf's print given `sorryAx` (BAD-AXIOM), a leaf's print dropped (NO-PRINT), the control's print made clean
+  (CONTROL).
+
+  So the forty-six records that printed `sorryAx` on their own branches (FS131-I6D's 26, -I6E's 14, -I6C's 6) print the standard
+  three on the joined line, and so do the planners' eight. This is iteration's evidence (`lake env lean` on the built tree); the
+  audit of every record is the gate's, after the doubled-name check (Stage 5).
+- **What the receipt leaves for the gate's registration**: of the 382 theorems, 293 have a record in a block, 21 are on a wired
+  list only, and 68 are on neither — each needs its line in `scripts/Axioms.lean` before the records check can pass (Stages 3, 5).
+
+## Stage 2 — SAVED (FS131-L6A)

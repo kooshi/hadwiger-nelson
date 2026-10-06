@@ -8,10 +8,14 @@ non-indented line. Its *statement* is: for a theorem or lemma, the text from the
 is the `/-- … -/` block ending on the line before it. Names are qualified by the enclosing
 `namespace` lines, so two namespaces' declarations of one short name are two rows.
 
-  present <ref> <file> [<file> ...]
+  present <ref> [--doc-owners r1,r2] <file> [<file> ...]
       Every declaration of `<ref>:<file>` appears verbatim in the working tree's file — a theorem's
       statement followed by ` :=` (so nothing can be appended to a conclusion), its docstring too.
       Exit 0 iff none is missing. The merges' check: against each branch's tip.
+      With --doc-owners: a declaration whose statement is present and whose docstring differs from
+      `<ref>`'s is not a fault when the working tree's docstring for that declaration is, verbatim, the
+      docstring it has at one of the owner refs (the branch that proved the leaf added a line to it);
+      it is then printed as `DOC-OWNER <ref>` and counted apart. A docstring no owner holds is `DOC`.
 
   delta <ref> [--changed a,b] [--removed c,d] [--added e,f] [--docs g,h] <file> [<file> ...]
       Compares the declarations of `<ref>:<file>` and of the working tree's file by qualified name.
@@ -113,15 +117,27 @@ def show(ref, path):
                           check=True).stdout
 
 
-def present(old, new):
+def present(old, new, owners=()):
+    """owners: [(ref, text of the file at ref)] — see --doc-owners."""
     bad = []
     cs = chunks(old)
+    here = {}
+    for q, _, d, _, _ in chunks(new):
+        here.setdefault(q, d)
     for qual, kind, doc, stmt, _ in cs:
         needle = stmt + ' :=' if kind in ('theorem', 'lemma') and stmt != '' else stmt
         if needle not in new:
             bad.append(('MISSING', qual, kind))
         elif doc and doc not in new:
-            bad.append(('DOC', qual, kind))
+            word = 'DOC'
+            for ref, text in owners:
+                theirs = {}
+                for q, _, d, _, _ in chunks(text):
+                    theirs.setdefault(q, d)
+                if qual in here and here[qual] and theirs.get(qual) == here[qual]:
+                    word = f'DOC-OWNER {ref}'
+                    break
+            bad.append((word, qual, kind))
     return len(cs), bad
 
 
@@ -183,14 +199,25 @@ def names(arg):
 
 def main(argv):
     if len(argv) >= 3 and argv[0] == 'present':
-        ref, files = argv[1], argv[2:]
+        ref, rest = argv[1], argv[2:]
+        owner_refs = []
+        if rest and rest[0] == '--doc-owners':
+            owner_refs, rest = [r for r in rest[1].split(',') if r], rest[2:]
+        files = rest
         rc = 0
         for path in files:
-            n, bad = present(show(ref, path), open(path, encoding='utf-8').read())
+            owners = []
+            for r in owner_refs:
+                q = subprocess.run(['git', 'show', f'{r}:{path}'], capture_output=True, text=True)
+                if q.returncode == 0:
+                    owners.append((r, q.stdout))
+            n, bad = present(show(ref, path), open(path, encoding='utf-8').read(), owners)
+            faults = [b for b in bad if not b[0].startswith('DOC-OWNER')]
             for word, qual, kind in bad:
                 print(f'  {word} {path}: {kind} {qual}')
-            print(f'{path} against {ref}: {n} declarations, {len(bad)} flagged')
-            rc = rc or (1 if bad else 0)
+            print(f'{path} against {ref}: {n} declarations, {len(faults)} flagged, '
+                  f'{len(bad) - len(faults)} docstring(s) an owner changed')
+            rc = rc or (1 if faults else 0)
         print('present: PASS' if rc == 0 else 'present: FAIL')
         return rc
     if len(argv) >= 3 and argv[0] == 'delta':
@@ -240,6 +267,15 @@ def main(argv):
                 fired = fired and any(b[0] == 'MISSING' for b in pbad)
             print(f'  -> {"fired" if fired else "DID NOT FIRE"} ({word})')
             ok = ok and fired
+        # --doc-owners: a docstring an owner holds is DOC-OWNER; one no owner holds stays DOC
+        edited = new.replace(docd[2], docd[2].replace('/--', '/-- PLANTED', 1), 1)
+        _, b1 = present(new, edited, [('owner', edited)])
+        _, b2 = present(new, edited, [('owner', new)])
+        f1 = [b[0] for b in b1] == ['DOC-OWNER owner']
+        f2 = [b[0] for b in b2] == ['DOC']
+        print(f'  owner holds the edited docstring -> {b1[0][0] if b1 else "nothing"}: {"as expected" if f1 else "WRONG"}')
+        print(f'  no owner holds it -> {b2[0][0] if b2 else "nothing"}: {"fired" if f2 else "DID NOT FIRE"}')
+        ok = ok and f1 and f2
         print('self-test: PASS' if ok else 'self-test: FAIL')
         return 0 if ok else 1
     print(__doc__)
