@@ -113,7 +113,7 @@ definition: the ratio is written out, in the shape of Besicovitch's theorem in M
 
 ## Stage 3 — SAVED (FS131-IF1): the general theorem, proved and in the library
 
-`Proofs/HadwigerNelson/Plane/MetricalBoundary.lean` (new; 340 lines, Mathlib imports only; in `Proofs.lean` and in
+`Proofs/HadwigerNelson/Plane/MetricalBoundary.lean` (new; 338 lines, Mathlib imports only; in `Proofs.lean` and in
 `ARCHITECTURE.md` § 3.11): every leaf of Stage 2's skeleton closed, no `sorry`, no statement of the skeleton changed. One child
 added, `measure_compl_inter_closedBall_div_eq_half` (ratio one half for `S` gives ratio one half for `Sᶜ`; used twice). Three
 theorems carry `omit [BorelSpace E] in` (the build's unused-section-variable linter named them). Spec examples at the foot: a
@@ -137,6 +137,67 @@ exactly `[propext, Classical.choice, Quot.sound]`, and the control prints `[sorr
 control made clean → exit 1, `did NOT fire`; (d) the unmodified output → exit 0. This is iteration evidence
 (`lake env lean`); the gate's receipt is Stage 4's `scripts/axioms.sh`.
 
+## Stage 4 — SAVED (FS131-IF1): the axiom is a theorem, and the audit moved with it
+
+**The swap** (`Proofs/HadwigerNelson/Plane/FalconerReduction.lean`). `git diff ca598960` on the statement:
+
+```
+-axiom falconer_lemma2_nonempty {S : Set ℂ} (hS : MeasurableSet S) (h1 : volume S ≠ 0) (h2 : volume Sᶜ ≠ 0) :
+-    ∃ x : ℂ, x ∉ densitySet S ∧ x ∉ densitySet Sᶜ
++theorem falconer_lemma2_nonempty {S : Set ℂ} (hS : MeasurableSet S) (h1 : volume S ≠ 0) (h2 : volume Sᶜ ≠ 0) :
++    ∃ x : ℂ, x ∉ densitySet S ∧ x ∉ densitySet Sᶜ :=
++  exists_not_tendsto_ratio_and_compl volume hS.nullMeasurableSet h1 h2
+```
+
+The keyword, and the `:=` with its one-line proof — the general theorem at `E = ℂ`, `μ = volume`, by unfolding `densitySet`.
+Same name, binders, conclusion. What else the change forced in that file, and nothing more: one import line
+(`Plane/MetricalBoundary`); the lemma's docstring (what is now proved, by which theorem, and that the proof is not claimed to
+be Croft's); two phrases of the section's module doc that said "imported"; the first words of
+`upperHalfPlane_falconer_hyp`'s docstring ("Model of the import's hypotheses" → "Model of `falconer_lemma2_nonempty`'s
+hypotheses"). No other statement or definition anywhere changed; no `axiom`, no `native_decide`, no `sorry`.
+
+**The audit** (`scripts/Axioms.lean`): the `declareImport` line removed; the four records (`falconer_reduction`,
+`le_chiM_of_falconerFan`, `exists_mem_falconerE`, `fan_tip_ae_mem`) moved from IMPORTED to CLEAN, beside wave 2's
+`FalconerReduction` records (after `falconer_lemma4` — not at the foot of CLEAN, where every wave appends and a merge would
+meet them); `falconer_lemma2_nonempty` itself and the fifteen theorems of `Plane/MetricalBoundary` registered there; two
+sentences of the IMPORTED banner's prose brought to the current state (the section is empty; the procedure stays).
+`ARCHITECTURE.md`: § 5's row for the import removed, with one line of current state under the table's header; § 3.11's row
+for `Plane/FalconerReduction` names the theorem and the new import.
+
+**Receipts** (all from the worktree, under the slot; logs in `data/fs131/if1/`):
+
+| check | command | exit | reading |
+|---|---|---|---|
+| build | `slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` | 0 | "467 of 467 batches, 9 module(s) rebuilt, 0 module(s) with warnings, 10m23s" (`build-stage4.log`; rebuilt: `Plane/FalconerReduction` and its dependents through `Plane/Slack` and `Plane/ValidMap/Dense`, `Proofs`) |
+| axiom audit | `slot.py --mem 16 --cpus 4 -- ./scripts/axioms.sh` | 0 | "audited: 5825 records — 5803 clean on the standard axioms, 17 axiom-free, 0 imported […], 5 declared purchase(s)"; "declared imports (0): none"; "library axioms other than native auxiliaries (0): none; native auxiliaries: 10"; "RECORDED COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 5783 clean → 5803, 4 imported → 0" (`axioms-gate-stage4.log`; the whole receipt, `axioms-gate-stage4-full.log`) |
+| the five records | read in the saved receipt, lines 2700–2704 | — | `falconer_lemma2_nonempty`, `falconer_reduction`, `le_chiM_of_falconerFan`, `exists_mem_falconerE`, `fan_tip_ae_mem`: each `[propext, Classical.choice, Quot.sound]` |
+| self-test, **red before** | `slot.py --mem 16 --cpus 4 -- ./scripts/axioms.sh --self-test`, controls file unchanged | 1 | "3 of 23 control(s) did not behave as designed": `baseline` (got `imported=0 declared=0 library=0`), `imported_declared` (got `1 / 1 / 1`), `banner_dropped` (the two consequences naming `falconer_reduction` and `falconer_lemma2_nonempty` did not fire) (`axioms-selftest-red-before.log`) |
+| self-test, **green after** | the same, after `data/fs131/if1/controls-edit.py` | 0 | "OK — every planted fault fired, and every partner passed", 23 of 23 (`axioms-selftest-green-after.log`) |
+| doubled names | `slot.py --mem 16 --cpus 4 -- ./scripts/dupnames.sh` | 0 | "OK — no name is declared by two modules (23 generated on demand […])" (`dupnames-stage4.log`) |
+| module map | `python3 tools/check_architecture.py` | 0 | `RESULT: PASS` (`check-architecture-stage4.log`); on copies, a row without the new import → exit 1, "imports of Plane/FalconerReduction: stated-only [], real-only ['Plane/MetricalBoundary']"; the new module's row removed → exit 1, "module coverage" (`check-architecture-controls.log`) |
+| linters (one cheap check beyond the brief's list, to spare the landing a round trip) | `slot.py --mem 8 --cpus 4 -- lake lint --no-build -- --no-build --trace` | 0 | every linter "(2/2) Passed!", "-- Linting passed for Proofs." (`lint-stage4.log`) |
+
+`rg -uu '^\s*axiom '` over `Proofs/` finds one line, an example inside `Sat/Lrat.lean`'s prose; the environment's own count
+is the audit's `LIBRARY SUMMARY axioms=0 native=10`.
+
+**The self-test with no declared import** (the brief's question). Its design does not need one: every IMPORTED control plants
+its own axiom (`t3c_import`) in a copy of the audit, and FS131-T3 wrote the controls for an empty list (`a09b2254`). Three
+controls read the library's state and move with it, in `scripts/axioms-controls.txt` (not `scripts/axioms.sh`, which the
+brief's touch list names; the counts live in the controls file): `baseline` (`imported / declared / library`, and the text of
+its `old` digest), `imported_declared` (the same three, each one higher), and `banner_dropped` (with records in the IMPORTED
+section, dropping its banner also strands them and their declaration). They are back at FS131-T3's values: `0 / 0 / 0` with
+the older-form digest matching, `1 / 1 / 1`, and the banner alone. **At the landing where this branch meets the Weil import's**:
+per declared import, `declared` and `library` rise by one in both controls and `imported` by its record count, the two `old`
+digests' texts follow (`…and the audit has N imported`), and `banner_dropped` regains `FAIL outside-banners <one of its
+records>` and `FAIL stale-declaration <the axiom>` — FS131-I2n's edit (`082f86c9`) is the pattern, and the file's header now
+says so. Three places will meet in that merge: the IMPORTED section of `scripts/Axioms.lean` (this branch deletes the lines
+the other appends beside), `ARCHITECTURE.md` § 5's table (a row deleted here, a row added there; the "None at present" line
+then goes), and those control lines.
+
+**Not run, by the brief** (the landing runs the full gate): `./scripts/vacuity.sh`. Its counts in `CLAUDE.md` § The gate will
+move — the new module adds fifteen theorems, whose hypotheses are parametric (a set, a measure, radii), and
+`falconer_lemma2_nonempty` is now a theorem with a model in its file (`upperHalfPlane_falconer_hyp`).
+
 ## Theorems this phase proved
 
 *Kernel theorems, each `[propext, Classical.choice, Quot.sound]` (Stage 3's print; Stage 4's audit for the receipt). All in
@@ -153,6 +214,11 @@ space `E` with an additive Haar measure `μ`.*
 - `continuous_measure_inter_closedBall` [kernel] — `c ↦ μ (S ∩ B̄(c, ρ))` is continuous, any `S`, `ρ > 0`.
 - `not_tendsto_ratio_compl_of_ratio_ge` [kernel] — ratio at least `κ > 0` along radii tending to `0` excludes density `1` of
   the complement.
+- `falconer_lemma2_nonempty` [kernel] (`Proofs/HadwigerNelson/Plane/FalconerReduction.lean`) — **the axiom, now a theorem**, same
+  statement: a measurable `S ⊆ ℂ` with `volume S ≠ 0`, `volume Sᶜ ≠ 0` has a point outside `densitySet S` and `densitySet Sᶜ`.
+  Audit (Stage 4): `[propext, Classical.choice, Quot.sound]`.
+- Moved from IMPORTED to CLEAN, statements untouched, each now `[propext, Classical.choice, Quot.sound]` in the audit:
+  `exists_mem_falconerE`, `fan_tip_ae_mem`, `falconer_reduction`, `le_chiM_of_falconerFan` (FS129-SA1-FALC-RED).
 - Children [kernel]: `measure_inter_closedBall_le_add`, `tendsto_measure_closedBall_sub`,
   `measure_inter_closedBall_div_add_compl`, `measure_compl_inter_closedBall_div_eq_half`, `exists_mem_ball_tendsto_ratio`,
   `measure_inter_ball_ne_zero_of_ratio_eq_half`, `exists_closedBall_subset_ratio_eq_half`,
