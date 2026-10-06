@@ -1,0 +1,18 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0,1,2,3
+'HadwigerNelson.Plane.conj_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+theorem HadwigerNelson.Plane.conj_e : ∀ (θ : ℝ),
+  (starRingEnd ℂ) (HadwigerNelson.Plane.e θ) = HadwigerNelson.Plane.e (-θ) :=
+fun θ =>
+  id
+    (Eq.mpr
+      (id (congrArg (fun _a => _a = Complex.exp (↑(-θ) * Complex.I)) (Eq.symm (Complex.exp_conj (↑θ * Complex.I)))))
+      ((fun z z_1 e_z => e_z ▸ Eq.refl (Complex.exp z)) ((starRingEnd ℂ) (↑θ * Complex.I)) (↑(-θ) * Complex.I)
+        (of_eq_true
+          (Eq.trans
+            (congr
+              (congrArg Eq
+                (Eq.trans (map_mul (starRingEnd ℂ) (↑θ) Complex.I)
+                  (Eq.trans (congr (congrArg HMul.hMul (Complex.conj_ofReal θ)) Complex.conj_I)
+                    (mul_neg (↑θ) Complex.I))))
+              (Eq.trans (congrFun' (congrArg HMul.hMul (Complex.ofReal_neg θ)) Complex.I) (neg_mul (↑θ) Complex.I)))
+            (eq_self (-(↑θ * Complex.I)))))))

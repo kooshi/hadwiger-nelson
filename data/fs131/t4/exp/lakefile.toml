@@ -1,0 +1,5 @@
+name = "t4exp"
+defaultTargets = []
+
+[[lean_lib]]
+name = "T4Exp"

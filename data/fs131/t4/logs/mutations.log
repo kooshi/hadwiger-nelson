@@ -1,0 +1,19 @@
+slot: admitted python3: mem 4 GiB (hard cap), cpus 0,1,2,3
+mutation 1 (scan: scan forgets a second declaring module): CAUGHT
+    exit 1; red: doubled_axiom_theorem, doubled_axioms_differ, doubled_prop_instance, doubled_theorem, generated_beside_doubled, generated_only, lost_copy_line, lost_doubled_line, scan_cut_short
+mutation 2 (scan: scan calls every pair of theorems of one type generated): CAUGHT
+    exit 1; red: doubled_axioms_differ, doubled_prop_instance, doubled_theorem, generated_beside_doubled, lost_copy_line, lost_doubled_line, scan_cut_short, shared_with_dependency
+mutation 3 (scan: scan does not look in the dependencies' modules): CAUGHT
+    exit 1; red: shared_with_dependency
+mutation 4 (scan: scan reports a constant count of package modules): CAUGHT
+    exit 1; red: baseline, dependencies_only_pair, generated_beside_doubled, lost_totals_line, module_not_imported, shared_with_dependency
+mutation 5 (wrapper: wrapper does not fail on a DOUBLED line): CAUGHT
+    exit 1; red: doubled_axiom_theorem, doubled_axioms_differ, doubled_prop_instance, doubled_theorem, generated_beside_doubled, lost_copy_line, scan_cut_short, shared_with_dependency
+mutation 6 (wrapper: wrapper does not compare the modules read with the source files): CAUGHT
+    exit 1; red: module_not_imported
+mutation 7 (wrapper: wrapper does not compare TOTALS with the lines read): CAUGHT
+    exit 1; red: lost_doubled_line
+mutation 8 (wrapper: wrapper does not require the END banner): CAUGHT
+    exit 1; red: scan_cut_short
+after the mutations: shipped files unchanged: True; mutant files left in scripts/: none; the shipped self-test: exit 0, 15 ok, 0 FAIL
+mutations: 8; every one caught by a control written for it

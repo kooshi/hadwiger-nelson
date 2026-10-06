@@ -1,0 +1,10 @@
+exit 0
+Build completed successfully (6 jobs).
+info: T4Exp/S7/TopBA.lean:10:0: 'T4.S7.down' does not depend on any axioms
+info: T4Exp/S7/TopBA.lean:5:0: PROBE T4.S7.dup ATTRIBUTED-TO T4Exp.S7.B
+info: T4Exp/S7/TopBA.lean:5:0: PROBE T4.S7.dup AXIOMS-OF-HELD-VALUE [T4.S7.dup._native.native_decide.ax_1_1]
+info: T4Exp/S7/TopBA.lean:5:0: PROBE T4.S7.dup AXIOMS-PRINTED []
+info: T4Exp/S7/TopBA.lean:5:0: PROBE T4.S7.dup DECLARED-BY T4Exp.S7.A kind=theorem uses=[Eq, Nat, instAddNat, instDecidableEqNat, instHAdd, instOfNatNat, of_decide_eq_true, HAdd.hAdd, OfNat.ofNat, T4.S7.dup._native.native_decide.ax_1_1]
+info: T4Exp/S7/TopBA.lean:5:0: PROBE T4.S7.dup DECLARED-BY T4Exp.S7.B kind=theorem uses=[T4.S7.markB]
+info: T4Exp/S7/TopBA.lean:5:0: PROBE T4.S7.dup ENV-HOLDS kind=theorem uses=[Eq, Nat, instAddNat, instDecidableEqNat, instHAdd, instOfNatNat, of_decide_eq_true, HAdd.hAdd, OfNat.ofNat, T4.S7.dup._native.native_decide.ax_1_1] copy-of=[T4Exp.S7.A]
+ℹ Built T4Exp.S7.TopBA

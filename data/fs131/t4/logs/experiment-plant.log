@@ -1,0 +1,7 @@
+slot: admitted python3: mem 4 GiB (hard cap), cpus 0,1,2,3
+package: data/fs131/t4/exp-plant (32 files)
+leaf modules: lake build of 10 modules: exit 0
+PLANT (the probe calls every declaring module's copy the held one): FIRED — 3 problem(s) with the expected text
+package: data/fs131/t4/exp-plant (32 files)
+leaf modules: lake build of 10 modules: exit 0
+PLANT (the probe reports no axioms for the name, whatever `collectAxioms` returns): FIRED — 1 problem(s) with the expected text

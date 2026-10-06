@@ -1,0 +1,215 @@
+# The doubled-name gate's controls (FS131-T4, 2026-10-06) — read by `./scripts/dupnames.sh --self-test`.
+#
+# A doubled name needs two compiled modules, so the plants are a library, not lines: the `## module` blocks below are written to
+# the scratch Lake package `data/fs131/t4/plant/` (core Lean only; two roots, `T4Plant` — the package under audit — and `T4Dep`,
+# standing for a dependency) and built there. Each `## control` then elaborates a COPY of the shipped `scripts/DupNames.lean` whose
+# `import Proofs` is replaced by the control's imports and whose root is the control's, and the gate's own `check_scan` judges what
+# it printed. Every check the gate makes has a control that must make it fire, and the PASS controls are the partners showing a
+# refusal comes from the plant and not from the scaffolding.
+#
+# Directives:
+#   ## module <Module>          the module's text follows, up to the next `## ` line
+#   ## control <name>           a control; then
+#   ## import <Module> …        the scan copy's imports, in order (the import order is the order the scan reports copies in)
+#   ## root <Name>              the package root the scan is told (default `T4Plant`)
+#   ## sources <n>              the number of source files the package is said to have — what the coverage check compares with
+#   ## drop-output <prefix>     delete the first output line with that prefix, after elaboration (a lost line, a run cut short)
+#   ## expect PASS | FAIL <kind> <text> | NOFAIL <kind> | COUNT <key>=<value> | ELAB <text>
+#                               PASS: elaborates and no FAIL line; FAIL: a `FAIL <kind>` line containing <text>; NOFAIL: no such
+#                               line; COUNT: the COUNTS line holds it; ELAB: the copy does not elaborate, and prints <text>
+# A control is two-sided: every FAIL kind it raises must be one it predicts. Lines starting `# ` outside a block are comments.
+# No module here holds a `sorry`: a copy that is not clean rests on a planted `axiom` instead (the `sorry` rows are the
+# experiment's, `data/fs131/t4/experiment-table.md`).
+
+## module T4Plant.Base
+namespace T4P
+/-- A two-element type, for the instance pair. -/
+inductive Tok where
+  | a
+  | b
+/-- A recursive function, so that Lean generates its equation lemma on demand. -/
+def fn : Nat → Nat
+  | 0 => 1
+  | n + 1 => fn n
+end T4P
+
+## module T4Plant.Clean
+import T4Plant.Base
+theorem T4P.only_here : 2 + 2 = 4 := rfl
+
+## module T4Plant.DupA
+import T4Plant.Base
+theorem T4P.dup : 2 + 2 = 4 := rfl
+
+## module T4Plant.DupB
+import T4Plant.Base
+theorem T4P.dup : 2 + 2 = 4 := Eq.refl 4
+
+## module T4Plant.AxA
+import T4Plant.Base
+axiom T4P.planted_ax : 3 + 3 = 6
+theorem T4P.dup_ax : 3 + 3 = 6 := T4P.planted_ax
+
+## module T4Plant.AxB
+import T4Plant.Base
+theorem T4P.dup_ax : 3 + 3 = 6 := rfl
+
+## module T4Plant.KindA
+import T4Plant.Base
+axiom T4P.dup_kind : 4 + 4 = 8
+
+## module T4Plant.KindB
+import T4Plant.Base
+theorem T4P.dup_kind : 4 + 4 = 8 := rfl
+
+## module T4Plant.InstA
+import T4Plant.Base
+namespace T4P
+instance : Nonempty Tok := ⟨.a⟩
+end T4P
+
+## module T4Plant.InstB
+import T4Plant.Base
+namespace T4P
+instance : Nonempty Tok := ⟨.b⟩
+end T4P
+
+## module T4Plant.GenA
+import T4Plant.Base
+theorem T4P.ask_a : T4P.fn 0 = 1 := T4P.fn.eq_1
+
+## module T4Plant.GenB
+import T4Plant.Base
+theorem T4P.ask_b : T4P.fn 0 = 1 := T4P.fn.eq_1
+
+## module T4Plant.Shared
+theorem T4P.shared : 5 + 5 = 10 := Eq.refl 10
+
+## module T4Dep.X
+theorem T4P.shared : 5 + 5 = 10 := rfl
+theorem T4P.theirs : 6 + 6 = 12 := rfl
+
+## module T4Dep.Z
+theorem T4P.theirs : 6 + 6 = 12 := Eq.refl 12
+
+# ---- the partners: a library with no repeated name passes, and the counts are read -------------------------------------------
+
+## control baseline
+## import T4Plant.Base T4Plant.Clean
+## sources 2
+## expect PASS
+## expect COUNT doubled=0
+## expect COUNT generated=0
+## expect COUNT package-modules=2
+
+# ---- the pairs the gate exists for -------------------------------------------------------------------------------------------
+
+## control doubled_theorem
+## import T4Plant.DupA T4Plant.DupB
+## sources 3
+## expect FAIL doubled T4P.dup
+## expect FAIL doubled T4Plant.DupA
+## expect FAIL doubled T4Plant.DupB
+## expect FAIL doubled axioms=same
+## expect COUNT doubled=1
+
+## control doubled_axioms_differ
+## import T4Plant.AxA T4Plant.AxB
+## sources 3
+## expect FAIL doubled T4P.dup_ax
+## expect FAIL doubled axioms=differ
+## expect FAIL doubled axioms=[T4P.planted_ax]
+
+## control doubled_axiom_theorem
+## import T4Plant.KindA T4Plant.KindB
+## sources 3
+## expect FAIL doubled T4P.dup_kind
+## expect FAIL doubled kind=axiom
+## expect FAIL doubled kind=theorem
+
+# What a scan of the source cannot see: neither file writes the name.
+## control doubled_prop_instance
+## import T4Plant.InstA T4Plant.InstB
+## sources 3
+## expect FAIL doubled T4P.instNonemptyTok
+## expect FAIL doubled T4Plant.InstA
+## expect FAIL doubled T4Plant.InstB
+
+# One copy in the package, one in a dependency: ours to fix, and the dependency's module is named.
+## control shared_with_dependency
+## import T4Dep.X T4Plant.Shared
+## sources 1
+## expect FAIL doubled T4P.shared
+## expect FAIL doubled T4Dep.X
+## expect FAIL doubled package=false
+## expect COUNT doubled=1
+
+# ---- the class that is not a failure, and its limits -------------------------------------------------------------------------
+
+# A theorem Lean generates on demand, asked for in two modules: counted, listed, and no failure. Asking for `fn.eq_1` makes Lean
+# generate the family — `T4P.fn.eq_1`, `T4P.fn.eq_2`, `T4P.fn.eq_def` — in each asking module, so three names repeat (measured at
+# this control's first run, which expected one; and `eq_def`'s two copies are not one term, so the class cannot ask for that).
+## control generated_only
+## import T4Plant.GenA T4Plant.GenB
+## sources 3
+## expect PASS
+## expect COUNT generated=3
+## expect COUNT doubled=0
+
+# The exclusion does not shelter a hand-written pair standing beside a generated one.
+## control generated_beside_doubled
+## import T4Plant.GenA T4Plant.GenB T4Plant.DupA T4Plant.DupB
+## sources 5
+## expect FAIL doubled T4P.dup
+## expect COUNT generated=3
+## expect COUNT doubled=1
+
+# A name two dependencies' modules share and no module of the package declares is theirs: not reported.
+## control dependencies_only_pair
+## import T4Dep.X T4Dep.Z T4Plant.Clean
+## sources 2
+## expect PASS
+## expect COUNT doubled=0
+
+# ---- a scan that did not read the library, or did not finish, never reads as a clean scan -------------------------------------
+
+# One module of the pair is not imported, so the scan sees no pair: the coverage check is what fires.
+## control module_not_imported
+## import T4Plant.DupA
+## sources 3
+## expect FAIL coverage read 2 module(s)
+## expect NOFAIL doubled
+
+## control scan_reads_nothing
+## import T4Plant.Clean
+## root NoSuchRoot
+## sources 2
+## expect ELAB nothing was scanned
+
+## control scan_cut_short
+## import T4Plant.DupA T4Plant.DupB
+## sources 3
+## drop-output === END ===
+## expect FAIL banners === END ===
+## expect FAIL doubled T4P.dup
+
+## control lost_doubled_line
+## import T4Plant.DupA T4Plant.DupB
+## sources 3
+## drop-output DOUBLED
+## expect FAIL accounting T4P.dup
+## expect FAIL accounting TOTALS
+## expect NOFAIL doubled
+
+## control lost_copy_line
+## import T4Plant.DupA T4Plant.DupB
+## sources 3
+## drop-output COPY
+## expect FAIL accounting T4P.dup
+## expect FAIL doubled T4P.dup
+
+## control lost_totals_line
+## import T4Plant.Base T4Plant.Clean
+## sources 2
+## drop-output TOTALS
+## expect FAIL accounting TOTALS

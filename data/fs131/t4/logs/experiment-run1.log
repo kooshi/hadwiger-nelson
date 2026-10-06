@@ -1,0 +1,5 @@
+slot: admitted python3: mem 4 GiB (hard cap), cpus 0,1,2,3
+package: data/fs131/t4/exp (172 files)
+leaf modules: lake build of 50 modules: exit 0
+wrote 145 outputs under data/fs131/t4/exp-out and data/fs131/t4/experiment-table.md
+consumers run: 120; problems: 0

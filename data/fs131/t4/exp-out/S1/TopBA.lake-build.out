@@ -1,0 +1,10 @@
+exit 0
+Build completed successfully (6 jobs).
+info: T4Exp/S1/TopBA.lean:10:0: 'T4.S1.down' does not depend on any axioms
+info: T4Exp/S1/TopBA.lean:5:0: PROBE T4.S1.dup ATTRIBUTED-TO T4Exp.S1.B
+info: T4Exp/S1/TopBA.lean:5:0: PROBE T4.S1.dup AXIOMS-OF-HELD-VALUE []
+info: T4Exp/S1/TopBA.lean:5:0: PROBE T4.S1.dup AXIOMS-PRINTED []
+info: T4Exp/S1/TopBA.lean:5:0: PROBE T4.S1.dup DECLARED-BY T4Exp.S1.A kind=theorem uses=[T4.S1.markA]
+info: T4Exp/S1/TopBA.lean:5:0: PROBE T4.S1.dup DECLARED-BY T4Exp.S1.B kind=theorem uses=[T4.S1.markB]
+info: T4Exp/S1/TopBA.lean:5:0: PROBE T4.S1.dup ENV-HOLDS kind=theorem uses=[T4.S1.markA] copy-of=[T4Exp.S1.A]
+ℹ Built T4Exp.S1.TopBA
