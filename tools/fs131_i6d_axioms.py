@@ -36,6 +36,10 @@ EXPECT_CLEAN = {
     "HadwigerNelson.Plane.isUnitCurve_angleCurve",
     "HadwigerNelson.Plane.IsUnitCurve.eqOn_angleCurve",
     "HadwigerNelson.Plane.eq_affine_of_sin_bounds",
+    "HadwigerNelson.Plane.exists_ordered_lifts",
+    "HadwigerNelson.Plane.sq9_not_isCuspAt",
+    "HadwigerNelson.Plane.sq9_singularSet_subset_grid",
+    "HadwigerNelson.Plane.sq9_singLocallyFinite",
 }
 CONTROL_UPSTREAM = "HadwigerNelson.Plane.IsUnitCurve.chord"
 CONTROL_CLEAN = "HadwigerNelson.Plane.norm_sub_le_of_discs"

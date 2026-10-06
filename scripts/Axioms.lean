@@ -6410,6 +6410,12 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.AeColouring.regJFan_of_saturated
 #print axioms HadwigerNelson.Plane.AeColouring.regJLiteral_of_saturated
 #print axioms HadwigerNelson.Plane.AeColouring.finite_arcs_of_isBounded
+#print axioms HadwigerNelson.Plane.sq9_not_isCuspAt
+#print axioms HadwigerNelson.Plane.sq9_twoColourNhd_of_re_grid
+#print axioms HadwigerNelson.Plane.sq9_twoColourNhd_of_im_grid
+#print axioms HadwigerNelson.Plane.sq9_singularSet_subset_grid
+#print axioms HadwigerNelson.Plane.sq9_singLocallyFinite
+#print axioms HadwigerNelson.Plane.sq9_regJFan
 
 #eval IO.println "=== PURCHASED ==="
 

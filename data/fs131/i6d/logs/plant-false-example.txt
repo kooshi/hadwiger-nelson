@@ -1,0 +1,5 @@
+CurveArc: 1 error line(s): CurveArc.lean:402:33: error: Tactic `decide` proved that the proposition
+ArcContinuation: 1 error line(s): ArcContinuation.lean:570:33: error: Tactic `decide` proved that the proposition
+FanArcs: 1 error line(s): FanArcs.lean:283:33: error: Tactic `decide` proved that the proposition
+FanBuild: 1 error line(s): FanBuild.lean:438:33: error: Tactic `decide` proved that the proposition
+FanBridge: 1 error line(s): FanBridge.lean:213:33: error: Tactic `decide` proved that the proposition

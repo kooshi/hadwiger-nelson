@@ -5,7 +5,20 @@
 
 ## Theorems this phase proved
 
-*(one line per kernel theorem, with its declaration and its axioms; filled stage by stage — see each stage)*
+*Axioms as printed on this branch (`data/fs131/i6d/logs/axioms-3.txt`). "std3" is `[propext, Classical.choice, Quot.sound]`; "std3 + upstream"
+adds `sorryAx`, every instance of which is a leaf of `Curve` or `LocalGraph` — another line's, proved on `fs131-w6c` at `d62406a2` with identical
+statements (the coordinator's message, 2026-10-06) — since none of this job's four modules holds a `sorry`. Each becomes std3 at the join (with
+`Pinch`'s leaves, which `local_graph` reads), which is where the audit runs.*
+
+- **FS131-E8-BETA, the curve's part** — `IsUnitCurve.exists_polarGraph` (`Plane/Saturated/FanBridge`; proof `IsUnitCurve.exists_polar_angle`, `Plane/Saturated/CurveArc`) — std3 + upstream (`chord`, `strictMonoOn_dist`, `norm_sub_le`).
+- **FS131-E8-GAMMA** — `AeColouring.gamma` (proof `AeColouring.exists_arc_of_isolated`, `Plane/Saturated/FanArcs`, over `ArcSetting.exists_component_arc`, `Plane/Saturated/ArcContinuation`) — std3 + upstream (`chord`, `AeColouring.local_graph`, `closure_essBdry_subset`).
+- **FS131-E8-BETA** — `AeColouring.beta` (proof `AeColouring.exists_polarGraph_of_isolated`, `FanArcs`) — std3 + upstream.
+- **FS131-E8-ALPHA** — `AeColouring.alpha` (proof `AeColouring.finite_components_of_isolated`, `FanArcs`) — std3 + upstream.
+- **FS131-E8-FAN** — `AeColouring.fan_of_isolated` (proof `AeColouring.exists_fan_of_isolated`, `Plane/Saturated/FanBuild`) — std3 + upstream (the above and `ae_one_colour_of_isConnected`).
+- **FS131-E8-BRIDGE** — `AeColouring.regJFan_of_saturated`, `regJFan_iff_singLocallyFinite` (the planner's proofs from `fan_of_isolated`; now with no `sorry` of `FanBridge` under them) — std3 + upstream.
+- **FS131-E8-CLAUSE2** — `AeColouring.regJLiteral_of_saturated`, `AeColouring.finite_arcs_of_isBounded` (proofs `regJLiteral_of_locallyFinite`, `finite_arcs_of_bounded`, `FanBuild`, over `Fan.finite_arcs_meeting_ball` — std3, no saturation read) — std3 + upstream.
+- **The model** — `sq9_singLocallyFinite : sq9.SingLocallyFinite` (`Plane/Saturated/FanExamples`; with `sq9_singularSet_subset_grid`, `sq9_not_isCuspAt`) — **std3**; `sq9_regJFan : sq9.RegJFan` (`FanBridge`) — std3 + upstream.
+- Colour-free lemmas, each **std3**: `eq_affine_of_sin_bounds`, `IsUnitCurve.affine`, `.dist_le`, `isUnitCurve_angleCurve`, `IsUnitCurve.eqOn_angleCurve` (`CurveArc`); `isOpen_polarRegion`, `isPreconnected_polarRegion`, `exists_ordered_lifts`, `polarRegion_disjoint_polarGraph` (`FanBuild`). Std3 + upstream (`chord` only): `IsUnitCurve.sin_abs_le_dist`, `.reparam`, `IsArcOf.eqOn`, `ArcSetting.exists_max_arc`, `ArcSetting.exists_component_arc`.
 
 ## Stage 1 — SAVED (FS131-I6D): the readback, the as-given build, what may and may not change
 
@@ -149,3 +162,86 @@ angularly consecutive curves is almost everywhere of one colour": the structure 
 Hypotheses: `0 < R`, `Σ ∩ B(z, R) ⊆ {z}`, saturation on the punctured disc — no `z ∈ Σ`, no `R ≤ 1/2` (the proof passes to `min R (1/2)`).
 CLAUSE2 — "every point of Σ lies in the closure of finitely many connected components of the interface set, and every bounded set meets
 finitely many connected components of the interface set": the two declarations, verbatim.
+
+## Stage 4 — SAVED (FS131-I6D): the model `sq9.SingLocallyFinite`, `sq9.RegJFan`; the last checks; what is left
+
+**Proved**: `sq9_singLocallyFinite : sq9.SingLocallyFinite` in `Plane/Saturated/FanExamples` (the plan's § 10.3 debt), on the standard three axioms,
+and `sq9_regJFan : sq9.RegJFan` in `FanBridge` (after `regJFan_iff_singLocallyFinite`; from `regJFan_of_saturated`, `sq9_tight_saturated`).
+**Route, shorter than the plan's** ("the vertex analysis at every grid vertex … the lemmas of `FanExamples` with `n`, `m` general"): no vertex is
+analysed. `Σ ⊆` the grid's vertices (`sq9_singularSet_subset_grid`) because (a) `sq9` has no cusp anywhere — a point of a class's support lies in
+a closed square of its colour (`sq9_essSupport_subset_sq`, nine candidate squares near any point) and closed squares lie in the essential closure
+(wave 2's `sq9Sq_subset_essClosure`); (b) an essential boundary point lies on a grid line (wave 2's `sq9_mem_edge_of_not_mem_densitySet`), and one
+that is no vertex has a two-colour ball (`sq9_twoColourNhd_of_re_grid`, `_of_im_grid`, through `twoColourNhd_of_halves`). A unit disc holds
+finitely many vertices. Spec example: `sqVertex` (a singular point, `sqVertex_mem_singularSet`) satisfies the inclusion's conclusion.
+**Inhabitant notes** added, as the brief asks, to the docstrings of `fan_of_isolated` (`sq9_isolatedAt`), `regJFan_of_saturated`,
+`regJLiteral_of_saturated`, `finite_arcs_of_isBounded` (`sq9` with `sq9_tight_saturated`, `sq9_singLocallyFinite`): one added line each, the base
+text intact (the statements tool now lets a docstring's closing line be continued, and still fails a changed one).
+
+**A slip, caught before the build**: my helper `abs_re_im_lt_of_mem_ball` (in `FanExamples`) had the name of a theorem of `Plane/SVMap` (a
+different statement; neither module imports the other, so `lake env lean` on `FanExamples` could not see it and the build would have refused
+`Proofs`). `tools/fs131_i6d_names.py` reported it on every ref; renamed `abs_re_im_sub_lt_of_mem_ball`. The tool's first run had searched my
+modules only — the names I add to files not wholly mine are now in its list.
+
+**Checks.**
+- Build: **OK — 466 of 466 batches, 3 modules rebuilt** (`FanExamples`, `FanBridge`, `Proofs`), **24 `declaration uses sorry`, none mine**
+  (`Pinch` 7, `MapColouring` 1, `Curve` 6, `LocalGraph` 5, `FanBridge` 5 — the five `AeColouring.Fan` leaves), exit 0 —
+  `data/fs131/i6d/logs/build-3-model.log`.
+- Statements: OK against `32f2ab4c`; `--self-test` OK (three plants fire, the unplanted tree passes).
+- Axioms (`data/fs131/i6d/logs/axioms-3.txt`): 41 records — 15 clean, 26 the standard three and `sorryAx` (upstream leaves only); controls fire.
+- Negative control of elaboration (`data/fs131/i6d/logs/plant-false-example.txt`): a false `example : (1 : ZMod 3) = 0 := by decide` appended to
+  a scratch copy of each of `CurveArc`, `ArcContinuation`, `FanArcs`, `FanBuild`, `FanBridge` is refused, and is the only error of each — the
+  files are elaborated to their last line. (The model's file: the same plant, the same refusal, on the scratch copy it was developed in.)
+- Linters, as iteration evidence only (`lake lint --no-build -- --no-build --trace` under the slot, `data/fs131/i6d/logs/lint-1.txt`): exit 0,
+  `-- Linting passed for Proofs.`, 14 `Passed!` lines, no line naming a declaration of mine.
+- `tools/check_architecture.py`: PASS. Names: 0 hits for 67 short names on the wave's five other branches (`-w6c`, `-w6g` at `d62406a2`), and 0
+  elsewhere in this tree.
+- **Not run, by the brief**: the gate (`scripts/axioms.sh`, `scripts/vacuity.sh`, `scripts/dupnames.sh`) — the join's.
+
+**The coordinator's message (mid-job, after stage 3)** — `fs131-w6c` handed back at `d62406a2`, statements identical: read. I want neither the
+merge nor an unexported fact. `gamma`'s route reads of `IsInterfaceChart` only `isOpen`, `mem`, `pos`, `subset`, `curve`, `zero`, `bdry` — not
+`injOn` (injectivity is the chord bound's), not `discs`, not `sides`; and none of `exists_arclength_inverse`, `exists_unit_curve_of_two_discs`,
+`IsUnitCurve.sin_add_sin_le`, `IsUnitCurve.strictMonoOn_dist_of_le_pi`, `isConnected_graph_side` is declared here (names tool, 0 hits at
+`d62406a2`).
+
+### What is left, and its route
+
+Nothing of this job's list: the seven leaves and the model are proved. For the join and for the lines that follow:
+1. **The join with `fs131-w6c`** (and `-w6p`): both lines edit `scripts/Axioms.lean` (my block "FS131-I6D" sits above the PURCHASED banner) and
+   `ARCHITECTURE.md` (I added four rows after `Plane/Saturated/Curve`'s and changed `FanBridge`'s import cell); `Proofs.lean` has my four imports
+   after `Curve`'s. Then `scripts/dupnames.sh` and the audit: my 41 records should read the standard three once `Curve`, `LocalGraph` and `Pinch`
+   are proved.
+2. **For the implementer of the five `Fan` leaves (`fs131-w6g`)** — proved here, so never to be declared again under these names:
+   `isOpen_polarRegion`, `isPreconnected_polarRegion`, `polarRegion_nonempty`, `isPreconnected_polarGraph`, `polarPt_norm_arg`,
+   `polarPt_eq_polarPt`, `polarPt_add_int`, `polarGraph_sub_int`, `polarRegion_disjoint_polarGraph` (`FanBuild`); `IsUnitCurve.affine` (shift
+   and reversal), `.sin_abs_le_dist`, `.dist_le`, `.injOn_of_abs_le`, `.continuousOn`, `.abs_angle_sub_le`, `.reparam`, `angleCurve`
+   (`CurveArc`); `AeColouring.arcSetting_of_isolated`, `ArcSetting.exists_open_subset_component` (`FanArcs`). `Fan.branch_outside_discs` and
+   `Fan.branch_contacts` need "a branch is a component with `z` in its closure, parametrized from `z`": `exists_arc_of_isolated` with
+   `polarGraph_of_curve_from_center` is that curve, and `isPreconnected_polarGraph` with `Fan.branch_subset` puts a branch in one component.
+3. **Stale docstring phrases, not mine to change** (`Fan.lean` is fenced; in `FanBridge` my check freezes base lines): "[hand], one mind, until
+   `Plane/Saturated/FanBridge` lands" (`Fan.lean`'s module docstring), "each entry **[hand], one mind, kernel pending** until this module lands"
+   (`FanBridge`'s), "([hand], one mind, until `fan_of_isolated` is proved)" (`Fan.sector_alone`'s). At the join: "kernel-checked
+   (`fan_of_isolated`)".
+
+## Drafts for the front page
+
+*I ran no gate (the brief), so no count is drafted; each draft is conditional on the join named in "What is left" (1).*
+
+- **`CLAUDE.md` § The gate and § Trust ledger** — slot: the sentence "the current audit reads … clean and … declared purchases" and the vacuity
+  counts. Draft: no number from this branch. At the join this job adds 41 records to `scripts/Axioms.lean` (block "FS131-I6D"), all expected
+  under CLEAN, no purchase, no import; and four modules (`Plane/Saturated/CurveArc`, `ArcContinuation`, `FanArcs`, `FanBuild`) with three
+  definitions (`HasArcChart`, `ArcSetting`, `IsArcOf`, each with a spec lemma) and `angleCurve` (spec `angleCurve_zero`) to the vacuity scan —
+  `ArcSetting`'s and `IsArcOf`'s theorems take a structure hypothesis; their inhabitant is `AeColouring.arcSetting_of_isolated` at
+  `sq9_isolatedAt` (named in `ArcContinuation`'s module docstring), which the scan may read as GENERIC or UNKNOWN: to be reconciled there.
+- **The derivation's entries, regraded** — slot: `plans/FS131-E8-derivation.md`, the `grade:` and `minds:` lines of FS131-E8-GAMMA, -BETA,
+  -ALPHA, -FAN, -BRIDGE, -CLAUSE2 (each "grade: hand / minds: 1"), and the phrase "[hand], one mind, kernel pending" of its § 3.8. Draft, for
+  each: "grade: kernel — `AeColouring.gamma` | `IsUnitCurve.exists_polarGraph`, `AeColouring.beta` | `AeColouring.alpha` |
+  `AeColouring.fan_of_isolated` | `AeColouring.regJFan_of_saturated` | `AeColouring.regJLiteral_of_saturated`,
+  `AeColouring.finite_arcs_of_isBounded` (`Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean`), on the standard three axioms once
+  `Plane/Saturated/Curve`, `LocalGraph` and `Pinch` are proved (`fs131-w6c`, `fs131-w6p`); no assumption beyond the statement's hypotheses."
+  FS131-E8-CLAUSE2's "uses only" line can lose "FS131-E8-LOCAL (off Σ each interface point has a neighbourhood in one component); compactness"
+  for "a fan at every point (FS131-E8-FAN at singular and non-singular points alike); a bounded set is covered by finitely many fans' discs".
+- **`CLAUDE.md` § Frontier** — slot: the sentence on FS-131's wave 6 (the Lean backlog's state; I do not hold its current words). Draft: "wave
+  6's bridge is in the kernel: under saturation a fan exists at every point isolated from the other singular points (`fan_of_isolated`), so
+  `RegJFan` is `SingLocallyFinite` (`regJFan_iff_singLocallyFinite`), with `sq9` its model (`sq9_regJFan`)" — to be filed when the join passes
+  the gate.
+- **Proof Atlas** — the nodes FS131-E8-GAMMA, -BETA, -ALPHA, -FAN, -BRIDGE, -CLAUSE2: [hand] → [kernel] at that join.

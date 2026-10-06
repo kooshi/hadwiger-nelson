@@ -110,13 +110,15 @@ theorem alpha (h : c.IsolatedAt z R) :
 
 /-- **FS131-E8-FAN.** If `z` is the only possible singular point of `B(z, R)` and the colouring is saturated at the
 essential boundary points of the punctured disc, then `z` has a fan. Not read: saturation at `z` or outside the
-punctured disc; any clause about arcs meeting `z`; that `z` is singular; the number of colours. -/
+punctured disc; any clause about arcs meeting `z`; that `z` is singular; the number of colours.
+Inhabitant of the hypotheses: `sq9` at the grid vertex, `R = 1/4` (`sq9_isolatedAt`). -/
 theorem fan_of_isolated (c : AeColouring k) {z : ℂ} {R : ℝ} (hR : 0 < R) (hS : c.singularSet ∩ ball z R ⊆ {z})
     (hsat : SaturatedOn c.cls (ball z R \ {z})) : Nonempty (c.Fan z) :=
   c.exists_fan_of_isolated hR hS hsat
 
 /-- **FS131-E8-BRIDGE.** A saturated colouring whose singular set is locally finite satisfies REG-J′ in its fan form:
-every singular point has a fan with end tangents. The frozen words' second clause is not read. -/
+every singular point has a fan with end tangents. The frozen words' second clause is not read.
+Inhabitant of the hypotheses: `sq9` (`sq9_tight_saturated`, `sq9_singLocallyFinite`) — `sq9_regJFan`. -/
 theorem regJFan_of_saturated (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite) : c.RegJFan :=
   ⟨hS, fun z _ => by
     obtain ⟨R, hR, hsub⟩ := hS.exists_ball_subset z
@@ -127,14 +129,22 @@ theorem regJFan_iff_singLocallyFinite (c : AeColouring k) (hsat : Saturated c.cl
     c.RegJFan ↔ c.SingLocallyFinite :=
   ⟨fun h => h.1, regJFan_of_saturated c hsat⟩
 
+/-- **The model of REG-J′'s fan form** (FS131-I6D): `sq9` — saturated (`sq9_tight_saturated`), its singular set the
+grid's vertices, locally finite (`sq9_singLocallyFinite`) — has a fan at every singular point. The inhabitant of every
+theorem that takes `RegJFan`, or `Saturated` with `SingLocallyFinite`, at `k = 9`. -/
+theorem _root_.HadwigerNelson.Plane.sq9_regJFan : sq9.RegJFan :=
+  regJFan_of_saturated sq9 sq9_tight_saturated.2.1 sq9_singLocallyFinite
+
 /-- **FS131-E8-CLAUSE2**, first clause: under saturation the frozen words of REG-J′ follow from their first clause —
-every singular point lies in the closure of finitely many components of the interface set. -/
+every singular point lies in the closure of finitely many components of the interface set.
+Inhabitant of the hypotheses: `sq9` (`sq9_tight_saturated`, `sq9_singLocallyFinite`). -/
 theorem regJLiteral_of_saturated (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite) :
     c.RegJLiteral :=
   c.regJLiteral_of_locallyFinite hsat hS
 
 /-- **FS131-E8-CLAUSE2**, second clause: in a saturated colouring with locally finite singular set, a bounded set
-meets finitely many components of the interface set. -/
+meets finitely many components of the interface set.
+Inhabitant of the hypotheses: `sq9` (`sq9_tight_saturated`, `sq9_singLocallyFinite`). -/
 theorem finite_arcs_of_isBounded (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite)
     {K : Set ℂ} (hK : Bornology.IsBounded K) :
     {A : Set ℂ | (∃ y ∈ c.interfaceSet, A = connectedComponentIn c.interfaceSet y) ∧ (A ∩ K).Nonempty}.Finite :=

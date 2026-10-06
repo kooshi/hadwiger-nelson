@@ -9,9 +9,10 @@ Two rules, each read from `git show <base>:<file>` against the working tree:
 
 * FROZEN files (another line's, or the foundation): byte-identical to the base.
 * PROOF files (`FanBridge`, `FanExamples`): every line of the base survives, in order, in the working
-  tree, except that a line `  sorry` may go, and a line ending in `:= by` may lose its `by`
-  (a `sorry` body replaced by a term). So a statement, a docstring, a definition or a structure field
-  that changed, moved or vanished fails; added lines pass.
+  tree, except that a line `  sorry` may go, a line ending in `:= by` may lose its `by`
+  (a `sorry` body replaced by a term), and a docstring's last line may lose its closing ` -/`
+  (the docstring continued by added lines: an inhabitant note). So a statement, a docstring's text,
+  a definition or a structure field that changed, moved or vanished fails; added lines pass.
 
 `--self-test` plants three faults in a copy of the working text of `FanBridge` and watches each fire
 (a bound in a statement changed; a hypothesis line deleted; a docstring line changed), with the
@@ -52,6 +53,8 @@ def survives(base, cur):
         alts = [line]
         if line.endswith(":= by"):
             alts.append(line[: -len(" by")])
+        if line.endswith(" -/"):
+            alts.append(line[: -len(" -/")])  # a docstring continued by added lines (an inhabitant note)
         found = None
         for k in range(pos, len(cur_lines)):
             if cur_lines[k] in alts:

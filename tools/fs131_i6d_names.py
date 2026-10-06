@@ -20,6 +20,9 @@ OWN = [
     "Proofs/HadwigerNelson/Plane/Saturated/FanArcs.lean",
     "Proofs/HadwigerNelson/Plane/Saturated/FanBuild.lean",
 ]
+EXTRA = ["isClosed_sq9Sq", "sq9_essSupport_subset_sq", "sq9_not_isCuspAt", "sq9_pred_ne", "abs_re_im_sub_lt_of_mem_ball",
+         "sq9_twoColourNhd_of_re_grid", "sq9_twoColourNhd_of_im_grid", "sq9_singularSet_subset_grid",
+         "sq9_singLocallyFinite", "sq9_regJFan"]  # in `FanExamples` and `FanBridge`
 DEFAULT_REFS = ["origin/fs131-w6", "origin/fs131-w6c", "origin/fs131-w6g", "origin/fs131-w6p", "origin/fs131-w6m"]
 DECL = r"^(?:noncomputable )?(?:@\[[^\]]*\] )?(?:theorem|lemma|def|structure|abbrev) (\S+)"
 
@@ -33,7 +36,7 @@ def own_names():
             continue
         for m in re.finditer(DECL, text, flags=re.M):
             names.add(m.group(1).split(".")[-1])
-    return sorted(names)
+    return sorted(names | set(EXTRA))
 
 
 def hits(ref, names, exclude_own=True):
@@ -59,7 +62,8 @@ def main():
     if "--self-test" in sys.argv:
         a = hits("HEAD", ["polarGraph"])
         b = hits(None, names, exclude_own=False)  # the working tree, untracked files included
-        ok = len(a) >= 1 and len(b) >= len(names) // 2
+        c = hits(None, EXTRA, exclude_own=False)
+        ok = len(a) >= 1 and len(b) >= len(names) // 2 and len(c) == len(EXTRA)
         print(f"self-test: a name every ref declares is found ({len(a)} hit(s)); own modules against themselves "
               f"({len(b)} hit(s) for {len(names)} names): {'OK' if ok else 'FAILED'}")
         sys.exit(0 if ok else 1)

@@ -13,6 +13,9 @@ vertex `sqVertex = 1/2 + i/2`, in the disc of radius `1/4` (FS131-E8's model for
   every axis point but the vertex has a two-colour ball; `sqVertex_mem_singularSet` — the vertex is singular.
 * **`sq9Fan : sq9.Fan sqVertex`** — four branches along the half-axes (constant angles `0, π/2, π, 3π/2`), four regions
   of four colours; `sq9Fan_hasSector` (each a sector of angle `π/2`), `sq9Fan_not_hasHorn`.
+* `sq9_singularSet_subset_grid`, **`sq9_singLocallyFinite`** (job FS131-I6D) — `Σ` of `sq9` is the grid's vertices,
+  locally finite: no cusp anywhere (`sq9_not_isCuspAt`), a two-colour ball at every boundary point that is no vertex
+  (`sq9_twoColourNhd_of_re_grid`, `sq9_twoColourNhd_of_im_grid`).
 
 So the hypotheses "a fan at `z`", "`z ∈ Σ`", "`Σ ∩ B(z, R) ⊆ {z}`" and "saturated" are met together, at `k = 9`.
 -/
@@ -540,5 +543,243 @@ theorem sq9Fan_hasSector (i : Fin 4) : sq9Fan.HasSector (sq9FanCol i) := ⟨i, r
 /-- Spec for `HasHorn`: `sq9` has no zero-angle region at the vertex. -/
 theorem sq9Fan_not_hasHorn (j : Fin 9) : ¬ sq9Fan.HasHorn j := fun ⟨i, _, h⟩ =>
   (sq9Fan_dir_lt_nextDir i).ne h
+
+/-! ## `Σ` of `sq9` is the grid's vertices, and is locally finite (FS131-I6D; owed by `plans/FS131-w6-kernel-plan.md` § 10.3) -/
+
+/-- The closed squares of `sq9`'s grid are closed. -/
+theorem isClosed_sq9Sq (n m : ℤ) : IsClosed (sq9Sq n m) :=
+  (isClosed_le continuous_const Complex.continuous_re).inter
+    ((isClosed_le Complex.continuous_re continuous_const).inter
+      ((isClosed_le continuous_const Complex.continuous_im).inter (isClosed_le Complex.continuous_im continuous_const)))
+
+/-- A point of the support of a class of `sq9` lies in a closed square of that class's colour — at every point of the
+plane (`sq9_essSupport_near_vertex` is its case near the vertex). -/
+theorem sq9_essSupport_subset_sq {j : Fin 9} {x : ℂ} (hx : x ∈ essSupport (sq9.cls j)) :
+    ∃ n m : ℤ, finProdFinEquiv ((n : ZMod 3), (m : ZMod 3)) = j ∧ x ∈ sq9Sq n m := by
+  set box : Set (ℤ × ℤ) := Icc (⌊2 * x.re⌋ - 1, ⌊2 * x.im⌋ - 1) (⌊2 * x.re⌋ + 1, ⌊2 * x.im⌋ + 1) with hbox
+  set K : Set ℂ := ⋃ p ∈ {p ∈ box | finProdFinEquiv ((p.1 : ZMod 3), (p.2 : ZMod 3)) = j}, sq9Sq p.1 p.2 with hK
+  have hKc : IsClosed K :=
+    ((Set.finite_Icc _ _).subset fun p hp => hp.1).isClosed_biUnion fun p _ => isClosed_sq9Sq _ _
+  have hsub : sq9.cls j ∩ ball x (1 / 4) ⊆ K := by
+    rintro z ⟨hzj, hzb⟩
+    have f1 := Int.floor_le (2 * z.re)
+    have f2 := Int.lt_floor_add_one (2 * z.re)
+    have f3 := Int.floor_le (2 * z.im)
+    have f4 := Int.lt_floor_add_one (2 * z.im)
+    refine mem_iUnion₂.2 ⟨(⌊2 * z.re⌋, ⌊2 * z.im⌋), ⟨?_, ?_⟩, ?_⟩
+    · rw [mem_ball, dist_eq_norm] at hzb
+      have h1 := abs_re_le_norm (z - x)
+      have h2 := abs_im_le_norm (z - x)
+      rw [Complex.sub_re] at h1
+      rw [Complex.sub_im] at h2
+      have hre := abs_lt.1 (lt_of_le_of_lt h1 hzb)
+      have him := abs_lt.1 (lt_of_le_of_lt h2 hzb)
+      have g1 := Int.floor_le (2 * x.re)
+      have g2 := Int.lt_floor_add_one (2 * x.re)
+      have g3 := Int.floor_le (2 * x.im)
+      have g4 := Int.lt_floor_add_one (2 * x.im)
+      have k1 : (⌊2 * z.re⌋ : ℝ) < ⌊2 * x.re⌋ + 2 := by linarith [hre.1, hre.2]
+      have k2 : (⌊2 * x.re⌋ : ℝ) - 2 < ⌊2 * z.re⌋ := by linarith [hre.1, hre.2]
+      have k3 : (⌊2 * z.im⌋ : ℝ) < ⌊2 * x.im⌋ + 2 := by linarith [him.1, him.2]
+      have k4 : (⌊2 * x.im⌋ : ℝ) - 2 < ⌊2 * z.im⌋ := by linarith [him.1, him.2]
+      have l1 : ⌊2 * z.re⌋ < ⌊2 * x.re⌋ + 2 := by exact_mod_cast k1
+      have l2 : ⌊2 * x.re⌋ - 2 < ⌊2 * z.re⌋ := by exact_mod_cast k2
+      have l3 : ⌊2 * z.im⌋ < ⌊2 * x.im⌋ + 2 := by exact_mod_cast k3
+      have l4 : ⌊2 * x.im⌋ - 2 < ⌊2 * z.im⌋ := by exact_mod_cast k4
+      exact ⟨⟨by omega, by omega⟩, ⟨by omega, by omega⟩⟩
+    · have h1 : sq9Col z = j := hzj
+      rw [sq9Col_of_floor rfl rfl] at h1
+      exact h1
+    · exact ⟨by linarith, by linarith, by linarith, by linarith⟩
+  have hmem : x ∈ closure (sq9.cls j ∩ ball x (1 / 4)) := by
+    rw [Metric.mem_closure_iff]
+    intro ε hε
+    obtain ⟨z, hzj, hzb⟩ :=
+      nonempty_of_measure_ne_zero (ne_of_gt (hx _ (lt_min hε (by norm_num : (0 : ℝ) < 1 / 4))))
+    rw [mem_ball] at hzb
+    exact ⟨z, ⟨hzj, mem_ball.2 (lt_of_lt_of_le hzb (min_le_right _ _))⟩, by
+      rw [dist_comm]; exact lt_of_lt_of_le hzb (min_le_left _ _)⟩
+  obtain ⟨p, hp, hxp⟩ := mem_iUnion₂.1 (closure_minimal hsub hKc hmem)
+  exact ⟨p.1, p.2, hp.2, hxp⟩
+
+/-- **`sq9` has no cusp**, anywhere. -/
+theorem sq9_not_isCuspAt (w : ℂ) (j : Fin 9) : ¬ IsCuspAt (sq9.cls j) w := by
+  rintro ⟨hs, hn⟩
+  obtain ⟨n, m, rfl, hsq⟩ := sq9_essSupport_subset_sq hs
+  exact hn (sq9Sq_subset_essClosure n m hsq)
+
+/-- Neighbouring columns (and rows) of `sq9` have different indices modulo `3`. -/
+theorem sq9_pred_ne (p : ℤ) : ((p - 1 : ℤ) : ZMod 3) ≠ (p : ZMod 3) := by
+  intro h
+  push_cast at h
+  have h1 : (1 : ZMod 3) = 0 := by linear_combination (-1 : ZMod 3) * h
+  exact absurd h1 (by decide)
+
+/-- Coordinates of a point of a ball. -/
+theorem abs_re_im_sub_lt_of_mem_ball {w z : ℂ} {ρ : ℝ} (hz : z ∈ ball w ρ) : |z.re - w.re| < ρ ∧ |z.im - w.im| < ρ := by
+  rw [mem_ball, dist_eq_norm] at hz
+  have h1 := abs_re_le_norm (z - w)
+  have h2 := abs_im_le_norm (z - w)
+  rw [Complex.sub_re] at h1
+  rw [Complex.sub_im] at h2
+  exact ⟨lt_of_le_of_lt h1 hz, lt_of_le_of_lt h2 hz⟩
+
+/-- **A point of a vertical grid line of `sq9` that is no vertex has a two-colour ball.** -/
+theorem sq9_twoColourNhd_of_re_grid {w : ℂ} {p : ℤ} (hre : w.re = (p : ℝ) / 2) (him : ∀ q : ℤ, w.im ≠ (q : ℝ) / 2) :
+    ∃ ρ a b, TwoColourNhd sq9.cls (ball w ρ) a b := by
+  have f1 := Int.floor_le (2 * w.im)
+  have f2 := Int.lt_floor_add_one (2 * w.im)
+  have hlo : ((⌊2 * w.im⌋ : ℤ) : ℝ) / 2 < w.im := lt_of_le_of_ne (by linarith) (Ne.symm (him _))
+  set q : ℤ := ⌊2 * w.im⌋ with hq
+  set ρ : ℝ := min (min (w.im - q / 2) ((q + 1) / 2 - w.im)) (1 / 4) with hρ
+  have hρ0 : 0 < ρ := lt_min (lt_min (by linarith) (by linarith)) (by norm_num)
+  have hρ1 : ρ ≤ w.im - q / 2 := (min_le_left _ _).trans (min_le_left _ _)
+  have hρ2 : ρ ≤ (q + 1) / 2 - w.im := (min_le_left _ _).trans (min_le_right _ _)
+  have hρ3 : ρ ≤ 1 / 4 := min_le_right _ _
+  have hfim : ∀ z ∈ ball w ρ, ⌊2 * z.im⌋ = q := fun z hz => by
+    have h2 := abs_lt.1 (abs_re_im_sub_lt_of_mem_ball hz).2
+    exact Int.floor_eq_iff.mpr ⟨by linarith [h2.1], by linarith [h2.2]⟩
+  have hdist : ∀ s : ℝ, |s| < ρ → w + (s : ℂ) ∈ ball w ρ := by
+    intro s hs
+    rw [mem_ball, dist_eq_norm, add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs]
+    exact hs
+  refine ⟨ρ, finProdFinEquiv (((p - 1 : ℤ) : ZMod 3), (q : ZMod 3)), finProdFinEquiv ((p : ZMod 3), (q : ZMod 3)), ?_⟩
+  refine sq9.twoColourNhd_of_halves isOpen_ball (convex_ball w ρ) (H₁ := {z : ℂ | z.re < (p : ℝ) / 2})
+    (H₂ := {z : ℂ | (p : ℝ) / 2 < z.re}) (isOpen_lt Complex.continuous_re continuous_const)
+    (isOpen_lt continuous_const Complex.continuous_re) (convex_halfSpace_re_lt _) (convex_halfSpace_re_gt _)
+    ?_ ?_ ?_ (fun h => sq9_pred_ne p (congrArg Prod.fst (finProdFinEquiv.injective h))) ?_ ?_
+  · refine ⟨w + ((-(ρ / 2) : ℝ) : ℂ), hdist _ (by rw [abs_neg, abs_of_pos (by linarith)]; linarith), ?_⟩
+    show (w + ((-(ρ / 2) : ℝ) : ℂ)).re < (p : ℝ) / 2
+    rw [Complex.add_re, Complex.ofReal_re, hre]; linarith
+  · refine ⟨w + ((ρ / 2 : ℝ) : ℂ), hdist _ (by rw [abs_of_pos (by linarith)]; linarith), ?_⟩
+    show (p : ℝ) / 2 < (w + ((ρ / 2 : ℝ) : ℂ)).re
+    rw [Complex.add_re, Complex.ofReal_re, hre]; linarith
+  · refine measure_mono_null ?_ (volume_segment_eq_zero (⟨(p : ℝ) / 2, w.im - 1⟩ : ℂ) ⟨(p : ℝ) / 2, w.im + 1⟩)
+    rintro z ⟨hzN, hzn⟩
+    have hzre : z.re = (p : ℝ) / 2 :=
+      le_antisymm (not_lt.1 fun h => hzn (Or.inr h)) (not_lt.1 fun h => hzn (Or.inl h))
+    have h2 := abs_lt.1 (abs_re_im_sub_lt_of_mem_ball hzN).2
+    refine ⟨1 - (z.im - w.im + 1) / 2, (z.im - w.im + 1) / 2, by linarith [h2.2], by linarith [h2.1], by ring, ?_⟩
+    apply Complex.ext
+    · simp only [Complex.add_re, Complex.real_smul, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im]
+      rw [hzre]; ring
+    · simp only [Complex.add_im, Complex.real_smul, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im]
+      ring
+  · rintro z ⟨hzN, hz⟩
+    have h1 := abs_lt.1 (abs_re_im_sub_lt_of_mem_ball hzN).1
+    rw [hre] at h1
+    have hz' : z.re < (p : ℝ) / 2 := hz
+    exact sq9Col_of_floor (Int.floor_eq_iff.mpr ⟨by push_cast; linarith [h1.1], by push_cast; linarith⟩) (hfim z hzN)
+  · rintro z ⟨hzN, hz⟩
+    have h1 := abs_lt.1 (abs_re_im_sub_lt_of_mem_ball hzN).1
+    rw [hre] at h1
+    have hz' : (p : ℝ) / 2 < z.re := hz
+    exact sq9Col_of_floor (Int.floor_eq_iff.mpr ⟨by linarith, by linarith [h1.2]⟩) (hfim z hzN)
+
+/-- **A point of a horizontal grid line of `sq9` that is no vertex has a two-colour ball.** -/
+theorem sq9_twoColourNhd_of_im_grid {w : ℂ} {q : ℤ} (him : w.im = (q : ℝ) / 2) (hre : ∀ p : ℤ, w.re ≠ (p : ℝ) / 2) :
+    ∃ ρ a b, TwoColourNhd sq9.cls (ball w ρ) a b := by
+  have f1 := Int.floor_le (2 * w.re)
+  have f2 := Int.lt_floor_add_one (2 * w.re)
+  have hlo : ((⌊2 * w.re⌋ : ℤ) : ℝ) / 2 < w.re := lt_of_le_of_ne (by linarith) (Ne.symm (hre _))
+  set p : ℤ := ⌊2 * w.re⌋ with hp
+  set ρ : ℝ := min (min (w.re - p / 2) ((p + 1) / 2 - w.re)) (1 / 4) with hρ
+  have hρ0 : 0 < ρ := lt_min (lt_min (by linarith) (by linarith)) (by norm_num)
+  have hρ1 : ρ ≤ w.re - p / 2 := (min_le_left _ _).trans (min_le_left _ _)
+  have hρ2 : ρ ≤ (p + 1) / 2 - w.re := (min_le_left _ _).trans (min_le_right _ _)
+  have hρ3 : ρ ≤ 1 / 4 := min_le_right _ _
+  have hfre : ∀ z ∈ ball w ρ, ⌊2 * z.re⌋ = p := fun z hz => by
+    have h2 := abs_lt.1 (abs_re_im_sub_lt_of_mem_ball hz).1
+    exact Int.floor_eq_iff.mpr ⟨by linarith [h2.1], by linarith [h2.2]⟩
+  have hdist : ∀ s : ℝ, |s| < ρ → w + (s : ℂ) * I ∈ ball w ρ := by
+    intro s hs
+    rw [mem_ball, dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, Complex.norm_I, mul_one,
+      Real.norm_eq_abs]
+    exact hs
+  refine ⟨ρ, finProdFinEquiv ((p : ZMod 3), ((q - 1 : ℤ) : ZMod 3)), finProdFinEquiv ((p : ZMod 3), (q : ZMod 3)), ?_⟩
+  refine sq9.twoColourNhd_of_halves isOpen_ball (convex_ball w ρ) (H₁ := {z : ℂ | z.im < (q : ℝ) / 2})
+    (H₂ := {z : ℂ | (q : ℝ) / 2 < z.im}) (isOpen_lt Complex.continuous_im continuous_const)
+    (isOpen_lt continuous_const Complex.continuous_im) (convex_halfSpace_im_lt _) (convex_halfSpace_im_gt _)
+    ?_ ?_ ?_ (fun h => sq9_pred_ne q (congrArg Prod.snd (finProdFinEquiv.injective h))) ?_ ?_
+  · refine ⟨w + ((-(ρ / 2) : ℝ) : ℂ) * I, hdist _ (by rw [abs_neg, abs_of_pos (by linarith)]; linarith), ?_⟩
+    show (w + ((-(ρ / 2) : ℝ) : ℂ) * I).im < (q : ℝ) / 2
+    rw [Complex.add_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im, him]
+    linarith
+  · refine ⟨w + ((ρ / 2 : ℝ) : ℂ) * I, hdist _ (by rw [abs_of_pos (by linarith)]; linarith), ?_⟩
+    show (q : ℝ) / 2 < (w + ((ρ / 2 : ℝ) : ℂ) * I).im
+    rw [Complex.add_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im, him]
+    linarith
+  · refine measure_mono_null ?_ (volume_segment_eq_zero (⟨w.re - 1, (q : ℝ) / 2⟩ : ℂ) ⟨w.re + 1, (q : ℝ) / 2⟩)
+    rintro z ⟨hzN, hzn⟩
+    have hzim : z.im = (q : ℝ) / 2 :=
+      le_antisymm (not_lt.1 fun h => hzn (Or.inr h)) (not_lt.1 fun h => hzn (Or.inl h))
+    have h2 := abs_lt.1 (abs_re_im_sub_lt_of_mem_ball hzN).1
+    refine ⟨1 - (z.re - w.re + 1) / 2, (z.re - w.re + 1) / 2, by linarith [h2.2], by linarith [h2.1], by ring, ?_⟩
+    apply Complex.ext
+    · simp only [Complex.add_re, Complex.real_smul, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im]
+      ring
+    · simp only [Complex.add_im, Complex.real_smul, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im]
+      rw [hzim]; ring
+  · rintro z ⟨hzN, hz⟩
+    have h1 := abs_lt.1 (abs_re_im_sub_lt_of_mem_ball hzN).2
+    rw [him] at h1
+    have hz' : z.im < (q : ℝ) / 2 := hz
+    exact sq9Col_of_floor (hfre z hzN) (Int.floor_eq_iff.mpr ⟨by push_cast; linarith [h1.1], by push_cast; linarith⟩)
+  · rintro z ⟨hzN, hz⟩
+    have h1 := abs_lt.1 (abs_re_im_sub_lt_of_mem_ball hzN).2
+    rw [him] at h1
+    have hz' : (q : ℝ) / 2 < z.im := hz
+    exact sq9Col_of_floor (hfre z hzN) (Int.floor_eq_iff.mpr ⟨by linarith, by linarith [h1.2]⟩)
+
+/-- **The singular points of `sq9` are vertices of its grid.** -/
+theorem sq9_singularSet_subset_grid {w : ℂ} (hw : w ∈ sq9.singularSet) :
+    ∃ p q : ℤ, w.re = (p : ℝ) / 2 ∧ w.im = (q : ℝ) / 2 := by
+  rcases hw with ⟨hb, hno⟩ | ⟨j, hc⟩
+  · obtain ⟨j, hj⟩ := mem_iUnion.1 hb
+    obtain ⟨n, m, rfl, hsq⟩ := sq9_essClosure_subset hj.1
+    by_contra hgrid
+    rcases sq9_mem_edge_of_not_mem_densitySet hsq hj.2 with h | h | h | h
+    · exact hno (sq9_twoColourNhd_of_re_grid (p := n) h fun q hq => hgrid ⟨n, q, h, hq⟩)
+    · have h' : w.re = ((n + 1 : ℤ) : ℝ) / 2 := by push_cast; exact h
+      exact hno (sq9_twoColourNhd_of_re_grid h' fun q hq => hgrid ⟨n + 1, q, h', hq⟩)
+    · exact hno (sq9_twoColourNhd_of_im_grid (q := m) h fun p hp => hgrid ⟨p, m, hp, h⟩)
+    · have h' : w.im = ((m + 1 : ℤ) : ℝ) / 2 := by push_cast; exact h
+      exact hno (sq9_twoColourNhd_of_im_grid h' fun p hp => hgrid ⟨p, m + 1, hp, h'⟩)
+  · exact absurd hc (sq9_not_isCuspAt w j)
+
+/-- **`Σ` of `sq9` is locally finite** (FS131-E8's model of REG-J′'s first clause): a unit disc holds finitely many
+grid vertices. With `sq9_tight_saturated` and FS131-E8-BRIDGE it gives `sq9.RegJFan` (`sq9_regJFan`,
+`Plane/Saturated/FanBridge`), the model of every theorem that takes `RegJFan`, or `Saturated` with
+`SingLocallyFinite`. -/
+theorem sq9_singLocallyFinite : sq9.SingLocallyFinite := by
+  intro x
+  refine ⟨1, one_pos, ?_⟩
+  refine ((Set.finite_Icc ((⌊2 * x.re⌋ - 2, ⌊2 * x.im⌋ - 2) : ℤ × ℤ) (⌊2 * x.re⌋ + 3, ⌊2 * x.im⌋ + 3)).image
+    fun p : ℤ × ℤ => (⟨(p.1 : ℝ) / 2, (p.2 : ℝ) / 2⟩ : ℂ)).subset ?_
+  rintro w ⟨hwS, hwb⟩
+  obtain ⟨p, q, hp, hq⟩ := sq9_singularSet_subset_grid hwS
+  refine ⟨(p, q), ?_, Complex.ext hp.symm hq.symm⟩
+  have hre := abs_lt.1 (abs_re_im_sub_lt_of_mem_ball hwb).1
+  have him := abs_lt.1 (abs_re_im_sub_lt_of_mem_ball hwb).2
+  rw [hp] at hre
+  rw [hq] at him
+  have f1 := Int.floor_le (2 * x.re)
+  have f2 := Int.lt_floor_add_one (2 * x.re)
+  have f3 := Int.floor_le (2 * x.im)
+  have f4 := Int.lt_floor_add_one (2 * x.im)
+  have k1 : (⌊2 * x.re⌋ : ℝ) - 3 < p := by linarith [hre.1]
+  have k2 : (p : ℝ) < ⌊2 * x.re⌋ + 3 := by linarith [hre.2]
+  have k3 : (⌊2 * x.im⌋ : ℝ) - 3 < q := by linarith [him.1]
+  have k4 : (q : ℝ) < ⌊2 * x.im⌋ + 3 := by linarith [him.2]
+  have l1 : ⌊2 * x.re⌋ - 3 < p := by exact_mod_cast k1
+  have l2 : p < ⌊2 * x.re⌋ + 3 := by exact_mod_cast k2
+  have l3 : ⌊2 * x.im⌋ - 3 < q := by exact_mod_cast k3
+  have l4 : q < ⌊2 * x.im⌋ + 3 := by exact_mod_cast k4
+  exact ⟨⟨by omega, by omega⟩, ⟨by omega, by omega⟩⟩
+
+/-- Spec: the vertex `sqVertex` is one of the grid's vertices (`sqVertex_mem_singularSet`: the inclusion of
+`sq9_singularSet_subset_grid` is not vacuous). -/
+example : ∃ p q : ℤ, sqVertex.re = (p : ℝ) / 2 ∧ sqVertex.im = (q : ℝ) / 2 :=
+  sq9_singularSet_subset_grid sqVertex_mem_singularSet
 
 end HadwigerNelson.Plane
