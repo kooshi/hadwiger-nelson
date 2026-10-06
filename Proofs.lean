@@ -174,6 +174,10 @@ import Proofs.HadwigerNelson.Plane.CoverExamples
 import Proofs.HadwigerNelson.Arith.PlaceHom
 import Proofs.HadwigerNelson.Arith.FalconerField
 import Proofs.HadwigerNelson.Arith.Dyadic
+import Proofs.HadwigerNelson.Arith.CharacterColouring
+import Proofs.HadwigerNelson.Arith.SpectralInputs
+import Proofs.HadwigerNelson.Arith.StationaryRatio
+import Proofs.HadwigerNelson.Arith.StandingFive
 import Proofs.HadwigerNelson.Plane.LocalMap
 import Proofs.HadwigerNelson.Plane.LocalMapExamples
 import Proofs.HadwigerNelson.Plane.CircleColouring

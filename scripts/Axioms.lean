@@ -4805,6 +4805,27 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.open_inType_iff
 #print axioms HadwigerNelson.Plane.ArcMap.Near.open_outType_iff
 
+/-! ## FS-131 wave 10 (job FS131-K10) — the arithmetic rows: the leaves the planner proved -/
+-- FS131-K10
+#print axioms HadwigerNelson.CharacterColouring.int_eq_zero_of_forall_pow_dvd
+#print axioms HadwigerNelson.CharacterColouring.mem_archimedean_of_layers
+#print axioms HadwigerNelson.CharacterColouring.mem_torsionBy_sup_archimedean_of_nsmul
+#print axioms HadwigerNelson.CharacterColouring.gluing
+#print axioms HadwigerNelson.CharacterColouring.inv_five_mem_Qring
+#print axioms HadwigerNelson.CharacterColouring.gluing_field
+#print axioms HadwigerNelson.CharacterColouring.gluing_iff_uniform
+#print axioms HadwigerNelson.CharacterColouring.gluing_iff_of_orderBound
+#print axioms HadwigerNelson.CharacterColouring.cl2
+#print axioms HadwigerNelson.CharacterColouring.half_mem_bandSet
+#print axioms HadwigerNelson.CharacterColouring.half_mem_torsionBy
+#print axioms HadwigerNelson.SpectralInputs.sp_only_if
+#print axioms HadwigerNelson.SpectralInputs.sp_only_if_interface
+#print axioms HadwigerNelson.SpectralInputs.contVec_id
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.empty_aeIndependent
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio
+#print axioms HadwigerNelson.StandingFive.K_le
+#print axioms HadwigerNelson.StandingFive.targetFloor_zero
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
