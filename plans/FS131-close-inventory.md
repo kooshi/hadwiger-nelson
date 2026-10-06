@@ -4295,3 +4295,46 @@ reason by the close.*
      each with a record file of its own, so the two halves append to no shared file). In flight: 1 (IR3) + 1 (BA1) + 1 (BA2) = 3. Queue: the
      freed lanes' continuations (IR4 if IR3 leaves cases; the outward bend's successors); the inhabitant `awayModel`; wave 5's final sync with
      the last lines; FS131-KM1 at the first slot no wave-5 continuation claims.
+
+449. **FS131-IR3 done: the vertex step is whole in the kernel — all four cases proved as stated; `Procedure` holds one `sorry`, the arc step**
+     (implementer; harness ≈ 632k by the task notice — past its line, done; record `fs131-w5c`'s `plans/FS131-limit-kernel-plan.md` Stages 22–27;
+     report `data/fs131/reports/FS131-IR3.md` on that branch; commits `285ce5f4`, `57b6d9c7`, `77acd5c5` (the merge of `origin/fs131-w5s`),
+     `2ead3ee3`, `844435a5`, `a6642d49`, `a036811f`, `ffefa549` (the Lean source the final build read), `37fb9ad9`, `9f28e42a`; pushed, tree
+     clean). **Results**: `exists_rayStep`, `exists_shaveStep`, `exists_mergeStep`, `exists_openStep` and, over them, `exists_vertexStep` — on
+     the standard three. The kit: `not_isSite_of_two_curves` (a point of a clean map near which `Γ` lies on two transversal curves, one of whose
+     four branches is dead, is no site and has at most three colours), `not_isSite_of_rim_junction`, `not_isSite_of_branches`,
+     `Near.not_isSite_of_chart`, `surgery_step`. The truth of the cases at their junctions — IR2's hand check — is now the kernel's: at every
+     junction of every move one of the four branches is dead. Stage 23's two edits done: `exists_arcStep` restated by ruling 430 (it stays
+     `sorry`) with its caller's lines and three docstring corrections; `origin/fs131-w5s` merged (one conflict, `scripts/Axioms.lean`,
+     keep-both). 1,297 lines added to `Procedure` (3,403 now); no declaration added to the move modules. **My receipt**: tip equals
+     `origin/fs131-w5c`; the build log `build/gate/build/20261006T060632Z-1519398.log` ends "Build completed successfully (5792 jobs)", 0
+     warnings other than `sorry`, 6 distinct `sorry` warnings (`Procedure` 1, at l. 2748, `exists_arcStep`; this line's stale copies:
+     `BaseDense` 3, `BendCollar` 1, `HexRing` 1); `sorry` by the handoff's grep: `Procedure` 1, `Terminal` 0;
+     `data/fs131/ir/ir3/IR3Axioms27.out` parsed by script, 35 records: 29 on exactly the standard three (the four cases and
+     `exists_vertexStep` among them), 6 with `sorryAx` alone beyond them (`exists_arcStep`, `exists_procStep`, `exists_terminalSeq`,
+     `exists_terminalMap`, `exists_red`, `exists_terminal`); `IR3Axioms23.out`: `stuckRun_ne_univ` on the standard three after the merge;
+     `exists_arcStep`'s statement on `fs131-w5c` compared by `diff` with IA1's § 3.6 text — identical. **Items**: generalizations — the cases
+     hold on less than planned (MERGE-RAY without the nearest-horn choice or a `c`-free gap; SHAVE without `g ≠ c`, `h ≠ c`; MERGE without a
+     `c`-free gap, `a + 1 < b` or the absence of phantom germs); `exists_rayStep` and `exists_shaveStep` do not read `hn`;
+     `not_isSite_of_two_curves` knows nothing of `v`, a rim or a move. Corrections owed — IR2's § 20.2 (the excluded sub-cases are true and
+     unused; no colour function is read at MERGE's and OPEN's junctions); `exists_openStep` takes the chart radius `min ρ₀ ρc`. Tool defect —
+     `tools/fs131_il_stmt_check.py --self-test` (item 431's, again). Slips, the job's, disclosed — the merge committed with a bare `git commit`
+     (a merge cannot be committed by path; the index checked by script); a doubled axioms record, removed before any commit. Prediction scored
+     — the four cases were priced at two sessions by two jobs; measured, one (the kit 480 lines, the cases 110–250 each).
+450. **Rulings on IR3's held items, and its slot.** (a) **Wave 5's lines are joined now, not after the outward bend**: FS131-M7, on
+     `fs131-w5c`, merges `origin/fs131-w5y` (`3f8270c0`: the density half as IA1 joined it, `BendStep`, `ArcStep`) and the outward bend's
+     skeleton commit `dd8c2c33` (pinned; not the moving tips of `fs131-w5a` and `fs131-w5z`), deletes `ArcStep`'s copy of `LocalStep.of_cutArcs`
+     (448 (a)), makes `ArcBend.of_away` follow `bend_away_part`'s conclusion (448 (b)), and writes the arc step's last lines into `Procedure`
+     from IA2's report (448 (c), revised: the lines no longer wait for the two implementers, because the skeleton's statements are all they
+     read). Alternative weighed: FS131-KM1 into this slot, and the join after FS131-BA1 and BA2. Why: after M7 every open leaf of wave 5 is one
+     of the outward bend's children, the two implementers' branches come home as proof-only merges in files nobody else touches, and the remedy
+     pass can run on the joined line while they work — the landing then waits on the bend alone. A trial merge of each (`git merge-tree`) shows
+     two conflicts, `scripts/Axioms.lean` and `plans/FS131-I5-implementation.md`, both keep-both. Confidence: high. (b) **Ruling 421 (c)'s named
+     forms are not minted**: about 55 lines in `Procedure` re-run two clauses; splitting the bodies in `Moves` is a tidy move for after the
+     landing. Default taken. (c) **`hn` leaves `exists_rayStep`'s and `exists_shaveStep`'s statements at the remedy pass** (they are the vertex
+     step's own children, with one caller). Alternative: keep it, read by `have _ :=`. Why: the reasoning of ruling 441 (a). Confidence: high.
+     (d) **`Procedure`'s layout** — its ring-arc lemmas upstream of the bend modules (items 445, 447), the vertex step's kit and cases in a
+     module of their own — is one re-layout, a tidy move after the landing. Alternative: before it. Why after: no statement depends on it, and
+     the landing's risk is lower with fewer moving files. Confidence: medium. (e) **The cases' Lean models** are QA4's rank 4, FS131-KM1's.
+     (f) **Slot → FS131-M7**, launched 2026-10-06. In flight: 1 (BA1) + 1 (BA2) + 1 (M7) = 3. Queue: the remedy pass (ruling 427 (a), with items
+     441 (a)–(b), (e), 450 (c), 434 (d)) on the joined line; the inhabitant `awayModel`; FS131-KM1.
