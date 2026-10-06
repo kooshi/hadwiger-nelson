@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–483 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–487 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -41,8 +41,8 @@ planted-picture models land (queue item 2).
 
 | job | tree and branch | what | brief | on its hand-back |
 |---|---|---|---|---|
-| **FS131-K10** | `.claude/worktrees/fs131-w10`, `fs131-w10` (`main`'s line) | a planner (`debruijn`): wave 10, the fourteen arithmetic rows (`Arith/StandingFive`, `CharacterColouring`, `SpectralInputs`, `StationaryRatio`; `plans/FS131-kernel-plan.md` § 7.1) — dispositions, a sorry-free foundation, a skeleton, a plan per leaf; it waits on nothing in waves 4–9 | `data/fs131/briefs/FS131-K10-wave10.md` | brief its implementers from its handoff; a row whose derivation does not support its statement is a message mid-job: an Ephodos job |
-| **FS131-K6** | `.claude/worktrees/fs131-w6`, `fs131-w6` (`main` with wave 5) | a planner (`debruijn`): wave 6, the thirty-five rows on saturated colourings (`Plane/Saturated/{Pinch, Fragment, MapColouring, Ladder}`); the plan names its definitions ("honest", "`D-NF`") as where a statement defect is likeliest | `data/fs131/briefs/FS131-K6-wave6.md` | likely a second planning pass, then implementers; a statement defect is a message mid-job: rule it, log the correction owed, an Ephodos job if a derivation is missing |
+| **FS131-I10A** | `.claude/worktrees/fs131-w10`, `fs131-w10` (from the planner's `f919973e`) | wave 10, implementer A: `Arith/SpectralInputs` (eight leaves) and `CharacterColouring`'s one leaf (K10's plan, item 484) | `data/fs131/briefs/FS131-I10A-wave10.md` | implementers B (`StationaryRatio`) and C (`StandingFive`): `python3 data/fs131/briefs/scripts/mk-i10.py B` / `C`, each on a new branch `fs131-w10b` / `fs131-w10c` cut from `f919973e` (make the worktree first; copy the build from an idle tree); then K10b (the unstated rows; the two floor rows, ruling 485 (b)) |
+| **FS131-E8** | the main tree, on `main` (`plans/`, `data/` only) | a deriver: do REG-J′'s frozen words with saturation give the fan with end tangents every wave-6 consumer reads (ruling 481 (c))? and, if budget remains, J45-SI-5's step (c) without a pointwise ergodic theorem | `data/fs131/briefs/FS131-E8-regj-bridge.md` | a refutation is a message mid-job: tell wave 6's second planner; file its drafted bearing lines for the FS-126 and FS-127 stubs; tell Kooshi (route M's hypothesis) |
 | **FS131-MC1** | `.claude/worktrees/fs131-wmb`, `fs131-wmb` (from `b9b3a9e5`: both halves joined, one `sorry` — item 479) | **the example maps finished and landed**: merge `main` (wave 5), `scripts/dupnames.sh` on the joined tree, the brick facts tidied; `stuckModel_terminal`; the sub-arc model of `bend_away_whole`; the wave-5 applications; the docstring lines naming each model on the theorems it fully serves; the full gate; fast-forward `main`; drafts | `data/fs131/briefs/FS131-MC1-models-land.md` | **while it is in its landing stage commit nothing to `main` outside the exempt paths**; on its hand-back follow § 5 "At a landing" (the previous logs: `data/fs131/l5/receipt-axioms-final.log`, `receipt-vacuity-final.log`), file the counts; if it messages that `stuckModel_terminal` resists, rule whether the lane lands without that declaration (480 (a)) |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. If the session restarted, resume a job from its record's last SAVED stage with
@@ -51,11 +51,12 @@ a fresh agent on the same brief.
 ## 4. Queue for the next freed slots, in order (item 427; re-ordered by ruling 434)
 
 0. **Order now** (rulings 473, 475): **wave 5 is on `main`** (item 474: gated at `1351ebc2`, landed `ad611866`; counts filed, item 475).
-   All three slots are full (MC1, K10, K6). K10 has reported a statement defect in a filed hand result, ruled (items 477–478: TC1-STANDING-FIVE
-   takes a second named hypothesis, the finite-target floor; FS89-S0A-10 takes its band's order bound as a hypothesis). In order, as slots free: **(0) FS131-E8, a short Ephodos job** (ruling 481 (c); brief not written — quote the statement from
-   FS131-K6's record on `fs131-w6`, both forms of REG-J′ with their addresses in `data/fs121/claims.md` and `plans/FS111-M-regularity.md` § 4.1):
-   do literal REG-J′ and saturation give the fan with end tangents — derived anywhere, derivable, or false? Then **FS131-K6b**, wave 6's second
-   planning pass (the ladder, the fragment rows; from K6's hand-back). Then: (i) **the example maps' landing** — running as FS131-MC1 (§ 3); it was: the landing job when FS131-MB2 is back — merge `fs131-wm` and `fs131-wmb` (MB2 is
+   All three slots are full (MC1, I10A, E8); wave 10 and wave 6 are planned in a first pass (items 484–487). K10 has reported a statement defect in a filed hand result, ruled (items 477–478: TC1-STANDING-FIVE
+   takes a second named hypothesis, the finite-target floor; FS89-S0A-10 takes its band's order bound as a hypothesis). In order, as slots free: **(0) FS131-K6b**, wave 6's second planning pass (`debruijn`; brief not written — derive it from
+   `data/fs131/briefs/scripts/mk-k6.py`, on `fs131-w6` at `714a972b`; K6's report says what it needs: the foundation's predicates restated
+   over a family of sets, the fan design `data/fs131/k6/FanDesign.lean`, the ladder's 17 rows, the fragment's 6, five more; rulings 487);
+   **FS131-I10B and I10C** (wave 10's other two files); K10b. Then:
+   (i) **the example maps' landing** — running as FS131-MC1 (§ 3); it was: the landing job when FS131-MB2 is back — merge `fs131-wm` and `fs131-wmb` (MB2 is
    merging A's half itself), merge `main` (wave 5: the brick facts become three lines; add `stuckModel_terminal`, the sub-arc model of
    `bend_away_whole` by `IsRingArc.mono` (471 (c)), the wave-5 applications, `awayModel` read against `bend_away_part` and
    `exists_arcStep`), apply the docstring lines (KM1's plan § 3.10; the stuck family's notes name `stuckModel_hyps`), the gate with
@@ -144,7 +145,8 @@ a fresh agent on the same brief.
 | `fs131-wop` | `4b68d47d` | the branch is merged into `main`; its worktree now holds branch `fs131-t4` |
 | `fs131-w4ba` | `71cca146` | no worktree; `bend_away`'s repaired statement |
 | `fs131-wm` | `87699974` | idle: the example maps' half A whole (item 472: `Paint`, `Moves` with no `sorry`; the four moves' models on the standard three); MB2 is merging it into `fs131-wmb` |
-| `fs131-w10` | moving (K10) | `main`'s line: wave 10's plan |
+| `fs131-w10` | moving (I10A; K10 left it at `f919973e`) | wave 10's plan and skeleton (21 leaves), implementer A in progress |
+| `fs131-w6` | `714a972b` | idle until FS131-K6b: wave 6's foundation, four rows proved, 8 leaves stated |
 
 ## 8. Held for the milestone's filing
 
