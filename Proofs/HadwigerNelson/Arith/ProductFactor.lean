@@ -392,7 +392,7 @@ system's `l`-factor. -/
 
 /-- **The fibre lemma**: if the first system is eventually fixed along `l`, the fibre over an atom of `Ω₁` of a set of
 the first two coordinates with `l`-continuous indicator has `l`-continuous indicator in the second system. -/
-theorem fibre_mem_factorSets [MeasurableSingletonClass Ω₁] [IsProbabilityMeasure μ₁] [IsProbabilityMeasure μ₂]
+theorem fibre_mem_factorSets [IsProbabilityMeasure μ₁] [IsProbabilityMeasure μ₂]
     [IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃}
     (hT₁ : ∀ y, MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ y, MeasurePreserving (T₂ y) μ₂ μ₂)
     (hT₃ : ∀ y, MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (h₁ : ∀ᶠ y in l, T₁ y = id) {C : Set (Ω₁ × Ω₂)}

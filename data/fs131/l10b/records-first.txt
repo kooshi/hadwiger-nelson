@@ -1,0 +1,77 @@
+main: 9336 theorems; landing: 9513; wave (landing only): 177 = 160 hand-written + 17 generated with no record asked; gone (main only): 0; records in the log: 6334
+  generated, by suffix: congr_simp 3, eq_1 8, eq_2 3, eq_def 3
+  wave records on exactly the three: 135
+  wave records on fewer: [Quot.sound, propext]: 9
+  wave records on fewer: [propext]: 8
+  wave records on the three and the import: 8
+  Arith.FactorAction: 3
+  Arith.Floor128: 48
+  Arith.FloorPlanes: 17
+  Arith.GapSeven: 8
+  Arith.MajorityVote: 6
+  Arith.NegCircleModel: 11
+  Arith.NormOneTarget: 4
+  Arith.ProductFactor: 23
+  Arith.RatioBound: 5
+  Arith.TargetFloors: 5
+  Arith.WeilKloosterman: 14
+  Plane.FalconerReduction: 1
+  Plane.MetricalBoundary: 15
+  head HadwigerNelson.StandingFive.involution_eq_pow: exactly the standard three
+  head HadwigerNelson.StandingFive.card_normOne: exactly the standard three
+  head HadwigerNelson.StandingFive.sum_quadratic_eq: exactly the standard three
+  head HadwigerNelson.StandingFive.circle_sum_eq_kloosterman: exactly the standard three
+  head HadwigerNelson.StandingFive.circle_sum_le: exactly the standard three
+  head HadwigerNelson.StandingFive.normOne_charSum_ge: exactly the standard three
+  head HadwigerNelson.StandingFive.targetFloor_of_charSum: exactly the standard three
+  head HadwigerNelson.StandingFive.targetFloor_seven_of_kloosterman: exactly the standard three
+  head HadwigerNelson.StandingFive.circle_sum_le_of_ne: exactly the standard three
+  head HadwigerNelson.StandingFive.circle_sum_zero_of_isotropic: exactly the standard three
+  head HadwigerNelson.StandingFive.two_sqrt_lt_circle_sum_zero: exactly the standard three
+  head HadwigerNelson.StandingFive.standingFloor_seven: exactly the standard three
+  head HadwigerNelson.StandingFive.standingFloor_five: exactly the standard three
+  head HadwigerNelson.StandingFive.seven_le_localBound_of_kloosterman: exactly the standard three
+  head HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound: exactly the standard three
+  head HadwigerNelson.StandingFive.four_mul_mul_ne_zero_iff: exactly the standard three
+  head HadwigerNelson.StandingFive.sum_units_eq_sum_ne_zero: exactly the standard three
+  head HadwigerNelson.StandingFive.kloosterman_bound_model: exactly the standard three
+  head HadwigerNelson.StandingFive.ringChar_ne_two_of_card_mod_four: exactly the standard three
+  head HadwigerNelson.StandingFive.targetFloor_six_of_kloosterman: exactly the standard three
+  head HadwigerNelson.StandingFive.kloostermanBound_of_card_le_five: exactly the standard three
+  head HadwigerNelson.Floor128.charSum_128_ge: exactly the standard three
+  head HadwigerNelson.Floor128.targetFloor_eight_128: exactly the standard three
+  head HadwigerNelson.Floor128.targetFloor_seven_128: exactly the standard three
+  head HadwigerNelson.Floor128.exists_root: exactly the standard three
+  head HadwigerNelson.Floor128.exists_root_pow_eq: exactly the standard three
+  head HadwigerNelson.Floor128.class_le: exactly the standard three
+  head HadwigerNelson.Floor128.normOne_eq_image: exactly the standard three
+  head HadwigerNelson.Floor128.exists_addChar: exactly the standard three
+  head HadwigerNelson.MajorityVote.ae_eq_measurable_of_majority: exactly the standard three
+  head HadwigerNelson.SpectralInputs.contVec_prod_eq: exactly the standard three
+  head HadwigerNelson.SpectralInputs.exists_parityHom: exactly the standard three
+  head HadwigerNelson.SpectralInputs.negCircle_trivial_bot: exactly the standard three
+  head HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot: exactly the standard three
+  head HadwigerNelson.SpectralInputs.contVec_prod_eq_coin: exactly the standard three
+  head HadwigerNelson.SpectralInputs.fibre_mem_factorSets: exactly the standard three
+  head HadwigerNelson.SpectralInputs.comap_factorSigma_eq: exactly the standard three
+  head HadwigerNelson.SpectralInputs.comap_factorSigma_eq_of_action: exactly the standard three
+  head HadwigerNelson.SpectralInputs.si4_equivariant_factorSigma: exactly the standard three
+  head HadwigerNelson.RatioBound.card_mul_le_of_indep: exactly the standard three
+  head HadwigerNelson.RatioBound.le_chromaticNumber_of_charSum: exactly the standard three
+  head HadwigerNelson.Plane.falconer_lemma2_nonempty: exactly the standard three
+  head HadwigerNelson.Plane.exists_not_tendsto_ratio_and_compl: exactly the standard three
+  head HadwigerNelson.Plane.exists_ratio_ge_and_compl_ge: exactly the standard three
+  head HadwigerNelson.Plane.falconer_reduction: exactly the standard three
+  head HadwigerNelson.Plane.le_chiM_of_falconerFan: exactly the standard three
+  head HadwigerNelson.Plane.exists_mem_falconerE: exactly the standard three
+  head HadwigerNelson.Plane.fan_tip_ae_mem: exactly the standard three
+  head HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two: exactly the standard three and StandingFive.kloosterman_bound
+  head HadwigerNelson.StandingFive.targetFloor_seven_weil: exactly the standard three and StandingFive.kloosterman_bound
+  head HadwigerNelson.StandingFive.targetFloor_six_weil: exactly the standard three and StandingFive.kloosterman_bound
+  head HadwigerNelson.StandingFive.circle_sum_le_weil: exactly the standard three and StandingFive.kloosterman_bound
+  head HadwigerNelson.StandingFive.standingFloor_seven_weil: exactly the standard three and StandingFive.kloosterman_bound
+  head HadwigerNelson.StandingFive.standingFloor_five_weil: exactly the standard three and StandingFive.kloosterman_bound
+  head HadwigerNelson.StandingFive.seven_le_localBound_weil: exactly the standard three and StandingFive.kloosterman_bound
+  head HadwigerNelson.StandingFive.five_le_chromaticNumber_weil: exactly the standard three and StandingFive.kloosterman_bound
+  whole log: records under IMPORTED 8; records carrying the import 8; records listing Falconer's lemma as an axiom 0
+records: PASS
