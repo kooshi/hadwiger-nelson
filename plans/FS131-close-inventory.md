@@ -3984,3 +3984,35 @@ reason by the close.*
      (d) **Corrections owed, for the filing**: item 422's and QA4's § 3.4 remark that the arc step does not share the vertex step's domain gap (it
      shares it through `⊤`); KL1's plan § 3.1 row for `exists_arcStep` (the two clauses). (e) **Credit**: the finding is IA1's, made at the reading
      its brief asked for before any proof — the statement had passed the planner, the restating implementer (item 420), QA4 and me.
+
+431. **FS131-IS1 done: `stuckRun_ne_univ` proved as written; `Terminal` holds no `sorry` of its own** (implementer; harness ≈ 408k by the task notice;
+     record `fs131-w5s`'s `plans/FS131-I5-implementation.md` Stages 60–62; report `data/fs131/reports/FS131-IS1.md` on that branch; commits
+     `5ea0043b`, `4f7115e3` (the Lean source the build read), `9c1c977f`, `5e82bdfa`, `facdf1c2`; branch `fs131-w5s` at `facdf1c2`, pushed, tree
+     clean). **Results**: `stuckRun_ne_univ` (N2-TERM's clause 3: a stuck run is not bi-infinite) with its child `shadow_recursion`
+     (`a ≤ curvDown a' ∧ curvUp b ≤ b'` for two neighbouring chain vertices) and six supporting theorems — `horn_upper_ne_one`,
+     `horn_lower_ne_neg_one`, `horn_colour_eq_of_isChainVertex`, `eq_horn_colour_of_two_sectors` in `Terminal`;
+     `le_curvDown_of_flankBelow_of_horn`, `curvUp_le_of_horn_of_flankAbove` in `HornShadow` — all on the standard three. `exists_terminal` and
+     `exists_red` still rest on `Procedure`'s two steps. **My receipt**: tip equals `origin/fs131-w5s`; the build log
+     `build/gate/build/20261006T043454Z-976637.log` ends "Build completed successfully (5792 jobs)", 0 warnings other than `sorry`, 34 `sorry`
+     warnings (`Procedure` 14, `HexRing` 10, `BaseDense` 6, `BendCollar` 4 — the last three this line's stale copies of the density half), none in
+     `Terminal` or `HornShadow`; `sorry` by the handoff's grep: `Terminal` 0, `HornShadow` 0; `data/fs131/is/ISAxioms62.out` parsed by script, 15
+     records: 12 on exactly the standard three (the eight new ones, `n4_fin`, `cv_class`, `run_hornBoundsQR`, `run_ends`), 3 controls on `sorryAx`
+     (`exists_terminal`, `exists_red`, `exists_vertexStep`); `stuckRun_ne_univ`'s statement at `HEAD` byte-identical to `ebb0b292`'s (`cmp`).
+     **Items**: generalizations — `shadow_recursion` reads no run (two neighbouring chain vertices suffice); `stuckRun_ne_univ` does not read `h3`
+     (kept, `have _ := h3`); the two `HornShadow` inequalities hold in any valid map at any `k`. Prediction scored — priced "M–H, one session"; done
+     in three stages, about 180 lines; the step M6 named as still to write was not needed (`cv_class` and Stage 54's four-germ count). Tool defect —
+     `tools/fs131_il_stmt_check.py --self-test` exits 1 on this line (its first plant targets `badCount_lt_top`'s `hc`, removed by ruling 389 (a)).
+     Correction owed — M6's "Left" paragraph and KL1's § 3.1 row name SH1; the proof uses SH2 with `Valid`, N4 § 2.6's own sentence. Slip, the
+     job's, disclosed — one `ARCHITECTURE.md` cell outside its touches.
+432. **Rulings on IS1's held items, and its slot.** (a) **`Terminal` imports `Plane/StuckChain`, and the `ARCHITECTURE.md` Imports cell stays as
+     IS1 edited it.** Alternative weighed: reverse it and copy `n4_fin`'s proof into `Terminal`. Why: the import is the honest dependency
+     (`n4_fin` is the theorem the proof ends on), `tools/check_architecture.py` fails without the cell, and a copy would be a second home for one
+     proof. Confidence: high. The edit outside its touches is logged and costs nothing to redo. (b) **The two drafted description cells** (rows
+     `HornShadow`, `Terminal`; record Stage 62, § Drafts) are applied at wave 5's final sync, by its implementer; `Terminal`'s row drops
+     "skeleton" only when `Procedure`'s steps are proved. Default taken. (c) **The gate is the landing's**; IS1's expectation (CLEAN; parametric for
+     vacuity) is a prediction to score there. (d) **`h3` stays** (ruling 419 (c)); the generalizations go to the errata. (e) **The rewritten
+     docstring** stands; the notes check reads it at the landing. (f) **The merge of `fs131-w5s`** waits for the final sync: FS131-IR2 is working
+     in `fs131-w5c`'s tree. Alternative: merge into `fs131-w5a` now. Why not: IA1 has its own merge under way and nothing of its work reads
+     `stuckRun_ne_univ`. Confidence: high. (g) **The tool defect** joins the list owed (the shared statement checker of item 406 (c) replaces the
+     per-job copies). (h) **Slot → FS131-E7**, launched 2026-10-06 on the brief of item 428 (a) (`ephodos`). In flight: 1 (IR2) + 1 (IA1) + 1 (E7)
+     = 3. Next freed slot: FS131-KM1 (item 428 (b)), unless the freed lane leaves leaves on wave 5's path.
