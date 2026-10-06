@@ -4194,3 +4194,11 @@ reason by the close.*
      form and to match KA1's text when it comes; KA1 asked for that text at its skeleton commit. Alternative: IA2 proves W1 and W2 separately and
      the final sync reconciles. Why not: a fourth doubled statement, foreseen. Confidence: high. (c) The correction of (3) is mine to own: my brief
      repeated the docstring's sentence as the constraint. Logged; no redo.
+
+443. **The W1/W2 lemma's exact text, relayed** (FS131-KA1's message to "main", 2026-10-06; sent verbatim to FS131-IA2 by message, and appended to
+     its brief as a second dated amendment, gate PASS). `ArcMap.LocalStep.of_cutArcs`, in KA1's new module `Plane/ValidMap/BendAway` on `fs131-w5a`
+     (`sorry`; commit pending at this writing): from `M.AgreesOff F K`, `M.arcs = F.cutArcs P θ₁ θ₂ ∪ S`, every arc of `S` inside `K` and
+     `ringArc P θ₁ θ₂ ⊆ K`, `LocalStep F M K`; its truth by KA1's hand check, one mind. KA1 also holds `LocalStep.union` there, proved.
+     **For the final sync**: IA2 states the lemma in its own module with the same name and signature (it cannot import KA1's branch), so the two
+     lines **will collide by name** when they meet — a loud failure by design, where two names for one statement would be silent; the job that
+     joins them keeps `BendAway`'s declaration and moves a proof into it if IA2 has one.

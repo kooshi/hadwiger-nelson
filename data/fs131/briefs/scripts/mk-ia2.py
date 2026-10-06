@@ -113,6 +113,24 @@ From the outward bend's planner, FS131-KA1, at its Stage 2 (`/home/kooshi/source
    the text when it arrives — the proof moves to KA1's upstream home at the merge. Take the other groups of clauses first if your order allows.
 3. KA1's construction bends the gaps one after another on the toward bend's own collar set, and the toward bend satisfies the same internal clause
    package: "one assembly for both" stands. {NOSPAWN}
+
+## Second amendment, 2026-10-06 (sent by message; inventory item 443): the W1/W2 lemma's exact text
+
+From FS131-KA1's message to the coordinator — its new module `BendAway` on `fs131-w5a` (imports `Limit`, `UnitArc`, `OpenMove`; namespace
+`HadwigerNelson.Plane.ArcMap`, `variable {{k : ℕ}} {{F : ArcMap k}}`); the text is final by KA1's word, its commit pending at this writing:
+
+```lean
+theorem LocalStep.of_cutArcs {{M : ArcMap k}} {{K : Set ℂ}} {{S : Set Arc}} {{P : ℂ}} {{θ₁ θ₂ : ℝ}} (h12 : θ₁ < θ₂)
+    (hag : M.AgreesOff F K) (harcs : M.arcs = F.cutArcs P θ₁ θ₂ ∪ S) (hS : ∀ a ∈ S, a.carrier ⊆ K)
+    (hK : ringArc P θ₁ θ₂ ⊆ K) : LocalStep F M K := by
+  sorry
+```
+
+State it in your module with exactly this signature (a `sorry` child you apply, or proved) and record which; at the merge the two are one
+declaration and a proof of yours moves to `BendAway`. The toward instance, in KA1's words: `M := hfit.map`, `S := {{collarArcA P θ₁ θ₂ R,
+collarArcB P θ₁ θ₂ R}}`, `K := collarK P θ₁ θ₂ R' R''` or any set holding it (`LocalStep.mono`), `hag` from `CollarFit.map_agreesOff` weakened to
+`K`. KA1 also holds `LocalStep.union : LocalStep F M₁ K₁ → LocalStep M₁ M₂ K₂ → LocalStep F M₂ (K₁ ∪ K₂)` there. If the signature does not fit
+the toward instance, message the coordinator with what is off; do not change it.
 '''
 open(ROOT+"data/fs131/briefs/FS131-IA2-arc-assembly.md","w").write(b)
 print("written at tip",TIP)
