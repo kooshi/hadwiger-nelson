@@ -6428,3 +6428,25 @@ reason by the close.*
      unexcepted sentence is false is not known — its question (at a tactic edge at `p` with centre `q` and inner tile
      `x`, can a second tile of `p` hold `q` in its closure?) is logged for the wave's errata and for Poros.
      Alternative: launch a deriver. Why not: nothing formal waits on the answer. Confidence: medium.
+
+550. **Falconer's lemma: the job is briefed as FS131-IF1, an implementer's, not as the deriver's job item 548 named — ruling
+     548 (1)'s route changed within the hour, and why** (mine; 2026-10-06). Reading the planner's note for the brief
+     (`plans/FS131-w2-kernel-plan.md` § 12.1: "no proof I could vouch for … the obvious Baire argument … does not close")
+     I saw an elementary argument and wrote it down: closed balls in which the set's density ratio is exactly one half,
+     found by the intermediate value theorem along a segment between a density point of the set and one of its
+     complement, nested with radii halving; their common point has ratio at most 7/8 for the set and for its complement
+     along a sequence of centred balls, so it is a density point of neither. **I acted as a deriver for this one
+     argument, unasked, and say so**: it is one mind's, mine, unchecked; I am not its reviewer — the kernel is; the brief
+     gives it under the heading "A candidate route — the coordinator's, one mind, not checked", asks that it be
+     attacked before it is used, and says a refuted step is a message and a good report. **Ruling**: one implementer job
+     replaces the axiom by a theorem of the same name and statement, removes its `declareImport`, and moves its four
+     records to CLEAN; it does not land (the next landing merges its branch). Alternative: a deriver's job first, as I
+     told Kooshi minutes earlier. Why changed: with an argument on the table the deriver's job would cost one job
+     (item 541: about 450k tokens) to produce what the implementer needs in its first stage, and the kernel checks
+     the argument either way; if a step fails, the implementer says which and the deriver's job is then launched on a
+     sharper question. Confidence: medium-high that the route goes; high that this is the cheaper order. **Brief**
+     `data/fs131/briefs/FS131-IF1-falconer-lemma2.md` (generator `mk-if1.py`; gate exit 0); tree
+     `.claude/worktrees/fs131-wf1`, branch `fs131-wf1` from `main` at `ca598960`, build copied from `fs131-w10l`
+     (idle; its Lean inputs equal `main`'s, by `git diff`). It takes the next free slot. **A seam named in the brief**:
+     Weil's bound adds a declared import on another branch while this job removes the only one; the audit's self-test
+     may need an import to exercise its IMPORTED controls, and the two branches meet at a landing.

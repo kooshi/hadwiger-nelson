@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–549 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–550 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -204,7 +204,7 @@ FS110-W-MERGE to [kernel]); the Proof Atlas rebuilt and committed, not published
 
 ## 9. Held for Kooshi, with defaults
 
-- **Falconer's lemma is pulled into this milestone, by his word, 2026-10-06** (item 548: "Agree, pull in Falconer's."): **FS131-E10**, a deriver's job on the proof of `falconer_lemma2_nonempty`, takes the next free slot (brief: see § 3's notes; if not written, write it first); then a planner-and-implementer job replaces the axiom. **Owed to him**: one complete script-made list of every outside theorem assumed, as axiom or as named hypothesis (item 548 (2)).
+- **Falconer's lemma is pulled into this milestone, by his word, 2026-10-06** (item 548: "Agree, pull in Falconer's."): **FS131-IF1** takes the next free slot — `data/fs131/briefs/FS131-IF1-falconer-lemma2.md`, tree `fs131-wf1` from `main` at `ca598960`, `debruijn-implementer`, `model: "opus"` (item 550): one implementer replaces the axiom `falconer_lemma2_nonempty` by a theorem, from a candidate route that is mine and unchecked (said so in the brief); it does not land; if the route fails at a step, a deriver's job is launched on that step. **Owed to him**: one complete script-made list of every outside theorem assumed, as axiom or as named hypothesis (item 548 (2)).
 - **Measure rigidity in Lean (FS-113) and the main clause through five (FS-101): held, by his word, 2026-10-06** (item 488) — *"Let's keep
   holding off on formalizing or pricing MR for now. That backlog is big enough that I might request community support for filling it. I'm
   going to wait to do that too though."* Do not open, price or re-offer them; the backlog's rows take their results as the named hypotheses
