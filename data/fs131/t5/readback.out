@@ -1,0 +1,16 @@
+MATCH     plans/FS131-close-inventory.md:6456 (verbatim)  ::  551. **Kooshi's word, 2026-10-06: the gate is to enumerate both kinds of assumption; a spe
+MATCH     LEAN.md:28 (verbatim)  ::  - **An imported theorem carries four things**, because an axiom that misstates its paper c
+MATCH     LEAN.md:34 (verbatim)  ::  - **Our own hand results** that a module needs before their own module lands enter as expl
+MATCH     plans/FS131-close-inventory.md:6388 (verbatim)  ::  548. **Kooshi's word, 2026-10-06: Falconer's lemma is pulled into this milestone; and two 
+MATCH     scripts/Axioms.lean:122 (verbatim)  ::  def declareImport (n : Name) : CommandElabM Unit := do
+MATCH     CLAUDE.md:448 (verbatim)  ::  Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/ax
+MATCH     Proofs/HadwigerNelson/SpectralChain.lean:124 (verbatim)  ::  def BochnerHerglotz (G : Type*) [AddCommGroup G] : Prop :=
+MATCH     Proofs/HadwigerNelson/SpectralChain.lean:339 (verbatim)  ::  def InvariantMeasureOnClosed (F : Subfield ℝ) : Prop :=
+MATCH     Proofs/HadwigerNelson/Arith/SpectralInputs.lean:783 (verbatim)  ::  def BochnerOn (t : TopologicalSpace R) : Prop :=
+MATCH     Proofs/HadwigerNelson/Plane/Slack.lean:3664 (verbatim)  ::  def Voronov11 : Prop :=
+MATCH     Proofs/HadwigerNelson/Arith/StandingFive.lean:1209 (verbatim)  ::  def StandingFloor (n : ℕ) : Prop :=
+MATCH     Proofs/HadwigerNelson/Arith/CharacterColouring.lean:87 (verbatim)  ::  def OrderBound {Q : Type*} [AddCommGroup Q] (U₀ : Set Q) (B : Set UnitAddCircle) (N : ℕ) :
+MATCH     Proofs/HadwigerNelson/Plane/Slack.lean:3472 (verbatim)  ::  def Row130M1 : Prop := ∀ k : ℕ, chiM0 ≤ k → chiCP ≤ k
+MATCH     plans/FS131-L10A-landing.md:448 (verbatim)  ::     | named hypothesis | states | whose | the landed theorems that take it | a Lean model o
+MATCH     plans/FS131-kernel-plan.md:578 (verbatim)  ::  ### 7.4 Hypotheses from outside the backlog, by name (inventory § What "Closed" means, ite
+quotations=15 mismatched=0
