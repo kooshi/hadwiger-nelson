@@ -1,0 +1,24 @@
+standard three     HadwigerNelson.Plane.ArcMap.nb4p
+standard three     HadwigerNelson.Plane.ArcMap.bend_toward_collar
+standard three     HadwigerNelson.Plane.ArcMap.exists_rayStep
+standard three     HadwigerNelson.Plane.ArcMap.exists_shaveStep
+standard three     HadwigerNelson.Arith.placeHom_step
+standard three     HadwigerNelson.Arith.falconerFan_five_placeHom
+standard three     HadwigerNelson.Arith.sqrt3_local_of_congr
+standard three     HadwigerNelson.Arith.sqrt3_local
+standard three     HadwigerNelson.Arith.sqrt3_dyadic
+standard three     HadwigerNelson.Plane.ArcMap.collarModel_hyps
+standard three     HadwigerNelson.Plane.ArcMap.collarModel
+standard three     HadwigerNelson.Plane.conj_e
+standard three     HadwigerNelson.Plane.sq_norm_eq
+standard three     HadwigerNelson.Plane.ArcMap.HasDegree.unique
+standard three     HadwigerNelson.Plane.ArcMap.coloursAt_eq_singleton_of_interior
+standard three     HadwigerNelson.Plane.dist_sq_re_im
+standard three     HadwigerNelson.Plane.ringArc_add_two_pi_mul
+standard three     HadwigerNelson.Plane.ArcMap.ringPt_add_int
+standard three     HadwigerNelson.Plane.ArcMap.IsRingArc.union
+standard three     HadwigerNelson.Plane.ArcMap.finite_arcs_inter_compact
+standard three     HadwigerNelson.Plane.ArcMap.exists_vertexStep
+standard three     HadwigerNelson.Arith.exists_isPlaceHom
+CONTROL sorryAx    HadwigerNelson.Plane.ArcMap.exists_arcStep
+asked 23, records 23, deviations 0

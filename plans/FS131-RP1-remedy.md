@@ -5,7 +5,18 @@ Tools: `tools/fs131_rp_*.py`.*
 
 ## Theorems this phase proved
 
-No new mathematics. One new declaration, a model's hypothesis set stated as a theorem; its line is added at the stage that builds it.
+No new mathematics. Axioms from `data/fs131/rp/RPAxioms.out`, against the build of `a10abf53` (Stage 4). All in
+`HadwigerNelson.Plane.ArcMap` unless a namespace is given; each on `[propext, Classical.choice, Quot.sound]`.
+
+- `collarModel_hyps` (`Plane/ValidMap/BendCollar`) — [kernel]; **new**: the hypotheses of `exists_collarFit` and of
+  `bend_toward_collar` hold at once on `l60Frag`'s sub-arc `r([π/8, 5π/24])` of `ω(0)`, sides `0`, `1` (FS131-QA4's QA4-C1).
+- `bend_toward_collar` (`BendCollar`) — [kernel]; restated without `hlen`, `hmax` (strictly stronger).
+- `nb4p` (`Plane/ValidMap/UnitArc`) — [kernel]; restated with one rotational sense of `hnb` (strictly stronger).
+- `exists_rayStep`, `exists_shaveStep` (`Plane/ValidMap/Procedure`) — [kernel]; restated without `hn` (strictly stronger).
+- `HadwigerNelson.Arith.placeHom_step` (`Arith/PlaceHom`), `HadwigerNelson.Arith.falconerFan_five_placeHom`
+  (`Arith/FalconerField`) — [kernel]; restated for every subfield `F` of `ℝ` (no `[NumberField F]`).
+- The definition `HadwigerNelson.Arith.DyadicSqrt3Conclusion` (`Arith/Dyadic`) lost its idle `[NumberField L]`; the theorems that
+  state it (`sqrt3_local_of_congr`, `sqrt3_local`, `sqrt3_dyadic`) print the standard three.
 
 ## Stage 1 — SAVED (FS131-RP1): the readback, the tree as given, the work list
 
@@ -207,3 +218,99 @@ Each entry names a declaration and is refused unless its old text stands exactly
 - The missed caller (§ 3.1).
 - Two notes read as CONFLICT after the edit: QA4's tool looks for "local hypotheses" with one space, and my wrap had put a line break
   inside the phrase. Found by the tool; the phrases it reads are now kept on one line.
+
+## Stage 4 — SAVED (FS131-RP1): the build, the axioms, the final checks; outcomes; what is left
+
+### 4.1 The build (the Lean sources of `a10abf53`; nothing under `Proofs/` or `scripts/` changed after it)
+
+`build/gate/build/20261006T083152Z-2635123.log` (a copy: `data/fs131/rp/build2-full.log`; the digest: `build2.log`): **exit 0, 464 of
+464 batches, 39 modules rebuilt, 14 m 25 s, "Build completed successfully (5803 jobs)"**. 363 warning lines, every one
+`declaration uses sorry` (0 of any other kind, counted by `grep`); **36 distinct sites, all the outward bend's**: `BendAway` 6,
+`LensOut` 7, `CollarMapOut` 7, `R2Cap` 3, `HornChart` 4, `BendGap` 8, and `BendStep` 1 — the count the branch had as given. The
+log's two lines with the word "error" are its lines 3 and 5, the up-to-date probe ("target is out-of-date and needs to be rebuilt")
+that `build.sh` runs before the walk. **The build's own negative control was watched**: Stage 2's run of it went red at the one
+wrong call (§ 3.1).
+
+Two builds were paid in all (17 m and 14 m), as planned at § 1.4; the first was not green.
+
+### 4.2 The axioms (`data/fs131/rp/RPAxioms.lean` → `RPAxioms.out`, read by `tools/fs131_rp_axioms.py`)
+
+23 records asked, 23 found, each once. **22 on the standard three**: the seven changed statements' (`nb4p`, `bend_toward_collar`,
+`exists_rayStep`, `exists_shaveStep`, `placeHom_step`, `falconerFan_five_placeHom`, and for the changed definition
+`sqrt3_local_of_congr`, `sqrt3_local`, `sqrt3_dyadic`); `collarModel_hyps`, `collarModel`; the three moved (`conj_e`, `sq_norm_eq`,
+`HasDegree.unique`); the six kept of a doubled pair (`coloursAt_eq_singleton_of_interior`, `dist_sq_re_im`,
+`ringArc_add_two_pi_mul`, `ringPt_add_int`, `IsRingArc.union`, `finite_arcs_inter_compact`); the callers `exists_vertexStep`,
+`exists_isPlaceHom`. **The control**, `exists_arcStep`, shows `sorryAx` as it must on this line. `--self-test`: five plants, each
+refused (a record deleted; a clean record given `sorryAx`; given a native axiom; the control's `sorryAx` removed; a record
+doubled). `scripts/Axioms.lean`: 5,129 records (5,138 as given, ten removed, one added), none twice.
+
+### 4.3 The final checks, on the tree the build read
+
+| check | result | file |
+|---|---|---|
+| statements (`tools/fs131_rp_stmt.py 3381e47f data/fs131/rp/stmt-expected.json`) | 11,258 declarations read; changed 7, gone 14, added 4 — the manifest exactly; 0 deviations; 6 plants fired | `stmt-stage3.txt`, `stmt-selftest.txt` |
+| each changed statement, before and after | — | `statements-before-after.txt` |
+| notes (`tools/fs131_rp_notes.py`) | 175 read, 0 CONFLICT (21 as given); 2 plants fired | `notes-after.txt`, `notes-selftest.txt` |
+| doubled names (`tools/fs131_m7_dupes.py --whole Proofs/HadwigerNelson/Plane a20bb6f5`) | 0 NAME-TWICE, 0 STATEMENT-TWICE; 5 NORM-TWICE, the tool's known artefacts | `dupes-whole-final.txt` |
+| `tools/check_architecture.py` | PASS, exit 0 | `arch-check.txt` |
+| no `axiom`, no `native_decide` | none added (pattern matched two planted lines first) | § 3.3 |
+| the fenced modules | none of the seven is in the diff (27 Lean files changed) | `git diff 3381e47f --stat -- Proofs` |
+
+Not run, by the brief: the gate (axioms audit, vacuity, linters, `lean4checker`). **Predictions for it, to score at the landing**: the
+audit CLEAN for the 22 above; the linter's three `[NumberField _]` findings gone; the vacuity scan's `declarations` ten lower on
+this account (eleven removed, one added) and its `sites` lower by the hypotheses removed (`hmax`, `hlen`, `hn` twice, three instance
+binders — how many of these the scan counts as sites I did not check).
+
+### 4.4 The work list's outcomes (§ 1.4's rows)
+
+S1–S6: done as ruled, with one caller § 1.4 had missed (`exists_preBend_step`, `BaseDense`; § 3.1). D1–D8: done; every pair's
+statements were one. N1–N12: done; N1 and N2 are ten notes each, not nine and eight; N11 was a correction, not a kept line.
+Nothing ruled was left undone and nothing unruled was made.
+
+### 4.5 What the pass changed that a later job should know
+
+- **`sq_norm_eq` is the one name** for `‖z‖² = re² + im²`; `conj_e` and it live in `Plane/Basic`; `HasDegree.unique` in
+  `Plane/ValidMap/Basic`. The names removed are in `scripts/Axioms.lean`'s "FS131-RP1" block and in § 2.1.
+- **At the merge of `fs131-w5z`**: its bend modules read `conj_e`, `hdeg.unique` and `coloursAt_eq_singleton_of_interior`, all kept
+  (checked at `ef33a037`; the branch moves, so re-check — a use of a removed name there fails the build by name). `scripts/Axioms.lean`
+  will conflict by adjacency at the end of the clean section (this job's block sits above the PURCHASED banner): keep both.
+- **`exists_preBend_step`** (`BaseDense`) no longer derives a length bound it does not need.
+
+## Drafts for the front page
+
+No gate was run, so there are no counts for `CLAUDE.md` § The gate or § Trust ledger, no ledger row, no Frontier line, and no Proof
+Atlas grade change. Two drafts for files Keryx writes:
+
+- **`LEAN.md` § Building**, after the sentence "Never conclude from it that a module is green." — add: "**And it reads the oleans on
+  disk**: after a statement changes upstream, a caller still elaborates against the old statement until the upstream module is
+  rebuilt, so a stale caller reads green (FS131-RP1: `bend_toward_collar` lost two hypotheses and `BaseDense`'s call passed under
+  `lake env lean`; the build failed there). To iterate past a changed upstream module, compile it to an overlay — a symlink copy of
+  the built library with the changed module's olean written over its link — and put the overlay first in `LEAN_PATH`
+  (`data/fs131/rp/lean-check/overlay.sh`); Lean takes every `Proofs.*` module from the first path entry that holds `Proofs/`."
+- **The errata's generalizations** (ruling 419 (a): "each a statement change recorded with its diff"): the seven of
+  `data/fs131/rp/statements-before-after.txt`.
+
+## The list left for after the outward bend's merge (not done by this job)
+
+1. `hF` out of `CollarFit.map_hornCount_le`, with its callers in `ArcStep` (ruling 457 (b)).
+2. The "skeleton" headers of the bend's modules and of FS131-KA1's block in `scripts/Axioms.lean`; `BendStep`'s header, which still
+   calls the horn child open (items 454, 456).
+3. `ringPt_inj_of_abs_sub_lt` (`BendAway`) and `ringPt_ne_of_abs_sub_lt` (`BaseDense`): one the contrapositive of the other
+   (item 454).
+4. Met on the way, of the same kind:
+   - `Terminal`'s `ARCHITECTURE.md` row keeps "skeleton" until `exists_arcStep` is on the standard three (ruling 432 (b)).
+   - `BendStep`'s docstrings (l. 19, l. 194) speak of "`bend_toward_collar`'s `hfree`": still true; its l. 29 and l. 289 name
+     `collarModel`, and may now name `collarModel_hyps` for the hypothesis sets.
+   - `exists_arcStep`'s note: when `awayModel` exists, read it against `exists_arcStep`'s hypotheses and name it or say why not.
+   - BA1's ten `CollarFitOut` helpers that re-prove `CollarMap`'s lemmas (item 454).
+   - After the merge: `python3 tools/fs131_m7_dupes.py --whole Proofs/HadwigerNelson/Plane a20bb6f5` (it should report no name twice
+     and no statement twice), `python3 tools/fs131_rp_notes.py` with the bend's modules added to its `EXTRA` list (they are not
+     read today), and `tools/fs131_rp_stmt.py` with the manifest extended by BA3's ruled changes.
+5. Tidies of the same kind that no ruling names — listed, not made:
+   - `re_e`, `im_e` (`Plane/Chord`) against `e_re_im` (`Plane/SixFragment`): the same two facts, apart and as a conjunction.
+   - `e_zero` and `e_add_int_mul_two_pi` live in `Plane/SixFragment`, downstream of users that re-derive them (`Plane/Basic`'s spec
+     example proves `e 0 = 1` inline).
+   - `tools/fs131_qa4_notes.py` reads its phrases with a literal space, so a line break inside "local hypotheses" turns
+     LOCAL-SAID into CONFLICT (a tool defect, failing toward the alarm).
+   - `tools/fs131_im_move_cone.py --check` holds the working `Contact` to a fixed commit and has failed since `Contact` last
+     changed (a stale check).
