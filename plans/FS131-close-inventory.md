@@ -3700,3 +3700,16 @@ reason by the close.*
      by `scripts/gate_report.py` and the fact audit before committing. Alternative weighed: merge `fs131-wop` into `fs131-w5c` and land OPEN with wave 5 (ruling
      401's plan). Why: the branch is `main` plus OPEN with no `sorry` anywhere, gate-ready now; landing it alone keeps wave 5's landing smaller and puts OPEN's
      counts on file; the procedure job then takes OPEN from `main`. Confidence: high. The slot is not refilled (Kooshi's halt, item 407). **Nothing is running.**
+410. **Restart (2026-10-06), on Kooshi's word**: *"Alright. […] we're clear to move forward for a while. […] for now, let's forge ahead as normal with
+     3 subagents."* Staffing: three Opus slots (item 323), unchanged. **Restart checks** (the handoff's list): `/tmp` was wiped (a reboot) and the rescue folder
+     of item 407 is in place; `main`, `fs131-w5`, `fs131-w5c`, `fs131-w5k`, `fs131-wop`, `fs131-w4ba` each equal their `origin` tip, every tree clean; the
+     toolchain is unchanged (`leanprover/lean4:v4.32.0`); no `lake` running.
+411. **Rulings: the three slots, filled from the queue of the handoff.** (a) **FS131-CC2**, lane C's continuation on `fs131-w5k` (item 406 (d)). (b)
+     **FS131-IR1**, `stuckRun_ne_univ` and the procedure's last steps on `fs131-w5c` (item 403). (c) **FS131-OL1**, OPEN's landing on `main` from `fs131-wop`
+     (item 409). (d) **Amending item 409's last clause**: the procedure job merges `origin/fs131-wop` at `a20bb6f5` into `fs131-w5c` directly, as ruling 401
+     planned, instead of waiting to take OPEN from `main`. Alternative weighed: launch IR1 only after OL1 lands. Why: `a20bb6f5` is an ancestor of whatever OL1
+     lands (it adds gate registrations on top, by fast-forward), so the later merge of `main` into wave 5 meets no conflict from it, and the two jobs run side
+     by side. Confidence: high. (e) **`exists_arcStep`'s partial away bend**: if the out-only case with a partial witness needs N2-TAN's tangent bend
+     (`bend_away`, open on `fs131-w4ba` at `71cca146`), IR1 states it as a `sorry` child and proves the step over it; the bend itself stays queued with its
+     own implementer. Alternative weighed: IR1 proves the bend too. Why: it is a construction of its own (E5 § 4) and would take the whole budget. Confidence:
+     medium-high. In flight after the launches: 3.
