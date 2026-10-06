@@ -216,3 +216,47 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-06, at launch) — your branch now stands on wave 6's first half, landed and proved
+
+Nothing above is withdrawn but where an item below says so; the base moved under you while this brief waited.
+
+1. **Your branch was fast-forwarded** from `6fc27fa1` to `4ae5bd36`: the wave's fourth planner merged `main` into the wave's line after
+   the wave's first half landed there (inventory items 558, 561). Your tree was untouched and unstarted, and the third pass's four
+   modules are byte-identical to `6fc27fa1` (`git diff`, mine). Every "statement check against `6fc27fa1`" above now reads **against
+   `4ae5bd36`**. The branch as given has **34** `sorry` leaves, not 65 — seventeen yours (four in `CoverHull`, thirteen in `Parallel`); the other thirty-one were proved by five implementers
+   and passed the full gate. Your tree's build is a copy of the planner's at `4ae5bd36`, so the build as given should rebuild nothing.
+2. **The fourteen modules beneath you are theorems now — cite them, re-declare nothing, edit none.** Two names changed at the landing,
+   and the plan and records you read may still use the old ones: `polarRegion_isOpen` and `polarRegion_isPreconnected` were folded
+   into these two, the same statements binder for binder:
+
+> theorem isOpen_polarRegion (z : ℂ) {r : ℝ} {φ ψ : ℝ → ℝ} (hφ : ContinuousOn φ (Ioo 0 r))
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6l/Proofs/HadwigerNelson/Plane/Saturated/FanBuild.lean
+
+> theorem isPreconnected_polarRegion (z : ℂ) {r : ℝ} {φ ψ : ℝ → ℝ} (hφ : ContinuousOn φ (Ioo 0 r))
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6l/Proofs/HadwigerNelson/Plane/Saturated/FanBuild.lean
+
+3. **Your statement check reads the kernel's statements** (inventory item 556; `LEAN.md` § Searching — Lean, last bullet): a section
+   `variable` enters a theorem only if its statement mentions it, so a leaf can lack a hypothesis its file shows, and a comparison of
+   text cannot see it. `#check` each leaf before you prove it — with `lake env lean` under the slot, the output saved under your
+   `data/` folder — and each head again at your last stage. A leaf whose kernel statement lacks a binder its row reads is a message to
+   me before you prove it: proving the wider statement is not the job.
+4. **The fourth planner is working on the wave's line now** — a fresh pass over the third pass's definitions and six more rows, in
+   modules of its own. It does not edit your files. If its pass finds that a statement of yours should change, I send it to you as a
+   second amendment; until then the statements stand as given.
+5. **Item 3 of "Done means" is superseded in one respect and sharpened in another.** `pinch` is no longer on another branch: it is
+   proved in your own tree, and the cell where the planner suspected its proof reads more than the cover gives is this one:
+
+> theorem hasTwoDiscsAt_of_out_out {A B N : Set ℂ} (hN : IsOpen N) (hcover : (N : Set ℂ) ≤ᵐ[volume] (A ∪ B : Set ℂ))
+> — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6l/Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
+
+   The fourth planner has since read that cell (inventory item 561, quoted below; read it whole): it holds with the cover alone, and the
+   kernel route it names is the landed lemma applied to `A \ B` and `B`, then weakened. It is proving that under the name
+   `hasTwoDiscsAt_of_out_out_of_cover` in a module of its own on another branch — an argument until it is built, in its own words.
+   **Do not declare that name.** If I have sent you its commit by the time you reach `pinch_of_cover`, merge it and cite it; if not,
+   prove the cell as a helper under a name of your own and say so in your report — the join folds the pair. Attack the argument before
+   you lean on it: nobody but its author has checked it. You still do not edit the landed `Pinch` module.
+
+> 561. **FS131-K6d, by message mid-job: its merge of the landed `main` is in, at `4ae5bd36`; and the whiff on `pinch_of_cover` is a route, not a statement defect** (source: K6d's message to "main", 2026-10-06; commit `4ae5bd36` on `origin/fs131-w6`, fetched).
+> — source: plans/FS131-close-inventory.md
+

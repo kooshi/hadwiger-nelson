@@ -6759,3 +6759,28 @@ reason by the close.*
      `59ce6b0c` is its readback stage; `origin/main` is not its ancestor — checked): the three branches for I6L, I6Z,
      I6K wait for its hash. In flight: 3 (I7A, K6d, I8A) + the special-purpose slot (T5). **Next into a free
      standing slot: FS131-L10B**, launch-ready.
+561. **FS131-K6d, by message mid-job: its merge of the landed `main` is in, at `4ae5bd36`; and the whiff on `pinch_of_cover` is a route, not a statement defect** (source: K6d's message to "main", 2026-10-06; commit `4ae5bd36` on `origin/fs131-w6`, fetched).
+     **The merge, by its word**: one conflict, `ARCHITECTURE.md`, both sides kept; no Lean file conflicted; build exit 0,
+     470 batches, 34 warnings, each "declaration uses sorry" (`CoverHull` 4, `Parallel` 13, `Centre` 7, `Accumulation`
+     10); `dupnames` OK; `check_architecture` PASS; not done, said so: a `#check` of the 34 leaves. **The out–out cell**
+     (`hasTwoDiscsAt_of_out_out`, landed `Pinch`): true with the cover alone — a point of the lens in `A` would lie
+     outside `A`'s own disc — so the landed docstring's sentence that almost-disjointness is read there is wrong as a
+     claim about the statement; its kernel route: the landed lemma at `A \ B` and `B`, then weaken. It is proving that
+     as `hasTwoDiscsAt_of_out_out_of_cover` in a module of its own — "an argument until it is" built, its words.
+     **My receipt**: `4ae5bd36` equals `origin/fs131-w6`; its parents are its Stage 16 and `main` at `f2ad1a4f`, and
+     the landed tip `e618ee65` and `6fc27fa1` are ancestors; under `Proofs/` it differs from the landed `main` by the
+     third pass's four modules and `Proofs.lean` and nothing else (`git diff --name-status`); those four are identical
+     to `6fc27fa1` (`git diff --stat`, empty); `sorry` at the commit by the handoff's grep: 10, 7, 4, 13 — 34. Not
+     checked by me: its build log (not yet committed), the argument on the cell. **Done on it, mine**: `fs131-w6l`,
+     `fs131-w6z`, `fs131-w6k` fast-forwarded from `6fc27fa1` to `4ae5bd36` (`git merge --ff-only`; each tree was
+     clean and unstarted), pushed; each tree's build replaced by a copy of the planner's at that commit (no `lake`
+     running in its tree before or after the copy). **Rulings.** (a) **`pinch_of_cover` stands as the third pass
+     stated it** (the planner's finding; no deriver's question). Confidence: high — the argument is four lines and is
+     being put through the kernel. (b) **The cover's implementer cites the planner's lemma if I have sent its commit
+     by the time it reaches that leaf, and otherwise proves the cell as a helper under a name of its own**; a pair
+     the join folds. Alternative: make the leaf wait for the planner. Why not: the leaf is one of the four that
+     re-price the rest of the job. Confidence: high. (c) A docstring correction owed in the landed `Pinch` (the
+     sentence on almost-disjointness), for wave 6's tidy job. (d) The three third-pass briefs each carry a dated
+     Amendment 1 (generator `mk-i6k-amend.py`): the moved base, the fourteen modules beneath them proved, the two
+     folded helper names, the kernel-level statement check, and per job what the landing supersedes. No reply
+     sent to the planner: it asks none.
