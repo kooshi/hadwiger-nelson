@@ -5976,6 +5976,22 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.CircleColouring.link_val_right_side
 #print axioms HadwigerNelson.Plane.CircleColouring.link_val_left_side
 
+/-! ## FS-131 wave 5 (job FS131-IA1) — the bends in the form the arc step reads (`Plane/ValidMap/BendStep`)
+
+The last two records are open children (`sorry`): the horn clause for the collar bend, and the away bend in collar form. -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.Γ_eq_of_degree_clause
+#print axioms HadwigerNelson.Plane.ArcMap.r2_notMem_region
+#print axioms HadwigerNelson.Plane.ArcMap.radiusTwoArc_inter_dom_subset_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.radiusTwoArc_disjoint_openArc
+#print axioms HadwigerNelson.Plane.ArcMap.isR2Arc_of_fixed
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.free_of_isClean
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_isClean
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_isR2Arc
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_le
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_hornCount_le
+#print axioms HadwigerNelson.Plane.ArcMap.bend_away_part
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

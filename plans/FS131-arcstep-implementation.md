@@ -5,7 +5,22 @@
 
 ## Theorems this phase proved
 
-(Filled stage by stage; each line: the declaration, its module, its axioms.)
+All in `Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean`, namespace `HadwigerNelson.Plane.ArcMap`; each **[kernel]** on
+`[propext, Classical.choice, Quot.sound]` (Stage 4's print, `data/fs131/ia/IAAxioms4.out`):
+
+- `r2_notMem_region` — no radius-2 point over a constant-sided unit arc of a valid map lies in the inner colour's class.
+- `radiusTwoArc_inter_dom_subset_Γ` — an (R2) witness arc lies in `Γ` wherever it lies in the domain.
+- `radiusTwoArc_disjoint_openArc` — a witness arc misses the open part of a free unit arc.
+- `isR2Arc_of_fixed` — **question (5)** (FS131-KL1's; `exists_arcStep`'s last clause): a bend by a homeomorphism fixing `Γ` off the open arc keeps (R2) arcs.
+- `CollarFit.map_isR2Arc` — question (5) for the collar bend.
+- `IsRingArc.free_of_isClean` — the collar bend's `hfree` from cleanness.
+- `CollarFit.map_isClean` — the collar bend of a clean map is clean.
+- `CollarFit.map_degree_le` — the repaired degree clause of `exists_arcStep` for the collar bend, where it is read.
+- `Γ_eq_of_degree_clause` — no-go for the withdrawn degree clause (not a claim about a live theorem).
+
+Stated, **not proved** (`sorry`): `CollarFit.map_hornCount_le`, `bend_away_part`. Found, at **[hand]**, one mind: `exists_arcStep`'s degree
+clause false at every instance (D1; its kernel half is the no-go above and `CollarFit.degree_openArc` with `map_lens`); its bad-count
+clause false on a fragment with infinitely many bad arcs (D2). Both ruled by Keryx (2026-10-06): the repaired statement is Stage 3.6.
 
 ## Stage 1 — SAVED (FS131-IA1): the readback, the as-given build, what I may change
 
@@ -213,3 +228,112 @@ hnb hT (show (0 : ℝ) < 1 / 2 by norm_num)`; l. 1146–1151, the `pot_le` bulle
 (not compiled by me: `Procedure.lean` is not mine to edit; the two changed lines are the `obtain` of `hdegs` and the `pot_eq` rewrite.)
 
 ## Stage 3 — SAVED (FS131-IA1)
+
+## Stage 4 — SAVED (FS131-IA1): `BendStep` — question (5) proved, the collar bend's step forms, two open children; the handover
+
+### 4.1 The module (`Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean`; imports `Limit`, `UnitArc`, `BendCollar`, `OpenMove`; upstream of `Procedure`)
+
+Stated against the repaired `exists_arcStep` (3.6). `badCount`, `IsMaxRingArc` and `treatPts` are `Procedure`'s, downstream, so the forms
+here are at the level of ring arcs, (R2), degrees and colours; the counts are the assembly's.
+
+**Proved** (no `sorry`; statements in the file):
+- `r2_notMem_region` — in a valid map no radius-2 point over a constant-sided unit arc lies in the inner colour's class (interior
+  angles by `ne1_region` against the ring point; the ends by openness). No witness is assumed.
+- `radiusTwoArc_inter_dom_subset_Γ` — an (R2) witness arc lies in `Γ` wherever it lies in the domain.
+- `radiusTwoArc_disjoint_openArc` — a witness arc (in the domain) misses the open part of any unit arc near whose interior points `Γ` is
+  `ω(P)` alone (`Arc.finite_inter_sphere_or_eq_circ` on `Arc.circ Q 2 a b`; an infinite interval of angles; `e` injective on `[a, b]`,
+  `l60_le`).
+- **`isR2Arc_of_fixed` — question (5)** for every bend by a homeomorphism that is the identity off a set `K ⊆ dom`, fixes `Γ` off the open
+  arc and carries `coloursAt`: an (R2) arc of `F` about `Q` whose ring arc survives, the colours at `Q` unchanged, is (R2) in the bent
+  map. It applies as it stands to `bend_away_part`'s map.
+- `CollarFit.map_isR2Arc` — the same for the collar bend, from `map_R2`, `homeo_eq_self`, `homeo_fix_Γ`, `sub_dom`, `free_open`.
+- `IsRingArc.free_of_isClean` — in a clean map `Γ` is `ω(P)` alone near each interior point of a constant-sided unit arc: the collar bend's
+  `hfree`, which the step has from `hc`.
+- `CollarFit.map_isClean` — the bent map of a clean map is clean: **no cleaning after a collar bend**, so `cleanKeep` is not needed in the
+  arc step.
+- `CollarFit.map_degree_le` — the repaired degree clause where it is read (off the collar: kept; on the open arc: `2 → 1`; at the ends: kept).
+- `Γ_eq_of_degree_clause` — the no-go for the withdrawn clause (its docstring says so).
+
+**Open children** (`sorry`, both stated for a planner or the assembly, routes in their docstrings):
+- `CollarFit.map_hornCount_le` — the horn clause for the collar bend, in the arc step's form.
+- `bend_away_part` — the away bend with the tangent bend, in collar form.
+
+Spec examples: the no-go at the idle pair; `r2_notMem_region` at `l60Frag`'s ring arc (`l60Frag_valid`, `l60Frag_isRingArc`).
+`isR2Arc_of_fixed`'s hypotheses are inhabited by the collar bend (`CollarFit.map_isR2Arc`), `CollarFit`'s by `collarModel` (`BendCollar`).
+
+### 4.2 The build and the receipt
+
+- **Build** (slot 40 GiB, 8 cpus, `BATCH=4`), the real one (the lakefile's options in force): **OK — 457 of 457 batches, 2 modules rebuilt
+  (`BendStep`, `Proofs`), 3 with warnings, 8 min 5 s, exit 0** (`build/gate/build/20261006T050543Z-1193250.log`; driver log
+  `data/fs131/ia/build-stage4.log`; the build before the docstring notes were corrected: `build-stage4-first.log`, also OK). The five
+  warnings are `declaration uses 'sorry'`: `BendStep` l. 285 (`CollarFit.map_hornCount_le`), l. 307 (`bend_away_part`); `Procedure` l. 795,
+  l. 812; `Terminal` l. 3592. Iteration before it (`lake env lean`, never evidence): one error (a `NeBot` instance), one deprecated name.
+- **Axioms** against that build's oleans (`data/fs131/ia/IAAxioms4.lean` → `IAAxioms4.out`, `slot.py --mem 12 --cpus 2 -- lake env lean`,
+  exit 0; IR1's `tools/fs131_ir_axsum.py … --expect-sorry CollarFit.map_hornCount_le,bend_away_part,exists_arcStep`, `IAAxioms4-summary.txt`,
+  PASS): **13 records — 10 on the standard three or fewer (my nine proved theorems and `bend_toward_collar`), 3 through `sorryAx`, exactly
+  the three expected, 0 other.** **Control**: with the horn child left off the expectation list the summarizer exits 1 naming it
+  (`IAAxioms4-control.txt`); the three `sorryAx` records are the print's own positive control.
+- **The map**: `ARCHITECTURE.md` row `Plane/ValidMap/BendStep`; `tools/check_architecture.py` PASS (`arch-stage4.txt`); with `OpenMove` taken
+  out of the row's Imports cell it FAILED naming `Plane/ValidMap/BendStep` (`arch-stage4-control.txt`), then PASS on the restored row.
+- **Receipt**: a block "FS131-IA1" of 11 records in `scripts/Axioms.lean`, above `=== PURCHASED ===` (the last two are the open children:
+  the gate fails on them until they are proved, as it should).
+- **Statements**: `git diff --stat 90030972 -- Proofs Proofs.lean` is `BendStep.lean` (new) and one import line; `UnitArc.lean`,
+  `Procedure.lean`, `Terminal.lean` and the move modules are untouched. No `axiom`, no `native_decide`. I ran no gate, merged nothing into
+  `fs131-w5c`, touched nothing on `main`, and left no process running.
+- **Notes** (LEAN.md § The gate, the inhabitant rule; ruling 427 (d)): the module header names `l60Frag` and `collarModel` for the hypotheses
+  they satisfy and says that no Lean model is named for an (R2) witness or for a clean map carrying a ring arc — open gate items.
+  *Slip of my own, corrected before the stage was saved*: `isR2Arc_of_fixed`'s first docstring called the collar bend an "inhabitant of
+  the hypotheses"; it inhabits the bend's hypotheses, not `hR`.
+
+### 4.3 The assembly's work list — what `exists_arcStep`'s proof in `Procedure` still needs, clause by clause
+
+**0. Statement and imports.** Replace `exists_arcStep`'s statement by 3.6's (rulings on D1, D2) and the two consumer lines in
+`exists_procStep`; `Procedure` imports `Plane/ValidMap/BendStep` (its `ARCHITECTURE.md` row). The docstring's "then `exists_clean`" and
+"`bend_toward`, `bend_away_whole`" go: the step is a collar bend, uncleaned.
+
+**1. The split.** `by_cases hout : c' ∈ F.coloursAt P`. If not: the toward collar bend (2). If so, `hnb` gives `c ∉ F.coloursAt P`:
+`bend_away_part` (3).
+
+**2. Toward (`F' := hfit.map`, `hfit` from `exists_collarFit hF hmax.1 hout (hmax.1.free_of_isClean hc) hε`).**
+
+| clause | from | owed |
+|---|---|---|
+| `ε` | `ε < δ`, `ε < 1/2`, and `cthickening ε α ∩ T ⊆ α` | the choice: `hT (cthickening (1/2) α)` finite, its points off the compact `α` at positive distance |
+| `Valid`, `IsClean` | `hfit.map_valid hF`, `hfit.map_isClean hc` | — |
+| `LocalStep` on `cthickening ε α` | `agreesOff`: `hfit.map_agreesOff`, mono in the set; `keep`, `new`: `hfit.map`'s arcs are `collarArcs F P θ₁ θ₂ R = F.cutArcs P θ₁ θ₂ ∪ {collarArcA, collarArcB}` (`rfl`) | **W1** `a ∈ F.arcs → Disjoint a.carrier (ringArc P θ₁ θ₂) → a ∈ F.cutArcs P θ₁ θ₂` (an arc of `ω(P)` missing `α` is its own piece: `m := ⌊(θa − θ₂)/(2π)⌋`, `cutLo`, `cutHi`); **W2** `b ∈ F.cutArcs P θ₁ θ₂ → b ∉ F.arcs → ∃ a ∈ F.arcs, (a.carrier ∩ ringArc P θ₁ θ₂).Nonempty ∧ b.carrier ⊆ a.carrier` (`cutArcs_subset`; a proper piece's arc holds `r(θ₁)` or `r(θ₂)`); **W3** `lensSet P θ₁ θ₂ R ⊆ collarK P θ₁ θ₂ R' R''` (`lensCurve_subset` is on file); the lens boundary's two arcs lie in `lensCurve` (`CollarFit.lensCurve_subset`'s neighbours in `CollarMap`) |
+| `IsModification` | `dom`: `rfl`; `hfit.map_ringArcsWithin`; `coloursAt_subset` by place: off the closed lens `coloursAt_eq_of_agreesOn` (`isClosed_closedLens`), in `lensSet` one colour (`map_lens`), on the lens boundary at open angles degree `2` (`map_degree_lensCurve`, `exists_hasDegree_of_mem_dom`), at an end `homeo_fix_Γ` and `pushforward_coloursAt` | the case split |
+| `badCount P` drops | the maximal ring arcs about `P` of `F'` are `F`'s other than `(θ₁, θ₂)`: R1 (`map_R1`), R2 (`map_R2`), R3 (`map_R3`); (Q) by the colours at `P` (`P ∉ collarK`: `dist_of_mem_cthickening_ringArc`, `homeo_eq_self`, `pushforward_coloursAt`); (R2) by `hfit.map_isR2Arc`; finiteness `badCount_lt_top hF hP P` | **W5** two maximal ring arcs about `P` with different parameters (starts in `[0, 2π)`) have disjoint open arcs (`IsRingArc.sides_eq`, `IsRingArc.union`, `l60_le`); the `encard` step (`Set.encard_lt_encard`-shaped: a subset missing one element of a finite set) |
+| no site created | repeated colour: `hfit.map_hasRepeatedColour` with the place of `h⁻¹ x` (interior: none; on `α°`: `degree_openArc`'s `c = c'`, false in a clean map — `c ≠ c'` from `hc` at a point of `α°` and `free_of_isClean`'s argument); horn: `map_hornCount_le` and **W6** | **W6** "a horn at `x` gives horn count `≥ 1`, and horn count `≥ 1` gives a horn" at a chart (`Near.hasHornCount_chart`, `Near.horn_index`; IR2's vertex step needs the same) |
+| degree at `T` (repaired) | `hfit.map_degree_le hF (hx) hm`, `hx` from the choice of `ε` and `hfit.sub_thick` | — |
+| horn count | **`CollarFit.map_hornCount_le`** | the open child |
+| `Q ∈ T`, `Q ≠ P`: colours | `Q ∉ collarK`: equal; `Q ∈ α°`: `map_lens` gives the one colour `c'`, an outer colour of `F` at `Q` (`hmax.1.2.2`); `Q` an end: fixed | the case split |
+| `Q ∈ T`, `Q ≠ P`: bad count | **W4** `Q ≠ P → F.IsRingArc Q a b d d' → Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂)` (the proof of `radiusTwoArc_disjoint_openArc` with `Arc.circ Q 1 a b`: its second alternative is `Q = P`); then `IsRingArc Q` is the same in both maps (R1, R2), so `IsMaxRingArc Q` is (unfold); (Q) by the colours; (R2) by `hfit.map_isR2Arc`; `Set.encard_le_encard` | W4 and the unfolding |
+
+**3. Away (`bend_away_part`).** The same table through its clauses, with `K` for `collarK`: `isR2Arc_of_fixed` applies verbatim; the degree
+clause at a point of `T ∩ α°` by its "fixed, or interior of colour `c`" clause; `P`'s count by the last clause — **W7**: an `M`-ring arc
+about `P` inside `α` has every interior angle in a contact interval, so (`r2Contacts` closed in `[θ₁, θ₂]`: `closure (region c)` is closed)
+its radius-2 arc lies in `closure (F.region c)`, which is `closure (M.region c)` there (`P + 2e(θ) ∉ K`), and with `c' ∈ coloursAt P`,
+`c ∉ coloursAt P` it is (R2) in `M`; and `(θ₁, θ₂)` itself is no ring arc of `M` (`hR` gives a non-contact angle, open, so an interior
+one, which is on no unit arc of `M` about `P`).
+
+**4. One assembly for both.** The toward bend satisfies every clause of `bend_away_part`'s conclusion with `K = collarK` (compact:
+`isCompact_polarSet_Icc`; `homeo_mem_collarK`; R3 gives the last clause vacuously; "fixed or interior" by `map_lens` with colour `c'` in
+place of `c`) except the horn count as an iff. So the shortest assembly states one lemma over those clauses with the gaining colour as a
+parameter and proves the arc step from it twice. I did not write that lemma: its statement mentions `badCount`, `Procedure`'s.
+
+### 4.4 Re-pricing
+
+The reading and the module took one session beside the merge. Left for the arc step: the assembly (W1–W7 and the table), **M–H, one
+session** — no geometry beyond W1, W2 (parameter arithmetic) and W5; `CollarFit.map_hornCount_le`, **M** (the chart at an end: `F`'s chart
+from `localSectors`, one curvature changed, `isSectorChart_of`; `map_degree_end`'s docstring names the surgery, its proof avoids it);
+`bend_away_part`, **H, a planner pass then one to two sessions** (the outward collar, the tangent ends at contacts, R1 at a pinch point,
+the composition over the gaps).
+
+### 4.5 Drafts for the front page
+
+None: wave 5 is not at its gate and this job ran none. For the filing that does: `exists_arcStep`'s statement changes (3.6) before it is
+proved, so no ledger row regrades on it yet; the inventory owes a correction to item 422's remark that the arc step does not share the
+vertex step's domain gap (D2), and to KL1's § 3.1 row and § 3.3's `bend_step` row ("then `exists_clean`"; `bend_toward`, `bend_away_whole`):
+the step is a collar bend, uncleaned.
+
+## Stage 4 — SAVED (FS131-IA1)
