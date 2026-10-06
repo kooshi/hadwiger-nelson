@@ -5400,3 +5400,34 @@ reason by the close.*
      gives such a combinatorial map**. (ii) (b) is a correction owed to FS114-N2-FIVE's entry (the nonempty map), with the wave's
      errata; (a) and (c) are readings, logged. (iii) The flag on N4-LENS, if its second pass confirms it, is a statement defect in
      a filed entry and comes to me as a message then.
+
+513. **FS131-K7 done at its Stage 4: wave 7's first planning pass — route T's seven rows stated on a combinatorial map, three proved in
+     part or whole, the shared word "simple" fixed; the thirteen four-colour rows disposed and left to a second pass** (planner;
+     harness 474k by the task notice; record `fs131-w7`'s `plans/FS131-w7-kernel-plan.md` Stages 1–4; report
+     `data/fs131/reports/FS131-K7.md`; commits `ee497fcd`, `611ffa39`, `b5ef0e39`; pushed, tree clean). **Modules**: `Plane/SimpleOn`
+     (items 508, 511), `Plane/RouteT/Basic`, `Rainbow`, `Count`. **Proved**: FS114-N114-EULER's identity at every Euler
+     characteristic (`CMap.euler_count`), FS114-Y-EDGE whole at a wider class, FS114-N114-RD's display on contact sets. **Stated**:
+     FS114-N2-FIVE, -N114-ROOM, -N2-ENDS (the identity), -N3-JOINT (first clause and the assignment form) on `CountData`, 19 leaves
+     in `Count`, and RD's anchoring clause (one leaf). **Not stated**: the thirteen four-colour rows (their foundation — tactic
+     edge, Reuleaux bowtie, pinwheel — is the second pass's), FS114-N2-ENDS's second sentence, N3-PAY. Its mid-job findings are item
+     512. **My receipt**: tip `b5ef0e39` equals `origin/fs131-w7`, tree clean; `sorry` by the handoff's grep: `SimpleOn` 0, `Basic`
+     0, `Rainbow` 1, `Count` 19 — the twenty reported; `SimpleOn.lean` unchanged since `611ffa39` (`git diff`); the full build log
+     (`build/gate/build/20261006T130945Z-40504.log` in the tree) ends "Build completed successfully (5812 jobs)", 0 warnings other
+     than `sorry`; no `axiom`, no `native_decide` in the four modules, by grep; `euler_count` read at `Basic.lean` ll. 171–173 — the
+     identity of item 512 (1), with `−3·chi2` for `−6χ`. Not checked by me: the proofs beyond the build; the dispositions against
+     the arguments (it read thirteen rows from their entries only, and says so). **Items**: predictions scored (one not met — four
+     of six short rows proved; three met); slips, the job's, disclosed (a late push; thirteen arguments unread; `CountData` has no
+     Lean inhabitant yet — two derived by hand in its § 3.5, owed before the gate); a stub to mint only if route T is ever
+     published through its torus form ("periodic valid maps to combinatorial torus maps", priced about 1M tokens).
+514. **Rulings on K7's held items, and its slot.** (a) **Its plan's § 4.3, six dispositions, each at its stated default**: the
+     counting rows on a combinatorial map (ruled, 512 (i)); FS114-N4-LEMMAS closed by OWN, LENS, TOP, FIVE and ARC's first clause,
+     the two sentences about arguments recorded as readings; FS114-N5-GRING's two exclusions as corollaries of FS114-Y4-RSTOPALL
+     with N5-BENDG its own declaration; FS114-Y6-HALF merged into Y4-SIDES and Y4-W if the second pass's reading confirms the cone
+     hypotheses are all it adds; N3-FACE and Y4-UPDOWN one declaration; ROOM's first sentence and HALF's last as readings.
+     Alternative: hold each until its argument is read. Why defaults now: they are dispositions from entries, the second pass reads
+     every argument before stating the rows, and a default that fails there is a message, not a redo. Confidence: medium — they
+     rest on entries only. (b) **A second planning pass, FS131-K7b** (the four-colour foundation and the thirteen rows' skeleton;
+     the N4-LENS flag first), and **an implementer, FS131-I7A**, on `Plane/RouteT/Count`'s nineteen leaves with the two
+     `CountData` inhabitants, from a branch cut at `b5ef0e39`; RD's `anchor` rides with K7b's first implementer. Briefs not
+     written. (c) **Slot → FS131-K8** (wave 8's planner, on `fs131-w8` at `611ffa39`), launched 2026-10-06. In flight: 1 (I10C) + 1
+     (I6A) + 1 (K8) = 3.
