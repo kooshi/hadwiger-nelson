@@ -7007,3 +7007,36 @@ reason by the close.*
      excluded case — can a tile of a four-colour vertex hold every direction in its cone, with two antipodal
      hubs? — is a question for the wave's stub lines, not a job. (d) (2) and (3) are generalizations for the
      wave's errata; the restatement is the landing's (ruling 563 (b)). Replies sent: one to each job.
+569. **FS131-I8A done at its Stage 5: wave 8's empty class is proved — `emptyNS` and its six leaves, `doubleTip`, `star_recip`; `star_anti` left open at its old statement** (implementer, Opus; harness 556k and 77 minutes by the task notice; record `fs131-w8a`'s `plans/FS131-I8A-implementation.md`; report `data/fs131/reports/FS131-I8A.md`; four commits, tip `e1e0c74d`; pushed, tree clean).
+     **Proved on the standard three** (`Plane/RingCalculus/`; built, not gated): **`emptyNS`** — `F : ArcMap 6`, valid,
+     non-Siamese, covering the closed unit disc about `p`, at least four colours at `p`, a ring with no arc of Γ,
+     gives `False` (FS129-SR3-EMPTY-NS, carrying FS116-Y4-EMPTY and -Y4-OBST); `v6_hubs`, `v6_hug`, `v6_count` (a
+     certified computation by the kernel's own evaluation, 12.3 s, no native evaluation), `doubleTip`, `star_recip`
+     (FS116-N2-RECIP); four new modules (`HubCount`, `TilesAt`, `SoleTip`, `RingColour`). **Generalizations**: item
+     563's lemma at every `k`; `v6_hubs` reads no finiteness of the ring's Γ points; `emptyNS` reads one conjunct of
+     the count; the ring-colour lemmas hold for any ring whose germs each lie in one class. **A correction to the
+     plan**: its route for `v6_hug` lacks a step (a second arc may be tangent at the tip's edge, invisible to
+     cones); not taken. **Not proved**: `star_anti` (ruling 568 (a) not applied: its budget); `outerAdj` (not its).
+     **Owed**: `emptyNS`'s nine-colour Lean model (ruling 530 (c)). **My receipt**: tip equals `origin/fs131-w8a`,
+     tree clean; outside `data/`, `plans/`, `tools/` it changed `Empty`, `Star`, four new modules, `Proofs.lean`,
+     `ARCHITECTURE.md`, `scripts/Axioms.lean` — not `Basic`; `sorry` by the handoff's grep: `Star` 1, `Empty` 1; its
+     last build log ends "OK — 468 of 468 batches, 5 module(s) rebuilt", `EXIT=0`, no warning but the two `sorry`;
+     its three axioms prints parsed by script — 22, 65 and 67 records, none outside the standard three but its
+     planted control, which shows `sorryAx`; **the heads the base declared in `Empty` (11), `Star` (12) and `Basic`
+     (40) are textually unchanged, and no `include` or `omit` line was added (by script)**; `emptyNS`'s statement
+     read by me against the row's sentence. Not checked by me: the proofs beyond the build; its elaborated
+     statement check's code; the two kernel tables. **Predictions scored**: its leaves ran under the plan's lines
+     (`v6_hubs` 330 against 600–900, `emptyNS` 75 against 200, `star_recip` 45 against 150); 1,538 lines in all,
+     for which the calibration's line gives 509k against 556k measured. **Credit**: a route for the hug and the
+     double tip that reads three hypotheses fewer than either entry; a gap in a hand proof located to the line and
+     reported as neither a refutation nor a defect until classified; the caution that two change points 60° apart
+     are held by no fragment. **Slips**: one of its own, corrected; one of my brief's (two table rows quoted under
+     the wrong section number). **Rulings.** (a) **`star_anti`'s ruled change and its proof, with `outerAdj`, are
+     the wave's next implementer's** (FS131-I8B; brief not written; its record § 5.5 has the route, about 200
+     lines), on a branch cut from the second planner's hand-back, which first merges `origin/fs131-w8a` at
+     `e1e0c74d` (the planner's branch holds `368a2c1a`). Alternative: ask the running planner to merge it now. Why
+     not: it reads none of the later commits, and a merge mid-pass spends its context. Confidence: high. (b) Its
+     drafts (ledger rows 148 and 150, two § B lines) are held for the filing. (c) `tools/fs131_i8a_stmt.py` is a
+     second elaborated statement checker; the shared one is chosen at the tidy job (ruling 564 (g)). (d) **Slot →
+     FS131-I6L** (wave 6's cover hull and parallels, on `fs131-w6l` at `2aa3f720`), launched 2026-10-06. In
+     flight: 3 (L10B, K8b, I6L).
