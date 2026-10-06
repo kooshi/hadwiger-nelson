@@ -566,3 +566,47 @@ message); `main`; the gate scripts' recorded counts; no new `axiom`, no `native_
 above, or run the full gate.
 
 ## Stage 12 — SAVED (FS131-IR1)
+
+## Stage 13 — SAVED (FS131-IR1): `a20bb6f5` (`origin/fs131-wop`'s tip: `main` plus `OpenMove`) merged into `fs131-w5c`
+
+`git merge --no-ff --no-commit a20bb6f5` at `61a0b31d` (one merge base, `1be5d622`: `main` as M5 merged it). **The merge commit is `533195c4`**
+(parents `61a0b31d`, `a20bb6f5`). `origin/fs131-wop` had moved to `dff76573` (FS131-OL1's landing work) when I fetched; every check below names
+`a20bb6f5`, never the moving ref. Git merged `Proofs.lean` (one import line added: `OpenMove`) and `ARCHITECTURE.md` (one row added) by itself; **one
+conflict**, in `scripts/Axioms.lean` (this branch's wave-5 blocks against OPEN's block, both above `=== PURCHASED ===`), resolved by keeping both
+blocks, ours first, one blank line between. The other 40 files are `fs131-wop`'s alone (`OpenMove.lean`, E6's and IO's records, tools and data).
+
+### 13.1 The checks
+
+- **Files, byte for byte** — `tools/fs131_ir_merge_check.py` (mine: every path of the three trees; a file changed by one side is that side's blob;
+  the three keep-both files have exactly ours' + theirs' − base's lines, no import, axioms record or module row twice): **PASS, 15,679 files**, on
+  the index before the commit (`data/fs131/ir/merge-check.txt`) and on `533195c4` after it (`merge-check-committed.txt`). `--self-test`: a byte in
+  `OpenMove.lean`, a line added to `Procedure.lean`, `Proofs.lean`'s `OpenMove` import dropped, a doubled axioms record, a both-changed file outside
+  the three — **each FIRED naming its file**, the unplanted run PASS (`merge-check-selftest.txt`). *Tool defects of my own, caught by the
+  self-test before use*: the first version read the merged side through the working tree and failed on 11 symlinks (fixed: blob hashes from the
+  index); and its self-test demanded exactly one failure line per plant, so the doubled record, which trips two checks of one file, read "did not
+  fire" (fixed: every failure names the planted file).
+- **Statements, three-way** — `tools/fs131_wl_mergestmts.py 61a0b31d a20bb6f5` (WL1's, run unchanged): **7,460 names, 0 mismatches or conflicts, 0
+  base conflicts — PASS** (`mergestmts.txt`); `--plant` (`HasDegree.eq`'s merged statement altered): MISMATCH, exit 1 (`mergestmts-plant.txt`).
+- **No declaration twice** — M6's `tools/fs131_m6_dupes.py 61a0b31d a20bb6f5 1be5d622`: 0 NAME/STATEMENT pairs. **Its `--plant` cannot fire with
+  this merge's refs** (exit 0: its plants re-declare `exists_shave_aux`, `isPreconnected_hornSet` and `branchPt_mem_closure_sector_pair`, all
+  declared at this merge's fork, so they read as inherited or STATEMENT-OLD) — a control whose failure is unreachable here. So
+  `tools/fs131_ir_dupes.py`: M6's tool copied under my prefix with only the plants changed to names new at `a20bb6f5` (`ArcMap.exists_open`
+  re-declared; `ne_hornSet_of_interior_coneAt`'s statement under a new name; the same with two binders made explicit; a docstring line
+  "class exists_open"). Unplanted: **0 NAME/STATEMENT pairs**, 11 STATEMENT-OLD/PRIVATE and 5 CONCL candidates, all M6's known ones
+  (`dupes-premerge.txt`, exit 0). `--plant`: **exactly the three it must** (NAME, STATEMENT, STATEMENT-NORM), the docstring line not reported, exit 1
+  (`dupes-plant.txt`).
+- **The map**: `tools/check_architecture.py` PASS, exit 0 (`arch-stage13.txt`; `OpenMove`'s row is `fs131-wop`'s).
+- **The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 457 of 457 batches, 2 modules rebuilt (`OpenMove` 10 s, `Proofs`), 5 modules with
+  warnings, all 9 warnings `declaration uses 'sorry'`**, 8 min 21 s, exit 0 (`build/gate/build/20261006T024750Z-282826.log`; driver log
+  `data/fs131/ir/build-stage13-merge.log`).
+- **Axioms**, against that build's oleans (`data/fs131/ir/IRAxioms13.lean` → `IRAxioms13.out`, `slot.py --mem 12 --cpus 2 -- lake env lean`, exit
+  0; read by `tools/fs131_ir_axsum.py … --expect-sorry exists_vertexStep,exists_arcStep,exists_terminalSeq,exists_terminalMap,stuckRun_ne_univ`,
+  `IRAxioms13-summary.txt`, PASS): **12 records, 7 on the standard three, 5 through `sorryAx`, 0 other.** `exists_open`,
+  `Near.open_allowedCone`, `Near.open_degree_horns`, `HasHornCount.eq`, `exists_clean`, `mergeAvailable_of_bothKind`, `run_hornBoundsQR` on
+  `[propext, Classical.choice, Quot.sound]`; **controls on `sorryAx`**: `exists_vertexStep`, `exists_arcStep`, `exists_terminalSeq`, and through
+  them `exists_terminalMap`; `stuckRun_ne_univ`. The summarizer's `--self-test` (`axsum-selftest.txt`): `sorryAx` planted in a standard record, a
+  primed record dropped, a foreign axiom, an expected `sorry` that is standard — each FIRED, the control PASS.
+
+No statement of either side changed; no `axiom`, no `native_decide`.
+
+## Stage 13 — SAVED (FS131-IR1)
