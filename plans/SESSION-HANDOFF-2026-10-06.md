@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–439 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–441 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -42,7 +42,7 @@ planted-picture models land (queue item 2).
 | job | tree and branch | what | brief | on its hand-back |
 |---|---|---|---|---|
 | **FS131-IR3** | `.claude/worktrees/fs131-w5c`, `fs131-w5c` (from `a5a12a0b`) | IR2's successor: first ruling 430's restatement of `exists_arcStep` and the merge of `origin/fs131-w5s`; then the vertex step's four cases (`exists_rayStep`, `exists_shaveStep`, `exists_mergeStep`, `exists_openStep`), each `sorry` under a proved `exists_vertexStep` (item 435). About two sessions | `data/fs131/briefs/FS131-IR3-vertex-cases.md` | expect cases left: brief a successor (IR4) from its record's last stage (Stage 22 on) |
-| **FS131-E7** | the main tree, on `main` (`plans/`, `data/` only) | a deriver: a model or a contradiction for four hypothesis sets with no known example (`a4six`, `straddlers_third`, `nb4p`, `flank_ne_of_doublyShadowed`), and whether a terminal plane map with a stuck vertex exists at `k ≥ 7` | `data/fs131/briefs/FS131-E7-models.md` | a contradiction is a statement finding: trace its readers, rule, tell the planner; a model goes to FS131-KM1 as a dated amendment to its brief |
+| **FS131-IA2** | `.claude/worktrees/fs131-w5y`, `fs131-w5y` (from `fs131-w5a` at `78eba0b4`) | the arc step's assembly without `Procedure.lean` and without the missing bend: one new module downstream of `BendStep` — the weakest clause family the step reads from a bend, the step's clauses from it, the toward bend's instance, W1–W4, W6, W7; the two count clauses stop at the ring-arc level (item 439) | `data/fs131/briefs/FS131-IA2-arc-assembly.md` | its report ends with the last lines for `Procedure`: they go to whoever holds that file after the vertex step's cases (IR3 or its successor); a change to the clause family is relayed to KA1 |
 | **FS131-KA1** | `.claude/worktrees/fs131-w5a`, `fs131-w5a` (from `78eba0b4`) | a planner (`debruijn`): the outward collar bend `bend_away_part` (`sorry` in `BendStep`; item 433) — its statement attacked first, then a skeleton of named children, a plan and price per child, its inhabitant; and the horn child `CollarFit.map_hornCount_le`. May weaken the horn clause to `∃ j' ≤ j` (pre-ruled, 438 (b)) | `data/fs131/briefs/FS131-KA1-bend-away.md` | brief one or two implementers from its handoff (it says how to split by file); a false clause is a message mid-job: rule, and tell IA2 if the clause family changes |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. If the session restarted, resume a job from its record's last SAVED stage with
@@ -50,12 +50,13 @@ a fresh agent on the same brief.
 
 ## 4. Queue for the next freed slots, in order (item 427; re-ordered by ruling 434)
 
-0. **FS131-IA2, the arc step's assembly without `Procedure.lean`** (`debruijn-implementer`, `model: "opus"`) — **next** (rulings 438 (c), 439): brief
-   written and gated, `data/fs131/briefs/FS131-IA2-arc-assembly.md`; its tree `.claude/worktrees/fs131-w5y` (branch `fs131-w5y` from `fs131-w5a` at
-   `78eba0b4`) is made, built and pushed. Then FS131-KM1 (item 3 below). FS131-KA1 (the outward bend's planner) is running; its implementers
-   follow its hand-back.
+0. **FS131-KM1, the example maps' planner** (`debruijn`) — **next** (item 3 below; rulings 441 (c)): its brief is rewritten to carry FS131-E7's
+   four models (one construction: the brick map relabelled, pictures planted by `recolour`; `P₅` in place of the completed bowtie), gated; its tree
+   `fs131-wm` is fast-forwarded to `main`. After it: implementers for the outward bend from FS131-KA1's hand-back; the last lines of the arc step
+   in `Procedure` from FS131-IA2's.
 1. **The freed lane's continuation**, if it left leaves on wave 5's path (IR2's will).
-2. **FS131-E7**, a short Ephodos job (`ephodos`): QA4's rank 9 and rank 10's question (`plans/FS131-QA4-audit.md` § 6.2) — a model or a contradiction
+2. **FS131-E7 — done** (items 440–441: a model for each of the four sets, no contradiction; a terminal plane map with a stuck vertex at twelve
+   colours; `nb4p` restated with one conjunct at the remedy pass; two questions held for Poros). It was: a short Ephodos job (`ephodos`): QA4's rank 9 and rank 10's question (`plans/FS131-QA4-audit.md` § 6.2) — a model or a contradiction
    for the backgrounds of `a4six`, `straddlers_third`, `nb4p` (is `sixFrag` one?) and for a doubly shadowed horn under Condition 5 with `Covers`
    (`flank_ne_of_doublyShadowed`); whether a terminal valid plane map with a stuck vertex exists at some `k ≥ 7`. **Brief written and gated**
    (item 428): `data/fs131/briefs/FS131-E7-models.md`, claim list `data/fs131/claims-E7.md`; it writes on `main` under `plans/` and `data/` only.
