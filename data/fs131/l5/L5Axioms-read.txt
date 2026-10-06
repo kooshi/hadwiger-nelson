@@ -1,0 +1,25 @@
+exactly the standard three   HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.map_localStep
+exactly the standard three   HadwigerNelson.Plane.ArcMap.bend_away_part
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_arcStep
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_terminalMap
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_red
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_terminal
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_procStep
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_terminalSeq
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.map_hornCount_le
+exactly the standard three   HadwigerNelson.Plane.ArcMap.exists_arcBend_toward
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFit.arcBend
+exactly the standard three   HadwigerNelson.Plane.ArcMap.bend_away_gap
+exactly the standard three   HadwigerNelson.Plane.ArcMap.bend_away_subdiv
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R1
+exactly the standard three   HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2
+CONTROL (the print before the merge) HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs: fails — NOT EXACTLY THE THREE: foreign ['sorryAx']
+CONTROL (the print before the merge) HadwigerNelson.Plane.ArcMap.CollarFit.map_localStep: fails — NOT EXACTLY THE THREE: foreign ['sorryAx']
+CONTROL (the print before the merge) HadwigerNelson.Plane.ArcMap.bend_away_part: fails — NOT EXACTLY THE THREE: foreign ['sorryAx']
+CONTROL (the print before the merge) HadwigerNelson.Plane.ArcMap.exists_arcStep: fails — NOT EXACTLY THE THREE: foreign ['sorryAx']
+CONTROL (the print before the merge) HadwigerNelson.Plane.ArcMap.exists_terminalMap: fails — NOT EXACTLY THE THREE: foreign ['sorryAx']
+CONTROL (the print before the merge) HadwigerNelson.Plane.ArcMap.exists_red: fails — NOT EXACTLY THE THREE: foreign ['sorryAx']
+CONTROL (the print before the merge) HadwigerNelson.Plane.ArcMap.exists_terminal: fails — NOT EXACTLY THE THREE: foreign ['sorryAx']
+RESULT: PASS — 17 of 17 asked records on exactly the standard three

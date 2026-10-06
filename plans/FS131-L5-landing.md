@@ -62,3 +62,72 @@ FS131-OL1's Stages 16–20 and drafts in `plans/FS131-IO-implementation.md` (on 
 - `ringPt_inj_of_abs_sub_lt` (`BendAway`, namespace `Plane`) and `ArcMap.ringPt_ne_of_abs_sub_lt` (`BaseDense`, three uses, all
   in `BaseDense`): on the joined line `BendAway` is upstream of `BaseDense` (through `Terminal`, `Procedure`, `ArcStep`,
   `BendStep`, `BendGap`), so the upstream one is the one to keep.
+
+## Stage 1 — SAVED (FS131-L5)
+
+## Stage 2 — SAVED (FS131-L5): `fs131-w5z` merged (`f1117627`); the build green with no warning; the wave whole
+
+### 2.1 The merge
+
+`git merge --no-ff --no-commit origin/fs131-w5z` at `d4f04ff3` (re-fetched: unmoved since the trial), parents `5d3a739f` and
+`d4f04ff3`, committed as **`f1117627`**. One conflict, as trialled: `scripts/Axioms.lean`, resolved keep-both — this line's blocks
+(FS131-M7, FS131-RP1), then that line's (FS131-BA1, BA2, BA3), one blank line between; 5,221 `#print axioms` records
+(5,129 + 33 + 52 + 7), none twice.
+
+- **File by file** (`python3 tools/fs131_m7_merge_check.py dd8c2c33 HEAD origin/fs131-w5z`, on the staged merge;
+  `data/fs131/l5/merge-check.txt`): **16,339 files, 1 changed by both sides, 0 failures, PASS**.
+- **Its negative controls.** M7's `--self-test` cannot run on this merge: its third plant needs an import line of `Proofs.lean`
+  that THEIRS added, and `fs131-w5z` adds none ("PLANT TARGET ABSENT", `merge-check-selftest.txt`; the tool is another job's
+  and is not edited). `tools/fs131_l5_merge_plants.py` plants on TREES built from the staged merge through a scratch index (no
+  ref, no working-tree file, not the real index) and runs the same check with `--rev` (`merge-plants.txt`): the staged merge
+  passes; `BendGap.lean` set to this line's blob, `BendCollar.lean` set to that line's blob, a record of `scripts/Axioms.lean`
+  dropped, the same record doubled — each **fails naming its file**.
+- **The index held the merge and nothing else**: against the trial's tree (`5b7c1adf`) the staged tree differed in Stage 1's own
+  nine files and the resolved `scripts/Axioms.lean`; no tracked file was modified outside the index.
+- **`ArcBend.of_away`'s hypothesis is `bend_away_part`'s conclusion** (`python3 tools/fs131_m7_away_clause.py`,
+  `away-clause.txt`): EQUAL, 18 clauses; `--self-test`: three plants fired (`away-clause-selftest.txt`).
+- **The names FS131-RP1 removed**: no use under `Proofs/` (eleven names; six hits, all in comments that record a removal).
+- **Doubled names and statements, by M7's text scanner** (`python3 tools/fs131_m7_dupes.py --whole Proofs/HadwigerNelson/Plane
+  a20bb6f5`, `dupes-whole-merge.txt`): 72 files, 4,371 public declarations; **0 NAME-TWICE, 0 STATEMENT-TWICE**, 5 NORM-TWICE
+  (the tool's known artefacts). The gate's own check is the kernel-side scan, Stage 5.
+
+### 2.2 The build of `f1117627`
+
+Under the slot (driver `data/fs131/l5/build-merge.log`; full log `build/gate/build/20261006T085723Z-2775704.log`, copy
+`data/fs131/l5/build-merge-full.log`): **exit 0, "464 of 464 batches, 14 module(s) rebuilt, 0 module(s) with warnings, 10m0s",
+"Build completed successfully (5803 jobs)"**. Rebuilt: `LensOut`, `CollarMapOut`, `HornChart`, `BendAway`, `R2Cap`, `BendGap`,
+`BendStep`, `ArcStep`, `Procedure`, `Terminal`, `Dense`, `BaseWalk`, `BaseDense`, `Proofs`. **`warning` lines: 0** (`grep -c`; the
+as-given log of Stage 1 holds 36, the control on the count). The log's three `error` lines are its lines 3, 5, 7, the up-to-date
+probe's "target is out-of-date and needs to be rebuilt", which starts the walk.
+
+A number I stopped on: the log gives `BendGap` 8.4 s and `Terminal` 17 s, against builds of ten minutes and more in the earlier
+records. Measured: `lake env lean` on `BendGap.lean` alone takes 10.9 s of wall clock (31.7 s of CPU); the ten minutes are the
+walk over 464 batches. The times are real.
+
+### 2.3 The receipt that the wave is whole
+
+- **`sorry`**: `grep -rnP '^\s*sorry\s*$|:= sorry|by sorry' --include='*.lean' Proofs/ Proofs.lean`: **0**. The wider `\bsorry\b`
+  finds five lines, all prose (`data/fs131/l5/sorry-merge.txt`): `main`'s four (`Packed` l. 266, `Plane/Cover` l. 33,
+  `Plane/CoverExamples` l. 13 and l. 6541) and `BendStep` l. 347, a docstring's remark on a wave-4 branch.
+- **Axioms** (`data/fs131/l5/L5Axioms.lean` → `L5Axioms.out`, read by `tools/fs131_l5_axioms.py`, which asks for EXACTLY the
+  standard three; `L5Axioms-read.txt`): **17 of 17 on exactly `[propext, Classical.choice, Quot.sound]`** —
+  `LocalStep.of_cutArcs`, `CollarFit.map_localStep`, `bend_away_part`, `exists_arcStep`, `exists_terminalMap`, `exists_red`,
+  `exists_terminal` (the brief's seven); `exists_procStep`, `exists_terminalSeq`, `CollarFit.map_hornCount_le`,
+  `exists_arcBend_toward`, `CollarFit.arcBend`; `bend_away_gap`, `bend_away_subdiv`, `CollarFitOut.awayBend`,
+  `CollarFitOut.map_R1`, `CollarFitOut.map_R2`.
+- **The control that fires**: the same reader on FS131-M7's print of the line before the merge
+  (`data/fs131/m7/M7AxiomsFinal.out`) fails on each of the brief's seven, naming `sorryAx`. `--self-test`: five plants on the
+  new print, each fired naming its record — a record deleted, given `sorryAx`, given a native axiom, with `Quot.sound` removed (a
+  subset is not "exactly"), doubled (`L5Axioms-selftest.txt`).
+- These prints are `lake env lean` against the build's oleans: a receipt for this stage. The gate's audit is Stage 5.
+
+### 2.4 Instruments prepared for the gate, and their first controls
+
+- `data/fs131/l5/count-modules.lean`: the declarations of every module as the vacuity scan counts them (`isOurs`,
+  `isRefutation`, `isNegationConcl`, `isGeneratedDecl` copied verbatim from `scripts/Vacuity.lean`). **Run against `main`'s built
+  library** (the worktree `fs131-wop`, whose `Proofs/` is `origin/main`'s; read only): `TOTAL declarations=11173
+  refutations=118` — `main`'s gated scan line, count for count (`count-modules-main.out`). So the counter reproduces the scan.
+- `data/fs131/l5/census.lean`: for every predicate or structure of the `Plane` modules a theorem may take as a hypothesis, what
+  the library holds about it (binder sites, closed refutations, closed witnesses), for `scripts/Vacuity.lean`'s IN/OUT procedure.
+  Not run yet.
+- `data/fs131/l5/tidy_edits.py`: Stage 3's edits as data; `--dry` on the merged tree: 52 of 52 match once. Not applied.
