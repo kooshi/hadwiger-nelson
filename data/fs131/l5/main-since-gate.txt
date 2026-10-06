@@ -1,0 +1,6 @@
+git diff --name-only 5358f6cf 290f32d8 (main since the gated merge):
+data/fs131/briefs/FS131-K10-wave10.md
+data/fs131/briefs/scripts/mk-k10.py
+plans/FS131-close-inventory.md
+plans/SESSION-HANDOFF-2026-10-06.md
+outside plans/, data/, .claude/, BIBLIOGRAPHY.md, LEDGER.md: 0

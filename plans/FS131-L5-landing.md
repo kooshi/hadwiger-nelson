@@ -5,9 +5,24 @@ Tools: `tools/fs131_l5_*.py`. Report: `data/fs131/reports/FS131-L5.md`.*
 
 ## Theorems this phase proved
 
-This job proves no new theorem: it joins the branch that holds the proved outward bend to wave 5's line, makes the ruled tidies, and
-takes the whole wave through the gate. The wave's heads and their axioms, read from the gate's saved log, are listed at the stage that
-ran the gate.
+This job proves no new mathematics: it joined the branch that holds the proved outward bend to wave 5's line, made the ruled
+tidies, took the whole wave through the gate and landed it on `main` (`3f5765b6`; gated commit `1351ebc2`). Axioms are read from
+the gate's saved audit log (`build/gate/axioms/20261006T094617Z-3066074.log`, copy `data/fs131/l5/receipt-axioms-final.log`). All
+in `HadwigerNelson.Plane.ArcMap` unless a namespace is given; each on `[propext, Classical.choice, Quot.sound]`.
+
+**Restated by this job** (each lost an unread `hF : F.Valid`; strictly stronger; rulings 457 (b), 465 (a)):
+- `CollarFit.sides_end`, `CollarFit.sides_eq`, `CollarFit.map_R1`, `CollarFit.map_R2` (`Plane/ValidMap/BendCollar`) — [kernel].
+- `CollarFit.map_hornCount_le` (`Plane/ValidMap/BendStep`) — [kernel].
+- `CollarFitOut.map_R1`, `CollarFitOut.map_R2` (`Plane/ValidMap/BendGap`) — [kernel].
+
+**Landed on `main` by this job, proved by the wave's implementers** (the heads; the whole wave is 1,309 hand-written theorems,
+each audited — § 5.3):
+- `exists_terminalMap` (`Plane/ValidMap/Procedure`) — [kernel]: every valid map of the plane has a terminal valid modification.
+- `exists_terminal` (`Plane/ValidMap/Terminal`) — [kernel]: FS112-N2-TERM at six colours, with its clauses on vertices and runs.
+- `exists_red` (`Terminal`) — [kernel]: FS112-N2-RED.
+- `bend_away_part` (`Plane/ValidMap/BendStep`) — [kernel]: FS112-N2-AWAY with N2-TAN, in collar form.
+- `exists_arcStep` (`Procedure`), `LocalStep.of_cutArcs` (`Plane/ValidMap/BendAway`), `CollarFit.map_localStep`
+  (`Plane/ValidMap/ArcStep`) — [kernel].
 
 ## Stage 1 — SAVED (FS131-L5): the readback, the tree as given, the trial merges
 
@@ -344,3 +359,102 @@ is flagged STALE by both digests (3889 → 5196; 11173 → 12999, 118 → 182, 7
 - `ArcMap.bend_away_part` — FS112-N2-AWAY with N2-TAN in collar form, as FS131-BA3 read it clause by clause; unchanged here.
 - `ArcMap.exists_arcStep` — as FS131-M7 read it; unchanged here.
 These are the kernel's statements. What they are not: a statement that a terminal map with a stuck vertex exists, or does not.
+
+## Stage 5 — SAVED (FS131-L5)
+
+## Stage 6 — SAVED (FS131-L5): the landing — `main` fast-forwarded to `3f5765b6`
+
+`origin/main` had moved once more, to `290f32d8`: three commits (inventory items 472–473, a brief and its generator, the
+handoff). `git diff --name-only 5358f6cf 290f32d8` names `plans/FS131-close-inventory.md`, `plans/SESSION-HANDOFF-2026-10-06.md`,
+`data/fs131/briefs/FS131-K10-wave10.md`, `data/fs131/briefs/scripts/mk-k10.py` — **nothing outside `plans/` and `data/`**
+(`data/fs131/l5/main-since-gate.txt`), so by ruling 415 (b) the gate was not re-run. Merged as `3f5765b6` (`git merge --no-ff`,
+no conflict). Checked before the push, at `3f5765b6`: `origin/main` (`290f32d8`) an ancestor of `HEAD`; the branch as given
+(`8f2280d0`) an ancestor of `HEAD` (never rewritten); `git diff --name-only 1351ebc2 HEAD -- . ':!plans' ':!data'` empty — the
+gate's inputs are the gated commit's; no tracked file modified. **`git push origin HEAD:main`: `290f32d8..3f5765b6`, a
+fast-forward** (`data/fs131/l5/push-main.txt`); after it `origin/main` = `origin/fs131-w5c` = `3f5765b6`. No `sorry` reached
+`main`. No background process is left running: the builds and the gate ran under the slot and exited.
+
+**What is on `main` now**: wave 5 — 29 new modules and 18 changed under `Proofs/` (41,000 lines), 1,829 new declarations,
+1,375 of them theorems, 0 `sorry`; its imports in `Proofs.lean`, its rows in `ARCHITECTURE.md`, its 1,312 records in
+`scripts/Axioms.lean`, its carrier entry in `scripts/Vacuity.lean`, the baseline header's new counts; the wave's jobs' tools,
+records and logs. With `conj_e` declared once, `scripts/dupnames.sh` passes on `main` (it failed there since FS131-T4's merge).
+
+## Stage 6 — SAVED (FS131-L5)
+
+## Drafts for the front page (FS131-L5)
+
+The gated commit is `1351ebc2`; the landed tip `3f5765b6` differs from it in `plans/` and `data/` alone. The saved gate logs
+are in the worktree `.claude/worktrees/fs131-w5c` under `build/gate/`; the copies are committed under `data/fs131/l5/`:
+`receipt-axioms-final.log`, `receipt-vacuity-final.log`, `receipt-dupnames-final.log`, the three self-tests'
+(`receipt-<gate>-self-test-final.log`), `build-final-full.log` over the full build `build-tidy-full.log`. To re-read:
+`python3 scripts/gate_report.py axioms data/fs131/l5/receipt-axioms-final.log data/fs131/ol/axioms-receipt-landed.log CLAUDE.md`
+and `python3 scripts/gate_report.py vacuity data/fs131/l5/receipt-vacuity-final.log data/fs131/ol/vacuity-scan-landed.log
+scripts/vacuity-baseline.txt CLAUDE.md`. Drafts 1 and 2 were applied to a scratch copy of `CLAUDE.md` and read "match" by both
+digests (§ 5.6).
+
+1. **`CLAUDE.md` § Trust ledger**, the words "the current audit reads 3889 clean and 5 declared purchases, and 4 imported (and 14
+   axiom-free; 3,912 records at OPEN's landing, FS131-OL1, 2026-10-06)" become: "the current audit reads 5196 clean and 5 declared
+   purchases, and 4 imported (and 16 axiom-free; 5,221 records at wave 5's landing, FS131-L5, 2026-10-06)". From
+   `data/fs131/l5/axioms-final.log`: "audited: 5221 records — 5196 clean on the standard axioms, 16 axiom-free, 4 imported
+   (resting on a declared outside theorem), 5 declared purchase(s)" and "==> axioms: OK — 5196 clean, 16 axiom-free, 4 imported, 5
+   declared purchase(s)". (The date is the logs' UTC date, ruling 415 (a): `20261006T094617Z`.)
+2. **`CLAUDE.md` § The gate**, the two count lines "`declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0 stale=0
+   declared=3 witnessed=32 generic=747 unknown=2`" become "`declarations=12999 refutations-skipped=182 sites=1130`, `vacuous=0
+   stale=0 declared=3 witnessed=32 generic=1093 unknown=2`". From `data/fs131/l5/vacuity-final.log`: "scanned: declarations=12999
+   refutations-skipped=182" and "sites:   sites=1130  vacuous=0  stale=0  declared=3  witnessed=32  generic=1093  unknown=2". The
+   baseline's two entries are unchanged (`hexShell_plane5`, `hexShell_plane6`).
+3. **`scripts/vacuity-baseline.txt`'s header** (written by this job from `scripts/gate_report.py header`, now on `main`):
+   "#   declarations=12999  refutations-skipped=182  sites=1130" / "#   vacuous=0 stale=0 declared=3 witnessed=32 generic=1093
+   unknown=2" — the digest's "recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)". No entry added
+   or removed.
+4. **`tools/claude_md_fact_audit.py`'s `GATE_CHANGES`**, after the `(("3784", "5"), ("3889", "5"))` entry:
+   `(("3889", "5"), ("5196", "5")): "FS-131 wave 5's landing (FS131-L5; .claude/worktrees/fs131-w5c/build/gate/axioms/20261006T094617Z-3066074.log, copy
+   data/fs131/l5/receipt-axioms-final.log, gated commit 1351ebc2): 5,221 records, 5,196 clean, 16 axiom-free, 4 imported, 5 purchases",`
+5. **`LEAN.md` § The gate's control counts**: no change — the axiom audit plants 23 ("==> axioms self-test: 23 controls"), the
+   vacuity scan sixty-two ("OK — all 62 controls behaved"), the doubled-name check fifteen ("OK — all 15 controls behaved"); no
+   carrier of wave 5 is tracked, so no control was added. **One sentence offered for the same section**, after "`#print axioms`
+   clean on the public surface (`scripts/axioms.sh`)": "Every hand-written theorem of a landing has a record there; a landing
+   checks it against the kernel's own list of the library's theorems (`data/fs131/l5/count-modules.lean`,
+   `tools/fs131_l5_records.py`), since a registration read from the source misses a line that does not begin with `theorem` (FS131-L5:
+   `@[simp] theorem limit_dom`)."
+6. **The open gate items at this landing** (ruling 427 (d), F3): each theorem below takes a hypothesis set that no Lean object
+   satisfies at once today, and says so in its docstring, naming the hand model. The list, with each docstring's sentence, is
+   `data/fs131/l5/open-gate-items.txt` (62 theorems whose docstrings name a hand model, an owed model or an open gate item; read
+   from the landed sources by script).
+   - **The four moves** — `exists_merge`, `exists_rayMerge`, `exists_shave` (`Plane/ValidMap/Contact`), their `_aux` forms
+     (`Plane/ValidMap/Moves`), `exists_open` (`Plane/ValidMap/OpenMove`), and the procedure's step forms over them
+     (`Plane/ValidMap/Procedure`: `exists_mergeStep`, `exists_mergeStep_aux`, `exists_rayStep`, `exists_shaveStep`,
+     `exists_shaveStep_aux`, `exists_openStep`, `exists_openStep_aux`, `exists_vertexStep`, `surgery_step`,
+     `not_isSite_of_branches`). Hand models: FS131-QA4 § 3.3 (`plans/FS131-QA4-audit.md`) for MERGE, MERGE-RAY and SHAVE;
+     FS131-E6's twelve-colour map (`plans/FS131-E6-derivation.md` §§ 3.1–3.3) for OPEN. Lean models `hornModel`, `twoHornModel`
+     are on the example maps' branch (inventory items 472–473), not on `main`.
+   - **The stuck family** — ten theorems of `Plane/ValidMap/FlankUA` (`not_outType_N_of_flankAbove_one`,
+     `not_outType_S_of_flankBelow_neg_one`, `srcG_of_shadow`, `srcH_of_shadow`, `region_near_of_inType`, `flank_ne_of_shadows`,
+     `horn_poles_contact`, `horn_bounds_of_noMerge`, `horn_bounds_of_interior_empty`, `hasSectors_one_of_contacts`) and nineteen
+     of `Plane/ValidMap/Terminal` (`stuck_flanks_ua`, `stuck_structure_ua`, `chainVertex_antipodal`, `cv_l0`,
+     `exists_horn_of_mem_coneAt_of_stuck`, `n3_end_four_colours`, `n3_end_bothKind`, `n3_end_of_not_inType`, `n3_end_chain`,
+     `upper_bounds_of_inType_N`, `stuck_turned_frame`, `stuck_structure_at_axis`, `c_ends`, `run_ends`,
+     `horn_flanks_of_isChainVertex`, `hornBoundsQR_of_isChainVertex`, `horn_colour_eq_of_isChainVertex`,
+     `eq_horn_colour_of_two_sectors`, `horn_upper_ne_one`). Hand model: FS131-E7's `P₅` at its stuck vertex
+     (`plans/FS131-E7-derivation.md` § 7), twelve colours. Lean model `stuckModel_hyps` is on `fs131-wmb`, through `sorryAx`
+     there (item 470).
+   - **The outward bend** — `bend_away_part`, `bend_away_subdiv` (`Plane/ValidMap/BendStep`); `bend_away_gap`,
+     `exists_lensOut_clear`, `CollarFitOut.map_R1`, `CollarFitOut.map_R2` (`BendGap`); `CollarFitOut.pushOutProfiles`
+     (`CollarMapOut`); `r2_side_dichotomy`, `exists_r2Subdiv` (`R2Cap`); `AwayBend.idle` (`BendAway`: an (R2) witness at a ring
+     arc); and `exists_arcStep` (`Procedure`). Model: `awayModel`, planned (`plans/FS131-bendaway-kernel-plan.md` § 5; the example
+     maps' lane, ruling 455 (a), FS131-MB2); the hand model `isoFrag` (FS112-ISO) is a fragment. For `exists_arcStep`, `l60Frag`
+     cleaned satisfies the local hypotheses at [hand] (FS131-QA4 § 4.3) and no model of all at once is on file.
+   - **FS131-E7's four** — `a4six` (`F₀`, the four-petal flower, § 3), `straddlers_third` (`F₁`, § 4), `nb4p` (on `F₁`, § 5; its
+     mirror clause at [hand], § 5.4) (`Plane/ValidMap/UnitArc`), `flank_ne_of_doublyShadowed` (`P₄`, nine colours, § 6;
+     `Plane/ValidMap/Contact`). No Lean object yet.
+   - **By design, not owed**: the 26 sites of `ArcMap.BaseCtx` and the other steps inside `row134BaseUA`'s refutation ("no model
+     expected", each naming the theorem that refutes the configuration); `exists_terminal`, whose hypotheses' satisfiability is
+     FS-114's open question, with its class at seven colours inhabited by `sevenBrickMap` (the filed F1 sentence).
+7. **Held for the milestone's filing** (as FS131-OL1's draft 6; not regraded by this job, and `LEDGER.md` was not read): the hand
+   statements this landing puts in the kernel on `main`, by the names their docstrings give — FS112-N2-TERM (`exists_terminal`,
+   over `exists_terminalMap`), FS112-N2-RED (`exists_red`), FS112-N2-AWAY with N2-TAN in collar form (`bend_away_part`; FS131-KA1's
+   § 2.5, C4 `exists_lensOut_clear`), the toward collar bend E4-BEND-UN with R1–R3 (`bend_toward_collar`), row 134's base with unit
+   arcs (`row134BaseUA`, `n3_base`), each on exactly `[propext, Classical.choice, Quot.sound]`, resting on no outside theorem and on
+   no hypothesis beyond its statement's. The wave's full row list is `ARCHITECTURE.md`'s rows of its 29 modules. FS131-BA2's and
+   BA3's records (`plans/FS131-BA2-implementation.md`) hold their own drafted ledger lines for the away bend. No Frontier line and
+   no Proof Atlas grade is drafted here: the milestone is not closed by one wave's landing.
