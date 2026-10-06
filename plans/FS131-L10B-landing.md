@@ -112,3 +112,96 @@ hypothesis forms; the third pass's three row modules; `fs131-t5`; `CLAUDE.md`, `
 here); a new `axiom`; `native_decide`.
 
 ## Stage 1 — SAVED (FS131-L10B)
+
+## Stage 2 — SAVED (FS131-L10B): the two merges; the joined tree builds with no warning
+
+### 2.1 The merges, each its own commit
+
+Each was made with `git -c merge.conflictStyle=diff3 merge --no-ff --no-commit <hash>`, resolved, checked, and then committed as a
+merge (two parents each). The trial of each was repeated on the commit it was merged into (`data/fs131/l10b/merge-trial-main.txt`,
+`merge-trial-wf1.txt`).
+
+| merge | commit | conflicts | merged by itself, both sides having changed it |
+|---|---|---|---|
+| `main` at `615c715c` into `2658107c` | **`214b30d5`** | `scripts/Axioms.lean` (one hunk, two adjacent additions, no base) | `ARCHITECTURE.md`, `Proofs.lean` |
+| `fs131-wf1` at `a61f0d14` into `74814a95` | **`6f3053dc`** | `ARCHITECTURE.md` (one hunk), `scripts/Axioms.lean` (one hunk) — the two the brief foresaw | `Proofs.lean`; and two sentences of `scripts/Axioms.lean`'s prose that only `fs131-wf1` had touched |
+
+**`origin/main` moved while the first merge was being made** (another session's fetch; the worktrees share refs): from `615c715c` to
+`996ab3ff`, three commits under `plans/` and `data/` (`git diff --name-only 615c715c 996ab3ff`: `data/` 1, `plans/` 2). The merge is
+of `615c715c`, named by hash; the rest is merged at the landing (Stage 6).
+
+- **The merge of `main`.** `scripts/Axioms.lean`: `main`'s eight wave-6 blocks in their place, this line's five blocks (FS131-K10b,
+  -I10D, -I10E, -I10F, -K10c) after them, above the `=== PURCHASED ===` banner (`tools/fs131_l10b_keepboth.py resolve
+  --theirs-first`). The three-way check on every path both sides changed, the two that merged by themselves included
+  (`tools/fs131_l10b_keepboth.py --self-test <file> HEAD 615c715c c20b57a0 <path>`; `keepboth-main.txt`, each exit 0): no marker;
+  every line stands exactly `ours + theirs − base` times — `scripts/Axioms.lean` 7,085 non-blank lines with `#print axioms` lines
+  **6,313 = this line's 5,948 + `main`'s 6,174 − the base's 5,809**, no name printed twice; `ARCHITECTURE.md` 737; `Proofs.lean` 275.
+  Its plants fire on each file (a line of theirs dropped: LOST; doubled: EXTRA; a marker left in: MARKER; in the file of records, a
+  record doubled: TWICE, and one dropped: COUNT). Against `main`'s files the merge is additions only (`git diff --numstat 615c715c`:
+  `ARCHITECTURE.md` 12 added, 0 removed; `Proofs.lean` 11, 0; `scripts/Axioms.lean` 154, 0).
+- **The merge of `fs131-wf1`: the joined state, not a side** (`data/fs131/l10b/resolve_wf1.py`: exact replacements, each refused
+  unless it matches once and the hunk has the shape expected).
+  - `scripts/Axioms.lean`, IMPORTED: Falconer's `declareImport` line and its four records are gone from the section (theirs deleted
+    them); Weil's `declareImport` line and its eight records stay (ours added them). Falconer's four, `falconer_lemma2_nonempty`
+    itself and `MetricalBoundary`'s fifteen are under CLEAN, beside wave 2's `FalconerReduction` records, where `fs131-wf1` entered
+    them. The section's sentence of current state — which `fs131-wf1` had rewritten to "The library declares no import at present …
+    so this section is empty", and which merged by itself — now reads: "The library declares one import at present, wave 10's
+    `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207, FS131-K10c), with eight records below; its first, wave 2's
+    `falconer_lemma2_nonempty`, is a theorem since FS131-IF1 (FS131-L10B's join)."
+  - `ARCHITECTURE.md` § 5, "Imported outside theorems": Falconer's row gone, Weil's row alone; `fs131-wf1`'s line "None at present:
+    the library declares no `axiom`. …" now reads "One at present. The library's first import, `[Falconer1981]` Lemma 2 (i)
+    (FS131-K2c), is a theorem since FS131-IF1 — `falconer_lemma2_nonempty`, proved in `Plane/MetricalBoundary` — and is no longer
+    in this table."
+  - **The check** (`tools/fs131_l10b_joined.py --self-test HEAD a61f0d14 ca598960`, new, this job's; `joined-wf1.txt`, exit 0):
+    (1) over `scripts/Axioms.lean`, `ARCHITECTURE.md` and `Proofs.lean` the three-way rule's faults are exactly the rewrites named
+    above (the lines of theirs rewritten read LOST, their rewritings EXTRA; six lines in all) and nothing else; (2) the
+    `declareImport` commands are exactly one, `HadwigerNelson.StandingFive.kloosterman_bound`; (3) the records between the IMPORTED
+    and CLEAN banners are exactly the eight; (4) `falconer_lemma2_nonempty` and the four that rested on it are each printed once,
+    under CLEAN; (5) the table has one row, and the section says neither "None at present" nor "declares no `axiom`". Six plants,
+    each fired with its word: Falconer's `declareImport` put back (DECLARE); one of Falconer's four put under IMPORTED (IMPORTED);
+    one of Weil's eight moved under CLEAN (IMPORTED); Falconer's row put back (ARCH); "None at present" put back (ARCH); a line of
+    theirs dropped from `Proofs.lean` (THREE-WAY). The check's first run read the `declareImport` line quoted as an example inside
+    the section's docstring as a second declaration — its fault, repaired (commands are read outside `/- … -/` blocks) before any
+    result was taken from it.
+  - `#print axioms` lines after it: **6,329 = 6,313 + `fs131-wf1`'s 5,825 − its base's 5,809**.
+  - `scripts/axioms-controls.txt` merged with no conflict and is `fs131-wf1`'s file whole (`git diff --quiet a61f0d14`): it expects
+    no declared import, and so describes neither `main` nor the joined tree. Its edit to the joined state is Stage 3's, red before
+    and green after.
+- **The index held the merge and nothing else** (`tools/fs131_l10b_mergeindex.py <hash> <the paths both sides changed>`;
+  `mergeindex-main.txt`, `mergeindex-wf1.txt`): `MERGE_HEAD` the named commit; no path unmerged; the staged paths exactly those
+  theirs changed since the base (326; 31); every one but the named paths taken whole from theirs (323; 28); the working tree equal
+  to the index. Controls run live at each merge, each exit 1 before the faithful run's exit 0: the resolved path not yet staged
+  (UNMERGED, DIRTY: `mergeindex-*-control-unstaged.txt`); the paths that merged by themselves not named (`BOTH sides changed, merged
+  unread: ARCHITECTURE.md`, `Proofs.lean`: `mergeindex-*-control-unnamed.txt`) — so no such path was committed without the
+  three-way check having read it.
+- A merge cannot be committed by path; each was committed whole after that check, and this job's logs went in commits of their
+  own by path (`74814a95`, `66b1b471`).
+
+### 2.2 No statement of any side changed
+
+No Lean file is changed by two sides (§ 1.3), so every Lean file of the joined tree is one side's file whole, shown by
+`git diff --quiet`: the fifteen files of `Arith/` this line holds (its eleven new modules, and `CharacterColouring`,
+`SpectralInputs`, `StationaryRatio`, `StandingFive`) equal `248f8f4f`'s; `Plane/FalconerReduction` and `Plane/MetricalBoundary`
+equal `a61f0d14`'s; and `git diff --name-only 615c715c HEAD -- Proofs Proofs.lean lakefile.toml lake-manifest.json lean-toolchain`
+names `Proofs.lean`, the eleven and the two and nothing else — every other Lean file is `main`'s. Byte-identity is stronger than a
+comparison of statements, and it is still a comparison of text: what the kernel holds of each head is Stage 4's.
+
+### 2.3 The build of the joined line
+
+`main`'s compiled modules were copied in from the last landing's idle worktree before the build (`rsync -a --update
+../fs131-w6j/.lake/build/ .lake/build/`; `data/fs131/l10b/rsync-w6j-build.txt`: 15 `.olean` files among those written, the fourteen
+of `Plane/Saturated/` and `Proofs`; that tree is at `e618ee65`, clean, its Lean inputs `main`'s; no process had its working
+directory there; the exit status that log prints is its filter's, not `rsync`'s — a slip of the runner, harmless: Lake checks every
+module's trace by hash, and it rebuilt all fourteen anyway, because `FalconerReduction`, which they depend on through `Plane/Slack`,
+changed). `.lake/build` stays this worktree's own directory.
+
+`data/fs131/l10b/build-merges.log` (`HEAD=66b1b471`, whose Lean sources are `6f3053dc`'s; no tracked file modified): **`build: OK —
+471 of 471 batches, 23 module(s) rebuilt, 0 module(s) with warnings, 11m17s`, `exit=0`**. The full log (`build-merges-full.log`)
+holds **0 `warning` lines** and ends "Build completed successfully (5932 jobs)". Rebuilt: `Plane/MetricalBoundary`,
+`Plane/FalconerReduction` and its dependents (`Plane/Slack`, `Plane/CoverExamples`, `Plane/YesLimit`, `Plane/ValidMap/Dense`, the
+fourteen of `Plane/Saturated/`, …), and `Proofs`. One build after the two merges: they change disjoint Lean files, and each merge
+was checked by script before the next was made. **This is the first tree to hold wave 6's first half, the second pass of wave 10
+with its import, and the proof of Falconer's lemma together, and the kernel accepts it** — no wave-10 module depends on
+`FalconerReduction`, and none of `Plane/Saturated/` on `Arith/`'s new modules.
+
+## Stage 2 — SAVED (FS131-L10B)
