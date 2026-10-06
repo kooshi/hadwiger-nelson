@@ -1,0 +1,196 @@
+APPLIES HadwigerNelson.Plane.cuspFrag_bend_away <- HadwigerNelson.Plane.ArcMap.bend_away_whole | APPLIED
+APPLIES HadwigerNelson.Plane.cuspFrag_bend_toward <- HadwigerNelson.Plane.ArcMap.bend_toward | APPLIED
+APPLIES HadwigerNelson.Plane.cuspFrag_bend_away <- HadwigerNelson.Plane.ArcMap.bend_toward | NOT-APPLIED
+APPLIES HadwigerNelson.Plane.shadowModel_flank_ne <- HadwigerNelson.Plane.ArcMap.flank_ne_of_doublyShadowed | APPLIED
+RECORD HadwigerNelson.Plane.cuspFrag_isRingArc | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.cuspFrag_coloursAt_I | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.cuspFrag_radiusTwo_disjoint | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.cuspFrag_bend_away | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.cuspFrag_bend_toward | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckArcs_nondegenerate | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckArcs_finite | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.frontier_stuckW_subset | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckCol_locallyConstant | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_valid | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_coloursAt | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_hasSectors | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_isHorn | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_flanks | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_contacts | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_not_mergeAvailable | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_not_rayAvailable | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_not_shaveAvailable | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_isStuck | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_hyps | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_terminal | SORRY-IN-OWN-FILES | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Stuck:HadwigerNelson.Plane.stuckModel_terminal]
+RECORD HadwigerNelson.Plane.stuckModel_no_unit_pair | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.stuckModel_partition | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_horn_cases | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.stuckModel_shadow | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.shadowArcs_nondegenerate | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.hornArcs_nondegenerate]
+RECORD HadwigerNelson.Plane.frontier_shadowW_subset | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.frontier_hornSet_subset]
+RECORD HadwigerNelson.Plane.shadowCol_locallyConstant | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_valid | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (2): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.frontier_hornSet_subset,
+ Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.hornArcs_nondegenerate]
+RECORD HadwigerNelson.Plane.shadowModel_condition5 | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (2): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.frontier_hornSet_subset,
+ Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.hornArcs_nondegenerate]
+RECORD HadwigerNelson.Plane.shadowModel_flanks | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (3): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts,
+ Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.frontier_hornSet_subset,
+ Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.hornArcs_nondegenerate]
+RECORD HadwigerNelson.Plane.shadowModel_doublyShadowed | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (3): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts,
+ Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.frontier_hornSet_subset,
+ Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.hornArcs_nondegenerate]
+RECORD HadwigerNelson.Plane.shadowModel_flank_ne | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (3): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts,
+ Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.frontier_hornSet_subset,
+ Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.hornArcs_nondegenerate]
+RECORD HadwigerNelson.Plane.shadowModel_mem_hornArcs | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_hornSet_not_mem_hornArcs | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_dists | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_not_mem_arcs | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_disjoint | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_isOpen | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_shadowCol | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_shadowW_subset | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (1): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts]
+RECORD HadwigerNelson.Plane.shadowModel_mem_region | SORRY-VIA-PAINT-ONLY | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (3): [Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.brickBase_mem_interiorPts,
+ Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.frontier_hornSet_subset,
+ Proofs.HadwigerNelson.Plane.Models.Paint:HadwigerNelson.Plane.hornArcs_nondegenerate]
+RECORD HadwigerNelson.Plane.shadowModel_tanHeight | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_apart | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_flank_source | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_no_unit_pair | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_not_isUnitArc | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_witness_real | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.shadowModel_shadow | STANDARD-THREE | axioms: [propext,
+ Classical.choice,
+ Quot.sound] | sorry leaves (0): []
+RECORD HadwigerNelson.Plane.awayModel_hyps | SORRY-IN-OWN-FILES | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (3): [Proofs.HadwigerNelson.Plane.Models.Bends:HadwigerNelson.Plane.awayArcs_nondegenerate,
+ Proofs.HadwigerNelson.Plane.Models.Bends:HadwigerNelson.Plane.awayModel_hyps,
+ Proofs.HadwigerNelson.Plane.Models.Bends:HadwigerNelson.Plane.frontier_awayW_subset]
+RECORD HadwigerNelson.Plane.awayModel_r2Contacts | SORRY-IN-OWN-FILES | axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] | sorry leaves (3): [Proofs.HadwigerNelson.Plane.Models.Bends:HadwigerNelson.Plane.awayArcs_nondegenerate,
+ Proofs.HadwigerNelson.Plane.Models.Bends:HadwigerNelson.Plane.awayModel_r2Contacts,
+ Proofs.HadwigerNelson.Plane.Models.Bends:HadwigerNelson.Plane.frontier_awayW_subset]

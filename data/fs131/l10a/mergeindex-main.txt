@@ -1,0 +1,32 @@
+### control: only the conflict path named — the two paths that merged by themselves must be reported (BOTH)
+merge of 294603ae8714ddd7446eccc7b5a9e1c9d65272e8 (294603ae) into 56e7456b, base ff377526: staged 1542 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 1539 taken whole from theirs
+  BOTH sides changed, merged unread: ARCHITECTURE.md
+  BOTH sides changed, merged unread: Proofs.lean
+  DIRTY (working tree differs from the index): tools/fs131_l10a_keepboth.py
+merge-index: FAIL (3 fault(s))
+exit=1
+### the faithful run: the three paths both sides changed named, each read below
+merge of 294603ae8714ddd7446eccc7b5a9e1c9d65272e8 (294603ae) into 56e7456b, base ff377526: staged 1542 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 1539 taken whole from theirs
+  DIRTY (working tree differs from the index): tools/fs131_l10a_keepboth.py
+merge-index: FAIL (1 fault(s))
+exit=1
+### Proofs.lean against main (numstat: added, removed), and the added lines
+4	0	Proofs.lean
++import Proofs.HadwigerNelson.Arith.CharacterColouring
++import Proofs.HadwigerNelson.Arith.SpectralInputs
++import Proofs.HadwigerNelson.Arith.StationaryRatio
++import Proofs.HadwigerNelson.Arith.StandingFive
+### ARCHITECTURE.md against main (numstat), and the first 60 characters of each added or removed line
+4	0	ARCHITECTURE.md
++| `Arith/CharacterColouring` | **FS-131 wave 10 (FS131-K10)
++| `Arith/SpectralInputs` | **FS-131 wave 10 (FS131-K10; pro
++| `Arith/StationaryRatio` | **FS-131 wave 10 (FS131-K10; pr
++| `Arith/StandingFive` | **FS-131 wave 10 (FS131-K10; prove
+### scripts/Axioms.lean against main (numstat)
+145	0	scripts/Axioms.lean
+### against this line's tip: Proofs.lean and ARCHITECTURE.md removed lines (must be none of this line's)
+-| `Plane/Basic` | The direction `e θ = exp (θ i)` (`norm_e`, `e_add`, `e_add_two_pi`), th
+### the faithful run again, with this job's edited tool set aside (it is not a path of the merge; it is committed by path after the merge)
+merge of 294603ae8714ddd7446eccc7b5a9e1c9d65272e8 (294603ae) into 56e7456b, base ff377526: staged 1542 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 1539 taken whole from theirs
+merge-index: PASS
+exit=0

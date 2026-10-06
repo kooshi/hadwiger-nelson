@@ -3772,7 +3772,10 @@ def r2Contacts (P : ℂ) (θ₁ θ₂ : ℝ) (c : Fin k) : Set ℝ := {θ ∈ Ic
 /-- **FS112-N2-BENDS**, the toward bend (N2-TOWARD; FS112-BEND's toward case, off the end vertices, is its special case): if the outer
 colour is not carried at the centre, the whole arc, end vertices included, bends toward `P` — for every `ε > 0` there is a valid map
 agreeing with `F` off the `ε`-neighbourhood of the closed arc and creating no unit arc, in which no interior point of the arc lies on an
-arc of `Γ` on `ω(P)`, no colour but the outer one gains points, and the outer one only inside `B̄(P, 1)` near the arc. -/
+arc of `Γ` on `ω(P)`, no colour but the outer one gains points, and the outer one only inside `B̄(P, 1)` near the arc. **Inhabitant**: on
+a map of the plane, `awayModel`'s arc (`Plane/Models/Bends`, `awayModel_bend_toward`: this theorem applied), whose centre carries `6` and
+neither side colour (`awayModel_coloursAt`); on a fragment, `cuspFrag`'s arc of `ω(i)` (`cuspFrag_bend_toward`), whose centre carries no
+colour. -/
 theorem bend_toward (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
     (hout : c' ∉ F.coloursAt P) {ε : ℝ} (hε : 0 < ε) :
     ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (thickening ε (ringArc P θ₁ θ₂)) ∧ F'.RingArcsWithin F ∧
@@ -3964,7 +3967,10 @@ theorem bend_toward (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} 
 /-- **FS112-N2-BENDS**, the away bend as the row states it (N2-AWAY): if the inner colour is not carried at the centre and no point of
 the radius-2 arc `R₂(ᾱ)` lies in the closure of its class, the whole arc bends away — no interior point of it is left on an arc of
 `Γ` on `ω(P)`. Proved directly on the away lens (`bendMap` with the circle about `P + d e(φ_m)` through the arc's ends), with no domain
-hypothesis: the inner class keeps a positive distance from `P` and from the compact `R₂(ᾱ)`. -/
+hypothesis: the inner class keeps a positive distance from `P` and from the compact `R₂(ᾱ)`. **Inhabitant**: on a map of the plane,
+`awayModel`'s sub-arc over `[1/5, 3/10]`, in a gap of its radius-2 contacts (`Plane/Models/Applied`, `awayModel_bend_away_whole`: this
+theorem applied); on a fragment, `cuspFrag`'s arc of `ω(i)` (`Plane/Models/Bends`, `cuspFrag_bend_away`), whose centre is off the fragment
+and carries no colour — a model of the hypotheses' letter. -/
 theorem bend_away_whole (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
     (hin : c ∉ F.coloursAt P) (hR2 : Disjoint (radiusTwoArc P θ₁ θ₂) (closure (F.region c))) {ε : ℝ} (hε : 0 < ε) :
     ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (thickening ε (ringArc P θ₁ θ₂)) ∧ F'.RingArcsWithin F ∧

@@ -1,0 +1,16 @@
+### control 1: the conflict path resolved in the tree and not yet staged
+merge of origin/fs131-w10b (423cd8e8) into f51c1f4e, base f919973e: staged 30 path(s), 1 changed by both sides (scripts/Axioms.lean), 29 taken whole from theirs
+  UNMERGED scripts/Axioms.lean
+  DIRTY (working tree differs from the index): scripts/Axioms.lean
+merge-index: FAIL (2 fault(s))
+exit=1
+### control 2: an extra file staged (this job's own tool)
+merge of origin/fs131-w10b (423cd8e8) into f51c1f4e, base f919973e: staged 31 path(s), 1 changed by both sides (scripts/Axioms.lean), 30 taken whole from theirs
+  EXTRA staged, not of the merge: tools/fs131_l10a_keepboth.py
+  NOT-THEIRS: staged tools/fs131_l10a_keepboth.py is not origin/fs131-w10b's blob
+merge-index: FAIL (2 fault(s))
+exit=1
+### the faithful run, after the plant is taken out of the index
+merge of origin/fs131-w10b (423cd8e8) into f51c1f4e, base f919973e: staged 30 path(s), 1 changed by both sides (scripts/Axioms.lean), 29 taken whole from theirs
+merge-index: PASS
+exit=0

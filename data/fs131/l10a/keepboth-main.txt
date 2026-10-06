@@ -1,0 +1,26 @@
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.sq_norm_re_im'
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.ArcMap.sq_norm_eq_re_im'
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.ArcMap.HasDegree.eq'
+faithful: #print axioms lines 5681 = ours 4043 + theirs 5550 - base 3912; faults 0
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.sq_norm_re_im'
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.ArcMap.sq_norm_eq_re_im'
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.ArcMap.HasDegree.eq'
+plant LOST: #print axioms lines 5680 = ours 4043 + theirs 5550 - base 3912; faults 2
+  LOST from theirs: '#print axioms HadwigerNelson.Plane.ArcMap.zero_mem_stuckRun_iff' (need 1, have 0)
+  COUNT #print axioms: have 5680, expected ours 4043 + theirs 5550 - base 3912 = 5681
+  plant LOST: fired
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.sq_norm_re_im'
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.ArcMap.sq_norm_eq_re_im'
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.ArcMap.HasDegree.eq'
+plant TWICE: #print axioms lines 5682 = ours 4043 + theirs 5550 - base 3912; faults 2
+  COUNT #print axioms: have 5682, expected ours 4043 + theirs 5550 - base 3912 = 5681
+  TWICE HadwigerNelson.Plane.ArcMap.zero_mem_stuckRun_iff (2)
+  plant TWICE: fired
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.sq_norm_re_im'
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.ArcMap.sq_norm_eq_re_im'
+  note: dropped by the other side since the base (in ours unchanged): '#print axioms HadwigerNelson.Plane.ArcMap.HasDegree.eq'
+plant MARKER: #print axioms lines 5681 = ours 4043 + theirs 5550 - base 3912; faults 1
+  MARKER '======='
+  plant MARKER: fired
+self-test: PASS
+exit=0

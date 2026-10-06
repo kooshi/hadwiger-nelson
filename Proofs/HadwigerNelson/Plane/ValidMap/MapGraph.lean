@@ -4266,8 +4266,10 @@ theorem cvb_pinch_connected (hF : F.Valid) (hP : F.IsPlaneMap) {T : Set ℂ} (hT
   exact h1.symm.trans h2
 
 /-- **FS114-CVB-PINCH, the hole clause** (B1): in the map graph of a valid map of the plane, removing a tile with a hole disconnects the graph
-(the tiles inside the hole from those outside). Whether a valid plane map with a holed tile exists is not claimed (the row: "every valid map
-cannot be refuted by an object"); the local configuration is `exists_holed_valid_fragment`. `GENERIC` on plane maps. -/
+(the tiles inside the hole from those outside). The row does not claim that a valid plane map with a holed tile exists ("every valid map
+cannot be refuted by an object"); the local configuration is `exists_holed_valid_fragment`. `GENERIC` on plane maps. Inhabitant of the
+hypotheses, at eight colours: `hornModel` with its tile `holedTile` and the hole `tangentDisc` (`Plane/Models/Moves`,
+`hornModel_holedTile`; this theorem applied to it: `Plane/Models/Applied`, `hornModel_hole_disconnected`). -/
 theorem cvb_hole_disconnected (hF : F.Valid) (hP : F.IsPlaneMap) {T Hc : Set ℂ} (hT : F.IsTile T) (hH : IsHoleOf T Hc) :
     ¬ (F.mapGraph.induce {T' | T' ≠ ⟨T, hT⟩}).Connected := by
   -- FS131-KP plan § 4, leaf HOLE: no Jordan curve theorem, only the separation clause

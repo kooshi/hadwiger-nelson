@@ -1,0 +1,39 @@
+import Proofs.HadwigerNelson.Plane.Models.Moves
+import Proofs.HadwigerNelson.Plane.Models.Stuck
+import Proofs.HadwigerNelson.Plane.Models.Bends
+#print axioms HadwigerNelson.Plane.ArcMap.relabel_region
+#print axioms HadwigerNelson.Plane.ArcMap.relabel_region_eq_empty
+#print axioms HadwigerNelson.Plane.ArcMap.relabel_valid
+#print axioms HadwigerNelson.Plane.ArcMap.interiorPts_paint
+#print axioms HadwigerNelson.Plane.ArcMap.region_paint
+#print axioms HadwigerNelson.Plane.ArcMap.paint_valid
+#print axioms HadwigerNelson.Plane.ArcMap.paint_condition5
+#print axioms HadwigerNelson.Plane.brickBase_valid
+#print axioms HadwigerNelson.Plane.brickBase_condition5
+#print axioms HadwigerNelson.Plane.brickBase_region_spare
+#print axioms HadwigerNelson.Plane.brickBase_mem_interiorPts
+#print axioms HadwigerNelson.Plane.brickBase_col_eq
+#print axioms HadwigerNelson.Plane.brickBase_col_zero
+#print axioms HadwigerNelson.Plane.tangentDisc_subset_ball
+#print axioms HadwigerNelson.Plane.frontier_hornSet_subset
+#print axioms HadwigerNelson.Plane.isPreconnected_fanRest
+#print axioms HadwigerNelson.Plane.ball_diff_fan
+#print axioms HadwigerNelson.Plane.isSector_fan_iff
+#print axioms HadwigerNelson.Plane.hornModel_shave
+#print axioms HadwigerNelson.Plane.hornModel_open
+#print axioms HadwigerNelson.Plane.hornModel_hasHornCount
+#print axioms HadwigerNelson.Plane.hornModel_contact
+#print axioms HadwigerNelson.Plane.hornModel_shaveAvailable
+#print axioms HadwigerNelson.Plane.hornModel_holedTile
+#print axioms HadwigerNelson.Plane.twoHornModel_rayMerge
+#print axioms HadwigerNelson.Plane.twoHornModel_merge
+#print axioms HadwigerNelson.Plane.twoHornModel_available
+#print axioms HadwigerNelson.Plane.stuckModel_hyps
+#print axioms HadwigerNelson.Plane.stuckModel_contacts
+#print axioms HadwigerNelson.Plane.stuckModel_flanks
+#print axioms HadwigerNelson.Plane.stuckModel_terminal
+#print axioms HadwigerNelson.Plane.shadowModel_flank_ne
+#print axioms HadwigerNelson.Plane.cuspFrag_bend_away
+#print axioms HadwigerNelson.Plane.cuspFrag_bend_toward
+#print axioms HadwigerNelson.Plane.awayModel_hyps
+#print axioms HadwigerNelson.Plane.awayModel_r2Contacts

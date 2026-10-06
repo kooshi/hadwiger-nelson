@@ -1,0 +1,50 @@
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:114:2: error: Tactic `simp` failed with a nested error:
+maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:217:58: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  0 • ?m
+in the target expression
+  0 • θ = 0
+
+Q₀ : Type u_1
+M : Type u_2
+inst✝² : Ring Q₀
+inst✝¹ : AddCommGroup M
+inst✝ : Module Q₀ M
+m : ℕ
+hm : 2 ≤ m
+c : Q₀
+hc : ↑m * c = 1
+U₀ : Set Q₀
+U : Set M
+hU : ∀ a ∈ U₀, ∀ b ∈ U, a • b ∈ U
+hspan : Submodule.span Q₀ U = ⊤
+B : Set UnitAddCircle
+θ : M →+ UnitAddCircle
+hθ : θ ∈ bandSet U B
+h : bandSet U₀ B ⊆ ↑(torsionBy Q₀ 0 ⊔ archimedean Q₀)
+⊢ 0 • θ = 0
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:246:7: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Real.instDivisionRing', which is 'noncomputable'
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:270:31: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:276:8: error: (kernel) deterministic timeout
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:306:8: error: (kernel) unknown constant 'HadwigerNelson.CharacterColouring.gluing_field'
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:317:8: error: (kernel) unknown constant 'HadwigerNelson.CharacterColouring.gluing_field'
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:330:8: error: (kernel) unknown constant 'HadwigerNelson.CharacterColouring.gluing_field'
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:345:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:369:6: warning: `ext` did not consume the patterns `x`
+
+Note: This linter can be disabled with `set_option linter.unusedRCasesPattern false`
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:370:30: error(lean.unknownIdentifier): Unknown identifier `x`
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:372:11: error(lean.unknownIdentifier): Unknown identifier `x`
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:372:14: error: unsolved goals
+⊢ ↑(sorry ()) = sorry ()
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:378:56: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  0 • ?m
+in the target expression
+  0 • half = 0
+
+⊢ 0 • half = 0
+exit=1

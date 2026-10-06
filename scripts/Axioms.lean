@@ -6298,8 +6298,647 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 
 #print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limit_dom
 
-/-! ## FS131-K6 — wave 6 (saturated colourings): the foundation, and the leaves the planner proved (the skeleton's `sorry` leaves are listed by wave 6's implementer as it proves them) -/
+/-! ## FS-131, the example maps (jobs FS131-KM1, MA1, MB1, MB2; landed by FS131-MC1): `Plane/Models/{Paint, Moves, Stuck, Bends}` -/
+-- FS131-KM1: the construction (Paint) — proved in the skeleton
+#print axioms HadwigerNelson.Plane.ArcMap.relabel_region
+#print axioms HadwigerNelson.Plane.ArcMap.relabel_region_eq_empty
+#print axioms HadwigerNelson.Plane.ArcMap.relabel_valid
+#print axioms HadwigerNelson.Plane.ArcMap.interiorPts_paint
+#print axioms HadwigerNelson.Plane.ArcMap.region_paint
+#print axioms HadwigerNelson.Plane.ArcMap.paint_valid
+#print axioms HadwigerNelson.Plane.ArcMap.paint_condition5
+#print axioms HadwigerNelson.Plane.brickBase_valid
+#print axioms HadwigerNelson.Plane.brickBase_condition5
+#print axioms HadwigerNelson.Plane.brickBase_region_spare
+-- FS131-KM1: the construction (Paint) — leaves
+#print axioms HadwigerNelson.Plane.brickBase_mem_interiorPts
+#print axioms HadwigerNelson.Plane.brickBase_col_eq
+#print axioms HadwigerNelson.Plane.brickBase_col_zero
+#print axioms HadwigerNelson.Plane.tangentDisc_subset_ball
+#print axioms HadwigerNelson.Plane.frontier_hornSet_subset
+#print axioms HadwigerNelson.Plane.isPreconnected_fanRest
+#print axioms HadwigerNelson.Plane.ball_diff_fan
+#print axioms HadwigerNelson.Plane.isSector_fan_iff
+-- FS131-KM1: the four moves' models (Moves)
+#print axioms HadwigerNelson.Plane.hornModel_shave
+#print axioms HadwigerNelson.Plane.hornModel_open
+#print axioms HadwigerNelson.Plane.hornModel_hasHornCount
+#print axioms HadwigerNelson.Plane.hornModel_contact
+#print axioms HadwigerNelson.Plane.hornModel_shaveAvailable
+#print axioms HadwigerNelson.Plane.hornModel_holedTile
+#print axioms HadwigerNelson.Plane.twoHornModel_rayMerge
+#print axioms HadwigerNelson.Plane.twoHornModel_merge
+#print axioms HadwigerNelson.Plane.twoHornModel_available
+-- FS131-KM1: the stuck vertex and the doubly shadowed band (Stuck)
+#print axioms HadwigerNelson.Plane.stuckModel_hyps
+#print axioms HadwigerNelson.Plane.stuckModel_contacts
+#print axioms HadwigerNelson.Plane.stuckModel_flanks
+#print axioms HadwigerNelson.Plane.shadowModel_flank_ne
+-- FS131-KM1: the bends (Bends)
+#print axioms HadwigerNelson.Plane.cuspFrag_bend_away
+#print axioms HadwigerNelson.Plane.cuspFrag_bend_toward
+#print axioms HadwigerNelson.Plane.awayModel_hyps
+#print axioms HadwigerNelson.Plane.awayModel_r2Contacts
 
+/-! ## FS-131, the example maps, half A (job FS131-MA1) — `Plane/Models/Paint`'s leaves proved, and the two models of the four local moves (`Plane/Models/Moves`). Records the FS131-KM1 block above already lists are not repeated here. -/
+-- FS131-MA1: the construction (Paint) — the leaves KM1's block does not list, and the fan's partition
+#print axioms HadwigerNelson.Plane.norm_plantDir
+#print axioms HadwigerNelson.Plane.hornArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.hornArcs_carrier_subset
+#print axioms HadwigerNelson.Plane.isOpen_fanRest
+#print axioms HadwigerNelson.Plane.fanRest_ne_hornSet
+#print axioms HadwigerNelson.Plane.iUnion_fanPiece
+#print axioms HadwigerNelson.Plane.fanPiece_data
+#print axioms HadwigerNelson.Plane.encard_sectors_fan
+#print axioms HadwigerNelson.Plane.encard_horns_fan
+#print axioms HadwigerNelson.Plane.ArcMap.region_paint_of_region_eq_empty
+#print axioms HadwigerNelson.Plane.ArcMap.region_paint_subset
+#print axioms HadwigerNelson.Plane.ArcMap.allowedCone_tangent
+#print axioms HadwigerNelson.Plane.ArcMap.tangent_contact_cone
+-- FS131-MA1: the four moves' models (Moves) — the leaves KM1's block does not list, and the two class lemmas
+#print axioms HadwigerNelson.Plane.hornModel_valid
+#print axioms HadwigerNelson.Plane.hornModel_region_seven
+#print axioms HadwigerNelson.Plane.hornModel_isHorn
+#print axioms HadwigerNelson.Plane.hornModel_hasSectors
+#print axioms HadwigerNelson.Plane.hornModel_hasDegree
+#print axioms HadwigerNelson.Plane.hornModel_flanks
+#print axioms HadwigerNelson.Plane.hornModel_clear
+#print axioms HadwigerNelson.Plane.hornModel_cone
+#print axioms HadwigerNelson.Plane.hornModel_allowedCone
+#print axioms HadwigerNelson.Plane.twoHornModel_valid
+#print axioms HadwigerNelson.Plane.twoHornModel_region_seven
+#print axioms HadwigerNelson.Plane.twoHornModel_isHorn
+#print axioms HadwigerNelson.Plane.twoHornModel_hasSectors
+#print axioms HadwigerNelson.Plane.twoHornModel_cone
+#print axioms HadwigerNelson.Plane.twoHornModel_allowedCone
+#print axioms HadwigerNelson.Plane.twoHornModel_hasDegree
+#print axioms HadwigerNelson.Plane.twoHornModel_hasHornCount
+
+/-! ## FS-131, the example maps, half B (job FS131-MB1) — the leaves of `Plane/Models/{Stuck, Bends}` proved; the model theorems themselves are in FS131-KM1's block above -/
+-- FS131-MB1: the cusp fragment's ring arc (Bends) — reads nothing of `Paint`
+#print axioms HadwigerNelson.Plane.cuspFrag_isRingArc
+#print axioms HadwigerNelson.Plane.cuspFrag_coloursAt_I
+#print axioms HadwigerNelson.Plane.cuspFrag_radiusTwo_disjoint
+-- FS131-MB1: the stuck vertex (Stuck) — `stuckModel_hyps`, `_contacts`, `_flanks` are in FS131-KM1's block; what reads the partition at the
+-- vertex rests on `Paint`'s leaf `brickBase_mem_interiorPts` until implementer A's branch joins
+#print axioms HadwigerNelson.Plane.stuckArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.frontier_stuckW_subset
+#print axioms HadwigerNelson.Plane.stuckCol_locallyConstant
+#print axioms HadwigerNelson.Plane.stuckModel_no_unit_pair
+#print axioms HadwigerNelson.Plane.stuckModel_valid
+#print axioms HadwigerNelson.Plane.stuckModel_partition
+#print axioms HadwigerNelson.Plane.stuckModel_coloursAt
+#print axioms HadwigerNelson.Plane.stuckModel_hasSectors
+#print axioms HadwigerNelson.Plane.stuckModel_isHorn
+#print axioms HadwigerNelson.Plane.stuckModel_horn_cases
+#print axioms HadwigerNelson.Plane.stuckModel_shadow
+#print axioms HadwigerNelson.Plane.stuckModel_not_mergeAvailable
+#print axioms HadwigerNelson.Plane.stuckModel_not_rayAvailable
+#print axioms HadwigerNelson.Plane.stuckModel_not_shaveAvailable
+#print axioms HadwigerNelson.Plane.stuckModel_isStuck
+
+/-! ## FS-131, the example maps, half B continued (job FS131-MB2) — `shadowModel`'s leaves (`Plane/Models/Stuck`) and `awayModel`'s (`Plane/Models/Bends`) proved; the model theorems `shadowModel_flank_ne`, `awayModel_hyps` are in FS131-KM1's block above -/
+-- FS131-MB2: the doubly shadowed band (Stuck)
+#print axioms HadwigerNelson.Plane.shadowArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.frontier_shadowW_subset
+#print axioms HadwigerNelson.Plane.shadowCol_locallyConstant
+#print axioms HadwigerNelson.Plane.shadowModel_not_mem_arcs
+#print axioms HadwigerNelson.Plane.shadowModel_mem_region
+#print axioms HadwigerNelson.Plane.shadowModel_flank_source
+#print axioms HadwigerNelson.Plane.shadowModel_no_unit_pair
+#print axioms HadwigerNelson.Plane.shadowModel_valid
+#print axioms HadwigerNelson.Plane.shadowModel_not_isUnitArc
+#print axioms HadwigerNelson.Plane.shadowModel_condition5
+#print axioms HadwigerNelson.Plane.shadowModel_flanks
+#print axioms HadwigerNelson.Plane.shadowModel_witness_real
+#print axioms HadwigerNelson.Plane.shadowModel_shadow
+#print axioms HadwigerNelson.Plane.shadowModel_doublyShadowed
+-- FS131-MB2: the outward bend's plane map (Bends) — `awayModel_hyps` and `awayModel_r2Contacts` are in FS131-KM1's block
+#print axioms HadwigerNelson.Plane.awayArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.frontier_awayW_subset
+#print axioms HadwigerNelson.Plane.awayModel_no_unit_pair
+#print axioms HadwigerNelson.Plane.awayModel_region_seven
+#print axioms HadwigerNelson.Plane.awayModel_brick
+#print axioms HadwigerNelson.Plane.awayModel_approach_real
+#print axioms HadwigerNelson.Plane.awayModel_centre_brick
+#print axioms HadwigerNelson.Plane.awayModel_coloursAt
+#print axioms HadwigerNelson.Plane.awayModel_bend_toward
+
+/-! ## FS-131, the example maps (job FS131-MC1) — the landing: the lane's theorems the four jobs' blocks did not list, and
+`Plane/Models/Applied` (the landed theorems applied to the models). Found by reading the files; checked against the kernel's own
+list by `tools/fs131_l5_records.py`. -/
+-- Plane/Models/Applied
+#print axioms HadwigerNelson.Plane.hornModel_isSite
+#print axioms HadwigerNelson.Plane.twoHornModel_isSite
+#print axioms HadwigerNelson.Plane.hornModel_hole_disconnected
+#print axioms HadwigerNelson.Plane.stuckModel_ncard
+#print axioms HadwigerNelson.Plane.stuckModel_isChainVertex
+#print axioms HadwigerNelson.Plane.stuckModel_isHorn_pi
+#print axioms HadwigerNelson.Plane.stuckModel_not_mem_interiorPts
+#print axioms HadwigerNelson.Plane.stuckModel_interior_allowedCone
+#print axioms HadwigerNelson.Plane.stuckModel_contacts_frame
+#print axioms HadwigerNelson.Plane.stuckModel_horn_shadows
+#print axioms HadwigerNelson.Plane.awayModel_radiusTwoArc_subset
+#print axioms HadwigerNelson.Plane.awayModel_gap
+#print axioms HadwigerNelson.Plane.awayModel_isRingArc_gap
+#print axioms HadwigerNelson.Plane.awayModel_bend_away_part
+#print axioms HadwigerNelson.Plane.awayModel_bend_away_whole
+-- Plane/Models/Bends
+#print axioms HadwigerNelson.Plane.cuspArc_sin
+#print axioms HadwigerNelson.Plane.cuspArc_pt
+#print axioms HadwigerNelson.Plane.cuspArc_mem
+#print axioms HadwigerNelson.Plane.cuspFrag_closure_region_subset
+#print axioms HadwigerNelson.Plane.awayModel_P_coords
+#print axioms HadwigerNelson.Plane.awayModel_dist_sq
+#print axioms HadwigerNelson.Plane.awayModel_circPt
+#print axioms HadwigerNelson.Plane.awayModel_mem_circ
+#print axioms HadwigerNelson.Plane.awayModel_arcs_subset
+#print axioms HadwigerNelson.Plane.awayModel_isOpen_rect
+#print axioms HadwigerNelson.Plane.awayModel_closure_rect
+#print axioms HadwigerNelson.Plane.awayModel_frontier_rect
+#print axioms HadwigerNelson.Plane.awayModel_wall_mem
+#print axioms HadwigerNelson.Plane.awayModel_mem_awayW
+#print axioms HadwigerNelson.Plane.awayModel_rect_subset
+#print axioms HadwigerNelson.Plane.awayModel_rect_dist
+#print axioms HadwigerNelson.Plane.awayModel_not_mem_arcs
+#print axioms HadwigerNelson.Plane.awayArcs_finite
+#print axioms HadwigerNelson.Plane.awayModel_isPlaneMap
+#print axioms HadwigerNelson.Plane.awayModel_trig
+#print axioms HadwigerNelson.Plane.awayModel_ringPt_mem
+-- Plane/Models/Moves
+#print axioms HadwigerNelson.Plane.hornB_nondegenerate
+#print axioms HadwigerNelson.Plane.hornB_finite
+#print axioms HadwigerNelson.Plane.frontier_hornW_subset
+#print axioms HadwigerNelson.Plane.hornModel_isPlaneMap
+#print axioms HadwigerNelson.Plane.hornModel_covers
+#print axioms HadwigerNelson.Plane.hornModel_eq_paint
+#print axioms HadwigerNelson.Plane.hornFan_strictMono
+#print axioms HadwigerNelson.Plane.hornFan_bound
+#print axioms HadwigerNelson.Plane.hornB_inter_ball
+#print axioms HadwigerNelson.Plane.hornModel_interiorPts_inter_ball
+#print axioms HadwigerNelson.Plane.hornModel_isSector_iff
+#print axioms HadwigerNelson.Plane.hornW_disjoint_hornB
+#print axioms HadwigerNelson.Plane.hornW_subset_interiorPts
+#print axioms HadwigerNelson.Plane.hornModel_col_of_mem
+#print axioms HadwigerNelson.Plane.hornModel_col_of_not_mem
+#print axioms HadwigerNelson.Plane.hornModel_horn_subset_col
+#print axioms HadwigerNelson.Plane.hornModel_fanRest_subset_region
+#print axioms HadwigerNelson.Plane.hornW_subset
+#print axioms HadwigerNelson.Plane.hornModel_tangent
+#print axioms HadwigerNelson.Plane.hornModel_contact_cone
+#print axioms HadwigerNelson.Plane.holedTile_eq
+#print axioms HadwigerNelson.Plane.isOpen_holedTile
+#print axioms HadwigerNelson.Plane.closure_holedTile_subset
+#print axioms HadwigerNelson.Plane.holedTile_subset_interiorPts
+#print axioms HadwigerNelson.Plane.mem_holedTile_of_mem_closure
+#print axioms HadwigerNelson.Plane.holedTile_base_mem
+#print axioms HadwigerNelson.Plane.isPreconnected_holedTile
+#print axioms HadwigerNelson.Plane.twoHornB_nondegenerate
+#print axioms HadwigerNelson.Plane.twoHornB_finite
+#print axioms HadwigerNelson.Plane.frontier_twoHornW_subset
+#print axioms HadwigerNelson.Plane.twoHornModel_isPlaneMap
+#print axioms HadwigerNelson.Plane.twoHornModel_covers
+#print axioms HadwigerNelson.Plane.twoHornModel_eq_paint
+#print axioms HadwigerNelson.Plane.twoHornFan_strictMono
+#print axioms HadwigerNelson.Plane.twoHornFan_bound
+#print axioms HadwigerNelson.Plane.twoHornB_inter_ball
+#print axioms HadwigerNelson.Plane.twoHornModel_interiorPts_inter_ball
+#print axioms HadwigerNelson.Plane.twoHornModel_isSector_iff
+#print axioms HadwigerNelson.Plane.twoHornW_disjoint_twoHornB
+#print axioms HadwigerNelson.Plane.twoHornW_subset_interiorPts
+#print axioms HadwigerNelson.Plane.twoHornModel_col_of_mem
+#print axioms HadwigerNelson.Plane.twoHornModel_col_of_not_mem
+#print axioms HadwigerNelson.Plane.twoHornModel_horns_subset_col
+#print axioms HadwigerNelson.Plane.twoHornModel_rest_gap_subset_col
+#print axioms HadwigerNelson.Plane.twoHornW_subset
+#print axioms HadwigerNelson.Plane.twoHornModel_tangent
+-- Plane/Models/Paint
+#print axioms HadwigerNelson.Plane.ArcMap.relabel_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.relabel_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.relabel_isPlaneMap
+#print axioms HadwigerNelson.Plane.ArcMap.relabel_condition5
+#print axioms HadwigerNelson.Plane.ArcMap.paint_isPlaneMap
+#print axioms HadwigerNelson.Plane.ArcMap.paint_col_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.paint_col_of_not_mem
+#print axioms HadwigerNelson.Plane.ArcMap.isClear_paint_of_mem_region
+#print axioms HadwigerNelson.Plane.ArcMap.interiorPts_paint_inter_ball
+#print axioms HadwigerNelson.Plane.brickBase_isPlaneMap
+#print axioms HadwigerNelson.Plane.mem_brickCell_of_coords
+#print axioms HadwigerNelson.Plane.brickBase_col_val
+#print axioms HadwigerNelson.Plane.dist_sq_coords
+#print axioms HadwigerNelson.Plane.plantPt_re
+#print axioms HadwigerNelson.Plane.plantPt_im
+#print axioms HadwigerNelson.Plane.plantDir_re
+#print axioms HadwigerNelson.Plane.plantDir_im
+#print axioms HadwigerNelson.Plane.tangentCentre_re
+#print axioms HadwigerNelson.Plane.tangentCentre_im
+#print axioms HadwigerNelson.Plane.dist_tangentCentre
+#print axioms HadwigerNelson.Plane.hornArcs_finite
+#print axioms HadwigerNelson.Plane.closure_hornSet_subset
+#print axioms HadwigerNelson.Plane.tanHeight_zero_left
+#print axioms HadwigerNelson.Plane.half_le_one_sub
+#print axioms HadwigerNelson.Plane.abs_frameY_le
+#print axioms HadwigerNelson.Plane.eq_of_frame_eq_zero
+#print axioms HadwigerNelson.Plane.self_mem_carrier_germArc
+#print axioms HadwigerNelson.Plane.mem_carrier_germArc_of_tanHeight_eq_zero
+#print axioms HadwigerNelson.Plane.frameX_combo
+#print axioms HadwigerNelson.Plane.convex_frameX_neg
+#print axioms HadwigerNelson.Plane.dist_fromFrame_lt
+#print axioms HadwigerNelson.Plane.exists_sign_change
+#print axioms HadwigerNelson.Plane.frame_of_mem_carrier_germArc
+#print axioms HadwigerNelson.Plane.fan_tanHeight_of_mem_hornSet
+#print axioms HadwigerNelson.Plane.Ioo_subset_coneAt_fanRest
+#print axioms HadwigerNelson.Plane.interior_coneAt_fanRest_nonempty
+#print axioms HadwigerNelson.Plane.frameX_zero
+#print axioms HadwigerNelson.Plane.frameY_zero
+#print axioms HadwigerNelson.Plane.abs_re_sub_le_dist
+#print axioms HadwigerNelson.Plane.abs_im_sub_le_dist
+#print axioms HadwigerNelson.Plane.mem_hornArcs_carrier_iff_of_mem_ball
+#print axioms HadwigerNelson.Plane.disjoint_hornSet_carrier_germArc
+#print axioms HadwigerNelson.Plane.disjoint_hornSet_hornArcs
+#print axioms HadwigerNelson.Plane.disjoint_fanRest_hornSet
+#print axioms HadwigerNelson.Plane.disjoint_hornSet_hornSet
+#print axioms HadwigerNelson.Plane.fanPiece_mono_radius
+#print axioms HadwigerNelson.Plane.fanPiece_subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.IsSector.false_of_col
+#print axioms HadwigerNelson.Plane.plantBall_subset_brick
+#print axioms HadwigerNelson.Plane.brickBase_mem_interiorPts_zero
+#print axioms HadwigerNelson.Plane.plantBall_subset_interiorPts
+#print axioms HadwigerNelson.Plane.plantBall_subset_region_zero
+#print axioms HadwigerNelson.Plane.tangentBrick_subset_interiorPts
+#print axioms HadwigerNelson.Plane.re_add_mul_I
+#print axioms HadwigerNelson.Plane.im_add_mul_I
+#print axioms HadwigerNelson.Plane.mk_mem_tangentBrick
+#print axioms HadwigerNelson.Plane.closedBall_tangentCentre_subset_tangentBrick
+#print axioms HadwigerNelson.Plane.tangentDisc_subset_interiorPts
+#print axioms HadwigerNelson.Plane.isOpen_tangentBrick
+#print axioms HadwigerNelson.Plane.convex_tangentBrick
+#print axioms HadwigerNelson.Plane.closure_tangentBrick_subset
+#print axioms HadwigerNelson.Plane.mem_tangentBrick_of_mem_interiorPts
+#print axioms HadwigerNelson.Plane.tangentDisc_far
+#print axioms HadwigerNelson.Plane.tangentDisc_subset_closedBall
+#print axioms HadwigerNelson.Plane.disjoint_tangentDisc_sphere
+#print axioms HadwigerNelson.Plane.disjoint_plantBall_tangent
+#print axioms HadwigerNelson.Plane.hornSet_subset_plantBall
+#print axioms HadwigerNelson.Plane.tangentCircle_carrier
+#print axioms HadwigerNelson.Plane.tangentCircle_nondegenerate
+#print axioms HadwigerNelson.Plane.frontier_tangentDisc
+#print axioms HadwigerNelson.Plane.horn_ineq
+#print axioms HadwigerNelson.Plane.dist_tangentCentre_le_of_mem_hornSet
+#print axioms HadwigerNelson.Plane.dist_lt_one_of_hornZone
+#print axioms HadwigerNelson.Plane.closure_inter_sphere_subset
+#print axioms HadwigerNelson.Plane.halfPlane_plantDir
+-- Plane/Models/Stuck
+#print axioms HadwigerNelson.Plane.stuckModel_plant_coords
+#print axioms HadwigerNelson.Plane.stuckModel_abs_coords_le
+#print axioms HadwigerNelson.Plane.stuckModel_carrier_circ
+#print axioms HadwigerNelson.Plane.stuckModel_corners
+#print axioms HadwigerNelson.Plane.stuckModel_mem_seg_iff
+#print axioms HadwigerNelson.Plane.stuckModel_mem_poleSqArcs_iff
+#print axioms HadwigerNelson.Plane.stuckModel_poleSqArcs_subset
+#print axioms HadwigerNelson.Plane.stuckModel_mem_poleSq
+#print axioms HadwigerNelson.Plane.stuckModel_isOpen_poleSq
+#print axioms HadwigerNelson.Plane.stuckModel_poleSq_diag
+#print axioms HadwigerNelson.Plane.stuckModel_frames
+#print axioms HadwigerNelson.Plane.stuckModel_poles
+#print axioms HadwigerNelson.Plane.stuckModel_germ_subset
+#print axioms HadwigerNelson.Plane.stuckModel_mem_germ_of_dist
+#print axioms HadwigerNelson.Plane.stuckModel_arcs_union
+#print axioms HadwigerNelson.Plane.stuckModel_pieces
+#print axioms HadwigerNelson.Plane.stuckModel_mem_arcs_ball_iff
+#print axioms HadwigerNelson.Plane.stuckModel_mem_arcs_sq_iff
+#print axioms HadwigerNelson.Plane.stuckModel_eventually_lt_iff
+#print axioms HadwigerNelson.Plane.stuckModel_sq_disjoint
+#print axioms HadwigerNelson.Plane.stuckArcs_finite
+#print axioms HadwigerNelson.Plane.stuckModel_isPlaneMap
+#print axioms HadwigerNelson.Plane.stuckModel_covers
+#print axioms HadwigerNelson.Plane.stuckModel_stuckW_subset
+#print axioms HadwigerNelson.Plane.stuckModel_interiorPts_eq
+#print axioms HadwigerNelson.Plane.stuckModel_col_eq
+#print axioms HadwigerNelson.Plane.stuckModel_mem_region_of
+#print axioms HadwigerNelson.Plane.stuckModel_region_subset
+#print axioms HadwigerNelson.Plane.stuckModel_stuckCol_ball
+#print axioms HadwigerNelson.Plane.stuckModel_stuckCol_sqN
+#print axioms HadwigerNelson.Plane.stuckModel_stuckCol_sqS
+#print axioms HadwigerNelson.Plane.stuckModel_stuckCol_spare
+#print axioms HadwigerNelson.Plane.stuckModel_mem_piece
+#print axioms HadwigerNelson.Plane.stuckModel_norms
+#print axioms HadwigerNelson.Plane.stuckModel_piece_cases
+#print axioms HadwigerNelson.Plane.stuckModelPiece_data
+#print axioms HadwigerNelson.Plane.stuckModel_piece_col
+#print axioms HadwigerNelson.Plane.stuckModel_piece_subset_region
+#print axioms HadwigerNelson.Plane.stuckModel_piece_hornSet
+#print axioms HadwigerNelson.Plane.stuckModel_sectorsOf_encard
+#print axioms HadwigerNelson.Plane.stuckModel_dist_pole_lt
+#print axioms HadwigerNelson.Plane.stuckModel_near_real
+#print axioms HadwigerNelson.Plane.stuckModel_near_real'
+#print axioms HadwigerNelson.Plane.stuckModel_far_real
+#print axioms HadwigerNelson.Plane.stuckModel_far_real'
+#print axioms HadwigerNelson.Plane.stuckModel_unit_pair_ball
+#print axioms HadwigerNelson.Plane.stuckModel_wedges
+#print axioms HadwigerNelson.Plane.stuckModel_pole_rays
+#print axioms HadwigerNelson.Plane.stuckModel_dist_vertex_sq
+#print axioms HadwigerNelson.Plane.stuckModel_wedge_dist
+#print axioms HadwigerNelson.Plane.stuckModel_tile_subset_sq
+#print axioms HadwigerNelson.Plane.stuckModel_hasSectors_two
+#print axioms HadwigerNelson.Plane.stuckModel_lens_ne_hornSet
+#print axioms HadwigerNelson.Plane.stuckModel_radial
+#print axioms HadwigerNelson.Plane.stuckModel_radial_sq
+#print axioms HadwigerNelson.Plane.shadowModel_mem_hornArcs
+#print axioms HadwigerNelson.Plane.shadowModel_hornSet_not_mem_hornArcs
+#print axioms HadwigerNelson.Plane.shadowModel_dists
+#print axioms HadwigerNelson.Plane.shadowModel_disjoint
+#print axioms HadwigerNelson.Plane.shadowModel_isOpen
+#print axioms HadwigerNelson.Plane.shadowModel_shadowCol
+#print axioms HadwigerNelson.Plane.shadowArcs_finite
+#print axioms HadwigerNelson.Plane.shadowModel_isPlaneMap
+#print axioms HadwigerNelson.Plane.shadowModel_shadowW_subset
+#print axioms HadwigerNelson.Plane.shadowModel_tanHeight
+#print axioms HadwigerNelson.Plane.shadowModel_apart
+
+/-! ## FS-131 wave 10 (job FS131-K10) — the arithmetic rows: the leaves the planner proved -/
+-- FS131-K10
+#print axioms HadwigerNelson.CharacterColouring.int_eq_zero_of_forall_pow_dvd
+#print axioms HadwigerNelson.CharacterColouring.mem_archimedean_of_layers
+#print axioms HadwigerNelson.CharacterColouring.mem_torsionBy_sup_archimedean_of_nsmul
+#print axioms HadwigerNelson.CharacterColouring.gluing
+#print axioms HadwigerNelson.CharacterColouring.inv_five_mem_Qring
+#print axioms HadwigerNelson.CharacterColouring.gluing_field
+#print axioms HadwigerNelson.CharacterColouring.gluing_iff_uniform
+#print axioms HadwigerNelson.CharacterColouring.gluing_iff_of_orderBound
+#print axioms HadwigerNelson.CharacterColouring.cl2
+#print axioms HadwigerNelson.CharacterColouring.half_mem_bandSet
+#print axioms HadwigerNelson.CharacterColouring.half_mem_torsionBy
+#print axioms HadwigerNelson.SpectralInputs.sp_only_if
+#print axioms HadwigerNelson.SpectralInputs.sp_only_if_interface
+#print axioms HadwigerNelson.SpectralInputs.contVec_id
+#print axioms HadwigerNelson.SpectralInputs.bochnerOn_bot
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.empty_aeIndependent
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio
+#print axioms HadwigerNelson.StandingFive.K_le
+#print axioms HadwigerNelson.StandingFive.targetFloor_zero
+
+/-! ## FS-131 wave 10 (job FS131-I10A) — the spectral inputs and the character colouring's last leaf -/
+-- FS131-I10A
+#print axioms HadwigerNelson.SpectralInputs.mem_factorSets_iff
+#print axioms HadwigerNelson.SpectralInputs.isClosed_contVec
+#print axioms HadwigerNelson.SpectralInputs.lipschitz_comp_mem_contVec
+#print axioms HadwigerNelson.SpectralInputs.iUnion_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.measurableSet_factorSigma_iff
+#print axioms HadwigerNelson.SpectralInputs.setOf_lt_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.contVec_eq_lpMeas
+#print axioms HadwigerNelson.SpectralInputs.measurableSet_preimage_factorSigma
+#print axioms HadwigerNelson.SpectralInputs.condExpL2_mem_contVec
+#print axioms HadwigerNelson.SpectralInputs.condExpL2_eq_self_iff
+#print axioms HadwigerNelson.SpectralInputs.inner_sub_condExpL2_eq_zero
+#print axioms HadwigerNelson.SpectralInputs.measurable_selection
+#print axioms HadwigerNelson.SpectralInputs.ae_mem_condSupport
+#print axioms HadwigerNelson.SpectralInputs.ae_condLaw_mul_eq_zero
+#print axioms HadwigerNelson.SpectralInputs.si4
+#print axioms HadwigerNelson.SpectralInputs.condExp_comp_measurePreserving
+#print axioms HadwigerNelson.SpectralInputs.si4_equivariant
+#print axioms HadwigerNelson.SpectralInputs.posDef_fourier
+#print axioms HadwigerNelson.SpectralInputs.ext_of_fourier
+#print axioms HadwigerNelson.SpectralInputs.posDef_delta
+#print axioms HadwigerNelson.SpectralInputs.exists_isHaarFourier
+#print axioms HadwigerNelson.SpectralInputs.IsHaarFourier.integral_eq
+#print axioms HadwigerNelson.SpectralInputs.IsHaarFourier.map_mulRight
+#print axioms HadwigerNelson.SpectralInputs.mul_mem_contChars_iff
+#print axioms HadwigerNelson.SpectralInputs.contChars_haar_null
+#print axioms HadwigerNelson.SpectralInputs.rot_negOne_apply
+#print axioms HadwigerNelson.SpectralInputs.sp_if
+#print axioms HadwigerNelson.SpectralInputs.compMeasurePreserving_add
+#print axioms HadwigerNelson.SpectralInputs.compMeasurePreserving_zero
+#print axioms HadwigerNelson.SpectralInputs.norm_comp_sub_sq
+#print axioms HadwigerNelson.SpectralInputs.spectral_carried_iff
+#print axioms HadwigerNelson.CharacterColouring.exists_ratLinear_extension
+#print axioms HadwigerNelson.CharacterColouring.mem_archimedean_unitRing_iff
+
+/-! ## FS-131 wave 10 (job FS131-I10B) — the stationary ratio: X25B-P, X25B-PZ, X25B-L1 (each at the class its proof
+reads: the `_of_symm` / `_of_shrink` twins were folded into the rows at the join, FS131-L10A, ruling 507 (a)), the toolkit,
+and the models (`StationarySet.parity`, `cantorLevel`) -/
+-- FS131-I10B
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul
+#print axioms HadwigerNelson.StationaryRatio.ratio_prod_le
+#print axioms HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels
+#print axioms HadwigerNelson.StationaryRatio.ae_neg_iff
+#print axioms HadwigerNelson.StationaryRatio.ratio_le_one
+#print axioms HadwigerNelson.StationaryRatio.ratio_mul_le
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.T_add_apply
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.T_zero_apply
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.T_neg_T
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.T_T_neg
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.measurable_T_apply
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.measurable_T_comp
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.measurable_T_left
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.ae_T_iff
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.notMem_nb_iff
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.nb_mono
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.measurableSet_nb
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.ae_nb_iff
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.prod_null_iff
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.prod_apply_corr
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.measurable_corr
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.aeIndependent_iff
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.measurableSet_majority
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.ae_majority
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.measure_le_majority_add
+#print axioms HadwigerNelson.StationaryRatio.cosetAverage_apply
+#print axioms HadwigerNelson.StationaryRatio.cosetAverage.instIsProbabilityMeasure
+#print axioms HadwigerNelson.StationaryRatio.cosetAverage_compl
+#print axioms HadwigerNelson.StationaryRatio.ae_mem_cosetAverage
+#print axioms HadwigerNelson.StationaryRatio.cosetAverage_preimage_add
+#print axioms HadwigerNelson.StationaryRatio.lintegral_prod_conv_cosetAverage
+#print axioms HadwigerNelson.StationaryRatio.tendsto_measure_symmDiff_shift
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_level_add
+#print axioms HadwigerNelson.StationaryRatio.ratio_dirac_le
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.parity_prob
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.parity_aeIndependent
+#print axioms HadwigerNelson.StationaryRatio.map_neg_dirac_one
+#print axioms HadwigerNelson.StationaryRatio.ratio_dirac_one_zmod_two
+#print axioms HadwigerNelson.StationaryRatio.mem_cantorLevel
+#print axioms HadwigerNelson.StationaryRatio.cantorLevel_antitone
+#print axioms HadwigerNelson.StationaryRatio.exists_cantorLevel_subset
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.nb
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.pull
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.couple
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.majority
+#print axioms HadwigerNelson.StationaryRatio.StationarySet.parity
+#print axioms HadwigerNelson.StationaryRatio.cantorLevel
+
+/-! ## FS-131 wave 10 (job FS131-I10C) — the standing-five field: the leaves of `Arith/StandingFive` -/
+-- FS131-I10C
+#print axioms HadwigerNelson.StandingFive.g_eta
+#print axioms HadwigerNelson.StandingFive.dvd_of_pow_pow_eq
+#print axioms HadwigerNelson.StandingFive.fourteen_dvd_of_char_two
+#print axioms HadwigerNelson.StandingFive.usableBelow_347
+#print axioms HadwigerNelson.StandingFive.card_ge_of_usable
+#print axioms HadwigerNelson.StandingFive.card_fixed_of_involution
+#print axioms HadwigerNelson.StandingFive.finrank_standingField_le
+#print axioms HadwigerNelson.StandingFive.im_eq_zero_of_aeval_gPoly
+#print axioms HadwigerNelson.StandingFive.numberField_standingField
+#print axioms HadwigerNelson.StandingFive.isTotallyReal_standingField
+#print axioms HadwigerNelson.StandingFive.usable_card_ge
+#print axioms HadwigerNelson.StandingFive.no_small_usable
+#print axioms HadwigerNelson.StandingFive.two_sq_ne_of_isIntegral
+#print axioms HadwigerNelson.StandingFive.fourteen_dvd_inertiaDeg
+#print axioms HadwigerNelson.StandingFive.two_le_ramificationIdx
+#print axioms HadwigerNelson.StandingFive.exists_two_primes
+#print axioms HadwigerNelson.StandingFive.dyadic_summary
+#print axioms HadwigerNelson.StandingFive.finrank_standingField
+#print axioms HadwigerNelson.StandingFive.finrank_E7_and_K
+#print axioms HadwigerNelson.StandingFive.minpoly_eta
+#print axioms HadwigerNelson.StandingFive.irreducible_gPoly
+#print axioms HadwigerNelson.StandingFive.cev_hvec
+#print axioms HadwigerNelson.StandingFive.ncard_primes_above_two
+#print axioms HadwigerNelson.StandingFive.comap_conj_of_two_mem
+#print axioms HadwigerNelson.StandingFive.card_quotient_of_two_mem
+#print axioms HadwigerNelson.StandingFive.exists_stablePrime_two
+#print axioms HadwigerNelson.StandingFive.exists_conjO_sub_notMem
+#print axioms HadwigerNelson.StandingFive.stablePrime_card
+#print axioms HadwigerNelson.StandingFive.le_localBound
+#print axioms HadwigerNelson.StandingFive.seven_le_localBound
+#print axioms HadwigerNelson.StandingFive.five_le_chromaticNumber
+
+/-! ## FS-131 wave 10's first pass (job FS131-L10A) — the landing: the theorems of `Arith/{CharacterColouring, SpectralInputs,
+StationaryRatio, StandingFive}` that the planner's and the three implementers' blocks did not list. Read from the kernel's own
+list of the library's theorems (`data/fs131/l5/count-modules.lean`), by `tools/fs131_l10a_register.py`; checked by
+`tools/fs131_l5_records.py`. -/
+-- Arith/CharacterColouring
+#print axioms HadwigerNelson.CharacterColouring.coe_inclusion_subring
+#print axioms HadwigerNelson.CharacterColouring.coe_smul_unitRing
+#print axioms HadwigerNelson.CharacterColouring.exists_mem_torsionBy_of_mem_torsion
+#print axioms HadwigerNelson.CharacterColouring.half_one
+#print axioms HadwigerNelson.CharacterColouring.mem_archimedean
+#print axioms HadwigerNelson.CharacterColouring.mem_torsionBy
+#print axioms HadwigerNelson.CharacterColouring.mk1_apply
+#print axioms HadwigerNelson.CharacterColouring.torsionBy_le_torsion
+#print axioms HadwigerNelson.CharacterColouring.unitRingToFieldI_injective
+#print axioms HadwigerNelson.CharacterColouring.unitRing_mono
+#print axioms HadwigerNelson.CharacterColouring.unitVectors_mono
+-- Arith/SpectralInputs
+#print axioms HadwigerNelson.SpectralInputs.abs_clamp_sub_le
+#print axioms HadwigerNelson.SpectralInputs.add_mem_contVec
+#print axioms HadwigerNelson.SpectralInputs.aestronglyMeasurable_of_mem_contVec
+#print axioms HadwigerNelson.SpectralInputs.clamp_zero
+#print axioms HadwigerNelson.SpectralInputs.coe_char_sub
+#print axioms HadwigerNelson.SpectralInputs.compMeasurePreserving_compLp
+#print axioms HadwigerNelson.SpectralInputs.compMeasurePreserving_comp_apply
+#print axioms HadwigerNelson.SpectralInputs.compMeasurePreserving_congr
+#print axioms HadwigerNelson.SpectralInputs.compl_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.condLaw_le_one
+#print axioms HadwigerNelson.SpectralInputs.condLaw_nonneg
+#print axioms HadwigerNelson.SpectralInputs.const_mem_contVec
+#print axioms HadwigerNelson.SpectralInputs.empty_mem_factorSets
+#print axioms HadwigerNelson.SpectralInputs.factorSigma_le
+#print axioms HadwigerNelson.SpectralInputs.indicatorConstLp_mem_contVec
+#print axioms HadwigerNelson.SpectralInputs.indicatorConstLp_mem_contVec_iff
+#print axioms HadwigerNelson.SpectralInputs.integrable_colourIndicator
+#print axioms HadwigerNelson.SpectralInputs.integrable_evalChar
+#print axioms HadwigerNelson.SpectralInputs.integral_evalChar_map_mulRight
+#print axioms HadwigerNelson.SpectralInputs.integral_evalChar_zero
+#print axioms HadwigerNelson.SpectralInputs.integral_mul_comp_eq_inner
+#print axioms HadwigerNelson.SpectralInputs.lipschitzWith_clamp
+#print axioms HadwigerNelson.SpectralInputs.measurableSet_condLaw_pos
+#print axioms HadwigerNelson.SpectralInputs.measurableSet_condSupport_eq
+#print axioms HadwigerNelson.SpectralInputs.measurable_condLaw
+#print axioms HadwigerNelson.SpectralInputs.measurable_evalChar
+#print axioms HadwigerNelson.SpectralInputs.measurable_mulDual
+#print axioms HadwigerNelson.SpectralInputs.measurable_mulRight
+#print axioms HadwigerNelson.SpectralInputs.measurable_mul_char
+#print axioms HadwigerNelson.SpectralInputs.measurable_of_evalChar
+#print axioms HadwigerNelson.SpectralInputs.measure_condLaw_nonpos_inter
+#print axioms HadwigerNelson.SpectralInputs.mem_condSupport
+#print axioms HadwigerNelson.SpectralInputs.mem_contVec_of_aestronglyMeasurable
+#print axioms HadwigerNelson.SpectralInputs.mulDual_apply
+#print axioms HadwigerNelson.SpectralInputs.neg_mem_contVec
+#print axioms HadwigerNelson.SpectralInputs.norm_comp_indicator_sub
+#print axioms HadwigerNelson.SpectralInputs.norm_indicatorConstLp_two
+#print axioms HadwigerNelson.SpectralInputs.rot_apply
+#print axioms HadwigerNelson.SpectralInputs.rot_comp_mulDual
+#print axioms HadwigerNelson.SpectralInputs.rot_mul
+#print axioms HadwigerNelson.SpectralInputs.sub_mem_contVec
+#print axioms HadwigerNelson.SpectralInputs.tendsto_sqrt_toReal_iff
+#print axioms HadwigerNelson.SpectralInputs.union_mem_factorSets
+-- Arith/StandingFive
+#print axioms HadwigerNelson.StandingFive.E7_le
+#print axioms HadwigerNelson.StandingFive.aeval_etaF
+#print axioms HadwigerNelson.StandingFive.aeval_etaI
+#print axioms HadwigerNelson.StandingFive.aeval_gPoly
+#print axioms HadwigerNelson.StandingFive.aeval_gPoly_map
+#print axioms HadwigerNelson.StandingFive.aeval_up_etaI
+#print axioms HadwigerNelson.StandingFive.anyBelow_of
+#print axioms HadwigerNelson.StandingFive.card_quot_eq_two_pow
+#print axioms HadwigerNelson.StandingFive.cev_add
+#print axioms HadwigerNelson.StandingFive.cev_cconv
+#print axioms HadwigerNelson.StandingFive.cev_cdelta
+#print axioms HadwigerNelson.StandingFive.chi29_add
+#print axioms HadwigerNelson.StandingFive.chi29_eq
+#print axioms HadwigerNelson.StandingFive.chi29_zero
+#print axioms HadwigerNelson.StandingFive.closure_eq_adjoin
+#print axioms HadwigerNelson.StandingFive.conjO_conjO
+#print axioms HadwigerNelson.StandingFive.conjO_iO
+#print axioms HadwigerNelson.StandingFive.conjO_omO
+#print axioms HadwigerNelson.StandingFive.conjO_up
+#print axioms HadwigerNelson.StandingFive.conjOn_iL
+#print axioms HadwigerNelson.StandingFive.conjOn_toL
+#print axioms HadwigerNelson.StandingFive.eta_mem
+#print axioms HadwigerNelson.StandingFive.exists_natCast_of_pow_eq
+#print axioms HadwigerNelson.StandingFive.exists_root_gPoly_of_sign
+#print axioms HadwigerNelson.StandingFive.finrank_closure
+#print axioms HadwigerNelson.StandingFive.finrank_fieldI_le
+#print axioms HadwigerNelson.StandingFive.finrank_simple_le
+#print axioms HadwigerNelson.StandingFive.finrank_standingIF_le
+#print axioms HadwigerNelson.StandingFive.gPoly_monic
+#print axioms HadwigerNelson.StandingFive.gPoly_natDegree
+#print axioms HadwigerNelson.StandingFive.horner1
+#print axioms HadwigerNelson.StandingFive.horner2
+#print axioms HadwigerNelson.StandingFive.horner3
+#print axioms HadwigerNelson.StandingFive.horner4
+#print axioms HadwigerNelson.StandingFive.horner5
+#print axioms HadwigerNelson.StandingFive.horner6
+#print axioms HadwigerNelson.StandingFive.horner7
+#print axioms HadwigerNelson.StandingFive.iL_sq
+#print axioms HadwigerNelson.StandingFive.iO_sq
+#print axioms HadwigerNelson.StandingFive.instFiniteDimensionalStandingIF
+#print axioms HadwigerNelson.StandingFive.instNumberFieldStanding
+#print axioms HadwigerNelson.StandingFive.isIntegral_eta
+#print axioms HadwigerNelson.StandingFive.isIntegral_of_aeval_gPoly
+#print axioms HadwigerNelson.StandingFive.isIntegral_of_sq_add
+#print axioms HadwigerNelson.StandingFive.isIntegral_sqrt_eleven
+#print axioms HadwigerNelson.StandingFive.isIntegral_sqrt_three
+#print axioms HadwigerNelson.StandingFive.isTotallyReal_aux
+#print axioms HadwigerNelson.StandingFive.liesOver_two
+#print axioms HadwigerNelson.StandingFive.mem_primesOver_two_iff
+#print axioms HadwigerNelson.StandingFive.mod_four_of_pow
+#print axioms HadwigerNelson.StandingFive.omL_rel
+#print axioms HadwigerNelson.StandingFive.omO_rel
+#print axioms HadwigerNelson.StandingFive.pow_char_eq_of_sq_natCast
+#print axioms HadwigerNelson.StandingFive.pow_mod_four_ne
+#print axioms HadwigerNelson.StandingFive.pow_natCard
+#print axioms HadwigerNelson.StandingFive.s11F_sq
+#print axioms HadwigerNelson.StandingFive.s11I_sq
+#print axioms HadwigerNelson.StandingFive.s3F_sq
+#print axioms HadwigerNelson.StandingFive.s3I_sq
+#print axioms HadwigerNelson.StandingFive.span_two_ne_top
+#print axioms HadwigerNelson.StandingFive.sq_mod_four_ne
+#print axioms HadwigerNelson.StandingFive.sqrt_eleven_mem
+#print axioms HadwigerNelson.StandingFive.sqrt_three_mem
+#print axioms HadwigerNelson.StandingFive.squaresBelow_11
+#print axioms HadwigerNelson.StandingFive.standingField_eq
+#print axioms HadwigerNelson.StandingFive.sum_chi29
+#print axioms HadwigerNelson.StandingFive.thetaF_rel
+#print axioms HadwigerNelson.StandingFive.thetaI_rel
+#print axioms HadwigerNelson.StandingFive.toStandingIF_injective
+#print axioms HadwigerNelson.StandingFive.twentyeight_le
+#print axioms HadwigerNelson.StandingFive.twoZ_ne_bot
+#print axioms HadwigerNelson.StandingFive.up_s11I_sq
+#print axioms HadwigerNelson.StandingFive.up_s3I_sq
+#print axioms HadwigerNelson.StandingFive.up_thetaI_mul
+
+
+/-! ## FS131-K6 — wave 6 (saturated colourings): the foundation, and the leaves the planner proved (the skeleton's `sorry` leaves are listed by wave 6's implementer as it proves them) -/
 #print axioms HadwigerNelson.Plane.AeColouring.isOpen_openPart
 #print axioms HadwigerNelson.Plane.AeColouring.openPart_subset_densitySet
 #print axioms HadwigerNelson.Plane.sqColA_ne_sqColB
@@ -6316,9 +6955,7 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.bound_iff
 #print axioms HadwigerNelson.Plane.gmap_i
 #print axioms HadwigerNelson.Plane.gmap_ii
-
 /-! ## FS131-K6b — wave 6's second planning pass: the foundation restated over two sets and a family (the first pass's `TwoColourAt` lines are replaced by these), the fan, and the leaves this pass proved -/
-
 #print axioms HadwigerNelson.Plane.H2On.volume_pos
 #print axioms HadwigerNelson.Plane.TwoColourOn.nonempty
 #print axioms HadwigerNelson.Plane.TwoColourOn.symm
@@ -6372,9 +7009,7 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.IsUnitCurve.mono
 #print axioms HadwigerNelson.Plane.norm_sub_le_of_discs
 #print axioms HadwigerNelson.Plane.sq9_isolatedAt
-
 /-! ## FS131-I6C — wave 6's bridge, line C: the leaves of `Plane/Saturated/Curve` (unit-speed curves with 1-Lipschitz tangent angle), then of `Plane/Saturated/LocalGraph`, with the implementer's children -/
-
 #print axioms HadwigerNelson.Plane.IsUnitCurve.hasDerivWithinAt_re_mul
 #print axioms HadwigerNelson.Plane.IsUnitCurve.hasDerivWithinAt_norm_sq
 #print axioms HadwigerNelson.Plane.IsUnitCurve.abs_sub_le
@@ -6420,7 +7055,6 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.TwoColourOn.ae_le_of_isPreconnected
 #print axioms HadwigerNelson.Plane.sq9_not_isCuspAt_near_edge
 #print axioms HadwigerNelson.Plane.sqEdgePt_mem_essBoundary
-
 -- entered at the join (FS131-L6A): proved over `Pinch`'s `c11_discs` and `TwoColourOn.essBoundary_inter_eq`
 #print axioms HadwigerNelson.Plane.HasTwoDiscsAt.one_le_norm_sub
 #print axioms HadwigerNelson.Plane.HasTwoDiscsAt.norm_sub_le
@@ -6428,9 +7062,7 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.local_graph
 #print axioms HadwigerNelson.Plane.AeColouring.local_graph
 #print axioms HadwigerNelson.Plane.sq9_exists_isInterfaceChart
-
 /-! ## FS131-I6E — wave 6's bridge: what every fan carries (`Plane/Saturated/FanBridge`, the five `Fan` lemmas) — the two leaves that read no saturation (`Fan.two_le_n`, `Fan.col_ne`) and the children of the five that rest on no open leaf of another line; the fourteen records proved over `gamma`, `IsUnitCurve.exists_polarGraph` and `Pinch`'s leaves are the block's last section, entered at the join (FS131-L6A) -/
-
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.two_le_n
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.col_ne
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.col_ne_aux
@@ -6486,8 +7118,6 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side_next
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_side_dir
-
-
 -- entered at the join (FS131-L6A): proved over `gamma`, `IsUnitCurve.exists_polarGraph` and `Pinch`'s leaves
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_unitCurve_branch
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.exists_twoColourNhd_branch
@@ -6503,7 +7133,6 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.false_of_horn_dir
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_alone
 #print axioms HadwigerNelson.Plane.AeColouring.Fan.sector_unique
-
 /-! ## FS131-I6D — wave 6, the bridge's existence half: the curve lemmas, the continuation, GAMMA, BETA, ALPHA (re-read at the join, FS131-L6A: nothing beneath them is open) -/
 #print axioms HadwigerNelson.Plane.IsUnitCurve.affine
 #print axioms HadwigerNelson.Plane.IsUnitCurve.sin_abs_le_dist
@@ -6546,7 +7175,6 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.sq9_singularSet_subset_grid
 #print axioms HadwigerNelson.Plane.sq9_singLocallyFinite
 #print axioms HadwigerNelson.Plane.sq9_regJFan
-
 /-! ## FS131-I6A — wave 6, `Plane/Saturated/Pinch`: the leaves the first implementer proved, and its helpers -/
 #print axioms HadwigerNelson.Plane.norm_sq_mul_sub_of_norm_eq_one
 #print axioms HadwigerNelson.Plane.dist_add_mul_lt_one
@@ -6585,7 +7213,6 @@ by this job with its record: `ringPt_ne_of_abs_sub_lt` (`BaseDense`; kept: `ring
 #print axioms HadwigerNelson.Plane.pinch_interface
 #print axioms HadwigerNelson.Plane.c11_discs_interface
 #print axioms HadwigerNelson.Plane.TwoColourNhd.mem_essBoundary
-
 /-! ## FS131-I6B — wave 6: `MapColouring`'s leaf `sat_inP` (FS121-C1-SAT) with its helpers (`Plane/Saturated/MapEdge`) and its model (`Plane/Saturated/Sq9Map`) -/
 #print axioms HadwigerNelson.Plane.MapEdge.densityRatio_congr_ae
 #print axioms HadwigerNelson.Plane.MapEdge.essBoundary_congr_ae

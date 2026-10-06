@@ -1,0 +1,31 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 2,3,4,5,6,7,8,9
+==> build: this run's full output: build/gate/build/20261006T104947Z-3429928.log
+    ⚠ [3703/3894] Replayed Proofs.HadwigerNelson.Arith.StationaryRatio
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:100:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:107:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:121:8: declaration uses `sorry`
+    ⚠ [5748/5752] Replayed Proofs.HadwigerNelson.Arith.CharacterColouring
+    warning: Proofs/HadwigerNelson/Arith/CharacterColouring.lean:359:8: declaration uses `sorry`
+    ⚠ [5749/5752] Replayed Proofs.HadwigerNelson.Arith.SpectralInputs
+    warning: Proofs/HadwigerNelson/Arith/SpectralInputs.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/SpectralInputs.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/SpectralInputs.lean:145:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/SpectralInputs.lean:151:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/SpectralInputs.lean:156:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/SpectralInputs.lean:201:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/SpectralInputs.lean:219:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/SpectralInputs.lean:243:8: declaration uses `sorry`
+    ⚠ [5750/5752] Replayed Proofs.HadwigerNelson.Arith.StandingFive
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:70:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:85:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:91:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:102:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:128:8: declaration uses `sorry`
+    All targets up-to-date (5754 jobs).
+==> build: OK — all 1771 modules already up to date, nothing built, 4 module(s) with warnings, 2s
+    full output: build/gate/build/20261006T104947Z-3429928.log
+EXIT=0

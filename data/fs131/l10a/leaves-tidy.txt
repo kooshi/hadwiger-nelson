@@ -1,0 +1,3 @@
+read: 24 names; 24 on exactly the standard three, 0 on a proper subset; control shows sorryAx; faults 0
+leaves: PASS
+exit=0

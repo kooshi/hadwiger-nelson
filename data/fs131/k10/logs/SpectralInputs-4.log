@@ -1,0 +1,9 @@
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:60:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:111:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:144:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:150:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:155:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:200:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:210:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:235:8: warning: declaration uses `sorry`
+exit=0

@@ -315,8 +315,8 @@ end Collar
 the set of radius-2 contacts of the inner colour for the map at hand — a contact piece is left alone (`AwayBend.idle`), a gap is bent by
 the outward collar bend (`bend_away_gap`), and two bends end to end compose (`AwayBend.next`, `AwayBend.join`); the second bend is
 applied to the map the first produced, so the statement runs over every valid plane map with the arc, and `ε ≤ 1/2` keeps each collar off
-`P` and off the radius-2 circle. Inhabitant of the hypotheses: owed with `bend_away_part`'s model
-(`plans/FS131-bendaway-kernel-plan.md` § 5). -/
+`P` and off the radius-2 circle. Inhabitant of the hypotheses: `awayModel` with the subdivision of its arc that `exists_r2Subdiv` gives
+(`Plane/Models/Applied` applies this theorem to them). -/
 theorem bend_away_subdiv {C : Set ℝ} {P : ℂ} {c c' : Fin k} {a b : ℝ} (hs : R2Subdiv C a b) :
     ∀ F : ArcMap k, F.Valid → F.IsPlaneMap → F.IsRingArc P a b c c' → c ∉ F.coloursAt P →
       (∀ θ ∈ Ioo a b, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) →
@@ -356,9 +356,10 @@ reads**, inventory ruling 444; IA1's form asked a non-degenerate interval of `r2
 (`plans/FS131-bendaway-kernel-plan.md` § 3; FS131-BA1, BA2, BA3): the finite subdivision of `[θ₁, θ₂]` by the contacts (`exists_r2Subdiv`, where the plane
 map is used), the bend over it (`bend_away_subdiv`), and the last clause from the package (`AwayBend.contact_of_onRingArc`). At a contact
 end of a gap the lens is tangent to `ω(P)` and must lie under FS131-E5's circle `Σ_Y` (§ 4.2 there: lens radius below `ρ_Y − 1`), not
-only under the unit circle about the contact. Model of the hypotheses: none in Lean yet; `isoFrag` (FS112-ISO) is the hand
-model with one isolated contact, a fragment — the plane-map inhabitant with a radius-2 contact is planned in the record's § 5 (open gate
-item, ruling 419 (d)). -/
+only under the unit circle about the contact. Model of the hypotheses: `awayModel` (`Plane/Models/Bends`, `awayModel_hyps`: the five at
+once, `P = awayP`, `c = 7`, `c' = 0`; this theorem applied to it: `Plane/Models/Applied`, `awayModel_bend_away_part`), a map of the plane
+whose radius-2 contacts are the interval `[−arcsin (3/20), arcsin (3/20)]` strictly inside the arc's angles (`awayModel_r2Contacts`): two
+gaps and a contact piece. An isolated contact is not exercised (`isoFrag`, FS112-ISO, a fragment, is the hand model of one). -/
 theorem bend_away_part (hF : F.Valid) (hP : F.IsPlaneMap) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
     (hA : F.IsRingArc P θ₁ θ₂ c c') (hin : c ∉ F.coloursAt P)
     (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) {ε : ℝ} (hε : 0 < ε) :

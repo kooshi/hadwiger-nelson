@@ -1,0 +1,6 @@
+Arith/CharacterColouring: 13 names cited, 0 not declared in the module: []
+Arith/SpectralInputs: 27 names cited, 0 not declared in the module: []
+Arith/StationaryRatio: 11 names cited, 0 not declared in the module: []
+  control (a cited name misspelt): ['cantorLevel_zz_planted'] -> fired
+Arith/StandingFive: 28 names cited, 0 not declared in the module: []
+arch rows: PASS

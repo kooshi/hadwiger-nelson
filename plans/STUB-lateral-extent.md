@@ -49,3 +49,7 @@ FS121-D4-HOLE, -LINE, -TINY16, -FALL; FS121-V5-FACE-SHARP, -GRID-CANTOR, -PAIR.
 ## Provisional bearings
 
 G84, G85; the drafted G90 (lateral extent against gap); G54 (fall colourings); G21. Stubs: FS-120 (the pinch), FS-126, FS-128.
+
+Since FS131-E8 (`plans/FS131-E8-derivation.md`; [hand], one mind, kernel pending): in a saturated colouring a locally finite Σ gives a fan with end
+tangents at each of its points and finitely many interface arcs in every bounded set (FS131-E8-BRIDGE, -CLAUSE2), so C121-REGJ is its first clause —
+the question is the singular points alone, and infinitely many boundary arcs in a bounded set are a wild Σ, never a second kind of crowding.

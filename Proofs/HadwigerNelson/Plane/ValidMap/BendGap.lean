@@ -766,7 +766,8 @@ near, it is within `< 1` (`n2_env_near_away`, the class off a disc about `P` by 
 (`n2_env_away`), so — the arc off small discs about its ends being compact and off the class's closure (`hgap`) — within `η` of an
 end, where it is beyond the end (`claim_e`) or on the gap's side at distance `≥ 2` from `P` and off the cap (`r2_side_dichotomy`'s
 "none" case, forced by `hgap`), hence farther than `1` (`end_cap`, once `R ≤ ρ₀ − 1`). **Proved (FS131-BA2)** (child C4, the new
-mathematics of the bend). Inhabitant of the hypotheses: owed with the away bend's model (plan § 5). -/
+mathematics of the bend). Inhabitant of the hypotheses: `awayModel` on the sub-arc `[1/5, 3/10]`, inside a gap of its radius-2 contacts
+(`Plane/Models/Applied`: `awayModel_gap`, this theorem applied). -/
 theorem exists_lensOut_clear (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ c c') (hin : c ∉ F.coloursAt P)
     (hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom) (hgap : ∀ θ ∈ Ioo θ₁ θ₂, P + 2 * e θ ∉ closure (F.region c)) :
     ∀ᶠ τ in 𝓝[>] (0 : ℝ), ∀ z ∈ polarSet P (Ioo θ₁ θ₂) (fun θ => Ioo 1 (outerProf θ₁ θ₂ (1 + τ / 2) θ)), F.IsClear c z := by
@@ -1428,8 +1429,9 @@ theorem CollarFitOut.awayBend (hF : F.Valid) (hfit : CollarFitOut F P θ₁ θ�
       bent := fun θ hθ => Or.inr (hbent θ hθ)
       rest := Set.Finite.subset Set.finite_empty fun θ hθ => hθ.2.1 (hbent θ hθ.1) }
 
-/-- **The away bend of one gap**: the outward collar bend exists and is an away bend. Inhabitant of the hypotheses: owed with the away
-bend's model (plan § 5; on a fragment, `isoFrag`'s half-arcs on either side of its isolated contact). -/
+/-- **The away bend of one gap**: the outward collar bend exists and is an away bend. Inhabitant of the hypotheses: `awayModel` on the
+sub-arc `[1/5, 3/10]`, inside a gap of its radius-2 contacts (`Plane/Models/Applied`: `awayModel_gap`, `awayModel_isRingArc_gap`, this
+theorem applied; on a fragment, `isoFrag`'s half-arcs on either side of its isolated contact). -/
 theorem bend_away_gap (hF : F.Valid) (hA : F.IsRingArc P θ₁ θ₂ c c') (hin : c ∉ F.coloursAt P)
     (hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom)
     (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1)

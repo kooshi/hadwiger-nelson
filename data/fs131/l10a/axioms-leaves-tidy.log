@@ -1,0 +1,33 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0,1
+'HadwigerNelson.CharacterColouring.mem_archimedean_unitRing_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.exists_isHaarFourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.sp_if' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.measurableSet_factorSigma_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.contVec_eq_lpMeas' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.measurableSet_preimage_factorSigma' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.spectral_carried_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.contChars_haar_null' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.si4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StationaryRatio.ratio_prod_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.numberField_standingField' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.finrank_standingField' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.isTotallyReal_standingField' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.ncard_primes_above_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.comap_conj_of_two_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.card_quotient_of_two_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.usable_card_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.stablePrime_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.le_localBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.no_small_usable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.seven_le_localBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.five_le_chromaticNumber' depends on axioms: [propext, Classical.choice, Quot.sound]
+data/fs131/l10a/axioms-leaves.lean:34:8: warning: declaration uses `sorry`
+'HadwigerNelson.fs131_l10a_control' depends on axioms: [sorryAx]

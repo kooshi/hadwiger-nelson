@@ -1,0 +1,26 @@
+### the faithful run: exactly the ruled statements changed, against 77e1f077 (Stage 2's tip)
+delta against 77e1f077 over 4 file(s): 320 declarations before, 317 after; statements changed 5 ['HadwigerNelson.SpectralInputs.sp_if', 'HadwigerNelson.SpectralInputs.spectral_carried_iff', 'HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul', 'HadwigerNelson.StationaryRatio.ratio_prod_le', 'HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels']; removed 3 ['HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul_of_symm', 'HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels_of_shrink', 'HadwigerNelson.StationaryRatio.ratio_prod_le_of_symm']; added 0 []; docstring alone 0 []
+delta: PASS
+exit=0
+### control 1: the same tree, with one ruled change left off the list (must fail: CHANGED, not ruled)
+delta against 77e1f077 over 4 file(s): 320 declarations before, 317 after; statements changed 5 ['HadwigerNelson.SpectralInputs.sp_if', 'HadwigerNelson.SpectralInputs.spectral_carried_iff', 'HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul', 'HadwigerNelson.StationaryRatio.ratio_prod_le', 'HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels']; removed 3 ['HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul_of_symm', 'HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels_of_shrink', 'HadwigerNelson.StationaryRatio.ratio_prod_le_of_symm']; added 0 []; docstring alone 0 []
+  CHANGED, not ruled: HadwigerNelson.SpectralInputs.sp_if
+delta: FAIL (1 fault(s))
+exit=1
+### control 2: the same tree, with a twin not listed as removed (must fail: REMOVED, not ruled)
+delta against 77e1f077 over 4 file(s): 320 declarations before, 317 after; statements changed 5 ['HadwigerNelson.SpectralInputs.sp_if', 'HadwigerNelson.SpectralInputs.spectral_carried_iff', 'HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul', 'HadwigerNelson.StationaryRatio.ratio_prod_le', 'HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels']; removed 3 ['HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul_of_symm', 'HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels_of_shrink', 'HadwigerNelson.StationaryRatio.ratio_prod_le_of_symm']; added 0 []; docstring alone 0 []
+  REMOVED, not ruled: HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul_of_symm
+delta: FAIL (1 fault(s))
+exit=1
+### control 3: against the tree itself, the ruled list given (must fail: NOT-CHANGED, NOT-REMOVED)
+delta against HEAD~0 over 1 file(s): 132 declarations before, 132 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 0 []
+  NOT-CHANGED, ruled to change: HadwigerNelson.SpectralInputs.sp_if
+  NOT-CHANGED, ruled to change: HadwigerNelson.SpectralInputs.spectral_carried_iff
+  NOT-CHANGED, ruled to change: HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul
+  NOT-CHANGED, ruled to change: HadwigerNelson.StationaryRatio.ratio_prod_le
+  NOT-CHANGED, ruled to change: HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels
+  NOT-REMOVED, ruled to go: HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul_of_symm
+  NOT-REMOVED, ruled to go: HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels_of_shrink
+  NOT-REMOVED, ruled to go: HadwigerNelson.StationaryRatio.ratio_prod_le_of_symm
+delta: FAIL (8 fault(s))
+exit=1

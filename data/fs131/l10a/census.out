@@ -1,0 +1,13 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 0,1,2,3
+=== L10A CENSUS === formers=10 declarations-read=12738
+PRED HadwigerNelson.CharacterColouring.OrderBound module=Proofs.HadwigerNelson.Arith.CharacterColouring kind=def prop=true sites=3 closedSites=1 refut=0 isEmpty=0 witness=0 condRefut=0 :: refut=[] isEmpty=[] witness=[]
+PRED HadwigerNelson.SpectralChain.Interface.MulStable module=Proofs.HadwigerNelson.Arith.SpectralInputs kind=def prop=true sites=1 closedSites=0 refut=0 isEmpty=0 witness=0 condRefut=0 :: refut=[] isEmpty=[] witness=[]
+PRED HadwigerNelson.SpectralChain.Interface.NegCircle module=Proofs.HadwigerNelson.Arith.SpectralInputs kind=def prop=true sites=1 closedSites=0 refut=0 isEmpty=0 witness=0 condRefut=0 :: refut=[] isEmpty=[] witness=[]
+PRED HadwigerNelson.SpectralInputs.BochnerOn module=Proofs.HadwigerNelson.Arith.SpectralInputs kind=def prop=true sites=1 closedSites=0 refut=0 isEmpty=0 witness=0 condRefut=0 :: refut=[] isEmpty=[] witness=[]
+PRED HadwigerNelson.SpectralInputs.IsHaarFourier module=Proofs.HadwigerNelson.Arith.SpectralInputs kind=def prop=true sites=5 closedSites=0 refut=0 isEmpty=0 witness=0 condRefut=0 :: refut=[] isEmpty=[] witness=[]
+PRED HadwigerNelson.SpectralInputs.IsSpectralMeasureOf module=Proofs.HadwigerNelson.Arith.SpectralInputs kind=def prop=true sites=1 closedSites=0 refut=0 isEmpty=0 witness=0 condRefut=0 :: refut=[] isEmpty=[] witness=[]
+PRED HadwigerNelson.StandingFive.StandingFloor module=Proofs.HadwigerNelson.Arith.StandingFive kind=def prop=true sites=3 closedSites=2 refut=0 isEmpty=0 witness=0 condRefut=0 :: refut=[] isEmpty=[] witness=[]
+PRED HadwigerNelson.StandingFive.TargetFloor module=Proofs.HadwigerNelson.Arith.StandingFive kind=def prop=true sites=0 closedSites=0 refut=0 isEmpty=0 witness=0 condRefut=0 :: refut=[] isEmpty=[] witness=[]
+PRED HadwigerNelson.StationaryRatio.StationarySet module=Proofs.HadwigerNelson.Arith.StationaryRatio kind=structure prop=false sites=32 closedSites=0 refut=0 isEmpty=0 witness=1 condRefut=0 :: refut=[] isEmpty=[] witness=[HadwigerNelson.StationaryRatio.StationarySet.parity]
+PRED HadwigerNelson.StationaryRatio.StationarySet.AEIndependent module=Proofs.HadwigerNelson.Arith.StationaryRatio kind=def prop=true sites=4 closedSites=0 refut=0 isEmpty=0 witness=1 condRefut=0 :: refut=[] isEmpty=[] witness=[HadwigerNelson.StationaryRatio.StationarySet.parity_aeIndependent]
+=== END ===

@@ -1,0 +1,49 @@
+### up-to-date check, lake build --no-build over 1771 modules: exit 0 after 2s
+⚠ [5708/5754] Replayed Proofs.HadwigerNelson.Plane.Models.Paint
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:224:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:230:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:238:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:259:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:263:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:275:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:285:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:290:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:299:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:304:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:310:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:318:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Paint.lean:326:8: declaration uses `sorry`
+⚠ [5720/5754] Replayed Proofs.HadwigerNelson.Plane.Models.Bends
+warning: Proofs/HadwigerNelson/Plane/Models/Bends.lean:163:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Bends.lean:168:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Bends.lean:179:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Bends.lean:186:8: declaration uses `sorry`
+⚠ [5721/5754] Replayed Proofs.HadwigerNelson.Plane.Models.Moves
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:35:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:40:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:56:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:60:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:64:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:68:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:72:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:76:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:80:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:85:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:90:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:120:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:135:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:141:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:157:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:161:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:165:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Moves.lean:170:8: declaration uses `sorry`
+⚠ [5722/5754] Replayed Proofs.HadwigerNelson.Plane.Models.Stuck
+warning: Proofs/HadwigerNelson/Plane/Models/Stuck.lean:1362:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Stuck.lean:1383:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Stuck.lean:1390:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Stuck.lean:1394:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Stuck.lean:1408:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Stuck.lean:1412:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Stuck.lean:1416:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/Models/Stuck.lean:1421:8: declaration uses `sorry`
+All targets up-to-date (5754 jobs).

@@ -433,8 +433,9 @@ of radius `ρ₀ > 2` tangent to it at `w₀` from `P`'s side (centre `P + (2 �
 radius-2 circle and the circle of radius `2(1 + τ)` on that side is free of `Γ` (`exists_r2_crescent_free`), connected and in the
 domain, so of one colour `j`; a radius-2 point `w` next to `w₀` on that side has a neighbourhood whose part outside the radius-2 circle
 is in the crescent and whose part inside or on it misses the class (inside by `ne1_region` against the inner side of the arc near
-`r(θ)`, an interior point of the arc; on the circle because the class is open), so `w` is a contact iff `j = c`. **Proved (FS131-BA2)** (child C2). Inhabitant of the
-hypotheses: owed with the away bend's model (plan § 5). -/
+`r(θ)`, an interior point of the arc; on the circle because the class is open), so `w` is a contact iff `j = c`. **Proved (FS131-BA2)** (child C2). Inhabitant
+of the hypotheses: `awayModel` on its arc of `ω(awayP)`, at the angle `0` (`Plane/Models/Bends`, `awayModel_hyps`; this theorem applied to
+it in `Plane/Models/Applied`). -/
 theorem r2_side_dichotomy (hF : F.Valid) {P : ℂ} {θ₁ θ₂ θ₀ σ δ₀ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
     (hσ : σ = 1 ∨ σ = -1) (hθ₀ : θ₀ ∈ Icc θ₁ θ₂) (hδ₀ : 0 < δ₀) (hside : θ₀ + σ * δ₀ ∈ Icc θ₁ θ₂)
     (hw : P + 2 * e θ₀ ∈ F.dom) :
@@ -542,7 +543,9 @@ theorem r2_side_dichotomy (hF : F.Valid) {P : ℂ} {θ₁ θ₂ θ₀ σ δ₀ :
 
 /-- **The radius-2 contacts over a constant-sided unit arc have a finite subdivision** when `R₂(ᾱ)` lies in the domain: by
 `r2_side_dichotomy` each angle of `[θ₁, θ₂]` has, on each side, a one-sided neighbourhood wholly in the contacts or wholly off them;
-`R2Subdiv.of_local` joins the pieces (near `x` an interval `(u, v)` is one piece if `x ∉ (u, v)` and two joined at `x` otherwise). **Proved (FS131-BA2)** (child C3). Inhabitant of the hypotheses: owed with the away bend's model. -/
+`R2Subdiv.of_local` joins the pieces (near `x` an interval `(u, v)` is one piece if `x ∉ (u, v)` and two joined at `x` otherwise). **Proved (FS131-BA2)** (child C3). Inhabitant
+of the hypotheses: `awayModel` on its arc of `ω(awayP)` (`Plane/Models/Bends`, `awayModel_hyps`; this theorem applied to it in
+`Plane/Models/Applied`). -/
 theorem exists_r2Subdiv (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
     (hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom) : R2Subdiv {θ | P + 2 * e θ ∈ closure (F.region c)} θ₁ θ₂ := by
   refine R2Subdiv.of_local hA.1 fun x hx => ?_

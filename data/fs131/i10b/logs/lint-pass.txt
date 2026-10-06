@@ -1,0 +1,5 @@
+-- Found 0 errors in 72 declarations (plus 63 automatically generated ones) in the current file with 14 linters
+
+
+-- All linting checks passed!
+exit=0

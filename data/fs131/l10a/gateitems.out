@@ -1,0 +1,33 @@
+NO-HYPOTHESIS  CharacterColouring.mem_archimedean_unitRing_iff         
+NO-NOTE        SpectralInputs.exists_isHaarFourier                     
+NOTE           SpectralInputs.sp_if                                    INHABITANT: over the arithmetic `E` the hypothesis is the open zero-entropy question; at `Interface.trivial` it is met by the point mass at the trivial character. **`hcirc : I.NegCircle` has no Lean model on file**: `Interface.tri
+NO-NOTE        SpectralInputs.measurableSet_factorSigma_iff            
+NO-NOTE        SpectralInputs.contVec_eq_lpMeas                        
+NO-NOTE        SpectralInputs.measurableSet_preimage_factorSigma       
+NO-NOTE        SpectralInputs.spectral_carried_iff                     
+NO-NOTE        SpectralInputs.contChars_haar_null                      
+NO-NOTE        SpectralInputs.si4                                      
+NOTE           StationaryRatio.StationarySet.prob_le_ratio_mul         Inhabitant of the hypotheses: `StationarySet.parity` with `ν = δ₁` (`map_neg_dirac_one`, `StationarySet.parity_aeIndependent`), where it reads `1/2 ≤ r · P(N[A])` (the Spec section). -/
+NOTE           StationaryRatio.ratio_prod_le                           Inhabitant of the hypotheses: `G = H = ZMod 2`, `ν_G = ν_H = δ₁` (`map_neg_dirac_one`), where it reads `r(K₂ × K₂) ≤ 1/2` (the Spec section). -/
+NOTE           StationaryRatio.ratio_prod_le_iSup_levels               Inhabitant of the hypotheses: `Y = ℕ → ZMod 2` with the levels `cantorLevel` (`exists_cantorLevel_subset`), `X = ZMod 2` (the Spec section). -/
+NO-HYPOTHESIS  StandingFive.numberField_standingField                  
+NO-HYPOTHESIS  StandingFive.finrank_standingField                      
+NO-HYPOTHESIS  StandingFive.isTotallyReal_standingField                
+NO-HYPOTHESIS  StandingFive.ncard_primes_above_two                     
+NO-NOTE        StandingFive.comap_conj_of_two_mem                      
+NO-NOTE        StandingFive.card_quotient_of_two_mem                   
+NO-NOTE        StandingFive.usable_card_ge                             
+NO-HYPOTHESIS  StandingFive.stablePrime_card                           
+NO-NOTE        StandingFive.le_localBound                              
+NO-NOTE        StandingFive.no_small_usable                            
+NO-NOTE        StandingFive.seven_le_localBound                        
+NO-NOTE        StandingFive.five_le_chromaticNumber                    
+NO-NOTE        CharacterColouring.gluing                               
+NO-NOTE        CharacterColouring.gluing_field                         
+NO-HYPOTHESIS  CharacterColouring.gluing_iff_uniform                   
+NO-NOTE        CharacterColouring.gluing_iff_of_orderBound             
+NO-NOTE        CharacterColouring.cl2                                  
+NO-NOTE        SpectralInputs.sp_only_if                               
+NOTE           SpectralInputs.sp_only_if_interface                     INHABITANT: none known — such a `τ` is the open sign problem (the Poros record's F5); the argument reads only the last hypothesis, and `sp_only_if` is satisfiable (any point mass at a character with `Re χ(r) < 0`). -/
+NO-NOTE        SpectralInputs.si4_equivariant                          
+heads 32: NOTE 5, NO-NOTE 20, NO-HYPOTHESIS 7

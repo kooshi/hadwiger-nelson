@@ -1,0 +1,13 @@
+tidy-shape: 3 rows on their twins' statements, 2 instance arguments cut; faults 0
+plant (a dropped argument put back): 3 rows on their twins' statements, 2 instance arguments cut; faults 2
+  ROW-SHAPE ratio_prod_le_iSup_levels: not its twin's statement under the row's name
+  ARG-KEPT ratio_prod_le_iSup_levels: T2Space
+  -> fired (ARG-KEPT)
+plant (a row's conclusion changed): 3 rows on their twins' statements, 2 instance arguments cut; faults 1
+  ROW-SHAPE ratio_prod_le: not its twin's statement under the row's name
+  -> fired (ROW-SHAPE)
+plant (another instance argument put in sp_if): 3 rows on their twins' statements, 2 instance arguments cut; faults 1
+  CUT-SHAPE sp_if: not its old statement with ' [Countable (unitRing F)]' cut
+  -> fired (CUT-SHAPE)
+self-test: PASS
+exit=0

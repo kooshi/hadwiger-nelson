@@ -1,0 +1,11 @@
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:261:8: error: (kernel) deterministic timeout
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:292:2: error: unsolved goals
+case refine_1
+B : Set UnitAddCircle
+N : ℕ
+h : fieldBandSet ⊥ B ⊆ ↑(torsionBy (↥Qring) N ⊔ archimedean ↥Qring)
+F : Subfield ℝ
+⊢ ↑5 * 5⁻¹ = 1
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:288:8: error: (kernel) unknown constant 'HadwigerNelson.CharacterColouring.coe_smul_unitRing'
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean:353:8: warning: declaration uses `sorry`
+exit=1

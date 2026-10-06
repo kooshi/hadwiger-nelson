@@ -1,0 +1,19 @@
+main: 8330 theorems; landing: 8677; wave (landing only): 347 = 329 hand-written + 18 generated with no record asked; gone (main only): 0; records in the log: 5550
+  generated, by suffix: eq_1 18
+  wave records on exactly the three: 329
+  Plane.Models.Applied: 15
+  Plane.Models.Bends: 37
+  Plane.Models.Moves: 72
+  Plane.Models.Paint: 106
+  Plane.Models.Stuck: 99
+  head HadwigerNelson.Plane.hornModel_shave: exactly the standard three
+  head HadwigerNelson.Plane.hornModel_open: exactly the standard three
+  head HadwigerNelson.Plane.twoHornModel_rayMerge: exactly the standard three
+  head HadwigerNelson.Plane.twoHornModel_merge: exactly the standard three
+  head HadwigerNelson.Plane.stuckModel_hyps: exactly the standard three
+  head HadwigerNelson.Plane.shadowModel_flank_ne: exactly the standard three
+  head HadwigerNelson.Plane.awayModel_hyps: exactly the standard three
+  head HadwigerNelson.Plane.awayModel_bend_away_part: exactly the standard three
+  head HadwigerNelson.Plane.awayModel_bend_away_whole: exactly the standard three
+  head HadwigerNelson.Plane.hornModel_hole_disconnected: exactly the standard three
+records: PASS
