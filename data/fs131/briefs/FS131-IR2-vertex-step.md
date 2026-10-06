@@ -111,3 +111,24 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment, 2026-10-06 — `exists_vertexStep` takes `F.Covers v 1` (inventory items 422–423)
+
+FS131-QA4, an audit running beside you, read the step's signature against the four moves it composes and found a hypothesis missing. Nothing you have
+proved is affected if you have not yet used `hv`; if you have, the change only gives you more. The finding and the ruling:
+
+> 422. **Statement defect, found before any proof — `exists_vertexStep` assumes `v ∈ F.dom` where every move it composes assumes `F.Covers v 1`** (FS131-QA4,
+> — source: plans/FS131-close-inventory.md
+
+> 423. **Ruling on item 422: `exists_vertexStep` takes `(hv : F.Covers v 1)` in place of `(hv : v ∈ F.dom)`** — a statement change to an internal `sorry`
+> — source: plans/FS131-close-inventory.md
+
+For you: in `exists_vertexStep`, replace `(hv : v ∈ F.dom)` by `(hv : F.Covers v 1)` — what each of the four moves takes; it gives `v ∈ F.dom` back in one
+line. Update the one call, in `exists_procStep`, with the lemma below (its `hG.plane` is the plane-map hypothesis), record the statement's diff in your
+record beside IR1's, and go on. `exists_arcStep`, `exists_terminalSeq` and `exists_terminalMap` are unchanged.
+
+> theorem covers_of_isPlaneMap (hP : F.IsPlaneMap) (x : ℂ) (R : ℝ) : F.Covers x R := by
+> — source: Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+
+This is the third repair to this statement, each found before a proof was spent on it; if you meet a fourth, it is as welcome as this one. Your touches are
+unchanged. You still start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

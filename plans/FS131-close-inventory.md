@@ -3864,3 +3864,19 @@ reason by the close.*
      copied while that tree was idle) at the next slot that frees; it edits `Terminal` only. (f) **`exists_arcStep`** follows `exists_vertexStep` in
      `Procedure` (one file, one writer), unless a slot is free earlier — then its bend exports (`bend_step`, KL1 § 3.3) go to a module of their own first.
      `bend_away`'s planner keeps its place after the audit's slot (item 419). In flight after IR2's launch: 1 (I5q) + 1 (QA4) + 1 (IR2) = 3.
+422. **Statement defect, found before any proof — `exists_vertexStep` assumes `v ∈ F.dom` where every move it composes assumes `F.Covers v 1`** (FS131-QA4,
+     by message, 2026-10-06; its record `plans/FS131-QA4-audit.md` Stage 4). The four moves on `main` — `exists_merge_aux`, `exists_rayMerge_aux`,
+     `exists_shave_aux` (`Moves`), `exists_open` (`OpenMove`) — each take `(hv : F.Covers v 1)`; the step, in KL1's form, E6's draft (§ 4.5 (2)) and IR1's
+     restated form alike, takes `(hv : v ∈ F.dom)`, so it is claimed for every valid clean fragment, including one whose domain does not hold the closed
+     unit disc about `v`, where no move applies. The source (E6-ROUTE, N2-TERM's procedure) is about plane maps. QA4 did not establish falsity on
+     fragments (a counterexample attempted, unfinished: a reading, not derived); the gap is read from the signatures. `exists_arcStep` does not share it
+     (the bends carry no domain hypothesis). **Receipt** (Keryx): the four signatures read on `main` (`Moves.lean` l. 1636, 1656, 1668; `OpenMove.lean`
+     l. 2847); the step read at `ebb0b292` (`Procedure.lean` l. 795); its one caller `exists_procStep` (l. 1046) holds `hG : ProcInv F G` with
+     `ProcInv.plane : G.IsPlaneMap` (l. 977), and `covers_of_isPlaneMap` (`Cone.lean` l. 1634) gives `F.Covers x R` from it. Credit: QA4, for a gap three
+     minds wrote past (the planner, the deriver's draft, the restatement — and the coordinator's two briefs that quoted it).
+423. **Ruling on item 422: `exists_vertexStep` takes `(hv : F.Covers v 1)` in place of `(hv : v ∈ F.dom)`** — a statement change to an internal `sorry`
+     child, the third to this statement (items 383 (b), 385 (a)); its caller supplies it by `covers_of_isPlaneMap hG.plane`. Alternative weighed:
+     `F.IsPlaneMap` as the hypothesis. Why `Covers`: it is exactly what the four moves take, it implies `v ∈ F.dom`, and it keeps the step a statement
+     about fragments that hold the unit disc. Confidence: high. **Routed at once** to FS131-IR2, which holds the leaf (IR1 handed back before the finding):
+     a dated amendment to its brief, and a message. No backlog statement changes (`exists_terminalSeq` and `exists_terminalMap` take `IsPlaneMap`).
+     **Correction owed**, for the filing: E6's draft § 4.5 (2) and KL1's plan row carry the same omission.
