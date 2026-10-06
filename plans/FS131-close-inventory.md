@@ -7382,3 +7382,18 @@ reason by the close.*
      `star_anti` save follows shortly and no slot is free before then. (b) Their briefs' generator is written and
      its quotations dry-checked against its tree (`mk-i8cd.py C|D`); each brief quotes the seven shared statements
      and asks for a `#check` of every leaf and the lint. No reply sent: it asks none.
+585. **Kooshi's second word on the outside repository, 2026-10-06 (verbatim in `data/external/EXT-HN2-request.md`): "Can the reviewer explicitly build a lean file into his codebase that shows his claim is false? I will fork it and push that."** (source: his message of 2026-10-06, about 22:30 UTC).
+     **Done**: a dated Amendment 1 appended to EXT-HN2's brief (gate exit 0 after three bare file names were
+     replaced by prose) and one message pointing at it. **What it asks**: one Lean file at the root of the outside
+     package, importing its headline file unchanged, proving — strongest first — that the headline's hypothesis is
+     met by no six-colouring of any circle of radius `r ≥ 0`, that the assumed bound is false at `1/4` and at
+     `1/√3`, that the headline follows from six numbers each below π/3, and if short a proper three-colouring of
+     the circle at `1/√3`; the smallest Lake change that builds it at the repository's own pin, sandboxed; the
+     axioms; the repository's own comparator shape for the first statement if its budget allows; a one-screen
+     plain note; a patch against `outside-commit-2` and the commands to apply it; the licence the repository declares.
+     **Rulings, mine.** (a) **The reviewer still posts nothing and makes no commit carrying an author line**: the
+     fork, the push and what it says are Kooshi's. Confidence: high. (b) **Every word written for the fork is about
+     Lean statements and what the kernel says of them** — nothing about the author or how the work was made (his
+     message carries a guess of his own about that; it is recorded verbatim in the request file and is not part of
+     what the job writes). (c) The negative-radius case is stated in the file, in a remark: an audit that
+     overstates is the thing being audited.
