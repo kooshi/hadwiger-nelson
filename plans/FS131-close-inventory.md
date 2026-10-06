@@ -5213,3 +5213,21 @@ reason by the close.*
      the two readings of Σ under saturation as a row. (d) The erratum to E8 § 3.1 (4) is E8's to write in its own record at the
      check; the other generalizations are logged for the errata at the filing. (e) **Slot → FS131-E8's check**, resumed 2026-10-06.
      In flight: 1 (I10B) + 1 (K10b) + 1 (E8) = 3. The queue after it: K7, I10C, K8, I6A, K9, I6B, K6c, I6C, I6D, MD1, MD2.
+
+503. **FS131-K10b, by message mid-job: J45-SI-J holds at a wider class by a shorter route — no spectral measure, no "Bernoulli has
+     Lebesgue spectrum", no convolution of spectral measures, no `Haar(E_S) = 0`** (source: K10b's message to "main", 2026-10-06; the
+     planner's argument, one mind, not yet a Lean proof). **The statement at the class the argument reads**: three independent systems
+     under maps indexed by `R` and any filter `l` on `R` — a finite system whose maps are eventually the identity along `l`, any
+     system, and a process with independent coordinates shifted by the maps; if `l` is not eventually inside a finite set, the
+     `l`-continuous vectors of the product are exactly the `L²` functions of the finite system and the `l`-factor of the second.
+     Identical distribution of the noise is not read. At `E_S` the hypothesis on `l` is "`τ′_S` is T₁ and not discrete", the part of
+     J45-N1 that weak approximation supplies. **What it drops**: `BochnerHerglotz`, the Bernoulli spectrum and the tensor/convolution
+     lemma — three foundation items the first pass listed for this row (its § 3.3). **My receipt**: the orthogonality step redone by
+     hand — for a cylinder `F′` in `L²(first two) ⊗ L²₀(noise)` on a finite coordinate set `A`, `⟨V_y F′, F′⟩ = 0` once `A + y` misses
+     `A` (independence, centred), so `‖V_y F′ − F′‖² = 2‖F′‖²` frequently along `l`, and with `‖F₁ − F′‖ < ε` continuity gives
+     `‖F₁‖ ≤ (1 + √2)ε`. Not checked by me: the fibrewise step for `F₀`. **Ruling**: adopted — stated in the filter form
+     (`Arith/ProductFactor`) with the row's reading as its instance; the read-back names which part of J45-N1 the instance rests on and
+     which downstream rows (SI-5, SI-C) are taken over the new form. Alternative: state the row as filed, over the spectral
+     foundation. Why: a row is stated at the class its argument reads (the plan's § 7.3 item 3), and three foundation items and one
+     named hypothesis leave the wave. Confidence: high. **Correction owed**: J45-SI-J's entry (the generalization), with the wave's
+     errata.
