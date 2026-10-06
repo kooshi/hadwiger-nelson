@@ -425,3 +425,100 @@ docstring cites `[LevitzMott1972]`: declared `ours`, stage 3 item 3.
   that still take the hypothesis in their statements are restated or left, on the landing's reading.
 - **A join of two lines** runs the step on the joined tree, like the doubled-name check: each line's ledger rows are
   kept (both sides), and `--write-ledger` on the joined tree settles the header.
+
+## Drafts for the front page
+
+Each names its slot. Counts are `main`'s at `3bfc7d2e` with this branch's list; a landing that merges other waves first
+reads its own from `build/gate/assumptions/latest` on the merged tree.
+
+**1. `CLAUDE.md` § Trust ledger** — a new paragraph, after the paragraph that ends "Rung B holds none." and before
+"What the audit accepts and what it buys". `scripts/gate_report.py` reads the nine `key=value` counts from this section,
+each exactly once (the full file with it is `data/fs131/t5/drafts/CLAUDE-with-sentence.md`):
+
+> **What the library assumes, in both forms** (`scripts/assumptions.sh`, whose digest reads these counts):
+> `axioms=1 rests=4 named=18 inline=15 outside=5 ours=24 open=4 takes=85 mentions=1` — one outside theorem declared as an
+> axiom, with four theorems resting on it; thirty-three hypotheses, eighteen named and fifteen written out in a binder,
+> five of them outside theorems, twenty-four hand results of ours and four open questions, taken by 85 statements
+> (`scripts/assumptions-ledger.txt` lists each; FS131-T5, 2026-10-06).
+
+Until it is filed the digest prints "RECORDED COUNTS ABSENT in CLAUDE.md § Trust ledger" with the counts to add, and
+does not fail; a partial or doubled record fails (exit 3).
+
+**2. `BIBLIOGRAPHY.md`** — two rows, without which the gate is red on `main` (stage 5). Drafted in full in
+`data/fs131/t5/drafts/BIBLIOGRAPHY-with-rows.md` (above `[Voronov2023]`'s row; the filer places them): `**[Rudin1962]**`,
+W. Rudin, *Fourier Analysis on Groups*, Interscience (1962) — Thm 1.4.3 and Thm 1.3.6, what `BochnerHerglotz` and
+`BochnerOn` state; not held, cited from memory in the docstrings, read-back owed. `**[Kakutani1938]**`, S. Kakutani,
+*Two fixed-point theorems concerning bicompact convex sets*, Proc. Imp. Acad. Tokyo 14 (1938) 242–245 — the
+Markov–Kakutani theorem `InvariantMeasureOnClosed`'s docstring names; **the bibliographic data are recalled, not read**;
+not held. If the filer keys either work differently, the two or one `.former` lines of `scripts/Assumptions.lean` take
+the filed key.
+
+**3. `LEAN.md` § The gate** — in the first sentence, after "`./scripts/axioms.sh --self-test` green (23 planted faults, …)":
+"`./scripts/assumptions.sh` and `./scripts/assumptions.sh --self-test` green (21 controls planted in one copy of the
+audit, 32 checks),". And a bullet after the `dupnames` bullet:
+
+> - **`./scripts/assumptions.sh` and `./scripts/assumptions.sh --self-test` are green** — everything a theorem rests on
+>   that the kernel did not check is listed, in both forms it takes. An outside theorem declared as an `axiom` shows in
+>   `#print axioms`; a hypothesis does not — a theorem that says "if Herglotz–Bochner holds, then …" prints the standard
+>   three — so `scripts/Assumptions.lean` reads every hand-written statement as the kernel holds it and prints every
+>   library axiom with the theorems whose stored axiom lists hold it (`RESTS`), and every declared hypothesis with its
+>   kind (`outside`, `ours`, `open`), its source and the statements that take it (`TAKES`, `MENTIONS`). Whether a
+>   hypothesis is an assumption or a condition on the theorem's parameters is intent, which no type records, so the
+>   check **requires evidence**: the one list is `AssumptionAudit.declared`. **It fails** on a *closed* hypothesis (no
+>   free variable: a statement about the world) that is neither declared, nor proved by the library, nor the one claim
+>   a refutation refutes; on a `Prop`-former taken as a hypothesis that no theorem concludes, or that is concluded only
+>   from declared assumptions, or whose docstring uses the words "named hypothesis", "outside the backlog" or "external",
+>   when neither list holds it; on a source that is not in `BIBLIOGRAPHY.md`, `LEDGER.md`, the grokkings, the stubs or
+>   the derivations; on a declared kind its docstring contradicts; on a declared hypothesis no statement takes, or one a
+>   theorem proves in general; and on any consumer that `scripts/assumptions-ledger.txt` does not list, or lists and the
+>   scan does not find. **It counts and prints, and cannot decide**: the other hypotheses of every consumer (`COHYP`),
+>   and `unseen=` — every other hypothesis over a theorem's own variables, among which a hand result written out in a
+>   binder, undeclared and unremarked in its docstring, is not told from a condition. The nine counts are recorded in
+>   `CLAUDE.md` § Trust ledger and in the ledger's header, where `scripts/gate_report.py` reads them.
+
+**4. `LEAN.md` § Assumptions: outside theorems and our own** — the third bullet ("Our own hand results … so they disappear
+when discharged.") gains, and a fourth bullet follows it:
+
+> - **Our own hand results** that a module needs before their own module lands enter as explicit hypotheses of the
+>   theorems that use them, never as axioms, so they disappear when discharged. **So may an outside theorem** (five do on
+>   `main`), when its statement is better carried as a named `Prop` than as an axiom.
+> - **Every assumption in hypothesis form is declared to the gate**, in `AssumptionAudit.declared` at the end of
+>   `scripts/Assumptions.lean`, by the landing that brings it: a named one by `.former ``Full.Name kind "source"`; one
+>   written out in a binder by `.site ``Theorem `binder "Label" kind "source"`, once per theorem that takes it; a former
+>   that is only a condition on a theorem's parameters by `.condition ``Full.Name "reason"`; a closed premise that is not
+>   an assumption by `.premise ``Theorem `binder "reason"`. The kind is `outside` (source: a `BIBLIOGRAPHY.md` key in
+>   brackets), `ours` (a ledger row `row N`, a grokking `G N`, or a derivation entry id) or `open` (those, or a stub
+>   `FS-N`); the source opens with that reference. The definition's docstring says whose it is in the words the gate
+>   reads — "external" or "classical" or its bracketed key; "[hand]", "[tools]", "[cert]" or "outside the backlog"; "open
+>   question" — or it is counted `SILENT`. Then `./scripts/assumptions.sh --self-test`, `./scripts/assumptions.sh`,
+>   `./scripts/assumptions.sh --write-ledger` (read the rows it adds: each is a statement that is now conditional), and
+>   the counts for `CLAUDE.md`. A hand result written out in a binder over the theorem's own variables is the one thing
+>   the gate cannot find by itself: the landing declares it on its own word.
+
+**5. `LEAN.md` § Trust ledger**, the table — a fifth row: "| a hypothesis standing for an outside theorem, a hand result of
+ours or an open question | **declared**, with its kind and source, by one line of `AssumptionAudit.declared` in
+`scripts/Assumptions.lean`; every statement that takes it listed in `scripts/assumptions-ledger.txt` |".
+
+**6. `ARCHITECTURE.md` § 5 Trust** — a subsection after "Imported outside theorems", "### Assumed as hypotheses
+(`scripts/assumptions.sh`; declared in `scripts/Assumptions.lean`)", holding stage 5's three tables (outside, ours,
+open) as they stand there, with the sentence: "None is an `axiom`: each is a `Prop` argument visible in the statement of
+every theorem that takes it, and `scripts/assumptions-ledger.txt` lists those statements. The gate fails on one that is
+closed, never concluded, concluded only from another, or named as one in its docstring, and is not in the list."
+
+**7. The line every landing brief carries from now on:**
+
+> A wave that brings an assumption in hypothesis form — a named `Prop` standing for an outside theorem, a hand result
+> of ours or an open question, or one written out in a binder — declares it in `AssumptionAudit.declared`
+> (`scripts/Assumptions.lean`; the procedure is `LEAN.md` § Assumptions), or `./scripts/assumptions.sh` fails; the landing
+> runs `./scripts/assumptions.sh --self-test`, `./scripts/assumptions.sh` and `--write-ledger` on the merged tree, reads
+> every ledger row it gains, and drafts the nine counts for `CLAUDE.md` § Trust ledger.
+
+**8. Docstrings under `Proofs/`, for a landing to make** (none is this job's to change; each rebuilds its module's
+dependents). (a) The eleven `SILENT` formers say whose they are: `Bridge.RealAlgebraicDescent` — add "external" or the key
+`[Lang1953]`; `Interface.{RU, APlus0, APlusOfR88, PE2, EFPlus, MR, MulStable, NegCircle}` and `CharacterColouring.OrderBound`
+— add the grade, "[hand]"; `SevenConditional.G4` — "[tools]". (b) `SpectralChain.BochnerHerglotz`, `SpectralInputs.BochnerOn`:
+the key in brackets, `[Rudin1962]`. (c) `SpectralChain.InvariantMeasureOnClosed`: name the work, `[Kakutani1938]` or the
+filer's key. (d) `Plane.Voronov11`: "Named here, not imported (FS106-COMP's clause is an equivalence, not a use)" beside
+`mu_lt_of_voronov11`, which takes it as a hypothesis — say which reading stands (the list has it `outside`, one
+consumer). (e) `Plane.ArcMap.flankQ_upper`, `flankQ_lower`, `flankQ_upper_of_qrOnly`: "a named hypothesis" of `hQR`, which
+wave 5 proved (`flankQ_upper_of_qrOnly`); reword, and the three `HINT` rows leave.
