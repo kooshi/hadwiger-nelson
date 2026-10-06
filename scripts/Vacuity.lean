@@ -476,6 +476,29 @@ Two exclusions are worth their reasons, because both look like obvious additions
   docstring names the model of the hypotheses it does not refute. `sat_noPar` binds `(c : AeColouring 6)` and `(F : ArcMap 6)`;
   being a refutation it raises no site, and its docstring says that the joint satisfiability of its hypotheses at six colours is
   the open question. What it cannot see, as before: hypothesis sets that hold together on no object of the library.
+* **Wave 10's second pass, its import, and Falconer's lemma proved (FS131-L10B, by the procedure below; the twelve new modules
+  `Arith/{FactorAction, Floor128, FloorPlanes, GapSeven, MajorityVote, NegCircleModel, NormOneTarget, ProductFactor, RatioBound,
+  TargetFloors, WeilKloosterman}` and `Plane/MetricalBoundary`).** **No new carrier IN.** The modules declare two
+  hypothesis-formers (`data/fs131/l10b/census.lean`, wave 5's census with its scope changed, lists them with what the library
+  proves of each): neither has an unconditional `¬ P …` at a closed instance, an `IsEmpty` instance, or a binder site at a closed
+  instance — so for neither could step (3)'s `VACUOUS` control be planted. **OUT**:
+  - `StandingFive.KloostermanBound F` (`Arith/FloorPlanes`) — Weil's bound for Kloosterman sums at a finite field `F`, the
+    hypothesis form the floor's modules were proved over (nine theorems take it, at a variable field or at every field of a given
+    cardinality). It is a predicate of a variable field and not a structure; it holds at every field of at most five elements
+    (`kloostermanBound_of_card_le_five`, no axiom) and, over the import `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207), at
+    every finite field of characteristic not 2 (`kloostermanBound_of_ringChar_ne_two`); nothing in the library refutes it at any
+    field. **What it stands for is an outside theorem, which is the axiom audit's to list, not this scan's** (`scripts/Axioms.lean`,
+    IMPORTED: the eight records that rest on the import);
+  - `GapSeven.Gapped v m` (`Arith/GapSeven`) — a decidable predicate of a vertex of `𝔽₇²` and a colour, inhabited
+    (`exists_adjacent_gapped`).
+  What this scan reads of the landing (`tools/fs131_l5_vacdiff.py` against wave 6's gated scan): **no site at all** — no row lost,
+  none added, no new evidence row; `declarations` rises by the 202 of the twelve modules and no other count moves. None of the
+  202 binds a tracked carrier: the wave's theorems are about finite fields, character sums, σ-algebras and measures, and
+  `Plane/MetricalBoundary`'s about a null-measurable set of a finite-dimensional normed space; no refutation is added.
+  `falconer_lemma2_nonempty`, an axiom until this landing, is a theorem (`Plane/FalconerReduction`, with its model
+  `upperHalfPlane_falconer_hyp` in the same file). What the scan cannot see of the landing: that `sp_if`, `si4`,
+  `spectral_carried_iff` and `contChars_haar_null` have no model of all their hypotheses that is a declaration free of a named
+  classical hypothesis (their docstrings say so), and the eight theorems whose only assumption is the import.
 
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with

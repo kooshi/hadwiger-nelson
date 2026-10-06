@@ -1,0 +1,7 @@
+diff --git a/scripts/vacuity-baseline.txt b/scripts/vacuity-baseline.txt
+index 4c2a1f05..f47d0045 100644
+--- a/scripts/vacuity-baseline.txt
++++ b/scripts/vacuity-baseline.txt
+@@ -25 +25 @@
+-#   declarations=14299  refutations-skipped=199  sites=1269
++#   declarations=14501  refutations-skipped=199  sites=1269

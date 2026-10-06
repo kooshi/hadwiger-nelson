@@ -7493,6 +7493,18 @@ blocks did not list. Read from the kernel's own list of the library's theorems (
 #print axioms HadwigerNelson.StandingFive.kloosterman_bound_model
 #print axioms HadwigerNelson.StandingFive.ringChar_ne_two_of_card_mod_four
 #print axioms HadwigerNelson.StandingFive.targetFloor_six_of_kloosterman
+/-! ## FS-131 wave 10's second landing (job FS131-L10B) — the theorems of the wave's eleven new modules that the planners' and
+the implementers' blocks did not list. Read from the kernel's own list of the library's theorems
+(`data/fs131/l5/count-modules.lean`), by `tools/fs131_l10b_register.py`; checked by `tools/fs131_l5_records.py`. -/
+-- Arith/ProductFactor
+#print axioms HadwigerNelson.SpectralInputs.measurePreserving_prodMap₃
+-- Arith/RatioBound
+#print axioms HadwigerNelson.RatioBound.fourier_sq_mul_charSum
+-- Arith/TargetFloors
+#print axioms HadwigerNelson.StandingFive.seven_le_localBound_of_kloosterman
+#print axioms HadwigerNelson.StandingFive.standingFloor_five
+#print axioms HadwigerNelson.StandingFive.standingFloor_seven
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
