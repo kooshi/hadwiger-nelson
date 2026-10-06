@@ -31,7 +31,12 @@ T={
    special="The wave's table row names its hypothesis from outside the backlog: row 130's conclusion, `χ(ℝ²) = χ_m⁰(ℝ²)`, for the two rows that end \"hence χ(ℝ²) ≥ 6\" given measure rigidity. It enters as a named hypothesis (`Row130Collapse`, as the plan's § 7.4 has it), never an axiom; Kooshi has ruled that measure rigidity itself is not formalized or priced now (inventory item 488), so do not open it. Every \"given MR\" in a row is read for what it hides beyond that one hypothesis."),
 }[N]
 TREE="fs131-w"+N; JOB="FS131-K"+N
-BUILDX="; the build copied into your tree predates the shared module `SimpleOn`, so this first build compiles it" if N in ("8","9") else ""
+BUILDX=("; the build copied into your tree predates the two shared modules, so this first build compiles them" if N=="9" else "; the build copied into your tree predates the shared module `SimpleOn`, so this first build compiles it") if N in ("8","9") else ""
+W=WT+TREE+"/"
+TIP=subprocess.run(["git","-C",W,"rev-parse","--short","HEAD"],capture_output=True,text=True).stdout.strip()
+import os
+HASRING=(N=="9") and os.path.exists(WT+"fs131-w9/Proofs/HadwigerNelson/Plane/RingCalculus/Basic.lean")
+CUT=("cut from `main` at `e6e7b312` and fast-forwarded to `"+TIP+"`, wave 8's commit, which holds wave 7's shared module `SimpleOn` and wave 8's foundation `RingCalculus/Basic`") if HASRING else (("cut from `main` at `e6e7b312` and fast-forwarded to `"+TIP+"`, wave 7's commit that adds the shared module `SimpleOn`") if N in ("8","9") else ("cut from `main` at `"+TIP+"`"))
 if N in ("8","9"):
     assert SHASH, "give the hash of fs131-w7's SimpleOn commit: mk-kw.py "+N+" <hash>"
     SIMPLE=f"""
@@ -40,19 +45,28 @@ if N in ("8","9"):
 a fragment is simple *on a set* — `ArcMap.SimpleOn S`: every tile whose closure meets `S` is a Jordan domain, and the closures of two such
 tiles meet in a preconnected set — with the landed `ArcMap.Simple` untouched and `Simple.simpleOn`, `simpleOn_univ`, `simpleOn_ball_iff`
 proved beside it, so a row stated with `SimpleOn` implies the row as filed. It lives in one module on that planner's branch
-(`fs131-w7`), **and it is already in yours**: your branch was fast-forwarded by the coordinator to that planner's commit `{SHASH}`, which holds
+(`fs131-w7`), **and it is already in yours**: your branch was fast-forwarded by the coordinator past that planner's commit `{SHASH}`, which holds
 the module (`/home/kooshi/source/lean-dir/.claude/worktrees/{TREE}/Proofs/HadwigerNelson/Plane/SimpleOn.lean`, no `sorry`, built there) and
 nothing else of its work but its stage-1 record and one build log — one module, declared once, on both branches by ancestry. State a class
 on a fragment with `F.SimpleOn (closedBall p R)`; the module's statements are fixed (that planner builds on them too). Never re-declare the predicate or its lemmas (`LEAN.md` § Searching —
 Lean, last bullet); a row whose argument reads a tile off the disc after all is a message to me. That planner did not take a purely local
 form: the second clause is about two whole closures."""
+    if N=="9":
+        assert HASRING, "fast-forward fs131-w9 to wave 8's foundation commit first"
+        SIMPLE+=f"""
+
+**Wave 8's foundation is in your branch too** (inventory items 518, 523): its planner committed
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w9/Proofs/HadwigerNelson/Plane/RingCalculus/Basic.lean` (no `sorry`) alone, and your
+branch was fast-forwarded to that commit, `{TIP}`. It holds the tiles of a point, tips, outer tiles, semi-hubs, and — what your class
+statements read — the two classes as predicates: `GammaFreeRing p` (no point of the ring on a boundary arc) and `QFreeRing p` (no (Q) arc
+on the ring). State your rows over them; never re-declare a name of that module, whose statements are fixed (wave 8's planner builds on
+them). That planner met the hazard on the way and it is worth knowing: a name another wave already declares in the same namespace fails
+only when both modules meet at the root import (`ArcMap.IsOuterTile` is wave 5's, a tile in no hole; wave 8's became `IsOuterTileAt`) —
+check a new name against the library with `./scripts/dupnames.sh` and a grep of `Proofs/` before you rely on it."""
     NOMERGE="You do not merge another branch into this one, run the gate, or touch `main`."
 else:
     SIMPLE=""
     NOMERGE="You do not merge another branch into this one, run the gate, or touch `main`."
-W=WT+TREE+"/"
-TIP=subprocess.run(["git","-C",W,"rev-parse","--short","HEAD"],capture_output=True,text=True).stdout.strip()
-CUT=("cut from `main` at `e6e7b312` and fast-forwarded to `"+TIP+"`, wave 7's commit that adds the shared module `SimpleOn`") if N in ("8","9") else ("cut from `main` at `"+TIP+"`")
 MODS="\n".join(Q(KP,p) for p in T["mods"])+"\n"
 b=f'''# Brief {JOB} — wave {N} planned: {T["title"]}
 

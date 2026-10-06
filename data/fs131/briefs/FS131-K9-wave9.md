@@ -14,7 +14,7 @@ brief: FS131-K9
   channel: message the coordinator ("main") by SendMessage mid-job for a statement defect in a row (at once, with the entry's address: it goes to a deriver), a definition you fix that another wave's planner reads, a generalization or a shorter route, an outside theorem you would import, a row that cannot be stated at the class its argument reads, or a question you cannot work around; the report goes to `data/fs131/reports/FS131-K9.md` on your branch, and its text is your final message (if the harness refuses that file, say so and the coordinator files it from your hand-back)
   standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full (§ The gate: the inhabitant rule and the doubled-name check; § Searching — Lean, last bullet: two branches never state one lemma under one name), and `RUNNING.md` § Building before your first build
   record: `plans/FS131-w9-kernel-plan.md` (new, on branch `fs131-w9`)
-  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w9` (branch `fs131-w9`, cut from `main` at `e6e7b312` and fast-forwarded to `611ffa39`, wave 7's commit that adds the shared module `SimpleOn`): new modules under `Plane/Reduction` and `Plane/Classes` — the layout is yours — with `Proofs.lean` and `ARCHITECTURE.md` for them; **new declarations only** in landed modules (no statement, definition or docstring of a landed declaration is edited); `scripts/Axioms.lean` (a block of your own, headed "FS131-K9", above the `=== PURCHASED ===` banner), `plans/FS131-w9-kernel-plan.md`, `tools/fs131_k9_*.py`, `data/fs131/k9/`, `data/fs131/reports/FS131-K9.md`; **not** `main`, another wave's branch, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w9` (branch `fs131-w9`, cut from `main` at `e6e7b312` and fast-forwarded to `26b08395`, wave 8's commit, which holds wave 7's shared module `SimpleOn` and wave 8's foundation `RingCalculus/Basic`): new modules under `Plane/Reduction` and `Plane/Classes` — the layout is yours — with `Proofs.lean` and `ARCHITECTURE.md` for them; **new declarations only** in landed modules (no statement, definition or docstring of a landed declaration is edited); `scripts/Axioms.lean` (a block of your own, headed "FS131-K9", above the `=== PURCHASED ===` banner), `plans/FS131-w9-kernel-plan.md`, `tools/fs131_k9_*.py`, `data/fs131/k9/`, `data/fs131/reports/FS131-K9.md`; **not** `main`, another wave's branch, `CLAUDE.md`, `LEDGER.md`, `LEAN.md`
   budget: about 400k by the harness's count, as guidance; hand back at a saved stage before about 500k — read your token count at every saved stage
 
 Hello. You are opening wave 9 of the Lean backlog. The milestone, FS-131, turns this project's hand-derived results into kernel-checked ones:
@@ -88,12 +88,21 @@ The wave's table row names its hypothesis from outside the backlog: row 130's co
 a fragment is simple *on a set* — `ArcMap.SimpleOn S`: every tile whose closure meets `S` is a Jordan domain, and the closures of two such
 tiles meet in a preconnected set — with the landed `ArcMap.Simple` untouched and `Simple.simpleOn`, `simpleOn_univ`, `simpleOn_ball_iff`
 proved beside it, so a row stated with `SimpleOn` implies the row as filed. It lives in one module on that planner's branch
-(`fs131-w7`), **and it is already in yours**: your branch was fast-forwarded by the coordinator to that planner's commit `611ffa39`, which holds
+(`fs131-w7`), **and it is already in yours**: your branch was fast-forwarded by the coordinator past that planner's commit `611ffa39`, which holds
 the module (`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w9/Proofs/HadwigerNelson/Plane/SimpleOn.lean`, no `sorry`, built there) and
 nothing else of its work but its stage-1 record and one build log — one module, declared once, on both branches by ancestry. State a class
 on a fragment with `F.SimpleOn (closedBall p R)`; the module's statements are fixed (that planner builds on them too). Never re-declare the predicate or its lemmas (`LEAN.md` § Searching —
 Lean, last bullet); a row whose argument reads a tile off the disc after all is a message to me. That planner did not take a purely local
 form: the second clause is about two whole closures.
+
+**Wave 8's foundation is in your branch too** (inventory items 518, 523): its planner committed
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w9/Proofs/HadwigerNelson/Plane/RingCalculus/Basic.lean` (no `sorry`) alone, and your
+branch was fast-forwarded to that commit, `26b08395`. It holds the tiles of a point, tips, outer tiles, semi-hubs, and — what your class
+statements read — the two classes as predicates: `GammaFreeRing p` (no point of the ring on a boundary arc) and `QFreeRing p` (no (Q) arc
+on the ring). State your rows over them; never re-declare a name of that module, whose statements are fixed (wave 8's planner builds on
+them). That planner met the hazard on the way and it is worth knowing: a name another wave already declares in the same namespace fails
+only when both modules meet at the root import (`ArcMap.IsOuterTile` is wave 5's, a tile in no hole; wave 8's became `IsOuterTileAt`) —
+check a new name against the library with `./scripts/dupnames.sh` and a grep of `Proofs/` before you rely on it.
 
 ## Done means
 
@@ -101,7 +110,7 @@ form: the second clause is about two whole closures.
    row's entry in `plans/LEAN-BACKLOG.md` and its derivation entry in full, with errata; what `Proofs/HadwigerNelson/Plane/` already holds
    that the rows reuse (read `ARCHITECTURE.md`'s rows for waves 3–5 and for `Proofs/HadwigerNelson/Plane/Models/`). Register, before reading the derivations
    closely, which rows you expect to be short, which to need an outside theorem, and which to hide a statement defect. Build the branch once
-   as given (no `sorry`; the build copied into your tree predates the shared module `SimpleOn`, so this first build compiles it). Open your record. Commit and push.
+   as given (no `sorry`; the build copied into your tree predates the two shared modules, so this first build compiles them). Open your record. Commit and push.
 2. **The dispositions**: for each row — the statement at the class its argument reads (G92), what it rests on inside the backlog, every
    hypothesis from outside it (named, with `LEAN.md` § Assumptions' four items for an imported theorem; formalize anything that is about an
    hour of work), and whether it is a theorem, a named-hypothesis implication, or a certified computation (`LEAN.md` § The kernel's cost
