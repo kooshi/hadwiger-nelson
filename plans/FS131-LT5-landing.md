@@ -117,3 +117,198 @@ are found; a plain docstring and a `--` comment are not).
   FS131-L10B's draft 6 says ("this landing has none").
 
 **Token count at this stage**: no reading of the harness's count; own estimate about 300k.
+
+## Stage 4 — SAVED (FS131-LT5): everything declared, from the records
+
+One line of `AssumptionAudit.declared` (`scripts/Assumptions.lean`) per failure of stage 3, each decided from the definition's
+docstring and the landings' tables. With them the scan's own failures are 0 (`data/fs131/lt5/runs/gate-declared-before-ledger.out`,
+`fails=0`); what remained was the ledger (stage 8).
+
+| failure of stage 3 | the line | decided from |
+|---|---|---|
+| `undeclared-by-docstring StandingFive.KloostermanBound` | `.former … .outside "[Weil1948] p. 207 (Weil's bound for Kloosterman sums over a finite field), in hypothesis form: the same outside theorem as the import StandingFive.kloosterman_bound, which proves it at characteristic not 2 …"` | its docstring ("a named classical hypothesis … `[Weil1948]` p. 207 … the import is `StandingFive.kloosterman_bound`"); FS131-L10B draft 6, row 1; the brief's pre-ruling ("declared only if the step asks for it; if it does, it is an outside theorem under the key of the import") — the step asked |
+| `undeclared-closed-hypothesis` at `hK` of `standingFloor_seven`, `standingFloor_five`, `seven_le_localBound_of_kloosterman` | three `.site … `hK "KloostermanFrom347" .outside "[Weil1948] p. 207, at every finite field of q ≡ 3 (mod 4), q ≥ 347 elements …"` | the theorems' docstrings ("over Weil's bound for Kloosterman sums at the fields of `q ≡ 3 (mod 4)`, `q ≥ 347` elements"); L10B draft 6 names the three |
+| `undeclared-closed-hypothesis five_le_chromaticNumber_weil:hRow123` | `.site … `hRow123 "Row123Chain" .ours "row 123 …"`, the label and source of the entry already there for `five_le_chromaticNumber` | its docstring ("row 123's chain (`hRow123`, …, a named hypothesis from outside the backlog; MR is inside it …)"); L10B draft 6, row 4 |
+| `undeclared-never-concluded Plane.NoPar` | `.former … .open "C121-NOPAR (𝒫₆ is empty on the locally finite map colourings: the former is stated for every class of families, and the open statement is its instance there; …)"` | `gmap_ii`'s docstring ("C121-NOPAR and G-FIN₆ are the two named open statements, hypotheses here and proved nowhere"), `sat_noPar`'s ("C121-NOPAR, a named open statement"); FS131-L6A draft 5 ("One named open statement is taken as a hypothesis: `NoPar 𝒞`") |
+| `undeclared-never-concluded Plane.GrundyBound` | `.condition … "a Grundy-bound family …: a predicate of the theorem's family; no Lean family is shown to be one (an open gate item of FS131-L6A, draft 6)"` | its definition (a property of the family `A`); its one taker `gmap_i`; L6A draft 6 lists it as a missing inhabitant, not as an assumption |
+| `undeclared-never-concluded Plane.H1On` | `.condition … "(H1) on N for two classes — every other class is null in N: a predicate of the theorem's family, set and two colours"` | its definition (`∀ j, j ≠ a → j ≠ b → volume (C j ∩ N) = 0`); its taker `AeColouring.twoColourNhd_of_h1` |
+
+**Entries that left.** `.former StandingFive.StandingFloor .ours "G56 …"` — see below. Nothing else: no assumption of the list became
+an axiom (Weil's bound was never in the list), and Falconer's lemma was an axiom, so its leaving is the ledger's (stage 8).
+
+**The two pre-ruled cases, and what the step did with each.**
+
+1. **`StandingFloor`: the step's rule did not fire; the entry leaves on the coordinator's ruling, with a docstring edit.** The brief:
+   its entry leaves "by the step's own rule for a proved assumption". The rule (`discharged`) fires only on a former proved over its
+   own variables with no hypothesis; `standingFloor_seven_weil : StandingFloor 7` and `standingFloor_five_weil` are instances
+   (`PRODUCES … uncond`), and the step's own control has as its silent partner "one proved at an instance still is" an assumption.
+   So with the entry present the step said nothing; with it removed the two closed takers read `CLOSED ESTABLISHED` — and the scan
+   failed `undeclared-by-docstring StandingFloor`, because its docstring said "a named hypothesis from outside the backlog (G56). …
+   [tools]/[hand], not kernel", in a module outside the step's draft 8. The step's rules and the reading disagreed, so I messaged the
+   coordinator with both ways. **Ruling (the coordinator's message, 2026-10-06): the entry leaves, and docstrings — nothing else — in
+   `Arith/StandingFive.lean` may be edited to say what is true now, "over the import", not "proved" alone; "My brief's sentence was
+   wrong about the mechanism — the step's rule for a proved assumption does not fire on an instance"; not the other way, which
+   "would count as a hand result of ours something the kernel holds over the import at both instances where it is taken closed".**
+   After it: `CLOSED ESTABLISHED StandingFive.seven_le_localBound hFloor :: StandingFloor 7` and `… five_le_chromaticNumber hFloor ::
+   StandingFloor 5` (`established` 1433 → 1435), each through a theorem that is a `RESTS` row of the import. `le_localBound` and
+   `standingFloor_mono` take the floor at a variable `n`: a condition there, in `unseen`.
+2. **`KloostermanBound`: the step asked, twice.** By docstring for the former, and by the closed rule for the three `hK` — which
+   the former's entry does not cover: the scan reads `TAKES KloostermanBound standingFloor_seven` and still fails the binder, because
+   a closed `∀ F, … → KloostermanBound F` is not *headed* by the former (the design's (d): "its head is a declared former (a named
+   assumption at a closed instance)"). Declared as three sites under one label. **So Weil's bound is listed in three forms** — the
+   axiom (8 theorems rest on it), the named hypothesis (9 statements) and the label `KloostermanFrom347` (3 statements, which are
+   also among the 9) — which is what the library holds today. The alternative, making the scan read a closed family of a declared
+   former as declared through it, is a rule changed after it failed; not made. Ratified by the coordinator's message ("the rule
+   change that would hide the third is rightly not made after a failure").
+
+**A hand result written out over a theorem's own variables** (the one thing the step cannot find): none in either landing —
+stage 3's reading of the docstrings, and FS131-L10B's draft 6 for wave 10.
+
+**No assumption that no record names, and no docstring disagreeing with a record about whose a hypothesis is**, beyond case 1.
+
+## Stage 5 — SAVED (FS131-LT5): the second reading of the branch's 31 conditions and 2 premises
+
+Each read against its definition (`data/fs131/lt5/conditions-defs.out`: the definition with its docstring) and the statements that
+take it (`data/fs131/lt5/condition-takers.lean`, output `condition-takers.out`: from the stored types, the constants that mention
+the former in a hypothesis, in the conclusion, and the definitions whose body holds it). The question asked of each: does a theorem
+that takes it ask its reader to accept, on someone's word, a statement about the world — or does it restrict the objects the theorem
+is about? **I agree with all 33. None would I class as an assumption.**
+
+| entry | what it is, by its definition | taken by | reading |
+|---|---|---|---|
+| `SpectralChain.TCA` | every stable place of `F` has all-levels four-colour ratio `< 1/4`: a property of the field | 3 theorems, only as the conclusion of `hCLS` (declared, X23D-CLS) and the antecedent of `hMR`; inside `Interface.Count` | agree — a predicate of `F`; what is assumed about it is `hCLS`, declared |
+| `Arith.IsUsablePrime` | a maximal ideal with residue field of size `≡ 3 (mod 4)` | 5 | agree |
+| `Arith.NoAffFieldHyp` | a disjunction of conditions on `F` and `k` (a usable prime of a given size, or a bound on `χ(F²)`) | 2 (`noAffine_fields`, `exists_hom_slack`) | agree — the user proves it for their field |
+| `ExtensionOrder` | an inductive predicate of a vertex list | its own API, `extends_of_extensionOrder` | agree |
+| `IsLift` | a deformation has every listed edge of quadrance one | 2; refuted by 4 `_no_lift` theorems | agree |
+| `Plane.AeProperRegions.IsRegion` | a colour and a connected component of its class | 4, its own lemmas | agree |
+| `Plane.Arc.IsUnitArc` | an arc of radius 1, by cases on the arc | 8 | agree — decided on written-down data |
+| `Plane.ArcMap.BaseCtx` | the bundled hypotheses of `Row134BaseUA` | 35, each a step of the refutation | agree — `BaseCtx.false` proves `False` from it with no other hypothesis (`Plane/ValidMap/BaseDense.lean:174`), so no taker asserts anything on anyone's word |
+| `Plane.ArcMap.Condition6` | no trichromatic vertex of degree above 3, read on the theorem's map | 1 (`ts_t_degree_three`) | agree |
+| `Plane.ArcMap.CrossesAt` | a colour crosses `ω(v)` at an angle | 4 | agree |
+| `Plane.ArcMap.DoubleEvent` | a configuration of two rings | 1 (`bv_nd`) | agree |
+| `Plane.ArcMap.HexRing` | six rotating points on a ring | 2 | agree |
+| `Plane.ArcMap.IsEssBoundary` | at least two essential colours at a point | 1 (`echo`) | agree |
+| `Plane.ArcMap.Near.RayConfig` | a structure of inequalities on a chart's germs | 28, its own lemmas | agree |
+| `Plane.ArcMap.OnRingArc` | a point on an arc of `Γ` on `ω(p)` | 16 | agree |
+| `Plane.ArcMap.RingProper` | `ω(u)` meets `Γ` finitely and has no like-coloured change points at distance 1 | 2 | agree |
+| `Plane.ArcMap.SaturatedAt` | each essential colour at `w` has support at distance 1 | 1 (`echo`) | agree |
+| `Plane.ArcMap.Terminal` | no move available anywhere in the theorem's map | 13 | agree — whether a terminal plane map with a stuck vertex exists is an open question, and the takers' docstrings say so; the hypothesis is still about the theorem's map |
+| `Plane.ArcMap.Todo` | a move is available or a unit arc is bad at `v` | 4, the procedure's invariant | agree |
+| `Plane.BranchGerms.Sorted` | germs sorted lexicographically | 6 | agree |
+| `Plane.CPColouring.RotationInvariant` | the law of the theorem's CP colouring is rotation-invariant | 1 | agree |
+| `Plane.InSixLens` | a point in a lens | 4 | agree |
+| `Plane.IsAdmissible` | measurable classes with null unit pairs | 4 | agree |
+| `Plane.IsRegOf` | a region of a family of classes | 4, its own lemmas | agree |
+| `Plane.IsSelection` | a measurable colouring choosing from a family | 1 | agree |
+| `SpectralInputs.IsHaarFourier` | a probability measure whose Fourier coefficients vanish off 0 | 5; produced by `exists_isHaarFourier` and `sp_if_hypotheses_trivial_bot`, both over `BochnerHerglotz` (declared) | agree — a predicate of the theorem's measure; its existence is the declared outside theorem's, and that is where the assumption is listed |
+| `SpectralChain.IsTraceSpectral` | a finite measure with the colouring's correlations as Fourier coefficients | 1; inside `Interface.R88TCA`, `APlus0` | agree |
+| `SpectralInputs.IsSpectralMeasureOf` | a spectral measure of a vector | 1 (`spectral_carried_iff`) | agree — no declaration exhibits one (an open gate item, not an assumption) |
+| `SpernerGrid.Rainbow` | three labels pairwise distinct | 2 | agree |
+| `Strip.WindowProper` | a structure of decidable conditions on a window | its own API, `window_extends` | agree |
+| `Thomassen.IsTwoSep` | two distinct vertices whose removal leaves a finite component | 1 | agree |
+| premise `deGrey_bound_of_not_colorable:hG` | `¬ (edgeGraph 1581 deGrey.edges).Colorable 4` | — | agree — checked: `deGreyRot_not_colorable_four` proves the rotated presentation's (`Instances/DeGrey/Bound.lean:123`), `chromaticNumber_plane_ge_five` concludes the bound from it with no hypothesis (l. 140), and no declaration under `Proofs/` uses `deGrey_bound_of_not_colorable` (`rg`: its own file and the axiom audit) |
+| premise `Plane.voronov11_of_forall_mu_lt:H` | `∀ ε > 0, mu 6 ε < 1` | — | agree — the theorem concludes the declared assumption `Voronov11` from it (`PRODUCES … cond`): one half of the equivalence `forall_mu_six_lt_one_iff`, whose content is the implication |
+
+**The two conditions this job added** (`GrundyBound`, `H1On`) are mine, one mind, and are in stage 4's table for a later reader.
+**One thing the reading turned up that is not an assumption**: `Plane.NoPar`'s docstring carries none of the words the step reads
+for its kind, so it is the one `SILENT` row (stage 6).
+
+## Stage 6 — SAVED (FS131-LT5): the docstrings — comments and nothing else, shown twice
+
+**The edits** (the step's draft 8, items (a)–(e); and `Arith/StandingFive.lean` on the coordinator's ruling): 22 doc comments in 9
+modules.
+
+| item | declaration | what the docstring now says |
+|---|---|---|
+| (a) | `Bridge.RealAlgebraicDescent` | "an external theorem, taken as a hypothesis … Artin–Lang, `[Lang1953]`, not read: cited through `[GoelPatilVerma2022]` Thm 3.11" |
+| (a) | `Interface.RU`, `APlus0`, `PE2`, `EFPlus`, `MR`, `APlusOfR88` (`SpectralChain`); `MulStable`, `NegCircle` (`Arith/SpectralInputs`) | "A hand result of ours ([hand], <its entry>), taken as a hypothesis: not in the kernel." — each grade copied from its record: J45's table (`plans/FS84-SI-D-derivation.md`: J45-RU, -A⁺, -SP-if, each [hand]); row 120 ("[hand; PE-2 two derivations blind to each other (X02D, X02V) …") |
+| (a) | `CharacterColouring.OrderBound` | "Where a theorem takes it at a closed instance (`cl2`: the band at 4, `N = 168`) it is a hand result of ours ([hand], FS89-S0A-3, two derivations)" — `LEDGER.md` § B: "hand, two derivations (blind)" |
+| (a) | `SevenConditional.G4` | "a measurement of ours, graded [tools] / [measured] — one CaDiCaL refusal with no proof log (`LEDGER.md` rows 103 and 47)" — row 103: "conditional on `G4`, a measurement"; "one CaDiCaL refusal with no proof log (row 47)" |
+| (b) | `SpectralChain.BochnerHerglotz`, `SpectralInputs.BochnerOn` | the key in brackets, `[Rudin1962]` |
+| (c) | `SpectralChain.InvariantMeasureOnClosed` | "Markov–Kakutani — `[Kakutani1938]`, not read" |
+| (d) | `Plane.Voronov11` | **the ruled sentence**: "An outside theorem, not an `axiom` of this library: it is taken as a hypothesis by one theorem, `mu_lt_of_voronov11`, and stated under an equivalence by another, `forall_mu_six_lt_one_iff` (FS106-COMP's second clause), which does not use it." (replacing "Named here, not imported (FS106-COMP's clause is an equivalence, not a use).") |
+| (e) | `Plane.ArcMap.flankQ_upper`, `flankQ_lower`, `flankQ_upper_of_qrOnly` | `hQR` is "a condition on the map that holds wherever every unit arc is (Q) or (R2): `flankQ_upper_of_qrOnly` … discharges it"; the words "a named hypothesis" are gone |
+| ruling | `StandingFive.StandingFloor` | "**No longer an assumption in hypothesis form**: it is proved at 7 and at 5 over the library's one declared import, Weil's bound for Kloosterman sums (`[Weil1948]` p. 207, the axiom `StandingFive.kloosterman_bound`) … The dependence moved from a hypothesis to that axiom; the theorems below that take the floor as a hypothesis keep their statements." |
+| ruling | `StandingFive.seven_le_localBound`; the section heading before `normOneCayley`; the module doc's paragraph "What is not" | the same, in each place that said "a named hypothesis from outside the backlog". **The module doc is a fourth doc comment in that file; the ruling named three.** Its paragraph said the floor "is neither in the kernel nor in the backlog", which the three edits would have left contradicting them; one sentence added. |
+
+**Shown by two instruments** (`tools/fs131_lt5_docstring_check.py`; `--self-test`, `data/fs131/lt5/docstring-check-selftest.out`,
+17 of 17: a reworded docstring and module doc pass; a character of a statement, of a `--` comment, of a plain block comment and of a
+string literal each fail; a docstring whose terminator is deleted so that it swallows the theorem below fails; a docstring added
+fails; and, for the dump, a reworded docstring gives an identical dump while a changed binder, a changed value and a removed theorem
+are each named, and a dump cut before its `COUNT` line is refused):
+
+1. **Text**: every doc comment of both versions replaced by a placeholder, the rest compared byte for byte — `text HEAD` before the
+   commit: `files=9 doc-comments-changed=22 failed=0` (`data/fs131/lt5/docstring-text-check.out`, which lists the 22 with their
+   declarations).
+2. **Elaborated**, independent of the lexer: every constant of the nine modules, from the built library — its stored type (hash,
+   and the length and hash of its full debug text), kind, universe parameters, and a definition's value hash — dumped before the
+   first edit (`sigs-before.txt`) and after the rebuild (`sigs-after.txt`): `before=1453 after=1453 (theorems before=1223)
+   missing=0 added=0 changed=0`, "IDENTICAL" (`sigs-compare.out`).
+
+**The rebuild**: `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, exit 0 — "471 of 471 batches,
+62 module(s) rebuilt, 0 module(s) with warnings, 17m21s" (`data/fs131/lt5/build-docstrings.log`).
+
+**The step's counts as they now stand**: **`silent=1`** (11 before) — `SILENT HadwigerNelson.Plane.NoPar kind=open`: its docstring
+("`𝒫_k` is empty on a class `𝒞` of families (C121-NOPAR is this at `k = 6` for the locally finite map colourings)") has no kind word,
+and `Plane/Saturated/MapColouring.lean` is in no list of modules I may edit; a line for the next landing that touches it: add "an open
+question" to that docstring. **`hints=0`** (4 before): the three `flankQ_*` reworded, and `five_le_chromaticNumber_weil` is now a
+consumer.
+
+## Stage 7 — SAVED (FS131-LT5): the one ruled change to the instrument — absent counts fail
+
+`scripts/gate_report.py`, `assumptions`: when `CLAUDE.md` § Trust ledger records none of the nine counts the digest now **refuses
+(exit 3)**, after printing the full digest, with the sentence's counts in the message — "RECORDED COUNTS ABSENT in CLAUDE.md § Trust
+ledger — it records none of the nine; add: `axioms=…`" and, in the refusal, "Add the sentence that holds them: `…`".
+`scripts/assumptions.sh` turns exit 3 into its own failure, as it did for a partial or doubled record. A drifted record is still
+flagged and not failed: a landing moves the counts before the front page is refiled.
+
+**The control, red and green** (`./scripts/assumptions.sh --self-test`, now 33 checks; `data/fs131/lt5/runs/selftest-declared.out`):
+`digest match` — a one-section copy of `CLAUDE.md` with the sentence: exit 0, "match (9 of 9 compared)"; `digest absent` — the same
+copy with the sentence removed: **exit 3**, "RECORDED COUNTS ABSENT" (it was exit 0 before this change); `digest
+absent-says-what-to-add`: exit 3 and the message holds the nine counts to record.
+
+**And on the real file, both ways** (the list as declared, the ledger rewritten):
+- against `data/fs131/lt5/drafts/CLAUDE-with-sentence.md` (`ASSUMPTIONS_CLAUDE`; the gate prints a NOTE saying which file it read):
+  **exit 0** — "assumptions: OK — 1 outside theorem(s) as axioms, with 8 theorem(s) resting on them; 19 named and 16 inline
+  hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s) and mentioned by 1"; both records "match (9 of 9 compared)"
+  (`data/fs131/lt5/runs/gate-with-draft.out`);
+- against the repository's own `CLAUDE.md`, which does not hold the sentence: **exit 1, by that refusal alone** — the scan's
+  `fails=0`, the ledger's header "match (9 of 9 compared)", then "assumptions: FAIL — a recorded count is absent or could not be read"
+  (`data/fs131/lt5/runs/gate-repo-claude.out`).
+
+**So `./scripts/assumptions.sh` is red on `main` from this landing until the paragraph of draft 1 is filed** — the brief's "The first
+filing is then: I add the sentence, and the digest passes". The draft copy is made by `tools/fs131_lt5_claude_draft.py`, which reads
+the counts from a scan's saved output and refuses if `CLAUDE.md` already records one.
+
+**A second change, for the control's own control**: `scripts/assumptions.sh` reads the digest script's path from
+`ASSUMPTIONS_GATE_REPORT` (default: the shipped one; a NOTE is printed when it is another), as it already read the audit's from
+`ASSUMPTIONS_AUDIT`, so that `tools/fs131_lt5_digest_mutate.py` can switch one decision of the digest off in a copy and require the
+self-test to fail and name the control built for it. Its result is in stage 9.
+
+## Stage 8 — SAVED (FS131-LT5): the ledger
+
+`./scripts/assumptions.sh --write-ledger` (against the draft copy, since the run refuses on an absent record): exit 0, "ledger
+written (107 rows)" (`data/fs131/lt5/runs/write-ledger.out`). 90 rows before; **24 added, 7 removed**. Every row, read:
+
+**Added — each is a statement of this library that is conditional on something.**
+
+| rows | n | read |
+|---|---|---|
+| `RESTS StandingFive.kloosterman_bound` ← `kloostermanBound_of_ringChar_ne_two`, `circle_sum_le_weil`, `targetFloor_seven_weil`, `targetFloor_six_weil`, `standingFloor_seven_weil`, `standingFloor_five_weil`, `seven_le_localBound_weil`, `five_le_chromaticNumber_weil` | 8 | the eight theorems whose stored axiom lists hold Weil's bound — the passage to the hypothesis form, the circle-sum bound, the floors at seven (`Q ≥ 98`) and six (`Q ≥ 62`) of the norm-one targets, the standing floor at 7 and 5, `7 ≤ L(F)` at the standing field, and `χ(F²) ≥ 5` there (which also takes row 123's chain). The audit's eight IMPORTED records, and no ninth theorem anywhere in the library |
+| `TAKES StandingFive.KloostermanBound` ← `circle_sum_le`, `circle_sum_le_of_ne`, `kloosterman_page_of_kloostermanBound` (at the theorem's field); `normOne_charSum_ge`, `targetFloor_seven_of_kloosterman`, `targetFloor_six_of_kloosterman` (at every field of `Q` elements); `standingFloor_seven`, `standingFloor_five`, `seven_le_localBound_of_kloosterman` (at every field of `q ≡ 3 (mod 4)`, `q ≥ 347` elements) | 9 | the hypothesis forms wave 10 kept: each says "if Weil's bound holds at these fields, then …" and prints the standard three; FS131-L10B's nine, name for name |
+| `TAKES inline:KloostermanFrom347` ← `standingFloor_seven`, `standingFloor_five`, `seven_le_localBound_of_kloosterman` | 3 | the last three of the nine again: there the hypothesis is closed, and the step wants the binder itself declared (stage 4, case 2) |
+| `TAKES inline:Row123Chain` ← `five_le_chromaticNumber_weil` | 1 | `χ(F²) ≥ 5` at the standing field rests on the import **and** on row 123's chain, a hand result of ours with measure rigidity inside it |
+| `TAKES SpectralChain.BochnerHerglotz` ← `SpectralInputs.sp_if_hypotheses_trivial_bot` | 1 | the model of `sp_if`'s hypotheses exists given Herglotz–Bochner at `ℚ` |
+| `TAKES Plane.NoPar` ← `gmap_ii`, `sat_noPar` | 2 | FS121-C1-GMAP (ii) and FS121-C1-SAT's "so" clause are conditional on `𝒫₆` being empty on the theorem's class — at the locally finite map colourings, the open statement C121-NOPAR |
+
+**Removed.**
+
+| rows | n | read |
+|---|---|---|
+| `RESTS Plane.falconer_lemma2_nonempty` ← `exists_mem_falconerE`, `falconer_reduction`, `fan_tip_ae_mem`, `le_chiM_of_falconerFan` | 4 | Falconer's Lemma 2 (i) is a theorem: the four are unconditional now |
+| `TAKES StandingFive.StandingFloor` ← `five_le_chromaticNumber`, `le_localBound`, `seven_le_localBound` | 3 | the floor left the list (stage 4, case 1); the three still take it in their statements, and the library proves it at 7 and at 5 over the import |
+
+The header: `axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` (8 + 98 + 1 = 107 rows).
+
+**Token count at this stage**: no reading of the harness's count; own estimate about 420k.

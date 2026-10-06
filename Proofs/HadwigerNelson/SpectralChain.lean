@@ -118,9 +118,9 @@ def PosDef {G : Type*} [AddCommGroup G] (C : G → ℂ) : Prop :=
 
 /-- **X-BH, external: Herglotz–Bochner on a discrete abelian group, with uniqueness.** "Bochner's theorem … as generalised by
 Weil: any positive definite function on a locally compact abelian group `G` is the Fourier–Stieltjes transform of a positive
-measure on the dual group" (Rudin, *Fourier Analysis on Groups* 1.4.3; not quoted from a held copy); uniqueness is the injectivity
-of the Fourier–Stieltjes transform (Rudin 1.3.6). Mathlib lacks both for groups (it has `Measure.ext_of_charFun` on
-inner-product spaces). -/
+measure on the dual group" (Rudin, *Fourier Analysis on Groups*, `[Rudin1962]`, 1.4.3; not quoted from a held copy);
+uniqueness is the injectivity of the Fourier–Stieltjes transform (Rudin 1.3.6). Mathlib lacks both for groups (it has
+`Measure.ext_of_charFun` on inner-product spaces). -/
 def BochnerHerglotz (G : Type*) [AddCommGroup G] : Prop :=
   ∀ C : G → ℂ, PosDef C → ∃ σ : Measure (AddChar G Circle), IsFiniteMeasure σ ∧ (∀ y, ∫ χ, (χ y : ℂ) ∂σ = C y) ∧
     ∀ σ' : Measure (AddChar G Circle), IsFiniteMeasure σ' → (∀ y, ∫ χ, (χ y : ℂ) ∂σ' = C y) → σ' = σ
@@ -156,14 +156,16 @@ def Interface.trivial : Interface F where
 variable {F}
 
 /-- **R-U** (`plans/FS84-SI-D-derivation.md` §5.4, J45; blind J46): "every finite `U`-invariant measure on `R̂` gives
-`E_S ∖ (T + A)` measure 0, for every finite `S`"; here in its union form, `τ(E ∖ (T + A)) = 0` (§4.1, "`E` is a countable union"). -/
+`E_S ∖ (T + A)` measure 0, for every finite `S`"; here in its union form, `τ(E ∖ (T + A)) = 0` (§4.1, "`E` is a countable union").
+A hand result of ours ([hand], J45-RU), taken as a hypothesis: not in the kernel. -/
 def Interface.RU (I : Interface F) : Prop :=
   ∀ τ : Measure (Dual F), IsFiniteMeasure τ → RotInv F τ → τ (I.E \ I.TA) = 0
 
 /-- **A⁺ at `S = ∅`, remark (ii)** (§3, J45; blind X05V): for every rotation-invariant random proper four-colouring,
 "`u ↦ ∫_{R̂∖E_S} χ(u) dσ_μ` is constant on `U`: strict at every `u`, in particular at `u = 1`". Rests on SI-3, SI-4, N2 and
 R88-TCA at `S = ∅` (row 113). VACUITY NOTE: this `Prop` quantifies over `InvariantColouring`, which is empty exactly when the
-headline's conclusion holds; its content is its derivation from R88-TCA, which never assumes that emptiness. -/
+headline's conclusion holds; its content is its derivation from R88-TCA, which never assumes that emptiness. A hand result of
+ours ([hand], J45-A⁺), taken as a hypothesis: not in the kernel. -/
 def Interface.APlus0 (I : Interface F) : Prop :=
   ∀ (μ : InvariantColouring F) (σ : Measure (Dual F)), IsTraceSpectral F μ.μ σ →
     ∫ χ in I.TAᶜ, (χ 1 : ℂ).re ∂σ < 0
@@ -171,7 +173,7 @@ def Interface.APlus0 (I : Interface F) : Prop :=
 /-- **PE-2**, in the consequence form the chain uses (queue §2 list X02; X02D, X02V blind; over EL2021 Thm 1.2): "every
 `U`-invariant finite positive measure `τ` on `R̂`: `τ = a·m + τ′` with `a ≥ 0`, `τ′` a `U`-invariant finite positive measure,
 and `h_{τ′}(u) = 0` for every `u ∈ U`." The Haar part `a·m` is recorded by the two properties used: it is `E`-null (N1) and its
-Fourier coefficients vanish off `0`. -/
+Fourier coefficients vanish off `0`. A hand result of ours ([hand]; X02D, X02V), taken as a hypothesis: not in the kernel. -/
 def Interface.PE2 (I : Interface F) : Prop :=
   ∀ τ : Measure (Dual F), IsFiniteMeasure τ → RotInv F τ →
     ∃ τH τ' : Measure (Dual F), τ = τH + τ' ∧ RotInv F τ' ∧ τH I.E = 0 ∧
@@ -179,12 +181,14 @@ def Interface.PE2 (I : Interface F) : Prop :=
 
 /-- **EF_F⁺**, weakened to the form the chain uses (zero entropy at every `u`, where EF_F⁺ needs one non-torsion `u*`):
 "every `U`-invariant finite positive Borel measure `μ` on `R̂` such that `h_μ(u*) = 0` for **one** non-torsion `u* ∈ U`
-satisfies `μ(R̂ ∖ (T + A)) = 0`" (`plans/FS100-X01D-derivation.md` line 194; second derivation X12B). -/
+satisfies `μ(R̂ ∖ (T + A)) = 0`" (`plans/FS100-X01D-derivation.md` line 194; second derivation X12B). A hand result of ours
+([hand]), taken as a hypothesis: not in the kernel. -/
 def Interface.EFPlus (I : Interface F) : Prop :=
   ∀ τ : Measure (Dual F), IsFiniteMeasure τ → RotInv F τ → (∀ u, I.h τ u = 0) → τ I.TAᶜ = 0
 
 /-- **MR**, Fourier form: every rotation-invariant `E`-null finite measure has vanishing Fourier coefficients off `0` (for
-`a·m` they vanish; the converse is Fourier uniqueness on `R̂`). -/
+`a·m` they vanish; the converse is Fourier uniqueness on `R̂`). A hand result of ours ([hand], `LEDGER.md` row 120; from PE-2
+and EF_F⁺ by `mr_of_pe2_efPlus`), taken as a hypothesis: not in the kernel. -/
 def Interface.MR (I : Interface F) : Prop :=
   ∀ τ : Measure (Dual F), IsFiniteMeasure τ → RotInv F τ → τ I.E = 0 → ∀ r : unitRing F, r ≠ 0 → ∫ χ, (χ r : ℂ) ∂τ = 0
 
@@ -311,7 +315,8 @@ derivation from the class form, which never assumes that emptiness. -/
 def Interface.R88TCA (I : Interface F) : Prop :=
   ∀ (μ : InvariantColouring F) (σ : Measure (Dual F)), IsTraceSpectral F μ.μ σ → σ I.TAᶜ ≠ 0
 
-/-- **A⁺ at `S = ∅` from R88-TCA** (J45: SI-3, SI-4, N2, then T-C(A) as a black box; field-free, X23V §2.3 "(lit)"). -/
+/-- **A⁺ at `S = ∅` from R88-TCA** (J45: SI-3, SI-4, N2, then T-C(A) as a black box; field-free, X23V §2.3 "(lit)"). A hand
+result of ours ([hand], J45), taken as a hypothesis: not in the kernel. -/
 def Interface.APlusOfR88 (I : Interface F) : Prop := I.R88TCA → I.APlus0
 
 /-- **The count**: in the class, R88-TCA at `S = ∅` holds (X23D-TCA; J28D's route: the extension to `G_∅`, C14.2 (a) with ratio
@@ -329,8 +334,9 @@ variable {F : Subfield ℝ}
 /-- **L1, the classical theorem in its own terms — a named hypothesis, true for every `F`.** "Every nonempty closed set of
 colourings of `ℤ[U]`, stable under the shifts and the rotations, carries a probability measure invariant under both": the group
 `ℤ[U] ⋊ U` is solvable, hence amenable, and acts by homeomorphisms on the compact space `(Fin 4)^{ℤ[U]}`, so it fixes a regular
-Borel probability measure on the compact invariant set (Markov–Kakutani for `ℤ[U]`, then for `U` on the `ℤ[U]`-invariant
-measures, which `U` preserves because it normalizes `ℤ[U]`); on the product σ-algebra a measurable `K` then has `μ(Kᶜ) = 0`.
+Borel probability measure on the compact invariant set (Markov–Kakutani — `[Kakutani1938]`, not read — for `ℤ[U]`, then for
+`U` on the `ℤ[U]`-invariant measures, which `U` preserves because it normalizes `ℤ[U]`); on the product σ-algebra a measurable
+`K` then has `μ(Kᶜ) = 0`.
 Not in Mathlib (no Markov–Kakutani, no invariant measures for amenable actions); X11K priced it at 100–200k harness tokens.
 **Why `MeasurableSet K` is a hypothesis:** without it the statement is false when `ℤ[U]` is uncountable — a product-measurable
 set depends on countably many coordinates, so no probability measure gives `X₄(F)ᶜ` measure zero (`plans/FS100-K-kernel-47.md`

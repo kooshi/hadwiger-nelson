@@ -743,6 +743,67 @@ and each is audited under the `PURCHASED` banner in `scripts/Axioms.lean`, the e
 `scripts/axioms.sh` extracts both and fails on any disagreement, and fails if the audit output lacks
 either banner, so an audit that could not elaborate cannot read as a pass.
 
+### Assumed as hypotheses (`scripts/assumptions.sh`; declared in `scripts/Assumptions.lean`)
+
+None is an `axiom`: each is a `Prop` argument visible in the statement of every theorem that takes it, so `#print axioms`
+shows the standard three and the axiom audit counts the theorem clean. `scripts/assumptions-ledger.txt` lists every
+(hypothesis, statement) pair — 98 pairs, 51 statements — and the gate compares it with the library exactly. The gate fails
+on a hypothesis that is closed (no free variable), never concluded, concluded only from another assumption, or called one
+in its docstring, and is not in the list. What it cannot find by itself is a hand result written out over a theorem's own
+variables under a docstring that does not say so; the landing that brings one declares it. Thirty-five entries, by kind
+(FS131-LT5; names under `HadwigerNelson.`):
+
+**Outside theorems — seven entries, five theorems.** Weil's bound is listed in each form it takes: the import above (eight
+theorems rest on the axiom), and the two hypothesis forms below, which the import proves.
+
+| hypothesis | form | source | statements that take it |
+|---|---|---|---|
+| `SpectralChain.BochnerHerglotz` | named | `[Rudin1962]` 1.4.3 (Herglotz–Bochner on a discrete abelian group) and 1.3.6 (uniqueness); the page not read | 13 |
+| `SpectralChain.InvariantMeasureOnClosed` | named | `[Kakutani1938]` (Markov–Kakutani, for `ℤ[U]` and then for `U`); not read | 7 |
+| `Bridge.RealAlgebraicDescent` | named | `[Lang1953]` (Artin–Lang; equivalently Tarski 1951); row 107's one named hypothesis | 6 |
+| `SpectralInputs.BochnerOn` | named | `[Rudin1962]` 1.4.3, for a topology induced from a locally compact abelian group | 1 |
+| `Plane.Voronov11` | named | `[Voronov2023]` Thm 1.1 (six colours) | 1 (`mu_lt_of_voronov11`); `forall_mu_six_lt_one_iff` states it under `↔` |
+| `StandingFive.KloostermanBound` | named | `[Weil1948]` p. 207, at the theorem's field; proved from the import at characteristic not 2 | 9 |
+| `hK` of `standingFloor_seven`, `standingFloor_five`, `seven_le_localBound_of_kloosterman` | in a binder | `[Weil1948]` p. 207, at every field of `q ≡ 3 (mod 4)`, `q ≥ 347` elements | 3 |
+
+**Hand results of ours — twenty-three: twelve named, eleven written out in a binder.**
+
+| hypothesis | form | source | statements that take it |
+|---|---|---|---|
+| `SpectralChain.Interface.RU` | named | J45 § 5.4 (R-U) | 6 |
+| `SpectralChain.Interface.PE2` | named | X02D (PE-2), over `[EinsiedlerLindenstrauss2022]` Thm 1.2 | 6 |
+| `SpectralChain.Interface.EFPlus` | named | FS100-X01D (EF_F⁺) | 6 |
+| `SpectralChain.Interface.APlus0` | named | J45 § 3 (A⁺ at `S = ∅`; row 113) | 3 |
+| `SpectralChain.Interface.APlusOfR88` | named | J45 (A⁺ from R88-TCA) | 3 |
+| `SpectralChain.Interface.Count` | named | X23D-TCA (the count) | 3 |
+| `CharacterColouring.OrderBound` | named | FS89-S0A-3 (`N = 168` at the band at 4) | 2 |
+| `SpectralChain.Interface.MR` | named | row 120 (measure rigidity, Fourier form) | 1 |
+| `SpectralChain.Interface.MulStable` | named | J45 § 4.2 step 2 | 1 |
+| `SpectralChain.Interface.NegCircle` | named | J45 § 4.2 step 3 | 1 |
+| `Plane.Row130M1` | named | row 130 (`χ_CP ≤ χ_m⁰`) | 1 |
+| `SevenConditional.G4` | named | row 103 (a solver refusal with no proof log) | 1 |
+| `hRow99` | in a binder | row 99 (`χ(F²) = L(F)` at `L(F) ≤ 4`) | 3 |
+| `hCLS` | in a binder | X23D-CLS (`L(F) ≥ 5 ⟹` T-C(A)) | 3 |
+| `hRow123` | in a binder | row 123's chain at the standing field | 2 |
+| `hUpper` | in a binder | row 52 (`χ(F²) ≤ L(F)`) | 1 |
+| `hRQ4`, `hRQ5` of `cl2` | in a binder | FS89-D2-T1, FS89-D5-T2 | 1 each |
+| `α(Γ₂₃) ≤ 105`, `α(Γ₈₃) ≤ 1148`, `α(Γ₁₁) ≤ 29` | in a binder | rows 71, 68, 68 (certificates checked outside the kernel) | 1 each |
+| `hR78`; `hR88`, `hR88per` | in a binder | rows 78; 88 | 1 each |
+
+**Open questions and design targets — five: one named, four written out in a binder.**
+
+| hypothesis | form | source | statements that take it |
+|---|---|---|---|
+| `Plane.NoPar` | named | C121-NOPAR at the locally finite map colourings (the former is stated for every class of families) | 2 (`gmap_ii`, `sat_noPar`) |
+| the six-target (every `√3`-pair and every distance-2 pair separated at five colours) | in a binder | row 43 | 2 |
+| the same at six colours | in a binder | row 61 | 2 |
+| its `{1, 2}`-distance form | in a binder | row 61 | 1 |
+| valid six-coloured fragments on discs of every radius | in a binder | row 145 | 1 |
+
+**No longer here**: `StandingFive.StandingFloor`, a hand result of ours until wave 10 — proved at 7 and at 5 over the import
+(`standingFloor_seven_weil`, `standingFloor_five_weil`). **Not assumptions, declared with reasons and printed every run**: 33
+conditions on a theorem's own parameters and 2 closed premises (`scripts/Assumptions.lean`, the end of the list).
+
 ### Why a purchase would sit on the worst possible claim
 
 The bound rests on two computations, and they are not equally checkable by a human:

@@ -44,8 +44,9 @@ open SimpleGraph MvPolynomial
 /-- **Real algebraic descent** (`plans/M2-S1D-bridge.md` §2.1's (∃T) for `ℚ`): every finite system of polynomial
 equations with rational coefficients that has a solution in `ℝ` has one whose coordinates are algebraic over `ℚ`.
 
-**True, and not proved here** (Tarski 1951, quantifier elimination for real closed fields, with `ℚ`'s real algebraic
-closure real closed — `RealClosed.lean`; equivalently Artin–Lang, Lang 1953). Mathlib has no quantifier elimination for
+**True, and not proved here: an external theorem, taken as a hypothesis** (Tarski 1951, quantifier elimination for real
+closed fields, with `ℚ`'s real algebraic closure real closed — `RealClosed.lean`; equivalently Artin–Lang, `[Lang1953]`,
+not read: cited through `[GoelPatilVerma2022]` Thm 3.11). Mathlib has no quantifier elimination for
 real closed fields, so every theorem in this file that assumes it carries the suffix `_of_descent`. Not a vacuous
 hypothesis: it is a proposition, not an empty domain (`realAlgebraicDescent_one` proves its one-variable case). -/
 def RealAlgebraicDescent : Prop :=

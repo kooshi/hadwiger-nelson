@@ -1,0 +1,11 @@
+slot: admitted python3: mem 16 GiB (hard cap), cpus 14,15,16,17
+    Proofs.HadwigerNelson.Bridge: 29 constants
+    Proofs.HadwigerNelson.SpectralChain: 147 constants
+    Proofs.HadwigerNelson.Arith.SpectralInputs: 116 constants
+    Proofs.HadwigerNelson.Arith.CharacterColouring: 53 constants
+    Proofs.HadwigerNelson.Instances.SevenConditional: 22 constants
+    Proofs.HadwigerNelson.Plane.Slack: 289 constants
+    Proofs.HadwigerNelson.Plane.ValidMap.UnitArc: 370 constants
+    Proofs.HadwigerNelson.Plane.ValidMap.Terminal: 183 constants
+    Proofs.HadwigerNelson.Arith.StandingFive: 244 constants
+dump: 1453 constants of 9 modules written to data/fs131/lt5/sigs-before.txt

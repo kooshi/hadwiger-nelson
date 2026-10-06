@@ -1,0 +1,47 @@
+-- FS131-LT5 signature dump (assembled by tools/fs131_lt5_docstring_check.py: an `import` line and a module list are
+-- written above this text, or — for a control — planted declarations). For every constant of the chosen modules
+-- (or, with no module, of the file being elaborated) it prints one line from what the kernel stores:
+--   SIG<TAB>module<TAB>name<TAB>kind<TAB>level params<TAB>hash of the type<TAB>length and hash of the type's full
+--   debug text<TAB>hash of the value (a definition's or an opaque's; `-` for a theorem, whose proof is not read)
+-- then `COUNT <n>`, whose absence means the dump did not reach its end. No pretty-printer option is involved: the
+-- debug text is the whole expression, binder names and universe levels included.
+section FS131LT5Dump
+open Lean Meta Elab Command
+
+private def fs131lt5Kind : ConstantInfo → String
+  | .axiomInfo _ => "axiom" | .defnInfo _ => "def" | .thmInfo _ => "theorem" | .opaqueInfo _ => "opaque"
+  | .quotInfo _ => "quot" | .inductInfo _ => "inductive" | .ctorInfo _ => "ctor" | .recInfo _ => "rec"
+
+private def fs131lt5Value : ConstantInfo → String
+  | .defnInfo v => toString v.value.hash
+  | .opaqueInfo v => toString v.value.hash
+  | _ => "-"
+
+/-- `#fs131_lt5_dump` dumps the constants declared in this file; `#fs131_lt5_dump M₁ M₂ …` those of the imported
+modules named. A module that is not imported is an error, never an empty result. -/
+elab "#fs131_lt5_dump" ms:(ident)* : command => do
+  let env ← getEnv
+  let mut rows : Array (String × String) := #[]
+  if ms.isEmpty then
+    for (n, ci) in env.constants.map₂.toList do
+      if (n.toString.splitOn "fs131lt5").length == 1 && (n.toString.splitOn "fs131_lt5").length == 1 then
+        let t := toString ci.type
+        rows := rows.push (n.toString, s!"SIG\t(this file)\t{n}\t{fs131lt5Kind ci}\t{ci.levelParams}\t{ci.type.hash}\t{t.length}:{hash t}\t{fs131lt5Value ci}")
+  else
+    let mut idxs : Array (ModuleIdx × Name) := #[]
+    for m in ms do
+      let some idx := env.getModuleIdx? m.getId | throwError "module {m.getId} is not imported"
+      idxs := idxs.push (idx, m.getId)
+    for (n, ci) in env.constants.map₁.toList do
+      match env.getModuleIdxFor? n with
+      | some i =>
+        match idxs.find? (·.1 == i) with
+        | some (_, mod) =>
+          let t := toString ci.type
+          rows := rows.push (n.toString, s!"SIG\t{mod}\t{n}\t{fs131lt5Kind ci}\t{ci.levelParams}\t{ci.type.hash}\t{t.length}:{hash t}\t{fs131lt5Value ci}")
+        | none => pure ()
+      | none => pure ()
+  for (_, r) in rows.qsort (fun a b => a.1 < b.1) do IO.println r
+  IO.println s!"COUNT {rows.size}"
+
+end FS131LT5Dump

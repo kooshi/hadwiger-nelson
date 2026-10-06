@@ -35,7 +35,14 @@
 # The records it reads can be pointed elsewhere, for a control or a draft, and the output then says so:
 # ASSUMPTIONS_BIB, ASSUMPTIONS_LEDGER_MD, ASSUMPTIONS_GROKKINGS, ASSUMPTIONS_STUBS, ASSUMPTIONS_CLAUDE,
 # ASSUMPTIONS_ENTRY_EXTRA (one more file searched for entry ids), ASSUMPTIONS_AUDIT (the audit file itself: the
-# mutation harness, tools/fs131_t5_mutate.py, runs mutated copies and never edits the shipped one).
+# mutation harness, tools/fs131_t5_mutate.py, runs mutated copies and never edits the shipped one),
+# ASSUMPTIONS_GATE_REPORT (the digest script: tools/fs131_lt5_digest_mutate.py does the same for its decisions).
+#
+# THE RECORDED COUNTS. The nine counts are recorded twice — in the ledger's header and in `CLAUDE.md` § Trust
+# ledger — and the digest compares this run with both. A record that has drifted is flagged and does not fail (a
+# landing moves the counts before the front page is refiled); a record that is ABSENT, partial or doubled fails:
+# a recorded count whose deletion passes is no record (inventory item 562 (d)). The failure prints the counts to
+# record.
 set -uo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -52,6 +59,7 @@ GROKKINGS="${ASSUMPTIONS_GROKKINGS:-${REPO}/.claude/skills/grokkings/SKILL.md}"
 STUBS="${ASSUMPTIONS_STUBS:-${REPO}/plans/FRONTIER-STUBS.md}"
 CLAUDE_MD="${ASSUMPTIONS_CLAUDE:-${REPO}/CLAUDE.md}"
 ENTRY_EXTRA="${ASSUMPTIONS_ENTRY_EXTRA:-}"
+GATE_REPORT="${ASSUMPTIONS_GATE_REPORT:-${REPO}/scripts/gate_report.py}"
 
 RECORD_KEYS="axioms rests named inline outside ours open takes mentions"
 kept() { echo "    full output: ${GATE_LOG#"${REPO}"/}"; }
@@ -298,7 +306,7 @@ if [[ "${1:-}" == "--self-test" ]]; then
   digest() {  # digest <variant> <the section's sentence> <expected exit> <expected text>
     printf '# planted\n\n## Trust ledger\n\n%s\n' "$2" > "${WORK}/CLAUDE-$1.md"
     local dstatus=0 dout
-    dout="$(python3 "${REPO}/scripts/gate_report.py" assumptions "${GATE_LOG}" '' "${WORK}/ledger-digest.txt" "${WORK}/CLAUDE-$1.md" 2>&1)" || dstatus=$?
+    dout="$(python3 "${GATE_REPORT}" assumptions "${GATE_LOG}" '' "${WORK}/ledger-digest.txt" "${WORK}/CLAUDE-$1.md" 2>&1)" || dstatus=$?
     { echo "######## digest $1 (exit ${dstatus})"; echo "${dout}"; } >> "${GATE_LOG}.digests"
     ran=$((ran + 1))
     if [[ "${dstatus}" == "$3" ]] && grep -qF -- "$4" <<< "${dout}"; then ok "digest $1 — exit ${dstatus}, '$4'"
@@ -307,7 +315,9 @@ if [[ "${1:-}" == "--self-test" ]]; then
   ledger_text "${RAW}" > "${WORK}/ledger-digest.txt"
   digest match "The assumptions scan reads \`${sentence# }\`." 0 "match (9 of 9 compared)"
   digest stale "The assumptions scan reads \`${sentence/ axioms=${first}/ axioms=$((first + 1))}\`." 0 "RECORDED COUNTS ARE STALE"
-  digest absent "The audit reads other things." 0 "RECORDED COUNTS ABSENT"
+  # absence fails, and says what to add: the partner is `match` above — the same section with the sentence in it
+  digest absent "The audit reads other things." 3 "RECORDED COUNTS ABSENT"
+  digest absent-says-what-to-add "The audit reads other things." 3 "Add the sentence that holds them: \`${sentence# }\`"
   digest partial "The assumptions scan reads \`axioms=${first} rests=0\`." 3 "could not read the counts"
   digest doubled "The assumptions scan reads \`${sentence# }\`, and again \`${sentence# }\`." 3 "recorded more than once"
   sed -i 's/ takes=[0-9]*/ takes=0/' "${WORK}/ledger-digest.txt"
@@ -334,16 +344,16 @@ printf '%s\n' "${RAW}" > "${GATE_LOG}"
 PREV="${GATE_PREV}"
 gate_log_complete
 
-for pair in "scripts/Assumptions.lean:${AUDIT}" "BIBLIOGRAPHY.md:${BIB}" "LEDGER.md:${LEDGER_MD}" "CLAUDE.md:${CLAUDE_MD}"; do
+for pair in "scripts/Assumptions.lean:${AUDIT}" "BIBLIOGRAPHY.md:${BIB}" "LEDGER.md:${LEDGER_MD}" "CLAUDE.md:${CLAUDE_MD}" "scripts/gate_report.py:${GATE_REPORT}"; do
   [[ "${pair#*:}" == "${REPO}/${pair%%:*}" ]] || echo "    NOTE: ${pair%%:*} is read from ${pair#*:}, not from the repository's own file"
 done
 
 # The digest: its exit status says which failure it is (read here directly, never through a pipe): 2, the
-# scan's output is not the shape the digest reads; 3, a recorded count could not be read.
-python3 "${REPO}/scripts/gate_report.py" assumptions "${GATE_LOG}" "${PREV}" "${LEDGER}" "${CLAUDE_MD}"
+# scan's output is not the shape the digest reads; 3, a recorded count is absent or could not be read.
+python3 "${GATE_REPORT}" assumptions "${GATE_LOG}" "${PREV}" "${LEDGER}" "${CLAUDE_MD}"
 DIGEST=$?
 if [[ "${DIGEST}" -eq 3 ]]; then
-  echo "==> assumptions: FAIL — a recorded count could not be read (above), so the comparison with it did not run."
+  echo "==> assumptions: FAIL — a recorded count is absent or could not be read (above), so the comparison with it did not run."
   kept; exit 1
 elif [[ "${DIGEST}" -ne 0 ]]; then
   echo "==> assumptions: FAIL — no digest could be built from this run's output (above)."

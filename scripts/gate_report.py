@@ -10,7 +10,7 @@
   the vacuity scan's nine counts against the baseline's header AND against `CLAUDE.md` § The gate; the
   axiom audit's three (clean, declared purchases, imported) against `CLAUDE.md` § Trust ledger; the
   assumptions scan's nine against its ledger's header AND against `CLAUDE.md` § Trust ledger. A drifted
-  record is flagged here, never failed;
+  record is flagged here, never failed; an absent one is a refusal (exit 3, below);
 * every row that changed since the previous complete run, which answers "which declarations are the new
   ones?" without a second scan.
 
@@ -24,6 +24,9 @@ cases, because each is a check that could not run:
   count is missing or recorded twice). Until 2026-09-25 the vacuity digest printed "match" naming
   `CLAUDE.md` § The gate, a file it never opened, while that section was four counts stale (J23bd, J32): a
   comparison that could not run must never read as one that passed. The digest is printed in full first.
+  **The assumptions scan's nine counts absent from `CLAUDE.md` § Trust ledger is this case too** (since
+  FS131-LT5, inventory item 562 (d)): a recorded count whose deletion passes is no record. The refusal
+  prints the counts to record, so the repair is one sentence.
 
 A baseline that does not exist is reported and not failed here: `scripts/vacuity.sh` fails on a missing
 baseline itself, except when creating one with `--baseline`.
@@ -444,8 +447,8 @@ def read_assumptions(path) -> dict:
 
 def assumption_counts(text: str, label: str, absent_ok: bool = False) -> dict | None:
     """All nine recorded counts in `text`, each exactly once — or `Unreadable`. With `absent_ok`, a text that
-    records none of them at all returns `None`: the record has not been written yet, which the caller flags
-    (a sentence to add) and does not fail; a partial or doubled record is never that."""
+    records none of them at all returns `None`, so that the caller can say which sentence to add; the caller
+    fails on it all the same (`assumptions`, below). A partial or doubled record is never that."""
     found = re.findall(rf"(?<![\w-])({'|'.join(A_COUNTS)})=(\d+)", text)
     seen = Counter(k for k, _ in found)
     if absent_ok and not seen:
@@ -519,8 +522,12 @@ def assumptions(cur_path: str, prev_path: str, ledger: str, claude: str) -> list
         if recorded == "missing":
             say(f"RECORDED COUNTS NOT COMPARED — {rel(ledger)} does not exist (scripts/assumptions.sh fails on that)")
         elif recorded is None:
-            say(f"RECORDED COUNTS ABSENT in {label} — it records none of the nine; add: `"
-                + " ".join(f"{k}={now[k]}" for k in A_COUNTS) + "`")
+            # Absence fails (inventory item 562 (d)): a recorded count whose deletion passes is this gate's own
+            # failure mode. The message carries the counts to record, so the repair is one sentence.
+            sentence = " ".join(f"{k}={now[k]}" for k in A_COUNTS)
+            say(f"RECORDED COUNTS ABSENT in {label} — it records none of the nine; add: `{sentence}`")
+            unreadable.append(f"{label} records none of the assumptions scan's nine counts, so there is nothing to "
+                              f"compare this run with. Add the sentence that holds them: `{sentence}`")
         else:
             compare(label, recorded, now)
 

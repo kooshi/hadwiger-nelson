@@ -761,6 +761,15 @@ def declared : Array Entry := #[
     "[Lang1953] Artin–Lang (equivalently Tarski 1951, quantifier elimination); row 107's one named hypothesis",
   .former ``HadwigerNelson.Plane.Voronov11 .outside
     "[Voronov2023] Thm 1.1 (Euclidean norm, six colours); its one consumer is a half of FS106-COMP's equivalence",
+  .former ``HadwigerNelson.StandingFive.KloostermanBound .outside
+    "[Weil1948] p. 207 (Weil's bound for Kloosterman sums over a finite field), in hypothesis form: the same outside theorem as the import StandingFive.kloosterman_bound, which proves it at characteristic not 2 (kloostermanBound_of_ringChar_ne_two)",
+  -- ## The same outside theorem, written out in a binder at a closed family of fields
+  .site ``HadwigerNelson.StandingFive.standingFloor_seven `hK "KloostermanFrom347" .outside
+    "[Weil1948] p. 207, at every finite field of q ≡ 3 (mod 4), q ≥ 347 elements (KloostermanBound at a closed family; the import proves it there)",
+  .site ``HadwigerNelson.StandingFive.standingFloor_five `hK "KloostermanFrom347" .outside
+    "[Weil1948] p. 207, at every finite field of q ≡ 3 (mod 4), q ≥ 347 elements (KloostermanBound at a closed family; the import proves it there)",
+  .site ``HadwigerNelson.StandingFive.seven_le_localBound_of_kloosterman `hK "KloostermanFrom347" .outside
+    "[Weil1948] p. 207, at every finite field of q ≡ 3 (mod 4), q ≥ 347 elements (KloostermanBound at a closed family; the import proves it there)",
   -- ## Hand results of ours, as named hypotheses
   .former ``HadwigerNelson.SpectralChain.Interface.RU .ours "J45 § 5.4 (R-U; blind J46), plans/FS84-SI-D-derivation.md",
   .former ``HadwigerNelson.SpectralChain.Interface.APlus0 .ours "J45 § 3, remark (ii) (A⁺ at S = ∅; blind X05V; row 113)",
@@ -775,8 +784,8 @@ def declared : Array Entry := #[
   .former ``HadwigerNelson.SpectralChain.Interface.MulStable .ours "J45 § 4.2 step 2 (m⁻¹(E) ⊆ E; on J28V-7)",
   .former ``HadwigerNelson.SpectralChain.Interface.NegCircle .ours "J45 § 4.2 step 3 (no Lean model on file)",
   .former ``HadwigerNelson.CharacterColouring.OrderBound .ours "FS89-S0A-3 (k = 4, N = 168, on Weil); J08-11 at 5, J08-10 at 6",
-  .former ``HadwigerNelson.StandingFive.StandingFloor .ours
-    "G56 (the floor at U₁₂₈ and at every Γ_Q, Q ≡ 3 (mod 4), Q ≥ 347; [tools]/[hand], on Weil)",
+  -- `StandingFive.StandingFloor` is not in this list: it is proved at 7 and at 5 over the import (`standingFloor_seven_weil`,
+  -- `standingFloor_five_weil`, each a `RESTS` row of `kloosterman_bound`), so its two closed takers read `CLOSED ESTABLISHED`.
   .former ``HadwigerNelson.Plane.Row130M1 .ours "row 130 (FS-103's M1, hard direction: χ_CP ≤ χ_m⁰)",
   .former ``HadwigerNelson.SevenConditional.G4 .ours
     "row 103 (the 8/3 forcer: M56's 588-vertex core, one solver refusal with no proof log)",
@@ -790,6 +799,8 @@ def declared : Array Entry := #[
   .site ``HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound `hUpper "UpperHalf" .ours
     "row 52 (the upper half χ(F²) ≤ L(F), at ring level; the field step is row 57's gap)",
   .site ``HadwigerNelson.StandingFive.five_le_chromaticNumber `hRow123 "Row123Chain" .ours
+    "row 123 (min(L(F), 5) ≤ χ(F²) at the standing field; in the kernel over named hypotheses, SpectralChain.min_localBound_five_le_chromaticNumber)",
+  .site ``HadwigerNelson.StandingFive.five_le_chromaticNumber_weil `hRow123 "Row123Chain" .ours
     "row 123 (min(L(F), 5) ≤ χ(F²) at the standing field; in the kernel over named hypotheses, SpectralChain.min_localBound_five_le_chromaticNumber)",
   .site ``HadwigerNelson.CharacterColouring.cl2 `hRQ4 "RQ4" .ours "FS89-D2-T1 (Θ₄(ℤ[U_ℚ]) ⊆ T + A)",
   .site ``HadwigerNelson.CharacterColouring.cl2 `hRQ5 "RQ5" .ours "FS89-D5-T2 (Θ₅(ℤ[U_ℚ]) ⊆ T + A)",
@@ -806,6 +817,8 @@ def declared : Array Entry := #[
   .site ``HadwigerNelson.Arith.falconerFan_five_mem_P `hR88per "Row88" .ours
     "row 88 (the forced group is 0 or P, and if it is P every four-colouring is periodic)",
   -- ## Open questions and design targets a theorem is conditional on
+  .former ``HadwigerNelson.Plane.NoPar .open
+    "C121-NOPAR (𝒫₆ is empty on the locally finite map colourings: the former is stated for every class of families, and the open statement is its instance there; FS121-C1-GMAP (ii), FS121-C1-SAT; FS131-L6A draft 5)",
   .site ``HadwigerNelson.not_colorable_five_of_forced_pairs `h3 "SixTarget" .open "row 43 (the six-target: every √3-pair and every distance-2 pair separated at five colours; G26)",
   .site ``HadwigerNelson.not_colorable_five_of_forced_pairs `h2 "SixTarget" .open "row 43 (the six-target: every √3-pair and every distance-2 pair separated at five colours; G26)",
   .site ``HadwigerNelson.six_le_chromaticNumber_plane_of_forced_pairs `h3 "SixTarget" .open "row 43 (the six-target: every √3-pair and every distance-2 pair separated at five colours; G26)",
@@ -847,6 +860,9 @@ def declared : Array Entry := #[
   .condition ``HadwigerNelson.Plane.ArcMap.Todo "something is left to do at v: a predicate of the theorem's map and point, inside the procedure's invariant",
   .condition ``HadwigerNelson.Plane.BranchGerms.Sorted "the germs are sorted: a predicate of the theorem's germ list, decided on written-down data",
   .condition ``HadwigerNelson.Plane.CPColouring.RotationInvariant "the law is rotation-invariant: a predicate of the theorem's CP colouring",
+  .condition ``HadwigerNelson.Plane.GrundyBound
+    "a Grundy-bound family (an admissible cover with almost disjoint classes, each class's support in the unit shadow of every earlier one): a predicate of the theorem's family; no Lean family is shown to be one (an open gate item of FS131-L6A, draft 6)",
+  .condition ``HadwigerNelson.Plane.H1On "(H1) on N for two classes — every other class is null in N: a predicate of the theorem's family, set and two colours",
   .condition ``HadwigerNelson.Plane.InSixLens "x lies in the open lens about 60°m: a predicate of the theorem's point",
   .condition ``HadwigerNelson.Plane.IsAdmissible "an admissible family (measurable classes with null unit pairs): a predicate of the theorem's family",
   .condition ``HadwigerNelson.Plane.IsRegOf "a region of a family of classes: a predicate of the theorem's pair",

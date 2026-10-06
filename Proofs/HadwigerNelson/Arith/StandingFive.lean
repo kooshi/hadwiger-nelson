@@ -34,7 +34,10 @@ chromatic number of every level-one target of `F` — an infinite family — whi
 `U₁₂₈`'s Hoffman floor) and which is neither in the kernel nor in the backlog. It enters as the named hypothesis
 `StandingFloor n`: the floor at `U₁₂₈` and at every `Γ_Q` with `Q ≡ 3 (mod 4)`, `Q ≥ 347` (the Weil range only: no certificate
 at 59–83 is an input at this field). The MR clause takes a second named hypothesis, `Row123Chain` in the plan's table: the
-conclusion of `SpectralChain.min_localBound_five_le_chromaticNumber`, `min (L(F)) 5 ≤ χ(F²)`.
+conclusion of `SpectralChain.min_localBound_five_le_chromaticNumber`, `min (L(F)) 5 ≤ χ(F²)`. **Since wave 10's second
+landing the floor is no longer assumed**: `StandingFloor 7` and `StandingFloor 5` are proved over the library's one declared
+import, Weil's bound for Kloosterman sums (`[Weil1948]` p. 207; `standingFloor_seven_weil`, `standingFloor_five_weil`,
+`Arith/WeilKloosterman`), and this module keeps the hypothesis forms. Row 123's chain is still a hypothesis.
 
 **Inhabitants.** `TargetFloor 0 Q` holds for every `Q` (`targetFloor_zero`), so `StandingFloor` is satisfiable at `n = 0`; at
 `n = 7` it is G56's claim, [tools]/[hand] on Weil. A finite field with an involution of the stated shape exists for every prime
@@ -1192,7 +1195,7 @@ theorem stablePrime_card (P : StablePrime standingField) :
       rw [← aeval_gPoly_map, map_zero]
       exact (aeval_gPoly_map (Ideal.Quotient.mk P.P) (up etaI)).trans (by rw [aeval_up_etaI, map_zero])
 
-/-! ### The floor, a named hypothesis from outside the backlog, and the two conditional clauses -/
+/-! ### The floor — proved at 7 and at 5 over the import `[Weil1948]` (`Arith/WeilKloosterman`) — and the two clauses on it -/
 
 /-- The level-one residue target of a field `k` with an involution `σ`: `Cay(k, {x : x·σ(x) = 1})` — `Γ_Q` when `k = 𝔽_{Q²}`
 with `Q ≡ 3 (mod 4)`, `U_Q` when `Q` is a power of 2. -/
@@ -1205,8 +1208,11 @@ def TargetFloor (n Q : ℕ) : Prop :=
   ∀ (k : Type) [Field k] [Finite k] (σ : k →+* k), (∀ x, σ (σ x) = x) → σ ≠ RingHom.id k → Nat.card k = Q ^ 2 →
     (n : ℕ∞) ≤ (normOneCayley k σ).chromaticNumber
 
-/-- **The floor this field reads — a named hypothesis from outside the backlog (G56).** At `n = 7`: `χ(U₁₂₈) ≥ 7` ("U₁₂₈'s
-Hoffman floor is 8") and `χ(Γ_Q) ≥ 7` for every `Q ≡ 3 (mod 4)`, `Q ≥ 347` ("by Weil from 98"). [tools]/[hand], not kernel. -/
+/-- **The floor this field reads (G56).** At `n = 7`: `χ(U₁₂₈) ≥ 7` ("U₁₂₈'s Hoffman floor is 8") and `χ(Γ_Q) ≥ 7` for every
+`Q ≡ 3 (mod 4)`, `Q ≥ 347` ("by Weil from 98"). **No longer an assumption in hypothesis form**: it is proved at 7 and at 5 over
+the library's one declared import, Weil's bound for Kloosterman sums (`[Weil1948]` p. 207, the axiom
+`StandingFive.kloosterman_bound`) — `standingFloor_seven_weil`, `standingFloor_five_weil` (`Arith/WeilKloosterman`). The
+dependence moved from a hypothesis to that axiom; the theorems below that take the floor as a hypothesis keep their statements. -/
 def StandingFloor (n : ℕ) : Prop :=
   TargetFloor n 128 ∧ ∀ Q : ℕ, Q % 4 = 3 → 347 ≤ Q → TargetFloor n Q
 
@@ -1236,7 +1242,9 @@ theorem le_localBound (n : ℕ) (hFloor : StandingFloor n) : (n : ℕ∞) ≤ lo
   · exact hFloor.1 _ σ hσ hne (hcard.trans h)
   · exact hFloor.2 Q hQ4 hQ _ σ hσ hne (hcard.trans h)
 
-/-- **"so L(F) ≥ 7"**, given the floor (G56) as a named hypothesis. -/
+/-- **"so L(F) ≥ 7"**, given the floor at seven (G56) as a hypothesis. The floor at seven is proved over the import
+`[Weil1948]` (`standingFloor_seven_weil`), and `seven_le_localBound_weil` (`Arith/WeilKloosterman`) is this theorem with it
+supplied. -/
 theorem seven_le_localBound (hFloor : StandingFloor 7) : 7 ≤ localBound standingField :=
   le_localBound 7 hFloor
 

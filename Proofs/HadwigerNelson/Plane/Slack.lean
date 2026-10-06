@@ -3659,8 +3659,9 @@ theorem seven_le_chiM0_iff : 7 ≤ chiM0 ↔ (⨆ ε > (0 : ℝ), mu 6 ε) < 1 :
   · intro h h1; exact h.ne h1
 
 /-- `[Voronov2023]` Thm 1.1 (Euclidean norm, six colours), as a statement: for every `ε > 0` no six-colouring of the plane
-is proper for the forbidden interval `[1 − ε, 1 + ε]` (D-VPROP). Named here, not imported (FS106-COMP's clause is an
-equivalence, not a use). -/
+is proper for the forbidden interval `[1 − ε, 1 + ε]` (D-VPROP). An outside theorem, not an `axiom` of this library: it is
+taken as a hypothesis by one theorem, `mu_lt_of_voronov11`, and stated under an equivalence by another,
+`forall_mu_six_lt_one_iff` (FS106-COMP's second clause), which does not use it. -/
 def Voronov11 : Prop :=
   ∀ ε > 0, ¬ ∃ f : ℂ → Fin 6, ∀ x y, 1 - ε ≤ dist x y → dist x y ≤ 1 + ε → f x ≠ f y
 

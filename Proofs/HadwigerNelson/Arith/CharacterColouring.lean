@@ -83,7 +83,9 @@ theorem mem_archimedean {θ : M →+ UnitAddCircle} : θ ∈ archimedean M ↔ �
 /-- The band `B_k = [1/k, 1 − 1/k]` in `ℝ/ℤ`. -/
 def band (k : ℕ) : Set UnitAddCircle := (fun x : ℝ => (x : UnitAddCircle)) '' Set.Icc (1 / (k : ℝ)) (1 - 1 / (k : ℝ))
 
-/-- **The order bound at a band**, over a base `(Q₀, U₀)`: a band character in `T + A` is in `T_N + A`. -/
+/-- **The order bound at a band**, over a base `(Q₀, U₀)`: a band character in `T + A` is in `T_N + A`. Where a theorem takes
+it at a closed instance (`cl2`: the band at 4, `N = 168`) it is a hand result of ours ([hand], FS89-S0A-3, two derivations),
+not in the kernel. -/
 def OrderBound {Q : Type*} [AddCommGroup Q] (U₀ : Set Q) (B : Set UnitAddCircle) (N : ℕ) : Prop :=
   bandSet U₀ B ∩ ((AddCommGroup.torsion (Q →+ UnitAddCircle) ⊔ archimedean Q : AddSubgroup _) : Set _) ⊆
     ((torsionBy Q N ⊔ archimedean Q : AddSubgroup _) : Set _)

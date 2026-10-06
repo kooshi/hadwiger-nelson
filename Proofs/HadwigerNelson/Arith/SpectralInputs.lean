@@ -215,13 +215,16 @@ theorem sp_only_if_interface (I : Interface F) {τ : Measure (Dual F)} (hfin : I
   ⟨hfin, hrot, hE, fun _ hm a => sp_only_if hm one_ne_zero hneg a⟩
 
 /-- **`m⁻¹(E) ⊆ E`** (J45 §4.2, SP-if step 2): if `χ(r₀ ·) ∈ E` then `χ ∈ E`, for every `r₀ ≠ 0`. For the arithmetic `E` it
-rests on J28V-7 (`MR ⊆ r₀R` for a non-zero integer `M`; `[LevitzMott1972]`). -/
+rests on J28V-7 (`MR ⊆ r₀R` for a non-zero integer `M`; `[LevitzMott1972]`). A hand result of ours ([hand], J45-SP-if step 2),
+taken as a hypothesis: not in the kernel. -/
 def _root_.HadwigerNelson.SpectralChain.Interface.MulStable (I : Interface F) : Prop :=
   ∀ r₀ : unitRing F, r₀ ≠ 0 → ∀ χ : Dual F, χ.compAddMonoidHom (AddMonoidHom.mulLeft r₀) ∈ I.E → χ ∈ I.E
 
 /-- **The negative circle** (J45 §4.2, SP-if step 3): a rotation-invariant probability `λ` with `∫ Re χ(1) dλ < 0`, carried by a
 set `S` of characters translation by which does not leave `E`ᶜ (for the arithmetic `E`: `S ⊆ A ⊆ E`, a subgroup; `λ` uniform on
-the archimedean characters `x ↦ exp(2πi Re(ξ x))`, `|ξ| = j₁,₁/2π`, where `∫ = J₀(j₁,₁) ≈ −0.4028`). -/
+the archimedean characters `x ↦ exp(2πi Re(ξ x))`, `|ξ| = j₁,₁/2π`, where `∫ = J₀(j₁,₁) ≈ −0.4028`). A hand result of ours
+([hand], J45-SP-if step 3), taken as a hypothesis: not in the kernel; `negCircle_trivial_bot` is its model at the trivial
+interface over `ℚ`. -/
 def _root_.HadwigerNelson.SpectralChain.Interface.NegCircle (I : Interface F) : Prop :=
   ∃ lam : Measure (Dual F), IsProbabilityMeasure lam ∧ RotInv F lam ∧
     (∃ S : Set (Dual F), MeasurableSet S ∧ lam Sᶜ = 0 ∧ ∀ a ∈ S, ∀ χ : Dual F, χ * a ∈ I.E → χ ∈ I.E) ∧
@@ -779,9 +782,9 @@ def contChars (t : TopologicalSpace R) : Set (AddChar R Circle) := {χ | @Contin
 
 /-- **Bochner's theorem for the topology `t`, a named classical hypothesis**: a finite measure on the characters of `R` whose
 Fourier transform is `t`-continuous is carried by the `t`-continuous characters. True when `t` is induced by a homomorphism with
-dense range into a locally compact abelian group `G′` (Bochner on `G′`, Rudin, *Fourier Analysis on Groups* 1.4.3, with the
-uniqueness of Fourier–Stieltjes coefficients on the compact dual of `R`): J45 Lemma N2's `⟸`. False for some group topologies
-that are not locally compact, which is why it is a hypothesis on `t`. -/
+dense range into a locally compact abelian group `G′` (Bochner on `G′`, Rudin, *Fourier Analysis on Groups*, `[Rudin1962]`,
+1.4.3, with the uniqueness of Fourier–Stieltjes coefficients on the compact dual of `R`): J45 Lemma N2's `⟸`. False for some
+group topologies that are not locally compact, which is why it is a hypothesis on `t`. -/
 def BochnerOn (t : TopologicalSpace R) : Prop :=
   ∀ σ : Measure (AddChar R Circle), IsFiniteMeasure σ →
     @Continuous R ℂ t _ (fun y : R => ∫ χ, (χ y : ℂ) ∂σ) → σ (contChars t)ᶜ = 0
