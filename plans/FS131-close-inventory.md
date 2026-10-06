@@ -4806,3 +4806,189 @@ reason by the close.*
      lane without that declaration and says so — a ruling then, by message. (b) The merge and the edited control at my direction are
      recorded as mine. (c) **Slot → FS131-MC1**, launched 2026-10-06. In flight: 1 (K10) + 1 (K6) + 1 (MC1) = 3. While it is in its
      landing stage I commit nothing to `main` outside the exempt paths.
+
+481. **FS131-K6, by message mid-job (`fs131-w6` at `c3ffb4e7`, build OK by its word): five rows of wave 6 hold at a wider class than filed;
+     three definitions the derivations never fixed are fixed; one bridge has no derivation** (source: K6's message to "main", 2026-10-06; not
+     checked by me — its record and build are the artifact at its hand-back). **Generalizations, each proved in Lean on the branch**:
+     FS121-D3-FALLSAT reads no partition (every family of MUA sets is saturated; its proof needs the ball almost everywhere inside the set,
+     not the support identity alone — a correction owed to the entry); FS121-C1-BOUND reads no map and no second colour; FS121-C1-GMAP holds
+     for any class of families of open sets with null unit pairs (the Jordan-arc structure of a map colouring enters neither clause);
+     FS121-V2-EROSION-DIAM reads no sector and no colouring; FS111-M-HALF is about one measurable set with null unit pairs. **Definitions**:
+     "honest" is the type `AeColouring k` and "in D-NF" notation, never a hypothesis (no row of the 35 uses a pointwise normalisation);
+     M-PINCH's tangent type carries its contacts (`HasTwoDiscsAt`, `IsTangentAt`); **REG-J′ is stated in its fan form with end tangents,
+     which is stronger than the frozen words** — the end tangent is taken silently from C11 in the derivations and is not automatic (the
+     unit discs hold only inside a neighbourhood that shrinks toward the singular set); K6 found no entry deriving the bridge. **Scope**:
+     this pass ends with the dispositions for all 35 rows, the foundation, and the skeletons of `Pinch` (part) and `MapColouring`; the
+     ladder (17 rows), the fragment rows (6) and five more go to a second planning pass. **Rulings** (sent by message): (a) the five
+     generalizations and the first two definitions adopted; (b) **REG-J′'s fan form with end tangents stays in the hypothesis, named, each
+     consumer's docstring saying it is stronger than the frozen words**. Alternative: the literal form with a `sorry` bridge. Why: a `sorry`
+     child with no hand proof behind it is what this workflow does not carry. Confidence: high. (c) **The bridge — literal REG-J′ and
+     saturation give the fan with end tangents: derived, derivable or false — goes to a deriver, FS131-E8, at the next free slot**; K6
+     writes its exact statement into its record. This bears outside the milestone: REG-J′ is route M's regularity hypothesis (rows 140–144),
+     so a "false" would be a finding for FS-126 and FS-127's stubs. (d) A second planning pass, FS131-K6b, follows K6's hand-back.
+
+482. **FS131-MC1 asks, and is ruled: the example maps land without `stuckModel_terminal`** (source: MC1's message to "main", 2026-10-06; its
+     Stage 1 saved; `main` merged into `fs131-wmb` as `abe678bb`, one conflict, keep-both; the joined tree builds with one `sorry` warning;
+     `./scripts/dupnames.sh` on the joined tree `doubled=0` — by its word, to be read at its hand-back). **Its two findings**: (1) of the
+     nineteen stuck-family heads in `Terminal`, `F.Terminal` alone is a hypothesis of `n3_end_chain` only; `cv_l0`,
+     `hornBoundsQR_of_isChainVertex`, `horn_upper_ne_one`, `c_ends`, `run_ends` take `IsTerminalMap` (`Valid ∧ IsPlaneMap ∧ Terminal ∧
+     QROnly`), and `stuckModel.QROnly` is not in the skeleton — so the declaration alone would close no gate item; fifteen other heads are
+     served by `stuckModel_hyps` today. (2) Its size against wave 5's library: 500–650 lines (the plan said 300–500): "no colour has two
+     sectors" at every point of the planted disc and squares needs each class connected near each point, and three families are not convex.
+     **Ruling**: option (a) — the declaration is removed from `Stuck.lean`, its statement and route recorded for a successor whose target is
+     `stuckModel.IsTerminalMap` whole; the three heads that read it keep a corrected hand-model sentence; everything else lands. Alternative:
+     spend the job on it and let a successor land. Why: it closes nothing alone, and the landing closes the gate item on the four moves and
+     fifteen stuck heads today; ruling 480 (a)'s fallback. Confidence: high. **A slip, mine**: the brief's "`cv_l0` and its like name
+     `stuckModel_terminal` only if it is proved" omitted `QROnly`; MC1 read the statements and caught it. **Owed after the landing**: a
+     job on `stuckModel.IsTerminalMap` (with the second planning pass for `F₀`, `F₁`, ruling 461 (d)).
+483. **Kooshi asks whether the five-colour fields and the collapse to the plane are in this milestone; answered from the record** (2026-10-06).
+     They are not proved by FS-131: row 123's chain enters as the named hypothesis `Row123Chain` and row 130's equality as `Row130Collapse`
+     (`plans/FS131-kernel-plan.md` § 7.4, l. 583–584); their kernel milestones are FS-113 (measure rigidity in full, rank 15) and FS-101
+     (the main clause through five, rank 16), with the collapse's Lean phase under FS-103, his call (`plans/FRONTIER-STUBS.md` l. 59–60).
+     Wave 10 holds the spectral statements under row 121 and the standing-five field. **Offered, not ruled** (the order of milestones is
+     his): one planner pass on FS-113 at a free slot, to price it from its first leaves; default, his order stands (the backlog, then
+     FS-124). Awaiting his word.
+
+484. **FS131-K10 done at its Stage 5: wave 10 planned — dispositions for all fourteen rows, a foundation, a skeleton of eleven, four rows
+     proved on the way; three rows and part of a fourth not stated** (planner; harness ≈ 428k by the task notice; record `fs131-w10`'s
+     `plans/FS131-w10-kernel-plan.md`; report `data/fs131/reports/FS131-K10.md` on that branch; commits `6ca3fb4e`, `90e95f58`, `f919973e`;
+     pushed, tree clean). **Proved on the branch**: FS89-S0A-2 at a wider class (`CharacterColouring.gluing`); FS89-S0A-10 given the band's
+     order bound, and its uniform form at every band; FS89-CL2 as a composition over four named results from outside the backlog; J45-SP-oi
+     at a wider class. **TC1-STANDING-FIVE** stated with two named hypotheses, row 123's chain and the finite-target floor `StandingFloor n`
+     (at `U₁₂₈` and every `Γ_Q`, `Q ≡ 3 (mod 4)`, `Q ≥ 347`); nine leaves open; "the least usable residue field has 347 elements" by an
+     exact tool with a fault that fires. Stated with `sorry` leaves: J45-SP-if, -N2, -SI-4, X25B-PZ, X25B-L1, J45-N1 (c). **Not stated**:
+     J45-SI-5, -SI-J, -SI-C, J45-N1 (a)(b). **My receipt**: tip equals `origin/fs131-w10`; `data/fs131/k10/logs/build-2-skeleton.log` ends
+     `EXIT=0`; `sorry` by the handoff's grep: `CharacterColouring` 1, `SpectralInputs` 8, `StationaryRatio` 3, `StandingFive` 9 — the 21
+     leaves reported; `StandingFloor` and `seven_le_localBound (hFloor : StandingFloor 7)` read in `StandingFive.lean` l. 122–133: the floor
+     is a hypothesis, never an axiom. **Items**: six further generalizations (J45-N2's second sentence needs no spectral theory; J45-N1 (c)
+     by a Fourier-side route; J45-SI-4 for any countable graph; X25B without Haar measure; the standing field's arithmetic without a
+     decomposition law). Corrections owed — the dispositions file's line 179; statements not yet separate. Questions — for a deriver:
+     J45-SI-5 step (c) cites a pointwise ergodic theorem Mathlib lacks: is there a conditional-expectation argument? For Poros: the order
+     bound at every band. Prior-art debts (Rudin for `BochnerHerglotz`; Weil's bound). A kernel fact for `LEAN.md` (a `rfl` between
+     coercions out of `unitRing ⊥` times out). Slips, the job's, disclosed. **Its price for the wave**: three implementer jobs by file (I-A
+     `SpectralInputs` and `CharacterColouring`'s leaf, about 300k; I-B `StationaryRatio`, about 350k; I-C `StandingFive`, about 300k), a
+     second planning pass K10b (about 150k), one or two jobs after it. **The floor as a kernel row, priced**: `U₁₂₈` by Hoffman and an
+     exact integer spectrum, one job, no outside theorem; `Γ_Q`, `Q ≥ 347`, by Hoffman and Weil — one job with Weil's bound imported,
+     about 1M tokens without.
+485. **Rulings on K10's held items, and its slot.** (a) **Three implementers by file, as it splits them**; the first, FS131-I10A
+     (`SpectralInputs` and `CharacterColouring`'s leaf), takes this slot on `fs131-w10`; the others on branches cut from `f919973e`.
+     (b) **The finite-target floor becomes two rows of wave 10's second pass**: `U₁₂₈`'s floor formalized (no outside theorem); `Γ_Q`'s with
+     Weil's bound for the norm-one torus sums imported under `LEAN.md` § Assumptions' four items. Alternative weighed: leave the floor a
+     named hypothesis for good, or formalize Weil (about 1M tokens). Why: Kooshi's rule lets a milestone trust the literature with each
+     import documented, and an imported Weil is a far smaller assumption than a hand floor for infinitely many planes; the full
+     formalization is priced for the publication-cost measurement. Confidence: medium — it raises the audit's imported count, which Kooshi
+     sees in the next report. (c) **K10b** (the three unstated rows, J45-N1 (a)(b), the two floor rows) follows the implementers.
+     (d) **J45-SI-5's question** goes with FS131-E8's brief as a second question, or to K10b if it finds the argument. (e) The slips are
+     logged; no redo. In flight: 1 (MC1) + 1 (K6) + 1 (I10A) = 3.
+
+486. **FS131-K6 done at its Stage 7: wave 6's first planning pass — dispositions for all 35 rows, the foundation, four rows proved at a wider
+     class, eight leaves stated; 23 rows and five more go to a second pass** (planner; harness ≈ 459k by the task notice; record `fs131-w6`'s
+     `plans/FS131-w6-kernel-plan.md` Stages 1–7; report `data/fs131/reports/FS131-K6.md`; commits `b29f01e1`, `c3ffb4e7`, `714a972b`;
+     pushed, tree clean). **Proved on the branch**: FS121-D3-FALLSAT, -V2-EROSION-DIAM, -C1-BOUND, -C1-GMAP, each wider than filed;
+     FS111-M-HALF's dichotomy. Stated with `sorry`: FS111-M-PINCH, C11 (i) and (iii), FS121-C1-SAT (8 leaves). The foundation
+     `Plane/Saturated/Basic` with no `sorry` and an inhabitant (`sq9` at an edge point). **Statement defects in filed results**: the tangent
+     type needs its contacts; REG-J′'s frozen words are weaker than the fan every consumer reads, by four clauses (both ruled, item 481);
+     FS116-S1-KAPPA and -S1-PAIR hide `k = 6`. **My receipt**: tip equals `origin/fs131-w6`, tree clean; `sorry` by the handoff's grep:
+     `Basic` 0, `Pinch` 7, `MapColouring` 1 — the eight leaves reported; its final build log ends `EXIT 0`; `RegJLiteral`, `RegJFan`,
+     `RegJBridge` read in `data/fs131/k6/FanDesign.lean` l. 22–71. **Items**: slips, the job's, disclosed — 12 of 35 rows' arguments read in
+     full, 23 from their entries; `sat_inP` has no Lean model of all its hypotheses yet (`sq9` as an `ArcMap 9` owed before the wave's
+     gate). **What the second pass needs** is in its report: restate the foundation's pointwise predicates over a family of sets (the
+     fragment rows read PINCH on a fragment), the fan design, curves as sets.
+487. **Rulings on K6's held items, and two slots.** (a) FS121-D1-VT is declared under its own name as VT-W's `C¹` case (its merge condition
+     fails). (b) FS111-M2-HULLC: `∂U ⊆ {d_C = 1/2}` is formalized and the finite-perimeter step (Federer 4.5.11) is a named classical
+     hypothesis with `LEAN.md` § Assumptions' four items — default; it changes if the second pass finds the perimeter conclusion unread by
+     any row. (c) The proposed merges (W-NOBEND with C11; DB1-L7 with O1-OUT) are the second pass's to confirm. (d) **The order**: the second
+     planning pass, FS131-K6b, before any implementer on `pinch` (it changes `Basic`'s signatures). (e) FS116-S1-KAPPA and -S1-PAIR are
+     stated at `ArcMap 6`; a correction owed to their entries. (f) **Slots**: FS131-I10A (wave 10's `SpectralInputs`) launched on
+     `fs131-w10`; **FS131-E8**, the deriver on REG-J′'s bridge (ruling 481 (c); brief `data/fs131/briefs/FS131-E8-regj-bridge.md`, gate
+     PASS, with J45-SI-5's question as a second), launched on `main`'s `plans/` and `data/`. In flight: 1 (MC1) + 1 (I10A) + 1 (E8) = 3.
+     Queue: FS131-K6b; FS131-I10B and I10C (`mk-i10.py B`, `C`, each on a branch cut from `fs131-w10` at `f919973e`); K10b.
+
+488. **Kooshi rules on item 483's offer: no planner pass on measure rigidity, and no pricing of it, for now** (2026-10-06; his words): *"Let's
+     keep holding off on formalizing or pricing MR for now. That backlog is big enough that I might request community support for filling
+     it. I'm going to wait to do that too though. OpenAI is rumored to be releasing proofs of 400 previously open problems soon, and if HN
+     is one of them, then our project becomes a footnote for individual progress in AI assisted research."* **So**: the offer of item 483
+     is withdrawn; FS-113 and FS-101 stay where they are ranked; no job prices or opens them until he says so; a request for community
+     support on that backlog is his to make and is also on hold. FS-131 runs on as staffed (three slots). Not to be re-offered by a later
+     session.
+
+489. **A conditional instruction from Kooshi, on disk verbatim** (2026-10-06): *"Oh trust, if they release an HN proof, we will analyze the
+     hell out of it."* **Trigger**: a published or posted proof (or claimed proof) that decides the Hadwiger–Nelson problem or moves either
+     bound of `5 ≤ χ(ℝ²) ≤ 7`, from the rumoured outside release or anywhere else, brought to this session by Kooshi or found by the
+     Searcher's daily run. **Then**: stop launches at the next hand-backs, read it in full before anything else (bibliography entry the
+     same day, read status per section), and brief the lanes to analyze it against what the kernel and the ledger hold — the statement read
+     against row 33 and the regularity wall's rows, each step graded, what of it can be checked or formalized here. Its briefs are written
+     at the trigger, not before. Until then nothing changes.
+
+490. **FS131-E8, by message mid-job (its Stage 3 saved, `0310d854` on `main`, pushed): the bridge under REG-J′ is derived — the frozen
+     words with saturation give the fan with end tangents, at every `k`, and the frozen words' second clause is not read** (source: E8's
+     message to "main", 2026-10-06; `plans/FS131-E8-derivation.md` §§ 3.1–3.8, eight entries, each [hand], one mind, kernel pending).
+     **The entries**: FS131-E8-LOCAL (off Σ the interface set is locally one `C^{1,1}` graph with 1-Lipschitz tangent, one colour on
+     each side); -GAMMA, -BETA, -ALPHA, -DELTA (K6's four clauses (γ), (β), (α), (δ)); **FS131-E8-FAN** (a fan at every singular point
+     isolated in Σ, saturation read in a punctured disc only; at least two branches, neighbouring regions of different colours);
+     **FS131-E8-BRIDGE** (`Saturated c.cls → (∀ x, ∃ r > 0, (c.singularSet ∩ ball x r).Finite) → c.RegJFan`, so `RegJBridge k` holds for
+     every `k`); FS131-E8-CLAUSE2 (under saturation the frozen words' second clause follows from the first, and every bounded set meets
+     finitely many interface arcs). So under saturation "Σ locally finite", the frozen words and the fan with end tangents are one
+     hypothesis. **Two notes for the kernel statements, E8's**: FS111-M-PINCH must be stated with its two-colour ball as a neighbourhood
+     of the point, not centred at it (C11 (ii) and § 3.1 (2) read it at off-centre points of one ball); FS111-M-C11 (ii) should carry
+     "no cusp in `N`" — as filed it assumes M-PINCH's hypotheses at essential boundary points only, and its step "each normal line meets
+     the boundary once" needs the point found on the line to be no cusp (§ 3.1's *not claimed*). **My receipt**: the commit is on
+     `origin/main`; its derive-gate output `data/fs131/e8/gate-stage3.out` reads 8 entries, 8 derived, `GATE: PASS`; both controls run
+     by me with their faults — `e8_lens.py` prints 0 and 880 with `--C 1`, `e8_chord.py` prints 0 and 14232 with `--kappa 2`; steps
+     § 3.1 (3)(b) and § 3.3's inequality `(d/ds)|γ(s) − z|² ≥ 2 sin s` redone by hand; § 3.6's field-by-field reading compared with
+     `data/fs131/k6/FanDesign.lean` ll. 29–49 on `fs131-w6` — each of the structure's eleven fields has its step. Not checked by me:
+     § 3.1 (4)'s constants, § 3.4's covering argument beyond a reading. **Rulings.** (a) **E8's eight entries become rows of wave 6,
+     planned by FS131-K6b**: FS131-E8-FAN as the lemma that produces the planner's `Fan c z`, -BRIDGE and -CLAUSE2 as its corollaries,
+     -LOCAL as the form of C11 (ii) the kernel needs. Alternative weighed: leave `RegJFan` a bare named hypothesis and the bridge a hand
+     result outside the backlog (K6's design file calls it "not a backlog row"). Why: with the bridge in the kernel every wave-6
+     consumer's hypothesis is, under saturation, "Σ locally finite" — the frozen words' first clause, which is what rows 140–144 state
+     and what FS-127 asks; without it the wave would be held over a hypothesis stronger than the ledger's, joined to it by one mind's
+     hand argument. Confidence: high that it belongs; medium on its size, which K6b prices from its first leaves (curves with Lipschitz
+     tangent and their arclength have no home in Mathlib) — if it is large the consumers still land over the fan and the bridge after
+     them, since (b) changes no statement. (b) **Ruling 481 (b) stands in form**: the consumers take `Fan c z` or `RegJFan`; the
+     docstring line it asked for ("stronger than the frozen words") becomes "under saturation equivalent to Σ locally finite, by
+     FS131-E8-BRIDGE" with that entry's grade at the time. Alternative: restate every consumer over local finiteness now. Why not: the
+     fan is what each proof reads, and a consumer over the fan is the wider theorem. Confidence: high. (c) **E8's two statement notes
+     go to FS131-K6b's brief** (it restates `Pinch`'s predicates over a family first, by K6's report; nothing is proved over them);
+     **a correction owed** to FS111-M-C11's entry (the cusp hypothesis) and a generalization logged for FS111-M-PINCH (a neighbourhood,
+     not a centred ball) — held for the milestone's errata. (d) **Bearing outside the milestone**: REG-J′ is route M's regularity
+     hypothesis (rows 140–144); what is left open of it is its first clause alone (FS-127). E8 drafts the stub lines at its hand-back;
+     I file them then. Kooshi is told in the next report, not by a notification: no value moves and nothing waits on him.
+
+491. **FS131-E8 done: nine entries derived, none stalled — the bridge (item 490, its §§ 3.1–3.7 unchanged since), the consumers traced row by
+     row, and the second question answered: J45-SI-5's step (c) needs no pointwise ergodic theorem** (deriver; harness 441k by the task
+     notice; record `plans/FS131-E8-derivation.md` Stages 1–5; report `data/fs131/reports/FS131-E8.md`; commits `39d7b431`, `0310d854`,
+     `9fcac197`, `fe9d2479`, `49cc6bff`, all on `origin/main`, tree clean). **New since item 490**: **FS131-E8-SI5C** ([hand], one mind) —
+     a finite-valued `G` that every `c(x)` equals unless an indicator `ε(x)` of probability `p < 1/2` fires, the `ε` pairwise independent
+     over an infinite index set, is almost surely a function of `c`: majority decoding by Chebyshev and the closedness of `L²(σ(c))`; it
+     replaces "ergodic averages along a tempered Følner sequence" in J45-SI-5 (c), whose remainder was not re-derived. **The trace**
+     (§§ 4.2, 4.6): no filed result becomes true under the stronger hypothesis only; four rows need a fan at one point and no local
+     finiteness (FS111-W-KB-DIR, FS121-DB1-L3, -V2-SECTOR, -V3-CPI); **the planner's `Fan` lacks two facts those rows read** — the
+     curvature bound along a branch, and the convergence of a branch's unit tangent to `dir i` (`Fan.tendsto` is the polar angle's) —
+     both in the record (FS131-E8-LOCAL at branch points; -GAMMA with -BETA's last clause). The table's rows marked † were read from
+     entries only. **Its attack** (§ 4.1): the nearest false statements located (without saturation; at an accumulation point of Σ; in a
+     disc of radius above `1/2`); "the fan has a region of positive angle" not decided; on a cover, not decided. **My receipt**: the five
+     commits are ancestors of `origin/main`; the diff of the record from `0310d854` to `49cc6bff` removes no line (§§ 3.1–3.7 unchanged, by
+     `git diff`); `data/fs131/e8/gate-stage5.out` reads 9 entries, 9 derived, 3 controls fired, `GATE: PASS`; `e8_majority.py` run by me
+     prints 0, and 291 with `--p 2/3`; the Chebyshev line redone by hand (`(2n/9)/(n/6)² = 8/n`); four of § 4.6's quoted phrases found once
+     each in their sources (`plans/FS121-derivation.md`, `plans/FS111-derivation.md` l. 1020). Not checked by me: the table's rows against
+     the arguments (the planner reads them). **Items**: predictions scored — five of five met, Brier 0.014, all registered after a sketch
+     (its § 1.5 says so); prior-art debts — Schur's comparison theorem and Allard–Almgren named as recalled, nothing rests on either, no
+     literature search run, nothing claimed new beyond "not found in this project's records"; a slip, the job's — no token count readable
+     at its saved stages; drafts in its §§ 4.4 and 4.6 (two stub lines, two errata lines, a note for `data/fs121/claims.md`, G85's words,
+     a G92 instance). **Credit**: the off-centre reading of M-PINCH and the cusp gap in C11 (ii) were found by re-reading the held proofs
+     against the Lean statements, and the consumer table was added on one message's notice.
+492. **Rulings on E8's held items, and its slot.** (a) **REG-J′ and C121-REGJ keep their frozen words in the stubs' question sections and
+     on the front page until the bridge's module passes the gate**; the two bearing lines are filed today (`plans/STUB-lateral-extent.md`,
+     `plans/STUB-curved-pencils.md`, verbatim by script from E8's § 4.4), and the rewrite to "Σ locally finite" goes with the filing that
+     regrades the bridge, Poros asked at its next re-rank whether FS-127's card changes. Alternative: rewrite now. Why: "held" means
+     kernel-checked, and one mind's hand result does not rename a hypothesis in files every agent loads at launch; nothing there is wrong
+     today (`CLAUDE.md`'s theory paragraph already names the first clause alone, E8's § 4.4). Confidence: high. (b) **The `Fan`'s two
+     missing facts go to FS131-K6b's brief**: whether they are fields of the structure or lemmas exported beside it is the planner's
+     (the structure is a design, landed nowhere). (c) **The errata lines** (FS111-M-C11, FS111-M-PINCH), the note for
+     `data/fs121/claims.md`, G85's replacement words and the G92 instance are **held for the milestone's filing** with the other errata,
+     their texts at E8's §§ 4.4 and 4.6. Alternative: file each now. Why: one filing audits them together (`tools/claude_md_fact_audit.py`),
+     and the grokkings file is loaded at launch by two lanes. Confidence: high. (d) **FS131-E8-SI5C becomes a row of wave 10's second
+     pass** (K10b), under J45-SI-5; that job checks at the pin whether Mathlib's strong law serves or Chebyshev is written out. (e) No
+     bibliography row (E8's § 4.4: nothing rests on the two recalled theorems). (f) **Slot → FS131-K6b**, wave 6's second planner
+     (`debruijn`), its brief regenerated with E8's § 4.6 and re-gated, launched 2026-10-06. In flight: 1 (MC1) + 1 (I10A) + 1 (K6b) = 3.

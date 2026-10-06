@@ -79,6 +79,9 @@ offset partner if one is built.
 G84, G85 (contact, integer radii; G85's "what escapes" refined by FS-121), the drafted G88; G21 (no held inhabitant); G62 (two interleaved pencils are
 a bilayer); G79. Rows 140–141 and FS-121's. Stubs: FS-115 (re-posed as thin pencils), FS-116, FS-127, FS-128.
 
+Since FS131-E8: REG-J′'s fan reading is derived from its first clause (FS131-E8-BRIDGE; [hand], one mind, kernel pending), so this stub's class is the
+honest saturated colourings with locally finite Σ; the failure clause on quoting REG-J′ stays as a quotation rule.
+
 ## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
 
 question: is-the-curved-tangent-class-inhabited
