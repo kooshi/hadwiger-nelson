@@ -2,6 +2,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.Limit
 import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 import Proofs.HadwigerNelson.Plane.ValidMap.BendCollar
 import Proofs.HadwigerNelson.Plane.ValidMap.OpenMove
+import Proofs.HadwigerNelson.Plane.ValidMap.BendGap
 
 /-!
 # The bends in the form the arc step reads (FS131-IA1)
@@ -18,8 +19,10 @@ site created, no rise of degree or horn count at a treatment point, and at every
 * **The collar bend's step forms** (`bend_toward_collar`'s construction, `CollarFit`): the hypothesis `hfree` from cleanness
   (`IsRingArc.free_of_isClean`), the bent map clean (`CollarFit.map_isClean`), (R2) arcs kept (`CollarFit.map_isR2Arc`), degrees at the
   points of the closed arc and off the collar (`CollarFit.map_degree_le`).
-* **Two open children**, stated for a planner: the horn clause for the collar bend (`CollarFit.map_hornCount_le`) and the away bend with
-  the tangent bend in collar form (`bend_away_part`, FS112-N2-AWAY and N2-TAN).
+* **The horn clause for the collar bend** (`CollarFit.map_hornCount_le`, open: its children are `Plane/ValidMap/HornChart`'s) and **the
+  away bend with the tangent bend in collar form** (`bend_away_part`, FS112-N2-AWAY and N2-TAN), proved here from the children FS131-KA1
+  laid out (`plans/FS131-bendaway-kernel-plan.md`): a finite subdivision of the arc's angles by the radius-2 contacts (`exists_r2Subdiv`),
+  the outward collar bend of one gap (`bend_away_gap`), and the composition of the clause package `AwayBend` (`bend_away_subdiv`).
 * A recorded **no-go** for the arc step's withdrawn degree clause (`Γ_eq_of_degree_clause`).
 
 **Models.** `Valid` with a constant-sided ring arc: `l60Frag` (`l60Frag_valid`, `l60Frag_isRingArc`; the spec example below).
@@ -276,7 +279,9 @@ theorem CollarFit.map_degree_le (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂
       exact ⟨m, le_rfl, ((hfit.map_degree_end hF hend).1 m).mpr hm⟩
 
 /-- **The horn clause for the collar bend** (`exists_arcStep`'s clause of inventory item 385 (a), FS131-E6's): no point's horn count
-rises. **Open — `sorry`, stated for a planner or the assembly** (FS131-IA1; hand grade, one mind). Route, by the place of `x`: off the
+rises. **Open — `sorry`** (FS131-IA1; hand grade, one mind; **planned by FS131-KA1**, `plans/FS131-bendaway-kernel-plan.md` § 4, over
+`Plane/ValidMap/HornChart`'s children `hasHornCount_iff_of_agree`, `hasHornCount_zero_of_mem_interiorPts`,
+`hasHornCount_zero_of_two_spheres`, `hasHornCount_iff_of_germ_swap`). Route, by the place of `x`: off the
 collar the maps agree near `x` (`hasHornCount_iff_of_agreesOff`'s argument); in the lens and on the open arc `x` is interior in the
 bent map, on the lens boundary it has two germs of different directions (a circle of radius `R`, or the two circles crossing at
 `collarMid`) — horn count `0` (`Near.hasHornCount_chart`); at an end the chart is `F`'s with the arc's germ's curvature `1` replaced by
@@ -290,20 +295,54 @@ end Collar
 
 /-! ## The away bend, in the form the arc step reads (open) -/
 
+/-- **The away bend over a subdivision** (FS131-KA1): by induction on a finite subdivision of `[a, b]` by a set `C` of angles that is
+the set of radius-2 contacts of the inner colour for the map at hand — a contact piece is left alone (`AwayBend.idle`), a gap is bent by
+the outward collar bend (`bend_away_gap`), and two bends end to end compose (`AwayBend.next`, `AwayBend.join`); the second bend is
+applied to the map the first produced, so the statement runs over every valid plane map with the arc, and `ε ≤ 1/2` keeps each collar off
+`P` and off the radius-2 circle. Inhabitant of the hypotheses: owed with `bend_away_part`'s model
+(`plans/FS131-bendaway-kernel-plan.md` § 5). -/
+theorem bend_away_subdiv {C : Set ℝ} {P : ℂ} {c c' : Fin k} {a b : ℝ} (hs : R2Subdiv C a b) :
+    ∀ F : ArcMap k, F.Valid → F.IsPlaneMap → F.IsRingArc P a b c c' → c ∉ F.coloursAt P →
+      (∀ θ ∈ Ioo a b, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) →
+      (∀ θ, P + 2 * e θ ∈ closure (F.region c) ↔ θ ∈ C) → ∀ ε : ℝ, 0 < ε → ε ≤ 1 / 2 →
+      ∃ (M : ArcMap k) (h : ℂ ≃ₜ ℂ) (K : Set ℂ), AwayBend F M h K P a b c ε := by
+  induction hs with
+  | @contact a₀ b₀ hab hC =>
+    intro F hF _ hA _ _ hC' ε hε _
+    exact ⟨F, Homeomorph.refl ℂ, ∅, AwayBend.idle hF hA (fun θ hθ => (hC' θ).mpr (hC hθ)) hε⟩
+  | @gap a₀ b₀ hab hC =>
+    intro F hF hP hA hin hfree hC' ε hε _
+    exact bend_away_gap hF hA hin (by rw [show F.dom = univ from hP]; exact subset_univ _) hfree
+      (fun θ hθ hcl => Set.disjoint_left.mp hC hθ ((hC' θ).mp hcl)) hε
+  | @join a₀ b₀ c₀ h1 h2 ih1 ih2 =>
+    intro F hF hP hA hin hfree hC' ε hε hε2
+    have hab := h1.lt
+    have hbc := h2.lt
+    have hA1 : F.IsRingArc P a₀ b₀ c c' :=
+      ⟨hab, (ringArc_subset_ringArc le_rfl hbc.le).trans hA.2.1, fun θ hθ => hA.2.2 θ ⟨hθ.1, hθ.2.trans hbc⟩⟩
+    obtain ⟨M₁, h₁, K₁, hb1⟩ := ih1 F hF hP hA1 hin (fun θ hθ => hfree θ ⟨hθ.1, hθ.2.trans hbc⟩) hC' ε hε hε2
+    obtain ⟨hA2, hin2, hfree2, hC2⟩ := hb1.next hF hA hab hbc hε2 hin hfree
+    have hP1 : M₁.IsPlaneMap := hb1.step.agreesOff.1.symm.trans hP
+    obtain ⟨M₂, h₂, K₂, hb2⟩ := ih2 M₁ hb1.valid hP1 hA2 hin2 hfree2 (fun θ => (hC2 θ).trans (hC' θ)) ε hε hε2
+    exact ⟨M₂, h₁.trans h₂, K₁ ∪ K₂, hb1.join hF hA hab hbc hε2 hb2⟩
+
 /-- **The away bend with the tangent bend, in collar form** (FS112-N2-AWAY and N2-TAN; wave 4's `bend_away`, `sorry` on `fs131-w4ba`,
-is its statement without the homeomorphism). **Open — `sorry`: the statement `exists_arcStep`'s out-only case reads, written for a
-planner** (FS131-IA1, `plans/FS131-arcstep-implementation.md` Stage 3). On a valid plane map, for a constant-sided unit arc
-`α = r([θ₁, θ₂])` of `ω(P)` whose inner colour `c` is not carried at `P` and near whose interior points `Γ` is `ω(P)` alone: for every
-`ε > 0` a valid map `M`, the image of `F` under a homeomorphism `h` supported in a compact collar `K` within `ε` of `α` that meets `Γ`
-only on `α`, a local step on `K`; `h` fixes `Γ` off the open arc and carries interior points with their colours, the colours at each
-point, degrees, repeated colours and horn counts; no unit arc is created, the constant-sided unit arcs of `M` are `F`'s with the same
-sides, and `F`'s whose open arc misses `α°` survive; each interior point of `α` is fixed or becomes an interior point of colour `c`;
-and an interior point of `α` still on a unit arc of `M` about `P` lies in a non-degenerate interval of radius-2 contacts of `c`
-(`r2Contacts`) — so what is left of `α` is (R2). Intended construction: on each of the finitely many gaps of `[θ₁, θ₂] \ C₂` the
-outward radial push across a collar in the outer tile (`pushHomeo`), its lens bounded by circles tangent to `ω(P)` at the gap's ends
-(at a contact end the lens must lie between `ω(P)` and the unit circle about the contact, FS112-ISO), clear for `c` by N2-ENV away
-(`away_clear`). Model of the hypotheses: none in Lean on this branch; `isoFrag` (FS112-ISO, `fs131-w4ba`) is the hand model with one
-isolated contact, a fragment — on a plane map the hypotheses' inhabitant at one arc with a partial witness is owed with the proof. -/
+is its statement without the homeomorphism): the statement `exists_arcStep`'s out-only case reads (FS131-IA1,
+`plans/FS131-arcstep-implementation.md` Stage 3; **the horn clause in the arc step's form**, FS131-KA1 under inventory ruling 438 (b)).
+On a valid plane map, for a constant-sided unit arc `α = r([θ₁, θ₂])` of `ω(P)` whose inner colour `c` is not carried at `P` and near
+whose interior points `Γ` is `ω(P)` alone: for every `ε > 0` a valid map `M`, the image of `F` under a homeomorphism `h` supported in a
+compact collar `K` within `ε` of `α` that meets `Γ` only on `α`, a local step on `K`; `h` fixes `Γ` off the open arc and carries interior
+points with their colours, the colours at each point, degrees and repeated colours; no horn count rises; no unit arc is created, the
+constant-sided unit arcs of `M` are `F`'s with the same sides, and `F`'s whose open arc misses `α°` survive; each interior point of `α`
+is fixed or becomes an interior point of colour `c`; and an interior point of `α` still on a unit arc of `M` about `P` has its
+radius-2 point in the closure of `c`'s class — so what is left of `α` is (R2) (**the last clause in the pointwise form the arc step
+reads**, inventory ruling 444; IA1's form asked a non-degenerate interval of `r2Contacts` about the angle). **Proved from open children**
+(`plans/FS131-bendaway-kernel-plan.md` § 3): the finite subdivision of `[θ₁, θ₂]` by the contacts (`exists_r2Subdiv`, where the plane
+map is used), the bend over it (`bend_away_subdiv`), and the last clause from the package (`AwayBend.contact_of_onRingArc`). At a contact
+end of a gap the lens is tangent to `ω(P)` and must lie under FS131-E5's circle `Σ_Y` (§ 4.2 there: lens radius below `ρ_Y − 1`), not
+only under the unit circle about the contact. Model of the hypotheses: none in Lean on this branch; `isoFrag` (FS112-ISO) is the hand
+model with one isolated contact, a fragment — the plane-map inhabitant with a radius-2 contact is planned in the record's § 5 (open gate
+item, ruling 419 (d)). -/
 theorem bend_away_part (hF : F.Valid) (hP : F.IsPlaneMap) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
     (hA : F.IsRingArc P θ₁ θ₂ c c') (hin : c ∉ F.coloursAt P)
     (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) {ε : ℝ} (hε : 0 < ε) :
@@ -315,15 +354,19 @@ theorem bend_away_part (hF : F.Valid) (hP : F.IsPlaneMap) {P : ℂ} {θ₁ θ₂
       (∀ z, M.coloursAt (h z) = F.coloursAt z) ∧
       (∀ z n, M.HasDegree (h z) n ↔ F.HasDegree z n) ∧
       (∀ z, M.HasRepeatedColour (h z) ↔ F.HasRepeatedColour z) ∧
-      (∀ z j, M.HasHornCount (h z) j ↔ F.HasHornCount z j) ∧
+      (∀ x j, F.HasHornCount x j → ∃ j' ≤ j, M.HasHornCount x j') ∧
       M.RingArcsWithin F ∧
       (∀ Q a b d d', M.IsRingArc Q a b d d' → F.IsRingArc Q a b d d') ∧
       (∀ Q a b d d', F.IsRingArc Q a b d d' → Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂) →
         M.IsRingArc Q a b d d') ∧
       (∀ θ ∈ Ioo θ₁ θ₂, h (ringPt P θ) = ringPt P θ ∨ ringPt P θ ∈ M.region c) ∧
-      (∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) →
-        ∃ a b, a < b ∧ θ ∈ Icc a b ∧ Icc a b ⊆ F.r2Contacts P θ₁ θ₂ c) := by
-  sorry
+      (∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) → P + 2 * e θ ∈ closure (F.region c)) := by
+  have hC := exists_r2Subdiv hF hA (by rw [show F.dom = univ from hP]; exact subset_univ _)
+  obtain ⟨M, h, K, hb⟩ := bend_away_subdiv hC F hF hP hA hin hfree (fun θ => Iff.rfl) (min ε (1 / 2))
+    (lt_min hε (by norm_num)) (min_le_right _ _)
+  exact ⟨M, h, K, hb.valid, hb.compact, hb.thick.trans (thickening_mono (min_le_left _ _) _), hb.free, hb.step, hb.fix_off,
+    hb.maps, hb.fix_Γ, hb.interior, hb.colours, hb.degree, hb.repeated, hb.horn, hb.within, hb.r1, hb.r2, hb.bent,
+    fun θ hθ hon => hb.contact_of_onRingArc hθ hon⟩
 
 /-! ## Spec examples -/
 

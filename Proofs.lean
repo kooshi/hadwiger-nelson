@@ -215,6 +215,12 @@ import Proofs.HadwigerNelson.Plane.ValidMap.RadialPush
 import Proofs.HadwigerNelson.Plane.ValidMap.Pushforward
 import Proofs.HadwigerNelson.Plane.ValidMap.CollarMap
 import Proofs.HadwigerNelson.Plane.ValidMap.BendCollar
+import Proofs.HadwigerNelson.Plane.ValidMap.BendAway
+import Proofs.HadwigerNelson.Plane.ValidMap.LensOut
+import Proofs.HadwigerNelson.Plane.ValidMap.HornChart
+import Proofs.HadwigerNelson.Plane.ValidMap.CollarMapOut
+import Proofs.HadwigerNelson.Plane.ValidMap.R2Cap
+import Proofs.HadwigerNelson.Plane.ValidMap.BendGap
 import Proofs.HadwigerNelson.Plane.ValidMap.BendStep
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseDense
 import Proofs.HadwigerNelson.Plane.Woodall.Basic
