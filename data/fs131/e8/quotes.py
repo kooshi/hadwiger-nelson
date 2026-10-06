@@ -18,6 +18,9 @@ if "--plant" in sys.argv and quotes:
     q, s = quotes[0]; quotes[0] = (q[:-1] + ("x" if q[-1] != "x" else "y"), s)
 bad = 0
 for q, s in quotes:
+    for ext in (".md ", ".lean "):          # a source line may carry a section name after the path
+        if ext in s:
+            s = s[: s.index(ext) + len(ext) - 1]
     p = pathlib.Path(s) if s.startswith("/") else ROOT / s
     ok = p.exists() and q in p.read_text()
     bad += not ok
