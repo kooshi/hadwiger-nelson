@@ -6692,6 +6692,19 @@ their implementers close them. -/
 #print axioms HadwigerNelson.Plane.ArcMap.QFreeRing.isHub
 #print axioms HadwigerNelson.Plane.GermIn.ringPt_mem_closure
 #print axioms HadwigerNelson.Plane.halfPlane2_gammaFreeRing
+-- FS131-K8: Plane/RingCalculus/Star (the proved rows: FS116-RING-GERM in tile form, FS116-N2-STAR)
+#print axioms HadwigerNelson.Plane.ArcMap.ringGerm_inward
+#print axioms HadwigerNelson.Plane.ArcMap.ringGerm_outward
+#print axioms HadwigerNelson.Plane.ArcMap.star_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.star_absent
+#print axioms HadwigerNelson.Plane.ArcMap.star_outer_cone
+#print axioms HadwigerNelson.Plane.ArcMap.star_flank
+#print axioms HadwigerNelson.Plane.ArcMap.star_flank_interior
+#print axioms HadwigerNelson.Plane.ArcMap.star_tip_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.star_outer_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_add_pi
+-- FS131-K8: Plane/RingCalculus/Empty (the proved row: FS116-V6-ANTI, class-free)
+#print axioms HadwigerNelson.Plane.ArcMap.v6_anti
 -- FS131-K8 block end (Plane/RingCalculus)
 
 #eval IO.println "=== PURCHASED ==="
