@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–473 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–475 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -28,7 +28,7 @@ ruling and receipt (items 1–473 at this writing; its first two sections are th
 | OPEN, the fifth move | **landed on `main`** (item 414: head `7189bdcf`, gated `68670175`); counts filed — 3,912 records, 3,889 clean, 14 axiom-free, 4 imported, 5 purchases; vacuity `declarations=11173 refutations-skipped=118 sites=784`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=747 unknown=2` |
 | wave 5, the density half (`fs131-w5` at `8ca5fc67`) | **no open leaf of its own**: the planar chain, `row134BaseUA`, the collar bend (`bend_toward_collar`, item 416), `exists_preBend` and its children, `n3_base`, `localDense`, `dense3`, `bv_l3` (item 424) — all on the standard three; `cv_exists` and `Terminal` there are stale copies of the other line's |
 | wave 5, the `Terminal` half (`fs131-w5c`) | `Limit` done; `exists_terminalSeq` proved over two open steps (item 420); **the vertex step is whole in the kernel (item 449: all four cases proved; `Procedure` holds one `sorry`); open: `exists_arcStep` (IA1's groundwork done, item 437: question (5) proved, the statement repaired by ruling 430, one bend missing — `bend_away_part`, KA1 planning it; the assembly split by ruling 438 (c))**; `stuckRun_ne_univ` is **proved** on `fs131-w5s` at `facdf1c2` (item 431), to be merged at the final sync |
-| wave 5's landing | after the three leaves: the merges, one remedy pass (ruling 427 (a)), the full gate with the guarded lint and the notes check |
+| wave 5's landing | **done** (item 474): on `main`, gated at `1351ebc2`; `CLAUDE.md` counts filed (item 475): 5,221 records, 5,196 clean; `declarations=12999 … sites=1130`, `vacuous=0` |
 | waves 6–10 (111 rows) | not started; wave 10 (arithmetic) depends on nothing in waves 4–9 |
 | `bend_away` (wave 4's tangent bend) | `sorry` on `fs131-w4ba` at `71cca146`; its planner waits for IA1 to say what statement the arc step needs (item 427 (e)) |
 
@@ -41,7 +41,6 @@ planted-picture models land (queue item 2).
 
 | job | tree and branch | what | brief | on its hand-back |
 |---|---|---|---|---|
-| **FS131-L5** | `.claude/worktrees/fs131-w5c`, `fs131-w5c` (from `8f2280d0`: joined, remedied — item 468) | **wave 5's landing**: merge `origin/fs131-w5z` (`d4f04ff3`, the outward bend whole; trial: one conflict, `scripts/Axioms.lean`), the post-merge tidies (465 (a), RP1's list), merge `main`, the full gate on one commit (build, zero `sorry`, `scripts/dupnames.sh`, `scripts/axioms.sh`, `scripts/vacuity.sh`, architecture, the guarded lint, the notes check), fast-forward `main`, drafts | `data/fs131/briefs/FS131-L5-wave5-land.md` | **while it is in flight commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`**; on its hand-back follow § 5 "At a landing" (the previous logs are `data/fs131/ol/axioms-receipt-landed.log`, `data/fs131/ol/vacuity-scan-landed.log`), file the counts, push-notify Kooshi; a red gate step is a message mid-job: rule it |
 | **FS131-K10** | `.claude/worktrees/fs131-w10`, `fs131-w10` (`main`'s line) | a planner (`debruijn`): wave 10, the fourteen arithmetic rows (`Arith/StandingFive`, `CharacterColouring`, `SpectralInputs`, `StationaryRatio`; `plans/FS131-kernel-plan.md` § 7.1) — dispositions, a sorry-free foundation, a skeleton, a plan per leaf; it waits on nothing in waves 4–9 | `data/fs131/briefs/FS131-K10-wave10.md` | brief its implementers from its handoff; a row whose derivation does not support its statement is a message mid-job: an Ephodos job |
 | **FS131-MB2** | `.claude/worktrees/fs131-wmb`, `fs131-wmb` (from `b7fbe6f9`) | MB1's successor (item 470: the cusp arc's two bend models and `stuckModel_valid` are whole; `stuckModel_hyps` waits on one leaf of half A's): `shadowModel` (7 leaves, the model of `flank_ne_of_doublyShadowed`), then `awayModel` (4 leaves) | `data/fs131/briefs/FS131-MB2-models-shadow.md` | merge with half A's branch `fs131-wm` (disjoint files; `scripts/Axioms.lean` keep-both; run `scripts/dupnames.sh` on the joined tree); after wave 5 lands the lane's landing job adds `stuckModel_terminal`, the sub-arc model of `bend_away_whole` (ruling 471 (c)), the wave-5 applications and the docstring lines |
 
@@ -50,12 +49,17 @@ a fresh agent on the same brief.
 
 ## 4. Queue for the next freed slots, in order (item 427; re-ordered by ruling 434)
 
-0. **Order now** (rulings 461, 467, 469): wave 5's landing is in flight (FS131-L5, § 3). **After it**: file the counts (§ 5), then the
-   items of § 6–7 below — the tidy moves (the three further same-fact pairs of item 468; the `Procedure` re-layout, 450 (d); ruling 421 (c)'s
-   named forms, 450 (b); the self-test's plant directory, 467 (e)), then waves 6–10's planners. **The example maps**: when FS131-MA1 and
-   FS131-MB1 are both back, one job merges `fs131-wmb` into `fs131-wm`, merges `main` (wave 5 landed: the brick facts become three lines,
-   the wave-5 applications and `stuckModel_terminal` are added), applies the docstring lines of KM1's plan § 3.10, runs the gate and lands;
-   a second planning pass for E7's `F₀` and `F₁` (461 (d)). Held for the filing: RP1's and BA3's notes on overlays (469 (e)).
+0. **Order now** (rulings 473, 475): **wave 5 is on `main`** (item 474: gated at `1351ebc2`, landed `ad611866`; counts filed, item 475).
+   One slot is free. In order: (i) **the example maps' landing job** when FS131-MB2 is back — merge `fs131-wm` and `fs131-wmb` (MB2 is
+   merging A's half itself), merge `main` (wave 5: the brick facts become three lines; add `stuckModel_terminal`, the sub-arc model of
+   `bend_away_whole` by `IsRingArc.mono` (471 (c)), the wave-5 applications, `awayModel` read against `bend_away_part` and
+   `exists_arcStep`), apply the docstring lines (KM1's plan § 3.10; the stuck family's notes name `stuckModel_hyps`), the gate with
+   `scripts/dupnames.sh` and L5's records check (475 (e)), land; (ii) **wave 10's implementers** from FS131-K10's handoff; (iii) **the
+   planners of waves 6–9** (`plans/FS131-kernel-plan.md` § 7.1; they build on wave 5, now landed) — brief the wave-6 planner next, on a
+   branch from `main`, modelled on `data/fs131/briefs/scripts/mk-k10.py`; (iv) the second planning pass for E7's `F₀`, `F₁` (461 (d));
+   (v) the tidy moves (the three same-fact pairs, item 468; the `Procedure` re-layout, 450 (d); ruling 421 (c)'s named forms; the stale
+   "skeleton" words, item 474; BA1's ten re-proved helpers; the self-test's plant directory, 467 (e)); a tooling job on the vacuity
+   scan's three questions (475 (d)). Held for the milestone's filing: 475 (b).
 1. **The freed lane's continuation**, if it left leaves on wave 5's path (IR2's will).
 2. **FS131-E7 — done** (items 440–441: a model for each of the four sets, no contradiction; a terminal plane map with a stuck vertex at twelve
    colours; `nb4p` restated with one conjunct at the remedy pass; two questions held for Poros). It was: a short Ephodos job (`ephodos`): QA4's rank 9 and rank 10's question (`plans/FS131-QA4-audit.md` § 6.2) — a model or a contradiction
@@ -94,7 +98,7 @@ a fresh agent on the same brief.
   Idle trees with green builds now: `fs131-w5k` (`fs131-w5`'s line at `3b120cd3`), `fs131-wop` (`main`'s line).
 - **At a landing** (as OL1's, items 414–415): `git pull --ff-only` in the main tree; read the saved gate logs; `scripts/gate_report.py axioms <log>
   <previous landing's log> CLAUDE.md` and `scripts/gate_report.py vacuity <log> <prev> scripts/vacuity-baseline.txt CLAUDE.md` (the previous logs are
-  now `data/fs131/ol/axioms-receipt-landed.log` and `data/fs131/ol/vacuity-scan-landed.log`); file the drafts (`CLAUDE.md` § Trust ledger and § The
+  now `data/fs131/l5/receipt-axioms-final.log` and `data/fs131/l5/receipt-vacuity-final.log`); file the drafts (`CLAUDE.md` § Trust ledger and § The
   gate, a `GATE_CHANGES` entry in `tools/claude_md_fact_audit.py`); `tools/claude_md_fact_audit.py --base <last CLAUDE.md commit>` (losses should be
   only the superseded counts) and `--dupes` before committing; push-notify Kooshi. Dates in filed counts are the gate logs' UTC date.
 - **Rules a landing brief now carries**: **the doubled-name check on the joined tree, after the build and before the axiom audit** —
@@ -124,7 +128,7 @@ a fresh agent on the same brief.
 |---|---|---|
 | `main` | this commit | waves 1–4, Woodall, MERGE, OPEN; the inventory, briefs, audits |
 | `fs131-w5` | `8ca5fc67` | wave 5's density half, whole |
-| `fs131-w5c` | moving (L5, the landing; RP1 left it at `8f2280d0`) | **wave 5's one line**: `fs131-w5s`, `fs131-w5y` and the bend's skeleton merged; `Procedure`, `Terminal`, `ArcStep`, the density half with no `sorry`; every open leaf is one of the outward bend's children (proved on `fs131-w5z` but two) |
+| `fs131-w5c` | `ad611866` = `main` (landed; idle) | **wave 5's one line**: `fs131-w5s`, `fs131-w5y` and the bend's skeleton merged; `Procedure`, `Terminal`, `ArcStep`, the density half with no `sorry`; every open leaf is one of the outward bend's children (proved on `fs131-w5z` but two) |
 | `fs131-t4` | `f53b7bdf` | merged into `main` (item 467 (c)): the doubled-name check; its worktree `.claude/worktrees/fs131-wop` is idle, a green build of `main`'s line |
 | `fs131-wmb` | moving (MB1) | cut from `fs131-wm`'s skeleton: the example maps, half B |
 | `fs131-w5s` | `facdf1c2` | idle; cut from `fs131-w5c` at `ebb0b292`; `stuckRun_ne_univ` proved, `Terminal` with no `sorry` of its own |
