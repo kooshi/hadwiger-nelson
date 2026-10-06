@@ -2,6 +2,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.Limit
 import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 import Proofs.HadwigerNelson.Plane.ValidMap.OpenMove
 import Proofs.HadwigerNelson.Plane.ValidMap.FlankUA
+import Proofs.HadwigerNelson.Plane.ValidMap.ArcStep
 
 /-!
 # The terminal procedure: FS112-N2-RED's bends with FS110-N4-TERM's moves, as one locally finite sequence (FS131-KL1)
@@ -11,17 +12,19 @@ plane has a modification that is a terminal valid map** (`exists_terminalMap`, e
 one procedure over its *treatment points* (`treatPts`: the sites and the centres of unit arcs, never created afterwards): at the
 least-index point with something to do, apply a **vertex step** (MERGE, MERGE-RAY, SHAVE or OPEN at a site, then cleaned: its
 potential, degree plus number of horns, drops — FS131-E6-ROUTE, inventory items 382–385; `exists_vertexStep`) or an **arc step** (a
-toward or away bend of a maximal bad unit arc, then cleaned: the point's count of maximal bad arcs drops, `exists_arcStep`). A site is
+toward or away collar bend of a maximal bad unit arc, uncleaned — the bent map of a clean map is clean: the point's count of maximal
+bad arcs drops, `exists_arcStep`). A site is
 the centre of at most its initial potential many vertex steps; a centre's bad count rises only at the finitely many vertex steps
 within distance `4` and at the at most `k` stages where it loses a colour, so it too is treated finitely often
 (`exists_terminalSeq`). The supports are then locally finite, and the limit (`Plane/ValidMap/Limit`) is the terminal map.
 
-**Where the steps' proofs live** (inventory items 371–372, 411): `exists_vertexStep` and `exists_arcStep` read the moves' constructions —
-`Moves` (`exists_shave_aux`, `exists_rayMerge_aux` through `Near.move`), `MergeMove` (`exists_merge_aux`), `OpenMove` (`exists_open`) and
-`UnitArc` (`bend_toward`, `bend_away_whole`, the N2-TAN bend) — each cleaned with its colour kept (`cleanKeep`, `LocalStep.cleanKeep`:
-`ArcMap.clean` itself is no local step, its colour function being a choice on the arcs); they are stated here and are open until
-proved from those constructions (the plan's § 3.3; new declarations downstream only). A move's surgery is a local step on its closed
-ball (`surgery_localStep`).
+**Where the steps' proofs live** (inventory items 371–372, 411, 447–450): `exists_vertexStep` reads the moves' constructions —
+`Moves` (`exists_shave_aux`, `exists_rayMerge_aux` through `Near.move`), `MergeMove` (`exists_merge_aux`) and `OpenMove` (`exists_open`) —
+each cleaned with its colour kept (`cleanKeep`, `LocalStep.cleanKeep`: `ArcMap.clean` itself is no local step, its colour function
+being a choice on the arcs); a move's surgery is a local step on its closed ball (`surgery_localStep`). `exists_arcStep` reads a
+collar bend, uncleaned, through the interface of `Plane/ValidMap/ArcStep` (`ArcBend`: the toward bend `exists_arcBend_toward`; the
+away bend `bend_away_part` of `Plane/ValidMap/BendStep`, with `ArcBend.of_away`) — not `UnitArc`'s bends. Both steps' proofs are in
+this module, over those constructions (the plan's § 3.3; new declarations downstream only).
 -/
 
 namespace HadwigerNelson.Plane
@@ -294,6 +297,33 @@ theorem IsMaxRingArc.not_regularAt {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} 
     have := (hmax.2.2 _ _ (min_le_left _ _) (le_max_left _ _) hU).2
     rw [max_eq_right (hθ.2.le)] at this
     linarith [hθ.2]
+
+/-- **A ring arc about `P` whose open arc meets a maximal ring arc's has its sides and lies in it** (FS131-IA1's W5, on point sets):
+turn it by whole turns to share an interior angle (`isRingArc_add_int`), read the sides there (`IsRingArc.sides_eq`), unite
+(`IsRingArc.union`) and use the maximality. -/
+theorem IsMaxRingArc.meet {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hmax : F.IsMaxRingArc P θ₁ θ₂ c c') {a b : ℝ} {d d' : Fin k}
+    (hD : F.IsRingArc P a b d d') (hnd : ¬ Disjoint (ringPt P '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂)) :
+    (d = c ∧ d' = c') ∧ ringPt P '' Ioo a b ⊆ ringPt P '' Ioo θ₁ θ₂ := by
+  rw [Set.not_disjoint_iff] at hnd
+  obtain ⟨_, ⟨s, hs, rfl⟩, ⟨θ, hθ, hθs⟩⟩ := hnd
+  have he : e θ = e s := by
+    simp only [ringPt] at hθs
+    exact add_left_cancel hθs
+  obtain ⟨n, hn⟩ := e_eq_e_iff.mp he
+  have hD' : F.IsRingArc P (a + 2 * π * n) (b + 2 * π * n) d d' := (isRingArc_add_int n).mpr hD
+  have hθ' : θ ∈ Ioo (a + 2 * π * n) (b + 2 * π * n) := ⟨by linarith [hs.1], by linarith [hs.2]⟩
+  obtain ⟨hcd, hcd'⟩ := hmax.1.sides_eq hD' hθ hθ'
+  subst hcd hcd'
+  have hov : max θ₁ (a + 2 * π * n) < min θ₂ (b + 2 * π * n) := by
+    rw [max_lt_iff, lt_min_iff, lt_min_iff]
+    exact ⟨⟨hmax.1.1, hθ.1.trans hθ'.2⟩, ⟨hθ'.1.trans hθ.2, by linarith [hD.1]⟩⟩
+  have hU := hmax.1.union hD' hov
+  obtain ⟨h1, h2⟩ := hmax.2.2 _ _ (min_le_left _ _) (le_max_left _ _) hU
+  have ha : θ₁ ≤ a + 2 * π * n := by rw [← h1]; exact min_le_right _ _
+  have hb : b + 2 * π * n ≤ θ₂ := by rw [← h2]; exact le_max_right _ _
+  refine ⟨⟨rfl, rfl⟩, ?_⟩
+  rintro _ ⟨t, ht, rfl⟩
+  exact ⟨t + 2 * π * n, ⟨by linarith [ht.1], by linarith [ht.2]⟩, ringPt_add_int P t n⟩
 
 /-- **The sites of a clean map in a compact part of the domain are finitely many** (each is isolated). -/
 theorem finite_sites_inter_compact (hc : F.IsClean) {K : Set ℂ} (hK : IsCompact K) (hKd : K ⊆ F.dom) :
@@ -2732,18 +2762,16 @@ theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : F.Cove
       subst hn0
       exact exists_openStep hF hc hv hH hn hD' hdeg hhorn hδ
 
-/-- **The arc step** (a bend of a maximal bad unit arc, then `exists_clean`): on a plane map (inventory item 430 (b): the bad
-count is an `ℕ∞`, finite only there — `badCount_lt_top`), at a maximal unit arc about `P`, neither (Q) nor (R2),
-whose side colours are not both carried at `P`, for every `δ > 0` and every locally finite set `T` (the treatment points), a clean
-valid modification that is a local step on the closed `ε`-neighbourhood of the arc, `ε < δ`, lowering `P`'s bad count, creating no
-site, raising the degree of no point of `T` (inventory item 430 (a): a bend moves `Γ`, so an interior point of the bent arc loses its
-degree, and no clause about every point's degree can hold) and raising no point's horn count (FS131-E6's clause, inventory item
-385 (a): the bent curve must
-not become tangent to another arc at an end vertex — a choice of the bend's profile), and at every other point of `T` adding no
-colour and — unless it loses one — raising no bad count. The toward bend (`bend_toward`) when the outer colour is absent at `P`; else the away bend (`bend_away_whole`, or N2-TAN's
-tangent bend on the parts of the arc with no radius-2 witness). **The last clause is FS131-KL1's question (5)** (inventory item 372):
-a bend's lens never cuts another arc's (R2) witness — a witness arc `R₂(β)` cannot cross the bent arc's open part, since past it
-`R₂(β)` would lie in the outer tile, outside the closure of the inner colour's class (one mind's sketch; this child is its check).
+/-- **The arc step** (a collar bend of a maximal bad unit arc; no cleaning follows — the bent map of a clean map is clean,
+`ArcBend.isClean`): at a maximal unit arc about `P` of a clean valid map of the plane, neither (Q) nor (R2), whose side colours are
+not both carried at `P`, for every `δ > 0` and every locally finite set `T` (the treatment points), a clean valid modification that
+is a local step on the closed `ε`-neighbourhood of the arc, `ε < δ`, lowering `P`'s bad count, creating no site, raising no degree at
+a point of `T` (inventory item 430 (a)) and no horn count anywhere (item 385 (a)), and at every other point of `T` adding no colour
+and — unless it loses one — raising no bad count. The toward collar bend when the outer colour is absent at `P`
+(`exists_arcBend_toward`, over `exists_collarFit`); else the away bend (`bend_away_part`, `ArcBend.of_away`). The clauses are read off
+the bend's interface (`ArcBend.arcStep`, `ArcBend.maxBad_centre`, `ArcBend.maxBad_other`; `Plane/ValidMap/ArcStep`); the last clause
+is FS131-KL1's question (5) (`isR2Arc_of_fixed`, `Plane/ValidMap/BendStep`). The plane hypothesis (item 430 (b)) gives the bad
+count's finiteness.
 Inhabitant: no Lean model on file; `l60Frag` cleaned, its whole arc, at [hand] (FS131-QA4 § 6.2, rank 7). -/
 theorem exists_arcStep (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
     (hmax : F.IsMaxRingArc P θ₁ θ₂ c c') (hQ : ¬ F.IsQArc P θ₁ θ₂) (hR : ¬ F.IsR2Arc P θ₁ θ₂)
@@ -2756,7 +2784,41 @@ theorem exists_arcStep (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) {P : 
       (∀ x j, F.HasHornCount x j → ∃ j' ≤ j, F'.HasHornCount x j') ∧
       ∀ Q ∈ T, Q ≠ P → F'.coloursAt Q ⊆ F.coloursAt Q ∧
         (F'.coloursAt Q = F.coloursAt Q → F'.badCount Q ≤ F.badCount Q) := by
-  sorry
+  obtain ⟨ε, hε0, hεδ, hε1, hεT⟩ := exists_arcStep_radius hT P θ₁ θ₂ hδ
+  have hfree := hmax.1.free_of_isClean hc
+  -- the bend: away from `P` if the outer colour is carried there (then the inner is not), else toward `P`
+  obtain ⟨M, h, K, g, hB⟩ : ∃ (M : ArcMap k) (h : ℂ ≃ₜ ℂ) (K : Set ℂ) (g : Fin k), ArcBend F M h K P θ₁ θ₂ c c' g ε := by
+    by_cases hout : c' ∈ F.coloursAt P
+    · have hin : c ∉ F.coloursAt P := fun h => hnb ⟨h, hout⟩
+      obtain ⟨M, h, K, hM⟩ := bend_away_part hF hP hmax.1 hin hfree hε0
+      exact ⟨M, h, K, c, ArcBend.of_away hP hmax.1 hin hout hM⟩
+    · obtain ⟨M, h, K, hB⟩ := exists_arcBend_toward hF hmax.1 hout hfree hε0
+      exact ⟨M, h, K, c', hB⟩
+  obtain ⟨hV, hC, hstep, hmod, hsite, hdeg, hhorn, hcolT, -⟩ := hB.arcStep hc hε1.le hεT
+  refine ⟨ε, hε0, hεδ, M, hV, hC, hstep, hmod, ?_, hsite, hdeg, hhorn, fun Q hQT hQP => ⟨hcolT Q hQT, fun hcol => ?_⟩⟩
+  · -- `P`'s count drops: a bad maximal arc of `M` about `P` is one of `F` off `α°`, and `α` is one of `F`'s
+    have hfin := badCount_lt_top hF hP P
+    rw [badCount, encard_lt_top_iff] at hfin
+    have hkey : ∀ {a b : ℝ} {d d' : Fin k}, M.IsMaxRingArc P a b d d' → ¬ M.IsQArc P a b → ¬ M.IsR2Arc P a b →
+        Disjoint (ringPt P '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂) ∧ F.IsMaxRingArc P a b d d' ∧ ¬ F.IsQArc P a b ∧
+          ¬ F.IsR2Arc P a b := by
+      intro a b d d' hM hQM hRM
+      obtain ⟨hdisj, hFD, hmaxF, hQF, hRF⟩ := hB.maxBad_centre hF hc hε1.le
+        (fun _ _ _ _ hD hnd => hmax.meet hD hnd) hM.1 hM.2.2 hQM hRM
+      exact ⟨hdisj, ⟨hFD, hM.2.1, hmaxF⟩, hQF, hRF⟩
+    have hsub : {p : ℝ × ℝ | ∃ c c', M.IsMaxRingArc P p.1 p.2 c c' ∧ ¬ M.IsQArc P p.1 p.2 ∧ ¬ M.IsR2Arc P p.1 p.2} ⊆
+        {p : ℝ × ℝ | ∃ c c', F.IsMaxRingArc P p.1 p.2 c c' ∧ ¬ F.IsQArc P p.1 p.2 ∧ ¬ F.IsR2Arc P p.1 p.2} := by
+      rintro ⟨a, b⟩ ⟨d, d', hM, hQM, hRM⟩
+      exact ⟨d, d', (hkey hM hQM hRM).2⟩
+    refine (hfin.subset hsub).encard_lt_encard ⟨hsub, fun hrev => ?_⟩
+    obtain ⟨d, d', hM, hQM, hRM⟩ := hrev (show (θ₁, θ₂) ∈ _ from ⟨c, c', hmax, hQ, hR⟩)
+    obtain ⟨t, ht⟩ := nonempty_Ioo.mpr hmax.1.1
+    exact Set.disjoint_left.mp (hkey hM hQM hRM).1 ⟨t, ht, rfl⟩ ⟨t, ht, rfl⟩
+  · -- at `Q ≠ P` with its colours kept, a bad maximal arc of `M` about `Q` is one of `F`
+    refine encard_le_encard ?_
+    rintro ⟨a, b⟩ ⟨d, d', hM, hQM, hRM⟩
+    obtain ⟨hFD, hmaxF, hQF, hRF⟩ := hB.maxBad_other hF hc hε1.le hQP hcol hM.1 hM.2.2 hQM hRM
+    exact ⟨d, d', ⟨hFD, hM.2.1, hmaxF⟩, hQF, hRF⟩
 
 /-! ## The run: locality off a step's support, the potential, one step, fairness (FS131-IR1)
 

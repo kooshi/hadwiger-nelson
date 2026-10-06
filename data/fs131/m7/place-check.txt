@@ -1,0 +1,1 @@
+RESULT: PASS — Procedure.lean holds the compiled text

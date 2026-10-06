@@ -47,8 +47,8 @@ MODDOC = [
      "each cleaned with its colour kept (`cleanKeep`, `LocalStep.cleanKeep`: `ArcMap.clean` itself is no local step, its colour function\n"
      "being a choice on the arcs); a move's surgery is a local step on its closed ball (`surgery_localStep`). `exists_arcStep` reads a\n"
      "collar bend, uncleaned, through the interface of `Plane/ValidMap/ArcStep` (`ArcBend`: the toward bend `exists_arcBend_toward`; the\n"
-     "away bend `bend_away_part` of `Plane/ValidMap/BendStep`, with `ArcBend.of_away`) — not `UnitArc`'s bends. Both steps are proved here\n"
-     "from those constructions (the plan's § 3.3; new declarations downstream only).\n"),
+     "away bend `bend_away_part` of `Plane/ValidMap/BendStep`, with `ArcBend.of_away`) — not `UnitArc`'s bends. Both steps' proofs are in\n"
+     "this module, over those constructions (the plan's § 3.3; new declarations downstream only).\n"),
 ]
 W5_AFTER = "theorem IsMaxRingArc.not_regularAt "
 STMT = re.compile(r"^theorem exists_arcStep('?) (.*?) := by\n", re.S | re.M)

@@ -320,3 +320,100 @@ print the standard three; if `BendAway`'s copy is still `sorry` then, the proof 
 `BendAway` here was not open to me: that file is FS131-BA1's while it works, and an edit would collide with its own.
 
 ## Stage 4 — SAVED (FS131-M7)
+
+## Stage 5 — SAVED (FS131-M7): the arc step's last lines in `Procedure`; `Procedure` holds no `sorry`
+
+### 5.1 FS131-IA2's text in the joined tree, tried in scratch before `Procedure.lean` was touched (iteration grade)
+
+`lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false`, possible only now (Stage 4's build made the bend modules' oleans).
+Not evidence — the build is (5.3).
+
+- **First try, and what it showed** — FS131-IA2's scratch file with its stand-in removed and the call made to `bend_away_part`
+  itself: **exit 1, one error, and not in the lines I place.** It is in `exists_procStep'`, FS131-IA2's generated copy of the
+  consumer, at `exists_vertexStep hG.valid hG.clean (hGd t)`: on `fs131-w5y` `exists_vertexStep` took `(hv : v ∈ F.dom)`; on this
+  line it takes `(hv : F.Covers v 1)`, and the real `exists_procStep` calls it with `covers_of_isPlaneMap hG.plane t 1` (l. 3001 as
+  then numbered). **So the third part of FS131-IA2's scratch — the consumer's copy — is stale on this line** (its report's "compile
+  … against `Procedure` and `ArcStep`" is true of its branch's older `Procedure`). No bearing on this job: the caller's lines were
+  already in place (FS131-IR3's Stage 23) and are not mine to change. I had overwritten that run's output; it is reproduced as
+  `data/fs131/m7/LastLinesJoined-withConsumer.lean` → `lastlines-joined-withConsumer.txt`, where it shows the same error at the
+  same line **and a second one, "`IsMaxRingArc.meet` has already been declared"** — because the reproduction ran after the placement:
+  the built `Procedure` now declares that name. The second error is the reproduction's own, not the first run's.
+- **The instrument cut to what is placed** — `data/fs131/m7/LastLinesJoined.lean`: `IsMaxRingArc.meet` and `exists_arcStep'` only.
+  **Exit 0, no error line, no warning line**; `IsMaxRingArc.meet` on `[propext, Classical.choice, Quot.sound]`, `exists_arcStep'`
+  through `sorryAx` with no `sorry` token of its own (`lastlines-joined.txt`; run at 02:12:16, before the placement at 02:13:32 —
+  the order is by file times). **Control**, FS131-IA2's own: the withdrawn degree clause back in the statement — exit 1, one error,
+  at l. 83, inside `exists_arcStep'` (`lastlines-joined-control.txt`; FS131-IA2 saw three errors for the same plant on its branch —
+  a difference I did not look into).
+- **So no line of FS131-IA2's text needed a change to compile here** beyond the substitution it prescribed itself. Its diff against
+  the compiled text is one name: `bend_away_part_weak` → `bend_away_part`.
+
+### 5.2 The placement (`tools/fs131_m7_place.py --apply`; every proof line copied by script from the file FS131-IA2 compiled)
+
+`Procedure.lean` 3,403 → 3,465 lines; `git diff --stat`: 82 insertions, 20 deletions, in six hunks (read in place):
+
+1. the import `Proofs.HadwigerNelson.Plane.ValidMap.ArcStep`, after `FlankUA`'s (it brings `BendStep` and the bend modules);
+2. **`IsMaxRingArc.meet`** (FS131-IA1's W5), docstring and proof, after `IsMaxRingArc.not_regularAt`;
+3. **`exists_arcStep`'s proof** in place of its `sorry` — the 35 lines between FS131-IA2's markers;
+4. `exists_arcStep`'s docstring: FS131-IA2's, from its report, **with the last sentence of the docstring it replaces kept** ("Inhabitant:
+   no Lean model on file; `l60Frag` cleaned, its whole arc, at [hand] (FS131-QA4 § 6.2, rank 7)") — the one addition to FS131-IA2's
+   docstring text, made because `LEAN.md` § The gate asks a theorem over a structure for its inhabitant or a note, and FS131-IR3 had
+   put the note there after FS131-IA2 wrote;
+5. the module docstring's two passages about the arc step: a collar bend, uncleaned (the bent map of a clean map is clean), read
+   through `ArcStep`'s interface, not `UnitArc`'s bends. I first ended the second passage "Both steps are proved here from those
+   constructions", and replaced it before the build by "Both steps' proofs are in this module, over those constructions": the first
+   reads as a claim that the bends beneath are closed, which they are not, and a status sentence in a docstring goes stale.
+
+**Not touched**: `exists_arcStep`'s statement (the tool refuses to place unless the text between `theorem exists_arcStep` and `:= by`
+equals the scratch's `exists_arcStep'` statement) and `exists_procStep` (the caller).
+
+`--check`: **PASS** — W5 and the proof are in `Procedure.lean` byte for byte as compiled, the docstring is the report's with the
+note, the import once, the two passages in place, no `sorry` token outside comments (`data/fs131/m7/place-check.txt`).
+`--self-test`: **six plants fired** (`place-selftest.txt`). One of them, "a sorry in a proof", fired through the byte-equality
+clause and not the sorry-count clause it is named for; that clause tested for itself (`place-sorry-clause.txt`): a `sorry` in an
+unrelated proof — fired, "1 `sorry` token(s) outside comments"; the word in a `--` comment and in a docstring — not counted.
+
+**`ARCHITECTURE.md`**, same commit (two rows, one line each; the file as it stood: `data/fs131/m7/ARCHITECTURE-before-stage5.md`):
+`Procedure`'s Imports cell gains `Plane/ValidMap/ArcStep`; its holdings name `IsMaxRingArc.meet` and say what the two steps are (the
+old parenthesis read "the moves and bends, cleaned; proved after the merge with `main`"); `ArcStep`'s row says `Procedure` imports
+it. **And a slip of Stage 4's, found here by reading the row, not by any check**: `ArcStep`'s row still listed
+`LocalStep.of_cutArcs` among that module's lemmas, one commit after I deleted it there — at Stage 4 I corrected the matching clause
+of the module docstring and did not look at the map. `check_architecture` could not have said so: it compares Imports cells and
+coverage with the code, not a row's prose. Corrected: the row cites the lemma as `Plane/ValidMap/BendAway`'s (whose own row holds it).
+
+### 5.3 The build
+
+Expectation written before the run, with the rebuild set computed from the import graph and saved first
+(`data/fs131/m7/stage5-expected-rebuild.txt`): 6 modules rebuilt — `Procedure`, `Terminal`, `Dense`, `BaseWalk`, `BaseDense`,
+`Proofs`; 36 distinct `sorry` sites, none in `Procedure`; 7 modules with warnings; 1796 modules; 459 batches.
+**Met but for the last: 464 batches.**
+
+`slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`: **OK — 464 of 464 batches, 6 modules rebuilt, 7 with
+warnings, 9 min 17 s, exit 0** (`data/fs131/m7/build-stage5.rc`; saved log `build/gate/build/20261006T071443Z-2071643.log`, ending
+"Build completed successfully (5803 jobs)"; driver log `build-stage5.log`). No Lean file modified after it started.
+
+- **Rebuilt**: the six expected, compared by `diff` with the saved list — identical. `Procedure` (11 s) with no warning beneath it.
+- **Warnings: 399 lines, all `declaration uses 'sorry'`, at 36 distinct sites**: `BendAway` 6, `LensOut` 7, `CollarMapOut` 7, `R2Cap`
+  3, `HornChart` 4, `BendGap` 8 (the outward bend's six modules: 35) and `BendStep` 1 (l. 290, `CollarFit.map_hornCount_le`).
+  **In `Procedure`, `Terminal`, `ArcStep`, `BaseDense`, `HexRing`, `BendCollar`: 0 each** (each counted by name). None of another kind.
+  **Every open leaf of wave 5 is now one of the outward bend's children.**
+- **The word "error" occurs once in the log, at line 46**, and it is the pre-check's out-of-date notice for `Procedure` (the
+  pre-check section is lines 1–48; it stands lower than in the earlier logs because the pre-check first replays the bend modules'
+  cached warnings). No Lean error.
+- **The batch count**: 464, not the 459 I wrote. Same 1796 modules, cut differently — Stage 4: 8×1 + 6×2 + 4×3 + 441×4; here
+  16×1 + 4×2 + 4×3 + 440×4. The last eight batches are sized 2, 1, 1, 1, 1, 1, 1, 1: with `Procedure` importing `ArcStep`, wave 5's
+  tail is a chain — `BendStep`, `ArcStep`, `Procedure`, `Terminal`, `Dense`, `BaseWalk`, `BaseDense`, `Proofs` — one module per
+  level. So **`BaseDense` and `BaseWalk`, the density half, are downstream of `Procedure`** and now of every bend module. A fact for
+  the re-layout the coordinator has deferred (ruling 450 (d)); it changes no statement.
+- **`tools/check_architecture.py`: exit 0, PASS** — 259 modules, 259 rows; 259 Imports cells compared, 0 mismatches, `Procedure`'s new
+  import against its new cell among them (`arch-stage5.txt`).
+
+### 5.4 Statements, and no new trust
+
+- `tools/fs131_m7_stmt_check.py dcdeac13 --touch Procedure.lean`, **with no allowance**: **PASS — 2,403 statements read, none changed,
+  none missing; added: `IsMaxRingArc.meet`** (`stmt-stage5.txt`). Without `--touch`: one failure, `Procedure.lean` TOUCHED — the only
+  Lean file that differs from Stage 4's commit (`stmt-stage5-notouch.txt`).
+- **No `axiom`, no `native_decide`**: added by this job's own edits (285 diff lines under `Proofs/`) — 0 and 0; added by the two
+  merges (6,864 diff lines) — 0 and 0; in `Plane/ValidMap/` as it stands — none. The patterns shown to match on a text that holds
+  both, first (this machine's `grep` under-matches some forms toward a clean negative).
+
+## Stage 5 — SAVED (FS131-M7)

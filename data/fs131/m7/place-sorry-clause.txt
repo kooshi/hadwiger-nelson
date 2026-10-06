@@ -1,0 +1,4 @@
+unplanted: PASS
+plant — a sorry in an unrelated proof: FIRED ['1 `sorry` token(s) outside comments']
+partner — the word in a `--` comment: PASS (not counted)
+partner — the word in a docstring: PASS (not counted)
