@@ -1,0 +1,10 @@
+1787 files; base 75689a4c; ours e37e864d; theirs 385b5ad3; 0 failure(s)
+PASS
+SELF-TEST plant on Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean: FIRED ["FAIL Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean: changed by main only, merged differs from main's"]
+SELF-TEST plant on Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean: FIRED ["FAIL Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean: changed by ours only, merged differs from ours' with the declared edits"]
+SELF-TEST plant on Proofs.lean: FIRED ["FAIL Proofs.lean: imports differ from the three-way union (missing ['import Proofs.HadwigerNelson.Plane.ValidMap.Moves'], extra [])"]
+SELF-TEST plant on scripts/Axioms.lean: FIRED ["FAIL scripts/Axioms.lean: a record occurs twice (['HadwigerNelson.Plane.ArcMap.exists_merge_aux'])"]
+SELF-TEST plant on ARCHITECTURE.md: FIRED ['FAIL ARCHITECTURE.md: row Plane/ValidMap/Limit is not the side that changed it (with the declared Imports edit)']
+SELF-TEST plant on plans/FS131-I5-implementation.md: FIRED ["FAIL plans/FS131-I5-implementation.md: a side's lines are not all in the merged record, in order"]
+SELF-TEST OK
+exit 0

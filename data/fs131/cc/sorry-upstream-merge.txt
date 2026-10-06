@@ -1,0 +1,6 @@
+BendCollar imports 28 modules of Proofs/ (transitively); `sorry` declarations in them: 0
+BendCollar `sorry` declaration, line 120: exists_collarFit
+BendCollar `sorry` declaration, line 157: CollarFit.map_degree_lensCurve
+BendCollar `sorry` declaration, line 168: CollarFit.map_degree_end
+BendCollar `sorry` declaration, line 270: CollarFit.sides_end
+PASS

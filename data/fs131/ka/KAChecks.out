@@ -1,0 +1,324 @@
+@IsClosed.Icc_subset_of_forall_mem_nhdsWithin : ∀ {α : Type u_1} [inst : TopologicalSpace α]
+  [inst_1 : ConditionallyCompleteLinearOrder α] [OrderTopology α] [DenselyOrdered α] {a b : α} {s : Set α},
+  IsClosed (s ∩ Set.Icc a b) → a ∈ s → (∀ x ∈ s ∩ Set.Ico a b, s ∈ nhdsWithin x (Set.Ioi x)) → Set.Icc a b ⊆ s
+@lebesgue_number_lemma_of_metric : ∀ {α : Type u_1} [inst : PseudoMetricSpace α] {s : Set α} {ι : Sort u_2}
+  {c : ι → Set α}, IsCompact s → (∀ (i : ι), IsOpen (c i)) → s ⊆ ⋃ i, c i → ∃ δ > 0, ∀ x ∈ s, ∃ i, Metric.ball x δ ⊆ c i
+@Real.mul_le_sin : ∀ {x : ℝ}, 0 ≤ x → x ≤ Real.pi / 2 → 2 / Real.pi * x ≤ Real.sin x
+@Metric.thickening_mono : ∀ {α : Type u_1} [inst : PseudoEMetricSpace α] {δ₁ δ₂ : ℝ},
+  δ₁ ≤ δ₂ → ∀ (E : Set α), Metric.thickening δ₁ E ⊆ Metric.thickening δ₂ E
+@IsCompact.exists_thickening_subset_open : ∀ {α : Type u_1} [inst : PseudoEMetricSpace α] {s t : Set α},
+  IsCompact s → IsOpen t → s ⊆ t → ∃ δ, 0 < δ ∧ Metric.thickening δ s ⊆ t
+@Homeomorph.trans : {X : Type u_1} →
+  {Y : Type u_2} →
+    {Z : Type u_3} →
+      [inst : TopologicalSpace X] →
+        [inst_1 : TopologicalSpace Y] → [inst_2 : TopologicalSpace Z] → X ≃ₜ Y → Y ≃ₜ Z → X ≃ₜ Z
+@IsPreconnected.constant : ∀ {α : Type u_1} [inst : TopologicalSpace α] {Y : Type u_2} [inst_1 : TopologicalSpace Y]
+  [DiscreteTopology Y] {s : Set α},
+  IsPreconnected s → ∀ {f : α → Y}, ContinuousOn f s → ∀ {x y : α}, x ∈ s → y ∈ s → f x = f y
+@IsPreconnected.subset_or_subset : ∀ {α : Type u_1} [inst : TopologicalSpace α] {s u v : Set α},
+  IsOpen u → IsOpen v → Disjoint u v → s ⊆ u ∪ v → IsPreconnected s → s ⊆ u ∨ s ⊆ v
+Real.cos_sq_add_sin_sq : ∀ (x : ℝ), Real.cos x ^ 2 + Real.sin x ^ 2 = 1
+Complex.arg_real_mul : ∀ (x : ℂ) {r : ℝ}, 0 < r → (↑r * x).arg = x.arg
+@dist_triangle : ∀ {α : Type u_1} [inst : PseudoMetricSpace α] (x y z : α), dist x z ≤ dist x y + dist y z
+@n2_sign : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    ∀ {P : ℂ} {θ₁ θ₂ : ℝ} {c c' d : Fin k},
+      F.IsRingArc P θ₁ θ₂ c c' →
+        d = c ∨ d = c' →
+          ∀ {z : ℂ},
+            z ∈ F.region d →
+              (∀ θ ∈ Set.Ioo θ₁ θ₂, dist z (ringPt P θ) < 1) ∨ ∀ θ ∈ Set.Ioo θ₁ θ₂, 1 < dist z (ringPt P θ)
+n2_env_away : ∀ (P : ℂ) {θ₁ θ₂ : ℝ},
+  θ₁ < θ₂ →
+    θ₂ - θ₁ ≤ Real.pi / 3 →
+      ∀ {r : ℝ},
+        0 < r →
+          ∃ ψ > 0,
+            ∀ φ ∈ Set.Ioo θ₁ θ₂,
+              ∀ (s : ℝ),
+                0 < s →
+                  s ≤ ψ * min (φ - θ₁) (θ₂ - φ) →
+                    Metric.closedBall (P + (1 + ↑s) * e φ) 1 \ ⋃ θ ∈ Set.Icc θ₁ θ₂, Metric.ball (ringPt P θ) 1 ⊆
+                      Metric.thickening r (radiusTwoArc P θ₁ θ₂)
+n2_env_near_away : ∀ (P : ℂ) {θ₁ θ₂ : ℝ},
+  θ₁ < θ₂ →
+    θ₂ - θ₁ ≤ Real.pi / 3 →
+      ∀ {r : ℝ},
+        0 < r →
+          ∃ ψ > 0,
+            ∀ φ ∈ Set.Ioo θ₁ θ₂,
+              ∀ (s : ℝ),
+                0 < s →
+                  s ≤ ψ * min (φ - θ₁) (θ₂ - φ) →
+                    ∀ p ∈ (Metric.closedBall (ringPt P θ₁) 1 ∩ Metric.closedBall (ringPt P θ₂) 1) \ Metric.ball P r,
+                      dist p (P + (1 + ↑s) * e φ) < 1
+@away_clear : ∀ {k : ℕ} (F : ArcMap k),
+  F.Valid →
+    ∀ {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k},
+      F.IsRingArc P θ₁ θ₂ c c' →
+        ∀ {r ψ₁ ψ₂ : ℝ},
+          (∀ y ∈ F.region c, r ≤ dist y P) →
+            (∀ y ∈ F.region c, y ∉ Metric.thickening r (radiusTwoArc P θ₁ θ₂)) →
+              (∀ φ ∈ Set.Ioo θ₁ θ₂,
+                  ∀ (s : ℝ),
+                    0 < s →
+                      s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ) →
+                        Metric.closedBall (P + (1 + ↑s) * e φ) 1 \ ⋃ θ ∈ Set.Icc θ₁ θ₂, Metric.ball (ringPt P θ) 1 ⊆
+                          Metric.thickening r (radiusTwoArc P θ₁ θ₂)) →
+                (∀ φ ∈ Set.Ioo θ₁ θ₂,
+                    ∀ (s : ℝ),
+                      0 < s →
+                        s ≤ ψ₂ * min (φ - θ₁) (θ₂ - φ) →
+                          ∀
+                            p ∈
+                              (Metric.closedBall (ringPt P θ₁) 1 ∩ Metric.closedBall (ringPt P θ₂) 1) \ Metric.ball P r,
+                            dist p (P + (1 + ↑s) * e φ) < 1) →
+                  ∀ {φ s : ℝ},
+                    φ ∈ Set.Ioo θ₁ θ₂ →
+                      0 < s →
+                        s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ) →
+                          s ≤ ψ₂ * min (φ - θ₁) (θ₂ - φ) → F.IsClear c (P + (1 + ↑s) * e φ)
+@ne1_region : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid → ∀ {c : Fin k} {x z : ℂ}, x ∈ closure (F.region c) → z ∈ F.region c → dist z x ≠ 1
+@l60_le : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid → ∀ {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}, F.IsRingArc P θ₁ θ₂ c c' → θ₂ - θ₁ ≤ Real.pi / 3
+@exists_collar_free : ∀ {k : ℕ} {F : ArcMap k} {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k},
+  F.Valid →
+    F.IsRingArc P θ₁ θ₂ c c' →
+      (∀ θ ∈ Set.Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ Metric.ball (ringPt P θ) r ⊆ Metric.sphere P 1) →
+        ∀ᶠ (τ : ℝ) in nhdsWithin 0 (Set.Ioi 0), F.Γ ∩ collarK P θ₁ θ₂ (1 - τ) (1 + τ) ⊆ ringArc P θ₁ θ₂
+@collarK_thin : ∀ {P : ℂ} {θ₁ θ₂ τ : ℝ},
+  0 < τ →
+    τ ≤ 1 / 4 →
+      θ₂ - θ₁ ≤ Real.pi / 3 →
+        ∀ {z : ℂ},
+          z ∈ collarK P θ₁ θ₂ (1 - τ) (1 + τ) → ∃ ψ ∈ Set.Icc θ₁ θ₂, ∃ t, 0 < t ∧ z = P + ↑t * e ψ ∧ |1 - t| ≤ 2 * τ
+@collarK_frame : ∀ {P : ℂ} {θ₁ θ₂ R' R'' : ℝ},
+  1 / 2 < R' →
+    1 < R'' →
+      θ₂ - θ₁ ≤ Real.pi / 3 →
+        ∀ {z : ℂ},
+          z ∈ collarK P θ₁ θ₂ R' R'' →
+            (∃ X Y,
+                z - ringPt P θ₁ = (↑Y + ↑X * Complex.I) * e θ₁ ∧
+                  0 ≤ X ∧ 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) ∧ 2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0) ∧
+              ∃ X Y,
+                z - ringPt P θ₂ = (↑Y + ↑X * Complex.I) * e θ₂ ∧
+                  X ≤ 0 ∧ 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) ∧ 2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0
+@exists_end_free : ∀ {k : ℕ} (F : ArcMap k) {P : ℂ} {θE σ : ℝ},
+  ringPt P θE ∈ F.dom →
+    σ = 1 ∨ σ = -1 →
+      ∃ ρ > 0,
+        ∃ τ₀ > 0,
+          ∀ (τ : ℝ),
+            0 < τ →
+              τ < τ₀ →
+                ∀ z ∈ F.Γ,
+                  dist z (ringPt P θE) < ρ →
+                    ∀ (X Y : ℝ),
+                      z - ringPt P θE = (↑Y + ↑X * Complex.I) * e θE →
+                        0 ≤ σ * X →
+                          0 ≤ 2 * (1 - τ) * Y + (X ^ 2 + Y ^ 2) → 2 * (1 + τ) * Y + (X ^ 2 + Y ^ 2) ≤ 0 → dist z P = 1
+@branch_transversal : ∀ {gx gy κ s ca sa X Y R' R'' : ℝ},
+  gx ^ 2 + gy ^ 2 = 1 →
+    0 < s →
+      s * (2 + |κ|) < |gx| →
+        s * (1 + |κ|) < 1 →
+          0 < ca →
+            ca ^ 2 + sa ^ 2 = 1 →
+              sa = κ * s / 2 →
+                Y = s * (gx * ca - gy * sa) →
+                  X ^ 2 + Y ^ 2 = s ^ 2 →
+                    1 / 2 < R' → 1 < R'' → 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) → 2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0 → False
+@branch_tangent : ∀ {gy κ σ s ca sa τ X Y : ℝ},
+  gy = 1 ∨ gy = -1 →
+    σ = 1 ∨ σ = -1 →
+      0 < s →
+        0 < ca →
+          sa = κ * s / 2 →
+            X = s * (gy * ca) →
+              Y = s * -(gy * sa) →
+                X ^ 2 + Y ^ 2 = s ^ 2 →
+                  0 ≤ σ * X →
+                    0 < τ →
+                      σ * κ = 1 ∨ τ * (|σ * κ| + 1) < |σ * κ - 1| →
+                        0 ≤ 2 * (1 - τ) * Y + (X ^ 2 + Y ^ 2) →
+                          2 * (1 + τ) * Y + (X ^ 2 + Y ^ 2) ≤ 0 → 2 * Y + (X ^ 2 + Y ^ 2) = 0
+@crescent_Y : ∀ {X Y R' R'' : ℝ},
+  1 / 2 < R' →
+    1 < R'' → 0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) → 2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0 → Y ≤ 0 ∧ -(X ^ 2 + Y ^ 2) ≤ Y
+@side_core : ∀ {α β σ : ℝ},
+  α ^ 2 + β ^ 2 = 1 →
+    ¬(α = 1 ∧ β = 0) →
+      σ = 1 ∨ σ = -1 →
+        ∃ ρ > 0,
+          (∀ (X Y R' R'' : ℝ),
+              1 / 2 < R' →
+                1 < R'' →
+                  0 ≤ σ * X →
+                    0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) →
+                      2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0 →
+                        0 < X ^ 2 + Y ^ 2 → X ^ 2 + Y ^ 2 < ρ → 0 < X ^ 2 + Y ^ 2 + 2 * (α * Y + β * X)) ∨
+            ∀ (X Y R' R'' : ℝ),
+              1 / 2 < R' →
+                1 < R'' →
+                  0 ≤ σ * X →
+                    0 ≤ 2 * R' * Y + (X ^ 2 + Y ^ 2) →
+                      2 * R'' * Y + (X ^ 2 + Y ^ 2) ≤ 0 →
+                        0 < X ^ 2 + Y ^ 2 → X ^ 2 + Y ^ 2 < ρ → X ^ 2 + Y ^ 2 + 2 * (α * Y + β * X) < 0
+isCompact_polarSet_Icc : ∀ (P : ℂ) {θa θb : ℝ} {f g : ℝ → ℝ},
+  Continuous f →
+    Continuous g →
+      (∀ θ ∈ Set.Icc θa θb, f θ ≤ g θ) → IsCompact (polarSet P (Set.Icc θa θb) fun θ => Set.Icc (f θ) (g θ))
+@continuous_radialMap_push1 : ∀ {P : ℂ} {θ₁ θ₂ : ℝ} {a l b m m' : ℝ → ℝ},
+  PushProfiles θ₁ θ₂ a l b →
+    Continuous m →
+      Continuous m' →
+        (∀ θ ∈ Set.Ioo θ₁ θ₂, a θ < m θ ∧ m θ < b θ) →
+          (∀ θ ∉ Set.Ioo θ₁ θ₂, m θ = 1 ∧ m' θ = 1) →
+            Continuous (radialMap P ((θ₁ + θ₂) / 2) fun θ t => push1 (a θ) (m θ) (m' θ) (b θ) t)
+@radialMap_radialMap : ∀ {P : ℂ} {φ : ℝ} {f g : ℝ → ℝ → ℝ},
+  (∀ (θ : ℝ), f θ 0 = 0) →
+    (∀ (θ : ℝ), g θ 0 = 0) →
+      (∀ (θ t : ℝ), 0 < t → 0 < f θ t) →
+        (∀ (θ t : ℝ), 0 < t → g θ (f θ t) = t) → ∀ (z : ℂ), radialMap P φ g (radialMap P φ f z) = z
+@radialMap_polar : ∀ {P : ℂ} {φ θ t : ℝ} {f : ℝ → ℝ → ℝ},
+  θ ∈ Set.Ioc (φ - Real.pi) (φ + Real.pi) → 0 < t → radialMap P φ f (P + ↑t * e θ) = P + ↑(f θ t) * e θ
+@radialMap_eq_self : ∀ {P : ℂ} {φ : ℝ} {f : ℝ → ℝ → ℝ} {z : ℂ},
+  f (polarAngle P φ z) ‖z - P‖ = ‖z - P‖ → radialMap P φ f z = z
+@push1_push1 : ∀ {a m m' b : ℝ}, a < m → m < b → a < m' → m' < b → ∀ (t : ℝ), push1 a m' m b (push1 a m m' b t) = t
+@push1_mid : ∀ {a m m' b : ℝ}, a < m → m < b → push1 a m m' b m = m'
+@push1_mem_Ioo : ∀ {a m m' b t : ℝ}, a < m → m < b → a < m' → m' < b → t ∈ Set.Ioo a b → push1 a m m' b t ∈ Set.Ioo a b
+@tangRad_sub_one_le : ∀ {R : ℝ}, 1 ≤ R → ∀ (u : ℝ), tangRad R u - 1 ≤ (R - 1) * u ^ 2
+@one_lt_tangRad : ∀ {R u : ℝ}, 1 < R → 0 < |u| → |u| ≤ Real.pi → 1 < tangRad R u
+@tangRad_lt_one : ∀ {R u : ℝ}, 1 / 2 < R → R < 1 → 0 < |u| → |u| ≤ Real.pi → tangRad R u < 1
+@tangRad_lt_tangRad : ∀ {R R' u : ℝ}, 1 / 2 < R' → R' < R → 0 < |u| → |u| ≤ Real.pi → tangRad R' u < tangRad R u
+@tangRad_spec : ∀ {R : ℝ},
+  1 / 2 < R →
+    ∀ (P : ℂ) (θ u : ℝ),
+      P + ↑(tangRad R u) * e (θ + u) ∈ Metric.sphere (P + ↑(1 - R) * e θ) R ∧
+        ∀ (t : ℝ), 0 < t → (P + ↑t * e (θ + u) ∈ Metric.closedBall (P + ↑(1 - R) * e θ) R ↔ t ≤ tangRad R u)
+@lt_tangRad_iff : ∀ {R : ℝ},
+  1 / 2 < R → ∀ (u : ℝ) {s : ℝ}, 0 < s → (s < tangRad R u ↔ s ^ 2 - 2 * (1 - R) * s * Real.cos u - (2 * R - 1) < 0)
+@polar_inj_window : ∀ {P : ℂ} {φ θ θ' t t' : ℝ},
+  θ ∈ Set.Ioc (φ - Real.pi) (φ + Real.pi) →
+    θ' ∈ Set.Ioc (φ - Real.pi) (φ + Real.pi) → 0 < t → 0 < t' → P + ↑t * e θ = P + ↑t' * e θ' → θ = θ' ∧ t = t'
+@ringPt_not_mem_openArc : ∀ {P : ℂ} {θ₁ θ₂ θ : ℝ},
+  θ₂ - θ₁ ≤ Real.pi / 3 → θ ∈ Set.Icc θ₁ θ₂ → θ ∉ Set.Ioo θ₁ θ₂ → ringPt P θ ∉ ringPt P '' Set.Ioo θ₁ θ₂
+@polar_tangentCircle : ∀ {R u : ℝ},
+  1 / 2 < R →
+    0 ≤ u →
+      u ≤ Real.pi →
+        ‖↑(tangRad R u) * e u - ↑(1 - R)‖ = R ∧
+          0 ≤ (↑(tangRad R u) * e u).im ∧ ‖↑(tangRad R u) * e u - 1‖ ^ 2 = 2 * R * (1 - tangRad R u * Real.cos u)
+@germ_tangentCircle : ∀ {R s : ℝ},
+  0 < R →
+    0 ≤ s →
+      s ≤ 2 * R →
+        ‖1 + ↑s * e (Real.pi / 2 + Real.arcsin (s / (2 * R))) - ↑(1 - R)‖ = R ∧
+          0 ≤ (1 + ↑s * e (Real.pi / 2 + Real.arcsin (s / (2 * R)))).im ∧
+            ‖1 + ↑s * e (Real.pi / 2 + Real.arcsin (s / (2 * R))) - 1‖ = s
+@eq_of_tangentCircle : ∀ {R : ℝ},
+  0 < R → ∀ {W W' : ℂ}, ‖W - ↑(1 - R)‖ = R → ‖W' - ↑(1 - R)‖ = R → 0 ≤ W.im → 0 ≤ W'.im → ‖W - 1‖ = ‖W' - 1‖ → W = W'
+@norm_tangRad_sub_one_le : ∀ {R u : ℝ}, 1 / 2 < R → 0 ≤ u → u ≤ Real.pi → ‖↑(tangRad R u) * e u - 1‖ ≤ 2 * R
+@pushforward_hasDegree : ∀ {k : ℕ} {F : ArcMap k} {h : ℂ ≃ₜ ℂ} {hdom : ⇑h '' F.dom = F.dom} {A' : Set Arc}
+  {hnd : ∀ a ∈ A', a.Nondegenerate} {hlf : ∀ x ∈ F.dom, ∃ t ∈ nhds x, {a | a ∈ A' ∧ (a.carrier ∩ t).Nonempty}.Finite}
+  {hΓ : F.dom ∩ ⋃ a ∈ A', a.carrier = ⇑h '' F.Γ} {z : ℂ},
+  z ∈ F.dom →
+    (∀ (m : ℕ), (F.pushforward h hdom A' hnd hlf hΓ).HasDegree (h z) m ↔ F.HasDegree z m) ∧
+      ((F.pushforward h hdom A' hnd hlf hΓ).HasRepeatedColour (h z) ↔ F.HasRepeatedColour z)
+@pushforward_coloursAt : ∀ {k : ℕ} {F : ArcMap k} {h : ℂ ≃ₜ ℂ} {hdom : ⇑h '' F.dom = F.dom} {A' : Set Arc}
+  {hnd : ∀ a ∈ A', a.Nondegenerate} {hlf : ∀ x ∈ F.dom, ∃ t ∈ nhds x, {a | a ∈ A' ∧ (a.carrier ∩ t).Nonempty}.Finite}
+  {hΓ : F.dom ∩ ⋃ a ∈ A', a.carrier = ⇑h '' F.Γ} (z : ℂ),
+  (F.pushforward h hdom A' hnd hlf hΓ).coloursAt (h z) = F.coloursAt z
+@pushforward_mem_interiorPts_iff : ∀ {k : ℕ} {F : ArcMap k} {h : ℂ ≃ₜ ℂ} {hdom : ⇑h '' F.dom = F.dom} {A' : Set Arc}
+  {hnd : ∀ a ∈ A', a.Nondegenerate} {hlf : ∀ x ∈ F.dom, ∃ t ∈ nhds x, {a | a ∈ A' ∧ (a.carrier ∩ t).Nonempty}.Finite}
+  {hΓ : F.dom ∩ ⋃ a ∈ A', a.carrier = ⇑h '' F.Γ} (z : ℂ),
+  h z ∈ (F.pushforward h hdom A' hnd hlf hΓ).interiorPts ↔ z ∈ F.interiorPts
+@pushforward_col_apply : ∀ {k : ℕ} {F : ArcMap k} {h : ℂ ≃ₜ ℂ} {hdom : ⇑h '' F.dom = F.dom} {A' : Set Arc}
+  {hnd : ∀ a ∈ A', a.Nondegenerate} {hlf : ∀ x ∈ F.dom, ∃ t ∈ nhds x, {a | a ∈ A' ∧ (a.carrier ∩ t).Nonempty}.Finite}
+  {hΓ : F.dom ∩ ⋃ a ∈ A', a.carrier = ⇑h '' F.Γ} (z : ℂ), (F.pushforward h hdom A' hnd hlf hΓ).col (h z) = F.col z
+@pushforward_Γ : ∀ {k : ℕ} {F : ArcMap k} {h : ℂ ≃ₜ ℂ} {hdom : ⇑h '' F.dom = F.dom} {A' : Set Arc}
+  {hnd : ∀ a ∈ A', a.Nondegenerate} {hlf : ∀ x ∈ F.dom, ∃ t ∈ nhds x, {a | a ∈ A' ∧ (a.carrier ∩ t).Nonempty}.Finite}
+  {hΓ : F.dom ∩ ⋃ a ∈ A', a.carrier = ⇑h '' F.Γ}, (F.pushforward h hdom A' hnd hlf hΓ).Γ = ⇑h '' F.Γ
+@hasDegree_iff_of_agree : ∀ {k : ℕ} {F F' : ArcMap k} {v : ℂ} {r₀ : ℝ},
+  0 < r₀ →
+    (∀ x ∈ Metric.ball v r₀, x ∈ F'.interiorPts ↔ x ∈ F.interiorPts) →
+      (∀ x ∈ Metric.ball v r₀, x ∈ F.interiorPts → F'.col x = F.col x) →
+        (∀ (n : ℕ), F'.HasDegree v n ↔ F.HasDegree v n) ∧ (F'.HasRepeatedColour v ↔ F.HasRepeatedColour v)
+@hasDegree_iff_of_mem_interiorPts : ∀ {k : ℕ} {F : ArcMap k} {v : ℂ},
+  v ∈ F.interiorPts → ∀ (n : ℕ), F.HasDegree v n ↔ n = 1
+@isSectorChart_circle : ∀ {k : ℕ} {F : ArcMap k} {v q : ℂ} {ρ φ r₀ : ℝ},
+  0 < ρ →
+    v = q + ↑ρ * e φ →
+      0 < r₀ →
+        r₀ < 2 * ρ →
+          Metric.ball v r₀ ⊆ F.dom →
+            F.Γ ∩ Metric.ball v r₀ = Metric.sphere q ρ ∩ Metric.ball v r₀ → F.IsSectorChart (circleGerms φ ρ) v r₀
+@isSectorChart_of : ∀ {k : ℕ} (F : ArcMap k) {n : ℕ} (G : BranchGerms n) {v : ℂ} {r₀ : ℝ},
+  0 < r₀ →
+    Metric.ball v r₀ ⊆ F.dom →
+      G.Sorted →
+        (∀ (i : Fin n), |G.κ i| * r₀ < 2) →
+          (v ∈ F.Γ ↔ 0 < n) →
+            (F.Γ ∩ Metric.ball v r₀) \ {v} = ⋃ i, branchPt v (G.β i) (G.κ i) '' Set.Ioo 0 r₀ →
+              (∀ (i j : Fin n), i ≠ j → ∀ s ∈ Set.Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) → F.IsSectorChart G v r₀
+@localSectors : ∀ {k : ℕ} (F : ArcMap k) {v : ℂ}, v ∈ F.dom → ∃ r₀ n G, F.IsSectorChart G v r₀
+@exists_near : ∀ {k : ℕ} {F : ArcMap k} {v : ℂ}, v ∈ F.dom → Nonempty (F.Near v)
+@Near.hasHornCount_chart : ∀ {k : ℕ} {F : ArcMap k} {v : ℂ} {X : F.Near v},
+  0 < X.n → F.HasHornCount v {i | X.G.β i = X.G.nextβ i}.ncard
+@Near.sector_eq_hornSet_iff : ∀ {k : ℕ} {F : ArcMap k} {v : ℂ} {X : F.Near v} {r : ℝ},
+  r ∈ Set.Ioc 0 X.r₀ →
+    ∀ (i : Fin X.n), (∃ α κ₁ κ₂, κ₁ < κ₂ ∧ X.G.sector v r i = hornSet v α κ₁ κ₂ r) ↔ X.G.β i = X.G.nextβ i
+@IsSectorChart.exists_col : ∀ {k : ℕ} {F : ArcMap k} {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀ : ℝ},
+  F.IsSectorChart G v r₀ → ∀ (j : Fin n), ∃ g, ∀ r ∈ Set.Ioc 0 r₀, G.sector v r j ⊆ F.region g
+@IsSectorChart.eventually_ord : ∀ {k : ℕ} {F : ArcMap k} {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀ : ℝ},
+  F.IsSectorChart G v r₀ →
+    ∃ s₀ > 0,
+      s₀ ≤ r₀ ∧
+        (∀ (i j : Fin n), i ≠ j → ∀ s ∈ Set.Ioo 0 s₀, e (G.dir i s) ≠ e (G.dir j s)) ∧
+          ∀ s ∈ Set.Ioo 0 s₀, ∀ (i : Fin n), G.dir i s < G.nextDir i s
+@cutArcs_subset : ∀ {k : ℕ} (F : ArcMap k) {P : ℂ} {θ₁ θ₂ : ℝ},
+  ∀ b ∈ F.cutArcs P θ₁ θ₂, ∃ a ∈ F.arcs, b.carrier ⊆ a.carrier
+@cutArcs_locallyFinite : ∀ {k : ℕ} (F : ArcMap k) {P : ℂ} {θ₁ θ₂ : ℝ},
+  ∀ x ∈ F.dom, ∃ t ∈ nhds x, {b | b ∈ F.cutArcs P θ₁ θ₂ ∧ (b.carrier ∩ t).Nonempty}.Finite
+@coloursAt_eq_of_agreesOn : ∀ {k : ℕ} {M F : ArcMap k} {W : Set ℂ},
+  M.AgreesOff F Wᶜ → IsOpen W → ∀ {x : ℂ}, x ∈ W → M.coloursAt x = F.coloursAt x
+@LocalStep.mono : ∀ {k : ℕ} {F F' : ArcMap k} {U V : Set ℂ}, F.LocalStep F' U → U ⊆ V → F.LocalStep F' V
+@CollarFit.exists_one_side : ∀ {k : ℕ} {F : ArcMap k} {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} {ε R' R R'' : ℝ},
+  F.CollarFit P θ₁ θ₂ c c' ε R' R R'' →
+    ∀ {Q x : ℂ},
+      Q ≠ P →
+        x = ringPt P θ₁ ∨ x = ringPt P θ₂ →
+          ∃ ρ > 0,
+            (∀ z ∈ collarK P θ₁ θ₂ R' R'', z ≠ x → dist z x < ρ → dist z Q < 1) ∨
+              ∀ z ∈ collarK P θ₁ θ₂ R' R'', z ≠ x → dist z x < ρ → 1 < dist z Q
+@CollarFit.sides_end : ∀ {k : ℕ} {F : ArcMap k} {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} {ε R' R R'' : ℝ},
+  F.Valid →
+    ∀ (hfit : F.CollarFit P θ₁ θ₂ c c' ε R' R R'') {Q x : ℂ},
+      Q ≠ P →
+        x = ringPt P θ₁ ∨ x = ringPt P θ₂ →
+          hfit.map.innerColours Q x = F.innerColours Q x ∧ hfit.map.outerColours Q x = F.outerColours Q x
+@CollarFit.map_R1 : ∀ {k : ℕ} {F : ArcMap k} {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} {ε R' R R'' : ℝ},
+  F.Valid →
+    ∀ (hfit : F.CollarFit P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k},
+      hfit.map.IsRingArc Q a b d d' → F.IsRingArc Q a b d d'
+@CollarFit.map_ringArcsWithin : ∀ {k : ℕ} {F : ArcMap k} {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} {ε R' R R'' : ℝ}
+  (hfit : F.CollarFit P θ₁ θ₂ c c' ε R' R R''), hfit.map.RingArcsWithin F
+@CollarFit.homeo_mem_collarK : ∀ {k : ℕ} {F : ArcMap k} {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} {ε R' R R'' : ℝ}
+  (hfit : F.CollarFit P θ₁ θ₂ c c' ε R' R R'') {z : ℂ},
+  z ∈ collarK P θ₁ θ₂ R' R'' → hfit.homeo z ∈ collarK P θ₁ θ₂ R' R''
+@CollarFit.kin_subset : ∀ {k : ℕ} {F : ArcMap k} {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} {ε R' R R'' : ℝ},
+  F.CollarFit P θ₁ θ₂ c c' ε R' R R'' →
+    (polarSet P (Set.Ioo θ₁ θ₂) fun θ => Set.Ico (lensProf θ₁ θ₂ R' θ) 1) ⊆ F.region c
+@mem_closure_region_inter_iff_of_agree : ∀ {k : ℕ} {F F' : ArcMap k} {x : ℂ} {O : Set ℂ},
+  IsOpen O →
+    x ∈ O →
+      (∀ z ∈ O, z ∈ F'.interiorPts ↔ z ∈ F.interiorPts) →
+        (∀ z ∈ O, F'.col z = F.col z) →
+          ∀ (d : Fin k) (S : Set ℂ), x ∈ closure (F'.region d ∩ S) ↔ x ∈ closure (F.region d ∩ S)
+Arc.finite_inter_sphere_or_eq_circ : ∀ (a : Arc),
+  a.Nondegenerate → ∀ (p : ℂ), (a.carrier ∩ Metric.sphere p 1).Finite ∨ ∃ θ₀ θ₁, a = Arc.circ p 1 θ₀ θ₁
+Arc.finite_inter_sphere_two_or_subset : ∀ (a : Arc),
+  a.Nondegenerate → ∀ (C : ℂ), (a.carrier ∩ Metric.sphere C 2).Finite ∨ a.carrier ⊆ Metric.sphere C 2

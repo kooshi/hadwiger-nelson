@@ -1,0 +1,2 @@
+504 declaration keys over 7 files, 17 one-sided files compared whole
+RESULT: PASS

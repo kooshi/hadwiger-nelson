@@ -1,0 +1,34 @@
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: dist_lt_one_of_thin
+1795 base files, 0 new files, 1 failures
+PLANT [a changed hypothesis of a theorem (dist_lt_one_of_thin)]: FIRED
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean: pushOutHomeo
+1795 base files, 0 new files, 1 failures
+PLANT [a changed data field of a def with proof fields (pushOutHomeo.toFun)]: FIRED
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean: CollarFitOut
+1795 base files, 0 new files, 1 failures
+PLANT [a changed field of a structure (CollarFitOut.params)]: FIRED
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean: AwayBend
+1795 base files, 0 new files, 1 failures
+PLANT [a changed field of a structure (AwayBend.rest)]: FIRED
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean: AwayBend.next'
+FAIL MISSING Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean: AwayBend.next
+1795 base files, 0 new files, 1 failures
+PLANT [a renamed theorem (AwayBend.next)]: FIRED
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_subdiv
+FAIL LINES Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: changed lines [307]; only the one holding `AwayBend.idle` may change
+1795 base files, 0 new files, 2 failures
+PLANT [a changed conclusion in BendStep (bend_away_subdiv)]: FIRED
+FAIL LINES Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: changed lines [319]; only the one holding `AwayBend.idle` may change
+1795 base files, 0 new files, 1 failures
+PLANT [a second changed line in BendStep (a proof line)]: FIRED
+FAIL CHANGED (not editable) Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean
+1795 base files, 0 new files, 1 failures
+PLANT [an edit to a file that is not editable (BendGap, the other half's)]: FIRED
+FAIL AXIOM in Proofs/Planted.lean
+1795 base files, 0 new files, 1 failures
+PLANT [an axiom in a new file]: FIRED
+FAIL native_decide in Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean
+1795 base files, 0 new files, 1 failures
+PLANT [native_decide in an editable file]: FIRED
+1795 base files, 0 new files, 0 failures
+UNPLANTED: PASS

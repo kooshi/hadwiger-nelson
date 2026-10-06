@@ -1,0 +1,38 @@
+mutation 5: wrapper does not fail on a DOUBLED line
+exit 1
+==> dupnames-self-test: this run's full output: build/gate/dupnames-self-test/20261006T084147Z-2683584.log
+==> dupnames self-test: 15 controls over a planted library of 15 modules (data/fs131/t4/plant/)
+    ok    baseline — passed
+    FAIL  doubled_theorem — passed; expected 'FAIL doubled' with 'T4P.dup';expected 'FAIL doubled' with 'T4Plant.DupA';expected 'FAIL doubled' with 'T4Plant.DupB';expected 'FAIL doubled' with 'axioms=same'
+            got: COUNTS doubled=1 generated=0 generated-axioms-differ=0 modules=2273 package-modules=3 package-constants=25 other-constants=204731
+    FAIL  doubled_axioms_differ — passed; expected 'FAIL doubled' with 'T4P.dup_ax';expected 'FAIL doubled' with 'axioms=differ';expected 'FAIL doubled' with 'axioms=[T4P.planted_ax]'
+            got: COUNTS doubled=1 generated=0 generated-axioms-differ=0 modules=2273 package-modules=3 package-constants=26 other-constants=204731
+    FAIL  doubled_axiom_theorem — passed; expected 'FAIL doubled' with 'T4P.dup_kind';expected 'FAIL doubled' with 'kind=axiom';expected 'FAIL doubled' with 'kind=theorem'
+            got: COUNTS doubled=1 generated=0 generated-axioms-differ=0 modules=2273 package-modules=3 package-constants=25 other-constants=204731
+    FAIL  doubled_prop_instance — passed; expected 'FAIL doubled' with 'T4P.instNonemptyTok';expected 'FAIL doubled' with 'T4Plant.InstA';expected 'FAIL doubled' with 'T4Plant.InstB'
+            got: COUNTS doubled=1 generated=0 generated-axioms-differ=0 modules=2273 package-modules=3 package-constants=25 other-constants=204731
+    FAIL  shared_with_dependency — passed; expected 'FAIL doubled' with 'T4P.shared';expected 'FAIL doubled' with 'T4Dep.X';expected 'FAIL doubled' with 'package=false'
+            got: COUNTS doubled=1 generated=0 generated-axioms-differ=0 modules=2272 package-modules=1 package-constants=1 other-constants=204733
+    ok    generated_only — passed
+    FAIL  generated_beside_doubled — passed; expected 'FAIL doubled' with 'T4P.dup'
+            got: COUNTS doubled=1 generated=3 generated-axioms-differ=0 modules=2275 package-modules=5 package-constants=39 other-constants=204731
+    ok    dependencies_only_pair — passed
+    ok    module_not_imported — failed (1 FAIL line(s))
+            FAIL coverage the scan read 2 module(s) of the package and the package has 3 source file(s): a module the root does not import was not scanned, or the scan was told the wrong root
+    ok    scan_reads_nothing — did not elaborate
+            <tmp> error: DupNames.scan: no imported module lies under [NoSuchRoot]; nothing was scanned
+    FAIL  scan_cut_short — failed (1 FAIL line(s)); expected 'FAIL doubled' with 'T4P.dup'
+            got: FAIL banners === END === printed 0 time(s), not once: the scan did not run to its end
+            got: COUNTS doubled=1 generated=0 generated-axioms-differ=0 modules=2273 package-modules=3 package-constants=25 other-constants=204731
+    ok    lost_doubled_line — failed (3 FAIL line(s))
+            FAIL accounting a COPY line for T4P.dup, which no DOUBLED or GENERATED line names
+            FAIL accounting a COPY line for T4P.dup, which no DOUBLED or GENERATED line names
+            FAIL accounting TOTALS reads doubled=1 generated=0 generated-axioms-differ=0 and the lines read give 0, 0, 0
+    FAIL  lost_copy_line — failed (1 FAIL line(s)); expected 'FAIL doubled' with 'T4P.dup'
+            got: FAIL accounting T4P.dup is listed with modules=2 and 1 COPY line(s) were read
+            got: COUNTS doubled=1 generated=0 generated-axioms-differ=0 modules=2273 package-modules=3 package-constants=25 other-constants=204731
+    ok    lost_totals_line — failed (1 FAIL line(s))
+            FAIL accounting TOTALS printed 0 time(s), not once
+==> dupnames self-test: FAIL — 8 of 15 control(s) did not behave as designed.
+    The gate cannot be trusted until every one of these behaves. Never tune a control until it agrees.
+    every control's output: build/gate/dupnames-self-test/20261006T084147Z-2683584.log

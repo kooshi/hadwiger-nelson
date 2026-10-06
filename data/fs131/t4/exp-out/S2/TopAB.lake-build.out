@@ -1,0 +1,12 @@
+exit 0
+Build completed successfully (6 jobs).
+info: T4Exp/S2/TopAB.lean:10:0: 'T4.S2.down' depends on axioms: [sorryAx]
+info: T4Exp/S2/TopAB.lean:5:0: PROBE T4.S2.dup ATTRIBUTED-TO T4Exp.S2.A
+info: T4Exp/S2/TopAB.lean:5:0: PROBE T4.S2.dup AXIOMS-OF-HELD-VALUE []
+info: T4Exp/S2/TopAB.lean:5:0: PROBE T4.S2.dup AXIOMS-PRINTED [sorryAx]
+info: T4Exp/S2/TopAB.lean:5:0: PROBE T4.S2.dup DECLARED-BY T4Exp.S2.A kind=theorem uses=[Eq, Nat, instAddNat, instHAdd, instOfNatNat, sorryAx, Bool.false, HAdd.hAdd, Lean.Name, OfNat.ofNat, Lean.Name.anonymous, Lean.Name.num, Lean.Name.str]
+info: T4Exp/S2/TopAB.lean:5:0: PROBE T4.S2.dup DECLARED-BY T4Exp.S2.B kind=theorem uses=[T4.S2.markB]
+info: T4Exp/S2/TopAB.lean:5:0: PROBE T4.S2.dup ENV-HOLDS kind=theorem uses=[T4.S2.markB] copy-of=[T4Exp.S2.B]
+warning: T4Exp/S2/A.lean:5:8: declaration uses `sorry`
+ℹ Built T4Exp.S2.TopAB
+⚠ Replayed T4Exp.S2.A

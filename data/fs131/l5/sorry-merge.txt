@@ -1,0 +1,5 @@
+Proofs/HadwigerNelson/Packed.lean:266:built by hand needs a proof that it is in range — a `sorry` waiting to be written into a definition. -/
+Proofs/HadwigerNelson/Plane/Cover.lean:33:partial colouring, and `AeColouring 9` is inhabited sorry-free. Its tightness and saturation are FS111-W-SQ9's content
+Proofs/HadwigerNelson/Plane/CoverExamples.lean:13:**FS111-M3-FIXCONV**. Plan: `plans/FS131-w2-kernel-plan.md` §§ 4, 7. Every object is defined by formula, sorry-free; the rows'
+Proofs/HadwigerNelson/Plane/CoverExamples.lean:6541:/-- `fatZ` is closed (spec, sorry-free). -/
+Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:347:/-- **The away bend with the tangent bend, in collar form** (FS112-N2-AWAY and N2-TAN; wave 4's `bend_away`, `sorry` on `fs131-w4ba`,

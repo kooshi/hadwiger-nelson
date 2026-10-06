@@ -1,0 +1,13 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Plane.ArcMap.disc1_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_three_le_coloursAt_square' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.closedSquare_subset_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_three_le_multicolour_square' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsRegOf.subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsRegOf.isPreconnected' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.unitPairsNull_of_dist_ne_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsRegOf.chain_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsRegOf.dist_lt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.bv_l3' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

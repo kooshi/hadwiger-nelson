@@ -1,0 +1,9 @@
+0. the staged merge (tree 4905fc1203): exit 0 -> PASS as it must
+3, 4. not applicable: THEIRS added no record to scripts/Axioms.lean
+1. scripts/vacuity-baseline.txt (THEIRS alone changed it) set to OURS' blob: exit 1 -> FAILS naming it
+     FAIL scripts/vacuity-baseline.txt: merged text is not the side it should be
+2. Proofs/HadwigerNelson/Plane/SixFragment.lean (OURS alone changed it) set to THEIRS' blob: exit 1 -> FAILS naming it
+     FAIL Proofs/HadwigerNelson/Plane/SixFragment.lean: merged text is not the side it should be
+5. ARCHITECTURE.md (both sides changed it) set to OURS' blob: exit 1 -> FAILS naming it
+     FAIL ARCHITECTURE.md: merged lines are not ours + theirs − base: {"| `Plane/ValidMap/OpenMove` | **FS-131, OPEN — the fifth move** (FS131-IO1; inventory items 382–385; derivation `plans/FS131-E6-derivation.md` § 4.2, E6-
+PLANTS OK: the unplanted merge passes and every plant fails naming its file

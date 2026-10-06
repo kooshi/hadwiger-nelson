@@ -1,0 +1,49 @@
+mutation 4: scan reports a constant count of package modules
+exit 1
+==> dupnames self-test: the scan under test is <tmp> NOT the shipped scripts/DupNames.lean
+==> dupnames-self-test: this run's full output: build/gate/dupnames-self-test/20261006T084130Z-2682365.log
+==> dupnames self-test: 15 controls over a planted library of 15 modules (data/fs131/t4/plant/)
+    FAIL  baseline — failed (1 FAIL line(s)); expected PASS;expected COUNTS package-modules=2;an unforeseen 'FAIL coverage'
+            got: FAIL coverage the scan read 3 module(s) of the package and the package has 2 source file(s): a module the root does not import was not scanned, or the scan was told the wrong root
+            got: COUNTS doubled=0 generated=0 generated-axioms-differ=0 modules=2272 package-modules=3 package-constants=24 other-constants=204731
+    ok    doubled_theorem — failed (1 FAIL line(s))
+            FAIL doubled T4P.dup is declared by 2 modules (types=same axioms=same): T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[] | T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+    ok    doubled_axioms_differ — failed (1 FAIL line(s))
+            FAIL doubled T4P.dup_ax is declared by 2 modules (types=same axioms=differ): T4Plant.AxA kind=theorem held=false attributed=true package=true axioms=[T4P.planted_ax] | T4Plant.AxB kind=theorem held=true attributed=false package=tr
+    ok    doubled_axiom_theorem — failed (1 FAIL line(s))
+            FAIL doubled T4P.dup_kind is declared by 2 modules (types=same axioms=differ): T4Plant.KindA kind=axiom held=false attributed=true package=true axioms=[T4P.dup_kind] | T4Plant.KindB kind=theorem held=true attributed=false package=
+    ok    doubled_prop_instance — failed (1 FAIL line(s))
+            FAIL doubled T4P.instNonemptyTok is declared by 2 modules (types=same axioms=same): T4Plant.InstA kind=theorem held=false attributed=true package=true axioms=[] | T4Plant.InstB kind=theorem held=true attributed=false package=true 
+    FAIL  shared_with_dependency — failed (2 FAIL line(s)); an unforeseen 'FAIL coverage'
+            got: FAIL coverage the scan read 3 module(s) of the package and the package has 1 source file(s): a module the root does not import was not scanned, or the scan was told the wrong root
+            got: FAIL doubled T4P.shared is declared by 2 modules (types=same axioms=same): T4Dep.X kind=theorem held=false attributed=true package=false axioms=[] | T4Plant.Shared kind=theorem held=true attributed=false package=true axioms=[]
+            got: COUNTS doubled=1 generated=0 generated-axioms-differ=0 modules=2272 package-modules=3 package-constants=1 other-constants=204733
+    ok    generated_only — passed
+    FAIL  generated_beside_doubled — failed (2 FAIL line(s)); an unforeseen 'FAIL coverage'
+            got: FAIL coverage the scan read 3 module(s) of the package and the package has 5 source file(s): a module the root does not import was not scanned, or the scan was told the wrong root
+            got: FAIL doubled T4P.dup is declared by 2 modules (types=same axioms=same): T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[] | T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+            got: COUNTS doubled=1 generated=3 generated-axioms-differ=0 modules=2275 package-modules=3 package-constants=39 other-constants=204731
+    FAIL  dependencies_only_pair — failed (1 FAIL line(s)); expected PASS;an unforeseen 'FAIL coverage'
+            got: FAIL coverage the scan read 3 module(s) of the package and the package has 2 source file(s): a module the root does not import was not scanned, or the scan was told the wrong root
+            got: COUNTS doubled=0 generated=0 generated-axioms-differ=0 modules=2274 package-modules=3 package-constants=24 other-constants=204734
+    FAIL  module_not_imported — passed; expected 'FAIL coverage' with 'read 2 module(s)'
+            got: COUNTS doubled=0 generated=0 generated-axioms-differ=0 modules=2272 package-modules=3 package-constants=24 other-constants=204731
+    ok    scan_reads_nothing — did not elaborate
+            <tmp> error: DupNames.scan: no imported module lies under [NoSuchRoot]; nothing was scanned
+    ok    scan_cut_short — failed (2 FAIL line(s))
+            FAIL banners === END === printed 0 time(s), not once: the scan did not run to its end
+            FAIL doubled T4P.dup is declared by 2 modules (types=same axioms=same): T4Plant.DupA kind=theorem held=false attributed=true package=true axioms=[] | T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+    ok    lost_doubled_line — failed (3 FAIL line(s))
+            FAIL accounting a COPY line for T4P.dup, which no DOUBLED or GENERATED line names
+            FAIL accounting a COPY line for T4P.dup, which no DOUBLED or GENERATED line names
+            FAIL accounting TOTALS reads doubled=1 generated=0 generated-axioms-differ=0 and the lines read give 0, 0, 0
+    ok    lost_copy_line — failed (2 FAIL line(s))
+            FAIL accounting T4P.dup is listed with modules=2 and 1 COPY line(s) were read
+            FAIL doubled T4P.dup is declared by 2 modules (types=same axioms=same): T4Plant.DupB kind=theorem held=true attributed=false package=true axioms=[]
+    FAIL  lost_totals_line — failed (2 FAIL line(s)); an unforeseen 'FAIL coverage'
+            got: FAIL coverage the scan read 3 module(s) of the package and the package has 2 source file(s): a module the root does not import was not scanned, or the scan was told the wrong root
+            got: FAIL accounting TOTALS printed 0 time(s), not once
+            got: COUNTS doubled=0 generated=0 generated-axioms-differ=0 modules=2272 package-modules=3 package-constants=24 other-constants=204731
+==> dupnames self-test: FAIL — 6 of 15 control(s) did not behave as designed.
+    The gate cannot be trusted until every one of these behaves. Never tune a control until it agrees.
+    every control's output: build/gate/dupnames-self-test/20261006T084130Z-2682365.log

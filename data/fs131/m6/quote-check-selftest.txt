@@ -1,0 +1,11 @@
+MISMATCH  CLAUDE.md  «xo not consider Lean formalization a cost. It's practically mechanical»
+verbatim  FS131-close-inventory.md  «389. **Rulings on IL2's held items, and its slot.** (a) **`badCount_lt»
+verbatim  FS131-close-inventory.md  «388. **FS131-IL2 done: the limit's lane A is complete** (harness ≈ 525»
+verbatim  FS131-close-inventory.md  «386. **FS131-M5 done: `main` merged into `fs131-w5`** (harness ≈ 368k »
+verbatim  FS131-close-inventory.md  «355. **FS131-I5n handed back** (Stage 42 SAVED, harness ≈ 429k by the »
+verbatim  FS131-close-inventory.md  «340. **FS131-I5k handed back: FS112-N3-END is held** (Stage 34 SAVED, »
+verbatim  FS131-close-inventory.md  «373. **FS131-KL1 done: the limit constructions planned** (planner; sta»
+verbatim  Terminal.lean  «theorem run_hornBoundsQR {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ}»
+verbatim  Terminal.lean  «theorem stuckRun_ne_univ {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ}»
+9 quotations, 1 failures
+SELF-TEST: FIRED (good)

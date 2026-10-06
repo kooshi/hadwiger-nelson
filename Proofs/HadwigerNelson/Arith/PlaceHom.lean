@@ -219,7 +219,7 @@ theorem placeHom_base (F : Subfield ℝ) [NumberField F] {𝔭 : Ideal (𝓞 F)}
 /-- **PLACE-HOM's step**: a place-hom pair over `E₀` extends over `E₀(s)`, `s` transcendental over `E₀` — `V₁` the elements of
 `E₀(s)` regular at `s = 0` whose value there is in `V₀`, `φ₁ = φ₀ ∘ evalZero` (through `adjoinTranscendentalEquiv`); unit vectors
 of `E₀(s)²` are regular at `0` (`mem_valuationSubring_of_sq_add_sq_eq_one` at `zeroPlace`) and evaluate to unit vectors of `E₀²`. -/
-theorem placeHom_step (F : Subfield ℝ) [NumberField F] {𝔭 : Ideal (𝓞 F)} {E₀ : Subfield ℝ} {V₀ : Subring ℝ}
+theorem placeHom_step (F : Subfield ℝ) {𝔭 : Ideal (𝓞 F)} {E₀ : Subfield ℝ} {V₀ : Subring ℝ}
     {φ₀ : V₀ →+* (𝓞 F ⧸ 𝔭)} (h₀ : IsPlaceHom F 𝔭 E₀ V₀ φ₀) {s : ℝ} (hs : Transcendental E₀ s) :
     ∃ (V₁ : Subring ℝ) (φ₁ : V₁ →+* (𝓞 F ⧸ 𝔭)), IsPlaceHom F 𝔭 (adjoinTranscendental E₀ s) V₁ φ₁ := by
   classical

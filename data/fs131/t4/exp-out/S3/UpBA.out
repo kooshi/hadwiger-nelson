@@ -1,0 +1,8 @@
+exit 1
+T4Exp/S3/UpBA.lean:7:8: error: `T4.S3.dup` has already been declared
+PROBE T4.S3.dup DECLARED-BY T4Exp.S3.B kind=theorem uses=[T4.S3.markB]
+PROBE T4.S3.dup ENV-HOLDS kind=theorem uses=[T4.S3.markB] copy-of=[T4Exp.S3.B]
+PROBE T4.S3.dup ATTRIBUTED-TO T4Exp.S3.B
+PROBE T4.S3.dup AXIOMS-PRINTED []
+PROBE T4.S3.dup AXIOMS-OF-HELD-VALUE []
+LOCALS [T4.S3.axA]

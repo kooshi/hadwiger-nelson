@@ -1,0 +1,32 @@
+import Mathlib
+/-! FS131-I5: the Mathlib names KB's base plan (§ 4) and this job's proofs rely on, confirmed at the pin. Not part of the library. -/
+open SimpleGraph in
+#check @SimpleGraph.sum_degrees_eq_twice_card_edges
+#check @SimpleGraph.even_card_odd_degree_vertices
+#check @IsPreconnected.prod
+#check @IsPreconnected.image
+#check @IsPreconnected.Icc_subset
+#check @closure_prod_eq
+#check @Metric.mem_closure_iff
+#check @Metric.closedBall_subset_closedBall
+#check @isClosed_le
+#check @connectedComponentIn
+#check @IsOpen.connectedComponentIn
+#check @isPreconnected_connectedComponentIn
+#check @IsPreconnected.subset_connectedComponentIn
+#check @Bornology.IsBounded
+#check @IsCompact.isBounded
+#check @Metric.isBounded_iff_subset_closedBall
+#check @convexHull
+#check @Convex.isPreconnected
+#check @IsCompact.elim_finite_subcover
+#check @isCompact_closedBall
+#check @isCompact_sphere
+#check @Set.Finite.subset
+#check @Finset.card_union_add_card_inter
+#check @Finset.card_sdiff_add_card_inter
+#check @Finset.eq_of_subset_of_card_le
+#check @Finset.card_image_of_injective
+#check @Finset.card_compl
+#check @ENat.card_eq_top_of_infinite
+#check @IsClosed.frontier_eq

@@ -146,6 +146,10 @@ the `.olean` would. Settle every hand-written module before starting a long gene
   `decide (…)`, an iff versus an implication) first. **And Mathlib is not the whole library:** `grep -rn "<name-fragment>" $(lean
   --print-prefix)/src/lean/` searches core. Grep the source before writing a proof, and before writing that something is missing. Grep
   Mathlib by the statement's shape at the skeleton.
+- **Never state one lemma under one name in two modules that do not import each other** — on two branches least of all. It is not
+  a loud failure at the join: the two theorems merge in silence and the axiom audit then reads one copy while the kernel holds the
+  other (§ The gate, `scripts/dupnames.sh`). A line that needs another line's lemma before they meet takes it as a hypothesis, or
+  states it under a name of its own and says so in its report; the join then makes one declaration.
 
 ## The package
 
@@ -159,7 +163,7 @@ invoked. `lake update` and Mathlib bumps go alone in a labeled commit (they move
 
 ## The gate
 
-Elaboration is the floor: the build green, zero `sorry`, `#print axioms` clean on the public surface (`scripts/axioms.sh`), and `./scripts/axioms.sh --self-test` green (23 planted faults, each watched to fire, two of them partners that must pass), linters
+Elaboration is the floor: the build green, zero `sorry`, `#print axioms` clean on the public surface (`scripts/axioms.sh`), no name declared by two modules (`scripts/dupnames.sh`, run before the audit, whose prints are faithful only then), and `./scripts/axioms.sh --self-test` green (23 planted faults, each watched to fire, two of them partners that must pass), linters
 silent, spec examples passing. On top of that, the statement-level gate, because a formalization that proves the *wrong* theorem is
 the characteristic failure here:
 
@@ -197,6 +201,25 @@ the characteristic failure here:
   plane; a stuck vertex in a terminal plane map), the docstring says so, names the question, and names an object satisfying the local hypotheses at
   once together with the hypothesis it fails.
 - Every definition has a `#eval`/`example` that would fail if it drifted.
+- **`./scripts/dupnames.sh` and `./scripts/dupnames.sh --self-test` are green** — no name is declared by two modules. Two modules,
+  neither importing the other, that each declare a theorem of one name and type build in silence: at import Lean accepts the second
+  constant when both are theorems of one type (up to bound-variable names), a theorem and an axiom of one type, or two axioms of one
+  proposition (`Lean/Environment.lean`, `subsumesInfo`, v4.32.0), and refuses only otherwise (two definitions, even identical; types
+  that differ). The build sees a doubled name only when one module is upstream of the other — and not even then for an anonymous
+  instance, which gets a fresh name. **Measured** (`data/fs131/t4/experiment-table.md`): the environment then holds the proof of the
+  module imported **last**, and `#print axioms` reads the axiom list stored by the module imported **first**
+  (`Lean/Util/CollectAxioms.lean`: one list per declaration, written with each `.olean`) — never the same copy. So the axiom audit
+  can print a record clean while the proof the environment holds rests on `sorry`, on an axiom or on a native purchase, and an
+  `axiom` shadowed by a theorem of its name is absent from `libraryAxioms`. The print of an imported theorem is the list stored when
+  its own module was compiled, whatever else is imported. No statement gains a proof it lacks — a clean list belongs to a copy that
+  is a clean proof of the same type (an argument, one mind; no experiment can show it) — what is lost is the audit's faithfulness to
+  the proof the environment holds. With no name declared twice, every module saw one copy of each name, so each stored list is the
+  list of the proof the kernel checked. The scan reads each module's own compiled constants (`scripts/DupNames.lean`), so it sees
+  what no scan of the source can: a `Prop`-valued instance is a theorem to the kernel, and two siblings' `instance : C T` merge in
+  silence under one generated name. One class is counted and listed without failing: theorems Lean generates on demand in whichever
+  module asks (`f.eq_1`, `f.congr_simp`; reserved names, which no author can declare) — failing only if their copies' axioms differ.
+  `--self-test` plants fifteen controls in a scratch library (`scripts/dupnames-controls.txt`). **A join of two lines runs it on the
+  joined tree, before the axiom audit**: the join makes the doubled name, and neither line's own gate can see it.
 - The Moser spindle's non-3-colourability is proved **twice** — by `decide` and through the SAT bridge — so the CNF encoding is
   checked against an independent oracle.
 - The final statement is read against Mathlib's `SimpleGraph.chromaticNumber` and the informal claim, out loud, before it is believed.

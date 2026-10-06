@@ -1,0 +1,8 @@
+unplanted: PASS
+plant — a token of the proof changed: FIRED  ["exists_arcStep's proof is not the compiled lines (BEGIN..END, `bend_away_part` for the stand-in)"]
+plant — a token of W5's proof changed: FIRED  ['W5 (`IsMaxRingArc.meet`, docstring and proof) is not in Procedure.lean byte for byte as compiled']
+plant — the statement changed (the withdrawn degree clause back): FIRED  ['the statement of exists_arcStep is not the one the proof was compiled against']
+plant — a sorry in a proof: FIRED  ["exists_arcStep's proof is not the compiled lines (BEGIN..END, `bend_away_part` for the stand-in)"]
+plant — the import dropped: FIRED  ['the import of ArcStep occurs 0 times']
+plant — the docstring's inhabitant note dropped: FIRED  ["exists_arcStep's docstring is not the report's (with the inhabitant note)"]
+SELF-TEST: every plant fired, the unplanted run passed

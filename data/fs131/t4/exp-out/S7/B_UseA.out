@@ -1,0 +1,8 @@
+exit 0
+PROBE T4.S7.dup DECLARED-BY T4Exp.S7.B kind=theorem uses=[T4.S7.markB]
+PROBE T4.S7.dup DECLARED-BY T4Exp.S7.A kind=theorem uses=[Eq, Nat, instAddNat, instDecidableEqNat, instHAdd, instOfNatNat, of_decide_eq_true, HAdd.hAdd, OfNat.ofNat, T4.S7.dup._native.native_decide.ax_1_1]
+PROBE T4.S7.dup ENV-HOLDS kind=theorem uses=[Eq, Nat, instAddNat, instDecidableEqNat, instHAdd, instOfNatNat, of_decide_eq_true, HAdd.hAdd, OfNat.ofNat, T4.S7.dup._native.native_decide.ax_1_1] copy-of=[T4Exp.S7.A]
+PROBE T4.S7.dup ATTRIBUTED-TO T4Exp.S7.B
+PROBE T4.S7.dup AXIOMS-PRINTED []
+PROBE T4.S7.dup AXIOMS-OF-HELD-VALUE [T4.S7.dup._native.native_decide.ax_1_1]
+'T4.S7.useA' depends on axioms: [T4.S7.dup._native.native_decide.ax_1_1]

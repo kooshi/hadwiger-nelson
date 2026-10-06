@@ -1,0 +1,6 @@
+unplanted: exit 0  (quotations=16 mismatches=0)
+plant 1 (a changed character in quotation 1): exit 1, quotations=16 mismatches=1 -> refused
+plant 2 (a wrong source for the last quotation): exit 1, quotations=16 mismatches=1 -> refused
+plant 3 (an empty quotation): exit 1, quotations=16 mismatches=1 -> refused
+plant 4 (no quotation at all): exit 2 -> refused
+SELF-TEST OK: every plant refused

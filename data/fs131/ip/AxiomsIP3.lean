@@ -1,0 +1,41 @@
+import Proofs
+
+set_option pp.fullNames true
+
+#print axioms HadwigerNelson.Plane.line_eq_span
+#print axioms HadwigerNelson.Plane.line_inter_sphere_two
+#print axioms HadwigerNelson.Plane.IsCurve.eq_of_three
+#print axioms HadwigerNelson.Plane.IsCurve.three_mem_ball
+#print axioms HadwigerNelson.Plane.IsCurve.eq_of_inter_ball_subset
+#print axioms HadwigerNelson.Plane.line_param_inj
+#print axioms HadwigerNelson.Plane.circle_param_injOn
+#print axioms HadwigerNelson.Plane.IsCurve.exists_param
+#print axioms HadwigerNelson.Plane.star_local_ray
+#print axioms HadwigerNelson.Plane.HasCurveStar.isRegularAt
+#print axioms HadwigerNelson.Plane.finite_nonRegular
+#print axioms HadwigerNelson.Plane.isOpen_setOf_agree
+#print axioms HadwigerNelson.Plane.port_pair
+#print axioms HadwigerNelson.Plane.even_sum_deg
+#print axioms HadwigerNelson.Plane.exists_finset_even_sum_deg
+#print axioms HadwigerNelson.Plane.isCurve_curveAt
+#print axioms HadwigerNelson.Plane.e_arg_mul_e
+#print axioms HadwigerNelson.Plane.branchPt_congr
+#print axioms HadwigerNelson.Plane.exists_curveGerm_eq
+#print axioms HadwigerNelson.Plane.branch_locally_curve
+#print axioms HadwigerNelson.Plane.hasCurveStar_of_branch
+#print axioms HadwigerNelson.Plane.HasCurveStar.connectedComponentIn
+#print axioms HadwigerNelson.Plane.IsCurve.exists_two_mem_sphere
+#print axioms HadwigerNelson.Plane.not_isRegularAt_of_hasCurveStar_one
+#print axioms HadwigerNelson.Plane.halfLine_hasCurveStar
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.col_eq_of_mem_sector
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.col_mem_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.hasRepeatedColour_of_col_eq
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.eq_two
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.inter_closure_two
+#print axioms HadwigerNelson.Plane.ArcMap.hasCurveStar_of_branches
+#print axioms HadwigerNelson.Plane.ArcMap.fin_two_eq_of_ne
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_subset_of_mem_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.exists_inner_branch
+#print axioms HadwigerNelson.Plane.ArcMap.exists_far_end
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.endpoint_of_far_end
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.exists_endpoint

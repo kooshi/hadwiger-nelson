@@ -1,0 +1,8 @@
+exit 0
+PROBE T4.S4.dup DECLARED-BY T4Exp.S4.B kind=theorem uses=[T4.S4.markB]
+PROBE T4.S4.dup DECLARED-BY T4Exp.S4.A kind=axiom uses=[]
+PROBE T4.S4.dup ENV-HOLDS kind=theorem uses=[T4.S4.markB] copy-of=[T4Exp.S4.B]
+PROBE T4.S4.dup ATTRIBUTED-TO T4Exp.S4.B
+PROBE T4.S4.dup AXIOMS-PRINTED []
+PROBE T4.S4.dup AXIOMS-OF-HELD-VALUE []
+'T4.S4.useB' does not depend on any axioms

@@ -564,7 +564,9 @@ theorem finite_bad_radii {K : Set ℝ} (hK : K.Finite) :
 /-- **FS106-WO, the step-4 lemma** (`[Woodall1973]` p. 198, as repaired: length **strictly** above `2π/3`): if, on one side `s` of `ω(u)`,
 every angle of an open arc of length `> 2π/3` carries a collar inside `closure (A ∪ B)` — `A`, `B` open with no unit pair in either — then
 `False`. (A collar about each angle is Woodall's "unit arc of positive thickness" with its thickness `f(θ)` locally bounded away from the
-circle.) -/
+circle.)
+A refutation step: no model of the hypotheses is expected. The chain it serves has its background inhabited at seven colours by
+`sevenBrickMap_woodallModel` (`Plane/Woodall/Steps`); `not_woodall_step4_two_thirds` is the collars' control. -/
 theorem woodall_step4 {A B : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1)
     (hBu : ∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) {u : ℂ} (s : Rim) {θ₁ θ₂ : ℝ} (hlen : 2 * π / 3 < θ₂ - θ₁)
     (hW : ∀ θ ∈ Ioo θ₁ θ₂, CollarAt (closure (A ∪ B)) u s θ) : False := by
@@ -738,7 +740,9 @@ theorem not_woodall_step4_two_thirds :
 /-- **FS106-TW, Townsend's `π/3` lemma** (`[Townsend1979ms]` Thm 1, = `[Townsend1981]`'s lemma, in the form its proof reads): `A`, `B` open with
 no unit pair in either; every angle off a finite set `K` of cut angles (and their `2π`-translates) carries a collar, on one side or the other of
 `ω(u)`, inside `closure (A ∪ B)`; and one side carries collars about every angle of a closed arc of length `> π/3` (the seed: Townsend's "segment
-of length greater than ⅓π containing no cut points"). Then `False`. -/
+of length greater than ⅓π containing no cut points"). Then `False`.
+A refutation step: no model of the hypotheses is expected. The chain it serves has its background inhabited at seven colours by
+`sevenBrickMap_woodallModel` (`Plane/Woodall/Steps`); `not_woodall_step4_two_thirds` is the collars' control. -/
 theorem townsend_lemma {A B : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1)
     (hBu : ∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) {u : ℂ} {K : Set ℝ} (hK : K.Finite)
     (hcollar : ∀ θ : ℝ, (∀ κ ∈ K, ∀ m : ℤ, θ ≠ κ + 2 * π * m) → ∃ s, CollarAt (closure (A ∪ B)) u s θ)

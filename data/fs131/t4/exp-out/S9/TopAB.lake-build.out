@@ -1,0 +1,10 @@
+exit 0
+Build completed successfully (6 jobs).
+info: T4Exp/S9/TopAB.lean:10:0: 'T4.S9.down' does not depend on any axioms
+info: T4Exp/S9/TopAB.lean:5:0: PROBE T4.S9.instNonemptyTok ATTRIBUTED-TO T4Exp.S9.A
+info: T4Exp/S9/TopAB.lean:5:0: PROBE T4.S9.instNonemptyTok AXIOMS-OF-HELD-VALUE []
+info: T4Exp/S9/TopAB.lean:5:0: PROBE T4.S9.instNonemptyTok AXIOMS-PRINTED []
+info: T4Exp/S9/TopAB.lean:5:0: PROBE T4.S9.instNonemptyTok DECLARED-BY T4Exp.S9.A kind=theorem uses=[Nonempty.intro, T4.Tok, T4.Tok.a]
+info: T4Exp/S9/TopAB.lean:5:0: PROBE T4.S9.instNonemptyTok DECLARED-BY T4Exp.S9.B kind=theorem uses=[Nonempty.intro, T4.Tok, T4.Tok.b]
+info: T4Exp/S9/TopAB.lean:5:0: PROBE T4.S9.instNonemptyTok ENV-HOLDS kind=theorem uses=[Nonempty.intro, T4.Tok, T4.Tok.b] copy-of=[T4Exp.S9.B]
+ℹ Built T4Exp.S9.TopAB

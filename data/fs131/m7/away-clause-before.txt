@@ -1,0 +1,4 @@
+DIFFER at clause 18 of 18/18:
+  bend_away_part: (∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) → P + 2 * e θ ∈ closure (F.region c))
+  of_away hM:     (∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) → ∃ a b, a < b ∧ θ ∈ Icc a b ∧ Icc a b ⊆ F.r2Contacts P θ₁ θ₂ c)
+RESULT: FAIL

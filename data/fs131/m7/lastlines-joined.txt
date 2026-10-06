@@ -1,0 +1,2 @@
+'HadwigerNelson.Plane.ArcMap.IsMaxRingArc.meet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_arcStep'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

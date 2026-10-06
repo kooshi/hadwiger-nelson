@@ -1,0 +1,13 @@
+MISMATCH  CLAUDE.md  «xo not consider Lean formalization a cost. It's practically mechanical»
+verbatim  Limit.lean  «structure LocalSeq (k : ℕ) where»
+verbatim  Limit.lean  «theorem frozen {K : Set ℂ} (hK : IsCompact K) (hKd : K ⊆ (S.F 0).dom) »
+verbatim  Limit.lean  «theorem limit_isModification (h : ∀ n, (S.F 0).IsModification (S.F n))»
+verbatim  FS131-limit-kernel-plan.md  «**What to prove** (the open children, § 3.1's routes; order cheapest r»
+verbatim  FS131-limit-kernel-plan.md  «**What it may change**: add children anywhere in `Limit`, `Procedure`,»
+verbatim  FS131-limit-kernel-plan.md  «`Limit`: `frozen` and its five consumers — one session; the locality l»
+verbatim  FS131-close-inventory.md  «371. **FS131-KL1 (the limit planner), by message: N4-TERM's count does»
+verbatim  FS131-close-inventory.md  «372. **Rulings on item 371.** (a) **`ArcMap.clean` accepted** as the p»
+verbatim  FS131-close-inventory.md  «373. **FS131-KL1 done: the limit constructions planned** (planner; sta»
+verbatim  FS131-close-inventory.md  «374. **Rulings on KL1's held items, and its slot.** (a) **The moves' n»
+11 quotations, 1 failures
+SELF-TEST: FIRED (good)

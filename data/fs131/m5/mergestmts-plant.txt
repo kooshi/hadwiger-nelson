@@ -1,0 +1,10 @@
+planted: AeColouring.exists_fill
+MISMATCH AeColouring.exists_fill: merged {"(c : AeColouring k) {j : Fin k} {x : ℂ} {η : ℝ} (hx : x ∈ essClosure (c.cls j)) (hη : 0 < η) (hfree : volume (densitySet (c.cls j) ∩ unitAnnulus x η) = 0) : ∃ c' : AeColouring k, c'.col = c.fillCol x (η / 2) j PLANTED": 1} expected {"(c : AeColouring k) {j : Fin k} {x : ℂ} {η : ℝ} (hx : x ∈ essClosure (c.cls j)) (hη : 0 < η) (hfree : volume (densitySet (c.cls j) ∩ unitAnnulus x η) = 0) : ∃ c' : AeColouring k, c'.col = c.fillCol x (η / 2) j": 1}
+MISMATCH N_add_eq_fromFrame: merged {} expected {'(v : ℂ) (α t x : ℝ) : v + e (α + π / 2) + (t : ℂ) * e (α - π / 2 + x) = fromFrame v α (t * Real.sin x) (1 - t * Real.cos x)': 1}
+CONFLICT coloursAt_subset_of_mem_interiorPts: both sides changed its statements
+MISMATCH e_mul_e_neg: merged {'(θ : ℝ) : e θ * e (-θ) = 1': 2} expected {'(θ : ℝ) : e θ * e (-θ) = 1': 1}
+MISMATCH n3_end: merged {'(hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v : ℂ} {α κ₂ : ℝ} {c : Fin k} (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α (-1) κ₂ c) : (4 ≤ (F.coloursAt (v - e (α + π / 2))).ncard ∧ F.HasRepeatedColour (v - e (α + π / 2)) ∧ ∃ θ₁ θ₂, F.BothKind (v - 2 * e (α + π / 2)) θ₁ θ₂) ∨ ∃ g, F.IsFlankAbove v α κ₂ g ∧ F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2)) ∧ κ₂ = 1 ∧ ∀ κ₃ κ₄, F.IsHorn v (α + π) κ₃ κ₄ c → κ₃ = -1': 1} expected {}
+MISMATCH next_injective: merged {} expected {': Function.Injective (next : Fin n → Fin n)': 1}
+MISMATCH unitPairsNull_of_dist_ne_one: merged {} expected {'{W : Set ℂ} (hne : ∀ x ∈ W, ∀ y ∈ W, dist x y ≠ 1) : UnitPairsNull W': 1}
+7126 names; bases 111830c8; renames [('framePt', 'fromFrame')]; 7 mismatches/conflicts, 0 base conflicts
+FAIL

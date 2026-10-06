@@ -1,0 +1,19 @@
+theorem bend_away_part (hF : F.Valid) (hP : F.IsPlaneMap) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
+    (hA : F.IsRingArc P θ₁ θ₂ c c') (hin : c ∉ F.coloursAt P)
+    (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1) {ε : ℝ} (hε : 0 < ε) :
+    ∃ (M : ArcMap k) (h : ℂ ≃ₜ ℂ) (K : Set ℂ), M.Valid ∧ IsCompact K ∧ K ⊆ thickening ε (ringArc P θ₁ θ₂) ∧
+      F.Γ ∩ K ⊆ ringArc P θ₁ θ₂ ∧ LocalStep F M K ∧
+      (∀ z ∉ K, h z = z) ∧ (∀ z ∈ K, h z ∈ K) ∧
+      (∀ z ∈ F.Γ, z ∉ ringPt P '' Ioo θ₁ θ₂ → h z = z) ∧
+      (∀ z, (h z ∈ M.interiorPts ↔ z ∈ F.interiorPts) ∧ (z ∈ F.interiorPts → M.col (h z) = F.col z)) ∧
+      (∀ z, M.coloursAt (h z) = F.coloursAt z) ∧
+      (∀ z n, M.HasDegree (h z) n ↔ F.HasDegree z n) ∧
+      (∀ z, M.HasRepeatedColour (h z) ↔ F.HasRepeatedColour z) ∧
+      (∀ z j, M.HasHornCount (h z) j ↔ F.HasHornCount z j) ∧
+      M.RingArcsWithin F ∧
+      (∀ Q a b d d', M.IsRingArc Q a b d d' → F.IsRingArc Q a b d d') ∧
+      (∀ Q a b d d', F.IsRingArc Q a b d d' → Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂) →
+        M.IsRingArc Q a b d d') ∧
+      (∀ θ ∈ Ioo θ₁ θ₂, h (ringPt P θ) = ringPt P θ ∨ ringPt P θ ∈ M.region c) ∧
+      (∀ θ ∈ Ioo θ₁ θ₂, M.OnRingArc P (ringPt P θ) →
+        ∃ a b, a < b ∧ θ ∈ Icc a b ∧ Icc a b ⊆ F.r2Contacts P θ₁ θ₂ c) := by

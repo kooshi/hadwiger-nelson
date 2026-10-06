@@ -1,0 +1,7 @@
+records 48 (print commands 48): standard-three-or-fewer 45, through sorryAx 3, other 0
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.bend_away_gap
+  HadwigerNelson.Plane.ArcMap.bend_away_part
+  HadwigerNelson.Plane.ArcMap.bend_away_subdiv
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.bend_away_part
+FAIL

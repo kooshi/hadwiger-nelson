@@ -1,0 +1,154 @@
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres is not the base's with the ruled rewrite
+    want: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+    have: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hρ : 0 < ρ) (hρ' : 0 < ρ') (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+1795 base files, 0 new files, 1 failures
+PLANT [a ruled removal left undone (hρ, hρ' back in hasHornCount_zero_of_two_spheres)]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap is not the base's with the ruled rewrite
+    want: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+    have: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ : |κ₀| * r < 2) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+1795 base files, 0 new files, 1 failures
+PLANT [a ruled removal left undone (hκ back in hasHornCount_iff_of_germ_swap)]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le is not the base's with the ruled rewrite
+    want: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+    have: theorem CollarFitOut.map_hornCount_le (hF : F.Valid) (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+1795 base files, 0 new files, 1 failures
+PLANT [a ruled removal left undone (hF back in CollarFitOut.map_hornCount_le)]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap is not the base's with the ruled rewrite
+    want: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+    have: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+1795 base files, 0 new files, 1 failures
+PLANT [a second change to a ruled statement (hκ' dropped from the swap lemma too)]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le is not the base's with the ruled rewrite
+    want: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+    have: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j', hfit.map.HasHornCount x j'
+1795 base files, 0 new files, 1 failures
+PLANT [a second change to a ruled statement (the horn clause's conclusion weakened)]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_R1
+1795 base files, 0 new files, 1 failures
+PLANT [map_R1's conclusion changed]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_R1
+1795 base files, 0 new files, 1 failures
+PLANT [map_R1 gains a hypothesis]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_R2
+1795 base files, 0 new files, 1 failures
+PLANT [map_R2 loses its disjointness hypothesis]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_R2'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL MISSING Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_R2
+1795 base files, 0 new files, 1 failures
+PLANT [map_R2 renamed]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL STATEMENT Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: exists_collarFitOut
+1795 base files, 0 new files, 1 failures
+PLANT [a hypothesis dropped from a proved theorem (exists_collarFitOut)]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL CHANGED (not editable) Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean
+1795 base files, 0 new files, 1 failures
+PLANT [an edit to the toward bend's module (BendCollar)]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL CHANGED (not editable) Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean
+1795 base files, 0 new files, 1 failures
+PLANT [an edit to BendStep (its horn child keeps hF)]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL CHANGED (not editable) Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean
+1795 base files, 0 new files, 1 failures
+PLANT [an edit to the other half's module (CollarMapOut)]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL AXIOM in Proofs/Planted.lean
+1795 base files, 0 new files, 1 failures
+PLANT [an axiom in a new file]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL AXIOM in Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean
+1795 base files, 0 new files, 1 failures
+PLANT [an axiom in an editable file]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+FAIL native_decide in Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean
+1795 base files, 0 new files, 1 failures
+PLANT [native_decide in an editable file]: FIRED
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: CollarFitOut.map_hornCount_le
+    now: theorem CollarFitOut.map_hornCount_le (hfit : CollarFitOut F P θ₁ θ₂ c c' ε R' R R'') {x : ℂ} {j : ℕ} (hj : F.HasHornCount x j) : ∃ j' ≤ j, hfit.map.HasHornCount x j'
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_zero_of_two_spheres
+    now: theorem hasHornCount_zero_of_two_spheres {x q q' : ℂ} {ρ ρ' r : ℝ} (hx : x ∈ F.dom) (hr : 0 < r) (hΓ : F.Γ ∩ ball x r ⊆ sphere q ρ ∪ sphere q' ρ') (hnt : x ∈ sphere q ρ → x ∈ sphere q' ρ' → (q = q' ∧ ρ = ρ') ∨ ((x - q) * starRingEnd ℂ (x - q')).im ≠ 0) : F.HasHornCount x 0
+ruled statement change, exactly as ruled: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean: hasHornCount_iff_of_germ_swap
+    now: theorem hasHornCount_iff_of_germ_swap {M : ArcMap k} {x : ℂ} {β₀ κ₀ κ₀' r : ℝ} (hx : x ∈ F.dom) (hdom : M.dom = F.dom) (hr : 0 < r) (hκ' : |κ₀'| * r < 2) (hF : branchPt x β₀ κ₀ '' Ioo 0 r ⊆ F.Γ) (hM : (M.Γ ∩ ball x r) \ {x} = ((F.Γ ∩ ball x r) \ {x}) \ (branchPt x β₀ κ₀ '' Ioo 0 r) ∪ branchPt x β₀ κ₀' '' Ioo 0 r) (hbetween : ∀ κ, min κ₀ κ₀' ≤ κ → κ ≤ max κ₀ κ₀' → κ ≠ κ₀ → ∀ s ∈ Ioo 0 r, branchPt x β₀ κ s ∉ F.Γ) (j : ℕ) : M.HasHornCount x j ↔ F.HasHornCount x j
+1795 base files, 0 new files, 0 failures
+UNPLANTED: PASS
+16 plants

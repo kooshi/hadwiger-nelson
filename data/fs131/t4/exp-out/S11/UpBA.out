@@ -1,0 +1,8 @@
+exit 1
+T4Exp/S11/UpBA.lean:6:4: error: `T4.S11.dup` has already been declared
+PROBE T4.S11.dup DECLARED-BY T4Exp.S11.B kind=def uses=[Nat, instOfNatNat, OfNat.ofNat]
+PROBE T4.S11.dup ENV-HOLDS kind=def uses=[Nat, instOfNatNat, OfNat.ofNat] copy-of=[T4Exp.S11.B]
+PROBE T4.S11.dup ATTRIBUTED-TO T4Exp.S11.B
+PROBE T4.S11.dup AXIOMS-PRINTED []
+PROBE T4.S11.dup AXIOMS-OF-HELD-VALUE []
+LOCALS []

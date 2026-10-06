@@ -43,10 +43,7 @@ theorem HasHornCount.eq {v : ℂ} {j j' : ℕ} (hj : F.HasHornCount v j) (hj' : 
   obtain ⟨r, hr⟩ := (hj.and hj').exists
   exact_mod_cast hr.1.symm.trans hr.2
 
-/-- The degree is unique. -/
-theorem HasDegree.eq {v : ℂ} {m m' : ℕ} (hm : F.HasDegree v m) (hm' : F.HasDegree v m') : m = m' := by
-  obtain ⟨r, hr⟩ := (hm.and hm').exists
-  exact_mod_cast hr.1.symm.trans hr.2
+-- The degree is unique: `HasDegree.unique` (`Plane/ValidMap/Basic`); this file's copy `HasDegree.eq` removed by FS131-RP1.
 
 end ArcMap
 
@@ -2086,7 +2083,7 @@ theorem open_degree_horns (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (_h' 
   classical
   have hn2 := cfg.two_le
   have hn : 0 < X.n := by omega
-  have hmn : m = X.n := by rw [hm.eq X.hC.hasDegree, max_eq_left (by omega)]
+  have hmn : m = X.n := by rw [hm.unique X.hC.hasDegree, max_eq_left (by omega)]
   have hjJ : j = {i : Fin X.n | X.G.β i = X.G.nextβ i}.ncard := hj.eq (hasHornCount_chart hn)
   have hpJ : X.G.β (BranchGerms.idx s (BranchGerms.hornPos up b)) = X.G.nextβ (BranchGerms.idx s (BranchGerms.hornPos up b)) := by
     have hc := cfg.cusp

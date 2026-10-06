@@ -1,0 +1,11 @@
+0. the staged merge (tree 5383a4e251): exit 0 -> PASS as it must
+1. Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean (THEIRS alone changed it) set to OURS' blob: exit 1 -> FAILS naming it
+     FAIL Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean: merged text is not the side it should be
+2. Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean (OURS alone changed it) set to THEIRS' blob: exit 1 -> FAILS naming it
+     FAIL Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean: merged text is not the side it should be
+3. scripts/Axioms.lean with the record `#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.ringPt_notMem_map_Γ` dropped: exit 1 -> FAILS naming it
+     FAIL scripts/Axioms.lean: merged lines are not ours + theirs − base: {'#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.ringPt_notMem_map_Γ': -1} blank-slack 0
+4. scripts/Axioms.lean with that record doubled: exit 1 -> FAILS naming it
+     FAIL scripts/Axioms.lean: merged lines are not ours + theirs − base: {'#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.ringPt_notMem_map_Γ': 1} blank-slack 0
+     FAIL scripts/Axioms.lean: twice after the merge: ['#print axioms HadwigerNelson.Plane.ArcMap.CollarFitOut.ringPt_notMem_map_Γ']
+PLANTS OK: the unplanted merge passes and every plant fails naming its file

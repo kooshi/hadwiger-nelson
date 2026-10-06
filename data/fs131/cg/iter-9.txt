@@ -1,0 +1,10 @@
+Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean:545:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean:552:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean:556:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean:560:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean:566:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean:570:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean:588:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean:596:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean:628:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/RadialPush.lean:634:8: warning: declaration uses `sorry`

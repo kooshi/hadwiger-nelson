@@ -1,0 +1,7 @@
+exit 0
+PROBE T4.S11.dup DECLARED-BY T4Exp.S11.B kind=def uses=[Nat, instOfNatNat, OfNat.ofNat]
+PROBE T4.S11.dup ENV-HOLDS kind=def uses=[Nat, instOfNatNat, OfNat.ofNat] copy-of=[T4Exp.S11.B]
+PROBE T4.S11.dup ATTRIBUTED-TO T4Exp.S11.B
+PROBE T4.S11.dup AXIOMS-PRINTED []
+PROBE T4.S11.dup AXIOMS-OF-HELD-VALUE []
+'T4.S11.down' does not depend on any axioms

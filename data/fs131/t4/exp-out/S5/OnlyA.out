@@ -1,0 +1,7 @@
+exit 0
+PROBE T4.S5.dup DECLARED-BY T4Exp.S5.A kind=theorem uses=[T4.S5.markA]
+PROBE T4.S5.dup ENV-HOLDS kind=theorem uses=[T4.S5.markA] copy-of=[T4Exp.S5.A]
+PROBE T4.S5.dup ATTRIBUTED-TO T4Exp.S5.A
+PROBE T4.S5.dup AXIOMS-PRINTED []
+PROBE T4.S5.dup AXIOMS-OF-HELD-VALUE []
+'T4.S5.down' does not depend on any axioms

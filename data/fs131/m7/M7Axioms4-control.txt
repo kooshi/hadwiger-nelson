@@ -1,0 +1,11 @@
+records 33 (print commands 33): standard-three-or-fewer 28, through sorryAx 5, other 0
+THROUGH sorryAx:
+  HadwigerNelson.Plane.ArcMap.CollarFit.arcBend
+  HadwigerNelson.Plane.ArcMap.CollarFit.map_localStep
+  HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+  HadwigerNelson.Plane.ArcMap.bend_away_part
+  HadwigerNelson.Plane.ArcMap.exists_arcBend_toward
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.CollarFit.map_localStep
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs
+SORRY-UNEXPECTED HadwigerNelson.Plane.ArcMap.bend_away_part
+FAIL

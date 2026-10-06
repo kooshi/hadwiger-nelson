@@ -1300,7 +1300,10 @@ theorem pair_i (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromati
   · exact pair_i_of_transversal hF h₁ h₂ hc₁ hc₂ hx hy hxy hax hay htx
 
 /-- **FS112-N3-PAIRS** (ii), N3-II: for a unit pair `x ∈ ω(u₁)`, `y ∈ ω(u₂)` with `c′(x) = c′(y) = {a, b}` and `ω(y)` transversal
-to `ω(u₁)` at `x` (`y ≠ u₁`, `|y − u₁| ≠ 2`), `x` carries at least four colours or `y` is the centre of a both-kind unit arc. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
+to `ω(u₁)` at `x` (`y ≠ u₁`, `|y − u₁| ≠ 2`), `x` carries at least four colours or `y` is the centre of a both-kind unit arc. Inhabitant: none named for the hypotheses at once. `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`) inhabits `IsCubicTrichromatic`
+alone, on a valid map of the plane where the other hypotheses cannot hold with it: `sevenBrickMap` has no unit arc and no four-colour
+point, so this theorem's conclusion is false there (FS131-QA4 § 4.1). The set is satisfiable only on a map with a unit arc ending at a
+cubic vertex. -/
 theorem pair_ii (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromatic u₁) (_h₂ : F.IsCubicTrichromatic u₂)
     (hc₁ : F.Covers u₁ 1) (_hc₂ : F.Covers u₂ 1) (hx : dist x u₁ = 1) (_hy : dist y u₂ = 1) (hxy : dist x y = 1)
     (htr : y ≠ u₁ ∧ dist y u₁ ≠ 2) {a b : Fin k} (hab : a ≠ b) (hax : F.pseudoColours u₁ x = {a, b})
@@ -1429,7 +1432,10 @@ theorem pair_P' (hF : F.Valid) {u u' : ℂ} (_h : F.IsCubicTrichromatic u) (h' :
 /-! ## FS112-N3-FAIL -/
 
 /-- **FS112-N3-FAIL**, the place: at a cubic trichromatic `u`, the strip fails at `q ∈ ω(u)` only when `q` is a leaving centre of
-`u`. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
+`u`. Inhabitant: none named for the hypotheses at once. `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`) inhabits `IsCubicTrichromatic`
+alone, on a valid map of the plane where the other hypotheses cannot hold with it: `sevenBrickMap` has no unit arc and no four-colour
+point, so this theorem's conclusion is false there (FS131-QA4 § 4.1). The set is satisfiable only on a map with a unit arc ending at a
+cubic vertex. -/
 theorem fail_leavingCentre (hF : F.Valid) {u q : ℂ} (hu : F.IsCubicTrichromatic u) (hc : F.Covers u 1) (hq : dist q u = 1)
     (hs : ¬ F.StripHolds u q) : F.IsLeavingCentre u q := by
   have hud : u ∈ F.dom := hc (mem_closedBall_self zero_le_one)
@@ -1462,7 +1468,11 @@ theorem fail_leavingCentre (hF : F.Valid) {u q : ℂ} (hu : F.IsCubicTrichromati
 
 /-- **FS112-N3-FAIL**, the colours: where the strip fails at `q`, the colours of `c(u)` occurring inside `ω(u)` near `q` are among the
 inner colours of the arcs of `ω(q)` leaving `u`, those occurring outside among their outer colours, and each side carries at least one
-colour of `c(u)` (the row's "exactly", read as the proof's "only"; equality when one such arc leaves `u`). -/
+colour of `c(u)` (the row's "exactly", read as the proof's "only"; equality when one such arc leaves `u`).
+Inhabitant: none named for the hypotheses at once. `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`) inhabits `IsCubicTrichromatic`
+alone, on a valid map of the plane where the other hypotheses cannot hold with it: `sevenBrickMap` has no unit arc and no four-colour
+point, so this theorem's conclusion is false there (FS131-QA4 § 4.1). The set is satisfiable only on a map with a unit arc ending at a
+cubic vertex. -/
 theorem fail_colours (hF : F.Valid) {u q : ℂ} (hu : F.IsCubicTrichromatic u) (hc : F.Covers u 1) (hq : dist q u = 1)
     (hs : ¬ F.StripHolds u q) :
     (F.innerColours u q ∩ F.coloursAt u).Nonempty ∧ F.innerColours u q ∩ F.coloursAt u ⊆ F.leavingInner u q ∧

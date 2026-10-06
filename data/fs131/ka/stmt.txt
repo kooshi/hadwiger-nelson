@@ -1,0 +1,9 @@
+allowed statement change: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_part
+new declaration: Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean: bend_away_subdiv
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendAway.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/BendGap.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/CollarMapOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/HornChart.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/LensOut.lean
+new file: Proofs/HadwigerNelson/Plane/ValidMap/R2Cap.lean
+1789 base files, 6 new files, 0 failures

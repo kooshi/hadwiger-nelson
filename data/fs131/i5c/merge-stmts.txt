@@ -1,0 +1,25 @@
+0 HEAD Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean :: 7 old, 7 new, 0 added, 0 removed, 0 changed
+0 HEAD Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean :: 19 old, 19 new, 0 added, 0 removed, 0 changed
+0 HEAD Proofs/HadwigerNelson/Plane/ValidMap/Chain.lean :: 9 old, 9 new, 0 added, 0 removed, 0 changed
+0 HEAD Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean :: 5 old, 5 new, 0 added, 0 removed, 0 changed
+0 HEAD Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean :: 11 old, 11 new, 0 added, 0 removed, 0 changed
+0 HEAD Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean :: 22 old, 22 new, 0 added, 0 removed, 0 changed
+0 HEAD Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean :: 14 old, 14 new, 0 added, 0 removed, 0 changed
+0 HEAD Proofs/HadwigerNelson/Plane/LocalStructure.lean :: 189 old, 190 new, 1 added, 0 removed, 0 changed
+0 origin/fs131-w4 Proofs/HadwigerNelson/Plane/LocalStructure.lean :: 190 old, 190 new, 0 added, 0 removed, 0 changed
+1 HEAD Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean :: 45 old, 163 new, 118 added, 0 removed, 3 changed
+45 old, 163 new, 118 added, 0 removed, 3 changed
+CHANGED pair_i
+CHANGED pair_ii
+CHANGED pair_P'
+0 origin/fs131-w4 Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean :: 163 old, 163 new, 0 added, 0 removed, 0 changed
+0 HEAD Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean :: 38 old, 41 new, 3 added, 0 removed, 0 changed
+0 origin/fs131-w4 Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean :: 41 old, 41 new, 0 added, 0 removed, 0 changed
+1 HEAD Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean :: 30 old, 180 new, 150 added, 0 removed, 1 changed
+30 old, 180 new, 150 added, 0 removed, 1 changed
+CHANGED stuck_structure
+0 origin/fs131-w4 Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean :: 180 old, 180 new, 0 added, 0 removed, 0 changed
+0 HEAD Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean :: 44 old, 46 new, 2 added, 0 removed, 0 changed
+0 origin/fs131-w4 Proofs/HadwigerNelson/Plane/ValidMap/Sectors.lean :: 46 old, 46 new, 0 added, 0 removed, 0 changed
+0 HEAD Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean :: 52 old, 120 new, 68 added, 0 removed, 0 changed
+0 origin/fs131-w4 Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean :: 120 old, 120 new, 0 added, 0 removed, 0 changed

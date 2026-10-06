@@ -1,0 +1,56 @@
+planted: sorryAx on HadwigerNelson.Plane.ArcMap.exists_terminalMap; HadwigerNelson.Plane.Arc.curve_eq_of_mem dropped; HadwigerNelson.Plane.Arc.exists_params_eq_Icc doubled; HadwigerNelson.Plane.Arc.finite_pt_eq under PURCHASED; HadwigerNelson.Plane.ArcMap.exists_terminal on Quot.sound alone  (['dbl', 'drop', 'exact', 'move', 'sorry'])
+main: 6958 theorems; landing: 8330; wave (landing only): 1375 = 1309 hand-written + 66 generated with no record asked; gone (main only): 3; records in the log: 5220
+  generated, by suffix: brecOn 1, congr_simp 2, eq_1 51, eq_2 4, eq_3 1, eq_def 1, inj 2, injEq 2, sizeOf_spec 2
+  gone: HadwigerNelson.Plane.ArcMap.HasDegree.eq  (Plane.ValidMap.OpenMove)
+  gone: HadwigerNelson.Plane.ArcMap.sq_norm_eq_re_im  (Plane.ValidMap.UnitArc)
+  gone: HadwigerNelson.Plane.sq_norm_re_im  (Plane.SixFragment)
+  wave records on exactly the three: 1283
+  wave records on fewer: [Quot.sound, propext]: 12
+  wave records on fewer: [Quot.sound]: 1
+  wave records on fewer: [propext]: 7
+  wave records on none: 2
+  Plane.CurveGraph: 25
+  Plane.PlaneTopology: 24
+  Plane.ValidMap.ArcStep: 31
+  Plane.ValidMap.BaseDense: 28
+  Plane.ValidMap.BaseWalk: 96
+  Plane.ValidMap.Basic: 1
+  Plane.ValidMap.BendAway: 14
+  Plane.ValidMap.BendCollar: 41
+  Plane.ValidMap.BendGap: 47
+  Plane.ValidMap.BendStep: 12
+  Plane.ValidMap.BrickMap: 41
+  Plane.ValidMap.Chain: 9
+  Plane.ValidMap.CollarMap: 19
+  Plane.ValidMap.CollarMapOut: 19
+  Plane.ValidMap.Cor3: 13
+  Plane.ValidMap.Dense: 11
+  Plane.ValidMap.FlankUA: 28
+  Plane.ValidMap.HexRing: 51
+  Plane.ValidMap.HornChart: 8
+  Plane.ValidMap.HornShadow: 45
+  Plane.ValidMap.LensOut: 25
+  Plane.ValidMap.Limit: 94
+  Plane.ValidMap.MapGraph: 129
+  Plane.ValidMap.MapTopology: 77
+  Plane.ValidMap.Procedure: 113
+  Plane.ValidMap.Pushforward: 29
+  Plane.ValidMap.R2Cap: 21
+  Plane.ValidMap.RadialPush: 80
+  Plane.ValidMap.Terminal: 93
+  Thomassen: 81
+  head HadwigerNelson.Plane.ArcMap.exists_terminalMap: FAILS
+  head HadwigerNelson.Plane.ArcMap.exists_terminal: FAILS
+  head HadwigerNelson.Plane.ArcMap.bend_away_part: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.exists_arcStep: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.exists_red: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.LocalStep.of_cutArcs: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.CollarFit.map_localStep: exactly the standard three
+FAIL MISSING HadwigerNelson.Plane.Arc.curve_eq_of_mem (0 records; module Proofs.HadwigerNelson.Plane.ValidMap.Limit)
+FAIL DOUBLED HadwigerNelson.Plane.Arc.exists_params_eq_Icc (2 records; module Proofs.HadwigerNelson.Plane.ValidMap.Procedure)
+FAIL NOT-CLEAN-SECTION HadwigerNelson.Plane.Arc.finite_pt_eq: printed under PURCHASED
+FAIL MISSING HadwigerNelson.Plane.ArcMap.LocalSeq.limit_dom (0 records; module Proofs.HadwigerNelson.Plane.ValidMap.Limit)
+FAIL FOREIGN HadwigerNelson.Plane.ArcMap.exists_terminalMap: ['sorryAx']
+FAIL HEAD HadwigerNelson.Plane.ArcMap.exists_terminalMap: axioms ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+FAIL HEAD HadwigerNelson.Plane.ArcMap.exists_terminal: axioms ['Quot.sound']
+records: FAIL (7)

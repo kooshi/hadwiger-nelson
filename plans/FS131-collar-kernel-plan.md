@@ -1,0 +1,476 @@
+# FS-131 — the collar bend's construction: the kernel plan (de Bruijn, the planner)
+
+*Job FS131-KP2, de Bruijn (Opus 5.5), launched 2026-10-05 on branch `fs131-w5` at `ae881022` (worktree
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5`). Brief `data/fs131/briefs/FS131-KP2-collar.md` (on `main`), with
+`plans/STANDING-RULES.md`, `LEAN.md` and `RUNNING.md` § Building. No fence (inventory ruling 1). Working files `data/fs131/kp2/`; tools
+`tools/fs131_kp2_*.py`.*
+
+## Theorems this phase proved
+
+A planning job; four small children closed in the skeleton, each [kernel] on `[propext, Classical.choice, Quot.sound]`
+(`data/fs131/kp2/KP2Axioms.out`): `HadwigerNelson.Plane.push1_mid`, `HadwigerNelson.Plane.push1_of_not_mem`,
+`HadwigerNelson.Plane.tangRad_zero` (`Plane/ValidMap/RadialPush`), `HadwigerNelson.Plane.ArcMap.collarArcs_locallyFinite`
+(`Plane/ValidMap/BendCollar`). Proved with no `sorry` of their own but resting on the `pushforward` definition's sorry'd field:
+`ArcMap.pushforward_Γ`, `pushforward_mem_interiorPts_iff`, `pushforward_col_apply`, `CollarFit.pushProfiles`. **`bend_toward_collar` is
+proved over 53 named children** (20 in `RadialPush`, 7 in `Pushforward`, 26 in `BendCollar`), so it rests on `sorryAx` through them —
+not a kernel theorem yet.
+
+## Stage 1 — SAVED: the readback, the as-given build, and what this job plans
+
+### 1.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script, 2026-10-05: `tools/fs131_kp2_quotes.py` reads each quotation from the brief itself (the `> ` line above each
+`> — source:` line) and requires it verbatim in the source the brief names — the leaf at `ae881022`, KB2's record at `ae881022`, the
+inventory and `CLAUDE.md` on `main`. Result `data/fs131/kp2/quotes.txt`: **PASS, 9 of 9 verbatim**; `--self-test` changes one character in
+each quotation in turn and requires the check to fail: **9 of 9 plants fired** (`data/fs131/kp2/quotes-selftest.txt`).
+
+| # | quotation (opening words) | source | result |
+|---|---|---|---|
+| 1 | "Do not consider Lean formalization a cost. …" | `CLAUDE.md` § Counter-priors | verbatim (two sentences of Kooshi's longer quotation) |
+| 2 | "theorem bend_toward_collar (hF : F.Valid) {P : ℂ} …" | `Plane/ValidMap/BendCollar.lean` at `ae881022` | verbatim (its first line) |
+| 3 | "- **The lens boundary `β`**: `C_A`, `C_B`, …" | `plans/FS131-I5-implementation.md` § 44.3 | verbatim (its first line) |
+| 4–9 | items 359, 365, 369, 378, 386, 387 (first lines) | `plans/FS131-close-inventory.md` on `main` | verbatim |
+
+No mismatch. One note on the brief's wording, not a defect: "Done means" item 2 lists `RingArcsWithin` among "the child's clauses"; the
+statement of `bend_toward_collar` has no `RingArcsWithin` clause — R1 (`M.IsRingArc → F.IsRingArc`) is its constant-sided form. The
+construction gives `M.RingArcsWithin F` anyway (every arc it adds has radius `≠ 1`), and this plan states it as a child because R1 is proved
+through it (§ 3).
+
+### 1.2 The as-given build (`ae881022`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`: **OK — all 1781 modules already up to date, nothing built,
+4 modules with warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T104808Z-3479001.log`; driver log
+`data/fs131/kp2/build-asgiven.log`). The `sorry` declarations: `BendCollar` 1 (`bend_toward_collar`, line 31), `HexRing` 1 (`bv_l3`),
+`BaseDense` 4 (three `exists_preBend` children and `cv_exists`'s stale copy), `Terminal` 9 (stale; the `Terminal` lane's).
+
+### 1.3 What this job plans, and what it may change
+
+**Planned**: the construction of `ArcMap.bend_toward_collar` (`Plane/ValidMap/BendCollar`), whose statement is fixed — reduced to named
+children, each with `sorry`, each read back against what its consumer needs, a plan and a price per child, the obligation pass, inhabitants
+for any structure a child takes as a hypothesis, and a handoff that two implementers can split by file. A child provable in about an hour is
+proved here.
+
+**May change**: `Plane/ValidMap/BendCollar.lean` (new declarations; `bend_toward_collar`'s docstring and statement byte-for-byte unchanged,
+checked by script), new modules upstream of it, `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean` (the block headed "FS131-I5g",
+extended), this record, `tools/fs131_kp2_*.py`, `data/fs131/kp2/`, `data/fs131/reports/FS131-KP2.md`.
+
+**May not change**: any declaration `main` brought (new declarations only — so `bendMap`, `cutArcs`, `toward_clear`, `bend_toward` are cited
+or re-proved under new names, never edited); `BaseDense` (the remaining `exists_preBend` children are another job's), `HexRing`,
+`BaseWalk`, `Terminal`. No merge of another branch, no gate run, nothing on `main`. No new `axiom`, no `native_decide`.
+
+## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the route checked (D1 against the clauses and against `main`'s machinery)
+
+### 2.1 Read back: what each clause needs, and where D1 meets it
+
+The construction as laid out here (the skeleton, § 3) is KB2's D1 with one change of frame: **the bent map is `F`'s image under the
+homeomorphism** (`ArcMap.pushforward`: same domain, arcs `cutArcs ∪ {collarArcA, collarArcB}`, colour `F.col ∘ h⁻¹`), not a `bendMap` with
+a recoloured lens. D1 already says "the bent map as the image of the old one"; taking it literally makes clauses 4–6 topology, with no case
+on the lens.
+
+| clause of `bend_toward_collar` | how the construction meets it | `main`'s machinery reused | new children |
+|---|---|---|---|
+| 1 `M.Valid` | `Valid.of_agreesOff` on the closed lens; its points are `c'` in `M`, clear for `c'` in `F` (open lens: `toward_clear`, the lens being under the toward profile; open arc: `ne1_region`), no two `1` apart (radii `≤ 1`, angles within `60°`) | `Valid.of_agreesOff`, `toward_clear`, `n2_env_toward`, `n2_env_near`, `ne1_region` | `map_valid`, `map_agreesOff`, `map_lens`, `one_sub_lensProf_le`, `dist_lt_one_of_mem_polarSet`, `CollarFit.clear` (in `exists_collarFit`) |
+| 2 `M.dom = F.dom` | definitional (`rfl`) | — | — |
+| 3 `h = id` off `thickening ε α` | `h = id` off the collar `K`, and `K ⊆ thickening ε α` | — | `homeo_eq_self`, `pushHomeo_eq_self`, `CollarFit.sub_thick` |
+| 4 `h` fixes `Γ ∖ α°` | `Γ ∩ K ⊆ α` (`CollarFit.free`) and `h` fixes the ends | — | `homeo_fix_Γ` |
+| 5 interior points and colours carried | `M.interiorPts = h(F.interiorPts)`, `M.col ∘ h = F.col` | — | `pushforward_mem_interiorPts_iff`, `pushforward_col_apply` (proved) |
+| 6 `coloursAt` carried | a homeomorphism carries closures of classes | — | `pushforward_coloursAt`, `pushforward_region` |
+| 7–8 degree, repeated colour | **computed at each point, never transported by `h`** (sector counts read balls): off `K` the maps agree near the point; inside `K` interior points have degree 1; `α°` and `β°` have two-germ charts with sectors `c`, `c'`; at the ends `M`'s chart is `F`'s with `α`'s germ curvature `1 ↦ ±1/R` | `localSectors_disj`, `isSectorChart_of`, `IsSectorChart.hasDegree`, `IsSectorChart.encard_sectorsOf`, `exists_eq_branchPt_curveGerm`, `branchPt_curveGerm_mem`, `exists_germDir_ne_of_ne`, `carrier_germArc`, `not_hasRepeatedColour_of_mem_interiorPts` | `map_hasDegree`, `map_hasRepeatedColour`, `hasDegree_iff_of_agree`, `hasDegree_iff_of_mem_interiorPts`, `degree_openArc`, `map_degree_lensCurve`, `map_degree_end` |
+| 9 R1 | the arc lies in `F.Γ` (`M` creates no unit arc: `β` has radius `R ≠ 1`); its sides change only at the ends, where the collar's horn lies on one side of `ω(Q)` | `ringArcsWithin_of_Γ_subset`, `germArc_isUnitArc_iff` | `map_R1`, `map_ringArcsWithin`, `sides_end` |
+| 10 R2 | the closed arc misses `α°` (an end on `α°` is excluded by `hfree`), so lies in `M.Γ`; sides as in R1 | `mem_cutArcs_iff` | `map_R2`, `map_Γ` |
+| 11 R3 | `α°` lies in the lens, interior in `M` | — | `map_R3` |
+| 12 no new inert arc | only `c` is lost, only on `lensSet`; a unit arc centred there never has `c` on a side | `lock`, `Valid.dist_ne_one_of_isOpen_subset_closure` | `map_inert`, `coloursAt_subset`, `side_ne_inner_of_mem_lens` |
+
+**No clause D1 cannot meet.** Checked in particular: (a) `c = c'` is allowed by the statement (no hypothesis excludes it); every degree child
+reads the sector colours as a list (`c` and `c'`), so `c = c'` needs no case. (b) An end where `α`'s germ is the only germ (then `c = c'`): the
+germ swap is uniform (the sector before `i` is the sector from `i`). (c) An end where another germ has `α`'s direction: its curvature is not
+`1`, so `R'`, `R''` (and `R` between them) can be taken nearer `1` than it — finitely many germs. (d) `ε` arbitrary: the collar is chosen inside
+`thickening ε α ∩ dom` (`α` compact in the open domain). (e) The ends are fixed by `h`: `A = P + e(θ₁)` is a polar point only at angles
+`≡ θ₁`, none in `(θ₁, θ₂)`.
+
+### 2.2 Findings
+
+1. **Generalization — `hmax` is not read by the construction** (grade: [reading], the planner's; its killing test is the proof of the
+   children, none of which takes `hmax`). Maximality is what `exists_preBend`'s measure needs, not what the bend needs: a non-maximal `α`
+   bends the same way (at an end where `α` continues with the same sides, the chart swap is the same). `hlen` is implied (`l60_le`, KB2).
+   The assembly reads both once (`have _ := hlen`, `have _ := hmax`, the repository's convention for a hypothesis the statement keeps and the proof does not need; a `clear` left the unused-variable linter firing, build 1). Nothing downstream changes: `exists_preBend_step` supplies both anyway. Sent to the
+   coordinator mid-job.
+2. **`toward_clear` and `n2_env_*` are public on this branch** (since the merge with `main`): KB2's "~30 lines to re-prove under a new name"
+   is not needed; `toward_clear` is cited as it stands.
+3. **`main`'s `bendMap` is not reused** (only its cut engine `cutArcs`, `cutArcs_locallyFinite`, `mem_cutArcs_iff`, `exists_kept_of_mem_openArc`,
+   and its validity engine `Valid.of_agreesOff`): the pushforward frame replaces `bend_hlc`'s case analysis by one topological lemma
+   (`pushforward_locallyConstant`), and KB2's "the collar lens inside `main`'s crescent `L`" is not needed — clearness comes straight from
+   `toward_clear` at each lens point, and pairs from a polar bound.
+4. **The bi-Lipschitz condition of I5o's notes (§ 41.2 (c)) is not needed**: no sector count is carried by `h`; each is computed from a chart
+   at its point (§ 2.1, clauses 7–8).
+5. **`RingArcsWithin`** (the brief's word) is not a clause; the construction proves `M.RingArcsWithin F` (`map_ringArcsWithin`) as R1's
+   first step.
+
+## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the skeleton
+
+Three modules, upstream of `BaseDense` (map: `ARCHITECTURE.md`, `tools/check_architecture.py` exit 0):
+
+- **`Plane/ValidMap/RadialPush`** (new; imports `UnitArc`, `Surgery`) — pure geometry: `polarSet`; `tent`, `push1` (`push1_mid`,
+  `push1_of_not_mem` proved; `push1_push1`, `push1_image_Ico`, `push1_image_Ioc`); `PushProfiles` (a structure taken as a hypothesis — its
+  inhabitant is `pushProfiles_collar`), `polarAngle`, `pushFun`, `pushInv`, `pushHomeo` (a def over four children: `pushInv_pushFun`,
+  `pushFun_pushInv`, `continuous_pushFun`, `continuous_pushInv`), `pushHomeo_polar`, `pushHomeo_eq_self`, `pushHomeo_image_polarSet`; D1's
+  `tangRad` (`tangRad_zero` proved; `tangRad_spec`, `tangRad_lt_one`, `one_lt_tangRad`, `tangRad_lt_tangRad`, `one_sub_tangRad_le`,
+  `tangRad_sub_one_le`), `clampAngle`, `lensProf`, `outerProf`, `pushProfiles_collar`, `one_sub_lensProf_le`; the sets `collarK`,
+  `lensSet`, `lensCurve`, `collarMid`, the arcs `collarArcA`, `collarArcB` (`germArc`s) with `collarArcs_carrier`;
+  `dist_lt_one_of_mem_polarSet`. Spec examples: `polarSet` membership, `tent 0 1 2 1 = 1`.
+- **`Plane/ValidMap/Pushforward`** (new; imports `Surgery`) — `ArcMap.pushforward` (a def over `pushforward_locallyConstant`);
+  `pushforward_Γ`, `pushforward_mem_interiorPts_iff`, `pushforward_col_apply` proved; `pushforward_interiorPts`, `pushforward_region`,
+  `pushforward_coloursAt`; `hasDegree_iff_of_agree`, `hasDegree_iff_of_charts`, `hasDegree_iff_of_mem_interiorPts`.
+- **`Plane/ValidMap/BendCollar`** (extended; now imports both) — `CollarFit` (a Prop structure: the collar's fit to the map; inhabitant
+  `exists_collarFit`, at a model map to be built, § 4 child B0), `exists_collarFit`, `kin_subset`, `kout_subset`, `pushProfiles` (proved),
+  `homeo` (def), `homeo_eq_self`, `homeo_ringPt`, `homeo_fix_Γ`, `homeo_image_dom`, `collarArcs` (def), `collarArcs_nondegenerate`,
+  `collarArcs_locallyFinite` (proved), `collarArcs_Γ`, `map` (def), `map_Γ`, `map_lens`, `map_agreesOff`, `map_valid`, `degree_openArc`,
+  `map_degree_lensCurve`, `map_degree_end`, `map_hasDegree`, `map_hasRepeatedColour`, `map_ringArcsWithin`, `sides_end`, `map_R1`,
+  `map_R2`, `map_R3`, `coloursAt_subset`, `side_ne_inner_of_mem_lens`, `map_inert`. **`bend_toward_collar` is proved over them** (its
+  `sorry` replaced by the assembly: `have _ := hlen`, `have _ := hmax`, `exists_collarFit`, then one `refine` citing a clause lemma per clause).
+
+Statement: `tools/fs131_kp2_stmt.py` — the block from `/-- **The collar bend**` to `:= by` byte-identical to `ae881022`, one declaring
+file, no `axiom` and no `native_decide` in the three modules: PASS; `--self-test` (a changed hypothesis, a changed docstring letter, a
+second declaring file, an `axiom` line): 4 of 4 fired. `scripts/Axioms.lean`: 61 lines added after the FS131-KB2 lines of the block
+headed "FS131-I5g". Build: § 3.1 (filled when it lands).
+
+## Stage 3 — SAVED
+
+## Stage 4 — SAVED: a plan per child
+
+Prices are lines of Lean, read from the neighbouring proofs on this branch (`bend_toward` is ~190 lines over its children; the cut engine
+~180); per `LEAN.md`, re-price from the first two leaves. Lemmas cited were read in their source on this branch at `ae881022`
+(`UnitArc`, `Surgery`, `LocalStructure`, `Sectors`, `Basic`); the skeleton elaborates with every citation in a statement, and the ones only in
+routes are named with their file. Hard = needs an idea beyond assembly.
+
+### RadialPush (pure geometry) — about 1,450 lines
+
+| child | route | cites | price | hard |
+|---|---|---|---|---|
+| `push1_push1` | split `t ≤ a`, `a < t ≤ m`, `m < t < b`, `t ≥ b`; on each piece `push1` is affine with image the matching piece for `m'`; `field_simp`, `linarith` | `push1_of_not_mem`, `push1_mid` | 60 | — |
+| `push1_image_Ico`, `_Ioc` | monotone and continuous on the piece, ends to ends (or by `push1_push1` both ways) | `intermediate_value_Icc` | 60 | — |
+| `pushInv_pushFun`, `pushFun_pushInv` | child `polarAngle_polar : |θ − φ| < π → 0 < t → polarAngle P φ (P + t e θ) = θ` (`arg` of `t e(θ − φ)`, `Complex.arg_real_mul`, `arg_exp_mul_I`-style, as in `toward_polar`); `z = P + ‖z − P‖ e(polarAngle z)` (`eq_polar_frameDir`); `push1` keeps radii positive (`0 < a`); then `push1_push1` | `eq_polar_frameDir`, `push1_push1` | 150 | — |
+| `continuous_pushFun`, `_Inv` | `pushFun z = z − (1 − l θ)·tent(a θ, 1, b θ, ‖z − P‖)·e θ`; continuity on `ℂ ∖ {P} ∩ {polarAngle away from the slit}` by composition where `l θ < 1`, and by `(1 − l θ) → 0` times a factor in `[0,1]` where `l θ = 1` (a two-line `tendsto` lemma: `f → 0`, `g` bounded ⇒ `f·g → 0`); identity on the open set `{‖z − P‖ < min a} ∪ {angle off [θ₁, θ₂]}` | `Complex.continuousAt_arg`, `ContinuousOn` piecing (`continuous_of_continuousOn_iUnion_of_isOpen`) | 250 | **yes** (the sector's edge) |
+| `pushHomeo_polar`, `_eq_self`, `_image_polarSet` | `polarAngle_polar`; off the open collar `push1 = id` (`push1_of_not_mem`) | — | 150 | — |
+| `tangRad_spec` | `‖t e(θ+u) − (1−R) e θ‖² = t² − 2(1−R) t cos u + (1−R)²` (`dist_polar_polar_sq` shape); the root by `Real.sq_sqrt`; the disc as `t` between the two roots, the other negative (`R > 1/2`) | `dist_polar_polar_sq` | 80 | — |
+| `tangRad_lt_one`, `one_lt_tangRad`, `tangRad_lt_tangRad` | the identity `(1 − t)(t + 2R − 1) = 2(1 − R) t (1 − cos u)` (child `tangRad_identity`); `cos u < 1` for `0 < |u| ≤ π`; monotone in `R` from the quadratic's value at `tangRad R' u` | `Real.cos_lt_cos_of_nonneg_of_le_pi` | 120 | — |
+| `one_sub_tangRad_le`, `tangRad_sub_one_le` | the identity, `t ≤ 1` and `t ≥ 2R − 1`; `1 − cos u ≤ u²/2` (`Real.one_sub_sq_div_two_le_cos`) | — | 100 | — |
+| `pushProfiles_collar` | continuity by composition (`clampAngle` continuous); off `(θ₁, θ₂)` the clamp is an end: one term `tangRad _ 0 = 1`, the other `< 1` / `> 1`; inside the three comparisons and `0 < tangRad R' u` | the four above | 120 | — |
+| `one_sub_lensProf_le` | `1 − max ≤ min of 1 − each`; `one_sub_tangRad_le`; `u ≤ π/3 < 2` | — | 60 | — |
+| `collarArcs_carrier` | `carrier_germArc`; a branch point `A + 2R sin(s/2) e(θ₁ + π/2 + s/2)` has polar angle in `[θ₁, φ]` up to `X` and radius `tangRad R (angle − θ₁)` (`tangRad_spec`'s uniqueness); on `[θ₁, φ]` the max is the `C_A` term (`tangRad` even and increasing in `cos u` there) | `carrier_germArc`, `branchPt_eq_circle` | 250 | **yes** (trig bookkeeping) |
+| `dist_lt_one_of_mem_polarSet` | copy `toward_pairs`'s last ten lines on polar points | `dist_polar_polar_sq` | 40 | — |
+
+### Pushforward (generic) — about 300 lines
+
+| child | route | price |
+|---|---|---|
+| `pushforward_locallyConstant` | `h⁻¹ y ∈ F.interiorPts` (domain kept, `hΓ`), `F.locallyConstant`, `h.symm.continuous.tendsto` | 30 |
+| `pushforward_interiorPts`, `_region`, `_coloursAt` | set algebra with `hΓ`, `hdom`; `h.image_closure` (`Homeomorph.image_closure`) | 80 |
+| `hasDegree_iff_of_agree` | for `r ≤ r₀`, `IsSector v r S` reads `interiorPts ∩ ball v r` and the colour on it: the two sets of sectors are equal | 80 |
+| `hasDegree_iff_of_charts` | `IsSectorChart.hasDegree` (both `max n 1`), `IsSectorChart.encard_sectorsOf` (both `{i | col i = c}.encard`) for `0 < n`; `n = 0`: `IsSectorChart.isSector_iff_of_zero`, no repeated colour | 60 |
+| `hasDegree_iff_of_mem_interiorPts` | `localSectors` at an interior point has `n = 0` (`mem_Γ`), so degree `1`; uniqueness of the eventual count | 30 |
+
+### BendCollar (map level) — about 3,000 lines
+
+| child | route | cites | price | hard |
+|---|---|---|---|---|
+| **B0** `collarModel` (new: the inhabitant) | a fragment exercising the hypotheses with `c ≠ c'`: domain a disc of diameter `< 1` about `r([0, π/6])` (valid trivially), arcs: `ω(0)` across the disc and the two radial segments at the ends, colours swapping across each segment (so `α` is maximal with sides `0`, `1`), `1 ∉ coloursAt 0` | — | 150 | — |
+| `exists_collarFit` | four children: **C1** `R` near `1` makes the lens clear (`one_sub_lensProf_le` against `n2_env_toward`, `n2_env_near` with `r` from `hout`, then `toward_clear`); **C2** the collar is thin: `K ⊆ thickening δ α` with `δ ≤ ε` and `thickening δ α ⊆ dom` (`IsCompact.exists_thickening_subset_open`); **C3** middle freeness: on `α' = r([θ₁ + τ, θ₂ − τ])` a Lebesgue number of `hfree`'s balls (`lebesgue_number_lemma_of_metric`); **C4** end freeness: `F`'s chart at `A` (`localSectors_disj`) has `α`'s germ `(θ₁ + π/2, 1)` (child: a germ whose branch meets `α` near `A` at infinitely small distances is `α`'s, by `exists_germDir_ne_of_ne`); the collar near `A` lies in the horn between `(θ₁+π/2, 1/R'')` and `(θ₁+π/2, 1/R')` (`tangRad_spec` in the frame at `A`: inside the tangent circle is `TanAbove` with curvature `1/R`, `sectorBetween_eq_hornSet`), which holds no other branch once `1/R''`, `1/R'` are nearer `1` than every other germ of that direction; the same at `B`. `short` by `l60_le`. Filters `∀ᶠ R in 𝓝[<] 1`, `∀ᶠ R'' in 𝓝[>] 1` | `toward_clear`, `n2_env_toward`, `n2_env_near`, `l60_le`, `localSectors_disj`, `sectorBetween_eq_hornSet`, `exists_germDir_ne_of_ne` | 450 | **yes** (C4) |
+| `kin_subset`, `kout_subset` | the polar set is preconnected (image of `{(θ, t)}` under the polar map), `Γ`-free (`free`), in the domain, so one colour (`IsPreconnected.constant`); its closure meets `α°` from inside, where `innerColours = {c}` | `continuousOn_col` | 120 | — |
+| `homeo_eq_self`, `homeo_ringPt`, `homeo_fix_Γ`, `homeo_image_dom` | `pushHomeo_eq_self` (open collar `⊆ K`); `pushHomeo_polar`, `push1_mid`; `free` and the ends; identity off `K ⊆ dom`, `h(K) ⊆ K` | — | 100 | — |
+| `collarArcs_nondegenerate` | `cutArcs_nondegenerate`, `germArc_nondegenerate` (`X ≠ A`) | — | 30 | — |
+| `collarArcs_Γ` | off `α°` and the ends `mem_cutArcs_iff`; on `α°` an arc of `F` through it is an arc of `ω(P)` (else `Arc.finite_inter_sphere_or_eq_circ` against `free_open` and `Arc.exists_near`), so the cut leaves nothing (`exists_kept_of_mem_openArc`); the two arcs are `β` (`collarArcs_carrier`); `h(Γ) = (Γ ∖ α°) ∪ β°` | `mem_cutArcs_iff`, `exists_kept_of_mem_openArc` | 150 | — |
+| `map_Γ`, `map_lens`, `map_agreesOff` | `pushforward_Γ` with `collarArcs_Γ`; `pushforward_interiorPts`; `pushHomeo_image_polarSet` on the outer collar (`push1_image_Ioc`) with `kout_subset`, and on the inner (`push1_image_Ico`) with `kin_subset` | — | 200 | — |
+| `map_valid` | `Valid.of_agreesOff` on `lensSet ∪ lensCurve`; `clear`, `ne1_region`; `dist_lt_one_of_mem_polarSet` | `Valid.of_agreesOff`, `ne1_region` | 60 | — |
+| `degree_openArc` | a two-germ chart at `ringPt P θ` (`isSectorChart_of`; branches: `Γ ∩ ball = ω(P) ∩ ball` from `free_open`, the circle's two germs by `exists_eq_branchPt_curveGerm`/`branchPt_curveGerm_mem`); sector colours `c`, `c'` from `IsRingArc`'s sides; then `hasDegree_iff_of_charts` against a two-germ word, or directly | `isSectorChart_of`, `exists_eq_branchPt_curveGerm` | 150 | — |
+| `map_degree_lensCurve` | the same on `C_A` / `C_B` (`map_Γ`; the collar `Γ`-free), and at `X` a two-germ chart of the two arcs' germs (transversal: distinct centres, equal radii) | — | 200 | — |
+| `map_degree_end` | `F`'s chart at `A` and `M`'s chart = the same germs with `κ i := 1/R` (`isSectorChart_of`; sorted by C4's gap; branches by `map_Γ`, `carrier_germArc`); colours per sector unchanged (the sector before `i` gains the lens, colour `c'`; the one from `i` loses it, colour `c`; others untouched as `h = id` there); `hasDegree_iff_of_charts`. At `B`: `(θ₂ − π/2, −1) ↦ −1/R`, the order reversed | `localSectors_disj`, `isSectorChart_of`, `IsSectorChart.encard_sectorsOf` | 350 | **yes** |
+| `map_hasDegree`, `map_hasRepeatedColour` | by the place of `z`: off `K` (`homeo_eq_self` on a ball, `hasDegree_iff_of_agree`); `K ∩ F.interiorPts` (both interior: `pushforward_mem_interiorPts_iff`, `hasDegree_iff_of_mem_interiorPts`, `not_hasRepeatedColour_of_mem_interiorPts`); `α°` (`degree_openArc`, `homeo_ringPt`, `map_degree_lensCurve`); the ends (`map_degree_end`) | — | 120 | — |
+| `map_ringArcsWithin` | `ringArcsWithin_of_Γ_subset` with `A' = {collarArcA, collarArcB}`, `germArc_isUnitArc_iff` (`1/R ≠ 1`) | — | 40 | — |
+| `sides_end` | near `A` the maps differ only on the collar horn with `α`'s branch (`homeo_eq_self`); the horn is preconnected (`isPreconnected_hornSet`) and misses `ω(Q)` for `Q ≠ P` (`ω(Q)`'s germs at `A`: another direction, or curvature `−1`), so lies on one side; on it both maps carry `c` and `c'` up to `A` | `isPreconnected_hornSet` | 200 | **yes** |
+| `map_R1`, `map_R2`, `map_R3` | as in their docstrings | `mem_cutArcs_iff` | 240 | — |
+| `coloursAt_subset`, `side_ne_inner_of_mem_lens`, `map_inert` | `pushforward_coloursAt` and the cases of `h⁻¹ Q`; `lock` (two points) and `Valid.dist_ne_one_of_isOpen_subset_closure`; R1 | `lock` | 200 | — |
+
+**Total**: about 4,750 lines (KB2's 3,000–4,000 priced the same design without the pushforward layer, the model map and the explicit
+charts). Formalization is not a cost that ranks routes (`CLAUDE.md` § Counter-priors); the price is for staffing only.
+
+## Stage 4 — SAVED
+
+Every lemma the routes above cite was confirmed by `#check` (`data/fs131/kp2/Checks.lean` → `checks.out`, 33 names, 0 errors; two names
+first guessed wrong were corrected there: `localSectors_disj` is `HadwigerNelson.Plane.localSectors_disj`, outside `ArcMap`; there is no
+`Real.cos_lt_one`, and `Real.cos_lt_cos_of_nonneg_of_le_pi` is cited instead).
+
+## Stage 5 — SAVED: the obligation pass, and the handoff
+
+### 5.1 The obligation pass (`debruijn-obligation-modeling`, invoked fresh for this job)
+
+- **The space, characterized.** Twelve clauses. Seven are topology or set algebra once the bent map is `F`'s image (`pushforward`):
+  2–6, R3, and the reduction of R1/R2 to the two ends. Two are metric and read per point (degree, repeated colour). Three read `F`'s
+  colours (validity, inert, the sides at the ends). For the metric pair the case table is the place of `z`: off `K`, interior in `K`, on
+  `α°`, at an end — four cases, all written out in `map_hasDegree`'s docstring before any tactic.
+- **The statement the degree clauses derive from** — `ArcMap.hasDegree_iff_of_charts` (added to `Pushforward`): *two charts with the same
+  colour word give the same degree and the same repeated-colour answer*. The tempting statement, "`h` carries sectors", is false in
+  general: sectors read balls, which a radial push does not carry. The colour word holds in all four cases. Off `K` the two charts are
+  equal. At interior points the word is empty. On `α°` and on `β°` it is the same two-letter word, `c` and `c'`. At an end the germ swap
+  keeps every sector's colour. So the four cases become four instances of one lemma, each a few lines over its chart. This is the
+  strengthening the pass looked for; the per-case proofs I first had in mind each re-proved the counting.
+- **Each child strictly smaller.** The measure is the number of open clauses, plus the open inputs of each clause. Every child proves
+  one clause, or one fact one clause reads (a set equality, a chart, a colour). None restates its parent. The assembly is a single
+  `refine` with one clause lemma per clause.
+- **The partition.** *Prove*: everything. *Test*: the spec examples (`polarSet` membership, `tent 0 1 2 1 = 1`), proved values
+  (`push1_mid`, `tangRad_zero`), and, once proved, an `example` of `pushProfiles_collar` at concrete radii (`R' = 3/4`, `R = 7/8`,
+  `R'' = 5/4` on `[0, π/6]`). That example catches a profile whose inequalities were stated the wrong way round. *Assume*: nothing. No
+  outside theorem is imported, and no hand result of ours enters as a hypothesis. Every cited theorem (`toward_clear`, `lock`, `l60_le`,
+  `n2_env_*`, `localSectors_disj`, `ringArcsWithin_of_Γ_subset`, …) is a kernel theorem on this branch, on the standard three by M5's
+  receipt.
+- **Smells read.**
+  1. `CollarFit` repeats two of the bend's hypotheses (`ring`, `free_open`). This is deliberate: each clause lemma then takes one
+     hypothesis, not five.
+  2. `A` and `B` are mirror images. Formalizing the reflection about the bisector would cost more than doing both ends. The pass's
+     choice: the end children (`map_degree_end`, `sides_end`, C4 of `exists_collarFit`) get one helper each, with an orientation
+     `σ = ±1`.
+  3. `hmax` is a dead hypothesis (§ 2.2, finding 1); the vacuity seam is checked below.
+- **Mutation audit, planned for the implementers.** With `hfree` dropped, C3 of `exists_collarFit` must fail: an arc crossing `α°`
+  leaves no `Γ`-free collar. With `hout` dropped, C1 must fail: `toward_clear` needs the outer class kept away from `P`. With `R < 1`
+  swapped for `R ≤ 1` in `CollarFit.params`, `pushProfiles_collar` must fail (`l = 1` inside). Each is checked once the child is proved.
+- **Vacuity.** `CollarFit` is a structure taken as a hypothesis, so it needs an inhabitant: child B0 (`collarModel`, § 4) with
+  `exists_collarFit`. B0 has `c ≠ c'`, so the clauses about the sides are exercised.
+
+### 5.2 The handoff (two implementers, split by file)
+
+| implementer | files and declarations | about |
+|---|---|---|
+| **G, the geometry** | all of `Plane/ValidMap/RadialPush`; in `BendCollar`: `kin_subset`, `kout_subset`, `homeo_eq_self`, `homeo_ringPt`, `homeo_fix_Γ`, `homeo_image_dom`, `collarArcs_nondegenerate`, `collarArcs_Γ`, `map_Γ`, `map_lens`, `map_agreesOff`, `map_valid` | 2,250 lines |
+| **C, the charts and sides** | all of `Plane/ValidMap/Pushforward`; in `BendCollar`: `exists_collarFit`, `degree_openArc`, `map_degree_lensCurve`, `map_degree_end`, `map_hasDegree`, `map_hasRepeatedColour`, `map_ringArcsWithin`, `sides_end`, `map_R1`, `map_R2`, `map_R3`, `coloursAt_subset`, `side_ne_inner_of_mem_lens`, `map_inert`, and the new child B0 `collarModel` | 2,500 lines |
+
+- **Interfaces.** Both work against the signatures as stated. G's children are inputs to C's (C cites `map_Γ`, `map_lens`,
+  `homeo_ringPt`, …), and C works while they are still `sorry`. Neither may change a statement. A change one of them needs goes to the
+  coordinator, then to me.
+- **Merging.** Both edit `BendCollar.lean`, in disjoint declarations: each fills in its own `sorry`s, and git merges such edits
+  cleanly. Before both launch, the coordinator can remove even that overlap by moving G's block (from `CollarFit.kin_subset` to
+  `map_valid`) into a new module `Plane/ValidMap/CollarMap.lean` upstream of `BendCollar`. The statements would move verbatim, checked
+  the way `tools/fs131_kp2_stmt.py` checks. **Held for the coordinator.**
+- **Order inside each lane, hardest first where it informs the rest.**
+  - G: `push1_push1` → `polarAngle_polar` (a new child) → the inverses → `continuous_pushFun` (hard) → the `tangRad` family →
+    `collarArcs_carrier` (hard) → the map-level children.
+  - C: `Pushforward` (with `hasDegree_iff_of_charts` first) → `degree_openArc` (the two-germ chart pattern) → `map_degree_lensCurve` →
+    `exists_collarFit`'s C4, which shares the identification of the end germ with `map_degree_end` → `map_degree_end` → `sides_end` →
+    R1, R2, R3 and inert → the case splits of `map_hasDegree`/`map_hasRepeatedColour` → B0.
+- **Re-price from the first two leaves** (`LEAN.md`): G from `push1_push1` and `polarAngle_polar`, C from `hasDegree_iff_of_charts` and
+  `degree_openArc`.
+
+## Stage 5 — SAVED
+
+## Stage 6 — SAVED: the build, and the hand-back
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 3 modules rebuilt, 6 with warnings, every warning `declaration uses
+'sorry'`** (0 others), exit 0, 8 min 45 s (`build/gate/build/20261005T111648Z-3669160.log`; driver log `data/fs131/kp2/build-skel2.log`).
+The first skeleton build (`build-skel1.log`, OK) showed two unused-variable warnings (`hlen`, `hmax`), fixed by the convention of § 2.2.
+`sorry` declarations by module: `RadialPush` 20, `Pushforward` 7, `BendCollar` 26 (`bend_toward_collar` itself none). Axioms:
+`data/fs131/kp2/KP2Axioms.out` — the four closed children on the standard three, the control `bend_toward_collar` on `sorryAx`.
+`tools/fs131_kp2_stmt.py`: PASS; `tools/check_architecture.py`: exit 0.
+
+**Left**: the 53 children, split as § 5.2, and the child B0 (`collarModel`), to be stated by implementer C.
+
+## Stage 6 — SAVED
+
+---
+
+# FS131-CG1 — lane G of the collar bend (de Bruijn, the implementer)
+
+*Job FS131-CG1, de Bruijn (Opus 5.5), launched 2026-10-05 on branch `fs131-w5` at `b2ccfb7b` (worktree
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5`). Brief `data/fs131/briefs/FS131-CG1-collar.md` (on `main`), with
+`plans/STANDING-RULES.md`, `LEAN.md` and `RUNNING.md` § Building and § Make the gate fail. No fence. Working files `data/fs131/cg/`; tools
+`tools/fs131_cg_*.py`. Stages from 7 on are this job's.*
+
+## Theorems this phase proved (FS131-CG1)
+
+Axioms read from `data/fs131/cg/CGAxioms.out` (`lake env lean` against the oleans of the Stage 11 build, `pp.fullNames`); every line below is
+**[kernel], on `[propext, Classical.choice, Quot.sound]`** or a subset, unless it says otherwise. Names are under `HadwigerNelson.Plane`.
+
+- `Plane/ValidMap/RadialPush` — all 20 of KP2's `sorry` children: `push1_push1`, `push1_image_Ico`, `push1_image_Ioc`, `pushInv_pushFun`,
+  `pushFun_pushInv`, `continuous_pushFun`, `continuous_pushInv`, `pushHomeo_polar`, `pushHomeo_eq_self`, `pushHomeo_image_polarSet`,
+  `tangRad_spec`, `tangRad_lt_one`, `one_lt_tangRad`, `tangRad_lt_tangRad`, `one_sub_tangRad_le`, `tangRad_sub_one_le`, `pushProfiles_collar`,
+  `one_sub_lensProf_le`, `collarArcs_carrier`, `dist_lt_one_of_mem_polarSet` — each [kernel], standard three. The module has no `sorry`.
+- `Plane/ValidMap/CollarMap` — 8 of KP2's 12 lane-G children: `ArcMap.CollarFit.kin_subset`, `.kout_subset`, `.homeo_eq_self`,
+  `.homeo_ringPt`, `.homeo_fix_Γ`, `.homeo_image_dom`, `.collarArcs_nondegenerate`, `.collarArcs_Γ` — each [kernel], standard three.
+- `ArcMap.CollarFit.map_Γ`, `.map_lens`, `.map_agreesOff`, `.map_valid` — **proved with no `sorry` of their own, not yet kernel theorems**:
+  their axioms include `sorryAx`, through lane C's `ArcMap.pushforward_locallyConstant` (a field of the `pushforward` definition, so of
+  `CollarFit.map`) and `ArcMap.pushforward_interiorPts`. They become kernel theorems when lane C proves those two, with no change here.
+- 62 supporting theorems (listed in `data/fs131/cg/new-decls.txt`; 57 in `RadialPush`, 5 in `CollarMap`), each [kernel], standard three; and
+  one new definition, `radialMap`, with its spec theorem `radialMap_id`.
+
+## Stage 7 — SAVED (FS131-CG1): the readback and the as-given build
+
+### 7.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_cg_quotes.py` reads each quotation from the brief itself (the `> ` line above each `> — source:` line) and requires it verbatim in
+the source the brief names: `BendCollar.lean` and KP2's plan at `b2ccfb7b`, `CLAUDE.md` and the inventory on `main`. Result
+`data/fs131/cg/quotes.txt`: **PASS, 10 of 10 verbatim**. `--self-test` (`data/fs131/cg/quotes-selftest.txt`): one changed character in each
+quotation in turn, and one quotation pointed at a source that does not hold it — **11 of 11 plants fired**, the unplanted partner PASS.
+
+| # | quotation (opening words) | source | result |
+|---|---|---|---|
+| 1 | "Do not consider Lean formalization a cost. …" | `CLAUDE.md` § Counter-priors | verbatim |
+| 2 | "theorem bend_toward_collar (hF : F.Valid) {P : ℂ} …" | `BendCollar.lean` at `b2ccfb7b` | verbatim (its first line) |
+| 3–5 | the G row of § 5.2, G's order, "Merging" | this plan § 5.2 at `b2ccfb7b` | verbatim |
+| 6–10 | items 394, 395, 390, 378, 386 (first lines) | `plans/FS131-close-inventory.md` on `main` | verbatim |
+
+No mismatch. One note, not about the brief: inventory item 390 (beyond the quoted first line) says the assembly "opens with `clear hlen hmax`";
+the skeleton at `b2ccfb7b` reads `have _ := hlen`, `have _ := hmax` (this plan § 2.2: the `clear` left the unused-variable linter firing). A
+wording slip in the inventory, for the coordinator.
+
+Read in full: this plan (Stages 1–6), KB2's design (`plans/FS131-I5-implementation.md` § 44), `RadialPush.lean`, `BendCollar.lean`.
+
+### 7.2 The as-given build (`b2ccfb7b`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`: **OK — all 1783 modules already up to date, nothing built, 6
+modules with warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T113025Z-3836086.log`; driver log
+`data/fs131/cg/build-asgiven.log`).
+
+### 7.3 What the move carries
+
+G's block in `BendCollar` at `b2ccfb7b` runs from `CollarFit.kin_subset` to `CollarFit.map_valid` (lines 71–162). Besides the twelve children of
+KP2's row it holds five declarations the children's statements use: `CollarFit.pushProfiles` (proved), `CollarFit.homeo` (def), `collarArcs`
+(def), `collarArcs_locallyFinite` (proved), `CollarFit.map` (def). And every statement in the block takes `CollarFit`, so the structure
+`CollarFit` (with the section note `## The collar's fit to the map` that describes it) moves upstream too. `exists_collarFit` (lane C's) sits
+between `CollarFit` and `kin_subset` and stays in `BendCollar`. Nothing else moves.
+
+## Stage 7 — SAVED (FS131-CG1)
+
+## Stage 8 — SAVED (FS131-CG1): G's block moved to `Plane/ValidMap/CollarMap`
+
+**The move** (ruling 395 (a)): the new module `Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean` holds, in `BendCollar`'s order and byte for
+byte, the section note `## The collar's fit to the map`, the structure `CollarFit`, and the block from `CollarFit.kin_subset` to
+`CollarFit.map_valid` (17 declarations: KP2's twelve for lane G with `CollarFit.pushProfiles`, `CollarFit.homeo`, `collarArcs`,
+`collarArcs_locallyFinite`, `CollarFit.map`), inside the same `namespace HadwigerNelson.Plane` / `namespace ArcMap` / `section Collar` and the
+same `variable` lines, so every declaration keeps its full name. It imports what `BendCollar` imported (`Chain`, `UnitArc`, `LocalStructure`,
+`RadialPush`, `Pushforward`), so names resolve as before. `BendCollar.lean` is the skeleton's with those lines deleted and one line added,
+`import Proofs.HadwigerNelson.Plane.ValidMap.CollarMap`; `exists_collarFit` (lane C's) stays there. `Proofs.lean` imports `CollarMap` before
+`BendCollar`; `ARCHITECTURE.md` has a `CollarMap` row and `BendCollar`'s Imports cell gains it (`tools/check_architecture.py`: PASS, exit 0,
+`data/fs131/cg/arch-move.txt`). `scripts/Axioms.lean` needs no change for the move (full names unchanged).
+
+**The check**: `tools/fs131_cg_stmt.py --move` (new) splits the skeleton's `RadialPush` and `BendCollar` at `b2ccfb7b` and the working tree into
+declaration chunks and requires (1) each of the 76 declarations in exactly one layout file, the right one, and in no other file under
+`Proofs/` that did not declare that name at `b2ccfb7b`; (2) each statement byte-identical (a theorem's docstring and header to the `:=`; a
+`def`'s or `structure`'s whole text; each spec `example`); (3) the section note byte-identical in `CollarMap`; (4) `BendCollar.lean` exactly the
+skeleton's minus the moved lines plus the import (so `bend_toward_collar`'s block is unchanged with it); (5) no `axiom` and no `native_decide`
+in the four modules; and with `--move`, the moved text with its proofs byte-identical. **PASS** (`data/fs131/cg/stmt-move.txt`).
+`--self-test` (`stmt-move-selftest.txt`): a changed hypothesis in a moved theorem, a changed docstring letter, a changed definition body, a
+changed section note, an edit to `BendCollar`, an `axiom` line, a `native_decide`, a moved declaration duplicated in `BendCollar`, a moved
+declaration deleted — **9 of 9 fired, each naming its culprit**; the unplanted partner PASS. Without `--move` the same check runs at every later
+stage (statements only, since proofs change).
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 4 modules rebuilt (`CollarMap`, `BendCollar`, `BaseDense`, `Proofs`), 7
+with warnings, every warning `declaration uses 'sorry'`**, exit 0, 8 min 30 s (`build/gate/build/20261005T113306Z-3842169.log`, which ends "Build
+completed successfully (5791 jobs)"; driver log `data/fs131/cg/build-move.log`).
+
+## Stage 8 — SAVED (FS131-CG1)
+
+## Stage 9 — SAVED (FS131-CG1): the radial push proved, and the lane re-priced
+
+**Proved** (`Plane/ValidMap/RadialPush`, statements unchanged — `tools/fs131_cg_stmt.py` PASS, `data/fs131/cg/stmt-9.txt`): `push1_push1`,
+`push1_image_Ico`, `push1_image_Ioc`, `pushInv_pushFun`, `pushFun_pushInv`, `continuous_pushFun`, `continuous_pushInv`, `pushHomeo_polar`,
+`pushHomeo_eq_self`, `pushHomeo_image_polarSet` — so `pushHomeo` is a homeomorphism with no `sorry` beneath it. Evidence at this stage:
+`lake env lean` on the module, only the ten remaining `sorry` warnings (`data/fs131/cg/iter-9.txt`); the build is at Stage 10.
+
+**How** (33 new supporting declarations, listed in `stmt-9.txt`):
+- the one-dimensional push in closed form on each side of its peak (`push1_of_le_mid`, `push1_of_mid_le`, from `tent_of_le_mid`,
+  `tent_of_mid_le`); `push1_mem_Ico`/`_Ioc` map the sides into the image sides, and `push1_push1` is the affine inverse on each side;
+- **`polarAngle_polar`** (the plan's new child), stated on the whole window: `θ ∈ Ioc (φ − π) (φ + π)`, `0 < t` ⟹ `polarAngle P φ (P + t e θ)
+  = θ` (the plan's `|θ − φ| < π` misses the window's closed end, which `pushInv_pushFun` meets when `z` lies on the slit);
+- **`radialMap`** (a new def, with spec theorem `radialMap_id`): `pushFun` and `pushInv` are radial maps by `rfl`, and one lemma,
+  `radialMap_radialMap` (each ray to itself, the radius map inverted ray by ray, `0` and positivity kept), gives both inverses;
+- **continuity** through one lemma for both directions, `continuous_radialMap_push1`: the map is `z − (m − m')(θ)·tent(a θ, m θ, b θ,
+  |z − P|)·e θ` (`radialMap_push1_eq`); the displacement is `0` on the open half-plane behind `P` (there `|arg| > π/2`, so the angle is
+  more than `π/2` from the bisector and outside the sector) and on a ball about `P` (inside the inner profile's positive minimum,
+  `PushProfiles.exists_a_ge`); elsewhere the angle is continuous (`Complex.continuousAt_arg`), and either the angle is inside the sector
+  (every piece continuous, the tent's denominators nonzero) or `m = m'` there and the displacement is squeezed by `|m − m'| → 0`. No case
+  on the tent's knots, as the plan foresaw.
+
+**Re-price** (`LEAN.md`: from the first leaves). KP2 priced this part at about 670 lines (push1 60 + images 60 + inverses 150 + continuity
+250 + `pushHomeo_*` 150); it came in at 376 lines, every leaf on its first or second elaboration — about 0.55× the plan. Lane G's remaining
+price by the same ratio: the `tangRad` family and the profiles (plan ≈ 520) ≈ 300; `collarArcs_carrier` (plan 250, hard) ≈ 150–250; the
+map-level children in `CollarMap` (plan ≈ 650) ≈ 350–650 — those read `F`'s geometry, where the ratio is less certain. The lane fits this
+job's budget on that reading.
+
+## Stage 9 — SAVED (FS131-CG1)
+
+## Stage 10 — SAVED (FS131-CG1): `RadialPush` sorry-free — the tangent circles, the profiles, the lens boundary
+
+**Proved** (statements unchanged, `data/fs131/cg/stmt-10.txt` PASS): `tangRad_spec`, `tangRad_lt_one`, `one_lt_tangRad`, `tangRad_lt_tangRad`,
+`one_sub_tangRad_le`, `tangRad_sub_one_le`, `pushProfiles_collar`, `one_sub_lensProf_le`, **`collarArcs_carrier`** (the plan's second hard
+leaf), `dist_lt_one_of_mem_polarSet`. **`Plane/ValidMap/RadialPush` has no `sorry`**: `lake env lean` on it prints nothing
+(`data/fs131/cg/iter-10.txt`, empty). Spec example added: `pushProfiles_collar` at `R' = 3/4`, `R = 7/8`, `R'' = 5/4` over `[0, π/6]` (the
+plan's § 5.1 partition). The build is deferred to the next stage: the slot was full (two other lanes' builds), and the waiting build was
+stopped by its PID before it started (`slot: waiting`), so that work could continue.
+
+**How** (supporting declarations listed in `stmt-10.txt`):
+- **one quadratic** carries the whole `tangRad` family: `tangRad_quad` — `s² − 2(1 − R) s cos u − (2R − 1) = (s − tangRad R u)(s − t')`
+  with `t' < 0` — so for `s > 0` the sign of the quadratic is the sign of `s − tangRad R u` (`le_tangRad_iff`, `lt_tangRad_iff`,
+  `tangRad_le_iff`). Then: the sphere and disc (`tangRad_spec`) are the quadratic as a distance; `< 1` / `> 1` are its value at `s = 1`,
+  `2(1 − R)(1 − cos u)`; the order in `R` is its value at the smaller circle's root, `2(R − R')(s cos u − 1) < 0` (the smaller circle's
+  point projects below `1`); the depth and height bounds are the identity `(1 − t)(t + 2R − 1) = 2(1 − R) t (1 − cos u)`
+  (`tangRad_identity`) with `1 − cos u ≤ u²/2`; `tangRad_anti` (decreasing in `u` on `[0, π]`) is its value at another angle;
+- **`collarArcs_carrier`** by normal position: in the frame `w = (z − P) e(θ_E)‾` at an end the tangent circle is the circle about `1 − R`
+  of radius `R`; the germ arc is `s ↦ 1 + s e(π/2 + arcsin(s/2R))` (that is `branchPt`'s own formula), the lens curve `u ↦ tangRad R u · e u`.
+  Both lie on the circle's closed upper side (`germ_tangentCircle`, `polar_tangentCircle`), where a point is fixed by its chord from `1`
+  (`eq_of_tangentCircle`); the lens curve's chord `2R(1 − t cos u)` increases on `[0, π/2]`, from `0` to the germ arc's length, so the
+  intermediate value theorem matches every chord (`tangentArc_image`). At `B` the frame is the mirror `w‾` (`arcsin` is odd), so one lemma
+  serves both ends with no case on orientation. No inverse trigonometry beyond `branchPt`'s own `arcsin`.
+
+**Price**: the `tangRad` family, the profiles and the carrier came to about 350 lines against the plan's 770 (0.45×). `RadialPush` in all: 20
+children closed in ~810 lines against the plan's ~1,450.
+
+## Stage 10 — SAVED (FS131-CG1)
+
+## Stage 11 — SAVED (FS131-CG1): `CollarMap`'s lane-G children proved; build OK; axioms read; the handover
+
+**Proved** in `Plane/ValidMap/CollarMap` (statements unchanged: `tools/fs131_cg_stmt.py` PASS, `data/fs131/cg/stmt-11.txt`): all twelve of
+KP2's lane-G children — `kin_subset`, `kout_subset`, `homeo_eq_self`, `homeo_ringPt`, `homeo_fix_Γ`, `homeo_image_dom`,
+`collarArcs_nondegenerate`, `collarArcs_Γ`, `map_Γ`, `map_lens`, `map_agreesOff`, `map_valid`. **`CollarMap` has no `sorry`.** Routes, as
+the plan's except where said:
+- `kin_subset`/`kout_subset`: the inner (outer) collar is the image of the box `(θ₁, θ₂) × [0, 1)` (`× (0, 1]`) under the continuous map
+  `(θ, s) ↦ P + (a θ + s(1 − a θ)) e θ` (`(1 + s(b θ − 1))`), so preconnected; it is interior (`CollarFit.mem_interiorPts`: in the collar,
+  off the unit circle, and `free`); so one colour (`IsPreconnected.constant`), which the arc's inner (outer) side forces, the collar running
+  up to every point of `α°`;
+- `collarArcs_Γ` through one lemma, `CollarFit.homeo_image_Γ`: `h(Γ) = (Γ ∖ α°) ∪ β` (the ends lie on both sides); the cut's arcs carry
+  `Γ ∖ α°` off the ends (`mem_cutArcs_iff`), and no arc of `F` but `ω(P)`'s passes through `α°` (`CollarFit.not_kept`: near a point of `α°`
+  `Γ` is `ω(P)`, another arc meets `ω(P)` finitely, `Arc.finite_inter_sphere_or_eq_circ`, while an arc through the point has points at
+  every small distance, `Arc.exists_near`). `map_Γ` is the same lemma through `pushforward_Γ`;
+- `map_agreesOff`: on the collar off the closed lens the push back keeps a point in the inner collar (radius `< l θ` goes to `< 1`) or the
+  outer (radius `> 1` stays `> 1`), so both the point and its preimage are interior of one colour; the ends are fixed;
+- `map_valid` exactly as the plan: `Valid.of_agreesOff` on the closed lens, whose interior points in the bent map are the lens (the lens
+  curve is in `Γ`), clear for `c'` (`clear` inside; `ne1_region` on `α°`, which is in the closure of the outer class), no two `1` apart.
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 5 modules rebuilt (`RadialPush`, `CollarMap`, `BendCollar`,
+`BaseDense`, `Proofs`), 5 with warnings, every warning `declaration uses 'sorry'`; none in `RadialPush` or `CollarMap`** (`BendCollar` 14 and
+`Pushforward` 7, all lane C's), exit 0, 8 min 36 s; the log `build/gate/build/20261005T122643Z-11522.log` ends "Build completed successfully
+(5791 jobs)" (driver log `data/fs131/cg/build-11.log`). A first build of this stage failed at `Proofs.lean`: my new `polar_inj` clashed with
+`Woodall/Basic`'s `HadwigerNelson.Plane.polar_inj` (each module built alone; the clash shows only where both are imported). Renamed
+`polar_inj_window`; `tools/fs131_cg_stmt.py` now also fails on a new declaration whose name another file under `Proofs/` declares (plant:
+a `polar_inj` added to `RadialPush`, FIRED); `--self-test`: **10 of 10 plants fired, unplanted partner PASS** (`stmt-11-selftest.txt`). The
+same check's first form compared `:= by` as part of a statement, so a tactic proof turned term proof read as a statement change
+(`homeo_eq_self`); it now ends a statement at the `:=`, and the hypothesis plant still fires. `tools/check_architecture.py`: PASS.
+
+**Axioms** (`data/fs131/cg/CGAxioms.lean` → `CGAxioms.out`, against this build's oleans): 102 records — **95 within the standard three**
+(KP2's 23 `RadialPush` declarations with the three it had proved, 10 `CollarMap` declarations, the 62 supporting theorems); **7 on
+`sorryAx`**: `map_Γ`, `map_lens`, `map_agreesOff`, `map_valid` (lane C's `pushforward_locallyConstant` and `pushforward_interiorPts`, as
+predicted before the print), and the three controls — `exists_collarFit` (lane C's `sorry`), `bend_toward_collar`, and a planted
+`theorem cgControlPlanted : (1 : ℕ) = 2 := sorry` in the print file — each printing `sorryAx`. No other axiom. `scripts/Axioms.lean`'s block
+headed "FS131-I5g" gains one line per supporting theorem after KP2's lines (its diff against `b2ccfb7b` is additions only).
+
+**What is left of lane G**: nothing. **What is left of the collar bend**: lane C's children (`Plane/ValidMap/Pushforward`'s seven, fourteen in
+`BendCollar`, and the model map B0); when lane C proves `pushforward_locallyConstant` and `pushforward_interiorPts`, the four map-level
+children above become kernel theorems with no change on this branch. No gate run, no merge, nothing on `main` (as the brief says).
+
+**Front-page drafts**: none this job — the milestone closes at the gate, after lane C; the counts and ledger rows are drafted then.
+
+**Re-price, final**: lane G came in at ~1,190 lines of Lean (`git diff --stat b2ccfb7b`: `RadialPush` +905 −20, `CollarMap` 463 of which 156
+are the moved block; the tools aside) against the plan's 2,250 — about 0.53×.
+
+## Stage 11 — SAVED (FS131-CG1)

@@ -1,0 +1,2 @@
+HadwigerNelson.Plane.conj_e  declared in module (some Proofs.HadwigerNelson.Plane.Chord)
+constants named …conj_e: 1

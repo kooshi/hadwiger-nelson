@@ -24,6 +24,9 @@ a boundary point"), so both are stated over open colour classes, never over a ma
   three colours everywhere (S–V Lemma 2's conclusion under Condition 5, not a backlog row) makes it trichromatic, and Condition 6
   (`ArcMap.Condition6`) of degree `3`.
 * **The inhabitant**: `sevenBrickMap`, the brick seven-colouring of `Instances/Seven` (M36) as an arc map of the plane, valid.
+  It is the model of every theorem here that assumes only `Valid` and `IsPlaneMap` — TS-T (`ts_t`, `ts_t_trichromatic`,
+  `ts_t_degree_three`) among them: `sevenBrickMap_valid`, `sevenBrickMap_isPlaneMap`, three colours and degree `3` at its corner
+  (`sevenBrick_corner_coloursAt`, `sevenBrick_corner_hasDegree`) (FS131-QA4 § 4.1; inventory ruling 427 (d), F2).
 -/
 
 namespace HadwigerNelson.Plane

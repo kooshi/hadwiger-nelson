@@ -1,0 +1,8 @@
+exit 0
+PROBE T4.S9.instNonemptyTok DECLARED-BY T4Exp.S9.B kind=theorem uses=[Nonempty.intro, T4.Tok, T4.Tok.b]
+PROBE T4.S9.instNonemptyTok DECLARED-BY T4Exp.S9.A kind=theorem uses=[Nonempty.intro, T4.Tok, T4.Tok.a]
+PROBE T4.S9.instNonemptyTok ENV-HOLDS kind=theorem uses=[Nonempty.intro, T4.Tok, T4.Tok.a] copy-of=[T4Exp.S9.A]
+PROBE T4.S9.instNonemptyTok ATTRIBUTED-TO T4Exp.S9.B
+PROBE T4.S9.instNonemptyTok AXIOMS-PRINTED []
+PROBE T4.S9.instNonemptyTok AXIOMS-OF-HELD-VALUE []
+'T4.S9.down' does not depend on any axioms
