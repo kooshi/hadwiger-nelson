@@ -67,6 +67,14 @@ example : ∃ (U : Set ℂ) (c : ℂ → Fin 6) (x : ℂ) (D : ThreePiece U c x)
   obtain ⟨σ, -, -, w', -, -, η', hη', -, -, h⟩ := closePair_lone hU hc C hw hwu hy
   exact ⟨U, c, x, C.left, σ 0, σ 1, η', hη', h⟩
 
+/-- **The control, read through `ClosePair.separatesAt_or`** (added by FS124-I4): at seven colours the one sentence in
+which six is spent fails — some label is the label of no piece of the pair — and with it the conclusion: every other
+hypothesis of `ClosePair.separatesAt_or` holds of the control. -/
+example : ∃ (U : Set ℂ) (c : ℂ → Fin 7) (x y : ℂ) (C : ClosePair U c x y),
+    ¬ ∀ ℓ : Fin 7, (∃ i, C.left.label i = ℓ) ∨ ∃ j, C.right.label j = ℓ := by
+  obtain ⟨U, c, x, y, w, C, hU, hc, hw, hwu, hx, hy⟩ := exists_closePair_seven_not_separatesAt
+  exact ⟨U, c, x, y, C, fun hcover => (C.separatesAt_or hU hc.aeProperOn hw hwu hcover).elim hx hy⟩
+
 /-- `closePair_four` on its inhabitant: some weak six-colouring has a point at which exactly four labels are present. -/
 example : ∃ (U : Set ℂ) (c : ℂ → Fin 6) (w : ℂ), IsWeakColouringOn U c ∧ (presentAt U c w).ncard = 4 := by
   obtain ⟨U, c, x, y, w, C, hU, hc, hw, hwu, hax, hay, ⟨σ, hσ⟩, τ, hτ⟩ := exists_closePair_full

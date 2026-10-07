@@ -1,0 +1,8 @@
+control fired: FS124I4.control_cites prints sorryAx
+control fired: FS124I4.control_planted prints sorryAx
+control fired: HadwigerNelson.Plane.ThreePiece.IsSector.hasArcEdges prints sorryAx
+control fired: HadwigerNelson.Plane.ThreePiece.IsSector.isFull prints sorryAx
+control fired: HadwigerNelson.Plane.closePair_both_saved_of_isSector prints sorryAx
+asked: 135 (130 records, 5 controls); printed: 135
+records on a subset of the standard three: 128 with axioms, 2 axiom-free; controls fired: 5 of 5
+PASS

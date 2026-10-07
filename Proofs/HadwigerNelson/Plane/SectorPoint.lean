@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ClosePair
+import Proofs.HadwigerNelson.Plane.ClosePairWitness
 
 /-!
 # The claim list's sector point, and the bridge to arc edges (FS-124, second module; the θ-lemma is owed)
@@ -60,7 +61,8 @@ end ThreePiece
 /-- **Inhabitant**: the ordinary three-sector point is a sector point — its three arcs are the radii along `1`, `i`
 and `−1 − i`. -/
 theorem sectorPoint_isSector : sectorPoint.IsSector := by
-  sorry
+  obtain ⟨J, hJ⟩ := sectorPoint_arcCut
+  exact hJ.sector (by norm_num)
 
 /-- **C124-BOTH**, second clause, in the claim list's words (`data/fs124/claims-K2.md`): "If they are sector points,
 each has an edge that contains an arc of S(w) with an end at the member: no common unit point of a close
@@ -77,6 +79,9 @@ theorem exists_closePair_sector :
     ∃ (U : Set ℂ) (c : ℂ → Fin 6) (x y w : ℂ) (C : ClosePair U c x y),
       IsOpen U ∧ IsWeakColouringOn U c ∧ w ∈ U ∧ IsCommonUnitPoint x y w ∧ C.left.IsSector ∧
         C.right.IsSector := by
-  sorry
+  obtain ⟨J, hJ⟩ := squarePair_left_arcCut
+  obtain ⟨J', hJ'⟩ := squarePair_right_arcCut
+  exact ⟨_, _, _, _, _, squarePair, isOpen_threeDisc _, isWeakColouringOn_squareCol, one_mem_threeDisc _,
+    isCommonUnitPoint_zero_one_sub_I, hJ.sector (by norm_num), hJ'.sector (by norm_num)⟩
 
 end HadwigerNelson.Plane

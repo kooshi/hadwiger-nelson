@@ -1,0 +1,2 @@
+records in the block: 130 (121 theorems, 9 definitions that hold proofs); theorems of Plane/ClosePairWitness: 116, of Plane/ClosePairModel: 3, of Plane/SectorPoint taken: 2
+PASS

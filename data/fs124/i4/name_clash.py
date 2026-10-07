@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """FS124-I4: every name this job's helper module declares, looked for as a declaration of the same short name in the
-same namespace path in `Proofs/` of the main working tree and of every worktree (text scan; `scripts/dupnames.sh` on the
+same namespace path in `Proofs/` of the main working tree and of every worktree (text scan, files prefiltered by ripgrep on the short names; `scripts/dupnames.sh` on the
 built tree is the gate). Exit 0 iff no other file declares one. `--control` adds the name `fin_three_cases`
 (declared by Plane/ThreePiece) to the list and must find it."""
 import pathlib, re, sys, subprocess
@@ -28,19 +28,29 @@ if not mine:
     print("NO NAMES READ: the reader is broken"); sys.exit(2)
 trees = [MAIN] + sorted(p for p in (MAIN / ".claude/worktrees").iterdir() if (p / "Proofs").is_dir())
 want = set(mine)
-hits = []
+shorts = sorted({n.split(".")[-1] for n in want})
+pat = ROOT / "data/fs124/i4/logs/name-clash-shorts.txt"
+pat.write_text("\n".join(shorts) + "\n")
+hits, n_files = [], 0
 for t in trees:
-    for f in (t / "Proofs").rglob("*.lean"):
+    # the files of this tree that hold one of the short names as a word (ripgrep; -uu: no ignore file is read)
+    r = subprocess.run(["rg", "-uu", "-l", "-w", "-F", "-f", str(pat), "--glob", "*.lean", str(t / "Proofs")],
+                       capture_output=True, text=True)
+    if r.returncode not in (0, 1):
+        print(f"rg failed on {t}: {r.stderr[:200]}"); sys.exit(2)
+    for line in r.stdout.splitlines():
+        f = pathlib.Path(line)
         rel = str(f.relative_to(t))
         if rel in MINE and t == ROOT: continue
-        try:
-            txt = f.read_text()
-        except Exception:
-            continue
-        if not any(n.split(".")[-1] in txt for n in want): continue
+        n_files += 1
         for n in names(f):
             if n in want: hits.append((n, str(f)))
+print(f"files holding one of the short names as a word, read for declarations: {n_files}")
 print(f"names declared by this job's helper module: {len(mine)}; trees scanned: {len(trees)}")
 for n, f in hits: print(f"CLASH {n}  {f}")
+if "--control" in sys.argv:
+    ok = any(n == "HadwigerNelson.Plane.fin_three_cases" for n, _ in hits) and all(n == "HadwigerNelson.Plane.fin_three_cases" for n, _ in hits)
+    print("CONTROL: the planted name is found, and no other — the scan can fail" if ok else "THE CONTROL DID NOT FIRE AS PLANTED")
+    sys.exit(0 if ok else 1)
 print("PASS: no other file declares one of them" if not hits else f"{len(set(n for n, _ in hits))} name(s) declared elsewhere")
 sys.exit(1 if hits else 0)

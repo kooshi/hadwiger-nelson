@@ -1,0 +1,7 @@
+compared: 9 named constants of the first dump (types; values of definitions), 3 example heads
+definitions compared by their three data fields in place of their value: 0
+internal (not compared): 0 before, 0 after
+new named constants in the second dump: 0
+examples in the working files that the base does not hold: 1
+  NEW EXAMPLE Proofs/HadwigerNelson/Plane/ClosePairModel.lean: example : ∃ (U : Set ℂ) (c : ℂ → Fin 7) (x y : ℂ) (C : ClosePair U c x y), ¬ ∀ ℓ : Fin 7, (∃ i, C.left.label i = ℓ) ∨ ∃ j, C.right.label j = ℓ
+PASS: no statement and no definition changed

@@ -1,0 +1,5 @@
+files holding one of the short names as a word, read for declarations: 3828
+names declared by this job's helper module: 137; trees scanned: 76
+CLASH HadwigerNelson.Plane.fin_three_cases  /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/ThreePiece.lean
+CLASH HadwigerNelson.Plane.fin_three_cases  /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wk3/Proofs/HadwigerNelson/Plane/ThreePiece.lean
+CONTROL: the planted name is found, and no other — the scan can fail

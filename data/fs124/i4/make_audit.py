@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+"""FS124-I4 — the audit block for this job's records, and the scratch file that prints it.
+
+Reads an output of data/fs124/i4/lean/AuditDump.lean (every constant stored by `Plane/ClosePairWitness`,
+`Plane/ClosePairModel`, `Plane/SectorPoint`) and writes
+
+  data/fs124/i4/audit-block.txt        the block a landing pastes into scripts/Axioms.lean (CLEAN section)
+  data/fs124/i4/lean/PrintAxioms.lean  the same lines behind an import of the three modules, then the controls
+  data/fs124/i4/theorems-proved.txt    one line per record: kind, full name, module
+
+The records: every theorem (THM, not INTERNAL) of `Plane/ClosePairWitness` and `Plane/ClosePairModel`; of
+`Plane/SectorPoint` the two leaves of this job (MINE_SECTOR); and the definitions of `Plane/ClosePairWitness` that hold
+proofs (PROOF_DEFS: decompositions, pairs, a homeomorphism, labels with their bounds). The controls: the three records of
+`Plane/SectorPoint` that rest on the θ-leaf (it is `sorry`: not this job's), and two theorems planted in the scratch
+file — each must print `sorryAx`.
+
+Exit 0 iff every name of PROOF_DEFS and MINE_SECTOR and every control is a constant of the dump of the kind stated, and
+every theorem of the two modules is in the block: the counts are printed.
+Usage: make_audit.py <audit-dump.txt>
+"""
+import sys, pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parents[3]
+P = "HadwigerNelson.Plane."
+PROOF_DEFS = [P + n for n in ("planeMotion", "ThreePiece.transport", "labLo", "labHi", "threeDiscPair", "sevenPair",
+                              "lonePair", "splitPoint", "squarePair")]
+MINE_SECTOR = [P + "sectorPoint_isSector", P + "exists_closePair_sector"]
+THETA_CONTROLS = [P + "ThreePiece.IsSector.hasArcEdges", P + "ThreePiece.IsSector.isFull",
+                  P + "closePair_both_saved_of_isSector"]
+
+
+def read_dump(path):
+    mods, cur = {}, None
+    for ln in pathlib.Path(path).read_text().splitlines():
+        if ln.startswith("## MODULE "):
+            cur = ln.split(" ")[2]; mods[cur] = []
+        elif ln.startswith("@@ ") and cur is not None:
+            p = ln.split(" ")
+            mods[cur].append((p[1], p[2], p[-1] == "INTERNAL"))
+    return mods
+
+
+def main():
+    mods = read_dump(sys.argv[1])
+    W, M, S = (f"Proofs.HadwigerNelson.Plane.{m}" for m in ("ClosePairWitness", "ClosePairModel", "SectorPoint"))
+    bad = 0
+    for m in (W, M, S):
+        if not mods.get(m):
+            print(f"NO CONSTANTS READ FOR {m}: the dump or the reader is broken"); sys.exit(2)
+    kinds = {n: k for m in mods.values() for (k, n, _) in m}
+    block = ["/-! ## FS124-I4 — FS-124's second module, the witnesses (planned by FS124-K2): `Plane/ClosePairWitness` (three",
+             "discs, a decomposition moved by a rigid motion, the pairs `sevenPair`, `lonePair`, `squarePair`; the sector",
+             "point from three arcs, `ThreePiece.ArcCut`), `Plane/ClosePairModel` (`exists_closePair_not_separatesAt`,",
+             "`exists_closePair_full`, `exists_closePair_seven_not_separatesAt`) and two leaves of `Plane/SectorPoint`",
+             "(`sectorPoint_isSector`, `exists_closePair_sector`). No record here rests on a declared outside theorem. Nine",
+             "records are definitions that hold proofs. The other three records of `Plane/SectorPoint` rest on the θ-leaf",
+             "`ThreePiece.IsSector.hasArcEdges` and are not in this block. -/"]
+    records = []
+    for label, m in (("Plane/ClosePairWitness", W), ("Plane/ClosePairModel", M)):
+        block.append(f"-- FS124-I4: {label}")
+        for k, n, internal in mods[m]:
+            if k == "THM" and not internal:
+                block.append(f"#print axioms {n}"); records.append(("THM", n, label))
+        if m == W:
+            for n in PROOF_DEFS:
+                if kinds.get(n) != "DEF":
+                    print(f"UNRESOLVED {n}: not a definition of the dump"); bad += 1; continue
+                block.append(f"#print axioms {n}"); records.append(("DEF", n, label))
+    block.append("-- FS124-I4: Plane/SectorPoint (two leaves)")
+    for n in MINE_SECTOR:
+        if kinds.get(n) != "THM":
+            print(f"UNRESOLVED {n}: not a theorem of the dump"); bad += 1; continue
+        block.append(f"#print axioms {n}"); records.append(("THM", n, "Plane/SectorPoint"))
+    block.append("-- FS124-I4 block end")
+    for n in THETA_CONTROLS:
+        if kinds.get(n) != "THM":
+            print(f"UNRESOLVED CONTROL {n}"); bad += 1
+    others = [n for (k, n, i) in mods[S] if k == "THM" and not i and n not in MINE_SECTOR and n not in THETA_CONTROLS]
+    for n in others:
+        print(f"UNCLASSED theorem of Plane/SectorPoint: {n}"); bad += 1
+    (ROOT / "data/fs124/i4/audit-block.txt").write_text("\n".join(block) + "\n")
+    scratch = ["import Proofs.HadwigerNelson.Plane.ClosePairModel",
+               "import Proofs.HadwigerNelson.Plane.SectorPoint",
+               "/-! FS124-I4 — the axioms of every record of this job, printed from the build; then five controls. Generated by",
+               "`data/fs124/i4/make_audit.py`; read by `data/fs124/i4/read_axioms.py`. -/",
+               "set_option pp.fullNames true"]
+    scratch += [ln for ln in block[7:] if not ln.startswith("-- FS124-I4 block end")]
+    scratch += ["-- controls: each must print sorryAx",
+                "namespace FS124I4",
+                "/-- A planted control: a theorem on `sorry`. -/",
+                "theorem control_planted : (1 : ℕ) + 1 = 2 := by sorry",
+                "/-- A planted control: a theorem that cites the planted one. -/",
+                "theorem control_cites : (1 : ℕ) + 1 = 2 := control_planted",
+                "end FS124I4",
+                "#print axioms FS124I4.control_planted",
+                "#print axioms FS124I4.control_cites"]
+    scratch += [f"#print axioms {n}" for n in THETA_CONTROLS]
+    (ROOT / "data/fs124/i4/lean/PrintAxioms.lean").write_text("\n".join(scratch) + "\n")
+    (ROOT / "data/fs124/i4/theorems-proved.txt").write_text("".join(f"{k} {n} {lab}\n" for k, n, lab in records))
+    n_thm = sum(1 for k, _, _ in records if k == "THM")
+    print(f"records in the block: {len(records)} ({n_thm} theorems, {len(records) - n_thm} definitions that hold proofs); "
+          f"theorems of Plane/ClosePairWitness: {sum(1 for k, n, i in mods[W] if k == 'THM' and not i)}, "
+          f"of Plane/ClosePairModel: {sum(1 for k, n, i in mods[M] if k == 'THM' and not i)}, of Plane/SectorPoint taken: {len(MINE_SECTOR)}")
+    print("PASS" if not bad else f"FAIL: {bad}")
+    sys.exit(1 if bad else 0)
+
+
+if __name__ == "__main__":
+    main()

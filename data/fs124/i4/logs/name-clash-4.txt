@@ -1,0 +1,3 @@
+files holding one of the short names as a word, read for declarations: 3828
+names declared by this job's helper module: 136; trees scanned: 76
+PASS: no other file declares one of them

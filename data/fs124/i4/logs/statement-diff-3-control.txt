@@ -1,0 +1,12 @@
+compared: 9 named constants of the first dump (types; values of definitions), 3 example heads
+definitions compared by their three data fields in place of their value: 0
+internal (not compared): 0 before, 0 after
+new named constants in the second dump: 0
+examples in the working files that the base does not hold: 2
+  NEW EXAMPLE Proofs/HadwigerNelson/Plane/ClosePairModel.lean: example : ∃ (U : Set ℂ) (c : ℂ → Fin 6) (x : ℂ) (D : ThreePiece U c x) (i j : Fin 3) (η : ℝ), 0 < η ∧ interior (D.piece i) ∩ closure (D.piece j) ∩ bal
+  NEW EXAMPLE Proofs/HadwigerNelson/Plane/ClosePairModel.lean: example : ∃ (U : Set ℂ) (c : ℂ → Fin 7) (x y : ℂ) (C : ClosePair U c x y), ¬ ∀ ℓ : Fin 7, (∃ i, C.left.label i = ℓ) ∨ ∃ j, C.right.label j = ℓ
+TYPE     THM HadwigerNelson.Plane.exists_closePair_full: the stored statement differs
+VALUE    DEF HadwigerNelson.Plane.ThreePiece.IsSector: the stored definition differs
+EXAMPLE  Proofs/HadwigerNelson/Plane/ClosePairModel.lean #1: its statement is not in the working file (in order)
+    was: example : ∃ (U : Set ℂ) (c : ℂ → Fin 6) (x : ℂ) (D : ThreePiece U c x) (i j : Fin 3) (η : ℝ), 0 < η ∧ closure (D.piece i) ∩ closure (D.piece j) ∩ ball x η = {x}
+CONTROL: 3 of 3 planted faults reported — the check can fail
