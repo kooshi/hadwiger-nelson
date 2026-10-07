@@ -137,3 +137,63 @@ beyond its first two families.
 family title and sentence and every manuscript title can be read in this context; the 722 abstracts in full cannot, and need not be:
 a family's sentence is the catalogue's own statement of its problem. Where I cut: abstracts and manuscripts are opened only for
 families the two passes flag; Tier A hits are read at their statements, not in full, as the brief says.
+
+## Stage 2 — SAVED: the sweep, its control, and the first tier
+
+### 2.1 How the sweep was made
+
+Two passes, neither trusted alone.
+
+- **By eye**: all 372 family titles with their catalogue sentences, and all 722 manuscript titles, read in full
+  (`data/external/oai3/families-read.txt`, one line per family, generated from the index). Abstracts were opened only for families
+  flagged.
+- **By keyword** (`data/external/oai3/sweep.py`; Python `re`, never `grep -E`; output `sweep-output.txt`): the brief's phrases in the
+  discipline's words and from the other side, and three groups of mine — the same questions elsewhere, what this project assumes or
+  poses, and methods — over each family's title and sentence, each manuscript's title and catalogue abstract, and the abstract
+  `pdftotext` read from the PDF.
+- **The control** (`sweep-control.txt`): in a scratch copy of the index, three of the brief's phrases ("measurable chromatic number",
+  "distance-avoiding", "Moser spindle") were planted in one row's abstract (row 400, family 218); the sweep finds all three there,
+  and finds none in the true index.
+
+**Zero hits in the whole release** for: "measurable chromatic", "distance-avoiding", "unit-distance graph", "distance graph",
+"forbidden distance", "de Grey", "Moser", "polychromatic", "density … avoid", "Kneser", "sphere packing", "kissing", "Steinhaus",
+"Lovász", "Hoffman", "Furstenberg", "invariant measure", "Rajchman", "Kloosterman", "Herglotz", "Tarski", "real closed",
+"Hedetniemi", "Cayley graph", "four-colour", "Kempe", "descriptive", "incidence". "Hadwiger" hits family 157 (Hadwiger's conjecture
+on clique minors — another Hadwiger) and 158; "Nelson" and "chromatic number of the plane" hit 158 alone; "unit distance" hits 158
+and 167; "Falconer" hits 073 alone (the distance conjecture, not his theorem on measurable colourings).
+
+### 2.2 The first tier — five families (sent to the coordinator, 2026-10-07)
+
+Catalogue sentences verbatim from `/home/kooshi/source/math/CONTENTS.md`; Lean status as the release states it, none of it built or
+audited here.
+
+| family | title | catalogue sentence | manuscripts | Lean, as the release states it |
+|---|---|---|---|---|
+| 073 | The Falconer distance conjecture | "Resolves the Falconer distance conjecture in every dimension d ≥ 2: every compact set $E\subset\mathbb R^d$ with Hausdorff dimension greater than $d/2$ determines a set of Euclidean distances of positive Lebesgue measure." | 1 | note `lean/docs/073.md`; challenges `PlanarFalconer.lean`, `FalconerAllDimensions.lean`, each with a solution module; the catalogue's main-results list names the planar one only |
+| 166 | The higher-dimensional Erdős distinct-distances conjecture | "For every fixed d ≥ 3, any n ≥ 2 distinct points in ℝ<sup>d</sup> determine at least $c_dn^{2/d}$ distinct distances, with $c_d\gt 0$ depending only on dimension. This matches the integer-grid order and resolves the higher-dimensional Erdős distinct-distances conjecture with a constant-factor bound." | 1 | none: manuscript only |
+| 167 | Planar distinct distances and unit-distance bounds | "Proves the weak pinned Erdős distance conjecture: for every fixed ε > 0, all but $o(n)$ points of any n-point planar set determine at least $n^{1-\varepsilon}$ distinct nonzero distances. A complementary theorem bounds the number of unit-distance pairs by $O(n^{4/3-\delta})$ for an absolute δ > 0." | 2 | note `lean/docs/167.md`; challenges `PinnedDistances.lean`, `PlanarUnitDistances.lean`, each with a solution module; the note says both "The separate unit-distance power-saving theorem is not included." and that the formalization proves it; the main-results list names the pinned one only |
+| 172 | Classification of finite Euclidean Ramsey configurations | "Classifies finite point configurations that occur monochromatically, at their original scale, in every finite coloring of sufficiently high-dimensional Euclidean space. The characterization is an algebraic condition over the coordinate field. It also disproves the Leader–Russell–Walters conjecture that every such configuration is a subset of a finite transitive set." | 1 | note `lean/docs/172.md`; seven challenges; `OAI.EuclideanRamsey.classification` and `OAI.GrahamSpherical.full_main` are in the main-results list |
+| 156 | Borsuk's conjecture fails in dimension nine | "Constructs a compact subset of ℝ<sup>9</sup> that cannot be covered by ten sets of strictly smaller diameter, disproving Borsuk's covering assertion already in dimension nine. The example consists of rank-one orthogonal projectors onto lines in ℝ<sup>4</sup>, with the Frobenius metric." | 1 | note `lean/docs/156.md`; challenge `BorsukNine.lean`, in the main-results list |
+
+**The tier widened, and why**: the brief's Tier A names "the same questions in other dimensions … or for other forbidden distances".
+Borsuk's partition number is the chromatic number of a set's diameter graph — the classical sibling of this problem — so 156 is in.
+The brief's own keyword listing had 073, 167 and 172; 166 and 156 are from the reading.
+
+**No other family claims anything on the Hadwiger–Nelson problem itself** — the plane's chromatic number, the measurable or
+almost-everywhere form, the chromatic number of a field's plane or a finite plane, a finite unit-distance graph's chromatic number,
+or the density of a unit-distance-avoiding set (E2: not met, as expected).
+
+**Three counts of "has Lean"** in this release, found while reading the five: a family note exists (235 families); the paper is among
+the 162 "with a formalized main result" in `lean/formalization.yaml`; a comparator challenge is in that file's main-results list
+(178 of the 405 challenge configurations on disk are; 227 are not). Each row in the stages below says which of the three it means.
+
+**Family 158, one item seen in passing** (not re-read): its Lean note lists a second comparator challenge, `PlaneColoring.lean` —
+`theorem properColoring_seven : ProperColoring 7`, namespace `OAI.Problem160`, solution module `OAI.Geometry.PlaneColoring.Main` —
+"the upper bound includes every boundary point of the coloring regions" (`lean/docs/158.md`).
+
+### 2.3 Candidates flagged for the other tiers, from the reading (confirmed or dropped in the stages below)
+
+- Tier B candidates: the release's own Lean library, for a proof of anything this project imports (Weil's bound for Kloosterman
+  sums; Bochner–Herglotz; the real-algebraic descent) — a sweep of the library's declaration names, stage 4; family 015 (its
+  abstracts name "measure rigidity").
+- Tier D candidates: 015, 028, 084, 090, 096, 144, 145, 154, 155, 157, 182, 231, 266, 354, 366.
