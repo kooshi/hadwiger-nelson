@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–599 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–600 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 1. Read first
@@ -65,7 +65,8 @@ a fresh agent on the same brief.
 6. ~~FS131-K7c~~ — running (item 599 (h)).
 7. **FS131-K9b** (`debruijn`; `data/fs131/briefs/FS131-K9b-wave9-second.md`, generator `mk-k9b.py`, gate exit 0): re-run the generator and the gate at launch if wave 8 has landed since it was written.
 8. **FS131-I9B** (`data/fs131/briefs/FS131-I9B-wave9-uniform.md`, generator `mk-i9b.py`, gate exit 0; tree `fs131-w9b`).
-**Then briefs to write: K10d, I10G, E9 (claim list first), I6Z2 (trial the three-branch merge first), K8c (after wave 8 lands), the owed-models job (with `exists_arcStep`'s model, ruling 599 (c)).**
+9. **FS131-I10G** (`data/fs131/briefs/FS131-I10G-wave10-leaves.md`, generator `mk-i10g.py`, gate exit 0; tree `fs131-w10g` from `main` at `d38c118b`): its first act merges `origin/fs131-w10k` and sends the merge's hash — **fast-forward `fs131-w10k` onto that hash before launching K10d** (item 600 (c)).
+**Then briefs to write: K10d, E9 (claim list first), I6Z2 (trial the three-branch merge first), K8c (after wave 8 lands), the owed-models job (with `exists_arcStep`'s model, ruling 599 (c)).**
 
 **Briefs to write, planners first** (a planner's hand-back is what implementers wait on):
 - ~~**FS131-K7c**~~ (written and launched, item 599; the notes below are what its brief carries) (`debruijn`, on `fs131-w7`): first act, merge `origin/fs131-w7a` (ruling 564 (f); my trial conflicts in `scripts/Axioms.lean` only) and fix `ARCHITECTURE.md`'s row for `Count`; then the discrepancy between `tools/fs114_y2_k1.py` and `data/fs116/n1/ring-survey-bowtie.out` about FS114-Y2-BOWTIE's ring (ruling 553 (a)); the pinwheel and eight rows; `rstopAll`'s `SimpleOn` narrowing; **item 571's relay** (four of its five QOPP theorems follow from wave 3's two cone lemmas; `qArc_inner`'s first clause is wave 8's `qcol_inner_tile`); `#check` every leaf it states (item 564: four of its predecessor's were false for a missing section variable).
@@ -77,7 +78,7 @@ a fresh agent on the same brief.
 - **Landings**: wave 6's second, waves 7, 8, 9 — each brief adapted from `mk-l10b.py`, and each **carries T5's draft 7** (the line on declaring assumptions) once LT5 has landed. Then the milestone's filing (§ 8).
 - **Every implementer brief from now on** asks for the guarded lint at its last stage (item 573) and a `#check`-level statement check (item 556; the tools are `tools/fs131_i7a_stmt_check.py` on `fs131-w7a` and `tools/fs131_i8a_stmt.py` on `fs131-w8a`).
 
-**Generators** (`data/fs131/briefs/scripts/`): `mkbrief.py` (the helper), `mk-l10b.py`, `mk-lt5.py`, `mk-i8b.py`, `mk-i6k-amend.py` (re-runnable while unlaunched), `mk-k8b-amend.py`, `mk-search-1006.py`, `mk-k7c.py`, `mk-k9b.py`, `mk-i9b.py` (the two planners' read whether wave 8 has landed and word the merge of `main` to match), `mk-l8a.py`, `mk-i7m.py`, `mk-i8cd.py`, `mk-ext-hn2.py`, `mk-i78.py`, `mk-k78b.py`, `mk-md.py`, `mk-i6k.py`, `mk-k6d.py`, `mk-l6a.py`, `mk-if1.py`, `mk-t5.py`.
+**Generators** (`data/fs131/briefs/scripts/`): `mkbrief.py` (the helper), `mk-l10b.py`, `mk-lt5.py`, `mk-i8b.py`, `mk-i6k-amend.py` (re-runnable while unlaunched), `mk-k8b-amend.py`, `mk-search-1006.py`, `mk-k7c.py`, `mk-k9b.py`, `mk-i9b.py`, `mk-i10g.py` (the two planners' read whether wave 8 has landed and word the merge of `main` to match), `mk-l8a.py`, `mk-i7m.py`, `mk-i8cd.py`, `mk-ext-hn2.py`, `mk-i78.py`, `mk-k78b.py`, `mk-md.py`, `mk-i6k.py`, `mk-k6d.py`, `mk-l6a.py`, `mk-if1.py`, `mk-t5.py`.
 
 ## 5. Procedures
 

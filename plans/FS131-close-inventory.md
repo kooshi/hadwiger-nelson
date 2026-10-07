@@ -7755,4 +7755,30 @@ reason by the close.*
      Why not: wave 6's line holds sixty-two open leaves, two of them a deriver's, and a merge would chain wave 9's
      landing to all of them; ruling 566 (a) fixes which statement the join takes, not where it is made. Confidence:
      high. (h) **Slot → FS131-K7c** (wave 7's third planner, `debruijn`, in `fs131-w7`), launched 2026-10-07 about
-     01:00 UTC. In flight: 3 (MD1, L8A, K7c). Next into a free slot: FS131-K9b, then FS131-I9B.
+     00:40 UTC. In flight: 3 (MD1, L8A, K7c). Next into a free slot: FS131-K9b, then FS131-I9B.
+
+600. **FS131-L8A, by message mid-job: wave 8's join is whole and `main` is merged; a twelfth module my brief did not name; docstrings the join made false** (source: L8A's message to "main", 2026-10-07 about 00:45 UTC; its record's Stages 1–2 and the merge `1171c25b` are pushed — the artifact is read at its hand-back).
+     Its account, not yet checked by me: the join `a243db17` conflicted in `ARCHITECTURE.md` and `scripts/Axioms.lean`
+     only; the joined build has no module with a warning and no `sorry` under `Proofs/`; 207 records in 7 blocks, 205
+     on exactly the standard three and 2 on `[propext, Quot.sound]`; elaborated statements unchanged against
+     `989a0393`, and against `0bdf6ea9` exactly the five of item 592. **The fact**: the line lands `Plane/SimpleOn`
+     (wave 7's foundation, commit `611ffa39`, shared by ancestry) — not on `main`, and not named in my brief.
+     **Checked by me**: one blob (`01a7215ae7`) on `origin/fs131-w8l`, `origin/fs131-w7`, `origin/fs131-w9` and at
+     `611ffa39`; `RingCalculus/Basic` imports it; no `sorry`. **The question**: three doc-comment sentences in
+     `SemiHub` and `SemiHubPlaces`, two rows of `ARCHITECTURE.md` and a block comment of `scripts/Axioms.lean` say
+     "stated", "skeleton" or "until the wave's join" of what the join proved. **A slip, mine**: the landing brief's
+     list of modules omitted the shared foundation the wave imports. **Rulings**, sent to it by message.
+     (a) **`Plane/SimpleOn` is gated and landed with the wave**, named in its record as the twelfth module.
+     Alternative: none live — the wave's modules import it. Confidence: high. (b) **The stale sentences are made
+     true of the joined state**, doc comments and registry prose only, each listed in its record as beyond the
+     brief's list with before and after text; its touches are extended to exactly these. Alternative: file them as
+     docstrings owed. Why not: "stated" would be false on `main` for two proved rows, and a later landing would
+     rebuild the modules for three sentences. Confidence: high. (c) **FS131-I10G's brief is written** while the
+     slots are full (`mk-i10g.py`, gate exit 0, 33 quotations; tree `fs131-w10g` from `main` at `d38c118b`, build
+     copied from the gate step's idle tree, pushed): its first act merges `origin/fs131-w10k` (my trial conflicts
+     in `scripts/Axioms.lean` only) and sends me the merge's hash, **onto which I fast-forward `fs131-w10k` before
+     wave 10's fourth planner is launched**, so that the planner and the implementer share one history; then the
+     level row's two leaves, the usable place (the plan's fallback to a named hypothesis is a message to me first:
+     the gate lists it), and the open gate items of ruling 575 (a). (d) **My trial of wave 6's three sibling
+     branches, for FS131-I6Z2's brief**: `fs131-w6z` with `fs131-w6l` — clean; with `fs131-w6k` — clean; `fs131-w6l`
+     with `fs131-w6k` — `scripts/Axioms.lean` only.
