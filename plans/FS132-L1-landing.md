@@ -254,3 +254,162 @@ and reads `GENERIC`: no `VACUOUS` control exists to plant. The emptiness that ma
 colours (this library's), with five (the import), no weak colouring with one — is a statement over all functions, which
 a per-binder scan cannot read. Both OUT; the module's docstring already says that the transfer is empty of content
 where no proper `k`-colouring exists, and gives the model at seven.
+
+## Stage 5 — SAVED (FS132-L1): what the library assumes, written; the audit's controls at the new state; the scan and its header; a second amendment
+
+Everything in this stage is a probe on the tree as it will be gated (the theorem, the ruled edits, `main` merged at
+`db43b298`); the gate's own run is stage 6. Build after the docstring edit (`data/fs132/l1/build-3-docstring.log`):
+**exit 0** — "474 of 474 batches, 10 module(s) rebuilt, 0 module(s) with warnings, 9m4s": `Instances/HexShell` and the
+nine modules downstream of it (`Instances/{ResidueObstruction11, FanGap11, LocalGlobal19, PlaneFreedom, FanGap19,
+FalconerOrbit}`, `Arith/{PlaceHom, FalconerField}`, `Proofs`) — a docstring is environment data, so its dependents
+rebuild. `Outside/OAI158` is not downstream of `HexShell` and was not rebuilt by it.
+
+### 5.1 The assumptions step: ten rows, and nothing else
+
+`./scripts/assumptions.sh --self-test` first (`probes/assumptions-selftest-first.out`): exit 0, "OK — all 33 checks
+behaved: every planted fault fired, and every partner stayed silent". Then the step (`probes/assumptions-first.out`,
+scan `probes/assumptions-first.scan.log`): **exit 1, ten failures, one kind** — `unlisted-consumer` for the ten `RESTS`
+rows of the two new axioms (five each: the import's nine, and this job's theorem on the transfer). Every failure read;
+there is no other: the scan's own `fails=0`, `hints=0`. **No line of `scripts/Assumptions.lean` is asked** (no
+`undeclared-…` row, no `SILENT` or `CONDITION` row naming the module).
+
+`./scripts/assumptions.sh --write-ledger` (`probes/assumptions-write-ledger.out`): exit 0, "ledger written (117 rows)".
+**The ledger gains ten rows and loses none** (the before-text is `data/fs132/l1/assumptions-ledger-before.txt`; 107 →
+117 rows), and its header's count line moves from `axioms=1 rests=8 …` to `axioms=3 rests=18 …`:
+
+```
++ RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.chiM0_six_or_seven
++ RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven
++ RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.not_colorable_five
++ RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.six_le_chiM0
++ RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.six_le_chromaticNumber_plane
++ RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.chiM0_le_chromaticNumber_plane
++ RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0
++ RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.colorable_iff_nonempty_aeColouring
++ RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.nonempty_aeColouring_of_colorable
++ RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff
+```
+
+Each row is a theorem that is conditional on one named outside statement. After it (`probes/assumptions-after.out`):
+**exit 0** — "assumptions: OK — 3 outside theorem(s) as axioms, with 18 theorem(s) resting on them; 19 named and 16
+inline hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s) and mentioned by 1"; the ledger's header
+"match (9 of 9 compared)"; `CLAUDE.md` § Trust ledger flagged stale, "axioms 1 → 3, rests 8 → 18" (drafts).
+
+| | `main` (FS131-L8A's gated scan) | this tree |
+|---|---|---|
+| `=== SCANNED ===` | constants=14063 theorems=10405 formers=320 hypotheses=18013 closed=1473 | constants=14095 theorems=10430 formers=322 hypotheses=18019 closed=1473 |
+| the nine | axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1 | **axioms=3 rests=18**, the other seven unmoved |
+| the rest | conditions=35 … silent=1 cohyp=58 hints=0 unseen=16035 fails=0 | conditions=35 … silent=1 cohyp=58 hints=0 unseen=16040 fails=0 |
+
+The two new formers are `ProperColoring` and `WeakColoring`: each is taken as a hypothesis and concluded by a theorem
+with no assumption (`exists_properColoring_seven`; `weakColoring_of_aeColouring`), so the step does not ask whether
+they are assumptions. `unseen` +5: the module's hypotheses over its own variables (a proper colouring, a measurable
+map, a weak colouring, a colouring of the graph, an `AeColouring`), each a condition on the theorem's own objects.
+
+### 5.2 The second finding, and the second amendment (R5, R6)
+
+Reading the step's printed list of what the library assumes, not its verdict: **two of the five hypotheses it holds as
+kind `open` are implied by the import.** `inline:SixTarget` ("row 43 (the six-target: every √3-pair and every
+distance-2 pair separated at five colours; G26)"), taken by `not_colorable_five_of_forced_pairs` and
+`six_le_chromaticNumber_plane_of_forced_pairs` in the binders `h3`, `h2`, each `∀ (C : (unitDistance ℂ).Coloring (Fin
+5)) (x y : ℂ), dist x y = … → C x ≠ C y`; and `inline:SixTargetOneTwo` ("row 61 (the six-target, distance-set-generic:
+the plane of the distances 1 and 2)"), taken by `six_le_chromaticNumber_oneTwo_of_forced_sqrt3` in `h3 : ∀ (C :
+(distanceGraph ℂ {1, 2}).Coloring (Fin 5)) (x y : ℂ), dist x y = Real.sqrt 3 → C x ≠ C y` (`Instances/HexShell.lean` l.
+454, read). Given `not_colorable_five` the first binders range over an empty type; the second's ranges over
+five-colourings of the plane's `{1, 2}`-distance graph, each of which is a five-colouring of the plane
+(`chromaticNumber_unitDistance_le_distanceGraph`, `DistanceGraph.lean` l. 82), so it is empty for the same reason, one
+library lemma further. The step cannot see it: no theorem of the library states those binders, so they read as declared
+hypotheses, `takes=98` unmoved.
+
+**Checked as terms, not argued** (`data/fs132/l1/five-empty.lean`, `lake env lean`, exit 0, `five-empty.out` —
+iteration files, **not** library theorems: R1 keeps every such statement out of the library at this landing):
+`IsEmpty ((unitDistance ℂ).Coloring (Fin 5))`; `SixTarget`'s two binders as closed theorems, and the two consumers
+applied to them, concluding `¬ (unitDistance ℂ).Colorable 5` and `6 ≤ (unitDistance ℂ).chromaticNumber`;
+`¬ (distanceGraph ℂ {1, 2}).Colorable 5`, `SixTargetOneTwo`'s binder, and its consumer applied, concluding `6 ≤
+(distanceGraph ℂ {1, 2}).chromaticNumber`. Each prints `[propext, Classical.choice, Quot.sound,
+HadwigerNelson.Outside.OAI158.no_proper_five_coloring]`. **The control** (`five-empty-control.lean`): the same term at
+six colours is refused, exit 1, "Application type mismatch … `(unitDistance ℂ).Coloring (Fin 6)` … expected
+`(unitDistance ℂ).Coloring (Fin 5)`" — the import closes the five-colour binders and not the six-colour ones
+(`SevenTarget`, `hexShell_plane6`).
+
+Sent to the coordinator; **ruled by a second amendment of the brief** (on `main`; read whole by `git show`):
+
+> **R5 — yes: the two source strings say it in words in this landing; the kinds and the counts do not move.** In
+> — source: data/fs132/briefs/FS132-L1-import-land.md
+
+> **R6 — in your record and drafts**: (i) both entries under the tooling job's list beside R1's question, as you propose —
+> — source: data/fs132/briefs/FS132-L1-import-land.md
+
+**Done under R5** — `scripts/Assumptions.lean`, five lines, each changed inside its last string literal and nowhere
+else (by script: the text before the string is identical, and the old string is a prefix of the new; the before-text
+is `data/fs132/l1/Assumptions-before.lean`): the four sites of `SixTarget` carry one source, character for character,
+which now ends "… — given the declared outside theorem Outside.OAI158.no_proper_five_coloring this holds with nothing
+to prove: its binder ranges over five-colourings of the plane, of which there are none
+(Outside.OAI158.not_colorable_five); the kind stays open until the tooling job decides how such an entry is classed
+(FS132-L1)"; `SixTargetOneTwo`'s the same with "five-colourings of the plane's {1, 2}-distance graph, each of them a
+five-colouring of the plane (chromaticNumber_unitDistance_le_distanceGraph)". Its binder was read before the string
+was touched, and is empty for the same reason (above). **Kind `open`, the references `row:43` and `row:61`, the nine
+counts and the ledger's rows are as they were**: after the edit the self-test reads "all 33 checks behaved"
+(`probes/assumptions-selftest-after.out`), the step exits 0 with the same nine counts, and its digest shows exactly two
+`ASSUMPTION` rows reworded (`probes/assumptions-after.out`: two `+`, two `-`, the same labels, kinds and consumer
+counts).
+
+### 5.3 The axiom audit: three declared imports; its two state-reading controls brought to the new state
+
+`./scripts/axioms.sh --self-test` with the controls **as `main` has them** (`probes/axioms-selftest-before.out`):
+**exit 1 — "2 of 23 control(s) did not behave as designed"**: `baseline` and `imported_declared`, the two whose
+expected counts read the library's state ("expected COUNTS imported=8 … declared=1 … library=1", "got: … imported=18 …
+declared=3 library=3"; and 9 / 2 / 2 against 19 / 4 / 4). The other twenty-one behaved. **The rule, in the controls
+file's own words**: "A later import, or this one's proof, moves them again — per declared import, `declared` and
+`library` rise by one in both controls and `imported` by its records, the `old` digests' texts follow, and
+`banner_dropped` gains `FAIL outside-banners <one of its records>` and `FAIL stale-declaration <the axiom>`". Applied
+(`scripts/axioms-controls.txt`; the counts derived from the rule — two more imports, five records each — and then seen
+to agree with the run):
+
+| control | was | is |
+|---|---|---|
+| `baseline` | `imported=8`, `declared=1`, `library=1`; digest `old` "… the audit has 8 imported" | `imported=18`, `declared=3`, `library=3`; "… has 18 imported" |
+| `imported_declared` | `imported=9`, `declared=2`, `library=2`; digest `old` "… has 9 imported" | `imported=19`, `declared=4`, `library=4`; "… has 19 imported" |
+| `banner_dropped` | two expectations for Weil's bound | four more: `outside-banners not_colorable_five`, `stale-declaration no_proper_five_coloring`, `outside-banners seven_le_chromaticNumber_plane_iff`, `stale-declaration proper_to_borel_weak` |
+| the file's header comment | one declared import, eight records | three, eighteen, by name |
+
+After it (`probes/axioms-selftest-after.out`): **exit 0, "OK — every planted fault fired, and every partner passed"**
+(23 controls). The audit (`probes/axioms-probe.out`, receipt `probes/axioms-probe.receipt.log`): **exit 0** — "audited:
+6576 records — 6533 clean on the standard axioms, 20 axiom-free, 18 imported (resting on a declared outside theorem),
+5 declared purchase(s)"; "declared imports (3): …kloosterman_bound, …no_proper_five_coloring, …proper_to_borel_weak";
+"library axioms other than native auxiliaries (3): … every one declared". Against `main`'s 6,554 (6521 / 20 / 8 / 5):
+**+22 records = +12 clean, +10 imported**; axiom-free and purchases unmoved.
+
+### 5.4 The vacuity scan: one new site, `GENERIC`; the baseline's header
+
+`./scripts/vacuity.sh` (`probes/vacuity-probe2.out`, scan `probes/vacuity-probe2.scan.log`): **exit 0, "vacuity: OK"**.
+
+| | `main` | the joined tree, before the theorem (`vacuity-joined`) | this tree |
+|---|---|---|---|
+| declarations | 14807 | 14844 | **14845** |
+| refutations-skipped | 215 | 215 | 215 |
+| sites | 1446 | 1447 | **1447** |
+| vacuous / stale / declared / witnessed | 0 / 0 / 3 / 38 | the same | the same |
+| generic | 1403 | 1404 | **1404** |
+| unknown | 2 | 2 | 2 |
+
+**How the scan classes every new site**: there is one — `SITE GENERIC HadwigerNelson.Outside.OAI158.weakColoring_of_aeColouring
+:: HadwigerNelson.Plane.AeColouring k`, a binder on the tracked `AeColouring` at a variable number of colours (the
+caller's obligation, by the scan's law; its model in the module is `Plane.r7_aeColouring` through
+`proper_to_borel_weak_model`). The two imports raise none: `no_proper_five_coloring` has no hypothesis;
+`proper_to_borel_weak`'s hypothesis `ProperColoring k c` is not a tracked carrier (OUT, above), and is inhabited at
+seven by `exists_properColoring_seven`. The landing's theorem has no binder. **No site reads `VACUOUS` or `UNKNOWN`
+beyond the baseline's two; no entry is added.** `declarations` +38 are the module's (37 before the theorem, and the
+theorem); `refutations-skipped` does not move: the two negations (`no_proper_five_coloring`, `not_colorable_five`) are
+stated negations, audited, not skipped. `hexShell_plane5` reads `UNKNOWN`, held by the baseline, as before — the
+finding of the first amendment.
+
+`scripts/vacuity-baseline.txt`, the header's two count lines, from `scripts/gate_report.py header` on that scan
+(`diff` of the script's output with the file's lines: none):
+
+```
+-#   declarations=14807  refutations-skipped=215  sites=1446
+-#   vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2
++#   declarations=14845  refutations-skipped=215  sites=1447
++#   vacuous=0 stale=0 declared=3 witnessed=38 generic=1404 unknown=2
+```

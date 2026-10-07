@@ -1,0 +1,9 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 4,5
+data/fs132/l1/five-empty-control.lean:7:32: error: Application type mismatch: The argument
+  C
+has type
+  (unitDistance ℂ).Coloring (Fin 6)
+but is expected to have type
+  (unitDistance ℂ).Coloring (Fin 5)
+in the application
+  Nonempty.intro C

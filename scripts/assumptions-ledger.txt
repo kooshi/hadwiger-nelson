@@ -4,8 +4,18 @@
 # holds it at unknown polarity). An inline assumption is inline:<Label>. Rewritten only by
 #   ./scripts/assumptions.sh --write-ledger
 # which prints every row it adds or removes. The counts this ledger was written from:
-#   axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1
+#   axioms=3 rests=18 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1
 MENTIONS HadwigerNelson.Plane.Voronov11 HadwigerNelson.Plane.forall_mu_six_lt_one_iff
+RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.chiM0_six_or_seven
+RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven
+RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.not_colorable_five
+RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.six_le_chiM0
+RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.six_le_chromaticNumber_plane
+RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.chiM0_le_chromaticNumber_plane
+RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0
+RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.colorable_iff_nonempty_aeColouring
+RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.nonempty_aeColouring_of_colorable
+RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.StandingFive.circle_sum_le_weil
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.StandingFive.five_le_chromaticNumber_weil
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two

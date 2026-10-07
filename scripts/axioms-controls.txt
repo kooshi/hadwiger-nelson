@@ -16,9 +16,11 @@
 # `declareImport` and `#print axioms` lines that use it. Lines starting with `# ` outside a block are comments.
 # Planted names start `t3c_`.
 #
-# The `baseline` and `imported_declared` counts, and `banner_dropped`'s consequences, read the library's state: one declared
-# import, `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207; FS-131 wave 10, FS131-L10B's join), with eight IMPORTED records.
-# (The first import, `falconer_lemma2_nonempty`, is a theorem since FS131-IF1.) A later import, or this one's proof, moves them
+# The `baseline` and `imported_declared` counts, and `banner_dropped`'s consequences, read the library's state: three declared
+# imports — `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207; FS-131 wave 10, FS131-L10B's join), with eight IMPORTED records,
+# and `Outside.OAI158.no_proper_five_coloring` and `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158; FS-132,
+# FS132-L1's landing), with five each: eighteen IMPORTED records.
+# (The first import, `falconer_lemma2_nonempty`, is a theorem since FS131-IF1.) A later import, or one's proof, moves them
 # again — per declared import, `declared` and `library`
 # rise by one in both controls and `imported` by its records, the `old` digests' texts follow, and `banner_dropped` gains
 # `FAIL outside-banners <one of its records>` and `FAIL stale-declaration <the axiom>` (FS131-I2n's edit, `082f86c9`, is the
@@ -26,22 +28,22 @@
 
 ## control baseline
 ## expect PASS
-## expect COUNT imported=8
-## expect COUNT declared=1
-## expect COUNT library=1
-## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 8 imported
+## expect COUNT imported=18
+## expect COUNT declared=3
+## expect COUNT library=3
+## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 18 imported
 ## digest new 0 match (clean, purchases and imported compared)
 ## digest doubled 3 not one
 
 ## control imported_declared
 ## expect PASS
-## expect COUNT imported=9
-## expect COUNT declared=2
-## expect COUNT library=2
+## expect COUNT imported=19
+## expect COUNT declared=4
+## expect COUNT library=4
 ## arch t3c_import
 ## digest new 0 match (clean, purchases and imported compared)
 ## digest off 0 RECORDED COUNT IS STALE
-## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 9 imported
+## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 19 imported
 ## at PRE
 /-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, `[Planted2026]` p. 1. -/
 axiom t3c_import : True
@@ -209,4 +211,8 @@ theorem t3c_mixed : True := (And.intro t3c_ax_c moserSpindle_cnf_unsat).1
 ## expect FAIL banners IMPORTED
 ## expect FAIL outside-banners kloostermanBound_of_ringChar_ne_two
 ## expect FAIL stale-declaration kloosterman_bound
+## expect FAIL outside-banners not_colorable_five
+## expect FAIL stale-declaration no_proper_five_coloring
+## expect FAIL outside-banners seven_le_chromaticNumber_plane_iff
+## expect FAIL stale-declaration proper_to_borel_weak
 ## drop-banner IMPORTED

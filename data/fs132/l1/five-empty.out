@@ -1,0 +1,13 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 4,5
+'l1_isEmpty_plane5' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'l1_sixTarget_h3' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'l1_sixTargetOneTwo_h3' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
