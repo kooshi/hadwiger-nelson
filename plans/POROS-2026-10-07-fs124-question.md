@@ -58,7 +58,7 @@ if the ring point is itself a rich point, which is a theorem in the map class (t
 - The six-coloured fragments held (rows 136, 138, 145–150 and the derivation files they name; FS116-Y2-SIXFRAG) — read against: every one is a map fragment; at every vertex of at least four colours its ring carries a (Q) arc or the fragment's radius is below `1 + ε`; none has been read against last night's measurable entries by anyone but the record job — surprised: no; every one a map fragment — the capped strip below `φ²/√2`, the disk at `φ`, SIXFRAG below `3/2`, the bowtie at `3√3/5`, T2 on four neighbourhoods. Read through rows 136, 138 and the stub only; no fragment's file was opened
 - `plans/STUB-exclusion-back-to-maps.md` (FS-134; the dictionary) — read against: the one underived fact runs from measure to maps (a map's ring data are its palettes), so carrying a *map theorem into the measurable class* does not need it — that direction is a re-derivation of the argument at the class it reads (G92), not a dictionary — surprised: no; F2, "a map's palette is its ring read two-sidedly", is owed for reading C132-M-EXCL at a map vertex (`plans/STUB-exclusion-back-to-maps.md` ll. 40–52). Read ll. 1–60
 - `plans/STUB-seed-remainder.md` (FS-135) — read against: a list of seed types last night left; its question 4 is a restatement of a stalled claim — surprised: no; question 4 is C132-TURN's stall restated, with its history said (`plans/STUB-seed-remainder.md` ll. 76–82). Read by sample: the four question heads and question 4
-- `plans/POROS-2026-10-07-fs132-night.md` and `plans/POROS-2026-10-07-fs132-round2.md` (my own records; the hunch ledger, two re-rank drafts, five banners) — read against: the ledger's read-basis hunches scored better than prior-basis ones again; the "needs no cone scale" finding is registered with basis derived and was never read against row 139's entries; both re-rank drafts put FS-124 at rank 1 or 2 — surprised: yes; `plans/POROS-2026-10-07-fs132-round2.md` l. 465 already reads the search's survivor as "row 136's three-partner count" — the rhombus was in my own record last night and the third card was posed on the lens. The ledgers scored as expected (below). Read by sample: the ledgers' status lines, both re-rank sections, the banners, the cone-scale lines
+- `plans/POROS-2026-10-07-fs132-night.md` and `plans/POROS-2026-10-07-fs132-round2.md` (my own records; the hunch ledger, two re-rank drafts, five banners) — read against: the ledger's read-basis hunches scored better than prior-basis ones again; the "needs no cone scale" finding is registered with basis derived and was never read against row 139's entries; both re-rank drafts put FS-124 at rank 1 or 2 — surprised: yes; `plans/POROS-2026-10-07-fs132-round2.md` l. 471 already reads the search's survivor as "row 136's three-partner count" — the rhombus was in my own record last night and the third card was posed on the lens. The ledgers scored as expected (below). Read by sample: the ledgers' status lines, both re-rank sections, the banners, the cone-scale lines
 - `data/fs132/reports/FS132-Z2.md` and `plans/FS132-Z2-record.md` Stage 3 and the row-139 paragraph — read against: 63 predictions scored; the "three failed at wording" are claims whose statement fixed a constant or a quantifier the derivation then met differently; the phrase the brief attributes to the record job about the two appearances is in this record — surprised: yes; the phrase on the two appearances is in the stub (ll. 211–212) and the derivation file (ll. 53–54), not in the record job's record; and the three wording failures are "a route named where a statement was meant (M1), a clause that was not a statement (A6), a clause resting on a sentence true one way only (B1)" (`plans/FS132-Z2-record.md` ll. 272–274), not constants or quantifiers. Read: ll. 268–276 and the row-139 paragraph (l. 337)
 - `LEDGER.md` row 139 and the derivation file it names (the cone scale) — read against: the cone scale belongs to route R's limit class (near-colourings with holes, the hole bound made uniform); in the exact class there are no holes, so "needs no cone scale" is true and empty as a note on that row — true as drafted with probability 0.15, true but misfiled 0.60, false as drafted 0.25 — surprised: no; `plans/FS111-derivation.md` l. 240: "not claimed: that either route closes; that the cone scale is idle in route M", and row 133's cell already carries the exact-class line ("in the exact class the tangent pair is an edge that lies on the unit circle about the common unit point"). Read: rows 133 and 139 at their cells, and the eight lines of the derivation file that hold the words "cone scale"
 - `plans/FS124-close-inventory.md` (the rules that will judge this milestone) — read against: rules about a claim's wording being fixed before derivation, drawn from last night's three wording failures — surprised: yes; the rules are announcement rules, and rule 3 says of rows 135–138 and 145–150 that "what of them transfers to measurable colourings is a claim, never a default" — no rule on a claim's wording. Read whole
@@ -241,6 +241,168 @@ has no held inhabitant and may be vacuous at six. C124-KIND: the two margins of 
 1.033) leave room for a short unit arc by a sagitta estimate only; no formula was written. C124-RADIUS (up): the motion group's map to
 (point, unit vector) for one edge is a diffeomorphism onto its image, so a null set of bad pairs pulls back to a null set of motions;
 not written out. Each is a claim for the deriver, and none is an entry.
+
+## Stage 3 — SAVED: for the kernel lane, for the search, for Kooshi; three answers owed
+
+### 3.1 For the kernel lane
+
+**Plan C124-RADIUS first, if it is derived** — both statements, at every `k` for (up). It rests on nothing of FS-132's [hand] entries:
+(up) is this library's N-EASY argument run on a disc with de Bruijn–Erdős, (down) is the declared outside theorem
+`Outside.OAI158.proper_to_borel_weak` and a restriction. It is the statement through which either answer of this milestone is consumed —
+a NO becomes "this disc has no weak six-colouring", a YES a family on discs — as M36's certificate machinery is for periodic avoiders;
+and (up) at `k = 5`, with the first import, gives a radius at which no disc has a weak five-colouring, which the release does not
+state. **The dependency to formalize with it** (Kooshi, 2026-10-07: "if any dependencies need to be formalized, have those done as
+well"): the weak colouring of an *open set*, the local form the planner listed second (`plans/FS132-kernel-plan.md` § 3.6) — every
+C124 claim is local, so it is this milestone's shared definition. **Second**: C132-SHADOW ("one intermediate value, one open set, one
+Fubini") with C124-CENTRE and C124-COMPLETION as its corollaries; every exclusion this milestone can reach stands on them. C124-SIX
+waits for its derivation: its wording at the step from closed unit discs to directions at `q` is the place I expect a restatement.
+
+### 3.2 For the search
+
+**The held request (`plans/SEARCH-QUEUE.md` line 11: the kept four-label fragment extended to the annulus and the closed unit disc) is not
+worth a day as queued; it is worth one after two claims, re-aimed.** As queued, its yes is a valid fragment of radius just above 1
+about a three-label point — a shape already held three times over (fragment T2's), below every held radius — and its no is a null in a
+design family "with a handful of interfaces per sector", which measures the family (G21). What changed today: if C124-COMPLETION and
+C124-SIX hold, the kept shape continued as it begins (three-label points of two complementary types on a unit honeycomb, four-label
+points at the hexagon centres) cannot keep four-label centres, and the request that decides something is another one — **the first-order
+label skeleton**: on the points of the unit triangular lattice within radius 2, then 3, then 4 of a three-label point, assign label sets
+and tight pairs obeying the two rules, the 60° rule and C124-SIX; a constraint problem on 19, 37 and 61 points, exhaustive. *Its yes*
+at every radius tried: a combinatorial skeleton to fill, and the design problem of line 11 re-posed on it with the centres' labels
+known (five, by C124-SIX, where six tight pairs meet). *Its no* at a radius: the first-order rules alone kill the saved skeleton there,
+by a certificate a deriver can read back as a count — the NO side's first exclusion at the object, in the class of colourings whose
+tight pairs lie on one lattice (said in its headline). Neither is a statement about all weak colourings. Queue it when the two claims
+are derived; until then line 11 stays held.
+
+### 3.3 Three lines for Kooshi
+
+1. **What it asks.** Every six-colouring we can analyse has a boundary between two colours that runs exactly along a circle of radius 1
+   around a point one unit away. The milestone asks what such a boundary forces at the four corners of the unit rhombus it sits in —
+   its two ends and the two points one unit from both — and whether that forcing reproduces itself across the plane or runs out within
+   a fixed distance.
+2. **What a yes and a no mean.** If it reproduces, a six-colouring has a rigid lattice skeleton: build it at every size and the plane
+   needs six; find the size at which it contradicts itself and it needs seven — once we also know every six-colouring has such a
+   boundary, which this milestone does not ask. If it runs out, no six-colouring carries such a boundary past that distance: seven,
+   with the same proviso. A short separate statement makes "six-colourings of discs of every size" the same as "the plane needs six".
+3. **What I expect.** The first forcing step holds (0.85); the skeleton recurs rather than runs out (0.50 against 0.12, the rest
+   "nothing forced"); an exclusion at a named distance within this milestone 0.10; a six-coloured object larger than any held 0.12;
+   six against seven decided here 0.03.
+
+### 3.4 The record job's two questions, and the coordinator's one
+
+**Is FS-135's question 4 (the one-edge form) a question?** No — not a card, and not a first claim of FS-135. It asks whether every
+witnessed cycle at `y` contains the pair `{a, b}`; its only consumer, C132-TURN-EDGE's contradiction, needs `y` to carry a witnessed
+cycle at all, which is the seed's existence asked at `y`. What it wanted — a statement at a point "near which one side of a unit circle
+through `y` carries `a` and then `b`" — is, in today's grammar, a statement at an end of two tight pairs, and C124-CENTRE and
+C124-COMPLETION say what is there without any witness. It stays in FS-135's stub as a recorded open form with its history.
+
+**Is C132-RADIUS FS-124's YES-side clause, or a short job of its own?** Both, in this sense: it is FS-124's first claim (C124-RADIUS,
+re-posed as two statements, since "iff" hid that one direction needs the import and the other does not), derived as its own entry in
+the opening round; it is not a milestone. Its Lean module is worth planning alone (§ 3.1), because it depends on nothing else here.
+
+**The row-139 note: is it true as drafted?** Its first clause is true of the entries it cites; as a note on row 139 it is not, and I
+recommend it stay declined. Read against the row and its derivation file:
+1. *"the complementary pair's exclusion needs no cone scale"* — true of C132-CROSS and C132-COMP-SHARP: their statements carry no
+   scale, and C132-CROSS's own *not claimed* line puts "the quantified form with holes" at "FS107-R-CP, row 133". But it is not news
+   for the exact class and not about row 139: the cone scale of rows 133 and 139 is (B), a hypothesis of route R for band-proper
+   partial colourings with holes; for exact maps row 133 already held the scale-free form as a design rule (W-TAN), and its cell
+   already carries FS-132's line ("in the exact class the tangent pair is an edge that lies on the unit circle about the common unit
+   point"). Row 139's own entry declines the stronger reading: "not claimed: that either route closes; that the cone scale is idle in
+   route M" (`plans/FS111-derivation.md` l. 240).
+2. *"up to one residue"* — understates it. In the exact class with unit arcs the pair is not excluded with a corner case left over; it
+   is **saved**, and the residue is the saving: rows 135–136 ("sits on a unit rhombus with four-colour corners (FS-110's T2, forced)";
+   "saved at its first by such a vertex"). The residue is FS-124's object.
+3. *"what is left of route R there is the forcing"* — false as an account: the forcing **and** the residue. A forced close
+   complementary pair in the exact class delivers a tight pair, not a contradiction.
+So: my finding of the night, "(B) has no consumer there (finding B, if it holds)" (`plans/POROS-2026-10-07-fs132-night.md` l. 134), is
+true and empty — there are no holes in the exact class for (B) to bound — and the two rows it would have annotated say nothing it
+corrects. The same over-reading is in my drafted banner for FS-122 ("the pair's exclusion needs no cone scale … so the question is the
+forcing alone"); § 4.4 below replaces it.
+
+## Stage 4 — SAVED: the re-rank
+
+## Draft re-rank
+
+*This draft **replaces** the two unfiled drafts of the night (`plans/POROS-2026-10-07-fs132-night.md` § The ranked table, and
+`plans/POROS-2026-10-07-fs132-round2.md` § Draft re-rank). What of them stands is carried here and named. `CLAUDE.md` and
+`plans/FRONTIER-STUBS.md` were re-read from disk at this stage (after the filing `fd3988367`, "FS-132, six by the nerve: Derived"):
+the ranked table there still has FS-132 at rank 1 and no row for FS-134 or FS-135. Ranked by bearing on the answer, never by difficulty
+(§ Counter-priors, rule 1). Keryx files.*
+
+### 4.1 The ranks, 1 to 16 (17 to 72 as filed)
+
+FS-132 leaves the ranked list: it is Derived, and belongs in § Open milestones. The sixteen top ranks, filed → drafted:
+
+| rank | stub | filed rank | the row's text |
+|---|---|---|---|
+| 1 | FS-124 | 2 | § 4.2, in full |
+| 2 | FS-135 the seed remainder | new | § 4.2, in full |
+| 3 | FS-127 lateral extent | 6 | § 4.2, in full |
+| 4 | FS-122 the forced pair | 5 | § 4.2, in full |
+| 5 | FS-128 the top colour, at six | 7 | the night's draft row, verbatim (`plans/POROS-2026-10-07-fs132-night.md` l. 400), with the rank 5 |
+| 6 | FS-130 the bicycle's windings | 15 | the night's draft row, verbatim (that file, l. 398), with the rank 6, and this sentence added to its question cell: "The winding lemma asks that no two changes be 60° apart (C132-INDEX's *not claimed* line), and on every six-coloured object held the changes are exactly 60° apart — the tight pairs' lattice — so this row bears on colourings with no tight pair only." |
+| 7 | FS-125 the saturated local exclusion | 4 | § 4.2, in full |
+| 8 | FS-123 the Siamese class | 3 | the night's draft row, verbatim (that file, l. 401), with this sentence added to its question cell: "The composition, and the one fact it needs (a map's palette is its ring read two-sidedly), are FS-134's (`plans/STUB-exclusion-back-to-maps.md`), a short job." |
+| 9 | FS-117 route T, the count | 8 | as filed |
+| 10 | FS-109 the hole dial | 9 | as filed |
+| 11 | FS-104 the null-set step | 10 | as filed |
+| 12 | FS-120 the pinch at a junction | 11 | as filed, with the banner of § 4.4 |
+| 13 | FS-126 curved pencils | 12 | as filed, with the banner of § 4.4 |
+| 14 | FS-62 six is not a value | 13 | as filed |
+| 15 | FS-39 the bridge to the plane | 14 | as filed |
+| 16 | FS-115 the stuck ray | 16 | as filed |
+
+**Unranked, with the reason: FS-134, the exclusion back to maps** (`plans/STUB-exclusion-back-to-maps.md`, minted 2026-10-07 by
+FS132-Z2). A short job — one fact (F2) and one composition. It bears on the map class's statement only (rows 148–149 with no Siamese
+clause, which is FS-123's first case), moves nothing on six against seven, and is **not on FS-124's path**: FS-124's claims are posed
+over open one-label pieces, so a held map is a control with no dictionary. Its line for § Open milestones: "FS-134, the exclusion back
+to maps: a short job, unranked; run when a derive slot is free; closes FS-123's first case in the map class."
+
+### 4.2 The rows that change, in full
+
+| rank | stub | the question | bearing on the answer | cost | status | solver |
+|---|---|---|---|---|---|---|
+| 1 | **FS-124 the unit arc: what a tight unit pair passes on** — `plans/STUB-q-ring.md` (minted 2026-10-03 by FS116-Z2 as the (Q) ring; re-posed 2026-10-07 by FS124-P1 for every measurable colouring; **Opened 2026-10-07**, Kooshi's choice) | when near one end of a unit pair one label fills the inside of the unit circle about the other end and another label the outside (a *tight pair*: in a map a boundary arc of a unit circle, the (Q) arc when its centre carries both side colours and at least four), what must a weak six-colouring carry at the pair's two ends and at its two rhombus completions, and does that recur along the unit triangular lattice or run out within an explicit radius? **First** (its question section of 2026-10-07, six claims posed, none derived): C124-RADIUS (weak six-colourings of discs of every radius give `χ(ℝ²) ≤ 6`, and the converse over the declared outside theorem); C124-CENTRE and C124-COMPLETION (what a tight pair forces at its centre and at its completions, at every number of labels, each a corollary of C132-SHADOW); C124-KIND (a calibration at seven); C124-SIX (a four-label point is not the centre of six tight pairs of two label pairs on one 60° orbit); C124-HALF (C132-ARC with its sides named). Held for maps: rows 135–138, 145–150, 153, and the card of 2026-10-03 with its eight cases, which stand as the ways a tight pair's two ends are filled in a map. Held in measure, [hand], one mind, kernel pending: C132-M-ORBIT, C132-COMP-SHARP, C132-PLACED-RING; the release's two-state theorem read at six (C132-DIAG-WIDE). In a finite family, [cert]: the Searcher's kept shape, a three-label centre with three complementary partners, each pair saved at both common unit points by a four-label point (SEARCH-1007-TURN4, local) | the object every exclusion held ends at and every six-coloured object held is made of — and what the exclusions force, not what they leave over: at a witnessed four-cycle (C132-M-EXCL), at a close complementary pair (C132-COMP-SHARP), in every non-Siamese valid six-map (rows 137, 149). **Toward seven**: an exclusion of tight pairs of a named kind at an explicit radius, which is `χ(ℝ²) = 7` only with a statement that every weak six-colouring has such a pair (FS-135 for a seed; FS-127 and FS-128 for the seed). **Toward six**: weak six-colourings of discs of every radius are `χ(ℝ²) = 6` (C124-RADIUS, posed; for maps FS116-O1-YESLIM, held); the held objects stop below `φ²/√2` about a tight pair's centre. Alone it delivers what a tight pair passes on and the first count that spends six on the arc's side | unpriced | **Opened** 2026-10-07; rank 2 → 1 (FS124-P1) | none in the milestone; `plans/SEARCH-QUEUE.md` line 11 held, and one request drafted (the label skeleton on a lattice patch), each waiting on C124-COMPLETION and C124-SIX |
+| 2 | **FS-135 the seed remainder** — `plans/STUB-seed-remainder.md` (minted 2026-10-07 by FS132-Z2) | at a point with data on its unit circle (a seed) and no tight pair at its ring points, do the configurations FS-132 left open exist: the sixteen patterns of sides whose witnessing sets are far away (C132-LENS-II, a gap); the alternating and the turning ring for germs that are only measurable (three shift lemmas for C132-ALT, sketched; the third-label rigidity, unproved)? Its question 4, the one-edge form of C132-TURN's stall, is **not asked** (FS124-P1 § 3.4): its content returns as C124-CENTRE and C124-COMPLETION at the placed point | necessary on the road to seven, silent on six: it is the statement that a seed with no tight pair does not exist — the step between "every colouring has a seed" (FS-127, FS-128) and FS-124's exclusions; C132-M-EXCL is its four-cycle half, held | unpriced | Not started; **new, at rank 2** (FS124-P1) | in-ban: derivation; the Searcher's wedge family is its finite control |
+| 3 | **FS-127 lateral extent** — `plans/STUB-lateral-extent.md` (minted 2026-10-03 by FS121-Z1; re-aimed 2026-10-07) | does every weak six-colouring have, in every disc of radius above 1, a point with usable data — a cyclic centre isolated among the cyclic centres (what the extraction reads: zero length of the centres and isolation of the essential one, `plans/FS132-E1-derivation.md` § Card 2), or a point through which connected pieces of two smoothed classes pass and reach a common second point (C132-WIT-EX's form (O), where FS-132 stalled) — for all weak colourings, or for honest ones (row 143's normal form; C132-GRUNDY7 did not decide whether honesty removes accumulation)? Carried from FS-132: C132-WIT-EX (O), C132-RING-TAME's first clause, the REG-J′ side question | the existence step of every road to seven that passes through a point: with FS-135 and FS-124's exclusion it is `χ(ℝ²) = 7`; nothing toward six. Asked three times in FS-132 and left there by Kooshi's word of 2026-10-07: ranked by bearing, not proposed as the next opening | unpriced | Not started; rank 6 → 3 (FS124-P1) | in-ban |
+| 4 | **FS-122 the forced pair** — `plans/STUB-forced-pair.md` (minted 2026-09-28 by FS111-C; route R; re-aimed 2026-10-07 at the exact class) | in a weak six-colouring all of whose seeds are triangles, must two with disjoint label triples lie closer than 2 — or two of one type between 1 and 2 apart (the bicycle, FS-130)? In the exact class a close complementary pair is **not excluded**: one of its six edge sets lies on the unit circle about each common unit point (C132-COMP-SHARP, [hand], one mind) — rows 135–136's rhombus, the pair saved by tight pairs — so the forcing delivers FS-124's object, not a contradiction. Carried from FS-132: C132-M-CV and C132-LONG, the forcing, stalled at C132-RING-TAME. The count behind it (eleven vertices against ten types) is cited to `[SokolovVoronov2025]` Lemma 6.1 in this row and to `[Voronov2023]` in FS-130's: one is a slip, to check against the papers at the filing. B-RR stays the band form's question | the forcing in route R's form: with it every colouring that lives on triangles has a tight pair — FS-135's conclusion by another road; nothing toward six | unpriced | Not started; rank 5 → 4 (FS124-P1) | in-ban |
+| 7 | **FS-125 the saturated local exclusion** — `plans/STUB-saturated-local.md` (minted 2026-10-03 by FS116-Z2; route M's honest branch) | NO-SAT: an explicit radius about a four-colour vertex within which no valid fragment saturated one unit inside exists. Held: every edge at a four-colour vertex of a saturated fragment is a unit arc about a ring point carrying both its side colours, or tangent (FS116-O1-SATPIN, in its corrected wording) — in FS-124's words, saturation makes every tight pair at such a vertex of kind both. Left: SAT-STRIP's G3, G1, G2 on rings with (Q) arcs, SATPIN-PER, NO-SAT, Y-SAT | none on the measurable road unless one condition holds: C124-KIND true **and** FS-124's exclusions needing "of kind both" — then this is the class that supplies the kind, and FS-124's NO is stated in it | unpriced | Not started; demoted 4 → 7 (FS132-P2, FS124-P1) | in-ban |
+
+### 4.3 The top three, as `CLAUDE.md` § Paths forward should carry them
+
+| rank | stub | the question | bearing on the answer |
+|---|---|---|---|
+| 1 | **FS-124 the unit arc** — `plans/STUB-q-ring.md` (Opened 2026-10-07) | where a boundary between two labels runs along the unit circle about a point one unit away (a tight pair; the (Q) arc of maps), what must a measurable six-colouring carry at the pair's two ends and at the two points one unit from both — and does that recur along the unit triangular lattice or run out within an explicit radius? First: six claims posed (C124-RADIUS, -CENTRE, -COMPLETION, -KIND, -SIX, -HALF) | what every held exclusion forces and every held six-coloured object is made of; an exclusion at a radius is `χ(ℝ²) = 7` given that every six-colouring has such a pair (FS-135, FS-127); six-colourings of discs of every radius are `χ(ℝ²) = 6` |
+| 2 | **FS-135 the seed remainder** — `plans/STUB-seed-remainder.md` | does a point with data on its unit circle and no tight pair at its ring points exist — far witnesses, and rings whose germs are only measurable? | the step from "every colouring has a seed" to FS-124's object; its four-cycle half is held (C132-M-EXCL); nothing toward six |
+| 3 | **FS-127 lateral extent** — `plans/STUB-lateral-extent.md` | does every measurable six-colouring have a point with usable data in every disc of radius above 1 — for all colourings, or for honest ones? | the existence step of every road to seven through a point; stalled three times in FS-132 and left there by Kooshi's word; nothing toward six |
+| 4–72 | 69 more open stubs, in rank order in `plans/FRONTIER-STUBS.md` | … | … |
+
+**A line for § Open milestones**: "**Opened 2026-10-07: FS-124, the unit arc** (`plans/STUB-q-ring.md`; Kooshi's choice), re-posed for
+every measurable colouring proper at almost every unit pair: what a tight unit pair passes on (`plans/POROS-2026-10-07-fs124-question.md`).
+FS-134, the exclusion back to maps, is a short job, unranked."
+
+### 4.4 Banners for Keryx to file (one line each; these replace the night's five)
+
+- `plans/STUB-qfree-ring.md` (FS-123): the night's banner stands, verbatim (`plans/POROS-2026-10-07-fs132-night.md` § Banners, first
+  line), with "FS-134 carries the composition" added after its first sentence.
+- `plans/STUB-forced-pair.md` (FS-122): "Re-aimed, 2026-10-07 (FS132-P2; wording corrected by FS124-P1), at the exact class: a close
+  complementary pair is not excluded there — one of its edge sets lies on the unit circle about each common unit point (C132-COMP-SHARP)
+  — so the question is the forcing, and what the forcing delivers is FS-124's object. B-RR stays as the band form's question."
+- `plans/STUB-lateral-extent.md` (FS-127): "Re-aimed, 2026-10-07 (FS132-P2, FS124-P1): it carries the existence of a point with usable
+  data — C132-WIT-EX's form (O), C132-RING-TAME's first clause, the REG-J′ side question — for all weak colourings or for honest ones
+  (row 143). Ranked by bearing, 6 → 3; left unopened by Kooshi's word of 2026-10-07."
+- `plans/STUB-saturated-local.md` (FS-125): "Demoted, 2026-10-07 (FS132-P2, FS124-P1), 4 → 7: on the road again on one condition —
+  C124-KIND true and FS-124's exclusions needing 'of kind both', which saturation supplies (FS116-O1-SATPIN)."
+- `plans/STUB-curved-pencils.md` (FS-126), `plans/STUB-pinch-at-junction.md` (FS-120): the night's banner stands, verbatim (its fourth
+  line), for these two.
+
+### 4.5 The closed list, and what of the night's drafts stands
+
+**Closed list**: no row closes — nothing derived is kernel-checked and nothing is two minds'. FS-132 is Derived, not closed, and moves
+from the ranked table to § Open milestones. The night's one change of wording to FS-116's entry (`plans/POROS-2026-10-07-fs132-night.md`
+§ The closed list) stands as drafted there. **Carried from the night's drafts**: the rows of FS-128, FS-130 and FS-123 (§ 4.1); the
+banners named in § 4.4; the citation slip flagged in FS-122's row. **Withdrawn from them**: FS-132's rows (the milestone is Derived);
+FS-124's two draft rows (replaced by § 4.2); FS-122's row and banner in the wording "needs no cone scale" (§ 3.4); FS-127's row in its
+conditional wording ("only if the witness card finds…"), which the second and third rounds overtook.
 
 ## Hunch ledger
 
