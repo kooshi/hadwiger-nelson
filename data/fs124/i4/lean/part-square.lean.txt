@@ -1,0 +1,265 @@
+
+/-! ## Both members arc-edged: the split point at `0` and, turned by a quarter about `1`, at `1 − i` -/
+
+/-- **The first inequality of the unit-square witness** (the pair of labels `0`, `0` and, turned by a quarter, the
+pair `3`, `3`): a point `(a, b)` near `1`, inside the unit circle about `0` and outside the unit circle about `1 + i`,
+and a point `(r, s)` near `0`, inside the unit circle about `1` and not above the real axis, are less than `1` apart.
+Below the axis (`b ≤ 0`) the two ordinates have one sign and the larger one bounds their difference; in the sliver
+`0 < b`, being outside the circle about `1 + i` gives `b < (1 − a)²`. -/
+theorem split_inner_lt {a b r s : ℝ} (ha : 3 / 4 < a) (hb : |b| < 1 / 4) (hab : a ^ 2 + b ^ 2 < 1)
+    (hout : 1 < (a - 1) ^ 2 + (b - 1) ^ 2) (hr : |r| < 1 / 4) (hs : s ≤ 0) (hs' : |s| < 1 / 4)
+    (hrs : (r - 1) ^ 2 + s ^ 2 < 1) : (r - a) ^ 2 + (s - b) ^ 2 < 1 := by
+  obtain ⟨hb1, hb2⟩ := abs_lt.mp hb
+  obtain ⟨hr1, hr2⟩ := abs_lt.mp hr
+  obtain ⟨hs1, -⟩ := abs_lt.mp hs'
+  have hr0 : 0 < r := by nlinarith [sq_nonneg r, sq_nonneg s]
+  have ha1 : a < 1 := by nlinarith [sq_nonneg b]
+  have hs2 : s ^ 2 < 2 * r - r ^ 2 := by nlinarith
+  rcases le_or_gt b 0 with hb0 | hb0
+  · rcases le_total s b with hsb | hsb
+    · -- `s ≤ b ≤ 0`: the difference of the ordinates is at most `|s|`
+      nlinarith [mul_nonneg (neg_nonneg.mpr hb0) (show 0 ≤ b - 2 * s by linarith),
+        mul_pos (sub_pos.mpr ha1) (show 0 < 1 + a - 2 * r by linarith)]
+    · -- `b ≤ s ≤ 0`: the difference of the ordinates is at most `|b|`
+      nlinarith [mul_nonneg (neg_nonneg.mpr hs) (show 0 ≤ s - 2 * b by linarith),
+        mul_pos hr0 (show 0 < 2 * a - r by linarith)]
+  · -- the sliver above the axis
+    have h4 : b < (1 - a) ^ 2 := by nlinarith [mul_pos hb0 (sub_pos.mpr hb2)]
+    have h2 : -(2 * s * b) ≤ b / 2 := by nlinarith [mul_nonneg hb0.le (show 0 ≤ 1 / 4 + s by linarith)]
+    have h3 : b ^ 2 ≤ b / 4 := by nlinarith [mul_nonneg hb0.le (sub_nonneg.mpr hb2.le)]
+    nlinarith [mul_pos (sub_pos.mpr ha1) (show 0 < 2 - 7 / 4 * (1 - a) - 2 * r by linarith)]
+
+/-- **The second inequality of the unit-square witness** (the pair of labels `1`, `1` and, turned by a quarter, the
+pair `4`, `4`): a point `(a, b)` near `1`, outside the unit circles about `0` and about `1 − i`, and a point `(r, s)`
+near `0`, outside the unit circle about `1` and not above the real axis, are more than `1` apart. On or above the axis
+(`0 ≤ b`) the product of the ordinates has the right sign, and the abscissae are absorbed by one of the two circles; in
+the sliver `b < 0`, being outside the circle about `1 − i` gives `−b < (a − 1)²` and `1 < a`. -/
+theorem split_outer_gt {a b r s : ℝ} (ha : |a - 1| < 1 / 4) (hb : |b| < 1 / 4) (hab : 1 < a ^ 2 + b ^ 2)
+    (hout : 1 < (a - 1) ^ 2 + (b + 1) ^ 2) (hr : |r| < 1 / 4) (hs : s ≤ 0) (hs' : |s| < 1 / 4)
+    (hrs : 1 < (r - 1) ^ 2 + s ^ 2) : 1 < (r - a) ^ 2 + (s - b) ^ 2 := by
+  obtain ⟨ha1, ha2⟩ := abs_lt.mp ha
+  obtain ⟨hb1, hb2⟩ := abs_lt.mp hb
+  obtain ⟨hr1, hr2⟩ := abs_lt.mp hr
+  obtain ⟨hs1, -⟩ := abs_lt.mp hs'
+  rcases le_or_gt 0 b with hb0 | hb0
+  · have hbs : 0 ≤ b * -s := mul_nonneg hb0 (neg_nonneg.mpr hs)
+    rcases le_or_gt r 0 with hr0 | hr0
+    · have h1 : 0 ≤ a * -r := mul_nonneg (by linarith) (neg_nonneg.mpr hr0)
+      linarith only [h1, hbs, hab, sq_nonneg r, sq_nonneg s]
+    · rcases le_or_gt a 1 with hu | hu
+      · have h1 : 0 ≤ r * (1 - a) := mul_nonneg hr0.le (sub_nonneg.mpr hu)
+        linarith only [h1, hbs, hab, hrs]
+      · have h1 : 0 < (a - 1) * (a + 1 - 2 * r) := mul_pos (sub_pos.mpr hu) (by linarith)
+        linarith only [h1, hbs, hrs, sq_nonneg b]
+  · -- the sliver below the axis
+    have h5 : 0 < -b * (1 + b) := mul_pos (neg_pos.mpr hb0) (by linarith)
+    have h4 : -b < (a - 1) ^ 2 := by linarith only [hout, h5]
+    have h3 : 0 ≤ -b * (1 / 4 + b) := mul_nonneg (neg_nonneg.mpr hb0.le) (by linarith)
+    have hu : 1 < a := by
+      by_contra hcon
+      have h6 : 0 ≤ (1 - a) * (5 / 4 * a + 3 / 4) := mul_nonneg (sub_nonneg.mpr (not_lt.mp hcon)) (by linarith)
+      linarith only [hab, h3, h4, h6]
+    have h2 : 0 ≤ -b * (1 / 4 + s) := mul_nonneg (neg_nonneg.mpr hb0.le) (by linarith)
+    have h7 : 0 < (a - 1) * (a / 2 + 3 / 2 - 2 * r) := mul_pos (sub_pos.mpr hu) (by linarith)
+    linarith only [h7, hrs, h2, h4, sq_nonneg b]
+
+/-- The unit discs about `1 − i` and `1 + i` touch at `1` only: a point inside one is outside the other. -/
+theorem one_lt_dist_of_dist_lt_one {z p q : ℂ} (hpq : dist p q = 2) (h : dist z p < 1) : 1 < dist z q := by
+  have := dist_triangle p z q
+  rw [dist_comm p z] at this
+  linarith
+
+/-- `1 − i` and `1 + i` are `2` apart. -/
+theorem dist_one_sub_I_one_add_I : dist (1 - I : ℂ) (1 + I) = 2 := by
+  rw [dist_eq_norm, show (1 - I : ℂ) - (1 + I) = -(2 * I) by ring, norm_neg, norm_mul, Complex.norm_I, mul_one,
+    Complex.norm_ofNat]
+
+/-- A point of the disc of radius `1/4` about `1` has real part within `1/4` of `1` and imaginary part of absolute
+value below `1/4`. -/
+theorem abs_re_sub_one_im_of_mem_ball_one {z : ℂ} (hz : z ∈ ball (1 : ℂ) (1 / 4)) :
+    |z.re - 1| < 1 / 4 ∧ |z.im| < 1 / 4 := by
+  rw [mem_ball, dist_eq_norm] at hz
+  have h1 := Complex.abs_re_le_norm (z - 1)
+  have h2 := Complex.abs_im_le_norm (z - 1)
+  rw [Complex.sub_re, Complex.one_re] at h1
+  rw [Complex.sub_im, Complex.one_im, sub_zero] at h2
+  exact ⟨by linarith, by linarith⟩
+
+/-- The first inequality, for points of the plane: `z` near `1`, inside the unit circle about `0` and outside that
+about `1 + i`; `t` near `0`, inside the unit circle about `1` and not above the real axis. -/
+theorem split_inner_dist_lt {z t : ℂ} (hz : z ∈ ball (1 : ℂ) (1 / 4)) (ht : t ∈ ball (0 : ℂ) (1 / 4))
+    (hz0 : dist z 0 < 1) (hzo : 1 < dist z (1 + I)) (ht1 : dist t 1 < 1) (hti : t.im ≤ 0) : dist t z < 1 := by
+  obtain ⟨hz1, hz2⟩ := re_im_of_mem_ball_one hz
+  obtain ⟨ht2, ht3⟩ := re_im_of_mem_ball_zero ht
+  rw [dist_lt_one_iff] at hz0 ht1 ⊢
+  rw [one_lt_dist_iff] at hzo
+  simp only [Complex.zero_re, Complex.zero_im, Complex.one_re, Complex.one_im, Complex.add_re, Complex.add_im,
+    Complex.I_re, Complex.I_im, sub_zero, add_zero, zero_add] at hz0 hzo ht1
+  exact split_inner_lt hz1 hz2 hz0 hzo ht2 hti ht3 ht1
+
+/-- The second inequality, for points of the plane: `z` near `1`, outside the unit circles about `0` and about
+`1 − i`; `t` near `0`, outside the unit circle about `1` and not above the real axis. -/
+theorem split_outer_dist_gt {z t : ℂ} (hz : z ∈ ball (1 : ℂ) (1 / 4)) (ht : t ∈ ball (0 : ℂ) (1 / 4))
+    (hz0 : 1 < dist z 0) (hzo : 1 < dist z (1 - I)) (ht1 : 1 < dist t 1) (hti : t.im ≤ 0) : 1 < dist t z := by
+  obtain ⟨hz1, hz2⟩ := abs_re_sub_one_im_of_mem_ball_one hz
+  obtain ⟨ht2, ht3⟩ := re_im_of_mem_ball_zero ht
+  rw [one_lt_dist_iff] at hz0 hzo ht1 ⊢
+  simp only [Complex.zero_re, Complex.zero_im, Complex.one_re, Complex.one_im, Complex.sub_re, Complex.sub_im,
+    Complex.I_re, Complex.I_im, sub_zero, zero_sub, sub_neg_eq_add] at hz0 hzo ht1
+  exact split_outer_gt hz1 hz2 hz0 hzo ht2 hti ht3 ht1
+
+/-! ### The frame `x = 0`, `w = 1`, `y = 1 − i`, and the quarter turn about `1` -/
+
+/-- `1 − i` is at least `1/2` from `0`. -/
+theorem half_le_dist_one_sub_I_zero : 1 / 2 ≤ dist (1 - I : ℂ) 0 := by
+  have h : 1 < dist (1 - I : ℂ) 0 := by
+    rw [one_lt_dist_iff]
+    simp
+  linarith
+
+/-- `1 − i` is less than `2` from `0`. -/
+theorem dist_one_sub_I_zero_lt_two : dist (1 - I : ℂ) 0 < 2 := by
+  have h : dist (1 - I : ℂ) 0 ^ 2 = 2 := by
+    rw [dist_sq_eq]
+    simp
+    norm_num
+  nlinarith [dist_nonneg (x := (1 - I : ℂ)) (y := 0)]
+
+/-- `1 − i` is at least `1/2` from `1`. -/
+theorem half_le_dist_one_sub_I_one : 1 / 2 ≤ dist (1 - I : ℂ) 1 := by
+  rw [dist_eq_norm, sub_sub_cancel_left, norm_neg, Complex.norm_I]
+  norm_num
+
+/-- `1` is a common unit point of `0` and `1 − i`. -/
+theorem isCommonUnitPoint_zero_one_sub_I : IsCommonUnitPoint (0 : ℂ) (1 - I) 1 := by
+  refine ⟨by simp, ?_⟩
+  rw [dist_eq_norm, sub_sub_cancel, Complex.norm_I]
+
+/-- The quarter turn about `1`, `z ↦ (1 − i) + i z`, fixes `1`. -/
+theorem quarterTurn_one : planeMotion (1 - I) I Complex.norm_I 1 = 1 := by
+  rw [planeMotion_apply]
+  ring
+
+/-- The inverse quarter turn carries `1` to `1`. -/
+theorem quarterTurn_symm_one : (planeMotion (1 - I) I Complex.norm_I).symm 1 = 1 := by
+  rw [Homeomorph.symm_apply_eq, quarterTurn_one]
+
+/-- The inverse quarter turn carries `0` to `1 + i`. -/
+theorem quarterTurn_symm_zero : (planeMotion (1 - I) I Complex.norm_I).symm 0 = 1 + I := by
+  rw [Homeomorph.symm_apply_eq, planeMotion_apply]
+  linear_combination -Complex.I_mul_I
+
+/-- The inverse quarter turn carries `1 − i` to `0`. -/
+theorem quarterTurn_symm_right : (planeMotion (1 - I) I Complex.norm_I).symm (1 - I) = 0 := by
+  rw [Homeomorph.symm_apply_eq, planeMotion_apply, mul_zero, add_zero]
+
+/-- The colouring of the unit-square witness on the disc about `1`: the four regions cut by the unit circles about
+`0` and about `1 − i` carry the labels `0` (inside both), `4` (inside the first only), `3` (inside the second only)
+and `1` (inside neither). -/
+noncomputable def squareW (z : ℂ) : Fin 6 :=
+  if dist z 0 < 1 then (if dist z (1 - I) < 1 then labLo (le_refl 6) 0 else labHi (le_refl 6) 1)
+  else (if dist z (1 - I) < 1 then labHi (le_refl 6) 0 else labLo (le_refl 6) 1)
+
+/-- The six-colouring of the unit-square witness: the split colouring about `0` (labels `0, 1, 2`), the split
+colouring turned by a quarter about `1` onto the disc about `1 − i` (labels `3, 4, 5`), and about `1` the four labels
+`0, 4, 3, 1` of the inner and the outer pieces on the four regions cut by the two unit circles. -/
+noncomputable def squareCol : ℂ → Fin 6 :=
+  pairCol (le_refl 6) splitCol splitCol (1 - I) I Complex.norm_I squareW
+
+/-- **The pair of the unit-square witness**: the split point at `0` and, turned by a quarter about `1`, at
+`1 − i`. -/
+noncomputable def squarePair : ClosePair (threeDisc (1 - I)) squareCol 0 (1 - I) :=
+  threeDiscPair _ splitPoint splitPoint Complex.norm_I _ half_le_dist_one_sub_I_zero dist_one_sub_I_zero_lt_two
+
+/-- The colouring on the disc about `1` is measurable. -/
+theorem measurable_squareW : Measurable squareW :=
+  Measurable.ite isOpen_ball.measurableSet
+    (Measurable.ite isOpen_ball.measurableSet measurable_const measurable_const)
+    (Measurable.ite isOpen_ball.measurableSet measurable_const measurable_const)
+
+/-- **The unit-square witness is a weak six-colouring** of its three discs: off the three unit circles about `0`,
+`1` and `1 − i`, a unit pair between the disc about `1` and the disc about `0` is separated by the two inequalities,
+and one between the disc about `1` and the disc about `1 − i` is such a pair turned by a quarter about `1`. -/
+theorem isWeakColouringOn_squareCol : IsWeakColouringOn (threeDisc (1 - I)) squareCol := by
+  have hN : volume (sphere (0 : ℂ) 1 ∪ sphere (1 - I : ℂ) 1 ∪ sphere (1 : ℂ) 1) = 0 :=
+    measure_union_null (measure_union_null (Measure.addHaar_sphere volume _ _)
+      (Measure.addHaar_sphere volume _ _)) (Measure.addHaar_sphere volume _ _)
+  refine isWeakColouringOn_pairCol _ Complex.norm_I _ measurable_splitCol measurable_splitCol measurable_squareW
+    half_le_dist_one_sub_I_zero half_le_dist_one_sub_I_one hN ?_ ?_
+  · intro t ht z hz htz htN hzN h
+    have hz0' : dist z 0 ≠ 1 := fun h' => hzN (Or.inl (Or.inl (mem_sphere.mpr h')))
+    have hzy' : dist z (1 - I) ≠ 1 := fun h' => hzN (Or.inl (Or.inr (mem_sphere.mpr h')))
+    have ht1' : dist t 1 ≠ 1 := fun h' => htN (Or.inr (mem_sphere.mpr h'))
+    unfold squareW at h
+    split_ifs at h with hz0 hzy hzy
+    · obtain ⟨h1, h2⟩ := splitCol_eq_zero (labLo_injective _ h)
+      have h3 := split_inner_dist_lt hz ht hz0 (one_lt_dist_of_dist_lt_one dist_one_sub_I_one_add_I hzy) h2 h1
+      linarith
+    · exact labLo_ne_labHi _ _ _ h
+    · exact labLo_ne_labHi _ _ _ h
+    · obtain ⟨h1, h2⟩ := splitCol_eq_one (labLo_injective _ h)
+      have h3 := split_outer_dist_gt hz ht (lt_of_le_of_ne (not_lt.mp hz0) (Ne.symm hz0'))
+        (lt_of_le_of_ne (not_lt.mp hzy) (Ne.symm hzy')) (lt_of_le_of_ne h2 (Ne.symm ht1')) h1
+      linarith
+  · intro t ht z hz htz htN hzN h
+    have hz0' : dist z 0 ≠ 1 := fun h' => hzN (Or.inl (Or.inl (mem_sphere.mpr h')))
+    have hzy' : dist z (1 - I) ≠ 1 := fun h' => hzN (Or.inl (Or.inr (mem_sphere.mpr h')))
+    have ht1' : dist t 1 ≠ 1 := fun h' => htN (Or.inr (mem_sphere.mpr h'))
+    -- the pair, turned back by a quarter about `1`
+    have hτb := planeMotion_symm_mem_ball Complex.norm_I ht
+    have hd := dist_planeMotion_symm (a := 1 - I) Complex.norm_I
+    have hζb : (planeMotion (1 - I) I Complex.norm_I).symm z ∈ ball (1 : ℂ) (1 / 4) := by
+      have h1 := hd z 1
+      rw [quarterTurn_symm_one] at h1
+      rw [mem_ball, h1]
+      exact hz
+    have hζ0 : dist ((planeMotion (1 - I) I Complex.norm_I).symm z) 0 = dist z (1 - I) := by
+      rw [← quarterTurn_symm_right, hd]
+    have hζp : dist ((planeMotion (1 - I) I Complex.norm_I).symm z) (1 + I) = dist z 0 := by
+      rw [← quarterTurn_symm_zero, hd]
+    have hτ1 : dist ((planeMotion (1 - I) I Complex.norm_I).symm t) 1 = dist t 1 := by
+      have h1 := hd t 1
+      rw [quarterTurn_symm_one] at h1
+      exact h1
+    have hτζ := hd t z
+    rw [htz] at hτζ
+    unfold squareW at h
+    split_ifs at h with hz0 hzy hzy
+    · exact labLo_ne_labHi _ _ _ h.symm
+    · obtain ⟨h1, h2⟩ := splitCol_eq_one (labHi_injective _ h)
+      rw [hτ1] at h2
+      have h3 := split_outer_dist_gt hζb hτb (by rw [hζ0]; exact lt_of_le_of_ne (not_lt.mp hzy) (Ne.symm hzy'))
+        (one_lt_dist_of_dist_lt_one (by rw [dist_comm]; exact dist_one_sub_I_one_add_I) (by rw [hζp]; exact hz0))
+        (by rw [hτ1]; exact lt_of_le_of_ne h2 (Ne.symm ht1')) h1
+      linarith
+    · obtain ⟨h1, h2⟩ := splitCol_eq_zero (labHi_injective _ h)
+      have h3 := split_inner_dist_lt hζb hτb (by rw [hζ0]; exact hzy)
+        (by rw [hζp]; exact lt_of_le_of_ne (not_lt.mp hz0) (Ne.symm hz0')) h2 h1
+      linarith
+    · exact labLo_ne_labHi _ _ _ h.symm
+
+/-- In the unit-square witness the first member has arc edges. -/
+theorem squarePair_left_hasArcEdges : squarePair.left.HasArcEdges :=
+  threeDiscPair_left_hasArcEdges _ _ _ _ _ _ _ splitPoint_hasArcEdges
+
+/-- In the unit-square witness the second member has arc edges. -/
+theorem squarePair_right_hasArcEdges : squarePair.right.HasArcEdges :=
+  threeDiscPair_right_hasArcEdges _ _ _ _ _ _ _ splitPoint_hasArcEdges
+
+/-- In the unit-square witness the first member has one piece of each kind at `1`. -/
+theorem squarePair_left_oneOfEach : squarePair.left.OneOfEach 1 (Equiv.refl (Fin 3)) :=
+  (threeDiscPair_left_oneOfEach_iff _ _ _ _ _ _ _ 1 _).mpr splitPoint_oneOfEach
+
+/-- In the unit-square witness the second member has one piece of each kind at `1`. -/
+theorem squarePair_right_oneOfEach : squarePair.right.OneOfEach 1 (Equiv.refl (Fin 3)) :=
+  (threeDiscPair_right_oneOfEach_iff _ _ _ _ _ _ _ quarterTurn_one _).mpr splitPoint_oneOfEach
+
+theorem check_full :
+    ∃ (U : Set ℂ) (c : ℂ → Fin 6) (x y w : ℂ) (C : ClosePair U c x y),
+      IsOpen U ∧ IsWeakColouringOn U c ∧ w ∈ U ∧ IsCommonUnitPoint x y w ∧ C.left.HasArcEdges ∧
+        C.right.HasArcEdges ∧ (∃ σ, C.left.OneOfEach w σ) ∧ ∃ τ, C.right.OneOfEach w τ := by
+  exact ⟨_, _, _, _, _, squarePair, isOpen_threeDisc _, isWeakColouringOn_squareCol, one_mem_threeDisc _,
+    isCommonUnitPoint_zero_one_sub_I, squarePair_left_hasArcEdges, squarePair_right_hasArcEdges,
+    ⟨_, squarePair_left_oneOfEach⟩, _, squarePair_right_oneOfEach⟩
+
+#print axioms check_full

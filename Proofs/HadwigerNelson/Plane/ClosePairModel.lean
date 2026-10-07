@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ClosePair
+import Proofs.HadwigerNelson.Plane.ClosePairWitness
 
 /-!
 # Models for the close complementary pair: the hypotheses of the four statements are satisfiable (FS-124, second module)
@@ -32,7 +33,8 @@ complementary pair and a common unit point in the set at which the second member
 theorem exists_closePair_not_separatesAt :
     ∃ (U : Set ℂ) (c : ℂ → Fin 6) (x y w : ℂ) (C : ClosePair U c x y),
       IsOpen U ∧ IsWeakColouringOn U c ∧ w ∈ U ∧ IsCommonUnitPoint x y w ∧ ¬ C.right.SeparatesAt w := by
-  sorry
+  exact ⟨_, _, _, _, _, lonePair, isOpen_threeDisc _, isWeakColouringOn_loneCol, one_mem_threeDisc _,
+    isCommonUnitPoint_zero_one_add_I, lonePair_right_not_separatesAt⟩
 
 /-- **Inhabitant of the hypotheses of `closePair_both_separate`, `closePair_both_saved` and `closePair_four`**: a weak six-colouring of an open set
 with a close complementary pair of arc-edged (hence full) members and a common unit point in the set at which each
@@ -49,7 +51,8 @@ theorem exists_closePair_seven_not_separatesAt :
     ∃ (U : Set ℂ) (c : ℂ → Fin 7) (x y w : ℂ) (C : ClosePair U c x y),
       IsOpen U ∧ IsWeakColouringOn U c ∧ w ∈ U ∧ IsCommonUnitPoint x y w ∧ ¬ C.left.SeparatesAt w ∧
         ¬ C.right.SeparatesAt w := by
-  sorry
+  exact ⟨_, _, _, _, _, sevenPair, isOpen_threeDisc _, isWeakColouringOn_sevenCol, one_mem_threeDisc _,
+    isCommonUnitPoint_zero_one_add_I, sevenPair_left_not_separatesAt, sevenPair_right_not_separatesAt⟩
 
 /-! ## Spec examples: the theorems run on their inhabitants -/
 

@@ -1,0 +1,2 @@
+names declared by this job's helper module: 68; trees scanned: 76
+PASS: no other file declares one of them
