@@ -38,3 +38,11 @@ rounds on tight unit pairs; the asking lane's verdict "record job", then this su
    placeholder names read C136-). **Numbers this milestone may use**: ledger rows from 165 (161–164 are FS-124's drafts),
    grokkings from G100, new stubs from FS-137. **The opening job is briefed** (FS136-E1, `ephodos`;
    `data/fs136/briefs/FS136-E1-opening.md`).
+2. **The opening job is launched** (15:5x UTC, with its brief's commit; FS136-E1, `ephodos`; brief
+   `data/fs136/briefs/FS136-E1-opening.md`, gate exit 0; record `plans/FS136-E1-derivation.md`, plan
+   `plans/FS136-the-point-across.md`): §G, §PA, §IQ, the plan; the reading of every held object at points of four or more
+   labels; then four claims, each verdict saying what is new beyond the held entry it restates. **In its brief, as
+   information**: the kernel planner's blind result that the forcing on pieces holds for any two families of pieces whose
+   labels are all the labels — this milestone's second claim, reached by a second mind before the deriver starts (FS-124
+   inventory item 29). Its commit subjects are to stay neutral while that planner is blind.
+

@@ -617,4 +617,27 @@ between two colours that is an arc of the unit circle about a point one unit awa
     sentence. (4) G99 is filed as a reading, with its status line as drafted. (5) Its drafts' slots are re-asserted by its
     script after the landing in flight has filed. **FS-124 is recorded; it is Derived when the filing is made — after the
     landing in flight is back.**
+29. **FS124-K2, a mid-job message, still blind (15:54 UTC logged; its Amendment 1 read, none of the newly fenced files opened):
+    all nine statements are typed and elaborate, no statement defect so far, seven generalizations, and one step that is
+    not routine.** "I reach all nine by a route of my own, except the sector clause of C124-BOTH, which I reach only over
+    a plane-topology lemma." **Its generalizations**: measurability of the colouring is idle in all nine (the one lemma is
+    one Fubini slice read forwards — proved in its skeleton, 28 lines, any function, any label type); finiteness of the
+    labels idle in five; **the lemma on one piece and one side does not use that the point is one unit from the member**,
+    and it "is the one principle" — the centre's statement, collar by collar and whole, and the wide form at a crossing
+    are its instances; **the four statements that spend six do so in exactly one sentence — "every label is the label of
+    a piece of `x` or of a piece of `y`" — and hold from it at any finite number of labels**, the forcing for any two
+    families of pieces (the successor milestone's second claim, reached blind); a statement for each of the four regions
+    under the forcing; and the first clause of C124-BOTH finer: each member's fullness forces the *other* to separate.
+    **The step that is not routine**: the sector clause needs that each of three arcs from a disc's centre to its rim
+    borders exactly two of the three complementary components — "Jordan-grade; Mathlib has no Jordan curve theorem"; this
+    library's plane-topology module holds unicoherence, "from which I expect it follows, as a job of its own"; stated as
+    one leaf, no hypothesis added. **Models**: the four-labels statement's and C124-BOTH's hypotheses are satisfiable (a
+    unit square with three discs, by hand); at seven the forcing fails, as its not-claimed line says. **Ruling, sent**:
+    **(b)** — the sector clause is stated for what it consumes (a decomposition each of whose edges contains an arc from
+    the point), and "the list's sector point is one" is its own theorem over the one leaf, in a module of its own —
+    alternative (a): plan the lemma here; rejected for this job, it is Jordan-grade and the other statements do not read
+    it; **the lemma is owed as a kernel job by name** (Kooshi's word on dependencies), not waived; confidence medium-high.
+    Its two readings of the definitions match the claim list's words. **Relayed, labelled its own and unchecked, to the
+    successor's opening job** (in its brief): the forcing for any two families of pieces; the four-regions statement;
+    the two remarks on the one-piece lemma.
 
