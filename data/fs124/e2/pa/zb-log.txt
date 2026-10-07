@@ -1,0 +1,7 @@
+## 2026-10-07T14:13:19Z  query: (ab:"trichromatic" | ab:"tricolored" | ab:"tricoloured" | ab:"triple point" | ab:"multicolored point" | ab:"three colors meet") & (ab:"chromatic number of the plane" | ab:"unit distance" | ab:"forbidden distance" | ab:"Hadwiger-Nelson")  hits: None
+
+## 2026-10-07T14:13:19Z  query: (ab:"measurable chromatic number" | ab:"measurable coloring" | ab:"measurable colouring" | ab:"measurable colorings") & (ab:plane | ab:"Euclidean") & (ab:boundary | ab:boundaries | ab:tile | ab:tiles | ab:map | ab:junction | ab:arc | ab:arcs)  hits: 1
+2018 | Donnelly, John | The chromatic number of the taxicab plane | Zbl 1407.05233 | text:summary
+
+## 2026-10-07T14:13:20Z  query: (ab:"map-type" | ab:"map coloring" | ab:"map colouring" | ab:"tile-based" | ab:"tiling") & (ab:"chromatic number of the plane" | ab:"Hadwiger-Nelson") & (ab:"six" | ab:"6-coloring" | ab:"seven" | ab:"vertex" | ab:"vertices")  hits: None
+

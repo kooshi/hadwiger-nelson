@@ -264,3 +264,130 @@ given; a claim refuted is refuted by an exhibited object with an exact check; a 
 No statement about weak six-colourings with a tight pair is called a statement about weak six-colourings; no class is called
 inhabited at six. Any statement that would fix the value of `χ(ℝ²)` goes to the coordinator at once as "claimed by one mind,
 unchecked".
+
+## Second round (FS124-E2, 2026-10-07) — dated additions; everything above stands as written
+
+*Added by FS124-E2 (Ephodos; brief `data/fs124/briefs/FS124-E2-second-round.md`; record `plans/FS124-E2-derivation.md`; scripts and
+outputs `data/fs124/e2/`). The object has changed since §G was written — from one tight pair read outward to a close complementary
+pair of three-piece points and its common unit points (`plans/STUB-q-ring.md` § The question (Poros, 2026-10-07, after the first
+round)) — so the grokkings are walked again from inside it.*
+
+### Readback (second round)
+
+`data/fs124/e2/quote_check.py`: 13 quotations, 13 lines, 0 misses, exit 0; with `--fault` 1 miss, exit 1. Read whole: the card's
+section, `plans/FS124-E1-derivation.md`, `plans/POROS-2026-10-07-fs124-round1.md`, the claim list, this plan; of
+`plans/FS132-derivation.md` the entries C132-WIT-SIDE, C132-SHADOW, C132-WITNESS, C132-CROSS, C132-COMP-SHARP with their prose (the
+arguments in the E4/E5 records not opened: this round re-derives what it uses from C124-SHADOW-OPEN).
+
+### §G, walked again from inside the save
+
+*The object in the walk's words: two points `x`, `y` less than 2 apart; near each, three connected open one-label pieces, six labels
+in all; a point `w` one unit from both. What must the pieces look like at `x` and `y`, what is present at `w`, and what is carried
+to the other such point?*
+
+**Bears** (what each dictates for this round):
+
+- **G92** (a held result reaches as far as its argument). C132-COMP-SHARP's argument reads of an "edge set" only two of its points,
+  each in the closure of one connected piece. **Dictates**: state the rule on *pieces*, not on edges or exclusion sets — a piece
+  with a point strictly inside (outside) the unit circle about `w` bars its label near `w` outside (inside) the unit circle about
+  its member — and read every claim as a statement about which pieces lie on one side of that circle. Changes the route of every
+  claim; an open set is never inside a circle, so every piece is barred on a side at once, with no pigeonhole on edges.
+- **G96** (circle data and ball data). A three-piece point is ball data at `x` and at `y`; what it bars at `w` is circle data; the
+  passage is the one G96 names as free — a connected piece of definite size. **Dictates**: hypotheses of one kind (pieces at the
+  members); conclusions at `w` and, back through C124-SHADOW-OPEN, at the members. "Every weak six-colouring has a three-piece
+  point" is the regularity stubs' and is in no claim.
+- **G83** (one four-colour vertex; every kill a straddle along two unit circles). A saved point is G83's vertex seen from its cause.
+  **Dictates**: the first test of a save by one member is two unit circles through that member — the one about `w` and the one about
+  a neighbour `w′` of `w` on the member's ring — and the thin regions between them. Run before any object is designed.
+- **G91** (the ring is the pigeonhole; before building on a type ask whether it is inhabited, testing the straddle among the forced
+  pieces first). **Dictates**: in C124-ONE-MEMBER exclude first, build second; `w` is a change point of both members' rings.
+- **G84** (contact). The saving boundary is carved by the unit circle about a point one unit from it, both sides present there:
+  contact forced by a count. **Dictates**: every control on an object with no margin (all held six-coloured objects; R7); the
+  honeycomb at 2/5 only where a claim must fail at seven.
+- **G97** (every exclusion stops at the unit arc about the other end). Here the arc is forced, not excepted. **Falsifiable here**:
+  its killing test's second clause — "a statement by the same tools that excludes, builds or bounds a unit arc about a ring point" —
+  is met if a save by one member is excluded in a named class. Registered (Q5).
+- **G98** (six is the one count at which the ring's labels can wind). A three-piece point leaves its ring three labels; a
+  complementary partner carries exactly those three. **Dictates**: read C124-SECOND's cyclic order as what the two rings exchange at
+  the two crossing points; no winding number is taken in this round.
+- **G86** (Siamese pairs). The save's exception is a point where a label's germ is not connected (a bowtie). **Dictates**: "three
+  connected pieces" and "every two pieces share boundary at the point" go in the headline of every statement that needs them.
+- **G60, G13** (one class at a time gives nothing; coverage is a set property). The count enters once: each of the four regions cut
+  at `w` by the two unit circles needs a label, and two triples are all six. **Dictates**: tag the statements; the per-class lemma
+  is stated once.
+- **G95, G94** (tightness is not regularity; the nerve gives less than a map). **Dictates**: the failure at seven by formula; no
+  claim that a three-piece point exists.
+- **G21, G79** (a reading measures its enumeration; the example invariant). **Dictates**: the reading enumerates vertices from the
+  tiles' own pieces, not from the ends of unit arcs, and says so; what every held save carries is read before the derivation is
+  written down. **G22** (non-polygonal classes): a save needs a boundary on a unit circle. **G85**: the saving arc's inner unit
+  parallel is the point `w`. **G87**: on the lookout (one item for the report: a held map-class result the card did not read).
+
+**Silent**: G1–G12, G14–G20, G23–G29, G31–G45, G48, G52–G59, G61–G66, G68–G71, G73–G78, G80–G82, G88–G90, G93. **Retired pointers**:
+G30, G46, G47, G49, G50, G51, G67, G72.
+
+**Rows, by mechanism** (133–136 read at their statement cells; FS112-N3-COR3 and FS107-W-TAN at their statements,
+`plans/FS112-derivation.md` l. 158, `plans/FS107-derivation.md` l. 100, and N3-COR3's verification note,
+`plans/FS112-NB3-verification.md` ll. 120–131). **For maps the card's question is already answered in this project**: FS107-W-TAN —
+two vertices under 2 apart with complementary three-sets "form a tangent pair or include a bowtie"; FS112-N3-COR3 (row 135; two
+minds, one blind) — a close complementary pair of cubic trichromatic vertices of a valid map "sits on a unit rhombus … whose other
+corners are vertices of at least four colours, each a leaving centre of both", with the line "**One failure is not enough**". So in
+the map class a save by one member is excluded and at least four colours are forced, the bowtie the only exception. The card's
+hunch ("one edge of each member is not forced … nobody has built one") did not read these. What is open is the measurable form.
+
+**What the re-walk changed.** (1) The unit of every statement is the piece and its side of the unit circle about `w`. (2)
+C124-ONE-MEMBER is attacked as an exclusion first, in measure, by G83's two circles. (3) A statement is added that the card reads
+but does not pose: which labels are present at a saved point. (4) Three classes are kept apart: three-piece points by the letter,
+those whose pieces pairwise share boundary at the point, and sector points (a map's three-tile vertices).
+
+### §PA (second round)
+
+*14:13 UTC, zbMATH Open API (`data/fs124/e2/zb.py`, log `data/fs124/e2/pa/zb-log.txt`); listings only.* In the map class's words:
+`(ab:"trichromatic" | ab:"tricolored" | ab:"triple point" | …) & (ab:"chromatic number of the plane" | ab:"unit distance" |
+ab:"forbidden distance" | ab:"Hadwiger-Nelson")` — 0; `(ab:"map-type" | ab:"map coloring" | ab:"tile-based" | ab:"tiling") &
+(ab:"chromatic number of the plane" | ab:"Hadwiger-Nelson") & (ab:"six" | … | ab:"vertices")` — 0 (the first round's title query
+found the four held works; this abstract form finds none, so the zero is the field). In measure: `(ab:"measurable chromatic number" |
+ab:"measurable coloring" | …) & (ab:plane | ab:"Euclidean") & (ab:boundary | ab:tile | ab:map | ab:junction | ab:arc …)` — 1, off
+the object (the taxicab plane). **In print for maps, by this project's records, not re-read by me**: trichromatic points sharing no
+colour are at least 2 apart in a tiling avoiding an interval of distances (de Grey, cited at `plans/FS112-derivation.md` l. 396 as
+`[17.282]`); the regular form `[Voronov2023]` Prop. 2.2 (by FS106-TAN); the edge exclusion `[SokolovVoronov2025]` Props. 1–2 (row
+134); the rescue by a unit arc is in print only as the two objects of row 136 (`[AxenovichEtAl2014]` Thm 4.2's strip,
+`[Polymath2021]` Fig. 10's disk), with no statement that it is forced. **The measurable form: not found in print**, at this reach
+(two vocabularies, one database, no author listing — a debt).
+
+### §IQ (second round)
+
+Both forms are the card's (`plans/STUB-q-ring.md` §§ Existence form, Structural form, of the section "after the first round").
+**The invariant the structural form forces, as this round proposes it before deriving**: for each member and each common unit point,
+the *side* of each of the member's three pieces with respect to the unit circle about the point — inside, outside, or crossing. The
+card's candidate (the pattern with a cyclic order) is a function of it. Route: derivation; the reading checks derived shapes.
+
+### Route and stages (second round)
+
+One lemma (C124-TYPE: a connected open one-label piece with its member in its closure and a point strictly inside, or outside, the
+unit circle about `w` bars its label near `w` outside, or inside, the member's unit circle — C124-SHADOW-OPEN and one intermediate
+value). Then: the count over the four regions at `w` (C124-FORCED in piece form); the half-window at `w` when one member does not
+separate, C124-CENTRE's computation at the other member for one neighbour `w′`, and the two thin regions between the unit circles
+about `w` and `w′` (C124-ONE-MEMBER); the labels present (added); the strip's top edge by formula (C124-EDGE); the two points of a
+pair (C124-SECOND). Stages, each saved and committed: 1 this addition, the readback, the claims as stated; 2 recognition; 3 the
+reading (`data/fs124/e2/saves_read.py`; no run over two minutes); 4 C124-FORCED with the failure at seven; 5 C124-ONE-MEMBER and
+the labels present; 6 C124-EDGE, C124-SECOND, the report. A kill redoes the current stage.
+
+### Registered predictions (second round)
+
+*Registered 14:20 UTC, before any entry was written and before any held object was read by this job — but after a first analysis
+by hand in the session (the route above is that analysis), which is said here because it makes the derivation predictions less
+blind than the reading's.*
+
+- **Q1 (the reading).** On the strip and the disk, read from the tiles (every three-tile vertex, not only arc ends): every common
+  unit point inside is saved with one boundary piece of each member on its circle, 0.85. Some held object shows a pattern other than
+  (1, 1): 0.8. At every common unit point inside a held object, every member that is a three-sector vertex has a piece inside and a
+  piece outside the unit circle about the point: 0.9 — *a miss is a defect in the route, to be found before anything is derived on
+  it*. Some held fragment shows a point saved by a bowtie member alone: 0.6. *Decides*: whether Stage 5 is written as an exclusion.
+- **Q2 (C124-FORCED).** Derived in piece form for three-piece points by the letter: 0.9; as posed for sector points: 0.9; as posed
+  by the letter it fails where two pieces meet only at the member: 0.7. *Decides*: the statement the kernel lane plans.
+- **Q3 (C124-ONE-MEMBER).** For members whose pieces pairwise share boundary at the member, a save by one member is excluded: 0.85;
+  an object by formula with a save by one member at a point of that kind: 0.03. *Decides*: the card's branch; whether the drafted
+  search (queue line 14) is asked.
+- **Q4 (C124-EDGE, C124-SECOND).** The top-edge computation holds as read: 0.8. C124-SECOND derived as posed for sector points:
+  0.9. Exactly four labels at a point saved by one boundary of each sector member, derived: 0.8.
+- **Q5 (G97).** Its killing test fires in the second clause: 0.8. *Decides*: a rewrite drafted at the record job.
