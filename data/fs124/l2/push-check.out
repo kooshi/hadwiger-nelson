@@ -1,0 +1,13 @@
+gated commit da96003b; HEAD c5ecdd0e312024e8b80426597ab4bafb0060d195; origin/main 121ccc4fcfe88b5cd4c3f22cd66d34f17a7efbac
+paths that differ between the gated commit and HEAD, by top directory:
+    104 data
+      7 plans
+      1 scripts
+outside data/ and plans/:
+scripts/vacuity-baseline.txt
+diff --stat da96003b HEAD -- Proofs Proofs.lean tools ARCHITECTURE.md lakefile.toml lean-toolchain lake-manifest.json CLAUDE.md scripts:
+ scripts/vacuity-baseline.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+origin/main is an ancestor of HEAD: yes
+sorry (narrow) lines in Proofs/: 0
+tracked files modified: 0

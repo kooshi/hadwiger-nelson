@@ -1,0 +1,11 @@
+HEAD=2077b80e5087a6a9f1ce249a38ed2faf011c8692
+narrow lines before the plant: 0
+narrow lines with the plant: 1
+Proofs/HadwigerNelson/Plane/ThreeArcs.lean:857:theorem zz_l2_sorry_plant : (1 : ℕ) = 2 := by sorry
+PLANT FIRED: the search finds the planted sorry and nothing else
+digest before: 56b46e5aa08e781e8678a8fd7b51b6817b794eee78d812f1f21c764fa80b62eb
+digest after:  56b46e5aa08e781e8678a8fd7b51b6817b794eee78d812f1f21c764fa80b62eb
+RESTORED: the module is the text it was
+plant's name in the file: 0 time(s)
+narrow lines after the restore: 0
+tracked files modified: 0
