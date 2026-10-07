@@ -1,0 +1,30 @@
+== disk: vertices=45 3-label/3-sector:25 4-label/4-sector:5 on-the-cut:15 | members: sector=25 bowtie=0 other=0 labels=6
+   close-complementary-pairs=20 common-unit-points: inside=20 on-the-cut-or-outside=20
+   patterns: (1, 1):20 | separating(member kinds): xy(ss):20
+   both-members-one-inner-one-outer-one-crossing=20, labels-at-w-exactly-those-four=20 | pattern-(1,1)-with-HALF-TWO's-hypothesis: 20 of 20
+   unit-arc-pieces=20 centre-on-the-cut=0 of-kind-both=20 edge-of-a-save=15 not=5
+   w=(-0.50000,0.16246) labels=greenorangeredviolet pattern=(1, 1) sector(-1.5000,0.1625) blue:crossing,green:inner,red:outer SEP ; sector(-1.0567,-0.6683) orange:outer,violet:inner,yellow:crossing SEP
+   w=(-0.50000,0.16246) labels=greenorangeredviolet pattern=(1, 1) sector(-1.5000,0.1625) blue:crossing,green:inner,red:outer SEP ; sector(-0.8090,1.1135) orange:inner,violet:outer,yellow:crossing SEP
+   w=(-0.50000,0.16246) labels=greenorangeredviolet pattern=(1, 1) sector(-1.3090,-0.4253) blue:crossing,orange:outer,violet:inner SEP ; sector(-1.3090,0.7502) green:inner,red:outer,yellow:crossing SEP
+   w=(-0.30902,-0.42533) labels=blueredvioletyellow pattern=(1, 1) sector(-1.3090,-0.4253) blue:outer,orange:crossing,violet:inner SEP ; sector(-0.6180,-1.3764) green:crossing,red:outer,yellow:inner SEP
+   w=(-0.50000,0.16246) labels=greenorangeredviolet pattern=(1, 1) sector(-1.3090,0.7502) green:inner,red:outer,yellow:crossing SEP ; sector(-0.4621,1.1617) blue:crossing,orange:inner,violet:outer SEP
+   w=(-0.30902,-0.42533) labels=blueredvioletyellow pattern=(1, 1) sector(-1.2477,-0.0805) blue:outer,green:crossing,violet:inner SEP ; sector(-1.1180,-1.0131) orange:crossing,red:outer,yellow:inner SEP
+   w=(-0.30902,-0.42533) labels=blueredvioletyellow pattern=(1, 1) sector(-1.1180,-1.0131) orange:crossing,red:outer,yellow:inner SEP ; sector(0.0000,-1.3764) blue:inner,green:crossing,violet:outer SEP
+   w=(-0.00000,0.52573) labels=blueorangeredyellow pattern=(1, 1) sector(-0.9621,0.7985) green:crossing,orange:inner,yellow:outer SEP ; sector(-0.3090,1.4768) blue:inner,red:outer,violet:crossing SEP
+   w=(0.00000,0.52573) labels=blueorangeredyellow pattern=(1, 1) sector(-0.8090,1.1135) orange:inner,violet:crossing,yellow:outer SEP ; sector(0.3090,1.4768) blue:inner,green:crossing,red:outer SEP
+   w=(-0.30902,-0.42533) labels=blueredvioletyellow pattern=(1, 1) sector(-0.6180,-1.3764) green:crossing,red:outer,yellow:inner SEP ; sector(0.3090,-1.2115) blue:inner,orange:crossing,violet:outer SEP
+   w=(0.30902,-0.42533) labels=bluegreenorangered pattern=(1, 1) sector(-0.3090,-1.2115) blue:inner,green:outer,yellow:crossing SEP ; sector(0.6180,-1.3764) orange:inner,red:outer,violet:crossing SEP
+   w=(-0.00000,0.52573) labels=blueorangeredyellow pattern=(1, 1) sector(-0.3090,1.4768) blue:inner,red:outer,violet:crossing SEP ; sector(0.8090,1.1135) green:crossing,orange:outer,yellow:inner SEP
+   w=(0.30902,-0.42533) labels=bluegreenorangered pattern=(1, 1) sector(0.0000,-1.3764) blue:inner,green:outer,violet:crossing SEP ; sector(1.1180,-1.0131) orange:inner,red:outer,yellow:crossing SEP
+   w=(0.00000,0.52573) labels=blueorangeredyellow pattern=(1, 1) sector(0.3090,1.4768) blue:inner,green:crossing,red:outer SEP ; sector(0.9621,0.7985) orange:outer,violet:crossing,yellow:inner SEP
+   w=(0.50000,0.16246) labels=greenredvioletyellow pattern=(1, 1) sector(0.4621,1.1617) blue:crossing,green:outer,yellow:inner SEP ; sector(1.3090,0.7502) orange:crossing,red:outer,violet:inner SEP
+   w=(0.30902,-0.42533) labels=bluegreenorangered pattern=(1, 1) sector(0.6180,-1.3764) orange:inner,red:outer,violet:crossing SEP ; sector(1.3090,-0.4253) blue:outer,green:inner,yellow:crossing SEP
+   w=(0.50000,0.16246) labels=greenredvioletyellow pattern=(1, 1) sector(0.8090,1.1135) green:outer,orange:crossing,yellow:inner SEP ; sector(1.5000,0.1625) blue:crossing,red:outer,violet:inner SEP
+   w=(0.50000,0.16246) labels=greenredvioletyellow pattern=(1, 1) sector(1.0567,-0.6683) green:inner,orange:crossing,yellow:outer SEP ; sector(1.5000,0.1625) blue:crossing,red:outer,violet:inner SEP
+   w=(0.30902,-0.42533) labels=bluegreenorangered pattern=(1, 1) sector(1.1180,-1.0131) orange:inner,red:outer,yellow:crossing SEP ; sector(1.2477,-0.0805) blue:outer,green:inner,violet:crossing SEP
+   w=(0.50000,0.16246) labels=greenredvioletyellow pattern=(1, 1) sector(1.3090,-0.4253) blue:crossing,green:inner,yellow:outer SEP ; sector(1.3090,0.7502) orange:crossing,red:outer,violet:inner SEP
+   arc not an edge of a save: centre=(0.5000,0.1625) red|violet ends=(-0.5000,0.1625),(-0.3090,-0.4253) labels-at-centre=greenredvioletyellow
+   arc not an edge of a save: centre=(0.3090,-0.4253) red|orange ends=(0.0000,0.5257),(-0.5000,0.1625) labels-at-centre=bluegreenorangered
+   arc not an edge of a save: centre=(0.0000,0.5257) red|blue ends=(-0.3090,-0.4253),(0.3090,-0.4253) labels-at-centre=blueorangeredyellow
+   arc not an edge of a save: centre=(-0.3090,-0.4253) red|yellow ends=(0.5000,0.1625),(0.0000,0.5257) labels-at-centre=blueredvioletyellow
+   arc not an edge of a save: centre=(-0.5000,0.1625) red|green ends=(0.3090,-0.4253),(0.5000,0.1625) labels-at-centre=greenorangeredviolet

@@ -1,0 +1,12 @@
+merged commit: 780225d8f3ccd086183550a7a31302e4cba23039
+gated commit:  b46a9d57ab422644b577d1b6bc3e79bd1e1636f8
+paths that differ between the gated commit and the merged commit, by top-level entry:
+    118 data
+      1 LEAN.md
+     19 plans
+of them outside plans/, data/, .claude/, BIBLIOGRAPHY.md, LEDGER.md, LEAN.md, RUNNING.md: 0
+git diff --stat b46a9d57 780225d8f3ccd086183550a7a31302e4cba23039 -- Proofs Proofs.lean scripts tools ARCHITECTURE.md lakefile.toml lean-toolchain lake-manifest.json:
+(empty above = no difference)
+is origin/main (f81abeecde0c8945132dac16d90d6f0d83683f6f) an ancestor of the merged commit: yes
+narrow sorry lines in Proofs/ on the merged tree: 0
+tracked files modified: 0

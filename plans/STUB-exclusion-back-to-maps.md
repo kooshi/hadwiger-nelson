@@ -120,3 +120,12 @@ G86 (a Siamese kill reads points and distances, not tiles — this is one), G91 
 G92 (C132-M-EXCL is rows 148–149's argument at the class it reads), G94 (the nerve replaces the map: here the map is put
 back, as a control), G21 (every held positive escapes at the hypothesis — check that it escapes for the reason stated);
 rows 134, 148–149; stubs FS-123, FS-124.
+
+*Since FS-124 (FS124-Z1, the record job, 2026-10-07; every entry named is in `plans/FS124-derivation.md`, [hand] or derived from [hand] entries, **one mind, kernel pending**):* **three map entries now have a statement
+in measure beside them, one mind each, by other routes.** FS112-N3-COR3 (row 135): C124-BOTH with C124-FOUR, for full members
+and sector points. Its verification's "One failure is not enough", with FS107-W-TAN's bowtie: C124-LONE with C124-LONE-EXISTS.
+FS114-Y-STRIPK6 (row 138), for the strip at its own colouring and one point: C124-EDGE-CLOSED. Each assumes pieces at the points
+it names and nothing else of the colouring; where it concludes an arc its hypothesis is a sector point — "a map's three-tile
+vertex seen locally" (the asking lane, `plans/POROS-2026-10-07-fs124-round2.md` § 2.3). Not done, and a control in this stub's
+direction: each read back at a map vertex and matched to its map entry clause by clause. Open, from the second deriver: whether
+a three-tile vertex of an arc map with a cusp is a sector point.

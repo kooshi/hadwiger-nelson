@@ -1,0 +1,175 @@
+DUMP OAI.EuclideanFiveColor.ProperColoring : def levels=[]
+DUMP   type  = (pi.d k (c Nat []) (pi.d c (pi.d a (c Complex []) ((c Fin []) #1)) (Sort 0)))
+DUMP   value = (lam.d k (c Nat []) (lam.d c (pi.d a (c Complex []) ((c Fin []) #1)) (pi.d x (c Complex []) (pi.d y (c Complex []) (pi.d a ((((c Eq [(S 0)]) (c Real [])) ((((c Norm.norm [0]) (c Complex [])) (c Complex.instNorm [])) (((((((c HSub.hSub [0,0,0]) (c Complex [])) (c Complex [])) (c Complex [])) (((c instHSub [0]) (c Complex [])) (c Complex.instSub []))) #1) #0))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 1)) (((c One.toOfNat1 [0]) (c Real [])) (c Real.instOne [])))) ((((c Ne [(S 0)]) ((c Fin []) #4)) (#3 #2)) (#3 #1)))))))
+USES OAI.EuclideanFiveColor.ProperColoring : Complex @ Mathlib.Basic.Complex.Basic
+USES OAI.EuclideanFiveColor.ProperColoring : Eq @ Init.Prelude
+USES OAI.EuclideanFiveColor.ProperColoring : Fin @ Init.Prelude
+USES OAI.EuclideanFiveColor.ProperColoring : Nat @ Init.Prelude
+USES OAI.EuclideanFiveColor.ProperColoring : Ne @ Init.Core
+USES OAI.EuclideanFiveColor.ProperColoring : Real @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.ProperColoring : instHSub @ Init.Prelude
+USES OAI.EuclideanFiveColor.ProperColoring : Complex.instNorm @ Mathlib.Analysis.Complex.Norm
+USES OAI.EuclideanFiveColor.ProperColoring : Complex.instSub @ Mathlib.Basic.Complex.Basic
+USES OAI.EuclideanFiveColor.ProperColoring : HSub.hSub @ Init.Prelude
+USES OAI.EuclideanFiveColor.ProperColoring : Norm.norm @ Mathlib.Analysis.Normed.Group.Defs
+USES OAI.EuclideanFiveColor.ProperColoring : OfNat.ofNat @ Init.Prelude
+USES OAI.EuclideanFiveColor.ProperColoring : One.toOfNat1 @ Init.Data.Zero
+USES OAI.EuclideanFiveColor.ProperColoring : Real.instOne @ Mathlib.Basic.Real.Basic
+DUMP OAI.EuclideanFiveColor.anglePeriodPositive : theorem levels=[]
+DUMP   type  = ((c Fact []) (((((c LT.lt [0]) (c Real [])) (c Real.instLT [])) ((((c OfNat.ofNat [0]) (c Real [])) (nat 0)) (((c Zero.toOfNat0 [0]) (c Real [])) (c Real.instZero [])))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (((c Nat.instAtLeastTwoHAddOfNat []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 1)) ((c instOfNatNat []) (nat 1)))) ((c Nat.instNeZeroSucc []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 0)) ((c instOfNatNat []) (nat 0)))))))) (c Real.pi []))))
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Fact @ Mathlib.Basic.Logic.Basic
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Nat @ Init.Prelude
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Real @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.anglePeriodPositive : instHMul @ Init.Prelude
+USES OAI.EuclideanFiveColor.anglePeriodPositive : instOfNatAtLeastTwo @ Mathlib.Data.Nat.Cast.Defs
+USES OAI.EuclideanFiveColor.anglePeriodPositive : instOfNatNat @ Init.Prelude
+USES OAI.EuclideanFiveColor.anglePeriodPositive : HMul.hMul @ Init.Prelude
+USES OAI.EuclideanFiveColor.anglePeriodPositive : LT.lt @ Init.Prelude
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Nat.instAtLeastTwoHAddOfNat @ Mathlib.Data.Nat.Init
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Nat.instNeZeroSucc @ Init.Data.Nat.Basic
+USES OAI.EuclideanFiveColor.anglePeriodPositive : OfNat.ofNat @ Init.Prelude
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Real.instLT @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Real.instMul @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Real.instNatCast @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Real.instZero @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Real.pi @ Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+USES OAI.EuclideanFiveColor.anglePeriodPositive : Zero.toOfNat0 @ Init.Data.Zero
+DUMP OAI.EuclideanFiveColor.Angles : def levels=[]
+DUMP   type  = (Sort (S 0))
+DUMP   value = ((((c AddCircle [0]) (c Real [])) (c Real.instAddCommGroup [])) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c OAI.EuclideanFiveColor.Angles._proof_1 [])))) (c Real.pi [])))
+USES OAI.EuclideanFiveColor.Angles : AddCircle @ Mathlib.Topology.Instances.AddCircle.Defs
+USES OAI.EuclideanFiveColor.Angles : Real @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.Angles : instHMul @ Init.Prelude
+USES OAI.EuclideanFiveColor.Angles : instOfNatAtLeastTwo @ Mathlib.Data.Nat.Cast.Defs
+USES OAI.EuclideanFiveColor.Angles : HMul.hMul @ Init.Prelude
+USES OAI.EuclideanFiveColor.Angles : OfNat.ofNat @ Init.Prelude
+USES OAI.EuclideanFiveColor.Angles : Real.instAddCommGroup @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.Angles : Real.instMul @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.Angles : Real.instNatCast @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.Angles : Real.pi @ Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+USES OAI.EuclideanFiveColor.Angles : OAI.EuclideanFiveColor.Angles._proof_1 @ OAI.Geometry.PlaneColoring.Coloring
+DUMP OAI.EuclideanFiveColor.angularMeasure : def levels=[]
+DUMP   type  = (((c MeasureTheory.Measure [0]) (c OAI.EuclideanFiveColor.Angles [])) (((((c QuotientAddGroup.measurableSpace [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (c Real.measurableSpace [])) ((((c AddSubgroup.zmultiples [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c OAI.EuclideanFiveColor.Angles._proof_1 [])))) (c Real.pi [])))))
+DUMP   value = (((c AddCircle.haarAddCircle []) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c OAI.EuclideanFiveColor.Angles._proof_1 [])))) (c Real.pi []))) (c OAI.EuclideanFiveColor.anglePeriodPositive []))
+USES OAI.EuclideanFiveColor.angularMeasure : Real @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.angularMeasure : instHMul @ Init.Prelude
+USES OAI.EuclideanFiveColor.angularMeasure : instOfNatAtLeastTwo @ Mathlib.Data.Nat.Cast.Defs
+USES OAI.EuclideanFiveColor.angularMeasure : AddCircle.haarAddCircle @ Mathlib.Analysis.Fourier.AddCircle
+USES OAI.EuclideanFiveColor.angularMeasure : AddCommGroup.toAddGroup @ Mathlib.Algebra.Group.Defs
+USES OAI.EuclideanFiveColor.angularMeasure : AddSubgroup.zmultiples @ Mathlib.Algebra.Group.Subgroup.ZPowers.Basic
+USES OAI.EuclideanFiveColor.angularMeasure : HMul.hMul @ Init.Prelude
+USES OAI.EuclideanFiveColor.angularMeasure : MeasureTheory.Measure @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES OAI.EuclideanFiveColor.angularMeasure : OfNat.ofNat @ Init.Prelude
+USES OAI.EuclideanFiveColor.angularMeasure : QuotientAddGroup.measurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Constructions
+USES OAI.EuclideanFiveColor.angularMeasure : Real.instAddCommGroup @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.angularMeasure : Real.instMul @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.angularMeasure : Real.instNatCast @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.angularMeasure : Real.measurableSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
+USES OAI.EuclideanFiveColor.angularMeasure : Real.pi @ Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+USES OAI.EuclideanFiveColor.angularMeasure : OAI.EuclideanFiveColor.Angles @ OAI.Geometry.PlaneColoring.Coloring
+USES OAI.EuclideanFiveColor.angularMeasure : OAI.EuclideanFiveColor.anglePeriodPositive @ OAI.Geometry.PlaneColoring.Coloring
+USES OAI.EuclideanFiveColor.angularMeasure : OAI.EuclideanFiveColor.Angles._proof_1 @ OAI.Geometry.PlaneColoring.Coloring
+DUMP OAI.EuclideanFiveColor.direction : def levels=[]
+DUMP   type  = (pi.d t (c OAI.EuclideanFiveColor.Angles []) (c Complex []))
+DUMP   value = (lam.d t (c OAI.EuclideanFiveColor.Angles []) ((((c Subtype.val [(S 0)]) (c Complex [])) (lam.d x (c Complex []) ((((((c Membership.mem [0,0]) (c Complex [])) (((c Submonoid [0]) (c Complex [])) (((c MulZeroOneClass.toMulOneClass [0]) (c Complex [])) (((c instMulZeroOneClassOfSemiring [0]) (c Complex [])) (((c Ring.toSemiring [0]) (c Complex [])) (((c SeminormedRing.toRing [0]) (c Complex [])) (((c SeminormedCommRing.toSeminormedRing [0]) (c Complex [])) (((c NormedCommRing.toSeminormedCommRing [0]) (c Complex [])) (((c NormedField.toNormedCommRing [0]) (c Complex [])) (c Complex.instNormedField [])))))))))) ((((c SetLike.instMembership [0,0]) (((c Submonoid [0]) (c Complex [])) (((c MulZeroOneClass.toMulOneClass [0]) (c Complex [])) (((c instMulZeroOneClassOfSemiring [0]) (c Complex [])) (((c Ring.toSemiring [0]) (c Complex [])) (((c SeminormedRing.toRing [0]) (c Complex [])) (((c SeminormedCommRing.toSeminormedRing [0]) (c Complex [])) (((c NormedCommRing.toSeminormedCommRing [0]) (c Complex [])) (((c NormedField.toNormedCommRing [0]) (c Complex [])) (c Complex.instNormedField [])))))))))) (c Complex [])) (((c Submonoid.instSetLike [0]) (c Complex [])) (((c MulZeroOneClass.toMulOneClass [0]) (c Complex [])) (((c instMulZeroOneClassOfSemiring [0]) (c Complex [])) (((c Ring.toSemiring [0]) (c Complex [])) (((c SeminormedRing.toRing [0]) (c Complex [])) (((c SeminormedCommRing.toSeminormedRing [0]) (c Complex [])) (((c NormedCommRing.toSeminormedCommRing [0]) (c Complex [])) (((c NormedField.toNormedCommRing [0]) (c Complex [])) (c Complex.instNormedField []))))))))))) (((((c Submonoid.unitSphere [0]) (c Complex [])) (((c SeminormedCommRing.toSeminormedRing [0]) (c Complex [])) (((c NormedCommRing.toSeminormedCommRing [0]) (c Complex [])) (((c NormedField.toNormedCommRing [0]) (c Complex [])) (c Complex.instNormedField []))))) (c Circle._proof_1 [])) (c Circle._proof_2 []))) #0))) (((c AddCircle.toCircle []) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c OAI.EuclideanFiveColor.Angles._proof_1 [])))) (c Real.pi []))) #0)))
+USES OAI.EuclideanFiveColor.direction : Complex @ Mathlib.Basic.Complex.Basic
+USES OAI.EuclideanFiveColor.direction : Real @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.direction : Submonoid @ Mathlib.Algebra.Group.Submonoid.Defs
+USES OAI.EuclideanFiveColor.direction : instHMul @ Init.Prelude
+USES OAI.EuclideanFiveColor.direction : instMulZeroOneClassOfSemiring @ Mathlib.Algebra.Ring.Defs
+USES OAI.EuclideanFiveColor.direction : instOfNatAtLeastTwo @ Mathlib.Data.Nat.Cast.Defs
+USES OAI.EuclideanFiveColor.direction : AddCircle.toCircle @ Mathlib.Analysis.SpecialFunctions.Complex.Circle
+USES OAI.EuclideanFiveColor.direction : Circle._proof_1 @ Mathlib.Analysis.Complex.Circle
+USES OAI.EuclideanFiveColor.direction : Circle._proof_2 @ Mathlib.Analysis.Complex.Circle
+USES OAI.EuclideanFiveColor.direction : Complex.instNormedField @ Mathlib.Analysis.Complex.Basic
+USES OAI.EuclideanFiveColor.direction : HMul.hMul @ Init.Prelude
+USES OAI.EuclideanFiveColor.direction : Membership.mem @ Init.Prelude
+USES OAI.EuclideanFiveColor.direction : MulZeroOneClass.toMulOneClass @ Mathlib.Algebra.GroupWithZero.Defs
+USES OAI.EuclideanFiveColor.direction : NormedCommRing.toSeminormedCommRing @ Mathlib.Analysis.Normed.Ring.Basic
+USES OAI.EuclideanFiveColor.direction : NormedField.toNormedCommRing @ Mathlib.Analysis.Normed.Field.Basic
+USES OAI.EuclideanFiveColor.direction : OfNat.ofNat @ Init.Prelude
+USES OAI.EuclideanFiveColor.direction : Real.instMul @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.direction : Real.instNatCast @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.direction : Real.pi @ Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+USES OAI.EuclideanFiveColor.direction : Ring.toSemiring @ Mathlib.Algebra.Ring.Defs
+USES OAI.EuclideanFiveColor.direction : SeminormedCommRing.toSeminormedRing @ Mathlib.Analysis.Normed.Ring.Basic
+USES OAI.EuclideanFiveColor.direction : SeminormedRing.toRing @ Mathlib.Analysis.Normed.Ring.Basic
+USES OAI.EuclideanFiveColor.direction : SetLike.instMembership @ Mathlib.Data.SetLike.Basic
+USES OAI.EuclideanFiveColor.direction : Submonoid.instSetLike @ Mathlib.Algebra.Group.Submonoid.Defs
+USES OAI.EuclideanFiveColor.direction : Submonoid.unitSphere @ Mathlib.Analysis.Normed.Field.UnitBall
+USES OAI.EuclideanFiveColor.direction : Subtype.val @ Init.Prelude
+USES OAI.EuclideanFiveColor.direction : OAI.EuclideanFiveColor.Angles @ OAI.Geometry.PlaneColoring.Coloring
+USES OAI.EuclideanFiveColor.direction : OAI.EuclideanFiveColor.Angles._proof_1 @ OAI.Geometry.PlaneColoring.Coloring
+DUMP OAI.EuclideanFiveColor.WeakColoring : def levels=[]
+DUMP   type  = (pi.d k (c Nat []) (pi.d c (pi.d a (c Complex []) ((c Fin []) #1)) (Sort 0)))
+DUMP   value = (lam.d k (c Nat []) (lam.d c (pi.d a (c Complex []) ((c Fin []) #1)) (((c And []) (((((((c AEMeasurable [0,0]) (c Complex [])) ((c Fin []) #1)) ((c Fin.instMeasurableSpace []) #1)) (((c MeasureTheory.MeasureSpace.toMeasurableSpace [0]) (c Complex [])) (((((((c measureSpaceOfInnerProductSpace [0]) (c Complex [])) (c Complex.instNormedAddCommGroup [])) (c instInnerProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelSpace [])))) #0) (((c MeasureTheory.MeasureSpace.volume [0]) (c Complex [])) (((((((c measureSpaceOfInnerProductSpace [0]) (c Complex [])) (c Complex.instNormedAddCommGroup [])) (c instInnerProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelSpace []))))) ((((c Filter.Eventually [0]) (((c Prod [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles []))) (lam.d p (((c Prod [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles [])) ((((c Ne [(S 0)]) ((c Fin []) #2)) (#1 ((((c Prod.fst [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles [])) #0))) (#1 (((((((c HAdd.hAdd [0,0,0]) (c Complex [])) (c Complex [])) (c Complex [])) (((c instHAdd [0]) (c Complex [])) (c Complex.instAdd []))) ((((c Prod.fst [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles [])) #0)) ((c OAI.EuclideanFiveColor.direction []) ((((c Prod.snd [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles [])) #0))))))) ((((((c MeasureTheory.ae [0,0]) (((c Prod [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles []))) (((c MeasureTheory.Measure [0]) (((c Prod [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles []))) (((((c Prod.instMeasurableSpace [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles [])) (((c MeasureTheory.MeasureSpace.toMeasurableSpace [0]) (c Complex [])) (((((((c measureSpaceOfInnerProductSpace [0]) (c Complex [])) (c Complex.instNormedAddCommGroup [])) (c instInnerProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelSpace [])))) (((((c QuotientAddGroup.measurableSpace [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (c Real.measurableSpace [])) ((((c AddSubgroup.zmultiples [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c OAI.EuclideanFiveColor.Angles._proof_1 [])))) (c Real.pi []))))))) (((c MeasureTheory.Measure.instFunLike [0]) (((c Prod [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles []))) (((((c Prod.instMeasurableSpace [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles [])) (((c MeasureTheory.MeasureSpace.toMeasurableSpace [0]) (c Complex [])) (((((((c measureSpaceOfInnerProductSpace [0]) (c Complex [])) (c Complex.instNormedAddCommGroup [])) (c instInnerProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelSpace [])))) (((((c QuotientAddGroup.measurableSpace [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (c Real.measurableSpace [])) ((((c AddSubgroup.zmultiples [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c OAI.EuclideanFiveColor.Angles._proof_1 [])))) (c Real.pi []))))))) (c OAI.EuclideanFiveColor.WeakColoring._proof_1 [])) (((((((c MeasureTheory.Measure.prod [0,0]) (c Complex [])) (c OAI.EuclideanFiveColor.Angles [])) (((c MeasureTheory.MeasureSpace.toMeasurableSpace [0]) (c Complex [])) (((((((c measureSpaceOfInnerProductSpace [0]) (c Complex [])) (c Complex.instNormedAddCommGroup [])) (c instInnerProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelSpace [])))) (((((c QuotientAddGroup.measurableSpace [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (c Real.measurableSpace [])) ((((c AddSubgroup.zmultiples [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c OAI.EuclideanFiveColor.Angles._proof_1 [])))) (c Real.pi []))))) (((c MeasureTheory.MeasureSpace.volume [0]) (c Complex [])) (((((((c measureSpaceOfInnerProductSpace [0]) (c Complex [])) (c Complex.instNormedAddCommGroup [])) (c instInnerProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelSpace [])))) (c OAI.EuclideanFiveColor.angularMeasure [])))))))
+USES OAI.EuclideanFiveColor.WeakColoring : AEMeasurable @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES OAI.EuclideanFiveColor.WeakColoring : And @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : Complex @ Mathlib.Basic.Complex.Basic
+USES OAI.EuclideanFiveColor.WeakColoring : Fin @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : Nat @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : Ne @ Init.Core
+USES OAI.EuclideanFiveColor.WeakColoring : Prod @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : Real @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.WeakColoring : instHAdd @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : instHMul @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : instInnerProductSpaceRealComplex @ Mathlib.Analysis.InnerProductSpace.Basic
+USES OAI.EuclideanFiveColor.WeakColoring : instOfNatAtLeastTwo @ Mathlib.Data.Nat.Cast.Defs
+USES OAI.EuclideanFiveColor.WeakColoring : measureSpaceOfInnerProductSpace @ Mathlib.MeasureTheory.Measure.Haar.OfBasis
+USES OAI.EuclideanFiveColor.WeakColoring : AddCommGroup.toAddGroup @ Mathlib.Algebra.Group.Defs
+USES OAI.EuclideanFiveColor.WeakColoring : AddSubgroup.zmultiples @ Mathlib.Algebra.Group.Subgroup.ZPowers.Basic
+USES OAI.EuclideanFiveColor.WeakColoring : Complex.borelSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+USES OAI.EuclideanFiveColor.WeakColoring : Complex.instAdd @ Mathlib.Basic.Complex.Basic
+USES OAI.EuclideanFiveColor.WeakColoring : Complex.instFiniteDimensionalReal @ Mathlib.LinearAlgebra.Complex.FiniteDimensional
+USES OAI.EuclideanFiveColor.WeakColoring : Complex.instNormedAddCommGroup @ Mathlib.Analysis.Complex.Norm
+USES OAI.EuclideanFiveColor.WeakColoring : Complex.measurableSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+USES OAI.EuclideanFiveColor.WeakColoring : Filter.Eventually @ Mathlib.Order.Filter.Defs
+USES OAI.EuclideanFiveColor.WeakColoring : Fin.instMeasurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Instances
+USES OAI.EuclideanFiveColor.WeakColoring : HAdd.hAdd @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : HMul.hMul @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : MeasureTheory.Measure @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES OAI.EuclideanFiveColor.WeakColoring : MeasureTheory.ae @ Mathlib.MeasureTheory.OuterMeasure.AE
+USES OAI.EuclideanFiveColor.WeakColoring : OfNat.ofNat @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : Prod.fst @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : Prod.instMeasurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Constructions
+USES OAI.EuclideanFiveColor.WeakColoring : Prod.snd @ Init.Prelude
+USES OAI.EuclideanFiveColor.WeakColoring : QuotientAddGroup.measurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Constructions
+USES OAI.EuclideanFiveColor.WeakColoring : Real.instAddCommGroup @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.WeakColoring : Real.instMul @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.WeakColoring : Real.instNatCast @ Mathlib.Basic.Real.Basic
+USES OAI.EuclideanFiveColor.WeakColoring : Real.measurableSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
+USES OAI.EuclideanFiveColor.WeakColoring : Real.pi @ Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+USES OAI.EuclideanFiveColor.WeakColoring : MeasureTheory.Measure.instFunLike @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES OAI.EuclideanFiveColor.WeakColoring : MeasureTheory.Measure.prod @ Mathlib.MeasureTheory.Measure.Prod
+USES OAI.EuclideanFiveColor.WeakColoring : MeasureTheory.MeasureSpace.toMeasurableSpace @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES OAI.EuclideanFiveColor.WeakColoring : MeasureTheory.MeasureSpace.volume @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES OAI.EuclideanFiveColor.WeakColoring : OAI.EuclideanFiveColor.Angles @ OAI.Geometry.PlaneColoring.Coloring
+USES OAI.EuclideanFiveColor.WeakColoring : OAI.EuclideanFiveColor.angularMeasure @ OAI.Geometry.PlaneColoring.Coloring
+USES OAI.EuclideanFiveColor.WeakColoring : OAI.EuclideanFiveColor.direction @ OAI.Geometry.PlaneColoring.Coloring
+USES OAI.EuclideanFiveColor.WeakColoring : OAI.EuclideanFiveColor.Angles._proof_1 @ OAI.Geometry.PlaneColoring.Coloring
+USES OAI.EuclideanFiveColor.WeakColoring : OAI.EuclideanFiveColor.WeakColoring._proof_1 @ OAI.Geometry.PlaneColoring.Coloring
+DUMP OAI.EuclideanFiveColor.no_proper_five_coloring : theorem levels=[]
+DUMP   type  = ((c Not []) (((c Exists [(S 0)]) (pi.d a (c Complex []) ((c Fin []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 5)) ((c instOfNatNat []) (nat 5)))))) (lam.d c (pi.d a (c Complex []) ((c Fin []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 5)) ((c instOfNatNat []) (nat 5))))) (((c OAI.EuclideanFiveColor.ProperColoring []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 5)) ((c instOfNatNat []) (nat 5)))) #0))))
+USES OAI.EuclideanFiveColor.no_proper_five_coloring : Complex @ Mathlib.Basic.Complex.Basic
+USES OAI.EuclideanFiveColor.no_proper_five_coloring : Exists @ Init.Core
+USES OAI.EuclideanFiveColor.no_proper_five_coloring : Fin @ Init.Prelude
+USES OAI.EuclideanFiveColor.no_proper_five_coloring : Nat @ Init.Prelude
+USES OAI.EuclideanFiveColor.no_proper_five_coloring : Not @ Init.Prelude
+USES OAI.EuclideanFiveColor.no_proper_five_coloring : instOfNatNat @ Init.Prelude
+USES OAI.EuclideanFiveColor.no_proper_five_coloring : OfNat.ofNat @ Init.Prelude
+USES OAI.EuclideanFiveColor.no_proper_five_coloring : OAI.EuclideanFiveColor.ProperColoring @ OAI.Geometry.PlaneColoring.Coloring
+DUMP OAI.EuclideanFiveColor.proper_to_borel_weak : theorem levels=[]
+DUMP   type  = (pi.i k (c Nat []) (pi.c inst ((((c NeZero [0]) (c Nat [])) (((c MulZeroClass.toZero [0]) (c Nat [])) (c Nat.instMulZeroClass []))) #0) (pi.i c (pi.d a (c Complex []) ((c Fin []) #2)) (pi.d hc (((c OAI.EuclideanFiveColor.ProperColoring []) #2) #0) (((c Exists [(S 0)]) (pi.d a (c Complex []) ((c Fin []) #4))) (lam.d d (pi.d a (c Complex []) ((c Fin []) #4)) (((c And []) ((((((c Measurable [0,0]) (c Complex [])) ((c Fin []) #4)) (c Complex.measurableSpace [])) ((c Fin.instMeasurableSpace []) #4)) #0)) (((c OAI.EuclideanFiveColor.WeakColoring []) #4) #0))))))))
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : And @ Init.Prelude
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : Complex @ Mathlib.Basic.Complex.Basic
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : Exists @ Init.Core
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : Fin @ Init.Prelude
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : Measurable @ Mathlib.MeasureTheory.MeasurableSpace.Defs
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : Nat @ Init.Prelude
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : NeZero @ Init.Data.NeZero
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : Complex.measurableSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : Fin.instMeasurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Instances
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : MulZeroClass.toZero @ Mathlib.Algebra.GroupWithZero.Defs
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : Nat.instMulZeroClass @ Mathlib.Algebra.GroupWithZero.Nat
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : OAI.EuclideanFiveColor.ProperColoring @ OAI.Geometry.PlaneColoring.Coloring
+USES OAI.EuclideanFiveColor.proper_to_borel_weak : OAI.EuclideanFiveColor.WeakColoring @ OAI.Geometry.PlaneColoring.Coloring

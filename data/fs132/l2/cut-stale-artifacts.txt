@@ -1,0 +1,16 @@
+.lake/build/ir/Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.c
+.lake/build/ir/Proofs/HadwigerNelson/Plane/SixRing/Winding.c
+.lake/build/ir/Proofs/HadwigerNelson/Plane/SixRing/Winding.setup.json
+.lake/build/ir/Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.setup.json
+.lake/build/ir/Proofs/HadwigerNelson/Plane/SixRing/Winding.c.hash
+.lake/build/ir/Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.c.hash
+.lake/build/lib/lean/Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.olean
+.lake/build/lib/lean/Proofs/HadwigerNelson/Plane/SixRing/Winding.ilean.hash
+.lake/build/lib/lean/Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.ilean
+.lake/build/lib/lean/Proofs/HadwigerNelson/Plane/SixRing/Winding.olean
+.lake/build/lib/lean/Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.ilean.hash
+.lake/build/lib/lean/Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.olean.hash
+.lake/build/lib/lean/Proofs/HadwigerNelson/Plane/SixRing/Winding.ilean
+.lake/build/lib/lean/Proofs/HadwigerNelson/Plane/SixRing/Winding.trace
+.lake/build/lib/lean/Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.trace
+.lake/build/lib/lean/Proofs/HadwigerNelson/Plane/SixRing/Winding.olean.hash

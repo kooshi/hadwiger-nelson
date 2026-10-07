@@ -1,0 +1,244 @@
+#!/usr/bin/env python3
+"""FS132-K1: generate `Proofs/HadwigerNelson/Outside/OAI158Palette.lean` from the release's own source.
+
+The module is the release's definition chain for the palette at a centre (`[OAIMath2026]` Definition 5.1), copied by
+this script from the clone at the audited commit, with the lemmas the definitions need to be well formed and the
+lemmas of the same three files (they are stated for every number of colours). What the script changes, and nothing
+else: the namespace (`OAI.EuclideanFiveColor` -> `HadwigerNelson.Outside.OAI158`), a source-address docstring before
+every declaration that has none (this library's `linter.missingDocs`), and the patches listed in PATCHES (each one a
+Mathlib signature that differs between the two pins).
+
+Extended by FS132-I2 (2026-10-07), in two places and no other: a declaration that has the release's own docstring now
+carries its source address at the head of that docstring (before, only declarations with no docstring carried one), and
+the module header names the release's licence and lists every change, the patch included (Apache-2.0 asks a changed
+file for a prominent notice of the change).  No declaration, statement or proof text moved.
+
+Extended by FS132-L2 (the landing, 2026-10-07), in two places and no other: the header names the copy of the release's
+licence text kept beside the module (`Outside/OAIMath2026-LICENSE.txt`, written and compared by `tools/fs132_i2_port.py`),
+and the three instances the release declares on Mathlib's own types are `scoped` (SCOPED below: the keyword on three
+lines, and one added `attribute [scoped instance]` line giving the two declared in the child namespace `WeakBall` the
+parent's scope).  No name, statement or proof text moved.
+
+Usage:  tools/fs132_k1_port.py [--check]     (--check: regenerate in memory, compare with the file, exit 1 if different)
+"""
+import hashlib
+import pathlib
+import subprocess
+import sys
+
+CLONE = pathlib.Path("/home/kooshi/source/math")
+COMMIT = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
+SRC = CLONE / "lean/OAI/Geometry/PlaneColoring"
+OUT = pathlib.Path(__file__).resolve().parent.parent / "Proofs/HadwigerNelson/Outside/OAI158Palette.lean"
+
+# (file, first line, last line), 1-based inclusive, in the order emitted.
+SEGMENTS = [
+    ("WeakColoring.lean", 5, 174),
+    ("Compactness.lean", 5, 377),
+    ("Palettes.lean", 5, 56),
+]
+
+# (file, line, old substring, new substring): Mathlib differences between v4.34.1 (theirs) and v4.32.0 (ours).
+PATCHES = [
+    ("Compactness.lean", 224,
+     "← eLpNorm_one_eq_lintegral_enorm (hv.sub hgi).aestronglyMeasurable]",
+     "← eLpNorm_one_eq_lintegral_enorm]"),
+]
+
+# FS132-L2: (file, line, old substring, new substring) — the three instances the release declares on Mathlib's own types
+# (a subtype of Mathlib's weak dual, twice; `ENNReal`) are scoped to this library's copy of the release's namespace.
+SCOPED = [
+    ("Compactness.lean", 160, "instance : CompactSpace (Space E)", "scoped instance : CompactSpace (Space E)"),
+    ("Compactness.lean", 161, "instance : TopologicalSpace.MetrizableSpace (Space E)",
+     "scoped instance : TopologicalSpace.MetrizableSpace (Space E)"),
+    ("Compactness.lean", 250, "private instance : Fact ((2 : ENNReal) ≠ ⊤)",
+     "private scoped instance : Fact ((2 : ENNReal) ≠ ⊤)"),
+]
+# FS132-L2: lines added after a source line.  The two instances of lines 160–161 are declared inside
+# `namespace … .WeakBall`, so `scoped` alone scopes them to the child namespace; the modules that use them stand in the
+# parent.  After the child namespace closes (source line 186) one line gives them the parent's scope as well.
+ADDED_AFTER = {
+    ("Compactness.lean", 186): [
+        "namespace HadwigerNelson.Outside.OAI158",
+        "attribute [scoped instance] WeakBall.instCompactSpaceSpace WeakBall.instMetrizableSpaceSpace",
+        "end HadwigerNelson.Outside.OAI158",
+    ],
+}
+
+# Single definitions the statements of FS-132 name: (file, [(first, last), ...], opens). Each is emitted in a section of
+# its own; a `variable` line of the source is part of the range where the definition needs it.
+SNIPPETS = [
+    ("AngularBoundary.lean", [(146, 147)], "Set"),
+    ("AngularBoundary.lean", [(306, 308)], "Set MeasureTheory"),
+    ("PaletteTransport.lean", [(390, 390)], "MeasureTheory"),
+    ("CircleTransport.lean", [(132, 133)], "MeasureTheory"),
+    ("PaletteDensity.lean", [(430, 432)], "MeasureTheory"),
+    ("States.lean", [(91, 93)], "MeasureTheory"),
+    ("Transitions.lean", [(8, 10), (21, 24)], "MeasureTheory MeasureTheory.Measure Filter Topology Set"),
+]
+
+DECL = ("def ", "abbrev ", "lemma ", "theorem ", "instance ", "instance:", "structure ", "private instance",
+        "@[simp] lemma ", "noncomputable def ")
+
+HEADER = '''import Proofs.HadwigerNelson.Outside.OAI158
+import Mathlib.Analysis.InnerProductSpace.Dual
+import Mathlib.Analysis.Normed.Module.WeakDual
+import Mathlib.MeasureTheory.Function.L2Space
+import Mathlib.MeasureTheory.Function.SimpleFuncDenseLp
+import Mathlib.MeasureTheory.Covering.Besicovitch
+import Mathlib.MeasureTheory.Covering.BesicovitchVectorSpace
+import Mathlib.MeasureTheory.Group.Prod
+import Mathlib.Topology.Sequences
+import Mathlib.MeasureTheory.Function.LpSpace.ContinuousCompMeasurePreserving
+
+/-!
+# The palette at a centre: the release's definition chain, ported (FS-132, job FS132-K1)
+
+**GENERATED by `tools/fs132_k1_port.py` from `[OAIMath2026]` family 158 (github.com/openai/math at commit
+`{commit}`): do not edit by hand; rerun the script.** Source files, under
+`lean/OAI/Geometry/PlaneColoring/`: `WeakColoring.lean` 5–174, `Compactness.lean` 5–377, `Palettes.lean` 5–56, five
+lines of `Coloring.lean` (20–24), and nine single definitions the statements of FS-132 name (`Straddle`,
+`spatialSupport`, `sixty`, `angularSum`, `liftPalette`, `RealState`, `transitionSet`, `transitionRatio`,
+`TransitionEdge`; the script's SNIPPETS list has their lines). Every declaration's docstring names its source line.
+
+What is here: density-one points and the properness of a weak colouring at them (`DensityOne`, `weak_density_proper`,
+`ae_density_actual`); typical points and typical circle samplings (`Typical`, `TypicalSampling`); the angular samples
+as points of the weak-* compact unit ball of `L²` of the circle (`sample`, `WeakBall.Space`, `TraceVector`,
+`sampleCode`); the traces at a centre (`IsTrace`: the closure of the samples at centres tending to `x` and radii
+tending to `1`); and the maximal palette (`paletteSet`, `palette`: the essential union, over the traces at `x`, of
+the directions where the trace gives a label positive weight) — the manuscript's Definition 5.1, for every number of
+colours `k`. All of it is kernel-checked here: the proofs are the release's, at this pin.
+
+**Licence and notice of change.** The source is licensed under the Apache License, Version 2.0 (`LICENSE` at the
+root of the release; http://www.apache.org/licenses/LICENSE-2.0); a byte-identical copy of that licence text is
+beside this file, `Outside/OAIMath2026-LICENSE.txt` (`tools/fs132_i2_port.py --check` compares the two). **This file
+is a changed copy of parts of the source files named above.** The changes, all of them:
+
+1. *A selection*: the line ranges above, and no other line of the release.
+2. *The namespace*: `OAI.EuclideanFiveColor` there, `HadwigerNelson.Outside.OAI158` here.
+3. *Docstrings*: every declaration's docstring opens with its source line at the commit; where the release has a
+   docstring it follows the address, and where it has none the address is the docstring.
+4. *The two instances of `Coloring.lean` 19–20* are anonymous there and named here (`Outside/OAI158`'s
+   `angularMeasure.instIsProbabilityMeasure`, and `angularMeasure.instIsAddHaarMeasure` below).
+5. *One patch, to a proof*: `Compactness.lean` line 224,
+   `← eLpNorm_one_eq_lintegral_enorm (hv.sub hgi).aestronglyMeasurable]` → `← eLpNorm_one_eq_lintegral_enorm]` —
+   Mathlib's lemma takes no explicit argument at this library's pin (v4.32.0; the release is at v4.34.1).
+6. *Three instances scoped* (FS132-L2). The release declares three instances on types that are Mathlib's own:
+   `CompactSpace` and `MetrizableSpace` on `WeakBall.Space E` — a reducible abbreviation of a subtype of Mathlib's
+   weak dual (`Compactness.lean` 160–162) — and a private `Fact ((2 : ENNReal) ≠ ⊤)` (line 250). There they are
+   global. Here each is a `scoped instance`: instance search finds it inside `namespace HadwigerNelson.Outside.OAI158`
+   and under `open Outside.OAI158`, and in no other module of this library. The first two are declared inside the
+   child namespace `WeakBall`, so one line is added after that namespace closes (`attribute [scoped instance] …`,
+   after `Compactness.lean` 186) to give them the parent's scope, where every use of them stands. The keyword on
+   three lines and that one line are the whole change: the names, the statements and the proofs are the release's.
+
+No axiom, no `sorry`. The definitions and the statements are compared with the release's, as the kernel stores them
+at the two pins, by `tools/fs132_i2_readback.py` (`plans/FS132-I2-implementation.md`).
+-/
+
+noncomputable section
+open MeasureTheory
+namespace HadwigerNelson.Outside.OAI158
+/-- `[OAIMath2026]` `Coloring.lean:20` (there anonymous): the angular measure is a Haar measure. -/
+instance angularMeasure.instIsAddHaarMeasure : angularMeasure.IsAddHaarMeasure :=
+  inferInstanceAs (AddCircle.haarAddCircle (T := 2*Real.pi)).IsAddHaarMeasure
+/-- `[OAIMath2026]` `Coloring.lean:21`. -/
+lemma direction_continuous : Continuous direction := continuous_subtype_val.comp AddCircle.continuous_toCircle
+/-- `[OAIMath2026]` `Coloring.lean:22`. -/
+@[simp] lemma direction_norm (t : Angles) : ‖direction t‖ = 1 := Circle.norm_coe _
+/-- `[OAIMath2026]` `Coloring.lean:23–24`. -/
+@[simp] lemma direction_real (t : ℝ) : direction (t : Angles) = (Circle.exp t : ℂ) := by
+  simp [direction,AddCircle.toCircle_apply_mk,Real.pi_ne_zero]
+end HadwigerNelson.Outside.OAI158
+end
+'''
+
+
+def clone_commit() -> str:
+    return subprocess.run(["git", "-C", str(CLONE), "rev-parse", "HEAD"], check=True, capture_output=True,
+                          text=True).stdout.strip()
+
+
+def addressed(name: str, lines, first: int, last: int):
+    """The source lines first..last (1-based, inclusive), each declaration's docstring carrying its source address:
+    added where the release has no docstring, prefixed where it has one.  Yields (line number, text) pairs; a
+    line number of 0 marks an added docstring line."""
+    prev = ""
+    for no in range(first, last + 1):
+        line = lines[no - 1]
+        if line.startswith("/-- "):
+            j = no
+            while not lines[j - 1].rstrip().endswith("-/"):
+                j += 1
+            if not lines[j].startswith(DECL):
+                sys.exit(f"FAIL: {name}:{no}: a docstring not followed by a declaration")
+            line = f"/-- `[OAIMath2026]` `{name}:{j + 1}`. " + line[4:]
+        elif line.startswith(DECL) and not prev.rstrip().endswith("-/"):
+            yield 0, f"/-- `[OAIMath2026]` `{name}:{no}`. -/"
+        yield no, line
+        prev = line
+
+
+def generate() -> str:
+    head = clone_commit()
+    if head != COMMIT:
+        sys.exit(f"FAIL: the clone is at {head}, not the audited commit {COMMIT}")
+    out = [HEADER.replace("{commit}", COMMIT)]
+    used, scoped, added = set(), set(), set()
+    for name, first, last in SEGMENTS:
+        lines = (SRC / name).read_text().split("\n")
+        out.append(f"\n/-! ## `{name}` {first}–{last} -/\n")
+        for no, line in addressed(name, lines, first, last):
+            for i, (pf, pl, old, new) in enumerate(PATCHES):
+                if pf == name and pl == no:
+                    if old not in line:
+                        sys.exit(f"FAIL: patch {i} does not apply at {name}:{no}")
+                    line = line.replace(old, new)
+                    used.add(i)
+            for i, (sf, sl, old, new) in enumerate(SCOPED):
+                if sf == name and sl == no:
+                    if not line.startswith(old):
+                        sys.exit(f"FAIL: scoping {i} does not apply at {name}:{no}")
+                    line = new + line[len(old):]
+                    scoped.add(i)
+            line = line.replace("namespace EuclideanFiveColor", "namespace HadwigerNelson.Outside.OAI158")
+            line = line.replace("end EuclideanFiveColor", "end HadwigerNelson.Outside.OAI158")
+            out.append(line)
+            if (name, no) in ADDED_AFTER:
+                if lines[no - 1] != "end EuclideanFiveColor.WeakBall":
+                    sys.exit(f"FAIL: {name}:{no} is not the line the added block follows")
+                out.extend(ADDED_AFTER[(name, no)])
+                added.add((name, no))
+    for name, ranges, opens in SNIPPETS:
+        lines = (SRC / name).read_text().split("\n")
+        where = ", ".join(f"{a}–{b}" for a, b in ranges)
+        out.append(f"\n/-! ## `{name}` {where} -/\n")
+        out.append("noncomputable section")
+        out.append(f"open {opens}")
+        out.append("namespace HadwigerNelson.Outside.OAI158")
+        for first, last in ranges:
+            for _, line in addressed(name, lines, first, last):
+                out.append(line)
+        out.append("end HadwigerNelson.Outside.OAI158")
+        out.append("end")
+    if len(used) != len(PATCHES):
+        sys.exit("FAIL: a patch was not used")
+    if len(scoped) != len(SCOPED) or added != set(ADDED_AFTER):
+        sys.exit("FAIL: a scoping or an added block was not used")
+    return "\n".join(out) + "\n"
+
+
+def main() -> None:
+    text = generate()
+    if "--check" in sys.argv:
+        cur = OUT.read_text() if OUT.exists() else ""
+        if cur != text:
+            sys.exit(f"FAIL: {OUT} differs from the generated text")
+        print(f"OK: {OUT.name} is the generated text, sha256 {hashlib.sha256(text.encode()).hexdigest()[:16]}")
+        return
+    OUT.write_text(text)
+    print(f"wrote {OUT} ({text.count(chr(10))} lines, sha256 {hashlib.sha256(text.encode()).hexdigest()[:16]})")
+
+
+if __name__ == "__main__":
+    main()

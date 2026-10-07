@@ -1,0 +1,14 @@
+plant: a record dropped (HadwigerNelson.Outside.OAI158.CircleJet): FIRED — MISSING HadwigerNelson.Outside.OAI158.CircleJet (0 records; DEF, module Proofs.HadwigerNelson.Outside.OAI158CircleMaps)
+plant: a record doubled (HadwigerNelson.Outside.OAI158.CircleParameter): FIRED — DOUBLED HadwigerNelson.Outside.OAI158.CircleParameter (2 records; DEF, module Proofs.HadwigerNelson.Outside.OAI158CircleMaps)
+plant: sorryAx under a landing record (HadwigerNelson.Outside.OAI158.DensityOne): FIRED — SORRY HadwigerNelson.Outside.OAI158.DensityOne: carries sorryAx, under CLEAN
+plant: a landing record resting on the transfer (HadwigerNelson.Outside.OAI158.DensityOne.compl): FIRED — IMPORT-LEAK HadwigerNelson.Outside.OAI158.DensityOne.compl: carries proper_to_borel_weak and is not filed on it, under CLEAN
+plant: a landing record resting on the five-colour theorem (HadwigerNelson.Outside.OAI158.DensityOne.iInter): FIRED — FOREIGN HadwigerNelson.Outside.OAI158.DensityOne.iInter: ['HadwigerNelson.Outside.OAI158.no_proper_five_coloring']
+plant: a landing record FILED under IMPORTED, on the three and the transfer (HadwigerNelson.Outside.OAI158.DensityOne.inter): FIRED — NOT-CLEAN-SECTION HadwigerNelson.Outside.OAI158.DensityOne.inter: printed under IMPORTED
+plant: a landing record printed under PURCHASED (HadwigerNelson.Outside.OAI158.DensityOne.measure_ne_zero): FIRED — NOT-CLEAN-SECTION HadwigerNelson.Outside.OAI158.DensityOne.measure_ne_zero: printed under PURCHASED
+plant: a native auxiliary under a landing record (HadwigerNelson.Outside.OAI158.DensityZero): FIRED — FOREIGN HadwigerNelson.Outside.OAI158.DensityZero: ['HadwigerNelson.Outside.OAI158.DensityZero._native.native_decide.ax_1_1']
+plant: the headline on two of the three (HadwigerNelson.SixRing.no_outside_orbit_points): FIRED — HEADLINE HadwigerNelson.SixRing.no_outside_orbit_points: under CLEAN, axioms ['Classical.choice', 'propext'] — not exactly the three under CLEAN
+plant: a theorem of the landing with no record (HadwigerNelson.SixRing.zz_l2_planted_theorem_with_no_record): FIRED — MISSING HadwigerNelson.SixRing.zz_l2_planted_theorem_with_no_record (0 records; THM, module Proofs.HadwigerNelson.Plane.SixRing.Orbit)
+plant: a record of main's on Weil's bound stripped of it (HadwigerNelson.StandingFive.circle_sum_le_weil): FIRED — IMPORT-RECORD HadwigerNelson.StandingFive.circle_sum_le_weil: filed on kloosterman_bound; under IMPORTED, axioms ['Classical.choice', 'Quot.sound', 'propext']
+plant: a module of the landing absent from the dump (Plane.SixRing.Kill): FIRED — MODULES: the dump lists 21 module(s); extra [], missing ['Proofs.HadwigerNelson.Plane.SixRing.Kill']
+plants: every one of 12 fired; the unplanted lists pass
+exit=0

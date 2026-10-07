@@ -1,0 +1,21 @@
+FS132-L2: the port's read-back, tag gate-final
+commit: b46a9d57ab422644b577d1b6bc3e79bd1e1636f8
+tracked files modified: 0
+release clone: adc7f1241b42e322a6451854ab7e4b4c146bf78a  clean: 0 modified
+STEP release-dump (v4.34.1): exit 0 (expected 0) ok
+release print digest: c3343d13c7b797ffc6d72e94e07e792492648494178bc6214155cfb1b659a039; the port's committed print: c3343d13c7b797ffc6d72e94e07e792492648494178bc6214155cfb1b659a039
+STEP release-dump is the port's committed print, byte for byte: exit 0 (expected 0) ok
+STEP here-dump (this pin, the built modules): exit 0 (expected 0) ok
+here print digest: 7874161ef72ea28be64f0ff9e71ee86ac799df28f033ec84dbda9e16c1cb307f; the port's own print (on its branch, before the join and the scoping): 7874161ef72ea28be64f0ff9e71ee86ac799df28f033ec84dbda9e16c1cb307f — IDENTICAL
+STEP compare: READBACK OK: exit 0 (expected 0) ok
+NOTE compare's output vs the port's own: cmp exit 0 (0 = identical)
+the port's tables after this run, as git sees them: 0 changed
+STEP self-test: every plant refused: exit 0 (expected 0) ok
+STEP here level-one dump: exit 0 (expected 0) ok
+STEP level one: exit 0 (expected 0) ok
+NOTE level-one table vs the port's own: cmp exit 0 (0 = identical)
+files written under ~/.cache/ext-oai1 during this run: 0; under ~/source/math: 0
+READBACK OK
+SELF-TEST OK: 13 plants refused, the unplanted pair passes
+LEVEL1 OK
+PORT READ-BACK RUN gate-final: OK

@@ -1,0 +1,10 @@
+IDENTICAL  ProperColoring: def there, def here; 600 characters of term; 14 constants named
+IDENTICAL  anglePeriodPositive: theorem there, theorem here; 652 characters of term; 17 constants named
+IDENTICAL  Angles: def there, def here; 365 characters of term; 11 constants named
+IDENTICAL  angularMeasure: def there, def here; 982 characters of term; 18 constants named
+IDENTICAL  direction: def there, def here; 2254 characters of term; 28 constants named
+IDENTICAL  WeakColoring: def there, def here; 4953 characters of term; 45 constants named
+IDENTICAL  no_proper_five_coloring: theorem there, axiom here; 375 characters of term; 8 constants named
+IDENTICAL  proper_to_borel_weak: theorem there, axiom here; 522 characters of term; 13 constants named
+declarations: 8  compared: 8  identical: 8  different: 0 []
+READ-BACK IDENTICAL: all 8 declarations, term for term, modulo the namespace

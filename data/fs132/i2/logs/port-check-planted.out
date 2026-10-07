@@ -1,0 +1,11 @@
+OK: OAI158Palette.lean is the generated text, sha256 5f47183c8cb4404a
+OK: OAI158CircleMaps.lean is the generated text, 626 lines, sha256 bf3e54736d95008e
+OK: OAI158Expansion.lean is the generated text, 217 lines, sha256 f79093a9b53219b4
+OK: OAI158CircleTransport.lean is the generated text, 258 lines, sha256 6773896323feb553
+OK: OAI158PaletteDensity.lean is the generated text, 540 lines, sha256 8f9bd9f42c8b6586
+OK: OAI158PaletteTransport.lean is the generated text, 433 lines, sha256 e7f7daa093b5c281
+OK: OAI158BinaryPalettes.lean is the generated text, 157 lines, sha256 cc5b740421be9b96
+FAIL: OAI158States.lean differs from the generated text
+OK: OAI158AngularBoundary.lean is the generated text, 52 lines, sha256 67a6fe74693499d3
+OK: scripts/Axioms.lean holds the block, 163 records
+CHECK FAILED

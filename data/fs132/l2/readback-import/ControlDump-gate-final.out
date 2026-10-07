@@ -1,0 +1,185 @@
+DUMP HadwigerNelson.Outside.OAI158.ProperColoring : def levels=[]
+DUMP   type  = (pi.d k (c Nat []) (pi.d c (pi.d a (c Complex []) ((c Fin []) #1)) (Sort 0)))
+DUMP   value = (lam.d k (c Nat []) (lam.d c (pi.d a (c Complex []) ((c Fin []) #1)) (pi.d x (c Complex []) (pi.d y (c Complex []) (pi.d a ((((c Eq [(S 0)]) (c Real [])) (((((c Dist.dist [0]) (c Complex [])) (((c PseudoMetricSpace.toDist [0]) (c Complex [])) (((c SeminormedRing.toPseudoMetricSpace [0]) (c Complex [])) (((c SeminormedCommRing.toSeminormedRing [0]) (c Complex [])) (((c NormedCommRing.toSeminormedCommRing [0]) (c Complex [])) (((c CommCStarAlgebra.toNormedCommRing [0]) (c Complex [])) (c instCommCStarAlgebraComplex []))))))) #1) #0)) ((((c OfNat.ofNat [0]) (c Real [])) (nat 1)) (((c One.toOfNat1 [0]) (c Real [])) (c Real.instOne [])))) ((((c Ne [(S 0)]) ((c Fin []) #4)) (#3 #2)) (#3 #1)))))))
+USES HadwigerNelson.Outside.OAI158.ProperColoring : Complex @ Mathlib.Data.Complex.Basic
+USES HadwigerNelson.Outside.OAI158.ProperColoring : Eq @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.ProperColoring : Fin @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.ProperColoring : Nat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.ProperColoring : Ne @ Init.Core
+USES HadwigerNelson.Outside.OAI158.ProperColoring : Real @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.ProperColoring : instCommCStarAlgebraComplex @ Mathlib.Analysis.CStarAlgebra.Classes
+USES HadwigerNelson.Outside.OAI158.ProperColoring : CommCStarAlgebra.toNormedCommRing @ Mathlib.Analysis.CStarAlgebra.Classes
+USES HadwigerNelson.Outside.OAI158.ProperColoring : Dist.dist @ Mathlib.Topology.MetricSpace.Pseudo.Defs
+USES HadwigerNelson.Outside.OAI158.ProperColoring : NormedCommRing.toSeminormedCommRing @ Mathlib.Analysis.Normed.Ring.Basic
+USES HadwigerNelson.Outside.OAI158.ProperColoring : OfNat.ofNat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.ProperColoring : One.toOfNat1 @ Init.Data.Zero
+USES HadwigerNelson.Outside.OAI158.ProperColoring : PseudoMetricSpace.toDist @ Mathlib.Topology.MetricSpace.Pseudo.Defs
+USES HadwigerNelson.Outside.OAI158.ProperColoring : Real.instOne @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.ProperColoring : SeminormedCommRing.toSeminormedRing @ Mathlib.Analysis.Normed.Ring.Basic
+USES HadwigerNelson.Outside.OAI158.ProperColoring : SeminormedRing.toPseudoMetricSpace @ Mathlib.Analysis.Normed.Ring.Basic
+DUMP HadwigerNelson.Outside.OAI158.anglePeriodPositive : theorem levels=[]
+DUMP   type  = ((c Fact []) (((((c LT.lt [0]) (c Real [])) (c Real.instLT [])) ((((c OfNat.ofNat [0]) (c Real [])) (nat 0)) (((c Zero.toOfNat0 [0]) (c Real [])) (c Real.instZero [])))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (((c Nat.instAtLeastTwoHAddOfNat []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 1)) ((c instOfNatNat []) (nat 1)))) ((c Nat.instNeZeroSucc []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 0)) ((c instOfNatNat []) (nat 0)))))))) (c Real.pi []))))
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Fact @ Mathlib.Logic.Basic
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Nat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Real @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : instHMul @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : instOfNatAtLeastTwo @ Mathlib.Data.Nat.Cast.Defs
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : instOfNatNat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : HMul.hMul @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : LT.lt @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Nat.instAtLeastTwoHAddOfNat @ Mathlib.Data.Nat.Init
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Nat.instNeZeroSucc @ Init.Data.Nat.Basic
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : OfNat.ofNat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Real.instLT @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Real.instMul @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Real.instNatCast @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Real.instZero @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Real.pi @ Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+USES HadwigerNelson.Outside.OAI158.anglePeriodPositive : Zero.toOfNat0 @ Init.Data.Zero
+DUMP HadwigerNelson.Outside.OAI158.Angles : def levels=[]
+DUMP   type  = (Sort (S 0))
+DUMP   value = ((((c AddCircle [0]) (c Real [])) (c Real.instAddCommGroup [])) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c HadwigerNelson.Outside.OAI158.Angles._proof_1 [])))) (c Real.pi [])))
+USES HadwigerNelson.Outside.OAI158.Angles : AddCircle @ Mathlib.Topology.Instances.AddCircle.Defs
+USES HadwigerNelson.Outside.OAI158.Angles : Real @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.Angles : instHMul @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.Angles : instOfNatAtLeastTwo @ Mathlib.Data.Nat.Cast.Defs
+USES HadwigerNelson.Outside.OAI158.Angles : HMul.hMul @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.Angles : OfNat.ofNat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.Angles : Real.instAddCommGroup @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.Angles : Real.instMul @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.Angles : Real.instNatCast @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.Angles : Real.pi @ Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+USES HadwigerNelson.Outside.OAI158.Angles : HadwigerNelson.Outside.OAI158.Angles._proof_1 @ (this file)
+DUMP HadwigerNelson.Outside.OAI158.angularMeasure : def levels=[]
+DUMP   type  = (((c MeasureTheory.Measure [0]) (c HadwigerNelson.Outside.OAI158.Angles [])) (((((c QuotientAddGroup.measurableSpace [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (c Real.measurableSpace [])) ((((c AddSubgroup.zmultiples [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c HadwigerNelson.Outside.OAI158.Angles._proof_1 [])))) (c Real.pi [])))))
+DUMP   value = (((c MeasureTheory.MeasureSpace.volume [0]) (c HadwigerNelson.Outside.OAI158.Angles [])) (((c AddCircle.measureSpace []) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c HadwigerNelson.Outside.OAI158.Angles._proof_1 [])))) (c Real.pi []))) (c HadwigerNelson.Outside.OAI158.anglePeriodPositive [])))
+USES HadwigerNelson.Outside.OAI158.angularMeasure : Real @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.angularMeasure : instHMul @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.angularMeasure : instOfNatAtLeastTwo @ Mathlib.Data.Nat.Cast.Defs
+USES HadwigerNelson.Outside.OAI158.angularMeasure : AddCircle.measureSpace @ Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+USES HadwigerNelson.Outside.OAI158.angularMeasure : AddCommGroup.toAddGroup @ Mathlib.Algebra.Group.Defs
+USES HadwigerNelson.Outside.OAI158.angularMeasure : AddSubgroup.zmultiples @ Mathlib.Algebra.Group.Subgroup.ZPowers.Basic
+USES HadwigerNelson.Outside.OAI158.angularMeasure : HMul.hMul @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.angularMeasure : MeasureTheory.Measure @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES HadwigerNelson.Outside.OAI158.angularMeasure : OfNat.ofNat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.angularMeasure : QuotientAddGroup.measurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Constructions
+USES HadwigerNelson.Outside.OAI158.angularMeasure : Real.instAddCommGroup @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.angularMeasure : Real.instMul @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.angularMeasure : Real.instNatCast @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.angularMeasure : Real.measurableSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
+USES HadwigerNelson.Outside.OAI158.angularMeasure : Real.pi @ Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+USES HadwigerNelson.Outside.OAI158.angularMeasure : MeasureTheory.MeasureSpace.volume @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES HadwigerNelson.Outside.OAI158.angularMeasure : HadwigerNelson.Outside.OAI158.Angles @ (this file)
+USES HadwigerNelson.Outside.OAI158.angularMeasure : HadwigerNelson.Outside.OAI158.anglePeriodPositive @ (this file)
+USES HadwigerNelson.Outside.OAI158.angularMeasure : HadwigerNelson.Outside.OAI158.Angles._proof_1 @ (this file)
+DUMP HadwigerNelson.Outside.OAI158.direction : def levels=[]
+DUMP   type  = (pi.d t (c HadwigerNelson.Outside.OAI158.Angles []) (c Complex []))
+DUMP   value = (lam.d t (c HadwigerNelson.Outside.OAI158.Angles []) ((((c Subtype.val [(S 0)]) (c Complex [])) (lam.d x (c Complex []) ((((((c Membership.mem [0,0]) (c Complex [])) (((c Submonoid [0]) (c Complex [])) (((c MulZeroOneClass.toMulOneClass [0]) (c Complex [])) (((c instMulZeroOneClassOfSemiring [0]) (c Complex [])) (((c Ring.toSemiring [0]) (c Complex [])) (((c SeminormedRing.toRing [0]) (c Complex [])) (((c SeminormedCommRing.toSeminormedRing [0]) (c Complex [])) (((c NormedCommRing.toSeminormedCommRing [0]) (c Complex [])) (((c NormedField.toNormedCommRing [0]) (c Complex [])) (c Complex.instNormedField [])))))))))) ((((c SetLike.instMembership [0,0]) (((c Submonoid [0]) (c Complex [])) (((c MulZeroOneClass.toMulOneClass [0]) (c Complex [])) (((c instMulZeroOneClassOfSemiring [0]) (c Complex [])) (((c Ring.toSemiring [0]) (c Complex [])) (((c SeminormedRing.toRing [0]) (c Complex [])) (((c SeminormedCommRing.toSeminormedRing [0]) (c Complex [])) (((c NormedCommRing.toSeminormedCommRing [0]) (c Complex [])) (((c NormedField.toNormedCommRing [0]) (c Complex [])) (c Complex.instNormedField [])))))))))) (c Complex [])) (((c Submonoid.instSetLike [0]) (c Complex [])) (((c MulZeroOneClass.toMulOneClass [0]) (c Complex [])) (((c instMulZeroOneClassOfSemiring [0]) (c Complex [])) (((c Ring.toSemiring [0]) (c Complex [])) (((c SeminormedRing.toRing [0]) (c Complex [])) (((c SeminormedCommRing.toSeminormedRing [0]) (c Complex [])) (((c NormedCommRing.toSeminormedCommRing [0]) (c Complex [])) (((c NormedField.toNormedCommRing [0]) (c Complex [])) (c Complex.instNormedField []))))))))))) (((((c Submonoid.unitSphere [0]) (c Complex [])) (((c SeminormedCommRing.toSeminormedRing [0]) (c Complex [])) (((c NormedCommRing.toSeminormedCommRing [0]) (c Complex [])) (((c NormedField.toNormedCommRing [0]) (c Complex [])) (c Complex.instNormedField []))))) (c Circle._proof_1 [])) (c Circle._proof_2 []))) #0))) (((c AddCircle.toCircle []) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c HadwigerNelson.Outside.OAI158.Angles._proof_1 [])))) (c Real.pi []))) ((((c Neg.neg [0]) (c HadwigerNelson.Outside.OAI158.Angles [])) (((c NegZeroClass.toNeg [0]) (c HadwigerNelson.Outside.OAI158.Angles [])) (((c SubNegZeroMonoid.toNegZeroClass [0]) (c HadwigerNelson.Outside.OAI158.Angles [])) (((c SubtractionMonoid.toSubNegZeroMonoid [0]) (c HadwigerNelson.Outside.OAI158.Angles [])) (((c SubtractionCommMonoid.toSubtractionMonoid [0]) (c HadwigerNelson.Outside.OAI158.Angles [])) (((c AddCommGroup.toDivisionAddCommMonoid [0]) (c HadwigerNelson.Outside.OAI158.Angles [])) ((((c QuotientAddGroup.Quotient.addCommGroup [0]) (c Real [])) (c Real.instAddCommGroup [])) ((((c AddSubgroup.zmultiples [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c HadwigerNelson.Outside.OAI158.Angles._proof_1 [])))) (c Real.pi [])))))))))) #0))))
+USES HadwigerNelson.Outside.OAI158.direction : Complex @ Mathlib.Data.Complex.Basic
+USES HadwigerNelson.Outside.OAI158.direction : Real @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.direction : Submonoid @ Mathlib.Algebra.Group.Submonoid.Defs
+USES HadwigerNelson.Outside.OAI158.direction : instHMul @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.direction : instMulZeroOneClassOfSemiring @ Mathlib.Algebra.Ring.Defs
+USES HadwigerNelson.Outside.OAI158.direction : instOfNatAtLeastTwo @ Mathlib.Data.Nat.Cast.Defs
+USES HadwigerNelson.Outside.OAI158.direction : AddCircle.toCircle @ Mathlib.Analysis.SpecialFunctions.Complex.Circle
+USES HadwigerNelson.Outside.OAI158.direction : AddCommGroup.toAddGroup @ Mathlib.Algebra.Group.Defs
+USES HadwigerNelson.Outside.OAI158.direction : AddCommGroup.toDivisionAddCommMonoid @ Mathlib.Algebra.Group.Defs
+USES HadwigerNelson.Outside.OAI158.direction : AddSubgroup.zmultiples @ Mathlib.Algebra.Group.Subgroup.ZPowers.Basic
+USES HadwigerNelson.Outside.OAI158.direction : Circle._proof_1 @ Mathlib.Analysis.Complex.Circle
+USES HadwigerNelson.Outside.OAI158.direction : Circle._proof_2 @ Mathlib.Analysis.Complex.Circle
+USES HadwigerNelson.Outside.OAI158.direction : Complex.instNormedField @ Mathlib.Analysis.Complex.Basic
+USES HadwigerNelson.Outside.OAI158.direction : HMul.hMul @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.direction : Membership.mem @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.direction : MulZeroOneClass.toMulOneClass @ Mathlib.Algebra.GroupWithZero.Defs
+USES HadwigerNelson.Outside.OAI158.direction : Neg.neg @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.direction : NegZeroClass.toNeg @ Mathlib.Algebra.Group.Defs
+USES HadwigerNelson.Outside.OAI158.direction : NormedCommRing.toSeminormedCommRing @ Mathlib.Analysis.Normed.Ring.Basic
+USES HadwigerNelson.Outside.OAI158.direction : NormedField.toNormedCommRing @ Mathlib.Analysis.Normed.Field.Basic
+USES HadwigerNelson.Outside.OAI158.direction : OfNat.ofNat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.direction : Real.instAddCommGroup @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.direction : Real.instMul @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.direction : Real.instNatCast @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.direction : Real.pi @ Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+USES HadwigerNelson.Outside.OAI158.direction : Ring.toSemiring @ Mathlib.Algebra.Ring.Defs
+USES HadwigerNelson.Outside.OAI158.direction : SeminormedCommRing.toSeminormedRing @ Mathlib.Analysis.Normed.Ring.Basic
+USES HadwigerNelson.Outside.OAI158.direction : SeminormedRing.toRing @ Mathlib.Analysis.Normed.Ring.Basic
+USES HadwigerNelson.Outside.OAI158.direction : SetLike.instMembership @ Mathlib.Data.SetLike.Basic
+USES HadwigerNelson.Outside.OAI158.direction : SubNegZeroMonoid.toNegZeroClass @ Mathlib.Algebra.Group.Defs
+USES HadwigerNelson.Outside.OAI158.direction : Submonoid.instSetLike @ Mathlib.Algebra.Group.Submonoid.Defs
+USES HadwigerNelson.Outside.OAI158.direction : Submonoid.unitSphere @ Mathlib.Analysis.Normed.Field.UnitBall
+USES HadwigerNelson.Outside.OAI158.direction : SubtractionCommMonoid.toSubtractionMonoid @ Mathlib.Algebra.Group.Defs
+USES HadwigerNelson.Outside.OAI158.direction : SubtractionMonoid.toSubNegZeroMonoid @ Mathlib.Algebra.Group.Basic
+USES HadwigerNelson.Outside.OAI158.direction : Subtype.val @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.direction : QuotientAddGroup.Quotient.addCommGroup @ Mathlib.GroupTheory.QuotientGroup.Defs
+USES HadwigerNelson.Outside.OAI158.direction : HadwigerNelson.Outside.OAI158.Angles @ (this file)
+USES HadwigerNelson.Outside.OAI158.direction : HadwigerNelson.Outside.OAI158.Angles._proof_1 @ (this file)
+DUMP HadwigerNelson.Outside.OAI158.WeakColoring : def levels=[]
+DUMP   type  = (pi.d k (c Nat []) (pi.d c (pi.d a (c Complex []) ((c Fin []) #1)) (Sort 0)))
+DUMP   value = (lam.d k (c Nat []) (lam.d c (pi.d a (c Complex []) ((c Fin []) #1)) (((c And []) ((((((c Measurable [0,0]) (c Complex [])) ((c Fin []) #1)) (c Complex.measurableSpace [])) ((c Fin.instMeasurableSpace []) #1)) #0)) ((((c Filter.Eventually [0]) (((c Prod [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles []))) (lam.d p (((c Prod [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles [])) ((((c Ne [(S 0)]) ((c Fin []) #2)) (#1 ((((c Prod.fst [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles [])) #0))) (#1 (((((((c HAdd.hAdd [0,0,0]) (c Complex [])) (c Complex [])) (c Complex [])) (((c instHAdd [0]) (c Complex [])) (c Complex.instAdd []))) ((((c Prod.fst [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles [])) #0)) ((c HadwigerNelson.Outside.OAI158.direction []) ((((c Prod.snd [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles [])) #0))))))) ((((((c MeasureTheory.ae [0,0]) (((c Prod [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles []))) (((c MeasureTheory.Measure [0]) (((c Prod [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles []))) (((((c Prod.instMeasurableSpace [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles [])) (((c MeasureTheory.MeasureSpace.toMeasurableSpace [0]) (c Complex [])) (((((((c measureSpaceOfInnerProductSpace [0]) (c Complex [])) (c Complex.instNormedAddCommGroup [])) (c instInnerProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelSpace [])))) (((((c QuotientAddGroup.measurableSpace [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (c Real.measurableSpace [])) ((((c AddSubgroup.zmultiples [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c HadwigerNelson.Outside.OAI158.Angles._proof_1 [])))) (c Real.pi []))))))) (((c MeasureTheory.Measure.instFunLike [0]) (((c Prod [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles []))) (((((c Prod.instMeasurableSpace [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles [])) (((c MeasureTheory.MeasureSpace.toMeasurableSpace [0]) (c Complex [])) (((((((c measureSpaceOfInnerProductSpace [0]) (c Complex [])) (c Complex.instNormedAddCommGroup [])) (c instInnerProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelSpace [])))) (((((c QuotientAddGroup.measurableSpace [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (c Real.measurableSpace [])) ((((c AddSubgroup.zmultiples [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c HadwigerNelson.Outside.OAI158.Angles._proof_1 [])))) (c Real.pi []))))))) (c HadwigerNelson.Outside.OAI158.WeakColoring._proof_1 [])) (((((((c MeasureTheory.Measure.prod [0,0]) (c Complex [])) (c HadwigerNelson.Outside.OAI158.Angles [])) (((c MeasureTheory.MeasureSpace.toMeasurableSpace [0]) (c Complex [])) (((((((c measureSpaceOfInnerProductSpace [0]) (c Complex [])) (c Complex.instNormedAddCommGroup [])) (c instInnerProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelSpace [])))) (((((c QuotientAddGroup.measurableSpace [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (c Real.measurableSpace [])) ((((c AddSubgroup.zmultiples [0]) (c Real [])) (((c AddCommGroup.toAddGroup [0]) (c Real [])) (c Real.instAddCommGroup []))) (((((((c HMul.hMul [0,0,0]) (c Real [])) (c Real [])) (c Real [])) (((c instHMul [0]) (c Real [])) (c Real.instMul []))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 2)) (((((c instOfNatAtLeastTwo [0]) (c Real [])) (nat 2)) (c Real.instNatCast [])) (c HadwigerNelson.Outside.OAI158.Angles._proof_1 [])))) (c Real.pi []))))) (((c MeasureTheory.MeasureSpace.volume [0]) (c Complex [])) (((((((c measureSpaceOfInnerProductSpace [0]) (c Complex [])) (c Complex.instNormedAddCommGroup [])) (c instInnerProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelSpace [])))) (c HadwigerNelson.Outside.OAI158.angularMeasure [])))))))
+USES HadwigerNelson.Outside.OAI158.WeakColoring : And @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Complex @ Mathlib.Data.Complex.Basic
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Fin @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Measurable @ Mathlib.MeasureTheory.MeasurableSpace.Defs
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Nat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Ne @ Init.Core
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Prod @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Real @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.WeakColoring : instHAdd @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : instHMul @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : instInnerProductSpaceRealComplex @ Mathlib.Analysis.InnerProductSpace.Basic
+USES HadwigerNelson.Outside.OAI158.WeakColoring : instOfNatAtLeastTwo @ Mathlib.Data.Nat.Cast.Defs
+USES HadwigerNelson.Outside.OAI158.WeakColoring : measureSpaceOfInnerProductSpace @ Mathlib.MeasureTheory.Measure.Haar.OfBasis
+USES HadwigerNelson.Outside.OAI158.WeakColoring : AddCommGroup.toAddGroup @ Mathlib.Algebra.Group.Defs
+USES HadwigerNelson.Outside.OAI158.WeakColoring : AddSubgroup.zmultiples @ Mathlib.Algebra.Group.Subgroup.ZPowers.Basic
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Complex.borelSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Complex.instAdd @ Mathlib.Data.Complex.Basic
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Complex.instFiniteDimensionalReal @ Mathlib.LinearAlgebra.Complex.FiniteDimensional
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Complex.instNormedAddCommGroup @ Mathlib.Analysis.Complex.Norm
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Complex.measurableSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Filter.Eventually @ Mathlib.Order.Filter.Defs
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Fin.instMeasurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Instances
+USES HadwigerNelson.Outside.OAI158.WeakColoring : HAdd.hAdd @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : HMul.hMul @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : MeasureTheory.Measure @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES HadwigerNelson.Outside.OAI158.WeakColoring : MeasureTheory.ae @ Mathlib.MeasureTheory.OuterMeasure.AE
+USES HadwigerNelson.Outside.OAI158.WeakColoring : OfNat.ofNat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Prod.fst @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Prod.instMeasurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Constructions
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Prod.snd @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.WeakColoring : QuotientAddGroup.measurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Constructions
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Real.instAddCommGroup @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Real.instMul @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Real.instNatCast @ Mathlib.Data.Real.Basic
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Real.measurableSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
+USES HadwigerNelson.Outside.OAI158.WeakColoring : Real.pi @ Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+USES HadwigerNelson.Outside.OAI158.WeakColoring : MeasureTheory.Measure.instFunLike @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES HadwigerNelson.Outside.OAI158.WeakColoring : MeasureTheory.Measure.prod @ Mathlib.MeasureTheory.Measure.Prod
+USES HadwigerNelson.Outside.OAI158.WeakColoring : MeasureTheory.MeasureSpace.toMeasurableSpace @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES HadwigerNelson.Outside.OAI158.WeakColoring : MeasureTheory.MeasureSpace.volume @ Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+USES HadwigerNelson.Outside.OAI158.WeakColoring : HadwigerNelson.Outside.OAI158.Angles @ (this file)
+USES HadwigerNelson.Outside.OAI158.WeakColoring : HadwigerNelson.Outside.OAI158.angularMeasure @ (this file)
+USES HadwigerNelson.Outside.OAI158.WeakColoring : HadwigerNelson.Outside.OAI158.direction @ (this file)
+USES HadwigerNelson.Outside.OAI158.WeakColoring : HadwigerNelson.Outside.OAI158.Angles._proof_1 @ (this file)
+USES HadwigerNelson.Outside.OAI158.WeakColoring : HadwigerNelson.Outside.OAI158.WeakColoring._proof_1 @ (this file)
+DUMP HadwigerNelson.Outside.OAI158.no_proper_five_coloring : axiom levels=[]
+DUMP   type  = ((c Not []) (((c Exists [(S 0)]) (pi.d a (c Complex []) ((c Fin []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 4)) ((c instOfNatNat []) (nat 4)))))) (lam.d c (pi.d a (c Complex []) ((c Fin []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 4)) ((c instOfNatNat []) (nat 4))))) (((c HadwigerNelson.Outside.OAI158.ProperColoring []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 4)) ((c instOfNatNat []) (nat 4)))) #0))))
+USES HadwigerNelson.Outside.OAI158.no_proper_five_coloring : Complex @ Mathlib.Data.Complex.Basic
+USES HadwigerNelson.Outside.OAI158.no_proper_five_coloring : Exists @ Init.Core
+USES HadwigerNelson.Outside.OAI158.no_proper_five_coloring : Fin @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.no_proper_five_coloring : Nat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.no_proper_five_coloring : Not @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.no_proper_five_coloring : instOfNatNat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.no_proper_five_coloring : OfNat.ofNat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.no_proper_five_coloring : HadwigerNelson.Outside.OAI158.ProperColoring @ (this file)
+DUMP HadwigerNelson.Outside.OAI158.proper_to_borel_weak : axiom levels=[]
+DUMP   type  = (pi.i k (c Nat []) (pi.i c (pi.d a (c Complex []) ((c Fin []) #1)) (pi.d hc (((c HadwigerNelson.Outside.OAI158.ProperColoring []) #1) #0) (((c Exists [(S 0)]) (pi.d a (c Complex []) ((c Fin []) #3))) (lam.d d (pi.d a (c Complex []) ((c Fin []) #3)) (((c And []) ((((((c Measurable [0,0]) (c Complex [])) ((c Fin []) #3)) (c Complex.measurableSpace [])) ((c Fin.instMeasurableSpace []) #3)) #0)) (((c HadwigerNelson.Outside.OAI158.WeakColoring []) #3) #0)))))))
+USES HadwigerNelson.Outside.OAI158.proper_to_borel_weak : And @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.proper_to_borel_weak : Complex @ Mathlib.Data.Complex.Basic
+USES HadwigerNelson.Outside.OAI158.proper_to_borel_weak : Exists @ Init.Core
+USES HadwigerNelson.Outside.OAI158.proper_to_borel_weak : Fin @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.proper_to_borel_weak : Measurable @ Mathlib.MeasureTheory.MeasurableSpace.Defs
+USES HadwigerNelson.Outside.OAI158.proper_to_borel_weak : Nat @ Init.Prelude
+USES HadwigerNelson.Outside.OAI158.proper_to_borel_weak : Complex.measurableSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+USES HadwigerNelson.Outside.OAI158.proper_to_borel_weak : Fin.instMeasurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Instances
+USES HadwigerNelson.Outside.OAI158.proper_to_borel_weak : HadwigerNelson.Outside.OAI158.ProperColoring @ (this file)
+USES HadwigerNelson.Outside.OAI158.proper_to_borel_weak : HadwigerNelson.Outside.OAI158.WeakColoring @ (this file)

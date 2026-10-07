@@ -2,8 +2,8 @@
  "meta": {
   "title": "Proof Atlas",
   "built": "2026-10-07",
-  "job": "FS132-Z2",
-  "as_of": "FS-132, six by the nerve, Derived (rows 155–160)",
+  "job": "FS124-Z1",
+  "as_of": "FS-124, the unit arc, Derived (rows 161–164); FS-132's first theorem held (row 155)",
   "statuses": {
    "kernel": "kernel — checked by Lean's kernel",
    "cert": "certificate — an exact object accepted by exact checkers",
@@ -1039,9 +1039,9 @@
    ],
    "note": "BASE-V re-derived row 134's print steps blind: every step but Lemma 4 at cusps upgraded.",
    "status": "hand-2b",
-   "line": 1191,
-   "address": "LEDGER.md row FS112-N3-BASE, line 1191",
-   "grade_address": "LEDGER.md row FS112-N3-BASE, line 1191"
+   "line": 1195,
+   "address": "LEDGER.md row FS112-N3-BASE, line 1195",
+   "grade_address": "LEDGER.md row FS112-N3-BASE, line 1195"
   },
   {
    "id": "N3DENSE3",
@@ -1085,9 +1085,9 @@
     }
    ],
    "status": "hand-2b",
-   "line": 1192,
-   "address": "LEDGER.md row FS112-N3-DENSE3, line 1192",
-   "grade_address": "LEDGER.md row FS112-N3-DENSE3, line 1192"
+   "line": 1196,
+   "address": "LEDGER.md row FS112-N3-DENSE3, line 1196",
+   "grade_address": "LEDGER.md row FS112-N3-DENSE3, line 1196"
   },
   {
    "id": "COMPOSE",
@@ -1109,9 +1109,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-1",
-   "line": 1196,
-   "address": "LEDGER.md row FS112-C-COMPOSE, line 1196",
-   "grade_address": "LEDGER.md row FS112-C-COMPOSE, line 1196",
+   "line": 1200,
+   "address": "LEDGER.md row FS112-C-COMPOSE, line 1200",
+   "grade_address": "LEDGER.md row FS112-C-COMPOSE, line 1200",
    "also": []
   },
   {
@@ -1282,9 +1282,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1185,
-   "address": "LEDGER.md row FS112-N3-PER, line 1185",
-   "grade_address": "LEDGER.md row FS112-N3-PER, line 1185",
+   "line": 1189,
+   "address": "LEDGER.md row FS112-N3-PER, line 1189",
+   "grade_address": "LEDGER.md row FS112-N3-PER, line 1189",
    "also": []
   },
   {
@@ -1307,9 +1307,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1193,
-   "address": "LEDGER.md row FS112-N3-END, line 1193",
-   "grade_address": "LEDGER.md row FS112-N3-END, line 1193",
+   "line": 1197,
+   "address": "LEDGER.md row FS112-N3-END, line 1197",
+   "grade_address": "LEDGER.md row FS112-N3-END, line 1197",
    "also": []
   },
   {
@@ -1338,13 +1338,13 @@
       "row": "FS112-Y3-END-NEEDS"
      },
      "quote": "hand; levels two minds: Y3; YB3, blind",
-     "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1218"
+     "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1222"
     }
    ],
    "status": "hand-1",
-   "line": 1218,
-   "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1218",
-   "grade_address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1218"
+   "line": 1222,
+   "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1222",
+   "grade_address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1222"
   },
   {
    "id": "HORNEND",
@@ -1372,7 +1372,7 @@
       "row": "FS112-C-DOUBLE"
      },
      "quote": "a stuck vertex with all four horn arcs unit arcs has in-type flank tiles at both neighbours, both (Q) centres with ≥ 4 colours",
-     "address": "LEDGER.md row FS112-C-DOUBLE, line 1199"
+     "address": "LEDGER.md row FS112-C-DOUBLE, line 1203"
     },
     {
      "src": {
@@ -1380,14 +1380,14 @@
       "row": "FS112-C-DOUBLE"
      },
      "quote": "hand; two minds: FS112-C2, a sketch; FS114-CV, blind",
-     "address": "LEDGER.md row FS112-C-DOUBLE, line 1199"
+     "address": "LEDGER.md row FS112-C-DOUBLE, line 1203"
     }
    ],
    "note": "Its companion C-DOUBLE (second quote above, two minds: FS112-C2, a sketch; FS114-CV, blind): when all four horn arcs are unit arcs, both neighbours are four-colour vertices, so the bowtie end sits within 1 of a four-colour vertex.",
    "status": "hand-1",
-   "line": 1198,
-   "address": "LEDGER.md row FS112-C-HORNEND, line 1198",
-   "grade_address": "LEDGER.md row FS112-C-HORNEND, line 1198"
+   "line": 1202,
+   "address": "LEDGER.md row FS112-C-HORNEND, line 1202",
+   "grade_address": "LEDGER.md row FS112-C-HORNEND, line 1202"
   },
   {
    "id": "BOWTIE",
@@ -1409,9 +1409,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "cert",
-   "line": 1200,
-   "address": "LEDGER.md row FS112-BOWTIE, line 1200",
-   "grade_address": "LEDGER.md row FS112-BOWTIE, line 1200",
+   "line": 1204,
+   "address": "LEDGER.md row FS112-BOWTIE, line 1204",
+   "grade_address": "LEDGER.md row FS112-BOWTIE, line 1204",
    "also": []
   },
   {
@@ -1444,9 +1444,9 @@
     }
    ],
    "status": "hand-2b",
-   "line": 1222,
-   "address": "LEDGER.md row FS114-CV-EXISTS, line 1222",
-   "grade_address": "LEDGER.md row FS114-CV-EXISTS, line 1222"
+   "line": 1226,
+   "address": "LEDGER.md row FS114-CV-EXISTS, line 1226",
+   "grade_address": "LEDGER.md row FS114-CV-EXISTS, line 1226"
   },
   {
    "id": "LOCALF",
@@ -1493,9 +1493,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1506,
-   "address": "LEDGER.md row FS116-Y4-EMPTY, line 1506",
-   "grade_address": "LEDGER.md row FS116-Y4-EMPTY, line 1506",
+   "line": 1510,
+   "address": "LEDGER.md row FS116-Y4-EMPTY, line 1510",
+   "grade_address": "LEDGER.md row FS116-Y4-EMPTY, line 1510",
    "also": []
   },
   {
@@ -1552,7 +1552,7 @@
    "id": "MEXCL",
    "label": "the (Q)-free exclusion, with no map",
    "role": "nogo",
-   "plain": "For every measurable six-colouring proper at almost every unit pair: where four labels meet in a witnessed cycle, the palettes on the point's unit circle cannot almost everywhere hold one of the two other labels. No map, no Siamese clause.",
+   "plain": "For every measurable six-colouring proper at almost every unit pair: where four labels meet in a witnessed cycle, the palettes on the point's unit circle cannot almost everywhere hold one of the two other labels. No map, no Siamese clause. Kernel-checked for the whole plane, over the release's lemmas ported with their proofs; the open-set form is by hand.",
    "src": {
     "file": "LEDGER.md",
     "row": "155"
@@ -1562,12 +1562,12 @@
     "file": "LEDGER.md",
     "row": "155"
    },
-   "grade": "[hand], one mind, with a line-by-line checking reading of its steps M4–M9 by a second mind",
+   "grade": "[kernel] for a Borel colouring of the whole plane",
    "theta": 90,
    "r": 520,
    "sector": "seven",
    "tier": 2,
-   "status": "hand-1",
+   "status": "kernel",
    "line": 200,
    "address": "LEDGER.md row 155, line 200",
    "grade_address": "LEDGER.md row 155, line 200",
@@ -1699,6 +1699,106 @@
    "also": []
   },
   {
+   "id": "DISCS",
+   "label": "the disc criterion",
+   "role": "held",
+   "plain": "Weak measurable six-colourings of the open discs of every radius give χ(ℝ²) ≤ 6 with no import; a disc with none gives seven over one declared outside theorem.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "161"
+   },
+   "quote": "the plane needs seven colours precisely if some open disc has no weak measurable six-colouring",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "161"
+   },
+   "grade": "[hand] or derived from [hand] entries, one mind each, kernel pending",
+   "theta": 109,
+   "r": 530,
+   "sector": "six-up",
+   "tier": 2,
+   "status": "kernel",
+   "line": 206,
+   "address": "LEDGER.md row 161, line 206",
+   "grade_address": "LEDGER.md row 161, line 206",
+   "also": []
+  },
+  {
+   "id": "ONEPIECE",
+   "label": "one piece, one side",
+   "role": "held",
+   "plain": "In every weak colouring an open piece of one label bars that label one unit away; one tight pair forces nothing beyond that first step.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "162"
+   },
+   "quote": "no entry spends a number of labels",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "162"
+   },
+   "grade": "[hand] or derived from [hand] entries, one mind each, kernel pending",
+   "theta": 120,
+   "r": 560,
+   "sector": "six-up",
+   "tier": 2,
+   "status": "kernel",
+   "line": 207,
+   "address": "LEDGER.md row 162, line 207",
+   "grade_address": "LEDGER.md row 162, line 207",
+   "also": []
+  },
+  {
+   "id": "PAIRPAYS",
+   "label": "a close pair pays at its common unit points",
+   "role": "held",
+   "plain": "Of two three-piece points less than 2 apart on disjoint triples of six labels, one has a piece inside and another outside the unit circle about each common unit point; both where both are full; one alone only at a bowtie. Nothing says a colouring has such points.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "163"
+   },
+   "quote": "x or y separates at w",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "163"
+   },
+   "grade": "[hand] or derived from [hand] entries, one mind each, kernel pending",
+   "theta": 122,
+   "r": 630,
+   "sector": "six-up",
+   "tier": 2,
+   "status": "kernel",
+   "line": 208,
+   "address": "LEDGER.md row 163, line 208",
+   "grade_address": "LEDGER.md row 163, line 208",
+   "also": []
+  },
+  {
+   "id": "STRIPEDGE",
+   "label": "the strip's top edge is closed",
+   "role": "nogo",
+   "plain": "No weak six-colouring keeps six named pieces of the strip and contains one point of its top edge.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "164"
+   },
+   "quote": "bar all six labels on an open set near the point",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "164"
+   },
+   "grade": "[hand] with an exact check, one mind, kernel pending",
+   "theta": 131,
+   "r": 550,
+   "sector": "six-up",
+   "tier": 2,
+   "status": "kernel",
+   "line": 209,
+   "address": "LEDGER.md row 164, line 209",
+   "grade_address": "LEDGER.md row 164, line 209",
+   "also": []
+  },
+  {
    "id": "TOP5",
    "label": "the map step at five",
    "role": "held",
@@ -1743,9 +1843,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1429,
-   "address": "LEDGER.md row FS116-RING-GERM, line 1429",
-   "grade_address": "LEDGER.md row FS116-RING-GERM, line 1429",
+   "line": 1433,
+   "address": "LEDGER.md row FS116-RING-GERM, line 1433",
+   "grade_address": "LEDGER.md row FS116-RING-GERM, line 1433",
    "also": []
   },
   {
@@ -1768,9 +1868,9 @@
    "sector": "six-up",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1423,
-   "address": "LEDGER.md row FS116-O1-YESLIM, line 1423",
-   "grade_address": "LEDGER.md row FS116-O1-YESLIM, line 1423",
+   "line": 1427,
+   "address": "LEDGER.md row FS116-O1-YESLIM, line 1427",
+   "grade_address": "LEDGER.md row FS116-O1-YESLIM, line 1427",
    "also": []
   },
   {
@@ -1816,7 +1916,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-q-ring.md, line 1",
-   "grade_address": "plans/STUB-q-ring.md, line 298",
+   "grade_address": "plans/STUB-q-ring.md, line 462",
    "also": []
   },
   {
@@ -1862,9 +1962,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1250,
-   "address": "LEDGER.md row FS114-Y4-RSTOPALL, line 1250",
-   "grade_address": "LEDGER.md row FS114-Y4-RSTOPALL, line 1250",
+   "line": 1254,
+   "address": "LEDGER.md row FS114-Y4-RSTOPALL, line 1254",
+   "grade_address": "LEDGER.md row FS114-Y4-RSTOPALL, line 1254",
    "also": []
   },
   {
@@ -1887,9 +1987,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1253,
-   "address": "LEDGER.md row FS114-Y5-PINALL, line 1253",
-   "grade_address": "LEDGER.md row FS114-Y5-PINALL, line 1253",
+   "line": 1257,
+   "address": "LEDGER.md row FS114-Y5-PINALL, line 1257",
+   "grade_address": "LEDGER.md row FS114-Y5-PINALL, line 1257",
    "also": []
   },
   {
@@ -1919,9 +2019,9 @@
     "address": "plans/STUB-route-t-count.md, line 70"
    },
    "status": "hand-2b",
-   "line": 1232,
-   "address": "LEDGER.md row FS114-N2-ENDS, line 1232",
-   "grade_address": "LEDGER.md row FS114-N2-ENDS, line 1232",
+   "line": 1236,
+   "address": "LEDGER.md row FS114-N2-ENDS, line 1236",
+   "grade_address": "LEDGER.md row FS114-N2-ENDS, line 1236",
    "also": []
   },
   {
@@ -1944,9 +2044,9 @@
    "sector": "six-up",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1260,
-   "address": "LEDGER.md row FS114-Y-DIAL, line 1260",
-   "grade_address": "LEDGER.md row FS114-Y-DIAL, line 1260",
+   "line": 1264,
+   "address": "LEDGER.md row FS114-Y-DIAL, line 1264",
+   "grade_address": "LEDGER.md row FS114-Y-DIAL, line 1264",
    "also": []
   },
   {
@@ -1980,7 +2080,7 @@
    "status": "hand-2b",
    "line": 19,
    "address": "plans/FS111-derivation.md, line 19",
-   "grade_address": "LEDGER.md row FS111-C1-UNIF, line 1269"
+   "grade_address": "LEDGER.md row FS111-C1-UNIF, line 1273"
   },
   {
    "id": "FS121",
@@ -2441,9 +2541,9 @@
     }
    ],
    "status": "cert",
-   "line": 1202,
-   "address": "LEDGER.md row FS112-CAL-STRIP, line 1202",
-   "grade_address": "LEDGER.md row FS112-CAL-STRIP, line 1202"
+   "line": 1206,
+   "address": "LEDGER.md row FS112-CAL-STRIP, line 1206",
+   "grade_address": "LEDGER.md row FS112-CAL-STRIP, line 1206"
   },
   {
    "id": "DISK",
@@ -2465,9 +2565,9 @@
    "sector": "six-up",
    "tier": 2,
    "status": "cert",
-   "line": 1207,
-   "address": "LEDGER.md row FS112-CAL-DISK, line 1207",
-   "grade_address": "LEDGER.md row FS112-CAL-DISK, line 1207",
+   "line": 1211,
+   "address": "LEDGER.md row FS112-CAL-DISK, line 1211",
+   "grade_address": "LEDGER.md row FS112-CAL-DISK, line 1211",
    "also": []
   },
   {
@@ -2490,9 +2590,9 @@
    "sector": "six-up",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1210,
-   "address": "LEDGER.md row FS112-STOP, line 1210",
-   "grade_address": "LEDGER.md row FS112-STOP, line 1210",
+   "line": 1214,
+   "address": "LEDGER.md row FS112-STOP, line 1214",
+   "grade_address": "LEDGER.md row FS112-STOP, line 1214",
    "also": []
   },
   {
@@ -2515,9 +2615,9 @@
    "sector": "six-up",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1216,
-   "address": "LEDGER.md row FS112-Y3-PIN, line 1216",
-   "grade_address": "LEDGER.md row FS112-Y3-PIN, line 1216",
+   "line": 1220,
+   "address": "LEDGER.md row FS112-Y3-PIN, line 1220",
+   "grade_address": "LEDGER.md row FS112-Y3-PIN, line 1220",
    "also": []
   },
   {
@@ -2546,13 +2646,13 @@
       "row": "FS112-C-PARTNERS"
      },
      "quote": "a cubic trichromatic vertex's close complementary cubic partners are rhombus completions of its leaving centres: at most three",
-     "address": "LEDGER.md row FS112-C-PARTNERS, line 1197"
+     "address": "LEDGER.md row FS112-C-PARTNERS, line 1201"
     }
    ],
    "status": "hand-2b",
-   "line": 1189,
-   "address": "LEDGER.md row FS112-N3-COR3, line 1189",
-   "grade_address": "LEDGER.md row FS112-N3-COR3, line 1189"
+   "line": 1193,
+   "address": "LEDGER.md row FS112-N3-COR3, line 1193",
+   "grade_address": "LEDGER.md row FS112-N3-COR3, line 1193"
   },
   {
    "id": "PARTS",
@@ -2620,7 +2720,7 @@
     "row": "FS114-CV-EXISTS"
    },
    "quote": "over FS112-N3-DENSE3, N2-TERM, N4-FIN",
-   "address": "LEDGER.md row FS114-CV-EXISTS, line 1222"
+   "address": "LEDGER.md row FS114-CV-EXISTS, line 1226"
   },
   {
    "source": "CVEXISTS",
@@ -2643,7 +2743,7 @@
    },
    "quote": "has a ring carrying no",
    "label": "a ring type removed",
-   "address": "LEDGER.md row FS116-Y4-EMPTY, line 1506"
+   "address": "LEDGER.md row FS116-Y4-EMPTY, line 1510"
   },
   {
    "source": "GFREE",
@@ -2694,6 +2794,66 @@
    "address": "LEDGER.md row 159, line 204"
   },
   {
+   "source": "ONEPIECE",
+   "target": "PAIRPAYS",
+   "kind": "context",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "163"
+   },
+   "quote": "x or y separates at w",
+   "label": "six uses of the lemma and a count",
+   "address": "LEDGER.md row 163, line 208"
+  },
+  {
+   "source": "ONEPIECE",
+   "target": "STRIPEDGE",
+   "kind": "context",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "164"
+   },
+   "quote": "six uses of C124-TYPE",
+   "label": "six uses of the lemma",
+   "address": "LEDGER.md row 164, line 209"
+  },
+  {
+   "source": "COR3",
+   "target": "PAIRPAYS",
+   "kind": "context",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "163"
+   },
+   "quote": "for maps C124-BOTH is FS112-N3-COR3",
+   "label": "the map theorem, in measure, by another route",
+   "address": "LEDGER.md row 163, line 208"
+  },
+  {
+   "source": "STOP",
+   "target": "STRIPEDGE",
+   "kind": "context",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "164"
+   },
+   "quote": "FS112-EDGE (row 136)",
+   "label": "the same point, for every weak six-colouring keeping six pieces",
+   "address": "LEDGER.md row 164, line 209"
+  },
+  {
+   "source": "DISCS",
+   "target": "STRIPEDGE",
+   "kind": "context",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "161"
+   },
+   "quote": "an explicit radius at any k",
+   "label": "an exclusion on a disc would reach seven here; this one is not on a disc",
+   "address": "LEDGER.md row 161, line 206"
+  },
+  {
    "source": "QPRUNE",
    "target": "LOCALF",
    "kind": "context",
@@ -2715,7 +2875,7 @@
    },
    "quote": "let y be a change point of the ring",
    "label": "the placing rule",
-   "address": "LEDGER.md row FS116-RING-GERM, line 1429"
+   "address": "LEDGER.md row FS116-RING-GERM, line 1433"
   },
   {
    "source": "YESLIM",
@@ -2727,7 +2887,7 @@
    },
    "quote": "some closed disc of radius R carries a valid k-coloured fragment",
    "label": "fragments on every disc",
-   "address": "LEDGER.md row FS116-O1-YESLIM, line 1423"
+   "address": "LEDGER.md row FS116-O1-YESLIM, line 1427"
   },
   {
    "source": "FS123",
@@ -2807,7 +2967,7 @@
    },
    "quote": "negative only at a degree-4 vertex with at least three tactic edges",
    "label": "where six has room",
-   "address": "LEDGER.md row FS114-N2-ENDS, line 1232"
+   "address": "LEDGER.md row FS114-N2-ENDS, line 1236"
   },
   {
    "source": "CAPSTRIP",
@@ -2819,7 +2979,7 @@
    },
    "quote": "no extension does better",
    "label": "R > φ²/√2",
-   "address": "LEDGER.md row FS114-Y-DIAL, line 1260"
+   "address": "LEDGER.md row FS114-Y-DIAL, line 1264"
   },
   {
    "source": "LB7",
@@ -3310,7 +3470,7 @@
     "row": "FS112-N3-BASE"
    },
    "quote": "over row 134's base, re-derived by BASE-V but for Lemma 4 at cusps",
-   "address": "LEDGER.md row FS112-N3-BASE, line 1191"
+   "address": "LEDGER.md row FS112-N3-BASE, line 1195"
   },
   {
    "source": "N3BASE",
@@ -3321,7 +3481,7 @@
     "row": "FS112-N3-DENSE3"
    },
    "quote": "over N3-BASE and DISC1",
-   "address": "LEDGER.md row FS112-N3-DENSE3, line 1192"
+   "address": "LEDGER.md row FS112-N3-DENSE3, line 1196"
   },
   {
    "source": "N3DENSE3",
@@ -3343,7 +3503,7 @@
     "row": "FS112-C-COMPOSE"
    },
    "quote": "the global step in DENSE3's form is the NO for all maps",
-   "address": "LEDGER.md row FS112-C-COMPOSE, line 1196"
+   "address": "LEDGER.md row FS112-C-COMPOSE, line 1200"
   },
   {
    "source": "GSTEP",
@@ -3426,7 +3586,7 @@
    },
    "quote": "no stuck ray, bounded chains",
    "label": "periodic maps need neither",
-   "address": "LEDGER.md row FS112-N3-PER, line 1185"
+   "address": "LEDGER.md row FS112-N3-PER, line 1189"
   },
   {
    "source": "N3END",
@@ -3471,7 +3631,7 @@
    },
    "quote": "FALSE as stated (BOWTIE)",
    "label": "refutes it as first stated",
-   "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1218"
+   "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1222"
   },
   {
    "source": "BOWTIE",
@@ -3712,7 +3872,7 @@
    },
    "quote": "20 unit arcs, all both-kind at four-colour corners",
    "label": "a tight fragment, not the plane",
-   "address": "LEDGER.md row FS112-CAL-DISK, line 1207"
+   "address": "LEDGER.md row FS112-CAL-DISK, line 1211"
   },
   {
    "source": "PARTS",
@@ -3747,7 +3907,7 @@
    },
    "quote": "the pinned corner: both positives end where a close complementary pair",
    "label": "the held positives stop at a pinned corner",
-   "address": "LEDGER.md row FS112-STOP, line 1210"
+   "address": "LEDGER.md row FS112-STOP, line 1214"
   },
   {
    "source": "Y3STOP",
@@ -3759,7 +3919,7 @@
    },
    "quote": "both pinned-corner escapes fail one ring further out",
    "label": "no way past the pinned corners",
-   "address": "LEDGER.md row FS112-Y3-PIN, line 1216"
+   "address": "LEDGER.md row FS112-Y3-PIN, line 1220"
   },
   {
    "source": "WPOLY",

@@ -1,0 +1,23 @@
+trial on the tree as committed: git merge-tree --write-tree --name-only 241ac63751adabf7055819deb17ecda4072a44a7 357e42de237b84656febcb262a5bfac4fc67814e
+a0bcf371b6211da04a9f6afed7a0b52dc26eace7
+merge-tree exit=0
+paths main changed since the merge base 808ef9bf2162f4f46a2fb9b0b74285f0d34424ab, by top-level entry:
+      1 BIBLIOGRAPHY.md
+      1 .claude
+      1 CLAUDE.md
+    161 data
+      1 LEAN.md
+      1 LEDGER.md
+     37 plans
+      1 RUNNING.md
+      6 tools
+      1 visualizations
+of them under Proofs/, Proofs.lean, scripts/, ARCHITECTURE.md, lakefile.toml, lean-toolchain, lake-manifest.json:
+0
+under tools/:
+tools/claude_md_fact_audit.py
+tools/fs124_p1_cones.py
+tools/fs132_z2_append.py
+tools/fs132_z2_brier.py
+tools/fs132_z2_frontpage.py
+tools/viz_proof_atlas_facts.py

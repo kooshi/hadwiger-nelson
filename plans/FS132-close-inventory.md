@@ -1232,3 +1232,184 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     outside lemmas and 46 open leaves of our own** (49, less the step lemma's module's eight, plus those of the two
     skeleton modules not counted here — the count is the implementers' to state at their hand-backs).
 
+44. **FS132-I3 done (375k and 56 minutes by the task notice): the step lemma's module and the shift's are proved — two of the
+    exclusion's twelve modules, 33 theorems on the standard three axioms** (implementer; record
+    `plans/FS132-I3-implementation.md` on branch `fs132-wi3`, tip `e9dd2f46`; its report is its hand-back). Beyond item 42:
+    **the shift's calculus is in the kernel** — the unit-pair relation in the direction used, the sign, the vanishing on the
+    axes, the bounds, measurability; the Lipschitz bound "with no derivative computed (the shift vanishes on both positive
+    axes, so its derivative at the origin is zero)", on some closed square whose side is not explicit — "the planner's
+    'numerically κ = 1/50 works' is not proved … nothing in the assembly reads its value"; the sign by an identity proved in
+    the chart's own variables, not through the library theorem the planner named. **Statements**: 14 of the 16 leaves
+    exactly as the planner's branch printed them, 2 with an unused hypothesis dropped by permission — compared record by
+    record by a script whose planted fault fires. **Price**: 15 leaves and 16 helpers; 237 lines as given, 1,059 now; four
+    builds; twelve elaboration errors, "none mathematical"; no dispatch. Architecture check, duplicate-name check and the
+    guarded lint pass. **For other lots**: a helper of the shift's module states what a leaf of the chart's module states,
+    under another name. **My receipt**: the four commits are on `origin`; both files at the tip hold no `sorry` (counted by
+    me: 769 and 290 lines); its block's axiom print read — 33 lines of the standard three and exactly one `sorryAx`, the
+    control; the final build log's exit. Not checked by me: the helpers' statements; its reading aloud. **Credit**: a
+    signature comparison against the planner's printed leaves, with a control; a planner's number reported as not proved
+    and not needed; the kernel's route said where it differs from the hand argument's.
+    **Its held points, ruled.** (a) **The two rows of the architecture map are edited at the join**, by the implementer who
+    merges this branch (FS132-I4, by an amendment to its brief, gate exit 0) — alternative: resume this job for two lines;
+    rejected, a message resumes it and bills its context again. (b) **No regrade in the derivation file now**: a step is
+    "held" when its module passes the gate; the dated line it drafted is filed at Closed. The first night's exclusion
+    stays "[hand], one mind, with a checking reading" — with two of its nine steps now kernel-checked on a branch, which
+    is said wherever the grade is said. (c) **Its three lines for the Lean facts file are filed now, with the port's
+    three** (`LEAN.md` § Searching — Lean; six bullets, copied by script from the two records) — they serve the
+    implementers still to come.
+    *A friction, logged once*: a brief that quotes lines of a file its recipient is to rewrite cannot be re-gated after
+    launch — the amended brief fails on one quotation the recipient's own proof has since changed. Not a defect of the
+    gate; a reason to quote such leaves from the planner's printed signatures, which do not move.
+
+45. **FS132-I4, second message (13:49 UTC): all sixteen leaves of its brief are proved and built — the palettes' steps, the
+    ring form's two, the chart's null sets, the relation and the kill** (branch `fs132-wi4`, `3e063027` then `b844cbb7`: the
+    finished `fs132-wi3` merged, one conflict where both branches append a block to the axioms script, all blocks kept;
+    the two architecture rows reworded). **The leaf the planner ranked hardest went "by the partner's motion on its unit
+    circle, not by the arccos formula"**. Three unused hypotheses dropped under the planner's permission, each with its
+    call site. **The two-pair ring's theorem at the whole plane reads the standard three** (its module has had no `sorry`
+    since the join). **What still stands between the first night's theorem and the kernel**: the eleven leaves of the
+    chart's module and the seven of the tips' — its theorems "read `sorryAx` only through five Chart leaves". **Its
+    question**: take those two modules, or hand back; it is at about 300k by its own count. **My receipt**: the two
+    commits are on `origin`. Not checked by me: the build of the merge (running); the files' `sorry` counts are read at
+    its hand-back. **Ruling**: **it takes the two modules, by Amendment 2 to its brief, under a stopping rule** (a saved
+    stage first; stop at about 420k by its own count or at three failed attempts on one leaf) — alternative: hand back
+    and a fresh implementer; why this one: it holds the chart's algebra in context and a successor would spend its first
+    hundred thousand tokens rebuilding it; an implementer's errors are caught by the build, so the risk of a deep context
+    here is wasted effort, not a wrong result — and the rule bounds the waste; confidence medium. **It messages me with the
+    four theorems' axiom lines the moment the last leaf is in.**
+
+46. **FS132-I4, third message (14:14 UTC): the last leaf is in — the first night's exclusion, in its four-point form at the
+    whole plane, reads the standard three axioms from built modules on branch `fs132-wi4`.** Its four lines, from its axiom
+    print after a build under the slot (exit 0): `no_outside_orbit_points`, `no_outside_orbit`, `not_ae_outside` and
+    `no_alternating_pairs`, each `[propext, Classical.choice, Quot.sound]`. Controls in the same run: a theorem on each
+    declared outside theorem prints it; a planted `sorry` prints `sorryAx`. **65 of 65 records clean, none on `sorry`, no
+    outside theorem and no native axiom under any.** The chart's and the tips' modules: all 18 leaves, no statement
+    changed, one helper (the 64 sign patterns, by `decide`). **At the time of its message the last two files were built
+    and not yet committed** (it sent the lines first, as the amendment asked); 19 `sorry` warnings remain in the build,
+    all in the two skeleton modules of other claims, none under these theorems; the full gate is not run. **My receipt,
+    read in its working tree at 14:14 UTC**: the print's seven planner lines, the four above among them, each the standard
+    three; its three controls (the two imports printed, `sorryAx` for the plant); the print and the build log written in
+    the same minute; the build log's last lines (exit 0, 7 modules rebuilt, 2 with warnings); **the `sorry` count of every
+    file of the six-ring folder, by me: 0 in thirteen, 16 and 3 in the two skeletons**; **the statement of
+    `no_outside_orbit_points` read by me against row 155's orbit form, clause by clause** — a measurable six-colouring of
+    the whole plane proper at almost every unit pair; four injectively named labels and the two others, distinct; four
+    points other than the centre; for each, the two consecutive labels' closed essential supports disjoint from the
+    straddle set of the two-point set; (i) for every integer `k`, almost every angle within `δ` of `ψ + kπ/3` has a palette
+    holding one of the two other labels; (ii) near `ψ` each of the two occurs on a set of positive measure; conclusion:
+    false — and the three definitions under it (the straddle set, the essential support, the weak colouring) read at
+    their source lines. Not checked by me: the commit (not yet made); the build itself; that the hypotheses are jointly
+    satisfiable short of the conclusion (the gate's vacuity check and the planner's models are the instruments for that).
+    **By this milestone's announcement rule (2 (i))**: this is **kernel-checked on a branch, not "held"** — held is when
+    the module passes the gate with its imports named. The row's grade does not change yet. **Rulings.** (a) Kooshi is
+    told now, in those words. (b) **The landing is briefed next** and takes this implementer's slot at its hand-back: the
+    exclusion's module with the port and the confinement module, **without the two skeleton modules** (nothing with a
+    `sorry` reaches `main`), with a copy of the release's licence text beside the ported modules and the three instances
+    on Mathlib types scoped or justified. (c) The two skeleton modules (the index lemmas; the centres) stay on the
+    planner's branch for their own jobs.
+
+47. **FS132-I4 done (590k and 90 minutes by the task notice): the exclusion is whole on its branch — every step of the hand
+    argument in the kernel, on the standard three axioms, committed and pushed** (implementer; record
+    `plans/FS132-I4-implementation.md` Stages 1–7 on branch `fs132-wi4`, tip `7e4e5d2a`, working tree clean; its report is
+    its hand-back). **Its job in sum**: the join; the sixteen leaves of its brief; by Amendment 2 the eighteen of the chart's
+    and the tips' modules — **58 theorems, 34 leaves and 24 helpers, 1,131 lines, no statement changed beyond three unused
+    hypotheses dropped by permission**. **On the final tree**: build exit 0 with 19 `sorry` warnings, all in the two
+    skeleton modules of other claims; 65 of 65 records on the standard three with three controls and eight plants refused;
+    architecture check, duplicate-name check (1,868 modules) and the guarded lint pass; **the full gate not run**. **Read
+    against**: the derivation file's § 1 at the whole plane — "the open-set form is not formalized". **For the landing**:
+    two modules that state one identity under two names; how seven conditions on parameters are declared to the
+    assumptions step; six architecture rows and one module docstring still naming the planner's branch and "sorry until
+    implemented"; three groups of declarations in no audit block; its drafts D1–D7. **My receipt**: the tip is on `origin`
+    and the working tree is clean (read by me); the rest as item 46's. **Credit**: the theorem brought to the kernel in one
+    job from a merge of three colleagues' branches; the hardest leaf by a route of its own; every dropped hypothesis with
+    its call site; a question asked before a fence was crossed.
+    **A slip of mine, in calibration**: I set its stopping rule at about 420k by its own count, reckoning its count at
+    nine-tenths of the harness's, as the three implementers before it had run; its count ran at two-thirds, and it handed
+    back at 590k by the harness — past the line at which this project replaces an agent. Nothing was lost; the rule for
+    the next amendment of this kind is a stage count or a leaf count, which an agent can read, and not a token figure it
+    cannot.
+    **Its held point, ruled**: **the exclusion's modules land without the two skeleton modules** (nothing with a `sorry`
+    reaches `main`; no module but the root file imports them — checked by me) — alternative: staff the two skeletons first
+    and land the whole branch; rejected, they are other claims (the index lemmas; the centres) and the exclusion is the
+    statement Kooshi put first; confidence high. **FS132-L2, the landing, is briefed and takes its slot** (worktree and
+    branch `fs132-wl2`, cut by me from that tip, build copied).
+
+48. **FS132-L2, the landing, is launched — a landing is in flight from 14:28 UTC** (`debruijn-implementer`, Opus; brief
+    `data/fs132/briefs/FS132-L2-landing.md`, gate exit 0; worktree and branch `fs132-wl2`, cut from `fs132-wi4` at
+    `7e4e5d2a`; record `plans/FS132-L2-landing.md` there): the two skeleton modules cut, `main` merged, the port's loose
+    ends (the licence text, three instances, both stored-term comparisons re-run), the registrations, the assumptions and
+    vacuity steps, the four theorems read aloud against row 155, the full gate on one commit, the fast-forward of `main`,
+    and the drafts for the filing. It messages one line when the gate is green, before it pushes. **While it is in
+    flight**: nothing is committed to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`,
+    `LEAN.md`, `RUNNING.md`, and **no `CLAUDE.md` filing is made until it is back**. Its stopping rule is in counts it can
+    read (a stage per item; three full gate runs without a green one), after item 47's slip.
+
+49. **FS132-L2, a mid-job message (15:06 UTC logged): the landing's Stages 1–4 are saved — the cut, `main` merged with no
+    conflict, the licence copy, the three instances scoped through the generators, both stored-term comparisons unchanged
+    on the joined tree — and its read-aloud found a difference of wording, not a gap.** The library's ring form is over four
+    compact sets (the first claim's own wording); row 155's ring sentence is over four points; "the Lean statement is the
+    stronger one and gives the row's" at the two-point sets — checked by it as a term. Two more clauses for the filing's
+    words: every Lean statement asks Borel measurability beside the weak-colouring condition, where the row says
+    "measurable"; and the row's clause on an extracted centre has no Lean theorem, like the open-set form. **In its working
+    tree, before the full gate pass**: the registrations; the assumptions step — three condition lines, the nine counts
+    unmoved, the ledger gaining no row; the vacuity probe — no new site, declarations 14,845 to 15,291,
+    refutations skipped 215 to 226. **Ruling**: **the four-point ring form is added to the library as a named theorem**
+    (Amendment 1 to its brief) — alternative: leave the row's sentence to follow from a stronger theorem by a remark in
+    the filing; why add it: the row's sentence should have a theorem that says it, the proof is a term it already holds,
+    and the gate has not yet been run on the commit; confidence high. Its other two points go into the filing's words.
+
+50. **FS132-L2: the full gate is green and the landing is on `main` (15:54 UTC, read by me on `origin/main`) — the first
+    night's exclusion is held.** Its message: every step of the gate exit 0 on commit `b46a9d57`, the one planted
+    scan-difference control exit 1 as designed; **6,953 records — 6,910 clean, 20 axiom-free, 18 imported, 5 purchases**;
+    **the five theorems, the added four-point ring form among them, "on exactly the standard three"**; the vacuity scan —
+    `declarations=15292 refutations-skipped=226 sites=1447`, no new site; the assumptions' nine counts unmoved, three
+    conditions declared; no tracked file modified after the pass. Then `main`'s newer commits merged (commit `780225d8`;
+    its check commit `3ab61fcd`: "data/, plans/ and LEAN.md only") and a fast-forward push. **My receipt**: `origin/main`
+    holds the merge and its check commit; **on `main` now, read by me**: the thirteen modules of the exclusion (no
+    skeleton module among them), the nine ported modules beside the import, and a copy of the release's licence text;
+    `no_outside_orbit_points` and `not_ae_outside_points` in the assembly module; **no `sorry` in either folder** (my
+    search, comments and docstrings set aside); the gate's saved axioms log — "6910 clean, 20 axiom-free, 18 imported, 5
+    declared purchase(s)", exit 0 — and its self-test's — "every planted fault fired, and every partner passed". Not
+    checked by me yet: the other gate logs, the read-aloud, the three digests against the last landing's receipts — at
+    its hand-back, with its drafts. **By this milestone's announcement rule (2 (i))**: C132-M-ORBIT, C132-WIT-ORBIT,
+    C132-M-EXCL and C132-DIAG-WIDE **at the whole plane** are **held** — kernel-checked in this library on the standard
+    three axioms, with no assumption and no outside theorem beneath them, through the gate. **Not held**: their open-set
+    forms; the row's clause on an extracted centre; every other entry of last night's record. **The front page does not
+    say it yet**: the filing follows its hand-back (counts, row 155's grade, the theorem record's dated lines). My one
+    unpushed commit was rebased onto the landed line and pushed; nothing was forced.
+
+51. **FS132-L2 done (527k and 87 minutes by the task notice), and its filing is made (16:00 UTC; commit `783e7bdb`): the first
+    night's exclusion is held, and the front page says so** (landing implementer; record `plans/FS132-L2-landing.md`; its
+    report is its hand-back; `origin/main` fast-forwarded four times, never forced). **The gate, green on its first full
+    pass**, on commit `b46a9d57`. **The five theorems**, each read aloud against the row or the entry it stands for and
+    each on the standard three: the orbit form over four points and over four compact sets, the ring form over four
+    compact sets and — added under Amendment 1 — over four points, and the two-pair ring. **What the Lean statements do
+    not say that the row does**: the open-set form; the clause at an extracted centre; and "measurable" is Borel
+    measurability in every statement. **Its other results**: the two skeleton modules cut; the licence text beside the
+    ported modules, byte-identical, written and compared by the generator; all three instances on Mathlib's types scoped;
+    both stored-term comparisons unchanged on the joined tree and on the gated commit; **377 declarations registered —
+    115 had been in no audit block**, more than my brief's three groups; one of two names for one identity removed by an
+    import edit; three conditions declared to the assumptions step. **Its tool findings**: the vacuity scan tracks no
+    carrier of these modules — 447 declarations entered with no site, "its silence is not evidence", the models named by
+    hand; the notes check reads nothing of them. **Open gate items it names**: no kernel model of the ring hypothesis (in
+    words only); no joint kernel model of the hypotheses short of one clause; a docstring note resting on a [tools]
+    control; the import module's header not naming the licence. **My receipt**: item 50's; **the three digests run by me
+    against FS132-L1's receipts — each "match"** (axioms: clean, purchases and imported; vacuity: 9 of 9 in the baseline's
+    header and in the front page; assumptions: 9 of 9 twice); **its drafts read whole by me and filed by script, each slot
+    asserted once**: the audit's sentence, the vacuity counts, the sentence on the ported lemmas, the Frontier's sentence
+    on the Lean phase (the same in the stub list), ledger row 155's grade and three of its clauses, two dated paragraphs
+    in the theorem record (its gate after: exit 0, 9 warnings), `LEAN.md` (a bullet on porting an outside Lean proof,
+    four on searching, a sentence on the scan's silence), the bibliography's row, the atlas node's grade (checker 220 of
+    220, rebuilt locally, not published); the gate-change entry and two superseded counts. Fact audit against `8afe2fde`:
+    passed after five superseded tokens were allow-listed with reasons. **The next filing's fact-audit base is
+    `783e7bdb`; the next landing's previous receipts are `data/fs132/l2/gate/receipt-{axioms,vacuity,assumptions}-final.log`.**
+    **Credit**: a gate green at the first pass on four colleagues' joined work; a read-aloud that found the row and the
+    theorem were over different objects; registrations counted from the kernel's own list, which found 115 where the
+    brief knew of three groups; the scan's silence reported as silence.
+    **Its held points, ruled.** (a) **The import module's header gets its licence sentence at the next landing** (the
+    radius module's), whose build pays for the rebuild. (b) **The Frontier says "not Closed"**, as drafted: the
+    milestone's module is not whole. (c) **The main checkout's build is behind**: worktree builds are copied from
+    `fs132-wl2`'s tree from now on. (d) **A kernel model of the four-point hypothesis** is the first statement of the
+    list already fixed for this milestone's next planner (`data/fs132/claims-K1.md`, the margin statement); a kernel
+    model of the ring hypothesis is added to that planner's brief as a request. **The milestone stays Derived**: Closed
+    waits on the index lemmas, the centres and the seven statements of that list.
+

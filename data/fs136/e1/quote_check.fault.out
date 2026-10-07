@@ -1,0 +1,12 @@
+ 1 MISMATCH data/external/EXT-OAI1-request.md :: I agree with all 3. let's keep the lean backlog paused. We move to the
+ 2 match    plans/STUB-covering-pairs.md :: question: is-the-point-across-forced-empty
+ 3 match    plans/FS124-close-inventory.md :: 21. **FS124-E2 done (523k and 46 minutes by the task notice): the seco
+ 4 match    plans/FS124-close-inventory.md :: 26. **FS124-P3, its verdict (15:19 UTC logged; commit `751b4749`; reco
+ 5 match    plans/FS124-close-inventory.md :: 28. **FS124-Z1 done (422k and 24 minutes by the task notice): the deri
+ 6 match    data/fs136/claims.md :: **Definitions, stated once.** `c` is a weak six-colouring of an open s
+ 7 match    data/fs136/claims.md :: **C136-RINGS-READ** (a reading; first) — as posed: On every held six-c
+ 8 match    data/fs136/claims.md :: **C136-COVER** (spends six) — as posed: *Let `c` be a weak six-colouri
+ 9 match    data/fs136/claims.md :: **C136-ONE** (spends six) — as posed: *A pieced point `p` carrying all
+10 match    data/fs136/claims.md :: **C136-PARTNERS** (spends six) — as posed: *A sector point `x` has at 
+11 match    data/fs136/claims.md :: **C136-STOP** (spends six; the card's claim on held rings) — as posed:
+quotations=11 mismatches=1

@@ -90,3 +90,9 @@ The asking lane's re-aim of this stub — honest colourings; "an essential centr
 proposals: the extraction for countable closed sets of centres was declined as a stub by the asking lane (the same record,
 § The debts); its side question — under REG-J′, are a saturated colouring's cyclic centres locally finite, "a candidate,
 unchecked" — was not started, and belongs beside FS131-E8's line above. Grokkings: G94; proposed G96.
+
+*Since FS-124 (FS124-Z1, the record job, 2026-10-07; every entry named is in `plans/FS124-derivation.md`, [hand] or derived from [hand] entries, **one mind, kernel pending**):* every entry of that file's §§ 2–4 that is not an
+object begins from an open one-label set (C124-SHADOW-OPEN) or a connected one (C124-TYPE), and no entry gives a weak
+six-colouring either. So what this stub's regularity would supply to that file is the piece, and no more is asked of it: with
+three pieces at each of two points less than 2 apart carrying all six labels, C124-FORCED-PIECES applies as it stands; an arc on
+the circle needs sector points (C124-FORCED), and "both members" full ones (C124-BOTH).

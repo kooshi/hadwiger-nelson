@@ -1,0 +1,4 @@
+plant 'a changed word': FIRED (1 mismatch)
+plant 'a wrong source': FIRED (1 mismatch)
+plant 'an empty quotation': FIRED (1 mismatch)
+SELF-TEST OK: 9 quotations read unplanted, 0 mismatches; 3 plants

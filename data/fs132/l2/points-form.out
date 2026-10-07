@@ -1,0 +1,4 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0,1
+'HadwigerNelson.SixRing.l2_not_ae_outside_points' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.l2_fourCycleStraddle_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit=0

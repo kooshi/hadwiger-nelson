@@ -128,6 +128,8 @@ open set containing the closed unit disc, as the statement is written: also E3's
 (M0, one mind). The kernel lane's statement is taken at the whole plane first (item 22 (a); `data/fs132/claims-K1.md`); the
 local form is planned second (K1 § 3.6).
 
+**2026-10-07, FS132-L2 — [kernel], for a Borel colouring of the whole plane (the instance `U = ℂ`), through the full gate at `b46a9d57`**: `HadwigerNelson.SixRing.no_outside_orbit_points` (C132-WIT-ORBIT), `no_outside_orbit` (C132-M-ORBIT), `not_ae_outside` (C132-M-EXCL), `not_ae_outside_points` (C132-WIT-EXCL; added at the landing, the compact-set form at the two-point sets), `Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean`, each on `[propext, Classical.choice, Quot.sound]`, no assumption in hypothesis form, no outside theorem — over the release's palette lemmas ported with their proofs (`Outside/OAI158…`, FS132-K1 and FS132-I2). Statements FS132-K2's (the four-point ring form FS132-L2's, by a ruling). **Every step M1–M9 is checked by the kernel**: M1–M3 `State` (FS132-I4); M4–M6 `Tips`, with M6's count as 64 patterns by `decide` (FS132-I4); M7 `Shift` — the unit-pair relation in the direction used (`dist_chart_chart_shift`), the sign (`shift_pos`), the bounds (`exists_shiftBounds`), with no derivative computed and the square's side not explicit (FS132-I3) — and its null sets, `ChartMeasure.unitPair_chart_ae`, by the partner point's motion on its unit circle, with no inverse function theorem (FS132-I4); M8 `StepLemma.step_lemma`, Lemma S along the planner's variant — a dyadic window, a base point of four density points (FS132-I3) — and (†), `Kill.no_double_change` (FS132-I4); M9 `Kill.step_kill` (FS132-I4). Three hypotheses of the skeleton were idle and are dropped: `X ≠ Y` in the ring form's reduction, `0 < κ'` in (†), measurability of the state in M9; two more in the step lemma's module (`u < w` in `exists_shiftMap`; measurability of the set in `volume_change_pairs_pos`). **Not kernel**: the statement on an open set containing the closed unit disc (M0's local reading of the release's two proofs stays [hand], one mind), and C132-M-EMPTY.
+
 **Side: arc-free (α).** Hypothesis (i) asks an outside label in almost every palette near all six orbit directions. It
 fails where the centre's own labels fill the ring near one of them: at every change point of the held fragments'
 four-colour vertices at least two of the four germs at ±60° lie on (Q) arcs (control `positives-escape`), so nothing held
@@ -248,6 +250,8 @@ release's.
 
 Rests on it: C132-DIAG (§ 10). With C132-M-EXCL it leaves, at a four-cycle centre, "the mixed rings and a diagonal ring
 that does not alternate" (item 9) — the mixed ring is where every held positive lives (item 12).
+
+**2026-10-07, FS132-L2 — [kernel] at the whole plane**: `HadwigerNelson.SixRing.no_alternating_pairs` (`Plane/SixRing/TwoPairs.lean`), the standard three axioms, from the ported `two_state_impossible` through `no_alternating_groups`; the release's theorem read at six, not a result of this milestone. Its reading on an open set stays [hand], one mind.
 
 ## 2. One side of a unit circle: the strips, the shadow, the witnesses
 
@@ -555,6 +559,18 @@ S5 and S7 of C132-EXT-DISC carry over from a disc to a square, the statement fol
 and the release's cover lemma need not be ported (item 25). Whether those steps read the disc's shape is the comparison,
 one short stage, that nobody has done. **Side: no side.**
 
+*Correction, dated 2026-10-07 (filed by FS-124's record job, FS124-Z1; sources: `data/fs132/claims.md`,
+the dated line "2026-10-07 (after FS132-K2's Stage 6, commit `34ba3019` on branch `fs132-wk1`; FS-132 inventory item 39)";
+`plans/FS132-close-inventory.md` item 39, ruling (b)):* the comparison that the paragraph above says "nobody has done" has been
+made, by the kernel planner's successor — "at the grade of a checking reading, one mind, with the argument open". It read the
+first deriver's steps against its predecessor's route: the route is that deriver's steps S5 and S7 with S6 exchanged for this
+library's covering theorem for the square, "and on this reading only S6 reads the region's shape … I see no step left to derive".
+**The verdict stays "gap"** — "until a deriver's entry or a kernel proof stands" (the claim list); "C132-CORES-SQUARE stays a gap,
+with the comparison on record as a checking reading" (ruling 39 (b)). A fact for whoever formalizes it, from the same line: "the
+release's Lean mesh theorem refutes connected sets joining points more than 2 apart, where the hand argument proves every
+threshold above 1; re-typed as it stands the kernel would hold a square of side above 2 — a disc of radius above √2, less than
+C132-CORES-FREE claims". The entry's statement, verdict, grade and count of minds are unchanged.
+
 derivation: C132-WIT-EX-FIN
   statement: let k ≥ 1 be an integer, c a weak measurable k-colouring of the plane and D a closed disc of radius greater than 1 containing finitely many cyclic centres of c; then there are a cyclic centre p in the interior of D, an integer ℓ with 3 ≤ ℓ ≤ k, distinct labels i_0, …, i_{ℓ−1} forming a cycle of the transition graph of p, and points q_0, …, q_{ℓ−1} other than p such that for each j modulo ℓ the supports H_{i_j} and H_{i_{j+1}} both miss Δ({p, q_j}) and both contain p and q_j
   uses only: C132-EXT-DISC (`plans/FS132-E1-derivation.md` Stage 3) — its clause (1) for a point q_j of K_j on the circle of radius ρ about p, clause (3) with Δ({p, q_j}) ⊂ Δ(K_j), clause (4) for the two anchors, clause (5) for the cycle
@@ -756,6 +772,22 @@ each of their common unit points in the open set. **Side.** Read as an exclusion
 it is **arc-free (β)**. Read as stated, **its conclusion is the hard case**: fragment T2 realizes it, with three of its
 six edge sets arcs of the unit circle about the crossing point (control `seam-fragments`). It carries C132-COMP (§ 10).
 The sharpening it gives `LEDGER.md` row 133 is drafted from E4's report in `plans/FS132-Z1-record.md` § 5.
+
+*Correction, dated 2026-10-07 (filed by FS-124's record job, FS124-Z1; sources:
+`plans/FS124-E2-derivation.md`, the entry C124-FORCED-PIECES and Stage 5's "Read against the card"; `LEDGER.md` row 157's
+sentence "Since FS-124's second round"):* **as stated, this entry's conclusion is met by a one-point set.** A compact set `K_j`
+containing `x` may be `{x}` alone, and `x` lies on the unit circle about `w`. In the second deriver's words, C132-COMP-SHARP "is
+the statement on exclusion sets, whose conclusion a one-point set satisfies" (C124-FORCED-PIECES, *prior art*); and fragment S1
+is a held instance in this entry's setting — "S1 meets its hypothesis with the one-point set `{x}` as the set on the circle —
+which is also why its conclusion there carries no arc" (said of C124-HALF, whose hypothesis is this entry's setting with exactly
+one set on that circle). So the sentence above, "force one of the six edge sets onto the unit circle about each of their common
+unit points", forces no arc where the set is a point. **The statement with content is on pieces** (C124-FORCED-PIECES; derived
+from C124-TYPE, [hand], one mind, kernel pending; `plans/FS124-derivation.md` § 3): "Let c be a weak six-colouring of U, (x, y) a
+close complementary pair of three-piece points, each with a decomposition, and w a common unit point of the pair lying in U. Then
+x or y separates at w: one of its pieces lies in the closed unit disc about w and another is disjoint from the open unit disc
+about w; the edge of those two pieces lies on S(w)." For sector points an arc of an edge lies on that circle (C124-FORCED); for
+three-piece points by the letter the arc form is refuted (C124-FORCED-AS-POSED: at a bowtie the edge of the two pieces can be the
+member alone). This entry's statement, verdict, grade and count of minds are unchanged.
 
 control: seam-fragments
   of: C132-COMP-SHARP — the four held seam fragments of FS110-FRAGS, both common unit points: the labels the blocking rule excludes, read off each fragment's own edges at its two centres, against the labels found near the points; FS110-Y's checker beside it; in T2, the edge sets on the unit circle about w

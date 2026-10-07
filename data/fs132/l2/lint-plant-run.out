@@ -1,0 +1,14 @@
+planted: 1 line(s)
+==> build: OK — 479 of 479 batches, 2 module(s) rebuilt, 0 module(s) with warnings, 8m54s
+    full output: build/gate/build/20261007T152202Z-2937512.log
+EXIT=0
+LINT CONTROL FIRED: exit 1, the plant named
+54:[Proofs] - synTaut: (2/2) Failed with 1 messages, but these may include declarations in `nolints.json`.
+58:[Proofs] - unusedArguments: (2/2) Failed with 1 messages, but these may include declarations in `nolints.json`.
+70:/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/Proofs/HadwigerNelson/Plane/SixRing/TwoPairs.lean:67:1: error: @zz_l2_lint_plant LHS equals RHS syntactically
+76:/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/Proofs/HadwigerNelson/Plane/SixRing/TwoPairs.lean:67:1: error: @zz_l2_lint_plant 1 unused argument:
+restored digest: 4289be8518041990c762684b68517b75999bf6210151aa9a2ef996b2d327e56a
+digest before:   4289be8518041990c762684b68517b75999bf6210151aa9a2ef996b2d327e56a
+RESTORED: the module is the text it was
+plant's name in the file: 0 time(s)
+tracked files modified: 0
