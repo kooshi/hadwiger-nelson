@@ -1,0 +1,5 @@
+control (a theorem closed by sorry prints sorryAx): fired
+control (a theorem on a planted axiom prints it):   fired
+51 theorems written in the module; 51 printed on a subset of ['Classical.choice', 'Quot.sound', 'propext']; 0 failing
+RESULT: PASS
+EXIT 0

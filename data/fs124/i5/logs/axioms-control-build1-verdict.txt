@@ -1,0 +1,30 @@
+NOT PRINTED  HadwigerNelson.Plane.polarPt_add_turn
+NOT PRINTED  HadwigerNelson.Plane.fin_three_eq_or_of_ne
+NOT PRINTED  HadwigerNelson.Plane.exists_ne_ne_fin_three
+NOT PRINTED  HadwigerNelson.Plane.fin_three_add_one_ne
+NOT PRINTED  HadwigerNelson.Plane.IsTriodCut.mem_diff_of_mem
+NOT PRINTED  HadwigerNelson.Plane.IsTriodCut.exists_mem_piece
+NOT PRINTED  HadwigerNelson.Plane.IsTriodCut.eq_of_mem_of_mem_closure
+NOT PRINTED  HadwigerNelson.Plane.IsTriodCut.closure_piece_subset_closedBall
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.piece_subset_ball: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.disjoint_iUnion_range: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.exists_unique_mem_closure: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.closure_inter_closure_subset: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.exists_forall_rimArc: ['sorryAx']
+NOT PRINTED  HadwigerNelson.Plane.IsTriodCut.disjoint_range_union_range
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.ne_of_rimOrder: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.exists_rimPieces: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.closure_inter_nonempty: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.isPreconnected_closure_inter: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.rimPiece_spec: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.exists_opposite: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.exists_range_subset: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.closure_inter_closure_inter_ball: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.mem_closure: ['sorryAx']
+NOT CLEAN    HadwigerNelson.Plane.IsTriodCut.exists_arc: ['sorryAx']
+control (a theorem closed by sorry prints sorryAx): fired
+control (a theorem on a planted axiom prints it):   fired
+the print holds the word `error`
+51 theorems written in the module; 27 printed on a subset of ['Classical.choice', 'Quot.sound', 'propext']; 25 failing
+RESULT: FAIL
+EXIT 1

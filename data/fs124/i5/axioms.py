@@ -6,6 +6,8 @@
                      theorem closed by `sorry`, and a theorem resting on a local axiom
   axioms.py check <output>   read the print: every module theorem must be printed, on a subset of the standard three;
                      the two controls must print `sorryAx` and the planted axiom.  exit 0 iff so.
+  axioms.py block    write data/fs124/i5/axioms-block.lean: the draft of the module's block for `scripts/Axioms.lean`
+                     (CLEAN section), one record per theorem of the module — a draft for the landing, not applied here
 Run between:  lake env lean data/fs124/i5/lean/Axioms.lean > <output>
 """
 import sys, re, pathlib
@@ -64,6 +66,21 @@ def check(path):
     print("RESULT:", "PASS" if ok else "FAIL")
     sys.exit(0 if ok else 1)
 
+def block():
+    ns = names()
+    body = ["/-! ## FS124-I5 — three arcs from a point of a disc to its rim (planned by FS124-K3): `Plane/ThreeArcs`. Pure plane",
+            "topology, no colouring and no measure: the closed disc is unicoherent; the θ-lemma `IsTriodCut.exists_opposite` (given",
+            "three open preconnected pairwise disjoint sets filling the disc less three arcs from its centre to its rim, each arc",
+            "lies in the closures of exactly two of them and every two share one) and the form `ThreePiece.IsSector.hasArcEdges`",
+            "reads, `IsTriodCut.exists_arc`. No import and no declared hypothesis: every record is CLEAN. -/",
+            "-- FS124-I5: Plane/ThreeArcs"]
+    body += [f"#print axioms {n}" for n in ns]
+    body += ["-- FS124-I5 block end", ""]
+    out = ROOT / "data/fs124/i5/axioms-block.lean"
+    out.write_text("\n".join(body))
+    print(f"wrote {out.relative_to(ROOT)}: {len(ns)} records")
+
 if sys.argv[1] == "gen": gen()
+elif sys.argv[1] == "block": block()
 elif sys.argv[1] == "check": check(sys.argv[2])
 else: sys.exit(__doc__)
