@@ -7,9 +7,15 @@ value of χ(ℝ²).** Gate: `python3 ../.claude/skills/ephodos/scripts/derive_ga
 
 ## Theorems this phase proved
 
-*(Filled stage by stage; each line: the entry, its verdict and grade, its address below.)*
+*(Each line: the entry, its verdict and grade, its address below. One mind each; kernel pending.)*
 
-- Stage 0, Stage 1: none (readback; the opening).
+- Stages 0–2: none (readback; the opening; recognition).
+- **C137-BUDGET** — derived, [hand] — Stage 3, § Argument — two corners cross.
+- **C137-THREE** — derived, [derived] from C136-CLASS (inherited) — Stage 4, § Argument — at most 2 − s corners cross.
+- **C137-SIXTY** — derived, [derived] from C136-FORCED and C124-SHADOW-OPEN (inherited) — Stage 5, § Argument — two forced sides 60° apart.
+- **C137-OWN** — derived, [derived] from C136-FORCED and C136-TABLE (inherited) — Stage 6, § Argument — a forced side along a connected set.
+- **C137-MEET** — derived, [derived] from C136-TABLE (inherited); a rewording — Stage 7, § Argument — the table, cell by cell.
+- **C137-RING** — **no verdict**: stopped before its stage (§ Stopped at).
 
 ## Stage 0 — SAVED: the readback, and the kernel lane's relay
 
@@ -503,3 +509,81 @@ other than `b`, in `Π_2`, hence a label of `F_2` pure on its side there. ∎
 **Theorems this stage proved**: C137-MEET — derived from C136-TABLE (inherited), one mind; no new mathematics.
 
 ## Stage 7 — SAVED
+
+## Stopped at — 2026-10-07, 20:55 UTC (the coordinator's wind-down: the budget, not the work)
+
+**Saved through Stage 7. Five of the six claims have a verdict; the sixth has none.** Gate on this record at the stop:
+`GATE: PASS (0 failures, 4 warnings)` (`data/fs137/e1/gate-stage7.txt`; the four warnings are "derived from an entry of
+another file" — C136-CLASS, C136-FORCED twice, C136-TABLE). Nothing this record cites lives outside the repository.
+
+| claim | verdict | where |
+|---|---|---|
+| C137-BUDGET | **derived** ([hand], one mind) — pointwise; two sentences of the card corrected | Stage 3 |
+| C137-THREE | **derived** (from C136-CLASS, inherited; one mind) — the geometric step of the held statement, at any number of corners | Stage 4 |
+| C137-SIXTY | **derived**, stronger than posed (from C136-FORCED, C124-SHADOW-OPEN; one mind) — 120°, either side | Stage 5 |
+| C137-OWN | **derived** (from C136-FORCED, C136-TABLE; one mind) — no instance held with more than one point | Stage 6 |
+| C137-MEET | **derived** (from C136-TABLE; one mind) — a rewording, no new mathematics | Stage 7 |
+| C137-RING | **no verdict** — not started as a stage; statement fixed (§ 1.3); its control written and run | below |
+
+### What is known about C137-RING (one mind; **not an entry, no verdict**; a successor starts here, not cold)
+
+**The statement** is fixed in § 1.3 and was sent to the coordinator. **The argument I would write** (three steps; I
+believe each, none is gated):
+
+1. *A crossing corner's label is absent across.* Let `C` be a corner of `F` crossing at `y`, with label `a`. At every
+   radius `C` has a non-empty open set of points strictly inside `S(y)` and one strictly outside (not inner, not
+   outer). C136-TABLE at the point `x` (which is in `U`) with the one member `y` and the parts of the corners of `G` as
+   its family: almost every point `z` near `x` has a label which, if it is a label of `G`, is inner-pure at `x` for `G`
+   when `|z − y| < 1` and outer-pure when `|z − y| > 1`. Almost every point of `C` near `x` has the label `a`, on both
+   sides; so if `a` were a label of `G`, every corner of `G` with the label `a` would be inner and outer at `x`, i.e. its
+   small parts would lie on `S(x)` — impossible for a non-empty open set.
+2. *The count at one point.* By C137-THREE the crossing corners number at most `2 − s`; if every corner of `F` has
+   angle less than 180° no corner holds both branches strictly (it would hold both tangent directions), so they number
+   exactly `2 − s` (each branch that is not an edge is strictly inside one corner, and the two are different). With one
+   corner for each label their labels are `2 − s` distinct labels of `F`, none a label of `G`: `|L(G)| ≤ k − 2 + s`.
+3. *The sum.* Add over `y_1, …, y_n`. A branch of `S(y_j)` at `x` that is an edge of `F` is a unit arc from `x` centred
+   `y_j`: an edge of `F` is such a branch for at most one `j` and one branch. So `Σ s_j = a ≤` the number of edges `= m`.
+
+**Its control is written and was run** (`python3 data/fs137/e1/budget.py ring`, 13 s, exact classes; output
+`data/fs137/e1/out/ring.txt`; fault `--fault=cross`, which gives 21 label violations on R7 and 80 on the strip):
+
+- **No violation on R7 or on any point a held object holds** — so no defect: crossing corners with a label of the far
+  point: 0 of 66 (R7), 0 of 580 (the strip), 0 of 140 (the disk), 0 of 84 (FS116-Y2-SIXFRAG), 0 of 72
+  (FS114-Y2-BOWTIE), over every unit pair of cornered vertices with the first full.
+- **R7 meets the count with equality at seven, everywhere**: all 66 lattice pairs have `k − 2 + s − |L(G)| = 0`
+  (`s = 1`, six labels across), and round a full ring `36 = 5·6 + 6`.
+- At six the least slack per pair is 0 on the strip (16 pairs), the flower (6) and the bowtie fragment (10), 1 on the
+  disk; the least ring slack is 8, 1, 6, 6 (the object's vertices at unit distance from a vertex, not a full ring).
+
+**What it says about the card's ask, as far as I got** (to be written as the entry's prose, and attacked first):
+
+- It is **a count every colouring with these corners satisfies, tight on R7 at seven** — the relation "between the
+  numbers of labels at a point and at the points of its ring" the structural form asks for.
+- It is **not the card's inequality**: at six many assignments meet it. *By hand, not run*: seven points on straight
+  two-label edges, the centre with labels `{1, 2}` and the ring alternating `{3, 4}`, `{5, 6}`, meet it with room and
+  leave every cell at the nineteen lattice points a label — so "corners at all seven and no empty cell" excludes
+  nothing; a successor should make this a control before saying it.
+- **What it does exclude at six**: R7's pattern — a centre with five labels on five corners (angles under 180°) and six
+  points of its ring with five labels each (`30 > 4·6 + 5`); in general every cornered ring point with `k − 1` labels
+  costs the centre one edge along that point's unit circle, and one with `k` labels two. *By hand*: on a unit
+  triangular lattice of such vertices with one common number `μ` of labels, `μ ≤ 6(k − 2)/5` — 6 at seven (R7), 4.8 at
+  six.
+- **Held for maps, to cite, not to claim**: step 1 at the hubs of a four-colour vertex is FS116-N2-STAR / -ANTI ("the
+  tile holding δ has its colour missing at both points of ω(p) at δ ± 90°"); a ring of four-label points with no edge
+  along a neighbour's unit circle dies as FS116-N2-HEX6 does (three tangent lines would need three disjoint pairs of
+  the centre's four labels). The sum with the unit-arc term was not found held.
+- **So the card's third branch is the one the count supports**: a rich ring fits only with unit-arc edges, one per rich
+  ring point. Whether such a ring exists at first order is a choice among assignments — `search request`s for lines 15
+  and 21, with three screens: C137-RING per pair (`|L(u) ∖ L(v)| ≥ 2 − s`), `Σ s ≤` edges, and C137-SIXTY.
+
+**What a successor does, in order**: (1) write Stage 8: the entry `derivation: C137-RING` with the statement of § 1.3
+verbatim, the argument above checked line by line, the control `ring-held` (`run:` as above, `expect:` the five lines
+of `data/fs137/e1/out/ring.txt`, `fault: … ring --fault=cross`), and the prose of the list above; (2) a control for the
+slack assignment; (3) run the gate; (4) score the predictions (plan: P1–P4 are met as far as run — the scan read 720°
+and 540° at all four five-label points; 120° derived; no own-label arc held; P5's control half is met, its verdict
+half is open; P6 unscored); (5) the sweeps and the report in standing rule 11's form.
+
+**Found on the way, for the coordinator** (each also in the report): the bowtie fragment's two unscanned five-label
+points have collar arcs too (eight arcs of exactly 60° at four points; sent at once); G100's "extent is forced in one
+way" is narrower than C137-OWN (a rewrite is the record job's to draft); the card's "whatever the corners" and "one
+label fewer on every side" are corrected under C137-BUDGET.
