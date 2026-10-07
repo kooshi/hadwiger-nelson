@@ -159,3 +159,39 @@ port's device). Every claim above is from `build.sh`.
 **What these theorems rest on that is not yet proved** (so `#print axioms` shows `sorryAx` on some of them until lots
 A and B land; the last stage prints each): `chart_eq_angularSum`, `continuous_chart`, `chart_hub`, `dist_chart_lt_one`,
 `dist_chart_centre` (`Chart`, unassigned) and `dist_chart_chart_shift`, `measurable_shift` (`Shift`, FS132-I3's).
+
+## Stage 4 — SAVED (FS132-I4): the relation with no double change, and the kill
+
+**Proved at this stage** (`Plane/SixRing/Kill`; the module has no `sorry` of its own, and `chart_step_false`, the
+planner's proof, now stands on proved leaves of this module):
+
+| leaf | route as built | against the planner's route |
+|---|---|---|
+| `no_double_change` | the first hub's statement along the projection `(α, d, d') ↦ (α, d)`; the second hub's along the shear to `(α + ε + d', d')` (`HubColours.ae_partner`, from `HubColours.shift_back`: the second hub in the coordinates `(β, d')`, `β` the chart angle less `π/3`); where both pairs are split each point carries `b`; `unitPair_chart_ae` | as planned |
+| `step_kill` | `step_kill_left` (the step falls: `θ ∈ S ↔ θ < t`) and the same after `HubColours.swap` (the two outside labels exchanged, `S` replaced by its complement; a rising step of `S` is a falling step of `Sᶜ` off the null set `{t}`). In `step_kill_left`, with `κ_3 = κ'/128`: (a) at the triples with `t − κ_3 < α < t`, `0 < d < κ_3`, `t − α < d' < 16(t − α)` the partner carries `b`, so `Z(α, d)` does not; Fubini over `d'` (`exists_mem_Ioo_of_ae`) gives it for almost every `(α, d)`; (b) so `V_0` carries `Y`; (c) the same from the other side at the triples with `h' = α + ε − t ∈ (0, κ_3)`, `h' < d < 16h'`, carried to the coordinates `(β, d', d)` by a measure-preserving shear and an exchange of the last two coordinates, then Fubini over `d`; so `V_1` carries `Y`; (d) for almost every triple with `0 < d, d' < κ'/256` and `t − ε < α < t` both points carry `Y` and are a unit pair: impossible, and for each `(d, d')` that set of `α` is an interval of length `ε > 0` | the derivation's (a)–(d) and the planner's constants (`κ_3 = κ'/128`); the planner's "as `no_double_change`, twice; `Measure.ae_prod_iff_ae_ae`; both orientations by the symmetry `(X, Y, S) ↔ (Y, X, Sᶜ)`" — as planned |
+
+**Statements changed, each under the planner's permission (1)** (a hypothesis the proof does not use):
+- `no_double_change`: `(hκ' : 0 < κ')` dropped (for `κ' ≤ 0` the box is empty). Call site changed: `chart_step_false`,
+  in the same file (one argument removed).
+- `step_kill`: `(hS : MeasurableSet S)` dropped — the proof asks measurability only of sets cut out by the colouring
+  and the chart, never of `S` (FS132-I3's relay had said the step lemma needs no measurability of the shift; this is
+  the same observation one step later: the kill needs none of `S`). Call site changed: `chart_step_false`, in the
+  same file (one argument removed; `chart_step_false` keeps its own `hS`, which `step_lemma` reads).
+
+No other statement of the skeleton was changed by this job. **All sixteen leaves of the brief are proved.**
+
+**Helpers added** (permission 3): in `Kill`: `HubColours.swap`, `HubColours.shift_back`, `HubColours.ae_partner`,
+`step_kill_left`; in `NullSets`: `exists_mem_Ioo_of_ae`.
+
+**Two things met on the way** (for a successor on these files): `tauto` exhausts its heartbeats in the context of
+`no_double_change` (a dozen hypotheses, two of them long implications) — the two case splits are written out; and
+`rw` with `Measure.ae_prod_iff_ae_ae` does not find its pattern after a `filter_upwards` has beta-reduced the goal —
+the lemma is applied by `refine (… (p := fun w => …) …).mpr ?_` with the predicate named.
+
+**Built**: `build.sh` under the slot — **exit 0**, 8 modules rebuilt, 9m16s, **44 `sorry` warnings**: `Chart` 11,
+`CyclicCentre` 3, `Shift` 7, `Tips` 7, `Winding` 16 (`data/fs132/i4/logs/build-4-kill.out`); none in any module this job
+proves. `tools/check_architecture.py`: PASS (`logs/arch-4.out`).
+
+**The coordinator's Amendment 1, received as this build ended** (the brief's last section, 2026-10-07 13:44 UTC):
+merge the tip of `fs132-wi3` (`e9dd2f46`: the shift's module proved too) and replace the words of the two
+`ARCHITECTURE.md` rows that still say "SKELETON" by that record's draft 1. Done at stage 5.

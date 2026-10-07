@@ -7986,6 +7986,60 @@ implementers' blocks did not list. Read from the kernel's own list of the librar
 #print axioms HadwigerNelson.Outside.OAI158.mem_spatialSupport_ae
 -- FS132-I2: end of the block
 
+/-! ## FS132-I4 — the join of the port under the exclusion's skeleton: the leaves on the ported lemmas (`Plane/SixRing/State`, `Excl`), the null sets
+through the chart and the kill (`ChartMeasure`, `Kill`), their helpers (`NullSets`); and the two-pair ring, complete at the join. No axiom, no outside
+theorem. Until the leaves of `Plane/SixRing/Chart` and `Shift` are proved, the records that stand on them read `sorryAx`
+(`data/fs132/i4/axioms/check.out` lists each with the leaves it stands on) -/
+-- FS132-I4
+-- Plane/SixRing/NullSets
+#print axioms HadwigerNelson.SixRing.shear_measurePreserving
+#print axioms HadwigerNelson.SixRing.quasiMeasurePreserving_triple_fst
+#print axioms HadwigerNelson.SixRing.quasiMeasurePreserving_triple_snd
+#print axioms HadwigerNelson.SixRing.quasiMeasurePreserving_triple_add
+#print axioms HadwigerNelson.SixRing.change_of_ae_flip
+#print axioms HadwigerNelson.SixRing.exists_inter_pos_of_ae_union
+#print axioms HadwigerNelson.SixRing.volume_preimage_inter_le_hausdorff
+#print axioms HadwigerNelson.SixRing.lipschitzWith_add_e
+#print axioms HadwigerNelson.SixRing.hausdorffMeasure_add_e_image_eq_zero
+#print axioms HadwigerNelson.SixRing.exists_mem_Ioo_of_ae
+#print axioms HadwigerNelson.SixRing.exists_pos_forall_le
+-- Plane/SixRing/Excl
+#print axioms HadwigerNelson.SixRing.ae_real_of_ae_angles
+#print axioms HadwigerNelson.SixRing.volume_liftPalette_ne_zero
+#print axioms HadwigerNelson.SixRing.exists_change_of_ae_outside
+-- Plane/SixRing/ChartMeasure
+#print axioms HadwigerNelson.SixRing.chartAngles_quasiMeasurePreserving
+#print axioms HadwigerNelson.SixRing.chart_quasiMeasurePreserving
+#print axioms HadwigerNelson.SixRing.shear_quasiMeasurePreserving
+#print axioms HadwigerNelson.SixRing.ae_ne_of_not_isTip
+#print axioms HadwigerNelson.SixRing.ringRadius_sub_ge
+#print axioms HadwigerNelson.SixRing.ringRadius_pos
+#print axioms HadwigerNelson.SixRing.volume_partner_direction_eq_zero
+#print axioms HadwigerNelson.SixRing.unitPair_chart_ae
+-- Plane/SixRing/State
+#print axioms HadwigerNelson.SixRing.measurableSet_liftPalette
+#print axioms HadwigerNelson.SixRing.OutsideOrbit.ae_mem_or
+#print axioms HadwigerNelson.SixRing.OutsideOrbit.ae_add_mem_or
+#print axioms HadwigerNelson.SixRing.OutsideOrbit.ae_iff_not
+#print axioms HadwigerNelson.SixRing.OutsideOrbit.ae_flip
+#print axioms HadwigerNelson.SixRing.OutsideOrbit.change_at
+#print axioms HadwigerNelson.SixRing.OutsideOrbit.chart_avoids
+#print axioms HadwigerNelson.SixRing.ae_chart_colour_mem
+#print axioms HadwigerNelson.SixRing.exists_tip
+#print axioms HadwigerNelson.SixRing.OutsideOrbit.hubColours
+#print axioms HadwigerNelson.SixRing.OutsideOrbit.hubColours_flip
+-- Plane/SixRing/Kill
+#print axioms HadwigerNelson.SixRing.HubColours.swap
+#print axioms HadwigerNelson.SixRing.HubColours.shift_back
+#print axioms HadwigerNelson.SixRing.HubColours.ae_partner
+#print axioms HadwigerNelson.SixRing.no_double_change
+#print axioms HadwigerNelson.SixRing.step_kill_left
+#print axioms HadwigerNelson.SixRing.step_kill
+-- Plane/SixRing/TwoPairs (FS132-K2's proofs; sorry-free since the join: the ported `two_state_impossible` and `ae_real_of_ae_angles`)
+#print axioms HadwigerNelson.SixRing.no_alternating_groups
+#print axioms HadwigerNelson.SixRing.no_alternating_pairs
+-- FS132-I4: end of the block
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

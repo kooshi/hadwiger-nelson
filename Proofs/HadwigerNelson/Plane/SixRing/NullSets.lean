@@ -17,7 +17,8 @@ Hausdorff measure in the plane.
 * `volume_preimage_inter_le_hausdorff`, `lipschitzWith_add_e`, `hausdorffMeasure_add_e_image_eq_zero` — an expanding
   map from a set of the line onto an arc of a unit circle pulls null sets of directions back to null sets (the
   derivation's step M7, "for fixed `z` the point `z′` moves along the unit circle about `z`").
-* `exists_pos_forall_le` — finitely many positive numbers have a positive lower bound.
+* `exists_mem_Ioo_of_ae` — an almost-everywhere statement holds somewhere in every interval (the Fubini sections of
+  the kill, step M9); `exists_pos_forall_le` — finitely many positive numbers have a positive lower bound.
 -/
 
 open MeasureTheory Set
@@ -178,6 +179,12 @@ theorem hausdorffMeasure_add_e_image_eq_zero (z : ℂ) {N : Set ℝ} (hN : volum
   have h := (lipschitzWith_add_e z).hausdorffMeasure_image_le (by norm_num : (0 : ℝ) ≤ 1) N
   rw [hausdorffMeasure_real, hN, mul_zero] at h
   exact nonpos_iff_eq_zero.mp h
+
+/-- A statement that holds for almost every real number holds at some point of every non-empty open interval. -/
+theorem exists_mem_Ioo_of_ae {a b : ℝ} (hab : a < b) {P : ℝ → Prop} (h : ∀ᵐ x : ℝ, P x) : ∃ x ∈ Ioo a b, P x := by
+  refine Measure.exists_mem_of_measure_ne_zero_of_ae ?_ (ae_restrict_of_ae h)
+  rw [Real.volume_Ioo, Ne, ENNReal.ofReal_eq_zero, not_le]
+  linarith
 
 /-- A positive lower bound for finitely many positive numbers. -/
 theorem exists_pos_forall_le {ι : Type*} [Finite ι] {κ : ι → ℝ} (h : ∀ i, 0 < κ i) :

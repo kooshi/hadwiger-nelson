@@ -1,0 +1,50 @@
+# FS132-I4: every theorem this job proved (39), then the theorems of other hands that its proofs complete or feed.
+# column 1: kind  (leaf = one of the brief's sixteen; helper = added by this job; planner = proved by the planner
+#                  from leaves, listed because this job's leaves are under it)
+# column 2: the declaration, in the namespace HadwigerNelson.SixRing
+helper shear_measurePreserving
+helper quasiMeasurePreserving_triple_fst
+helper quasiMeasurePreserving_triple_snd
+helper quasiMeasurePreserving_triple_add
+helper change_of_ae_flip
+helper exists_inter_pos_of_ae_union
+helper volume_preimage_inter_le_hausdorff
+helper lipschitzWith_add_e
+helper hausdorffMeasure_add_e_image_eq_zero
+helper exists_mem_Ioo_of_ae
+helper exists_pos_forall_le
+leaf ae_real_of_ae_angles
+helper volume_liftPalette_ne_zero
+leaf exists_change_of_ae_outside
+helper chartAngles_quasiMeasurePreserving
+leaf chart_quasiMeasurePreserving
+leaf shear_quasiMeasurePreserving
+leaf ae_ne_of_not_isTip
+helper ringRadius_sub_ge
+helper ringRadius_pos
+helper volume_partner_direction_eq_zero
+leaf unitPair_chart_ae
+leaf measurableSet_liftPalette
+helper OutsideOrbit.ae_mem_or
+helper OutsideOrbit.ae_add_mem_or
+leaf OutsideOrbit.ae_iff_not
+leaf OutsideOrbit.ae_flip
+leaf OutsideOrbit.change_at
+leaf OutsideOrbit.chart_avoids
+helper ae_chart_colour_mem
+leaf exists_tip
+leaf OutsideOrbit.hubColours
+leaf OutsideOrbit.hubColours_flip
+helper HubColours.swap
+helper HubColours.shift_back
+helper HubColours.ae_partner
+leaf no_double_change
+helper step_kill_left
+leaf step_kill
+planner no_alternating_groups
+planner no_alternating_pairs
+planner chart_step_false
+planner adjacent_tip_false
+planner no_outside_orbit_points
+planner no_outside_orbit
+planner not_ae_outside
