@@ -1,0 +1,20 @@
+OK	plans/FS131-close-inventory.md	619. **EXT-OAI1 done: the outside release's Lean proof that the plane 
+OK	plans/FS131-close-inventory.md	629. **FS132-I1 done at its Stage 4: the import is a module of this li
+OK	data/external/EXT-OAI1-request.md	> 1. port or import: let's import and adopt parts piecemeal if needed.
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI	axiom no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI	axiom proper_to_borel_weak {k : ℕ} [NeZero k] {c : ℂ → Fin k} (hc : Pr
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI	theorem weakColoring_iff_unitPairsNull {k : ℕ} {d : ℂ → Fin k} (hd : M
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI	theorem chromaticNumber_plane_six_or_seven :
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI	theorem chromaticNumber_plane_eq_chiM0 : (unitDistance ℂ).chromaticNum
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/data/fs132/i1/extra/seven-criteri	theorem seven_le_chromaticNumber_plane_iff :
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/data/fs132/i1/extra/seven-criteri	7 ≤ (unitDistance ℂ).chromaticNumber ↔ (⨆ ε > (0 : ℝ), Plane.mu 6 ε) <
+OK	CLAUDE.md § The aim	5. **So Hadwiger–Nelson is one question: can vanishing holes save the 
+OK	CLAUDE.md § Trust ledger	as a set); the current audit reads 6521 clean and 5 declared purchases
+OK	CLAUDE.md § Trust ledger	**What the library assumes, in both forms** (`scripts/assumptions.sh`,
+OK	CLAUDE.md § The gate	`declarations=14807 refutations-skipped=215 sites=1446`, `vacuous=0 st
+  source /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158.lean: 5
+  source /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/data/fs132/i1/extra/seven-criterion.lean: 2
+  source CLAUDE.md: 4
+  source data/external/EXT-OAI1-request.md: 1
+  source plans/FS131-close-inventory.md: 2
+quotations: 14  mismatches: 0  root: /home/kooshi/source/lean-dir
