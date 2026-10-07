@@ -1,0 +1,9 @@
+trial 3: HEAD=0219036b936f4e85285874d7143739c9a722c2b9 against ac7dee7bd15f014e93287b4ad14ec4486ce13596, 2026-10-07T17:22:44Z
+bc3b7b7a02a381a80fced4dc65b8c224f9eb781d
+merge-tree exit=0
+paths main changes since the commit merged at stage 2 (98738509), outside plans/ data/ .claude/ BIBLIOGRAPHY.md LEDGER.md LEAN.md RUNNING.md:
+0
+      1 BIBLIOGRAPHY.md
+     34 data
+      1 LEAN.md
+      8 plans
