@@ -26,7 +26,32 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
-## 0d. READ THIS FIRST — written at 20:44 UTC, 2026-10-07, just before a compaction Kooshi asked for (the second today)
+## 0e. READ THIS BEFORE § 0d — THE WIND-DOWN (20:47 UTC, 2026-10-07): every job asked to stop
+
+Kooshi, after the compaction: "[…], and need to wind down. Make sure all agents come to a
+stopping point, and everything important is out of /tmp." **His idea from the puzzle is still unheard — ask for it first
+when work resumes.** § 0d below is the state the wind-down started from; this section says what changed.
+
+- **All three running jobs were asked by message (20:47 UTC) to stop at a saved stage**: finish only what is minutes from
+  done, write a dated **"Stopped at"** section in their record (what is committed and at which commit, what is left in
+  order, what they know about what is left), copy anything cited from a temp directory into `data/fsNNN/<job>/`, commit
+  by explicit path, push, hand back in a few lines. **A successor's first read for each job is that section.**
+  - the landing of FS-124's second module (FS124-L2; worktree and branch `fs124-wi3`; record `plans/FS124-L2-landing.md`
+    on its branch): told to finish the land only if the final gate pass is already green or minutes away, with nothing
+    of the gate skipped; otherwise not to land. **Until its hand-back says "landed" or "not landed", § 0d's rule on
+    `main` holds.**
+  - FS-136's implementer (FS136-I1; worktree and branch `fs136-wk1`): leaves done and left are in its record's section.
+  - FS-137's deriver (FS137-E1; record `plans/FS137-E1-derivation.md` on `main`): three of six claims have verdicts
+    (C137-BUDGET, C137-THREE, C137-SIXTY — each derived, one mind; FS-137 inventory items 5–6, **none yet read by
+    me: read the three entries and re-run one control of each before anything is built on them**); C137-OWN, -MEET,
+    -RING are left.
+- **Out of /tmp**: the session's scratch directory and the loose temp files are copied to
+  `~/source/lean-dir-tmp-rescue-2026-10-07/` (524 MB; `scratchpad/`, `tmp-root/`); the agent-id file is there as
+  `scratchpad/agents.txt` (ids resume a job only inside this session). No record of FS-124, FS-136 or FS-137 cites a
+  temp path (searched 20:50 UTC).
+- **Nothing launches until Kooshi says the budget is back.** Then: his idea; then § 0d's list from each "Stopped at".
+
+## 0d. THE STATE THE WIND-DOWN STARTED FROM — written at 20:44 UTC, 2026-10-07, just before a compaction Kooshi asked for (the second today)
 
 **KOOSHI HAS AN IDEA TO DISCUSS, FIRST THING AFTER THE COMPACTION** — his words: "[…] I had
 an idea I'd like to discuss, after the compaction." Listen to it before anything else; it may bear on the finite plane at
