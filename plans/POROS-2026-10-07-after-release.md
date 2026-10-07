@@ -70,8 +70,8 @@ release, in the file of § 1.2 and here). An item too large to read whole says h
 - `M/` §§ 2–8 (4,304 lines of TeX) and `lean/OAI/Geometry/PlaneColoring` — read against: nothing; I rely on the reading and the audit — surprised: unread; "recalled, not read" for every statement of the release quoted in this record beyond `introduction.tex`
 - `/home/kooshi/source/math/CONTENTS.md`, the catalogue of 372 families — read against: E9 — surprised: no; sampled by `rg` on thirty phrases of this frontier's disciplines over family headlines; families named for a route, each **unread**: 085 (endpoint Sobolev regularity of centred disc averages — the release's approximants are thresholded disc averages), 096 (the Gaussian propeller conjecture — an extremal statement about measurable partitions whose optimum is a triple junction), 015 (torus-packet equidistribution over totally real fields, "combines measure rigidity" — beside row 120), 167 (a power saving for planar unit distances), 073 (the Falconer distance conjecture)
 - `plans/FRONTIER-STUBS.md`, the ranking (190 lines, 149 kB) — read against: the top twelve are the regularity wall's, most of the tail says "none on the answer", and some low row is suddenly at the frontier — surprised: yes; rank 37, FS-39 the bridge ("what is left, B2 (`RealAlgebraicDescent`, months)") has an alternative discharge in the release's transfer; sampled: header and rules whole, ranks 1–3 whole (the brief), ranks 4–51 at the first 210/420/330 characters of their stub, question and bearing cells, ranks 52–74 by title and bearing's first 110 characters; the closed list (ll. 120–190) unread
-- `plans/SESSION-HANDOFF-2026-10-06.md` §§ 2–4 and `plans/SESSION-HANDOFF-2026-10-07.md` — read against: E7 — surprised: unread; read at stage 4, for the backlog table
-- `plans/STUB-cp-plane-six.md`, `plans/STUB-q-ring.md`, `plans/STUB-qfree-ring.md`, `plans/STUB-forced-pair.md`, `plans/STUB-lateral-extent.md` — read against: nothing yet — surprised: unread; opened at stages 2 and 4 where a banner or a question section needs their words
+- `plans/SESSION-HANDOFF-2026-10-06.md` §§ 2–4 and `plans/SESSION-HANDOFF-2026-10-07.md` — read against: E7 — surprised: yes; the newer handoff's § 4 (ll. 85–101, read whole): "`Row130Collapse`, a named hypothesis of wave 9, is the statement the release's transfer proves"; the older one sampled: every line naming waves 6, 7, 9, 10 (24 lines), the rest unread
+- `plans/STUB-cp-plane-six.md`, `plans/STUB-q-ring.md`, `plans/STUB-qfree-ring.md`, `plans/STUB-forced-pair.md`, `plans/STUB-lateral-extent.md` — read against: nothing yet — surprised: unread; not opened: § 4.3's banners are drafted from the ranking's rows and the reading's § 5.4, and I rewrote no bearing section in them — a job owed (the report's inventory)
 - The conditions of the last reading: my ranking of 2026-10-03 (`plans/POROS-2026-10-03-fs129-rerank.md`) was made with "given MR" in front of the plane's equality and with the map step taken as the only road from a measurable colouring to a point with interfaces — read against: both premises were earned — surprised: yes; the first is removed by a theorem, and the second was a premise of the frame, never a result: row 140 called the map step at five "a reformulation, not a step toward six", and nobody asked what the exclusions consume
 
 ### 1.4 What is curious, and the invention signal
@@ -419,3 +419,90 @@ hunch: one-class-needs-no-redrawing
 § 2.6. (A correction owed, not a collision: row 129's and G80's "finite-graph killing test for MR" cannot fire if C133-ONE holds.)
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED
+
+### 4.1 The aim's six links (`CLAUDE.md` § The aim), each in one line
+
+| link | verdict | reason |
+|---|---|---|
+| 1. "Given MR, the plane is the measurable problem" | **unconditional now, for the plane; the field half keeps "given MR"** | `χ(ℝ²) = χ_m⁰(ℝ²)` at every `k` is `[OAIMath2026]` Thm 1.3 (the forward half kernel-checked in its library); `χ(F²) = χ(ℝ²)` at ℚ(√635087) and de Grey's field still rests on MR(F), which their rigidity "does not give … for any number field" (the reading § 2.2) |
+| 2. "Upper bounds need no MR" | **unchanged** | it never needed MR; note its direction (`χ ≤ χ_m⁰`) is the one *not* in the release's Lean (the audit l. 381) — it stands at [hand] here and in their manuscript |
+| 3. "Density cannot give six" | **unchanged in content; unconditional for the plane if FS-133 lands** | six was given by how classes fit — labels on a ring, the graph of adjacent classes, the nerve (the reading § 3.4) — never by one class's size |
+| 4. "Regular colourings need seven … maps need six" | **the "maps need six" half is answered by citation; the "seven" half is unchanged** | every measurable colouring proper at almost every unit pair needs six (Thm 1.4), Jordan boundaries included; this project's arc-map proof stands as a second route |
+| 5. "given MR, … one question: can vanishing holes save a colour?" | **unconditional now; answered at five; its "or `= 5`" clause is closed as a direction** | row 131 with Thm 1.3: `χ(ℝ²) = 7` iff `lim µ₆(ε) < 1`; `lim µ₅(ε) < 1` by Thm 1.4 |
+| 6. "Its tools are Voronov's circle topology made robust, and the density topology" | **re-aimed: a third tool, and a question about which class the exclusions need** | the release's nerve reaches a point with interface continua with no regularity; whether the six-colour exclusions need more is FS-132's card 1 |
+
+### 4.2 Every ranked stub of `plans/FRONTIER-STUBS.md`, each in one line (verdicts: answered / unconditional now / re-aimed / unchanged / closed as a direction)
+
+*"Unconditional now" means: every sentence of the row that reads "`χ(ℝ²) = 7` given MR" or "`χ(ℝ²) ≥ 6` given MR" loses "given MR";
+sentences about a number field's plane keep it. Old rank first.*
+
+| old | stub | verdict | reason, in one line |
+|---|---|---|---|
+| 1 | FS-124 the (Q) ring | **unconditional now; re-aimed lightly** | still the bulk of the exclusions and the YES side's home; gains the release's dictionary (their diagonal states are (Q) arcs; `two_state_impossible` at `k = 6`; their four-cycle argument is the five-colour vertex's, one outsider); the class it is posed in waits on FS-132's card 1 |
+| 2 | FS-123 the Siamese class | **unconditional now; re-aimed** | its first case is FS-132's existence form; the release's exclusions "read no tiles", so a measurable form has no Siamese clause; the reading § 3.5's region kill is a second route (queued for the Searcher) |
+| 3 | FS-104 `χ_CP(ℝ²)` at six | **answered — YES, by citation** — exactly this form: `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6`. **Not answered:** `χ_m⁰ = χ_m` (the null-set step), `χ_B` against `χ_m`, the ZF + DC audit — re-aimed at these as the axiom question | Thm 1.4 with row 130; its routes (0)–(e) are closed as routes; its NO side (a CP five-colouring) is closed as a direction |
+| 4 | FS-128 the top colour, at five and six | **five half answered by citation; six half unconditional now** | row 154's two sides are both true (no five-colouring exists), so TOP₅ has nothing to bind; TOP₆ "given a NO … is the answer" stands, and whether the normal form is on the road at all waits on FS-132's cards 1–2 |
+| 5 | FS-125 the saturated local exclusion | **unconditional now** | the class where slack-sensitive statements can hold (the reading § 4.3); the exclusions need it on either road |
+| 6 | FS-122 the forced pair | **unconditional now; gains tools** | A-ALL "equivalent to seven" with no MR; the release's Lemma 5.5 is a separation constant "uniform in the colouring" (the reading § 3.3), the kind B-RR asks; card 3's first branch would land here |
+| 7 | FS-120 the pinch, and the cover route at five | **five half answered by citation (closed as a need); six half unchanged** | the cover route's rungs at five were to give `χ(ℝ²) ≥ 6`; it is given |
+| 8 | FS-127 lateral extent | **re-aimed** | at local finiteness of *cyclic centres* of honest saturated colourings, with no arcs ([L₆]); and behind FS-132's card 2, which asks whether even that is needed; its bearing through REG-J′₅ is moot |
+| 9 | FS-126 curved pencils | **re-aimed downward** | not consumed by the extraction (the reading § 4.3: "the curved-pencil question (FS-126) [is] not consumed by Act 3"); on the road only under card 1's third branch |
+| 10 | FS-117 route T, the count | **unconditional now** | the existence step in the map class, non-Siamese; card 3 names what would replace it for measurable colourings |
+| 11 | FS-109 the hole dial | **unconditional now; gains a control** | `1 − µ₅(ε)` is now known to stay bounded below: a positive control for the dial before `µ₆` is read |
+| 12 | FS-108 print residuals of the regular half | **answered by citation as a need** | FS106-AE-MAP6's role ("every route at five rests on AE-MAP6") is discharged: no five-colouring of any kind exists; Townsend's (c) stays a note on a printed proof |
+| 13 | FS-44 the fifth colour | **closed as a direction** | its object, a CP five-colouring of the plane, does not exist (Thm 1.4 with row 130) |
+| 14 | FS-80 window-frequency certificate | **its five target answered; unchanged otherwise** | re-aimed on 2026-09-27 at "averaged certificates at five colours on the real plane"; six is held; a certificate for seven is unposed |
+| 15 | FS-113 MR in full, in Lean | **re-aimed downward** | no longer "required to publish … the answer seven through the measurable route": the plane's equality is the release's, importable; MR(F) is needed for the field rows only |
+| 16 | FS-101 the main clause through five in the kernel | **unchanged** (field rows, given MR); its collapse slot is discharged for the plane by the import |
+| 17 | FS-62 six is not a value | **re-aimed** | W now reads `χ(ℝ²) ≠ 6` ⟺ `χ(ℝ²) = 7`; some real number field's plane needs six (the transfer reads the algebraic plane only), so S is false unless the plane is seven |
+| 18, 19 | FS-130 the bicycle's windings; FS-115 the stuck ray | **unchanged** | local structure in the map class; no sentence of theirs moved |
+| 20, 22, 23, 24 | FS-67, FS-96, FS-64, FS-63 (product locality and the window cluster) | **unchanged**, given MR | field-level; FS-96's outcome "a CP five-colouring of the plane" is closed with FS-44 |
+| 21 | FS-59 ℚ(√167): six colours | **re-aimed** | the conjunct `χ_CP(ℝ²) ≥ 6` holds, so given MR six there is `PL_∃(23, 43)` alone (row 125); its bearing on the answer ("gives `χ(ℝ²) ≥ 6`") is spent |
+| 25 | FS-49 one gadget for six | **closed as a need** | `χ(ℝ²) ≥ 6` with no MR is held; a finite six-chromatic unit-distance graph exists by de Bruijn–Erdős and none is explicit; an explicit one is the genre Kooshi ruled out as a route |
+| 26 | FS-102 the fallback write-up | **re-aimed — Kooshi's call** | its proposed lead (the collapse, rows 128–130) is in print as the release's theorem for the plane, dated three days before FS-103; rows 120–123 are still this project's |
+| 33, 34, 35 | FS-78, FS-42, FS-43 (supply for FS-49) | **unchanged; consumer closed** | each bore "none on the answer beyond FS-49's" |
+| 37 | FS-39 the bridge to the plane | **re-aimed** | a second discharge of `RealAlgebraicDescent` for the chromatic-number consumers, through the release's transfer (the reading § 5.3); the drawing lemma still needs it |
+| 27–32, 36, 38–74 | FS-69, 57, 100, 65, 17, 55, 45, 75, 90, 98, 76, 95, 87, 92, 68, 47, 60, 46, 48, 72, 77, 88, 93, 94, 99, 41, 51, 52, 20, 2, 13, 12, 19, 37, 27, 23, 22, 30, 35, 8, 29, 9, 10, 5 | **unchanged** | each row already reads "none on the answer": residue planes, field planes given MR, four-colour rigidity, kernel ports, bookkeeping; no sentence of theirs names five as open except through FS-104 or FS-44 (sampled: ranks 4–51 at their cell prefixes, 52–74 by title and bearing — § 1.3) |
+
+### 4.3 Banners, drafted for Keryx to file (one per answered or re-aimed stub; each goes at the head of the stub file)
+
+- **`plans/STUB-cp-plane-six.md` (FS-104):** "Answered YES by citation, 2026-10-07: `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (`[OAIMath2026]` Thm 1.4 with row 130). Routes (0)–(e) are closed as routes to that question. Re-aimed (FS132-P1): the stub now carries the null-set step `χ_m⁰(ℝ²) = χ_m(ℝ²)` — with the transfer, the Shelah–Soifer axiom question for the plane — `χ_B` against `χ_m`, and the ZF + DC audit. It bears on Falconer's number and on the axioms, not on `χ(ℝ²)`."
+- **`plans/STUB-top-colour.md` (FS-128):** "2026-10-07: the five-colour half is answered by citation (no measurable five-colouring exists, `[OAIMath2026]` Thm 1.4; row 154's two sides are both true). TOP₆ stands, with no 'given MR'. Whether a saturated normal form is on the road at all waits on FS-132's cards 1 and 2."
+- **`plans/STUB-pinch-at-junction.md` (FS-120):** "2026-10-07: the cover route at five is closed as a need — `χ(ℝ²) ≥ 6` is held by citation. The pinch question at six stands."
+- **`plans/STUB-lateral-extent.md` (FS-127):** "Re-aimed 2026-10-07 (FS132-P1): at local finiteness of the *cyclic centres* of an honest saturated colouring (the reading's [L₆]) — no arcs, no integer radii — the statement `[OAIMath2026]`'s extraction consumes; and behind FS-132's card 2, which asks whether the extraction needs even that."
+- **`plans/STUB-curved-pencils.md` (FS-126):** "Demoted 2026-10-07 (FS132-P1): `[OAIMath2026]`'s extraction reads no arcs, so this question is on the road to seven only if FS-132's card 1 finds a step of the exclusions that reads one."
+- **`plans/STUB-regular-half-residuals.md` (FS-108):** "2026-10-07: closed as a need — FS106-AE-MAP6's role is discharged by `[OAIMath2026]` Thm 1.4 (no a.e.-proper five-colouring of any kind). Townsend's simplification (c) remains a note on a printed proof."
+- **`plans/STUB-fifth-colour-structure.md` (FS-44):** "Closed as a direction, 2026-10-07: a CP five-colouring of the plane does not exist (`[OAIMath2026]` Thm 1.4 with row 130)."
+- **`plans/STUB-distance-two-gadget.md` (FS-49):** "Closed as a need, 2026-10-07: `χ(ℝ²) ≥ 6` holds with no MR (`[OAIMath2026]`); a finite six-chromatic unit-distance graph exists and none is explicit. An explicit one is not pursued (Kooshi: 'search for a finite graph is out')."
+- **`plans/STUB-mr-in-lean.md` (FS-113):** "Demoted 2026-10-07: the plane's equality `χ(ℝ²) = χ_m⁰(ℝ²)` is `[OAIMath2026]`'s and enters by import; MR(F) in Lean is needed for the field rows (120–129) only."
+- **`plans/STUB-qfree-ring.md` (FS-123):** "2026-10-07 (FS132-P1): 'given MR' leaves this stub's bearing. Its first case is FS-132's existence form, asked for measurable colourings, where there is no Siamese clause; a second route to its NO at radius 2 is the reading § 3.5's region kill (a placement, queued for the Searcher)."
+- **`plans/STUB-q-ring.md` (FS-124):** "2026-10-07 (FS132-P1): 'given MR' leaves this stub's bearing. From `[OAIMath2026]`: a palette that is a diagonal of the vertex's own labels is a (Q) arc in measure; its `two_state_impossible`, stated for every `k`, at six excludes a ring alternating between the two diagonals (FS-132's C132-DIAG, posed); its four-cycle argument (one outside label) is the template for the five-colour vertex. The class this stub is posed in waits on FS-132's card 1."
+- **`plans/STUB-plane-bridge.md` (FS-39):** "Re-aimed 2026-10-07: `[OAIMath2026]`'s transfer reads a colouring only on the algebraic plane, so `χ(ℝ²) = χ(ℚ̄²) = sup_F χ(F²)` follows with no Tarski; what is left of this stub is the drawing lemma, and stating which kernel consumers of `RealAlgebraicDescent` the import discharges."
+- **`plans/STUB-four-colours-167.md` (FS-59):** "2026-10-07: the conjunct `χ_CP(ℝ²) ≥ 6` holds by citation; given MR, six at ℚ(√167) is `PL_∃(23, 43)` alone (row 125)."
+- **`plans/STUB-six-is-not-a-value.md` (FS-62):** "2026-10-07: with `χ(ℝ²) ∈ {6, 7}`, W reads `χ(ℝ²) = 7`, and some real number field's plane needs at least six."
+
+### 4.4 The paused backlog (FS-131): which waves resume, in one table
+
+*From `plans/SESSION-HANDOFF-2026-10-07.md` § 4 (read whole) and `plans/SESSION-HANDOFF-2026-10-06.md` (sampled: every line naming
+waves 6, 7, 9, 10). The test for each wave: does the new frontier stand on what it formalizes?*
+
+| wave | what it formalizes | the new frontier | verdict | first job when it resumes |
+|---|---|---|---|---|
+| **the import** (not a wave; the new handoff's queue item 2) | the release's two theorems as declared outside theorems, with the bridges | everything: rows 33 and 130's new sentences, FS-133's statement, wave 9's `Row130Collapse` | **first, before any wave** | the implementer's job from `data/external/oai1/audit/ImportSkeleton.lean` |
+| **7 — the four-colour vertex** (`Count` proved; `FourColour/Local`, `Bowtie`, the fragment object, the pinwheel) | row 137's existence step and the fragments of rows 138, 145 | FS-132's card 1 reads exactly these arguments by their `uses only:` lines, and the positives are the test objects of every exclusion | **resumes first among the waves** | FS131-I7L (`FourColour/Local`, `anchor` first) and FS131-I7FA (the fragment object); the bowtie's jobs after; the pinwheel (K7d) can wait |
+| **9 — the reductions** (`Reduction/Uniform`, the bend on a fragment, the join with wave 8; named hypothesis `Row130Collapse`) | rows 131, 133, 139, 149's bend | its headline hypothesis is "the statement the release's transfer proves" (the handoff § 4) | **re-aimed, then resumes second**: restate over the import so `Row130Collapse` is discharged, not assumed; the bend leaves stand as planned | FS131-I9A after the import lands (its first act joins wave 8) |
+| **6 — the saturated class** (`CoverHull`, `Parallel`, `Centre`, `Accumulation`, `Fragment`, `ReduceI`, `Owed`) | rows 140–144: contact, parallels, ladders, the normal form, route M's reduction | the normal form is needed for the exclusions on either road; the *reduction to a map* (`ReduceI`, the arcs) is what FS-132's card 1 may take off the road | **finish what is in flight; hold the new lines**: the join and the centre leaves (I6Z2) and the three gaps (E9) are in results the frontier keeps; lines X, Y, W wait for card 1's answer | FS131-I6Z2, then FS131-E9; no new line |
+| **10 — the arithmetic floors** (`LevelGraph`, `UsablePlace`) | the field rows' spectral floors (row 123's side) | none on six against seven; every one of its rows keeps "given MR" | **waits**, except gate hygiene | only I10G's open gate items of the second landing, so `main` is clean; K10d waits |
+
+**Three slots, where they bear** (a recommendation; staffing is Kooshi's): a deriver on FS-133 and then FS-132; an implementer on
+the import and then wave 7; the third on wave 8's landing, then wave 9 re-aimed, then wave 6's join.
+
+**E7 scored (0.60):** registered "7 and 6 resume; 9 re-aimed; 10 waits". The table has 7 resuming, 9 re-aimed, 10 waiting, and 6
+only *half* resuming (in-flight jobs yes, new lines held). By my own clause ("wrong if my table differs in any of the four"):
+**lost**, on wave 6.
+
+**Invention signal:** none new at this stage; read for it: the handoff's § 4, the ranking's rows as sampled, the reading § 5.2–5.4.
+
+## Stage 4 — SAVED
