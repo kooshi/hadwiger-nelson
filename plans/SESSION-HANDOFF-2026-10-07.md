@@ -49,12 +49,13 @@ removing any worktree's build copy; reuse a retired tree instead of copying a bu
    nodes `ONEPIECE`, `PAIRPAYS`); fact audit `--base 07bf6096`; decide from its list of which of the thirty entries are
    kernel theorems whether FS-124 is Closed; **tell Kooshi: held — the nine statements, the clause in its authors'
    wording included.** If my push is rejected because it landed first: `git pull --rebase`, push, never force.
-2a. **FS136-K1** (kernel planner, **blind first**; FS-136 inventory item 16) — seven statements of FS-136 from
-   `data/fs136/claims-K1.md`, in worktree `fs136-wk1` (**the old `fs124-wk2` tree, moved; branch `fs136-wk1`** cut from
-   `fs124-wi3` at `e33b5088`). **While it is blind, commit subjects on `main` name no route for those statements.** At
-   its "phase 1 committed" message: lift the fence by reply, naming `plans/FS136-derivation.md` §§ 1–2 and the three
-   statements with no second derivation (C136-FORCED, C136-CLASS's order, C136-COLLAR). At its hand-back: an implementer
-   on its skeleton (its branch must merge the landed module first).
+2a. **FS136-I1** (implementer; launched 20:41 UTC; FS-136 inventory items 22–25) — the kernel planner for FS-136 is back:
+   **four of its seven statements are kernel-checked on branch `fs136-wk1`** (the table, the two counts, the forward
+   step's label half), found blind; its second look at the three one-mind entries found no error (corrections filed
+   under them). FS136-I1 proves the 27 leaves left, in worktree `fs136-wk1` (the old `fs124-wk2` tree, moved). It sends
+   one line when the forward step's and the collar's theorems print their axioms. **Then this module's landing**, after
+   FS-124's second module is on `main` (its branch merges `main` first). Two clauses of the lemma on corners (the count
+   of `2m`; corners named by their sides) are deferred with no consumer.
 3. **FS137-E1** (deriver; launched 20:12 UTC; FS-137 inventory items 1–2) — **FS-137 is OPENED**: the asking lane chose it
    and posed its card (`plans/STUB-collars.md` § The question (Poros, 2026-10-07): "can a ring afford its points at
    six" — a count of the labels a point's own corners leave on each side of its unit circle; six claims in
