@@ -124,3 +124,72 @@ crossing at a point one unit away; inner-pure and outer-pure).*
 *Not claimed:* that a weak colouring has corners anywhere; **an exclusion of every labelled ring at six — the count is met at six by many assignments (seven points on straight two-label edges meet it with room), so it is not the inequality "no assignment meets at six" that the card asks for**; that a ring meeting the count exists as a colouring, or fits at first order; the count for a label with two corners at x (the bound is then by the distinct labels of the crossing corners, at least one); anything at a point of the ring where the colouring has no corners; the sum over the points of a lattice patch beyond the centre's own ring; a value of the chromatic number of the plane — with it, the announcement rule's sentence: it would bear on seven only with a statement that every weak six-colouring has such points, which nobody holds.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: recognition (`ephodos-recognition`, invoked fresh) on the six claims
+
+**The stall read.** None of the six is stalled; the dispatch conditions that apply are two: *a result proved only at
+instances* (the card's count was checked by hand at two vertex figures) and *a known theorem that almost applies* (each
+claim has a map entry beside it). So the work is the cut — what determines, what accompanies — and the home.
+
+**For a stranger** (a convex geometer; nothing of this project's words). *At a point `x` of the plane finitely many
+sectors meet, each bounded by two curves leaving `x` (rays or circular arcs) and each carrying a label; together they
+fill a neighbourhood of `x`. For a unit vector `e`, call a sector* near *if its part close to `x` lies in the closed
+unit disc about `x + e`,* far *if it misses the open disc,* cut *otherwise. Unknown: for each `e`, how many sectors are
+near, far and cut; what the sets of directions in which a sector is near add up to; and, when sectors also meet at
+`y = x + e` and two points at distance exactly 1 almost never share a label, a relation between the labels at `x` and at
+`y`.* A reader stops at no word but "label"; struck: palettes, windows, collars, rings, pay.
+
+**This is a** complete fan of cones in the plane, and "near in the direction `e`" is, off finitely many directions,
+"`e` lies in the cone's dual". The disc about `x + e` enters only through its tangent line at `x`; a cone `C` lies in the
+half-plane `{d : d·e ≥ 0}` exactly for `e` in the dual cone `C* = {e : d·e ≥ 0 for every d in C}`, of angle `180° −` the
+angle of `C`. What the home holds, each elementary and proved in the argument below rather than cited: a line through
+the apex of a complete fan meets the interiors of exactly two cones unless a cone is reflex; the duals of the cones of a
+complete fan with `c` cones, none reflex, have angles summing to `180°·(c − 2)` — **the interior-angle sum of the convex
+`c`-gon whose normal fan the vertex figure is**; the dual of a union of cones is the dual of their convex hull.
+
+**The features, sorted, each with its receipt.**
+
+| feature | sort | receipt |
+|---|---|---|
+| the number `k` of labels | accompanies claims 1, 2; enters only as `k − m` labels absent | the argument of claim 1 never reads `k`; control `budget-scan` prints the same pure counts at seven (R7) and at six (the bowtie fragment) — `m − 2` on every arc |
+| one corner for each label | **determines** the count by labels (split: what is consumed is "the corners that are not crossing carry distinct labels with no other corner") | the fan `a, c, b, c` of angles 10°, 170°, 10°, 170°: 340° against `180°·(3 − 2)` (control `budget-repeat`) |
+| every angle at most 180° | **determines** "two cross" | a reflex cone holds both tangent directions: one crossing corner (control `budget-repeat`, its second line) |
+| the fan fills a neighbourhood | determines claims 1, 2 and 6's count; accompanies claim 3's first sentence, 4 and 5 | their arguments apply C136-FORCED or C136-TABLE to the corners that are there |
+| the far circle has radius 1 | accompanies claim 1 (only its tangent line is read); **determines** claim 3 (60° is one unit) and claim 6 (an edge along a unit circle has one centre) | claim 1's argument; in claim 6 the step "each edge is counted once" |
+| edges are rays or circular arcs (curvature) | accompanies every length in claim 1; determines the class at the two tangent directions (claim 2's "lies along") | C136-CLASS; the engine's fault `bend` |
+| the forced label is absent at `x` (C136-COLLAR) | accompanies | C136-FORCED's hypothesis never asks it (claim 4) |
+| the arc is open, is an arc | accompanies | the kernel lane's finding 6; claim 4's argument |
+| the corners at the far point fill a neighbourhood | accompanies claim 6 | only "a corner of `G` has that label" is read |
+| `x` lies in the domain | **determines** claim 6's first sentence | it is the table at the point `x` |
+| the ring points are 60° apart (the lattice family) | accompanies claim 6's count (any finite set of ring points); determines only what two ring points one unit apart, or two antipodal ones, add | the sum's argument reads no angle between the `y_j` |
+
+**Homes, each with its dictionary and its test.**
+
+1. *Convex geometry: dual cones of a complete planar fan* — adopted for claims 1 and 2. Dictionary: corner ↔ cone;
+   inner at `θ` ↔ `e(θ)` in the interior of the dual; window ↔ dual cone; a label with several corners ↔ the convex hull
+   of its cones; the windows' sum ↔ the interior-angle sum of the polygon with that normal fan. *Tests*: the proofs
+   apply at once (one line each); the exception vanishes (the card's "at most … with equality exactly when" becomes one
+   identity for hulls: a label's window has length `max(0, 180° − h)`, `h` the angle of the hull of its cones — one
+   mind's remark, **not an entry**); it predicts a neighbour, checkable: at a generic direction the two crossing corners
+   are the two holding the tangent directions, so the pure count is `m − 2` on **every** arc of a scan, not on average —
+   read on ten of ten arcs at `q₂` before any argument (Stage 0.4). One step changes: at the two tangent directions the
+   dual is decided by curvature, not by the fan (C136-CLASS).
+2. *This project's ring calculus for maps* (FS116-N2-STAR, -ANTI; N-E1) — adopted for claim 6's first sentence.
+   Dictionary: tile of `p` ↔ corner of `F`; "cone holds `ψ ± 90°` in its interior" ↔ crossing at a generic direction;
+   "its colour is in `A(y)`" ↔ the label of no corner of `G`; a hub ↔ any cornered point of the ring; N-E1 ↔ C136-TABLE
+   at the point `x` with the member `y`. *Changed step*: STAR's "one tile per colour at `y`" (non-Siamese) is not
+   available and not needed; the sum over the ring, with one unit-arc edge charged to its centre, is not in the map
+   entries.
+3. *List colouring of the ring's 60° graph* (the asking lane's recognition) — **killed for derivation** at one line of
+   its dictionary: "a colour of the list may be used" has no counterpart — a palette is an upper bound (the kernel
+   lane's finding 8), so a list colouring of the ring is a design, never a colouring. It stays the frame of the search
+   lane's line 21.
+4. *Counting tiles by Euler's formula* (route T, FS114-N2-ENDS) — **killed** for this count: its dictionary has no line
+   for a direction at a point or for a point of a ring, and it needs a map (G86).
+
+**The class.** Claims 1–2: complete fans of corners at a point, any number of corners and labels; no colouring. Claims
+3–5: every weak `k`-colouring with the named corners, any `k`. Claim 6: the same, any finite set of cornered points on
+the ring. **Recognition does not differ from the plan's route A**; it adds the name (dual cones; the polygon's angle
+sum), which is why the count is exact pointwise and why a repeated label breaks it.
+
+## Stage 2 — SAVED
