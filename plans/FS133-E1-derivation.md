@@ -33,6 +33,8 @@ plan's § PA.3.
 - **C133-ALG** — every `E ⋊ K`-invariant random independent set of the algebraic plane has density at most `m₁(ℝ²)`: TRUE. [hand] over `[OAIMath2026]` family 158's Theorem 2.3 (`wild_fourier`), one mind. Stage 5, § Argument for C133-ONE.
 - **C133-ONE** (posed) — `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)` and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, no hypothesis: TRUE. [derived] from C133-ALG, C133-INV-CLASS, C133-EASY, C133-CHIF; one mind; over the same outside theorem. Stage 5.
 - **C133-FN** — `f(n)/n → m₁(ℝ²)`: TRUE. [derived] from C133-ONE. Stage 5.
+- **C133-PAIR** — for finitely many labels and forbidden label pairs at a countable set of algebraic distances: a labelling of the plane exists iff one of the algebraic plane exists iff a measurable one exists almost everywhere: TRUE, each direction argued. [hand] over `[OAIMath2026]` family 158's Theorem 2.3, one mind. Stage 6, § Argument for C133-PAIR, § Converse for C133-PAIR.
+- **C133-HOM** (posed) — TRUE, both directions. [derived] from C133-PAIR. Stage 6.
 
 ## Stage 1 — SAVED: the readback, the definitions at their pages, and the opening
 
@@ -630,3 +632,150 @@ orbit mean.
 **Theorems this stage proved:** `C133-EASY`, `C133-PER`, `C133-DP` — TRUE, [hand], one mind each, all known; `C133-CHIF` — TRUE,
 [derived] (a checking re-derivation of FS103-B-CHIF); `C133-ALG` — TRUE, [hand] over `[OAIMath2026]` Theorem 2.3, one mind;
 `C133-ONE` (posed) — TRUE, [derived]; `C133-FN` — TRUE, [derived].
+
+## Stage 6 — SAVED: C133-HOM — derived, both directions, as an instance of a pair-constraint transfer
+
+**Verdict: TRUE.** The cross terms close, by two routes. The statement the argument carries is `C133-PAIR`: finitely many labels,
+a countable set of **algebraic** distances, and at each distance a set of forbidden label pairs. `C133-HOM` is its instance with
+one distance and the non-edges of `H` forbidden. Like `C133-ALG` it reads Theorem 2.3 itself, now at every nonzero algebraic
+displacement of the constrained lengths and for complex combinations of two remainders.
+
+*Definitions for the two entries.* `Λ` a finite set; `R` a countable set of positive real algebraic numbers; for each `r ∈ R` a
+symmetric `N_r ⊆ Λ × Λ`. For `X = ℝ²` or `E`, a map `ℓ : X → Λ` is **admissible** if `(ℓ(x), ℓ(y)) ∉ N_r` whenever
+`|x − y| = r ∈ R`. A Lebesgue-measurable `ℓ : ℝ² → Λ` is **admissible almost everywhere** if for each `r ∈ R`,
+`(ℓ(x), ℓ(x + ru)) ∉ N_r` for `(Leb × σ)`-almost every `(x, u) ∈ ℝ² × S¹`.
+
+derivation: C133-PAIR
+  statement: an admissible `ℓ : ℝ² → Λ` exists if and only if a Lebesgue-measurable `ℓ : ℝ² → Λ` admissible almost everywhere
+    exists; and an admissible `ℓ : ℝ² → Λ` exists if and only if an admissible `ℓ : E → Λ` exists
+  uses only: forward — restriction to `E`; an invariant probability on the compact space of admissible labellings of `E` (two
+    uses of Markov–Kakutani); `[OAIMath2026]` family 158's Lemma 4.1 and Theorem 2.3, the latter at the spectral measures of
+    `b_i`, `b_j`, `b_i + b_j` and `b_i + i·b_j`; that `{w ∈ E : |w| = r}` is `rK`, dense in the circle of radius `r`, for
+    algebraic `r`; jointly measurable versions; Tonelli; `Σ_i p_i = 1`. Converse — Lebesgue density, as in `C133-DP`; that
+    finitely many conull sets meet; Tychonoff for `Λ^{ℝ²}` with `Λ` finite
+  not claimed: any constraint on three or more points (a monochromatic unit triangle, say) — it is a third moment, and nothing
+    here addresses it; any distance that is not algebraic (the forward direction reads only `E`, where such a constraint is
+    empty); infinitely many labels; that the measurable labelling resembles the one started from; a measurable labelling
+    admissible at **every** pair (for colourings that is `χ_m` against `χ_m⁰`, FS103-M-D, a GAP)
+  converse: § Converse for C133-PAIR
+  argument: § Argument for C133-PAIR
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `Λ = {1, …, 7}`, `R = {1}`, `N_1` the diagonal: the hexagonal seven-colouring is admissible, measurable, and admissible
+    almost everywhere, so all three sides hold together; with `Λ = {1, 2}` all three fail together (a unit triangle lies in `E`)
+  prior art: partly: for `N_1` the diagonal this is `[OAIMath2026]` family 158's Theorem 1.3; `plans/EXT-OAI2-reading.md` § 2.4
+    reads the distance as free within algebraic ones; the cross terms and the general pattern: not found in print at the scope
+    of the plan's § PA.2
+  handoff: de Bruijn — over `wild_fourier` as an outside theorem; the planner decides whether to state the class or the
+    instance; the converse needs nothing outside Mathlib
+
+derivation: C133-HOM
+  statement: For a finite graph `H`: a homomorphism of the plane's unit-distance graph to `H` exists iff a measurable one
+    exists almost everywhere.
+  uses only: `C133-PAIR` with `Λ = V(H)`, `R = {1}` and `N_1` the set of pairs that are not edges of `H` (the diagonal
+    included, `H` having no loops), where "a measurable one exists almost everywhere" is read as: a Lebesgue-measurable
+    `c : ℝ² → V(H)` with `c(x)` adjacent to `c(x + u)` for `(Leb × σ)`-almost every `(x, u)`
+  not claimed: the items of `C133-PAIR`'s line; for an infinite `H` nothing
+  converse: § Converse for C133-PAIR
+  argument: § Argument for C133-PAIR
+  verdict: derived
+  grade: derived from: C133-PAIR
+  minds: 1
+  model: `H = K_7` (the hexagonal colouring) and `H = K_2` (both sides fail)
+  prior art: partly: `H = K_k` is the release's Theorem 1.3; other `H` not found in print at the scope of the plan's § PA.2
+  handoff: none — subsumed by `C133-PAIR`, which crosses
+
+control: pair-polarisation
+  of: C133-PAIR — the cross-term step, exactly, on a non-Hermitian form over ℤ[i]: the cross term is recovered from the quadratic
+    form at the four vectors `b_i`, `b_j`, `b_i + b_j`, `b_i + i·b_j`
+  run: python3 ../data/fs133/e1/polarisation.py complex
+  expect: True
+  fault: python3 ../data/fs133/e1/polarisation.py real
+
+control: pair-converse-support
+  of: C133-PAIR — the converse direction, its density-point step: every sampled `x' + u'` with `x' ∈ B(x, h)` and
+    `|u' − u| < h` lies in `B(y, 2h)`, in exact rationals (`h = 1/8`)
+  run: python3 ../data/fs133/e1/converse_support.py 1
+  expect: True
+  fault: python3 ../data/fs133/e1/converse_support.py 3
+
+### Argument for C133-PAIR
+
+*An admissible labelling of `ℝ²` restricts to one of `E`*, since the constraints between points of `E` are among those of `ℝ²`.
+So it is enough to prove: (F) an admissible labelling of `E` gives a measurable labelling of `ℝ²` admissible almost everywhere;
+and (B), in the next section, that the latter gives an admissible labelling of `ℝ²`.
+
+**(F1) An invariant law.** `Ω ⊆ Λ^E`, the admissible labellings of `E`, is closed, nonempty, compact and metrizable. `E` acts by
+`(τ_z ℓ)(x) = ℓ(x + z)` and `K` by `(ρ_u ℓ)(x) = ℓ(ux)`; both preserve admissibility because `|ux − uy| = |x − y|`, and
+`τ_z ρ_u = ρ_u τ_{uz}`. The `E`-invariant Borel probabilities on `Ω` form a nonempty compact convex set (Markov–Kakutani for
+the commuting `τ_z`), on which the commuting affine maps `(ρ_u)_*` act (as in stage 4, step (3)); a common fixed point `μ` is
+`E ⋊ K`-invariant. With `(T_z g)(ℓ) = g(τ_z ℓ)` and `(V_u g)(ℓ) = g(ρ_u ℓ)`: `V_u T_z V_u⁻¹ = T_{uz}`.
+
+**(F2) The indicators.** `f_i(ℓ) = 1[ℓ(0) = i]`, `i ∈ Λ`: `(T_z f_i)(ℓ) = 1[ℓ(z) = i]`, `V_u f_i = f_i`, `Σ_i f_i = 1`. For
+`r ∈ R`, `(i, j) ∈ N_r` and `w ∈ E` with `|w| = r`: `⟨f_i, T_w f_j⟩ = μ{ℓ(0) = i, ℓ(w) = j} = 0`.
+
+**(F3) The continuous parts.** By Lemma 4.1, with `p_i = 𝔼(f_i ∣ 𝓕_c)` and `b_i = f_i − p_i`: `0 ≤ p_i ≤ 1`, `Σ_i p_i = 1`
+(conditional expectation is linear and fixes 1), each `p_i` and `b_i` is rotation-fixed, and `b_i ⊥ 𝓗_c`.
+
+**(F4) The remainders are uncorrelated at every nonzero algebraic displacement — the new step.** *First route (polarisation).*
+Let `s, t ∈ ℂ` and `v = s·b_i + t·b_j`. Then `v ⊥ 𝓗_c` and `V_u v = v`, so the spectral measure of `v` is null on `C` and
+`K`-invariant (the computation of F5 in stage 5 used nothing else), and by Theorem 2.3 `⟨v, T_z v⟩ = 0` for `z ∈ E ∖ {0}`. With
+the inner product linear in its first argument,
+`⟨v, T_z v⟩ = |s|²⟨b_i, T_z b_i⟩ + |t|²⟨b_j, T_z b_j⟩ + s·t̄·⟨b_i, T_z b_j⟩ + t·s̄·⟨b_j, T_z b_i⟩`. The choices `(1, 0)` and
+`(0, 1)` kill the first two terms; `(1, 1)` gives `⟨b_i, T_z b_j⟩ + ⟨b_j, T_z b_i⟩ = 0`; `(1, i)` gives
+`−i⟨b_i, T_z b_j⟩ + i⟨b_j, T_z b_i⟩ = 0`. Hence `⟨b_i, T_z b_j⟩ = 0` for all `i, j` and all `z ∈ E ∖ {0}`. (The real choice
+`(1, 1)` alone gives only the symmetric part; `T_z` is not self-adjoint: the control.) *Second route (domination).* The cross
+spectral measure `λ_ij(B) = ⟨P_B b_i, b_j⟩` satisfies `|λ_ij(B)|² ≤ λ_ii(B)·λ_jj(B)`; by Theorem 2.3 on the diagonal,
+`λ_ii = c_i·m_D` and `λ_jj = c_j·m_D`, so `λ_ij = g·m_D` with `|g| ≤ √(c_i c_j)`, and `g ∈ L²(m_D)`. Its Fourier coefficients
+`φ(z) = ⟨b_i, T_z b_j⟩` are then square-summable over `z ∈ E` (the `ψ_z` are an orthonormal basis of `L²(m_D)`), and
+`φ(uz) = φ(z)` for `u ∈ K` because both vectors are rotation-fixed. For `z ≠ 0` the orbit `Kz` is infinite, so `φ(z) = 0`.
+The two routes share Theorem 2.3 and nothing else.
+
+**(F5) Zero correlations of the continuous parts, on whole circles.** For `(i, j) ∈ N_r` and `w ∈ E`, `|w| = r`: the mixed
+terms vanish (`𝓗_c` and its complement are translation-invariant), so
+`0 = ⟨f_i, T_w f_j⟩ = ⟨p_i, T_w p_j⟩ + ⟨b_i, T_w b_j⟩ = ⟨p_i, T_w p_j⟩`. Since `r` is real algebraic, `r ∈ E` and
+`{w ∈ E : |w| = r} = rK`, dense in the circle of radius `r`; `x ↦ ⟨p_i, T_x p_j⟩` is continuous; so `⟨p_i, T_{ru} p_j⟩ = 0` for
+every `u ∈ S¹`, and `⟨T_x p_i, T_{x+ru} p_j⟩ = 0` for every `x ∈ ℝ²`. (An `r` that is not algebraic has no `w ∈ E` of that
+length: this is where the hypothesis on `R` is consumed.)
+
+**(F6) A sample.** Take product-measurable `H_i : ℝ² × Ω → [0, 1]` with `H_i(x, ·) = T_x p_i` for almost every `x` (stage 5,
+F8, once per label). For almost every `x`, `Σ_i H_i(x, ·) = T_x 1 = 1` almost surely. By Tonelli, as in stage 5's F9, for
+`μ`-almost every `ω`: `Σ_i H_i(x, ω) = 1` for almost every `x`, and for every `r ∈ R` and `(i, j) ∈ N_r`,
+`H_i(x, ω) H_j(x + ru, ω) = 0` for almost every `(x, u)` — countably many conditions. Fix such an `ω`, order `Λ`, and let
+`ℓ(x)` be the least `i` with `H_i(x, ω) > 0` where the sum is 1, and any fixed label elsewhere. `ℓ` is measurable. If `x` and
+`x + ru` are both in the good set and `(ℓ(x), ℓ(x + ru)) = (i, j) ∈ N_r`, then `H_i(x, ω) H_j(x + ru, ω) > 0`, which happens on
+a null set of `(x, u)`; and the pairs with an endpoint in the null bad set are null. So `ℓ` is admissible almost everywhere.
+
+### Converse for C133-PAIR
+
+**(B)** Let `ℓ : ℝ² → Λ` be measurable and admissible almost everywhere, `A_i = ℓ⁻¹(i)`, and `A_i*` the set of density points of
+`A_i`. The `A_i*` are pairwise disjoint and their union `Z` is conull. *No constrained pair inside `Z` is forbidden:* if
+`x ∈ A_i*`, `y = x + ru ∈ A_j*` with `r ∈ R` and `(i, j) ∈ N_r`, take `x'` uniform in `B(x, h)` and `u'` uniform on
+`{u' ∈ S¹ : |ru' − ru| < h}`; as in `C133-DP`, `P(x' ∈ A_i) → 1` and `P(x' + ru' ∈ A_j) → 1` as `h → 0`, the law of
+`(x', u')` is absolutely continuous to `Leb × σ`, and so `(ℓ(x'), ℓ(x' + ru')) = (i, j) ∈ N_r` on a set of positive measure — a
+contradiction. So the labelling "`i` on `A_i*`" of `Z` is admissible at every pair of `Z`. *Finite configurations:* for a finite
+`P ⊂ ℝ²` the translations `t` with `P + t ⊆ Z` are a finite intersection of conull sets; any one gives an admissible labelling
+of `P`. *Compactness:* in the compact space `Λ^{ℝ²}` each constraint is a closed condition on two coordinates, and every finite
+family of constraints is satisfiable; so some `ℓ` satisfies them all. This is the manuscript's Lemma 4.3 and the last paragraph
+of its § 4 with `K_k` replaced by the pattern; choice enters here (Tychonoff for a power of a finite set) and nowhere else in
+this direction.
+
+### What C133-PAIR adds, and a second route to one equality of C133-ONE
+
+- **The structural form's first rung is "pair constraints at algebraic distances".** Circular colourings, `b`-fold colourings
+  and `H`-colourings of the plane exist iff they exist measurably almost everywhere; so does a colouring avoiding several
+  algebraic distances at once. What is **not** shown is "exactly those": no three-point constraint is proved to fail to
+  transfer, and none is proved to transfer.
+- **A second route to `χ_f(ℝ²) = 1/m₁(ℝ²)`, by different mathematics.** `[Johnson1996fcn]`'s Proposition gives `χ_f(ℝ²)` as
+  the infimum of `a/b` over `b`-fold colourings with `a` colours, that is over homomorphisms to the Kneser graph `KG(a, b)`.
+  By `C133-HOM` such a homomorphism gives a measurable map `c : ℝ² → KG(a, b)` adjacent at almost every unit pair; its `a`
+  classes `A_j = {x : j ∈ c(x)}` are edge-null and `Σ_j 1_{A_j} = b`, so in each disc some class has relative measure at least
+  `b/a`, some one class does so in infinitely many `B(0, n)`, and by `C133-DP` its density points are a 1-avoiding set of
+  upper density at least `b/a`. So `m₁(ℝ²) ≥ 1/χ_f(ℝ²)`, and with `C133-CHIF`, `χ_f(ℝ²) = 1/m₁(ℝ²)` — without stage 4's
+  Følner pieces and without the reverse Fatou step. It shares Theorem 2.3 and `C133-CHIF` with stage 5's route, and it does
+  **not** give `α₁(ℝ²) = m₁(ℝ²)`: between `sup_G χ_f(G)` and `χ_f(ℝ²)` there is no compactness (Johnson's Question 1), and
+  stage 5 crosses that gap with the invariant law.
+
+**Theorems this stage proved:** `C133-PAIR` — TRUE, both directions, [hand] over `[OAIMath2026]` Theorem 2.3, one mind;
+`C133-HOM` (posed) — TRUE, [derived] from it.
