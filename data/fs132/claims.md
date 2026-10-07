@@ -476,4 +476,16 @@ the death of every such cycle — which are what the answer is made of and are n
   three consecutive ring points are outer-pure). **C132-LENS-II — the card's clause (ii) verbatim — is a GAP** at "pure
   sides are opposite at antipodes"; sixteen patterns of sides stay open, all of them seeds whose sets witness from far away.
   *Not claimed*: each entry's own line. **Not yet answered**: C132-PLACED; C132-ARC will not be reached by this job.
+- **2026-10-07 (after FS132-E6's Stage 3, commit `7145bd26`; FS-132 inventory item 29): C132-PLACED has its verdict; C132-ARC was
+  not reached** — read the entry and the list PL1–PL6 in that record's Stage 3 whole:
+
+> derivation: C132-PLACED-RING
+> — source: plans/FS132-E6-derivation.md Stage 3
+
+  **C132-PLACED: answered as a list, with a gap at one line** — whether any pair containing a label of the centre's triple is
+  a witnessed edge at the placed point; no four-cycle is closed by anything derived; in the card's table it is the second
+  row, a mixed ring. **C132-PLACED-RING** ([hand], one mind): the placed point's unit circle, at the two neighbouring ring
+  points, runs along an interface between the two ring labels, with opposite orientation at the two — so the first night's
+  exclusion says nothing on the orbit through the centre. **C132-LENS's clause (ii) stands as a gap** (C132-LENS-II), with
+  C132-LENS-FOUR and C132-LENS-GERM as what is derived of it; it is not re-posed. **C132-ARC: posed, unstarted.**
 

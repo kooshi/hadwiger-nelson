@@ -875,3 +875,27 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     controls are recorded as controls of the margin case only**; a correction owed to the two records' control lines at
     the record job.
 
+29. **FS132-E6 handed back at its Stage 3 (the task notice not yet read; its own estimate 470k): the third round is done but for
+    one claim — and the night's derive lane stops here** (its report `data/fs132/reports/FS132-E6.md`, commit `523fac9c`;
+    Stage 3 commit `7145bd26`; its first verdict is item 28's). **C132-PLACED: a list (PL1–PL6) with one line open** —
+    whether any pair containing a label of the centre's triple is a witnessed edge at the placed four-label point; nothing
+    derived closes a four-cycle there; the card's second branch, "a mixed ring". **C132-PLACED-RING** ([hand], one mind):
+    the placed point's unit circle runs, at the two neighbouring ring points, along an interface between the two ring
+    labels, oppositely oriented — "so the first night's exclusion says nothing on the orbit through `x`"; and, for FS-124:
+    "the placed point is the centre of two unit arcs carrying both their side labels, of opposite orientation" — a
+    measurable instance of that stub's first question with every hypothesis derived. **C132-ARC: not reached.** **Read
+    off, not entered**: C132-SHADOW gives two of the alternating ring's four cases by a second route with no unit-pair
+    shift. **Its questions for the asking lane**: the sixteen far-witness patterns; what fills the two inner wedges at the
+    placed point and what its ring carries at the orbit's other four points. **A tool defect** in an earlier job's control
+    script (a strict floating-point comparison, harmless at one circumradius and random at the other), not edited. **Not
+    verified in what it inherits**, by its own list: the proof of the release's transfer lemma; C132-CONFINE; C132-WITNESS.
+    **My receipt**: the commits are on `main`; its gate on the final record run by me at item 28 for Stage 2, and its
+    report read; C132-PLACED-RING's header quoted into the claim list. Not checked by me: Stage 3. **Rulings.** (a) **The
+    claim list takes the verdicts; clause (ii) stands as a gap and is not re-posed** — its question: mine to rule, and a
+    re-posing is the asking lane's with Kooshi's answer on the milestone's product. (b) **The dated correction it drafted
+    for the ring card's record is filed at the record job**, with the others owed there. (c) **No fourth round and no
+    successor on C132-ARC tonight** (item 24's ruling stands): three rounds have delivered what a point's unit circle
+    forces around it on the arc-free side, and each ended at the same object — a boundary that is a unit arc about a ring
+    point — which is FS-124's, the open hard case. **The milestone's next step is its record job** (Workflow 3.1, step 6),
+    which waits for Kooshi's word on what the milestone delivers. The kernel planner alone is running.
+
