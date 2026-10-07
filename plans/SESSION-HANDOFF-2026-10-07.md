@@ -55,13 +55,18 @@ removing any worktree's build copy; reuse a retired tree instead of copying a bu
    its "phase 1 committed" message: lift the fence by reply, naming `plans/FS136-derivation.md` §§ 1–2 and the three
    statements with no second derivation (C136-FORCED, C136-CLASS's order, C136-COLLAR). At its hand-back: an implementer
    on its skeleton (its branch must merge the landed module first).
-3. **FS136-P2** (asking lane; launched 19:40 UTC; FS-136 inventory item 18) — the re-rank after FS-136 Derived and the next
-   milestone's question card (brief `data/fs136/briefs/FS136-P2-rerank.md`; record
-   `plans/POROS-2026-10-07-fs136-derived.md`). **It messages when the card is saved → open the next milestone**: read its
-   stub, open its inventory (`plans/FSnn-close-inventory.md`), fix the claim list from the card by script, brief the
-   opening job (`ephodos`; pattern `data/fs131/briefs/scripts/mk-fs136-e1.py`). **Its re-rank is filed only after the
-   landing is back** (pattern `data/fs124/p1/file_fs124_rerank.py`). Kooshi may override its choice of milestone: tell
-   him the choice when it arrives.
+3. **FS137-E1** (deriver; launched 20:12 UTC; FS-137 inventory items 1–2) — **FS-137 is OPENED**: the asking lane chose it
+   and posed its card (`plans/STUB-collars.md` § The question (Poros, 2026-10-07): "can a ring afford its points at
+   six" — a count of the labels a point's own corners leave on each side of its unit circle; six claims in
+   `data/fs137/claims.md`; inventory `plans/FS137-close-inventory.md`, whose rule 2 is the announcement rule). **Kooshi
+   was told the choice and may override.** It sends each claim's statement before deriving it (fix by a dated line in
+   the claim list) and each verdict as saved (log in the inventory). **A count that fires on the seven-colouring or on
+   a held object is a defect: it stops.** Numbers FS-137 may use: ledger rows from 168, grokkings from G101, stubs from
+   FS-138.
+   **The asking lane's re-rank draft waits for the landing**: `plans/POROS-2026-10-07-fs136-derived.md` § Draft re-rank
+   (FS-137 to rank 1, FS-136 to the open milestones, two banners) — file it with the landing's drafts or right after
+   (pattern `data/fs124/p1/file_fs124_rerank.py`; fact audit `--base 07bf6096`). **For the kernel planner when its fence
+   lifts**: the asking lane's two notes (FS-136 inventory item 21).
 
 **A side page, published at Kooshi's word**: the unit-step puzzle (`visualizations/unit-step-puzzle/page.html`, artifact
 `https://claude.ai/artifact/Yafj379vqWgrVUZaaK3AQr`, private). To change it: edit `page.html`, run its `build.py` and
