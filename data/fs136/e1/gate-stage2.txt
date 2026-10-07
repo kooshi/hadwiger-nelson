@@ -1,0 +1,13 @@
+entry lint
+  warn  FS136-E1-derivation.md:191 (C136-RINGS-READ): computed over "four named points, one on each of four held objects, exact in the objects' own towers" states no set — a computed statement quantifies over exactly the set computed
+  claim C136-RINGS-READ: minds 1
+  claim C136-RINGS-READ: prior art partly
+  entries: 1  derived: 1  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    rings-held: printed 'sixfrag: labels=6 members=13 centres=7 covering-pairs=24 on-a-ring=18 inside=42[L2:42] violations=0 not-inside=6[L1:6] least=1.7321:1 stop-class=L1:6 disk: labels=6 members=30 centres=5 covering-pairs=40 on-a-ring=40 inside=60[L2:60] violations=0 not-inside=20[L0:20] least=1.618:5 stop-class=L0:10 bowtie: labels=6 members=11 centres=7 covering-pairs=24 on-a-ring=20 inside=34[L2:34] violations=0 not-inside=14[L1:10,L2:4] least=1.7321:1,1.9319:4 stop-class=L1:6,L2:4'; with the fault planted ('' → '--fault') it printed 'sixfrag: labels=6 members=13 centres=7 c' — it fires
+  ok    rings-strip: printed 'strip: labels=6 members=50 centres=10 covering-pairs=71 on-a-ring=54 inside=105[L2:105] violations=0 not-inside=37[L0:34,L2:3] least=0.5:1,1.0:2,1.8512:6 stop-class=L0:24,L2:3'; with the fault planted ('' → '--fault') it printed 'strip: labels=6 members=50 centres=10 co' — it fires
+  ok    rings-small: printed 'T2: labels=6 members=4 centres=2 covering-pairs=2 on-a-ring=1 inside=4[L2:4] violations=0 not-inside=0[] least=none stop-class=none S1: labels=6 members=2 centres=0 covering-pairs=1 on-a-ring=0 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none MX: labels=6 members=4 centres=2 covering-pairs=1 on-a-ring=1 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none BB: labels=6 members=4 centres=2 covering-pairs=1 on-a-ring=1 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none kept: labels=6 members=7 centres=3 covering-pairs=6 on-a-ring=3 inside=12[L2:12] violations=0 not-inside=0[] least=none stop-class=none'; with the fault planted ('' → '--fault') it printed 'T2: labels=6 members=4 centres=2 coverin' — it fires
+  controls: 3  fired on their faults: 3
+GATE: PASS (0 failures, 1 warning)
