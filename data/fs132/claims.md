@@ -147,4 +147,78 @@ the death of every such cycle — which are what the answer is made of and are n
   outside labels (C132-INDEX, a statement with no colouring in it), carried to the centre by C132-TRI-STRIP and summed over a
   disc by C132-REL. **C132-LONG** is the forcing statement, the disc form of C132-M-CV, which follows from it. *Not claimed by
   any of the six*: a value of `χ(ℝ²)`; that a six-colouring exists; that a cycle longer than three is ever returned.
+- **2026-10-07 (after FS132-E3's Stage 3, commit `db43b298`; FS-132 inventory item 6): C132-M-EMPTY is derived, [hand], one
+  mind, from two wider statements that enter the list; the reading C132-RUN-EMPTY has its verdict** — each read whole at its
+  address:
+
+> derivation: C132-M-ORBIT
+> — source: plans/FS132-E3-derivation.md Stage 3
+
+>   statement: let U be an open set of the plane containing the closed unit disc about a point p, let c be a weak measurable six-colouring of U (a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair (z, u) of a point z of U and a unit vector u with z + u in U), let a_0, a_1, a_2, a_3 be four of the labels and X, Y the other two, and for each j modulo 4 let K_j be a compact set containing p and a point other than p with H_{a_j} ∩ Δ(K_j) = ∅ and H_{a_{j+1}} ∩ Δ(K_j) = ∅, where H_a is the closed essential support of the class of a and Δ(K) is the set of z with min over q ∈ K of |z − q| below 1 and max over q ∈ K of |z − q| above 1; then there are no angle ψ and number δ > 0 such that (i) for every integer k and almost every θ with |θ − ψ − kπ/3| < δ the palette P_p(e(θ)) (`[OAIMath2026]` Definition 5.1, read at the centre p with samplings inside U) contains X or Y, and (ii) for every η > 0 the set of θ in (ψ − η, ψ + η) whose palette contains X and the set of those whose palette contains Y both have positive measure
+> — source: plans/FS132-E3-derivation.md Stage 3
+
+> derivation: C132-M-EXCL
+> — source: plans/FS132-E3-derivation.md Stage 3
+
+>   statement: let U, p, c, the labels a_0, a_1, a_2, a_3, X, Y and the sets K_0, K_1, K_2, K_3 be as in C132-M-ORBIT; then it is not the case that for almost every unit vector e the palette P_p(e) contains X or Y
+> — source: plans/FS132-E3-derivation.md Stage 3
+
+>   verdict: stalls at: V6-HUBS — "a tile of p tips at most two [change points], and two only if consecutive", whose argument is "a tile's tipped change points are pairwise within distance 1 (V6-DIAM)": the dictionary's left-hand term is the tile as one connected piece of diameter at most 1 holding two hubs in its closure ("the same tile"); the data confine a label's exclusion sets, not the label
+> — source: plans/FS132-E3-derivation.md Stage 3
+
+  **C132-M-ORBIT** is the exclusion at one six-fold orbit of ring directions; **C132-M-EXCL** its corollary for a ring whose
+  palettes almost everywhere hold an outside label; C132-M-EMPTY as named in the first dated line is C132-M-EXCL at an
+  extracted centre. They read of the extraction's data **clauses (1) and (3) only** — a point, four labels in a cycle, four
+  compact sets through the point with the two-colour exclusion — and nothing of clauses (2), (4), (5), of connectedness, or of
+  the centre's isolation. **The reading's verdict is "stalls at V6-HUBS"** (the one step that reads a tile as a connected
+  piece), and its statement is derived all the same, with that step and the count replaced by a count of exclusion sets
+  against three axes. *Not claimed*: each entry's own line — in particular nothing at a ring with palettes that hold no
+  outside label on a set of positive measure near the orbit (the (Q) rings), nothing at seven labels, nothing at a cycle of
+  three, five or six labels, and that a map's four-colour vertex carries the four sets is taken from row 134's base, not
+  re-derived.
+- **2026-10-07 (after FS132-E2's Stage 3, commit `7b76f48f`; FS-132 inventory item 7): card 3's six claims have their verdicts,
+  and four entries of that record enter the list** — each statement read whole in its entry there:
+
+> derivation: C132-RING-TAME
+> — source: plans/FS132-E2-derivation.md Stage 3
+
+> derivation: C132-RING-WIND
+> — source: plans/FS132-E2-derivation.md Stage 3
+
+> derivation: C132-ORBIT
+> — source: plans/FS132-E2-derivation.md Stage 3
+
+> derivation: C132-SEP
+> — source: plans/FS132-E2-derivation.md Stage 3
+
+> derivation: C132-LONG
+> — source: plans/FS132-E2-derivation.md Stage 3
+
+  **Derived, [hand], one mind**: C132-FILL, C132-NOESS, C132-REL, C132-INDEX, C132-TRI-STRIP as fixed above; **C132-RING-WIND**
+  (a tame ring's winding number exists and is 3 modulo 6 — no colouring in it), **C132-ORBIT** (every extracted triangle
+  centre of a weak measurable six-colouring carries an orbit index with values 2, 3 or 4 — over the release's Corollary 5.4
+  taken at its statement), **C132-SEP** (one computation about the unit chord's angle). **Stalled**: **C132-LONG**, the forcing
+  statement, at the winding number of the three outside labels on a triangle centre's unit circle; and **C132-RING-TAME**, the
+  stalled step as a statement of its own — the pure-side palette changes at finitely many directions, no two of them 60°
+  apart — at its first clause, "the three-label form of the release's two-label strip rigidity". *Not claimed*: each entry's
+  own line; in particular C132-RING-TAME is said by its own entry to be possible only on a normal form (local slack along
+  the ring breaks it) and not to be enough for C132-LONG by itself; C132-M-CV stalls with C132-LONG.
+- **2026-10-07 (after FS132-E3's Stage 4, commit `33686856`; FS-132 inventory item 9): the second reading has its verdict, and
+  one posed statement is derived at a wider form that enters the list** — each read whole at its address:
+
+> derivation: C132-DIAG-WIDE
+> — source: plans/FS132-E3-derivation.md Stage 4
+
+>   statement: let U be an open set of the plane containing the closed unit disc about a point p, c a weak measurable six-colouring of U, and D, D′ two disjoint pairs of labels; then there is no measurable map w from the unit circle to {D, D′} with w(e) ⊂ P_p(e) and w(Re) ≠ w(e) for almost every unit vector e, R the rotation by π/3
+> — source: plans/FS132-E3-derivation.md Stage 4
+
+> derivation: C132-RUN-CV
+> — source: plans/FS132-E3-derivation.md Stage 4
+
+  **C132-RUN-CV: stalls at FS112-N3-DENSE3**, the route's first input — its alternative "or a repeated colour" reads the cyclic
+  order of tiles at a point, and without it the restated input is C132-M-CV itself; the route's other inputs (the terminal
+  modification and what serves it) are dissolved, not stalled. C132-M-CV stays open, and stalls by the other route at
+  C132-RING-TAME (the dated line above). **C132-DIAG-WIDE** ([hand], one mind): no centre of a weak measurable six-colouring
+  has a ring alternating under the 60° rotation between two disjoint pairs of labels — C132-DIAG as posed is its instance at a
+  four-cycle's two diagonals. *Not claimed*: each entry's own line. **Not reached**: C132-RADIUS.
 

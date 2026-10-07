@@ -15,10 +15,14 @@ or evaluates a colouring given by formula.
                                      neither O (labels left after the endpoints of positive edges are removed) nor I (after
                                      the negative ones) is free of cycle labels.  --fault: a cycle of length 4 (16 patterns).
   ring_checks.py hexrel [--fault]    the hexagonal seven-colouring (circumradius 2/5), the unit circle about the vertex
-                                     (0, 2/5): the labels on it and on the circles of radii 0.98 and 1.02; its closed walk in
+                                     (0, 2/5): the labels on it and on the circles of radii 0.98 and 1.02; its cyclic walk of
+                                     labels and whether two of its changes are 60 degrees apart; its closed walk in
                                      K_7 as an integral 1-chain; the sum of the triangle chains of the honeycomb vertices
                                      inside it; whether the two agree.  --fault: the vertices are counted inside radius 0.75
                                      (the honeycomb vertices within 1 of that vertex are at 0, 0.4, 0.693 and 0.8).
+  ring_checks.py mixed [--fault]     the angle at the common centre between two points at distance 1, one on the circle of
+                                     radius r and one on the circle of radius r': its mixed second derivative at r = r' = 1,
+                                     exactly (sympy).  --fault: the angle replaced by its first-order part at (1, 1).
 """
 import sys, math, itertools
 from fractions import Fraction
@@ -188,8 +192,21 @@ def hexrel():
                         total[k2] = total.get(k2, 0) + val
     total = {k2: v for k2, v in total.items() if v}
     labs = {rad: sorted(set(rings[rad]) & own) for rad in rings}
+    jumps = [360.0 * i / K for i in range(K) if rings[1.0][i] != rings[1.0][i - 1]]
+    seq = "".join(str(rings[1.0][i]) for i in range(K) if rings[1.0][i] != rings[1.0][i - 1])
+    gap = min(abs((b - a) % 360.0 - 60.0) for a in jumps for b in jumps)
     print(f"own-labels={sorted(own)} ring-labels={sorted(set(rings[1.0]))} own-on-rings={[labs[r] for r in (0.98, 1.0, 1.02)]} "
-          f"crossings={crossings} vertices-inside={nv} relation-holds={ring == total}")
+          f"crossings={crossings} ring-walk={seq} two-jumps-60-apart={gap < 0.01} vertices-inside={nv} relation-holds={ring == total}")
 
 
-{"skeleton": skeleton, "index3": index3, "strips": strips, "hexrel": hexrel}[mode]()
+def mixed():
+    import sympy as sp
+    r, s = sp.symbols("r s", positive=True)
+    phi = sp.acos((r**2 + s**2 - 1) / (2 * r * s))
+    if fault:
+        phi = sp.pi / 3 + sp.diff(phi, r).subs({r: 1, s: 1}) * (r - 1) + sp.diff(phi, s).subs({r: 1, s: 1}) * (s - 1)
+    val = sp.simplify(sp.diff(phi, r, s).subs({r: 1, s: 1}))
+    print(f"mixed-derivative-at-(1,1)={val} first-derivatives={sp.simplify(sp.diff(sp.acos((r**2 + s**2 - 1) / (2 * r * s)), r).subs({r: 1, s: 1}))}")
+
+
+{"skeleton": skeleton, "mixed": mixed, "index3": index3, "strips": strips, "hexrel": hexrel}[mode]()
