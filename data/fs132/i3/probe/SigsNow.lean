@@ -1,0 +1,21 @@
+import Proofs.HadwigerNelson.Plane.SixRing.Orbit
+import Proofs.HadwigerNelson.Plane.SixRing.TwoPairs
+open HadwigerNelson.SixRing
+set_option pp.fullNames false
+#check @step_lemma
+#check @exists_step_or_density_triple
+#check @exists_window
+#check @exists_shiftMap
+#check @exists_density_pair
+#check @volume_pattern_pos
+#check @step_at_of_change
+#check @volume_change_pairs_pos
+#check @ringRadius_mem
+#check @shift_comm
+#check @shift_zero_right
+#check @shift_zero_left
+#check @dist_chart_chart_shift
+#check @shift_pos
+#check @exists_shift_lipschitz
+#check @measurable_shift
+#check @exists_shiftBounds

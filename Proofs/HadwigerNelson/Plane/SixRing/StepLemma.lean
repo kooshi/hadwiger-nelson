@@ -294,7 +294,8 @@ example := exists_window (E := Ioo (-1 : ℝ) 1) (a := -2) (b := 0) (c := 2) mea
     fun x hx h => by linarith [show 1 < x from hx, h.2]))
 
 /-- **Lemma S, the map `g_{u,w}`** ("`g_{u,w}(v) = v + ε`, an increasing … map with `g′ ≥ 7/8` … and
-`0 < g(v) − v ≤ min(v − u, w − v)/16`"), at one pair `u < w` with `w − u < κ`: there is `g` on `(u, w)` with
+`0 < g(v) − v ≤ min(v − u, w − v)/16`"), at one pair `u`, `w` with `w − u < κ` (nothing is said when `w ≤ u`: the
+interval is then empty): there is `g` on `(u, w)` with
 `v < g v < w` and `g v = v + ε (v − u) (w − g v)` — so that `(u, v, g v, w)` are the four angles of a unit pair with
 `d = v − u` and `d' = w − g v` — and with slopes between `7/8` and `9/8`. (The bounds `g v − v ≤ (v − u)/16` and
 `g v − v ≤ (w − g v)/16` are then `ShiftBounds.le_left`, `.le_right`.) -/

@@ -1,0 +1,21 @@
+same     step_lemma
+same     exists_step_or_density_triple
+same     exists_window
+CHANGED  exists_shiftMap
+   then: exists_shiftMap : ∀ {ε : ℝ → ℝ → ℝ} {κ : ℝ}, ShiftBounds ε κ → ∀ {u w : ℝ}, u < w → w - u < κ → ∃ g, (∀ v ∈ Set.Ioo u w, v < g v ∧ g v < w ∧ g v = v + ε (v - u) (w - g v)) ∧ ∀ v₁ ∈ Set.Ioo u w, ∀ v₂ ∈ Set.Ioo u w, v₁ ≤ v₂ → 7 / 8 * (v₂ - v₁) ≤ g v₂ - g v₁ ∧ g v₂ - g v₁ ≤ 9 / 8 * (v₂ - v₁)
+   now:  exists_shiftMap : ∀ {ε : ℝ → ℝ → ℝ} {κ : ℝ}, ShiftBounds ε κ → ∀ {u w : ℝ}, w - u < κ → ∃ g, (∀ v ∈ Set.Ioo u w, v < g v ∧ g v < w ∧ g v = v + ε (v - u) (w - g v)) ∧ ∀ v₁ ∈ Set.Ioo u w, ∀ v₂ ∈ Set.Ioo u w, v₁ ≤ v₂ → 7 / 8 * (v₂ - v₁) ≤ g v₂ - g v₁ ∧ g v₂ - g v₁ ≤ 9 / 8 * (v₂ - v₁)
+same     exists_density_pair
+same     volume_pattern_pos
+same     step_at_of_change
+CHANGED  volume_change_pairs_pos
+   then: volume_change_pairs_pos : ∀ {S : Set ℝ}, MeasurableSet S → ∀ {t : ℝ}, (∀ (η : ℝ), 0 < η → 0 < MeasureTheory.volume (S ∩ Set.Ioo (t - η) (t + η)) ∧ 0 < MeasureTheory.volume (Sᶜ ∩ Set.Ioo (t - η) (t + η))) → ∀ {κ : ℝ}, 0 < κ → 0 < MeasureTheory.volume {x | |x.1 - t| < κ ∧ 0 < x.2 ∧ x.2 < κ ∧ (x.1 ∈ S ↔ x.1 - x.2 ∉ S)}
+   now:  volume_change_pairs_pos : ∀ {S : Set ℝ} {t : ℝ}, (∀ (η : ℝ), 0 < η → 0 < MeasureTheory.volume (S ∩ Set.Ioo (t - η) (t + η)) ∧ 0 < MeasureTheory.volume (Sᶜ ∩ Set.Ioo (t - η) (t + η))) → ∀ {κ : ℝ}, 0 < κ → 0 < MeasureTheory.volume {x | |x.1 - t| < κ ∧ 0 < x.2 ∧ x.2 < κ ∧ (x.1 ∈ S ↔ x.1 - x.2 ∉ S)}
+same     ringRadius_mem
+same     shift_comm
+same     shift_zero_right
+same     dist_chart_chart_shift
+same     shift_pos
+same     exists_shift_lipschitz
+same     measurable_shift
+same     exists_shiftBounds
+leaves=16 same=14 changed=2 missing=0 expected-changed=['exists_shiftMap', 'volume_change_pairs_pos'] verdict=OK
