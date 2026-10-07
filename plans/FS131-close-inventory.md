@@ -7995,3 +7995,55 @@ reason by the close.*
      generalizations are held for the filing. (h) **Slot → FS131-I9B** (wave 9's first implementer, on
      `fs131-w9b`), launched 2026-10-07 about 01:20 UTC. In flight: 3 (L8A, K9b, I9B). Next: FS131-I10G, then wave
      7's (I7B1 and the fragment's first job now; I7L when `main` holds wave 8), FS131-E9, FS131-I6Z2.
+
+607. **KOOSHI'S STANDING CONDITIONAL HAS FIRED (item 489): an outside release holds a claimed proof, with a Lean formalization, that the plane is not five-colourable — `χ(ℝ²) ≥ 6` with no assumption on the colour classes** (source: Kooshi's message, 2026-10-07 about 01:30 UTC, verbatim in `data/external/EXT-OAI1-request.md`; the release cloned by me to `~/source/math`, commit `adc7f1241b42e322a6451854ab7e4b4c146bf78a`, one commit dated 2026-10-06, 3.1 GB, 132,851 files).
+     **His words**: "We have an analysis trigger. OpenAI released a trove of manuscripts on open questions. Have a
+     special slot reviewer check it for anything related to our project. Clone it in `~/source`, as I'll be exploring
+     it for other things as well." **What the release says of itself** (its README, read by me): 722 manuscripts in
+     372 result families "produced by an internal OpenAI model"; "results at different stages of verification. Not
+     all have accompanying Lean formalizations"; "Some of the unformalized results could have issues"; Apache
+     License 2.0. **The hit, found by my sweep of its catalogue** (`CONTENTS.md`, 640 KB; `rg` for the discipline's
+     phrases, and the directory names read): **family 158, "The Euclidean plane cannot be colored with five
+     colors"** — "Proves that every five-coloring of the Euclidean plane has a monochromatic pair at distance one,
+     with no restriction on the color classes … only six and seven remain possible chromatic numbers of the plane.
+     ([Lean](lean/docs/158.md))"; preprint dated September 23, 2026. **Its Lean, listed by me, none of the proof
+     read**: the comparator challenge `lean/ComparatorChallenges/EuclideanFiveColor.lean` states `def ProperColoring
+     (colorCount : ℕ) (coloring : ℂ → Fin colorCount) : Prop := ∀ point otherPoint : ℂ, ‖point - otherPoint‖ = 1 →
+     coloring point ≠ coloring otherPoint` and `theorem no_proper_five_coloring : ¬ ∃ coloring : ℂ → Fin 5,
+     ProperColoring 5 coloring`; the solution module is `lean/OAI/Geometry/PlaneColoring/Five.lean`, in a directory
+     of 46 files and 14,661 lines whose module names (`BorelTransfer`, `MeasurableProper`, `HoleApproximation`,
+     `Interfaces`, `Accumulation`, `PlanarCovers`, `Mesh`, …) are of an analytic and topological argument, not of a
+     finite graph; its comparator configuration permits the standard three axioms, with the second kernel off;
+     toolchain `leanprover/lean4:v4.34.1`. **Nothing here is a finding about correctness.** Other families my sweep
+     saw and did not open: 073 (the Falconer distance conjecture), 157 (a counterexample to Hadwiger's conjecture —
+     graph minors, another Hadwiger), 167 (planar unit distances), 172 (Euclidean Ramsey configurations).
+     **The trigger, on its letter** (item 489: "a published or claimed proof that decides the problem or moves a
+     bound, brought by Kooshi or found by the Searcher"): met — a claimed proof that moves the lower bound, brought by
+     Kooshi. **The conditional's four steps, and their state.** (1) *Stop launches at the next hand-backs*: **in
+     force from this item** — FS-131's queue (I10G, I7B1, I7FA, I7L, E9, I6Z2, K10d, K7d) is held; the three running
+     jobs (wave 8's landing, K9b, I9B) run to their hand-backs and are reviewed and logged as ever; wave 8 lands if
+     its gate is green. (2) *Read it in full*: **EXT-OAI1 launched** (special slot; `debruijn`; brief
+     `data/external/briefs/EXT-OAI1-outside-five-colour-lean.md`, generator `mk-ext-oai1.py`, gate exit 0, 13
+     quotations) — the Lean first, in the order of evidential value: the headline read aloud, the import cone by
+     text, the build at the release's toolchain with the axioms and a control, the release's comparator check, the
+     proof's shape; four messages mid-job. **EXT-OAI2**, a deriver's reading of the manuscript in full against rows
+     33 and 128–154, takes the first slot that frees (brief being written). (3) *A bibliography entry that day*:
+     **filed** — `BIBLIOGRAPHY.md` § A, key `[OAIMath2026]`, marked listed, not read (`tools/bib_audit.py` exits 1 on
+     one key, `[Author2024]`, first seen in this inventory two days ago — not this row's). (4) *Brief the lanes to
+     analyze it against row 33 and rows 131–154*: EXT-OAI1 and EXT-OAI2 are the first two; then the sweep of the
+     other 371 families for what this project assumes, poses or claims (EXT-OAI3; generator `mk-ext-oai3.py`,
+     written before the hit was found, to be revised), and the asker's re-rank of the frontier once the first
+     answers are in. **Slips, mine**: the first clone was killed at five minutes by a time limit I guessed for a
+     download of unknown size (re-run without one; the memory note on wrapping a long process in a timeout says
+     exactly this). **Rulings.** (a) **The special slot goes to the Lean audit first, the manuscript's reading
+     second.** Alternative: the reading first, or the wide sweep Kooshi's sentence asks for. Why: a build with a
+     faithful headline on the standard three axioms decides the claim as no reading can, and a headline that says
+     less than the abstract decides it the other way — the checks that decide run before the slow ones that cannot
+     (`CLAUDE.md` § The standard of evidence); the sweep cannot change what the project does next, and the hit it
+     would have been launched to find is found. Confidence: high. (b) **No fifth agent without Kooshi's word**: the
+     reading waits for the first freed slot; he is told he can have both at once by saying so. (c) **Nothing of the
+     release is cited, imported or built on here until Kooshi says**: the audit drafts the bridging lines and the
+     ledger's sentence as text in its record. (d) **What it bears on, mine and unread**: row 33's lower end; FS-104
+     (is `χ_CP(ℝ²) ≥ 6`), which a clean audit answers in a stronger form and with no measure rigidity; the
+     conjecture's bold form `χ(ℝ²) = 7` is untouched; the ranking of FS-123, FS-124 and FS-104 is the asker's to
+     redo. (e) **Kooshi notified by push** at the moment the hit was read.

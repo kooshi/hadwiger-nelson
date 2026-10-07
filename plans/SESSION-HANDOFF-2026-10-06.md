@@ -1,8 +1,18 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–606 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–607 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
+
+## 0. THE STANDING CONDITIONAL HAS FIRED (2026-10-07, item 607) — read this before anything else
+
+An outside release (`https://github.com/openai/math`, cloned at `~/source/math`, commit `adc7f1241b`) holds a claimed proof, with a Lean formalization, that the plane is not five-colourable (`χ(ℝ²) ≥ 6`; its family 158; `BIBLIOGRAPHY.md` `[OAIMath2026]`). Kooshi's conditional of item 489 is in force:
+
+1. **FS-131's launches are stopped at the next hand-backs.** The queue of § 4 is held, not cancelled. Running milestone jobs (wave 8's landing, K9b, I9B) run to their hand-backs, are reviewed and logged as ever, and wave 8 lands if its gate is green. **A freed slot goes to the analysis, not to the queue.**
+2. **Running for the analysis**: **EXT-OAI1** (special slot; `debruijn`; `data/external/briefs/EXT-OAI1-outside-five-colour-lean.md`; record `plans/EXT-OAI1-audit.md`; working copy `~/.cache/ext-oai1/`) — the Lean audit: it sends four messages (the headline read aloud; the import cone by text; the build and axioms; the proof's shape). Each is logged and told to Kooshi at once.
+3. **Next into the first freed slot**: **EXT-OAI2**, a deriver's (`ephodos`) reading of the manuscript in full against `LEDGER.md` rows 33 and 128–154 (brief: see item 607 and the briefs folder `data/external/briefs/`). Then **EXT-OAI3**, the sweep of the other 371 families (generator `mk-ext-oai3.py`, to be revised: its Tier A is found), and the asker's (`poros`) re-rank once the first answers are in.
+4. **Nothing of the release is cited, imported or built on here until Kooshi says** (ruling 607 (c)). `~/source/math` is his clone: read only.
+5. Kooshi's request, verbatim: `data/external/EXT-OAI1-request.md`.
 
 ## 1. Read first
 
@@ -39,7 +49,7 @@ theorem at once. The four moves on `main` (`exists_merge`, `exists_rayMerge`, `e
 (FS131-QA4's record §§ 3.2–3.3; E6's twelve-colour map for OPEN). Truth is not in question (kernel-checked). Kooshi has been told. It closes when the
 planted-picture models land (queue item 2).
 
-## 3. Running now (3: K9b, I9B, L8A) — each reports to "main" by hand-back; its report file is on its branch
+## 3. Running now (3 of the milestone: K9b, I9B, L8A; and EXT-OAI1 in the special slot — see § 0) — each reports to "main" by hand-back; its report file is on its branch
 
 | job | tree and branch | what | brief | on its hand-back |
 |---|---|---|---|---|
