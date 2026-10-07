@@ -8992,3 +8992,26 @@ reason by the close.*
      found to be emptied by the outside theorem; the 6-programme's five-colour seeds are to be swept for others
      (owed: a short job on which statements bind a five-colouring of the plane — the scan found this one site only
      at the plane with five colours, by its word).
+
+634. **FS132-L1, a second mid-job finding: two of the library's five "open question" hypotheses are settled by the import, and the assumptions step cannot see it** (source: its message to "main", 2026-10-07; its probes on the tree with the added theorem and the ruled edits).
+     **The finding**: `inline:SixTarget` (row 43: every √3-pair and every distance-2 pair separated at five colours;
+     G26) and — pending its reading of the binder — `inline:SixTargetOneTwo` (row 61) are hypotheses over
+     five-colourings of the plane; given `Outside.OAI158.not_colorable_five` that type is empty, so they hold with no
+     gadget, and the theorems that take them (`not_colorable_five_of_forced_pairs`,
+     `six_le_chromaticNumber_plane_of_forced_pairs`) conclude the import's own statements. The step reads them as
+     declared hypotheses of kind `open`; `takes=98` and `open=5` do not move. So after the landing the front page's
+     "five for open questions" counts two that the library's import settles. `SevenTarget`, `NoPar` and
+     `FragmentsAtEveryRadius` stay open. **Its probes**: the assumptions step's self-test green; the step red on exactly
+     the ten new `unlisted-consumer` rows (`axioms=3 rests=18`), to be written by the ledger step; the axiom audit's
+     self-test red on two controls whose expected counts read the library's state, brought to the new state by the
+     file's own rule. **Read by me**: nothing beyond the message. **Rulings** (the brief's second amendment, R5–R6).
+     (a) **The two source strings say it in words in this landing; kinds and counts unmoved** — `SixTargetOneTwo`'s only
+     if its binder is empty the same way. Alternative: leave them for the tooling job. Why not: the rule of ruling 633
+     (b) — a text in the gated tree known false at the landing says so at the landing. Confidence: medium-high.
+     (b) **No change of kind**: "a declared hypothesis that a declared import implies" is a class the step does not
+     have; it joins ruling 633 (a)'s question on the tooling job's list, and Kooshi hears both. (c) **At the landing's
+     filing I refile, from its drafts**: the front page's sentence that counts the open questions; a note on rows 43
+     and 61; one line on the two theorems. (d) **A sweep is owed** (with ruling 633 (e)'s): every statement and
+     hypothesis of the library that binds a five-colouring of the plane — the six-programme's Act-One material (G26,
+     rows 43, 61, `hexShell_plane5`) is now, at five, consequences of the import. A short job; the asking lane's
+     table of what to formalize will say whether the six-colour halves of those rows are on the road.
