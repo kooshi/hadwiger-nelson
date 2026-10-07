@@ -7814,3 +7814,47 @@ reason by the close.*
      and five citations in filed records name the wrong object; nothing else moves. (d) **A reading for the record,
      mine**: the verifier's "independent rebuild" verified the statement with a different witness, so
      FS114-Y2-BOWTIE's existence has two objects, each one mind's; neither tool is the other's check.
+
+602. **FS131-MD1 done: the example maps' first closer — the stuck example map is a terminal map, in the kernel; three more landed heads now name a Lean model** (implementer, Opus; harness 665k and 95 minutes by the task notice — past the line; record `fs131-wd1`'s `plans/FS131-MD1-implementation.md` Stages 1–6; report `data/fs131/reports/FS131-MD1.md`; six commits, tip `ff583145`; pushed, tree clean; not landed, the full gate not run, by its brief).
+     **Proved on the standard three** (one new module, `Plane/Models/StuckTerminal`, 1,379 lines, 47 theorems; built,
+     not gated): **`stuckModel_terminal : stuckModel.Terminal`** (at every point of the plane none of the three moves
+     is available), **`stuckModel_qrOnly`** (every constant-sided arc of `Γ` on a unit circle is a (Q) arc, and one
+     exists: `stuckModel_exists_isQArc`), **`stuckModel_isTerminalMap`** — no hypothesis; the vertex is the map's
+     only site (`stuckModel_not_isSite`). The three `example`s of `Plane/Models/Applied` (`n3_end_chain`, `cv_l0`,
+     `hornBoundsQR_of_isChainVertex`) lose their binders. **Open gate items by the milestone's tool: 29 → 26 on this
+     branch** (CLOSED 33 → 36); with the sibling closer's fifteen (item 599) the two branches together leave eleven
+     of the twenty-nine. **A reusable instrument**: `WideAt`, `ArcMap.not_isSite_of_wideAt`,
+     `ArcMap.not_isSite_of_pieces` — no site at a point of an open chart whose pieces are wide there, with no
+     `IsClean` and no sector chart; `ArcMap.relabel_isSite`, `brickBase_not_isSite`. **My receipt**: tip equals
+     `origin/fs131-wd1`, tree clean; outside `data/`, `plans/`, `tools/` it changed the new module, `Applied` (ten
+     lines added, seven removed), `ValidMap/Terminal` and the three registry files; **`ValidMap/Terminal` with every
+     doc comment removed is identical to `1ed1cfd2` (my script)**; the new module holds no `sorry`, no `axiom`, no
+     `native_decide`; its two last build logs end "OK — 466 of 466 batches … 0 module(s) with warnings", `EXIT=0`;
+     its axioms print parsed by my script — 47 records, each on exactly the standard three — and its control shows
+     `sorryAx`; the guarded lint's log ends "Linting passed for Proofs."; the three heads read in the module (ruling
+     497 (b)'s `stuckModel.IsTerminalMap` is `⟨valid, plane map, terminal, (Q)/(R2) only⟩`, as it reports). Not
+     checked by me: the proofs beyond the build; its statement tool's code; the three docstrings against the model.
+     **Predictions scored**: the landing job's route table priced `Terminal` at 500–650 lines; written it is about
+     950 with the general lemmas, and `QROnly`, unrouted there, about 300; the calibration's line gives 489k for
+     1,379 lines against 665k measured. **Tool defects, found by it** (for the filing's list): the notes check as
+     my brief wrote it (the same slip as item 599's — the tree-reading form is `tools/fs131_l5_notes.py --tree .
+     --only-flagged`); `tools/fs131_mc_gateitems.py --self-test` asks that all sixty-two names read REMAIN on the
+     given tree, which `main` has not satisfied since the example maps landed. **Slips, the job's, disclosed**: a
+     stage that said three items were read whole before they were; one exit status read through a pipe and re-run;
+     a control that did not fire, caught by its own self-test; a lemma first named inside a Mathlib structure's
+     namespace, renamed before any commit. **Credit**: one argument (wide pieces) for the disc and the squares
+     alike where the plan had two; a lint control planted and watched to go red on its own module; `QROnly` proved
+     in the stronger form and shown live by an instance. **Rulings.** (a) **`Applied`'s import and its one corrected
+     module-doc sentence are ratified** (the sentence said the two facts "are not proved in Lean" above examples that
+     now use them). Alternative: leave the sentence. Why not: it would be false. Confidence: high. (b) The clauses
+     added to two rows of `ARCHITECTURE.md` and the extra theorem `stuckModel_exists_isQArc` (with its import of
+     `ValidMap/Terminal`) are ratified: each is what makes a docstring's claim checkable. (c) **Both closers'
+     branches go to the next landing after wave 8's** (ruling 599 (d) stands): it joins `fs131-wd1` and `fs131-wd2`
+     (conflicts to expect in the three registry files and `Applied`; no shared name at its Stage 4, by its count),
+     runs the doubled-name check, and reads 47 and 40 new clean records. (d) Its draft line for `LEAN.md` § Searching
+     — Lean (a lemma named `Convex.foo` inside this package's namespace shadows) is filed at that landing with
+     the others held. (e) **The reusable instrument is named to the owed-models job** (ruling 599 (c)): the
+     arc-step example's two missing facts and the other maps' non-vertex points are of the kind it serves.
+     (f) **Slot → FS131-K9b** (wave 9's second planner, `debruijn`, in `fs131-w9`; its brief regenerated for one
+     sentence made stale by item 599 — gate exit 0, 48 quotations), launched 2026-10-07 about 01:00 UTC. In
+     flight: 3 (L8A, K7c, K9b). Next into a free slot: FS131-I9B, then FS131-I10G, FS131-I6Z2, FS131-E9.
