@@ -398,3 +398,26 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     against the two papers first. (f) **Slot → FS132-E5**, the witness card (`data/fs132/briefs/FS132-E5-witness-card.md`,
     regenerated against the stub as it stands, gate exit 0). Running: the two cards' derivers and the landing.
 
+13. **FS132-E4, first message: the ring card's claims are stated, with two findings about the card from its recognition**
+    (source: its message to "main", 2026-10-07; record `plans/FS132-E4-derivation.md` Stage 1; commit `2344f702`). **Its
+    terms**: a *witnessed edge* at a point (a compact set through it and another point, excluding both labels' supports from
+    its straddle set), a *witnessed triangle*, an edge *outer-* or *inner-blocked* at a ring point, a *pure side*. **The
+    claims**: C132-COMP and C132-TURN as posed; C132-PLACE as one statement with a list; five entries expected on the way
+    (C132-CROSS, C132-COMP-SHARP, C132-WITNESS, C132-ALT, C132-TURN-EDGE). **Its two findings**: (a) for the complementary
+    pair, the side that is pure and the card's proviso are not where it can fail — "the only escape is an interface set
+    lying on the unit circle about the crossing point", which is a held fragment's configuration (FS110-FRAGS' T2), and a
+    bowtie is outside the hypothesis for want of a third edge; (b) **"two changes 60° apart" is two objects** — the
+    alternating orbit, where the first night's step-lemma mechanism does apply with the third outside label as the tip
+    (against the readings deriver's paragraph, which found no form "by the same mechanism": the two are to be read side by
+    side at its verdict), and the turning orbit, where the centre's own data are consistent near the ring and a kill must
+    read the ring point as a point with a witness of its own. It expects C132-TURN to stall. **A thing it did in the shared
+    tree, disclosed**: its push was refused as non-fast-forward after the landing; with a clean tree it ran
+    `git pull --rebase origin main` and pushed — nothing forced; the shared tree took the landing's commits by its pull.
+    **My receipt**: the commit is on `main`; § 1.4's three first lines quoted into the claim list by script; its message
+    read against § 1.4's headings. Not checked by me: its recognition. **Rulings.** (a) **The claims are fixed by a dated
+    line as stated; the five entries are named and fixed at their verdicts.** (b) **The overlap with the witness card**
+    (the strips from a fixed witness point): its use as a step is fine; the entry that crosses is the witness card's — as
+    it proposed. (c) Its pull is logged as correct: a rebase of one unpushed commit of its own onto `origin/main`, in a
+    clean tree. **A slip of mine**: I had not pulled the landing into the shared tree before a deriver's next push met it —
+    the landing's hand-back and this push crossed; no harm.
+

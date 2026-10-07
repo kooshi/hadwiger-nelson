@@ -255,4 +255,23 @@ the death of every such cycle — which are what the answer is made of and are n
   second clause is posed as a conclusion for every weak colouring living on triangles alone (the ring card, C132-TURN); its
   first clause for honest (Grundy) colourings, after C132-GRUNDY7. As with the first round, each claim is stated by its
   deriver in its record before it is derived; a change is a dated line here.
+- **2026-10-07 (after FS132-E4's Stage 1, commit `2344f702`; FS-132 inventory item 13): the ring card's three claims as their
+  deriver states them** — read § 1.4 of that record whole, with its terms (a witnessed edge and triangle; an edge outer- or
+  inner-blocked at a point; a pure side; the outside state of the ring):
+
+> - **C132-COMP**, the stub's statement, verbatim (`plans/STUB-six-by-the-nerve.md` § The first claims a deriver takes).
+> — source: plans/FS132-E4-derivation.md § 1.4
+
+> - **C132-PLACE**, as one statement and a list under it: with a witnessed triangle at `x` and a pure side at the ring
+> — source: plans/FS132-E4-derivation.md § 1.4
+
+> - **C132-TURN**, the stub's statement, verbatim. Expected verdict: a stall, with two entries on the way —
+> — source: plans/FS132-E4-derivation.md § 1.4
+
+  C132-COMP and C132-TURN stand as posed; C132-PLACE is fixed as stated there. **Entries the deriver expects on the way, each
+  named now and fixed when its verdict is saved**: C132-CROSS and C132-COMP-SHARP (wider forms of C132-COMP — the second with
+  the proviso weakened to "no interface set on the unit circle about the crossing point"), C132-WITNESS (a relay-result),
+  C132-ALT and C132-TURN-EDGE (two steps toward C132-TURN). **An overlap, ruled**: the strips with a fixed witness point in
+  place of a limiting direction are the witness card's C132-WIT; the ring card's deriver uses that form as a step inside
+  C132-CROSS, and the entry that crosses to the kernel lane is the witness card's.
 
