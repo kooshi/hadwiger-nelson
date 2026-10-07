@@ -99,3 +99,48 @@ axioms and the one declared outside theorem `Outside.OAI158.proper_to_borel_weak
 blind on branch `fs124-wk2` (item 25). The other sixteen entries have no kernel job.
 
 **Stage 1 — SAVED** (2026-10-07).
+
+## Stage 2 — SAVED: the derivation file
+
+**Filed: `plans/FS124-derivation.md`** — 30 entries (29 derived, 1 refuted), 17 controls, 8 sections, written by
+`data/fs124/z1/build_derivation.py` (`--check`: the file on disk is what the script writes).
+
+**How it was made, and why that way.** Every `derivation:` and `control:` block is copied by the script, character for character,
+from the record of the deriver who wrote it; the one change is that `argument: § <heading>` gains its record's file name, so the
+address resolves from the new file. I typed no statement, no grade and no count of minds. The gate's own check of this:
+`derive_gate.py quotes FS124-derivation.md FS124-E1-derivation.md FS124-E2-derivation.md` — "statements named in more than one
+place: 30", PASS, 0 failures.
+
+**The decisions that were mine.**
+1. **No new merged statement is written.** "Its strongest merged form" is met by order: each chain's head is its strongest
+   form and the weaker forms sit under it marked *corollary*, each under its deriver's name. A statement that fused two entries
+   would be a derivation by a record job, graded by nobody, and nine of these names are fixed in the kernel lane's claim list
+   for a planner working blind. Three places where two entries are one statement in two strengths, and which is the head:
+   C124-CENTRE-HALF over C124-CENTRE (the second is the conjunction of the first's two halves — the second deriver's `handoff:`
+   line; C124-CENTRE keeps its source's grade, derived from C124-SHADOW-OPEN); C124-STRADDLE over C124-COMPLETION;
+   C124-EDGE-CLOSED over C124-EDGE.
+2. **Order**: § 1 the class (the radius clause; every direction); § 2 the one lemma and what one piece forces; § 3 the pair;
+   § 4 the strip's edge; § 5 the first round's two chains at a centre that the second round did not continue; § 6 the two
+   calibrations; § 7 the reading; § 8 what the file does not hold.
+3. **Class and count** stand in the prose under each entry, from the entry's statement first; the tags of § 1.2's table are
+   the same. Two places where a tag and a statement had disagreed during the day, the statement followed: C124-SIX is `k ≥ 4`
+   and does not spend six; C124-FORCED is for sector points, the posed wording being its own refuted entry.
+4. **The kernel planner's generalizations** are recorded under § 1's entries as the planner's own and are not entered: the
+   measurability of the colouring idle in three (C124-RADIUS-GRAPH, -COUNTABLE, -UP); every subset in one (C124-RADIUS-DOWN);
+   discs at any centres; the contrapositive of (up) with no import. The two join theorems of its module are named under
+   C124-RADIUS-DOWN as the kernel's, on a branch.
+5. **Calibrations**: C124-KIND and C124-FORCED-SEVEN, each called one by its own `handoff:` line. C124-RADIUS-FIVE stays in
+   § 1 as a corollary; that the asking lane files it with the calibrations is said under it.
+6. **The reading** is § 7, in prose with its table quoted, not an entry: its deriver did not enter it and it proves nothing.
+
+**Grades and minds lowered or raised**: none. **Sentences I am least sure are no larger than their entries** (for the
+coordinator's eye): § 3's "C124-BOTH, C124-FOUR and C124-SECOND rest on this entry; C124-EDGE-CLOSED does not" under C124-LONE
+(my reading of four `uses only:` lines; § 1.2 above) and § 5's "Its class is inhabited" under C124-HALF (the second deriver's
+finding, with a one-point set — the sentence says so).
+
+**Gate.** `python3 ../.claude/skills/ephodos/scripts/derive_gate.py all FS124-derivation.md`, from `plans/`, run in the
+background under a slot (several minutes): **GATE: PASS (0 failures, 2 warnings)** — entries 30, derived 29, refuted 1; controls
+17, fired on their faults 17. The two warnings are the sources' own: "prior art owed" at C124-RADIUS-COUNTABLE and C124-OPEN.
+Output: `data/fs124/z1/gate-FS124-derivation.txt`.
+
+**Stage 2 — SAVED** (2026-10-07).
