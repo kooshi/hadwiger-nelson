@@ -1,0 +1,12 @@
+ 1 MISMATCH data/external/EXT-OAI1-request.md :: I agree with all 3. let's keep the lean backlog paused. We move to the
+ 2 match    plans/FS136-close-inventory.md :: 4. **FS136-E1, verdicts through its Stage 3 (16:48 UTC logged; commit 
+ 3 match    plans/FS136-close-inventory.md :: 5. **FS136-E1, the last two claims (17:01 UTC logged; commit `50bf05d7
+ 4 match    plans/FS136-close-inventory.md :: 6. **FS136-E1 done (17:13 UTC logged; hand-back 17:11 UTC; 508k by the
+ 5 match    plans/FS136-close-inventory.md :: 8. **FS136-P1, first message (18:02 UTC logged; its commit `bc91935c`,
+ 6 match    plans/FS136-close-inventory.md :: 10. **FS136-E2, first message (18:25 UTC logged; its commit `0b23e4da`
+ 7 match    plans/FS136-close-inventory.md :: 11. **FS136-E2, verdicts (18:50 UTC logged; its commit `fa57f58f`, 18:
+ 8 match    plans/FS136-close-inventory.md :: 12. **FS136-E2, the clause I kept fires (18:53 UTC logged): "a label I
+ 9 match    plans/FS136-close-inventory.md :: 14. **FS136-E2 done (18:57 UTC logged; hand-back 19:0x UTC; 598k by th
+10 match    plans/FS124-close-inventory.md :: 40. **FS124-L1 done (hand-back 17:39 UTC; 527k by the harness's count 
+11 match    plans/FS124-close-inventory.md :: 42. **FS124-I3 done (18:07 UTC logged; hand-back 18:05 UTC; 506k by th
+quotations=11 mismatches=1
