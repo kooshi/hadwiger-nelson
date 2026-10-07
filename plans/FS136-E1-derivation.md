@@ -364,3 +364,51 @@ control: cover-count
 
 **Predictions scored.** P3 — **met** (0.93). The asking lane's "C-COVER derived as posed 0.9" — derived, and restated;
 "C-ONE 0.9" — derived, in the label form.
+
+
+## Stage 4 — SAVED: C136-PARTNERS
+
+derivation: C136-PARTNERS
+  statement: Let c be a weak six-colouring of U and x a sector point. For each edge of x there is at most one point w such that the edge begins with an arc of the unit circle about w, so there are at most three such points; if y is a close complementary sector partner of x and both common unit points w, w′ of the pair lie in U, then each of w, w′ is one of those points and y = w + w′ − x; so x has at most three close complementary sector partners both of whose common unit points lie in U.
+  uses only: C124-BOTH's second sentence (`plans/FS124-derivation.md` § 3: "each has an edge that contains an arc of S(w) with an end at the member"; derived from C124-LONE, one mind, kernel pending — inherited, cited as the coordinator's relay of FS124-K2's § 4.2 allows; its argument and C124-LONE's Step II not read by me); that a connected subset of an arc containing its first point is an initial piece of it, and the rest of the arc keeps a positive distance from that point; that two distinct circles share at most two points; that four points x, w, y, w′ with |w − x| = |w′ − x| = |w − y| = |w′ − y| = 1, w ≠ w′, x ≠ y satisfy x + y = w + w′
+  not claimed: that a weak six-colouring has a sector point or a close complementary pair; anything for a partner with only one common unit point in U (37 of the strip's 54 pairs: control `partners-held`); anything for a member of four or more labels, or a three-piece point that is not a sector point — C124-BOTH is not held there, and on the disk and the flower a four-label member pays alone (§ 2.2 item 5); that the two points use different edges of x (C124-SECOND, for pattern (1, 1)); that three is attained except on the strip and the kept model as read
+  argument: § Argument — at most three partners
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the Searcher's kept model: its centre has three partners, the three ring points with complementary triples, each pair with both common unit points inside (control `partners-held`: "kept: … partners-histogram={1: 3, 3: 1}"); FS-112's strip: 28 members with three partners, none with more
+  prior art: known for maps: FS112-C-PARTNERS ("every close complementary cubic trichromatic partner of a cubic trichromatic vertex u is the fourth corner w_i + w_j − u of a unit rhombus on two of u's leaving centres, so u has at most three such partners"; one mind over FS112-N3-COR3's two) and FS114-Y-PAIRSHARE's first clause (two minds, blind); in measure posed by the asking lane (`plans/POROS-2026-10-07-fs124-round2.md` § 1.2, "one step"); print: not found (plan §PA)
+  handoff: none — a corollary of C124-BOTH's second clause by two lines of plane geometry; it crosses only if the kernel lane takes that clause (the sector clause, the planner's § 2.4)
+
+**Class**: sector points (three pieces, three labels, three arcs). **Count**: six, through C124-BOTH. **Grade, said whole**:
+[hand] over C124-BOTH, which is derived from C124-LONE — one mind, kernel pending, the step its deriver flagged now looked
+at a second time by the kernel planner (blind first; "stands as written", two corrections filed) and not by me.
+**What is new beyond the held entry it restates: nothing but the class** — FS112-C-PARTNERS's two lines under the
+dictionary "leaving centre of `u` ↔ a point on whose unit circle an edge of `x` begins", with C124-BOTH in place of
+FS112-N3-COR3. Recognition expected this verdict (Stage 1). **Not reached by it**: FS114-Y-PAIRSHARE's second clause (two
+partners of one vertex share a common unit point) — it follows from (ii) by counting, three points and each partner using
+two, and is not entered.
+
+### Argument — at most three partners
+
+*One point per edge.* Let the edge `J` (an arc from `x`) begin with an arc of `S(w)` and with an arc of `S(w″)`: its parts
+within `r′` and within `r″` of `x` lie on the two circles. The part of `J` within `min(r′, r″)` of `x` is infinite (`J` is
+connected, contains `x` and reaches the circle of radius `r` about `x`), and lies on both circles; two distinct circles
+share at most two points; so `w = w″`. Three edges: at most three points. *The partner.* At `w`, C124-BOTH gives an edge
+`J` of `x` containing an arc `A` of `S(w)` with an end at `x`. `A` is a connected subset of the arc `J` containing its first
+point, so it is an initial piece `J([0, t₀])`, and `J([t₀, 1])` is compact and misses `x`, so it keeps a distance `r′ > 0`
+from `x`: the part of `J` within `r′` of `x` lies in `A ⊂ S(w)` — `J` begins with an arc of `S(w)`. The same at `w′`. The two
+common unit points are distinct (`|x − y| < 2`), both are among the at most three points, and `x`, `w`, `y`, `w′` is a
+rhombus of side 1, whose diagonals bisect each other: `y = w + w′ − x`. *The count.* A partner is determined by an
+unordered pair out of at most three points. ∎
+
+control: partners-held
+  of: C136-PARTNERS — the asking lane's reader on the second round's outputs for the strip, the disk and the kept model (three-label members only): the histogram of partners per member — none above three, three attained on the strip and at the kept model's centre; and how many pairs have one common unit point inside. A reading of another job's outputs, floats. The fault drops the second member of every line (no pair is read)
+  run: python3 ../data/fs124/p3/pairs_read.py strip disk kept
+  expect: strip: pairs=54 both=17 one=37 distances={0.7569: 34, 1.732: 10, 1.9364: 10} partners-histogram={2: 12, 3: 28} points=10 pairs-per-point={2: 1, 5: 1, 8: 8} unsaved-point-at-distance={0.5: 1, 1.0: 2, 1.851: 34} (tautology, not evidence: completions=17/17)
+    disk: pairs=20 both=0 one=20 distances={0.9416: 8, 0.9417: 2, 1.1755: 8, 1.1756: 2} partners-histogram={1: 10, 2: 15} points=5 pairs-per-point={4: 5} unsaved-point-at-distance={1.618: 10, 1.764: 8, 1.765: 2} (tautology, not evidence: completions=0/0)
+    kept: pairs=3 both=3 one=0 distances={1.0: 3} partners-histogram={1: 3, 3: 1} points=3 pairs-per-point={2: 3} unsaved-point-at-distance={} (tautology, not evidence: completions=3/3)
+  fault: python3 ../data/fs124/p3/pairs_read.py strip disk kept --fault
+
+**Predictions scored.** P4, first half — **met** (0.85): derived as restated, resting on C124-BOTH. Second half —
+withdrawn (§ 3.0 item 4). The asking lane's "C-PARTNERS 0.9" — met.
