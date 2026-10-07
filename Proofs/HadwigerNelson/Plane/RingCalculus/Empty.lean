@@ -324,8 +324,9 @@ theorem GammaFreeRing.changePoint_gap {p : ℂ} (hΓ : F.GammaFreeRing p) (hF : 
 above 1 about a vertex `p` of at least four colours whose ring carries no arc of `Γ`, the change points of the ring are
 the six points `r(ψ₀ + 60°k)`.
 
-VACUITY DECLARED: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is a step of that refutation and is consumed
-nowhere else. -/
+**Jointly vacuous, and a kernel fact (`v6_hubs_vacuous`)**: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is a
+step of that refutation and is consumed nowhere else. (Not the scan's `VACUITY DECLARED` marker, which claims that one
+binder's carrier is empty; here each hypothesis is satisfiable alone and the five are not together.) -/
 theorem v6_hubs {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
     (h4 : 4 ≤ (F.coloursAt p).ncard) (hΓ : F.GammaFreeRing p) :
     ∃ ψ₀ : ℝ, ∀ ψ : ℝ, (∃ X X', F.IsChangePoint p ψ X X') ↔ ∃ n : ℤ, ψ = ψ₀ + n * (π / 3) := by
@@ -361,9 +362,12 @@ theorem v6_hubs {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp 
 /-- **FS116-V6-HUG** (without *simple*, with its own colour step V6-GERM): in the Γ-free class, no tile of `p` tips two
 adjacent change points `y = r(ψ)` and `y' = r(ψ + 60°)` while being the only tip at each.
 
-VACUITY DECLARED: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is a step of that refutation. Outside the
-Γ-free class the statement to use is `doubleTip`. (The proof reads no Γ-free ring: it is
-`not_sole_tip_of_adjacent_changePoints`, `Plane/RingCalculus/SoleTip`, which `emptyNS` consumes.) -/
+**Jointly vacuous, and a kernel fact (`v6_hug_vacuous`)**: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is a
+step of that refutation. (Not the scan's `VACUITY DECLARED` marker, which claims that one binder's carrier is empty; here
+each of the first five hypotheses is satisfiable alone and the five are not together. The statement concludes `False`, so
+the scan skips it as a refutation and reads no marker on it.) Outside the Γ-free class the statement to use is
+`doubleTip`. (The proof reads no Γ-free ring: it is `not_sole_tip_of_adjacent_changePoints`,
+`Plane/RingCalculus/SoleTip`, which `emptyNS` consumes.) -/
 theorem v6_hug {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
     (h4 : 4 ≤ (F.coloursAt p).ncard) (hΓ : F.GammaFreeRing p) {ψ : ℝ} {X X' Y Y' : Fin 6}
     (hy : F.IsChangePoint p ψ X X') (hy' : F.IsChangePoint p (ψ + π / 3) Y Y') {T : Set ℂ}

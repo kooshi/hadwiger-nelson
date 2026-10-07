@@ -499,6 +499,62 @@ Two exclusions are worth their reasons, because both look like obvious additions
   `upperHalfPlane_falconer_hyp` in the same file). What the scan cannot see of the landing: that `sp_if`, `si4`,
   `spectral_carried_iff` and `contChars_haar_null` have no model of all their hypotheses that is a declaration free of a named
   classical hypothesis (their docstrings say so), and the eight theorems whose only assumption is the import.
+* **Wave 8, the ring calculus (FS131-L8A, by the procedure below; the eleven modules `Plane/RingCalculus/{Basic, Star, Empty,
+  HubCount, TilesAt, SoleTip, RingColour, StarChart, SemiHub, SemiHubPlaces, OuterAdj}` and wave 7's foundation
+  `Plane/SimpleOn`, which lands with them).** **No new carrier IN.** The modules declare seventeen predicates and one
+  enumeration (`data/fs131/l8a/census.lean`, wave 5's census with its scope changed, lists them with what the library proves of
+  each): none has an unconditional `¬ P …` at a closed instance, none an `IsEmpty` instance, and none a binder site at a closed
+  instance — so for none could step (3)'s `VACUOUS` control be planted, and entering one would add `GENERIC` rows and no signal.
+  **OUT**, by kind:
+  - **facts about a tile of a variable map** — `ArcMap.TileAt`, `IsTip`, `IsOuterTileAt` (7, 14 and 1 sites), `IsEdgeDir` (1
+    site), `ZeroAngleAt` (a set and a point; no site): like `IsTile` and `TileOf`, refutable only at a concrete set, which no
+    theorem fixes;
+  - **the ring's classes and its germ pairs, predicates of a variable map, point and angle** — `GammaFreeRing` (10 sites),
+    `QFreeRing` (2), `TipPairFree` (2), `OuterPairFree` (3), `GermOnQWith` (32), `IsSemiHub` (7), `IsFullSemiHub` (3),
+    `IsClosedChangePoint` (no site). `GammaFreeRing` holds at the closed instance `halfPlane2`, `0`
+    (`halfPlane2_gammaFreeRing`, two colours), and with it `QFreeRing` and both pairs. **In the class of `emptyNS` — valid,
+    non-Siamese, six colours, at least four at `p`, covering the closed unit disc — a Γ-free ring is refuted**
+    (FS129-SR3-EMPTY-NS), but that refutation is over variables and across five hypotheses, which is no evidence to this
+    per-binder scan. **No Lean term is a semi-hub or a full semi-hub** (held by hand: the strip's `P₀` at `P₂`, the bowtie's
+    centre at `top`): an open gate item of the landing, said in each docstring;
+  - **the star** — `ArcMap.IsStar4` (a `Prop`-valued structure: the four tiles of `p`, pairwise distinct, their cones four
+    consecutive closed intervals; 9 sites, each at a variable map and point). "Does one exist" is a theorem here
+    (`exists_isStar4`: at a point of exactly four colours simple for a valid non-Siamese map), so by step (1)'s first clause
+    alone it would be IN; it is kept OUT by the law as wave 5 applied it and wave 6 was ruled on (`AeColouring.Fan`): no theorem
+    refutes a star at a closed instance, so no `VACUOUS` control can be planted — the third instance of that case. **No Lean
+    term is a star** (`quadRing` at `0` is the candidate; owed). Register it when a theorem refutes a star at a closed instance;
+  - **`ArcMap.SimpleOn`** (`Plane/SimpleOn`; 34 sites, each at a variable map and set) — *simple* read at the tiles whose
+    closures meet a set; implied by the tracked `Simple` (`Simple.simpleOn`) and equal to it over `univ` (`simpleOn_univ`).
+    Nothing refutes it at a closed instance, so it is OUT where `Simple` is IN; its closed model is `halfDisc` at `{0}`, inside
+    an `example` of `Plane/RingCalculus/SemiHub` that runs `ncard_tileAt_eq`, `exists_sectorChart_tileAt` and
+    `exists_initialPiece_of_ncard_le_three` on it. Register it with a theorem `¬ F.SimpleOn S` at a concrete map;
+  - **finite data** — `V6Count.CountStmt`, `V6Count.TwoDoubles` (`HubCount`: decidable statements about four tiles and six
+    hubs, checked by the kernel's own evaluation; no site), `ArcMap.SemiKind` (an enumeration of two, `O` and `T`).
+  What this scan reads of the wave (`tools/fs131_l5_vacdiff.py` against the assumptions step's gated scan: no row lost, none
+  added to a declaration `main` held, no new evidence row): **177 new sites, every one `GENERIC` on a carrier tracked since the
+  first waves, at a variable map** — `Valid` 82, `NonSiamese` 52, `IsChangePoint` 23, `IsRingArc` 14, `IsHub` 5, `Simple` 1
+  (`SemiHub` 64, `SemiHubPlaces` 39, `Star` 27, `Basic` 11, `Empty` 9, `StarChart` 8, `RingColour` 7, `OuterAdj` 6, `SoleTip` 3,
+  `TilesAt` 2, `SimpleOn` 1) — and **sixteen refutations skipped**: four rows that conclude `False` (`emptyNS`, `doubleTip`,
+  `v6_hug`, `not_sole_tip_of_adjacent_changePoints`), the two kernel facts of joint vacuity (`v6_hubs_vacuous`,
+  `v6_hug_vacuous`), six steps inside a proof by contradiction or negative clauses of a row (`GammaFreeRing.changePoint_gap`,
+  `not_double_two_classes`, `fin_four_three_pairs`, `qcol_not_one_arc`, `star_anti_ne`, `false_of_antipodal_gaps`), and four
+  whose conclusion is a predicate that unfolds to a refutation — `halfPlane2_gammaFreeRing`, `GammaFreeRing.qFreeRing`,
+  `halfDisc_valid`, `halfDisc_nonSiamese` (the reducing telescope's known reading of `GammaFreeRing`, `QFreeRing`, `Valid`,
+  `NonSiamese`).
+  **The marker and joint vacuity.** `v6_hubs` and `v6_hug` are route lemmas over the empty class of `emptyNS`, and both came
+  with this scan's marker in their docstrings. `v6_hug` concludes `False`, so it was skipped and its marker never read;
+  `v6_hubs` concludes an `∃`, and the scan read its two tracked binders `STALE` — rightly: the marker claims that ONE binder's
+  carrier is provably empty, and `F.Valid`, `F.NonSiamese` at a variable map are not. The emptiness is joint, across five
+  hypotheses, and is proved (`v6_hubs_vacuous`, `v6_hug_vacuous`: `False` from the exact hypotheses). The marker was taken
+  out of both docstrings, which now say the joint vacuity in words and name the theorem that refutes the hypotheses (the
+  coordinator's ruling on FS131-L8A's question, 2026-10-06, reversing ruling 518's placement); the two sites read `GENERIC`,
+  which is true binder by binder, and `declared` stays 3. **The rule: the marker is for a declaration with one provably empty
+  carrier; a route lemma whose hypotheses are jointly unsatisfiable says so in words and names the theorem that refutes
+  them.** Honouring a marker on the evidence of such a theorem would be a change to this scan (joint emptiness as evidence),
+  filed for the tooling job. What the scan cannot see, as before: hypothesis sets that hold together on no object of the
+  library — here the star rows, the semi-hub rows, two change points `60°` apart (`outerAdj`,
+  `not_sole_outer_of_adjacent_changePoints`), and `emptyNS`'s class at nine colours, each with no Lean model and each saying
+  so in its docstring.
 
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
