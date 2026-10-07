@@ -1,0 +1,3 @@
+'HadwigerNelson.Plane.IsTriodCut.exists_opposite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_arc' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXIT 0
