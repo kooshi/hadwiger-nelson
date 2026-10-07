@@ -53,19 +53,18 @@ ask Kooshi before removing any worktree's build copy.
    sector point as an arc-edged point → A RULING OF MINE WAITS ON THAT MESSAGE** (prove it, or re-fix the definition by
    a dated line in `data/fs124/claims.md` and `data/fs124/claims-K2.md` with the derive lane told; item 43 says what was
    weighed). If the lemma is to be proved: an implementer on its skeleton after it hands back.
-3. **FS136-E2** (deriver; launched 18:04 UTC; FS-136 inventory items 8–9) — the milestone's **second round**: the asking
-   lane handed back a card ("how far does a seed force": the table run forward — a cell with one label left is that
-   label; the forced closure of a seed) and corrected a ruling of mine (what bars at a stop is the germs at the two
-   members, not a region's extent: both are [tools] readings, an entry will decide). Brief
-   `data/fs136/briefs/FS136-E2-forward.md`; record `plans/FS136-E2-derivation.md`; the three claims are in
-   `data/fs136/claims.md` (last dated block). **It sends each claim's statement and *not claimed* line before deriving
-   it → fix each in the claim list by a dated line; each verdict → the inventory.** **An empty cell on the
-   seven-colouring is a defect: it stops and messages. A closure that closes round a ring, or any six-coloured piece
-   past `φ²/√2` → Kooshi at once, "claimed by one mind, unchecked".** At its hand-back: this milestone's record job
-   (pattern `data/fs131/briefs/scripts/mk-fs124-z1.py`; ledger rows from 165, grokkings from G100, stubs from FS-137; it
-   re-runs FS-124's second reader with a repaired tolerance before quoting its counts, files the asking lane's re-drafted
-   row 1 and the dated lines owed under the first deriver's closing section). Queue line 15 is re-posed to run at
-   tomorrow's search; line 16 held on it.
+3. **FS136-Z1** (the record job; launched 18:59 UTC; FS-136 inventory items 8–15) — **both derive rounds are in: twenty
+   entries, each derived, one mind, kernel pending; every one is about colourings that already have named regions or
+   corners, and none fixes or bears on the value.** Round two: the forward step (a corner with one label left has it),
+   the forced closure — it stalls on every seed tried, the seven-colouring's included — the four held stops excluded by
+   the corner patterns at two points alone, and **C136-COLLAR: a point carrying five of six labels forces the sixth along
+   arcs of its unit circle** (one mind; the one entry that forces a region of definite extent). The record job writes
+   `plans/FS136-derivation.md`, the errata, **a new stub FS-137 (what collars force)**, and the front page's drafts in
+   `plans/FS136-Z1-record.md`. **At its hand-back: file its drafts** (pattern `data/fs124/z1/file_fs124_derived.py`;
+   fact audit `--base 1344fdc0` and `--dupes`; ledger rows from 165; the atlas; the asking lane's re-drafted first row
+   from `plans/POROS-2026-10-07-fs136-round1.md` § Draft re-rank) **→ FS-136 Derived; then the asking lane's re-rank and
+   next card** (`poros`; the collar's stub is a candidate; pattern `data/fs131/briefs/scripts/mk-fs124-p1.py`). Queue
+   lines 15 and 17–20 are open for tomorrow's search; line 16 is held on 15.
 
 **A side page, published at Kooshi's word (18:0x UTC)**: the unit-step puzzle (`visualizations/unit-step-puzzle/page.html`,
 artifact `https://claude.ai/artifact/Yafj379vqWgrVUZaaK3AQr`, private): colour the `q × q` torus so that no two cells a
