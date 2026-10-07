@@ -1,0 +1,73 @@
+# The cone of OAI.Geometry.PlaneColoring.Five: 70 modules by depth (longest import chain below them).
+# PC = OAI.Geometry.PlaneColoring, PS = OAI.Analysis.PlaneSpectrum, CF = OAI.MeasureTheory.CompactFactors
+  1  PS.Basic                       735 lines  <- Mathlib
+  1  PS.Fourier                     163 lines  <- Mathlib
+  1  PS.InvariantMean              1078 lines  <- Mathlib
+  1  PS.NumberFields                524 lines  <- Mathlib
+  1  PS.PhaseEncoding               255 lines  <- Mathlib
+  1  PS.SmallArcs                   322 lines  <- Mathlib
+  1  PC.Coloring                     34 lines  <- Mathlib
+  1  PC.Expansion                   725 lines  <- Mathlib
+  1  PC.Moser                       439 lines  <- Mathlib
+  1  CF.Amenability                 411 lines  <- Mathlib
+  1  CF.Centers                     703 lines  <- Mathlib
+  2  PS.Characters                  560 lines  <- PS.Basic
+  2  PS.CircleDecay                 241 lines  <- PS.Fourier, PC.Coloring
+  2  PS.PhaseCollision              537 lines  <- PS.PhaseEncoding
+  2  PS.Selections                  432 lines  <- PS.NumberFields
+  2  PC.BinaryDynamics              515 lines  <- PC.Expansion
+  2  PC.CircleMaps                  517 lines  <- PC.Coloring
+  2  PC.WeakColoring                176 lines  <- PC.Coloring
+  2  CF.RelativeCenters             598 lines  <- PS.Basic, CF.Centers
+  3  PS.Multipliers                 314 lines  <- PS.Characters, PS.InvariantMean
+  3  PC.CircleTransport             336 lines  <- PC.BinaryDynamics, PC.CircleMaps
+  3  PC.Compactness                 379 lines  <- PC.WeakColoring
+  3  CF.ConditionalSelection        442 lines  <- PS.PhaseCollision
+  4  PS.CircleOperator              308 lines  <- PS.CircleDecay, PC.Compactness
+  4  PS.FourierTests                295 lines  <- PS.Multipliers
+  5  PS.ConditionalSpectrum         497 lines  <- PS.FourierTests, PS.SmallArcs, CF.ConditionalSelection
+  5  PC.Transitions                 150 lines  <- PS.CircleOperator
+  6  PC.Palettes                    124 lines  <- PC.Transitions
+  6  CF.Approximation               496 lines  <- PS.ConditionalSpectrum, CF.RelativeCenters
+  7  PC.PaletteDensity              485 lines  <- PC.CircleTransport, PC.Palettes
+  7  CF.ConditionalLimits           701 lines  <- CF.Approximation
+  8  PC.PaletteTransport            458 lines  <- PC.PaletteDensity
+  8  CF.Kernels                     774 lines  <- CF.ConditionalLimits
+  9  PC.BinaryPalettes              375 lines  <- PC.PaletteTransport
+  9  PC.Rigidity                    443 lines  <- PC.PaletteTransport
+  9  CF.BoundedFunctions            223 lines  <- CF.Kernels
+  9  CF.Functions                   884 lines  <- CF.Kernels
+ 10  PC.States                      764 lines  <- PC.BinaryPalettes
+ 10  CF.Factors                     586 lines  <- CF.Functions
+ 10  CF.RelativeProducts            472 lines  <- CF.Amenability, CF.BoundedFunctions
+ 11  PC.BoundaryTrace               367 lines  <- PC.Rigidity, PC.States
+ 11  PC.FourContinuity              551 lines  <- PC.States
+ 11  CF.Separability                573 lines  <- CF.RelativeProducts
+ 11  CF.Stationary                  201 lines  <- CF.Factors
+ 12  PC.AngularBoundary             503 lines  <- PC.BoundaryTrace
+ 12  PC.FourTransport               454 lines  <- PC.FourContinuity
+ 12  CF.AlgebraModels               664 lines  <- CF.Separability
+ 13  PS.Representations             477 lines  <- CF.AlgebraModels, CF.Stationary
+ 13  PC.Exclusion                   165 lines  <- PC.AngularBoundary
+ 13  PC.Interfaces                  527 lines  <- PC.AngularBoundary
+ 13  PC.Sectors                     453 lines  <- PC.AngularBoundary, PC.Moser
+ 14  PS.Energy                      453 lines  <- PS.Representations
+ 14  PS.SpectralMeasure             388 lines  <- PS.Representations
+ 14  PC.Accumulation                401 lines  <- PC.Exclusion, PC.FourTransport
+ 15  PS.RadialEnergy                472 lines  <- PS.Energy, PS.Selections
+ 15  PC.DiskAverages                333 lines  <- PC.Accumulation
+ 15  PC.FiveSupport                 376 lines  <- PC.Accumulation
+ 16  PS.Ergodicity                  415 lines  <- PS.RadialEnergy, PS.SpectralMeasure
+ 16  PC.CyclicCore                  280 lines  <- PC.FiveSupport
+ 16  PC.PlanarCovers                402 lines  <- PC.DiskAverages
+ 17  PC.BorelTransfer               451 lines  <- PS.Ergodicity, PC.Coloring
+ 17  PC.GraphRealization            415 lines  <- PC.CyclicCore, PC.PlanarCovers
+ 18  PC.ContinuumLimits             353 lines  <- PC.GraphRealization, PC.Interfaces, PC.Sectors
+ 18  PC.DiskExtension               611 lines  <- PC.GraphRealization
+ 19  PC.GraphCuts                   314 lines  <- PC.DiskExtension
+ 19  PC.HoleApproximation           328 lines  <- PC.DiskExtension
+ 20  PC.GraphPatches                314 lines  <- PC.GraphCuts, PC.HoleApproximation
+ 21  PC.FullApproximation           339 lines  <- PC.ContinuumLimits, PC.GraphPatches
+ 22  PC.Mesh                        154 lines  <- PC.FullApproximation
+ 23  PC.Five                        131 lines  <- PC.BorelTransfer, PC.Mesh
+# longest chain: 23 modules

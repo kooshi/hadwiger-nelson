@@ -216,3 +216,108 @@ instruction is `lake update` on the whole package set.
 **What the text cannot decide, and where it is decided:** a `sorryAx` or a native axiom reached through a tactic no pattern names
 (`#print axioms`, stage 4); the instance and coercions in the stored statement (stage 4); that the 30,336 lines elaborate (the
 build, stage 4).
+
+## Stage 4 — SAVED: the build, the axioms, the control, and the statement as the kernel holds it
+
+**The result in one line.** At the release's own toolchain and Mathlib revision the 70 modules of the cone compile from the
+release's source with exit 0 and no warning, and
+
+```
+'OAI.EuclideanFiveColor.no_proper_five_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+— the three the release's comparator configuration permits, and this repository's standard three.
+
+**The build.** Working copy `/home/kooshi/.cache/ext-oai1/lean/`, a copy of the release's `lean/` directory (the clone is untouched:
+`git rev-parse HEAD` still `adc7f124…`, no `.lake` in it). Lean `4.34.1` (commit `5045d0056413266e57c625dcd7c365b10e377c52`,
+installed by `elan`); Lake `5.0.0-src+5045d00`. Lakefile: the reduced one of stage 3. `lake update` resolved nine packages —
+Mathlib and its eight dependencies — **each at the revision the release's manifest pins** (script comparison, nine of nine
+`SAME`; `data/external/oai1/lake-manifest.reduced.json`), and Mathlib's own hook fetched its build from Mathlib's cache (8,908
+files): **Mathlib was not compiled here and not replayed here.** The cone: `data/external/oai1/build_cone.py`, one module per
+`lake build` call in dependency order, under `scripts/slot.py --mem 10 --cpus 4`; log `data/external/oai1/build-cone.log`:
+`build_cone DONE … modules=70 total=778s exit=0`, each batch `exit=0`, 69 `✔ Built` lines and the first module from
+`build-first.log`, no `⚠`, `warning` or `error` line. Peak resident memory of one Lean process importing Mathlib: 7.1 GB
+(`build-first.log`). The 70 source files in the working copy are byte-identical to the release's (`cmp`, 70 of 70; their hashes:
+`cone-five-sha256.txt`), and 70 `.olean` files exist under `.lake/build/lib/lean/OAI/`. Disk used: 11 GB under
+`/home/kooshi/.cache/ext-oai1/` (7.7 GB of it Mathlib and its cache).
+
+**The axioms** (`data/external/oai1/audit/Axioms.lean`, run with `lake env lean` under a slot, exit 0; output `Axioms.out`):
+
+```
+'OAI.EuclideanFiveColor.no_proper_five_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OAI.EuclideanFiveColor.proper_to_borel_weak' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OAI.EuclideanFiveColor.no_measurable_weak_five_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OAI.PlaneFiveColor.Spectral.wild_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+AXIOM-SET PASS OAI.EuclideanFiveColor.no_proper_five_coloring: 3 axioms, all among the three permitted: …
+```
+
+The last line is a positive signal from a set check (`Lean.collectAxioms` against the three names), which throws on any other
+axiom; it passes for the headline and for both halves.
+
+**The control fires** (`data/external/oai1/control_sorry.sh`, output `control-sorry.out`). A second tree
+(`/home/kooshi/.cache/ext-oai1/control/`: the 70 cone files, the same lakefile, `.lake/packages` symlinked, `.lake/build`
+copied) with one line changed — the last line of `OAI.EuclideanFiveColor.positiveSelect_pos` (`BorelTransfer.lean:396`),
+`exact (Finset.mem_filter.mp hmem).2`, replaced by `sorry`. Lake rebuilt two modules (`⚠ … BorelTransfer`, `declaration uses
+'sorry'`; `✔ … Five`), and the same `Axioms.lean` printed:
+
+```
+'OAI.EuclideanFiveColor.no_proper_five_coloring' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'OAI.EuclideanFiveColor.proper_to_borel_weak' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'OAI.EuclideanFiveColor.no_measurable_weak_five_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+error: AXIOM-SET FAIL OAI.EuclideanFiveColor.no_proper_five_coloring: outside the permitted three: [sorryAx]
+```
+
+exit 1. The plant is two modules below the headline and reaches it; the half that does not use the planted lemma stays clean.
+
+**The statement as the kernel holds it — by elaborated signature, not by name.**
+`data/external/oai1/audit/ChallengeDump.lean` imports the release's *challenge* module (built here: `⚠ … declaration uses
+'sorry'`, as a challenge must) and `SolutionDump.lean` imports the *solution* module; each prints, from its own environment,
+the stored type and value of `OAI.EuclideanFiveColor.ProperColoring` and the stored type of
+`OAI.EuclideanFiveColor.no_proper_five_coloring` in a canonical form of my own (de Bruijn indices, full constant names with
+universe arguments, every implicit and instance argument, binder kinds, and no bound-variable names). Both exit 0, and
+**the two prints are byte-identical** (`cmp` exit 0; sha256 `24aea7aa…0416fca` both). *Control*: `ControlDump.lean`, the
+challenge with `Measurable coloring →` added inside the definition, prints differently (`cmp` exit 1). The print:
+
+```
+ProperColoring : def levels=[]
+  type  = (pi.d (c Nat []) (pi.d (pi.d (c Complex []) ((c Fin []) #1)) (Sort 0)))
+  value = λ (k : Nat) (c : Complex → Fin k), ∀ x y : Complex,
+            @Eq Real (@Norm.norm Complex Complex.instNorm (@HSub.hSub Complex Complex Complex (@instHSub Complex Complex.instSub) x y))
+                     (@OfNat.ofNat Real 1 (@One.toOfNat1 Real Real.instOne))
+            → @Ne (Fin k) (c x) (c y)                                   -- transcribed from the dump; the dump itself is in SolutionDump.dump
+no_proper_five_coloring : theorem levels=[]
+  type  = Not (@Exists (Complex → Fin 5) (λ c, OAI.EuclideanFiveColor.ProperColoring 5 c))        -- `5` is `@OfNat.ofNat Nat 5 (instOfNatNat 5)`
+```
+
+So the norm is Mathlib's `Complex.instNorm`, the subtraction `Complex.instSub`, the `1` the real number one, the colours `Fin 5`,
+and there is no hidden argument, coercion or instance beyond those. The proved theorem is the challenge's statement.
+
+**Restatements, each closed by the release's theorem and checked by the kernel here** (`data/external/oai1/audit/Statement.lean`,
+`lake env lean`, exit 0, every `#print axioms` the standard three; output `Statement.out`):
+
+| name (the audit's) | statement |
+|---|---|
+| `AuditChallenge.no_proper_five_coloring` | the challenge's two declarations, text copied character for character into another namespace, closed by `OAI.EuclideanFiveColor.no_proper_five_coloring`; and `example : @AuditChallenge.ProperColoring = @OAI.EuclideanFiveColor.ProperColoring := rfl` |
+| `audit_unfolded` | `¬ ∃ c : ℂ → Fin 5, ∀ x y : ℂ, ‖x - y‖ = 1 → c x ≠ c y` |
+| `audit_norm` | `∀ z : ℂ, ‖z‖ = Real.sqrt (z.re ^ 2 + z.im ^ 2)` — the norm in the statement is the Euclidean modulus |
+| (example) | `ProperColoring k c → c 0 ≠ c 1` — the definition's premise is not vacuous |
+| `audit_mono` | `∀ c : ℂ → Fin 5, ∃ x y : ℂ, ‖x - y‖ = 1 ∧ c x = c y` |
+| **`audit_real`** | **`∀ c : ℝ × ℝ → Fin 5, ∃ p q : ℝ × ℝ, (p.1 - q.1) ^ 2 + (p.2 - q.2) ^ 2 = 1 ∧ c p = c q`** — no `ℂ`, no norm, no square root: real pairs and a polynomial identity |
+| `audit_euclidean` | `¬ ∃ c : EuclideanSpace ℝ (Fin 2) → Fin 5, ∀ x y, dist x y = 1 → c x ≠ c y` — the model of the release's own seven-colour theorem and of this repository's row 33 |
+| `audit_chromaticNumber` | `6 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber`, with this repository's `unitDistance` copied in |
+
+`audit_real` is the reading I would hand a sceptic: every map from `ℝ × ℝ` to five colours gives one colour to two points whose
+coordinate differences satisfy `Δ₁² + Δ₂² = 1`.
+
+**What stage 4 did not check.** (1) Mathlib's compiled declarations: taken from Mathlib's cache for the tag `v4.34.1`, loaded
+by the kernel as stored, not re-checked here. (2) The release's full configuration — its 42-package manifest and its lakefile's
+patching hooks — was not resolved or built; the cone needs none of it. (3) The release's comparator was not run (stage 5).
+(4) Nothing here says anything about the 9.2 million other lines of the release's library, or about the manuscript's prose.
+
+**An incident of mine during this stage, reported to the coordinator at once.** To read the usage of `leanchecker` (the
+kernel-replay tool shipped in the toolchain) I ran `lake env leanchecker --help` outside a slot, three times between 02:00:15
+and 02:02:50 UTC. The binary knows no such flag and, with no module named, replays every module on the search path on all
+threads: the kernel's OOM killer fired globally twice (pids 790279 and 793251, anon-rss 119.1 GB and 118.1 GB), killing only
+those two processes; the third I killed by PID at 95 GB. The first kill was hidden from me by a pipe into `head` (rule 9's pipe
+clause, broken). Kernel and journal lines: `data/external/oai1/incident-oom.txt`. No other process was killed; my slotted build
+survived (one batch took 83 s against a usual 7 s). Nothing of mine has run outside a slot since.

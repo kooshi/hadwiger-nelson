@@ -1,0 +1,6 @@
+slot: admitted ext-oai1-dumps: mem 10 GiB (hard cap), cpus 4,5,6,7
+DUMP OAI.EuclideanFiveColor.ProperColoring : def levels=[]
+DUMP   type  = (pi.d (c Nat []) (pi.d (pi.d (c Complex []) ((c Fin []) #1)) (Sort 0)))
+DUMP   value = (lam.d (c Nat []) (lam.d (pi.d (c Complex []) ((c Fin []) #1)) (pi.d (c Complex []) (pi.d (c Complex []) (pi.d ((((c Eq [(S 0)]) (c Real [])) ((((c Norm.norm [0]) (c Complex [])) (c Complex.instNorm [])) (((((((c HSub.hSub [0,0,0]) (c Complex [])) (c Complex [])) (c Complex [])) (((c instHSub [0]) (c Complex [])) (c Complex.instSub []))) #1) #0))) ((((c OfNat.ofNat [0]) (c Real [])) (nat 1)) (((c One.toOfNat1 [0]) (c Real [])) (c Real.instOne [])))) ((((c Ne [(S 0)]) ((c Fin []) #4)) (#3 #2)) (#3 #1)))))))
+DUMP OAI.EuclideanFiveColor.no_proper_five_coloring : theorem levels=[]
+DUMP   type  = ((c Not []) (((c Exists [(S 0)]) (pi.d (c Complex []) ((c Fin []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 5)) ((c instOfNatNat []) (nat 5)))))) (lam.d (pi.d (c Complex []) ((c Fin []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 5)) ((c instOfNatNat []) (nat 5))))) (((c OAI.EuclideanFiveColor.ProperColoring []) ((((c OfNat.ofNat [0]) (c Nat [])) (nat 5)) ((c instOfNatNat []) (nat 5)))) #0))))
