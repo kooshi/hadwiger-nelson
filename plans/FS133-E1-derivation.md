@@ -24,6 +24,8 @@ plan's § PA.3.
 - Stage 2 proved none (recognition).
 - **C133-DENS-CLASS** — the reverse-Fatou step at its class (any σ-finite space, any window sequence, mean `≥ α` almost everywhere): TRUE. [hand], one mind. Stage 3, § Argument for C133-DENS.
 - **C133-DENS** (posed) — TRUE. [derived] from C133-DENS-CLASS. Stage 3.
+- **C133-INV-CLASS** — for every symmetric `K`-invariant connection set on `E`, an `E ⋊ K`-invariant law on independent sets with vertex marginal equal to the infimum of `α(G)/|G|` over finite `G ⊂ E`, and no translation-invariant law above it: TRUE. [hand], one mind. Stage 4, § Argument for C133-INV.
+- **C133-INV** (posed) — TRUE. [derived] from C133-INV-CLASS. Stage 4.
 
 ## Stage 1 — SAVED: the readback, the definitions at their pages, and the opening
 
@@ -262,3 +264,84 @@ not the posed one's.
 
 **Theorems this stage proved** (also listed at the head): `C133-DENS-CLASS` — TRUE, [hand], one mind; `C133-DENS` (posed) — TRUE,
 [derived] from it.
+
+## Stage 4 — SAVED: C133-INV — derived, with equality and at its class
+
+**Verdict: TRUE.** The posed clause is entry `C133-INV`; its class is `C133-INV-CLASS`. It reads **no statement of the release**
+(the manuscript's step F2 averages a point mass over a Følner sequence of `E ⋊ K`; this averages maximum independent sets of
+Følner pieces of `E` and then fixes the rotations). No redrawing lemma and no Tarski: the infimum is over finite subsets of `E`.
+
+derivation: C133-INV-CLASS
+  statement: let `S ⊆ E ∖ {0}` be symmetric and invariant under multiplication by `K`, let `𝓘_S ⊆ {0,1}^E` be the compact space
+    of independent sets of `Cay(E, S)`, and let `a_S` be the infimum of `α(G)/|G|` over finite nonempty `G ⊂ E`, `α(G)` the
+    independence number of the subgraph of `Cay(E, S)` induced on `G`; then some `E ⋊ K`-invariant Borel probability on `𝓘_S` has
+    `P(0 ∈ I) = a_S`, and every `E`-invariant Borel probability on `𝓘_S` has `P(0 ∈ I) ≤ a_S`
+  uses only: that `E` is a countable abelian group (a Følner sequence; a compact metrizable `{0,1}^E`); that each edge constraint
+    is a clopen condition on two coordinates; that `K` is abelian, fixes `0`, and normalises the translations
+    (`τ_z ρ_u = ρ_u τ_{uz}`); the Markov–Kakutani fixed-point theorem; linearity of expectation
+  not claimed: that the invariant law is ergodic, or unique; that a single independent set of `E` has density `a_S` in any
+    sense; anything with the infimum taken over finite subsets of `ℝ²` (that infimum is smaller or equal, and its equality with
+    `a_S` at the unit distance is `C133-ONE`'s, by another route); necessity of amenability
+  argument: § Argument for C133-INV
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `S = K` (the unit distance): the Moser spindle is seven points of `E` with eleven unit pairs and independence number 2
+    (control `inv-spindle`), and a proper 7-colouring exists, so `1/7 ≤ a_K ≤ 2/7` and the law is not trivial
+  prior art: known: the invariant-measure form of the independence ratio of an amenable vertex-transitive graph; this project's
+    FS103-B-AMEN at number fields (`plans/FS103-B-verification.md` § 2.1, "The equalities"); `[MatolcsiEtAl2025]` Theorem 1's
+    Følner averaging is the same device on fractional colourings
+  handoff: de Bruijn — the statement at `S = K` suffices for `C133-ONE`; over Mathlib's weak-* compactness of probability
+    measures on a compact metrizable space and a fixed-point or second-average step for `K`; no outside theorem
+
+derivation: C133-INV
+  statement: At the algebraic plane `E = ℚ̄`: there is an `E ⋊ K`-invariant probability on the independent subsets of
+    the unit-distance graph of `E` with `P(0 ∈ I) ≥ inf α(G)/|G|` over finite `G ⊂ E`
+  uses only: `C133-INV-CLASS` at `S = K`; `K` is symmetric (`−1 ∈ K`) and closed under multiplication by `K`
+  not claimed: the items of `C133-INV-CLASS`'s line; in particular nothing about finite subsets of `ℝ²` outside `E`
+  argument: § Argument for C133-INV
+  verdict: derived
+  grade: derived from: C133-INV-CLASS
+  minds: 1
+  model: the model of `C133-INV-CLASS`
+  prior art: known: FS103-B-AMEN's Følner half, restated at `E`
+  handoff: none — subsumed by `C133-INV-CLASS`, which crosses
+
+control: inv-spindle
+  of: C133-INV-CLASS — the model at the unit distance: the Moser spindle in exact arithmetic over ℚ(√−3, √−11) ⊂ E, printed as
+    points, unit pairs, independence number
+  run: python3 ../tools/fs133_e1_spindle.py 11
+  expect: 7 11 2
+  fault: python3 ../tools/fs133_e1_spindle.py 13
+
+### Argument for C133-INV
+
+*Set-up.* `{0,1}^E` is compact and metrizable because `E` is countable; `𝓘_S` is the intersection of the clopen sets
+`{I : not (z ∈ I and z' ∈ I)}` over pairs with `z − z' ∈ S`, so it is closed. For `z ∈ E` and `u ∈ K` put `τ_z I = I − z` and
+`ρ_u I = u⁻¹ I`. Both are homeomorphisms of `{0,1}^E` preserving `𝓘_S` (for `ρ_u`: `u⁻¹z − u⁻¹z' ∈ S` iff `z − z' ∈ uS = S`),
+`τ` and `ρ` are actions of `E` and `K`, and `ρ_u τ_w I = u⁻¹I − u⁻¹w = τ_{u⁻¹w} ρ_u I`, that is `τ_z ρ_u = ρ_u τ_{uz}`: together
+they are an action of `E ⋊ K`.
+
+*(1) The upper bound, for every `E`-invariant law.* Let `ν` be an `E`-invariant Borel probability on `𝓘_S` and `G ⊂ E` finite,
+nonempty. `ν{g ∈ I} = ν{0 ∈ τ_g I} = ν{0 ∈ I}` for each `g`, so `∫ |I ∩ G| dν = |G|·ν{0 ∈ I}`; and `|I ∩ G| ≤ α(G)` for every
+`I ∈ 𝓘_S`. Hence `ν{0 ∈ I} ≤ α(G)/|G|`, and `ν{0 ∈ I} ≤ a_S`.
+
+*(2) A translation-invariant law of density at least `a_S`.* A countable abelian group has a Følner sequence: finite nonempty
+`G_n ⊂ E` with `|(G_n + z) △ G_n| / |G_n| → 0` for every `z` (amenability of abelian groups and the Følner criterion, as the
+manuscript cites them at M/transfer.tex:157–161; concretely, `E` is torsion-free, so the subgroup generated by the first `n`
+elements of an enumeration is free of finite rank, and a cube of side `n²` in a basis of it will do). Let `I_n ⊆ G_n` be a maximum
+independent set of the induced graph, `|I_n| = α(G_n) ≥ a_S |G_n|`, and `ν_n = |G_n|⁻¹ Σ_{r ∈ G_n} δ_{τ_r I_n}`, a probability on
+`𝓘_S`. Then `ν_n{0 ∈ I} = |{r ∈ G_n : r ∈ I_n}| / |G_n| = α(G_n)/|G_n| ≥ a_S`. For `z ∈ E`,
+`(τ_z)_* ν_n = |G_n|⁻¹ Σ_{r ∈ G_n + z} δ_{τ_r I_n}`, so its total-variation distance from `ν_n` is at most
+`|(G_n + z) △ G_n| / |G_n| → 0`. Take a weak-* convergent subsequence, with limit `ν`: it is carried by the closed set `𝓘_S`, it
+is `τ_z`-invariant for every `z`, and since `{0 ∈ I}` is clopen, `ν{0 ∈ I} = lim ν_n{0 ∈ I} ≥ a_S`.
+
+*(3) The rotations.* Let `M` be the set of `E`-invariant Borel probabilities `ν` on `𝓘_S` with `ν{0 ∈ I} ≥ a_S`. It is nonempty
+by (2), convex, and weak-* compact (each condition is closed). For `u ∈ K` the map `ν ↦ (ρ_u)_* ν` is affine and continuous and
+maps `M` into itself: `(τ_z)_*(ρ_u)_* ν = (ρ_u)_*(τ_{uz})_* ν = (ρ_u)_* ν`, and `(ρ_u)_* ν{0 ∈ I} = ν{0 ∈ u⁻¹I} = ν{0 ∈ I}`
+because `u⁻¹·0 = 0`. These maps commute (`K` is abelian), so by Markov–Kakutani they have a common fixed point `μ ∈ M`: an
+`E ⋊ K`-invariant probability on `𝓘_S` with `μ{0 ∈ I} ≥ a_S`, and `= a_S` by (1).
+
+*The posed clause.* `S = K`: `Cay(E, K)` is the unit-distance graph of `E`, `−1 ∈ K`, and `K·K = K`.
+
+**Theorems this stage proved:** `C133-INV-CLASS` — TRUE, [hand], one mind; `C133-INV` (posed) — TRUE, [derived] from it.
