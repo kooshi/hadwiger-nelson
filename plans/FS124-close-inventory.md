@@ -563,4 +563,30 @@ between two colours that is an arc of the unit circle about a point one unit awa
     successor's number is FS-136.** **Kooshi is told, with the alternative**: he chose FS-124 this morning, and may
     override the move to its successor. **The record job (FS124-Z1) launches into the asking lane's slot at its hand-back;
     the successor's opening follows when a slot frees after that.**
+27. **FS124-P3 done (461k and 30 minutes by the task notice), and the record job launched into its slot** (asking lane; record
+    `plans/POROS-2026-10-07-fs124-round2.md` Stages 0–4 with an addendum, its gate exit 0; report
+    `data/fs124/reports/FS124-P3.md`; commits to `6f1b2a71`). Beyond item 26: **a fourth held object agrees** — the bowtie
+    fragment stops at such a point too, "in place (its labels not read)"; **what the two rounds settled**, sixteen lines
+    with class and count (its § 2.1), and **eight things not known that a reader might assume** (its § 2.2: that any weak
+    six-colouring has a piece; that three-colour points are of the ordinary kind; that close complementary pairs exist, in
+    measure or in a map; anything with a member of four or more labels; a second mind on anything; a value); **my framing
+    attacked** (its § 2.3): "our map theorem carried to measure" is right, and both alternatives are true of different
+    entries — more, where the lemma on one piece and the forcing on pieces "read no curve and nothing away from the two
+    members"; less, where an arc is concluded and the hypothesis "is a map's three-tile vertex seen locally" — "the
+    dictionary runs both ways, so the map rows are the place to read what is locally true, and measure owes only the
+    piece"; **the six-colour point** is not a second cause: "the same count with members of four labels", the next
+    milestone's; **G97's killing test fired** — an amendment with a demotion record drafted; **the search**: line 11
+    re-posed to run, one new line held, a continuation of the strip declined as a search. **Its own card's miss, said by
+    it**: the second card "was written from a reading of two maps and not from" the stub's own carry-over list, and no
+    earlier asking record names a derivation file of the three map milestones. **Its slips, disclosed**: records opened
+    before its expectations were written; a script's first version printing a tautology as a count; four map entries read
+    at statement and uses lines only; the claim list unread. **My receipt**: the commits are on `main`; its § 4.2 and § 4.3
+    read whole; the stub's head, definitions and card (item 26). Not checked by me: its table of ten map-class steps; its
+    reading of the four stops. **Filed by me, by script**: line 11's fate (to run at the next day's search) and a new held
+    line 15 in `plans/SEARCH-QUEUE.md`. **Held until the landing in flight is back**: its draft re-rank (the successor at
+    rank 1 once this milestone is Derived; clauses for three rows; the top three). **Rulings.** (a) As item 26: the record
+    job. (b) **FS124-Z1 is launched** (15:23 UTC by the clock; `ephodos`; brief `data/fs124/briefs/FS124-Z1-record.md`,
+    gate exit 0): the derivation file from thirty entries, five dated corrections, the stubs, the predictions, the front
+    page's drafts; its commit subjects neutral, because a planner is working blind. (c) **The day's search is spent**
+    (it ran in the night); line 11 goes to tomorrow's Searcher. (d) G97's amendment is the record job's draft to make.
 
