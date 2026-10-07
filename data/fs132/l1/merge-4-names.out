@@ -1,0 +1,11 @@
+A	data/fs131/briefs/scripts/mk-fs132-e45.py
+M	data/fs131/briefs/scripts/mk-fs132-k1.py
+A	data/fs132/briefs/FS132-E4-ring-card.md
+A	data/fs132/briefs/FS132-E5-witness-card.md
+M	data/fs132/claims.md
+A	data/fs132/p2/readback.py
+A	data/fs132/reports/FS132-P2.md
+M	plans/FS132-close-inventory.md
+A	plans/POROS-2026-10-07-fs132-night.md
+M	plans/SESSION-HANDOFF-2026-10-07.md
+M	plans/STUB-six-by-the-nerve.md

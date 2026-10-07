@@ -752,3 +752,54 @@ import; no node becomes [kernel] on the standard three.
    import, no leak, no record on two; it is a candidate for the standing form.
 5. **`scripts/vacuity.sh --baseline` rewrites the baseline's header and drops its prose**, the ruled note on
    `hexShell_plane5` with it; the entries are what the gate reads.
+
+## Theorems this phase proved, final
+
+Module `Proofs/HadwigerNelson/Outside/OAI158.lean`, namespace `HadwigerNelson.Outside.OAI158`, as gated on `5df686f0`.
+Axioms as the audit's saved log prints them (`data/fs132/l1/gate/receipt-axioms-final.log`, read by
+`tools/fs132_l1_records.py`, `records-final.txt`); "three" is `[propext, Classical.choice, Quot.sound]`; H is the
+declared outside theorem `no_proper_five_coloring`, T is `proper_to_borel_weak` — both `[OAIMath2026]` family 158,
+**not proved here**: axioms, each the release's stored statement term for term.
+
+**This job's one theorem** — kernel, on the three and T:
+- **`seven_le_chromaticNumber_plane_iff : 7 ≤ (unitDistance ℂ).chromaticNumber ↔ (⨆ ε > (0 : ℝ), Plane.mu 6 ε) < 1`** —
+  no hypothesis. Read against `CLAUDE.md` § The aim, item 5 ("`χ_m⁰(ℝ²) ≥ 7` iff six classes, each free of
+  monochromatic pairs at distances in `[1−ε, 1+ε]`, cannot cover the plane up to holes of density tending to 0 as
+  `ε → 0`", with `χ(ℝ²) = χ_m⁰(ℝ²)`): stage 4.
+
+**The import's theorems, gated and landed by this job** (FS132-I1's; `plans/FS132-I1-implementation.md`):
+- on the three alone (ten, and two instances): `properColoring_iff_colorable`, `direction_coe`, `map_coe_arcLength`,
+  `map_prodMap_coe`, `weakColoring_iff_unitPairsNull`, `nonempty_aeColouring_of_weak`, `weakColoring_of_aeColouring`,
+  `exists_weakColoring_iff_nonempty_aeColouring`, `exists_properColoring_seven`, `proper_to_borel_weak_model`;
+  `anglePeriodPositive`, `angularMeasure.instIsProbabilityMeasure`;
+- on the three and H (five): `not_colorable_five` (`¬ (unitDistance ℂ).Colorable 5`), `six_le_chromaticNumber_plane`
+  (`6 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber`; "`χ(ℝ²) ≥ 6`"),
+  **`chromaticNumber_plane_six_or_seven`** ("`6 ≤ χ(ℝ²) ≤ 7`", row 33 with its lower end moved), `six_le_chiM0`
+  ("`6 ≤ χ_m⁰(ℝ²)`"), `chiM0_six_or_seven`;
+- on the three and T (four, and this job's): `nonempty_aeColouring_of_colorable`, `colorable_iff_nonempty_aeColouring`,
+  `chiM0_le_chromaticNumber_plane` ("`χ_m⁰(ℝ²) ≤ χ(ℝ²)`"), **`chromaticNumber_plane_eq_chiM0`** ("`χ(ℝ²) = χ_m⁰(ℝ²)`,
+  with no hypothesis": no binder).
+
+No record rests on both imports; none on `sorryAx`; no `native_decide`. **Nothing here is [kernel] on the standard
+three that was not before, but the dictionary and the models**: the headline statements are kernel-checked from one
+declared outside theorem each (draft 14).
+
+## Stage 7 — SAVED (FS132-L1): the landing
+
+**`main` moved while the gate ran, twice merged before it and once after.** Before the gate: `db43b298` (merge
+`cfabd587`) and `7eb8dbd9` (merge `bfa16394`), each touching `plans/` and `data/` only (`data/fs132/l1/merge-2-names.out`,
+`merge-3-names.out`) — both inside the gated commit. After the gate: `main` is at `6b125da4`, nine commits past
+`7eb8dbd9` (the asking lane's re-rank, two briefs, the inventory, the handoff); `git diff --name-status 7eb8dbd9
+6b125da4` (`data/fs132/l1/merge-4-names.out`) lists eleven files, **every one under `plans/` or `data/`** — the filter
+for anything outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md` prints
+nothing. Merged by hash; the gate is not re-run, by the brief's step 7.
+
+**What the landed tip differs from the gated commit in** (`git diff --name-only 5df686f0 <tip>`, the filter for paths
+outside `data/` and `plans/`): one file, `tools/fs132_l1_slots.py` — this job's check of the drafts' slots against the
+files, written after the gate and read by no step of it. Everything else is `data/` (the gate's logs) and `plans/`
+(this record; `main`'s own). `Proofs/`, `Proofs.lean`, `scripts/`, `ARCHITECTURE.md`, the lakefile and the pin are the
+gated commit's, byte for byte (checked before the push, below).
+
+**The push**: `git push origin HEAD:main` from the worktree, a fast-forward (`main`'s tip `6b125da4` is an ancestor of
+the pushed commit by the merge). Its receipt — the pushed hash, `git ls-remote`, and the ancestor check — is appended
+below after the push, on the branch.
