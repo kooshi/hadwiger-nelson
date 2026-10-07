@@ -480,4 +480,9 @@ between two colours that is an arc of the unit circle about a point one unit awa
     takes the freed slot** (FS124-P3): two rounds are in, the frame has been corrected twice, and the next question —
     whether the saves close up, what a six-colour point forces, or the record job — is its to pose. (d) Line 14 of the
     search queue is declined in its words. (e) The dated line under the first round's entry is owed at the record job.
+22. **FS124-P3 launched** (14:52 UTC, read from the clock; `poros`; brief `data/fs124/briefs/FS124-P3-round-two.md`, gate exit 0;
+    record `plans/POROS-2026-10-07-fs124-round2.md`): what the two rounds settled, in one table; **its verdict — a third
+    round's card, or "record job" with what follows**; the six-colour point the frame leaves out; the held search line;
+    three lines for Kooshi. Its brief asks of every claim it poses the check the last card lacked: the held theorem or
+    entry it would restate. Slots: it, the landing, the radius module's implementer.
 
