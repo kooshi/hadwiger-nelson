@@ -72,3 +72,10 @@ at the end.*
   12. **C124-SIX** — as posed. **Not claimed**: that the configuration exists at any `k` (no held object meets the hypothesis); which label the fifth one is, or that five suffice; anything when the six pairs use three or more label pairs (R7's centres). Its smallest form is stated as its own relay, **C124-SIX-CONES** (X): *in the setting of C124-SIX, there is `η > 0` such that almost every point of `B(q, η)` with a label among `a, b, a′, b′` lies in a closed set that is the union of at most four regions, each bounded near `q` by two unit circles through `q` meeting at the angle `π/3`, or reduced to `{q}`.*
 
   13. **C124-HALF** — as posed (both statements). **Not claimed**: that a label of `y` is present at `w`; anything inside the unit circle about `y` for the first statement; that the first statement's class is inhabited at six.
+
+- **2026-10-07 (13:20 UTC; after FS124-E1's Stage 3; FS-124 inventory item 7): the first claim has its verdict — C124-RADIUS is
+  derived, both halves, with its relay and its control** (C124-RADIUS-GRAPH, C124-RADIUS-UP, C124-RADIUS-DOWN, C124-RADIUS-FIVE:
+  each "derived", [hand] or derived from a [hand] entry, one mind, kernel pending; C124-RADIUS-DOWN and C124-RADIUS-FIVE each
+  over one declared outside theorem). **One statement added by the deriver, derived with them**: **C124-RADIUS-COUNTABLE** —
+  statement: Let k ≥ 1, U an open set of the plane, c a weak k-colouring of U, and V a countable subset of U whose closure is a compact subset of U. Then the unit-distance graph on V has a proper k-colouring of the form v ↦ c(g(v)) for a rigid motion g with g(V) ⊂ U. *Not claimed (C124-RADIUS-COUNTABLE):* anything for an uncountable V; anything for a countable V that accumulates at the boundary of U; that the colouring obtained is measurable in any sense on a larger set. **It fixes no value of `χ(ℝ²)`.**
+

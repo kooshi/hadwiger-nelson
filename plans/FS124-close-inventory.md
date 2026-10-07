@@ -132,4 +132,31 @@ between two colours that is an arc of the unit circle about a point one unit awa
    card's question at the ends of maximal arcs — not before: one mind's prediction is not yet a result. (c) Line 12 of the
    search queue (the label skeleton on lattice points) stays held, and its object is re-read against that finding before
    it is queued: P2 and P3 say on which points the constraints live.
+7. **FS124-E1, verdict on the first claim (13:20 UTC): C124-RADIUS is derived, both halves — six-colourings of discs of every
+   radius, of any regularity, give six; and if the plane has six, every open set has one** (record
+   `plans/FS124-E1-derivation.md` Stage 3; five entries, each [hand] or derived from one, one mind, kernel pending).
+   **The relay, wider than posed (C124-RADIUS-GRAPH)**: for a weak `k`-colouring of any open set `U` and any finite set `V` in
+   it, almost every rigid motion that keeps `V` inside `U` makes the colouring proper on `V`'s unit pairs — "N-EASY's
+   `AeColouring.exists_motion` with 'every motion' replaced by 'the open set of motions keeping V in U'; no weak-* limit, no
+   hole count". **(up)** from it and de Bruijn–Erdős; **(down)** at every `k` and every open set, over the declared outside
+   theorem on Borel transfer and a restriction; **C124-RADIUS-FIVE**: some disc has no weak five-colouring, over the other
+   declared outside theorem — no radius, since no graph is exhibited; **C124-RADIUS-COUNTABLE** (added): a countable set
+   with compact closure in `U` needs no compactness theorem. **"This fixes NO value of χ(ℝ²)"**: it is the clause through
+   which a NO (one disc with no weak six-colouring) or a YES (discs of every radius) would be consumed — with `χ(ℝ²) ∈
+   {6, 7}`, seven if and only if some disc has no weak six-colouring. Prior art: the whole-plane argument is
+   `[GwynStavrianos2022]`'s and this library's; the disc form "not found in print" by its queries — listings, not readings.
+   **My receipt**: the stage is on `main`; **its gate run by me** — exit 0, 0 failures, 1 warning, its control firing; the
+   five entries' statement, uses, not-claimed, verdict, grade and minds fields read by me; **one step checked by my own
+   reasoning** — for two points at distance 1, a rigid motion is determined by where it sends the first and the direction
+   to the second, so the motions making that pair one colour are the preimage of a null set of (point, unit vector) pairs,
+   and finitely many null sets do not fill an open set of motions. Not checked by me: the countable form; its control's
+   script. **By the announcement rule (2 (i), (ii))**: it fixes no value, so nothing goes to Kooshi "at once"; it is
+   announced as **derived, one mind**, with its class (every weak measurable colouring of an open set) and what it does not
+   give (no radius; nothing at six). **Rulings.** (a) The verdicts enter the claim list by a dated line, with the added
+   statement copied by script. (b) **Workflow step 4: the kernel claim list for this milestone's first module is fixed**
+   (`data/fs124/claims-K1.md`: the five statements and their not-claimed lines, nothing else), and **a planner of the
+   kernel lane takes it, blind first, at the next free kernel slot — ahead of the exclusion's unassigned lot** —
+   alternative: finish the exclusion's leaves first; why this order: the radius clause is the statement both answers are
+   consumed through, it stands on a theorem this library already holds and one import, and a blind planner is best
+   launched before more of the derivation is written around it; confidence medium.
 
