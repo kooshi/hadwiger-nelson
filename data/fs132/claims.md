@@ -488,4 +488,14 @@ the death of every such cycle — which are what the answer is made of and are n
   points, runs along an interface between the two ring labels, with opposite orientation at the two — so the first night's
   exclusion says nothing on the orbit through the centre. **C132-LENS's clause (ii) stands as a gap** (C132-LENS-II), with
   C132-LENS-FOUR and C132-LENS-GERM as what is derived of it; it is not re-posed. **C132-ARC: posed, unstarted.**
+- **2026-10-07 (after FS132-K1's Stage 3, commit `e3695302` on branch `fs132-wk1`; FS-132 inventory item 30): the kernel lane's
+  planner has read the first night's exclusion as a second mind, and two forms enter the list.** (i) **C132-M-ORBIT's steps
+  M7, M8 and M9 now have two readers** (their deriver; the planner, line by line, after a blind route of its own that reached
+  everything but M8): "no gap found". (ii) **The four-point form is the leaf**: C132-M-ORBIT with four points `q_j ≠ p` and
+  the straddle sets of `{p, q_j}` in place of four compact sets — the statement fixed above is its corollary, and
+  compactness is never used (the planner's skeleton proves the corollary; C132-WIT, derived, says the same by hand).
+  (iii) **C132-CORES-SQUARE, as the planner's record states it** (that branch's `plans/FS132-kernel-plan.md` § 3.5, copied by
+  script): "**C132-CORES-SQUARE** — statement: for every integer k ≥ 1 and every weak measurable k-colouring of the plane, every closed axis-parallel square of side greater than 1 contains a cyclic centre; in particular every closed disc of radius greater than 1/√2 does. *Not claimed:* a square of side 1 or less; that 1/√2 is sharp for discs (in the hexagonal model every disc of radius 2/5 contains one); squares that are not axis-parallel (they follow by rotating the colouring; not stated); anything for a colouring of a bounded region." — posed by the planner, [hand], one mind, its route not yet compared with the first deriver's steps;
+  C132-CORES-FREE is its corollary. (iv) **C132-CONFINE holds for every set** — neither compactness nor connectedness — and is
+  proved in Lean on that branch (not landed).
 

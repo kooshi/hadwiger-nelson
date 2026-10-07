@@ -899,3 +899,43 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     point — which is FS-124's, the open hard case. **The milestone's next step is its record job** (Workflow 3.1, step 6),
     which waits for Kooshi's word on what the milestone delivers. The kernel planner alone is running.
 
+30. **FS132-K1 done at its Stage 3 (532k and 104 minutes by the task notice): the first night's exclusion has its second mind —
+    the step lemma holds on a line-by-line reading; a Lean skeleton with the release's palette definitions ported is on a
+    branch** (planner; record `plans/FS132-kernel-plan.md` Stages 1–3 on branch `fs132-wk1`, tip `e3695302`, pushed; its
+    report is its hand-back). **Phase 2, for C132-M-ORBIT and C132-M-EXCL only**: the derivers' M1–M9 read line by line —
+    "no gap found". **M8, "Lemma S", holds on this reading**: the coordinates are a diffeomorphism onto the triples; the
+    shift's derivative lies in (7/8, 9/8); the failure of "at most one jump" does give three density points with the outer
+    two equal and the middle different; both window cases; the overlap `(3/2 + 21/16 − 9/4)ρ = (9/16)ρ`; the triples lie in
+    the relation's domain. Two things the text leaves implicit, "both fine": the state is Borel, and the image and preimage
+    steps need the shift bi-Lipschitz, which its derivative bounds give. **M7's constant re-derived independently**, with an
+    exact identity for the shift (`F(0) = −8 sin(d/2) sin(d′/2) cos((d + d′)/2)` — row 148's identity in the chart — and
+    `F′ ∈ (3/2, 2)`, so the shift is unique, positive and between `d d′` and `(4/3) d d′` with no inverse cosine
+    differentiated). **M9 checked with its ranges. "Grade: two minds on M7–M9 now."** **M8 is several leaves, not one**:
+    one measure-theory leaf for the relation and four leaves of real analysis with no colouring in them. **Also**: the
+    derivers' M3–M6 need neither of the release's two strip statements — the exclusion stands on two release statements
+    only (the transfer of palettes for a pair, and the 60° disjointness); the compact-set form is a corollary of the
+    four-point form in the skeleton; C132-CONFINE is in the kernel on the branch for every set; C132-INDEX and
+    C132-RING-WIND are one lemma, by hand, not yet compared with the derivers' entries; C132-CORES-SQUARE stated; a slip of
+    its own blind route corrected (its count does not need limiting directions). **The price, from pieces tried**: "one
+    fix per 600 lines for release files already at `Fin k`"; **its recommendation — port the cones of the three statements
+    (about 2,400 lines, one job), declare no further axiom**; the local form second, as a change to proofs this library
+    then owns; the centres' port (about 1,400 lines typed at five and at radius 5) waits. **What an implementer can start
+    on**: the palette port, the winding module, and Lemma S's analysis leaves with M6 (which need nothing ported). **What
+    could land alone**: the ported palette file and the confinement module, both with no `sorry`; the three skeletons must
+    not reach `main`. **Disclosed**: the fenced file names were printed once by a listing before the fence lifted — names
+    only. **Not done by it**: the derivers' controls re-run; the centres' route and the index lemmas compared with the
+    derivers' entries; the audit steps of the gate (a skeleton is not a landing). **My receipt**: the tip is on `origin`;
+    its record's § 3.2 (the reading of M7–M9) and § 3.5 read whole; its blind-phase commit's file list seen at item 27.
+    Not checked by me: the build's log; the ported file; the skeleton's statements against the claim list.
+    **Credit**: a blind route that reached the argument's shape and stopped honestly at the one lemma it could not see —
+    then, with the fence lifted, read that lemma line by line and said what it leaves implicit; an attribution returned to
+    the release; a theorem of this library's own backlog found doing the work of an outside lemma; a price measured from
+    pieces actually ported.
+    **Rulings.** (a) **The first night's exclusion is now "derived, two minds on every step, kernel pending"** — the second
+    mind is the kernel lane's planner, whose route was blind for all but the step lemma and who read that lemma open. It is
+    not two blind derivations, and the record says which. (b) **The claim list gains the four-point form, the square form
+    and the second reading by a dated line.** (c) **No implementer tonight**: what is formalized first is Kooshi's, with the asking lane's table and this price — my recommendation: one implementer on the palette port and
+    Lemma S's leaves, on the planner's branch. (d) **The record job starts now** (FS132-Z1; the condition of the handoff's
+    § 0b is met: the step lemma holds on a second reading). (e) **A successor planner** resumes at its record's stage 4
+    when the kernel lane is restaffed; nothing of its skeleton is merged into `main`.
+
