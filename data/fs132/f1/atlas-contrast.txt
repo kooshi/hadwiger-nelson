@@ -1,0 +1,63 @@
+== light: ground #eef1ef, panel #f8faf8
+   text  ink       on ground 13.00  on panel 14.10
+   text  ink-2     on ground  7.99  on panel  8.66
+   text  muted     on ground  4.81  on panel  5.22
+   text  c7        on ground  6.44  on panel  6.98
+   text  c6        on ground  4.87  on panel  5.28
+   text  c5        on ground  4.84  on panel  5.25
+   mark  missing   on panel  4.91
+   mark  nogo      on panel  9.39
+   mark  reading   on panel  3.99
+   mark  external  on panel  5.48
+   mark  focus     on panel  4.64
+   apart missing/nogo: CIELAB distance 35
+   apart missing/c5: CIELAB distance 29
+   apart c5/reading: CIELAB distance 28
+   apart c7/focus: CIELAB distance 29
+   apart c7/external: CIELAB distance 23
+   apart c6/focus: CIELAB distance 78
+   apart external/focus: CIELAB distance 41
+   apart nogo/external: CIELAB distance 38
+   node fills, lightness L*: kernel 16, cert 26, 2b 50, 2 69, 1 85, hollow 98
+   hatch mean #c1b4c6; halo against ink 14.10
+   brick hub: seven tints #dee5ea, #dce9e5, #ece5db, #e8dedf, #e8e5e9, #eaead9, #e0e3e2; distances 3 to 12
+   route bar, cert                  against its track 8.85
+   route bar, two minds, one blind  against its track 4.40
+   route bar, two minds             against its track 2.87
+   route bar, one mind              against its track 2.15
+   route bar, in print              against its track 3.44
+   route bar, a reading             against its track 2.68
+   route bar, missing step          against its track 3.09
+   route bar, open question         against its track 4.03
+== dark: ground #0f1618, panel #151f22
+   text  ink       on ground 14.48  on panel 13.29
+   text  ink-2     on ground 10.81  on panel  9.92
+   text  muted     on ground  6.77  on panel  6.21
+   text  c7        on ground  7.69  on panel  7.06
+   text  c6        on ground  9.27  on panel  8.51
+   text  c5        on ground  8.75  on panel  8.03
+   mark  missing   on panel  6.66
+   mark  nogo      on panel  4.95
+   mark  reading   on panel 11.38
+   mark  external  on panel  6.63
+   mark  focus     on panel  9.05
+   apart missing/nogo: CIELAB distance 36
+   apart missing/c5: CIELAB distance 32
+   apart c5/reading: CIELAB distance 28
+   apart c7/focus: CIELAB distance 34
+   apart c7/external: CIELAB distance 25
+   apart c6/focus: CIELAB distance 31
+   apart external/focus: CIELAB distance 48
+   apart nogo/external: CIELAB distance 38
+   node fills, lightness L*: kernel 91, cert 84, 2b 63, 2 44, 1 28, hollow 11
+   hatch mean #5b546c; halo against ink 14.48
+   brick hub: seven tints #293b4b, #26413e, #3f3a2e, #3c2d37, #353744, #40432f, #364143; distances 6 to 25
+   route bar, cert                  against its track 9.10
+   route bar, two minds, one blind  against its track 5.65
+   route bar, two minds             against its track 3.91
+   route bar, one mind              against its track 2.89
+   route bar, in print              against its track 4.35
+   route bar, a reading             against its track 7.15
+   route bar, missing step          against its track 3.98
+   route bar, open question         against its track 5.44
+palette review: 0 failed

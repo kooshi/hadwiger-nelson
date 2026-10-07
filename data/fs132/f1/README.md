@@ -131,3 +131,37 @@ Script `data/fs132/f1/stage4_frontier_stubs.py`, log and stops `data/fs132/f1/st
 | `FS112-N3-COR3's` | rank 5: P's bearing replaces FS-122's | yes: `plans/FS114-NB5-verification.md`, `plans/FS112-unit-arc-half.md`, `plans/POROS-2026-10-03-fs129-rerank.md`, `plans/FS131-I5-implementation.md` |
 
 `--dupes` exit 0; `tools/check_architecture.py` exit 0 (`arch-stage4.txt`); `scripts/identities.py check` exit 0 (`identities-stage4.txt`).
+
+## Stage 5 — SAVED: the Proof Atlas (item 8) — checked, re-pointed, rebuilt; nothing published
+
+Run by the README's commands, in the worktree. **Before** (after items 1–7): `tools/viz_proof_atlas_check.py` exit 1, **30 failures** (`atlas-check-before.txt`); of them **two are not
+caused by this filing** — MAPS6's node and its edge MAPS6→FS44 fail on `main` too (LEDGER.md row 132's wording changed at FS131-E1; `main`: "checked 212, failed 2").
+**Re-pointed** (script `stage5_atlas_repoint.py`, log `stage5-repoint-log.txt`; quote strings, quote addresses and the meta only — no label, plain text, grade fold, route or credence touched):
+
+| node / edge | old quote (address) | new quote (address) |
+|---|---|---|
+| A7, A6, A5 and the six "half" edges | `χ(ℝ²) ∈ {5, 6, 7}` (CLAUDE.md § Where the problem stands) | `χ(ℝ²) ∈ {6, 7}` (same) |
+| LB7; edges R128→LB7, M7→LB7 | `gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR` (CLAUDE.md § The aim) | `gives χ(ℝ²) = 7` (same, link 5) |
+| M7 | `No — … gives χ_m⁰(ℝ²) = 7` (§ The aim) | `No — … gives χ(ℝ²) = 7` |
+| UB6 | `Yes — such a sequence, with six or five colours — gives χ(ℝ²) ≤ 6, or = 5, with no MR` | `Yes — such a sequence with six colours — gives χ(ℝ²) = 6` |
+| UB5 | the same old string | `At five the answer is in: the holes stay of density bounded below` (link 5) |
+| R130; edge R130→LB7 | `Given MR (row 128): χ(ℝ²) = χ_m⁰(ℝ²)` (LEDGER.md row 130) | `With no hypothesis ([OAIMath2026] Thm 1.3; χ_m⁰ ≤ χ kernel-checked there and audited here, EXT-OAI1): χ(ℝ²) = χ_m⁰(ℝ²)` |
+| FS120 | the stub's old title words (`…, and the cover route at five: can a pinch …`) | `the pinch at a junction: can a pinch …` (the stub's title after M18) |
+| FS104 node; edges FS104→LB6, R128→LB6 | `is χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130)?`, `a YES gives χ(ℝ²) ≥ 6 given MR (row 128)` (CLAUDE.md ranked row 3, which left the top three) | `Answered YES by citation, 2026-10-07: χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (`plans/STUB-cp-plane-six.md`, its banner) |
+| edge FS104→FS44; FS44 node; edge FS44→UB5 | `a NO (a CP five-colouring) gives …`, `the shape of a CP five-colouring …`, `a CP five-colouring of the plane gives χ(ℝ²) = 5 …` (CLAUDE.md row 3; FRONTIER-STUBS item 13, now FS-62) | `a CP five-colouring of the plane does not exist` (`plans/STUB-fifth-colour-structure.md`, its banner) |
+| FS44 `words` | `the conjecture's bold form predicts no (G48)` at FRONTIER-STUBS item 13 | the same words at `plans/RERANK-2026-09-27.md` (the ranked row left the table; found by `rg -F`) |
+| FS80 (node, `words`, edge FS80→FS104) | FRONTIER-STUBS ranked item 14 | item 19 (the row moved) |
+| edge BOWTIE→TSMYES | FRONTIER-STUBS item 19 | item 16 (FS-115 moved) |
+| note belief | `…the value-skipping that motivates the belief is itself compatible with five (G64).` | `…the value-skipping that motivated the belief was compatible with five until [OAIMath2026]` (CLAUDE.md § The local–global conjecture) |
+| MAPS6 node, edge MAPS6→FS44 (**pre-existing**) | `maps need six modulo Townsend's simplification (c), which …` (LEDGER.md row 132) | `maps need six for arc maps (segments and circular arcs), by [Woodall1973]'s steps 1–6, step 6 repaired by Townsend's lemma`; edge: `maps need six for arc maps (segments and circular arcs)` |
+| MAPS6 grade words (**pre-existing**) | `maps-six, Townsend's manuscript and Woodall one mind, the fill in outline` | `maps-six for arc maps one mind (FS131-E1), Woodall's steps 1–3 in outline` (row 132) |
+
+Facts writer's meta set to built="2026-10-07", job="FS132-F1", as_of="the outside release as literature; FS132-P1's re-rank". **After:** `viz_proof_atlas_facts.py` exit 0 ("89 nodes, 106 edges,
+9 routes", "layout lint: 0 overlaps"); `viz_proof_atlas_check.py` exit 0 ("checked 212, failed 0, errors 0"); its `--self-test` exit 0 (SELF-TEST PASSED); `viz_proof_atlas_contrast.py` exit 0
+("palette review: 0 failed") and its `--self-test` exit 0; `build.py` exit 0 (wrote `visualizations/proof-atlas/index.html`, 175,780 bytes). **Nothing published** (Kooshi's standing word).
+
+**Nodes whose label, grade or plain text now disagrees with what was filed (CHECK, not edited):** A5 (the answer "χ(ℝ²) = 5" stands as a possible answer), LB6 (still the open "$1,000 question",
+grade "the exact value inside it remains open"), LB7 and M7 (plain text "given measure rigidity"/"Given MR"), UB5 ("Five colours suffice"), R130 (plain "Given MR, that is Hadwiger–Nelson itself"),
+R128, R132, MAPS6 (plain "each repairing the other"; its grade is now one mind), FS104 (a question node still open, with "No held result decides it"), FS44 (a question node "Decisive if it lands"), FS120 (label "… and the cover route at five"),
+FS128 (label "at five and six"), FS59 (plain "gives χ(ℝ²) ≥ 6"); routes `five`, `alg5` (a route to five), `cp6`, `win6`, `q167`, `wall7` (their link texts and distances, whose credences were registered before the release) and the credence table.
+The page therefore still draws five as a live answer; it is a node edit, owed.
