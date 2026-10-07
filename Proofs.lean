@@ -268,6 +268,7 @@ import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.Topology.SpernerGrid
 import Proofs.HadwigerNelson.Topology.LebesgueCovering
+import Proofs.HadwigerNelson.Outside.OAI158
 
 /-!
 # Proofs
