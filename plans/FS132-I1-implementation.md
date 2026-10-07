@@ -279,3 +279,116 @@ distinction is for the record.
 `data/fs132/i1/build-1-module.log`: exit 0, "471 of 471 batches, 2 module(s) rebuilt, 0 module(s) with warnings"
 (`Outside.OAI158` 1.8 s, `Proofs` 1.6 s). Two docstrings then gained their inhabitant notes;
 `data/fs132/i1/build-2-final.log` is the build of the module as committed (its last lines are quoted in stage 3).
+
+## Stage 3 — SAVED (FS132-I1): the registrations, the probes, the guarded lint
+
+Everything below is on this branch's tree: base `8386c256`, the module as committed in stage 2 (`8bb6ba9d`).
+`main` has moved since the cut (67 commits at this writing, wave 8's landing among them); a landing re-runs each
+probe on the joined tree, and the counts it files are its own. What transfers is the **difference** this job makes.
+
+| check | command (each under `scripts/slot.py`) | result | saved |
+|---|---|---|---|
+| the build, as committed | `--mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` | **exit 0** — "471 of 471 batches, 2 module(s) rebuilt, 0 module(s) with warnings, 8m31s" (`Outside.OAI158`, `Proofs`) | `data/fs132/i1/build-2-final.log` |
+| the module map | `python3 tools/check_architecture.py` | **exit 0**, `RESULT: PASS`: 295 modules, 295 rows, 0 import mismatches (before the row: exit 1, "missing: ['Outside/OAI158']" — the check's own red, seen) | `arch-0-baseline.out`, `arch-1.out` |
+| doubled names | `--mem 16 -- ./scripts/dupnames.sh` | **exit 0** — "no name is declared by two modules (23 generated on demand)"; 1832 modules scanned, 1832 source files; the new module is in none of the 23 | `probes/dupnames.out`, `dupnames-full.log` |
+| this block's axioms | `tools/fs132_i1_axioms.py emit` → `lake env lean` → `check` | **exit 0** — 21 records as filed: 12 clean, 5 on H alone, 4 on T alone | `axioms/module.out`, `module.check` |
+| — its control, a planted `sorry` | `direction_coe`'s proof replaced by `sorry` in a copy | **FIRED**: the ten records above it refused (`carries sorryAx`), the other eleven pass | `axioms/control-sorry.*` |
+| — its control, a wrong filing | `six_le_chiM0` proved through the collapse in a copy | **FIRED**: `six_le_chiM0`, `chiM0_six_or_seven` refused ("filed on no_proper_five_coloring alone; carries [both]"), nineteen pass | `axioms/control-both.*` |
+| the axiom audit, once, as a probe | `--mem 24 -- ./scripts/axioms.sh` | **exit 0** — "audited: 6355 records — 6316 clean on the standard axioms, 17 axiom-free, 17 imported, 5 declared purchase(s)"; "declared imports: 3; library axioms other than native auxiliaries: 3, every one declared" | `probes/axioms.out`, `axioms-receipt.log` |
+| the assumptions audit, once, as a probe | `--mem 16 -- ./scripts/assumptions.sh` | **exit 1, nine failures, one kind**: `unlisted-consumer` for the nine `RESTS` rows of the two new axioms (the ledger is the landing's file). The scan itself: `fails=0`, `hints=0`; `axioms=3 rests=17 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` | `probes/assumptions.out`, `assumptions-receipt.log` |
+| the guarded lint, after the last build | `--mem 8 -- lake lint --no-build -- --no-build --trace` | **exit 0** — "-- Linting passed for Proofs."; 14 linters, 14 "(2/2) Passed!" | `probes/lint.out` |
+
+**The audit accepts two more declared imports.** Against `main`'s recorded counts (6,334 records: 6304 clean, 17
+axiom-free, 8 imported, 5 purchases): **+21 records — +12 clean, +9 imported, axiom-free and purchases unmoved**; the
+digest's own line: "RECORDED COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 6304 clean → 6316, 8 imported →
+17". The receipt prints `DECLARED IMPORT` three times and `LIBRARY SUMMARY axioms=3 native=10`.
+
+**The assumptions scan asks for no line of `scripts/Assumptions.lean`.** Its rows naming the module are the two
+`AXIOM … ref=bib:OAIMath2026` rows (theorems=5 and 4) and the nine `RESTS` rows; no `FAIL` of the scan, no `HINT`, no
+`SILENT`, no `CONDITION`. `ProperColoring` and `WeakColoring` are formers taken as hypotheses and each is concluded by a
+theorem with no assumption (`exists_properColoring_seven`; `weakColoring_of_aeColouring`), which is why the scan does
+not ask whether they are assumptions. Against the last landed receipt (`data/fs131/lt5/gate/receipt-assumptions-
+landed2.log`): constants 13795 → 13826, theorems 10173 → 10197, formers 303 → 305, hypotheses 17192 → 17198, closed
+1473 → 1473, `unseen` 15214 → 15219, **axioms 1 → 3, rests 8 → 17**, every other total unmoved.
+
+**Not run by me** (the landing's, on the joined tree): `./scripts/axioms.sh --self-test`, `./scripts/assumptions.sh
+--self-test` and `--write-ledger`, `./scripts/vacuity.sh`, `./scripts/dupnames.sh --self-test`, the whole gate.
+
+**At the join** (a dry run, `git merge-tree origin/main HEAD`, nothing merged): `Proofs.lean` and
+`scripts/Axioms.lean` merge by themselves; **`ARCHITECTURE.md` conflicts in one place**, the end of § 3 — `main` added
+rows to § 3.11's table where this branch adds § 3.12. Both are kept: `main`'s rows, then § 3.12.
+
+## Drafts for the front page
+
+Counts are this tree's (base `8386c256`); the landing replaces each with the joined tree's, and the differences are:
+audit +21 records = +12 clean +9 imported; assumptions `axioms` +2, `rests` +9.
+
+1. **`scripts/Assumptions.lean`, `AssumptionAudit.declared`** — *no line*. **`scripts/assumptions-ledger.txt`** — by
+   `./scripts/assumptions.sh --write-ledger`, which adds exactly these nine rows (sorted into place) and rewrites the
+   header's count line to the joined tree's nine counts:
+   ```
+   RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.chiM0_six_or_seven
+   RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven
+   RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.not_colorable_five
+   RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.six_le_chiM0
+   RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.six_le_chromaticNumber_plane
+   RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.chiM0_le_chromaticNumber_plane
+   RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0
+   RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.colorable_iff_nonempty_aeColouring
+   RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.nonempty_aeColouring_of_colorable
+   ```
+2. **`CLAUDE.md` § Trust ledger, first paragraph** — *replacing* "the current audit reads 6304 clean and 5 declared
+   purchases, and 8 imported (and 17 axiom-free; 6,334 records at wave 10's second landing, FS131-L10B, 2026-10-06)"
+   *with* "the current audit reads 6316 clean and 5 declared purchases, and 17 imported (and 17 axiom-free; 6,355
+   records at FS-132's import, FS132-I1, 2026-10-07)"; *and replacing* "The library declares one outside axiom,
+   `StandingFive.kloosterman_bound` — Weil's bound for Kloosterman sums, `[Weil1948]` p. 207, read against its page by
+   two readers — and the eight imported records are the theorems that rest on it;" *with* "The library declares three
+   outside axioms: `StandingFive.kloosterman_bound` — Weil's bound for Kloosterman sums, `[Weil1948]` p. 207, read
+   against its page by two readers — with eight imported records; and, from `[OAIMath2026]` family 158, a Lean
+   development audited here at its own pin, `Outside.OAI158.no_proper_five_coloring` — no map `ℂ → Fin 5` separates
+   every unit pair — with five, and `Outside.OAI158.proper_to_borel_weak` — a proper `k`-colouring of the plane gives a
+   Borel one proper at almost every unit pair — with four; each of the two is the release's stored statement term for
+   term (`tools/fs132_i1_readback.py`);". The sentence "Rung B holds none." stands.
+3. **`CLAUDE.md` § Trust ledger, second paragraph** — *replacing* "`axioms=1 rests=8 named=19 inline=16 outside=7
+   ours=23 open=5 takes=98 mentions=1` — one outside theorem declared as an axiom, with eight theorems resting on it;"
+   *with* "`axioms=3 rests=17 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — three outside
+   theorems declared as axioms, with seventeen theorems resting on them;". The rest of the paragraph stands
+   (thirty-five hypotheses, 98 pairs, 51 statements: none moved).
+4. **`LEAN.md` § Assumptions, item 2 of "An imported theorem carries four things"** — *after* "(`StandingFive.
+   kloosterman_bound`, with `kloostermanBound_of_ringChar_ne_two` and `kloosterman_page_of_kloostermanBound`)" *add*:
+   "Where the source is itself Lean, copy its definitions, state the axiom over the copies, and compare the stored
+   terms across the two pins — every constant, instance, binder and universe level — with a control that fires
+   (`Outside.OAI158`; `tools/fs132_i1_readback.py`, on a print made at each pin by one dumper)."
+5. **`LEAN.md` § Searching — Lean** — *a new line*: "Which instance a term is elaborated with depends on the imports,
+   and equal text can store different terms: `volume : Measure ℂ` takes the proof `Complex.instFiniteDimensionalReal`
+   of `FiniteDimensional ℝ ℂ` where `Mathlib.LinearAlgebra.Complex.FiniteDimensional` is imported and
+   `FiniteDimensional.rclike_to_real` where it is not — equal by proof irrelevance, not symbol for symbol. A statement
+   copied from another library is compared as the kernel stores it, never as text (FS132-I1)."
+6. **`LEAN.md` § Trust ledger** — no row changes; its table already has "an `axiom` importing an outside theorem".
+7. **`tools/claude_md_fact_audit.py`, `GATE_CHANGES`**, after the last entry — on this tree's counts:
+   `(("6304", "5"), ("6316", "5")): "FS-132's import of [OAIMath2026] family 158 (FS132-I1; copy data/fs132/i1/probes/axioms-receipt.log, on fs132-wi1 at 8bb6ba9d): 6,355 records, 6,316 clean, 17 axiom-free, 17 imported, 5 purchases",`
+   — at a landing after wave 8 the pair is `(<main's clean count then>, <that + 12>)` and the receipt the landing's.
+8. **`ARCHITECTURE.md`** — filed on this branch (§ 3.12; § 5 Trust, two rows, "Three at present").
+9. **`LEDGER.md` rows 33 and 130, `BIBLIOGRAPHY.md` `[OAIMath2026]`** — the audit's drafted sentences
+   (`plans/EXT-OAI1-audit.md` stage 8, last section) name declarations that now exist exactly as it wrote them:
+   `Outside.OAI158.no_proper_five_coloring`, `chromaticNumber_plane_six_or_seven`,
+   `Outside.OAI158.chromaticNumber_plane_eq_chiM0`. *To add to row 130's sentence*: "colour by colour:
+   `colorable_iff_nonempty_aeColouring`"; *to row 33's*: "and `6 ≤ χ_m⁰(ℝ²) ≤ 7` (`chiM0_six_or_seven`)". *To the
+   bibliography row's third cell*: "Imported by FS132-I1 as two declared outside theorems (`Outside/OAI158`); the
+   stored statements compared term for term across the pins (`plans/FS132-I1-implementation.md`)."
+10. **The grade.** These are not regraded to [kernel]: `6 ≤ χ(ℝ²)` and `χ(ℝ²) = χ_m⁰(ℝ²)` are held **on a declared
+    outside theorem each**, kernel-checked from there. What is [kernel] with no import is the dictionary
+    (`weakColoring_iff_unitPairsNull`, `properColoring_iff_colorable`) and the models.
+
+## What was checked, and by whom
+
+**By the kernel at this pin (the build, exit 0):** every theorem of the list at the top, on the axioms printed beside
+it; the eight copied declarations elaborate; the nine characterisations (`ModuleSemantic.lean`, `lake env lean`).
+**By the kernel at the release's pin (Lean v4.34.1, `lake`-free, nothing written there):** the same nine
+characterisations over the release's constants; the release's eight declarations exist with the printed terms.
+**By my instruments, each with a control seen to fire:** the 24 quotations; the eight stored terms equal across the
+pins; the 21 records' axiom sets as filed. **By reading, one mind:** the level-one table's eight differences; the
+release's scope lines; that the docstrings say what the statements say.
+**By nobody here:** Mathlib between the tags below the constants the statements name (and the five primitives the
+characterisations bottom out in); the release's proofs as mathematics (the audit's list stands); the audit scripts'
+self-tests, the vacuity scan and the whole gate on a joined tree.
