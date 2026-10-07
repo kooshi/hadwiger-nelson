@@ -1,0 +1,125 @@
+## 2026-10-07T13:02:31Z  query: ti:"chromatic number" & (ti:disc | ti:disk | ti:bounded | ti:strip) & cc:05C15  hits: 22
+1990 | Erdős, Paul; Gimbel, John; Straight, H. Joseph | Chromatic number versus chromatic number in graphs with bounded clique number | Zbl 0721.05020 | text:review
+2020 | Dujmović, Vida; Esperet, Louis; Joret, Gwenaël; Walczak, Bartosz; Wood, David R. | Planar graphs have bounded nonrepetitive chromatic number | Zbl 1450.05012 | text:summary
+1997 | Edwards, Keith | The harmonious chromatic number of bounded degree graphs | Zbl 0869.05033 | text:review
+2008 | Kruskal, Clyde P. | The chromatic number of the plane: the bounded case | Zbl 1139.05023 | text:summary
+2011 | Guruswami, Venkatesan; Sinop, Ali Kemal | The complexity of finding independent sets in bounded degree (hyper)graphs of low chromatic number | Zbl 1376.68054 | text:summary
+1989 | Beigel, Richard; Gasarch, William I. | On the complexity of finding the chromatic number of a recursive graph. I: The bounded case | Zbl 0685.03033 | text:review
+1996 | Edwards, Keith | The harmonious chromatic number of bounded degree trees | Zbl 0849.05029 | text:review
+1998 | Bonato, A. | Continuum many universal Horn classes of graphs of bounded chromatic number | Zbl 0933.05046 | text:review
+2018 | Carmi, Paz; Dujmović, Vida; Morin, Pat | Anagram-free chromatic number is not pathwidth-bounded | Zbl 1519.05069 | text:summary
+1992 | Berman, Kenneth A.; Paul, Jerome L. | The bounded chromatic number for graphs of genus \(g\) | Zbl 0774.05035 | text:review
+2018 | Song, Huimin; Lai, Hong-Jian; Wu, Jianliang | List \(r\)-hued chromatic number of graphs with bounded maximum average degrees | Zbl 1383.05120 | text:summary
+1993 | Chen, Bor-Liang; Lih, Ko-Wei | A note on the \(m\)-bounded chromatic number of a tree | Zbl 0781.05019 | text:review
+2006 | Bessy, S.; Havet, F.; Birmelé, E. | Arc-chromatic number of digraphs in which every vertex has bounded outdegree or bounded indegree | Zbl 1116.05025 | text:review
+2015 | Amine, El Sahili; Mekkia, Kouider; Maidoun, Mortada | On the \(b\)-chromatic number of regular bounded graphs | Zbl 1316.05037 | text:summary
+2026 | Goetze, Miriam; Ueckerdt, Torsten | The \(r\)-dynamic chromatic number is bounded in the strong 2-coloring number | Zbl 1579.05075 | text:summary
+2019 | Choi, Ilkyoo; Kim, Ringi; Park, Boram | Characterization of forbidden subgraphs for bounded star chromatic number | Zbl 1403.05043 | text:summary
+1998 | Malesińska, Ewa; Piskorz, Steffen; Weißenfels, Gerhard | On the chromatic number of disk graphs | Zbl 0990.05047 | text:summary
+2020 | Fickes, Grant; Wong, Tony W. H. | The edge-distinguishing chromatic number of spider graphs with three legs or bounded leg lengths | Zbl 1461.05090 | text:summary
+2023 | Duffy, Christopher; Jacques, Fabien; Montassier, Mickaël; Pinlou, Alexandre | The chromatic number of 2-edge-colored and signed graphs of bounded maximum degree | Zbl 1522.05110 | text:review
+2015 | Xu, Chuandong; Zhang, Shenggui; Wang, Yi | On the maximum arc-chromatic number of digraphs with bounded outdegrees or indegrees | Zbl 1338.05095 | text:summary
+2022 | Jacques, Fabien; Pinlou, Alexandre | The chromatic number of signed graphs with bounded maximum average degree | Zbl 1490.05074 | text:summary
+2010 | Junosza-Szaniawski, Konstanty; Roẓej, łukasz | Game chromatic number of graphs with locally bounded number of cycles | Zbl 1234.05090 | text:summary
+
+## 2026-10-07T13:02:38Z  query: ti:"chromatic number of the plane" | ti:"chromatic number of the Euclidean plane"  hits: 31
+2003 | Soifer, Alexander | Chromatic number of the plane and its relatives | Zbl 1035.05043 | text:review
+1991 | Soifer, Alexander | Chromatic number of the plane: A historical essay | Zbl 0853.05038 | text:review
+2018 | de Grey, Aubrey D. N. J. | The chromatic number of the plane is at least | Zbl 1404.05063 | text:summary
+2003 | Shelah, Saharon; Soifer, Alexander | Axiom of choice and chromatic number of the plane | Zbl 1030.03035 | text:review
+1993 | Hoffman, Ilya; Soifer, Alexander | Almost chromatic number of the plane | Zbl 0845.05037 | text:review
+2003 | Soifer, Alexander | Chromatic number of the plane: Its past and future | Zbl 1049.05039 | text:review
+1992 | Soifer, Alexander | Relatives of chromatic number of the plane. I | Zbl 0853.05039 | text:review
+2007 | Soifer, Alexander | Chromatic number of the plane theorem in Solovay's set theory | Zbl 1506.03106 | text:-
+2019 | Soifer, Alexander | Chromatic number of the plane, breakthroughs and aspirations in six essays | Zbl ? | text:-
+2025 | Thürey, Volker Wilhelm | More than `the chromatic number of the plane' | Zbl 1569.05110 | text:summary
+2008 | Kruskal, Clyde P. | The chromatic number of the plane: the bounded case | Zbl 1139.05023 | text:summary
+1994 | Hoffman, Ilya; Soifer, Alexander | Correction for: Almost chromatic number of the plane | Zbl 0845.05038 | text:review
+1992 | Fisher, David; Ullman, Daniel | The fractional chromatic number of the plane | Zbl 0843.05043 | text:review
+2017 | Cranston, Daniel W.; Rabern, Landon | The fractional chromatic number of the plane | Zbl 1399.05069 | text:review
+2020 | Exoo, Geoffrey; Ismailescu, Dan | The chromatic number of the plane is at least 5: a new proof | Zbl 1445.05040 | text:review
+2003 | Soifer, Alexander | Chromatic number of the plane and its relatives. II: Polychromatic number and 6-coloring. | Zbl 1061.05038 | text:editorial
+2020 | Parts, Jaan | The chromatic number of the plane is at least 5 -- a human-veriviable proof | Zbl 1455.05020 | text:summary
+2023 | Máté Matolcsi; Imre Z. Ruzsa; Dániel Varga; Pál Zsámboki | The fractional chromatic number of the plane is at least 4 | Zbl arXiv:2311.10069 | text:summary
+2011 | Soifer, Alexander | Chromatic number of the plane \& its relatives, history, problems and results: an essay in 11 parts | Zbl 1226.05123 | text:summary
+2025 | Soifer, Alexander | New results and new open problems and conjectures related to the chromatic number of the plane problem | Zbl 1569.05108 | text:review
+1992 | Kainen, Paul C. | Is the chromatic number of the plane robust? | Zbl 0846.05029 | text:review
+2018 | Soifer, Alexander | Progress in my favorite open problem of mathematics, chromatic number of the plane: an Étude in five movements | Zbl 1403.05157 | text:-
+2000 | Kahle, Matthew | A generalization of the chromatic number of the plane | Zbl 0969.05026 | text:summary
+2023 | Frankl, Nóra; Hubai, Tamás; Pálvölgyi, Dömötör | Almost-monochromatic sets and the chromatic number of the plane | Zbl 1522.05117 | text:summary
+2020 | Frankl, Nóra; Hubai, Tamás; Pálvölgyi, Dömötör | Almost-monochromatic sets and the chromatic number of the plane | Zbl 1560.68210 | text:summary
+2016 | Alm, Jeremy F.; Manske, Jacob | The vector graph and the chromatic number of the plane, or how not to prove that \(\chi(\mathbb E^2)>4\) | Zbl 1375.05078 | text:summary
+2026 | Sokolov, Georgy; Voronov, Vsevolod | On the chromatic number of the plane for map-type colorings | Zbl ? | text:summary
+2018 | Junosza-Szaniawski, Konstanty | Upper bound on the circular chromatic number of the plane | Zbl 1391.05110 | text:summary
+2023 | Vsevolod Voronov | The chromatic number of the plane with an interval of forbidden distances is at least 7 | Zbl arXiv:2304.10163 | text:summary
+2025 | zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | Zbl 1585.05050 | text:summary
+2015 | Junosza-Szaniawski, Konstanty | First non-trivial upper bound on circular chromatic number of the plane | Zbl 1346.05073 | text:summary
+
+## 2026-10-07T13:02:40Z  query: "measurable chromatic number"  hits: 20
+1989 | Székely, L. A.; Wormald, N. C. | Bounds on the measurable chromatic number of \({\mathbb{R}}\) | Zbl 0683.05021 | text:editorial
+2016 | Conley, Clinton T.; Miller, Benjamin D. | A bound on measurable chromatic numbers of locally finite Borel graphs | Zbl 1432.03086 | text:summary
+2010 | de Oliveira Filho, Fernando Mário; Vallentin, Frank | Fourier analysis, linear programming, and densities of distance avoiding sets in \(\mathbb R^n\) | Zbl 1205.90196 | text:summary
+1983 | Székely, L. A. | Remarks on the chromatic number of geometric graphs | Zbl 0536.05024 | text:review
+2009 | Bachoc, Christine; Nebe, Gabriele; de Oliveira Filho, Fernando Mário; Vallentin, Frank | Lower bounds for measurable chromatic numbers | Zbl 1214.05022 | text:summary
+1984 | Székely, L. A. | Measurable chromatic number of geometric graphs and sets without some distances in Euclidean space | Zbl 0558.05020 | text:review
+2015 | Bachoc, Christine; Passuello, Alberto; Thiery, Alain | The density of sets avoiding distance 1 in Euclidean space | Zbl 1327.52032 | text:review
+2007 | Moshchevitin, N. G.; Raigorodskii, A. M. | Colorings of the space \(\mathbb R^{n}\) with several forbidden distances | Zbl 1134.05027 | text:summary
+2008 | Miller, Benjamin D. | Measurable chromatic numbers | Zbl 1157.03025 | text:summary
+2015 | Bogolubsky, L. I.; Raigorodskii, A. M. | On the measurable chromatic number of a space of dimension \(n \leq 24\) | Zbl 1334.05034 | text:summary
+2009 | Payne, Michael S. | Unit distance graphs with ambiguous chromatic number | Zbl 1185.05063 | text:summary
+2022 | Weilacher, Felix | Descriptive chromatic numbers of locally finite and everywhere two-ended graphs | Zbl 1521.03155 | text:summary
+2026 | Amnon Rosenmann | On the chromatic number and equilateral dimension of $\mathbb{R}^n$ with the tropical norm | Zbl arXiv:2606.16642 | text:summary
+2019 | Bernshteyn, Anton | Measurable versions of the Lovász local lemma and measurable graph colorings | Zbl 1436.05110 | text:summary
+2019 | Bachoc, Christine; Bellitto, Thomas; Moustrou, Philippe; Pêcher, Arnaud | On the density of sets avoiding parallelohedron distance 1 | Zbl 1430.52022 | text:review
+2018 | Donnelly, John | The chromatic number of the taxicab plane | Zbl 1407.05233 | text:summary
+2015 | Malen, Greg | Measurable colorings of \(\mathbb{S}^2_r\) | Zbl 1345.05031 | text:summary
+2019 | DeCorte, Evan; Golubev, Konstantin | Lower bounds for the measurable chromatic number of the hyperbolic plane | Zbl 1417.05063 | text:summary
+2026 | Cecelia Higgins; Pieter Spaas; Alexander Tenenbaum | Spectral Theory for Borel PMP Graphs | Zbl arXiv:2602.05185 | text:summary
+2019 | Konstantin Golubev | On the support of a non-autocorrelated function on a hyperbolic surface | Zbl arXiv:1908.11613 | text:summary
+
+## 2026-10-07T13:02:53Z  query: (ab:"avoiding unit distance" | ab:"unit distance avoiding" | ab:"1-avoiding" | ab:"distance-avoiding") & (ab:boundary | ab:arc | ab:"Reuleaux" | ab:"constant width")  hits: 2
+1996 | Mitra, Pinaki; Nandy, Subhas C. | Efficient computation of rectilinear geodesic Voronoi neighbor in presence of obstacles | Zbl 1541.68407 | text:summary
+2012 |  | Proceedings of the 24th international conference on formal power series and algebraic combinatorics, FPSAC 2012, Nagoya, Japan, July 30--August 3, 2012 | Zbl 1257.05001 | text:editorial
+
+## 2026-10-07T13:02:54Z  query: (ab:"Reuleaux" | ab:"constant width") & (ab:"chromatic number" | ab:coloring | ab:colouring) & (ab:plane | ab:tiling)  hits: 2
+2004 |  | STACS 2004. 21st annual symposium on theoretical aspects of computer science, Montpellier, France, March 25--27, 2004. Proceedings. | Zbl 1046.68005 | text:editorial
+2009 |  | Algorithms and computation. 20th international symposium, ISAAC 2009, Honolulu, Hawaii, USA, December 16--18, 2009. Proceedings | Zbl 1178.68008 | text:editorial
+
+## 2026-10-07T13:03:07Z  query: (ab:"triple junction" | ab:"triple junctions" | ab:"triple point" | ab:"multiple junction") & (ab:"measurable partition" | ab:"Caccioppoli partition" | ab:"Lebesgue density" | ab:"density point" | ab:"measurable sets")  hits: None
+
+## 2026-10-07T13:03:07Z  query: (ab:"Lebesgue covering" | ab:"covering dimension" | ab:Sperner | ab:"KKM") & (ab:"density point" | ab:"Lebesgue density" | ab:"positive density" | ab:"measure-theoretic boundary") & (ab:partition | ab:cover | ab:covering)  hits: None
+
+## 2026-10-07T13:03:08Z  query: (ab:"probabilistic Hadwiger" | (ab:"almost every" & ab:"unit distance" & (ab:coloring | ab:colouring | ab:"chromatic number")) | (ab:"almost all" & ab:"unit distance" & ab:measurable & ab:chromatic))  hits: None
+
+## 2026-10-07T13:03:09Z  query: (ti:tiling | ti:tilings | ti:"map-type" | ti:"map type" | ti:"tile-based" | ti:polygonal) & (ab:"chromatic number of the plane" | ab:"Hadwiger-Nelson" | ab:"unit distance")  hits: 4
+2022 | de Grey, Aubrey D. N. J.; Parts, Jaan | Tiling the plane with hexagons: improved separations for \(k\)-colourings | Zbl 1503.52025 | text:review
+2004 | Coulson, D. | On the chromatic number of plane tilings | Zbl 1081.05022 | text:review
+2026 | Sokolov, Georgy; Voronov, Vsevolod | On the chromatic number of the plane for map-type colorings | Zbl ? | text:summary
+2003 | Coulson, David | Tilings and colourings of 3-space | Zbl 1035.05040 | text:review
+
+## 2026-10-07T13:03:15Z  query: (ab:"spindle convex" | ab:"ball-polyhedra" | ab:"ball polyhedra" | ab:"hyperconvex" | ab:"Reuleaux polygon") & (ab:tiling | ab:partition | ab:packing | ab:"unit distance")  hits: 2
+2025 | Lopez-Campos, Gyivan; Oliveros, Déborah; Ramírez Alfonsín, Jorge L. | Borsuk and Vázsonyi problems through Reuleaux polyhedra | Zbl 1580.52001 | text:review
+1999 |  | Nonlinear analysis and convex analysis. Proceedings of the 1st international conference (NACA98), Niigata, Japan, July 28--31, 1998 | Zbl 0969.00060 | text:review
+
+## 2026-10-07T13:03:16Z  query: (ab:"three sets" | ab:"three measurable" | ab:"three classes") & (ab:"density point" | ab:"positive density" | ab:"Lebesgue density") & ab:plane  hits: None
+
+## 2026-10-07T13:03:17Z  query: (ab:"nerve") & (ab:"measurable" ) & (ab:"density" | ab:"coloring" | ab:"partition") & ab:plane  hits: None
+
+## 2026-10-07T13:03:17Z  query: au:"Townsend, Stephen" | (au:Woodall & ti:"Distances realized by sets covering the plane")  hits: 1
+1973 | Woodall, D. R. | Distances realized by sets covering the plane | Zbl 0251.50003 | text:-
+
+## 2026-10-07T13:03:27Z  query: "density topology" & ("covering dimension" | "topological dimension" | "Lebesgue covering")  hits: None
+
+## 2026-10-07T13:03:28Z  query: ("measure-theoretic" | "essential boundary" | "measure theoretic boundary") & ("three sets" | "triple" ) & (partition | partitions) & plane & cc:28A75  hits: None
+
+## 2026-10-07T13:03:29Z  query: ti:"unit distance" & (ti:arc | ti:arcs | ti:circle | ti:circles) & (cc:05C15 | cc:52C10)  hits: None
+
+## 2026-10-07T13:03:29Z  query: (ti:"realization of distances" | ti:"realize all distances" | ti:"distances realized") & py:1970-2026  hits: 4
+1973 | Woodall, D. R. | Distances realized by sets covering the plane | Zbl 0251.50003 | text:-
+1972 | Larman, D. G.; Rogers, C. A. | The realization of distances within sets in Euclidean space | Zbl 0246.05020 | text:-
+1981 | Falconer, K. J. | The realization of distances in measurable subsets covering \(R^ n\). | Zbl 0469.05021 | text:-
+1978 | Larman, D. G. | A note on the realization of distances within sets in euclidean space | Zbl 0408.52005 | text:-
+
+## 2026-10-07T13:03:30Z  query: au:"Kruskal, Clyde" & (ti:chromatic | ti:plane)  hits: 1
+2008 | Kruskal, Clyde P. | The chromatic number of the plane: the bounded case | Zbl 1139.05023 | text:summary
+
