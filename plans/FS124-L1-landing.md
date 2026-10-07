@@ -75,3 +75,25 @@ fifteen plants; after FS132-L2's, whose claim was the other kind — no record o
 `data/fs124/l1/checks.lean` (the statements as stored, their axioms, the halves proved apart, the models as terms);
 `data/fs124/l1/run-readback-import.sh` (FS132-L1's runner as FS132-L2 ran it, the output directory changed);
 `data/fs124/l1/run-gate.sh` (the pass, after FS132-L2's runner).
+
+## Stage 2 — SAVED (FS124-L1): `main` merged in
+
+**Tried again on the committed tree** (`data/fs124/l1/merge-trial-2.out`, `f8917640` against `origin/main` at
+`98738509`, which had moved once more — FS-136's and the inventory's commits, `plans/` and `data/` only): the same one
+conflict, `Proofs.lean`.
+
+**Made**: `git merge --no-ff --no-commit 987385099934894359bc9203dfca0b9c7a582368` (the hash, never the ref;
+`data/fs124/l1/merge.out`) — `ARCHITECTURE.md` and `scripts/Axioms.lean` merged automatically; **one conflict,
+`Proofs.lean`, resolved by keeping both sides' import lines**: `main`'s twenty-two (the last landing's modules), then
+the branch's three. Checked: the resolved file differs from `main`'s by exactly the three added lines and from the
+branch's by exactly the twenty-two; 308 import lines, none twice. **No conflict in a file under `Proofs/`.** Merge
+commit **`eadcf27b`** (parents `f8917640`, `98738509`).
+
+**The two files git merged by itself, read**: `ARCHITECTURE.md` — `main`'s rows of the last landing stand in § 3.11
+and § 3.12, the branch's § 3.13 after them, no heading twice; `scripts/Axioms.lean` — under IMPORTED the branch's five
+records follow FS132-I1's ten; under CLEAN the branch's block of 52 follows FS131-L8A's and `main`'s four blocks of the
+last landing follow it; 7,010 `#print axioms` lines = `main`'s 6,953 + 57.
+
+**Built** (`data/fs124/l1/build-1-merged.log`): **exit 0** — "build: OK — 480 of 480 batches, 1 module(s) rebuilt, 0
+module(s) with warnings, 9m6s" (the root: its import list changed; every other module's compiled file is the one the
+last landing's tree or stage 1's build made).
