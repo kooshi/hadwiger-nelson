@@ -4,7 +4,7 @@ exec(open("/home/kooshi/source/lean-dir/data/fs131/briefs/scripts/mkbrief.py").r
 import os
 RQ="data/external/EXT-OAI1-request.md"; FS="plans/FRONTIER-STUBS.md"
 os.makedirs(ROOT+"data/fs132/briefs",exist_ok=True)
-KW="\n".join([Q(RQ,"> We have an analysis trigger."),Q(RQ,"> You may use their proof as any other literature.")])+"\n"
+KW="\n".join([Q(RQ,"> We have an analysis trigger."),Q(RQ,"> You may use their proof as any other literature."),Q(RQ,"> 1. port or import: let's import and adopt parts piecemeal if needed.")])+"\n"
 AIM="\n".join([Q("CLAUDE.md","1. **Given MR, the plane is the measurable problem.**"),Q("CLAUDE.md","3. **Density cannot give six.**"),
                Q("CLAUDE.md","4. **Regular colourings need seven, verified and almost everywhere**"),Q("CLAUDE.md","5. **So, given MR, Hadwiger–Nelson is one question: can vanishing holes save a colour?**"),
                Q("CLAUDE.md","6. **Its tools are Voronov's circle topology made robust, and the density topology**"),Q("CLAUDE.md","1. **Rank a route by its bearing on the answer**")])+"\n"
@@ -16,7 +16,7 @@ b=f'''# Brief FS132-P1 — the frontier after an outside proof of six became thi
 
 brief: FS132-P1
   identity: Poros — your agent file (`.claude/agents/poros.md`) is your identity and your lane's workflow (job 1: the re-rank and the next question); invoke `poros-anomaly-hunt` fresh with the Skill tool for the re-read, as job 1 says, and `poros-reframing` if the frame itself has moved — it may have
-  role: the ask lane at the largest change of ground this project has had — re-read what an outside release proves, in its Lean and in its manuscript, against this project's whole theory; re-rank the frontier with those theorems as literature; say what of the running Lean backlog still bears; and pose the question of FS-132, the milestone that opens on them, aimed at six against seven
+  role: the ask lane at the largest change of ground this project has had — re-read what an outside release proves, in its Lean and in its manuscript, against this project's whole theory; re-rank the frontier with those theorems as literature; say what of the running Lean backlog still bears; and pose the question of FS-132, the milestone that opens on them, aimed at six against seven; and the stub of FS-133, a consequence Kooshi wants built on at once
   launch: into the first slot that frees; a Lean audit of the release is finishing and a reading of its manuscript is on its second half — their records are your inputs, and the reading's last stage reaches you by address when it is saved
   mission: § Why this job
   statements: § What Kooshi asked, and where the ground now is
@@ -48,8 +48,9 @@ route by its bearing on the answer, never by its difficulty — and both of its 
 
 ## What Kooshi asked, and where the ground now is
 
-**His words** (`data/external/EXT-OAI1-request.md`, read whole; the first is the trigger of his standing instruction, the second his
-decision after the build):
+**His words** (`data/external/EXT-OAI1-request.md`, read whole — the file gives the five questions the third answers; the first is
+the trigger of his standing instruction, the second his decision after the build, the third his plan: import; the front page's two
+sentences; a stub for the consequence; the backlog paused until your re-rank):
 
 {KW}
 **What happened today, item by item** (the FS-131 inventory, `plans/FS131-close-inventory.md`; the first lines are quoted as addresses
@@ -92,15 +93,21 @@ decision after the build):
    stated as a question and not as a route: the release closes five by a cover of order two against a disc; at six a point may
    carry three colours and that obstruction is gone — so what, in this project's holdings or in the release's statements that hold
    for every number of colours, takes its place? **Message me when the card is saved.**
-4. **What can be a result this week.** One consequence is already named by the manuscript's reader (inventory item 613 (1): the
-   release's rigidity theorem run for one colour class would give `α₁(ℝ²) = m₁(ℝ²)` and its fractional form with no hypothesis — a
-   clause of a 2026 conjecture and a 1996 question — the manuscript does not state it; one step unchecked). Say whether it comes
-   first, and list any other consequence a short deriver's job could close — each with the question in the literature it answers
-   (`CLOSED-QUESTIONS.md` is this project's list of those) and the prior-art risk of someone else drawing it from a public proof.
-5. **What of the Lean backlog still bears.** FS-131 is in flight with its launches held: waves 6 (the saturated class), 7 (the
-   four-colour vertex), 9 (the reductions) and 10 (the arithmetic floors) each have briefed jobs waiting
-   (`plans/SESSION-HANDOFF-2026-10-06.md` § 4). In one table: which waves formalize something the new frontier stands on, which
-   formalize something the release supersedes or answers, and which can wait — so that three agent slots go where they bear.
+4. **The one-class consequence gets a stub of its own — Kooshi's word: "definitely build on it... write the stub".** It is named
+   by the manuscript's reader (inventory item 613 (1); its sketch is § 2.6 of `plans/EXT-OAI2-reading.md`): the release's rigidity
+   theorem run for one colour class would give `α₁(ℝ²) = m₁(ℝ²)` and its fractional form with no hypothesis — a clause of a 2026
+   conjecture and a 1996 question — and the manuscript does not state it; one step is unchecked. **Mint its stub as FS-133** (the
+   number is fixed), in the stub rule's full form: the mission context in plain language, the question card with both forms, what
+   each answer gives, the question in the literature it answers (`CLOSED-QUESTIONS.md` is this project's list of those;
+   `LEDGER.md` row 129 is where this project stands on it), the unchecked step as the first claim a deriver takes, and the
+   prior-art risk of someone else drawing it from a public proof. Say whether FS-133 or FS-132 takes the deriver's first slot,
+   and list any other consequence a short job could close this week, each the same way.
+5. **The backlog is paused, by his word, until this re-rank** ("pause the backlog, lets come to a stopping point, collect ourselves
+   and have poros rerank"). FS-131's waves 6 (the saturated class), 7 (the four-colour vertex), 9 (the reductions) and 10 (the
+   arithmetic floors) each have briefed jobs waiting; their state is `plans/SESSION-HANDOFF-2026-10-06.md` §§ 2–4. In one table:
+   which waves formalize something the new frontier stands on and resume first, which formalize something the release answers or
+   supersedes and are retired or re-aimed, and which can wait — so that three agent slots go where they bear. This table is what
+   restarts the milestone, or does not.
 6. **The re-rank**, as a draft of `plans/FRONTIER-STUBS.md`'s table in your record, with FS-132 placed; and the catalogue's other
    families that a route of the new ranking could use — named from their catalogue entries only, each marked unread.
 7. Your record in stages headed "Stage n — SAVED", committed by explicit path and pushed; your gate

@@ -8335,3 +8335,23 @@ reason by the close.*
      it**: the per-module kernel replay under a 16 GiB slot (15 of 70 at its message, 6.3 GB peak), the drafts
      (re-asked as filings by ruling 615 (b)), the report. **This item and the reading's third message are the
      asker's input** (ruling 615 (c)).
+
+617. **KOOSHI'S THIRD WORD, 2026-10-07 (verbatim; `data/external/EXT-OAI1-request.md`, third word, with the five questions it answers): "1. port or import: let's import and adopt parts piecemeal if needed. 2. indeed 3. definitely build on it... write the stub 4. not sure, probably allow, but audit what it does 5. pause the backlog, lets come to a stopping point, collect ourselves and have poros rerank. — Oh look, you've already laid out basically the same plan. Carry on then. Make sure your handoff carries the new plan."**
+     **What each sets, against rulings 615 (a)–(f)**: (1) import, with parts of the release's Lean adopted piece by
+     piece where a job needs one — ruling 615 (a) confirmed, and its "a port is priced beside it" narrowed to
+     "which pieces are the natural first to adopt"; (2) the front page's two sentences, as ruling 615 (b) has them;
+     (3) the one-class consequence is built on and gets a stub — **FS-133**, minted by the asking lane; (4) **the
+     release's comparator is allowed after an audit of what its three programs do, and not before**: asked of
+     EXT-OAI1 by message (source, publisher, what each reads, writes and executes, its network access and
+     privileges, a user-local build), which messages me and waits for my word before running any; I tell Kooshi
+     what the audit says before the first run; (5) **the backlog is paused**: FS-131 launches nothing new, its two
+     running jobs finish, wave 8 lands if its gate is green, and the asking lane's re-rank says which waves resume,
+     which are retired or re-aimed, and which wait — ruling 615 (f) confirmed and made his. **Done at his word**:
+     the asking lane's brief rewritten for his answers while unlaunched (`mk-fs132-p1.py`; gate exit 0, 18
+     quotations): FS-133's stub is its item 4, the backlog's restart table its item 5; **a new handoff,
+     `plans/SESSION-HANDOFF-2026-10-07.md`, carries the plan** — his five answers in a table with what each sets in
+     motion and its state, a six-line stopping point, the four running jobs with what to do at each hand-back, the
+     new work's queue in order, and the paused backlog's ready briefs; the 2026-10-06 handoff is superseded but for
+     its §§ 2–8 on the backlog. **Numbers fixed**: FS-132, the milestone that opens on the release, aimed at six
+     against seven; FS-133, the one-class consequence. Their inventories open with their opening jobs; this
+     inventory's items 607–617 are their prehistory.
