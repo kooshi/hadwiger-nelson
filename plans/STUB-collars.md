@@ -94,13 +94,175 @@ at each point of the arc; a countable subcover; connectedness of a union of half
   this: every half-plane there holds a whole Reuleaux corner or a cusp, so each side keeps two labels or more — its scans
   read `arc-forced=0`".
 
+*Correction, dated 2026-10-07 (20:10 UTC; filed by the coordinator; source: the asking lane's re-read, job FS136-P2, checked by the coordinator at `data/fs136/e1/out/bowtie.txt` l. 1, "5-label:4"): the bowtie fragment has **four** five-label points, not two. The arc scan was seeded with two of them (`q₂`, `q₁`), and what is said here of "its two five-label points" is said of those two; the other two have not been scanned. No verdict moves.*
+
 ## The smallest open form, the second deriver's (verbatim, `plans/FS136-E2-derivation.md` Stage 8)
 
 > *a pieced point carrying five of six labels forces its sixth along every arc of its unit circle on whose side none of its own labels is pure; what do two such collars, or a collar and a pieced point, force one unit further on — a corner emptied, a stall, or a second collar?*
 
-## The question
+## The question (Poros, 2026-10-07)
 
-*This section is the asking lane's. Nothing is posed here.*
+*Posed by the asking lane at FS-136's Derived (job FS136-P2; record `plans/POROS-2026-10-07-fs136-derived.md`, where the
+evidence, the expectations written first and the ledger are). **Everything below is about weak colourings that already
+have labelled corners at named points; no weak six-colouring is known to have one, and no answer to this card fixes the
+value of χ(ℝ²) by itself.** The question is wider than the stub's title: a collar is one reading of a count that every
+point with corners carries, and the card is about the count.*
+
+**What the count is, in the held words.** Let `c` have at `x` a finite set `F` of labelled corners filling a
+neighbourhood of `x`, and let `w = x + e(θ)`. A label of `F` is *inner-pure at θ* if every corner of `F` with that label
+is inner at `w` (C136-CLASS decides it), *outer-pure* likewise. Write `I(θ)` for the labels of no corner of `F` together
+with the labels inner-pure at `θ`, and `O(θ)` the same with outer: by C136-TABLE at one member these are the only labels
+almost every point near `w` inside (outside) `S(x)` can have. Call `I(θ)`, `O(θ)` the **palettes** of `x`, and the set of
+`θ` at which a label is inner-pure its **window**. A side is *forced* where the palette is one label (C136-FORCED), *empty*
+where it is none, *free* otherwise. A collar is an arc on which the palette is the one absent label.
+
+### The card
+
+question: can-a-ring-afford-its-points-at-six
+  evidence: `plans/FS136-derivation.md` l. 547 — at the bowtie fragment's stop `(√3, 0)` "out/in=4 … in/out=2 out/out=EMPTY(order 1)", and `(√3, 0) = q₂ + e(30°) = q₁ + e(−30°)` is the common end of the two outer collar arcs (ll. 75–78 above); `data/fs136/e2/out/bowtie12.txt` seed line — the arc comes from two corners of 120°, a window of exactly 60°; `plans/FS116-derivation.md` ll. 655–658 — "r(θ) or r(θ + 60°) lies on a (Q) arc; so the (Q) arcs of the ring have total length at least 180°"; `data/fs136/e1/out/*.txt` l. 1 — strip "3-label:40 4-label:10" reaching 1.8512, bowtie "5-label:4" and flower "6-label:1" reaching 1.7321, R7 "6-label:16" of seven with no cell empty anywhere; `plans/STUB-q-ring.md` l. 229 — "a skeleton that saves every complementary pair at both common unit points has five-label centres"
+  expected: a collar is a curiosity of one fragment, the stops are facts about pairs of tiles, and how many labels a point carries is "not read by anything at the point across" (FS-136's first round)
+  ask: at six, can the points round one ring both pay at every point across (four labels or more, or three with a unit-arc edge) and keep a label on each side of their own unit circles, as R7's points do at seven?
+  if the count falls short for every assignment of corners round a ring: an exclusion within 2 of a point for every weak six-colouring that has corners there and at the points of its ring — the first of this line whose hypothesis is "has vertex figures", not "keeps these tiles"; the existence stubs are re-aimed at exactly what it reads, and route T's count (FS-117) is re-read with directions in place of tiles
+  if an assignment fits at first order: it is the Searcher's line-15 object with its reason — which numbers of labels sit where — and goes to line 16 to be grown into pieces; the palettes say where a construction has no freedom (forced arcs) and where it has (palettes of two)
+  if it fits only with unit-arc edges at three-label points: the unit arc is the equality case of the count, the strip's way is the only way, and FS-124's cases 1, 3 and 5 become one question: how many such edges a ring needs and whether it has room for them
+  answered by: derivation — Ephodos, for the count and its first four claims below; the lattice family of the ask's first-order form is the Searcher's line 15, which runs beside it
+  cost: one round for claims 1–5 (each a few lines over C136-TABLE and C136-CLASS, with an exact read of a held output as its control); the ring question itself unpriced
+  hunch: at first order the count falls short on the nineteen-point lattice family and fits only with unit-arc edges — 0.6; a count that excludes every ring at six with no family named — 0.12; that any of this moves the value — 0.01
+  falsifier: a labelled set of corners at a point and the six points of its ring, with every cell at every common unit point within 2 non-empty at first order and no edge along a unit circle about a point across
+  rank: 1
+
+### Existence form
+
+Is there a weak six-colouring of an open set containing the closed unit disc about a point `x` at which it has labelled
+corners carrying five of the six labels — a five-label point *with its whole ring*? None is held: FS116-N2-FIVERING's
+model line reads "none held with five colours at a vertex", and the bowtie fragment's four five-label points
+(`data/fs136/e1/out/bowtie.txt` l. 1: "5-label:4") lie one unit from its centre, on the rim of what it holds. One ring
+further: is there one containing the closed disc of radius 2 about a point with corners, with corners at the six points
+of its ring 60° apart? *On corners, not pieces*: by C136-CLOSE's *not claimed* line a set of corners with every side
+non-empty is a labelled skeleton, a design for the search lane's line 16 to grow, never a fragment.
+
+### Structural form
+
+For every weak `k`-colouring and every point `x` at which it has labelled corners filling a neighbourhood: **what must
+the palettes of `x` be for both sides of `S(x)` to be coloured all the way round — points of `S(x)` 60° apart being one
+unit apart — and what must the palettes of two such points be for every cell at their common unit points to keep a
+label?** Is there one inequality between the numbers of labels at a point and at the points of its ring that every such
+colouring satisfies, that R7 meets at seven with every vertex carrying six of seven, and that no assignment meets at
+six? This is a question about every colouring with corners, at every `k`; it cannot be answered without something every
+such colouring carries (the palettes, and what their sizes sum to), and it is the relation between the tables of one
+ring that FS-136's structural form asked for twice and did not get (`plans/FS136-derivation.md` § 7 item 5).
+
+### What each answer gives
+
+- **Toward seven.** A count that falls short is an exclusion, at an explicit radius (at most 2), of every weak
+  six-colouring that has corners at a point and at the points of its ring. It is seven only with a statement that every
+  weak six-colouring has such a point (FS-127, FS-128; a point of four or more labels: FS-122, FS-130), which nothing
+  held gives. What it would change at once: what those stubs must supply, said exactly.
+- **Toward six.** A ring that fits is a skeleton with its reason, the first object of this line whose forced parts
+  (collars, own-label arcs) nobody chose. It is six only as far as the search lane can grow it and then only disc by
+  disc (ledger row 161).
+- **Either way** the first five claims stand as instruments; none of them moves the value.
+
+### The first claims a deriver takes, in order
+
+*Each is put at the widest form its argument reads (the kernel planner's relay of 2026-10-07: the table reads neither
+the number of labels nor the distance 1 beyond the cut at `w`; the forward step's label half is on the cell, "the whole
+set of such points, connected or not"). Names are proposals; the coordinator fixes the claim list. For each: its
+smallest form; its control on an object with no margin, **and what was run**; whether it reads regions somebody keeps or
+forces one; the side it would move. Held antecedents were looked for in nine derivation files by five terms (`on
+average`, `average number`, `mean number`, `total length`, `half-plane`) and in the entries the stub names; a search by
+terms measures the terms.*
+
+1. **C137-BUDGET — what the windows sum to.** *Plane geometry; no colouring.* For labelled corners at `x`, each of angle
+   at most 180°, filling a neighbourhood of `x`: the windows' lengths sum to at most `180°·(c − 2)`, `c` the number of
+   corners, with equality exactly when every label has one corner; so with `m` labels, one corner each, the mean over
+   `θ` of `|I(θ)|` is `k − 1 − m/2`. *Smallest form*: one corner of angle `α` is inner at `x + e(θ)` for `θ` in an arc of
+   length `180° − α` (its two ends by curvature, C136-CLASS). *Control, no margin*: R7 at a lattice point — three
+   corners of 120° and three cusps, six of seven labels: mean `3`; the bowtie fragment's `q₂` — cones 30°, 120°, 120°,
+   6.9°, 83.1°: windows 150° + 60° + 60° + 173.1° + 96.9° = 540° = `180°·3`, mean `2.5`, and the one direction set no
+   window covers is `(150°, 210°)`, the collar's arc. **What was run**: nothing; both by hand from angles read in
+   `data/fs136/e2/out/bowtie12.txt` and the stub. The control to run is the engine's scan of a unit circle, summed.
+   *Reads* corners somebody keeps; *forces* nothing. *Side*: neither — it is the instrument, and it is where six and
+   seven differ: one label fewer on every side of every ring, whatever the corners. *Not found held.*
+2. **C137-THREE — a three-label point pays only along a unit arc.** At a point with three labels on three corners
+   filling a neighbourhood, edges rays or circular arcs, a direction at which one label is inner-pure and another
+   outer-pure is perpendicular to an edge, and that edge begins along the unit circle about `x + e(θ)`. So in C136-COVER
+   a three-label member separates at `w` only if one of its edges begins with an arc of `S(w)`. *Smallest form*: two
+   corners sharing a straight edge — at the direction perpendicular to it neither is inner. *It restates, by another
+   route*, C124-BOTH's second sentence ("each has an edge that contains an arc of S(w) with an end at the member";
+   one mind, over C124-LONE, the step its deriver flagged) and for maps FS112-N3-COR3; what would be new is the reason —
+   it is BUDGET's equality case at `m = 3`, where the windows sum to exactly 180° and a window meets another's antipode
+   in one direction — and that four labels or more pay on open sets of directions. *Control, no margin*: the strip's 17
+   pairs with both common unit points inside (`partners-held`: "both=17"). **What was run**: nothing new; the control
+   to run reads the paying member's edge at those 17, exactly. R7 has no three-label vertex: it is silent there, say
+   so. *Reads* kept corners; *excludes* (payment at first order). *Side*: both.
+3. **C137-SIXTY — FS116-N2-FIVERING's second clause, in measure.** Let `c` have at `x` corners carrying all labels but
+   `ℓ`, and let `N` be the directions at which no label of them is inner-pure. If `θ` and `θ + 60°` are both interior to
+   `N` and `x + e(θ)`, `x + e(θ + 60°)` lie in the domain, the two one-sided neighbourhoods inside `S(x)` hold a set of
+   unit pairs of positive measure with both ends `ℓ` (points at depth `s` in directions `60° + δ` apart, `s` of the
+   order of `δ`): so no domain holds both. Hence `N` has no two interior directions 60° apart, every arc of `N` had
+   whole is at most 60°, `N` has length at most 180°, and two adjacent one-corner labels span at most 240°. The same
+   outside. *Smallest form*: one arc longer than 60°. *Control,
+   no margin*: the bowtie fragment's `q₂`, where `N = (150°, 210°)` is exactly 60° and its ends `(0, 0)`, `(0, −1)` are
+   one unit apart — it must pass with nothing to spare. **What was run**: nothing new; read from the engine's
+   `forced-arc` line and the seed line. R7 passes with room (`N` empty: "arc-forced=0") — a control satisfied with
+   room measures the room (G21). *It restates* FS116-N2-FIVERING's clause "r(θ) or r(θ + 60°) lies on a (Q) arc" with
+   no map and no disc; read that entry's argument first — C136-COLLAR's `prior art:` line quotes only its first
+   clause. *Reads* kept corners; *excludes* vertex figures. *Side*: both.
+4. **C137-OWN — a point with every label forces its own.** In C136-COLLAR put "an open arc along which `I(θ)` is one
+   label `ℓ`" for "whose labels are all the labels but one, `ℓ`": the conclusion and the argument are the same
+   (C136-FORCED's hypothesis never asks that `ℓ` be absent at the member), and by SIXTY's argument each such arc is at
+   most 60°. So G100's "extent is forced in one way" has a second: at a point of all `k` labels, an arc on whose side
+   exactly one label is pure. *Smallest form*: C136-FORCED at one member with `ℓ` the one pure label. *Control, no
+   margin*: the flower's centre — six corners of 60°, windows of length zero: six isolated forced corners, "the
+   sector's own", and no arc. **What was run**: the second deriver's `flower0` (not re-run by me). **No held object has
+   an arc of this kind** — the claim is about colourings nobody holds an example of, and its headline says so. For
+   maps it is FS116-N2-SIXRING ("six 60° (Q) arcs, one per tile"). *Reads* kept corners; *forces* a region with length
+   and no width. *Side*: both.
+5. **C137-MEET — where two collars meet.** *A corollary of C136-TABLE on the cell.* For `x`, `y` with
+   `0 < |x − y| < 2`, corners at each, and `w` a common unit point: on the cell at `w` on given sides of `S(x)` and
+   `S(y)` the labels left are the two palettes' common labels. If `x` lacks exactly `a` and `y` exactly `b ≠ a`, the
+   cell is empty unless `a` is pure for `y` on its side, or `b` for `x`, or one label is pure for both. *On the held
+   object*: `(√3, 0)` is the common end of the outer collar arcs of `q₂` (label 4) and `q₁` (label 2), and the cell
+   outside both circles is empty (C136-STOP-GERMS (c), read this way); at the pair's other common unit point, the
+   origin, the inner arcs end and the cell inside both is coloured, by the label of a tile both points carry (`t1`).
+   So with both points' corners kept neither outer arc lies whole in any domain (C136-STOP-GERMS-RADIUS). *Control, no
+   margin*: R7 — adjacent lattice points lack different labels, and `forced-r7-window` reads "empty=0" over 432
+   corners at the 108 common unit points of 54 pairs: at each, one of the three alternatives must hold. **What was
+   run**: the second deriver's control (not by me); the control to run names which alternative, corner by corner.
+   *Reads* kept corners; *forces* nothing; *excludes*. *Side*: both — a design rule (two five-label points lacking
+   different labels need a common pure label at both their common unit points) and the mechanism of one held stop.
+6. **The ring itself**, the card's ask. *Smallest form*: a point, the six points of its ring 60° apart, corners at all
+   seven, and every cell at the nineteen lattice points within 2 non-empty — the search lane's line 15 is its
+   first-order lattice family. For the deriver: is there an inequality from BUDGET, summed over the seven points and
+   the cells they cut, that R7's labelling meets at seven and no labelling meets at six? *Controls*: it must not fire
+   on R7; it must not fire on the strip, the disk, the flower or the bowtie fragment at any point they hold; a count
+   that excludes a held object is a defect.
+
+**The seeds, by their labels** (G100's *Do*, done before the word "forced" was written): claims 3 and 4 start from a
+point of `k − 1` or `k` labels — the only kind from which an arc is forced; claims 2 and 5 force nothing; no claim asks a
+closure for a fragment.
+
+### Registered before any deriver reads this
+
+BUDGET as stated 0.9; THREE for rays and arcs 0.8; SIXTY 0.85; OWN 0.85; MEET's rule 0.9, and on R7 every cell passing
+by one of its three alternatives 0.9. The ring: a count excluding every assignment, no family named, 0.12; a first-order
+ring out to 2, by derivation or by line 15, 0.3; neither within the milestone 0.6. The value: 0.01.
+
+### The record job's remark below — the asking lane's position
+
+True, and it is the one lemma itself (C124-SHADOW-OPEN applied to `V`), not a consequence to derive. By hand (one
+mind, no control) the region is the union of the unit circles about the arc's points — for 60°, two lunes each holding a
+disc of radius 1/2, joined by a thin bridge — and on it the colouring uses five labels. A collar forces nothing there by
+itself: it brings one bar where a forced side needs five. What is new in a collar is the kind of bar, on an open
+region where a germ bars at corners of isolated points; whether that is ever the fifth bar is claim 5's question on
+the held object, not a separate computation. The stub's first failure clause covers the case that it never is.
+
+### The stop for this line, set now
+
+FS-124 ended at eight cases and FS-136 at lists of free corners. **If claim 6 ends at a list too — no count, no ring —
+the asking lane poses no fourth card on local configurations**: the next opening is the existence step (FS-127 with
+FS-122), in whatever form it then has, or an honest exit to Kooshi saying it has none.
 
 ## What the record job noticed while filing — one line, not an entry, checked by no control
 
@@ -134,13 +296,18 @@ assumed on the ring) and the hypothesis read arc by arc". **A deriver here reads
 - **The planted fault** of the arc scan (`--fault=bar`: one wrong bar) must empty a corner.
 - G21, G95: run each control where the hypothesis is tight — R7 and the two fragments have no margin anywhere.
 
-## Bearing on the answer (provisional; the asking lane writes it)
+## Bearing on the answer (the asking lane's, 2026-10-07, FS136-P2)
 
-None on the value as it stands. It is the one place in two milestones where a seed forces a region with extent. *Toward
-seven*: an exclusion reached from collars would be an exclusion of colourings with a five-label point, and it is seven
-only with a statement that every weak six-colouring has such a point — which nothing held gives (FS-127, FS-128, FS-135).
-*Toward six*: collars are regions a construction does not choose; a seed whose collars and corners force a consistent
-piece of a colouring would be the first object here not kept by hand. Neither is in sight from one arc of 60°.
+None on the value as it stands, and none from any answer alone: every statement here is about colourings that have
+corners at named points. It is the local half of both roads, asked for the first time as one count — what a point's own
+corners leave on each side of its unit circle, over all directions — instead of object by object. *Toward seven*: a count
+that falls short round every ring is an exclusion within 2 of a point for every weak six-colouring with corners there
+and on its ring; it is seven only with a statement that every weak six-colouring has such a point, which nothing held
+gives (FS-127, FS-128; a point of four or more labels: FS-122, FS-130). *Toward six*: a ring that fits is a skeleton
+with its reason for the search lane to grow; it is six only disc by disc (ledger row 161). The asking lane's number
+that this milestone moves the value: 0.01. Why it is posed all the same: two milestones ended at lists, and the lists
+are of one kind — sides with two labels left — which a count over directions is the instrument for and a table at one
+point is not.
 
 ## Owed second minds
 
@@ -175,6 +342,17 @@ the bowtie fragment with its two five-label points, their corners, the four coll
 one unit on.
 
 ## Provisional bearings
+
+*The asking lane's line (FS136-P2), which the deriver's re-grokking replaces at the opening:* G98 (its count read with
+pure labels added: `k − m` absent and, on average, `m/2 − 1` pure — so `k − 1 − m/2` labels on a side, one fewer at six
+than at seven for every `m`); G100 (extent forced from a point of `k − 1` labels — and, by C136-FORCED's own hypothesis,
+from a point of `k` with one label pure: its "one way" is two); G97 with G84 (the unit arc about a ring point as the
+equality case of the count at three labels: where a three-label point can pay at all); G99 and G92 (each first claim
+names the map entry it restates — FS116-N2-FIVERING *both clauses*, FS116-N2-SIXRING, FS112-N3-COR3 — and is put at the
+class its argument reads); G86 (a count over tiles is blind to Siamese pairs; a count over directions at a point reads
+them as own-label arcs — a reading of the asking lane's, basis analogy, untested); G91 (points of a ring 60° apart are
+one unit apart: the hexagon the palettes must colour); G21, G95 (every control on R7 and the held fragments, none with
+a margin; say of each what was run). Ledger rows 137, 149, 161–167. *The record job's line, kept:*
 
 G98 (the count: `k − 1` labels at a point leave one for its ring — at six, a five-label point; the collar is that count
 for pieces, arc by arc); G96 (a forced corner is a germ; a collar is the first forced piece with a definite extent, and it

@@ -1,0 +1,4 @@
+card lint
+  cards: 1  no-question exits: 0
+  the ask: at six, can the points round one ring both pay at every point across (four labels or more, or three with a unit-arc edge) and keep a label on each side of their own unit circles, as R7's points do at seven?  [line 119]
+GATE: PASS (0 failures, 0 warnings)
