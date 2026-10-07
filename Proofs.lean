@@ -283,6 +283,14 @@ import Proofs.HadwigerNelson.Topology.SpernerGrid
 import Proofs.HadwigerNelson.Topology.LebesgueCovering
 import Proofs.HadwigerNelson.Outside.OAI158
 import Proofs.HadwigerNelson.Outside.OAI158Palette
+import Proofs.HadwigerNelson.Outside.OAI158CircleMaps
+import Proofs.HadwigerNelson.Outside.OAI158Expansion
+import Proofs.HadwigerNelson.Outside.OAI158CircleTransport
+import Proofs.HadwigerNelson.Outside.OAI158PaletteDensity
+import Proofs.HadwigerNelson.Outside.OAI158PaletteTransport
+import Proofs.HadwigerNelson.Outside.OAI158BinaryPalettes
+import Proofs.HadwigerNelson.Outside.OAI158States
+import Proofs.HadwigerNelson.Outside.OAI158AngularBoundary
 import Proofs.HadwigerNelson.Plane.SixRing.Confine
 import Proofs.HadwigerNelson.Plane.SixRing.Winding
 import Proofs.HadwigerNelson.Plane.SixRing.Orbit
