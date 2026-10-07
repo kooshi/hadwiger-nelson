@@ -977,3 +977,19 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     **A slip of mine**: ruling 30 (a) raised a count of minds — the one thing this role exists not to do — and was caught
     by the record job because its brief said "raise no grade".
 
+32. **Kooshi's sixth word (2026-10-07, about 11:40 UTC; verbatim, with what "all 3" answers, in
+    `data/external/EXT-OAI1-request.md` § Kooshi's sixth word): the scope of item 24 is confirmed, the exclusion is
+    formalized first, the unit-arc milestone opens next, the Lean backlog stays paused, and a Lean phase formalizes its
+    dependencies.** **Rulings.** (a) **Item 24's change of product stands, by his word**: FS-132 delivers what a point with
+    data on its unit circle is forced to carry; "does every weak measurable colouring have such a point" is FS-127's and
+    FS-128's. (b) **The record job's second half is briefed now** (FS132-Z2) — the stubs, the predictions scored, the
+    front page's drafts — and its filing makes FS-132 Derived. (c) **FS-132's Lean phase starts now, in two jobs on two
+    worktrees**: the planner's successor (FS132-K2, branch `fs132-wk1`) finishes the skeleton of the exclusion — its nine
+    steps as leaves — and the comparisons its predecessor left; an implementer (FS132-I2, branch `fs132-wi2`, cut from
+    that tip) ports what the exclusion rests on from the release's Lean, with no new axiom — alternative: declare the two
+    release statements as outside theorems and prove only our steps; rejected by his word on dependencies and by the
+    planner's measured price (about one fix per 600 lines). Confidence: high. (d) **FS-124 is the next milestone**; the
+    asking lane poses its question on FS-132's derivation file as soon as a slot is free (after the record job's second
+    half, which also writes that stub's bearing lines — one writer per file), and the re-rank it drafts then replaces its
+    two unfiled drafts of the night. (e) **Staffing returns to his cap of three Opus slots**; 
+
