@@ -442,4 +442,42 @@ between two colours that is an arc of the unit circle about a point one unit awa
     `28a82429`; record `plans/FS124-I1-implementation.md` there): the 49 leaves in the planner's order, statements fixed
     with no permissions to change them; the axioms of every theorem printed, the two join theorems' lines to me; no
     landing — a landing job takes the branch when the one in flight is back.
+21. **FS124-E2 done (523k and 46 minutes by the task notice): the second round is in — the map class's rhombus theorem holds
+    in measure for three-sector points, by another route; a save by one member exists only at a bowtie; the strip is
+    closed at its top edge** (deriver; record `plans/FS124-E2-derivation.md`, six stages, 14 entries — 13 derived, 1
+    refuted — 8 controls; report `data/fs124/reports/FS124-E2.md`; commits to `d077b010`). Beyond items 16 and 18:
+    **C124-LONE** — if one member does not separate, the other has exactly one inner, one outer and one crossing piece,
+    the point's neighbourhood on one side is split along its unit circle between the two labels, and near that member
+    its inner and outer pieces lie in two opposite lenses and "their closures meet at `x` only"; **C124-BOTH** — so for
+    full members both separate, and **for sector points no common unit point of a close complementary pair is saved by
+    one member alone**: "the measurable form of FS112-N3-COR3 (row 135) … by another route"; **C124-FOUR** — exactly four
+    labels at a point saved by two full members; **C124-LONE-EXISTS** — the one-member save by formula, a held fragment
+    with a thin band: "four flowers and a band, no value", its saver a three-piece point "only by the letter";
+    **C124-EDGE-CLOSED** — "there is no weak six-colouring of an open set that contains the point `(1/4, √15/4 + √3/2)`,
+    the three arches … and the parts of its tiles … below the line, and that gives almost every point of each of these six
+    sets the strip's label": six uses of the round's lemma bar all six labels near the point, exact comparisons in a
+    number field — **local to the strip's family; no regularity assumed above the line**; **C124-SECOND** — a pair's two
+    saves use different edges at each member, four labels at each point with two in common, a cyclic order of the six
+    labels. **Its corrections owed, drafted**: a dated line under the first round's rhombus entry (its class is inhabited:
+    the lone save, with a one-point set on the circle); the claim list's wording of the forcing claim; line 14 of the
+    search queue declined. **Its debts**: prior art recalled, not read (a topological lemma; the release's every-direction
+    lemma); **"a second mind is owed on C124-LONE's Step II before C124-BOTH, C124-FOUR or C124-EDGE-CLOSED is built on
+    outside this milestone"**. **A question it leaves**: whether a three-sector vertex of an arc map with a cusp is a
+    sector point in its sense. **Its slips, disclosed**: two stages committed together; a count corrected in place; two
+    reader defects and a fault that did not fire, each repaired before a count was kept. **My receipt**: the commits are
+    on `main`; **its gate run by me on the whole record** — exit 0, 0 failures, 0 warnings, 14 entries, 8 controls each
+    firing; the statement, uses, not-claimed, verdict and grade fields of seven entries read (the forcing claim's three,
+    C124-LONE, C124-BOTH, C124-FOUR, C124-SECOND, the lone save, the closed edge). Not checked by me: C124-LONE's second
+    step; the exact comparisons; the band.
+    **Scored**: the asking lane's "one edge of each member forced 0.2; a save by one member exists 0.45; neither 0.35" —
+    **the first, for sector points**; the second only at a bowtie by the letter; its "every tight arc of kind both … an
+    edge of a save 0.6" missed (the six-colour fragment).
+    **Rulings.** (a) The verdicts and the three added statements enter the claim list; **the forcing claim's wording is
+    fixed** there. (b) **The second mind it asks for is the kernel lane's planner, blind first** — the milestone's second
+    module: the one lemma, the round's lemma on one piece and one side, the centre's statement collar by collar, the
+    forcing on pieces, C124-LONE, C124-BOTH, C124-FOUR — briefed when the first module's implementer frees its slot;
+    alternative: a blind verifier; that is outside the standard workflow and Kooshi's to order. (c) **The asking lane
+    takes the freed slot** (FS124-P3): two rounds are in, the frame has been corrected twice, and the next question —
+    whether the saves close up, what a six-colour point forces, or the record job — is its to pose. (d) Line 14 of the
+    search queue is declined in its words. (e) The dated line under the first round's entry is owed at the record job.
 
