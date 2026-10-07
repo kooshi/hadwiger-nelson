@@ -48,11 +48,17 @@ ask Kooshi before removing any worktree's build copy.
    `data/fs131/briefs/scripts/mk-fs124-l1.py`; previous receipts `data/fs124/l1/gate/`; the implementers' audit blocks
    are files under `data/fs124/i2/`, `i3/`, `i4/` on the branch; branches cut before the disc criterion's landing meet it
    in `scripts/Axioms.lean`, `ARCHITECTURE.md` § 3.13, `scripts/axioms-controls.txt` and the import module).
-2b. **FS124-K3** (kernel planner; launched 18:09 UTC; worktree and branch `fs124-wk3`) — the θ-lemma
-   (`ThreePiece.IsSector.hasArcEdges`). **It messages its price early, beside the price of re-fixing the claim list's
-   sector point as an arc-edged point → A RULING OF MINE WAITS ON THAT MESSAGE** (prove it, or re-fix the definition by
-   a dated line in `data/fs124/claims.md` and `data/fs124/claims-K2.md` with the derive lane told; item 43 says what was
-   weighed). If the lemma is to be proved: an implementer on its skeleton after it hands back.
+2b. **FS124-I5** (implementer; launched 19:07 UTC; FS-124 inventory items 44, 46) — the θ-lemma's module. **The ruling is
+   made: the lemma is built** (the planner priced it at about 500 lines with no Jordan curve theorem, since the
+   definition already assumes the three regions). `Plane/ThreeArcs` on branch `fs124-wk3` (tip `8cd74a6b`): 41 theorems,
+   21 proved, 20 for this job. It does not write `Plane/SectorPoint.lean`. **At the join** (the landing job's first
+   act, when FS124-I4 and FS124-I5 are both back): merge `fs124-wk3` into `fs124-wi3`, add `import
+   Proofs.HadwigerNelson.Plane.ThreeArcs` to the sector module and the two lines that close
+   `ThreePiece.IsSector.hasArcEdges` (in the planner's report and its record § 3.1), add the spec example
+   `example : sectorPoint.HasArcEdges := sectorPoint_isSector.hasArcEdges`, then merge `main` and run the full gate on
+   eight modules (`CircleCrossing`, `OnePiece`, `ThreePiece`, `ClosePair`, `ClosePairWitness`, `ClosePairModel`,
+   `ThreeArcs`, `SectorPoint`); reword the two docstrings FS124-I4 names; the audit blocks are files under
+   `data/fs124/i2/` … `i5/`. Owed after it: the corrected `uses only` line of C124-FORCED.
 3. **FS136-Z1** (the record job; launched 18:59 UTC; FS-136 inventory items 8–15) — **both derive rounds are in: twenty
    entries, each derived, one mind, kernel pending; every one is about colourings that already have named regions or
    corners, and none fixes or bears on the value.** Round two: the forward step (a corner with one label left has it),
