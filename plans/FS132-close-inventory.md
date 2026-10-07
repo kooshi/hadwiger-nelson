@@ -939,3 +939,41 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     § 0b is met: the step lemma holds on a second reading). (e) **A successor planner** resumes at its record's stage 4
     when the kernel lane is restaffed; nothing of its skeleton is merged into `main`.
 
+31. **FS132-Z1 done: the derivation file is written — 57 entries, each at its source's grade, each marked for which side of
+    the unit-arc line it sits on — with eleven dated corrections; and it corrects my count of minds** (deriver; 509k and 32
+    minutes by the task notice; record `plans/FS132-Z1-record.md` Stages 1–5; the file `plans/FS132-derivation.md`; report
+    `data/fs132/reports/FS132-Z1.md`; five commits, `49080448` to `f65df976`). **The file**: 47 derived entries — 42 of the
+    six derivers', each [hand] or derived from [hand], one mind, kernel pending; 5 of the search's, four [cert] in its
+    finite family and one [hand] — and **10 stalls and gaps, each an entry with its step**; 32 controls, each firing on its
+    fault from where the file puts them; every block copied by script with a check that compares each field with its
+    source. **"No statement the night called derived was found underived by what its record's entry holds, and no two
+    entries were found that cannot both hold"** — at the level it read: statements, `uses only:`, `not claimed:`, the grade
+    chains; no proof was reworked. **No grade and no count of minds raised.** **The line, tallied** (its § 12): the
+    exclusions sit on the arc-free side; two entries of the third round conclude at a ring point of the hard kind from
+    neighbours of the easy kind; one produces the hard object; "nothing in the file excludes, builds or bounds a boundary
+    that is a unit arc about a ring point". **Its findings**: **the exclusion stands on different ground at the whole
+    plane and on an open set** — at the whole plane, two kernel-checked statements of the release and the nine steps; on
+    an open set, as the entry is written, also one mind's reading of those two proofs as local, which the second reader
+    did not read; **a defect of my brief** — of the "two standard facts about maps nobody derived tonight", one was derived
+    in round two (C132-WITNESS: a map's edges are witnessed edges), so the short job that would carry the exclusion back
+    to maps needs one fact, not two. **Its slips, disclosed**: a corrections script that skipped one of three notes on
+    its first run (seen in the diff, fixed before the commit); two errors in a template caught before filing; its scripts
+    under `data/` where a standing rule says `tools/`; what it did not read. **My receipt**: the commits are on `main`;
+    **its gate run by me** — exit 0, 0 failures, 9 warnings (prior art owed), 32 controls each firing; 57 entries counted
+    by me; the file's twelve section headings and the exclusion's grade, verdict and minds fields read; its three drafts
+    for files outside its touches read and filed by me (below). **Not checked by me**: the entries against their sources
+    one by one (its script's check stands for it); the eleven appended corrections in place; its § 12's tally.
+    **Its five held points, ruled.** (1) **The exclusion's count of minds: it is right and my ruling 30 (a) was wrong.**
+    It wrote "minds: 1" with the account of who derived, reworked and read each step; a reading made with the argument
+    open is a checking reading, and the weakest step governs. **Ruling 30 (a) is corrected to: derived, one mind, with a
+    line-by-line checking reading of its last six steps by a second mind whose own blind route reached the state, the
+    chart, a forced label at each hub, the unit-pair relation and the kill for a clean change, and stopped at the step
+    lemma.** My sentence to Kooshi ("a second mind on every step") is corrected in the next report. (2) **The index
+    lemmas and the confinement statement keep "minds: 1"**: the planner's blind second routes exist and are said under
+    each; by Workflow 3.1 the planner's blindness serves discovery and carries no grade. (3) **C132-CORES-SQUARE stays a
+    gap**: a route, not re-derived. (4) **Its three drafted corrections are appended by me, verbatim, each under its
+    slot**: the asking lane's record (the "generalization" is a restatement), the stub (the stripe colouring), the
+    search's record (the hand argument's failing step). (5) **Part 2 waits for Kooshi** (item 24's question), as ruled.
+    **A slip of mine**: ruling 30 (a) raised a count of minds — the one thing this role exists not to do — and was caught
+    by the record job because its brief said "raise no grade".
+

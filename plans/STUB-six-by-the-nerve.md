@@ -255,6 +255,8 @@ the bicycle (two centres of one type), for which no weak form is posed.
   (`plans/EXT-OAI2-reading.md` § 5.6) a Grundy colouring, and the Grundy-ization of each (FS121-D3-GRUNDY's construction) has
   finitely many cyclic centres in every disc and finitely many changes on every ring.
 
+  *Dated line (2026-10-07, from FS132-E5, `plans/FS132-E5-derivation.md` § The two controls at seven; drafted by FS132-Z1):* the stripe colouring is not a witnessed triangle with a wild ring. The unit circle about the striped circle's centre `x` passes through the vertex `v` and crosses two of the three hexagons at `v` along arcs, so those two labels have no witness at `x` at all (C132-WIT-CROSSED), with the stripes or without; the colouring stays a control for a three-label palette only.
+
 ### What each answer gives
 
 | outcome | what it is, as a result | what it does to the road |

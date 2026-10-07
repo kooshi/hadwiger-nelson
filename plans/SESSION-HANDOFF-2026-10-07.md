@@ -70,13 +70,15 @@ everything else.*
 
 ## 0b. WHERE THE NIGHT STANDS (about 07:00 UTC) AND WHAT IS LEFT OF IT
 
-- **Running: the record job, part 1, alone** (FS132-Z1, `ephodos`; brief `data/fs132/briefs/FS132-Z1-record.md`; record
-  `plans/FS132-Z1-record.md`): the derivation file `plans/FS132-derivation.md` from the six derivers' records, the search and
-  the planner's second reading — every statement at its source's grade, every stall as an entry, each entry marked for
-  which side of the unit-arc line it sits on — and the dated corrections. **On its hand-back**: review (run its gate; read
-  the exclusion's entry against `plans/FS132-E3-derivation.md` and the planner's § 3.2 myself), log; **part 2 (the stubs,
-  the predictions scored, the front page's drafts — rows 155 onward and grokkings G96 onward are free numbers) is NOT
-  briefed until Kooshi has answered the question of FS-132 inventory item 24** (what the milestone delivers).
+- **NOTHING IS RUNNING.** The record job's first part is done (FS-132 inventory item 31): **`plans/FS132-derivation.md` —
+  57 entries (47 derived, 10 stalls and gaps), gate exit 0** — with eleven dated corrections appended by it and three by
+  me. **It corrected my count of minds: the first night's exclusion is "derived, one mind, with a line-by-line checking
+  reading by a second mind whose own blind route reached all but the step lemma" — never "two minds".** FS-132 is **not
+  yet Derived**: part 2 (the stubs, the predictions scored, the front page's drafts — rows 155 onward and grokkings G96
+  onward are free numbers; the two ledger drafts are in `plans/FS132-Z1-record.md` §§ 5.1–5.2) **is not briefed until
+  Kooshi has answered the question of FS-132 inventory item 24** (what the milestone delivers). **The next act is the
+  morning report to Kooshi** — given as this session's last message of the night; if a compaction intervenes, give it
+  again from the outline below.
 - **The kernel planner is done** (FS-132 inventory item 30): **the step lemma holds on its line-by-line reading — the first
   night's exclusion has two minds on every step, kernel pending**; its skeleton and the ported palette definitions are on
   branch `fs132-wk1` (tip `e3695302`; the skeletons hold `sorry` and must not be merged); a successor resumes at its

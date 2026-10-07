@@ -80,6 +80,8 @@ without citing the first's example. Reading at one mind's grade (mine, of three 
 is checked against M0–M9 line by line and is a `generalization` item; that the same holds for C132-TRI-STRIP with `s` fixed is
 my reading of one identity, not a derivation.
 
+*Dated line (2026-10-07, from FS132-E5, `plans/FS132-E5-derivation.md` § The exclusion, step by step; drafted by FS132-Z1):* for the two exclusions this is a restatement, not a generalization — a two-point set `{p, q}` is itself a compact set containing `p` and another point, and `Δ({p, q}) ⊂ Δ(K)` for every `K` holding both, so C132-WIT-ORBIT and C132-M-ORBIT are one theorem ("The two are one theorem … what is new in it is the description of the hypothesis"). For the strips the two-point form *is* wider (C132-WIT-STRIP).
+
 **B. The regular chain's terminal contradiction is in the ledger and in nobody's record tonight.** Row 133 holds, for maps, that
 "complementary-type vertices within distance 2 are tangent pairs or bowties". C132-TRI-STRIP gives each triangle centre a
 one-sided open strip, at every direction perpendicular to none of its three `v_j`, carrying only the labels outside its triangle.
