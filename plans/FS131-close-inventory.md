@@ -8677,3 +8677,33 @@ reason by the close.*
      for a stopping point before anything restarts. (d) The fallback write-up (FS-102) and the six papers to hold
      are his, listed to him. (e) Its third card and the two posed generalizations go into FS-132's claim list
      when that milestone opens. In flight: 3 (the import; the sweep; FS-133's deriver).
+
+626. **EXT-OAI3, second message: three hits among what this project assumes or poses, none among what it claims — an elementary Kloosterman bound in the release's Lean, an answer to the periodic-colouring question by a reduction of its own, and Lean machinery for measure rigidity** (source: EXT-OAI3's message to "main", 2026-10-07; record `plans/EXT-OAI3-review.md`; outputs under `data/external/oai3/`. Nothing here is built or audited; each is its reading of statements and file headers, one mind).
+     **(1) The library's one declared axiom** (`StandingFive.kloosterman_bound`, Weil's `2√q`): the release's Lean
+     holds, inside its family 021, `fourth_norm_le : ‖sum ψ a b‖^4 ≤ 3 * (Fintype.card F : ℝ)^3` for the same sum over
+     every finite field — the elementary fourth-moment bound `|K| ≤ 3^{1/4} q^{3/4}`, weaker than Weil's; its cone is
+     three files (531 lines) importing only Mathlib, with no `sorry` or `axiom` by text. Its arithmetic: every floor
+     this project takes from Weil at large `q` holds from it at a larger threshold (`q > 768` at five, `q > 3,888`
+     at seven, against 59 and about 142), so **the axiom could become a theorem plus a finite list of residue
+     fields, each an exact check** — unpriced. **(2) The periodic-colouring question** (FS-76's C3-aper;
+     `[Ellenberg2018]`, `[AbrishamiEtAl2025]` Problem 4.6): the release's family 155 gives a finite tile of `ℤ³`
+     with no periodic tiling complement; **its own reduction, [hand], one mind** — a Cayley graph on differences of
+     a `k`-point set has a proper periodic `k`-colouring iff the set has a periodic tiling complement (checked
+     exactly on 767 small cases with a planted fault that fires) — turns that into a `|T|`-colourable Cayley graph
+     on `ℤ³` with no periodic `|T|`-colouring: NO to the existence question at that `k`. Nothing at four colours,
+     nothing about unit-distance lattices. Prior art for the reduction: owed (its search was refused by the server).
+     **(3) Measure rigidity in Lean**: family 015's folder is 886 files and about 88,000 lines naming conditional
+     entropy, leafwise measures and steps of Einsiedler–Katok–Lindenstrauss — not the theorem this project imports,
+     the same machinery, and nothing like it is in Mathlib; read at file headers only. **No Tier C hit**: no
+     statement on this project's claim list appears in any family but 158 (28 patterns and the full reading).
+     **A method note for FS-132**: family 156 (Borsuk in dimension nine) kills a cover by a map to a simplex with a
+     degree argument that forces every maximal support to exactly four labels at the threshold — the same shape as
+     the nerve map with a rigidity statement at the threshold; it needs slack for the open cover. **Read by me**:
+     nothing beyond the message. **Rulings.** (a) **(1) is a question for the kernel lane when the backlog's wave 10
+     is looked at again**: is the finite list between the two thresholds affordable — a planner's pricing, not
+     started; it would take the library's outside axioms back toward the standard three. (b) **(2) is a candidate
+     short milestone for the asking lane to rank** beside FS-133's siblings: a published question answered by a
+     reduction on top of an outside theorem; its prior-art search is owed first. (c) **(3) is logged and not
+     acted on: FS-113 and FS-101 stay held by Kooshi's word of 2026-10-06 — no formalizing, no pricing, no
+     re-offer.** He is told that the machinery exists, as a fact. (d) The method note goes into FS-132's opening
+     brief when it is written.
