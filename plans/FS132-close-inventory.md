@@ -1039,3 +1039,44 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     file the estimate lacked and showed the Fourier chain is not needed; a rename seen as a question about statements and
     put to me with both options priced, the work continued on the reversible one.
 
+35. **FS132-Z2 done: the record job's second half — two stubs minted, eleven dated lines in eight open stubs, 63 registered
+    predictions scored, and the front page's drafts, each slot checked to occur once** (deriver; 512k and 28 minutes by the
+    task notice; record `plans/FS132-Z2-record.md` Stages 1–6; report `data/fs132/reports/FS132-Z2.md`; six commits,
+    `d33cddd9` to `cc7f0e2f`). **Stubs**: **FS-134, the exclusion back to maps** (`plans/STUB-exclusion-back-to-maps.md`:
+    one fact to derive — a map's palette is its ring read two-sidedly — and one composition) and **FS-135, the seed's
+    remainder** (`plans/STUB-seed-remainder.md`: far witnesses, measurable germs for the two rings, the one-edge form);
+    twenty-six candidates each minted, placed or cited as placed or declined by the asking lane (its Stage 2.2); the claims
+    posed and not started and the second round's three residues placed at FS-124; the square form of "centres exist" and
+    the exclusion on an open set placed inside this milestone's own Lean phase. **Predictions**: mean Brier 0.135 for the
+    asking lane's three registrations (0.109, 0.083, 0.266) over 17 items, 0.026 for the six derivers over 32 (registered
+    with the argument partly in hand, by their own word); "three expected a claim 'derived as posed' and failed at the
+    claim's wording, not its mathematics; the registered 0.03 for 'decides six against seven' was right three times".
+    **Drafts**: `LEDGER.md` rows 155–160; `CLAUDE.md`, six slots, net +2,003 bytes; grokkings G96–G98 and three sentences;
+    nine instances; six atlas nodes and two edges; one bibliography clause. **Sweeps**: "G84 (with G83's reading) is the
+    entry that should have borne and was not used; it names the object every round ended at, and the milestone reached
+    that after two rounds". **A caution it found and kept out of every draft**: the placed point is "the centre of two unit
+    arcs carrying both their side labels" only under the hypothesis of three consecutive outer-pure ring points; the
+    entry on the placed point's ring alone gives the two arcs, not both labels. **Its slips, disclosed**: a miscount in its
+    reading of the scores, corrected in place; a check first read through a pipe; what it did not read (the derivers'
+    arguments, ledger row 139, any paper; the atlas not rendered). **My receipt**: the commits are on `main`; **the
+    derivation file's gate run by me after its appended paragraph** — exit 0, 0 failures, 9 warnings; the stubs' diff
+    counted (ten files, 427 insertions, no deletion); **its drafts section read whole by me**, and its lines in the next
+    milestone's stub read whole; ledger row 139 read by me against the optional note. Not checked by me: the two new stubs
+    cold; the Brier arithmetic; the atlas positions. **Credit**: every statement in a ledger row copied from its entry by
+    script; three headlines set beside their entries' own words for me to choose; a phrase of the night's summaries caught
+    saying more than its entry; a filing order given with its reason.
+    **Its held points, ruled.** (a) **The sentence of the aim's sixth point is replaced by its draft** — alternative: leave
+    the standing sentence, incomplete and not false; the draft wins because the front page is loaded at every launch and
+    the standing sentence names a bound that is the release's at five; confidence medium-high. (b) **The stale sentence on
+    the Lean backlog is replaced by its draft** (Kooshi's word of the day). (c) **Row 155's grade sentence is filed as
+    drafted.** (d) **The three headlines stand as drafted**, row 159's long form included; **in item 31's sentence I add
+    the drafter's own qualifier from its atlas node** — "in step form with witnesses near the centre" — before "places a
+    four-label point", because that sentence, unlike the row, carries no hypothesis beside it; my change, logged as mine.
+    (e) **G96 is filed; of the asking lane's two unfiled sentences for G94 the first is filed as drafted and the second
+    becomes a pointer "(G96)"**. (f) **The filing order is its order.** (g) **The optional note for row 139 is declined
+    for now** — alternative: file it; I read the row: it states route R through the cone scale and the forcing, and the
+    note's claim that the pair's exclusion "needs no cone scale" in the exact class is the asking lane's reading (item
+    12), which nobody has read against the row's entries; the same content stands in row 133's sharpening and in row 157;
+    it goes to the asking lane's next job as a question. (h) **Its two questions for the asking lane go into that job's
+    brief** (whether the seed's remainder's fourth question is a question; where C132-RADIUS belongs).
+
