@@ -1,0 +1,3 @@
+skeleton: 79 declarations (62 theorems to the kernel, 41 written, 41 of them printed); candidate: 89 declarations (72 theorems); skeleton declarations not found unchanged in the candidate: 0
+RESULT: PASS — every declaration of the skeleton is in the candidate with the same stored type
+EXIT 0

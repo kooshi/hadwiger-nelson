@@ -1,0 +1,6 @@
+'HadwigerNelson.Plane.IsTriod.not_mem_closure_both_sides' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_inter_of_union_eq_closedBall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_inter_halves' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_arc' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

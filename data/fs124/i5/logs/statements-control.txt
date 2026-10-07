@@ -1,0 +1,4 @@
+skeleton: 79 declarations (62 theorems to the kernel, 41 written, 41 of them printed); candidate: 89 declarations (72 theorems); skeleton declarations not found unchanged in the candidate: 1
+STMT theorem HadwigerNelson.Plane.IsTriodCut.mem_closure #1040412927 :: ∀ {x : ℂ} {r : ℝ} {J : Fin 3 → C(↑unitInterval, ℂ)} {P : Fin 3 → Set ℂ},   HadwigerNelson.Plane.IsTriodCut x r J P → ∀ (i : Fin 3), x ∈ closure (P i)
+RESULT: FAIL
+EXIT 1

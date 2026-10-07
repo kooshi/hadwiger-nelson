@@ -1,0 +1,102 @@
+@IsPreconnected.subset_closure : ∀ {α : Type u_1} [inst : TopologicalSpace α] {s t : Set α},
+  IsPreconnected s → s ⊆ t → t ⊆ closure s → IsPreconnected t
+@IsPreconnected.closure : ∀ {α : Type u_1} [inst : TopologicalSpace α] {s : Set α},
+  IsPreconnected s → IsPreconnected (closure s)
+@IsPreconnected.union : ∀ {α : Type u_1} [inst : TopologicalSpace α] (x : α) {s t : Set α},
+  x ∈ s → x ∈ t → IsPreconnected s → IsPreconnected t → IsPreconnected (s ∪ t)
+@IsPreconnected.union' : ∀ {α : Type u_1} [inst : TopologicalSpace α] {s t : Set α},
+  (s ∩ t).Nonempty → IsPreconnected s → IsPreconnected t → IsPreconnected (s ∪ t)
+@isPreconnected_sUnion : ∀ {α : Type u_1} [inst : TopologicalSpace α] (x : α) (c : Set (Set α)),
+  (∀ s ∈ c, x ∈ s) → (∀ s ∈ c, IsPreconnected s) → IsPreconnected (⋃₀ c)
+@isPreconnected_iUnion : ∀ {α : Type u_1} [inst : TopologicalSpace α] {ι : Sort u_2} {s : ι → Set α},
+  (⋂ i, s i).Nonempty → (∀ (i : ι), IsPreconnected (s i)) → IsPreconnected (⋃ i, s i)
+@IsPreconnected.image : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β]
+  {s : Set α}, IsPreconnected s → ∀ (f : α → β), ContinuousOn f s → IsPreconnected (f '' s)
+@isPreconnected_closed_iff : ∀ {α : Type u_1} [inst : TopologicalSpace α] {s : Set α},
+  IsPreconnected s ↔
+    ∀ (t t' : Set α),
+      IsClosed t → IsClosed t' → s ⊆ t ∪ t' → (s ∩ t).Nonempty → (s ∩ t').Nonempty → (s ∩ (t ∩ t')).Nonempty
+@IsPreconnected.subset_left_of_subset_union : ∀ {α : Type u_1} [inst : TopologicalSpace α] {s u v : Set α},
+  IsOpen u → IsOpen v → Disjoint u v → s ⊆ u ∪ v → (s ∩ u).Nonempty → IsPreconnected s → s ⊆ u
+@IsPreconnected.subset_or_subset : ∀ {α : Type u_1} [inst : TopologicalSpace α] {s u v : Set α},
+  IsOpen u → IsOpen v → Disjoint u v → s ⊆ u ∪ v → IsPreconnected s → s ⊆ u ∨ s ⊆ v
+@Convex.isPreconnected : ∀ {E : Type u_1} [inst : AddCommGroup E] [inst_1 : Module ℝ E] [inst_2 : TopologicalSpace E]
+  [ContinuousAdd E] [ContinuousSMul ℝ E] {s : Set E}, Convex ℝ s → IsPreconnected s
+@convex_segment : ∀ {𝕜 : Type u_1} {E : Type u_2} [inst : Semiring 𝕜] [inst_1 : PartialOrder 𝕜]
+  [inst_2 : AddCommMonoid E] [inst_3 : Module 𝕜 E] [IsOrderedRing 𝕜] (x y : E), Convex 𝕜 (segment 𝕜 x y)
+data/fs124/k3/lean/checks1.lean:18:8: error(lean.unknownIdentifier): Unknown identifier `Tuple.sort`
+data/fs124/k3/lean/checks1.lean:19:8: error(lean.unknownIdentifier): Unknown identifier `Tuple.monotone_sort`
+@Monotone.strictMono_of_injective : ∀ {α : Type u_1} {β : Type u_2} [inst : Preorder α] [inst_1 : PartialOrder β]
+  {f : α → β}, Monotone f → Function.Injective f → StrictMono f
+norm_mul_exp_arg_mul_I : ∀ (x : ℂ), ↑‖x‖ * cexp (↑x.arg * I) = x
+neg_pi_lt_arg : ∀ (x : ℂ), -Real.pi < x.arg
+arg_le_pi : ∀ (x : ℂ), x.arg ≤ Real.pi
+@image_closure_subset_closure_image : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X]
+  [inst_1 : TopologicalSpace Y] {f : X → Y} {s : Set X}, Continuous f → f '' closure s ⊆ closure (f '' s)
+@closure_Ioo : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : LinearOrder α] [OrderTopology α]
+  [DenselyOrdered α] {a b : α}, a ≠ b → closure (Ioo a b) = Icc a b
+@Function.Surjective.iUnion_comp : ∀ {α : Type u_1} {ι : Sort u_2} {ι₂ : Sort u_3} {f : ι → ι₂},
+  Function.Surjective f → ∀ (g : ι₂ → Set α), ⋃ x, g (f x) = ⋃ y, g y
+polarPt : ℂ → ℝ → ℝ → ℂ
+@polarPt_ne_of_sub : ∀ {u : ℂ} {ρ ρ' a b : ℝ},
+  0 < ρ → 0 < ρ' → 0 < a - b → a - b < 2 * Real.pi → polarPt u ρ a ≠ polarPt u ρ' b
+@inter_nonempty_of_interleaved_radius : ∀ {u : ℂ} {R : ℝ},
+  0 < R →
+    ∀ {K K' : Set ℂ},
+      IsClosed K →
+        IsPreconnected K →
+          IsPreconnected K' →
+            K ⊆ closedBall u R →
+              K' ⊆ closedBall u R →
+                ∀ {s s' t t' : ℝ},
+                  s < s' →
+                    s' < t →
+                      t < t' →
+                        t' < s + 2 * Real.pi →
+                          polarPt u R s ∈ K →
+                            polarPt u R t ∈ K → polarPt u R s' ∈ K' → polarPt u R t' ∈ K' → (K ∩ K').Nonempty
+@isPreconnected_inter_of_union_eq_univ : ∀ {A B : Set ℂ},
+  IsClosed A → IsClosed B → IsPreconnected A → IsPreconnected B → A ∪ B = univ → IsPreconnected (A ∩ B)
+@exists_inter_of_finite_closed_cover : ∀ {α : Type u_1} {ι : Type u_2} [inst : TopologicalSpace α] {S : Set α},
+  IsPreconnected S →
+    ∀ {s : Set ι},
+      s.Finite →
+        ∀ (C : ι → Set α),
+          (∀ i ∈ s, IsClosed (C i)) →
+            S ⊆ ⋃ i ∈ s, C i →
+              ∀ {i j : ι},
+                i ∈ s →
+                  j ∈ s →
+                    i ≠ j →
+                      (S ∩ C i).Nonempty → (S ∩ C j).Nonempty → ∃ i' ∈ s, ∃ j' ∈ s, i' ≠ j' ∧ (S ∩ C i' ∩ C j').Nonempty
+norm_polarPt_sub : ∀ (p : ℂ) (ρ ψ : ℝ), ‖polarPt p ρ ψ - p‖ = |ρ|
+@isPreconnected_Ioo : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : ConditionallyCompleteLinearOrder α]
+  [OrderTopology α] [DenselyOrdered α] {a b : α}, IsPreconnected (Ioo a b)
+@isPreconnected_Icc : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : ConditionallyCompleteLinearOrder α]
+  [OrderTopology α] [DenselyOrdered α] {a b : α}, IsPreconnected (Icc a b)
+unitInterval : Set ℝ
+@Finite.injective_iff_surjective : ∀ {α : Type u_1} [Finite α] {f : α → α}, Function.Injective f ↔ Function.Surjective f
+@IsCompact.isClosed : ∀ {X : Type u_1} [inst : TopologicalSpace X] [T2Space X] {s : Set X}, IsCompact s → IsClosed s
+@isCompact_range : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y]
+  [CompactSpace X] {f : X → Y}, Continuous f → IsCompact (range f)
+data/fs124/k3/lean/checks1.lean:39:8: error(lean.unknownIdentifier): Unknown identifier `Metric.closedBall_eq_closure_ball`
+@closure_ball : ∀ {E : Type u_1} [inst : SeminormedAddCommGroup E] [NormedSpace ℝ E] (x : E) {r : ℝ},
+  r ≠ 0 → closure (ball x r) = closedBall x r
+@closure_minimal : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s t : Set X}, s ⊆ t → IsClosed t → closure s ⊆ t
+discRetract : ℂ → ℂ → ℂ
+@mem_closure_iff_nhds : ∀ {X : Type u_1} [inst : TopologicalSpace X] {x : X} {s : Set X},
+  x ∈ closure s ↔ ∀ t ∈ 𝓝 x, (t ∩ s).Nonempty
+@Metric.mem_closure_iff : ∀ {α : Type u_1} [inst : PseudoMetricSpace α] {s : Set α} {a : α},
+  a ∈ closure s ↔ ∀ ε > 0, ∃ b ∈ s, dist a b < ε
+@IsPreconnected.biUnion_of_reflTransGen : ∀ {α : Type u_1} [inst : TopologicalSpace α] {ι : Type u_2} {t : Set ι}
+  {s : ι → Set α},
+  (∀ i ∈ t, IsPreconnected (s i)) →
+    (∀ i ∈ t, ∀ j ∈ t, Relation.ReflTransGen (fun i j => (s i ∩ s j).Nonempty ∧ i ∈ t) i j) →
+      IsPreconnected (⋃ n ∈ t, s n)
+@projIcc : {α : Type u_1} → [inst : LinearOrder α] → (a b : α) → a ≤ b → α → ↑(Icc a b)
+unitInterval.symm : ↑unitInterval → ↑unitInterval
+@IsOpen.inter_closure : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s t : Set X},
+  IsOpen s → s ∩ closure t ⊆ closure (s ∩ t)
+@Continuous.continuousOn : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β]
+  {f : α → β} {s : Set α}, Continuous f → ContinuousOn f s
+data/fs124/k3/lean/checks1.lean:50:8: error(lean.unknownIdentifier): Unknown identifier `polarPt_add_two_pi`

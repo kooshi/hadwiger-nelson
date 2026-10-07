@@ -1,0 +1,82 @@
+'HadwigerNelson.Plane.ballRetract_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.continuous_ballRetract' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ballRetract_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ballRetract_of_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ballRetract_of_mem_segment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_preimage_ballRetract' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_inter_of_union_eq_closedBall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_inter_halves' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.RimOrder.rotate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.RimOrder.eq_or' depends on axioms: [propext, Classical.choice, Quot.sound]
+data/fs124/i5/lean/Axioms.lean:16:14: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.Plane.polarPt_add_turn`
+data/fs124/i5/lean/Axioms.lean:17:14: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.Plane.fin_three_eq_or_of_ne`
+data/fs124/i5/lean/Axioms.lean:18:14: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.Plane.exists_ne_ne_fin_three`
+data/fs124/i5/lean/Axioms.lean:19:14: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.Plane.fin_three_add_one_ne`
+'HadwigerNelson.Plane.isClosed_iUnion_range_arc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_arc_range_subset_inter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.apply_mem_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.apply_mem_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.apply_one_mem_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.eq_one_of_mem_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.apply_one_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.isPreconnected_range_union_range' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.IsTriod.isPreconnected_iUnion_range' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.polarPt_mem_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.range_subset_of_isPreconnected' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.apply_one_eq_polarPt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.isPreconnected_image_Icc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.exists_rimOrder' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.eq_apply_one_of_mem_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.notMem_iUnion_range_of_mem_Ioo' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.not_mem_closure_both_sides' depends on axioms: [propext, Classical.choice, Quot.sound]
+data/fs124/i5/lean/Axioms.lean:37:14: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.Plane.IsTriodCut.mem_diff_of_mem`
+data/fs124/i5/lean/Axioms.lean:38:14: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.Plane.IsTriodCut.exists_mem_piece`
+data/fs124/i5/lean/Axioms.lean:39:14: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.Plane.IsTriodCut.eq_of_mem_of_mem_closure`
+data/fs124/i5/lean/Axioms.lean:40:14: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.Plane.IsTriodCut.closure_piece_subset_closedBall`
+'HadwigerNelson.Plane.IsTriodCut.piece_subset_ball' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.disjoint_iUnion_range' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_unique_mem_closure' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.closure_inter_closure_subset' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_forall_rimArc' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+data/fs124/i5/lean/Axioms.lean:46:14: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.Plane.IsTriodCut.disjoint_range_union_range`
+'HadwigerNelson.Plane.IsTriodCut.ne_of_rimOrder' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_rimPieces' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.closure_inter_nonempty' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.isPreconnected_closure_inter' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.rimPiece_spec' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_opposite' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_range_subset' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.closure_inter_closure_inter_ball' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.mem_closure' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_arc' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+data/fs124/i5/lean/Axioms.lean:59:8: warning: declaration uses `sorry`
+'fs124_i5_control_sorry' depends on axioms: [sorryAx]
+'fs124_i5_control_planted' depends on axioms: [fs124_i5_control_axiom]
