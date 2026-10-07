@@ -1,0 +1,11 @@
+HEAD=24a42aa9f7816b544c4e7a63c754a9b45e77bd49
+narrow lines before the plant: 0
+narrow lines with the plant: 1
+Proofs/HadwigerNelson/Plane/Radius.lean:268:theorem zz_l1_sorry_plant : (1 : ℕ) = 2 := by sorry
+PLANT FIRED: the search finds the planted sorry and nothing else
+digest before: a7c2eb758d110b99251cd6a134899b9f781a5fc07eb7a30e061fcb2a47540d61
+digest after:  a7c2eb758d110b99251cd6a134899b9f781a5fc07eb7a30e061fcb2a47540d61
+RESTORED: the module is the text it was
+plant's name in the file: 0 time(s)
+narrow lines after the restore: 0
+tracked files modified: 0

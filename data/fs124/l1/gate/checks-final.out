@@ -1,0 +1,174 @@
+def HadwigerNelson.Plane.rigidMotion : ℂ × ℝ → ℂ → ℂ :=
+fun (q : ℂ × ℝ) (z : ℂ) => q.1 + HadwigerNelson.Plane.e q.2 * z
+def HadwigerNelson.Plane.monoPairSet.{u_1} : {α : Type u_1} → Set ℂ → (ℂ → α) → Set (ℂ × ℝ) :=
+fun {α : Type u_1} (U : Set ℂ) (c : ℂ → α) =>
+  {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + HadwigerNelson.Plane.e q.2 ∈ U ∧ c q.1 = c (q.1 + HadwigerNelson.Plane.e q.2)}
+def HadwigerNelson.Plane.AeProperOn.{u_1} : {α : Type u_1} → Set ℂ → (ℂ → α) → Prop :=
+fun {α : Type u_1} (U : Set ℂ) (c : ℂ → α) =>
+  (MeasureTheory.MeasureSpace.volume.prod HadwigerNelson.Plane.arcLength) (HadwigerNelson.Plane.monoPairSet U c) =
+    (0 : ENNReal)
+structure HadwigerNelson.Plane.IsWeakColouringOn {k : ℕ} (U : Set ℂ) (c : ℂ → Fin k) : Prop
+number of parameters: 3
+fields:
+  HadwigerNelson.Plane.IsWeakColouringOn.measurable : Measurable c
+  HadwigerNelson.Plane.IsWeakColouringOn.aeProperOn : HadwigerNelson.Plane.AeProperOn U c
+constructor:
+  HadwigerNelson.Plane.IsWeakColouringOn.mk {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k} (measurable : Measurable c)
+    (aeProperOn : HadwigerNelson.Plane.AeProperOn U c) : HadwigerNelson.Plane.IsWeakColouringOn U c
+def HadwigerNelson.Plane.arcLength : MeasureTheory.Measure ℝ :=
+MeasureTheory.MeasureSpace.volume.restrict (Set.Ico (0 : ℝ) ((2 : ℝ) * Real.pi))
+def HadwigerNelson.Plane.e : ℝ → ℂ :=
+fun (θ : ℝ) => Complex.exp (↑θ * Complex.I)
+@HadwigerNelson.Plane.radius_graph : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {V : Set ℂ},
+        V.Finite →
+          V ⊆ U →
+            (IsOpen {q : ℂ × ℝ | Set.MapsTo (HadwigerNelson.Plane.rigidMotion q) V U} ∧
+                {q : ℂ × ℝ | Set.MapsTo (HadwigerNelson.Plane.rigidMotion q) V U}.Nonempty) ∧
+              (∀ᵐ (q : ℂ × ℝ) ∂MeasureTheory.MeasureSpace.volume.prod HadwigerNelson.Plane.arcLength,
+                  Set.MapsTo (HadwigerNelson.Plane.rigidMotion q) V U →
+                    ∀ v ∈ V,
+                      ∀ w ∈ V,
+                        Dist.dist v w = (1 : ℝ) →
+                          c (HadwigerNelson.Plane.rigidMotion q v) ≠ c (HadwigerNelson.Plane.rigidMotion q w)) ∧
+                (SimpleGraph.induce V (HadwigerNelson.unitDistance ℂ)).Colorable k
+@HadwigerNelson.Plane.radius_countable : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {V : Set ℂ},
+        V.Countable →
+          IsCompact (closure V) →
+            closure V ⊆ U →
+              ∃ (q : ℂ × ℝ),
+                Set.MapsTo (HadwigerNelson.Plane.rigidMotion q) V U ∧
+                  ∀ v ∈ V,
+                    ∀ w ∈ V,
+                      Dist.dist v w = (1 : ℝ) →
+                        c (HadwigerNelson.Plane.rigidMotion q v) ≠ c (HadwigerNelson.Plane.rigidMotion q w)
+@HadwigerNelson.Plane.radius_up : ∀ {k : ℕ},
+  (∀ R > (0 : ℝ), ∃ (c : ℂ → Fin k), HadwigerNelson.Plane.IsWeakColouringOn (Metric.ball (0 : ℂ) R) c) →
+    (∀ (V : Set ℂ), V.Finite → (SimpleGraph.induce V (HadwigerNelson.unitDistance ℂ)).Colorable k) ∧
+      (HadwigerNelson.unitDistance ℂ).chromaticNumber ≤ ↑k
+@HadwigerNelson.Plane.radius_down : ∀ {k : ℕ},
+  (HadwigerNelson.unitDistance ℂ).chromaticNumber ≤ ↑k →
+    ∀ (U : Set ℂ), IsOpen U → ∃ (c : ℂ → Fin k), HadwigerNelson.Plane.IsWeakColouringOn U c
+HadwigerNelson.Plane.radius_five : ∃ R > (0 : ℝ),
+  ∀ (p : ℂ), ¬∃ (c : ℂ → Fin (5 : ℕ)), HadwigerNelson.Plane.IsWeakColouringOn (Metric.ball p R) c
+@HadwigerNelson.Plane.colorable_iff_forall_ball : ∀ {k : ℕ},
+  (HadwigerNelson.unitDistance ℂ).Colorable k ↔
+    ∀ R > (0 : ℝ), ∃ (c : ℂ → Fin k), HadwigerNelson.Plane.IsWeakColouringOn (Metric.ball (0 : ℂ) R) c
+HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball : (7 : ℕ∞) ≤
+    (HadwigerNelson.unitDistance ℂ).chromaticNumber ↔
+  ∃ R > (0 : ℝ), ¬∃ (c : ℂ → Fin (6 : ℕ)), HadwigerNelson.Plane.IsWeakColouringOn (Metric.ball (0 : ℂ) R) c
+@HadwigerNelson.Plane.exists_radius_of_not_colorable : ∀ {k : ℕ},
+  ¬(HadwigerNelson.unitDistance ℂ).Colorable k →
+    ∃ R > (0 : ℝ), ∀ (p : ℂ) (c : ℂ → Fin k), ¬HadwigerNelson.Plane.AeProperOn (Metric.ball p R) c
+@HadwigerNelson.Plane.colorable_plane_of_forall_aeProperOn_ball : ∀ {k : ℕ},
+  (∀ R > (0 : ℝ), ∃ (p : ℂ) (c : ℂ → Fin k), HadwigerNelson.Plane.AeProperOn (Metric.ball p R) c) →
+    (HadwigerNelson.unitDistance ℂ).Colorable k
+@HadwigerNelson.Plane.exists_isWeakColouringOn_of_colorable : ∀ {k : ℕ},
+  (HadwigerNelson.unitDistance ℂ).Colorable k →
+    ∃ (c : ℂ → Fin k), ∀ (U : Set ℂ), HadwigerNelson.Plane.IsWeakColouringOn U c
+@HadwigerNelson.Plane.AeProperOn.ae_rigidMotion : ∀ {α : Type u_1} {U : Set ℂ} {c : ℂ → α},
+  HadwigerNelson.Plane.AeProperOn U c →
+    ∀ {V : Set ℂ},
+      V.Countable →
+        ∀ᵐ (q : ℂ × ℝ),
+          ∀ v ∈ V,
+            ∀ w ∈ V,
+              Dist.dist v w = (1 : ℝ) →
+                HadwigerNelson.Plane.rigidMotion q v ∈ U →
+                  HadwigerNelson.Plane.rigidMotion q w ∈ U →
+                    c (HadwigerNelson.Plane.rigidMotion q v) ≠ c (HadwigerNelson.Plane.rigidMotion q w)
+@HadwigerNelson.Plane.aeProperOn_iff_ae : ∀ {α : Type u_1} {U : Set ℂ} {c : ℂ → α},
+  HadwigerNelson.Plane.AeProperOn U c ↔
+    ∀ᵐ (q : ℂ × ℝ) ∂MeasureTheory.MeasureSpace.volume.prod HadwigerNelson.Plane.arcLength,
+      q.1 ∈ U → q.1 + HadwigerNelson.Plane.e q.2 ∈ U → c q.1 ≠ c (q.1 + HadwigerNelson.Plane.e q.2)
+@HadwigerNelson.Plane.exists_isWeakColouringOn_iff_subtype : ∀ {k : ℕ} [NeZero k] {U : Set ℂ},
+  MeasurableSet U →
+    ((∃ (c : ℂ → Fin k), HadwigerNelson.Plane.IsWeakColouringOn U c) ↔
+      ∃ (c : ↑U → Fin k),
+        Measurable c ∧
+          ∀ᵐ (q : ℂ × ℝ) ∂MeasureTheory.MeasureSpace.volume.prod HadwigerNelson.Plane.arcLength,
+            ∀ (h₁ : q.1 ∈ U) (h₂ : q.1 + HadwigerNelson.Plane.e q.2 ∈ U),
+              c ⟨q.1, h₁⟩ ≠ c ⟨q.1 + HadwigerNelson.Plane.e q.2, h₂⟩)
+@HadwigerNelson.Plane.exists_isWeakColouringOn_ball_iff : ∀ {k : ℕ} (p : ℂ) (R : ℝ),
+  (∃ (c : ℂ → Fin k), HadwigerNelson.Plane.IsWeakColouringOn (Metric.ball p R) c) ↔
+    ∃ (c : ℂ → Fin k), HadwigerNelson.Plane.IsWeakColouringOn (Metric.ball (0 : ℂ) R) c
+HadwigerNelson.Plane.exists_isWeakColouringOn_seven : ∃ (c : ℂ → Fin (7 : ℕ)),
+  ∀ (U : Set ℂ), HadwigerNelson.Plane.IsWeakColouringOn U c
+HadwigerNelson.Plane.exists_radius_no_weak_four : ∃ R > (0 : ℝ),
+  ∀ (p : ℂ), ¬∃ (c : ℂ → Fin (4 : ℕ)), HadwigerNelson.Plane.IsWeakColouringOn (Metric.ball p R) c
+'HadwigerNelson.Plane.radius_graph' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.radius_countable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.radius_up' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.radius_down' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Plane.radius_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Plane.colorable_iff_forall_ball' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Plane.exists_radius_of_not_colorable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_isWeakColouringOn_of_colorable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Plane.exists_radius_no_weak_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L1.colorable_of_forall_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L1.forall_ball_of_colorable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'FS124L1.exists_ball_of_seven_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L1.seven_le_of_exists_ball' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'FS124L1.eq_seven_iff_exists_disc' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'FS124L1.seven_le_iff_no_aeProperOn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+HadwigerNelson.chromaticNumber_plane_eq_complex : (HadwigerNelson.unitDistance
+      (EuclideanSpace ℝ (Fin (2 : ℕ)))).chromaticNumber =
+  (HadwigerNelson.unitDistance ℂ).chromaticNumber
+HadwigerNelson.chromaticNumber_plane_interval : (5 : ℕ∞) ≤
+    (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin (2 : ℕ)))).chromaticNumber ∧
+  (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin (2 : ℕ)))).chromaticNumber ≤ (7 : ℕ∞)
+'FS124L1.model_graph' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L1.model_up' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L1.model_down' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L1.join_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L1.join_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L1.criterion_at_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L1.criterion_at_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'FS124L1.up_hypothesis_five_empty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Outside.OAI158.not_colorable_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
