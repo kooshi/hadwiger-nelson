@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/43qPvtb2oAfSiNv1iWzYMakitdQ</id>
+  <title>arXiv Query: search_query=all:"finitary" AND all:"chromatic number" AND all:plane&amp;id_list=&amp;start=0&amp;max_results=25</title>
+  <updated>2026-10-07T03:05:07Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22finitary%22+AND+(all:%22chromatic+number%22+AND+all:plane)&amp;start=0&amp;max_results=25&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2311.10069v4</id>
+    <title>The fractional chromatic number of the plane is at least 4</title>
+    <updated>2025-03-27T16:48:40Z</updated>
+    <link href="https://arxiv.org/abs/2311.10069v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.10069v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that the fractional chromatic number $χ_f(\mathbb R^2)$ of the unit distance graph of the Euclidean plane is greater than or equal to $4$. Interestingly, however, we cannot present a finite subgraph $G$ of the plane such that $χ_f(G)\ge 4$. Instead, we utilize the concept of the geometric fractional chromatic number $χ_{gf}(G)$, which was introduced recently in connection with density bounds for 1-avoiding sets.
+  First, as $G$ ranges over finite subgraphs of the plane, we establish that the supremum of $χ_f(G)$ is the same as that of $χ_{gf}(G)$. The proof exploits the amenability of the group of Euclidean transformations in dimension 2 and, as such, we do not know whether the analogous statement holds in higher dimensions. We then present a specific planar unit distance graph $G$ on 27 vertices such that $χ_{gf}(G)=4$, and conclude $χ_f(\mathbb R^2)\ge 4$ as a corollary.
+  As another main result we show that the finitary fractional chromatic number and the Hall ratio of the plane are equal. As a consequence, we conclude that there exist finite unit distance graphs with independence ratio $\frac{1}{4}+\varepsilon$, while we conjecture that the value $\frac{1}{4}$ cannot be reached.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-16T18:09:12Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Máté Matolcsi</name>
+    </author>
+    <author>
+      <name>Imre Z. Ruzsa</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+    <author>
+      <name>Pál Zsámboki</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,412 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/058vOJlsOD//DxhpGsWWE8WEtRU</id>
+  <title>arXiv Query: search_query=all:"chromatic number of the plane"&amp;id_list=&amp;start=0&amp;max_results=25</title>
+  <updated>2026-10-07T03:03:47Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22chromatic+number+of+the+plane%22&amp;start=0&amp;max_results=25&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+  <opensearch:totalResults>23</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.28157v1</id>
+    <title>A unit-distance graph in the plane with independence ratio below 1/4</title>
+    <updated>2026-06-26T14:54:23Z</updated>
+    <link href="https://arxiv.org/abs/2606.28157v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.28157v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that there exists a finite unit-distance graph in the plane with independence ratio strictly smaller than 1/4, answering a question of Erdős. Our proof closely follows the framework of Matolcsi, Ruzsa, Varga, and Zsámboki, based on the geometric fractional chromatic number, but adds a carefully chosen two-vertex augmentation that pushes their 27-vertex construction from geometric fractional chromatic number $4$ to a value strictly larger than 4. This disproves their Conjecture 1, and implies that the fractional chromatic number of the plane is strictly larger than 4. The proof can be made fully constructive, but the resulting finite graph has an enormous number of vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-26T14:54:23Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.12325v1</id>
+    <title>A note on geometric colorings of the Moser lattice</title>
+    <updated>2026-06-10T16:59:20Z</updated>
+    <link href="https://arxiv.org/abs/2606.12325v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.12325v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In arXiv:2311.10069, Matolcsi et al. show that the fractional chromatic number of the plane is at least 4. Their proof uses a 27-vertex unit-distance graph in the Moser lattice, with geometric fractional chromatic number exactly 4. We show that this bound is tight for graphs in the Moser lattice by exhibiting geometric 4-colorings of the entire lattice. The same colorings also extend to the entire Moser ring.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-10T16:59:20Z</published>
+    <arxiv:comment>5 pages, 0 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.01958v1</id>
+    <title>On the chromatic number of the plane for map-type colorings</title>
+    <updated>2025-02-04T03:08:07Z</updated>
+    <link href="https://arxiv.org/abs/2502.01958v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.01958v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the Hadwiger-Nelson problem on the chromatic number of the plane under conditions of coloring a map containing a finite number of vertices in any bounded region. Woodall (1973) and Townsend (1981) showed that at least 6 colors would be required. In the present paper, it is shown that at least 7 colors are required to color a map in which the boundaries are not arcs of a unit circle and three boundaries connect at each vertex. As a corollary, we obtain that at least 7 colors are required for a proper coloring in which the regions are arbitrary polygons. The proof relies on techniques developed for a similar result concerning the chromatic number of the plane with a forbidden interval of distances.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-04T03:08:07Z</published>
+    <arxiv:comment>29 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Georgy Sokolov</name>
+    </author>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.14398v2</id>
+    <title>A lower bound on the number of colours needed to nicely colour a sphere</title>
+    <updated>2025-04-18T17:55:55Z</updated>
+    <link href="https://arxiv.org/abs/2404.14398v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.14398v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Hadwiger--Nelson problem is about determining the chromatic number of the plane (CNP), defined as the minimum number of colours needed to colour the plane so that no two points of distance 1 have the same colour. In this paper we investigate a related problem for spheres and we use a few natural restrictions on the colouring. Thomassen showed that with these restrictions, the chromatic number of all manifolds satisfying certain properties (including the plane and all spheres with a large enough radius) is at least 7. We prove that with these restrictions, the chromatic number of any sphere with a large enough radius is at least 8. This also gives a new lower bound for the minimum colours needed for colouring the 3-dimensional space with the same restrictions.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-22T17:57:46Z</published>
+    <arxiv:comment>The result was presented at CCCG 2020. The present paper is a revised version of the paper in the conference proceedings</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Péter Ágoston</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.10069v4</id>
+    <title>The fractional chromatic number of the plane is at least 4</title>
+    <updated>2025-03-27T16:48:40Z</updated>
+    <link href="https://arxiv.org/abs/2311.10069v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.10069v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that the fractional chromatic number $χ_f(\mathbb R^2)$ of the unit distance graph of the Euclidean plane is greater than or equal to $4$. Interestingly, however, we cannot present a finite subgraph $G$ of the plane such that $χ_f(G)\ge 4$. Instead, we utilize the concept of the geometric fractional chromatic number $χ_{gf}(G)$, which was introduced recently in connection with density bounds for 1-avoiding sets.
+  First, as $G$ ranges over finite subgraphs of the plane, we establish that the supremum of $χ_f(G)$ is the same as that of $χ_{gf}(G)$. The proof exploits the amenability of the group of Euclidean transformations in dimension 2 and, as such, we do not know whether the analogous statement holds in higher dimensions. We then present a specific planar unit distance graph $G$ on 27 vertices such that $χ_{gf}(G)=4$, and conclude $χ_f(\mathbb R^2)\ge 4$ as a corollary.
+  As another main result we show that the finitary fractional chromatic number and the Hall ratio of the plane are equal. As a consequence, we conclude that there exist finite unit distance graphs with independence ratio $\frac{1}{4}+\varepsilon$, while we conjecture that the value $\frac{1}{4}$ cannot be reached.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-16T18:09:12Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Máté Matolcsi</name>
+    </author>
+    <author>
+      <name>Imre Z. Ruzsa</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+    <author>
+      <name>Pál Zsámboki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.10163v3</id>
+    <title>The chromatic number of the plane with an interval of forbidden distances is at least 7</title>
+    <updated>2025-04-13T17:17:35Z</updated>
+    <link href="https://arxiv.org/abs/2304.10163v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.10163v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The work is devoted to one of the variations of the Hadwiger--Nelson problem on the chromatic number of the plane. In this formulation one needs to find for arbitrarily small $\varepsilon$ the least possible number of colors needed to color a Euclidean plane in such a way that any two points, the distance between which belongs to the interval $[1-\varepsilon, 1+\varepsilon]$, are colored differently. The conjecture proposed by G. Exoo in 2004, states that for arbitrary positive $\varepsilon$ at least 7 colors are required. Also, with a sufficiently small $\varepsilon$ the number of colors is exactly 7. The main result of the present paper is that the conjecture is true for the Euclidean plane as well as for any Minkowski plane.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-20T08:50:06Z</published>
+    <arxiv:comment>16 pages, 6 figures. Extended the bibliography and details of proofs concerning arbitrary norm. Added a theorem on covering a disk of radius 3 by closed sets. Corrected some inaccuracies</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.06801v1</id>
+    <title>A 5-chromatic same-distance graph in the hyperbolic plane</title>
+    <updated>2023-03-13T01:18:15Z</updated>
+    <link href="https://arxiv.org/abs/2303.06801v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.06801v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The chromatic number of the plane problem asks for the minimum number of colors so that each point of the plane can be assigned a single color with the property that no two points unit-distance apart are identically colored. It is now known that the answer is 5, 6, or 7.
+  Here we consider the problem in the context of the hyperbolic plane. We prove that there exists a distance $d\approx 1.375033509$ so that every 4-coloring of the hyperbolic plane contains two points distance $d$ apart, which are identically colored.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-13T01:18:15Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Geoffrey Exoo</name>
+    </author>
+    <author>
+      <name>Dan Ismailescu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2301.13695v1</id>
+    <title>Note on the chromatic number of Minkowski planes: the regular polygon case</title>
+    <updated>2023-01-31T15:13:49Z</updated>
+    <link href="https://arxiv.org/abs/2301.13695v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2301.13695v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The famous Hadwiger-Nelson problem asks for the minimum number of colors needed to color the points of the Euclidean plane so that no two points unit distance apart are assigned the same color. In this note we consider a variant of the problem in Minkowski metric planes, where the unit circle is a regular polygon of even and at most 22 vertices. We present a simple lattice-sublattice coloring scheme that uses 6 colors, proving that the chromatic number of the Minkowski planes above are at most 6. This result is new for regular polygons having more than 8 vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-01-31T15:13:49Z</published>
+    <arxiv:comment>15 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Panna Gehér</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.12633v1</id>
+    <title>On the plane and its coloring</title>
+    <updated>2022-06-25T12:18:52Z</updated>
+    <link href="https://arxiv.org/abs/2206.12633v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.12633v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We provide a human-verifiable proof that, in a certain sense, the chromatic number of the plane is exactly 7.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-25T12:18:52Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 31/4 (2022) 189-195</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.12630v1</id>
+    <title>On upper bounds for the multi-fold chromatic numbers of the plane</title>
+    <updated>2022-06-25T12:11:00Z</updated>
+    <link href="https://arxiv.org/abs/2206.12630v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.12630v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The multi-fold chromatic number of the plane $χ_m$ is the smallest number of colors $k$, sufficient to color each point of the Euclidean plane in exactly $m$ colors, so that for any pair of points at a unit distance from each other, two corresponding $m$-subsets of $k$-set do not contain any common color. We consider upper bounds for $m$-fold chromatic numbers of the plane. Our main result is that for any $m$ the inequality $χ_m&lt;(1+2/\sqrt3)^2\cdot m+3.501$ holds.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-25T12:11:00Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 30/4 (2021) 177-189</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2107.08508v3</id>
+    <title>Non-local Potts model on random lattice and chromatic number of a plane</title>
+    <updated>2026-03-27T03:54:06Z</updated>
+    <link href="https://arxiv.org/abs/2107.08508v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2107.08508v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Statistical models are widely used for the investigation of complex system's behavior. Most of the models considered in the literature are formulated on regular lattices with nearest-neighbor interactions. The models with non-local interaction kernels have been less studied. In this article, we investigate an example of such a model - the non-local q-color Potts model on a random d=2 lattice. Only the same color spins at a unit distance (within some small margin $δ$) interact. We study the vacuum states of this model and present the results of numerical simulations and discuss qualitative features of the corresponding patterns. Conjectured relation with the chromatic number of a plane problem is discussed.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-07-18T18:10:19Z</published>
+    <arxiv:comment>18 pages, 11 figures, accepted version, sections on comparison of algorithms and checking of model stability are added, new references are added</arxiv:comment>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <arxiv:journal_ref>Journal of Computational Science, Volume 61, 2022, 101607</arxiv:journal_ref>
+    <author>
+      <name>V. Shevchenko</name>
+    </author>
+    <author>
+      <name>A. Tanashkin</name>
+    </author>
+    <arxiv:doi>10.1016/j.jocs.2022.101607</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jocs.2022.101607" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.11824v4</id>
+    <title>Constructing 5-chromatic unit distance graphs embedded in the Euclidean plane and two-dimensional spheres</title>
+    <updated>2022-10-22T08:36:37Z</updated>
+    <link href="https://arxiv.org/abs/2106.11824v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.11824v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper is devoted to the development of algorithms for finding unit distance graphs with chromatic number greater than 4, embedded in a two-dimensional sphere or plane. Such graphs provide a lower bound for the Nelson-Hadwiger problem on the chromatic number of the plane and its generalizations to the case of the sphere. A series of 5-chromatic unit distance graphs on 64513 vertices embedded into the plane is constructed. Unlike previously known examples, these graphs do not contain the Moser spindle as a subgraph. The construction of 5-chromatic graphs embedded in a sphere at two values of the radius is given. Namely, the 5-chromatic unit distance graph on 372 vertices embedded into the circumsphere of an icosahedron with a unit edge length, and the 5-chromatic graph on 972 vertices embedded into the circumsphere of a great icosahedron are constructed.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-07T14:18:45Z</published>
+    <arxiv:comment>20 pages, 12 figures. Fixed a few minor mistakes. Changes suggested by the reviewers have been made. Simplified some formulas</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Discrete Mathematics, 345(12), 113106 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+    <author>
+      <name>Anna Neopryatnaya</name>
+    </author>
+    <author>
+      <name>Eugene Dergachev</name>
+    </author>
+    <arxiv:doi>10.1016/j.disc.2022.113106</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.disc.2022.113106" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2010.12661v1</id>
+    <title>The chromatic number of the plane is at least 5 -- a human-verifiable proof</title>
+    <updated>2020-10-23T20:51:07Z</updated>
+    <link href="https://arxiv.org/abs/2010.12661v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.12661v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a new proof of the known fact that the chromatic number of the plane is at least 5. The main difference of this proof is that it can be verified manually without the help of the computer.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-23T20:51:07Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 30/2 (2020) 77-102</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1912.02604v3</id>
+    <title>Almost-monochromatic sets and the chromatic number of the plane</title>
+    <updated>2022-02-26T05:51:57Z</updated>
+    <link href="https://arxiv.org/abs/1912.02604v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1912.02604v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In a colouring of $\mathbb{R}^d$ a pair $(S,s_0)$ with $S\subseteq \mathbb{R}^d$ and with $s_0\in S$ is \emph{almost monochromatic} if $S\setminus \{s_0\}$ is monochromatic but $S$ is not. We consider questions about finding almost monochromatic similar copies of pairs $(S,s_0)$ in colourings of $\mathbb{R}^d$, $\mathbb{Z}^d$, and in $\mathbb{Q}$ under some restrictions on the colouring.
+  Among other results, we characterise those $(S,s_0)$ with $S\subseteq \mathbb{Z}$ for which every finite colouring of $\mathbb{R}$ without an infinite monochromatic arithmetic progression contains an almost monochromatic similar copy of $(S,s_0)$. We also show that if $S\subseteq \mathbb{Z}^d$ and $s_0$ is outside of the convex hull of $S\setminus \{s_0\}$, then every finite colouring of $\mathbb{R}^d$ without a similar monochromatic copy of $\mathbb{Z}^d$ contains an almost monochromatic similar copy of $(S,s_0)$.
+  Further, we propose an approach of finding almost-monochromatic sets that might lead to a non-computer assisted proof of $χ(\R^2)\geq 5$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-12-05T14:44:53Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Nóra Frankl</name>
+    </author>
+    <author>
+      <name>Tamás Hubai</name>
+    </author>
+    <author>
+      <name>Dömötör Pálvölgyi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1908.03880v2</id>
+    <title>Lattice approach to plane colorings</title>
+    <updated>2019-08-27T06:26:40Z</updated>
+    <link href="https://arxiv.org/abs/1908.03880v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1908.03880v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>I propose a fixed-range interaction multicomponent spin model, to be used as a physical analog to problems in plane geometry. Specifically, the model is applied to the open problem of the chromatic number of the plane. When spin values are interpreted as colors, the lowest energy configurations of the lattice spin system can be interpreted as approximations to plane colorings. In general minimum energy configurations of the model give optimal colorings, corresponding to minimum probability of any color realizing distance one. Approximate optimal lattice colorings with two to seven colors towards the continuum limit suggest that a true coloring of the plane cannot be achieved with less than seven colors.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-08-11T10:17:02Z</published>
+    <arxiv:comment>20 pages, 10 pdf figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Sami Heinäsmäki</name>
+      <arxiv:affiliation>Aalto University</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.12181v1</id>
+    <title>Computing Small Unit-Distance Graphs with Chromatic Number 5</title>
+    <updated>2018-05-30T19:05:11Z</updated>
+    <link href="https://arxiv.org/abs/1805.12181v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.12181v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a new method for reducing the size of graphs with a given property. Our method, which is based on clausal proof minimization, allowed us to compute several 553-vertex unit-distance graphs with chromatic number 5, while the smallest published unit-distance graph with chromatic number 5 has 1581 vertices. The latter graph was constructed by Aubrey de Grey to show that the chromatic number of the plane is at least 5. The lack of a 4-coloring of our graphs is due to a clear pattern enforced on some vertices. Also, our graphs can be mechanically validated in a second, which suggests that the pattern is based on a reasonably short argument.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-30T19:05:11Z</published>
+    <arxiv:comment>To appear in Geombinatorics XXVIII(1) in July-2018, a special issue dedicated to 5-chromatic unit-distance graphs</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Marijn J. H. Heule</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.00157v1</id>
+    <title>The chromatic number of the plane is at least 5 - a new proof</title>
+    <updated>2018-05-01T02:30:54Z</updated>
+    <link href="https://arxiv.org/abs/1805.00157v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.00157v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present an alternate proof of the fact that given any 4-coloring of the plane there exist two points unit distance apart which are identically colored.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-01T02:30:54Z</published>
+    <arxiv:comment>12 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Geoffrey Exoo</name>
+    </author>
+    <author>
+      <name>Dan Ismailescu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1804.02385v3</id>
+    <title>The chromatic number of the plane is at least 5</title>
+    <updated>2018-05-30T20:46:47Z</updated>
+    <link href="https://arxiv.org/abs/1804.02385v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1804.02385v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a family of finite unit-distance graphs in the plane that are not 4-colourable, thereby improving the lower bound of the Hadwiger-Nelson problem. The smallest such graph that we have so far discovered has 1581 vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-04-08T00:33:50Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Aubrey D. N. J. de Grey</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1509.01595v2</id>
+    <title>The vector graph and the chromatic number of the plane, or how NOT to prove that $χ(\mathbb{E}^2)&gt;4$</title>
+    <updated>2016-08-04T22:00:15Z</updated>
+    <link href="https://arxiv.org/abs/1509.01595v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1509.01595v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The chromatic number $χ\left(\mathcal{E^2}\right)$ of the plane is known to be some integer between 4 and 7, inclusive. We prove a limiting result that says, roughly, that one cannot increase the lower bound on $χ\left(\mathcal{E^2}\right)$ by pasting Moser Spindles together, even countably many.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-09-04T20:15:25Z</published>
+    <arxiv:comment>To appear in Australasian Journal of Combinatorics</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jeremy F. Alm</name>
+    </author>
+    <author>
+      <name>Jacob Manske</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1507.00025v2</id>
+    <title>Chromatic number of Euclidean plane</title>
+    <updated>2023-01-05T13:26:06Z</updated>
+    <link href="https://arxiv.org/abs/1507.00025v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1507.00025v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>If the chromatic number of Euclidean plane is larger than four, but it is known that the chromatic number of planar graphs is equal to four, then how does one explain it? In my opinion, they are contradictory to each other. This idea leads to confirm the chromatic number of the plane about its exact value.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-07-01T04:07:40Z</published>
+    <arxiv:comment>there was an error that appears in proof of the theorem</arxiv:comment>
+    <arxiv:primary_category term="math.GM"/>
+    <author>
+      <name>Kai-Rui Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1506.01886v1</id>
+    <title>First non-trivial upper bound on the circular chromatic number of the plane</title>
+    <updated>2015-06-05T12:29:58Z</updated>
+    <link href="https://arxiv.org/abs/1506.01886v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1506.01886v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider circular version of the famous Nelson-Hadwiger problem. It is know that 4 colors are necessary and 7 colors suffice to color the euclidean plane in such a way that points at distance one get different colors. In $r$-circular coloring we assign arcs of length one of a circle with a perimeter $r$ in such a way that points at distance one get disjoint arcs. In this paper we show the existence of $r$-circular coloring for $r=4+\frac{4\sqrt{3}}{3}\approx 6.30$. It is the first result with $r$-circular coloring of the plane with $r$ smaller than 7. We also show $r$-circular coloring of the plane with $r&lt;7$ in the case when we require disjoint arcs for points at distance belonging to the internal $[\frac{10}{11}, \frac{12}{11}]$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-06-05T12:29:58Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Konstanty Junosza-Szaniawski</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1501.01647v1</id>
+    <title>The Fractional Chromatic Number of the Plane</title>
+    <updated>2015-01-07T21:17:13Z</updated>
+    <link href="https://arxiv.org/abs/1501.01647v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1501.01647v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The chromatic number of the plane is the chromatic number of the uncountably infinite graph that has as its vertices the points of the plane and has an edge between two points if their distance is 1. This chromatic number is denoted $χ(\mathcal{R}^2)$. The problem was introduced in 1950, and shortly thereafter it was proved that $4\le χ(\mathcal{R}^2)\le 7$. These bounds are both easy to prove, but after more than 60 years they are still the best known. In this paper, we investigate $χ_f(\mathcal{R}^2)$, the fractional chromatic number of the plane. The previous best bounds (rounded to five decimal places) were $3.5556 \le χ_f(\mathcal{R}^2)\le 4.3599$. Here we improve the lower bound to $76/21\approx3.6190$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-01-07T21:17:13Z</published>
+    <arxiv:comment>20 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Combinatorica. Vol. 37(5), October 2017, pp. 837-861</arxiv:journal_ref>
+    <author>
+      <name>Daniel W. Cranston</name>
+    </author>
+    <author>
+      <name>Landon Rabern</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0707.1177v3</id>
+    <title>Unit distance graphs with ambiguous chromatic number</title>
+    <updated>2009-12-16T08:16:08Z</updated>
+    <link href="https://arxiv.org/abs/0707.1177v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0707.1177v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  First Laszlo Szekely and more recently Saharon Shelah and Alexander Soifer have presented examples of infinite graphs whose chromatic numbers depend on the axioms chosen for set theory. The existence of such graphs may be relevant to the Chromatic Number of the Plane problem. In this paper we construct a new class of graphs with ambiguous chromatic number. They are unit distance graphs with vertex set R^n, and hence may be seen as further evidence that the chromatic number of the plane might depend on set theory.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-07-09T03:52:53Z</published>
+    <arxiv:comment>7 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Electron. J. Combin. 16 (2009), no. 1, Note 31</arxiv:journal_ref>
+    <author>
+      <name>Michael S. Payne</name>
+    </author>
+  </entry>
+</feed>

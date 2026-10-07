@@ -1,0 +1,567 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/QzC3FBPy6K1wvVNqVEWQxqJSzjo</id>
+  <title>arXiv Query: search_query=ti:plane AND ti:colorable&amp;id_list=&amp;start=0&amp;max_results=25</title>
+  <updated>2026-10-07T03:05:57Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:plane+AND+ti:colorable&amp;start=0&amp;max_results=25&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+  <opensearch:totalResults>67</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2609.00583v1</id>
+    <title>A 21-Coloring of the Plane Without Monochromatic Unit-Area Rectangles</title>
+    <updated>2026-09-01T02:23:00Z</updated>
+    <link href="https://arxiv.org/abs/2609.00583v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.00583v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Erdős and Graham asked whether every finite coloring of the plane must contain a monochromatic rectangle of any prescribed area. Kovač gave a negative answer by constructing a $25$-coloring with no monochromatic rectangle of area $1$. We reduce the number of colors to $21$ by replacing the square cells in his construction with regular hexagons.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-01T02:23:00Z</published>
+    <arxiv:comment>4 pages, comments welcome!</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Gary Hu</name>
+    </author>
+    <author>
+      <name>Yumo Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.08367v1</id>
+    <title>The Volume Helly Theorem in the plane, colorful version</title>
+    <updated>2026-08-08T23:39:00Z</updated>
+    <link href="https://arxiv.org/abs/2608.08367v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.08367v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove a colorful volume Helly theorem for convex sets in $\mathbb R^2$: There is a constant $V&gt;0$ such that if $\mathfrak F_1,\mathfrak F_2,\mathfrak F_3,\mathfrak F_4$ are finite families of convex sets in $\mathbb R^2$ and if $|\bigcap_1^4F_i|\ge V$ for every transversal $F_i\in \mathfrak F_i,\; (i=1,\ldots,4)$, then $|\bigcap \mathfrak{F}_i|\ge 1$ for some $i$. Here $|A|$ is the Lebesgue measure of $A\subset \mathbb R^d$. The main ingredient is the following theorem. Let $Q_1,\ldots,Q_4\subset\mathbb R^2$ be convex quadrilaterals of area at most $1$, where of course each $Q_i$ is the intersection of 4 halfplanes. Then for every $Q_i$ there is one of these halfplanes $H_i$, say, such that $|\bigcap_1^4 H_i| \le 4096$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-08T23:39:00Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Imre Bárány</name>
+    </author>
+    <author>
+      <name>Bobby Miraftab</name>
+    </author>
+    <author>
+      <name>Leonidas Theocharous</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.25682v1</id>
+    <title>On t-colorable k-plane drawings</title>
+    <updated>2026-07-28T12:56:46Z</updated>
+    <link href="https://arxiv.org/abs/2607.25682v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.25682v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work, we introduce $t$-colorable $k$-plane drawings, that is, drawings of graphs with a $t$-edge-coloring where every edge is crossed by at most $k$ edges of each color. We give tight upper bounds on the edge- and crossing density for small values of $t$ and $k$ and show that the recognition of such drawings is NP-complete if $t\geq 2$ and $k\geq1$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-28T12:56:46Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Miriam Goetze</name>
+    </author>
+    <author>
+      <name>Michael Kaufmann</name>
+    </author>
+    <author>
+      <name>Soeren Terziadis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.21074v2</id>
+    <title>Counting Weighted Bi-Colored Plane Trees and Their Geometric Applications</title>
+    <updated>2026-07-21T17:50:08Z</updated>
+    <link href="https://arxiv.org/abs/2606.21074v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.21074v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work solves the enumeration problem for weighted bi-colored plane trees with prescribed numbers of black and white vertices, together with prescribed total edge weights at each vertex. An exact closed formula for a particular case is obtained, and a unified algorithmic method for the general case is provided. We then apply this result to two geometric problems. Firstly, we compute the strong Hurwitz number for a special class of branch datum between Riemann spheres with three branched points. This is done by counting the dessins d'enfants that faithfully record such branched covers, and a clear correspondence between dessins and weighted trees in such case. Secondly, we study the geometric moduli space for a special class of extremal Kähler metrics on Riemann sphere (HCMU spheres), with a single conical singularity. We classify and enumerate the connected components of the moduli space with respect to the Gromov-Hausdorff topology. This is based on an efficient representation of these metric surfaces, and a study of Gromov-Hausdorff limits of such surfaces.</summary>
+    <category term="math.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-19T03:46:15Z</published>
+    <arxiv:comment>48 pages, including 3 pages of appendix and 1 page of notation table; 11 figures. This is an update and extension of arXiv:2503.20661</arxiv:comment>
+    <arxiv:primary_category term="math.GT"/>
+    <author>
+      <name>Sicheng Lu</name>
+    </author>
+    <author>
+      <name>Yi Song</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.15466v1</id>
+    <title>Any 2-coloring of the plane contains monochromatic unit rhombuses</title>
+    <updated>2026-04-16T18:31:44Z</updated>
+    <link href="https://arxiv.org/abs/2604.15466v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.15466v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this note, we prove that any 2-coloring of the plane contains 4 points of the same color forming a rhombus with unit sides and non-unit diagonals, answering a question of Axenovich, Liu, and the second author.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-16T18:31:44Z</published>
+    <arxiv:comment>7 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Kenneth Moore</name>
+    </author>
+    <author>
+      <name>Arsenii Sagdeev</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.05339v1</id>
+    <title>Garment numbers of bi-colored point sets in the plane</title>
+    <updated>2026-03-05T16:16:13Z</updated>
+    <link href="https://arxiv.org/abs/2603.05339v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.05339v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider colored variants of a class of geometric-combinatorial questions on $k$-gons and empty $k$-gons that have been started around 1935 by Erdős and Szekeres. In our setting we have $n$ points in general position in the plane, each one colored either red or blue. A structure on $k$ points is a geometric graph where the edges are spanned by (some of) these points and is called monochromatic if all $k$ points have the same color. Already for $k=4$ there exist interesting open problems. Most prominently, it is still open whether for any sufficiently large bichromatic set there always exists a convex empty, monochromatic quadrilateral. In order to shed more light on the underlying geometry we study the existence of five different monochromatic structures that all use exactly 4 points of a bichromatic point set. We provide several improved lower and upper bounds on the smallest $n$ such that every bichromatic set of at least $n$ points contains (some of) those monochromatic structures.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-05T16:16:13Z</published>
+    <arxiv:comment>Presented at EuroCG26</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Oswin Aichholzer</name>
+    </author>
+    <author>
+      <name>Helena Bergold</name>
+    </author>
+    <author>
+      <name>Simon D. Fink</name>
+    </author>
+    <author>
+      <name>Maarten Löffler</name>
+    </author>
+    <author>
+      <name>Patrick Schnider</name>
+    </author>
+    <author>
+      <name>Josef Tkadlec</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.19426v1</id>
+    <title>The half-monochromatic colorings of plane graphs with even polygonal faces</title>
+    <updated>2026-02-23T01:45:24Z</updated>
+    <link href="https://arxiv.org/abs/2602.19426v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.19426v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>On the maximum number of colors for proper anti-rainbow colorings on a planar quadrangulation, an upper bound was given by Enami-Ozeki-Yamaguchi in terms of the independence number. In this paper, as an extension, we introduce the half-monochromatic coloring on a plane graph with even polygonal faces, and give an upper bound on the maximum number of colors for such colorings in terms of the independence number.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-23T01:45:24Z</published>
+    <arxiv:comment>7 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Kazuhiro Ichihara</name>
+    </author>
+    <author>
+      <name>Yuha Tamura</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.10813v1</id>
+    <title>Four plane unit vectors generate a $3$-colorable graph</title>
+    <updated>2025-11-13T21:24:47Z</updated>
+    <link href="https://arxiv.org/abs/2511.10813v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.10813v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that given an arbitrary set of four plane unit vectors $v_1, v_2, v_3, v_4$, the Cayley graph generated by $\{\pm v_1, \pm v_2, \pm v_3, \pm v_4\}$ is always $3$-colorable. Indeed, we show that this is a specific case of a much more general result wherein we determine the chromatic number of an arbitrary abelian Cayley graph generated by a set of four elements and their negatives, subject to the constraint that the group of relations between those elements has rank no more than $2$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-13T21:24:47Z</published>
+    <arxiv:comment>20 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Katherine Eng</name>
+    </author>
+    <author>
+      <name>Timothy Harris</name>
+    </author>
+    <author>
+      <name>Mike Krebs</name>
+    </author>
+    <author>
+      <name>Mason Meeks</name>
+    </author>
+    <author>
+      <name>Claudia Maria Schmidt</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.13806v1</id>
+    <title>Colored Vertex Models and Interacting Reverse Plane Partitions</title>
+    <updated>2025-05-20T01:35:34Z</updated>
+    <link href="https://arxiv.org/abs/2505.13806v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.13806v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the coupling of pairs of reverse plane partitions of the same shape by assigning a certain local interaction between the reverse plane partitions. We show that they are in bijection with a certain Yang-Baxter integrable colored vertex model. By utilizing the Yang-Baxter equation for this colored vertex model, we are able to compute the generating function for the interacting pairs of reverse plane partitions. We also give a bijection between the coupled pairs of reverse plane partitions with the interaction strength set to zero and a single reverse plane partition of the same shape.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-20T01:35:34Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jonah Guse</name>
+    </author>
+    <author>
+      <name>David Jiang</name>
+    </author>
+    <author>
+      <name>David Keating</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.06931v1</id>
+    <title>Out-of-plane displacement of quantum color centers in monolayer h-BN</title>
+    <updated>2025-03-10T05:21:13Z</updated>
+    <link href="https://arxiv.org/abs/2503.06931v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.06931v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Color centers exhibiting deep-level states within the wide bandgap h-BN monolayer possess substantial potential for quantum applications. Uncovering precise geometric characteristics at the atomic scale is crucial for understanding defect performance. In this study, first-principles calculations were performed on the most extensively investigated CBVN and NBVN color centers in h-BN, focusing on the out-of-plane displacement and their specific impacts on electronic, vibrational, and emission properties. We demonstrate the competition between the σ*-like antibonding state and the π-like bonding state, which determines the out-of-plane displacement. The overall effect of vibronic coupling on geometry is elucidated using a pseudo Jahn-Teller model. Local vibrational analysis reveals a series of distinct quasi-local phonon modes that could serve as fingerprints for experimental identification of specific point defects. The critical effects of out-of-plane displacement during the quantum emission process are carefully elucidated to answer the distinct observations in experiments, and these revelations are universal in quantum point defects in other layered materials.</summary>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-10T05:21:13Z</published>
+    <arxiv:comment>14 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mes-hall"/>
+    <author>
+      <name>Zhao Tang</name>
+    </author>
+    <author>
+      <name>Fanhao Jia</name>
+    </author>
+    <author>
+      <name>Greis J. Kim-Reyes</name>
+    </author>
+    <author>
+      <name>Yabei Wu</name>
+    </author>
+    <author>
+      <name>James R. Chelikowsky</name>
+    </author>
+    <author>
+      <name>Peihong Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.01958v1</id>
+    <title>On the chromatic number of the plane for map-type colorings</title>
+    <updated>2025-02-04T03:08:07Z</updated>
+    <link href="https://arxiv.org/abs/2502.01958v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.01958v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the Hadwiger-Nelson problem on the chromatic number of the plane under conditions of coloring a map containing a finite number of vertices in any bounded region. Woodall (1973) and Townsend (1981) showed that at least 6 colors would be required. In the present paper, it is shown that at least 7 colors are required to color a map in which the boundaries are not arcs of a unit circle and three boundaries connect at each vertex. As a corollary, we obtain that at least 7 colors are required for a proper coloring in which the regions are arbitrary polygons. The proof relies on techniques developed for a similar result concerning the chromatic number of the plane with a forbidden interval of distances.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-04T03:08:07Z</published>
+    <arxiv:comment>29 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Georgy Sokolov</name>
+    </author>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.18527v3</id>
+    <title>Neural Discovery in Mathematics: Do Machines Dream of Colored Planes?</title>
+    <updated>2025-06-05T07:01:14Z</updated>
+    <link href="https://arxiv.org/abs/2501.18527v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.18527v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We demonstrate how neural networks can drive mathematical discovery through a case study of the Hadwiger-Nelson problem, a long-standing open problem at the intersection of discrete geometry and extremal combinatorics that is concerned with coloring the plane while avoiding monochromatic unit-distance pairs. Using neural networks as approximators, we reformulate this mixed discrete-continuous geometric coloring problem with hard constraints as an optimization task with a probabilistic, differentiable loss function. This enables gradient-based exploration of admissible configurations that most significantly led to the discovery of two novel six-colorings, providing the first improvement in thirty years to the off-diagonal variant of the original problem. Here, we establish the underlying machine learning approach used to obtain these results and demonstrate its broader applicability through additional numerical insights.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-30T17:44:34Z</published>
+    <arxiv:comment>9 pages main paper, 11 pages references and appendix, 17 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Proc. 42nd ICML, PMLR 267, 2025</arxiv:journal_ref>
+    <author>
+      <name>Konrad Mundinger</name>
+    </author>
+    <author>
+      <name>Max Zimmer</name>
+    </author>
+    <author>
+      <name>Aldo Kiem</name>
+    </author>
+    <author>
+      <name>Christoph Spiegel</name>
+    </author>
+    <author>
+      <name>Sebastian Pokutta</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.08229v5</id>
+    <title>Improvement of Spiking Neural Network with Bit Planes and Color Models</title>
+    <updated>2025-11-22T10:41:00Z</updated>
+    <link href="https://arxiv.org/abs/2410.08229v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.08229v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Spiking neural network (SNN) has emerged as a promising paradigm in computational neuroscience and artificial intelligence, offering advantages such as low energy consumption and small memory footprint. However, their practical adoption is constrained by several challenges, prominently among them being performance optimization. In this study, we present a novel approach to enhance the performance of SNN for images through a new coding method that exploits bit plane representation. Our proposed technique is designed to improve the accuracy of SNN without increasing model size. Also, we investigate the impacts of color models of the proposed coding process. Through extensive experimental validation, we demonstrate the effectiveness of our coding strategy in achieving performance gain across multiple datasets. To the best of our knowledge, this is the first research that considers bit planes and color models in the context of SNN. By leveraging the unique characteristics of bit planes, we hope to unlock new potentials in SNNs performance, potentially paving the way for more efficient and effective SNNs models in future researches and applications.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-28T15:52:49Z</published>
+    <arxiv:comment>Accepted for publication at IEEE Access</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>IEEE Access, vol. 13, pp. 198607-198622, 2025</arxiv:journal_ref>
+    <author>
+      <name>Nhan T. Luu</name>
+    </author>
+    <author>
+      <name>Duong T. Luu</name>
+    </author>
+    <author>
+      <name>Nam N. Pham</name>
+    </author>
+    <author>
+      <name>Thang C. Truong</name>
+    </author>
+    <arxiv:doi>10.1109/ACCESS.2025.3635297</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/ACCESS.2025.3635297" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.14197v2</id>
+    <title>Any two-coloring of the plane contains monochromatic 3-term arithmetic progressions</title>
+    <updated>2024-07-22T05:44:42Z</updated>
+    <link href="https://arxiv.org/abs/2402.14197v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.14197v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A conjecture of Erdős, Graham, Montgomery, Rothschild, Spencer and Straus states that, with the exception of equilateral triangles, any two-coloring of the plane will have a monochromatic congruent copy of every three-point configuration. This conjecture is known only for special classes of configurations. In this manuscript, we confirm one of the most natural open cases; that is, every two-coloring of the plane admits a monochromatic congruent copy of any $3$-term arithmetic progression.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-22T00:55:23Z</published>
+    <arxiv:comment>13 pages, revised based on referee comments</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Combinatorica 44 (2024), no. 6, 1367-1380</arxiv:journal_ref>
+    <author>
+      <name>Gabriel Currier</name>
+    </author>
+    <author>
+      <name>Kenneth Moore</name>
+    </author>
+    <author>
+      <name>Chi Hoi Yip</name>
+    </author>
+    <arxiv:doi>10.1007/s00493-024-00122-2</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00493-024-00122-2" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.00654v1</id>
+    <title>Edge-covering plane-filling curves on grid colorings: a pedestrian approach</title>
+    <updated>2023-12-01T15:28:02Z</updated>
+    <link href="https://arxiv.org/abs/2312.00654v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.00654v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We describe families of plane-filling curves on any edge-to-edge tiling of the plane with regular polygons and finitely many classes of edges. It is shown how to partition the minimal number of edge classes from the group G of symmetries of the tiling into refined colorings of the tiling, corresponding to finite subgroups of G. All of these colorings correspond to families of plane-filling curves which we call curve-sets. Our exposition is driven by illustrated examples.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-01T15:28:02Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jörg Arndt</name>
+    </author>
+    <author>
+      <name>Julia Handl</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.08784v1</id>
+    <title>Plane vortex pairs, colorful structures and low-lying Dirac modes</title>
+    <updated>2023-11-15T08:56:35Z</updated>
+    <link href="https://arxiv.org/abs/2311.08784v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.08784v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the influence of topological charges on non-stable zero and near-zero modes of the single uni-color plane vortex pairs. We combine the uni-color plane vortices with the spherical vortex and also construct the plane vortex pairs with two colorful vortices. The stability of zero and near-zero modes is analyzed where various boundary conditions for the fermions are checked. In addition, plane vortex pairs may show the role of the topological charges for changing the chirality of fermions. The results clearly indicate characteristic properties for spontaneous chiral symmetry breaking.</summary>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-15T08:56:35Z</published>
+    <arxiv:comment>9 pages, 7 figures, accepted for publication in International Journal of Modern Physics A</arxiv:comment>
+    <arxiv:primary_category term="hep-lat"/>
+    <author>
+      <name>Seyed Mohsen Hosseini Nejad</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.14722v1</id>
+    <title>More certainty in coloring the plane with a forbidden distance interval</title>
+    <updated>2023-03-26T13:19:50Z</updated>
+    <link href="https://arxiv.org/abs/2303.14722v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.14722v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the mysterious and colorful world of chromatic numbers, where there are a lot of unknown, there is an amazing thing. It turns out that for some intervals of forbidden distances on the plane, one can specify the exact value of the chromatic number $χ$. Two sets of such intervals have been found, for $χ=7$ and 9. We call them islands of certainty. Here we increase the size of these islands, and add three new ones with $χ=8$, 12, 13. We also %formulate conjectures which predict conjecture islands for $χ=14$, 15, 16. Are there islands of certainty for $χ$=10 or 11? This is still a mystery. Roll up for the Mystery Tour.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-26T13:19:50Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 32/4 (2023) 159-185</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.09632v2</id>
+    <title>Conflict Optimization for Binary CSP Applied to Minimum Partition into Plane Subgraphs and Graph Coloring</title>
+    <updated>2023-03-25T00:59:07Z</updated>
+    <link href="https://arxiv.org/abs/2303.09632v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.09632v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>CG:SHOP is an annual geometric optimization challenge and the 2022 edition proposed the problem of coloring a certain geometric graph defined by line segments. Surprisingly, the top three teams used the same technique, called conflict optimization. This technique has been introduced in the 2021 edition of the challenge, to solve a coordinated motion planning problem. In this paper, we present the technique in the more general framework of binary constraint satisfaction problems (binary CSP). Then, the top three teams describe their different implementations of the same underlying strategy. We evaluate the performance of those implementations to vertex color not only geometric graphs, but also other types of graphs.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-16T20:21:48Z</published>
+    <arxiv:comment>To appear at ACM Journal of Experimental Algorithmics</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Loïc Crombez</name>
+    </author>
+    <author>
+      <name>Guilherme D. da Fonseca</name>
+    </author>
+    <author>
+      <name>Florian Fontan</name>
+    </author>
+    <author>
+      <name>Yan Gerard</name>
+    </author>
+    <author>
+      <name>Aldo Gonzalez-Lorenzo</name>
+    </author>
+    <author>
+      <name>Pascal Lafourcade</name>
+    </author>
+    <author>
+      <name>Luc Libralesso</name>
+    </author>
+    <author>
+      <name>Benjamin Momège</name>
+    </author>
+    <author>
+      <name>Jack Spalding-Jamieson</name>
+    </author>
+    <author>
+      <name>Brandon Zhang</name>
+    </author>
+    <author>
+      <name>Da Wei Zheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.12215v1</id>
+    <title>A coloring of the plane without monochromatic right triangles</title>
+    <updated>2023-02-23T18:24:16Z</updated>
+    <link href="https://arxiv.org/abs/2302.12215v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.12215v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We give a full, correct proof of the following result, earlier claimed by Erdős and Komjáth. If the Continuum Hypothesis holds then there is a coloring of the plane with countably many colors, with no monocolored right triangle.</summary>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-23T18:24:16Z</published>
+    <arxiv:primary_category term="math.LO"/>
+    <author>
+      <name>Balázs Bursics</name>
+    </author>
+    <author>
+      <name>Péter Komjáth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.09607v2</id>
+    <title>Perfect precise colorings of plane semiregular tilings</title>
+    <updated>2023-12-31T11:04:58Z</updated>
+    <link href="https://arxiv.org/abs/2302.09607v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.09607v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A coloring of a planar semiregular tiling $\mathcal{T}$ is an assignment of a unique color to each tile of $\mathcal{T}$. If $G$ is the symmetry group of $\mathcal{T}$, we say that the coloring is perfect if every element of $G$ induces a permutation on the finite set of colors. If $\mathcal{T}$ is $k$-valent, then a coloring of $\mathcal{T}$ with $k$ colors is said to be precise if no two tiles of $\mathcal{T}$ sharing the same vertex have the same color. In this work, we obtain perfect precise colorings of some families of $k$-valent semiregular tilings in the plane, where $k\leq 6$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-19T16:08:51Z</published>
+    <arxiv:comment>19 pages, 65 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Manuel Joseph C. Loquias</name>
+    </author>
+    <author>
+      <name>Rovin B. Santos</name>
+    </author>
+    <arxiv:doi>10.1107/S2053273323006630</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1107/S2053273323006630" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.16212v1</id>
+    <title>A conditional approach for monochromatic unit distance in a plane for four and five coloring</title>
+    <updated>2022-10-27T10:53:58Z</updated>
+    <link href="https://arxiv.org/abs/2210.16212v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.16212v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A measure theoretic approach of the problem that there exits a finite unit-distance graphs in the plane that are not five (or four) colorable.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-27T10:53:58Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Saayan Mukherjee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.12633v1</id>
+    <title>On the plane and its coloring</title>
+    <updated>2022-06-25T12:18:52Z</updated>
+    <link href="https://arxiv.org/abs/2206.12633v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.12633v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We provide a human-verifiable proof that, in a certain sense, the chromatic number of the plane is exactly 7.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-25T12:18:52Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 31/4 (2022) 189-195</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.05636v1</id>
+    <title>Convex geometries representable with colors, by ellipses on the plane, and impossible by circles</title>
+    <updated>2022-06-12T00:55:54Z</updated>
+    <link href="https://arxiv.org/abs/2206.05636v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.05636v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A convex geometry is a closure system satisfying the anti-exchange property. This paper, following the work of K. Adaricheva and M. Bolat (2016) and the Polymath REU 2020 team, continues to investigate representations of convex geometries on a 5-element base set. It introduces several properties: the opposite property, nested triangle property, area Q property, and separation property, of convex geometries of circles on a plane, preventing this representation for numerous convex geometries on a 5-element base set. It also demonstrates that all 672 convex geometries on a 5-element base set have a representation by ellipses, as given in the appendix for those without a known representation by circles, and introduces a method of expanding representation with circles by defining unary predicates, shown as colors.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.RA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-12T00:55:54Z</published>
+    <arxiv:comment>40 pages, 22 figures, 2 appendices</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Kira Adaricheva</name>
+    </author>
+    <author>
+      <name>Evan Daisy</name>
+    </author>
+    <author>
+      <name>Ayush Garg</name>
+    </author>
+    <author>
+      <name>Zachary King</name>
+    </author>
+    <author>
+      <name>Grace Ma</name>
+    </author>
+    <author>
+      <name>Michelle Olson</name>
+    </author>
+    <author>
+      <name>Cat Raanes</name>
+    </author>
+    <author>
+      <name>James Thompson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.04499v1</id>
+    <title>Coloring distance graphs on the plane</title>
+    <updated>2022-01-12T15:00:35Z</updated>
+    <link href="https://arxiv.org/abs/2201.04499v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.04499v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the coloring of certain distance graphs on the Euclidean plane. Namely, we ask for the minimal number of colors needed to color all points of the plane in such a way that pairs of points at distance in the interval $[1,b]$ get different colors. The classic Hadwiger-Nelson problem is a special case of this question -- obtained by taking $b=1$. The main results of the paper are improved lower and upper bounds on the number of colors for some values of $b$. In particular, we determine the minimal number of colors for two ranges of values of $b$ - one of which is enlarging an interval presented by Exoo and the second is completely new. Up to our knowledge, these are the only known families of distance graphs on the plane with a determined nontrivial chromatic number. Moreover, we present the first $8$-coloring for $b$ larger than values of $b$ for the known $7$-colorings. As a byproduct, we give some bounds and exact values for bounded parts of the plane, specifically by coloring certain annuli.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-12T15:00:35Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Joanna Chybowska-Sokół</name>
+    </author>
+    <author>
+      <name>Konstanty Junosza-Szaniawski</name>
+    </author>
+    <author>
+      <name>Krzysztof Węsek</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2110.12314v4</id>
+    <title>Simplicial complexes from finite projective planes and colored configurations</title>
+    <updated>2023-01-27T21:28:27Z</updated>
+    <link href="https://arxiv.org/abs/2110.12314v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2110.12314v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the 7-vertex triangulation of the torus, the 14 triangles can be partitioned as $T_{1} \sqcup T_{2}$, such that each $T_{i}$ represents the lines of a copy of the Fano plane $PG(2, \mathbb{F}_{2})$. We generalize this observation by constructing, for each prime power $q$, a simplicial complex $X_{q}$ with $q^{2} + q + 1$ vertices and $2(q^{2} + q + 1)$ facets consisting of two copies of $PG(2, \mathbb{F}_{q})$.
+  Our construction works for any colored $k$-configuration, defined as a $k$-configuration whose associated bipartite graph $G$ is connected and has a $k$-edge coloring $χ\colon E(G) \to [k]$, such that for all $v \in V(G)$, $a, b, c \in [k]$, following edges of colors $a, b, c, a, b, c$ from $v$ brings us back to $v$. We give one-to-one correspondences between (1) Sidon sets of order 2 and size $k + 1$ in groups with order $n$, (2) linear codes with radius 1 and index $n$ in the lattice $A_{k}$, and (3) colored $(k + 1)$-configurations with $n$ points and $n$ lines. (The correspondence between (1) and (2) is known.) As a result, we suggest possible topological obstructions to the existence of Sidon sets, and in particular, planar difference sets.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-10-23T22:59:48Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Matt Superdock</name>
+    </author>
+  </entry>
+</feed>

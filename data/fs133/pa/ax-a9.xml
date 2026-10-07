@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Axy/I6ClhD0s2V/9Xm+EyXA/4j0</id>
+  <title>arXiv Query: search_query=all:"Borel fractional"&amp;id_list=&amp;start=0&amp;max_results=25</title>
+  <updated>2026-10-07T03:04:27Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22Borel+fractional%22&amp;start=0&amp;max_results=25&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2501.07352v2</id>
+    <title>Borel fractional perfect matchings in quasi-transitive amenable graphs</title>
+    <updated>2025-01-14T23:29:04Z</updated>
+    <link href="https://arxiv.org/abs/2501.07352v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.07352v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that if a locally finite Borel graph with quasitransitive amenable components admits a fractional perfect matching, it will admit a Borel fractional perfect matching. In particular, if a countable amenable quasitransitive graph admits a fractional perfect matching then its Bernoulli graph admits a Borel fractional perfect matching.</summary>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-13T14:17:04Z</published>
+    <arxiv:comment>18 pages, 5 figures; corrected reference</arxiv:comment>
+    <arxiv:primary_category term="math.LO"/>
+    <author>
+      <name>Sam Murray</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.13913v1</id>
+    <title>Optimized Self-Similar Borel Summation</title>
+    <updated>2023-11-23T11:01:45Z</updated>
+    <link href="https://arxiv.org/abs/2311.13913v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.13913v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The method of Fractional Borel Summation is suggested in conjunction with self-similar factor approximants. The method used for extrapolating asymptotic expansions at small variables to large variables, including the variables tending to infinity, is described. The method is based on the combination of optimized perturbation theory, self-similar approximation theory, and Borel-type transformations. General Borel Fractional transformation of the original series is employed. The transformed series is resummed in order to adhere to the asymptotic power laws. The starting point is the formulation of dynamics in the approximations space by employing the notion of self-similarity. The flow in the approximation space is controlled, and ``deep'' control is incorporated into the definitions of the self-similar approximants. The class of self-similar approximations, satisfying, by design, the power law behavior, such as the use of self-similar factor approximants, is chosen for the reasons of transparency, explicitness, and convenience. A detailed comparison of different methods is performed on a rather large set of examples, employing self-similar factor approximants, self-similar iterated root approximants, as well as the approximation technique of self-similarly modified Pade - Borel approximations.</summary>
+    <category term="nlin.CD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.other" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-23T11:01:45Z</published>
+    <arxiv:comment>39 pages, 10 tables</arxiv:comment>
+    <arxiv:primary_category term="nlin.CD"/>
+    <arxiv:journal_ref>Axioms 12 (2023) 1060</arxiv:journal_ref>
+    <author>
+      <name>S. Gluzman</name>
+    </author>
+    <author>
+      <name>V. I. Yukalov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.11557v3</id>
+    <title>Borel fractional colorings of Schreier graphs</title>
+    <updated>2022-03-23T22:55:46Z</updated>
+    <link href="https://arxiv.org/abs/2105.11557v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.11557v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $Γ$ be a countable group and let $G$ be the Schreier graph of the free part of the Bernoulli shift of $Γ$ (with respect to some finite subset $F \subseteq Γ$). We show that the Borel fractional chromatic number of $G$ is equal to $1$ over the measurable independence number of $G$. As a consequence, we asymptotically determine the Borel fractional chromatic number of $G$ when $Γ$ is the free group, answering a question of Meehan.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-24T22:12:44Z</published>
+    <arxiv:comment>8 pp</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Anton Bernshteyn</name>
+    </author>
+  </entry>
+</feed>

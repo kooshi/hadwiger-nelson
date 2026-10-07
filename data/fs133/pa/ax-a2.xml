@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/mhd91VxeUdt+kdUH2N3oJ5vYT2E</id>
+  <title>arXiv Query: search_query=all:avoiding AND all:"unit distance" AND all:density&amp;id_list=&amp;start=0&amp;max_results=25</title>
+  <updated>2026-10-07T03:03:24Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:avoiding+AND+(all:%22unit+distance%22+AND+all:density)&amp;start=0&amp;max_results=25&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+  <opensearch:totalResults>8</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2408.10076v4</id>
+    <title>No new lower bound for the density of planar Sets avoiding Unit Distances</title>
+    <updated>2025-06-18T13:21:01Z</updated>
+    <link href="https://arxiv.org/abs/2408.10076v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.10076v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In a recently published article by G. Ambrus et al. a new \emph{upper bound} for the density of an unit avoiding, periodic set is given as $0.2470$, the first upper bound $&lt; 1/4$. A construction of Croft 1967 gave a \emph{lower bound} $δ_C = 0.22936$ for the density. To this date, no better construction with a higher bound has been given. In the \emph{first versions} of this article I gave a construction of planar sets with a "higher" density than Croft's tortoises. No explicit value for this density was given, it was just shown that Croft's density is a local minima in the density of the constructed 1-parameter family of planar sets. But now I found a servere error. After the correction in this article none of the investigated sets of constant diameter resulted in a new lower bound. I did not withdraw the article, maybe something could be useful for somebody.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-19T15:20:19Z</published>
+    <arxiv:comment>15 pages</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Helmut Ruhland</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.05071v1</id>
+    <title>Clustering in typical unit-distance avoiding sets</title>
+    <updated>2024-07-06T13:26:29Z</updated>
+    <link href="https://arxiv.org/abs/2407.05071v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.05071v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the 1960s Moser asked how dense a subset of $\mathbb{R}^d$ can be if no pairs of points in the subset are exactly distance 1 apart. There has been a long line of work showing upper bounds on this density. One curious feature of dense unit distance avoiding sets is that they appear to be ``clumpy,'' i.e. forbidding unit distances comes hand in hand with having more than the expected number distance $\approx 2$ pairs.
+  In this work we rigorously establish this phenomenon in $\mathbb{R}^2$. We show that dense unit distance avoiding sets have over-represented distance $\approx 2$ pairs, and that this clustering extends to typical unit distance avoiding sets. To do so, we build off of the linear programming approach used previously to prove upper bounds on the density of unit distance avoiding sets.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-06T13:26:29Z</published>
+    <arxiv:comment>20 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Alex Cohen</name>
+    </author>
+    <author>
+      <name>Nitya Mani</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.10069v4</id>
+    <title>The fractional chromatic number of the plane is at least 4</title>
+    <updated>2025-03-27T16:48:40Z</updated>
+    <link href="https://arxiv.org/abs/2311.10069v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.10069v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that the fractional chromatic number $χ_f(\mathbb R^2)$ of the unit distance graph of the Euclidean plane is greater than or equal to $4$. Interestingly, however, we cannot present a finite subgraph $G$ of the plane such that $χ_f(G)\ge 4$. Instead, we utilize the concept of the geometric fractional chromatic number $χ_{gf}(G)$, which was introduced recently in connection with density bounds for 1-avoiding sets.
+  First, as $G$ ranges over finite subgraphs of the plane, we establish that the supremum of $χ_f(G)$ is the same as that of $χ_{gf}(G)$. The proof exploits the amenability of the group of Euclidean transformations in dimension 2 and, as such, we do not know whether the analogous statement holds in higher dimensions. We then present a specific planar unit distance graph $G$ on 27 vertices such that $χ_{gf}(G)=4$, and conclude $χ_f(\mathbb R^2)\ge 4$ as a corollary.
+  As another main result we show that the finitary fractional chromatic number and the Hall ratio of the plane are equal. As a consequence, we conclude that there exist finite unit distance graphs with independence ratio $\frac{1}{4}+\varepsilon$, while we conjecture that the value $\frac{1}{4}$ cannot be reached.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-16T18:09:12Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Máté Matolcsi</name>
+    </author>
+    <author>
+      <name>Imre Z. Ruzsa</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+    <author>
+      <name>Pál Zsámboki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.14179v3</id>
+    <title>The density of planar sets avoiding unit distances</title>
+    <updated>2023-07-28T10:24:19Z</updated>
+    <link href="https://arxiv.org/abs/2207.14179v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.14179v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>By improving upon previous estimates on a problem posed by L. Moser, we prove a conjecture of Erdős that the density of any measurable planar set avoiding unit distances cannot exceed $1/4$. Our argument implies the upper bound of $0.2470$.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-28T15:45:19Z</published>
+    <arxiv:comment>24 pages, 6 figures. Final version, to appear in Mathematical Programming</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Gergely Ambrus</name>
+    </author>
+    <author>
+      <name>Adrián Csiszárik</name>
+    </author>
+    <author>
+      <name>Máté Matolcsi</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+    <author>
+      <name>Pál Zsámboki</name>
+    </author>
+    <arxiv:doi>10.1007/s10107-023-02012-9</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10107-023-02012-9" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1809.05453v3</id>
+    <title>Density estimates of 1-avoiding sets via higher order correlations</title>
+    <updated>2020-10-20T16:05:14Z</updated>
+    <link href="https://arxiv.org/abs/1809.05453v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1809.05453v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We improve the best known upper bound on the density of a planar measurable set A containing no two points at unit distance to 0.25442. We use a combination of Fourier analytic and linear programming methods to obtain the result. The estimate is achieved by means of obtaining new linear constraints on the autocorrelation function of A utilizing triple-order correlations in A, a concept that has not been previously studied.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-09-14T15:04:05Z</published>
+    <arxiv:comment>11 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Discrete and Computational Geometry, 2020</arxiv:journal_ref>
+    <author>
+      <name>Gergely Ambrus</name>
+    </author>
+    <author>
+      <name>Máté Matolcsi</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-020-00263-3</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-020-00263-3" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1501.00168v2</id>
+    <title>Better bounds for planar sets avoiding unit distances</title>
+    <updated>2015-10-26T13:52:56Z</updated>
+    <link href="https://arxiv.org/abs/1501.00168v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1501.00168v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A $1$-avoiding set is a subset of $\mathbb{R}^n$ that does not contain pairs of points at distance $1$. Let $m_1(\mathbb{R}^n)$ denote the maximum fraction of $\mathbb{R}^n$ that can be covered by a measurable $1$-avoiding set. We prove two results. First, we show that any $1$-avoiding set in $\mathbb{R}^n$ ($n\ge 2$) that displays block structure (i.e., is made up of blocks such that the distance between any two points from the same block is less than $1$ and points from distinct blocks lie farther than $1$ unit of distance apart from each other) has density strictly less than $1/2^n$. For the special case of sets with block structure this proves a conjecture of Erdős asserting that $m_1(\mathbb{R}^2) &lt; 1/4$. Second, we use linear programming and harmonic analysis to show that $m_1(\mathbb{R}^2) \leq 0.258795$.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-12-31T16:34:34Z</published>
+    <arxiv:comment>16 pages, 1 figure. Contains a Sage script called dstverify.sage, to verify the application of Theorem 3.3. Download the article source to get the script</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Discrete Comput Geom 55 (2016) 642-661</arxiv:journal_ref>
+    <author>
+      <name>Tamás Keleti</name>
+    </author>
+    <author>
+      <name>Máté Matolcsi</name>
+    </author>
+    <author>
+      <name>Fernando Mário de Oliveira Filho</name>
+    </author>
+    <author>
+      <name>Imre Z. Ruzsa</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-015-9751-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-015-9751-5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1401.6140v2</id>
+    <title>The density of sets avoiding distance 1 in Euclidean space</title>
+    <updated>2015-01-29T19:33:29Z</updated>
+    <link href="https://arxiv.org/abs/1401.6140v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1401.6140v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We improve by an exponential factor the best known asymptotic upper bound for the density of sets avoiding 1 in Euclidean space. This result is obtained by a combination of an analytic bound that is an analogue of Lovasz theta number and of a combinatorial argument involving finite subgraphs of the unit distance graph. In turn, we straightforwardly obtain an asymptotic improvement for the measurable chromatic number of Euclidean space. We also tighten previous results for the dimensions between 4 and 24.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-01-23T19:50:09Z</published>
+    <arxiv:comment>Revised version, to appear in Discrete and Computational Geometry</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Christine Bachoc</name>
+      <arxiv:affiliation>IMB</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alberto Passuello</name>
+    </author>
+    <author>
+      <name>Alain Thiery</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0808.1822v2</id>
+    <title>Fourier analysis, linear programming, and densities of distance avoiding sets in R^n</title>
+    <updated>2008-12-02T06:21:19Z</updated>
+    <link href="https://arxiv.org/abs/0808.1822v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0808.1822v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this paper we derive new upper bounds for the densities of measurable sets in R^n which avoid a finite set of prescribed distances. The new bounds come from the solution of a linear programming problem. We apply this method to obtain new upper bounds for measurable sets which avoid the unit distance in dimensions 2,..., 24. This gives new lower bounds for the measurable chromatic number in dimensions 3,..., 24. We apply it to get a new, short proof of a variant of a recent result of Bukh which in turn generalizes theorems of Furstenberg, Katznelson, Weiss and Bourgain and Falconer about sets avoiding many distances.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-08-13T12:51:06Z</published>
+    <arxiv:comment>11 pages, 1 figure (v2) some modifications and corrections, accepted in Journal of the European Mathematical Society</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>J. Eur. Math. Soc. 12 (2010), 1417-1428</arxiv:journal_ref>
+    <author>
+      <name>Fernando Mario de Oliveira Filho</name>
+    </author>
+    <author>
+      <name>Frank Vallentin</name>
+    </author>
+    <arxiv:doi>10.4171/JEMS/236</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.4171/JEMS/236" title="doi"/>
+  </entry>
+</feed>

@@ -1,0 +1,698 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/FKVLuNsmzNVA3Pg+iG63mmaRENo</id>
+  <title>arXiv Query: search_query=all:"five-colorable" OR all:"five-colourable"&amp;id_list=&amp;start=0&amp;max_results=25</title>
+  <updated>2026-10-07T03:04:58Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22five-colorable%22+OR+all:%22five-colourable%22&amp;start=0&amp;max_results=25&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+  <opensearch:totalResults>76</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2609.37973v1</id>
+    <title>On-line majority edge-colourings of graphs</title>
+    <updated>2026-09-29T16:40:08Z</updated>
+    <link href="https://arxiv.org/abs/2609.37973v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.37973v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A majority edge-colouring of a graph $G$ is a colouring of the edges of $G$ such that, for every vertex $v$ of $G$, at most half of the edges incident with $v$ receive the same colour. This notion was introduced by Bock et al. in 2023, who proved that every graph of minimum degree at least $2$ has a majority $4$-edge-colouring.
+  We investigate an on-line variant of majority edge-colouring in which the graph is revealed by the Presenter edge-by-edge and the Algorithm must colour each edge immediately and irrevocably. In particular. we prove that the greedy strategy, which uses at most five colours, is optimal among on-line algorithms if $δ= O(\frac{\log n}{\log\log n})$. We further extend our results to $1/k$-majority edge-colourings.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T16:40:08Z</published>
+    <arxiv:comment>15 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Paweł Pękała</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.23179v1</id>
+    <title>Counting edge-colorings of a complete graph avoiding a rainbow $K_4$</title>
+    <updated>2026-09-19T19:06:34Z</updated>
+    <link href="https://arxiv.org/abs/2609.23179v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.23179v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For $k, r, n$ natural numbers let $ρ_{r,k}(K_n)$ be the number of $r$-edge-colorings of $K_n$ that do not contain a rainbow copy of a $K_k$, that is, a copy of $K_k$ in which all edges receive different colors. When $k=3$, the quantity $ρ_{r,3}(K_n)$ represents the number of Gallai Colorings. It was proved by Balogh and Li and independently by Bastos, Benevides and Han, that most of the Gallai colorings are 2-colorings, for $n$ large. A natural analogue conjecture would be that when $k=4$, $r\ge 5$ and $n$ large, most rainbow-$K_4$-free $r$-edge-colorings are $5$-colorings. We show that this is not true in general and identify an exact threshold for $r$ where this ceases to be true. For the range where the conjecture is false, we determine the exponential growth of $ρ_{r,4}(K_n)$ for every fixed $r$. More precisely, for \(6\le r\le24\), we prove that \(ρ_{r,4}(K_n)=(\binom{r}{5}+o(1))5^{\binom{n}{2}}\); and for each \(r\ge25\), the proportion using at most five colors tends to zero, and \(ρ_{r,4}(K_n)=r^{(n^2/4)+o(n^2)}\). A bipartite construction, with all edges within the two parts assigned one common color, achieves the latter exponential growth rate. The lower bounds can be easily generalized for every $k$. Those results are related to other recent results about counting colorings that avoid rainbow cliques or given rainbow patterns in general. Our proof combines hypergraph containers with the graph removal lemma, structural estimates for color palettes and a refined count of colorings close to a fixed five-color palette.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-19T19:06:34Z</published>
+    <arxiv:comment>30 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Fabricio S. Benevides</name>
+    </author>
+    <author>
+      <name>Josefran de O. Bastos</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.14356v1</id>
+    <title>Color Complexity of Recolorable Graph Exploration: Upper and Lower Bounds via Block Structure</title>
+    <updated>2026-09-13T07:34:53Z</updated>
+    <link href="https://arxiv.org/abs/2609.14356v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.14356v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study exploration of anonymous, port-free graphs by a single agent with no internal memory. To compensate for the lack of memory, the agent uses writable vertex colors as external memory. From every starting vertex, the agent must visit all vertices, return to its start, and terminate there. Throughout, recoloring is unrestricted, and the color count includes the common initial color. However, to our knowledge, no nontrivial color lower bound was known for unrestricted recoloring. We determine the optimal number of colors on two classes defined by block structure and prove the first nontrivial color lower bounds for unrestricted recoloring. First, a single three-color algorithm explores every tree and every simple cycle in $O(n)$ moves, and no algorithm with at most two colors explores $P_3$, the path on three vertices. Second, we give a four-color algorithm that explores every graph whose blocks are cycles or complete bipartite graphs in $O(n)$ moves, and we prove that no algorithm with at most three colors explores all subcubic pseudotrees. Hence four colors are optimal for every class between subcubic pseudotrees and this block-defined class. On cacti, this improves the previous five-color upper bound to a tight four. The lower bound reduces the possible initial actions by hand and rules out the remaining cases by a machine-checked SAT certificate on nine graphs with at most five vertices. Finally, we extend the known five-color algorithm for triangle-free graphs to graphs whose blocks are cliques or triangle-free, using $O(nΔ)$ moves, where $Δ$ is the maximum degree.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-13T07:34:53Z</published>
+    <arxiv:comment>23 pages, 4 figures, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Shoma Hiraoka</name>
+    </author>
+    <author>
+      <name>Shunsuke Imori</name>
+    </author>
+    <author>
+      <name>Shota Takahashi</name>
+    </author>
+    <author>
+      <name>Yuichi Sudo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.22860v1</id>
+    <title>Every signed planar graph is $5$-choosable: A short proof and refinements</title>
+    <updated>2026-05-19T16:24:20Z</updated>
+    <link href="https://arxiv.org/abs/2605.22860v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.22860v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A \emph{signed graph} is a pair $\Gs$ in which $G$ is a finite simple graph and $σ:\E(G)\to\{+1,-1\}$ is a \emph{signature}. Following Máčajová--Raspaud- Škoviera and Jin--Kang--Steffen, a \emph{proper coloring} of $\Gs$ is a map $c:\V(G)\to\Z$ with $c(u)\neσ(uv)\,c(v)$ for every edge $uv$, and $\Gs$ is \emph{signed $k$-choosable} if such a coloring exists from any list assignment $L$ with $|L(v)|\ge k$. In a celebrated two-page note, Thomassen proved that every planar graph is $5$ choosable, and Jin, Kang, and Steffen subsequently extended this to signed planar graphs. Our principal contribution is a short, self-contained, and \emph{signature-blind} proof of the latter: the inductive bookkeeping inserts one factor of $σ(\cdot)$ uniformly into every constraint, so that with $σ\equiv +1$ the argument reduces verbatim to Thomassen's original. From the strengthened extension statement (\cref{thm:main}) we deduce the main result (\cref{thm:JKS}: $\chs\Gs\le 5$ for every planar signed graph), the Máčajová--Raspaud--Škoviera signed Five-Color Theorem in the symmetric palette $\Ns{2}=\{-2,-1,0,1,2\}$, the Switching Invariance Lemma, $3$-choosability of outerplanar signed graphs, $1$-defective signed $4$-choosability of planar signed graphs, a sandwich inequality relating $\chs$ to the unsigned and positive'' choice numbers, and a polynomial-time list-coloring algorithm. Voigt's planar non-$4$-choosable graph and Mirzakhani's smaller variant show the bound $5$ is best possible. We close with examples illustrating that negative edges genuinely refine unsigned phenomena, a comparison table situating our work in the literature, and several open problems.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-19T16:24:20Z</published>
+    <arxiv:comment>16 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Pie Desire Ebode Atangana</name>
+    </author>
+    <author>
+      <name>Maxwell Ndognkon Manga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.23189v1</id>
+    <title>Total coloring of (sub)cubic Halin graphs</title>
+    <updated>2026-03-24T13:35:48Z</updated>
+    <link href="https://arxiv.org/abs/2603.23189v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.23189v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Total coloring of a graph is a coloring of its vertices and edges such that adjacent or incident elements receive distinct colors. Total coloring conjecture (stipulating that the total chromatic number of a graph $G$ is at most $Δ(G)+2$) is known to be true for subcubic graphs -- five colors are always enough. However, deciding whether a total coloring with only four colors exists remains a difficult problem, even in the class of bipartite cubic graphs. We solve the problem completely for cubic and subcubic Halin graphs, proving that there are only finitely many such graphs requiring five colors.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-24T13:35:48Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>František Kardoš</name>
+    </author>
+    <author>
+      <name>Matúš Matok</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.12696v1</id>
+    <title>IdentYS: A Python-Based Tool for Identifying Young Stars in Star-Forming Regions</title>
+    <updated>2025-11-16T17:23:28Z</updated>
+    <link href="https://arxiv.org/abs/2511.12696v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.12696v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Research on young stellar populations is essential to understand the properties of embedded clusters and advance theories of their formation. This has driven advancements in methodologies for star detection, leading to the development of valuable databases and software. We present the scientific justification and operating principles of the IdentYS tool, which is designed to identify young stellar objects (YSOs) in star-forming regions. The tool facilitates the identification of young stars with infrared (IR) excess in remote and embedded star-forming regions, focusing primarily on Class I and II YSOs. For this purpose, near- and mid-IR photometric data and five colour-colour diagrams (J - H) vs. (H - K), K - [3.6] vs. [3.6] - [4.5], [3.6] - [4.5] vs. [5.8] - [8.0], [3.6] - [4.5] vs. [8.0] - [24], and [3.4] - [4.6] vs. [4.6] - [12] are used. The purity of the YSOs sample is enhanced by excluding field contamination from stellar and extragalactic objects. As a result, we compile a list of YSO candidates displaying the source designation, astrometric, and photometric parameters, as well as information on the evolutionary stage determined by the presence of IR excess, as indicated by certain diagrams. The application of this program can greatly streamline the statistical analysis of young stellar populations across diverse star-forming regions, including distant and deeply embedded ones, which typically require processing large volumes of initial data.</summary>
+    <category term="astro-ph.SR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-16T17:23:28Z</published>
+    <arxiv:comment>13 pages, 5 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.SR"/>
+    <author>
+      <name>E. Nikoghosyan</name>
+    </author>
+    <author>
+      <name>D. Baghdasaryan</name>
+    </author>
+    <author>
+      <name>D. Andreasyan</name>
+    </author>
+    <author>
+      <name>N. Azatyan</name>
+    </author>
+    <author>
+      <name>A. Samsonyan</name>
+    </author>
+    <author>
+      <name>A. Yeghikyan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.08986v3</id>
+    <title>CAPC-CG: A Large-Scale, Expert-Directed LLM-Annotated Corpus of Adaptive Policy Communication in China</title>
+    <updated>2026-05-18T22:12:24Z</updated>
+    <link href="https://arxiv.org/abs/2510.08986v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.08986v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce CAPC-CG, the Chinese Adaptive Policy Communication (Central Government) Corpus, the first open dataset of Chinese policy directives annotated with a five-color taxonomy of clear and ambiguous language categories, building on Ang's theory of adaptive policy communication. Spanning 1949-2023, this corpus includes national laws, administrative regulations, and ministerial rules issued by China's top authorities. Each document is segmented into paragraphs, producing a total of 3.3 million units. Alongside the corpus, we release comprehensive metadata, a two-round labeling framework, and a gold-standard annotation set developed by expert and trained coders. Inter-annotator agreement achieves a Fleiss's kappa of K = 0.86 on directive labels, indicating high reliability for supervised modeling. We provide baseline classification results with several large language models (LLMs), together with our annotation codebook, and describe patterns from the dataset. This release aims to support downstream tasks and multilingual NLP research in policy communication.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-10T04:11:57Z</published>
+    <arxiv:comment>Accepted for publication in the Proceedings of ACL Main 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Bolun Sun</name>
+    </author>
+    <author>
+      <name>Charles Chang</name>
+    </author>
+    <author>
+      <name>Yuen Yuen Ang</name>
+    </author>
+    <author>
+      <name>Ruotong Mu</name>
+    </author>
+    <author>
+      <name>Yuchen Xu</name>
+    </author>
+    <author>
+      <name>Zhengxin Zhang</name>
+    </author>
+    <author>
+      <name>Pingxu Hao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.01572v1</id>
+    <title>Elementary Proofs and Generalizations of Recent Congruences of Thejitha and Fathima</title>
+    <updated>2025-10-02T01:32:58Z</updated>
+    <link href="https://arxiv.org/abs/2510.01572v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.01572v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Motivated by recent work of Hirschhorn and the author, Thejitha and Fathima recently considered arithmetic properties satisfied by the function $a_5(n)$ which counts the number of integer partitions of weight $n$ wherein even parts come in only one color (i.e., they are monochromatic), while the odd parts may appear in one of five colors. They proved two sets of Ramanujan--like congruences satisfied by $a_5(n)$, relying heavily on modular forms. In this note, we prove their results via purely elementary means, utilizing generating function manipulations and elementary $q$-series dissections. We then extensively generalize these two sets of congruences to infinite families of divisibility properties in which the results of Thejitha and Fathima are specific instances.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-02T01:32:58Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Revista de la Real Academia de Ciencias Exactas, Físicas y Naturales. Serie A. Matemáticas (RACSAM) 120 (2026), Article 119</arxiv:journal_ref>
+    <author>
+      <name>James A. Sellers</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.02789v2</id>
+    <title>Recolorable Graph Exploration by an Oblivious Agent with Fewer Colors</title>
+    <updated>2026-09-29T04:33:54Z</updated>
+    <link href="https://arxiv.org/abs/2505.02789v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.02789v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently, Böckenhauer, Frei, Unger, and Wehner (SIROCCO 2023) introduced a novel variant of the graph exploration problem in which a single memoryless agent must visit all nodes of an unknown, undirected, and connected graph before returning to its starting node. Unlike the standard model for mobile agents, edges are not labeled with port numbers. Instead, the agent can color its current node and observe the color of each neighboring node. To move, it specifies a target color and then moves to an adversarially chosen neighbor of that color. Böckenhauer~et al.~analyzed the minimum number of colors required for successful exploration and proposed an elegant algorithm that enables the agent to explore an arbitrary graph using only eight colors. In this paper, we present a novel graph exploration algorithm that requires only six colors. Furthermore, we prove that five colors are sufficient if we consider only a restricted class of graphs, which we call the $\varphi$-free graphs, a class that includes every graph with maximum degree at most three and every cactus.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-05T17:03:55Z</published>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Shota Takahashi</name>
+    </author>
+    <author>
+      <name>Haruki Kanaya</name>
+    </author>
+    <author>
+      <name>Shoma Hiraoka</name>
+    </author>
+    <author>
+      <name>Ryota Eguchi</name>
+    </author>
+    <author>
+      <name>Yuichi Sudo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.05895v1</id>
+    <title>Minimum cost flow decomposition on arc-coloured networks</title>
+    <updated>2025-03-07T19:31:44Z</updated>
+    <link href="https://arxiv.org/abs/2503.05895v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.05895v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A network $\mathcal{N}$ is formed by a (multi)digraph $D$ together with a \emph{capacity function} $u : A(D) \to R_+$, and it is denoted by $\mathcal{N} = (D,u)$. A flow on $\mathcal{N}$ is a function $x: A(D) \to R_+$ such that $x(a) \leq u(a)$ for all $a \in A(D)$, and it is said to be $k$-splittable if it can be decomposed into up to $k$ paths. We say that a flow is $λ$-uniform if its value on each arc of the network with positive flow value is exactly $λ$, for some $λ\in R_+^*$.
+  Arc-coloured networks are used to model qualitative differences among different regions through which the flow will be sent. They have applications in several areas such as communication networks, multimodal transportation, molecular biology, packing etc.
+  We consider the problem of decomposing a flow over an arc-coloured network with minimum cost, that is, with minimum sum of the cost of its paths, where the cost of each path is given by its number of colours. We show that this problem is NP-Hard for general flows. When we restrict the problem to $λ$-uniform flows, we show that it can be solved in polynomial time for networks with at most two colours, and it is NP-Hard for general networks with three colours and for acyclic networks with at least five colours.</summary>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-07T19:31:44Z</published>
+    <arxiv:comment>20 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CC"/>
+    <author>
+      <name>Claudio Carvalho Neto</name>
+    </author>
+    <author>
+      <name>Ana Karolinna Maia</name>
+    </author>
+    <author>
+      <name>Cláudia Linhares Sales</name>
+    </author>
+    <author>
+      <name>Jonas Costa Ferreira da Silva</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.19775v1</id>
+    <title>Improved image display by identifying the RGB family color space</title>
+    <updated>2024-12-27T18:14:54Z</updated>
+    <link href="https://arxiv.org/abs/2412.19775v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.19775v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>To display an image, the color space in which the image is encoded is assumed to be known. Unfortunately, this assumption is rarely realistic. In this paper, we propose to identify the color space of a given color image using pixel embedding and the Gaussian process. Five color spaces are supported, namely Adobe RGB, Apple RGB, ColorMatch RGB, ProPhoto RGB and sRGB. The results obtained show that this problem deserves more efforts.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-27T18:14:54Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Elvis Togban</name>
+    </author>
+    <author>
+      <name>Djemel Ziou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.11137v2</id>
+    <title>The five-color hypercube Adinkra and the Jacobian of a generalized Fermat curve</title>
+    <updated>2026-01-14T19:46:09Z</updated>
+    <link href="https://arxiv.org/abs/2410.11137v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.11137v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adinkras are highly structured graphs developed to study 1-dimensional supersymmetry algebras. A cyclic ordering of the edge colors of an Adinkra, or rainbow, determines a Riemann surface and a height function on the vertices of the Adinkra determines a divisor on this surface. We study the induced map from height functions to divisors on the Jacobian of the Riemann surface. In the first nontrivial case, a 5-dimensional hypercube corresponding to a Jacobian given by a product of 5 elliptic curves each with $j$-invariant 2048, we develop and characterize a purely combinatorial algorithm to compute height function images. We show that when restricted to a single elliptic curve, every height function is a multiple of a specified generating divisor, and raising and lowering vertices corresponds to adding or subtracting this generator. We also give strict bounds on the coefficients of this generator that appear in the collection of all divisors of height functions.</summary>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-14T23:27:22Z</published>
+    <arxiv:comment>We have updated the title. The combinatorial discussion that previously appeared in Section 4 has been removed for incorporation in a forthcoming paper. This paper will appear in Annales de l'Institut Henri Poincaré D</arxiv:comment>
+    <arxiv:primary_category term="math.AG"/>
+    <author>
+      <name>Amanda E. Francis</name>
+    </author>
+    <author>
+      <name>Ursula A. Whitcher</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.03310v4</id>
+    <title>Photometric segregation of dwarf and giant FGK stars using the SVO Filter Profile Service and photometric tools</title>
+    <updated>2025-04-08T15:08:32Z</updated>
+    <link href="https://arxiv.org/abs/2406.03310v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.03310v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper is focused on the segregation of FGK dwarf and giant stars through narrow-band photometric data using the Spanish Virtual Observatory (SVO) Filter Profile Service and associated photometric tools. We selected spectra from the MILES, STELIB, and ELODIE stellar libraries, and used SVO photometric tools to derive the synthetic photometry in 15 J-PAS narrow filters, which were especially selected to cover spectral features sensitive to gravity changes. Using machine-learning techniques as the Gaussian mixture model and the support vector machine, we defined several criteria based on J-PAS colours to discriminate between dwarf and giant stars. We selected five colour-colour diagrams that presented the most promising separation between both samples. Our results show an overall accuracy in the studied sample of $\sim$0.97 for FGK stars, although a dependence on the luminosity type and the stellar effective temperature was found. We also defined a colour-temperature relation for dwarf stars with effective temperatures between 4\,000 and 7\,000\,K, which allows one to estimate the stellar effective temperature from four J-PAS filters ($J0450$, $J0510$, $J0550$, and $J0620$). Additionally, we extended the study to M-type giant and dwarf stars, achieving a similar accuracy to that for FGK stars.</summary>
+    <category term="astro-ph.SR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-05T14:23:13Z</published>
+    <arxiv:comment>19 pages, 18 figures, published in A&amp;A</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.SR"/>
+    <arxiv:journal_ref>A&amp;A 689, A93 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Carlos Rodrigo</name>
+    </author>
+    <author>
+      <name>Patricia Cruz</name>
+    </author>
+    <author>
+      <name>John F. Aguilar</name>
+    </author>
+    <author>
+      <name>Alba Aller</name>
+    </author>
+    <author>
+      <name>Enrique Solano</name>
+    </author>
+    <author>
+      <name>Maria Cruz Galvez-Ortiz</name>
+    </author>
+    <author>
+      <name>Francisco Jimenez-Esteban</name>
+    </author>
+    <author>
+      <name>Pedro Mas-Buitrago</name>
+    </author>
+    <author>
+      <name>Amelia Bayo</name>
+    </author>
+    <author>
+      <name>Miriam Cortes-Contreras</name>
+    </author>
+    <author>
+      <name>Raquel Murillo-Ojeda</name>
+    </author>
+    <author>
+      <name>Silvia Bonoli</name>
+    </author>
+    <author>
+      <name>Javier Cenarro</name>
+    </author>
+    <author>
+      <name>Renato Dupke</name>
+    </author>
+    <author>
+      <name>Carlos Lopez-Sanjuan</name>
+    </author>
+    <author>
+      <name>Antonio Marin-Franch</name>
+    </author>
+    <author>
+      <name>Claudia Mendes de Oliveira</name>
+    </author>
+    <author>
+      <name>Mariano Moles</name>
+    </author>
+    <author>
+      <name>Keith Taylor</name>
+    </author>
+    <author>
+      <name>Jesus Varela</name>
+    </author>
+    <author>
+      <name>Hector Vazquez Ramio</name>
+    </author>
+    <arxiv:doi>10.1051/0004-6361/202449998</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361/202449998" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.05509v1</id>
+    <title>Extending the Continuum of Six-Colorings</title>
+    <updated>2024-04-08T13:31:48Z</updated>
+    <link href="https://arxiv.org/abs/2404.05509v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.05509v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present two novel six-colorings of the Euclidean plane that avoid monochromatic pairs of points at unit distance in five colors and monochromatic pairs at another specified distance $d$ in the sixth color. Such colorings have previously been known to exist for $0.41 &lt; \sqrt{2} - 1 \le d \le 1 / \sqrt{5} &lt; 0.45$. Our results significantly expand that range to $0.354 \le d \le 0.657$, the first improvement in 30 years. Notably, the constructions underlying this were derived by formalizing colorings suggested by a custom machine learning approach.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-08T13:31:48Z</published>
+    <arxiv:comment>An animated version of Figure 2 is available at https://christophspiegel.berlin/hn/fig2.pdf and can be viewed with Acrobat Reader</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Konrad Mundinger</name>
+    </author>
+    <author>
+      <name>Sebastian Pokutta</name>
+    </author>
+    <author>
+      <name>Christoph Spiegel</name>
+    </author>
+    <author>
+      <name>Max Zimmer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.03787v2</id>
+    <title>Revisiting Categorical Color Perception in Scatterplots: Sequential, Diverging, and Categorical Palettes</title>
+    <updated>2024-04-16T22:02:00Z</updated>
+    <link href="https://arxiv.org/abs/2404.03787v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.03787v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Existing guidelines for categorical color selection are heuristic, often grounded in intuition rather than empirical studies of readers' abilities. While design conventions recommend palettes maximize hue differences, more recent exploratory findings indicate other factors, such as lightness, may play a role in effective categorical palette design. We conducted a crowdsourced experiment on mean value judgments in multi-class scatterplots using five color palette families--single-hue sequential, multi-hue sequential, perceptually-uniform multi-hue sequential, diverging, and multi-hue categorical--that differ in how they manipulate hue and lightness. Participants estimated relative mean positions in scatterplots containing 2 to 10 categories using 20 colormaps. Our results confirm heuristic guidance that hue-based categorical palettes are most effective. However, they also provide additional evidence that scalable categorical encoding relies on more than hue variance.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-04T19:59:46Z</published>
+    <arxiv:comment>Accepted for publication in EuroVis 2024 Short Paper</arxiv:comment>
+    <arxiv:primary_category term="cs.HC"/>
+    <arxiv:journal_ref>In Proceedings of the 26th EG/VGTC Conference on Visualization (EuroVis 2024), May 27-31, 2024, Odense, Denmark</arxiv:journal_ref>
+    <author>
+      <name>Chin Tseng</name>
+    </author>
+    <author>
+      <name>Arran Zeyu Wang</name>
+    </author>
+    <author>
+      <name>Ghulam Jilani Quadri</name>
+    </author>
+    <author>
+      <name>Danielle Albers Szafir</name>
+    </author>
+    <arxiv:doi>10.2312/evs.20241073</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.2312/evs.20241073" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.16660v1</id>
+    <title>Spectroradiometry with sub-microsecond time resolution using multianode photomultiplier tube assemblies</title>
+    <updated>2023-10-25T14:21:36Z</updated>
+    <link href="https://arxiv.org/abs/2310.16660v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.16660v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate and precise measurements of spectroradiometric temperature are crucial for many high pressure experiments that use diamond anvil cells or shock waves. In experiments with sub-millisecond timescales, specialized detectors such as streak cameras or photomultiplier tubes are required to measure temperature. High accuracy and precision are difficult to attain, especially at temperatures below 3000 K. Here we present a new spectroradiometry system based on multianode photomultiplier tube technology and passive readout circuitry that yields a 0.24 $μ$s rise-time for each channel. Temperature is measured using five color spectroradiometry. During high pressure pulsed Joule heating experiments in a diamond anvil cell, we document measurement precision to be $\pm 30$ K at temperatures as low as 2000 K during single-shot heating experiments with $0.6$ $μ$s time-resolution. Ambient pressure melting tests using pulsed Joule heating indicate that the accuracy is $\pm 80$ K in the temperature range 1800-2700 K.</summary>
+    <category term="physics.ins-det" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-25T14:21:36Z</published>
+    <arxiv:comment>17 pages, 18 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.ins-det"/>
+    <author>
+      <name>Zachary M. Geballe</name>
+    </author>
+    <author>
+      <name>Francesca Miozzi</name>
+    </author>
+    <author>
+      <name>Chris F. Anto</name>
+    </author>
+    <author>
+      <name>Javier Rojas</name>
+    </author>
+    <author>
+      <name>Jing Yang</name>
+    </author>
+    <author>
+      <name>Michael J. Walter</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.16212v1</id>
+    <title>A conditional approach for monochromatic unit distance in a plane for four and five coloring</title>
+    <updated>2022-10-27T10:53:58Z</updated>
+    <link href="https://arxiv.org/abs/2210.16212v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.16212v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A measure theoretic approach of the problem that there exits a finite unit-distance graphs in the plane that are not five (or four) colorable.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-27T10:53:58Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Saayan Mukherjee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2208.12563v1</id>
+    <title>Ramsey theory constructions from hypergraph matchings</title>
+    <updated>2022-08-26T10:15:37Z</updated>
+    <link href="https://arxiv.org/abs/2208.12563v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2208.12563v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We give asymptotically optimal constructions in generalized Ramsey theory using results about conflict-free hypergraph matchings. For example, we present an edge-coloring of $K_{n,n}$ with $2n/3 + o(n)$ colors such that each $4$-cycle receives at least three colors on its edges. This answers a question of Axenovich, Füredi and the second author (On generalized Ramsey theory: the bipartite case, J. Combin. Theory Ser B 79 (2000), 66--86). We also exhibit an edge-coloring of $K_n$ with $5n/6+o(n)$ colors that assigns each copy of $K_4$ at least five colors. This gives an alternative very short solution to an old question of Erdős and Gyárfás that was recently answered by Bennett, Cushman, Dudek, and Pralat by analyzing a colored modification of the triangle removal process.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-08-26T10:15:37Z</published>
+    <arxiv:comment>11 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Felix Joos</name>
+    </author>
+    <author>
+      <name>Dhruv Mubayi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.09436v2</id>
+    <title>Early results from GLASS-JWST. III: Galaxy candidates at z$\sim$9-15</title>
+    <updated>2022-09-26T17:31:41Z</updated>
+    <link href="https://arxiv.org/abs/2207.09436v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.09436v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present the results of a first search for galaxy candidates at z$\sim$9--15 on deep seven-bands NIRCam imaging acquired as part of the GLASS-JWST Early Release Science Program on a flanking field of the Frontier Fields cluster A2744. Candidates are selected via two different renditions of the Lyman-break technique, isolating objects at z$\sim$9-11, and z$\sim$9-15, respectively, supplemented by photometric redshifts obtained with two independent codes. We find five color-selected candidates at z$&gt;$9, plus one additional candidate with photometric redshift z$_{phot}\geq$9. In particular, we identify two bright candidates at $M_{UV}\simeq -21$ that are unambiguously placed at $z\simeq 10.6$ and $z\simeq 12.2$, respectively. The total number of galaxies discovered at $z&gt;9$ is in line with the predictions of a non-evolving LF. The two bright ones at $z&gt;10$ are unexpected given the survey volume, although cosmic variance and small number statistics limits general conclusions. This first search demonstrates the unique power of JWST to discover galaxies at the high redshift frontier. The candidates are ideal targets for spectroscopic follow-up in Cycle$-2$.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-19T17:50:05Z</published>
+    <arxiv:comment>Accepted for publication in ApJL, 11 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Marco Castellano</name>
+    </author>
+    <author>
+      <name>Adriano Fontana</name>
+    </author>
+    <author>
+      <name>Tommaso Treu</name>
+    </author>
+    <author>
+      <name>Paola Santini</name>
+    </author>
+    <author>
+      <name>Emiliano Merlin</name>
+    </author>
+    <author>
+      <name>Nicha Leethochawalit</name>
+    </author>
+    <author>
+      <name>Michele Trenti</name>
+    </author>
+    <author>
+      <name>Uros Mestric</name>
+    </author>
+    <author>
+      <name>Eros Vanzella</name>
+    </author>
+    <author>
+      <name>Andrea Bonchi</name>
+    </author>
+    <author>
+      <name>Davide Belfiori</name>
+    </author>
+    <author>
+      <name>Mario Nonino</name>
+    </author>
+    <author>
+      <name>Diego Paris</name>
+    </author>
+    <author>
+      <name>Gianluca Polenta</name>
+    </author>
+    <author>
+      <name>Guido Roberts-Borsani</name>
+    </author>
+    <author>
+      <name>Kristan Boyett</name>
+    </author>
+    <author>
+      <name>Marusa Bradac</name>
+    </author>
+    <author>
+      <name>Antonello Calabro</name>
+    </author>
+    <author>
+      <name>Karl Glazebrook</name>
+    </author>
+    <author>
+      <name>Claudio Grillo</name>
+    </author>
+    <author>
+      <name>Sara Mascia</name>
+    </author>
+    <author>
+      <name>Charlotte Mason</name>
+    </author>
+    <author>
+      <name>Amata Mercurio</name>
+    </author>
+    <author>
+      <name>Takahiro Morishita</name>
+    </author>
+    <author>
+      <name>Themiya Nanayakkara</name>
+    </author>
+    <author>
+      <name>Laura Pentericci</name>
+    </author>
+    <author>
+      <name>Piero Rosati</name>
+    </author>
+    <author>
+      <name>Benedetta Vulcani</name>
+    </author>
+    <author>
+      <name>Xin Wang</name>
+    </author>
+    <author>
+      <name>Lilan Yang</name>
+    </author>
+    <arxiv:doi>10.3847/2041-8213/ac94d0</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3847/2041-8213/ac94d0" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.02920v1</id>
+    <title>The Erdős-Gyárfás function $f(n, 4, 5) = \frac 56 n + o(n)$ -- so Gyárfás was right</title>
+    <updated>2022-07-06T18:57:28Z</updated>
+    <link href="https://arxiv.org/abs/2207.02920v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.02920v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A $(4, 5)$-coloring of $K_n$ is an edge-coloring of $K_n$ where every $4$-clique spans at least five colors. We show that there exist $(4, 5)$-colorings of $K_n$ using $\frac 56 n + o(n)$ colors. This settles a disagreement between Erdős and Gyárfás reported in their 1997 paper. Our construction uses a randomized process which we analyze using the so-called differential equation method to establish dynamic concentration. In particular, our coloring process uses random triangle removal, a process first introduced by Bollobás and Erdős, and analyzed by Bohman, Frieze and Lubetzky.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-06T18:57:28Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Patrick Bennett</name>
+    </author>
+    <author>
+      <name>Ryan Cushman</name>
+    </author>
+    <author>
+      <name>Andrzej Dudek</name>
+    </author>
+    <author>
+      <name>Paweł Prałat</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.12861v1</id>
+    <title>The chromatic number of the Minkowski plane -- the regular polygon case</title>
+    <updated>2021-08-29T15:35:56Z</updated>
+    <link href="https://arxiv.org/abs/2108.12861v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.12861v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Hadwiger-Nelson problem asks for the minimum number of colors, so that each point of the plane can be assigned a single color with the property that no two points unit-distance apart are identically colored. It is now known that the answer is $5$, $6$, or $7$, Here we consider the problem in the context of Minkowski planes, where the unit circle is a regular polygon with $8$, $10$, or $12$ vertices. We prove that in each of these cases, one also needs at least five colors.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-29T15:35:56Z</published>
+    <arxiv:comment>19 pages, 14 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Geoffrey Exoo</name>
+    </author>
+    <author>
+      <name>David Fisher</name>
+    </author>
+    <author>
+      <name>Dan Ismailescu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.09241v1</id>
+    <title>On sublinear approximations for the Petersen coloring conjecture</title>
+    <updated>2021-04-19T12:28:01Z</updated>
+    <link href="https://arxiv.org/abs/2104.09241v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.09241v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>If $f:\mathbb{N}\rightarrow \mathbb{N}$ is a function, then let us say that $f$ is sublinear if \[\lim_{n\rightarrow +\infty}\frac{f(n)}{n}=0.\] If $G=(V,E)$ is a cubic graph and $c:E\rightarrow \{1,...,k\}$ is a proper $k$-edge-coloring of $G$, then an edge $e=uv$ of $G$ is poor (rich) in $c$, if the edges incident to $u$ and $v$ are colored with three (five) colors. An edge is abnormal if it is neither rich nor poor. The Petersen coloring conjecture of Jaeger states that any bridgeless cubic graph admits a proper 5-edge-coloring $c$, such that there is no an abnormal edge of $G$ with respect to $c$. For a proper 5-edge-coloring $c$ of $G$, let $N_G(c)$ be the set of abnormal edges of $G$ with respect to $c$. In this paper we show that (a) The Petersen coloring conjecture is equivalent to the statement that there is a sublinear function $f:\mathbb{N}\rightarrow \mathbb{N}$, such that all bridgeless cubic graphs admit a proper 5-edge-coloring $c$ with $|N_G(c)|\leq f(|V|)$; (b) for $k=2,3,4$, the statement that there is a sublinear function $f:\mathbb{N}\rightarrow \mathbb{N}$, such that all (cyclically) $k$-edge-connected cubic graphs admit a proper 5-edge-coloring $c$ with $|N_G(c)|\leq f(|V|)$ is equivalent to the statement that all (cyclically) $k$-edge-connected cubic graphs admit a proper 5-edge-coloring $c$ with $|N_G(c)|\leq 2k+1$.</summary>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-19T12:28:01Z</published>
+    <arxiv:comment>10 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.DM"/>
+    <author>
+      <name>Davide Mattiolo</name>
+    </author>
+    <author>
+      <name>Giuseppe Mazzuoccolo</name>
+    </author>
+    <author>
+      <name>Vahan Mkrtchyan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2102.01150v2</id>
+    <title>Finite temperature properties of QCD with two flavors and three, four and five colors</title>
+    <updated>2021-05-26T17:10:53Z</updated>
+    <link href="https://arxiv.org/abs/2102.01150v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2102.01150v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>I present a numerical study of the crossover between the low temperature chirally broken phase and the high temperature chirally restored phase in $SU(N_c)$ gauge theory with $N_c=3-5$ colors and $N_f=2$ degenerate fermion flavors. Fermion masses span a range of intermediate values (represented by the squared ratio of pseudoscalar to vector meson masses $(m_{PS}/m_V)^2\sim 0.25$ to 0.63). Observables include the temperature dependent chiral condensate and screening masses. At each fermion mass these quantities show nearly identical temperature dependence across $N_c$.</summary>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nucl-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-01T20:39:52Z</published>
+    <arxiv:comment>published version, small changes from v.1, 24 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="hep-lat"/>
+    <arxiv:journal_ref>Phys. Rev. D 103, 094513 (2021)</arxiv:journal_ref>
+    <author>
+      <name>Thomas DeGrand</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.103.094513</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.103.094513" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2010.14659v2</id>
+    <title>Properties of HYMNs in Examples of Four-Color, Five-Color, and Six-Color Adinkras</title>
+    <updated>2020-11-05T17:39:53Z</updated>
+    <link href="https://arxiv.org/abs/2010.14659v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.14659v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The mathematical concept of a "Banchoff index" associated with discrete Morse functions for oriented triangular meshes has been shown to correspond to the height assignments of nodes in adinkras. In recent work there has been introduced the concept of "Banchoff matrices" leading to HYMNs - height yielding matrix numbers. HYMNs map the shape of an adinkra to a set of eigenvalues derived from Banchoff matrices. In the context of some examples of four-color, minimal five-color, and minimal six-color adinkras, properties of the HYMNs are explored.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.RT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-27T22:55:16Z</published>
+    <arxiv:comment>31 pages, 12 figures, figure 12 corrected</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <arxiv:journal_ref>Int.J.Mod.Phys.A 36 (2021) 13, 2150082</arxiv:journal_ref>
+    <author>
+      <name>S. James Gates,</name>
+    </author>
+    <author>
+      <name>Yangrui Hu</name>
+    </author>
+    <author>
+      <name>Kory Stiffler</name>
+    </author>
+    <arxiv:doi>10.1142/S0217751X21500822</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1142/S0217751X21500822" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2010.12668v1</id>
+    <title>What percent of the plane can be properly 5- and 6-colored?</title>
+    <updated>2020-10-23T21:04:18Z</updated>
+    <link href="https://arxiv.org/abs/2010.12668v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.12668v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a tiling of more than 99.985698% of the Euclidean plane with six colors, reducing the previous record for uncovered fraction of the plane by about 12.8%. We also present a tiling of more than 95.99% of the plane with five colors. It is thus shown that any unit-distance graph of order at most 6992 and 24 in the plane can be properly 6-colored and 5-colored, respectively.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-23T21:04:18Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 30/1 (2020) 25-39</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+</feed>

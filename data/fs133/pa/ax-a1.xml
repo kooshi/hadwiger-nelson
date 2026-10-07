@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/oZQMDN9Xh9GB9WmsWzsTUPQ+DzI</id>
+  <title>arXiv Query: search_query=all:"fractional chromatic number" AND all:plane&amp;id_list=&amp;start=0&amp;max_results=25</title>
+  <updated>2026-10-07T03:03:17Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22fractional+chromatic+number%22+AND+all:plane&amp;start=0&amp;max_results=25&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+  <opensearch:totalResults>6</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.28157v1</id>
+    <title>A unit-distance graph in the plane with independence ratio below 1/4</title>
+    <updated>2026-06-26T14:54:23Z</updated>
+    <link href="https://arxiv.org/abs/2606.28157v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.28157v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that there exists a finite unit-distance graph in the plane with independence ratio strictly smaller than 1/4, answering a question of Erdős. Our proof closely follows the framework of Matolcsi, Ruzsa, Varga, and Zsámboki, based on the geometric fractional chromatic number, but adds a carefully chosen two-vertex augmentation that pushes their 27-vertex construction from geometric fractional chromatic number $4$ to a value strictly larger than 4. This disproves their Conjecture 1, and implies that the fractional chromatic number of the plane is strictly larger than 4. The proof can be made fully constructive, but the resulting finite graph has an enormous number of vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-26T14:54:23Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.12325v1</id>
+    <title>A note on geometric colorings of the Moser lattice</title>
+    <updated>2026-06-10T16:59:20Z</updated>
+    <link href="https://arxiv.org/abs/2606.12325v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.12325v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In arXiv:2311.10069, Matolcsi et al. show that the fractional chromatic number of the plane is at least 4. Their proof uses a 27-vertex unit-distance graph in the Moser lattice, with geometric fractional chromatic number exactly 4. We show that this bound is tight for graphs in the Moser lattice by exhibiting geometric 4-colorings of the entire lattice. The same colorings also extend to the entire Moser ring.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-10T16:59:20Z</published>
+    <arxiv:comment>5 pages, 0 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.10069v4</id>
+    <title>The fractional chromatic number of the plane is at least 4</title>
+    <updated>2025-03-27T16:48:40Z</updated>
+    <link href="https://arxiv.org/abs/2311.10069v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.10069v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that the fractional chromatic number $χ_f(\mathbb R^2)$ of the unit distance graph of the Euclidean plane is greater than or equal to $4$. Interestingly, however, we cannot present a finite subgraph $G$ of the plane such that $χ_f(G)\ge 4$. Instead, we utilize the concept of the geometric fractional chromatic number $χ_{gf}(G)$, which was introduced recently in connection with density bounds for 1-avoiding sets.
+  First, as $G$ ranges over finite subgraphs of the plane, we establish that the supremum of $χ_f(G)$ is the same as that of $χ_{gf}(G)$. The proof exploits the amenability of the group of Euclidean transformations in dimension 2 and, as such, we do not know whether the analogous statement holds in higher dimensions. We then present a specific planar unit distance graph $G$ on 27 vertices such that $χ_{gf}(G)=4$, and conclude $χ_f(\mathbb R^2)\ge 4$ as a corollary.
+  As another main result we show that the finitary fractional chromatic number and the Hall ratio of the plane are equal. As a consequence, we conclude that there exist finite unit distance graphs with independence ratio $\frac{1}{4}+\varepsilon$, while we conjecture that the value $\frac{1}{4}$ cannot be reached.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-16T18:09:12Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Máté Matolcsi</name>
+    </author>
+    <author>
+      <name>Imre Z. Ruzsa</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+    <author>
+      <name>Pál Zsámboki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1810.00960v4</id>
+    <title>On the density of sets of the Euclidean plane avoiding distance 1</title>
+    <updated>2022-05-27T15:50:23Z</updated>
+    <link href="https://arxiv.org/abs/1810.00960v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1810.00960v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A subset $A \subset \mathbb R^2$ is said to avoid distance $1$ if: $\forall x,y \in A, \left\| x-y \right\|_2 \neq 1.$ In this paper we study the number $m_1(\mathbb R^2)$ which is the supremum of the upper densities of measurable sets avoiding distance 1 in the Euclidean plane. Intuitively, $m_1(\mathbb R^2)$ represents the highest proportion of the plane that can be filled by a set avoiding distance 1. This parameter is related to the fractional chromatic number $χ_f(\mathbb R^2)$ of the plane.
+  We establish that $m_1(\mathbb R^2) \leq 0.25647$ and $χ_f(\mathbb R^2) \geq 3.8991$.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-10-01T20:20:01Z</published>
+    <arxiv:comment>13 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Discrete Mathematics &amp; Theoretical Computer Science, vol. 23 no. 1, Combinatorics (August 31, 2021) dmtcs:5153</arxiv:journal_ref>
+    <author>
+      <name>Thomas Bellitto</name>
+    </author>
+    <author>
+      <name>Arnaud Pêcher</name>
+    </author>
+    <author>
+      <name>Antoine Sédillot</name>
+    </author>
+    <arxiv:doi>10.46298/dmtcs.5153</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.46298/dmtcs.5153" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1506.01887v2</id>
+    <title>Fractional and $j$-fold colouring of the plane</title>
+    <updated>2015-10-05T18:15:20Z</updated>
+    <link href="https://arxiv.org/abs/1506.01887v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1506.01887v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present results referring to the Hadwiger-Nelson problem which asks for the minimum number of colours needed to colour the plane with no two points at distance $1$ having the same colour. Exoo considered a more general problem concerning graphs $G_{[a,b]}$ with $\mathbb{R}^2$ as the vertex set and two vertices adjacent if their distance is in the interval $[a,b]$. Exoo conjectured $χ(G_{[a,b]}) = 7$ for sufficiently small but positive difference between $a$ and $b$. We partially answer this conjecture by proving that $χ(G_{[a,b]}) \geq 5$ for $b &gt; a$.
+  A $j$-fold colouring of graph $G = (V,E)$ is an assignment of $j$-elemental sets of colours to the vertices of $G$, in such a way that the sets assigned to any two adjacent vertices are disjoint. The fractional chromatic number $χ_f(G)$ is the infimum of fractions $k/j$ for $j$-fold colouring of $G$ using $k$ colours. We generalize a method by Hochberg and O'Donnel (who proved that $G_{[1,1]} \leq 4.36$) for fractional colouring of graphs $G_{[a,b]}$, obtaining a bound dependant on $\frac{a}{b}$.
+  We also present few specific and two general methods for $j$-fold coloring of $G_{[a,b]}$ for small $j$, in particular for $G_{[1,1]}$ and $G_{[1,2]}$. The $j$-fold colouring for small $j$ has strong practical motivation especially in scheduling theory, while graph $G_{[1,2]}$ is often used to model hidden conflicts in radio networks.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-06-05T12:41:21Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Discrete Comput Geom (2016) 55: 594</arxiv:journal_ref>
+    <author>
+      <name>Jarosław Grytczuk</name>
+    </author>
+    <author>
+      <name>Konstanty Junosza-Szaniawski</name>
+    </author>
+    <author>
+      <name>Joanna Sokół</name>
+    </author>
+    <author>
+      <name>Krzysztof Węsek</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-016-9769-3</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-016-9769-3" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1501.01647v1</id>
+    <title>The Fractional Chromatic Number of the Plane</title>
+    <updated>2015-01-07T21:17:13Z</updated>
+    <link href="https://arxiv.org/abs/1501.01647v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1501.01647v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The chromatic number of the plane is the chromatic number of the uncountably infinite graph that has as its vertices the points of the plane and has an edge between two points if their distance is 1. This chromatic number is denoted $χ(\mathcal{R}^2)$. The problem was introduced in 1950, and shortly thereafter it was proved that $4\le χ(\mathcal{R}^2)\le 7$. These bounds are both easy to prove, but after more than 60 years they are still the best known. In this paper, we investigate $χ_f(\mathcal{R}^2)$, the fractional chromatic number of the plane. The previous best bounds (rounded to five decimal places) were $3.5556 \le χ_f(\mathcal{R}^2)\le 4.3599$. Here we improve the lower bound to $76/21\approx3.6190$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-01-07T21:17:13Z</published>
+    <arxiv:comment>20 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Combinatorica. Vol. 37(5), October 2017, pp. 837-861</arxiv:journal_ref>
+    <author>
+      <name>Daniel W. Cranston</name>
+    </author>
+    <author>
+      <name>Landon Rabern</name>
+    </author>
+  </entry>
+</feed>
