@@ -26,6 +26,55 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
+## 0d. READ THIS FIRST — written at 16:21 UTC, 2026-10-07, just before a compaction Kooshi asked for
+
+**Held / Derived / Opened.** FS-132's first theorem (the four-way exclusion, whole plane) is **held**: landed and filed
+(`783e7bdb`; FS-132 inventory items 46–51). FS-124 is **Derived** and filed (`bd3df943`, **the next filing's fact-audit
+base**; `plans/FS124-derivation.md`, 30 entries; rows 161–164; FS-124 inventory items 1–33). FS-136, "the point across"
+(`plans/STUB-covering-pairs.md`), is **Opened** and ranked first (inventory `plans/FS136-close-inventory.md`, items 1–3;
+claim list `data/fs136/claims.md`). Kooshi was told of the move to FS-136 and may override; he has not objected.
+
+**Three jobs are running** (agent ids in the scratch file `agents.txt`, never in a repo file):
+1. **FS124-L1 — a LANDING IN FLIGHT** (the disc criterion's module; worktree and branch `fs124-wl1`; brief
+   `data/fs124/briefs/FS124-L1-landing.md`). **Until it is back: no `CLAUDE.md` filing, and nothing committed to `main`
+   outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`.** It sends one line when
+   the gate is green, then hands back with drafts. Then: the three digests against
+   `data/fs132/l2/gate/receipt-{axioms,vacuity,assumptions}-final.log`; file its drafts by a script on the pattern of
+   `data/fs132/l2/file_fs132_landed.py` (counts; row 161's grade; the first planner's sentence on which half of the
+   criterion needs the import; every "kernel-checked on a branch" said of this module; the theorem record's dated line;
+   the atlas node `DISCS`); fact audit `--base bd3df943`; **tell Kooshi: held — seven iff some disc has no weak
+   six-colouring, on one declared outside theorem.** If my push is rejected because it landed first: `git pull --rebase`,
+   push, never force.
+2. **FS124-K2** (kernel planner, FS-124's second module; worktree and branch `fs124-wk2`; record
+   `plans/FS124-kernel-plan-2.md` there). **Its fence is lifted** (blind commit `1681f612`); **its second look at the
+   flagged step is in — its blind route is the deriver's and the step stands** (FS-124 inventory items 32–33; grade
+   unchanged: one mind, kernel pending). It is in phase 2 and will hand back with a skeleton of 134 leaves. Then: an
+   implementer on it (pattern `data/fs124/briefs/FS124-I1-radius.md`, generator
+   `data/fs131/briefs/scripts/mk-fs124-i1.py`; worktree cut from its tip, **build copied from `fs132-wl2`'s or
+   `fs124-wl1`'s tree — `main`'s own build is stale**). **Owed by name as a kernel job: the θ-lemma** (three arcs from a
+   disc's centre; its needs in that record's § 2.4). Owed to the record: a dated line under C124-LONE (the bound
+   `η ≤ 1`; the hypothesis the step really uses).
+3. **FS136-E1** (deriver; FS-136's opening and five claims; record `plans/FS136-E1-derivation.md`, plan
+   `plans/FS136-the-point-across.md`). Its first message is logged (item 3: the claims restated on labels; FS-110's held
+   covering-pair theorems found as prior art). Next from it: the reading of every held object, then a verdict per claim
+   (dated lines in `data/fs136/claims.md`). **An exclusion on a disc would fix the value → Kooshi at once, "claimed by
+   one mind, unchecked".** At its hand-back → the asking lane (its brief must name `plans/FS107-derivation.md` and
+   `plans/FS110-derivation.md` by file: its cards missed held prior art three times today), or a second deriver.
+
+**Queued for kernel slots** (none briefed): the second module's implementer; the θ-lemma; a planner for FS-132's seven
+further statements (`data/fs132/claims-K1.md`, "tier A", plus a kernel model of the ring hypothesis); the centres' kernel
+job; FS-133's kernel planner (compute the rigidity theorem's cone and price a port first). **Line 11 of
+`plans/SEARCH-QUEUE.md` is to run at tomorrow's search.** **Owed filings, small**: ledger claim-list lines for rows
+155–164; one count cited to two papers in two rows of the stub list; the atlas's older debts. **Disk**: about 45 GB
+free; build copies of landed branches (`fs132-wi2`, `-wi3`, `-wi4`) may be removed when space is needed.
+
+**How this session works** (unchanged): briefs by generators in `data/fs131/briefs/scripts/` (`mkbrief.py`), gated with
+`python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>` from the root; an amended brief gets a dated amendment,
+the gate, and a one-line message; statements into claim lists by script; inventory entries with "My receipt"; rulings in
+four parts; times read from the clock (`date -u`); a filing script and its commit in one `&&` chain; never `cd` in a
+compound command; a fenced (blind) brief carries no verdict, confidence or hint, and commit subjects stay neutral while a
+mind is blind. Corrections I owe Kooshi are told in the report where they arise — today's are all told.
+
 ## 0c. AFTER KOOSHI'S SIXTH WORD (2026-10-07, about 11:40 UTC) — READ THIS SECTION FIRST; §§ 0a and 0b are the night before it
 
 **His word** (verbatim in `data/external/EXT-OAI1-request.md` § Kooshi's sixth word, with the three items it answers and my
