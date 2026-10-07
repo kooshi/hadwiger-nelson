@@ -1,5 +1,7 @@
 # STUB — the point across: two rich points on one unit circle whose colours together are all six
 
+> **FS-136 (numbered 2026-10-07 by Keryx). Opened 2026-10-07**: its inventory is `plans/FS136-close-inventory.md`, its claim list `data/fs136/claims.md`; in the claim list and everywhere after it the first claims' names read C136- where this stub's question section writes C-.
+
 *Minted 2026-10-07 by FS124-P3 (`plans/POROS-2026-10-07-fs124-round2.md`), the asking lane, after FS-124's second round. Its
 number is the coordinator's to give. **Not started.** It is FS-124's successor: FS-124 (`plans/STUB-q-ring.md`) answered what a
 tight unit pair passes on and what a close complementary pair costs; its eight cases, listed there (ll. 17–55), are open and

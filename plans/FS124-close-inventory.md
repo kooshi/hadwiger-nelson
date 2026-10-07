@@ -589,4 +589,55 @@ between two colours that is an arc of the unit circle about a point one unit awa
     gate exit 0): the derivation file from thirty entries, five dated corrections, the stubs, the predictions, the front
     page's drafts; its commit subjects neutral, because a planner is working blind. (c) **The day's search is spent**
     (it ran in the night); line 11 goes to tomorrow's Searcher. (d) G97's amendment is the record job's draft to make.
+28. **FS124-Z1 done (422k and 24 minutes by the task notice): the derivation file is filed — thirty entries, each copied by
+    script from its deriver's record — with five dated corrections, eight stubs' bearing blocks, every prediction scored,
+    and the front page's drafts** (deriver; record `plans/FS124-Z1-record.md`; the file `plans/FS124-derivation.md`; report
+    `data/fs124/reports/FS124-Z1.md`; eight commits to `fc472413`, their subjects neutral). **The file**: 29 derived and 1
+    refuted, 17 controls, eight sections; "I typed no statement, grade or count of minds, and raised or lowered none";
+    **no merged statement written** — each chain's head first, its weaker forms as corollaries under their own names: "a
+    fused statement would have been a derivation by a record job, and nine names are fixed for a planner working blind".
+    **Corrections appended** (58 lines, none removed): two under first-round entries, one under the closed edge's entry,
+    **two in last night's theorem record** (the sharp form's conclusion met by a one-point set, with the piece form; the
+    square form's comparison made as a checking reading, verdict still a gap). **Stubs**: dated bearing blocks in eight;
+    no new stub. **Predictions**: 44 yes/no lines and 5 branch lines, mean Brier 0.083 — "on four of the five branch lines
+    the largest mass was on a branch that did not occur". **Drafts**: `LEDGER.md` rows 161–164; seven `CLAUDE.md` slots,
+    +1,921 bytes; G97 amended with a demotion record; G99 proposed; one sentence for G92; instances; four atlas nodes.
+    **Its findings**: the asking lane's drafted clause for this milestone's row is larger than the four-labels entry — a
+    form no larger drafted; the second deriver's caution names one entry too many and one too few among those waiting on
+    its flagged step (by their uses lines: the closed edge does not rest on it; the pair's two saves do); **last night's
+    open line on the placed point has no named home** now that this milestone is recorded — a question for the asking
+    lane. **Its slips, disclosed**: two stages in one commit; it went on past the brief's hand-back line; the launch's copy
+    of the front page was older than the disk's, found before any draft was written. **My receipt**: the commits are on
+    `main`; **the derivation file's gate run by me** — exit 0, 0 failures, 2 warnings, 30 entries, 17 controls each firing;
+    its section headings read; its commit subjects read as the blind planner would see them — none carries a verdict. Not
+    checked by me yet: the drafts (read whole at the filing); the appended paragraphs in place. **Its held points, ruled.**
+    (1) **The blind planner's fence is extended to what this job wrote**, by an amendment to its brief and a content-free
+    message (done). (2) Rows 163 and 164 stay two — the pair's theorem and the strip's closed edge are cited for
+    different things. (3) The optional clause in the aim's fifth point is decided at the filing, with the kernel planner's
+    sentence. (4) G99 is filed as a reading, with its status line as drafted. (5) Its drafts' slots are re-asserted by its
+    script after the landing in flight has filed. **FS-124 is recorded; it is Derived when the filing is made — after the
+    landing in flight is back.**
+29. **FS124-K2, a mid-job message, still blind (15:54 UTC logged; its Amendment 1 read, none of the newly fenced files opened):
+    all nine statements are typed and elaborate, no statement defect so far, seven generalizations, and one step that is
+    not routine.** "I reach all nine by a route of my own, except the sector clause of C124-BOTH, which I reach only over
+    a plane-topology lemma." **Its generalizations**: measurability of the colouring is idle in all nine (the one lemma is
+    one Fubini slice read forwards — proved in its skeleton, 28 lines, any function, any label type); finiteness of the
+    labels idle in five; **the lemma on one piece and one side does not use that the point is one unit from the member**,
+    and it "is the one principle" — the centre's statement, collar by collar and whole, and the wide form at a crossing
+    are its instances; **the four statements that spend six do so in exactly one sentence — "every label is the label of
+    a piece of `x` or of a piece of `y`" — and hold from it at any finite number of labels**, the forcing for any two
+    families of pieces (the successor milestone's second claim, reached blind); a statement for each of the four regions
+    under the forcing; and the first clause of C124-BOTH finer: each member's fullness forces the *other* to separate.
+    **The step that is not routine**: the sector clause needs that each of three arcs from a disc's centre to its rim
+    borders exactly two of the three complementary components — "Jordan-grade; Mathlib has no Jordan curve theorem"; this
+    library's plane-topology module holds unicoherence, "from which I expect it follows, as a job of its own"; stated as
+    one leaf, no hypothesis added. **Models**: the four-labels statement's and C124-BOTH's hypotheses are satisfiable (a
+    unit square with three discs, by hand); at seven the forcing fails, as its not-claimed line says. **Ruling, sent**:
+    **(b)** — the sector clause is stated for what it consumes (a decomposition each of whose edges contains an arc from
+    the point), and "the list's sector point is one" is its own theorem over the one leaf, in a module of its own —
+    alternative (a): plan the lemma here; rejected for this job, it is Jordan-grade and the other statements do not read
+    it; **the lemma is owed as a kernel job by name** (Kooshi's word on dependencies), not waived; confidence medium-high.
+    Its two readings of the definitions match the claim list's words. **Relayed, labelled its own and unchecked, to the
+    successor's opening job** (in its brief): the forcing for any two families of pieces; the four-regions statement;
+    the two remarks on the one-piece lemma.
 

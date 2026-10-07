@@ -1357,3 +1357,23 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     the filing; why add it: the row's sentence should have a theorem that says it, the proof is a term it already holds,
     and the gate has not yet been run on the commit; confidence high. Its other two points go into the filing's words.
 
+50. **FS132-L2: the full gate is green and the landing is on `main` (15:54 UTC, read by me on `origin/main`) — the first
+    night's exclusion is held.** Its message: every step of the gate exit 0 on commit `b46a9d57`, the one planted
+    scan-difference control exit 1 as designed; **6,953 records — 6,910 clean, 20 axiom-free, 18 imported, 5 purchases**;
+    **the five theorems, the added four-point ring form among them, "on exactly the standard three"**; the vacuity scan —
+    `declarations=15292 refutations-skipped=226 sites=1447`, no new site; the assumptions' nine counts unmoved, three
+    conditions declared; no tracked file modified after the pass. Then `main`'s newer commits merged (commit `780225d8`;
+    its check commit `3ab61fcd`: "data/, plans/ and LEAN.md only") and a fast-forward push. **My receipt**: `origin/main`
+    holds the merge and its check commit; **on `main` now, read by me**: the thirteen modules of the exclusion (no
+    skeleton module among them), the nine ported modules beside the import, and a copy of the release's licence text;
+    `no_outside_orbit_points` and `not_ae_outside_points` in the assembly module; **no `sorry` in either folder** (my
+    search, comments and docstrings set aside); the gate's saved axioms log — "6910 clean, 20 axiom-free, 18 imported, 5
+    declared purchase(s)", exit 0 — and its self-test's — "every planted fault fired, and every partner passed". Not
+    checked by me yet: the other gate logs, the read-aloud, the three digests against the last landing's receipts — at
+    its hand-back, with its drafts. **By this milestone's announcement rule (2 (i))**: C132-M-ORBIT, C132-WIT-ORBIT,
+    C132-M-EXCL and C132-DIAG-WIDE **at the whole plane** are **held** — kernel-checked in this library on the standard
+    three axioms, with no assumption and no outside theorem beneath them, through the gate. **Not held**: their open-set
+    forms; the row's clause on an extracted centre; every other entry of last night's record. **The front page does not
+    say it yet**: the filing follows its hand-back (counts, row 155's grade, the theorem record's dated lines). My one
+    unpushed commit was rebased onto the landed line and pushed; nothing was forced.
+
