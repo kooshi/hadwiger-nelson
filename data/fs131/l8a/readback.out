@@ -1,0 +1,17 @@
+MATCH     plans/FS131-close-inventory.md:7012 (verbatim)  ::  569. **FS131-I8A done at its Stage 5: wave 8's empty class is proved — `emptyNS` and its s
+MATCH     plans/FS131-close-inventory.md:7074 (verbatim)  ::  572. **FS131-K8b done at its Stage 10: wave 8's second planning pass — nine semi-hub rows 
+MATCH     plans/FS131-close-inventory.md:7403 (verbatim)  ::  586. **FS131-I8B done: wave 8's join — the two branches merged, the shared lemmas proved, 
+MATCH     plans/FS131-close-inventory.md:7556 (verbatim)  ::  592. **FS131-I8D, by message mid-job: a statement defect — five statements of `SemiHubPlac
+MATCH     plans/FS131-close-inventory.md:7641 (verbatim)  ::  597. **FS131-I8C done: wave 8's `SemiHub` — all seventeen leaves proved as the planner sta
+MATCH     plans/FS131-close-inventory.md:7668 (verbatim)  ::  598. **FS131-I8D done: wave 8's `SemiHubPlaces` and `outerAdj` — all seven leaves proved; 
+MATCH     plans/FS131-close-inventory.md:7517 (verbatim)  ::  591. **FS131-LT5 done: the gate's step that lists what the library assumes is on `main` — 
+MATCH     /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:462 (verbatim)  ::  theorem emptyNS {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p
+MATCH     /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:564 (verbatim)  ::  theorem outerAdj {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers 
+MATCH     /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w8l/Proofs/HadwigerNelson/Plane/RingCalculus/Star.lean:399 (verbatim)  ::  theorem star_anti {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers
+MATCH     /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w8l/Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean:856 (verbatim)  ::  theorem ringArc_star (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hpd : p ∈ F.dom) (hS : F.
+MATCH     /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w8d/Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean:549 (verbatim)  ::  theorem semiHub_places (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1) {ψ :
+MATCH     CLAUDE.md:449 (verbatim, under § Trust ledger)  ::  as a set); the current audit reads 6304 clean and 5 declared purchases, and 8 imported (an
+MATCH     CLAUDE.md:455 (verbatim, under § Trust ledger)  ::  **What the library assumes, in both forms** (`scripts/assumptions.sh`, whose digest reads 
+MATCH     CLAUDE.md:514 (verbatim, under § The gate)  ::  `declarations=14501 refutations-skipped=199 sites=1269`, `vacuous=0 stale=0 declared=3 wit
+MATCH     plans/FS131-LT5-landing.md:488 (verbatim)  ::  > A wave that brings an assumption in hypothesis form — a named `Prop` standing for an out
+quotations=16 mismatched=0
