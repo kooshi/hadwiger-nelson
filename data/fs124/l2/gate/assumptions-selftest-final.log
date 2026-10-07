@@ -1,0 +1,42 @@
+slot: admitted assumptions.sh: mem 16 GiB (hard cap), cpus 0,1,2,3
+==> assumptions-self-test: this run's full output: build/gate/assumptions-self-test/20261007T204644Z-248355.log
+==> assumptions self-test: 21 controls, planted together in one copy of scripts/Assumptions.lean
+    control run: === SCANNED === constants=15128 theorems=11288 formers=386 hypotheses=19577 closed=1504 untelescoped=0
+    control run: === TOTALS === axioms=6 rests=27 named=36 inline=19 outside=12 ours=37 open=6 takes=126 mentions=3 produces=10 sites=33 conditions=43 declaredClosed=51 established=1437 premises=4 refuted=4 refutes=1 silent=3 derived=2 wrappers=3 cohyp=58 hints=0 unseen=17491 fails=26
+    ok    named_declared — a declared named hypothesis with its source, kind and consumer: the partner of every refusal below
+    ok    closed_undeclared — THE LOAD-BEARING ONE: a hypothesis nobody declared, written out in a binder, closed
+    ok    closed_site — the same proposition in the same place, declared as a site: silent
+    ok    parametric_unseen — the class the check cannot see: the same hypothesis over the theorem's own variable reads clean, and is counted
+    ok    closed_established — a closed hypothesis the library proves, directly and through a chain of closed steps
+    ok    closed_unestablished — a closed hypothesis whose only proof in the library is conditional, or rests on a closed step whose own hypothesis is unproved, is not established
+    ok    closed_refuted — the one closed hypothesis of a refutation is the claim refuted; two are not
+    ok    closed_premise — a closed premise declared not an assumption, with its reason; and one with no reason
+    ok    never_concluded — a former taken as a hypothesis and concluded by no theorem, in neither list
+    ok    concluded — a former some theorem concludes with no declared assumption is an ordinary predicate: silent
+    ok    condition — a never-concluded former declared a condition, printed with its reason; and a condition entry that is not needed
+    ok    by_docstring — a former whose docstring uses the library's words for an assumption, undeclared; and the same declared
+    ok    stale_declaration — a declared hypothesis that no theorem takes
+    ok    sources — no source; a source that is no key, row or id; a source its kind does not admit; three that do not resolve; and the partners that do
+    ok    ledger — a theorem that takes a declared hypothesis and is missing from its list; and a listed one the scan does not find
+    ok    shapes — every way a statement can take a declared hypothesis is found, and the ways it does not are not
+    ok    kind — a declared kind its docstring contradicts; a condition whose docstring calls it a hypothesis; a docstring that says nothing; a cited key that contradicts nothing
+    ok    discharged — a declared hypothesis a theorem proves in general is no longer an assumption; one proved at an instance still is
+    ok    derived_only — an undeclared former every proof of which takes a declared assumption
+    ok    axioms — the other form: an axiom with its source and the theorems resting on it; one unlisted; one with no source; one whose key is not in the bibliography
+    ok    bad_entries — an entry naming a theorem; a site with no such binder; a name declared twice; one label with two sources
+    ok    two-sided — every failure naming a planted name is one a control predicts
+    (the shipped list's own failures in this run, judged by the gate and not here: 0)
+    ok    accounting: the TOTALS line dropped (a scan that died before its end) — FAIL accounting, 'did not run to its end'
+    ok    accounting: one TAKES row dropped (rows that disagree with the totals) — FAIL accounting, 'TOTALS records takes='
+    ok    accounting: an untelescoped declaration — FAIL accounting, 'could not be telescoped'
+    ok    ledger: a missing ledger fails (FAIL ledger-missing), never a free pass
+    ok    digest match — exit 0, 'match (9 of 9 compared)'
+    ok    digest stale — exit 0, 'RECORDED COUNTS ARE STALE'
+    ok    digest absent — exit 3, 'RECORDED COUNTS ABSENT'
+    ok    digest absent-says-what-to-add — exit 3, 'Add the sentence that holds them: `axioms=6 rests=27 named=36 inline=19 outside=12 ours=37 open=6 takes=126 mentions=3`'
+    ok    digest partial — exit 3, 'could not read the counts'
+    ok    digest doubled — exit 3, 'recorded more than once'
+    ok    digest ledger-header — exit 0, 'RECORDED COUNTS ARE STALE in'
+==> assumptions self-test: OK — all 33 checks behaved: every planted fault fired, and every partner stayed silent.
+    full output: build/gate/assumptions-self-test/20261007T204644Z-248355.log
+exit=0

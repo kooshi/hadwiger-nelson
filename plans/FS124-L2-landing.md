@@ -514,3 +514,807 @@ past the commit merged at stage 2 — `data/` 10 paths, `plans/` 7, `.claude/` 1
 `RUNNING.md`**; merged by hash, automatic (`b585119d`), so that the commit the gate reads already holds it. The
 drafts' slots were read on `main` at that commit (`data/fs124/l2/drafts-slots.py`): 17 of 17 found exactly once, the
 control absent.
+
+## Stage 8 — SAVED (FS124-L2): the full gate on one commit — `da96003b` — green on its first pass
+
+One pass is every step in order, one at a time under the slot (`data/fs124/l2/run-gate.sh final`, launched from a
+snapshot copy; every log under `data/fs124/l2/gate/` with its exit status on its last line; `run-gate-final.head`
+records the commit and that no tracked file was modified at its start; `run-pass-final.out` holds every step's exit;
+20:30Z–20:49Z). **Every step exit 0 but the one planted control that must exit 1** (the scan difference's plants);
+"tracked files modified after the pass: 0". It is the **first** full pass of this job. Counts below are read from the
+saved logs.
+
+| step | result, read from its saved log (`data/fs124/l2/gate/`, tag `final`) | log |
+|---|---|---|
+| build | "build: OK — 481 of 481 batches, 2 module(s) rebuilt, **0 module(s) with warnings**, 8m59s" (the sector module and the root, recompiled from the text restored after the lint's control); lines holding "warning" in the build log: 1, that sentence; in Lake's full log: 0 | `build-final.log`, `receipt-build-final.log` |
+| `sorry` | narrow pattern over `Proofs/` and `Proofs.lean`: **0** lines; `\bsorry\b`: 24, all prose, `main`'s count. The plant: see "Stopped at" below | `sorry-narrow-final.txt`, `sorry-wide-final.txt` |
+| `axiom` lines in `Proofs/` | 4 line-initial, as on `main` (three axioms and one line of a docstring's code block). **The landing brings none** | `axiom-lines-final.txt` |
+| doubled names, after the build and before the audit | "dupnames: OK — no name is declared by two modules (24 generated on demand, listed above)"; its self-test "OK — all 15 controls behaved" | `dupnames-final.log`, `dupnames-selftest-final.log` |
+| every declaration in a block, before the audit | "declarations the landing brings: 405 (of 558 constants in 8 modules); with one line: 405; unfiled: 0; doubled: 0" | `unfiled-final.txt` |
+| axioms | "audited: **7420 records — 7364 clean on the standard axioms, 28 axiom-free, 23 imported** (resting on a declared outside theorem), **5 declared purchase(s)**"; "axioms: OK". `CLAUDE.md` § Trust ledger flagged stale, "6967 clean → 7364" (draft 1) | `axioms-final.log`, `receipt-axioms-final.log` |
+| its self-test | "axioms self-test: OK — every planted fault fired, and every partner passed." | `axioms-selftest-final.log` |
+| every declaration of the landing filed on what it rests on (`tools/fs124_l2_records.py`) | "records: PASS" — 405 records under CLEAN on the standard three or fewer; the twenty headline theorems each on exactly the three; over the whole log 23 under IMPORTED, none of the landing's, none carrying two imports, none `sorryAx` (the lines are stage 3's); "plants: every one of 12 fired; the unplanted lists pass" | `records-final.txt`, `records-plant-final.txt` |
+| the import's block with its two controls; the generated modules against the generator | "block: PASS — every record as filed; both controls fired"; "CHECK OK"; "SELF-TEST OK: 10 plants refused and 1 partner accepted" | `block-final.txt`, `port-check-final.txt`, `port-selftest-final.txt` |
+| vacuity | "scanned: **declarations=15928 refutations-skipped=228**"; "sites: **sites=1448 vacuous=0 stale=0 declared=3 witnessed=38 generic=1405 unknown=2**"; "vacuity: OK". Flagged stale, not failed: the baseline's header and `CLAUDE.md` § The gate ("declarations 15370 → 15928, refutations-skipped 226 → 228"; draft 3, and the header's refiling below) | `vacuity-final.log`, `receipt-vacuity-final.log` |
+| the scan against `main`'s, row for row | "by module: declarations +558, refutations +2: equal to the scans difference"; no row lost or added; "vacdiff: PASS"; its plants: exit 1, as they must | `vacdiff-final.txt`, `vacdiff-plant-final.txt` |
+| its self-test | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent." | `vacuity-selftest-final.log` |
+| assumptions | "assumptions: OK — 3 outside theorem(s) as axioms, with 23 theorem(s) resting on them; 19 named and 16 inline hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s) and mentioned by 1"; "assumed: **axioms=3 rests=23 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1**"; the ledger's header and `CLAUDE.md` § Trust ledger each "match (9 of 9 compared)"; its self-test "OK — all 33 checks behaved" | `assumptions-final.log`, `receipt-assumptions-final.log`, `assumptions-selftest-final.log` |
+| architecture | "RESULT: PASS" | `arch-final.txt` |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "(2/2) Passed!"; its control red before the pass (stage 7) | `lint-final.log`; `../lint-plant.log` |
+| notes, as the last landing ran them | "notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58", `main`'s count (the check reads QA4's modules, none of this landing's); "self-test: OK (6 controls, 1 planted)" | `notes-l5-final.txt`, `notes-qa4-selftest-final.txt` |
+| the import's and the port's stored-term comparisons, on the modules as recompiled in this tree | "declarations: 8 compared: 8 identical: 8 different: 0", "READ-BACK IDENTICAL: all 8 declarations, term for term, modulo the namespace", "READ-BACK RUN gate-final: OK"; "READBACK OK", "SELF-TEST OK: 13 plants refused, the unplanted pair passes", "PORT READ-BACK RUN gate-final: OK" | `readback-import-final.txt`, `readback-port-final.txt`; `../readback-import/`, `../readback-port/` |
+| the statements as stored, against the dump made before the merged build | "statements: PASS: no statement and no definition changed — 523 named constants compared in 8 module(s)"; "plants: every one of 4 fired" | `statements-final.txt`, `statements-plant-final.txt`, `statements-final.compact` |
+| the statements by `#check`, their axioms, the models | no error; 26 prints, every one `[propext, Classical.choice, Quot.sound]` — the twenty headline theorems and the six model terms | `checks-final.out` |
+| the baseline and the scans' sources | "baseline entries: unchanged from main's (2)"; lines of `scripts/Vacuity.lean` that differ from `main`'s: 0; of `scripts/Assumptions.lean`: 3 (the two `.condition` lines); of `scripts/axioms-controls.txt`: 0 | `baseline-final.txt` |
+| the three digests against the previous landing's receipts (`data/fs124/l1/gate/receipt-*-final.log`) | axioms: 405 rows added, none removed, every one CLEAN; vacuity: two counts move, no row added or removed; assumptions: nothing moves, "match (9 of 9 compared)" twice | `digest-axioms-final.txt`, `digest-vacuity-final.txt`, `digest-assumptions-final.txt` |
+
+**After the pass: the baseline header's two counts refiled** (my brief: "its header's count lines only, after the
+scan's final run"): one line of `scripts/vacuity-baseline.txt`, `declarations=15370 refutations-skipped=226
+sites=1448` → `declarations=15928 refutations-skipped=228 sites=1448`, from `scripts/gate_report.py header` on the
+final scan's receipt; no entry touched. **So the landed tree differs from the gated commit in that one line under
+`scripts/`**, and the one step that reads it was run again on the edited file — see "Stopped at".
+
+**Read aloud against the informal claim.** The claim of this landing: "nine statements about what an open region of
+one label forces one unit away in a weak colouring, and what a close complementary pair of three-piece points forces
+at a common unit point at six labels, with models of their hypotheses and the plane-topology lemma one clause rests
+on — each on the standard three axioms, none on an outside theorem." What the gate shows: no `axiom` enters and no
+`sorry` is in `Proofs/`; each of the 405 declarations the eight modules bring has one record under CLEAN on the
+standard three or fewer; no name is declared twice, so each printed list is the list of the proof the kernel
+checked; no theorem of the landing rests on a declared outside theorem or takes a declared hypothesis; no statement
+moved between the implementers' hand-backs and this commit. **What the gate does not show, and this record says**:
+that the hypotheses can be met — the scan has no site in 558 constants, and stage 5 names each model and how it is
+held; that every sentence of rows 162 and 163 is a theorem — sixteen entries are not, and stage 6 says which; that
+the θ-curve theorem is proved — one half is, for pieces given.
+
+## Drafts for the front page (FS124-L2)
+
+*For the coordinator to file; nothing here is filed by this job. Each names its slot — the file, the section, and **the
+exact words on `main` it replaces or follows**, read on `main` at `07290735` and each asserted to occur exactly once
+there (`data/fs124/l2/drafts-slots.py`, output `drafts-slots.out`: 17 of 17, the control absent) — and the log line it
+comes from. The gated commit is `da96003b16dfa1f9c833178dcba3e70186d681b1`; its logs are `data/fs124/l2/gate/*-final.*`
+(`receipt-axioms-final.log`, `receipt-vacuity-final.log`, `receipt-assumptions-final.log` are the three scans' full
+outputs).*
+
+**1. `CLAUDE.md` § Trust ledger, the audit's sentence.** *Replaces* "the current audit reads 6967 clean and 5 declared
+purchases, and 23 imported (and 20 axiom-free; 7,015 records at the landing of FS-124's disc criterion, FS124-L1,
+2026-10-07)" — from `axioms-final.log`, "audited: 7420 records — 7364 clean on the standard axioms, 28 axiom-free, 23
+imported (resting on a declared outside theorem), 5 declared purchase(s)":
+
+> the current audit reads 7364 clean and 5 declared purchases, and 23 imported (and 28 axiom-free; 7,420 records at the
+> landing of FS-124's second module, FS124-L2, 2026-10-07)
+
+6967 + 397 = 7364 and 20 + 8 = 28 (the landing's 405 records: 397 on a non-empty subset of the standard three — 393 on
+all three, 1 on `[propext, Quot.sound]`, 3 on `[propext]` — and 8 on no axiom: `records-final.txt`); 7015 + 405 = 7420;
+imported and purchases do not move, and the sentences on the three outside theorems stand as they are (eight, six and
+nine records; none of the landing's). **Fifty more records than my brief's count gives** (355): every declaration a
+person typed is filed, definitions and structures with the theorems (stage 3). Until it is filed the audit flags the
+sentence stale (not failed): "6967 clean → 7364".
+
+**2. `CLAUDE.md` § Trust ledger, the nine assumption counts: they stand.** "`axioms=3 rests=23 named=19 inline=16
+outside=7 ours=23 open=5 takes=98 mentions=1`" is this tree's line too (`receipt-assumptions-final.log`, `=== TOTALS
+===`; the digest: "match (9 of 9 compared)" in the ledger's header and in `CLAUDE.md`). No theorem of the eight modules
+rests on a declared outside theorem and none takes an assumption in hypothesis form; the ledger gains no row.
+`scripts/Assumptions.lean` gains two `.condition` lines (stage 4): `conditions=38 → 40`, which is not one of the nine.
+
+**3. `CLAUDE.md` § The gate, the vacuity scan's two count lines.** *Replaces* "`declarations=15370
+refutations-skipped=226 sites=1448`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1405 unknown=2`." — from
+`vacuity-final.log`, "scanned: declarations=15928 refutations-skipped=228", "sites: sites=1448 vacuous=0 stale=0
+declared=3 witnessed=38 generic=1405 unknown=2":
+
+> `declarations=15928 refutations-skipped=228 sites=1448`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1405 unknown=2`.
+
+Two counts move: declarations +558 (the landing's 558 constants) and refutations-skipped +2
+(`CircleSide.ball_antipode_subset_outside`, whose conclusion the scan reads through a complement, and
+`IsTriod.not_mem_closure_both_sides`, a step of a proof by contradiction; stage 5). No site is added. The sentences on
+the baseline's two entries stand; the baseline's header is refiled on the branch from this scan.
+
+**4. `tools/claude_md_fact_audit.py`, `GATE_CHANGES`** — one entry after the last (`(("6910", "5"), ("6967", "5")):`):
+
+```python
+    (("6967", "5"), ("7364", "5")): "FS-124, the landing of its second module — what a region of one label forces one unit away, and at a common unit point of a close complementary pair; the witnesses; the three-arcs lemma (FS124-L2; copy data/fs124/l2/gate/receipt-axioms-final.log, gated commit da96003b): 7,420 records, 7,364 clean, 28 axiom-free, 23 imported, 5 purchases",
+```
+
+and, in the same file's table of superseded counts, in that table's own form: `"6967"` (7364 clean), `"7,015"` (7,420
+records), "20 axiom-free" (28), `declarations=15370` (15928), `refutations-skipped=226` (228) — "superseded gate count,
+refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-axioms-final.log (the vacuity counts from
+receipt-vacuity-final.log); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES". The previous landing's
+receipts, against which the three digests were taken: `data/fs124/l1/gate/receipt-{axioms,vacuity,assumptions}-final.log`;
+**the next landing's previous receipts are `data/fs124/l2/gate/receipt-{axioms,vacuity,assumptions}-final.log`.**
+
+**5. `CLAUDE.md` § Paths forward, "Open milestones", and the same sentence in `plans/FRONTIER-STUBS.md`.** *Replaces*
+"its second is being planned; Closed when its modules pass the gate." *by*
+
+> its second is through the gate (FS124-L2, 2026-10-07; `Plane/CircleCrossing`, `OnePiece`, `ThreePiece`, `ClosePair`,
+> `ClosePairWitness`, `ClosePairModel`, `ThreeArcs`, `SectorPoint`; 340 theorems, each on the standard three axioms or
+> fewer, none on an outside theorem and none taking an assumption): what an open piece of one label forces one unit
+> away (`Plane.shadow_open`, `piece_type`, `centre_half`, `tight_centre`, `tight_straddle`), and what a close
+> complementary pair forces at a common unit point (`closePair_forced_pieces`, `closePair_lone`,
+> `closePair_both_separate`, `closePair_four`; `closePair_both_saved` for arc-edged decompositions and
+> `closePair_both_saved_of_isSector` in the claim list's words), the hypotheses inhabited by colourings given by formula
+> on three small discs and the number six shown needed by a control at seven. **The Lean phase is complete for every
+> statement a planner planned** — fourteen of the milestone's thirty entries are kernel theorems; the other sixteen have
+> no kernel job, need a held object's tiles, or are readings, and five of them were handed to the kernel lane and are
+> planned by nobody (C124-ANTIPODE, C124-SECOND, C124-SIX, C124-HALF, C124-FORCED's second sentence). Whether the
+> milestone is Closed on that is the coordinator's word.
+
+*Whether the milestone's Lean phase is then complete for every statement a planner planned*: **yes** — FS124-K1's five
+entries and the criterion (FS124-L1), FS124-K2's nine and FS124-K3's lemma with the bridge (this landing); no planned
+statement is left on a branch, and no `sorry` is left under FS-124.
+
+**6. `CLAUDE.md` § Where the problem stands, item 31's clause on rows 161–164.** Three replacements in the sentence
+beginning "At the unit arc itself":
+- *replaces* "At the unit arc itself (FS-124; rows 161–164; [hand], one mind each, kernel pending):" *by* "At the unit
+  arc itself (FS-124; rows 161–164; fourteen of its thirty entries [kernel], the rest [hand], one mind each):";
+- *replaces* "one tight pair forces nothing beyond its first step (row 162);" *by* "one tight pair forces nothing beyond
+  its first step (row 162; the lemma on an open piece and what it gives at a tight pair's centre and beside its far
+  end [kernel] since FS124-L2, the nothing-beyond by hand);";
+- *replaces* "and one member pays alone only where two of its pieces meet at it only (row 163);" *by* "and one member
+  pays alone only where two of its pieces meet at it only (row 163; [kernel] since FS124-L2 on pieces, for full
+  members, at four labels and for the lone member; for sector points through a three-arcs lemma proved here);".
+
+Row 164's clause stands. *What the clause may not say*: "[kernel]" of "one tight pair forces nothing beyond its first
+step" as a whole — that sentence rests on C124-KIND, C124-ANTIPODE and C124-OPEN, which have no Lean theorem.
+
+**7. `CLAUDE.md` § Paths forward, FS-136's paragraph.** *Replaces* "which is kernel-checked on a branch in FS-124's
+second module" *by* "which is a kernel theorem of FS-124's second module (`Plane/ClosePair`, through the gate since
+FS124-L2)" — `ae_onSide_of_label` is a record of the audit under CLEAN on the standard three (`receipt-axioms-final.log`).
+
+**8. `LEDGER.md` row 162.** *(a) Replaces* its grade sentence, "**Grade:** [hand] or derived from [hand] entries, one
+mind each, kernel pending; C124-SHADOW-OPEN, C124-TYPE, C124-CENTRE-HALF, C124-CENTRE and C124-STRADDLE are in the kernel
+lane's second module, being planned." — from `records-final.txt` and `checks-final.out` (the first implementer's draft,
+with the gate's words for "on a branch"):
+
+> **Grade:** C124-SHADOW-OPEN, C124-TYPE, C124-CENTRE-HALF, C124-CENTRE and C124-STRADDLE **[kernel]**, through the gate
+> (FS124-L2, 2026-10-07, gated commit `da96003b`; `Proofs/HadwigerNelson/Plane/OnePiece.lean` over
+> `CircleCrossing.lean`, namespace `HadwigerNelson.Plane`): `shadow_open`, `piece_type`, `centre_half`, `tight_centre`,
+> `tight_straddle`, each on `[propext, Classical.choice, Quot.sound]` and resting on no assumption — no declared outside
+> theorem, no hypothesis standing for a hand result; each is the corollary of a statement for any function proper at
+> almost every unit pair of `U`, at any label type (`AeProperOn.ae_unitShadow_ne`, `IsPieceAt.ae_ne_region`,
+> `AeProperOn.ae_ne_of_ae_region`, `IsTight.ae_ne_centre`, `IsTight.ae_ne_straddle`), and C124-TYPE holds at every
+> `w ∈ U`, with no hypothesis `|w − x| = 1`. Hypotheses inhabited in the kernel: a weak three-colouring of three discs
+> with a tight pair (`isWeakColouringOn_tightModel`, `isTight_tightModel`). **[hand] or derived from [hand] entries, one
+> mind each, with no Lean theorem:** C124-COMPLETION (the case of `tight_straddle` at a completion; not stated),
+> C124-ANTIPODE, C124-KIND, C124-SIX, and the readings by formula ([tools]).
+
+*(b) The row's address cell*: *add* "`Proofs/HadwigerNelson/Plane/CircleCrossing.lean`, `OnePiece.lean`;
+`plans/FS124-kernel-plan-2.md`, `plans/FS124-I2-implementation.md`, `plans/FS124-L2-landing.md`".
+
+**9. `LEDGER.md` row 163.** *(a) Replaces* its grade sentence, "**Grade:** [hand] or derived from [hand] entries, one
+mind each, kernel pending; **a second mind is owed on C124-LONE's Step II**, on which C124-BOTH, C124-FOUR and
+C124-SECOND rest (its deriver's line; the kernel lane's second module is that mind, blind first); one topological input
+of C124-FORCED is recalled, not read." — from `records-final.txt` and `checks-final.out` (the second and third
+implementers' drafts joined, the leaf closed):
+
+> **Grade:** C124-FORCED-PIECES, C124-LONE, C124-BOTH and C124-FOUR **[kernel]**, through the gate (FS124-L2,
+> 2026-10-07, gated commit `da96003b`; `Proofs/HadwigerNelson/Plane/` `ThreePiece`, `ClosePair`, `SectorPoint`,
+> `ThreeArcs`, namespace `HadwigerNelson.Plane`): `closePair_forced_pieces`, `closePair_lone`,
+> `closePair_both_separate`, `closePair_four`, and C124-BOTH's second sentence in two forms — `closePair_both_saved` for
+> decompositions each of whose edges contains an arc from the point, and `closePair_both_saved_of_isSector` in the
+> definition's own words, for sector points — each on `[propext, Classical.choice, Quot.sound]` and resting on no
+> assumption; each of the first four is the corollary at six labels of a statement at any label type from the one
+> hypothesis that every label is the label of a piece of `x` or of `y` (`ClosePair.separatesAt_or`,
+> `ClosePair.lone_of_cover`, `ClosePair.separatesAt_right_of_isFull`, `ClosePair.presentAt_eq`), which six distinct
+> labels among six give (`ClosePair.exists_label_eq`). **The topological input is a theorem of this library**:
+> `IsTriodCut.exists_opposite` (`Plane/ThreeArcs`) — for three open connected pairwise disjoint sets given as filling a
+> disc cut by three arcs from its centre, each arc borders exactly two and every two share one — from the plane's
+> unicoherence and the crossing lemma, with no Jordan curve theorem; that a cut disc has exactly three components is not
+> proved and not used (a sector point is given with its three pieces). **C124-LONE's Step II has its second mind, the
+> kernel** (`exists_isTight_of_ae_side`, `IsTight.closure_inter_closure_eq`,
+> `ThreePiece.exists_second_unit_point_of_ae_side`). Hypotheses inhabited in the kernel, by colourings of three discs of
+> radius 1/4 given by formula: `exists_closePair_not_separatesAt` (one member alone — C124-LONE-EXISTS's sentence, by
+> another witness than fragment S1), `exists_closePair_full` (both arc-edged, one piece of each kind),
+> `exists_closePair_sector` (both sector points); the number six is needed:
+> `exists_closePair_seven_not_separatesAt`. **[hand] or derived from [hand] entries, one mind each, with no Lean
+> theorem:** C124-FORCED (its first sentence follows from C124-BOTH's theorem; its second, tightness along the arc, is
+> stated in no module), C124-FORCED-AS-POSED, C124-SECOND, C124-HALF, C124-HALF-TWO, C124-FORCED-SEVEN, and the reading
+> of held objects ([tools]).
+
+*(b) The row's address cell*: *add* "`Proofs/HadwigerNelson/Plane/ThreePiece.lean`, `ClosePair.lean`,
+`ClosePairWitness.lean`, `ClosePairModel.lean`, `ThreeArcs.lean`, `SectorPoint.lean`; `plans/FS124-kernel-plan-2.md`,
+`plans/FS124-kernel-plan-3.md`, `plans/FS124-I3-implementation.md`, `plans/FS124-I4-implementation.md`,
+`plans/FS124-I5-implementation.md`, `plans/FS124-L2-landing.md`".
+
+*What the row may not say*: "[kernel]" of C124-FORCED or C124-SECOND; that a weak six-colouring of the plane, or of a
+disc of any given radius, has a close complementary pair (the witnesses are colourings of three small discs); that the
+θ-curve theorem is proved (one half is, for pieces given). `tools/check_architecture.py` lists (without failing) that
+row 163 names no identifier of `Plane/ClosePair`, `Plane/ClosePairModel`, `Plane/SectorPoint`: with (a) it names them.
+
+**10. `LEDGER.md` row 164: nothing of it lands.** *Replaces* "**Grade:** [hand] with an exact check, one mind, kernel
+pending; it rests on C124-TYPE and on no entry of row 163." *by*
+
+> **Grade:** [hand] with an exact check, one mind, with no Lean theorem (no kernel job: C124-EDGE-CLOSED needs the
+> strip's tiles and was handed off "only with a consumer"); it rests on C124-TYPE — a kernel theorem since FS124-L2
+> (`Plane.piece_type`) — and on no entry of row 163.
+
+**11. `plans/FS124-derivation.md` — the theorem record.** *(a) One dated line, placed once* (the entries' `grade:` and
+`minds:` fields are the coordinator's), for the nine entries marked "**Kernel**: second module":
+
+> **2026-10-07, FS124-L2 — [kernel], through the full gate at `da96003b`**: `HadwigerNelson.Plane.shadow_open`
+> (C124-SHADOW-OPEN), `piece_type` (-TYPE; at every `w ∈ U`), `centre_half` (-CENTRE-HALF), `tight_centre` (-CENTRE),
+> `tight_straddle` (-STRADDLE), `closePair_forced_pieces` (-FORCED-PIECES), `closePair_lone` (-LONE),
+> `closePair_both_separate` with `closePair_both_saved` and `closePair_both_saved_of_isSector` (-BOTH: the first
+> sentence; the second for arc-edged decompositions and, in the definition's words, for sector points),
+> `closePair_four` (-FOUR), each on `[propext, Classical.choice, Quot.sound]`, no assumption
+> (`Proofs/HadwigerNelson/Plane/OnePiece.lean`, `ClosePair.lean`, `SectorPoint.lean`; definitions `ThreePiece.lean`;
+> witnesses `ClosePairWitness.lean`, `ClosePairModel.lean`; the three-arcs lemma `ThreeArcs.lean`). Statements
+> FS124-K2's and FS124-K3's, proofs FS124-I2's, -I3's, -I4's and -I5's, landed by FS124-L2. Each entry's words are the
+> theorem named, read against it clause by clause (`plans/FS124-L2-landing.md` stage 6: no gap; "another" in
+> C124-FORCED-PIECES is a consequence, not a conjunct). Under them the modules prove the wider forms (any function
+> proper at almost every unit pair; any label type from the cover sentence), which are the modules' and not entries.
+> The other sixteen entries have no Lean theorem; C124-LONE-EXISTS's sentence is a kernel theorem by another witness
+> (`exists_closePair_not_separatesAt`).
+
+*(b) Replaces*, in the file's head, "nine entries (marked "second module") are being planned blind on branch
+`fs124-wk2`; the rest have no kernel job." *by* "nine entries (marked "second module") are kernel theorems through the
+gate (FS124-L2; eight modules, 340 theorems); the rest have no kernel job."
+
+*(c) C124-FORCED, `uses only:`* — the three-arcs planner's draft (`plans/FS124-kernel-plan-3.md` § 4.5), now due, its
+condition met through the gate. *Replaces* "(the θ-curve form of the Jordan–Schoenflies theorem: recalled, not read)"
+*by*
+
+> (`IsTriodCut.exists_opposite`, `Plane/ThreeArcs`: proved in this library from the unicoherence of the plane and the
+> crossing lemma, for three pieces given as filling the cut disc — the definition of a sector point gives them; that a
+> cut disc has three components is not proved and not used)
+
+and the same parenthesis where C124-BOTH's and C136-PARTNERS's entries cite "C124-FORCED's input" (the planner's
+words; I have not read C136-PARTNERS's entry).
+
+**12. `LEAN.md`.** *(a) § Searching — Lean*, *following* the bullet that ends "`LinearIsometryEquiv.measurePreserving` is
+in the closure (FS124-I1).": the lines the planners and implementers drafted and nobody has filed — each verbatim in
+its record, fifteen in all: `plans/FS124-I2-implementation.md` § 4.3 (three: `Complex.finrank_real_complex` and the
+import that is not a free edit; the statement dump before the first rebuild; `measure_eq_zero_iff_ae_notMem`);
+`plans/FS124-I3-implementation.md` § 3.3 (six: `decide +revert`; `zero_le` and `Set.sdiff_self`; `IsPreconnected.union`
+with anonymous constructors; a line given by its equation is null; an injective path on a circle contains an arc; a
+definition that holds proofs as fields moves its stored value); `plans/FS124-I4-implementation.md` § 4.5 item 7 (three:
+a lemma on a term built with proof arguments; `linarith` on products stated as `have`s; `Set.image_sdiff` and a
+definition downstream of its models); `plans/FS124-kernel-plan-3.md` § 4.5 (one: `unitInterval`'s instances, the
+unicoherent disc, `RimOrder.rotate`); `plans/FS124-I5-implementation.md` draft 7 (two: a filled skeleton's statements
+compared as stored; a copy under `data/` while a build walks). And one of this job's:
+
+> - A landing shows from the kernel's side that it changed no statement with one dump of every constant of its modules
+>   (stored type, a definition's stored value) made before the first build that recompiles them and one after the last
+>   (`data/fs124/l2/StatementDump.lean`, `tools/fs124_l2_statements.py`); a module the join had already recompiled is
+>   compared with its maker's last dump, and a module from another branch with a dump made in that branch's worktree
+>   (FS124-L2).
+
+*(b) § The gate*, the bullet on `./scripts/vacuity.sh`, *following* "(FS124-L1, its record's stage 6: seven, six,
+five).":
+
+> The count `refutations-skipped` holds statements that refute nothing: a conclusion that is an inclusion in a
+> complement (`⊆ (closedBall q 1)ᶜ`) is read through to `→ False` and the declaration skipped
+> (`CircleSide.ball_antipode_subset_outside`, FS124-L2); a landing reads each skipped declaration of its modules.
+
+*(c) § The gate*, the bullet on `./scripts/assumptions.sh`, at its end:
+
+> A structure of hypotheses that no library theorem concludes fails as `undeclared-never-concluded` even when every use
+> is a condition on the theorem's own variables: the module ships a theorem concluding it at its model, or the landing
+> declares a `.condition` and says that no declaration exhibits one (`Plane.IsTriod`, `Plane.IsTriodCut`, FS124-L2).
+
+**13. The Proof Atlas.** C124-SHADOW-OPEN, -TYPE, -CENTRE-HALF, -CENTRE, -STRADDLE (row 162) and C124-FORCED-PIECES,
+-LONE, -BOTH, -FOUR (row 163): **[hand] → [kernel]**, each on the standard three, no outside edge; each with its
+inhabitant named (the tight model; `lonePair`; `squarePair`). C124-BOTH's node carries both forms of its second
+sentence. The input of C124-FORCED cited as "the θ-curve form of the Jordan–Schoenflies theorem: recalled, not read"
+becomes a [kernel] node for the half used (`IsTriodCut.exists_opposite`: the incidence, given the three pieces); the
+count of components stays unproved and unused. C124-FORCED, C124-SECOND and the other fourteen: no grade moves.
+C124-LONE-EXISTS: its sentence is a kernel theorem by another witness — whether its node is regraded is the
+coordinator's. No value moves.
+
+**14. `ARCHITECTURE.md`**: nothing to file — § 3.13's second paragraph and its eight rows are on the branch as landed
+(stage 3).
+
+**15. `BIBLIOGRAPHY.md`**: nothing — the eight modules cite no outside work and rest on no import.
+
+## Open gate items at this landing
+
+1. **`IsTriod` and `IsTriodCut` are concluded by no library theorem.** They are declared to the assumptions step as
+   conditions (stage 4), and their satisfiability in the library is held only inside the bridge's proof; the model is
+   a term of this job's checks file (`FS124L2.model_triodCut`). A one-line theorem in `Plane/SectorPoint` — the
+   three-sector point's arcs and sectors are an `IsTriodCut`, from `sectorPoint_isSector` — would make both
+   declarations unnecessary. It is a statement, so not this job's.
+2. **Of the classical θ-curve fact one half is proved**: the incidence, for three pieces given as filling the cut
+   disc. That a disc cut by three arcs from its centre has exactly three components is proved nowhere and used
+   nowhere (a sector point is given with its pieces). A reader of "the θ-lemma" should find that sentence beside it:
+   it is in the module header, in the architecture file and in the drafted row.
+3. **`piece_type`'s second clause is run on no object** (the module's `example` runs the first: a piece with a point
+   inside `S(w)`). It is the first clause with the two sides exchanged, one core lemma for both
+   (`IsPieceAt.ae_ne_region`); no model with a point of the piece strictly outside `S(w)` is drawn.
+4. **Models that are terms of an iteration file, not library theorems**: `FS124L2.model_triodCut`,
+   `model_triodCut_arc`, `model_lone`, `model_sector`, `model_sector_full`, `model_tight`
+   (`data/fs124/l2/checks.lean`; the gate's pass elaborates them). The library's own models are the existence
+   theorems and the modules' `example`s.
+5. **The vacuity scan tracks no carrier of these modules**: 558 constants, no site. One of the two declarations it
+   skips as refutations refutes nothing (`CircleSide.ball_antipode_subset_outside`: an inclusion in a complement).
+   For the tooling job, beside the last three landings' questions. The notes check reads QA4's modules only: no
+   instrument reads the `Inhabitant` notes of the eight modules; stage 5 read them.
+6. **Sixteen of the milestone's thirty entries have no Lean theorem** (stage 6's table), five of them handed to the
+   kernel lane and planned by nobody: C124-ANTIPODE, C124-SECOND, C124-SIX, C124-HALF, C124-FORCED's second sentence.
+   C124-EVERY-DIRECTION stays as FS124-L1 left it.
+7. **C124-LONE-EXISTS's sentence is a kernel theorem by another witness** than the entry's (`lonePair`, not fragment
+   S1 with a band). Whether that regrades the entry is the coordinator's.
+8. **Whether a landing files its definitions is still practice, not a written rule.** This landing files every
+   declaration a person typed — 405 records, 65 of them definitions, structures and inductive types — where its
+   brief's count (the implementers' theorems, and definitions that hold proofs) gives 355. Three `congr_simp`
+   theorems the third implementer's block listed are not filed: Lean generates them on demand.
+9. **The record tools carry the filing of imported records**: `tools/fs124_l2_records.py` reads the twenty-three
+   from `tools/fs124_l1_records.py`. A later landing that files a record under IMPORTED extends the table, or the
+   tooling job makes one.
+10. **The witnesses are colourings of three discs of radius 1/4.** No statement of the eight modules says that a
+    weak six-colouring of the plane, or of a disc of any given radius, has a piece, a three-piece point or a close
+    complementary pair; row 163's "not claimed" line stands as written.
+
+
+## Theorems this phase proved, final
+
+*Each [kernel], through the full gate at `da96003b`. Printed from the gate's own logs
+(`data/fs124/l2/theorem-lines.py` on `gate/decls-final.out` and `gate/receipt-axioms-final.log`; output
+`data/fs124/l2/theorem-lines.md`): every declaration the landing brings — 340 theorems, 56 definitions, 9 structures
+and inductive types — with the banner its record is under and its axioms as the audit printed them. Namespace
+`HadwigerNelson.Plane`; modules under `Proofs/HadwigerNelson/`. Statements FS124-K2's and FS124-K3's; proofs
+FS124-I2's, -I3's, -I4's and -I5's; this job proved one leaf by the planner's two lines
+(`ThreePiece.IsSector.hasArcEdges`) and changed no statement. The informal statement each headline theorem was read
+against is in stage 6.*
+
+**The theorems the landing is for**, each under CLEAN on `[propext, Classical.choice, Quot.sound]`, no assumption in
+hypothesis form:
+
+- **`shadow_open`**, **`piece_type`**, **`centre_half`**, **`tight_centre`**, **`tight_straddle`**
+  (`Plane/OnePiece.lean`) — C124-SHADOW-OPEN, -TYPE, -CENTRE-HALF, -CENTRE, -STRADDLE; row 162.
+- **`closePair_forced_pieces`**, **`closePair_lone`**, **`closePair_both_separate`**, **`closePair_both_saved`**,
+  **`closePair_four`** (`Plane/ClosePair.lean`) — C124-FORCED-PIECES, -LONE, -BOTH (first sentence; second for
+  arc-edged decompositions), -FOUR; row 163.
+- **`closePair_both_saved_of_isSector`**, **`ThreePiece.IsSector.hasArcEdges`**, **`ThreePiece.IsSector.isFull`**
+  (`Plane/SectorPoint.lean`) — C124-BOTH's second sentence in the claim list's words, and the bridge.
+- **`IsTriodCut.exists_opposite`**, **`IsTriodCut.exists_arc`** (`Plane/ThreeArcs.lean`) — the three-arcs lemma:
+  "each of three arcs from the centre of a disc to its rim borders exactly two of the three complementary regions,
+  and every two regions share one", for three regions given as filling the cut disc.
+- **`exists_closePair_not_separatesAt`**, **`exists_closePair_full`**, **`exists_closePair_seven_not_separatesAt`**
+  (`Plane/ClosePairModel.lean`), **`exists_closePair_sector`**, **`sectorPoint_isSector`** (`Plane/SectorPoint.lean`)
+  — the hypotheses' inhabitants and the control at seven.
+
+**Every declaration, one line each:**
+
+**`Plane/CircleCrossing`** (38 declarations):
+
+- `CircleSide` — structure or inductive type; [kernel]; under CLEAN; axioms: []
+- `CircleSide.abs_sign` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.ball_antipode_subset_outside` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.disjoint_region_flip` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.flip` — definition; [kernel]; under CLEAN; axioms: []
+- `CircleSide.flip_flip` — theorem; [kernel]; under CLEAN; axioms: []
+- `CircleSide.flip_inside` — theorem; [kernel]; under CLEAN; axioms: []
+- `CircleSide.flip_outside` — theorem; [kernel]; under CLEAN; axioms: []
+- `CircleSide.isOpen_region` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.mem_region_comm` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.mem_region_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.mem_region_inside` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.mem_region_or_of_dist_ne` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.mem_region_outside` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.region` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.sign` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CircleSide.sign_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossAt` — structure or inductive type; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossAt.abs_inner_lt_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossAt.antipode` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossAt.exists_mem_quadrant` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossAt.exists_mem_sphere_inside` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossAt.exists_mem_sphere_region` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossAt.quadPt_mem_region_left` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossAt.quadPt_mem_region_right` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossAt.symm` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossAt.volume_quadrant_pos` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `abs_real_inner_lt_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `crossAt_of_dist_lt_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `crossAt_zero_one_add_I` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_quadPt_le` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_ball_inter_spheres_subset` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_convex_subset_region` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_dist_ne_of_isOpen` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `instDecidableEqCircleSide` — definition; [kernel]; under CLEAN; axioms: []
+- `norm_sq_quadrant` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `quadPt` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `quadrant_sign_pos` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+
+**`Plane/OnePiece`** (60 declarations):
+
+- `AeProperOn.ae_ne_of_ae_region` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `AeProperOn.ae_unitShadow_ne` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `CrossingAt` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `InnerAt` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `InnerAt.closure_inter_closure_subset` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsPieceAt` — structure or inductive type; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsPieceAt.ae_ne_of_crossingAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsPieceAt.ae_ne_region` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsPieceAt.ae_unitShadow_ne` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsPieceAt.disjoint` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsPieceAt.innerAt_self` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsPieceAt.inter_eq_empty` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsPieceAt.isConnected` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsPieceAt.nonempty` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTight` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTight.ae_ne_centre` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTight.ae_ne_straddle` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTightWith` — structure or inductive type; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTightWith.ae_innerCollar` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTightWith.ae_outerCollar` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTightWith.mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTightWith.mono` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `OnSide` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `OnSide.subset_region` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `OuterAt` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `centre_half` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `crossingAt_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `eq_empty_of_isOpen_of_ae` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `innerAt_or_outerAt_or_crossingAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `innerCollar` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isOpen_innerCollar` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isOpen_outerCollar` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isOpen_tightModelDom` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isOpen_unitShadow` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isTight_of_ae_of_isOpen` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isTight_tightModel` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isWeakColouringOn_tightModel` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `measurable_tightModel` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_unitShadow_iff_exists_e` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_unitShadow_of_isPreconnected` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `not_innerAt_and_outerAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `not_innerAt_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `not_onSide_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `not_outerAt_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `onSide_inside` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `onSide_of_subset_region` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `onSide_outside` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `outerCollar` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `piece_type` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `shadow_open` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `tightModel` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `tightModelDom` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `tightModel_eq_two_of_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `tightModel_far` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `tightModel_ne_two_of_lt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `tightModel_ne_two_of_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `tightModel_of_not_lt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `tight_centre` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `tight_straddle` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `unitShadow_mono` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+
+**`Plane/ThreePiece`** (72 declarations):
+
+- `HasUnitArcFrom` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `HasUnitArcFrom.mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `HasUnitArcFrom.mem_closure_diff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsThreePiecePoint` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece` — structure or inductive type; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.HasArcEdges` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.HasArcEdges.isFull` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.IsFull` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.OneOfEach` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.OneOfEach.eq_of_innerAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.OneOfEach.eq_of_outerAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.OneOfEach.separatesAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.Saves` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.SeparatesAt` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.ae_label_of_forall_onSide` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.ae_mem_piece` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.disjoint_piece` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.edge` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.edge_comm` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.edge_subset_sphere` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.hasUnitArcFrom_of_arc_subset_sphere` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.isConnected_piece` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.isPieceAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.mem_edge` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.not_separatesAt_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `combo_lt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `convex_petalSet_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `convex_petalSet_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `convex_sectorSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `convex_setOf_abs_re_lt_mul_im` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `convex_setOf_lt_mul_re` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_arc_of_ray_subset` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `fin_three_cases` — theorem; [kernel]; under CLEAN; axioms: [propext]
+- `isOpen_petalSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isOpen_sectorSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isPreconnected_petalSea` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isWeakColouringOn_ball_quarter` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `measurable_petalCol` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `measurable_sectorCol` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_ball_zero_of_abs_re_add_abs_im_lt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_ball_zero_of_sq_lt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_closure_inter_ball` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_closure_of_forall_add_ofReal_mul_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_closure_sectorSet_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_closure_sectorSet_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_closure_sectorSet_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_petalSet_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_petalSet_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_petalSet_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_sectorPoint_edge` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_sectorSet_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_sectorSet_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_sectorSet_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ofReal_mul_mem_ball_quarter` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `petalCol` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `petalCol_of_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `petalPoint` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `petalPoint_edge` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `petalPoint_not_isFull` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `petalSet` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorCol` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorCol_of_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorPoint` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorPoint_hasArcEdges` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorPoint_isFull` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorSet` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `volume_ball_diff_iUnion_petalSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `volume_ball_diff_iUnion_sectorSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `volume_setOf_re_im_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `zero_mem_closure_petalSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `zero_mem_closure_sectorSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+
+**`Plane/ClosePair`** (35 declarations):
+
+- `ClosePair` — structure or inductive type; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ClosePair.crossAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ClosePair.exists_label_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ClosePair.label_mem_presentAt_of_isFull_right` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ClosePair.lone_of_cover` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ClosePair.ncard_inner_outer` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ClosePair.presentAt_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ClosePair.separatesAt_or` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ClosePair.separatesAt_right_of_isFull` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ClosePair.symm` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsCommonUnitPoint` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsCommonUnitPoint.symm` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTight.closure_inter_closure_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.HasArcEdges.saves_of_separatesAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.exists_ne_not_onSide_of_ae_side` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.exists_second_unit_point_of_ae_side` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.not_isFull_of_ae_side` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ae_label_left_of_forall_not_onSide` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ae_onSide_of_label` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `closePair_both_saved` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `closePair_both_separate` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `closePair_forced_pieces` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `closePair_four` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `closePair_lone` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_inner_outer_of_cover` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_isCommonUnitPoint` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_isTight_of_ae_side` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_onSide_of_cover` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_perm_fin_three` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_presentAt_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_presentAt_of_ae_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `not_mem_presentAt_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `not_mem_presentAt_of_ae_ne` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `presentAt` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `presentAt_nonempty` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+
+**`Plane/ClosePairWitness`** (136 declarations):
+
+- `ThreePiece.ArcCut` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.ArcCut.of_image` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.ArcCut.sector` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.HasArcEdges.of_image` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.arcCut_of_radii` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.edge_eq_image` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.exists_eq_connectedComponentIn` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.oneOfEach_iff_of_image` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.separatesAt_iff_of_image` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.transport` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.transport_label` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.transport_nbhd` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.transport_piece` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `abs_re_sub_one_im_of_mem_ball_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `continuous_splitArc` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_le_one_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_lt_one_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_one_add_I_zero_lt_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_one_sub_I_one_add_I` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_one_sub_I_zero_lt_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_planeMotion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_planeMotion_symm` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_splitArc_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_splitArc_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_sq_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_zero_sq_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `half_le_dist_one_add_I_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `half_le_dist_one_add_I_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `half_le_dist_one_sub_I_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `half_le_dist_one_sub_I_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `innerAt_image_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isCommonUnitPoint_zero_one_add_I` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isCommonUnitPoint_zero_one_sub_I` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isOpen_splitSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isOpen_threeDisc` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isPreconnected_splitOuter` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isWeakColouringOn_loneCol` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isWeakColouringOn_pairCol` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isWeakColouringOn_sevenCol` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isWeakColouringOn_squareCol` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `labHi` — definition; [kernel]; under CLEAN; axioms: []
+- `labHi_injective` — theorem; [kernel]; under CLEAN; axioms: [propext]
+- `labLo` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `labLo_injective` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `labLo_ne_labHi` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `loneCol` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `lonePair` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `lonePair_right_not_separatesAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `loneW` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `measurable_splitCol` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `measurable_squareW` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `measurable_threeDiscCol` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `measurePreserving_planeMotion_symm` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_closure_splitSet_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_closure_splitSet_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_closure_splitSet_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_splitPoint_edge` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_splitSet_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_splitSet_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_splitSet_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `norm_sectorDir` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `one_le_dist_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `one_lt_dist_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `one_lt_dist_of_dist_lt_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `one_mem_threeDisc` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `outerAt_image_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `pairCol` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `petalCol_eq_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `petalCol_eq_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `petal_inner_lt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `petal_outer_gt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `planeMotion` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `planeMotion_apply` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `planeMotion_mem_ball` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `planeMotion_symm_apply` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `planeMotion_symm_mem_ball` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `quarterTurn_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `quarterTurn_symm_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `quarterTurn_symm_right` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `quarterTurn_symm_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `re_im_of_mem_ball_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `re_im_of_mem_ball_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorDir` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorPoint_arcCut` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorPoint_not_separatesAt_neg_I` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorPoint_not_separatesAt_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sevenCol` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sevenPair` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sevenPair_left_not_separatesAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sevenPair_right_not_separatesAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitArc` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitArc_im_nonpos` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitArc_mem_edge` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitArc_sq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitCol` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitCol_eq_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitCol_eq_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitCol_of_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitPoint` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitPoint_arcCut` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitPoint_hasArcEdges` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitPoint_oneOfEach` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitRadius` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `splitSet` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `split_inner_dist_lt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `split_inner_lt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `split_outer_dist_gt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `split_outer_gt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sq_lt_of_mem_ball_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sqrt_two_div_two_sq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `squareCol` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `squarePair` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `squarePair_left_arcCut` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `squarePair_left_hasArcEdges` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `squarePair_left_oneOfEach` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `squarePair_right_arcCut` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `squarePair_right_hasArcEdges` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `squarePair_right_oneOfEach` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `squareW` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDisc` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscCol` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscCol_of_mem_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscCol_of_mem_right` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscCol_of_mem_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscPair` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscPair_left_hasArcEdges` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscPair_left_oneOfEach_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscPair_left_piece` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscPair_left_separatesAt_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscPair_right_hasArcEdges` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscPair_right_oneOfEach_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscPair_right_piece` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDiscPair_right_separatesAt_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `threeDisc_aeProperOn` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `volume_ball_diff_iUnion_splitSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `zero_mem_closure_splitSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+
+**`Plane/ClosePairModel`** (3 declarations):
+
+- `exists_closePair_full` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_closePair_not_separatesAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_closePair_seven_not_separatesAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+
+**`Plane/ThreeArcs`** (55 declarations):
+
+- `IsTriod` — structure or inductive type; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.apply_mem_ball` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.apply_mem_closedBall` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.apply_one_eq_polarPt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.apply_one_mem_sphere` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.apply_one_ne` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.eq_apply_one_of_mem_sphere` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.eq_one_of_mem_sphere` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.exists_rimOrder` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.isPreconnected_iUnion_range` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.isPreconnected_image_Icc` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.isPreconnected_range_union_range` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.notMem_iUnion_range_of_mem_Ioo` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.not_mem_closure_both_sides` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.polarPt_mem_sphere` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriod.range_subset_of_isPreconnected` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut` — structure or inductive type; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.closure_inter_closure_inter_ball` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.closure_inter_closure_subset` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.closure_inter_nonempty` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.closure_piece_subset_closedBall` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.disjoint_iUnion_range` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.disjoint_range_union_range` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.eq_of_mem_of_mem_closure` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.exists_arc` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.exists_forall_rimArc` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.exists_mem_piece` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.exists_opposite` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.exists_range_subset` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.exists_rimPieces` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.exists_unique_mem_closure` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.isPreconnected_closure_inter` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.mem_closure` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.mem_diff_of_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.ne_of_rimOrder` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.piece_subset_ball` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsTriodCut.rimPiece_spec` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `RimOrder` — structure or inductive type; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `RimOrder.eq_or` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `RimOrder.rotate` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ballRetract` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ballRetract_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ballRetract_of_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ballRetract_of_mem_segment` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ballRetract_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `continuous_ballRetract` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_arc_range_subset_inter` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_ne_ne_fin_three` — theorem; [kernel]; under CLEAN; axioms: [propext, Quot.sound]
+- `fin_three_add_one_ne` — theorem; [kernel]; under CLEAN; axioms: [propext]
+- `fin_three_eq_or_of_ne` — theorem; [kernel]; under CLEAN; axioms: []
+- `isClosed_iUnion_range_arc` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isPreconnected_inter_halves` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isPreconnected_inter_of_union_eq_closedBall` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isPreconnected_preimage_ballRetract` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `polarPt_add_turn` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+
+**`Plane/SectorPoint`** (6 declarations):
+
+- `ThreePiece.IsSector` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.IsSector.hasArcEdges` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreePiece.IsSector.isFull` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `closePair_both_saved_of_isSector` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_closePair_sector` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `sectorPoint_isSector` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+
+## Slips, my own
+
+1. **A merge commit with Git's own subject** (stage 7): `b585119d`, "Merge commit '07290735…'", made with
+   `--no-edit` — no job name in its subject and no attribution lines. Its content is `main`'s commits and nothing
+   else; standing rule 6 forbids amending, so it stands. The two earlier merges carry subjects of mine.
+2. **Two commands printed far more than they were read for** — a `git diff` of the whole `Plane/` directory against
+   the as-given commit (it listed `main`'s thirteen modules too), and a `grep` over the per-declaration counter's
+   output. Nothing was written by either; they cost this job's reading budget, and the first is why stage 3's text
+   diff is by file.
+3. **A phrase in stage 5's table named the wrong `example`** ("the module's last"), corrected in the next commit
+   after reading the file.
+4. **The statement dump was taken after the join's first build**, which had already recompiled the sector module:
+   for that module and the three-arcs module the "before" is their makers' own dumps (stage 3 says so); for the
+   other six it is the compiled files as given.
+5. **Counts that differ from my brief's** are decisions, not slips, and were sent in the line before the push: 405
+   records for 355; two `.condition` declarations where the planners' records expected none.

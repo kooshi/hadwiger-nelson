@@ -1,0 +1,407 @@
+inductive HadwigerNelson.Plane.CircleSide : Type
+number of parameters: 0
+constructors:
+HadwigerNelson.Plane.CircleSide.inside : HadwigerNelson.Plane.CircleSide
+HadwigerNelson.Plane.CircleSide.outside : HadwigerNelson.Plane.CircleSide
+def HadwigerNelson.Plane.CircleSide.region : HadwigerNelson.Plane.CircleSide → ℂ → Set ℂ :=
+fun (σ : HadwigerNelson.Plane.CircleSide) (w : ℂ) =>
+  match σ with
+  | HadwigerNelson.Plane.CircleSide.inside => Metric.ball w (1 : ℝ)
+  | HadwigerNelson.Plane.CircleSide.outside => (Metric.closedBall w (1 : ℝ))ᶜ
+def HadwigerNelson.Plane.InnerAt : Set ℂ → ℂ → Prop :=
+fun (P : Set ℂ) (w : ℂ) => P ⊆ Metric.closedBall w (1 : ℝ)
+def HadwigerNelson.Plane.OuterAt : Set ℂ → ℂ → Prop :=
+fun (P : Set ℂ) (w : ℂ) => Disjoint P (Metric.ball w (1 : ℝ))
+def HadwigerNelson.Plane.CrossingAt : Set ℂ → ℂ → Prop :=
+fun (P : Set ℂ) (w : ℂ) => ¬HadwigerNelson.Plane.InnerAt P w ∧ ¬HadwigerNelson.Plane.OuterAt P w
+structure HadwigerNelson.Plane.IsPieceAt.{u_1} {α : Type u_1} (U : Set ℂ) (c : ℂ → α) (x : ℂ) (P : Set ℂ) (i : α) : Prop
+number of parameters: 6
+fields:
+  HadwigerNelson.Plane.IsPieceAt.isOpen : IsOpen P
+  HadwigerNelson.Plane.IsPieceAt.isPreconnected : IsPreconnected P
+  HadwigerNelson.Plane.IsPieceAt.subset : P ⊆ U
+  HadwigerNelson.Plane.IsPieceAt.mem_closure : x ∈ closure P
+  HadwigerNelson.Plane.IsPieceAt.ae_label : ∀ᵐ (z : ℂ), z ∈ P → c z = i
+constructor:
+  HadwigerNelson.Plane.IsPieceAt.mk.{u_1} {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ} {P : Set ℂ} {i : α}
+    (isOpen : IsOpen P) (isPreconnected : IsPreconnected P) (subset : P ⊆ U) (mem_closure : x ∈ closure P)
+    (ae_label : ∀ᵐ (z : ℂ), z ∈ P → c z = i) : HadwigerNelson.Plane.IsPieceAt U c x P i
+structure HadwigerNelson.Plane.IsTightWith.{u_1} {α : Type u_1} (U : Set ℂ) (c : ℂ → α) (q z : ℂ) (a b : α) (ρ : ℝ) :
+  Prop
+number of parameters: 8
+fields:
+  HadwigerNelson.Plane.IsTightWith.dist_eq : Dist.dist q z = (1 : ℝ)
+  HadwigerNelson.Plane.IsTightWith.ne : a ≠ b
+  HadwigerNelson.Plane.IsTightWith.pos : (0 : ℝ) < ρ
+  HadwigerNelson.Plane.IsTightWith.ball_subset : Metric.ball z ρ ⊆ U
+  HadwigerNelson.Plane.IsTightWith.ae_inside : ∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → Dist.dist w q < (1 : ℝ) → c w = a
+  HadwigerNelson.Plane.IsTightWith.ae_outside : ∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → (1 : ℝ) < Dist.dist w q → c w = b
+constructor:
+  HadwigerNelson.Plane.IsTightWith.mk.{u_1} {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {q z : ℂ} {a b : α} {ρ : ℝ}
+    (dist_eq : Dist.dist q z = (1 : ℝ)) (ne : a ≠ b) (pos : (0 : ℝ) < ρ) (ball_subset : Metric.ball z ρ ⊆ U)
+    (ae_inside : ∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → Dist.dist w q < (1 : ℝ) → c w = a)
+    (ae_outside : ∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → (1 : ℝ) < Dist.dist w q → c w = b) :
+    HadwigerNelson.Plane.IsTightWith U c q z a b ρ
+def HadwigerNelson.Plane.IsTight.{u_1} : {α : Type u_1} → Set ℂ → (ℂ → α) → ℂ → ℂ → α → α → Prop :=
+fun {α : Type u_1} (U : Set ℂ) (c : ℂ → α) (q z : ℂ) (a b : α) =>
+  ∃ (ρ : ℝ), HadwigerNelson.Plane.IsTightWith U c q z a b ρ
+structure HadwigerNelson.Plane.ThreePiece.{u_1} {α : Type u_1} (U : Set ℂ) (c : ℂ → α) (x : ℂ) : Type u_1
+number of parameters: 4
+fields:
+  HadwigerNelson.Plane.ThreePiece.nbhd : Set ℂ
+  HadwigerNelson.Plane.ThreePiece.piece : Fin (3 : ℕ) → Set ℂ
+  HadwigerNelson.Plane.ThreePiece.label : Fin (3 : ℕ) → α
+  HadwigerNelson.Plane.ThreePiece.nbhd_mem : self.nbhd ∈ 𝓝 x
+  HadwigerNelson.Plane.ThreePiece.nbhd_subset : self.nbhd ⊆ U
+  HadwigerNelson.Plane.ThreePiece.piece_subset : ∀ (i : Fin (3 : ℕ)), self.piece i ⊆ self.nbhd
+  HadwigerNelson.Plane.ThreePiece.isOpen_piece : ∀ (i : Fin (3 : ℕ)), IsOpen (self.piece i)
+  HadwigerNelson.Plane.ThreePiece.isPreconnected_piece : ∀ (i : Fin (3 : ℕ)), IsPreconnected (self.piece i)
+  HadwigerNelson.Plane.ThreePiece.mem_closure_piece : ∀ (i : Fin (3 : ℕ)), x ∈ closure (self.piece i)
+  HadwigerNelson.Plane.ThreePiece.ae_label : ∀ (i : Fin (3 : ℕ)), ∀ᵐ (z : ℂ), z ∈ self.piece i → c z = self.label i
+  HadwigerNelson.Plane.ThreePiece.label_injective : Function.Injective self.label
+  HadwigerNelson.Plane.ThreePiece.null_diff : MeasureTheory.MeasureSpace.volume
+        (self.nbhd \ ⋃ (i : Fin (3 : ℕ)), self.piece i) =
+      (0 : ENNReal)
+constructor:
+  HadwigerNelson.Plane.ThreePiece.mk.{u_1} {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ} (nbhd : Set ℂ)
+    (piece : Fin (3 : ℕ) → Set ℂ) (label : Fin (3 : ℕ) → α) (nbhd_mem : nbhd ∈ 𝓝 x) (nbhd_subset : nbhd ⊆ U)
+    (piece_subset : ∀ (i : Fin (3 : ℕ)), piece i ⊆ nbhd) (isOpen_piece : ∀ (i : Fin (3 : ℕ)), IsOpen (piece i))
+    (isPreconnected_piece : ∀ (i : Fin (3 : ℕ)), IsPreconnected (piece i))
+    (mem_closure_piece : ∀ (i : Fin (3 : ℕ)), x ∈ closure (piece i))
+    (ae_label : ∀ (i : Fin (3 : ℕ)), ∀ᵐ (z : ℂ), z ∈ piece i → c z = label i)
+    (label_injective : Function.Injective label)
+    (null_diff : MeasureTheory.MeasureSpace.volume (nbhd \ ⋃ (i : Fin (3 : ℕ)), piece i) = (0 : ENNReal)) :
+    HadwigerNelson.Plane.ThreePiece U c x
+def HadwigerNelson.Plane.ThreePiece.edge.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → HadwigerNelson.Plane.ThreePiece U c x → Fin (3 : ℕ) → Fin (3 : ℕ) → Set ℂ :=
+fun {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ} (D : HadwigerNelson.Plane.ThreePiece U c x) (i j : Fin (3 : ℕ)) =>
+  closure (D.piece i) ∩ closure (D.piece j) ∩ D.nbhd
+def HadwigerNelson.Plane.ThreePiece.SeparatesAt.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → HadwigerNelson.Plane.ThreePiece U c x → ℂ → Prop :=
+fun {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ} (D : HadwigerNelson.Plane.ThreePiece U c x) (w : ℂ) =>
+  ∃ (i : Fin (3 : ℕ)) (j : Fin (3 : ℕ)),
+    HadwigerNelson.Plane.InnerAt (D.piece i) w ∧ HadwigerNelson.Plane.OuterAt (D.piece j) w
+def HadwigerNelson.Plane.ThreePiece.OneOfEach.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → HadwigerNelson.Plane.ThreePiece U c x → ℂ → Equiv.Perm (Fin (3 : ℕ)) → Prop :=
+fun {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ} (D : HadwigerNelson.Plane.ThreePiece U c x) (w : ℂ)
+    (σ : Equiv.Perm (Fin (3 : ℕ))) =>
+  HadwigerNelson.Plane.InnerAt (D.piece (σ (0 : Fin (3 : ℕ)))) w ∧
+    HadwigerNelson.Plane.OuterAt (D.piece (σ (1 : Fin (3 : ℕ)))) w ∧
+      HadwigerNelson.Plane.CrossingAt (D.piece (σ (2 : Fin (3 : ℕ)))) w
+def HadwigerNelson.Plane.ThreePiece.IsFull.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → HadwigerNelson.Plane.ThreePiece U c x → Prop :=
+fun {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ} (D : HadwigerNelson.Plane.ThreePiece U c x) =>
+  ∀ (i j : Fin (3 : ℕ)), i ≠ j → x ∈ closure (D.edge i j \ {x})
+def HadwigerNelson.Plane.HasUnitArcFrom : Set ℂ → ℂ → ℂ → Prop :=
+fun (E : Set ℂ) (w x : ℂ) =>
+  ∃ (s : ℝ),
+    (s = (1 : ℝ) ∨ s = (-1 : ℝ)) ∧
+      ∃ δ > (0 : ℝ), ∀ t ∈ Set.Icc (0 : ℝ) δ, w + (x - w) * HadwigerNelson.Plane.e (s * t) ∈ E
+def HadwigerNelson.Plane.ThreePiece.Saves.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → HadwigerNelson.Plane.ThreePiece U c x → ℂ → Prop :=
+fun {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ} (D : HadwigerNelson.Plane.ThreePiece U c x) (w : ℂ) =>
+  ∃ (i : Fin (3 : ℕ)) (j : Fin (3 : ℕ)), i ≠ j ∧ HadwigerNelson.Plane.HasUnitArcFrom (D.edge i j) w x
+def HadwigerNelson.Plane.ThreePiece.HasArcEdges.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → HadwigerNelson.Plane.ThreePiece U c x → Prop :=
+fun {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ} (D : HadwigerNelson.Plane.ThreePiece U c x) =>
+  ∀ (i j : Fin (3 : ℕ)),
+    i ≠ j → ∃ (γ : C(↑unitInterval, ℂ)), Function.Injective ⇑γ ∧ γ (0 : ↑unitInterval) = x ∧ Set.range ⇑γ ⊆ D.edge i j
+def HadwigerNelson.Plane.ThreePiece.IsSector.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → HadwigerNelson.Plane.ThreePiece U c x → Prop :=
+fun {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ} (D : HadwigerNelson.Plane.ThreePiece U c x) =>
+  ∃ r > (0 : ℝ),
+    ∃ (J : Fin (3 : ℕ) → C(↑unitInterval, ℂ)),
+      (∀ (m : Fin (3 : ℕ)), Function.Injective ⇑(J m)) ∧
+        (∀ (m : Fin (3 : ℕ)), (J m) (0 : ↑unitInterval) = x) ∧
+          (∀ (m : Fin (3 : ℕ)), Dist.dist ((J m) (1 : ↑unitInterval)) x = r) ∧
+            (∀ (m : Fin (3 : ℕ)) (t : ↑unitInterval), t ≠ (1 : ↑unitInterval) → Dist.dist ((J m) t) x < r) ∧
+              (∀ (m m' : Fin (3 : ℕ)) (s t : ↑unitInterval), m ≠ m' → (J m) s = (J m') t → (J m) s = x) ∧
+                (∀ (i : Fin (3 : ℕ)),
+                    ∃ z ∈ D.piece i,
+                      D.piece i = connectedComponentIn (Metric.ball x r \ ⋃ (m : Fin (3 : ℕ)), Set.range ⇑(J m)) z) ∧
+                  ⋃ (i : Fin (3 : ℕ)), D.piece i = Metric.ball x r \ ⋃ (m : Fin (3 : ℕ)), Set.range ⇑(J m)
+structure HadwigerNelson.Plane.ClosePair.{u_1} {α : Type u_1} (U : Set ℂ) (c : ℂ → α) (x y : ℂ) : Type u_1
+number of parameters: 5
+fields:
+  HadwigerNelson.Plane.ClosePair.left : HadwigerNelson.Plane.ThreePiece U c x
+  HadwigerNelson.Plane.ClosePair.right : HadwigerNelson.Plane.ThreePiece U c y
+  HadwigerNelson.Plane.ClosePair.ne : x ≠ y
+  HadwigerNelson.Plane.ClosePair.dist_lt : Dist.dist x y < (2 : ℝ)
+  HadwigerNelson.Plane.ClosePair.label_ne : ∀ (i j : Fin (3 : ℕ)), self.left.label i ≠ self.right.label j
+constructor:
+  HadwigerNelson.Plane.ClosePair.mk.{u_1} {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x y : ℂ}
+    (left : HadwigerNelson.Plane.ThreePiece U c x) (right : HadwigerNelson.Plane.ThreePiece U c y) (ne : x ≠ y)
+    (dist_lt : Dist.dist x y < (2 : ℝ)) (label_ne : ∀ (i j : Fin (3 : ℕ)), left.label i ≠ right.label j) :
+    HadwigerNelson.Plane.ClosePair U c x y
+def HadwigerNelson.Plane.IsCommonUnitPoint : ℂ → ℂ → ℂ → Prop :=
+fun (x y w : ℂ) => Dist.dist w x = (1 : ℝ) ∧ Dist.dist w y = (1 : ℝ)
+def HadwigerNelson.Plane.presentAt.{u_1} : {α : Type u_1} → Set ℂ → (ℂ → α) → ℂ → Set α :=
+fun {α : Type u_1} (U : Set ℂ) (c : ℂ → α) (w : ℂ) => {i : α | w ∈ HadwigerNelson.Plane.essSupport (U ∩ c ⁻¹' {i})}
+structure HadwigerNelson.Plane.IsTriod (x : ℂ) (r : ℝ) (J : Fin (3 : ℕ) → C(↑unitInterval, ℂ)) : Prop
+number of parameters: 3
+fields:
+  HadwigerNelson.Plane.IsTriod.pos : (0 : ℝ) < r
+  HadwigerNelson.Plane.IsTriod.injective : ∀ (m : Fin (3 : ℕ)), Function.Injective ⇑(J m)
+  HadwigerNelson.Plane.IsTriod.apply_zero : ∀ (m : Fin (3 : ℕ)), (J m) (0 : ↑unitInterval) = x
+  HadwigerNelson.Plane.IsTriod.dist_apply_one : ∀ (m : Fin (3 : ℕ)), Dist.dist ((J m) (1 : ↑unitInterval)) x = r
+  HadwigerNelson.Plane.IsTriod.dist_lt : ∀ (m : Fin (3 : ℕ)) (t : ↑unitInterval),
+      t ≠ (1 : ↑unitInterval) → Dist.dist ((J m) t) x < r
+  HadwigerNelson.Plane.IsTriod.eq_center_of_ne : ∀ (m m' : Fin (3 : ℕ)) (s t : ↑unitInterval),
+      m ≠ m' → (J m) s = (J m') t → (J m) s = x
+constructor:
+  HadwigerNelson.Plane.IsTriod.mk {x : ℂ} {r : ℝ} {J : Fin (3 : ℕ) → C(↑unitInterval, ℂ)} (pos : (0 : ℝ) < r)
+    (injective : ∀ (m : Fin (3 : ℕ)), Function.Injective ⇑(J m))
+    (apply_zero : ∀ (m : Fin (3 : ℕ)), (J m) (0 : ↑unitInterval) = x)
+    (dist_apply_one : ∀ (m : Fin (3 : ℕ)), Dist.dist ((J m) (1 : ↑unitInterval)) x = r)
+    (dist_lt : ∀ (m : Fin (3 : ℕ)) (t : ↑unitInterval), t ≠ (1 : ↑unitInterval) → Dist.dist ((J m) t) x < r)
+    (eq_center_of_ne : ∀ (m m' : Fin (3 : ℕ)) (s t : ↑unitInterval), m ≠ m' → (J m) s = (J m') t → (J m) s = x) :
+    HadwigerNelson.Plane.IsTriod x r J
+structure HadwigerNelson.Plane.IsTriodCut (x : ℂ) (r : ℝ) (J : Fin (3 : ℕ) → C(↑unitInterval, ℂ))
+  (P : Fin (3 : ℕ) → Set ℂ) : Prop
+number of parameters: 4
+parents:
+  HadwigerNelson.Plane.IsTriodCut.toIsTriod : HadwigerNelson.Plane.IsTriod x r J
+fields:
+  HadwigerNelson.Plane.IsTriod.pos : (0 : ℝ) < r
+  HadwigerNelson.Plane.IsTriod.injective : ∀ (m : Fin (3 : ℕ)), Function.Injective ⇑(J m)
+  HadwigerNelson.Plane.IsTriod.apply_zero : ∀ (m : Fin (3 : ℕ)), (J m) (0 : ↑unitInterval) = x
+  HadwigerNelson.Plane.IsTriod.dist_apply_one : ∀ (m : Fin (3 : ℕ)), Dist.dist ((J m) (1 : ↑unitInterval)) x = r
+  HadwigerNelson.Plane.IsTriod.dist_lt : ∀ (m : Fin (3 : ℕ)) (t : ↑unitInterval),
+      t ≠ (1 : ↑unitInterval) → Dist.dist ((J m) t) x < r
+  HadwigerNelson.Plane.IsTriod.eq_center_of_ne : ∀ (m m' : Fin (3 : ℕ)) (s t : ↑unitInterval),
+      m ≠ m' → (J m) s = (J m') t → (J m) s = x
+  HadwigerNelson.Plane.IsTriodCut.isOpen : ∀ (i : Fin (3 : ℕ)), IsOpen (P i)
+  HadwigerNelson.Plane.IsTriodCut.isPreconnected : ∀ (i : Fin (3 : ℕ)), IsPreconnected (P i)
+  HadwigerNelson.Plane.IsTriodCut.disjoint : ∀ (i j : Fin (3 : ℕ)), i ≠ j → Disjoint (P i) (P j)
+  HadwigerNelson.Plane.IsTriodCut.iUnion_eq : ⋃ (i : Fin (3 : ℕ)), P i =
+      Metric.ball x r \ ⋃ (m : Fin (3 : ℕ)), Set.range ⇑(J m)
+constructor:
+  HadwigerNelson.Plane.IsTriodCut.mk {x : ℂ} {r : ℝ} {J : Fin (3 : ℕ) → C(↑unitInterval, ℂ)} {P : Fin (3 : ℕ) → Set ℂ}
+    (toIsTriod : HadwigerNelson.Plane.IsTriod x r J) (isOpen : ∀ (i : Fin (3 : ℕ)), IsOpen (P i))
+    (isPreconnected : ∀ (i : Fin (3 : ℕ)), IsPreconnected (P i))
+    (disjoint : ∀ (i j : Fin (3 : ℕ)), i ≠ j → Disjoint (P i) (P j))
+    (iUnion_eq : ⋃ (i : Fin (3 : ℕ)), P i = Metric.ball x r \ ⋃ (m : Fin (3 : ℕ)), Set.range ⇑(J m)) :
+    HadwigerNelson.Plane.IsTriodCut x r J P
+field notation resolution order:
+  HadwigerNelson.Plane.IsTriodCut, HadwigerNelson.Plane.IsTriod
+@HadwigerNelson.Plane.shadow_open : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {W : Set ℂ},
+        IsOpen W →
+          W ⊆ U →
+            ∀ {i : Fin k},
+              (∀ᵐ (z : ℂ), z ∈ W → c z = i) →
+                IsOpen (U ∩ HadwigerNelson.Plane.unitShadow W) ∧
+                  ∀ᵐ (z : ℂ), z ∈ U ∩ HadwigerNelson.Plane.unitShadow W → c z ≠ i
+@HadwigerNelson.Plane.piece_type : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {P : Set ℂ},
+        IsOpen P →
+          IsConnected P →
+            P ⊆ U →
+              ∀ {i : Fin k},
+                (∀ᵐ (z : ℂ), z ∈ P → c z = i) →
+                  ∀ {x w : ℂ},
+                    x ∈ closure P →
+                      w ∈ U →
+                        ((∃ y ∈ P, Dist.dist y w < (1 : ℝ)) →
+                            ∃ η > (0 : ℝ), ∀ᵐ (z : ℂ), z ∈ Metric.ball w η → (1 : ℝ) < Dist.dist z x → c z ≠ i) ∧
+                          ((∃ y ∈ P, (1 : ℝ) < Dist.dist y w) →
+                            ∃ η > (0 : ℝ), ∀ᵐ (z : ℂ), z ∈ Metric.ball w η → Dist.dist z x < (1 : ℝ) → c z ≠ i)
+@HadwigerNelson.Plane.centre_half : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {q z : ℂ},
+        q ∈ U →
+          Dist.dist q z = (1 : ℝ) →
+            ∀ {ρ : ℝ},
+              (0 : ℝ) < ρ →
+                Metric.ball z ρ ⊆ U →
+                  ∀ (a : Fin k),
+                    ((∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → Dist.dist w q < (1 : ℝ) → c w = a) →
+                        ∃ η > (0 : ℝ), ∀ᵐ (p : ℂ), p ∈ Metric.ball q η → (1 : ℝ) < Dist.dist p z → c p ≠ a) ∧
+                      ((∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → (1 : ℝ) < Dist.dist w q → c w = a) →
+                        ∃ η > (0 : ℝ), ∀ᵐ (p : ℂ), p ∈ Metric.ball q η → Dist.dist p z < (1 : ℝ) → c p ≠ a)
+@HadwigerNelson.Plane.tight_centre : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {q z : ℂ},
+        q ∈ U →
+          ∀ {a b : Fin k},
+            HadwigerNelson.Plane.IsTight U c q z a b →
+              ∃ η > (0 : ℝ),
+                (∀ᵐ (w : ℂ), w ∈ Metric.ball q η → (1 : ℝ) < Dist.dist w z → c w ≠ a) ∧
+                  ∀ᵐ (w : ℂ), w ∈ Metric.ball q η → Dist.dist w z < (1 : ℝ) → c w ≠ b
+@HadwigerNelson.Plane.tight_straddle : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {q z : ℂ} {a b : Fin k},
+        HadwigerNelson.Plane.IsTight U c q z a b →
+          ∀ {p : ℂ},
+            p ∈ U →
+              Dist.dist p z = (1 : ℝ) →
+                p ≠ q → p ≠ (2 : ℂ) * z - q → ∃ η > (0 : ℝ), ∀ᵐ (w : ℂ), w ∈ Metric.ball p η → c w ≠ a ∧ c w ≠ b
+@HadwigerNelson.Plane.closePair_forced_pieces : ∀ {U : Set ℂ} {c : ℂ → Fin (6 : ℕ)},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : HadwigerNelson.Plane.ClosePair U c x y),
+        w ∈ U →
+          HadwigerNelson.Plane.IsCommonUnitPoint x y w →
+            (∃ (i : Fin (3 : ℕ)) (j : Fin (3 : ℕ)),
+                HadwigerNelson.Plane.InnerAt (C.left.piece i) w ∧
+                  HadwigerNelson.Plane.OuterAt (C.left.piece j) w ∧ C.left.edge i j ⊆ Metric.sphere w (1 : ℝ)) ∨
+              ∃ (i : Fin (3 : ℕ)) (j : Fin (3 : ℕ)),
+                HadwigerNelson.Plane.InnerAt (C.right.piece i) w ∧
+                  HadwigerNelson.Plane.OuterAt (C.right.piece j) w ∧ C.right.edge i j ⊆ Metric.sphere w (1 : ℝ)
+@HadwigerNelson.Plane.closePair_lone : ∀ {U : Set ℂ} {c : ℂ → Fin (6 : ℕ)},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : HadwigerNelson.Plane.ClosePair U c x y),
+        w ∈ U →
+          HadwigerNelson.Plane.IsCommonUnitPoint x y w →
+            ¬C.right.SeparatesAt w →
+              ∃ (σ : Equiv.Perm (Fin (3 : ℕ))),
+                C.left.OneOfEach w σ ∧
+                  (∃ (τ : HadwigerNelson.Plane.CircleSide),
+                      ∃ η > (0 : ℝ),
+                        (∀ᵐ (z : ℂ),
+                            z ∈ Metric.ball w η →
+                              z ∈ τ.region y → Dist.dist z x < (1 : ℝ) → c z = C.left.label (σ (0 : Fin (3 : ℕ)))) ∧
+                          ∀ᵐ (z : ℂ),
+                            z ∈ Metric.ball w η →
+                              z ∈ τ.region y → (1 : ℝ) < Dist.dist z x → c z = C.left.label (σ (1 : Fin (3 : ℕ)))) ∧
+                    ∃ w' ∈ Metric.sphere x (1 : ℝ),
+                      w' ≠ w ∧
+                        ∃ η' > (0 : ℝ),
+                          C.left.piece (σ (0 : Fin (3 : ℕ))) ∩ Metric.ball x η' ⊆
+                              Metric.closedBall w (1 : ℝ) ∩ Metric.closedBall w' (1 : ℝ) ∧
+                            Disjoint (C.left.piece (σ (1 : Fin (3 : ℕ))) ∩ Metric.ball x η')
+                                (Metric.ball w (1 : ℝ) ∪ Metric.ball w' (1 : ℝ)) ∧
+                              closure (C.left.piece (σ (0 : Fin (3 : ℕ)))) ∩
+                                    closure (C.left.piece (σ (1 : Fin (3 : ℕ)))) ∩
+                                  Metric.ball x η' =
+                                {x}
+@HadwigerNelson.Plane.closePair_both_separate : ∀ {U : Set ℂ} {c : ℂ → Fin (6 : ℕ)},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : HadwigerNelson.Plane.ClosePair U c x y),
+        w ∈ U →
+          HadwigerNelson.Plane.IsCommonUnitPoint x y w →
+            C.left.IsFull → C.right.IsFull → C.left.SeparatesAt w ∧ C.right.SeparatesAt w
+@HadwigerNelson.Plane.closePair_both_saved : ∀ {U : Set ℂ} {c : ℂ → Fin (6 : ℕ)},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : HadwigerNelson.Plane.ClosePair U c x y),
+        w ∈ U →
+          HadwigerNelson.Plane.IsCommonUnitPoint x y w →
+            C.left.HasArcEdges → C.right.HasArcEdges → C.left.Saves w ∧ C.right.Saves w
+@HadwigerNelson.Plane.closePair_four : ∀ {U : Set ℂ} {c : ℂ → Fin (6 : ℕ)},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : HadwigerNelson.Plane.ClosePair U c x y),
+        w ∈ U →
+          HadwigerNelson.Plane.IsCommonUnitPoint x y w →
+            C.left.IsFull →
+              C.right.IsFull →
+                ∀ {σ τ : Equiv.Perm (Fin (3 : ℕ))},
+                  C.left.OneOfEach w σ →
+                    C.right.OneOfEach w τ →
+                      HadwigerNelson.Plane.presentAt U c w =
+                          {C.left.label (σ (0 : Fin (3 : ℕ))), C.left.label (σ (1 : Fin (3 : ℕ))),
+                            C.right.label (τ (0 : Fin (3 : ℕ))), C.right.label (τ (1 : Fin (3 : ℕ)))} ∧
+                        (HadwigerNelson.Plane.presentAt U c w).ncard = (4 : ℕ)
+@HadwigerNelson.Plane.closePair_both_saved_of_isSector : ∀ {U : Set ℂ} {c : ℂ → Fin (6 : ℕ)},
+  IsOpen U →
+    HadwigerNelson.Plane.IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : HadwigerNelson.Plane.ClosePair U c x y),
+        w ∈ U →
+          HadwigerNelson.Plane.IsCommonUnitPoint x y w →
+            C.left.IsSector → C.right.IsSector → C.left.Saves w ∧ C.right.Saves w
+@HadwigerNelson.Plane.ThreePiece.IsSector.hasArcEdges : ∀ {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ}
+  {D : HadwigerNelson.Plane.ThreePiece U c x}, D.IsSector → D.HasArcEdges
+@HadwigerNelson.Plane.ThreePiece.IsSector.isFull : ∀ {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ}
+  {D : HadwigerNelson.Plane.ThreePiece U c x}, D.IsSector → D.IsFull
+@HadwigerNelson.Plane.IsTriodCut.exists_opposite : ∀ {x : ℂ} {r : ℝ} {J : Fin (3 : ℕ) → C(↑unitInterval, ℂ)}
+  {P : Fin (3 : ℕ) → Set ℂ},
+  HadwigerNelson.Plane.IsTriodCut x r J P →
+    ∃ (opp : Equiv.Perm (Fin (3 : ℕ))),
+      (∀ (m i : Fin (3 : ℕ)), i ≠ opp m → Set.range ⇑(J m) ⊆ closure (P i)) ∧
+        ∀ (m : Fin (3 : ℕ)), closure (P (opp m)) ∩ Set.range ⇑(J m) = {x}
+@HadwigerNelson.Plane.IsTriodCut.exists_arc : ∀ {x : ℂ} {r : ℝ} {J : Fin (3 : ℕ) → C(↑unitInterval, ℂ)}
+  {P : Fin (3 : ℕ) → Set ℂ},
+  HadwigerNelson.Plane.IsTriodCut x r J P →
+    ∀ {N : Set ℂ},
+      N ∈ 𝓝 x →
+        ∀ {i j : Fin (3 : ℕ)},
+          i ≠ j →
+            ∃ (γ : C(↑unitInterval, ℂ)),
+              Function.Injective ⇑γ ∧ γ (0 : ↑unitInterval) = x ∧ Set.range ⇑γ ⊆ closure (P i) ∩ closure (P j) ∩ N
+HadwigerNelson.Plane.exists_closePair_not_separatesAt : ∃ (U : Set ℂ) (c : ℂ → Fin (6 : ℕ)) (x : ℂ) (y : ℂ) (w : ℂ) (C :
+  HadwigerNelson.Plane.ClosePair U c x y),
+  IsOpen U ∧
+    HadwigerNelson.Plane.IsWeakColouringOn U c ∧
+      w ∈ U ∧ HadwigerNelson.Plane.IsCommonUnitPoint x y w ∧ ¬C.right.SeparatesAt w
+HadwigerNelson.Plane.exists_closePair_full : ∃ (U : Set ℂ) (c : ℂ → Fin (6 : ℕ)) (x : ℂ) (y : ℂ) (w : ℂ) (C :
+  HadwigerNelson.Plane.ClosePair U c x y),
+  IsOpen U ∧
+    HadwigerNelson.Plane.IsWeakColouringOn U c ∧
+      w ∈ U ∧
+        HadwigerNelson.Plane.IsCommonUnitPoint x y w ∧
+          C.left.HasArcEdges ∧
+            C.right.HasArcEdges ∧
+              (∃ (σ : Equiv.Perm (Fin (3 : ℕ))), C.left.OneOfEach w σ) ∧
+                ∃ (τ : Equiv.Perm (Fin (3 : ℕ))), C.right.OneOfEach w τ
+HadwigerNelson.Plane.exists_closePair_sector : ∃ (U : Set ℂ) (c : ℂ → Fin (6 : ℕ)) (x : ℂ) (y : ℂ) (w : ℂ) (C :
+  HadwigerNelson.Plane.ClosePair U c x y),
+  IsOpen U ∧
+    HadwigerNelson.Plane.IsWeakColouringOn U c ∧
+      w ∈ U ∧ HadwigerNelson.Plane.IsCommonUnitPoint x y w ∧ C.left.IsSector ∧ C.right.IsSector
+HadwigerNelson.Plane.exists_closePair_seven_not_separatesAt : ∃ (U : Set ℂ) (c : ℂ → Fin (7 : ℕ)) (x : ℂ) (y : ℂ) (w :
+  ℂ) (C : HadwigerNelson.Plane.ClosePair U c x y),
+  IsOpen U ∧
+    HadwigerNelson.Plane.IsWeakColouringOn U c ∧
+      w ∈ U ∧ HadwigerNelson.Plane.IsCommonUnitPoint x y w ∧ ¬C.left.SeparatesAt w ∧ ¬C.right.SeparatesAt w
+HadwigerNelson.Plane.sectorPoint_isSector : HadwigerNelson.Plane.sectorPoint.IsSector
+@HadwigerNelson.Plane.ClosePair.separatesAt_or : ∀ {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x y w : ℂ},
+  IsOpen U →
+    HadwigerNelson.Plane.AeProperOn U c →
+      ∀ (C : HadwigerNelson.Plane.ClosePair U c x y),
+        w ∈ U →
+          HadwigerNelson.Plane.IsCommonUnitPoint x y w →
+            (∀ (ℓ : α), (∃ (i : Fin (3 : ℕ)), C.left.label i = ℓ) ∨ ∃ (j : Fin (3 : ℕ)), C.right.label j = ℓ) →
+              C.left.SeparatesAt w ∨ C.right.SeparatesAt w
+@HadwigerNelson.Plane.ClosePair.exists_label_eq : ∀ {U : Set ℂ} {x y : ℂ} {c : ℂ → Fin (6 : ℕ)}
+  (C : HadwigerNelson.Plane.ClosePair U c x y) (ℓ : Fin (6 : ℕ)),
+  (∃ (i : Fin (3 : ℕ)), C.left.label i = ℓ) ∨ ∃ (j : Fin (3 : ℕ)), C.right.label j = ℓ
+HadwigerNelson.Plane.isWeakColouringOn_tightModel : HadwigerNelson.Plane.IsWeakColouringOn
+  HadwigerNelson.Plane.tightModelDom HadwigerNelson.Plane.tightModel
+HadwigerNelson.Plane.isTight_tightModel : HadwigerNelson.Plane.IsTight HadwigerNelson.Plane.tightModelDom
+  HadwigerNelson.Plane.tightModel (0 : ℂ) (1 : ℂ) (0 : Fin (3 : ℕ)) (1 : Fin (3 : ℕ))
+'HadwigerNelson.Plane.shadow_open' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.piece_type' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.centre_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.tight_centre' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.tight_straddle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_forced_pieces' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_lone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_both_separate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_both_saved' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_both_saved_of_isSector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ThreePiece.IsSector.hasArcEdges' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ThreePiece.IsSector.isFull' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_opposite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_arc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_closePair_not_separatesAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_closePair_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_closePair_sector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_closePair_seven_not_separatesAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sectorPoint_isSector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L2.model_triodCut' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L2.model_triodCut_arc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L2.model_lone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L2.model_sector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L2.model_sector_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124L2.model_tight' depends on axioms: [propext, Classical.choice, Quot.sound]

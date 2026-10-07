@@ -1,0 +1,4 @@
+baseline entries: unchanged from main's (2)
+lines of scripts/Vacuity.lean that differ from main's: 0
+lines of scripts/Assumptions.lean that differ from main's: 3
+lines of scripts/axioms-controls.txt that differ from main's: 0

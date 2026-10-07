@@ -1,0 +1,10 @@
+  Plane.CircleCrossing: 63 named constants in the first dump, 63 in the second
+  Plane.OnePiece: 79 named constants in the first dump, 79 in the second
+  Plane.ThreePiece: 95 named constants in the first dump, 95 in the second
+  Plane.ClosePair: 51 named constants in the first dump, 51 in the second
+  Plane.ClosePairWitness: 139 named constants in the first dump, 139 in the second
+  Plane.ClosePairModel: 3 named constants in the first dump, 3 in the second
+  Plane.ThreeArcs: 87 named constants in the first dump, 87 in the second
+  Plane.SectorPoint: 6 named constants in the first dump, 6 in the second
+statements: PASS: no statement and no definition changed — 523 named constants compared in 8 module(s)
+exit=0

@@ -1,0 +1,24 @@
+Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:345:/-- **The away bend with the tangent bend, in collar form** (FS112-N2-AWAY and N2-TAN; wave 4's `bend_away`, `sorry` on `fs131-w4ba`,
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:20:**Every row above is proved; the module holds no `sorry`**: the rows marked so by the planner, and `pinch`,
+Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean:34:**Proofs** (FS131-I6C): no `sorry` in this module; `local_graph` rests on two theorems of `Plane/Saturated/Pinch`
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:9:`plans/FS131-E8-derivation.md` §§ 3.2–3.7, each entry kernel-checked in this module (no `sorry`)
+Proofs/HadwigerNelson/Plane/Cover.lean:33:partial colouring, and `AeColouring 9` is inhabited sorry-free. Its tightness and saturation are FS111-W-SQ9's content
+Proofs/HadwigerNelson/Plane/CoverExamples.lean:13:**FS111-M3-FIXCONV**. Plan: `plans/FS131-w2-kernel-plan.md` §§ 4, 7. Every object is defined by formula, sorry-free; the rows'
+Proofs/HadwigerNelson/Plane/CoverExamples.lean:6541:/-- `fatZ` is closed (spec, sorry-free). -/
+Proofs/HadwigerNelson/Plane/SixRing/Kill.lean:15:**Both leaves are proved from the statements they cite** (job FS132-I4); this module has no `sorry` of its own.
+Proofs/HadwigerNelson/Plane/SixRing/Tips.lean:15:Every leaf is proved (job FS132-I4, under Amendment 2 of its brief); no `sorry`. The count of M6 is the finite
+Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:21:**No `sorry`, here or beneath.** Every theorem here is proved from the leaves of the modules it imports — `State`
+Proofs/HadwigerNelson/Plane/SixRing/State.lean:20:**Every statement here is proved from the statements it cites** (job FS132-I4); this module has no `sorry` of its
+Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:10:Every leaf is proved (job FS132-I4, under Amendment 2 of its brief); no `sorry`. `chart_eq_polar` is also what the
+Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean:22:**Every statement here is proved from the statements it cites** (job FS132-I4); this module has no `sorry` of its
+Proofs/HadwigerNelson/Outside/OAI158Palette.lean:53:No axiom, no `sorry`. The definitions and the statements are compared with the release's, as the kernel stores them
+Proofs/HadwigerNelson/Outside/OAI158PaletteTransport.lean:40:`sorry`.
+Proofs/HadwigerNelson/Outside/OAI158CircleMaps.lean:45:of it is kernel-checked in this library: no axiom, no `sorry`.
+Proofs/HadwigerNelson/Outside/OAI158PaletteDensity.lean:41:and the density-zero form on lines of angles. All of it is kernel-checked in this library: no axiom, no `sorry`.
+Proofs/HadwigerNelson/Outside/OAI158States.lean:39:this library: no axiom, no `sorry`.
+Proofs/HadwigerNelson/Outside/OAI158BinaryPalettes.lean:35:All of it is kernel-checked in this library: no axiom, no `sorry`.
+Proofs/HadwigerNelson/Outside/OAI158AngularBoundary.lean:32:All of it is kernel-checked in this library: no axiom, no `sorry`.
+Proofs/HadwigerNelson/Outside/OAI158.lean:31:Classical.choice, Quot.sound]` there (a planted `sorry` reaches the headline), the headline's stored statement is
+Proofs/HadwigerNelson/Outside/OAI158CircleTransport.lean:42:All of it is kernel-checked in this library: no axiom, no `sorry`.
+Proofs/HadwigerNelson/Outside/OAI158Expansion.lean:37:do. All of it is kernel-checked in this library: no axiom, no `sorry`.
+Proofs/HadwigerNelson/Packed.lean:266:built by hand needs a proof that it is in range — a `sorry` waiting to be written into a definition. -/
