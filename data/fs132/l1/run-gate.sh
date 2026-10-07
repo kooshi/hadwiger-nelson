@@ -10,7 +10,7 @@
 # and the scan against main's gated scan row for row, with its plants; the assumptions step and its self-test; the
 # architecture check; the guarded lint; the notes check and its self-test as the last landing ran them; the stored-term
 # comparison with the release on the module as built on this commit, with its planted faults; every statement of the
-# module by #check; the three digests against the previous landing's receipts (FS131-L8A's, gated commit 126bff4d — main's
+# module by #check; the ruled docstring edit by text and by the kernel's stored signatures; the three digests against the previous landing's receipts (FS131-L8A's, gated commit 126bff4d — main's
 # Proofs/, Proofs.lean and scripts/ are unchanged since: `git diff --stat 126bff4d aca251ee -- Proofs/ Proofs.lean scripts/`
 # is empty).
 # Usage (from anywhere): data/fs132/l1/run-gate.sh <tag>
@@ -66,6 +66,14 @@ plain() { local name="$1"; shift; "$@" > "$d/$name-$tag.txt" 2>&1; local st=$?; 
   plain notes-qa4-selftest python3 tools/fs131_qa4_notes.py --self-test
   data/fs132/l1/run-readback.sh "gate-$tag" > "$d/readback-$tag.txt" 2>&1; echo "readback exit=$?"
   "$S" --mem 16 --cpus 2 --wait 7200 -- lake env lean data/fs132/l1/checks.lean > "$d/checks-$tag.out" 2> "$d/checks-$tag.err"; echo "checks exit=$?"
+  # the ruled docstring edit (the brief's amendment, R2): by text against the commit before it (b71b773b, which holds the
+  # landing's theorem), and by the kernel's stored signatures against the dump taken before the edit; with the tool's own plants
+  plain docstring-text python3 tools/fs131_lt5_docstring_check.py text b71b773b
+  plain docstring-selftest python3 tools/fs131_lt5_docstring_check.py --self-test
+  "$S" --mem 8 --cpus 4 --wait 7200 -- python3 tools/fs131_lt5_docstring_check.py dump "$d/sigs-$tag.txt" Proofs.HadwigerNelson.Instances.HexShell Proofs.HadwigerNelson.Outside.OAI158 > "$d/sigs-dump-$tag.log" 2>&1; echo "sigs-dump exit=$?"
+  plain docstring-elaborated python3 tools/fs131_lt5_docstring_check.py compare data/fs132/l1/sigs-before.txt "$d/sigs-$tag.txt"
+  # the baseline: its entries are the two it held, and the marker's string stands nowhere in HexShell
+  { diff <(grep -E '^UNKNOWN ' data/fs132/l1/vacuity-baseline-before.txt) <(grep -E '^UNKNOWN ' scripts/vacuity-baseline.txt) && echo "baseline entries: unchanged ($(grep -cE '^UNKNOWN ' scripts/vacuity-baseline.txt))"; echo "marker string in Instances/HexShell.lean: $(grep -c 'VACUITY DECLARED:' Proofs/HadwigerNelson/Instances/HexShell.lean)"; echo "lines of scripts/Vacuity.lean outside the registry comment that differ from main's (126bff4d): $(diff <(git show 126bff4d:scripts/Vacuity.lean | sed -n '/^def trackedProps/,$p') <(sed -n '/^def trackedProps/,$p' scripts/Vacuity.lean) | wc -l)"; } > "$d/baseline-$tag.txt" 2>&1; echo "baseline-check exit=$?"
   plain digest-axioms python3 scripts/gate_report.py axioms "$d/receipt-axioms-$tag.log" "$M/receipt-axioms-final.log" CLAUDE.md
   plain digest-vacuity python3 scripts/gate_report.py vacuity "$d/receipt-vacuity-$tag.log" "$M/receipt-vacuity-final.log" scripts/vacuity-baseline.txt CLAUDE.md
   plain digest-assumptions python3 scripts/gate_report.py assumptions "$d/receipt-assumptions-$tag.log" "$M/receipt-assumptions-final.log" scripts/assumptions-ledger.txt CLAUDE.md
