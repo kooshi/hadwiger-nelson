@@ -1,0 +1,6 @@
+control fired: FS124I2.control_cites prints sorryAx
+control fired: FS124I2.control_planted prints sorryAx
+control fired: HadwigerNelson.Plane.closePair_forced_pieces prints sorryAx
+asked: 83 (80 records, 3 controls); printed: 83
+records on a subset of the standard three: 77 with axioms, 3 axiom-free; controls fired: 3 of 3
+PASS

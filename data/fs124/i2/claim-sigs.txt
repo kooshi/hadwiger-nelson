@@ -1,0 +1,84 @@
+@shadow_open : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {W : Set ℂ},
+        IsOpen W →
+          W ⊆ U →
+            ∀ {i : Fin k},
+              (∀ᵐ (z : ℂ), z ∈ W → c z = i) → IsOpen (U ∩ unitShadow W) ∧ ∀ᵐ (z : ℂ), z ∈ U ∩ unitShadow W → c z ≠ i
+@piece_type : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {P : Set ℂ},
+        IsOpen P →
+          IsConnected P →
+            P ⊆ U →
+              ∀ {i : Fin k},
+                (∀ᵐ (z : ℂ), z ∈ P → c z = i) →
+                  ∀ {x w : ℂ},
+                    x ∈ closure P →
+                      w ∈ U →
+                        ((∃ y ∈ P, dist y w < 1) → ∃ η > 0, ∀ᵐ (z : ℂ), z ∈ Metric.ball w η → 1 < dist z x → c z ≠ i) ∧
+                          ((∃ y ∈ P, 1 < dist y w) → ∃ η > 0, ∀ᵐ (z : ℂ), z ∈ Metric.ball w η → dist z x < 1 → c z ≠ i)
+@centre_half : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {q z : ℂ},
+        q ∈ U →
+          dist q z = 1 →
+            ∀ {ρ : ℝ},
+              0 < ρ →
+                Metric.ball z ρ ⊆ U →
+                  ∀ (a : Fin k),
+                    ((∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → dist w q < 1 → c w = a) →
+                        ∃ η > 0, ∀ᵐ (p : ℂ), p ∈ Metric.ball q η → 1 < dist p z → c p ≠ a) ∧
+                      ((∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → 1 < dist w q → c w = a) →
+                        ∃ η > 0, ∀ᵐ (p : ℂ), p ∈ Metric.ball q η → dist p z < 1 → c p ≠ a)
+@tight_centre : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {q z : ℂ},
+        q ∈ U →
+          ∀ {a b : Fin k},
+            IsTight U c q z a b →
+              ∃ η > 0,
+                (∀ᵐ (w : ℂ), w ∈ Metric.ball q η → 1 < dist w z → c w ≠ a) ∧
+                  ∀ᵐ (w : ℂ), w ∈ Metric.ball q η → dist w z < 1 → c w ≠ b
+@tight_straddle : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {q z : ℂ} {a b : Fin k},
+        IsTight U c q z a b →
+          ∀ {p : ℂ},
+            p ∈ U → dist p z = 1 → p ≠ q → p ≠ 2 * z - q → ∃ η > 0, ∀ᵐ (w : ℂ), w ∈ Metric.ball p η → c w ≠ a ∧ c w ≠ b
+structure HadwigerNelson.Plane.IsWeakColouringOn {k : ℕ} (U : Set ℂ) (c : ℂ → Fin k) : Prop
+number of parameters: 3
+fields:
+  HadwigerNelson.Plane.IsWeakColouringOn.measurable : Measurable c
+  HadwigerNelson.Plane.IsWeakColouringOn.aeProperOn : AeProperOn U c
+constructor:
+  HadwigerNelson.Plane.IsWeakColouringOn.mk {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k} (measurable : Measurable c)
+    (aeProperOn : AeProperOn U c) : IsWeakColouringOn U c
+def HadwigerNelson.Plane.AeProperOn.{u_1} : {α : Type u_1} → Set ℂ → (ℂ → α) → Prop :=
+fun {α} U c => (MeasureTheory.volume.prod arcLength) (monoPairSet U c) = 0
+def HadwigerNelson.Plane.monoPairSet.{u_1} : {α : Type u_1} → Set ℂ → (ℂ → α) → Set (ℂ × ℝ) :=
+fun {α} U c => {q | q.1 ∈ U ∧ q.1 + e q.2 ∈ U ∧ c q.1 = c (q.1 + e q.2)}
+def HadwigerNelson.Plane.unitShadow : Set ℂ → Set ℂ :=
+fun F => {z | ∃ y ∈ F, dist z y = 1}
+def HadwigerNelson.Plane.IsTight.{u_1} : {α : Type u_1} → Set ℂ → (ℂ → α) → ℂ → ℂ → α → α → Prop :=
+fun {α} U c q z a b => ∃ ρ, IsTightWith U c q z a b ρ
+structure HadwigerNelson.Plane.IsTightWith.{u_1} {α : Type u_1} (U : Set ℂ) (c : ℂ → α) (q z : ℂ) (a b : α) (ρ : ℝ) :
+  Prop
+number of parameters: 8
+fields:
+  HadwigerNelson.Plane.IsTightWith.dist_eq : dist q z = 1
+  HadwigerNelson.Plane.IsTightWith.ne : a ≠ b
+  HadwigerNelson.Plane.IsTightWith.pos : 0 < ρ
+  HadwigerNelson.Plane.IsTightWith.ball_subset : Metric.ball z ρ ⊆ U
+  HadwigerNelson.Plane.IsTightWith.ae_inside : ∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → dist w q < 1 → c w = a
+  HadwigerNelson.Plane.IsTightWith.ae_outside : ∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → 1 < dist w q → c w = b
+constructor:
+  HadwigerNelson.Plane.IsTightWith.mk.{u_1} {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {q z : ℂ} {a b : α} {ρ : ℝ}
+    (dist_eq : dist q z = 1) (ne : a ≠ b) (pos : 0 < ρ) (ball_subset : Metric.ball z ρ ⊆ U)
+    (ae_inside : ∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → dist w q < 1 → c w = a)
+    (ae_outside : ∀ᵐ (w : ℂ), w ∈ Metric.ball z ρ → 1 < dist w q → c w = b) : IsTightWith U c q z a b ρ

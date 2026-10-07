@@ -1,0 +1,16 @@
+compared: 133 named constants of the first dump (types; values of definitions), 9 example heads
+internal (not compared): 39 before, 54 after
+new named constants in the second dump: 9
+  NEW THM HadwigerNelson.Plane.CircleSide.abs_sign
+  NEW THM HadwigerNelson.Plane.CircleSide.sign_eq
+  NEW THM HadwigerNelson.Plane.CrossAt.exists_mem_sphere_inside
+  NEW THM HadwigerNelson.Plane.quadrant_sign_pos
+  NEW THM HadwigerNelson.Plane.tightModel_eq_two_of_mem
+  NEW THM HadwigerNelson.Plane.tightModel_far
+  NEW THM HadwigerNelson.Plane.tightModel_ne_two_of_lt
+  NEW THM HadwigerNelson.Plane.tightModel_ne_two_of_mem
+  NEW THM HadwigerNelson.Plane.tightModel_of_not_lt
+examples in the working files that the base does not hold: 2
+  NEW EXAMPLE Proofs/HadwigerNelson/Plane/OnePiece.lean: example : ∃ η > 0, ∀ᵐ z, z ∈ ball (0 : ℂ) η → 1 < dist z 1 → tightModel z ≠ 0
+  NEW EXAMPLE Proofs/HadwigerNelson/Plane/OnePiece.lean: example : (∃ η > 0, ∀ᵐ p, p ∈ ball (0 : ℂ) η → 1 < dist p 1 → tightModel p ≠ 0) ∧ ∃ η > 0, ∀ᵐ p, p ∈ ball (0 : ℂ) η → dist p 1 < 1 → tightModel p ≠ 1
+PASS: no statement and no definition changed
