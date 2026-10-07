@@ -8,7 +8,34 @@ next starts.*
 
 ## Theorems this phase proved
 
-*(filled at each stage; nothing here is on `main`)*
+On branch `fs124-wk2` only: **kernel-checked on a branch, not through the gate** — nothing here is on `main`, and the
+branch's other four modules of the skeleton still hold 67 `sorry`. Axioms as printed from the build of Stage 3
+(`data/fs124/i2/axioms.txt`; the control fired).
+
+**The claims' theorems** (`Proofs/HadwigerNelson/Plane/OnePiece.lean`), each read against `data/fs124/claims-K2.md` in
+Stage 4:
+- **C124-TYPE** — `HadwigerNelson.Plane.piece_type` — `[propext, Classical.choice, Quot.sound]`. Proved in this phase,
+  over the planner's core `IsPieceAt.ae_ne_region`.
+- **C124-CENTRE-HALF** — `HadwigerNelson.Plane.centre_half` — `[propext, Classical.choice, Quot.sound]`. This phase;
+  core `AeProperOn.ae_ne_of_ae_region`.
+- **C124-CENTRE** — `HadwigerNelson.Plane.tight_centre` — `[propext, Classical.choice, Quot.sound]`. This phase; core
+  `IsTight.ae_ne_centre`.
+- **C124-STRADDLE** — `HadwigerNelson.Plane.tight_straddle` — `[propext, Classical.choice, Quot.sound]`. This phase;
+  core `IsTight.ae_ne_straddle`.
+- **C124-SHADOW-OPEN** — `HadwigerNelson.Plane.shadow_open` — `[propext, Classical.choice, Quot.sound]`. **Proved by the
+  planner (FS124-K2), not by this phase**; printed here from the same build, with this phase's spec example on the model.
+
+No one of the five takes an assumption: no declared outside theorem, no hypothesis standing for a hand result. Each
+is for a weak `k`-colouring; its core under it is for any function proper at almost every unit pair, at any label type.
+
+**Every theorem this phase proved** — 66: 57 leaves of the skeleton and 9 helpers; with them 6 spec examples of the
+skeleton and 2 added ones (anonymous, so not records). The other 14 theorems of the two files are the planner's.
+
+**`Plane/CircleCrossing`** — 25 theorems of this phase (4 of them helpers, marked †), each [kernel] on a branch:
+- on `[propext, Classical.choice, Quot.sound]` (24): `CircleSide.mem_region_inside`, `CircleSide.mem_region_outside`, `CircleSide.mem_region_iff`, `CircleSide.disjoint_region_flip`, `CircleSide.mem_region_or_of_dist_ne`, `CircleSide.ball_antipode_subset_outside`, `CrossAt.symm`, `CrossAt.antipode`, `crossAt_of_dist_lt_two`, `CrossAt.abs_inner_lt_one`, `CircleSide.sign_eq`†, `CircleSide.abs_sign`†, `quadrant_sign_pos`†, `CrossAt.quadPt_mem_region_left`, `CrossAt.quadPt_mem_region_right`, `dist_quadPt_le`, `CrossAt.exists_mem_quadrant`, `CrossAt.volume_quadrant_pos`, `CrossAt.exists_mem_sphere_inside`†, `CrossAt.exists_mem_sphere_region`, `exists_ball_inter_spheres_subset`, `exists_convex_subset_region`, `exists_dist_ne_of_isOpen`, `crossAt_zero_one_add_I`.
+- on no axiom (1): `CircleSide.flip_flip`.
+**`Plane/OnePiece`** — 41 theorems of this phase (5 of them helpers, marked †), each [kernel] on a branch:
+- on `[propext, Classical.choice, Quot.sound]` (41): `unitShadow_mono`, `mem_unitShadow_iff_exists_e`, `eq_empty_of_isOpen_of_ae`, `not_innerAt_iff`, `not_outerAt_iff`, `crossingAt_iff`, `OnSide.subset_region`, `onSide_of_subset_region`, `not_innerAt_and_outerAt`, `innerAt_or_outerAt_or_crossingAt`, `InnerAt.closure_inter_closure_subset`, `IsPieceAt.nonempty`, `IsPieceAt.isConnected`, `IsPieceAt.disjoint`, `IsPieceAt.inter_eq_empty`, `IsPieceAt.ae_unitShadow_ne`, `IsPieceAt.ae_ne_of_crossingAt`, `IsPieceAt.innerAt_self`, `piece_type`, `AeProperOn.ae_ne_of_ae_region`, `centre_half`, `IsTightWith.mem`, `IsTightWith.mono`, `isOpen_innerCollar`, `isOpen_outerCollar`, `IsTightWith.ae_innerCollar`, `IsTightWith.ae_outerCollar`, `isTight_of_ae_of_isOpen`, `IsTight.ae_ne_centre`, `tight_centre`, `IsTight.ae_ne_straddle`, `tight_straddle`, `tightModel_of_not_lt`†, `tightModel_ne_two_of_lt`†, `tightModel_far`†, `tightModel_eq_two_of_mem`†, `tightModel_ne_two_of_mem`†, `isOpen_tightModelDom`, `measurable_tightModel`, `isWeakColouringOn_tightModel`, `isTight_tightModel`.
 
 ## Stage 1 — SAVED (FS124-I2): the readback and the build as given
 
@@ -172,3 +199,200 @@ copy while the first file's build ran, then two `lean` runs to green (one implic
 added examples; one build, 9m29s. **Both files: 63 leaves, 449 lines added, 3 builds (one as given), 0 leaves left, 0
 routes failed.** The planner priced the two files at about 380 lines; they came in at 449 with nine helpers and two
 added examples.
+
+## Stage 4 — SAVED (FS124-I2): names and linters on the built tree; the five claims' theorems read aloud; the drafts
+
+### 4.1 Names, linters, architecture — on the tree of Stage 3's build
+
+- **`./scripts/dupnames.sh`** under the slot: exit 0 — `dupnames: OK — no name is declared by two modules (23 generated
+  on demand, listed above)`; `scanned 7465 modules, 1853 of them the package's (1853 source files)`
+  (`data/fs124/i2/logs/dupnames.txt`). None of the 23 generated names is of my two modules. **`--self-test`**: exit 0, `all
+  15 controls behaved: every planted fault fired, and every partner passed` (`logs/dupnames-selftest.txt`). **This is the
+  scan of this branch alone**: the join of the two implementers' branches makes the tree on which a doubled name could
+  first exist, and runs it again (`LEAN.md` § The gate). My nine helper names were searched in `Proofs/` of `main` and of
+  every worktree, the other implementer's among them, when each was named and again at 17:06 UTC (its branch then still
+  at the planner's tip): no other declaration.
+- **The environment linters**, run once as a probe (not the gate): `lake lint --no-build -- --no-build --trace` under the
+  slot, exit 0, `-- Linting passed for Proofs.`, 14 linters and 14 `(2/2) Passed!` (`logs/lint.txt`) — `unusedArguments`,
+  `simpNF` and `docBlame` among them, on the whole library as this branch builds it.
+- **`tools/check_architecture.py`**: exit 0, `RESULT: PASS` (Stage 3).
+- **Not run, by the brief**: the full gate (`scripts/axioms.sh`, `scripts/assumptions.sh`, `scripts/vacuity.sh`), which
+  reads `scripts/Axioms.lean` — the joining job's file.
+
+### 4.2 Read aloud: each claim's theorem against the claim list's words, and against its *not claimed* line
+
+Three readings hold for all five and are said once.
+1. **The class.** The list's weak `k`-colouring is "a measurable map `c` from `U` to `k` labels"; the theorems take the
+   first module's `IsWeakColouringOn U c` — a total `c : ℂ → Fin k`, measurable, proper at almost every unit pair of `U`
+   (`volume ⊗ arcLength`-null monochromatic pairs inside `U`), read on `U` alone. That is the reading the first module
+   fixed and its landing carries; nothing here adds to it. A map given on `U` only is extended by a constant: every
+   hypothesis below reads `c` at points of `U`, and every conclusion is about almost every point of a disc `ball w η`
+   whose centre is in the open set `U` and is monotone in `η`, so the radius may be taken with the disc inside `U` (the
+   proofs take it so). That step from a map on `U` to a total map is not a theorem of these files.
+2. **"Almost every"** is `∀ᵐ z` for plane Lebesgue measure `volume` on `ℂ`; `|a − b|` is `dist a b`; `B(p, r)` is
+   `ball p r`; `S(p)` is the unit circle about `p`.
+3. **As the kernel holds them**: `data/fs124/i2/claim-sigs.txt` is `#check` on the five from the build — the binders
+   below are the stored ones, and `k`, `U`, `c` are implicit in each.
+
+**C124-SHADOW-OPEN** — `shadow_open` (the planner's proof; read here because the brief names it among the five).
+
+> Let U be an open set of the plane, c a measurable map from U to a finite set of labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, i a label, and W an open subset of U almost every point of which has the label i. Then the set of points of U at distance exactly 1 from some point of W is open, and almost every point of it has a label other than i.
+> — source: data/fs124/claims-K2.md
+
+"Let U be an open set of the plane" — `hU : IsOpen U`. "c a measurable map from U to a finite set of labels with c(z) ≠
+c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U" — `hc : IsWeakColouringOn U c`, the
+finite set being `Fin k` (reading 1). "i a label" — `i : Fin k`. "W an open subset of U" — `hW : IsOpen W`, `hWU : W ⊆ U`.
+"almost every point of which has the label i" — `hi : ∀ᵐ z, z ∈ W → c z = i`. "Then the set of points of U at distance
+exactly 1 from some point of W" — `U ∩ unitShadow W`, with `unitShadow W = {z | ∃ y ∈ W, dist z y = 1}` (`Plane/Cover`) —
+"is open" — `IsOpen (U ∩ unitShadow W)` — "and almost every point of it has a label other than i" — `∀ᵐ z, z ∈ U ∩
+unitShadow W → c z ≠ i`. Every clause has its conjunct; no hypothesis is added.
+
+> anything for a set W that is not open; anything at a point whose unit circle meets only the boundary of W; that any weak colouring has an open one-label set
+> — source: data/fs124/claims-K2.md
+
+A set that is not open: `hW` is a hypothesis, of the core lemma too. A point whose unit circle meets only the boundary
+of `W`: the conclusion is on the shadow of `W` itself, not of its closure. That a weak colouring has an open one-label
+set: `W` and `hi` are hypotheses. The theorem claims none of the three.
+
+**C124-TYPE** — `piece_type`.
+
+> Let c be a weak k-colouring of an open set U, P a connected open subset of U almost every point of which has the label i, x a point of the closure of P, and w a point of U with |w − x| = 1. If P has a point strictly inside S(w), there is η > 0 such that almost every point z of B(w, η) with |z − x| > 1 has a label other than i; if P has a point strictly outside S(w), there is η > 0 such that almost every point z of B(w, η) with |z − x| < 1 has a label other than i.
+> — source: data/fs124/claims-K2.md
+
+"Let c be a weak k-colouring of an open set U" — `hU`, `hc`. "P a connected open subset of U" — `hPo : IsOpen P`, `hPc :
+IsConnected P`, `hPU : P ⊆ U`. "almost every point of which has the label i" — `hi : ∀ᵐ z, z ∈ P → c z = i`. "x a point
+of the closure of P" — `hx : x ∈ closure P`. "w a point of U" — `hw : w ∈ U`. **"with |w − x| = 1" — not a hypothesis of
+the theorem**: it is stated at every `w ∈ U`, and the claim is its case `dist w x = 1`. The statement is the planner's
+(its G3, in the list's dated line of 16:33 UTC); the proof never reads the distance, and the kernel has checked the wide
+form. "If P has a point strictly inside S(w)" — `∃ y ∈ P, dist y w < 1` — "there is η > 0 such that almost every point z
+of B(w, η) with |z − x| > 1 has a label other than i" — `∃ η > 0, ∀ᵐ z, z ∈ ball w η → 1 < dist z x → c z ≠ i`. "if P
+has a point strictly outside S(w)" — `∃ y ∈ P, 1 < dist y w` — "there is η > 0 such that almost every point z of B(w, η)
+with |z − x| < 1 has a label other than i" — `∃ η > 0, ∀ᵐ z, z ∈ ball w η → dist z x < 1 → c z ≠ i`. The two clauses are
+the two conjuncts, each an implication with its own `η`.
+
+> anything for a piece that is not connected or not open; a uniform η over pieces or over the point of P chosen; anything on the side not named; that any weak colouring has such a piece
+> — source: data/fs124/claims-K2.md
+
+Not connected or not open: both are hypotheses (the proof reads connected as preconnected, the planner's G3; the
+hypothesis stays `IsConnected`). A uniform `η`: each clause has its own `∃ η`, after `P` and the two points are fixed.
+The side not named: each clause concludes on one side of `S(x)` only. Existence of a piece: `P` is a hypothesis.
+
+**C124-CENTRE-HALF** — `centre_half`.
+
+> Let c be a weak k-colouring of an open set U, q and z points of U with |q − z| = 1, ρ > 0 with B(z, ρ) ⊂ U, and a a label. If almost every point of B(z, ρ) with distance less than 1 from q has the label a, there is η > 0 such that almost every point p of B(q, η) with |p − z| > 1 has a label other than a; if almost every point of B(z, ρ) with distance more than 1 from q has the label a, there is η > 0 such that almost every point p of B(q, η) with |p − z| < 1 has a label other than a.
+> — source: data/fs124/claims-K2.md
+
+"Let c be a weak k-colouring of an open set U" — `hU`, `hc`. "q and z points of U" — `hq : q ∈ U`; `z ∈ U` is not a
+binder: it follows from `hρ` and `hball` (the centre of a disc inside `U`). "with |q − z| = 1" — `hqz : dist q z = 1`.
+"ρ > 0 with B(z, ρ) ⊂ U" — `hρ : 0 < ρ`, `hball : ball z ρ ⊆ U`. "a a label" — `(a : Fin k)`, explicit. "If almost every
+point of B(z, ρ) with distance less than 1 from q has the label a" — `∀ᵐ w, w ∈ ball z ρ → dist w q < 1 → c w = a` —
+"there is η > 0 such that almost every point p of B(q, η) with |p − z| > 1 has a label other than a" — `∃ η > 0, ∀ᵐ p,
+p ∈ ball q η → 1 < dist p z → c p ≠ a`. "if almost every point of B(z, ρ) with distance more than 1 from q has the label
+a" — `∀ᵐ w, w ∈ ball z ρ → 1 < dist w q → c w = a` — "there is η > 0 such that almost every point p of B(q, η) with
+|p − z| < 1 has a label other than a" — `∃ η > 0, ∀ᵐ p, p ∈ ball q η → dist p z < 1 → c p ≠ a`. Two conjuncts, one per
+collar; no hypothesis is added.
+
+> anything about the other collar; that (q, z) is tight
+> — source: data/fs124/claims-K2.md
+
+The other collar: each implication's hypothesis reads one collar, and its conclusion one side of `S(z)`. Tightness: no
+clause asks or concludes it.
+
+**C124-CENTRE** — `tight_centre`.
+
+> Let c be a weak k-colouring of an open set U, q and z points of U with |q − z| = 1, and (q, z) tight for (a, b). Then there is η > 0 such that almost every point w of B(q, η) with |w − z| > 1 has a label other than a, and almost every point w of B(q, η) with |w − z| < 1 has a label other than b.
+> — source: data/fs124/claims-K2.md
+
+"Let c be a weak k-colouring of an open set U" — `hU`, `hc`. "q and z points of U" — `hq : q ∈ U`; `z ∈ U` is carried by
+`ht` (`IsTightWith.mem`: the far end is the centre of a disc inside `U`). "with |q − z| = 1" — the field `dist_eq : dist q
+z = 1` of `ht`. "(q, z) tight for (a, b)" — `ht : IsTight U c q z a b`, which is `∃ ρ, IsTightWith U c q z a b ρ`; read
+against the list's object ("there is ρ > 0 with B(z, ρ) ⊂ U such that almost every point w of B(z, ρ) with |w − q| < 1
+has the label a and almost every point w of B(z, ρ) with |w − q| > 1 has the label b", with "a ≠ b two labels") the
+fields are `ne : a ≠ b`, `pos : 0 < ρ`, `ball_subset : ball z ρ ⊆ U`, `ae_inside : ∀ᵐ w, w ∈ ball z ρ → dist w q < 1 → c
+w = a`, `ae_outside : ∀ᵐ w, w ∈ ball z ρ → 1 < dist w q → c w = b`. "Then there is η > 0 such that almost every point w
+of B(q, η) with |w − z| > 1 has a label other than a, and almost every point w of B(q, η) with |w − z| < 1 has a label
+other than b" — `∃ η > 0, (∀ᵐ w, w ∈ ball q η → 1 < dist w z → c w ≠ a) ∧ (∀ᵐ w, w ∈ ball q η → dist w z < 1 → c w ≠
+b)`: one `η` for both, as the claim says.
+
+> that a or b is present at q (C124-KIND: neither need be); anything about the other labels near q; that this is all a tight pair forces at q — with a second tight far end z′ for the same (a, b) the conclusions intersect, and near q the label a is confined to B̄(z, 1) ∩ B̄(z′, 1), a region with angle π − ∠zqz′ at q
+> — source: data/fs124/claims-K2.md
+
+Presence of `a` or `b` at `q`: the conclusion only excludes labels. Other labels near `q`: only `a` and `b` are named.
+That this is all a tight pair forces: nothing of the kind is stated.
+
+**C124-STRADDLE** — `tight_straddle`.
+
+> Let c be a weak k-colouring of U, (q, z) tight for (a, b), and p a point of U with |p − z| = 1, p ≠ q and p ≠ 2z − q. Then there is η > 0 such that almost every point of B(p, η) has a label other than a and other than b.
+> — source: data/fs124/claims-K2.md
+
+"Let c be a weak k-colouring of U" — `hU : IsOpen U` (the class is of open sets) and `hc`. "(q, z) tight for (a, b)" —
+`ht : IsTight U c q z a b`. "p a point of U" — `hp : p ∈ U`. "with |p − z| = 1" — `hpz : dist p z = 1`. "p ≠ q" — `hpq`.
+"p ≠ 2z − q" — `hanti : p ≠ 2 * z - q`. "Then there is η > 0 such that almost every point of B(p, η) has a label other
+than a and other than b" — `∃ η > 0, ∀ᵐ w, w ∈ ball p η → c w ≠ a ∧ c w ≠ b`. Every clause has its binder or conjunct;
+no hypothesis is added.
+
+> a uniform η as p tends to q or to 2z − q (it tends to 0); anything at those two points (C124-CENTRE, C124-ANTIPODE); anything that reads the radius of the interface — for an interface of any shape the statement at a point whose unit circle crosses it is C132-WITNESS's
+> — source: data/fs124/claims-K2.md
+
+A uniform `η`: the `∃ η` comes after `p`. The two points `q` and `2z − q`: excluded by `hpq` and `hanti`. The radius of
+the interface: the statement is about a tight pair, whose interface is the unit circle about `q`.
+
+**What the read-aloud found.** No clause of the five is missing, none is added, and no theorem claims an item of its
+*not claimed* line. One theorem is wider than its claim, as the list's dated line already says: `piece_type` has no
+hypothesis `|w − x| = 1`. Each docstring's named inhabitant is now run by a declaration of the file (Stage 3).
+
+### 4.3 Drafts for the landing (the joining job's files; none is written by this job)
+
+- **`scripts/Axioms.lean`, CLEAN section, after the block `-- FS124-I1 block end`**: the file
+  `data/fs124/i2/audit-block.txt`, whole — a header, `-- FS124-I2: Plane/CircleCrossing` with 31 `#print axioms` lines,
+  `-- FS124-I2: Plane/OnePiece` with 49, `-- FS124-I2 block end`. **80 records, each expected CLEAN** (77 on a subset of
+  the standard three that is not empty, 3 on no axiom: `CircleSide.flip_inside`, `CircleSide.flip_outside`,
+  `CircleSide.flip_flip`). It is generated from the two files' `theorem` lines and regenerates if a file changes
+  (`data/fs124/i2/make_audit.py <a dump of the stored constants>`).
+- **`scripts/Assumptions.lean`**: no entry. No theorem of the two modules takes a hypothesis standing for an outside
+  theorem, a hand result or an open question; `IsTight`, `IsPieceAt`, `CrossAt` are conditions on a theorem's own
+  parameters, each with its model.
+- **Vacuity, for the landing's note on models** (`LEAN.md`: the scan is silent on colourings under a predicate it does
+  not track): the structures of hypotheses and their inhabitants, all in the kernel on this branch — `IsWeakColouringOn
+  U c` with `IsTight U c q z a b`: `isWeakColouringOn_tightModel`, `isTight_tightModel` (three labels on three discs;
+  the pair `(0, 1)` tight for `(0, 1)`); `CrossAt p q z`: `crossAt_zero_one_add_I`; `IsPieceAt` and the hypotheses of
+  `piece_type`: the added example (the inner collar, `x = 1`, `w = 0`). The five claims' theorems are each run on the
+  model by an `example` of `Plane/OnePiece`.
+- **`Proofs.lean`, `ARCHITECTURE.md`**: not touched; the planner registered the modules, and its rows say "a skeleton
+  on branch `fs124-wk2`" — the landing rewrites them.
+- **`LEAN.md` § Searching — Lean**, three lines:
+  - "`Complex.finrank_real_complex` is in `Mathlib.LinearAlgebra.Complex.FiniteDimensional`, which `Plane/Basic` does not
+    import; without it `finrank ℝ ℂ = 2` is `Module.finrank_eq_card_basis Complex.basisOneI` with `Fintype.card_fin`. In
+    a module whose statements name `volume : Measure ℂ` the import is not a free edit: it changes the instance the
+    statement stores (the line above on imports) (FS124-I2)."
+  - "An implementer shows it changed no statement from the kernel's side: print every constant of its modules' compiled
+    data (kind, name, stored type, a definition's value) from the build as given — **before the first rebuild replaces
+    the `.olean`s** — print again after, and compare, with a planted difference that must be reported; an `example` is not
+    stored, so its head is compared as text against the base commit (`data/fs124/i2/lean/StatementDump.lean`,
+    `data/fs124/i2/statement_diff.py`) (FS124-I2)."
+  - "At the pin 'null exactly when almost every point is off it' is `measure_eq_zero_iff_ae_notMem` (FS124-I2)."
+
+## Drafts for the front page
+
+*Each names its slot. None is filed by this job; the landing's own gate run supplies the counts.*
+
+- **`CLAUDE.md` § The gate and § Trust ledger — the counts**: not measured here (the brief: no full gate; the audit
+  script is the joining job's). What this job fixes for them: **80 records to add under CLEAN** for `Plane/CircleCrossing`
+  (31) and `Plane/OnePiece` (49), none IMPORTED, none PURCHASED; no declared hypothesis, so the assumptions step's nine
+  counts do not move for these two modules; the vacuity scan's site count is the landing's to read.
+- **`LEDGER.md` row 162, its `**Grade:**` sentence** — replacing "[hand] or derived from [hand] entries, one mind each,
+  kernel pending; C124-SHADOW-OPEN, C124-TYPE, C124-CENTRE-HALF, C124-CENTRE and C124-STRADDLE are in the kernel lane's
+  second module, being planned." — at the landing: "C124-SHADOW-OPEN, C124-TYPE, C124-CENTRE-HALF, C124-CENTRE and
+  C124-STRADDLE **[kernel]**: `HadwigerNelson.Plane.shadow_open`, `piece_type`, `centre_half`, `tight_centre`,
+  `tight_straddle` (`Proofs/HadwigerNelson/Plane/OnePiece.lean`), each on `[propext, Classical.choice, Quot.sound]` and
+  resting on no assumption — no declared outside theorem, no hypothesis standing for a hand result; each holds for any
+  function proper at almost every unit pair of `U`, at any label type (`AeProperOn.ae_unitShadow_ne`,
+  `IsPieceAt.ae_ne_region`, `AeProperOn.ae_ne_of_ae_region`, `IsTight.ae_ne_centre`, `IsTight.ae_ne_straddle`), and
+  C124-TYPE at every `w ∈ U`, with no hypothesis `|w − x| = 1`. The row's other entries: [hand] or derived from [hand]
+  entries, one mind each, kernel pending." **Until the landing** the five are "kernel-checked on branch `fs124-wk2`
+  (`bc5bb0da2`), not through the gate".
+- **`CLAUDE.md` § Frontier, the sentence on FS-124's second module** ("its second is being planned") — once this branch
+  is joined: "of its second, the circle geometry and the first five claims are proved on branch `fs124-wk2` (80
+  theorems; kernel-checked on a branch, not through the gate)".
+- **Proof Atlas**: row 162's five statements named above change grade [hand] → [kernel] at the landing, not before; no
+  other grade moves by this job.
