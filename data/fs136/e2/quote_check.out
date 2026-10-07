@@ -1,0 +1,15 @@
+ 1 match    data/external/EXT-OAI1-request.md :: I agree with all 3. let's keep the lean backlog paused. We move to the
+ 2 match    plans/STUB-covering-pairs.md :: question: how-far-does-a-seed-force
+ 3 match    plans/STUB-covering-pairs.md :: C-FORCED derived as posed 0.9; found already held under another name 0
+ 4 match    plans/STUB-covering-pairs.md :: - If C-FORCED is already held (FS132-E3's paragraph, or an entry this 
+ 5 match    plans/STUB-covering-pairs.md :: - If the closure on R7 empties a cell, stop: the defect is in the stat
+ 6 match    plans/STUB-covering-pairs.md :: - If every closure stalls at its first step, the product is the list o
+ 7 match    plans/STUB-covering-pairs.md :: - Every statement says in its headline that it is about colourings tha
+ 8 match    data/fs136/claims.md ::   **C136-FORCED** (the card's C-FORCED; posed, not derived) — (forces 
+ 9 match    data/fs136/claims.md ::   **C136-CLOSE** (the card's C-CLOSE; posed, not derived) — (forces re
+10 match    data/fs136/claims.md ::   **C136-STOP-GERMS** (the card's C-STOP-GERMS; posed, not derived) — 
+11 match    data/fs136/claims.md ::   **C136-TABLE** — verdict: derived; grade: hand; minds: 1. *Statement
+12 match    plans/FS136-close-inventory.md :: 4. **FS136-E1, verdicts through its Stage 3 (16:48 UTC logged; commit 
+13 match    plans/FS136-close-inventory.md :: 5. **FS136-E1, the last two claims (17:01 UTC logged; commit `50bf05d7
+14 match    plans/FS136-close-inventory.md :: 8. **FS136-P1, first message (18:02 UTC logged; its commit `bc91935c`,
+quotations=14 mismatches=0
