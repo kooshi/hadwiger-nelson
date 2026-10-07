@@ -7782,3 +7782,35 @@ reason by the close.*
      the gate lists it), and the open gate items of ruling 575 (a). (d) **My trial of wave 6's three sibling
      branches, for FS131-I6Z2's brief**: `fs131-w6z` with `fs131-w6l` — clean; with `fs131-w6k` — clean; `fs131-w6l`
      with `fs131-w6k` — `scripts/Axioms.lean` only.
+
+601. **FS131-K7c, by message mid-job (its Stage 10 saved at `9b13628a`): the discrepancy of ruling 553 (a) is settled — two different bowtie fragments are on file, and FS-116's ring survey read the second under the first's name** (source: K7c's message to "main", 2026-10-07 about 00:55 UTC; record `fs131-w7`'s `plans/FS131-w7-kernel-plan.md` Stage 10; `data/fs131/k7c/ring-both.out`).
+     **(a)** FS114-Y2's own fragment (`tools/fs114_y2_k1.py`): the lune tiles `t2`, `t4` are bounded by the unit circle
+     about the centre on `[60°, 120°]` and `[240°, 300°]`, so the centre's ring carries arcs of `Γ` there, inner colour
+     carried at the centre. **(b)** FS114-YB2's independent rebuild (`tools/fs114_yb2_run.py`): no piece on that circle;
+     the ring is off `Γ` on `(30°, 150°)` and `(210°, 330°)` with change points at `top` and `bot`. The survey
+     (`tools/fs116_n1_ring.py`) imports (b) and prints it as "Y2 bowtie centre"; "off Gamma" is literal. Both have a
+     Reuleaux bowtie with four tactic edges and meet FS114-Y2-BOWTIE's statement; FS116-Z2's erratum sentence (two (Q)
+     arcs) is true of both. **Checked by me**: `tools/fs116_n1_ring.py` ll. 387–388, `tools/fs114_y2_k1.py` l. 107,
+     `tools/fs114_yb2_run.py` l. 191 say what it quotes; its saved survey of (a) prints four arcs of kind `in-P`. Not
+     checked by me: that (b)'s survey output equals the filed one line for line (its `diff`); which hypotheses each
+     object meets beyond the ring — its reading. **Corrections owed, held for the errata** (its texts, verbatim in its
+     message and its Stage 10): `plans/FS114-derivation.md` l. 496 (FS114-N4-D's model line names (b), not
+     FS114-Y2-BOWTIE's fragment) and l. 547 (FS114-N5-GRING's model line names both, each with its ring);
+     `plans/FS116-derivation.md` ll. 192, 211, 469, 1454 and the citation at l. 259 ("FS114-Y2-BOWTIE's centre", "the Y2
+     bowtie's change points" → FS114-YB2's bowtie's centre) — in (a) `top` and `bot` are not change points, so (a) is no
+     model of those four entries' hypotheses. **No filed statement moves.** **Also from it**: the merge of
+     `origin/fs131-w7m` is `7394c0e4`, built (three modules rebuilt, twenty `sorry` and no other warning); four of the
+     five `qArc_*` are proved in draft with `NonSiamese` idle; **one leaf of `Local`, `lens_cone`, is false as stated
+     at `ψ = ψ′`** — details to come with its message for `Local`'s cut. **Credit**: both objects run through the one
+     survey unedited, with the line that decides it found in the survey's own import; no side had been picked by
+     anyone before it, and it picked by evidence. **Rulings.** (a) **The kernel holds (b) as `bowtieFrag`** — the
+     fragment's four jobs build FS114-YB2's rebuild. Alternative: (a), which keeps the second planner's § 7.5 whole.
+     Why (b): the fragment exists in the kernel to be an inhabitant, and (b) inhabits strictly more of what waves 7
+     and 8 state — `ring_odd`, the class of N4-TOP, N4-FIVE and N4-ARC, wave 8's rows at a change point of the centre's
+     ring — at the same count of tiles and pairs. Confidence: medium-high; a pair-bound price well above (a)'s, or a
+     tactic or bowtie hypothesis (b) does not meet, would change it, and the fragment's first job checks both at its
+     readback. Sent to K7c by message. (b) **K7c revises its § 7.5 for (b) in one short stage, after its item 3**: the
+     fragment's first brief is written from its record. (c) **Kooshi is told at his next check-in**: two model lines
+     and five citations in filed records name the wrong object; nothing else moves. (d) **A reading for the record,
+     mine**: the verifier's "independent rebuild" verified the statement with a different witness, so
+     FS114-Y2-BOWTIE's existence has two objects, each one mind's; neither tool is the other's check.
