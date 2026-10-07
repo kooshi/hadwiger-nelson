@@ -420,4 +420,33 @@ the death of every such cycle — which are what the answer is made of and are n
   (`HadwigerNelson.LebesgueCovering.lebesgue_covering_square`) in place of the release's cover lemma; the mesh bound is the
   release's argument, read by it and not re-derived at every number of labels. C132-CORES-FREE as fixed above is its
   corollary. It is fixed here when its statement is in the planner's committed plan.
+- **2026-10-07 (after FS132-E6's Stage 1, commit `2692fd0b`; FS-132 inventory item 26): the seed card's first claim as its
+  deriver states it — in six statements — and a defect in a line it rests on** — read § 1.4 of that record whole:
+
+> - **C132-SHADOW** (the class; a relay-result). A weak colouring of an open set, any finite number of labels; `|p − p′| = 1`;
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+> - **C132-LENS** (the card's first sentence, in two halves). On a six-sector turning seed: a pure outer side at `y_1` keeps
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+> - **C132-LENS-SIDE** (the card's (i)): with both, `y_0` has no pure inner side.
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+> - **C132-LENS-FOUR** (what (ii) needs, locally): three consecutive ring points with pure outer sides — the middle one has
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+> - **C132-LENS-GERM** (the existence clause, at the hypothesis the argument reads): if each `K_j` has a point strictly inside
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+> - **C132-LENS-II**: the card's clause (ii), verbatim. Expected verdict: a gap at the antipodal step.
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+  C132-LENS as posed is fixed as these: its first sentence in two halves (C132-LENS), its clause (i) (C132-LENS-SIDE), and its
+  clause (ii) kept verbatim as C132-LENS-II with two entries for what the deriver expects to derive of it (C132-LENS-FOUR,
+  C132-LENS-GERM); C132-SHADOW is the relay-result they stand on. C132-PLACED and C132-ARC stand as posed. **The defect**
+  ([hand], one mind — the deriver's): "pure sides are opposite at antipodes", used by the card's clause (ii) and by a read-off
+  line of the ring card's record, is true in one direction only when a side is "blocked by some point of the set" — a point
+  of a set strictly inside the unit circle about a ring point is strictly outside the one about its antipode, but not
+  conversely; three two-point sets with their second points at distance 3 from the centre give six pure inner sides and no
+  pure outer one. C132-TURN-EDGE's entry does not use the sentence; its stall's first item and C132-LENS (ii) as posed do.
 

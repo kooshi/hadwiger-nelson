@@ -802,3 +802,26 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     phase-1 commit, and my ruling "the whole plane first" stands only as an order. Confidence in that ruling: lowered to
     medium.
 
+26. **FS132-E6, first message: the seed card's first claim stated in six statements, and a defect found in a line it rests
+    on** (source: its message to "main", 2026-10-07; record `plans/FS132-E6-derivation.md` Stage 1; commit `2692fd0b`).
+    **The defect**: the card's clause (ii) and a read-off line of the ring card's record both use "pure sides are opposite
+    at antipodes, so the six read O O O I I I or O I O I O I"; with a side defined as blocked by *some* point of the set,
+    only one direction holds — a point strictly inside the unit circle about a ring point is strictly outside its
+    antipode's, but a point far from the centre is outside all six; three two-point sets at distance 3 give six pure inner
+    sides and no pure outer one. "True when the blocking points are near `x` … and false as written." The ring card's
+    entry C132-TURN-EDGE does not use it; its stall's first item and the card's clause (ii) do. **Its statements**:
+    C132-SHADOW (a relay-result: an open one-label piece reaching a point keeps its label off one whole side of the unit
+    circle about that point, near every point at distance 1 — "stated by no entry"), C132-LENS in two halves,
+    C132-LENS-SIDE, C132-LENS-FOUR (three consecutive ring points with pure outer sides: the middle one has four labels
+    present), C132-LENS-GERM (a hypothesis on the sets under which three consecutive outer-pure ring points exist),
+    C132-LENS-II (the card's clause (ii) verbatim, expected to be filed as a gap at the antipodal step). **Disclosed**: it
+    had the first claim's argument before registering expectations, and ran the two riding controls before registering
+    anything about them — not blind, and said so. **My receipt**: the commit is on `main`; § 1.4's six first lines quoted
+    into the claim list by script; the defect's counterexample checked by me — a point at distance 3 from the centre is
+    at distance at least 2 from every ring point, so outside all six unit circles: it holds. **Rulings.** (a) **The
+    statements are fixed by a dated line; the card's clause (ii) is kept verbatim as C132-LENS-II so that its gap is a
+    verdict about the asking lane's own sentence.** (b) **The defect is logged against the ring card's read-off line and
+    the asking lane's card** — two records, one sentence, neither an entry; corrections owed at the record job. (c) Third
+    time tonight a card's wording is corrected by the deriver that took it: the asking lane's next job is told the three
+    instances together.
+
