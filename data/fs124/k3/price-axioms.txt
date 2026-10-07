@@ -1,0 +1,27 @@
+'HadwigerNelson.Plane.ballRetract_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.continuous_ballRetract' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ballRetract_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ballRetract_of_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ballRetract_of_mem_segment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_preimage_ballRetract' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_inter_of_union_eq_closedBall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_inter_halves' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.RimOrder.rotate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.RimOrder.eq_or' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isClosed_iUnion_range_arc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.apply_mem_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.apply_mem_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.apply_one_mem_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.eq_one_of_mem_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.apply_one_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.isPreconnected_range_union_range' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.IsTriod.isPreconnected_iUnion_range' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.isPreconnected_image_Icc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.eq_apply_one_of_mem_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriod.not_mem_closure_both_sides' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.mem_closure' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsTriodCut.exists_arc' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

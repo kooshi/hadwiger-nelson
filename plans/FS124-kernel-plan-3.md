@@ -7,7 +7,24 @@ fact exists to be blind to). The record is written in stages; each is committed 
 
 ## Theorems this phase proved
 
-*(Filled at Stage 4; until then: none.)*
+On branch `fs124-wk3` only (nothing here is on `main`; the module holds 20 `sorry`). Each [kernel, on a branch], on
+`[propext, Classical.choice, Quot.sound]` or fewer as printed from the built library with two controls that print
+`sorryAx` (`data/fs124/k3/price-axioms.txt`; the names: `data/fs124/k3/theorems-proved.txt`). All in
+`Proofs/HadwigerNelson/Plane/ThreeArcs.lean`:
+- **The closed disc is unicoherent** — `isPreconnected_inter_of_union_eq_closedBall`: two closed preconnected sets
+  whose union is a closed disc meet in a preconnected set. Over `ballRetract` (the radial retraction; `ballRetract_one`,
+  `continuous_ballRetract`, `ballRetract_mem`, `ballRetract_of_mem`, `ballRetract_of_mem_segment`),
+  `isPreconnected_preimage_ballRetract`, and this library's `isPreconnected_inter_of_union_eq_univ`. Its hypotheses'
+  model: `isPreconnected_inter_halves`.
+- **The crossing leaf** — `IsTriod.not_mem_closure_both_sides`: no preconnected set of the closed disc off two of the
+  three arcs reaches the rim on both sides of their far ends. Over `inter_nonempty_of_interleaved_radius`.
+- **The order round the rim is cyclic** — `RimOrder.rotate`; `RimOrder.eq_or`.
+- Ten facts about the arcs: `isClosed_iUnion_range_arc`, `IsTriod.apply_mem_closedBall`, `IsTriod.apply_mem_ball`,
+  `IsTriod.apply_one_mem_sphere`, `IsTriod.eq_one_of_mem_sphere`, `IsTriod.eq_apply_one_of_mem_sphere`,
+  `IsTriod.apply_one_ne`, `IsTriod.isPreconnected_range_union_range`, `IsTriod.isPreconnected_iUnion_range`,
+  `IsTriod.isPreconnected_image_Icc`.
+**Not proved**: the θ-lemma `IsTriodCut.exists_opposite` and the leaf `ThreePiece.IsSector.hasArcEdges` — planned,
+route by hand, one mind (§ 3.2, § 4.3); 20 leaves left.
 
 ## Stage 1 — SAVED (FS124-K3): the readback and the build as given
 
@@ -315,3 +332,126 @@ measure; a triod whose pieces are fewer than three — the hypotheses are then c
 looking*: "about an interior point of an arc a small disc holds only that arc and its two pieces" (what C124-FORCED's
 second sentence reads) — it states in the module's words and follows in a few lines from `exists_opposite` and the
 fill clause; not stated, no consumer in the kernel yet.
+
+### 4.2 The pass on the obligations (`debruijn-obligation-modeling`, run fresh)
+
+No induction and no recursion here: the space is three rotations of one configuration, and every leaf is a point-set
+argument over the two proved tools. The pass asked of each open leaf whether its statement makes its proof local, and
+changed four:
+1. **`IsTriod.not_mem_closure_both_sides` now takes a set of the *closed* disc** (`Q ⊆ closedBall x r`; it was the open
+   disc). The same proof, one line shorter — and the "exactly two" step becomes one application: the piece together
+   with a closed stretch of the third arc, far end included, is such a set. With the open disc the stretch had to be
+   half-open and its far end argued as a limit.
+2. **`exists_rimPiece` (one existential, four conjuncts) is split by quantifier.** `exists_rimPieces`: the three pieces
+   at the three rim arcs exist and are different — the distinctness argument, once. `rimPiece_spec`: *any* piece whose
+   closure holds a point of the open rim arc from the far end of `J a` to that of `J b` has `J a`, `J b` in its closure
+   and meets `J c` at `x` only — a universal statement, read at the three rotations. Before the split the distinctness
+   was owed twice (for `closure_inter_nonempty` and again inside `exists_opposite`): the repeated chain was the missing
+   lemma.
+3. **`closure_inter_nonempty` is a corollary of `exists_rimPieces`** (three different elements of `Fin 3` are all of
+   them: `decide`), which is what lets `isPreconnected_closure_inter` carry no side hypothesis.
+4. Two typed joints: `IsTriod.apply_one_eq_polarPt` (a far end is the rim point at its own argument) and
+   `IsTriod.isPreconnected_image_Icc` (a closed stretch of an arc is preconnected — proved: `isPreconnected_Icc` holds
+   for `unitInterval` by instance, `data/fs124/k3/logs/checks2.txt`).
+
+**The measure.** The open leaves form a chain with no cycle (§ 4.3 lists them in an order in which each reads only
+earlier ones); each is closed by its own argument or by earlier leaves, none restates another. **The partition**:
+*prove* — all 41; *test* — `ballRetract_one` (the definition against `discRetract`), `isPreconnected_inter_halves`
+(the disc's unicoherence run on two half-discs), and, for the landing, the θ-lemma run on the three-sector point (§
+4.4); *assume* — nothing: `IsTriodCut` is the caller's data, not an assumption about the world.
+
+**The mutation audit, by hand** (one mind; each is a reason a hypothesis is load-bearing, not a proof): without the
+fill clause three small discs off the arcs satisfy the rest and share nothing; without preconnectedness `P 0` may be
+two of the true regions and `P 2` empty, and the arc between those two regions lies in one closure only; without
+openness or disjointness step 1 of the route has no proof (I built no counterexample). The conclusion's second
+conjunct is not implied by the first: it is the crossing lemma a second time.
+
+### 4.3 The plan per leaf — the 20 left
+
+Every name below was checked at the pin under the module's own imports (`data/fs124/k3/lean/checks1.lean`,
+`checks2.lean`; logs `data/fs124/k3/logs/checks1.txt`, `checks2.txt` — four lines of the first list failed and are
+corrected here: `Tuple.sort` and `Tuple.monotone_sort` need `Mathlib.Data.Fin.Tuple.Sort`, now imported;
+`closure_ball`, not `Metric.closedBall_eq_closure_ball`; `polarPt_add_two_pi` is outside the import closure — use
+`e_add_two_pi` after unfolding `polarPt`; the second list is clean). `T` is `⋃ m,
+range (J m)`. Sizes are lines of proof on the measured scale (§ 3.3). In build order:
+
+| # | leaf | route | lines |
+|---|---|---|---|
+| 1 | `exists_arc_range_subset_inter` | `γ.continuous.continuousAt.preimage_mem_nhds hN`, `Metric.mem_nhds_iff` in `unitInterval` give `δ`; `d := min (δ/2) 1`; `γ' t := γ ⟨d * t, _⟩` (`Continuous.subtype_mk`); injective as `d > 0`; the range by `Subtype.dist_eq`, `Real.dist_eq` (the pattern of `ThreePiece.HasArcEdges.isFull`) | 25 |
+| 2 | `IsTriod.range_subset_of_isPreconnected` | suppose `J m s₀ ∉ Z`; `C₁ := J m '' Icc s₀ 1`, `C₂ := J m '' Icc 0 s₀ ∪` the two other ranges, closed (`isCompact_Icc.image`, `isClosed_iUnion_of_finite`), covering `Z` (`le_total`); `isPreconnected_closed_iff.mp hZ C₁ C₂ …` gives a point of `Z ∩ C₁ ∩ C₂`; it is `J m s₀` (`injective`; `eq_center_of_ne` with `apply_zero`) | 35 |
+| 3 | `IsTriod.apply_one_eq_polarPt` | `Complex.norm_mul_exp_arg_mul_I (J m 1 - x)` with `‖J m 1 - x‖ = r` (`dist_eq_norm`, `dist_apply_one`); unfold `polarPt`, `e` | 8 |
+| 4 | `IsTriod.exists_rimOrder` | `θ m := arg (J m 1 - x)`, injective (3, `apply_one_ne`); `σ := Tuple.sort θ`, `a b c := σ 0, σ 1, σ 2`; `Tuple.monotone_sort` and injectivity for `<`; `γ < α + 2π` from `Complex.arg_le_pi`, `Complex.neg_pi_lt_arg`. (Or no sort: `lt_trichotomy` on three distinct reals.) | 30 |
+| 5 | `IsTriod.notMem_iUnion_range_of_mem_Ioo` | `mem_iUnion`; `eq_apply_one_of_mem_sphere`; `ho.eq_or m`; three cases of `polarPt_ne_of_sub h.pos h.pos`, the bounds by `linarith` | 15 |
+| 6, 7 | `IsTriodCut.piece_subset_ball`, `disjoint_iUnion_range` | `subset_iUnion P i` rewritten by `iUnion_eq`; `.1`, `.2` | 7 |
+| 8 | `IsTriodCut.exists_unique_mem_closure` | `Metric.isOpen_iff` on `Tᶜ` (`isClosed_iUnion_range_arc`) gives `ε`; `V := ball p ε ∩ ball x r` is convex, inside `⋃ P`; `p ∈ closure V` by `isOpen_ball.inter_closure` and `closure_ball x h.pos.ne'`; a point of `V` is in some `P i`, and `IsPreconnected.subset_left_of_subset_union` (against the union of the other pieces) puts `V ⊆ P i`. Uniqueness: `ball p ε` meets `P j`, inside `V ⊆ P i`, against `h.disjoint` | 35 |
+| 9 | `IsTriodCut.closure_inter_closure_subset` | by contradiction off `T`; inside the open disc the point is in a piece `P k` (`iUnion_eq`), open, meeting `P i` and `P j` (`mem_closure_iff`): `k = i = j`; on the rim, 8 | 18 |
+| 10 | `IsTriodCut.exists_forall_rimArc` | `S := polarPt x r '' Ioo α β`, preconnected (`isPreconnected_Ioo.image`); the midpoint's piece `i` (8); a point of `S` in another closure and `exists_inter_of_finite_closed_cover` (`s := univ`, `C := fun i => closure (P i)`) give a point of `S` in two closures, against 8; the closed arc by `image_closure_subset_closure_image`, `closure_Ioo hαβ.ne`, `closure_minimal` | 30 |
+| 11 | `IsTriodCut.ne_of_rimOrder` | `rintro rfl`; `not_mem_closure_both_sides ho.apply_b ho.apply_c hψ` with the second point at `φ + 2π` (`e_add_two_pi`; `γ < φ + 2π < β + 2π` by `linarith`), `Q := P i` (`piece_subset_ball`, `disjoint_iUnion_range`) | 15 |
+| 12 | `IsTriodCut.exists_rimPieces` | 10 at `ho`, `ho.rotate`, `ho.rotate.rotate` (5 for its `hT`); 11 at the same three, the last with the first arc's midpoint read a turn on | 35 |
+| 13 | `IsTriodCut.closure_inter_nonempty` | 4, 12; `j` is one of the three (`decide`, as in `checks2.lean`); the far end `polarPt x r α = J a 1` (`left_mem_Icc`) | 12 |
+| 14 | `IsTriodCut.isPreconnected_closure_inter` | `isPreconnected_inter_of_union_eq_closedBall h.pos` with `A := closure (P i)` and `B :=` the union over `j` of `T ∪ (if j = i then ∅ else closure (P j))`: each member preconnected (`IsPreconnected.union'`, 13; `h.isPreconnected_iUnion_range`), all through `x` (`isPreconnected_iUnion`), closed; `A ∪ B` is the closed disc (8 on the rim, `iUnion_eq` inside, `closure_minimal`); `A ∩ B = closure (P i) ∩ T` by 9 | 35 |
+| 15 | `IsTriodCut.rimPiece_spec` | the far ends are in the closure (10 at `ho`, its uniqueness naming `i`); 14, then 2 twice; third conjunct: `⊇` by `apply_zero`; `⊆`: for `J c s ≠ x` take `Q := P i ∪ J c '' Icc s 1` — preconnected (`IsPreconnected.subset_closure`, `IsPreconnected.union (J c s)`, `isPreconnected_image_Icc`), off `J a ∪ J b` — and `not_mem_closure_both_sides ho.apply_a ho.apply_b hφ ⟨ho.lt_bc, ho.lt_ca⟩` | 40 |
+| 16 | `IsTriodCut.exists_opposite` | 4, 12, then 15 at the three rotations with the three midpoints; `opp` sends `c ↦ i₁`, `a ↦ i₂`, `b ↦ i₃` (`Equiv.ofBijective` of the `if`-function; `Finite.injective_iff_surjective`); the conjuncts by `ho.eq_or m` and the same exhaustion for `i` | 40 |
+| 17 | `IsTriodCut.exists_range_subset` | the third index `k` (`decide`); `m := opp.symm k` | 8 |
+| 18 | `IsTriodCut.closure_inter_closure_inter_ball` | `m` as in 17; `⊇` by 16; `⊆`: the point is on some `J m'` (9); if `m' ≠ m` then `opp m'` is `i` or `j` and the second conjunct of 16 makes the point `x` | 20 |
+| 19 | `IsTriodCut.mem_closure` | 17 with any `j ≠ i`; `x = J m 0` | 5 |
+| 20 | `IsTriodCut.exists_arc` | 17, then 1 for `J m` at `N` (`h.apply_zero m ▸ hN`) | 8 |
+
+**About 420 lines.** What is hard: nothing new. The two leaves where an implementer may spend time are 14 (the shape
+of `B`, so that its closedness and preconnectedness are each one lemma) and 16 (the bookkeeping of a bijection on
+`Fin 3`); both are finite case work. **If a leaf will not go**: 4 has a second route in its row; for 16 the statement
+may be read with `opp` a bijective function first and the `Equiv` built last.
+
+### 4.4 Where the implementer starts, and the file this job did not write
+
+1. **Start**: `Proofs/HadwigerNelson/Plane/ThreeArcs.lean` on branch `fs124-wk3`: 41 theorems, 21 proved, 20 `sorry`,
+   in the order of § 4.3. No statement may change; one that must comes back through the coordinator.
+2. **`Plane/SectorPoint.lean` holds three `sorry`; one depends on this module.**
+   - `ThreePiece.IsSector.hasArcEdges` — **depends on `Plane/ThreeArcs`**: add `import
+     Proofs.HadwigerNelson.Plane.ThreeArcs` and the two lines of § 3.1.
+   - `sectorPoint_isSector` — does not: it exhibits the three radii and reads no theorem of this module.
+   - `exists_closePair_sector` — does not: it exhibits a colouring and two sector points.
+   `IsSector.isFull` and `closePair_both_saved_of_isSector` are already proved over the leaf. So the file can go to one
+   writer in either order; the only edit this module asks of it is the import and those two lines.
+3. **The spec example the landing owes** (in `Plane/SectorPoint.lean`, after `sectorPoint_isSector` is proved): `example
+   : sectorPoint.HasArcEdges := sectorPoint_isSector.hasArcEdges` — the θ-lemma run on the model of its hypotheses;
+   `sectorPoint_hasArcEdges` proves the same fact by construction, so the two are a cross-check.
+4. **The gate's items for the new module**: its records for `scripts/Axioms.lean` (41 theorems; the two structures and
+   `ballRetract` hold no proof); no declared hypothesis and no axiom, so nothing for the assumptions step; the
+   vacuity scan will be silent on it (its hypotheses are predicates on maps), so the landing names the model in words:
+   `sectorPoint_isSector`.
+
+### 4.5 Drafts for the coordinator's files (none written by this job)
+
+- **`plans/FS124-derivation.md`, C124-FORCED, `uses only:`** — once the 20 are closed, in place of "(the θ-curve form of
+  the Jordan–Schoenflies theorem: recalled, not read)": "(`IsTriodCut.exists_opposite`, `Plane/ThreeArcs`: proved in
+  this library from the unicoherence of the plane and the crossing lemma, for three pieces given as filling the cut
+  disc — the definition of a sector point gives them; that a cut disc has three components is not proved and not
+  used)". The same parenthesis under C124-BOTH's and C136-PARTNERS's citations of "C124-FORCED's input".
+- **`LEAN.md` § Searching — Lean**, one line: "`isPreconnected_Icc` and `isCompact_Icc` hold for `unitInterval` by
+  instance; the closed disc is unicoherent (`isPreconnected_inter_of_union_eq_closedBall`, `Plane/ThreeArcs`); a
+  cyclic order of points on a circle is carried by one rotation lemma (`RimOrder.rotate`), not by index arithmetic in
+  `Fin n` (FS124-K3)."
+- **`ARCHITECTURE.md`**: the row for `Plane/ThreeArcs` is written (this job's); its words "a skeleton on branch
+  `fs124-wk3`" change at the landing.
+
+## Stage 5 — SAVED (FS124-K3): the build of the final skeleton, the price in final form
+
+**The build** (`data/fs124/k3/logs/build-2.log`): `EXIT 0`, 2 modules rebuilt (`Plane/ThreeArcs`, `Proofs`), **26
+`declaration uses sorry` warnings and no other** — the 6 as given and 20 in `Plane/ThreeArcs`.
+`tools/check_architecture.py`: `RESULT: PASS`. The leaf's two lines (§ 3.1) elaborate against the rebuilt library
+(`data/fs124/k3/lean/Bridge.lean`, no error). Axioms (`data/fs124/k3/price-axioms.txt`): 21 proved theorems on the
+standard three or fewer, the two controls on `sorryAx`.
+
+**The price, final.** `Plane/ThreeArcs`: 41 theorems, two structures of hypotheses, one more for the order round the
+rim, one definition; **21 theorems proved in 162 lines of proof; 20 left, about 420 lines** (§ 4.3) — the module whole
+near 600 lines of proof, 513 lines of file today. The 21 include both uses of a tool from outside the module (the
+plane's unicoherence; the crossing lemma); what is left reads only this module and Mathlib's point-set lemmas. One
+build of the branch is nine minutes whatever was touched (477 batches walked).
+
+**What an implementer starts from**: § 4.3 (the 20 leaves in build order, each with its route and its names), § 4.4
+(the file this job did not write), `data/fs124/k3/leaves-open.txt`, `data/fs124/k3/lean1.sh` for iteration.
+
+**Not done by this job**: the pass on the surface (`debruijn-experience-modeling`) — the brief named two passes; the
+module's one consumer boundary is `IsTriodCut.exists_arc`, whose shape is the consumer's own definition, checked by
+the bridge. No search was run. No file of the coordinator's was written.

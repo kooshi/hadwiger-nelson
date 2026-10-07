@@ -1,0 +1,8 @@
+@Tuple.monotone_sort : ∀ {n : ℕ} {α : Type u_1} [inst : LinearOrder α] (f : Fin n → α), Monotone (f ∘ ⇑(Tuple.sort f))
+@Equiv.ofBijective : {α : Sort u_1} → {β : Sort u_2} → (f : α → β) → Function.Bijective f → α ≃ β
+convex_halfSpace_re_le : ∀ (r : ℝ), Convex ℝ {c | c.re ≤ r}
+@IsOpen.inter_closure : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s t : Set X},
+  IsOpen s → s ∩ closure t ⊆ closure (s ∩ t)
+@isClosed_iUnion_of_finite : ∀ {X : Type u_1} {ι : Sort u_2} [inst : TopologicalSpace X] [Finite ι] {s : ι → Set X},
+  (∀ (i : ι), IsClosed (s i)) → IsClosed (⋃ i, s i)
+HadwigerNelson.Plane.e_add_two_pi : ∀ (θ : ℝ), HadwigerNelson.Plane.e (θ + 2 * Real.pi) = HadwigerNelson.Plane.e θ
