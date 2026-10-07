@@ -39,39 +39,18 @@ the next milestone**; staffing is his cap of three Opus slots.
 `plans/FS124-close-inventory.md`, items 1–5; its claim list `data/fs124/claims.md`); **the re-rank is filed** (the commit after
 `4bb0c8c4`; **the next filing's fact-audit base is that commit** — `git log -1 --format=%h -- plans/FRONTIER-STUBS.md`).
 
-**Running (three slots, as of 13:44 UTC):**
+**Running (three slots, as of 14:02 UTC):**
 
 | job | where | what it hands on | on its message or hand-back |
 |---|---|---|---|
-| **FS124-P2** (`poros`) — the second round's card | `main`; record `plans/POROS-2026-10-07-fs124-round1.md`; brief `data/fs124/briefs/FS124-P2-round-one.md` | a message when the card is saved; then re-posed search lines, the stub's bearings, three lines for Kooshi | the paragraph below |
-| **FS124-K1** (`debruijn`) — the kernel planner for the radius clause, **blind first** | worktree and branch `fs124-wk1`; record `plans/FS124-kernel-plan.md` there; brief `data/fs124/briefs/FS124-K1-kernel-plan.md`; kernel claim list `data/fs124/claims-K1.md` | a message when its phase-1 plan is committed | **reply to lift the fence**, naming `plans/FS124-E1-derivation.md` Stage 3 (the five entries) and § 1.1; log the commit that dates its blindness (FS-124 inventory item 11); at hand-back, an implementer on its skeleton |
-| **FS132-I4** (`debruijn-implementer`) — the join (done, item 43), then lots E and D | worktree and branch `fs132-wi4`; record `plans/FS132-I4-implementation.md` there; brief `data/fs132/briefs/FS132-I4-join.md` **with Amendment 1** (merge the finished `fs132-wi3`; two rows of the architecture map) | the palettes' module, the ring form's leaves, the chart's null sets, the kill | log; then **lot A** (the chart's geometry and the tips: 18 leaves, nothing ported; one of its leaves is already stated and proved under another name in the shift's module — FS-132 inventory item 44) to an implementer on a worktree cut from `fs132-wi4`'s tip |
+| **FS124-E2** (`ephodos`) — FS-124's second derive round: the save | `main`; record `plans/FS124-E2-derivation.md`; brief `data/fs124/briefs/FS124-E2-second-round.md` | each claim's statement with its *not claimed* line; the reading on every held six-coloured object; a verdict per claim (the forcing; the save by one member — built by formula or excluded; the strip's top edge; the cyclic order) | dated lines in `data/fs124/claims.md`; **a held object that breaks the pattern, or a one-member save built → it stops and messages: read its artifact, then tell Kooshi (a local object; it fixes no value)**; anything that would fix the value → Kooshi at once, "claimed by one mind, unchecked"; after the reading, queue line 14 of `plans/SEARCH-QUEUE.md` for the day's Searcher if the reading leaves it open; at hand-back → the asking lane again, or the record job if the round closes the card |
+| **FS124-K1** (`debruijn`) — the kernel planner for the radius clause, **blind first** | worktree and branch `fs124-wk1`; record `plans/FS124-kernel-plan.md` there; brief `data/fs124/briefs/FS124-K1-kernel-plan.md` | a message when its phase-1 plan is committed | **reply to lift the fence**, naming `plans/FS124-E1-derivation.md` Stage 3 and § 1.1; at hand-back, an implementer on its skeleton; **the second module's list** (the one lemma, the centre's statement, the completion's wide form, the rhombus's two-set statement — FS-124 inventory item 13) is fixed in `data/fs124/claims-K1.md` by a dated line then |
+| **FS132-I4** (`debruijn-implementer`) — the exclusion's last two modules (Amendment 2 of its brief), under a stopping rule | worktree and branch `fs132-wi4`; record `plans/FS132-I4-implementation.md` there | **a message with four axiom lines when the last leaf is in** | **read the lines and the print's control; if `no_outside_orbit_points` reads the standard three, tell Kooshi at once: the first night's theorem is kernel-checked on a branch** (not landed; grade unchanged until the gate); then brief the landing (procedure `plans/FS132-L1-landing.md`; the port's drafts D1–D7 in `plans/FS132-I2-implementation.md` on that branch; a copy of the release's licence text beside the ported modules; the three instances on Mathlib types to scope; fact-audit base: the last filing) |
 
 **Done this afternoon in the kernel lane** (FS-132 inventory items 40–44): the port (branch `fs132-wi2`); the join (no leaf
 changed); **the step lemma's module and the shift's, proved** (branch `fs132-wi3`, tip `e9dd2f46`: 33 theorems on the standard
 three axioms) — so of the exclusion's nine steps, the two analytic ones are kernel-checked on a branch. Six bullets filed in
 `LEAN.md` § Searching — Lean.
-
-**FS-124's second round is posed** (FS-124 inventory item 12; the card in `plans/STUB-q-ring.md`, § dated "after the first
-round": the unit is the *save* — a close complementary pair of three-colour points and its two common unit points; five claims,
-four of which spend six; fixed in `data/fs124/claims.md`). **Briefed, waiting for the first free slot (14:00 UTC): FS124-E2**
-(`ephodos`; brief `data/fs124/briefs/FS124-E2-second-round.md`, gate exit 0; record `plans/FS124-E2-derivation.md`) — **launch
-it when the asking lane's job hands back** (it is finishing its search lines, the stub's bearings and three lines for Kooshi),
-with the line "Your brief is on disk: read it in full first." and the brief's path. Its messages: each claim's statement with
-its *not claimed* line (dated lines in the claim list); a verdict per claim; **a held object that breaks the card's pattern,
-or a save by one member built by formula — it stops and messages first**; anything that would fix the value → Kooshi at once.
-**At the asking lane's hand-back also**: file its re-posed search lines (`plans/SEARCH-QUEUE.md` lines 12, 13) and any change
-of rank (fact-audit base: the last commit that touched `plans/FRONTIER-STUBS.md`).
-
-**Briefed, waiting for the next free slot (13:22 UTC): FS124-K1, the kernel planner for FS-124's first module** (`debruijn`; brief
-`data/fs124/briefs/FS124-K1-kernel-plan.md`, gate exit 0, **fenced: blind first**; kernel claim list `data/fs124/claims-K1.md`;
-worktree and branch `fs124-wk1`, cut from `main` at `596100d4`, build copied; record `plans/FS124-kernel-plan.md` there): the
-radius clause — five statements, derived by hand today (FS-124 inventory item 7: six-colourings of discs of every radius give
-six; the converse over the import; some disc has no weak five-colouring). **Launch it into the first slot that frees, ahead of
-the exclusion's lot A** (ruling 7 (b)); its fence lifts by my reply to its "phase-1 plan committed" message — then tell it
-where the deriver's entries are (`plans/FS124-E1-derivation.md` Stage 3). **Since the morning also** (FS-132 inventory items
-42–43): the step lemma is proved in the kernel on branch `fs132-wi3` (`6fe55ef7`); the join builds on `fs132-wi4` with no leaf
-changed (`d260d0bf`).
 
 **Done since the morning** (FS-132 inventory items 33–41): the record job's second half; the planner's successor (49 leaves in
 five lots; the kernel claim list extended by seven statements, `data/fs132/claims-K1.md`); **the port** (163 declarations on

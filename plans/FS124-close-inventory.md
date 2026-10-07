@@ -280,4 +280,30 @@ between two colours that is an arc of the unit circle about a point one unit awa
     slot. (c) My two wrong sentences are corrected here and in the report to Kooshi. (d) The card's own caution is the
     milestone's: every claim says it does not claim that a weak six-colouring has a three-piece point or a close
     complementary pair.
+13. **FS124-P2 done (446k and 31 minutes by the task notice), and FS124-E2 launched into its slot** (asking lane; record
+    `plans/POROS-2026-10-07-fs124-round1.md` Stages 0–3, its gate exit 0; report `data/fs124/reports/FS124-P2.md`; four
+    commits to `0658dab3`). Beyond item 12: **what the first round settled** (its § 2.1): eleven instruments or relays true
+    at every number of labels, two calibrations, two statements over classes with no held member, and the rhombus's
+    two-set statement "an instrument with held instances at every centre read"; **the three centres read side by side**
+    (the tight seven-colouring: six labels, three windows, no pair reversed; the strip: four sectors of 90°, four windows,
+    each pair reversed at the antipode; the disk); **a whiff it reports and does not settle**: a tight pair's centre at
+    seven carries neither label (the calibration), while 91 of 91 saved points at six carry all four labels of their two
+    edges — "whether six forces the kind at a saved point is neither derived nor refuted"; **for the kernel lane**: the
+    second module is the one lemma, the centre's statement and the completion's wide form, with the two-set statement
+    moved up and read back against the strip at its origin; **the search queue**: line 12 declined as posed ("its yes would
+    be a labelling under rules that constrain nothing; its no could not occur"), line 13 declined ("neither answer changes
+    a move"), **a new line 14** — a save by one member in the wedge family, four flowers at the corners of a unit rhombus —
+    held until the reading has seen two objects; line 11 stays held; **no change of rank**; one clause for the forced
+    pair's row. **Its slips, disclosed**: five held objects not read (they are the second round's first claim); one claim's
+    statement rests on its hand reading of one output; the claim list read at its headings only; a reader whose first
+    fault criteria did not fire, repaired before any line rested on it. **My receipt**: the commits are on `main`; its
+    § 3.1, § 3.4 and its draft for the ranking read whole; its three lines for Kooshi read. Not checked by me: its readers;
+    the 94. **Filed by me, by script** (this commit): the fates of lines 12 and 13 and the new line 14 in
+    `plans/SEARCH-QUEUE.md`; the clause in the forced pair's row of `plans/FRONTIER-STUBS.md` (fact audit against
+    `8afe2fde`: passed). The stub's provisional bearings it filed itself, as the brief asked. **Rulings.** (a) **The 94 is
+    called what it is wherever it is said: a sample, one mind's script, on two objects built by one recipe** — the second
+    round's first claim makes it exact or corrects it. (b) The kernel lane's second module takes its list (above) when
+    the first module's planner is back. (c) **FS124-E2 is launched** (14:02 UTC by the clock at this entry; `ephodos`;
+    brief `data/fs124/briefs/FS124-E2-second-round.md`): the reading on every held object, then the four claims. Slots:
+    it, the implementer on the exclusion's last two modules, the kernel planner on the radius clause.
 
