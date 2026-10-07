@@ -26,26 +26,19 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
-## 0d. READ THIS FIRST — brought current at 17:15 UTC, 2026-10-07 (after the compaction Kooshi asked for at 16:21)
+## 0d. READ THIS FIRST — brought current at 17:49 UTC, 2026-10-07 (after the compaction Kooshi asked for at 16:21)
 
-**Held / Derived / Opened.** FS-132's first theorem (the four-way exclusion, whole plane) is **held**: landed and filed
-(`783e7bdb`; FS-132 inventory items 46–51). FS-124 is **Derived** and filed (`bd3df943`, **the next filing's fact-audit
-base**; `plans/FS124-derivation.md`, 30 entries; rows 161–164; FS-124 inventory items 1–37). FS-136, "the point across"
-(`plans/STUB-covering-pairs.md`), is **Opened**, ranked first, and **its first round is in: ten entries, each derived, one
-mind** (inventory `plans/FS136-close-inventory.md`, items 1–7; claim list `data/fs136/claims.md`; record
-`plans/FS136-E1-derivation.md`) — every held stop closed in measure by its own pair's regions; no value moved.
+**Held / Derived / Opened.** FS-132's first theorem (the four-way exclusion, whole plane) is **held** (`783e7bdb`).
+**FS-124's disc criterion is HELD: landed (gated `24a42aa9`) and filed (`1344fdc0` — THE NEXT FILING'S FACT-AUDIT BASE;
+the next landing's previous receipts are `data/fs124/l1/gate/receipt-{axioms,vacuity,assumptions}-final.log`; FS-124
+inventory items 38, 40).** FS-124 is **Derived** (`plans/FS124-derivation.md`, 30 entries; rows 161–164); **all nine
+statements of its second module are kernel-checked on branch `fs124-wi3`** (items 36–41), not landed. FS-136, "the point
+across" (`plans/STUB-covering-pairs.md`), is **Opened**, ranked first, **its first round in: ten entries, each derived,
+one mind** (inventory `plans/FS136-close-inventory.md`, items 1–7; claim list `data/fs136/claims.md`; record
+`plans/FS136-E1-derivation.md`); no value moved. **NO LANDING IS IN FLIGHT.**
 
-**Three jobs are running** (agent ids in the scratch file `agents.txt`, never in a repo file):
-1. **FS124-L1 — a LANDING IN FLIGHT** since 16:06 UTC (the disc criterion's module; worktree and branch `fs124-wl1`; brief
-   `data/fs124/briefs/FS124-L1-landing.md`). **Until it is back: no `CLAUDE.md` filing, and nothing committed to `main`
-   outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`.** It sends one line when
-   the gate is green, then hands back with drafts. Then: the three digests against
-   `data/fs132/l2/gate/receipt-{axioms,vacuity,assumptions}-final.log`; file its drafts by a script on the pattern of
-   `data/fs132/l2/file_fs132_landed.py` (counts; row 161's grade; the first planner's sentence on which half of the
-   criterion needs the import; every "kernel-checked on a branch" said of this module; the theorem record's dated line;
-   the atlas node `DISCS`); fact audit `--base bd3df943`; **tell Kooshi: held — seven iff some disc has no weak
-   six-colouring, on one declared outside theorem.** If my push is rejected because it landed first: `git pull --rebase`,
-   push, never force.
+**Two jobs are running; the third slot is held by choice** for whichever of their two follow-ups comes first (agent ids in
+the scratch file `agents.txt`, never in a repo file):
 2. **FS124-I3** (implementer; launched 17:12 UTC; FS-124 inventory items 34–37) — the second module's last four claims:
    `Plane/ThreePiece` and `Plane/ClosePair`, 61 leaves, in worktree and branch `fs124-wi3` (fast-forwarded to the first
    implementer's tip `ab669747`, where `CircleCrossing` and `OnePiece` are proved: 63 leaves, the first five claims
