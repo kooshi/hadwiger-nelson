@@ -1,0 +1,9 @@
+slot: admitted keryx-check: mem 10 GiB (hard cap), cpus 4,5
+'OAI.EuclideanFiveColor.no_proper_five_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+OAI.EuclideanFiveColor.no_proper_five_coloring : ¬∃ c, OAI.EuclideanFiveColor.ProperColoring 5 c
+/tmp/claude-1000/-home-kooshi-source-lean-dir/97d700e3-0ed0-4032-8dcd-cebbe8c929fe/scratchpad/KeryxCheck.lean:7:67: error: Type mismatch
+  OAI.EuclideanFiveColor.no_proper_five_coloring
+has type
+  ¬∃ c, OAI.EuclideanFiveColor.ProperColoring 5 c
+but is expected to have type
+  ¬∃ c, ∀ (x y : ℂ), ‖x - y‖ = 2 → c x ≠ c y

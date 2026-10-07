@@ -8231,3 +8231,43 @@ reason by the close.*
      one step (stationary mean to upper density), **after** the audit's third message, and at Kooshi's word given
      ruling 607 (c) (it builds on the outside theorem). Not launched. (c) Its table of what changes in this
      repository (its brief's item 5) is the input for the front page's drafts; nothing is filed.
+
+614. **EXT-OAI1, third message: THE OUTSIDE PROOF BUILDS HERE, ITS HEADLINE RESTS ON THE STANDARD THREE AXIOMS, AND ITS STORED STATEMENT IS THE CHALLENGE'S — `χ(ℝ²) ≥ 6` is a kernel-checked theorem on this machine at the release's toolchain, and so is the transfer `χ_m⁰(ℝ²) ≤ χ(ℝ²)` for every number of colours** (source: EXT-OAI1's message to "main", 2026-10-07 about 02:25 UTC; record `plans/EXT-OAI1-audit.md` stage 4, commit `e56ea847` on `main`; everything cited under `data/external/oai1/`).
+     **Its account.** *The build*: Lean 4.34.1, Mathlib at the tag v4.34.1 from Mathlib's own cache, a lakefile reduced
+     to the Mathlib requirement; the cone's 70 modules (30,336 lines, byte-identical to the release's, 70 of 70)
+     compiled from source under a 10 GiB slot in 778 s, every batch exit 0, no warning. *The axioms*:
+     `no_proper_five_coloring`, `proper_to_borel_weak` (the transfer, every `k`),
+     `no_measurable_weak_five_coloring` and `PlaneFiveColor.Spectral.wild_fourier` (their rigidity theorem) each on
+     `[propext, Classical.choice, Quot.sound]`. *The control*: one line of a lemma two modules below the headline
+     replaced by `sorry` in a second tree — the headline and the transfer then print `sorryAx`, the untouched half
+     stays clean, the set check fails with exit 1. *The statement*: the stored type and value of `ProperColoring`
+     and the stored type of the theorem, from the challenge's environment and from the solution's, in a canonical
+     form, are byte-identical; a challenge with `Measurable coloring →` inserted prints differently; the norm is
+     Mathlib's on `ℂ`, the `1` real, the colours `Fin 5`. *Restatements closed by their theorem, on the standard
+     three*: a form with no `ℂ`, no norm and no square root (`∀ c : ℝ × ℝ → Fin 5, ∃ p q, (p.1 - q.1)^2 + (p.2 -
+     q.2)^2 = 1 ∧ c p = c q`); the form on `EuclideanSpace ℝ (Fin 2)`; `6 ≤ (unitDistance …).chromaticNumber` with
+     this repository's `unitDistance` copied in; and, at this repository's own pin with their unfolded statement as
+     a hypothesis and nothing added to `Proofs/`, `6 ≤ χ ∧ χ ≤ 7` by row 33's upper end, and the converse.
+     **What it does not cover, in its words**: Mathlib's compiled declarations were loaded from Mathlib's cache, not
+     re-checked here; the release's full configuration was not resolved (the cone needs none of it); the release's
+     comparator has not been run (it needs three outside programs downloaded — held for me); no independent kernel
+     replay yet. **My receipt.** Its commit is on `main`; its saved prints read by me: `audit/Axioms.out` (the four
+     lines and three AXIOM-SET PASS), `control-sorry.out` (`sorryAx` at the headline and the transfer, "AXIOM-SET
+     FAIL", exit 1), the three dumps' heads, `build-cone.log`'s last line (`modules=70 total=778s exit=0`),
+     `audit/LeanDirBridge.out` and `audit/Statement.out`. **And one step by my own hand**
+     (`data/external/oai1/keryx/KeryxCheck.lean`, `keryx-check.out`; under a 10 GiB slot in its working copy):
+     `#print axioms OAI.EuclideanFiveColor.no_proper_five_coloring` prints the standard three; **my own wording of
+     the claim — `¬ ∃ c : ℂ → Fin 5, ∀ x y : ℂ, ‖x - y‖ = 1 → c x ≠ c y` — is closed by their theorem with no
+     error; the same line with distance 2 fails with a type mismatch, as a control must.** Not checked by me: the
+     build itself (I read its log); the byte-identity of the 70 modules; the canonical dumps beyond their first
+     lines; the bridge's statements. **The grade, in this project's words**: [kernel] at Lean 4.34.1 on this
+     machine, for a statement read aloud by two (the auditor and me) against the informal claim; outside this
+     repository's library and pin; Mathlib's own oleans trusted as distributed; no second kernel. **Rulings.**
+     (a) **Kooshi notified by push at once.** (b) **The comparator stays held for Kooshi**: three outside programs
+     run on his machine, one a third-party sandbox — an install is his decision; the audit names which of its
+     checks were made by hand. Alternative: let the job fetch and run them. Why not: installs are the principal's.
+     Confidence: high. (c) **Ruling 607 (c) stands until he speaks**: nothing is cited, imported or built on. What
+     is now his to decide is listed to him: how the result enters this repository (cited; imported as a declared
+     outside theorem; ported to this pin), what the front page says, the possible consequence of item 613 (1), the
+     asker's re-rank, and when the backlog's launches resume. (d) The capped replay and the proof's shape are the
+     audit's remaining stages.
