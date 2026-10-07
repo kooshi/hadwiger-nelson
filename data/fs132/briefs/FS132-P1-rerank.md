@@ -77,6 +77,9 @@ sentences; a stub for the consequence; the backlog paused until your re-rank):
 > 618. **EXT-OAI2, third message: the outside manuscript's obstruction at five is read in full — no gap found, one mind; it goes around the map step and proves no regularity; five is one count spent in three five-only statements; two of them are false at seven, so at six they can hold only on a normal form — and that normal form is this project's** (source: EXT-OAI2's message to "main", 2026-10-07; record `plans/EXT-OAI2-reading.md` stages 3–4, commits `2f18d416`, `422dec3e`, `1076316a` on `main`; their §§ 5–8, 2,747 lines).
 > — source: plans/FS131-close-inventory.md
 
+> 619. **EXT-OAI1 done: the outside release's Lean proof that the plane is not five-colourable stands under everything a build can show — built, axioms printed with a control, the statement equal by signature, and replayed module by module; the import is drafted as a skeleton at this repository's pin** (auditor, `debruijn`; harness 471k and 46 minutes by the task notice; record `plans/EXT-OAI1-audit.md` stages 1–8; report `data/external/reports/EXT-OAI1.md`; eight commits on `main`, the last `2015ff98`; working copy `~/.cache/ext-oai1/`, about 11 GB, kept).
+> — source: plans/FS131-close-inventory.md
+
 
 **Your inputs, by address** (read them whole; nothing in this brief stands in for them):
 - the audit of the release's Lean: `plans/EXT-OAI1-audit.md` — stage 4 (the build, the axioms, the statement), **stage 6 (the proof's
@@ -86,7 +89,9 @@ sentences; a stub for the consequence; the backlog paused until your re-rank):
   object), stage 2 (the transfer, read in full: rigidity proved at the real algebraic numbers, by properties no number field has),
   stage 3 (the obstruction at five, in four acts, and how it goes around the map step), and **stage 4 (every step against every
   `k`: the three five-only statements, what six would need — its [P₆], [L₆], [G₆], [A₆] — against rows 131–154, and a calibration
-  showing two of them false at seven)**; its last stage, the front page's replacement sentences, may still be in progress;
+  showing two of them false at seven)**; and **stage 5 (what changes here: the replacement sentences it drafts for the front page and the ledger; its § 5.4, the
+  stubs it would re-aim — FS-104, FS-123, FS-124, FS-126, FS-127, FS-128, FS-120 — and five it would mint; one mind's proposals,
+  yours to rank and not to take as ranked)**; its report is `data/external/reports/EXT-OAI2.md`;
 - the release itself, read-only: `/home/kooshi/source/math` — the manuscript's source under its `preprints` folder for the
   five-colour paper, the Lean under `lean/OAI/Geometry/PlaneColoring`, and a catalogue of 371 other result families
   (`/home/kooshi/source/math/CONTENTS.md`) that nobody here has read.

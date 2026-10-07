@@ -9,7 +9,7 @@ AIM="\n".join([Q("CLAUDE.md","1. **Given MR, the plane is the measurable problem
                Q("CLAUDE.md","4. **Regular colourings need seven, verified and almost everywhere**"),Q("CLAUDE.md","5. **So, given MR, Hadwiger–Nelson is one question: can vanishing holes save a colour?**"),
                Q("CLAUDE.md","6. **Its tools are Voronov's circle topology made robust, and the density topology**"),Q("CLAUDE.md","1. **Rank a route by its bearing on the answer**")])+"\n"
 TOP="\n".join([Q(FS,"| 1 | **FS-124 the (Q) ring**"),Q(FS,"| 2 | **FS-123 the Siamese class**"),Q(FS,"| 3 | **FS-104 `χ_CP(ℝ²)` at six**")])+"\n"
-ITEMQ="\n".join(item(n) for n in [607,611,613,614,615,616,617,618])+"\n"
+ITEMQ="\n".join(item(n) for n in [607,611,613,614,615,616,617,618,619])+"\n"
 b=f'''# Brief FS132-P1 — the frontier after an outside proof of six became this project's literature: the re-rank, and the question of the milestone that opens on it
 
 *Written 2026-10-07 (UTC) by Keryx, the coordinator (the top-level session), at Kooshi's word. Launch line: "Your brief is on disk: read it in full first."*
@@ -65,7 +65,9 @@ sentences; a stub for the consequence; the backlog paused until your re-rank):
   object), stage 2 (the transfer, read in full: rigidity proved at the real algebraic numbers, by properties no number field has),
   stage 3 (the obstruction at five, in four acts, and how it goes around the map step), and **stage 4 (every step against every
   `k`: the three five-only statements, what six would need — its [P₆], [L₆], [G₆], [A₆] — against rows 131–154, and a calibration
-  showing two of them false at seven)**; its last stage, the front page's replacement sentences, may still be in progress;
+  showing two of them false at seven)**; and **stage 5 (what changes here: the replacement sentences it drafts for the front page and the ledger; its § 5.4, the
+  stubs it would re-aim — FS-104, FS-123, FS-124, FS-126, FS-127, FS-128, FS-120 — and five it would mint; one mind's proposals,
+  yours to rank and not to take as ranked)**; its report is `data/external/reports/EXT-OAI2.md`;
 - the release itself, read-only: `/home/kooshi/source/math` — the manuscript's source under its `preprints` folder for the
   five-colour paper, the Lean under `lean/OAI/Geometry/PlaneColoring`, and a catalogue of 371 other result families
   (`/home/kooshi/source/math/CONTENTS.md`) that nobody here has read.
