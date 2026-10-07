@@ -1218,3 +1218,17 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     measurability are relayed to the implementer whose leaves call them (FS132-I4), with the choice of merging this commit
     now. (b) Kooshi is told in the next report, as a step and not as the theorem.
 
+43. **FS132-I4, first message (13:19 UTC): the join builds, and no leaf's statement and no call site had to change**
+    (branch `fs132-wi4` at `d260d0bf`; record `plans/FS132-I4-implementation.md` Stages 1–2). The port merged
+    automatically (merge commit `466d0fa1`; both sides' lines kept in the module list and the architecture map); the
+    placeholders' file is deleted with its row and import; four modules now import the ported ones. **The four statements
+    are identical as the kernel stores them, placeholder against ported** — compared by the kernel's own equality on
+    expressions, with two controls that fire. Build exit 0, 68 `sorry` warnings (the 71 before, less the three
+    placeholders); architecture check and duplicate-name check pass. It merges the step lemma's proved module next, so
+    that its one call into it is written once against the final binders. **My receipt**: the commit is on `origin`; the
+    six-ring folder at that commit listed by me — no placeholders' file; the comparison's output file's last lines read.
+    Not checked by me: the build log. **So both halves' claims held**: the planner's "no leaf changes at the join" and the
+    porter's "the planner's placeholders are a deletion". **The exclusion now stands, on its branch, on kernel-checked
+    outside lemmas and 46 open leaves of our own** (49, less the step lemma's module's eight, plus those of the two
+    skeleton modules not counted here — the count is the implementers' to state at their hand-backs).
+
