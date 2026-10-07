@@ -12,13 +12,14 @@ Two lists are read:
   AXIOMS_LOG  the full output of `scripts/axioms.sh` (its saved receipt), every record with the banner it is under.
 
 What the landing CLAIMS is written here, once: every declaration it brings has one record, under CLEAN, on a subset of
-the standard three; the four headline theorems on exactly the three; the records under IMPORTED are the eighteen
+the standard three; the five headline theorems on exactly the three; the records under IMPORTED are the eighteen
 earlier landings filed and no other.  What the library SHIPS is the log.  The checks:
 
   MISSING / DOUBLED   every declaration the landing brings has exactly one record
   NOT-CLEAN-SECTION   … printed under CLEAN
   FOREIGN             … on a subset of the standard three (`sorryAx`, a native auxiliary, an outside theorem: refused)
-  HEADLINE            each of the four theorems the landing is for is a declaration it brings, on exactly the three
+  HEADLINE            each of the five theorems the landing is for (the brief's four, and the ring form over four
+                      points its Amendment 1 adds) is a declaration it brings, on exactly the three
   MODULES             the modules the dump lists are exactly the landing's twenty-two (given in MODULES below)
   IMPORTED-SET        over the WHOLE log, the records under IMPORTED are exactly the eighteen filed (8 + 5 + 5)
   IMPORT-LEAK         over the whole log, no record outside an import's filed set carries that import
@@ -45,7 +46,9 @@ import fs132_l1_records as l1  # noqa: E402  (STD, FILED, SHORT, IMPORTS, ALL_FI
 
 STD = l1.STD
 SIX = "HadwigerNelson.SixRing."
-HEADLINE = [SIX + n for n in ("no_outside_orbit_points", "no_outside_orbit", "not_ae_outside", "no_alternating_pairs")]
+# the four theorems the brief names, and the one its Amendment 1 adds (the ring form over four points)
+HEADLINE = [SIX + n for n in ("no_outside_orbit_points", "no_outside_orbit", "not_ae_outside", "no_alternating_pairs",
+                              "not_ae_outside_points")]
 MODULES = frozenset(
     ["Proofs.HadwigerNelson.Plane.SixRing." + m for m in
      "Basic Chart ChartMeasure Confine Excl Kill NullSets Orbit Shift State StepLemma Tips TwoPairs".split()]

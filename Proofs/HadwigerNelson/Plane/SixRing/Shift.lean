@@ -1,4 +1,4 @@
-import Proofs.HadwigerNelson.Plane.SixRing.Basic
+import Proofs.HadwigerNelson.Plane.SixRing.Chart
 import Proofs.HadwigerNelson.Plane.Chord
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.InverseDeriv
 
@@ -17,7 +17,7 @@ identity of row 148 (FS129-SR1-TWOCIRC, the library's `Plane.twoCirc_identity`) 
 chart's own variables as `shift_sign_identity`. `plans/FS132-kernel-plan.md` stage 5 has the plan per leaf.
 
 **How the leaves are proved** (`plans/FS132-I3-implementation.md`). The unit-pair relation is the law of cosines in
-the chart's polar form (`chart_eq_polar_shift`, `norm_sq_polar_sub`) with `cos (arccos Q) = Q`. The sign compares
+the chart's polar form (`chart_eq_polar` of `Plane/SixRing/Chart`, `norm_sq_polar_sub`) with `cos (arccos Q) = Q`. The sign compares
 `Q` with `cos(π/3 + (d + d')/2)` by `shift_sign_identity` and uses that `arccos` is strictly decreasing. The Lipschitz
 bound differentiates nothing by hand: the shift is continuously differentiable at the origin (a composition:
 `Real.contDiffAt_arccos` at `Q = 1/2`), it vanishes on both positive axes, so its derivative there is zero, and a
@@ -78,21 +78,6 @@ theorem shift_zero_right {d : ℝ} (h0 : 0 ≤ d) (h1 : d ≤ 1 / 4) : shift d 0
 theorem shift_zero_left {d' : ℝ} (h0 : 0 ≤ d') (h1 : d' ≤ 1 / 4) : shift 0 d' = 0 := by
   rw [shift_comm]; exact shift_zero_right h0 h1
 
-/-- The chart in polar form about its centre, `Z(α, d) = p + r(d) e(α − π/3 − d/2)`. This is the statement of
-`chart_eq_polar` (`Plane/SixRing/Chart`, another lot's leaf, which this module does not import), under a name of
-its own until the two meet. -/
-theorem chart_eq_polar_shift (p : ℂ) (α d : ℝ) :
-    chart p α d = p + ((ringRadius d : ℝ) : ℂ) * Plane.e (α - π / 3 - d / 2) := by
-  have hsum : Plane.e α + Plane.e (α - 2 * π / 3 - d) =
-      Plane.e ((α - π / 3 - d / 2) + (π / 3 + d / 2)) + Plane.e ((α - π / 3 - d / 2) + -(π / 3 + d / 2)) := by
-    congr 2 <;> ring
-  have hpair : Plane.e (π / 3 + d / 2) + Plane.e (-(π / 3 + d / 2)) = ((ringRadius d : ℝ) : ℂ) := by
-    rw [Plane.e_eq, Plane.e_eq, cos_neg, sin_neg, ringRadius]
-    push_cast
-    ring
-  rw [chart, add_assoc, hsum, Plane.e_add (α - π / 3 - d / 2) (π / 3 + d / 2),
-    Plane.e_add (α - π / 3 - d / 2) (-(π / 3 + d / 2)), ← mul_add, hpair, mul_comm]
-
 /-- The law of cosines for two points given in polar form about one centre. -/
 theorem norm_sq_polar_sub (r r' β β' : ℝ) :
     ‖(r : ℂ) * Plane.e β - (r' : ℂ) * Plane.e β'‖ ^ 2 = r ^ 2 + r' ^ 2 - 2 * r * r' * cos (β' - β) := by
@@ -144,7 +129,7 @@ theorem dist_chart_chart_shift (p : ℂ) (α : ℝ) {d d' : ℝ} (hd : 0 ≤ d) 
     simp only [shift]
     ring
   have hsq : dist (chart p α d) (chart p (α + shift d d' + d' + π / 3) d') ^ 2 = 1 := by
-    rw [dist_eq_norm, chart_eq_polar_shift, chart_eq_polar_shift, add_sub_add_left_eq_sub, norm_sq_polar_sub, hang,
+    rw [dist_eq_norm, chart_eq_polar, chart_eq_polar, add_sub_add_left_eq_sub, norm_sq_polar_sub, hang,
       cos_arccos hQ1 hQ2]
     have hne : ringRadius d ≠ 0 := by linarith
     have hne' : ringRadius d' ≠ 0 := by linarith

@@ -15,11 +15,14 @@ dated line, 2026-10-07); the form for an open set containing the closed unit dis
   (C132-M-ORBIT): with four points, or four compact sets, through `p` whose straddle regions exclude the
   consecutive pairs of a cycle of four labels, the two labels outside the cycle do not fill the ring near a rotation
   orbit at which they change.
-* `not_ae_outside` (C132-M-EXCL): so they do not fill the ring.
+* `not_ae_outside` (C132-M-EXCL): so they do not fill the ring; `not_ae_outside_points` (the derivers'
+  C132-WIT-EXCL) is the same over four points — the wording of `LEDGER.md` row 155's ring sentence.
 
-**This module has no `sorry` of its own.** Every theorem here is proved from the leaves of the modules it imports —
-`State` (steps M1–M3), `Tips` (M4–M6), `Kill` (M7–M9, through `Shift`, `StepLemma`, `ChartMeasure`), `Excl` — which
-are `sorry` until implemented; the plan per leaf is `plans/FS132-kernel-plan.md` stage 5.
+**No `sorry`, here or beneath.** Every theorem here is proved from the leaves of the modules it imports — `State`
+(steps M1–M3), `Tips` (M4–M6), `Kill` (M7–M9, through `Shift`, `StepLemma`, `ChartMeasure`), `Excl` — and every leaf
+is proved (FS132-I3, FS132-I4; landed by FS132-L2 over the release's palette lemmas, ported with their proofs:
+`Outside/OAI158…`). Each theorem prints the standard three axioms and rests on neither declared outside theorem. The
+plan per leaf is `plans/FS132-kernel-plan.md` stage 5.
 -/
 
 open MeasureTheory Filter Topology
@@ -143,5 +146,26 @@ theorem not_ae_outside {c : ℂ → Fin 6} (hc : Measurable c) (hw : WeakColorin
   obtain ⟨ψ, hψ⟩ := exists_change_of_ae_outside hc hw p h
   exact no_outside_orbit hc hw ha hXY hX hY hK ψ 1 one_pos
     (fun _ => (ae_real_of_ae_angles h).mono fun _ hθ _ => hθ) hψ
+
+/-- **C132-WIT-EXCL** — the ring form over four points (the instance `U = ℂ`, **the whole plane**), read against
+the ring sentence of `LEDGER.md` row 155: "let U, p, c, the labels a_0, a_1, a_2, a_3, X, Y and the points q_0, q_1,
+q_2, q_3 be as in C132-WIT-ORBIT; then it is not the case that for almost every unit vector e the palette P_p(e)
+contains X or Y". With the colouring, the four labels and the two others, and the four points of
+`no_outside_orbit_points` — each `q j` other than `p`, the straddle region of `{p, q j}` missing the closed essential
+supports of `a j` and of `a (j + 1)` — it is not the case that for almost every direction the palette at `p` contains
+`X` or `Y`.
+
+This is the compact-set form `not_ae_outside` (C132-M-EXCL) at the two-point sets `K j = {p, q j}`: each is compact,
+contains `p`, and contains the point `q j ≠ p`. Added at the landing (FS132-L2, its brief's Amendment 1) so that the
+row's sentence has a theorem that says it. The remark on models at `no_outside_orbit_points` applies. -/
+theorem not_ae_outside_points {c : ℂ → Fin 6} (hc : Measurable c) (hw : WeakColoring 6 c) {p : ℂ}
+    {a : Fin 4 → Fin 6} (ha : Function.Injective a) {X Y : Fin 6} (hXY : X ≠ Y)
+    (hX : ∀ j, a j ≠ X) (hY : ∀ j, a j ≠ Y) {q : Fin 4 → ℂ} (hq : ∀ j, q j ≠ p)
+    (hl : ∀ j, Disjoint (spatialSupport c (a j)) (Straddle {p, q j}))
+    (hr : ∀ j, Disjoint (spatialSupport c (a (j + 1))) (Straddle {p, q j})) :
+    ¬ ∀ᵐ t ∂angularMeasure, X ∈ palette c hc p t ∨ Y ∈ palette c hc p t :=
+  not_ae_outside hc hw ha hXY hX hY (K := fun j => {p, q j})
+    ⟨fun _ => (Set.toFinite _).isCompact, fun _ => Set.mem_insert _ _,
+      fun j => ⟨q j, Set.mem_insert_of_mem _ rfl, hq j⟩, hl, hr⟩
 
 end HadwigerNelson.SixRing

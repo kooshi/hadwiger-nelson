@@ -1,0 +1,15 @@
+/-- The chart in polar form about its centre, `Z(α, d) = p + r(d) e(α − π/3 − d/2)`. This is the statement of
+`chart_eq_polar` (`Plane/SixRing/Chart`, another lot's leaf, which this module does not import), under a name of
+its own until the two meet. -/
+theorem chart_eq_polar_shift (p : ℂ) (α d : ℝ) :
+    chart p α d = p + ((ringRadius d : ℝ) : ℂ) * Plane.e (α - π / 3 - d / 2) := by
+  have hsum : Plane.e α + Plane.e (α - 2 * π / 3 - d) =
+      Plane.e ((α - π / 3 - d / 2) + (π / 3 + d / 2)) + Plane.e ((α - π / 3 - d / 2) + -(π / 3 + d / 2)) := by
+    congr 2 <;> ring
+  have hpair : Plane.e (π / 3 + d / 2) + Plane.e (-(π / 3 + d / 2)) = ((ringRadius d : ℝ) : ℂ) := by
+    rw [Plane.e_eq, Plane.e_eq, cos_neg, sin_neg, ringRadius]
+    push_cast
+    ring
+  rw [chart, add_assoc, hsum, Plane.e_add (α - π / 3 - d / 2) (π / 3 + d / 2),
+    Plane.e_add (α - π / 3 - d / 2) (-(π / 3 + d / 2)), ← mul_add, hpair, mul_comm]
+

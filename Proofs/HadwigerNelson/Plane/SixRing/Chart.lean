@@ -7,9 +7,9 @@ No colouring and no measure. Every statement is an identity or an inequality of 
 `chart p α d = p + e(α) + e(α − 2π/3 − d)` and `hub p ψ n = p + e(ψ + nπ/3)`; each is a leaf of a few lines.
 `plans/FS132-kernel-plan.md` stage 5 has the plan per leaf.
 
-Every leaf is proved (job FS132-I4, under Amendment 2 of its brief); no `sorry`. `chart_eq_polar` states what
-`chart_eq_polar_shift` of `Plane/SixRing/Shift` states (FS132-I3 proved that one where it was needed: the shift's
-module does not import this one, nor this one that); the proof here is the same sum-to-product.
+Every leaf is proved (job FS132-I4, under Amendment 2 of its brief); no `sorry`. `chart_eq_polar` is also what the
+shift's module uses (`Plane/SixRing/Shift` imports this one since the landing, FS132-L2; before it, that module held
+the same statement under a name of its own, `chart_eq_polar_shift`, proved by FS132-I3 by the same sum-to-product).
 -/
 
 open scoped RealInnerProductSpace

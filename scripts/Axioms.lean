@@ -8015,7 +8015,6 @@ implementers' blocks did not list. Read from the kernel's own list of the librar
 #print axioms HadwigerNelson.SixRing.shift_comm
 #print axioms HadwigerNelson.SixRing.shift_zero_right
 #print axioms HadwigerNelson.SixRing.shift_zero_left
-#print axioms HadwigerNelson.SixRing.chart_eq_polar_shift
 #print axioms HadwigerNelson.SixRing.norm_sq_polar_sub
 #print axioms HadwigerNelson.SixRing.shiftCos_mem
 #print axioms HadwigerNelson.SixRing.shift_sign_identity
@@ -8107,6 +8106,136 @@ leaves complete (`Kill.chart_step_false`, `Orbit`). `data/fs132/i4/axioms/check.
 #print axioms HadwigerNelson.SixRing.no_outside_orbit
 #print axioms HadwigerNelson.SixRing.not_ae_outside
 -- FS132-I4: end of the block
+
+/-! ## FS132-L2 — the landing of FS-132's first theorem: every declaration the landing brings that no block above holds — the palette module's own
+(`Outside/OAI158Palette`: definitions and lemmas), the confinement module and the basic module of the exclusion (`Plane/SixRing/Confine`, `Basic`), and three
+strays (a definition, a lemma, a structure). Definitions and structures are filed with the theorems, as the port's block files them. No axiom, no
+outside theorem: `tools/fs132_l2_records.py` reads every record of the landing's twenty-two modules under CLEAN on a subset of the standard three -/
+-- FS132-L2
+-- Outside/OAI158Palette — the release's palette chain, ported by FS132-K1 (generated): every definition and lemma of the module
+#print axioms HadwigerNelson.Outside.OAI158.DensityOne
+#print axioms HadwigerNelson.Outside.OAI158.IsTrace
+#print axioms HadwigerNelson.Outside.OAI158.PlaneL2
+#print axioms HadwigerNelson.Outside.OAI158.RealL2
+#print axioms HadwigerNelson.Outside.OAI158.RealState
+#print axioms HadwigerNelson.Outside.OAI158.Straddle
+#print axioms HadwigerNelson.Outside.OAI158.TraceVector
+#print axioms HadwigerNelson.Outside.OAI158.Traces
+#print axioms HadwigerNelson.Outside.OAI158.TransitionEdge
+#print axioms HadwigerNelson.Outside.OAI158.Typical
+#print axioms HadwigerNelson.Outside.OAI158.TypicalSampling
+#print axioms HadwigerNelson.Outside.OAI158.WeakBall.Space
+#print axioms HadwigerNelson.Outside.OAI158.WeakBall.continuous_eval
+#print axioms HadwigerNelson.Outside.OAI158.WeakBall.instCompactSpaceSpace
+#print axioms HadwigerNelson.Outside.OAI158.WeakBall.instMetrizableSpaceSpace
+#print axioms HadwigerNelson.Outside.OAI158.WeakBall.ofNorm
+#print axioms HadwigerNelson.Outside.OAI158.WeakBall.tendsto_iff
+#print axioms HadwigerNelson.Outside.OAI158.WeakBall.value
+#print axioms HadwigerNelson.Outside.OAI158.WeakBall.value_eval
+#print axioms HadwigerNelson.Outside.OAI158.WeakBall.value_norm
+#print axioms HadwigerNelson.Outside.OAI158.WeakBall.value_ofNorm
+#print axioms HadwigerNelson.Outside.OAI158.ae_density_actual
+#print axioms HadwigerNelson.Outside.OAI158.ae_typicalSampling
+#print axioms HadwigerNelson.Outside.OAI158.all_parameters_product_zero
+#print axioms HadwigerNelson.Outside.OAI158.angularMeasure.instIsAddHaarMeasure
+#print axioms HadwigerNelson.Outside.OAI158.angularSum
+#print axioms HadwigerNelson.Outside.OAI158.bounded_test_error
+#print axioms HadwigerNelson.Outside.OAI158.correlation_continuous
+#print axioms HadwigerNelson.Outside.OAI158.densityOne_disjoint
+#print axioms HadwigerNelson.Outside.OAI158.densityOne_translate
+#print axioms HadwigerNelson.Outside.OAI158.direction_continuous
+#print axioms HadwigerNelson.Outside.OAI158.direction_exists
+#print axioms HadwigerNelson.Outside.OAI158.direction_norm
+#print axioms HadwigerNelson.Outside.OAI158.direction_real
+#print axioms HadwigerNelson.Outside.OAI158.exists_countable_essential_union
+#print axioms HadwigerNelson.Outside.OAI158.exists_finite_weak_subseq
+#print axioms HadwigerNelson.Outside.OAI158.exists_trace
+#print axioms HadwigerNelson.Outside.OAI158.isClosed_traceGraph
+#print axioms HadwigerNelson.Outside.OAI158.isCompact_traces
+#print axioms HadwigerNelson.Outside.OAI158.liftPalette
+#print axioms HadwigerNelson.Outside.OAI158.mem_palette
+#print axioms HadwigerNelson.Outside.OAI158.oneL2
+#print axioms HadwigerNelson.Outside.OAI158.oneL2_ae
+#print axioms HadwigerNelson.Outside.OAI158.palette
+#print axioms HadwigerNelson.Outside.OAI158.paletteGenerators
+#print axioms HadwigerNelson.Outside.OAI158.paletteGenerators_countable
+#print axioms HadwigerNelson.Outside.OAI158.paletteSet
+#print axioms HadwigerNelson.Outside.OAI158.paletteSet_measurable
+#print axioms HadwigerNelson.Outside.OAI158.paletteSet_minimal
+#print axioms HadwigerNelson.Outside.OAI158.palette_nonempty
+#print axioms HadwigerNelson.Outside.OAI158.product_zero_of_inner_zero
+#print axioms HadwigerNelson.Outside.OAI158.sample
+#print axioms HadwigerNelson.Outside.OAI158.sampleCode
+#print axioms HadwigerNelson.Outside.OAI158.sampleFn
+#print axioms HadwigerNelson.Outside.OAI158.sampleFn_le_one
+#print axioms HadwigerNelson.Outside.OAI158.sampleFn_measurable
+#print axioms HadwigerNelson.Outside.OAI158.sampleFn_memLp
+#print axioms HadwigerNelson.Outside.OAI158.sampleFn_nonneg
+#print axioms HadwigerNelson.Outside.OAI158.sampleSet
+#print axioms HadwigerNelson.Outside.OAI158.sample_ae
+#print axioms HadwigerNelson.Outside.OAI158.sample_norm_le
+#print axioms HadwigerNelson.Outside.OAI158.sample_sum
+#print axioms HadwigerNelson.Outside.OAI158.sampling_weak_compact
+#print axioms HadwigerNelson.Outside.OAI158.shiftL2
+#print axioms HadwigerNelson.Outside.OAI158.shiftL2_ae
+#print axioms HadwigerNelson.Outside.OAI158.shiftL2_continuous
+#print axioms HadwigerNelson.Outside.OAI158.sixty
+#print axioms HadwigerNelson.Outside.OAI158.spatialSupport
+#print axioms HadwigerNelson.Outside.OAI158.traceCode_tendsto_iff
+#print axioms HadwigerNelson.Outside.OAI158.tracePositive
+#print axioms HadwigerNelson.Outside.OAI158.tracePositive_le_palette
+#print axioms HadwigerNelson.Outside.OAI158.tracePositive_measurable
+#print axioms HadwigerNelson.Outside.OAI158.traceValue
+#print axioms HadwigerNelson.Outside.OAI158.traceValue_sampleCode
+#print axioms HadwigerNelson.Outside.OAI158.trace_bounds
+#print axioms HadwigerNelson.Outside.OAI158.trace_limit
+#print axioms HadwigerNelson.Outside.OAI158.trace_of_realization
+#print axioms HadwigerNelson.Outside.OAI158.trace_realization
+#print axioms HadwigerNelson.Outside.OAI158.trace_realization_weakStar
+#print axioms HadwigerNelson.Outside.OAI158.transitionRatio
+#print axioms HadwigerNelson.Outside.OAI158.transitionSet
+#print axioms HadwigerNelson.Outside.OAI158.truncatedClass
+#print axioms HadwigerNelson.Outside.OAI158.truncatedClass_finite
+#print axioms HadwigerNelson.Outside.OAI158.truncatedClass_measurable
+#print axioms HadwigerNelson.Outside.OAI158.truncatedVector
+#print axioms HadwigerNelson.Outside.OAI158.truncatedVector_ae
+#print axioms HadwigerNelson.Outside.OAI158.weakHilbert
+#print axioms HadwigerNelson.Outside.OAI158.weakHilbert_apply
+#print axioms HadwigerNelson.Outside.OAI158.weak_L2_to_weakStar
+#print axioms HadwigerNelson.Outside.OAI158.weak_all_directions
+#print axioms HadwigerNelson.Outside.OAI158.weak_density_proper
+#print axioms HadwigerNelson.Outside.OAI158.weak_limit_le_one
+#print axioms HadwigerNelson.Outside.OAI158.weak_limit_nonneg
+#print axioms HadwigerNelson.Outside.OAI158.weak_limit_sum
+-- Plane/SixRing/Confine — C132-CONFINE (FS132-K1)
+#print axioms HadwigerNelson.SixRing.confine
+#print axioms HadwigerNelson.SixRing.confine_of_disjoint
+#print axioms HadwigerNelson.SixRing.inner_nonneg_of_subset_closedBall
+#print axioms HadwigerNelson.SixRing.inner_nonpos_of_disjoint_ball
+#print axioms HadwigerNelson.SixRing.mem_straddle_iff_min_max
+#print axioms HadwigerNelson.SixRing.subset_closedBall_of_dist_lt
+-- Plane/SixRing/Basic — the exclusion's definitions and their models (FS132-K2)
+#print axioms HadwigerNelson.SixRing.HubColours
+#print axioms HadwigerNelson.SixRing.HubColours.mono
+#print axioms HadwigerNelson.SixRing.IsTip
+#print axioms HadwigerNelson.SixRing.NoDoubleChange
+#print axioms HadwigerNelson.SixRing.OutsideOrbit
+#print axioms HadwigerNelson.SixRing.ShiftBounds
+#print axioms HadwigerNelson.SixRing.ShiftBounds.mono
+#print axioms HadwigerNelson.SixRing.chart
+#print axioms HadwigerNelson.SixRing.hub
+#print axioms HadwigerNelson.SixRing.ringRadius
+#print axioms HadwigerNelson.SixRing.shift
+#print axioms HadwigerNelson.SixRing.shiftBounds_model
+-- Plane/SixRing/StepLemma — the one definition of the step lemma's module (its theorems are FS132-I3's block)
+#print axioms HadwigerNelson.SixRing.IsDensityPt
+-- Plane/SixRing/State — the one lemma of the palettes' module that FS132-I4's block does not hold
+#print axioms HadwigerNelson.SixRing.mem_liftPalette
+-- Plane/SixRing/Orbit — the structure of the four-set hypothesis (its theorems are FS132-I4's block)
+#print axioms HadwigerNelson.SixRing.FourCycleStraddle
+-- Plane/SixRing/Orbit — the ring form over four points (C132-WIT-EXCL), added at the landing by the brief's Amendment 1
+#print axioms HadwigerNelson.SixRing.not_ae_outside_points
+-- FS132-L2: end of the block
 
 #eval IO.println "=== PURCHASED ==="
 
