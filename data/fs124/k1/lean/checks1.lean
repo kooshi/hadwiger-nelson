@@ -1,0 +1,30 @@
+import Mathlib
+open MeasureTheory Set Filter Topology Metric
+
+#check @MeasurePreserving.skew_product
+#check @Measure.measurePreserving_swap
+#check @Measure.QuasiMeasurePreserving.preimage_null
+#check @MeasurePreserving.quasiMeasurePreserving
+#check @Measure.volume_eq_prod
+#check @measurePreserving_add_right
+#check @measurePreserving_add_left
+#check @Measure.prod_restrict
+#check @Measure.restrict_apply'
+#check @MeasureTheory.ae_ball_iff
+#check @IsCompact.eventually_forall_of_forall_eventually
+#check @IsOpen.measure_pos
+#check @Measure.exists_mem_of_measure_ne_zero_of_ae
+#check @SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom
+#check @Set.Finite.isCompact
+#check @Bornology.IsBounded.subset_ball_lt
+#check @Set.Finite.isBounded
+#check @measure_ae_null_of_prod_null
+#check @Measure.measure_prod_null
+#check @MeasurePreserving.prod
+#check @IsCompact.exists_thickening_subset_open
+#check @measure_iUnion_null_iff
+#check @Measurable.piecewise
+#check @ae_restrict_of_ae
+#check @Measure.prod.instIsOpenPosMeasure
+#check @Complex.arg
+#check @MeasurePreserving.id
