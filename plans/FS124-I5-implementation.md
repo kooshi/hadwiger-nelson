@@ -29,3 +29,23 @@ warnings and no other** — 3 in `Plane/ClosePairModel`, 3 in `Plane/SectorPoint
 
 **How I iterate.** `data/fs124/k3/lean1.sh` (`lake env lean` with the lakefile's two options and the docstring linter):
 never evidence. Evidence is the build under the slot at each saved stage.
+
+## Stage 2 — SAVED (FS124-I5): leaves 1–5
+
+**Proved, by the planner's route each** (`plans/FS124-kernel-plan-3.md` § 4.3, rows 1–5):
+`exists_arc_range_subset_inter`, `IsTriod.range_subset_of_isPreconnected`, `IsTriod.apply_one_eq_polarPt`,
+`IsTriod.exists_rimOrder` (the sort: `Tuple.sort`, `Tuple.monotone_sort`), `IsTriod.notMem_iUnion_range_of_mem_Ioo`.
+One helper, new: `IsTriod.polarPt_mem_sphere` (a point at radius `r` about `x` is on the rim; searched by shape —
+`rg "polarPt.*(sphere|closedBall)"` over `Proofs/` — and held nowhere as a lemma).
+
+**The build** (`data/fs124/i5/logs/build-1.log`): `EXIT 0`, 477 of 477 batches, 2 modules rebuilt (`Plane/ThreeArcs`,
+`Proofs`), **21 `declaration uses sorry` warnings and no other** — the 6 as given and 15 in `Plane/ThreeArcs`.
+
+**The statement check, built at this stage** (`data/fs124/i5/statements.sh`, with
+`data/fs124/i5/lean/StatementDump.footer`): the planner's skeleton (`git show 8cd74a6b:…/ThreeArcs.lean`) and a
+candidate file are each elaborated with a footer that prints every declaration's stored type and its hash; the check
+passes iff every line of the skeleton's print is a line of the candidate's. It reads the statements as the elaborator
+stored them, not as text (`LEAN.md` § Searching — Lean, on reading a leaf as the kernel has it). Its own check: each
+of the 41 `theorem` names written in the skeleton must be in the skeleton's print. **Control**
+(`data/fs124/i5/logs/statements-control.txt`): one hypothesis added to `IsTriodCut.mem_closure` in a copy — the check
+exits 1 and names that theorem.

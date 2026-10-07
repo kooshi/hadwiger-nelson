@@ -1,0 +1,23 @@
+
+/-! FS124-I5: print every theorem, definition and structure this file declares, as the elaborator stored it — its
+name, the hash of its type, and the type. (Appended to a copy of the module; never part of the library.) -/
+open Lean Elab Command in
+run_cmd do
+  let env ← getEnv
+  let mut out : Array (String × String) := #[]
+  for (n, ci) in env.constants.map₂.toList do
+    if n.isInternal then continue
+    if (`HadwigerNelson.Plane).isPrefixOf n then
+      let kind := match ci with
+        | .thmInfo _ => "theorem"
+        | .defnInfo _ => "def"
+        | .inductInfo _ => "inductive"
+        | .ctorInfo _ => "ctor"
+        | .recInfo _ => "rec"
+        | .opaqueInfo _ => "opaque"
+        | .axiomInfo _ => "axiom"
+        | .quotInfo _ => "quot"
+      let ty ← liftTermElabM <| Meta.ppExpr ci.type
+      out := out.push (n.toString, s!"STMT {kind} {n} #{hash ci.type} :: {(toString ty).replace "\n" " "}")
+  for (_, l) in out.qsort (fun a b => a.1 < b.1) do
+    IO.println l

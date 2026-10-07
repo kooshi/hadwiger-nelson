@@ -264,7 +264,26 @@ range lies in the given arc and in the neighbourhood. -/
 theorem exists_arc_range_subset_inter {X : Type*} [TopologicalSpace X] {γ : C(unitInterval, X)}
     (hγ : Function.Injective γ) {N : Set X} (hN : N ∈ 𝓝 (γ 0)) :
     ∃ γ' : C(unitInterval, X), Function.Injective γ' ∧ γ' 0 = γ 0 ∧ range γ' ⊆ range γ ∩ N := by
-  sorry
+  obtain ⟨δ, hδ, hball⟩ := Metric.mem_nhds_iff.mp (γ.continuous.continuousAt.preimage_mem_nhds hN)
+  obtain ⟨d, hd⟩ : ∃ d : ℝ, d = min (δ / 2) 1 := ⟨_, rfl⟩
+  have hd0 : 0 < d := hd ▸ lt_min (half_pos hδ) one_pos
+  have hd1 : d ≤ 1 := hd ▸ min_le_right _ _
+  have hdδ : d < δ := hd ▸ (min_le_left _ _).trans_lt (half_lt_self hδ)
+  have hmem : ∀ t : unitInterval, d * (t : ℝ) ∈ Icc (0 : ℝ) 1 := fun t =>
+    ⟨mul_nonneg hd0.le t.2.1, mul_le_one₀ hd1 t.2.1 t.2.2⟩
+  have hf : Continuous fun t : unitInterval => (⟨d * (t : ℝ), hmem t⟩ : unitInterval) :=
+    (continuous_const.mul continuous_subtype_val).subtype_mk _
+  refine ⟨⟨fun t => γ ⟨d * (t : ℝ), hmem t⟩, γ.continuous.comp hf⟩, fun s t hst => ?_, ?_, ?_⟩
+  · exact Subtype.ext (mul_left_cancel₀ hd0.ne' (congrArg Subtype.val (hγ hst)))
+  · show γ ⟨d * ((0 : unitInterval) : ℝ), hmem 0⟩ = γ 0
+    congr 1
+    exact Subtype.ext (by simp)
+  · rintro _ ⟨t, rfl⟩
+    refine ⟨⟨_, rfl⟩, hball ?_⟩
+    rw [mem_ball, Subtype.dist_eq, Real.dist_eq]
+    show |d * (t : ℝ) - ((0 : unitInterval) : ℝ)| < δ
+    rw [Set.Icc.coe_zero, sub_zero, abs_of_nonneg (mul_nonneg hd0.le t.2.1)]
+    exact (mul_le_of_le_one_right hd0.le t.2.2).trans_lt hdδ
 
 namespace IsTriod
 
@@ -310,18 +329,51 @@ theorem isPreconnected_iUnion_range (h : IsTriod x r J) : IsPreconnected (⋃ m,
   exact isPreconnected_iUnion ⟨x, mem_iInter.mpr fun m => ⟨0, h.apply_zero m⟩⟩ fun m =>
     isPreconnected_range (J m).continuous
 
+/-- A point at radius `r` about `x` is on the rim. -/
+theorem polarPt_mem_sphere (h : IsTriod x r J) (ξ : ℝ) : polarPt x r ξ ∈ sphere x r := by
+  rw [mem_sphere, dist_eq_norm, norm_polarPt_sub, abs_of_pos h.pos]
+
 /-- **A preconnected subset of the three arcs that holds two far ends holds the whole arc to each**: were a point
 `J m s₀` missing, the part of `J m` beyond it and the rest of the three arcs would be two closed sets covering the
 subset, each meeting it, with only that point in common. -/
 theorem range_subset_of_isPreconnected (h : IsTriod x r J) {Z : Set ℂ} (hZ : IsPreconnected Z)
     (hZT : Z ⊆ ⋃ m, range (J m)) {m m' : Fin 3} (hmm : m ≠ m') (hm : J m 1 ∈ Z) (hm' : J m' 1 ∈ Z) :
     range (J m) ⊆ Z := by
-  sorry
+  rintro _ ⟨s₀, rfl⟩
+  by_contra hs₀
+  have hC₁ : IsClosed (J m '' Icc s₀ 1) := (isCompact_Icc.image (J m).continuous).isClosed
+  have hC₂ : IsClosed (J m '' Icc 0 s₀ ∪ ⋃ k : {k : Fin 3 // k ≠ m}, range (J k)) :=
+    (isCompact_Icc.image (J m).continuous).isClosed.union
+      (isClosed_iUnion_of_finite fun k => (isCompact_range (J k.1).continuous).isClosed)
+  have hcov : Z ⊆ J m '' Icc s₀ 1 ∪ (J m '' Icc 0 s₀ ∪ ⋃ k : {k : Fin 3 // k ≠ m}, range (J k)) := by
+    intro z hz
+    obtain ⟨k, t, rfl⟩ := mem_iUnion.mp (hZT hz)
+    by_cases hk : k = m
+    · subst hk
+      rcases le_total s₀ t with ht | ht
+      · exact Or.inl ⟨t, ⟨ht, unitInterval.le_one'⟩, rfl⟩
+      · exact Or.inr (Or.inl ⟨t, ⟨unitInterval.nonneg', ht⟩, rfl⟩)
+    · exact Or.inr (Or.inr (mem_iUnion.mpr ⟨⟨k, hk⟩, t, rfl⟩))
+  obtain ⟨z, hzZ, ⟨s, hs, rfl⟩, hz₂⟩ := isPreconnected_closed_iff.mp hZ _ _ hC₁ hC₂ hcov
+    ⟨J m 1, hm, 1, ⟨unitInterval.le_one', le_rfl⟩, rfl⟩
+    ⟨J m' 1, hm', Or.inr (mem_iUnion.mpr ⟨⟨m', hmm.symm⟩, 1, rfl⟩)⟩
+  have hss : s = s₀ := by
+    rcases hz₂ with ⟨s', hs', he⟩ | hz₂
+    · obtain rfl : s' = s := h.injective m he
+      exact le_antisymm hs'.2 hs.1
+    · obtain ⟨⟨k, hk⟩, t, he⟩ := mem_iUnion.mp hz₂
+      have hx : J m s = x := h.eq_center_of_ne m k s t (Ne.symm hk) he.symm
+      obtain rfl : s = 0 := h.injective m (hx.trans (h.apply_zero m).symm)
+      exact le_antisymm unitInterval.nonneg' hs.1
+  exact hs₀ (hss ▸ hzZ)
 
 /-- A far end is the point of the rim at its own argument about `x`. -/
 theorem apply_one_eq_polarPt (h : IsTriod x r J) (m : Fin 3) :
     J m 1 = polarPt x r (Complex.arg (J m 1 - x)) := by
-  sorry
+  have hn : ‖J m 1 - x‖ = r := by rw [← dist_eq_norm, h.dist_apply_one m]
+  have hz := Complex.norm_mul_exp_arg_mul_I (J m 1 - x)
+  rw [hn] at hz
+  rw [polarPt, e, hz, add_sub_cancel]
 
 /-- A closed stretch of an arc is preconnected. -/
 theorem isPreconnected_image_Icc (J : Fin 3 → C(unitInterval, ℂ)) (m : Fin 3) (s t : unitInterval) :
@@ -330,7 +382,20 @@ theorem isPreconnected_image_Icc (J : Fin 3 → C(unitInterval, ℂ)) (m : Fin 3
 
 /-- **The far ends have an order round the rim**: the arguments of the three far ends, sorted. -/
 theorem exists_rimOrder (h : IsTriod x r J) : ∃ a b c α β γ, RimOrder x r J a b c α β γ := by
-  sorry
+  obtain ⟨θ, hθ⟩ : ∃ θ : Fin 3 → ℝ, θ = fun m => Complex.arg (J m 1 - x) := ⟨_, rfl⟩
+  have hpt : ∀ m, J m 1 = polarPt x r (θ m) := fun m => by rw [hθ]; exact h.apply_one_eq_polarPt m
+  have hinj : Function.Injective θ := fun m m' he => by
+    by_contra hmm
+    exact h.apply_one_ne hmm ((hpt m).trans ((congrArg (polarPt x r) he).trans (hpt m').symm))
+  have hmono := Tuple.monotone_sort θ
+  have hlt : ∀ i j : Fin 3, i < j → θ (Tuple.sort θ i) < θ (Tuple.sort θ j) := fun i j hij =>
+    lt_of_le_of_ne (hmono hij.le) fun he => hij.ne ((Tuple.sort θ).injective (hinj he))
+  refine ⟨Tuple.sort θ 0, Tuple.sort θ 1, Tuple.sort θ 2, θ (Tuple.sort θ 0), θ (Tuple.sort θ 1),
+    θ (Tuple.sort θ 2), (Tuple.sort θ).injective.ne (by decide), (Tuple.sort θ).injective.ne (by decide),
+    (Tuple.sort θ).injective.ne (by decide), hpt _, hpt _, hpt _, hlt 0 1 (by decide), hlt 1 2 (by decide), ?_⟩
+  have hle : θ (Tuple.sort θ 2) ≤ Real.pi := by rw [hθ]; exact Complex.arg_le_pi _
+  have hgt : -Real.pi < θ (Tuple.sort θ 0) := by rw [hθ]; exact Complex.neg_pi_lt_arg _
+  linarith
 
 /-- A point of the rim on an arc is the arc's far end. -/
 theorem eq_apply_one_of_mem_sphere (h : IsTriod x r J) {m : Fin 3} {p : ℂ} (hp : p ∈ sphere x r)
@@ -342,7 +407,16 @@ theorem eq_apply_one_of_mem_sphere (h : IsTriod x r J) {m : Fin 3} {p : ℂ} (hp
 `β` is on none of the three arcs. -/
 theorem notMem_iUnion_range_of_mem_Ioo (h : IsTriod x r J) {a b c : Fin 3} {α β γ φ : ℝ}
     (ho : RimOrder x r J a b c α β γ) (hφ : φ ∈ Ioo α β) : polarPt x r φ ∉ ⋃ m, range (J m) := by
-  sorry
+  intro hmem
+  obtain ⟨m, hm⟩ := mem_iUnion.mp hmem
+  have he := h.eq_apply_one_of_mem_sphere (h.polarPt_mem_sphere φ) hm
+  rcases ho.eq_or m with rfl | rfl | rfl
+  · rw [ho.apply_a] at he
+    exact polarPt_ne_of_sub h.pos h.pos (sub_pos.mpr hφ.1) (by linarith [hφ.2, ho.lt_bc, ho.lt_ca]) he
+  · rw [ho.apply_b] at he
+    exact polarPt_ne_of_sub h.pos h.pos (sub_pos.mpr hφ.2) (by linarith [hφ.1, ho.lt_bc, ho.lt_ca]) he.symm
+  · rw [ho.apply_c] at he
+    exact polarPt_ne_of_sub h.pos h.pos (sub_pos.mpr (hφ.2.trans ho.lt_bc)) (by linarith [hφ.1, ho.lt_ca]) he.symm
 
 /-- **No preconnected set of the closed disc off two of the arcs reaches the rim on both sides of their far ends**:
 the two arcs together are a continuum of the closed disc joining their far ends, the set with two rim points of its
