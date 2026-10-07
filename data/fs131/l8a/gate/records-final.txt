@@ -1,0 +1,92 @@
+main: 9513 theorems; landing: 9744; wave (landing only): 231 = 220 hand-written + 11 generated with no record asked; gone (main only): 0; records in the log: 6554
+  generated, by suffix: eq_1 9, eq_2 1, eq_3 1
+  wave records on exactly the three: 215
+  wave records on fewer: [Quot.sound, propext]: 2
+  wave records on none: 3
+  Plane.RingCalculus.Basic: 32
+  Plane.RingCalculus.Empty: 20
+  Plane.RingCalculus.HubCount: 15
+  Plane.RingCalculus.OuterAdj: 6
+  Plane.RingCalculus.RingColour: 16
+  Plane.RingCalculus.SemiHub: 53
+  Plane.RingCalculus.SemiHubPlaces: 22
+  Plane.RingCalculus.SoleTip: 8
+  Plane.RingCalculus.Star: 17
+  Plane.RingCalculus.StarChart: 16
+  Plane.RingCalculus.TilesAt: 7
+  Plane.SimpleOn: 8
+  head HadwigerNelson.Plane.ArcMap.Simple.simpleOn: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.simpleOn_univ: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.SimpleOn.mono: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.simpleOn_ball_iff: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ringGerm_inward: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ringGerm_outward: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.star_coloursAt: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.star_absent: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.IsTip.coneAt_subset: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.star_outer_cone: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.star_flank: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.star_flank_interior: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.star_tip_nonempty: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.star_outer_nonempty: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.v6_anti: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ringPt_sixth_dist_le_one: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.v6_count: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.exists_ne_mem_closure_inter_of_split: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.not_sole_tip_of_adjacent_changePoints: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.v6_hug: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.doubleTip: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.v6_hubs: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.emptyNS: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.v6_hubs_vacuous: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.v6_hug_vacuous: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.star_recip: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.star_anti: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.star_anti_ne: exactly the standard three
+  head HadwigerNelson.Plane.exists_int_of_angleIcc_subset: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.mem_closure_tile_of_near: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ncard_tileAt_eq: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.IsSectorChart.tileAt_equiv: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.exists_sectorChart_tileAt: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.qcol_cw: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.qcol_ccw: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.qcol_inner_tile: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.qcol_not_one_arc: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_ccw: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_cw: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.IsTile.not_mem_closure_of_not_subset_ball: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.germPair_inner_ne: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.germPair_swap: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.germPair_dicho: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ringTile_uMinus: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ringTile_vMinus: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ringTile_vPlus: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ringTile_uPlus: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.germOnQ_bar_uPlus: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.germOnQ_bar_vMinus: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.germOnQ_bar_uMinus: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.germOnQ_bar_vPlus: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.closure_inter_subset_sphere: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.isRingArc_of_edge: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.four_le_of_bothKind: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.exists_isStar4: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.ringArc_star: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.outerAdj: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.crossed_no_tip: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.crossed_outer: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.crossed_four: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.crossed_changePoint: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.crossed_semiHub: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.semiHub_places: exactly the standard three
+  head HadwigerNelson.Plane.ArcMap.transferQC: exactly the standard three
+  whole log: records under IMPORTED 8; records carrying the import 8; records listing Falconer's lemma as an axiom 0
+records: PASS
+exit=0

@@ -430,3 +430,376 @@ not edited); `kernel-sigs-read-probe.txt`, the table `kernel-sigs-table-probe.tx
   with `(F.coloursAt p).ncard = 4`. In each the kernel's binders are the file's, one for one.
 
 **Token count at this stage**: no reading of the harness's count; my own estimate is about 420k.
+
+## Stage 6 — SAVED (FS131-L8A): the full gate on one commit — `126bff4d`
+
+One pass is every step in order, one at a time under the slot (`data/fs131/l8a/run-gate.sh <tag>`, after the last landing's
+runner; every log under `data/fs131/l8a/gate/` with its exit status on its last line; `run-gate-<tag>.head` records the commit
+and that **no tracked file was modified**; `run-pass-<tag>.out` holds every step's exit). It ran twice.
+
+- **First pass, tag `first`, on `1f094eb2`** (01:37:13Z–01:56:54Z): every step exit 0 but the planted controls that must exit 1
+  and one step of the instrument's own — the last landing's kernel-signature reader's `--self-test`, which plants its second
+  fault in `Arith/NormOneTarget` and reads its partner in `Arith/Floor128`, modules of the landing it was written for; a
+  listing of the ring calculus holds no record of either, so it printed "DID NOT FIRE" and "FAILED" for want of records
+  (`kernel-sigs-selftest-first.txt`). Not a fault of the tree. Its four checks are re-made on the wave's modules in this job's
+  wrapper (`tools/fs131_l8a_kernelsig.py --plant`, part (b)), and the runner calls that.
+- **Between the passes, the lint's negative control** — which the wave's three implementers each left to this gate ("it needs a
+  build of its own"): an unused anonymous instance binder planted in a leaf module (`theorem zz_l8a_lint_plant [Nonempty ℕ] :
+  (1 : ℕ) = 1 := rfl`, appended to `Plane/RingCalculus/OuterAdj`; never committed), built — "473 of 473 batches, 3 module(s)
+  rebuilt, **0 module(s) with warnings**" (`data/fs131/l8a/lint-plant-build.log`: the build's own linters do not see it, as
+  `LEAN.md` § The gate says) — and then the guarded lint: **exit 1**, "`unusedArguments`: (2/2) Failed with 1 messages",
+  "error: @HadwigerNelson.Plane.ArcMap.zz_l8a_lint_plant 1 unused argument: argument 1: [Nonempty ℕ]"
+  (`data/fs131/l8a/lint-plant.log`). The module restored by `git checkout`: its digest is the one taken before the plant
+  (`lint-plant-digest-before.txt`), no tracked file modified, the plant's name in the file 0 times; the next pass's build rebuilt
+  the three modules and its lint is green.
+- **Second pass, tag `final`, on `126bff4d`** (02:14:26Z–02:33:39Z; `126bff4d` differs from `1f094eb2` in `tools/`, `data/` and
+  `plans/` alone — the wrapper's part (b), the runner, the logs, this record): **every step exit 0** but the three plants that
+  must exit 1. The three scans' rows are the first pass's, row for row (`cmp` on every `SITE`/`EVIDENCE` row of the vacuity
+  scan and on every `AXIOM`, `RESTS`, `ASSUMPTION`, `TAKES`, `MENTIONS`, `CONDITION`, `SILENT`, `COHYP`, `CLOSED` row of the
+  assumptions scan; the axiom audit's counts). **The landing's evidence is this pass.**
+
+**The machine incident of 02:00:15–02:02:50Z** (the coordinator's message: another job's unslotted process exhausted the RAM
+twice; two out-of-memory kills, both of that job's own process). What of mine ran in that window, as it asks, each with its exit
+status and its log's last line:
+
+| run | overlap | exit | the log's last lines |
+|---|---|---|---|
+| any step of a gate pass | **none**: the first pass's last log was written at 01:56:54Z, and the final pass started at 02:14:26Z | — | — |
+| the lint control's planted build (`lint-plant-build.log`; Lake's log `build/gate/build/20261007T020053Z-792599.log`) | launched 02:00:53Z; held three times by the slot's reserve ("slot: waiting (MemAvailable 16.5 - 40 < reserve 25 GiB)", "4.9", "14.1"); admitted and at batch 1 by 02:01:04Z; **ran through the rest of the window** and ended at 02:11:57Z | 0 | "==> build: OK — 473 of 473 batches, 3 module(s) rebuilt, 0 module(s) with warnings, 10m53s", "EXIT=0" |
+| a run of the wrapper's `--plant` at the prompt (a Python reader of text files), a commit, a push | about 02:00Z | 0 | "plant: PASS" (re-run by the final pass: the same eight lines) |
+
+The planted build is a control with a fault in it and is evidence of nothing but the lint's red; **the three modules it
+compiled (`OuterAdj` with the plant, `Empty`, `Proofs`) were each compiled again by the final pass**, which started after the
+window, so no artifact written during the window is in the tree the gate read: every other module was up to date and untouched
+by that build. Nothing failed in the window; no step needed a re-run for it.
+
+| step | result, read from its saved log (`data/fs131/l8a/gate/`, tag `final`) | log |
+|---|---|---|
+| build | "build: OK — 473 of 473 batches, 3 module(s) rebuilt, **0 module(s) with warnings**, 9m5s" (`OuterAdj`, `Empty`, `Proofs`: the restore after the lint control); lines holding "warning" in the build log: 1, that sentence; in Lake's full log: 0. The first pass, on an untouched build: "all 1843 modules already up to date, nothing built, 0 module(s) with warnings" | `build-final.log`, `receipt-build-final.log`; `build-first.log` |
+| `sorry` | narrow pattern (`^\s*sorry\s*$`, `:= sorry`, `by sorry`): **0** lines; `\bsorry\b`: 8, all prose, the eight `main` holds, file and line (the wave's two lines of prose were corrected in stage 4) | `sorry-narrow-final.txt`, `sorry-wide-final.txt` |
+| doubled names, **after the build and before the audit** | "dupnames: OK — no name is declared by two modules (23 generated on demand, listed above)" | `dupnames-final.log` |
+| its self-test (`--mem 4 --cpus 4`) | "OK — all 15 controls behaved: every planted fault fired, and every partner passed." | `dupnames-selftest-final.log` |
+| axioms | "audited: **6554 records — 6521 clean on the standard axioms, 20 axiom-free, 8 imported** (resting on a declared outside theorem), **5 declared purchase(s)**"; "declared imports (1): HadwigerNelson.StandingFive.kloosterman_bound"; "library axioms other than native auxiliaries: 1, every one declared"; "axioms: OK". Against `main`'s receipt: 220 rows added, none removed. `CLAUDE.md` § Trust ledger flagged stale, "6304 clean → 6521" (draft 1) | `axioms-final.log`, `receipt-axioms-final.log`, `digest-axioms-final.txt` |
+| its self-test | "OK — every planted fault fired, and every partner passed." (23 controls; `scripts/axioms-controls.txt` untouched: no control's expected count moved) | `axioms-selftest-final.log` |
+| **every record of the wave registered and within the standard three** | records: "main: 9513 theorems; landing: 9744; wave (landing only): 231 = 220 hand-written + 11 generated with no record asked; gone (main only): 0; records in the log: 6554"; "wave records on exactly the three: 215", "on fewer: [Quot.sound, propext]: 2", "on none: 3"; **all 72 heads "exactly the standard three"**; "whole log: records under IMPORTED 8; records carrying the import 8; records listing Falconer's lemma as an axiom 0"; "records: PASS". Registration: "hand-written 220; with a record 220; MISSING 0; STALE 0", "FOREIGN-MODULE 0" | `records-final.txt`, `register-final.txt` |
+| their plants | records `--plant`: exit 1, **"plants fired: 7 of 8 NOT FIRED: ['IMPORT-RECORD …circle_sum_le_weil']"** — the eighth plant strips the import from a record of `main`, and this tool reads a record's axioms only for the landing's own theorems, which hold none of the eight: unreachable on a landing that brings no imported theorem (that state is the audit's own to refuse, under its IMPORTED rule). Registration `--self-test`: MISSING fired, STALE fired | `records-plant-final.txt`, `register-selftest-final.txt` |
+| this job's receipt, from the compiled modules | "220 records in 8 blocks — 215 on exactly the standard three, 5 on a proper subset, 0 bad; 329 theorems in 12 modules (230 hand-written, 99 generated; 10 hand-written with no record in the eight blocks), 0 bad" — no `sorry` beneath any; the 5 are the two kernel tables and `SemiKind`'s three; the 10 are `IsStar4`'s fields, theorems to the kernel that the lister counts generated. The control prints `['sorryAx']`; with `--fault`, exit 1 naming it. The sibling's tool: 29 of 29, none resting | `l8a-axioms-final.txt`, `l8a-axioms-fault-final.txt`, `i8d-axioms-final.txt` |
+| vacuity | "scanned: **declarations=14807 refutations-skipped=215**"; "sites: **sites=1446 vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2**"; "vacuity: OK"; the baseline's header "match (9 of 9 compared)"; `CLAUDE.md` § The gate flagged stale on four counts (draft 3). Against `main`'s scan, row for row: "main rows 1350, landing rows 1527; lost 0; added 177" — GENERIC on `Valid` 82, `NonSiamese` 52, `IsChangePoint` 23, `IsRingArc` 14, `IsHub` 5, `Simple` 1; "by module: declarations +306, refutations +16: equal to the scans difference"; "vacdiff: PASS" | `vacuity-final.log`, `receipt-vacuity-final.log`, `digest-vacuity-final.txt`, `vacdiff-final.txt` |
+| its self-test, and the diff's plants | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent."; vacdiff `--plant`: exit 1 — COUNTER-DISAGREES, LOST, NOT NEW, FLAGGED, MODULE-SUM | `vacuity-selftest-final.log`, `vacdiff-plant-final.txt` |
+| assumptions | "assumptions: OK — 1 outside theorem(s) as axioms, with 8 theorem(s) resting on them; 19 named and 16 inline hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s) and mentioned by 1"; `=== TOTALS === axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1 … conditions=35 … silent=1 … cohyp=58 hints=0 unseen=16035 fails=0`; **both recorded sources "match (9 of 9 compared)"** — the front page's nine are not stale. Against `main`'s receipt the only rows added are the two `CONDITION` rows | `assumptions-final.log`, `receipt-assumptions-final.log`, `digest-assumptions-final.txt` |
+| its self-test | "OK — all 33 checks behaved: every planted fault fired, and every partner stayed silent." | `assumptions-selftest-final.log` |
+| architecture | "RESULT: PASS" | `arch-final.txt` |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "(2/2) Passed!"; its control red between the passes (above) | `lint-final.log`; `../lint-plant.log` |
+| notes | `tools/fs131_l5_notes.py --only-flagged`: "notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58", **0 CONFLICT** — `main`'s count: the check reads the modules of QA4's audit, none of them the wave's; `tools/fs131_qa4_notes.py --self-test`: "OK (6 controls, 1 planted)" | `notes-l5-final.txt`, `notes-qa4-selftest-final.txt` |
+| every theorem of the twelve modules as the kernel holds it | "records read: 241 …; generated by Lean, not compared: 24; compared with their files: 217"; no MISSING-BINDER; "ABSENT inst/term 62 (reviewed 62, not reviewed 0)"; "kernel-signatures: PASS"; the reviewed list regenerated on this commit is the committed one (`cmp`). `--plant`: eight of eight behave — three false exemptions refused, a true field exempted; a hypothesis of `emptyNS` dropped from the kernel's record (MISSING-BINDER); `variable (hplant : (1 : Nat) = 1)` in scope of `OuterAdj` (ABSENT term on 6 of 6 theorems); a head with no record (NO-RECORD); `Empty`'s `{F : ArcMap k}` INCLUDED in 13 theorems and ABSENT in 7 | `kernel-sigs-final.out`, `kernel-sigs-read-final.txt`, `kernel-sigs-table-final.txt`, `kernel-sigs-plant-final.txt` |
+| the docstring corrections, all eleven | text against the merge of `main`, `1171c25b`: "files=3 doc-comments-changed=11 failed=0"; elaborated, the twelve modules against the dump taken before any edit: "before=398 after=398 (theorems before=329) missing=0 added=0 changed=0", IDENTICAL (so the lint's plant left no constant behind either) | `docstring-text-final.txt`, `sigs-final.txt`, `docstring-elaborated-final.txt` |
+| the census | 19 formers; byte-identical to stage 5's | `census-final.out` |
+
+**Read aloud against the informal claim.** The claim of this landing: "wave 8's first two planning passes are in the kernel
+on the standard three, with no assumption". What the gate shows: the 220 hand-written theorems of the twelve modules each have
+one record under CLEAN on a subset of `[propext, Classical.choice, Quot.sound]`, with no `sorry` beneath any theorem of those
+modules, no name declared twice (so each stored list is the list of the proof the kernel checked), and no hypothesis standing
+for an unproved result — by the assumptions step for the forms it can find, and by a reading of all 347 doc comments for the
+one it cannot. What it does not show, and the docstrings say: that the hypotheses of the star rows, the semi-hub rows,
+`outerAdj`, `doubleTip` and `emptyNS` hold together on any object — no Lean model of any (drafts, item 8). `emptyNS` read
+aloud: *no valid non-Siamese six-coloured map whose domain holds the closed unit disc about `p`, with at least four colours at
+`p`, has a ring about `p` no sub-arc of which lies in `Γ`* — the row's sentence ("No non-Siamese … valid six-coloured fragment on
+a closed disc of radius above 1 about a vertex of at least four colours has a ring carrying no arc of Γ"), with *simple*
+removed by FS129-SR3 and "radius above 1" read as `F.Covers p 1` (`covers_one_iff`).
+
+**Token count at this stage**: no reading of the harness's count; my own estimate is about 520k — past the brief's guidance,
+inside its hand-back line; what is left is the landing and the report.
+
+## Drafts for the front page (FS131-L8A)
+
+*For the coordinator to file; nothing here is filed by this job. Each names its slot and the log line it comes from. The gated
+commit is `126bff4d`; its logs are `data/fs131/l8a/gate/*-final.*` (`receipt-axioms-final.log`, `receipt-vacuity-final.log`,
+`receipt-assumptions-final.log` are the three scans' full outputs).*
+
+**1. `CLAUDE.md` § Trust ledger, the audit's sentence** (slot: "the current audit reads 6304 clean and 5 declared purchases, and 8
+imported (and 17 axiom-free; 6,334 records at wave 10's second landing, FS131-L10B, 2026-10-06)") — from `axioms-final.log`,
+"audited: 6554 records — 6521 clean on the standard axioms, 20 axiom-free, 8 imported (resting on a declared outside theorem), 5
+declared purchase(s)":
+
+> the current audit reads 6521 clean and 5 declared purchases, and 8 imported (and 20 axiom-free; 6,554 records at wave 8's first
+> landing, FS131-L8A, 2026-10-06)
+
+The 220 records the landing adds: 215 on exactly the standard three, 2 on `[propext, Quot.sound]` (the kernel tables
+`V6Count.table`, `V6Count.doublesTable`; counted clean), 3 axiom-free (`SemiKind`'s generated theorems). 6304 + 217 = 6521;
+17 + 3 = 20. Imported and purchases do not move; the library still declares one axiom.
+
+**2. `CLAUDE.md` § Trust ledger, the nine assumption counts — no change.** `receipt-assumptions-final.log`, `=== TOTALS ===`:
+`axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — the paragraph "What the library assumes, in
+both forms" stands as filed, its "98 (hypothesis, statement) pairs by 51 statements" included; the digest reads both recorded
+sources "match (9 of 9 compared)". Wave 8 brings no assumption in either form. (If the paragraph is to say so: "wave 8's first
+landing, FS131-L8A, brought none".)
+
+**3. `CLAUDE.md` § The gate, the vacuity scan's two count lines** (slot: "`declarations=14501 refutations-skipped=199 sites=1269`,
+`vacuous=0 stale=0 declared=3 witnessed=38 generic=1226 unknown=2`.") — from `vacuity-final.log`, "scanned: declarations=14807
+refutations-skipped=215", "sites: sites=1446 vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2":
+
+> `declarations=14807 refutations-skipped=215 sites=1446`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2`.
+
+The baseline's two entries are unchanged. Until this is filed the scan flags `CLAUDE.md` § The gate stale (not failed), on four
+counts: declarations, refutations-skipped, sites, generic.
+
+**4. `tools/claude_md_fact_audit.py`, `GATE_CHANGES`** — one entry after the last (`(("6148", "5"), ("6304", "5"))`):
+
+```python
+    (("6304", "5"), ("6521", "5")): "FS-131, wave 8's first landing (FS131-L8A; copy data/fs131/l8a/gate/receipt-axioms-final.log, gated commit 126bff4d): 6,554 records, 6,521 clean, 20 axiom-free, 8 imported, 5 purchases",
+```
+
+The previous landing's receipts, against which the three digests were taken: `data/fs131/lt5/gate/receipt-axioms-landed2.log`,
+`receipt-vacuity-landed2.log`, `receipt-assumptions-landed2.log`.
+
+**5. `LEAN.md` § The gate, a sentence in the vacuity bullet** (slot: after "`DECLARED` (deliberate emptiness, named with its reason
+in the docstring as `VACUITY DECLARED:` and printed every run)"; the coordinator's ruling of 2026-10-06 on `v6_hubs`, in my words):
+
+> **The marker is for a declaration one of whose binders has a provably empty carrier**; the scan reads it binder by binder, and on
+> a binder whose carrier is not empty it reads `STALE` and fails. A route lemma whose hypotheses are *jointly* unsatisfiable — each
+> satisfiable alone — does not carry it: its docstring says the joint vacuity in words and names the theorem that derives `False`
+> from its exact hypotheses (`v6_hubs` with `v6_hubs_vacuous`, FS131-L8A). A statement that concludes `False` is skipped as a
+> refutation, so a marker on it is never read and proves nothing either way.
+
+And `plans/FS131-kernel-plan.md` § 7.3 item 5 (which asks the marker on route lemmas over an empty class) gets the same
+clarification. **For the tooling job** (ruling 475 (d); filed by the coordinator's ruling as option (ii)): honouring a marker on
+the evidence of a named theorem that refutes the declaration's exact hypotheses — joint emptiness as evidence — with its controls.
+
+**6. `LEDGER.md` — the regrades, each [kernel] at this landing** (gated commit `126bff4d`; every declaration below is of
+`HadwigerNelson.Plane.ArcMap` in `Proofs/HadwigerNelson/Plane/RingCalculus/` unless a namespace is given; **each rests on exactly
+`[propext, Classical.choice, Quot.sound]` and on no assumption**: `records-final.txt` reads all 72 heads "exactly the standard
+three", and the assumptions step lists no consumer among them). The implementers' and planners' drafts, gathered; what the join
+changed is in bold.
+
+- **Row 148** (the Γ-free four-colour vertex), slot: its grade and address — "[kernel] at the wider class of FS129-SR3-EMPTY-NS —
+  non-Siamese, simple or not: `emptyNS` (`Empty.lean`). Its steps: `v6_hubs`, `v6_hug` (route lemmas over the empty class; jointly
+  vacuous, refuted by `v6_hubs_vacuous`, `v6_hug_vacuous`), `v6_count` (a kernel table, `decide +kernel`, no native axiom),
+  `exists_ne_mem_closure_inter_of_split`, `v6_anti`. No Lean object meets its hypotheses at a living parameter: the nine-colour
+  model (`sq9Map`, five facts) is owed." (I8A's draft 2, with "VACUITY DECLARED" replaced by what the docstrings now say.)
+- **Row 150** (two change points 60° apart), slot: after "share neither a sole tip" — "**both halves [kernel]**: the sole-tip half
+  `doubleTip`, from `not_sole_tip_of_adjacent_changePoints` (`SoleTip.lean`), which reads no simplicity and no condition on the
+  far germs; the sole-outer-colour half `outerAdj` (`Empty.lean`), from `not_sole_outer_of_adjacent_changePoints`
+  (`OuterAdj.lean`), which reads at most two colours absent at `p` and never six. No Lean object has two change points 60°
+  apart." (I8A's draft 3 said the second half was open; **closed by FS131-I8D and unconditional since the join**.)
+- **§ B, FS129-SR3-EMPTY-NS, FS116-Y4-EMPTY, FS116-Y4-OBST** — kernel: `emptyNS`.
+- **§ B, FS116-V6-HUBS** (grade cell "hand; one mind; true vacuously (FS116-Y4-EMPTY, held)") — "kernel: `v6_hubs`, with
+  `ringPt_sixth_dist_le_one`; over the empty class (`v6_hubs_vacuous`)". **FS116-V6-COUNT** — "kernel: `v6_count`
+  (`V6Count.count`, `HubCount.lean`: the kernel's check of 13⁴ quadruples), `exists_ne_mem_closure_inter_of_split`; finite
+  combinatorics with no map in it". **FS116-V6-ANTI** — "kernel: `v6_anti`, class-free (any valid map), so not vacuous".
+  **FS116-V6-HUG** — "kernel: `v6_hug`; not vacuous at the class its proof reads (`not_sole_tip_of_adjacent_changePoints`: no
+  Γ-free ring)". **FS116-V6-ADJ** — carried by FS129-SR3-OUTERADJ, below.
+- **§ B, FS129-MR1-DOUBLETIP** — kernel: `doubleTip` (its hypotheses `hS`, `hv`, `hu` idle). **FS129-SR3-OUTERADJ** (grade cell
+  "hand; one mind") — "kernel: `outerAdj`, from `not_sole_outer_of_adjacent_changePoints`; the argument reads at most two colours
+  absent at `p`, never six" (I8D's draft 2).
+- **§ B, FS116-RING-GERM** (l. 1423, "derived; held, two minds (the second blind)") — kernel, in tile form: `ringGerm_inward`,
+  `ringGerm_outward` (no non-Siamese hypothesis in (ii)); its first clause and (iii) are wave 3's `germS_absent`, `germS_four`.
+  **FS116-N2-STAR** (l. 1447) — kernel, whole: `star_coloursAt`, `star_absent`, `IsTip.coneAt_subset`, `star_outer_cone`,
+  `star_flank`, `star_flank_interior`, `star_tip_nonempty`, `star_outer_nonempty`. **FS116-V5-OUT2** (l. 1491) — kernel, a
+  citation: it is `star_outer_cone`, valid and non-Siamese only.
+- **§ B, FS116-N2-RECIP** (l. 1448) — "kernel: `star_recip`, at a change point `y` of four colours (never a hub, never
+  non-Siamese), `Covers p 2`" (I8A's draft 5). **FS116-N2-ANTI** (l. 1449, "derived; one mind") — "kernel: `star_anti`; *simple*
+  read at the tiles of `p` only; with the row's *not claimed* case as two hypotheses (no other tile of `p` approaches `p` along
+  `ψ ± 90°`: inventory item 568)" (I8B's draft 2).
+- **§ B, FS116-V5-QCOL** (l. 1489, "hand; one mind") — "kernel, **all clauses but the one never stated**: `qcol_cw`, `qcol_ccw`,
+  `qcol_inner_tile`, `ringArc_dist_le_one`, `IsTile.not_mem_closure_of_not_subset_ball`, `qcol_not_one_arc`,
+  `GermOnQWith.exists_isRingArc_ccw`, `…_cw`; the clause "a (Q) arc holding u⁺ (v⁻) and not u⁻ (v⁺) ends at u (v)" was not
+  stated in Lean and stays at its filed grade" (I8C's draft 2).
+- **§ B, FS116-N3-PAIR** (l. 1484) — "kernel: `germPair_inner_ne`, `germPair_swap`; with no change point, no *simple*, any `k`".
+  **FS116-V5-DICHO** (l. 1492) — "kernel: `germPair_dicho`, at a point of exactly four colours simple for the map, any `k`; its
+  dichotomy clause for any two arcs of `Γ` on `ω(p)` whose side colours are carried at `p`, `ringArc_pair_eq_or_disjoint`".
+  **FS116-N3-CONE** (l. 1483) — "kernel: (a) `ringTile_uMinus`, `…_vMinus`, `…_vPlus`, `…_uPlus` (no *simple*); (b) the four
+  `germOnQ_bar_*`; (c) `closure_inter_subset_sphere`, `isRingArc_of_edge` ("is an arc of ω(w)" read as: `y` lies on an arc of `Γ`
+  on `ω(w)` with those side colours), `four_le_of_bothKind` (with `w ∈ dom` and *simple* at `w`)". **FS116-N3-STAR2** (l. 1485) —
+  "kernel: `exists_isStar4`, `ringArc_star`, `fullSemiHub_star_crossed`, `fullSemiHub_star_parallel`; at exactly four colours;
+  the row's "full semi-hub of kind O" read as its two arcs".
+- **§ B, FS116-N3-CROSS** (l. 1487, "derived; held on every clause but the last (one mind and a checking reading)") — "**kernel,
+  every clause, the last included, and unconditional since the join**: `crossed_no_tip` (with `crossed_tip_zeroAngle`),
+  `crossed_outer`, `crossed_four`, `crossed_changePoint`, `crossed_semiHub` (`SemiHubPlaces.lean`); at a vertex of exactly four
+  colours in the last three (`(F.coloursAt p).ncard = 4`, inventory item 592); the last clause reads neither the freedom of `y`'s
+  outer pair nor *simple* at `y`". **FS116-N3-SEMI** (l. 1486) — "**kernel**: `semiHub_places`, both kinds, at exactly four
+  colours". **FS116-RING-TRANSFER-QC** (l. 1488) — "**kernel**, its first clause: `transferQC`". (I8D's draft 3 said "on the
+  standard three once `…/SemiHub` holds no `sorry`": **it holds none; the fourteen records that rested on its leaves rest on
+  nothing** — stage 2, item 3.)
+- **No ledger row**: `fullSemiHub_star_parallel_T` (kernel; FS116-N3-STAR2's *not claimed* line excludes kind T; no held model) —
+  a row is the deriver's to mint (ruling 597 (a)). `Plane/SimpleOn` (wave 7's foundation: `Simple.simpleOn`, `simpleOn_univ`,
+  `SimpleOn.mono`, `simpleOn_ball_iff`) — kernel; definitions' lemmas, no row.
+
+**`plans/LEAN-BACKLOG.md`** — the rows that are kernel at this landing, by their numbers there: 99 (FS116-N3-PAIR), 100
+(FS116-N3-STAR2), 104 (FS116-RING-GERM), 105 (FS116-N2-STAR), 106 (FS116-N2-ANTI), 107 (FS116-N2-RECIP), 110 (FS116-N3-CONE),
+111 (FS116-N3-CROSS), 131 (FS116-V5-OUT2), 132 (FS116-V5-QCOL — all clauses but one), 140 (FS116-V5-DICHO), 141 (FS116-N3-SEMI),
+142 (FS116-RING-TRANSFER-QC, its first clause), 143 (FS116-V6-HUBS), 144 (FS116-V6-ANTI), 145 (FS116-V6-HUG), 146
+(FS116-V6-COUNT), and the rows of FS129-SR3-EMPTY-NS and FS129-SR3-OUTERADJ (items 24 and 26 of its replacements list) and of
+FS129-MR1-DOUBLETIP. Not kernel: FS116-N2-SIXRING, FS116-RING-TWIST-C (item 9).
+
+**7. Errata — the rows the wave found wider or narrower than filed, each with the Lean name that shows it** (the deriver's files;
+drafts only).
+
+*Wider than filed (generalizations):*
+- FS116-V6-HUG, FS129-MR1-DOUBLETIP — no Γ-free ring, no simplicity, no condition on the far germs, any `k` with at most two
+  colours absent: `not_sole_tip_of_adjacent_changePoints`. Not restated at this landing (ruling 598 (b)): `v6_hug`, `doubleTip`
+  keep their statements beside it.
+- FS129-SR3-OUTERADJ — any `k` with at most two colours absent at `p`, no simplicity: `not_sole_outer_of_adjacent_changePoints`.
+  Its entry's wording "the only colour carried at y by a tile that is not a tile of p" is never met read literally; read as
+  `O_y = {c} = O_y′` (`plans/FS129-derivation.md` l. 795; inventory item 518).
+- FS116-N2-STAR — the flank clause for any tile of any valid map at any point and direction: `star_flank`. FS116-RING-GERM (ii)
+  and STAR's outer-tile clauses — no non-Siamese hypothesis: `ringGerm_outward`, `star_outer_nonempty`.
+- FS116-N2-RECIP — a change point of four colours, never a hub, never non-Siamese: `star_recip`.
+- FS116-V6-ANTI — class-free: `v6_anti`. FS116-V6-COUNT — finite combinatorics with no map: `v6_count`; its last step by a
+  connected circle, no sectors: `exists_ne_mem_closure_inter_of_split`. FS116-V6-HUBS reads no finiteness of the ring's Γ points:
+  `v6_hubs`. `emptyNS` reads one conjunct of the count.
+- FS116-V5-OUT2 — valid and non-Siamese only: `star_outer_cone`. FS116-V5-QCOL's carried-colour clause — Siamese pairs allowed:
+  `qcol_cw`, `qcol_ccw`; its one-arc clause — no change point: `qcol_not_one_arc`.
+- FS116-N3-PAIR — no change point, no *simple*, any `k`: `germPair_inner_ne`, `germPair_swap`.
+- FS116-V5-DICHO — its dichotomy clause (the two colour pairs equal as sets, or disjoint) for any two arcs of `Γ` on `ω(p)` whose
+  side colours are carried at `p`: `ringArc_pair_eq_or_disjoint`. **Its parenthesis (inner and outer exchanged) does not
+  generalize**: it reads the two germs' position (`germPair_swap`); FS116-N3-PAIR's *not claimed* line stands.
+- FS116-N3-CONE (c) — the two tiles need not be assumed distinct: `isRingArc_of_edge` (its `hne` is not read). (a) — no *simple*:
+  the four `ringTile_*`.
+- FS116-N3-CROSS — its last clause holds at a closed change point: `crossed_semiHub` reads neither `ho` nor *simple* at `y`; its
+  first clause is true in the stronger form "no tile of `p` has `y` in its closure": `crossed_no_tip`. Its minds line: "the last
+  clause: kernel-checked (FS131-I8D), the stall of V5's blind verdict closed by the disjoint cones of the two side classes at `y`
+  (`crossed_not_germOnQ_inside`)".
+- Class-free lemmas the plans listed and the library did not hold: `GermIn.tangent_mem_coneAt` (a germ of `ω(p)` approaches its
+  ring point along the tangent), `IsRingArc.inner_ne_outer`.
+
+*Narrower than filed:*
+- FS116-N2-ANTI — its *not claimed* case ("anything when an edge of p leaves at ψ + 90° or ψ − 90°") is two hypotheses of
+  `star_anti` (`hp''`, `hm''`): the interior of a cone that is every direction does not give it (inventory item 568). Slot: after
+  "let ψ + 90° and ψ − 90° lie in the interiors of the cones at p of tiles t⁺ and t⁻".
+- FS116-N3-STAR2, FS116-N3-CROSS (its last three clauses), FS116-N3-SEMI, FS116-RING-TRANSFER-QC — "at least four colours" at `p`
+  is **exactly four** in the kernel: `(F.coloursAt p).ncard = 4` in `fullSemiHub_star_crossed`, `…_parallel`, `crossed_four`,
+  `crossed_changePoint`, `crossed_semiHub`, `semiHub_places`, `transferQC`. At a change point two colours are absent
+  (`germS_absent`: `ncard + 2 = k`), so "at least four with at most two absent" is four only at `k = 6` (inventory item 592): for
+  the rows' six-coloured fragments nothing is lost; the Lean statements over a general `k` say it.
+- FS116-N3-CONE (c) — `four_le_of_bothKind` takes `w ∈ dom` and *simple* at `w` as hypotheses.
+- FS116-N2-RECIP — the statement does not say the two tiles hold the directions `ψ ∓ 90°` (the planner's record).
+- FS116-N3-STAR2's *not claimed* line: the parallel star of kind T is in the kernel (`fullSemiHub_star_parallel_T`), with no held
+  model.
+
+*Corrections to the plans (the planners' record; notes, no edit by this job):* `plans/FS131-w8-kernel-plan.md` § 9.4 A1 is false as
+written — "…outside `B̄(p, 1)`, outside `B̄(y′, 1)` **and outside `B̄(v, 1)`**…; the arc of `ω(y′)` from `y` away from `p` is
+outside `B̄(v, 1)` (`one_lt_norm_e_add_e_sub_e`)"; § 8.4's table of DICHO's one-shared-colour cases was not checked by the kernel
+(the proof took another route): neither confirmed nor refuted; its route for `v6_hug` lacks a step (a second arc tangent at the
+tip's edge), not taken; C1 was landed (wave 3's `exists_lift_of_Icc_subset_angleIcc`); two children it priced are landed lemmas
+(`IsRingArc.disjoint_coneAt`, `exists_mem_coneAt_region`).
+
+**A stub line** (`plans/FRONTIER-STUBS.md`, under FS-124's residues; ruling 568 (c)): "can a tile of a four-colour vertex have every
+direction in its cone, with two antipodal hubs? (the case `star_anti` excludes by hypothesis; neither excluded nor constructed)".
+
+**8. The open gate items at this landing, by name** (each said in the docstrings it concerns; none is an assumption, none is seen
+by the vacuity scan, which reads these theorems `GENERIC` binder by binder):
+
+| owed | the theorems whose hypotheses no Lean object is known to meet together | held by hand |
+|---|---|---|
+| **`emptyNS`'s model at a living parameter**: `sq9Map : ArcMap 9` with `Valid`, `NonSiamese`, `Covers` at a lattice vertex, four colours there, `GammaFreeRing` there (ruling 530 (c)) | `emptyNS` (a refutation at six colours; without the model nothing shows its five hypotheses hold together anywhere), and with it `v6_hubs`, `v6_hug`, `v6_count`'s use | SQ9's lattice vertex |
+| **a Lean star** (`IsStar4`; `quadRing` at `0` is the candidate, about 150 lines) | `ringArc_star`, `fullSemiHub_star_crossed`, `fullSemiHub_star_parallel`, `ringArc_pair_eq_or_disjoint`, `germPair_dicho`, `IsStar4`'s lemmas (`exists_isStar4` proves one exists at a four-colour point simple for a valid non-Siamese map; no such point is a Lean term) | the strip's `P₀`, the bowtie's centre |
+| **a Lean semi-hub**, and a full one | `semiHub_places`, `transferQC`, `crossed_no_tip`, `crossed_outer`, `crossed_four`, `crossed_changePoint`, `crossed_semiHub` | the strip's `P₀` at `P₂` (crossed), the bowtie's centre at `top` (parallel); `semiHub_places`' second and third alternatives have no held model (the third is SEMI-PAR3's open question) |
+| `fullSemiHub_star_parallel_T` | itself | **no held model at all** (no held semi-hub of kind T) |
+| **two change points 60° apart** | `outerAdj`, `not_sole_outer_of_adjacent_changePoints`, `doubleTip`, `not_sole_tip_of_adjacent_changePoints`, `v6_hug` | **held by no fragment**; satisfiability open (FS-124) |
+| **a change point of a four-colour vertex with two colours absent** (wave 7's bowtie, as for wave 3's rows) | `ringGerm_inward`, `ringGerm_outward`, the `star_*` rows, `star_recip`, `star_anti`, `qcol_cw`, `qcol_ccw`, the four `ringTile_*` | the bowtie's top, the strip's `P₂` |
+| a named `example` of `isRingArc_of_edge`'s hypotheses; a Lean `example` of one of `v6_count`'s 72 configurations | those two | `quadRing`; the exact tool's 72 |
+
+Paid at this wave: the class of `StarChart`'s lemmas (`halfDisc` at `0`: valid, non-Siamese, simple, two colours); `GammaFreeRing`
+at `halfPlane2`, `0`. **Standing from earlier landings and unchanged**: `Plane.NoPar`'s docstring (the assumptions step's one
+`SILENT` row), and the open gate items of FS131-L6A's and FS131-L10A's drafts. **Docstrings owed, not made** (outside the doc
+comments my touches name): `v6_hubs_vacuous`'s and `v6_hug_vacuous`'s docstrings and their section title in `Empty` still say "the
+marker" for what the two docstrings now say in words; the block comments of "FS131-K8" and "FS131-K8b" in `scripts/Axioms.lean`
+say their open leaves "join this block" (they joined the implementers' blocks).
+
+**9. What a third planning pass (FS131-K8c) still has to state — two rows and one clause.**
+- **FS116-N2-SIXRING** (`LEDGER.md` § B l. 1445, "derived; one mind"): not stated. What it starts from: the first pass's
+  disposition; `ringArc_dist_le_one` gives "each arc is at most 60°" for its covering step, and its clause "cone at p in
+  `[α + 60°i − 30°, α + 60°i + 90°]`" is `ringArc_cone_inner` on the tile's arc (`plans/FS131-w8-kernel-plan.md` § 9.7). The
+  covering step is unpriced.
+- **FS116-RING-TWIST-C** (l. 1421): not stated; designed (§ 9.7) so that it and wave 7's `ring_odd` are one theorem and a
+  corollary at the join: `twistC_four`, the colour off a finite set and its swap, a new word *colour change*, and the last clause
+  in `ring_odd`'s own shape. Its first clause and L1 are landed (`ringD`, `finite_ringD_off_ringArc`,
+  `IsRingArc.not_mem_closure_third`).
+- **FS116-V5-QCOL's clause** "a (Q) arc holding u⁺ (v⁻) and not u⁻ (v⁺) ends at u (v)": never stated in Lean (no consumer: the two
+  sub-arc lemmas stand in for its uses); it stays at its filed grade (ruling 597 (c)).
+
+**At the joins with the other waves** (for their landings; nothing is discharged there): `qcol_inner_tile` and wave 7's
+`qArc_inner`'s first clause are one lemma under two names; `simpleOn_not_hasRepeatedColour` (`SemiHub`) has the statement of wave
+9's leaf `not_hasRepeatedColour_of_simpleOn` (`Plane/Classes/QFree`) — one becomes a one-line corollary; `four_le_of_bothKind` and
+wave 7's `IsTacticAt.four_le_centre` share that child; FS116-RING-TWIST-C's last clause is `ring_odd`'s corollary. **`Plane/SimpleOn`
+is on `main` from this landing**: waves 7 and 9 hold the same blob and meet it as their own file.
+
+**10. `CLAUDE.md` § Frontier.** No change of state: FS-131 stays open. A line, if one is wanted where the landings are listed:
+"wave 8's first two planning passes are on `main` through the full gate (FS131-L8A, 2026-10-06): the ring calculus in the
+non-Siamese class — row 148 at its wider class (`emptyNS`) and both halves of row 150 (`doubleTip`, `outerAdj`) in the kernel, with
+the star, germ, cone and semi-hub rows of FS-116; twelve modules, 220 records, no assumption; two rows and one clause left for a
+third pass; no Lean model yet of a star, a semi-hub, two adjacent change points, or `emptyNS`'s class at nine colours."
+
+**11. Proof Atlas grade changes** — to [kernel]: FS129-SR3-EMPTY-NS, FS116-Y4-EMPTY, FS116-Y4-OBST, FS116-V6-HUBS, FS116-V6-HUG,
+FS116-V6-COUNT, FS116-V6-ANTI, FS116-V6-ADJ (through FS129-SR3-OUTERADJ), FS129-SR3-OUTERADJ, FS129-MR1-DOUBLETIP,
+FS116-RING-GERM, FS116-N2-STAR, FS116-N2-RECIP, FS116-N2-ANTI (with its two hypotheses), FS116-V5-OUT2, FS116-V5-QCOL (all clauses
+but one), FS116-N3-PAIR, FS116-V5-DICHO, FS116-N3-CONE, FS116-N3-STAR2 (at exactly four colours), FS116-N3-CROSS, FS116-N3-SEMI,
+FS116-RING-TRANSFER-QC (its first clause); rows 148 and 150. Each with the scope of item 6.
+
+**12. Two notes for `LEAN.md` § Searching — Lean / § The gate** (drafts).
+- "A `Prop`-valued `structure`'s fields and an enumeration's `sizeOf_spec` / `ofNat_ctorIdx` are theorems to the kernel with no
+  text of their own: the audit's generated-name pattern does not know them (register them, or identify them in the file before
+  exempting them — `tools/fs131_l8a_kernelsig.py`), and `data/fs131/l5/count-modules.lean` counts the fields `GEN` and the
+  enumeration's three `THM`."
+- "Name a merged commit by its hash in every check, never by `origin/main`: the worktrees share one set of refs, and another job's
+  fetch moves the ref between two runs of a check (FS131-L8A: a merge-index check compared the index with a commit that was not
+  the one merged)."
+
+## Theorems this phase proved, final
+
+**This job proved none; it landed these.** [kernel] at the gated commit `126bff4d`, each a declaration of
+`HadwigerNelson.Plane.ArcMap` in `Proofs/HadwigerNelson/Plane/RingCalculus/` unless a namespace is given, **each on exactly
+`[propext, Classical.choice, Quot.sound]`** (`data/fs131/l8a/gate/records-final.txt`: 72 heads, each "exactly the standard
+three") **and on no assumption** (`receipt-assumptions-final.log`: none is a `RESTS`, `TAKES` or `MENTIONS` row). Proved by the
+jobs named; read against their rows in those jobs' records; read from the kernel against their files in stage 5.4.
+
+- **FS129-SR3-EMPTY-NS** (carrying FS116-Y4-EMPTY, FS116-Y4-OBST; `LEDGER.md` row 148 at its wider class) — `emptyNS` (`Empty`;
+  FS131-I8A): `{F : ArcMap 6}`, `F.Valid`, `F.NonSiamese`, `F.Covers p 1`, `4 ≤ (F.coloursAt p).ncard`, `F.GammaFreeRing p` ⊢
+  `False`. With `v6_hubs_vacuous`, `v6_hug_vacuous`.
+- **FS116-V6-HUBS** — `v6_hubs`, `ringPt_sixth_dist_le_one`; **FS116-V6-COUNT** — `v6_count`,
+  `exists_ne_mem_closure_inter_of_split` (`V6Count.table`, `V6Count.doublesTable` on `[propext, Quot.sound]`: the kernel's own
+  evaluation); **FS116-V6-ANTI** — `v6_anti` (FS131-K8); **FS116-V6-HUG** — `v6_hug`; **FS129-MR1-DOUBLETIP** — `doubleTip`;
+  both from `not_sole_tip_of_adjacent_changePoints` (`SoleTip`) (FS131-I8A).
+- **FS129-SR3-OUTERADJ** (carrying FS116-V6-ADJ; with DOUBLETIP, both halves of row 150) — `outerAdj` (`Empty`), from
+  `not_sole_outer_of_adjacent_changePoints` (`OuterAdj`) (FS131-I8D).
+- **FS116-RING-GERM**, tile form — `ringGerm_inward`, `ringGerm_outward`; **FS116-N2-STAR** — `star_coloursAt`, `star_absent`,
+  `IsTip.coneAt_subset`, `star_outer_cone` (which is **FS116-V5-OUT2**), `star_flank`, `star_flank_interior`,
+  `star_tip_nonempty`, `star_outer_nonempty` (`Basic`, `Star`; FS131-K8).
+- **FS116-N2-RECIP** — `star_recip` (FS131-I8A); **FS116-N2-ANTI** — `star_anti`, with `star_anti_ne` (`Star`; FS131-I8B, at
+  the statement of inventory item 568).
+- **FS116-V5-QCOL**, all clauses but the one never stated — `qcol_cw`, `qcol_ccw`, `IsTile.not_mem_closure_of_not_subset_ball`
+  (FS131-K8b), `qcol_inner_tile`, `ringArc_dist_le_one`, `qcol_not_one_arc`, `GermOnQWith.exists_isRingArc_ccw`, `…_cw`;
+  **FS116-N3-PAIR** — `germPair_inner_ne`, `germPair_swap`; **FS116-V5-DICHO** — `germPair_dicho`,
+  `ringArc_pair_eq_or_disjoint`; **FS116-N3-CONE** — `ringTile_uMinus`, `…_vMinus`, `…_vPlus`, `…_uPlus`, `germOnQ_bar_uPlus`,
+  `…_vMinus`, `…_uMinus`, `…_vPlus`, `closure_inter_subset_sphere`, `isRingArc_of_edge`, `four_le_of_bothKind`;
+  **FS116-N3-STAR2**, at exactly four colours — `exists_isStar4`, `ringArc_star`, `fullSemiHub_star_crossed`,
+  `fullSemiHub_star_parallel`; and, with no row, `fullSemiHub_star_parallel_T` (`SemiHub`; FS131-I8C).
+- **FS116-N3-CROSS**, every clause — `crossed_no_tip`, `crossed_tip_zeroAngle`, `crossed_outer`, `crossed_four`,
+  `crossed_changePoint`, `crossed_semiHub`; **FS116-N3-SEMI** — `semiHub_places`; **FS116-RING-TRANSFER-QC**, its first clause —
+  `transferQC` (`SemiHubPlaces`; FS131-I8D, at the statements of inventory item 592).
+- The shared lemmas (`StarChart`; FS131-I8B): `HadwigerNelson.Plane.exists_int_of_angleIcc_subset`, `mem_closure_tile_of_near`,
+  `ncard_tileAt_eq`, `IsSectorChart.tileAt_equiv`, `exists_sectorChart_tileAt`, `exists_initialPiece_of_ncard_le_three`.
+- Wave 7's foundation (`Plane/SimpleOn`; FS131-K7): `Simple.simpleOn`, `simpleOn_univ`, `SimpleOn.mono`, `simpleOn_ball_iff`.
+
+The whole landing: twelve modules, 306 declarations, 231 theorems (220 hand-written, each with one record; 215 on exactly the
+standard three, 2 on `[propext, Quot.sound]`, 3 axiom-free). The audit: 6,554 records — 6,521 clean, 20 axiom-free, 8 imported,
+5 declared purchases; one library axiom, `StandingFive.kloosterman_bound`, on which nothing of this wave rests.
+
+## Slips, my own
+
+1. **A check run against a ref that moved** (stage 3): `origin/main` was moved by another job's fetch between two runs of the
+   merge-index check, which then compared the index with a commit that was not merged. Caught by the check's own `WRONG-MERGE`
+   line; every check of the stage re-run against the commit's hash.
+2. **A fault's anchor that stood twice** (stage 2): my first plant in `SemiHubPlaces` matched two signatures; the instrument
+   stopped with exit 2 as built, the anchor was made unique, the self-test re-run.
+3. **A sleep longer than the harness's wait, twice**, moved to the background by the harness; nothing depended on it.
+4. **No build at the merge of `main` alone** (stage 3): the queued build was stopped before the slot admitted it and one build
+   was made at the next commit (doc comments and registry prose only). Said where it happened.
+5. **The record was committed once while the first gate pass ran** (`fd37fa78`, `plans/` alone). The pass's head file names the
+   commit it started on; no step reads the record. The final pass ran on a commit that did not move under it.
+6. **The marker in `v6_hug`'s new docstring**: both reworded docstrings hold the two words of the scan's marker in backticks
+   without its colon, as the ruled sentence does; a later edit that adds a colon there would bring the marker back. The edit
+   script refuses a file in which the marker's string stands; nothing guards a later hand.
+7. **One plant of another job's tool is unreachable on this landing** (stage 6, the records check: 7 of 8) and I did not make
+   a reachable twin of it: the state it plants is the axiom audit's own to refuse.
+8. No token count was read at any saved stage: I have no instrument for the harness's count, and wrote my own estimate each time.

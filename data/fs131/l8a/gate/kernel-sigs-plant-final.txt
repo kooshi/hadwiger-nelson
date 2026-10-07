@@ -1,0 +1,10 @@
+plant (a name `<S>.<g>` where `<g>` is no field): NOT-FOUND fired, not exempted
+plant (`<E>.<c>.sizeOf_spec` where `<c>` is no constructor): NOT-FOUND fired, not exempted
+plant (a plain theorem name with no text): NOT-FOUND fired, not exempted
+partner (a true field, HadwigerNelson.Plane.ArcMap.IsStar4.cone₁): exempted with its field line
+plant (the kernel record of HadwigerNelson.Plane.ArcMap.emptyNS loses `(hΓ : …)`): fired (MISSING-BINDER)
+plant (`variable (hplant : (1 : Nat) = 1)` in scope of Proofs.HadwigerNelson.Plane.RingCalculus.OuterAdj): fired (ABSENT term) on 6 of 6 theorems
+plant (a head with no record): fired (NO-RECORD)
+partner (`Empty`'s section variable `{F : ArcMap k}`: INCLUDED in 13 theorem(s), ABSENT in 7): passed
+plant: PASS
+exit=0
