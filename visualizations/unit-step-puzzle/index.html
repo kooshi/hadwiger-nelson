@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit-step puzzle</title>
+<style>
+:root{
+  --bg:#f6f5f1; --panel:#ffffff; --ink:#1d1d1f; --muted:#666a70; --line:#d7d5cf; --empty:#e9e7e1;
+  --accent:#1f5fbf; --warn:#b3261e; --ok:#1b7f3b;
+  --c0:#d7263d; --c1:#1b998b; --c2:#2e5eaa; --c3:#f4a024; --c4:#7b2d8e; --c5:#39a9db; --c6:#e85d9a; --c7:#8a9a1b;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15161a; --panel:#1e2026; --ink:#ececec; --muted:#9aa0a8; --line:#353842; --empty:#2a2d35;
+    --accent:#7fb0ff; --warn:#ff8a80; --ok:#6fd08c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15161a; --panel:#1e2026; --ink:#ececec; --muted:#9aa0a8; --line:#353842; --empty:#2a2d35;
+  --accent:#7fb0ff; --warn:#ff8a80; --ok:#6fd08c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 0 2px}
+p{margin:6px 0}
+.muted{color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 10px;cursor:pointer}
+button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+button:disabled{opacity:.45;cursor:default}
+.sw{width:34px;height:34px;padding:0;border-radius:8px;font-weight:600;color:#fff;text-shadow:0 0 2px #0008}
+.sw.erase{color:var(--ink);text-shadow:none;background:var(--empty)}
+#board{display:grid;gap:1px;width:min(100%,640px);margin:10px auto;touch-action:none;user-select:none;background:var(--line);border:1px solid var(--line)}
+.cell{aspect-ratio:1;background:var(--empty);position:relative;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#fff;text-shadow:0 0 2px #000a;overflow:hidden}
+.cell.clash::after{content:"";position:absolute;inset:0;border:2px solid var(--ink)}
+.cell.ring::before{content:"";position:absolute;width:42%;height:42%;border-radius:50%;background:var(--ink);opacity:.85}
+.cell.here::before{content:"";position:absolute;inset:12%;border:2px solid var(--ink);border-radius:50%}
+.cell.free{background-image:radial-gradient(circle,var(--muted) 0 16%,transparent 18%)}
+#status{font-weight:600}
+#status.ok{color:var(--ok)} #status.bad{color:var(--warn)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0}
+code{font:13px ui-monospace,Menlo,Consolas,monospace}
+textarea{width:100%;height:64px;font:12px ui-monospace,Menlo,Consolas,monospace;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px}
+</style>
+</head>
+<body>
+<main>
+<h1>Unit-step puzzle</h1>
+<p class="muted">Colour every cell of a <span id="qq"></span> grid that wraps around at its edges. Two cells clash when the step between
+them, <code>(dx, dy)</code>, satisfies <code>dx² + dy² ≡ 1 (mod q)</code>. Clashing cells must get different colours.</p>
+
+<div class="row" id="levels" aria-label="Level"></div>
+<div class="card" id="known"></div>
+
+<div class="row" id="palette" aria-label="Colour"></div>
+<div class="row">
+  <button id="mPaint" aria-pressed="true">Paint</button>
+  <button id="mLook" aria-pressed="false">Inspect a cell</button>
+  <button id="tFree" aria-pressed="false">Show where this colour can go</button>
+  <button id="tNum" aria-pressed="false">Numbers</button>
+</div>
+<div id="board" role="grid" aria-label="The grid"></div>
+<p id="status" aria-live="polite"></p>
+<div class="row">
+  <button id="undo">Undo</button>
+  <button id="clear">Clear</button>
+  <button id="stripes" hidden>Fill the known stripes</button>
+  <button id="copy">Copy code</button>
+  <button id="paste">Load code</button>
+</div>
+<textarea id="code" aria-label="Colouring code" placeholder="A colouring as text: one character per cell, row by row (0–7, or . for empty)."></textarea>
+<p class="muted">Keys: 1–8 pick a colour, 0 the eraser. Your work is kept in this browser, per level.</p>
+</main>
+<script>
+/*CORE*/
+function steps(q){const s=[];for(let a=0;a<q;a++)for(let b=0;b<q;b++)if((a*a+b*b)%q===1)s.push([a,b]);return s;}
+function neighbours(q){const st=steps(q),nb=[];for(let y=0;y<q;y++)for(let x=0;x<q;x++){const l=[];for(const[a,b]of st)l.push(((y+b)%q)*q+(x+a)%q);nb.push(l);}return nb;}
+function clashes(col,nb){const bad=new Uint8Array(col.length);let pairs=0;for(let i=0;i<col.length;i++){if(col[i]<0)continue;for(const j of nb[i])if(col[j]===col[i]){bad[i]=1;if(j>i)pairs++;}}return{bad,pairs};}
+// The known eight-colouring at q = 23: stripes of the linear form 3x + 5y (mod 23), cut into bands of three.
+function stripes23(){const q=23,col=new Int8Array(q*q);for(let y=0;y<q;y++)for(let x=0;x<q;x++)col[y*q+x]=Math.min(Math.floor(((3*x+5*y)%q)/3),7);return col;}
+function encode(col){let s="";for(const c of col)s+=c<0?".":String(c);return s;}
+function decode(s,n,k){s=s.replace(/\s+/g,"");if(s.length!==n)return null;const col=new Int8Array(n);for(let i=0;i<n;i++){const ch=s[i];if(ch==="."){col[i]=-1;continue;}const v=ch.charCodeAt(0)-48;if(!(v>=0&&v<k))return null;col[i]=v;}return col;}
+/*END*/
+const LEVELS=[
+ {q:3,k:3,known:"Three colours are enough, and three are needed."},
+ {q:7,k:4,known:"Four colours are enough, by this project's record."},
+ {q:11,k:5,known:"Five colours are enough and five are needed."},
+ {q:19,k:5,known:"Five colours are enough (a bound checked in Lean)."},
+ {q:23,k:8,known:"Eight colours are enough: a striped colouring does it (the button below fills it in)."},
+ {q:23,k:7,known:"<b>Open.</b> Nobody knows whether seven colours are enough here."},
+ {q:23,k:6,known:"<b>Open.</b> Five colours are impossible (an exact certificate: no colour can take more than 105 of the 529 cells). Whether six are enough is not known. A solution would be new."},
+];
+let L=0,q,k,nb,col,sel=0,mode="paint",showFree=false,showNum=false,hist=[],hover=-1,down=false;
+const $=id=>document.getElementById(id),board=$("board");
+const key=()=>"unit-step-puzzle:"+q+":"+k;
+function save(){try{localStorage.setItem(key(),encode(col));}catch(e){}}
+function load(){try{const s=localStorage.getItem(key());if(s){const c=decode(s,q*q,k);if(c)return c;}}catch(e){}return new Int8Array(q*q).fill(-1);}
+function setLevel(i){L=i;q=LEVELS[i].q;k=LEVELS[i].k;nb=neighbours(q);col=load();sel=0;hist=[];hover=-1;
+  $("qq").textContent=q+" × "+q;
+  [...$("levels").children].forEach((b,j)=>b.setAttribute("aria-pressed",j===i));
+  $("known").innerHTML="<b>"+q+" × "+q+", "+k+" colours.</b> Each cell clashes with "+nb[0].length+" others. "+LEVELS[i].known;
+  $("stripes").hidden=!(q===23&&k===8);
+  const pal=$("palette");pal.innerHTML="";
+  for(let c=0;c<k;c++){const b=document.createElement("button");b.className="sw";b.style.background="var(--c"+c+")";b.textContent=c+1;b.title="Colour "+(c+1);b.onclick=()=>{sel=c;render();};pal.appendChild(b);}
+  const e=document.createElement("button");e.className="sw erase";e.textContent="×";e.title="Eraser";e.onclick=()=>{sel=-1;render();};pal.appendChild(e);
+  board.style.gridTemplateColumns="repeat("+q+",1fr)";board.innerHTML="";
+  for(let i2=0;i2<q*q;i2++){const d=document.createElement("div");d.className="cell";d.dataset.i=i2;board.appendChild(d);}
+  render();}
+function paint(i){if(col[i]===sel)return;hist.push([i,col[i]]);col[i]=sel;save();render();}
+function render(){const{bad,pairs}=clashes(col,nb);let done=0;const cells=board.children;
+  const ring=new Uint8Array(q*q);if(hover>=0)for(const j of nb[hover])ring[j]=1;
+  for(let i=0;i<cells.length;i++){const c=col[i],d=cells[i];if(c>=0)done++;
+    d.style.background=c>=0?"var(--c"+c+")":"";
+    let free=false;if(showFree&&sel>=0&&c<0){free=true;for(const j of nb[i])if(col[j]===sel){free=false;break;}}
+    d.className="cell"+(bad[i]?" clash":"")+(ring[i]?" ring":"")+(i===hover?" here":"")+(free?" free":"");
+    d.textContent=showNum&&c>=0?String(c+1):"";}
+  [...$("palette").children].forEach((b,j)=>b.setAttribute("aria-pressed",(j<k?j:-1)===sel));
+  const st=$("status"),n=q*q;st.className="";
+  if(done===n&&pairs===0){st.className="ok";st.textContent=(q===23&&k<8)?"Solved with "+k+" colours. This was not known to be possible — copy the code below and send it in.":"Solved: every cell coloured, no clash.";}
+  else{if(pairs>0)st.className="bad";st.textContent=done+" of "+n+" cells coloured; "+pairs+" clashing pair"+(pairs===1?"":"s")+".";}
+  $("undo").disabled=hist.length===0;}
+function cellAt(ev){const t=document.elementFromPoint(ev.clientX,ev.clientY);return t&&t.classList&&t.classList.contains("cell")?+t.dataset.i:-1;}
+board.addEventListener("pointerdown",ev=>{const i=cellAt(ev);if(i<0)return;ev.preventDefault();if(mode==="look"){hover=hover===i?-1:i;render();return;}down=true;paint(i);});
+board.addEventListener("pointermove",ev=>{const i=cellAt(ev);if(mode==="paint"){if(down&&i>=0)paint(i);else if(ev.pointerType==="mouse"&&i!==hover){hover=i;render();}}});
+board.addEventListener("pointerleave",()=>{if(mode==="paint"&&hover>=0){hover=-1;render();}});
+window.addEventListener("pointerup",()=>{down=false;});
+$("mPaint").onclick=()=>{mode="paint";hover=-1;$("mPaint").setAttribute("aria-pressed",true);$("mLook").setAttribute("aria-pressed",false);render();};
+$("mLook").onclick=()=>{mode="look";$("mLook").setAttribute("aria-pressed",true);$("mPaint").setAttribute("aria-pressed",false);render();};
+$("tFree").onclick=()=>{showFree=!showFree;$("tFree").setAttribute("aria-pressed",showFree);render();};
+$("tNum").onclick=()=>{showNum=!showNum;$("tNum").setAttribute("aria-pressed",showNum);render();};
+$("undo").onclick=()=>{const h=hist.pop();if(!h)return;col[h[0]]=h[1];save();render();};
+$("clear").onclick=()=>{if(!confirm("Clear this level?"))return;col.fill(-1);hist=[];save();render();};
+$("stripes").onclick=()=>{col=stripes23();hist=[];save();render();};
+$("copy").onclick=()=>{const s=encode(col);$("code").value=s;try{navigator.clipboard.writeText(s);}catch(e){}};
+$("paste").onclick=()=>{const c=decode($("code").value,q*q,k);if(!c){alert("That code does not fit this level: it needs "+(q*q)+" characters, each 0–"+(k-1)+" or a dot.");return;}col=c;hist=[];save();render();};
+window.addEventListener("keydown",ev=>{if(ev.target.tagName==="TEXTAREA")return;const v=ev.key.charCodeAt(0)-48;if(ev.key.length===1&&v>=0&&v<=8){if(v===0)sel=-1;else if(v<=k)sel=v-1;else return;render();}});
+LEVELS.forEach((lv,i)=>{const b=document.createElement("button");b.textContent=lv.q+"×"+lv.q+" · "+lv.k+(lv.q===23&&lv.k<8?" (open)":"");b.onclick=()=>setLevel(i);$("levels").appendChild(b);});
+setLevel(0);
+</script>
+</body>
+</html>
