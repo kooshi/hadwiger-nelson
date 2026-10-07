@@ -27,8 +27,8 @@ The colouring is `c : ℂ → α`, proper at almost every unit pair of `U` (`AeP
   lie with respect to `S(x)`. `piece_type` is the claim in its words.
 * `AeProperOn.ae_ne_of_ae_region` — C124-CENTRE-HALF in one clause, by the type of the disc tangent to `S(q)` at
   `z`; `centre_half` in the claim's words.
-* `IsTight U c q z a b` — the pair `(q, z)` is tight for `(a, b)`; `innerCollar`, `outerCollar`. `centre`
-  (C124-CENTRE) and `straddle` (C124-STRADDLE).
+* `IsTight U c q z a b` — the pair `(q, z)` is tight for `(a, b)`; `innerCollar`, `outerCollar`. `tight_centre`
+  (C124-CENTRE) and `tight_straddle` (C124-STRADDLE).
 
 **Inhabitant** of every hypothesis here at once: `tightModel` on `tightModelDom` — three discs of radius `1/10` about
 `0`, `1` and `1 + i`; about `1` the label is `0` inside the unit circle about `0` and `1` outside it; elsewhere `2`.
@@ -139,6 +139,12 @@ def OnSide (σ : CircleSide) (P : Set ℂ) (w : ℂ) : Prop :=
   match σ with
   | .inside => InnerAt P w
   | .outside => OuterAt P w
+
+/-- On the closed inside: inner. -/
+@[simp] theorem onSide_inside {P : Set ℂ} {w : ℂ} : OnSide .inside P w ↔ InnerAt P w := Iff.rfl
+
+/-- On the closed outside: outer. -/
+@[simp] theorem onSide_outside {P : Set ℂ} {w : ℂ} : OnSide .outside P w ↔ OuterAt P w := Iff.rfl
 
 /-- Not inner: a point strictly outside the unit circle. -/
 theorem not_innerAt_iff {P : Set ℂ} {w : ℂ} : ¬ InnerAt P w ↔ ∃ y ∈ P, 1 < dist y w := by
@@ -386,7 +392,7 @@ with |q − z| = 1, and (q, z) tight for (a, b). Then there is η > 0 such that 
 |w − z| > 1 has a label other than a, and almost every point w of B(q, η) with |w − z| < 1 has a label other than b."
 
 `|q − z| = 1` and `z ∈ U` are carried by `IsTight`. Inhabitant of the hypotheses: `isTight_tightModel`. -/
-theorem centre {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {q z : ℂ} (hq : q ∈ U)
+theorem tight_centre {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {q z : ℂ} (hq : q ∈ U)
     {a b : Fin k} (ht : IsTight U c q z a b) :
     ∃ η > 0, (∀ᵐ w, w ∈ ball q η → 1 < dist w z → c w ≠ a) ∧ (∀ᵐ w, w ∈ ball q η → dist w z < 1 → c w ≠ b) := by
   sorry
@@ -403,7 +409,7 @@ a point of U with |p − z| = 1, p ≠ q and p ≠ 2z − q. Then there is η > 
 a label other than a and other than b."
 
 Inhabitant of the hypotheses: `isTight_tightModel` with `p = 1 + i`. -/
-theorem straddle {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {q z : ℂ} {a b : Fin k}
+theorem tight_straddle {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {q z : ℂ} {a b : Fin k}
     (ht : IsTight U c q z a b) {p : ℂ} (hp : p ∈ U) (hpz : dist p z = 1) (hpq : p ≠ q) (hanti : p ≠ 2 * z - q) :
     ∃ η > 0, ∀ᵐ w, w ∈ ball p η → c w ≠ a ∧ c w ≠ b := by
   sorry
@@ -445,7 +451,7 @@ example : ∀ᵐ z, z ∈ tightModelDom ∩ unitShadow (ball (0 : ℂ) (1 / 10))
 /-- The model, read through C124-CENTRE: near the centre `0` the labels `0` and `1` are confined. -/
 example : ∃ η > 0, (∀ᵐ w, w ∈ ball (0 : ℂ) η → 1 < dist w 1 → tightModel w ≠ 0) ∧
     (∀ᵐ w, w ∈ ball (0 : ℂ) η → dist w 1 < 1 → tightModel w ≠ 1) :=
-  centre isOpen_tightModelDom isWeakColouringOn_tightModel (Or.inl (Or.inl (mem_ball_self (by norm_num))))
+  tight_centre isOpen_tightModelDom isWeakColouringOn_tightModel (Or.inl (Or.inl (mem_ball_self (by norm_num))))
     isTight_tightModel
 
 /-- The model, read through C124-STRADDLE at `p = 1 + i`. -/

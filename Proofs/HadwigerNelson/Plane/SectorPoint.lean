@@ -14,13 +14,13 @@ but for x, such that the three components of B(x, r) ∖ (J_0 ∪ J_1 ∪ J_2) a
   three complementary components, and every two components share one. Mathlib holds no Jordan curve theorem; this
   library's `Plane/PlaneTopology` holds unicoherence and the crossing of continua in a disc. Owed as a kernel job of
   its own (`plans/FS124-kernel-plan-2.md` § the sector clause; the coordinator's ruling of 2026-10-07).
-* `both_saved_of_isSector` — **C124-BOTH's second clause in the claim list's own words**, over that leaf and
-  `both_saved` (`Plane/ClosePair`), which is stated for arc-edged decompositions and does not read this module.
+* `closePair_both_saved_of_isSector` — **C124-BOTH's second clause in the claim list's own words**, over that leaf and
+  `closePair_both_saved` (`Plane/ClosePair`), which is stated for arc-edged decompositions and does not read this module.
   "A sector point is full" (`ThreePiece.IsSector.isFull`) is over the same leaf.
 
 **Inhabitant**: `sectorPoint_isSector` — the ordinary three-sector point of `Plane/ThreePiece` is a sector point, its
 three arcs the radii along `1`, `i`, `−1 − i`. `exists_closePair_sector` — a close complementary pair of sector
-points of a weak six-colouring, with a common unit point in the set (the hypotheses of `both_saved_of_isSector`).
+points of a weak six-colouring, with a common unit point in the set (the hypotheses of `closePair_both_saved_of_isSector`).
 -/
 
 namespace HadwigerNelson.Plane
@@ -65,17 +65,17 @@ theorem sectorPoint_isSector : sectorPoint.IsSector := by
 /-- **C124-BOTH**, second clause, in the claim list's words (`data/fs124/claims-K2.md`): "If they are sector points,
 each has an edge that contains an arc of S(w) with an end at the member: no common unit point of a close
 complementary pair of sector points is saved by one member alone." Over the θ-lemma
-(`ThreePiece.IsSector.hasArcEdges`) and `both_saved`. Inhabitant of the hypotheses: `exists_closePair_sector`. -/
-theorem both_saved_of_isSector {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c)
-    {x y w : ℂ} (C : ClosePair U c x y) (hw : w ∈ U) (hwx : dist w x = 1) (hwy : dist w y = 1)
+(`ThreePiece.IsSector.hasArcEdges`) and `closePair_both_saved`. Inhabitant of the hypotheses: `exists_closePair_sector`. -/
+theorem closePair_both_saved_of_isSector {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c)
+    {x y w : ℂ} (C : ClosePair U c x y) (hw : w ∈ U) (hwu : IsCommonUnitPoint x y w)
     (hsx : C.left.IsSector) (hsy : C.right.IsSector) : C.left.Saves w ∧ C.right.Saves w :=
-  both_saved hU hc C hw hwx hwy hsx.hasArcEdges hsy.hasArcEdges
+  closePair_both_saved hU hc C hw hwu hsx.hasArcEdges hsy.hasArcEdges
 
-/-- **Inhabitant of the hypotheses of `both_saved_of_isSector`**: a weak six-colouring of an open set with a close
+/-- **Inhabitant of the hypotheses of `closePair_both_saved_of_isSector`**: a weak six-colouring of an open set with a close
 complementary pair of sector points and a common unit point in the set. -/
 theorem exists_closePair_sector :
     ∃ (U : Set ℂ) (c : ℂ → Fin 6) (x y w : ℂ) (C : ClosePair U c x y),
-      IsOpen U ∧ IsWeakColouringOn U c ∧ w ∈ U ∧ dist w x = 1 ∧ dist w y = 1 ∧ C.left.IsSector ∧
+      IsOpen U ∧ IsWeakColouringOn U c ∧ w ∈ U ∧ IsCommonUnitPoint x y w ∧ C.left.IsSector ∧
         C.right.IsSector := by
   sorry
 

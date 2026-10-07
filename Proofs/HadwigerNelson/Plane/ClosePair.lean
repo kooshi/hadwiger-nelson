@@ -17,7 +17,7 @@ Claims **C124-FORCED-PIECES**, **C124-LONE**, **C124-BOTH** and **C124-FOUR** of
 label of a piece of `x` or of a piece of `y`. Every theorem here is proved from that sentence as a hypothesis
 (`hcover`) for `AeProperOn` at any label type — `exists_onSide_of_cover`, `ClosePair.separatesAt_or`,
 `ClosePair.lone_of_cover`, `ClosePair.separatesAt_right_of_isFull`, `ClosePair.presentAt_eq` — and the claim list's
-statements are the corollaries at `Fin 6`. With seven labels `hcover` fails, and `forced_pieces` is false
+statements are the corollaries at `Fin 6`. With seven labels `hcover` fails, and `closePair_forced_pieces` is false
 (`exists_closePair_seven_not_separatesAt`, `Plane/ClosePairModel`).
 
 The mechanism, with no cover hypothesis (`ae_onSide_of_label`, the type of finitely many pieces at once): near `w`,
@@ -32,9 +32,9 @@ C124-FORCED-PIECES is that sentence at the two sides a non-separating pair would
 excludes in C124-BOTH and C124-FOUR.
 
 **Inhabitants** (`Plane/ClosePairModel`): `exists_closePair_not_separatesAt` — a close complementary pair of a weak
-six-colouring with a common unit point at which one member does not separate (the hypotheses of `forced_pieces` and
-`lone` at once); `exists_closePair_full` — one with both members arc-edged, hence full, each with one inner, one
-outer and one crossing piece (the hypotheses of `both_separate`, `both_saved` and `four` at once).
+six-colouring with a common unit point at which one member does not separate (the hypotheses of `closePair_forced_pieces` and
+`closePair_lone` at once); `exists_closePair_full` — one with both members arc-edged, hence full, each with one inner, one
+outer and one crossing piece (the hypotheses of `closePair_both_separate`, `closePair_both_saved` and `closePair_four` at once).
 -/
 
 namespace HadwigerNelson.Plane
@@ -93,6 +93,10 @@ structure ClosePair (U : Set ℂ) (c : ℂ → α) (x y : ℂ) where
 
 /-- `w` is a **common unit point** of `x` and `y`: `|w − x| = |w − y| = 1`. -/
 def IsCommonUnitPoint (x y w : ℂ) : Prop := dist w x = 1 ∧ dist w y = 1
+
+/-- A common unit point of `x` and `y` is one of `y` and `x`. -/
+theorem IsCommonUnitPoint.symm {x y w : ℂ} (h : IsCommonUnitPoint x y w) : IsCommonUnitPoint y x w := by
+  sorry
 
 /-- "Its common unit points are the two points `w` with `|w − x| = |w − y| = 1`": for `0 < |x − y| < 2` there are
 exactly two. -/
@@ -306,14 +310,14 @@ complementary pair of three-piece points, each with a decomposition, and w a com
 U. Then x or y separates at w: one of its pieces lies in the closed unit disc about w and another is disjoint from
 the open unit disc about w; the edge of those two pieces lies on S(w)."
 
-Clause by clause: `hU`, `hc`; `C` (the pair with its two decompositions); `hw`, `hwx`, `hwy`; the disjunction is
+Clause by clause: `hU`, `hc`; `C` (the pair with its two decompositions); `hw`, `hwu`; the disjunction is
 "x or y separates" with its two pieces `i` (inner) and `j` (outer) named, and their edge on the unit circle. **The
 number six is spent in `ClosePair.exists_label_eq`**, and nowhere else: `ClosePair.separatesAt_or` is the statement at
 any label type whose labels are all carried by the six pieces. The cover clause of the two decompositions
 (`null_diff`) is not read. Inhabitant of the hypotheses: `exists_closePair_not_separatesAt`
 (`Plane/ClosePairModel`). -/
-theorem forced_pieces {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
-    (C : ClosePair U c x y) (hw : w ∈ U) (hwx : dist w x = 1) (hwy : dist w y = 1) :
+theorem closePair_forced_pieces {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
+    (C : ClosePair U c x y) (hw : w ∈ U) (hwu : IsCommonUnitPoint x y w) :
     (∃ i j, InnerAt (C.left.piece i) w ∧ OuterAt (C.left.piece j) w ∧ C.left.edge i j ⊆ sphere w 1) ∨
       ∃ i j, InnerAt (C.right.piece i) w ∧ OuterAt (C.right.piece j) w ∧ C.right.edge i j ⊆ sphere w 1 := by
   sorry
@@ -330,8 +334,8 @@ Clause by clause: `σ` names the inner piece `σ 0`, the outer piece `σ 1` and 
 `C.left.label (σ 0)`, `C.left.label (σ 1)`; `τ` is the side of `S(y)`; `w'`, `η'` and the three conclusions inside
 `ball x η'`. The number six is spent in `ClosePair.exists_label_eq` only (`ClosePair.lone_of_cover`). Inhabitant of
 the hypotheses: `exists_closePair_not_separatesAt` (`Plane/ClosePairModel`). -/
-theorem lone {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
-    (C : ClosePair U c x y) (hw : w ∈ U) (hwx : dist w x = 1) (hwy : dist w y = 1)
+theorem closePair_lone {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
+    (C : ClosePair U c x y) (hw : w ∈ U) (hwu : IsCommonUnitPoint x y w)
     (hy : ¬ C.right.SeparatesAt w) :
     ∃ σ : Equiv.Perm (Fin 3), C.left.OneOfEach w σ ∧
       (∃ τ : CircleSide, ∃ η > 0,
@@ -348,8 +352,8 @@ full, both separate at w."
 
 Each member's fullness makes the **other** member separate (`ClosePair.separatesAt_right_of_isFull`). Inhabitant of
 the hypotheses: `exists_closePair_full` (`Plane/ClosePairModel`). -/
-theorem both_separate {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
-    (C : ClosePair U c x y) (hw : w ∈ U) (hwx : dist w x = 1) (hwy : dist w y = 1) (hfx : C.left.IsFull)
+theorem closePair_both_separate {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
+    (C : ClosePair U c x y) (hw : w ∈ U) (hwu : IsCommonUnitPoint x y w) (hfx : C.left.IsFull)
     (hfy : C.right.IsFull) : C.left.SeparatesAt w ∧ C.right.SeparatesAt w := by
   sorry
 
@@ -359,14 +363,14 @@ points is saved by one member alone."
 
 **Stated for what the clause reads of a sector point**: a decomposition with arc edges (`ThreePiece.HasArcEdges` —
 every edge contains an arc from the point). `D.Saves w`: some edge contains an arc of the unit circle about `w` with
-an end at the point. An arc-edged member is full, so both separate (`both_separate`); the edge of the inner and the
+an end at the point. An arc-edged member is full, so both separate (`closePair_both_separate`); the edge of the inner and the
 outer piece lies on `S(w)` and contains an arc from the point, and an arc on a circle from a point contains an arc of
 the circle from it (`ThreePiece.hasUnitArcFrom_of_arc_subset_sphere`). The clause in the claim list's own words, for
-its sector points, is `both_saved_of_isSector` (`Plane/SectorPoint`), over one fact of plane topology that is a leaf
+its sector points, is `closePair_both_saved_of_isSector` (`Plane/SectorPoint`), over one fact of plane topology that is a leaf
 there. Inhabitant of the hypotheses: `exists_closePair_full` (`Plane/ClosePairModel`), whose members' edges are arcs
 of unit circles by construction. -/
-theorem both_saved {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
-    (C : ClosePair U c x y) (hw : w ∈ U) (hwx : dist w x = 1) (hwy : dist w y = 1) (hax : C.left.HasArcEdges)
+theorem closePair_both_saved {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
+    (C : ClosePair U c x y) (hw : w ∈ U) (hwu : IsCommonUnitPoint x y w) (hax : C.left.HasArcEdges)
     (hay : C.right.HasArcEdges) : C.left.Saves w ∧ C.right.Saves w := by
   sorry
 
@@ -377,8 +381,8 @@ those of the two inner and the two outer pieces."
 The labels present at `w` are the set of the four named labels, and that set has four elements. The number six is
 spent in `ClosePair.exists_label_eq` only (`ClosePair.presentAt_eq`). Inhabitant of the hypotheses:
 `exists_closePair_full` (`Plane/ClosePairModel`). -/
-theorem four {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
-    (C : ClosePair U c x y) (hw : w ∈ U) (hwx : dist w x = 1) (hwy : dist w y = 1) (hfx : C.left.IsFull)
+theorem closePair_four {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
+    (C : ClosePair U c x y) (hw : w ∈ U) (hwu : IsCommonUnitPoint x y w) (hfx : C.left.IsFull)
     (hfy : C.right.IsFull) {σ τ : Equiv.Perm (Fin 3)} (hσ : C.left.OneOfEach w σ) (hτ : C.right.OneOfEach w τ) :
     presentAt U c w = {C.left.label (σ 0), C.left.label (σ 1), C.right.label (τ 0), C.right.label (τ 1)} ∧
       (presentAt U c w).ncard = 4 := by

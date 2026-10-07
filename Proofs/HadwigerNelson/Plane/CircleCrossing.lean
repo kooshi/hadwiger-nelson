@@ -91,6 +91,12 @@ theorem disjoint_region_flip (σ : CircleSide) (w : ℂ) : Disjoint (σ.region w
 theorem mem_region_or_of_dist_ne {z w : ℂ} (h : dist z w ≠ 1) : z ∈ inside.region w ∨ z ∈ outside.region w := by
   sorry
 
+/-- The other side of the inside is the outside. -/
+@[simp] theorem flip_inside : inside.flip = outside := rfl
+
+/-- The other side of the outside is the inside. -/
+@[simp] theorem flip_outside : outside.flip = inside := rfl
+
 /-- Flipping twice. -/
 @[simp] theorem flip_flip (σ : CircleSide) : σ.flip.flip = σ := by
   sorry
