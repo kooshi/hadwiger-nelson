@@ -658,4 +658,13 @@ between two colours that is an arc of the unit circle about a point one unit awa
     tokens were allow-listed with reasons. **The next filing's fact-audit base is this commit.** **Owed**: lines in the
     ledger's claim list for rows 155–164; the citation of one count to two papers in two rows; the prior-art searches in
     print the rows call owed.
+31. **FS124-L1, the landing of the first module, is launched — a landing is in flight from 16:06 UTC** (`debruijn-implementer`,
+    Opus; brief `data/fs124/briefs/FS124-L1-landing.md`, gate exit 0; worktree and branch `fs124-wl1`, cut by me from
+    `fs124-wk1` at `80ee1983`, build copied from the last landing's tree; record `plans/FS124-L1-landing.md` there): `main`
+    merged (it holds the exclusion's landing since this afternoon), the registrations, one sentence naming the licence in
+    the import module's docstring, the assumptions and vacuity steps with each hypothesis's model named by hand, the read
+    aloud, the full gate on one commit, the fast-forward of `main`, the drafts. **While it is in flight**: nothing is
+    committed to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`, and
+    no `CLAUDE.md` filing is made. Its previous receipts: `data/fs132/l2/gate/`. Slots: it, the blind planner of the
+    second module, the successor's opening job.
 
