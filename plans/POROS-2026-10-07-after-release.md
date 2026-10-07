@@ -60,7 +60,7 @@ release, in the file of § 1.2 and here). An item too large to read whole says h
 - `plans/FS131-close-inventory.md` items 607–609, 611–619 (Keryx's accounts of the two agents' messages), ll. 8002–8097, 8148–8460 — read against: the brief's quoted first lines match (checked by script) and each item separates the agent's account from Keryx's receipt — surprised: yes; item 616 (the audit: five is used at "the cover's order") and item 618 (the reading: "the cover of order two is not where five enters") are both on record and item 618 settles it in one sentence
 - `plans/EXT-OAI2-reading.md` stage 1, the dictionary (ll. 30–198) — read against: their Definition 1.2 is the object of `χ_m⁰`, not Falconer's and not Borel-only — surprised: no; § 1.3's row for Def. 1.2, with its attack (a)–(c)
 - `plans/EXT-OAI2-reading.md` stage 2, the transfer (ll. 200–400) — read against: the colouring is used only on a countable set; rigidity says wild implies Haar and nothing about the tame part; it uses a property no number field has — surprised: yes, once; F1 "needs less than its hypothesis: a proper `k`-colouring of the countable graph on `E`" (l. 313), so the transfer's input is a colouring of the algebraic plane and `χ(ℝ²) = χ(ℚ̄²)` is its unstated corollary
-- `plans/EXT-OAI2-reading.md` § 2.6, the one-class sketch (ll. 352–364) — read against: the unchecked step is the passage from a stationary field to a density, closable by an ergodic average (E11) — surprised: unread; read against E11 at stage 3 with `LEDGER.md` row 129 and `CLOSED-QUESTIONS.md`
+- `plans/EXT-OAI2-reading.md` § 2.6, the one-class sketch (ll. 352–364) — read against: the unchecked step is the passage from a stationary field to a density, closable by an ergodic average (E11) — surprised: yes, in the direction of less risk; read at stage 3 with `LEDGER.md` row 129 and `CLOSED-QUESTIONS.md` ll. 655–668: the infimum the argument bounds is over graphs in the algebraic plane, which is at least the infimum over all finite unit-distance graphs — the direction needed — so the sketch needs no redrawing lemma, and with it Johnson's Question 3 follows too; the reading does not say either
 - `plans/EXT-OAI2-reading.md` stage 3, the obstruction in four acts (ll. 402–652) — read against: the palette bound is a disjointness count giving `k − 3`; the extraction needs palettes of at most two labels to produce a graph-valued map — surprised: yes; the second half is wrong: the map is graph-valued off the cyclic centres because "a clique in a forest has at most two vertices" (l. 480), with no palette bound; the palette bound enters only Theorem 6.5 and § 8
 - `plans/EXT-OAI2-reading.md` stage 4, five against every `k` (ll. 654–779) — read against: at least one all-`k` statement is stronger than the summaries say — surprised: yes; § 4.1 item 4: the cover theorem "says that *no* colouring, at any `k`, has a graph-valued approximant on a large disc", so at every `k` the cyclic centres are forced to exist; no summary states it as a theorem about six and seven
 - `plans/EXT-OAI2-reading.md` stage 5, the drafts and § 5.4's stub proposals (ll. 781–1102) — read against: its proposals rank [P₆] first — surprised: no; § 4.3 "The first place where nothing is held by either side is **[P₆]**", § 5.4 (ii)
@@ -360,3 +360,60 @@ complete graph on the labels, fixed before the colouring. Card 3 puts it to Epho
 § 1.3, inventory items 607–619.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED
+
+### 3.1 FS-133, and which milestone takes the deriver's first slot — a decision in four parts
+
+- **The choice.** FS-133 (`plans/STUB-one-class-transfer.md`) takes the deriver's first slot, as a short job on four posed claims
+  (C133-DENS, the unchecked step, first); FS-132 opens in the next slot, or beside it if two deriver slots are free.
+- **The alternative weighed.** FS-132 first, because it alone bears on six against seven and FS-133 by its own stub bears none
+  (`CLAUDE.md` § Counter-priors rule 1: rank by bearing, never by difficulty).
+- **Why FS-133 first anyway.** Rule 1 ranks *routes to the answer*; FS-133 is not a route and is not ranked as one (§ 5 puts it
+  outside the ranked table, as an open milestone, the way FS-131 is). What orders the slot is that its value decays with the
+  calendar and FS-132's does not: the release is public, the question is three printed questions' answer, the people who posed it
+  will run one class through the transfer, and this project holds every other link at two minds (row 129). Days matter for it;
+  for FS-132 the holding nobody else has — the map-class chain — does not decay in a week.
+- **Confidence, and the fact that would change it.** High. It would change if C133-DENS or C133-ONE stalls past one job: then
+  FS-133 yields the slot and waits; it must not hold FS-132 back.
+- **The default.** FS-133 first; FS-132 opens at FS-133's first hand-back at the latest.
+
+### 3.2 The card (the stub carries it, with both forms and four posed claims)
+
+question: does-the-rigidity-run-for-one-class
+  evidence: `plans/EXT-OAI2-reading.md` ll. 352–364 (§ 2.6: "The step to check before it is claimed: the passage from a stationary field of mean `α₁` to a set of *upper density* `α₁`"); `LEDGER.md` row 129 ("At ℚ(√635087), given MR there: `α₁(ℝ²) = m₁(ℝ²)`"); `CLOSED-QUESTIONS.md` l. 655 ("answered at [hand], given MR")
+  expected: the equality of the finitary and the measurable densities needs measure rigidity at a number field (row 120's outside input), so it stays conditional
+  ask: does the release's rigidity theorem, run on an invariant random independent set of the algebraic plane in place of a colouring, give a measurable set avoiding distance 1 whose upper density is at least the finitary independence ratio?
+  if it does: `α₁(ℝ²) = m₁(ℝ²)` and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²)` hold with no hypothesis; row 129's plane clause loses "given MR"; three questions posed in print are answered at [hand] over an outside theorem; a short note is owed its Lean form and then a write-up
+  if a step fails: the named step is where one class differs from a partition, row 129 keeps "given MR", and the finding is a limit of the release's transfer that its manuscript does not state
+  answered by: derivation — Ephodos
+  cost: one short derivation job, no search: the manuscript's § 4 (316 lines) re-read with one class, FS103-B-AMEN's Følner half restated at the algebraic plane, the density step, and the literature's definitions of `f(n)` and `m₁` read at their pages
+  hunch: it runs; the density step closes by reverse Fatou on disc averages; the care is in which infimum the literature's `f(n)/n` names (0.85)
+  falsifier: a step among the transfer's F3–F9 that uses the sum of the classes' fields being 1, or more than one class; or `[DuczVarga2026]`'s `f(n)` defined over graphs the argument's infimum does not cover
+  rank: 1
+
+### 3.3 Other consequences a short job could close this week (the stub's § Siblings carries each with its literature and risk)
+
+1. The bridge without Tarski — `χ(ℝ²) = χ(ℚ̄²) = sup_F χ(F²)` with no `RealAlgebraicDescent` — with the import, de Bruijn's lane.
+2. The axiom question — the Shelah–Soifer question for the plane is the null-set step `χ_m⁰ = χ_m` — a short derivation, third.
+3. Falconer's `χ_m(ℝ²) ≥ 6`, `χ_B(ℝ²) ≥ 6` — a filing line.  4. `lim µ₅(ε) < 1` — a filing line.
+5. The obstruction on a disc of explicit radius — inside FS-132 (C132-RADIUS).
+
+### 3.4 Expectations scored at this stage
+
+| | claim (short) | p | outcome |
+|---|---|---|---|
+| E6 | FS-133 takes the deriver's first slot | 0.75 | **met** — § 3.1 |
+| E11 | the unchecked step closes by an ergodic average; the risk is in which density the literature names | 0.65 | **open until derived**; my route for the step is reverse Fatou on disc averages (C133-DENS), and the reading of row 129 moved the risk I named: the infimum is the favourable one |
+
+hunch: one-class-needs-no-redrawing
+  claim: the one-class argument bounds the infimum of α(G)/|G| over finite graphs in the algebraic plane, which is at least the infimum over all finite unit-distance graphs, so α₁(ℝ²) = m₁(ℝ²) and Johnson's Question 3 both follow with no Tarski
+  basis: derived
+  falsifier: a step of C133-INV or C133-ONE that needs a finite unit-distance graph of the real plane redrawn with algebraic coordinates
+  registered: 2026-10-07
+  status: open
+
+**Invention signal:** none seen at this stage; read for it: `LEDGER.md` row 129, `CLOSED-QUESTIONS.md` ll. 655–668, the reading
+§ 2.6. (A correction owed, not a collision: row 129's and G80's "finite-graph killing test for MR" cannot fire if C133-ONE holds.)
+
+## Stage 3 — SAVED
