@@ -194,4 +194,39 @@ between two colours that is an arc of the unit circle about a point one unit awa
    centre's and the completion's, and the completion's is now known to carry no datum; the asking lane re-poses it with
    the card. (d) Kooshi is told in the next report, plainly: the rule holds, it is weaker than the card hoped, and it is
    not special to unit arcs.
+9. **FS124-E1 done (482k and 35 minutes by the task notice): the opening, and all six claims at verdicts — the first round
+   is in** (deriver; record `plans/FS124-E1-derivation.md`, 16 entries, 9 controls; plan `plans/FS124-tight-pairs.md`;
+   report `data/fs124/reports/FS124-E1.md`; six stage commits to `426330aa` and the report's). Beyond items 7 and 8:
+   **C124-KIND true by formula** (the honeycomb at circumradius 2/5 with one cap; 200,000 sampled unit pairs, none
+   monochromatic) — so a tight pair's centre need carry neither of its labels, and every statement on the NO side must name
+   the kind it needs; **and the card's control for it was false of the object** (the capped honeycomb at circumradius 1/2 is
+   a weak seven-colouring too). **C124-SIX derived as posed, through its relay** — four labels cover at most 240° of 360°
+   at such a centre — **"over a class with no known member at any number of labels"**. **C124-HALF derived as posed**, and
+   its two-set form (C124-HALF-TWO), over FS-132's one-witness side statement, whose argument this job did not read;
+   **"no held object meets C124-HALF's hypothesis"**. **Its predictions**: all seven met as registered — and its own §IQ
+   assessment ("at the ends") failed on the strip, which it reports as a correction. **Not run**: the controls on three
+   fragments, the strip's caps and the search's kept model. **A tool defect of its own, repaired before any entry rested
+   on it** (a tightness reader that misread near an arc's end). **Prior art**: the reviews database answered every query;
+   nothing was opened; author listings and citation graphs not done. **A search request**: an inhabitant of C124-SIX's
+   hypothesis, at seven or more labels, in a capped-honeycomb family — "it decides whether C124-SIX excludes anything".
+   **Its question for the asking lane**: the next card's unit — the centre with all its tight arcs — "and whether anything
+   at six forces a centre of kind both to exist one unit from an end; the first reading owed is the strip's ends".
+   **My receipt**: the commits are on `main`; **its gate run by me on the final record** — exit 0, 0 failures, 2 warnings,
+   16 entries, 9 controls each firing; the last five entries' not-claimed, verdict, grade and model fields read. Not
+   checked by me: the count behind C124-SIX; the cap's margins. **Credit**: a lemma found under six claims; a card's branch
+   decided and said in one paragraph; its own early assessment tested by formula and withdrawn in the same job; two
+   statements labelled as possibly about empty classes, in their own model lines.
+   **What the round amounts to, in my words, for the next job**: two results a later statement can stand on (the radius
+   clause; the one lemma, with what it gives at a centre, a completion and the opposite point); one calibration (the kind
+   is a hypothesis); two statements that are true and may exclude nothing (the count; the rhombus's first half); and
+   **every statement but the count is true at every number of labels — nothing in this round spends six**.
+   **Its held points, ruled.** (1) The claim list has its dated lines (items 6, 7, 8 and this one). (2) **Its draft
+   replacing the stub's provisional bearings is filed by the asking lane's next job, with the correction it names** (the
+   stub is that lane's to write while it runs). (3) For the kernel lane: the radius clause's planner is briefed and waits
+   for a slot; the one lemma and its three corollaries are the second module's list, fixed when that planner's phase 2
+   opens. (4) Its budget overrun is not a slip. (5) Its superseded sentence is logged in item 8. **Ruling on the slot it
+   frees**: **the asking lane's re-posing job (FS124-P2) takes it** — the derive lane's next round waits on its card —
+   alternative: the kernel planner for the radius clause, already briefed; it takes the next kernel slot; why: the
+   milestone's attack is the derive lane's, and its question has just changed; confidence medium-high. **The search
+   request is queued as line 13, held with line 12 until the re-posing.**
 

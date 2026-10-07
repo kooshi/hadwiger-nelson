@@ -88,3 +88,11 @@ at the end.*
   pair. **Of the card's three branches, for one tight pair and first-order tools, the third.** Still to come: C124-KIND,
   C124-SIX with C124-SIX-CONES, C124-HALF.
 
+- **2026-10-07 (13:29 UTC; after FS124-E1's hand-back, its Stages 5–6; FS-124 inventory item 9): the last three claims have their
+  verdicts — every claim of this list now stands at "derived", [hand] or derived from a [hand] entry, one mind, kernel
+  pending; none fixes a value of `χ(ℝ²)`.** C124-KIND: true by formula with exact margins — so "of kind both" is a
+  hypothesis, not a property of tightness. C124-SIX with C124-SIX-CONES: derived as posed, **over a class with no known
+  member at any number of labels** — "the statement may hold of an empty class". C124-HALF: derived as posed, over FS-132's
+  one-witness side statement, **with no held object meeting its hypothesis**. **Its second statement, with one word written
+  out by the deriver, is the entry C124-HALF-TWO** — statement: In the setting of C132-COMP-SHARP, if exactly K_0 and one set K′_0 of y, with labels t′_0, t′_1, are contained in the unit circle about w, x's two other sets have points strictly on opposite sides of that circle, and y's two other sets have points strictly on opposite sides of that circle, then almost every point near w has one of the four labels t_0, t_1, t′_0, t′_1. *Not claimed (C124-HALF-TWO):* which of the four labels lies in which quadrant beyond C124-HALF's reading on each side; that any of the four is present at w; that K_0 and K′_0 are tight arcs.
+
