@@ -8047,3 +8047,30 @@ reason by the close.*
      (is `χ_CP(ℝ²) ≥ 6`), which a clean audit answers in a stronger form and with no measure rigidity; the
      conjecture's bold form `χ(ℝ²) = 7` is untouched; the ranking of FS-123, FS-124 and FS-104 is the asker's to
      redo. (e) **Kooshi notified by push** at the moment the hit was read.
+
+608. **EXT-OAI1, first message: the outside release's Lean headline says the claim, by text; and its proof is two steps, the first of which is — for every number of colours — the direction of this project's collapse that is held here only given measure rigidity** (source: EXT-OAI1's message to "main", 2026-10-07; its record `plans/EXT-OAI1-audit.md` stages 1–2, commits `eefde416`, `c51088d8` on `main`).
+     **Its account.** The challenge file (15 lines; imports Mathlib only; no notation, instance, attribute or option)
+     states `def ProperColoring (colorCount : ℕ) (coloring : ℂ → Fin colorCount) : Prop := ∀ point otherPoint : ℂ,
+     ‖point - otherPoint‖ = 1 → coloring point ≠ coloring otherPoint` and `theorem no_proper_five_coloring : ¬ ∃
+     coloring : ℂ → Fin 5, ProperColoring 5 coloring`: no hypothesis in the definition, the existential over every
+     map, no look-alike character — by text nothing weaker than the informal claim. The solution module's theorem is
+     the same statement with variables renamed. **Not yet checked by it**: which `Norm ℂ` instance elaboration picks;
+     the stored types' equality by signature — both wait for the build. **(a) The proof is three lines**:
+     `proper_to_borel_weak`, then `no_measurable_weak_five_coloring`. The first is stated for every `k`: a proper
+     `k`-colouring of `ℂ` gives a Borel `k`-colouring proper at almost every unit pair — **`χ_m⁰(ℝ²) ≤ χ(ℝ²)`, the
+     direction rows 128 and 130 hold given measure rigidity, at [hand], claimed here with no hypothesis**; its cone
+     is 33 modules of spectral and ergodic machinery (invariant means, number fields, compact factors). "If the build
+     is clean this is in the kernel whatever happens to the five-colour half." (b) The release's seven-colour theorem
+     is on `EuclideanSpace ℝ (Fin 2)` with `dist`, the five-colour one on `ℂ` with the norm; no Lean statement in the
+     release joins them. The cone of the solution module is **70 modules, 30,336 lines**, with Mathlib its only
+     outside import; it builds with a lakefile reduced to that requirement. **Read by me in the clone**: `Five.lean`
+     ll. 123–127 (the theorem and its three-line proof), `BorelTransfer.lean` ll. 436–437 (`lemma
+     proper_to_borel_weak {k : ℕ} [NeZero k] {c : ℂ → Fin k} (hc : ProperColoring k c) : ∃ d : ℂ → Fin k, Measurable
+     d ∧ WeakColoring k d`), `Coloring.lean` ll. 27–29 (`WeakColoring k c := AEMeasurable c volume ∧ ∀ᵐ p ∂ volume.prod
+     angularMeasure, c p.1 ≠ c (p.1 + direction p.2)`) — they say what it quotes. **A correction to my item 607 and
+     to my report to Kooshi**: "46 files and 14,661 lines" is the directory's count; the proof's cone is 70 modules
+     and 30,336 lines. **Nothing here is yet a kernel fact on this machine.** **Rulings.** (a) **Told to Kooshi at
+     once**, with the correction. (b) **The transfer lemma is named to the manuscript's reader** (EXT-OAI2's brief
+     already asks its route; the Lean names go to it by message when it is running). (c) If the build is clean, the
+     first sentence this project's front page would owe is about row 130, not row 33: its "given MR" — a draft for
+     Kooshi's decision, written by the audit (its brief, item 7) and the reading (its item 5), filed by nobody yet.

@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-06: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word, for an overnight run)
 
 *Written 2026-10-06 by Keryx. Current state only. A successor arriving with nothing reads this first, then `plans/FS131-close-inventory.md` — every item,
-ruling and receipt (items 1–607 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
+ruling and receipt (items 1–608 at this writing; its first two sections are the rules that judge the milestone). The handoff before this one,
 `plans/SESSION-HANDOFF-2026-10-04.md`, is superseded; it is kept only for its long list of jobs done before the restart.*
 
 ## 0. THE STANDING CONDITIONAL HAS FIRED (2026-10-07, item 607) — read this before anything else
