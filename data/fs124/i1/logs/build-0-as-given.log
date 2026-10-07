@@ -1,0 +1,58 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 2,3,4,5,6,7,8,9
+==> build: this run's full output: build/gate/build/20261007T144513Z-2786639.log
+    ⚠ [4118/4307] Replayed Proofs.HadwigerNelson.Plane.WeakColouringOn
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:86:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:90:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:94:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:98:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:102:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:116:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:127:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:152:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:202:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:207:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:213:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:219:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:225:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:230:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:234:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:238:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:242:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:249:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:256:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:264:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:269:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:273:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:278:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:283:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:289:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/WeakColouringOn.lean:297:8: declaration uses `sorry`
+    ⚠ [5683/5824] Replayed Proofs.HadwigerNelson.Plane.Radius
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:43:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:72:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:80:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:96:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:104:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:111:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:128:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:145:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:155:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:162:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:168:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:175:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Radius.lean:188:8: declaration uses `sorry`
+    ⚠ [5826/5952] Replayed Proofs.HadwigerNelson.Plane.RadiusOutside
+    warning: Proofs/HadwigerNelson/Plane/RadiusOutside.lean:38:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RadiusOutside.lean:44:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RadiusOutside.lean:54:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RadiusOutside.lean:67:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RadiusOutside.lean:82:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RadiusOutside.lean:88:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RadiusOutside.lean:99:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RadiusOutside.lean:112:8: declaration uses `sorry`
+    All targets up-to-date (5952 jobs).
+==> build: OK — all 1847 modules already up to date, nothing built, 3 module(s) with warnings, 2s
+    full output: build/gate/build/20261007T144513Z-2786639.log
+exit=0
