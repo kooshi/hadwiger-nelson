@@ -39,15 +39,14 @@ one mind** (inventory `plans/FS136-close-inventory.md`, items 1–7; claim list 
 
 **Three jobs are running** (agent ids in the scratch file `agents.txt`, never in a repo file). **Disk is at 27 GB free**:
 ask Kooshi before removing any worktree's build copy.
-2. **FS124-I4** (implementer; launched 18:09 UTC; FS-124 inventory items 42–43) — both earlier implementers are back: **the
-   four statement modules of the second module hold no `sorry`** (branch `fs124-wi3`, tip `fb515b25`; all nine claims
-   kernel-checked on a branch, C124-BOTH's second clause in the arc-edged form). FS124-I4 proves the witnesses
-   (`Plane/ClosePairModel`, then `Plane/SectorPoint`'s two planned leaves) in that worktree; **it messages the third
-   witness's price after its first inequality** — it goes on unless that is more than about twice 700 lines. **The four
-   modules land with the witnesses' module, in one landing** (ruling 42 (b)); the landing is not briefed (pattern
-   `data/fs131/briefs/scripts/mk-fs124-l1.py`; previous receipts `data/fs124/l1/gate/`; the implementers' audit blocks
-   are files under `data/fs124/i2/`, `i3/`, `i4/` on the branch; branches cut before the disc criterion's landing meet it
-   in `scripts/Axioms.lean`, `ARCHITECTURE.md` § 3.13, `scripts/axioms-controls.txt` and the import module).
+2. **FS124-I4 is back** (FS-124 inventory item 47): the three witnesses and the sector module's two leaves are proved on
+   branch `fs124-wi3` (tip `e33b5088`); the branch's one `sorry` is the θ-leaf. **The module is landed once, eight
+   modules, when FS124-I5 is back** (ruling 47 (a)) — see 2b for the join.
+2a. **FS136-K1** (kernel planner, **blind first**; launched 19:20 UTC; FS-136 inventory item 16) — seven statements of FS-136
+   from `data/fs136/claims-K1.md`, in worktree `fs136-wk1` (**the old `fs124-wk2` tree, moved; branch `fs136-wk1`**).
+   **While it is blind, commit subjects on `main` name no route for those statements.** At its "phase 1 committed"
+   message: lift the fence by reply, naming the entries and the three statements with no second derivation
+   (C136-FORCED, C136-CLASS's order, C136-COLLAR). At its hand-back: an implementer on its skeleton.
 2b. **FS124-I5** (implementer; launched 19:07 UTC; FS-124 inventory items 44, 46) — the θ-lemma's module. **The ruling is
    made: the lemma is built** (the planner priced it at about 500 lines with no Jordan curve theorem, since the
    definition already assumes the three regions). `Plane/ThreeArcs` on branch `fs124-wk3` (tip `8cd74a6b`): 41 theorems,
