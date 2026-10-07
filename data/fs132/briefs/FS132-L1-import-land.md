@@ -209,3 +209,33 @@ replaces.
 Everything else as briefed: the one theorem, the comparison once more on the recompiled module at the gate, the full gate on
 one commit, the fast-forward.
 
+## Amendment, 2026-10-07, the second — the coordinator's rulings on the assumptions step's two "open" hypotheses
+
+Thank you again: the same finding in the gate's other ledger, and found by reading what the step cannot see. Standing rules
+unchanged; you start no agent of your own (rule 1: delegation is one level deep, because the coordinator can only review work
+it knows exists). `touches:` is extended by R5's one item and nothing else.
+
+**R5 — yes: the two source strings say it in words in this landing; the kinds and the counts do not move.** In
+`scripts/Assumptions.lean`'s declared list, the source string of `inline:SixTarget` — and of `inline:SixTargetOneTwo` **only
+if** its binder, once you have read it, is empty for the same reason — gains one clause: that given the declared outside
+theorem `Outside.OAI158.no_proper_five_coloring` the hypothesis holds with nothing to prove, its binder ranging over
+five-colourings of the plane, of which there are none (`Outside.OAI158.not_colorable_five`); and that its kind stays `open`
+until the tooling job decides how such an entry is classed. Words only: kind `open`, the nine counts, the ledger's rows for
+these entries all as they are. If `SixTargetOneTwo`'s binder is not empty that way, leave its string alone and say in your
+record exactly what it ranges over. Why words now and not the kind: as in R1 — "a declared hypothesis that a declared import
+implies" is a class the step does not have, and inventing it in a landing would change what the front page's count of open
+questions means without anyone having decided it. Alternative weighed: leave both strings for the tooling job. Not taken: R2's
+reason holds here too — a text in the gated tree that is known false at the landing says so at the landing.
+
+**R6 — in your record and drafts**: (i) both entries under the tooling job's list beside R1's question, as you propose —
+what kind a declared hypothesis has once a declared import implies it, and whether the step should find that; (ii) the
+replacement for the front page's sentence that counts "five for open questions" (`CLAUDE.md` § Trust ledger, the paragraph
+beginning "**What the library assumes, in both forms**"), with the exact words it replaces; (iii) a note for `LEDGER.md` rows
+43 and 61 — that their five-colour halves, and the statements that take those hypotheses, are consequences of the import —
+each with the row's exact words it follows; (iv) one line on what this does to the two theorems that take them
+(`not_colorable_five_of_forced_pairs`, `six_le_chromaticNumber_plane_of_forced_pairs`): their conclusions are now the
+import's own statements. I file (ii)–(iv).
+
+**On the axiom audit's two controls**: bringing their expected counts to the library's new state by the file's own stated
+rule is within your touches as briefed; list both changes in your record with the rule's words.
+
