@@ -1320,6 +1320,19 @@ mixed ring. Behind it C132-ARC was not reached (§ 9).
 - **The search's second request** — extend the kept four-label fragment to the annulus and the closed unit disc: queued,
   not run (item 20 (e)).
 
+*Dated line (2026-10-07, FS132-Z2, the record job's second part): where each thread of §§ 8–9 went.* By Kooshi's word of
+2026-10-07 (`data/external/EXT-OAI1-request.md` § Kooshi's sixth word) this milestone delivers what a point with data on its
+unit circle is forced to carry; whether every weak colouring has such a point is FS-127's and FS-128's. **To FS-124**
+(`plans/STUB-q-ring.md`, the next milestone): C132-ARC; C132-PLACED's open line; C132-RADIUS; the search's second request
+(`plans/SEARCH-QUEUE.md` line 11, held). **To FS-135** (`plans/STUB-seed-remainder.md`, minted): C132-LENS-II's sixteen patterns;
+the three shift lemmas for C132-ALT's measurable form; the third-label rigidity; the one-edge form of C132-TURN's stall.
+**To FS-134** (`plans/STUB-exclusion-back-to-maps.md`, minted): "a map vertex carries the four sets" — one fact to derive, one
+composition to write. **To FS-122** (`plans/STUB-forced-pair.md`): C132-M-CV and C132-LONG, the forcing. **To FS-127 and
+FS-128** (`plans/STUB-lateral-extent.md`, `plans/STUB-top-colour.md`): C132-WIT-EX's form (O); C132-RING-TAME's first clause;
+C132-GRUNDY7's readings (G1), (G2); the REG-J′ side question. **Inside this milestone's Lean phase**: C132-CORES-SQUARE's
+comparison; the first night's exclusion on an open set. **Declined as a stub by the asking lane**: card 2 beyond the argument's
+level (`plans/POROS-2026-10-07-fs132-night.md` § The debts). The table with each reason is `plans/FS132-Z2-record.md` Stage 2.
+
 ## 10. The claims as posed, and the restatements — kept, each carried by an entry above
 
 derivation: C132-EXT

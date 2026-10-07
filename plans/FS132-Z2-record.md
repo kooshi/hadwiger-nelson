@@ -466,3 +466,120 @@ Every key FS-132's derivation file cites resolves: `[OAIMath2026]`, `[SokolovVor
 
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the sweeps, the gates, what is left
+
+### 5.1 §G re-read — which extractions paid, and the entry that should have borne
+
+The opening's §G is `plans/FS132-six-by-the-nerve.md` § §G (read whole at this stage, with its §PA and §IQ).
+
+**Paid.** G79 → centres derived first and with no hypothesis (C132-CORES-FREE). G92 → the extraction read at its class (every
+`k`, any closed disc of radius above 1), and the exclusion's `uses only:` — two clauses of the data, not the one-mind clause,
+not the centre's isolation. G95 → the island colouring run as the test: the conclusion with clause (4) is false at the
+accumulation centre. G21 → three verdicts, not two: C132-RUN-EMPTY *stalls* while its statement C132-M-EMPTY is *derived* —
+the case the grammar was built for. G86 → confinement where "non-Siamese" stood: the exclusion has no Siamese clause. G83, G91
+→ "predicted to restate": steps M1–M5 and M9 are FS116-V6's steps in measure, and six is spent at two places (M2, M9), as G91
+says. G13 → the ring hypothesis on palettes. G22 → every model line at seven, and "none is known" said at six. G71 → a winding
+number where three labels are present: C132-INDEX — **on the ring, not where §G put it** (the loop's class in the nerve's
+fundamental group, where C132-NOESS shows nothing stays essential).
+
+**Extracted and not followed.** G82 → "the chain to look at is S–V's Cor. 1, row 134": C132-RUN-CV stalls at exactly that
+input, and its deriver did not read it (its debt, disclosed; FS132-E3's hand-over, now in FS-122's bearing line). G82 →
+C132-RADIUS: not started. G25, G29, G26, G60: no use found in the records I read.
+
+**The miss: G84, with G83's reading.** §G lists G84 only for "who supplies EXT's hypothesis … → no change to EXT's
+derivation". Read by its body from inside this question, G84's first sentence — in a saturated colouring a two-colour
+interface point "lies on a unit arc whose centre carries both colours", or on a curve between two tangent unit discs — names
+the object every round of the milestone ended at; and G83's reading — "what is left is four-colour vertices whose rings carry
+(Q) arcs, the class every exclusion so far had to except" — predicts the line. Extracted, the two give an instruction no round
+had: *an exclusion in measure will hold where no interface lies on a unit circle about a point one unit away; say which side a
+statement sits on; run its controls on a model with no margin.* The milestone reached it at inventory item 21, after two
+rounds, from the asking lane's attack on the coordinator's framing; all 21 controls until then ran with a margin or on the held
+seam fragments. **Drafted** (Stage 4): one sentence for G84's *Do*; an instance of G84; proposed G97. Not checked by me:
+whether the second and third rounds' derivers re-walked the grokkings when the object changed from the extraction to a point
+with circle data (§G's rule 5) — I did not read their recognition stages.
+
+**A second, smaller miss: G89's wording.** "Every a.e.-proper colouring becomes a measurable Grundy colouring" reads as one
+output; the claim posed on it (C132-GRUNDY7, "the Grundy-ization of each") was not a statement. **Drafted**: one sentence for
+G89; an instance.
+
+### 5.2 §IQ and G79 — only a counterexample to either
+
+**None found.** §IQ: every derived entry answers a structural form — what every weak colouring carries, at a point with data
+on its unit circle or in every disc. The invariant that tells six from seven (C132-INDEX's winding of the outside labels) came
+from the structural question by recognition; what failed was the card's hunch about *where* the invariant lives (its first
+branch has an empty answer), not the rule. G79: the derived results are example invariants (centres exist in every colouring;
+what a seed's circle forces); the three cards that asked for the other direction — a point with data in every colouring, or
+what a six-colouring on triangles alone would have to carry at a ball-defined point — were "answered off their tables". The
+YES side's sketch, a counterexample's invariant, organized the second round (alternating against turning) and broke nothing
+through. That is the rule's own prediction, so no line is drafted for it.
+
+### 5.3 §PA — recognitions about what the object is
+
+| the recognition | whose | where it goes |
+|---|---|---|
+| a witnessed cycle is a property of the unit circle about a point, a meeting of classes of its small balls; the object re-cut as a seed | FS132-E5; the asking lane (items 14, 18, 23) | proposed **G96**; FS-127's and FS-128's lines |
+| every residue is the unit arc of rows 135–136 | the asking lane (item 24), unchecked | proposed **G97**; FS-124's line |
+| the invariant is the winding of the three outside labels on a triangle point's ring | FS132-E2 (item 5) | proposed **G98**; FS-122's and FS-130's lines |
+| the side rule for an open piece is G84's shadow identity | FS132-E6 (C132-SHADOW's prior-art line) | an instance of G84 |
+| "two changes 60° apart" is two objects, the alternating orbit and the turning orbit | FS132-E4 (item 13) | **FS-135**, questions 2 and 3 |
+| the cover step is Lebesgue's covering theorem for the square, already in this library's kernel | the kernel planner (item 25) | C132-CORES-SQUARE, in FS-132's Lean phase |
+| in geometric measure theory's words a cyclic centre is a triple junction of a measurable partition, with no regularity assumed | the plan's §PA | **a prior-art debt, not a stub**: no search was made under that discipline's name — the three zbMATH queries of the opening returned 503 and were not re-run by any later job, nor by this one; it is owed at FS-127's or FS-124's opening |
+
+**Prior art, as measured**: nine "owed" lines in the derivation file (the gate's nine warnings); "3 modulo 6" unsearched; zbMATH
+down through the night (FS132-E1, FS132-E5). This job ran no search and read no paper.
+
+### 5.4 The plan and the stub, grepped for "conjecture" and "not claimed"
+
+"conjecture": no hit in `plans/FS132-six-by-the-nerve.md` or `plans/STUB-six-by-the-nerve.md`. "not claimed": two hits, both in
+the plan (ll. 188, 197), the *Not claimed* lines of the two readings; the stub says "*Not posed*" once (l. 382).
+
+| the line | its clause | a stub, or an explicit decline |
+|---|---|---|
+| plan l. 188, C132-RUN-EMPTY | "that C132-M-EMPTY is false if the route stalls" | moot — C132-M-EMPTY is derived |
+| | "anything at a centre whose ring is not of that kind (the (Q) rings, FS-124)" | FS-124 |
+| | "anything at `k ≠ 6`" | declined: at five the class is empty (`[OAIMath2026]` Thm 1.4); at seven the argument's steps M2 and M9 fail, and the nine-colour control meets every other hypothesis |
+| | "that the extraction ever returns `ℓ = 4`" | C132-M-CV — FS-122's line |
+| | "that a point whose transition graph contains a four-cycle is an extracted centre" | ball data to circle data — FS-127's line ("two inclusions, not one place") |
+| plan l. 197, C132-RUN-CV | "that C132-M-CV is false if the route stalls" | open — FS-122's line |
+| | "that a six-colouring whose extracted centres are all triangles exists" | no stub of its own: it is the failure clause of FS-122's forcing, and FS-135 carries the rings it would have |
+| | "card 3's statement" | answered: its first branch is empty (C132-FILL, C132-NOESS) |
+| | "anything without the hypothesis on the centres" | FS-127, FS-128 |
+| stub l. 382, C132-LENS | "that the ring point is a cyclic centre" | declined as a claim — it asks ball data of circle data (proposed G96) |
+| | "that any pair is witnessed there" | C132-PLACED's open line — FS-124 |
+| | "anything for an outside state that is not a step on the six arcs" | FS-135, question 3 |
+| | "anything at a ring point one of whose neighbours has no pure outer side" | FS-135, question 1 (far witnesses); FS-124 (an edge set on the unit circle about the neighbour) |
+
+### 5.5 The gates
+
+- **`plans/FS132-derivation.md`**: one dated paragraph appended by this job, at the end of its § 9 (where each thread of §§ 8–9
+  went; 13 lines inserted, none changed). After it, from `plans/` under the slot,
+  `python3 ../.claude/skills/ephodos/scripts/derive_gate.py all FS132-derivation.md`: **exit 0 — GATE: PASS (0 failures, 9
+  warnings)**; 57 entries (47 derived, 10 stalled or gapped); 32 controls, each firing on its fault
+  (`data/fs132/z2/derivation-gate.out`). The same reading as part 1's.
+- **`plans/FS132-six-by-the-nerve.md`**: nothing appended by this job (the correction it was owed was appended by part 1).
+- **The new stubs, read cold**: Stage 2.4.
+- **This job's three tools**, each with a planted fault watched firing: `tools/fs132_z2_append.py` (`--check --fault`, exit 1),
+  `tools/fs132_z2_brier.py` (`--fault`, the means move), `tools/fs132_z2_frontpage.py` (`--fault`, exit 1).
+
+### 5.6 What I did not do, and my slips
+
+- **Not read**: the six derivers' arguments (I read statements, `uses only:`, `not claimed:`, verdicts, grades, the prose of
+  the derivation file, and the sections of the records Stage 2.1 names); the kernel planner's record beyond part 1's
+  quotations; `LEDGER.md` row 139 (the optional note for it says so); the release's manuscript; any paper.
+- **Not rendered**: the Proof Atlas; the six nodes' positions are proposals.
+- **Slips**: a miscount in Stage 3's reading of the scores, corrected in place and said in Stage 4; the append script's first
+  check was read through a pipe (`| tail`), against standing rule 9, and re-run directly with its exit recorded; the
+  expectations in the two new stubs are mine and were written with the night's results in view — instruments, not blind.
+- **A judgment a reader may reverse**: C132-RADIUS is placed at FS-124 as the YES side's clause of its measurable
+  restatement; it could equally be a short job of its own beside FS-134. The asking lane poses FS-124 next and sees it there.
+
+### 5.7 Where a successor takes over
+
+Nothing of this job is half-done. For the coordinator's filing: Stage 4's drafts in the order ledger rows → `CLAUDE.md` →
+grokkings → instances → atlas (the atlas quotes filed rows; the grokkings cite them). For the asking lane's next job: FS-124's
+stub carries, in its § Provisional bearings, everything FS-132 left about its object; FS-134 and FS-135 are unranked and have
+no card. For the kernel lane: nothing new from this job — C132-CORES-SQUARE's comparison and the local form of the exclusion
+are named in FS-132's stub as open inside its Lean phase.
+
+## Stage 5 — SAVED
