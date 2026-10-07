@@ -103,4 +103,33 @@ between two colours that is an arc of the unit circle about a point one unit awa
    `data/fs124/briefs/FS124-E1-opening.md`, gate exit 0; record `plans/FS124-E1-derivation.md`, plan
    `plans/FS124-tight-pairs.md`): §G, §PA, §IQ, the plan; then the six claims in order, a verdict by message as each is
    saved.
+6. **FS124-E1, first message: the opening is saved** (commit `1524a765`; plan `plans/FS124-tight-pairs.md`; record
+   `plans/FS124-E1-derivation.md` Stage 1). **The claims**: six kept as posed, one restated wider (the first claim's second
+   half, at every `k` and every open set), **seven added** — the one lemma under every first-order claim (an open one-label
+   set bars its label from every point at distance exactly 1 from it: "the second half of C132-SHADOW's own argument"); that
+   tightness is open along the circle, so "the object is an arc with ends, not a pair"; the completion's statement at every
+   point one unit from the far end but two; the point opposite the centre; the first claim's form for a finite set under
+   almost every rigid motion ("the form the kernel lane should plan"); the control at five as a statement (some disc has no
+   weak five-colouring, no radius claimed); the count's smallest form as its own relay. **Fixed in the claim list by a
+   dated line, copied by script** (13:11 UTC). **A finding about the card, held by it as a prediction until confirmed by
+   formula**: the card's unit — a tight pair and its two rhombus completions — reads the object at an interior point of an
+   arc; on the tight seven-colouring the completions of an interior far end are interior points of one tile, and "the
+   lattice points are the arcs' ends": so "does it recur" is a question about the ends of maximal tight arcs, and at an
+   interior completion the first-order answer is the absence of two labels at every number of labels — the card's third
+   branch, there. **Step 3 of the workflow, scored by me**: §G names all 98 entries of the grokkings file (by script: none in
+   neither list), sixteen with *bears* lines; §IQ's structural form quantifies over every colouring and is not the
+   existence form reworded, and it attacks the card's candidate datum (the carrier is an arc; the relation is a polarity
+   between cones of presence and tight windows; "none known beyond first order"). **§PA**: the reviews database answered
+   today — the searches last night could not make are run, for this object and for the triple junction of a measurable
+   partition; "everything below is a listing … no paper was opened by this pass"; the first claim's step "not found in
+   print", said as "not found", never "new"; author listings and citation graphs not done. **Registered predictions** (the
+   plan's § Registered predictions, P1–P7, each with the decision it drives): the first claim 0.95 both ways; the centre
+   0.97, the completion 0.95, its wider form 0.90, the opposite point 0.85; **"nothing is forced beyond the first step" at
+   the completions of an interior far end, at every `k`: 0.85**; the calibration at seven 0.93; the count derived as posed
+   0.85, and found to say less than its wording 0.40; the rhombus's first half 0.75; G97's killing test fires in its second
+   clause 0.80. **Rulings.** (a) The restated and added statements are accepted as the claims its verdicts are about.
+   (b) **Its finding about the card's unit goes to the asking lane when the formula confirms it** — a re-posing of the
+   card's question at the ends of maximal arcs — not before: one mind's prediction is not yet a result. (c) Line 12 of the
+   search queue (the label skeleton on lattice points) stays held, and its object is re-read against that finding before
+   it is queued: P2 and P3 say on which points the constraints live.
 
