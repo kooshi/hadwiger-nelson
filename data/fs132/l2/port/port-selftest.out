@@ -1,0 +1,14 @@
+unplanted: PASS (as it must)
+plant 'a generated file changed by two spaces': REFUSED
+plant 'a generated file absent': REFUSED
+plant 'the 4 CONE lines of palette_transfer_pair removed': REFUSED
+plant 'a CONE line added (a declaration outside the cone)': REFUSED
+plant 'a patch that does not apply': REFUSED
+plant 'a patch into a statement': REFUSED
+plant 'a patch into a definition': REFUSED
+partner 'a patch into a proof': generation ACCEPTED, files then DIFFER
+plant 'the licence copy changed by one byte': REFUSED
+plant 'the licence copy absent': REFUSED
+plant 'the clone at another commit': REFUSED
+SELF-TEST OK: 10 plants refused and 1 partner accepted
+selftest exit=0

@@ -1,0 +1,97 @@
+flower0: seed=6 corners at 1 points (full neighbourhoods: True) labels=6 | rounds=2 closed=yes | forced=6 at 6 points | emptied=0 conflicts=0 | arc-scans=1 arc-forced=0 | corners read: forced=18 free=18 outside-U free=24 seed-point free=12 | agree-with-object=6 of 6 (disagree 0, unread 0) | class-samples=102 mismatches=0
+U = the open disc of radius 3/2; fault = None
+round 1: points read 0; forced corners added 6; emptied 0; conflicts 0; tower height 2
+round 2: points read 13; forced corners added 0; emptied 0; conflicts 0; tower height 2
+
+THE SEED
+  (0.00000,0.00000): 0:[0.0,60.0](S0) 1:[60.0,120.0](S1) 2:[120.0,180.0](S2) 3:[180.0,240.0](S3) 4:[240.0,300.0](S4) 5:[300.0,0.0](S5)
+
+THE FORCED CORNERS (the closure less the seed)
+  (0.86603,0.50000) label 0 corner [120.0+,300.0-] (forced, round 1)
+  (0.00000,1.00000) label 1 corner [180.0+,0.0-] (forced, round 1)
+  (-0.86603,0.50000) label 2 corner [240.0+,60.0-] (forced, round 1)
+  (-0.86603,-0.50000) label 3 corner [300.0+,120.0-] (forced, round 1)
+  (0.00000,-1.00000) label 4 corner [0.0+,180.0-] (forced, round 1)
+  (0.86603,-0.50000) label 5 corner [60.0+,240.0-] (forced, round 1)
+
+THE TABLE AT EVERY POINT ONE UNIT FROM TWO OR MORE POINTS OF THE CLOSURE (last round)
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):in (0.00000,1.00000):out (-0.86603,0.50000):out (-0.86603,-0.50000):out (0.00000,-1.00000):out (0.86603,-0.50000):in corner [0.0-,0.0+] left=05 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):in (0.00000,1.00000):in (-0.86603,0.50000):out (-0.86603,-0.50000):out (0.00000,-1.00000):out (0.86603,-0.50000):in corner [0.0+,60.0-] left=015 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):in (0.00000,1.00000):in (-0.86603,0.50000):out (-0.86603,-0.50000):out (0.00000,-1.00000):out (0.86603,-0.50000):out corner [60.0-,60.0+] left=01 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):in (0.00000,1.00000):in (-0.86603,0.50000):in (-0.86603,-0.50000):out (0.00000,-1.00000):out (0.86603,-0.50000):out corner [60.0+,120.0-] left=012 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):out (0.00000,1.00000):in (-0.86603,0.50000):in (-0.86603,-0.50000):out (0.00000,-1.00000):out (0.86603,-0.50000):out corner [120.0-,120.0+] left=12 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):out (0.00000,1.00000):in (-0.86603,0.50000):in (-0.86603,-0.50000):in (0.00000,-1.00000):out (0.86603,-0.50000):out corner [120.0+,180.0-] left=123 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):out (0.00000,1.00000):out (-0.86603,0.50000):in (-0.86603,-0.50000):in (0.00000,-1.00000):out (0.86603,-0.50000):out corner [180.0-,180.0+] left=23 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):out (0.00000,1.00000):out (-0.86603,0.50000):in (-0.86603,-0.50000):in (0.00000,-1.00000):in (0.86603,-0.50000):out corner [180.0+,240.0-] left=234 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):out (0.00000,1.00000):out (-0.86603,0.50000):out (-0.86603,-0.50000):in (0.00000,-1.00000):in (0.86603,-0.50000):out corner [240.0-,240.0+] left=34 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):out (0.00000,1.00000):out (-0.86603,0.50000):out (-0.86603,-0.50000):in (0.00000,-1.00000):in (0.86603,-0.50000):in corner [240.0+,300.0-] left=345 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):out (0.00000,1.00000):out (-0.86603,0.50000):out (-0.86603,-0.50000):out (0.00000,-1.00000):in (0.86603,-0.50000):in corner [300.0-,300.0+] left=45 free
+  (0.00000,0.00000) in U SEED POINT members (0.86603,0.50000):in (0.00000,1.00000):out (-0.86603,0.50000):out (-0.86603,-0.50000):out (0.00000,-1.00000):in (0.86603,-0.50000):in corner [300.0+,0.0-] left=045 free
+  (0.86603,0.50000) in U members (0.00000,0.00000):out (0.00000,1.00000):out (0.86603,-0.50000):out corner [0.0-,60.0+] left=234 free
+  (0.86603,0.50000) in U members (0.00000,0.00000):out (0.00000,1.00000):in (0.86603,-0.50000):out corner [60.0+,120.0+] left=234 free
+  (0.86603,0.50000) in U members (0.00000,0.00000):in (0.00000,1.00000):in (0.86603,-0.50000):out corner [120.0+,180.0+] left=0 forced:held
+  (0.86603,0.50000) in U members (0.00000,0.00000):in (0.00000,1.00000):in (0.86603,-0.50000):in corner [180.0+,240.0-] left=0 forced:held
+  (0.86603,0.50000) in U members (0.00000,0.00000):in (0.00000,1.00000):out (0.86603,-0.50000):in corner [240.0-,300.0-] left=0 forced:held
+  (0.86603,0.50000) in U members (0.00000,0.00000):out (0.00000,1.00000):out (0.86603,-0.50000):in corner [300.0-,0.0-] left=234 free
+  (0.00000,1.00000) in U members (0.00000,0.00000):out (0.86603,0.50000):in (-0.86603,0.50000):out corner [0.0-,60.0-] left=345 free
+  (0.00000,1.00000) in U members (0.00000,0.00000):out (0.86603,0.50000):out (-0.86603,0.50000):out corner [60.0-,120.0+] left=345 free
+  (0.00000,1.00000) in U members (0.00000,0.00000):out (0.86603,0.50000):out (-0.86603,0.50000):in corner [120.0+,180.0+] left=345 free
+  (0.00000,1.00000) in U members (0.00000,0.00000):in (0.86603,0.50000):out (-0.86603,0.50000):in corner [180.0+,240.0+] left=1 forced:held
+  (0.00000,1.00000) in U members (0.00000,0.00000):in (0.86603,0.50000):in (-0.86603,0.50000):in corner [240.0+,300.0-] left=1 forced:held
+  (0.00000,1.00000) in U members (0.00000,0.00000):in (0.86603,0.50000):in (-0.86603,0.50000):out corner [300.0-,0.0-] left=1 forced:held
+  (-0.86603,0.50000) in U members (0.00000,0.00000):in (0.00000,1.00000):in (-0.86603,-0.50000):out corner [0.0-,60.0-] left=2 forced:held
+  (-0.86603,0.50000) in U members (0.00000,0.00000):out (0.00000,1.00000):in (-0.86603,-0.50000):out corner [60.0-,120.0-] left=045 free
+  (-0.86603,0.50000) in U members (0.00000,0.00000):out (0.00000,1.00000):out (-0.86603,-0.50000):out corner [120.0-,180.0+] left=045 free
+  (-0.86603,0.50000) in U members (0.00000,0.00000):out (0.00000,1.00000):out (-0.86603,-0.50000):in corner [180.0+,240.0+] left=045 free
+  (-0.86603,0.50000) in U members (0.00000,0.00000):in (0.00000,1.00000):out (-0.86603,-0.50000):in corner [240.0+,300.0+] left=2 forced:held
+  (-0.86603,0.50000) in U members (0.00000,0.00000):in (0.00000,1.00000):in (-0.86603,-0.50000):in corner [300.0+,0.0-] left=2 forced:held
+  (-0.86603,-0.50000) in U members (0.00000,0.00000):in (-0.86603,0.50000):in (0.00000,-1.00000):in corner [0.0+,60.0-] left=3 forced:held
+  (-0.86603,-0.50000) in U members (0.00000,0.00000):in (-0.86603,0.50000):in (0.00000,-1.00000):out corner [60.0-,120.0-] left=3 forced:held
+  (-0.86603,-0.50000) in U members (0.00000,0.00000):out (-0.86603,0.50000):in (0.00000,-1.00000):out corner [120.0-,180.0-] left=015 free
+  (-0.86603,-0.50000) in U members (0.00000,0.00000):out (-0.86603,0.50000):out (0.00000,-1.00000):out corner [180.0-,240.0+] left=015 free
+  (-0.86603,-0.50000) in U members (0.00000,0.00000):out (-0.86603,0.50000):out (0.00000,-1.00000):in corner [240.0+,300.0+] left=015 free
+  (-0.86603,-0.50000) in U members (0.00000,0.00000):in (-0.86603,0.50000):out (0.00000,-1.00000):in corner [300.0+,0.0+] left=3 forced:held
+  (0.00000,-1.00000) in U members (0.00000,0.00000):in (-0.86603,-0.50000):out (0.86603,-0.50000):in corner [0.0+,60.0+] left=4 forced:held
+  (0.00000,-1.00000) in U members (0.00000,0.00000):in (-0.86603,-0.50000):in (0.86603,-0.50000):in corner [60.0+,120.0-] left=4 forced:held
+  (0.00000,-1.00000) in U members (0.00000,0.00000):in (-0.86603,-0.50000):in (0.86603,-0.50000):out corner [120.0-,180.0-] left=4 forced:held
+  (0.00000,-1.00000) in U members (0.00000,0.00000):out (-0.86603,-0.50000):in (0.86603,-0.50000):out corner [180.0-,240.0-] left=012 free
+  (0.00000,-1.00000) in U members (0.00000,0.00000):out (-0.86603,-0.50000):out (0.86603,-0.50000):out corner [240.0-,300.0+] left=012 free
+  (0.00000,-1.00000) in U members (0.00000,0.00000):out (-0.86603,-0.50000):out (0.86603,-0.50000):in corner [300.0+,0.0+] left=012 free
+  (0.86603,-0.50000) in U members (0.00000,0.00000):out (0.86603,0.50000):in (0.00000,-1.00000):out corner [0.0+,60.0+] left=123 free
+  (0.86603,-0.50000) in U members (0.00000,0.00000):in (0.86603,0.50000):in (0.00000,-1.00000):out corner [60.0+,120.0+] left=5 forced:held
+  (0.86603,-0.50000) in U members (0.00000,0.00000):in (0.86603,0.50000):in (0.00000,-1.00000):in corner [120.0+,180.0-] left=5 forced:held
+  (0.86603,-0.50000) in U members (0.00000,0.00000):in (0.86603,0.50000):out (0.00000,-1.00000):in corner [180.0-,240.0-] left=5 forced:held
+  (0.86603,-0.50000) in U members (0.00000,0.00000):out (0.86603,0.50000):out (0.00000,-1.00000):in corner [240.0-,300.0-] left=123 free
+  (0.86603,-0.50000) in U members (0.00000,0.00000):out (0.86603,0.50000):out (0.00000,-1.00000):out corner [300.0-,0.0+] left=123 free
+  (0.86603,1.50000) OUTSIDE U members (0.86603,0.50000):out (0.00000,1.00000):out corner [0.0-,120.0+] left=2345 free
+  (0.86603,1.50000) OUTSIDE U members (0.86603,0.50000):out (0.00000,1.00000):in corner [120.0+,180.0+] left=2345 free
+  (0.86603,1.50000) OUTSIDE U members (0.86603,0.50000):in (0.00000,1.00000):in corner [180.0+,300.0-] left=2345 free
+  (0.86603,1.50000) OUTSIDE U members (0.86603,0.50000):in (0.00000,1.00000):out corner [300.0-,0.0-] left=2345 free
+  (1.73205,0.00000) OUTSIDE U members (0.86603,0.50000):in (0.86603,-0.50000):out corner [60.0+,120.0+] left=1234 free
+  (1.73205,0.00000) OUTSIDE U members (0.86603,0.50000):in (0.86603,-0.50000):in corner [120.0+,240.0-] left=1234 free
+  (1.73205,0.00000) OUTSIDE U members (0.86603,0.50000):out (0.86603,-0.50000):in corner [240.0-,300.0-] left=1234 free
+  (1.73205,0.00000) OUTSIDE U members (0.86603,0.50000):out (0.86603,-0.50000):out corner [300.0-,60.0+] left=1234 free
+  (-0.86603,1.50000) OUTSIDE U members (0.00000,1.00000):in (-0.86603,0.50000):out corner [0.0-,60.0-] left=0345 free
+  (-0.86603,1.50000) OUTSIDE U members (0.00000,1.00000):out (-0.86603,0.50000):out corner [60.0-,180.0+] left=0345 free
+  (-0.86603,1.50000) OUTSIDE U members (0.00000,1.00000):out (-0.86603,0.50000):in corner [180.0+,240.0+] left=0345 free
+  (-0.86603,1.50000) OUTSIDE U members (0.00000,1.00000):in (-0.86603,0.50000):in corner [240.0+,0.0-] left=0345 free
+  (-1.73205,0.00000) OUTSIDE U members (-0.86603,0.50000):in (-0.86603,-0.50000):out corner [60.0-,120.0-] left=0145 free
+  (-1.73205,0.00000) OUTSIDE U members (-0.86603,0.50000):out (-0.86603,-0.50000):out corner [120.0-,240.0+] left=0145 free
+  (-1.73205,0.00000) OUTSIDE U members (-0.86603,0.50000):out (-0.86603,-0.50000):in corner [240.0+,300.0+] left=0145 free
+  (-1.73205,0.00000) OUTSIDE U members (-0.86603,0.50000):in (-0.86603,-0.50000):in corner [300.0+,60.0-] left=0145 free
+  (-0.86603,-1.50000) OUTSIDE U members (-0.86603,-0.50000):in (0.00000,-1.00000):in corner [0.0+,120.0-] left=0125 free
+  (-0.86603,-1.50000) OUTSIDE U members (-0.86603,-0.50000):in (0.00000,-1.00000):out corner [120.0-,180.0-] left=0125 free
+  (-0.86603,-1.50000) OUTSIDE U members (-0.86603,-0.50000):out (0.00000,-1.00000):out corner [180.0-,300.0+] left=0125 free
+  (-0.86603,-1.50000) OUTSIDE U members (-0.86603,-0.50000):out (0.00000,-1.00000):in corner [300.0+,0.0+] left=0125 free
+  (0.86603,-1.50000) OUTSIDE U members (0.00000,-1.00000):out (0.86603,-0.50000):in corner [0.0+,60.0+] left=0123 free
+  (0.86603,-1.50000) OUTSIDE U members (0.00000,-1.00000):in (0.86603,-0.50000):in corner [60.0+,180.0-] left=0123 free
+  (0.86603,-1.50000) OUTSIDE U members (0.00000,-1.00000):in (0.86603,-0.50000):out corner [180.0-,240.0-] left=0123 free
+  (0.86603,-1.50000) OUTSIDE U members (0.00000,-1.00000):out (0.86603,-0.50000):out corner [240.0-,0.0+] left=0123 free
+
+ALONG THE UNIT CIRCLES OF POINTS CARRYING AT LEAST k - 1 LABELS
+  about (0.00000,0.00000) arc at (0.11962,0.99282): in:left=01 out:left=34
+  about (0.00000,0.00000) arc at (-0.80000,0.60000): out:left=45 in:left=12
+  about (0.00000,0.00000) arc at (-0.91962,-0.39282): out:left=05 in:left=23
+  about (0.00000,0.00000) arc at (-0.11962,-0.99282): out:left=01 in:left=34
+  about (0.00000,0.00000) arc at (0.80000,-0.60000): in:left=45 out:left=12
+  about (0.00000,0.00000) arc at (0.91962,0.39282): in:left=05 out:left=23

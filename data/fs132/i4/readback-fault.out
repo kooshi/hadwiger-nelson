@@ -1,0 +1,22 @@
+ 1 MISMATCH data/external/EXT-OAI1-request.md :: I agree with all 3. let's keep the lean backlag paused. We move to the
+ 2 MATCH    CLAUDE.md :: Do not consider Lean formalization a cost. It's practically mechanical
+ 3 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/State.lean :: theorem OutsideOrbit.ae_iff_not (h : OutsideOrbit c hc p X Y ψ δ) (hw 
+ 4 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/State.lean :: theorem OutsideOrbit.ae_flip (h : OutsideOrbit c hc p X Y ψ δ) (hw : W
+ 5 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/State.lean :: theorem OutsideOrbit.change_at (h : OutsideOrbit c hc p X Y ψ δ) (hw :
+ 6 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/State.lean :: theorem OutsideOrbit.chart_avoids (h : OutsideOrbit c hc p X Y ψ δ) (h
+ 7 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/State.lean :: theorem exists_tip (h : OutsideOrbit c hc p X Y ψ δ) (hw : WeakColorin
+ 8 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/State.lean :: theorem OutsideOrbit.hubColours (h : OutsideOrbit c hc p X Y ψ δ) (hw 
+ 9 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/State.lean :: theorem OutsideOrbit.hubColours_flip (h : OutsideOrbit c hc p X Y ψ δ)
+10 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/Excl.lean :: theorem exists_change_of_ae_outside {k : ℕ} {c : ℂ → Fin k} (hc : Meas
+11 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/Excl.lean :: theorem ae_real_of_ae_angles {P : Angles → Prop} (h : ∀ᵐ t ∂angularMea
+12 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean :: theorem chart_quasiMeasurePreserving (p : ℂ) :
+13 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean :: theorem shear_quasiMeasurePreserving {f : ℝ × ℝ → ℝ} (hf : Measurable 
+14 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean :: theorem ae_ne_of_not_isTip {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c)
+15 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean :: theorem unitPair_chart_ae {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c) 
+16 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/Kill.lean :: theorem no_double_change (hc : Measurable c) (hw : WeakColoring k c) (
+17 MATCH    .claude/worktrees/fs132-wi4/Proofs/HadwigerNelson/Plane/SixRing/Kill.lean :: theorem step_kill (hc : Measurable c) (hw : WeakColoring k c) (p : ℂ) 
+18 MATCH    .claude/worktrees/fs132-wi4/plans/FS132-kernel-plan.md :: A, B, C need nothing ported and share no file: **three implementers ca
+19 MATCH    .claude/worktrees/fs132-wi4/plans/FS132-kernel-plan.md :: **The planner's standing permissions to an implementer** (so that a ro
+20 MATCH    .claude/worktrees/fs132-wi4/plans/FS132-kernel-plan.md :: **Hard, in order**: `unitPair_chart_ae`, `step_kill`, `volume_pattern_
+21 MATCH    .claude/worktrees/fs132-wi4/plans/FS132-kernel-plan.md :: Nothing of this job is half done. In order of value: (1) when the port
+quotations=21 matched=20 mismatched=1

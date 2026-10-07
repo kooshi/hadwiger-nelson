@@ -1,0 +1,21 @@
+counter vs the main scan: declarations 15292 / 15292, refutations 226 / 226: agree
+counter vs the landing scan: declarations 15370 / 15370, refutations 226 / 226: agree
+added SITE GENERIC HadwigerNelson.Plane.AeColouring.isWeakColouringOn :: HadwigerNelson.Plane.AeColouring k
+main rows 1528, landing rows 1529; lost 0 (0 with a removed declaration); added 1
+  added SITE GENERIC on AeColouring: 1
+  added rows in Plane.WeakColouringOn: 1
+  declarations: 15292 -> 15370 (+78)
+  refutations-skipped: 226 -> 226 (+0)
+  sites: 1447 -> 1448 (+1)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1404 -> 1405 (+1)
+  unknown: 2 -> 2 (+0)
+  module Plane.Radius: declarations 0 -> 16 (+16), refutations 0 -> 0 (+0)  [new module]
+  module Plane.RadiusOutside: declarations 0 -> 12 (+12), refutations 0 -> 0 (+0)  [new module]
+  module Plane.WeakColouringOn: declarations 0 -> 50 (+50), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +78, refutations +0: equal to the scans difference
+vacdiff: PASS
+exit=0

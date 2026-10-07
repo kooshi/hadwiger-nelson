@@ -1,0 +1,16 @@
+  aux          AUX-ABSENT       6
+  aux          AUX-DIFFERS      3
+  aux          IDENTICAL        68
+  aux          UP-TO-INSTANCES  8
+  definition   IDENTICAL        44
+  definition   UP-TO-INSTANCES  14
+  lemma        IDENTICAL        158
+  lemma        UP-TO-INSTANCES  23
+  target       IDENTICAL        4
+  target mem_spatialSupport_ae: IDENTICAL
+  target palette_transfer_pair: IDENTICAL
+  target palette_sixty_disjoint: IDENTICAL
+  target two_state_impossible: IDENTICAL
+  constants differing inside instance and proof arguments: 47 (recorded: 47)
+cone constants: 328  failing: 0  fatal: 0  renamed map: {'Set.domRestrict': 'Set.restrict', 'Set.ofPred': 'setOf'}
+READBACK OK

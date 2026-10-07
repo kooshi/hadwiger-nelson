@@ -1,0 +1,71 @@
+QUERY: ab:"chromatic number of the plane" & ab:disk -> 1
+    2020 | 36th international symposium on computational geometry, SoCG 2020, Zürich, Switzerland (virtual conference), June 23--26 |  | Zbl 1436.68018
+QUERY: ab:"unit distance" & ab:colo* & ab:strip -> 1
+    2020 | Coloring unit-distance strips using SAT | Oostema, Peter,Martins, Ruben,Heule, Marijn | Zbl 1564.68263
+QUERY: ab:"six colo*" & ab:plane & ab:"distance" -> 8
+    1992 | A six-coloring of the plane | Soifer, Alexander | Zbl 0756.05057
+    2020 | What percent of the plane can be properly 5- and 6-colored? | Parts, Jaan | Zbl 1452.05069
+    2021 | Distance-two colourings of Barnette graphs | Feder, Tomás,Hell, Pavol,Subi, Carlos | Zbl 1458.05065
+    1994 | Six-realizable set \(X_ 6\) | Soifer, Alexander | Zbl 0845.05039
+    1993 | Almost chromatic number of the plane | Hoffman, Ilya,Soifer, Alexander | Zbl 0845.05037
+    2024 | Extending the continuum of six-colorings | Mundinger, Konrad,Pokutta, Sebastian,Spiegel, Christoph,Zimmer, Max | Zbl 1559.05057
+    2025 | Neural Discovery in Mathematics: Do Machines Dream of Colored Planes? | Konrad Mundinger,Max Zimmer,Aldo Kiem,Christoph Spiegel,Sebastian Poku | Zbl arXiv:2501.18527
+    2019 | Lower bounds for the measurable chromatic number of the hyperbolic plane | DeCorte, Evan,Golubev, Konstantin | Zbl 1417.05063
+QUERY: ab:"chromatic number" & ab:plane & (ab:tiling | ab:tilings | ab:map | ab:maps) & ab:"unit distance" -> 6
+    2009 | The mathematical coloring book. Mathematics of coloring and the colorful life of its creators. Forewords by Branko Grünb | Soifer, Alexander | Zbl 1221.05001
+    2015 | Chromatic properties of the Euclidean plane | James D. Currie,Roger B. Eggleton | Zbl arXiv:1509.03667
+    2010 | Geometric etudes in combinatorial mathematics. With forewords to the 1st edition by Paul Erdős, Branko Grünbaum, and Cec | Soifer, Alexander | Zbl 1203.52007
+    2018 | The chromatic number of the taxicab plane | Donnelly, John | Zbl 1407.05233
+    2009 | On the plane-width of graphs | Kamiński, Marcin,Medvedev, Paul,Milanič, Martin | Zbl 1273.05054
+    2013 | The seventh European conference on combinatorics, graph theory and applications. Extended abstracts of EuroComb 2013, Pi |  | Zbl 1271.05002
+QUERY: ab:colo* & ab:plane & ab:"monochrom*" & ab:"unit" & (ab:regions | ab:region | ab:tiles | ab:Jordan) -> 3
+    2021 | Odd-distance virtual edges in unit-distance graphs | Heule, Marijn J. H. | Zbl 1481.05047
+    2017 | Rays, waves, and scattering. Topics in classical mathematical physics | Adam, John A. | Zbl 1386.00065
+    2007 | Proceedings of the eighteenth annual ACM-SIAM symposium on discrete algorithms, SODA 2007, New Orleans, LA, USA, January |  | Zbl 1190.68001
+QUERY: ti:"chromatic number" & (ti:disk | ti:disks | ti:strip | ti:strips | ti:"bounded") -> 27
+    2021 | On the chromatic number of circular disks and infinite strips in the plane | Polymath, D. H. J. | Zbl 1466.05215
+    1990 | Chromatic number versus chromatic number in graphs with bounded clique number | Erdős, Paul,Gimbel, John,Straight, H. Joseph | Zbl 0721.05020
+    2020 | Planar graphs have bounded nonrepetitive chromatic number | Dujmović, Vida,Esperet, Louis,Joret, Gwenaël,Walczak, Bartosz,Wood, Da | Zbl 1450.05012
+    1997 | The harmonious chromatic number of bounded degree graphs | Edwards, Keith | Zbl 0869.05033
+    2008 | The chromatic number of the plane: the bounded case | Kruskal, Clyde P. | Zbl 1139.05023
+    2011 | The complexity of finding independent sets in bounded degree (hyper)graphs of low chromatic number | Guruswami, Venkatesan,Sinop, Ali Kemal | Zbl 1376.68054
+    1989 | On the complexity of finding the chromatic number of a recursive graph. I: The bounded case | Beigel, Richard,Gasarch, William I. | Zbl 0685.03033
+    1996 | The harmonious chromatic number of bounded degree trees | Edwards, Keith | Zbl 0849.05029
+    1998 | Continuum many universal Horn classes of graphs of bounded chromatic number | Bonato, A. | Zbl 0933.05046
+    2018 | Anagram-free chromatic number is not pathwidth-bounded | Carmi, Paz,Dujmović, Vida,Morin, Pat | Zbl 1519.05069
+    1992 | The bounded chromatic number for graphs of genus \(g\) | Berman, Kenneth A.,Paul, Jerome L. | Zbl 0774.05035
+    2018 | List \(r\)-hued chromatic number of graphs with bounded maximum average degrees | Song, Huimin,Lai, Hong-Jian,Wu, Jianliang | Zbl 1383.05120
+    1993 | A note on the \(m\)-bounded chromatic number of a tree | Chen, Bor-Liang,Lih, Ko-Wei | Zbl 0781.05019
+    2006 | Arc-chromatic number of digraphs in which every vertex has bounded outdegree or bounded indegree | Bessy, S.,Havet, F.,Birmelé, E. | Zbl 1116.05025
+    2015 | On the \(b\)-chromatic number of regular bounded graphs | Amine, El Sahili,Mekkia, Kouider,Maidoun, Mortada | Zbl 1316.05037
+    2019 | Characterization of forbidden subgraphs for bounded star chromatic number | Choi, Ilkyoo,Kim, Ringi,Park, Boram | Zbl 1403.05043
+    2026 | The \(r\)-dynamic chromatic number is bounded in the strong 2-coloring number | Goetze, Miriam,Ueckerdt, Torsten | Zbl 1579.05075
+    2023 | Compact representation of interval graphs and circular-arc graphs of bounded degree and chromatic number | Chakraborty, Sankardeep,Jo, Seungbum | Zbl 1543.68272
+    1998 | On the chromatic number of disk graphs | Malesińska, Ewa,Piskorz, Steffen,Weißenfels, Gerhard | Zbl 0990.05047
+    2020 | The edge-distinguishing chromatic number of spider graphs with three legs or bounded leg lengths | Fickes, Grant,Wong, Tony W. H. | Zbl 1461.05090
+    2026 | Bounded chromatic number of graphs with small clique number and large minimum degree | Jiaao Li,Xinyuan Li | Zbl arXiv:2609.24097
+    2023 | The chromatic number of 2-edge-colored and signed graphs of bounded maximum degree | Duffy, Christopher,Jacques, Fabien,Montassier, Mickaël,Pinlou, Alexand | Zbl 1522.05110
+    2026 | The oriented chromatic number of random graphs of bounded degree | Karen Gunderson,JD Nir | Zbl arXiv:2202.12323
+    2016 | Chromatic number of signed graphs with bounded maximum degree | Sandip Das,Soumen Nandi,Soumyajit Paul,Sagnik Sen | Zbl arXiv:1603.09557
+    2015 | On the maximum arc-chromatic number of digraphs with bounded outdegrees or indegrees | Xu, Chuandong,Zhang, Shenggui,Wang, Yi | Zbl 1338.05095
+    2022 | The chromatic number of signed graphs with bounded maximum average degree | Jacques, Fabien,Pinlou, Alexandre | Zbl 1490.05074
+    2010 | Game chromatic number of graphs with locally bounded number of cycles | Junosza-Szaniawski, Konstanty,Roẓej, łukasz | Zbl 1234.05090
+QUERY: ab:"distance 1" & ab:colo* & ab:plane & (ab:trichromatic | ab:"three colo*" | ab:tricolo*) -> 0
+QUERY: ab:"unit circle" & ab:colo* & ab:plane & ab:"chromatic number" & (ab:boundary | ab:arc | ab:arcs) -> 1
+    2026 | On the chromatic number of the plane for map-type colorings | Sokolov, Georgy,Voronov, Vsevolod | Zbl None
+QUERY: au:"Kruskal, Clyde" & ti:chromatic -> 1
+    2008 | The chromatic number of the plane: the bounded case | Kruskal, Clyde P. | Zbl 1139.05023
+QUERY: au:"Bauslaugh, Bruce" -> 10
+    1996 | Cores and compactness of infinite directed graphs | Bauslaugh, Bruce L. | Zbl 0861.05028
+    1990 | Generating alternating permutations lexicographically | Bauslaugh, Bruce,Ruskey, Frank | Zbl 0692.68026
+    1998 | Tearing a strip off the plane | Bauslaugh, Bruce L. | Zbl 0919.05018
+    1994 | The complexity of infinite \(H\)-colouring | Bauslaugh, Bruce | Zbl 0802.05038
+    2005 | 2-colouring doubly-periodic graphs | Bauslaugh, Bruce L.,MacGillivray, Gary | Zbl 1076.05031
+    1995 | Core-like properties of infinite graphs and structures | Bauslaugh, B. | Zbl 0821.05053
+    1998 | Circular colourings of infinite graphs | Bauslaugh, Bruce L.,Zhu, Xuding | Zbl 0909.05025
+    2001 | List-compactness of infinite directed graphs | Bauslaugh, Bruce L. | Zbl 0990.05061
+    1997 | Compactness and finite equivalence of infinite digraphs | Bauslaugh, Bruce L. | Zbl 0878.05038
+    1993 | The complexity of colouring by infinite vertex transitive graphs | Bauslaugh, Bruce | Zbl 0791.05035
+QUERY: au:"Oostema, Peter" -> 1
+    2020 | Coloring unit-distance strips using SAT | Oostema, Peter,Martins, Ruben,Heule, Marijn | Zbl 1564.68263
+QUERY: (ab:"realiz* all distances" | ab:"realizes all distances" | ab:"distances realized") & ab:plane & (ab:cover* | ab:partition*) -> 0

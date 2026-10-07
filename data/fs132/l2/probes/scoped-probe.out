@@ -1,0 +1,5 @@
+NOT FOUND in parent before the attribute (expected)
+A.B.instFooSpace : Foo A.B.Space
+NOT FOUND outside the namespace (expected)
+Fact NOT FOUND outside the namespace (expected)
+exit=0

@@ -1,0 +1,32 @@
+slots read on origin/main = 022f4c59cfa1e18935df6912362e6d895ca2ea8c
+OK CLAUDE.md: 1 (stated 1): the current audit reads 6910 clean and 5 declared purchases, and 18 im
+OK CLAUDE.md: 1 (stated 1): — no map `ℂ → Fin 5` separates every unit pair — with five, and
+OK CLAUDE.md: 1 (stated 1): — a proper `k`-colouring of the plane gives a Borel one proper at almo
+OK CLAUDE.md: 1 (stated 1): no record rests on two of the three
+OK CLAUDE.md: 1 (stated 1): `axioms=3 rests=18 named=19 inline=16 outside=7 ours=23 open=5 takes=9
+OK CLAUDE.md: 1 (stated 1): `declarations=15292 refutations-skipped=226 sites=1447`, `vacuous=0 st
+OK tools/claude_md_fact_audit.py: 1 (stated 1): (("6533", "5"), ("6910", "5")):
+OK tools/claude_md_fact_audit.py: 1 (stated 1): "6576": "superseded gate count, refiled at FS132-L2's landing
+OK CLAUDE.md: 1 (stated 1): Falconer's everywhere-proper `χ_m` is one step further, a GAP; by Thm 
+OK LEDGER.md: 1 (stated 1): **Grade:** [hand] or derived from [hand] entries, one mind each, kerne
+OK LEDGER.md: 1 (stated 1): The kernel planner's own generalizations there are its module's, not e
+OK LEDGER.md: 1 (stated 1): `plans/FS124-E1-derivation.md` Stage 3; branch `fs124-wk1` |
+OK plans/FS124-derivation.md: 1 (stated 1): the five entries of § 1's radius clause are a module complete on branc
+OK plans/FS124-derivation.md: 1 (stated 1): **Kernel**: first module, complete on a branch, not held.
+OK plans/FS124-derivation.md: 1 (stated 1): each on the standard three axioms and that one declared outside theore
+OK plans/FS124-derivation.md: 1 (stated 1): not stated in the first module
+OK CLAUDE.md: 1 (stated 1): no value moved; its first Lean module complete on a branch, its landin
+OK CLAUDE.md: 1 (stated 1): Its first Lean module, the disc criterion, is complete on branch `fs12
+OK plans/FRONTIER-STUBS.md: 1 (stated 1): Its first Lean module, the disc criterion, is complete on branch `fs12
+OK CLAUDE.md: 1 (stated 1): the direction toward seven over the outside theorem on Borel transfer 
+OK plans/STUB-q-ring.md: 1 (stated 1): the first is complete on a branch, the second is being planned
+OK plans/STUB-q-ring.md: 1 (stated 1): (§ 1; its module complete on branch `fs124-wk1`, kernel-checked on a b
+OK LEAN.md: 1 (stated 1): (`latest` is the last complete run; `scripts/gate-log.sh`)
+OK LEAN.md: 1 (stated 1): (FS132-L2, its record's stage 7).
+OK LEAN.md: 1 (stated 1): the landing runs it again on the module as recompiled on the joined tr
+OK LEAN.md: 0 (stated 0): smulOfUnit
+slots: 26  mismatches: 0
+exit=0
+MISSING (as a control must be) LEAN.md: the landing runs it again on the module as recompiled on the joined tr
+CONTROL FIRED: no altered slot is found
+control exit=0

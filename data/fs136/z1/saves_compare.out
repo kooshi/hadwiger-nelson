@@ -1,0 +1,56 @@
+original  exit=0 strip: members=40s+0b pairs=54 inside=71 patterns=11:71 separating=xy(ss):71 four=71/71 half-two=71/71 arcs-of-kind-both=38 edges-of-saves=38
+repaired  exit=0 strip: members=40s+0b pairs=54 inside=71 patterns=11:71 separating=xy(ss):71 four=71/71 half-two=71/71 arcs-of-kind-both=38 edges-of-saves=38
+norepair  exit=0 strip: members=40s+0b pairs=54 inside=71 patterns=11:71 separating=xy(ss):71 four=71/71 half-two=71/71 arcs-of-kind-both=38 edges-of-saves=38
+fault     exit=0 strip: members=40s+0b pairs=54 inside=71 patterns=00:71 separating=--(ss):71 four=0/0 half-two=0/0 arcs-of-kind-both=38 edges-of-saves=0
+  -> strip: repaired equals original; norepair equals original; fault changes the line
+original  exit=0 disk: members=25s+0b pairs=20 inside=20 patterns=11:20 separating=xy(ss):20 four=20/20 half-two=20/20 arcs-of-kind-both=20 edges-of-saves=15
+repaired  exit=0 disk: members=25s+0b pairs=20 inside=20 patterns=11:20 separating=xy(ss):20 four=20/20 half-two=20/20 arcs-of-kind-both=20 edges-of-saves=15
+norepair  exit=0 disk: members=25s+0b pairs=20 inside=20 patterns=11:20 separating=xy(ss):20 four=20/20 half-two=20/20 arcs-of-kind-both=20 edges-of-saves=15
+fault     exit=0 disk: members=25s+0b pairs=20 inside=20 patterns=00:20 separating=--(ss):20 four=0/0 half-two=0/0 arcs-of-kind-both=20 edges-of-saves=0
+  -> disk: repaired equals original; norepair equals original; fault changes the line
+original  exit=0 capped: members=40s+0b pairs=54 inside=71 patterns=11:71 separating=xy(ss):71 four=71/71 half-two=71/71 arcs-of-kind-both=38 edges-of-saves=38
+repaired  exit=0 capped: members=40s+0b pairs=54 inside=71 patterns=11:71 separating=xy(ss):71 four=71/71 half-two=71/71 arcs-of-kind-both=38 edges-of-saves=38
+norepair  exit=0 capped: members=40s+0b pairs=54 inside=71 patterns=11:71 separating=xy(ss):71 four=71/71 half-two=71/71 arcs-of-kind-both=38 edges-of-saves=38
+fault     exit=0 capped: members=40s+0b pairs=54 inside=71 patterns=00:71 separating=--(ss):71 four=0/0 half-two=0/0 arcs-of-kind-both=38 edges-of-saves=0
+  -> capped: repaired equals original; norepair equals original; fault changes the line
+original  exit=0 T2: members=2s+0b pairs=1 inside=2 patterns=12:1,21:1 separating=xy(ss):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=4
+repaired  exit=0 T2: members=2s+0b pairs=1 inside=2 patterns=12:1,21:1 separating=xy(ss):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=4
+norepair  exit=0 T2: members=2s+0b pairs=1 inside=2 patterns=12:1,21:1 separating=xy(ss):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=4
+fault     exit=0 T2: members=2s+0b pairs=1 inside=2 patterns=00:2 separating=--(ss):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=0
+  -> T2: repaired equals original; norepair equals original; fault changes the line
+original  exit=0 BB: members=0s+2b pairs=1 inside=2 patterns=00:2 separating=xy(bb):2 four=2/2 half-two=0/0 arcs-of-kind-both=0 edges-of-saves=0
+repaired  exit=0 BB: members=0s+2b pairs=1 inside=2 patterns=00:2 separating=xy(bb):2 four=2/2 half-two=0/0 arcs-of-kind-both=0 edges-of-saves=0
+norepair  exit=0 BB: members=0s+2b pairs=1 inside=2 patterns=00:2 separating=xy(bb):2 four=2/2 half-two=0/0 arcs-of-kind-both=0 edges-of-saves=0
+fault     exit=0 BB: members=0s+2b pairs=1 inside=2 patterns=00:2 separating=-y(bb):2 four=0/0 half-two=0/0 arcs-of-kind-both=0 edges-of-saves=0
+  -> BB: repaired equals original; norepair equals original; fault changes the line
+original  exit=0 S1: members=1s+1b pairs=1 inside=2 patterns=00:2 separating=x-(bs):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=0
+repaired  exit=0 S1: members=1s+1b pairs=1 inside=2 patterns=00:2 separating=x-(bs):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=0
+norepair  exit=0 S1: members=1s+1b pairs=1 inside=2 patterns=00:2 separating=x-(bs):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=0
+fault     exit=0 S1: members=1s+1b pairs=1 inside=2 patterns=00:2 separating=--(bs):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=0
+  -> S1: repaired equals original; norepair equals original; fault changes the line
+original  exit=0 MX: members=1s+1b pairs=1 inside=2 patterns=02:1,21:1 separating=xy(bs):2 four=1/1 half-two=0/0 arcs-of-kind-both=2 edges-of-saves=2
+repaired  exit=0 MX: members=1s+1b pairs=1 inside=2 patterns=02:1,21:1 separating=xy(bs):2 four=1/1 half-two=0/0 arcs-of-kind-both=2 edges-of-saves=2
+norepair  exit=0 MX: members=1s+1b pairs=1 inside=2 patterns=02:1,21:1 separating=xy(bs):2 four=1/1 half-two=0/0 arcs-of-kind-both=2 edges-of-saves=2
+fault     exit=0 MX: members=1s+1b pairs=1 inside=2 patterns=00:2 separating=--(bs):2 four=0/0 half-two=0/0 arcs-of-kind-both=2 edges-of-saves=0
+  -> MX: repaired equals original; norepair equals original; fault changes the line
+original  exit=0 sixfrag: members=6s+0b pairs=0 inside=0 patterns=none separating=none four=0/0 half-two=0/0 arcs-of-kind-both=18 edges-of-saves=0
+repaired  exit=0 sixfrag: members=6s+0b pairs=0 inside=0 patterns=none separating=none four=0/0 half-two=0/0 arcs-of-kind-both=18 edges-of-saves=0
+norepair  exit=0 sixfrag: members=6s+0b pairs=0 inside=0 patterns=none separating=none four=0/0 half-two=0/0 arcs-of-kind-both=18 edges-of-saves=0
+fault     exit=0 sixfrag: members=6s+0b pairs=0 inside=0 patterns=none separating=none four=0/0 half-two=0/0 arcs-of-kind-both=18 edges-of-saves=0
+  -> sixfrag: repaired equals original; norepair equals original; fault does not change the line
+original  exit=0 kept: members=4s+0b pairs=3 inside=6 patterns=11:3,12:1,21:2 separating=xy(ss):6 four=3/3 half-two=3/3 arcs-of-kind-both=9 edges-of-saves=9
+repaired  exit=0 kept: members=4s+0b pairs=3 inside=6 patterns=11:3,12:1,21:2 separating=xy(ss):6 four=3/3 half-two=3/3 arcs-of-kind-both=9 edges-of-saves=9
+norepair  exit=0 kept: members=4s+0b pairs=3 inside=6 patterns=11:3,12:1,21:2 separating=xy(ss):6 four=3/3 half-two=3/3 arcs-of-kind-both=9 edges-of-saves=9
+fault     exit=0 kept: members=4s+0b pairs=3 inside=6 patterns=00:6 separating=--(ss):6 four=0/0 half-two=0/0 arcs-of-kind-both=9 edges-of-saves=0
+  -> kept: repaired equals original; norepair equals original; fault changes the line
+original  exit=0 r7: members=0s+0b pairs=0 inside=0 patterns=none separating=none four=0/0 half-two=0/0
+repaired  exit=0 r7: members=0s+0b pairs=0 inside=0 patterns=none separating=none four=0/0 half-two=0/0
+norepair  exit=0 r7: members=0s+0b pairs=0 inside=0 patterns=none separating=none four=0/0 half-two=0/0
+fault     exit=0 r7: members=0s+0b pairs=0 inside=0 patterns=none separating=none four=0/0 half-two=0/0
+  -> r7: repaired equals original; norepair equals original; fault does not change the line
+original  exit=0 hex7: members=66s+0b pairs=66 inside=132 patterns=00:132 separating=--(ss):132 four=0/0 half-two=0/0
+repaired  exit=0 hex7: members=66s+0b pairs=66 inside=132 patterns=00:132 separating=--(ss):132 four=0/0 half-two=0/0
+norepair  exit=0 hex7: members=66s+0b pairs=66 inside=132 patterns=00:132 separating=--(ss):132 four=0/0 half-two=0/0
+fault     exit=0 hex7: members=66s+0b pairs=66 inside=132 patterns=00:132 separating=--(ss):132 four=0/0 half-two=0/0
+  -> hex7: repaired equals original; norepair equals original; fault does not change the line
+objects=11 moved=0 control=11 of 11 fault=8 nonzero-exits=0

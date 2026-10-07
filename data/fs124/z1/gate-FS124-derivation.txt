@@ -1,0 +1,103 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 8
+entry lint
+  claim C124-RADIUS-GRAPH: minds 1
+  claim C124-RADIUS-GRAPH: prior art partly
+  claim C124-RADIUS-COUNTABLE: governed by C124-RADIUS-GRAPH (hand, minds 1)
+  claim C124-RADIUS-COUNTABLE: minds 1
+  warn  FS124-derivation.md:65 (C124-RADIUS-COUNTABLE): prior art owed — novelty unmeasured; a standing finding
+  claim C124-RADIUS-COUNTABLE: prior art owed
+  claim C124-RADIUS-UP: governed by C124-RADIUS-GRAPH (hand, minds 1)
+  claim C124-RADIUS-UP: minds 1
+  claim C124-RADIUS-UP: prior art partly
+  claim C124-RADIUS-DOWN: minds 1
+  claim C124-RADIUS-DOWN: prior art known
+  claim C124-RADIUS-FIVE: governed by C124-RADIUS-UP (derived from, minds 1)
+  claim C124-RADIUS-FIVE: minds 1
+  claim C124-RADIUS-FIVE: prior art partly
+  claim C124-EVERY-DIRECTION: minds 1
+  claim C124-EVERY-DIRECTION: prior art partly
+  claim C124-SHADOW-OPEN: minds 1
+  claim C124-SHADOW-OPEN: prior art partly
+  claim C124-TYPE: minds 1
+  claim C124-TYPE: prior art partly
+  claim C124-CENTRE-HALF: minds 1
+  claim C124-CENTRE-HALF: prior art partly
+  claim C124-CENTRE: governed by C124-SHADOW-OPEN (hand, minds 1)
+  claim C124-CENTRE: minds 1
+  claim C124-CENTRE: prior art partly
+  claim C124-STRADDLE: governed by C124-SHADOW-OPEN (hand, minds 1)
+  claim C124-STRADDLE: minds 1
+  claim C124-STRADDLE: prior art partly
+  claim C124-COMPLETION: governed by C124-STRADDLE (derived from, minds 1)
+  claim C124-COMPLETION: minds 1
+  claim C124-COMPLETION: prior art partly
+  claim C124-ANTIPODE: governed by C124-SHADOW-OPEN (hand, minds 1)
+  claim C124-ANTIPODE: minds 1
+  claim C124-ANTIPODE: prior art partly
+  claim C124-OPEN: minds 1
+  warn  FS124-derivation.md:273 (C124-OPEN): prior art owed — novelty unmeasured; a standing finding
+  claim C124-OPEN: prior art owed
+  claim C124-FORCED-PIECES: governed by C124-TYPE (hand, minds 1)
+  claim C124-FORCED-PIECES: minds 1
+  claim C124-FORCED-PIECES: prior art partly
+  claim C124-FORCED: governed by C124-FORCED-PIECES (derived from, minds 1)
+  claim C124-FORCED: minds 1
+  claim C124-FORCED: prior art partly
+  claim C124-LONE: governed by C124-FORCED-PIECES (derived from, minds 1)
+  claim C124-LONE: governed by C124-CENTRE-HALF (hand, minds 1)
+  claim C124-LONE: minds 1
+  claim C124-LONE: prior art partly
+  claim C124-LONE-EXISTS: minds 1
+  claim C124-LONE-EXISTS: prior art known
+  claim C124-BOTH: governed by C124-LONE (derived from, minds 1)
+  claim C124-BOTH: minds 1
+  claim C124-BOTH: prior art partly
+  claim C124-FOUR: governed by C124-LONE (derived from, minds 1)
+  claim C124-FOUR: minds 1
+  claim C124-FOUR: prior art partly
+  claim C124-SECOND: governed by C124-BOTH (derived from, minds 1)
+  claim C124-SECOND: governed by C124-FOUR (derived from, minds 1)
+  claim C124-SECOND: minds 1
+  claim C124-SECOND: prior art partly
+  claim C124-EDGE-CLOSED: minds 1
+  claim C124-EDGE-CLOSED: prior art partly
+  claim C124-EDGE: minds 1
+  claim C124-EDGE: prior art known
+  claim C124-SIX: governed by C124-SIX-CONES (derived from, minds 1)
+  claim C124-SIX: minds 1
+  claim C124-SIX: prior art partly
+  claim C124-SIX-CONES: governed by C124-CENTRE (derived from, minds 1)
+  claim C124-SIX-CONES: minds 1
+  claim C124-SIX-CONES: prior art partly
+  claim C124-HALF: minds 1
+  claim C124-HALF: prior art partly
+  claim C124-HALF-TWO: minds 1
+  claim C124-HALF-TWO: prior art partly
+  claim C124-KIND: minds 1
+  claim C124-KIND: prior art partly
+  claim C124-FORCED-SEVEN: minds 1
+  claim C124-FORCED-SEVEN: prior art partly
+  entries: 30  derived: 29  stalled, gapped or refuted: 1
+quotes
+  statements named in more than one place: 0
+controls
+  ok    radius-motions: printed 'circumradius=0.4 disc-radius=2.0 motions=20000 unit-pairs-per-motion=11 monochromatic-pairs=0'; with the fault planted ('' → '--fault') it printed 'circumradius=0.6 disc-radius=2.0 motions' — it fires
+  ok    shadow-geometry: printed 'arc-radius=1.0 centre-samples-far,near=1961,2039 straddle-samples=11000 antipode-samples,inside-radius-2=4000,2006 disagreements=0'; with the fault planted ('' → '--fault') it printed 'arc-radius=0.9 centre-samples-far,near=0' — it fires
+  ok    r7-tight: printed 'windows=3 (0.5,59.5):0|4 (120.5,179.5):2|5 (240.5,299.5):1|6 centre-samples=9720 with-inside-label=3213 with-outside-label=27 centre-violations=0 completion-labels=[3] completion-violations=0 antipode-samples=1080 antipode-violations=0 ends-centring-tight-arcs=6/6 completions-centring-tight-arcs=0/6'; with the fault planted ('' → '--fault') it printed 'windows=3 (0.5,59.5):0|4 (120.5,179.5):0' — it fires
+  ok    maps-tight: printed 'strip: unit-arcs=46 tight=42 centres-in-fragment=42 of-kind-both=38 centre-samples-inside-label,outside-label=1514,1366 centre-violations=0 completions-in-fragment=74 completion-samples=1850 completion-violations=0 ; disk: unit-arcs=20 tight=20 centres-in-fragment=20 of-kind-both=20 centre-samples-inside-label,outside-label=720,720 centre-violations=0 completions-in-fragment=40 completion-samples=1000 completion-violations=0'; with the fault planted ('' → '--fault') it printed 'strip: unit-arcs=46 tight=42 centres-in-' — it fires
+  ok    hex-half-none: printed 'colouring=hex7 circumradius=0.5 labels-at-vertex=3 three-label-points-on-its-ring=3 ring-directions=720 tight-directions=0'; with the fault planted ('' → '--fault') it printed 'colouring=R7 point=lattice ring-directio' — it fires
+  ok    maps-ends: printed 'strip: unit-arc-pieces=46 ends=92 ends-that-centre-a-unit-arc=0 ; disk: unit-arc-pieces=20 ends=40 ends-that-centre-a-unit-arc=10'; with the fault planted ('' → '--fault') it printed 'strip: unit-arc-pieces=46 ends=92 ends-t' — it fires
+  ok    quadrant-count: printed '0'; with the fault planted ('==' → 'in'; '' → "+'c'") it printed '195' — it fires
+  ok    saves-fragments: printed 'T2: members=2s+0b pairs=1 inside=2 patterns=12:1,21:1 separating=xy(ss):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=4 BB: members=0s+2b pairs=1 inside=2 patterns=00:2 separating=xy(bb):2 four=2/2 half-two=0/0 arcs-of-kind-both=0 edges-of-saves=0 MX: members=1s+1b pairs=1 inside=2 patterns=02:1,21:1 separating=xy(bs):2 four=1/1 half-two=0/0 arcs-of-kind-both=2 edges-of-saves=2 kept: members=4s+0b pairs=3 inside=6 patterns=11:3,12:1,21:2 separating=xy(ss):6 four=3/3 half-two=3/3 arcs-of-kind-both=9 edges-of-saves=9'; with the fault planted ('' → '--fault') it printed 'T2: members=2s+0b pairs=1 inside=2 patte' — it fires
+  ok    saves-r7: printed 'r7: members=0s+0b pairs=0 inside=0 patterns=none separating=none four=0/0 half-two=0/0'; with the fault planted ('r7' → 'hex7') it printed 'hex7: members=66s+0b pairs=66 inside=132' — it fires
+  ok    saves-lone: printed 'S1: members=1s+1b pairs=1 inside=2 patterns=00:2 separating=x-(bs):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=0'; with the fault planted ('' → '--fault') it printed 'S1: members=1s+1b pairs=1 inside=2 patte' — it fires
+  ok    saves-maps: printed 'strip: members=40s+0b pairs=54 inside=71 patterns=11:71 separating=xy(ss):71 four=71/71 half-two=71/71 arcs-of-kind-both=38 edges-of-saves=38 disk: members=25s+0b pairs=20 inside=20 patterns=11:20 separating=xy(ss):20 four=20/20 half-two=20/20 arcs-of-kind-both=20 edges-of-saves=15 capped: members=40s+0b pairs=54 inside=71 patterns=11:71 separating=xy(ss):71 four=71/71 half-two=71/71 arcs-of-kind-both=38 edges-of-saves=38'; with the fault planted ('' → '--fault') it printed 'strip: members=40s+0b pairs=54 inside=71' — it fires
+  ok    second-count: printed 'cases=36 labels-in-common=[2] absent-pairs-disjoint=36 one-alternating-hexagon=36 second: OK'; with the fault planted ('' → '--fault') it printed 'cases=54 labels-in-common=[2, 3] absent-' — it fires
+  ok    edge-exact: printed 'w-at-distance-1-from-V1,V0,A-1,A1=True circles-meet-S(w)-at-the-members=True T1-part-inner=[-1, -1, -1] T0-part-inner=[-1, -1, -1] T2-part-has-a-point-outside=True arches-crossing=[True, True, True] direction-(12,5)/13:outside-S(V1),outside-S(A-1),inside-S(A1)=True labels-T0,T1,T2,U-1,U0,U1=ROMBPG edge: OK'; with the fault planted ('' → '--fault') it printed 'w-at-distance-1-from-V1,V0,A-1,A1=False ' — it fires
+  ok    six-cones: printed 'angle-between-far-ends=120 equal-signs=[0, 0] mixed-signs-widths=[60] most-covered-by-two-pairs=240 of 360'; with the fault planted ('' → '--fault') it printed 'angle-between-far-ends=90 equal-signs=[0' — it fires
+  ok    half-sides: printed 'side-patterns=9 consistent=2 K1=in,K2=out:inside-x=t1;outside-x=t0 K1=out,K2=in:inside-x=t0;outside-x=t1'; with the fault planted ('' → '--fault') it printed 'side-patterns=9 consistent=9 K1=in,K2=in' — it fires
+  ok    kind-cap: printed 'cap:height=1/61,half-chord=11/61(2*asin=20.78deg) ; circumradius=2/5: cap-inside-edge=True enlarged-tile-diameter=4/5 weakly-proper-by-margins=True centre-inside-opposite-tile=True tight-pair=(0, 1) tight-directions=196/3600 labels-at-centre=[6] labels-at-completions=[2, 4] monochromatic-of-200000-unit-pairs=0 ; circumradius=1/2: cap-inside-edge=True enlarged-tile-diameter=1 weakly-proper-by-margins=True centre-inside-opposite-tile=True tight-pair=(0, 1) tight-directions=196/3600 labels-at-centre=[6] labels-at-completions=[2, 4] monochromatic-of-200000-unit-pairs=0'; with the fault planted ('' → '--fault') it printed 'cap:height=1/61,half-chord=11/61(2*asin=' — it fires
+  ok    seven-exact: printed 'circumradius=2/5 x=up(0,0) x-labels=[0, 1, 3] y=down(-2,1) y-labels=[2, 4, 5] squared-distance=28/25 common-unit-point-strictly-inside-the-inscribed-disc-of-hexagon=(0, 2) of-label=6 seven: OK'; with the fault planted ('' → '--fault') it printed 'circumradius=2/5 x=up(0,0) x-labels=[0, ' — it fires
+  controls: 17  fired on their faults: 17
+GATE: PASS (0 failures, 2 warnings)
+exit=0

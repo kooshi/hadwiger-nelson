@@ -1,0 +1,3 @@
+== disk SCAN (control): (whole tile, germ at rho=0.0125) over 30 members x 360 directions: crossing/crossing:21630 crossing/inner:2990 inner/inner:3280 outer/outer:6300
+== sixfrag SCAN (control): (whole tile, germ at rho=0.0125) over 13 members x 360 directions: crossing/crossing:9384 crossing/inner:1860 inner/inner:2076 outer/outer:3960
+== r7 SCAN (control): (whole tile, germ at rho=0.0125) over 16 members x 360 directions: crossing/crossing:11616 crossing/inner:5664 inner/inner:5760 outer/outer:11520

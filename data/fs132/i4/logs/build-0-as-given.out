@@ -1,0 +1,88 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261007T125717Z-2160951.log
+    ⚠ [5855/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.CyclicCentre
+    warning: Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.lean:49:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.lean:60:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.lean:66:8: declaration uses `sorry`
+    ⚠ [5856/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.Winding
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:34:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:38:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:43:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:54:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:71:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:77:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:83:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:90:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:103:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:130:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:140:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:151:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:160:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:172:8: declaration uses `sorry`
+    ⚠ [5868/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.Placeholders
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Placeholders.lean:30:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Placeholders.lean:38:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Placeholders.lean:46:8: declaration uses `sorry`
+    ⚠ [5876/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.Chart
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:19:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:24:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:29:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:33:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:38:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:42:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:47:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:52:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:56:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:60:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Chart.lean:64:8: declaration uses `sorry`
+    ⚠ [5877/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.Excl
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Excl.lean:22:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Excl.lean:31:8: declaration uses `sorry`
+    ⚠ [5878/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.Shift
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Shift.lean:25:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Shift.lean:29:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Shift.lean:33:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Shift.lean:42:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Shift.lean:49:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Shift.lean:55:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Shift.lean:62:8: declaration uses `sorry`
+    ⚠ [5879/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.StepLemma
+    warning: Proofs/HadwigerNelson/Plane/SixRing/StepLemma.lean:49:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/StepLemma.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/StepLemma.lean:72:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/StepLemma.lean:83:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/StepLemma.lean:95:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/StepLemma.lean:109:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/StepLemma.lean:130:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/StepLemma.lean:140:8: declaration uses `sorry`
+    ⚠ [5946/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.ChartMeasure
+    warning: Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean:30:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean:36:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean:43:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean:53:8: declaration uses `sorry`
+    ⚠ [5947/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.Tips
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Tips.lean:26:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Tips.lean:32:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Tips.lean:40:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Tips.lean:49:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Tips.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Tips.lean:69:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Tips.lean:78:8: declaration uses `sorry`
+    ⚠ [5951/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.Kill
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Kill.lean:28:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Kill.lean:38:8: declaration uses `sorry`
+    ⚠ [5952/5970] Replayed Proofs.HadwigerNelson.Plane.SixRing.State
+    warning: Proofs/HadwigerNelson/Plane/SixRing/State.lean:34:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/State.lean:40:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/State.lean:46:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/State.lean:53:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/State.lean:64:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/State.lean:76:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/State.lean:84:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/State.lean:93:8: declaration uses `sorry`
+    All targets up-to-date (5970 jobs).
+==> build: OK — all 1860 modules already up to date, nothing built, 11 module(s) with warnings, 3s
+    full output: build/gate/build/20261007T125717Z-2160951.log
+exit=0

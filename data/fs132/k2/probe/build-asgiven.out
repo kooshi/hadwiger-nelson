@@ -1,0 +1,38 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261007T120628Z-1932875.log
+    ⚠ [5854/5959] Replayed Proofs.HadwigerNelson.Plane.SixRing.CyclicCentre
+    warning: Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.lean:49:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.lean:60:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.lean:66:8: declaration uses `sorry`
+    ⚠ [5855/5959] Replayed Proofs.HadwigerNelson.Plane.SixRing.Winding
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:34:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:38:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:43:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:54:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:71:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:77:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:83:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:90:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:103:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:130:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:140:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:151:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:160:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Winding.lean:172:8: declaration uses `sorry`
+    ⚠ [5866/5959] Replayed Proofs.HadwigerNelson.Plane.SixRing.Orbit
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:34:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:57:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:68:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:83:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:95:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:129:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:174:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean:183:8: declaration uses `sorry`
+    All targets up-to-date (5959 jobs).
+==> build: OK — all 1849 modules already up to date, nothing built, 3 module(s) with warnings, 2s
+    full output: build/gate/build/20261007T120628Z-1932875.log
+exit=0

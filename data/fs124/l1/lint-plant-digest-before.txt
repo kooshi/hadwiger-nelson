@@ -1,0 +1,1 @@
+94b537c508b47f09f3f11c1c3e31392afe9d28e8a82e5283dd63ff57241e1dae  Proofs/HadwigerNelson/Plane/RadiusOutside.lean

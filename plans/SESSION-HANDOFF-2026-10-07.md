@@ -26,6 +26,69 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
+## 0d. READ THIS FIRST — brought current at 19:38 UTC, 2026-10-07 (after the compaction Kooshi asked for at 16:21)
+
+**Held / Derived / Opened.** Held: FS-132's first theorem (`783e7bdb`); FS-124's disc criterion (gated `24a42aa9`, filed
+`1344fdc0`). **FS-124 is Derived; every statement of its second module is kernel-checked on two branches and its landing is
+in flight (below).** **FS-136, "the point across", is DERIVED and filed (`07bf6096` — THE NEXT FILING'S FACT-AUDIT BASE)**:
+`plans/FS136-derivation.md`, 21 entries, one mind each; rows 165–167; G100 filed; every statement is about colourings that
+already have named regions or corners; no value moved (FS-136 inventory items 1–17). **FS-137, collars
+(`plans/STUB-collars.md`), is minted, unranked.** Ledger rows 1–167; grokkings to G100; stubs to FS-137; `CLAUDE.md` 68,188
+of 80,000 bytes; grokkings 186,876 of 200,000.
+
+**Running** (agent ids in the scratch file `agents.txt`, never in a repo file). **Disk is at 27 GB free**: ask Kooshi before
+removing any worktree's build copy; reuse a retired tree instead of copying a build.
+1. **FS124-L2 — A LANDING IN FLIGHT since 19:38 UTC** (FS-124 inventory item 49; worktree and branch `fs124-wi3`; brief
+   `data/fs124/briefs/FS124-L2-landing.md`). **Until it is back: no `CLAUDE.md` filing, and nothing committed to `main`
+   outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`.** It joins branch
+   `fs124-wk3` (the three-arcs module), closes the last `sorry` by two written lines, merges `main`, gates eight modules,
+   sends one line when green, pushes, hands back with drafts. Then: the three digests against
+   `data/fs124/l1/gate/receipt-{axioms,vacuity,assumptions}-final.log`; file its drafts by a script on the pattern of
+   `data/fs124/l1/file_fs124_landed.py` (counts; rows 162–163's grades; the open-milestones sentence; item 31's clause; the
+   theorem record's dated lines and its stale head; C124-FORCED's `uses only` line; `LEAN.md`'s unfiled lines; the atlas
+   nodes `ONEPIECE`, `PAIRPAYS`); fact audit `--base 07bf6096`; decide from its list of which of the thirty entries are
+   kernel theorems whether FS-124 is Closed; **tell Kooshi: held — the nine statements, the clause in its authors'
+   wording included.** If my push is rejected because it landed first: `git pull --rebase`, push, never force.
+2a. **FS136-K1** (kernel planner, **blind first**; FS-136 inventory item 16) — seven statements of FS-136 from
+   `data/fs136/claims-K1.md`, in worktree `fs136-wk1` (**the old `fs124-wk2` tree, moved; branch `fs136-wk1`** cut from
+   `fs124-wi3` at `e33b5088`). **While it is blind, commit subjects on `main` name no route for those statements.** At
+   its "phase 1 committed" message: lift the fence by reply, naming `plans/FS136-derivation.md` §§ 1–2 and the three
+   statements with no second derivation (C136-FORCED, C136-CLASS's order, C136-COLLAR). At its hand-back: an implementer
+   on its skeleton (its branch must merge the landed module first).
+3. **FS136-P2** (asking lane; launched 19:40 UTC; FS-136 inventory item 18) — the re-rank after FS-136 Derived and the next
+   milestone's question card (brief `data/fs136/briefs/FS136-P2-rerank.md`; record
+   `plans/POROS-2026-10-07-fs136-derived.md`). **It messages when the card is saved → open the next milestone**: read its
+   stub, open its inventory (`plans/FSnn-close-inventory.md`), fix the claim list from the card by script, brief the
+   opening job (`ephodos`; pattern `data/fs131/briefs/scripts/mk-fs136-e1.py`). **Its re-rank is filed only after the
+   landing is back** (pattern `data/fs124/p1/file_fs124_rerank.py`). Kooshi may override its choice of milestone: tell
+   him the choice when it arrives.
+
+**A side page, published at Kooshi's word**: the unit-step puzzle (`visualizations/unit-step-puzzle/page.html`, artifact
+`https://claude.ai/artifact/Yafj379vqWgrVUZaaK3AQr`, private). To change it: edit `page.html`, run its `build.py` and
+`test.js`, publish the same path again.
+
+**Open with Kooshi, unanswered** (told, with defaults): the disk (default: I leave old build copies alone); a blind
+verifier on the collar (default: none; the kernel planner's blind phase is the second look). **Corrections told to him
+today**: three sentences of mine about FS-136, each corrected in the next report.
+
+**For FS-136's kernel claim list, when its planner is briefed** (FS-136 inventory rulings 4 (b), 5 (d)): the head statement
+(the table), the label form of the count, the one-point form — three short statements over `ae_onSide_of_label`, a leaf
+of FS-124's second module; none of the five exclusions unless the asking lane names a consumer.
+
+**Queued for kernel slots** (none briefed): the second module's implementer; the θ-lemma; a planner for FS-132's seven
+further statements (`data/fs132/claims-K1.md`, "tier A", plus a kernel model of the ring hypothesis); the centres' kernel
+job; FS-133's kernel planner (compute the rigidity theorem's cone and price a port first). **Line 11 of
+`plans/SEARCH-QUEUE.md` is to run at tomorrow's search.** **Owed filings, small**: ledger claim-list lines for rows
+155–164; one count cited to two papers in two rows of the stub list; the atlas's older debts. **Disk**: about 45 GB
+free; build copies of landed branches (`fs132-wi2`, `-wi3`, `-wi4`) may be removed when space is needed.
+
+**How this session works** (unchanged): briefs by generators in `data/fs131/briefs/scripts/` (`mkbrief.py`), gated with
+`python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>` from the root; an amended brief gets a dated amendment,
+the gate, and a one-line message; statements into claim lists by script; inventory entries with "My receipt"; rulings in
+four parts; times read from the clock (`date -u`); a filing script and its commit in one `&&` chain; never `cd` in a
+compound command; a fenced (blind) brief carries no verdict, confidence or hint, and commit subjects stay neutral while a
+mind is blind. Corrections I owe Kooshi are told in the report where they arise — today's are all told.
+
 ## 0c. AFTER KOOSHI'S SIXTH WORD (2026-10-07, about 11:40 UTC) — READ THIS SECTION FIRST; §§ 0a and 0b are the night before it
 
 **His word** (verbatim in `data/external/EXT-OAI1-request.md` § Kooshi's sixth word, with the three items it answers and my
@@ -39,13 +102,30 @@ the next milestone**; staffing is his cap of three Opus slots.
 `plans/FS124-close-inventory.md`, items 1–5; its claim list `data/fs124/claims.md`); **the re-rank is filed** (the commit after
 `4bb0c8c4`; **the next filing's fact-audit base is that commit** — `git log -1 --format=%h -- plans/FRONTIER-STUBS.md`).
 
+**State at 16:06 UTC (read from the clock): FS-132's first theorem is HELD** (landed and filed: FS-132 inventory items 50–51;
+commit `783e7bdb`); **FS-124 is DERIVED** (filed: FS-124 inventory item 30; commit `bd3df943` — **the next filing's fact-audit
+base**); **FS-136, its successor, is OPENED** (inventory `plans/FS136-close-inventory.md`).
+
 **Running (three slots):**
 
 | job | where | what it hands on | on its message or hand-back |
 |---|---|---|---|
-| **FS124-E1** (`ephodos`) — FS-124's opening, then its six first claims | `main`; record `plans/FS124-E1-derivation.md`, plan `plans/FS124-tight-pairs.md`; brief `data/fs124/briefs/FS124-E1-opening.md`; launched 12:52 UTC | first message: each claim's exact statement with its *not claimed* line → fix by dated lines in `data/fs124/claims.md`; then a verdict per claim; after the third claim, one paragraph on what a completion carries (the card's three branches turn on it) | log in FS-124's inventory; **anything that would fix the value → Kooshi at once, "claimed by one mind, unchecked"**; when the completion's rule and the count at a four-label centre are derived, queue line 12 of `plans/SEARCH-QUEUE.md` for the day's Searcher; at hand-back: a successor deriver on the remaining claims, and (workflow step 4) a kernel planner on FS-124's derived claims, blind first, from a kernel claim list |
-| **FS132-I3** (`debruijn-implementer`) — the step lemma, then the shift's calculus (lots C, B) | worktree and branch `fs132-wi3`; record `plans/FS132-I3-implementation.md` there; brief `data/fs132/briefs/FS132-I3-step-lemma.md` | a message when `step_lemma` is proved — the one step of the exclusion with a single derivation | log; a line to Kooshi (the hand proof's thinnest step checked by the kernel) — or, if a leaf is false, at once |
-| **FS132-I4** (`debruijn-implementer`) — the join, then lots E and D | worktree and branch `fs132-wi4` (cut from `fs132-wk1` at `1c5e2609`; it merges `fs132-wi2`, the port); record `plans/FS132-I4-implementation.md` there; brief `data/fs132/briefs/FS132-I4-join.md`; launched 12:56 UTC | a message when the join builds (did any leaf change?); then the leaves on the ported lemmas and on the chart's null sets | log; **lot A (the chart's geometry, the tips: 18 leaves, nothing ported) is unassigned** — the next free kernel slot, on the pattern of the two briefs above (generators `data/fs131/briefs/scripts/mk-fs132-i3.py`, `mk-fs132-i4.py`) |
+| **FS124-L1** (`debruijn-implementer`) — **A LANDING, IN FLIGHT since 16:06 UTC: commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`; no `CLAUDE.md` filing until it is back** | worktree and branch `fs124-wl1` (cut from `fs124-wk1` at `80ee1983`: the disc criterion's module, 57 theorems); record `plans/FS124-L1-landing.md` there; brief `data/fs124/briefs/FS124-L1-landing.md` | one line when the gate is green, before it pushes; then its hand-back with the drafts | **the filing that makes the disc criterion held**: the three digests against `data/fs132/l2/gate/receipt-{axioms,vacuity,assumptions}-final.log`; its drafts (counts; row 161's grade; the first planner's sentence on which half needs the import; the phrase "kernel-checked on a branch" wherever it stands; the theorem record's dated line; the atlas node); fact audit `--base bd3df943`; the pattern is `data/fs132/l2/file_fs132_landed.py`; **tell Kooshi: held — seven iff some disc has no weak six-colouring, on one declared outside theorem** |
+| **FS124-K2** (`debruijn`) — the kernel planner for FS-124's second module, **blind first** | worktree and branch `fs124-wk2`; record `plans/FS124-kernel-plan-2.md` there; brief `data/fs124/briefs/FS124-K2-kernel-plan.md` with Amendment 1 (its fence extended) | a message when its phase-1 plan is committed (it has reported mid-job: all nine typed, seven generalizations, one Jordan-grade fact — FS-124 inventory item 29) | **reply to lift the fence**: name `plans/FS124-derivation.md` §§ 2–3, the two derivers' records, **and the step the deriver flagged (C124-LONE's second step)**; at hand-back: an implementer on its skeleton (worktree cut from its tip, build copied from a tree built today); **the θ-lemma is owed as a kernel job by name** |
+| **FS136-E1** (`ephodos`) — FS-136's opening, then its five first claims | `main`; record `plans/FS136-E1-derivation.md`, plan `plans/FS136-the-point-across.md`; brief `data/fs136/briefs/FS136-E1-opening.md` | each claim's statement with its *not claimed* line (dated lines in `data/fs136/claims.md`); the reading of every held object at points of four or more labels; a verdict per claim, each saying what is new beyond the held entry it restates | log in `plans/FS136-close-inventory.md`; **an exclusion on a disc would fix the value by the disc criterion → Kooshi at once, "claimed by one mind, unchecked"**; a held object whose stop is not a point across → read its artifact; at hand-back → the asking lane (the card's three branches), or a second deriver on the remaining claims |
+
+**Queued for kernel slots, in order** (none briefed): an implementer on the second module's skeleton (after FS124-K2); the
+θ-lemma; a planner for FS-132's seven further statements (`data/fs132/claims-K1.md`, "tier A"; add to its brief a kernel
+model of the ring hypothesis — FS-132 inventory item 51 (d)); the centres' kernel job (the mesh threshold a parameter);
+FS-133's kernel planner (the density result: it rests on the release's rigidity theorem — have the planner compute that
+theorem's cone and price a port before anything is declared; Kooshi agreed this morning that it follows the exclusion).
+**Disk**: 45 GB free; each worktree's build copy is 5 GB — the copies under `fs132-wi2`, `fs132-wi3`, `fs132-wi4` belong to
+branches now merged and landed, and may be removed when space is needed (not removed by me).
+
+**Done this afternoon in the kernel lane** (FS-132 inventory items 40–44): the port (branch `fs132-wi2`); the join (no leaf
+changed); **the step lemma's module and the shift's, proved** (branch `fs132-wi3`, tip `e9dd2f46`: 33 theorems on the standard
+three axioms) — so of the exclusion's nine steps, the two analytic ones are kernel-checked on a branch. Six bullets filed in
+`LEAN.md` § Searching — Lean.
 
 **Done since the morning** (FS-132 inventory items 33–41): the record job's second half; the planner's successor (49 leaves in
 five lots; the kernel claim list extended by seven statements, `data/fs132/claims-K1.md`); **the port** (163 declarations on

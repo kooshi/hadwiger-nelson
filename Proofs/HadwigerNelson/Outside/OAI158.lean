@@ -38,6 +38,10 @@ the two equivalences above, which say in this library's own vocabulary what the 
 nine characterisations of the copied definitions that elaborate, as one text, at both pins (`SemanticBody.lean.inc`
 there).
 
+**Licence.** The release is published under the Apache License, Version 2.0, and the declarations copied from it
+below are used under that licence: a byte-identical copy of its `LICENSE` file is beside this module,
+`Proofs/HadwigerNelson/Outside/OAIMath2026-LICENSE.txt`.
+
 **Read aloud.** H: colour every point of the plane with one of five colours; then some two points exactly one unit
 apart have the same colour. T: suppose `k` colours can be given to the points of the plane so that no two points one
 unit apart share a colour — with no regularity asked of the colouring. Then there is a Borel-measurable colouring

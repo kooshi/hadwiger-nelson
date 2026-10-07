@@ -83,6 +83,14 @@ cubic three-colour vertex read arcs and degree three, or only a triangle centre'
 asking lane's re-aim of this stub at the exact class (`plans/POROS-2026-10-07-fs132-night.md` § The ranked table, rank 3, and
 § Banners) is drafted, not filed. Proposed G98 (six is the count at which the outside labels wind).
 
+*Since FS-124 (FS124-Z1, the record job, 2026-10-07; every entry named is in `plans/FS124-derivation.md`, [hand] or derived from [hand] entries, **one mind, kernel pending**):* **the sharp form of the complementary pair has its
+statement with content, on pieces.** C132-COMP-SHARP's conclusion is met by a one-point set (a dated correction stands under it
+in `plans/FS132-derivation.md`). C124-FORCED-PIECES: of a close complementary pair of three-piece points, one member has a piece
+inside the closed unit disc about each common unit point and another disjoint from the open one. For full members both do
+(C124-BOTH), and with one piece of each side at each member exactly four labels are present at the point (C124-FOUR); both rest
+on C124-LONE, on whose Step II its deriver asks for a second mind. **Nothing here forces a pair**: every entry begins from one
+and says so in its *not claimed* line.
+
 ## A card carried for the opening (filed by Keryx, 2026-09-29)
 
 *Poros's card from the close re-read of 2026-09-28 (`plans/POROS-2026-09-28-close-reread.md` § 2.4, card 1), re-addressed here by Poros's

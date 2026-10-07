@@ -1,0 +1,161 @@
+strip1: seed=8 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=3 closed=yes | forced=10 at 6 points | emptied=0 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: forced=14 free=106 seed-point free=16 | agree-with-object=10 of 10 (disagree 0, unread 0) | class-samples=148 mismatches=0
+U = the object as its float reader reads it (two small circles about the point); fault = None
+round 1: points read 2; forced corners added 6; emptied 0; conflicts 0; tower height 2
+round 2: points read 12; forced corners added 4; emptied 0; conflicts 0; tower height 2
+round 3: points read 28; forced corners added 0; emptied 0; conflicts 0; tower height 3
+
+THE SEED
+  (0.00000,0.00000): P:[0.0,90.0](U0) B:[90.0,180.0](U-1) O:[180.0,270.0](D-1) M:[270.0,0.0](D0)
+  (0.50000,0.00000): G:[0.0,90.0](U1) P:[90.0,180.0](U0) M:[180.0,270.0](D0) R:[270.0,0.0](D1)
+
+THE FORCED CORNERS (the closure less the seed)
+  (0.25000,0.96825) label R corner [165.5+,194.5+] (forced, round 1)
+  (0.25000,0.96825) label P corner [194.5+,345.5-] (forced, round 1)
+  (0.25000,0.96825) label O corner [345.5-,14.5-] (forced, round 1)
+  (0.25000,-0.96825) label M corner [14.5+,165.5-] (forced, round 1)
+  (0.25000,-0.96825) label G corner [165.5-,194.5-] (forced, round 1)
+  (0.25000,-0.96825) label B corner [345.5+,14.5+] (forced, round 1)
+  (0.96353,0.26762) label G corner [105.5+,225.5-] (forced, round 2)
+  (0.96353,-0.26762) label R corner [134.5+,254.5-] (forced, round 2)
+  (-0.46353,0.26762) label B corner [314.5+,74.5-] (forced, round 2)
+  (-0.46353,-0.26762) label O corner [285.5+,45.5-] (forced, round 2)
+
+THE TABLE AT EVERY POINT ONE UNIT FROM TWO OR MORE POINTS OF THE CLOSURE (last round)
+  (0.00000,0.00000) in U SEED POINT members (0.25000,0.96825):in (0.25000,-0.96825):out (0.96353,0.26762):in (0.96353,-0.26762):in corner [14.5-,74.5-] left=BPR free
+  (0.00000,0.00000) in U SEED POINT members (0.25000,0.96825):in (0.25000,-0.96825):out (0.96353,0.26762):in (0.96353,-0.26762):out corner [74.5-,105.5-] left=BP free
+  (0.00000,0.00000) in U SEED POINT members (0.25000,0.96825):in (0.25000,-0.96825):out (0.96353,0.26762):out (0.96353,-0.26762):out corner [105.5-,165.5-] left=BP free
+  (0.00000,0.00000) in U SEED POINT members (0.25000,0.96825):out (0.25000,-0.96825):out (0.96353,0.26762):out (0.96353,-0.26762):out corner [165.5-,194.5+] left=BO free
+  (0.00000,0.00000) in U SEED POINT members (0.25000,0.96825):out (0.25000,-0.96825):in (0.96353,0.26762):out (0.96353,-0.26762):out corner [194.5+,254.5+] left=MO free
+  (0.00000,0.00000) in U SEED POINT members (0.25000,0.96825):out (0.25000,-0.96825):in (0.96353,0.26762):out (0.96353,-0.26762):in corner [254.5+,285.5+] left=MO free
+  (0.00000,0.00000) in U SEED POINT members (0.25000,0.96825):out (0.25000,-0.96825):in (0.96353,0.26762):in (0.96353,-0.26762):in corner [285.5+,345.5+] left=GMO free
+  (0.00000,0.00000) in U SEED POINT members (0.25000,0.96825):in (0.25000,-0.96825):in (0.96353,0.26762):in (0.96353,-0.26762):in corner [345.5+,14.5-] left=GMPR free
+  (0.50000,0.00000) in U SEED POINT members (0.25000,0.96825):in (0.25000,-0.96825):out (-0.46353,0.26762):out (-0.46353,-0.26762):out corner [14.5+,74.5+] left=GP free
+  (0.50000,0.00000) in U SEED POINT members (0.25000,0.96825):in (0.25000,-0.96825):out (-0.46353,0.26762):in (-0.46353,-0.26762):out corner [74.5+,105.5+] left=GP free
+  (0.50000,0.00000) in U SEED POINT members (0.25000,0.96825):in (0.25000,-0.96825):out (-0.46353,0.26762):in (-0.46353,-0.26762):in corner [105.5+,165.5+] left=GOP free
+  (0.50000,0.00000) in U SEED POINT members (0.25000,0.96825):in (0.25000,-0.96825):in (-0.46353,0.26762):in (-0.46353,-0.26762):in corner [165.5+,194.5-] left=BMOP free
+  (0.50000,0.00000) in U SEED POINT members (0.25000,0.96825):out (0.25000,-0.96825):in (-0.46353,0.26762):in (-0.46353,-0.26762):in corner [194.5-,254.5-] left=BMR free
+  (0.50000,0.00000) in U SEED POINT members (0.25000,0.96825):out (0.25000,-0.96825):in (-0.46353,0.26762):out (-0.46353,-0.26762):in corner [254.5-,285.5-] left=MR free
+  (0.50000,0.00000) in U SEED POINT members (0.25000,0.96825):out (0.25000,-0.96825):in (-0.46353,0.26762):out (-0.46353,-0.26762):out corner [285.5-,345.5-] left=MR free
+  (0.50000,0.00000) in U SEED POINT members (0.25000,0.96825):out (0.25000,-0.96825):out (-0.46353,0.26762):out (-0.46353,-0.26762):out corner [345.5-,14.5+] left=GR free
+  (0.25000,0.96825) in U members (0.00000,0.00000):out (0.50000,0.00000):out (0.96353,0.26762):in (-0.46353,0.26762):out corner [14.5-,45.5-] left=OR free
+  (0.25000,0.96825) in U members (0.00000,0.00000):out (0.50000,0.00000):out (0.96353,0.26762):out (-0.46353,0.26762):out corner [45.5-,134.5+] left=OR free
+  (0.25000,0.96825) in U members (0.00000,0.00000):out (0.50000,0.00000):out (0.96353,0.26762):out (-0.46353,0.26762):in corner [134.5+,165.5+] left=OR free
+  (0.25000,0.96825) in U members (0.00000,0.00000):in (0.50000,0.00000):out (0.96353,0.26762):out (-0.46353,0.26762):in corner [165.5+,194.5+] left=R forced:held
+  (0.25000,0.96825) in U members (0.00000,0.00000):in (0.50000,0.00000):in (0.96353,0.26762):out (-0.46353,0.26762):in corner [194.5+,225.5+] left=P forced:held
+  (0.25000,0.96825) in U members (0.00000,0.00000):in (0.50000,0.00000):in (0.96353,0.26762):in (-0.46353,0.26762):in corner [225.5+,314.5-] left=P forced:held
+  (0.25000,0.96825) in U members (0.00000,0.00000):in (0.50000,0.00000):in (0.96353,0.26762):in (-0.46353,0.26762):out corner [314.5-,345.5-] left=P forced:held
+  (0.25000,0.96825) in U members (0.00000,0.00000):out (0.50000,0.00000):in (0.96353,0.26762):in (-0.46353,0.26762):out corner [345.5-,14.5-] left=O forced:held
+  (0.25000,-0.96825) in U members (0.00000,0.00000):in (0.50000,0.00000):in (0.96353,-0.26762):in (-0.46353,-0.26762):out corner [14.5+,45.5+] left=M forced:held
+  (0.25000,-0.96825) in U members (0.00000,0.00000):in (0.50000,0.00000):in (0.96353,-0.26762):in (-0.46353,-0.26762):in corner [45.5+,134.5-] left=M forced:held
+  (0.25000,-0.96825) in U members (0.00000,0.00000):in (0.50000,0.00000):in (0.96353,-0.26762):out (-0.46353,-0.26762):in corner [134.5-,165.5-] left=M forced:held
+  (0.25000,-0.96825) in U members (0.00000,0.00000):in (0.50000,0.00000):out (0.96353,-0.26762):out (-0.46353,-0.26762):in corner [165.5-,194.5-] left=G forced:held
+  (0.25000,-0.96825) in U members (0.00000,0.00000):out (0.50000,0.00000):out (0.96353,-0.26762):out (-0.46353,-0.26762):in corner [194.5-,225.5-] left=BG free
+  (0.25000,-0.96825) in U members (0.00000,0.00000):out (0.50000,0.00000):out (0.96353,-0.26762):out (-0.46353,-0.26762):out corner [225.5-,314.5+] left=BG free
+  (0.25000,-0.96825) in U members (0.00000,0.00000):out (0.50000,0.00000):out (0.96353,-0.26762):in (-0.46353,-0.26762):out corner [314.5+,345.5+] left=BG free
+  (0.25000,-0.96825) in U members (0.00000,0.00000):out (0.50000,0.00000):in (0.96353,-0.26762):in (-0.46353,-0.26762):out corner [345.5+,14.5+] left=B forced:held
+  (-0.71353,0.70063) in U members (0.00000,0.00000):in (0.25000,0.96825):in (-0.46353,-0.26762):out corner [14.5-,45.5-] left=BGR free
+  (-0.71353,0.70063) in U members (0.00000,0.00000):out (0.25000,0.96825):in (-0.46353,-0.26762):out corner [45.5-,105.5-] left=GMR free
+  (-0.71353,0.70063) in U members (0.00000,0.00000):out (0.25000,0.96825):out (-0.46353,-0.26762):out corner [105.5-,194.5+] left=GM free
+  (-0.71353,0.70063) in U members (0.00000,0.00000):out (0.25000,0.96825):out (-0.46353,-0.26762):in corner [194.5+,225.5+] left=GM free
+  (-0.71353,0.70063) in U members (0.00000,0.00000):in (0.25000,0.96825):out (-0.46353,-0.26762):in corner [225.5+,285.5+] left=BG free
+  (-0.71353,0.70063) in U members (0.00000,0.00000):in (0.25000,0.96825):in (-0.46353,-0.26762):in corner [285.5+,14.5-] left=BGR free
+  (0.96353,0.26762) in U members (0.00000,0.00000):out (0.25000,0.96825):in corner [45.5+,105.5+] left=GO free
+  (0.96353,0.26762) in U members (0.00000,0.00000):in (0.25000,0.96825):in corner [105.5+,225.5-] left=G forced:held
+  (0.96353,0.26762) in U members (0.00000,0.00000):in (0.25000,0.96825):out corner [225.5-,285.5-] left=GR free
+  (0.96353,0.26762) in U members (0.00000,0.00000):out (0.25000,0.96825):out corner [285.5-,45.5+] left=GR free
+  (0.96353,-0.26762) in U members (0.00000,0.00000):in (0.25000,-0.96825):out corner [74.5+,134.5+] left=GR free
+  (0.96353,-0.26762) in U members (0.00000,0.00000):in (0.25000,-0.96825):in corner [134.5+,254.5-] left=R forced:held
+  (0.96353,-0.26762) in U members (0.00000,0.00000):out (0.25000,-0.96825):in corner [254.5-,314.5-] left=BR free
+  (0.96353,-0.26762) in U members (0.00000,0.00000):out (0.25000,-0.96825):out corner [314.5-,74.5+] left=GR free
+  (-0.71353,-0.70063) in U members (0.00000,0.00000):in (0.25000,-0.96825):out (-0.46353,0.26762):in corner [74.5-,134.5-] left=OR free
+  (-0.71353,-0.70063) in U members (0.00000,0.00000):out (0.25000,-0.96825):out (-0.46353,0.26762):in corner [134.5-,165.5-] left=PR free
+  (-0.71353,-0.70063) in U members (0.00000,0.00000):out (0.25000,-0.96825):out (-0.46353,0.26762):out corner [165.5-,254.5+] left=PR free
+  (-0.71353,-0.70063) in U members (0.00000,0.00000):out (0.25000,-0.96825):in (-0.46353,0.26762):out corner [254.5+,314.5+] left=GPR free
+  (-0.71353,-0.70063) in U members (0.00000,0.00000):in (0.25000,-0.96825):in (-0.46353,0.26762):out corner [314.5+,345.5+] left=GOR free
+  (-0.71353,-0.70063) in U members (0.00000,0.00000):in (0.25000,-0.96825):in (-0.46353,0.26762):in corner [345.5+,74.5-] left=GOR free
+  (-0.46353,0.26762) in U members (0.50000,0.00000):out (0.25000,0.96825):in corner [74.5-,134.5-] left=BR free
+  (-0.46353,0.26762) in U members (0.50000,0.00000):out (0.25000,0.96825):out corner [134.5-,254.5+] left=BO free
+  (-0.46353,0.26762) in U members (0.50000,0.00000):in (0.25000,0.96825):out corner [254.5+,314.5+] left=BO free
+  (-0.46353,0.26762) in U members (0.50000,0.00000):in (0.25000,0.96825):in corner [314.5+,74.5-] left=B forced:held
+  (1.21353,0.70063) in U members (0.50000,0.00000):out (0.25000,0.96825):in (0.96353,-0.26762):out corner [74.5+,134.5+] left=BMO free
+  (1.21353,0.70063) in U members (0.50000,0.00000):in (0.25000,0.96825):in (0.96353,-0.26762):out corner [134.5+,165.5+] left=BGO free
+  (1.21353,0.70063) in U members (0.50000,0.00000):in (0.25000,0.96825):in (0.96353,-0.26762):in corner [165.5+,254.5-] left=BGO free
+  (1.21353,0.70063) in U members (0.50000,0.00000):in (0.25000,0.96825):out (0.96353,-0.26762):in corner [254.5-,314.5-] left=BG free
+  (1.21353,0.70063) in U members (0.50000,0.00000):out (0.25000,0.96825):out (0.96353,-0.26762):in corner [314.5-,345.5-] left=BM free
+  (1.21353,0.70063) in U members (0.50000,0.00000):out (0.25000,0.96825):out (0.96353,-0.26762):out corner [345.5-,74.5+] left=BM free
+  (1.21353,-0.70063) in U members (0.50000,0.00000):out (0.25000,-0.96825):out (0.96353,0.26762):in corner [14.5+,45.5+] left=OP free
+  (1.21353,-0.70063) in U members (0.50000,0.00000):in (0.25000,-0.96825):out (0.96353,0.26762):in corner [45.5+,105.5+] left=OR free
+  (1.21353,-0.70063) in U members (0.50000,0.00000):in (0.25000,-0.96825):in (0.96353,0.26762):in corner [105.5+,194.5-] left=BOR free
+  (1.21353,-0.70063) in U members (0.50000,0.00000):in (0.25000,-0.96825):in (0.96353,0.26762):out corner [194.5-,225.5-] left=BOR free
+  (1.21353,-0.70063) in U members (0.50000,0.00000):out (0.25000,-0.96825):in (0.96353,0.26762):out corner [225.5-,285.5-] left=BOP free
+  (1.21353,-0.70063) in U members (0.50000,0.00000):out (0.25000,-0.96825):out (0.96353,0.26762):out corner [285.5-,14.5+] left=OP free
+  (-0.46353,-0.26762) in U members (0.50000,0.00000):in (0.25000,-0.96825):out corner [45.5-,105.5-] left=BO free
+  (-0.46353,-0.26762) in U members (0.50000,0.00000):out (0.25000,-0.96825):out corner [105.5-,225.5+] left=BO free
+  (-0.46353,-0.26762) in U members (0.50000,0.00000):out (0.25000,-0.96825):in corner [225.5+,285.5+] left=GO free
+  (-0.46353,-0.26762) in U members (0.50000,0.00000):in (0.25000,-0.96825):in corner [285.5+,45.5-] left=O forced:held
+  (0.71353,-0.70063) in U members (0.00000,0.00000):in (0.96353,0.26762):in corner [45.5+,165.5-] left=MR free
+  (0.71353,-0.70063) in U members (0.00000,0.00000):in (0.96353,0.26762):out corner [165.5-,225.5-] left=MR free
+  (0.71353,-0.70063) in U members (0.00000,0.00000):out (0.96353,0.26762):out corner [225.5-,345.5+] left=BR free
+  (0.71353,-0.70063) in U members (0.00000,0.00000):out (0.96353,0.26762):in corner [345.5+,45.5+] left=BR free
+  (0.71353,0.70063) in U members (0.00000,0.00000):out (0.96353,-0.26762):out corner [14.5-,134.5+] left=GO free
+  (0.71353,0.70063) in U members (0.00000,0.00000):in (0.96353,-0.26762):out corner [134.5+,194.5+] left=GP free
+  (0.71353,0.70063) in U members (0.00000,0.00000):in (0.96353,-0.26762):in corner [194.5+,314.5-] left=GP free
+  (0.71353,0.70063) in U members (0.00000,0.00000):out (0.96353,-0.26762):in corner [314.5-,14.5-] left=GO free
+  (-0.21353,-0.70063) in U members (0.50000,0.00000):in (-0.46353,0.26762):in corner [14.5+,134.5-] left=MO free
+  (-0.21353,-0.70063) in U members (0.50000,0.00000):out (-0.46353,0.26762):in corner [134.5-,194.5-] left=GO free
+  (-0.21353,-0.70063) in U members (0.50000,0.00000):out (-0.46353,0.26762):out corner [194.5-,314.5+] left=GO free
+  (-0.21353,-0.70063) in U members (0.50000,0.00000):in (-0.46353,0.26762):out corner [314.5+,14.5+] left=MO free
+  (-0.21353,0.70063) in U members (0.50000,0.00000):out (-0.46353,-0.26762):out corner [45.5-,165.5+] left=BR free
+  (-0.21353,0.70063) in U members (0.50000,0.00000):out (-0.46353,-0.26762):in corner [165.5+,225.5+] left=BR free
+  (-0.21353,0.70063) in U members (0.50000,0.00000):in (-0.46353,-0.26762):in corner [225.5+,345.5-] left=BP free
+  (-0.21353,0.70063) in U members (0.50000,0.00000):in (-0.46353,-0.26762):out corner [345.5-,45.5-] left=BP free
+  (1.21353,1.23586) in U members (0.25000,0.96825):in (0.96353,0.26762):out corner [105.5+,165.5+] left=BMO free
+  (1.21353,1.23586) in U members (0.25000,0.96825):in (0.96353,0.26762):in corner [165.5+,285.5-] left=BMO free
+  (1.21353,1.23586) in U members (0.25000,0.96825):out (0.96353,0.26762):in corner [285.5-,345.5-] left=BMR free
+  (1.21353,1.23586) in U members (0.25000,0.96825):out (0.96353,0.26762):out corner [345.5-,105.5+] left=BMR free
+  (-0.71353,1.23586) in U members (0.25000,0.96825):in (-0.46353,0.26762):out corner [14.5-,74.5-] left=GMR free
+  (-0.71353,1.23586) in U members (0.25000,0.96825):out (-0.46353,0.26762):out corner [74.5-,194.5+] left=GMO free
+  (-0.71353,1.23586) in U members (0.25000,0.96825):out (-0.46353,0.26762):in corner [194.5+,254.5+] left=GMO free
+  (-0.71353,1.23586) in U members (0.25000,0.96825):in (-0.46353,0.26762):in corner [254.5+,14.5-] left=GMR free
+  (1.21353,-1.23586) in U members (0.25000,-0.96825):out (0.96353,-0.26762):in corner [14.5+,74.5+] left=GOP free
+  (1.21353,-1.23586) in U members (0.25000,-0.96825):in (0.96353,-0.26762):in corner [74.5+,194.5-] left=BOP free
+  (1.21353,-1.23586) in U members (0.25000,-0.96825):in (0.96353,-0.26762):out corner [194.5-,254.5-] left=BOP free
+  (1.21353,-1.23586) in U members (0.25000,-0.96825):out (0.96353,-0.26762):out corner [254.5-,14.5+] left=GOP free
+  (-0.71353,-1.23586) in U members (0.25000,-0.96825):out (-0.46353,-0.26762):in corner [105.5-,165.5-] left=BPR free
+  (-0.71353,-1.23586) in U members (0.25000,-0.96825):out (-0.46353,-0.26762):out corner [165.5-,285.5+] left=BPR free
+  (-0.71353,-1.23586) in U members (0.25000,-0.96825):in (-0.46353,-0.26762):out corner [285.5+,345.5+] left=GPR free
+  (-0.71353,-1.23586) in U members (0.25000,-0.96825):in (-0.46353,-0.26762):in corner [345.5+,105.5-] left=GPR free
+  (1.92705,0.00000) in U members (0.96353,0.26762):in (0.96353,-0.26762):out corner [74.5+,105.5+] left=BMOPR free
+  (1.92705,0.00000) in U members (0.96353,0.26762):in (0.96353,-0.26762):in corner [105.5+,254.5-] left=BMOP free
+  (1.92705,0.00000) in U members (0.96353,0.26762):out (0.96353,-0.26762):in corner [254.5-,285.5-] left=BGMOP free
+  (1.92705,0.00000) in U members (0.96353,0.26762):out (0.96353,-0.26762):out corner [285.5-,74.5+] left=BGMOPR free
+  (0.25000,-0.43301) in U members (0.96353,0.26762):in (-0.46353,0.26762):in corner [45.5+,134.5-] left=MOPR free
+  (0.25000,-0.43301) in U members (0.96353,0.26762):out (-0.46353,0.26762):in corner [134.5-,225.5-] left=MOPR free
+  (0.25000,-0.43301) in U members (0.96353,0.26762):out (-0.46353,0.26762):out corner [225.5-,314.5+] left=MOPR free
+  (0.25000,-0.43301) in U members (0.96353,0.26762):in (-0.46353,0.26762):out corner [314.5+,45.5+] left=MOPR free
+  (0.47739,-0.60627) in U members (0.96353,0.26762):in (-0.46353,-0.26762):in corner [70.2+,150.9-] left=BMOPR free
+  (0.47739,-0.60627) in U members (0.96353,0.26762):out (-0.46353,-0.26762):in corner [150.9-,250.2-] left=BMOPR free
+  (0.47739,-0.60627) in U members (0.96353,0.26762):out (-0.46353,-0.26762):out corner [250.2-,330.9+] left=BMPR free
+  (0.47739,-0.60627) in U members (0.96353,0.26762):in (-0.46353,-0.26762):out corner [330.9+,70.2+] left=BMPR free
+  (0.02261,0.60627) in U members (0.96353,0.26762):out (-0.46353,-0.26762):out corner [70.2-,150.9+] left=BMPR free
+  (0.02261,0.60627) in U members (0.96353,0.26762):out (-0.46353,-0.26762):in corner [150.9+,250.2+] left=BMPR free
+  (0.02261,0.60627) in U members (0.96353,0.26762):in (-0.46353,-0.26762):in corner [250.2+,330.9-] left=BGMPR free
+  (0.02261,0.60627) in U members (0.96353,0.26762):in (-0.46353,-0.26762):out corner [330.9-,70.2-] left=BGMPR free
+  (0.02261,-0.60627) in U members (0.96353,-0.26762):in (-0.46353,0.26762):in corner [29.1+,109.8-] left=GMOPR free
+  (0.02261,-0.60627) in U members (0.96353,-0.26762):out (-0.46353,0.26762):in corner [109.8-,209.1-] left=GMOP free
+  (0.02261,-0.60627) in U members (0.96353,-0.26762):out (-0.46353,0.26762):out corner [209.1-,289.8+] left=GMOP free
+  (0.02261,-0.60627) in U members (0.96353,-0.26762):in (-0.46353,0.26762):out corner [289.8+,29.1+] left=GMOPR free
+  (0.47739,0.60627) in U members (0.96353,-0.26762):out (-0.46353,0.26762):out corner [29.1-,109.8+] left=GMOP free
+  (0.47739,0.60627) in U members (0.96353,-0.26762):out (-0.46353,0.26762):in corner [109.8+,209.1+] left=BGMOP free
+  (0.47739,0.60627) in U members (0.96353,-0.26762):in (-0.46353,0.26762):in corner [209.1+,289.8-] left=BGMOP free
+  (0.47739,0.60627) in U members (0.96353,-0.26762):in (-0.46353,0.26762):out corner [289.8-,29.1-] left=GMOP free
+  (0.25000,0.43301) in U members (0.96353,-0.26762):out (-0.46353,-0.26762):out corner [45.5-,134.5+] left=BGMP free
+  (0.25000,0.43301) in U members (0.96353,-0.26762):out (-0.46353,-0.26762):in corner [134.5+,225.5+] left=BGMP free
+  (0.25000,0.43301) in U members (0.96353,-0.26762):in (-0.46353,-0.26762):in corner [225.5+,314.5-] left=BGMP free
+  (0.25000,0.43301) in U members (0.96353,-0.26762):in (-0.46353,-0.26762):out corner [314.5-,45.5-] left=BGMP free
+  (-1.42705,0.00000) in U members (-0.46353,0.26762):in (-0.46353,-0.26762):out corner [74.5-,105.5-] left=GMOPR free
+  (-1.42705,0.00000) in U members (-0.46353,0.26762):out (-0.46353,-0.26762):out corner [105.5-,254.5+] left=BGMOPR free
+  (-1.42705,0.00000) in U members (-0.46353,0.26762):out (-0.46353,-0.26762):in corner [254.5+,285.5+] left=BGMPR free
+  (-1.42705,0.00000) in U members (-0.46353,0.26762):in (-0.46353,-0.26762):in corner [285.5+,74.5-] left=GMPR free
+
+ALONG THE UNIT CIRCLES OF POINTS CARRYING AT LEAST k - 1 LABELS

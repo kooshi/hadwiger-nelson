@@ -1,0 +1,35 @@
+== sixfrag: labels=6 members=13
+   READING 1 (germs): stops with an empty cell by whole tiles, not inside: 6 | still with an empty cell by germs: rho=0.2:6 rho=0.05:6 rho=0.0125:6 | orders of the germ depths (rounded): 1:60 2:12
+   READING 2 (payments): coloured common unit points inside: 42 | labels at the point 2:6 3:12 4:12 6:12 | which member separates x:9 xy:24 y:9
+   payments (cell, tile at w, member): backing:168 free:210 same:150 | labels barred at a member, per (point, member): 0:24 1:12 2:48 | barred labels that are absent at w: 108 of 108
+   singleton cells per coloured point (cells with exactly one unbarred label; such a cell is a.e. that label): 0:12 1:6 2:12 3:6 4:6 | cells whose unbarred labels are exactly the labels present there: 138 of 168
+== disk: labels=6 members=30
+   READING 1 (germs): stops with an empty cell by whole tiles, not inside: 20 | still with an empty cell by germs: rho=0.2:20 rho=0.05:20 rho=0.0125:20 | orders of the germ depths (rounded): 1:200
+   READING 2 (payments): coloured common unit points inside: 60 | labels at the point 2:10 3:5 4:45 | which member separates x:5 xy:50 y:5
+   payments (cell, tile at w, member): backing:240 free:360 same:190 | labels barred at a member, per (point, member): 1:90 2:30 | barred labels that are absent at w: 150 of 150
+   singleton cells per coloured point (cells with exactly one unbarred label; such a cell is a.e. that label): 0:20 1:20 2:10 3:10 | cells whose unbarred labels are exactly the labels present there: 220 of 240
+== bowtie: labels=6 members=11
+   READING 1 (germs): stops with an empty cell by whole tiles, not inside: 10 | still with an empty cell by germs: rho=0.2:10 rho=0.05:10 rho=0.0125:10 | orders of the germ depths (rounded): 0:4 1:104 2:16
+   READING 2 (payments): coloured common unit points inside: 34 | labels at the point 2:4 4:14 5:16 | which member separates x:2 xy:30 y:2
+   payments (cell, tile at w, member): backing:152 free:176 same:112 | labels barred at a member, per (point, member): 0:4 1:44 2:20 | barred labels that are absent at w: 84 of 84
+   singleton cells per coloured point (cells with exactly one unbarred label; such a cell is a.e. that label): 0:4 1:24 3:6 | cells whose unbarred labels are exactly the labels present there: 108 of 136
+== strip: labels=6 members=50
+   READING 1 (germs): stops with an empty cell by whole tiles, not inside: 34 | still with an empty cell by germs: rho=0.2:34 rho=0.05:34 rho=0.0125:34 | orders of the germ depths (rounded): 1:340
+   READING 2 (payments): coloured common unit points inside: 105 | labels at the point 3:34 4:71 | which member separates xy:105
+   payments (cell, tile at w, member): backing:388 free:704 same:384 | labels barred at a member, per (point, member): 1:142 2:68 | barred labels that are absent at w: 278 of 278
+   singleton cells per coloured point (cells with exactly one unbarred label; such a cell is a.e. that label): 0:71 3:34 | cells whose unbarred labels are exactly the labels present there: 420 of 420
+== kept: labels=6 members=7
+   READING 1 (germs): stops with an empty cell by whole tiles, not inside: 0 | still with an empty cell by germs: rho=0.2:0 rho=0.05:0 rho=0.0125:0 | orders of the germ depths (rounded): none
+   READING 2 (payments): coloured common unit points inside: 12 | labels at the point 3:6 4:6 | which member separates xy:12
+   payments (cell, tile at w, member): backing:53 facing:56 free:79 | labels barred at a member, per (point, member): 0:6 1:18 | barred labels that are absent at w: 18 of 18
+   singleton cells per coloured point (cells with exactly one unbarred label; such a cell is a.e. that label): 0:6 1:6 | cells whose unbarred labels are exactly the labels present there: 15 of 48
+== T2: labels=6 members=4
+   READING 1 (germs): stops with an empty cell by whole tiles, not inside: 0 | still with an empty cell by germs: rho=0.2:0 rho=0.05:0 rho=0.0125:0 | orders of the germ depths (rounded): none
+   READING 2 (payments): coloured common unit points inside: 4 | labels at the point 3:2 4:2 | which member separates xy:4
+   payments (cell, tile at w, member): backing:12 facing:14 free:22 | labels barred at a member, per (point, member): 0:2 1:2 2:4 | barred labels that are absent at w: 10 of 10
+   singleton cells per coloured point (cells with exactly one unbarred label; such a cell is a.e. that label): 0:2 3:2 | cells whose unbarred labels are exactly the labels present there: 10 of 16
+== r7: labels=7 members=16
+   READING 1 (germs): stops with an empty cell by whole tiles, not inside: 0 | still with an empty cell by germs: rho=0.2:0 rho=0.05:0 rho=0.0125:0 | orders of the germ depths (rounded): none
+   READING 2 (payments): coloured common unit points inside: 96 | labels at the point 6:96 | which member separates xy:96
+   payments (cell, tile at w, member): backing:672 free:384 same:480 | labels barred at a member, per (point, member): 1:192 | barred labels that are absent at w: 192 of 192
+   singleton cells per coloured point (cells with exactly one unbarred label; such a cell is a.e. that label): 1:69 2:27 | cells whose unbarred labels are exactly the labels present there: 384 of 384

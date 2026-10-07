@@ -1,0 +1,13 @@
+OK: OAI158Palette.lean is the generated text, sha256 d6cf7e973c04b035
+OK: OAI158CircleMaps.lean is the generated text, 627 lines, sha256 e115dbdd64d9b476
+OK: OAI158Expansion.lean is the generated text, 218 lines, sha256 c1072cd7cc6e272e
+OK: OAI158CircleTransport.lean is the generated text, 259 lines, sha256 daaf09d9c6e0e800
+OK: OAI158PaletteDensity.lean is the generated text, 541 lines, sha256 f4d48314e2b276c6
+OK: OAI158PaletteTransport.lean is the generated text, 434 lines, sha256 c32c645063bbc775
+OK: OAI158BinaryPalettes.lean is the generated text, 158 lines, sha256 af30c2709b6d8ba7
+OK: OAI158States.lean is the generated text, 339 lines, sha256 d8676e3f93134e88
+OK: OAI158AngularBoundary.lean is the generated text, 53 lines, sha256 816a88e64046f3fc
+OK: OAIMath2026-LICENSE.txt is the release's LICENSE byte for byte, 11357 bytes, sha256 c71d239df91726fc
+OK: scripts/Axioms.lean holds the block, 163 records
+CHECK OK
+check exit=0

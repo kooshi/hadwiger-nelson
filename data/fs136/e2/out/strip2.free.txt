@@ -1,0 +1,4 @@
+search request | seed strip2 | point (0.00000,0.00000) | corner [14.5+,150.0-] (in S(-0.25000,0.96825) in S(0.50000,0.86603)) | labels left BP
+search request | seed strip2 | point (0.00000,0.00000) | corner [150.0-,194.5-] (in S(-0.25000,0.96825) out S(0.50000,0.86603)) | labels left BO
+search request | seed strip2 | point (0.00000,0.00000) | corner [194.5-,330.0+] (out S(-0.25000,0.96825) out S(0.50000,0.86603)) | labels left MO
+search request | seed strip2 | point (0.00000,0.00000) | corner [330.0+,14.5+] (out S(-0.25000,0.96825) in S(0.50000,0.86603)) | labels left MP

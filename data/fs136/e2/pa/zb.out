@@ -1,0 +1,4 @@
+ab:"constraint propagation" & (ab:"chromatic number of the plane" | ab:"unit distance" | ab:"unit-distance") => 0 | 
+(ab:"forced" | ab:"forcing") & ab:colo* & ab:plane & (ab:"unit circle" | ab:"unit distance") & (ab:region* | ab:tile* | ab:tiling*) => 1 | The seventh European conference on combinatorics, graph theory and app [2013, Zbl 1271.05002]
+(ab:"local rule*" | ab:"vertex figure*" | ab:"empire*") & ab:colo* & (ab:"unit distance" | ab:"chromatic number of the plane") => 0 | 
+ab:"chromatic number of the plane" & (ab:measurable | ab:"map-type" | ab:"map type") & (ab:"propagat*" | ab:"extend*" | ab:"extension") => 0 | 

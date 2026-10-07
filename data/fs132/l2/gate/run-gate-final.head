@@ -1,0 +1,12 @@
+HEAD=b46a9d57ab422644b577d1b6bc3e79bd1e1636f8  2026-10-07T15:31:18Z
+status (tracked files modified, and untracked outside data/ and plans/):
+--
+main's Proofs/, Proofs.lean, scripts/ since the previous landing's gated commit: 0 path(s) differ
+dupnames latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/build/gate/dupnames/20261007T154123Z-3026084.log
+dupnames-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/build/gate/dupnames-self-test/20261007T154126Z-3026239.log
+axioms latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/build/gate/axioms/20261007T154143Z-3027443.log
+axioms-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/build/gate/axioms-self-test/20261007T154148Z-3027677.log
+vacuity latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/build/gate/vacuity/20261007T154350Z-3033832.log
+vacuity-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/build/gate/vacuity-self-test/20261007T154502Z-3035331.log
+assumptions latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/build/gate/assumptions/20261007T154615Z-3037238.log
+assumptions-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/build/gate/assumptions-self-test/20261007T154722Z-3039192.log

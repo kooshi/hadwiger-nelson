@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Unit-Step Puzzle</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: one column, the board is the page; controls sit above and below it like the margins of a worksheet. */
+:root{
+  --bg:#eef1f4; --panel:#ffffff; --ink:#18212b; --muted:#5d6975; --line:#c9d1d9; --empty:#dfe5ea;
+  --accent:#0b5cad; --warn:#b3261e; --ok:#11703a; --on-swatch:#ffffff; --swatch-shade:rgba(0,0,0,.55);
+  --c0:#d7263d; --c1:#1b998b; --c2:#2e5eaa; --c3:#e08e0b; --c4:#7b2d8e; --c5:#2a9fd6; --c6:#e0528f; --c7:#7a8a12;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12161b; --panel:#1b2129; --ink:#e8edf2; --muted:#96a2ae; --line:#323b46; --empty:#262e38;
+    --accent:#7db4f5; --warn:#ff8a80; --ok:#6fd08c; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12161b; --panel:#1b2129; --ink:#e8edf2; --muted:#96a2ae; --line:#323b46; --empty:#262e38;
+  --accent:#7db4f5; --warn:#ff8a80; --ok:#6fd08c; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--sans)}
+main{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:14px;display:flex;flex-direction:column;gap:10px}
+h1{font:600 22px/1.2 var(--sans);margin:0;text-wrap:balance}
+p{margin:0}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono);font-size:13px}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 10px;cursor:pointer;min-height:36px}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+button:disabled{opacity:.45;cursor:default}
+.lv{font-family:var(--mono);font-size:13px}
+.sw{width:38px;height:38px;padding:0;font:600 14px var(--mono);color:var(--on-swatch);text-shadow:0 0 2px var(--swatch-shade)}
+.sw.erase{color:var(--ink);text-shadow:none;background:var(--empty)}
+#known{background:var(--panel);border-left:3px solid var(--accent);padding:8px 12px}
+#wrap{width:100%;overflow:auto;max-height:80vh}
+#board{display:grid;gap:1px;width:min(100%,640px);max-width:none;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none;background:var(--line);border:1px solid var(--line)}
+#board.zoom{width:200%}
+#board.move{touch-action:auto}
+.cell{aspect-ratio:1;background:var(--empty);position:relative;display:flex;align-items:center;justify-content:center;font:600 9px var(--mono);color:var(--on-swatch);text-shadow:0 0 2px var(--swatch-shade);overflow:hidden}
+#board.zoom .cell{font-size:13px}
+.cell.clash::after{content:"";position:absolute;inset:0;border:2px solid var(--ink)}
+.cell.ring::before{content:"";position:absolute;width:44%;height:44%;border-radius:50%;background:var(--ink);opacity:.9}
+.cell.here::before{content:"";position:absolute;inset:10%;border:2px solid var(--ink);border-radius:50%}
+.cell.free{background-image:radial-gradient(circle,var(--muted) 0 16%,transparent 18%)}
+#status{font-weight:600;min-height:1.45em}
+#status.ok{color:var(--ok)} #status.bad{color:var(--warn)}
+textarea{width:100%;height:60px;font:12px var(--mono);background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px}
+</style>
+<main>
+<h1>Unit-Step Puzzle</h1>
+<p class="muted">Colour every cell of a <span id="qq"></span> grid that wraps around at its edges. Two cells clash when the step
+between them, <span class="mono">(dx, dy)</span>, satisfies <span class="mono">dx² + dy² ≡ 1 (mod <span id="qm"></span>)</span>.
+Clashing cells need different colours.</p>
+
+<div class="row" id="levels" aria-label="Level"></div>
+<div id="known"></div>
+
+<div class="row" id="palette" aria-label="Colour"></div>
+<div class="row">
+  <button id="mPaint" aria-pressed="true">Paint</button>
+  <button id="mLook" aria-pressed="false">Inspect</button>
+  <button id="mMove" aria-pressed="false">Move</button>
+  <button id="tZoom" aria-pressed="false">Zoom</button>
+  <button id="tFree" aria-pressed="false">Where can this colour go?</button>
+  <button id="tNum" aria-pressed="false">Numbers</button>
+</div>
+<div id="wrap"><div id="board" role="grid" aria-label="The grid"></div></div>
+<p id="status" aria-live="polite"></p>
+<div class="row">
+  <button id="undo">Undo</button>
+  <button id="clear">Clear</button>
+  <button id="stripes" hidden>Start from the stripes</button>
+  <button id="copy">Copy code</button>
+  <button id="paste">Load code</button>
+</div>
+<textarea id="code" aria-label="Colouring code" placeholder="A colouring as text: one character per cell, row by row (0–7, or . for empty)."></textarea>
+<p class="muted">Paint: tap or drag; tapping a cell that already has the chosen colour erases it. Inspect: tap a cell to see every
+cell it clashes with. Move: scroll the board when it is zoomed. Your work is kept in this browser, per level.</p>
+</main>
+<script>
+/*CORE*/
+function steps(q){const s=[];for(let a=0;a<q;a++)for(let b=0;b<q;b++)if((a*a+b*b)%q===1)s.push([a,b]);return s;}
+function neighbours(q){const st=steps(q),nb=[];for(let y=0;y<q;y++)for(let x=0;x<q;x++){const l=[];for(const[a,b]of st)l.push(((y+b)%q)*q+(x+a)%q);nb.push(l);}return nb;}
+function clashes(col,nb){const bad=new Uint8Array(col.length);let pairs=0;for(let i=0;i<col.length;i++){if(col[i]<0)continue;for(const j of nb[i])if(col[j]===col[i]){bad[i]=1;if(j>i)pairs++;}}return{bad,pairs};}
+// The known eight-colouring at q = 23: stripes of the linear form 3x + 5y (mod 23), cut into bands of three.
+// With k < 8 colours the bands numbered k and above are left empty: a head start, not a solution.
+function stripes23(k){const q=23,col=new Int8Array(q*q);for(let y=0;y<q;y++)for(let x=0;x<q;x++){const b=Math.min(Math.floor(((3*x+5*y)%q)/3),7);col[y*q+x]=b<k?b:-1;}return col;}
+function encode(col){let s="";for(const c of col)s+=c<0?".":String(c);return s;}
+function decode(s,n,k){s=s.replace(/\s+/g,"");if(s.length!==n)return null;const col=new Int8Array(n);for(let i=0;i<n;i++){const ch=s[i];if(ch==="."){col[i]=-1;continue;}const v=ch.charCodeAt(0)-48;if(!(v>=0&&v<k))return null;col[i]=v;}return col;}
+function stepList(q){const seen=new Set(),out=[];for(const[a,b]of steps(q)){const u=Math.min(a,q-a),v=Math.min(b,q-b),lo=Math.min(u,v),hi=Math.max(u,v),key=lo+","+hi;if(!seen.has(key)){seen.add(key);out.push([lo,hi]);}}return out.sort((p,r)=>p[0]-r[0]||p[1]-r[1]);}
+/*END*/
+const LEVELS=[
+ {q:3,k:3,known:"Three colours are enough, and three are needed."},
+ {q:7,k:4,known:"Four colours are enough."},
+ {q:11,k:5,known:"Five colours are enough, and five are needed."},
+ {q:19,k:5,known:"Five colours are enough."},
+ {q:23,k:8,known:"Eight colours are enough: diagonal stripes do it. Press “Start from the stripes” to see them."},
+ {q:23,k:7,known:"<b>Open.</b> Nobody knows whether seven colours are enough here."},
+ {q:23,k:6,known:"<b>Open.</b> Five colours are impossible: no colour can take more than 105 of the 529 cells. Whether six are enough is not known."},
+];
+let L=0,q,k,nb,col,sel=0,mode="paint",showFree=false,showNum=false,hist=[],hover=-1,down=false,dragTo=0,armed=0;
+const $=id=>document.getElementById(id),board=$("board");
+const key=()=>"unit-step-puzzle:"+q+":"+k;
+function store(name,val){try{localStorage.setItem(name,val);}catch(e){}}
+function fetchStored(name){try{return localStorage.getItem(name);}catch(e){return null;}}
+function save(){store(key(),encode(col));}
+function say(text,cls){const st=$("status");st.className=cls||"";st.textContent=text;}
+function setLevel(i,firstRun){L=i;q=LEVELS[i].q;k=LEVELS[i].k;nb=neighbours(q);sel=0;hist=[];hover=-1;armed=0;
+  const s=fetchStored(key());col=(s&&decode(s,q*q,k))||(firstRun&&q===23?stripes23(k):new Int8Array(q*q).fill(-1));
+  store("unit-step-puzzle:level",String(i));
+  $("qq").textContent=q+" × "+q;$("qm").textContent=q;
+  [...$("levels").children].forEach((b,j)=>b.setAttribute("aria-pressed",j===i));
+  const sl=stepList(q).map(([a,b])=>a===0?"(0, ±1), (±1, 0)":a===b?"(±"+a+", ±"+b+")":"(±"+a+", ±"+b+"), (±"+b+", ±"+a+")").join(", ");
+  $("known").innerHTML="<b>"+q+" × "+q+", "+k+" colours.</b> "+LEVELS[i].known+"<br><span class='muted'>Each cell clashes with "+nb[0].length+" others. The steps: </span><span class='mono'>"+sl+"</span>";
+  $("stripes").hidden=q!==23;$("clear").textContent="Clear";
+  const pal=$("palette");pal.innerHTML="";
+  for(let c=0;c<k;c++){const b=document.createElement("button");b.className="sw";b.style.background="var(--c"+c+")";b.textContent=c+1;b.setAttribute("aria-label","Colour "+(c+1));b.onclick=()=>{sel=c;render();};pal.appendChild(b);}
+  const e=document.createElement("button");e.className="sw erase";e.textContent="×";e.setAttribute("aria-label","Eraser");e.onclick=()=>{sel=-1;render();};pal.appendChild(e);
+  board.style.gridTemplateColumns="repeat("+q+",1fr)";board.innerHTML="";
+  for(let j=0;j<q*q;j++){const d=document.createElement("div");d.className="cell";d.dataset.i=j;board.appendChild(d);}
+  render();}
+function setCell(i,v){if(col[i]===v)return;hist.push([i,col[i]]);col[i]=v;save();render();}
+function render(){const{bad,pairs}=clashes(col,nb);let done=0;const cells=board.children;
+  const ring=new Uint8Array(q*q);if(hover>=0)for(const j of nb[hover])ring[j]=1;
+  for(let i=0;i<cells.length;i++){const c=col[i],d=cells[i];if(c>=0)done++;
+    d.style.background=c>=0?"var(--c"+c+")":"";
+    let free=false;if(showFree&&sel>=0&&c<0){free=true;for(const j of nb[i])if(col[j]===sel){free=false;break;}}
+    d.className="cell"+(bad[i]?" clash":"")+(ring[i]?" ring":"")+(i===hover?" here":"")+(free?" free":"");
+    d.textContent=showNum&&c>=0?String(c+1):"";}
+  [...$("palette").children].forEach((b,j)=>b.setAttribute("aria-pressed",(j<k?j:-1)===sel));
+  const n=q*q;
+  if(done===n&&pairs===0)say((q===23&&k<8)?"Solved with "+k+" colours. This was not known to be possible. Copy the code below and send it in.":(q===23?"Solved: the known eight-colour stripes, or your own. Try a level with fewer colours.":"Solved: every cell coloured, no clash."),"ok");
+  else say(done+" of "+n+" cells coloured; "+pairs+" clashing pair"+(pairs===1?"":"s")+".",pairs>0?"bad":"");
+  $("undo").disabled=hist.length===0;}
+function cellAt(ev){const t=document.elementFromPoint(ev.clientX,ev.clientY);return t&&t.classList&&t.classList.contains("cell")?+t.dataset.i:-1;}
+board.addEventListener("pointerdown",ev=>{if(mode==="move")return;const i=cellAt(ev);if(i<0)return;ev.preventDefault();
+  if(mode==="look"){hover=hover===i?-1:i;render();return;}
+  down=true;dragTo=(sel>=0&&col[i]===sel)?-1:sel;setCell(i,dragTo);});
+board.addEventListener("pointermove",ev=>{if(mode!=="paint")return;const i=cellAt(ev);if(down&&i>=0)setCell(i,dragTo);else if(!down&&ev.pointerType==="mouse"&&i!==hover){hover=i;render();}});
+board.addEventListener("pointerleave",()=>{if(mode==="paint"&&hover>=0){hover=-1;render();}});
+window.addEventListener("pointerup",()=>{down=false;});
+window.addEventListener("pointercancel",()=>{down=false;});
+function setMode(m){mode=m;if(m!=="look")hover=-1;for(const[id,v]of[["mPaint","paint"],["mLook","look"],["mMove","move"]])$(id).setAttribute("aria-pressed",v===m);board.classList.toggle("move",m==="move");render();}
+$("mPaint").onclick=()=>setMode("paint");$("mLook").onclick=()=>setMode("look");$("mMove").onclick=()=>setMode("move");
+$("tZoom").onclick=()=>{const z=board.classList.toggle("zoom");$("tZoom").setAttribute("aria-pressed",z);};
+$("tFree").onclick=()=>{showFree=!showFree;$("tFree").setAttribute("aria-pressed",showFree);render();};
+$("tNum").onclick=()=>{showNum=!showNum;$("tNum").setAttribute("aria-pressed",showNum);render();};
+$("undo").onclick=()=>{const h=hist.pop();if(!h)return;col[h[0]]=h[1];save();render();};
+$("clear").onclick=()=>{const now=Date.now();if(now-armed>4000){armed=now;$("clear").textContent="Tap again to clear";setTimeout(()=>{if(Date.now()-armed>=4000)$("clear").textContent="Clear";},4100);return;}armed=0;$("clear").textContent="Clear";col.fill(-1);hist=[];save();render();};
+$("stripes").onclick=()=>{col=stripes23(k);hist=[];save();render();};
+$("copy").onclick=()=>{const t=$("code");t.value=encode(col);const pick=()=>{t.focus();t.select();};
+  try{navigator.clipboard.writeText(t.value).then(()=>say("Code copied.","ok"),pick);}catch(e){pick();}};
+$("paste").onclick=()=>{const c=decode($("code").value,q*q,k);if(!c){say("That code does not fit this level: it needs "+(q*q)+" characters, each 0–"+(k-1)+" or a dot.","bad");return;}col=c;hist=[];save();render();};
+window.addEventListener("keydown",ev=>{if(ev.target.tagName==="TEXTAREA")return;const v=ev.key.charCodeAt(0)-48;if(ev.key.length===1&&v>=0&&v<=8){if(v===0)sel=-1;else if(v<=k)sel=v-1;else return;render();}});
+LEVELS.forEach((lv,i)=>{const b=document.createElement("button");b.className="lv";b.textContent=lv.q+"×"+lv.q+" · "+lv.k+(lv.q===23&&lv.k<8?" (open)":"");b.onclick=()=>setLevel(i,false);$("levels").appendChild(b);});
+const saved=fetchStored("unit-step-puzzle:level"),first=saved===null||!(+saved>=0&&+saved<LEVELS.length);
+setLevel(first?4:+saved,first);
+</script>
+</body>
+</html>

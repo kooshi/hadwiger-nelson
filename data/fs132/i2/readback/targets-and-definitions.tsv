@@ -1,0 +1,63 @@
+class	name	kind	verdict	constants only at the release's pin	constants only at this pin	note
+definition	spatialSupport	def	IDENTICAL	—	—	
+target	mem_spatialSupport_ae	theorem	IDENTICAL	—	—	
+definition	triangleAngle	def	IDENTICAL	—	—	
+definition	sourceTriangle	def	IDENTICAL	—	—	
+definition	circleSum	def	IDENTICAL	—	—	
+definition	circleSumDeriv	def	IDENTICAL	—	—	
+definition	CircleParameter	def	IDENTICAL	—	—	
+definition	CircleJet	def	IDENTICAL	—	—	
+definition	jetCenter	def	IDENTICAL	—	—	
+definition	jetRadius	def	IDENTICAL	—	—	
+definition	jetAngle	def	IDENTICAL	—	—	
+definition	circleTarget	def	IDENTICAL	—	—	
+definition	circleTargetDeriv	def	IDENTICAL	—	—	
+definition	circleEndpoint	def	IDENTICAL	—	—	
+definition	circleEndpointDeriv	def	IDENTICAL	—	—	
+definition	angleChart	def	IDENTICAL	—	—	
+definition	angleChartMeasure	def	IDENTICAL	—	—	
+definition	circleSumDerivEquiv	def	IDENTICAL	—	—	
+definition	circleInverseHomeo	def	IDENTICAL	—	—	
+definition	circleInverse	def	IDENTICAL	—	—	
+definition	RealPlane	def	IDENTICAL	—	—	
+definition	angularSum	def	IDENTICAL	—	—	
+definition	samplingParameter	def	IDENTICAL	—	—	
+definition	Angles	def	IDENTICAL	—	—	
+definition	angularMeasure	def	IDENTICAL	—	—	
+definition	direction	def	IDENTICAL	—	—	
+definition	WeakColoring	def	IDENTICAL	—	—	
+definition	weakHilbert	def	UP-TO-INSTANCES	WeakDual.instAddCommMonoid	DivisionSemiring.toSemiring Semifield.toDivisionSemiring instAddCommMonoidWeakDual	
+definition	sample	def	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+definition	WeakBall.Space	def	UP-TO-INSTANCES	WeakDual.instAddCommMonoid	instAddCommMonoidWeakDual	
+definition	WeakBall.value	def	UP-TO-INSTANCES	WeakDual.instAddCommMonoid	DivisionSemiring.toSemiring Semifield.toDivisionSemiring instAddCommMonoidWeakDual	
+definition	WeakBall.ofNorm	def	UP-TO-INSTANCES	WeakDual.instAddCommMonoid	instAddCommMonoidWeakDual	
+definition	TraceVector	def	UP-TO-INSTANCES	§.RealL2._proof_1 §.TraceVector._proof_1	§.PlaneL2._proof_1 §.shiftL2._proof_1	
+definition	traceValue	def	UP-TO-INSTANCES	§.RealL2._proof_1 §.TraceVector._proof_1	§.PlaneL2._proof_1 §.shiftL2._proof_1	
+definition	sampleCode	def	UP-TO-INSTANCES	§.RealL2._proof_1 §.TraceVector._proof_1	§.PlaneL2._proof_1 §.shiftL2._proof_1	
+definition	sampleSet	def	IDENTICAL	—	—	
+definition	IsTrace	def	UP-TO-INSTANCES	WeakDual.instAddCommMonoid §.RealL2._proof_1 §.TraceVector._proof_1	instAddCommMonoidWeakDual §.PlaneL2._proof_1 §.shiftL2._proof_1	
+definition	RealL2	def	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+definition	oneL2	def	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+definition	Typical	def	IDENTICAL	—	—	
+definition	TypicalSampling	def	IDENTICAL	—	—	
+definition	sampleFn	def	IDENTICAL	—	—	
+target	palette_transfer_pair	theorem	IDENTICAL	—	—	
+definition	FlatDensityZero	def	IDENTICAL	—	—	
+definition	LineDensityZero	def	IDENTICAL	—	—	
+definition	liftPalette	def	IDENTICAL	—	—	
+definition	colorIndicator	def	IDENTICAL	—	—	
+definition	sixty	def	IDENTICAL	—	—	
+target	palette_sixty_disjoint	theorem	IDENTICAL	—	—	
+definition	tracePositive	def	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+definition	paletteGenerators	def	UP-TO-INSTANCES	§.paletteGenerators._proof_2	§.TypicalSampling._proof_1	
+definition	paletteSet	def	IDENTICAL	—	—	
+definition	palette	def	IDENTICAL	—	—	
+definition	Traces	def	IDENTICAL	—	—	
+target	two_state_impossible	theorem	IDENTICAL	—	—	
+definition	DensityZero	def	IDENTICAL	—	—	
+definition	RealState	def	IDENTICAL	—	—	
+definition	shiftL2	def	UP-TO-INSTANCES	AddSubmonoidClass.toAddZeroClass MeasureTheory.AEEqFun.instAddMonoid §.shiftL2._proof_3 §.shiftL2._proof_4	AddSubgroup.toAddGroup	
+definition	DensityOne	def	IDENTICAL	—	—	
+definition	truncatedClass	def	IDENTICAL	—	—	
+definition	truncatedVector	def	IDENTICAL	—	—	
+definition	PlaneL2	def	IDENTICAL	—	—	

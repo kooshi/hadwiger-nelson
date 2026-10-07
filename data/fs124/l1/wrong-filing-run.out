@@ -1,0 +1,9 @@
+planted: the two lines exchanged
+WRONG-FILING CONTROL FIRED: exit 1, both records named
+2:==> axioms: this run's full output: build/gate/axioms/20261007T164003Z-3306013.log
+48:    FAIL stale-import 'HadwigerNelson.Plane.radius_up' carries no declared import: its record belongs under CLEAN
+49:    FAIL import-in-clean 'HadwigerNelson.Plane.radius_five' carries the declared import HadwigerNelson.Outside.OAI158.no_proper_five_coloring: move its record under IMPORTED
+50:==> axioms: FAIL — 2 check(s) failed (above)
+digest before: a5823c9f700f8095becbbccef2cd4cae09ce6b6c14b6f76219919b80442000d5
+digest after:  a5823c9f700f8095becbbccef2cd4cae09ce6b6c14b6f76219919b80442000d5
+RESTORED: the audit script is the text it was

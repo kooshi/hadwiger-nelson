@@ -1,0 +1,207 @@
+data/fs132/i2/axioms/Print.lean:7:8: warning: declaration uses `sorry`
+'HadwigerNelson.Outside.OAI158.RealPlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSumDeriv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSumDeriv_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSumDerivEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_local_antilipschitz' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.realDirection_lipschitz' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverseHomeo' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverse_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverse_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverse_at' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverse_continuousAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverse_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverse_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverse_regular' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.triangular_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.triangular_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.strict_fiber_uniform_antilipschitz' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.CircleParameter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.CircleJet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.jetCenter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.jetRadius' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.jetAngle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleTarget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleTargetDeriv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleTarget_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleTarget_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleEndpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleEndpointDeriv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleEndpoint_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleEndpoint_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.inverse_tangent_first_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleEndpoint_fiber_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleEndpoint_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleEndpoint_good_neighborhood' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.angleChart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.angleChartMeasure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.angleChartMeas_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.instIsFiniteMeasureRealPlaneAngleChartMeasure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.angleChart_preserving' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.angleChart_measure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.integral_angular_eq_chart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.direction_realPlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_chart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.volume_preimage_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.map_restrict_volume_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.antilipschitz_small_perturbation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.realDirection_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_decompose' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_perturb_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_parameter_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_eventual_image' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_limit_image' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_eventual_antilipschitz' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_limit_antilipschitz' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.measure_null_of_locally_null_on_conull' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_regular_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_preimage_null' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_quasiMeasurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.line_volume_preimage_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.line_map_restrict_volume_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.integrable_comp_of_map_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.integral_norm_comp_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.tendsto_integral_norm_comp_sub' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.tendsto_integral_norm_comp_sub_eventual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.line_antilipschitz_qmp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.line_indicator_pullback_L1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.tendsto_integral_of_local_cover' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.bounded_difference_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_tendsto_L1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.angularSum_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.angularSum_chart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.angularSum_quasiMeasurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.angularSum_tendsto_L1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.samplingParameter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.samplingParameter_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleTarget_sampling' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverse_sampling' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.weak_strong_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.colorIndicator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.colorIndicator_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.colorIndicator_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.sample_pair_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.trace_pair_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_first_exclusion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_second_exclusion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_transfer_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.angleMk_quasiMeasurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.anglePair_quasiMeasurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.FlatDensityZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.LineDensityZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.volume_image_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.flatDensityZero_prod' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.tendsto_pos_mul_nhdsWithin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.FlatDensityZero.image' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.FlatDensityZero.of_locally_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.FlatDensityZero.transport' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_one_lipschitz' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleSum_densityZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.complex_ball_flat_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.flat_to_complex_densityZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.ae_lineDensityZero_compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.liftPalette_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_spatial_densityZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_spatial_not_densityOne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_sample_branch_exclusion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.angleRep_preserving' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.weak_lift_Ioc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.weak_restrict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.weak_lift_set' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.weak_strong_disjoint_single' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.weak_strong_disjoint_single_eventual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_trace_branch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_branch_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleInverse_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circleEndpoint_eventuallyEq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.ae_of_locally_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.ae_restrict_of_locally_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_transport_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.sin_sixty_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.sin_twice_sixty_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.sixty_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.ae_angular_of_ae_line' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_sixty_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_sixty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.palette_sixty_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.triangleAngle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.triangleAngle_cos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.triangleAngle_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.triangleAngle_lt_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.triangleAngle_ratio_irrational' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.triangle_rotation_ergodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.equal_triangleAngle_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.circle_exp_sub_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.sourceTriangle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.sourceTriangle_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.sourceTriangle_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.LineDensityZero.mono_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.DensityZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.DensityZero.union' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.densityZero_empty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.DensityZero.biUnion_finset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.DensityZero.compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.state_densityZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.angularSum_swap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.states_densityOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.DensityOne.compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.DensityOne.inter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.DensityOne.measure_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.densityOne_univ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.DensityOne.iInter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.finite_density_realization' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.two_label_triangle_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.bool_flip_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.bool_flip_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.bool_flip_even' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.triangleAngle_nonparallel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.two_state_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.mem_spatialSupport_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.not_colorable_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'FS132I2Control.planted_sorry' depends on axioms: [sorryAx]

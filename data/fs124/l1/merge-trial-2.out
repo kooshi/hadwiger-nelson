@@ -1,0 +1,9 @@
+trial 2: HEAD=f891764090343e291fec1ef70b4a60293cd821b2 against 987385099934894359bc9203dfca0b9c7a582368, 2026-10-07T16:17:05Z
+e90151a93be63828bae4513e95709953fcfd9988
+Proofs.lean
+
+Auto-merging ARCHITECTURE.md
+Auto-merging Proofs.lean
+CONFLICT (content): Merge conflict in Proofs.lean
+Auto-merging scripts/Axioms.lean
+merge-tree exit=1

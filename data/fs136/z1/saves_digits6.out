@@ -1,0 +1,7 @@
+disk: members=25s+0b pairs=20 inside=20 patterns=00:20 separating=xy(ss):20 four=20/20 half-two=0/0 arcs-of-kind-both=20 edges-of-saves=0
+kept: members=4s+0b pairs=3 inside=6 patterns=00:2,11:2,12:1,21:1 separating=xy(ss):6 four=3/3 half-two=2/2 arcs-of-kind-both=9 edges-of-saves=6
+T2: members=2s+0b pairs=1 inside=2 patterns=12:1,21:1 separating=xy(ss):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=4
+
+real	0m25.692s
+user	0m25.557s
+sys	0m0.033s

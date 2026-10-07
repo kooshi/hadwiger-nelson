@@ -1,0 +1,11 @@
+card lint
+  FAIL  line 118 (what-does-a-tight-unit-pair-pass-on): rank 1 already used at line 65
+  FAIL  line 300 (what-does-a-save-cost): rank 1 already used at line 65
+  warn  4 cards — three is a menu; more is a spray; one is a turn
+  cards: 4  no-question exits: 0
+  the ask: What does a four-colour vertex's (Q) ring pass to the four-colour vertices its change points place — and is that quantity conserved, so that the placed skeleton either recurs at every radius or must close within one?  [line 65]
+hunch ledger
+  hunches: 0  open: 0  confirmed: 0  killed: 0
+evidence inventory
+  warn  no section headed 'evidence inventory' — what is in front of you is not listed, so nothing can be marked unread
+GATE: FAIL (2 failures, 2 warnings)

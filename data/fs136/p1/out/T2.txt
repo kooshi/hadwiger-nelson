@@ -1,0 +1,12 @@
+   facing: w=(0.50000,-0.86603) z=(1.00000,0.00000) tile-at-w=W_2 tiles-at-z=v_3 label=6
+   facing: w=(0.50000,-0.86603) z=(1.00000,0.00000) tile-at-w=W_2 tiles-at-z=v_3 label=6
+   facing: w=(0.50000,-0.86603) z=(0.00000,0.00000) tile-at-w=W_3 tiles-at-z=u_2 label=2
+   facing: w=(0.50000,-0.86603) z=(0.00000,0.00000) tile-at-w=W_3 tiles-at-z=u_2 label=2
+   facing: w=(0.50000,0.86603) z=(0.00000,0.00000) tile-at-w=w_2 tiles-at-z=u_3 label=3
+   facing: w=(0.50000,0.86603) z=(0.00000,0.00000) tile-at-w=w_2 tiles-at-z=u_3 label=3
+   facing: w=(0.50000,0.86603) z=(1.00000,0.00000) tile-at-w=w_3 tiles-at-z=v_2 label=5
+   facing: w=(0.50000,0.86603) z=(1.00000,0.00000) tile-at-w=w_3 tiles-at-z=v_2 label=5
+   facing: w=(1.00000,0.00000) z=(0.50000,0.86603) tile-at-w=v_2 tiles-at-z=w_3 label=5
+   facing: w=(1.00000,0.00000) z=(0.50000,-0.86603) tile-at-w=v_3 tiles-at-z=W_2 label=6
+   facing: w=(1.00000,0.00000) z=(0.50000,-0.86603) tile-at-w=v_3 tiles-at-z=W_2 label=6
+   facing: w=(-0.00000,0.00000) z=(0.50000,0.86603) tile-at-w=u_3 tiles-at-z=w_2 label=3

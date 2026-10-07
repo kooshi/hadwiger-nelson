@@ -1,0 +1,17 @@
+OK	data/external/EXT-OAI1-request.md	> I agree with all 3. let's keep the lean backlog paused. We move to t
+OK	data/external/EXT-OAI1-request.md	> 1. port or import: let's import and adopt parts piecemeal if needed.
+OK	CLAUDE.md § Counter-priors — read before pricing anything (Kooshi, 2026-09-26)	Do not consider Lean formalization a cost. It's practically mechanical
+OK	/home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/PaletteDensity.lean	lemma palette_transfer_pair (hw : WeakColoring k c) (x : ℂ) :
+OK	/home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/PaletteTransport.lean	lemma palette_sixty_disjoint (hw : WeakColoring k c) (x : ℂ) :
+OK	/home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/States.lean	lemma two_state_impossible {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c)
+OK	/home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/AngularBoundary.lean	lemma mem_spatialSupport_ae (hc : Measurable c) (i : Fin k) :
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wk1/plans/FS132-kernel-plan.md Stage 	- **Port, declare nothing further.** C132-M-ORBIT, -M-EXCL, -DIAG-WIDE
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wk1/plans/FS132-kernel-plan.md Stage 	Stands on two release statements only — `palette_sixty_disjoint`, `pal
+  source /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wk1/plans/FS132-kernel-plan.md: 2
+  source /home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/AngularBoundary.lean: 1
+  source /home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/PaletteDensity.lean: 1
+  source /home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/PaletteTransport.lean: 1
+  source /home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/States.lean: 1
+  source CLAUDE.md: 1
+  source data/external/EXT-OAI1-request.md: 2
+quotations: 9  mismatches: 0  root: /home/kooshi/source/lean-dir

@@ -78,6 +78,9 @@ FS-132 (2026-10-07), a count of minds: the coordinator's ruling called the first
 
 FS-132 (2026-10-07), a reading with no control: the asking lane read the tight seven-colouring R7 as the common exception of three results — "its reading, no computation" — and the sentence reached Kooshi before its author caught it: R7 has "**no three-label point**", so the results do not speak of it at all. Source: `plans/FS132-close-inventory.md` items 21 (4), 23.
 
+FS-124 (2026-10-07): three headlines larger than their statements, each caught the same day. (i) "94 of 94" — one edge of each member on the centre's unit circle at every centre read — was a sample, by one mind's script, on two maps built by one recipe; read whole on nine held objects it is the law of the strip, the disk and the capped strip "and of nothing else held" (`plans/FS124-E2-derivation.md` Stage 3 § 3.2; `plans/FS124-close-inventory.md` items 13 (a), 16 (d)). (ii) "Every statement but the count is true at every number of labels" named the wrong exception — the count is stated for `k ≥ 4`, and the two entries that spend six are the rhombus's (item 12 (a)); a brief's first draft said "fifteen of the sixteen are true at every number of colours" — "a count I had not read from the record" (item 10). (iii) "0 of 92 ends centre a unit arc" was true and hid a positive — all 40 interior ends of the strip are three-label points one unit from exactly two centres: "it was read for the wrong property" (item 12 (c)). A control satisfied with room: the first card expected the capped honeycomb at circumradius 1/2 to be refused by the check, and it is still a weak seven-colouring — "The honeycomb at 1/2 is tight at its vertices only; its edges have room" — so R7 is the model with no room (`plans/FS124-E1-derivation.md` Stage 5, "Read against the card"). Three reader defects in two rounds, none flattering, each repaired before a count was kept (that record's Stage 4; `plans/FS124-E2-derivation.md` § 3.1). Source: `plans/FS124-Z1-record.md` Stage 7.
+
+FS-136 (2026-10-07; FS136-Z1's draft 11): the second deriver's (the same section): "FS-136 (2026-10-07): a float sampler with no sample hugging an edge read a half-plane with tangent edges as inner; and the first round's finite list of whole-tile witnesses missed the one corner of the bowtie fragment's stop that the vertex figures empty". And the record job's, from the inventory's items 8, 10 and 12 and its own Stage 3: "FS-136 (2026-10-07): three sentences carried upward from a job's closing lines were each corrected by the next job to read the objects — 'what bars is a tile's extent, not its germ' (read false at 70 of 70 stops, then by an entry), 'a closed ring would be a fragment by formula' (a closure is corners at points), 'a closure forces corners at points' (and along arcs from a five-label point). Each was a reading of results, none an entry: a closing sentence is audited at the rate of an entry before it is carried. And a suspected rounding defect in a reader was settled by a comparison with a positive control: no count moved at nine decimals, the lines moved at six."
 
 ## G25 — The forcing ladder is recursive
 
@@ -350,6 +353,8 @@ FS-114: six rounds of a proof side against a construction side, fenced from each
 
 FS-103's V1 read row 110's `0.199` at 59 — a Hoffman ratio — as `λ*` in a stage-1 control; the plan's X5 line ("thickness is `sup|ν̂|`, both signs, not Hoffman's sign") caught it before any verdict (`plans/FS103-V1-verification.md` §Stage 3 correction 4).
 
+FS-136 (2026-10-07; FS136-Z1's draft 11): the second deriver's (the same section): "FS-136 (2026-10-07): the tight seven-colouring's table at a common unit point of two lattice points is exact (432 of 432 corners), and the closure of the pair stalls after three corners: tight is not rigid for forced corners".
+
 ## G58 — The antipodal conjecture
 
 *F1, from G58, cut in `d0df4f82` (2026-09-21, “trim ahead of FS-66's close”), after “…rather than on a full cube-and-conquer.”:*
@@ -535,15 +540,33 @@ EXT-OAI3 (2026-10-07): the bibliography row for `[GreenfeldTao2024]` had called 
 
 FS-132 (2026-10-07): four statements moved to the class their arguments read — the release's extraction to every `k` and to any closed disc of radius above 1, with existence needing no hypothesis ("G92 applied to an outside proof"); the first night's exclusion, which reads two clauses of the extraction's data and neither the centre's isolation nor a Siamese clause; the covering count, which reads no properness; the confinement statement, for any set (the kernel planner, blind). Two widenings were found not to be: the two-point form of the exclusion "is therefore a restatement, not a generalization", and the two-pair ring, entered as wider than posed, was the release's own Lean theorem. Source: `plans/FS132-close-inventory.md` items 3, 6, 15, 18, 25; `plans/FS132-derivation.md` §§ 1–3.
 
+FS-124 (2026-10-07): the trigger "a second milestone about to re-derive a near neighbour" did not fire at the asking lane and fired at the deriver. The second card posed as open — "must one edge of each member lie on its unit circle?", with 0.45 on a save by one member — a question FS112-N3-COR3 (row 135; two minds, one blind) answers for maps: "each a leaving centre of both `u` and `u′`". The deriver found it at its readback (`plans/FS124-E2-derivation.md` Stage 1); the asking lane: "The second card was written from a reading of two maps and not from that list" — the stub's own carry-over list, which names that lemma second (`plans/POROS-2026-10-07-fs124-round2.md` § 1.3, S4); the coordinator: "the second time today a card's unit was corrected by the deriver who took it" (`plans/FS124-close-inventory.md` item 15 (b)). Two held statements about one set of six tiles — FS114-Y-STRIPK6 and C124-EDGE-CLOSED — "do not cite each other" (S5). Reaches found the same day by reading arguments: the kernel planner, typing the radius clause blind, found the colouring's measurability idle in three statements and (down) true of every subset (item 14); C124-CENTRE-HALF is "C124-CENTRE with its hypothesis split (G92)" (its entry); the forcing count's argument reads "every label is a label of a piece at one of the two points", not two disjoint triples (item 26 — the asking lane's reading, to be derived at FS-136). Source: `plans/FS124-Z1-record.md` Stage 7.
+
+FS-136 (2026-10-07; FS136-Z1's draft 11): the first deriver's (`plans/FS136-E1-derivation.md` § 6.2): "FS-136 (2026-10-07): C124-FORCED-PIECES's argument, read at its class, is C136-TABLE — any number of members, pieces and labels; the same afternoon the kernel planner reached it blind (its G6). The count's 'six' is 'all the labels' (R7 at seven obeys it)."
+
 ## G95 — Tightness is not regularity
 
 FS-132 (2026-10-07): the stalled regularity statement of the existence side carries this entry's caution in its own entry — "its first clause is false wherever local slack exists along the strip, so it is a statement for a normal form or false at six" (C132-RING-TAME) — and the extraction's conclusion with its clause (4) is false at the island colouring's accumulation centre and true at the isolated ones. Source: `plans/FS132-close-inventory.md` items 3, 7; `plans/FS132-derivation.md` §§ 3, 8.
+
+## G96 — Circle data and ball data: an exclusion reads the unit circle about a point, a meeting of classes is a property of its small balls, and only one passage between them is free
+
+FS-136 (2026-10-07; FS136-Z1's draft 11): the second deriver's (its § 7.4): "FS-136, second round (2026-10-07): the first passage from ball data at two points to ball data at a third (C136-FORCED) yields a germ, a piece of no definite size; chained (C136-CLOSE) it is a countable family of vertex figures and never a region — so 'a connected piece of definite size' stays owed". *With the exception its own Stage 8 found, in its words*: "at six, a seed with a five-label point does force a region" — one with a definite length and no definite width (C136-COLLAR).
+
+## G98 — Six is the one count at which the labels left for a ring can wind
+
+FS-136 (2026-10-07): listed silent in the second round's re-walk and used an hour later as the mechanism of C136-COLLAR — a point of five labels leaves one for its ring, and one label left is a forced label. Read with its count for a point of `m` labels, not only for a triangle, it names the seed to run first.
+
+## G99 — With pieces, the local theory is the map class's; what measure owes is the piece
+
+FS-136 (2026-10-07; FS136-Z1's draft 11): the first deriver's, for the *Do* (the same section): "its search range, rows 133–138, is needed: the card searched 135–138 and missed FS-110's covering pair (rows 133–134)." And the second deriver's scoring of its killing test (`plans/FS136-E2-derivation.md` § 7.4): "**not fired**. C136-FORCED has a map antecedent (placing), and it changed no move: every closure stalls."
 
 ## `CLAUDE.md` § Counter-priors
 
 *FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, `plans/FS116-Z2-close.md` § 2.5:*
 
 FS-116's verifiers registered 23 predictions (Brier 0.138 by the gate's count); where their probabilities were lowest the statements held — FS116-Y3-STARFORCE at 0.3, -TIGHTLENS at 0.4, FS116-N3-SEMI at 0.45, and FS116-V6's "refuted" at 0.6 against FS116-Y4-EMPTY, which held: the miss in the direction the section measured.
+
+*FS136-Z1, FS-136's record job; `plans/FS136-Z1-record.md` Stage 5:* the record job's, from Stage 5: "FS-136 (2026-10-07): of 50 scored registered numbers, the two met rows priced lowest (0.35 each: the flower's stop by the lemma alone; the flower's pair forcing a further point) were both derivations landing; the one confident miss (0.8) was a belief about an object, corrected by exact arithmetic. No number above 0.25 was registered on an exclusion beyond one held family, a fragment or a value, and none was met." ### `BIBLIOGRAPHY.md` **No row is drafted.** The one work first used by this milestone, `[Bauslaugh1998]`, was filed today (author's summary read, not held). Checked against the file: neither deriver cites a key that is absent. One title-only hit of the first deriver's second pass (Lopez-Campos, Oliveros, Ramírez Alfonsín, 2025, Zbl 1580.52001; "a Borsuk-type problem, not ours by its title; unread") rests under nothing and would change no row: reported, not drafted. ### `tools/viz_proof_atlas_facts.py` — Proof Atlas facts (written after the ledger rows are filed: the checker quotes them)
 
 ## `CLAUDE.md` § Delegation — one level deep
 

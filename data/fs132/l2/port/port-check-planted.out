@@ -1,0 +1,11 @@
+== plant 1, in the real file: one word of the licence copy changed
+FAIL: OAIMath2026-LICENSE.txt differs from the release's LICENSE
+CHECK FAILED
+exit=1
+== plant 2, in the real file: one of the three scoped instances made global again
+FAIL: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wl2/Proofs/HadwigerNelson/Outside/OAI158Palette.lean differs from the generated text
+CHECK FAILED
+exit=1
+== restored: licence SAME, palette module SAME
+CHECK OK
+exit=0

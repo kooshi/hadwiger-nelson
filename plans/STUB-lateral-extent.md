@@ -90,3 +90,20 @@ The asking lane's re-aim of this stub — honest colourings; "an essential centr
 proposals: the extraction for countable closed sets of centres was declined as a stub by the asking lane (the same record,
 § The debts); its side question — under REG-J′, are a saturated colouring's cyclic centres locally finite, "a candidate,
 unchecked" — was not started, and belongs beside FS131-E8's line above. Grokkings: G94; proposed G96.
+
+*Since FS-124 (FS124-Z1, the record job, 2026-10-07; every entry named is in `plans/FS124-derivation.md`, [hand] or derived from [hand] entries, **one mind, kernel pending**):* every entry of that file's §§ 2–4 that is not an
+object begins from an open one-label set (C124-SHADOW-OPEN) or a connected one (C124-TYPE), and no entry gives a weak
+six-colouring either. So what this stub's regularity would supply to that file is the piece, and no more is asked of it: with
+three pieces at each of two points less than 2 apart carrying all six labels, C124-FORCED-PIECES applies as it stands; an arc on
+the circle needs sector points (C124-FORCED), and "both members" full ones (C124-BOTH).
+
+*Since FS-136 (FS136-Z1, the record job, 2026-10-07; every entry named is in `plans/FS136-derivation.md`, [hand], derived from [hand] entries or computed exactly over named corners, **one mind each, kernel pending**; each is about weak colourings that already have the named regions or corners, and none is known to):* every entry of that file begins from pieces or
+labelled corners at named points, and none gives a weak six-colouring one. Two bear on what this stub would have to
+supply. **C136-FORCED** gives a piece at a new point from pieces at old ones, and what it gives is a germ — its *not
+claimed* line: "a lower bound for η (it is half the least witness depth of the bars used, and shrinks at every step)";
+chained (**C136-CLOSE**), "no region of definite size is forced". So a radius for a forced corner is this stub's ground —
+"a piece of definite size" (the second deriver's sweep, `plans/FS136-E2-derivation.md` § 7.4) — and nothing in FS-136
+supplies it. **C136-COLLAR** forces a region with a definite length and no definite width, and only from a point that
+already carries five of the six labels. **This stub's question was not re-posed by FS-136**: the first round's closing
+sentence, which pointed back here ("which pieces at the members must reach across its unit circle?"), is withdrawn by a
+dated erratum under it — a held stop is excluded by the corner patterns at its two members alone (**C136-STOP-GERMS**).

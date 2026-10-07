@@ -1,0 +1,49 @@
+control: rings-held
+  of: C136-RINGS-READ — the reader on FS116-Y2-SIXFRAG, [Polymath2021]'s disk and FS114-Y2-BOWTIE, each read whole from its tiles: members, centres, covering pairs, the class of the table at every common unit point (inside, with the samples that violate the table; not inside), the least distance of a point across not inside about each centre and the class there. Tight on these models: none has a margin. The fault moves one member of every pair by 0.01 (violations must appear)
+  run: python3 ../data/fs136/e1/rings_read.py sixfrag disk bowtie --brief
+  expect: sixfrag: labels=6 members=13 centres=7 covering-pairs=24 on-a-ring=18 inside=42[L2:42] violations=0 not-inside=6[L1:6] least=1.7321:1 stop-class=L1:6
+    disk: labels=6 members=30 centres=5 covering-pairs=40 on-a-ring=40 inside=60[L2:60] violations=0 not-inside=20[L0:20] least=1.618:5 stop-class=L0:10
+    bowtie: labels=6 members=11 centres=7 covering-pairs=24 on-a-ring=20 inside=34[L2:34] violations=0 not-inside=14[L1:10,L2:4] least=1.7321:1,1.9319:4 stop-class=L1:6,L2:4
+  fault: python3 ../data/fs136/e1/rings_read.py sixfrag disk bowtie --brief --fault
+
+control: rings-strip
+  of: C136-RINGS-READ — the reader on FS-112's strip, tiles −4 to 6; the values 0.5 and 1.0 are at the window's two ends. The fault moves one member of every pair by 0.01
+  run: python3 ../data/fs136/e1/rings_read.py strip --brief
+  expect: strip: labels=6 members=50 centres=10 covering-pairs=71 on-a-ring=54 inside=105[L2:105] violations=0 not-inside=37[L0:34,L2:3] least=0.5:1,1.0:2,1.8512:6 stop-class=L0:24,L2:3
+  fault: python3 ../data/fs136/e1/rings_read.py strip --brief --fault
+
+control: rings-small
+  of: C136-RINGS-READ — the reader on fragments T2, S1, MX, BB and the Searcher's kept model: no point across outside any of them. The fault moves one member of every pair by 0.01
+  run: python3 ../data/fs136/e1/rings_read.py T2 S1 MX BB kept --brief
+  expect: T2: labels=6 members=4 centres=2 covering-pairs=2 on-a-ring=1 inside=4[L2:4] violations=0 not-inside=0[] least=none stop-class=none
+    S1: labels=6 members=2 centres=0 covering-pairs=1 on-a-ring=0 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none
+    MX: labels=6 members=4 centres=2 covering-pairs=1 on-a-ring=1 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none
+    BB: labels=6 members=4 centres=2 covering-pairs=1 on-a-ring=1 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none
+    kept: labels=6 members=7 centres=3 covering-pairs=6 on-a-ring=3 inside=12[L2:12] violations=0 not-inside=0[] least=none stop-class=none
+  fault: python3 ../data/fs136/e1/rings_read.py T2 S1 MX BB kept --brief --fault
+
+control: rings-r7
+  of: C136-TABLE — at seven, on R7 (25 Reuleaux tiles and 25 concave tiles about the origin): every lattice point read carries six of the seven labels, two adjacent ones carry all seven between them, and at every common unit point inside the table holds with no cell empty. The fault moves one member of every pair by 0.01
+  run: python3 ../data/fs136/e1/rings_read.py r7 --brief
+  expect: r7: labels=7 members=16 centres=16 covering-pairs=54 on-a-ring=54 inside=96[L2:96] violations=0 not-inside=12[L2:12] least=1.7321:8 stop-class=L2:12
+  fault: python3 ../data/fs136/e1/rings_read.py r7 --brief --fault
+
+control: stop-exact
+  of: C136-STOP — exact, in each object's own tower: the point across of the named pair is one unit from both members, the members are less than 2 apart, its squared distance from the centre is 3, φ², φ⁴/2 and 3; every tile with a member as an end point of a boundary piece, with witnesses among exact points of its boundary strictly inside or outside the unit circle about the point; the cells in which every label is shown barred; and the horn's witness on the tangent ray. The fault reads the point moved by (1/50, 0), and a point of the direction 330° for the horn
+  run: python3 ../data/fs136/e1/stop_check.py flower disk strip bowtie horn | grep -v '^  '
+  expect: flower: p=(0.00000,0.00000) x=(0.86603,-0.50000) y=(0.86603,0.50000) w=x+y-p=(1.73205,0.00000)
+    flower: kept-tiles=8 labels=6 cells-proved-empty=in/out EXCLUDED
+    disk: p=(-0.50000,0.16246) x=(-1.50000,0.16246) y=(-0.80902,1.11352) w=x+y-p=(-1.80902,1.11352)
+    disk: kept-tiles=6 labels=6 cells-proved-empty=out/out EXCLUDED
+    strip: p=(0.00000,0.00000) x=(-0.25000,0.96825) y=(0.50000,0.86603) w=x+y-p=(0.25000,1.83427)
+    strip: kept-tiles=6 labels=6 cells-proved-empty=out/out EXCLUDED
+    bowtie: p=(0.00000,0.00000) x=(0.86603,-0.50000) y=(0.86603,0.50000) w=x+y-p=(1.73205,0.00000)
+    bowtie: kept-tiles=10 labels=6 cells-proved-empty=in/out,out/in EXCLUDED
+    horn: q=e(-30)+t*e(300), t=1/4: outside-S(p)=True outside-S(e(-90))=True outside-S(e(30))=True inside-the-cut=True strictly-outside-S(w)=True HORN WITNESS OK
+  fault: python3 ../data/fs136/e1/stop_check.py flower disk strip bowtie horn --fault | grep -v '^  '
+
+control: cover-count
+  of: C136-COVER — the count as a function of the states alone: over the 50,625 assignments, to four labels, of a state at x and a state at y (inner-pure, outer-pure, barred, or not a label of that member; not absent at both), the number in which each of the four cells has a label no state bars and neither member has an inner-pure and an outer-pure label; the fault lets a label barred at x serve x's cells
+  run: python3 -c "import itertools as I;S=['in','out','bar','-'];print(sum(all(any(a in (s,'-') and b in (t,'-') for a,b in st) for s in ('in','out') for t in ('in','out')) and not ((any(a=='in' for a,b in st) and any(a=='out' for a,b in st)) or (any(b=='in' for a,b in st) and any(b=='out' for a,b in st))) for st in I.product([(a,b) for a in S for b in S if (a,b)!=('-','-')],repeat=4)))"
+  expect: 0
+  fault: python3 -c "import itertools as I;S=['in','out','bar','-'];print(sum(all(any(a in (s,'-','bar') and b in (t,'-') for a,b in st) for s in ('in','out') for t in ('in','out')) and not ((any(a=='in' for a,b in st) and any(a=='out' for a,b in st)) or (any(b=='in' for a,b in st) and any(b=='out' for a,b in st))) for st in I.product([(a,b) for a in S for b in S if (a,b)!=('-','-')],repeat=4)))"

@@ -325,8 +325,36 @@ def half():
     print(f"side-patterns=9 consistent={len(pats)} " + " ".join(f"K1={a},K2={b}:inside-x={','.join(c)};outside-x={','.join(d)}" for a, b, c, d in pats))
 
 
+# ---------- ends ----------
+def ends():
+    """the held maps: for every boundary piece of radius 1, are its two end points themselves centres of boundary pieces of radius 1?"""
+    root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
+    sys.path.insert(0, os.path.join(root, "tools"))
+    import fs116_n3_semi as N3
+    RG = N3.RG; done = set(); out = []
+    shift = 0.01 if FAULT else 0.0
+    for lab, T, _ in RG.objects():
+        key = lab.split()[0]
+        if key in done: continue
+        done.add(key); TF = RG.fl_tiles(T)
+        pieces = {}
+        for nm, (c, ps) in TF.items():
+            for pc in ps:
+                if pc[0] == "A" and abs(pc[2] - 1) < 1e-12:
+                    _, C, rho, S, E_ = pc
+                    k = tuple(sorted([(round(S[0], 6), round(S[1], 6)), (round(E_[0], 6), round(E_[1], 6))])) + (round(C[0], 6), round(C[1], 6))
+                    pieces[k] = (C, S, E_)
+        centres = [C for C, _, _ in pieces.values()]
+        n = hit = 0
+        for C, S, E_ in pieces.values():
+            for P in (S, E_):
+                n += 1; hit += any(dist((P[0] + shift, P[1]), Q) < 1e-6 for Q in centres)
+        out.append(f"{key}: unit-arc-pieces={len(pieces)} ends={n} ends-that-centre-a-unit-arc={hit}")
+    print(" ; ".join(out))
+
+
 if __name__ == "__main__":
     cmd = next((a for a in sys.argv[1:] if not a.startswith("--")), None)
-    fn = {"radius": radius, "geometry": geometry, "r7": r7, "hexhalf": hexhalf, "maps": maps, "kind": kind, "cones": cones, "half": half}.get(cmd)
+    fn = {"radius": radius, "geometry": geometry, "r7": r7, "hexhalf": hexhalf, "maps": maps, "kind": kind, "cones": cones, "half": half, "ends": ends}.get(cmd)
     if fn is None: print(__doc__); sys.exit(2)
     fn()

@@ -843,6 +843,7 @@ def declared : Array Entry := #[
   .condition ``HadwigerNelson.Arith.NoAffFieldHyp "the field hypotheses of NOAFF-FIELDS at k: a condition on the field F and on k",
   .condition ``HadwigerNelson.ExtensionOrder "a greedy extension order of a graph: an inductive predicate of the theorem's vertex list, built by its constructors",
   .condition ``HadwigerNelson.IsLift "a first-order lift of a framework: a predicate of the theorem's deformation, taken only to be refuted or transported",
+  .condition ``HadwigerNelson.Outside.OAI158.RealState "the release's state of a set of angles ([OAIMath2026] States.lean:92): the set is measurable and lies, up to a null set, in the lifted palette of every label of J — a predicate of the theorem's centre, set of angles and labels; built in the proof of SixRing.no_alternating_groups from a measurable two-valued map on the circle (FS132-L2)",
   .condition ``HadwigerNelson.Plane.AeProperRegions.IsRegion "a region (a colour and a connected component of its class): a predicate of the theorem's pair",
   .condition ``HadwigerNelson.Plane.Arc.IsUnitArc "a boundary arc of radius 1: a predicate of the theorem's arc, decided by a computation on written-down data",
   .condition ``HadwigerNelson.Plane.ArcMap.BaseCtx
@@ -869,6 +870,8 @@ def declared : Array Entry := #[
   .condition ``HadwigerNelson.Plane.IsAdmissible "an admissible family (measurable classes with null unit pairs): a predicate of the theorem's family",
   .condition ``HadwigerNelson.Plane.IsRegOf "a region of a family of classes: a predicate of the theorem's pair",
   .condition ``HadwigerNelson.Plane.IsSelection "a selection from a family: a predicate of the theorem's colouring",
+  .condition ``HadwigerNelson.SixRing.FourCycleStraddle "the four-set hypothesis of C132-M-ORBIT (four compact sets through the centre whose straddle regions miss the essential supports of the consecutive labels of a four-cycle): a predicate of the theorem's colouring, centre, labels and sets, taken only to be refuted together with OutsideOrbit under a weak six-colouring (no_outside_orbit, not_ae_outside); the constant colouring satisfies it and is not weak (FS132-L2)",
+  .condition ``HadwigerNelson.SixRing.OutsideOrbit "the ring hypothesis of C132-M-ORBIT, clauses (i) and (ii), at a centre, a base angle and a width: a predicate of the theorem's colouring, centre, two labels and angle, taken only to be refuted (no_outside_orbit_points) or carried by the leaves under that refutation; no declaration exhibits one (FS132-L2)",
   .condition ``HadwigerNelson.SpectralInputs.IsHaarFourier
     "m is a measure with Haar's Fourier coefficients: a predicate of the theorem's measure; its one existence theorem is from Herglotz–Bochner, declared",
   .condition ``HadwigerNelson.SpectralChain.IsTraceSpectral "σ is a trace spectral measure of μ: a predicate of the theorem's two measures (existence is from Herglotz–Bochner, declared)",

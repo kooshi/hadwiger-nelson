@@ -1,0 +1,7 @@
+plant: a theorem with a sorry body appended to Proofs/HadwigerNelson/Plane/SixRing/Excl.lean (never built, never committed)
+Proofs/HadwigerNelson/Plane/SixRing/Excl.lean:74:  sorry
+narrow lines with the plant=1
+PLANT FIRED
+restored by git checkout: digest before=3acb323cf0a13e279162510a93223bc384e382da9aeb2dd9e4bebe328eccf348 after=3acb323cf0a13e279162510a93223bc384e382da9aeb2dd9e4bebe328eccf348 SAME
+plant's name in the file: 0
+narrow lines after restore=0

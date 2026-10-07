@@ -1,0 +1,3 @@
+trial: git merge-tree --write-tree --name-only HEAD(4f0ea87b2, before the cut's commit) origin/main(5c6c52e86); nothing merged
+f883386d5e015daa9faae8beb43446c4e90620d7
+merge-tree exit=0

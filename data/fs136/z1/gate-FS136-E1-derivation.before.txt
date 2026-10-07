@@ -1,0 +1,44 @@
+slot: admitted fs136-z1-gate-e1-before: mem 8 GiB (hard cap), cpus 12,13,14,15
+entry lint
+  warn  FS136-E1-derivation.md:203 (C136-RINGS-READ): computed over "the set of the four points across named in the statement, each with the tiles of its object at its two members, exact in the objects' own towers" states no set — a computed statement quantifies over exactly the set computed
+  claim C136-RINGS-READ: minds 1
+  claim C136-RINGS-READ: prior art partly
+  claim C136-TABLE: minds 1
+  claim C136-TABLE: prior art partly, 2 counted queries
+  claim C136-COVER: governed by C136-TABLE (hand, minds 1)
+  claim C136-COVER: minds 1
+  claim C136-COVER: prior art known
+  claim C136-ONE: governed by C136-TABLE (hand, minds 1)
+  claim C136-ONE: minds 1
+  claim C136-ONE: prior art partly
+  claim C136-PARTNERS: minds 1
+  claim C136-PARTNERS: prior art known
+  claim C136-STOP-FLOWER: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-FLOWER: minds 1
+  claim C136-STOP-FLOWER: prior art known
+  claim C136-STOP-FLOWER-GERMS: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-FLOWER-GERMS: minds 1
+  claim C136-STOP-FLOWER-GERMS: prior art partly
+  claim C136-STOP-DISK: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-DISK: minds 1
+  claim C136-STOP-DISK: prior art known
+  claim C136-STOP-STRIP: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-STRIP: minds 1
+  claim C136-STOP-STRIP: prior art known
+  claim C136-STOP-BOWTIE: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-BOWTIE: minds 1
+  claim C136-STOP-BOWTIE: prior art known
+  entries: 10  derived: 10  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    rings-held: printed 'sixfrag: labels=6 members=13 centres=7 covering-pairs=24 on-a-ring=18 inside=42[L2:42] violations=0 not-inside=6[L1:6] least=1.7321:1 stop-class=L1:6 disk: labels=6 members=30 centres=5 covering-pairs=40 on-a-ring=40 inside=60[L2:60] violations=0 not-inside=20[L0:20] least=1.618:5 stop-class=L0:10 bowtie: labels=6 members=11 centres=7 covering-pairs=24 on-a-ring=20 inside=34[L2:34] violations=0 not-inside=14[L1:10,L2:4] least=1.7321:1,1.9319:4 stop-class=L1:6,L2:4'; with the fault planted ('' → '--fault') it printed 'sixfrag: labels=6 members=13 centres=7 c' — it fires
+  ok    rings-strip: printed 'strip: labels=6 members=50 centres=10 covering-pairs=71 on-a-ring=54 inside=105[L2:105] violations=0 not-inside=37[L0:34,L2:3] least=0.5:1,1.0:2,1.8512:6 stop-class=L0:24,L2:3'; with the fault planted ('' → '--fault') it printed 'strip: labels=6 members=50 centres=10 co' — it fires
+  ok    rings-small: printed 'T2: labels=6 members=4 centres=2 covering-pairs=2 on-a-ring=1 inside=4[L2:4] violations=0 not-inside=0[] least=none stop-class=none S1: labels=6 members=2 centres=0 covering-pairs=1 on-a-ring=0 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none MX: labels=6 members=4 centres=2 covering-pairs=1 on-a-ring=1 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none BB: labels=6 members=4 centres=2 covering-pairs=1 on-a-ring=1 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none kept: labels=6 members=7 centres=3 covering-pairs=6 on-a-ring=3 inside=12[L2:12] violations=0 not-inside=0[] least=none stop-class=none'; with the fault planted ('' → '--fault') it printed 'T2: labels=6 members=4 centres=2 coverin' — it fires
+  ok    rings-r7: printed 'r7: labels=7 members=16 centres=16 covering-pairs=54 on-a-ring=54 inside=96[L2:96] violations=0 not-inside=12[L2:12] least=1.7321:8 stop-class=L2:12'; with the fault planted ('' → '--fault') it printed 'r7: labels=7 members=16 centres=16 cover' — it fires
+  ok    cover-count: printed '0'; with the fault planted ('' → "','bar") it printed '5369' — it fires
+  ok    partners-held: printed 'strip: pairs=54 both=17 one=37 distances={0.7569: 34, 1.732: 10, 1.9364: 10} partners-histogram={2: 12, 3: 28} points=10 pairs-per-point={2: 1, 5: 1, 8: 8} unsaved-point-at-distance={0.5: 1, 1.0: 2, 1.851: 34} (tautology, not evidence: completions=17/17) disk: pairs=20 both=0 one=20 distances={0.9416: 8, 0.9417: 2, 1.1755: 8, 1.1756: 2} partners-histogram={1: 10, 2: 15} points=5 pairs-per-point={4: 5} unsaved-point-at-distance={1.618: 10, 1.764: 8, 1.765: 2} (tautology, not evidence: completions=0/0) kept: pairs=3 both=3 one=0 distances={1.0: 3} partners-histogram={1: 3, 3: 1} points=3 pairs-per-point={2: 3} unsaved-point-at-distance={} (tautology, not evidence: completions=3/3)'; with the fault planted ('' → '--fault') it printed 'strip: pairs=0 both=0 one=0 distances={}' — it fires
+  ok    stop-exact: printed 'flower: p=(0.00000,0.00000) x=(0.86603,-0.50000) y=(0.86603,0.50000) w=x+y-p=(1.73205,0.00000) flower: kept-tiles=8 labels=6 cells-proved-empty=in/out EXCLUDED disk: p=(-0.50000,0.16246) x=(-1.50000,0.16246) y=(-0.80902,1.11352) w=x+y-p=(-1.80902,1.11352) disk: kept-tiles=6 labels=6 cells-proved-empty=out/out EXCLUDED strip: p=(0.00000,0.00000) x=(-0.25000,0.96825) y=(0.50000,0.86603) w=x+y-p=(0.25000,1.83427) strip: kept-tiles=6 labels=6 cells-proved-empty=out/out EXCLUDED bowtie: p=(0.00000,0.00000) x=(0.86603,-0.50000) y=(0.86603,0.50000) w=x+y-p=(1.73205,0.00000) bowtie: kept-tiles=10 labels=6 cells-proved-empty=in/out,out/in EXCLUDED horn: q=e(-30)+t*e(300), t=1/4: outside-S(p)=True outside-S(e(-90))=True outside-S(e(30))=True inside-the-cut=True strictly-outside-S(w)=True HORN WITNESS OK'; with the fault planted ('' → '--fault') it printed 'flower: p=(0.00000,0.00000) x=(0.86603,-' — it fires
+  controls: 7  fired on their faults: 7
+GATE: PASS (0 failures, 1 warning)
+exit=0

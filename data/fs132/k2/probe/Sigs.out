@@ -1,0 +1,407 @@
+@no_outside_orbit_points : ∀ {c : ℂ → Fin 6} (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring 6 c →
+    ∀ {p : ℂ} {a : Fin 4 → Fin 6},
+      Function.Injective a →
+        ∀ {X Y : Fin 6},
+          X ≠ Y →
+            (∀ (j : Fin 4), a j ≠ X) →
+              (∀ (j : Fin 4), a j ≠ Y) →
+                ∀ {q : Fin 4 → ℂ},
+                  (∀ (j : Fin 4), q j ≠ p) →
+                    (∀ (j : Fin 4),
+                        Disjoint (HadwigerNelson.Outside.OAI158.spatialSupport c (a j))
+                          (HadwigerNelson.Outside.OAI158.Straddle {p, q j})) →
+                      (∀ (j : Fin 4),
+                          Disjoint (HadwigerNelson.Outside.OAI158.spatialSupport c (a (j + 1)))
+                            (HadwigerNelson.Outside.OAI158.Straddle {p, q j})) →
+                        ∀ (ψ δ : ℝ),
+                          0 < δ →
+                            (∀ (k : ℤ),
+                                ∀ᵐ (θ : ℝ),
+                                  |θ - ψ - ↑k * (Real.pi / 3)| < δ →
+                                    X ∈ HadwigerNelson.Outside.OAI158.palette c hc p ↑θ ∨
+                                      Y ∈ HadwigerNelson.Outside.OAI158.palette c hc p ↑θ) →
+                              (∀ (η : ℝ),
+                                  0 < η →
+                                    0 <
+                                        MeasureTheory.volume
+                                          {θ |
+                                            θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧
+                                              X ∈ HadwigerNelson.Outside.OAI158.palette c hc p ↑θ} ∧
+                                      0 <
+                                        MeasureTheory.volume
+                                          {θ |
+                                            θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧
+                                              Y ∈ HadwigerNelson.Outside.OAI158.palette c hc p ↑θ}) →
+                                False
+@adjacent_tip_false : ∀ {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ {p : ℂ} {X Y : Fin k} {ψ δ : ℝ},
+      OutsideOrbit c hc p X Y ψ δ →
+        ∀ (n : ℤ) {b : Fin k},
+          (∀ (i : Fin k), i ≠ b → i ≠ X → i ≠ Y → ¬IsTip c p (hub p ψ n) i) →
+            (∀ (i : Fin k), i ≠ b → i ≠ X → i ≠ Y → ¬IsTip c p (hub p ψ (n + 1)) i) → False
+@exists_tip : ∀ {k : ℕ} {c : ℂ → Fin k} {hc : Measurable c} {p : ℂ} {X Y : Fin k} {ψ δ : ℝ},
+  OutsideOrbit c hc p X Y ψ δ →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c → ∀ (n : ℤ), ∃ i, i ≠ X ∧ i ≠ Y ∧ IsTip c p (hub p ψ n) i
+@OutsideOrbit.ae_iff_not : ∀ {k : ℕ} {c : ℂ → Fin k} {hc : Measurable c} {p : ℂ} {X Y : Fin k} {ψ δ : ℝ},
+  OutsideOrbit c hc p X Y ψ δ →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c →
+      ∀ (n : ℤ),
+        ∀ᵐ (θ : ℝ),
+          |θ - ψ - ↑n * (Real.pi / 3)| < δ →
+            (θ ∈ HadwigerNelson.Outside.OAI158.liftPalette c hc p Y ↔
+              θ ∉ HadwigerNelson.Outside.OAI158.liftPalette c hc p X)
+@OutsideOrbit.ae_flip : ∀ {k : ℕ} {c : ℂ → Fin k} {hc : Measurable c} {p : ℂ} {X Y : Fin k} {ψ δ : ℝ},
+  OutsideOrbit c hc p X Y ψ δ →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c →
+      ∀ (n : ℤ),
+        ∀ᵐ (θ : ℝ),
+          |θ - ψ - ↑n * (Real.pi / 3)| < δ →
+            (θ + Real.pi / 3 ∈ HadwigerNelson.Outside.OAI158.liftPalette c hc p X ↔
+              θ ∉ HadwigerNelson.Outside.OAI158.liftPalette c hc p X)
+@OutsideOrbit.change_at : ∀ {k : ℕ} {c : ℂ → Fin k} {hc : Measurable c} {p : ℂ} {X Y : Fin k} {ψ δ : ℝ},
+  OutsideOrbit c hc p X Y ψ δ →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c →
+      ∀ (m : ℤ) (η : ℝ),
+        0 < η →
+          0 <
+              MeasureTheory.volume
+                (HadwigerNelson.Outside.OAI158.liftPalette c hc p X ∩
+                  Set.Ioo (ψ + ↑m * (Real.pi / 3) - η) (ψ + ↑m * (Real.pi / 3) + η)) ∧
+            0 <
+              MeasureTheory.volume
+                ((HadwigerNelson.Outside.OAI158.liftPalette c hc p X)ᶜ ∩
+                  Set.Ioo (ψ + ↑m * (Real.pi / 3) - η) (ψ + ↑m * (Real.pi / 3) + η))
+@OutsideOrbit.chart_avoids : ∀ {k : ℕ} {c : ℂ → Fin k} {hc : Measurable c} {p : ℂ} {X Y : Fin k} {ψ δ : ℝ},
+  OutsideOrbit c hc p X Y ψ δ →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c →
+      ∀ (n : ℤ),
+        ∀ᵐ (x : ℝ × ℝ),
+          |x.1 - (ψ + ↑(n + 1) * (Real.pi / 3))| < δ / 2 →
+            |x.2| < δ / 2 →
+              (x.1 ∈ HadwigerNelson.Outside.OAI158.liftPalette c hc p X ∨
+                    x.1 - x.2 ∈ HadwigerNelson.Outside.OAI158.liftPalette c hc p X →
+                  c (chart p x.1 x.2) ≠ X) ∧
+                (x.1 ∉ HadwigerNelson.Outside.OAI158.liftPalette c hc p X ∨
+                    x.1 - x.2 ∉ HadwigerNelson.Outside.OAI158.liftPalette c hc p X →
+                  c (chart p x.1 x.2) ≠ Y)
+@OutsideOrbit.hubColours : ∀ {k : ℕ} {c : ℂ → Fin k} {hc : Measurable c} {p : ℂ} {X Y : Fin k} {ψ δ : ℝ},
+  OutsideOrbit c hc p X Y ψ δ →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c →
+      ∀ (n : ℤ) {b : Fin k},
+        (∀ (i : Fin k), i ≠ b → i ≠ X → i ≠ Y → ¬IsTip c p (hub p ψ n) i) →
+          ∃ κ,
+            0 < κ ∧
+              HubColours c p b X Y (HadwigerNelson.Outside.OAI158.liftPalette c hc p X) (ψ + ↑(n + 1) * (Real.pi / 3)) κ
+@OutsideOrbit.hubColours_flip : ∀ {k : ℕ} {c : ℂ → Fin k} {hc : Measurable c} {p : ℂ} {X Y : Fin k} {ψ δ : ℝ},
+  OutsideOrbit c hc p X Y ψ δ →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c →
+      ∀ (n : ℤ) {b : Fin k},
+        (∀ (i : Fin k), i ≠ b → i ≠ X → i ≠ Y → ¬IsTip c p (hub p ψ (n + 1)) i) →
+          ∃ κ,
+            0 < κ ∧
+              HubColours c p b X Y {θ | θ - Real.pi / 3 ∉ HadwigerNelson.Outside.OAI158.liftPalette c hc p X}
+                (ψ + ↑(n + 1) * (Real.pi / 3) + Real.pi / 3) κ
+@measurableSet_liftPalette : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c) (p : ℂ) (i : Fin k),
+  MeasurableSet (HadwigerNelson.Outside.OAI158.liftPalette c hc p i)
+@IsTip.dist_le_one : ∀ {k : ℕ} {c : ℂ → Fin k} {p y q : ℂ} {i : Fin k},
+  IsTip c p y i →
+    Disjoint (HadwigerNelson.Outside.OAI158.spatialSupport c i) (HadwigerNelson.Outside.OAI158.Straddle {p, q}) →
+      dist q y ≤ 1
+@IsTip.inner_pos : ∀ {k : ℕ} {c : ℂ → Fin k} {p y q : ℂ} {i : Fin k},
+  dist y p = 1 →
+    IsTip c p y i →
+      q ≠ p →
+        Disjoint (HadwigerNelson.Outside.OAI158.spatialSupport c i) (HadwigerNelson.Outside.OAI158.Straddle {p, q}) →
+          0 < inner ℝ (q - p) (y - p)
+@tip_antipodal : ∀ {k : ℕ} {c : ℂ → Fin k} {p : ℂ} {a : Fin 4 → Fin k} {q : Fin 4 → ℂ},
+  (∀ (j : Fin 4), q j ≠ p) →
+    (∀ (j : Fin 4),
+        Disjoint (HadwigerNelson.Outside.OAI158.spatialSupport c (a j))
+          (HadwigerNelson.Outside.OAI158.Straddle {p, q j})) →
+      (∀ (j : Fin 4),
+          Disjoint (HadwigerNelson.Outside.OAI158.spatialSupport c (a (j + 1)))
+            (HadwigerNelson.Outside.OAI158.Straddle {p, q j})) →
+        ∀ {y y' : ℂ},
+          dist y p = 1 → y' - p = -(y - p) → ∀ {j j' : Fin 4}, IsTip c p y (a j) → IsTip c p y' (a j') → j' = j + 2
+@tip_unique : ∀ {k : ℕ} {c : ℂ → Fin k} {p : ℂ} {a : Fin 4 → Fin k} {q : Fin 4 → ℂ},
+  (∀ (j : Fin 4), q j ≠ p) →
+    (∀ (j : Fin 4),
+        Disjoint (HadwigerNelson.Outside.OAI158.spatialSupport c (a j))
+          (HadwigerNelson.Outside.OAI158.Straddle {p, q j})) →
+      (∀ (j : Fin 4),
+          Disjoint (HadwigerNelson.Outside.OAI158.spatialSupport c (a (j + 1)))
+            (HadwigerNelson.Outside.OAI158.Straddle {p, q j})) →
+        ∀ (ψ : ℝ) (τ : ℤ → Fin 4),
+          (∀ (n : ℤ), IsTip c p (hub p ψ n) (a (τ n))) → ∀ {n : ℤ} {j : Fin 4}, IsTip c p (hub p ψ n) (a j) → j = τ n
+adjacent_of_signs : ∀ (t : Fin 3 → Fin 4) (σ : Fin 4 → Fin 3 → ℝ),
+  (∀ (n : Fin 3) (j : Fin 4), j = t n ∨ j + 1 = t n → 0 < σ j n) →
+    (∀ (n : Fin 3) (j : Fin 4), j = t n + 1 ∨ j = t n + 2 → σ j n < 0) →
+      (∀ (j : Fin 4), σ j 1 = σ j 0 + σ j 2) → t 0 = t 1 ∨ t 1 = t 2 ∨ t 2 = t 0 + 2
+@exists_adjacent_tips : ∀ {k : ℕ} {c : ℂ → Fin k} {p : ℂ} {a : Fin 4 → Fin k} {q : Fin 4 → ℂ},
+  (∀ (j : Fin 4), q j ≠ p) →
+    (∀ (j : Fin 4),
+        Disjoint (HadwigerNelson.Outside.OAI158.spatialSupport c (a j))
+          (HadwigerNelson.Outside.OAI158.Straddle {p, q j})) →
+      (∀ (j : Fin 4),
+          Disjoint (HadwigerNelson.Outside.OAI158.spatialSupport c (a (j + 1)))
+            (HadwigerNelson.Outside.OAI158.Straddle {p, q j})) →
+        ∀ (ψ : ℝ) (τ : ℤ → Fin 4), (∀ (n : ℤ), IsTip c p (hub p ψ n) (a (τ n))) → ∃ n, τ n = τ (n + 1)
+@exists_cycle_label : ∀ {a : Fin 4 → Fin 6},
+  Function.Injective a →
+    ∀ {X Y : Fin 6},
+      X ≠ Y → (∀ (j : Fin 4), a j ≠ X) → (∀ (j : Fin 4), a j ≠ Y) → ∀ {i : Fin 6}, i ≠ X → i ≠ Y → ∃ j, a j = i
+@chart_step_false : ∀ {k : ℕ} {c : ℂ → Fin k},
+  Measurable c →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c →
+      ∀ (p : ℂ) {b X Y : Fin k} {S : Set ℝ},
+        MeasurableSet S →
+          ∀ {t κ : ℝ},
+            0 < κ →
+              (∀ (η : ℝ),
+                  0 < η →
+                    0 < MeasureTheory.volume (S ∩ Set.Ioo (t - η) (t + η)) ∧
+                      0 < MeasureTheory.volume (Sᶜ ∩ Set.Ioo (t - η) (t + η))) →
+                HubColours c p b X Y S t κ → HubColours c p b X Y {θ | θ - Real.pi / 3 ∉ S} (t + Real.pi / 3) κ → False
+@no_double_change : ∀ {k : ℕ} {c : ℂ → Fin k},
+  Measurable c →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c →
+      ∀ (p : ℂ) {b X Y : Fin k} {S : Set ℝ} {t κ κ' : ℝ},
+        0 < κ' →
+          3 * κ' ≤ κ →
+            κ' ≤ 1 / 4 →
+              ShiftBounds shift κ' →
+                HubColours c p b X Y S t κ →
+                  HubColours c p b X Y {θ | θ - Real.pi / 3 ∉ S} (t + Real.pi / 3) κ → NoDoubleChange shift S t κ'
+@step_kill : ∀ {k : ℕ} {c : ℂ → Fin k},
+  Measurable c →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c →
+      ∀ (p : ℂ) {b X Y : Fin k} {S : Set ℝ},
+        MeasurableSet S →
+          ∀ {t κ κ' : ℝ},
+            0 < κ' →
+              3 * κ' ≤ κ →
+                κ' ≤ 1 / 4 →
+                  ShiftBounds shift κ' →
+                    HubColours c p b X Y S t κ →
+                      HubColours c p b X Y {θ | θ - Real.pi / 3 ∉ S} (t + Real.pi / 3) κ →
+                        ((∀ᵐ (θ : ℝ), |θ - t| < κ' / 4 → (θ ∈ S ↔ θ < t)) ∨
+                            ∀ᵐ (θ : ℝ), |θ - t| < κ' / 4 → (θ ∈ S ↔ t < θ)) →
+                          False
+@step_lemma : ∀ {ε : ℝ → ℝ → ℝ} {κ : ℝ},
+  0 < κ →
+    ShiftBounds ε κ →
+      ∀ {S : Set ℝ},
+        MeasurableSet S →
+          ∀ {t : ℝ},
+            NoDoubleChange ε S t κ →
+              ∃ t', (∀ᵐ (θ : ℝ), |θ - t| < κ / 4 → (θ ∈ S ↔ θ < t')) ∨ ∀ᵐ (θ : ℝ), |θ - t| < κ / 4 → (θ ∈ S ↔ t' < θ)
+@step_at_of_change : ∀ {S : Set ℝ} {t r : ℝ},
+  0 < r →
+    (∀ (η : ℝ),
+        0 < η →
+          0 < MeasureTheory.volume (S ∩ Set.Ioo (t - η) (t + η)) ∧
+            0 < MeasureTheory.volume (Sᶜ ∩ Set.Ioo (t - η) (t + η))) →
+      ∀ {t' : ℝ}, ((∀ᵐ (θ : ℝ), |θ - t| < r → (θ ∈ S ↔ θ < t')) ∨ ∀ᵐ (θ : ℝ), |θ - t| < r → (θ ∈ S ↔ t' < θ)) → t' = t
+@volume_change_pairs_pos : ∀ {S : Set ℝ},
+  MeasurableSet S →
+    ∀ {t : ℝ},
+      (∀ (η : ℝ),
+          0 < η →
+            0 < MeasureTheory.volume (S ∩ Set.Ioo (t - η) (t + η)) ∧
+              0 < MeasureTheory.volume (Sᶜ ∩ Set.Ioo (t - η) (t + η))) →
+        ∀ {κ : ℝ}, 0 < κ → 0 < MeasureTheory.volume {x | |x.1 - t| < κ ∧ 0 < x.2 ∧ x.2 < κ ∧ (x.1 ∈ S ↔ x.1 - x.2 ∉ S)}
+@exists_step_or_density_triple : ∀ {S : Set ℝ},
+  MeasurableSet S →
+    ∀ (l r : ℝ),
+      (∃ t', (∀ᵐ (θ : ℝ), θ ∈ Set.Ioo l r → (θ ∈ S ↔ θ < t')) ∨ ∀ᵐ (θ : ℝ), θ ∈ Set.Ioo l r → (θ ∈ S ↔ t' < θ)) ∨
+        ∃ a b c,
+          l < a ∧
+            a < b ∧
+              b < c ∧
+                c < r ∧
+                  (IsDensityPt S a ∧ IsDensityPt Sᶜ b ∧ IsDensityPt S c ∨
+                    IsDensityPt Sᶜ a ∧ IsDensityPt S b ∧ IsDensityPt Sᶜ c)
+@exists_window : ∀ {E : Set ℝ},
+  MeasurableSet E →
+    ∀ {a b c : ℝ},
+      a < b →
+        b < c →
+          IsDensityPt Eᶜ a →
+            IsDensityPt E b →
+              IsDensityPt Eᶜ c →
+                ∃ u w ρ,
+                  0 < ρ ∧
+                    a ≤ u ∧
+                      u ≤ b - ρ ∧
+                        b + ρ ≤ w ∧
+                          w ≤ c ∧
+                            IsDensityPt Eᶜ u ∧
+                              IsDensityPt Eᶜ w ∧
+                                (b - u ≤ 2 * ρ ∨ w - b ≤ 2 * ρ) ∧
+                                  ENNReal.ofReal (7 / 4 * ρ) ≤ MeasureTheory.volume (E ∩ Set.Ioo (b - ρ) (b + ρ))
+@exists_shiftMap : ∀ {ε : ℝ → ℝ → ℝ} {κ : ℝ},
+  ShiftBounds ε κ →
+    ∀ {u w : ℝ},
+      u < w →
+        w - u < κ →
+          ∃ g,
+            (∀ v ∈ Set.Ioo u w, v < g v ∧ g v < w ∧ g v = v + ε (v - u) (w - g v)) ∧
+              ∀ v₁ ∈ Set.Ioo u w,
+                ∀ v₂ ∈ Set.Ioo u w, v₁ ≤ v₂ → 7 / 8 * (v₂ - v₁) ≤ g v₂ - g v₁ ∧ g v₂ - g v₁ ≤ 9 / 8 * (v₂ - v₁)
+@exists_density_pair : ∀ {F : Set ℝ},
+  MeasurableSet F →
+    ∀ {b ρ : ℝ},
+      0 < ρ →
+        F ⊆ Set.Ioo (b - ρ) (b + ρ) →
+          ENNReal.ofReal (7 / 4 * ρ) ≤ MeasureTheory.volume F →
+            ∀ {g : ℝ → ℝ},
+              (∀ v ∈ F, v < g v ∧ g v ≤ v + 3 / 16 * ρ) →
+                (∀ v₁ ∈ F, ∀ v₂ ∈ F, v₁ ≤ v₂ → 7 / 8 * (v₂ - v₁) ≤ g v₂ - g v₁ ∧ g v₂ - g v₁ ≤ 9 / 8 * (v₂ - v₁)) →
+                  ∃ v ∈ F, g v ∈ F ∧ IsDensityPt F v ∧ IsDensityPt F (g v)
+@volume_pattern_pos : ∀ {ε : ℝ → ℝ → ℝ} {κ : ℝ},
+  ShiftBounds ε κ →
+    ∀ {E₁ E₂ : Set ℝ},
+      MeasurableSet E₁ →
+        MeasurableSet E₂ →
+          ∀ {α d d' : ℝ},
+            0 < d →
+              d < κ →
+                0 < d' →
+                  d' < κ →
+                    IsDensityPt E₁ (α - d) →
+                      IsDensityPt E₂ α →
+                        IsDensityPt E₂ (α + ε d d') →
+                          IsDensityPt E₁ (α + ε d d' + d') →
+                            ∀ {η : ℝ},
+                              0 < η →
+                                0 <
+                                  MeasureTheory.volume
+                                    {y |
+                                      |y.1 - α| < η ∧
+                                        |y.2.1 - d| < η ∧
+                                          |y.2.2 - d'| < η ∧
+                                            y.1 - y.2.1 ∈ E₁ ∧
+                                              y.1 ∈ E₂ ∧ y.1 + ε y.2.1 y.2.2 ∈ E₂ ∧ y.1 + ε y.2.1 y.2.2 + y.2.2 ∈ E₁}
+chart_quasiMeasurePreserving : ∀ (p : ℂ),
+  MeasureTheory.Measure.QuasiMeasurePreserving (fun x => chart p x.1 x.2) MeasureTheory.volume MeasureTheory.volume
+@shear_quasiMeasurePreserving : ∀ {f : ℝ × ℝ → ℝ},
+  Measurable f →
+    MeasureTheory.Measure.QuasiMeasurePreserving (fun y => (y.1 + f y.2, y.2.2)) MeasureTheory.volume
+      MeasureTheory.volume
+@ae_ne_of_not_isTip : ∀ {k : ℕ} {c : ℂ → Fin k},
+  Measurable c →
+    ∀ {p : ℂ} {ψ : ℝ} {n : ℤ} {i : Fin k},
+      ¬IsTip c p (hub p ψ n) i →
+        ∃ κ,
+          0 < κ ∧
+            ∀ᵐ (x : ℝ × ℝ), |x.1 - (ψ + ↑(n + 1) * (Real.pi / 3))| < κ → 0 < x.2 → x.2 < κ → c (chart p x.1 x.2) ≠ i
+@unitPair_chart_ae : ∀ {k : ℕ} {c : ℂ → Fin k},
+  Measurable c →
+    HadwigerNelson.Outside.OAI158.WeakColoring k c →
+      ∀ (p : ℂ),
+        ∀ᵐ (y : ℝ × ℝ × ℝ),
+          0 < y.2.1 →
+            y.2.1 < 1 / 4 →
+              0 < y.2.2 →
+                y.2.2 < 1 / 4 →
+                  c (chart p y.1 y.2.1) ≠ c (chart p (y.1 + shift y.2.1 y.2.2 + y.2.2 + Real.pi / 3) y.2.2)
+@ringRadius_mem : ∀ {d : ℝ}, 0 ≤ d → d ≤ 1 / 4 → 1 / 2 < ringRadius d ∧ ringRadius d ≤ 1
+shift_comm : ∀ (d d' : ℝ), shift d d' = shift d' d
+@shift_zero_right : ∀ {d : ℝ}, 0 ≤ d → d ≤ 1 / 4 → shift d 0 = 0
+dist_chart_chart_shift : ∀ (p : ℂ) (α : ℝ) {d d' : ℝ},
+  0 ≤ d → d ≤ 1 / 4 → 0 ≤ d' → d' ≤ 1 / 4 → dist (chart p α d) (chart p (α + shift d d' + d' + Real.pi / 3) d') = 1
+@shift_pos : ∀ {d d' : ℝ}, 0 < d → d ≤ 1 / 4 → 0 < d' → d' ≤ 1 / 4 → 0 < shift d d'
+exists_shift_lipschitz : ∃ κ,
+  0 < κ ∧
+    κ ≤ 1 / 4 ∧
+      ∀ (d₁ d₂ d' : ℝ),
+        0 ≤ d₁ → d₁ ≤ κ → 0 ≤ d₂ → d₂ ≤ κ → 0 ≤ d' → d' ≤ κ → |shift d₁ d' - shift d₂ d'| ≤ |d₁ - d₂| / 32
+measurable_shift : Measurable fun x => shift x.1 x.2
+exists_shiftBounds : ∃ κ, 0 < κ ∧ κ ≤ 1 / 4 ∧ ShiftBounds shift κ
+chart_eq_polar : ∀ (p : ℂ) (α d : ℝ),
+  chart p α d = p + ↑(ringRadius d) * HadwigerNelson.Plane.e (α - Real.pi / 3 - d / 2)
+chart_zero : ∀ (p : ℂ) (α : ℝ), chart p α 0 = p + HadwigerNelson.Plane.e (α - Real.pi / 3)
+chart_hub : ∀ (p : ℂ) (ψ : ℝ) (n : ℤ), chart p (ψ + ↑(n + 1) * (Real.pi / 3)) 0 = hub p ψ n
+dist_chart_centre : ∀ (p : ℂ) (α d : ℝ), dist (chart p α d) p = |ringRadius d|
+@dist_chart_lt_one : ∀ {d : ℝ}, 0 < d → d ≤ Real.pi / 3 → ∀ (p : ℂ) (α : ℝ), dist (chart p α d) p < 1
+continuous_chart : ∀ (p : ℂ), Continuous fun x => chart p x.1 x.2
+chart_eq_angularSum : ∀ (p : ℂ) (α d : ℝ),
+  chart p α d = HadwigerNelson.Outside.OAI158.angularSum p 1 (↑α, ↑(α - 2 * Real.pi / 3 - d))
+dist_hub : ∀ (p : ℂ) (ψ : ℝ) (n : ℤ), dist (hub p ψ n) p = 1
+hub_add_three : ∀ (p : ℂ) (ψ : ℝ) (n : ℤ), hub p ψ (n + 3) - p = -(hub p ψ n - p)
+hub_axes : ∀ (p : ℂ) (ψ : ℝ) (n : ℤ), hub p ψ (n + 1) - p = hub p ψ n - p + (hub p ψ (n + 2) - p)
+hub_shift : ∀ (p : ℂ) (ψ : ℝ) (m n : ℤ), hub p (ψ + ↑m * (Real.pi / 3)) n = hub p ψ (m + n)
+@exists_change_of_ae_outside : ∀ {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (p : ℂ) {X Y : Fin k},
+      X ≠ Y →
+        (∀ᵐ (t : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+            X ∈ HadwigerNelson.Outside.OAI158.palette c hc p t ∨ Y ∈ HadwigerNelson.Outside.OAI158.palette c hc p t) →
+          ∃ ψ,
+            ∀ (η : ℝ),
+              0 < η →
+                0 <
+                    MeasureTheory.volume
+                      {θ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ X ∈ HadwigerNelson.Outside.OAI158.palette c hc p ↑θ} ∧
+                  0 <
+                    MeasureTheory.volume
+                      {θ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ Y ∈ HadwigerNelson.Outside.OAI158.palette c hc p ↑θ}
+@ae_real_of_ae_angles : ∀ {P : HadwigerNelson.Outside.OAI158.Angles → Prop},
+  (∀ᵐ (t : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure, P t) → ∀ᵐ (θ : ℝ), P ↑θ
+@no_alternating_groups : ∀ {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (p : ℂ) {J K : Finset (Fin k)},
+      (Finset.univ \ (J ∪ K)).card ≤ 2 →
+        ∀ (w : HadwigerNelson.Outside.OAI158.Angles → Bool),
+          Measurable w →
+            (∀ᵐ (t : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+                (if w t = true then K else J) ⊆ HadwigerNelson.Outside.OAI158.palette c hc p t) →
+              (∀ᵐ (t : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+                  w (t + ↑HadwigerNelson.Outside.OAI158.sixty) ≠ w t) →
+                False
+@no_alternating_pairs : ∀ {c : ℂ → Fin 6} (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring 6 c →
+    ∀ (p : ℂ) {D D' : Finset (Fin 6)},
+      D.card = 2 →
+        D'.card = 2 →
+          Disjoint D D' →
+            ∀ (w : HadwigerNelson.Outside.OAI158.Angles → Bool),
+              Measurable w →
+                (∀ᵐ (t : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+                    (if w t = true then D' else D) ⊆ HadwigerNelson.Outside.OAI158.palette c hc p t) →
+                  (∀ᵐ (t : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+                      w (t + ↑HadwigerNelson.Outside.OAI158.sixty) ≠ w t) →
+                    False
+@palette_transfer_pair : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (x : ℂ),
+      ∀ᵐ (p :
+        HadwigerNelson.Outside.OAI158.Angles ×
+          HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure.prod
+          HadwigerNelson.Outside.OAI158.angularMeasure,
+        c (HadwigerNelson.Outside.OAI158.angularSum x 1 p) ∉
+          HadwigerNelson.Outside.OAI158.palette c hc x p.1 ∪ HadwigerNelson.Outside.OAI158.palette c hc x p.2
+@palette_sixty_disjoint : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (x : ℂ),
+      ∀ᵐ (f : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+        Disjoint (HadwigerNelson.Outside.OAI158.palette c hc x f)
+          (HadwigerNelson.Outside.OAI158.palette c hc x (f + ↑HadwigerNelson.Outside.OAI158.sixty))
+@two_state_impossible : ∀ {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (x : ℂ) (J K : Finset (Fin k)),
+      (Finset.univ \ (J ∪ K)).card ≤ 2 →
+        ∀ (s : HadwigerNelson.Outside.OAI158.Angles → Bool),
+          Measurable s →
+            HadwigerNelson.Outside.OAI158.RealState hc x {t | s ↑t = false} J →
+              HadwigerNelson.Outside.OAI158.RealState hc x {t | s ↑t = true} K →
+                (∀ᵐ (t : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+                    s (t + ↑(Real.pi / 3)) = !s t) →
+                  False
+@mem_spatialSupport_ae : ∀ {k : ℕ} (c : ℂ → Fin k),
+  Measurable c → ∀ (i : Fin k), ∀ᵐ (z : ℂ), c z = i → z ∈ HadwigerNelson.Outside.OAI158.spatialSupport c i
+'HadwigerNelson.SixRing.no_outside_orbit_points' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.exists_shiftBounds' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.shiftBounds_model' depends on axioms: [propext, Classical.choice, Quot.sound]

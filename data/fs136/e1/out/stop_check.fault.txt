@@ -1,0 +1,13 @@
+flower: p=(0.00000,0.00000) x=(0.86603,-0.50000) y=(0.86603,0.50000) w=x+y-p=(1.75205,0.00000)
+  1. |w-x|=1:False |w-y|=1:False 0<|x-y|<2:True |w-p|: d^2 = 3:False
+flower: STEP 1 FAILS - nothing concluded
+disk: p=(-0.50000,0.16246) x=(-1.50000,0.16246) y=(-0.80902,1.11352) w=x+y-p=(-1.78902,1.11352)
+  1. |w-x|=1:False |w-y|=1:False 0<|x-y|<2:True |w-p|: d^2 = phi^2:False
+disk: STEP 1 FAILS - nothing concluded
+strip: p=(0.00000,0.00000) x=(-0.25000,0.96825) y=(0.50000,0.86603) w=x+y-p=(0.27000,1.83427)
+  1. |w-x|=1:False |w-y|=1:False 0<|x-y|<2:True |w-p|: d^2 = phi^4/2:False
+strip: STEP 1 FAILS - nothing concluded
+bowtie: p=(0.00000,0.00000) x=(0.86603,-0.50000) y=(0.86603,0.50000) w=x+y-p=(1.75205,0.00000)
+  1. |w-x|=1:False |w-y|=1:False 0<|x-y|<2:True |w-p|: d^2 = 3:False
+bowtie: STEP 1 FAILS - nothing concluded
+horn: q=e(-30)+t*e(330), t=1/100: outside-S(p)=True outside-S(e(-90))=True outside-S(e(30))=True inside-the-cut=True strictly-outside-S(w)=False NOT A WITNESS

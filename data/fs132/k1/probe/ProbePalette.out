@@ -1,0 +1,9 @@
+slot: admitted lake: mem 12 GiB (hard cap), cpus 0,1
+data/fs132/k1/probe/ProbePalette.lean:433:8: error: Function expected at
+  eLpNorm_one_eq_lintegral_enorm
+but this term has type
+  eLpNorm ?m.306 1 ?m.305 = ∫⁻ (x : ?m.301), ‖?m.306 x‖ₑ ∂?m.305
+
+Note: Expected a function because this term is being applied to the argument
+  (hv.sub hgi).aestronglyMeasurable
+data/fs132/k1/probe/ProbePalette.lean:649:0: error: Invalid name after `end`: Expected `EuclideanFiveColor`, but found `OAI`

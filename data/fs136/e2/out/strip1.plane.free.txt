@@ -1,0 +1,106 @@
+search request | seed strip1 | point (0.25000,0.96825) | corner [14.5-,45.5-] (out S(0.00000,0.00000) out S(0.50000,0.00000) in S(0.96353,0.26762) out S(-0.46353,0.26762)) | labels left OR
+search request | seed strip1 | point (0.25000,0.96825) | corner [45.5-,134.5+] (out S(0.00000,0.00000) out S(0.50000,0.00000) out S(0.96353,0.26762) out S(-0.46353,0.26762)) | labels left OR
+search request | seed strip1 | point (0.25000,0.96825) | corner [134.5+,165.5+] (out S(0.00000,0.00000) out S(0.50000,0.00000) out S(0.96353,0.26762) in S(-0.46353,0.26762)) | labels left OR
+search request | seed strip1 | point (0.25000,-0.96825) | corner [194.5-,225.5-] (out S(0.00000,0.00000) out S(0.50000,0.00000) out S(0.96353,-0.26762) in S(-0.46353,-0.26762)) | labels left BG
+search request | seed strip1 | point (0.25000,-0.96825) | corner [225.5-,314.5+] (out S(0.00000,0.00000) out S(0.50000,0.00000) out S(0.96353,-0.26762) out S(-0.46353,-0.26762)) | labels left BG
+search request | seed strip1 | point (0.25000,-0.96825) | corner [314.5+,345.5+] (out S(0.00000,0.00000) out S(0.50000,0.00000) in S(0.96353,-0.26762) out S(-0.46353,-0.26762)) | labels left BG
+search request | seed strip1 | point (-0.71353,0.70063) | corner [14.5-,45.5-] (in S(0.00000,0.00000) in S(0.25000,0.96825) out S(-0.46353,-0.26762)) | labels left BGR
+search request | seed strip1 | point (-0.71353,0.70063) | corner [45.5-,105.5-] (out S(0.00000,0.00000) in S(0.25000,0.96825) out S(-0.46353,-0.26762)) | labels left GMR
+search request | seed strip1 | point (-0.71353,0.70063) | corner [105.5-,194.5+] (out S(0.00000,0.00000) out S(0.25000,0.96825) out S(-0.46353,-0.26762)) | labels left GM
+search request | seed strip1 | point (-0.71353,0.70063) | corner [194.5+,225.5+] (out S(0.00000,0.00000) out S(0.25000,0.96825) in S(-0.46353,-0.26762)) | labels left GM
+search request | seed strip1 | point (-0.71353,0.70063) | corner [225.5+,285.5+] (in S(0.00000,0.00000) out S(0.25000,0.96825) in S(-0.46353,-0.26762)) | labels left BG
+search request | seed strip1 | point (-0.71353,0.70063) | corner [285.5+,14.5-] (in S(0.00000,0.00000) in S(0.25000,0.96825) in S(-0.46353,-0.26762)) | labels left BGR
+search request | seed strip1 | point (0.96353,0.26762) | corner [45.5+,105.5+] (out S(0.00000,0.00000) in S(0.25000,0.96825)) | labels left GO
+search request | seed strip1 | point (0.96353,0.26762) | corner [225.5-,285.5-] (in S(0.00000,0.00000) out S(0.25000,0.96825)) | labels left GR
+search request | seed strip1 | point (0.96353,0.26762) | corner [285.5-,45.5+] (out S(0.00000,0.00000) out S(0.25000,0.96825)) | labels left GR
+search request | seed strip1 | point (0.96353,-0.26762) | corner [74.5+,134.5+] (in S(0.00000,0.00000) out S(0.25000,-0.96825)) | labels left GR
+search request | seed strip1 | point (0.96353,-0.26762) | corner [254.5-,314.5-] (out S(0.00000,0.00000) in S(0.25000,-0.96825)) | labels left BR
+search request | seed strip1 | point (0.96353,-0.26762) | corner [314.5-,74.5+] (out S(0.00000,0.00000) out S(0.25000,-0.96825)) | labels left GR
+search request | seed strip1 | point (-0.71353,-0.70063) | corner [74.5-,134.5-] (in S(0.00000,0.00000) out S(0.25000,-0.96825) in S(-0.46353,0.26762)) | labels left OR
+search request | seed strip1 | point (-0.71353,-0.70063) | corner [134.5-,165.5-] (out S(0.00000,0.00000) out S(0.25000,-0.96825) in S(-0.46353,0.26762)) | labels left PR
+search request | seed strip1 | point (-0.71353,-0.70063) | corner [165.5-,254.5+] (out S(0.00000,0.00000) out S(0.25000,-0.96825) out S(-0.46353,0.26762)) | labels left PR
+search request | seed strip1 | point (-0.71353,-0.70063) | corner [254.5+,314.5+] (out S(0.00000,0.00000) in S(0.25000,-0.96825) out S(-0.46353,0.26762)) | labels left GPR
+search request | seed strip1 | point (-0.71353,-0.70063) | corner [314.5+,345.5+] (in S(0.00000,0.00000) in S(0.25000,-0.96825) out S(-0.46353,0.26762)) | labels left GOR
+search request | seed strip1 | point (-0.71353,-0.70063) | corner [345.5+,74.5-] (in S(0.00000,0.00000) in S(0.25000,-0.96825) in S(-0.46353,0.26762)) | labels left GOR
+search request | seed strip1 | point (-0.46353,0.26762) | corner [74.5-,134.5-] (out S(0.50000,0.00000) in S(0.25000,0.96825)) | labels left BR
+search request | seed strip1 | point (-0.46353,0.26762) | corner [134.5-,254.5+] (out S(0.50000,0.00000) out S(0.25000,0.96825)) | labels left BO
+search request | seed strip1 | point (-0.46353,0.26762) | corner [254.5+,314.5+] (in S(0.50000,0.00000) out S(0.25000,0.96825)) | labels left BO
+search request | seed strip1 | point (1.21353,0.70063) | corner [74.5+,134.5+] (out S(0.50000,0.00000) in S(0.25000,0.96825) out S(0.96353,-0.26762)) | labels left BMO
+search request | seed strip1 | point (1.21353,0.70063) | corner [134.5+,165.5+] (in S(0.50000,0.00000) in S(0.25000,0.96825) out S(0.96353,-0.26762)) | labels left BGO
+search request | seed strip1 | point (1.21353,0.70063) | corner [165.5+,254.5-] (in S(0.50000,0.00000) in S(0.25000,0.96825) in S(0.96353,-0.26762)) | labels left BGO
+search request | seed strip1 | point (1.21353,0.70063) | corner [254.5-,314.5-] (in S(0.50000,0.00000) out S(0.25000,0.96825) in S(0.96353,-0.26762)) | labels left BG
+search request | seed strip1 | point (1.21353,0.70063) | corner [314.5-,345.5-] (out S(0.50000,0.00000) out S(0.25000,0.96825) in S(0.96353,-0.26762)) | labels left BM
+search request | seed strip1 | point (1.21353,0.70063) | corner [345.5-,74.5+] (out S(0.50000,0.00000) out S(0.25000,0.96825) out S(0.96353,-0.26762)) | labels left BM
+search request | seed strip1 | point (1.21353,-0.70063) | corner [14.5+,45.5+] (out S(0.50000,0.00000) out S(0.25000,-0.96825) in S(0.96353,0.26762)) | labels left OP
+search request | seed strip1 | point (1.21353,-0.70063) | corner [45.5+,105.5+] (in S(0.50000,0.00000) out S(0.25000,-0.96825) in S(0.96353,0.26762)) | labels left OR
+search request | seed strip1 | point (1.21353,-0.70063) | corner [105.5+,194.5-] (in S(0.50000,0.00000) in S(0.25000,-0.96825) in S(0.96353,0.26762)) | labels left BOR
+search request | seed strip1 | point (1.21353,-0.70063) | corner [194.5-,225.5-] (in S(0.50000,0.00000) in S(0.25000,-0.96825) out S(0.96353,0.26762)) | labels left BOR
+search request | seed strip1 | point (1.21353,-0.70063) | corner [225.5-,285.5-] (out S(0.50000,0.00000) in S(0.25000,-0.96825) out S(0.96353,0.26762)) | labels left BOP
+search request | seed strip1 | point (1.21353,-0.70063) | corner [285.5-,14.5+] (out S(0.50000,0.00000) out S(0.25000,-0.96825) out S(0.96353,0.26762)) | labels left OP
+search request | seed strip1 | point (-0.46353,-0.26762) | corner [45.5-,105.5-] (in S(0.50000,0.00000) out S(0.25000,-0.96825)) | labels left BO
+search request | seed strip1 | point (-0.46353,-0.26762) | corner [105.5-,225.5+] (out S(0.50000,0.00000) out S(0.25000,-0.96825)) | labels left BO
+search request | seed strip1 | point (-0.46353,-0.26762) | corner [225.5+,285.5+] (out S(0.50000,0.00000) in S(0.25000,-0.96825)) | labels left GO
+search request | seed strip1 | point (0.71353,-0.70063) | corner [45.5+,165.5-] (in S(0.00000,0.00000) in S(0.96353,0.26762)) | labels left MR
+search request | seed strip1 | point (0.71353,-0.70063) | corner [165.5-,225.5-] (in S(0.00000,0.00000) out S(0.96353,0.26762)) | labels left MR
+search request | seed strip1 | point (0.71353,-0.70063) | corner [225.5-,345.5+] (out S(0.00000,0.00000) out S(0.96353,0.26762)) | labels left BR
+search request | seed strip1 | point (0.71353,-0.70063) | corner [345.5+,45.5+] (out S(0.00000,0.00000) in S(0.96353,0.26762)) | labels left BR
+search request | seed strip1 | point (0.71353,0.70063) | corner [14.5-,134.5+] (out S(0.00000,0.00000) out S(0.96353,-0.26762)) | labels left GO
+search request | seed strip1 | point (0.71353,0.70063) | corner [134.5+,194.5+] (in S(0.00000,0.00000) out S(0.96353,-0.26762)) | labels left GP
+search request | seed strip1 | point (0.71353,0.70063) | corner [194.5+,314.5-] (in S(0.00000,0.00000) in S(0.96353,-0.26762)) | labels left GP
+search request | seed strip1 | point (0.71353,0.70063) | corner [314.5-,14.5-] (out S(0.00000,0.00000) in S(0.96353,-0.26762)) | labels left GO
+search request | seed strip1 | point (-0.21353,-0.70063) | corner [14.5+,134.5-] (in S(0.50000,0.00000) in S(-0.46353,0.26762)) | labels left MO
+search request | seed strip1 | point (-0.21353,-0.70063) | corner [134.5-,194.5-] (out S(0.50000,0.00000) in S(-0.46353,0.26762)) | labels left GO
+search request | seed strip1 | point (-0.21353,-0.70063) | corner [194.5-,314.5+] (out S(0.50000,0.00000) out S(-0.46353,0.26762)) | labels left GO
+search request | seed strip1 | point (-0.21353,-0.70063) | corner [314.5+,14.5+] (in S(0.50000,0.00000) out S(-0.46353,0.26762)) | labels left MO
+search request | seed strip1 | point (-0.21353,0.70063) | corner [45.5-,165.5+] (out S(0.50000,0.00000) out S(-0.46353,-0.26762)) | labels left BR
+search request | seed strip1 | point (-0.21353,0.70063) | corner [165.5+,225.5+] (out S(0.50000,0.00000) in S(-0.46353,-0.26762)) | labels left BR
+search request | seed strip1 | point (-0.21353,0.70063) | corner [225.5+,345.5-] (in S(0.50000,0.00000) in S(-0.46353,-0.26762)) | labels left BP
+search request | seed strip1 | point (-0.21353,0.70063) | corner [345.5-,45.5-] (in S(0.50000,0.00000) out S(-0.46353,-0.26762)) | labels left BP
+search request | seed strip1 | point (1.21353,1.23586) | corner [105.5+,165.5+] (in S(0.25000,0.96825) out S(0.96353,0.26762)) | labels left BMO
+search request | seed strip1 | point (1.21353,1.23586) | corner [165.5+,285.5-] (in S(0.25000,0.96825) in S(0.96353,0.26762)) | labels left BMO
+search request | seed strip1 | point (1.21353,1.23586) | corner [285.5-,345.5-] (out S(0.25000,0.96825) in S(0.96353,0.26762)) | labels left BMR
+search request | seed strip1 | point (1.21353,1.23586) | corner [345.5-,105.5+] (out S(0.25000,0.96825) out S(0.96353,0.26762)) | labels left BMR
+search request | seed strip1 | point (-0.71353,1.23586) | corner [14.5-,74.5-] (in S(0.25000,0.96825) out S(-0.46353,0.26762)) | labels left GMR
+search request | seed strip1 | point (-0.71353,1.23586) | corner [74.5-,194.5+] (out S(0.25000,0.96825) out S(-0.46353,0.26762)) | labels left GMO
+search request | seed strip1 | point (-0.71353,1.23586) | corner [194.5+,254.5+] (out S(0.25000,0.96825) in S(-0.46353,0.26762)) | labels left GMO
+search request | seed strip1 | point (-0.71353,1.23586) | corner [254.5+,14.5-] (in S(0.25000,0.96825) in S(-0.46353,0.26762)) | labels left GMR
+search request | seed strip1 | point (1.21353,-1.23586) | corner [14.5+,74.5+] (out S(0.25000,-0.96825) in S(0.96353,-0.26762)) | labels left GOP
+search request | seed strip1 | point (1.21353,-1.23586) | corner [74.5+,194.5-] (in S(0.25000,-0.96825) in S(0.96353,-0.26762)) | labels left BOP
+search request | seed strip1 | point (1.21353,-1.23586) | corner [194.5-,254.5-] (in S(0.25000,-0.96825) out S(0.96353,-0.26762)) | labels left BOP
+search request | seed strip1 | point (1.21353,-1.23586) | corner [254.5-,14.5+] (out S(0.25000,-0.96825) out S(0.96353,-0.26762)) | labels left GOP
+search request | seed strip1 | point (-0.71353,-1.23586) | corner [105.5-,165.5-] (out S(0.25000,-0.96825) in S(-0.46353,-0.26762)) | labels left BPR
+search request | seed strip1 | point (-0.71353,-1.23586) | corner [165.5-,285.5+] (out S(0.25000,-0.96825) out S(-0.46353,-0.26762)) | labels left BPR
+search request | seed strip1 | point (-0.71353,-1.23586) | corner [285.5+,345.5+] (in S(0.25000,-0.96825) out S(-0.46353,-0.26762)) | labels left GPR
+search request | seed strip1 | point (-0.71353,-1.23586) | corner [345.5+,105.5-] (in S(0.25000,-0.96825) in S(-0.46353,-0.26762)) | labels left GPR
+search request | seed strip1 | point (1.92705,0.00000) | corner [74.5+,105.5+] (in S(0.96353,0.26762) out S(0.96353,-0.26762)) | labels left BMOPR
+search request | seed strip1 | point (1.92705,0.00000) | corner [105.5+,254.5-] (in S(0.96353,0.26762) in S(0.96353,-0.26762)) | labels left BMOP
+search request | seed strip1 | point (1.92705,0.00000) | corner [254.5-,285.5-] (out S(0.96353,0.26762) in S(0.96353,-0.26762)) | labels left BGMOP
+search request | seed strip1 | point (1.92705,0.00000) | corner [285.5-,74.5+] (out S(0.96353,0.26762) out S(0.96353,-0.26762)) | labels left BGMOPR
+search request | seed strip1 | point (0.25000,-0.43301) | corner [45.5+,134.5-] (in S(0.96353,0.26762) in S(-0.46353,0.26762)) | labels left MOPR
+search request | seed strip1 | point (0.25000,-0.43301) | corner [134.5-,225.5-] (out S(0.96353,0.26762) in S(-0.46353,0.26762)) | labels left MOPR
+search request | seed strip1 | point (0.25000,-0.43301) | corner [225.5-,314.5+] (out S(0.96353,0.26762) out S(-0.46353,0.26762)) | labels left MOPR
+search request | seed strip1 | point (0.25000,-0.43301) | corner [314.5+,45.5+] (in S(0.96353,0.26762) out S(-0.46353,0.26762)) | labels left MOPR
+search request | seed strip1 | point (0.47739,-0.60627) | corner [70.2+,150.9-] (in S(0.96353,0.26762) in S(-0.46353,-0.26762)) | labels left BMOPR
+search request | seed strip1 | point (0.47739,-0.60627) | corner [150.9-,250.2-] (out S(0.96353,0.26762) in S(-0.46353,-0.26762)) | labels left BMOPR
+search request | seed strip1 | point (0.47739,-0.60627) | corner [250.2-,330.9+] (out S(0.96353,0.26762) out S(-0.46353,-0.26762)) | labels left BMPR
+search request | seed strip1 | point (0.47739,-0.60627) | corner [330.9+,70.2+] (in S(0.96353,0.26762) out S(-0.46353,-0.26762)) | labels left BMPR
+search request | seed strip1 | point (0.02261,0.60627) | corner [70.2-,150.9+] (out S(0.96353,0.26762) out S(-0.46353,-0.26762)) | labels left BMPR
+search request | seed strip1 | point (0.02261,0.60627) | corner [150.9+,250.2+] (out S(0.96353,0.26762) in S(-0.46353,-0.26762)) | labels left BMPR
+search request | seed strip1 | point (0.02261,0.60627) | corner [250.2+,330.9-] (in S(0.96353,0.26762) in S(-0.46353,-0.26762)) | labels left BGMPR
+search request | seed strip1 | point (0.02261,0.60627) | corner [330.9-,70.2-] (in S(0.96353,0.26762) out S(-0.46353,-0.26762)) | labels left BGMPR
+search request | seed strip1 | point (0.02261,-0.60627) | corner [29.1+,109.8-] (in S(0.96353,-0.26762) in S(-0.46353,0.26762)) | labels left GMOPR
+search request | seed strip1 | point (0.02261,-0.60627) | corner [109.8-,209.1-] (out S(0.96353,-0.26762) in S(-0.46353,0.26762)) | labels left GMOP
+search request | seed strip1 | point (0.02261,-0.60627) | corner [209.1-,289.8+] (out S(0.96353,-0.26762) out S(-0.46353,0.26762)) | labels left GMOP
+search request | seed strip1 | point (0.02261,-0.60627) | corner [289.8+,29.1+] (in S(0.96353,-0.26762) out S(-0.46353,0.26762)) | labels left GMOPR
+search request | seed strip1 | point (0.47739,0.60627) | corner [29.1-,109.8+] (out S(0.96353,-0.26762) out S(-0.46353,0.26762)) | labels left GMOP
+search request | seed strip1 | point (0.47739,0.60627) | corner [109.8+,209.1+] (out S(0.96353,-0.26762) in S(-0.46353,0.26762)) | labels left BGMOP
+search request | seed strip1 | point (0.47739,0.60627) | corner [209.1+,289.8-] (in S(0.96353,-0.26762) in S(-0.46353,0.26762)) | labels left BGMOP
+search request | seed strip1 | point (0.47739,0.60627) | corner [289.8-,29.1-] (in S(0.96353,-0.26762) out S(-0.46353,0.26762)) | labels left GMOP
+search request | seed strip1 | point (0.25000,0.43301) | corner [45.5-,134.5+] (out S(0.96353,-0.26762) out S(-0.46353,-0.26762)) | labels left BGMP
+search request | seed strip1 | point (0.25000,0.43301) | corner [134.5+,225.5+] (out S(0.96353,-0.26762) in S(-0.46353,-0.26762)) | labels left BGMP
+search request | seed strip1 | point (0.25000,0.43301) | corner [225.5+,314.5-] (in S(0.96353,-0.26762) in S(-0.46353,-0.26762)) | labels left BGMP
+search request | seed strip1 | point (0.25000,0.43301) | corner [314.5-,45.5-] (in S(0.96353,-0.26762) out S(-0.46353,-0.26762)) | labels left BGMP
+search request | seed strip1 | point (-1.42705,0.00000) | corner [74.5-,105.5-] (in S(-0.46353,0.26762) out S(-0.46353,-0.26762)) | labels left GMOPR
+search request | seed strip1 | point (-1.42705,0.00000) | corner [105.5-,254.5+] (out S(-0.46353,0.26762) out S(-0.46353,-0.26762)) | labels left BGMOPR
+search request | seed strip1 | point (-1.42705,0.00000) | corner [254.5+,285.5+] (out S(-0.46353,0.26762) in S(-0.46353,-0.26762)) | labels left BGMPR
+search request | seed strip1 | point (-1.42705,0.00000) | corner [285.5+,74.5-] (in S(-0.46353,0.26762) in S(-0.46353,-0.26762)) | labels left GMPR

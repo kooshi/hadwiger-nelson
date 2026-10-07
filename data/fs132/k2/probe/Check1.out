@@ -1,0 +1,97 @@
+@Besicovitch.ae_tendsto_measure_inter_div_of_measurableSet : ∀ {β : Type u_1} [inst : MetricSpace β]
+  [inst_1 : MeasurableSpace β] [BorelSpace β] [SecondCountableTopology β] [HasBesicovitchCovering β] (μ : Measure β)
+  [IsLocallyFiniteMeasure μ] {s : Set β},
+  MeasurableSet s →
+    ∀ᵐ (x : β) ∂μ,
+      Filter.Tendsto (fun r => μ (s ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0))
+        (nhds (s.indicator 1 x))
+data/fs132/k2/probe/Check1.lean:5:8: error(lean.unknownIdentifier): Unknown constant `LipschitzOnWith.hausdorffMeasure_image_le`
+data/fs132/k2/probe/Check1.lean:6:8: error(lean.unknownIdentifier): Unknown constant `AntilipschitzWith.le_hausdorffMeasure_image`
+data/fs132/k2/probe/Check1.lean:7:8: error(lean.unknownIdentifier): Unknown identifier `MeasureTheory.hausdorffMeasure_real`
+data/fs132/k2/probe/Check1.lean:8:8: error(lean.unknownIdentifier): Unknown constant `Real.contDiffAt_arccos`
+@arccos_cos : ∀ {x : ℝ}, 0 ≤ x → x ≤ π → arccos (cos x) = x
+@cos_arccos : ∀ {x : ℝ}, -1 ≤ x → x ≤ 1 → cos (arccos x) = x
+strictAntiOn_arccos : StrictAntiOn arccos (Set.Icc (-1) 1)
+@Convex.lipschitzOnWith_of_nnnorm_hasFDerivWithin_le : ∀ {E : Type u_1} [inst : NormedAddCommGroup E]
+  [inst_1 : NormedSpace ℝ E] {𝕜 : Type u_2} {G : Type u_3} [inst_2 : NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜]
+  [inst_4 : NormedSpace 𝕜 E] [inst_5 : NormedAddCommGroup G] [inst_6 : NormedSpace 𝕜 G] {f : E → G} {s : Set E}
+  {f' : E → E →L[𝕜] G} {C : NNReal},
+  (∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) → (∀ x ∈ s, ‖f' x‖₊ ≤ C) → Convex ℝ s → LipschitzOnWith C f s
+@Convex.norm_image_sub_le_of_norm_deriv_le : ∀ {𝕜 : Type u_1} {G : Type u_2} [inst : RCLike 𝕜]
+  [inst_1 : NormedAddCommGroup G] [inst_2 : NormedSpace 𝕜 G] {f : 𝕜 → G} {s : Set 𝕜} {x y : 𝕜} {C : ℝ},
+  (∀ x ∈ s, DifferentiableAt 𝕜 f x) →
+    (∀ x ∈ s, ‖deriv f x‖ ≤ C) → Convex ℝ s → x ∈ s → y ∈ s → ‖f y - f x‖ ≤ C * ‖y - x‖
+@Measure.QuasiMeasurePreserving.ae : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β}
+  {μa : Measure α} {μb : Measure β} {f : α → β},
+  Measure.QuasiMeasurePreserving f μa μb → ∀ {p : β → Prop}, (∀ᵐ (x : β) ∂μb, p x) → ∀ᵐ (x : α) ∂μa, p (f x)
+@Measure.QuasiMeasurePreserving.preimage_null : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α}
+  {mβ : MeasurableSpace β} {μa : Measure α} {μb : Measure β} {f : α → β},
+  Measure.QuasiMeasurePreserving f μa μb → ∀ {s : Set β}, μb s = 0 → μa (f ⁻¹' s) = 0
+@Measure.measure_prod_null : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] {s : Set (α × β)},
+  MeasurableSet s → ((μ.prod ν) s = 0 ↔ (fun x => ν (Prod.mk x ⁻¹' s)) =ᵐ[μ] 0)
+@Measure.ae_prod_iff_ae_ae : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] {p : α × β → Prop},
+  MeasurableSet {x | p x} → ((∀ᵐ (z : α × β) ∂μ.prod ν, p z) ↔ ∀ᵐ (x : α) ∂μ, ∀ᵐ (y : β) ∂ν, p (x, y))
+@measurePreserving_add_right : ∀ {G : Type u_1} [inst : MeasurableSpace G] [inst_1 : Add G] [MeasurableAdd G]
+  (μ : Measure G) [μ.IsAddRightInvariant] (g : G), MeasurePreserving (fun x => x + g) μ μ
+@Measure.quasiMeasurePreserving_fst : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α]
+  [inst_1 : MeasurableSpace β] {μ : Measure α} {ν : Measure β}, Measure.QuasiMeasurePreserving Prod.fst (μ.prod ν) μ
+data/fs132/k2/probe/Check1.lean:20:8: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.QuasiMeasurePreserving.prodMap`
+AddCircle.measurePreserving_mk : ∀ (T : ℝ) [hT : Fact (0 < T)] (t : ℝ),
+  MeasurePreserving QuotientAddGroup.mk (volume.restrict (Set.Ioc t (t + T))) volume
+@AddCircle.volume_eq_smul_haarAddCircle : ∀ {T : ℝ} [hT : Fact (0 < T)],
+  volume = ENNReal.ofReal T • AddCircle.haarAddCircle
+@intermediate_value_Icc : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : ConditionallyCompleteLinearOrder α]
+  [OrderTopology α] [DenselyOrdered α] {δ : Type u_2} [inst_4 : LinearOrder δ] [inst_5 : TopologicalSpace δ]
+  [OrderClosedTopology δ] {a b : α},
+  a ≤ b → ∀ {f : α → δ}, ContinuousOn f (Set.Icc a b) → Set.Icc (f a) (f b) ⊆ f '' Set.Icc a b
+@StrictMonoOn.orderIso : {α : Type u_1} →
+  {β : Type u_2} →
+    [inst : LinearOrder α] → [inst_1 : Preorder β] → (f : α → β) → (s : Set α) → StrictMonoOn f s → ↑s ≃o ↑(f '' s)
+@volume_Ioo : ∀ {a b : ℝ}, volume (Set.Ioo a b) = ENNReal.ofReal (b - a)
+@Measure.support : {X : Type u_1} → [TopologicalSpace X] → [inst : MeasurableSpace X] → Measure X → Set X
+@Measure.support_mem_ae : ∀ {X : Type u_1} [inst : TopologicalSpace X] [inst_1 : MeasurableSpace X] {μ : Measure X}
+  [HereditarilyLindelofSpace X], μ.support ∈ ae μ
+@Measure.mem_support_iff : ∀ {X : Type u_1} [inst : TopologicalSpace X] [inst_1 : MeasurableSpace X] {μ : Measure X}
+  {x : X}, x ∈ μ.support ↔ ∃ᶠ (u : Set X) in (nhds x).smallSets, 0 < μ u
+@HadwigerNelson.Plane.twoCirc_identity : ∀ {y₀ y₁ : ℂ},
+  dist y₀ y₁ = 1 →
+    ∀ {σ : ℝ},
+      σ = 1 ∨ σ = -1 →
+        ∀ (s t : ℝ),
+          ‖y₀ + (y₁ - y₀) * HadwigerNelson.Plane.e (σ * s) - (y₁ + (y₀ - y₁) * HadwigerNelson.Plane.e (-(σ * t)))‖ ^ 2 -
+                1 =
+              -8 * sin (s / 2) * sin (t / 2) * cos ((s + t) / 2) ∧
+            ‖y₀ + (y₁ - y₀) * HadwigerNelson.Plane.e (σ * s) - (y₁ + (y₀ - y₁) * HadwigerNelson.Plane.e (-(σ * t)))‖ ^
+                  2 -
+                1 =
+              2 * (1 - cos s) * (1 - cos t) - 2 * sin s * sin t
+data/fs132/k2/probe/Check1.lean:30:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.Plane.e_add_e_eq`
+HadwigerNelson.Outside.OAI158.direction_coe : ∀ (θ : ℝ),
+  HadwigerNelson.Outside.OAI158.direction ↑θ = HadwigerNelson.Plane.e θ
+@HadwigerNelson.Outside.OAI158.direction_exists : ∀ {u : ℂ},
+  ‖u‖ = 1 → ∃ t, HadwigerNelson.Outside.OAI158.direction t = u
+Complex.volume_preserving_equiv_real_prod : MeasurePreserving (⇑Complex.measurableEquivRealProd) volume volume
+data/fs132/k2/probe/Check1.lean:34:8: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.addHaar_image_le_mul_of_det_lt`
+@IsOpen.measure_pos : ∀ {X : Type u_1} [inst : TopologicalSpace X] {m : MeasurableSpace X} (μ : Measure X)
+  [μ.IsOpenPosMeasure] {U : Set X}, IsOpen U → U.Nonempty → 0 < μ U
+@measure_union_le : ∀ {α : Type u_1} {F : Type u_2} [inst : FunLike F (Set α) ENNReal] [OuterMeasureClass F α] {μ : F}
+  (s t : Set α), μ (s ∪ t) ≤ μ s + μ t
+data/fs132/k2/probe/Check1.lean:37:8: warning: `MeasureTheory.measure_inter_add_diff` has been deprecated: Use `MeasureTheory.measure_inter_add_sdiff` instead
+@measure_inter_add_diff : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {t : Set α} (s : Set α),
+  MeasurableSet t → μ (s ∩ t) + μ (s \ t) = μ s
+data/fs132/k2/probe/Check1.lean:38:8: error(lean.unknownIdentifier): Unknown constant `LipschitzOnWith.comp_measure_image_le`
+data/fs132/k2/probe/Check1.lean:39:8: error(lean.unknownIdentifier): Unknown constant `Measurable.arccos`
+measurable_arccos : Measurable arccos
+@inner_sub_left : ∀ {𝕜 : Type u_1} {E : Type u_2} [inst : RCLike 𝕜] [inst_1 : SeminormedAddCommGroup E]
+  [inst_2 : InnerProductSpace 𝕜 E] (x y z : E), inner 𝕜 (x - y) z = inner 𝕜 x z - inner 𝕜 y z
+@norm_sub_sq_real : ∀ {F : Type u_1} [inst : SeminormedAddCommGroup F] [inst_1 : InnerProductSpace ℝ F] (x y : F),
+  ‖x - y‖ ^ 2 = ‖x‖ ^ 2 - 2 * inner ℝ x y + ‖y‖ ^ 2
+data/fs132/k2/probe/Check1.lean:43:8: error(lean.unknownIdentifier): Unknown constant `ContinuousLinearEquiv.measurableEmbedding`
+data/fs132/k2/probe/Check1.lean:44:8: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.MeasurePreserving.quasiMeasurePreserving`
+@AddCircle.coe_add : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p x y : 𝕜), ↑(x + y) = ↑x + ↑y
+@Finset.card_compl : ∀ {α : Type u_1} [inst : DecidableEq α] [inst_1 : Fintype α] (s : Finset α),
+  sᶜ.card = Fintype.card α - s.card
+@Finset.exists_ne_map_eq_of_card_lt_of_maps_to : ∀ {α : Type u_1} {β : Type u_2} {s : Finset α} {t : Finset β},
+  t.card < s.card → ∀ {f : α → β}, Set.MapsTo f ↑s ↑t → ∃ x ∈ s, ∃ y ∈ s, x ≠ y ∧ f x = f y

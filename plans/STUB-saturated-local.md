@@ -127,3 +127,13 @@ triangle, do the three outside labels change finitely often (C132-RING-TAME's fi
 false wherever local slack exists along the strip, so it is a statement for a normal form or false at six",
 `plans/FS132-close-inventory.md` item 7)? Declined as a stub by the asking lane on the night; placed here and at FS-128
 (`plans/STUB-top-colour.md`). G95, G84.
+
+*Since FS-124 (FS124-Z1, the record job, 2026-10-07; every entry named is in `plans/FS124-derivation.md`, [hand] or derived from [hand] entries, **one mind, kernel pending**):* **what one tight pair forces with no saturation
+is three statements, each for every weak `k`-colouring** (§ 2): C124-CENTRE (near the centre each label of the pair is confined
+to one side of the unit circle about the far end), C124-STRADDLE (both labels absent near every other point one unit from the
+far end but one) and C124-ANTIPODE (near the opposite point `2z − q`: `b` absent, and `a` absent inside the circle of radius 2
+about `q`). C124-ANTIPODE is the neighbour, with no saturation, of row 140's unit parallels (G85), which need a saturated
+colouring. By the first deriver (`plans/FS124-E1-derivation.md` Stage 4, "What the datum at a completion is"), whether anything is
+forced at an arc's end or at a centre beyond C124-CENTRE "is not a first-order statement at any number of labels … it is where a
+count across classes, or binding (FS-125, FS-128), has to enter". C124-KIND's colouring — a tight pair at seven with neither
+label present at its centre — is not claimed saturated or honest.

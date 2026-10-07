@@ -1,0 +1,4 @@
+== r7: vertices=49 6-label/6-sector:49 | members: sector=0 bowtie=0 other=0 labels=7
+   close-complementary-pairs=0 common-unit-points: inside=0 on-the-cut-or-outside=0
+   patterns: none | separating(member kinds): none
+   both-members-one-inner-one-outer-one-crossing=0, labels-at-w-exactly-those-four=0 | pattern-(1,1)-with-HALF-TWO's-hypothesis: 0 of 0

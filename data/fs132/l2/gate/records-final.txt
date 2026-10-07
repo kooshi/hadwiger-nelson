@@ -1,0 +1,36 @@
+landing: 447 constants in 22 modules; declarations it brings: 377 (308 THM, 66 DEF, 3 IND); records in the log: 6953
+  declarations the landing brings, module Outside.OAI158AngularBoundary: 1
+  declarations the landing brings, module Outside.OAI158BinaryPalettes: 11
+  declarations the landing brings, module Outside.OAI158CircleMaps: 63
+  declarations the landing brings, module Outside.OAI158CircleTransport: 11
+  declarations the landing brings, module Outside.OAI158Expansion: 8
+  declarations the landing brings, module Outside.OAI158Palette: 94
+  declarations the landing brings, module Outside.OAI158PaletteDensity: 28
+  declarations the landing brings, module Outside.OAI158PaletteTransport: 20
+  declarations the landing brings, module Outside.OAI158States: 21
+  declarations the landing brings, module Plane.SixRing.Basic: 12
+  declarations the landing brings, module Plane.SixRing.Chart: 11
+  declarations the landing brings, module Plane.SixRing.ChartMeasure: 8
+  declarations the landing brings, module Plane.SixRing.Confine: 6
+  declarations the landing brings, module Plane.SixRing.Excl: 3
+  declarations the landing brings, module Plane.SixRing.Kill: 7
+  declarations the landing brings, module Plane.SixRing.NullSets: 11
+  declarations the landing brings, module Plane.SixRing.Orbit: 7
+  declarations the landing brings, module Plane.SixRing.Shift: 13
+  declarations the landing brings, module Plane.SixRing.State: 12
+  declarations the landing brings, module Plane.SixRing.StepLemma: 20
+  declarations the landing brings, module Plane.SixRing.Tips: 8
+  declarations the landing brings, module Plane.SixRing.TwoPairs: 2
+  landing records on exactly the three: 376
+  landing records on fewer: [Quot.sound, propext]: 1
+  headline no_outside_orbit_points: under CLEAN: [Classical.choice, Quot.sound, propext]
+  headline no_outside_orbit: under CLEAN: [Classical.choice, Quot.sound, propext]
+  headline not_ae_outside: under CLEAN: [Classical.choice, Quot.sound, propext]
+  headline no_alternating_pairs: under CLEAN: [Classical.choice, Quot.sound, propext]
+  headline not_ae_outside_points: under CLEAN: [Classical.choice, Quot.sound, propext]
+  whole log: records carrying kloosterman_bound: 8 (filed: 8); of the landing's: 0
+  whole log: records carrying no_proper_five_coloring: 5 (filed: 5); of the landing's: 0
+  whole log: records carrying proper_to_borel_weak: 5 (filed: 5); of the landing's: 0
+  whole log: records under IMPORTED 18; carrying two imports 0; carrying sorryAx 0
+records: PASS
+exit=0

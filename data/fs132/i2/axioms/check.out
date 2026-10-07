@@ -1,0 +1,9 @@
+records: 163  printed: 163  on the standard three exactly: 163  on a proper subset: 0  on no axiom: 0
+  palette_transfer_pair: ['Classical.choice', 'Quot.sound', 'propext']
+  palette_sixty_disjoint: ['Classical.choice', 'Quot.sound', 'propext']
+  two_state_impossible: ['Classical.choice', 'Quot.sound', 'propext']
+  mem_spatialSupport_ae: ['Classical.choice', 'Quot.sound', 'propext']
+  control HadwigerNelson.Outside.OAI158.not_colorable_five: ['Classical.choice', 'HadwigerNelson.Outside.OAI158.no_proper_five_coloring', 'Quot.sound', 'propext']  (planted for HadwigerNelson.Outside.OAI158.no_proper_five_coloring)
+  control HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0: ['Classical.choice', 'HadwigerNelson.Outside.OAI158.proper_to_borel_weak', 'Quot.sound', 'propext']  (planted for HadwigerNelson.Outside.OAI158.proper_to_borel_weak)
+  control FS132I2Control.planted_sorry: ['sorryAx']  (planted for sorryAx)
+AXIOMS OK: every record on the standard three or fewer, neither outside theorem under any; the three controls fire

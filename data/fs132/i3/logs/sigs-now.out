@@ -1,0 +1,106 @@
+@step_lemma : ∀ {ε : ℝ → ℝ → ℝ} {κ : ℝ},
+  0 < κ →
+    ShiftBounds ε κ →
+      ∀ {S : Set ℝ},
+        MeasurableSet S →
+          ∀ {t : ℝ},
+            NoDoubleChange ε S t κ →
+              ∃ t', (∀ᵐ (θ : ℝ), |θ - t| < κ / 4 → (θ ∈ S ↔ θ < t')) ∨ ∀ᵐ (θ : ℝ), |θ - t| < κ / 4 → (θ ∈ S ↔ t' < θ)
+@exists_step_or_density_triple : ∀ {S : Set ℝ},
+  MeasurableSet S →
+    ∀ (l r : ℝ),
+      (∃ t', (∀ᵐ (θ : ℝ), θ ∈ Set.Ioo l r → (θ ∈ S ↔ θ < t')) ∨ ∀ᵐ (θ : ℝ), θ ∈ Set.Ioo l r → (θ ∈ S ↔ t' < θ)) ∨
+        ∃ a b c,
+          l < a ∧
+            a < b ∧
+              b < c ∧
+                c < r ∧
+                  (IsDensityPt S a ∧ IsDensityPt Sᶜ b ∧ IsDensityPt S c ∨
+                    IsDensityPt Sᶜ a ∧ IsDensityPt S b ∧ IsDensityPt Sᶜ c)
+@exists_window : ∀ {E : Set ℝ},
+  MeasurableSet E →
+    ∀ {a b c : ℝ},
+      a < b →
+        b < c →
+          IsDensityPt Eᶜ a →
+            IsDensityPt E b →
+              IsDensityPt Eᶜ c →
+                ∃ u w ρ,
+                  0 < ρ ∧
+                    a ≤ u ∧
+                      u ≤ b - ρ ∧
+                        b + ρ ≤ w ∧
+                          w ≤ c ∧
+                            IsDensityPt Eᶜ u ∧
+                              IsDensityPt Eᶜ w ∧
+                                (b - u ≤ 2 * ρ ∨ w - b ≤ 2 * ρ) ∧
+                                  ENNReal.ofReal (7 / 4 * ρ) ≤ MeasureTheory.volume (E ∩ Set.Ioo (b - ρ) (b + ρ))
+@exists_shiftMap : ∀ {ε : ℝ → ℝ → ℝ} {κ : ℝ},
+  ShiftBounds ε κ →
+    ∀ {u w : ℝ},
+      w - u < κ →
+        ∃ g,
+          (∀ v ∈ Set.Ioo u w, v < g v ∧ g v < w ∧ g v = v + ε (v - u) (w - g v)) ∧
+            ∀ v₁ ∈ Set.Ioo u w,
+              ∀ v₂ ∈ Set.Ioo u w, v₁ ≤ v₂ → 7 / 8 * (v₂ - v₁) ≤ g v₂ - g v₁ ∧ g v₂ - g v₁ ≤ 9 / 8 * (v₂ - v₁)
+@exists_density_pair : ∀ {F : Set ℝ},
+  MeasurableSet F →
+    ∀ {b ρ : ℝ},
+      0 < ρ →
+        F ⊆ Set.Ioo (b - ρ) (b + ρ) →
+          ENNReal.ofReal (7 / 4 * ρ) ≤ MeasureTheory.volume F →
+            ∀ {g : ℝ → ℝ},
+              (∀ v ∈ F, v < g v ∧ g v ≤ v + 3 / 16 * ρ) →
+                (∀ v₁ ∈ F, ∀ v₂ ∈ F, v₁ ≤ v₂ → 7 / 8 * (v₂ - v₁) ≤ g v₂ - g v₁ ∧ g v₂ - g v₁ ≤ 9 / 8 * (v₂ - v₁)) →
+                  ∃ v ∈ F, g v ∈ F ∧ IsDensityPt F v ∧ IsDensityPt F (g v)
+@volume_pattern_pos : ∀ {ε : ℝ → ℝ → ℝ} {κ : ℝ},
+  ShiftBounds ε κ →
+    ∀ {E₁ E₂ : Set ℝ},
+      MeasurableSet E₁ →
+        MeasurableSet E₂ →
+          ∀ {α d d' : ℝ},
+            0 < d →
+              d < κ →
+                0 < d' →
+                  d' < κ →
+                    IsDensityPt E₁ (α - d) →
+                      IsDensityPt E₂ α →
+                        IsDensityPt E₂ (α + ε d d') →
+                          IsDensityPt E₁ (α + ε d d' + d') →
+                            ∀ {η : ℝ},
+                              0 < η →
+                                0 <
+                                  MeasureTheory.volume
+                                    {y |
+                                      |y.1 - α| < η ∧
+                                        |y.2.1 - d| < η ∧
+                                          |y.2.2 - d'| < η ∧
+                                            y.1 - y.2.1 ∈ E₁ ∧
+                                              y.1 ∈ E₂ ∧ y.1 + ε y.2.1 y.2.2 ∈ E₂ ∧ y.1 + ε y.2.1 y.2.2 + y.2.2 ∈ E₁}
+@step_at_of_change : ∀ {S : Set ℝ} {t r : ℝ},
+  0 < r →
+    (∀ (η : ℝ),
+        0 < η →
+          0 < MeasureTheory.volume (S ∩ Set.Ioo (t - η) (t + η)) ∧
+            0 < MeasureTheory.volume (Sᶜ ∩ Set.Ioo (t - η) (t + η))) →
+      ∀ {t' : ℝ}, ((∀ᵐ (θ : ℝ), |θ - t| < r → (θ ∈ S ↔ θ < t')) ∨ ∀ᵐ (θ : ℝ), |θ - t| < r → (θ ∈ S ↔ t' < θ)) → t' = t
+@volume_change_pairs_pos : ∀ {S : Set ℝ} {t : ℝ},
+  (∀ (η : ℝ),
+      0 < η →
+        0 < MeasureTheory.volume (S ∩ Set.Ioo (t - η) (t + η)) ∧
+          0 < MeasureTheory.volume (Sᶜ ∩ Set.Ioo (t - η) (t + η))) →
+    ∀ {κ : ℝ}, 0 < κ → 0 < MeasureTheory.volume {x | |x.1 - t| < κ ∧ 0 < x.2 ∧ x.2 < κ ∧ (x.1 ∈ S ↔ x.1 - x.2 ∉ S)}
+@ringRadius_mem : ∀ {d : ℝ}, 0 ≤ d → d ≤ 1 / 4 → 1 / 2 < ringRadius d ∧ ringRadius d ≤ 1
+shift_comm : ∀ (d d' : ℝ), shift d d' = shift d' d
+@shift_zero_right : ∀ {d : ℝ}, 0 ≤ d → d ≤ 1 / 4 → shift d 0 = 0
+@shift_zero_left : ∀ {d' : ℝ}, 0 ≤ d' → d' ≤ 1 / 4 → shift 0 d' = 0
+dist_chart_chart_shift : ∀ (p : ℂ) (α : ℝ) {d d' : ℝ},
+  0 ≤ d → d ≤ 1 / 4 → 0 ≤ d' → d' ≤ 1 / 4 → dist (chart p α d) (chart p (α + shift d d' + d' + Real.pi / 3) d') = 1
+@shift_pos : ∀ {d d' : ℝ}, 0 < d → d ≤ 1 / 4 → 0 < d' → d' ≤ 1 / 4 → 0 < shift d d'
+exists_shift_lipschitz : ∃ κ,
+  0 < κ ∧
+    κ ≤ 1 / 4 ∧
+      ∀ (d₁ d₂ d' : ℝ),
+        0 ≤ d₁ → d₁ ≤ κ → 0 ≤ d₂ → d₂ ≤ κ → 0 ≤ d' → d' ≤ κ → |shift d₁ d' - shift d₂ d'| ≤ |d₁ - d₂| / 32
+measurable_shift : Measurable fun x => shift x.1 x.2
+exists_shiftBounds : ∃ κ, 0 < κ ∧ κ ≤ 1 / 4 ∧ ShiftBounds shift κ

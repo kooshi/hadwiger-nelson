@@ -1,0 +1,812 @@
+[
+ {
+  "round": 1,
+  "point": [
+   0.25,
+   0.9682458365518543
+  ],
+  "corner": "[165.5+,194.5+]",
+  "label": "R",
+  "sides": {
+   "(0.00000,0.00000)": "in",
+   "(0.50000,0.00000)": "out"
+  },
+  "bars": {
+   "B": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U-1",
+     "label": "B",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "O": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D-1",
+     "label": "O",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "M": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D0",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "inner"
+    },
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D0",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ],
+   "G": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U1",
+     "label": "G",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ],
+   "P": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "inner",
+     "needed": "outer"
+    }
+   ]
+  }
+ },
+ {
+  "round": 1,
+  "point": [
+   0.25,
+   0.9682458365518543
+  ],
+  "corner": "[194.5+,345.5-]",
+  "label": "P",
+  "sides": {
+   "(0.00000,0.00000)": "in",
+   "(0.50000,0.00000)": "in"
+  },
+  "bars": {
+   "B": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U-1",
+     "label": "B",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "O": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D-1",
+     "label": "O",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "M": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D0",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "inner"
+    },
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D0",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "G": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U1",
+     "label": "G",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "R": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D1",
+     "label": "R",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ]
+  }
+ },
+ {
+  "round": 1,
+  "point": [
+   0.25,
+   0.9682458365518543
+  ],
+  "corner": "[345.5-,14.5-]",
+  "label": "O",
+  "sides": {
+   "(0.00000,0.00000)": "out",
+   "(0.50000,0.00000)": "in"
+  },
+  "bars": {
+   "P": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "inner",
+     "needed": "outer"
+    }
+   ],
+   "B": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U-1",
+     "label": "B",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ],
+   "M": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D0",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "outer"
+    },
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D0",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "G": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U1",
+     "label": "G",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "R": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D1",
+     "label": "R",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ]
+  }
+ },
+ {
+  "round": 1,
+  "point": [
+   0.25,
+   -0.9682458365518543
+  ],
+  "corner": "[14.5+,165.5-]",
+  "label": "M",
+  "sides": {
+   "(0.00000,0.00000)": "in",
+   "(0.50000,0.00000)": "in"
+  },
+  "bars": {
+   "P": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "inner"
+    },
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "B": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U-1",
+     "label": "B",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "O": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D-1",
+     "label": "O",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "G": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U1",
+     "label": "G",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "R": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D1",
+     "label": "R",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ]
+  }
+ },
+ {
+  "round": 1,
+  "point": [
+   0.25,
+   -0.9682458365518543
+  ],
+  "corner": "[165.5-,194.5-]",
+  "label": "G",
+  "sides": {
+   "(0.00000,0.00000)": "in",
+   "(0.50000,0.00000)": "out"
+  },
+  "bars": {
+   "P": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "inner"
+    },
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ],
+   "B": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U-1",
+     "label": "B",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "O": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D-1",
+     "label": "O",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "M": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D0",
+     "label": "M",
+     "klass": "inner",
+     "needed": "outer"
+    }
+   ],
+   "R": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D1",
+     "label": "R",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ]
+  }
+ },
+ {
+  "round": 1,
+  "point": [
+   0.25,
+   -0.9682458365518543
+  ],
+  "corner": "[345.5+,14.5+]",
+  "label": "B",
+  "sides": {
+   "(0.00000,0.00000)": "out",
+   "(0.50000,0.00000)": "in"
+  },
+  "bars": {
+   "P": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "outer"
+    },
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "O": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D-1",
+     "label": "O",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ],
+   "M": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D0",
+     "label": "M",
+     "klass": "inner",
+     "needed": "outer"
+    }
+   ],
+   "G": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U1",
+     "label": "G",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "R": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D1",
+     "label": "R",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ]
+  }
+ },
+ {
+  "round": 2,
+  "point": [
+   0.9635254915624212,
+   0.2676165673298175
+  ],
+  "corner": "[105.5+,225.5-]",
+  "label": "G",
+  "sides": {
+   "(0.00000,0.00000)": "in",
+   "(0.25000,0.96825)": "in"
+  },
+  "bars": {
+   "B": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U-1",
+     "label": "B",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "O": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D-1",
+     "label": "O",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "M": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D0",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "R": [
+    {
+     "member": [
+      0.25,
+      0.9682458365518543
+     ],
+     "corner_of": "forced, round 1",
+     "label": "R",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "P": [
+    {
+     "member": [
+      0.25,
+      0.9682458365518543
+     ],
+     "corner_of": "forced, round 1",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ]
+  }
+ },
+ {
+  "round": 2,
+  "point": [
+   0.9635254915624212,
+   -0.2676165673298175
+  ],
+  "corner": "[134.5+,254.5-]",
+  "label": "R",
+  "sides": {
+   "(0.00000,0.00000)": "in",
+   "(0.25000,-0.96825)": "in"
+  },
+  "bars": {
+   "P": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "B": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "U-1",
+     "label": "B",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "O": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "D-1",
+     "label": "O",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "M": [
+    {
+     "member": [
+      0.25,
+      -0.9682458365518543
+     ],
+     "corner_of": "forced, round 1",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "G": [
+    {
+     "member": [
+      0.25,
+      -0.9682458365518543
+     ],
+     "corner_of": "forced, round 1",
+     "label": "G",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ]
+  }
+ },
+ {
+  "round": 2,
+  "point": [
+   -0.4635254915624212,
+   0.2676165673298175
+  ],
+  "corner": "[314.5+,74.5-]",
+  "label": "B",
+  "sides": {
+   "(0.50000,0.00000)": "in",
+   "(0.25000,0.96825)": "in"
+  },
+  "bars": {
+   "G": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U1",
+     "label": "G",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "M": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D0",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "R": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D1",
+     "label": "R",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "P": [
+    {
+     "member": [
+      0.25,
+      0.9682458365518543
+     ],
+     "corner_of": "forced, round 1",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "O": [
+    {
+     "member": [
+      0.25,
+      0.9682458365518543
+     ],
+     "corner_of": "forced, round 1",
+     "label": "O",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ]
+  }
+ },
+ {
+  "round": 2,
+  "point": [
+   -0.4635254915624212,
+   -0.2676165673298175
+  ],
+  "corner": "[285.5+,45.5-]",
+  "label": "O",
+  "sides": {
+   "(0.50000,0.00000)": "in",
+   "(0.25000,-0.96825)": "in"
+  },
+  "bars": {
+   "G": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U1",
+     "label": "G",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "P": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "R": [
+    {
+     "member": [
+      0.5,
+      0.0
+     ],
+     "corner_of": "D1",
+     "label": "R",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "M": [
+    {
+     "member": [
+      0.25,
+      -0.9682458365518543
+     ],
+     "corner_of": "forced, round 1",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "B": [
+    {
+     "member": [
+      0.25,
+      -0.9682458365518543
+     ],
+     "corner_of": "forced, round 1",
+     "label": "B",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ]
+  }
+ }
+]

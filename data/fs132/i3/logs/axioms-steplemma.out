@@ -1,0 +1,18 @@
+@HadwigerNelson.SixRing.step_lemma : ∀ {ε : ℝ → ℝ → ℝ} {κ : ℝ},
+  0 < κ →
+    HadwigerNelson.SixRing.ShiftBounds ε κ →
+      ∀ {S : Set ℝ},
+        MeasurableSet S →
+          ∀ {t : ℝ},
+            HadwigerNelson.SixRing.NoDoubleChange ε S t κ →
+              ∃ t', (∀ᵐ (θ : ℝ), |θ - t| < κ / 4 → (θ ∈ S ↔ θ < t')) ∨ ∀ᵐ (θ : ℝ), |θ - t| < κ / 4 → (θ ∈ S ↔ t' < θ)
+'HadwigerNelson.SixRing.step_lemma' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.exists_step_or_density_triple' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.exists_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.exists_shiftMap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.exists_density_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.volume_pattern_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.density_triple_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.step_at_of_change' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.volume_change_pairs_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.chart_step_false' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
