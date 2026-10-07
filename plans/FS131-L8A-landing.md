@@ -141,3 +141,104 @@ brings twelve.
 **For the gate's records step**: of the 23 hand-written theorems with no record in the seven blocks, most are fields of the
 structures `IsStar4`, `IsTip`, … that the kernel holds as theorems; the gate's records check (stage 7) says which are owed a
 record.
+
+## Stage 3 — SAVED (FS131-L8A): `main` merged in
+
+**The trial first** (`git merge-tree --write-tree --name-only HEAD origin/main`, nothing merged; `data/fs131/l8a/merge-trial-main.out`):
+exit 1, three conflicts — `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean` — the three the coordinator's trial names, and no
+other. Since the line's base on `main` (`e6e7b312`, before wave 5 landed) `main` changed 37 Lean files under `Proofs/` and the
+line twelve; **no Lean file under `Proofs/` was changed by both** (the two lists of names have no line in common).
+
+**The merge**: `git -c merge.conflictStyle=diff3 merge --no-commit --no-ff origin/main`, at `22f1ca6c` (`main` had moved from
+`416a3830` by two commits of briefs; `merge-main.out`). Each conflict is one hunk with no base lines — blocks added at one place
+by both sides — resolved by the three-way rule, `main`'s lines first (`tools/fs131_l10b_keepboth.py resolve --theirs-first`), so
+that the file is `main`'s with the line's rows, imports and blocks after them:
+
+| file | `check` against ours `ac8d0bcc`, theirs `22f1ca6c`, base `e6e7b312` | the checker's plants on it |
+|---|---|---|
+| `ARCHITECTURE.md` | "802 non-blank lines; faults 0", "three-way: PASS" | 3 fired, "self-test: PASS" |
+| `Proofs.lean` | "288 non-blank lines; faults 0", PASS | 3 fired, PASS |
+| `scripts/Axioms.lean` | "7364 non-blank lines; `#print axioms` lines 6541 = ours 5757 + theirs 6334 − base 5550; faults 0", PASS | 5 fired, PASS |
+
+(`keepboth-main-check-*.out`, `keepboth-main-selftest-*.out`.) The check reads the whole file, so the parts of
+`ARCHITECTURE.md` that merged by themselves (§ 5's subsection "Assumed as hypotheses", `main`'s) are held to the same rule.
+
+**The index held the merge and nothing else** (`tools/fs131_l10b_mergeindex.py 22f1ca6c ARCHITECTURE.md Proofs.lean
+scripts/Axioms.lean`, `mergeindex-main.out`): "staged 1230 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean,
+scripts/Axioms.lean), 1227 taken whole from theirs", "merge-index: PASS"; its two controls first — `scripts/Axioms.lean` put back
+to `HEAD`'s in the index: FAIL (`MISSING from the index`, `CONFLICT-PATH not staged`, `DIRTY`); an extra file staged: FAIL
+(`EXTRA staged, not of the merge`). **A first run of this check failed for a reason of its own, and showed something**: I had
+given it the ref `origin/main`, which another job's fetch moved under me from `22f1ca6c` to `d38c118b` between two of its runs
+(the worktrees share one set of refs), so it compared the index with a commit that was not merged — `WRONG-MERGE`, `MISSING`,
+`NOT-THEIRS`. Every check of this stage was re-run against the commit's own hash, and from here on a merged commit is named by
+hash, never by a ref that can move. Committed as the merge `1171c25b` (parents `ac8d0bcc`, `22f1ca6c`).
+
+**No build at this commit alone.** The slot's ledger held two other 40 GiB builds, and my build of `1171c25b` was still waiting,
+not admitted, when the coordinator's ruling on docstrings arrived; I stopped it by its task id before it had started (verified by
+effect: no process with its working directory in this tree, its log unchanged across ten seconds, the slot's ledger never held
+it, `Proofs.olean`'s digest unchanged) and built once, at the next commit, which differs from `1171c25b` in doc comments and
+registry prose only (stage 4). What was forfeited: nothing was compiled; a place in a queue. What that one build shows of this
+stage is in stage 4.
+
+## Stage 4 — SAVED (FS131-L8A): the docstring corrections, and nothing else in the modules
+
+**The edits** are `data/fs131/l8a/docstring-edits.py`: seventeen exact replacements (21 occurrences) in four files, each
+refused unless its old text stands the expected number of times; its `--list` output, every before and after text, is
+`docstring-edits.list`. A second run is refused at the first edit (`docstring-edits-second-run.out`).
+
+*The brief's four.*
+
+| # | where | before → after |
+|---|---|---|
+| 1 | `SemiHub`, `fullSemiHub_star_crossed`'s docstring | "…gives these hypotheses: the arcs by `GermOnQWith.exists_isRingArc_ccw`, `…_cw`, four colours by `germS_absent`." → "…gives the two arcs, by `GermOnQWith.exists_isRingArc_ccw`, `…_cw`. It does not give `h4`: at a change point `germS_absent` makes two colours absent at `p` (`ncard + 2 = k`), which is four colours only at `k = 6`; exactly four colours is a hypothesis of its own (inventory item 592)." (`germS_absent`'s statement read: `(F.coloursAt p).ncard + 2 = k ∧ (F.coloursAt p)ᶜ = {X, X'}`.) |
+| 2 | `SemiHubPlaces`, the five ruled statements' docstrings (`semiHub_places`, `crossed_four`, `crossed_changePoint`, `crossed_semiHub`, `transferQC`) | "(`h4`; ruled on FS131-I8D's finding)" → "(`h4`; inventory item 592)" |
+| 3 | `SemiHub`, `qcol_inner_tile`'s docstring | "stated there with `sorry` on a branch this one does not hold" → "stated there as an open leaf on a branch this one does not hold" |
+| 4 | `ARCHITECTURE.md`, the row of `Plane/RingCalculus/StarChart` | "Imported by no module yet: `SemiHub` and `SemiHubPlaces` take it at their implementers' first stage." → "Imported by `SemiHub` and `SemiHubPlaces`." |
+
+*Beyond the brief's list — sentences the join itself made false or stale, which no branch could see from its own tree.* Sent to
+the coordinator mid-job with the alternative (file them as docstrings owed); **ruled, by its message of 2026-10-06: "make (a),
+(b), (c), the `ARCHITECTURE.md` rows and the `scripts/Axioms.lean` block comment true of the joined state — doc comments and
+registry prose only, shown by your two instruments, each listed in your record as beyond the brief's list with its before and
+after text … Your touches are extended to exactly these."**
+
+| | where | before → after |
+|---|---|---|
+| (a) | `SemiHub`, module doc, the table's row of FS116-N3-SEMI | "\| stated \|" → "\| proved there (job FS131-I8D) \|" |
+| (a) | the same, the row of FS116-N3-CROSS | "\| `crossed_tip_zeroAngle` proved from `crossed_no_tip`; the rest stated \|" → "\| proved there (job FS131-I8D) \|" |
+| (b) | `SemiHubPlaces`, module doc | "(job FS131-I8C's leaves, in a tree of its own until the wave's join): no declaration of this module holds a `sorry`, and each rests on that module's leaves it cites." → "(job FS131-I8C's leaves, proved in a tree of its own; the two were joined by job FS131-L8A): every declaration of this module is a kernel theorem with no open leaf beneath it." (also the second and last line of prose in the ring calculus holding the word `sorry`) |
+| (c) | `SemiHubPlaces`, module doc | "**The class** (ruled on job FS131-I8D's finding):" → "**The class** (inventory item 592, on job FS131-I8D's finding):" |
+| | `ARCHITECTURE.md`, the row of `SemiHubPlaces` | "ruled on FS131-I8D's finding:" → "inventory item 592:"; "No `sorry` in the module; until the wave's join its records rest on `…/SemiHub`'s open leaves." → "No `sorry` in the module, and since the wave's join (job FS131-L8A) none beneath it: every record is on the standard three." |
+| | `ARCHITECTURE.md`, the rows of `Star`, `Empty`, `SemiHub` | the title's word "skeleton" → who stated and who proved ("**FS-131 wave 8** (stated by job FS131-K8, plan Stages 2–4; its two leaves proved by jobs FS131-I8A and FS131-I8B)", and likewise). `Star`'s row carried the word too, though my message named two rows: the same word of the same class, corrected with them. |
+| | `ARCHITECTURE.md`, the row of `SemiHub` | the skeleton's five "(stated)", one "(proved)" beside them, and the sentence that apologized for them ("the words "(stated)" above are the skeleton's and no longer describe the module") removed |
+| | `scripts/Axioms.lean`, the block comment of "FS131-I8D" | "…rests on that module's open leaves (`tools/fs131_i8d_axioms.py` names them per record)." → "…rested on that module's open leaves; since the join (job FS131-L8A) none does (`tools/fs131_i8d_axioms.py`: 29 on the standard three, none resting)." |
+
+**Not made, by ruling 598 (b)–(c)**: no row is restated at its wider class; `Empty` keeps its import of `SemiHub` through
+`OuterAdj`. **Not made, and not asked**: the block comments of "FS131-K8" and "FS131-K8b" in `scripts/Axioms.lean` still say their
+open leaves "join this block as their implementers close them" (they joined the implementers' blocks instead) — history, not a
+claim about the tree; left.
+
+**Shown to touch no line outside a doc comment, by two instruments** (the last landing's `tools/fs131_lt5_docstring_check.py`,
+not edited; its `--self-test` on this tree, `docstring-check-selftest.out`: "self-test: OK — every planted fault fired and every
+partner passed"):
+
+1. **Text**, against the merge `1171c25b`: every doc comment of both versions replaced by a placeholder and the rest compared
+   byte for byte — `text: files=2 doc-comments-changed=9 failed=0` (`docstring-text-check.out`, which lists the nine with their
+   declarations: `SemiHub`'s module doc, `qcol_inner_tile`, `fullSemiHub_star_crossed`; `SemiHubPlaces`' module doc and the
+   five). Registered before the run: 2 files, 9 doc comments.
+2. **Elaborated**, independent of the lexer: every constant of the twelve modules from the built library — stored type (hash,
+   and the length and hash of its full debug text), kind, universe parameters, a definition's value hash — dumped before any edit
+   (`sigs-before.txt`, from the joined tree's build) and after the rebuild (`sigs-after.txt`): `before=398 after=398 (theorems
+   before=329) missing=0 added=0 changed=0`, "IDENTICAL — every constant's stored type, kind, universe parameters and value hash
+   agree" (`sigs-compare.out`). **The two dumps stand on either side of the merge of `main` as well**, so they also show that
+   compiling the wave over `main`'s 37 changed files moved no statement or definition of the twelve modules.
+
+`scripts/Axioms.lean`: the diff is the one comment (`docstring-axioms-diff.out`: no `#print axioms` line added or removed).
+`ARCHITECTURE.md`: five rows changed; `tools/check_architecture.py` — `RESULT: PASS` (`arch-after-docstrings.txt`). Committed as
+`2952622f`.
+
+**The one build, of `2952622f`** (`data/fs131/l8a/build-main-and-docstrings.log`): "build: OK — 473 of 473 batches, 79 module(s)
+rebuilt, **0 module(s) with warnings**, 17m22s", `EXIT=0` — `main`'s modules compiled in this tree for the first time (waves 5,
+6's first half, 10, the example maps, the docstrings of the assumptions step), then `SemiHub`, `SemiHubPlaces`, their
+dependents and `Proofs`.
+
+**Token count at this stage**: no reading of the harness's count; my own estimate is about 330k.

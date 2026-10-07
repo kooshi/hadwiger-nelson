@@ -1,0 +1,16 @@
+=== Proofs/HadwigerNelson/Plane/RingCalculus/Basic.lean — 59 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean — 31 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/RingCalculus/HubCount.lean — 31 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/RingCalculus/OuterAdj.lean — 7 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/RingCalculus/RingColour.lean — 25 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean — 88 doc comment(s), 1 with a word
+  l.7 ['named hypothes']
+    decl: module doc
+    doc : # The ring calculus: semi-hubs — the words, the germs' colours, the cone lemmas at the rhombus, the pinned stars Wave 8's second planning pass (`plans/FS131-w8-kernel-plan.md`, Stages 6–10; job FS131-K8b): the nine semi-hub rows, stated at the classes their arguments read (`plans/FS116-N3-proof.md` §§ 2–3, `plans/FS116-V5-verification.md` § 3). This module holds the definitions and six of the rows; FS116-N3-SEMI, FS116-N3-CROSS and FS116-RING-TRANSFER-QC are in `Plane/RingCalculus/SemiHubPlaces`, which imports it (two files, so that two implementers share none). **The three words the rows use and the foundation did not define.** * *An edge of `p` between two tiles, leaving along `δ`* (`IsEdgeDir p T T' δ`): two distinct tiles of `p` both approach `p` along `δ`. First order only: the tiles are adjacent there, or separated by cusp tiles of that one direction. "No edge of `p` leaves along `
+=== Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean — 27 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/RingCalculus/SoleTip.lean — 9 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/RingCalculus/StarChart.lean — 28 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/RingCalculus/Star.lean — 22 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/RingCalculus/TilesAt.lean — 8 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/SimpleOn.lean — 12 doc comment(s), 0 with a word
+modules=12 hits=1

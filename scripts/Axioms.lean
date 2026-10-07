@@ -7758,6 +7758,25 @@ close, their helpers, and the declarations the planner proved from those leaves.
 #print axioms HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints
 #print axioms HadwigerNelson.Plane.ArcMap.outerAdj
 -- FS131-I8D block end
+/-! ## FS131-L8A — FS-131 wave 8's first landing: the theorems of the wave's modules that the planners' and the
+implementers' blocks did not list. Read from the kernel's own list of the library's theorems
+(`data/fs131/l5/count-modules.lean`), by `tools/fs131_l8a_register.py`; checked by `tools/fs131_l10b_records.py`. -/
+-- Plane/RingCalculus/Basic
+#print axioms HadwigerNelson.Plane.ArcMap.GammaFreeRing.not_isRingArc
+#print axioms HadwigerNelson.Plane.ArcMap.GermOnQWith.germOnQ
+#print axioms HadwigerNelson.Plane.ArcMap.IsFullSemiHub.isSemiHub
+#print axioms HadwigerNelson.Plane.ArcMap.IsHub.not_isSemiHub
+#print axioms HadwigerNelson.Plane.ArcMap.IsOuterTileAt.not_isTip
+#print axioms HadwigerNelson.Plane.ArcMap.IsTip.tileAt
+#print axioms HadwigerNelson.Plane.ArcMap.QFreeRing.not_germOnQ
+#print axioms HadwigerNelson.Plane.ArcMap.SemiKind.O.sizeOf_spec
+#print axioms HadwigerNelson.Plane.ArcMap.SemiKind.T.sizeOf_spec
+#print axioms HadwigerNelson.Plane.ArcMap.SemiKind.ofNat_ctorIdx
+#print axioms HadwigerNelson.Plane.ArcMap.TileAt.subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.outerTileColours_subset
+#print axioms HadwigerNelson.Plane.ArcMap.tipColours_subset
+-- FS131-L8A block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

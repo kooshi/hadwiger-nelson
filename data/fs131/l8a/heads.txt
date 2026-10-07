@@ -1,0 +1,82 @@
+# FS131-L8A — the heads of the landing: every theorem the wave's records name as carrying a row, a clause of a row, or a
+# lemma another module is told to read. Full names, taken from the seven blocks of scripts/Axioms.lean by unique suffix
+# (an absent or ambiguous name stops the generator). Read by tools/fs131_l10b_kernelsig.py --heads (each must have a
+# kernel record) and tools/fs131_l10b_records.py --heads (each must rest on exactly the standard three).
+# FS131-K7 — Plane/SimpleOn (wave 7's foundation, landed with this wave)
+HadwigerNelson.Plane.ArcMap.Simple.simpleOn
+HadwigerNelson.Plane.ArcMap.simpleOn_univ
+HadwigerNelson.Plane.ArcMap.SimpleOn.mono
+HadwigerNelson.Plane.ArcMap.simpleOn_ball_iff
+# FS131-K8 — FS116-RING-GERM (tile form), FS116-N2-STAR, FS116-V6-ANTI
+HadwigerNelson.Plane.ArcMap.ringGerm_inward
+HadwigerNelson.Plane.ArcMap.ringGerm_outward
+HadwigerNelson.Plane.ArcMap.star_coloursAt
+HadwigerNelson.Plane.ArcMap.star_absent
+HadwigerNelson.Plane.ArcMap.IsTip.coneAt_subset
+HadwigerNelson.Plane.ArcMap.star_outer_cone
+HadwigerNelson.Plane.ArcMap.star_flank
+HadwigerNelson.Plane.ArcMap.star_flank_interior
+HadwigerNelson.Plane.ArcMap.star_tip_nonempty
+HadwigerNelson.Plane.ArcMap.star_outer_nonempty
+HadwigerNelson.Plane.ArcMap.v6_anti
+# FS131-I8A — FS129-SR3-EMPTY-NS and its route (FS116-V6-HUBS, -HUG, -COUNT), FS129-MR1-DOUBLETIP, FS116-N2-RECIP
+HadwigerNelson.Plane.ArcMap.ringPt_sixth_dist_le_one
+HadwigerNelson.Plane.ArcMap.v6_count
+HadwigerNelson.Plane.ArcMap.exists_ne_mem_closure_inter_of_split
+HadwigerNelson.Plane.ArcMap.not_sole_tip_of_adjacent_changePoints
+HadwigerNelson.Plane.ArcMap.v6_hug
+HadwigerNelson.Plane.ArcMap.doubleTip
+HadwigerNelson.Plane.ArcMap.v6_hubs
+HadwigerNelson.Plane.ArcMap.emptyNS
+HadwigerNelson.Plane.ArcMap.v6_hubs_vacuous
+HadwigerNelson.Plane.ArcMap.v6_hug_vacuous
+HadwigerNelson.Plane.ArcMap.star_recip
+# FS131-I8B — FS116-N2-ANTI and the shared lemmas
+HadwigerNelson.Plane.ArcMap.star_anti
+HadwigerNelson.Plane.ArcMap.star_anti_ne
+HadwigerNelson.Plane.exists_int_of_angleIcc_subset
+HadwigerNelson.Plane.ArcMap.mem_closure_tile_of_near
+HadwigerNelson.Plane.ArcMap.ncard_tileAt_eq
+HadwigerNelson.Plane.ArcMap.IsSectorChart.tileAt_equiv
+HadwigerNelson.Plane.ArcMap.exists_sectorChart_tileAt
+HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three
+# FS131-K8b, FS131-I8C — FS116-V5-QCOL, FS116-N3-PAIR, FS116-V5-DICHO, FS116-N3-CONE, FS116-N3-STAR2
+HadwigerNelson.Plane.ArcMap.qcol_cw
+HadwigerNelson.Plane.ArcMap.qcol_ccw
+HadwigerNelson.Plane.ArcMap.qcol_inner_tile
+HadwigerNelson.Plane.ArcMap.qcol_not_one_arc
+HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_ccw
+HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_cw
+HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one
+HadwigerNelson.Plane.ArcMap.IsTile.not_mem_closure_of_not_subset_ball
+HadwigerNelson.Plane.ArcMap.germPair_inner_ne
+HadwigerNelson.Plane.ArcMap.germPair_swap
+HadwigerNelson.Plane.ArcMap.germPair_dicho
+HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint
+HadwigerNelson.Plane.ArcMap.ringTile_uMinus
+HadwigerNelson.Plane.ArcMap.ringTile_vMinus
+HadwigerNelson.Plane.ArcMap.ringTile_vPlus
+HadwigerNelson.Plane.ArcMap.ringTile_uPlus
+HadwigerNelson.Plane.ArcMap.germOnQ_bar_uPlus
+HadwigerNelson.Plane.ArcMap.germOnQ_bar_vMinus
+HadwigerNelson.Plane.ArcMap.germOnQ_bar_uMinus
+HadwigerNelson.Plane.ArcMap.germOnQ_bar_vPlus
+HadwigerNelson.Plane.ArcMap.closure_inter_subset_sphere
+HadwigerNelson.Plane.ArcMap.isRingArc_of_edge
+HadwigerNelson.Plane.ArcMap.four_le_of_bothKind
+HadwigerNelson.Plane.ArcMap.exists_isStar4
+HadwigerNelson.Plane.ArcMap.ringArc_star
+HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed
+HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel
+HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T
+# FS131-I8D — FS129-SR3-OUTERADJ, FS116-N3-CROSS, FS116-N3-SEMI, FS116-RING-TRANSFER-QC
+HadwigerNelson.Plane.ArcMap.outerAdj
+HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints
+HadwigerNelson.Plane.ArcMap.crossed_no_tip
+HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle
+HadwigerNelson.Plane.ArcMap.crossed_outer
+HadwigerNelson.Plane.ArcMap.crossed_four
+HadwigerNelson.Plane.ArcMap.crossed_changePoint
+HadwigerNelson.Plane.ArcMap.crossed_semiHub
+HadwigerNelson.Plane.ArcMap.semiHub_places
+HadwigerNelson.Plane.ArcMap.transferQC

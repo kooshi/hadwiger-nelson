@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""FS131-L8A — the receipt that wave 8 is whole after the join: every record of the line's seven blocks of
+"""FS131-L8A — the receipt that wave 8 is whole after the join: every record of the line's eight blocks of
 `scripts/Axioms.lean`, and every theorem of the line's twelve modules, on a subset of the standard three with no
 `sorry` anywhere beneath it (after the sibling implementer's tools/fs131_i8d_axioms.py, another job's, not edited).
 
@@ -7,7 +7,8 @@ Until the join, fourteen records of the block "FS131-I8D" printed `sorryAx`, by 
 under the same statements. This tool asks, of the compiled modules (what the last build wrote, never a source):
 
   * for each `#print axioms` name of the blocks "FS131-K7" (wave 7's foundation `Plane/SimpleOn`, which this line
-    carries), "FS131-K8", "-I8A", "-K8b", "-I8B", "-I8C", "-I8D" (each from the line
+    carries), "FS131-K8", "-I8A", "-K8b", "-I8B", "-I8C", "-I8D", and "FS131-L8A" (the landing's own: the theorems the others
+    did not list; absent until the landing registers them, and then required) (each from the line
     holding "## <job> —" to "-- <job> block end"): its axioms (`Lean.collectAxioms`) and its *sorry roots* — the
     declarations beneath it whose own type or proof term mentions `sorryAx`, each with its module;
   * for each module of `Plane/RingCalculus/` (eleven) and `Plane/SimpleOn`: every theorem the kernel holds in it, hand-written or not —
@@ -36,7 +37,7 @@ import sys
 import tempfile
 
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
-JOBS = ["FS131-K7", "FS131-K8", "FS131-I8A", "FS131-K8b", "FS131-I8B", "FS131-I8C", "FS131-I8D"]
+JOBS = ["FS131-K7", "FS131-K8", "FS131-I8A", "FS131-K8b", "FS131-I8B", "FS131-I8C", "FS131-I8D", "FS131-L8A"]
 # the eleven modules of the ring calculus, and wave 7's foundation `Plane/SimpleOn`, which this line carries and lands
 MODS = ["RingCalculus." + m for m in
         ["Basic", "Star", "Empty", "HubCount", "TilesAt", "SoleTip", "RingColour", "StarChart", "SemiHub",
@@ -211,12 +212,12 @@ def main():
         h, g = per_mod.get(m, [0, 0])
         print(f"MODULE {m}: {h} hand-written theorems, {g} generated")
     for u in unreg:
-        print("UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) " + u)
+        print("UNREGISTERED (no record in the line's eight blocks; the gate's records check decides) " + u)
     total = len(recs) - 1
     print(f"axioms receipt: {total} records in {len(JOBS)} blocks — {sum(exact.values())} on exactly the standard three, "
           f"{sum(sub.values())} on a proper subset, {sum(1 for b in bad if b[0].startswith('record'))} bad; "
           f"{len(mods)} theorems in {len(MODS)} modules ({hand} hand-written, {gen} generated; {len(unreg)} hand-written "
-          f"with no record in the seven blocks), {sum(1 for b in bad if b[0].startswith('theorem'))} bad; control `{CONTROL}` "
+          f"with no record in the eight blocks), {sum(1 for b in bad if b[0].startswith('theorem'))} bad; control `{CONTROL}` "
           f"prints {sorted(caxs)} with root {croots}")
     for n, why in bad:
         print(f"BAD {n}: " + "; ".join(why))
