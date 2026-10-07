@@ -7923,3 +7923,31 @@ reason by the close.*
      is false without its exception needs a constructed map — joins the deriver's questions for the wave's stub
      lines (with item 580 (c)); nothing waits on it. (f) **Launch order from here** (mine; the nearest landings
      first): FS131-I9B, FS131-I10G, then wave 7's three (I7L when `main` holds wave 8), FS131-E9, FS131-I6Z2.
+
+605. **FS131-L8A, by message mid-job: the vacuity scan is red on wave 8's merged tree at two sites — both from a marker my ruling 518 placed** (source: L8A's message to "main", 2026-10-07 about 01:15 UTC; its probe log `data/fs131/l8a/vacuity-probe.scan.log` on `fs131-w8l` — the artifact is read at its hand-back).
+     Its account: `SITE STALE … v6_hubs :: F.Valid` and `… :: F.NonSiamese`; totals `declarations=14807
+     refutations-skipped=215 sites=1446 vacuous=0 stale=2 declared=3 witnessed=38 generic=1401 unknown=2` — against
+     `main`, +306 declarations, +16 refutations, +177 sites (175 generic and these two); no VACUOUS, no new UNKNOWN.
+     The mechanism: the scan's `VACUITY DECLARED:` marker makes each tracked binder read DECLARED if its own carrier
+     is provably empty and STALE if not; `v6_hubs` binds `F.Valid` and `F.NonSiamese`, each satisfiable alone; the
+     emptiness is joint, across five binders (`v6_hubs_vacuous`), which a per-binder scan cannot see. `v6_hug`
+     concludes `False`, is skipped as a refutation, and its marker is never read. **Also from it, all green**: the
+     assumptions step after two `.condition` lines (`ArcMap.TipPairFree`, `ArcMap.OuterPairFree` — predicates of the
+     theorem's own map, point and angle; nine counts unchanged from `main`'s, the ledger gaining and losing no row);
+     13 records registered in a block of its own; the docstring corrections of item 600 made (nine doc comments in
+     two files; the elaborated dump of the twelve modules identical before and after, 398 constants); the build with
+     `main` merged, 79 modules rebuilt, none with a warning. **Read by me before ruling**: ruling 518; `LEAN.md`
+     § The gate ll. 236–237; the marker in `scripts/Vacuity.lean`. **A slip, mine**: ruling 518 placed the marker
+     "whatever the scan prints" on ruling 167 (b)'s premise that the scan does not track `ArcMap` binders — false
+     since wave 3 registered `F.Valid` and `F.NonSiamese`; I ruled from an older ruling's premise without re-reading
+     the scan. **Credit**: the mechanism read from the scan's own source, three options laid out with their costs,
+     and "I do not weaken the check". **Ruling**, sent by message. **The two docstrings (`v6_hubs`, `v6_hug`) lose
+     the scan's marker and say the joint vacuity in words**, every fact kept and the refuting theorem named; the two
+     sites then read GENERIC, true binder by binder, and `declared` stays 3. Alternatives: `private` (167 (b)) —
+     not taken: backlog rows cited by name, with the refutation beside each; an excuse for the sites — not taken:
+     the marker as the scan defines it is false of `v6_hubs`, so STALE is the gate being right. Confidence: high.
+     Its touches are extended to those two doc comments. **Owed**: a line for `LEAN.md` § The gate (its draft, filed
+     after its hand-back) — the marker is for one provably empty carrier; a route lemma with jointly unsatisfiable
+     hypotheses says so in words and names its refutation — and the same clarification to the plan's § 7.3 item 5 at
+     the filing; **an instrument change that would let the scan honour a marker against a named refutation of the
+     exact hypotheses joins the tooling job's questions** (ruling 475 (d)). Ruling 518 is amended to this.
