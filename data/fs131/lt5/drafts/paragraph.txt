@@ -1,0 +1,8 @@
+**What the library assumes, in both forms** (`scripts/assumptions.sh`, whose digest reads these counts and fails if
+they are absent): `axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — one outside theorem declared as
+an axiom, with eight theorems resting on it; thirty-five hypotheses, nineteen named and sixteen written out in a
+binder — seven standing for outside theorems, twenty-three for hand results of ours and five for open questions — taken in
+98 (hypothesis, statement) pairs by 51 statements (`scripts/assumptions-ledger.txt` lists each pair; FS131-LT5,
+2026-10-06). Weil's bound is counted in each form it takes — the axiom, the named hypothesis `KloostermanBound`, and that
+hypothesis written out at a family of fields: one outside theorem, three entries.
+written: data/fs131/lt5/drafts/CLAUDE-with-sentence.md

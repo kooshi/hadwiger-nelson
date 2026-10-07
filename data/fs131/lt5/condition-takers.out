@@ -1,0 +1,182 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 8,9,10,11
+@@ HadwigerNelson.SpectralChain.TCA
+  TAKEN 3 : SpectralChain.min_localBound_five_le_chromaticNumber_of_totallyReal, SpectralChain.chromaticNumber_eq_localBound, SpectralChain.min_localBound_five_le_chromaticNumber
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 1 : SpectralChain.Interface.Count
+@@ HadwigerNelson.Arith.IsUsablePrime
+  TAKEN 5 : Arith.exists_isPlaceHom, Arith.exists_placeHom, Arith.falconerFan_five_placeHom, Arith.placeHom_base, Arith.exists_hom_finitePlane_of_card
+  DATA 1 : Arith.falconerFan_five_field
+  CONCL 1 : Arith.falconerFan_five_field
+  BODY 1 : Arith.NoAffFieldHyp
+@@ HadwigerNelson.Arith.NoAffFieldHyp
+  TAKEN 2 : Arith.noAffine_fields, Arith.exists_hom_slack
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.ExtensionOrder
+  TAKEN 10 : ExtensionOrder.rec, ExtensionOrder.casesOn, ExtensionOrder.recOn, extends_of_extensionOrder, ExtensionOrder.below, ExtensionOrder.cons, ExtensionOrder.below.cons, ExtensionOrder.brecOn
+  DATA 2 : ExtensionOrder.below.nil, ExtensionOrder.nil
+  CONCL 2 : ExtensionOrder.cons, ExtensionOrder.nil
+  BODY 0 : 
+@@ HadwigerNelson.IsLift
+  TAKEN 2 : not_exists_lift_of_stressPairing_ne_zero.match_1_1, stressPairing_eq_zero_of_lift
+  DATA 4 : not_exists_lift_of_stressPairing_ne_zero, merged131_no_lift, core19_no_lift, core11_no_lift
+  CONCL 4 : not_exists_lift_of_stressPairing_ne_zero, merged131_no_lift, core19_no_lift, core11_no_lift
+  BODY 0 : 
+@@ HadwigerNelson.Plane.AeProperRegions.IsRegion
+  TAKEN 4 : Plane.AeProperRegions.IsRegion.isPreconnected, Plane.AeProperRegions.IsRegion.subset, Plane.AeProperRegions.IsRegion.dist_lt_one, Plane.AeProperRegions.IsRegion.chain_step
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.Plane.Arc.IsUnitArc
+  TAKEN 8 : Plane.Arc.finite_inter_sphere_of_not_isUnitArc, Plane.ArcMap.Near.newArcs_unit, Plane.ArcMap.Near.move_step, Plane.ArcMap.surgery_ringArcsWithin, Plane.ArcMap.Near.move_ringArcsWithin, Plane.ArcMap.Near.mergeArcs_unit, Plane.ArcMap.bendMap_ringArcsWithin, Plane.ArcMap.ringArcsWithin_of_Γ_subset
+  DATA 5 : Plane.Arc.IsUnitArc.eq_1, Plane.shadowModel_not_isUnitArc, Plane.shaveArcs_not_isUnitArc, Plane.germArc_isUnitArc_iff, Plane.Arc.IsUnitArc.eq_2
+  CONCL 5 : Plane.Arc.IsUnitArc.eq_1, Plane.shadowModel_not_isUnitArc, Plane.shaveArcs_not_isUnitArc, Plane.germArc_isUnitArc_iff, Plane.Arc.IsUnitArc.eq_2
+  BODY 0 : 
+@@ HadwigerNelson.Plane.ArcMap.BaseCtx
+  TAKEN 35 : Plane.ArcMap.BaseCtx.cubic_of_three, Plane.ArcMap.BaseCtx.orient_pair, Plane.ArcMap.BaseCtx.casesOn, Plane.ArcMap.BaseCtx.valid, Plane.ArcMap.BaseCtx.exists_endpoint, Plane.ArcMap.BaseCtx.exists_pseudoCircle, Plane.ArcMap.BaseCtx.exists_pseudoCircle.match_1_2, Plane.ArcMap.BaseCtx.retArc_partner
+  DATA 1 : Plane.ArcMap.BaseCtx.mk
+  CONCL 1 : Plane.ArcMap.BaseCtx.mk
+  BODY 0 : 
+@@ HadwigerNelson.Plane.ArcMap.Condition6
+  TAKEN 1 : Plane.ArcMap.ts_t_degree_three
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.Plane.ArcMap.CrossesAt
+  TAKEN 4 : Plane.ArcMap.exists_inside_colour, Plane.ArcMap.exists_side_colours_of_not_crossesAt, Plane.ArcMap.SectorsAt.not_mem_range_of_crossesAt, Plane.ArcMap.exists_closure_colour_of_arc
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.Plane.ArcMap.DoubleEvent
+  TAKEN 1 : Plane.ArcMap.bv_nd
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.Plane.ArcMap.HexRing
+  TAKEN 2 : Plane.ArcMap.bv_hex, Plane.ArcMap.p17_ua
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.Plane.ArcMap.IsEssBoundary
+  TAKEN 1 : Plane.ArcMap.echo
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.Plane.ArcMap.Near.RayConfig
+  TAKEN 28 : Plane.ArcMap.Near.RayConfig.sector_disjoint, Plane.ArcMap.Near.RayConfig.hasSectors, Plane.ArcMap.Near.RayConfig.germ₀, Plane.ArcMap.Near.RayConfig.mem_keep₀, Plane.ArcMap.Near.RayConfig.ne, Plane.ArcMap.Near.RayConfig.sec₀, Plane.ArcMap.Near.RayConfig.exists_merge, Plane.ArcMap.Near.RayConfig.h23
+  DATA 1 : Plane.ArcMap.Near.RayConfig.mk
+  CONCL 1 : Plane.ArcMap.Near.RayConfig.mk
+  BODY 0 : 
+@@ HadwigerNelson.Plane.ArcMap.OnRingArc
+  TAKEN 16 : Plane.ArcMap.ArcBend.left, Plane.ArcMap.nb4p, Plane.ArcMap.ArcBend.mk, Plane.ArcMap.straddlers_third, Plane.ArcMap.ring_finite_S, Plane.ArcMap.cleanKeep_isModification.match_1_1, Plane.ArcMap.exists_isRingArc_of_onRingArc, Plane.ArcMap.exists_swap_of_ring
+  DATA 19 : Plane.ArcMap.bend_away_whole, Plane.ArcMap.ArcBend.casesOn, Plane.ArcMap.bend_away_part, Plane.ArcMap.CollarFit.map_R3, Plane.ArcMap.bend_toward, Plane.ArcMap.cv_l0, Plane.ArcMap.a4six, Plane.ArcMap.finite_centres_inter_compact
+  CONCL 16 : Plane.ArcMap.bend_away_whole, Plane.ArcMap.bend_away_part, Plane.ArcMap.CollarFit.map_R3, Plane.ArcMap.bend_toward, Plane.ArcMap.cv_l0, Plane.ArcMap.a4six, Plane.ArcMap.finite_centres_inter_compact, Plane.awayModel_bend_toward
+  BODY 2 : Plane.ArcMap.treatPts, Plane.ArcMap.RingArcsWithin
+@@ HadwigerNelson.Plane.ArcMap.RingProper
+  TAKEN 2 : Plane.ArcMap.bv_l3, Plane.ArcMap.ringCircle_noSwap
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.Plane.ArcMap.SaturatedAt
+  TAKEN 1 : Plane.ArcMap.echo
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.Plane.ArcMap.Terminal
+  TAKEN 13 : Plane.ArcMap.stuck_neighbour, Plane.ArcMap.y3_end_needs_of_not_mem, Plane.ArcMap.n3_end_chain, Plane.ArcMap.n3_end_four_colours, Plane.ArcMap.y3_end_needs, Plane.ArcMap.n3_end, Plane.ArcMap.isStuck_of_hasRepeatedColour, Plane.ArcMap.lower_flank_horns_at_N_of
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 1 : Plane.ArcMap.IsTerminalMap
+@@ HadwigerNelson.Plane.ArcMap.Todo
+  TAKEN 4 : Plane.ArcMap.ProcInv.mem_treatPts_of_todo, Plane.ArcMap.ProcStep.refl, Plane.ArcMap.ProcStep.mk, Plane.ArcMap.ProcRun.const
+  DATA 6 : Plane.ArcMap.ProcStep.idle, Plane.ArcMap.ProcStep.casesOn, Plane.ArcMap.ProcStep.least, Plane.ArcMap.ProcStep.rec, Plane.ArcMap.ProcStep.recOn, Plane.ArcMap.ProcRun.eventually_not_todo
+  CONCL 3 : Plane.ArcMap.ProcStep.idle, Plane.ArcMap.ProcStep.least, Plane.ArcMap.ProcRun.eventually_not_todo
+  BODY 0 : 
+@@ HadwigerNelson.Plane.BranchGerms.Sorted
+  TAKEN 6 : Plane.BranchGerms.Sorted.mono, Plane.BranchGerms.Sorted.κ_ne, Plane.ArcMap.IsSectorChart.mk, Plane.BranchGerms.eventually_dir_lt_nextDir, Plane.ArcMap.isSectorChart_of, Plane.BranchGerms.dir_lt_nextDir
+  DATA 4 : Plane.ArcMap.IsSectorChart.casesOn, Plane.ArcMap.IsSectorChart.rec, Plane.ArcMap.IsSectorChart.recOn, Plane.ArcMap.IsSectorChart.sorted
+  CONCL 1 : Plane.ArcMap.IsSectorChart.sorted
+  BODY 0 : 
+@@ HadwigerNelson.Plane.CPColouring.RotationInvariant
+  TAKEN 1 : Plane.CPColouring.forcedSet_eq_zero
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.Plane.GrundyBound
+  TAKEN 1 : Plane.gmap_i
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 1 : Plane.GFin
+@@ HadwigerNelson.Plane.H1On
+  TAKEN 2 : Plane.TwoColourNhd.mk, Plane.AeColouring.twoColourNhd_of_h1
+  DATA 4 : Plane.TwoColourNhd.rec, Plane.TwoColourNhd.recOn, Plane.TwoColourNhd.casesOn, Plane.TwoColourNhd.h1
+  CONCL 1 : Plane.TwoColourNhd.h1
+  BODY 0 : 
+@@ HadwigerNelson.Plane.InSixLens
+  TAKEN 4 : Plane.sixCol_of_lens, Plane.sixRound_of_lens, Plane.sixCol_locallyConstant.match_1_10, Plane.exists_one_lt_dist_of_not_lens
+  DATA 4 : Plane.inSixLens_reduce, Plane.inSixLens_add_six, Plane.inSixLens_rot, Plane.sixCol.eq_1
+  CONCL 4 : Plane.inSixLens_reduce, Plane.inSixLens_add_six, Plane.inSixLens_rot, Plane.sixCol.eq_1
+  BODY 1 : Plane.sixCol
+@@ HadwigerNelson.Plane.IsAdmissible
+  TAKEN 4 : Plane.IsAdmissible.exists_aeColouring, Plane.c11_discs_interface, Plane.pinch_interface, Plane.face_densitySet
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 1 : Plane.IsAeCover
+@@ HadwigerNelson.Plane.IsRegOf
+  TAKEN 4 : Plane.IsRegOf.chain_step, Plane.IsRegOf.subset, Plane.IsRegOf.isPreconnected, Plane.IsRegOf.dist_lt_one
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.Plane.IsSelection
+  TAKEN 1 : Plane.IsAdmissible.exists_aeColouring
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.SpectralInputs.IsHaarFourier
+  TAKEN 5 : SpectralInputs.IsHaarFourier.integral_eq, SpectralInputs.sp_if, SpectralInputs.contChars_haar_null, SpectralInputs.sp_only_if, SpectralInputs.IsHaarFourier.map_mulRight
+  DATA 3 : SpectralInputs.sp_only_if_interface, SpectralInputs.exists_isHaarFourier, SpectralInputs.sp_if_hypotheses_trivial_bot
+  CONCL 3 : SpectralInputs.sp_only_if_interface, SpectralInputs.exists_isHaarFourier, SpectralInputs.sp_if_hypotheses_trivial_bot
+  BODY 0 : 
+@@ HadwigerNelson.SpectralChain.IsTraceSpectral
+  TAKEN 1 : SpectralChain.rotInv_of_isTraceSpectral
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 2 : SpectralChain.Interface.R88TCA, SpectralChain.Interface.APlus0
+@@ HadwigerNelson.SpectralInputs.IsSpectralMeasureOf
+  TAKEN 1 : SpectralInputs.spectral_carried_iff
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.SpernerGrid.Rainbow
+  TAKEN 2 : SpernerGrid.door_cell, SpernerGrid.Rainbow.exhaust
+  DATA 2 : SpernerGrid.RainbowCell.eq_1, SpernerGrid.instDecidableRainbow
+  CONCL 2 : SpernerGrid.RainbowCell.eq_1, SpernerGrid.instDecidableRainbow
+  BODY 2 : SpernerGrid.RainbowCell, SpernerGrid.instDecidableRainbowCell
+@@ HadwigerNelson.Strip.WindowProper
+  TAKEN 8 : Strip.WindowProper.hex, Strip.WindowProper.rec, Strip.window_extends, Strip.WindowProper.bound, Strip.WindowProper.casesOn, Strip.WindowProper.rain, Strip.WindowProper.avoid, Strip.WindowProper.recOn
+  DATA 1 : Strip.WindowProper.mk
+  CONCL 1 : Strip.WindowProper.mk
+  BODY 0 : 
+@@ HadwigerNelson.Thomassen.IsTwoSep
+  TAKEN 1 : Thomassen.PlanarLike.exists_maximal_above
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 1 : Thomassen.IsMaximalTwoSep
+@@ HadwigerNelson.Plane.NoPar
+  TAKEN 2 : Plane.sat_noPar, Plane.gmap_ii
+  DATA 0 : 
+  CONCL 0 : 
+  BODY 0 : 
+@@ HadwigerNelson.StandingFive.StandingFloor
+  TAKEN 4 : StandingFive.five_le_chromaticNumber, StandingFive.seven_le_localBound, StandingFive.le_localBound, StandingFive.standingFloor_mono
+  DATA 4 : StandingFive.standingFloor_five, StandingFive.standingFloor_seven_weil, StandingFive.standingFloor_seven, StandingFive.standingFloor_five_weil
+  CONCL 5 : StandingFive.standingFloor_five, StandingFive.standingFloor_seven_weil, StandingFive.standingFloor_seven, StandingFive.standingFloor_five_weil, StandingFive.standingFloor_mono
+  BODY 0 : 
+@@ HadwigerNelson.StandingFive.KloostermanBound
+  TAKEN 9 : StandingFive.targetFloor_six_of_kloosterman, StandingFive.standingFloor_five, StandingFive.circle_sum_le_of_ne, StandingFive.circle_sum_le, StandingFive.targetFloor_seven_of_kloosterman, StandingFive.normOne_charSum_ge, StandingFive.standingFloor_seven, StandingFive.kloosterman_page_of_kloostermanBound
+  DATA 2 : StandingFive.kloostermanBound_of_ringChar_ne_two, StandingFive.kloostermanBound_of_card_le_five
+  CONCL 2 : StandingFive.kloostermanBound_of_ringChar_ne_two, StandingFive.kloostermanBound_of_card_le_five
+  BODY 0 : 
+FORMERS 36

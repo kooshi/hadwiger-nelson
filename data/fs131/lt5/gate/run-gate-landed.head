@@ -1,0 +1,12 @@
+HEAD=c5a4565f07651d1617d9f61de3d9d14ec63b879b  2026-10-06T21:55:45Z
+status (tracked files modified, and untracked outside data/ and plans/):
+--
+build latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wlt/build/gate/build/20261006T220026Z-3506091.log
+dupnames latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wlt/build/gate/dupnames/20261006T220107Z-3510263.log
+dupnames-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wlt/build/gate/dupnames-self-test/20261006T220111Z-3510669.log
+axioms latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wlt/build/gate/axioms/20261006T220318Z-3528843.log
+axioms-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wlt/build/gate/axioms-self-test/20261006T220323Z-3529349.log
+vacuity latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wlt/build/gate/vacuity/20261006T220522Z-3541130.log
+vacuity-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wlt/build/gate/vacuity-self-test/20261006T220642Z-3547213.log
+assumptions latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wlt/build/gate/assumptions/20261006T220917Z-3560573.log
+assumptions-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wlt/build/gate/assumptions-self-test/20261006T221029Z-3566874.log

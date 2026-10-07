@@ -1,0 +1,10 @@
+slot: admitted python3: mem 16 GiB (hard cap), cpus 0,1,2,3
+unmutated: exit 0 — OK
+absence-passes: caught — self-test exit 1, and it names its control:     FAIL  digest absent — expected exit 3 and 'RECORDED COUNTS ABSENT', got exit 0
+absence-says-nothing: caught — self-test exit 1, and it names its control:     FAIL  digest absent-says-what-to-add — expected exit 3 and 'Add the sentence that holds them: `axioms=4 rests=12 named=36 inline=19 outside=12 our
+doubled-passes: caught — self-test exit 1, and it names its control:     FAIL  digest doubled — expected exit 3 and 'recorded more than once', got exit 0
+partial-reads-as-absent: caught — self-test exit 1, and it names its control:     FAIL  digest partial — expected exit 3 and 'could not read the counts', got exit 3
+restore: scripts/gate_report.py is byte-identical to the start, and no mutant is left
+unmutated, again: exit 0 — OK
+mutations=4 survived-or-failed=0
+exit=0

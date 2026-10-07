@@ -1,0 +1,44 @@
+import Proofs.HadwigerNelson.Arith.StandingFive
+
+/-!
+# A usable place of the standing field (FS-131 wave 10, third pass; an open gate item of the first landing)
+
+**Read aloud, against the informal claim.** TC1-STANDING-FIVE: "no usable residue field of size ≤ 47" — in the kernel,
+`StandingFive.usable_card_ge`: a maximal ideal of `𝓞 F`, `F = K·E₇`, whose residue field has `q ≡ 3 (mod 4)` elements has
+`q ≥ 347`. That theorem bounds a family the kernel did not know non-empty (`plans/FS131-L10A-landing.md`, draft 6; ruling
+535 (c)). `exists_usable_place` is the missing inhabitant, **a leaf**: `F` has a usable place. With it
+`exists_usable_place_card_ge` exhibits the family `usable_card_ge` and `no_small_usable` speak of.
+
+**Not claimed**: that 347 is attained (ruling 520 (a): [tools], `tools/fs131_k10_usable.py`; the leaf's plan,
+`plans/FS131-w10-kernel-plan.md` § 16.1, goes through the prime 83, where the residue fields have `83⁷` elements).
+-/
+
+namespace HadwigerNelson.StandingFive
+
+open NumberField
+
+/-- **The standing field has a usable place** (the leaf): some maximal ideal of `𝓞 F` has a residue field of
+`q ≡ 3 (mod 4)` elements. (Plan: above 83 — `83 ≡ 3 (mod 4)`, 3 and 11 are squares mod 83, and the period polynomial has no
+root mod 83 — every residue degree is 7, so `q = 83⁷`.) -/
+theorem exists_usable_place :
+    ∃ w : Ideal (𝓞 standingField), w.IsMaximal ∧ Nat.card (𝓞 standingField ⧸ w) % 4 = 3 := by
+  sorry
+
+/-- **The family `usable_card_ge` bounds is inhabited** (over the leaf): a usable place, with its residue field of at
+least 347 elements. -/
+theorem exists_usable_place_card_ge :
+    ∃ w : Ideal (𝓞 standingField), w.IsMaximal ∧ Nat.card (𝓞 standingField ⧸ w) % 4 = 3 ∧
+      347 ≤ Nat.card (𝓞 standingField ⧸ w) := by
+  obtain ⟨w, hw, h⟩ := exists_usable_place
+  exact ⟨w, hw, h, usable_card_ge w hw h⟩
+
+/-! ## Spec -/
+
+-- the arithmetic the plan's prime rests on: `83 ≡ 3 (mod 4)`, an odd power of it is `≡ 3 (mod 4)`, and `83⁷ ≥ 347`.
+example : 83 % 4 = 3 ∧ 83 ^ 7 % 4 = 3 ∧ 347 ≤ 83 ^ 7 := by decide
+-- 3 and 11 are squares mod 83: `13² = 169 = 3 + 2·83`, `29² = 841 = 11 + 10·83`.
+example : (13 : ZMod 83) ^ 2 = 3 ∧ (29 : ZMod 83) ^ 2 = 11 := by decide
+-- the period polynomial has no root mod 83 (so the residue degree above 83 is divisible by 7).
+example : ∀ x : ZMod 83, x ^ 7 + x ^ 6 - 12 * x ^ 5 - 7 * x ^ 4 + 28 * x ^ 3 + 14 * x ^ 2 - 9 * x + 1 ≠ 0 := by decide
+
+end HadwigerNelson.StandingFive

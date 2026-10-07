@@ -1,0 +1,10 @@
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:100:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:107:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:121:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:135:64: error: unsolved goals
+G : Type u_1
+inst✝¹ : AddCommGroup G
+inst✝ : MeasurableSpace G
+ω : (StationarySet.empty ℤ).Ω
+⊢ 0 < {t | ω ∈ ∅}.indicator 1 0 ↔ ω ∈ ∅
+exit=1

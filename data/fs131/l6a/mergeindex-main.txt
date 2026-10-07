@@ -1,0 +1,34 @@
+### control: one of the three conflict paths not named
+merge of origin/main (ac2e84ea) into 15398e94, base a917d57f: staged 519 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 516 taken whole from theirs
+  BOTH sides changed, merged unread: Proofs.lean
+merge-index: FAIL (1 fault(s))
+exit=1
+### faithful
+merge of origin/main (309f4de5) into 15398e94, base a917d57f: staged 519 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 516 taken whole from theirs
+  WRONG-MERGE: MERGE_HEAD ac2e84ea is not origin/main (309f4de5)
+  NOT-THEIRS: staged plans/FS131-close-inventory.md is not origin/main's blob
+  NOT-THEIRS: staged plans/SESSION-HANDOFF-2026-10-06.md is not origin/main's blob
+merge-index: FAIL (3 fault(s))
+exit=1
+### the three registry files against main's: lines added, removed (git diff --numstat origin/main)
+14	0	ARCHITECTURE.md
+14	0	Proofs.lean
+323	0	scripts/Axioms.lean
+### (origin/main moved from ac2e84ea to 309f4de5 between the two runs above — another session's fetch; the second run's WRONG-MERGE and NOT-THEIRS are the check reading the moved ref. The merge being made is of ac2e84ea; named by hash from here.)
+### control, by hash: one of the three conflict paths not named
+merge of ac2e84ea (ac2e84ea) into 15398e94, base a917d57f: staged 519 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 516 taken whole from theirs
+  BOTH sides changed, merged unread: Proofs.lean
+merge-index: FAIL (1 fault(s))
+exit=1
+### faithful, by hash
+merge of ac2e84ea (ac2e84ea) into 15398e94, base a917d57f: staged 519 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs.lean, scripts/Axioms.lean), 516 taken whole from theirs
+merge-index: PASS
+exit=0
+### the three registry files against ac2e84ea's: lines added, removed
+14	0	ARCHITECTURE.md
+14	0	Proofs.lean
+323	0	scripts/Axioms.lean
+### what main changed between ac2e84ea and 309f4de5
+ plans/FS131-close-inventory.md      | 35 +++++++++++++++++++++++++++++++++++
+ plans/SESSION-HANDOFF-2026-10-06.md |  4 ++--
+ 2 files changed, 37 insertions(+), 2 deletions(-)

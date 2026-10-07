@@ -446,9 +446,19 @@ One reduction plus two certified computations, and why nothing in `tools/` is tr
 ## Trust ledger
 
 Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/axioms.sh`, which checks each record's axioms
-as a set); the current audit reads 5525 clean and 5 declared purchases, and 4 imported (and 16 axiom-free; 5,550 records at the example maps'
-landing, FS131-MC1, 2026-10-06), each purchase listed in `ARCHITECTURE.md` § Trust; an imported record rests on a
-declared outside theorem (`LEAN.md` § Trust ledger). Rung B holds none.
+as a set); the current audit reads 6304 clean and 5 declared purchases, and 8 imported (and 17 axiom-free; 6,334 records at wave 10's second
+landing, FS131-L10B, 2026-10-06), each purchase listed in `ARCHITECTURE.md` § Trust; an imported record rests on a
+declared outside theorem (`LEAN.md` § Trust ledger). The library declares one outside axiom, `StandingFive.kloosterman_bound` — Weil's
+bound for Kloosterman sums, `[Weil1948]` p. 207, read against its page by two readers — and the eight imported records are the theorems
+that rest on it; its first import, `[Falconer1981]` Lemma 2 (i), is a theorem since FS131-IF1. Rung B holds none.
+
+**What the library assumes, in both forms** (`scripts/assumptions.sh`, whose digest reads these counts and fails if
+they are absent): `axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — one outside theorem declared as
+an axiom, with eight theorems resting on it; thirty-five hypotheses, nineteen named and sixteen written out in a
+binder — seven standing for outside theorems, twenty-three for hand results of ours and five for open questions — taken in
+98 (hypothesis, statement) pairs by 51 statements (`scripts/assumptions-ledger.txt` lists each pair; FS131-LT5,
+2026-10-06). Weil's bound is counted in each form it takes — the axiom, the named hypothesis `KloostermanBound`, and that
+hypothesis written out at a family of fields: one outside theorem, three entries.
 
 What the audit accepts and what it buys — the ledger's entries, `native_decide`'s per-declaration axioms, an imported theorem's four
 items, `lean4checker` as the publication gate — is `LEAN.md` § Trust ledger.
@@ -501,7 +511,7 @@ The Lean gate — the build, zero `sorry`, the axiom audit, linters, spec exampl
 `LEAN.md` § The gate. Its recorded state stays here, where `scripts/gate_report.py`
 reads it. The vacuity scan's **counts** — a silent change in them is this gate's own failure mode (declarations are the library's;
 the audit's own are not counted):
-`declarations=13386 refutations-skipped=192 sites=1137`, `vacuous=0 stale=0 declared=3 witnessed=37 generic=1095 unknown=2`.
+`declarations=14501 refutations-skipped=199 sites=1269`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1226 unknown=2`.
 The baseline's two entries, `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
 
 What follows binds every mind that builds an instrument, not only the kernel lane.

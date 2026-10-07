@@ -1,0 +1,2 @@
+plans/FS131-close-inventory.md
+plans/SESSION-HANDOFF-2026-10-06.md

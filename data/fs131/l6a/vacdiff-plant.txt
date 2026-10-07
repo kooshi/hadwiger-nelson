@@ -1,0 +1,42 @@
+planted: dropped `EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis ::…`; a row on main's `Complex.I.eq_1`; an UNKNOWN row on new `HadwigerNelson.Plane.AeColouring.Fan.branch_contacts`; declarations +1
+counter vs the main scan: declarations 13767 / 13767, refutations 192 / 192: agree
+counter vs the landing scan: declarations 14299 / 14300, refutations 199 / 199: COUNTER-DISAGREES
+LOST EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis :: HadwigerNelson.Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1
+NOT NEW SITE GENERIC Complex.I.eq_1 :: F.Valid
+FLAGGED SITE UNKNOWN HadwigerNelson.Plane.AeColouring.Fan.branch_contacts :: F.Valid
+main rows 1254, landing rows 1351; lost 1 (0 with a removed declaration); added 98
+  added SITE GENERIC on AeColouring: 96
+  added SITE UNKNOWN on Valid: 1
+  added rows in Plane.Saturated.Basic: 7
+  added rows in Plane.Saturated.Fan: 24
+  added rows in Plane.Saturated.FanArcs: 5
+  added rows in Plane.Saturated.FanBridge: 47
+  added rows in Plane.Saturated.FanBuild: 4
+  added rows in Plane.Saturated.LocalGraph: 7
+  added rows in Plane.Saturated.MapColouring: 2
+  added rows in Plane.Saturated.Pinch: 1
+  declarations: 13767 -> 14300 (+533)
+  refutations-skipped: 192 -> 199 (+7)
+  sites: 1173 -> 1269 (+96)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1130 -> 1226 (+96)
+  unknown: 2 -> 2 (+0)
+  module Plane.Saturated.ArcContinuation: declarations 0 -> 40 (+40), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Saturated.Basic: declarations 0 -> 71 (+71), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Saturated.Curve: declarations 0 -> 30 (+30), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Saturated.CurveArc: declarations 0 -> 18 (+18), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Saturated.Fan: declarations 0 -> 57 (+57), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Saturated.FanArcs: declarations 0 -> 8 (+8), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Saturated.FanBridge: declarations 0 -> 91 (+91), refutations 0 -> 4 (+4)  [new module]
+  module Plane.Saturated.FanBuild: declarations 0 -> 14 (+14), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Saturated.FanExamples: declarations 0 -> 44 (+44), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Saturated.LocalGraph: declarations 0 -> 46 (+46), refutations 0 -> 1 (+1)  [new module]
+  module Plane.Saturated.MapColouring: declarations 0 -> 19 (+19), refutations 0 -> 1 (+1)  [new module]
+  module Plane.Saturated.MapEdge: declarations 0 -> 28 (+28), refutations 0 -> 0 (+0)  [new module]
+  module Plane.Saturated.Pinch: declarations 0 -> 45 (+45), refutations 0 -> 1 (+1)  [new module]
+  module Plane.Saturated.Sq9Map: declarations 0 -> 21 (+21), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +532, refutations +7: MODULE-SUM differs from the scans
+vacdiff: FAIL (5)

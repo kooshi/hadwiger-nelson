@@ -1,0 +1,31 @@
+[Elab.async] [2.309576] ✅️ elaborating proof of K10bCost.counts_le
+  [Elab.definition.value] [2.309381] ✅️ K10bCost.counts_le
+    [Elab.step] [2.309231] ✅️ decide +kernel
+      [Elab.step] [2.309215] ✅️ decide +kernel
+        [Elab.step] [2.309195] ✅️ decide +kernel
+          [addDecl] [2.308658] ✅️ adding declarations [K10bCost.counts_le._proof_1_1]
+            [Kernel] [2.308611] ✅️ typechecking declarations [K10bCost.counts_le._proof_1_1]
+	Command being timed: "lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/k10b/lean/U128Cost.lean"
+	User time (seconds): 4.68
+	System time (seconds): 0.53
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:05.21
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1223468
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 111980
+	Voluntary context switches: 365
+	Involuntary context switches: 137
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+EXIT=0

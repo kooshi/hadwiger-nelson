@@ -1,0 +1,116 @@
+import Proofs.HadwigerNelson.Arith.StationaryRatio
+import Mathlib.Combinatorics.SimpleGraph.Clique
+
+/-!
+# X25B-L1's level against the finite quotient graph (FS-131 wave 10, third pass; the row of ruling 507 (b))
+
+**Read aloud, against the informal claim.** X25B-L1 (`plans/FS100-X25B-derivation.md:72–79`): "a profinite factor's
+stationary ratio in a product is at most the supremum over its finite levels", where level `k` is the finite Cayley graph on
+`Y_k = Y/K_k` with connection set `S_k`, the image of `T_Y`. `StationaryRatio.ratio_prod_le_iSup_levels` (landed) bounds the
+ratio by the levels **pulled back to `X × Y`** — the connection measure smoothed by the Haar probability of `K_k`. This module
+states the comparison nothing stated: the pulled-back level of `Y` is bounded by the independence ratio of the finite graph,
+
+`ratio (ν_Y ∗ m_K) ≤ α(Cay(Y/K, S̄)) / |Y/K|`,  `S̄ = {c : ν_Y(π⁻¹ c) > 0}`  (`ratio_conv_cosetAverage_le`),
+
+and the form X25B-T's chain reads (`plans/FS100-X25B-derivation.md:89`, "`r(G_∅) ≤ sup_k r(ℂ^{r₁} × Y_k)` (X25B-L1)
+`≤ max(r(ℂ^{r₁}), sup_k r(Y_k))` (X25B-PZ)" with "`r(G_{v,k}) = α/|G_{v,k}|`"): the composition
+`ratio (ν_X × ν_Y) ≤ max (ratio ν_X) (sup_k α(Y_k)/|Y_k|)` (`ratio_prod_le_max_iSup_levelGraph`). The chain's middle term,
+the ratio of the product `X × Y_k` with the finite quotient **as a group**, is never formed: X25B-PZ applies to the
+pulled-back level directly, so no quotient system is built.
+
+**The class the argument reads** (wider than K10b's shape, § 8.7 of the plan): `ν_Y` any s-finite measure — **no symmetry and
+no `ν_Y(K) = 0`**: `SimpleGraph.fromRel` symmetrizes and drops loops, and where `ν_Y(K) > 0` a set independent for the
+smoothed measure is null, so the inequality holds with room. Only the upper bound is claimed; the reverse inequality (a
+uniform translate of a maximum independent set, pulled back) is true and not stated — the chain does not read it.
+
+**Inhabitant, with equality.** `Y = ZMod 2`, `K = ⊥`, `ν = δ₁`: the smoothed measure is `δ₁`, the level graph is `K₂`, and
+`ratio δ₁ = 1/2 = α(K₂)/2` (`StationaryRatio.ratio_dirac_one_zmod_two`; the Spec states the level graph's edge).
+-/
+
+namespace HadwigerNelson.StationaryRatio
+
+open MeasureTheory
+
+variable {Y : Type*} [AddCommGroup Y] [MeasurableSpace Y]
+
+/-- **The finite level graph** `Cay(Y ⧸ K, S̄)`, `S̄ = {c : ν(π⁻¹ c) > 0}`: two cosets are adjacent when they differ and the
+connection measure charges the coset of their difference (in either order). -/
+def levelGraph (ν : Measure Y) (K : AddSubgroup Y) : SimpleGraph (Y ⧸ K) :=
+  SimpleGraph.fromRel fun a b => 0 < ν ((QuotientAddGroup.mk : Y → Y ⧸ K) ⁻¹' {b - a})
+
+theorem levelGraph_adj {ν : Measure Y} {K : AddSubgroup Y} {a b : Y ⧸ K} :
+    (levelGraph ν K).Adj a b ↔ a ≠ b ∧
+      (0 < ν ((QuotientAddGroup.mk : Y → Y ⧸ K) ⁻¹' {b - a}) ∨ 0 < ν ((QuotientAddGroup.mk : Y → Y ⧸ K) ⁻¹' {a - b})) :=
+  SimpleGraph.fromRel_adj _ _ _
+
+variable [TopologicalSpace Y] [IsTopologicalAddGroup Y] [LocallyCompactSpace Y] [BorelSpace Y]
+
+/-- **The level row, per stationary set** (the leaf). A stationary random set in a compact group `Y`, a.e.-independent for
+the connection measure smoothed by the Haar probability of an open subgroup `K`, has `P(0 ∈ W)·|Y ⧸ K| ≤ α`, the
+independence number of the finite level graph. (Route, FS131-I10B's finding 4: almost surely the cosets in which `W` has
+positive Haar share form an independent set of the level graph; `P(0 ∈ W)` is the mean share of the origin's coset, at most
+the probability that this coset has positive share; that probability is the same for every coset, so it is the mean size of
+the independent set over `|Y ⧸ K|`.) -/
+theorem StationarySet.prob_mul_card_le_indepNum [CompactSpace Y] [SecondCountableTopology Y] (ν : Measure Y) [SFinite ν]
+    (K : OpenAddSubgroup Y) (W : StationarySet Y) (hW : W.AEIndependent (Measure.conv ν (cosetAverage K))) :
+    W.P W.B * (Nat.card (Y ⧸ K.toAddSubgroup) : ENNReal) ≤ ((levelGraph ν K.toAddSubgroup).indepNum : ENNReal) := by
+  sorry
+
+/-- **X25B-L1's level against the finite quotient graph**: the stationary ratio of the pulled-back level is at most the
+independence ratio `α / |Y ⧸ K|` of the finite level graph. -/
+theorem ratio_conv_cosetAverage_le [CompactSpace Y] [SecondCountableTopology Y] (ν : Measure Y) [SFinite ν]
+    (K : OpenAddSubgroup Y) :
+    ratio (Measure.conv ν (cosetAverage K)) ≤
+      ((levelGraph ν K.toAddSubgroup).indepNum : ENNReal) / (Nat.card (Y ⧸ K.toAddSubgroup) : ENNReal) := by
+  haveI : Finite (Y ⧸ K.toAddSubgroup) := AddSubgroup.quotient_finite_of_isOpen K.toAddSubgroup K.isOpen
+  have hpos : (Nat.card (Y ⧸ K.toAddSubgroup) : ENNReal) ≠ 0 := by
+    exact_mod_cast (Nat.card_pos (α := Y ⧸ K.toAddSubgroup)).ne'
+  refine iSup₂_le fun W hW => ?_
+  rw [ENNReal.le_div_iff_mul_le (Or.inl hpos) (Or.inl (ENNReal.natCast_ne_top _))]
+  exact W.prob_mul_card_le_indepNum ν K hW
+
+/-- The smoothed connection measure of a symmetric measure is symmetric (the Haar probability of a subgroup is). -/
+theorem map_neg_conv_cosetAverage [CompactSpace Y] [SecondCountableTopology Y] (ν : Measure Y) [SFinite ν]
+    (hν : ν.map Neg.neg = ν) (K : OpenAddSubgroup Y) :
+    (Measure.conv ν (cosetAverage K)).map Neg.neg = Measure.conv ν (cosetAverage K) := by
+  sorry
+
+/-- **X25B-L1 in the form X25B-T's chain reads**: for a compact `Y` with open subgroups `K_k` entering every neighbourhood
+of `0`, and symmetric connection measures, `r(X × Y) ≤ max(r(X), sup_k α(Y_k)/|Y_k|)` — X25B-L1, then X25B-PZ at each
+pulled-back level, then the level row. -/
+theorem ratio_prod_le_max_iSup_levelGraph {ι X : Type*} [AddCommGroup X] [MeasurableSpace X] [MeasurableNeg X]
+    [CompactSpace Y] [SecondCountableTopology Y] (νX : Measure X) [SigmaFinite νX] (νY : Measure Y) [IsFiniteMeasure νY]
+    (hX : νX.map Neg.neg = νX) (hY : νY.map Neg.neg = νY) (K : ι → OpenAddSubgroup Y)
+    (hK0 : ∀ V ∈ nhds (0 : Y), ∃ k, (K k : Set Y) ⊆ V) :
+    ratio (νX.prod νY) ≤ max (ratio νX)
+      (⨆ k, ((levelGraph νY (K k).toAddSubgroup).indepNum : ENNReal) / (Nat.card (Y ⧸ (K k).toAddSubgroup) : ENNReal)) := by
+  refine (ratio_prod_le_iSup_levels νX νY K hK0).trans (iSup_le fun k => ?_)
+  haveI : IsFiniteMeasure (Measure.conv νY (cosetAverage (K k))) := by
+    unfold Measure.conv
+    infer_instance
+  refine (ratio_prod_le νX (Measure.conv νY (cosetAverage (K k))) hX (map_neg_conv_cosetAverage νY hY (K k))).trans ?_
+  exact max_le_max le_rfl ((ratio_conv_cosetAverage_le νY (K k)).trans
+    (le_iSup (fun k => ((levelGraph νY (K k).toAddSubgroup).indepNum : ENNReal) /
+      (Nat.card (Y ⧸ (K k).toAddSubgroup) : ENNReal)) k))
+
+/-! ## Spec -/
+
+-- the level graph of `δ₁` on `ZMod 2` at the trivial subgroup has the edge between the two cosets: it is `K₂`.
+example : (levelGraph (Measure.dirac (1 : ZMod 2)) (⊥ : AddSubgroup (ZMod 2))).Adj
+    (QuotientAddGroup.mk 0) (QuotientAddGroup.mk 1) := by
+  rw [levelGraph_adj]
+  refine ⟨?_, Or.inl ?_⟩
+  · intro h
+    have h' := (QuotientAddGroup.eq (s := (⊥ : AddSubgroup (ZMod 2)))).mp h
+    rw [AddSubgroup.mem_bot] at h'
+    revert h'
+    decide
+  · rw [Measure.dirac_apply' _ (MeasurableSet.of_discrete)]
+    simp
+
+-- a measure that charges nothing gives the empty level graph: the bound is then `ratio ≤ 1`.
+example (K : AddSubgroup (ZMod 2)) : levelGraph (0 : Measure (ZMod 2)) K = ⊥ := by
+  ext a b
+  simp [levelGraph_adj]
+
+end HadwigerNelson.StationaryRatio

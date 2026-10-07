@@ -1,0 +1,27 @@
+MATCH     n=1  '- **The artifact is the certificate plus the checker, never the search'  <- CLAUDE.md § The standard of evidence above rung B
+MATCH     n=1  "551. **Kooshi's word, 2026-10-06: the gate is to enumerate both kinds "  <- plans/FS131-close-inventory.md
+MATCH     n=1  "535. **FS131-L10A done: wave 10's first pass is on `main` through the "  <- plans/FS131-close-inventory.md
+MATCH     n=1  "538. **FS131-I10D done: the planes' floor is proved over the one named"  <- plans/FS131-close-inventory.md
+MATCH     n=1  '542. **FS131-I10F, by message mid-job: a generalization — the majority'  <- plans/FS131-close-inventory.md
+MATCH     n=1  "547. **FS131-I10F done: wave 10's three measure-theoretic leaves and t"  <- plans/FS131-close-inventory.md
+MATCH     n=1  "554. **FS131-K10c, by message: the import is committed — Weil's bound "  <- plans/FS131-close-inventory.md
+MATCH     n=1  "555. **FS131-K10c done at its Stage 17: wave 10's third planning pass "  <- plans/FS131-close-inventory.md
+MATCH     n=1  "559. **FS131-IF1 done: Falconer's lemma is a theorem — the library dec"  <- plans/FS131-close-inventory.md
+MATCH     n=1  '556. **FS131-I7A, by message mid-job: a defect of the skeleton — four '  <- plans/FS131-close-inventory.md
+MATCH     n=1  '- **The import at the gate** (`LEAN.md` § Trust ledger): the `declareI'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md § 16.6 For the wave's second joining job (replacing § 9.4's list where they differ)
+MATCH     n=1  "- **Edits owed in landed or fixed modules, the landing's**: `local ins"  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10k/plans/FS131-w10-kernel-plan.md § 16.6 For the wave's second joining job (replacing § 9.4's list where they differ)
+MATCH     n=1  'theorem ae_eq_measurable_of_majority {Ω I K : Type*} [MeasurableSpace '  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10m/Proofs/HadwigerNelson/Arith/MajorityVote.lean
+MATCH     n=1  'axiom kloosterman_bound.{u} (F : Type u) [Field F] [Fintype F] [Decida'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10m/Proofs/HadwigerNelson/Arith/WeilKloosterman.lean
+MATCH     n=1  'theorem standingFloor_seven_weil : StandingFloor 7 :='  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10m/Proofs/HadwigerNelson/Arith/WeilKloosterman.lean
+MATCH     n=1  'theorem seven_le_localBound_weil : 7 ≤ SpectralChain.localBound standi'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10m/Proofs/HadwigerNelson/Arith/WeilKloosterman.lean
+MATCH     n=1  'theorem targetFloor_six_weil {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 62 ≤ Q) :'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10m/Proofs/HadwigerNelson/Arith/WeilKloosterman.lean
+MATCH     n=1  'theorem targetFloor_eight_128 : TargetFloor 8 128 :='  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10m/Proofs/HadwigerNelson/Arith/Floor128.lean
+MATCH     n=1  'theorem sp_if (I : Interface F) (hBH : BochnerHerglotz (unitRing F)) ('  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10m/Proofs/HadwigerNelson/Arith/SpectralInputs.lean
+MATCH     n=1  'theorem falconer_lemma2_nonempty {S : Set ℂ} (hS : MeasurableSet S) (h'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wf1/Proofs/HadwigerNelson/Plane/FalconerReduction.lean
+MATCH     n=1  'theorem exists_not_tendsto_ratio_and_compl {S : Set E} (hS : NullMeasu'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wf1/Proofs/HadwigerNelson/Plane/MetricalBoundary.lean
+MATCH     n=1  'as a set); the current audit reads 6148 clean and 5 declared purchases'  <- CLAUDE.md § Trust ledger
+MATCH     n=1  '`declarations=14299 refutations-skipped=199 sites=1269`, `vacuous=0 st'  <- CLAUDE.md § The gate
+pairs=23 match=23 multi=0 bad=0
+plant 1 (one character changed): MISSING -> fired
+plant 2 (a source that does not exist): NO-SOURCE -> fired
+self-test: PASS

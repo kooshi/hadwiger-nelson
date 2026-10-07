@@ -1,0 +1,7 @@
+Lean files differing from 53f4cde5: 7; code lines removed 9, added 6, in 3 files; the other 4 differ in comments and docstrings only
+tidy shape: PASS
+plant (a code line added in another file): fired (CODE)
+plant (a hypothesis of another theorem dropped): fired (CODE)
+plant (the majority vote's conclusion changed): fired (SHAPE)
+plant (a file outside the list touched in a comment only): fired (FILES)
+self-test: PASS

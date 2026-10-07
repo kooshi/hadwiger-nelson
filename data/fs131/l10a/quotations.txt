@@ -1,0 +1,20 @@
+MATCH     n=1  '- **The artifact is the certificate plus the checker, never the search'  <- CLAUDE.md § The standard of evidence above rung B
+MATCH     n=1  "493. **FS131-I10A done: all nine leaves of wave 10's first file pair p"  <- plans/FS131-close-inventory.md
+MATCH     n=1  "494. **Rulings on I10A's held items, and its slot.** (a) **The two unr"  <- plans/FS131-close-inventory.md
+MATCH     n=1  "506. **FS131-I10B done: all three leaves of wave 10's `StationaryRatio"  <- plans/FS131-close-inventory.md
+MATCH     n=1  "507. **Rulings on I10B's held items, and its slot.** (a) **The seven u"  <- plans/FS131-close-inventory.md
+MATCH     n=1  "519. **FS131-I10C done: all nine leaves of wave 10's `StandingFive` pr"  <- plans/FS131-close-inventory.md
+MATCH     n=1  '520. **Rulings on I10C\'s held items, and its slot.** (a) **"347 is att'  <- plans/FS131-close-inventory.md
+MATCH     n=1  "509. **FS131-K10b done at its Stage 9: wave 10's second planning pass "  <- plans/FS131-close-inventory.md
+MATCH     n=1  '496. **FS131-MC1 done: the example maps are on `main` through the full'  <- plans/FS131-close-inventory.md
+MATCH     n=1  'theorem sp_if (I : Interface F) [Countable (unitRing F)] (hBH : Bochne'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10l/Proofs/HadwigerNelson/Arith/SpectralInputs.lean
+MATCH     n=1  'theorem spectral_carried_iff [IsProbabilityMeasure μ] (t : Topological'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10l/Proofs/HadwigerNelson/Arith/SpectralInputs.lean
+MATCH     n=1  'theorem ratio_prod_le {H : Type*} [AddCommGroup H] [MeasurableSpace H]'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10b/Proofs/HadwigerNelson/Arith/StationaryRatio.lean
+MATCH     n=1  'theorem ratio_prod_le_iSup_levels {X Y : Type*} [AddCommGroup X] [Meas'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10b/Proofs/HadwigerNelson/Arith/StationaryRatio.lean
+MATCH     n=1  'theorem seven_le_localBound (hFloor : StandingFloor 7) : 7 ≤ localBoun'  <- /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10c/Proofs/HadwigerNelson/Arith/StandingFive.lean
+MATCH     n=1  '`declarations=13386 refutations-skipped=192 sites=1137`, `vacuous=0 st'  <- CLAUDE.md § The gate
+pairs=15 match=15 multi=0 bad=0
+plant 1 (one character changed): MISSING -> fired
+plant 2 (a source that does not exist): NO-SOURCE -> fired
+self-test: PASS
+exit=0

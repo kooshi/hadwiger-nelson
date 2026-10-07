@@ -1,0 +1,9 @@
+trial: git merge-tree --write-tree --name-only HEAD(248f8f4f) 615c715ca71985294532117684a82a2ff82db609 (origin/main)
+14105b39a5f9035893ca0d7513ec3e3e2422df32
+scripts/Axioms.lean
+
+Auto-merging ARCHITECTURE.md
+Auto-merging Proofs.lean
+Auto-merging scripts/Axioms.lean
+CONFLICT (content): Merge conflict in scripts/Axioms.lean
+exit=1

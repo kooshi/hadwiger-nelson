@@ -1,0 +1,2 @@
+slot: waiting (ledger 80 + 16 > budget 90 GiB)
+slot: admitted lake: mem 16 GiB (hard cap), cpus 0,1,2,3

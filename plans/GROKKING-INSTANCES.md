@@ -511,6 +511,10 @@ FS-106's: three of three agents that night quoted their own count as the harness
 
 **M2 measured it seven times more** (5× to ≥ 30× in time, never in tokens): each time the non-obvious input was already in Mathlib, so grep Mathlib by the statement's shape at the skeleton (`plans/M2-kernel-lane.md` §R-close 3e). **FS-75 once more** (4.5 h planned, 45 minutes): even the re-price from the first two leaves ran 2–3× high, and the saving came from the obligation pass cutting the statement's analytic half, not from Mathlib (`plans/FS75-kernel-167.md` §R-close 4d).
 
+*FS-131, an instance (Keryx's measurement at Kooshi's word, 2026-10-06; `data/fs131/calibration/price-vs-actual.md`, inventory item 541):*
+
+**FS-131 measured it by unit, over nineteen implementer jobs**: a planner's price in tokens ran 1.2–1.5 times low, in lines of Lean it was right (median 0.75 of the plan; proofs under, explicit objects over), in sessions twice high, and in agent-days ten times high in jobs — between sixteen and eighty-five times on the clock. One implementer job is about an hour, about 430k tokens and about 1,300 lines (`tokens ≈ 311k + 129 per line`). So price a kernel phase in lines and jobs, never in days; a day-price carries nothing its line count did not.
+
 ## `CLAUDE.md` § Building — Kill by PID or process group
 
 *M11, from § Building, Kill by PID, after “…membership, not whether the work stopped.”:*

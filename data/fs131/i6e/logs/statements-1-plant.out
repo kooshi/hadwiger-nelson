@@ -1,0 +1,32 @@
+CHANGED | structure IsolatedAt (c : AeColouring k) (z : ℂ) (R : ℝ) : Prop where
+same    | theorem sq9_isolatedAt : sq9.IsolatedAt sqVertex (1 / 4) :=
+same    | theorem gamma (h : c.IsolatedAt z R) {y : ℂ} (hy : y ∈ c.essBdry ∩ (ball z R \ {z})) :
+  still sorry, not mine | gamma
+same    | theorem IsUnitCurve.exists_polarGraph {γ : ℝ → ℂ} {ψ : ℝ → ℝ} {L : ℝ} (h : IsUnitCurve γ ψ (Icc 0 L)) (hL : 0 
+  still sorry, not mine | IsUnitCurve.exists_polarGraph
+same    | theorem beta (h : c.IsolatedAt z R) {y : ℂ} (hy : y ∈ c.essBdry ∩ (ball z R \ {z}))
+  still sorry, not mine | beta
+same    | theorem alpha (h : c.IsolatedAt z R) :
+  still sorry, not mine | alpha
+same    | theorem fan_of_isolated (c : AeColouring k) {z : ℂ} {R : ℝ} (hR : 0 < R) (hS : c.singularSet ∩ ball z R ⊆ {z})
+  still sorry, not mine | fan_of_isolated
+same    | theorem regJFan_of_saturated (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite) : c.RegJF
+same    | theorem regJFan_iff_singLocallyFinite (c : AeColouring k) (hsat : Saturated c.cls) :
+same    | theorem regJLiteral_of_saturated (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite) :
+  still sorry, not mine | regJLiteral_of_saturated
+same    | theorem finite_arcs_of_isBounded (c : AeColouring k) (hsat : Saturated c.cls) (hS : c.SingLocallyFinite)
+  still sorry, not mine | finite_arcs_of_isBounded
+same    | theorem two_le_n (hz : z ∈ c.singularSet) : 2 ≤ F.n := by
+same    | theorem col_ne {i j : Fin F.n} (hij : (j : ℕ) + 1 = i ∨ ((i : ℕ) = 0 ∧ (j : ℕ) + 1 = F.n)) : F.col j ≠ F.col i
+same    | theorem branch_outside_discs (hsat : SaturatedOn c.cls (ball z F.r \ {z})) (i : Fin F.n) {t : ℝ}
+same    | theorem branch_contacts (hsat : SaturatedOn c.cls (ball z F.r \ {z})) {i j : Fin F.n}
+same    | theorem sector_alone (hsat : SaturatedOn c.cls (ball z F.r \ {z})) {i i' : Fin F.n} (hi : F.dir i < F.nextDir 
+same    | theorem sector_unique (hsat : SaturatedOn c.cls (ball z F.r \ {z})) {i i' : Fin F.n} (hi : F.dir i < F.nextDir
+identical | Proofs/HadwigerNelson/Plane/Saturated/Basic.lean
+identical | Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
+identical | Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean
+identical | Proofs/HadwigerNelson/Plane/Saturated/Fan.lean
+identical | Proofs/HadwigerNelson/Plane/Saturated/FanExamples.lean
+identical | Proofs/HadwigerNelson/Plane/Saturated/Curve.lean
+identical | Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean
+statements: 17  failures: 1  base: d62406a2

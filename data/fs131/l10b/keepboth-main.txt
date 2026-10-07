@@ -1,0 +1,48 @@
+faithful: scripts/Axioms.lean: 7085 non-blank lines; #print axioms lines 6313 = ours 5948 + theirs 6174 - base 5809; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): scripts/Axioms.lean: 7084 non-blank lines; #print axioms lines 6313 = ours 5948 + theirs 6174 - base 5809; faults 1
+  LOST '/-! ## FS131-K6 — wave 6 (saturated colourings): the foundation, and the leaves the planner proved (' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): scripts/Axioms.lean: 7086 non-blank lines; #print axioms lines 6313 = ours 5948 + theirs 6174 - base 5809; faults 1
+  EXTRA '/-! ## FS131-K6 — wave 6 (saturated colourings): the foundation, and the leaves the planner proved (' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): scripts/Axioms.lean: 7086 non-blank lines; #print axioms lines 6313 = ours 5948 + theirs 6174 - base 5809; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+plant (a record of theirs doubled): scripts/Axioms.lean: 7086 non-blank lines; #print axioms lines 6314 = ours 5948 + theirs 6174 - base 5809; faults 3
+  COUNT #print axioms: have 6314, expected ours 5948 + theirs 6174 - base 5809
+  EXTRA '#print axioms HadwigerNelson.Plane.AeColouring.isOpen_openPart' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  TWICE HadwigerNelson.Plane.AeColouring.isOpen_openPart (2)
+  -> fired (TWICE)
+plant (a record of theirs dropped): scripts/Axioms.lean: 7084 non-blank lines; #print axioms lines 6312 = ours 5948 + theirs 6174 - base 5809; faults 2
+  COUNT #print axioms: have 6312, expected ours 5948 + theirs 6174 - base 5809
+  LOST '#print axioms HadwigerNelson.Plane.AeColouring.isOpen_openPart' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (COUNT)
+self-test: PASS
+exit=0
+faithful: ARCHITECTURE.md: 737 non-blank lines; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): ARCHITECTURE.md: 736 non-blank lines; faults 1
+  LOST '| `Plane/Saturated/Basic` | **FS-131 wave 6, foundation** (jobs FS131-K6, FS131-K6b; `plans/FS131-w6' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): ARCHITECTURE.md: 738 non-blank lines; faults 1
+  EXTRA '| `Plane/Saturated/Basic` | **FS-131 wave 6, foundation** (jobs FS131-K6, FS131-K6b; `plans/FS131-w6' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): ARCHITECTURE.md: 738 non-blank lines; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+self-test: PASS
+exit=0
+faithful: Proofs.lean: 275 non-blank lines; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): Proofs.lean: 274 non-blank lines; faults 1
+  LOST 'import Proofs.HadwigerNelson.Plane.Saturated.Basic' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): Proofs.lean: 276 non-blank lines; faults 1
+  EXTRA 'import Proofs.HadwigerNelson.Plane.Saturated.Basic' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): Proofs.lean: 276 non-blank lines; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+self-test: PASS
+exit=0

@@ -1,0 +1,25 @@
+> COHYP HadwigerNelson.Plane.gmap_ii h𝒞 :: ∀ (S : Fin 6 → Set ℂ), 𝒞 S → (∀ (j : Fin 6), IsOpen (S j)) ∧ ∀ (j : Fin 6), HadwigerNelson.Plane.UnitPairsNull (S j)
+> COHYP HadwigerNelson.Plane.sat_noPar h𝒞 :: 𝒞 F.region
+> COHYP HadwigerNelson.Plane.sat_noPar hc :: ∀ (j : Fin 6), c.cls j =ᵐ[MeasureTheory.volume] F.region j
+> COHYP HadwigerNelson.Plane.sat_noPar hF :: F.IsPlaneMap
+> COHYP HadwigerNelson.Plane.sat_noPar hsat :: HadwigerNelson.Plane.Saturated c.cls
+< COHYP HadwigerNelson.StandingFive.standingFloor_mono h :: n ≤ n'
+> COHYP HadwigerNelson.StandingFive.circle_sum_le ha :: a ≠ 0
+> COHYP HadwigerNelson.StandingFive.circle_sum_le hb :: b ≠ 0
+> COHYP HadwigerNelson.StandingFive.circle_sum_le hodd :: ringChar F ≠ 2
+> COHYP HadwigerNelson.StandingFive.circle_sum_le hψ :: ψ ≠ 1
+> COHYP HadwigerNelson.StandingFive.circle_sum_le_of_ne h :: a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0
+> COHYP HadwigerNelson.StandingFive.circle_sum_le_of_ne hb :: b ≠ 0
+> COHYP HadwigerNelson.StandingFive.circle_sum_le_of_ne hodd :: ringChar F ≠ 2
+> COHYP HadwigerNelson.StandingFive.circle_sum_le_of_ne hψ :: ψ ≠ 1
+> COHYP HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound h4 :: 4 * c * d = a
+> COHYP HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound ha :: a ≠ 0
+> COHYP HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound hp :: ringChar F ≠ 2
+> COHYP HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound hψ :: ∃ x, ψ x ≠ 1
+> COHYP HadwigerNelson.StandingFive.normOne_charSum_ge hcard :: Fintype.card k = Q ^ 2
+> COHYP HadwigerNelson.StandingFive.normOne_charSum_ge hQ4 :: Q % 4 = 3
+> COHYP HadwigerNelson.StandingFive.normOne_charSum_ge hψ :: ψ ≠ 1
+> COHYP HadwigerNelson.StandingFive.targetFloor_seven_of_kloosterman hQ4 :: Q % 4 = 3
+> COHYP HadwigerNelson.StandingFive.targetFloor_seven_of_kloosterman hQ :: 98 ≤ Q
+> COHYP HadwigerNelson.StandingFive.targetFloor_six_of_kloosterman hQ4 :: Q % 4 = 3
+> COHYP HadwigerNelson.StandingFive.targetFloor_six_of_kloosterman hQ :: 62 ≤ Q

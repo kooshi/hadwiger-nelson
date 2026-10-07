@@ -1,0 +1,4 @@
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:100:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:107:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:121:8: warning: declaration uses `sorry`
+exit=0

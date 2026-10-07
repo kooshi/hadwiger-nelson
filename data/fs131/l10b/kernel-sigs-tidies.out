@@ -1,0 +1,1943 @@
+data/fs131/l10b/kernel-sigs.lean:59:47: warning: `String.trim` has been deprecated: Use `String.trimAscii` instead
+
+Note: The updated constant has a different type:
+  String → String.Slice
+instead of
+  String → String
+=== L10B KERNEL SIGNATURES ===
+@@ THM Proofs.HadwigerNelson.Arith.FactorAction HadwigerNelson.SpectralInputs.comap_factorSigma_eq
+SIG HadwigerNelson.SpectralInputs.comap_factorSigma_eq.{u_1, u_2} {R : Type u_1} {Ω : Type u_2} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} [MeasureTheory.IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (hcomm : ∀ (x y : R), T x ∘ T y = T y ∘ T x) (l : Filter R) {x x' : R} (hinv : T x' ∘ T x = id) : MeasurableSpace.comap (T x) (HadwigerNelson.SpectralInputs.factorSigma T hT l) = HadwigerNelson.SpectralInputs.factorSigma T hT l
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω : Type u_2
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FactorAction.2926067791._hygCtx._hyg.4 : MeasurableSpace Ω
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.FactorAction.2926067791._hygCtx._hyg.9 : MeasureTheory.IsProbabilityMeasure μ
+BINDER explicit data T : R → Ω → Ω
+BINDER explicit prop hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ
+BINDER explicit prop hcomm : ∀ (x y : R), T x ∘ T y = T y ∘ T x
+BINDER explicit data l : Filter R
+BINDER implicit data x : R
+BINDER implicit data x' : R
+BINDER explicit prop hinv : T x' ∘ T x = id
+CONCL MeasurableSpace.comap (T x) (HadwigerNelson.SpectralInputs.factorSigma T hT l) = HadwigerNelson.SpectralInputs.factorSigma T hT l
+@@ THM Proofs.HadwigerNelson.Arith.FactorAction HadwigerNelson.SpectralInputs.comap_factorSigma_eq_of_action
+SIG HadwigerNelson.SpectralInputs.comap_factorSigma_eq_of_action.{u_1, u_2} {R : Type u_1} {Ω : Type u_2} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} [AddCommGroup R] [MeasureTheory.IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (hadd : ∀ (x y : R), T (x + y) = T x ∘ T y) (h0 : T 0 = id) (l : Filter R) (x : R) : MeasurableSpace.comap (T x) (HadwigerNelson.SpectralInputs.factorSigma T hT l) = HadwigerNelson.SpectralInputs.factorSigma T hT l
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω : Type u_2
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FactorAction.1840034795._hygCtx._hyg.4 : MeasurableSpace Ω
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FactorAction.1840034795._hygCtx._hyg.9 : AddCommGroup R
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.FactorAction.1840034795._hygCtx._hyg.12 : MeasureTheory.IsProbabilityMeasure μ
+BINDER explicit data T : R → Ω → Ω
+BINDER explicit prop hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ
+BINDER explicit prop hadd : ∀ (x y : R), T (x + y) = T x ∘ T y
+BINDER explicit prop h0 : T 0 = id
+BINDER explicit data l : Filter R
+BINDER explicit data x : R
+CONCL MeasurableSpace.comap (T x) (HadwigerNelson.SpectralInputs.factorSigma T hT l) = HadwigerNelson.SpectralInputs.factorSigma T hT l
+@@ THM Proofs.HadwigerNelson.Arith.FactorAction HadwigerNelson.SpectralInputs.si4_equivariant_factorSigma
+SIG HadwigerNelson.SpectralInputs.si4_equivariant_factorSigma.{u_1, u_2, u_3} {R : Type u_1} {Ω : Type u_2} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} {V : Type u_3} [Countable V] [MeasureTheory.IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (hcomm : ∀ (x y : R), T x ∘ T y = T y ∘ T x) (l : Filter R) (c : Ω → V → Fin 4) (hc : ∀ (v : V), Measurable fun ω => c ω v) {x x' : R} (hinv : T x' ∘ T x = id) (π : V → V) (hπ : ∀ (ω : Ω) (v : V), c (T x ω) v = c ω (π v)) : ∀ᵐ (ω : Ω) ∂μ, ∀ (v : V), HadwigerNelson.SpectralInputs.condSupport (HadwigerNelson.SpectralInputs.factorSigma T hT l) μ c (T x ω) v = HadwigerNelson.SpectralInputs.condSupport (HadwigerNelson.SpectralInputs.factorSigma T hT l) μ c ω (π v)
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω : Type u_2
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FactorAction.210012351._hygCtx._hyg.4 : MeasurableSpace Ω
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER implicit data V : Type u_3
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.FactorAction.210012351._hygCtx._hyg.10 : Countable V
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.FactorAction.210012351._hygCtx._hyg.13 : MeasureTheory.IsProbabilityMeasure μ
+BINDER explicit data T : R → Ω → Ω
+BINDER explicit prop hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ
+BINDER explicit prop hcomm : ∀ (x y : R), T x ∘ T y = T y ∘ T x
+BINDER explicit data l : Filter R
+BINDER explicit data c : Ω → V → Fin 4
+BINDER explicit prop hc : ∀ (v : V), Measurable fun ω => c ω v
+BINDER implicit data x : R
+BINDER implicit data x' : R
+BINDER explicit prop hinv : T x' ∘ T x = id
+BINDER explicit data π : V → V
+BINDER explicit prop hπ : ∀ (ω : Ω) (v : V), c (T x ω) v = c ω (π v)
+CONCL ∀ᵐ (ω : Ω) ∂μ, ∀ (v : V), HadwigerNelson.SpectralInputs.condSupport (HadwigerNelson.SpectralInputs.factorSigma T hT l) μ c (T x ω) v = HadwigerNelson.SpectralInputs.condSupport (HadwigerNelson.SpectralInputs.factorSigma T hT l) μ c ω (π v)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 Equiv.mulLeft₀.congr_simp
+SIG Equiv.mulLeft₀.congr_simp.{u_1} {G₀ : Type u_1} [GroupWithZero G₀] (a a✝ : G₀) (e_a : a = a✝) (ha : a ≠ 0) : Equiv.mulLeft₀ a ha = Equiv.mulLeft₀ a✝ ⋯
+BINDER implicit data G₀ : Type u_1
+BINDER inst data inst._@.Mathlib.Algebra.GroupWithZero.Units.Equiv.2381840360._hygCtx._hyg.3 : GroupWithZero G₀
+BINDER explicit data a : G₀
+BINDER explicit data a : G₀
+BINDER explicit prop e_a : a✝ = a
+BINDER explicit prop ha : a✝ ≠ 0
+CONCL Equiv.mulLeft₀ a✝ ha = Equiv.mulLeft₀ a ⋯
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.bezout128
+SIG HadwigerNelson.Floor128.bezout128 : HadwigerNelson.Floor128.clmul 15 HadwigerNelson.Floor128.P HadwigerNelson.Floor128.a128 ^^^ HadwigerNelson.Floor128.clmul 14 HadwigerNelson.Floor128.b128 (2 ^ 128 ^^^ 2) = 1
+CONCL HadwigerNelson.Floor128.clmul 15 HadwigerNelson.Floor128.P HadwigerNelson.Floor128.a128 ^^^ HadwigerNelson.Floor128.clmul 14 HadwigerNelson.Floor128.b128 (2 ^ 128 ^^^ 2) = 1
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.bezout4
+SIG HadwigerNelson.Floor128.bezout4 : HadwigerNelson.Floor128.clmul 15 HadwigerNelson.Floor128.P HadwigerNelson.Floor128.a4 ^^^ HadwigerNelson.Floor128.clmul 14 HadwigerNelson.Floor128.b4 (2 ^ 4 ^^^ 2) = 1
+CONCL HadwigerNelson.Floor128.clmul 15 HadwigerNelson.Floor128.P HadwigerNelson.Floor128.a4 ^^^ HadwigerNelson.Floor128.clmul 14 HadwigerNelson.Floor128.b4 (2 ^ 4 ^^^ 2) = 1
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.charP_two
+SIG HadwigerNelson.Floor128.charP_two.{u_1} {k : Type u_1} [Field k] [Fintype k] (hcard : Fintype.card k = 128 ^ 2) : CharP k 2
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.351305045._hygCtx._hyg.3 : Field k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.351305045._hygCtx._hyg.6 : Fintype k
+BINDER explicit prop hcard : Fintype.card k = 128 ^ 2
+CONCL CharP k 2
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.charSum_128_ge
+SIG HadwigerNelson.Floor128.charSum_128_ge {k : Type} [Field k] [Fintype k] [DecidableEq k] (hcard : Fintype.card k = 128 ^ 2) (ψ : AddChar k ℂ) (hψ : ψ ≠ 1) : -19 ≤ (∑ u with u ^ (128 + 1) = 1, ψ u).re
+BINDER implicit data k : Type
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.3821202364._hygCtx._hyg.3 : Field k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.3821202364._hygCtx._hyg.6 : Fintype k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.3821202364._hygCtx._hyg.9 : DecidableEq k
+BINDER explicit prop hcard : Fintype.card k = 128 ^ 2
+BINDER explicit data ψ : AddChar k ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+CONCL -19 ≤ (∑ u with u ^ (128 + 1) = 1, ψ u).re
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.class_le
+SIG HadwigerNelson.Floor128.class_le (r : ℕ) (hr : r < 127) : ∑ j ∈ Finset.range 129, HadwigerNelson.Floor128.step^[127 * j + r] 1 % 2 ≤ 74
+BINDER explicit data r : ℕ
+BINDER explicit prop hr : r < 127
+CONCL ∑ j ∈ Finset.range 129, HadwigerNelson.Floor128.step^[127 * j + r] 1 % 2 ≤ 74
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.clmul.eq_1
+SIG HadwigerNelson.Floor128.clmul.eq_1 (x✝ x✝¹ : ℕ) : HadwigerNelson.Floor128.clmul 0 x✝ x✝¹ = 0
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.3106025144._hygCtx._hyg.10 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.3106025144._hygCtx._hyg.11 : ℕ
+CONCL HadwigerNelson.Floor128.clmul 0 x✝¹ x✝ = 0
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.clmul.eq_2
+SIG HadwigerNelson.Floor128.clmul.eq_2 (x✝ x✝¹ fuel : ℕ) : HadwigerNelson.Floor128.clmul fuel.succ x✝ x✝¹ = (if x✝.testBit 0 = true then x✝¹ else 0) ^^^ HadwigerNelson.Floor128.clmul fuel (x✝ >>> 1) (x✝¹ <<< 1)
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.3106025144._hygCtx._hyg.10 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.3106025144._hygCtx._hyg.11 : ℕ
+BINDER explicit data fuel : ℕ
+CONCL HadwigerNelson.Floor128.clmul fuel.succ x✝¹ x✝ = (if x✝¹.testBit 0 = true then x✝ else 0) ^^^ HadwigerNelson.Floor128.clmul fuel (x✝¹ >>> 1) (x✝ <<< 1)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.clmul.eq_def
+SIG HadwigerNelson.Floor128.clmul.eq_def (x✝ x✝¹ x✝² : ℕ) : HadwigerNelson.Floor128.clmul x✝ x✝¹ x✝² = match x✝, x✝¹, x✝² with | 0, x, x_1 => 0 | fuel.succ, a, b => (if a.testBit 0 = true then b else 0) ^^^ HadwigerNelson.Floor128.clmul fuel (a >>> 1) (b <<< 1)
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.3106025144._hygCtx._hyg.9 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.3106025144._hygCtx._hyg.10 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.3106025144._hygCtx._hyg.11 : ℕ
+CONCL HadwigerNelson.Floor128.clmul x✝² x✝¹ x✝ = match x✝², x✝¹, x✝ with | 0, x, x_1 => 0 | fuel.succ, a, b => (if a.testBit 0 = true then b else 0) ^^^ HadwigerNelson.Floor128.clmul fuel (a >>> 1) (b <<< 1)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.clmul_P_qBig
+SIG HadwigerNelson.Floor128.clmul_P_qBig : HadwigerNelson.Floor128.clmul 15 HadwigerNelson.Floor128.P HadwigerNelson.Floor128.qBig = 2 ^ 16384 ^^^ 2
+CONCL HadwigerNelson.Floor128.clmul 15 HadwigerNelson.Floor128.P HadwigerNelson.Floor128.qBig = 2 ^ 16384 ^^^ 2
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.coeff_ev_X
+SIG HadwigerNelson.Floor128.coeff_ev_X.{u_1} {R : Type u_1} [Semiring R] (n i : ℕ) : (HadwigerNelson.Floor128.ev Polynomial.X n).coeff i = if n.testBit i = true then 1 else 0
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.2524744641._hygCtx._hyg.3 : Semiring R
+BINDER explicit data n : ℕ
+BINDER explicit data i : ℕ
+CONCL (HadwigerNelson.Floor128.ev Polynomial.X n).coeff i = if n.testBit i = true then 1 else 0
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.counts.eq_1
+SIG HadwigerNelson.Floor128.counts.eq_1 : HadwigerNelson.Floor128.counts = HadwigerNelson.Floor128.pass 16383 1 0 0
+CONCL HadwigerNelson.Floor128.counts = HadwigerNelson.Floor128.pass 16383 1 0 0
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.countsOk.eq_1
+SIG HadwigerNelson.Floor128.countsOk.eq_1 (bound : ℕ) : HadwigerNelson.Floor128.countsOk bound = (HadwigerNelson.Floor128.counts.1 == 1 && (List.range 127).all fun i => decide (HadwigerNelson.Floor128.counts.2 >>> (8 * i) &&& 255 ≤ bound))
+BINDER explicit data bound : ℕ
+CONCL HadwigerNelson.Floor128.countsOk bound = (HadwigerNelson.Floor128.counts.1 == 1 && (List.range 127).all fun i => decide (HadwigerNelson.Floor128.counts.2 >>> (8 * i) &&& 255 ≤ bound))
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.counts_ok
+SIG HadwigerNelson.Floor128.counts_ok : HadwigerNelson.Floor128.countsOk 74 = true
+CONCL HadwigerNelson.Floor128.countsOk 74 = true
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.digit_sum
+SIG HadwigerNelson.Floor128.digit_sum {B : ℕ} (d : ℕ → ℕ) (hd : ∀ (r : ℕ), d r < B) (N i : ℕ) (hi : i < N) : (∑ r ∈ Finset.range N, d r * B ^ r) / B ^ i % B = d i
+BINDER implicit data B : ℕ
+BINDER explicit data d : ℕ → ℕ
+BINDER explicit prop hd : ∀ (r : ℕ), d r < B
+BINDER explicit data N : ℕ
+BINDER explicit data i : ℕ
+BINDER explicit prop hi : i < N
+CONCL (∑ r ∈ Finset.range N, d r * B ^ r) / B ^ i % B = d i
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.eq_of_dvd_of_not_dvd
+SIG HadwigerNelson.Floor128.eq_of_dvd_of_not_dvd {d : ℕ} (hd : d ∣ 16383) (h1 : ¬d ∣ 5461) (h2 : ¬d ∣ 381) (h3 : ¬d ∣ 129) : d = 16383
+BINDER implicit data d : ℕ
+BINDER explicit prop hd : d ∣ 16383
+BINDER explicit prop h1 : ¬d ∣ 5461
+BINDER explicit prop h2 : ¬d ∣ 381
+BINDER explicit prop h3 : ¬d ∣ 129
+CONCL d = 16383
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev.eq_1
+SIG HadwigerNelson.Floor128.ev.eq_1.{u_1} {R : Type u_1} [Semiring R] (t : R) : HadwigerNelson.Floor128.ev t 0 = 0
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.2058338049._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+CONCL HadwigerNelson.Floor128.ev t 0 = 0
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev.eq_2
+SIG HadwigerNelson.Floor128.ev.eq_2.{u_1} {R : Type u_1} [Semiring R] (t : R) (n : ℕ) : HadwigerNelson.Floor128.ev t n.succ = (if (n + 1) % 2 = 1 then 1 else 0) + t * HadwigerNelson.Floor128.ev t ((n + 1) / 2)
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.2058338049._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+BINDER explicit data n : ℕ
+CONCL HadwigerNelson.Floor128.ev t n.succ = (if (n + 1) % 2 = 1 then 1 else 0) + t * HadwigerNelson.Floor128.ev t ((n + 1) / 2)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev.eq_def
+SIG HadwigerNelson.Floor128.ev.eq_def.{u_1} {R : Type u_1} [Semiring R] (t : R) (x✝ : ℕ) : HadwigerNelson.Floor128.ev t x✝ = match x✝ with | 0 => 0 | n.succ => (if (n + 1) % 2 = 1 then 1 else 0) + t * HadwigerNelson.Floor128.ev t ((n + 1) / 2)
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.2058338049._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.2058338049._hygCtx._hyg.12 : ℕ
+CONCL HadwigerNelson.Floor128.ev t x✝ = match x✝ with | 0 => 0 | n.succ => (if (n + 1) % 2 = 1 then 1 else 0) + t * HadwigerNelson.Floor128.ev t ((n + 1) / 2)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_clmul
+SIG HadwigerNelson.Floor128.ev_clmul.{u_1} {R : Type u_1} [CommRing R] [CharP R 2] (t : R) (fuel a b : ℕ) (ha : a < 2 ^ fuel) : HadwigerNelson.Floor128.ev t (HadwigerNelson.Floor128.clmul fuel a b) = HadwigerNelson.Floor128.ev t a * HadwigerNelson.Floor128.ev t b
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.440201956._hygCtx._hyg.3 : CommRing R
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.440201956._hygCtx._hyg.6 : CharP R 2
+BINDER explicit data t : R
+BINDER explicit data fuel : ℕ
+BINDER explicit data a : ℕ
+BINDER explicit data b : ℕ
+BINDER explicit prop ha : a < 2 ^ fuel
+CONCL HadwigerNelson.Floor128.ev t (HadwigerNelson.Floor128.clmul fuel a b) = HadwigerNelson.Floor128.ev t a * HadwigerNelson.Floor128.ev t b
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_eq
+SIG HadwigerNelson.Floor128.ev_eq.{u_1} {R : Type u_1} [Semiring R] (t : R) (n : ℕ) : HadwigerNelson.Floor128.ev t n = (if n % 2 = 1 then 1 else 0) + t * HadwigerNelson.Floor128.ev t (n / 2)
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.740490599._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+BINDER explicit data n : ℕ
+CONCL HadwigerNelson.Floor128.ev t n = (if n % 2 = 1 then 1 else 0) + t * HadwigerNelson.Floor128.ev t (n / 2)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_inj
+SIG HadwigerNelson.Floor128.ev_inj.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) {m n : ℕ} (hm : m < 2 ^ 14) (hn : n < 2 ^ 14) (h : HadwigerNelson.Floor128.ev g m = HadwigerNelson.Floor128.ev g n) : m = n
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.2807025390._hygCtx._hyg.3 : Field k
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.2807025390._hygCtx._hyg.6 : CharP k 2
+BINDER implicit data g : k
+BINDER explicit prop hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+BINDER implicit data m : ℕ
+BINDER implicit data n : ℕ
+BINDER explicit prop hm : m < 2 ^ 14
+BINDER explicit prop hn : n < 2 ^ 14
+BINDER explicit prop h : HadwigerNelson.Floor128.ev g m = HadwigerNelson.Floor128.ev g n
+CONCL m = n
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_iterate_step
+SIG HadwigerNelson.Floor128.ev_iterate_step.{u_1} {R : Type u_1} [CommRing R] [CharP R 2] {g : R} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) (n x : ℕ) : HadwigerNelson.Floor128.ev g (HadwigerNelson.Floor128.step^[n] x) = g ^ n * HadwigerNelson.Floor128.ev g x
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.486324986._hygCtx._hyg.3 : CommRing R
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.486324986._hygCtx._hyg.6 : CharP R 2
+BINDER implicit data g : R
+BINDER explicit prop hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+BINDER explicit data n : ℕ
+BINDER explicit data x : ℕ
+CONCL HadwigerNelson.Floor128.ev g (HadwigerNelson.Floor128.step^[n] x) = g ^ n * HadwigerNelson.Floor128.ev g x
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_ne_zero
+SIG HadwigerNelson.Floor128.ev_ne_zero.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) {n : ℕ} (hn : n < 2 ^ 14) (h0 : n ≠ 0) : HadwigerNelson.Floor128.ev g n ≠ 0
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.508943752._hygCtx._hyg.3 : Field k
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.508943752._hygCtx._hyg.6 : CharP k 2
+BINDER implicit data g : k
+BINDER explicit prop hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+BINDER implicit data n : ℕ
+BINDER explicit prop hn : n < 2 ^ 14
+BINDER explicit prop h0 : n ≠ 0
+CONCL HadwigerNelson.Floor128.ev g n ≠ 0
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_one
+SIG HadwigerNelson.Floor128.ev_one.{u_1} {R : Type u_1} [Semiring R] (t : R) : HadwigerNelson.Floor128.ev t 1 = 1
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.2660155446._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+CONCL HadwigerNelson.Floor128.ev t 1 = 1
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_shiftLeft_one
+SIG HadwigerNelson.Floor128.ev_shiftLeft_one.{u_1} {R : Type u_1} [Semiring R] (t : R) (n : ℕ) : HadwigerNelson.Floor128.ev t (n <<< 1) = t * HadwigerNelson.Floor128.ev t n
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.1592178203._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+BINDER explicit data n : ℕ
+CONCL HadwigerNelson.Floor128.ev t (n <<< 1) = t * HadwigerNelson.Floor128.ev t n
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_step
+SIG HadwigerNelson.Floor128.ev_step.{u_1} {R : Type u_1} [CommRing R] [CharP R 2] {g : R} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) (x : ℕ) : HadwigerNelson.Floor128.ev g (HadwigerNelson.Floor128.step x) = g * HadwigerNelson.Floor128.ev g x
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.2036161889._hygCtx._hyg.3 : CommRing R
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.2036161889._hygCtx._hyg.6 : CharP R 2
+BINDER implicit data g : R
+BINDER explicit prop hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+BINDER explicit data x : ℕ
+CONCL HadwigerNelson.Floor128.ev g (HadwigerNelson.Floor128.step x) = g * HadwigerNelson.Floor128.ev g x
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_two
+SIG HadwigerNelson.Floor128.ev_two.{u_1} {R : Type u_1} [Semiring R] (t : R) : HadwigerNelson.Floor128.ev t 2 = t
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.3357269683._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+CONCL HadwigerNelson.Floor128.ev t 2 = t
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_two_mul
+SIG HadwigerNelson.Floor128.ev_two_mul.{u_1} {R : Type u_1} [Semiring R] (t : R) (n : ℕ) : HadwigerNelson.Floor128.ev t (2 * n) = t * HadwigerNelson.Floor128.ev t n
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.1576953476._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+BINDER explicit data n : ℕ
+CONCL HadwigerNelson.Floor128.ev t (2 * n) = t * HadwigerNelson.Floor128.ev t n
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_two_pow
+SIG HadwigerNelson.Floor128.ev_two_pow.{u_1} {R : Type u_1} [Semiring R] (t : R) (m : ℕ) : HadwigerNelson.Floor128.ev t (2 ^ m) = t ^ m
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.78852705._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+BINDER explicit data m : ℕ
+CONCL HadwigerNelson.Floor128.ev t (2 ^ m) = t ^ m
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_xor
+SIG HadwigerNelson.Floor128.ev_xor.{u_1} {R : Type u_1} [CommRing R] [CharP R 2] (t : R) (a b : ℕ) : HadwigerNelson.Floor128.ev t (a ^^^ b) = HadwigerNelson.Floor128.ev t a + HadwigerNelson.Floor128.ev t b
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.1443194507._hygCtx._hyg.3 : CommRing R
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.1443194507._hygCtx._hyg.6 : CharP R 2
+BINDER explicit data t : R
+BINDER explicit data a : ℕ
+BINDER explicit data b : ℕ
+CONCL HadwigerNelson.Floor128.ev t (a ^^^ b) = HadwigerNelson.Floor128.ev t a + HadwigerNelson.Floor128.ev t b
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.ev_zero
+SIG HadwigerNelson.Floor128.ev_zero.{u_1} {R : Type u_1} [Semiring R] (t : R) : HadwigerNelson.Floor128.ev t 0 = 0
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.4096005679._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+CONCL HadwigerNelson.Floor128.ev t 0 = 0
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.exists_addChar
+SIG HadwigerNelson.Floor128.exists_addChar.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} [Fintype k] (hcard : Fintype.card k = 128 ^ 2) (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) : ∃ ψ₀, ψ₀ ≠ 1 ∧ ∀ (n : ℕ), ψ₀ (g ^ n) = 1 - 2 * ↑(HadwigerNelson.Floor128.step^[n] 1 % 2)
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.1384505180._hygCtx._hyg.3 : Field k
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.1384505180._hygCtx._hyg.6 : CharP k 2
+BINDER implicit data g : k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.1384505180._hygCtx._hyg.11 : Fintype k
+BINDER explicit prop hcard : Fintype.card k = 128 ^ 2
+BINDER explicit prop hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+CONCL ∃ ψ₀, ψ₀ ≠ 1 ∧ ∀ (n : ℕ), ψ₀ (g ^ n) = 1 - 2 * ↑(HadwigerNelson.Floor128.step^[n] 1 % 2)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.exists_code
+SIG HadwigerNelson.Floor128.exists_code.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} [Fintype k] (hcard : Fintype.card k = 128 ^ 2) (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) (x : k) : ∃ n < 2 ^ 14, HadwigerNelson.Floor128.ev g n = x
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.1594345677._hygCtx._hyg.3 : Field k
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.1594345677._hygCtx._hyg.6 : CharP k 2
+BINDER implicit data g : k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.1594345677._hygCtx._hyg.11 : Fintype k
+BINDER explicit prop hcard : Fintype.card k = 128 ^ 2
+BINDER explicit prop hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+BINDER explicit data x : k
+CONCL ∃ n < 2 ^ 14, HadwigerNelson.Floor128.ev g n = x
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.exists_iterate_step_eq
+SIG HadwigerNelson.Floor128.exists_iterate_step_eq {n : ℕ} (hn : n < 2 ^ 14) (h0 : n ≠ 0) : ∃ j < 16383, HadwigerNelson.Floor128.step^[j] 1 = n
+BINDER implicit data n : ℕ
+BINDER explicit prop hn : n < 2 ^ 14
+BINDER explicit prop h0 : n ≠ 0
+CONCL ∃ j < 16383, HadwigerNelson.Floor128.step^[j] 1 = n
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.exists_root
+SIG HadwigerNelson.Floor128.exists_root.{u_1} {k : Type u_1} [Field k] [Fintype k] (hcard : Fintype.card k = 128 ^ 2) : ∃ g, HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.3918839075._hygCtx._hyg.3 : Field k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.3918839075._hygCtx._hyg.6 : Fintype k
+BINDER explicit prop hcard : Fintype.card k = 128 ^ 2
+CONCL ∃ g, HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.exists_root_pow_eq
+SIG HadwigerNelson.Floor128.exists_root_pow_eq.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} [Fintype k] (hcard : Fintype.card k = 128 ^ 2) (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) {x : k} (hx : x ≠ 0) : ∃ j < 16383, g ^ j = x
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.4212142676._hygCtx._hyg.3 : Field k
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.4212142676._hygCtx._hyg.6 : CharP k 2
+BINDER implicit data g : k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.4212142676._hygCtx._hyg.11 : Fintype k
+BINDER explicit prop hcard : Fintype.card k = 128 ^ 2
+BINDER explicit prop hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+BINDER implicit data x : k
+BINDER explicit prop hx : x ≠ 0
+CONCL ∃ j < 16383, g ^ j = x
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.iterate_step_injOn
+SIG HadwigerNelson.Floor128.iterate_step_injOn : Set.InjOn (fun n => HadwigerNelson.Floor128.step^[n] 1) (Set.Iio 16383)
+CONCL Set.InjOn (fun n => HadwigerNelson.Floor128.step^[n] 1) (Set.Iio 16383)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.iterate_step_lt
+SIG HadwigerNelson.Floor128.iterate_step_lt (n : ℕ) : HadwigerNelson.Floor128.step^[n] 1 < 2 ^ 14
+BINDER explicit data n : ℕ
+CONCL HadwigerNelson.Floor128.step^[n] 1 < 2 ^ 14
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.iterate_step_ne_zero
+SIG HadwigerNelson.Floor128.iterate_step_ne_zero (n : ℕ) : HadwigerNelson.Floor128.step^[n] 1 ≠ 0
+BINDER explicit data n : ℕ
+CONCL HadwigerNelson.Floor128.step^[n] 1 ≠ 0
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.iterate_step_period
+SIG HadwigerNelson.Floor128.iterate_step_period : HadwigerNelson.Floor128.step^[16383] 1 = 1
+CONCL HadwigerNelson.Floor128.step^[16383] 1 = 1
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.map_ev
+SIG HadwigerNelson.Floor128.map_ev.{u_1, u_2} {R : Type u_1} [Semiring R] (t : R) {S : Type u_2} [Semiring S] (f : R →+* S) (n : ℕ) : f (HadwigerNelson.Floor128.ev t n) = HadwigerNelson.Floor128.ev (f t) n
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.2498119834._hygCtx._hyg.3 : Semiring R
+BINDER explicit data t : R
+BINDER implicit data S : Type u_2
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.2498119834._hygCtx._hyg.8 : Semiring S
+BINDER explicit data f : R →+* S
+BINDER explicit data n : ℕ
+CONCL f (HadwigerNelson.Floor128.ev t n) = HadwigerNelson.Floor128.ev (f t) n
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.minimalPeriod_step
+SIG HadwigerNelson.Floor128.minimalPeriod_step : Function.minimalPeriod HadwigerNelson.Floor128.step 1 = 16383
+CONCL Function.minimalPeriod HadwigerNelson.Floor128.step 1 = 16383
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.normOne_eq_image
+SIG HadwigerNelson.Floor128.normOne_eq_image.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} [Fintype k] [DecidableEq k] (hcard : Fintype.card k = 128 ^ 2) (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) : {u | u ^ (128 + 1) = 1} = Finset.image (fun j => g ^ (127 * j)) (Finset.range 129)
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.3287590636._hygCtx._hyg.3 : Field k
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.3287590636._hygCtx._hyg.6 : CharP k 2
+BINDER implicit data g : k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.3287590636._hygCtx._hyg.11 : Fintype k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.3287590636._hygCtx._hyg.14 : DecidableEq k
+BINDER explicit prop hcard : Fintype.card k = 128 ^ 2
+BINDER explicit prop hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+CONCL {u | u ^ (128 + 1) = 1} = Finset.image (fun j => g ^ (127 * j)) (Finset.range 129)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.order_checks
+SIG HadwigerNelson.Floor128.order_checks : (HadwigerNelson.Floor128.pass 5461 1 0 0).1 ≠ 1 ∧ (HadwigerNelson.Floor128.pass 381 1 0 0).1 ≠ 1 ∧ (HadwigerNelson.Floor128.pass 129 1 0 0).1 ≠ 1
+CONCL (HadwigerNelson.Floor128.pass 5461 1 0 0).1 ≠ 1 ∧ (HadwigerNelson.Floor128.pass 381 1 0 0).1 ≠ 1 ∧ (HadwigerNelson.Floor128.pass 129 1 0 0).1 ≠ 1
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.pass.eq_1
+SIG HadwigerNelson.Floor128.pass.eq_1 (x✝ x✝¹ x✝² : ℕ) : HadwigerNelson.Floor128.pass 0 x✝ x✝¹ x✝² = (x✝, x✝²)
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.1541938879._hygCtx._hyg.16 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.1541938879._hygCtx._hyg.17 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.1541938879._hygCtx._hyg.18 : ℕ
+CONCL HadwigerNelson.Floor128.pass 0 x✝² x✝¹ x✝ = (x✝², x✝)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.pass.eq_2
+SIG HadwigerNelson.Floor128.pass.eq_2 (x✝ x✝¹ x✝² fuel : ℕ) : HadwigerNelson.Floor128.pass fuel.succ x✝ x✝¹ x✝² = HadwigerNelson.Floor128.pass fuel (HadwigerNelson.Floor128.step x✝) (if x✝¹ = 126 then 0 else x✝¹ + 1) (x✝² + (x✝ &&& 1) <<< (8 * x✝¹))
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.1541938879._hygCtx._hyg.16 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.1541938879._hygCtx._hyg.17 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.1541938879._hygCtx._hyg.18 : ℕ
+BINDER explicit data fuel : ℕ
+CONCL HadwigerNelson.Floor128.pass fuel.succ x✝² x✝¹ x✝ = HadwigerNelson.Floor128.pass fuel (HadwigerNelson.Floor128.step x✝²) (if x✝¹ = 126 then 0 else x✝¹ + 1) (x✝ + (x✝² &&& 1) <<< (8 * x✝¹))
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.pass.eq_def
+SIG HadwigerNelson.Floor128.pass.eq_def (x✝ x✝¹ x✝² x✝³ : ℕ) : HadwigerNelson.Floor128.pass x✝ x✝¹ x✝² x✝³ = match x✝, x✝¹, x✝², x✝³ with | 0, x, x_1, acc => (x, acc) | fuel.succ, x, i, acc => HadwigerNelson.Floor128.pass fuel (HadwigerNelson.Floor128.step x) (if i = 126 then 0 else i + 1) (acc + (x &&& 1) <<< (8 * i))
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.1541938879._hygCtx._hyg.15 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.1541938879._hygCtx._hyg.16 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.1541938879._hygCtx._hyg.17 : ℕ
+BINDER explicit data x._@.Proofs.HadwigerNelson.Arith.Floor128.1541938879._hygCtx._hyg.18 : ℕ
+CONCL HadwigerNelson.Floor128.pass x✝³ x✝² x✝¹ x✝ = match x✝³, x✝², x✝¹, x✝ with | 0, x, x_1, acc => (x, acc) | fuel.succ, x, i, acc => HadwigerNelson.Floor128.pass fuel (HadwigerNelson.Floor128.step x) (if i = 126 then 0 else i + 1) (acc + (x &&& 1) <<< (8 * i))
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.pass_class
+SIG HadwigerNelson.Floor128.pass_class (x b : ℕ) (hb : b < 256) (r : ℕ) (hr : r < 127) : (HadwigerNelson.Floor128.pass (127 * b) x 0 0).2 / 2 ^ (8 * r) % 256 = ∑ j ∈ Finset.range b, HadwigerNelson.Floor128.step^[127 * j + r] x % 2
+BINDER explicit data x : ℕ
+BINDER explicit data b : ℕ
+BINDER explicit prop hb : b < 256
+BINDER explicit data r : ℕ
+BINDER explicit prop hr : r < 127
+CONCL (HadwigerNelson.Floor128.pass (127 * b) x 0 0).2 / 2 ^ (8 * r) % 256 = ∑ j ∈ Finset.range b, HadwigerNelson.Floor128.step^[127 * j + r] x % 2
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.pass_fst
+SIG HadwigerNelson.Floor128.pass_fst (n x i acc : ℕ) : (HadwigerNelson.Floor128.pass n x i acc).1 = HadwigerNelson.Floor128.step^[n] x
+BINDER explicit data n : ℕ
+BINDER explicit data x : ℕ
+BINDER explicit data i : ℕ
+BINDER explicit data acc : ℕ
+CONCL (HadwigerNelson.Floor128.pass n x i acc).1 = HadwigerNelson.Floor128.step^[n] x
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.pass_snd
+SIG HadwigerNelson.Floor128.pass_snd (n x i acc : ℕ) (hi : i < 127) : (HadwigerNelson.Floor128.pass n x i acc).2 = acc + ∑ m ∈ Finset.range n, HadwigerNelson.Floor128.step^[m] x % 2 * 2 ^ (8 * ((i + m) % 127))
+BINDER explicit data n : ℕ
+BINDER explicit data x : ℕ
+BINDER explicit data i : ℕ
+BINDER explicit data acc : ℕ
+BINDER explicit prop hi : i < 127
+CONCL (HadwigerNelson.Floor128.pass n x i acc).2 = acc + ∑ m ∈ Finset.range n, HadwigerNelson.Floor128.step^[m] x % 2 * 2 ^ (8 * ((i + m) % 127))
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.qBig_lt
+SIG HadwigerNelson.Floor128.qBig_lt : HadwigerNelson.Floor128.qBig < 2 ^ 16384
+CONCL HadwigerNelson.Floor128.qBig < 2 ^ 16384
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.qBig_testBit_one
+SIG HadwigerNelson.Floor128.qBig_testBit_one : HadwigerNelson.Floor128.qBig.testBit 1 = true
+CONCL HadwigerNelson.Floor128.qBig.testBit 1 = true
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.root_pow_eq_one
+SIG HadwigerNelson.Floor128.root_pow_eq_one.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) : g ^ 16383 = 1
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.3922237145._hygCtx._hyg.3 : Field k
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.3922237145._hygCtx._hyg.6 : CharP k 2
+BINDER implicit data g : k
+BINDER explicit prop hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+CONCL g ^ 16383 = 1
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.root_pow_inj
+SIG HadwigerNelson.Floor128.root_pow_inj.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) {i j : ℕ} (hi : i < 16383) (hj : j < 16383) (h : g ^ i = g ^ j) : i = j
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.Floor128.4130428494._hygCtx._hyg.3 : Field k
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.Floor128.4130428494._hygCtx._hyg.6 : CharP k 2
+BINDER implicit data g : k
+BINDER explicit prop hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+BINDER implicit data i : ℕ
+BINDER implicit data j : ℕ
+BINDER explicit prop hi : i < 16383
+BINDER explicit prop hj : j < 16383
+BINDER explicit prop h : g ^ i = g ^ j
+CONCL i = j
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.step_lt
+SIG HadwigerNelson.Floor128.step_lt {x : ℕ} (hx : x < 2 ^ 14) : HadwigerNelson.Floor128.step x < 2 ^ 14
+BINDER implicit data x : ℕ
+BINDER explicit prop hx : x < 2 ^ 14
+CONCL HadwigerNelson.Floor128.step x < 2 ^ 14
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.step_ne_zero
+SIG HadwigerNelson.Floor128.step_ne_zero {x : ℕ} (hx : x ≠ 0) : HadwigerNelson.Floor128.step x ≠ 0
+BINDER implicit data x : ℕ
+BINDER explicit prop hx : x ≠ 0
+CONCL HadwigerNelson.Floor128.step x ≠ 0
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.sum_range_mul_eq
+SIG HadwigerNelson.Floor128.sum_range_mul_eq (f : ℕ → ℕ) (a b : ℕ) : ∑ n ∈ Finset.range (a * b), f n = ∑ r ∈ Finset.range a, ∑ j ∈ Finset.range b, f (a * j + r)
+BINDER explicit data f : ℕ → ℕ
+BINDER explicit data a : ℕ
+BINDER explicit data b : ℕ
+CONCL ∑ n ∈ Finset.range (a * b), f n = ∑ r ∈ Finset.range a, ∑ j ∈ Finset.range b, f (a * j + r)
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.targetFloor_eight_128
+SIG HadwigerNelson.Floor128.targetFloor_eight_128 : HadwigerNelson.StandingFive.TargetFloor 8 128
+CONCL HadwigerNelson.StandingFive.TargetFloor 8 128
+@@ THM Proofs.HadwigerNelson.Arith.Floor128 HadwigerNelson.Floor128.targetFloor_seven_128
+SIG HadwigerNelson.Floor128.targetFloor_seven_128 : HadwigerNelson.StandingFive.TargetFloor 7 128
+CONCL HadwigerNelson.StandingFive.TargetFloor 7 128
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.card_filter_pow_eq_self
+SIG HadwigerNelson.StandingFive.card_filter_pow_eq_self.{u_1} {k : Type u_1} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) : {x | x ^ Q = x}.card = Q
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.155985493._hygCtx._hyg.3 : Field k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.155985493._hygCtx._hyg.6 : Fintype k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.155985493._hygCtx._hyg.9 : DecidableEq k
+BINDER implicit data Q : ℕ
+BINDER explicit prop hcard : Fintype.card k = Q ^ 2
+CONCL {x | x ^ Q = x}.card = Q
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.circle_sum_eq_kloosterman
+SIG HadwigerNelson.StandingFive.circle_sum_eq_kloosterman.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (a : F) (b : F × F) (hb : b ≠ 0) : ∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2) = ↑((quadraticChar F) (-1)) * ∑ x, ψ (-a * ↑x + -((b.1 ^ 2 + b.2 ^ 2) / 4) * ↑x⁻¹)
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.4052064152._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.4052064152._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.4052064152._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hodd : ringChar F ≠ 2
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+BINDER explicit data a : F
+BINDER explicit data b : F × F
+BINDER explicit prop hb : b ≠ 0
+CONCL ∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2) = ↑((quadraticChar F) (-1)) * ∑ x, ψ (-a * ↑x + -((b.1 ^ 2 + b.2 ^ 2) / 4) * ↑x⁻¹)
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.circle_sum_le
+SIG HadwigerNelson.StandingFive.circle_sum_le.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (hK : HadwigerNelson.StandingFive.KloostermanBound F) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {a : F} (ha : a ≠ 0) (b : F × F) (hb : b ≠ 0) : ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * √↑(Fintype.card F)
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.288325066._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.288325066._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.288325066._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hodd : ringChar F ≠ 2
+BINDER explicit prop hK : HadwigerNelson.StandingFive.KloostermanBound F
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+BINDER implicit data a : F
+BINDER explicit prop ha : a ≠ 0
+BINDER explicit data b : F × F
+BINDER explicit prop hb : b ≠ 0
+CONCL ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * √↑(Fintype.card F)
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.circle_sum_le_of_ne
+SIG HadwigerNelson.StandingFive.circle_sum_le_of_ne.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (hK : HadwigerNelson.StandingFive.KloostermanBound F) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (a : F) (b : F × F) (hb : b ≠ 0) (h : a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0) : ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * √↑(Fintype.card F)
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.696149486._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.696149486._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.696149486._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hodd : ringChar F ≠ 2
+BINDER explicit prop hK : HadwigerNelson.StandingFive.KloostermanBound F
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+BINDER explicit data a : F
+BINDER explicit data b : F × F
+BINDER explicit prop hb : b ≠ 0
+BINDER explicit prop h : a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0
+CONCL ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * √↑(Fintype.card F)
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.circle_sum_zero_of_isotropic
+SIG HadwigerNelson.StandingFive.circle_sum_zero_of_isotropic.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (b : F × F) (hb : b ≠ 0) (hiso : b.1 ^ 2 + b.2 ^ 2 = 0) : ∑ s with s.1 ^ 2 + s.2 ^ 2 = 0, ψ (b.1 * s.1 + b.2 * s.2) = ↑((quadraticChar F) (-1)) * (↑(Fintype.card F) - 1)
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.757720356._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.757720356._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.757720356._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hodd : ringChar F ≠ 2
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+BINDER explicit data b : F × F
+BINDER explicit prop hb : b ≠ 0
+BINDER explicit prop hiso : b.1 ^ 2 + b.2 ^ 2 = 0
+CONCL ∑ s with s.1 ^ 2 + s.2 ^ 2 = 0, ψ (b.1 * s.1 + b.2 * s.2) = ↑((quadraticChar F) (-1)) * (↑(Fintype.card F) - 1)
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.exists_mulShift_eq
+SIG HadwigerNelson.StandingFive.exists_mulShift_eq.{u_1} {F : Type u_1} [Field F] [Finite F] (ψ₀ : AddChar F ℂ) (hψ₀ : ψ₀ ≠ 1) (φ : AddChar F ℂ) : ∃ b, ψ₀.mulShift b = φ
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.4277218064._hygCtx._hyg.3 : Field F
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.4277218064._hygCtx._hyg.6 : Finite F
+BINDER explicit data ψ₀ : AddChar F ℂ
+BINDER explicit prop hψ₀ : ψ₀ ≠ 1
+BINDER explicit data φ : AddChar F ℂ
+CONCL ∃ b, ψ₀.mulShift b = φ
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.exists_ringHom_pow
+SIG HadwigerNelson.StandingFive.exists_ringHom_pow.{u_1} {k : Type u_1} [Field k] [Fintype k] {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) : ∃ τ, ∀ (x : k), τ x = x ^ Q
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.631086232._hygCtx._hyg.3 : Field k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.631086232._hygCtx._hyg.6 : Fintype k
+BINDER implicit data Q : ℕ
+BINDER explicit prop hcard : Fintype.card k = Q ^ 2
+CONCL ∃ τ, ∀ (x : k), τ x = x ^ Q
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.kloostermanBound_of_card_le_five
+SIG HadwigerNelson.StandingFive.kloostermanBound_of_card_le_five.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (h : Fintype.card F ≤ 5) : HadwigerNelson.StandingFive.KloostermanBound F
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.322238940._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.322238940._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.322238940._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop h : Fintype.card F ≤ 5
+CONCL HadwigerNelson.StandingFive.KloostermanBound F
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.normOne_charSum_ge
+SIG HadwigerNelson.StandingFive.normOne_charSum_ge {k : Type} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hQ4 : Q % 4 = 3) (hcard : Fintype.card k = Q ^ 2) (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F) (ψ : AddChar k ℂ) (hψ : ψ ≠ 1) : -(2 * √↑Q) ≤ (∑ u with u ^ (Q + 1) = 1, ψ u).re
+BINDER implicit data k : Type
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.109653804._hygCtx._hyg.3 : Field k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.109653804._hygCtx._hyg.6 : Fintype k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.109653804._hygCtx._hyg.9 : DecidableEq k
+BINDER implicit data Q : ℕ
+BINDER explicit prop hQ4 : Q % 4 = 3
+BINDER explicit prop hcard : Fintype.card k = Q ^ 2
+BINDER explicit prop hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F
+BINDER explicit data ψ : AddChar k ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+CONCL -(2 * √↑Q) ≤ (∑ u with u ^ (Q + 1) = 1, ψ u).re
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.sum_addChar_mul_left
+SIG HadwigerNelson.StandingFive.sum_addChar_mul_left.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (c : F) : ∑ y, ψ (c * y) = if c = 0 then ↑(Fintype.card F) else 0
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.127834431._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.127834431._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.127834431._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+BINDER explicit data c : F
+CONCL ∑ y, ψ (c * y) = if c = 0 then ↑(Fintype.card F) else 0
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.sum_addChar_mul_sq
+SIG HadwigerNelson.StandingFive.sum_addChar_mul_sq.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {r : F} (hr : r ≠ 0) : ∑ y, ψ (r * y ^ 2) = ↑((quadraticChar F) r) * gaussSum ((quadraticChar F).ringHomComp (Int.castRingHom ℂ)) ψ
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.2027917299._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.2027917299._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.2027917299._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hodd : ringChar F ≠ 2
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+BINDER implicit data r : F
+BINDER explicit prop hr : r ≠ 0
+CONCL ∑ y, ψ (r * y ^ 2) = ↑((quadraticChar F) r) * gaussSum ((quadraticChar F).ringHomComp (Int.castRingHom ℂ)) ψ
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.sum_eq_zero_add_sum_units
+SIG HadwigerNelson.StandingFive.sum_eq_zero_add_sum_units.{u_1, u_2} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] {M : Type u_2} [AddCommMonoid M] (g : F → M) : ∑ r, g r = g 0 + ∑ x, g ↑x
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.408803763._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.408803763._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.408803763._hygCtx._hyg.9 : DecidableEq F
+BINDER implicit data M : Type u_2
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.408803763._hygCtx._hyg.13 : AddCommMonoid M
+BINDER explicit data g : F → M
+CONCL ∑ r, g r = g 0 + ∑ x, g ↑x
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.sum_plane_quadratic
+SIG HadwigerNelson.StandingFive.sum_plane_quadratic.{u_1} {F : Type u_1} [Field F] [Fintype F] (ψ : AddChar F ℂ) (a r : F) (b : F × F) : ∑ s, ψ (r * (s.1 ^ 2 + s.2 ^ 2 - a)) * ψ (b.1 * s.1 + b.2 * s.2) = ψ (-(r * a)) * ((∑ y, ψ (r * y ^ 2 + b.1 * y)) * ∑ y, ψ (r * y ^ 2 + b.2 * y))
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.3941004721._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.3941004721._hygCtx._hyg.6 : Fintype F
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit data a : F
+BINDER explicit data r : F
+BINDER explicit data b : F × F
+CONCL ∑ s, ψ (r * (s.1 ^ 2 + s.2 ^ 2 - a)) * ψ (b.1 * s.1 + b.2 * s.2) = ψ (-(r * a)) * ((∑ y, ψ (r * y ^ 2 + b.1 * y)) * ∑ y, ψ (r * y ^ 2 + b.2 * y))
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.sum_quadratic_eq
+SIG HadwigerNelson.StandingFive.sum_quadratic_eq.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {r : F} (hr : r ≠ 0) (c : F) : ∑ y, ψ (r * y ^ 2 + c * y) = ψ (-(c ^ 2 / (4 * r))) * ↑((quadraticChar F) r) * gaussSum ((quadraticChar F).ringHomComp (Int.castRingHom ℂ)) ψ
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.2122492166._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.2122492166._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.2122492166._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hodd : ringChar F ≠ 2
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+BINDER implicit data r : F
+BINDER explicit prop hr : r ≠ 0
+BINDER explicit data c : F
+CONCL ∑ y, ψ (r * y ^ 2 + c * y) = ψ (-(c ^ 2 / (4 * r))) * ↑((quadraticChar F) r) * gaussSum ((quadraticChar F).ringHomComp (Int.castRingHom ℂ)) ψ
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.sum_units_addChar_mul
+SIG HadwigerNelson.StandingFive.sum_units_addChar_mul.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {c : F} (hc : c ≠ 0) : ∑ x, ψ (c * ↑x) = -1
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.482135958._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.482135958._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.482135958._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+BINDER implicit data c : F
+BINDER explicit prop hc : c ≠ 0
+CONCL ∑ x, ψ (c * ↑x) = -1
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.targetFloor_seven_of_kloosterman
+SIG HadwigerNelson.StandingFive.targetFloor_seven_of_kloosterman {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 98 ≤ Q) (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F) : HadwigerNelson.StandingFive.TargetFloor 7 Q
+BINDER implicit data Q : ℕ
+BINDER explicit prop hQ4 : Q % 4 = 3
+BINDER explicit prop hQ : 98 ≤ Q
+BINDER explicit prop hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F
+CONCL HadwigerNelson.StandingFive.TargetFloor 7 Q
+@@ THM Proofs.HadwigerNelson.Arith.FloorPlanes HadwigerNelson.StandingFive.two_sqrt_lt_circle_sum_zero
+SIG HadwigerNelson.StandingFive.two_sqrt_lt_circle_sum_zero.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (b : F × F) (hb : b ≠ 0) (hiso : b.1 ^ 2 + b.2 ^ 2 = 0) (hq : 6 ≤ Fintype.card F) : 2 * √↑(Fintype.card F) < ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = 0, ψ (b.1 * s.1 + b.2 * s.2)‖
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.844210300._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.844210300._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.FloorPlanes.844210300._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hodd : ringChar F ≠ 2
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+BINDER explicit data b : F × F
+BINDER explicit prop hb : b ≠ 0
+BINDER explicit prop hiso : b.1 ^ 2 + b.2 ^ 2 = 0
+BINDER explicit prop hq : 6 ≤ Fintype.card F
+CONCL 2 * √↑(Fintype.card F) < ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = 0, ψ (b.1 * s.1 + b.2 * s.2)‖
+@@ THM Proofs.HadwigerNelson.Arith.GapSeven HadwigerNelson.GapSeven.card_edges
+SIG HadwigerNelson.GapSeven.card_edges : {p | (HadwigerNelson.finitePlane 7).Adj p.1 p.2}.card = 392 ∧ {p | (HadwigerNelson.finitePlane 7).Adj p.1 p.2 ∧ HadwigerNelson.GapSeven.Gapped p.1 3 ∧ HadwigerNelson.GapSeven.Gapped p.2 3}.card = 28
+CONCL {p | (HadwigerNelson.finitePlane 7).Adj p.1 p.2}.card = 392 ∧ {p | (HadwigerNelson.finitePlane 7).Adj p.1 p.2 ∧ HadwigerNelson.GapSeven.Gapped p.1 3 ∧ HadwigerNelson.GapSeven.Gapped p.2 3}.card = 28
+@@ THM Proofs.HadwigerNelson.Arith.GapSeven HadwigerNelson.GapSeven.exists_adjacent_gapped
+SIG HadwigerNelson.GapSeven.exists_adjacent_gapped : ∃ a b, (HadwigerNelson.finitePlane 7).Adj a b ∧ HadwigerNelson.GapSeven.Gapped a 3 ∧ HadwigerNelson.GapSeven.Gapped b 3
+CONCL ∃ a b, (HadwigerNelson.finitePlane 7).Adj a b ∧ HadwigerNelson.GapSeven.Gapped a 3 ∧ HadwigerNelson.GapSeven.Gapped b 3
+@@ THM Proofs.HadwigerNelson.Arith.GapSeven HadwigerNelson.GapSeven.gamma_proper
+SIG HadwigerNelson.GapSeven.gamma_proper (u v : ZMod 7 × ZMod 7) : (HadwigerNelson.finitePlane 7).Adj u v → HadwigerNelson.GapSeven.gamma u ≠ HadwigerNelson.GapSeven.gamma v
+BINDER explicit data u : ZMod 7 × ZMod 7
+BINDER explicit data v : ZMod 7 × ZMod 7
+BINDER explicit prop a._@._internal._hyg.0 : (HadwigerNelson.finitePlane 7).Adj u v
+CONCL HadwigerNelson.GapSeven.gamma u ≠ HadwigerNelson.GapSeven.gamma v
+@@ THM Proofs.HadwigerNelson.Arith.GapSeven HadwigerNelson.GapSeven.gapped_eq_three
+SIG HadwigerNelson.GapSeven.gapped_eq_three (v : ZMod 7 × ZMod 7) (m : Fin 4) : HadwigerNelson.GapSeven.Gapped v m → m = 3
+BINDER explicit data v : ZMod 7 × ZMod 7
+BINDER explicit data m : Fin 4
+BINDER explicit prop a._@._internal._hyg.0 : HadwigerNelson.GapSeven.Gapped v m
+CONCL m = 3
+@@ THM Proofs.HadwigerNelson.Arith.GapSeven HadwigerNelson.GapSeven.gapped_iff
+SIG HadwigerNelson.GapSeven.gapped_iff (v : ZMod 7 × ZMod 7) : (∃ m, HadwigerNelson.GapSeven.Gapped v m) ↔ HadwigerNelson.GapSeven.theta7 v = 0 ∨ HadwigerNelson.GapSeven.theta7 v = 5
+BINDER explicit data v : ZMod 7 × ZMod 7
+CONCL (∃ m, HadwigerNelson.GapSeven.Gapped v m) ↔ HadwigerNelson.GapSeven.theta7 v = 0 ∨ HadwigerNelson.GapSeven.theta7 v = 5
+@@ THM Proofs.HadwigerNelson.Arith.GapSeven HadwigerNelson.GapSeven.supp_disjoint
+SIG HadwigerNelson.GapSeven.supp_disjoint (u v : ZMod 7 × ZMod 7) : (HadwigerNelson.finitePlane 7).Adj u v → Disjoint (HadwigerNelson.GapSeven.supp u) (HadwigerNelson.GapSeven.supp v)
+BINDER explicit data u : ZMod 7 × ZMod 7
+BINDER explicit data v : ZMod 7 × ZMod 7
+BINDER explicit prop a._@._internal._hyg.0 : (HadwigerNelson.finitePlane 7).Adj u v
+CONCL Disjoint (HadwigerNelson.GapSeven.supp u) (HadwigerNelson.GapSeven.supp v)
+@@ THM Proofs.HadwigerNelson.Arith.GapSeven HadwigerNelson.GapSeven.zbar_iff
+SIG HadwigerNelson.GapSeven.zbar_iff (v : ZMod 7 × ZMod 7) : HadwigerNelson.GapSeven.theta7 v = 0 ↔ HadwigerNelson.GapSeven.gamma v = 0 ∧ HadwigerNelson.GapSeven.Gapped v 3
+BINDER explicit data v : ZMod 7 × ZMod 7
+CONCL HadwigerNelson.GapSeven.theta7 v = 0 ↔ HadwigerNelson.GapSeven.gamma v = 0 ∧ HadwigerNelson.GapSeven.Gapped v 3
+@@ THM Proofs.HadwigerNelson.Arith.GapSeven HadwigerNelson.GapSeven.zbar_indep
+SIG HadwigerNelson.GapSeven.zbar_indep (u v : ZMod 7 × ZMod 7) : HadwigerNelson.GapSeven.theta7 u = 0 → HadwigerNelson.GapSeven.theta7 v = 0 → ¬(HadwigerNelson.finitePlane 7).Adj u v
+BINDER explicit data u : ZMod 7 × ZMod 7
+BINDER explicit data v : ZMod 7 × ZMod 7
+BINDER explicit prop a._@._internal._hyg.0 : HadwigerNelson.GapSeven.theta7 u = 0
+BINDER explicit prop a._@._internal._hyg.0 : HadwigerNelson.GapSeven.theta7 v = 0
+CONCL ¬(HadwigerNelson.finitePlane 7).Adj u v
+@@ THM Proofs.HadwigerNelson.Arith.MajorityVote HadwigerNelson.MajorityVote.ae_eq_measurable_of_majority
+SIG HadwigerNelson.MajorityVote.ae_eq_measurable_of_majority.{u_1, u_2, u_3} {Ω : Type u_1} {I : Type u_2} {K : Type u_3} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} [MeasureTheory.IsProbabilityMeasure μ] [Infinite I] [Countable K] [MeasurableSpace K] [MeasurableSingletonClass K] (G : Ω → K) (c : I → Ω → K) (E : I → Set Ω) (hE : ∀ (x : I), MeasurableSet (E x)) {p : ℝ} (hp : p < 1 / 2) (hEp : ∀ (x : I), μ.real (E x) ≤ p) (hindep : ∀ (x y : I), x ≠ y → μ (E x ∩ E y) = μ (E x) * μ (E y)) (hGc : ∀ (x : I), ∀ᵐ (ω : Ω) ∂μ, c x ω ≠ G ω → ω ∈ E x) : ∃ g, Measurable g ∧ G =ᵐ[μ] g
+BINDER implicit data Ω : Type u_1
+BINDER implicit data I : Type u_2
+BINDER implicit data K : Type u_3
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.2997390611._hygCtx._hyg.5 : MeasurableSpace Ω
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.2997390611._hygCtx._hyg.10 : MeasureTheory.IsProbabilityMeasure μ
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.2997390611._hygCtx._hyg.13 : Infinite I
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.2997390611._hygCtx._hyg.16 : Countable K
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.2997390611._hygCtx._hyg.19 : MeasurableSpace K
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.2997390611._hygCtx._hyg.22 : MeasurableSingletonClass K
+BINDER explicit data G : Ω → K
+BINDER explicit data c : I → Ω → K
+BINDER explicit data E : I → Set Ω
+BINDER explicit prop hE : ∀ (x : I), MeasurableSet (E x)
+BINDER implicit data p : ℝ
+BINDER explicit prop hp : p < 1 / 2
+BINDER explicit prop hEp : ∀ (x : I), μ.real (E x) ≤ p
+BINDER explicit prop hindep : ∀ (x y : I), x ≠ y → μ (E x ∩ E y) = μ (E x) * μ (E y)
+BINDER explicit prop hGc : ∀ (x : I), ∀ᵐ (ω : Ω) ∂μ, c x ω ≠ G ω → ω ∈ E x
+CONCL ∃ g, Measurable g ∧ G =ᵐ[μ] g
+@@ THM Proofs.HadwigerNelson.Arith.MajorityVote HadwigerNelson.MajorityVote.eq_of_lt_two_mul_card_filter
+SIG HadwigerNelson.MajorityVote.eq_of_lt_two_mul_card_filter.{u_1} {K : Type u_1} [DecidableEq K] {n : ℕ} {cs : ℕ → K} {k k' : K} (hk : n < 2 * {i ∈ Finset.range n | cs i = k}.card) (hk' : n < 2 * {i ∈ Finset.range n | cs i = k'}.card) : k = k'
+BINDER implicit data K : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.1783599275._hygCtx._hyg.3 : DecidableEq K
+BINDER implicit data n : ℕ
+BINDER implicit data cs : ℕ → K
+BINDER implicit data k : K
+BINDER implicit data k' : K
+BINDER explicit prop hk : n < 2 * {i ∈ Finset.range n | cs i = k}.card
+BINDER explicit prop hk' : n < 2 * {i ∈ Finset.range n | cs i = k'}.card
+CONCL k = k'
+@@ THM Proofs.HadwigerNelson.Arith.MajorityVote HadwigerNelson.MajorityVote.exists_measurable_selector
+SIG HadwigerNelson.MajorityVote.exists_measurable_selector.{u_1, u_2} {Ω : Type u_1} {K : Type u_2} {m : MeasurableSpace Ω} [Countable K] [MeasurableSpace K] (B : K → Set Ω) (hB : ∀ (k : K), MeasurableSet (B k)) (hdisj : ∀ (ω : Ω) (k k' : K), ω ∈ B k → ω ∈ B k' → k = k') (k₀ : K) : ∃ g, Measurable g ∧ ∀ (ω : Ω) (k : K), ω ∈ B k → g ω = k
+BINDER implicit data Ω : Type u_1
+BINDER implicit data K : Type u_2
+BINDER implicit data m : MeasurableSpace Ω
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.1517456903._hygCtx._hyg.6 : Countable K
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.1517456903._hygCtx._hyg.9 : MeasurableSpace K
+BINDER explicit data B : K → Set Ω
+BINDER explicit prop hB : ∀ (k : K), MeasurableSet (B k)
+BINDER explicit prop hdisj : ∀ (ω : Ω) (k k' : K), ω ∈ B k → ω ∈ B k' → k = k'
+BINDER explicit data k₀ : K
+CONCL ∃ g, Measurable g ∧ ∀ (ω : Ω) (k : K), ω ∈ B k → g ω = k
+@@ THM Proofs.HadwigerNelson.Arith.MajorityVote HadwigerNelson.MajorityVote.lt_two_mul_card_filter_of_bad
+SIG HadwigerNelson.MajorityVote.lt_two_mul_card_filter_of_bad.{u_1} {K : Type u_1} [DecidableEq K] {n : ℕ} {cs : ℕ → K} {g : K} {bad : ℕ → Prop} [DecidablePred bad] (h : ∀ i < n, cs i ≠ g → bad i) (hlt : 2 * (Finset.filter bad (Finset.range n)).card < n) : n < 2 * {i ∈ Finset.range n | cs i = g}.card
+BINDER implicit data K : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.3901375783._hygCtx._hyg.3 : DecidableEq K
+BINDER implicit data n : ℕ
+BINDER implicit data cs : ℕ → K
+BINDER implicit data g : K
+BINDER implicit data bad : ℕ → Prop
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.3901375783._hygCtx._hyg.20 : DecidablePred bad
+BINDER explicit prop h : ∀ i < n, cs i ≠ g → bad i
+BINDER explicit prop hlt : 2 * (Finset.filter bad (Finset.range n)).card < n
+CONCL n < 2 * {i ∈ Finset.range n | cs i = g}.card
+@@ THM Proofs.HadwigerNelson.Arith.MajorityVote HadwigerNelson.MajorityVote.measurableSet_lt_two_mul_card_filter
+SIG HadwigerNelson.MajorityVote.measurableSet_lt_two_mul_card_filter.{u_1, u_2} {Ω : Type u_1} {K : Type u_2} {m : MeasurableSpace Ω} [DecidableEq K] (cs : ℕ → Ω → K) (k : K) (hcs : ∀ (i : ℕ), MeasurableSet {ω | cs i ω = k}) (n : ℕ) : MeasurableSet {ω | n < 2 * {i ∈ Finset.range n | cs i ω = k}.card}
+BINDER implicit data Ω : Type u_1
+BINDER implicit data K : Type u_2
+BINDER implicit data m : MeasurableSpace Ω
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.188182489._hygCtx._hyg.6 : DecidableEq K
+BINDER explicit data cs : ℕ → Ω → K
+BINDER explicit data k : K
+BINDER explicit prop hcs : ∀ (i : ℕ), MeasurableSet {ω | cs i ω = k}
+BINDER explicit data n : ℕ
+CONCL MeasurableSet {ω | n < 2 * {i ∈ Finset.range n | cs i ω = k}.card}
+@@ THM Proofs.HadwigerNelson.Arith.MajorityVote HadwigerNelson.MajorityVote.measure_half_le_sum_indicator_le
+SIG HadwigerNelson.MajorityVote.measure_half_le_sum_indicator_le.{u_1} {Ω : Type u_1} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} [MeasureTheory.IsProbabilityMeasure μ] (E : ℕ → Set Ω) (hE : ∀ (i : ℕ), MeasurableSet (E i)) {p : ℝ} (hp : p < 1 / 2) (hEp : ∀ (i : ℕ), μ.real (E i) ≤ p) (hindep : ∀ (i j : ℕ), i ≠ j → μ (E i ∩ E j) = μ (E i) * μ (E j)) {n : ℕ} (hn : 0 < n) : μ {ω | ↑n / 2 ≤ ∑ i ∈ Finset.range n, (E i).indicator (fun x => 1) ω} ≤ ENNReal.ofReal (1 / (4 * (1 / 2 - p) ^ 2) / ↑n)
+BINDER implicit data Ω : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.2835385295._hygCtx._hyg.3 : MeasurableSpace Ω
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.MajorityVote.2835385295._hygCtx._hyg.8 : MeasureTheory.IsProbabilityMeasure μ
+BINDER explicit data E : ℕ → Set Ω
+BINDER explicit prop hE : ∀ (i : ℕ), MeasurableSet (E i)
+BINDER implicit data p : ℝ
+BINDER explicit prop hp : p < 1 / 2
+BINDER explicit prop hEp : ∀ (i : ℕ), μ.real (E i) ≤ p
+BINDER explicit prop hindep : ∀ (i j : ℕ), i ≠ j → μ (E i ∩ E j) = μ (E i) * μ (E j)
+BINDER implicit data n : ℕ
+BINDER explicit prop hn : 0 < n
+CONCL μ {ω | ↑n / 2 ≤ ∑ i ∈ Finset.range n, (E i).indicator (fun x => 1) ω} ≤ ENNReal.ofReal (1 / (4 * (1 / 2 - p) ^ 2) / ↑n)
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.countable_bot_subfield_real
+SIG HadwigerNelson.SpectralInputs.countable_bot_subfield_real : Countable ↥⊥
+CONCL Countable ↥⊥
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.exists_odd_rep_of_mem_unitRing
+SIG HadwigerNelson.SpectralInputs.exists_odd_rep_of_mem_unitRing {z : ℂ} (hz : z ∈ HadwigerNelson.SpectralChain.unitRing ⊥) : ∃ a b c, Odd c ∧ z * ↑c = ↑a + ↑b * Complex.I
+BINDER implicit data z : ℂ
+BINDER explicit prop hz : z ∈ HadwigerNelson.SpectralChain.unitRing ⊥
+CONCL ∃ a b c, Odd c ∧ z * ↑c = ↑a + ↑b * Complex.I
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.exists_odd_rep_of_unitVector
+SIG HadwigerNelson.SpectralInputs.exists_odd_rep_of_unitVector {z : ℂ} (hz : z ∈ HadwigerNelson.planeOver ⊥) (h1 : ‖z‖ = 1) : ∃ a b c, Odd c ∧ z * ↑c = ↑a + ↑b * Complex.I
+BINDER implicit data z : ℂ
+BINDER explicit prop hz : z ∈ HadwigerNelson.planeOver ⊥
+BINDER explicit prop h1 : ‖z‖ = 1
+CONCL ∃ a b c, Odd c ∧ z * ↑c = ↑a + ↑b * Complex.I
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.exists_parityHom
+SIG HadwigerNelson.SpectralInputs.exists_parityHom : ∃ π, ∀ (u : ↑(HadwigerNelson.SpectralChain.unitVectors ⊥)), π (HadwigerNelson.SpectralChain.uvRing u) = 1
+CONCL ∃ π, ∀ (u : ↑(HadwigerNelson.SpectralChain.unitVectors ⊥)), π (HadwigerNelson.SpectralChain.uvRing u) = 1
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.exists_signChar
+SIG HadwigerNelson.SpectralInputs.exists_signChar : ∃ ψ, ↑(ψ 1) = -1
+CONCL ∃ ψ, ↑(ψ 1) = -1
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.intCast_zmod_two_of_odd
+SIG HadwigerNelson.SpectralInputs.intCast_zmod_two_of_odd {c : ℤ} (hc : Odd c) : ↑c = 1
+BINDER implicit data c : ℤ
+BINDER explicit prop hc : Odd c
+CONCL ↑c = 1
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.negCircle_trivial_bot
+SIG HadwigerNelson.SpectralInputs.negCircle_trivial_bot : (HadwigerNelson.SpectralChain.Interface.trivial ⊥).NegCircle
+CONCL (HadwigerNelson.SpectralChain.Interface.trivial ⊥).NegCircle
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.parity_rep_unique
+SIG HadwigerNelson.SpectralInputs.parity_rep_unique {z : ℂ} {a b c a' b' c' : ℤ} (hc : Odd c) (hc' : Odd c') (h : z * ↑c = ↑a + ↑b * Complex.I) (h' : z * ↑c' = ↑a' + ↑b' * Complex.I) : ↑(a + b) = ↑(a' + b')
+BINDER implicit data z : ℂ
+BINDER implicit data a : ℤ
+BINDER implicit data b : ℤ
+BINDER implicit data c : ℤ
+BINDER implicit data a' : ℤ
+BINDER implicit data b' : ℤ
+BINDER implicit data c' : ℤ
+BINDER explicit prop hc : Odd c
+BINDER explicit prop hc' : Odd c'
+BINDER explicit prop h : z * ↑c = ↑a + ↑b * Complex.I
+BINDER explicit prop h' : z * ↑c' = ↑a' + ↑b' * Complex.I
+CONCL ↑(a + b) = ↑(a' + b')
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.re_im_of_mul_intCast_eq
+SIG HadwigerNelson.SpectralInputs.re_im_of_mul_intCast_eq {z : ℂ} {a b c : ℤ} (h : z * ↑c = ↑a + ↑b * Complex.I) : z.re * ↑c = ↑a ∧ z.im * ↑c = ↑b
+BINDER implicit data z : ℂ
+BINDER implicit data a : ℤ
+BINDER implicit data b : ℤ
+BINDER implicit data c : ℤ
+BINDER explicit prop h : z * ↑c = ↑a + ↑b * Complex.I
+CONCL z.re * ↑c = ↑a ∧ z.im * ↑c = ↑b
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot
+SIG HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot (hBH : HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing ⊥)) : ∃ ν m, (HadwigerNelson.SpectralChain.Interface.trivial ⊥).MulStable ∧ (HadwigerNelson.SpectralChain.Interface.trivial ⊥).NegCircle ∧ MeasureTheory.IsFiniteMeasure ν ∧ HadwigerNelson.SpectralChain.RotInv ⊥ ν ∧ ν (HadwigerNelson.SpectralChain.Interface.trivial ⊥).E = 0 ∧ HadwigerNelson.SpectralInputs.IsHaarFourier m ∧ ∀ (a : ENNReal), ν ≠ a • m
+BINDER explicit prop hBH : HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing ⊥)
+CONCL ∃ ν m, (HadwigerNelson.SpectralChain.Interface.trivial ⊥).MulStable ∧ (HadwigerNelson.SpectralChain.Interface.trivial ⊥).NegCircle ∧ MeasureTheory.IsFiniteMeasure ν ∧ HadwigerNelson.SpectralChain.RotInv ⊥ ν ∧ ν (HadwigerNelson.SpectralChain.Interface.trivial ⊥).E = 0 ∧ HadwigerNelson.SpectralInputs.IsHaarFourier m ∧ ∀ (a : ENNReal), ν ≠ a • m
+@@ THM Proofs.HadwigerNelson.Arith.NegCircleModel HadwigerNelson.SpectralInputs.two_dvd_of_sq_add_sq_eq_four_mul
+SIG HadwigerNelson.SpectralInputs.two_dvd_of_sq_add_sq_eq_four_mul {a b n : ℤ} (h : a ^ 2 + b ^ 2 = 4 * n) : 2 ∣ a ∧ 2 ∣ b
+BINDER implicit data a : ℤ
+BINDER implicit data b : ℤ
+BINDER implicit data n : ℤ
+BINDER explicit prop h : a ^ 2 + b ^ 2 = 4 * n
+CONCL 2 ∣ a ∧ 2 ∣ b
+@@ THM Proofs.HadwigerNelson.Arith.NormOneTarget HadwigerNelson.StandingFive.card_filter_pow_eq_one
+SIG HadwigerNelson.StandingFive.card_filter_pow_eq_one.{u_1} {k : Type u_1} [Field k] [Fintype k] [DecidableEq k] {d : ℕ} (hd0 : d ≠ 0) (hd : d ∣ Fintype.card k - 1) : {u | u ^ d = 1}.card = d
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.NormOneTarget.810119561._hygCtx._hyg.3 : Field k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.NormOneTarget.810119561._hygCtx._hyg.6 : Fintype k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.NormOneTarget.810119561._hygCtx._hyg.9 : DecidableEq k
+BINDER implicit data d : ℕ
+BINDER explicit prop hd0 : d ≠ 0
+BINDER explicit prop hd : d ∣ Fintype.card k - 1
+CONCL {u | u ^ d = 1}.card = d
+@@ THM Proofs.HadwigerNelson.Arith.NormOneTarget HadwigerNelson.StandingFive.card_normOne
+SIG HadwigerNelson.StandingFive.card_normOne.{u_1} {k : Type u_1} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) : {u | u ^ (Q + 1) = 1}.card = Q + 1
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.NormOneTarget.2288740941._hygCtx._hyg.3 : Field k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.NormOneTarget.2288740941._hygCtx._hyg.6 : Fintype k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.NormOneTarget.2288740941._hygCtx._hyg.9 : DecidableEq k
+BINDER implicit data Q : ℕ
+BINDER explicit prop hcard : Fintype.card k = Q ^ 2
+CONCL {u | u ^ (Q + 1) = 1}.card = Q + 1
+@@ THM Proofs.HadwigerNelson.Arith.NormOneTarget HadwigerNelson.StandingFive.involution_eq_pow
+SIG HadwigerNelson.StandingFive.involution_eq_pow.{u_1} {k : Type u_1} [Field k] [Fintype k] (σ : k →+* k) (hσ : ∀ (x : k), σ (σ x) = x) (hne : σ ≠ RingHom.id k) {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) (x : k) : σ x = x ^ Q
+BINDER implicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.NormOneTarget.61889414._hygCtx._hyg.3 : Field k
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.NormOneTarget.61889414._hygCtx._hyg.6 : Fintype k
+BINDER explicit data σ : k →+* k
+BINDER explicit prop hσ : ∀ (x : k), σ (σ x) = x
+BINDER explicit prop hne : σ ≠ RingHom.id k
+BINDER implicit data Q : ℕ
+BINDER explicit prop hcard : Fintype.card k = Q ^ 2
+BINDER explicit data x : k
+CONCL σ x = x ^ Q
+@@ THM Proofs.HadwigerNelson.Arith.NormOneTarget HadwigerNelson.StandingFive.normOneCayley.eq_1
+SIG HadwigerNelson.StandingFive.normOneCayley.eq_1.{u_1} (k : Type u_1) [Field k] (σ : k →+* k) : HadwigerNelson.StandingFive.normOneCayley k σ = SimpleGraph.fromRel fun x y => (x - y) * σ (x - y) = 1
+BINDER explicit data k : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.StandingFive.2217378971._hygCtx._hyg.3 : Field k
+BINDER explicit data σ : k →+* k
+CONCL HadwigerNelson.StandingFive.normOneCayley k σ = SimpleGraph.fromRel fun x y => (x - y) * σ (x - y) = 1
+@@ THM Proofs.HadwigerNelson.Arith.NormOneTarget HadwigerNelson.StandingFive.targetFloor_of_charSum
+SIG HadwigerNelson.StandingFive.targetFloor_of_charSum (N Q : ℕ) {m : ℝ} (hm : 0 < m) (hN : (↑N - 1) * m < ↑Q + 1 + m) (hchar : ∀ (k : Type) [inst : Field k] [inst_1 : Fintype k] [inst_2 : DecidableEq k], Fintype.card k = Q ^ 2 → ∀ (ψ : AddChar k ℂ), ψ ≠ 1 → -m ≤ (∑ u with u ^ (Q + 1) = 1, ψ u).re) : HadwigerNelson.StandingFive.TargetFloor N Q
+BINDER explicit data N : ℕ
+BINDER explicit data Q : ℕ
+BINDER implicit data m : ℝ
+BINDER explicit prop hm : 0 < m
+BINDER explicit prop hN : (↑N - 1) * m < ↑Q + 1 + m
+BINDER explicit prop hchar : ∀ (k : Type) [inst : Field k] [inst_1 : Fintype k] [inst_2 : DecidableEq k], Fintype.card k = Q ^ 2 → ∀ (ψ : AddChar k ℂ), ψ ≠ 1 → -m ≤ (∑ u with u ^ (Q + 1) = 1, ψ u).re
+CONCL HadwigerNelson.StandingFive.TargetFloor N Q
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.comap_factorSigma_le
+SIG HadwigerNelson.SpectralInputs.comap_factorSigma_le.{u_1, u_2, u_3} {R : Type u_1} {Ω : Type u_2} {Ω' : Type u_3} [MeasurableSpace Ω] [MeasurableSpace Ω'] {μ : MeasureTheory.Measure Ω} {μ' : MeasureTheory.Measure Ω'} [MeasureTheory.IsProbabilityMeasure μ] [MeasureTheory.IsProbabilityMeasure μ'] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (T' : R → Ω' → Ω') (hT' : ∀ (y : R), MeasureTheory.MeasurePreserving (T' y) μ' μ') (l : Filter R) {π : Ω → Ω'} (hπ : MeasureTheory.MeasurePreserving π μ μ') (hequiv : ∀ (y : R), π ∘ T y = T' y ∘ π) : MeasurableSpace.comap π (HadwigerNelson.SpectralInputs.factorSigma T' hT' l) ≤ HadwigerNelson.SpectralInputs.factorSigma T hT l
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω : Type u_2
+BINDER implicit data Ω' : Type u_3
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1311458739._hygCtx._hyg.5 : MeasurableSpace Ω
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1311458739._hygCtx._hyg.8 : MeasurableSpace Ω'
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER implicit data μ' : MeasureTheory.Measure Ω'
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1311458739._hygCtx._hyg.15 : MeasureTheory.IsProbabilityMeasure μ
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1311458739._hygCtx._hyg.18 : MeasureTheory.IsProbabilityMeasure μ'
+BINDER explicit data T : R → Ω → Ω
+BINDER explicit prop hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ
+BINDER explicit data T' : R → Ω' → Ω'
+BINDER explicit prop hT' : ∀ (y : R), MeasureTheory.MeasurePreserving (T' y) μ' μ'
+BINDER explicit data l : Filter R
+BINDER implicit data π : Ω → Ω'
+BINDER explicit prop hπ : MeasureTheory.MeasurePreserving π μ μ'
+BINDER explicit prop hequiv : ∀ (y : R), π ∘ T y = T' y ∘ π
+CONCL MeasurableSpace.comap π (HadwigerNelson.SpectralInputs.factorSigma T' hT' l) ≤ HadwigerNelson.SpectralInputs.factorSigma T hT l
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.contVec_prod_eq
+SIG HadwigerNelson.SpectralInputs.contVec_prod_eq.{u_1, u_2, u_3, u_4, u_5} {R : Type u_1} {Ω₁ : Type u_2} {Ω₂ : Type u_3} {Ω₃ : Type u_4} [MeasurableSpace Ω₁] [MeasurableSpace Ω₂] [MeasurableSpace Ω₃] {μ₁ : MeasureTheory.Measure Ω₁} {μ₂ : MeasureTheory.Measure Ω₂} {μ₃ : MeasureTheory.Measure Ω₃} [AddCommGroup R] [Finite Ω₁] [MeasurableSingletonClass Ω₁] [MeasureTheory.IsProbabilityMeasure μ₁] [MeasureTheory.IsProbabilityMeasure μ₂] [MeasureTheory.IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (h₁ : ∀ᶠ (y : R) in l, T₁ y = id) {B : Type u_5} [MeasurableSpace B] (ε : R → Ω₃ → B) (hε : ∀ (x : R), Measurable (ε x)) (hgen : inst✝ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω) (hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D) : HadwigerNelson.SpectralInputs.contVec (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l = ↑(MeasureTheory.lpMeas ℝ ℝ (HadwigerNelson.SpectralInputs.prodFactorSigma T₂ hT₂ l) 2 (μ₁.prod (μ₂.prod μ₃)))
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω₁ : Type u_2
+BINDER implicit data Ω₂ : Type u_3
+BINDER implicit data Ω₃ : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2735956026._hygCtx._hyg.6 : MeasurableSpace Ω₁
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2735956026._hygCtx._hyg.9 : MeasurableSpace Ω₂
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2735956026._hygCtx._hyg.12 : MeasurableSpace Ω₃
+BINDER implicit data μ₁ : MeasureTheory.Measure Ω₁
+BINDER implicit data μ₂ : MeasureTheory.Measure Ω₂
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2735956026._hygCtx._hyg.21 : AddCommGroup R
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2735956026._hygCtx._hyg.24 : Finite Ω₁
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2735956026._hygCtx._hyg.27 : MeasurableSingletonClass Ω₁
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2735956026._hygCtx._hyg.30 : MeasureTheory.IsProbabilityMeasure μ₁
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2735956026._hygCtx._hyg.33 : MeasureTheory.IsProbabilityMeasure μ₂
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2735956026._hygCtx._hyg.36 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data T₁ : R → Ω₁ → Ω₁
+BINDER implicit data T₂ : R → Ω₂ → Ω₂
+BINDER implicit data T₃ : R → Ω₃ → Ω₃
+BINDER explicit prop hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁
+BINDER explicit prop hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂
+BINDER explicit prop hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃
+BINDER explicit data l : Filter R
+BINDER explicit prop h₁ : ∀ᶠ (y : R) in l, T₁ y = id
+BINDER implicit data B : Type u_5
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2735956026._hygCtx._hyg.110 : MeasurableSpace B
+BINDER explicit data ε : R → Ω₃ → B
+BINDER explicit prop hε : ∀ (x : R), Measurable (ε x)
+BINDER explicit prop hgen : inst✝⁷ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance
+BINDER explicit prop hind : ProbabilityTheory.iIndepFun ε μ₃
+BINDER explicit prop hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω
+BINDER explicit prop hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D
+CONCL HadwigerNelson.SpectralInputs.contVec (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l = ↑(MeasureTheory.lpMeas ℝ ℝ (HadwigerNelson.SpectralInputs.prodFactorSigma T₂ hT₂ l) 2 (μ₁.prod (μ₂.prod μ₃)))
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.contVec_prod_eq_coin
+SIG HadwigerNelson.SpectralInputs.contVec_prod_eq_coin (ρ : MeasureTheory.Measure Bool) [MeasureTheory.IsProbabilityMeasure ρ] : HadwigerNelson.SpectralInputs.contVec (HadwigerNelson.SpectralInputs.prodMap₃ (fun x => id) (fun x => id) fun y ω x => ω (x + y)) ⋯ Filter.cofinite = ↑(MeasureTheory.lpMeas ℝ ℝ (HadwigerNelson.SpectralInputs.prodFactorSigma (fun x => id) ⋯ Filter.cofinite) 2 ((MeasureTheory.Measure.dirac ()).prod ((MeasureTheory.Measure.dirac ()).prod (MeasureTheory.Measure.infinitePi fun x => ρ))))
+BINDER explicit data ρ : MeasureTheory.Measure Bool
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.380230154._hygCtx._hyg.4 : MeasureTheory.IsProbabilityMeasure ρ
+CONCL HadwigerNelson.SpectralInputs.contVec (HadwigerNelson.SpectralInputs.prodMap₃ (fun x => id) (fun x => id) fun y ω x => ω (x + y)) ⋯ Filter.cofinite = ↑(MeasureTheory.lpMeas ℝ ℝ (HadwigerNelson.SpectralInputs.prodFactorSigma (fun x => id) ⋯ Filter.cofinite) 2 ((MeasureTheory.Measure.dirac ()).prod ((MeasureTheory.Measure.dirac ()).prod (MeasureTheory.Measure.infinitePi fun x => ρ))))
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.cylMap.eq_1
+SIG HadwigerNelson.SpectralInputs.cylMap.eq_1.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} (ε : R → Ω₃ → B) (A : Finset R) (p : X × Ω₃) : HadwigerNelson.SpectralInputs.cylMap ε A p = (p.1, fun i => ε (↑i) p.2)
+BINDER implicit data R : Type u_1
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER implicit data B : Type u_4
+BINDER explicit data ε : R → Ω₃ → B
+BINDER explicit data A : Finset R
+BINDER explicit data p : X × Ω₃
+CONCL HadwigerNelson.SpectralInputs.cylMap ε A p = (p.1, fun i => ε (↑i) p.2)
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.exists_cyl_of_subset
+SIG HadwigerNelson.SpectralInputs.exists_cyl_of_subset.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace B] (ε : R → Ω₃ → B) {A A' : Finset R} (hsub : A ⊆ A') {E₀ : Set (X × (↥A → B))} (hE₀ : MeasurableSet E₀) : ∃ E₀', MeasurableSet E₀' ∧ HadwigerNelson.SpectralInputs.cylMap ε A' ⁻¹' E₀' = HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀
+BINDER implicit data R : Type u_1
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER implicit data B : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4103231518._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4103231518._hygCtx._hyg.12 : MeasurableSpace B
+BINDER explicit data ε : R → Ω₃ → B
+BINDER implicit data A : Finset R
+BINDER implicit data A' : Finset R
+BINDER explicit prop hsub : A ⊆ A'
+BINDER implicit data E₀ : Set (X × (↥A → B))
+BINDER explicit prop hE₀ : MeasurableSet E₀
+CONCL ∃ E₀', MeasurableSet E₀' ∧ HadwigerNelson.SpectralInputs.cylMap ε A' ⁻¹' E₀' = HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.exists_fst_preimage_ae_eq_of_mem_factorSets
+SIG HadwigerNelson.SpectralInputs.exists_fst_preimage_ae_eq_of_mem_factorSets.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace Ω₃] [MeasurableSpace B] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [AddCommGroup R] [MeasureTheory.IsProbabilityMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {S : R → X → X} {T₃ : R → Ω₃ → Ω₃} (hS : ∀ (y : R), MeasureTheory.MeasurePreserving (S y) μX μX) (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (ε : R → Ω₃ → B) (hε : ∀ (x : R), Measurable (ε x)) (hgen : inst✝ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω) (hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D) {A : Set (X × Ω₃)} (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets (fun y => Prod.map (S y) (T₃ y)) ⋯ l) : ∃ C, MeasurableSet C ∧ A =ᵐ[μX.prod μ₃] Prod.fst ⁻¹' C
+BINDER implicit data R : Type u_1
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER implicit data B : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.595039914._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.595039914._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.595039914._hygCtx._hyg.12 : MeasurableSpace B
+BINDER implicit data μX : MeasureTheory.Measure X
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.595039914._hygCtx._hyg.19 : AddCommGroup R
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.595039914._hygCtx._hyg.22 : MeasureTheory.IsProbabilityMeasure μX
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.595039914._hygCtx._hyg.25 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data S : R → X → X
+BINDER implicit data T₃ : R → Ω₃ → Ω₃
+BINDER explicit prop hS : ∀ (y : R), MeasureTheory.MeasurePreserving (S y) μX μX
+BINDER explicit prop hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃
+BINDER explicit data l : Filter R
+BINDER explicit data ε : R → Ω₃ → B
+BINDER explicit prop hε : ∀ (x : R), Measurable (ε x)
+BINDER explicit prop hgen : inst✝⁴ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance
+BINDER explicit prop hind : ProbabilityTheory.iIndepFun ε μ₃
+BINDER explicit prop hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω
+BINDER explicit prop hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D
+BINDER implicit data A : Set (X × Ω₃)
+BINDER explicit prop hA : A ∈ HadwigerNelson.SpectralInputs.factorSets (fun y => Prod.map (S y) (T₃ y)) ⋯ l
+CONCL ∃ C, MeasurableSet C ∧ A =ᵐ[μX.prod μ₃] Prod.fst ⁻¹' C
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.exists_fst_preimage_of_integral_section_var_eq_zero
+SIG HadwigerNelson.SpectralInputs.exists_fst_preimage_of_integral_section_var_eq_zero.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsProbabilityMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) (h0 : ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E)) ∂μX = 0) : ∃ C, MeasurableSet C ∧ E =ᵐ[μX.prod μ₃] Prod.fst ⁻¹' C
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2487225788._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2487225788._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER implicit data μX : MeasureTheory.Measure X
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2487225788._hygCtx._hyg.19 : MeasureTheory.IsProbabilityMeasure μX
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2487225788._hygCtx._hyg.22 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data E : Set (X × Ω₃)
+BINDER explicit prop hE : MeasurableSet E
+BINDER explicit prop h0 : ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E)) ∂μX = 0
+CONCL ∃ C, MeasurableSet C ∧ E =ᵐ[μX.prod μ₃] Prod.fst ⁻¹' C
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.exists_measurableSet_prodFactorSigma_ae_eq
+SIG HadwigerNelson.SpectralInputs.exists_measurableSet_prodFactorSigma_ae_eq.{u_1, u_2, u_3, u_4, u_5} {R : Type u_1} {Ω₁ : Type u_2} {Ω₂ : Type u_3} {Ω₃ : Type u_4} [MeasurableSpace Ω₁] [MeasurableSpace Ω₂] [MeasurableSpace Ω₃] {μ₁ : MeasureTheory.Measure Ω₁} {μ₂ : MeasureTheory.Measure Ω₂} {μ₃ : MeasureTheory.Measure Ω₃} [AddCommGroup R] [Finite Ω₁] [MeasurableSingletonClass Ω₁] [MeasureTheory.IsProbabilityMeasure μ₁] [MeasureTheory.IsProbabilityMeasure μ₂] [MeasureTheory.IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (h₁ : ∀ᶠ (y : R) in l, T₁ y = id) {B : Type u_5} [MeasurableSpace B] (ε : R → Ω₃ → B) (hε : ∀ (x : R), Measurable (ε x)) (hgen : inst✝ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω) (hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D) {A : Set (Ω₁ × Ω₂ × Ω₃)} (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l) : ∃ B', MeasurableSet B' ∧ A =ᵐ[μ₁.prod (μ₂.prod μ₃)] B'
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω₁ : Type u_2
+BINDER implicit data Ω₂ : Type u_3
+BINDER implicit data Ω₃ : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2230683133._hygCtx._hyg.6 : MeasurableSpace Ω₁
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2230683133._hygCtx._hyg.9 : MeasurableSpace Ω₂
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2230683133._hygCtx._hyg.12 : MeasurableSpace Ω₃
+BINDER implicit data μ₁ : MeasureTheory.Measure Ω₁
+BINDER implicit data μ₂ : MeasureTheory.Measure Ω₂
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2230683133._hygCtx._hyg.21 : AddCommGroup R
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2230683133._hygCtx._hyg.24 : Finite Ω₁
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2230683133._hygCtx._hyg.27 : MeasurableSingletonClass Ω₁
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2230683133._hygCtx._hyg.30 : MeasureTheory.IsProbabilityMeasure μ₁
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2230683133._hygCtx._hyg.33 : MeasureTheory.IsProbabilityMeasure μ₂
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2230683133._hygCtx._hyg.36 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data T₁ : R → Ω₁ → Ω₁
+BINDER implicit data T₂ : R → Ω₂ → Ω₂
+BINDER implicit data T₃ : R → Ω₃ → Ω₃
+BINDER explicit prop hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁
+BINDER explicit prop hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂
+BINDER explicit prop hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃
+BINDER explicit data l : Filter R
+BINDER explicit prop h₁ : ∀ᶠ (y : R) in l, T₁ y = id
+BINDER implicit data B : Type u_5
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2230683133._hygCtx._hyg.110 : MeasurableSpace B
+BINDER explicit data ε : R → Ω₃ → B
+BINDER explicit prop hε : ∀ (x : R), Measurable (ε x)
+BINDER explicit prop hgen : inst✝⁷ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance
+BINDER explicit prop hind : ProbabilityTheory.iIndepFun ε μ₃
+BINDER explicit prop hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω
+BINDER explicit prop hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D
+BINDER implicit data A : Set (Ω₁ × Ω₂ × Ω₃)
+BINDER explicit prop hA : A ∈ HadwigerNelson.SpectralInputs.factorSets (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l
+CONCL ∃ B', MeasurableSet B' ∧ A =ᵐ[μ₁.prod (μ₂.prod μ₃)] B'
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.factorSigma.congr_simp
+SIG HadwigerNelson.SpectralInputs.factorSigma.congr_simp.{u_1, u_2} {R : Type u_1} {Ω : Type u_2} [MeasurableSpace Ω] {μ μ✝ : MeasureTheory.Measure Ω} (e_μ : μ = μ✝) [MeasureTheory.IsFiniteMeasure μ] (T T✝ : R → Ω → Ω) (e_T : T = T✝) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (l l✝ : Filter R) (e_l : l = l✝) : HadwigerNelson.SpectralInputs.factorSigma T hT l = HadwigerNelson.SpectralInputs.factorSigma T✝ ⋯ l✝
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω : Type u_2
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.SpectralInputs.970006939._hygCtx._hyg.4 : MeasurableSpace Ω
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER explicit prop e_μ : μ✝ = μ
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.SpectralInputs.970006939._hygCtx._hyg.9 : MeasureTheory.IsFiniteMeasure μ✝
+BINDER explicit data T : R → Ω → Ω
+BINDER explicit data T : R → Ω → Ω
+BINDER explicit prop e_T : T✝ = T
+BINDER explicit prop hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T✝ y) μ✝ μ✝
+BINDER explicit data l : Filter R
+BINDER explicit data l : Filter R
+BINDER explicit prop e_l : l✝ = l
+CONCL HadwigerNelson.SpectralInputs.factorSigma T✝ hT l✝ = HadwigerNelson.SpectralInputs.factorSigma T ⋯ l
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.fibre_mem_factorSets
+SIG HadwigerNelson.SpectralInputs.fibre_mem_factorSets.{u_1, u_2, u_3, u_4} {R : Type u_1} {Ω₁ : Type u_2} {Ω₂ : Type u_3} {Ω₃ : Type u_4} [MeasurableSpace Ω₁] [MeasurableSpace Ω₂] [MeasurableSpace Ω₃] {μ₁ : MeasureTheory.Measure Ω₁} {μ₂ : MeasureTheory.Measure Ω₂} {μ₃ : MeasureTheory.Measure Ω₃} [MeasurableSingletonClass Ω₁] [MeasureTheory.IsProbabilityMeasure μ₁] [MeasureTheory.IsProbabilityMeasure μ₂] [MeasureTheory.IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (h₁ : ∀ᶠ (y : R) in l, T₁ y = id) {C : Set (Ω₁ × Ω₂)} (hC : MeasurableSet C) (hB : {ω | (ω.1, ω.2.1) ∈ C} ∈ HadwigerNelson.SpectralInputs.factorSets (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l) {a : Ω₁} (ha : μ₁ {a} ≠ 0) : Prod.mk a ⁻¹' C ∈ HadwigerNelson.SpectralInputs.factorSets T₂ hT₂ l
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω₁ : Type u_2
+BINDER implicit data Ω₂ : Type u_3
+BINDER implicit data Ω₃ : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4248292594._hygCtx._hyg.6 : MeasurableSpace Ω₁
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4248292594._hygCtx._hyg.9 : MeasurableSpace Ω₂
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4248292594._hygCtx._hyg.12 : MeasurableSpace Ω₃
+BINDER implicit data μ₁ : MeasureTheory.Measure Ω₁
+BINDER implicit data μ₂ : MeasureTheory.Measure Ω₂
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4248292594._hygCtx._hyg.21 : MeasurableSingletonClass Ω₁
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4248292594._hygCtx._hyg.24 : MeasureTheory.IsProbabilityMeasure μ₁
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4248292594._hygCtx._hyg.27 : MeasureTheory.IsProbabilityMeasure μ₂
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4248292594._hygCtx._hyg.30 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data T₁ : R → Ω₁ → Ω₁
+BINDER implicit data T₂ : R → Ω₂ → Ω₂
+BINDER implicit data T₃ : R → Ω₃ → Ω₃
+BINDER explicit prop hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁
+BINDER explicit prop hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂
+BINDER explicit prop hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃
+BINDER explicit data l : Filter R
+BINDER explicit prop h₁ : ∀ᶠ (y : R) in l, T₁ y = id
+BINDER implicit data C : Set (Ω₁ × Ω₂)
+BINDER explicit prop hC : MeasurableSet C
+BINDER explicit prop hB : {ω | (ω.1, ω.2.1) ∈ C} ∈ HadwigerNelson.SpectralInputs.factorSets (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l
+BINDER implicit data a : Ω₁
+BINDER explicit prop ha : μ₁ {a} ≠ 0
+CONCL Prod.mk a ⁻¹' C ∈ HadwigerNelson.SpectralInputs.factorSets T₂ hT₂ l
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.generateFrom_cylSets
+SIG HadwigerNelson.SpectralInputs.generateFrom_cylSets.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace Ω₃] [MeasurableSpace B] {ε : R → Ω₃ → B} (hε : ∀ (x : R), Measurable (ε x)) (hgen : inst✝ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) : inferInstance = MeasurableSpace.generateFrom (HadwigerNelson.SpectralInputs.cylSets ε)
+BINDER implicit data R : Type u_1
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER implicit data B : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3306641141._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3306641141._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3306641141._hygCtx._hyg.12 : MeasurableSpace B
+BINDER implicit data ε : R → Ω₃ → B
+BINDER explicit prop hε : ∀ (x : R), Measurable (ε x)
+BINDER explicit prop hgen : inst✝¹ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance
+CONCL inferInstance = MeasurableSpace.generateFrom (HadwigerNelson.SpectralInputs.cylSets ε)
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.integrable_measureReal_section
+SIG HadwigerNelson.SpectralInputs.integrable_measureReal_section.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsFiniteMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : MeasureTheory.Integrable (fun w => μ₃.real (Prod.mk w ⁻¹' E)) μX
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2837824518._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2837824518._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER implicit data μX : MeasureTheory.Measure X
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2837824518._hygCtx._hyg.19 : MeasureTheory.IsFiniteMeasure μX
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2837824518._hygCtx._hyg.22 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data E : Set (X × Ω₃)
+BINDER explicit prop hE : MeasurableSet E
+CONCL MeasureTheory.Integrable (fun w => μ₃.real (Prod.mk w ⁻¹' E)) μX
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.integrable_section_var
+SIG HadwigerNelson.SpectralInputs.integrable_section_var.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsFiniteMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : MeasureTheory.Integrable (fun w => μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E))) μX
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2266305246._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2266305246._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER implicit data μX : MeasureTheory.Measure X
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2266305246._hygCtx._hyg.19 : MeasureTheory.IsFiniteMeasure μX
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2266305246._hygCtx._hyg.22 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data E : Set (X × Ω₃)
+BINDER explicit prop hE : MeasurableSet E
+CONCL MeasureTheory.Integrable (fun w => μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E))) μX
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.integral_section_var_le_add
+SIG HadwigerNelson.SpectralInputs.integral_section_var_le_add.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsProbabilityMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {E E' : Set (X × Ω₃)} (hE : MeasurableSet E) (hE' : MeasurableSet E') : ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E)) ∂μX ≤ ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E') * (1 - μ₃.real (Prod.mk w ⁻¹' E')) ∂μX + (μX.prod μ₃).real (symmDiff E E')
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.381987105._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.381987105._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER implicit data μX : MeasureTheory.Measure X
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.381987105._hygCtx._hyg.19 : MeasureTheory.IsProbabilityMeasure μX
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.381987105._hygCtx._hyg.22 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data E : Set (X × Ω₃)
+BINDER implicit data E' : Set (X × Ω₃)
+BINDER explicit prop hE : MeasurableSet E
+BINDER explicit prop hE' : MeasurableSet E'
+CONCL ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E)) ∂μX ≤ ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E') * (1 - μ₃.real (Prod.mk w ⁻¹' E')) ∂μX + (μX.prod μ₃).real (symmDiff E E')
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.integral_section_var_le_symmDiff_shift
+SIG HadwigerNelson.SpectralInputs.integral_section_var_le_symmDiff_shift.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace Ω₃] [MeasurableSpace B] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [AddCommGroup R] [MeasureTheory.IsProbabilityMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {S : R → X → X} {T₃ : R → Ω₃ → Ω₃} (hS : ∀ (y : R), Measurable (S y)) (hT₃ : ∀ (y : R), Measurable (T₃ y)) {ε : R → Ω₃ → B} (hε : ∀ (x : R), Measurable (ε x)) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω) (A : Finset R) {E₀ : Set (X × (↥A → B))} (hE₀ : MeasurableSet E₀) {y : R} (hy : ∀ x ∈ A, x + y ∉ A) : ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀) * (1 - μ₃.real (Prod.mk w ⁻¹' HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀)) ∂μX ≤ (μX.prod μ₃).real (symmDiff (Prod.map (S y) (T₃ y) ⁻¹' HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀) (HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀))
+BINDER implicit data R : Type u_1
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER implicit data B : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1296650547._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1296650547._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1296650547._hygCtx._hyg.12 : MeasurableSpace B
+BINDER implicit data μX : MeasureTheory.Measure X
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1296650547._hygCtx._hyg.19 : AddCommGroup R
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1296650547._hygCtx._hyg.22 : MeasureTheory.IsProbabilityMeasure μX
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1296650547._hygCtx._hyg.25 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data S : R → X → X
+BINDER implicit data T₃ : R → Ω₃ → Ω₃
+BINDER explicit prop hS : ∀ (y : R), Measurable (S y)
+BINDER explicit prop hT₃ : ∀ (y : R), Measurable (T₃ y)
+BINDER implicit data ε : R → Ω₃ → B
+BINDER explicit prop hε : ∀ (x : R), Measurable (ε x)
+BINDER explicit prop hind : ProbabilityTheory.iIndepFun ε μ₃
+BINDER explicit prop hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω
+BINDER explicit data A : Finset R
+BINDER implicit data E₀ : Set (X × (↥A → B))
+BINDER explicit prop hE₀ : MeasurableSet E₀
+BINDER implicit data y : R
+BINDER explicit prop hy : ∀ x ∈ A, x + y ∉ A
+CONCL ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀) * (1 - μ₃.real (Prod.mk w ⁻¹' HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀)) ∂μX ≤ (μX.prod μ₃).real (symmDiff (Prod.map (S y) (T₃ y) ⁻¹' HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀) (HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀))
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.isSetRing_cylSets
+SIG HadwigerNelson.SpectralInputs.isSetRing_cylSets.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace B] (ε : R → Ω₃ → B) : MeasureTheory.IsSetRing (HadwigerNelson.SpectralInputs.cylSets ε)
+BINDER implicit data R : Type u_1
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER implicit data B : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.996660279._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.996660279._hygCtx._hyg.12 : MeasurableSpace B
+BINDER explicit data ε : R → Ω₃ → B
+CONCL MeasureTheory.IsSetRing (HadwigerNelson.SpectralInputs.cylSets ε)
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.measurable_cylMap
+SIG HadwigerNelson.SpectralInputs.measurable_cylMap.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace Ω₃] [MeasurableSpace B] {ε : R → Ω₃ → B} (hε : ∀ (x : R), Measurable (ε x)) (A : Finset R) : Measurable (HadwigerNelson.SpectralInputs.cylMap ε A)
+BINDER implicit data R : Type u_1
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER implicit data B : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.442477455._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.442477455._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.442477455._hygCtx._hyg.12 : MeasurableSpace B
+BINDER implicit data ε : R → Ω₃ → B
+BINDER explicit prop hε : ∀ (x : R), Measurable (ε x)
+BINDER explicit data A : Finset R
+CONCL Measurable (HadwigerNelson.SpectralInputs.cylMap ε A)
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.measurable_measureReal_section
+SIG HadwigerNelson.SpectralInputs.measurable_measureReal_section.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsFiniteMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : Measurable fun w => μ₃.real (Prod.mk w ⁻¹' E)
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.266522356._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.266522356._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.266522356._hygCtx._hyg.19 : MeasureTheory.IsFiniteMeasure μ₃
+BINDER implicit data E : Set (X × Ω₃)
+BINDER explicit prop hE : MeasurableSet E
+CONCL Measurable fun w => μ₃.real (Prod.mk w ⁻¹' E)
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.measurePreserving_prodMap₃
+SIG HadwigerNelson.SpectralInputs.measurePreserving_prodMap₃.{u_1, u_2, u_3, u_4} {R : Type u_1} {Ω₁ : Type u_2} {Ω₂ : Type u_3} {Ω₃ : Type u_4} [MeasurableSpace Ω₁] [MeasurableSpace Ω₂] [MeasurableSpace Ω₃] {μ₁ : MeasureTheory.Measure Ω₁} {μ₂ : MeasureTheory.Measure Ω₂} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsProbabilityMeasure μ₁] [MeasureTheory.IsProbabilityMeasure μ₂] [MeasureTheory.IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃) (y : R) : MeasureTheory.MeasurePreserving (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃ y) (μ₁.prod (μ₂.prod μ₃)) (μ₁.prod (μ₂.prod μ₃))
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω₁ : Type u_2
+BINDER implicit data Ω₂ : Type u_3
+BINDER implicit data Ω₃ : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1288058782._hygCtx._hyg.6 : MeasurableSpace Ω₁
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1288058782._hygCtx._hyg.9 : MeasurableSpace Ω₂
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1288058782._hygCtx._hyg.12 : MeasurableSpace Ω₃
+BINDER implicit data μ₁ : MeasureTheory.Measure Ω₁
+BINDER implicit data μ₂ : MeasureTheory.Measure Ω₂
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1288058782._hygCtx._hyg.21 : MeasureTheory.IsProbabilityMeasure μ₁
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1288058782._hygCtx._hyg.24 : MeasureTheory.IsProbabilityMeasure μ₂
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1288058782._hygCtx._hyg.27 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data T₁ : R → Ω₁ → Ω₁
+BINDER implicit data T₂ : R → Ω₂ → Ω₂
+BINDER implicit data T₃ : R → Ω₃ → Ω₃
+BINDER explicit prop hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁
+BINDER explicit prop hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂
+BINDER explicit prop hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃
+BINDER explicit data y : R
+CONCL MeasureTheory.MeasurePreserving (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃ y) (μ₁.prod (μ₂.prod μ₃)) (μ₁.prod (μ₂.prod μ₃))
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.measurePreserving_shift_infinitePi
+SIG HadwigerNelson.SpectralInputs.measurePreserving_shift_infinitePi.{u_1, u_2} {R : Type u_1} {B : Type u_2} [AddCommGroup R] [MeasurableSpace B] (ρ : MeasureTheory.Measure B) [MeasureTheory.IsProbabilityMeasure ρ] (y : R) : MeasureTheory.MeasurePreserving (fun ω x => ω (x + y)) (MeasureTheory.Measure.infinitePi fun x => ρ) (MeasureTheory.Measure.infinitePi fun x => ρ)
+BINDER implicit data R : Type u_1
+BINDER implicit data B : Type u_2
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4206573077._hygCtx._hyg.4 : AddCommGroup R
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4206573077._hygCtx._hyg.7 : MeasurableSpace B
+BINDER explicit data ρ : MeasureTheory.Measure B
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4206573077._hygCtx._hyg.12 : MeasureTheory.IsProbabilityMeasure ρ
+BINDER explicit data y : R
+CONCL MeasureTheory.MeasurePreserving (fun ω x => ω (x + y)) (MeasureTheory.Measure.infinitePi fun x => ρ) (MeasureTheory.Measure.infinitePi fun x => ρ)
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.measureReal_mul_one_sub_le_symmDiff
+SIG HadwigerNelson.SpectralInputs.measureReal_mul_one_sub_le_symmDiff.{u_3} {Ω₃ : Type u_3} [MeasurableSpace Ω₃] {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsProbabilityMeasure μ₃] {U V : Set Ω₃} (hU : MeasurableSet U) (hV : MeasurableSet V) (hUV : μ₃ (U ∩ V) = μ₃ U * μ₃ V) : μ₃.real V * (1 - μ₃.real V) ≤ μ₃.real (symmDiff U V)
+BINDER implicit data Ω₃ : Type u_3
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3784300632._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3784300632._hygCtx._hyg.19 : MeasureTheory.IsProbabilityMeasure μ₃
+BINDER implicit data U : Set Ω₃
+BINDER implicit data V : Set Ω₃
+BINDER explicit prop hU : MeasurableSet U
+BINDER explicit prop hV : MeasurableSet V
+BINDER explicit prop hUV : μ₃ (U ∩ V) = μ₃ U * μ₃ V
+CONCL μ₃.real V * (1 - μ₃.real V) ≤ μ₃.real (symmDiff U V)
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.measureReal_prod_eq_integral_section
+SIG HadwigerNelson.SpectralInputs.measureReal_prod_eq_integral_section.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsFiniteMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : (μX.prod μ₃).real E = ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E) ∂μX
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2925557007._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2925557007._hygCtx._hyg.9 : MeasurableSpace Ω₃
+BINDER implicit data μX : MeasureTheory.Measure X
+BINDER implicit data μ₃ : MeasureTheory.Measure Ω₃
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.2925557007._hygCtx._hyg.19 : MeasureTheory.IsFiniteMeasure μ₃
+BINDER implicit data E : Set (X × Ω₃)
+BINDER explicit prop hE : MeasurableSet E
+CONCL (μX.prod μ₃).real E = ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E) ∂μX
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.mem_factorSets_of_ae_eq
+SIG HadwigerNelson.SpectralInputs.mem_factorSets_of_ae_eq.{u_1, u_2} {R : Type u_1} {Ω : Type u_2} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} [MeasureTheory.IsFiniteMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (l : Filter R) {A B : Set Ω} (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets T hT l) (hB : MeasurableSet B) (hAB : A =ᵐ[μ] B) : B ∈ HadwigerNelson.SpectralInputs.factorSets T hT l
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω : Type u_2
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1836653120._hygCtx._hyg.5 : MeasurableSpace Ω
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.1836653120._hygCtx._hyg.15 : MeasureTheory.IsFiniteMeasure μ
+BINDER explicit data T : R → Ω → Ω
+BINDER explicit prop hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ
+BINDER explicit data l : Filter R
+BINDER implicit data A : Set Ω
+BINDER implicit data B : Set Ω
+BINDER explicit prop hA : A ∈ HadwigerNelson.SpectralInputs.factorSets T hT l
+BINDER explicit prop hB : MeasurableSet B
+BINDER explicit prop hAB : A =ᵐ[μ] B
+CONCL B ∈ HadwigerNelson.SpectralInputs.factorSets T hT l
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.preimage_mem_factorSets
+SIG HadwigerNelson.SpectralInputs.preimage_mem_factorSets.{u_1, u_2, u_3} {R : Type u_1} {Ω : Type u_2} {Ω' : Type u_3} [MeasurableSpace Ω] [MeasurableSpace Ω'] {μ : MeasureTheory.Measure Ω} {μ' : MeasureTheory.Measure Ω'} [MeasureTheory.IsFiniteMeasure μ] [MeasureTheory.IsFiniteMeasure μ'] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (T' : R → Ω' → Ω') (hT' : ∀ (y : R), MeasureTheory.MeasurePreserving (T' y) μ' μ') (l : Filter R) {π : Ω → Ω'} (hπ : MeasureTheory.MeasurePreserving π μ μ') (hequiv : ∀ (y : R), π ∘ T y = T' y ∘ π) {A : Set Ω'} (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets T' hT' l) : π ⁻¹' A ∈ HadwigerNelson.SpectralInputs.factorSets T hT l
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω : Type u_2
+BINDER implicit data Ω' : Type u_3
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3455101515._hygCtx._hyg.5 : MeasurableSpace Ω
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3455101515._hygCtx._hyg.8 : MeasurableSpace Ω'
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER implicit data μ' : MeasureTheory.Measure Ω'
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3455101515._hygCtx._hyg.15 : MeasureTheory.IsFiniteMeasure μ
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3455101515._hygCtx._hyg.18 : MeasureTheory.IsFiniteMeasure μ'
+BINDER explicit data T : R → Ω → Ω
+BINDER explicit prop hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ
+BINDER explicit data T' : R → Ω' → Ω'
+BINDER explicit prop hT' : ∀ (y : R), MeasureTheory.MeasurePreserving (T' y) μ' μ'
+BINDER explicit data l : Filter R
+BINDER implicit data π : Ω → Ω'
+BINDER explicit prop hπ : MeasureTheory.MeasurePreserving π μ μ'
+BINDER explicit prop hequiv : ∀ (y : R), π ∘ T y = T' y ∘ π
+BINDER implicit data A : Set Ω'
+BINDER explicit prop hA : A ∈ HadwigerNelson.SpectralInputs.factorSets T' hT' l
+CONCL π ⁻¹' A ∈ HadwigerNelson.SpectralInputs.factorSets T hT l
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.prodFactorSigma.congr_simp
+SIG HadwigerNelson.SpectralInputs.prodFactorSigma.congr_simp.{u_1, u_2, u_3, u_4} {R : Type u_1} {Ω₁ : Type u_2} {Ω₂ : Type u_3} {Ω₃ : Type u_4} [MeasurableSpace Ω₁] [MeasurableSpace Ω₂] {μ₂ μ₂✝ : MeasureTheory.Measure Ω₂} (e_μ₂ : μ₂ = μ₂✝) [MeasureTheory.IsProbabilityMeasure μ₂] (T₂ T₂✝ : R → Ω₂ → Ω₂) (e_T₂ : T₂ = T₂✝) (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂) (l l✝ : Filter R) (e_l : l = l✝) : HadwigerNelson.SpectralInputs.prodFactorSigma T₂ hT₂ l = HadwigerNelson.SpectralInputs.prodFactorSigma T₂✝ ⋯ l✝
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω₁ : Type u_2
+BINDER implicit data Ω₂ : Type u_3
+BINDER implicit data Ω₃ : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4005716502._hygCtx._hyg.6 : MeasurableSpace Ω₁
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4005716502._hygCtx._hyg.9 : MeasurableSpace Ω₂
+BINDER implicit data μ₂ : MeasureTheory.Measure Ω₂
+BINDER implicit data μ₂ : MeasureTheory.Measure Ω₂
+BINDER explicit prop e_μ₂ : μ₂✝ = μ₂
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.4005716502._hygCtx._hyg.21 : MeasureTheory.IsProbabilityMeasure μ₂✝
+BINDER explicit data T₂ : R → Ω₂ → Ω₂
+BINDER explicit data T₂ : R → Ω₂ → Ω₂
+BINDER explicit prop e_T₂ : T₂✝ = T₂
+BINDER explicit prop hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂✝ y) μ₂✝ μ₂✝
+BINDER explicit data l : Filter R
+BINDER explicit data l : Filter R
+BINDER explicit prop e_l : l✝ = l
+CONCL HadwigerNelson.SpectralInputs.prodFactorSigma T₂✝ hT₂ l✝ = HadwigerNelson.SpectralInputs.prodFactorSigma T₂ ⋯ l
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.prodMap₃.eq_1
+SIG HadwigerNelson.SpectralInputs.prodMap₃.eq_1.{u_1, u_2, u_3, u_4} {R : Type u_1} {Ω₁ : Type u_2} {Ω₂ : Type u_3} {Ω₃ : Type u_4} (T₁ : R → Ω₁ → Ω₁) (T₂ : R → Ω₂ → Ω₂) (T₃ : R → Ω₃ → Ω₃) (y : R) : HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃ y = Prod.map (T₁ y) (Prod.map (T₂ y) (T₃ y))
+BINDER implicit data R : Type u_1
+BINDER implicit data Ω₁ : Type u_2
+BINDER implicit data Ω₂ : Type u_3
+BINDER implicit data Ω₃ : Type u_4
+BINDER explicit data T₁ : R → Ω₁ → Ω₁
+BINDER explicit data T₂ : R → Ω₂ → Ω₂
+BINDER explicit data T₃ : R → Ω₃ → Ω₃
+BINDER explicit data y : R
+CONCL HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃ y = Prod.map (T₁ y) (Prod.map (T₂ y) (T₃ y))
+@@ THM Proofs.HadwigerNelson.Arith.ProductFactor HadwigerNelson.SpectralInputs.univ_mem_cylSets
+SIG HadwigerNelson.SpectralInputs.univ_mem_cylSets.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace B] (ε : R → Ω₃ → B) : Set.univ ∈ HadwigerNelson.SpectralInputs.cylSets ε
+BINDER implicit data R : Type u_1
+BINDER implicit data X : Type u_2
+BINDER implicit data Ω₃ : Type u_3
+BINDER implicit data B : Type u_4
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3257639354._hygCtx._hyg.6 : MeasurableSpace X
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.ProductFactor.3257639354._hygCtx._hyg.12 : MeasurableSpace B
+BINDER explicit data ε : R → Ω₃ → B
+CONCL Set.univ ∈ HadwigerNelson.SpectralInputs.cylSets ε
+@@ THM Proofs.HadwigerNelson.Arith.RatioBound HadwigerNelson.RatioBound.card_mul_le_of_indep
+SIG HadwigerNelson.RatioBound.card_mul_le_of_indep.{u_1} {G : Type u_1} [AddCommGroup G] [Fintype G] [DecidableEq G] (S : Finset G) {m : ℝ} (hm : 0 ≤ m) (hS : ∀ (ψ : AddChar G ℂ), ψ ≠ 1 → -m ≤ (∑ s ∈ S, ψ s).re) (I : Finset G) (hI : ∀ x ∈ I, ∀ y ∈ I, x - y ∉ S) : ↑I.card * (↑S.card + m) ≤ m * ↑(Fintype.card G)
+BINDER implicit data G : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.1972707409._hygCtx._hyg.3 : AddCommGroup G
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.1972707409._hygCtx._hyg.6 : Fintype G
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.1972707409._hygCtx._hyg.9 : DecidableEq G
+BINDER explicit data S : Finset G
+BINDER implicit data m : ℝ
+BINDER explicit prop hm : 0 ≤ m
+BINDER explicit prop hS : ∀ (ψ : AddChar G ℂ), ψ ≠ 1 → -m ≤ (∑ s ∈ S, ψ s).re
+BINDER explicit data I : Finset G
+BINDER explicit prop hI : ∀ x ∈ I, ∀ y ∈ I, x - y ∉ S
+CONCL ↑I.card * (↑S.card + m) ≤ m * ↑(Fintype.card G)
+@@ THM Proofs.HadwigerNelson.Arith.RatioBound HadwigerNelson.RatioBound.fourier_sq_mul_charSum
+SIG HadwigerNelson.RatioBound.fourier_sq_mul_charSum.{u_1} {G : Type u_1} [AddCommGroup G] [Fintype G] (I S : Finset G) (ψ : AddChar G ℂ) : (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) * ∑ s ∈ S, ψ s = ∑ x ∈ I, ∑ y ∈ I, ∑ s ∈ S, ψ (x - y + s)
+BINDER implicit data G : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.35159112._hygCtx._hyg.3 : AddCommGroup G
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.35159112._hygCtx._hyg.6 : Fintype G
+BINDER explicit data I : Finset G
+BINDER explicit data S : Finset G
+BINDER explicit data ψ : AddChar G ℂ
+CONCL (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) * ∑ s ∈ S, ψ s = ∑ x ∈ I, ∑ y ∈ I, ∑ s ∈ S, ψ (x - y + s)
+@@ THM Proofs.HadwigerNelson.Arith.RatioBound HadwigerNelson.RatioBound.le_chromaticNumber_of_charSum
+SIG HadwigerNelson.RatioBound.le_chromaticNumber_of_charSum.{u_1} {G : Type u_1} [AddCommGroup G] [Fintype G] [DecidableEq G] (S : Finset G) (h0 : 0 ∉ S) (H : SimpleGraph G) (hH : ∀ (x y : G), x ≠ y → x - y ∈ S → H.Adj x y) {m : ℝ} (hm : 0 < m) (hS : ∀ (ψ : AddChar G ℂ), ψ ≠ 1 → -m ≤ (∑ s ∈ S, ψ s).re) (N : ℕ) (hN : (↑N - 1) * m < ↑S.card + m) : ↑N ≤ H.chromaticNumber
+BINDER implicit data G : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.2163247903._hygCtx._hyg.3 : AddCommGroup G
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.2163247903._hygCtx._hyg.6 : Fintype G
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.2163247903._hygCtx._hyg.9 : DecidableEq G
+BINDER explicit data S : Finset G
+BINDER explicit prop h0 : 0 ∉ S
+BINDER explicit data H : SimpleGraph G
+BINDER explicit prop hH : ∀ (x y : G), x ≠ y → x - y ∈ S → H.Adj x y
+BINDER implicit data m : ℝ
+BINDER explicit prop hm : 0 < m
+BINDER explicit prop hS : ∀ (ψ : AddChar G ℂ), ψ ≠ 1 → -m ≤ (∑ s ∈ S, ψ s).re
+BINDER explicit data N : ℕ
+BINDER explicit prop hN : (↑N - 1) * m < ↑S.card + m
+CONCL ↑N ≤ H.chromaticNumber
+@@ THM Proofs.HadwigerNelson.Arith.RatioBound HadwigerNelson.RatioBound.sum_fourier_sq
+SIG HadwigerNelson.RatioBound.sum_fourier_sq.{u_1} {G : Type u_1} [AddCommGroup G] [Fintype G] [DecidableEq G] (I : Finset G) : ∑ ψ, (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) = ↑(Fintype.card G) * ↑I.card
+BINDER implicit data G : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.2692959116._hygCtx._hyg.3 : AddCommGroup G
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.2692959116._hygCtx._hyg.6 : Fintype G
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.2692959116._hygCtx._hyg.9 : DecidableEq G
+BINDER explicit data I : Finset G
+CONCL ∑ ψ, (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) = ↑(Fintype.card G) * ↑I.card
+@@ THM Proofs.HadwigerNelson.Arith.RatioBound HadwigerNelson.RatioBound.sum_fourier_sq_mul_charSum_eq_zero
+SIG HadwigerNelson.RatioBound.sum_fourier_sq_mul_charSum_eq_zero.{u_1} {G : Type u_1} [AddCommGroup G] [Fintype G] [DecidableEq G] (S I : Finset G) (hI : ∀ x ∈ I, ∀ y ∈ I, x - y ∉ S) : ∑ ψ, (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) * ∑ s ∈ S, ψ s = 0
+BINDER implicit data G : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.2625095081._hygCtx._hyg.3 : AddCommGroup G
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.2625095081._hygCtx._hyg.6 : Fintype G
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.RatioBound.2625095081._hygCtx._hyg.9 : DecidableEq G
+BINDER explicit data S : Finset G
+BINDER explicit data I : Finset G
+BINDER explicit prop hI : ∀ x ∈ I, ∀ y ∈ I, x - y ∉ S
+CONCL ∑ ψ, (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) * ∑ s ∈ S, ψ s = 0
+@@ THM Proofs.HadwigerNelson.Arith.TargetFloors HadwigerNelson.StandingFive.seven_le_localBound_of_kloosterman
+SIG HadwigerNelson.StandingFive.seven_le_localBound_of_kloosterman (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F) : 7 ≤ HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField
+BINDER explicit prop hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F
+CONCL 7 ≤ HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField
+@@ THM Proofs.HadwigerNelson.Arith.TargetFloors HadwigerNelson.StandingFive.standingFloor_five
+SIG HadwigerNelson.StandingFive.standingFloor_five (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F) : HadwigerNelson.StandingFive.StandingFloor 5
+BINDER explicit prop hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F
+CONCL HadwigerNelson.StandingFive.StandingFloor 5
+@@ THM Proofs.HadwigerNelson.Arith.TargetFloors HadwigerNelson.StandingFive.standingFloor_mono
+SIG HadwigerNelson.StandingFive.standingFloor_mono {n n' : ℕ} (h : n ≤ n') (hf : HadwigerNelson.StandingFive.StandingFloor n') : HadwigerNelson.StandingFive.StandingFloor n
+BINDER implicit data n : ℕ
+BINDER implicit data n' : ℕ
+BINDER explicit prop h : n ≤ n'
+BINDER explicit prop hf : HadwigerNelson.StandingFive.StandingFloor n'
+CONCL HadwigerNelson.StandingFive.StandingFloor n
+@@ THM Proofs.HadwigerNelson.Arith.TargetFloors HadwigerNelson.StandingFive.standingFloor_seven
+SIG HadwigerNelson.StandingFive.standingFloor_seven (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F) : HadwigerNelson.StandingFive.StandingFloor 7
+BINDER explicit prop hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F
+CONCL HadwigerNelson.StandingFive.StandingFloor 7
+@@ THM Proofs.HadwigerNelson.Arith.TargetFloors HadwigerNelson.StandingFive.targetFloor_mono
+SIG HadwigerNelson.StandingFive.targetFloor_mono {n n' Q : ℕ} (h : n ≤ n') (hf : HadwigerNelson.StandingFive.TargetFloor n' Q) : HadwigerNelson.StandingFive.TargetFloor n Q
+BINDER implicit data n : ℕ
+BINDER implicit data n' : ℕ
+BINDER implicit data Q : ℕ
+BINDER explicit prop h : n ≤ n'
+BINDER explicit prop hf : HadwigerNelson.StandingFive.TargetFloor n' Q
+CONCL HadwigerNelson.StandingFive.TargetFloor n Q
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.circle_sum_le_weil
+SIG HadwigerNelson.StandingFive.circle_sum_le_weil.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (a : F) (b : F × F) (hb : b ≠ 0) (h : a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0) : ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * √↑(Fintype.card F)
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.760209720._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.760209720._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.760209720._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hodd : ringChar F ≠ 2
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ψ ≠ 1
+BINDER explicit data a : F
+BINDER explicit data b : F × F
+BINDER explicit prop hb : b ≠ 0
+BINDER explicit prop h : a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0
+CONCL ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * √↑(Fintype.card F)
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.five_le_chromaticNumber_weil
+SIG HadwigerNelson.StandingFive.five_le_chromaticNumber_weil (hRow123 : min (HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField) 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber) : 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+BINDER explicit prop hRow123 : min (HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField) 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+CONCL 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.four_mul_mul_ne_zero_iff
+SIG HadwigerNelson.StandingFive.four_mul_mul_ne_zero_iff.{u_1} {F : Type u_1} [Field F] (hp : ringChar F ≠ 2) (c d : F) : 4 * c * d ≠ 0 ↔ c ≠ 0 ∧ d ≠ 0
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.1467434817._hygCtx._hyg.3 : Field F
+BINDER explicit prop hp : ringChar F ≠ 2
+BINDER explicit data c : F
+BINDER explicit data d : F
+CONCL 4 * c * d ≠ 0 ↔ c ≠ 0 ∧ d ≠ 0
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two
+SIG HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two.{u_1} (F : Type u_1) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 2) : HadwigerNelson.StandingFive.KloostermanBound F
+BINDER explicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.194185862._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.194185862._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.194185862._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hp : ringChar F ≠ 2
+CONCL HadwigerNelson.StandingFive.KloostermanBound F
+@@ AXIOM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.kloosterman_bound
+SIG HadwigerNelson.StandingFive.kloosterman_bound.{u} (F : Type u) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ∃ x, ψ x ≠ 1) (c d a : F) (h4 : 4 * c * d = a) (ha : a ≠ 0) : ‖∑ x with x ≠ 0, ψ (c * x + d * x⁻¹)‖ ≤ 2 * √↑(Fintype.card F)
+BINDER explicit data F : Type u
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.867119030._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.867119030._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.867119030._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hp : ringChar F ≠ 2
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ∃ x, ψ x ≠ 1
+BINDER explicit data c : F
+BINDER explicit data d : F
+BINDER explicit data a : F
+BINDER explicit prop h4 : 4 * c * d = a
+BINDER explicit prop ha : a ≠ 0
+CONCL ‖∑ x with x ≠ 0, ψ (c * x + d * x⁻¹)‖ ≤ 2 * √↑(Fintype.card F)
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.kloosterman_bound_model
+SIG HadwigerNelson.StandingFive.kloosterman_bound_model : ringChar (ZMod 3) ≠ 2 ∧ (∃ x, ZMod.stdAddChar x ≠ 1) ∧ 4 * 1 * 1 = 1 ∧ 1 ≠ 0 ∧ ‖∑ x with x ≠ 0, ZMod.stdAddChar (1 * x + 1 * x⁻¹)‖ ≤ 2 * √↑(Fintype.card (ZMod 3))
+CONCL ringChar (ZMod 3) ≠ 2 ∧ (∃ x, ZMod.stdAddChar x ≠ 1) ∧ 4 * 1 * 1 = 1 ∧ 1 ≠ 0 ∧ ‖∑ x with x ≠ 0, ZMod.stdAddChar (1 * x + 1 * x⁻¹)‖ ≤ 2 * √↑(Fintype.card (ZMod 3))
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound
+SIG HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hK : HadwigerNelson.StandingFive.KloostermanBound F) (hp : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ∃ x, ψ x ≠ 1) (c d a : F) (h4 : 4 * c * d = a) (ha : a ≠ 0) : ‖∑ x with x ≠ 0, ψ (c * x + d * x⁻¹)‖ ≤ 2 * √↑(Fintype.card F)
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.3790167823._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.3790167823._hygCtx._hyg.6 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.3790167823._hygCtx._hyg.9 : DecidableEq F
+BINDER explicit prop hK : HadwigerNelson.StandingFive.KloostermanBound F
+BINDER explicit prop hp : ringChar F ≠ 2
+BINDER explicit data ψ : AddChar F ℂ
+BINDER explicit prop hψ : ∃ x, ψ x ≠ 1
+BINDER explicit data c : F
+BINDER explicit data d : F
+BINDER explicit data a : F
+BINDER explicit prop h4 : 4 * c * d = a
+BINDER explicit prop ha : a ≠ 0
+CONCL ‖∑ x with x ≠ 0, ψ (c * x + d * x⁻¹)‖ ≤ 2 * √↑(Fintype.card F)
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.ringChar_ne_two_of_card_mod_four
+SIG HadwigerNelson.StandingFive.ringChar_ne_two_of_card_mod_four.{u_1} {F : Type u_1} [Field F] [Fintype F] (h : Fintype.card F % 4 = 3) : ringChar F ≠ 2
+BINDER implicit data F : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.877675956._hygCtx._hyg.3 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.877675956._hygCtx._hyg.6 : Fintype F
+BINDER explicit prop h : Fintype.card F % 4 = 3
+CONCL ringChar F ≠ 2
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.seven_le_localBound_weil
+SIG HadwigerNelson.StandingFive.seven_le_localBound_weil : 7 ≤ HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField
+CONCL 7 ≤ HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.standingFloor_five_weil
+SIG HadwigerNelson.StandingFive.standingFloor_five_weil : HadwigerNelson.StandingFive.StandingFloor 5
+CONCL HadwigerNelson.StandingFive.StandingFloor 5
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.standingFloor_seven_weil
+SIG HadwigerNelson.StandingFive.standingFloor_seven_weil : HadwigerNelson.StandingFive.StandingFloor 7
+CONCL HadwigerNelson.StandingFive.StandingFloor 7
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.sum_units_eq_sum_ne_zero
+SIG HadwigerNelson.StandingFive.sum_units_eq_sum_ne_zero.{u_1, u_2} {F : Type u_1} {M : Type u_2} [Field F] [Fintype F] [DecidableEq F] [AddCommMonoid M] (g : F → M) : ∑ x, g ↑x = ∑ x with x ≠ 0, g x
+BINDER implicit data F : Type u_1
+BINDER implicit data M : Type u_2
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.3109983914._hygCtx._hyg.4 : Field F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.3109983914._hygCtx._hyg.7 : Fintype F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.3109983914._hygCtx._hyg.10 : DecidableEq F
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.WeilKloosterman.3109983914._hygCtx._hyg.13 : AddCommMonoid M
+BINDER explicit data g : F → M
+CONCL ∑ x, g ↑x = ∑ x with x ≠ 0, g x
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.targetFloor_seven_weil
+SIG HadwigerNelson.StandingFive.targetFloor_seven_weil {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 98 ≤ Q) : HadwigerNelson.StandingFive.TargetFloor 7 Q
+BINDER implicit data Q : ℕ
+BINDER explicit prop hQ4 : Q % 4 = 3
+BINDER explicit prop hQ : 98 ≤ Q
+CONCL HadwigerNelson.StandingFive.TargetFloor 7 Q
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.targetFloor_six_of_kloosterman
+SIG HadwigerNelson.StandingFive.targetFloor_six_of_kloosterman {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 62 ≤ Q) (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F) : HadwigerNelson.StandingFive.TargetFloor 6 Q
+BINDER implicit data Q : ℕ
+BINDER explicit prop hQ4 : Q % 4 = 3
+BINDER explicit prop hQ : 62 ≤ Q
+BINDER explicit prop hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F
+CONCL HadwigerNelson.StandingFive.TargetFloor 6 Q
+@@ THM Proofs.HadwigerNelson.Arith.WeilKloosterman HadwigerNelson.StandingFive.targetFloor_six_weil
+SIG HadwigerNelson.StandingFive.targetFloor_six_weil {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 62 ≤ Q) : HadwigerNelson.StandingFive.TargetFloor 6 Q
+BINDER implicit data Q : ℕ
+BINDER explicit prop hQ4 : Q % 4 = 3
+BINDER explicit prop hQ : 62 ≤ Q
+CONCL HadwigerNelson.StandingFive.TargetFloor 6 Q
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.continuous_measure_inter_closedBall
+SIG HadwigerNelson.Plane.continuous_measure_inter_closedBall.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (S : Set E) {ρ : ℝ} (hρ : 0 < ρ) : Continuous fun c => μ (S ∩ Metric.closedBall c ρ)
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1472945896._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1472945896._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1472945896._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1472945896._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1472945896._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1472945896._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER explicit data S : Set E
+BINDER implicit data ρ : ℝ
+BINDER explicit prop hρ : 0 < ρ
+CONCL Continuous fun c => μ (S ∩ Metric.closedBall c ρ)
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.exists_closedBall_ratio_eq_half
+SIG HadwigerNelson.Plane.exists_closedBall_ratio_eq_half.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) {c₀ a b : E} {R δ : ℝ} (ha : a ∈ Metric.ball c₀ R) (hb : b ∈ Metric.ball c₀ R) (hδ : 0 < δ) (hSa : Filter.Tendsto (fun r => μ (S ∩ Metric.closedBall a r) / μ (Metric.closedBall a r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)) (hSb : Filter.Tendsto (fun r => μ (Sᶜ ∩ Metric.closedBall b r) / μ (Metric.closedBall b r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)) : ∃ c ρ, 0 < ρ ∧ ρ ≤ δ ∧ Metric.closedBall c ρ ⊆ Metric.closedBall c₀ R ∧ μ (S ∩ Metric.closedBall c ρ) / μ (Metric.closedBall c ρ) = 1 / 2
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.957150831._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.957150831._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.957150831._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.957150831._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.957150831._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.957150831._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data S : Set E
+BINDER explicit prop hS : MeasureTheory.NullMeasurableSet S μ
+BINDER implicit data c₀ : E
+BINDER implicit data a : E
+BINDER implicit data b : E
+BINDER implicit data R : ℝ
+BINDER implicit data δ : ℝ
+BINDER explicit prop ha : a ∈ Metric.ball c₀ R
+BINDER explicit prop hb : b ∈ Metric.ball c₀ R
+BINDER explicit prop hδ : 0 < δ
+BINDER explicit prop hSa : Filter.Tendsto (fun r => μ (S ∩ Metric.closedBall a r) / μ (Metric.closedBall a r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+BINDER explicit prop hSb : Filter.Tendsto (fun r => μ (Sᶜ ∩ Metric.closedBall b r) / μ (Metric.closedBall b r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+CONCL ∃ c ρ, 0 < ρ ∧ ρ ≤ δ ∧ Metric.closedBall c ρ ⊆ Metric.closedBall c₀ R ∧ μ (S ∩ Metric.closedBall c ρ) / μ (Metric.closedBall c ρ) = 1 / 2
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.exists_closedBall_ratio_eq_half_of_measure_ne_zero
+SIG HadwigerNelson.Plane.exists_closedBall_ratio_eq_half_of_measure_ne_zero.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ c r, 0 < r ∧ μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1412499128._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1412499128._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1412499128._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1412499128._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1412499128._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1412499128._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data S : Set E
+BINDER explicit prop hS : MeasureTheory.NullMeasurableSet S μ
+BINDER explicit prop h1 : μ S ≠ 0
+BINDER explicit prop h2 : μ Sᶜ ≠ 0
+CONCL ∃ c r, 0 < r ∧ μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.exists_closedBall_subset_ratio_eq_half
+SIG HadwigerNelson.Plane.exists_closedBall_subset_ratio_eq_half.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) {c : E} {r : ℝ} (hr : 0 < r) (h : μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2) : ∃ c' r', 0 < r' ∧ r' ≤ r / 2 ∧ Metric.closedBall c' r' ⊆ Metric.closedBall c r ∧ μ (S ∩ Metric.closedBall c' r') / μ (Metric.closedBall c' r') = 1 / 2
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2427335318._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2427335318._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2427335318._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2427335318._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2427335318._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2427335318._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data S : Set E
+BINDER explicit prop hS : MeasureTheory.NullMeasurableSet S μ
+BINDER implicit data c : E
+BINDER implicit data r : ℝ
+BINDER explicit prop hr : 0 < r
+BINDER explicit prop h : μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2
+CONCL ∃ c' r', 0 < r' ∧ r' ≤ r / 2 ∧ Metric.closedBall c' r' ⊆ Metric.closedBall c r ∧ μ (S ∩ Metric.closedBall c' r') / μ (Metric.closedBall c' r') = 1 / 2
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.exists_mem_ball_tendsto_ratio
+SIG HadwigerNelson.Plane.exists_mem_ball_tendsto_ratio.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (A : Set E) {c : E} {ρ : ℝ} (h : μ (A ∩ Metric.ball c ρ) ≠ 0) : ∃ a ∈ Metric.ball c ρ, Filter.Tendsto (fun r => μ (A ∩ Metric.closedBall a r) / μ (Metric.closedBall a r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1362973453._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1362973453._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1362973453._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1362973453._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1362973453._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1362973453._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER explicit data A : Set E
+BINDER implicit data c : E
+BINDER implicit data ρ : ℝ
+BINDER explicit prop h : μ (A ∩ Metric.ball c ρ) ≠ 0
+CONCL ∃ a ∈ Metric.ball c ρ, Filter.Tendsto (fun r => μ (A ∩ Metric.closedBall a r) / μ (Metric.closedBall a r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.exists_nested_closedBalls_ratio_eq_half
+SIG HadwigerNelson.Plane.exists_nested_closedBalls_ratio_eq_half.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ c r, (∀ (n : ℕ), 0 < r n) ∧ (∀ (n : ℕ), r (n + 1) ≤ r n / 2) ∧ (∀ (n : ℕ), Metric.closedBall (c (n + 1)) (r (n + 1)) ⊆ Metric.closedBall (c n) (r n)) ∧ ∀ (n : ℕ), μ (S ∩ Metric.closedBall (c n) (r n)) / μ (Metric.closedBall (c n) (r n)) = 1 / 2
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.717224455._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.717224455._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.717224455._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.717224455._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.717224455._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.717224455._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data S : Set E
+BINDER explicit prop hS : MeasureTheory.NullMeasurableSet S μ
+BINDER explicit prop h1 : μ S ≠ 0
+BINDER explicit prop h2 : μ Sᶜ ≠ 0
+CONCL ∃ c r, (∀ (n : ℕ), 0 < r n) ∧ (∀ (n : ℕ), r (n + 1) ≤ r n / 2) ∧ (∀ (n : ℕ), Metric.closedBall (c (n + 1)) (r (n + 1)) ⊆ Metric.closedBall (c n) (r n)) ∧ ∀ (n : ℕ), μ (S ∩ Metric.closedBall (c n) (r n)) / μ (Metric.closedBall (c n) (r n)) = 1 / 2
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.exists_not_tendsto_ratio_and_compl
+SIG HadwigerNelson.Plane.exists_not_tendsto_ratio_and_compl.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ x, ¬Filter.Tendsto (fun r => μ (S ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1) ∧ ¬Filter.Tendsto (fun r => μ (Sᶜ ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1442993213._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1442993213._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1442993213._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1442993213._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1442993213._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1442993213._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data S : Set E
+BINDER explicit prop hS : MeasureTheory.NullMeasurableSet S μ
+BINDER explicit prop h1 : μ S ≠ 0
+BINDER explicit prop h2 : μ Sᶜ ≠ 0
+CONCL ∃ x, ¬Filter.Tendsto (fun r => μ (S ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1) ∧ ¬Filter.Tendsto (fun r => μ (Sᶜ ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.exists_ratio_ge_and_compl_ge
+SIG HadwigerNelson.Plane.exists_ratio_ge_and_compl_ge.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ x s, (∀ (n : ℕ), 0 < s n) ∧ Filter.Tendsto s Filter.atTop (nhds 0) ∧ ∀ (n : ℕ), (2 * 2 ^ Module.finrank ℝ E)⁻¹ ≤ μ (S ∩ Metric.closedBall x (s n)) / μ (Metric.closedBall x (s n)) ∧ (2 * 2 ^ Module.finrank ℝ E)⁻¹ ≤ μ (Sᶜ ∩ Metric.closedBall x (s n)) / μ (Metric.closedBall x (s n))
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1864813609._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1864813609._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1864813609._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1864813609._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1864813609._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1864813609._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data S : Set E
+BINDER explicit prop hS : MeasureTheory.NullMeasurableSet S μ
+BINDER explicit prop h1 : μ S ≠ 0
+BINDER explicit prop h2 : μ Sᶜ ≠ 0
+CONCL ∃ x s, (∀ (n : ℕ), 0 < s n) ∧ Filter.Tendsto s Filter.atTop (nhds 0) ∧ ∀ (n : ℕ), (2 * 2 ^ Module.finrank ℝ E)⁻¹ ≤ μ (S ∩ Metric.closedBall x (s n)) / μ (Metric.closedBall x (s n)) ∧ (2 * 2 ^ Module.finrank ℝ E)⁻¹ ≤ μ (Sᶜ ∩ Metric.closedBall x (s n)) / μ (Metric.closedBall x (s n))
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.measure_compl_inter_closedBall_div_eq_half
+SIG HadwigerNelson.Plane.measure_compl_inter_closedBall_div_eq_half.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) {c : E} {r : ℝ} (hr : 0 < r) (h : μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2) : μ (Sᶜ ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.55214731._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.55214731._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.55214731._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.55214731._hygCtx._hyg.18 : MeasurableSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.55214731._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data S : Set E
+BINDER explicit prop hS : MeasureTheory.NullMeasurableSet S μ
+BINDER implicit data c : E
+BINDER implicit data r : ℝ
+BINDER explicit prop hr : 0 < r
+BINDER explicit prop h : μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2
+CONCL μ (Sᶜ ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.measure_inter_ball_ne_zero_of_ratio_eq_half
+SIG HadwigerNelson.Plane.measure_inter_ball_ne_zero_of_ratio_eq_half.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {A : Set E} {c : E} {ρ : ℝ} (hρ : 0 < ρ) (h : μ (A ∩ Metric.closedBall c ρ) / μ (Metric.closedBall c ρ) = 1 / 2) : μ (A ∩ Metric.ball c ρ) ≠ 0
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3042008882._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3042008882._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3042008882._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3042008882._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3042008882._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3042008882._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data A : Set E
+BINDER implicit data c : E
+BINDER implicit data ρ : ℝ
+BINDER explicit prop hρ : 0 < ρ
+BINDER explicit prop h : μ (A ∩ Metric.closedBall c ρ) / μ (Metric.closedBall c ρ) = 1 / 2
+CONCL μ (A ∩ Metric.ball c ρ) ≠ 0
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.measure_inter_closedBall_div_add_compl
+SIG HadwigerNelson.Plane.measure_inter_closedBall_div_add_compl.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) (x : E) {r : ℝ} (hr : 0 < r) : μ (S ∩ Metric.closedBall x r) / μ (Metric.closedBall x r) + μ (Sᶜ ∩ Metric.closedBall x r) / μ (Metric.closedBall x r) = 1
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.4066469549._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.4066469549._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.4066469549._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.4066469549._hygCtx._hyg.18 : MeasurableSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.4066469549._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data S : Set E
+BINDER explicit prop hS : MeasureTheory.NullMeasurableSet S μ
+BINDER explicit data x : E
+BINDER implicit data r : ℝ
+BINDER explicit prop hr : 0 < r
+CONCL μ (S ∩ Metric.closedBall x r) / μ (Metric.closedBall x r) + μ (Sᶜ ∩ Metric.closedBall x r) / μ (Metric.closedBall x r) = 1
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.measure_inter_closedBall_le_add
+SIG HadwigerNelson.Plane.measure_inter_closedBall_le_add.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (S : Set E) (c c' : E) (ρ : ℝ) : μ (S ∩ Metric.closedBall c' ρ) ≤ μ (S ∩ Metric.closedBall c ρ) + (μ (Metric.closedBall 0 (ρ + dist c' c)) - μ (Metric.closedBall 0 ρ))
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3186925154._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3186925154._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3186925154._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3186925154._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3186925154._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3186925154._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER explicit data S : Set E
+BINDER explicit data c : E
+BINDER explicit data c' : E
+BINDER explicit data ρ : ℝ
+CONCL μ (S ∩ Metric.closedBall c' ρ) ≤ μ (S ∩ Metric.closedBall c ρ) + (μ (Metric.closedBall 0 (ρ + dist c' c)) - μ (Metric.closedBall 0 ρ))
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.not_tendsto_ratio_compl_of_ratio_ge
+SIG HadwigerNelson.Plane.not_tendsto_ratio_compl_of_ratio_ge.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {A : Set E} (hA : MeasureTheory.NullMeasurableSet A μ) {x : E} {s : ℕ → ℝ} {κ : ENNReal} (hκ : κ ≠ 0) (hs : ∀ (n : ℕ), 0 < s n) (hs0 : Filter.Tendsto s Filter.atTop (nhds 0)) (h : ∀ (n : ℕ), κ ≤ μ (A ∩ Metric.closedBall x (s n)) / μ (Metric.closedBall x (s n))) : ¬Filter.Tendsto (fun r => μ (Aᶜ ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2122800962._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2122800962._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2122800962._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2122800962._hygCtx._hyg.18 : MeasurableSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.2122800962._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data A : Set E
+BINDER explicit prop hA : MeasureTheory.NullMeasurableSet A μ
+BINDER implicit data x : E
+BINDER implicit data s : ℕ → ℝ
+BINDER implicit data κ : ENNReal
+BINDER explicit prop hκ : κ ≠ 0
+BINDER explicit prop hs : ∀ (n : ℕ), 0 < s n
+BINDER explicit prop hs0 : Filter.Tendsto s Filter.atTop (nhds 0)
+BINDER explicit prop h : ∀ (n : ℕ), κ ≤ μ (A ∩ Metric.closedBall x (s n)) / μ (Metric.closedBall x (s n))
+CONCL ¬Filter.Tendsto (fun r => μ (Aᶜ ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.ratio_two_mul_ge
+SIG HadwigerNelson.Plane.ratio_two_mul_ge.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {A : Set E} {x c : E} {r : ℝ} (hr : 0 < r) (hx : x ∈ Metric.closedBall c r) (h : μ (A ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2) : (2 * 2 ^ Module.finrank ℝ E)⁻¹ ≤ μ (A ∩ Metric.closedBall x (2 * r)) / μ (Metric.closedBall x (2 * r))
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3353804977._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3353804977._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3353804977._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3353804977._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3353804977._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.3353804977._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data A : Set E
+BINDER implicit data x : E
+BINDER implicit data c : E
+BINDER implicit data r : ℝ
+BINDER explicit prop hr : 0 < r
+BINDER explicit prop hx : x ∈ Metric.closedBall c r
+BINDER explicit prop h : μ (A ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2
+CONCL (2 * 2 ^ Module.finrank ℝ E)⁻¹ ≤ μ (A ∩ Metric.closedBall x (2 * r)) / μ (Metric.closedBall x (2 * r))
+@@ THM Proofs.HadwigerNelson.Plane.MetricalBoundary HadwigerNelson.Plane.tendsto_measure_closedBall_sub
+SIG HadwigerNelson.Plane.tendsto_measure_closedBall_sub.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {ρ : ℝ} (hρ : 0 < ρ) : Filter.Tendsto (fun d => μ (Metric.closedBall 0 (ρ + d)) - μ (Metric.closedBall 0 ρ)) (nhds 0) (nhds 0)
+BINDER implicit data E : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1971786193._hygCtx._hyg.3 : NormedAddCommGroup E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1971786193._hygCtx._hyg.6 : NormedSpace ℝ E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1971786193._hygCtx._hyg.12 : FiniteDimensional ℝ E
+BINDER inst data inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1971786193._hygCtx._hyg.18 : MeasurableSpace E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1971786193._hygCtx._hyg.21 : BorelSpace E
+BINDER explicit data μ : MeasureTheory.Measure E
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Plane.MetricalBoundary.1971786193._hygCtx._hyg.26 : μ.IsAddHaarMeasure
+BINDER implicit data ρ : ℝ
+BINDER explicit prop hρ : 0 < ρ
+CONCL Filter.Tendsto (fun d => μ (Metric.closedBall 0 (ρ + d)) - μ (Metric.closedBall 0 ρ)) (nhds 0) (nhds 0)
+@@ THM Proofs.HadwigerNelson.Plane.FalconerReduction HadwigerNelson.Plane.falconer_lemma2_nonempty
+SIG HadwigerNelson.Plane.falconer_lemma2_nonempty {S : Set ℂ} (hS : MeasurableSet S) (h1 : MeasureTheory.volume S ≠ 0) (h2 : MeasureTheory.volume Sᶜ ≠ 0) : ∃ x ∉ HadwigerNelson.Plane.densitySet S, x ∉ HadwigerNelson.Plane.densitySet Sᶜ
+BINDER implicit data S : Set ℂ
+BINDER explicit prop hS : MeasurableSet S
+BINDER explicit prop h1 : MeasureTheory.volume S ≠ 0
+BINDER explicit prop h2 : MeasureTheory.volume Sᶜ ≠ 0
+CONCL ∃ x ∉ HadwigerNelson.Plane.densitySet S, x ∉ HadwigerNelson.Plane.densitySet Sᶜ
+@@ THM Proofs.HadwigerNelson.Plane.FalconerReduction HadwigerNelson.Plane.falconer_reduction
+SIG HadwigerNelson.Plane.falconer_reduction {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V) (hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) (hr : 1 / 2 < dist t a) (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)) (S : Fin k → Set ℂ) (hS : ∀ (j : Fin k), MeasurableSet (S j)) (hcov : ⋃ j, S j = Set.univ) : ∃ j, ∃ x ∈ S j, ∃ y ∈ S j, dist x y = 1
+BINDER implicit data k : ℕ
+BINDER explicit data V : Finset ℂ
+BINDER implicit data a : ℂ
+BINDER implicit data t : ℂ
+BINDER explicit prop ha : a ∈ V
+BINDER explicit prop ht : t ∈ V
+BINDER explicit prop hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩
+BINDER explicit prop hr : 1 / 2 < dist t a
+BINDER explicit prop hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)
+BINDER explicit data S : Fin k → Set ℂ
+BINDER explicit prop hS : ∀ (j : Fin k), MeasurableSet (S j)
+BINDER explicit prop hcov : ⋃ j, S j = Set.univ
+CONCL ∃ j, ∃ x ∈ S j, ∃ y ∈ S j, dist x y = 1
+@@ THM Proofs.HadwigerNelson.Plane.FalconerReduction HadwigerNelson.Plane.le_chiM_of_falconerFan
+SIG HadwigerNelson.Plane.le_chiM_of_falconerFan {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V) (hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) (hr : 1 / 2 < dist t a) (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)) : ↑(k + 1) ≤ HadwigerNelson.Plane.chiM
+BINDER implicit data k : ℕ
+BINDER explicit data V : Finset ℂ
+BINDER implicit data a : ℂ
+BINDER implicit data t : ℂ
+BINDER explicit prop ha : a ∈ V
+BINDER explicit prop ht : t ∈ V
+BINDER explicit prop hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩
+BINDER explicit prop hr : 1 / 2 < dist t a
+BINDER explicit prop hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)
+CONCL ↑(k + 1) ≤ HadwigerNelson.Plane.chiM
+@@ THM Proofs.HadwigerNelson.Plane.FalconerReduction HadwigerNelson.Plane.exists_mem_falconerE
+SIG HadwigerNelson.Plane.exists_mem_falconerE {k : ℕ} {S : Fin k → Set ℂ} (hS : ∀ (j : Fin k), MeasurableSet (S j)) (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = Set.univ) (hno : ∀ (j : Fin k), ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1) : ∃ x, ∀ (j : Fin k), x ∉ HadwigerNelson.Plane.densitySet (S j)
+BINDER implicit data k : ℕ
+BINDER implicit data S : Fin k → Set ℂ
+BINDER explicit prop hS : ∀ (j : Fin k), MeasurableSet (S j)
+BINDER explicit prop hd : Pairwise (Function.onFun Disjoint S)
+BINDER explicit prop hcov : ⋃ j, S j = Set.univ
+BINDER explicit prop hno : ∀ (j : Fin k), ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1
+CONCL ∃ x, ∀ (j : Fin k), x ∉ HadwigerNelson.Plane.densitySet (S j)
+@@ THM Proofs.HadwigerNelson.Plane.FalconerReduction HadwigerNelson.Plane.fan_tip_ae_mem
+SIG HadwigerNelson.Plane.fan_tip_ae_mem {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V) (hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) {S : Fin k → Set ℂ} (hS : ∀ (j : Fin k), MeasurableSet (S j)) (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = Set.univ) (hno : ∀ (j : Fin k), ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1) : ∃ c i j, i ≠ j ∧ ∀ᵐ (θ : ℝ) ∂HadwigerNelson.Plane.arcLength, c + ↑(dist t a) * HadwigerNelson.Plane.e θ ∈ HadwigerNelson.Plane.densitySet (S i) ∪ HadwigerNelson.Plane.densitySet (S j)
+BINDER implicit data k : ℕ
+BINDER explicit data V : Finset ℂ
+BINDER implicit data a : ℂ
+BINDER implicit data t : ℂ
+BINDER explicit prop ha : a ∈ V
+BINDER explicit prop ht : t ∈ V
+BINDER explicit prop hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩
+BINDER implicit data S : Fin k → Set ℂ
+BINDER explicit prop hS : ∀ (j : Fin k), MeasurableSet (S j)
+BINDER explicit prop hd : Pairwise (Function.onFun Disjoint S)
+BINDER explicit prop hcov : ⋃ j, S j = Set.univ
+BINDER explicit prop hno : ∀ (j : Fin k), ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1
+CONCL ∃ c i j, i ≠ j ∧ ∀ᵐ (θ : ℝ) ∂HadwigerNelson.Plane.arcLength, c + ↑(dist t a) * HadwigerNelson.Plane.e θ ∈ HadwigerNelson.Plane.densitySet (S i) ∪ HadwigerNelson.Plane.densitySet (S j)
+@@ THM Proofs.HadwigerNelson.Arith.SpectralInputs HadwigerNelson.SpectralInputs.sp_if
+SIG HadwigerNelson.SpectralInputs.sp_if {F : Subfield ℝ} (I : HadwigerNelson.SpectralChain.Interface F) (hBH : HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing F)) (hmul : I.MulStable) (hcirc : I.NegCircle) {ν m : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)} (hfin : MeasureTheory.IsFiniteMeasure ν) (hrot : HadwigerNelson.SpectralChain.RotInv F ν) (hE : ν I.E = 0) (hm : HadwigerNelson.SpectralInputs.IsHaarFourier m) (hnh : ∀ (a : ENNReal), ν ≠ a • m) : ∃ τ, MeasureTheory.IsFiniteMeasure τ ∧ HadwigerNelson.SpectralChain.RotInv F τ ∧ τ I.E = 0 ∧ ∫ (χ : HadwigerNelson.SpectralChain.Dual F), (↑(χ 1)).re ∂τ < 0
+BINDER implicit data F : Subfield ℝ
+BINDER explicit data I : HadwigerNelson.SpectralChain.Interface F
+BINDER explicit prop hBH : HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing F)
+BINDER explicit prop hmul : I.MulStable
+BINDER explicit prop hcirc : I.NegCircle
+BINDER implicit data ν : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)
+BINDER implicit data m : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)
+BINDER explicit prop hfin : MeasureTheory.IsFiniteMeasure ν
+BINDER explicit prop hrot : HadwigerNelson.SpectralChain.RotInv F ν
+BINDER explicit prop hE : ν I.E = 0
+BINDER explicit prop hm : HadwigerNelson.SpectralInputs.IsHaarFourier m
+BINDER explicit prop hnh : ∀ (a : ENNReal), ν ≠ a • m
+CONCL ∃ τ, MeasureTheory.IsFiniteMeasure τ ∧ HadwigerNelson.SpectralChain.RotInv F τ ∧ τ I.E = 0 ∧ ∫ (χ : HadwigerNelson.SpectralChain.Dual F), (↑(χ 1)).re ∂τ < 0
+@@ THM Proofs.HadwigerNelson.Arith.SpectralInputs HadwigerNelson.SpectralInputs.si4
+SIG HadwigerNelson.SpectralInputs.si4.{u_1, u_2} {Ω : Type u_1} {V : Type u_2} [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : MeasureTheory.Measure Ω) [MeasureTheory.IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) (c : Ω → V → Fin 4) (hc : ∀ (x : V), Measurable fun ω => c ω x) (adj : V → V → Prop) (hdisj : ∀ (x y : V), adj x y → ∀ (j : Fin 4), ∫ (ω : Ω), μ[{ω' | c ω' x = j}.indicator fun x => 1 | 𝒜] ω * μ[{ω' | c ω' y = j}.indicator fun x => 1 | 𝒜] ω ∂μ = 0) (f : Finset (Fin 4) → Fin 4) (hf : ∀ (s : Finset (Fin 4)), s.Nonempty → f s ∈ s) : (∀ (x : V), Measurable fun ω => f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x)) ∧ (∀ᵐ (ω : Ω) ∂μ, ∀ (x y : V), adj x y → f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x) ≠ f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω y)) ∧ ∀ᵐ (ω : Ω) ∂μ, ∀ (x : V), c ω x ∈ HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x
+BINDER implicit data Ω : Type u_1
+BINDER implicit data V : Type u_2
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.SpectralInputs.1152247360._hygCtx._hyg.4 : Countable V
+BINDER explicit data 𝒜 : MeasurableSpace Ω
+BINDER inst data m0 : MeasurableSpace Ω
+BINDER explicit data μ : MeasureTheory.Measure Ω
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.SpectralInputs.1152247360._hygCtx._hyg.13 : MeasureTheory.IsProbabilityMeasure μ
+BINDER explicit prop h𝒜 : 𝒜 ≤ m0
+BINDER explicit data c : Ω → V → Fin 4
+BINDER explicit prop hc : ∀ (x : V), Measurable fun ω => c ω x
+BINDER explicit data adj : V → V → Prop
+BINDER explicit prop hdisj : ∀ (x y : V), adj x y → ∀ (j : Fin 4), ∫ (ω : Ω), μ[{ω' | c ω' x = j}.indicator fun x => 1 | 𝒜] ω * μ[{ω' | c ω' y = j}.indicator fun x => 1 | 𝒜] ω ∂μ = 0
+BINDER explicit data f : Finset (Fin 4) → Fin 4
+BINDER explicit prop hf : ∀ (s : Finset (Fin 4)), s.Nonempty → f s ∈ s
+CONCL (∀ (x : V), Measurable fun ω => f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x)) ∧ (∀ᵐ (ω : Ω) ∂μ, ∀ (x y : V), adj x y → f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x) ≠ f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω y)) ∧ ∀ᵐ (ω : Ω) ∂μ, ∀ (x : V), c ω x ∈ HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x
+@@ THM Proofs.HadwigerNelson.Arith.SpectralInputs HadwigerNelson.SpectralInputs.si4_equivariant
+SIG HadwigerNelson.SpectralInputs.si4_equivariant.{u_1, u_2} {Ω : Type u_1} {V : Type u_2} [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : MeasureTheory.Measure Ω) [MeasureTheory.IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) (c : Ω → V → Fin 4) (hc : ∀ (x : V), Measurable fun ω => c ω x) {S : Ω → Ω} (hS : MeasureTheory.MeasurePreserving S μ μ) (hS𝒜 : MeasurableSpace.comap S 𝒜 = 𝒜) (π : V → V) (hπ : ∀ (ω : Ω) (x : V), c (S ω) x = c ω (π x)) : ∀ᵐ (ω : Ω) ∂μ, ∀ (x : V), HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c (S ω) x = HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω (π x)
+BINDER implicit data Ω : Type u_1
+BINDER implicit data V : Type u_2
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.SpectralInputs.3882468256._hygCtx._hyg.4 : Countable V
+BINDER explicit data 𝒜 : MeasurableSpace Ω
+BINDER inst data m0 : MeasurableSpace Ω
+BINDER explicit data μ : MeasureTheory.Measure Ω
+BINDER inst prop inst._@.Proofs.HadwigerNelson.Arith.SpectralInputs.3882468256._hygCtx._hyg.13 : MeasureTheory.IsProbabilityMeasure μ
+BINDER explicit prop h𝒜 : 𝒜 ≤ m0
+BINDER explicit data c : Ω → V → Fin 4
+BINDER explicit prop hc : ∀ (x : V), Measurable fun ω => c ω x
+BINDER implicit data S : Ω → Ω
+BINDER explicit prop hS : MeasureTheory.MeasurePreserving S μ μ
+BINDER explicit prop hS𝒜 : MeasurableSpace.comap S 𝒜 = 𝒜
+BINDER explicit data π : V → V
+BINDER explicit prop hπ : ∀ (ω : Ω) (x : V), c (S ω) x = c ω (π x)
+CONCL ∀ᵐ (ω : Ω) ∂μ, ∀ (x : V), HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c (S ω) x = HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω (π x)
+@@ THM Proofs.HadwigerNelson.Arith.SpectralInputs HadwigerNelson.SpectralInputs.spectral_carried_iff
+SIG HadwigerNelson.SpectralInputs.spectral_carried_iff.{u_1, u_2} {R : Type u_1} [AddCommGroup R] {Ω : Type u_2} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} (t : TopologicalSpace R) (ht : IsTopologicalAddGroup R) (hcount : (nhds 0).IsCountablyGenerated) (hB : HadwigerNelson.SpectralInputs.BochnerOn t) (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (hadd : ∀ (x y : R), T (x + y) = T x ∘ T y) {f : ↥(MeasureTheory.Lp ℝ 2 μ)} {σ : MeasureTheory.Measure (AddChar R Circle)} (hσ : HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ) : σ (HadwigerNelson.SpectralInputs.contChars t)ᶜ = 0 ↔ f ∈ HadwigerNelson.SpectralInputs.contVec T hT (nhds 0)
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.SpectralInputs.3033901286._hygCtx._hyg.3 : AddCommGroup R
+BINDER implicit data Ω : Type u_2
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.SpectralInputs.3033901286._hygCtx._hyg.7 : MeasurableSpace Ω
+BINDER implicit data μ : MeasureTheory.Measure Ω
+BINDER explicit data t : TopologicalSpace R
+BINDER explicit prop ht : IsTopologicalAddGroup R
+BINDER explicit prop hcount : (nhds 0).IsCountablyGenerated
+BINDER explicit prop hB : HadwigerNelson.SpectralInputs.BochnerOn t
+BINDER explicit data T : R → Ω → Ω
+BINDER explicit prop hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ
+BINDER explicit prop hadd : ∀ (x y : R), T (x + y) = T x ∘ T y
+BINDER implicit data f : ↥(MeasureTheory.Lp ℝ 2 μ)
+BINDER implicit data σ : MeasureTheory.Measure (AddChar R Circle)
+BINDER explicit prop hσ : HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ
+CONCL σ (HadwigerNelson.SpectralInputs.contChars t)ᶜ = 0 ↔ f ∈ HadwigerNelson.SpectralInputs.contVec T hT (nhds 0)
+@@ THM Proofs.HadwigerNelson.Arith.SpectralInputs HadwigerNelson.SpectralInputs.contChars_haar_null
+SIG HadwigerNelson.SpectralInputs.contChars_haar_null.{u_1} {R : Type u_1} [AddCommGroup R] (hBH : HadwigerNelson.SpectralChain.BochnerHerglotz R) (t : TopologicalSpace R) (hmeas : MeasurableSet (HadwigerNelson.SpectralInputs.contChars t)) (hsep : ∀ (r : R), r ≠ 0 → ∃ χ ∈ HadwigerNelson.SpectralInputs.contChars t, χ r ≠ 1) (hproper : HadwigerNelson.SpectralInputs.contChars t ≠ Set.univ) {m : MeasureTheory.Measure (AddChar R Circle)} (hm : HadwigerNelson.SpectralInputs.IsHaarFourier m) : m (HadwigerNelson.SpectralInputs.contChars t) = 0
+BINDER implicit data R : Type u_1
+BINDER inst data inst._@.Proofs.HadwigerNelson.Arith.SpectralInputs.3345711390._hygCtx._hyg.3 : AddCommGroup R
+BINDER explicit prop hBH : HadwigerNelson.SpectralChain.BochnerHerglotz R
+BINDER explicit data t : TopologicalSpace R
+BINDER explicit prop hmeas : MeasurableSet (HadwigerNelson.SpectralInputs.contChars t)
+BINDER explicit prop hsep : ∀ (r : R), r ≠ 0 → ∃ χ ∈ HadwigerNelson.SpectralInputs.contChars t, χ r ≠ 1
+BINDER explicit prop hproper : HadwigerNelson.SpectralInputs.contChars t ≠ Set.univ
+BINDER implicit data m : MeasureTheory.Measure (AddChar R Circle)
+BINDER explicit prop hm : HadwigerNelson.SpectralInputs.IsHaarFourier m
+CONCL m (HadwigerNelson.SpectralInputs.contChars t) = 0
+@@ THM Proofs.HadwigerNelson.Arith.StandingFive HadwigerNelson.StandingFive.numberField_standingField
+SIG HadwigerNelson.StandingFive.numberField_standingField : NumberField ↥HadwigerNelson.StandingFive.standingField
+CONCL NumberField ↥HadwigerNelson.StandingFive.standingField
+@@ THM Proofs.HadwigerNelson.Arith.StandingFive HadwigerNelson.StandingFive.instNumberFieldStanding
+SIG HadwigerNelson.StandingFive.instNumberFieldStanding : NumberField ↥HadwigerNelson.StandingFive.standingField
+CONCL NumberField ↥HadwigerNelson.StandingFive.standingField
+@@ THM Proofs.HadwigerNelson.Arith.StandingFive HadwigerNelson.StandingFive.seven_le_localBound
+SIG HadwigerNelson.StandingFive.seven_le_localBound (hFloor : HadwigerNelson.StandingFive.StandingFloor 7) : 7 ≤ HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField
+BINDER explicit prop hFloor : HadwigerNelson.StandingFive.StandingFloor 7
+CONCL 7 ≤ HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField
+@@ THM Proofs.HadwigerNelson.Arith.StandingFive HadwigerNelson.StandingFive.five_le_chromaticNumber
+SIG HadwigerNelson.StandingFive.five_le_chromaticNumber (hFloor : HadwigerNelson.StandingFive.StandingFloor 5) (hRow123 : min (HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField) 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber) : 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+BINDER explicit prop hFloor : HadwigerNelson.StandingFive.StandingFloor 5
+BINDER explicit prop hRow123 : min (HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField) 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+CONCL 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+@@ THM Proofs.HadwigerNelson.Arith.StandingFive HadwigerNelson.StandingFive.usable_card_ge
+SIG HadwigerNelson.StandingFive.usable_card_ge (w : Ideal (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField)) (hw : w.IsMaximal) (h : Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w) % 4 = 3) : 347 ≤ Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w)
+BINDER explicit data w : Ideal (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField)
+BINDER explicit prop hw : w.IsMaximal
+BINDER explicit prop h : Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w) % 4 = 3
+CONCL 347 ≤ Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w)
+@@ THM Proofs.HadwigerNelson.Arith.StandingFive HadwigerNelson.StandingFive.no_small_usable
+SIG HadwigerNelson.StandingFive.no_small_usable (w : Ideal (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField)) (hw : w.IsMaximal) (h : Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w) % 4 = 3) : 47 < Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w)
+BINDER explicit data w : Ideal (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField)
+BINDER explicit prop hw : w.IsMaximal
+BINDER explicit prop h : Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w) % 4 = 3
+CONCL 47 < Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w)
+TOTAL wave=177 extra=16
+=== END ===

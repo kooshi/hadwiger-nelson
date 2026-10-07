@@ -1,0 +1,5 @@
+MATCH     LEAN.md:34 (verbatim)  ::  - **Our own hand results** that a module needs before their own module lands enter as expl
+quotations=1 mismatched=0
+MISMATCH  LEAN.md: the quoted line is not a line of the file  ::  - **Our own band results** that a module needs before their own module lands enter as expl
+quotations=1 mismatched=1
+self-test: OK — the faithful quotation matched and the one-character plant did not

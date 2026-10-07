@@ -1,0 +1,11 @@
+Proofs/HadwigerNelson/Arith/RatioBound.lean: 5 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/FactorAction.lean: 3 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/NormOneTarget.lean: 3 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/FloorPlanes.lean: 7 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/Floor128.lean: 19 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/TargetFloors.lean: 5 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/ProductFactor.lean: 6 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/MajorityVote.lean: 1 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/GapSeven.lean: 13 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/NegCircleModel.lean: 2 heads at the base, 0 changed, 0 removed, 0 added
+TOTAL: 0 changed or removed

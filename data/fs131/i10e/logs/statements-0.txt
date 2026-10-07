@@ -1,0 +1,6 @@
+Proofs/HadwigerNelson/Arith/Floor128.lean: 14 base declarations, 14 with statement and docstring kept, 0 docstring(s) extended, 0 flagged
+STATEMENTS: PASS
+SELF-TEST Proofs/HadwigerNelson/Arith/Floor128.lean: theorem statement fault on `counts_ok`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/Floor128.lean: definition fault on `clmul`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/Floor128.lean: docstring fault on `clmul_P_qBig`: as required
+SELF-TEST Proofs/HadwigerNelson/Arith/Floor128.lean: docstring extension on `clmul_P_qBig` (partner): as required

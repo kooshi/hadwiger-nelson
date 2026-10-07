@@ -1,0 +1,23 @@
+import Mathlib
+-- FS131-K6: the Mathlib names the plan per leaf cites (plans/FS131-w6-kernel-plan.md § 5), at the pin.
+open MeasureTheory
+#check @Measure.addHaar_sphere
+#check @IsOpen.measure_eq_zero_iff
+#check @Measure.measure_neg
+#check @measure_preimage_add
+#check @Complex.volume_preserving_equiv_real_prod
+#check @IsCompact.exists_thickening_subset_open
+#check @Metric.mem_closure_iff
+#check @IsPreconnected.image
+#check @isPreconnected_connectedComponentIn
+#check @connectedComponentIn_subset
+#check @Real.sin_pos_of_pos_of_lt_pi
+#check @Real.cos_le_cos_of_nonneg_of_le_pi
+#check @Int.floor_eq_iff
+#check @Complex.dist_of_im_eq
+#check @convex_halfSpace_re_lt
+#check @ae_eq_set
+#check @closure_prod_eq
+#check @Order.le_of_lt_add_one
+#check @Filter.limsup_le_of_le
+#check @EuclideanGeometry.eq_of_dist_eq_of_dist_eq_of_finrank_eq_two

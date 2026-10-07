@@ -1,0 +1,19 @@
+Basic: cited names — in the module 21, elsewhere in the wave 0, elsewhere in the library 2, MISSING 0 []
+Pinch: cited names — in the module 22, elsewhere in the wave 1, elsewhere in the library 1, MISSING 0 []
+MapEdge: cited names — in the module 17, elsewhere in the wave 0, elsewhere in the library 1, MISSING 0 []
+Sq9Map: cited names — in the module 10, elsewhere in the wave 1, elsewhere in the library 2, MISSING 0 []
+MapColouring: cited names — in the module 18, elsewhere in the wave 0, elsewhere in the library 0, MISSING 0 []
+Fan: cited names — in the module 23, elsewhere in the wave 1, elsewhere in the library 0, MISSING 0 []
+FanExamples: cited names — in the module 10, elsewhere in the wave 0, elsewhere in the library 1, MISSING 0 []
+Curve: cited names — in the module 11, elsewhere in the wave 0, elsewhere in the library 0, MISSING 0 []
+CurveArc: cited names — in the module 10, elsewhere in the wave 0, elsewhere in the library 0, MISSING 0 []
+ArcContinuation: cited names — in the module 5, elsewhere in the wave 0, elsewhere in the library 0, MISSING 0 []
+FanArcs: cited names — in the module 8, elsewhere in the wave 2, elsewhere in the library 0, MISSING 0 []
+FanBuild: cited names — in the module 14, elsewhere in the wave 1, elsewhere in the library 0, MISSING 0 []
+LocalGraph: cited names — in the module 12, elsewhere in the wave 2, elsewhere in the library 0, MISSING 0 []
+FanBridge: cited names — in the module 37, elsewhere in the wave 1, elsewhere in the library 0, MISSING 0 []
+  MISSING FanBuild: `fan_of_isolatedd`
+plant MISSING: fired
+  SKELETON Fan: the row says 'skeleton'
+plant SKELETON: fired
+self-test: PASS

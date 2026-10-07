@@ -1,0 +1,4 @@
+  hit: ('module doc', ['open question'])
+  hit: ('theorem flagged', ['[hand'])
+  hit: ('theorem split', ['named hypothes'])
+self-test: OK — the three planted hits and no other (the plain lemma, the quiet definition and the line comment are silent)

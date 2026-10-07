@@ -1,0 +1,3 @@
+Proofs/HadwigerNelson/Arith/StandingFive.lean: 37 base declarations, 0 changed or missing
+STATEMENTS: PASS
+self-test: clean=True (37 base declarations), fault 1 flagged 1, fault 2 flagged 1: PASS

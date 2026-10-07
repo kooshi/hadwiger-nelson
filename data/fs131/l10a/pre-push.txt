@@ -1,0 +1,12 @@
+### checks before the push, at 002c921a758eaca3b2bee9e76ca28494b8e7e7cf  2026-10-06T15:10:19Z
+origin/main=c70a1cf8e60cd79dfed4142eafdbcfe332f644f0
+origin/main is an ancestor of HEAD: exit=0
+the branch as given (ace98a35) is an ancestor of HEAD: exit=0
+423cd8e8 is an ancestor of HEAD: exit=0
+8ee0d85b is an ancestor of HEAD: exit=0
+999cde4a is an ancestor of HEAD: exit=0
+paths differing from the gated commit 999cde4a outside plans/ and data/:
+(none above = the gate's inputs are the gated commit's)
+tracked files modified:
+(none above)
+sorry, narrow pattern, Proofs/: 0 line(s)

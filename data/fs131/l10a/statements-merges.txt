@@ -1,0 +1,112 @@
+### self-test on CharacterColouring
+faithful present: 36 declarations, 0 flagged
+faithful delta: 36 declarations before, 36 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 0 []
+plant (one character of a statement): 36 declarations before, 36 after; statements changed 1 ['HadwigerNelson.CharacterColouring.coe_smul_unitRing']; removed 0 []; added 0 []; docstring alone 0 []
+  CHANGED, not ruled: HadwigerNelson.CharacterColouring.coe_smul_unitRing
+  -> fired (CHANGED)
+plant (a disjunct appended to a conclusion): 36 declarations before, 36 after; statements changed 1 ['HadwigerNelson.CharacterColouring.coe_smul_unitRing']; removed 0 []; added 0 []; docstring alone 0 []
+  CHANGED, not ruled: HadwigerNelson.CharacterColouring.coe_smul_unitRing
+  -> fired (CHANGED)
+plant (a declaration renamed away): 36 declarations before, 36 after; statements changed 0 []; removed 1 ['HadwigerNelson.CharacterColouring.coe_smul_unitRing']; added 1 ['HadwigerNelson.CharacterColouring.zz_planted_gone']; docstring alone 0 []
+  REMOVED, not ruled: HadwigerNelson.CharacterColouring.coe_smul_unitRing
+  ADDED, not expected: HadwigerNelson.CharacterColouring.zz_planted_gone
+  -> fired (REMOVED)
+plant (a declaration added): 36 declarations before, 37 after; statements changed 0 []; removed 0 []; added 1 ['zz_planted_new']; docstring alone 0 []
+  ADDED, not expected: zz_planted_new
+  -> fired (ADDED)
+plant (a docstring edited): 36 declarations before, 36 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 1 ['HadwigerNelson.CharacterColouring.mk1']
+  DOC changed alone, not listed: HadwigerNelson.CharacterColouring.mk1
+  -> fired (DOC)
+self-test: PASS
+exit=0
+### self-test on SpectralInputs
+faithful present: 93 declarations, 0 flagged
+faithful delta: 93 declarations before, 93 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 0 []
+plant (one character of a statement): 93 declarations before, 93 after; statements changed 1 ['HadwigerNelson.SpectralInputs.union_mem_factorSets']; removed 0 []; added 0 []; docstring alone 0 []
+  CHANGED, not ruled: HadwigerNelson.SpectralInputs.union_mem_factorSets
+  -> fired (CHANGED)
+plant (a disjunct appended to a conclusion): 93 declarations before, 93 after; statements changed 1 ['HadwigerNelson.SpectralInputs.union_mem_factorSets']; removed 0 []; added 0 []; docstring alone 0 []
+  CHANGED, not ruled: HadwigerNelson.SpectralInputs.union_mem_factorSets
+  -> fired (CHANGED)
+plant (a declaration renamed away): 93 declarations before, 93 after; statements changed 0 []; removed 1 ['HadwigerNelson.SpectralInputs.union_mem_factorSets']; added 1 ['HadwigerNelson.SpectralInputs.zz_planted_gone']; docstring alone 0 []
+  REMOVED, not ruled: HadwigerNelson.SpectralInputs.union_mem_factorSets
+  ADDED, not expected: HadwigerNelson.SpectralInputs.zz_planted_gone
+  -> fired (REMOVED)
+plant (a declaration added): 93 declarations before, 94 after; statements changed 0 []; removed 0 []; added 1 ['zz_planted_new']; docstring alone 0 []
+  ADDED, not expected: zz_planted_new
+  -> fired (ADDED)
+plant (a docstring edited): 93 declarations before, 93 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 1 ['HadwigerNelson.SpectralInputs.IsHaarFourier']
+  DOC changed alone, not listed: HadwigerNelson.SpectralInputs.IsHaarFourier
+  -> fired (DOC)
+self-test: PASS
+exit=0
+### self-test on StationaryRatio
+faithful present: 59 declarations, 0 flagged
+faithful delta: 59 declarations before, 59 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 0 []
+plant (one character of a statement): 59 declarations before, 59 after; statements changed 1 ['HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio']; removed 0 []; added 0 []; docstring alone 0 []
+  CHANGED, not ruled: HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio
+  -> fired (CHANGED)
+plant (a disjunct appended to a conclusion): 59 declarations before, 59 after; statements changed 1 ['HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio']; removed 0 []; added 0 []; docstring alone 0 []
+  CHANGED, not ruled: HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio
+  -> fired (CHANGED)
+plant (a declaration renamed away): 59 declarations before, 59 after; statements changed 0 []; removed 1 ['HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio']; added 1 ['HadwigerNelson.StationaryRatio.zz_planted_gone']; docstring alone 0 []
+  REMOVED, not ruled: HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio
+  ADDED, not expected: HadwigerNelson.StationaryRatio.zz_planted_gone
+  -> fired (REMOVED)
+plant (a declaration added): 59 declarations before, 60 after; statements changed 0 []; removed 0 []; added 1 ['zz_planted_new']; docstring alone 0 []
+  ADDED, not expected: zz_planted_new
+  -> fired (ADDED)
+plant (a docstring edited): 59 declarations before, 59 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 1 ['HadwigerNelson.StationaryRatio.StationarySet']
+  DOC changed alone, not listed: HadwigerNelson.StationaryRatio.StationarySet
+  -> fired (DOC)
+self-test: PASS
+exit=0
+### self-test on StandingFive
+faithful present: 132 declarations, 0 flagged
+faithful delta: 132 declarations before, 132 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 0 []
+plant (one character of a statement): 132 declarations before, 132 after; statements changed 1 ['HadwigerNelson.StandingFive.isIntegral_of_aeval_gPoly']; removed 0 []; added 0 []; docstring alone 0 []
+  CHANGED, not ruled: HadwigerNelson.StandingFive.isIntegral_of_aeval_gPoly
+  -> fired (CHANGED)
+plant (a disjunct appended to a conclusion): 132 declarations before, 132 after; statements changed 1 ['HadwigerNelson.StandingFive.isIntegral_of_aeval_gPoly']; removed 0 []; added 0 []; docstring alone 0 []
+  CHANGED, not ruled: HadwigerNelson.StandingFive.isIntegral_of_aeval_gPoly
+  -> fired (CHANGED)
+plant (a declaration renamed away): 132 declarations before, 132 after; statements changed 0 []; removed 1 ['HadwigerNelson.StandingFive.isIntegral_of_aeval_gPoly']; added 1 ['HadwigerNelson.StandingFive.zz_planted_gone']; docstring alone 0 []
+  REMOVED, not ruled: HadwigerNelson.StandingFive.isIntegral_of_aeval_gPoly
+  ADDED, not expected: HadwigerNelson.StandingFive.zz_planted_gone
+  -> fired (REMOVED)
+plant (a declaration added): 132 declarations before, 133 after; statements changed 0 []; removed 0 []; added 1 ['zz_planted_new']; docstring alone 0 []
+  ADDED, not expected: zz_planted_new
+  -> fired (ADDED)
+plant (a docstring edited): 132 declarations before, 132 after; statements changed 0 []; removed 0 []; added 0 []; docstring alone 1 ['HadwigerNelson.StandingFive.eta']
+  DOC changed alone, not listed: HadwigerNelson.StandingFive.eta
+  -> fired (DOC)
+self-test: PASS
+exit=0
+### present, against origin/fs131-w10
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean against origin/fs131-w10: 36 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean against origin/fs131-w10: 93 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean against origin/fs131-w10: 11 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/StandingFive.lean against origin/fs131-w10: 24 declarations, 0 flagged
+present: PASS
+exit=0
+### present, against origin/fs131-w10b
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean against origin/fs131-w10b: 33 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean against origin/fs131-w10b: 24 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean against origin/fs131-w10b: 59 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/StandingFive.lean against origin/fs131-w10b: 24 declarations, 0 flagged
+present: PASS
+exit=0
+### present, against origin/fs131-w10c
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean against origin/fs131-w10c: 33 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean against origin/fs131-w10c: 24 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean against origin/fs131-w10c: 11 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/StandingFive.lean against origin/fs131-w10c: 132 declarations, 0 flagged
+present: PASS
+exit=0
+### present, against f919973e
+Proofs/HadwigerNelson/Arith/CharacterColouring.lean against f919973e: 33 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean against f919973e: 24 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean against f919973e: 11 declarations, 0 flagged
+Proofs/HadwigerNelson/Arith/StandingFive.lean against f919973e: 24 declarations, 0 flagged
+present: PASS
+exit=0

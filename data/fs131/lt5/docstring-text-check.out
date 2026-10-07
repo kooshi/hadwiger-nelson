@@ -1,0 +1,32 @@
+ok    Proofs/HadwigerNelson/Arith/CharacterColouring.lean: 1 doc comment(s) changed, nothing else
+    doc comment changed, l.86 (base l.86) — docstring of: def OrderBound {Q : Type*} [AddCommGroup Q] (U₀ : Set Q) (B : Set UnitAddCircle) (N : ℕ) : Prop :=
+ok    Proofs/HadwigerNelson/Arith/SpectralInputs.lean: 3 doc comment(s) changed, nothing else
+    doc comment changed, l.217 (base l.217) — docstring of: def _root_.HadwigerNelson.SpectralChain.Interface.MulStable (I : Interface F) : Prop :=
+    doc comment changed, l.223 (base l.222) — docstring of: def _root_.HadwigerNelson.SpectralChain.Interface.NegCircle (I : Interface F) : Prop :=
+    doc comment changed, l.783 (base l.780) — docstring of: def BochnerOn (t : TopologicalSpace R) : Prop :=
+ok    Proofs/HadwigerNelson/Arith/StandingFive.lean: 4 doc comment(s) changed, nothing else
+    doc comment changed, l.15 (base l.15) — module doc
+    doc comment changed, l.1198 (base l.1195) — module doc
+    doc comment changed, l.1211 (base l.1208) — docstring of: def StandingFloor (n : ℕ) : Prop :=
+    doc comment changed, l.1245 (base l.1239) — docstring of: theorem seven_le_localBound (hFloor : StandingFloor 7) : 7 ≤ localBound standingField :=
+ok    Proofs/HadwigerNelson/Bridge.lean: 1 doc comment(s) changed, nothing else
+    doc comment changed, l.44 (base l.44) — docstring of: def RealAlgebraicDescent : Prop :=
+ok    Proofs/HadwigerNelson/Instances/SevenConditional.lean: 1 doc comment(s) changed, nothing else
+    doc comment changed, l.22 (base l.22) — docstring of: def G4 : Prop :=
+ok    Proofs/HadwigerNelson/Plane/Slack.lean: 1 doc comment(s) changed, nothing else
+    doc comment changed, l.3661 (base l.3661) — docstring of: def Voronov11 : Prop :=
+ok    Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean: 1 doc comment(s) changed, nothing else
+    doc comment changed, l.815 (base l.815) — docstring of: theorem flankQ_upper_of_qrOnly (hF : F.Valid) (hQR : F.QROnly) {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {c g : F
+ok    Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean: 2 doc comment(s) changed, nothing else
+    doc comment changed, l.5355 (base l.5355) — docstring of: theorem flankQ_upper (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {c g : Fin k}
+    doc comment changed, l.5743 (base l.5742) — docstring of: theorem flankQ_lower (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₂ : ℝ} {c h : Fin k}
+ok    Proofs/HadwigerNelson/SpectralChain.lean: 8 doc comment(s) changed, nothing else
+    doc comment changed, l.119 (base l.119) — docstring of: def BochnerHerglotz (G : Type*) [AddCommGroup G] : Prop :=
+    doc comment changed, l.158 (base l.158) — docstring of: def Interface.RU (I : Interface F) : Prop :=
+    doc comment changed, l.164 (base l.163) — docstring of: def Interface.APlus0 (I : Interface F) : Prop :=
+    doc comment changed, l.173 (base l.171) — docstring of: def Interface.PE2 (I : Interface F) : Prop :=
+    doc comment changed, l.182 (base l.180) — docstring of: def Interface.EFPlus (I : Interface F) : Prop :=
+    doc comment changed, l.189 (base l.186) — docstring of: def Interface.MR (I : Interface F) : Prop :=
+    doc comment changed, l.318 (base l.314) — docstring of: def Interface.APlusOfR88 (I : Interface F) : Prop := I.R88TCA → I.APlus0
+    doc comment changed, l.334 (base l.329) — docstring of: def InvariantMeasureOnClosed (F : Subfield ℝ) : Prop :=
+text: files=9 doc-comments-changed=22 failed=0 (base HEAD)

@@ -1,0 +1,52 @@
+=== IMPORTED ===
+DECLARED IMPORT HadwigerNelson.Plane.falconer_lemma2_nonempty
+'HadwigerNelson.Plane.falconer_reduction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Plane.falconer_lemma2_nonempty]
+'HadwigerNelson.Plane.le_chiM_of_falconerFan' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Plane.falconer_lemma2_nonempty]
+'HadwigerNelson.Plane.exists_mem_falconerE' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Plane.falconer_lemma2_nonempty]
+'HadwigerNelson.Plane.fan_tip_ae_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Plane.falconer_lemma2_nonempty]
+DECLARED IMPORT HadwigerNelson.StandingFive.kloosterman_bound
+'HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.targetFloor_seven_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.targetFloor_six_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.circle_sum_le_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.standingFloor_seven_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.standingFloor_five_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.seven_le_localBound_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.StandingFive.five_le_chromaticNumber_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+exit 0

@@ -1,0 +1,1292 @@
+## THM HadwigerNelson.SpectralInputs.comap_factorSigma_eq  (Proofs.HadwigerNelson.Arith.FactorAction)
+kernel: HadwigerNelson.SpectralInputs.comap_factorSigma_eq.{u_1, u_2} {R : Type u_1} {Ω : Type u_2} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} [MeasureTheory.IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (hcomm : ∀ (x y : R), T x ∘ T y = T y ∘ T x) (l : Filter R) {x x' : R} (hinv : T x' ∘ T x = id) : MeasurableSpace.comap (T x) (HadwigerNelson.SpectralInputs.factorSigma T hT l) = HadwigerNelson.SpectralInputs.factorSigma T hT l
+file:   theorem comap_factorSigma_eq [IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (hcomm : ∀ x y, T x ∘ T y = T y ∘ T x) (l : Filter R) {x x' : R} (hinv : T x' ∘ T x = id) : (factorSigma T hT l).comap (T x) = factorSigma T hT l
+kernel hypotheses (prop binders, named): 3: (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ); (hcomm : ∀ (x y : R), T x ∘ T y = T y ∘ T x); (hinv : T x' ∘ T x = id)
+  INCLUDED {R Ω : Type*}
+  INCLUDED {R Ω : Type*}
+  INCLUDED [MeasurableSpace Ω]
+  INCLUDED {μ : Measure Ω}
+
+## THM HadwigerNelson.SpectralInputs.comap_factorSigma_eq_of_action  (Proofs.HadwigerNelson.Arith.FactorAction)
+kernel: HadwigerNelson.SpectralInputs.comap_factorSigma_eq_of_action.{u_1, u_2} {R : Type u_1} {Ω : Type u_2} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} [AddCommGroup R] [MeasureTheory.IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (hadd : ∀ (x y : R), T (x + y) = T x ∘ T y) (h0 : T 0 = id) (l : Filter R) (x : R) : MeasurableSpace.comap (T x) (HadwigerNelson.SpectralInputs.factorSigma T hT l) = HadwigerNelson.SpectralInputs.factorSigma T hT l
+file:   theorem comap_factorSigma_eq_of_action [AddCommGroup R] [IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (hadd : ∀ x y, T (x + y) = T x ∘ T y) (h0 : T 0 = id) (l : Filter R) (x : R) : (factorSigma T hT l).comap (T x) = factorSigma T hT l
+kernel hypotheses (prop binders, named): 3: (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ); (hadd : ∀ (x y : R), T (x + y) = T x ∘ T y); (h0 : T 0 = id)
+  INCLUDED {R Ω : Type*}
+  INCLUDED {R Ω : Type*}
+  INCLUDED [MeasurableSpace Ω]
+  INCLUDED {μ : Measure Ω}
+
+## THM HadwigerNelson.SpectralInputs.si4_equivariant_factorSigma  (Proofs.HadwigerNelson.Arith.FactorAction)
+kernel: HadwigerNelson.SpectralInputs.si4_equivariant_factorSigma.{u_1, u_2, u_3} {R : Type u_1} {Ω : Type u_2} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} {V : Type u_3} [Countable V] [MeasureTheory.IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (hcomm : ∀ (x y : R), T x ∘ T y = T y ∘ T x) (l : Filter R) (c : Ω → V → Fin 4) (hc : ∀ (v : V), Measurable fun ω => c ω v) {x x' : R} (hinv : T x' ∘ T x = id) (π : V → V) (hπ : ∀ (ω : Ω) (v : V), c (T x ω) v = c ω (π v)) : ∀ᵐ (ω : Ω) ∂μ, ∀ (v : V), HadwigerNelson.SpectralInputs.condSupport (HadwigerNelson.SpectralInputs.factorSigma T hT l) μ c (T x ω) v = HadwigerNelson.SpectralInputs.condSupport (HadwigerNelson.SpectralInputs.factorSigma T hT l) μ c ω (π v)
+file:   theorem si4_equivariant_factorSigma {V : Type*} [Countable V] [IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (hcomm : ∀ x y, T x ∘ T y = T y ∘ T x) (l : Filter R) (c : Ω → V → Fin 4) (hc : ∀ v, Measurable fun ω => c ω v) {x x' : R} (hinv : T x' ∘ T x = id) (π : V → V) (hπ : ∀ ω v, c (T x ω) v = c ω (π v)) : ∀ᵐ ω ∂μ, ∀ v, condSupport (factorSigma T hT l) μ c (T x ω) v = condSupport (factorSigma T hT l) μ c ω (π v)
+kernel hypotheses (prop binders, named): 5: (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ); (hcomm : ∀ (x y : R), T x ∘ T y = T y ∘ T x); (hc : ∀ (v : V), Measurable fun ω => c ω v); (hinv : T x' ∘ T x = id); (hπ : ∀ (ω : Ω) (v : V), c (T x ω) v = c ω (π v))
+  INCLUDED {R Ω : Type*}
+  INCLUDED {R Ω : Type*}
+  INCLUDED [MeasurableSpace Ω]
+  INCLUDED {μ : Measure Ω}
+
+## THM HadwigerNelson.Floor128.bezout128  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.bezout128 : HadwigerNelson.Floor128.clmul 15 HadwigerNelson.Floor128.P HadwigerNelson.Floor128.a128 ^^^ HadwigerNelson.Floor128.clmul 14 HadwigerNelson.Floor128.b128 (2 ^ 128 ^^^ 2) = 1
+file:   theorem bezout128 : clmul 15 P a128 ^^^ clmul 14 b128 (2 ^ 128 ^^^ 2) = 1
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.bezout4  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.bezout4 : HadwigerNelson.Floor128.clmul 15 HadwigerNelson.Floor128.P HadwigerNelson.Floor128.a4 ^^^ HadwigerNelson.Floor128.clmul 14 HadwigerNelson.Floor128.b4 (2 ^ 4 ^^^ 2) = 1
+file:   theorem bezout4 : clmul 15 P a4 ^^^ clmul 14 b4 (2 ^ 4 ^^^ 2) = 1
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.charP_two  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.charP_two.{u_1} {k : Type u_1} [Field k] [Fintype k] (hcard : Fintype.card k = 128 ^ 2) : CharP k 2
+file:   theorem charP_two {k : Type*} [Field k] [Fintype k] (hcard : Fintype.card k = 128 ^ 2) : CharP k 2
+kernel hypotheses (prop binders, named): 1: (hcard : Fintype.card k = 128 ^ 2)
+
+## THM HadwigerNelson.Floor128.charSum_128_ge  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.charSum_128_ge {k : Type} [Field k] [Fintype k] [DecidableEq k] (hcard : Fintype.card k = 128 ^ 2) (ψ : AddChar k ℂ) (hψ : ψ ≠ 1) : -19 ≤ (∑ u with u ^ (128 + 1) = 1, ψ u).re
+file:   theorem charSum_128_ge {k : Type} [Field k] [Fintype k] [DecidableEq k] (hcard : Fintype.card k = 128 ^ 2) (ψ : AddChar k ℂ) (hψ : ψ ≠ 1) : -(19 : ℝ) ≤ (∑ u ∈ univ.filter (fun u : k => u ^ (128 + 1) = 1), ψ u).re
+kernel hypotheses (prop binders, named): 2: (hcard : Fintype.card k = 128 ^ 2); (hψ : ψ ≠ 1)
+
+## THM HadwigerNelson.Floor128.class_le  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.class_le (r : ℕ) (hr : r < 127) : ∑ j ∈ Finset.range 129, HadwigerNelson.Floor128.step^[127 * j + r] 1 % 2 ≤ 74
+file:   theorem class_le (r : ℕ) (hr : r < 127) : ∑ j ∈ range 129, step^[127 * j + r] 1 % 2 ≤ 74
+kernel hypotheses (prop binders, named): 1: (hr : r < 127)
+
+## THM HadwigerNelson.Floor128.clmul_P_qBig  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.clmul_P_qBig : HadwigerNelson.Floor128.clmul 15 HadwigerNelson.Floor128.P HadwigerNelson.Floor128.qBig = 2 ^ 16384 ^^^ 2
+file:   theorem clmul_P_qBig : clmul 15 P qBig = 2 ^ 16384 ^^^ 2
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.coeff_ev_X  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.coeff_ev_X.{u_1} {R : Type u_1} [Semiring R] (n i : ℕ) : (HadwigerNelson.Floor128.ev Polynomial.X n).coeff i = if n.testBit i = true then 1 else 0
+file:   theorem coeff_ev_X (n i : ℕ) : (ev (X : R[X]) n).coeff i = if n.testBit i then 1 else 0
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R : Type*}
+  INCLUDED [Semiring R]
+  ABSENT term (t : R) — reviewed: a ring element; the statement speaks of `X` or of the root `g` and not of `t`; a bare element carries no hypothesis
+
+## THM HadwigerNelson.Floor128.counts_ok  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.counts_ok : HadwigerNelson.Floor128.countsOk 74 = true
+file:   theorem counts_ok : countsOk 74 = true
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.digit_sum  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.digit_sum {B : ℕ} (d : ℕ → ℕ) (hd : ∀ (r : ℕ), d r < B) (N i : ℕ) (hi : i < N) : (∑ r ∈ Finset.range N, d r * B ^ r) / B ^ i % B = d i
+file:   theorem digit_sum {B : ℕ} (d : ℕ → ℕ) (hd : ∀ r, d r < B) (N i : ℕ) (hi : i < N) : (∑ r ∈ range N, d r * B ^ r) / B ^ i % B = d i
+kernel hypotheses (prop binders, named): 2: (hd : ∀ (r : ℕ), d r < B); (hi : i < N)
+
+## THM HadwigerNelson.Floor128.eq_of_dvd_of_not_dvd  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.eq_of_dvd_of_not_dvd {d : ℕ} (hd : d ∣ 16383) (h1 : ¬d ∣ 5461) (h2 : ¬d ∣ 381) (h3 : ¬d ∣ 129) : d = 16383
+file:   theorem eq_of_dvd_of_not_dvd {d : ℕ} (hd : d ∣ 16383) (h1 : ¬d ∣ 5461) (h2 : ¬d ∣ 381) (h3 : ¬d ∣ 129) : d = 16383
+kernel hypotheses (prop binders, named): 4: (hd : d ∣ 16383); (h1 : ¬d ∣ 5461); (h2 : ¬d ∣ 381); (h3 : ¬d ∣ 129)
+
+## THM HadwigerNelson.Floor128.ev_clmul  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_clmul.{u_1} {R : Type u_1} [CommRing R] [CharP R 2] (t : R) (fuel a b : ℕ) (ha : a < 2 ^ fuel) : HadwigerNelson.Floor128.ev t (HadwigerNelson.Floor128.clmul fuel a b) = HadwigerNelson.Floor128.ev t a * HadwigerNelson.Floor128.ev t b
+file:   theorem ev_clmul (fuel a b : ℕ) (ha : a < 2 ^ fuel) : ev t (clmul fuel a b) = ev t a * ev t b
+kernel hypotheses (prop binders, named): 1: (ha : a < 2 ^ fuel)
+  INCLUDED {R : Type*}
+  INCLUDED [CommRing R]
+  INCLUDED [CharP R 2]
+  INCLUDED (t : R)
+
+## THM HadwigerNelson.Floor128.ev_eq  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_eq.{u_1} {R : Type u_1} [Semiring R] (t : R) (n : ℕ) : HadwigerNelson.Floor128.ev t n = (if n % 2 = 1 then 1 else 0) + t * HadwigerNelson.Floor128.ev t (n / 2)
+file:   theorem ev_eq (n : ℕ) : ev t n = (if n % 2 = 1 then 1 else 0) + t * ev t (n / 2)
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R : Type*}
+  INCLUDED [Semiring R]
+  INCLUDED (t : R)
+
+## THM HadwigerNelson.Floor128.ev_inj  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_inj.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) {m n : ℕ} (hm : m < 2 ^ 14) (hn : n < 2 ^ 14) (h : HadwigerNelson.Floor128.ev g m = HadwigerNelson.Floor128.ev g n) : m = n
+file:   theorem ev_inj (hg : ev g P = 0) {m n : ℕ} (hm : m < 2 ^ 14) (hn : n < 2 ^ 14) (h : ev g m = ev g n) : m = n
+kernel hypotheses (prop binders, named): 4: (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0); (hm : m < 2 ^ 14); (hn : n < 2 ^ 14); (h : HadwigerNelson.Floor128.ev g m = HadwigerNelson.Floor128.ev g n)
+  INCLUDED {k : Type*}
+  INCLUDED [Field k]
+  INCLUDED [CharP k 2]
+  INCLUDED {g : k}
+
+## THM HadwigerNelson.Floor128.ev_iterate_step  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_iterate_step.{u_1} {R : Type u_1} [CommRing R] [CharP R 2] {g : R} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) (n x : ℕ) : HadwigerNelson.Floor128.ev g (HadwigerNelson.Floor128.step^[n] x) = g ^ n * HadwigerNelson.Floor128.ev g x
+file:   theorem ev_iterate_step {g : R} (hg : ev g P = 0) (n x : ℕ) : ev g (step^[n] x) = g ^ n * ev g x
+kernel hypotheses (prop binders, named): 1: (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0)
+  INCLUDED {R : Type*}
+  INCLUDED [CommRing R]
+  INCLUDED [CharP R 2]
+  ABSENT term (t : R) — reviewed: a ring element; the statement speaks of `X` or of the root `g` and not of `t`; a bare element carries no hypothesis
+
+## THM HadwigerNelson.Floor128.ev_ne_zero  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_ne_zero.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) {n : ℕ} (hn : n < 2 ^ 14) (h0 : n ≠ 0) : HadwigerNelson.Floor128.ev g n ≠ 0
+file:   theorem ev_ne_zero (hg : ev g P = 0) {n : ℕ} (hn : n < 2 ^ 14) (h0 : n ≠ 0) : ev g n ≠ 0
+kernel hypotheses (prop binders, named): 3: (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0); (hn : n < 2 ^ 14); (h0 : n ≠ 0)
+  INCLUDED {k : Type*}
+  INCLUDED [Field k]
+  INCLUDED [CharP k 2]
+  INCLUDED {g : k}
+
+## THM HadwigerNelson.Floor128.ev_one  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_one.{u_1} {R : Type u_1} [Semiring R] (t : R) : HadwigerNelson.Floor128.ev t 1 = 1
+file:   theorem ev_one : ev t 1 = 1
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R : Type*}
+  INCLUDED [Semiring R]
+  INCLUDED (t : R)
+
+## THM HadwigerNelson.Floor128.ev_shiftLeft_one  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_shiftLeft_one.{u_1} {R : Type u_1} [Semiring R] (t : R) (n : ℕ) : HadwigerNelson.Floor128.ev t (n <<< 1) = t * HadwigerNelson.Floor128.ev t n
+file:   theorem ev_shiftLeft_one (n : ℕ) : ev t (n <<< 1) = t * ev t n
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R : Type*}
+  INCLUDED [Semiring R]
+  INCLUDED (t : R)
+
+## THM HadwigerNelson.Floor128.ev_step  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_step.{u_1} {R : Type u_1} [CommRing R] [CharP R 2] {g : R} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) (x : ℕ) : HadwigerNelson.Floor128.ev g (HadwigerNelson.Floor128.step x) = g * HadwigerNelson.Floor128.ev g x
+file:   theorem ev_step {g : R} (hg : ev g P = 0) (x : ℕ) : ev g (step x) = g * ev g x
+kernel hypotheses (prop binders, named): 1: (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0)
+  INCLUDED {R : Type*}
+  INCLUDED [CommRing R]
+  INCLUDED [CharP R 2]
+  ABSENT term (t : R) — reviewed: a ring element; the statement speaks of `X` or of the root `g` and not of `t`; a bare element carries no hypothesis
+
+## THM HadwigerNelson.Floor128.ev_two  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_two.{u_1} {R : Type u_1} [Semiring R] (t : R) : HadwigerNelson.Floor128.ev t 2 = t
+file:   theorem ev_two : ev t 2 = t
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R : Type*}
+  INCLUDED [Semiring R]
+  INCLUDED (t : R)
+
+## THM HadwigerNelson.Floor128.ev_two_mul  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_two_mul.{u_1} {R : Type u_1} [Semiring R] (t : R) (n : ℕ) : HadwigerNelson.Floor128.ev t (2 * n) = t * HadwigerNelson.Floor128.ev t n
+file:   theorem ev_two_mul (n : ℕ) : ev t (2 * n) = t * ev t n
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R : Type*}
+  INCLUDED [Semiring R]
+  INCLUDED (t : R)
+
+## THM HadwigerNelson.Floor128.ev_two_pow  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_two_pow.{u_1} {R : Type u_1} [Semiring R] (t : R) (m : ℕ) : HadwigerNelson.Floor128.ev t (2 ^ m) = t ^ m
+file:   theorem ev_two_pow (m : ℕ) : ev t (2 ^ m) = t ^ m
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R : Type*}
+  INCLUDED [Semiring R]
+  INCLUDED (t : R)
+
+## THM HadwigerNelson.Floor128.ev_xor  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_xor.{u_1} {R : Type u_1} [CommRing R] [CharP R 2] (t : R) (a b : ℕ) : HadwigerNelson.Floor128.ev t (a ^^^ b) = HadwigerNelson.Floor128.ev t a + HadwigerNelson.Floor128.ev t b
+file:   theorem ev_xor (a b : ℕ) : ev t (a ^^^ b) = ev t a + ev t b
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R : Type*}
+  INCLUDED [CommRing R]
+  INCLUDED [CharP R 2]
+  INCLUDED (t : R)
+
+## THM HadwigerNelson.Floor128.ev_zero  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.ev_zero.{u_1} {R : Type u_1} [Semiring R] (t : R) : HadwigerNelson.Floor128.ev t 0 = 0
+file:   @[simp] theorem ev_zero : ev t 0 = 0
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R : Type*}
+  INCLUDED [Semiring R]
+  INCLUDED (t : R)
+
+## THM HadwigerNelson.Floor128.exists_addChar  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.exists_addChar.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} [Fintype k] (hcard : Fintype.card k = 128 ^ 2) (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) : ∃ ψ₀, ψ₀ ≠ 1 ∧ ∀ (n : ℕ), ψ₀ (g ^ n) = 1 - 2 * ↑(HadwigerNelson.Floor128.step^[n] 1 % 2)
+file:   theorem exists_addChar [Fintype k] (hcard : Fintype.card k = 128 ^ 2) (hg : ev g P = 0) : ∃ ψ₀ : AddChar k ℂ, ψ₀ ≠ 1 ∧ ∀ n, ψ₀ (g ^ n) = 1 - 2 * ((step^[n] 1 % 2 : ℕ) : ℂ)
+kernel hypotheses (prop binders, named): 2: (hcard : Fintype.card k = 128 ^ 2); (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0)
+  INCLUDED {k : Type*}
+  INCLUDED [Field k]
+  INCLUDED [CharP k 2]
+  INCLUDED {g : k}
+
+## THM HadwigerNelson.Floor128.exists_code  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.exists_code.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} [Fintype k] (hcard : Fintype.card k = 128 ^ 2) (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) (x : k) : ∃ n < 2 ^ 14, HadwigerNelson.Floor128.ev g n = x
+file:   theorem exists_code [Fintype k] (hcard : Fintype.card k = 128 ^ 2) (hg : ev g P = 0) (x : k) : ∃ n < 2 ^ 14, ev g n = x
+kernel hypotheses (prop binders, named): 2: (hcard : Fintype.card k = 128 ^ 2); (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0)
+  INCLUDED {k : Type*}
+  INCLUDED [Field k]
+  INCLUDED [CharP k 2]
+  INCLUDED {g : k}
+
+## THM HadwigerNelson.Floor128.exists_iterate_step_eq  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.exists_iterate_step_eq {n : ℕ} (hn : n < 2 ^ 14) (h0 : n ≠ 0) : ∃ j < 16383, HadwigerNelson.Floor128.step^[j] 1 = n
+file:   theorem exists_iterate_step_eq {n : ℕ} (hn : n < 2 ^ 14) (h0 : n ≠ 0) : ∃ j < 16383, step^[j] 1 = n
+kernel hypotheses (prop binders, named): 2: (hn : n < 2 ^ 14); (h0 : n ≠ 0)
+
+## THM HadwigerNelson.Floor128.exists_root  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.exists_root.{u_1} {k : Type u_1} [Field k] [Fintype k] (hcard : Fintype.card k = 128 ^ 2) : ∃ g, HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0
+file:   theorem exists_root {k : Type*} [Field k] [Fintype k] (hcard : Fintype.card k = 128 ^ 2) : ∃ g : k, ev g P = 0
+kernel hypotheses (prop binders, named): 1: (hcard : Fintype.card k = 128 ^ 2)
+
+## THM HadwigerNelson.Floor128.exists_root_pow_eq  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.exists_root_pow_eq.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} [Fintype k] (hcard : Fintype.card k = 128 ^ 2) (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) {x : k} (hx : x ≠ 0) : ∃ j < 16383, g ^ j = x
+file:   theorem exists_root_pow_eq [Fintype k] (hcard : Fintype.card k = 128 ^ 2) (hg : ev g P = 0) {x : k} (hx : x ≠ 0) : ∃ j < 16383, g ^ j = x
+kernel hypotheses (prop binders, named): 3: (hcard : Fintype.card k = 128 ^ 2); (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0); (hx : x ≠ 0)
+  INCLUDED {k : Type*}
+  INCLUDED [Field k]
+  INCLUDED [CharP k 2]
+  INCLUDED {g : k}
+
+## THM HadwigerNelson.Floor128.iterate_step_injOn  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.iterate_step_injOn : Set.InjOn (fun n => HadwigerNelson.Floor128.step^[n] 1) (Set.Iio 16383)
+file:   theorem iterate_step_injOn : Set.InjOn (fun n => step^[n] 1) (Set.Iio 16383)
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.iterate_step_lt  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.iterate_step_lt (n : ℕ) : HadwigerNelson.Floor128.step^[n] 1 < 2 ^ 14
+file:   theorem iterate_step_lt (n : ℕ) : step^[n] 1 < 2 ^ 14
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.iterate_step_ne_zero  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.iterate_step_ne_zero (n : ℕ) : HadwigerNelson.Floor128.step^[n] 1 ≠ 0
+file:   theorem iterate_step_ne_zero (n : ℕ) : step^[n] 1 ≠ 0
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.iterate_step_period  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.iterate_step_period : HadwigerNelson.Floor128.step^[16383] 1 = 1
+file:   theorem iterate_step_period : step^[16383] 1 = 1
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.map_ev  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.map_ev.{u_1, u_2} {R : Type u_1} [Semiring R] (t : R) {S : Type u_2} [Semiring S] (f : R →+* S) (n : ℕ) : f (HadwigerNelson.Floor128.ev t n) = HadwigerNelson.Floor128.ev (f t) n
+file:   theorem map_ev {S : Type*} [Semiring S] (f : R →+* S) (n : ℕ) : f (ev t n) = ev (f t) n
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R : Type*}
+  INCLUDED [Semiring R]
+  INCLUDED (t : R)
+
+## THM HadwigerNelson.Floor128.minimalPeriod_step  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.minimalPeriod_step : Function.minimalPeriod HadwigerNelson.Floor128.step 1 = 16383
+file:   theorem minimalPeriod_step : Function.minimalPeriod step 1 = 16383
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.normOne_eq_image  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.normOne_eq_image.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} [Fintype k] [DecidableEq k] (hcard : Fintype.card k = 128 ^ 2) (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) : {u | u ^ (128 + 1) = 1} = Finset.image (fun j => g ^ (127 * j)) (Finset.range 129)
+file:   theorem normOne_eq_image [Fintype k] [DecidableEq k] (hcard : Fintype.card k = 128 ^ 2) (hg : ev g P = 0) : univ.filter (fun u : k => u ^ (128 + 1) = 1) = (range 129).image fun j => g ^ (127 * j)
+kernel hypotheses (prop binders, named): 2: (hcard : Fintype.card k = 128 ^ 2); (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0)
+  INCLUDED {k : Type*}
+  INCLUDED [Field k]
+  INCLUDED [CharP k 2]
+  INCLUDED {g : k}
+
+## THM HadwigerNelson.Floor128.order_checks  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.order_checks : (HadwigerNelson.Floor128.pass 5461 1 0 0).1 ≠ 1 ∧ (HadwigerNelson.Floor128.pass 381 1 0 0).1 ≠ 1 ∧ (HadwigerNelson.Floor128.pass 129 1 0 0).1 ≠ 1
+file:   theorem order_checks : (pass 5461 1 0 0).1 ≠ 1 ∧ (pass 381 1 0 0).1 ≠ 1 ∧ (pass 129 1 0 0).1 ≠ 1
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.pass_class  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.pass_class (x b : ℕ) (hb : b < 256) (r : ℕ) (hr : r < 127) : (HadwigerNelson.Floor128.pass (127 * b) x 0 0).2 / 2 ^ (8 * r) % 256 = ∑ j ∈ Finset.range b, HadwigerNelson.Floor128.step^[127 * j + r] x % 2
+file:   theorem pass_class (x b : ℕ) (hb : b < 256) (r : ℕ) (hr : r < 127) : (pass (127 * b) x 0 0).2 / 2 ^ (8 * r) % 256 = ∑ j ∈ range b, step^[127 * j + r] x % 2
+kernel hypotheses (prop binders, named): 2: (hb : b < 256); (hr : r < 127)
+
+## THM HadwigerNelson.Floor128.pass_fst  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.pass_fst (n x i acc : ℕ) : (HadwigerNelson.Floor128.pass n x i acc).1 = HadwigerNelson.Floor128.step^[n] x
+file:   theorem pass_fst (n x i acc : ℕ) : (pass n x i acc).1 = step^[n] x
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.pass_snd  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.pass_snd (n x i acc : ℕ) (hi : i < 127) : (HadwigerNelson.Floor128.pass n x i acc).2 = acc + ∑ m ∈ Finset.range n, HadwigerNelson.Floor128.step^[m] x % 2 * 2 ^ (8 * ((i + m) % 127))
+file:   theorem pass_snd (n x i acc : ℕ) (hi : i < 127) : (pass n x i acc).2 = acc + ∑ m ∈ range n, step^[m] x % 2 * 2 ^ (8 * ((i + m) % 127))
+kernel hypotheses (prop binders, named): 1: (hi : i < 127)
+
+## THM HadwigerNelson.Floor128.qBig_lt  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.qBig_lt : HadwigerNelson.Floor128.qBig < 2 ^ 16384
+file:   theorem qBig_lt : qBig < 2 ^ 16384
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.qBig_testBit_one  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.qBig_testBit_one : HadwigerNelson.Floor128.qBig.testBit 1 = true
+file:   theorem qBig_testBit_one : qBig.testBit 1 = true
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.root_pow_eq_one  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.root_pow_eq_one.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) : g ^ 16383 = 1
+file:   theorem root_pow_eq_one (hg : ev g P = 0) : g ^ 16383 = 1
+kernel hypotheses (prop binders, named): 1: (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0)
+  INCLUDED {k : Type*}
+  INCLUDED [Field k]
+  INCLUDED [CharP k 2]
+  INCLUDED {g : k}
+
+## THM HadwigerNelson.Floor128.root_pow_inj  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.root_pow_inj.{u_1} {k : Type u_1} [Field k] [CharP k 2] {g : k} (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0) {i j : ℕ} (hi : i < 16383) (hj : j < 16383) (h : g ^ i = g ^ j) : i = j
+file:   theorem root_pow_inj (hg : ev g P = 0) {i j : ℕ} (hi : i < 16383) (hj : j < 16383) (h : g ^ i = g ^ j) : i = j
+kernel hypotheses (prop binders, named): 4: (hg : HadwigerNelson.Floor128.ev g HadwigerNelson.Floor128.P = 0); (hi : i < 16383); (hj : j < 16383); (h : g ^ i = g ^ j)
+  INCLUDED {k : Type*}
+  INCLUDED [Field k]
+  INCLUDED [CharP k 2]
+  INCLUDED {g : k}
+
+## THM HadwigerNelson.Floor128.step_lt  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.step_lt {x : ℕ} (hx : x < 2 ^ 14) : HadwigerNelson.Floor128.step x < 2 ^ 14
+file:   theorem step_lt {x : ℕ} (hx : x < 2 ^ 14) : step x < 2 ^ 14
+kernel hypotheses (prop binders, named): 1: (hx : x < 2 ^ 14)
+
+## THM HadwigerNelson.Floor128.step_ne_zero  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.step_ne_zero {x : ℕ} (hx : x ≠ 0) : HadwigerNelson.Floor128.step x ≠ 0
+file:   theorem step_ne_zero {x : ℕ} (hx : x ≠ 0) : step x ≠ 0
+kernel hypotheses (prop binders, named): 1: (hx : x ≠ 0)
+
+## THM HadwigerNelson.Floor128.sum_range_mul_eq  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.sum_range_mul_eq (f : ℕ → ℕ) (a b : ℕ) : ∑ n ∈ Finset.range (a * b), f n = ∑ r ∈ Finset.range a, ∑ j ∈ Finset.range b, f (a * j + r)
+file:   theorem sum_range_mul_eq (f : ℕ → ℕ) (a b : ℕ) : ∑ n ∈ range (a * b), f n = ∑ r ∈ range a, ∑ j ∈ range b, f (a * j + r)
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.targetFloor_eight_128  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.targetFloor_eight_128 : HadwigerNelson.StandingFive.TargetFloor 8 128
+file:   theorem targetFloor_eight_128 : TargetFloor 8 128
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.Floor128.targetFloor_seven_128  (Proofs.HadwigerNelson.Arith.Floor128)
+kernel: HadwigerNelson.Floor128.targetFloor_seven_128 : HadwigerNelson.StandingFive.TargetFloor 7 128
+file:   theorem targetFloor_seven_128 : TargetFloor 7 128
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.StandingFive.card_filter_pow_eq_self  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.card_filter_pow_eq_self.{u_1} {k : Type u_1} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) : {x | x ^ Q = x}.card = Q
+file:   theorem card_filter_pow_eq_self {k : Type*} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) : (univ.filter fun x : k => x ^ Q = x).card = Q
+kernel hypotheses (prop binders, named): 1: (hcard : Fintype.card k = Q ^ 2)
+
+## THM HadwigerNelson.StandingFive.circle_sum_eq_kloosterman  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.circle_sum_eq_kloosterman.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (a : F) (b : F × F) (hb : b ≠ 0) : ∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2) = ↑((quadraticChar F) (-1)) * ∑ x, ψ (-a * ↑x + -((b.1 ^ 2 + b.2 ^ 2) / 4) * ↑x⁻¹)
+file:   theorem circle_sum_eq_kloosterman {F : Type*} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (a : F) (b : F × F) (hb : b ≠ 0) : ∑ s ∈ univ.filter (fun s : F × F => s.1 ^ 2 + s.2 ^ 2 = a), ψ (b.1 * s.1 + b.2 * s.2) = ((quadraticChar F (-1) : ℤ) : ℂ) * ∑ x : Fˣ, ψ (-a * (x : F) + -((b.1 ^ 2 + b.2 ^ 2) / 4) * ((x⁻¹ : Fˣ) : F))
+kernel hypotheses (prop binders, named): 3: (hodd : ringChar F ≠ 2); (hψ : ψ ≠ 1); (hb : b ≠ 0)
+
+## THM HadwigerNelson.StandingFive.circle_sum_le  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.circle_sum_le.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (hK : HadwigerNelson.StandingFive.KloostermanBound F) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {a : F} (ha : a ≠ 0) (b : F × F) (hb : b ≠ 0) : ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * √↑(Fintype.card F)
+file:   theorem circle_sum_le {F : Type*} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (hK : KloostermanBound F) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {a : F} (ha : a ≠ 0) (b : F × F) (hb : b ≠ 0) : ‖∑ s ∈ univ.filter (fun s : F × F => s.1 ^ 2 + s.2 ^ 2 = a), ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * Real.sqrt (Fintype.card F)
+kernel hypotheses (prop binders, named): 5: (hodd : ringChar F ≠ 2); (hK : HadwigerNelson.StandingFive.KloostermanBound F); (hψ : ψ ≠ 1); (ha : a ≠ 0); (hb : b ≠ 0)
+
+## THM HadwigerNelson.StandingFive.circle_sum_le_of_ne  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.circle_sum_le_of_ne.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (hK : HadwigerNelson.StandingFive.KloostermanBound F) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (a : F) (b : F × F) (hb : b ≠ 0) (h : a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0) : ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * √↑(Fintype.card F)
+file:   theorem circle_sum_le_of_ne {F : Type*} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (hK : KloostermanBound F) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (a : F) (b : F × F) (hb : b ≠ 0) (h : a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0) : ‖∑ s ∈ univ.filter (fun s : F × F => s.1 ^ 2 + s.2 ^ 2 = a), ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * Real.sqrt (Fintype.card F)
+kernel hypotheses (prop binders, named): 5: (hodd : ringChar F ≠ 2); (hK : HadwigerNelson.StandingFive.KloostermanBound F); (hψ : ψ ≠ 1); (hb : b ≠ 0); (h : a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0)
+
+## THM HadwigerNelson.StandingFive.circle_sum_zero_of_isotropic  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.circle_sum_zero_of_isotropic.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (b : F × F) (hb : b ≠ 0) (hiso : b.1 ^ 2 + b.2 ^ 2 = 0) : ∑ s with s.1 ^ 2 + s.2 ^ 2 = 0, ψ (b.1 * s.1 + b.2 * s.2) = ↑((quadraticChar F) (-1)) * (↑(Fintype.card F) - 1)
+file:   theorem circle_sum_zero_of_isotropic {F : Type*} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (b : F × F) (hb : b ≠ 0) (hiso : b.1 ^ 2 + b.2 ^ 2 = 0) : ∑ s ∈ univ.filter (fun s : F × F => s.1 ^ 2 + s.2 ^ 2 = 0), ψ (b.1 * s.1 + b.2 * s.2) = ((quadraticChar F (-1) : ℤ) : ℂ) * ((Fintype.card F : ℂ) - 1)
+kernel hypotheses (prop binders, named): 4: (hodd : ringChar F ≠ 2); (hψ : ψ ≠ 1); (hb : b ≠ 0); (hiso : b.1 ^ 2 + b.2 ^ 2 = 0)
+
+## THM HadwigerNelson.StandingFive.exists_mulShift_eq  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.exists_mulShift_eq.{u_1} {F : Type u_1} [Field F] [Finite F] (ψ₀ : AddChar F ℂ) (hψ₀ : ψ₀ ≠ 1) (φ : AddChar F ℂ) : ∃ b, ψ₀.mulShift b = φ
+file:   theorem exists_mulShift_eq {F : Type*} [Field F] [Finite F] (ψ₀ : AddChar F ℂ) (hψ₀ : ψ₀ ≠ 1) (φ : AddChar F ℂ) : ∃ b : F, ψ₀.mulShift b = φ
+kernel hypotheses (prop binders, named): 1: (hψ₀ : ψ₀ ≠ 1)
+
+## THM HadwigerNelson.StandingFive.exists_ringHom_pow  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.exists_ringHom_pow.{u_1} {k : Type u_1} [Field k] [Fintype k] {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) : ∃ τ, ∀ (x : k), τ x = x ^ Q
+file:   theorem exists_ringHom_pow {k : Type*} [Field k] [Fintype k] {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) : ∃ τ : k →+* k, ∀ x, τ x = x ^ Q
+kernel hypotheses (prop binders, named): 1: (hcard : Fintype.card k = Q ^ 2)
+
+## THM HadwigerNelson.StandingFive.kloostermanBound_of_card_le_five  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.kloostermanBound_of_card_le_five.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (h : Fintype.card F ≤ 5) : HadwigerNelson.StandingFive.KloostermanBound F
+file:   theorem kloostermanBound_of_card_le_five {F : Type*} [Field F] [Fintype F] [DecidableEq F] (h : Fintype.card F ≤ 5) : KloostermanBound F
+kernel hypotheses (prop binders, named): 1: (h : Fintype.card F ≤ 5)
+
+## THM HadwigerNelson.StandingFive.normOne_charSum_ge  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.normOne_charSum_ge {k : Type} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hQ4 : Q % 4 = 3) (hcard : Fintype.card k = Q ^ 2) (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F) (ψ : AddChar k ℂ) (hψ : ψ ≠ 1) : -(2 * √↑Q) ≤ (∑ u with u ^ (Q + 1) = 1, ψ u).re
+file:   theorem normOne_charSum_ge {k : Type} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hQ4 : Q % 4 = 3) (hcard : Fintype.card k = Q ^ 2) (hK : ∀ (F : Type) [Field F] [Fintype F] [DecidableEq F], Fintype.card F = Q → KloostermanBound F) (ψ : AddChar k ℂ) (hψ : ψ ≠ 1) : -(2 * Real.sqrt Q) ≤ (∑ u ∈ univ.filter (fun u : k => u ^ (Q + 1) = 1), ψ u).re
+kernel hypotheses (prop binders, named): 4: (hQ4 : Q % 4 = 3); (hcard : Fintype.card k = Q ^ 2); (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F); (hψ : ψ ≠ 1)
+
+## THM HadwigerNelson.StandingFive.sum_addChar_mul_left  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.sum_addChar_mul_left.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (c : F) : ∑ y, ψ (c * y) = if c = 0 then ↑(Fintype.card F) else 0
+file:   theorem sum_addChar_mul_left {F : Type*} [Field F] [Fintype F] [DecidableEq F] (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (c : F) : ∑ y : F, ψ (c * y) = if c = 0 then (Fintype.card F : ℂ) else 0
+kernel hypotheses (prop binders, named): 1: (hψ : ψ ≠ 1)
+
+## THM HadwigerNelson.StandingFive.sum_addChar_mul_sq  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.sum_addChar_mul_sq.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {r : F} (hr : r ≠ 0) : ∑ y, ψ (r * y ^ 2) = ↑((quadraticChar F) r) * gaussSum ((quadraticChar F).ringHomComp (Int.castRingHom ℂ)) ψ
+file:   theorem sum_addChar_mul_sq {F : Type*} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {r : F} (hr : r ≠ 0) : ∑ y : F, ψ (r * y ^ 2) = ((quadraticChar F r : ℤ) : ℂ) * gaussSum ((quadraticChar F).ringHomComp (Int.castRingHom ℂ)) ψ
+kernel hypotheses (prop binders, named): 3: (hodd : ringChar F ≠ 2); (hψ : ψ ≠ 1); (hr : r ≠ 0)
+
+## THM HadwigerNelson.StandingFive.sum_eq_zero_add_sum_units  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.sum_eq_zero_add_sum_units.{u_1, u_2} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] {M : Type u_2} [AddCommMonoid M] (g : F → M) : ∑ r, g r = g 0 + ∑ x, g ↑x
+file:   theorem sum_eq_zero_add_sum_units {F : Type*} [Field F] [Fintype F] [DecidableEq F] {M : Type*} [AddCommMonoid M] (g : F → M) : ∑ r : F, g r = g 0 + ∑ x : Fˣ, g (x : F)
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.StandingFive.sum_plane_quadratic  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.sum_plane_quadratic.{u_1} {F : Type u_1} [Field F] [Fintype F] (ψ : AddChar F ℂ) (a r : F) (b : F × F) : ∑ s, ψ (r * (s.1 ^ 2 + s.2 ^ 2 - a)) * ψ (b.1 * s.1 + b.2 * s.2) = ψ (-(r * a)) * ((∑ y, ψ (r * y ^ 2 + b.1 * y)) * ∑ y, ψ (r * y ^ 2 + b.2 * y))
+file:   theorem sum_plane_quadratic {F : Type*} [Field F] [Fintype F] (ψ : AddChar F ℂ) (a r : F) (b : F × F) : ∑ s : F × F, ψ (r * (s.1 ^ 2 + s.2 ^ 2 - a)) * ψ (b.1 * s.1 + b.2 * s.2) = ψ (-(r * a)) * ((∑ y : F, ψ (r * y ^ 2 + b.1 * y)) * ∑ y : F, ψ (r * y ^ 2 + b.2 * y))
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.StandingFive.sum_quadratic_eq  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.sum_quadratic_eq.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {r : F} (hr : r ≠ 0) (c : F) : ∑ y, ψ (r * y ^ 2 + c * y) = ψ (-(c ^ 2 / (4 * r))) * ↑((quadraticChar F) r) * gaussSum ((quadraticChar F).ringHomComp (Int.castRingHom ℂ)) ψ
+file:   theorem sum_quadratic_eq {F : Type*} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {r : F} (hr : r ≠ 0) (c : F) : ∑ y : F, ψ (r * y ^ 2 + c * y) = ψ (-(c ^ 2 / (4 * r))) * ((quadraticChar F r : ℤ) : ℂ) * gaussSum ((quadraticChar F).ringHomComp (Int.castRingHom ℂ)) ψ
+kernel hypotheses (prop binders, named): 3: (hodd : ringChar F ≠ 2); (hψ : ψ ≠ 1); (hr : r ≠ 0)
+
+## THM HadwigerNelson.StandingFive.sum_units_addChar_mul  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.sum_units_addChar_mul.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {c : F} (hc : c ≠ 0) : ∑ x, ψ (c * ↑x) = -1
+file:   theorem sum_units_addChar_mul {F : Type*} [Field F] [Fintype F] [DecidableEq F] (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) {c : F} (hc : c ≠ 0) : ∑ x : Fˣ, ψ (c * (x : F)) = -1
+kernel hypotheses (prop binders, named): 2: (hψ : ψ ≠ 1); (hc : c ≠ 0)
+
+## THM HadwigerNelson.StandingFive.targetFloor_seven_of_kloosterman  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.targetFloor_seven_of_kloosterman {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 98 ≤ Q) (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F) : HadwigerNelson.StandingFive.TargetFloor 7 Q
+file:   theorem targetFloor_seven_of_kloosterman {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 98 ≤ Q) (hK : ∀ (F : Type) [Field F] [Fintype F] [DecidableEq F], Fintype.card F = Q → KloostermanBound F) : TargetFloor 7 Q
+kernel hypotheses (prop binders, named): 3: (hQ4 : Q % 4 = 3); (hQ : 98 ≤ Q); (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F)
+
+## THM HadwigerNelson.StandingFive.two_sqrt_lt_circle_sum_zero  (Proofs.HadwigerNelson.Arith.FloorPlanes)
+kernel: HadwigerNelson.StandingFive.two_sqrt_lt_circle_sum_zero.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (b : F × F) (hb : b ≠ 0) (hiso : b.1 ^ 2 + b.2 ^ 2 = 0) (hq : 6 ≤ Fintype.card F) : 2 * √↑(Fintype.card F) < ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = 0, ψ (b.1 * s.1 + b.2 * s.2)‖
+file:   theorem two_sqrt_lt_circle_sum_zero {F : Type*} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (b : F × F) (hb : b ≠ 0) (hiso : b.1 ^ 2 + b.2 ^ 2 = 0) (hq : 6 ≤ Fintype.card F) : 2 * Real.sqrt (Fintype.card F) < ‖∑ s ∈ univ.filter (fun s : F × F => s.1 ^ 2 + s.2 ^ 2 = 0), ψ (b.1 * s.1 + b.2 * s.2)‖
+kernel hypotheses (prop binders, named): 5: (hodd : ringChar F ≠ 2); (hψ : ψ ≠ 1); (hb : b ≠ 0); (hiso : b.1 ^ 2 + b.2 ^ 2 = 0); (hq : 6 ≤ Fintype.card F)
+
+## THM HadwigerNelson.GapSeven.card_edges  (Proofs.HadwigerNelson.Arith.GapSeven)
+kernel: HadwigerNelson.GapSeven.card_edges : {p | (HadwigerNelson.finitePlane 7).Adj p.1 p.2}.card = 392 ∧ {p | (HadwigerNelson.finitePlane 7).Adj p.1 p.2 ∧ HadwigerNelson.GapSeven.Gapped p.1 3 ∧ HadwigerNelson.GapSeven.Gapped p.2 3}.card = 28
+file:   theorem card_edges : (Finset.univ.filter fun p : (ZMod 7 × ZMod 7) × (ZMod 7 × ZMod 7) => (finitePlane 7).Adj p.1 p.2).card = 392 ∧ (Finset.univ.filter fun p : (ZMod 7 × ZMod 7) × (ZMod 7 × ZMod 7) => (finitePlane 7).Adj p.1 p.2 ∧ Gapped p.1 3 ∧ Gapped p.2 3).card = 28
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.GapSeven.exists_adjacent_gapped  (Proofs.HadwigerNelson.Arith.GapSeven)
+kernel: HadwigerNelson.GapSeven.exists_adjacent_gapped : ∃ a b, (HadwigerNelson.finitePlane 7).Adj a b ∧ HadwigerNelson.GapSeven.Gapped a 3 ∧ HadwigerNelson.GapSeven.Gapped b 3
+file:   theorem exists_adjacent_gapped : ∃ a b : ZMod 7 × ZMod 7, (finitePlane 7).Adj a b ∧ Gapped a 3 ∧ Gapped b 3
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.GapSeven.gamma_proper  (Proofs.HadwigerNelson.Arith.GapSeven)
+kernel: HadwigerNelson.GapSeven.gamma_proper (u v : ZMod 7 × ZMod 7) : (HadwigerNelson.finitePlane 7).Adj u v → HadwigerNelson.GapSeven.gamma u ≠ HadwigerNelson.GapSeven.gamma v
+file:   theorem gamma_proper : ∀ u v : ZMod 7 × ZMod 7, (finitePlane 7).Adj u v → gamma u ≠ gamma v
+kernel hypotheses (prop binders, named): 1: (a._@._internal._hyg.0 : (HadwigerNelson.finitePlane 7).Adj u v)
+
+## THM HadwigerNelson.GapSeven.gapped_eq_three  (Proofs.HadwigerNelson.Arith.GapSeven)
+kernel: HadwigerNelson.GapSeven.gapped_eq_three (v : ZMod 7 × ZMod 7) (m : Fin 4) : HadwigerNelson.GapSeven.Gapped v m → m = 3
+file:   theorem gapped_eq_three : ∀ (v : ZMod 7 × ZMod 7) (m : Fin 4), Gapped v m → m = 3
+kernel hypotheses (prop binders, named): 1: (a._@._internal._hyg.0 : HadwigerNelson.GapSeven.Gapped v m)
+
+## THM HadwigerNelson.GapSeven.gapped_iff  (Proofs.HadwigerNelson.Arith.GapSeven)
+kernel: HadwigerNelson.GapSeven.gapped_iff (v : ZMod 7 × ZMod 7) : (∃ m, HadwigerNelson.GapSeven.Gapped v m) ↔ HadwigerNelson.GapSeven.theta7 v = 0 ∨ HadwigerNelson.GapSeven.theta7 v = 5
+file:   theorem gapped_iff : ∀ v : ZMod 7 × ZMod 7, (∃ m, Gapped v m) ↔ theta7 v = 0 ∨ theta7 v = 5
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.GapSeven.supp_disjoint  (Proofs.HadwigerNelson.Arith.GapSeven)
+kernel: HadwigerNelson.GapSeven.supp_disjoint (u v : ZMod 7 × ZMod 7) : (HadwigerNelson.finitePlane 7).Adj u v → Disjoint (HadwigerNelson.GapSeven.supp u) (HadwigerNelson.GapSeven.supp v)
+file:   theorem supp_disjoint : ∀ u v : ZMod 7 × ZMod 7, (finitePlane 7).Adj u v → Disjoint (supp u) (supp v)
+kernel hypotheses (prop binders, named): 1: (a._@._internal._hyg.0 : (HadwigerNelson.finitePlane 7).Adj u v)
+
+## THM HadwigerNelson.GapSeven.zbar_iff  (Proofs.HadwigerNelson.Arith.GapSeven)
+kernel: HadwigerNelson.GapSeven.zbar_iff (v : ZMod 7 × ZMod 7) : HadwigerNelson.GapSeven.theta7 v = 0 ↔ HadwigerNelson.GapSeven.gamma v = 0 ∧ HadwigerNelson.GapSeven.Gapped v 3
+file:   theorem zbar_iff : ∀ v : ZMod 7 × ZMod 7, theta7 v = 0 ↔ gamma v = 0 ∧ Gapped v 3
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.GapSeven.zbar_indep  (Proofs.HadwigerNelson.Arith.GapSeven)
+kernel: HadwigerNelson.GapSeven.zbar_indep (u v : ZMod 7 × ZMod 7) : HadwigerNelson.GapSeven.theta7 u = 0 → HadwigerNelson.GapSeven.theta7 v = 0 → ¬(HadwigerNelson.finitePlane 7).Adj u v
+file:   theorem zbar_indep : ∀ u v : ZMod 7 × ZMod 7, theta7 u = 0 → theta7 v = 0 → ¬ (finitePlane 7).Adj u v
+kernel hypotheses (prop binders, named): 2: (a._@._internal._hyg.0 : HadwigerNelson.GapSeven.theta7 u = 0); (a._@._internal._hyg.0 : HadwigerNelson.GapSeven.theta7 v = 0)
+
+## THM HadwigerNelson.MajorityVote.ae_eq_measurable_of_majority  (Proofs.HadwigerNelson.Arith.MajorityVote)
+kernel: HadwigerNelson.MajorityVote.ae_eq_measurable_of_majority.{u_1, u_2, u_3} {Ω : Type u_1} {I : Type u_2} {K : Type u_3} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} [MeasureTheory.IsProbabilityMeasure μ] [Infinite I] [Countable K] [MeasurableSpace K] [MeasurableSingletonClass K] (G : Ω → K) (c : I → Ω → K) (E : I → Set Ω) (hE : ∀ (x : I), MeasurableSet (E x)) {p : ℝ} (hp : p < 1 / 2) (hEp : ∀ (x : I), μ.real (E x) ≤ p) (hindep : ∀ (x y : I), x ≠ y → μ (E x ∩ E y) = μ (E x) * μ (E y)) (hGc : ∀ (x : I), ∀ᵐ (ω : Ω) ∂μ, c x ω ≠ G ω → ω ∈ E x) : ∃ g, Measurable g ∧ G =ᵐ[μ] g
+file:   theorem ae_eq_measurable_of_majority {Ω I K : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsProbabilityMeasure μ] [Infinite I] [Countable K] [MeasurableSpace K] [MeasurableSingletonClass K] (G : Ω → K) (c : I → Ω → K) (E : I → Set Ω) (hE : ∀ x, MeasurableSet (E x)) {p : ℝ} (hp : p < 1 / 2) (hEp : ∀ x, μ.real (E x) ≤ p) (hindep : ∀ x y, x ≠ y → μ (E x ∩ E y) = μ (E x) * μ (E y)) (hGc : ∀ x, ∀ᵐ ω ∂μ, c x ω ≠ G ω → ω ∈ E x) : ∃ g : Ω → K, Measurable[⨆ x, MeasurableSpace.comap (c x) inferInstance] g ∧ G =ᵐ[μ] g
+kernel hypotheses (prop binders, named): 5: (hE : ∀ (x : I), MeasurableSet (E x)); (hp : p < 1 / 2); (hEp : ∀ (x : I), μ.real (E x) ≤ p); (hindep : ∀ (x y : I), x ≠ y → μ (E x ∩ E y) = μ (E x) * μ (E y)); (hGc : ∀ (x : I), ∀ᵐ (ω : Ω) ∂μ, c x ω ≠ G ω → ω ∈ E x)
+
+## THM HadwigerNelson.MajorityVote.eq_of_lt_two_mul_card_filter  (Proofs.HadwigerNelson.Arith.MajorityVote)
+kernel: HadwigerNelson.MajorityVote.eq_of_lt_two_mul_card_filter.{u_1} {K : Type u_1} [DecidableEq K] {n : ℕ} {cs : ℕ → K} {k k' : K} (hk : n < 2 * {i ∈ Finset.range n | cs i = k}.card) (hk' : n < 2 * {i ∈ Finset.range n | cs i = k'}.card) : k = k'
+file:   theorem eq_of_lt_two_mul_card_filter {K : Type*} [DecidableEq K] {n : ℕ} {cs : ℕ → K} {k k' : K} (hk : n < 2 * ((Finset.range n).filter fun i => cs i = k).card) (hk' : n < 2 * ((Finset.range n).filter fun i => cs i = k').card) : k = k'
+kernel hypotheses (prop binders, named): 2: (hk : n < 2 * {i ∈ Finset.range n | cs i = k}.card); (hk' : n < 2 * {i ∈ Finset.range n | cs i = k'}.card)
+
+## THM HadwigerNelson.MajorityVote.exists_measurable_selector  (Proofs.HadwigerNelson.Arith.MajorityVote)
+kernel: HadwigerNelson.MajorityVote.exists_measurable_selector.{u_1, u_2} {Ω : Type u_1} {K : Type u_2} {m : MeasurableSpace Ω} [Countable K] [MeasurableSpace K] (B : K → Set Ω) (hB : ∀ (k : K), MeasurableSet (B k)) (hdisj : ∀ (ω : Ω) (k k' : K), ω ∈ B k → ω ∈ B k' → k = k') (k₀ : K) : ∃ g, Measurable g ∧ ∀ (ω : Ω) (k : K), ω ∈ B k → g ω = k
+file:   theorem exists_measurable_selector {Ω K : Type*} {m : MeasurableSpace Ω} [Countable K] [MeasurableSpace K] (B : K → Set Ω) (hB : ∀ k, MeasurableSet (B k)) (hdisj : ∀ ω k k', ω ∈ B k → ω ∈ B k' → k = k') (k₀ : K) : ∃ g : Ω → K, Measurable g ∧ ∀ ω k, ω ∈ B k → g ω = k
+kernel hypotheses (prop binders, named): 2: (hB : ∀ (k : K), MeasurableSet (B k)); (hdisj : ∀ (ω : Ω) (k k' : K), ω ∈ B k → ω ∈ B k' → k = k')
+
+## THM HadwigerNelson.MajorityVote.lt_two_mul_card_filter_of_bad  (Proofs.HadwigerNelson.Arith.MajorityVote)
+kernel: HadwigerNelson.MajorityVote.lt_two_mul_card_filter_of_bad.{u_1} {K : Type u_1} [DecidableEq K] {n : ℕ} {cs : ℕ → K} {g : K} {bad : ℕ → Prop} [DecidablePred bad] (h : ∀ i < n, cs i ≠ g → bad i) (hlt : 2 * (Finset.filter bad (Finset.range n)).card < n) : n < 2 * {i ∈ Finset.range n | cs i = g}.card
+file:   theorem lt_two_mul_card_filter_of_bad {K : Type*} [DecidableEq K] {n : ℕ} {cs : ℕ → K} {g : K} {bad : ℕ → Prop} [DecidablePred bad] (h : ∀ i < n, cs i ≠ g → bad i) (hlt : 2 * ((Finset.range n).filter bad).card < n) : n < 2 * ((Finset.range n).filter fun i => cs i = g).card
+kernel hypotheses (prop binders, named): 2: (h : ∀ i < n, cs i ≠ g → bad i); (hlt : 2 * (Finset.filter bad (Finset.range n)).card < n)
+
+## THM HadwigerNelson.MajorityVote.measurableSet_lt_two_mul_card_filter  (Proofs.HadwigerNelson.Arith.MajorityVote)
+kernel: HadwigerNelson.MajorityVote.measurableSet_lt_two_mul_card_filter.{u_1, u_2} {Ω : Type u_1} {K : Type u_2} {m : MeasurableSpace Ω} [DecidableEq K] (cs : ℕ → Ω → K) (k : K) (hcs : ∀ (i : ℕ), MeasurableSet {ω | cs i ω = k}) (n : ℕ) : MeasurableSet {ω | n < 2 * {i ∈ Finset.range n | cs i ω = k}.card}
+file:   theorem measurableSet_lt_two_mul_card_filter {Ω K : Type*} {m : MeasurableSpace Ω} [DecidableEq K] (cs : ℕ → Ω → K) (k : K) (hcs : ∀ i, MeasurableSet {ω | cs i ω = k}) (n : ℕ) : MeasurableSet {ω | n < 2 * ((Finset.range n).filter fun i => cs i ω = k).card}
+kernel hypotheses (prop binders, named): 1: (hcs : ∀ (i : ℕ), MeasurableSet {ω | cs i ω = k})
+
+## THM HadwigerNelson.MajorityVote.measure_half_le_sum_indicator_le  (Proofs.HadwigerNelson.Arith.MajorityVote)
+kernel: HadwigerNelson.MajorityVote.measure_half_le_sum_indicator_le.{u_1} {Ω : Type u_1} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} [MeasureTheory.IsProbabilityMeasure μ] (E : ℕ → Set Ω) (hE : ∀ (i : ℕ), MeasurableSet (E i)) {p : ℝ} (hp : p < 1 / 2) (hEp : ∀ (i : ℕ), μ.real (E i) ≤ p) (hindep : ∀ (i j : ℕ), i ≠ j → μ (E i ∩ E j) = μ (E i) * μ (E j)) {n : ℕ} (hn : 0 < n) : μ {ω | ↑n / 2 ≤ ∑ i ∈ Finset.range n, (E i).indicator (fun x => 1) ω} ≤ ENNReal.ofReal (1 / (4 * (1 / 2 - p) ^ 2) / ↑n)
+file:   theorem measure_half_le_sum_indicator_le {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsProbabilityMeasure μ] (E : ℕ → Set Ω) (hE : ∀ i, MeasurableSet (E i)) {p : ℝ} (hp : p < 1 / 2) (hEp : ∀ i, μ.real (E i) ≤ p) (hindep : ∀ i j, i ≠ j → μ (E i ∩ E j) = μ (E i) * μ (E j)) {n : ℕ} (hn : 0 < n) : μ {ω | (n : ℝ) / 2 ≤ ∑ i ∈ Finset.range n, (E i).indicator (fun _ => (1 : ℝ)) ω} ≤ ENNReal.ofReal (1 / (4 * (1 / 2 - p) ^ 2) / n)
+kernel hypotheses (prop binders, named): 5: (hE : ∀ (i : ℕ), MeasurableSet (E i)); (hp : p < 1 / 2); (hEp : ∀ (i : ℕ), μ.real (E i) ≤ p); (hindep : ∀ (i j : ℕ), i ≠ j → μ (E i ∩ E j) = μ (E i) * μ (E j)); (hn : 0 < n)
+
+## THM HadwigerNelson.SpectralInputs.countable_bot_subfield_real  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.countable_bot_subfield_real : Countable ↥⊥
+file:   theorem countable_bot_subfield_real : Countable (⊥ : Subfield ℝ)
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.SpectralInputs.exists_odd_rep_of_mem_unitRing  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.exists_odd_rep_of_mem_unitRing {z : ℂ} (hz : z ∈ HadwigerNelson.SpectralChain.unitRing ⊥) : ∃ a b c, Odd c ∧ z * ↑c = ↑a + ↑b * Complex.I
+file:   theorem exists_odd_rep_of_mem_unitRing {z : ℂ} (hz : z ∈ unitRing (⊥ : Subfield ℝ)) : ∃ a b c : ℤ, Odd c ∧ z * (c : ℂ) = (a : ℂ) + (b : ℂ) * Complex.I
+kernel hypotheses (prop binders, named): 1: (hz : z ∈ HadwigerNelson.SpectralChain.unitRing ⊥)
+
+## THM HadwigerNelson.SpectralInputs.exists_odd_rep_of_unitVector  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.exists_odd_rep_of_unitVector {z : ℂ} (hz : z ∈ HadwigerNelson.planeOver ⊥) (h1 : ‖z‖ = 1) : ∃ a b c, Odd c ∧ z * ↑c = ↑a + ↑b * Complex.I
+file:   theorem exists_odd_rep_of_unitVector {z : ℂ} (hz : z ∈ planeOver (⊥ : Subfield ℝ)) (h1 : ‖z‖ = 1) : ∃ a b c : ℤ, Odd c ∧ z * (c : ℂ) = (a : ℂ) + (b : ℂ) * Complex.I
+kernel hypotheses (prop binders, named): 2: (hz : z ∈ HadwigerNelson.planeOver ⊥); (h1 : ‖z‖ = 1)
+
+## THM HadwigerNelson.SpectralInputs.exists_parityHom  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.exists_parityHom : ∃ π, ∀ (u : ↑(HadwigerNelson.SpectralChain.unitVectors ⊥)), π (HadwigerNelson.SpectralChain.uvRing u) = 1
+file:   theorem exists_parityHom : ∃ π : unitRing (⊥ : Subfield ℝ) →+* ZMod 2, ∀ u : unitVectors (⊥ : Subfield ℝ), π (uvRing u) = 1
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.SpectralInputs.exists_signChar  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.exists_signChar : ∃ ψ, ↑(ψ 1) = -1
+file:   theorem exists_signChar : ∃ ψ : AddChar (ZMod 2) Circle, ((ψ 1 : Circle) : ℂ) = -1
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.SpectralInputs.intCast_zmod_two_of_odd  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.intCast_zmod_two_of_odd {c : ℤ} (hc : Odd c) : ↑c = 1
+file:   theorem intCast_zmod_two_of_odd {c : ℤ} (hc : Odd c) : ((c : ℤ) : ZMod 2) = 1
+kernel hypotheses (prop binders, named): 1: (hc : Odd c)
+
+## THM HadwigerNelson.SpectralInputs.negCircle_trivial_bot  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.negCircle_trivial_bot : (HadwigerNelson.SpectralChain.Interface.trivial ⊥).NegCircle
+file:   theorem negCircle_trivial_bot : (Interface.trivial (⊥ : Subfield ℝ)).NegCircle
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.SpectralInputs.parity_rep_unique  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.parity_rep_unique {z : ℂ} {a b c a' b' c' : ℤ} (hc : Odd c) (hc' : Odd c') (h : z * ↑c = ↑a + ↑b * Complex.I) (h' : z * ↑c' = ↑a' + ↑b' * Complex.I) : ↑(a + b) = ↑(a' + b')
+file:   theorem parity_rep_unique {z : ℂ} {a b c a' b' c' : ℤ} (hc : Odd c) (hc' : Odd c') (h : z * (c : ℂ) = (a : ℂ) + (b : ℂ) * Complex.I) (h' : z * (c' : ℂ) = (a' : ℂ) + (b' : ℂ) * Complex.I) : ((a + b : ℤ) : ZMod 2) = ((a' + b' : ℤ) : ZMod 2)
+kernel hypotheses (prop binders, named): 4: (hc : Odd c); (hc' : Odd c'); (h : z * ↑c = ↑a + ↑b * Complex.I); (h' : z * ↑c' = ↑a' + ↑b' * Complex.I)
+
+## THM HadwigerNelson.SpectralInputs.re_im_of_mul_intCast_eq  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.re_im_of_mul_intCast_eq {z : ℂ} {a b c : ℤ} (h : z * ↑c = ↑a + ↑b * Complex.I) : z.re * ↑c = ↑a ∧ z.im * ↑c = ↑b
+file:   theorem re_im_of_mul_intCast_eq {z : ℂ} {a b c : ℤ} (h : z * (c : ℂ) = (a : ℂ) + (b : ℂ) * Complex.I) : z.re * c = a ∧ z.im * c = b
+kernel hypotheses (prop binders, named): 1: (h : z * ↑c = ↑a + ↑b * Complex.I)
+
+## THM HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot (hBH : HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing ⊥)) : ∃ ν m, (HadwigerNelson.SpectralChain.Interface.trivial ⊥).MulStable ∧ (HadwigerNelson.SpectralChain.Interface.trivial ⊥).NegCircle ∧ MeasureTheory.IsFiniteMeasure ν ∧ HadwigerNelson.SpectralChain.RotInv ⊥ ν ∧ ν (HadwigerNelson.SpectralChain.Interface.trivial ⊥).E = 0 ∧ HadwigerNelson.SpectralInputs.IsHaarFourier m ∧ ∀ (a : ENNReal), ν ≠ a • m
+file:   theorem sp_if_hypotheses_trivial_bot (hBH : BochnerHerglotz (unitRing (⊥ : Subfield ℝ))) : ∃ ν m : Measure (Dual (⊥ : Subfield ℝ)), (Interface.trivial (⊥ : Subfield ℝ)).MulStable ∧ (Interface.trivial (⊥ : Subfield ℝ)).NegCircle ∧ IsFiniteMeasure ν ∧ RotInv (⊥ : Subfield ℝ) ν ∧ ν (Interface.trivial (⊥ : Subfield ℝ)).E = 0 ∧ IsHaarFourier m ∧ ∀ a : ENNReal, ν ≠ a • m
+kernel hypotheses (prop binders, named): 1: (hBH : HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing ⊥))
+
+## THM HadwigerNelson.SpectralInputs.two_dvd_of_sq_add_sq_eq_four_mul  (Proofs.HadwigerNelson.Arith.NegCircleModel)
+kernel: HadwigerNelson.SpectralInputs.two_dvd_of_sq_add_sq_eq_four_mul {a b n : ℤ} (h : a ^ 2 + b ^ 2 = 4 * n) : 2 ∣ a ∧ 2 ∣ b
+file:   theorem two_dvd_of_sq_add_sq_eq_four_mul {a b n : ℤ} (h : a ^ 2 + b ^ 2 = 4 * n) : 2 ∣ a ∧ 2 ∣ b
+kernel hypotheses (prop binders, named): 1: (h : a ^ 2 + b ^ 2 = 4 * n)
+
+## THM HadwigerNelson.StandingFive.card_filter_pow_eq_one  (Proofs.HadwigerNelson.Arith.NormOneTarget)
+kernel: HadwigerNelson.StandingFive.card_filter_pow_eq_one.{u_1} {k : Type u_1} [Field k] [Fintype k] [DecidableEq k] {d : ℕ} (hd0 : d ≠ 0) (hd : d ∣ Fintype.card k - 1) : {u | u ^ d = 1}.card = d
+file:   theorem card_filter_pow_eq_one {k : Type*} [Field k] [Fintype k] [DecidableEq k] {d : ℕ} (hd0 : d ≠ 0) (hd : d ∣ Fintype.card k - 1) : (univ.filter fun u : k => u ^ d = 1).card = d
+kernel hypotheses (prop binders, named): 2: (hd0 : d ≠ 0); (hd : d ∣ Fintype.card k - 1)
+
+## THM HadwigerNelson.StandingFive.card_normOne  (Proofs.HadwigerNelson.Arith.NormOneTarget)
+kernel: HadwigerNelson.StandingFive.card_normOne.{u_1} {k : Type u_1} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) : {u | u ^ (Q + 1) = 1}.card = Q + 1
+file:   theorem card_normOne {k : Type*} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) : (univ.filter fun u : k => u ^ (Q + 1) = 1).card = Q + 1
+kernel hypotheses (prop binders, named): 1: (hcard : Fintype.card k = Q ^ 2)
+
+## THM HadwigerNelson.StandingFive.involution_eq_pow  (Proofs.HadwigerNelson.Arith.NormOneTarget)
+kernel: HadwigerNelson.StandingFive.involution_eq_pow.{u_1} {k : Type u_1} [Field k] [Fintype k] (σ : k →+* k) (hσ : ∀ (x : k), σ (σ x) = x) (hne : σ ≠ RingHom.id k) {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) (x : k) : σ x = x ^ Q
+file:   theorem involution_eq_pow {k : Type*} [Field k] [Fintype k] (σ : k →+* k) (hσ : ∀ x, σ (σ x) = x) (hne : σ ≠ RingHom.id k) {Q : ℕ} (hcard : Fintype.card k = Q ^ 2) (x : k) : σ x = x ^ Q
+kernel hypotheses (prop binders, named): 3: (hσ : ∀ (x : k), σ (σ x) = x); (hne : σ ≠ RingHom.id k); (hcard : Fintype.card k = Q ^ 2)
+
+## THM HadwigerNelson.StandingFive.targetFloor_of_charSum  (Proofs.HadwigerNelson.Arith.NormOneTarget)
+kernel: HadwigerNelson.StandingFive.targetFloor_of_charSum (N Q : ℕ) {m : ℝ} (hm : 0 < m) (hN : (↑N - 1) * m < ↑Q + 1 + m) (hchar : ∀ (k : Type) [inst : Field k] [inst_1 : Fintype k] [inst_2 : DecidableEq k], Fintype.card k = Q ^ 2 → ∀ (ψ : AddChar k ℂ), ψ ≠ 1 → -m ≤ (∑ u with u ^ (Q + 1) = 1, ψ u).re) : HadwigerNelson.StandingFive.TargetFloor N Q
+file:   theorem targetFloor_of_charSum (N Q : ℕ) {m : ℝ} (hm : 0 < m) (hN : ((N : ℝ) - 1) * m < (Q : ℝ) + 1 + m) (hchar : ∀ (k : Type) [Field k] [Fintype k] [DecidableEq k], Fintype.card k = Q ^ 2 → ∀ ψ : AddChar k ℂ, ψ ≠ 1 → -m ≤ (∑ u ∈ univ.filter (fun u : k => u ^ (Q + 1) = 1), ψ u).re) : TargetFloor N Q
+kernel hypotheses (prop binders, named): 3: (hm : 0 < m); (hN : (↑N - 1) * m < ↑Q + 1 + m); (hchar : ∀ (k : Type) [inst : Field k] [inst_1 : Fintype k] [inst_2 : DecidableEq k], Fintype.card k = Q ^ 2 → ∀ (ψ : AddChar k ℂ), ψ ≠ 1 → -m ≤ (∑ u with u ^ (Q + 1) = 1, ψ u).re)
+
+## THM HadwigerNelson.SpectralInputs.comap_factorSigma_le  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.comap_factorSigma_le.{u_1, u_2, u_3} {R : Type u_1} {Ω : Type u_2} {Ω' : Type u_3} [MeasurableSpace Ω] [MeasurableSpace Ω'] {μ : MeasureTheory.Measure Ω} {μ' : MeasureTheory.Measure Ω'} [MeasureTheory.IsProbabilityMeasure μ] [MeasureTheory.IsProbabilityMeasure μ'] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (T' : R → Ω' → Ω') (hT' : ∀ (y : R), MeasureTheory.MeasurePreserving (T' y) μ' μ') (l : Filter R) {π : Ω → Ω'} (hπ : MeasureTheory.MeasurePreserving π μ μ') (hequiv : ∀ (y : R), π ∘ T y = T' y ∘ π) : MeasurableSpace.comap π (HadwigerNelson.SpectralInputs.factorSigma T' hT' l) ≤ HadwigerNelson.SpectralInputs.factorSigma T hT l
+file:   theorem comap_factorSigma_le [IsProbabilityMeasure μ] [IsProbabilityMeasure μ'] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (T' : R → Ω' → Ω') (hT' : ∀ y, MeasurePreserving (T' y) μ' μ') (l : Filter R) {π : Ω → Ω'} (hπ : MeasurePreserving π μ μ') (hequiv : ∀ y, π ∘ T y = T' y ∘ π) : (factorSigma T' hT' l).comap π ≤ factorSigma T hT l
+kernel hypotheses (prop binders, named): 4: (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ); (hT' : ∀ (y : R), MeasureTheory.MeasurePreserving (T' y) μ' μ'); (hπ : MeasureTheory.MeasurePreserving π μ μ'); (hequiv : ∀ (y : R), π ∘ T y = T' y ∘ π)
+  INCLUDED {R Ω Ω' : Type*}
+  INCLUDED {R Ω Ω' : Type*}
+  INCLUDED {R Ω Ω' : Type*}
+  INCLUDED [MeasurableSpace Ω]
+  INCLUDED [MeasurableSpace Ω']
+  INCLUDED {μ : Measure Ω}
+  INCLUDED {μ' : Measure Ω'}
+
+## THM HadwigerNelson.SpectralInputs.contVec_prod_eq  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.contVec_prod_eq.{u_1, u_2, u_3, u_4, u_5} {R : Type u_1} {Ω₁ : Type u_2} {Ω₂ : Type u_3} {Ω₃ : Type u_4} [MeasurableSpace Ω₁] [MeasurableSpace Ω₂] [MeasurableSpace Ω₃] {μ₁ : MeasureTheory.Measure Ω₁} {μ₂ : MeasureTheory.Measure Ω₂} {μ₃ : MeasureTheory.Measure Ω₃} [AddCommGroup R] [Finite Ω₁] [MeasurableSingletonClass Ω₁] [MeasureTheory.IsProbabilityMeasure μ₁] [MeasureTheory.IsProbabilityMeasure μ₂] [MeasureTheory.IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (h₁ : ∀ᶠ (y : R) in l, T₁ y = id) {B : Type u_5} [MeasurableSpace B] (ε : R → Ω₃ → B) (hε : ∀ (x : R), Measurable (ε x)) (hgen : inst✝ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω) (hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D) : HadwigerNelson.SpectralInputs.contVec (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l = ↑(MeasureTheory.lpMeas ℝ ℝ (HadwigerNelson.SpectralInputs.prodFactorSigma T₂ hT₂ l) 2 (μ₁.prod (μ₂.prod μ₃)))
+file:   theorem contVec_prod_eq [AddCommGroup R] [Finite Ω₁] [MeasurableSingletonClass Ω₁] [IsProbabilityMeasure μ₁] [IsProbabilityMeasure μ₂] [IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ y, MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ y, MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ y, MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (h₁ : ∀ᶠ y in l, T₁ y = id) {B : Type*} [MeasurableSpace B] (ε : R → Ω₃ → B) (hε : ∀ x, Measurable (ε x)) (hgen : ‹MeasurableSpace Ω₃› = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ y x ω, ε x (T₃ y ω) = ε (x + y) ω) (hl : ∀ D : Set R, D.Finite → ∃ᶠ y in l, y ∉ D) : contVec (prodMap₃ T₁ T₂ T₃) (measurePreserving_prodMap₃ hT₁ hT₂ hT₃) l = (lpMeas ℝ ℝ (prodFactorSigma (Ω₁
+kernel hypotheses (prop binders, named): 9: (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁); (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂); (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃); (h₁ : ∀ᶠ (y : R) in l, T₁ y = id); (hε : ∀ (x : R), Measurable (ε x)); (hgen : inst✝⁷ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance); (hind : ProbabilityTheory.iIndepFun ε μ₃); (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω); (hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D)
+  INCLUDED {R : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED [MeasurableSpace Ω₁]
+  INCLUDED [MeasurableSpace Ω₂]
+  INCLUDED [MeasurableSpace Ω₃]
+  INCLUDED {μ₁ : Measure Ω₁}
+  INCLUDED {μ₂ : Measure Ω₂}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.contVec_prod_eq_coin  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.contVec_prod_eq_coin (ρ : MeasureTheory.Measure Bool) [MeasureTheory.IsProbabilityMeasure ρ] : HadwigerNelson.SpectralInputs.contVec (HadwigerNelson.SpectralInputs.prodMap₃ (fun x => id) (fun x => id) fun y ω x => ω (x + y)) ⋯ Filter.cofinite = ↑(MeasureTheory.lpMeas ℝ ℝ (HadwigerNelson.SpectralInputs.prodFactorSigma (fun x => id) ⋯ Filter.cofinite) 2 ((MeasureTheory.Measure.dirac ()).prod ((MeasureTheory.Measure.dirac ()).prod (MeasureTheory.Measure.infinitePi fun x => ρ))))
+file:   theorem contVec_prod_eq_coin (ρ : Measure Bool) [IsProbabilityMeasure ρ] : contVec (prodMap₃ (fun _ : ℤ => (id : Unit → Unit)) (fun _ : ℤ => (id : Unit → Unit)) (fun (y : ℤ) (ω : ℤ → Bool) (x : ℤ) => ω (x + y))) (measurePreserving_prodMap₃ (μ₁
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.SpectralInputs.exists_cyl_of_subset  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.exists_cyl_of_subset.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace B] (ε : R → Ω₃ → B) {A A' : Finset R} (hsub : A ⊆ A') {E₀ : Set (X × (↥A → B))} (hE₀ : MeasurableSet E₀) : ∃ E₀', MeasurableSet E₀' ∧ HadwigerNelson.SpectralInputs.cylMap ε A' ⁻¹' E₀' = HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀
+file:   theorem exists_cyl_of_subset (ε : R → Ω₃ → B) {A A' : Finset R} (hsub : A ⊆ A') {E₀ : Set (X × (A → B))} (hE₀ : MeasurableSet E₀) : ∃ E₀' : Set (X × (A' → B)), MeasurableSet E₀' ∧ cylMap ε A' ⁻¹' E₀' = cylMap ε A ⁻¹' E₀
+kernel hypotheses (prop binders, named): 2: (hsub : A ⊆ A'); (hE₀ : MeasurableSet E₀)
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  OMITTED [MeasurableSpace Ω₃] (the file says `omit … in` above the declaration)
+  INCLUDED [MeasurableSpace B]
+  ABSENT term {μX : Measure X} — reviewed: a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+  ABSENT term {μ₃ : Measure Ω₃} — reviewed: a bare measure the statement does not mention; `Measure Ω₃` bundles no hypothesis
+
+## THM HadwigerNelson.SpectralInputs.exists_fst_preimage_ae_eq_of_mem_factorSets  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.exists_fst_preimage_ae_eq_of_mem_factorSets.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace Ω₃] [MeasurableSpace B] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [AddCommGroup R] [MeasureTheory.IsProbabilityMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {S : R → X → X} {T₃ : R → Ω₃ → Ω₃} (hS : ∀ (y : R), MeasureTheory.MeasurePreserving (S y) μX μX) (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (ε : R → Ω₃ → B) (hε : ∀ (x : R), Measurable (ε x)) (hgen : inst✝ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω) (hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D) {A : Set (X × Ω₃)} (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets (fun y => Prod.map (S y) (T₃ y)) ⋯ l) : ∃ C, MeasurableSet C ∧ A =ᵐ[μX.prod μ₃] Prod.fst ⁻¹' C
+file:   theorem exists_fst_preimage_ae_eq_of_mem_factorSets [AddCommGroup R] [IsProbabilityMeasure μX] [IsProbabilityMeasure μ₃] {S : R → X → X} {T₃ : R → Ω₃ → Ω₃} (hS : ∀ y, MeasurePreserving (S y) μX μX) (hT₃ : ∀ y, MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (ε : R → Ω₃ → B) (hε : ∀ x, Measurable (ε x)) (hgen : ‹MeasurableSpace Ω₃› = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ y x ω, ε x (T₃ y ω) = ε (x + y) ω) (hl : ∀ D : Set R, D.Finite → ∃ᶠ y in l, y ∉ D) {A : Set (X × Ω₃)} (hA : A ∈ factorSets (fun y => Prod.map (S y) (T₃ y)) (fun y => (hS y).prod (hT₃ y)) l) : ∃ C : Set X, MeasurableSet C ∧ A =ᵐ[μX.prod μ₃] Prod.fst ⁻¹' C
+kernel hypotheses (prop binders, named): 8: (hS : ∀ (y : R), MeasureTheory.MeasurePreserving (S y) μX μX); (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃); (hε : ∀ (x : R), Measurable (ε x)); (hgen : inst✝⁴ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance); (hind : ProbabilityTheory.iIndepFun ε μ₃); (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω); (hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D); (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets (fun y => Prod.map (S y) (T₃ y)) ⋯ l)
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  INCLUDED [MeasurableSpace Ω₃]
+  INCLUDED [MeasurableSpace B]
+  INCLUDED {μX : Measure X}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.exists_fst_preimage_of_integral_section_var_eq_zero  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.exists_fst_preimage_of_integral_section_var_eq_zero.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsProbabilityMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) (h0 : ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E)) ∂μX = 0) : ∃ C, MeasurableSet C ∧ E =ᵐ[μX.prod μ₃] Prod.fst ⁻¹' C
+file:   theorem exists_fst_preimage_of_integral_section_var_eq_zero [IsProbabilityMeasure μX] [IsProbabilityMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) (h0 : ∫ w, μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E)) ∂μX = 0) : ∃ C : Set X, MeasurableSet C ∧ E =ᵐ[μX.prod μ₃] Prod.fst ⁻¹' C
+kernel hypotheses (prop binders, named): 2: (hE : MeasurableSet E); (h0 : ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E)) ∂μX = 0)
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  INCLUDED [MeasurableSpace Ω₃]
+  ABSENT inst [MeasurableSpace B] — reviewed: a σ-algebra on a type `B` the statement does not mention
+  INCLUDED {μX : Measure X}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.exists_measurableSet_prodFactorSigma_ae_eq  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.exists_measurableSet_prodFactorSigma_ae_eq.{u_1, u_2, u_3, u_4, u_5} {R : Type u_1} {Ω₁ : Type u_2} {Ω₂ : Type u_3} {Ω₃ : Type u_4} [MeasurableSpace Ω₁] [MeasurableSpace Ω₂] [MeasurableSpace Ω₃] {μ₁ : MeasureTheory.Measure Ω₁} {μ₂ : MeasureTheory.Measure Ω₂} {μ₃ : MeasureTheory.Measure Ω₃} [AddCommGroup R] [Finite Ω₁] [MeasurableSingletonClass Ω₁] [MeasureTheory.IsProbabilityMeasure μ₁] [MeasureTheory.IsProbabilityMeasure μ₂] [MeasureTheory.IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (h₁ : ∀ᶠ (y : R) in l, T₁ y = id) {B : Type u_5} [MeasurableSpace B] (ε : R → Ω₃ → B) (hε : ∀ (x : R), Measurable (ε x)) (hgen : inst✝ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω) (hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D) {A : Set (Ω₁ × Ω₂ × Ω₃)} (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l) : ∃ B', MeasurableSet B' ∧ A =ᵐ[μ₁.prod (μ₂.prod μ₃)] B'
+file:   theorem exists_measurableSet_prodFactorSigma_ae_eq [AddCommGroup R] [Finite Ω₁] [MeasurableSingletonClass Ω₁] [IsProbabilityMeasure μ₁] [IsProbabilityMeasure μ₂] [IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ y, MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ y, MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ y, MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (h₁ : ∀ᶠ y in l, T₁ y = id) {B : Type*} [MeasurableSpace B] (ε : R → Ω₃ → B) (hε : ∀ x, Measurable (ε x)) (hgen : ‹MeasurableSpace Ω₃› = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ y x ω, ε x (T₃ y ω) = ε (x + y) ω) (hl : ∀ D : Set R, D.Finite → ∃ᶠ y in l, y ∉ D) {A : Set (Ω₁ × Ω₂ × Ω₃)} (hA : A ∈ factorSets (prodMap₃ T₁ T₂ T₃) (measurePreserving_prodMap₃ hT₁ hT₂ hT₃) l) : ∃ B' : Set (Ω₁ × Ω₂ × Ω₃), MeasurableSet[prodFactorSigma (Ω₁
+kernel hypotheses (prop binders, named): 10: (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁); (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂); (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃); (h₁ : ∀ᶠ (y : R) in l, T₁ y = id); (hε : ∀ (x : R), Measurable (ε x)); (hgen : inst✝⁷ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance); (hind : ProbabilityTheory.iIndepFun ε μ₃); (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω); (hl : ∀ (D : Set R), D.Finite → ∃ᶠ (y : R) in l, y ∉ D); (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l)
+  INCLUDED {R : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED [MeasurableSpace Ω₁]
+  INCLUDED [MeasurableSpace Ω₂]
+  INCLUDED [MeasurableSpace Ω₃]
+  INCLUDED {μ₁ : Measure Ω₁}
+  INCLUDED {μ₂ : Measure Ω₂}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.fibre_mem_factorSets  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.fibre_mem_factorSets.{u_1, u_2, u_3, u_4} {R : Type u_1} {Ω₁ : Type u_2} {Ω₂ : Type u_3} {Ω₃ : Type u_4} [MeasurableSpace Ω₁] [MeasurableSpace Ω₂] [MeasurableSpace Ω₃] {μ₁ : MeasureTheory.Measure Ω₁} {μ₂ : MeasureTheory.Measure Ω₂} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsProbabilityMeasure μ₁] [MeasureTheory.IsProbabilityMeasure μ₂] [MeasureTheory.IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (h₁ : ∀ᶠ (y : R) in l, T₁ y = id) {C : Set (Ω₁ × Ω₂)} (hC : MeasurableSet C) (hB : {ω | (ω.1, ω.2.1) ∈ C} ∈ HadwigerNelson.SpectralInputs.factorSets (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l) {a : Ω₁} (ha : μ₁ {a} ≠ 0) : Prod.mk a ⁻¹' C ∈ HadwigerNelson.SpectralInputs.factorSets T₂ hT₂ l
+file:   theorem fibre_mem_factorSets [IsProbabilityMeasure μ₁] [IsProbabilityMeasure μ₂] [IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ y, MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ y, MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ y, MeasurePreserving (T₃ y) μ₃ μ₃) (l : Filter R) (h₁ : ∀ᶠ y in l, T₁ y = id) {C : Set (Ω₁ × Ω₂)} (hC : MeasurableSet C) (hB : {ω : Ω₁ × Ω₂ × Ω₃ | (ω.1, ω.2.1) ∈ C} ∈ factorSets (prodMap₃ T₁ T₂ T₃) (measurePreserving_prodMap₃ hT₁ hT₂ hT₃) l) {a : Ω₁} (ha : μ₁ {a} ≠ 0) : Prod.mk a ⁻¹' C ∈ factorSets T₂ hT₂ l
+kernel hypotheses (prop binders, named): 7: (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁); (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂); (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃); (h₁ : ∀ᶠ (y : R) in l, T₁ y = id); (hC : MeasurableSet C); (hB : {ω | (ω.1, ω.2.1) ∈ C} ∈ HadwigerNelson.SpectralInputs.factorSets (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃) ⋯ l); (ha : μ₁ {a} ≠ 0)
+  INCLUDED {R : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED [MeasurableSpace Ω₁]
+  INCLUDED [MeasurableSpace Ω₂]
+  INCLUDED [MeasurableSpace Ω₃]
+  INCLUDED {μ₁ : Measure Ω₁}
+  INCLUDED {μ₂ : Measure Ω₂}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.generateFrom_cylSets  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.generateFrom_cylSets.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace Ω₃] [MeasurableSpace B] {ε : R → Ω₃ → B} (hε : ∀ (x : R), Measurable (ε x)) (hgen : inst✝ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) : inferInstance = MeasurableSpace.generateFrom (HadwigerNelson.SpectralInputs.cylSets ε)
+file:   theorem generateFrom_cylSets {ε : R → Ω₃ → B} (hε : ∀ x, Measurable (ε x)) (hgen : ‹MeasurableSpace Ω₃› = ⨆ x, MeasurableSpace.comap (ε x) inferInstance) : (inferInstance : MeasurableSpace (X × Ω₃)) = MeasurableSpace.generateFrom (cylSets (X
+kernel hypotheses (prop binders, named): 2: (hε : ∀ (x : R), Measurable (ε x)); (hgen : inst✝¹ = ⨆ x, MeasurableSpace.comap (ε x) inferInstance)
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  INCLUDED [MeasurableSpace Ω₃]
+  INCLUDED [MeasurableSpace B]
+  ABSENT term {μX : Measure X} — reviewed: a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+  ABSENT term {μ₃ : Measure Ω₃} — reviewed: a bare measure the statement does not mention; `Measure Ω₃` bundles no hypothesis
+
+## THM HadwigerNelson.SpectralInputs.integrable_measureReal_section  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.integrable_measureReal_section.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsFiniteMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : MeasureTheory.Integrable (fun w => μ₃.real (Prod.mk w ⁻¹' E)) μX
+file:   theorem integrable_measureReal_section [IsFiniteMeasure μX] [IsProbabilityMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : Integrable (fun w => μ₃.real (Prod.mk w ⁻¹' E)) μX
+kernel hypotheses (prop binders, named): 1: (hE : MeasurableSet E)
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  INCLUDED [MeasurableSpace Ω₃]
+  ABSENT inst [MeasurableSpace B] — reviewed: a σ-algebra on a type `B` the statement does not mention
+  INCLUDED {μX : Measure X}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.integrable_section_var  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.integrable_section_var.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsFiniteMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : MeasureTheory.Integrable (fun w => μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E))) μX
+file:   theorem integrable_section_var [IsFiniteMeasure μX] [IsProbabilityMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : Integrable (fun w => μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E))) μX
+kernel hypotheses (prop binders, named): 1: (hE : MeasurableSet E)
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  INCLUDED [MeasurableSpace Ω₃]
+  ABSENT inst [MeasurableSpace B] — reviewed: a σ-algebra on a type `B` the statement does not mention
+  INCLUDED {μX : Measure X}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.integral_section_var_le_add  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.integral_section_var_le_add.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsProbabilityMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {E E' : Set (X × Ω₃)} (hE : MeasurableSet E) (hE' : MeasurableSet E') : ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E)) ∂μX ≤ ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E') * (1 - μ₃.real (Prod.mk w ⁻¹' E')) ∂μX + (μX.prod μ₃).real (symmDiff E E')
+file:   theorem integral_section_var_le_add [IsProbabilityMeasure μX] [IsProbabilityMeasure μ₃] {E E' : Set (X × Ω₃)} (hE : MeasurableSet E) (hE' : MeasurableSet E') : ∫ w, μ₃.real (Prod.mk w ⁻¹' E) * (1 - μ₃.real (Prod.mk w ⁻¹' E)) ∂μX ≤ ∫ w, μ₃.real (Prod.mk w ⁻¹' E') * (1 - μ₃.real (Prod.mk w ⁻¹' E')) ∂μX + (μX.prod μ₃).real (E ∆ E')
+kernel hypotheses (prop binders, named): 2: (hE : MeasurableSet E); (hE' : MeasurableSet E')
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  INCLUDED [MeasurableSpace Ω₃]
+  ABSENT inst [MeasurableSpace B] — reviewed: a σ-algebra on a type `B` the statement does not mention
+  INCLUDED {μX : Measure X}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.integral_section_var_le_symmDiff_shift  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.integral_section_var_le_symmDiff_shift.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace Ω₃] [MeasurableSpace B] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [AddCommGroup R] [MeasureTheory.IsProbabilityMeasure μX] [MeasureTheory.IsProbabilityMeasure μ₃] {S : R → X → X} {T₃ : R → Ω₃ → Ω₃} (hS : ∀ (y : R), Measurable (S y)) (hT₃ : ∀ (y : R), Measurable (T₃ y)) {ε : R → Ω₃ → B} (hε : ∀ (x : R), Measurable (ε x)) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω) (A : Finset R) {E₀ : Set (X × (↥A → B))} (hE₀ : MeasurableSet E₀) {y : R} (hy : ∀ x ∈ A, x + y ∉ A) : ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀) * (1 - μ₃.real (Prod.mk w ⁻¹' HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀)) ∂μX ≤ (μX.prod μ₃).real (symmDiff (Prod.map (S y) (T₃ y) ⁻¹' HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀) (HadwigerNelson.SpectralInputs.cylMap ε A ⁻¹' E₀))
+file:   theorem integral_section_var_le_symmDiff_shift [AddCommGroup R] [IsProbabilityMeasure μX] [IsProbabilityMeasure μ₃] {S : R → X → X} {T₃ : R → Ω₃ → Ω₃} (hS : ∀ y, Measurable (S y)) (hT₃ : ∀ y, Measurable (T₃ y)) {ε : R → Ω₃ → B} (hε : ∀ x, Measurable (ε x)) (hind : ProbabilityTheory.iIndepFun ε μ₃) (hshift : ∀ y x ω, ε x (T₃ y ω) = ε (x + y) ω) (A : Finset R) {E₀ : Set (X × (A → B))} (hE₀ : MeasurableSet E₀) {y : R} (hy : ∀ x ∈ A, x + y ∉ A) : ∫ w, μ₃.real (Prod.mk w ⁻¹' (cylMap ε A ⁻¹' E₀)) * (1 - μ₃.real (Prod.mk w ⁻¹' (cylMap ε A ⁻¹' E₀))) ∂μX ≤ (μX.prod μ₃).real ((Prod.map (S y) (T₃ y) ⁻¹' (cylMap ε A ⁻¹' E₀)) ∆ (cylMap ε A ⁻¹' E₀))
+kernel hypotheses (prop binders, named): 7: (hS : ∀ (y : R), Measurable (S y)); (hT₃ : ∀ (y : R), Measurable (T₃ y)); (hε : ∀ (x : R), Measurable (ε x)); (hind : ProbabilityTheory.iIndepFun ε μ₃); (hshift : ∀ (y x : R) (ω : Ω₃), ε x (T₃ y ω) = ε (x + y) ω); (hE₀ : MeasurableSet E₀); (hy : ∀ x ∈ A, x + y ∉ A)
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  INCLUDED [MeasurableSpace Ω₃]
+  INCLUDED [MeasurableSpace B]
+  INCLUDED {μX : Measure X}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.isSetRing_cylSets  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.isSetRing_cylSets.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace B] (ε : R → Ω₃ → B) : MeasureTheory.IsSetRing (HadwigerNelson.SpectralInputs.cylSets ε)
+file:   theorem isSetRing_cylSets (ε : R → Ω₃ → B) : IsSetRing (cylSets (X
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  OMITTED [MeasurableSpace Ω₃] (the file says `omit … in` above the declaration)
+  INCLUDED [MeasurableSpace B]
+  ABSENT term {μX : Measure X} — reviewed: a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+  ABSENT term {μ₃ : Measure Ω₃} — reviewed: a bare measure the statement does not mention; `Measure Ω₃` bundles no hypothesis
+
+## THM HadwigerNelson.SpectralInputs.measurable_cylMap  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.measurable_cylMap.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace Ω₃] [MeasurableSpace B] {ε : R → Ω₃ → B} (hε : ∀ (x : R), Measurable (ε x)) (A : Finset R) : Measurable (HadwigerNelson.SpectralInputs.cylMap ε A)
+file:   theorem measurable_cylMap {ε : R → Ω₃ → B} (hε : ∀ x, Measurable (ε x)) (A : Finset R) : Measurable (cylMap (X
+kernel hypotheses (prop binders, named): 1: (hε : ∀ (x : R), Measurable (ε x))
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  INCLUDED [MeasurableSpace Ω₃]
+  INCLUDED [MeasurableSpace B]
+  ABSENT term {μX : Measure X} — reviewed: a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+  ABSENT term {μ₃ : Measure Ω₃} — reviewed: a bare measure the statement does not mention; `Measure Ω₃` bundles no hypothesis
+
+## THM HadwigerNelson.SpectralInputs.measurable_measureReal_section  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.measurable_measureReal_section.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsFiniteMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : Measurable fun w => μ₃.real (Prod.mk w ⁻¹' E)
+file:   theorem measurable_measureReal_section [IsFiniteMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : Measurable fun w => μ₃.real (Prod.mk w ⁻¹' E)
+kernel hypotheses (prop binders, named): 1: (hE : MeasurableSet E)
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  INCLUDED [MeasurableSpace Ω₃]
+  ABSENT inst [MeasurableSpace B] — reviewed: a σ-algebra on a type `B` the statement does not mention
+  ABSENT term {μX : Measure X} — reviewed: a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.measurePreserving_prodMap₃  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.measurePreserving_prodMap₃.{u_1, u_2, u_3, u_4} {R : Type u_1} {Ω₁ : Type u_2} {Ω₂ : Type u_3} {Ω₃ : Type u_4} [MeasurableSpace Ω₁] [MeasurableSpace Ω₂] [MeasurableSpace Ω₃] {μ₁ : MeasureTheory.Measure Ω₁} {μ₂ : MeasureTheory.Measure Ω₂} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsProbabilityMeasure μ₁] [MeasureTheory.IsProbabilityMeasure μ₂] [MeasureTheory.IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃) (y : R) : MeasureTheory.MeasurePreserving (HadwigerNelson.SpectralInputs.prodMap₃ T₁ T₂ T₃ y) (μ₁.prod (μ₂.prod μ₃)) (μ₁.prod (μ₂.prod μ₃))
+file:   theorem measurePreserving_prodMap₃ [IsProbabilityMeasure μ₁] [IsProbabilityMeasure μ₂] [IsProbabilityMeasure μ₃] {T₁ : R → Ω₁ → Ω₁} {T₂ : R → Ω₂ → Ω₂} {T₃ : R → Ω₃ → Ω₃} (hT₁ : ∀ y, MeasurePreserving (T₁ y) μ₁ μ₁) (hT₂ : ∀ y, MeasurePreserving (T₂ y) μ₂ μ₂) (hT₃ : ∀ y, MeasurePreserving (T₃ y) μ₃ μ₃) (y : R) : MeasurePreserving (prodMap₃ T₁ T₂ T₃ y) (μ₁.prod (μ₂.prod μ₃)) (μ₁.prod (μ₂.prod μ₃))
+kernel hypotheses (prop binders, named): 3: (hT₁ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₁ y) μ₁ μ₁); (hT₂ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₂ y) μ₂ μ₂); (hT₃ : ∀ (y : R), MeasureTheory.MeasurePreserving (T₃ y) μ₃ μ₃)
+  INCLUDED {R : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED {Ω₁ Ω₂ Ω₃ : Type*}
+  INCLUDED [MeasurableSpace Ω₁]
+  INCLUDED [MeasurableSpace Ω₂]
+  INCLUDED [MeasurableSpace Ω₃]
+  INCLUDED {μ₁ : Measure Ω₁}
+  INCLUDED {μ₂ : Measure Ω₂}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.measurePreserving_shift_infinitePi  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.measurePreserving_shift_infinitePi.{u_1, u_2} {R : Type u_1} {B : Type u_2} [AddCommGroup R] [MeasurableSpace B] (ρ : MeasureTheory.Measure B) [MeasureTheory.IsProbabilityMeasure ρ] (y : R) : MeasureTheory.MeasurePreserving (fun ω x => ω (x + y)) (MeasureTheory.Measure.infinitePi fun x => ρ) (MeasureTheory.Measure.infinitePi fun x => ρ)
+file:   theorem measurePreserving_shift_infinitePi {R B : Type*} [AddCommGroup R] [MeasurableSpace B] (ρ : Measure B) [IsProbabilityMeasure ρ] (y : R) : MeasurePreserving (fun (ω : R → B) (x : R) => ω (x + y)) (Measure.infinitePi fun _ : R => ρ) (Measure.infinitePi fun _ : R => ρ)
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.SpectralInputs.measureReal_mul_one_sub_le_symmDiff  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.measureReal_mul_one_sub_le_symmDiff.{u_3} {Ω₃ : Type u_3} [MeasurableSpace Ω₃] {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsProbabilityMeasure μ₃] {U V : Set Ω₃} (hU : MeasurableSet U) (hV : MeasurableSet V) (hUV : μ₃ (U ∩ V) = μ₃ U * μ₃ V) : μ₃.real V * (1 - μ₃.real V) ≤ μ₃.real (symmDiff U V)
+file:   theorem measureReal_mul_one_sub_le_symmDiff [IsProbabilityMeasure μ₃] {U V : Set Ω₃} (hU : MeasurableSet U) (hV : MeasurableSet V) (hUV : μ₃ (U ∩ V) = μ₃ U * μ₃ V) : μ₃.real V * (1 - μ₃.real V) ≤ μ₃.real (U ∆ V)
+kernel hypotheses (prop binders, named): 3: (hU : MeasurableSet U); (hV : MeasurableSet V); (hUV : μ₃ (U ∩ V) = μ₃ U * μ₃ V)
+  INCLUDED {R X Ω₃ B : Type*}
+  ABSENT inst [MeasurableSpace X] — reviewed: a σ-algebra on a type `X` the statement does not mention
+  INCLUDED [MeasurableSpace Ω₃]
+  ABSENT inst [MeasurableSpace B] — reviewed: a σ-algebra on a type `B` the statement does not mention
+  ABSENT term {μX : Measure X} — reviewed: a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.measureReal_prod_eq_integral_section  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.measureReal_prod_eq_integral_section.{u_2, u_3} {X : Type u_2} {Ω₃ : Type u_3} [MeasurableSpace X] [MeasurableSpace Ω₃] {μX : MeasureTheory.Measure X} {μ₃ : MeasureTheory.Measure Ω₃} [MeasureTheory.IsFiniteMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : (μX.prod μ₃).real E = ∫ (w : X), μ₃.real (Prod.mk w ⁻¹' E) ∂μX
+file:   theorem measureReal_prod_eq_integral_section [IsFiniteMeasure μ₃] {E : Set (X × Ω₃)} (hE : MeasurableSet E) : (μX.prod μ₃).real E = ∫ w, μ₃.real (Prod.mk w ⁻¹' E) ∂μX
+kernel hypotheses (prop binders, named): 1: (hE : MeasurableSet E)
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  INCLUDED [MeasurableSpace Ω₃]
+  ABSENT inst [MeasurableSpace B] — reviewed: a σ-algebra on a type `B` the statement does not mention
+  INCLUDED {μX : Measure X}
+  INCLUDED {μ₃ : Measure Ω₃}
+
+## THM HadwigerNelson.SpectralInputs.mem_factorSets_of_ae_eq  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.mem_factorSets_of_ae_eq.{u_1, u_2} {R : Type u_1} {Ω : Type u_2} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} [MeasureTheory.IsFiniteMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (l : Filter R) {A B : Set Ω} (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets T hT l) (hB : MeasurableSet B) (hAB : A =ᵐ[μ] B) : B ∈ HadwigerNelson.SpectralInputs.factorSets T hT l
+file:   theorem mem_factorSets_of_ae_eq [IsFiniteMeasure μ] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (l : Filter R) {A B : Set Ω} (hA : A ∈ factorSets T hT l) (hB : MeasurableSet B) (hAB : A =ᵐ[μ] B) : B ∈ factorSets T hT l
+kernel hypotheses (prop binders, named): 4: (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ); (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets T hT l); (hB : MeasurableSet B); (hAB : A =ᵐ[μ] B)
+  INCLUDED {R Ω Ω' : Type*}
+  INCLUDED {R Ω Ω' : Type*}
+  INCLUDED [MeasurableSpace Ω]
+  ABSENT inst [MeasurableSpace Ω'] — reviewed: a σ-algebra on a second space `Ω'` the statement does not mention
+  INCLUDED {μ : Measure Ω}
+  ABSENT term {μ' : Measure Ω'} — reviewed: a bare measure on a second space the statement does not mention
+
+## THM HadwigerNelson.SpectralInputs.preimage_mem_factorSets  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.preimage_mem_factorSets.{u_1, u_2, u_3} {R : Type u_1} {Ω : Type u_2} {Ω' : Type u_3} [MeasurableSpace Ω] [MeasurableSpace Ω'] {μ : MeasureTheory.Measure Ω} {μ' : MeasureTheory.Measure Ω'} [MeasureTheory.IsFiniteMeasure μ] [MeasureTheory.IsFiniteMeasure μ'] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (T' : R → Ω' → Ω') (hT' : ∀ (y : R), MeasureTheory.MeasurePreserving (T' y) μ' μ') (l : Filter R) {π : Ω → Ω'} (hπ : MeasureTheory.MeasurePreserving π μ μ') (hequiv : ∀ (y : R), π ∘ T y = T' y ∘ π) {A : Set Ω'} (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets T' hT' l) : π ⁻¹' A ∈ HadwigerNelson.SpectralInputs.factorSets T hT l
+file:   theorem preimage_mem_factorSets [IsFiniteMeasure μ] [IsFiniteMeasure μ'] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (T' : R → Ω' → Ω') (hT' : ∀ y, MeasurePreserving (T' y) μ' μ') (l : Filter R) {π : Ω → Ω'} (hπ : MeasurePreserving π μ μ') (hequiv : ∀ y, π ∘ T y = T' y ∘ π) {A : Set Ω'} (hA : A ∈ factorSets T' hT' l) : π ⁻¹' A ∈ factorSets T hT l
+kernel hypotheses (prop binders, named): 5: (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ); (hT' : ∀ (y : R), MeasureTheory.MeasurePreserving (T' y) μ' μ'); (hπ : MeasureTheory.MeasurePreserving π μ μ'); (hequiv : ∀ (y : R), π ∘ T y = T' y ∘ π); (hA : A ∈ HadwigerNelson.SpectralInputs.factorSets T' hT' l)
+  INCLUDED {R Ω Ω' : Type*}
+  INCLUDED {R Ω Ω' : Type*}
+  INCLUDED {R Ω Ω' : Type*}
+  INCLUDED [MeasurableSpace Ω]
+  INCLUDED [MeasurableSpace Ω']
+  INCLUDED {μ : Measure Ω}
+  INCLUDED {μ' : Measure Ω'}
+
+## THM HadwigerNelson.SpectralInputs.univ_mem_cylSets  (Proofs.HadwigerNelson.Arith.ProductFactor)
+kernel: HadwigerNelson.SpectralInputs.univ_mem_cylSets.{u_1, u_2, u_3, u_4} {R : Type u_1} {X : Type u_2} {Ω₃ : Type u_3} {B : Type u_4} [MeasurableSpace X] [MeasurableSpace B] (ε : R → Ω₃ → B) : Set.univ ∈ HadwigerNelson.SpectralInputs.cylSets ε
+file:   theorem univ_mem_cylSets (ε : R → Ω₃ → B) : (Set.univ : Set (X × Ω₃)) ∈ cylSets ε
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED {R X Ω₃ B : Type*}
+  INCLUDED [MeasurableSpace X]
+  OMITTED [MeasurableSpace Ω₃] (the file says `omit … in` above the declaration)
+  INCLUDED [MeasurableSpace B]
+  ABSENT term {μX : Measure X} — reviewed: a bare measure the statement does not mention; `Measure X` bundles no hypothesis
+  ABSENT term {μ₃ : Measure Ω₃} — reviewed: a bare measure the statement does not mention; `Measure Ω₃` bundles no hypothesis
+
+## THM HadwigerNelson.RatioBound.card_mul_le_of_indep  (Proofs.HadwigerNelson.Arith.RatioBound)
+kernel: HadwigerNelson.RatioBound.card_mul_le_of_indep.{u_1} {G : Type u_1} [AddCommGroup G] [Fintype G] [DecidableEq G] (S : Finset G) {m : ℝ} (hm : 0 ≤ m) (hS : ∀ (ψ : AddChar G ℂ), ψ ≠ 1 → -m ≤ (∑ s ∈ S, ψ s).re) (I : Finset G) (hI : ∀ x ∈ I, ∀ y ∈ I, x - y ∉ S) : ↑I.card * (↑S.card + m) ≤ m * ↑(Fintype.card G)
+file:   theorem card_mul_le_of_indep (S : Finset G) {m : ℝ} (hm : 0 ≤ m) (hS : ∀ ψ : AddChar G ℂ, ψ ≠ 1 → -m ≤ (∑ s ∈ S, ψ s).re) (I : Finset G) (hI : ∀ x ∈ I, ∀ y ∈ I, x - y ∉ S) : (I.card : ℝ) * (S.card + m) ≤ m * Fintype.card G
+kernel hypotheses (prop binders, named): 3: (hm : 0 ≤ m); (hS : ∀ (ψ : AddChar G ℂ), ψ ≠ 1 → -m ≤ (∑ s ∈ S, ψ s).re); (hI : ∀ x ∈ I, ∀ y ∈ I, x - y ∉ S)
+  INCLUDED {G : Type*}
+  INCLUDED [AddCommGroup G]
+  INCLUDED [Fintype G]
+  INCLUDED [DecidableEq G]
+
+## THM HadwigerNelson.RatioBound.fourier_sq_mul_charSum  (Proofs.HadwigerNelson.Arith.RatioBound)
+kernel: HadwigerNelson.RatioBound.fourier_sq_mul_charSum.{u_1} {G : Type u_1} [AddCommGroup G] [Fintype G] (I S : Finset G) (ψ : AddChar G ℂ) : (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) * ∑ s ∈ S, ψ s = ∑ x ∈ I, ∑ y ∈ I, ∑ s ∈ S, ψ (x - y + s)
+file:   theorem fourier_sq_mul_charSum (I S : Finset G) (ψ : AddChar G ℂ) : (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) * ∑ s ∈ S, ψ s = ∑ x ∈ I, ∑ y ∈ I, ∑ s ∈ S, ψ (x - y + s)
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {G : Type*}
+  INCLUDED [AddCommGroup G]
+  INCLUDED [Fintype G]
+  OMITTED [DecidableEq G] (the file says `omit … in` above the declaration)
+
+## THM HadwigerNelson.RatioBound.le_chromaticNumber_of_charSum  (Proofs.HadwigerNelson.Arith.RatioBound)
+kernel: HadwigerNelson.RatioBound.le_chromaticNumber_of_charSum.{u_1} {G : Type u_1} [AddCommGroup G] [Fintype G] [DecidableEq G] (S : Finset G) (h0 : 0 ∉ S) (H : SimpleGraph G) (hH : ∀ (x y : G), x ≠ y → x - y ∈ S → H.Adj x y) {m : ℝ} (hm : 0 < m) (hS : ∀ (ψ : AddChar G ℂ), ψ ≠ 1 → -m ≤ (∑ s ∈ S, ψ s).re) (N : ℕ) (hN : (↑N - 1) * m < ↑S.card + m) : ↑N ≤ H.chromaticNumber
+file:   theorem le_chromaticNumber_of_charSum (S : Finset G) (h0 : (0 : G) ∉ S) (H : SimpleGraph G) (hH : ∀ x y, x ≠ y → x - y ∈ S → H.Adj x y) {m : ℝ} (hm : 0 < m) (hS : ∀ ψ : AddChar G ℂ, ψ ≠ 1 → -m ≤ (∑ s ∈ S, ψ s).re) (N : ℕ) (hN : ((N : ℝ) - 1) * m < S.card + m) : (N : ℕ∞) ≤ H.chromaticNumber
+kernel hypotheses (prop binders, named): 5: (h0 : 0 ∉ S); (hH : ∀ (x y : G), x ≠ y → x - y ∈ S → H.Adj x y); (hm : 0 < m); (hS : ∀ (ψ : AddChar G ℂ), ψ ≠ 1 → -m ≤ (∑ s ∈ S, ψ s).re); (hN : (↑N - 1) * m < ↑S.card + m)
+  INCLUDED {G : Type*}
+  INCLUDED [AddCommGroup G]
+  INCLUDED [Fintype G]
+  INCLUDED [DecidableEq G]
+
+## THM HadwigerNelson.RatioBound.sum_fourier_sq  (Proofs.HadwigerNelson.Arith.RatioBound)
+kernel: HadwigerNelson.RatioBound.sum_fourier_sq.{u_1} {G : Type u_1} [AddCommGroup G] [Fintype G] [DecidableEq G] (I : Finset G) : ∑ ψ, (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) = ↑(Fintype.card G) * ↑I.card
+file:   theorem sum_fourier_sq (I : Finset G) : ∑ ψ : AddChar G ℂ, (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) = (Fintype.card G : ℂ) * I.card
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {G : Type*}
+  INCLUDED [AddCommGroup G]
+  INCLUDED [Fintype G]
+  INCLUDED [DecidableEq G]
+
+## THM HadwigerNelson.RatioBound.sum_fourier_sq_mul_charSum_eq_zero  (Proofs.HadwigerNelson.Arith.RatioBound)
+kernel: HadwigerNelson.RatioBound.sum_fourier_sq_mul_charSum_eq_zero.{u_1} {G : Type u_1} [AddCommGroup G] [Fintype G] [DecidableEq G] (S I : Finset G) (hI : ∀ x ∈ I, ∀ y ∈ I, x - y ∉ S) : ∑ ψ, (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) * ∑ s ∈ S, ψ s = 0
+file:   theorem sum_fourier_sq_mul_charSum_eq_zero (S I : Finset G) (hI : ∀ x ∈ I, ∀ y ∈ I, x - y ∉ S) : ∑ ψ : AddChar G ℂ, (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) * ∑ s ∈ S, ψ s = 0
+kernel hypotheses (prop binders, named): 1: (hI : ∀ x ∈ I, ∀ y ∈ I, x - y ∉ S)
+  INCLUDED {G : Type*}
+  INCLUDED [AddCommGroup G]
+  INCLUDED [Fintype G]
+  INCLUDED [DecidableEq G]
+
+## THM HadwigerNelson.StandingFive.seven_le_localBound_of_kloosterman  (Proofs.HadwigerNelson.Arith.TargetFloors)
+kernel: HadwigerNelson.StandingFive.seven_le_localBound_of_kloosterman (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F) : 7 ≤ HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField
+file:   theorem seven_le_localBound_of_kloosterman (hK : ∀ (F : Type) [Field F] [Fintype F] [DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → KloostermanBound F) : 7 ≤ SpectralChain.localBound standingField
+kernel hypotheses (prop binders, named): 1: (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F)
+
+## THM HadwigerNelson.StandingFive.standingFloor_five  (Proofs.HadwigerNelson.Arith.TargetFloors)
+kernel: HadwigerNelson.StandingFive.standingFloor_five (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F) : HadwigerNelson.StandingFive.StandingFloor 5
+file:   theorem standingFloor_five (hK : ∀ (F : Type) [Field F] [Fintype F] [DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → KloostermanBound F) : StandingFloor 5
+kernel hypotheses (prop binders, named): 1: (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F)
+
+## THM HadwigerNelson.StandingFive.standingFloor_mono  (Proofs.HadwigerNelson.Arith.TargetFloors)
+kernel: HadwigerNelson.StandingFive.standingFloor_mono {n n' : ℕ} (h : n ≤ n') (hf : HadwigerNelson.StandingFive.StandingFloor n') : HadwigerNelson.StandingFive.StandingFloor n
+file:   theorem standingFloor_mono {n n' : ℕ} (h : n ≤ n') (hf : StandingFloor n') : StandingFloor n
+kernel hypotheses (prop binders, named): 2: (h : n ≤ n'); (hf : HadwigerNelson.StandingFive.StandingFloor n')
+
+## THM HadwigerNelson.StandingFive.standingFloor_seven  (Proofs.HadwigerNelson.Arith.TargetFloors)
+kernel: HadwigerNelson.StandingFive.standingFloor_seven (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F) : HadwigerNelson.StandingFive.StandingFloor 7
+file:   theorem standingFloor_seven (hK : ∀ (F : Type) [Field F] [Fintype F] [DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → KloostermanBound F) : StandingFloor 7
+kernel hypotheses (prop binders, named): 1: (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F)
+
+## THM HadwigerNelson.StandingFive.targetFloor_mono  (Proofs.HadwigerNelson.Arith.TargetFloors)
+kernel: HadwigerNelson.StandingFive.targetFloor_mono {n n' Q : ℕ} (h : n ≤ n') (hf : HadwigerNelson.StandingFive.TargetFloor n' Q) : HadwigerNelson.StandingFive.TargetFloor n Q
+file:   theorem targetFloor_mono {n n' Q : ℕ} (h : n ≤ n') (hf : TargetFloor n' Q) : TargetFloor n Q
+kernel hypotheses (prop binders, named): 2: (h : n ≤ n'); (hf : HadwigerNelson.StandingFive.TargetFloor n' Q)
+
+## THM HadwigerNelson.StandingFive.circle_sum_le_weil  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.circle_sum_le_weil.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (a : F) (b : F × F) (hb : b ≠ 0) (h : a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0) : ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * √↑(Fintype.card F)
+file:   theorem circle_sum_le_weil {F : Type*} [Field F] [Fintype F] [DecidableEq F] (hodd : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ψ ≠ 1) (a : F) (b : F × F) (hb : b ≠ 0) (h : a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0) : ‖∑ s ∈ univ.filter (fun s : F × F => s.1 ^ 2 + s.2 ^ 2 = a), ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * Real.sqrt (Fintype.card F)
+kernel hypotheses (prop binders, named): 4: (hodd : ringChar F ≠ 2); (hψ : ψ ≠ 1); (hb : b ≠ 0); (h : a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0)
+
+## THM HadwigerNelson.StandingFive.five_le_chromaticNumber_weil  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.five_le_chromaticNumber_weil (hRow123 : min (HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField) 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber) : 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+file:   theorem five_le_chromaticNumber_weil (hRow123 : min (SpectralChain.localBound standingField) 5 ≤ ((unitDistance ℂ).induce (planeOver standingField)).chromaticNumber) : 5 ≤ ((unitDistance ℂ).induce (planeOver standingField)).chromaticNumber
+kernel hypotheses (prop binders, named): 1: (hRow123 : min (HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField) 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber)
+
+## THM HadwigerNelson.StandingFive.four_mul_mul_ne_zero_iff  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.four_mul_mul_ne_zero_iff.{u_1} {F : Type u_1} [Field F] (hp : ringChar F ≠ 2) (c d : F) : 4 * c * d ≠ 0 ↔ c ≠ 0 ∧ d ≠ 0
+file:   theorem four_mul_mul_ne_zero_iff {F : Type*} [Field F] (hp : ringChar F ≠ 2) (c d : F) : 4 * c * d ≠ 0 ↔ c ≠ 0 ∧ d ≠ 0
+kernel hypotheses (prop binders, named): 1: (hp : ringChar F ≠ 2)
+
+## THM HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two.{u_1} (F : Type u_1) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 2) : HadwigerNelson.StandingFive.KloostermanBound F
+file:   theorem kloostermanBound_of_ringChar_ne_two (F : Type*) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 2) : KloostermanBound F
+kernel hypotheses (prop binders, named): 1: (hp : ringChar F ≠ 2)
+
+## AXIOM HadwigerNelson.StandingFive.kloosterman_bound  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.kloosterman_bound.{u} (F : Type u) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ∃ x, ψ x ≠ 1) (c d a : F) (h4 : 4 * c * d = a) (ha : a ≠ 0) : ‖∑ x with x ≠ 0, ψ (c * x + d * x⁻¹)‖ ≤ 2 * √↑(Fintype.card F)
+file:   axiom kloosterman_bound.{u} (F : Type u) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ∃ x, ψ x ≠ 1) (c d a : F) (h4 : 4 * c * d = a) (ha : a ≠ 0) : ‖∑ x ∈ univ.filter (fun x : F => x ≠ 0), ψ (c * x + d * x⁻¹)‖ ≤ 2 * Real.sqrt (Fintype.card F)
+kernel hypotheses (prop binders, named): 4: (hp : ringChar F ≠ 2); (hψ : ∃ x, ψ x ≠ 1); (h4 : 4 * c * d = a); (ha : a ≠ 0)
+
+## THM HadwigerNelson.StandingFive.kloosterman_bound_model  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.kloosterman_bound_model : ringChar (ZMod 3) ≠ 2 ∧ (∃ x, ZMod.stdAddChar x ≠ 1) ∧ 4 * 1 * 1 = 1 ∧ 1 ≠ 0 ∧ ‖∑ x with x ≠ 0, ZMod.stdAddChar (1 * x + 1 * x⁻¹)‖ ≤ 2 * √↑(Fintype.card (ZMod 3))
+file:   theorem kloosterman_bound_model : ringChar (ZMod 3) ≠ 2 ∧ (∃ x : ZMod 3, ZMod.stdAddChar (N
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.kloosterman_page_of_kloostermanBound.{u_1} {F : Type u_1} [Field F] [Fintype F] [DecidableEq F] (hK : HadwigerNelson.StandingFive.KloostermanBound F) (hp : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ∃ x, ψ x ≠ 1) (c d a : F) (h4 : 4 * c * d = a) (ha : a ≠ 0) : ‖∑ x with x ≠ 0, ψ (c * x + d * x⁻¹)‖ ≤ 2 * √↑(Fintype.card F)
+file:   theorem kloosterman_page_of_kloostermanBound {F : Type*} [Field F] [Fintype F] [DecidableEq F] (hK : KloostermanBound F) (hp : ringChar F ≠ 2) (ψ : AddChar F ℂ) (hψ : ∃ x, ψ x ≠ 1) (c d a : F) (h4 : 4 * c * d = a) (ha : a ≠ 0) : ‖∑ x ∈ univ.filter (fun x : F => x ≠ 0), ψ (c * x + d * x⁻¹)‖ ≤ 2 * Real.sqrt (Fintype.card F)
+kernel hypotheses (prop binders, named): 5: (hK : HadwigerNelson.StandingFive.KloostermanBound F); (hp : ringChar F ≠ 2); (hψ : ∃ x, ψ x ≠ 1); (h4 : 4 * c * d = a); (ha : a ≠ 0)
+
+## THM HadwigerNelson.StandingFive.ringChar_ne_two_of_card_mod_four  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.ringChar_ne_two_of_card_mod_four.{u_1} {F : Type u_1} [Field F] [Fintype F] (h : Fintype.card F % 4 = 3) : ringChar F ≠ 2
+file:   theorem ringChar_ne_two_of_card_mod_four {F : Type*} [Field F] [Fintype F] (h : Fintype.card F % 4 = 3) : ringChar F ≠ 2
+kernel hypotheses (prop binders, named): 1: (h : Fintype.card F % 4 = 3)
+
+## THM HadwigerNelson.StandingFive.seven_le_localBound_weil  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.seven_le_localBound_weil : 7 ≤ HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField
+file:   theorem seven_le_localBound_weil : 7 ≤ SpectralChain.localBound standingField
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.StandingFive.standingFloor_five_weil  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.standingFloor_five_weil : HadwigerNelson.StandingFive.StandingFloor 5
+file:   theorem standingFloor_five_weil : StandingFloor 5
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.StandingFive.standingFloor_seven_weil  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.standingFloor_seven_weil : HadwigerNelson.StandingFive.StandingFloor 7
+file:   theorem standingFloor_seven_weil : StandingFloor 7
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.StandingFive.sum_units_eq_sum_ne_zero  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.sum_units_eq_sum_ne_zero.{u_1, u_2} {F : Type u_1} {M : Type u_2} [Field F] [Fintype F] [DecidableEq F] [AddCommMonoid M] (g : F → M) : ∑ x, g ↑x = ∑ x with x ≠ 0, g x
+file:   theorem sum_units_eq_sum_ne_zero {F M : Type*} [Field F] [Fintype F] [DecidableEq F] [AddCommMonoid M] (g : F → M) : ∑ x : Fˣ, g (x : F) = ∑ x ∈ univ.filter (fun x : F => x ≠ 0), g x
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.StandingFive.targetFloor_seven_weil  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.targetFloor_seven_weil {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 98 ≤ Q) : HadwigerNelson.StandingFive.TargetFloor 7 Q
+file:   theorem targetFloor_seven_weil {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 98 ≤ Q) : TargetFloor 7 Q
+kernel hypotheses (prop binders, named): 2: (hQ4 : Q % 4 = 3); (hQ : 98 ≤ Q)
+
+## THM HadwigerNelson.StandingFive.targetFloor_six_of_kloosterman  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.targetFloor_six_of_kloosterman {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 62 ≤ Q) (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F) : HadwigerNelson.StandingFive.TargetFloor 6 Q
+file:   theorem targetFloor_six_of_kloosterman {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 62 ≤ Q) (hK : ∀ (F : Type) [Field F] [Fintype F] [DecidableEq F], Fintype.card F = Q → KloostermanBound F) : TargetFloor 6 Q
+kernel hypotheses (prop binders, named): 3: (hQ4 : Q % 4 = 3); (hQ : 62 ≤ Q); (hK : ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F)
+
+## THM HadwigerNelson.StandingFive.targetFloor_six_weil  (Proofs.HadwigerNelson.Arith.WeilKloosterman)
+kernel: HadwigerNelson.StandingFive.targetFloor_six_weil {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 62 ≤ Q) : HadwigerNelson.StandingFive.TargetFloor 6 Q
+file:   theorem targetFloor_six_weil {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 62 ≤ Q) : TargetFloor 6 Q
+kernel hypotheses (prop binders, named): 2: (hQ4 : Q % 4 = 3); (hQ : 62 ≤ Q)
+
+## THM HadwigerNelson.Plane.continuous_measure_inter_closedBall  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.continuous_measure_inter_closedBall.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (S : Set E) {ρ : ℝ} (hρ : 0 < ρ) : Continuous fun c => μ (S ∩ Metric.closedBall c ρ)
+file:   theorem continuous_measure_inter_closedBall (S : Set E) {ρ : ℝ} (hρ : 0 < ρ) : Continuous fun c : E => μ (S ∩ closedBall c ρ)
+kernel hypotheses (prop binders, named): 1: (hρ : 0 < ρ)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.exists_closedBall_ratio_eq_half  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.exists_closedBall_ratio_eq_half.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) {c₀ a b : E} {R δ : ℝ} (ha : a ∈ Metric.ball c₀ R) (hb : b ∈ Metric.ball c₀ R) (hδ : 0 < δ) (hSa : Filter.Tendsto (fun r => μ (S ∩ Metric.closedBall a r) / μ (Metric.closedBall a r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)) (hSb : Filter.Tendsto (fun r => μ (Sᶜ ∩ Metric.closedBall b r) / μ (Metric.closedBall b r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)) : ∃ c ρ, 0 < ρ ∧ ρ ≤ δ ∧ Metric.closedBall c ρ ⊆ Metric.closedBall c₀ R ∧ μ (S ∩ Metric.closedBall c ρ) / μ (Metric.closedBall c ρ) = 1 / 2
+file:   theorem exists_closedBall_ratio_eq_half {S : Set E} (hS : NullMeasurableSet S μ) {c₀ a b : E} {R δ : ℝ} (ha : a ∈ ball c₀ R) (hb : b ∈ ball c₀ R) (hδ : 0 < δ) (hSa : Tendsto (fun r => μ (S ∩ closedBall a r) / μ (closedBall a r)) (𝓝[>] 0) (𝓝 1)) (hSb : Tendsto (fun r => μ (Sᶜ ∩ closedBall b r) / μ (closedBall b r)) (𝓝[>] 0) (𝓝 1)) : ∃ c ρ, 0 < ρ ∧ ρ ≤ δ ∧ closedBall c ρ ⊆ closedBall c₀ R ∧ μ (S ∩ closedBall c ρ) / μ (closedBall c ρ) = 1 / 2
+kernel hypotheses (prop binders, named): 6: (hS : MeasureTheory.NullMeasurableSet S μ); (ha : a ∈ Metric.ball c₀ R); (hb : b ∈ Metric.ball c₀ R); (hδ : 0 < δ); (hSa : Filter.Tendsto (fun r => μ (S ∩ Metric.closedBall a r) / μ (Metric.closedBall a r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)); (hSb : Filter.Tendsto (fun r => μ (Sᶜ ∩ Metric.closedBall b r) / μ (Metric.closedBall b r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1))
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.exists_closedBall_ratio_eq_half_of_measure_ne_zero  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.exists_closedBall_ratio_eq_half_of_measure_ne_zero.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ c r, 0 < r ∧ μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2
+file:   theorem exists_closedBall_ratio_eq_half_of_measure_ne_zero {S : Set E} (hS : NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ c r, 0 < r ∧ μ (S ∩ closedBall c r) / μ (closedBall c r) = 1 / 2
+kernel hypotheses (prop binders, named): 3: (hS : MeasureTheory.NullMeasurableSet S μ); (h1 : μ S ≠ 0); (h2 : μ Sᶜ ≠ 0)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.exists_closedBall_subset_ratio_eq_half  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.exists_closedBall_subset_ratio_eq_half.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) {c : E} {r : ℝ} (hr : 0 < r) (h : μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2) : ∃ c' r', 0 < r' ∧ r' ≤ r / 2 ∧ Metric.closedBall c' r' ⊆ Metric.closedBall c r ∧ μ (S ∩ Metric.closedBall c' r') / μ (Metric.closedBall c' r') = 1 / 2
+file:   theorem exists_closedBall_subset_ratio_eq_half {S : Set E} (hS : NullMeasurableSet S μ) {c : E} {r : ℝ} (hr : 0 < r) (h : μ (S ∩ closedBall c r) / μ (closedBall c r) = 1 / 2) : ∃ c' r', 0 < r' ∧ r' ≤ r / 2 ∧ closedBall c' r' ⊆ closedBall c r ∧ μ (S ∩ closedBall c' r') / μ (closedBall c' r') = 1 / 2
+kernel hypotheses (prop binders, named): 3: (hS : MeasureTheory.NullMeasurableSet S μ); (hr : 0 < r); (h : μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.exists_mem_ball_tendsto_ratio  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.exists_mem_ball_tendsto_ratio.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (A : Set E) {c : E} {ρ : ℝ} (h : μ (A ∩ Metric.ball c ρ) ≠ 0) : ∃ a ∈ Metric.ball c ρ, Filter.Tendsto (fun r => μ (A ∩ Metric.closedBall a r) / μ (Metric.closedBall a r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+file:   theorem exists_mem_ball_tendsto_ratio (A : Set E) {c : E} {ρ : ℝ} (h : μ (A ∩ ball c ρ) ≠ 0) : ∃ a ∈ ball c ρ, Tendsto (fun r => μ (A ∩ closedBall a r) / μ (closedBall a r)) (𝓝[>] 0) (𝓝 1)
+kernel hypotheses (prop binders, named): 1: (h : μ (A ∩ Metric.ball c ρ) ≠ 0)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.exists_nested_closedBalls_ratio_eq_half  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.exists_nested_closedBalls_ratio_eq_half.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ c r, (∀ (n : ℕ), 0 < r n) ∧ (∀ (n : ℕ), r (n + 1) ≤ r n / 2) ∧ (∀ (n : ℕ), Metric.closedBall (c (n + 1)) (r (n + 1)) ⊆ Metric.closedBall (c n) (r n)) ∧ ∀ (n : ℕ), μ (S ∩ Metric.closedBall (c n) (r n)) / μ (Metric.closedBall (c n) (r n)) = 1 / 2
+file:   theorem exists_nested_closedBalls_ratio_eq_half {S : Set E} (hS : NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ (c : ℕ → E) (r : ℕ → ℝ), (∀ n, 0 < r n) ∧ (∀ n, r (n + 1) ≤ r n / 2) ∧ (∀ n, closedBall (c (n + 1)) (r (n + 1)) ⊆ closedBall (c n) (r n)) ∧ ∀ n, μ (S ∩ closedBall (c n) (r n)) / μ (closedBall (c n) (r n)) = 1 / 2
+kernel hypotheses (prop binders, named): 3: (hS : MeasureTheory.NullMeasurableSet S μ); (h1 : μ S ≠ 0); (h2 : μ Sᶜ ≠ 0)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.exists_not_tendsto_ratio_and_compl  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.exists_not_tendsto_ratio_and_compl.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ x, ¬Filter.Tendsto (fun r => μ (S ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1) ∧ ¬Filter.Tendsto (fun r => μ (Sᶜ ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+file:   theorem exists_not_tendsto_ratio_and_compl {S : Set E} (hS : NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ x : E, ¬ Tendsto (fun r => μ (S ∩ closedBall x r) / μ (closedBall x r)) (𝓝[>] 0) (𝓝 1) ∧ ¬ Tendsto (fun r => μ (Sᶜ ∩ closedBall x r) / μ (closedBall x r)) (𝓝[>] 0) (𝓝 1)
+kernel hypotheses (prop binders, named): 3: (hS : MeasureTheory.NullMeasurableSet S μ); (h1 : μ S ≠ 0); (h2 : μ Sᶜ ≠ 0)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.exists_ratio_ge_and_compl_ge  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.exists_ratio_ge_and_compl_ge.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ x s, (∀ (n : ℕ), 0 < s n) ∧ Filter.Tendsto s Filter.atTop (nhds 0) ∧ ∀ (n : ℕ), (2 * 2 ^ Module.finrank ℝ E)⁻¹ ≤ μ (S ∩ Metric.closedBall x (s n)) / μ (Metric.closedBall x (s n)) ∧ (2 * 2 ^ Module.finrank ℝ E)⁻¹ ≤ μ (Sᶜ ∩ Metric.closedBall x (s n)) / μ (Metric.closedBall x (s n))
+file:   theorem exists_ratio_ge_and_compl_ge {S : Set E} (hS : NullMeasurableSet S μ) (h1 : μ S ≠ 0) (h2 : μ Sᶜ ≠ 0) : ∃ (x : E) (s : ℕ → ℝ), (∀ n, 0 < s n) ∧ Tendsto s atTop (𝓝 0) ∧ ∀ n, (2 * 2 ^ Module.finrank ℝ E : ENNReal)⁻¹ ≤ μ (S ∩ closedBall x (s n)) / μ (closedBall x (s n)) ∧ (2 * 2 ^ Module.finrank ℝ E : ENNReal)⁻¹ ≤ μ (Sᶜ ∩ closedBall x (s n)) / μ (closedBall x (s n))
+kernel hypotheses (prop binders, named): 3: (hS : MeasureTheory.NullMeasurableSet S μ); (h1 : μ S ≠ 0); (h2 : μ Sᶜ ≠ 0)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.measure_compl_inter_closedBall_div_eq_half  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.measure_compl_inter_closedBall_div_eq_half.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) {c : E} {r : ℝ} (hr : 0 < r) (h : μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2) : μ (Sᶜ ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2
+file:   theorem measure_compl_inter_closedBall_div_eq_half {S : Set E} (hS : NullMeasurableSet S μ) {c : E} {r : ℝ} (hr : 0 < r) (h : μ (S ∩ closedBall c r) / μ (closedBall c r) = 1 / 2) : μ (Sᶜ ∩ closedBall c r) / μ (closedBall c r) = 1 / 2
+kernel hypotheses (prop binders, named): 3: (hS : MeasureTheory.NullMeasurableSet S μ); (hr : 0 < r); (h : μ (S ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  OMITTED [BorelSpace E] (the file says `omit … in` above the declaration)
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.measure_inter_ball_ne_zero_of_ratio_eq_half  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.measure_inter_ball_ne_zero_of_ratio_eq_half.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {A : Set E} {c : E} {ρ : ℝ} (hρ : 0 < ρ) (h : μ (A ∩ Metric.closedBall c ρ) / μ (Metric.closedBall c ρ) = 1 / 2) : μ (A ∩ Metric.ball c ρ) ≠ 0
+file:   theorem measure_inter_ball_ne_zero_of_ratio_eq_half {A : Set E} {c : E} {ρ : ℝ} (hρ : 0 < ρ) (h : μ (A ∩ closedBall c ρ) / μ (closedBall c ρ) = 1 / 2) : μ (A ∩ ball c ρ) ≠ 0
+kernel hypotheses (prop binders, named): 2: (hρ : 0 < ρ); (h : μ (A ∩ Metric.closedBall c ρ) / μ (Metric.closedBall c ρ) = 1 / 2)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.measure_inter_closedBall_div_add_compl  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.measure_inter_closedBall_div_add_compl.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {S : Set E} (hS : MeasureTheory.NullMeasurableSet S μ) (x : E) {r : ℝ} (hr : 0 < r) : μ (S ∩ Metric.closedBall x r) / μ (Metric.closedBall x r) + μ (Sᶜ ∩ Metric.closedBall x r) / μ (Metric.closedBall x r) = 1
+file:   theorem measure_inter_closedBall_div_add_compl {S : Set E} (hS : NullMeasurableSet S μ) (x : E) {r : ℝ} (hr : 0 < r) : μ (S ∩ closedBall x r) / μ (closedBall x r) + μ (Sᶜ ∩ closedBall x r) / μ (closedBall x r) = 1
+kernel hypotheses (prop binders, named): 2: (hS : MeasureTheory.NullMeasurableSet S μ); (hr : 0 < r)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  OMITTED [BorelSpace E] (the file says `omit … in` above the declaration)
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.measure_inter_closedBall_le_add  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.measure_inter_closedBall_le_add.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (S : Set E) (c c' : E) (ρ : ℝ) : μ (S ∩ Metric.closedBall c' ρ) ≤ μ (S ∩ Metric.closedBall c ρ) + (μ (Metric.closedBall 0 (ρ + dist c' c)) - μ (Metric.closedBall 0 ρ))
+file:   theorem measure_inter_closedBall_le_add (S : Set E) (c c' : E) (ρ : ℝ) : μ (S ∩ closedBall c' ρ) ≤ μ (S ∩ closedBall c ρ) + (μ (closedBall (0 : E) (ρ + dist c' c)) - μ (closedBall (0 : E) ρ))
+kernel hypotheses (prop binders, named): 0
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.not_tendsto_ratio_compl_of_ratio_ge  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.not_tendsto_ratio_compl_of_ratio_ge.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {A : Set E} (hA : MeasureTheory.NullMeasurableSet A μ) {x : E} {s : ℕ → ℝ} {κ : ENNReal} (hκ : κ ≠ 0) (hs : ∀ (n : ℕ), 0 < s n) (hs0 : Filter.Tendsto s Filter.atTop (nhds 0)) (h : ∀ (n : ℕ), κ ≤ μ (A ∩ Metric.closedBall x (s n)) / μ (Metric.closedBall x (s n))) : ¬Filter.Tendsto (fun r => μ (Aᶜ ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 1)
+file:   theorem not_tendsto_ratio_compl_of_ratio_ge {A : Set E} (hA : NullMeasurableSet A μ) {x : E} {s : ℕ → ℝ} {κ : ENNReal} (hκ : κ ≠ 0) (hs : ∀ n, 0 < s n) (hs0 : Tendsto s atTop (𝓝 0)) (h : ∀ n, κ ≤ μ (A ∩ closedBall x (s n)) / μ (closedBall x (s n))) : ¬ Tendsto (fun r => μ (Aᶜ ∩ closedBall x r) / μ (closedBall x r)) (𝓝[>] 0) (𝓝 1)
+kernel hypotheses (prop binders, named): 5: (hA : MeasureTheory.NullMeasurableSet A μ); (hκ : κ ≠ 0); (hs : ∀ (n : ℕ), 0 < s n); (hs0 : Filter.Tendsto s Filter.atTop (nhds 0)); (h : ∀ (n : ℕ), κ ≤ μ (A ∩ Metric.closedBall x (s n)) / μ (Metric.closedBall x (s n)))
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  OMITTED [BorelSpace E] (the file says `omit … in` above the declaration)
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.ratio_two_mul_ge  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.ratio_two_mul_ge.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {A : Set E} {x c : E} {r : ℝ} (hr : 0 < r) (hx : x ∈ Metric.closedBall c r) (h : μ (A ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2) : (2 * 2 ^ Module.finrank ℝ E)⁻¹ ≤ μ (A ∩ Metric.closedBall x (2 * r)) / μ (Metric.closedBall x (2 * r))
+file:   theorem ratio_two_mul_ge {A : Set E} {x c : E} {r : ℝ} (hr : 0 < r) (hx : x ∈ closedBall c r) (h : μ (A ∩ closedBall c r) / μ (closedBall c r) = 1 / 2) : (2 * 2 ^ Module.finrank ℝ E : ENNReal)⁻¹ ≤ μ (A ∩ closedBall x (2 * r)) / μ (closedBall x (2 * r))
+kernel hypotheses (prop binders, named): 3: (hr : 0 < r); (hx : x ∈ Metric.closedBall c r); (h : μ (A ∩ Metric.closedBall c r) / μ (Metric.closedBall c r) = 1 / 2)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.tendsto_measure_closedBall_sub  (Proofs.HadwigerNelson.Plane.MetricalBoundary)
+kernel: HadwigerNelson.Plane.tendsto_measure_closedBall_sub.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {ρ : ℝ} (hρ : 0 < ρ) : Filter.Tendsto (fun d => μ (Metric.closedBall 0 (ρ + d)) - μ (Metric.closedBall 0 ρ)) (nhds 0) (nhds 0)
+file:   theorem tendsto_measure_closedBall_sub {ρ : ℝ} (hρ : 0 < ρ) : Tendsto (fun d : ℝ => μ (closedBall (0 : E) (ρ + d)) - μ (closedBall (0 : E) ρ)) (𝓝 0) (𝓝 0)
+kernel hypotheses (prop binders, named): 1: (hρ : 0 < ρ)
+  INCLUDED {E : Type*}
+  INCLUDED [NormedAddCommGroup E]
+  INCLUDED [NormedSpace ℝ E]
+  INCLUDED [FiniteDimensional ℝ E]
+  INCLUDED [MeasurableSpace E]
+  INCLUDED [BorelSpace E]
+  INCLUDED (μ : Measure E)
+  INCLUDED [μ.IsAddHaarMeasure]
+
+## THM HadwigerNelson.Plane.falconer_lemma2_nonempty  (Proofs.HadwigerNelson.Plane.FalconerReduction)
+kernel: HadwigerNelson.Plane.falconer_lemma2_nonempty {S : Set ℂ} (hS : MeasurableSet S) (h1 : MeasureTheory.volume S ≠ 0) (h2 : MeasureTheory.volume Sᶜ ≠ 0) : ∃ x ∉ HadwigerNelson.Plane.densitySet S, x ∉ HadwigerNelson.Plane.densitySet Sᶜ
+file:   theorem falconer_lemma2_nonempty {S : Set ℂ} (hS : MeasurableSet S) (h1 : volume S ≠ 0) (h2 : volume Sᶜ ≠ 0) : ∃ x : ℂ, x ∉ densitySet S ∧ x ∉ densitySet Sᶜ
+kernel hypotheses (prop binders, named): 3: (hS : MeasurableSet S); (h1 : MeasureTheory.volume S ≠ 0); (h2 : MeasureTheory.volume Sᶜ ≠ 0)
+
+## THM HadwigerNelson.Plane.falconer_reduction  (Proofs.HadwigerNelson.Plane.FalconerReduction)
+kernel: HadwigerNelson.Plane.falconer_reduction {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V) (hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) (hr : 1 / 2 < dist t a) (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)) (S : Fin k → Set ℂ) (hS : ∀ (j : Fin k), MeasurableSet (S j)) (hcov : ⋃ j, S j = Set.univ) : ∃ j, ∃ x ∈ S j, ∃ y ∈ S j, dist x y = 1
+file:   theorem falconer_reduction {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V) (hfan : FalconerFan ((unitDistance ℂ).induce (V : Set ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) (hr : 1 / 2 < dist t a) (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)) (S : Fin k → Set ℂ) (hS : ∀ j, MeasurableSet (S j)) (hcov : ⋃ j, S j = univ) : ∃ j, ∃ x ∈ S j, ∃ y ∈ S j, dist x y = 1
+kernel hypotheses (prop binders, named): 7: (ha : a ∈ V); (ht : t ∈ V); (hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩); (hr : 1 / 2 < dist t a); (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)); (hS : ∀ (j : Fin k), MeasurableSet (S j)); (hcov : ⋃ j, S j = Set.univ)
+
+## THM HadwigerNelson.Plane.le_chiM_of_falconerFan  (Proofs.HadwigerNelson.Plane.FalconerReduction)
+kernel: HadwigerNelson.Plane.le_chiM_of_falconerFan {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V) (hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) (hr : 1 / 2 < dist t a) (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)) : ↑(k + 1) ≤ HadwigerNelson.Plane.chiM
+file:   theorem le_chiM_of_falconerFan {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V) (hfan : FalconerFan ((unitDistance ℂ).induce (V : Set ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) (hr : 1 / 2 < dist t a) (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)) : ((k + 1 : ℕ) : ℕ∞) ≤ chiM
+kernel hypotheses (prop binders, named): 5: (ha : a ∈ V); (ht : t ∈ V); (hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩); (hr : 1 / 2 < dist t a); (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi))
+
+## THM HadwigerNelson.Plane.exists_mem_falconerE  (Proofs.HadwigerNelson.Plane.FalconerReduction)
+kernel: HadwigerNelson.Plane.exists_mem_falconerE {k : ℕ} {S : Fin k → Set ℂ} (hS : ∀ (j : Fin k), MeasurableSet (S j)) (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = Set.univ) (hno : ∀ (j : Fin k), ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1) : ∃ x, ∀ (j : Fin k), x ∉ HadwigerNelson.Plane.densitySet (S j)
+file:   theorem exists_mem_falconerE {k : ℕ} {S : Fin k → Set ℂ} (hS : ∀ j, MeasurableSet (S j)) (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = univ) (hno : ∀ j, ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1) : ∃ x : ℂ, ∀ j, x ∉ densitySet (S j)
+kernel hypotheses (prop binders, named): 4: (hS : ∀ (j : Fin k), MeasurableSet (S j)); (hd : Pairwise (Function.onFun Disjoint S)); (hcov : ⋃ j, S j = Set.univ); (hno : ∀ (j : Fin k), ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1)
+
+## THM HadwigerNelson.Plane.fan_tip_ae_mem  (Proofs.HadwigerNelson.Plane.FalconerReduction)
+kernel: HadwigerNelson.Plane.fan_tip_ae_mem {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V) (hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) {S : Fin k → Set ℂ} (hS : ∀ (j : Fin k), MeasurableSet (S j)) (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = Set.univ) (hno : ∀ (j : Fin k), ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1) : ∃ c i j, i ≠ j ∧ ∀ᵐ (θ : ℝ) ∂HadwigerNelson.Plane.arcLength, c + ↑(dist t a) * HadwigerNelson.Plane.e θ ∈ HadwigerNelson.Plane.densitySet (S i) ∪ HadwigerNelson.Plane.densitySet (S j)
+file:   theorem fan_tip_ae_mem {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V) (hfan : FalconerFan ((unitDistance ℂ).induce (V : Set ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) {S : Fin k → Set ℂ} (hS : ∀ j, MeasurableSet (S j)) (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = univ) (hno : ∀ j, ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1) : ∃ (c : ℂ) (i j : Fin k), i ≠ j ∧ ∀ᵐ θ ∂arcLength, c + (dist t a : ℝ) * e θ ∈ densitySet (S i) ∪ densitySet (S j)
+kernel hypotheses (prop binders, named): 7: (ha : a ∈ V); (ht : t ∈ V); (hfan : HadwigerNelson.Arith.FalconerFan (SimpleGraph.induce (↑V) (HadwigerNelson.unitDistance ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩); (hS : ∀ (j : Fin k), MeasurableSet (S j)); (hd : Pairwise (Function.onFun Disjoint S)); (hcov : ⋃ j, S j = Set.univ); (hno : ∀ (j : Fin k), ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1)
+
+## THM HadwigerNelson.SpectralInputs.sp_if  (Proofs.HadwigerNelson.Arith.SpectralInputs)
+kernel: HadwigerNelson.SpectralInputs.sp_if {F : Subfield ℝ} (I : HadwigerNelson.SpectralChain.Interface F) (hBH : HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing F)) (hmul : I.MulStable) (hcirc : I.NegCircle) {ν m : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)} (hfin : MeasureTheory.IsFiniteMeasure ν) (hrot : HadwigerNelson.SpectralChain.RotInv F ν) (hE : ν I.E = 0) (hm : HadwigerNelson.SpectralInputs.IsHaarFourier m) (hnh : ∀ (a : ENNReal), ν ≠ a • m) : ∃ τ, MeasureTheory.IsFiniteMeasure τ ∧ HadwigerNelson.SpectralChain.RotInv F τ ∧ τ I.E = 0 ∧ ∫ (χ : HadwigerNelson.SpectralChain.Dual F), (↑(χ 1)).re ∂τ < 0
+file:   theorem sp_if (I : Interface F) (hBH : BochnerHerglotz (unitRing F)) (hmul : I.MulStable) (hcirc : I.NegCircle) {ν m : Measure (Dual F)} (hfin : IsFiniteMeasure ν) (hrot : RotInv F ν) (hE : ν I.E = 0) (hm : IsHaarFourier m) (hnh : ∀ a : ENNReal, ν ≠ a • m) : ∃ τ : Measure (Dual F), IsFiniteMeasure τ ∧ RotInv F τ ∧ τ I.E = 0 ∧ ∫ χ, (χ 1 : ℂ).re ∂τ < 0
+kernel hypotheses (prop binders, named): 8: (hBH : HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing F)); (hmul : I.MulStable); (hcirc : I.NegCircle); (hfin : MeasureTheory.IsFiniteMeasure ν); (hrot : HadwigerNelson.SpectralChain.RotInv F ν); (hE : ν I.E = 0); (hm : HadwigerNelson.SpectralInputs.IsHaarFourier m); (hnh : ∀ (a : ENNReal), ν ≠ a • m)
+  INCLUDED {F : Subfield ℝ}
+
+## THM HadwigerNelson.SpectralInputs.si4  (Proofs.HadwigerNelson.Arith.SpectralInputs)
+kernel: HadwigerNelson.SpectralInputs.si4.{u_1, u_2} {Ω : Type u_1} {V : Type u_2} [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : MeasureTheory.Measure Ω) [MeasureTheory.IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) (c : Ω → V → Fin 4) (hc : ∀ (x : V), Measurable fun ω => c ω x) (adj : V → V → Prop) (hdisj : ∀ (x y : V), adj x y → ∀ (j : Fin 4), ∫ (ω : Ω), μ[{ω' | c ω' x = j}.indicator fun x => 1 | 𝒜] ω * μ[{ω' | c ω' y = j}.indicator fun x => 1 | 𝒜] ω ∂μ = 0) (f : Finset (Fin 4) → Fin 4) (hf : ∀ (s : Finset (Fin 4)), s.Nonempty → f s ∈ s) : (∀ (x : V), Measurable fun ω => f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x)) ∧ (∀ᵐ (ω : Ω) ∂μ, ∀ (x y : V), adj x y → f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x) ≠ f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω y)) ∧ ∀ᵐ (ω : Ω) ∂μ, ∀ (x : V), c ω x ∈ HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x
+file:   theorem si4 [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : Measure Ω) [IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) (c : Ω → V → Fin 4) (hc : ∀ x, Measurable fun ω => c ω x) (adj : V → V → Prop) (hdisj : ∀ x y, adj x y → ∀ j : Fin 4, ∫ ω, (μ[(Set.indicator {ω' | c ω' x = j} fun _ => (1 : ℝ)) | 𝒜]) ω * (μ[(Set.indicator {ω' | c ω' y = j} fun _ => (1 : ℝ)) | 𝒜]) ω ∂μ = 0) (f : Finset (Fin 4) → Fin 4) (hf : ∀ s : Finset (Fin 4), s.Nonempty → f s ∈ s) : (∀ x, Measurable[𝒜] fun ω => f (condSupport 𝒜 μ c ω x)) ∧ (∀ᵐ ω ∂μ, ∀ x y, adj x y → f (condSupport 𝒜 μ c ω x) ≠ f (condSupport 𝒜 μ c ω y)) ∧ ∀ᵐ ω ∂μ, ∀ x, c ω x ∈ condSupport 𝒜 μ c ω x
+kernel hypotheses (prop binders, named): 4: (h𝒜 : 𝒜 ≤ m0); (hc : ∀ (x : V), Measurable fun ω => c ω x); (hdisj : ∀ (x y : V), adj x y → ∀ (j : Fin 4), ∫ (ω : Ω), μ[{ω' | c ω' x = j}.indicator fun x => 1 | 𝒜] ω * μ[{ω' | c ω' y = j}.indicator fun x => 1 | 𝒜] ω ∂μ = 0); (hf : ∀ (s : Finset (Fin 4)), s.Nonempty → f s ∈ s)
+  INCLUDED {Ω : Type*}
+  INCLUDED {V : Type*}
+
+## THM HadwigerNelson.SpectralInputs.si4_equivariant  (Proofs.HadwigerNelson.Arith.SpectralInputs)
+kernel: HadwigerNelson.SpectralInputs.si4_equivariant.{u_1, u_2} {Ω : Type u_1} {V : Type u_2} [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : MeasureTheory.Measure Ω) [MeasureTheory.IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) (c : Ω → V → Fin 4) (hc : ∀ (x : V), Measurable fun ω => c ω x) {S : Ω → Ω} (hS : MeasureTheory.MeasurePreserving S μ μ) (hS𝒜 : MeasurableSpace.comap S 𝒜 = 𝒜) (π : V → V) (hπ : ∀ (ω : Ω) (x : V), c (S ω) x = c ω (π x)) : ∀ᵐ (ω : Ω) ∂μ, ∀ (x : V), HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c (S ω) x = HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω (π x)
+file:   theorem si4_equivariant [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : Measure Ω) [IsProbabilityMeasure μ] (h𝒜 : 𝒜 ≤ m0) (c : Ω → V → Fin 4) (hc : ∀ x, Measurable fun ω => c ω x) {S : Ω → Ω} (hS : MeasurePreserving S μ μ) (hS𝒜 : 𝒜.comap S = 𝒜) (π : V → V) (hπ : ∀ ω x, c (S ω) x = c ω (π x)) : ∀ᵐ ω ∂μ, ∀ x, condSupport 𝒜 μ c (S ω) x = condSupport 𝒜 μ c ω (π x)
+kernel hypotheses (prop binders, named): 5: (h𝒜 : 𝒜 ≤ m0); (hc : ∀ (x : V), Measurable fun ω => c ω x); (hS : MeasureTheory.MeasurePreserving S μ μ); (hS𝒜 : MeasurableSpace.comap S 𝒜 = 𝒜); (hπ : ∀ (ω : Ω) (x : V), c (S ω) x = c ω (π x))
+  INCLUDED {Ω : Type*}
+  INCLUDED {V : Type*}
+
+## THM HadwigerNelson.SpectralInputs.spectral_carried_iff  (Proofs.HadwigerNelson.Arith.SpectralInputs)
+kernel: HadwigerNelson.SpectralInputs.spectral_carried_iff.{u_1, u_2} {R : Type u_1} [AddCommGroup R] {Ω : Type u_2} [MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω} (t : TopologicalSpace R) (ht : IsTopologicalAddGroup R) (hcount : (nhds 0).IsCountablyGenerated) (hB : HadwigerNelson.SpectralInputs.BochnerOn t) (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) (hadd : ∀ (x y : R), T (x + y) = T x ∘ T y) {f : ↥(MeasureTheory.Lp ℝ 2 μ)} {σ : MeasureTheory.Measure (AddChar R Circle)} (hσ : HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ) : σ (HadwigerNelson.SpectralInputs.contChars t)ᶜ = 0 ↔ f ∈ HadwigerNelson.SpectralInputs.contVec T hT (nhds 0)
+file:   theorem spectral_carried_iff (t : TopologicalSpace R) (ht : @IsTopologicalAddGroup R t _) (hcount : (@nhds R t 0).IsCountablyGenerated) (hB : BochnerOn t) (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (hadd : ∀ x y, T (x + y) = T x ∘ T y) {f : Lp ℝ 2 μ} {σ : Measure (AddChar R Circle)} (hσ : IsSpectralMeasureOf T hT f σ) : σ (contChars t)ᶜ = 0 ↔ f ∈ contVec T hT (@nhds R t 0)
+kernel hypotheses (prop binders, named): 6: (ht : IsTopologicalAddGroup R); (hcount : (nhds 0).IsCountablyGenerated); (hB : HadwigerNelson.SpectralInputs.BochnerOn t); (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ); (hadd : ∀ (x y : R), T (x + y) = T x ∘ T y); (hσ : HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ)
+  INCLUDED {R : Type*}
+  INCLUDED [AddCommGroup R]
+  INCLUDED {Ω : Type*}
+  INCLUDED [MeasurableSpace Ω]
+  INCLUDED {μ : Measure Ω}
+
+## THM HadwigerNelson.SpectralInputs.contChars_haar_null  (Proofs.HadwigerNelson.Arith.SpectralInputs)
+kernel: HadwigerNelson.SpectralInputs.contChars_haar_null.{u_1} {R : Type u_1} [AddCommGroup R] (hBH : HadwigerNelson.SpectralChain.BochnerHerglotz R) (t : TopologicalSpace R) (hmeas : MeasurableSet (HadwigerNelson.SpectralInputs.contChars t)) (hsep : ∀ (r : R), r ≠ 0 → ∃ χ ∈ HadwigerNelson.SpectralInputs.contChars t, χ r ≠ 1) (hproper : HadwigerNelson.SpectralInputs.contChars t ≠ Set.univ) {m : MeasureTheory.Measure (AddChar R Circle)} (hm : HadwigerNelson.SpectralInputs.IsHaarFourier m) : m (HadwigerNelson.SpectralInputs.contChars t) = 0
+file:   theorem contChars_haar_null (hBH : BochnerHerglotz R) (t : TopologicalSpace R) (hmeas : MeasurableSet (contChars t)) (hsep : ∀ r : R, r ≠ 0 → ∃ χ ∈ contChars t, χ r ≠ 1) (hproper : contChars t ≠ Set.univ) {m : Measure (AddChar R Circle)} (hm : IsHaarFourier m) : m (contChars t) = 0
+kernel hypotheses (prop binders, named): 5: (hBH : HadwigerNelson.SpectralChain.BochnerHerglotz R); (hmeas : MeasurableSet (HadwigerNelson.SpectralInputs.contChars t)); (hsep : ∀ (r : R), r ≠ 0 → ∃ χ ∈ HadwigerNelson.SpectralInputs.contChars t, χ r ≠ 1); (hproper : HadwigerNelson.SpectralInputs.contChars t ≠ Set.univ); (hm : HadwigerNelson.SpectralInputs.IsHaarFourier m)
+  INCLUDED {R : Type*}
+  INCLUDED [AddCommGroup R]
+  ABSENT inst [MeasurableSpace Ω] — reviewed: a σ-algebra on `Ω`; the statement mentions no `Ω`
+  ABSENT term {μ : Measure Ω} — reviewed: a bare measure on `Ω`; the statement is about a measure `m` on the dual and mentions neither `Ω` nor `μ`
+
+## THM HadwigerNelson.StandingFive.numberField_standingField  (Proofs.HadwigerNelson.Arith.StandingFive)
+kernel: HadwigerNelson.StandingFive.numberField_standingField : NumberField ↥HadwigerNelson.StandingFive.standingField
+file:   theorem numberField_standingField : NumberField standingField
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.StandingFive.instNumberFieldStanding  (Proofs.HadwigerNelson.Arith.StandingFive)
+kernel: HadwigerNelson.StandingFive.instNumberFieldStanding : NumberField ↥HadwigerNelson.StandingFive.standingField
+file:   instance instNumberFieldStanding : NumberField standingField
+kernel hypotheses (prop binders, named): 0
+
+## THM HadwigerNelson.StandingFive.seven_le_localBound  (Proofs.HadwigerNelson.Arith.StandingFive)
+kernel: HadwigerNelson.StandingFive.seven_le_localBound (hFloor : HadwigerNelson.StandingFive.StandingFloor 7) : 7 ≤ HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField
+file:   theorem seven_le_localBound (hFloor : StandingFloor 7) : 7 ≤ localBound standingField
+kernel hypotheses (prop binders, named): 1: (hFloor : HadwigerNelson.StandingFive.StandingFloor 7)
+
+## THM HadwigerNelson.StandingFive.five_le_chromaticNumber  (Proofs.HadwigerNelson.Arith.StandingFive)
+kernel: HadwigerNelson.StandingFive.five_le_chromaticNumber (hFloor : HadwigerNelson.StandingFive.StandingFloor 5) (hRow123 : min (HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField) 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber) : 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+file:   theorem five_le_chromaticNumber (hFloor : StandingFloor 5) (hRow123 : min (localBound standingField) 5 ≤ ((unitDistance ℂ).induce (planeOver standingField)).chromaticNumber) : 5 ≤ ((unitDistance ℂ).induce (planeOver standingField)).chromaticNumber
+kernel hypotheses (prop binders, named): 2: (hFloor : HadwigerNelson.StandingFive.StandingFloor 5); (hRow123 : min (HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField) 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (HadwigerNelson.unitDistance ℂ)).chromaticNumber)
+
+## THM HadwigerNelson.StandingFive.usable_card_ge  (Proofs.HadwigerNelson.Arith.StandingFive)
+kernel: HadwigerNelson.StandingFive.usable_card_ge (w : Ideal (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField)) (hw : w.IsMaximal) (h : Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w) % 4 = 3) : 347 ≤ Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w)
+file:   theorem usable_card_ge (w : Ideal (𝓞 standingField)) (hw : w.IsMaximal) (h : Nat.card (𝓞 standingField ⧸ w) % 4 = 3) : 347 ≤ Nat.card (𝓞 standingField ⧸ w)
+kernel hypotheses (prop binders, named): 2: (hw : w.IsMaximal); (h : Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w) % 4 = 3)
+
+## THM HadwigerNelson.StandingFive.no_small_usable  (Proofs.HadwigerNelson.Arith.StandingFive)
+kernel: HadwigerNelson.StandingFive.no_small_usable (w : Ideal (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField)) (hw : w.IsMaximal) (h : Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w) % 4 = 3) : 47 < Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w)
+file:   theorem no_small_usable (w : Ideal (𝓞 standingField)) (hw : w.IsMaximal) (h : Nat.card (𝓞 standingField ⧸ w) % 4 = 3) : 47 < Nat.card (𝓞 standingField ⧸ w)
+kernel hypotheses (prop binders, named): 2: (hw : w.IsMaximal); (h : Nat.card (NumberField.RingOfIntegers ↥HadwigerNelson.StandingFive.standingField ⧸ w) % 4 = 3)
+

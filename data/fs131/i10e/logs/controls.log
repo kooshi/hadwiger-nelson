@@ -1,0 +1,18 @@
+data/fs131/i10e/lean/Controls.lean:19:2: error: Type mismatch
+  h1
+has type
+  (pass 16383 1 0 0).2 / 2 ^ (8 * r) % 256 ≤ 74
+but is expected to have type
+  (pass (127 * 129) 1 0 0).2 / 2 ^ (8 * r) % 256 ≤ 73
+data/fs131/i10e/lean/Controls.lean:24:2: error: linarith failed to find a contradiction
+c : ℝ
+hc : c ≤ 74
+a✝ : 129 - 2 * c < -18
+⊢ False
+failed
+data/fs131/i10e/lean/Controls.lean:30:2: error: Type mismatch
+  h
+has type
+  step^[5461] 1 ≠ 1
+but is expected to have type
+  step^[5461] 1 = 1

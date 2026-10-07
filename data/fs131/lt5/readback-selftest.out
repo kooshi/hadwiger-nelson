@@ -1,0 +1,13 @@
+MATCH     LEAN.md:36 (verbatim, under § Assumptions)  ::  - **Our own hand results** that a module needs before their own module lands enter as expl
+quotations=1 mismatched=0
+  control [faithful]: as expected
+MISMATCH  LEAN.md: the quoted line is not a line of the file  ::  - **Our own band results** that a module needs before their own module lands enter as expl
+quotations=1 mismatched=1
+  control [one character changed]: as expected
+MISMATCH  LEAN.md:36: the line is in the file but under ['The Lean facts of this repository', 'Assumptions: outside theorems and our own'], not under § Toolchain  ::  - **Our own hand results** that a module needs before their own module lands enter as expl
+quotations=1 mismatched=1
+  control [wrong section]: as expected
+MISMATCH  LEAN-absent.md: no such file  ::  - **Our own hand results** that a module needs before their own module lands enter as expl
+quotations=1 mismatched=1
+  control [no such file]: as expected
+self-test: OK — all four controls behaved

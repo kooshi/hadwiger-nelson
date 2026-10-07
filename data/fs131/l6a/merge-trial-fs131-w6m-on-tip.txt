@@ -1,0 +1,8 @@
+425e5b6428a5b8d7e6cc0bbb89f731c4f6441022
+ARCHITECTURE.md
+
+Auto-merging ARCHITECTURE.md
+CONFLICT (content): Merge conflict in ARCHITECTURE.md
+Auto-merging Proofs.lean
+Auto-merging scripts/Axioms.lean
+exit=1

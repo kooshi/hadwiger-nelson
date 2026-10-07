@@ -1,0 +1,4 @@
+=== L10B CENSUS === formers=2 declarations-read=13389
+PRED HadwigerNelson.StandingFive.KloostermanBound module=Proofs.HadwigerNelson.Arith.FloorPlanes kind=def prop=true sites=3 closedSites=0 refut=0 isEmpty=0 witness=0 condRefut=0 :: refut=[] isEmpty=[] witness=[]
+PRED HadwigerNelson.GapSeven.Gapped module=Proofs.HadwigerNelson.Arith.GapSeven kind=def prop=true sites=1 closedSites=0 refut=0 isEmpty=0 witness=0 condRefut=0 :: refut=[] isEmpty=[] witness=[]
+=== END ===

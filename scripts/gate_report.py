@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """The digest a gate prints from its own saved output, so reading a result never means running the gate again.
 
-`scripts/vacuity.sh` and `scripts/axioms.sh` save their Lean tool's complete output (`scripts/gate-log.sh`)
-and call this to print, from that file and the previous complete run's file:
+`scripts/vacuity.sh`, `scripts/axioms.sh` and `scripts/assumptions.sh` save their Lean tool's complete output
+(`scripts/gate-log.sh`) and call this to print, from that file and the previous complete run's file:
 
 * every count the tool computed, including the ones the gate does not decide on;
 * whether those counts still match the ones the repository records, **one line per recorded source, and
   a source is named on a "match" line only if it was read and every count it records was compared**:
   the vacuity scan's nine counts against the baseline's header AND against `CLAUDE.md` § The gate; the
-  axiom audit's three (clean, declared purchases, imported) against `CLAUDE.md` § Trust ledger. A drifted
-  record is flagged here, never failed;
+  axiom audit's three (clean, declared purchases, imported) against `CLAUDE.md` § Trust ledger; the
+  assumptions scan's nine against its ledger's header AND against `CLAUDE.md` § Trust ledger. A drifted
+  record is flagged here, never failed; an absent one is a refusal (exit 3, below);
 * every row that changed since the previous complete run, which answers "which declarations are the new
   ones?" without a second scan.
 
@@ -23,12 +24,16 @@ cases, because each is a check that could not run:
   count is missing or recorded twice). Until 2026-09-25 the vacuity digest printed "match" naming
   `CLAUDE.md` § The gate, a file it never opened, while that section was four counts stale (J23bd, J32): a
   comparison that could not run must never read as one that passed. The digest is printed in full first.
+  **The assumptions scan's nine counts absent from `CLAUDE.md` § Trust ledger is this case too** (since
+  FS131-LT5, inventory item 562 (d)): a recorded count whose deletion passes is no record. The refusal
+  prints the counts to record, so the repair is one sentence.
 
 A baseline that does not exist is reported and not failed here: `scripts/vacuity.sh` fails on a missing
 baseline itself, except when creating one with `--baseline`.
 
     gate_report.py vacuity <this run's log> <previous run's log, or ''> <baseline file> <CLAUDE.md>
     gate_report.py axioms  <this run's log> <previous run's log, or ''> <CLAUDE.md>
+    gate_report.py assumptions <this run's log> <previous run's log, or ''> <ledger file> <CLAUDE.md>
     gate_report.py header  <this run's log>
 
 `header` prints the vacuity baseline's two counts lines from a scan's saved output, in the form the reader
@@ -417,13 +422,144 @@ def axioms(cur_path: str, prev_path: str, claude: str) -> list[str]:
     return unreadable
 
 
+# ---- assumptions: scripts/Assumptions.lean's report ---------------------------------------------------
+
+# The counts the repository records for the assumptions scan (the ledger's header; `CLAUDE.md` § Trust ledger).
+A_COUNTS = ("axioms", "rests", "named", "inline", "outside", "ours", "open", "takes", "mentions")
+# Every row kind the scan prints; a run is compared with the previous one row for row over all of them.
+A_ROWS = ("AXIOM", "RESTS", "ASSUMPTION", "TAKES", "MENTIONS", "PRODUCES", "REFUTES", "SITE", "CLOSED", "CONDITION",
+          "SILENT", "DERIVED", "WRAPS", "COHYP", "HINT", "FAIL")
+
+
+def read_assumptions(path) -> dict:
+    run = {"scanned": None, "totals": None, "rows": [], "warnings": []}
+    for line in lines_of(path):
+        if line.startswith("=== SCANNED === "):
+            run["scanned"] = {k: int(v) for k, v in re.findall(r"(\w+)=(\d+)", line)}
+        elif line.startswith("=== TOTALS === "):
+            run["totals"] = {k: int(v) for k, v in re.findall(r"(\w+)=(\d+)", line)}
+        elif line.split(" ", 1)[0] in A_ROWS:
+            run["rows"].append(line)
+        elif WARNING.match(line):
+            run["warnings"].append(line)
+    return run
+
+
+def assumption_counts(text: str, label: str, absent_ok: bool = False) -> dict | None:
+    """All nine recorded counts in `text`, each exactly once — or `Unreadable`. With `absent_ok`, a text that
+    records none of them at all returns `None`, so that the caller can say which sentence to add; the caller
+    fails on it all the same (`assumptions`, below). A partial or doubled record is never that."""
+    found = re.findall(rf"(?<![\w-])({'|'.join(A_COUNTS)})=(\d+)", text)
+    seen = Counter(k for k, _ in found)
+    if absent_ok and not seen:
+        return None
+    missing = [k for k in A_COUNTS if k not in seen]
+    doubled = sorted(k for k, n in seen.items() if n > 1)
+    if missing or doubled:
+        raise Unreadable(f"could not read the counts in {label}: "
+                         + "; ".join(([f"no {', '.join(missing)}"] if missing else [])
+                                     + ([f"{', '.join(doubled)} recorded more than once"] if doubled else [])))
+    return {k: int(v) for k, v in found}
+
+
+def assumptions(cur_path: str, prev_path: str, ledger: str, claude: str) -> list[str]:
+    run = read_assumptions(cur_path)
+    if run["scanned"] is None or run["totals"] is None:
+        raise Malformed("no '=== SCANNED ===' or '=== TOTALS ===' line: the scan did not report its accounting")
+    now = {**run["scanned"], **run["totals"]}
+    if any(k not in now for k in A_COUNTS):
+        raise Malformed(f"the '=== TOTALS ===' line lacks one of {', '.join(A_COUNTS)}")
+    by = Counter(line.split(" ", 1)[0] for line in run["rows"])
+    say("scanned: " + "  ".join(f"{k}={now[k]}" for k in ("constants", "theorems", "formers", "hypotheses", "closed")
+                                 if k in now))
+    say("assumed: " + "  ".join(f"{k}={now[k]}" for k in A_COUNTS))
+    say("decided: " + "  ".join(f"{k}={now[k]}" for k in ("declaredClosed", "established", "premises", "refuted",
+                                                           "conditions", "fails") if k in now))
+    say("counted, not decided: " + "  ".join(f"{k}={now[k]}" for k in ("cohyp", "hints", "silent", "unseen",
+                                                                        "produces", "refutes", "wrappers") if k in now))
+    axioms_rows = [line for line in run["rows"] if line.startswith("AXIOM ")]
+    say(f"--- outside theorems declared as axioms ({len(axioms_rows)}) ---")
+    for line in axioms_rows:
+        say(line[len("AXIOM "):])
+    declared = [line for line in run["rows"] if line.startswith("ASSUMPTION ")]
+    for kind in ("outside", "ours", "open"):
+        rows = [line for line in declared if f" kind={kind} " in line]
+        say(f"--- hypotheses, kind {kind} ({len(rows)}) ---")
+        for line in rows:
+            say(line[len("ASSUMPTION "):])
+    closed = [line for line in run["rows"] if line.startswith("CLOSED ") and not line.startswith("CLOSED ESTABLISHED ")]
+    say(f"--- closed hypotheses other than the {by['CLOSED'] - len(closed)} the library proves ({len(closed)}) ---")
+    for line in closed:
+        say(line[len("CLOSED "):][:260])
+    conditions = [line for line in run["rows"] if line.startswith("CONDITION ")]
+    say(f"--- formers declared conditions, not assumptions ({len(conditions)}): "
+        + ", ".join(line.split(" ", 2)[1].rsplit(".", 1)[-1] for line in conditions))
+    if run["warnings"]:
+        say(f"the scan printed {len(run['warnings'])} warning(s) of its own (full text in the log):")
+        for w in run["warnings"]:
+            say(f"  {w}")
+
+    unreadable = []
+    ledger_label = f"{rel(ledger)}'s header"
+    claude_trust = claude_label(claude, "Trust ledger")
+
+    def from_ledger():
+        if not Path(ledger).is_file():
+            return "missing"
+        return assumption_counts("\n".join(line for line in lines_of(ledger) if line.startswith("#")), ledger_label)
+
+    def from_claude():
+        text = section_text(claude, "Trust ledger", claude_trust)
+        return assumption_counts(text, claude_trust, absent_ok=True)
+
+    for label, read in ((ledger_label, from_ledger), (claude_trust, from_claude)):
+        try:
+            recorded = read()
+        except Unreadable as e:
+            say(f"RECORDED COUNTS NOT COMPARED — {e}")
+            unreadable.append(str(e))
+            continue
+        if recorded == "missing":
+            say(f"RECORDED COUNTS NOT COMPARED — {rel(ledger)} does not exist (scripts/assumptions.sh fails on that)")
+        elif recorded is None:
+            # Absence fails (inventory item 562 (d)): a recorded count whose deletion passes is this gate's own
+            # failure mode. The message carries the counts to record, so the repair is one sentence.
+            sentence = " ".join(f"{k}={now[k]}" for k in A_COUNTS)
+            say(f"RECORDED COUNTS ABSENT in {label} — it records none of the nine; add: `{sentence}`")
+            unreadable.append(f"{label} records none of the assumptions scan's nine counts, so there is nothing to "
+                              f"compare this run with. Add the sentence that holds them: `{sentence}`")
+        else:
+            compare(label, recorded, now)
+
+    say("--- changes since the previous complete run ---")
+    if not prev_path:
+        say("no previous complete run on record; the next run is compared with this one")
+        return unreadable
+    prev = read_assumptions(prev_path)
+    say(f"previous: {rel(prev_path)}")
+    before = {**(prev["scanned"] or {}), **(prev["totals"] or {})}
+    moved = [f"{k} {before[k]} → {now[k]}" for k in now if k in before and before[k] != now[k]]
+    say("counts: " + (", ".join(moved) if moved else "unchanged"))
+    a, b = Counter(prev["rows"]), Counter(run["rows"])
+    added, removed = sorted((b - a).elements()), sorted((a - b).elements())
+    for line in added:
+        say(f"+ {line[:300]}")
+    for line in removed:
+        say(f"- {line[:300]}")
+    if not added and not removed:
+        say("rows: none changed")
+    say(f"every row: rg '^({'|'.join(A_ROWS)}) ' {rel(cur_path)}")
+    return unreadable
+
+
 def main(argv: list[str]) -> int:
-    arity = {"vacuity": 6, "axioms": 5, "header": 3}
+    arity = {"vacuity": 6, "axioms": 5, "header": 3, "assumptions": 6}
     if len(argv) < 2 or argv[1] not in arity or len(argv) != arity[argv[1]]:
         print(__doc__)
         return 2
     try:
-        unreadable = {"vacuity": vacuity, "axioms": axioms, "header": header}[argv[1]](*argv[2:])
+        unreadable = {"vacuity": vacuity, "axioms": axioms, "header": header,
+                      "assumptions": assumptions}[argv[1]](*argv[2:])
     except Malformed as e:
         print(f"==> gate report: the output is not the shape this digest reads — {e}")
         return 2

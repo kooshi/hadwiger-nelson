@@ -1,0 +1,7 @@
+MATCH | CLAUDE.md | Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time.
+MATCH | plans/FS131-close-inventory.md | 484. **FS131-K10 done at its Stage 5: wave 10 planned — dispositions for all fourteen rows, a foundation, a skeleton of eleven, four rows
+MATCH | plans/FS131-close-inventory.md | 485. **Rulings on K10's held items, and its slot.** (a) **Three implementers by file, as it splits them**; the first, FS131-I10A
+MATCH | plans/FS131-close-inventory.md | 477. **FS131-K10, by message at its Stage 1 (`fs131-w10` at `6ca3fb4e`): a statement defect in a filed hand result, a gap, a generalization**
+MATCH | plans/FS131-close-inventory.md | 478. **Rulings on item 477** (sent to K10 by message). (a) **TC1-STANDING-FIVE takes a second named hypothesis beside `Row123Chain`, the
+MATCH | .claude/worktrees/fs131-w10/plans/FS131-w10-kernel-plan.md | ### 5.2 `SpectralInputs` — eight leaves
+MATCH | .claude/worktrees/fs131-w10/plans/FS131-w10-kernel-plan.md | ### 5.5 The named hypotheses, with `LEAN.md` § Assumptions' four items, and what each would take

@@ -1,0 +1,81 @@
+exec(open("/home/kooshi/source/lean-dir/data/fs131/briefs/scripts/mkbrief.py").read())
+# The day's Searcher brief, 2026-10-06: one request (queue line 8), at Kooshi's conditional word (inventory item 574).
+C=WT+"fs131-w7a/Proofs/HadwigerNelson/Plane/RouteT/Count.lean"
+IR=WT+"fs131-w7a/plans/FS131-I7A-implementation.md"
+b=f'''# Brief SEARCH-2026-10-06 — the day's search: does a six-colour count exist on a combinatorial map of Euler characteristic 0? One request, small and bounded, beside the Lean backlog's builds
+
+*Written 2026-10-06 by Keryx, the coordinator (the top-level session), at Kooshi's word. Launch line: "Your brief is on disk: read it in full first."*
+
+brief: SEARCH-2026-10-06
+  identity: the Searcher — your agent file (`.claude/agents/searcher.md`) is your identity and your lane's workflow
+  role: the day's search run, outside the milestone loop: one request — find a face-colouring with six colours of a combinatorial map of Euler characteristic 0 that meets every field of the Lean structure `CountData`, or bound where none exists; keep any model in a form a checker and then the kernel can re-check; report the result or the null
+  launch: when a slot frees, beside two or three jobs of the Lean backlog, each building Lean in its own worktree under the slot with up to 40 GiB
+  mission: § Why this job
+  statements: § The request
+  acceptance: § Done means
+  yours: § What is yours to decide
+  fences: none — nothing in this milestone is blind (`plans/FS131-close-inventory.md` § Rulings in force, ruling 1)
+  channel: message the coordinator ("main") by SendMessage at once if you find a model (with its address), and otherwise only for a question you cannot work around; the report goes to `data/search/2026-10-06/report.md`, and its text is your final message
+  standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. `RUNNING.md` is part of it too: read it in full before any run
+  record: `plans/SEARCH-2026-10-06.md`
+  touches: `plans/SEARCH-2026-10-06.md`, `data/search/2026-10-06/`, `tools/search_20261006_*.py`
+  budget: about 150k by the harness's count, as guidance; hand back at a saved stage before about 250k. Wallclock window: about one hour from launch; memory: at most 16 GiB and 12 cores per run under `scripts/slot.py`, since the builds hold up to 80 GiB of the slot's budget
+
+Hello. This is your lane's third day. The milestone running is the Lean backlog (FS-131), which formalizes the project's hand results
+in the kernel. Today one of its implementers proved the *tile count* of route T — a count over the tiles of a map that bounds how many
+colours it can carry — and found that six of its theorems, the ones at six colours, have no known object satisfying their hypotheses.
+A theorem with no such object may be true only because nothing satisfies it. Whether one exists is a finite question on any fixed map,
+and it is yours.
+
+## Why this job
+
+The owner's word, and the request's source (read the item whole in the inventory):
+
+{item(574)}
+{item(564)}
+A model would be the first inhabitant of six kernel theorems, and a statement about the frontier: the count is what the open stub on
+route T (FS-117) rests on, and at six colours it leaves room exactly where the problem is open. No model on every small map is not a
+proof that none exists — it is a bounded null, and with it the question goes to a deriver in the form your run suggests.
+
+## The request
+
+> | 8 | 2026-10-06, FS131-I7A | whether the six-colour theorems of route T's count (`CountData.room`, `slack`, `ends_identity`, `joint_first`, `kill`, `joint`) have a model on combinatorial maps or are empty there: "does a `CountData M 6` with `M.chi2 = 0` exist?" Excluded by hand, one mind, not in Lean: linear colourings `ax + by mod 6` and row-shifted colourings `x + s(y) mod 6` of the square grid | 6-colourings of small torus grids (and other maps with `V₄ ≥ 3V₆`) meeting `CountData`'s fields, each a local check | `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w7a/data/fs131/reports/FS131-I7A.md` (search request); its record § 3.3; inventory item 564 | open |
+> — source: plans/SEARCH-QUEUE.md
+
+The structure, as the kernel holds it — one unknown, `col`, and every other field a local condition on it (read the whole structure,
+the definitions its fields name — `CMap`, `deg`, `mu`, `Adj`, `EdgeAdj`, `vertNbrs`, `chi2` — and the two models that exist, at nine
+and at fifteen colours, in the same file):
+
+{Q(C,"structure CountData ")}
+{Q(C,"def torusGrid ")}
+Do not run queue lines 3 or 4 (held, and declined); line 7 stays open at low priority and is not today's.
+
+## Done means
+
+1. **Your decision, first**, in your record: which maps you will search, in what order, and why — the square grid on a torus in all
+   its quotients up to a size you name, and which maps with vertices of other degrees (the count's own inequalities say which degree
+   mixes are possible at six colours: read `room` and `kill` in that file before you choose). Two families look excluded by counting
+   before any run — maps whose faces are all hexagons, and maps whose vertices all have degree 6 — that is my reading, unchecked:
+   confirm or correct it in a line each.
+2. **Your model of the structure is checked against the kernel's before it is trusted**: your encoding of a combinatorial map and of
+   every field accepts the two colourings the kernel has checked (`grid9` on the `3 × 3` grid, `grid15` on the `4 × 4`, read from that
+   file) and rejects a planted fault in each field — one fault per field, each seen to fail. An encoding that disagrees with the Lean
+   definitions finds models of something else.
+3. **The runs**, bounded and checkpointed (standing rule 2, `RUNNING.md` § Building), each under the slot with the limits above. A
+   model is certified by an exact check another mind can re-run with no solver: the map written out as its permutations (or as
+   `torusGrid n m`), the colouring as a table, every field checked by a short script — and written so that a Lean implementer can state
+   it as a `CountData _ 6` and let the kernel evaluate it, as the two existing models are. A null is stated with its range: which
+   maps, to what size, each with the solver's proof of unsatisfiability kept where its checker can read it.
+4. **If no model appears and you see why** — a counting reason that covers a family, or all maps — do not try to prove it: write it
+   as a question for a deriver, with the family it covers and the smallest map it does not.
+5. Your record `plans/SEARCH-2026-10-06.md` (stages saved; "Theorems this phase proved": none, or the certified object's address),
+   the report in standing rule 11's form, and a drafted fate line for queue line 8 for me to file.
+
+## What is yours to decide
+
+Which maps, in what order, how far, and when the hour is better spent stopping. If the request is mis-posed — the structure's fields
+cannot all hold at six colours for a reason you can state from them — say so: that is a finding about the six theorems, and the most
+useful null there is.
+'''
+open(ROOT+"data/search/briefs/SEARCH-2026-10-06.md","w").write(b)
+print("written")

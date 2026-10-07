@@ -1,0 +1,5 @@
+slot: admitted python3: mem 6 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11
+grids ['13']: 66 instances, 0 done, 66 to run on 12 workers
+  {"key": "grid-12x12", "verdict": "SAT", "seconds": 0.053, "faces": 144, "darts": 576, "clauses": 198437, "map": "torusGrid 12 12", "degrees": {"4": 144}, "lengths": {"4": 144}, "cnf_sha256": "b17485981a81ae325787c5bcddd54d5384c7b39966a752c6eb1e0f0f2ef647e5", "checker": "ACCEPTED"}
+finished: {'UNSAT': 65, 'SAT': 1}
+rc=0

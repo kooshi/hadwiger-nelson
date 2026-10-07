@@ -1,0 +1,62 @@
+Curve            IsUnitCurve.chord                                MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Curve            IsUnitCurve.sin_le_inner                         MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Curve            IsUnitCurve.strictMonoOn_dist                    MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Curve            IsUnitCurve.norm_sub_le                          MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Curve            IsUnitCurve.one_le_dist                          MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Curve            lipschitzOnWith_of_chord                         MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBridge        AeColouring.gamma                                MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBridge        IsUnitCurve.exists_polarGraph                    MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBridge        AeColouring.beta                                 MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBridge        AeColouring.alpha                                MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBridge        AeColouring.fan_of_isolated                      own note
+FanBridge        AeColouring.regJLiteral_of_saturated             own note
+FanBridge        AeColouring.finite_arcs_of_isBounded             own note
+FanBridge        AeColouring.Fan.two_le_n                         own note
+FanBridge        AeColouring.Fan.col_ne                           own note
+FanBridge        AeColouring.Fan.branch_outside_discs             own note
+FanBridge        AeColouring.Fan.branch_contacts                  own note
+FanBridge        AeColouring.Fan.sector_alone                     own note
+LocalGraph       AeColouring.notMem_essBdry_of_mem_densitySet     MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+LocalGraph       AeColouring.ae_one_colour_of_isConnected         MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+LocalGraph       AeColouring.closure_essBdry_subset               no explicit hypothesis
+LocalGraph       local_graph                                      MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+LocalGraph       AeColouring.local_graph                          MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+MapColouring     sat_inP                                          own note
+Pinch            half_upperDensity                                own note
+Pinch            sq9_isTangentAt                                  no explicit hypothesis
+Pinch            pinch                                            own note
+Pinch            pinch_not_in_in                                  MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Pinch            TwoColourOn.essBoundary_inter_eq                 MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Pinch            c11_discs                                        MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Pinch            c11_split                                        MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Pinch            TwoColourNhd.mem_essBoundary                     MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Pinch            pinch_interface                                  MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Pinch            c11_discs_interface                              MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+MapColouring     sat_noPar                                        MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBridge        AeColouring.regJFan_of_saturated                 own note
+FanBridge        AeColouring.regJFan_iff_singLocallyFinite        MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBridge        AeColouring.Fan.sector_unique                    MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+?? HadwigerNelson.Plane.sq9_regJFan: not found by the reader
+Pinch            saturated_of_forall_isMUA                        MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Pinch            AeColouring.saturated_of_idomatic                MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Pinch            erosion_diam                                     MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Pinch            erosion_diam_cot                                 MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+MapColouring     bound_iff                                        MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+MapColouring     gmap_i                                           MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+MapColouring     gmap_ii                                          MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Pinch            half_dichotomy                                   MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+Curve            norm_sub_le_of_discs                             MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+MapColouring     ArcMap.bound_of_saturatedOn                      own note
+MapColouring     sat_bound_of_mem_closure                         own note
+MapColouring     sq9Map_sat_model                                 no explicit hypothesis
+LocalGraph       sq9_exists_isInterfaceChart                      no explicit hypothesis
+FanExamples      sq9_singLocallyFinite                            no explicit hypothesis
+FanBridge        AeColouring.Fan.isPreconnected_cell              no explicit hypothesis
+FanBridge        AeColouring.Fan.cell_subset_densitySet           no explicit hypothesis
+FanBridge        AeColouring.Fan.exists_ray_subset_cell           MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBridge        volume_essBoundary                               MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBridge        in_in_or_out_out                                 MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBridge        horn_of_sin_constraints                          MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBuild         isOpen_polarRegion                               MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+FanBuild         isPreconnected_polarRegion                       MODULE-ONLY (no note of its own; its module docstring has an inhabitants paragraph)
+heads 61: own note 14, module only 39, no note 0, no explicit hypothesis 7

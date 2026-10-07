@@ -1,0 +1,17 @@
+pre-push checks at d8eace55361f79e271e7b6715e2f291e884159f9 (2026-10-06T18:31:41Z)
+origin/main = aed29ad474515809c98afe82798db1654393ea5e
+ancestor of HEAD? aed29ad474515809c98afe82798db1654393ea5e: exit 0
+ancestor of HEAD? b3b67f23: exit 0
+ancestor of HEAD? d62406a2: exit 0
+ancestor of HEAD? 8e81fedd: exit 0
+ancestor of HEAD? 43ea4886: exit 0
+ancestor of HEAD? 2e55a2d6: exit 0
+ancestor of HEAD? 7e67af3b: exit 0
+--- the gate's inputs: git diff --name-only 7e67af3b HEAD -- . ':!plans' ':!data'
+LEAN.md
+(end)
+--- of those, under Proofs/, Proofs.lean, scripts/, lakefile, manifest, toolchain, ARCHITECTURE.md, tools/check_architecture.py:
+(end)
+--- tracked files modified:
+(end)
+--- sorry, the gate's narrow pattern over Proofs/: 0 line(s)

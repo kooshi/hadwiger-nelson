@@ -1,0 +1,27 @@
+=== Proofs/HadwigerNelson/Plane/Saturated/Basic.lean — 63 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean — 63 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/MapEdge.lean — 31 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/Sq9Map.lean — 21 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean — 33 doc comment(s), 3 with a word
+  l.175 ['open statement', 'named open', 'proved nowhere', 'hypotheses here']
+    decl: theorem gmap_ii (𝒞 : (Fin 6 → Set ℂ) → Prop)
+    doc : **FS121-C1-GMAP (ii)**, for every class `𝒞` of families of open sets with null unit pairs: if `𝒫_6` is empty on `𝒞`, then G-FIN on `𝒞` holds if and only if `χ_m⁰(ℝ²) ≥ 7`. With `𝒞` the locally finite map colourings this is the row: C121-NOPAR and G-FIN₆ are the two named open statements, hypotheses here and proved nowhere.
+  l.242 ['open question', 'open statement', 'named open']
+    decl: theorem sat_noPar (𝒞 : (Fin 6 → Set ℂ) → Prop) (hNoPar : NoPar 𝒞) (F : ArcMap 6) (hF : F.IsPlaneMap)
+    doc : **FS121-C1-SAT**, the "so" clause: if `𝒫_6` is empty on a class `𝒞` containing the classes of every valid plane map bounded by segments and circular arcs (C121-NOPAR, a named open statement, for the locally finite map colourings), no saturated six-colouring is almost everywhere equal to such a map. A refutation; its hypotheses without `hNoPar` are `sat_inP`'s, whose satisfiability at `k = 6` is the open question (at `k = 7`: R7).
+  l.257 ['open question']
+    decl: theorem sq9Map_sat_model : sq9Map.IsPlaneMap ∧ (∀ j, sq9.cls j =ᵐ[volume] sq9Map.region j) ∧ Saturated sq9.cls ∧
+    doc : **Inhabitant of `sat_inP`'s hypotheses, all at once** (and of `sat_bound_of_mem_closure`'s), at `k = 9`: `sq9Map` is a map of the plane bounded by segments, its regions are the classes of `sq9` up to the null grid, `sq9` is saturated — and the conclusion is not empty there: the edge point `sqEdgePt` separates `sqColA` and `sqColB`. (At `k = 6`, where `sat_noPar` refutes these hypotheses under C121-NOPAR, their satisfiability is the open question.)
+=== Proofs/HadwigerNelson/Plane/Saturated/Fan.lean — 49 doc comment(s), 1 with a word
+  l.140 ['open question']
+    decl: def SingLocallyFinite (c : AeColouring k) : Prop := ∀ x : ℂ, ∃ r > 0, (c.singularSet ∩ ball x r).Finite
+    doc : **`Σ` is locally finite**: every point has a ball holding finitely many singular points. (REG-J′'s first clause; C121-REGJ's open question, FS-127.)
+=== Proofs/HadwigerNelson/Plane/Saturated/FanExamples.lean — 45 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/Curve.lean — 32 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/CurveArc.lean — 21 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/ArcContinuation.lean — 31 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/FanArcs.lean — 9 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/FanBuild.lean — 19 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean — 50 doc comment(s), 0 with a word
+=== Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean — 101 doc comment(s), 0 with a word
+modules=14 hits=4

@@ -1,0 +1,27 @@
+ok   Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: deleted ['polarRegion_isOpen', 'polarRegion_isPreconnected'] (34 lines)
+ok   Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: '  polarRegion_isOpen z (F.cont i) (F.continuousOn_cyclicNext'
+ok   Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: '  polarRegion_isPreconnected z ((F.cont i).mono (Ioo_subset_'
+ok   Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: 'polarRegion_isOpen z hlo (F.continuousOn_cyclicNext i),'
+ok   scripts/Axioms.lean: '#print axioms HadwigerNelson.Plane.polarRegion_isOpen\n#print'
+ok   scripts/Axioms.lean: '; the records wired over `gamma`, `IsUnitCurve.exists_polarG'
+ok   scripts/Axioms.lean: " (until `fs131-w6c` joins, the records that read `Curve`'s o"
+ok   Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: '`plans/FS131-E8-derivation.md` §§ 3.2–3.7, each entry **[han'
+ok   Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: 'locally finite near `z`, by FS131-E8-BRIDGE ([hand], one min'
+ok   Proofs/HadwigerNelson/Plane/Saturated/Fan.lean: 'by FS131-E8-BRIDGE ([hand], one mind, until\n`Plane/Saturated'
+ok   Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean: '`plans/FS131-E8-derivation.md` §§ 3.1, 3.5 ([hand], one mind'
+ok   Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean: 'no `sorry` in this module; `local_graph` rests on two leaves'
+ok   Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean: '  preconnected unit-distance-free set. No sector and no colo'
+ok   Proofs/HadwigerNelson/Plane/Saturated/MapEdge.lean: "(names of this module's own: a second line\nmay hold the same"
+ok   ARCHITECTURE.md: '| `Plane/Saturated/Pinch` | **FS-131 wave 6, skeleton** (job'
+ok   ARCHITECTURE.md: 'FS121-V2-EROSION-DIAM (`dist_le_one_of_mem_closure`, `erosio'
+ok   ARCHITECTURE.md: '| `Plane/Saturated/Curve` | **FS-131 wave 6, skeleton** (job'
+ok   ARCHITECTURE.md: 'inhabitant `isUnitCurve_segment`; the leaves `IsUnitCurve.ch'
+ok   ARCHITECTURE.md: 'is 1-Lipschitz, by the parallelogram law). No measure, no co'
+ok   ARCHITECTURE.md: '| `Plane/Saturated/LocalGraph` | **FS-131 wave 6, skeleton**'
+ok   ARCHITECTURE.md: '`AeColouring.local_graph` (FS121-V5-LOC (ii)). | `Plane/Satu'
+ok   ARCHITECTURE.md: '| `Plane/Saturated/FanBridge` | **FS-131 wave 6, skeleton** '
+ok   ARCHITECTURE.md: 'FS121-V2-SECTOR (`Fan.sector_alone`) and FS121-DB1-L3 with F'
+ok   ARCHITECTURE.md: "Rests on `Curve`'s and `LocalGraph`'s leaves. |"
+ok   scripts/Axioms.lean: 6 records appended to block FS131-I6C
+ok   scripts/Axioms.lean: 14 records appended to block FS131-I6E
+tidy: wrote 7 file(s)

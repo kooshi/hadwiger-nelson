@@ -1,0 +1,37 @@
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: admitted env: mem 40 GiB (hard cap), cpus 8,9,10,11,12,13,14,15
+==> build: this run's full output: build/gate/build/20261006T170010Z-1602773.log
+    ⚠ [3837/3995] Replayed Proofs.HadwigerNelson.Arith.MajorityVote
+    warning: Proofs/HadwigerNelson/Arith/MajorityVote.lean:32:8: declaration uses `sorry`
+    ⚠ [3934/3995] Replayed Proofs.HadwigerNelson.Arith.StationaryRatio
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:100:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:107:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StationaryRatio.lean:121:8: declaration uses `sorry`
+    ⚠ [5780/5790] Replayed Proofs.HadwigerNelson.Arith.StandingFive
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:70:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:85:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:91:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:102:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/StandingFive.lean:128:8: declaration uses `sorry`
+    ⚠ [5783/5790] Replayed Proofs.HadwigerNelson.Arith.NegCircleModel
+    warning: Proofs/HadwigerNelson/Arith/NegCircleModel.lean:29:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/NegCircleModel.lean:35:8: declaration uses `sorry`
+    ⚠ [5784/5790] Replayed Proofs.HadwigerNelson.Arith.NormOneTarget
+    warning: Proofs/HadwigerNelson/Arith/NormOneTarget.lean:30:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/NormOneTarget.lean:35:8: declaration uses `sorry`
+    ⚠ [5785/5790] Replayed Proofs.HadwigerNelson.Arith.ProductFactor
+    warning: Proofs/HadwigerNelson/Arith/ProductFactor.lean:105:8: declaration uses `sorry`
+    ⚠ [5786/5790] Replayed Proofs.HadwigerNelson.Arith.Floor128
+    warning: Proofs/HadwigerNelson/Arith/Floor128.lean:94:8: declaration uses `sorry`
+    ⚠ [5787/5790] Replayed Proofs.HadwigerNelson.Arith.FloorPlanes
+    warning: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:64:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:83:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/FloorPlanes.lean:95:8: declaration uses `sorry`
+    All targets up-to-date (5790 jobs).
+==> build: OK — all 1781 modules already up to date, nothing built, 8 module(s) with warnings, 2s
+    full output: build/gate/build/20261006T170010Z-1602773.log

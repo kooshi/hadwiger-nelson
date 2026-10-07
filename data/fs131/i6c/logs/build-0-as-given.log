@@ -1,0 +1,42 @@
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261006T144523Z-729186.log
+    ⚠ [3979/4204] Replayed Proofs.HadwigerNelson.Plane.Saturated.Curve
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Curve.lean:45:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Curve.lean:52:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Curve.lean:58:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Curve.lean:63:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Curve.lean:70:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Curve.lean:98:8: declaration uses `sorry`
+    ⚠ [5596/5811] Replayed Proofs.HadwigerNelson.Plane.Saturated.MapColouring
+    warning: Proofs/HadwigerNelson/Plane/Saturated/MapColouring.lean:194:8: declaration uses `sorry`
+    ⚠ [5597/5811] Replayed Proofs.HadwigerNelson.Plane.Saturated.Pinch
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:131:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:140:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:150:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:162:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:169:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:218:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:237:8: declaration uses `sorry`
+    ⚠ [5610/5811] Replayed Proofs.HadwigerNelson.Plane.Saturated.LocalGraph
+    warning: Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean:47:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean:54:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean:91:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean:101:8: declaration uses `sorry`
+    ⚠ [5624/5811] Replayed Proofs.HadwigerNelson.Plane.Saturated.FanBridge
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:67:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:78:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:91:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:100:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:130:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:136:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:149:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:154:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:160:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:171:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:185:8: declaration uses `sorry`
+    All targets up-to-date (5811 jobs).
+==> build: OK — all 1804 modules already up to date, nothing built, 5 module(s) with warnings, 3s
+    full output: build/gate/build/20261006T144523Z-729186.log

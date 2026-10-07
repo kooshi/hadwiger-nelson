@@ -1,0 +1,8 @@
+Proofs/HadwigerNelson/Plane/ValidMap/BendStep.lean:345:/-- **The away bend with the tangent bend, in collar form** (FS112-N2-AWAY and N2-TAN; wave 4's `bend_away`, `sorry` on `fs131-w4ba`,
+Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean:20:**Every row above is proved; the module holds no `sorry`**: the rows marked so by the planner, and `pinch`,
+Proofs/HadwigerNelson/Plane/Saturated/LocalGraph.lean:34:**Proofs** (FS131-I6C): no `sorry` in this module; `local_graph` rests on two theorems of `Plane/Saturated/Pinch`
+Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean:9:`plans/FS131-E8-derivation.md` §§ 3.2–3.7, each entry kernel-checked in this module (no `sorry`)
+Proofs/HadwigerNelson/Plane/Cover.lean:33:partial colouring, and `AeColouring 9` is inhabited sorry-free. Its tightness and saturation are FS111-W-SQ9's content
+Proofs/HadwigerNelson/Plane/CoverExamples.lean:13:**FS111-M3-FIXCONV**. Plan: `plans/FS131-w2-kernel-plan.md` §§ 4, 7. Every object is defined by formula, sorry-free; the rows'
+Proofs/HadwigerNelson/Plane/CoverExamples.lean:6541:/-- `fatZ` is closed (spec, sorry-free). -/
+Proofs/HadwigerNelson/Packed.lean:266:built by hand needs a proof that it is in range — a `sorry` waiting to be written into a definition. -/

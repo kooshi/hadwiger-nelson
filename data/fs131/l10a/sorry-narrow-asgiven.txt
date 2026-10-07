@@ -1,0 +1,12 @@
+ace98a35:Proofs/HadwigerNelson/Arith/StandingFive.lean:63:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StandingFive.lean:67:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StandingFive.lean:71:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StandingFive.lean:76:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StandingFive.lean:81:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StandingFive.lean:88:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StandingFive.lean:93:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StandingFive.lean:105:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StandingFive.lean:129:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StationaryRatio.lean:103:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StationaryRatio.lean:111:  sorry
+ace98a35:Proofs/HadwigerNelson/Arith/StationaryRatio.lean:127:  sorry

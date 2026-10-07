@@ -1,0 +1,34 @@
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:60:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:111:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:133:0: warning: Definition `HadwigerNelson.SpectralInputs.factorSigma` of class type must be marked with `@[reducible]` or `@[implicit_reducible]`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:144:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:150:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:155:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:161:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:174:84: error: unexpected token ','; expected ':', ']', ']'' or '|'
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:183:16: error: unexpected token ','; expected ':', ']', ']'' or '|'
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:192:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:202:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:232:36: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  𝒜
+inferred
+  m0
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:233:36: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  𝒜
+inferred
+  m0
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:233:64: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  𝒜
+inferred
+  m0
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:234:28: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  𝒜
+inferred
+  m0
+Proofs/HadwigerNelson/Arith/SpectralInputs.lean:243:33: error: Type mismatch
+  continuous_bot
+has type
+  Continuous ?m.12
+but is expected to have type
+  x✝ ∈ contChars ⊥
+exit=1

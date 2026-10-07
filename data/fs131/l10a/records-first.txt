@@ -1,0 +1,43 @@
+main: 8677 theorems; landing: 8956; wave (landing only): 279 = 253 hand-written + 26 generated with no record asked; gone (main only): 0; records in the log: 5809
+  generated, by suffix: congr_simp 2, eq_1 19, eq_2 1, eq_def 1, inj 1, injEq 1, sizeOf_spec 1
+  wave records on exactly the three: 248
+  wave records on fewer: [Quot.sound, propext]: 3
+  wave records on fewer: [propext]: 1
+  wave records on none: 1
+  Arith.CharacterColouring: 24
+  Arith.SpectralInputs: 78
+  Arith.StandingFive: 107
+  Arith.StationaryRatio: 44
+  head HadwigerNelson.CharacterColouring.mem_archimedean_unitRing_iff: exactly the standard three
+  head HadwigerNelson.SpectralInputs.exists_isHaarFourier: exactly the standard three
+  head HadwigerNelson.SpectralInputs.sp_if: exactly the standard three
+  head HadwigerNelson.SpectralInputs.measurableSet_factorSigma_iff: exactly the standard three
+  head HadwigerNelson.SpectralInputs.contVec_eq_lpMeas: exactly the standard three
+  head HadwigerNelson.SpectralInputs.measurableSet_preimage_factorSigma: exactly the standard three
+  head HadwigerNelson.SpectralInputs.spectral_carried_iff: exactly the standard three
+  head HadwigerNelson.SpectralInputs.contChars_haar_null: exactly the standard three
+  head HadwigerNelson.SpectralInputs.si4: exactly the standard three
+  head HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul: exactly the standard three
+  head HadwigerNelson.StationaryRatio.ratio_prod_le: exactly the standard three
+  head HadwigerNelson.StationaryRatio.ratio_prod_le_iSup_levels: exactly the standard three
+  head HadwigerNelson.StandingFive.numberField_standingField: exactly the standard three
+  head HadwigerNelson.StandingFive.finrank_standingField: exactly the standard three
+  head HadwigerNelson.StandingFive.isTotallyReal_standingField: exactly the standard three
+  head HadwigerNelson.StandingFive.ncard_primes_above_two: exactly the standard three
+  head HadwigerNelson.StandingFive.comap_conj_of_two_mem: exactly the standard three
+  head HadwigerNelson.StandingFive.card_quotient_of_two_mem: exactly the standard three
+  head HadwigerNelson.StandingFive.usable_card_ge: exactly the standard three
+  head HadwigerNelson.StandingFive.stablePrime_card: exactly the standard three
+  head HadwigerNelson.StandingFive.le_localBound: exactly the standard three
+  head HadwigerNelson.StandingFive.no_small_usable: exactly the standard three
+  head HadwigerNelson.StandingFive.seven_le_localBound: exactly the standard three
+  head HadwigerNelson.StandingFive.five_le_chromaticNumber: exactly the standard three
+  head HadwigerNelson.CharacterColouring.gluing: exactly the standard three
+  head HadwigerNelson.CharacterColouring.gluing_field: exactly the standard three
+  head HadwigerNelson.CharacterColouring.gluing_iff_uniform: exactly the standard three
+  head HadwigerNelson.CharacterColouring.gluing_iff_of_orderBound: exactly the standard three
+  head HadwigerNelson.CharacterColouring.cl2: exactly the standard three
+  head HadwigerNelson.SpectralInputs.sp_only_if: exactly the standard three
+  head HadwigerNelson.SpectralInputs.sp_only_if_interface: exactly the standard three
+  head HadwigerNelson.SpectralInputs.si4_equivariant: exactly the standard three
+records: PASS

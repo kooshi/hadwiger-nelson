@@ -251,4 +251,17 @@ theorem planted_generic_normal {k : ℕ} (F : Plane.ArcMap k) (K : Set ℂ) (_h 
 /-- CONTROL 62 — `WoodallNormal` on `halfDisc` (true, but proved nowhere). `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
 theorem planted_unknown_normal (_h : Plane.halfDisc.WoodallNormal Set.univ) : (1 : ℕ) = 1 := rfl
 
+/-- CONTROL 63 — wave 10's `StationarySet` at a variable group: `GENERIC` (FS131-L10A). -/
+theorem planted_generic_stationary {G : Type} [AddCommGroup G] [MeasurableSpace G]
+    (W : StationaryRatio.StationarySet G) : W.B = W.B := rfl
+
+/-- CONTROL 64 — `StationarySet` at `ZMod 2`, where `StationarySet.parity` is a closed inhabitant: `WITNESSED`. -/
+theorem planted_witnessed_stationary (W : StationaryRatio.StationarySet (ZMod 2)) : W.B = W.B := rfl
+
+/-- CONTROL 65 — `StationarySet` at `ℤ`: inhabited (`StationarySet.empty ℤ`), but by a construction that takes its group as an
+argument, which is no evidence to this scan, and by no closed declaration. `UNKNOWN`, never `WITNESSED` and never `VACUOUS`: the
+load-bearing half — the family at an instance the evidence does not reach. (No `VACUOUS` control exists for this carrier: it is
+empty at no group.) -/
+theorem planted_unknown_stationary (W : StationaryRatio.StationarySet ℤ) : W.B = W.B := rfl
+
 end HadwigerNelson

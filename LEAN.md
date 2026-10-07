@@ -28,17 +28,37 @@ certificate. **Nothing in `tools/` is trusted**: a generator bug can only produc
 - **An imported theorem carries four things**, because an axiom that misstates its paper can be inconsistent, and then every theorem
   built on it is provable, false ones included, and the kernel cannot see it:
   1. its docstring names its `BIBLIOGRAPHY.md` key, the section and the page;
-  2. its Lean statement is read back against the paper's own wording, in the planner's record;
+  2. its Lean statement is read back against the paper's own wording, in the planner's record. State the axiom in the paper's own
+     form and derive the form the library uses: the translation is then kernel-checked and the read-back is symbol against symbol
+     (`StandingFive.kloosterman_bound`, with `kloostermanBound_of_ringChar_ne_two` and `kloosterman_page_of_kloostermanBound`);
   3. one model of its hypotheses — a `theorem` or `example` in the same file exhibiting an object that satisfies them;
   4. a line in `ARCHITECTURE.md` § Trust, as a declared purchase.
-- **Our own hand results** that a module needs before their own module lands enter as explicit hypotheses of the theorems that use
-  them, never as axioms, so they disappear when discharged.
+- **Our own hand results** that a module needs before their own module lands enter as explicit hypotheses of the
+  theorems that use them, never as axioms, so they disappear when discharged. **So may an outside theorem** (five do on
+  `main`, in seven entries: Herglotz–Bochner in two forms, Markov–Kakutani, Artin–Lang, Voronov's Thm 1.1, and Weil's
+  bound in the hypothesis forms its modules were proved over), when its statement is better carried as a named `Prop`
+  than as an axiom.
+- **Every assumption in hypothesis form is declared to the gate**, in `AssumptionAudit.declared` at the end of
+  `scripts/Assumptions.lean`, by the landing that brings it: a named one by `.former ``Full.Name kind "source"`; one
+  written out in a binder by `.site ``Theorem `binder "Label" kind "source"`, once per theorem that takes it (sites
+  with one label carry one source, character for character); a former that is only a condition on a theorem's
+  parameters by `.condition ``Full.Name "reason"`; a closed premise that is not an assumption by `.premise ``Theorem
+  `binder "reason"`. The kind is `outside` (source: a `BIBLIOGRAPHY.md` key in brackets), `ours` (a ledger row `row N`,
+  a grokking `G N`, or a derivation entry id) or `open` (those, or a stub `FS-N`); the source opens with that
+  reference. The definition's docstring says whose it is in the words the gate reads — "external" or "classical" or
+  its bracketed key; "[hand]", "[tools]", "[cert]" or "outside the backlog"; "open question" — or it is counted
+  `SILENT`; and a former that is **not** assumed must not use the words "named hypothesis", "outside the backlog" or
+  "external" in its docstring. Then `./scripts/assumptions.sh --self-test`, `./scripts/assumptions.sh`,
+  `./scripts/assumptions.sh --write-ledger` (read the rows it adds: each is a statement that is now conditional), and
+  the nine counts for `CLAUDE.md` § Trust ledger, which the step reads as stale — flagged, not failed — until they are
+  refiled. A hand result written out in a binder over the theorem's own variables is the one thing the gate cannot find
+  by itself: the landing declares it on its own word.
 - **At publication** the cost of landing every assumption on the standard three axioms is measured first; Kooshi prefers the three
   axioms if it is about a week of agent work or less.
 
 ## Trust ledger
 
-The audit's counts are recorded in `CLAUDE.md` § Trust ledger, where `scripts/gate_report.py` reads them. What it accepts:
+The audit's counts are recorded in `CLAUDE.md` § Trust ledger, where `scripts/gate_report.py` reads them. So are the assumptions step's nine. What it accepts:
 
 | Entry | Status |
 |---|---|
@@ -46,6 +66,7 @@ The audit's counts are recorded in `CLAUDE.md` § Trust ledger, where `scripts/g
 | `sorryAx` | the gate fails on it |
 | `<decl>._native.native_decide.ax_N_M` | **explicit purchase, per use**, named in its declaration's docstring and listed in `ARCHITECTURE.md` § Trust |
 | an `axiom` importing an outside theorem | **explicit purchase**, with the four items above; declared to the gate by one `AxiomAudit.declareImport` line in `scripts/Axioms.lean`'s IMPORTED section (the procedure is beside its banner), every record resting on it audited there |
+| a hypothesis standing for an outside theorem, a hand result of ours or an open question | **declared**, with its kind and source, by one line of `AssumptionAudit.declared` in `scripts/Assumptions.lean`; every statement that takes it listed in `scripts/assumptions-ledger.txt` |
 
 **The audit checks each record's axioms as a set** (`scripts/axioms.sh`): under CLEAN a subset of the standard three; under IMPORTED
 the standard three and declared imports, at least one; under PURCHASED those and native axioms, at least one native. Any other axiom
@@ -124,6 +145,12 @@ the `.olean` would. Settle every hand-written module before starting a long gene
   transfer to a bare `List.range` re-evaluated in a loop, which the kernel's cache absorbs; hoisting it is still the honest shape. A
   rule you are obeying is still a claim, and it is measured before it is written down. A `Nat` literal costs about 2.3 KB of olean
   against about 145 bytes per plain literal node, so pack many values into few big `Nat`s.
+- **A closed `Nat` term rewritten by a lemma stated at other instances than its own is evaluated by the kernel.** `0 + S` with `S` a
+  closed sum of 16,383 register states, rewritten by Mathlib's `zero_add`: elaboration succeeds, the kernel runs 173 s to
+  `deterministic timeout`, and passes 8 GiB in 27 s; with one variable free in `S`, or with core's `Nat.zero_add` on the closed term,
+  2 s (`data/fs131/i10e/lean/closed-term/`). State the lemma that does the algebra with the term's parameters free and instantiate it
+  last (`Floor128.pass_class`, `class_le`); a `(kernel) deterministic timeout` is a memory event too, so bisect one under a slot.
+  (Measured by FS131-I10E; the mechanism is its reading, one mind, not checked against the kernel's source.)
 - **A `∀ x ∈ l, P x` under `decide` costs an order of magnitude more than the same check as a `Bool`** (31.9 GB and a timeout against
   3.5 GB and 5 s on 778 pairs). State list checks through `List.all` and recover the per-element form with `List.all_eq_true`.
 - **A numeral at an unsimplified type index is paid per numeral, at elaboration, even in a definition with no proof.** A 48-point
@@ -141,6 +168,32 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - At the pin `push_neg` is deprecated; write `push Not`.
 - `nlinarith` exhausts its heartbeats in a large context even when the certificate is small, and one declaration shares one heartbeat budget: state each
   inequality as a small real-variable lemma carrying only its own hypotheses, then apply it (FS131-I4h, five leaves).
+- `T ⁻¹' A ∆ A` parses as `T ⁻¹' (A ∆ A)`: write `(T ⁻¹' A) ∆ A`. `s ∆ t` on sets needs `open scoped symmDiff` (FS131-I10A, -I10B).
+- At the pin `add_le_add_left h a : b + a ≤ c + a` and `add_le_add_right h a : a + b ≤ a + c` (and `mul_le_mul_left/right` alike): the name
+  says which side varies. `#check` before use (FS131-I10B).
+- `ENNReal`: `ENNReal.one_half_lt_one` is stated at `2⁻¹`, not `1 / 2` (`ENNReal.half_lt_self` gives `a / 2 < a`);
+  there is no `ENNReal.div_eq_iff` — `ENNReal.eq_div_iff : b = c / a ↔ a * b = c`. `Measure.exists_mem_of_measure_ne_zero_of_ae`
+  is under `Measure`. `Measure.addHaar_sphere` asks `Nontrivial E`; `addHaar_sphere_of_ne_zero` does not. A `rw` with
+  `Measure.addHaar_closedBall'` takes the first closed ball about `0` in the goal, `closedBall 0 1` included: name the radius.
+  An intermediate value on a convex set needs no path: `(convex_closedBall c r).isPreconnected.intermediate_value` (FS131-IF1).
+- A `rfl` for `((Subring.inclusion h a : unitRing F) : ℂ) = a` at the concrete pair `unitRing ⊥ ≤ unitRing F` is accepted by the elaborator
+  and times out in the kernel, which compares the two subtypes and descends into `F =?= ⊥`. Stated generically in the two subrings
+  (`coe_inclusion_subring`) it is checked once with variables (FS131-K10).
+- The reflection `z ↦ g − z` preserves an invariant measure: `MeasureTheory.Measure.measurePreserving_sub_left` (the name is under
+  `Measure`, not under `MeasureTheory`). With a translation it bounds a half-disc or a strip without rotating the plane: an open
+  half of a disc and its mirror image are disjoint (FS131-I6A, `volume_halfPlane_inter_closedBall_le`).
+- For sets, `s ≤ᵐ[μ] t` is `∀ᵐ z, z ∈ s → z ∈ t`: prove it with `filter_upwards […] with z … hz`, or from an inclusion as
+  `Eventually.of_forall fun z hz => h hz`; `Eventually.of_forall h` with `h : s ⊆ t` does not elaborate, and
+  `HasSubset.Subset.eventuallyLE` is deprecated at the pin (FS131-I6A).
+- At the pin Mathlib holds two ramification APIs. The number-field lemmas — `Ideal.sum_ramification_inertia` (`Σ e·f = [L:K]` over
+  `IsDedekindDomain.primesOverFinset`), `Ideal.absNorm_eq_pow_inertiaDeg'`, `Ideal.IsDedekindDomain.ramificationIdx'_eq_multiplicity` —
+  are stated for the primed `Ideal.ramificationIdx'` / `Ideal.inertiaDeg'` (`Mathlib/NumberTheory/RamificationInertia/`), over
+  `Ideal.span {((p : ℕ) : ℤ)}`; the unprimed names are a newer definition in `Mathlib/RingTheory/RamificationInertia/` with a
+  different statement of the sum (FS131-I10C).
+- `simp` does not rewrite the coercion of a numeral out of a subfield, `((3 : ↥S) : K)`; `map_ofNat S.subtype 3` and `norm_cast` do.
+  Dot notation on a `local notation` (`twoZ.inertiaDeg' P`) is an unknown identifier: make the object an `abbrev`. And
+  `lake env lean` does not report a missing docstring on a public `def` (the lakefile's linter options are not in force); the
+  build does (FS131-I10C).
 
 - **A failed `exact?` is not an absence.** It proves the shape you asked for was not found; vary the statement (`= true` versus
   `decide (…)`, an iff versus an implication) first. **And Mathlib is not the whole library:** `grep -rn "<name-fragment>" $(lean
@@ -150,6 +203,14 @@ the `.olean` would. Settle every hand-written module before starting a long gene
   a loud failure at the join: the two theorems merge in silence and the axiom audit then reads one copy while the kernel holds the
   other (§ The gate, `scripts/dupnames.sh`). A line that needs another line's lemma before they meet takes it as a hypothesis, or
   states it under a name of its own and says so in its report; the join then makes one declaration.
+- **A section `variable` enters a theorem only if the theorem's statement mentions it** (at the pin; the proof body cannot pull it in).
+  A skeleton leaf whose statement does not name a hypothesis-carrying variable is stated without it: `Plane/RouteT/Count` held four
+  such leaves — each false of a one-face torus, each a `sorry` from which the next leaves were to be proved (FS131-I7A, inventory
+  item 556). `include C in` above the theorem adds the binder and leaves the text unchanged; `omit [...] in` drops instance binders a
+  proved theorem does not read (with a `sorry` body the `unusedSectionVars` linter stays quiet). **Read a leaf as the kernel has it —
+  `#check` — never as the file prints it; a statement check that compares text passes this whole class.** `data/fs131/l10b/kernel-sigs.lean` with
+  `tools/fs131_l10b_kernelsig.py` is that reading for a list of modules: the binders of each stored type against the file's own
+  signature and every `variable` in scope (FS131-L10B).
 
 ## The package
 
@@ -163,7 +224,8 @@ invoked. `lake update` and Mathlib bumps go alone in a labeled commit (they move
 
 ## The gate
 
-Elaboration is the floor: the build green, zero `sorry`, `#print axioms` clean on the public surface (`scripts/axioms.sh`), no name declared by two modules (`scripts/dupnames.sh`, run before the audit, whose prints are faithful only then), and `./scripts/axioms.sh --self-test` green (23 planted faults, each watched to fire, two of them partners that must pass), linters
+Elaboration is the floor: the build green, zero `sorry`, `#print axioms` clean on the public surface (`scripts/axioms.sh`), no name declared by two modules (`scripts/dupnames.sh`, run before the audit, whose prints are faithful only then), and `./scripts/axioms.sh --self-test` green (23 planted faults, each watched to fire, two of them partners that must pass), `./scripts/assumptions.sh` and `./scripts/assumptions.sh --self-test` green (21
+controls planted in one copy of the audit, 33 checks), linters
 silent, spec examples passing. On top of that, the statement-level gate, because a formalization that proves the *wrong* theorem is
 the characteristic failure here:
 
@@ -175,7 +237,7 @@ the characteristic failure here:
   run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness not proved), which fail unconditionally before the baseline;
   `GENERIC` (parametric, where **no inhabitant witness can exist** — the caller's obligation); `UNKNOWN` (counted, never silent, and the
   only thing the baseline may hold). The counts and the baseline's two entries are recorded in `CLAUDE.md` § The gate, where
-  `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants sixty-two controls
+  `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants sixty-five controls
   and watches each fire; the load-bearing one — the same carrier family at an instantiation nothing refutes — must read `UNKNOWN`,
   never `VACUOUS`.
 - **The environment linters** are `lake lint --no-build -- --no-build --trace` under the slot (about 5 s, 4.8 GB): Lake's
@@ -220,6 +282,29 @@ the characteristic failure here:
   module asks (`f.eq_1`, `f.congr_simp`; reserved names, which no author can declare) — failing only if their copies' axioms differ.
   `--self-test` plants fifteen controls in a scratch library (`scripts/dupnames-controls.txt`). **A join of two lines runs it on the
   joined tree, before the axiom audit**: the join makes the doubled name, and neither line's own gate can see it.
+- **`./scripts/assumptions.sh` and `./scripts/assumptions.sh --self-test` are green** — everything a theorem rests on
+  that the kernel did not check is listed, in both forms it takes. An outside theorem declared as an `axiom` shows in
+  `#print axioms`; a hypothesis does not — a theorem that says "if Herglotz–Bochner holds, then …" prints the standard
+  three — so `scripts/Assumptions.lean` reads every hand-written statement as the kernel holds it and prints every
+  library axiom with the theorems whose stored axiom lists hold it (`RESTS`), and every declared hypothesis with its
+  kind (`outside`, `ours`, `open`), its source and the statements that take it (`TAKES`, `MENTIONS`). Whether a
+  hypothesis is an assumption or a condition on the theorem's parameters is intent, which no type records, so the
+  check **requires evidence**: the one list is `AssumptionAudit.declared`. **It fails** on a *closed* hypothesis (no
+  free variable: a statement about the world) that is neither declared, nor proved by the library, nor the one claim
+  a refutation refutes — a closed family `∀ F, … → H F` of a declared `H` included: the binder is declared as a site;
+  on a `Prop`-former taken as a hypothesis that no theorem concludes, or that is concluded only from declared
+  assumptions, or whose docstring uses the words "named hypothesis", "outside the backlog" or "external", when neither
+  list holds it; on a source that is not in `BIBLIOGRAPHY.md`, `LEDGER.md`, the grokkings, the stubs or the
+  derivations; on a declared kind its docstring contradicts; on a declared hypothesis no statement takes, or one a
+  theorem proves over its own variables; on any consumer that `scripts/assumptions-ledger.txt` does not list, or lists
+  and the scan does not find; and **when the nine counts are absent from `CLAUDE.md` § Trust ledger** (a recorded count
+  whose deletion passes is no record; counts that have drifted are flagged, not failed). **It counts and prints, and
+  cannot decide**: the other hypotheses of every consumer (`COHYP`), and `unseen=` — every other hypothesis over a
+  theorem's own variables, among which a hand result written out in a binder, undeclared and unremarked in its
+  docstring, is not told from a condition. **A former proved at the instances where it is taken closed** (not over its
+  own variables) is not reported: its entry leaves on the landing's reading, its docstring is reworded to say over what
+  it is proved, and its closed takers then read `ESTABLISHED` (`StandingFive.StandingFloor`, FS131-LT5). The nine counts
+  are recorded in `CLAUDE.md` § Trust ledger and in the ledger's header, where `scripts/gate_report.py` reads them.
 - The Moser spindle's non-3-colourability is proved **twice** — by `decide` and through the SAT bridge — so the CNF encoding is
   checked against an independent oracle.
 - The final statement is read against Mathlib's `SimpleGraph.chromaticNumber` and the informal claim, out loud, before it is believed.

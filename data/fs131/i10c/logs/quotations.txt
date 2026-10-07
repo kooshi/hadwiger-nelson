@@ -1,0 +1,9 @@
+MATCH (1)  /home/kooshi/source/lean-dir/CLAUDE.md :: Do not consider Lean formalization a cost. It's practically mechanical
+MATCH (1)  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md :: 484. **FS131-K10 done at its Stage 5: wave 10 planned — dispositions f
+MATCH (1)  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md :: 485. **Rulings on K10's held items, and its slot.** (a) **Three implem
+MATCH (1)  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md :: 477. **FS131-K10, by message at its Stage 1 (`fs131-w10` at `6ca3fb4e`
+MATCH (1)  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md :: 478. **Rulings on item 477** (sent to K10 by message). (a) **TC1-STAND
+MATCH (1)  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md :: 493. **FS131-I10A done: all nine leaves of wave 10's first file pair p
+MATCH (1)  /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10c/plans/FS131-w10-kernel-plan.md :: ### 5.4 `StandingFive` — nine leaves, one certificate
+MATCH (1)  /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10c/plans/FS131-w10-kernel-plan.md :: ### 5.5 The named hypotheses, with `LEAN.md` § Assumptions' four items
+MISMATCH   /home/kooshi/source/lean-dir/CLAUDE.md :: Do not consider Lean formalization a cost. It's practically mechanical

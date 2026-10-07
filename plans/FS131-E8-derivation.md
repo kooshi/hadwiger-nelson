@@ -20,6 +20,12 @@ Each **[hand], one mind, kernel pending**; entries and arguments in § Stage 3. 
   frozen words' second clause unread: § 3.6.
 - **FS131-E8-CLAUSE2** — under saturation the frozen words' second clause follows from the first, and every bounded set meets finitely many
   interface arcs: § 3.7.
+- **FS131-E8-BRANCH** — the contacts at a branch of any fan under saturation (the planner's `Fan.branch_contacts`): a common contact at one
+  branch point puts the whole branch on one unit circle about it; otherwise the two contacts at `z ± i e(d)`: § 6.1.
+- **FS131-E8-TWOSIDES** — at any fan, no saturation: the two sides of a branch differ in colour, no fan has one branch, and a singular point
+  has at least two (the planner's `Fan.col_ne`, `Fan.two_le_n`): § 6.2.
+- **FS131-E8-OUTSIDE** — a curve of curvature at most 1 and length at most `π/2` stays outside the two unit discs tangent at its start (the
+  planner's `IsUnitCurve.one_le_dist`, checked): § 6.3.
 - **FS131-E8-SI5C** — the brief's second question: J45-SI-5's step (c) holds by majority decoding — Chebyshev's inequality and a closed subspace
   of `L²` — with no pointwise ergodic theorem: § 5.1.
 
@@ -267,6 +273,17 @@ control: e8-lens
   expect: 0
   fault: python3 ../data/fs131/e8/e8_lens.py --C 1
 
+**Erratum, 2026-10-06** (under FS131-E8-LOCAL; § 6.4; source: FS131-K6b, `plans/FS131-w6-kernel-plan.md` § 11.5 (1) on `fs131-w6` at `32f2ab4c`,
+its `norm_sub_le_of_discs` kernel-checked). § 3.1 (4), *Regularity*, last sentence — "At a point where `g″` exists … the tangent angle
+`ψ = arctan g′` is absolutely continuous with `dψ/ds = κ`, so `ψ` is 1-Lipschitz in arclength" — is true, and rests on two theorems the argument
+does not need (a Lipschitz function is differentiable almost everywhere; the fundamental theorem for absolutely continuous functions). Read in
+its place: for `x′, x″ ∈ Z₀ ∩ B(y, ρ₁/2)` with `δ = |x′ − x″| ≤ ρ₁/8`, the open unit disc of `b` at `x′` and that of `a` at `x″` do not overlap —
+if they did, the midpoint of their centres, `x′ + (x″ − x′)/2 + (ν′ − ν″)/2`, would lie in both and within `δ/2 + 6δ/2 = 3.5δ` of `x′` by
+(3)(c), hence in `N`, in `O_a ∩ O_b = ∅` — and the same with `a`, `b` exchanged; so the centres are at least 2 apart both ways, and the
+parallelogram law gives **`|ν(x′) − ν(x″)| ≤ |x′ − x″|`**. The unit normal, hence the unit tangent, is 1-Lipschitz in the chord, so in
+arclength; a continuous tangent angle with that property is 1-Lipschitz. No second derivative is taken. The entry's statement, its `uses only`
+and its verdict are unchanged; (3)(c)'s constant 6 is now read only to place that midpoint in `N`.
+
 ### 3.2 Finite length, the ends and the end tangent
 
 *Setting for §§ 3.2–3.4.* `z ∈ Σ`, `0 < R ≤ 1/2`, and `U = B(z, R) ∖ {z}` satisfies (U). By § 3.1, `𝓘 ∩ U = ∂_e ∩ U` is relatively closed in `U`
@@ -433,6 +450,14 @@ derivation: FS131-E8-FAN
     FS121-derivation.md, the job records FS121-V2, -V3, -V5); no literature search run — the objects are this project's
   handoff: de Bruijn — the statement as a lemma producing the planner's Fan at z from Σ ∩ ball z R ⊆ {z} and saturation at the essential boundary
     points of the punctured ball; § 3.6's field-by-field reading; the kernel route notes of §§ 3.1 (2) and 3.2 (2)
+
+**Note, 2026-10-06** (under FS131-E8-FAN; § 6.2, § 6.3; source: FS131-K6b, § 11.5 (3), (4)). Two of the statement's clauses and one of its
+hypotheses are wider than filed. (i) "at least two" and "regions on the two sides of a curve being of different colours" read no saturation and
+none of FS131-E8-LOCAL: they hold for every fan (FS131-E8-TWOSIDES, § 6.2), the first with `z ∈ Σ`. The `uses only` line's "FS131-E8-LOCAL's two
+colours at a branch point" is one route, not a need. (ii) "let z be a point of the singular set" is read for "at least two" alone: a point `z`
+off Σ with the other hypotheses has a fan too — with no curve if `z` is off the essential boundary's closure, with two if `z` is an interface
+point. (iii) `R` needs no bound: pass to `min(R, 1/2)`. The entry's text stands; these are the planner's `fan_of_isolated`, `Fan.two_le_n`,
+`Fan.col_ne`, each confirmed in stage 6.
 
 derivation: FS131-E8-BRIDGE
   statement: for every k, in a measurable k-colouring of the plane whose classes have null unit pairs, saturated, with locally finite singular set Σ,
@@ -708,3 +733,178 @@ control: e8-majority
   run: python3 ../data/fs131/e8/e8_majority.py
   expect: 0
   fault: python3 ../data/fs131/e8/e8_majority.py --p 2/3
+
+## Stage 6 — SAVED: the planner's statements of the bridge, checked (the brief's amendment of 2026-10-06)
+
+*Resumed for this stage only. Read: the amendment; `plans/FS131-w6-kernel-plan.md` §§ 10.2, 11.1–11.5 on `fs131-w6` at `32f2ab4c`;
+`Plane/Saturated/Curve.lean`, `FanBridge.lean` whole; `Fan.lean` ll. 30–215; `LocalGraph.lean` ll. 63–105; `Pinch.lean`'s statements of `pinch`,
+`pinch_interface`, `c11_discs`, `c11_split`. The amendment's ten quotations against their sources: exact, each (`data/fs131/e8/quotes.py`, now
+reading a section name after a path; output `data/fs131/e8/quotes-amendment.out`, 15 of 15 over the whole brief; `--plant` exits 1).*
+
+**A fan**, in this stage, is the planner's structure (`Plane/Saturated/Fan.lean` ll. 159–185), for a measurable colouring with finitely many
+colours and a point `z`: a radius `r > 0` with `Σ ∩ B(z, r) ⊆ {z}`; `n` **branches**, branch `i` the polar graph `{z + t e(φ_i(t)) : 0 < t < r}`
+of a continuous `φ_i` with a limit `d_i` at 0 (its **limit direction** `e(d_i)`), in counter-clockwise order within one turn at every `t`; the
+essential boundary in `B(z, r) ∖ {z}` the union of the branches; the open region counter-clockwise of branch `i` almost everywhere of a colour
+`col i`. No saturation and no curvature bound is part of it.
+
+### 6.1 The contacts at a branch
+
+**Registered after a sketch made while reading the statement** (informed, as § 1.5's were): `branch_contacts` true at 0.8; the planner's
+"split along its whole length or tangent along it" true as worded at 0.5 — the likeliest break a point that is of both types at once.
+*Scored:* the first met; the second half-met — true as an inclusive alternative, false as an exclusive one (below).
+
+Let `F` be a fan at `z`, the colouring's classes with null unit pairs, and every essential boundary point of `B(z, r) ∖ {z}` saturated. Fix a
+branch, `e(d)` its limit direction, `a` the colour of the region clockwise of it and `b` of the region counter-clockwise; `a ≠ b` (§ 6.2). Its
+points `x(t) = z + t e(φ(t))` are interface points (on the essential boundary, off Σ), and in every small ball about one only `a` and `b` have
+positive measure, so its two-colour ball has the colours `a`, `b`.
+
+**Case A: some branch point `x(t₀)` has a common contact** — a point `y ∈ supp S_a ∩ supp S_b` with `|x(t₀) − y| = 1`. Let
+`T = {t ∈ (0, r) : |x(t) − y| = 1}`. It is closed in `(0, r)` (continuity). It is open: at `t₁ ∈ T`, FS111-M-PINCH at `x(t₁)` with the pair of
+contacts `(y, y)` cannot be its tangent case (that needs antipodal contacts), so `x(t₁)` is of split type about `y`, and in its two-colour ball
+the essential boundary is the unit circle about `y` (FS111-M-C11 (iii)); the branch points near `x(t₁)` are essential boundary points in that
+ball. `T ∋ t₀` and `(0, r)` is connected: **the whole branch lies on the unit circle about `y`**. Letting `t → 0`: `|z − y| = 1`, and the
+branch's limit direction is the circle's tangent at `z`, so `y − z = ± i e(d)`. (No saturation is read in this case beyond the one common
+contact, and no bound `1/2`.)
+
+**Case B: no branch point has a common contact.** At each branch point `x` take a contact `y_a` of `a` and `y_b` of `b` (saturation). They
+differ, so FS111-M-PINCH gives its tangent case: `y_b − x = −(y_a − x)`, the open unit disc about `y_a` a.e. of `b` near `x`, the one about
+`y_b` a.e. of `a`. So `y_a − x` is a unit normal of the branch at `x` pointing into `b`'s side, the counter-clockwise side. Within `B(z, 1/2)`
+the branch is the component of FS131-E8-GAMMA through its points (it is connected, lies in one component, and both meet each small circle about
+`z` once — FS131-E8-BETA), so it has a unit tangent `T`, pointing away from `z`, which tends at `z` to `e(d)` (BETA's last clause with the fan's
+`tendsto`). The normal into the counter-clockwise side is `iT` (the tangent has a positive radial component, so `iT` has a positive component
+along increasing angle). Hence `y_a(x(t)) = x(t) + iT → z + i e(d)` and `y_b(x(t)) = x(t) − iT → z − i e(d)`; supports are closed:
+**`z + i e(d) ∈ supp S_a` and `z − i e(d) ∈ supp S_b`**. ∎
+
+One of the two cases holds, so the planner's disjunction holds: `branch_contacts` is **derived at its exact hypotheses** (`F` any fan;
+saturation in `B(z, F.r) ∖ {z}`; `j` the region clockwise of `i`).
+
+**The planner's sentence, corrected in one word.** "A branch is of split type along its whole length or of tangent type along it" is true as
+*some branch point has a common contact of both colours — then every branch point is of split type about that one centre — or none has, and
+then every branch point is of tangent type*. It is false as an exclusive alternative of the two types: a unit arc about `y` with `b` inside,
+whose colour `b` also has a contact at `2x − y` for the arc's points `x`, is of split type and of tangent type at once (FS111-M-PINCH's "exactly
+one of" is per pair of contacts). The Lean disjunction is inclusive, so the statement is unaffected; a consumer that case-splits on it must not
+assume the second alternative excludes a unit arc.
+
+derivation: FS131-E8-BRANCH
+  statement: in a measurable k-colouring of the plane whose classes have null unit pairs, let z have a fan of radius r, and let every essential
+    boundary point of B(z, r) other than z have, for every class with that point on its essential boundary, a point of that class's support at
+    distance 1; then for each branch of the fan, with limit direction e(d), a the colour of the region clockwise of it and b the colour of the
+    region counter-clockwise: either one of the two points z + i e(d), z − i e(d) lies in the supports of both a and b and every point of the
+    branch is at distance 1 from it, or z + i e(d) lies in the support of a and z − i e(d) in the support of b
+  uses only: FS111-M-PINCH at a branch point for a given pair of contacts (a common contact excludes its tangent case, distinct contacts its
+    split case); FS111-M-C11 (iii) in a split point's two-colour ball; connectedness of (0, r); FS131-E8-TWOSIDES (a ≠ b); in the second
+    alternative also saturation at branch points near z, FS131-E8-GAMMA and -BETA for the branch's tangent at z, and closed supports
+  not claimed: that the two alternatives exclude each other (a unit arc with a further contact at the antipode has both); which colour is
+    inside the circle in the first; that the branch is not a unit arc in the second; anything about a branch of a fan in a colouring that is
+    not saturated near z
+  argument: § 6.1 The contacts at a branch
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: R7 at a lattice point — each of the six branches is a unit arc about the opposite corner of its Reuleaux triangle, which carries both
+    colours (the first alternative); SQ9 at the vertex (1/2, 1/2) — each branch along an axis has its two contacts at z ± i e(d) (the second;
+    control e8-sq9-contacts)
+  prior art: partly: FS121-V2-verification.md § 2.1 Lemma T (ii) holds the contacts' limit for an arc of one type; the propagation of a common
+    contact along the branch and the statement over any fan are the planner's (FS131-w6-kernel-plan.md § 11.5 (4) on fs131-w6), derived here
+  handoff: de Bruijn — Fan.branch_contacts as stated; the first alternative holds for every t in (0, F.r), not only below 1/2, and its
+    proof reads no saturation beyond the common contact
+
+control: e8-sq9-contacts
+  of: FS131-E8-BRANCH — the second alternative on its model: SQ9's four branches at a vertex, both contacts of each, exactly
+  run: python3 ../data/fs131/e8/e8_sq9_contacts.py
+  expect: 0
+  fault: python3 ../data/fs131/e8/e8_sq9_contacts.py --swap
+
+### 6.2 Two sides, two colours — with no saturation
+
+Let `F` be a fan at `z` in a measurable colouring with finitely many colours; no unit pairs, no contacts.
+(1) *A branch is a null set.* It is relatively closed in the punctured disc, and each circle about `z` meets it in one point; integrate in
+polar coordinates. (Or: the image of the graph of `φ_i`, a null set of the `(t, θ)`-plane, under the smooth polar map.)
+(2) *Near a branch point `x = x_i(t₀)` every point is on branch `i` or in one of the two regions beside it.* The other branches' angles differ
+from `φ_i(t₀)` modulo `2π` at `t₀` (the order within one turn) and are continuous, so a small ball about `x` misses them; its points have
+angle just above `φ_i(t)` (the region counter-clockwise of `i`), just below (the region clockwise of it), or equal.
+(3) *The two regions differ in colour.* If both were a.e. of one colour `a`, a ball about `x` would be a.e. of `a` by (1) and (2), `x` a density
+point of `S_a`, hence on no class's essential boundary — but the branches lie in the essential boundary. With one branch the two regions are
+one region, so **no fan has one branch**.
+(4) *At a singular point, at least two.* With no branch, the punctured disc is a connected open set meeting no essential boundary and no cusp
+(cusps are in Σ), so it is a.e. of one colour (FS131-E8-DELTA); then `z` is a density point of that class and outside every other class's
+support: on no essential boundary and no cusp, so `z ∉ Σ`. ∎
+
+The planner's `Fan.col_ne` and `Fan.two_le_n` are **derived, with no saturation**. FS131-E8-FAN's entry is not wrong — its two clauses are true
+— but its `uses only` names a route through FS131-E8-LOCAL that is not needed; the dated note under the entry (§ 3.6) says so.
+
+derivation: FS131-E8-TWOSIDES
+  statement: in a measurable colouring of the plane with finitely many colours, at a point z that has a fan, the regions on the two sides of
+    each branch have different colours, the fan does not have one branch, and if z is a singular point the fan has at least two branches
+  uses only: that a continuous polar graph is a null set; continuity and the angular order of the branches; that a density point of one class
+    is on no class's essential boundary; FS131-E8-DELTA on the punctured disc, for a fan with no branch; the definition of Σ. Not read: unit
+    pairs, saturation, contacts, curvature
+  not claimed: that two regions not beside one branch differ in colour (without saturation one colour can occupy two regions of a fan, as at
+    the centre of a bow-tie); that a fan exists
+  argument: § 6.2 Two sides, two colours — with no saturation
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: SQ9 at the vertex (1/2, 1/2) — four branches, four regions, the colours on the two sides of each branch different
+  prior art: partly: the planner's argument (FS131-w6-kernel-plan.md §§ 11.4, 11.5 (3) on fs131-w6), checked here step by step; FS131-E8-FAN
+    held the two clauses under saturation
+  handoff: de Bruijn — Fan.two_le_n and Fan.col_ne as stated
+
+### 6.3 The lens bound, and the fan at every point
+
+**`IsUnitCurve.one_le_dist`.** For a unit-speed curve with 1-Lipschitz tangent angle `ψ` on `[0, ℓ]`, `ℓ ≤ π/2`, put
+`f_±(s) = |γ(s) − γ(0) ∓ i T(0)|²`. Then `f_±(0) = 1` and, with `⟨i e(α), e(β)⟩ = sin(β − α)`,
+
+  `f_±′(s) = 2⟨γ(s) − γ(0), T(s)⟩ ∓ 2 sin(ψ(s) − ψ(0)) ≥ 2 sin s − 2 sin s = 0`,
+
+by § 3.3's inequality (C2) and `|ψ(s) − ψ(0)| ≤ s ≤ π/2`. So `f_± ≥ 1`: **confirmed** (control `e8-outside`, exact, both signs). **It is the
+statement the sector rows need**: V2 § 2.3's "it lies on or below that arc, outside `B(y, 1)`" and V3 § 2.3 (F-c) are this, at `γ(0) = z`,
+`T(0) = e(d)`. In polar form it is `|φ_i(t) − d_i| ≤ arcsin(t/2)`, V3's lens; my § 4.6 offered `arcsin(t)/2`, which is weaker
+(`arcsin(t/2) ≤ arcsin(t)/2`) and does not put the branch outside the discs. § 4.6's offer is withdrawn in favour of this.
+
+derivation: FS131-E8-OUTSIDE
+  statement: a unit-speed plane curve whose tangent angle is 1-Lipschitz in arclength, of length at most π/2, stays outside the two open unit
+    discs tangent to it at its starting point
+  uses only: the inequality ⟨γ(s) − γ(0), T(s)⟩ ≥ sin s of § 3.3; that the sine is increasing on [0, π/2]
+  not claimed: the same beyond arclength π/2; strict inequality (a unit arc stays on one of the two circles)
+  argument: § 6.3 The lens bound, and the fan at every point
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the unit arc γ(s) = (sin s, 1 − cos s) — on the circle about (0, 1), at distance √(5 − 4 cos s) ≥ 1 from (0, −1); the segment
+  prior art: partly: the derivation is the planner's (FS131-w6-kernel-plan.md § 11.4, one_le_dist, on fs131-w6), redone by the coordinator and
+    checked here; a classical comparison for curves of curvature at most 1 (recalled, not read)
+  handoff: de Bruijn — IsUnitCurve.one_le_dist as stated; Fan.branch_outside_discs follows on the branch's arclength parametrization
+
+control: e8-outside
+  of: FS131-E8-OUTSIDE — both distances, exactly, on all 65,534 bang-bang prefixes of curvature ±1
+  run: python3 ../data/fs131/e8/e8_outside.py
+  expect: 0
+  fault: python3 ../data/fs131/e8/e8_outside.py --kappa 2
+
+**`fan_of_isolated` at every `z`, without `R ≤ 1/2`: confirmed.** §§ 3.1–3.5 read `z ∈ Σ` nowhere (hypothesis (U) is about the punctured disc),
+and § 3.6 reads it for "at least two" alone. For `z` off Σ under the same hypotheses: if `z` is not in the closure of the essential boundary, a
+small punctured disc has no essential boundary and the fan has no branch; otherwise `z` is an interface point (§ 3.1 (0)), and §§ 3.2–3.4 give
+finitely many branches (two: the halves of the curve through `z`), § 3.5 the regions. `R` enters only through `min(R, 1/2)`.
+
+### 6.4 The erratum under FS131-E8-LOCAL, and the planner's `3.5δ`
+
+The dated erratum is under the entry in § 3.1. Checked: the midpoint of the centres `x′ + ν′` and `x″ − ν″` is
+`x′ + (x″ − x′)/2 + (ν′ − ν″)/2`, within `δ/2 + |ν′ − ν″|/2 ≤ 3.5δ` of `x′` by (3)(c); with `|x′ − y| < ρ₁/2` and `δ ≤ ρ₁/8` it is within
+`0.9375ρ₁` of `y`, in `N`; two open unit discs whose centres are less than 2 apart both contain that midpoint. `3.5δ` is right. The planner's
+`norm_sub_le_of_discs` then gives the sharp bound, and its item 2 is right too: the fan's existence needs only the crude constant (lengths
+bounded in a smaller disc), the sharp one is read by FS131-E8-OUTSIDE's consumers.
+
+### 6.5 The planner's read-backs (its § 11.3), entry by entry
+
+Beyond what § 11.3 itself names as wider:
+- **FS131-E8-GAMMA** — `gamma` says `InjOn γ (Icc 0 L)`, injective on the *closed* interval, which is more than the entry's "not closed": the two
+  ends are different points and no end is a point of the arc. True, by the same chord bound (`⟨γ(s₂) − γ(s₁), T(s₁)⟩ ≥ sin(s₂ − s₁) > 0`).
+- **FS131-E8-BETA** — `beta` exports a limit `d` of the polar angle and drops "to an angle of the component's limit tangent at z";
+  `exists_polarGraph` keeps it (its limit is `ψ 0`). `Fan.branch_contacts` and `Fan.branch_outside_discs` need the dropped clause (§ 6.1 Case B:
+  the tangent at `z` is `e(d)`), so their proofs go through `gamma` and `exists_polarGraph`, not through `beta` alone — as § 11.4's row for
+  `branch_outside_discs` plans.
+- **FS131-E8-LOCAL** — `local_graph` is the entry's clause (ii) at a wider class (two sets); the entry's clause (i) is `closure_essBdry_subset`.
+  The chart's `bdry` is about `essBoundary A`; for a colouring, `c.essBdry ∩ Q` is the same set (every other class is null in `Q ⊆ N`), a line the
+  colouring form owes.
+- **FS131-E8-DELTA, -ALPHA, -FAN, -BRIDGE, -CLAUSE2** — as meant; nothing to add to § 11.3.

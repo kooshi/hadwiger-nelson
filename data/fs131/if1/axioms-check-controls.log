@@ -1,0 +1,12 @@
+(a) dirty record under RECORDS, no control: exit=1 (want 1)
+FAIL if1_control_sorry: ['sorryAx']
+FAIL control: no planted record was read, so the predicate was not seen to fire
+RESULT: FAIL — 16 records, 0 control(s)
+(b) one record missing: exit=1 (want 1)
+FAIL count: 14 records under RECORDS, expected 15
+RESULT: FAIL — 14 records, 1 control(s)
+(c) control clean: exit=1 (want 1)
+FAIL control if1_control_sorry: ['propext'] — did NOT fire
+RESULT: FAIL — 15 records, 1 control(s)
+(d) unmodified: exit=0 (want 0)
+RESULT: PASS — 15 records, 1 control(s)

@@ -25,7 +25,10 @@ unit of `ℚ(√3, √11)(i)`, so fixing it costs no generality.
 
 `Forces` at four colours cannot hold vacuously here: every graph drawn in `ℚ(√3, √11)²` is four-colourable (Theorem B,
 `LEDGER.md` row 57), so a witness is a genuine compulsion, and by the spare-colour lemma (row 45) its forcer is not
-three-colourable. -/
+three-colourable.
+
+**Not in the kernel**: a measurement of ours, graded [tools] / [measured] — one CaDiCaL refusal with no proof log (`LEDGER.md`
+rows 103 and 47) — taken as a hypothesis by `five_le_chromaticNumber_planeOver_seven_of_G4`. -/
 def G4 : Prop :=
   ∃ (n : ℕ) (E : List (Fin n × Fin n)) (q : Fin n → ℂ) (a b : Fin n),
     (∀ x y, (edgeGraph n E).Adj x y → dist (q x) (q y) = 1) ∧

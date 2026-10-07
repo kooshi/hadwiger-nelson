@@ -1,0 +1,11 @@
+Proofs/HadwigerNelson/Arith/RatioBound.lean: 5 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/FactorAction.lean: 3 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/NormOneTarget.lean: 3 heads at the base, 0 changed, 0 removed, 1 added: card_filter_pow_eq_one
+Proofs/HadwigerNelson/Arith/FloorPlanes.lean: 7 heads at the base, 0 changed, 0 removed, 11 added: sum_addChar_mul_left, sum_eq_zero_add_sum_units, sum_units_addChar_mul, sum_addChar_mul_sq, sum_plane_quadratic, circle_sum_le_of_ne, circle_sum_zero_of_isotropic, two_sqrt_lt_circle_sum_zero, exists_ringHom_pow, card_filter_pow_eq_self, exists_mulShift_eq
+Proofs/HadwigerNelson/Arith/Floor128.lean: 19 heads at the base, 0 changed, 0 removed, 41 added: ev, ev_zero, ev_eq, ev_one, ev_two_mul, ev_shiftLeft_one, ev_two_pow, ev_two, map_ev, coeff_ev_X, ev_xor, ev_clmul, ev_step, ev_iterate_step, qBig_lt, qBig_testBit_one, charP_two, exists_root, step_lt, step_ne_zero, pass_fst, pass_snd, iterate_step_lt, iterate_step_ne_zero, iterate_step_period, eq_of_dvd_of_not_dvd, minimalPeriod_step, iterate_step_injOn, exists_iterate_step_eq, digit_sum, sum_range_mul_eq, pass_class, class_le, root_pow_eq_one, ev_ne_zero, ev_inj, root_pow_inj, exists_code, exists_root_pow_eq, normOne_eq_image, exists_addChar
+Proofs/HadwigerNelson/Arith/TargetFloors.lean: 5 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/ProductFactor.lean: 6 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/MajorityVote.lean: 1 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/GapSeven.lean: 13 heads at the base, 0 changed, 0 removed, 0 added
+Proofs/HadwigerNelson/Arith/NegCircleModel.lean: 2 heads at the base, 0 changed, 0 removed, 0 added
+TOTAL: 0 changed or removed

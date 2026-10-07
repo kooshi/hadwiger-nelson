@@ -1,0 +1,42 @@
+'HadwigerNelson.SpectralInputs.mem_factorSets_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.isClosed_contVec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.lipschitz_comp_mem_contVec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.iUnion_mem_factorSets' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.measurableSet_factorSigma_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.setOf_lt_mem_factorSets' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.contVec_eq_lpMeas' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.measurableSet_preimage_factorSigma' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.condExpL2_mem_contVec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.condExpL2_eq_self_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.inner_sub_condExpL2_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.measurable_selection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.ae_mem_condSupport' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.ae_condLaw_mul_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.si4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.condExp_comp_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.si4_equivariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.posDef_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.ext_of_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.posDef_delta' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.exists_isHaarFourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.IsHaarFourier.integral_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.IsHaarFourier.map_mulRight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.mul_mem_contChars_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.contChars_haar_null' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.rot_negOne_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.sp_if' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.compMeasurePreserving_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.compMeasurePreserving_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.norm_comp_sub_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralInputs.spectral_carried_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.CharacterColouring.exists_ratLinear_extension' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.CharacterColouring.mem_archimedean_unitRing_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.StandingFive.usable_card_ge' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

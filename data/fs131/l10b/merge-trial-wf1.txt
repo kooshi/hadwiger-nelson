@@ -1,0 +1,11 @@
+trial on 74814a95: git merge-tree --write-tree --name-only HEAD a61f0d141a437d3482d4e1bb5e6eda5f5200748e
+b15d381009dc9fde661815e90d48eea8412892c2
+ARCHITECTURE.md
+scripts/Axioms.lean
+
+Auto-merging ARCHITECTURE.md
+CONFLICT (content): Merge conflict in ARCHITECTURE.md
+Auto-merging Proofs.lean
+Auto-merging scripts/Axioms.lean
+CONFLICT (content): Merge conflict in scripts/Axioms.lean
+exit=1

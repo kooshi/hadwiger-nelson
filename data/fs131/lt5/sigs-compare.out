@@ -1,0 +1,2 @@
+compare: before=1453 after=1453 (theorems before=1223) missing=0 added=0 changed=0
+compare: IDENTICAL — every constant's stored type, kind, universe parameters and value hash agree

@@ -1,0 +1,5 @@
+Proofs/HadwigerNelson/Arith/FloorPlanes.lean:64:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/FloorPlanes.lean:74:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/FloorPlanes.lean:83:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/FloorPlanes.lean:95:8: warning: declaration uses `sorry`
+EXIT=0

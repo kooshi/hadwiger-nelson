@@ -1,0 +1,18 @@
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:78:4: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Measure.dirac', which is 'noncomputable'
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:100:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:107:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:121:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:133:53: error: Function expected at
+  zero_le
+but this term has type
+  0 ≤ ?m.13
+
+Note: Expected a function because this term is being applied to the argument
+  _
+Proofs/HadwigerNelson/Arith/StationaryRatio.lean:135:64: error: unsolved goals
+G : Type u_1
+inst✝¹ : AddCommGroup G
+inst✝ : MeasurableSpace G
+ω : (StationarySet.empty ℤ).Ω
+⊢ ω ∈ {ω | 0 < {t | ω ∈ ∅}.indicator 1 0} ↔ ω ∈ ∅
+exit=1

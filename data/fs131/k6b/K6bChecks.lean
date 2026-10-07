@@ -1,0 +1,34 @@
+import Proofs.HadwigerNelson.Plane.Saturated.Basic
+/-! FS131-K6b: Mathlib and library names confirmed at the pin (run with `lake env lean`; every line must resolve). -/
+open Complex Set MeasureTheory Filter Topology Metric
+namespace HadwigerNelson.Plane
+#check @convex_halfSpace_im_lt
+#check @convex_halfSpace_im_gt
+#check @convex_halfSpace_re_lt
+#check @isClosed_iUnion_of_finite
+#check @volume_segment_eq_zero
+#check @norm_polarPt_sub
+#check @le_of_tendsto_of_tendsto
+#check @Ioo_mem_nhdsGT
+#check @e_pi_div_two
+#check @Real.cos_neg_of_pi_div_two_lt_of_lt
+#check @Real.sin_neg_of_neg_of_neg_pi_lt
+#check @Real.cos_pos_of_mem_Ioo
+#check @tendsto_densityRatio_compl_of_mem
+#check @nonempty_of_measure_ne_zero
+#check @closure_minimal
+#check @Measure.addHaar_affineSubspace
+#check @parallelogram_law_with_norm
+#check @HasDerivWithinAt.ofReal_comp
+#check @LipschitzWith.const
+#check @Real.cos_le_cos_of_nonneg_of_le_pi
+#check @Real.sin_le_sin_of_le_of_le_pi_div_two
+#check @intervalIntegral.integral_eq_sub_of_hasDeriv_right
+#check @strictMonoOn_of_deriv_pos
+#check @norm_e_sub_e_le
+#check @exists_mem_essClosure_of_cover
+#check @exists_ne_mem_essClosure
+#check @volume_densitySet_diff
+#check @isPreconnected_iff_subset_of_disjoint
+#check @addHaar_image_eq_zero_of_differentiableOn_of_addHaar_eq_zero
+end HadwigerNelson.Plane

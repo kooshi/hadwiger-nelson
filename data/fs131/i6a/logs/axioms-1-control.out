@@ -1,0 +1,14 @@
+clean     | HadwigerNelson.Plane.norm_sq_mul_sub_of_norm_eq_one: ['Classical.choice', 'Quot.sound', 'propext']
+clean     | HadwigerNelson.Plane.dist_add_mul_lt_one: ['Classical.choice', 'Quot.sound', 'propext']
+clean     | HadwigerNelson.Plane.one_lt_dist_add_mul: ['Classical.choice', 'Quot.sound', 'propext']
+clean     | HadwigerNelson.Plane.exists_add_mul_mem_of_isOpen: ['Classical.choice', 'Quot.sound', 'propext']
+clean     | HadwigerNelson.Plane.real_inner_lt_one_of_ne: ['Classical.choice', 'Quot.sound', 'propext']
+clean     | HadwigerNelson.Plane.neg_one_lt_real_inner_of_ne_neg: ['Classical.choice', 'Quot.sound', 'propext']
+clean     | HadwigerNelson.Plane.subset_of_isOpen_ae_le_isClosed: ['Classical.choice', 'Quot.sound', 'propext']
+clean     | HadwigerNelson.Plane.pinch_not_in_in: ['Classical.choice', 'Quot.sound', 'propext']
+clean     | HadwigerNelson.Plane.isSplitAt_of_in_out: ['Classical.choice', 'Quot.sound', 'propext']
+clean     | HadwigerNelson.Plane.hasTwoDiscsAt_of_out_out: ['Classical.choice', 'Quot.sound', 'propext']
+clean     | HadwigerNelson.Plane.pinch: ['Classical.choice', 'Quot.sound', 'propext']
+NOT CLEAN | HadwigerNelson.Plane.c11_split: ['sorryAx']
+control   | HadwigerNelson.Plane.fs131I6aPlantedSorry: ['sorryAx']  (fired: sorryAx seen)
+records: 12  clean: 11  not clean: 1

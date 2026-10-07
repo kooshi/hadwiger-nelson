@@ -1,0 +1,8 @@
+joined state: PASS
+plant (Falconer's declareImport put back): fired (DECLARE)
+plant (one of Falconer's four put under IMPORTED): fired (IMPORTED)
+plant (one of Weil's eight moved under CLEAN): fired (IMPORTED)
+plant (Falconer's row put back in the table): fired (ARCH)
+plant ("None at present" put back): fired (ARCH)
+plant (a line of theirs dropped from Proofs.lean): fired (THREE-WAY)
+self-test: PASS

@@ -1,0 +1,24 @@
+slot: admitted python3: mem 12 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11
+recheck grids ['13']: 65 UNSAT lines, 65 RECHECKED (CNF regenerated to the recorded sha256, kept proof verified by cake_lpr), 0 failed []
+rc=0
+slot: admitted python3: mem 12 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11
+recheck grids ['13']: 65 UNSAT lines, 64 RECHECKED (CNF regenerated to the recorded sha256, kept proof verified by cake_lpr), 1 failed [{'key': 'grid-5x7', 'verdict': 'RECHECK-FAILED', 'cnf_same': False, 'cake': 's VERIFIED UNSAT'}]
+rc(plant, must be 1)=1
+slot: admitted python3: mem 12 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11
+recheck tori ['square', '64']: 2671 UNSAT lines, 2671 RECHECKED (CNF regenerated to the recorded sha256, kept proof verified by cake_lpr), 0 failed []
+rc=0
+slot: admitted python3: mem 12 GiB (hard cap), cpus 0,1,2
+recheck windows ['cairo', '8', '10', '12']: 3 UNSAT lines, 3 RECHECKED (CNF regenerated to the recorded sha256, kept proof verified by cake_lpr), 0 failed []
+rc=0
+slot: admitted python3: mem 12 GiB (hard cap), cpus 0,1,2
+recheck windows ['prismatic-pentagonal', '8', '10', '12']: 1 UNSAT lines, 1 RECHECKED (CNF regenerated to the recorded sha256, kept proof verified by cake_lpr), 0 failed []
+rc=0
+slot: admitted python3: mem 12 GiB (hard cap), cpus 0,1,2
+recheck windows ['deltoidal', '8', '10', '12']: 3 UNSAT lines, 3 RECHECKED (CNF regenerated to the recorded sha256, kept proof verified by cake_lpr), 0 failed []
+rc=0
+slot: admitted python3: mem 12 GiB (hard cap), cpus 0,1,2
+recheck windows ['snub', '8', '10', '12']: 2 UNSAT lines, 2 RECHECKED (CNF regenerated to the recorded sha256, kept proof verified by cake_lpr), 0 failed []
+rc=0
+slot: admitted python3: mem 12 GiB (hard cap), cpus 0,1,2
+recheck windows ['elongated', '8', '10', '12']: 3 UNSAT lines, 3 RECHECKED (CNF regenerated to the recorded sha256, kept proof verified by cake_lpr), 0 failed []
+rc=0

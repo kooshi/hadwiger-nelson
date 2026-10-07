@@ -1,0 +1,16 @@
+MISMATCH | Do not consider Lean formalization a cost. It's practically mechanical for us, | CLAUDE.md
+exact    | 486. **FS131-K6 done at its Stage 7: wave 6's first planning pass — dispositio | plans/FS131-close-inventory.md
+exact    | 495. **FS131-K6b, by message mid-job (`fs131-w6` at `3928644b`, pushed): wave  | plans/FS131-close-inventory.md
+exact    | 490. **FS131-E8, by message mid-job (its Stage 3 saved, `0310d854` on `main`,  | plans/FS131-close-inventory.md
+exact    | theorem pinch_not_in_in {A B N : Set ℂ} (hN : IsOpen N) (hcover : (N : Set ℂ)  | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
+exact    | theorem pinch {A B N : Set ℂ} (hA : MeasurableSet A) (hAn : UnitPairsNull A) ( | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
+exact    | theorem TwoColourOn.essBoundary_inter_eq {A B N : Set ℂ} (hA : MeasurableSet A | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
+exact    | theorem c11_discs {A B N : Set ℂ} (hA : MeasurableSet A) (hAn : UnitPairsNull  | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
+exact    | theorem c11_split {A B N : Set ℂ} (hN : IsOpen N) {x y : ℂ} (h : IsSplitAt A B | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
+exact    | theorem half_upperDensity {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPair | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
+exact    | theorem sq9_isTangentAt : | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/Proofs/HadwigerNelson/Plane/Saturated/Pinch.lean
+exact    | ## Stage 9 — SAVED: the foundation restated over two sets and a family (`debru | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/plans/FS131-w6-kernel-plan.md
+exact    | ### 9.2 The leaves restated, each against its row (`data/fs131/k6/backlog-rows | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/plans/FS131-w6-kernel-plan.md
+exact    | ### 9.4 The plan per leaf, where it changed (the first pass's § 5 otherwise st | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/plans/FS131-w6-kernel-plan.md
+exact    | ## Stage 5 — SAVED: the plan per leaf (`debruijn-obligation-modeling`, invoked | /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w6p/plans/FS131-w6-kernel-plan.md
+quotations: 15  exact: 14  mismatched: 1

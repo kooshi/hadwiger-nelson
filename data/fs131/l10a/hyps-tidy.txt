@@ -1,0 +1,14 @@
+HYP   CharacterColouring  CharacterColouring.gluing_iff_of_orderBound                  OrderBound
+HYP   CharacterColouring  CharacterColouring.cl2                                       OrderBound, RQ₄, RQ₅
+HYP   SpectralInputs      SpectralInputs.ext_of_fourier                                BochnerHerglotz
+HYP   SpectralInputs      SpectralInputs.exists_isHaarFourier                          BochnerHerglotz
+HYP   SpectralInputs      SpectralInputs.IsHaarFourier.map_mulRight                    BochnerHerglotz
+HYP   SpectralInputs      SpectralInputs.sp_if                                         BochnerHerglotz, MulStable, NegCircle
+HYP   SpectralInputs      SpectralInputs.spectral_carried_iff                          BochnerOn
+CONCL SpectralInputs      SpectralInputs.bochnerOn_bot                                 BochnerOn
+HYP   SpectralInputs      SpectralInputs.contChars_haar_null                           BochnerHerglotz
+CONCL StandingFive        StandingFive.targetFloor_zero                                TargetFloor
+HYP   StandingFive        StandingFive.le_localBound                                   StandingFloor
+HYP   StandingFive        StandingFive.seven_le_localBound                             StandingFloor
+HYP   StandingFive        StandingFive.five_le_chromaticNumber                         Row123Chain, StandingFloor
+named hypotheses: 244 theorems read; 11 take a named hypothesis, 2 conclude one

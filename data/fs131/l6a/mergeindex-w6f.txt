@@ -1,0 +1,17 @@
+### control 1: the two resolved paths not yet staged
+merge of origin/fs131-w6f (8e81fedd) into 361a891b, base 32f2ab4c: staged 23 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean, scripts/Axioms.lean), 20 taken whole from theirs
+  UNMERGED ARCHITECTURE.md
+  UNMERGED scripts/Axioms.lean
+  DIRTY (working tree differs from the index): ARCHITECTURE.md
+  DIRTY (working tree differs from the index): scripts/Axioms.lean
+merge-index: FAIL (4 fault(s))
+exit=1
+### control 2: staged, the path that merged by itself not named
+merge of origin/fs131-w6f (8e81fedd) into 361a891b, base 32f2ab4c: staged 23 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean, scripts/Axioms.lean), 20 taken whole from theirs
+  BOTH sides changed, merged unread: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean
+merge-index: FAIL (1 fault(s))
+exit=1
+### faithful: the three paths both sides changed named, each read by the three-way check (keepboth-w6f.txt)
+merge of origin/fs131-w6f (8e81fedd) into 361a891b, base 32f2ab4c: staged 23 path(s), 3 changed by both sides (ARCHITECTURE.md, Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean, scripts/Axioms.lean), 20 taken whole from theirs
+merge-index: PASS
+exit=0

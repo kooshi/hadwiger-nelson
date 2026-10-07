@@ -1,0 +1,55 @@
+resolved 1 hunk(s) in ARCHITECTURE.md
+resolved 1 hunk(s) in scripts/Axioms.lean
+--- the three paths both sides changed, each against ours b3b67f23(+stage 1), theirs 8e81fedd, base 32f2ab4c
+faithful: ARCHITECTURE.md: 714 non-blank lines; faults 0
+plant (a line of theirs dropped): ARCHITECTURE.md: 713 non-blank lines; faults 1
+  LOST '| `Plane/Saturated/CurveArc` | **FS-131 wave 6** (job FS131-I6D; `plans/FS131-I6D-implementation.md`' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): ARCHITECTURE.md: 715 non-blank lines; faults 1
+  EXTRA '| `Plane/Saturated/CurveArc` | **FS-131 wave 6** (job FS131-I6D; `plans/FS131-I6D-implementation.md`' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): ARCHITECTURE.md: 715 non-blank lines; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+plant (the base's line put back beside ours' rewriting): ARCHITECTURE.md: 715 non-blank lines; faults 1
+  EXTRA '| `Plane/Saturated/LocalGraph` | **FS-131 wave 6, skeleton** (job FS131-K6b). FS131-E8-DELTA (`AeCol' (rule 0 = ours 0 + theirs 1 - base 1; have 1)
+  -> fired (EXTRA)
+self-test: PASS
+exit=0
+faithful: scripts/Axioms.lean: 6137 non-blank lines; #print axioms lines 5433 = ours 5392 + theirs 5331 - base 5290; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): scripts/Axioms.lean: 6136 non-blank lines; #print axioms lines 5433 = ours 5392 + theirs 5331 - base 5290; faults 1
+  LOST "/-! ## FS131-I6D — wave 6, the bridge's existence half: the curve lemmas, the continuation, GAMMA, B" (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): scripts/Axioms.lean: 6138 non-blank lines; #print axioms lines 5433 = ours 5392 + theirs 5331 - base 5290; faults 1
+  EXTRA "/-! ## FS131-I6D — wave 6, the bridge's existence half: the curve lemmas, the continuation, GAMMA, B" (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): scripts/Axioms.lean: 6138 non-blank lines; #print axioms lines 5433 = ours 5392 + theirs 5331 - base 5290; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+plant (a record of theirs doubled): scripts/Axioms.lean: 6138 non-blank lines; #print axioms lines 5434 = ours 5392 + theirs 5331 - base 5290; faults 3
+  COUNT #print axioms: have 5434, expected ours 5392 + theirs 5331 - base 5290
+  EXTRA '#print axioms HadwigerNelson.Plane.IsUnitCurve.affine' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  TWICE HadwigerNelson.Plane.IsUnitCurve.affine (2)
+  -> fired (TWICE)
+plant (a record of theirs dropped): scripts/Axioms.lean: 6136 non-blank lines; #print axioms lines 5432 = ours 5392 + theirs 5331 - base 5290; faults 2
+  COUNT #print axioms: have 5432, expected ours 5392 + theirs 5331 - base 5290
+  LOST '#print axioms HadwigerNelson.Plane.IsUnitCurve.affine' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (COUNT)
+self-test: PASS
+exit=0
+faithful: Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: 1381 non-blank lines; faults 0
+plant (a line of theirs dropped): Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: 1380 non-blank lines; faults 1
+  LOST 'import Proofs.HadwigerNelson.Plane.Saturated.FanArcs' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: 1382 non-blank lines; faults 1
+  EXTRA 'import Proofs.HadwigerNelson.Plane.Saturated.FanArcs' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: 1382 non-blank lines; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+plant (the base's line put back beside ours' rewriting): Proofs/HadwigerNelson/Plane/Saturated/FanBridge.lean: 1382 non-blank lines; faults 1
+  EXTRA 'the punctured disc is of one colour and `z` is a density point; with one, its points are density poi' (rule 0 = ours 0 + theirs 1 - base 1; have 1)
+  -> fired (EXTRA)
+self-test: PASS
+exit=0

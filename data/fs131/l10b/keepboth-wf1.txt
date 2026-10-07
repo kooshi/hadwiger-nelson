@@ -1,0 +1,9 @@
+check: Proofs.lean: 276 non-blank lines; faults 0
+three-way: PASS
+exit=0
+check: scripts/axioms-controls.txt: 186 non-blank lines; #print axioms lines 13 = ours 13 + theirs 13 - base 13; faults 3
+  TWICE four_le_chromaticNumber_plane (3)
+  TWICE moserSpindle_cnf_unsat (2)
+  TWICE t3c_imported_user (5)
+three-way: FAIL
+exit=1

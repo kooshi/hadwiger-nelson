@@ -673,6 +673,9 @@ GATE_CHANGES: dict[tuple, str] = {
     (("3784", "5"), ("3889", "5")): "FS-131 OPEN's landing (FS131-OL1; .claude/worktrees/fs131-wop/build/gate/axioms/20261006T030550Z-413723.log, copy data/fs131/ol/axioms-receipt-landed.log, gated commit 68670175): 3,912 records, 3,889 clean, 14 axiom-free, 4 imported, 5 purchases",
     (("3889", "5"), ("5196", "5")): "FS-131 wave 5's landing (FS131-L5; .claude/worktrees/fs131-w5c/build/gate/axioms/20261006T094617Z-3066074.log, copy data/fs131/l5/receipt-axioms-final.log, gated commit 1351ebc2): 5,221 records, 5,196 clean, 16 axiom-free, 4 imported, 5 purchases",
     (("5196", "5"), ("5525", "5")): "FS-131, the example maps' landing (FS131-MC1; .claude/worktrees/fs131-wmb/build/gate/axioms/20261006T114811Z-3752274.log, copy data/fs131/mc/receipt-axioms-final2.log, gated commit d9347791): 5,550 records, 5,525 clean, 16 axiom-free, 4 imported, 5 purchases",
+    (("5525", "5"), ("5783", "5")): "FS-131, wave 10's first landing (FS131-L10A; .claude/worktrees/fs131-w10l/build/gate/axioms/20261006T145710Z-778814.log, copy data/fs131/l10a/receipt-axioms-first.log, gated commit 999cde4a): 5,809 records, 5,783 clean, 17 axiom-free, 4 imported, 5 purchases",
+    (("5783", "5"), ("6148", "5")): "FS-131, wave 6's first landing (FS131-L6A; copy data/fs131/l6a/receipt-axioms-first.log, gated commit 7e67af3b): 6,174 records, 6,148 clean, 17 axiom-free, 4 imported, 5 purchases",
+    (("6148", "5"), ("6304", "5")): "FS-131, wave 10's second landing (FS131-L10B; copy data/fs131/l10b/receipt-axioms-final.log, gated commit f0cc3018): 6,334 records, 6,304 clean, 17 axiom-free, 8 imported, 5 purchases",
 }
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")

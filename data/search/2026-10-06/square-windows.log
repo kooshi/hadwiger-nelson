@@ -1,0 +1,4 @@
+slot: admitted python3: mem 4 GiB (hard cap), cpus 8,9,10,11,12,13
+windows ['square', '14', '16', '20', '24', '28', '32']: 6 instances, 0 done, 6 to run on 6 workers
+finished: {'SAT': 6}
+rc=0

@@ -1,0 +1,3 @@
+Proofs/HadwigerNelson/Arith/NormOneTarget.lean: 3 base declarations, 3 with statement and docstring kept, 0 docstring(s) extended, 0 flagged
+Proofs/HadwigerNelson/Arith/FloorPlanes.lean: 7 base declarations, 7 with statement and docstring kept, 0 docstring(s) extended, 0 flagged
+STATEMENTS: PASS

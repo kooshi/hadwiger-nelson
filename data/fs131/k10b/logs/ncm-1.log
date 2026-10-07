@@ -1,0 +1,8 @@
+Proofs/HadwigerNelson/Arith/NegCircleModel.lean:29:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/NegCircleModel.lean:35:32: error: Type mismatch
+  Interface.trivial
+has type
+  (F : Subfield ℝ) → Interface F
+but is expected to have type
+  Interface ⊥
+EXIT=1
