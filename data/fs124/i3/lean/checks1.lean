@@ -1,0 +1,31 @@
+import Mathlib
+open Complex Set MeasureTheory Metric Topology
+#check @Complex.norm_add_mul_I
+#check @Complex.continuousAt_arg
+#check @Complex.norm_mul_exp_arg_mul_I
+#check @intermediate_value_uIcc
+#check @Set.projIcc_left
+#check @Set.projIcc_of_mem
+#check @continuous_projIcc
+#check @Complex.isOpen_slitPlane
+#check @Real.cos_eq_one_iff_of_lt_of_lt
+#check @Finite.exists_min
+#check @Fintype.bijective_iff_injective_and_card
+#check @Measure.exists_mem_of_measure_ne_zero_of_ae
+#check @ae_restrict_of_ae
+#check @Set.ncard_insert_of_notMem
+#check @Set.ncard_pair
+#check @IsOpen.inter_closure
+#check @measure_eq_zero_iff_ae_notMem
+#check @measure_mono_ae
+#check @ae_all_iff
+#check @EuclideanGeometry.eq_of_dist_eq_of_dist_eq_of_finrank_eq_two
+#check @Complex.arg_one
+#check @Complex.one_mem_slitPlane
+#check @Complex.arg_eq_zero_iff
+#check @Subtype.dist_eq
+#check @Measure.addHaar_affineSubspace
+#check @Convex.isPreconnected
+#check @IsPreconnected.union
+#check @IsPreconnected.union'
+example : ∀ i j k : Fin 3, i ≠ j → i ≠ k → j ≠ k → Function.Injective ![i, j, k] := by decide
