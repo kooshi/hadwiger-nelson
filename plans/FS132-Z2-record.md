@@ -151,3 +151,139 @@ its § The setting; two quoted phrases needed a gloss and got one ("L7"; "step f
 provisional expectations of mine, to be replaced at an opening; neither has a card — Poros writes it.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: every registered prediction, scored
+
+`tools/fs132_z2_brier.py` holds the registrations and the outcomes and prints the table below and the means
+(`data/fs132/z2/brier.out`); its planted fault flips one outcome and the means move (`--fault`: the morning's mean 0.1089 →
+0.0756, the overall 0.0640 → 0.0599; `data/fs132/z2/brier-fault.out`). Binary items are scored `(p − outcome)²`; a three-way
+registration is scored as the sum of squared errors over its branches (range 0 to 2) and is not averaged with the binary ones.
+An outcome is read from the derivation file's verdict for the claim, by the claim's own grammar; where the deriver scored its
+own prediction the reading is the deriver's unless a note says otherwise.
+
+**Sources.** The asking lane's three registrations: `plans/STUB-six-by-the-nerve.md` § Registered expectations (Poros, before
+any derivation) — the morning's; § The question, re-posed after the first night, its "Registered expectations"; § The question,
+re-posed after the second round, its "Registered expectations", with two more from its record
+(`plans/POROS-2026-10-07-fs132-round2.md` §§ 1.6, 3.1). The derivers': `plans/FS132-six-by-the-nerve.md` § Registered
+predictions (FS132-E1's P1–P7) and each record's own section (FS132-E2 § Predictions scored; -E3 Stage 1 and § Predictions
+scored; -E4 § 1.2; -E5 § 1.2; -E6 § 1.2).
+
+| lane | id | the registration | registered | outcome | Brier |
+|---|---|---|---|---|---|
+| asking, morning | M1 | EMPTY's argument runs on the extraction's data | 0.60 | did not | 0.3600 |
+| asking, morning | M2 | CV-EXISTS's does | 0.20 | did not | 0.0400 |
+| asking, morning | M3 | C132-EXT holds as stated at every k | 0.80 | occurred | 0.0400 |
+| asking, morning | M4 | it holds with 'closed and totally disconnected' in place of 'finite' | 0.50 | not scored | — |
+| asking, morning | M5 | C132-DIAG holds as the reading reads it | 0.70 | occurred | 0.0900 |
+| asking, morning | M6 | C132-RADIUS | 0.85 | not scored | — |
+| asking, morning | M7 | card 3's first branch | 0.35 | did not | 0.1225 |
+| asking, morning | M8 | this milestone decides six against seven outright | 0.03 | did not | 0.0009 |
+| asking, after round 1 | A1 | C132-COMP derived at the first attempt | 0.85 | occurred | 0.0225 |
+| asking, after round 1 | A2 | C132-PLACE's list with the third label forced in the differing case | 0.60 | occurred | 0.1600 |
+| asking, after round 1 | A4 | C132-WIT | 0.90 | occurred | 0.0100 |
+| asking, after round 1 | A6 | C132-GRUNDY7 | 0.60 | did not | 0.3600 |
+| asking, after round 1 | A7 | C132-LONG for every weak colouring within two jobs | 0.07 | did not | 0.0049 |
+| asking, after round 1 | A8 | C132-LONG for honest colourings within two jobs | 0.15 | did not | 0.0225 |
+| asking, after round 1 | A9 | six against seven decided by this milestone | 0.03 | did not | 0.0009 |
+| asking, after round 2 | B1 | C132-LENS derived (as posed, with clauses (i) and (ii)) | 0.65 | did not | 0.4225 |
+| asking, after round 2 | B3 | C132-ARC derived | 0.60 | not scored | — |
+| asking, after round 2 | B4 | a seed shown to exist in every weak six-colouring within two jobs | 0.03 | did not | 0.0009 |
+| asking, after round 2 | B5 | six against seven decided by this milestone | 0.03 | did not | 0.0009 |
+| asking, after round 2 | B6 | the riding controls: two unchanged and margin-witness finds the vertex's labels | 0.80 | did not | 0.6400 |
+| asking, after round 2 | B7 | the third round is answered off its branch table | 0.25 | not scored | — |
+| FS132-E1 | P1 | C132-EXT holds as posed at every k | 0.93 | occurred | 0.0049 |
+| FS132-E1 | P2 | C132-CORES with no hypothesis, every closed disc of radius above 1 | 0.90 | occurred | 0.0100 |
+| FS132-E1 | P3a | 'closed and totally disconnected' suffices by the manuscript's argument | 0.05 | did not | 0.0025 |
+| FS132-E1 | P3b | some hypothesis weaker than finite suffices by another argument | 0.55 | not scored | — |
+| FS132-E1 | P5 | C132-RUN-CV derived | 0.10 | did not | 0.0100 |
+| FS132-E1 | P6a | C132-DIAG holds | 0.75 | occurred | 0.0625 |
+| FS132-E1 | P6b | C132-RADIUS holds as posed | 0.85 | not scored | — |
+| FS132-E1 | P7 | this milestone decides six against seven | 0.02 | did not | 0.0004 |
+| FS132-E2 | Q1a | card 3's first branch as worded | 0.10 | did not | 0.0100 |
+| FS132-E2 | Q1b | nothing stays essential | 0.75 | occurred | 0.0625 |
+| FS132-E2 | Q3 | the difference located at one named step, with both controls | 0.80 | occurred | 0.0400 |
+| FS132-E2 | Q4 | invention needed | 0.25 | did not | 0.0625 |
+| FS132-E3 | DIAG | C132-DIAG holds | 0.80 | occurred | 0.0400 |
+| FS132-E3 | RADIUS | C132-RADIUS holds as posed | 0.85 | not scored | — |
+| FS132-E4 | P1 | C132-COMP derived, in a form sharper than posed | 0.93 | occurred | 0.0049 |
+| FS132-E4 | P1r | C132-COMP refuted by a held fragment | 0.02 | did not | 0.0004 |
+| FS132-E4 | P2 | C132-PLACE's list derived for constant and step germs, the formula only for measurable ones | 0.85 | occurred | 0.0225 |
+| FS132-E4 | P2f | a colouring by formula realizing an open line, built | 0.05 | did not | 0.0025 |
+| FS132-E4 | P3 | C132-TURN stalls | 0.80 | occurred | 0.0400 |
+| FS132-E4 | P3a | its alternating half derived on the way | 0.80 | occurred | 0.0400 |
+| FS132-E4 | P3d | C132-TURN derived whole | 0.05 | did not | 0.0025 |
+| FS132-E4 | P3r | C132-TURN refuted by a colouring by formula | 0.03 | did not | 0.0009 |
+| FS132-E5 | W1 | C132-WIT, the exclusion, derived as an instance | 0.95 | occurred | 0.0025 |
+| FS132-E5 | W2 | C132-WIT, the strips, derived with the side rule | 0.90 | occurred | 0.0100 |
+| FS132-E5 | W3d | C132-WIT-EX: a defect of the statement | 0.80 | occurred | 0.0400 |
+| FS132-E5 | G1 | C132-GRUNDY7: first clause derived, thinly | 0.90 | occurred | 0.0100 |
+| FS132-E5 | G2 | C132-GRUNDY7: second clause not a statement | 0.85 | occurred | 0.0225 |
+| FS132-E5 | G3 | C132-GRUNDY7: some form of the second clause derived | 0.30 | did not | 0.0900 |
+| FS132-E6 | L1 | C132-LENS, first sentence, derived | 0.97 | occurred | 0.0009 |
+| FS132-E6 | L2 | C132-LENS (i) derived | 0.97 | occurred | 0.0009 |
+| FS132-E6 | L3 | C132-LENS (ii) not derived as posed | 0.85 | occurred | 0.0225 |
+| FS132-E6 | L4 | C132-LENS (ii) derived in a narrower form | 0.90 | occurred | 0.0100 |
+| FS132-E6 | PL1 | C132-PLACED: the exclusion does not apply on the orbit through x | 0.80 | occurred | 0.0400 |
+| FS132-E6 | PL2 | C132-PLACED: a four-cycle of witnessed edges forced closed | 0.10 | did not | 0.0100 |
+| FS132-E6 | ARC | C132-ARC not reached in this context | 0.60 | occurred | 0.1600 |
+| asking, after round 1 | A3 | C132-TURN | derived 0.45, stalls 0.40, refuted 0.15 | stalls | 0.5850 (three-way) |
+| asking, after round 1 | A5 | C132-WIT-EX | derived 0.30, stalls 0.50, refuted 0.20 | stalls | 0.3800 (three-way) |
+| asking, after round 2 | B2 | C132-PLACED | the exclusion applies on an orbit 0.25, a mixed ring 0.55, off this table 0.20 | a mixed ring | 0.3050 (three-way) |
+| FS132-E1 | P4 | C132-RUN-EMPTY | derived 0.45, stalls 0.45, refuted 0.10 | stalls | 0.5150 (three-way) |
+| FS132-E2 | Q2 | C132-LONG | derived 0.03, stalls 0.95, refuted 0.02 | stalls | 0.0038 (three-way) |
+| FS132-E3 | CV | C132-RUN-CV | stalls 0.85, derived 0.10, refuted 0.05 | stalls | 0.0350 (three-way) |
+| FS132-E5 | W3 | C132-WIT-EX | derived 0.10, stalls 0.75, refuted 0.05 | stalls | 0.0750 (three-way) |
+
+**Means** (the tool's): the asking lane's three registrations, 17 binary items, **0.135** (morning 0.109, after round one
+0.083, after round two 0.266); the six derivers, 32 binary items, **0.026**; all 49 binary items, 0.064. Three-way: C132-TURN
+0.585 and C132-WIT-EX 0.380 (asking lane), C132-PLACED 0.305 (asking lane), C132-RUN-EMPTY 0.515 (FS132-E1), C132-LONG 0.004
+(FS132-E2), C132-RUN-CV 0.035 (FS132-E3), C132-WIT-EX 0.075 (FS132-E5, whose three branches were registered summing to 0.90).
+
+**Notes, where a score needs its sentence.**
+
+- **M1** ("EMPTY's argument runs on the extraction's data", 0.60) is scored *did not*, as FS132-E3 scored it "by the claim's
+  grammar: *stalls at*": the listed route stalls at V6-HUBS. The statement the route was for is derived by another count
+  (C132-M-EMPTY). Scored on the statement instead it would read *occurred*, 0.16. The registration named the argument.
+- **A2** is scored *occurred* with the deriver's qualifier, "met on the pure side": the third label is forced at outer-pure
+  ring points of a six-sector turning ring and nothing is placed at inner-pure ones (the stub's dated line of this job).
+- **A6** (C132-GRUNDY7, 0.60) is scored *did not*: the claim stalls; its first clause holds and tests nothing, its second "is
+  not a statement" and is withdrawn as posed. The registration was of a claim that was not well posed.
+- **B1** (C132-LENS derived, 0.65) is scored on the claim as posed, *did not*: its first sentence and clause (i) are derived,
+  clause (ii) is a gap (C132-LENS-II). Scored on the first sentence alone it would read 0.1225. None of the three registered
+  branches occurred as worded — "stalls at a line of one chart" did not: "the line that failed is a count of sides, not a
+  chart" (FS132-E6).
+- **B6** (the riding controls) is scored *did not*: `margin-witness` found the vertex's labels (0 → 6,672), as expected, but
+  `hex7-crossings` moved (0 → 36 of 432) and `hex7-relation`'s script failed at circumradius 1/2 for a reason outside its
+  statement.
+- **B7** ("the third round is answered off its branch table", 0.25) is not scored: C132-PLACED fell on its table (the second
+  row), C132-LENS's failing clause did not; the registration does not say which governs.
+- **M4, P3b** (a hypothesis weaker than finiteness suffices) are not scored: by the manuscript's argument "closed and totally
+  disconnected" does not suffice (P3a, met as a NO); by another argument it is open (a countable closed case is sketched).
+  **M6, P6b, FS132-E3's RADIUS, B3** are not scored: C132-RADIUS and C132-ARC were not started.
+- **P4, CV — met as to the verdict, missed as to the place.** FS132-E1 expected C132-RUN-EMPTY to stall "at a step reading
+  sectors at a hub"; it stalls at V6-HUBS, which reads a tile. FS132-E3 expected C132-RUN-CV to stall at the terminal
+  modification; it stalls at FS112-N3-DENSE3, and the modification is not needed. The three-way score reads the verdict only.
+- **Registered not blind, by their own word**: FS132-E1's (after reading the manuscript's §§ 6–7); FS132-E4's ("calibration
+  instruments, not blind forecasts"); FS132-E6's ("expectations with the first argument already seen"). FS132-E3 registered
+  nothing for C132-RUN-EMPTY before deriving (its slip, disclosed); its reconstructed expectation is not scored. The derivers'
+  mean of 0.026 is that of forecasts made with the argument partly in hand, and is not comparable with the asking lane's.
+
+**What the scores say** (a reading, one mind). The asking lane's misses are one-sided in a way worth naming: of its five
+binary misses above 0.3 (M1, A6, B1, B6 and, at 0.12, M7), four expected a claim to be *derived as posed*, and each failed at
+the claim's wording, not at its mathematics — a route named where a statement was meant (M1), a clause that was not a
+statement (A6), a clause resting on a sentence true one way only (B1). The derivers, registering with the argument in view,
+each predicted the wording's failure (FS132-E5's "a defect of the statement 0.80"; FS132-E6's "(ii) not derived as posed
+0.85"). The registered 0.03 for "decides six against seven" was right three times.
+
+**The kernel planner's.** Its record (`plans/FS132-kernel-plan.md` on branch `fs132-wk1`, read by `git show` for the words
+"expect" and "predict" and for probabilities) states no expectation with a probability; its blind phase names one leaf as
+"the leaf I would call hard" (item 22), and that leaf is the step lemma M8 — which held on its own later reading. Not scored.
+
+**The coordinator's, noted beside and not scored as a lane's.** `plans/FS132-close-inventory.md` § Registered predictions
+holds pointers to the asking lane's and the deriver's and no prediction of its own. Its rulings carry confidences in words;
+four were later corrected on the record, each by the lane it had asked to attack it: "the measurable road" (item 6 (a),
+medium-high) — narrowed to "for the exclusions" (item 12 (a)); clause (5) "load-bearing for the first time" (16 (c)) —
+withdrawn (21 (a)); the hope that the stalled claim was derivable for measurable germs (20 (d)) — "answered no for step 3's
+second rule" (28 (c)); "two minds on every step" (30 (a)) — corrected to one mind and a checking reading (31 (1)).
+
+## Stage 3 — SAVED
