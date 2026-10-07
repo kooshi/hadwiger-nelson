@@ -1014,3 +1014,28 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     generated module's header names source, commit, licence and every patch — to be told to Kooshi as a thing to know, since
     at publication the notice travels with the files.
 
+34. **FS132-I2, first message (2026-10-07; its Stage 1 pushed as `8573c259` on branch `fs132-wi2`): the port's price is the
+    planner's order, the cone is computed, no Fourier chain — and one ruling asked.** **Measured**: 3 of 8 files ported and
+    built (build exit 0) — 82 declarations, 753 source lines, 2 proof patches (one cause: a coercion's non-negativity that
+    the arithmetic tactics at this pin do not match), "one fix per about 375 lines" against the planner's one per 600;
+    5 files, 81 declarations, 1,038 lines left, showing 5 errors in iteration. **The cone, from the release's own compiled
+    constants at its pin**: the four statements use 328 constants of 12 release files; 163 declarations (1,791 lines) not yet
+    here; **nothing of the release's Fourier chain, its transitions, its rigidity or its boundary traces**; one file the
+    planner's list lacked (8 of its 37 declarations, 134 lines). **The finding**: Mathlib renamed one function between the
+    two pins (`Set.restrict` here, `Set.domRestrict` at the release's — the old name a deprecated alias there); the release
+    writes the new name on 32 lines of the cone, 19 of them inside the statements of 16 intermediate lemmas; none of the
+    four target statements and no definition names it. It added a table of renames to the generator, separate from the
+    patches, refused inside a definition, each line listed in the header — and asked whether a shim (the new name declared
+    here in Mathlib's namespace) is wanted instead. **My receipt**: the commit is on `origin`; **the definition read by me at
+    both pins** — line 32 of Mathlib's file on set restriction has the same body under the two names (this library's
+    packages; the audit's working copy of the release's). Not checked by me: the cone's count; the build. **Ruling**: (a)
+    **the rename table stands; no shim** — alternative: the shim, which keeps the release's text untouched; rejected because
+    it puts a constant of ours where the release's term has Mathlib's, in a namespace this library does not own, and breaks
+    at the next bump, while the rename changes one constant's name and nothing else; confidence high; what would change it:
+    the stored-term read-back across pins showing any other difference in one of the sixteen statements. (b) **Asked of
+    it**: the read-back treats the rename as an explicit one-entry map and its control plants a second differing constant;
+    its list of unscoped instances says, for each, whether the type is the release's own or Mathlib's — the landing decides
+    whether an instance on a Mathlib type is scoped. **Credit**: a cone computed from compiled constants, which found a
+    file the estimate lacked and showed the Fourier chain is not needed; a rename seen as a question about statements and
+    put to me with both options priced, the work continued on the reversible one.
+
