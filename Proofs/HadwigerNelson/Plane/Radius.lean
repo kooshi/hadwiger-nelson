@@ -51,7 +51,14 @@ of the monochromatic pairs under `q ↦ motionMul q h`. -/
 theorem AeProperOn.ae_rigidMotion_edge {U : Set ℂ} {c : ℂ → α} (hc : AeProperOn U c) (h : ℂ × ℝ) :
     ∀ᵐ q : ℂ × ℝ, rigidMotion q (rigidMotion h 0) ∈ U → rigidMotion q (rigidMotion h 1) ∈ U →
       c (rigidMotion q (rigidMotion h 0)) ≠ c (rigidMotion q (rigidMotion h 1)) := by
-  sorry
+  have hnull := (measurePreserving_motionMul_right h).quasiMeasurePreserving.preimage_null
+    (aeProperOn_iff_volume.mp hc)
+  rw [ae_iff]
+  refine measure_mono_null (fun q hq => ?_) hnull
+  simp only [mem_setOf_eq, Classical.not_imp, not_not] at hq
+  show motionMul q h ∈ monoPairSet U c
+  rw [mem_monoPairSet_iff_rigidMotion, rigidMotion_motionMul, rigidMotion_motionMul]
+  exact hq
 
 /-- **Almost every rigid motion is good for a countable set** (the core of C124-RADIUS-GRAPH): if `c` is proper at
 almost every unit pair of `U` and `V` is countable, then for almost every parameter `q ∈ ℂ × ℝ` (Lebesgue measure,
@@ -78,7 +85,10 @@ theorem aeProperOn_iff_ae_rigidMotion {U : Set ℂ} {c : ℂ → α} :
 /-- **The motions carrying a compact set into an open set form an open set** of parameters. -/
 theorem isOpen_setOf_mapsTo_rigidMotion {K U : Set ℂ} (hK : IsCompact K) (hU : IsOpen U) :
     IsOpen {q : ℂ × ℝ | MapsTo (rigidMotion q) K U} := by
-  sorry
+  rw [isOpen_iff_eventually]
+  intro q₀ hq₀
+  refine hK.eventually_forall_of_forall_eventually fun y hy => ?_
+  exact continuous_rigidMotion.continuousAt.eventually (hU.mem_nhds (hq₀ hy))
 
 /-- **One good motion**: `U` open, `c` proper at almost every unit pair of `U`, `V` countable with compact closure,
 and some motion `g₀` carrying that closure into `U`. Then some motion carries `V` into `U` and gives different labels

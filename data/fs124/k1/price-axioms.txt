@@ -1,0 +1,12 @@
+'HadwigerNelson.Plane.continuous_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.rigidMotion_motionMul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.measurePreserving_motionMul_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.prod_arcLength_eq_restrict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.prod_arcLength_eq_zero_iff_volume' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_monoPairSet_iff_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isOpen_setOf_mapsTo_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeProperOn.ae_rigidMotion_edge' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+data/fs124/k1/lean/PriceAxioms.lean:14:8: warning: declaration uses `sorry`

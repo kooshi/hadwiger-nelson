@@ -104,7 +104,9 @@ theorem dist_rigidMotion (q : ℂ × ℝ) (z w : ℂ) : dist (rigidMotion q z) (
 
 /-- The parametrization is jointly continuous in the parameter and the point. -/
 theorem continuous_rigidMotion : Continuous fun p : (ℂ × ℝ) × ℂ => rigidMotion p.1 p.2 := by
-  sorry
+  unfold rigidMotion
+  exact (continuous_fst.comp continuous_fst).add
+    ((continuous_e.comp (continuous_snd.comp continuous_fst)).mul continuous_snd)
 
 /-- Each rigid motion is continuous (hence measurable). -/
 theorem continuous_rigidMotion_apply (q : ℂ × ℝ) : Continuous (rigidMotion q) := by
@@ -118,7 +120,7 @@ theorem rigidMotion_add_two_pi (x : ℂ) (θ : ℝ) (z : ℂ) :
 /-- `motionMul` is composition of motions. -/
 theorem rigidMotion_motionMul (q h : ℂ × ℝ) (z : ℂ) :
     rigidMotion (motionMul q h) z = rigidMotion q (rigidMotion h z) := by
-  sorry
+  simp only [rigidMotion, motionMul, e_add]; ring
 
 /-- **Every unit pair is the image of the reference edge**: two points at distance `1` are `rigidMotion h 0` and
 `rigidMotion h 1` for the parameter `h = (v, arg (w - v))`. -/
@@ -130,7 +132,20 @@ theorem exists_rigidMotion_edge {v w : ℂ} (h : dist v w = 1) :
 plane, and a translation of the angle. -/
 theorem measurePreserving_motionMul_right (h : ℂ × ℝ) :
     MeasurePreserving (fun q : ℂ × ℝ => motionMul q h) volume volume := by
-  sorry
+  -- over each angle a translation of the plane, and a translation of the angle: a skew product between two swaps
+  have hsk : MeasurePreserving (fun p : ℝ × ℂ => (p.1 + h.2, p.2 + e p.1 * h.1))
+      ((volume : Measure ℝ).prod (volume : Measure ℂ)) ((volume : Measure ℝ).prod (volume : Measure ℂ)) := by
+    refine MeasurePreserving.skew_product (g := fun (θ : ℝ) (x : ℂ) => x + e θ * h.1)
+      (measurePreserving_add_right volume h.2) ?_ (Filter.Eventually.of_forall fun θ => ?_)
+    · exact measurable_snd.add ((continuous_e.measurable.comp measurable_fst).mul measurable_const)
+    · exact (measurePreserving_add_right volume (e θ * h.1)).map_eq
+  have h1 := (Measure.measurePreserving_swap (μ := (volume : Measure ℝ)) (ν := (volume : Measure ℂ))).comp
+    (hsk.comp (Measure.measurePreserving_swap (μ := (volume : Measure ℂ)) (ν := (volume : Measure ℝ))))
+  have hfun : (fun q : ℂ × ℝ => motionMul q h) =
+      Prod.swap ∘ (fun p : ℝ × ℂ => (p.1 + h.2, p.2 + e p.1 * h.1)) ∘ Prod.swap := by
+    funext q; simp [motionMul, rigidMotion]
+  rw [hfun]
+  exact h1
 
 /-- **Left multiplication preserves Lebesgue measure on the parameters**: a rigid motion of the plane, and a
 translation of the angle. -/
@@ -141,7 +156,7 @@ theorem measurePreserving_motionMul_left (q : ℂ × ℝ) :
 /-- `volume ⊗ arcLength` is Lebesgue measure on `ℂ × ℝ` restricted to the angles in `[0, 2π)`. -/
 theorem prod_arcLength_eq_restrict :
     (volume : Measure ℂ).prod arcLength = (volume : Measure (ℂ × ℝ)).restrict (univ ×ˢ Ico 0 (2 * Real.pi)) := by
-  sorry
+  rw [arcLength, Measure.volume_eq_prod, ← Measure.prod_restrict, Measure.restrict_univ]
 
 /-- A set of pairs `(x, θ)` that reads the angle through the unit vector `e θ` alone is null for
 `volume ⊗ arcLength` (angles in `[0, 2π)`) exactly when it is null for Lebesgue measure on `ℂ × ℝ` (all real
@@ -149,7 +164,30 @@ angles): it is the union of its integer translates by `2π` in the angle. -/
 theorem prod_arcLength_eq_zero_iff_volume {S : Set (ℂ × ℝ)}
     (hS : ∀ (x : ℂ) (θ θ' : ℝ), e θ = e θ' → (x, θ) ∈ S → (x, θ') ∈ S) :
     ((volume : Measure ℂ).prod arcLength) S = 0 ↔ (volume : Measure (ℂ × ℝ)) S = 0 := by
-  sorry
+  have hI : MeasurableSet ((univ : Set ℂ) ×ˢ Ico (0 : ℝ) (2 * Real.pi)) := MeasurableSet.univ.prod measurableSet_Ico
+  rw [prod_arcLength_eq_restrict, Measure.restrict_apply' hI]
+  refine ⟨fun h0 => ?_, fun h0 => measure_mono_null inter_subset_left h0⟩
+  have hp : (0 : ℝ) < 2 * Real.pi := by positivity
+  -- `S` is covered by the integer translates, in the angle, of its part over `[0, 2π)`
+  have hcov : S ⊆ ⋃ n : ℤ, (fun q : ℂ × ℝ => (q.1, q.2 + (-(n * (2 * Real.pi))))) ⁻¹'
+      (S ∩ (univ : Set ℂ) ×ˢ Ico (0 : ℝ) (2 * Real.pi)) := by
+    rintro ⟨x, θ⟩ hq
+    refine mem_iUnion.2 ⟨⌊θ / (2 * Real.pi)⌋, ?_, mem_univ _, ?_, ?_⟩
+    · refine hS x θ _ ?_ hq
+      have h := (Function.Periodic.int_mul (fun θ : ℝ => e_add_two_pi θ) (-⌊θ / (2 * Real.pi)⌋)) θ
+      simpa [mul_comm] using h.symm
+    · have := Int.floor_le (θ / (2 * Real.pi))
+      rw [le_div_iff₀ hp] at this
+      show 0 ≤ θ + -(↑⌊θ / (2 * Real.pi)⌋ * (2 * Real.pi)); linarith
+    · have := Int.lt_floor_add_one (θ / (2 * Real.pi))
+      rw [div_lt_iff₀ hp] at this
+      show θ + -(↑⌊θ / (2 * Real.pi)⌋ * (2 * Real.pi)) < 2 * Real.pi; linarith
+  refine measure_mono_null hcov (measure_iUnion_null fun n => ?_)
+  have hmp : MeasurePreserving (fun q : ℂ × ℝ => (q.1, q.2 + (-(n * (2 * Real.pi)))))
+      (volume : Measure (ℂ × ℝ)) volume := by
+    rw [Measure.volume_eq_prod]
+    exact (MeasurePreserving.id volume).prod (measurePreserving_add_right volume _)
+  exact hmp.quasiMeasurePreserving.preimage_null h0
 
 /-! ## Proper at almost every unit pair -/
 
@@ -158,7 +196,7 @@ theorem prod_arcLength_eq_zero_iff_volume {S : Set (ℂ × ℝ)}
 theorem mem_monoPairSet_iff_rigidMotion {U : Set ℂ} {c : ℂ → α} {q : ℂ × ℝ} :
     q ∈ monoPairSet U c ↔
       rigidMotion q 0 ∈ U ∧ rigidMotion q 1 ∈ U ∧ c (rigidMotion q 0) = c (rigidMotion q 1) := by
-  sorry
+  simp [monoPairSet, rigidMotion]
 
 /-- The monochromatic unit pairs inside `U` are the unit pairs of the classes cut down to `U`. -/
 theorem monoPairSet_eq_iUnion (U : Set ℂ) (c : ℂ → α) :

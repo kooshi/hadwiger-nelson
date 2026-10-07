@@ -6,9 +6,13 @@ files: `data/fs124/k1/`. The record is written in stages; each is committed befo
 
 ## Theorems this phase proved
 
-None in the library: this is a planning job, and every leaf of the three skeleton modules is a `sorry`. Three leaves were
-taken through `lean` outside the library to validate the model (`data/fs124/k1/lean/Probe1.lean`, Stage 2); they are
-evidence for the plan, not theorems of the library.
+On branch `fs124-wk1` only (nothing here is on `main`; the modules still hold 49 `sorry`): seven leaves of
+`Plane/WeakColouringOn` and `Plane/Radius`, each [kernel] on `[propext, Classical.choice, Quot.sound]` as printed from the
+build (`data/fs124/k1/price-axioms.txt`) — `continuous_rigidMotion`, `rigidMotion_motionMul`,
+`measurePreserving_motionMul_right`, `prod_arcLength_eq_restrict`, `prod_arcLength_eq_zero_iff_volume`,
+`mem_monoPairSet_iff_rigidMotion`, `isOpen_setOf_mapsTo_rigidMotion`. An eighth, `AeProperOn.ae_rigidMotion_edge`, is
+proved from the leaf `aeProperOn_iff_volume`, which is still a `sorry`: not yet a theorem. None of the five claims is
+proved; this is a planning job (Stage 5).
 
 ## Stage 1 — SAVED (FS124-K1): the readback and the build as given
 
@@ -427,3 +431,127 @@ group, are marked "not proved here".
   (`Proofs/HadwigerNelson/Motion.lean`, exact motions over `Q4`) is a different object under a different name.
 - **`AeColouring.exists_motion`** (`Plane/YesLimit`) is `AeProperOn.exists_rigidMotion` at `U = univ` in the other order
   of parameters. It stays as it is: no statement on the main line is touched.
+
+## Stage 4 — SAVED (FS124-K1): phase 2, open — the deriver's route against mine
+
+The fence was lifted by the coordinator's reply to commit `a7daf9f69` (14:29 UTC). Read after it, on the main working tree:
+`plans/FS124-E1-derivation.md` § 1.1 (the claims as fixed), Stage 2's feature-table rows and "homes" for C124-RADIUS, and
+Stage 3 whole (the five entries, both arguments, the control); `plans/FS124-E2-derivation.md`, the entry
+C124-EVERY-DIRECTION and its argument; `plans/FS124-tight-pairs.md`, the lines on the bounded case only. Not read: the rest
+of either derivation, the inventory, the stub, the asking lane's card.
+
+### 4.1 Is it the same proof? Yes — and here is where the two part
+
+The deriver's home for C124-RADIUS is "kinematic measure on the motion group — an edge `{v, v′}` sends a motion `g` to the
+pair `(g(v), g(v′) − g(v))`, a measure-preserving bijection of the group onto (point, unit vector); theorem held there:
+invariance of Haar measure" (`plans/FS124-E1-derivation.md` Stage 2, home 3). That bijection is my `q ↦ motionMul q h` for
+the motion `h` carrying the reference edge to `(v, v′)`: I chose the coordinates in which the group *is* the space of
+pairs, so the deriver's `Φ` becomes right multiplication and the definition becomes the clause at one edge. One proof, seen
+from the two sides. The differences are all in how a step is discharged:
+
+| step | the deriver's argument (Stage 3) | this plan | which an implementer builds, and why |
+|---|---|---|---|
+| the bad pairs `N` | "measurable (`c` is) and null" | null; measurability never asked (`QuasiMeasurePreserving.preimage_null` takes any set) | **mine**: the hand argument's clause "measurable (`c` is)" is not used by any later line, and the entry's own *uses only* says "no regularity of `c`"; the kernel statement is `AeProperOn`, for any function |
+| `Φ` preserves measure | "its Jacobian matrix is triangular with unit diagonal" | a skew product: over each angle a translation of the plane, and a translation of the angle (`MeasurePreserving.skew_product`) | **mine**: no change-of-variables formula, no derivative; proved (12 lines) |
+| the measure on motions | `dφ dt` on the group, the angle on the circle | Lebesgue on `ℂ × ℝ`, with `volume ⊗ arcLength` for "each motion once" and one lemma between them | **mine**, because the library's "almost every unit pair" is over real angles in `[0, 2π)`; the lemma is proved (28 lines) |
+| the open set of motions, finite `V` | a finite intersection of open sets | the tube lemma at the compact set `V` | either; mine is one lemma for both cases, proved (5 lines) |
+| countable `V` | "the closure keeps a positive distance from the complement of `U`, so every motion close enough to the identity keeps `V` in `U`" | the same tube lemma at `closure V`: the motions carrying it into `U` are open, and `0` is one | **mine**: no distance estimate on `|g z − z|` |
+| "almost every one of them" | `G ∩ Φ⁻¹(N)` is null for each pair | the same, for countably many pairs and with no hypothesis on `V` | the same; the deriver's hand-off asks that the formal statement be read "almost every motion in that open set, not some motion" — `radius_graph`'s second conjunct is that |
+| UP | a disc about `0` holding the graph; de Bruijn–Erdős | a disc about any centre and the translation into it; the same theorem | the same; mine needs no translation of colourings for FIVE |
+| DOWN | the import; "normalized angular measure and arc length have the same null sets"; restriction | `Outside.OAI158.nonempty_aeColouring_of_colorable`, which already holds the first two; `AeColouring.isWeakColouringOn` | the same |
+| FIVE | UP at five, the import, "its translates have none" | UP's contrapositive at any centre, the import | the same |
+
+**The library's own `AeColouring.exists_motion`**, which the deriver names as the model ("with 'every motion' replaced by
+'the open set of motions keeping `V` in `U`'"), is proved in two steps — almost every angle is good, then for one good angle
+almost every translation — which gives *a* motion. Passing from that to *almost every* motion in the product needs the bad
+set measurable, hence `c` measurable. The route planned here does not adapt that proof: it gets the product statement at
+once. **So the implementer builds this plan's route, not an adaptation of `exists_motion`.**
+
+**A second route, found blind?** Not a second route: the same one. What the blind phase added is in § 2.4 — the hypothesis
+actually used (no measurability), the class (countable `V` anywhere), and the reading "the definition is the clause at one
+edge".
+
+### 4.2 What the deriver's entries have that phase 1 did not, and the reverse
+
+- **Mine to correct** (sent to the coordinator at 14:17 as part of generalization 1): the observation that UP reaches
+  "fragments at every radius give `χ ≤ k`" with no limit is **the deriver's** — C124-RADIUS-UP's hand-off line reads "it
+  subsumes FS116-O1-YESLIM's use (an arc map of a disc is a weak colouring of it), with no limit taken". What phase 1 adds
+  is only that the fragment's colouring need not be measurable (`aeProperOn_of_proper_off_null`).
+- **The deriver's model for FIVE** is its analogue with an exhibited radius at three colours: "no open disc holding a Moser
+  spindle has a weak measurable three-colouring". The library holds the spindle in `ℂ` (`FieldWall4`: `spindlePt`,
+  `spindlePt_dist`, `moserSpindle_not_colorable_three`), and `AeProperOn.colorable_induce` turns it into that statement in
+  one line once the seven points are bounded. **Not planned**: it needs seven norm bounds over `√3`, `√11` and imports
+  `FieldWall4`; `exists_radius_no_weak_four` is the import-free sentence of the same shape. A consumer that wants an
+  exhibited radius has the lemma.
+- **C124-RADIUS-COUNTABLE's hand-off** says where choice enters UP: only in passing from countable sets to the plane. The
+  kernel will say the same by what the audit prints, but not sharply: every leaf here prints `Classical.choice` through
+  Mathlib's measure theory. No statement about choice is planned.
+- **C124-EVERY-DIRECTION** (`plans/FS124-E2-derivation.md` Stage 4; the answer to § 2.4's item 7, derived by hand, one
+  mind; hand-off "only with a consumer"). **Decision: the module does not state it.** No entry uses it; its proof needs the
+  continuity of translation in `L²`, which branch `fs132-wi4` is porting from the release as
+  `Outside.OAI158.all_parameters_product_zero`, and a second copy stated here would meet it at a join (`LEAN.md`: never one
+  lemma in two modules that do not import each other). When a consumer appears, the leaf is
+  `∀ᵐ z, z ∈ U → z + e θ ∈ U → c z ≠ c (z + e θ)` for `MeasurableSet U`, `IsWeakColouringOn U c` and every `θ`
+  (it elaborates: `data/fs124/k1/lean/PriceAxioms.lean`, last declaration), over that port, with the deriver's four-line
+  argument on `U ∩ c ⁻¹' {i} ∩ ball 0 R`.
+
+### 4.3 The plan in final form
+
+§ 3.2's tables stand as written: phase 2 changed no statement and no route. Additions to the skeleton since the phase-1
+commit: none. The order for the implementer is the files' order.
+
+### 4.4 Drafts for the coordinator's files (each names its slot; none is written by this job)
+
+- **`CLAUDE.md` § Where the problem stands**, after the sentence on `seven_le_chromaticNumber_plane_iff`, once the module
+  has landed: "On discs (`Plane/RadiusOutside`): `seven_le_chromaticNumber_plane_iff_exists_ball` — `7 ≤ χ(ℝ²)` exactly
+  when some open disc about the origin has no weak measurable six-colouring — and `colorable_iff_forall_ball` at every
+  `k`. *Seven gives such a disc* is the contrapositive of `radius_up` (`exists_radius_of_not_colorable`) and rests on the
+  standard three axioms; *such a disc gives seven* is the contrapositive of `radius_down` and rests on the declared
+  outside theorem `Outside.OAI158.proper_to_borel_weak`. So an exclusion on a disc reaches seven only through the
+  transfer, and weak six-colourings of every disc reach six with no import."
+- **`data/fs124/claims-K1.md`**, a dated line: "The kernel module states GRAPH, COUNTABLE and UP for any function proper at
+  almost every unit pair (`AeProperOn`, no measurability; GRAPH's almost-every clause for countable `V` anywhere), DOWN for
+  every set, UP and FIVE at any centres; the list's statements are the corollaries `radius_graph`, `radius_countable`,
+  `radius_up`, `radius_down`, `radius_five`."
+- **`LEAN.md` § Searching — Lean**, one line: "A null set pulls back to a null set under a measure-preserving map with no
+  measurability of the set (`MeasureTheory.Measure.QuasiMeasurePreserving.preimage_null`), and `∀ᵐ` and `μ s = 0` are about
+  outer measure: a statement about 'almost every' needs a measurability hypothesis only where Fubini is read backwards
+  (slices to product). `MeasurePreserving.skew_product` has its base in the first factor; conjugate by
+  `Measure.measurePreserving_swap` for the second (FS124-K1)."
+- **`LEAN.md` § Building**, one clause: "a worktree's copied `.lake/build` can be behind its branch — FS124-K1's first
+  build rebuilt 136 modules in 20 minutes; `lake build --no-build` under the cap says so in two seconds."
+
+## Stage 5 — SAVED (FS124-K1): the price, and where the implementer starts
+
+**The price, from leaves taken through the build.** Eight leaves — the ones § 3.2 marked P1 and P2, chosen as the ones I
+expected to cost most — are proved in the modules. Build under the slot: exit 0, `476 of 476 batches, 4 module(s) rebuilt,
+3 module(s) with warnings, 8m52s`; 49 `declaration uses sorry` and no other warning
+(`data/fs124/k1/logs/build-3-price.log`). Each of the three modules elaborates and is kernel-checked in under 2 s; the
+kernel is not a cost here. Seven of the eight print the standard three axioms; the eighth waits on one `sorry` child
+(`data/fs124/k1/price-axioms.txt`).
+
+| measured | value | what it measures |
+|---|---|---|
+| leaves proved | 8 of 57 | by count |
+| lines of proof | 85 of about 270 planned | § 3.2's sizes, summed |
+| attempts | 1 or 2 per leaf | one retry on the function equality under the swap, one on the edge lemma's rewrite |
+| my working time on them | about 20 minutes | writing and two `lean` runs of 2 s each against this worktree's build, not builds |
+| one build | 8m52s | the walk over 476 batches with 4 modules to compile — the walk, not the modules |
+
+**What the module costs**: the 49 leaves left are about 185 lines, none longer than 15, each with its route and its Mathlib
+names in § 3.2. At the measured rate that is one implementer session of well under an hour of work and two or three
+builds. The estimate is from the eight hardest; the rest are shorter.
+
+**Where the implementer starts.**
+1. Branch `fs124-wk1` at this stage's commit. The statements are fixed: 57 declarations in
+   `Proofs/HadwigerNelson/Plane/{WeakColouringOn, Radius, RadiusOutside}.lean`; a statement that will not prove comes back
+   through the coordinator.
+2. Order: `WeakColouringOn` top to bottom (27 left), `Radius` (14 left), `RadiusOutside` (8 left). Each file's order is a
+   valid order of proof.
+3. Iterate with `lean` on one file against the build (2 s); the build is for evidence. The overlay I used
+   (`build/fs124-k1-iter.sh`, in the ignored `build/` folder of this worktree) is a convenience and not evidence.
+4. The probes (`data/fs124/k1/lean/Probe1.lean`, `Probe2.lean`) are now in the modules; nothing is left to lift.
+5. At the landing: `scripts/Axioms.lean` and the gate items of § 3.5; the two `example`s that run the claims on R7, the
+   adversaries, and the exclusion path are in the files and must still pass.
+6. Not in scope: C124-EVERY-DIRECTION (§ 4.2), the exhibited radius at three colours (§ 4.2), a Borel representative of
+   an almost-everywhere measurable weak colouring (§ 2.1).
