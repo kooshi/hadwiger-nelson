@@ -9,7 +9,31 @@ clone (`/home/kooshi/source/math`, commit `adc7f1241b42e322a6451854ab7e4b4c146bf
 
 ## Theorems this phase proved
 
-*(Filled at the stage that builds them; none before stage 2.)*
+Namespace `HadwigerNelson.Outside.OAI158`. **Every one of the 163 declarations below prints exactly `[propext, Classical.choice,
+Quot.sound]`** from the built modules (`data/fs132/i2/axioms/Print.out`, checked as sets by `tools/fs132_i2_axioms.py`), and
+**none rests on either declared outside theorem** (`no_proper_five_coloring`, `proper_to_borel_weak`). Grade: [kernel], each
+a proof of the release's (`[OAIMath2026]` family 158), ported, checked by this library's kernel at its pin. One line per
+declaration, with its source line at the commit: `data/fs132/i2/theorems.tsv`.
+
+**The four statements the brief names** (stage 3 reads each aloud):
+
+| declaration | module | source | axioms |
+|---|---|---|---|
+| `palette_transfer_pair` | `Outside/OAI158PaletteDensity` | `PaletteDensity.lean:143` | the standard three |
+| `palette_sixty_disjoint` | `Outside/OAI158PaletteTransport` | `PaletteTransport.lean:450` | the standard three |
+| `two_state_impossible` | `Outside/OAI158States` | `States.lean:243` | the standard three |
+| `mem_spatialSupport_ae` | `Outside/OAI158AngularBoundary` | `AngularBoundary.lean:309` | the standard three |
+
+**All 163, by module** (kind: `d` a definition, `i` an instance, otherwise a theorem; each on the standard three):
+
+- **`Outside/OAI158CircleMaps`** (63, from `CircleMaps.lean`): `RealPlane` (d), `circleSum` (d), `circleSumDeriv` (d), `circleSum_strict`, `circleSum_continuous`, `circleSumDeriv_injective`, `circleSumDerivEquiv` (d), `circleSum_local_antilipschitz`, `realDirection_lipschitz`, `circleInverseHomeo` (d), `circleInverse` (d), `circleInverse_measurable`, `circleInverse_eq`, `circleInverse_at`, `circleInverse_continuousAt`, `circleInverse_strict`, `circleInverse_right`, `circleInverse_regular`, `triangular_injective`, `triangular_surjective`, `strict_fiber_uniform_antilipschitz`, `CircleParameter` (d), `CircleJet` (d), `jetCenter` (d), `jetRadius` (d), `jetAngle` (d), `circleTarget` (d), `circleTargetDeriv` (d), `circleTarget_strict`, `circleTarget_continuous`, `circleEndpoint` (d), `circleEndpointDeriv` (d), `circleEndpoint_measurable`, `circleEndpoint_strict`, `inverse_tangent_first_ne`, `circleEndpoint_fiber_ne`, `circleEndpoint_uniform`, `circleEndpoint_good_neighborhood`, `angleChart` (d), `angleChartMeasure` (d), `angleChartMeas_le`, `instIsFiniteMeasureRealPlaneAngleChartMeasure` (i), `angleChart_preserving`, `angleChart_measure`, `integral_angular_eq_chart`, `direction_realPlane`, `circleSum_chart`, `volume_preimage_bound`, `map_restrict_volume_le`, `antilipschitz_small_perturbation`, `realDirection_norm_le`, `circleSum_decompose`, `circleSum_norm_le`, `circleSum_perturb_identity`, `circleSum_parameter_tendsto`, `circleSum_eventual_image`, `circleSum_limit_image`, `circleSum_eventual_antilipschitz`, `circleSum_limit_antilipschitz`, `measure_null_of_locally_null_on_conull`, `circleSum_regular_ae`, `circleSum_preimage_null`, `circleSum_quasiMeasurePreserving`.
+- **`Outside/OAI158Expansion`** (8, from `Expansion.lean`): `line_volume_preimage_bound`, `line_map_restrict_volume_le`, `integrable_comp_of_map_le`, `integral_norm_comp_le`, `tendsto_integral_norm_comp_sub`, `tendsto_integral_norm_comp_sub_eventual`, `line_antilipschitz_qmp`, `line_indicator_pullback_L1`.
+- **`Outside/OAI158CircleTransport`** (11, from `CircleTransport.lean`): `tendsto_integral_of_local_cover`, `bounded_difference_integrable`, `circleSum_tendsto_L1`, `angularSum_measurable`, `angularSum_chart`, `angularSum_quasiMeasurePreserving`, `angularSum_tendsto_L1`, `samplingParameter` (d), `samplingParameter_tendsto`, `circleTarget_sampling`, `circleInverse_sampling`.
+- **`Outside/OAI158PaletteDensity`** (28, from `PaletteDensity.lean`): `weak_strong_disjoint`, `colorIndicator` (d), `colorIndicator_measurable`, `colorIndicator_bounds`, `sample_pair_disjoint`, `trace_pair_disjoint`, `palette_first_exclusion`, `palette_second_exclusion`, `palette_transfer_pair`, `angleMk_quasiMeasurePreserving`, `anglePair_quasiMeasurePreserving`, `FlatDensityZero` (d), `LineDensityZero` (d), `volume_image_bound`, `flatDensityZero_prod`, `tendsto_pos_mul_nhdsWithin`, `FlatDensityZero.image`, `FlatDensityZero.of_locally_le`, `FlatDensityZero.transport`, `circleSum_one_lipschitz`, `circleSum_densityZero`, `complex_ball_flat_ball`, `flat_to_complex_densityZero`, `ae_lineDensityZero_compl`, `liftPalette_measurable`, `palette_spatial_densityZero`, `palette_spatial_not_densityOne`, `palette_sample_branch_exclusion`.
+- **`Outside/OAI158PaletteTransport`** (20, from `PaletteTransport.lean`): `angleRep_preserving`, `weak_lift_Ioc`, `weak_restrict`, `weak_lift_set`, `weak_strong_disjoint_single`, `weak_strong_disjoint_single_eventual`, `palette_trace_branch`, `palette_branch_local`, `circleInverse_left`, `circleEndpoint_eventuallyEq`, `ae_of_locally_ae`, `ae_restrict_of_locally_ae`, `palette_transport_real`, `sin_sixty_ne`, `sin_twice_sixty_ne`, `sixty_sum`, `ae_angular_of_ae_line`, `palette_sixty_real`, `palette_sixty`, `palette_sixty_disjoint`.
+- **`Outside/OAI158BinaryPalettes`** (11, from `BinaryPalettes.lean`): `triangleAngle` (d), `triangleAngle_cos`, `triangleAngle_pos`, `triangleAngle_lt_pi`, `triangleAngle_ratio_irrational`, `triangle_rotation_ergodic`, `equal_triangleAngle_positive`, `circle_exp_sub_norm_sq`, `sourceTriangle` (d), `sourceTriangle_eq`, `sourceTriangle_pair`.
+- **`Outside/OAI158States`** (21, from `States.lean`): `LineDensityZero.mono_ae`, `DensityZero` (d), `DensityZero.union`, `densityZero_empty`, `DensityZero.biUnion_finset`, `DensityZero.compl`, `state_densityZero`, `angularSum_swap`, `states_densityOne`, `DensityOne.compl`, `DensityOne.inter`, `DensityOne.measure_ne_zero`, `densityOne_univ`, `DensityOne.iInter`, `finite_density_realization`, `two_label_triangle_impossible`, `bool_flip_two`, `bool_flip_three`, `bool_flip_even`, `triangleAngle_nonparallel`, `two_state_impossible`.
+- **`Outside/OAI158AngularBoundary`** (1, from `AngularBoundary.lean`): `mem_spatialSupport_ae`.
 
 ## Stage 1 — SAVED (FS132-I2): the readback, and the branch built as given
 
@@ -201,3 +225,230 @@ rows after `Outside/OAI158Palette`'s; `tools/check_architecture.py`: `RESULT: PA
   hour.
 
 Token count at this stage: own ≈ 330k (an estimate: this harness shows no meter).
+
+## Stage 3 — SAVED (FS132-I2): the read-back across pins, the axioms, the statements read aloud, the registrations and the guarded lint
+
+### 3.1 The four statements as this library holds them, read aloud
+
+`data/fs132/i2/checks.lean` → `checks.out` (`lake env lean`, after the build; exit 0):
+
+```
+@palette_transfer_pair : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c), WeakColoring k c → ∀ (x : ℂ),
+    ∀ᵐ (p : Angles × Angles) ∂angularMeasure.prod angularMeasure, c (angularSum x 1 p) ∉ palette c hc x p.1 ∪ palette c hc x p.2
+@palette_sixty_disjoint : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c), WeakColoring k c → ∀ (x : ℂ),
+    ∀ᵐ (f : Angles) ∂angularMeasure, Disjoint (palette c hc x f) (palette c hc x (f + ↑sixty))
+@two_state_impossible : ∀ {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c), WeakColoring k c → ∀ (x : ℂ) (J K : Finset (Fin k)),
+    (Finset.univ \ (J ∪ K)).card ≤ 2 → ∀ (s : Angles → Bool), Measurable s →
+      RealState hc x {t | s ↑t = false} J → RealState hc x {t | s ↑t = true} K →
+        (∀ᵐ (t : Angles) ∂angularMeasure, s (t + ↑(Real.pi / 3)) = !s t) → False
+@mem_spatialSupport_ae : ∀ {k : ℕ} (c : ℂ → Fin k), Measurable c → ∀ (i : Fin k), ∀ᵐ (z : ℂ), c z = i → z ∈ spatialSupport c i
+```
+
+Read against the release's lines (stage 1), each for every number of colours `k` and a Borel colouring `c` of the
+plane proper at almost every unit pair:
+- **`palette_transfer_pair`** (`PaletteDensity.lean:143`): fix a centre `x`. For almost every pair of directions
+  `(s, t)` — product of the two normalized angle measures — the colour of the point `x + e(s) + e(t)`
+  (`angularSum x 1 p = x + 1·e(p.1) + e(p.2)`) is in neither the palette of `x` at `s` nor the palette of `x` at `t`.
+  Binders as the release's: `c` and `hc` explicit (its section variables), then `hw`, `x`.
+- **`palette_sixty_disjoint`** (`PaletteTransport.lean:450`): for almost every direction `f`, the palette of `x` at `f`
+  and the palette of `x` at `f + π/3` have no label in common (`sixty = π/3`).
+- **`two_state_impossible`** (`States.lean:243`): there is no measurable two-valued function `s` on the circle of
+  directions such that the directions where `s` is false lie, up to a null set of the line, in the lifted palette of
+  every label of `J`, those where it is true in that of every label of `K`, at most two colours are outside `J ∪ K`,
+  and `s` flips under rotation by `π/3` almost everywhere. Binders the release's: `k`, `c` implicit, `hc` explicit.
+- **`mem_spatialSupport_ae`** (`AngularBoundary.lean:309`): almost every point of colour `i` lies in the essential
+  support of the class of `i` (the support of Lebesgue measure restricted to it).
+
+The planner's placeholders in `Plane/SixRing/Orbit.lean` have these names and binders; deleting them leaves
+`open Outside.OAI158` resolving to the ported theorems. I did not edit that file.
+
+### 3.2 Their axioms, with controls that fire
+
+`tools/fs132_i2_axioms.py emit` → `data/fs132/i2/axioms/Print.lean` (163 records — the block of `scripts/Axioms.lean` —
+and three controls); `lake env lean` on the final build (exit 0) → `Print.out`; `check` → `check.out`, **exit 0**:
+**163 of 163 printed, each on exactly `[propext, Classical.choice, Quot.sound]`**; neither
+`Outside.OAI158.no_proper_five_coloring` nor `Outside.OAI158.proper_to_borel_weak` is under any of them, the four
+statements included. **The controls**, printed in the same run: `not_colorable_five` shows `no_proper_five_coloring`;
+`chromaticNumber_plane_eq_chiM0` shows `proper_to_borel_weak`; a `sorry` stated in the file shows `sorryAx` — so the
+print sees each of the three things it is trusted not to find. `--self-test` (`selftest.out`): an outside theorem,
+`sorryAx` and a native axiom planted under a target, a record not printed, a control gone clean — 5 of 5 refused.
+
+### 3.3 The read-back: the ported declarations against the release's, as the kernel stores them at the two pins
+
+**What it is for** (the coordinator's ruling, 2026-10-07): a ported theorem is kernel-checked here, so nothing about
+its truth rests on its being the release's term; the read-back is an instrument for the sentence "this is the
+release's lemma", and for catching a definition that means something else at this pin. **It does not show the port
+identical to the release term for term, and no check could**: the same text elaborates against a Mathlib 1,502
+commits apart.
+
+**The instrument**: `tools/fs132_i2_readback.py`. One dumper text, written into `ReleaseDump.lean` (run at the
+release's pin, `data/fs132/i2/leanrel.sh`) and `HereDump.lean` (run by `lake env lean` on the built modules), prints
+for each of the cone's 328 constants its stored type, and for a definition its stored value, twice: the **full** print
+(FS132-I1's), and an **erased** print in which every instance argument and every proof argument is `_` (an argument
+is erased when the applied function's own signature, read in `MetaM` at that pin, takes it instance-implicitly or at a
+proposition). The prints are 17.8 MB and 18.2 MB; committed as `ReleaseDump.out.xz`, `HereDump.out.xz` (96 kB each;
+`prints.sha256`; the print from the final build has the digest of the one compared).
+
+**The declared map, all of it** — applied to the release's print, nothing else is normalised but the two namespaces
+and the two anonymous instances FS132-I1 and FS132-K1 named by hand:
+
+| what | release's pin → this pin | why it is not a difference in meaning | checked |
+|---|---|---|---|
+| rename | `Set.domRestrict` → `Set.restrict` | Mathlib renamed the function on 2026-07-19; in the ported text by the generator's RENAMES | level 1: one type, one value at the two pins — IDENTICAL |
+| rename | `Set.ofPred` → `setOf` | Mathlib renamed it on 2026-07-09; **never in the text**: the set-builder notation `{x \| p x}` elaborates to the name of the pin | level 1: IDENTICAL |
+| unfolding | `Filter.EventuallySubset l s t` → `Filter.EventuallyLE l s t` at `Prop` | Mathlib (2026-08-14) made `s ≤ᵐ[μ] t` on sets a definition of its own, `EventuallySubset l s t := EventuallyLE l (· ∈ s) (· ∈ t)`; at this pin the notation gives the right-hand side | a kernel `rfl` at the release's pin, and the notation's own `rfl` at each pin (`ReleaseLevel1.lean`, `HereLevel1.lean`; both exit 0) |
+
+**The verdicts** (`data/fs132/i2/readback/compare.out`; `READBACK OK`, exit 0, on the built modules):
+
+| class | IDENTICAL | UP-TO-INSTANCES | other |
+|---|---|---|---|
+| the four targets | **4** | 0 | — |
+| definitions (58) | 44 | 14 | — |
+| lemmas (181) | 158 | 23 | — |
+| generated auxiliaries (85) | 68 | 8 | 6 absent here under the release's name, 3 another statement under it |
+
+- **IDENTICAL**: the full stored terms agree after the map. **UP-TO-INSTANCES**: the erased prints agree and the full
+  ones do not — the two terms differ only inside instance arguments and proof arguments. **No constant is DIFFERENT**
+  in a target, a definition or a lemma.
+- **The four targets are IDENTICAL as stored** — `two_state_impossible` after the map's second line (its two
+  set-builders; its docstring says so), the other three with no entry of the map used.
+- **The definitions, each by name with its verdict and its differing constants**:
+  `data/fs132/i2/readback/targets-and-definitions.tsv` (62 rows). The 29 definitions of the eight release files this
+  job ported from (24 ported here, 5 copied earlier by FS132-K1: `angularSum`, `liftPalette`, `sixty`, `RealState`,
+  `spatialSupport`) are **all IDENTICAL**. The 14 UP-TO-INSTANCES are all in the chain FS132-K1 ported
+  (`OAI158Palette`): `weakHilbert`, `WeakBall.Space`, `WeakBall.value`, `WeakBall.ofNorm`, `IsTrace`
+  (`WeakDual.instAddCommMonoid` there, `instAddCommMonoidWeakDual` here — Mathlib's instance under two names — and
+  the chain `Semifield → Semiring`); `sample`, `TraceVector`, `traceValue`, `sampleCode`, `RealL2`, `oneL2`,
+  `tracePositive`, `paletteGenerators` (a generated proof under another name: the three release files are one module
+  here and share `PlaneL2._proof_1`, the proof of `Fact (1 ≤ 2)`, where the release has one per file); `shiftL2`
+  (Mathlib's additive structure on `Lp`, reached by another chain of instances).
+- **The lemmas that are not IDENTICAL** (23; `lemmas.tsv`, with the auxiliaries): 9 in this job's modules — 7 where
+  only the argument order of Mathlib's `Measure.instSMul` differs (the same constants on both sides:
+  `angleChart_measure`, `map_restrict_volume_le`, `line_map_restrict_volume_le`, `integrable_comp_of_map_le`,
+  `integral_norm_comp_le`, `tendsto_integral_norm_comp_sub`, `tendsto_integral_norm_comp_sub_eventual`) and 2 by the
+  generated proof's name (`trace_pair_disjoint`, `palette_trace_branch`); 14 in `OAI158Palette`.
+- **The sixteen statements that hold the rename**: 13 IDENTICAL; 3 UP-TO-INSTANCES (`map_restrict_volume_le`,
+  `line_map_restrict_volume_le`, `palette_trace_branch`, by the two causes just named). With the rename withdrawn
+  from the map, exactly those sixteen fail (the self-test's plant).
+- **The constants that differ inside instance and proof arguments are a recorded set**: 47
+  (`instance-constants.txt`: 39 of Mathlib and core, 8 generated proofs of the port); a constant not in the record
+  fails the run, and so does a recorded one that no longer differs. One of the release's own constants there, other
+  than a generated proof, is a DIFFERENT.
+- **One level down** (`level1.out`, `LEVEL1 OK`): of the 94 Mathlib and core constants that the four targets and the 29
+  definitions under them name outside instance and proof arguments, 81 are stored alike at the two pins (type, and
+  value or constructors), 4 moved to another module, 9 differ inside Mathlib (`Bool.not`, a binder name;
+  `InnerProductSpace`, `NormedAddCommGroup`, `LinearIsometryEquiv`, `MeasureTheory.Lp`, `Measure.restrict`,
+  `InnerProductSpace.toDual`, `StrongDual.toWeakDual`, `WeakDual.toStrongDual`: instance paths and universe order in
+  Mathlib's own definitions) — listed for reading, not failed.
+
+**What the read-back leaves to trust**: that Mathlib's instances for one class on one type agree at each pin — the
+content of every UP-TO-INSTANCES verdict — which no print across pins can check; and Mathlib itself below level one.
+
+**Its controls** (`selftest.out`, 13 of 13 refused, the unplanted pair passing): a second constant differing in a
+statement that also holds the declared rename (`NNReal` in `circleSum_local_antilipschitz` — the control the
+coordinator asked for: a rename the map was not told about is refused); a constant renamed in a target; **an
+undeclared constant inside an instance argument only** (refused: not in the record); one of the release's own
+constants inside an instance argument; each rename withdrawn in turn (16 statements fail each time); a rename
+pointing at another constant; a numeral in `sixty`'s value; a binder kind in a target; a target missing; a target
+turned axiom; a truncated print; a stale record.
+
+### 3.4 The registrations and the checks of the brief's item 6
+
+| check | command | result | saved |
+|---|---|---|---|
+| the final build | `slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` | **exit 0**; 6 modules rebuilt (a header's wording); 29 `sorry` warnings, all the planner's skeleton; none from a generated module | `data/fs132/i2/logs/build-4-final.out` |
+| no `sorry`, no `axiom`, no `native_decide` in the nine generated modules | `rg` | none (two hits are the headers' own words "no `sorry`") | — |
+| the generated text | `tools/fs132_i2_port.py --check` | exit 0; **with a change planted in a real file** (`card≤2` → `card≤3` in `two_state_impossible`'s statement in `OAI158States.lean`): exit 1, "OAI158States.lean differs from the generated text"; regenerated, exit 0 | `logs/port-check-planted.out`, `logs/port-check.out` |
+| the module map | `tools/check_architecture.py` | `RESULT: PASS` (eight new rows) | `logs/arch-2-final.out` |
+| doubled names | `./scripts/dupnames.sh` (slot, 16 GiB) | **exit 0**: 1857 of 1857 package modules scanned, no name declared by two modules, no ported name among the 23 generated-on-demand names | `logs/dupnames.out` |
+| the environment linters | `slot.py --mem 8 -- lake lint --no-build -- --no-build --trace` | **exit 0**, `-- Linting passed for Proofs.`, every linter `(2/2) Passed!` | `logs/lint.out` |
+
+**Not run, by the brief**: the full gate (`axioms.sh`, `vacuity.sh`, `assumptions.sh` and their self-tests) — a landing
+job's. For that job: the block in `scripts/Axioms.lean` adds 163 CLEAN records; the port adds no hypothesis-form
+assumption and no axiom; `OAI158Palette`'s own declarations (FS132-K1's) are in no audit block yet — those in the
+cone are under the four statements' prints, the others (`Straddle`, `TransitionEdge`, …) under none.
+
+### 3.5 The instances the ported modules declare, and on whose type (the coordinator's question)
+
+| instance | module | source | scope | the type it is an instance on |
+|---|---|---|---|---|
+| `instIsFiniteMeasureRealPlaneAngleChartMeasure : IsFiniteMeasure angleChartMeasure` | `OAI158CircleMaps` (**this job's only one**) | `CircleMaps.lean:301` | global | **the release's own**: `angleChartMeasure` is a definition of the release (a measure on `ℝ × ℝ`); the instance is found only for that constant |
+| `angularMeasure.instIsProbabilityMeasure` | `OAI158` (on `main`) | `Coloring.lean:19` | global | the release's own (`angularMeasure`) |
+| `angularMeasure.instIsAddHaarMeasure` | `OAI158Palette` (FS132-K1) | `Coloring.lean:20` | global | the release's own |
+| `anglePeriodPositive : Fact (0 < 2*Real.pi)` | `OAI158` (on `main`) | `Coloring.lean:15` | **scoped** by FS132-I1 | Mathlib's (`ℝ`) |
+| `WeakBall.instCompactSpaceSpace`, `WeakBall.instMetrizableSpaceSpace` | `OAI158Palette` (FS132-K1) | `Compactness.lean:160–162` | global | **Mathlib's, through a reducible abbreviation**: `WeakBall.Space E` is an `abbrev` for the subtype `{v : WeakDual ℝ E // WeakDual.toStrongDual v ∈ Metric.closedBall 0 1}`, so the two instances are on a subtype of Mathlib's weak dual and reach every module downstream |
+| a private anonymous `Fact ((2 : ENNReal) ≠ ⊤)` | `OAI158Palette` (FS132-K1) | `Compactness.lean:250` | global (the name is private, the instance is not) | **Mathlib's** (`ENNReal`) |
+
+No ported module declares a `@[simp]` lemma whose left-hand side is not headed by one of the release's own
+definitions (six in `OAI158Palette`: `direction_norm`, `direction_real`, `weakHilbert_apply`, `value_ofNorm`,
+`traceValue_sampleCode`, `mem_palette`; none in this job's eight modules). I changed none of these: the landing decides.
+
+### 3.6 The price, final
+
+| | |
+|---|---|
+| ported | 163 declarations (138 theorems, 24 definitions, 1 instance), 1,791 source lines, 8 modules |
+| fixes | 7 proof patches, 1 rename (32 lines), 0 patches to a statement or a definition; 0 imports added to the computed list |
+| builds | four runs of `build.sh` (8m39s, 9m25s, 2 s, 8m56s — the walk; each module is 2–3 s) |
+| three statements + the small lemma | 4 of 4 green |
+| own token count | ≈ 420k at this stage (an estimate; no meter) — of which the read-back, its two rulings and its controls are about a third |
+
+## Drafts for the front page
+
+*Each names its slot. Nothing here is filed by me.*
+
+**D1 — `CLAUDE.md` § Trust ledger**, to follow the sentence ending "…its first import, `[Falconer1981]` Lemma 2 (i), is a
+theorem since FS131-IF1." (when the branch lands; the counts are the landing's to read from its own `axioms.sh`):
+> Three of the release's lemmas that FS-132's first theorem stands on — `Outside.OAI158.palette_transfer_pair`,
+> `palette_sixty_disjoint` and `two_state_impossible`, with `mem_spatialSupport_ae` — are not imports: their proofs are
+> ported from `[OAIMath2026]` family 158 (163 declarations in eight generated modules, FS132-I2), kernel-checked at this
+> pin on the standard three, and rest on neither declared outside theorem.
+
+**D2 — `CLAUDE.md` § Trust ledger, the audit's counts**: the block adds **163 clean records** (6533 → 6696 clean if
+nothing else moves; 5 purchases and 18 imported unchanged; the landing reads the receipt).
+
+**D3 — `LEAN.md` § Assumptions**, after the bullet "An imported theorem carries four things", a new bullet:
+> - **An outside Lean proof may be ported instead of imported** (`Outside/OAI158CircleMaps` … `OAI158States`, FS132-I2):
+>   compute the cone of the wanted statements from the source's own compiled constants at its pin, copy those
+>   declarations by line range with a generator that refuses a patch to a statement or a definition
+>   (`tools/fs132_i2_port.py`), and build. The kernel then checks every proof here and no axiom enters. A read-back
+>   across pins (`tools/fs132_i2_readback.py`) is an instrument for "this is the source's lemma", never a gate on
+>   truth, and it cannot read "term for term": the same text elaborates against another Mathlib. It reports IDENTICAL,
+>   or identical up to instance and proof arguments with the differing constants recorded, under an explicit map of
+>   Mathlib's renames between the pins; what it leaves to trust is that Mathlib's instances for one class on one type
+>   agree at each pin.
+
+**D4 — `LEAN.md` § Searching — Lean**, three new bullets:
+> - Between Mathlib `v4.32.0` and `v4.34.1`: `Set.restrict` became `Set.domRestrict` (2026-07-19), `setOf` became
+>   `Set.ofPred` (2026-07-09; the set-builder notation elaborates to the pin's name, so two prints of one text differ
+>   by it), `s ≤ᵐ[μ] t` on sets became `Filter.EventuallySubset` (2026-08-14; here it is `Filter.EventuallyLE` at
+>   `Prop`), and core's `if_neg` became `ite_eq_right` (2026-07-21). A text written at the later pin needs the earlier
+>   names here (FS132-I2).
+> - `K.2 : 0 ≤ K.val` for `K : ℝ≥0` is not the atom `(K : ℝ)` to `linarith`/`nlinarith` at the pin; `K.coe_nonneg` is.
+> - `lean -o` writes no `.olean` when the file has an error, and a `LEAN_PATH` entry holding a `Proofs/` directory
+>   hides every later entry's `Proofs`: a scratch farm is a symlink copy of the build's library with the modules under
+>   work written over it (`data/fs132/i2/lean1.sh`).
+
+**D5 — `ARCHITECTURE.md` § Trust**: no new row (no purchase, no import). Its § 3 rows for the eight modules are on the
+branch.
+
+**D6 — `BIBLIOGRAPHY.md`, `[OAIMath2026]`'s entry**, to add to what of ours rests on it and what of it is held:
+> Ported into this library (FS132-I2, 2026-10-07; Apache-2.0, each generated module's header is the notice of change):
+> of `lean/OAI/Geometry/PlaneColoring/` at commit `adc7f124`, `CircleMaps.lean` whole and parts of `Expansion`,
+> `CircleTransport`, `PaletteDensity`, `PaletteTransport`, `BinaryPalettes`, `States`, `AngularBoundary` — 163
+> declarations, 1,791 lines, with FS132-K1's 620 lines of `WeakColoring`, `Compactness`, `Palettes` — the cone of
+> `palette_transfer_pair` (the manuscript's Lemma 5.2 (1)), `palette_sixty_disjoint` (Corollary 5.3),
+> `two_state_impossible` (Lemma 6.4 at every `k`) and `mem_spatialSupport_ae`. Read for the port: those files' cone
+> declarations as text (by the generator) and the four statements with their definitions by eye; the proofs were
+> compiled, not read.
+
+**D7 — the Frontier line and the Proof Atlas**: none from this job (no ledger row; no grade moves — the four statements
+are the release's, now [kernel] here in place of the planner's placeholders).
+
+## What was checked, and by whom
+
+By the kernel at this pin: all 163 proofs (four builds, exit 0). By instruments of this job, each with a control
+watched to fire: the quotations (3 plants), the generated text (8 plants and a partner, and a change planted in a real
+file), the axioms (3 controls in the print, 5 plants), the read-back (13 plants). By one mind, by eye: the four
+statements against the release's lines; the seven patches' reasons; the map's three entries against Mathlib's source at
+the two tags. Not checked: the release's proofs were not read; Mathlib between the two tags below level one.

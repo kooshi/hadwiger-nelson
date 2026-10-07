@@ -62,8 +62,8 @@ FILES = [
      "pull-backs of `L¹` convergence along maps that expand volume by a bounded factor, and the line maps that do",
      ["OAI158"]),
     ("CircleTransport.lean", "OAI158CircleTransport",
-     "the angular sum `x + r(e(s) + e(t))` as a quasi-measure-preserving map of the torus, `L¹` convergence along it, "
-     "and the sampling parameter",
+     "the angular sum `x + r·e(s) + e(t)` (`angularSum`, defined in `OAI158Palette`) as a quasi-measure-preserving map "
+     "of the torus of direction pairs, `L¹` convergence along it, and the sampling parameter",
      ["OAI158CircleMaps", "OAI158Expansion"]),
     ("PaletteDensity.lean", "OAI158PaletteDensity",
      "the palette's transfer along the angular sum (`palette_transfer_pair`, the manuscript's Lemma 5.2 (1)) and the "

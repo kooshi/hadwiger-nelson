@@ -33,8 +33,10 @@ Three verdicts per constant:
                            that Mathlib's instances for one class on one type agree at each pin, which no cross-pin
                            print can check;
   DIFFERENT                anything else.  The run fails.
-A generated auxiliary (`X._proof_n`, `X._simp_n`, …) absent here under the release's name is counted, not failed: the
-elaborator names and shares those per module.
+A generated auxiliary (`X._proof_n`, `X._simp_n`, …, and the one private anonymous instance, whose generated name
+carries the namespace) that is absent here under the release's name (AUX-ABSENT), or is another statement under it
+(AUX-DIFFERS), is counted and listed, not failed: the elaborator numbers and shares those per module, and no
+statement or definition names one outside an instance or proof argument (that would be a DIFFERENT).
 
   fs132_i2_readback.py emit                      write ReleaseDump.lean and HereDump.lean (pass 1: the cone)
   fs132_i2_readback.py compare REL.out HERE.out  the verdicts; writes `targets-and-definitions.tsv` (the four targets
@@ -424,8 +426,10 @@ def compare(rel_text: str, our_text: str, renamed=None, quiet=False, record=None
             verdict, why, there, here = ("AUX-ABSENT" if aux else "ABSENT-HERE"), "", [], []
         else:
             verdict, why, there, here = judge(r, o)
-            if verdict == "DIFFERENT" and aux and r["levels"] != o["levels"] and "universe" in why:
-                verdict = "AUX-RENUMBERED"
+            if verdict == "DIFFERENT" and aux:
+                # a generated auxiliary of the same name that is another statement: the elaborator numbers and
+                # shares `X._proof_n`, `X._simp_n` per module, and three release files are one module here
+                verdict = "AUX-DIFFERS"
         if verdict == "UP-TO-INSTANCES":
             badc = [c for c in there + here if not allowed_instance_constant(c)]
             if badc:
@@ -435,9 +439,7 @@ def compare(rel_text: str, our_text: str, renamed=None, quiet=False, record=None
         cls = ("target" if lab[2:] in TARGETS else "aux" if aux else "definition" if r["kind"] == "def" else "lemma")
         counts[(cls, verdict)] = counts.get((cls, verdict), 0) + 1
         table.append((cls, lab, r["kind"], verdict, there, here, why))
-    failing = [t for t in table if t[3] in ("DIFFERENT", "ABSENT-HERE") or (t[3] == "AUX-ABSENT" and t[0] != "aux")]
-    # aux constants that differ are generated proofs' own statements: counted, listed, not failed
-    failing = [t for t in failing if not (t[0] == "aux" and t[3] == "DIFFERENT")]
+    failing = [t for t in table if t[3] in ("DIFFERENT", "ABSENT-HERE")]
     rec = None
     if record is None and RECORD.exists():
         record = RECORD.read_text()

@@ -36,8 +36,9 @@ file.** The changes, all of them:
    aliases of the new (`Restrict.lean:202–209` there) and the definition's text is the same at both tags: `(s : Set
    α) (f : ∀ a : α, π a) : ∀ a : s, π a := fun x => f x`.
 
-What is here: the angular sum `x + r(e(s) + e(t))` as a quasi-measure-preserving map of the torus, `L¹` convergence
-along it, and the sampling parameter. All of it is kernel-checked in this library: no axiom, no `sorry`.
+What is here: the angular sum `x + r·e(s) + e(t)` (`angularSum`, defined in `OAI158Palette`) as a
+quasi-measure-preserving map of the torus of direction pairs, `L¹` convergence along it, and the sampling parameter.
+All of it is kernel-checked in this library: no axiom, no `sorry`.
 
 **Compared with the release** as the kernel stores both (`tools/fs132_i2_readback.py`; its tables are under
 `data/fs132/i2/readback/`): each declaration's stored statement, and each definition's stored value, at the release's
