@@ -94,6 +94,8 @@ at each point of the arc; a countable subcover; connectedness of a union of half
   this: every half-plane there holds a whole Reuleaux corner or a cusp, so each side keeps two labels or more — its scans
   read `arc-forced=0`".
 
+*Correction, dated 2026-10-07 (20:10 UTC; filed by the coordinator; source: the asking lane's re-read, job FS136-P2, checked by the coordinator at `data/fs136/e1/out/bowtie.txt` l. 1, "5-label:4"): the bowtie fragment has **four** five-label points, not two. The arc scan was seeded with two of them (`q₂`, `q₁`), and what is said here of "its two five-label points" is said of those two; the other two have not been scanned. No verdict moves.*
+
 ## The smallest open form, the second deriver's (verbatim, `plans/FS136-E2-derivation.md` Stage 8)
 
 > *a pieced point carrying five of six labels forces its sixth along every arc of its unit circle on whose side none of its own labels is pure; what do two such collars, or a collar and a pieced point, force one unit further on — a corner emptied, a stall, or a second collar?*

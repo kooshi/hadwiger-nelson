@@ -256,6 +256,8 @@ leaves**, its *not claimed* line: "what V bars one unit further on (a fact about
 question of stub FS-137 (`plans/STUB-collars.md`). **Prior art**: for maps FS116-N2-FIVERING, "read at its statement only,
 its argument and mind count not read" — a debt. **Kernel**: none; "only with a consumer".
 
+*Correction, dated 2026-10-07 (20:10 UTC; filed by the coordinator; source: the asking lane's re-read, job FS136-P2, checked by the coordinator at `data/fs136/e1/out/bowtie.txt` l. 1, "5-label:4"): the bowtie fragment has **four** five-label points, not two. The arc scan was seeded with two of them (`q₂`, `q₁`), and what is said here of "its two five-label points" is said of those two; the other two have not been scanned. No verdict moves.*
+
 control: corners-selftest
   of: C136-CLASS — the arithmetic (four roots: in the field, a nested one, a new one, a product) and the classifier on eleven corners at (0, 0) seen from (1, 0), each read exactly and by samples — quarter-planes, the half-plane with tangent edges, the disc's own corner, three horns between tangent circles, two horns between circles of radius 1/2 and 2 and the unit circle — and C136-CORNERS on three arrangements (antipodal: two corners outside both; a right angle; three members). Tight: seven of the eleven are decided by curvature alone. The fault orders curves by direction only
   run: python3 ../data/fs136/e2/closure.py selftest
