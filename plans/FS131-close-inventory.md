@@ -8141,3 +8141,29 @@ reason by the close.*
      until Kooshi says (ruling 607 (c)). (e) **Slot → EXT-OAI2** (the manuscript's reading, `ephodos`), by the
      standing conditional: launched 2026-10-07 about 02:05 UTC. In flight: 2 of the milestone (L8A, I9B) and 2 of
      the analysis (EXT-OAI1 in the special slot, EXT-OAI2).
+
+611. **EXT-OAI2, first message: the dictionary — the outside manuscript's "weak measurable colouring" is exactly this project's `χ_m⁰` object, its transfer theorem is `χ(ℝ²) = χ_m⁰(ℝ²)` with no hypothesis, and it does not do without measure rigidity: it proves one of its own** (source: EXT-OAI2's message to "main", 2026-10-07; record `plans/EXT-OAI2-reading.md` stage 1, commit `6c2d2134` on `main`; a reading, one mind, of definitions and statements — the proofs unread at this stage).
+     **Its dictionary.** (1) Their Definition 1.2 is the object of row 130's `χ_m⁰` (Lebesgue measurable,
+     monochromatic unit pairs null for Lebesgue × arc length): the same set of functions, not Falconer's `χ_m`.
+     (2) Their Theorem 1.3 is `χ(ℝ²) = χ_m⁰(ℝ²)`, both directions, every `k`; the ⟸ half is this project's
+     unconditional one (FS103-M-EASY); **the ⟹ half is the one held here only given MR** (row 130 through row
+     128). (3) Their Theorem 1.4 is `χ_m⁰(ℝ²) ≥ 6` — the YES of the third-ranked stub
+     (`plans/STUB-cp-plane-six.md`); with it Falconer's `χ_m(ℝ²) ≥ 6`, the Borel number, and by row 131
+     `lim µ₅(ε) < 1`. (4) **The transfer rests on a rigidity theorem of the manuscript's own**: "every `K`-invariant
+     probability on `D` assigning zero mass to `C` is Haar probability", for the algebraic plane `ℚ̄ = ℝ_alg(i)`
+     with all algebraic rotations — this project's measure-rigidity statement at the one field its version does not
+     cover (not a number field); a neighbour of row 120, neither implying the other as stated; its announced proof
+     is by the Furstenberg–Zimmer compact-extension method and a radial positive-definite function, with no
+     Einsiedler–Lindenstrauss. **Its registered expectations** (nine, in its § 1.4, before the proofs): among them,
+     that the five-specific step is the last section's case analysis over cycles of length 3, 4, 5, and that their
+     "cyclic centers form a closed locally finite set" is, at five, what this project holds open at six as the map
+     step. **An item it handed me to match**: the manuscript's footnote to its main theorem cites a "Outside2026".
+     **Matched by me**: its `references.bib` entry is this project's `[Outside2026]` — the same author, title and
+     repository as the claim EXT-HN1 and EXT-HN2 audited — and the footnote says of it what those audits found:
+     "The displayed formal theorem assumes that density bound as a hypothesis, so the argument does not establish
+     the announced equality", with its own counterexample to the bound (the half-open arc of angular measure
+     `π/3`). **Read by me**: the footnote (`introduction.tex` ll. 70–78), the bibliography entry (l. 352), the
+     rigidity sentence (ll. 174–175); its commit on `main`. Not checked by me: the dictionary's four identifications.
+     **Told to Kooshi at once.** **A note for the frontier, mine and unread**: this project's bridge (row 107) names
+     `ℝ_alg` as real closed and a named hypothesis; their rigidity is stated at `ℝ_alg(i)` — the reading's second
+     message says whether the two meet.
