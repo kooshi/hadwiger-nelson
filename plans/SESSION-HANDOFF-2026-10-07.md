@@ -47,6 +47,16 @@ the next milestone**; staffing is his cap of three Opus slots.
 | **FS132-I3** (`debruijn-implementer`) — the step lemma, then the shift's calculus (lots C, B) | worktree and branch `fs132-wi3`; record `plans/FS132-I3-implementation.md` there; brief `data/fs132/briefs/FS132-I3-step-lemma.md` | a message when `step_lemma` is proved — the one step of the exclusion with a single derivation | log; a line to Kooshi (the hand proof's thinnest step checked by the kernel) — or, if a leaf is false, at once |
 | **FS132-I4** (`debruijn-implementer`) — the join, then lots E and D | worktree and branch `fs132-wi4` (cut from `fs132-wk1` at `1c5e2609`; it merges `fs132-wi2`, the port); record `plans/FS132-I4-implementation.md` there; brief `data/fs132/briefs/FS132-I4-join.md`; launched 12:56 UTC | a message when the join builds (did any leaf change?); then the leaves on the ported lemmas and on the chart's null sets | log; **lot A (the chart's geometry, the tips: 18 leaves, nothing ported) is unassigned** — the next free kernel slot, on the pattern of the two briefs above (generators `data/fs131/briefs/scripts/mk-fs132-i3.py`, `mk-fs132-i4.py`) |
 
+**Briefed, waiting for the next free slot (13:22 UTC): FS124-K1, the kernel planner for FS-124's first module** (`debruijn`; brief
+`data/fs124/briefs/FS124-K1-kernel-plan.md`, gate exit 0, **fenced: blind first**; kernel claim list `data/fs124/claims-K1.md`;
+worktree and branch `fs124-wk1`, cut from `main` at `596100d4`, build copied; record `plans/FS124-kernel-plan.md` there): the
+radius clause — five statements, derived by hand today (FS-124 inventory item 7: six-colourings of discs of every radius give
+six; the converse over the import; some disc has no weak five-colouring). **Launch it into the first slot that frees, ahead of
+the exclusion's lot A** (ruling 7 (b)); its fence lifts by my reply to its "phase-1 plan committed" message — then tell it
+where the deriver's entries are (`plans/FS124-E1-derivation.md` Stage 3). **Since the morning also** (FS-132 inventory items
+42–43): the step lemma is proved in the kernel on branch `fs132-wi3` (`6fe55ef7`); the join builds on `fs132-wi4` with no leaf
+changed (`d260d0bf`).
+
 **Done since the morning** (FS-132 inventory items 33–41): the record job's second half; the planner's successor (49 leaves in
 five lots; the kernel claim list extended by seven statements, `data/fs132/claims-K1.md`); **the port** (163 declarations on
 the standard three axioms, branch `fs132-wi2`, tip `4060fe1d`; it lands with the exclusion's module, in one landing, with a
