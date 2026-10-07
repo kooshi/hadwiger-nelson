@@ -37,8 +37,9 @@ across" (`plans/STUB-covering-pairs.md`), is **Opened**, ranked first, **its fir
 one mind** (inventory `plans/FS136-close-inventory.md`, items 1–7; claim list `data/fs136/claims.md`; record
 `plans/FS136-E1-derivation.md`); no value moved. **NO LANDING IS IN FLIGHT.**
 
-**Two jobs are running; the third slot is held by choice** for whichever of their two follow-ups comes first (agent ids in
-the scratch file `agents.txt`, never in a repo file):
+**Two jobs are running; the third slot is free for the kernel lane's next job** — the third job on the second module (the
+witnesses and the join) when FS124-I3 hands back, else the θ-lemma's planner (agent ids in the scratch file `agents.txt`,
+never in a repo file):
 2. **FS124-I3** (implementer; launched 17:12 UTC; FS-124 inventory items 34–37) — the second module's last four claims:
    `Plane/ThreePiece` and `Plane/ClosePair`, 61 leaves, in worktree and branch `fs124-wi3` (fast-forwarded to the first
    implementer's tip `ab669747`, where `CircleCrossing` and `OnePiece` are proved: 63 leaves, the first five claims
@@ -48,13 +49,24 @@ the scratch file `agents.txt`, never in a repo file):
    blocks registered (the first implementer's is `data/fs124/i2/audit-block.txt` on the branch), then the landing of the
    module. **Owed by name as a kernel job: the θ-lemma** (`ThreePiece.IsSector.hasArcEdges`; the planner's record § 2.4 on
    that branch); `SectorPoint` stays off `main` until it lands.
-3. **FS136-P1** (asking lane; launched 17:15 UTC; FS-136 inventory items 6–7) — re-poses after the first round; it
-   messages when its card is saved, **with the card's home said first**. If the card stays in FS-136: a deriver on it
-   (pattern `data/fs131/briefs/scripts/mk-fs124-e2.py`). If it moves to another stub: FS-136 goes to its record job
-   (pattern `data/fs131/briefs/scripts/mk-fs124-z1.py`; numbers it may use: ledger rows from 165, grokkings from G100,
-   stubs from FS-137; it must re-run FS-124's second reader with a repaired tolerance before quoting its counts —
-   FS-136 inventory ruling 6 (b)) and the card opens its own milestone. **A statement that would fix the value → Kooshi
-   at once, "claimed by one mind, unchecked".**
+3. **FS136-E2** (deriver; launched 18:04 UTC; FS-136 inventory items 8–9) — the milestone's **second round**: the asking
+   lane handed back a card ("how far does a seed force": the table run forward — a cell with one label left is that
+   label; the forced closure of a seed) and corrected a ruling of mine (what bars at a stop is the germs at the two
+   members, not a region's extent: both are [tools] readings, an entry will decide). Brief
+   `data/fs136/briefs/FS136-E2-forward.md`; record `plans/FS136-E2-derivation.md`; the three claims are in
+   `data/fs136/claims.md` (last dated block). **It sends each claim's statement and *not claimed* line before deriving
+   it → fix each in the claim list by a dated line; each verdict → the inventory.** **An empty cell on the
+   seven-colouring is a defect: it stops and messages. A closure that closes round a ring, or any six-coloured piece
+   past `φ²/√2` → Kooshi at once, "claimed by one mind, unchecked".** At its hand-back: this milestone's record job
+   (pattern `data/fs131/briefs/scripts/mk-fs124-z1.py`; ledger rows from 165, grokkings from G100, stubs from FS-137; it
+   re-runs FS-124's second reader with a repaired tolerance before quoting its counts, files the asking lane's re-drafted
+   row 1 and the dated lines owed under the first deriver's closing section). Queue line 15 is re-posed to run at
+   tomorrow's search; line 16 held on it.
+
+**A side page, published at Kooshi's word (18:0x UTC)**: the unit-step puzzle (`visualizations/unit-step-puzzle/page.html`,
+artifact `https://claude.ai/artifact/Yafj379vqWgrVUZaaK3AQr`, private): colour the `q × q` torus so that no two cells a
+modular unit step apart share a colour; at 23 six and seven colours are open (row 71). To change it: edit `page.html`,
+run its `build.py` and `test.js`, publish the same path again.
 
 **For FS-136's kernel claim list, when its planner is briefed** (FS-136 inventory rulings 4 (b), 5 (d)): the head statement
 (the table), the label form of the count, the one-point form — three short statements over `ae_onSide_of_label`, a leaf
