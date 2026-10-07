@@ -1,0 +1,5 @@
+slot: admitted env: mem 16 GiB (hard cap), cpus 0,1,2,3
+✖ [5946/5994] Building Proofs.HadwigerNelson.Outside.OAI158
+error: target is out-of-date and needs to be rebuilt
+Some required targets logged failures:
+- Proofs.HadwigerNelson.Outside.OAI158

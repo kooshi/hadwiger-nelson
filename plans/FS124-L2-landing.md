@@ -63,3 +63,55 @@ uses sorry` warning, `Proofs/HadwigerNelson/Plane/SectorPoint.lean:52:8` — the
   `ARCHITECTURE.md`, and the coordinator's files; this branch changes 7 under `Proofs/` (its seven modules),
   `Proofs.lean`, `ARCHITECTURE.md`, `data/`, `plans/`. **No conflict in a file under `Proofs/`**, as the brief's
   trial found. It is tried again on the joined tree before it is made (stage 2).
+
+## Stage 2 — SAVED (FS124-L2): the join — the three-arcs branch merged, the leaf closed, `main` merged in
+
+**The first merge**: `git merge --no-ff --no-commit 9af859b7dcf63899973c04b8ff3d00165e98940d` (the hash, never the
+ref; `data/fs124/l2/merge-wk3.out`) — `Proofs.lean` merged automatically (the one import line of `Plane/ThreeArcs`
+after this branch's seven); **one conflict, `ARCHITECTURE.md`, resolved by keeping both sides**: this branch's three
+rows (`Plane/ClosePairWitness`, and the rows of `Plane/ClosePairModel` and `Plane/SectorPoint` with the imports cell
+this branch gave them), then the other side's row of `Plane/ThreeArcs`. Checked by script before writing: the two
+doubled rows differ between the sides in their imports cell only. **No conflict in a file under `Proofs/`.** Merge
+commit `35704355`.
+
+**The leaf** (`Proofs/HadwigerNelson/Plane/SectorPoint.lean`; `git diff` against the as-given file: 20 lines added, 10
+removed): the import `Proofs.HadwigerNelson.Plane.ThreeArcs`; the body of `ThreePiece.IsSector.hasArcEdges` — the
+`sorry` replaced by the kernel planner's two lines (`plans/FS124-kernel-plan-3.md` § 3.1), as written there:
+
+```lean
+  obtain ⟨r, hr, J, h1, h2, h3, h4, h5, -, h7⟩ := h
+  exact fun i j hij => IsTriodCut.exists_arc ⟨⟨hr, h1, h2, h3, h4, h5⟩, D.isOpen_piece, D.isPreconnected_piece,
+    fun _ _ hab => D.disjoint_piece hab, h7⟩ D.nbhd_mem hij
+```
+
+the spec example of its § 4.4 after `sectorPoint_isSector` — `example : sectorPoint.HasArcEdges :=
+sectorPoint_isSector.hasArcEdges`, the lemma run on the model of its hypotheses; and two docstrings that the leaf's
+closing makes false as written: the module header's title and its item on the leaf ("the θ-lemma is owed", "Owed as a
+kernel job of its own") and the leaf's own docstring ("owed as a kernel job of its own") now say what the bridge rests
+on — `IsTriodCut.exists_arc`, which half of the classical fact it proves, and that the definition's sixth clause is
+not read. **No statement and no definition of the file is touched** (stage 3's kernel-side comparison).
+
+**Built** (`data/fs124/l2/build-1-joined.log`): **exit 0** — "build: OK — 477 of 477 batches, 3 module(s) rebuilt, 0
+module(s) with warnings, 8m44s" (`Plane.ThreeArcs`, `Plane.SectorPoint`, `Proofs`); lines holding "warning" in Lake's
+full log: 0. **No `sorry` in the eight modules**: the narrow search (`^\s*sorry\s*$`, `:= sorry`, `by sorry`) over
+`Proofs/` and `Proofs.lean` finds 0 lines; the word occurs in none of the eight files but in prose. The leaf and the
+two theorems over it print the standard three (`data/fs124/l2/probes/checks-probe.out`: 26 prints, every one
+`[propext, Classical.choice, Quot.sound]`) — on the as-given tree each of the three printed `sorryAx` (the third
+implementer's controls). Commit `fb86127a` (the leaf), pushed to the branch.
+
+**The second merge**, tried again on the joined tree (`data/fs124/l2/merge-trial-main.out`: the same one conflict)
+and made by hash: `git merge --no-ff --no-commit a61ea9150aade8ebac38014a004bf4c732230232`
+(`data/fs124/l2/merge-main.out`) — `main` had moved three commits past `9febc276` (FS-136's inventory and a brief:
+`plans/` 2 paths, `data/` 2). `Proofs.lean` and `scripts/Axioms.lean` merged automatically; **one conflict,
+`ARCHITECTURE.md`** — § 3.13's table, where `main` reworded the first module's three rows at its landing and this
+branch added eight rows after them — **resolved by keeping both sides**: `main`'s three rows, then this branch's
+eight. Checked: the resolved file differs from `main`'s by exactly eight added lines, and `Proofs.lean` from `main`'s
+by exactly the eight import lines (316 import lines, none twice). **No conflict in a file under `Proofs/`.** Merge
+commit `16cb9018`.
+
+**Built** (`data/fs124/l2/build-2-merged.log`), with stage 3's docstring rewordings in the tree: **exit 0** — "build:
+OK — 481 of 481 batches, 30 module(s) rebuilt, 0 module(s) with warnings, 10m15s". The thirty: the import module
+(`main`'s licence sentence is a docstring, so it and everything downstream recompiled here — the nine ported modules,
+the thirteen of `Plane/SixRing`, `Plane/RadiusOutside`), the five modules downstream of the reworded docstrings
+(`Plane/ThreePiece`, `ClosePair`, `ClosePairWitness`, `ClosePairModel`, `SectorPoint`), and the root. The library is
+1,877 modules: `main`'s 1,869 and the eight.
