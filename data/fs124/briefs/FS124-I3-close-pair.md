@@ -5,7 +5,7 @@
 brief: FS124-I3
   identity: de Bruijn, the implementer — your agent file (`.claude/agents/debruijn-implementer.md`) is your identity and your lane's workflow; you run on Opus
   role: one of two implementers of the second module of the milestone derived today — replace every `sorry` in two files of a planner's skeleton with a proof, changing no statement; print the axioms; draft what a landing will need
-  launch: into the next free slot, in a worktree of your own cut from the planner's tip; the other implementer (FS124-I2) works in another worktree on the other two statement files and writes none of yours; a landing of this milestone's first module is in flight on `main`, and a deriver works under `plans/` and `data/` on `main` — you touch neither
+  launch: now, in a worktree of your own, cut from the planner's tip and fast-forwarded to the first implementer's hand-back — its two files (`CircleCrossing`, `OnePiece`) are proved on your branch, and nobody else writes in your worktree; a landing of this milestone's first module is in flight on `main`, and a deriver works under `plans/` and `data/` on `main` — you touch neither
   mission: § Why this job
   statements: § The statements
   acceptance: § Done means
@@ -14,7 +14,7 @@ brief: FS124-I3
   channel: message the coordinator ("main") by SendMessage **at once** for a leaf that is false as stated, vacuous, or provable only with a hypothesis it lacks (say which: the *statement* needs it, or your *route* does) — and for a leaf of the other implementer's files that you need in a different form; **with one line when the five theorems quoted below print their axioms**; and for a question you cannot work around; the report goes to `data/fs124/reports/FS124-I3.md` on your branch, and its text is your final message
   standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full, and `RUNNING.md` § Building and § Make the gate fail, and watch it fail
   record: `plans/FS124-I3-implementation.md` (new, on branch `fs124-wi3`)
-  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3` (branch `fs124-wi3`, at `92f09e14`; its `.lake/build` is its own, copied today from the planner's tree after its last build): `Proofs/HadwigerNelson/Plane/ThreePiece.lean`, `Proofs/HadwigerNelson/Plane/ClosePair.lean` (proofs only; helpers under names no other module declares, in these two files); `plans/FS124-I3-implementation.md`, `data/fs124/i3/`, `data/fs124/reports/FS124-I3.md`; **not** any statement or definition (a statement that will not go through comes back through me); **not** the other four modules of the skeleton — two are the other implementer's, and the two that hold the models are a third job's; **not** `scripts/Axioms.lean`, `scripts/Assumptions.lean`, `Proofs.lean` or `ARCHITECTURE.md` (two implementers work at once, and one job joins the branches and registers everything: you draft your audit block as a file under `data/fs124/i3/`); the planner's record, `CLAUDE.md`, `LEAN.md`, `LEDGER.md`, `main`
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3` (branch `fs124-wi3`, at `ab669747`; its `.lake/build` is its own, copied today from the planner's tree after its last build; the first implementer's two files recompile at your first build): `Proofs/HadwigerNelson/Plane/ThreePiece.lean`, `Proofs/HadwigerNelson/Plane/ClosePair.lean` (proofs only; helpers under names no other module declares, in these two files); `plans/FS124-I3-implementation.md`, `data/fs124/i3/`, `data/fs124/reports/FS124-I3.md`; **not** any statement or definition (a statement that will not go through comes back through me); **not** the other four modules of the skeleton — two are the first implementer's, proved, and stay as they are, and the two that hold the models are a third job's; **not** `scripts/Axioms.lean`, `scripts/Assumptions.lean`, `Proofs.lean` or `ARCHITECTURE.md` (one later job registers everything and takes the models: you draft your audit block as a file under `data/fs124/i3/`); the planner's record, `CLAUDE.md`, `LEAN.md`, `LEDGER.md`, `main`
   budget: about 350k by the harness's count, as guidance; you cannot read that count, so use this: **save a stage after each file; a leaf on which three attempts fail stays `sorry` with a note in your record, and you go on; if three leaves are so left, stop at the next saved stage and hand back**
 
 Hello. The Hadwiger–Nelson problem — how many colours the plane needs so that no two points at distance 1 share one — stands
@@ -25,7 +25,7 @@ from it nine statements, ending with what two nearby meeting points of three col
 planner then stated the nine in Lean, working blind from the statements; it reached each by a route of its own (three by a
 shorter one than the derivers'), found that none uses measurability, and left a skeleton that builds, with fourteen leaves
 proved and a route written for every other. Two implementers take the statement files. This brief is for
-the last two: the last four claims: at a point one unit from two three-piece points whose six labels are all different, a piece of one of them lies inside and another outside that point's unit circle; what it forces when one member pays alone; that both pay when both are full; and that exactly four labels are then present.
+the last two: the last four claims: at a point one unit from two three-piece points whose six labels are all different, a piece of one of them lies inside and another outside that point's unit circle; what it forces when one member pays alone; that both pay when both are full; and that exactly four labels are then present. The first has handed back: the circle geometry and the first five claims are proved on your branch, 63 leaves, each on the standard three axioms.
 
 ## Why this job
 
@@ -97,15 +97,14 @@ it says the job costs, its order for one implementer, and what is hard (first li
 > **What is hard, in order.** (1) The θ-lemma — out of this plan. (2) `exists_closePair_full`: the one leaf where a
 > — source: /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/plans/FS124-kernel-plan-2.md § 3.2
 
-**Your order**: `Plane/ThreePiece`'s interface (every leaf down to and including `hasUnitArcFrom_of_arc_subset_sphere`); then `Plane/ClosePair` whole — the four claims are then proved; then `Plane/ThreePiece`'s two constructions (the three-sector point and the petal point, with their measurability leaves and examples), last. Your two files have 29 and 32 leaves left. A leaf of the other implementer's files is used as it
-stands — its statement is fixed, and its `sorry` is theirs.
+**Your order**: `Plane/ThreePiece`'s interface (every leaf down to and including `hasUnitArcFrom_of_arc_subset_sphere`); then `Plane/ClosePair` whole — the four claims are then proved; then `Plane/ThreePiece`'s two constructions (the three-sector point and the petal point, with their measurability leaves and examples), last. Your two files have 29 and 32 leaves left. The first two files are proved — the first implementer's record is `/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/plans/FS124-I2-implementation.md` — and you use their theorems as they stand. It added nine helpers whose names you must not reuse: `CircleSide.sign_eq`, `CircleSide.abs_sign`, `quadrant_sign_pos`, `CrossAt.exists_mem_sphere_inside`, `tightModel_of_not_lt`, `tightModel_ne_two_of_lt`, `tightModel_far`, `tightModel_eq_two_of_mem`, `tightModel_ne_two_of_mem`.
 
 **The hand arguments**, should a leaf's route fail and you want the other side's wording: `/home/kooshi/source/lean-dir/plans/FS124-E2-derivation.md`, Stage 4 (§ Argument — four regions, six pieces) and Stage 5 (§ Argument — the save by one member: the half-collar, Steps I and II, Both, Four labels) — a dated correction stands under Step II, filed today from the planner's second look: read it with the step.
 
 ## Done means
 
 1. **Your readback first**: the quotations against their sources; the planner's record; your two files whole and the
-   files they import. Build the branch once as given, under the slot (it should end with 130 `declaration uses sorry`
+   files they import. Build the branch once as given, under the slot (it should end with 67 `declaration uses sorry`
    warnings and no other). Open your record. Commit and push.
 2. **Your two files, in the order above**, each leaf by its route in § 3.2 unless it fails — then yours, said in your
    record. **Before you prove a helper, search this library and Mathlib for its statement's shape, not for a name.**
