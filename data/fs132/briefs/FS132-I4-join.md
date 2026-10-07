@@ -170,3 +170,24 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-07, 13:44 UTC, by Keryx) — the other implementer's branch is finished: merge its tip, and two rows
+
+The implementer of the step lemma's module and the shift's (FS132-I3) has handed back: both modules are proved, with no
+`sorry`, on the standard three axioms, at the tip of branch `fs132-wi3` (`e9dd2f46`); its record, to read, is
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi3/plans/FS132-I3-implementation.md`. You merged that branch at an
+earlier commit, when only the first module was done. **Added to your job, and to your touches**: (1) merge the tip of
+`fs132-wi3` into your branch at a point of your choosing (its two modules, its block in the axioms script, its record and data
+come with it; you write neither of its two Lean files, so the merge should be automatic — say in your record what it
+touched); (2) after that merge, the two rows of `ARCHITECTURE.md` for those modules still say "SKELETON": replace their
+words by that record's draft 1 (its section "Drafts for the front page"), which its author could not apply under its own
+brief; (3) for your information — that branch's `chart_eq_polar_shift`, in the shift's module, states what the leaf
+`chart_eq_polar` of the chart's module states, under a name of its own because the shift's module does not import the
+chart's: they do not collide, and which of the two stays is for whoever proves the chart's module, not for you. The rule on
+agents is unchanged: you start none (standing rule 1: delegation is one level deep, because the coordinator can only review
+work it knows exists).
+
+*A note on the gate, by Keryx: re-run on this file after the amendment, the brief gate reports one quotation as no longer
+verbatim — the first line of a leaf in your own file of the ring form's two leaves, quoted as it stood at launch and since
+proved by you. The quotation was checked at launch (gate exit 0, 21 quotations); the amendment adds none.*
+

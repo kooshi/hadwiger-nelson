@@ -1232,3 +1232,32 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     outside lemmas and 46 open leaves of our own** (49, less the step lemma's module's eight, plus those of the two
     skeleton modules not counted here — the count is the implementers' to state at their hand-backs).
 
+44. **FS132-I3 done (375k and 56 minutes by the task notice): the step lemma's module and the shift's are proved — two of the
+    exclusion's twelve modules, 33 theorems on the standard three axioms** (implementer; record
+    `plans/FS132-I3-implementation.md` on branch `fs132-wi3`, tip `e9dd2f46`; its report is its hand-back). Beyond item 42:
+    **the shift's calculus is in the kernel** — the unit-pair relation in the direction used, the sign, the vanishing on the
+    axes, the bounds, measurability; the Lipschitz bound "with no derivative computed (the shift vanishes on both positive
+    axes, so its derivative at the origin is zero)", on some closed square whose side is not explicit — "the planner's
+    'numerically κ = 1/50 works' is not proved … nothing in the assembly reads its value"; the sign by an identity proved in
+    the chart's own variables, not through the library theorem the planner named. **Statements**: 14 of the 16 leaves
+    exactly as the planner's branch printed them, 2 with an unused hypothesis dropped by permission — compared record by
+    record by a script whose planted fault fires. **Price**: 15 leaves and 16 helpers; 237 lines as given, 1,059 now; four
+    builds; twelve elaboration errors, "none mathematical"; no dispatch. Architecture check, duplicate-name check and the
+    guarded lint pass. **For other lots**: a helper of the shift's module states what a leaf of the chart's module states,
+    under another name. **My receipt**: the four commits are on `origin`; both files at the tip hold no `sorry` (counted by
+    me: 769 and 290 lines); its block's axiom print read — 33 lines of the standard three and exactly one `sorryAx`, the
+    control; the final build log's exit. Not checked by me: the helpers' statements; its reading aloud. **Credit**: a
+    signature comparison against the planner's printed leaves, with a control; a planner's number reported as not proved
+    and not needed; the kernel's route said where it differs from the hand argument's.
+    **Its held points, ruled.** (a) **The two rows of the architecture map are edited at the join**, by the implementer who
+    merges this branch (FS132-I4, by an amendment to its brief, gate exit 0) — alternative: resume this job for two lines;
+    rejected, a message resumes it and bills its context again. (b) **No regrade in the derivation file now**: a step is
+    "held" when its module passes the gate; the dated line it drafted is filed at Closed. The first night's exclusion
+    stays "[hand], one mind, with a checking reading" — with two of its nine steps now kernel-checked on a branch, which
+    is said wherever the grade is said. (c) **Its three lines for the Lean facts file are filed now, with the port's
+    three** (`LEAN.md` § Searching — Lean; six bullets, copied by script from the two records) — they serve the
+    implementers still to come.
+    *A friction, logged once*: a brief that quotes lines of a file its recipient is to rewrite cannot be re-gated after
+    launch — the amended brief fails on one quotation the recipient's own proof has since changed. Not a defect of the
+    gate; a reason to quote such leaves from the planner's printed signatures, which do not move.
+

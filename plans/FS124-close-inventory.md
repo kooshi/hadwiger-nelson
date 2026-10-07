@@ -238,4 +238,11 @@ between two colours that is an arc of the unit circle about a point one unit awa
     deriver tags only its seven added statements (six per class, one across), and two of the posed claims are among six
     labels. The paragraph was rewritten from the tags and the statements' words. Slots: this job, and the two implementers
     of FS-132.
+11. **FS124-K1 launched** (13:43 UTC by the clock at its launch; `debruijn`, the kernel lane's planner, **blind first**; brief
+    `data/fs124/briefs/FS124-K1-kernel-plan.md`, gate exit 0 with no warning; kernel claim list `data/fs124/claims-K1.md`;
+    worktree and branch `fs124-wk1`; record `plans/FS124-kernel-plan.md` there): the radius clause — five statements. It
+    messages when its phase-1 plan is committed; **my reply lifts the fence** and names the deriver's entries
+    (`plans/FS124-E1-derivation.md` Stage 3). A known soft spot in its fence, logged now: my commit subjects of this
+    afternoon say the radius clause was "derived" — a verdict it may have been shown at launch; by Workflow 3.1 the
+    planner's blindness serves discovery and carries no grade.
 
