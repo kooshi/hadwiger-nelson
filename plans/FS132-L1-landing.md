@@ -49,3 +49,59 @@ commits past the branch's base `8386c256`. `git merge-tree --write-tree --name-o
 (`data/fs132/l1/merge-trial.out`): **one conflict, `ARCHITECTURE.md`**; `Proofs.lean` and `scripts/Axioms.lean` merge
 by themselves — as the import's dry run found. No Lean file under `Proofs/` conflicts: the branch touches one module
 there (`Outside/OAI158.lean`, new), `main` twelve others (the ring calculus and `Plane/SimpleOn`, wave 8).
+
+## Stage 2 — SAVED (FS132-L1): `main` merged in
+
+`git merge --no-ff aca251ee4d1f2e7031d3fc5b426eedf3460d6ca8` (the hash, never the ref): **merge commit `90ef4fa3`**.
+
+- **The one conflict, `ARCHITECTURE.md`, the end of § 3** — `main` added twelve rows to § 3.11's table (`Plane/SimpleOn`
+  and the eleven modules of `Plane/RingCalculus/`) where the branch adds § 3.12. Resolved as the brief says: `main`'s
+  rows directly under § 3.11's last row (the table stays one table), then a blank line, then the branch's § 3.12 with
+  its one row. Checked by script after the resolution: every line of the branch's file is in the result; every line of
+  `main`'s is, but the one the branch rewrote in § 5 Trust ("One at present. …" → "Three at present. …", the branch's
+  side, merged by git with no conflict); no conflict marker left. `git diff aca251ee -- ARCHITECTURE.md` is the branch's
+  additions and nothing else: § 3.12, the two rows of § 5 Trust, the count sentence.
+- **`Proofs.lean`** against `main`: one line added, `import Proofs.HadwigerNelson.Outside.OAI158`. **`scripts/Axioms.lean`**
+  against `main`: the IMPORTED section's prose (three imports), the two `declareImport` lines, the nine records under
+  IMPORTED, the block of twelve above PURCHASED — the import's own, merged by git with no conflict.
+- **No Lean file under `Proofs/` conflicts, and none the module imports changed.** `git diff --name-status 39d37838
+  90ef4fa3 -- Proofs/ Proofs.lean lakefile.toml lake-manifest.json lean-toolchain`: twelve files **added** (the wave's)
+  and `Proofs.lean` modified; nothing else. So every file in `Outside/OAI158`'s import closure is byte for byte what the
+  branch compiled it against.
+- **`main`'s library has not moved since the last landing's gate**: `git diff --stat 126bff4d aca251ee -- Proofs/
+  Proofs.lean scripts/ lakefile.toml lake-manifest.json lean-toolchain` is empty (113 commits, all outside those paths).
+  FS131-L8A's receipts (`data/fs131/l8a/gate/*-final.*`, gated commit `126bff4d`) are therefore `main`'s gated state,
+  and the digests of stage 6 are taken against them.
+
+**The build of the joined tree** (`data/fs132/l1/build-1-merged.log`; Lake's full log
+`build/gate/build/20261007T040520Z-1181891.log`): **exit 0** — "build: OK — 474 of 474 batches, 13 module(s) rebuilt,
+0 module(s) with warnings, 9m34s". The thirteen: the wave's twelve (`HubCount` 23 s, the rest under 7 s each) and
+`Proofs`. `Outside.OAI158` was **not** rebuilt — Lake's trace agrees with the diff above: its inputs did not change.
+
+## Stage 3 — SAVED (FS132-L1): the comparison, again, on the joined tree — eight of eight identical
+
+`data/fs132/l1/run-readback.sh joined` on `90ef4fa3`, no tracked file modified
+(`data/fs132/l1/readback/summary-joined.txt`; every output of this run is under `data/fs132/l1/readback/` with the tag
+in its name, the import's own prints untouched). The import's instrument is run unedited
+(`tools/fs132_i1_readback.py`; the dump files of `data/fs132/i1/readback/`).
+
+| step | result | saved |
+|---|---|---|
+| the release's eight declarations, **printed again** at the release's pin (Lean v4.34.1's own binary, `LEAN_PATH` the audit's compiled working copy, no `lake`) | exit 0; eight `DUMP` records; **identical to the print the import committed** (the slot's own admission line apart — the import's prints hold it, this run keeps stderr in its own file) | `ReleaseDump-joined.out` |
+| the module's eight, from the module as built on the joined tree | exit 0; identical to the import's own print made before the join | `ModuleDump-joined.out` |
+| **the comparison** (`decls`) | **exit 0 — "declarations: 8 compared: 8 identical: 8 different: 0 []", "READ-BACK IDENTICAL: all 8 declarations, term for term, modulo the namespace"** | `decls-module-joined.out` |
+| the comparator's six planted faults (`--self-test`: a changed instance, a binder kind, a numeral, a missing declaration, a kind, a renamed constant) | exit 0 — each **FIRED**; "SELF-TEST OK: the unplanted pair identical on 8 declarations; 6 plants" | `selftest-joined.out` |
+| the control in Lean, elaborated on the joined tree (`ControlDump.lean`: six declarations altered in one place each, two faithful) | "CONTROL FIRED AS EXPECTED": the six **DIFFERENT**, the two **IDENTICAL**; and read as a plain comparison it is refused, exit 1 | `ControlDump-joined.out`, `decls-control-joined.out`, `decls-control-red-joined.out` |
+| one step down: the 83 constants the statements name, in the module's environment on the joined tree | no constant absent; the table is the import's, line for line (69 identical, 6 up to universe-parameter names, 8 different — the eight its stage 1 read) | `ModuleLevel1-joined.out`, `level1-joined.out` |
+| the nine characterisations (`ModuleSemantic.lean`; its body is `SemanticBody.lean.inc`, by `diff`, as is `ReleaseSemantic.lean`'s) | exit 0, no message | `ModuleSemantic-joined.out`, `.err` |
+| written at the release's side during the run | 0 files under `~/.cache/ext-oai1`, 0 under `~/source/math` (`find -newer` a marker); the clone is at `adc7f124`, clean | summary |
+
+**Nothing differs, and the reason is stronger than the comparison**: the join added twelve modules the import's module
+does not import and changed none it does (stage 2), so its compiled term is the branch's — the module was not
+recompiled. The comparison is repeated in stage 6 on the module **as recompiled on the joined tree** (the added
+theorem forces that), which is the run the landing's evidence rests on.
+
+**A slip of my own, caught by the runner's first pass**: its first form compared the new prints with the import's by
+`cmp` and read two as different; the difference was the slot's admission line (`slot: admitted … mem 10 GiB`), which
+the import's saved prints hold as their first line. The runner now takes that one line out of both sides and compares
+the rest; the first pass's summary was overwritten by the second's.
