@@ -1,0 +1,80 @@
+slot: admitted fs136-z1-gate: mem 8 GiB (hard cap), cpus 8,9,10,11
+entry lint
+  claim C136-TABLE: minds 1
+  claim C136-TABLE: prior art partly, 2 counted queries
+  claim C136-COVER: governed by C136-TABLE (hand, minds 1)
+  claim C136-COVER: minds 1
+  claim C136-COVER: prior art known
+  claim C136-ONE: governed by C136-TABLE (hand, minds 1)
+  claim C136-ONE: minds 1
+  claim C136-ONE: prior art partly
+  claim C136-CORNERS: minds 1
+  claim C136-CORNERS: prior art known
+  claim C136-CLASS: minds 1
+  claim C136-CLASS: prior art known
+  claim C136-FORCED: minds 1
+  claim C136-FORCED: prior art partly
+  claim C136-CLOSE: governed by C136-FORCED (hand, minds 1)
+  claim C136-CLOSE: minds 1
+  claim C136-CLOSE: prior art partly
+  claim C136-COLLAR: governed by C136-FORCED (hand, minds 1)
+  claim C136-COLLAR: minds 1
+  claim C136-COLLAR: prior art partly
+  claim C136-CLOSE-R7: minds 1
+  claim C136-CLOSE-R7: prior art partly
+  claim C136-CLOSE-FLOWER: minds 1
+  claim C136-CLOSE-FLOWER: prior art partly
+  claim C136-CLOSE-STRIP: minds 1
+  claim C136-CLOSE-STRIP: prior art partly
+  claim C136-STOP-GERMS: governed by C136-CLOSE (derived from, minds 1)
+  claim C136-STOP-GERMS: minds 1
+  claim C136-STOP-GERMS: prior art known
+  claim C136-STOP-GERMS-RADIUS: minds 1
+  claim C136-STOP-GERMS-RADIUS: prior art partly
+  claim C136-STOP-STRIP: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-STRIP: minds 1
+  claim C136-STOP-STRIP: prior art known
+  claim C136-STOP-DISK: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-DISK: minds 1
+  claim C136-STOP-DISK: prior art known
+  claim C136-STOP-BOWTIE: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-BOWTIE: minds 1
+  claim C136-STOP-BOWTIE: prior art known
+  claim C136-STOP-BOWTIE-SIX: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-BOWTIE-SIX: minds 1
+  claim C136-STOP-BOWTIE-SIX: prior art known
+  claim C136-STOP-FLOWER-GERMS: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-FLOWER-GERMS: minds 1
+  claim C136-STOP-FLOWER-GERMS: prior art partly
+  claim C136-STOP-FLOWER: governed by C136-TABLE (hand, minds 1)
+  claim C136-STOP-FLOWER: minds 1
+  claim C136-STOP-FLOWER: prior art known
+  claim C136-PARTNERS: minds 1
+  claim C136-PARTNERS: prior art known
+  warn  FS136-derivation.md:613 (C136-RINGS-READ): computed over "the set of the four points across named in the statement, each with the tiles of its object at its two members, exact in the objects' own towers" states no set — a computed statement quantifies over exactly the set computed
+  claim C136-RINGS-READ: minds 1
+  claim C136-RINGS-READ: prior art partly
+  entries: 21  derived: 21  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    rings-r7: printed 'r7: labels=7 members=16 centres=16 covering-pairs=54 on-a-ring=54 inside=96[L2:96] violations=0 not-inside=12[L2:12] least=1.7321:8 stop-class=L2:12'; with the fault planted ('' → '--fault') it printed 'r7: labels=7 members=16 centres=16 cover' — it fires
+  ok    cover-count: printed '0'; with the fault planted ('' → "','bar") it printed '5369' — it fires
+  ok    corners-selftest: printed 'selftest: 18 of 18 OK'; with the fault planted ('' → '--fault=bend') it printed 'selftest: 10 of 18 FAILED [7, 9, 10, 11,' — it fires
+  ok    forced-r7-window: printed 'r7 window: pairs=54 points=108 corners=432 viol=0 forced=141 forced_wrong=0 exact=432 empty=0 class-samples=1296 mismatches=0'; with the fault planted ('' → '--fault=bar') it printed 'r7 window: pairs=54 points=108 corners=4' — it fires
+  ok    forced-arc: printed 'bowtie12: seed=10 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=3 closed=yes | forced=5 at 3 points | emptied=1 conflicts=0 | arc-scans=2 arc-forced=4 | corners read: forced=7 free=17 outside-U empty=1 outside-U forced=2 outside-U free=9 seed-point free=12 | agree-with-object=5 of 5 (disagree 0, unread 0) | class-samples=226 mismatches=0'; with the fault planted ('' → '--fault=bar') it printed 'bowtie12: seed=10 corners at 2 points (f' — it fires
+  ok    close-r7: printed 'r7: seed=12 corners at 2 points (full neighbourhoods: True) labels=7 | rounds=2 closed=yes | forced=3 at 2 points | emptied=0 conflicts=0 | arc-scans=2 arc-forced=0 | corners read: forced=3 free=21 seed-point free=12 | agree-with-object=3 of 3 (disagree 0, unread 0) | class-samples=156 mismatches=0'; with the fault planted ('' → '--fault=bar') it printed 'r7: seed=12 corners at 2 points (full ne' — it fires
+  ok    close-flower: printed 'flower: seed=7 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=3 closed=yes | forced=6 at 2 points | emptied=0 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: forced=8 free=18 outside-U forced=2 outside-U free=10 seed-point free=4 | agree-with-object=6 of 6 (disagree 0, unread 0) | class-samples=69 mismatches=0 flower: seed=7 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=3 closed=yes | forced=8 at 3 points | emptied=0 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: forced=12 free=40 seed-point free=6 | agree-with-object=6 of 8 (disagree 0, unread 2) | class-samples=90 mismatches=0'; with the fault planted ('' → '--fault=bar'; '' → '--fault=bar') it printed 'flower: seed=7 corners at 2 points (full' — it fires
+  ok    close-strip: printed 'strip1: seed=8 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=3 closed=yes | forced=10 at 6 points | emptied=0 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: forced=14 free=106 seed-point free=16 | agree-with-object=10 of 10 (disagree 0, unread 0) | class-samples=148 mismatches=0 strip1: seed=8 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=3 closed=yes | forced=10 at 6 points | emptied=0 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: forced=14 free=106 seed-point free=16 | agree-with-object=10 of 10 (disagree 0, unread 0) | class-samples=148 mismatches=0 strip2: seed=6 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=1 closed=yes | forced=0 at 0 points | emptied=1 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: free=4 outside-U empty=1 outside-U forced=2 outside-U free=1 | agree-with-object=0 of 0 (disagree 0, unread 0) | class-samples=12 mismatches=0 strip2: seed=6 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=2 closed=yes | forced=2 at 1 points | emptied=1 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: empty=1 forced=2 free=21 | agree-with-object=0 of 2 (disagree 0, unread 2) | class-samples=32 mismatches=0'; with the fault planted ('' → '--fault=bar'; '' → '--fault=bar'; '' → '--fault=bar' …) it printed 'strip1: seed=8 corners at 2 points (full' — it fires
+  ok    bowtie-six: printed "bowtie-six: kept=L2@q2,T2@q2,V'@q2,t1@q2,T1@q1,W@q1 step1=True lines-read=6 of 6 labels=6 barred-in-the-cell(in S(q2), out S(q1))=6 left=[] EXCLUDED"; with the fault planted ('' → '--fault') it printed "bowtie-six: kept=L2@q2,T2@q2,V'@q2,t1@q2" — it fires
+  ok    stop-corners: printed "strip: w=(0.25000,1.83427) corners at x: T-1 U-1 T0 | at y: T1 U0 U1 | labels=6 | corners at w (x/y): out/out=EMPTY(order 1) in/out=R in/in=OR out/in=O | class-samples=6 mismatches=0 disk: w=(-1.80902,1.11352) corners at x: R1 S1 W1 | at y: S0 T1 P0 | labels=6 | corners at w (x/y): out/in=yellow out/out=EMPTY(order 1) in/out=red in/in=redyellow | class-samples=6 mismatches=0 bowtie: w=(1.73205,0.00000) corners at x: W t1 L2 V' T2 | at y: V L1 t1 W T1 | labels=6 | corners at w (x/y): out/in=4 in/in=234 in/out=2 out/out=EMPTY(order 1) | class-samples=10 mismatches=0 flower: w=(1.73205,0.00000) corners at x: Q0 S5 Q5 G5 | at y: G0 Q1 S0 Q0 | labels=6 | corners at w (x/y): out/in=1 in/in=2 in/out=EMPTY(order 2; second-order only: 3) out/out=1 | class-samples=8 mismatches=0"; with the fault planted ('' → '--fault=move') it printed 'strip: w=(0.27000,1.83427): 0 members on' — it fires
+  ok    stop-shadow: printed 'strip: corners at w=4 left by the shadow: EMPTY R OR O | agree with the exact table: 4 of 4 disk: corners at w=4 left by the shadow: yellow EMPTY red redyellow | agree with the exact table: 4 of 4 bowtie: corners at w=4 left by the shadow: 4 234 2 EMPTY | agree with the exact table: 4 of 4 flower: corners at w=4 left by the shadow: 1 2 EMPTY 1 | agree with the exact table: 4 of 4'; with the fault planted ('' → '--fault') it printed 'strip: corners at w=4 left by the shadow' — it fires
+  ok    stop-exact: printed 'flower: p=(0.00000,0.00000) x=(0.86603,-0.50000) y=(0.86603,0.50000) w=x+y-p=(1.73205,0.00000) flower: kept-tiles=8 labels=6 cells-proved-empty=in/out EXCLUDED disk: p=(-0.50000,0.16246) x=(-1.50000,0.16246) y=(-0.80902,1.11352) w=x+y-p=(-1.80902,1.11352) disk: kept-tiles=6 labels=6 cells-proved-empty=out/out EXCLUDED strip: p=(0.00000,0.00000) x=(-0.25000,0.96825) y=(0.50000,0.86603) w=x+y-p=(0.25000,1.83427) strip: kept-tiles=6 labels=6 cells-proved-empty=out/out EXCLUDED bowtie: p=(0.00000,0.00000) x=(0.86603,-0.50000) y=(0.86603,0.50000) w=x+y-p=(1.73205,0.00000) bowtie: kept-tiles=10 labels=6 cells-proved-empty=in/out,out/in EXCLUDED horn: q=e(-30)+t*e(300), t=1/4: outside-S(p)=True outside-S(e(-90))=True outside-S(e(30))=True inside-the-cut=True strictly-outside-S(w)=True HORN WITNESS OK'; with the fault planted ('' → '--fault') it printed 'flower: p=(0.00000,0.00000) x=(0.86603,-' — it fires
+  ok    partners-held: printed 'strip: pairs=54 both=17 one=37 distances={0.7569: 34, 1.732: 10, 1.9364: 10} partners-histogram={2: 12, 3: 28} points=10 pairs-per-point={2: 1, 5: 1, 8: 8} unsaved-point-at-distance={0.5: 1, 1.0: 2, 1.851: 34} (tautology, not evidence: completions=17/17) disk: pairs=20 both=0 one=20 distances={0.9416: 8, 0.9417: 2, 1.1755: 8, 1.1756: 2} partners-histogram={1: 10, 2: 15} points=5 pairs-per-point={4: 5} unsaved-point-at-distance={1.618: 10, 1.764: 8, 1.765: 2} (tautology, not evidence: completions=0/0) kept: pairs=3 both=3 one=0 distances={1.0: 3} partners-histogram={1: 3, 3: 1} points=3 pairs-per-point={2: 3} unsaved-point-at-distance={} (tautology, not evidence: completions=3/3)'; with the fault planted ('' → '--fault') it printed 'strip: pairs=0 both=0 one=0 distances={}' — it fires
+  ok    rings-held: printed 'sixfrag: labels=6 members=13 centres=7 covering-pairs=24 on-a-ring=18 inside=42[L2:42] violations=0 not-inside=6[L1:6] least=1.7321:1 stop-class=L1:6 disk: labels=6 members=30 centres=5 covering-pairs=40 on-a-ring=40 inside=60[L2:60] violations=0 not-inside=20[L0:20] least=1.618:5 stop-class=L0:10 bowtie: labels=6 members=11 centres=7 covering-pairs=24 on-a-ring=20 inside=34[L2:34] violations=0 not-inside=14[L1:10,L2:4] least=1.7321:1,1.9319:4 stop-class=L1:6,L2:4'; with the fault planted ('' → '--fault') it printed 'sixfrag: labels=6 members=13 centres=7 c' — it fires
+  ok    rings-strip: printed 'strip: labels=6 members=50 centres=10 covering-pairs=71 on-a-ring=54 inside=105[L2:105] violations=0 not-inside=37[L0:34,L2:3] least=0.5:1,1.0:2,1.8512:6 stop-class=L0:24,L2:3'; with the fault planted ('' → '--fault') it printed 'strip: labels=6 members=50 centres=10 co' — it fires
+  ok    rings-small: printed 'T2: labels=6 members=4 centres=2 covering-pairs=2 on-a-ring=1 inside=4[L2:4] violations=0 not-inside=0[] least=none stop-class=none S1: labels=6 members=2 centres=0 covering-pairs=1 on-a-ring=0 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none MX: labels=6 members=4 centres=2 covering-pairs=1 on-a-ring=1 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none BB: labels=6 members=4 centres=2 covering-pairs=1 on-a-ring=1 inside=2[L2:2] violations=0 not-inside=0[] least=none stop-class=none kept: labels=6 members=7 centres=3 covering-pairs=6 on-a-ring=3 inside=12[L2:12] violations=0 not-inside=0[] least=none stop-class=none'; with the fault planted ('' → '--fault') it printed 'T2: labels=6 members=4 centres=2 coverin' — it fires
+  warn  C136-CLASS: two-way statement with controls on one direction only — a control that reads one direction passes a fault on the other
+  controls: 16  fired on their faults: 16
+GATE: PASS (0 failures, 2 warnings)
+exit=0

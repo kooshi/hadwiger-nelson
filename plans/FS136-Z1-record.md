@@ -97,3 +97,58 @@ graded as the note's source grades it (derived from C136-TABLE, one mind), with 
 from the first round's exact check (Stage 2). **Not entered**: the six-corner form of 18 (c) — its deriver's *not claimed*
 line names the six corners (`W, t1, V′, T2` at `q₂`; `V, T1` at `q₁`) and its class line says "eight (six of them used)";
 the derivation file quotes those words under the entry and mints no statement from them.
+
+## Stage 2 — SAVED: the derivation file, `plans/FS136-derivation.md`
+
+**Built by script** (`data/fs136/z1/build_derivation.py`; `--check` compares the file with what the script writes): the
+twenty `derivation:` blocks and fifteen `control:` blocks of the two records copied character for character — the one
+change being that an `argument: § …` or `converse: § …` address gains its record's file name — and one entry and one
+control of this job's own (C136-STOP-BOWTIE-SIX, `bowtie-six`), written in the script and marked in the file. The script
+fails if a block of either record is not placed; none is left out.
+
+**Its order** — seven sections, each a chain:
+
+| § | head | corollaries and what stands beside it |
+|---|---|---|
+| 1 The table at a point, and the two counts | C136-TABLE | C136-COVER (two members), C136-ONE (one member) — each "on labels", the posed forms being its cases with a conclusion one region cut along the circle meets |
+| 2 The forward step | C136-FORCED (over C136-TABLE and the lemmas C136-CORNERS, C136-CLASS) | C136-CLOSE (the step chained); C136-COLLAR (the step at one member along an arc) |
+| 3 Three closures, computed | — instances of C136-CLOSE on named corners | C136-CLOSE-R7 (a calibration at seven), -FLOWER, -STRIP; each "computed over" its named set, exact |
+| 4 The four held stops | C136-STOP-GERMS (strip, disk, bowtie fragment, by corners) with -RADIUS; C136-STOP-FLOWER-GERMS | C136-STOP-STRIP, -DISK, -BOWTIE, -FLOWER (whole tiles), each a corollary; **C136-STOP-BOWTIE-SIX and C136-STOP-GERMS (c): neither contains the other**; C136-STOP-STRIP against FS-124's C124-EDGE-CLOSED: neither contains the other |
+| 5 The bound on partners | C136-PARTNERS | its grade said whole: over C124-BOTH's second clause, in the kernel on a branch for arc-edged decompositions only |
+| 6 The reading | C136-RINGS-READ (four points, exact) | the reading's table, quoted: [tools], floats, one mind — on which objects, and what was exact; the asking lane's second reading by germs, [tools] |
+| 7 What this file does not hold | — | nine items, from the entries' own *not claimed* lines |
+
+**Checks.**
+
+- **The gate**: `python3 ../.claude/skills/ephodos/scripts/derive_gate.py all FS136-derivation.md`, from `plans/`, under the
+  slot (it ran past two minutes: sixteen controls, each twice) — **exit 0: "entries: 21 derived: 21"; "controls: 16 fired
+  on their faults: 16"; "GATE: PASS (0 failures, 2 warnings)"** (`data/fs136/z1/gate-FS136-derivation.txt`). Both warnings
+  are the source records' own, carried with the copied blocks: C136-RINGS-READ's grade "states no set" by the gate's
+  reading (the set is the four points its statement names), and C136-CLASS is two-way with a control read as one direction
+  (its eleven corners include both).
+- **Every quoted phrase of the file's prose is in a source**: `data/fs136/z1/prose_quotes.py plans/FS136-derivation.md` —
+  "quoted fragments=112 not-found=0"; with one character of the first fragment altered it reports that fragment. (Its
+  first run reported five: three changes of a capital letter or a backtick, one quotation joined across an elision, and
+  one that cut "TRUE … [kernel, on a branch];" out of the implementer's sentence. Each was put right in the script
+  before the file was kept.)
+- **The record job's entry.** C136-STOP-BOWTIE-SIX's statement is the one the first deriver's dated note names; its
+  witnesses were read from the exact check's own lines (`stop_check.py bowtie`, step 3): `L2` (6), `T2` (2), `V′` (5),
+  `t1` (1) at `q₂` each have a witness strictly outside the unit circle about `(√3, 0)`; `T1` (4), `W` (3) at `q₁` each
+  have one strictly inside; so in the cell inside `S(q₂)` and outside `S(q₁)` every label is barred, by C136-TABLE with
+  those two families. Control `bowtie-six` (`data/fs136/z1/bowtie_six.py`) prints "… labels=6
+  barred-in-the-cell(in S(q2), out S(q1))=6 left=[] EXCLUDED"; with the fault (the point moved by `(1/50, 0)`) "step1=False
+  … NOT SHOWN"; and with any one of the six left out (`--drop=`) the cell keeps exactly that tile's label. **Its count of
+  minds is the note's: one.** My reading of another job's exact output is a check, not a derivation.
+
+**What I decided, and why** (the brief's "yours to decide"). *Heads*: the germ forms head the stops, because a colouring
+that keeps a tile keeps its part near the member — the whole-tile entries follow from them and not conversely. *The
+bowtie fragment*: three statements, because two are incomparable (six whole tiles; eight germs) and the first round's
+eight-tile entry follows from each. *The collar*: placed under the forward step, not in a section of its own — it is that
+step at one member. *The reading*: one entry (four exact points) and a quoted table marked [tools]. *Not entered*: the
+six-corner form at the bowtie fragment (quoted from its deriver's *not claimed* line), the two remarks under C136-CLOSE
+(refinement; no overlap), the first-order remark under the count (arcs of at most 180°) — each is its deriver's prose, not
+a statement with a verdict.
+
+**No grade and no count of minds was raised.** One is **said more fully than its field**: C136-PARTNERS — its `grade:`
+field is "hand", and the file says under it, in its deriver's words and the kernel lane's, what that hand argument stands
+on.
