@@ -1,0 +1,10 @@
+@radius_up : ∀ {k : ℕ},
+  (∀ R > (0 : ℝ), ∃ (c : ℂ → Fin k), IsWeakColouringOn (Metric.ball (0 : ℂ) R) c) →
+    (∀ (V : Set ℂ), V.Finite → (SimpleGraph.induce V (unitDistance ℂ)).Colorable k) ∧
+      (unitDistance ℂ).chromaticNumber ≤ ↑k
+@radius_down : ∀ {k : ℕ},
+  (unitDistance ℂ).chromaticNumber ≤ ↑k → ∀ (U : Set ℂ), IsOpen U → ∃ (c : ℂ → Fin k), IsWeakColouringOn U c
+@colorable_iff_forall_ball : ∀ {k : ℕ},
+  (unitDistance ℂ).Colorable k ↔ ∀ R > (0 : ℝ), ∃ (c : ℂ → Fin k), IsWeakColouringOn (Metric.ball (0 : ℂ) R) c
+seven_le_chromaticNumber_plane_iff_exists_ball : (7 : ℕ∞) ≤ (unitDistance ℂ).chromaticNumber ↔
+  ∃ R > (0 : ℝ), ¬∃ (c : ℂ → Fin (6 : ℕ)), IsWeakColouringOn (Metric.ball (0 : ℂ) R) c

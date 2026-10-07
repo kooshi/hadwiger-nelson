@@ -110,7 +110,7 @@ other warning (`data/fs124/i1/logs/build-0-as-given.log`).
 every constant the three modules declare, its kind, its full name, `Expr.hash` of its stored type, `Expr.hash` of its
 value where it is a definition, and the type pretty-printed: 74 constants (64 theorems — the 57 leaves and seven the
 elaborator generates — 7 definitions, the structure with its constructor and recursor), in
-`data/fs124/i1/statements-before.txt`. Stage 3 prints the same from the build after the last leaf and compares
+`data/fs124/i1/statements-before.txt`. Stage 2 prints the same from the build after the last leaf and compares
 (`data/fs124/i1/statements_check.py`): "no statement changed" is then a check on stored terms, not on the files' text.
 
 **The iteration instrument** (never evidence): `data/fs124/i1/iter.sh <file> [keep]` elaborates one file against an
@@ -257,3 +257,201 @@ decided hypotheses; `rests` 18 → 23 and the other eight counts unchanged
 `scripts/Assumptions.lean`** — neither `AeProperOn` nor `IsWeakColouringOn` is read as an undeclared former (each is
 concluded by theorems with no assumption: `aeProperOn_of_proper`, `AeColouring.isWeakColouringOn`), and no hypothesis
 of the 57 statements is closed. The landing's `--write-ledger` adds the five rows.
+
+## Stage 4 — SAVED (FS124-I1): the four statements read aloud, the scan of the statements, the price, the drafts
+
+### 4.1 Read aloud
+
+Each statement below is the stored one, every binder's type shown (`data/fs124/i1/lean/ReadAloud.lean`, output
+`data/fs124/i1/read-aloud-signatures.txt`), read against the claim's words.
+
+**`radius_up`** against
+
+> **C124-RADIUS-UP** — statement: For every integer k ≥ 1: if for every R > 0 the open disc of radius R about the origin has a weak measurable k-colouring, then every finite unit-distance graph in the plane has a proper k-colouring, and χ(ℝ²) ≤ k.
+> — source: data/fs124/claims-K1.md
+
+```
+@radius_up : ∀ {k : ℕ},
+  (∀ R > (0 : ℝ), ∃ (c : ℂ → Fin k), IsWeakColouringOn (Metric.ball (0 : ℂ) R) c) →
+    (∀ (V : Set ℂ), V.Finite → (SimpleGraph.induce V (unitDistance ℂ)).Colorable k) ∧
+      (unitDistance ℂ).chromaticNumber ≤ ↑k
+```
+
+Aloud: *for every natural number `k`: if for every real `R > 0` there is a measurable function from the plane to `k`
+labels whose monochromatic unit pairs with both ends in the open disc of radius `R` about `0` are a null set of pairs
+(point, direction), then the graph on every finite set of points of the plane, with an edge wherever two of them are
+at distance 1, has a proper colouring with `k` colours, and the chromatic number of the plane's unit-distance graph is
+at most `k`.*
+
+- "every integer k ≥ 1" — `{k : ℕ}` with no `1 ≤ k`: there is no `c : ℂ → Fin 0`, so at `k = 0` the hypothesis fails
+  at every `R` and the statement says nothing; the claim's range is all the statement says.
+- "the open disc of radius R about the origin" — `Metric.ball (0 : ℂ) R`, `R > 0`.
+- "has a weak measurable k-colouring" — `∃ c : ℂ → Fin k, IsWeakColouringOn (ball 0 R) c`: `c` measurable, and
+  `(volume ⊗ arcLength) {(x, θ) | x ∈ U ∧ x + e θ ∈ U ∧ c x = c (x + e θ)} = 0`. The list's own words — "a measurable
+  map `c` from `U` to `k` labels with `c(z) ≠ c(z + u)` for almost every pair of a point `z` of `U` and a unit vector
+  `u` with `z + u` in `U`" — are `aeProperOn_iff_ae` for the second clause, and for a map on `U` itself
+  `exists_isWeakColouringOn_iff_subtype` (a disc is measurable; `k ≥ 1` there is `[NeZero k]`). Both are now proved.
+- "every finite unit-distance graph in the plane has a proper k-colouring" — the graph on a finite `V` with *all* its
+  unit pairs as edges is `k`-colourable; a finite unit-distance graph drawn on those points is a subgraph of it.
+- "χ(ℝ²) ≤ k" — `(unitDistance ℂ).chromaticNumber ≤ (k : ℕ∞)`, the number `chromaticNumber_plane_eq_complex` equates
+  with row 33's over `EuclideanSpace ℝ (Fin 2)`.
+- Not said, as the list's not-claimed line asks: no radius, no converse, nothing about whether the hypothesis holds at
+  six. **No import**: the standard three, as printed. The file's `example` runs it on R7 and gets `χ(ℝ²) ≤ 7`.
+
+**`radius_down`** against
+
+> **C124-RADIUS-DOWN** — statement: For every integer k ≥ 1: if χ(ℝ²) ≤ k, every open set of the plane has a weak measurable k-colouring.
+> — source: data/fs124/claims-K1.md
+
+```
+@radius_down : ∀ {k : ℕ},
+  (unitDistance ℂ).chromaticNumber ≤ ↑k → ∀ (U : Set ℂ), IsOpen U → ∃ (c : ℂ → Fin k), IsWeakColouringOn U c
+```
+
+Aloud: *for every natural number `k`: if the chromatic number of the plane's unit-distance graph is at most `k`, then
+every open set `U` of the plane has a measurable function from the plane to `k` labels whose monochromatic unit pairs
+inside `U` are null.* Word for word. "k ≥ 1" is no hypothesis because `χ(ℝ²) ≤ 0` is false. The proof gives more than
+is said — one colouring for every set, open or not (`exists_isWeakColouringOn_of_colorable`) — and the statement keeps
+the claim's "open". **It rests on `Outside.OAI158.proper_to_borel_weak`** and the standard three, as printed, and the
+list's not-claimed line says so: "anything without that import". The file's `example` runs it at `k = 7`.
+
+**`colorable_iff_forall_ball`** — the join, not a line of the claim list (kept by the coordinator's ruling; `main`'s
+copy of the list names it in its dated line):
+
+```
+@colorable_iff_forall_ball : ∀ {k : ℕ},
+  (unitDistance ℂ).Colorable k ↔ ∀ R > (0 : ℝ), ∃ (c : ℂ → Fin k), IsWeakColouringOn (Metric.ball (0 : ℂ) R) c
+```
+
+Aloud: *for every `k`, the plane has a proper `k`-colouring exactly when every open disc about the origin has a weak
+`k`-colouring.* `→` is C124-RADIUS-DOWN at the discs, **on the import**; `←` is C124-RADIUS-UP, **with no import**
+(Stage 2's table: each half printed apart).
+
+**`seven_le_chromaticNumber_plane_iff_exists_ball`** against the brief's sentence — "`7 ≤ χ(ℝ²)` if and only if some
+disc about the origin has no weak six-colouring" (`data/fs124/briefs/FS124-I1-radius.md` § Why this job):
+
+```
+seven_le_chromaticNumber_plane_iff_exists_ball : (7 : ℕ∞) ≤ (unitDistance ℂ).chromaticNumber ↔
+  ∃ R > (0 : ℝ), ¬∃ (c : ℂ → Fin (6 : ℕ)), IsWeakColouringOn (Metric.ball (0 : ℂ) R) c
+```
+
+Aloud: *the plane's unit-distance graph needs at least seven colours exactly when there is a radius `R > 0` such that
+no measurable function from the plane to six labels has its monochromatic unit pairs inside the open disc of radius
+`R` about `0` null.* No binder, no hypothesis. With row 33's `χ(ℝ²) ≤ 7` the left side is `χ(ℝ²) = 7`. "About the
+origin" costs nothing: `exists_isWeakColouringOn_ball_iff` moves a disc to any centre.
+
+**Which half needs the import, as its docstring says — and as the kernel prints.**
+- `→`, *seven gives a disc with no weak six-colouring*: the contrapositive of C124-RADIUS-UP,
+  `exists_radius_of_not_colorable` at `k = 6`. **No import** — proved apart, it prints `[propext, Classical.choice,
+  Quot.sound]`. It also says more than this half: at that radius no disc at any centre has even a non-measurable
+  six-colouring proper at almost every unit pair.
+- `←`, *a disc with no weak six-colouring gives seven*: the contrapositive of C124-RADIUS-DOWN. **On
+  `Outside.OAI158.proper_to_borel_weak`** — proved apart, it prints the standard three and that axiom.
+  `no_proper_five_coloring` is not used by either half.
+
+So for the milestone's consumers: **an exclusion on one disc reaches `χ(ℝ²) = 7` only through the release's transfer;
+weak six-colourings of every disc reach `χ(ℝ²) ≤ 6` on this library's own three axioms.** The docstring's sentence is
+the proof's shape: the theorem is proved half by half from the two lemmas it names.
+
+### 4.2 The statements under the vacuity scan (run to read; the landing's to gate)
+
+`./scripts/vacuity.sh` under the slot: exit 0, `vacuity: OK` — `declarations=14923 refutations-skipped=215 sites=1448`,
+`vacuous=0 stale=0 declared=3 witnessed=38 generic=1405 unknown=2` (`data/fs124/i1/logs/vacuity-sh.txt`). Against the
+recorded counts: declarations +78, sites +1, generic +1, nothing else. **Reconciled**: the scan's own count by module
+(`data/fs131/l5/count-modules.lean`, its three lines and total in `data/fs124/i1/logs/count-three-modules.txt`) gives
+`Plane/WeakColouringOn` 50, `Plane/Radius` 16, `Plane/RadiusOutside` 12 — 78 — and total 14923. The one new site is
+`AeColouring.isWeakColouringOn :: AeColouring k`, read GENERIC: a binder over colourings of the plane at a free `k`
+(inhabited at seven and nine: `r7_aeColouring`, `sq9`). No statement of the three modules is a refutation the scan
+skips, and none takes a structure whose carrier an import empties — the planner's § 3.5 warning stands for *later*
+theorems: one that assumes a weak **five**-colouring of a large disc assumes nothing, given `radius_five`.
+
+### 4.3 The price, as measured
+
+| measured | value | what it measures |
+|---|---|---|
+| leaves proved | 49 of 49 (27 + 14 + 8) | by count; with the planner's eight, 57 of 57 |
+| lines of proof | 204 added (111 + 60 + 33) for 49 `sorry` lines removed | `git diff --numstat` over the three files; the plan said about 185 |
+| longest proofs | `measurePreserving_motionMul_left` 14 lines, `aeProperOn_of_proper_off_null` 13 | the plan's bound was 15 |
+| attempts | one retry on one leaf; 48 leaves as first written | § Stage 2, departure 1 |
+| iteration runs | about nine of `lean` on one file, 2–3 s each | against the overlay; not evidence |
+| builds under the slot | 2: as given (2 s, nothing to build), proved (8m40s, 4 modules) | the walk over 476 batches, not the modules |
+| other runs under the slot | `dupnames` 1, `lake lint` 1, `axioms.sh` 3 (one planted), `assumptions.sh` 1, `vacuity.sh` 1, the module count 1 | each under a minute but the vacuity scan (about two) |
+| wall clock, launch to this stage | about half an hour, 9 minutes of it the build | 14:42 to 15:13 UTC, the reading included |
+
+The planner priced it at "well under an hour of work and two or three builds"; it took one build that compiled anything,
+and about half the hour.
+
+### 4.4 What this job ran of the gate, and what it did not
+
+Ran, on this branch as it stands: the build; the `sorry` scan; `scripts/axioms.sh` with a planted control on the
+block; `scripts/dupnames.sh`; `tools/check_architecture.py`; the guarded lint; `scripts/assumptions.sh` and
+`scripts/vacuity.sh`, each once, to read counts for the drafts below. **Not run**: any `--self-test` (axioms, dupnames,
+assumptions, vacuity), `--write-ledger`, `lean4checker`, `regen-check`; nothing on the joined tree, which is where the
+landing's gate counts. The brief keeps the full gate for the landing.
+
+## Drafts for the front page
+
+*Each names its slot. Counts are measured on `fs124-wk1` (cut from `main` at `596100d4`), where the recorded base is
+`main`'s current one (6533 clean, 18 imported; `rests=18`; `declarations=14845`). If the landing now in flight moves
+`main`'s base, the deltas are what transfers: **clean +52, imported +5, records +57; `rests` +5; declarations +78,
+sites +1, generic +1.***
+
+1. **`CLAUDE.md` § Trust ledger**, replacing "the current audit reads 6533 clean and 5 declared purchases, and 18
+   imported (and 20 axiom-free; 6,576 records at the landing of FS-132's import, FS132-L1, 2026-10-07)":
+   "the current audit reads 6585 clean and 5 declared purchases, and 23 imported (and 20 axiom-free; 6,633 records at
+   the landing of FS-124's radius clause, 2026-10-07)". In the next sentence, "`Outside.OAI158.no_proper_five_coloring`
+   … with five, and `Outside.OAI158.proper_to_borel_weak` … with five" becomes "with six" and "with nine"; "no record
+   rests on two of the three" stays true (checked: no record of the 57 carries both).
+2. **`CLAUDE.md` § Trust ledger**, the nine counts: `rests=18` becomes `rests=23`, and "with eighteen theorems resting
+   on them" becomes "twenty-three"; the other eight are unchanged. No hypothesis is added, in either form.
+3. **`CLAUDE.md` § The gate**, the vacuity counts: `declarations=14923 refutations-skipped=215 sites=1448`,
+   `vacuous=0 stale=0 declared=3 witnessed=38 generic=1405 unknown=2`. The baseline's two entries are unchanged.
+4. **`CLAUDE.md` § Where the problem stands**, after the sentence on `seven_le_chromaticNumber_plane_iff` — the
+   planner's draft (`plans/FS124-kernel-plan.md` § 4.4, first item) stands word for word; each of its claims about
+   axioms is now a printed line (Stage 2).
+5. **`LEDGER.md`, a new row** (none holds the radius clause: `rg C124-RADIUS LEDGER.md` on `main` finds nothing; the
+   number is Keryx's): "**A weak colouring of one open set colours every finite unit-distance graph inside it, by
+   almost every rigid motion; so the plane's chromatic number is read on discs** [kernel]. For `c` proper at almost
+   every unit pair of an open `U` — no measurability — and a countable `V`, almost every rigid motion gives different
+   labels to every two points of `V` at distance 1 that it carries into `U` (`Plane.AeProperOn.ae_rigidMotion`); with
+   compact closure carried into `U`, one motion does (`Plane.AeProperOn.exists_rigidMotion`). C124-RADIUS-GRAPH
+   `Plane.radius_graph`, -COUNTABLE `Plane.radius_countable`, -UP `Plane.radius_up` (weak `k`-colourings of every disc
+   about `0` give `χ(ℝ²) ≤ k`; any centres, any regularity: `Plane.colorable_plane_of_forall_aeProperOn_ball`), each
+   on the standard three axioms. On the declared outside theorem `Outside.OAI158.proper_to_borel_weak`: -DOWN
+   `Plane.radius_down`, and the join `Plane.colorable_iff_forall_ball`,
+   `Plane.seven_le_chromaticNumber_plane_iff_exists_ball` — `7 ≤ χ(ℝ²)` exactly when some open disc about `0` has no
+   weak six-colouring; *seven gives such a disc* needs no import (`Plane.exists_radius_of_not_colorable`), *such a
+   disc gives seven* needs that one. On `Outside.OAI158.no_proper_five_coloring`: -FIVE `Plane.radius_five`; its
+   sentence at four colours with no import, `Plane.exists_radius_no_weak_four`. `Proofs/HadwigerNelson/Plane/`
+   `WeakColouringOn`, `Radius`, `RadiusOutside`; FS-124 (FS124-E1 derived, FS124-K1 planned, FS124-I1 proved)."
+   Assumptions, by name: none in hypothesis form; the two axioms above, each for the records named.
+6. **`CLAUDE.md` § Frontier, "Last filed"** — once the landing's gate passes: "the landing of FS-124's radius clause
+   (FS124-I1: `Plane/WeakColouringOn`, `Plane/Radius`, `Plane/RadiusOutside` through the gate — the plane is
+   `k`-colourable exactly when every disc about the origin has a weak `k`-colouring, `7 ≤ χ(ℝ²)` exactly when one disc
+   has no weak six-colouring; the first three claims on the standard three axioms, the join on
+   `proper_to_borel_weak`)".
+7. **The Proof Atlas**, grade changes at the landing: C124-RADIUS-GRAPH, -COUNTABLE, -UP from derived to [kernel]
+   (standard three); C124-RADIUS-DOWN to [kernel] on the declared outside theorem `proper_to_borel_weak`;
+   C124-RADIUS-FIVE to [kernel] on `no_proper_five_coloring`. On this branch today, not on `main`.
+8. **`ARCHITECTURE.md` § 5 Trust**, the third column of the two rows of `Outside/OAI158`'s axioms: to
+   `no_proper_five_coloring`'s records add `Plane.radius_five`; to `proper_to_borel_weak`'s add
+   `Plane.exists_isWeakColouringOn_of_colorable`, `Plane.radius_down`, `Plane.colorable_iff_forall_ball`,
+   `Plane.seven_le_chromaticNumber_plane_iff_exists_ball`. The three module rows (the planner's) need only their job
+   tag widened: "(job FS124-K1)" to "(planned by FS124-K1, proved by FS124-I1)".
+9. **`scripts/Axioms.lean`**, the IMPORTED section's prose, "with five and five (the fifth on the transfer is
+   FS132-L1's)": "with six and nine (the fifth on the transfer is FS132-L1's; one and four are FS124-I1's)". Not
+   changed by this job: it is outside the block.
+10. **`scripts/assumptions-ledger.txt`**: `./scripts/assumptions.sh --write-ledger` adds five rows —
+    `RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Plane.radius_five` and
+    `RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak` with each of
+    `HadwigerNelson.Plane.colorable_iff_forall_ball`, `…exists_isWeakColouringOn_of_colorable`, `…radius_down`,
+    `…seven_le_chromaticNumber_plane_iff_exists_ball` — and its header's `rests=18` becomes `rests=23`.
+    **`scripts/Assumptions.lean`: no line.**
+11. **`scripts/vacuity-baseline.txt`**, the header's counts: as in draft 3.
+12. **`LEAN.md` § Searching — Lean**, one line: "A `#check` under `import Mathlib` shows that a name exists at the pin,
+    not that a module can see it: check a route's names under the module's own imports. `rotation`
+    (`Mathlib.Analysis.Complex.Isometry`) is outside `Plane/AeColouring`'s closure; multiplication by a unit complex
+    number is a real-linear isometry with no new import as `⟨(LinearEquiv.smulOfUnit (Units.mk0 a ha)).restrictScalars
+    ℝ, _⟩`, and `LinearIsometryEquiv.measurePreserving` is in the closure (FS124-I1)." The planner's two `LEAN.md`
+    drafts (its § 4.4) stand: `QuasiMeasurePreserving.preimage_null` carried every null-set step here with no
+    measurability asked.
