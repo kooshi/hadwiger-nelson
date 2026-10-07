@@ -3,7 +3,8 @@
 *Record of the implementer (de Bruijn, Opus 5.5). Brief: `data/fs132/briefs/FS132-I2-port.md` on `main` at `dcf89464e`.
 Branch `fs132-wi2`, cut from `fs132-wk1` at `e3695302c`; worktree `.claude/worktrees/fs132-wi2`. Working files:
 `data/fs132/i2/`. Tools: `tools/fs132_i2_port.py` (the generator and its check), `tools/fs132_i2_readback.py` (the
-ported statements and definitions against the release's, as the kernel stores them at the two pins). The outside
+ported statements and definitions against the release's, as the kernel stores them at the two pins),
+`tools/fs132_i2_axioms.py` (the ported declarations' axioms, as sets, with controls). The outside
 clone (`/home/kooshi/source/math`, commit `adc7f1241b42e322a6451854ab7e4b4c146bf78a`) and the audit's compiled copy
 (`~/.cache/ext-oai1/lean`) were read; nothing was written into either.*
 
