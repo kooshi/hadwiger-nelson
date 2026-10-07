@@ -15,6 +15,10 @@ of χ(ℝ²).** The kernel lane's state on 2026-10-07: the five entries of § 1'
 are being planned blind on branch `fs124-wk2`; the rest have no kernel job. **A second mind is owed on C124-LONE's Step II**, by its
 deriver's own line, before what rests on it is built on outside this milestone (§ 3).
 
+*Dated 2026-10-07 (FS-136's record job, FS136-Z1; the paragraph above is left standing): the second mind asked for in its
+last sentence has looked, and the step has passed the kernel on a branch in the planner's statement of it — the dated
+paragraph under C124-LONE, § 3. No grade moves.*
+
 ## How to read this file
 
 **Order.** Each section is a chain: its head is the strongest form, and the entries under it marked *corollary* are its weaker
@@ -388,6 +392,23 @@ own line — "before C124-BOTH, C124-FOUR or C124-EDGE-CLOSED is built on outsid
 module is that mind, blind first. *The record job's reading of the `uses only:` lines*: C124-BOTH, C124-FOUR and C124-SECOND rest
 on this entry; C124-EDGE-CLOSED does not. **What rests on it**: those three. **Kernel**: second module.
 
+*Dated 2026-10-07, filed by FS-136's record job (FS136-Z1; sources: `plans/FS124-close-inventory.md` items 33 and 41–42;
+the paragraph above is left standing).* **The step its deriver flagged has had its second look, and has passed the kernel
+on a branch in the planner's statement of it.** *The second look* (item 33): the kernel planner of the second module
+"reached the statement **blind, by the same route, dated by its commit before it read the first** — and then read the
+first sentence by sentence"; its words: "my route IS its, and the step stands as written"; "I did not find an error. One
+mind's reading of another's argument; the kernel will be the check that counts." What it found implicit, "none of it a
+gap", and its two notes for the author — the bound "with `η ≤ 1`", and that the step's real hypothesis "is not 'the other
+member does not separate' but the half-window it produces" — stand as a dated correction under the step in
+`plans/FS124-E2-derivation.md` (16:33 UTC). *The kernel* (items 41–42): C124-LONE is `closePair_lone`, on
+`[propext, Classical.choice, Quot.sound]`, kernel-checked on branch `fs124-wi3` and **not through the gate**; "C124-LONE's
+Step II is in the kernel as three named theorems." *What was not checked*, in those items' words: by the coordinator,
+"its read-aloud; the build logs"; and by the implementer, "What is not shown: that the four claims' hypotheses are
+inhabited" — "until they land, non-vacuity is the planner's two sampled witnesses, [measured]". *What it does to the
+grade*: nothing yet — "C124-LONE, C124-BOTH and C124-FOUR stay '[hand], one mind, kernel pending'" (item 33) until the
+module lands. And for whoever builds on C124-BOTH's second sentence (FS-136's C136-PARTNERS does): that clause is "TRUE
+for arc-edged decompositions [kernel, on a branch]; GAP for the list's sector points at one named step" (item 42).
+
 derivation: C124-LONE-EXISTS
   statement: There is a weak six-colouring of an open set U, by formula, with a close complementary pair (x, y) of three-piece points and a common unit point w of the pair in U at which y does not separate.
   uses only: fragment S1 of FS110-FRAGS (`tools/fs110_y_fragments.py`; valid by FS110-Y's exact checker: control `seam-fragments` of `plans/FS132-derivation.md` § 4 prints ACCEPT for S1); the band β_u of C124-FORCED-AS-POSED's argument, which S1's bowtie admits unchanged (the same four tiles at u, label 1 repeated, no label 1 elsewhere)
@@ -698,6 +719,25 @@ Between those two sentences the stage lists what breaks the statement elsewhere:
 model, BB and S1; a point saved with no edge on its circle (BB); a point saved by one member alone (S1, by the bowtie); and tight
 arcs of kind both that are no edge of a save (SIXFRAG 18 of 18, S1 4 of 4, the disk 5 of 20). Its controls are entered in § 3
 (`saves-fragments`, `saves-r7`, `saves-lone`, `saves-maps`) and § 6 (`seven-exact`).
+
+*Dated 2026-10-07, filed by FS-136's record job (FS136-Z1; sources: `plans/FS136-E1-derivation.md` § 6.3 item 5; FS-136
+inventory item 6, ruling (b); this job's comparison, `data/fs136/z1/saves_compare.py`, output `saves_compare.out`; the
+section above is left standing).* **A suspected defect of this reading's reader was examined: no count moves.** The
+reader (`data/fs124/e2/saves_read.py`) rounds every vertex to nine decimals and tests "an edge lies on the circle" at
+`10⁻⁹`; the same rounding, in a copy of it made by FS-136's first deriver, produced 2,296 false violations on the disk
+(in that copy's own side test, repaired there before any count was kept). Re-run beside a copy with vertices kept at
+full precision (`data/fs136/z1/saves_read_repaired.py`; the original is left as it is) on all eleven objects of the table
+above — the strip, the disk, the capped strip, T2, BB, S1, MX, FS116-Y2-SIXFRAG, the kept model, R7 and the honeycomb at
+2/5 — **the copy's line equals the original's on 11 of 11**. So every count of the table above stands, and so does every
+count ledger row 163 quotes from it: 71, 20 and 71 common unit points of pattern (1, 1) with exactly four labels on the
+strip, the disk and the capped strip; two edges of one member on T2, MX and the kept model; none on BB; the bowtie alone
+on S1; eighteen arcs of kind both and no close complementary pair on FS116-Y2-SIXFRAG. *Controls of the comparison*: with
+the repair switched off the copy reproduces the original on 11 of 11; with vertices rounded to six decimals in place of
+nine the lines move (the disk reads pattern (0, 0) at all 20 points and no edge of a save; the kept model's patterns
+change: `saves_digits6.out`), so the comparison can see a rounding effect; the copy's planted fault changes its line on
+the 8 objects that have a common unit point to move and a pattern or a separation to lose. The rounding stays a defect of
+the reader for any later use at a tighter tolerance; it is reported for the tooling job, and the reader is not edited.
+**The grade of this section is unchanged: [tools], one mind; it proves nothing.**
 
 ## 8 What this file does not hold
 

@@ -19,7 +19,8 @@ entry that forces a region of definite extent (C136-COLLAR, § 2) starts from a 
 one, which somebody must supply. **The kernel lane's state on 2026-10-07**, said exactly: the disc criterion of the
 milestone before is held (FS124-L1, through the gate); the nine statements of that milestone's second module — among them
 the one-member form of this milestone's head statement, `ae_onSide_of_label` — are kernel-checked on a branch, not through
-the gate; **nothing of this milestone's own twenty-one is in the kernel**. One statement was reached by two jobs on one
+the gate; **nothing of this milestone's own twenty-one is in the kernel** (its kernel planner, FS136-K1, was
+launched blind at 19:20 UTC on seven of the statements). One statement was reached by two jobs on one
 route (§ 1): its count of minds is one.
 
 ## How to read this file
@@ -82,7 +83,8 @@ its deriver's words: "for maps nothing (FS110-N-SEAM (b)); in measure, beyond C1
 pieces and labels, labels repeated at a member, and the conclusion on labels." **What rests on it**: C136-COVER, C136-ONE,
 C136-FORCED (§ 2, its forward half), the five whole-tile exclusions and the flower's germ form (§ 4). **Kernel**: its
 one-member form is `ae_onSide_of_label`, kernel-checked on a branch in FS-124's second module, not through the gate; the
-statement over finitely many members is for this milestone's own module, unplanned.
+statement over finitely many members is for this milestone's own module, whose planner was launched, blind, while this file
+was being filed (FS136-K1; FS-136 inventory item 16).
 
 derivation: C136-COVER
   statement: Let c be a weak six-colouring of U, x, y points with 0 < |x − y| < 2, 𝒫_x, 𝒫_y families of pieces at x and at y such that each of the six labels is a label of 𝒫_x or of 𝒫_y, and w a point of U with |w − x| = |w − y| = 1. Then x or y separates at w by labels: one of the two families has a label all of whose pieces are inner at w and another label all of whose pieces are outer at w.

@@ -68,9 +68,9 @@
 
 *with:*
 
-> Its eight cases passed to its successor and are open. **Derived 2026-10-07: FS-136, the point across** (`plans/FS136-derivation.md`, 21 entries, each derived; [hand] or computed exactly over named corners, one mind each; rows 165–167; stub `plans/STUB-covering-pairs.md`): what the regions at the points one unit from a point force there, in a measurable colouring proper at almost every unit pair that has those regions — the table, the two counts, the four held stops by two vertex figures, the forward step with its closure, the collar — and whether any colouring has them is not its claim. Nothing of it is in the kernel. Its Lean phase would state first the head statement over finitely many members, the label form of the count, the one-point form and the forward step on a cell — each a few lines over `ae_onSide_of_label`, which is kernel-checked on a branch in FS-124's second module — and the collar and the exclusions only with a consumer; Closed when its module passes the gate. Its successor, **FS-137, collars** (`plans/STUB-collars.md`), is minted, unranked.
+> Its eight cases passed to its successor and are open. **Derived 2026-10-07: FS-136, the point across** (`plans/FS136-derivation.md`, 21 entries, each derived; [hand] or computed exactly over named corners, one mind each; rows 165–167; stub `plans/STUB-covering-pairs.md`): what the regions at the points one unit from a point force there, in a measurable colouring proper at almost every unit pair that has those regions — the table, the two counts, the four held stops by two vertex figures, the forward step with its closure, the collar — and whether any colouring has them is not its claim. Nothing of it is in the kernel: its planner (FS136-K1) is launched, blind, on seven statements — the head statement, the count for two members and for one, the two lemmas on corners, the forward step and the collar, the first four a few lines each over `ae_onSide_of_label`, which is kernel-checked on a branch in FS-124's second module; the closure and the exclusions go only with a consumer. Closed when its module passes the gate. Its successor, **FS-137, collars** (`plans/STUB-collars.md`), is minted, unranked.
 
-*Net change: +963 bytes.*
+*Net change: +998 bytes.*
 
 **Draft 8 — `CLAUDE.md`, § Paths forward, the ranked table, row 1 (the whole row).** *Replaces* (occurs once):
 
@@ -82,4 +82,4 @@
 
 *Net change: +364 bytes.*
 
-**`CLAUDE.md` in all: +2728 bytes — 65425 → 68153 of 80,000.**
+**`CLAUDE.md` in all: +2763 bytes — 65425 → 68188 of 80,000.**

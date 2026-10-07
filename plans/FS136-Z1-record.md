@@ -409,9 +409,9 @@ larger than its entry, the entry's statement is quoted in the row itself.*
 
 *with:*
 
-> Its eight cases passed to its successor and are open. **Derived 2026-10-07: FS-136, the point across** (`plans/FS136-derivation.md`, 21 entries, each derived; [hand] or computed exactly over named corners, one mind each; rows 165–167; stub `plans/STUB-covering-pairs.md`): what the regions at the points one unit from a point force there, in a measurable colouring proper at almost every unit pair that has those regions — the table, the two counts, the four held stops by two vertex figures, the forward step with its closure, the collar — and whether any colouring has them is not its claim. Nothing of it is in the kernel. Its Lean phase would state first the head statement over finitely many members, the label form of the count, the one-point form and the forward step on a cell — each a few lines over `ae_onSide_of_label`, which is kernel-checked on a branch in FS-124's second module — and the collar and the exclusions only with a consumer; Closed when its module passes the gate. Its successor, **FS-137, collars** (`plans/STUB-collars.md`), is minted, unranked.
+> Its eight cases passed to its successor and are open. **Derived 2026-10-07: FS-136, the point across** (`plans/FS136-derivation.md`, 21 entries, each derived; [hand] or computed exactly over named corners, one mind each; rows 165–167; stub `plans/STUB-covering-pairs.md`): what the regions at the points one unit from a point force there, in a measurable colouring proper at almost every unit pair that has those regions — the table, the two counts, the four held stops by two vertex figures, the forward step with its closure, the collar — and whether any colouring has them is not its claim. Nothing of it is in the kernel: its planner (FS136-K1) is launched, blind, on seven statements — the head statement, the count for two members and for one, the two lemmas on corners, the forward step and the collar, the first four a few lines each over `ae_onSide_of_label`, which is kernel-checked on a branch in FS-124's second module; the closure and the exclusions go only with a consumer. Closed when its module passes the gate. Its successor, **FS-137, collars** (`plans/STUB-collars.md`), is minted, unranked.
 
-*Net change: +963 bytes.*
+*Net change: +998 bytes.*
 
 **Draft 8 — `CLAUDE.md`, § Paths forward, the ranked table, row 1 (the whole row).** *Replaces* (occurs once):
 
@@ -423,7 +423,7 @@ larger than its entry, the entry's statement is quoted in the row itself.*
 
 *Net change: +364 bytes.*
 
-**`CLAUDE.md` in all: +2728 bytes — 65425 → 68153 of 80,000.**
+**`CLAUDE.md` in all: +2763 bytes — 65425 → 68188 of 80,000.**
 
 ### `plans/FRONTIER-STUBS.md`
 
@@ -600,3 +600,31 @@ and forced-tile literatures "recalled, not read" (nothing rests on them).
 **G87 lookout.** No invention signal. Three pairs looked like one and are not, each settled by the derivers with both
 sides kept: C124-BOTH against the two-label points (different classes of member); the stub's two controls at seven (a
 defect in one); the bowtie fragment's cells by whole tiles against its corner by germs (both hold).
+
+## Stage 8 — SAVED: the gates, the slips, where a successor takes over
+
+**The gates** (each from `plans/`; outputs in `data/fs136/z1/`):
+
+| file | gate | result |
+|---|---|---|
+| `plans/FS136-derivation.md` (new) | `derive_gate.py all`, under the slot (it runs past two minutes) | **exit 0 — "entries: 21 derived: 21"; "controls: 16 fired on their faults: 16"; "GATE: PASS (0 failures, 2 warnings)"** (`gate-FS136-derivation.txt`). Run twice: after the build, and again after two prose sentences on the kernel lane's state were brought up to the planner's launch (no block changed; `build_derivation.py --check` passes) |
+| `plans/FS136-E1-derivation.md` (three dated texts appended) | the same, before and after | before: exit 0, 10 entries derived, 7 controls firing, 1 warning; **after: the same line for line** (`gate-FS136-E1-derivation.before.txt`, `.after.txt`) |
+| `plans/FS124-derivation.md` (three dated texts appended) | the same, before and after | before: exit 0, 30 entries (29 derived, 1 refuted), 17 controls firing, 2 warnings; **after: the same** (`gate-FS124-derivation.before.txt`, `.after.txt`) |
+| five stubs appended to, one new | the asking lane's `poros_gate.py all` | each fails as it stood and fails identically after (0 differing lines): stubs are not card records. `STUB-covering-pairs.md`: "rank 1 already used at line 55" — both of its cards carry rank 1, the asking lane's to mend. The new stub has no card by design |
+| this record | `prose_quotes.py` | 15 quoted fragments are not in the corpus: lines of tools' output (gate lines, control lines), the three watch-phrases of Stage 0, three row labels of Stage 5; every quotation of a source is found |
+| the brief's quotations | `quote_check.py`, re-run at the end | `quotations=11 mismatches=0` |
+
+`plans/FS136-E2-derivation.md` was not appended to and not re-gated (its own final gate: exit 0, 10 entries, 8 controls).
+
+**Slips, disclosed.** (1) A compound background command parsed otherwise than I meant (`cd … && (A) & (B) & wait`):
+the before-gate of FS-124's theorem record did not start with the other; it was started alone some minutes later, still
+before any append. (2) Five quotations in the derivation file's prose were not verbatim at the first build — a capital
+letter, a backtick, an elision joined, one cut — found by my checker and put right before the file was gated. (3) My
+checker's first version paired quotation marks wrongly, and my append script's first dry run keyed idempotency on a
+prefix three texts shared; both were caught before anything was written. (4) Two sentences of the derivation file said
+the milestone's kernel module was unplanned; its planner was launched while I worked (inventory item 16), and the
+sentences were brought up to it and the file gated again.
+
+**Where a successor takes over.** Every numbered item of the brief's "Done means" is done. What is left is the
+coordinator's filing from the drafts above, and four decisions listed in the report: whether the record job's one entry
+stays; who holds row 1 until the asking lane re-ranks; whether G100 is filed; where FS-124's eight cases live.

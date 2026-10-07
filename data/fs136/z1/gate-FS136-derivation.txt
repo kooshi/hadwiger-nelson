@@ -1,4 +1,4 @@
-slot: admitted fs136-z1-gate: mem 8 GiB (hard cap), cpus 8,9,10,11
+slot: admitted fs136-z1-gate-final: mem 8 GiB (hard cap), cpus 8,9,10,11,12,13,14,15
 entry lint
   claim C136-TABLE: minds 1
   claim C136-TABLE: prior art partly, 2 counted queries
@@ -51,7 +51,7 @@ entry lint
   claim C136-STOP-FLOWER: prior art known
   claim C136-PARTNERS: minds 1
   claim C136-PARTNERS: prior art known
-  warn  FS136-derivation.md:613 (C136-RINGS-READ): computed over "the set of the four points across named in the statement, each with the tiles of its object at its two members, exact in the objects' own towers" states no set — a computed statement quantifies over exactly the set computed
+  warn  FS136-derivation.md:615 (C136-RINGS-READ): computed over "the set of the four points across named in the statement, each with the tiles of its object at its two members, exact in the objects' own towers" states no set — a computed statement quantifies over exactly the set computed
   claim C136-RINGS-READ: minds 1
   claim C136-RINGS-READ: prior art partly
   entries: 21  derived: 21  stalled, gapped or refuted: 0
