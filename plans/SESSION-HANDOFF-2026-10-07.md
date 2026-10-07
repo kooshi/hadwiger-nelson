@@ -37,18 +37,22 @@ across" (`plans/STUB-covering-pairs.md`), is **Opened**, ranked first, **its fir
 one mind** (inventory `plans/FS136-close-inventory.md`, items 1–7; claim list `data/fs136/claims.md`; record
 `plans/FS136-E1-derivation.md`); no value moved. **NO LANDING IS IN FLIGHT.**
 
-**Two jobs are running; the third slot is free for the kernel lane's next job** — the third job on the second module (the
-witnesses and the join) when FS124-I3 hands back, else the θ-lemma's planner (agent ids in the scratch file `agents.txt`,
-never in a repo file):
-2. **FS124-I3** (implementer; launched 17:12 UTC; FS-124 inventory items 34–37) — the second module's last four claims:
-   `Plane/ThreePiece` and `Plane/ClosePair`, 61 leaves, in worktree and branch `fs124-wi3` (fast-forwarded to the first
-   implementer's tip `ab669747`, where `CircleCrossing` and `OnePiece` are proved: 63 leaves, the first five claims
-   kernel-checked on a branch, standard three axioms). Brief `data/fs124/briefs/FS124-I3-close-pair.md`. It sends one line
-   when its theorems print their axioms. **Then a third job** (not briefed): the witnesses (`Plane/ClosePairModel`;
-   `Plane/SectorPoint`'s two planned leaves — the unit-square witness re-priced from its first inequality), the audit
-   blocks registered (the first implementer's is `data/fs124/i2/audit-block.txt` on the branch), then the landing of the
-   module. **Owed by name as a kernel job: the θ-lemma** (`ThreePiece.IsSector.hasArcEdges`; the planner's record § 2.4 on
-   that branch); `SectorPoint` stays off `main` until it lands.
+**Three jobs are running** (agent ids in the scratch file `agents.txt`, never in a repo file). **Disk is at 27 GB free**:
+ask Kooshi before removing any worktree's build copy.
+2. **FS124-I4** (implementer; launched 18:09 UTC; FS-124 inventory items 42–43) — both earlier implementers are back: **the
+   four statement modules of the second module hold no `sorry`** (branch `fs124-wi3`, tip `fb515b25`; all nine claims
+   kernel-checked on a branch, C124-BOTH's second clause in the arc-edged form). FS124-I4 proves the witnesses
+   (`Plane/ClosePairModel`, then `Plane/SectorPoint`'s two planned leaves) in that worktree; **it messages the third
+   witness's price after its first inequality** — it goes on unless that is more than about twice 700 lines. **The four
+   modules land with the witnesses' module, in one landing** (ruling 42 (b)); the landing is not briefed (pattern
+   `data/fs131/briefs/scripts/mk-fs124-l1.py`; previous receipts `data/fs124/l1/gate/`; the implementers' audit blocks
+   are files under `data/fs124/i2/`, `i3/`, `i4/` on the branch; branches cut before the disc criterion's landing meet it
+   in `scripts/Axioms.lean`, `ARCHITECTURE.md` § 3.13, `scripts/axioms-controls.txt` and the import module).
+2b. **FS124-K3** (kernel planner; launched 18:09 UTC; worktree and branch `fs124-wk3`) — the θ-lemma
+   (`ThreePiece.IsSector.hasArcEdges`). **It messages its price early, beside the price of re-fixing the claim list's
+   sector point as an arc-edged point → A RULING OF MINE WAITS ON THAT MESSAGE** (prove it, or re-fix the definition by
+   a dated line in `data/fs124/claims.md` and `data/fs124/claims-K2.md` with the derive lane told; item 43 says what was
+   weighed). If the lemma is to be proved: an implementer on its skeleton after it hands back.
 3. **FS136-E2** (deriver; launched 18:04 UTC; FS-136 inventory items 8–9) — the milestone's **second round**: the asking
    lane handed back a card ("how far does a seed force": the table run forward — a cell with one label left is that
    label; the forced closure of a seed) and corrected a ruling of mine (what bars at a stop is the germs at the two
