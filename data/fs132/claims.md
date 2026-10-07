@@ -221,4 +221,38 @@ the death of every such cycle — which are what the answer is made of and are n
   C132-RING-TAME (the dated line above). **C132-DIAG-WIDE** ([hand], one mind): no centre of a weak measurable six-colouring
   has a ring alternating under the 60° rotation between two disjoint pairs of labels — C132-DIAG as posed is its instance at a
   four-cycle's two diagonals. *Not claimed*: each entry's own line. **Not reached**: C132-RADIUS.
+- **2026-10-07 (after FS132-P2's Stage 2, commit `f6f14aaf`; FS-132 inventory item 11): the milestone's second round — two
+  cards of the asking lane, re-posed on the first night's results, and six claims, each posed, not derived** — read each whole
+  in the stub's section, with its controls, the two forms and "What each answer gives":
+
+> question: can-a-triangle-ring-change-at-two-points-sixty-degrees-apart
+> — source: plans/STUB-six-by-the-nerve.md § The question, re-posed after the first night
+
+> - **C132-COMP (posed, not derived).** No weak measurable six-colouring of an open set containing the closed unit discs about two
+> — source: plans/STUB-six-by-the-nerve.md § The question, re-posed after the first night
+
+> - **C132-PLACE (posed).** What the transfer (C132-M-ORBIT's (⋆), read at a triangle centre) and C132-TRI-STRIP force near a ring
+> — source: plans/STUB-six-by-the-nerve.md § The question, re-posed after the first night
+
+> - **C132-TURN (posed).** In a weak measurable six-colouring of a closed disc of radius above 2 about a triangle centre `x`, every
+> — source: plans/STUB-six-by-the-nerve.md § The question, re-posed after the first night
+
+> question: do-witnessed-cycles-exist-with-no-hypothesis-on-the-centres
+> — source: plans/STUB-six-by-the-nerve.md § The question, re-posed after the first night
+
+> - **C132-WIT (posed).** C132-M-ORBIT, C132-M-EXCL and C132-TRI-STRIP with each set `K_j` replaced by a two-point set `{p, q_j}`
+> — source: plans/STUB-six-by-the-nerve.md § The question, re-posed after the first night
+
+> - **C132-WIT-EX (posed).** Every weak measurable `k`-colouring has, in every closed disc of radius above 1, a point with a
+> — source: plans/STUB-six-by-the-nerve.md § The question, re-posed after the first night
+
+> - **C132-GRUNDY7 (posed).** For no order of the seven labels is the island colouring or the stripe colouring
+> — source: plans/STUB-six-by-the-nerve.md § The question, re-posed after the first night
+
+  **The ring card** (first): C132-COMP — no two triangle centres with disjoint label triples closer than 2 — then C132-PLACE
+  and C132-TURN; the composition behind C132-COMP is the asking lane's, two lines, unchecked. **The witness card** (second):
+  C132-WIT, C132-WIT-EX, C132-GRUNDY7. The two share no claim. **The asking lane's ruling on the class of C132-RING-TAME**: its
+  second clause is posed as a conclusion for every weak colouring living on triangles alone (the ring card, C132-TURN); its
+  first clause for honest (Grundy) colourings, after C132-GRUNDY7. As with the first round, each claim is stated by its
+  deriver in its record before it is derived; a change is a dated line here.
 

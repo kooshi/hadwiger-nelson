@@ -315,3 +315,32 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     statement. **Slots**: two running (the asking lane's job; the import's landing); the next deriver waits for the asking
     lane's card, the kernel planner for the landing.
 
+11. **FS132-P2, first message: the existence side is re-posed as two cards, and the first night's results are read against
+    each other** (source: its message to "main", 2026-10-07; stub `plans/STUB-six-by-the-nerve.md` § The question, re-posed
+    after the first night; record `plans/POROS-2026-10-07-fs132-night.md` Stages 1–2; commits `8756d639`, `f6f14aaf`; its card
+    gate exit 0 by its word). **Its five findings across the three records**: (A) every statement derived at a centre tonight
+    reads a point, a label cycle and one further point per edge with the two-label exclusion — a **witnessed cycle** — and
+    none reads the centre's isolation, which only the extraction's construction reads; (B) the regular chain's terminal
+    contradiction — two triangle centres with disjoint triples less than 2 apart — is held for maps (row 133) and stated in no
+    record for weak colourings, though the strips supply both its hypotheses; (C) regularity comes back at the existence
+    step; (D) the method that made "finitely many change points" a conclusion has not been asked of the ring's second
+    clause; (E) the normal form that costs nothing is honesty (Grundy colourings, row 143), not saturation, and it has not
+    been tested on the two slack colourings at seven. **Its ruling on C132-RING-TAME's class**: split — the second clause a
+    conclusion for every weak colouring living on triangles alone; the first clause for honest colourings, and only after
+    honesty is tested at seven; saturation is not the class (at six it binds the top colour, "the answer restated"). **The
+    ring card** (rank 1): can a triangle centre's ring have two essential changes of its outside label 60° apart, or does
+    the transfer put a fourth label or a complementary triangle at the ring point — first claim **C132-COMP**, then
+    C132-PLACE, C132-TURN. **The witness card** (rank 2): do witnessed cycles exist in every disc with no hypothesis on the
+    centres — C132-WIT, C132-WIT-EX, C132-GRUNDY7. **One finding in the safe direction**: C132-M-ORBIT's steps use one point
+    of each set besides `p`, so it holds for two-point sets — an entry narrower than its argument (its reading, one mind).
+    **No two results of the night found that cannot both hold.** **My receipt**: both commits are on `main`; the stub's new
+    section read whole — the two cards, both forms, the six claims with their controls, the outcomes table; the six first
+    lines quoted into the claim list by script. Not checked by me: its Stage 1 re-read; the road's table (Stage 2) — read at
+    its hand-back. **Rulings.** (a) **The six claims are fixed as posed by a dated line.** (b) **The ring card takes the free
+    deriver's slot now** (FS132-E4), its order adopted: it is the step at which six differs from seven, and each of its
+    three answers changes the next launch. **The witness card takes the next** (FS132-E5), when the asking lane's job hands
+    back and frees the slot. Alternative: both now. Why not: three jobs are the night's ceiling with the landing running, and
+    the kernel planner is next in line for the third. Confidence: medium-high. (c) Its finding on two-point sets is not
+    entered as a generalization of C132-M-ORBIT until a deriver states it (C132-WIT): the kernel planner is told at its
+    phase 2, since a statement over two-point sets is the simpler one to formalize.
+
