@@ -25,3 +25,8 @@ number of the unit-distance graph of the plane. In the order the planner takes t
 **C124-RADIUS-FIVE** — statement: There is R > 0 such that no open disc of radius R has a weak measurable five-colouring.
 
 *Not claimed (C124-RADIUS-FIVE):* any value of R — the argument gives the radius of a disc holding a finite unit-distance graph that is not five-colourable, which exists by compactness and has not been exhibited; the same at six
+
+- **2026-10-07 (14:44 UTC; after FS124-K1's hand-back; FS-124 inventory item 19; the planner's draft, verbatim):** The kernel module states GRAPH, COUNTABLE and UP for any function proper at almost every unit pair (`AeProperOn`, no measurability; GRAPH's almost-every clause for countable `V` anywhere), DOWN for every set, UP and FIVE at any centres; the list's statements are the corollaries `radius_graph`, `radius_countable`, `radius_up`, `radius_down`, `radius_five`. **Two
+  theorems added as the module's join**, by my ruling of item 14: `colorable_iff_forall_ball` and
+  `seven_le_chromaticNumber_plane_iff_exists_ball`, each on the one declared outside theorem its docstring names.
+

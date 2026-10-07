@@ -419,4 +419,27 @@ between two colours that is an arc of the unit circle about a point one unit awa
     statement that holds at six and fails at seven** — derived, one mind, by hand — and it is said so, with what it does
     not claim: that any weak six-colouring has such a pair. (d) The planner's question is answered and relayed. (e) Kooshi
     is told, with the correction to what I reported from last night ("must be at least 2 apart, with the same escape").
+19. **FS124-K1 done (434k and 60 minutes by the task notice): the radius clause is typed with no statement defect, planned
+    leaf by leaf, and priced from eight leaves taken through the build** (planner; record `plans/FS124-kernel-plan.md`
+    Stages 1–5 on branch `fs124-wk1`, tip `28a82429`; its report is its hand-back). 57 declarations in three modules, 8
+    proved (7 printing the standard three axioms), 49 open; build exit 0; architecture check passing. **Phase 2**: "the
+    deriver's route and mine are one proof (the deriver's bijection of the motion group onto the unit pairs is right
+    multiplication in my coordinates); the implementer builds this plan's form". **A correction of its own**: an
+    observation it had offered as its own ("fragments at every radius … with no periodization") is the deriver's; its own
+    is only that the fragment's colouring need not be measurable. **For the deriver's entry**: one clause of the hand
+    argument ("measurable (`c` is)") is used by no later line and can go. **Not stated in the module**: the
+    every-direction statement (it waits for a consumer and for a lemma the exclusion's port brings); an exhibited radius
+    at three colours (one line over a module of this library, "not planned"). **Its slips, disclosed**: one object file
+    written into the shared scratch directory and removed; a commit subject seen before its phase-1 commit. **A note on my
+    recipe**: the build I copied into its worktree from `main`'s was 136 modules behind — its first build took twenty
+    minutes; a worktree's build is to be copied from a tree built today. **My receipt**: the tip is on `origin`, its
+    working tree clean; the three modules' open leaves counted by me (27, 14, 8); its Stage 5 and its § 4.4 read whole.
+    Not checked by me: the eight proved leaves' prints. **Filed from its drafts now**: the dated line in the kernel claim
+    list (verbatim); one line in `LEAN.md` § Searching — Lean and one in § Building. **Held until the landing in flight
+    is back**: its sentence for the front page on which half of the disc criterion needs the import.
+20. **FS124-I1 launched into its slot** (14:5x UTC, by its brief's commit `fc77e37e`; `debruijn-implementer`, Opus; brief
+    `data/fs124/briefs/FS124-I1-radius.md`, gate exit 0; the planner's own worktree and branch `fs124-wk1`, at
+    `28a82429`; record `plans/FS124-I1-implementation.md` there): the 49 leaves in the planner's order, statements fixed
+    with no permissions to change them; the axioms of every theorem printed, the two join theorems' lines to me; no
+    landing — a landing job takes the branch when the one in flight is back.
 

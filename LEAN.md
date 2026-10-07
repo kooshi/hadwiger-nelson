@@ -130,6 +130,7 @@ So: prose in a module a certificate imports is written as `--` comments or not a
 `Sat/Diagnose.lean`; `Sat/Mask.lean`, `Sat/ClauseTable.lean` and `Sat/MaskCheck.lean` are settled, and changing a declaration or
 docstring there is a decision about hours; deleting a generated `.c` under `.lake/build/ir/` invalidates its module exactly as deleting
 the `.olean` would. Settle every hand-written module before starting a long generated build.
+- A worktree's copied `.lake/build` can be behind its branch — FS124-K1's first build rebuilt 136 modules in 20 minutes; `lake build --no-build` under the cap says so in two seconds. (FS124-K1).
 
 ## The kernel's cost model
 
@@ -218,6 +219,7 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - Positivity of the measure of a set that need not be measurable goes through sections: `Measure.measure_ae_null_of_prod_null` asks no measurability, so a null set has almost every section null, and one positive section on a set of positive measure refutes it (`SixRing.volume_pattern_pos`, FS132-I3).
 - `vol F ≤ K · vol (g '' F)` on the line for a map that shrinks no distance on `F` by more than `K`, with no measurability of `F`, `g` or the image: `AntilipschitzWith.le_hausdorffMeasure_image` for `F.restrict g`, `Isometry.hausdorffMeasure_image` for the coercion, `hausdorffMeasure_real` (import `Mathlib.MeasureTheory.Measure.Hausdorff`; `SixRing.volume_le_mul_volume_image`, FS132-I3).
 - A `ring` that cannot close a goal and whose fallback `ring_nf` does prints `Try this: ring_nf` as information, with no file position in `lake env lean`'s plain output: `lake env lean --json` gives the line. And `ext` on a continuous linear map out of a product applies `prod_ext` and binds no vector: write `ContinuousLinearMap.ext fun v => _` (FS132-I3).
+- A null set pulls back to a null set under a measure-preserving map with no measurability of the set (`MeasureTheory.Measure.QuasiMeasurePreserving.preimage_null`), and `∀ᵐ` and `μ s = 0` are about outer measure: a statement about 'almost every' needs a measurability hypothesis only where Fubini is read backwards (slices to product). `MeasurePreserving.skew_product` has its base in the first factor; conjugate by `Measure.measurePreserving_swap` for the second (FS124-K1).
 
 ## The package
 
