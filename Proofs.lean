@@ -285,6 +285,11 @@ import Proofs.HadwigerNelson.Outside.OAI158
 import Proofs.HadwigerNelson.Plane.WeakColouringOn
 import Proofs.HadwigerNelson.Plane.Radius
 import Proofs.HadwigerNelson.Plane.RadiusOutside
+import Proofs.HadwigerNelson.Plane.CircleCrossing
+import Proofs.HadwigerNelson.Plane.OnePiece
+import Proofs.HadwigerNelson.Plane.ThreePiece
+import Proofs.HadwigerNelson.Plane.ClosePair
+import Proofs.HadwigerNelson.Plane.ClosePairModel
 
 /-!
 # Proofs

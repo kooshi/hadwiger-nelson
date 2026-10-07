@@ -1,0 +1,27 @@
+import Proofs.HadwigerNelson.Plane.Radius
+open MeasureTheory Metric Set
+#check @MeasureTheory.Measure.measure_ae_null_of_prod_null
+#check @MeasureTheory.Measure.ae_ae_of_ae_prod
+#check @IsOpen.measure_pos
+#check @IsPreconnected.intermediate_value
+#check @HadwigerNelson.Plane.preconnected_dist_lt_or_gt
+#check @HadwigerNelson.Plane.unitShadow
+#check @HadwigerNelson.Plane.inter_frontier_nonempty_of_isPreconnected
+#check @EuclideanGeometry.eq_of_dist_eq_of_dist_eq_of_finrank_eq_two
+#check @Complex.finrank_real_complex
+#check @Convex.isPreconnected
+#check @convex_ball
+#check @inner_eq_one_iff_of_norm_eq_one
+#check @inner_eq_neg_one_iff_of_norm_eq_one
+#check @norm_add_sq_real
+#check @Measure.addHaar_sphere
+#check @HadwigerNelson.Plane.essSupport
+#check @HadwigerNelson.Plane.exists_angle_of_norm_eq_one
+#check @HadwigerNelson.Plane.volume_prod_shift_null
+#check @Filter.eventually_all
+#check @Finite.injective_iff_surjective
+#check @closure_ball
+#check @IsOpen.inter_closure
+#check @mem_closure_iff_nhds
+#check @Metric.mem_closure_iff
+#check @Complex.inner
