@@ -1,0 +1,13 @@
+ 1 MISMATCH data/external/EXT-OAI1-request.md :: I agree with all 3. let's keep the lean backlog paused. We move to the
+ 2 match    plans/FS136-close-inventory.md :: 10. **FS136-E2, first message (18:25 UTC logged; its commit `0b23e4da`
+ 3 match    plans/FS136-close-inventory.md :: 11. **FS136-E2, verdicts (18:50 UTC logged; its commit `fa57f58f`, 18:
+ 4 match    plans/FS136-close-inventory.md :: 12. **FS136-E2, the clause I kept fires (18:53 UTC logged): "a label I
+ 5 match    plans/FS136-close-inventory.md :: 14. **FS136-E2 done (18:57 UTC logged; hand-back 19:0x UTC; 598k by th
+ 6 match    plans/FS136-close-inventory.md :: 17. **FS136-Z1 done (hand-back 19:3x UTC; 556k by the harness's count 
+ 7 match    data/fs136/reports/FS136-Z1.md :: INVENTORY: question for another lane — the asking lane: where FS-124's
+ 8 match    data/fs136/reports/FS136-Z1.md :: INVENTORY: question for another lane — the next deriver on collars: on
+ 9 match    plans/FRONTIER-STUBS.md :: | 1 | **FS-136 the point across: what a seed forces** — `plans/STUB-co
+10 match    plans/FRONTIER-STUBS.md :: | 2 | **FS-135 the seed remainder** — `plans/STUB-seed-remainder.md` (
+11 match    plans/FRONTIER-STUBS.md :: | 3 | **FS-127 lateral extent** — `plans/STUB-lateral-extent.md` (mint
+12 match    plans/FRONTIER-STUBS.md :: **Unranked, minted 2026-10-07 (FS136-Z1): FS-137, collars** — `plans/S
+quotations=12 mismatches=1
