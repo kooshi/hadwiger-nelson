@@ -26,6 +26,39 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
+## 0a. THE NIGHT OF 2026-10-07 — read this section first: Kooshi has handed over the reins
+
+> […] I'll hand the reins over to you […]. Keep us on track to 6 or 7. I suggest walking the standard workflow at this point once things settle into a clear direction. I'll go with whatever you recommend on the open questions with that in mind. Keep your handoff current in case of auto compaction.
+> — source: data/external/EXT-OAI1-request.md, fifth word
+
+**What is decided (FS-131 inventory item 632; each ruling in four parts there):**
+1. **Running: three jobs — § 2.** Two derivers on FS-132 (the exploration: card 3 and card 1's readings) and the import's
+   landing. **Never more than two derive-lane agents and one kernel-lane agent at once**; the remaining budget is not known tonight. After a halt, resume each job by message from its last saved stage.
+2. **The direction is FS132-E3's first verdict** (C132-RUN-EMPTY: does this project's exclusion run on the extraction's data).
+   - **It runs** → the road to seven is the measurable one. Launch the kernel lane's planner (`debruijn`, blind first from
+     `data/fs132/claims.md`, then open) on FS-132's derived statements over the import: the extraction (C132-EXT-DISC,
+     C132-CORES-FREE, C132-CONFINE) and the measurable exclusion (C132-M-EMPTY) — after the import's landing is back. The
+     backlog's map-class waves stay paused.
+   - **It stalls at a step that reads an arc or a tile** → the map step stands. Restart the backlog by the asking lane's table
+     (`plans/POROS-2026-10-07-after-release.md` § 4.4): wave 7 first (`data/fs131/briefs/FS131-I7FA-wave7-fragment-object.md`
+     is gated and ready; `mk-i7.py L` writes `Local`'s), then wave 9 restated over the import, then wave 6's two in-flight jobs.
+   - **Either way**, when both derivers have reported: one asking-lane job (`poros`) re-ranks on their results before a second
+     wave of launches — Workflow 3.1's step 1. It also owes: the question cells of ranks 7 and 11 in full; the two stubs
+     FS132-E1 proposed; the sweep's periodic-colouring candidate; FS-133's two candidate stubs; the stub's existence form's
+     wording.
+3. **FS-133 (the density result, Derived)** gets its kernel planner when the kernel slot is free and FS-132 does not need
+   it: over the import, with the release's rigidity theorem (`wild_fourier`) as a third outside theorem. No blind second mind.
+4. **The record job** for FS-132 (the derivation file, the stubs, the front page's drafts — Workflow 3.1's step 6) is briefed
+   when its two derivers and their successors have answered card 1; until then each result is logged in
+   `plans/FS132-close-inventory.md` and told to Kooshi report.
+5. **A push notification wakes him for one thing only**: a statement that would fix the value of `χ(ℝ²)`, sent as "claimed by
+   one mind, unchecked".
+6. **While the landing is in flight: commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`,
+   `LEDGER.md`, `LEAN.md`, `RUNNING.md`** — in particular no `CLAUDE.md`, no `tools/`.
+7. **The morning report to Kooshi** (house format, `decompress`): what the night found on six against seven, at its grades;
+   what was launched on his delegation and why; usage unknown to me; the decisions that are still his (the fallback
+   write-up; six papers to fetch; the checking tool's audit; whether the density result is told to anyone).
+
 ## 1. The plan — Kooshi's five answers (verbatim) and what each sets in motion
 
 > 1. port or import: let's import and adopt parts piecemeal if needed. 2. indeed 3. definitely build on it... write the stub 4. not sure, probably allow, but audit what it does 5. pause the backlog, lets come to a stopping point, collect ourselves and have poros rerank.
@@ -47,12 +80,11 @@ everything else.*
 5. The asking lane's re-rank is **drafted and both stubs exist** (item 625); **its filing is part of line 4's one filing**.
 6. A report to Kooshi: the state of everything, and what restarts — **given 2026-10-07 (twice: at the stopping point, and after the sweep, the import and FS-133's first result came back) with the asking lane's restart table as my recommendation (ruling 625 (c)); the backlog restarts only on his word — he has not yet answered**: the import first; wave 7 (`Local`, the fragment's first job); wave 9 re-aimed over the import; wave 6's in-flight jobs only; wave 10 waits.
 
-## 2. Running now (2 slots: FS-132's two derivers) — and what to do at each hand-back
-
-**Staffing since Kooshi's fourth word (item 630): two Opus agents at once, the third slot held; no Lean job runs.**
+## 2. Running now (3 slots: FS-132's two derivers, the import's landing) — and what to do at each hand-back
 
 | job | where | what | on its hand-back |
 |---|---|---|---|
+| **FS132-L1** (`debruijn-implementer`, Opus) | `.claude/worktrees/fs132-wi1`, branch `fs132-wi1` | **the import's landing** (brief `data/fs132/briefs/FS132-L1-import-land.md`): merges `main`, re-runs the stored-term comparison, adds `seven_le_chromaticNumber_plane_iff` (the one question as a kernel statement on the transfer), the full gate on one commit, the fast-forward of `main`, the drafts | **the landing procedure** (`plans/SESSION-HANDOFF-2026-10-06.md` § 5): `git pull --ff-only`; confirm only exempt paths changed since its gated commit; the three digests (`scripts/gate_report.py axioms|vacuity|assumptions <log> <prev> … CLAUDE.md`, previous receipts `data/fs131/l8a/gate/receipt-{axioms,vacuity,assumptions}-final.log`); then **file its drafts myself**: `CLAUDE.md` § Trust ledger (counts; outside axioms one to three; the nine assumption counts), § The gate's count lines, the sentences that say "not in this library" (the mission's row D, § Frontier's first paragraph), `LEDGER.md` rows 33, 130, 131, the release's bibliography cell, `LEAN.md`'s two lines, a `GATE_CHANGES` entry, a dated note to the audit's record (629 (e)); `tools/claude_md_fact_audit.py --base 35116159` and `--dupes`. Log as an FS-131 inventory item. A stored-term difference it messages about is ruled before it repairs anything. |
 | **FS132-E2** (`ephodos`) | `main`, under `plans/FS132-E2-derivation.md` and `data/fs132/e2/` | **card 3 — must a cyclic centre that is not a triangle exist in every measurable six-colouring?** — the statement on which six differs from seven; by any route; it states its claims first (brief `data/fs132/briefs/FS132-E2-card-three.md`) | **its first message carries its claims: fix them in `data/fs132/claims.md` by a dated line the same turn.** Then each verdict. A forcing argument must say where the honeycomb seven-colouring escapes it. Anything fixing the value of `χ(ℝ²)` goes to Kooshi at once as "claimed by one mind, unchecked" (FS-132 inventory, rule 2). |
 | **FS132-E3** (`ephodos`) | `main`, under `plans/FS132-E3-derivation.md` and `data/fs132/e3/` | **card 1's readings** — C132-RUN-EMPTY (does this project's exclusion run on the extraction's data, with no map), then C132-RUN-CV, then C132-DIAG, C132-RADIUS and a side question on REG-J′ as far as one context carries (brief `data/fs132/briefs/FS132-E3-card-one-readings.md`) | each verdict by message: log it, tell Kooshi (a "runs" for the exclusion is the foothold he asked for — at [hand], one mind; a stall names what a map supplies). A successor takes over where its record says. |
 | ~~FS132-E1~~ | — | **done, FS-132 inventory items 2–4**: the opening; the two readings stated and fixed; **the extraction derived at every number of colours on any disc of radius above 1 with finitely many centres (C132-EXT-DISC), a cyclic centre in every such disc with no hypothesis (C132-CORES-FREE)**, [hand], one mind; card 2 answered at the level of the argument (what is read is isolation of the essential centre). Its clause (5) contradicts a sentence of the manuscript and is flagged in both briefs. | — |
