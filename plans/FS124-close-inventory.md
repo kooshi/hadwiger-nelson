@@ -667,4 +667,24 @@ between two colours that is an arc of the unit circle about a point one unit awa
     committed to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`, and
     no `CLAUDE.md` filing is made. Its previous receipts: `data/fs132/l2/gate/`. Slots: it, the blind planner of the
     second module, the successor's opening job.
+32. **FS124-K2: its phase-1 plan is committed — `1681f612` on branch `fs124-wk2`, 16:15 UTC, which dates its blindness — and the
+    fence is lifted by my reply** (16:16 UTC). "I have opened none of the fenced files, Amendment 1's included." What is
+    there: its record's Stages 1–3 (definitions with a model each; the nine statements typed and read back; a route to
+    each; a plan per leaf; three passes); **six skeleton modules, 134 leaves, six proved**; build exit 0 with only their
+    warnings; the architecture check passing. **My ruling (b) carried out**: the "both members" theorem is stated for
+    decompositions whose edges contain an arc from the point and reads nothing of the sector point; the list's sector
+    point, the θ-lemma as the one unplanned leaf, and the clause in the list's words sit in a module no other imports;
+    what the θ-lemma needs "is not short (the crossing of continua in a disc twice, the frontier-of-a-component lemma
+    once, and one step I have not made precise)". **Two more generalizations**: the lemma under the forcing needs no
+    cover hypothesis, and at seven "says exactly what the seventh label must fill"; `a ≠ b` is idle in two statements.
+    **A cost it names**: the gate's inhabitant for the both-members and four-labels theorems — a unit-square witness,
+    500 to 700 lines — unless the derivers hold a model with checked inequalities. **Its disclosed touch**: five commit
+    subjects of `main` shown at launch, two of this milestone's fenced lanes (its Stage 1). **My receipt**: the commit and
+    its time read on `origin`; the six modules listed. Not checked by me: any statement against the claim list. **Sent
+    with the fence's lift**: the entries' addresses in the derivation file and the two records; **the step the second
+    round's deriver flagged — C124-LONE's Step II — named now, with the request that its first act in phase 2 be one
+    paragraph to me: whether its own blind route to that clause is the deriver's, whether the step stands as written,
+    what it leaves implicit**; the derivers' model (the strip, by a script, not in the kernel) for its cost question, the
+    choice left to it. **What is already on record before that paragraph arrives**: a second mind, blind and dated,
+    reports reaching C124-LONE with its last clause by a route of its own — typed, not yet in the kernel.
 
