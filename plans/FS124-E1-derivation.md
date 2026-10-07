@@ -616,3 +616,24 @@ forbids six unit arcs about ring points at a four-label centre), with the cautio
 exhibited: G97's line is crossed by a statement, not yet by an object.
 
 **Stage 5 — SAVED** (2026-10-07).
+
+## Stage 6 — SAVED: the second prior-art pass, the INVENTORY, and where a successor takes over
+
+**The second §PA pass** (13:26 UTC, in the words the recognition gave; listings in `data/fs124/e1/pa/zb-log.txt`).
+`(ab:"Minkowski sum" | ab:"parallel curve" | ab:"parallel set" | ab:"offset curve") & (ab:"unit distance" | ab:"distance-avoiding" |
+…| ab:"chromatic number of the plane")` — 1 hit, off the object (crossing numbers of Hamming graphs). `(ab:"ball-polar" | ab:"ball
+polar" | ab:"spindle convex") & (ab:coloring | ab:colouring | ab:"chromatic" | ab:"distance graph" | ab:"diameter graph")` — 0. It
+added nothing; no paper was opened by either pass. The gate's items 4, 5, 7, 8 (outside arXiv, the citation graph of the paper
+that posed the question, two databases, author listings) were not done and are debts.
+
+**Where a successor takes over.** Every claim of the list is at a verdict. What is owed, in the order of bearing:
+1. *The strip's ends* — the reading the paragraph of Stage 4 names: where FS-112's strip's unit arcs end, how many labels meet
+   there, and which centres those ends are one unit from (`tools/fs116_n1_ring.py`'s loader; `tight_checks.py ends` is the start).
+2. *The controls not run*: fragment T2 and the bowtie fragment (`tools/fs110_y_fragments.py`), FS116-Y2-SIXFRAG, FS-114's capped
+   strip's caps, and the Searcher's kept model for C124-COMPLETION, C124-SIX ("must not fire": three consecutive ring points
+   only) and C124-HALF-TWO at `w = y_1` — `maps` in `tight_checks.py` takes any loader that yields tiles with arc pieces.
+3. *An inhabitant of C124-SIX's hypothesis*, at seven labels or more, by formula — or a first-order reason none exists.
+4. *The next round's statement*: at a centre, the tight windows of its ring with their ordered pairs against the cones of
+   presence (C124-CENTRE's polarity), and what six labels allow — posed by the asking lane, not by this job.
+
+**Stage 6 — SAVED** (2026-10-07).

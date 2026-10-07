@@ -123,3 +123,8 @@
 ## 2026-10-07T13:03:30Z  query: au:"Kruskal, Clyde" & (ti:chromatic | ti:plane)  hits: 1
 2008 | Kruskal, Clyde P. | The chromatic number of the plane: the bounded case | Zbl 1139.05023 | text:summary
 
+## 2026-10-07T13:26:01Z  query: (ab:"Minkowski sum" | ab:"parallel curve" | ab:"parallel set" | ab:"offset curve") & (ab:"unit distance" | ab:"distance-avoiding" | ab:"avoiding distance" | ab:"avoiding unit" | ab:"chromatic number of the plane")  hits: 1
+2026 | Haroldo Costa Silva Filho | The crossing number and the unit-distance crossing number of the Hamming graphs H(d,3)=K_3^{box d}, and their realizations over many coordinate fields | Zbl arXiv:2609.13757 | text:summary
+
+## 2026-10-07T13:26:02Z  query: (ab:"ball-polar" | ab:"ball polar" | ab:"spindle convex") & (ab:coloring | ab:colouring | ab:"chromatic" | ab:"distance graph" | ab:"diameter graph")  hits: None
+
