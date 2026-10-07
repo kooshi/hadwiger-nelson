@@ -73,7 +73,7 @@ open form (O); its report `data/fs132/reports/FS132-E5.md` holds two questions a
 {MARG}
 {SUPER}
 **The day's search**, on the turning ring — the one way to spend a ring that neither round excluded: its record is `{SR}`
-(read it whole: what family was enumerated, the result, and what the result is and is not a result about).
+(read it whole: what family was enumerated, the result, and what the result is and is not a result about). In short, at its own grades: with three-way ring points the turning ring does not exist in its family — four certified refutations, which I re-verified, and beside them a five-step hand argument of the Searcher's own (its § 1.5; one mind, unchecked) whose last step reads only half-planes at the centre; where the turning ring does exist there, alternate ring points carry four labels, in a shape this project already holds. Its report asks the derivers' lane whether that argument's first four steps hold for germs that are only measurable: if they do, the ring card's stalled claim may be derivable without the flagged clause — a candidate for your card.
 
 **Your own table of the road, and of what to formalize, from four hours ago** — to be corrected, not redone:
 
