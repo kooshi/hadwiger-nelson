@@ -387,3 +387,255 @@ kernel accepts them is EXT-OAI1's): Theorem 2.3 in Fourier form is
 P1 (0.85) **met**; P2 (0.70) **met**, with the two properties named; P3 (0.60) **half met** (radial and positive-definite, but on a
 relative difference law); P4 (0.50) **met**; P9's first half (0.60: a rigidity step I cannot verify on one reading) **lost** — I
 followed every step, taking only cited standard facts as read.
+
+## Stage 3 — SAVED: the obstruction at five, read in full (their §§ 5–8; Theorem 1.4)
+
+**What was read:** `M/palettes.tex` (663 lines), `M/transitions.tex` (641), `M/interfaces.tex` (670), `M/angular.tex` (773) — every
+line. **Grade of this stage: read in full, no gap found by me, one mind, one pass**; what I reworked and what I took as read is
+§ 3.6. One exact check of my own: the seven-point certificate (§ 3.6). Rows 133–154 of `LEDGER.md` read at their openings (133–139 in
+full), with G83–G92.
+
+### 3.1 The route of Theorem 1.4, in four acts
+
+Standing objects (theirs): a weak measurable five-colouring `c` with classes `A_i`; *typical* points (density one of their own
+colour — proper at every unit pair by Lemma 4.3); `H_i` the closed essential support of `A_i`; `R` the rotation by `κ = π/3`.
+
+**Act 1 — the ring, in measure (§ 5).**
+
+> For each fixed center \(x\), let \(\mathcal W_x\) be the family of
+> vector functions in \(L^\infty(S;\R^5)\) that can be obtained as
+> \[ b=\operatorname{w}^*\!-\!\lim_{n\to\infty} (a_i(y_n+r_ne))_{i=1}^5,\qquad y_n\to x,\quad r_n\to1, \]
+> where every \((y_n,r_n)\) is a typical circle sampling.
+> — `M/palettes.tex:49–56` (Definition 5.1; the *palette* `P_x(e)` is the set of labels `i` with `b_i(e) > 0` for some trace `b`,
+> an essential union, defined up to angular null sets)
+
+- **Lemma 5.2** (palette transfer): (1) "`c(x+e+v) ∉ P_x(e) ∪ P_x(v)`" for almost every `(e, v)`; (2) at a density direction `e`
+  of `{i ∈ P_x}` and `v` not parallel to it, `A_i` has density zero at `x + e + v`; (3) for a smooth representation
+  `z + f = x + s(f) + t(f)` by two non-parallel unit directions, "`P_z(f) ∩ P_x(s(f)) = ∅`" almost everywhere. The proof pairs one
+  weak-* limit with one strongly convergent factor (a change of variables in the two-angle sum map), never two weak limits.
+- **Corollary 5.4**: "`P_x(f) ∩ P_x(Rf) = ∅` for almost every `f ∈ S`."
+- **Lemma 5.5** (binary-centre separation): a centre is *binary for* a pair of labels if almost every palette meets the pair; then
+  the choice is a sign `s_x` with `s_x(t + κ) = −s_x(t)`. "There is an absolute constant `δ_* > 0` such that, for every fixed pair
+  of labels, any two distinct centers binary for that pair are at distance at least `δ_*`." Proof: writing a point of `y`'s ring as
+  `x + e^{iα₊(t)} + e^{iα₋(t)}` makes `s_x` invariant under `H = α₊ ∘ α₋⁻¹`, hence under six near-identity diffeomorphisms
+  `F_j(t) = t + (2d/√3) sin(t − jκ − π/6) + O(d²)`, one of which expands at every point; Sullivan's bounded-distortion argument
+  (`[DeroinKleptsynNavas2008]` § 2.1, adapted) spreads a density point of `{s_x = 1}` to an interval and then to the whole circle,
+  against measure `π`.
+- **Proposition 5.6**: "`1 ≤ |P_x(e)| ≤ 2` for almost every `e ∈ S`", at every centre. Proof: a triple in the palette on a
+  positive-measure set of `e` leaves **the complementary pair** on the unit circle about `x + e`, so those `x + e` are infinitely
+  many binary centres for one pair on a compact circle.
+
+**Act 2 — vertices are locally finite (§ 6).**
+
+> For $x\in\R^2$, let $\Gamma_x$ be the simple graph on $\mathcal I$ in
+> which $ij$ is an edge precisely when, for every ball $B$ centered at $x$
+> with positive finite radius,
+> \[ \limsup_{\substack{h\to0\\h\ne0}} \frac{D_{ij}(B,h)}{|h|}>0. \]
+> — `M/transitions.tex:31–38` (Definition 6.1; `D_ij(B, h)` is the area of the `q ∈ B` with `{c(q), c(q+h)} = {i, j}`)
+
+- **Lemma 6.2**: an edge `ij ∈ Γ_x` has a trace at `x` with `b_i = b_j = 0`; so "`P_x(e) ⊄ {i, j}`" almost everywhere. Proof: the
+  circle average is `½`-smoothing — `|σ̂(ξ)| ≤ C(1+|ξ|)^{−1/2}` gives `‖𝒮(a_s − a_s(·+h))‖_{L²(B)} = o(√|h|)` — and a transition
+  set of area `≥ c|h|` meets that at exactly the Cauchy–Schwarz threshold.
+- **Lemmas 6.3, 6.4**: two states whose label groups cover all labels but `X` put density one of `X` at `x + a + b`, so the
+  closed essential support of either contains no two directions 60° apart (two density-one points of `X` at distance exactly 1);
+  and no state function alternates under `R` between a singleton `{X}` and a fixed pair — the rotation by `γ`, `cos γ = 5/6`,
+  irrational, yields a unit equilateral triangle whose vertices all have density one of **the two remaining labels**.
+- **Theorem 6.5**: "`𝓛 = {x ∈ ℝ² : Γ_x contains a cycle}` is closed and locally finite". Three cases on five labels. *Triangle*:
+  palettes of size ≤ 2 not inside an edge meet the outside pair, so `x` is binary: Lemma 5.5. *Four-cycle* `0123` with fifth label
+  `X`: states `X`, `U = {0,2}`, `V = {1,3}`, continuous in `x` in `L¹(S)` along the locus; moving the centre moves a support
+  endpoint `a` with a velocity `V_H(a; b) = −(H·b)/(a × b)` depending on its partner `b`, and two partners with different
+  velocities push a point of the support into a gap. *Five-cycle*: every palette is a diagonal `D_i = {i, i+2}`, steps under `R`
+  are `±1 mod 5`; a contact of two adjacent states at one direction bans that step on the whole circle (Lemma 6.7), and an
+  accumulation forces two such contacts that isolate a state.
+
+**Act 3 — one vertex with its interfaces, from topology (§ 7).**
+
+> \begin{proposition}[A cycle of common exclusion continua] … there
+> exist an integer $\ell\in\{3,4,5\}$, distinct labels
+> $i_0,\ldots,i_{\ell-1}\in\mathcal I$, a point $x\in\R^2$, and a
+> radius $\rho>0$ with the following properties. For each edge
+> $i_ji_{j+1}$ of the simple label cycle, with indices modulo $\ell$,
+> there are a compact connected set
+> $K_j\subset\overline{B(x,\rho)}$, a direction $v_j\in S$, and a
+> sequence $q_{j,k}\in K_j\setminus\{x\}$ such that … $x\in K_j$ and $K_j\cap\partial B(x,\rho)\ne\varnothing$; …
+> both endpoint supports are excluded from the same open set:
+> \[ H_{i_j}\cap\Delta(K_j)= H_{i_{j+1}}\cap\Delta(K_j)=\varnothing. \]
+> — `M/interfaces.tex:31–50` (Proposition 7.1, abridged at the two ellipses; `Δ(K) = {z : min_{q∈K}|z−q| < 1 < max_{q∈K}|z−q|}`)
+
+How: disc averages `p_i^ε` are continuous probability vectors with `p_i^ε(q) + p_i^ε(z) ≤ 1` at **every** unit pair (Lemma 7.2); a
+missing edge `ij ∉ Γ_x` gives `∫ p_i^ε p_j^ε = o(ε)`, so the points where both exceed a threshold `α < 1/5` lie in discs of
+vanishing total radius (Lemma 7.3); thresholding and renormalizing gives a continuous map `q^ε` into the simplex which, off those
+discs and off small discs about `𝓛`, lands in **the complete graph on the labels** (a clique in a forest has at most two
+vertices), and the small discs away from `𝓛` are filled through trees (Lemma 7.4). If every loop around a point of `𝓛` were
+null-homotopic the map would extend over a 10 × 10 square, and the sets `{coordinate i > 0}` would be an open cover of
+multiplicity ≤ 2 whose members have diameter ≤ 1 + o(1) — a path of one label joining points more than 1 apart forbids that label
+near its end (Lemma 7.6) — against Lebesgue's covering theorem (Lemma 7.5, by Brouwer). So some loop is essential; its reduced
+word contains a simple cycle; every loop in its class meets each edge midpoint (Lemma 7.7); a component of each midpoint's
+preimage crosses the annulus (Lemma 7.8); Hausdorff limits are the `K_j`.
+
+**Act 4 — every vertex type is impossible (§ 8).** With `v_j` the limiting directions and signs `sgn(e · v_j)`: a strip just
+outside the unit circle about `x` near `e` uses only the labels `O(e)` left after deleting the endpoints of the positive edges,
+and one just inside only `I(e)`; both are non-empty and both meet `P_x(e)` (Lemma 8.1).
+- *Five-cycle* (no outside label; Prop. 8.2): palettes are one of two diagonals, the same two at antipodes; six steps of `±1`
+  with antipodal difference `0, ±2` must all agree and then do not close mod 5.
+- *Four-cycle* (one outside label `X`; Prop. 8.5): a direction without `X` is *split* (signs `++−−`) and its palette is a
+  diagonal; six-position words always contain `X` at one parity; the four rays are two antipodal pairs, the diagonal is `U` on
+  one projective arc and `V` on the other, one of length ≤ π/2 — too short for three positions spaced `π/3`.
+- *Triangle* (two outside labels `X, Y`; Prop. 8.10): the ring carries exactly one outsider at almost every direction,
+  alternating under `R`; two-colour rigidity on open strips (a four-edge unit path keeps `c(q) = c(q+h)`; Lemma 8.6) makes it
+  locally constant off one six-point orbit, so the outsiders occupy **six alternating 60° sectors** (Lemma 8.7); then every
+  `x + e + v` with `e`, `v` in sectors of opposite outsiders is free of both outsiders, an open region
+  "`υ²(3ξ² − υ²)² < l³(1 − l/4)(l − 1)²`" using only the three triangle labels (Lemma 8.8), and a rotated, translated Moser
+  spindle, `z_g = ((35+12i)/37)(g + (−290+149i)/250)`, lies inside it (Lemma 8.9).
+
+### 3.2 How the manuscript makes "the map step"
+
+**It does not make it; it goes around it.** This project's route M asks that a tight colouring be made a map — interfaces that
+are curves, a locally finite singular set with finitely many arcs at each point (REG-J′), reached through saturation and contact
+(rows 140–144, G84, G85) — so that the regular theory (rows 132–138) applies. The manuscript proves no regularity of any colour
+class: no curve, no finite perimeter, no saturation, no maximal cover. What it proves instead, for an arbitrary weak measurable
+five-colouring:
+
+1. the points where **three or more classes meet cyclically in the transition sense** (`𝓛`) are locally finite — by ring
+   rigidity (Act 1) and transport of ring data between nearby centres, not by any structure of interfaces;
+2. off `𝓛` the smoothed, thresholded colouring is a continuous map into a **graph** (the 1-skeleton of the simplex on the
+   labels) after filling holes through trees — the map of route M replaced by a map *to* the nerve;
+3. dimension theory then forces one essential loop, and the "interfaces" are **connected components of the preimage of an edge
+   midpoint**, carried to the limit as Hausdorff continua. `[SokolovVoronov2025]`'s exclusion holds on `Δ(K_j)` because
+   connectedness alone gives a point of `K_j` at distance exactly 1.
+
+So the sentence in their introduction — "We derive corresponding exclusions from weak measurable data, without assuming regular
+color boundaries" (`M/introduction.tex:57–58`) — is accurate as read, and the object it yields is weaker than a map and enough:
+one point, `ℓ ≥ 3` continua through it with limiting directions, and the two-colour exclusion on each. Row 140 already recorded
+that at five the map step "is equivalent to `χ_m⁰(ℝ²) ≥ 6` (VM2-EQ5): a reformulation, not a step toward six"; the manuscript
+reaches `χ_m⁰(ℝ²) ≥ 6` without it.
+
+### 3.3 Against this project's results: re-derived, not needed, new to us
+
+| in the manuscript | in this project | relation |
+|---|---|---|
+| Cor. 5.4 and the binary sign `s_x(t+κ) = −s_x(t)` | G91, FS116-RING-TWIST-C: the ring of a vertex is a proper colouring of its 60°-hexagon graph by the absent colours, "alternating under the 60° rotation" | **re-derived in measure**, at a three-colour vertex of a five-colouring (ours: a four-colour vertex of a six-colouring); the *palette* is the ring read two-sidedly |
+| the diagonal states `U`, `V` at a four-cycle centre (a palette of two of the vertex's own colours) | a **(Q) arc** on the ring ("an arc of the boundary whose two side colours the vertex carries", row 149) | the same phenomenon; their four-cycle argument is, in our words, the exclusion of a four-colour vertex whose ring carries (Q) arcs — at five, with one absent colour |
+| Lemma 8.1's strips `O(e)`, `I(e)` from the signs `e · v_j` | FS114-N-E2's cone form ("every tile's cone and colour is pinned by the half-planes facing the edges' centres", row 138) | re-derived from limiting directions only |
+| Lemma 8.7: six alternating 60° sectors | the Γ-free ring with six change points (row 148, FS116-Y4-EMPTY) | the same ring; **a different kill** (§ 3.5) |
+| Lemma 6.3: no two support directions 60° apart, by two density-one points of `X` at distance 1 | G83's straddle ("two tiles of one colour forced along two unit circles to come within 1") | re-derived in measure |
+| Lemma 7.6's mesh bound | row 132's hole-filling tool ("a one-coloured connected region avoiding distance 1 has diameter at most 1") | re-derived for the smoothed colouring |
+| Prop. 7.1 (3) | `[SokolovVoronov2025]` Props. 1–2, this project's FS106-SV chain | re-derived for continua |
+| Lemma 7.6: some point of `𝓛` carries an essential loop | row 137, FS114-CV-EXISTS (every valid six-map with unit arcs "has a vertex of at least four colours"), there by Woodall's reduction and S–V's Cor. 1 | the five-colour analogue by covering dimension; **it selects no vertex type** (§ 3.4) |
+| Lemma 6.2's `o(√|h|)` | rows 130–131: properness survives weak limits "because the circle measure's Fourier transform decays"; G90 ("spend the plane's dimension at distance exactly 1") | the same input, used quantitatively at its exact exponent |
+| Lemma 4.3 | FS103-M-D (D1) | weaker form, printed |
+| Lemma 8.6 | Townsend's annulus (rows 132, FS131-E1) | cited by them as a predecessor (`[Townsend2005]` Thms 1, 4) |
+| Lemmas 6.4, 5.5 (an irrational rotation; an expanding family on the ring) | FS129-SA1-FALC-RED (Falconer's fan with an irrational angle) | the same family of mechanism; Lemma 5.5's dynamics has no counterpart here |
+
+**Not needed by their argument:** saturation, maximal covers, Grundy colourings and the top colour (rows 140–144, G84, G85, G89);
+integer radii and pencils; row 131's periodic approximants and the hole functional `µ_k(ε)`; any tile count or discharging (row
+137's count; G86); the non-Siamese and simplicity hypotheses of rows 138, 148–150 — nothing in §§ 5–8 distinguishes Siamese
+pairs; any density bound on one class (row 129); measure rigidity (Theorem 1.4 is proved directly on the measurable colouring).
+
+**New to this project, and colour-count-free as written** (my reading of the proofs; each is stated there in a five-colour
+section but uses no count): Lemma 5.2 (transport of palettes between centres); **Lemma 5.5** (binary centres for one pair are
+`δ_*`-separated, `δ_*` absolute — a statement **uniform in the colouring**, the kind row 139 says seven needs: "seven is the NO's
+hole bound made uniform in the complexity bound"); Lemma 6.2 (an interface of positive `|h|`-density at `x` empties both its
+colours from a trace at `x`); Lemmas 7.2–7.8 with the nerve map. INVENTORY: generalization (Lemma 5.5 and the extraction at
+every `k`).
+
+### 3.4 Which step uses five and not six
+
+Five is not used at one step; it is used as **one arithmetic fact at three places**: *the labels a configuration does not use are
+at most two, and two is where the ring is rigid.*
+
+1. **Prop. 5.6** (`M/palettes.tex:639–640`): "uses only the complementary pair `{1,…,5} ∖ 𝒜`". A triple leaves a pair; a pair
+   makes a binary centre; Lemma 5.5 applies. With six labels the same proof gives `|P_x(e)| ≤ 3` and no more: a triple leaves a
+   triple, the ring about `x + e` is three-coloured with only `s(Re) ≠ s(e)`, and the identity
+   `s_x(α₊(t)) = s_x(α₋(t)) = −s_y(t)` that drives the dynamics has no three-label form.
+2. **Theorem 6.5**: the triangle's outside is a pair (binary again); Lemma 6.4 needs exactly two labels outside `{X} ∪ D`; the
+   five-cycle's palettes are the diagonals of `C₅`, disjoint exactly at index difference `±1`.
+3. **§ 8**: `5 = ℓ + (labels outside the cycle)`, with 0, 1, 2 outside for `ℓ = 5, 4, 3`, and each is locally contradictory.
+   The triangle is killed because **two** outsiders make the ring binary, binary strips are rigid, and what is left is a
+   **three**-label open region, which the 4-chromatic Moser spindle fits.
+
+**At six a triangle has three outside labels and is not locally contradictory** — three-colour vertices are the generic
+vertices of every seven-colouring and of the printed tight six-coloured regions (row 136's cubic trichromatic vertices). So a
+six-colour version cannot end as theirs does, "every extracted cycle is impossible"; it needs a **global** step that selects a
+cycle of length at least four, which is what row 137 does for maps, by Woodall's reduction and a count that G86 says is blind
+to Siamese pairs.
+
+**The statements about six that would make the same argument run**, in the order the argument needs them (none is claimed
+here; each must fail for some colouring if `χ(ℝ²) = 6`):
+
+- **[P₆]** in every weak measurable six-colouring, almost every palette at every centre has at most two labels (their method:
+  at most three);
+- **[L₆]** the locus of centres whose transition graph contains a cycle is locally finite (closedness is free). Given [L₆],
+  **Acts 3 runs verbatim at six** — Lemmas 7.2–7.8 use no count — and yields a point, a simple label cycle of length
+  `ℓ ∈ {3, 4, 5, 6}` and `ℓ` continua with the two-colour exclusion: *a map-step substitute, with no regularity*;
+- **[G₆]** some such point carries a cycle of length at least four (the weak measurable form of row 137's FS114-CV-EXISTS),
+  or the triangle case is refuted non-locally (the weak form of S–V's Cor. 1);
+- **[A₆]** the angular exclusions at `ℓ = 4, 5, 6`, with two, one and no outside labels — the weak measurable form of
+  C114-LOCAL-F (the ranked stubs FS-124, FS-123, FS-125). Their correspondence with the five-colour cases is by the number of
+  outside labels, not by `ℓ`:
+
+| outside labels | at five | at six | what the five-colour kill becomes at six |
+|---|---|---|---|
+| 2 | triangle (Prop. 8.10) | four-cycle = a four-colour vertex | binary ring, strips rigid (Lemma 8.6 as is); but the palette may be a diagonal of the vertex's own four labels (a (Q) arc) — the case their four-cycle argument handles with **one** outsider and ours holds open (FS-124); where the ring is (Q)-free, a **four**-label open region, which needs a **5-chromatic** unit-distance graph inside it (§ 3.5) |
+| 1 | four-cycle (Prop. 8.5) | five-cycle = a five-colour vertex | the word argument needs "the non-diagonal state is the single outsider"; its six-colour form is open (FS-124's five-colour vertices) |
+| 0 | five-cycle (Prop. 8.2) | six-cycle = a six-colour vertex | the mod-5 closing argument has no mod-6 form: on `C₆` both `{i, i+2}` and `{i, i+3}` are admissible palettes (row 148 holds a six-colour vertex on every disc of radius below 3/2) |
+| 3 | — | triangle | locally possible; needs [G₆] |
+
+**How it fits more than one class together** (the brief's question against row 129). Row 129 says a bound on one class at a
+time gives at most `⌈1/α⌉ ≤ 5`. The manuscript never bounds a class. Its three devices are all about *which classes coexist*:
+(i) the palette is a set of labels at a point of a ring, and its exclusion `c(x+e+v) ∉ P_x(e) ∪ P_x(v)` removes labels from a
+region according to **two** palettes at once — the count enters as "the complement of what two palettes hold"; (ii) the
+transition graph is a graph on pairs of classes, and the topological step is the nerve of the cover by the classes (a plane
+region cannot be covered with multiplicity two by sets of diameter about 1); (iii) the endgame is combinatorics of a label
+cycle against its complement. This is G25's ladder in measurable form — "χ ≥ 5 a regional pigeonhole whose kills are the
+previous level's forcer" — with the kills by a unit pair (one label left: Lemma 6.3), a unit triangle (two left: Lemma 6.4)
+and the Moser spindle (three left: Prop. 8.10).
+
+### 3.5 One cross-application, stated as a question (a candidate; nothing here is derived beyond the first sentence)
+
+In a valid six-coloured fragment about a vertex `p` of exactly four colours whose ring is (Q)-free, every point
+`p + e + v` with `p + e` interior to the absent colour `X` and `p + v` interior to the absent colour `Y` is at distance 1 from
+both, so it carries one of `p`'s four colours: **the region is four-coloured, with no hypothesis on Siamese pairs or
+simplicity.** With the ring's six alternating 60° sectors it is their region (8.2), which contains a neighbourhood of `p`, the
+whole circle of radius `√3` and six spokes. So *if some unit-distance graph that is not four-colourable lies in that region
+under a rigid motion, the (Q)-free four-colour vertex dies on every disc of radius above 2 in every class* — the Siamese class
+included, which rows 148–149 do not reach and FS-123 holds open ("left: the Siamese class"). The manuscript's triangle kill is
+this statement one colour down, where the graph is the Moser spindle. Whether a 5-chromatic graph (509, 510, 553 vertices in
+print) fits is a placement search over three parameters, exact to verify, and standing rule 5 makes it the Searcher's.
+INVENTORY: search request; stub to re-aim (FS-123).
+
+### 3.6 What I reworked, what I took as read, and one check of my own
+
+Reworked by hand: Lemma 5.2 (2)'s `o(h²)` and (3)'s two limits; Cor. 5.4; in Lemma 5.5 the representation
+`d + e^{it} = e^{iα₊} + e^{iα₋}`, the expansions of `α_±`, `α₋⁻¹`, `F`, the identity `s_x ∘ F_j = s_x`, the two maxima over six
+phases, the interval-enlarging and distortion estimates, the extension step; Prop. 5.6; Lemma 6.2's Plancherel multiplier and the
+Cauchy–Schwarz threshold; Lemmas 6.3 and 6.4 (the triangle of side 1 at distance `1/√3`); (6.5) and the limit in Lemma 6.6; the
+support transport rule, the velocity formula, the two-partner step and the closing separation argument for four-cycles; Lemma
+6.7; the five residues `j` in the five-cycle accumulation; Lemmas 7.2, 7.3 (`N_ε ε = o(1)`), 7.5; the mesh argument of Lemma 7.6
+and its reuse in Prop. 7.1 (3); Lemma 8.1's sign identity; Prop. 8.2's runs and the mod-5 step count; the split signs, Lemma
+8.4's four steps and Prop. 8.5's arc count; Lemma 8.6's four-edge path; Lemma 8.7's count of projective classes; Lemma 8.8's
+triple-angle identities. Taken as read: the strong convergence (5.2) of Lemma 5.2 (1) (a standard change of variables, read, not
+recomputed); the third (uniform) clause of Lemma 6.3; the `o(δ_n)` remainder justification; Lemma 7.4's merging bookkeeping;
+Lemmas 7.7 and 7.8 (graph words; a component crossing an annulus — standard, read in full); the isolation step inside Lemma 8.3
+(read, plausible, not recomputed); the manuscript's two certificate tables.
+
+**My own check of Lemma 8.9**, independent of their tables: `data/external/oai2/moser_certificate_check.py` evaluates
+`P` and `P′` at the seven placed points in interval arithmetic at 60 digits and the eleven unit edges exactly in sympy —
+`CERTIFICATE HOLDS` (`moser_certificate_check.out`; the tightest point is `uT`: `P ≤ 12.5744 < 13.0226 ≤ P′`, inside their
+`12.65 < 12.9`). Control: with the translation's imaginary part moved from `149/250` to `249/250`, six of the seven points
+leave the region and the script prints `CERTIFICATE FAILS`.
+
+**Lean, by module name only** (the kernel's word is EXT-OAI1's): the headline's second line is
+`no_measurable_weak_five_coloring` (`lean/OAI/Geometry/PlaneColoring/Five.lean`); the cone's module names follow the acts —
+`Palettes`, `PaletteTransport`, `PaletteDensity`, `BinaryPalettes`, `BinaryDynamics`, `Expansion`; `Transitions`,
+`CircleDecay`, `States`, `FourContinuity`, `FourTransport`, `Accumulation`, `FiveSupport`, `CyclicCore`; `DiskAverages`,
+`HoleApproximation`, `GraphPatches`, `PlanarCovers`, `GraphCuts`, `ContinuumLimits`, `Interfaces`, `Exclusion`; `Sectors`,
+`AngularBoundary`, `BoundaryTrace`, `Moser`.
+
+### 3.7 Predictions scored
+
+P5 (0.90: the five-specific step is the last section's case analysis) **met in substance and too narrow**: the same count is
+spent twice before (Prop. 5.6, Theorem 6.5). P6 (0.50) **met**. P7 (0.60) **met**: Act 3 is the same at every number of colours,
+given local finiteness. P8 (0.75) **half met**: the palette is the ring in measure, and Theorem 6.5 plays at five the part REG-J′
+plays in route M, but it is not REG-J′ — `𝓛` is defined by transition graphs, is smaller than a singular set of interfaces, and
+nothing about arcs is proved. P9's second half (0.50: an extraction step I cannot verify on one reading) **lost**.
