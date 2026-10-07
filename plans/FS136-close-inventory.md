@@ -45,4 +45,32 @@ rounds on tight unit pairs; the asking lane's verdict "record job", then this su
    information**: the kernel planner's blind result that the forcing on pieces holds for any two families of pieces whose
    labels are all the labels — this milestone's second claim, reached by a second mind before the deriver starts (FS-124
    inventory item 29). Its commit subjects are to stay neutral while that planner is blind.
+3. **FS136-E1, first message (16:06 UTC logged): the opening is saved — and the card had missed, again, a theorem this project
+   holds** (commit `1f22daba`; plan `plans/FS136-the-point-across.md` with §G, §PA, §IQ, the routes and the registered
+   predictions). **Prior art in this project the card did not find**: its second claim's line says "no held entry found
+   for a member of four labels" after a search of rows 135–138 and 145–150; **one milestone earlier, FS-110 holds the
+   object under the same name, for maps** — "covering pair: the union of the closure types is all six" (its claim list);
+   FS110-CALC, "no point of the plane sees all six colours near distance 1, so the closure types of any family of
+   vertices covering six cannot all block" (three minds on two of its parts); **FS110-N-SEAM** (two minds, one blind),
+   "for a covering pair at distance below 2 each common unit point lies on the boundary set, every tile there lies on one
+   side of the unit circles" — "its proof says where six is spent and gives the seven-colour control the card poses". So
+   the second claim "restates FS110-N-SEAM (a)–(b) with FS110-CALC, for members of any number of colours and families of
+   any size. What a measure form can add: nothing assumed at the common unit point (no tile, no map), and a conclusion
+   about the members' pieces. Each verdict will say this." **Two posed conclusions are met by a degenerate case and are
+   restated on labels**: at a pieced point two pieces may carry one label; one region cut in two along the unit circle is
+   an inner and an outer piece, and "separates" then says nothing. **Added**: C136-TABLE — for any finite family of
+   points on a unit circle about `w`, each with a family of pieces, almost every point near `w` has a label that, for
+   every member carrying it, lies wholly on that member's matching side. **One thing for my eye, registered by it as not
+   blind**: reading the flower's held exclusion for the prior-art gate, it expects the first-order lemma to reach the
+   flower's far vertex with six kept pieces — the last claim's content — and that the cover claim is "necessary and not
+   sufficient there: one member separates and a cell is still empty". Nothing is derived. **My receipt**: the commit is on
+   `main`; its § The claims copied whole into the claim list by script. Not checked by me: FS-110's entries against its
+   quotations; its §G and §IQ (scored at its next message, with the reading). **Rulings.** (a) The restated and added
+   statements are accepted as the claims its verdicts are about. (b) **The asking lane's card missed held prior art for
+   the third time today** — after an entry filed this afternoon (G99, with G92's amended *Do*) that says how not to: the
+   card searched ledger rows of two milestones and not the derivation files of the one before them. Logged as an
+   instance for this milestone's record job; and the next asking brief names FS-107 and FS-110 by file. (c) What a
+   verdict on the second claim will be, said before it exists: a held two-minds theorem about maps, restated in measure
+   with nothing assumed at the common unit point — and a second mind has already reached its count blind (FS-124
+   inventory item 29).
 
