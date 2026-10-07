@@ -61,6 +61,26 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # FS132-F1 (2026-10-07, the coordinator's amendment R1)
+    "data/fs129/index/lean-order-corrected.md": "FS132-F1 (M8) replaced the open-milestones sentence; the fact stays in `plans/LEAN-BACKLOG.md`",
+    "FS129-L1": "FS132-F1 (M8) replaced the open-milestones sentence; the fact stays in `plans/LEAN-BACKLOG.md`",
+    "[hand, two minds each]": "`[OAIMath2026]` Thm 1.3 replaced link 1's grade for the plane's equality (FS132-F1); the fact stays in `plans/STUB-regularity-wall.md`",
+    "4–74": "the group row reads 4–72 since FS132-P1's re-rank (72 ranked rows)",
+    "six-colour-research-directions.md": "FS-49 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-distance-two-gadget.md`",
+    "six_le_chromaticNumber_plane_of_separated_two": "FS-49 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-distance-two-gadget.md`",
+    "μ(2)": "FS-49 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-distance-two-gadget.md`",
+    "J23": "FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/POROS-2026-10-03-fs129-rerank.md`",
+    "§ J23": "FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/POROS-2026-10-03-fs129-rerank.md`",
+    "Theorem 5": "FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-regular-half-residuals.md`",
+    "FS106-V3's": "FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-regular-half-residuals.md`",
+    "FS114-N2-AVG's": "FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/FS129-OR1-audit.md`",
+    "25's": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-curved-pencils.md`",
+    "62.14": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    "j/5": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    "m₄(ℝ²)": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    "χ_g(H)": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    "80's": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    "FS112-N3-COR3's": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/FS112-unit-arc-half.md`",
     # FS129-F1 (2026-10-03, the coordinator's amendment R1): FS129-P1's re-drafted ranked rows.
     'j = 2, 3': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
     '104–108': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`",

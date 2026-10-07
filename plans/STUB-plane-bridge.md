@@ -1,5 +1,7 @@
 # FS-39 — The bridge: χ(ℝ²) is the supremum of χ(F²) over real number fields (STUB, 2026-09-13; minted by the Poros wall-breaking pass, card 3 of `plans/POROS-2026-09-13-wall-breaking.md`)
 
+> Re-aimed 2026-10-07: `[OAIMath2026]`'s transfer reads a colouring only on the algebraic plane, so `χ(ℝ²) = χ(ℚ̄²) = sup_F χ(F²)` follows with no Tarski; what is left of this stub is the drawing lemma, and stating which kernel consumers of `RealAlgebraicDescent` the import discharges.
+
 **At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 30 → 25 in `plans/FRONTIER-STUBS.md`.** Partly superseded: FS-103's F1 (a candidate composition, not a result: given MR, row 120, and T-J39-3, at a real field with no non-thick stable place, `χ(ℝ²) = χ_CP(ℝ²) = χ(F²)`), given MR, attains `χ(ℝ²)` at a named field. Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
 
 **At FS-91's close.** S1 holds for every algebraic `F ⊆ ℝ` and every purely transcendental extension of one, with `L(F)` read over all `c`-stable valuation rings (row 99); a general transcendental `F` hits this stub's gap (finite generation not purely transcendental over an algebraic field).

@@ -1,0 +1,12 @@
+bibliography: 522 keyed rows, 24 retired/alternate keys
+cited across the repository: 253 arXiv ids, 494 bracketed keys
+
+arXiv ids cited but NOT in the bibliography: 1
+   arXiv:2008.07987   first seen in data/fs132/f1/README.md
+
+bracketed keys cited but neither defined nor aliased: 3
+   [Author2024]   first seen in data/fs132/briefs/FS132-F1-front-page.md
+   [Bekka2008]   first seen in data/fs132/f1/README.md
+   [TaoDisintegration2008]   first seen in data/fs132/f1/README.md
+
+UNLOGGED PRIOR ART: 4

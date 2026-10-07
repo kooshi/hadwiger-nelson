@@ -1,5 +1,7 @@
 # FS-108 — the print residuals of the regular half (stub)
 
+> 2026-10-07: closed as a need — FS106-AE-MAP6's role is discharged by `[OAIMath2026]` Thm 1.4 (no a.e.-proper five-colouring of any kind). Townsend's simplification (c) remains a note on a printed proof.
+
 *Minted 2026-09-27 by the close planner FS106-C at FS-106's close (`plans/FS106-close-inventory.md` items 36, 57, 59; `plans/FS106-regular-half.md`
 §R-close 3.6). **Solver column: none** — reading, derivation and Lean. Written for a session with zero conversation memory: read `CLAUDE.md`
 § The aim and § Counter-priors first, then `LEDGER.md` rows 131–132 and `plans/FS106-derivation.md` §§1–2.*

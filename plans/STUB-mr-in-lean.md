@@ -1,5 +1,7 @@
 # FS-113 — measure rigidity for the unit-vector group, in full, in Lean (stub)
 
+> Demoted 2026-10-07: the plane's equality `χ(ℝ²) = χ_m⁰(ℝ²)` is `[OAIMath2026]`'s and enters by import; MR(F) in Lean is needed for the field rows (120–129) only.
+
 *Minted 2026-09-27 by the product owner at Kooshi's ruling (the consolidation run, `plans/CONSOLIDATION-2026-09-27.md` item 6): asked whether "MR
 in full in Lean" gets its own stub, he chose *"Yes, mint the stub (Recommended)"*. The gap it fills was named by the 2026-09-27 ranking pass
 (`plans/RERANK-2026-09-27.md` § 4): *"No row of the ranked table carries MR in full in Lean, the first item of § The aim's Lean program; FS-101
@@ -53,5 +55,7 @@ plan's guess (`CLAUDE.md` § What compute actually helps: kernel phases re-price
 G80 (infinite rank is the resource; the height count is the hypothesis), G81 (where every place mixes, the field is the plane — the consumer), G76
 (the measure half of four-colour rigidity), G21 (a reading gap is named, never smoothed over); rows 120, 127, 128, 130; FS-101 (its consumer),
 FS-105 (its hardening, closed), FS-100 (its origin).
+
+*2026-10-07 (EXT-OAI3):* `[OAIMath2026]` family 015's Lean folder `OAI/NumberTheory/DukePrimeDegree/` (886 files, 87,763 lines, Lean 4.34.1, Apache-2.0; headers only read) names conditional entropy for countable partitions, leafwise measures and steps of Einsiedler–Katok 2003 and Einsiedler–Katok–Lindenstrauss 2006 — the toolkit EL2021's proof uses, absent from Mathlib. Read its `Entropy/` and `Geometry/` statements before planning PE-2's inputs from scratch; every piece is a port across 1,502 Mathlib commits.
 
 *At FS-111's close:* FS-111's route-M lemmas (FS111-C1-UNIF, V0-RESCALE, C-FILL, C-HULL, M-SATC, M-PINCH, M-C11, M2-COV, M2-ZERO, M2-INT, M2-FIX, M2-HULLC, M2-REDUCE-C, M2-INTRAD) are queued behind the measurable chain: their objects are not in `Proofs/`.

@@ -1,6 +1,6 @@
 ---
 name: grokkings
-description: lean-dir's grokkings, the working theory of the Hadwiger–Nelson hunt — entries G1 to G92, each with its status, its Do and its killing test or what it forbids. Preloaded at launch into the poros, ephodos, ephodos-verifier and debruijn agents through their skills field; the coordinator and the Clerk read an entry here by its number instead of loading the file.
+description: lean-dir's grokkings, the working theory of the Hadwiger–Nelson hunt — entries G1 to G95, each with its status, its Do and its killing test or what it forbids. Preloaded at launch into the poros, ephodos, ephodos-verifier and debruijn agents through their skills field; the coordinator and the Clerk read an entry here by its number instead of loading the file.
 ---
 
 # Grokkings — the working theory of Hadwiger–Nelson (the entries)
@@ -1127,4 +1127,30 @@ writer.*
   them before asking where else it bears; trigger: a statement whose class names a property its proof does not use, or a second milestone about to
   re-derive a near neighbour.* Killing test: a pass in which the restated (widened) forms fail on attack more often than they hold — then the
   statements were tight and the reach was not there.
+* **G93 — The plane's number is a measurable one, by rigidity where no place is stable. [external: `[OAIMath2026]` Thm 1.3,
+  kernel-checked there, audited and read here; the reading one mind]** `χ(ℝ²) = χ_m⁰(ℝ²)` with no hypothesis: restrict a
+  colouring to the algebraic plane, average over its rigid motions, keep the part of each class's indicator that is
+  continuous in the plane's topology (a conditional expectation), and the rest is uncorrelated at every algebraic
+  translation because a rotation-invariant law on the dual with no continuous part is Haar. It is G81 at its limit — at
+  `ℝ_alg` no place is stable, the rotation group is divisible and every small real is a sum of two unit vectors — and it is
+  why no number field was needed for the plane. *Do: pose every question about `χ(ℝ²)` for measurable colourings proper at
+  almost every unit pair, and cite the transfer; keep "given MR" only where a number field's plane is named; when a rigidity
+  question about a group action resists at a finitely generated or number-field level, ask whether the question's consumer
+  can be moved to the divisible hull first. It forbids a value of `χ(ℝ²)` different from `χ_m⁰(ℝ²)`; nothing kills it but
+  a defect the kernel did not see in the statement's fit (the audit read the statement against its challenge).*
+* **G94 — The nerve replaces the map: what an exclusion argument needs from regularity is a continuous map to a graph and
+  connected fibres. [external for five (`[OAIMath2026]` §§ 6–7); the six-colour reading one mind]** Off the centres where
+  three classes meet cyclically, a measurable colouring's smoothed and thresholded classes land in the complete graph on the
+  colours; covering dimension forces an essential loop; fibres over edge midpoints are continua with Sokolov–Voronov's
+  exclusion. No curve, perimeter or saturation is used. *Do: when a route stalls at making a colouring a map (route M's
+  REG-J′, curved pencils, integer radii), ask first whether its consumer reads arcs or only a point with interface continua
+  and limiting directions; if the latter, the statement to prove is local finiteness of cyclic centres and nothing about
+  arcs. Killing test of the six-colour reading: a consumer in rows 134–138 or 145–150 that cannot be restated for continua.*
+* **G95 — Tightness is not regularity: the palette bound and the local finiteness of vertices are false under local slack.
+  [hand, one mind (EXT-OAI2 § 4.3; entries `EXT-OAI2-SLACK7-L`, `EXT-OAI2-SLACK7-P`)]** In the hexagonal seven-colouring,
+  slack at a vertex admits accumulating islands and three-colour stripes along a unit circle. So a statement of the form
+  "every measurable `k`-colouring has locally finite vertices" or "at most two colours along a ring" can be true only where no colouring has local slack — at five, of an empty class — and at six it must be posed for a normal form. (*Local slack* is freedom to recolour near one vertex; row 132's slack is a forbidden interval of distances everywhere, `[Voronov2023]` Thm 1.1 — FS132-P1.) *Do: before transplanting a five-colour lemma of `[OAIMath2026]` to six, plant local slack in the hexagonal seven-colouring and see whether
+  the lemma survives; if it does not, pose it for honest saturated colourings (rows 140, 143). Killing test: a
+  slack-sensitive statement proved at six for all measurable colourings — it would show no six-colouring has slack at a
+  vertex, a strong rigidity in itself.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** Retired to `plans/GROKKINGS-RETIRED.md`; carried by `plans/PROTOCOL-competitor-and-advisor.md`, the `keryx` skill's `<independence>`, `.claude/agents/ephodos-verifier.md`, and `plans/STANDING-RULES.md` rules 6, 8 and 11.

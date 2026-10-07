@@ -46,22 +46,22 @@ it joins) and `--dupes` (nothing retold). **A paragraph tagged `[PROTECTED — n
 - **Grades.** Ledger rows are kernel-checked unless marked; grokkings carry a status. **[kernel]**; **[tools]** / **[measured]**
   (tools-side: exact arithmetic with controls, or a controlled instrument); **[cert]** (an exact certificate accepted by a standalone
   checker, not the kernel); **[hand]** (a hand proof); **[derived]** (derived from results held); **[reading]** (an interpretation,
-  believed and falsifiable — it names its killing test); **[external]** (claimed in the literature, unchecked here); **[method]** (a
+  believed and falsifiable — it names its killing test); **[external]** (claimed in the literature, unchecked here); **[kernel, outside]** (kernel-checked in an outside library at its own pin, built and audited here; it enters this library as a declared outside theorem); **[method]** (a
   working rule).
 
 ## The mission
 
 How many colours does the plane need so that no two points at distance exactly 1 share a colour?
 Known since 1950 to be 4, 5, 6, or 7; de Grey (2018) ruled out 4 with a 1581-vertex unit-distance graph
-that is not 4-colourable.
+that is not 4-colourable. `[OAIMath2026]` (2026) ruled out 5 (row D below).
 
 | rung | status |
 |---|---|
 | **A. χ(ℝ²) ≥ 4** — the Moser spindle | ✅ kernel-checked; exercised the whole pipeline end to end |
 | **B. χ(ℝ²) ≥ 5** — de Grey's graph | ✅ kernel-checked (M06–M09) on axioms exactly `[propext, Classical.choice, Quot.sound]`; our foundation, not our product. Also derived with no witness object, at [hand] (§ Where the problem stands) |
 | **C. The search instrument** — shrinking, criticality, fractional bounds, fans, sweeps | ✅ built through M17, extended by every milestone since |
-| **The upper end** — χ(ℝ²) ≤ 7 | ✅ kernel-checked (M36), so the repository holds **5 ≤ χ(ℝ²) ≤ 7** on the standard three axioms. Not new mathematics: it exists because the certificate machinery is the promotion path for any future periodic avoider, and a five-colour avoider IS the open upper-bound problem |
-| **D. The answer** — χ(ℝ²) decided | open. Given MR it is one question about measurable colour classes, and both of its answers decide the problem (§ The aim) |
+| **The upper end** — χ(ℝ²) ≤ 7 | ✅ kernel-checked (M36), so the repository holds **5 ≤ χ(ℝ²) ≤ 7** on the standard three axioms. Not new mathematics: it exists because the certificate machinery is the promotion path for any future periodic avoider, and a six-colour avoider IS the open upper-bound problem (five is excluded: row D) |
+| **D. The answer** — χ(ℝ²) decided | open at six against seven. **`6 ≤ χ(ℝ²)`** is `[OAIMath2026]`'s — a transfer from arbitrary to measurable colourings and an obstruction to five there; kernel-checked in its own library, built and audited here (EXT-OAI1), read in full (EXT-OAI2), not in this library — so `χ(ℝ²) ∈ {6, 7}`. With no hypothesis it is one question about measurable colour classes, and both of its answers decide the problem (§ The aim) |
 
 ### The aim
 
@@ -71,31 +71,21 @@ think we can go all the way to an HN solution)"*. It replaces every earlier targ
 skipping six): *"You can remove the old goals. We blaze the trail now."*
 
 **The direction: the regularity wall** (the owner's reading, 2026-09-26, adopted by Kooshi; each link at its grade):
-1. **Given MR, the plane is the measurable problem.** `χ(ℝ²) = χ_CP(ℝ²) = χ_m⁰(ℝ²)` — the fewest colours in a Lebesgue-measurable colouring
-   whose unit pairs are bichromatic almost everywhere — and it equals `χ(F²)` at each totally real field where every stable place mixes at six
-   colours, ℚ(√635087) and de Grey's field among them (rows 128, 130; [hand, two minds each]). The arithmetic is exhausted there: every
-   prime mixes, and what is left is analysis in `ℝ²`.
+1. **The plane is the measurable problem, with no hypothesis.** `χ(ℝ²) = χ_CP(ℝ²) = χ_m⁰(ℝ²)` — the fewest colours in a Lebesgue-measurable colouring whose unit pairs are bichromatic almost everywhere — at every number of colours (`[OAIMath2026]` Thm 1.3: measure rigidity proved at the real algebraic numbers, where no place is stable; `χ_m⁰ ≤ χ` kernel-checked in its library and audited here; `χ_CP = χ_m⁰` is row 130's). Given MR at a number field (row 120) it also equals `χ(F²)` at each totally real field where every stable place mixes at six colours, ℚ(√635087) and de Grey's field among them (row 128; [hand, two minds]). What is left is analysis in `ℝ²`.
 2. **Upper bounds need no MR.** `χ(ℝ²) ≤ χ_m⁰(ℝ²)`: move a measurable colouring by a random rigid motion; each edge of a finite graph is
    bichromatic almost surely, and de Bruijn–Erdős finishes ([hand, two minds]: FS103-N's N-EASY, PA1's (E)); its argument is in print
    (`[GwynStavrianos2022]` Lemma 2, Thm 2, under an invariant mean; the Haar-average line unprinted, row 130), and choice enters at
    de Bruijn–Erdős alone (a reading, one mind; `[ShelahSoifer2003b]` p. 42 names that step).
 3. **Density cannot give six.** One colour class at a time is capped below 4.37 (row 129); a proof of six must use how the classes fit
-   together, never only how large each is.
+   together, never only how large each is. `[OAIMath2026]`'s six does exactly that: labels on a ring, the graph of adjacent classes, the nerve of the cover (`plans/EXT-OAI2-reading.md` § 3.4).
 4. **Regular colourings need seven, verified and almost everywhere** (row 132). Closed colour classes need seven (`[Voronov2023]` Thm 1.3: six
    closed sets covering a disc of radius 3 realize the unit distance; closedness enters once, as compactness giving a band), and so does any
    colouring with slack (Thm 1.1) — proofs repaired locally, the paper an unrefereed preprint. Almost everywhere, boundaries free: slack needs
    seven; polygons and locally finite convex tilings need seven, `[SokolovVoronov2025]` repaired, its map theorem a
-   GAP at the fills; nice maps need seven (`[Thomassen1999]`). Maps need six for arc maps:
-   `[Woodall1973]`'s steps 1–6 (step 6 by Townsend's lemma) and FS131-E1's lemma in place of his steps 7–8, which have GAPs as printed; for
-   Jordan boundaries, owed (`[Townsend1981]` prints no proof); `[Coulson2004]`'s six is for tiles with an area bound.
-5. **So, given MR, Hadwiger–Nelson is one question: can vanishing holes save a colour?** With no MR, `χ_m⁰(ℝ²) ≥ 7` iff six classes, each
-   free of monochromatic pairs at distances in `[1−ε, 1+ε]`, cannot cover the plane up to holes of density tending to 0 as `ε → 0` (row 131;
-   `[SokolovVoronov2025]` §9's hypothesis). A refutation needs no wild set: it is a sequence of periodic grid-square colourings, wild only in the
-   limit, whose normal form FS-103 holds, or valid fragments on discs of every radius (row 145). Both answers decide the problem. *No* — Voronov's contradiction survives a free colour of vanishing
-   density — gives `χ_m⁰(ℝ²) = 7`, hence `χ(ℝ²) = 7` given MR. *Yes* — such a sequence, with six or five colours — gives `χ(ℝ²) ≤ 6`, or
-   `= 5`, **with no MR**: the first move of the upper bound since 1950.
+   GAP at the fills; nice maps need seven (`[Thomassen1999]`). Maps need six, of every kind and almost everywhere, by citation: every measurable colouring proper at almost every unit pair needs six (`[OAIMath2026]` Thm 1.4), Jordan boundaries included. This project's proof for arc maps (`[Woodall1973]`'s steps 1–6, step 6 by Townsend's lemma, FS131-E1's lemma in place of his steps 7–8) stands as a second route.
+5. **So Hadwiger–Nelson is one question: can vanishing holes save the seventh colour?** `χ(ℝ²) = χ_m⁰(ℝ²) ∈ {6, 7}` (`[OAIMath2026]` Thms 1.3, 1.4), and `χ_m⁰(ℝ²) ≥ 7` iff six classes, each free of monochromatic pairs at distances in `[1−ε, 1+ε]`, cannot cover the plane up to holes of density tending to 0 as `ε → 0` (row 131; `[SokolovVoronov2025]` §9's hypothesis). A refutation needs no wild set: it is a sequence of periodic grid-square colourings, wild only in the limit, whose normal form FS-103 holds, or valid fragments on discs of every radius (row 145). Both answers decide the problem. *No* — Voronov's contradiction survives a free colour of vanishing density — gives `χ(ℝ²) = 7`. *Yes* — such a sequence with six colours — gives `χ(ℝ²) = 6`: the first move of the upper bound since 1950. At five the answer is in: the holes stay of density bounded below (`lim µ₅(ε) < 1`; row 131 with Thm 1.4).
 6. **Its tools are Voronov's circle topology made robust, and the density topology** (approximate continuity, Lebesgue density, De Giorgi's
-   structure theory for finite-perimeter classes) — the room after ergodic theory in G30's ladder. Two proof shapes are closed (row 131):
+   structure theory for finite-perimeter classes) — the room after ergodic theory in G30's ladder. A third tool is `[OAIMath2026]`'s nerve: off a locally finite set of centres a measurable five-colouring's smoothed classes are a continuous map into the complete graph on the colours, and covering dimension forces a point with interface continua carrying Sokolov–Voronov's exclusion — no regularity of any class. At six it needs two statements that are false under local slack at seven and so belong to a saturated normal form: at most two labels along a ring, and local finiteness of the centres where three classes meet cyclically (`plans/EXT-OAI2-reading.md` § 4.3). Two proof shapes are closed (row 131):
    counting holes met by circles caps at `O(ε)`, and trichromatic points vanish from partial colourings; the index of density traces fails
    where a unit-arc interface faces a bowtie (row 132). A reading, with its test: finite perimeter is Lipschitz-in-probability, the
    quantitative form of the continuity every CP colouring has. Killing test: a CP colouring whose disagreement `P(c(0) ≠ c(h))` is
@@ -105,7 +95,7 @@ skipping six): *"You can remove the old goals. We blaze the trail now."*
 Voronov's contradiction survives a free colour if a complementary junction pair is forced at a scale bounded below, and vanishing holes at bounded
 complexity are a tight six-map; **FS-110, the tangency seam — closed** (row 134: none under Condition 5); **FS-112, the unit-arc half — closed** (rows 135–136);
 **FS-114, the unit-arc question — closed** (rows 137–138: one local exclusion about a four-colour vertex suffices for the NO); **FS-116, the local exclusion — closed** (rows 145–148: the Γ-free four-colour vertex dies at `1 + ε`); its successors **FS-123, the Siamese class**, **FS-124, the (Q) ring**, **FS-125, the saturated class**;
-**FS-117, route T's count** (the non-Siamese part); **FS-115, the stuck ray** (the density form only); **FS-111, the cone scale and the regularity step — closed** (rows 139–141); its successors **FS-120, the pinch at a junction, and the cover route at five**, **FS-121, the map step — closed** (rows 142–144); its successors **FS-126, curved pencils**, **FS-127, lateral extent**, **FS-128, the top colour, at five and six**, **FS-122, the forced pair**; **Lean throughout** — MR in full
+**FS-117, route T's count** (the non-Siamese part); **FS-115, the stuck ray** (the density form only); **FS-111, the cone scale and the regularity step — closed** (rows 139–141); its successors **FS-120, the pinch at a junction**, **FS-121, the map step — closed** (rows 142–144); its successors **FS-126, curved pencils**, **FS-127, lateral extent**, **FS-128, the top colour, at six**, **FS-122, the forced pair**; on `[OAIMath2026]`, **FS-132, six by the nerve**, and **FS-133, the one-class transfer**; **Lean throughout** — MR in full
 (Einsiedler–Lindenstrauss, Einsiedler–Fish), the collapse, the measurable chain, the map argument.
 
 ### Counter-priors — read before pricing anything (Kooshi, 2026-09-26)
@@ -144,7 +134,7 @@ d ≡ 11 (mod 12) and at ℚ(α,√7), α³ = α + 1, is met (rows 82–83, 99).
 itself: seven at ℚ(√635087) is `χ(ℝ²) = 7` given MR (row 128). **A finite refusal only confirms**: a prediction falls to a colouring of the
 whole plane with fewer than L colours, local at no prime (G48), so five over ℚ(√167), held at [hand] (row 123), confirmed it and could not
 falsify it, and only FS-64's windowed form still aims at one (its one-character case is closed, rows 96, 101). Believing the answer is seven
-is not evidence for seven; the value-skipping that motivates the belief is itself compatible with five (G64).
+is not evidence for seven; the value-skipping that motivated the belief was compatible with five until `[OAIMath2026]`; now some real number field's plane needs six (its transfer reads the colouring only on the algebraic plane), so `L(F) ≥ 6` is attained with `χ(F²) ≥ 6` somewhere, and the conjecture's open content is which fields and whether six or seven.
 
 **The mission is exclusively a hunt for new mathematics, however small, ratcheting toward major findings**
 (Kooshi, 2026-08-02). A formalized statement earns its place by being structure nobody had named, or a rung
@@ -196,19 +186,17 @@ Titles seen only in search listings are marked as such until checked against the
 rewritten in place at every filing; a milestone whose filing does not update this section has not moved state. The understanding the
 results add up to lives in § Grokkings; both point (`row 68`, `G56`) and never retell.*
 
-*Last updated: 2026-10-03 — **Workflow 3.1**: a milestone moves Not started → Opened → Derived → Closed, and is Closed only when its Lean
-module passes the gate; milestones closed before it keep the word, and their hand results are the Lean backlog. Last filed: **FS-129, the cross-application audit**, Derived (rows 149–154; `plans/FS129-derivation.md`, 44 entries, each derived, one mind); before
-it **FS-116, the local exclusion**, and **FS-121, the map step**, both closed undecided (rows 142–148). Earlier closes: `plans/FRONTIER-STUBS.md`'s
+*Last updated: 2026-10-07 — **Workflow 3.1**: a milestone moves Not started → Opened → Derived → Closed, and is Closed only when its Lean
+module passes the gate; milestones closed before it keep the word, and their hand results are the Lean backlog. Last filed: **the outside release `[OAIMath2026]`, taken as literature** (Kooshi, 2026-10-07; `plans/EXT-OAI1-audit.md`, `plans/EXT-OAI2-reading.md`; no new row), with FS132-P1's re-rank; before it **FS-129, the cross-application audit**, Derived (rows 149–154; `plans/FS129-derivation.md`, 44 entries, each derived, one mind), and **FS-116, the local exclusion**, and **FS-121, the map step**, both closed undecided (rows 142–148). Earlier closes: `plans/FRONTIER-STUBS.md`'s
 closed list, and git.*
 
 ### Where the problem stands
 
-**The problem.** χ(ℝ²) ∈ {5, 6, 7}. This repository kernel-certifies the whole classical interval, **5 ≤ χ(ℝ²) ≤ 7** (row 33), on
-the standard three axioms, its lower end through de Grey's graph (rung B). **The lower end now also follows algebraically, with no
+**The problem.** χ(ℝ²) ∈ {6, 7}: `6 ≤ χ(ℝ²)` is `[OAIMath2026]`'s (family 158; kernel-checked in its own library on the standard three axioms, the cone built and audited here, EXT-OAI1; its manuscript read in full, EXT-OAI2). This repository's own kernel holds the classical interval, **5 ≤ χ(ℝ²) ≤ 7** (row 33), on the standard three axioms, its lower end through de Grey's graph (rung B). **The lower end now also follows algebraically, with no
 witness object:** a subfield's plane is a subgraph of ℝ²'s, so `χ(ℚ(√47)²) = 5` (row 121) gives χ(ℝ²) ≥ 5 — at [hand] grade, over MR
 (row 120: `[EinsiedlerLindenstrauss2022]` Thm 1.3 by statement, with a two-mind deduction of its Thm 1.2, and `[EinsiedlerFish2010]`'s method transferred, three blind derivations), not in the kernel, where
 row 127 holds it only over named hypotheses. Kooshi's reading (2026-09-26): "We have now reduced hadwiger-nelson to 5,6,7
-*algebraically* rather than by a witness object. That is far more valuable than de Grey's 2018 graph IMHO." **Given MR, the plane's number is a field's and a measurable one** (rows 128, 130): `χ(ℝ²) = χ(ℚ(√635087)²) = χ_CP(ℝ²) = χ_m⁰(ℝ²)`, the least number of colours in a measurable colouring proper at almost every unit pair — [hand], two blind minds for the collapse, two for the last equality; Falconer's everywhere-proper `χ_m` is one step further, a GAP.
+*algebraically* rather than by a witness object. That is far more valuable than de Grey's 2018 graph IMHO." **The plane's number is a measurable one with no hypothesis, and given MR a field's**: `χ(ℝ²) = χ_CP(ℝ²) = χ_m⁰(ℝ²)`, the least number of colours in a measurable colouring proper at almost every unit pair (`[OAIMath2026]` Thm 1.3 with row 130), and given MR(ℚ(√635087)) it is `χ(ℚ(√635087)²)` (row 128; [hand], two blind minds). Falconer's everywhere-proper `χ_m` is one step further, a GAP; by Thm 1.4 `χ_m(ℝ²) ≥ χ_m⁰(ℝ²) ≥ 6`.
 
 **What the kernel holds, beyond the interval** (addresses in `LEDGER.md`): **χ(ℚ(√11)²) ≥ 4** and the 3-adic barrier (rows 72–73);
 **Theorems A and B** and the finite-plane machinery around them (rows 52–60); Theorem A's two-colour case and the 2-adic splitting
@@ -239,8 +227,7 @@ across `plans/` and read by address; § Grokkings' theory in one paragraph summa
    and honesty is free; what is open is curved tangent interfaces (one question for three claims), the singular set at lateral extent, and the top
    colour at six, the last the answer restated given a NO; at five, given REG-J′₅, the honest existence form of C-SAT-T is equivalent to
    `χ_m⁰(ℝ²) ≥ 6` (row 154). FS-104's routes (b) and (c) are narrowed from the arithmetic era: a slack residue target kills linear identities and
-   confines Falconer fans, and route (b)'s literal reading is empty (rows 151–152). Bearing on the answer: no value moved; of door (A)'s local
-   statement the (Q)-free half is closed in the non-Siamese class, and what is left is a case list — the Siamese (Q)-free ring (FS-123), the (Q) rings
+   confines Falconer fans, and route (b)'s literal reading is empty (rows 151–152). Bearing on the answer: the value moved from outside — `χ(ℝ²) ∈ {6, 7}`, `[OAIMath2026]` — and five is closed at every regularity; this project moved none. What is open is this item's question at six; of door (A)'s local statement the (Q)-free half is closed in the non-Siamese class, and what is left is a case list — the Siamese (Q)-free ring (FS-123), the (Q) rings
    and many-colour vertices (FS-124), the saturated class (FS-125).
 
 **The prior-art position**: what is ours, and every attribution, verbatim, is `LEDGER.md` § The claim list — read it before calling
@@ -261,19 +248,17 @@ theorem record, and no line per theorem goes to § B.
 milestone; Kooshi may override.*
 
 **Open milestones.** **FS-129, the cross-application audit**, is Derived (`plans/FS129-derivation.md`, 44 entries; rows 149–154; the index corrected and given its where-else column, `data/fs129/index/`); it is
-Closed when its compositions pass the Lean gate, in the Lean backlog's session. **Next, in Kooshi's order** (2026-10-03): **the Lean backlog** (FS-131, `plans/STUB-lean-backlog.md`, a special case, unranked), in a
-session of its own — the hand results of the milestones closed before Workflow 3.1, with FS-129's compositions and merged forms, from the input FS129-L1
-writes (`plans/LEAN-BACKLOG.md`, on `data/fs129/index/lean-order-corrected.md`) — formalized before the pipeline continues; then the top of the ranking, FS-124, the (Q) ring (its question posed in `plans/STUB-q-ring.md`). **M63**
+Closed when its compositions pass the Lean gate, in the Lean backlog's session. **Since 2026-10-07 the frontier stands on `[OAIMath2026]` family 158**: `χ(ℝ²) ∈ {6, 7}` and `χ(ℝ²) = χ_m⁰(ℝ²)` with no hypothesis. **Opened 2026-10-07: FS-133, the one-class transfer** (`plans/STUB-one-class-transfer.md`; a short milestone, unranked — it bears none on six against seven and is first because its window is closing): `α₁(ℝ²) = m₁(ℝ²)` with no hypothesis, its unchecked step first. **Then the top of the ranking, FS-132, six by the nerve** (`plans/STUB-six-by-the-nerve.md`), opening on the release's extraction stated at every `k` (C132-EXT) and on whether FS114-CV-EXISTS and FS116-Y4-EMPTY run on it with no map. **The Lean backlog (FS-131**, `plans/STUB-lean-backlog.md`; its input `plans/LEAN-BACKLOG.md`**)** is paused at Kooshi's word (2026-10-07) and restarts on his word; the asking lane's recommendation is the table of `plans/POROS-2026-10-07-after-release.md` § 4.4: the import first, then wave 7, wave 9 restated over the import, wave 6's in-flight jobs; wave 10 waits. **M63**
 stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it.
 
 **Ranked stubs** (the top three; each bearing stated against the answer):
 
 | rank | stub | the question | bearing on the answer |
 |---|---|---|---|
-| 1 | **FS-124 the (Q) ring** — `plans/STUB-q-ring.md` (FS-116's successor) | does every four-colour vertex whose ring carries (Q) arcs, and every five- or six-colour vertex, die within an explicit radius? First: what a (Q) ring passes to the vertices it places, and whether it is conserved (its question section). Held: the placing rule; since FS-129 the pruning rules of row 150 and DISC-F from the exclusion (row 153). Left: SEMI-PAR3, the disk's corner, crossed reciprocity, five and six colours, the recurrence, FS114-K1's (Q) residues | the bulk of C114-LOCAL-F and the YES side's home (rows 136, 149): with FS-123's NO, route M's first half; in a valid map it also leaves no close complementary pair, route R's exact-map form (FS112-N3-COR3); fragments at every radius give `χ(ℝ²) ≤ 6` with no MR |
-| 2 | **FS-123 the Siamese class** — `plans/STUB-qfree-ring.md` (re-aimed at FS-129) | in the non-Siamese class no (Q)-free four-colour vertex survives past `1 + ε` (row 149); left: the Siamese class, reduced to FS116-Y4-EMPTY's Siamese form (FS129-OR1-QFREE-CLASS). First: does FS116-V6's route read non-Siamese anywhere but at `p`, the tips and the hugs? | a necessary piece of C114-LOCAL-F (G86: tile counts cannot see Siamese pairs); with FS-124's NO, route M's first half; Siamese fragments at every radius give `χ(ℝ²) ≤ 6` with no MR |
-| 3 | **FS-104 `χ_CP(ℝ²)` at six** — `plans/STUB-cp-plane-six.md` | is `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (row 130)? Since FS-129: route (c)'s linear identities and route (b)'s literal reading empty (rows 151–152); route (e), route M at five — FS-128's top colour (row 154) or FS-120's cover rungs, which need no NO beyond FS106-AE-MAP6 | a NO (a CP five-colouring) gives `χ(ℝ²) = 5` with no MR; a YES gives `χ(ℝ²) ≥ 6` given MR (row 128), a new lower bound independent of the six-map NO, six against seven left; route (e) is a reduction if its cover rungs need not spend five |
-| 4–74 | 71 more open stubs, in rank order in `plans/FRONTIER-STUBS.md` | … | … |
+| 1 | **FS-132 six by the nerve** — `plans/STUB-six-by-the-nerve.md` | does this project's six-colour chain (rows 137, 148–149) run on what `[OAIMath2026]`'s extraction gives a measurable six-colouring — a point, a label cycle, connected interfaces, the two-colour exclusion — with no map? First: the extraction at every `k` (C132-EXT) | decides whether the road to seven needs route M's map step or one statement about cyclic centres, and the class in which every exclusion is owed; fragments at every radius still give `χ(ℝ²) = 6` |
+| 2 | **FS-124 the (Q) ring** — `plans/STUB-q-ring.md` | does every four-colour vertex whose ring carries (Q) arcs, and every five- or six-colour vertex, die within an explicit radius? Since `[OAIMath2026]`: (Q) arcs are diagonal palettes; a ring alternating between the two diagonals is excluded (C132-DIAG, posed) | the bulk of the exclusions and the YES side's home; with FS-123's NO, a structure step and the existence step, `χ(ℝ²) = 7` with no MR |
+| 3 | **FS-123 the Siamese class** — `plans/STUB-qfree-ring.md` | the (Q)-free ring with Siamese pairs; for measurable colourings it is FS-132's existence form, with a second route by a region kill at radius 2 | necessary in the map class (G86); absorbed into FS-124 if FS-132's card 1 runs |
+| 4–72 | 69 more open stubs, in rank order in `plans/FRONTIER-STUBS.md` | … | … |
 
 **Closed as directions** (reasons in the grokkings): a five-colouring of ℚ(√167)'s plane from `UD(ℤ/529, 2)`, at any level (row 75); the six-level design target over a sealed field (FS-6) and
 the residue-allowed distances (FS-16), both dead by theorem (row 66, G48); the cell family, in both directions
@@ -302,7 +287,7 @@ field 𝔽₃ or 𝔽₇ and no prime above 2 ramified in F(i) or inert there of
 out: over a field Γ₁₁ seals at five, a five-colour forced pair is one point and a virtual edge a unit edge (row 66), so the spindle's
 design for six has no instance there (G48), and L(F) = 6 needs one of six finite targets — Γ_q at q ∈ {23, 27, 31, 43, 47}, or U₆₄ — to
 be six-chromatic, none decided (G56, G59). Where every stable place of a totally real field mixes at six colours, as at ℚ(√635087), the
-arithmetic is exhausted: given MR, χ(F²) = χ(ℝ²) = χ_m⁰(ℝ²), the least k with a measurable k-colouring proper at almost every unit pair
+arithmetic is exhausted: χ(ℝ²) = χ_m⁰(ℝ²) (`[OAIMath2026]`), and given MR χ(F²) = χ(ℝ²), the least k with a measurable k-colouring proper at almost every unit pair
 (rows 128, 130, G81; [hand]), and χ(ℝ²) ≤ χ_m⁰(ℝ²) needs no MR (row 130). No argument that bounds one colour class at a time gives six:
 row 123's five is ⌈1/α_loc⌉, one densest class's bound, and 1/α_loc ≤ 4.36 (row 129, G60; [hand]). What is left, with no MR, is a
 stability question (row 131, G82; [hand]): χ_m⁰(ℝ²) ≥ 7 iff six classes free of monochromatic pairs at distances in [1 − ε, 1 + ε]
@@ -317,7 +302,7 @@ Seven, χ_m⁰(ℝ²) ≥ 7, is the NO's hole bound made uniform in the complexi
 (route M, the map step), or from a forced complementary junction pair at every complexity with its cone scale bounded below (route R),
 and each route's third statement is the answer restated. Route M's regularity is contact: a saturated class is carved by unit circles
 about its own points, and off a locally finite singular set its interfaces are segments and arcs of integer radius, that finiteness
-open (rows 140–141, G84, G85; [hand]); FS-121 located the open part — curved tangent interfaces, lateral extent and the top colour at six (rows 142–144, G88–G90). No value has moved: χ(ℝ²) ∈ {5, 6, 7} (row 33).
+open (rows 140–141, G84, G85; [hand]); FS-121 located the open part — curved tangent interfaces, lateral extent and the top colour at six (rows 142–144, G88–G90). This project has moved no value; `[OAIMath2026]` has: every measurable colouring proper at almost every unit pair needs six, and `χ(ℝ²) = χ_m⁰(ℝ²)` with no hypothesis, so χ(ℝ²) ∈ {6, 7} and the stability question at six is the whole problem.
 
 *The entries themselves, each retired one as a titled pointer, are `.claude/skills/grokkings/SKILL.md`, which Poros and Ephodos load
 in full at launch; every other mind reads an entry there by its number. Keryx is that file's only writer, and a new grokking is filed
@@ -403,8 +388,7 @@ head-count, model, budget, and the crunch and competition protocols — is Koosh
 
 ## The standard of evidence above rung B
 
-χ(ℝ²) ≥ 5 is a known theorem; a reader's default is to believe it. **χ(ℝ²) ≥ 6 would be new mathematics, and a reader's default is to
-disbelieve it** — correctly, because the characteristic failure of machine-assisted combinatorics is a search that found what a bug
+χ(ℝ²) ≥ 5 is a known theorem; a reader's default is to believe it. χ(ℝ²) ≥ 6 is `[OAIMath2026]`'s (2026), kernel-checked in its own library and audited here. **Anything this project adds above rung B — seven, a six-colouring, a field's value — would be new mathematics, and a reader's default is to disbelieve it** — correctly, because the characteristic failure of machine-assisted combinatorics is a search that found what a bug
 allowed. Anything above rung B must convince someone who trusts none of this and reads none of the Python:
 
 - **No native evaluation in the headline.** `native_decide` trusts the compiler and one CPU; for a new result that is the whole
