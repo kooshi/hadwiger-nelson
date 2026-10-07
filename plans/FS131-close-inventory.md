@@ -8410,3 +8410,48 @@ reason by the close.*
      owed to `LEDGER.md` § The claim list and rows 128, 130 at the front page's filing**: independent, and theirs
      is dated three days earlier — said as that. (d) Item (i) is a second candidate consequence for the asking
      lane to rank beside FS-133; item (ii) waits in the search queue for the re-rank.
+
+619. **EXT-OAI1 done: the outside release's Lean proof that the plane is not five-colourable stands under everything a build can show — built, axioms printed with a control, the statement equal by signature, and replayed module by module; the import is drafted as a skeleton at this repository's pin** (auditor, `debruijn`; harness 471k and 46 minutes by the task notice; record `plans/EXT-OAI1-audit.md` stages 1–8; report `data/external/reports/EXT-OAI1.md`; eight commits on `main`, the last `2015ff98`; working copy `~/.cache/ext-oai1/`, about 11 GB, kept).
+     **New since item 616.** *The kernel replay*: 70 of 70 modules of the cone through `leanchecker`, one named
+     module at a time under a 16 GiB slot. *The pieces that hold for every `k`*, each with the count of release
+     declarations it rests on (measured): the cover obstruction 17, the tree and disc-extension lemmas 52–61, the
+     straddle exclusion 61, binary rigidity 57, the transfer 1,997; the headline 3,520 across all 70 modules.
+     *The import, drafted* (`data/external/oai1/audit/ImportSkeleton.lean`, 104 lines; it elaborates at this
+     repository's pin): namespace `HadwigerNelson.Outside.OAI158`, the release's two definitions copied, **two
+     axioms in the release's own form** — `no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c`
+     (their `Five.lean` l. 124) and `proper_to_borel_weak {k} [NeZero k] {c : ℂ → Fin k} (hc : ProperColoring k c)
+     : ∃ d : ℂ → Fin k, Measurable d ∧ WeakColoring k d` (their `BorelTransfer.lean` ll. 436–437) — and the bridges
+     proved over them: `six_le_chromaticNumber_plane`, `chromaticNumber_plane_six_or_seven`,
+     `chiM0_le_chromaticNumber_plane`, `chromaticNumber_plane_eq_chiM0`, `six_le_chiM0`; **one `sorry` leaf**,
+     `nonempty_aeColouring_of_weak` (their weak colouring gives this library's `AeColouring`; 60–120 lines by its
+     estimate); the rigidity theorem is not proposed as a third axiom (no consumer here). The sentences for rows 33
+     and 130 and the bibliography row's cells are drafted in its stage 8. *The distance between the pins*: 1,502
+     Mathlib commits, 6,296 files changed under `Mathlib/` — it proposes a backport probe on the smallest pieces
+     before any larger one. **Checked by nobody here, in its words**: Mathlib's own declarations (loaded from
+     Mathlib's cache); the release's comparator and a second kernel; the release's full 42-package configuration
+     (the cone needs only Mathlib; Lake resolved the same nine revisions); the proofs below the headline as
+     mathematics a person has read. **My receipt**: its report and eight commits are on `main`;
+     `replay-cone.log` ends "REPLAY DONE modules=70 ok=70 failed=0", its driver `exit=0`; the skeleton holds the
+     two `axiom` lines it quotes, five bridge theorems and one `sorry`, and its print shows each bridge on the
+     standard three and exactly the axiom it uses; no process of its is running and the slot ledger is clear of
+     it; item 614's check by my own hand stands. Not checked by me: the replay itself; the skeleton's elaboration;
+     the pieces' counts; that nothing was written into `~/source/math` (its statement). **Predictions**: none
+     registered by it. **Slips, the job's, disclosed**: the memory incident of item 612; a scratch file re-run
+     clean before its output was recorded. **Credit**: the order it kept — statement, cone, build, axioms, control,
+     signature — so that each message decided something; a restatement with no complex numbers and no square root
+     for a sceptic; the incident reported at once with the kernel's own lines; "checked by nobody here" written as
+     a list. **Rulings.** (a) **The import is an implementer's job from its skeleton** (queue item 2 of the new
+     handoff): it imports `Plane.YesLimit` and drops the easy-half binder, proves the one leaf, declares the two
+     outside theorems to the audit and to the assumptions step with their four items, and lands through the gate
+     after wave 8 — the library's outside axioms go from one to three. Alternative: one axiom (the transfer) with
+     the five-colour theorem left as a citation. Why two: each is a theorem a later statement will cite by itself,
+     and the release's Lean proves both. Confidence: high. (b) **The comparator's audit is a short job of its own**
+     (the release's instructions pin no commit for any of the three programs; nothing was downloaded); brief not
+     written; nothing runs before its report reaches me and Kooshi has heard it. (c) **A re-check of Mathlib's own
+     declarations is not run now**: about 8,900 modules at 6 s and 6.3 GB each — a publication-gate item, with the
+     second kernel; noted for the publication's cost measurement. Alternative: run it overnight. Why not: Mathlib's
+     distributed cache is the trust base of every Lean project, and nothing this week turns on it. Confidence:
+     medium. (d) **A backport probe** (the cover obstruction and the tree lemmas at this pin) waits for a job that
+     needs a piece — Kooshi's "adopt parts piecemeal if needed". (e) **The special slot is closed**: three slots
+     from here. In flight: EXT-OAI2 (its report is committed; its hand-back not yet arrived), wave 8's landing,
+     wave 9's implementer.

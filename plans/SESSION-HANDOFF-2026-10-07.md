@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-07: an outside proof of six is this project's literature; the Lean backlog is paused; the plan
 
 *Written 2026-10-07 (UTC) by Keryx, at Kooshi's word ("Make sure your handoff carries the new plan"). Current state only. A successor
-arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–618 (the day's record, each with what was
+arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–619 (the day's record, each with what was
 checked by whom); then, for the paused backlog only, `plans/SESSION-HANDOFF-2026-10-06.md` §§ 2–8, which this file supersedes for
 everything else.*
 
@@ -47,11 +47,11 @@ everything else.*
 5. The asking lane's re-rank is filed in `plans/FRONTIER-STUBS.md` with its banners, and FS-132's and FS-133's stubs exist.
 6. A report to Kooshi: the state of everything, and what restarts.
 
-## 2. Running now (4) — and what to do at each hand-back
+## 2. Running now (3) — and what to do at each hand-back
 
 | job | where | what | on its hand-back |
 |---|---|---|---|
-| **EXT-OAI1** (special slot; `debruijn`) | `main`, under `plans/` and `data/external/oai1/`; working copy `~/.cache/ext-oai1/` (11 GB) | the Lean audit of the release's family 158 — done through its fourth message (items 608, 609, 614, 616); left: a per-module kernel replay under a 16 GiB slot, the drafts of answer 1, the comparator's audit of answer 4 (it messages and waits for my word), the report | review by artifact (`plans/EXT-OAI1-audit.md`; `data/external/reports/EXT-OAI1.md`); log; **the special slot closes**; write the import job's brief from its draft. It caused the memory incident of item 612 and reported it at once: everything of its runs under the slot. |
+| ~~EXT-OAI1~~ | — | **done, item 619**: the proof stands in the kernel at its own pin — built, axioms with a control, statement by signature, 70 of 70 modules replayed. Its drafts: the import skeleton `data/external/oai1/audit/ImportSkeleton.lean` (two axioms, five bridges, one `sorry` leaf), the sentences for rows 33 and 130 and the bibliography cells in `plans/EXT-OAI1-audit.md` stage 8. **The special slot is closed: three slots.** | — |
 | **EXT-OAI2** (`ephodos`) | `main`, under `plans/` and `data/external/oai2/` | the manuscript read in full against this project's rows — the dictionary (item 611), the transfer (item 613) and the obstruction with every step against every `k` (item 618) are done; left: its stage 5 — the front page's replacement sentences, the untouched list, the bibliography rows (16 of the manuscript's 33 references are not held) — and its report | review; log; its item-5 table is the front page's draft (answer 2). |
 | **FS131-L8A** | `.claude/worktrees/fs131-w8l`, `fs131-w8l` | wave 8's landing — joined, `main` merged, docstrings corrected (items 600, 605), a first full gate pass done; a second pass, begun after the incident of item 612, is its evidence | **the landing procedure of `plans/SESSION-HANDOFF-2026-10-06.md` § 5** — `git pull --ff-only`; three digests (`scripts/gate_report.py axioms / vacuity / assumptions`, previous receipts `data/fs131/lt5/gate/receipt-{axioms,vacuity,assumptions}-landed2.log`); file `CLAUDE.md` § Trust ledger and § The gate, a `GATE_CHANGES` entry; fact audit `--base e3d9b643`; its `LEAN.md` line on the vacuity marker (item 605). **Then the front page's filing of answer 2 in a second commit.** Until it is back: commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`. |
 | **FS131-I9B** | `.claude/worktrees/fs131-w9b`, `fs131-w9b` | wave 9's first implementer — the three uniform-bound leaves are proved (its stage 4); the models M1–M3 left | review, log; it does not land. **Its slot goes to the queue of § 3, not to the backlog.** |
@@ -65,8 +65,10 @@ record's last SAVED stage with a fresh agent on the same brief.
    `data/fs131/briefs/scripts/mk-fs132-p1.py`; gate exit 0; it names the reading's stages 3 and 4 as saved). The re-rank; FS-132's question card; **FS-133's stub**; the
    table that restarts or retires each backlog wave. Record `plans/POROS-2026-10-07-after-release.md`. It messages when FS-132's card
    is saved. **Into the first freed slot.**
-2. **The import** (a `debruijn-implementer`, `model: "opus"`; brief not written — from EXT-OAI1's draft): the two outside theorems
-   declared with their four items; the bridging theorems; a landing of its own through the gate, after wave 8's.
+2. **The import** (a `debruijn-implementer`, `model: "opus"`; brief not written — ruling 619 (a)): from the skeleton
+   `data/external/oai1/audit/ImportSkeleton.lean` — it imports `Plane.YesLimit` and drops the easy-half binder, proves the one
+   leaf `nonempty_aeColouring_of_weak`, declares the two outside theorems with their four items to `scripts/Axioms.lean` and to
+   the assumptions step, and lands through the gate after wave 8's (outside axioms: one to three).
 3. **FS-133's opening** (`ephodos`; brief not written — from the asking lane's stub and the reading's § 2.6): the one-class
    consequence; its one unchecked step is the first claim. A new inventory, `plans/FS133-close-inventory.md`, opens with it.
 4. **FS-132's opening** (`ephodos`; from the asking lane's card): its inventory `plans/FS132-close-inventory.md` opens with it, with
@@ -75,7 +77,8 @@ record's last SAVED stage with a fresh agent on the same brief.
    power saving for planar unit distances, a classification of Euclidean Ramsey configurations are in its catalogue, unread):
    generator `data/fs131/briefs/scripts/mk-ext-oai3.py`, **to be rewritten first** — it was written before the hit was found; its
    first tier becomes "what can be built on".
-6. **The comparator's audit**, if EXT-OAI1 hands it back undone (answer 4).
+6. **The comparator's audit** (EXT-OAI1 handed it back unstarted: ruling 619 (b)); brief not written. Three programs, no commit
+   pinned by the release; read their source, report, run nothing until I and then Kooshi have the report.
 
 ## 4. The paused backlog (FS-131) — nothing here launches until the re-rank says so
 
