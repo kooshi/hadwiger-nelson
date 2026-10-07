@@ -317,6 +317,10 @@ N("COMPSHARP", "the complementary pair, in the exact class", "held", "Two triang
 N("WIND6", "three outside labels wind", "held", "A loop among three labels with the 60° exclusion has degree 3 modulo 6: six is the one count at which the labels left for a ring can wind. The forcing of a centre that is not a triangle stalls at this circle.", L(158), "then the degree of φ, for the orientation a → b → c of Θ, is congruent to 3 modulo 6", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(53, 630), sector="seven")
 N("PLACEDARC", "the turning ring places a unit-arc centre", "held", "In step form with witnesses near the centre, a turning ring forces a point with four labels present whose own unit circle runs along two unit arcs. No model is known.", L(159), "a measurable instance of FS-124's first question, every hypothesis derived from the seed's data", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(61, 630), sector="seven")
 N("FLOWERS", "the turning ring in a finite family", "held", "In a family of seven flowers of wedges the three-label turning ring and the alternating ring do not exist; with four labels at alternate ring points the turning ring exists, in fragment T2's shape.", L(160), "no model has the turning ring `a, b, n, a, b, n` and at most three labels at every ring point", "[cert]", at=(78, 400), sector="seven")
+N("DISCS", "the disc criterion", "held", "Weak measurable six-colourings of the open discs of every radius give χ(ℝ²) ≤ 6 with no import; a disc with none gives seven over one declared outside theorem.", L(161), "the plane needs seven colours precisely if some open disc has no weak measurable six-colouring", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(109, 530), sector="six-up")
+N("ONEPIECE", "one piece, one side", "held", "In every weak colouring an open piece of one label bars that label one unit away; one tight pair forces nothing beyond that first step.", L(162), "no entry spends a number of labels", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(120, 560), sector="six-up")
+N("PAIRPAYS", "a close pair pays at its common unit points", "held", "Of two three-piece points less than 2 apart on disjoint triples of six labels, one has a piece inside and another outside the unit circle about each common unit point; both where both are full; one alone only at a bowtie. Nothing says a colouring has such points.", L(163), "x or y separates at w", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(122, 630), sector="six-up")
+N("STRIPEDGE", "the strip's top edge is closed", "nogo", "No weak six-colouring keeps six named pieces of the strip and contains one point of its top edge.", L(164), "bar all six labels on an open set near the point", "[hand] with an exact check, one mind, kernel pending", at=(131, 550), sector="six-up")
 N("TOP5", "the map step at five", "held", "Given REG-J′₅, the honest five-colour existence form is equivalent to χ_m⁰(ℝ²) ≥ 6.", L(154),
   "The map step at five, as an equivalence", "[hand], one mind, kernel pending", at=(162, 434), sector="six-up")
 N("RINGRULE", "change points place four-colour vertices", "held", "On the unit circle of a four-colour vertex, every change point off (Q) arcs, and "
@@ -363,6 +367,11 @@ E("GFREE", "QFREE", "rests", L(149), "the exclusion of rings with no arc of the 
 E("QFREE", "LOCALF", "context", L(149), "FS-123's first question is answered yes", label="the (Q)-free half removed")
 E("MEXCL", "QFREE", "context", L(155), "It is rows 148–149's exclusion in measure", label="the same exclusion, with no map")
 E("PLACEDARC", "FLOWERS", "context", L(159), "the one model the day's search kept (row 160) is the other case", label="the kept model is the hard case")
+E("ONEPIECE", "PAIRPAYS", "context", L(163), "x or y separates at w", label="six uses of the lemma and a count")
+E("ONEPIECE", "STRIPEDGE", "context", L(164), "six uses of C124-TYPE", label="six uses of the lemma")
+E("COR3", "PAIRPAYS", "context", L(163), "for maps C124-BOTH is FS112-N3-COR3", label="the map theorem, in measure, by another route")
+E("STOP", "STRIPEDGE", "context", L(164), "FS112-EDGE (row 136)", label="the same point, for every weak six-colouring keeping six pieces")
+E("DISCS", "STRIPEDGE", "context", L(161), "an explicit radius at any k", label="an exclusion on a disc would reach seven here; this one is not on a disc")
 E("QPRUNE", "LOCALF", "context", L(150), "The (Q)-ring case list, pruned", label="pruning rules")
 E("RINGRULE", "LOCALF", "context", B("FS116-RING-GERM"), "let y be a change point of the ring", label="the placing rule")
 E("YESLIM", "UB6", "rests", B("FS116-O1-YESLIM"), "some closed disc of radius R carries a valid k-coloured fragment", label="fragments on every disc")
@@ -703,7 +712,7 @@ def build():
             c["address"] = address_str(c["src"], locate(c["src"], c["quote"]))
     for t in NOTES:
         t["address"] = address_str(t["src"], locate(t["src"], t["quote"]))
-    facts = dict(meta=dict(title="Proof Atlas", built="2026-10-07", job="FS132-L2", as_of="FS-132's first theorem through the gate (row 155, the whole plane)",
+    facts = dict(meta=dict(title="Proof Atlas", built="2026-10-07", job="FS124-Z1", as_of="FS-124, the unit arc, Derived (rows 161–164); FS-132's first theorem held (row 155)",
                            statuses={k: v for k, v in __import__("viz_proof_atlas_common").STATUS_WORDS.items()}),
                  nodes=NODES, edges=EDGES, routes=ROUTES, credence=CREDENCE, notes=NOTES)
     OUT.parent.mkdir(parents=True, exist_ok=True)

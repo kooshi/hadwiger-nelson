@@ -640,4 +640,22 @@ between two colours that is an arc of the unit circle about a point one unit awa
     Its two readings of the definitions match the claim list's words. **Relayed, labelled its own and unchecked, to the
     successor's opening job** (in its brief): the forcing for any two families of pieces; the four-regions statement;
     the two remarks on the one-piece lemma.
+30. **FS-124 is Derived: the filing is made** (16:04 UTC; the commit that carries this line; the script,
+    `data/fs124/z1/file_fs124_derived.py`, reads every text from the record job's and the asking lane's records and
+    asserts each slot once). **Filed**: `LEDGER.md` rows 161–164; `CLAUDE.md`, the record job's seven slots — the clause
+    on the disc criterion in the aim's fifth point taken — to 64,468 of 80,000 bytes; **the re-rank**: the successor,
+    FS-136, at rank 1 of the stub list (FS-124 leaves the ranked table; ranks 1 to 72 asserted), clauses for two rows, the
+    front page's top three; grokkings — **G97 demoted in part, with its demotion record**, G99 new, G92's *Do* with the
+    record job's two additions — to 183,889 of 200,000; two instances; a banner in the milestone's stub; **the atlas**:
+    four nodes and five edges, checker 229 of 229, rebuilt locally, not published. **Changed by me against the drafts,
+    each logged**: "Not started" and "named" for the successor read "Opened 2026-10-07" and "opened" (it was opened
+    between the draft and the filing); **row 164's headline begins "The strip of FS-112" where the draft began
+    "FS-112's strip"** — the fact audit's parser reads a row whose bold text opens with a milestone number as a ranked-stub
+    row, and reported the row missing (a tool defect, noted for the tooling job); the atlas nodes' positions, by a search
+    for zero collisions, and their grade words, made exact substrings of the rows; the clause for one row went to its
+    question cell (the draft named no cell). **Not filed, held**: the first kernel planner's sentence on which half of
+    the criterion needs the import — at its branch's landing. Fact audit against `783e7bdb`: passed after four replaced
+    tokens were allow-listed with reasons. **The next filing's fact-audit base is this commit.** **Owed**: lines in the
+    ledger's claim list for rows 155–164; the citation of one count to two papers in two rows; the prior-art searches in
+    print the rows call owed.
 
