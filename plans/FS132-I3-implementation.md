@@ -31,6 +31,23 @@ standard three" is `[propext, Classical.choice, Quot.sound]`, as printed (`data/
   `IsDensityPt.eventually_lt_Ioo`, `IsDensityPt.not_compl`, `volume_le_mul_volume_image`, `noDoubleChange_compl`,
   `density_triple_false` (the contradiction of Lemma S, from the four children), `change_Iio`.
 
+`Proofs/HadwigerNelson/Plane/SixRing/Shift.lean` (stage 3; every leaf of the module, no `sorry` left in it; axioms as
+printed in `data/fs132/i3/logs/axioms-block.out`):
+
+- **`exists_shiftBounds`** — M7's display: for some `κ ∈ (0, 1/4]` the chart's shift is positive, at most
+  `min(d, d')/16` and `1/32`-Lipschitz in each variable on `(0, κ)²`. Proved by the planner from the leaves; with
+  the leaves proved it is [kernel], the standard three. Statement unchanged.
+- **`dist_chart_chart_shift`** — M7's unit-pair relation: `dist (Z(α, d)) (Z(α + ε + d' + π/3, d')) = 1` on
+  `[0, 1/4]²`. [kernel], the standard three. Unchanged.
+- `shift_pos` — M7's sign, `0 < ε` on `(0, 1/4]²`. [kernel], the standard three. Unchanged.
+- `exists_shift_lipschitz` — M7's "`|∇ε| ≤ 1/32`", in one variable on a closed square `[0, κ]²`. [kernel], the
+  standard three. Unchanged.
+- `ringRadius_mem`, `shift_comm`, `shift_zero_right`, `shift_zero_left`, `measurable_shift` — [kernel], the standard
+  three. Unchanged.
+- helpers, new, all [kernel] on the standard three: `ringRadius_eq`, `chart_eq_polar_shift` (the statement of
+  `Chart.chart_eq_polar`, another lot's leaf, under a name of its own), `norm_sq_polar_sub` (the law of cosines in
+  polar form), `shiftCos_mem`, `shift_sign_identity` (row 148's straddle identity in the chart's variables).
+
 ## Stage 1 — SAVED (FS132-I3): the readback
 
 **Quotations.** `data/fs132/i3/readback.py` reads every block quotation of the brief and looks for it, whitespace
@@ -159,8 +176,130 @@ is a `sorry`). `step_lemma`, `step_at_of_change` (the two called from `Kill.lean
 
 **Price, measured.** 8 leaves and 11 helpers; the file went from 146 to 768 lines; 2 builds under the slot (the
 as-given one, 4 s; this one, 8 min 54 s, of which the module itself 4.6 s); about 25 `lake env lean` iterations of
-2–5 s; 7 elaboration errors in all, none a mathematical one (two `min` arguments, one `norm_num` step, four in
-`volume_pattern_pos`: a membership coercion, a filter lemma's form, two beta-redexes, one unnamed measure). No
+2–5 s; 7 elaboration errors in all, none a mathematical one (one pair of `min` arguments, one `norm_num` step, and in
+`volume_pattern_pos`, five: a membership coercion, a filter lemma's form, two beta-redexes, one unnamed measure). No
 dispatch to a companion. The planner's estimate for the module was 550 lines.
 
 Token count at this stage: own estimate ≈ 230k.
+
+## Stage 3 — SAVED (FS132-I3): the shift's module, every leaf proved; the checks after the last green build
+
+**State.** `Proofs/HadwigerNelson/Plane/SixRing/Shift.lean`: 290 lines, no `sorry`; `StepLemma.lean`: 769 lines, no
+`sorry` (one docstring line more than at stage 2: `exists_shiftMap`'s now says its interval may be empty). The last
+build under the slot (`--mem 40 --cpus 8`, `MEMMAX=40G BATCH=4`): **exit 0**, 7 modules rebuilt (`Shift`, `StepLemma`,
+`ChartMeasure`, `State`, `Kill`, `Orbit`, `Proofs`), no warning in either of the two modules; the build's
+sorry-warning count stands at 10 modules, from 12 as given (`data/fs132/i3/logs/build-3-final.out`; the build after
+`Shift` alone is `build-2-shift.out`, exit 0).
+
+**Routes, leaf by leaf, and where they leave the plan.**
+
+- `ringRadius_mem` — the plan's: `r(d) = cos(d/2) − √3 sin(d/2)` (`ringRadius_eq`), then `1 − x²/2 ≤ cos x`,
+  `sin x ≤ x`, `√3 < 2`.
+- `shift_comm` — `ring_nf` on the definition. `shift_zero_right` — the quotient is `r(d)/2 = cos(π/3 + d/2)`;
+  `Real.arccos_cos`.
+- `dist_chart_chart_shift` — the plan's: the chart in polar form, the law of cosines, `Real.cos_arccos` with
+  `−1 ≤ Q ≤ 1` (`shiftCos_mem`, from `(r − r')² ≤ 1 ≤ (r + r')²`). **The polar form is proved here under a name of
+  this module's own, `chart_eq_polar_shift`**: `Chart.chart_eq_polar` is another lot's leaf, a `sorry` there, and this
+  module does not import `Chart` (`LEAN.md` § Searching: a line that needs another line's lemma before they meet
+  states it under a name of its own and says so). At the join one of the two goes.
+- `shift_pos` — the plan's identity, **not through `Plane.twoCirc_identity`**: the same identity is proved in the
+  chart's variables (`shift_sign_identity`), as a polynomial identity in the sines and cosines of `d/2`, `d'/2` and
+  `√3` modulo the three Pythagorean relations, by `linear_combination`. The multipliers were computed, not found by
+  hand: `data/fs132/i3/shift_identity.py` (sympy's `reduced`; remainder 0, exit 0; **its control fires** — `--fault`
+  changes the identity's `8` to `7`, remainder `−ca·cb·sa·sb + sa²·sb²`, exit 1). The kernel checks the identity; the
+  script only supplied coefficients. Then `Q < cos(π/3 + (d + d')/2)` and `Real.strictAntiOn_arccos`.
+- `exists_shift_lipschitz` — the plan's tool (`ContDiffAt.exists_lipschitzOnWith_of_nnnorm_lt` with `K = 1/32`), **with
+  no derivative computed**: the shift is `C¹` at the origin (a composition; `Real.contDiffAt_arccos` at `Q = 1/2`), it
+  vanishes on both positive axes (`shift_zero_right`, `shift_zero_left`), so its derivative at the origin kills
+  `(1, 0)` and `(0, 1)` — a one-sided derivative, `uniqueDiffWithinAt_Ici` — and is zero. The neighbourhood contains a
+  sup-norm ball, which is a square. **The `κ` is not explicit**: the plan's "numerically `κ = 1/50` works" is not
+  proved and is not needed; the statement asks for some `κ ∈ (0, 1/4]`. An honest estimate of the gradient on a named
+  square would be a different, longer leaf; nothing in the assembly reads the value of `κ`.
+- `measurable_shift` — `fun_prop` on the unfolded definition.
+
+**The statements read against M7** (`plans/FS132-E3-derivation.md`, Stage 3, M7), for the theorems the assembly uses:
+
+| M7 | Lean | same? |
+|---|---|---|
+| "`\|z − z′\| = 1` holds on `α′ = α + π/3 + d′ + ε(d, d′)`, independent of `α`", `z = Z(α, d)`, `z′ = Z(α′, d′)`, `d, d′ ≥ 0` near `0` | `dist_chart_chart_shift`: for every `p`, `α` and `0 ≤ d, d' ≤ 1/4`, `dist (chart p α d) (chart p (α + shift d d' + d' + π / 3) d') = 1` | the direction used (on the locus the distance is `1`; not "only there"), on a named square, with `ε` the explicit `shift`. The derivation's `ε` is this function near `0`: its `g = ε + (d + d')/2` solves `cos(π/3 + g) = Q` with `π/3 + g` near `π/3`, the principal branch |
+| "`0 < ε(d, d′) ≤ min(d, d′)/16` and `\|∇ε\| ≤ 1/32` for `0 < d, d′ < κ_1`", some `κ_1 ≤ κ_*/3` | `exists_shiftBounds`: `∃ κ, 0 < κ ∧ κ ≤ 1/4 ∧ ShiftBounds shift κ` | the sign and the two bounds by a sixteenth as written; the gradient bound as the two one-variable Lipschitz clauses it implies (what M8 and M9 read); `κ ≤ 1/4` in place of `κ_1 ≤ κ_*/3` — the caller (`chart_step_false`) takes the minimum with its own `κ/3` |
+| "for `d′ = 0` … `ε(d, 0) = 0`; for `d = 0` … `ε(0, d′) = 0`" | `shift_zero_right`, `shift_zero_left`, on `[0, 1/4]` | yes |
+| "`h(0, 0) = 2/√3`" (the expansion) | not stated, not used: the sign comes from the exact identity at zero shift, the bound by a sixteenth from the Lipschitz clauses and the vanishing on the axes (the planner's design) | — |
+
+One reading, mine, with both texts open.
+
+**Every leaf as the kernel holds it, against the skeleton.** `data/fs132/i3/sigs.py` splits the planner's print of the
+leaves at the skeleton (`data/fs132/k2/probe/Sigs.out`) and a print made now (`data/fs132/i3/probe/SigsNow.lean`,
+`logs/sigs-now.out`) into records and compares the sixteen names of my two modules that the planner printed:
+`leaves=16 same=14 changed=2 missing=0 … verdict=OK`, exit 0; the two changed are `exists_shiftMap` and
+`volume_change_pairs_pos`, each by the one dropped hypothesis and nothing else (`logs/sigs-compare.out` prints both
+forms). **Its control fires**: `--fault` deletes `0 < κ →` from `step_lemma`'s record of the new print; `changed=3`,
+`verdict=FAIL`, exit 1. The seventeenth theorem, `shift_zero_left`, was already proved in the skeleton and is not in
+the planner's print; its statement line is not in `git diff e0c95ec1`.
+
+**After the last green build** (each output saved under `data/fs132/i3/logs/`):
+
+| check | result |
+|---|---|
+| my block in `scripts/Axioms.lean`, headed "FS132-I3", above the PURCHASED banner: 33 records (19 of `StepLemma`, 14 of `Shift`) | written from one list by script; the same 33 lines printed alone by `data/fs132/i3/probe/AxBlock.lean`: **33 of 33 read `[propext, Classical.choice, Quot.sound]`**; the control in the same print, `chart_step_false`, reads `sorryAx` (`axioms-block.out`) |
+| `tools/check_architecture.py` | exit 0, `RESULT: PASS` (`check-architecture.out`) |
+| `./scripts/dupnames.sh` (under the slot, `--mem 16`) | exit 0, "no name is declared by two modules (23 generated on demand)" (`dupnames.out`) |
+| `lake lint --no-build -- --no-build --trace` (under the slot, `--mem 8`) | exit 0, 14 linters each `(2/2) Passed!`, `-- Linting passed for Proofs.` (`lint.out`); `unusedArguments` among them |
+
+**Not run, and why**: `scripts/axioms.sh` (the audit of the whole file; my block was printed alone), `vacuity.sh`,
+`assumptions.sh`, any `--self-test` — the brief keeps the full gate for the landing. So the controls watched here are
+mine: the sorry control in both axiom prints, the readback's, the identity script's and the signature comparison's;
+I planted no fault in `dupnames.sh`, `check_architecture.py` or the lint. The build's own unused-variable linter was
+seen to fire, unplanted, on each of the two hypotheses before it was dropped (`huw`, `hS`).
+
+**Price, measured, both modules.** 15 leaves (8 + 7) and 16 helpers (11 + 5); 237 lines as given (146 + 91), 1,059 now
+(769 + 290); 4 builds under the slot (4 s as given; 8 min 54 s; 9 min 7 s; 8 min 52 s — each walks all 477 batches and
+compiles 5–7 modules, my two in 4–5 s each); about 40 `lake env lean` iterations; 12 elaboration errors in all (7 in
+`StepLemma`, 5 in `Shift`: a rewrite that took the wrong sum, a notation scope, a point written `0` against `(0, 0)`,
+an `ext` that bound no vector, and one `ring` that closed only by its fallback), none mathematical; no dispatch to a
+companion. The planner's estimate for the two modules was 550 + 180 lines, with `exists_shift_lipschitz` "the heavy
+calculus leaf" at 60: it is 62 with its statement, and no derivative is computed in it — the gradient at the origin
+is read off the axes.
+
+Token count at this stage: own estimate ≈ 300k.
+
+## Drafts for the front page
+
+*Each names its slot. Nothing here is filed by me. The milestone is not closed by this job: two of its twelve modules
+are proved; the counts of the full gate are the landing's.*
+
+1. **`ARCHITECTURE.md`, the module map, the two rows `Plane/SixRing/Shift` and `Plane/SixRing/StepLemma`** (I did not
+   edit them: the brief gives me whole new lines for new modules only, and I added none). In each row replace
+   "**FS-132 (FS132-K2), branch `fs132-wk1`. SKELETON.**" by "**FS-132 (FS132-K2 stated, FS132-I3 proved). No `sorry`.**";
+   in the `Shift` row replace "(leaves); `shift_zero_left` and `exists_shiftBounds` proved from them." by
+   "; `shift_zero_left` and `exists_shiftBounds` from them; helpers `ringRadius_eq`, `chart_eq_polar_shift`,
+   `norm_sq_polar_sub`, `shiftCos_mem`, `shift_sign_identity`."; in the `StepLemma` row add after
+   "`volume_change_pairs_pos`" the words "; `density_triple_false`; the density tools (`ae_mem_imp_isDensityPt`,
+   `IsDensityPt.mono`, `.eventually_lt`, `.eventually_compl_le`, `.not_compl`, `isDensityPt_of_mem_nhds`),
+   `volume_le_mul_volume_image`; a model of each leaf's hypotheses".
+2. **`plans/FS132-derivation.md` § 1, the table "Who did what, step by step"** — a column or a dated line under it,
+   in these words: "M8, the step lemma (Lemma S): **[kernel]** — `HadwigerNelson.SixRing.step_lemma`
+   (`Proofs/HadwigerNelson/Plane/SixRing/StepLemma.lean`), axioms `[propext, Classical.choice, Quot.sound]`, no
+   assumption; along the planner's variant; for any shift with `ShiftBounds`, with no measurability of the shift
+   (FS132-I3, branch `fs132-wi3`). M7, the shift: **[kernel]** for the unit-pair relation in the direction used
+   (`dist_chart_chart_shift`), the sign (`shift_pos`), the vanishing on the axes, the bounds
+   (`exists_shiftBounds`) and measurability (`measurable_shift`), same axioms; M7's last sentence — that the map `Φ`
+   carries null sets to null sets — is `ChartMeasure.unitPair_chart_ae`, another lot's leaf, not proved here." The
+   entry's `grade:` and `minds:` fields are the coordinator's; C132-M-ORBIT itself is [kernel] only when the other
+   ten modules land.
+3. **`LEAN.md` § Searching — Lean**, three lines to follow the last bullet:
+   - "Positivity of the measure of a set that need not be measurable goes through sections:
+     `Measure.measure_ae_null_of_prod_null` asks no measurability, so a null set has almost every section null, and
+     one positive section on a set of positive measure refutes it (`SixRing.volume_pattern_pos`, FS132-I3)."
+   - "`vol F ≤ K · vol (g '' F)` on the line for a map that shrinks no distance on `F` by more than `K`, with no
+     measurability of `F`, `g` or the image: `AntilipschitzWith.le_hausdorffMeasure_image` for `F.restrict g`,
+     `Isometry.hausdorffMeasure_image` for the coercion, `hausdorffMeasure_real` (import
+     `Mathlib.MeasureTheory.Measure.Hausdorff`; `SixRing.volume_le_mul_volume_image`, FS132-I3)."
+   - "A `ring` that cannot close a goal and whose fallback `ring_nf` does prints `Try this: ring_nf` as information,
+     with no file position in `lake env lean`'s plain output: `lake env lean --json` gives the line. And `ext` on a
+     continuous linear map out of a product applies `prod_ext` and binds no vector: write
+     `ContinuousLinearMap.ext fun v => _` (FS132-I3)."
+4. **`CLAUDE.md` § Trust ledger and § The gate** — no count from me: I did not run the audits. What the landing should
+   expect from this block alone: 33 more records, all clean, no purchase, no import, no assumption in hypothesis form
+   (neither module takes a named hypothesis; `ShiftBounds` is a condition on a parameter, inhabited by
+   `shiftBounds_model` and by `exists_shiftBounds`).
