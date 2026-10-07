@@ -380,6 +380,8 @@ complete graph on the labels, fixed before the colouring. Card 3 puts it to Epho
 
 ### 3.2 The card (the stub carries it, with both forms and four posed claims)
 
+*In this record the card is ranked 4, behind FS-132's three: ranks here order questions by bearing on the answer, and this one bears none. In its own stub it is rank 1. The slot order is § 3.1's, a separate decision. **A slip of mine, disclosed:** the first commit of this stage (`d0facc6d`) was made with this card at rank 1 and the gate failing on the duplicate rank — I chained the commit after the gate with `;`, against standing rule 9. This commit repairs it.*
+
 question: does-the-rigidity-run-for-one-class
   evidence: `plans/EXT-OAI2-reading.md` ll. 352–364 (§ 2.6: "The step to check before it is claimed: the passage from a stationary field of mean `α₁` to a set of *upper density* `α₁`"); `LEDGER.md` row 129 ("At ℚ(√635087), given MR there: `α₁(ℝ²) = m₁(ℝ²)`"); `CLOSED-QUESTIONS.md` l. 655 ("answered at [hand], given MR")
   expected: the equality of the finitary and the measurable densities needs measure rigidity at a number field (row 120's outside input), so it stays conditional
@@ -390,7 +392,7 @@ question: does-the-rigidity-run-for-one-class
   cost: one short derivation job, no search: the manuscript's § 4 (316 lines) re-read with one class, FS103-B-AMEN's Følner half restated at the algebraic plane, the density step, and the literature's definitions of `f(n)` and `m₁` read at their pages
   hunch: it runs; the density step closes by reverse Fatou on disc averages; the care is in which infimum the literature's `f(n)/n` names (0.85)
   falsifier: a step among the transfer's F3–F9 that uses the sum of the classes' fields being 1, or more than one class; or `[DuczVarga2026]`'s `f(n)` defined over graphs the argument's infimum does not cover
-  rank: 1
+  rank: 4
 
 ### 3.3 Other consequences a short job could close this week (the stub's § Siblings carries each with its literature and risk)
 
