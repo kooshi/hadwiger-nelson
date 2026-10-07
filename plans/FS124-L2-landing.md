@@ -1318,3 +1318,49 @@ hypothesis form:
    other six it is the compiled files as given.
 5. **Counts that differ from my brief's** are decisions, not slips, and were sent in the line before the push: 405
    records for 355; two `.condition` declarations where the planners' records expected none.
+
+## Stage 9 — SAVED (FS124-L2): the landing
+
+**After the pass, on the gated tree.** *The `sorry` search's plant* (`data/fs124/l2/sorry-plant.sh`, after FS124-L1's;
+`sorry-plant.out`): a theorem with a `sorry` body appended to `Plane/ThreeArcs.lean`, never built, never committed —
+narrow lines 0 before, 1 with the plant, "PLANT FIRED: the search finds the planted sorry and nothing else"; restored
+by `git checkout`, "RESTORED: the module is the text it was", narrow lines 0 again, 0 tracked files modified. *The
+baseline header's count line* refiled and the vacuity step run again on it
+(`data/fs124/l2/gate/vacuity-header-refiled.log`): exit 0, "recorded counts in scripts/vacuity-baseline.txt's header:
+match (9 of 9 compared)", the same scan counts, "vacuity: OK"; `CLAUDE.md` § The gate stays flagged stale until
+draft 3 is filed.
+
+**`main` had moved once more** (to `121ccc4f`: `data/` 15 paths, `plans/` 6, nothing else since the commit merged at
+stage 7); merged by hash, automatic (`c5ecdd0e`). **The commit pushed is `e89c4e92`.** The diff that shows what
+separates it from the gated commit `da96003b` (`data/fs124/l2/push-check.out`): `data/` 104 paths, `plans/` 7, and
+**one path outside them, `scripts/vacuity-baseline.txt`, one line** — the header's count line above; `git diff --stat
+da96003b HEAD -- Proofs Proofs.lean tools ARCHITECTURE.md lakefile.toml lean-toolchain lake-manifest.json CLAUDE.md
+scripts` shows that file and no other; `origin/main` was its ancestor; zero `sorry` by the narrow search; no tracked
+file modified. The coordinator was sent one line when the gate was green, before the push, with the three places
+where this landing differs from the brief's expectations (405 records for 355; two `.condition` declarations; the
+header line).
+
+**The push** (`data/fs124/l2/push-main.out`): `git push origin HEAD:main` from the worktree — "121ccc4fc..e89c4e92d
+HEAD -> main", **a fast-forward; no force.** `origin/main` by `ls-remote`: `121ccc4f…` before, `e89c4e92…` after.
+
+## Stopped at (2026-10-07, 20:58 UTC) — the coordinator's wind-down, at a finished landing
+
+*The coordinator asked every job to come to a saved stage (budget). The final gate pass was already green when
+the message was read, so the landing was finished with nothing of the gate skipped.*
+
+- **Landed.** `main` is at `e89c4e92` (this branch's tip at the push), then one more fast-forward that carries this
+  section and the report (`plans/` and `data/` only). Gated commit `da96003b`; the last stage committed is stage 9.
+- **The front-page drafts are written** — "Drafts for the front page (FS124-L2)" above, fifteen drafts, their
+  seventeen slots each found once on `main` at `07290735` (`data/fs124/l2/drafts-slots.out`). They were not read
+  again on `main` after the landing: the coordinator's files moved by `LEDGER.md` rows 165–167 only between that
+  check and the push, and the slots of rows 162–164 were in the check.
+- **Nothing this record cites lives under `/tmp` or a scratch directory.** Every log, receipt, dump and script is
+  under `data/fs124/l2/` (the gate's under `gate/`, the probes' under `probes/`), committed. The scratch copies of the
+  runners were snapshots of committed scripts.
+- **No process of this job is running**: the slot ledger shows no reservation of mine; the gate pass, the vacuity
+  re-run and the monitor on the pass have all exited.
+- **Uncommitted files**: none.
+- **What is left, in order** — none of it gate work: (1) the filing, from the drafts (the coordinator's); (2) the
+  open gate items above, of which item 1 (a library theorem concluding `IsTriodCut`) is one line for a later job;
+  (3) the report in standing rule 11's full form — a short one is filed (`data/fs124/reports/FS124-L2.md`), by the
+  wind-down's word.
