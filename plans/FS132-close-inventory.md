@@ -593,3 +593,53 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     at a time throughout — three at a time would spend the budget too fast. Two is the kernel planner plus one of the derive lanes; the freed slot stays empty now.
     Alternative: keep three. Why not: "keep us on track to 6 or 7" is an instruction about direction, and the budget is his. Confidence: medium — 
 
+20. **SEARCH-2026-10-07 done: the turning ring with three-way ring points does not exist in the family enumerated — by four
+    verified refutations and by a short hand argument beside them; with four labels at alternate ring points it does, in a
+    shape this project already holds** (the Searcher; 268k and 24 minutes by the task notice; record
+    `plans/SEARCH-2026-10-07.md` Stages 1–5; report `data/search/2026-10-07/report.md`; commits `856b380a`, `70d65896`,
+    `35576351` on `main`). **The family**: seven "flowers" — the centre and the six ring points — each ring flower the six 60°
+    wedges cut by the three unit circles through the ring point, one label of six per wedge; the centre's flower in twelve
+    30° sub-sectors with straight rays or arcs of unit circles about ring points; the ring `a, b, n, a, b, n`; every
+    same-label pair at distance 1 decided exactly by an earlier milestone's checker, tables equal at two radii.
+    **SEARCH-1007-TURN3 — NULL [cert]**: with at most three labels at every ring point, refused in all four families of
+    the centre (four CNFs, each LRAT proof verified by `cake_lpr`). **SEARCH-1007-TURN3-HAND** ([hand], one mind — the
+    Searcher's — unchecked): the same null in five steps, the last reading only half-planes at the centre ("any finite
+    sector structure at `x`, at any angles") — so the request, as a three-way question in this family, was not a search.
+    **SEARCH-1007-TURN4 [cert]**: with four labels allowed, 192 models with a simple three-sector centre, all of one
+    shape — the centre's three interfaces are arcs of the unit circles about three alternate ring points, exactly those
+    ring points carry four labels, and no two adjacent ring points are three-way — "fragment T2's shape"; each re-checked
+    from a cold start at two radii. **SEARCH-1007-TURN-SS — NULL [cert]**: a simple three-sector centre with straight rays
+    has no turning ring at any number of labels. **SEARCH-1007-ALT [cert]**, the positive control: the alternating ring is
+    refused in all sixteen variants, and becomes satisfiable exactly when the four pair classes of C132-ALT's four cases
+    are removed together. **What the null is not**: outside the family are a wedge split along another curve, twelve
+    sectors, unequal sectors, curved sector boundaries, a sector with two outside labels, measurable germs. **A second
+    search request, not run**: extend the kept four-label fragment to the whole annulus and the closed unit disc — "a
+    design problem with a handful of interfaces per sector". **A tool defect**: `cake_lpr` exits 0 on a failed check; the
+    signal is its line `s VERIFIED UNSAT`. **Its slips, disclosed**: a pilot batch ran before the controls (re-run after
+    them, byte-identical); one planted fault that could not fire, repaired before any table; the proofs git-ignored at
+    first, then archived with a verified round trip.
+    **My receipt**: the three commits are on `main`; **the four refutations of the requested object re-verified by me**
+    from its archive with `cake_lpr` under the slot — each "s VERIFIED UNSAT"; its record's Stage 5 drafts read. **Not
+    checked by me**: that the four formulas say what the family is (the encoding, the exact tables); the hand argument;
+    the kept models; the control's sixteen variants. **Credit**: it found that its own request was decided by hand and said
+    so in its headline; it would not call the four-label fragment "a model" of what was asked; the positive control is run
+    to the point of showing which four constraints are needed together; and its slips are in the record before I could
+    find them.
+    **Rulings.** (a) **Queue line 10's fate and the `RUNNING.md` line are filed from its drafts, verbatim.** (b) **No push
+    to Kooshi**: the object asked for does not exist in the family, and the four-label fragment is a held shape, local
+    (flowers of radius about 0.25), with four-way points — not the first object of the YES side. (c) **Where the existence
+    side stands, as this inventory now records it**: for a six-colouring on triangle points alone, the complementary
+    pair is excluded (item 15), the alternating ring in step form (item 16), and **the six-sector turning ring in the
+    wedge family** (this item) — and the search adds what the hand results did not: **wherever the turning ring does
+    exist, alternate ring points are four-way**. Each is one mind's or one instrument's; none is in the kernel. What is
+    left to that side: a ring with infinitely many changes, germs that are only measurable, and the bridge from a cyclic
+    centre to its witnesses (item 18 (d)). (d) **Its hand argument and its question on measurable germs go to the asking
+    lane now, and through it to the next deriver**: if steps 1–4 hold for measurable germs, C132-TURN — the stalled claim
+    — may be derivable without the flagged clause. (e) **Its second search request is queued as line 11, not run**: it
+    extends a shape already held and bears on the YES side only if the asking lane ranks it. (f) **Slot → FS132-P3**, the
+    asking lane (ruling 19 (c)); two agents running. **A slip of mine at this filing**: the script that files these lines
+    stopped at its second step on an assertion of its own, and the shell line after it committed what had been written —
+    the queue's line 10 alone — under a subject naming all of it (commit `e847e0dc`). Nothing wrong was committed; the
+    subject over-claims; the rest is in the commit that carries this item. The repair to my practice: a filing script and
+    its commit are one command, joined by `&&`.
+
