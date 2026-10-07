@@ -274,4 +274,42 @@ the death of every such cycle — which are what the answer is made of and are n
   C132-ALT and C132-TURN-EDGE (two steps toward C132-TURN). **An overlap, ruled**: the strips with a fixed witness point in
   place of a limiting direction are the witness card's C132-WIT; the ring card's deriver uses that form as a step inside
   C132-CROSS, and the entry that crosses to the kernel lane is the witness card's.
+- **2026-10-07 (after FS132-E5's Stage 1, commit `c0284a2d`; FS-132 inventory item 14): the witness card's three claims as their
+  deriver states them** — read § 1.4 of that record whole:
+
+> - **C132-WIT-ORBIT.** C132-M-ORBIT's statement (`plans/FS132-E3-derivation.md` Stage 3) with "for each j modulo 4 let K_j be a
+> — source: plans/FS132-E5-derivation.md § 1.4
+
+> - **C132-WIT-EXCL.** C132-M-EXCL's statement with the same replacement.
+> — source: plans/FS132-E5-derivation.md § 1.4
+
+> - **C132-WIT-STRIP.** Let k ≥ 3 be an integer, x a point, U an open set containing the unit circle about x, c a weak measurable
+> — source: plans/FS132-E5-derivation.md § 1.4
+
+> **C132-WIT-EX** — as posed, with the definition written out. For every integer k ≥ 1, every weak measurable k-colouring of the
+> — source: plans/FS132-E5-derivation.md § 1.4
+
+> **C132-GRUNDY7** — the posed sentence has two clauses, and my verdicts will be about these:
+> — source: plans/FS132-E5-derivation.md § 1.4
+
+  C132-WIT is fixed as the conjunction of its three statements; C132-WIT-EX as posed with its definition written out, and an
+  anchored form the deriver will also rule on; C132-GRUNDY7 as two clauses, the second in two readings ("some output" and
+  "every output" of the Grundy construction).
+- **2026-10-07 (after FS132-E4's Stage 2, commit `5c04c375`; FS-132 inventory item 15): C132-COMP is derived as posed, [hand],
+  one mind, through two wider entries that enter the list, with one relay-result** — each statement read whole in its entry
+  (C132-COMP's own entry there carries the stub's statement, quoted above at the second round's line):
+
+> derivation: C132-CROSS
+> — source: plans/FS132-E4-derivation.md Stage 2
+
+> derivation: C132-COMP-SHARP
+> — source: plans/FS132-E4-derivation.md Stage 2
+
+> derivation: C132-WITNESS
+> — source: plans/FS132-E4-derivation.md Stage 2
+
+  **C132-CROSS** is a covering count that reads no properness, no palette, no limiting direction and no connectedness — only
+  the exclusions and two points of each set; **C132-COMP-SHARP**: six labels, witnessed triangles on disjoint triples at two
+  points less than 2 apart, a common unit point in the open set — then one of the six edge sets lies on the unit circle about
+  that point; C132-COMP as posed is its instance. *Not claimed*: each entry's own line.
 

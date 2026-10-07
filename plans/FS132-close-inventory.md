@@ -421,3 +421,53 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     clean tree. **A slip of mine**: I had not pulled the landing into the shared tree before a deriver's next push met it —
     the landing's hand-back and this push crossed; no harm.
 
+14. **FS132-E5, first message: the witness card's claims stated, with a finding that changes the card's frame** (source: its
+    message to "main", 2026-10-07; record `plans/FS132-E5-derivation.md` Stage 1; commit `c0284a2d`). **The statements**:
+    C132-WIT as three (the orbit form and the ring form of the exclusion with two-point sets; the strips from fixed witness
+    points, the excluded directions at most six); C132-WIT-EX as posed, with an anchored form added; C132-GRUNDY7 as two
+    clauses, the second read two ways because the Grundy construction takes each class by a maximality choice and has no one
+    output. **Its finding, from recognition, no verdict yet**: **"a witnessed cycle at `p` is a property of the unit circle
+    about `p`, not of `p`"** — for a witness `q` near `p` the straddle set of `{p, q}` is two thin lunes along that circle,
+    and nothing in the definition is near `p`. It expects to derive: (a) the two-point form is not a widening — a two-point
+    set is itself an admissible set, and the straddle set only shrinks; (b) **in the honeycomb seven-colouring every point of
+    a small neighbourhood of each vertex carries a witnessed triangle of that vertex's three labels**, so witnessed cycles
+    sit at points that are no centres, and existence "as posed is free wherever a colouring has such a margin — the two
+    slack colourings among them. The real question is then for colourings with no margin." **My receipt**: the commit is on
+    `main`; § 1.4's five first lines quoted into the claim list by script. Not checked by me: its recognition. **Rulings.**
+    (a) **The statements are fixed by a dated line as stated.** (b) **Its finding is relayed to the ring card's deriver**,
+    whose entries are stated over witnessed triangles, at its grade (a recognition, no verdict). (c) If (b) is derived, the
+    asking lane's word "witnessed cycle" names a property of a unit circle, and "does one exist in every disc" is the wrong
+    question for colourings with a margin: logged for the asking lane's next job; no re-pose until the verdicts are in.
+
+15. **FS132-E4, first verdict: C132-COMP is derived — no two points carrying witnessed triangles on disjoint label triples lie
+    closer than 2, unless an interface set lies on the unit circle about their crossing point; [hand], one mind** (source: its
+    message to "main", 2026-10-07; record `plans/FS132-E4-derivation.md` Stage 2, four entries, three controls; commit
+    `5c04c375`). **C132-CROSS** ([hand]): a covering count at a common unit point `w` of two points less than 2 apart — the
+    two unit circles cross transversally, so all four quadrants at `w` are non-empty open sets; an edge set with a point
+    strictly inside (outside) the unit circle about `w` excludes its two labels on the outer (inner) side of its own
+    centre's circle near `w`; so on no quadrant can the excluded labels be all the labels. **It reads no properness.**
+    **C132-COMP-SHARP** ([derived]): with six labels and disjoint triples, three edges and two sides at each centre give a
+    pure side at each, and the quadrant where both are pure would have no label left — unless one of the six edge sets lies
+    on the unit circle about `w`. **C132-COMP** as posed is its instance. **C132-WITNESS** ([hand]): a connected open region
+    of one label witnesses that label on every compact subset of its closure — so a map's edges are witnessed edges.
+    **The three controls I named**: at seven, 342 pairs of honeycomb vertices and 684 common unit points, never a label of
+    either vertex near one (two triangles of seven labels always leave a label outside both); **every held fragment falls
+    outside** — one by its common unit points lying in its voids, one (T2) by exactly the sharp proviso (three of its six
+    edge sets are arcs of the unit circle about the crossing point), three because a bowtie has no third edge; the tangent
+    pair "shrinks" to that one case. **Read off, not entered**: with no edge set on such a circle, no complementary pair
+    under 2 apart at all, with no map. **My receipt**: the commit is on `main`; its gate run by me — exit 0, three controls
+    each firing; C132-CROSS's statement and `uses only:` read. **Checked by me**: the pigeonhole of C132-COMP-SHARP — three
+    edges of a triangle against two sides give two edges on one side, two edges of a triangle carry all three of its
+    labels, so each centre has a side excluding its whole triple near `w`; disjoint triples of six labels exhaust them on
+    the common quadrant; and the blocking rule from the straddle set's definition (a point of the set strictly inside the
+    unit circle about `w`, and the centre at distance 1, put the points just outside the centre's circle near `w` in the
+    straddle set). **Not checked by me**: the transversality constant; the controls' geometry; C132-WITNESS's argument.
+    **Credit**: the claim taken to the class its argument reads — no properness at all — and the exception found exactly:
+    not "tangent pairs or bowties" but one configuration, which a held fragment realizes; all three controls run on held
+    objects, one of them a planted fault of an earlier milestone's own checker.
+    **Rulings.** (a) **The claim list gains the entries by a dated line.** (b) **This is the regular chain's last line in
+    the exact class** (the road's step 3e): logged as derived, one mind; for the kernel lane after the planner's first
+    statements — it is short and reads no properness (the asking lane's table, item 4). (c) Row 133's sharpening is filed
+    from its report's draft. (d) Relayed to the witness card's deriver in one line, since its strips statement is this
+    entry's step.
+
