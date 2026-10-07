@@ -1,0 +1,15 @@
+A	data/fs131/briefs/scripts/mk-fs132-k1.py
+A	data/fs131/briefs/scripts/mk-fs132-p2.py
+M	data/fs132/briefs/FS132-L1-import-land.md
+A	data/fs132/briefs/FS132-P2-night-rerank.md
+M	data/fs132/claims.md
+M	data/fs132/e2/checks.out
+M	data/fs132/e2/ring_checks.py
+A	data/fs132/reports/FS132-E2.md
+A	data/fs132/reports/FS132-E3.md
+M	plans/FS131-close-inventory.md
+M	plans/FS132-E2-derivation.md
+M	plans/FS132-E3-derivation.md
+M	plans/FS132-close-inventory.md
+M	plans/SEARCH-QUEUE.md
+M	plans/SESSION-HANDOFF-2026-10-07.md
