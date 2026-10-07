@@ -24,6 +24,11 @@ folder, `/home/kooshi/source/math/preprints/The-Euclidean-plane-is-not-five-colo
   C132-EXT-DISC], one mind. Stage 3.
 - C132-WIT-EX — **not proved: stalls** at the selection of a point with connected pieces of two classes through it. Stage 3,
   § The stall.
+- C132-GRUNDY7-NOT — no order makes the hexagonal colouring (circumradius 2/5), the island colouring or the stripe colouring
+  a Grundy colouring. [hand], one mind. Stage 4.
+- C132-GRUNDY7-LOCAL — for an order beginning with a label of the slack vertex, some output of the Grundy construction has
+  one label on the whole slack ball. [hand], one mind. Stage 4.
+- C132-GRUNDY7 — **not proved: stalls** at its second clause, which names a family of colourings, not one. Stage 4.
 
 ## Stage 1 — SAVED: the readback, the predictions, the recognition, the statements
 
@@ -546,3 +551,152 @@ and `Γ_p` is a path. (Hand, one mind, no control.) What makes a centre is a pro
 which no finite set of points records.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: C132-GRUNDY7
+
+**Verdict: the claim as posed stalls at its second clause, which is not yet a statement.** Its first clause is derived, and
+thinly: no order makes either slack colouring a Grundy colouring — but none makes the *unmodified* hexagonal colouring one
+either, so the clause does not test the planted slack. Its second clause speaks of "the Grundy-ization of each": the
+construction takes each class by Zorn's lemma after an order has been chosen, so it names a family of colourings. Of that
+family: for the orders that begin with a label of the slack vertex, **some** member has a single label on the whole slack
+ball, with no centre in it and a constant ring across it (derived); that some member is tame on every disc and every ring,
+or that every member is, is not derived, and the two slack colourings cannot decide it.
+
+*Labels.* The reading's vertex `v` with labels 1, 2, 3 (islands of label 3 on the 1–2 edge) is, in the scripts, the vertex
+`X = (0, 2/5)` with labels 3, 2, 0 (islands of label 0 on the 3–2 edge); the four other labels are 1, 4, 5, 6. The text below
+uses the reading's names.
+
+### The entries
+
+derivation: C132-GRUNDY7-NOT
+  statement: for no order of the seven labels is the hexagonal seven-colouring with circumradius 2/5, the island colouring (EXT-OAI2-SLACK7-L) or the stripe colouring (EXT-OAI2-SLACK7-P) a Grundy colouring in the sense of FS121-D3-GRUNDY, in which the class first in the order is maximal, up to null sets, among measurable sets with null unit pairs and each later class is maximal among such sets inside the complement of the earlier classes
+  uses only: the two margins of the hexagonal colouring (two points of one hexagon at most 0.8 apart; distinct hexagons of one label more than 1.033 apart) and that the slack colourings differ from it only inside the ball of radius 0.03 about v, by labels of v; for the second reason FS121-D3-GRUNDY's step (b), which follows from the definition alone (a positive-measure set of points of a later class whose unit circles meet an earlier class in zero length could be added to the earlier class)
+  not claimed: that this tells the slack colourings from the hexagonal one — it does not, and that is the finding; anything about the hexagonal colouring at circumradius 1/2, or about this project's seven-colouring R7, which FS121-D3-GRUNDY's model line says is Grundy in every order
+  argument: § Argument — neither is honest, and neither is the colouring they were planted in
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the three colourings themselves; control `grundy-margins` — the hexagons of one label thickened by 0.016 hold no unit pair with 60 points just outside one of them, and the unit circles about a point of an island and about a point of a hexagon near v carry only the four labels that are not labels of v
+  prior art: partly: Grundy and fall colourings of finite graphs are classical (row 143's line: Dunbar et al. 2000, by that row; not read by this job); that a colouring with a margin is not Grundy is immediate from FS121-D3-GRUNDY; owed beyond that
+  handoff: none — a calibration for the asking lane's ruling on the class of C132-RING-TAME; nothing here is for the kernel
+
+derivation: C132-GRUNDY7-LOCAL
+  statement: for each of the island colouring and the stripe colouring, and each order of the seven labels beginning with one of the three labels of the vertex v, some output (A_1, …, A_7) of FS121-D3-GRUNDY's construction on that colouring in that order has the first class A_1 containing almost every point of the ball of radius 0.03 about v; in such an output no point of that open ball is a cyclic centre, and for the stripe colouring's point x the palette P_x(e) is the single first label for almost every direction e with x + e in that ball
+  uses only: that the class of a label a of v together with B(v, 0.03) holds no unit pair (two points of the ball are less than 0.06 apart; a point of the ball and a point of the hexagon of a at v at most 0.83; a point of the ball and a point of another hexagon of a more than 1.003); that the construction's family at its first step contains every measurable set with null unit pairs that contains the class, and that every member lies below a maximal one (its own chain argument, FS111-M-SATC (i) by that record, not re-read); that a ball carrying one label almost everywhere has no transition between two classes, and every circle sample through it has that label's coordinate equal to 1 there
+  not claimed: anything about the output outside B(v, 0.03) — the maximal extension is a choice there, and nothing bounds what it does; that every output in such an order contains the ball; anything for an order beginning with one of the four other labels; that any output has finitely many cyclic centres in every disc or finitely many changes on every ring
+  argument: § Argument — some honest output erases the planted slack
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the order 3, 1, 2, 4, 5, 6, 7 on the island colouring: the first class starts from the hexagons of label 3 with the islands and is extended over B(v, 0.03), swallowing the 1–2 edge near v
+  prior art: owed — the statement is this project's
+  handoff: none — a calibration
+
+derivation: C132-GRUNDY7
+  statement: For no order of the seven labels is the island colouring or the stripe colouring (`plans/EXT-OAI2-reading.md` § 5.6) a Grundy colouring, and the Grundy-ization of each (FS121-D3-GRUNDY's construction) has finitely many cyclic centres in every disc and finitely many changes on every ring
+  uses only: for its first clause C132-GRUNDY7-NOT; for its second, what is derived of the family the construction defines — C132-GRUNDY7-LOCAL
+  not claimed: that the second clause is false in either reading — no honest seven-colouring with accumulating centres or a ring that changes infinitely often is exhibited; that it is true in either
+  argument: § What the second clause is, and what is left of it
+  verdict: stalls at: the second clause, at the words "the Grundy-ization of each" — FS121-D3-GRUNDY's construction lets A_m be any maximal element of a family, after an order is chosen, and its own entry does not claim uniqueness; read as "some output" the clause is derived only inside the slack ball (C132-GRUNDY7-LOCAL), read as "every output" not at all: no statement held here bounds the complexity of a relatively maximal set with null unit pairs
+  grade: hand
+  minds: 1
+  model: what the first clause holds of — the three colourings of C132-GRUNDY7-NOT; for the second clause read as "some output", the output of C132-GRUNDY7-LOCAL inside the ball
+  prior art: owed — the claim is the asking lane's
+  handoff: Poros — not derived; stalls at the step named; the smallest open forms are § What the second clause is, and what is left of it, (G1) and (G2)
+
+control: grundy-margins
+  of: C132-GRUNDY7-NOT — (a) the hexagons of label 0 thickened by 0.016 against 60 points 0.008 outside the hexagon of centre (0, 0): no unit pair on 3600 angles each, and both margins hold; (b) in the island colouring the unit circles about a point of island 6 and about a point of the label-3 hexagon near the vertex carry only the labels 1, 4, 5, 6; the fault thickens by 0.1
+  run: python3 ../data/fs132/e5/margin_check.py grundy
+  expect: thickened-unit-pairs=0 margins=True,True ring-labels-at-island-point=1456 ring-labels-at-tile-point=1456
+  fault: python3 ../data/fs132/e5/margin_check.py grundy --fault
+
+### Argument — neither is honest, and neither is the colouring they were planted in
+
+Fix one of the three colourings and an order. *First reason (the first class is not maximal).* Let `ℓ` be the first label
+and `T` a hexagon of label `ℓ` more than 2 from `v`. Put `E = {z ∉ T : dist(z, T) < 0.016}`: a set of positive measure, in
+the neighbouring hexagons, so disjoint from the class of `ℓ`. A point `z ∈ E` and a point `z′` of the class of `ℓ` or of `E`:
+if `z′ ∈ T ∪ E`, `|z − z′| ≤ 0.8 + 0.032 < 1`; if `z′` is in another hexagon of label `ℓ`, `|z − z′| > 1.033 − 0.016 > 1`; if
+`z′` is a recoloured point, it is within 0.03 of `v` and `|z − z′| > 1.9`. So the class of `ℓ` with `E` added has null unit
+pairs: the class is not maximal. *Second reason (unbound points; the one that concerns slack).* Let `a` be the earliest in
+the order of the three labels of `v`, `b` another of them. The points of label `b` within 0.01 of `v` have positive measure
+(a sector of a hexagon, less the islands; or a third of the stripes). The unit circle about such a point `y` holds no point
+of label `a`: those are within 0.81 of `y` or more than 1.023 from it (Stage 3, the model's margins). So a positive measure
+of points of the later label `b` have unit circles meeting the class of `a` in the empty set, against step (b) of
+FS121-D3-GRUNDY. ∎ Both reasons hold for the unmodified hexagonal colouring word for word. (Control `grundy-margins`.)
+
+**What this says of the test the claim proposed.** "Is the island colouring a Grundy colouring?" is answered no by the
+hexagonal colouring's own margins, before any island is planted. The slack was never planted: it is the base colouring's,
+and the islands and the stripes only spend it. So the first clause cannot show that honesty removes the two pathologies.
+
+### Argument — some honest output erases the planted slack
+
+Let `a` be a label of `v` and `S_a` its class in the island or the stripe colouring: points of the hexagons of label `a` and
+points of `B(v, 0.03)`. `S_a ∪ B(v, 0.03)` holds no unit pair, by the three distances in the entry's `uses only`. It
+contains `S_a`, so it is a member of the family from which the construction takes `A_1` when `a` is first in the order; a
+maximal member above it is a maximal member of the family, and the construction may take it. Continue the construction in
+any way. In the output, almost every point of `B(v, 0.03)` has label `a`. Every point `z` of the open ball has a ball about
+it with one label almost everywhere, so no pair of labels has a transition there and `Γ_z` has no edge: the island colouring's
+centres inside the ball, and their accumulation at `v`, are gone. For the stripe colouring, a circle sample centred near `x`
+with radius near 1 is, on directions `e` with `x + e` in the open ball, equal to `a` almost everywhere once the centre and
+radius are close enough; so every trace has `a`-coordinate 1 there and `P_x(e) = {a}` for almost every such `e`. ∎
+
+### What the second clause is, and what is left of it
+
+**The defect.** FS121-D3-GRUNDY's construction: "let `A_m` be maximal, under inclusion up to null sets, among measurable `T`
+with null unit pairs and `S_m ∖ (A_1 ∪ ⋯ ∪ A_{m−1}) ⊆ T ⊆ R_{m−1}`" — a maximal element by Zorn, of a family that depends on the
+order chosen and on every earlier choice; its entry's `not claimed` line lists "uniqueness". C132-GRUNDY7-LOCAL already shows
+three outputs of one colouring that differ on a ball (one for each label of `v` taken first). So "the Grundy-ization of each
+… has finitely many cyclic centres" has no truth value until it is quantified.
+
+**The two readings, as open statements.**
+- **(G1), "some".** *For the island colouring and for the stripe colouring there are an order and an output of the
+  construction with finitely many cyclic centres in every disc and finitely many changes on every ring.* Derived inside
+  `B(v, 0.03)` only. What is missing is a maximal extension of a hexagon class that is explicit everywhere: a set by formula
+  with a proof of maximality. This project holds one honest seven-colouring by formula (R7, by FS121-D3-GRUNDY's model line),
+  but its classes do not contain the hexagonal colouring's, so it is not an output on these inputs.
+- **(G2), "every".** *Every measurable Grundy seven-colouring has finitely many cyclic centres in every disc and finitely
+  many changes on every ring* — the form the asking lane's ruling needs, since it wants to pose C132-RING-TAME's first
+  clause "for honest colourings". Nothing here derives it or refutes it.
+
+**What honesty does and does not remove, as far as derived.** It removes the way the two pathologies were made: in a Grundy
+colouring no positive-measure set of points of one label has an earlier label free on it (step (b)), so three labels cannot
+all be free in a ball, which is what the islands and the stripes spend. It is not shown to remove accumulating centres or
+rings with infinitely many changes made another way.
+
+**A reading, with its killing test (not an entry; one mind; it leans on G84's sentence "Maximality leaves bands free", whose
+source rows I did not read).** A point of a later class is bound to an earlier class by *any* point of that class's support
+at distance 1. Two boundary pieces of the same pair of labels that face each other at distance 1 can therefore bind each
+other whatever their pattern: near two points `y_0`, `z_0` at distance 1 the unit-pair relation is, to first order, "equal
+coordinate along `z_0 − y_0`", so one label on a measurable set of bands near `y_0` and on the complementary bands near `z_0`,
+the other label on the rest, is proper and each band is held by its partner. If that survives the second-order terms and the
+other five classes, honest colourings with rings that change infinitely often exist at seven, and the normal form for
+C132-RING-TAME's first clause is not honesty. *Killing test*: a proof of (G2), or of its ring half, for Grundy
+seven-colourings; *confirming test*: one Grundy seven-colouring by formula with a banded pair of facing unit arcs.
+
+**So, for the ruling this claim was to decide** — "in which class the ring's finiteness is to be posed": this claim does not
+decide it. The test it proposed is thin on its first half and undefined on its second. What can be said: honesty forbids the
+*known* construction of a wild ring; it is not known to forbid a wild ring; and the calibration that would tell is a banded
+honest colouring at seven, or its exclusion — (G2) and the reading above.
+
+## Stage 4 — SAVED
+
+## Predictions scored
+
+| claim | registered | outcome |
+|---|---|---|
+| C132-WIT, the exclusion | derived as an instance, 0.95 | **met** — and more: the two forms are one theorem |
+| C132-WIT, the strips | derived with the side rule, 0.90 | **met** |
+| C132-WIT-EX | derived 0.10; stalls 0.75; refuted 0.05; a defect of the statement 0.80 | **stalls**; the defect found (witnesses by margin at points that are no centres) |
+| C132-GRUNDY7 | first clause derived, thinly, 0.90; second clause not a statement 0.85; some form of it derived 0.30 | first two **met**; the third met only locally (C132-GRUNDY7-LOCAL), so scored **not met** as registered |
+
+The asking lane's registered expectations (`plans/STUB-six-by-the-nerve.md`, for its own scoring): C132-WIT 0.90 — derived.
+C132-WIT-EX derived 0.30, stalls 0.50, refuted 0.20 — stalls, but not where its hunch put the stall ("at the proof of clause
+(3)"): that proof runs with no centre (C132-WIT-SUPER); the stall is one step earlier. C132-GRUNDY7 0.60 — its first half
+holds and its second is not a statement.
+
+## Where a successor takes over
+
+Nothing of this record is half-done. Open, each stated as a question in its section: (O) of Stage 3; (G1), (G2) and the
+reading of Stage 4. Unread by this job and worth a reader: `plans/FS132-close-inventory.md` items 3, 6, 7, 9; `LEDGER.md`
+rows 140–142; `M/interfaces.tex` (the manuscript's own proof of clause (3), taken here from the first deriver's reworking);
+M7–M9 of `plans/FS132-E3-derivation.md`, which I read and did not rework.
