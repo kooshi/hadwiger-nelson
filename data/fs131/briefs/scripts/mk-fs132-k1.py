@@ -20,7 +20,7 @@ def entry(path,name):
         if l.startswith("  not claimed: "): nc=l[len("  not claimed: "):]
     assert st and nc,name
     return st,nc
-ORDER=[(E3,"C132-M-ORBIT"),(E3,"C132-M-EXCL"),(E2,"C132-INDEX"),(E2,"C132-RING-WIND"),(E1,"C132-CONFINE"),(E1,"C132-CORES-FREE"),(E1,"C132-EXT-DISC")]
+ORDER=[(E3,"C132-M-ORBIT"),(E3,"C132-M-EXCL"),(E3,"C132-DIAG-WIDE"),(E1,"C132-CONFINE"),(E1,"C132-CORES-FREE"),(E2,"C132-INDEX"),(E2,"C132-RING-WIND")]
 body=[]
 for path,name in ORDER:
     st,nc=entry(path,name)
@@ -43,7 +43,7 @@ b=f'''# Brief FS132-K1 — the kernel module for the first night's results on si
 
 brief: FS132-K1
   identity: {IDENT_P}
-  role: the kernel lane's planner for FS-132 — state in Lean seven statements derived by hand tonight, the first of them a theorem about every measurable six-colouring of the plane that no second mind has read; find your own route to each before you see the derivers'; then, with the derivations open, give an implementer a skeleton and a plan per leaf, and say which statements of an outside Lean library are imported and which are ported
+  role: the kernel lane's planner for FS-132 — state in Lean seven statements derived by hand last night, the first of them a theorem about every measurable six-colouring of the plane that no second mind has read; find your own route to each before you see the derivers'; then, with the derivations open, give an implementer a skeleton and a plan per leaf, and say which statements of an outside Lean library are imported and which are ported
   launch: now, in a tree of your own cut from `main` after the outside theorems landed there; two other jobs work under `plans/` and `data/` on `main`
   mission: § Why this job
   statements: § The statements
@@ -80,11 +80,13 @@ it whole. Their first lines:
 
 {Qs["C132-M-ORBIT"]}
 {Qs["C132-M-EXCL"]}
-{Qs["C132-INDEX"]}
-{Qs["C132-RING-WIND"]}
+{Qs["C132-DIAG-WIDE"]}
 {Qs["C132-CONFINE"]}
 {Qs["C132-CORES-FREE"]}
-{Qs["C132-EXT-DISC"]}
+{Qs["C132-INDEX"]}
+{Qs["C132-RING-WIND"]}
+*Not on your list, on purpose*: the release's extraction with its interface continua at every number of colours. A job running
+tonight decides which form of it the road needs; it comes to this lane when that is answered.
 **What they are stated over** (none of it fenced — read all of it):
 - the import module, `{M}`: the release's definitions as this library holds them (`WeakColoring` and its companions, for the
   whole plane) and the dictionary to this library's own (`weakColoring_iff_unitPairsNull`);
@@ -132,12 +134,13 @@ import, the release and every landed module are open.
 4. **The outside statements.** Which statements of the release your plan stands on, by their Lean names, and for each: declared
    here as a further outside theorem in the import's form (definitions copied, stored terms compared, the four items), or
    ported to this toolchain — priced from the first two pieces you try (`LEAN.md`'s re-pricing rule), not from a table. The
-   last two statements of the list are the release's extraction at every number of colours: its Lean types much of that at
-   five labels; say what of it is general already, what a port would be, and whether an implementer should start it or wait.
+   fifth statement of the list — a cyclic centre in every disc, at every number of colours — is the release's cover argument
+   with the count removed: its Lean types much of that at five labels; say what of it is general already, what a port would
+   be, and whether an implementer should start it or wait.
 5. **The price**, re-read from the first two leaves you actually attempt: leaves per statement, which are finite checks, which
    are analysis, what an implementer starts with tomorrow.
 6. **Your record**, stages headed "Stage n — SAVED (FS132-K1)", committed by explicit path and pushed on your branch; the
-   report in standing rule 11's form. Stopping at a saved stage with phase 1 committed for the first four statements is a
+   report in standing rule 11's form. Stopping at a saved stage with phase 1 committed for the first three statements is a
    good report.
 
 ## What is yours to decide

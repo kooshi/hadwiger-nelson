@@ -315,3 +315,86 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     statement. **Slots**: two running (the asking lane's job; the import's landing); the next deriver waits for the asking
     lane's card, the kernel planner for the landing.
 
+11. **FS132-P2, first message: the existence side is re-posed as two cards, and the first night's results are read against
+    each other** (source: its message to "main", 2026-10-07; stub `plans/STUB-six-by-the-nerve.md` § The question, re-posed
+    after the first night; record `plans/POROS-2026-10-07-fs132-night.md` Stages 1–2; commits `8756d639`, `f6f14aaf`; its card
+    gate exit 0 by its word). **Its five findings across the three records**: (A) every statement derived at a centre tonight
+    reads a point, a label cycle and one further point per edge with the two-label exclusion — a **witnessed cycle** — and
+    none reads the centre's isolation, which only the extraction's construction reads; (B) the regular chain's terminal
+    contradiction — two triangle centres with disjoint triples less than 2 apart — is held for maps (row 133) and stated in no
+    record for weak colourings, though the strips supply both its hypotheses; (C) regularity comes back at the existence
+    step; (D) the method that made "finitely many change points" a conclusion has not been asked of the ring's second
+    clause; (E) the normal form that costs nothing is honesty (Grundy colourings, row 143), not saturation, and it has not
+    been tested on the two slack colourings at seven. **Its ruling on C132-RING-TAME's class**: split — the second clause a
+    conclusion for every weak colouring living on triangles alone; the first clause for honest colourings, and only after
+    honesty is tested at seven; saturation is not the class (at six it binds the top colour, "the answer restated"). **The
+    ring card** (rank 1): can a triangle centre's ring have two essential changes of its outside label 60° apart, or does
+    the transfer put a fourth label or a complementary triangle at the ring point — first claim **C132-COMP**, then
+    C132-PLACE, C132-TURN. **The witness card** (rank 2): do witnessed cycles exist in every disc with no hypothesis on the
+    centres — C132-WIT, C132-WIT-EX, C132-GRUNDY7. **One finding in the safe direction**: C132-M-ORBIT's steps use one point
+    of each set besides `p`, so it holds for two-point sets — an entry narrower than its argument (its reading, one mind).
+    **No two results of the night found that cannot both hold.** **My receipt**: both commits are on `main`; the stub's new
+    section read whole — the two cards, both forms, the six claims with their controls, the outcomes table; the six first
+    lines quoted into the claim list by script. Not checked by me: its Stage 1 re-read; the road's table (Stage 2) — read at
+    its hand-back. **Rulings.** (a) **The six claims are fixed as posed by a dated line.** (b) **The ring card takes the free
+    deriver's slot now** (FS132-E4), its order adopted: it is the step at which six differs from seven, and each of its
+    three answers changes the next launch. **The witness card takes the next** (FS132-E5), when the asking lane's job hands
+    back and frees the slot. Alternative: both now. Why not: three jobs are the night's ceiling with the landing running, and
+    the kernel planner is next in line for the third. Confidence: medium-high. (c) Its finding on two-point sets is not
+    entered as a generalization of C132-M-ORBIT until a deriver states it (C132-WIT): the kernel planner is told at its
+    phase 2, since a statement over two-point sets is the simpler one to formalize.
+
+12. **FS132-P2 handed back, done (422k by the task notice): the road to seven as one table, the re-rank, and what to formalize;
+    the witness card's deriver launched into its slot** (record `plans/POROS-2026-10-07-fs132-night.md` Stages 1–3; report
+    `data/fs132/reports/FS132-P2.md`; commits `8756d639`, `f6f14aaf`, `d4998f1f`, `c64ebf34`, on `main`). **The road's table**
+    (its § 2.1): step 0 the transfer — outside, kernel-checked there; step 1 centres exist — derived; **step 2 a centre with
+    data — derived under a hypothesis nobody supplies at six** (a six-colouring can hide here, by centres infinite in every
+    disc); **step 3 not every centre is a triangle — stalled**, with its parts: 3a the strips and 3b the orbit index derived,
+    3c the ring winds (derived given tameness, the stall), 3d the count inside (the relation derived, its use unposed), 3e
+    the complementary pair (posed: C132-COMP), 3f the bicycle (held for maps, unposed in measure); **step 4 the exclusions**:
+    4a the outside-labelled four-cycle and 4b the two-pair ring derived with no map; 4c the mixed ring — **where every held
+    positive lives** — open; 4d the diagonal ring that does not alternate and 4e five- and six-cycles unposed. **Its honest
+    summary**: "the exclusions of centres that are not triangles run with no map and no normal form, as far as they have
+    been tried … the step that a non-triangle exists is where every request for regularity now sits. The frame 'the
+    measurable road' is right for step 4 and names a hope for step 3." **The re-rank** (drafted in full for ranks 1–9, 12,
+    13): FS-132 stays first; FS-124 second, its measurable restatement owed; **FS-122, the forced pair, third**, re-aimed at
+    the exact class; FS-127 fourth, re-aimed at honest colourings; FS-130, the bicycle, 15 → 5; FS-123 3 → 8, "absorbed
+    pending the kernel". **What to formalize, in its order**: (1) tonight's exclusion, because the direction rests on two
+    steps with no second reader; (2) C132-DIAG-WIDE with it; (3) C132-CORES-FREE; (4) the strips, and C132-COMP if derived;
+    (5) the colouring-free index lemmas, cheap, not before; (6) the extraction with its continua — **wait for the witness
+    card**; (7) FS-133's density equality — off the road, the one item whose value falls by waiting: one kernel job after
+    1–3; (8) wave 7's fragments — on the road as controls and as the YES side; hold its existence chain; (9) wave 6's Grundy
+    construction only, and only if the road goes through honest colourings; (10) the rest of wave 6 — retire from the queue
+    for now; (11) wave 9 — retire the bend, keep the restatement over the import; (12) wave 10 waits. **Its statement
+    defects**: rows 148–149 carry "non-Siamese" where the measurable exclusion has no such clause; rows 133 and 139 pose
+    route R with a cone-scale bound that has no consumer in the exact class if C132-COMP holds; **my item 6 names "the
+    measurable road" on the exclusion alone while item 7 records that the existence side's stalled statement needs a normal
+    form — one name over two classes**; a citation in the filed ranking (one of two rows cites the wrong paper for a lemma,
+    unchecked). **A whiff it puts on record**: the manuscript's "need not consist of edges" against the extraction's clause
+    (5) — its only consumer so far is one remark. **Its slips, disclosed**: three inputs unread (the two derivers' reports,
+    which reached it through my items; the regular proof's last two steps in the papers; the backlog's file beyond its
+    headings — so its wave rows rest on its own morning summary); the reframing skill not invoked. **A tool defect**: the
+    asking lane's gate reads the machine's date and warns "registered in the future" on hunches dated in UTC.
+    **My receipt**: the four commits are on `main`; § 2.1, § 2.3, the top three, the banners, the closed list's note and the
+    whole table of what to formalize read by me; the stub's re-posed section read at item 11. Not checked by me: Stage 1's
+    findings against the three records line by line; the ranked rows 4–13; the debts list.
+    **Credit**: it read three records against each other and found what none said — that everything derived at a centre
+    reads a witness and nothing reads isolation; it found the regular proof's last line unposed in the weak class with both
+    hypotheses already supplied; it corrected my name for the direction; and it scored its own three cards of this morning
+    as "answered off their branch tables", with the common cause named.
+    **Rulings.** (a) **The road's table is the milestone's map**, and the direction's name is corrected to its sentence:
+    measurable, with no map and no normal form, for the exclusions; the existence step is where regularity is asked for. My
+    call of item 6 (a) stands for what it launched — the kernel planner on the exclusion. (b) **Its formalization order is
+    adopted for the kernel slot tonight**: the planner (FS132-K1) takes the exclusion, C132-DIAG-WIDE and C132-CORES-FREE,
+    with the two index lemmas after them; **the extraction with its continua is taken off the planner's list until the
+    witness card answers**; FS-133's planner follows. Alternative: my own earlier list, which had the index lemmas third
+    and the extraction last. Why its order: the index lemmas have a consumer only if a tame ring is ever supplied, and the
+    extraction's right form is what a running job decides. Confidence: medium-high. (c) **Nothing of the backlog restarts
+    tonight**: one kernel slot, and its items 1–3 fill it; items 8–12 are my recommendation to Kooshi, as
+    its table. (d) **Its suggestion that the exclusion be formalized over four points instead of four compact sets goes to
+    the planner at the lifting of its fence**, not before — its blind phase is not told why. (e) **The re-rank, the four
+    banners, the G94 sentence and the closed list's note are filed after the import's landing is back** (they touch the
+    front page), with the corrections it found owed to rows 133, 139, 148, 149 as dated notes; the citation slip is read
+    against the two papers first. (f) **Slot → FS132-E5**, the witness card (`data/fs132/briefs/FS132-E5-witness-card.md`,
+    regenerated against the stub as it stands, gate exit 0). Running: the two cards' derivers and the landing.
+
