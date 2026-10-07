@@ -510,3 +510,68 @@ proof by contradiction is. The statements that survive it as theorems about obje
 (`proper_to_borel_weak`, `wild_fourier`, `continuum_limit_support_exclusion`, `binary_open_local_rigidity`,
 `binary_strip_rigidity`, `compact_open_cover_impossible`, the tree-contraction and disc-extension lemmas): they hold at six and
 seven, where colourings exist or may. Nothing in the cone states or uses a six-colour analogue of the obstruction.
+
+## Stage 7 — SAVED: for this repository, drafted and added nowhere
+
+**(a) Their theorem in this library's vocabulary.** `data/external/oai1/audit/LeanDirBridge.lean`, checked with `lake env lean`
+at this repository's pin (v4.32.0) under a slot, exit 0, each declaration on the standard three; it imports
+`Proofs.HadwigerNelson.Instances.Interval`, is not a module of `Proofs`, and is imported by nothing. The outside theorem enters
+as a hypothesis in Mathlib's vocabulary — its unfolded statement, which the kernel checked against their constant at their pin
+(`audit_unfolded`, stage 4):
+
+```lean
+namespace HadwigerNelson
+
+/-- If no map `ℂ → Fin 5` separates every unit pair, the plane needs six colours. -/
+theorem six_le_chromaticNumber_plane_of_no_proper_five
+    (h : ¬ ∃ c : ℂ → Fin 5, ∀ x y : ℂ, ‖x - y‖ = 1 → c x ≠ c y) :
+    6 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber := by
+  rw [chromaticNumber_plane_eq_complex]
+  have h6 := (add_one_le_chromaticNumber_iff_not_colorable (G := unitDistance ℂ) (n := 5)).mpr
+    fun ⟨C⟩ => h ⟨C, fun x y hxy => C.valid (unitDistance_adj.mpr (by rw [dist_eq_norm, hxy]))⟩
+  exact_mod_cast h6
+
+/-- Row 33's interval with its lower end moved: `6 ≤ χ(ℝ²) ≤ 7`, given the outside theorem. -/
+theorem chromaticNumber_plane_six_or_seven_of_no_proper_five
+    (h : ¬ ∃ c : ℂ → Fin 5, ∀ x y : ℂ, ‖x - y‖ = 1 → c x ≠ c y) :
+    6 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ∧
+      (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ≤ 7 :=
+  ⟨six_le_chromaticNumber_plane_of_no_proper_five h, chromaticNumber_plane_interval.2⟩
+
+end HadwigerNelson
+```
+
+and the converse `no_proper_five_of_six_le_chromaticNumber_plane`, so the hypothesis is exactly the bound: `6 ≤ χ(ℝ²)` in this
+library's form ⟺ their statement. The same bound proved outright at *their* pin, with this repository's `unitDistance` copied
+in: `audit_chromaticNumber` (stage 4). Three facts for whoever decides: their proof is 70 modules at Lean v4.34.1 / Mathlib tag
+`v4.34.1` and this repository is at v4.32.0, so holding the theorem itself in `Proofs` means a Mathlib bump or a port; as a
+hypothesis it would be a `.former`/`.site` entry of kind `outside` in `scripts/Assumptions.lean`; as an `axiom` it would owe
+`LEAN.md` § Assumptions' four items, of which the read-back is this record's stage 4 (statement against the challenge, term for
+term) and the model question does not arise (the statement has no hypothesis).
+
+**(b) `BIBLIOGRAPHY.md`.** The row `[OAIMath2026]` exists (§ A, filed by Keryx as "listed, not read"). Drafted replacements, by
+slot:
+- *its third cell (what of ours rests on it), replacing* "Under audit: EXT-OAI1 (the Lean: statement, cone, build, axioms;
+  `plans/EXT-OAI1-audit.md`), then …" *with:* "**Audited by EXT-OAI1 (`plans/EXT-OAI1-audit.md`, 2026-10-07): the Lean stands.**
+  The import cone of `OAI.Geometry.PlaneColoring.Five` (70 modules, 30,336 lines; `Mathlib` its only outside import) holds no
+  `axiom`, `sorry`, native evaluation, `unsafe`, `opaque` or `set_option`; it compiles at Lean v4.34.1 / Mathlib tag `v4.34.1`
+  (rev `d13f23b7`) with exit 0; `#print axioms OAI.EuclideanFiveColor.no_proper_five_coloring` reads `[propext,
+  Classical.choice, Quot.sound]`, with a planted-`sorry` control firing; the stored statement equals the comparator
+  challenge's term for term. Also on the three axioms, and stated for every `k`: `OAI.EuclideanFiveColor.proper_to_borel_weak`
+  — a proper `k`-colouring of `ℂ` gives a Borel one proper at almost every unit pair (`χ_m⁰(ℝ²) ≤ χ(ℝ²)`, the direction rows
+  128 and 130 hold given MR) — through `OAI.PlaneFiveColor.Spectral.wild_fourier`. Not done there: the release's comparator
+  run; a replay of Mathlib's own declarations; the release's full 42-package configuration."
+- *its fifth cell (read status), replacing* "**listed, not read** … Nothing above is a finding about correctness" *with:*
+  "**Lean: built and audited** (EXT-OAI1): `lean/ComparatorChallenges/EuclideanFiveColor.lean` and `.json`,
+  `lean/OAI/Geometry/PlaneColoring/Five.lean` and `Coloring.lean` read whole; the statements and docstrings of the cone's 232
+  documented declarations read (`data/external/oai1/docindex-five.txt`); the proofs below `Five.lean` not read line by line —
+  compiled. **Manuscript**: `build/sections/introduction.tex` read whole (EXT-OAI1) and the statement of its rigidity theorem
+  (`spectral.tex` 56–70); the other seven sections: see EXT-OAI2. The other 371 families: unread."
+
+**(c) `LEDGER.md` row 33**, one sentence for what it would say if this audit is taken as clean: "*Outside this library, and
+audited here (`plans/EXT-OAI1-audit.md`): `[OAIMath2026]` family 158 proves in Lean, at v4.34.1 on the standard three axioms,
+that no map `ℂ → Fin 5` separates every unit pair, which in this row's form is `6 ≤ (unitDistance (EuclideanSpace ℝ (Fin
+2))).chromaticNumber` — with this row's upper end, `6 ≤ χ(ℝ²) ≤ 7` (`six_le_chromaticNumber_plane_of_no_proper_five`, drafted,
+conditional on their statement, added nowhere); the theorem this library holds unconditionally is still `5 ≤ χ(ℝ²) ≤ 7`.*"
+
+Whether anything of theirs is cited, imported or built on here is Kooshi's decision.
