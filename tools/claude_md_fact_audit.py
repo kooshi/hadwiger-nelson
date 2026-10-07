@@ -61,6 +61,24 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # FS132-L1's landing (2026-10-07, Keryx; FS-131 inventory item 635): gate counts refiled; row 33's pre-import sentence replaced.
+    "axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-assumptions-final.log (axioms=3 rests=18); the old line stays in data/fs131/l8a/gate/receipt-assumptions-final.log",
+    "axioms=1": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-assumptions-final.log; the old count stays in data/fs131/l8a/gate/receipt-assumptions-final.log",
+    "rests=8": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-assumptions-final.log; the old count stays in data/fs131/l8a/gate/receipt-assumptions-final.log",
+    "declarations=14807 refutations-skipped=215 sites=1446": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log (14845, 1447); the old line stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
+    "vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log (generic=1404); the old line stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
+    "declarations=14807": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
+    "sites=1446": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
+    "generic=1403": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
+    "14807": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
+    "1446": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
+    "1403": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
+    "6521": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-axioms-final.log (6533 clean); the old count stays in data/fs131/l8a/gate/receipt-axioms-final.log and in GATE_CHANGES",
+    "6554": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-axioms-final.log (6,576 records); the old count stays in data/fs131/l8a/gate/receipt-axioms-final.log and in GATE_CHANGES",
+    "8's": "'wave 8's first landing' in the audit's sentence, superseded by FS132-L1's landing; wave 8's landing stays in plans/FS131-L8A-landing.md",
+    "six_le_chromaticNumber_plane_of_no_proper_five": "LEDGER row 33's pre-import sentence named this drafted bridge; replaced at FS132-L1's landing by the landed `Outside.OAI158.chromaticNumber_plane_six_or_seven`; the draft stays in `plans/EXT-OAI1-audit.md` stage 7",
+    "2))).chromaticNumber": "the same pre-import sentence of LEDGER row 33 (its Lean spelling of χ(ℝ²)); the form stays in `plans/EXT-OAI1-audit.md` stage 7 and in `Proofs/HadwigerNelson/Outside/OAI158.lean`",
+    "EuclideanSpace": "the same pre-import sentence of LEDGER row 33; the carrier stays in `plans/EXT-OAI1-audit.md` stage 7 and in `Proofs/HadwigerNelson/Outside/OAI158.lean`",
     # FS-133's filing (2026-10-07, Keryx; FS-133 inventory item 4): row 129's finite-graph killing test for MR is withdrawn (draft D2).
     '0.00297': "FS-133 withdrew row 129's finite-graph killing test for MR (FS133-E1's draft D2); the window's width stays in `plans/FS105-W-walk.md`",
     '0.0176': "FS-133 withdrew row 129's finite-graph killing test for MR (FS133-E1's draft D2); the figure stays in `plans/FS105-W-walk.md`",
@@ -700,6 +718,7 @@ GATE_CHANGES: dict[tuple, str] = {
     (("5783", "5"), ("6148", "5")): "FS-131, wave 6's first landing (FS131-L6A; copy data/fs131/l6a/receipt-axioms-first.log, gated commit 7e67af3b): 6,174 records, 6,148 clean, 17 axiom-free, 4 imported, 5 purchases",
     (("6148", "5"), ("6304", "5")): "FS-131, wave 10's second landing (FS131-L10B; copy data/fs131/l10b/receipt-axioms-final.log, gated commit f0cc3018): 6,334 records, 6,304 clean, 17 axiom-free, 8 imported, 5 purchases",
     (("6304", "5"), ("6521", "5")): "FS-131, wave 8's first landing (FS131-L8A; copy data/fs131/l8a/gate/receipt-axioms-final.log, gated commit 126bff4d): 6,554 records, 6,521 clean, 20 axiom-free, 8 imported, 5 purchases",
+    (("6521", "5"), ("6533", "5")): "FS-132, the landing of the import of [OAIMath2026] family 158 (FS132-L1; copy data/fs132/l1/gate/receipt-axioms-final.log, gated commit 5df686f0): 6,576 records, 6,533 clean, 20 axiom-free, 18 imported, 5 purchases",
 }
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")

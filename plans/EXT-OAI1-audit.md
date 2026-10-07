@@ -732,6 +732,9 @@ cost is this library's own breakage across the same 1,502 commits, which nothing
 - the challenge's text closed by the solution's theorem; the definitions equal by `rfl`; the restatements `audit_unfolded`,
   `audit_mono`, `audit_real`, `audit_euclidean`, `audit_chromaticNumber`, `audit_norm`;
 - the import's two statements closed by the release's theorems (`ImportReadback.lean`);
+
+  *Note, 2026-10-07 (filed at FS132-L1's landing): true at the release's pin, inside `import Mathlib`. The comparison across the two pins — the stored terms of the six copied definitions and the two statements, symbol against symbol, at this repository's pin under the module's own imports — is FS132-I1's (`plans/FS132-I1-implementation.md` stages 1–2): it found this stage's skeleton storing another proof of `FiniteDimensional ℝ ℂ` inside `WeakColoring` than the release's, equal by proof irrelevance and not symbol for symbol, and repaired it by one import. Run again by FS132-L1 on the module as recompiled on the landed tree: eight of eight identical (`data/fs132/l1/readback/summary-gate-final.txt`).*
+
 - at this repository's pin (Lean 4.32.0): the bridges of stage 7 and the import skeleton, one `sorry` leaf.
 
 **By my instruments and my reading:** the brief's 13 quotations (script, control); the cone (import lines; parser against `rg`);

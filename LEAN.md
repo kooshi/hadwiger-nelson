@@ -30,7 +30,7 @@ certificate. **Nothing in `tools/` is trusted**: a generator bug can only produc
   1. its docstring names its `BIBLIOGRAPHY.md` key, the section and the page;
   2. its Lean statement is read back against the paper's own wording, in the planner's record. State the axiom in the paper's own
      form and derive the form the library uses: the translation is then kernel-checked and the read-back is symbol against symbol
-     (`StandingFive.kloosterman_bound`, with `kloostermanBound_of_ringChar_ne_two` and `kloosterman_page_of_kloostermanBound`);
+     (`StandingFive.kloosterman_bound`, with `kloostermanBound_of_ringChar_ne_two` and `kloosterman_page_of_kloostermanBound`) Where the source is itself Lean, copy its definitions, state the axiom over the copies, and compare the stored terms across the two pins — every constant, instance, binder and universe level — with a control that fires (`Outside.OAI158`; `tools/fs132_i1_readback.py`, on a print made at each pin by one dumper); the landing runs it again on the module as recompiled on the joined tree.;
   3. one model of its hypotheses — a `theorem` or `example` in the same file exhibiting an object that satisfies them;
   4. a line in `ARCHITECTURE.md` § Trust, as a declared purchase.
 - **Our own hand results** that a module needs before their own module lands enter as explicit hypotheses of the
@@ -211,6 +211,7 @@ the `.olean` would. Settle every hand-written module before starting a long gene
   `#check` — never as the file prints it; a statement check that compares text passes this whole class.** `data/fs131/l10b/kernel-sigs.lean` with
   `tools/fs131_l10b_kernelsig.py` is that reading for a list of modules: the binders of each stored type against the file's own
   signature and every `variable` in scope (FS131-L10B).
+- Which instance a term is elaborated with depends on the imports, and equal text can store different terms: `volume : Measure ℂ` takes the proof `Complex.instFiniteDimensionalReal` of `FiniteDimensional ℝ ℂ` where `Mathlib.LinearAlgebra.Complex.FiniteDimensional` is imported and `FiniteDimensional.rclike_to_real` where it is not — equal by proof irrelevance, not symbol for symbol. A statement copied from another library is compared as the kernel stores it, never as text (FS132-I1).
 
 ## The package
 
@@ -240,7 +241,7 @@ the characteristic failure here:
   a binder whose carrier is not empty it reads `STALE` and fails. A route lemma whose hypotheses are *jointly* unsatisfiable — each
   satisfiable alone — does not carry it: its docstring says the joint vacuity in words and names the theorem that derives `False`
   from its exact hypotheses (`v6_hubs` with `v6_hubs_vacuous`, FS131-L8A). A statement that concludes `False` is skipped as a
-  refutation, so a marker on it is never read and proves nothing either way. The counts and the baseline's two entries are recorded in `CLAUDE.md` § The gate, where
+  refutation, so a marker on it is never read and proves nothing either way. **An import can empty an older statement's domain, and no scan sees it.** A landing that brings an `axiom` refuting a carrier (`¬ ∃ c, …`, `¬ Colorable k`) reads the scan's sites and the assumptions step's declared hypotheses for that carrier: a statement whose hypothesis is empty only given a declared import says so in words in its docstring, naming the import and the theorem that shows it, and no `IsEmpty` statement or marker rests on an import until the tooling job rules how such emptiness is counted (`hexShell_plane5` given `Outside.OAI158.no_proper_five_coloring`, FS132-L1). The counts and the baseline's two entries are recorded in `CLAUDE.md` § The gate, where
   `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants sixty-five controls
   and watches each fire; the load-bearing one — the same carrier family at an instantiation nothing refutes — must read `UNKNOWN`,
   never `VACUOUS`.
@@ -307,7 +308,7 @@ the characteristic failure here:
   theorem's own variables, among which a hand result written out in a binder, undeclared and unremarked in its
   docstring, is not told from a condition. **A former proved at the instances where it is taken closed** (not over its
   own variables) is not reported: its entry leaves on the landing's reading, its docstring is reworded to say over what
-  it is proved, and its closed takers then read `ESTABLISHED` (`StandingFive.StandingFloor`, FS131-LT5). The nine counts
+  it is proved, and its closed takers then read `ESTABLISHED` (`StandingFive.StandingFloor`, FS131-LT5). A declared hypothesis that a declared import implies — its binder ranging over a domain the import empties — keeps its kind and says so in its source string until the tooling job classes such an entry (`inline:SixTarget`, `inline:SixTargetOneTwo`, FS132-L1); the step cannot find one: no theorem states the binder. The nine counts
   are recorded in `CLAUDE.md` § Trust ledger and in the ledger's header, where `scripts/gate_report.py` reads them.
 - The Moser spindle's non-3-colourability is proved **twice** — by `decide` and through the SAT bridge — so the CNF encoding is
   checked against an independent oracle.

@@ -9015,3 +9015,55 @@ reason by the close.*
      hypothesis of the library that binds a five-colouring of the plane — the six-programme's Act-One material (G26,
      rows 43, 61, `hexShell_plane5`) is now, at five, consequences of the import. A short job; the asking lane's
      table of what to formalize will say whether the six-colour halves of those rows are on the road.
+
+635. **FS132-L1 done: the import is on `main` through the full gate — the library holds `6 ≤ χ(ℝ²) ≤ 7` on one declared outside theorem, `χ(ℝ²) = χ_m⁰(ℝ²)` and `7 ≤ χ(ℝ²) ⟺ lim µ₆(ε) < 1` on the other; filed** (implementer, Opus; 577k and 76 minutes by the task notice; record `plans/FS132-L1-landing.md` Stages 1–7 with fifteen drafts; report `data/fs132/reports/FS132-L1.md`; gated commit `5df686f0`, landed by one fast-forward push as `7ea7c364`; logs `data/fs132/l1/gate/`).
+     **The gate on `5df686f0`, by its report**: every step exit 0 (and the one plant that must fail, failing); build
+     474 of 474 batches with no warning; no `sorry`; doubled names clean; **axiom audit 6,576 records — 6,533 clean,
+     20 axiom-free, 18 imported, 5 purchases; three declared imports**; **vacuity `declarations=14845
+     refutations-skipped=215 sites=1447`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1404 unknown=2`**;
+     **assumptions `axioms=3 rests=18 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1`**; the module
+     map, the guarded lint (with a control seen red first) and the notes check green. **The stored-term comparison
+     run again on the module as recompiled on the joined tree: 8 of 8 identical**, its plants firing. **The added
+     theorem**: `Outside.OAI158.seven_le_chromaticNumber_plane_iff : 7 ≤ (unitDistance ℂ).chromaticNumber ↔ (⨆ ε >
+     (0 : ℝ), Plane.mu 6 ε) < 1`, on the standard three and the transfer alone, **read aloud against the front
+     page's sentence — it holds**, with one difference of wording the library closes (the sentence says classes
+     *free* of the pairs, `Plane.mu` asks them *null*; the limit is the same over periodic grid families with none).
+     **Its two findings** are items 633 and 634, each now checked by it as kernel terms
+     (`data/fs132/l1/five-empty.lean`, with a six-colour control refused). **Tool defects it lists**: the standing
+     records check knows one import (its own `tools/fs132_l1_records.py` reads a table); the audit's two
+     state-reading controls go red at every import; `scripts/vacuity.sh --baseline` drops the baseline's prose.
+     **Its slips, six, none reaching a commit of the library**, in its record.
+     **My receipt — the landing procedure**: `main` pulled; **since the gated commit the only path changed outside
+     the exempt ones is `tools/fs132_l1_slots.py`**, its own checker of the drafts' slots, written after the gate
+     and read by no gate step — accepted, and noted as outside the letter of the rule; **the three digests taken by
+     me** from its receipts against wave 8's (`scripts/gate_report.py`): the counts above, the 22 new records listed
+     one by one (12 clean, 5 on each import), one new site, generic; **after my filing all three read "match"**
+     against the front page and their own headers. **Filed by me, by script, each replaced passage asserted to
+     occur once** (twenty-four edits): `CLAUDE.md` § Trust ledger (the audit's sentence; **three outside axioms**;
+     the nine counts; **"five declared as open questions … two hold with nothing to prove given the import"**),
+     § The gate (the two count lines; **the baseline's two entries, one of them no longer Hadwiger–Nelson**), § The
+     mission's row D and § Frontier's first paragraph (**"This library holds `6 ≤ χ(ℝ²) ≤ 7` on one declared outside
+     theorem"**; the collapse and the one question as theorems on the other), the "Last filed" line, the
+     open-milestones sentence (and its mirror); `LEDGER.md` rows 33 (its pre-import sentence replaced; address and
+     milestone cells), 130, 131, 43, 61; the release's bibliography cell; a dated note in the audit's record
+     (ruling 629 (e)); `LEAN.md` — four sentences (how a Lean source is imported; equal text can store different
+     terms; **an import can empty an older statement's domain and no scan sees it**; a declared hypothesis that a
+     declared import implies); the fact audit's `GATE_CHANGES` entry and seventeen allow-list entries for the
+     superseded counts and row 33's replaced wording, each with the file that keeps it. **Audits after the filing**:
+     the fact audit against `35116159` exit 0; `--dupes` exit 0; the bibliography audit resolves every key. **Not
+     checked by me**: the gate's logs beyond the three receipts; the comparison's re-run; the two findings' Lean
+     file; its fifteenth draft's list item by item.
+     **Credit**: two findings no gate step could make, found by reading the scans' printed lists and not their
+     verdicts, and generalized by it into one sentence — a landing that brings an axiom deciding a carrier changes
+     what older statements over that carrier say; every draft's slot checked against the file by a tool with plants;
+     the reading-aloud that found "free" against "null" and closed it from the library.
+     **Rulings.** (a) **The import is landed and filed; for the next filing the fact audit's base is this commit.**
+     (b) Its reading of R5's condition for `SixTargetOneTwo` — empty by the same import, one library lemma further,
+     checked as a term — is what the condition meant: the string stays reworded. (c) Its line on the two theorems
+     that take those hypotheses is not filed apart: rows 43 and 61's notes say it. (d) **To the tooling job's list**
+     (ruling 475 (d)), now five questions from this landing: emptiness evidence resting on a declared import;
+     the class of a declared hypothesis a declared import implies; a landing check listing the sites and binders an
+     axiom empties; the records check for several imports; the baseline rewrite that drops prose. (e) **The Proof
+     Atlas's grades** for rows 33, 130, 131 (kernel-checked from one declared outside theorem each) join the owed
+     node edits (item 631 (e)). (f) **The branch's one commit ahead of `main` (its report) is merged.**
+     (g) **Slot → FS132-K1**, the kernel lane's planner (FS-132 inventory ruling 12 (b)).
