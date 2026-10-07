@@ -17,8 +17,8 @@ direction `t`. Stated for the whole plane, the instance `U = ℂ` of each claim 
 
 **Status: skeleton.** The statements tagged OUTSIDE are the release's, verbatim over the copied definitions; here
 each is a `sorry`, to be declared an outside theorem in the import's form or ported (`plans/FS132-kernel-plan.md`).
-**The proof of `no_outside_orbit` is open in the planner's blind phase past its first-order steps** (the plan's
-stage 2): no leaf below it is stated yet.
+`no_outside_orbit` is proved from its four-point form `no_outside_orbit_points`, whose proof is the plan's stage 3
+(the derivers' steps M1–M9, read by the planner after the blind phase); its leaves are not yet stated in Lean.
 -/
 
 open MeasureTheory Filter Topology
@@ -117,16 +117,39 @@ structure FourCycleStraddle (c : ℂ → Fin 6) (p : ℂ) (a : Fin 4 → Fin 6) 
   /-- The straddle region of `K j` misses the essential support of the label `a (j + 1)`. -/
   right : ∀ j, Disjoint (spatialSupport c (a (j + 1))) (Straddle (K j))
 
+/-- The straddle region grows with the set. -/
+theorem straddle_mono {K L : Set ℂ} (h : K ⊆ L) : Straddle K ⊆ Straddle L :=
+  fun _ ⟨p, hp, q, hq, h1, h2⟩ => ⟨p, h hp, q, h hq, h1, h2⟩
+
+/-- **C132-M-ORBIT over four points** (the derivers' C132-WIT form, `plans/FS132-E5-derivation.md` Stage 2; the
+instance `U = ℂ`): the four sets may be the two-point sets `{p, q j}`. The argument reads one point of each set
+besides `p` and nothing else of it, so this is the theorem to prove; `no_outside_orbit` follows from it because a
+straddle region grows with its set. Leaves: the steps M1–M9 of `plans/FS132-kernel-plan.md` stage 3. A refutation;
+the remark on models at `no_outside_orbit` applies. -/
+theorem no_outside_orbit_points {c : ℂ → Fin 6} (hc : Measurable c) (hw : WeakColoring 6 c) {p : ℂ}
+    {a : Fin 4 → Fin 6} (ha : Function.Injective a) {X Y : Fin 6} (hXY : X ≠ Y)
+    (hX : ∀ j, a j ≠ X) (hY : ∀ j, a j ≠ Y) {q : Fin 4 → ℂ} (hq : ∀ j, q j ≠ p)
+    (hl : ∀ j, Disjoint (spatialSupport c (a j)) (Straddle {p, q j}))
+    (hr : ∀ j, Disjoint (spatialSupport c (a (j + 1))) (Straddle {p, q j}))
+    (ψ δ : ℝ) (hδ : 0 < δ)
+    (hi : ∀ k : ℤ, ∀ᵐ θ : ℝ, |θ - ψ - k * (Real.pi / 3)| < δ →
+      X ∈ palette c hc p (θ : Angles) ∨ Y ∈ palette c hc p (θ : Angles))
+    (hii : ∀ η : ℝ, 0 < η →
+      0 < volume {θ : ℝ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ X ∈ palette c hc p (θ : Angles)} ∧
+      0 < volume {θ : ℝ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ Y ∈ palette c hc p (θ : Angles)}) : False := by
+  sorry
+
 /-- **C132-M-ORBIT** (the instance `U = ℂ`). Let `c` be a weak measurable six-colouring of the plane, `a 0, …, a 3`
 four of the labels and `X`, `Y` the other two, and `K` four sets as in `FourCycleStraddle`. Then there are no angle
 `ψ` and number `δ > 0` such that (i) for every integer `k` and almost every `θ` with `|θ − ψ − kπ/3| < δ` the palette
 at `p` in the direction `θ` contains `X` or `Y`, and (ii) for every `η > 0` the `θ` in `(ψ − η, ψ + η)` whose palette
-contains `X`, and those whose palette contains `Y`, both have positive measure.
+contains `X`, and those whose palette contains `Y`, both have positive measure. From `no_outside_orbit_points` at
+one point of each set besides `p`.
 
 A refutation. Whether its first hypothesis can hold is the open question (`χ(ℝ²) = 6` or `7`: a weak six-colouring
 of the plane exists exactly when the plane is six-colourable, `Outside.OAI158.colorable_iff_nonempty_aeColouring`);
 the hexagonal seven-colouring satisfies the analogous local hypotheses at a point where three tiles meet and fails
-"six". **Open in the planner's blind phase** (`plans/FS132-kernel-plan.md` stage 2). -/
+"six". -/
 theorem no_outside_orbit {c : ℂ → Fin 6} (hc : Measurable c) (hw : WeakColoring 6 c) {p : ℂ}
     {a : Fin 4 → Fin 6} (ha : Function.Injective a) {X Y : Fin 6} (hXY : X ≠ Y)
     (hX : ∀ j, a j ≠ X) (hY : ∀ j, a j ≠ Y) {K : Fin 4 → Set ℂ} (hK : FourCycleStraddle c p a K)
@@ -136,7 +159,14 @@ theorem no_outside_orbit {c : ℂ → Fin 6} (hc : Measurable c) (hw : WeakColor
     (hii : ∀ η : ℝ, 0 < η →
       0 < volume {θ : ℝ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ X ∈ palette c hc p (θ : Angles)} ∧
       0 < volume {θ : ℝ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ Y ∈ palette c hc p (θ : Angles)}) : False := by
-  sorry
+  choose q hqK hqp using hK.other
+  have hsub : ∀ j, ({p, q j} : Set ℂ) ⊆ K j := fun j => by
+    rintro z (rfl | rfl)
+    · exact hK.centre_mem j
+    · exact hqK j
+  exact no_outside_orbit_points hc hw ha hXY hX hY hqp
+    (fun j => (hK.left j).mono_right (straddle_mono (hsub j)))
+    (fun j => (hK.right j).mono_right (straddle_mono (hsub j))) ψ δ hδ hi hii
 
 /-- **A ring filled by two labels has an orbit of the kind C132-M-ORBIT refutes** (no four-cycle enters): if almost
 every palette at `p` contains `X` or `Y`, there is an angle `ψ` every neighbourhood of which holds both, in positive

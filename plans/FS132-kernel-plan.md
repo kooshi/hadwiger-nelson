@@ -282,3 +282,126 @@ restricted lemmas; in cost it is the palette port done twice in the files `WeakC
 5. CORES-FREE holds for squares of side above `1`, so discs of radius above `1/√2`, by this library's Lebesgue covering
    theorem; the release's cover lemma need not be ported.
 6. The import question for a colouring of `U` (ruled: whole plane first).
+
+## Stage 3 — SAVED (FS132-K1): phase 2, open — C132-M-ORBIT and C132-M-EXCL against the derivers' argument; the four-point form; C132-CORES-SQUARE stated
+
+*The fence lifted by the coordinator's reply to the phase-1 commit `1eb4b94b0`. Read for this stage:
+`plans/FS132-E3-derivation.md` (from `origin/main`), Stage 3 § "Argument — the orbit form", steps M0–M9, lines 166–306, whole.
+**Not read** (budget): the rest of that record, `FS132-E1`, `-E2`, `-E4`, `-E5`, `-E6`, the milestone's plan, the inventories,
+`data/fs132/claims.md`. What the coordinator's reply says of them is quoted as the coordinator's, not checked.*
+
+### 3.1 The two routes, compared
+
+| step | the planner's blind route (2.3) | the derivers' (`FS132-E3` Stage 3) | which the skeleton carries, and why |
+|---|---|---|---|
+| the state `s`, alternating | (a), S1 | M1 | one step; theirs is mine |
+| the chart, the colour avoids `{s(α), s(α − d)}` | S1, chart `(α, β)` about `z_1` | M2, chart `Z(α, d) = e(α) + e(α − 2π/3 − d)` (`d > 0` iff inside the ring) | **theirs**: `d` is the radial coordinate, and M7's relation is `α′ = α + π/3 + d′ + ε(d, d′)` independent of `α` |
+| a forced inner label at each hub | S2–S3: strips of the `K_j` (`outer_strip_trace`, `inner_strip_trace`), a finite check on sign patterns, both sides of the ring | M3–M5: `Tip(k)`, confinement of a tip's two sets to `B̄(y_k, 1)` by C132-CONFINE, `B̄(y) ∩ B̄(−y) = {p}`; one tip per hub, opposite at antipodes; inside the ring only | **theirs**: no strip lemma, no boundary directions, nothing outside the ring; reads one point of each set besides `p` |
+| two adjacent hubs with one label | S4: a count over hexagon sectors, needing limiting directions `v_j` | M6: the signs of `q_j · e(ψ_k)` against three axes, `e(ψ_1) = e(ψ_0) + e(ψ_2)`; a check on 64 patterns | **theirs**: mine is not available for the statement as typed |
+| the unit-pair relation between adjacent hubs | S5: distance `1 − (4/3)t²` between points on the bounding arcs at equal radius | M7: `ε = d d′ h`, `h(0, 0) = 2/√3`, with `0 < ε ≤ min(d, d′)/16`, `|∇ε| ≤ 1/32` | theirs; mine is its diagonal |
+| a general measurable state | **not reached** | **M8, Lemma S** | theirs |
+| the kill for a clean step | S5 | M9 | one step |
+
+**The second route the blind phase found** is S2–S3: the forced inner label from the strips, on both sides of the ring. It is
+not the one to build (it needs two more release lemmas, and handles the boundary directions case by case), but it gives
+something M3–M5 do not state: the label forced *outside* the ring on the mixed set is the opposite one, `a_{τ(k)+2}`.
+
+### 3.2 M7, M8, M9, read line by line (the planner as second mind; by hand)
+
+- **M4–M6**: checked. M4 is `SixRing.subset_closedBall_of_dist_lt` and a limit; M5's count ("two tips have at least three of
+  the four sets") and `τ(k + 3) = τ(k) + 2` hold; M6's three cases each close, and the supposition's three inequalities are all
+  six adjacent pairs under `τ(k + 3) = τ(k) + 2`.
+- **M7**: `g = (d + d′)/2 + (2/√3) d d′ + O(3)` re-derived independently (from `1 − r = (√3/2)d + d²/8`,
+  `cos(π/3 + g) = ½ − ½σ − (3/2)π₂ + …`, `σ = x + x′`, `π₂ = x x′`): `h(0, 0) = 2/√3` ✓, positive ✓. `ε(d, 0) = ε(0, d′) = 0`
+  ✓ (each by naming the ring point). The transversality behind "`Φ` is a local diffeomorphism" holds at the hubs (the unit
+  circle about `y_0` meets the unit circle about `p` at `y_1` at angle `60°`). `ε` is an explicit function,
+  `ε = arccos((r² + r′² − 1)/(2 r r′)) − π/3 − (d + d′)/2`, `r = 2cos(π/3 + d/2)`: no implicit function theorem is needed.
+- **M8, Lemma S: holds on my reading.** Checked: the coordinates `(u, v, w)` are a diffeomorphism onto all triples
+  `u < v < w` of `J` (`w − v = d′ + ε` is increasing in `d′` from `0`); `g′ ≥ 1 − 1/32 − 33/(32·31) > 0.93 > 7/8` (and `g′ ≤ 1 + 1/32 + 33/(32·31) < 9/8`);
+  the failure of "at most one jump" gives density points `a_* < b < c_*` with the outer two equal and the middle different (if
+  no such triple exists, the density points of one value all precede those of the other); `ρ_1 > 0` exists and
+  `m(ρ_1) = 3/4` in the second case, so the other value has a density point within `ρ_1` of `b`; in both cases
+  `I ⊂ (u_0, w_0)` with a gap, `{s = Y}` fills `3/4` of `I`, the shift on `I` is at most `ρ/4` near `(u_0, w_0)`; the overlap
+  `(3/2 + 21/16 − 9/4)ρ = (9/16)ρ` ✓; the triples have positive measure by Fubini and lie in (†)'s domain. Two things the
+  text leaves implicit, both fine: `s` is taken Borel (it is: `paletteSet` is measurable), so `s ∘ g` is measurable in
+  `(u, v, w)`; and "its image under `g` has measure at least `7/8` of it" and "the preimage of a positive-measure set is
+  positive" need `g` bi-Lipschitz, which `7/8 ≤ g′ ≤ 9/8` gives.
+- **M9**: (a)–(d) checked with their ranges (`17κ_3 < κ_2`, `d′ < 16κ_3 < κ_1`, `α′ − ψ_2 < 3κ_1 ≤ κ_*`). (d)'s set is open and
+  non-empty because `ε > 0`.
+
+**Verdict of this reading: C132-M-ORBIT holds by M1–M9, and its four-point form with it; C132-M-EXCL follows (2.3). I found no
+gap. Grade: two minds on M7–M9 (the deriver; this reading), M8 no longer unread.** What I did not do: re-run their controls;
+read M0's claim that the release's proofs of Lemma 5.2 (1) and Cor. 5.4 spend no count (the release's Lean states both for
+every `k`, which settles it for `U = ℂ`).
+
+### 3.3 The plan per leaf, final form, for `no_outside_orbit_points` (`Plane/SixRing/Orbit.lean`)
+
+Stands on two release statements only — `palette_sixty_disjoint`, `palette_transfer_pair` — and on the ported
+`mem_spatialSupport_ae` (to copy: `AngularBoundary.lean:309–312`) and the definition of `WeakColoring`. **`outer_strip_trace`
+and `inner_strip_trace` are not needed** and leave the skeleton's OUTSIDE list when the implementer reaches it.
+
+| leaf | states | from | kind |
+|---|---|---|---|
+| M1 `outsideState` | a measurable `s : ℝ → Bool` on `⋃ I_k`, the palette holds exactly the label `s` names a.e., `s(θ + π/3) = !s(θ)` a.e., both values of positive measure near every `ψ_k` | (i), (ii), `palette_sixty_disjoint` | measure theory |
+| M2 `chart_avoids` | for a.e. `(α, d)` near `(ψ_{k+1}, 0)`: `c (Z α d)` is neither label named by `s α`, `s (α − d)` | `palette_transfer_pair`, the map `(α, d) ↦ ((α : Angles), (α − 2π/3 − d : Angles))` is a local diffeomorphism (quasi-measure-preserving) | change of variables |
+| M3 `mixed_pos` | the mixed set `W_k(κ)` has positive measure for every `κ`; `Tip k ≠ ∅` | M1 ("`s(x) = s(y)` for a.e. pair ⟹ a.e. constant"), M2 | measure theory |
+| M4 `tip_confines` | `a ∈ Tip k`, `q` a point of a set of `a` ⟹ `dist q (y k) ≤ 1` and `0 < ⟪q − p, e ψ_k⟫` | `subset_closedBall_of_dist_lt` (proved), closedness | geometry, short |
+| M5 `tip_unique` | `Tip k = {a (τ k)}`, `τ (k + 3) = τ k + 2`; a.e. point of `B(p, 1) ∩ N_k(κ_*)` carries `a (τ k)`, `X` or `Y` | M3, M4, `closedBall y 1 ∩ closedBall (−y) 1 = {0}`, a finite count on `Fin 4` | finite + short |
+| M6 `adjacent_tips` | some `k` has `τ k = τ (k + 1)` | M4, M5; the sign pattern check | **finite**: `decide` over `Fin 4 → Fin 4 → …` (64 patterns) after the three-axes lemma `⟪q, e_1⟫ = ⟪q, e_0⟫ + ⟪q, e_2⟫` |
+| M7a `shift` | the explicit `ε(d, d′)`; `dist (Z α d) (Z (α + π/3 + d′ + ε) d′) = 1`; `ε(d, 0) = ε(0, d′) = 0` | trigonometry | calculus on an explicit formula |
+| M7b `shift_bounds` | `∃ κ_1 > 0`, on `(0, κ_1)²`: `0 < ε ≤ min d d′ / 16`, `ε` Lipschitz with constant `1/32` in each variable | `ε_{dd′}(0, 0) = 2/√3`, continuity of the mixed derivative | **the heavy calculus leaf**, made lighter by an exact identity checked here by hand: with `F(ε) = |Z(α, d) − Z(α + π/3 + d′ + ε, d′)|² − 1 = r² + r′² − 1 − 2 r r′ cos(π/3 + (d + d′)/2 + ε)`, `F(0) = −8 sin(d/2) sin(d′/2) cos((d + d′)/2)` (row 148's identity, with `s = d`, `t = d′`) and `F′(ε) = 2 r r′ sin(π/3 + (d + d′)/2 + ε) ∈ (3/2, 2)` near `0`; so the zero `ε` is unique, positive, and between `d d′` and `(4/3) d d′` — the sign and the bound `ε ≤ min(d, d′)/16` with no arccos differentiated. The Lipschitz bound still needs `∂F/∂d = O(d′)` at the zero |
+| M7c `unitPair_chart` | `(α, d, d′) ↦ (Z α d, direction to the partner)` carries null sets of `volume ⊗ angularMeasure` to null sets, both ways | M7a, transversality | change of variables |
+| M8a `no_double_change` | (†) a.e. | M5, M6, M7c, `WeakColoring`'s second clause | measure theory |
+| M8b–e Lemma S | no colouring: (b) a two-valued measurable function on an interval is a.e. a function with at most one jump, or has density points `a < b < c` valued `V, V′, V`; (c) the window `(u_0, w_0, ρ)`; (d) for bi-Lipschitz increasing `g` with `7/8 ≤ slope`, `0 < g − id ≤ ρ/4` on `I` and `E ⊆ I` of measure `≥ (3/2)ρ`: `E ∩ g⁻¹ E` has positive measure; (e) Fubini against (†) | Lebesgue density (`Besicovitch.ae_tendsto_measure_inter_div_of_measurableSet`, used by the ported `ae_density_actual`), Lipschitz images | **four leaves, real analysis** |
+| M9 `kill` | (a)–(d) | M2, M5, M7, M8 | measure theory, short once M7c is there |
+
+Fourteen leaves. Finite: M6. Geometry: M4, M5. Calculus: M7a, M7b. Analysis: the rest. **Hard, in order**: M7b, M7c, Lemma S
+(d)–(e), M2.
+
+### 3.4 The four-point form (the coordinator's item 1), done in the skeleton
+
+`SixRing.no_outside_orbit_points`: four points `q j ≠ p` with `Straddle {p, q j}` missing the supports of `a j` and
+`a (j + 1)`. `SixRing.no_outside_orbit` (the compact-set form of the claim list) is now **proved from it**
+(`straddle_mono`; a point of each set by `choose`): the compact-set form asks more of the hypothesis, so it is the weaker
+theorem. Compactness of the `K j` is not used at all — the field stays in `FourCycleStraddle` only because the claim has it.
+**Built**: `./scripts/build.sh` under the slot after this change — exit 0, 2 modules rebuilt (`Plane.SixRing.Orbit`, `Proofs`),
+warnings only `declaration uses sorry` (`data/fs132/k1/probe/build-phase2.out`); `Orbit` still has 10 (`no_outside_orbit` is
+proved, `no_outside_orbit_points` is the leaf).
+
+### 3.5 C132-CORES-SQUARE (posed by the planner; for the claim list)
+
+> **C132-CORES-SQUARE** — statement: for every integer k ≥ 1 and every weak measurable k-colouring of the plane, every closed
+> axis-parallel square of side greater than 1 contains a cyclic centre; in particular every closed disc of radius greater than
+> 1/√2 does.
+> *Not claimed:* a square of side 1 or less; that 1/√2 is sharp for discs (in the hexagonal model every disc of radius 2/5
+> contains one); squares that are not axis-parallel (they follow by rotating the colouring; not stated); anything for a
+> colouring of a bounded region.
+
+Lean: `SixRing.exists_cyclicCentre_square`; the disc form `exists_cyclicCentre` is derived from it in the skeleton. Its route
+(2.3) rests on the release's §7.2–7.3 at general `k` — **not compared with the first deriver's S5–S7 (`FS132-E1` Stage 3):
+unread.** Whether a port should start: `missing_edge_disk_cover` and `DiskAverages` are at `Fin k` already;
+`GraphRealization` (threshold map, forest chart: 22 occurrences of `Fin 5`), `HoleApproximation` (12), `Mesh` (6) are typed at
+five and at the disc of radius 5 — a port with changed types of about 1,400 lines, plus `DiskExtension` (611 lines, no label).
+**Wait**: it is the largest item here, nothing else in this plan needs it, and the queue's later entries (C132-WIT-SUPER,
+C132-WIT-SIDE, noted by the coordinator, planned nowhere in this job) may change what of it is needed.
+
+### 3.6 The outside statements and the price, final for the statements read
+
+- **Port, declare nothing further.** C132-M-ORBIT, -M-EXCL, -DIAG-WIDE at `U = ℂ` need three release statements
+  (`palette_transfer_pair`, `palette_sixty_disjoint`, `two_state_impossible`). Their cones are the general-`k` files
+  `CircleMaps`, `CircleTransport`, `PaletteDensity`, `PaletteTransport`, `States` to line 310 (about 2,400 lines with
+  `BinaryPalettes`' triangle), on top of the 620 already ported at one patch. One implementer job, started tomorrow, re-priced
+  after its first two files. Declaring them instead costs three read-backs and three models and leaves three more axioms.
+- **The local form, after all?** Yes, but second. With the lemmas ported rather than declared, the local form is a change to
+  proofs this library then owns (2.6); M1–M9 read the colouring only inside `B(p, 1)` and on the ring (M3–M5 never leave the
+  open disc), so the whole-plane theorem's proof is the local one once `palette_transfer_pair` is restricted to sums inside
+  `U`. Plan it when the whole-plane module is green.
+- **An implementer starts with**: (1) the palette port; (2) `Winding.lean` (independent); (3) Lemma S (b)–(d) and M6, which
+  need nothing ported.
+
+### 3.7 Where a successor resumes
+
+At **stage 4**: (1) read `FS132-E1` Stage 3 S5–S7 against 2.3's route for C132-CORES-FREE and 3.5; (2) read the entries for
+C132-INDEX and C132-RING-WIND (their record is not located by this job) against `sixStep`; (3) read `FS132-E5` Stage 2
+(C132-WIT) against 3.4; (4) state M1–M9 as `sorry` leaves in `Plane/SixRing/Orbit.lean` in the chart `Z(α, d)` — only
+`no_outside_orbit_points` carries them now; (5) drop `outer_strip_trace`, `inner_strip_trace` from the OUTSIDE placeholders.
