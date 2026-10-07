@@ -1,0 +1,20 @@
+ref origin/main = 072907351c41dd01cd2514102fa2ee34494929e3
+OK   1 time(s) in CLAUDE.md: 1 audit sentence
+OK   1 time(s) in CLAUDE.md: 2 vacuity counts
+OK   1 time(s) in CLAUDE.md: 3 nine counts (stand)
+OK   1 time(s) in tools/claude_md_fact_audit.py: 4 GATE_CHANGES, the entry it follows
+OK   1 time(s) in CLAUDE.md: 5 open milestones
+OK   1 time(s) in plans/FRONTIER-STUBS.md: 5 open milestones, the stubs file
+OK   1 time(s) in CLAUDE.md: 6 item 31, the clause's head
+OK   1 time(s) in CLAUDE.md: 6 item 31, row 162
+OK   1 time(s) in CLAUDE.md: 6 item 31, row 163
+OK   1 time(s) in CLAUDE.md: 7 FS-136's paragraph
+OK   1 time(s) in LEDGER.md: 8 row 162's grade
+OK   1 time(s) in LEDGER.md: 9 row 163's grade
+OK   1 time(s) in LEDGER.md: 10 row 164's grade
+OK   1 time(s) in plans/FS124-derivation.md: 11 the theorem record's head
+OK   1 time(s) in plans/FS124-derivation.md: 12 C124-FORCED's uses only
+OK   1 time(s) in LEAN.md: 13 LEAN.md, the bullet the new ones follow
+OK   1 time(s) in LEAN.md: 14 LEAN.md § The gate, the sentence the new one follows
+CONTROL FIRED AS EXPECTED: absent — CLAUDE.md
+slots: 17 checked, 0 bad

@@ -496,3 +496,21 @@ theorems — five since FS124-L1, nine by this landing — and sixteen by hand.*
 FS124-K2's nine, FS124-K3's lemma and the bridge. Of the sixteen by hand, five were handed to the kernel lane "as
 written" or "after" a landed entry and no planner has fixed them: C124-ANTIPODE, C124-SECOND, C124-SIX, C124-HALF,
 and C124-FORCED's second sentence.
+
+## Stage 7 — SAVED (FS124-L2): before the pass — the lint's control, and `main` merged once more
+
+**The lint's negative control** (`data/fs124/l2/lint-plant.sh`, FS124-L1's copy of FS132-L1's script pointed at a
+module of this landing; `lint-plant-run.out`): `theorem zz_l2_lint_plant [Nonempty ℕ] : (1 : ℕ) = 1 := rfl` planted
+at the end of `Plane/SectorPoint.lean` (never committed), built — "481 of 481 batches, 2 module(s) rebuilt, **0
+module(s) with warnings**, 8m59s" (`lint-plant-build.log`: the build's own linters do not see it) — then the guarded
+lint: **exit 1**, "`unusedArguments`: (2/2) Failed with 1 messages", "error: @zz_l2_lint_plant 1 unused argument",
+and `synTaut` on the same plant (`lint-plant.log`). Restored by `git checkout` under a trap: the digest is the one
+taken before (`c56e053e…`), the plant's name in the file 0 times, 0 tracked files modified; the pass's build
+recompiles the module and the root from the restored text.
+
+**`main` merged in once more** (`data/fs124/l2/merge-trial-3.out`, `merge-3.out`): `main` had moved to `07290735`,
+past the commit merged at stage 2 — `data/` 10 paths, `plans/` 7, `.claude/` 1, `LEDGER.md` (FS-136's filing: rows
+165–167), **0 paths outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`,
+`RUNNING.md`**; merged by hash, automatic (`b585119d`), so that the commit the gate reads already holds it. The
+drafts' slots were read on `main` at that commit (`data/fs124/l2/drafts-slots.py`): 17 of 17 found exactly once, the
+control absent.

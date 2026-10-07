@@ -1,0 +1,1 @@
+c56e053e0d372cdeb0ef45bbb20f0d5a96128a7e05561ee66371f44731f6c541  Proofs/HadwigerNelson/Plane/SectorPoint.lean
