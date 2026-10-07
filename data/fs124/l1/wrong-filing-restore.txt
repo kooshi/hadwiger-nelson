@@ -1,0 +1,3 @@
+digest before: a5823c9f700f8095becbbccef2cd4cae09ce6b6c14b6f76219919b80442000d5
+digest after:  a5823c9f700f8095becbbccef2cd4cae09ce6b6c14b6f76219919b80442000d5
+RESTORED: the audit script is the text it was

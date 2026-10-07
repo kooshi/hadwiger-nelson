@@ -79,6 +79,35 @@ theorem seven_le_of_exists_ball (h : ∃ R > (0 : ℝ), ¬ ∃ c : ℂ → Fin 6
   obtain ⟨R, -, hR⟩ := h
   exact hR (radius_down (SimpleGraph.chromaticNumber_le_iff_colorable.mpr hcol) _ isOpen_ball)
 
+/-- Row 161's own wording — "some open disc", at any centre, and "needs seven colours" as an equality (with row 33's
+`χ(ℝ²) ≤ 7`) — follows from the landed theorem by the translation lemma, on the same axioms. -/
+theorem eq_seven_iff_exists_disc : (unitDistance ℂ).chromaticNumber = 7 ↔
+    ∃ (p : ℂ) (R : ℝ), 0 < R ∧ ¬ ∃ c : ℂ → Fin 6, IsWeakColouringOn (ball p R) c := by
+  have h7 : (unitDistance ℂ).chromaticNumber ≤ 7 := by
+    have h := chromaticNumber_plane_interval.2
+    rwa [chromaticNumber_plane_eq_complex] at h
+  rw [le_antisymm_iff, and_iff_right h7, seven_le_chromaticNumber_plane_iff_exists_ball]
+  constructor
+  · rintro ⟨R, hR, h⟩
+    exact ⟨0, R, hR, h⟩
+  · rintro ⟨p, R, hR, h⟩
+    exact ⟨R, hR, fun h0 => h ((exists_isWeakColouringOn_ball_iff p R).mpr h0)⟩
+
+/-- The criterion does not depend on which measurability is read into "weak measurable": it holds with **no**
+measurability asked of the colouring (so with every class between Borel maps, the theorem's, and all maps — Lebesgue
+measurable ones among them), on the same axioms. `→` gives a disc with no map at all proper at almost every unit
+pair; `←` uses that the import's colouring is Borel. -/
+theorem seven_le_iff_no_aeProperOn : 7 ≤ (unitDistance ℂ).chromaticNumber ↔
+    ∃ R > (0 : ℝ), ¬ ∃ c : ℂ → Fin 6, AeProperOn (ball (0 : ℂ) R) c := by
+  constructor
+  · intro h
+    have h6 : ¬ (unitDistance ℂ).Colorable 6 :=
+      (add_one_le_chromaticNumber_iff_not_colorable (G := unitDistance ℂ) (n := 6)).mp h
+    obtain ⟨R, hR, hRp⟩ := exists_radius_of_not_colorable h6
+    exact ⟨R, hR, fun ⟨c, hc⟩ => hRp 0 c hc⟩
+  · rintro ⟨R, hR, h⟩
+    exact seven_le_chromaticNumber_plane_iff_exists_ball.mpr ⟨R, hR, fun ⟨c, hc⟩ => h ⟨c, hc.aeProperOn⟩⟩
+
 -- § 5  the models of the hypotheses, as terms
 
 /-- `radius_graph`, `radius_countable`: every hypothesis at once on a **bounded** open set with a unit pair in it —
@@ -91,7 +120,7 @@ theorem model_graph : ∃ (c : ℂ → Fin 7) (U V : Set ℂ), IsOpen U ∧ IsWe
   have hsub : ({0, 1} : Set ℂ) ⊆ ball (0 : ℂ) 2 := by
     rintro z (rfl | rfl) <;> simp
   have hcl : closure ({0, 1} : Set ℂ) = {0, 1} := hfin.isClosed.closure_eq
-  refine ⟨c, ball 0 2, {0, 1}, isOpen_ball, hc _, hfin, hsub, hfin.countable, hcl ▸ hfin.isCompact, hcl ▸ hsub,
+  refine ⟨c, ball 0 2, {0, 1}, isOpen_ball, hc _, hfin, hsub, hfin.countable, by rw [hcl]; exact hfin.isCompact, by rw [hcl]; exact hsub,
     ⟨0, by simp, 1, by simp, by simp⟩, fun h => ?_⟩
   have h3 : (3 : ℂ) ∈ ball (0 : ℂ) 2 := h ▸ mem_univ _
   rw [mem_ball, dist_zero_right] at h3
@@ -128,8 +157,8 @@ theorem criterion_at_seven : ¬ (8 : ℕ∞) ≤ (unitDistance ℂ).chromaticNum
   have h78 : (8 : ℕ∞) ≤ (7 : ℕ) := h.trans h7
   exact absurd h78 (by decide)
 
-/-- The criterion's sentence one colour down holds on both sides, on the two imports: `6 ≤ χ(ℝ²)` and some disc has no
-weak five-colouring. -/
+/-- The criterion's sentence one colour down holds on both sides, on the declared outside theorem
+`no_proper_five_coloring` alone: `6 ≤ χ(ℝ²)` and some disc has no weak five-colouring. -/
 theorem criterion_at_five : (6 : ℕ∞) ≤ (unitDistance ℂ).chromaticNumber ∧
     ∃ R > (0 : ℝ), ¬ ∃ c : ℂ → Fin 5, IsWeakColouringOn (ball (0 : ℂ) R) c := by
   refine ⟨?_, ?_⟩
@@ -151,6 +180,10 @@ end FS124L1
 #print axioms FS124L1.forall_ball_of_colorable
 #print axioms FS124L1.exists_ball_of_seven_le
 #print axioms FS124L1.seven_le_of_exists_ball
+#print axioms FS124L1.eq_seven_iff_exists_disc
+#print axioms FS124L1.seven_le_iff_no_aeProperOn
+#check @chromaticNumber_plane_eq_complex
+#check @chromaticNumber_plane_interval
 #print axioms FS124L1.model_graph
 #print axioms FS124L1.model_up
 #print axioms FS124L1.model_down

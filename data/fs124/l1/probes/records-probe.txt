@@ -1,0 +1,22 @@
+landing: 78 constants in 3 modules; declarations it brings: 62 (57 THM, 4 DEF, 1 IND); records in the log: 7015
+  declarations the landing brings, module Plane.Radius: 16
+  declarations the landing brings, module Plane.RadiusOutside: 8
+  declarations the landing brings, module Plane.WeakColouringOn: 38
+  landing records on exactly the three: 57
+  landing records on the three and no_proper_five_coloring: 1
+  landing records on the three and proper_to_borel_weak: 4
+  record colorable_iff_forall_ball: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record exists_isWeakColouringOn_of_colorable: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record radius_down: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record radius_five: under IMPORTED: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+  record seven_le_chromaticNumber_plane_iff_exists_ball: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record radius_up: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record exists_radius_of_not_colorable: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record colorable_plane_of_forall_aeProperOn_ball: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record radius_graph: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record radius_countable: under CLEAN: [Classical.choice, Quot.sound, propext]
+  whole log: records carrying kloosterman_bound: 8 (filed: 8); of the landing's: 0
+  whole log: records carrying no_proper_five_coloring: 6 (filed: 6); of the landing's: 1
+  whole log: records carrying proper_to_borel_weak: 9 (filed: 9); of the landing's: 4
+  whole log: records under IMPORTED 23; carrying two imports 0; carrying sorryAx 0
+records: PASS

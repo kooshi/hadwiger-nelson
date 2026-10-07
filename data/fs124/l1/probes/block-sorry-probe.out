@@ -1,0 +1,76 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 0,1
+data/fs124/l1/probes/block-sorry-probe.lean:136:8: warning: declaration uses `sorry`
+'HadwigerNelson.Outside.OAI158.not_colorable_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Outside.OAI158.six_le_chromaticNumber_plane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Outside.OAI158.six_le_chiM0' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Outside.OAI158.chiM0_six_or_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Outside.OAI158.nonempty_aeColouring_of_colorable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Outside.OAI158.colorable_iff_nonempty_aeColouring' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Outside.OAI158.chiM0_le_chromaticNumber_plane' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Outside.OAI158.properColoring_iff_colorable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.direction_coe' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.map_coe_arcLength' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.map_prodMap_coe' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.weakColoring_iff_unitPairsNull' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.nonempty_aeColouring_of_weak' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.weakColoring_of_aeColouring' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.exists_weakColoring_iff_nonempty_aeColouring' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.exists_properColoring_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.proper_to_borel_weak_model' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI158.anglePeriodPositive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.angularMeasure.instIsProbabilityMeasure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

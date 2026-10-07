@@ -1,0 +1,29 @@
+FS124-L1: the import's read-back (FS132-L1's runner as FS132-L2 ran it, its output directory changed and nothing else), tag joined
+commit: 13c03063e5659f5e48fd7a0dbb9b1217538d967a
+tracked files modified: 4
+module digest: b4300d72bdabb026  olean: f763d277289dc114
+release clone: adc7f1241b42e322a6451854ab7e4b4c146bf78a  clean: 0 modified
+STEP release-dump (v4.34.1): exit 0 (expected 0) ok
+STEP release-dump equals the import's committed print (the slot's line apart): exit 0 (expected 0) ok
+STEP release-dump holds eight declarations: exit 0 (expected 0) ok
+STEP module-dump (this pin, the built module): exit 0 (expected 0) ok
+NOTE module-dump vs the import's own print (before the join; the slot's line apart): cmp exit 0 (0 = identical)
+STEP decls: eight of eight identical: exit 0 (expected 0) ok
+STEP self-test: six plants fire: exit 0 (expected 0) ok
+STEP control-dump: exit 0 (expected 0) ok
+STEP control: six different, two identical: exit 0 (expected 0) ok
+STEP control read as a plain comparison is refused: exit 1 (expected 1) ok
+STEP module level-one dump: exit 0 (expected 0) ok
+STEP level one: no constant absent: exit 0 (expected 0) ok
+NOTE level-one table vs the import's own (before the join): cmp exit 0 (0 = identical)
+STEP nine characterisations elaborate: exit 0 (expected 0) ok
+characterisations: 0 bytes of message from lean (0 = none)
+STEP characterisations elaborate with no message: exit 0 (expected 0) ok
+STEP the characterisations' text holds nine examples: exit 0 (expected 0) ok
+files written under ~/.cache/ext-oai1 during this run: 0; under ~/source/math: 0
+declarations: 8  compared: 8  identical: 8  different: 0 []
+READ-BACK IDENTICAL: all 8 declarations, term for term, modulo the namespace
+SELF-TEST OK: the unplanted pair identical on 8 declarations; 6 plants
+CONTROL FIRED AS EXPECTED: expected different ['ProperColoring', 'WeakColoring', 'angularMeasure', 'direction', 'no_proper_five_coloring', 'proper_to_borel_weak']
+different, to be read: Circle._proof_1, Complex.instRCLike, Filter.Eventually, Real.instLT, Real.instMul, Real.instOne, Real.instZero, measureSpaceOfInnerProductSpace
+READ-BACK RUN joined: OK

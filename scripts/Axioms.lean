@@ -167,7 +167,8 @@ under PURCHASED — and so does any axiom the library declares without a `declar
 not (`undeclared-library-axiom`, from `libraryAxioms`, the file's last command). The library
 declares three imports at present: wave 10's `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207, FS131-K10c), with
 eight records below, and FS-132's `Outside.OAI158.no_proper_five_coloring` and `Outside.OAI158.proper_to_borel_weak`
-(`[OAIMath2026]` family 158, FS132-I1), with five and five (the fifth on the transfer is FS132-L1's); its first, wave 2's
+(`[OAIMath2026]` family 158, FS132-I1), with six and nine (the fifth on the transfer is FS132-L1's; one on the first and four on
+the transfer are of FS-124's radius clause, `Plane/RadiusOutside`, FS124-I1, landed by FS124-L1); its first, wave 2's
 `falconer_lemma2_nonempty`, is a theorem since FS131-IF1 (FS131-L10B's join).
 
 **Why this section comes first.** The gate reads the sections in any order, but two things do not move:
@@ -8304,6 +8305,18 @@ outside theorem: `tools/fs132_l2_records.py` reads every record of the landing's
 -- Plane/SixRing/Orbit — the ring form over four points (C132-WIT-EXCL), added at the landing by the brief's Amendment 1
 #print axioms HadwigerNelson.SixRing.not_ae_outside_points
 -- FS132-L2: end of the block
+
+/-! ## FS124-L1 — the landing of FS-124's radius clause: the declarations of its three modules that FS124-I1's block does not hold — the four
+definitions and the structure of `Plane/WeakColouringOn`. Definitions and structures are filed with the theorems, as FS132-L2's block files them.
+`tools/fs124_l1_records.py` reads every declaration of the three modules as the kernel lists it: one record each, the five under IMPORTED each on
+the standard three and exactly its one declared outside theorem, every other under CLEAN on a subset of the standard three -/
+-- FS124-L1
+#print axioms HadwigerNelson.Plane.rigidMotion
+#print axioms HadwigerNelson.Plane.motionMul
+#print axioms HadwigerNelson.Plane.monoPairSet
+#print axioms HadwigerNelson.Plane.AeProperOn
+#print axioms HadwigerNelson.Plane.IsWeakColouringOn
+-- FS124-L1: end of the block
 
 #eval IO.println "=== PURCHASED ==="
 
