@@ -643,3 +643,37 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     subject over-claims; the rest is in the commit that carries this item. The repair to my practice: a filing script and
     its commit are one command, joined by `&&`.
 
+21. **FS132-P3, first message: two of my rulings are corrected, and one absence in the second round's evidence is named**
+    (source: its message to "main", 2026-10-07; record `plans/POROS-2026-10-07-fs132-round2.md` Stage 1; commit `59a6fada`).
+    **(1) A statement read more widely than its entry — by me.** My ruling 16 (c) called the extraction's clause (5)
+    "load-bearing for the first time" and my claim-list line called the ring card's stall "the relation of clause (5)".
+    The clause is derived for the extraction's own continua; the stall needs the relation for whatever witnesses a
+    hypothesis hands a ring point, and there it is false as a general principle, by the witness card's own example (an
+    anchored witnessed triangle at a point whose transition graph is a path; hand, one mind, no control, at seven, in the
+    slack). "So: clause (5) as proved does not bear on C132-TURN; a second reading of it would not move the stall." Its
+    grade: its reading of three one-mind records. **(2) My framing, attacked as I asked.** "One place from two sides"
+    (ruling 18 (d)) is wrong as worded: the two stalls are **the two opposite inclusions between two graphs on the labels
+    at a point** — the transition graph (every small ball) and the witness graph (the unit circle). The witness card needs
+    meetings to *produce* witnesses and stalls at a connected piece of definite size; the ring card needs a witnessed
+    triangle to *lie in* the point's transition graph. And the ring card was answered on its branch table (its third
+    branch); only the witness card was off it. **(3) Its own statement defect**: C132-TURN as it posed it attaches circle
+    data to a ball-defined point with nothing joining them. **(4) An absence**: **all 21 controls of the five derivation
+    records run at seven on the honeycomb with a margin, or at six on the held seam fragments; none runs on a tight
+    colouring.** The one tight seven-colouring held by formula (R7) has every boundary a unit arc centred at a lattice
+    point carrying both its side colours; read from that statement alone (its reading, no computation), every edge of
+    every vertex of R7 lies on the unit circle about one of that vertex's own ring points — **the exception of
+    C132-COMP-SHARP, the residue of C132-ALT and the void of C132-PLACE at once. "So the second round's exclusions are
+    theorems about colourings with neither a margin nor such an arc — Condition 5 in measure."** No two derived results
+    fail to hold together. **My receipt**: the commit is on `main`; its four points read against my items 16 and 18 and
+    the claim list's line — it is right on (1) and (2) as to my words. Not checked by me: its reading of R7; the line
+    numbers it cites. **Rulings.** (a) **Ruling 16 (c) is withdrawn**: no second reading of clause (5) is ordered on
+    this account; the clause keeps its flag for its two actual consumers. **A dated correction is in the claim list.**
+    (b) **Ruling 18 (d)'s sentence is replaced by its**: two opposite inclusions between the transition graph and the
+    witness graph. (c) **Finding (4) changes how tonight is reported to Kooshi**: the second round's three exclusions
+    (the complementary pair, the alternating ring, the turning ring in the wedge family) hold where no interface lies on
+    a unit circle about a ring point — and that is exactly what a tight colouring has everywhere, as this project learned
+    for maps (row 134: with no unit arcs no tight six-map exists; the unit-arc case is the open one). They are the
+    measurable form of the easy half, not progress on the hard one. Said so in the next report, in those words.
+    (d) **Slips of mine, two**: a ruling and a claim-list line that widened an entry; a framing sentence that named one
+    place where there are two. Both were caught because the brief asked for the attack.
+

@@ -376,4 +376,13 @@ the death of every such cycle — which are what the answer is made of and are n
   vertex, some output has one label on the whole slack ball). **The second clause is withdrawn as posed**; its two readings —
   "some output" and "every honest seven-colouring" — are open and go to the asking lane to pose or drop. **The class of
   C132-RING-TAME's first clause is not decided by this claim.**
+- **2026-10-07 (after FS132-P3's Stage 1, commit `59a6fada`; FS-132 inventory item 21): A correction to two lines above, the
+  coordinator's.** The line for FS132-E4's Stage 3 calls C132-TURN's stall "the relation of C132-EXT-DISC's clause (5)". That
+  reads the clause more widely than its entry: clause (5) is derived for the extraction's own continua (its step S11, from
+  their radii filling an interval), and says nothing of whatever witnesses a hypothesis hands a point; for those the relation
+  is false in general (the witness card's record gives an anchored witnessed triangle at a point whose transition graph is a
+  path — hand, one mind, no control). **C132-TURN's stall is: that a witnessed triangle given at a point lies in that point's
+  own transition graph — a statement no entry of this list asserts.** And C132-TURN as posed carries the defect its poser
+  now names: "every cyclic centre of which carries a witnessed triangle" attaches data of a unit circle to a point defined by
+  its small balls, with nothing joining them. It stands as stalled and is not re-posed in that form.
 
