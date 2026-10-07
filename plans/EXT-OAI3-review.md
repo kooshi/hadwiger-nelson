@@ -489,3 +489,100 @@ of the two: [hand, one mind] over an outside theorem not audited here. The look-
 row for `[GreenfeldTao2024]` already calls C3-aper "the colouring form" of the tiling question — and it deforms to its neighbours
 (any group, any period subgroup); what it does not reach is a colour count below the clique number, which is where four colours on a
 triangle-free or `K₄`-free lattice lives.
+
+## Stage 5 — SAVED: drafts for files this job does not write, the expectations scored, and what is left
+
+### 5.1 Drafts (each names its slot; none is filed by this job)
+
+**D1 — `BIBLIOGRAPHY.md` § A, row `[OAIMath2026]` (line 401), last cell: replace its closing sentence** "**Every other family (371):
+listed in the catalogue only, unread**" **with:**
+
+> **The other 371 families: swept by EXT-OAI3 (2026-10-07, `plans/EXT-OAI3-review.md`; index `data/external/oai3/`)** — every family's
+> title and catalogue sentence and every manuscript's title read; nine families opened further, none read in full and none built or
+> audited here. *Read at their main statements* (TeX source, Lean note, comparator challenge): 172 (*A classification of finite
+> Euclidean Ramsey configurations*; Lean in the release), 156 (*A nine-dimensional counterexample to Borsuk's covering assertion*;
+> Lean), 073 (*The Falconer distance conjecture in all dimensions*; Lean), 166 (*The higher-dimensional Erdős distinct-distances
+> conjecture*; manuscript only), 167 (*The weak pinned planar distance theorem*, Lean; *A power saving for planar unit distances*,
+> Lean status contradictory in the release's note), 155 (*A translational tile with no fully periodic tiling in dimension three*;
+> Lean). *Lean statements read, by text*: family 021's elementary Kloosterman bound (`OAI.Erdos970.ErdosKloosterman.fourth_norm_le`,
+> three files importing only Mathlib). *File headers only*: family 015's `OAI/NumberTheory/DukePrimeDegree/` (886 files). *Every
+> other family: catalogue sentence only.* The release's catalogue grades its own library `review: status: unchecked`.
+
+**D2 — `BIBLIOGRAPHY.md` § A, same row, second cell (what of ours rests on it): add after its last sentence:**
+
+> Nothing of ours rests on any family but 158. Candidates, each unadopted until its own job: family 021's Kloosterman bound against
+> the declared axiom `StandingFive.kloosterman_bound` (EXT-OAI3 § 4.1 B1); family 155 with EXT-OAI3's entry `tile-colouring` against
+> FS-76's C3-aper (B2); family 015's Lean against FS-113 (B3); families 156 and 172 as method (its §§ 3.1–3.2).
+
+**D3 — `BIBLIOGRAPHY.md` § C, row `[GreenfeldTao2024]` (line 805): replace** "FS-73's C3-aper is the colouring form for Cayley graphs of
+ℤ^r. Paper not read" **with:**
+
+> FS-73's C3-aper is the colouring form for Cayley graphs of ℤ^r, and the link is exact for one graph: a tile `F` has a fully periodic
+> tiling iff `Cay(A, (F − F) ∖ {0})` has a periodic `|F|`-colouring (EXT-OAI3's `tile-colouring`, [hand], one mind, prior art owed) —
+> so a single aperiodic tile of `ℤ^d` answers `[Ellenberg2018]`'s question no at `k = |F|` in rank `d`. Paper not read: whether its
+> theorem gives such a tile in some `ℤ^d` is recalled from its review, not read.
+
+**D4 — a bearing line for `plans/STUB-four-colour-inheritance.md`, to follow its line 7** ("Provisional bearings, updated at the
+2026-09-25 crunch's close …"):
+
+> **Provisional bearings, updated 2026-10-07 (EXT-OAI3):** C3-aper is false in the abstract class at some colour count, given either of
+> two outside theorems — `[OAIMath2026]` family 155 (a tile of `ℤ³` with no periodic tiling; Lean in the release, not audited here) or
+> `[GreenfeldTao2024]` (large rank; recalled, not read) — through EXT-OAI3's `tile-colouring`: `Cay(A, (F − F) ∖ {0})` is
+> `|F|`-colourable with a periodic `|F|`-colouring iff `F` tiles periodically. Question 1 is therefore a threshold question (the least
+> `k ≥ 4` and the least rank at which a `k`-colourable Cayley graph of `ℤ^r` has no periodic `k`-colouring; ranks 1 and 2 are excluded
+> for graphs of this difference-set form by the periodic tiling theorems there), and question 2's two-sided certificate scheme cannot
+> exist for every `k`. Nothing moves at four colours or on a unit-distance lattice.
+
+**D5 — a bearing line for `plans/STUB-mr-in-lean.md` § Provisional bearings, to follow its first paragraph:**
+
+> *2026-10-07 (EXT-OAI3):* `[OAIMath2026]` family 015's Lean folder `OAI/NumberTheory/DukePrimeDegree/` (886 files, 87,763 lines, Lean
+> 4.34.1, Apache-2.0; headers only read) names conditional entropy for countable partitions, leafwise measures and steps of
+> Einsiedler–Katok 2003 and Einsiedler–Katok–Lindenstrauss 2006 — the toolkit EL2021's proof uses, absent from Mathlib. Read its
+> `Entropy/` and `Geometry/` statements before planning PE-2's inputs from scratch; every piece is a port across 1,502 Mathlib commits.
+
+**D6 — a line for `CLAUDE.md` § Trust ledger, to follow** "its first import, `[Falconer1981]` Lemma 2 (i), is a theorem since FS131-IF1."
+**(a candidate, not a change of state — file it only if the kernel lane takes the job):**
+
+> A route to removing the axiom is on record (EXT-OAI3 § 4.1 B1): `[OAIMath2026]` family 021's Lean proves `|K(a, b)|⁴ ≤ 3q³` over every
+> finite field in three files importing only Mathlib, which gives each floor from `q > 3(k − 1)⁴`; what is left is the usable residue
+> fields below that threshold.
+
+**D7 — a bearing line for `plans/STUB-six-by-the-nerve.md`, to follow its line 8:**
+
+> *2026-10-07 (EXT-OAI3 § 3.2):* `[OAIMath2026]` family 156 (Borsuk in dimension nine; Lean in the release, not audited here) is a
+> second instance of the map-to-a-simplex method, with a rigidity statement at the threshold number of labels — every maximal support
+> has exactly dim + 1 labels, by a mod-two degree count — of the kind [P₆] and [L₆] ask for. Its first step enlarges a cover to an open
+> one, so it applies with slack only. Read its `extension.tex`, `topology.tex` and `six-labels.tex` at the opening.
+
+**D8 — `LEDGER.md` § The claim list:** no line. No prior art for any item of the list was found outside family 158 (§ 4.2).
+
+**D9 — `plans/GROKKING-INSTANCES.md` § G92** (a held result reaches as far as its argument), a new instance, verbatim:
+
+> EXT-OAI3 (2026-10-07): the bibliography row for `[GreenfeldTao2024]` had called C3-aper "the colouring form" of the periodic tiling
+> conjecture since FS-73's close and stopped there; read for what a tiling *is* in graph words — a clique partition — the form is an
+> equivalence for one graph, and the published counterexample answers the question the stub carried as open (EXT-OAI3 § 4.5). Source:
+> `plans/EXT-OAI3-review.md` § 4.1 B2.
+
+### 5.2 The expectations of § 1.4, scored
+
+| # | expectation | registered | outcome |
+|---|---|---|---|
+| E1 | a Tier A family beyond 073, 167, 172 | 0.7 | **met** — 166 (distinct distances in higher dimension) and, by widening, 156 (Borsuk) |
+| E2 | another family claims more on the problem itself than 158 | 0.08 | **not met** — none claims anything on it |
+| E3 | a Tier B hit | 0.3 | **met**, three, each partial: a weaker bound than the axiom's; an answer at a colour count other than four; machinery, not the theorem |
+| E4 | a Tier C hit beyond 158 | 0.15 | **not met** |
+| E5 | one context suffices at the depth of titles and catalogue sentences | 0.85 | **met** |
+
+Brier score over the five: (0.09 + 0.0064 + 0.49 + 0.0225 + 0.0225)/5 = 0.126. The miss is E3, priced at 0.3: I priced it as "does
+a family prove one of our hypotheses", and the hits came from two places that question does not look — the release's Lean library
+below its headline results (B1, B3), and a consequence nobody had drawn from a result on another subject (B2).
+
+### 5.3 What this job did not do
+
+- It read no manuscript in full and built no Lean. Every grade above is the release's own statement about itself.
+- It did not survey the Lean library by need (§ 4.4): only seven name patterns and five folders were looked at.
+- Tier D is named from catalogue sentences; a family whose bearing shows only inside its manuscript is not in it. The 722 abstracts
+  were swept by keyword and read only for flagged families.
+- Prior art for `tile-colouring` is unmeasured (the zbMATH API returned HTTP 503 to four queries at the time of the job).
+- The frontier stubs were read at their one-line questions (`plans/FRONTIER-STUBS.md`'s table, 74 rows), not stub by stub; a stub
+  whose question is narrower than its line could hide a hit.
