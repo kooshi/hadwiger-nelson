@@ -26,6 +26,13 @@ plan's § PA.3.
 - **C133-DENS** (posed) — TRUE. [derived] from C133-DENS-CLASS. Stage 3.
 - **C133-INV-CLASS** — for every symmetric `K`-invariant connection set on `E`, an `E ⋊ K`-invariant law on independent sets with vertex marginal equal to the infimum of `α(G)/|G|` over finite `G ⊂ E`, and no translation-invariant law above it: TRUE. [hand], one mind. Stage 4, § Argument for C133-INV.
 - **C133-INV** (posed) — TRUE. [derived] from C133-INV-CLASS. Stage 4.
+- **C133-EASY** — `m₁(ℝ²) ≤ α(G)/|G|` for every finite `G`: TRUE. [hand], one mind; known. Stage 5, § Argument for the relay-results.
+- **C133-PER** — periodisation, and the three printed definitions of `m₁(ℝ²)` are one number: TRUE. [hand], one mind; known. Stage 5.
+- **C133-DP** — the density points of an edge-null measurable set are 1-avoiding: TRUE. [hand], one mind; the release's Lemma 4.3 for one class. Stage 5.
+- **C133-CHIF** — `χ_f(ℝ²) ≤ 1/m₁(ℝ²)`: TRUE. [derived] from C133-PER; a checking re-derivation of FS103-B-CHIF. Stage 5.
+- **C133-ALG** — every `E ⋊ K`-invariant random independent set of the algebraic plane has density at most `m₁(ℝ²)`: TRUE. [hand] over `[OAIMath2026]` family 158's Theorem 2.3 (`wild_fourier`), one mind. Stage 5, § Argument for C133-ONE.
+- **C133-ONE** (posed) — `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)` and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, no hypothesis: TRUE. [derived] from C133-ALG, C133-INV-CLASS, C133-EASY, C133-CHIF; one mind; over the same outside theorem. Stage 5.
+- **C133-FN** — `f(n)/n → m₁(ℝ²)`: TRUE. [derived] from C133-ONE. Stage 5.
 
 ## Stage 1 — SAVED: the readback, the definitions at their pages, and the opening
 
@@ -345,3 +352,281 @@ because `u⁻¹·0 = 0`. These maps commute (`K` is abelian), so by Markov–Kak
 *The posed clause.* `S = K`: `Cay(E, K)` is the unit-distance graph of `E`, `−1 ∈ K`, and `K·K = K`.
 
 **Theorems this stage proved:** `C133-INV-CLASS` — TRUE, [hand], one mind; `C133-INV` (posed) — TRUE, [derived] from it.
+
+## Stage 5 — SAVED: C133-ONE — derived, over the release's Theorem 2.3; five relay-results first
+
+*Two words from the coordinator arrived during this stage and were read before it went on. (1) The claim list now names
+`C133-DENS-CLASS` as the form C133-ONE consumes — this stage does consume that form. (2) New scripts and their outputs go under
+`data/fs133/e1/`, not `tools/`, while a landing is in flight; this stage's one script is `data/fs133/e1/chif_count.py`, and the
+three already in `tools/` stay.*
+
+**Verdict: TRUE** — `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)` and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, with no hypothesis, at [hand], one
+mind, **over one outside theorem**: `[OAIMath2026]` family 158, Theorem 2.3 (in its Lean, `wild_fourier`), which this argument
+reads itself — not through the release's transfer theorem. No step of F3–F9 uses `Σ p_i = 1` but the choice of a label, which one
+class does not make. No Tarski and no redrawing lemma is used. `m₁(ℝ²)` is the same number under each of the three printed
+definitions (`C133-PER`).
+
+derivation: C133-EASY
+  statement: for every finite nonempty `G ⊂ ℝ²` and every measurable 1-avoiding `A ⊆ ℝ²`, `α(G) ≥ d·|G|`, where `d` is the upper
+    density of `A` along the discs `B(0, R)`; hence `m₁(ℝ²) ≤ α₁(ℝ²)`
+  uses only: that `{g ∈ G : g + t ∈ A}` is independent in `UD(G)` for every `t`; that `|B(0, R) ∖ B(0, R − r)| / |B(0, R)| → 0`
+  not claimed: the reverse inequality (that is `C133-ONE`); the weighted form with `χ_f(G)` (`[DuczVarga2026]` Claim 1)
+  argument: § Argument for the relay-results
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `G` the Moser spindle, `α(G)/|G| = 2/7 = 0.2857…`, above every known bound on `m₁(ℝ²) ≤ 0.247`
+  prior art: known: `[MatolcsiEtAl2025]` (14); `[DuczVarga2026]` § 2.1, "the standard averaging argument"
+  handoff: de Bruijn — crosses, as one half of `C133-ONE`; no outside theorem
+
+derivation: C133-PER
+  statement: for every measurable 1-avoiding `A ⊆ ℝ²`, every `L > 1` and every `q ∈ ℝ²`, the set
+    `(A ∩ (q + [1/2, L − 1/2)²)) + Lℤ²` is measurable, `Lℤ²`-periodic and 1-avoiding, of density at least
+    `|A ∩ (q + [0, L)²)| / L² − 2/L`; consequently four numbers coincide — the supremum of the densities of periodic measurable
+    1-avoiding sets, the supremum of upper densities of measurable 1-avoiding sets along the discs `B(0, R)`, the same with
+    `sup_p limsup_T` over the squares `p + [−T, T]²`, and `inf_X sup_A |A|/|X|` over `X` of finite positive measure and
+    measurable 1-avoiding `A ⊆ X`
+  uses only: that two points of different copies differ by more than 1 in some coordinate; that a strip of width 1/2 inside a
+    square of side `L` has area below `2L`; averaging over the squares of a tiling, and over the translates of a periodic set
+  not claimed: that any of the suprema is attained (held separately, FS106-SUP, row 131); anything in dimension three or more
+  argument: § Argument for the relay-results
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `A` the disc packing of stage 3 and `L = 4`: `A` is already periodic and the statement only loses the strip
+  prior art: known: periodisation is standard (`[AmbrusEtAl2023]` § 2 cites it; `plans/FS103-B-verification.md` D7 uses it);
+    `[MatolcsiEtAl2025]` p. 5 asserts the agreement of two of the definitions
+  handoff: de Bruijn — crosses only if the Lean statement of `C133-ONE` is wanted for more than one definition of `m₁`
+
+derivation: C133-DP
+  statement: if `W ⊆ ℝ²` is measurable and edge-null, then the set `W*` of points at which `W` has Lebesgue density 1 is
+    measurable, differs from `W` by a null set, and contains no two points at distance 1
+  uses only: the Lebesgue density theorem; that a point uniform in `B(x, h)` plus an independent unit vector uniform on an arc
+    of length comparable to `h` has a law with density at most `1/(πh²)`, carried by a disc of radius `2h`
+  not claimed: anything about points of positive upper density that are not density points (FS103-M-D's (D1) says more)
+  argument: § Argument for the relay-results
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `W` the disc packing with a null set of points added at distance 1 from it: `W*` is the packing
+  prior art: known: `[OAIMath2026]` family 158, Lemma 4.3 (M/transfer.tex:266–295), whose proof uses one class at a time;
+    FS103-M-D (D1); the method is `[Falconer1981]`'s (the manuscript's attribution)
+  handoff: de Bruijn — crosses; the release's Lean does not contain its Lemma 4.3 (`plans/EXT-OAI1-audit.md` stage 6)
+
+derivation: C133-CHIF
+  statement: for every `ε > 0` there are finitely many 1-avoiding subsets `U_1, …, U_N` of `ℝ²` and an integer
+    `n ≥ (m₁(ℝ²) − ε)·N` such that every point of `ℝ²` lies in `n` of them; hence `χ_f(ℝ²) ≤ 1/m₁(ℝ²)` for the fractional
+    chromatic number of `[MatolcsiEtAl2025]` p. 4 and for `[Johnson1996fcn]`'s
+  uses only: `C133-PER` with an integer period; that `{x : |P ∩ B(x, r)| > (3/4)|B(x, r)|}` is open and 1-avoiding when `P` is;
+    that an open set is a union of half-open dyadic squares; that a half-open square of side `s` contains one point of each
+    coset of `sℤ²`
+  not claimed: `χ_f(ℝ²) ≥ 1/m₁(ℝ²)` (that is `C133-ONE`); that the sets can be taken to be translates of a set of density
+    `m₁(ℝ²)` itself; anything for geometric fractional colourings
+  argument: § Argument for the relay-results
+  verdict: derived
+  grade: derived from: C133-PER
+  minds: 1
+  model: the disc packing, which is open: with it the construction gives `χ_f(ℝ²) ≤ 8√3/π + o(1) = 4.41…`
+  prior art: known: FS103-B-CHIF (`plans/FS103-B-verification.md` § 3.2 (v), one mind, read before this was written — so this
+    is a checking re-derivation, not a blind one); the assertion is Fisher–Ullman's, and `[Johnson1996fcn]` p. 105, Question 5,
+    asks "if that assertion at the end of [7] is true, and … for a proof"
+  handoff: de Bruijn — crosses, for the `χ_f` clauses of `C133-ONE`; no outside theorem
+
+control: chif-count
+  of: C133-CHIF — the counting step, exactly: 16 half-open grid cells in a period, 36 translates, every tested point (cell
+    interiors, edges and corners) in the same number of translates as there are cells
+  run: python3 ../data/fs133/e1/chif_count.py halfopen
+  expect: 16 [16]
+  fault: python3 ../data/fs133/e1/chif_count.py closed
+
+derivation: C133-ALG
+  statement: every `E ⋊ K`-invariant Borel probability on the space of independent sets of the unit-distance graph of the
+    algebraic plane `E` has `P(0 ∈ I) ≤ m₁(ℝ²)`
+  uses only: from `[OAIMath2026]` family 158 — Theorem 2.3 through one consequence, that a `K`-invariant probability `ν` on `D`
+    with `ν(C) = 0` has `Re ∫ ψ_1 dν ≥ 0` (the theorem gives `= 0`), and Lemma 4.1 (the continuous vectors are `L²` of a factor
+    and the spectral subspace on `C`, with a strongly continuous positive unitary extension to `ℝ²` that commutes with the
+    rotations); that the indicator of `{0 ∈ I}` is `[0, 1]`-valued and rotation-fixed; that `K` is dense in `S¹`; a jointly
+    measurable version of an `L²`-continuous field; Tonelli; `C133-DENS-CLASS`; `C133-DP`
+  not claimed: the same at any number field's plane — over `ℚ(√3,√11)` a colour class of Theorem B's residue colouring is an
+    invariant independent set of density `1/4 > m₁(ℝ²)`, and every step below but Theorem 2.3 runs there; the same for laws
+    invariant under translations alone; the form with several algebraic distances (the argument reads the distance only as
+    "`K` is transitive on the algebraic circle of that radius and dense in the real one", but no entry is written)
+  argument: § Argument for C133-ONE
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the law of `C133-INV-CLASS` at `S = K`: an `E ⋊ K`-invariant probability with `P(0 ∈ I) = α₁(E) ∈ [1/7, 2/7]`
+  prior art: partly: the chain is this project's FS103-F-FRAC (row 129; `plans/FS103-B-verification.md` § 2.1, D1–D7) with MR
+    replaced by the release's theorem; the observation that one class runs is `plans/EXT-OAI2-reading.md` § 2.6; not found in
+    print — fifteen arXiv queries and two web searches on 2026-10-07 UTC, zbMATH owed (the plan's § PA.2)
+  handoff: de Bruijn — over `wild_fourier` as a declared outside theorem (the import's third); the release's label-model lemmas
+    (`projected_unit_correlation`, `fieldVector_unit_correlation`, `exists_label_field`) are stated for its `LabelModel.measure`
+    and are not consumable here — see § What C133-ONE reads of the release
+
+derivation: C133-ONE
+  statement: `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`, and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`
+  uses only: `C133-INV-CLASS` at `S = K` (a law of density `α₁(𝒜²)`); `C133-ALG`; `C133-EASY`; that an infimum over fewer
+    graphs is larger; `C133-CHIF`; `χ_f(G) ≥ |G|/α(G)` for finite `G`; that a fractional colouring restricts to a subgraph
+  not claimed: any value of `m₁(ℝ²)` or of a chromatic number; `m₁(ℝ²) = δ_Croft`; that some finite graph attains
+    `sup χ_f(G)` (`[Johnson1996fcn]` Question 2); anything at a number field's plane (row 129's field form keeps "given MR");
+    anything at six colours — `1/m₁(ℝ²) ≤ 4.36`; that the release states any of this
+  argument: § Argument for C133-ONE
+  verdict: derived
+  grade: derived from: C133-ALG, C133-INV-CLASS, C133-EASY, C133-CHIF
+  minds: 1
+  model: every term is a number in `[0.2293, 0.2470]` or its reciprocal in `[4.0487, 4.3599]` (`[AmbrusEtAl2023]` Theorem 1;
+    Croft's set), so no side of an equality is vacuous
+  prior art: partly: row 129 holds both lines given MR at ℚ(√635087) (FS103-F-DV, two minds); the questions are
+    `[MatolcsiEtAl2025]` § 2, `[Johnson1996fcn]` Questions 1 and 3, `[Johnson2000surprises]` Problems 3 and 4, read at their
+    pages; with no hypothesis: not found in print, at the scope of the plan's § PA.2
+  handoff: de Bruijn — the statement over `wild_fourier`; the planner chooses how many of the six equalities to state
+
+derivation: C133-FN
+  statement: `f(n)/n → m₁(ℝ²)` as `n → ∞`, where `f(n)` is the minimum of `α(G)` over `n`-point subsets `G` of the plane
+  uses only: `C133-ONE`'s `α₁(ℝ²) = m₁(ℝ²)`; `α₁(ℝ²) = inf_n f(n)/n` by definition; `f(a + b) ≤ f(a) + f(b)` (two
+    configurations placed far apart); Fekete's lemma
+  not claimed: any rate; `m₁(ℝ²) = δ_Croft`, the second clause of `[DuczVarga2026]` Conjecture 1
+  argument: § Argument for C133-ONE
+  verdict: derived
+  grade: derived from: C133-ONE
+  minds: 1
+  model: `f(7) ≤ 2` (the Moser spindle), so `f(7)/7 ≤ 0.2857…`
+  prior art: partly: `[DuczVarga2026]` Conjecture 1, first clause, "f (n)/n = m1 (R2 ) + o(1)"; held given MR as FS103-F-DV
+  handoff: none — a corollary of `C133-ONE` by Fekete's lemma; the planner may state it
+
+### Argument for the relay-results
+
+**C133-EASY.** Let `G ⊂ B(0, r)`, and `R_n → ∞` with `|A ∩ B(0, R_n)| / |B(0, R_n)| → d`. For `t ∈ ℝ²` the set
+`J(t) = {g ∈ G : g + t ∈ A}` is independent in `UD(G)`, since two of its points at distance 1 would give two points of `A` at
+distance 1; so `|J(t)| ≤ α(G)`. Averaging over `t ∈ B(0, R_n)`:
+`α(G) ≥ |B(0, R_n)|⁻¹ Σ_{g ∈ G} |A ∩ (B(0, R_n) + g)| ≥ |G|·(|A ∩ B(0, R_n)| − |B(0, R_n) ∖ B(0, R_n − r)|) / |B(0, R_n)| → d·|G|`.
+The supremum over `A` gives `α(G)/|G| ≥ m₁(ℝ²)` for every finite `G`.
+
+**C133-PER.** Put `Q' = q + [1/2, L − 1/2)²` and `A' = (A ∩ Q') + Lℤ²`. Two points of one copy are translates of two points of
+`A`. Two points `a + Lv`, `a' + Lv'` with `v ≠ v'` and `a, a' ∈ Q'` differ in some coordinate by at least `L − |a_i − a'_i| > 1`,
+because `|a_i − a'_i| < L − 1`. So `A'` is 1-avoiding; its density is `|A ∩ Q'| / L² ≥ |A ∩ (q + [0, L)²)| / L² − (2L − 1)/L²`.
+*The four numbers.* Write `m_per` for the periodic supremum. A periodic set has its density as upper density along any of the
+windows, so `m_per` is at most the second and third numbers. Conversely let `A` have upper density `d` along discs (or along
+squares about some `p`), and `ε > 0`; fix `L > 2/ε`. For a window `X` of the sequence, the squares of the tiling by
+`[0, L)² + Lℤ²` that lie inside `X` cover all of `X` but a boundary layer of relatively vanishing area, so along the sequence
+their average of `|A ∩ Q| / L²` exceeds `d − ε`, some one square does as well, and the first part gives a periodic 1-avoiding
+set of density above `d − 2ε`. For the fourth number: given a periodic 1-avoiding `P` of density `d` and any `X`, the average
+of `|(P + t) ∩ X|` over `t` in a period is `d·|X|`, so `sup_{A ⊆ X} |A|/|X| ≥ d`; and with `X = [0, L)²` the first part gives
+`sup_{A ⊆ X} |A|/|X| ≤ m_per + 2/L`. So the infimum over `X` is `m_per`.
+
+**C133-DP.** `W*` is measurable and `|W △ W*| = 0` by the Lebesgue density theorem (almost every point of `W` is a density
+point of `W`, almost every point of the complement is a density point of the complement). Suppose `x, y = x + u ∈ W*` with
+`|u| = 1`. For small `h > 0` let `x'` be uniform in `B(x, h)` and, independently, `u'` uniform on the arc
+`{u' ∈ S¹ : |u' − u| < h}`. Then `P(x' ∉ W) = |B(x, h) ∖ W| / |B(x, h)| → 0`. The law of `x' + u'` is a mixture of uniform laws
+on discs `B(x + u', h) ⊆ B(y, 2h)`, so it has density at most `1/(πh²)` and
+`P(x' + u' ∉ W) ≤ |B(y, 2h) ∖ W| / (πh²) = 4·|B(y, 2h) ∖ W| / |B(y, 2h)| → 0`. So for small `h` the event
+`{x' ∈ W, x' + u' ∈ W}` has positive probability; the law of `(x', u')` is absolutely continuous to `Leb × σ`; hence
+`(Leb × σ){(x, u) : x ∈ W, x + u ∈ W} > 0`, against edge-nullness. (This is the manuscript's proof of its Lemma 4.3 with the
+other classes deleted; it never mentions them.)
+
+**C133-CHIF.** Let `ε > 0`. By `C133-PER` there is a measurable 1-avoiding `P`, periodic under `Lℤ²` with `L` an integer, of
+density `d ≥ m₁(ℝ²) − ε`. *Open regularisation.* For `r > 0` let `P_r = {x : |P ∩ B(x, r)| > (3/4)·|B(x, r)|}`. It is open
+(`x ↦ |P ∩ B(x, r)|` is continuous) and `Lℤ²`-periodic. It is 1-avoiding: if `x, y ∈ P_r` and `|x − y| = 1`, the sets
+`P ∩ B(y, r)` and `(P ∩ B(x, r)) + (y − x)` both lie in `B(y, r)` and each has more than three quarters of its area, so they
+share a point `z`; then `z` and `z − (y − x)` are points of `P` at distance 1. By the density theorem `1_{P_r} → 1_P` almost
+everywhere as `r → 0`, so by dominated convergence on a period the density of `P_r` tends to `d`; fix `r` with density at
+least `d − ε`. *An inner union of grid squares.* An open set is a disjoint union of half-open dyadic squares
+`[a, a + 2^{−j}) × [b, b + 2^{−j})` with corners in `2^{−j}ℤ²`; as `L` is an integer these grids are `Lℤ²`-periodic. Finitely
+many of the squares in one period carry all but `εL²` of the area of `P_r` there; cut them to a common side `s = 2^{−j}`, say
+`n'` squares, and let `U` be their union with all its `Lℤ²`-translates: `U ⊆ P_r` is 1-avoiding and has density
+`n's²/L² ≥ d − 2ε`. *The count.* Let `Θ = sℤ² / Lℤ²`, `N = |Θ| = (L/s)²`. For `x ∈ ℝ²`, `x ∈ U + t` iff `x − t ∈ U`, and as
+`t` runs over `Θ` the point `x − t` runs once over the coset `x + sℤ²` modulo `Lℤ²`, which meets each half-open grid square of
+side `s` in one point. So `x` lies in `n = n'` of the `N` translates `U + t`, each of which is 1-avoiding, and
+`n/N = n's²/L² ≥ m₁(ℝ²) − 3ε`. Giving each translate the weight `1/n` is a fractional colouring of the plane of weight
+`N/n ≤ 1/(m₁(ℝ²) − 3ε)` with finitely many sets (it is an `n`-fold colouring with `N` colours), so `χ_f(ℝ²) ≤ 1/m₁(ℝ²)` in
+`[MatolcsiEtAl2025]`'s definition; `[Johnson1996fcn]`'s is the same number by his Proposition (pp. 102, 106, read).
+
+### Argument for C133-ONE
+
+**C133-ALG.** Let `μ` be an `E ⋊ K`-invariant Borel probability on `𝓘 = 𝓘_K`, with `τ_z`, `ρ_u` as in stage 4, and
+`δ = μ{0 ∈ I}`. `(𝓘, μ)` is a standard probability space. Put `(T_z g)(I) = g(τ_z I)`, `(V_u g)(I) = g(ρ_u I)` on `L²(μ)`:
+unitary, with `T_z T_w = T_{z+w}`, and `V_u T_z V_u⁻¹ = T_{uz}` (compute: `(V_u T_z V_u⁻¹ g)(I) = g(u(u⁻¹I − z)) = g(I − uz)`).
+The steps are the manuscript's F3–F9 (`plans/EXT-OAI2-reading.md` § 2.1), for one indicator.
+
+- *F3.* `f(I) = 1[0 ∈ I]`. Then `(T_z f)(I) = 1[z ∈ I]`, `V_u f = f` (as `u⁻¹·0 = 0`), `∫ f dμ = δ`, and for `u ∈ K`,
+  `⟨f, T_u f⟩ = μ{0 ∈ I, u ∈ I} = 0` because `0` and `u` are adjacent.
+- *F4* (Lemma 4.1, M/transfer.tex:25–142, read whole; its hypotheses are a standard probability space, a measure-preserving
+  action of `E`, and rotations with the covariance above — all hold). `𝓗_c = {v : ‖T_z v − v‖₂ → 0 as z → 0 in E}` is `L²(𝓕_c)`
+  for a factor `𝓕_c`, is the spectral subspace on `C`, carries a strongly continuous unitary extension `T_x`, `x ∈ ℝ²`,
+  preserving the positive cone and the constant 1, and its projection commutes with every `V_u`.
+- *F5.* `p = 𝔼(f ∣ 𝓕_c)`, `b = f − p`. So `0 ≤ p ≤ 1`, `∫ p dμ = δ`, `V_u p = p`, `V_u b = b`, `b ⊥ 𝓗_c`. Let `λ_b` be the
+  spectral measure of `b`: `⟨b, T_z b⟩ = ∫_D ψ_z dλ_b`. It gives `C` mass 0 (`b` is orthogonal to the spectral subspace on `C`).
+  It is `K`-invariant: `⟨b, T_{uz} b⟩ = ⟨V_u⁻¹ b, T_z V_u⁻¹ b⟩ = ⟨b, T_z b⟩`, and `ψ_{uz}(d) = ψ_z(ud)`, so `λ_b` and its image
+  under `d ↦ ud` have the same Fourier coefficients. **Nothing here mentions another class.**
+- *F6.* If `λ_b ≠ 0`, its normalisation is a `K`-invariant probability on `D` null on `C`, so by **Theorem 2.3** it is Haar and
+  `⟨b, T_z b⟩ = 0` for `z ∈ E ∖ {0}`. For `u ∈ K`: `T_u` preserves `𝓗_c` and its orthogonal complement, so
+  `0 = ⟨f, T_u f⟩ = ⟨p, T_u p⟩ + ⟨b, T_u b⟩ = ⟨p, T_u p⟩`. *What is consumed:* since `p ≥ 0` gives `⟨p, T_u p⟩ ≥ 0`, the theorem
+  is needed only as `Re ∫ ψ_u dλ_b ≥ 0` at one `u ∈ K` — in this project's words, that the algebraic plane has no SP witness.
+- *F7.* `x ↦ ⟨p, T_x p⟩` is continuous on `ℝ²` and vanishes on `K`, which is dense in `S¹` (the rational points of the circle
+  are in `K`); so `⟨p, T_u p⟩ = 0` for every `u ∈ S¹`, and `⟨T_x p, T_{x+u} p⟩ = ⟨p, T_u p⟩ = 0` for every `x ∈ ℝ²`.
+- *F8.* There is a product-measurable `H : ℝ² × 𝓘 → [0, 1]` with `H(x, ·) = T_x p` in `L²(μ)` for almost every `x`. (On a unit
+  square `Q` the map `Φ(x) = T_x p` is uniformly continuous into `L²(μ)`; take simple maps `Φ_m`, constant on the cells of a
+  partition of `Q`, with `sup_Q ‖Φ_m − Φ‖₂ ≤ 2^{−m}`, and measurable `[0, 1]`-valued representatives of their finitely many
+  values — `0 ≤ T_x p ≤ 1` because `T_x` preserves positivity and 1. The resulting `H_m` are product-measurable and
+  `‖H_m − H_{m+1}‖_{L²(Q × 𝓘)}` is summable, so `H_m → H := limsup H_m` almost everywhere on `Q × 𝓘`; for almost every `x` the
+  section converges `μ`-almost everywhere, and its limit must be the `L²` limit `Φ(x)`.) This is M/transfer.tex:212–227.
+- *F9.* Let `N` be the null set of `x` where the representation fails. For almost every `x`,
+  `∫ H(x, ω) dμ(ω) = ⟨T_x p, 1⟩ = ⟨p, T_{−x} 1⟩ = δ`. The set of `(x, u)` with `x ∈ N` or `x + u ∈ N` is `(Leb × σ)`-null, and
+  off it `∫ H(x, ω) H(x + u, ω) dμ = ⟨T_x p, T_{x+u} p⟩ = 0`. By Tonelli,
+  `∫ [∫∫ H(x, ω) H(x + u, ω) dσ(u) dx] dμ(ω) = 0`, so for `μ`-almost every `ω`, `H(x, ω) H(x + u, ω) = 0` for almost every
+  `(x, u)`. **The manuscript's only use of `Σ_i p_i = 1` is the next line of its proof, the choice of "the least index with
+  positive field" at each point (M/transfer.tex:248–251); with one class there is nothing to choose.**
+- *The density step.* `C133-DENS-CLASS` with `X = ℝ²`, `X_n = B(0, n)`, `α = δ` and the full-measure event of F9 gives an `ω`
+  for which `W = {x : H(x, ω) > 0}` is edge-null and has upper density at least `δ` along the discs.
+- *Density points.* By `C133-DP`, `W*` is a measurable 1-avoiding set equal to `W` up to a null set. So
+  `m₁(ℝ²) ≥ δ = μ{0 ∈ I}`.
+
+**C133-ONE, first line.** `C133-INV-CLASS` at `S = K` gives an invariant law with `μ{0 ∈ I} = a_K`, and `a_K` is `α₁(𝒜²)` by
+definition. So `α₁(𝒜²) ≤ m₁(ℝ²)` (`C133-ALG`), `m₁(ℝ²) ≤ α₁(ℝ²)` (`C133-EASY`), and `α₁(ℝ²) ≤ α₁(𝒜²)` because the infimum
+defining `α₁(ℝ²)` runs over more point sets. The three are equal. **This closed chain is why no redrawing lemma is needed: the
+inequality that Tarski's theorem would supply, `α₁(𝒜²) ≤ α₁(ℝ²)`, comes out as a consequence.**
+
+**C133-ONE, second line.** For a finite `G`, `χ_f(G) ≥ |G|/α(G)` (in a fractional colouring of weight `w`,
+`|G| ≤ Σ_J γ(J)|J| ≤ w·α(G)`), so `sup{χ_f(G) : G ⊂ 𝒜² finite} ≥ 1/α₁(𝒜²) = 1/m₁(ℝ²)`. A fractional colouring of a graph
+restricts to any subgraph with the same weight, so
+`sup{χ_f(G) : G ⊂ 𝒜² finite} ≤ χ_f(𝒜²) ≤ χ_f(ℝ²)` and `sup{χ_f(G) : G ⊂ 𝒜² finite} ≤ χ_f,0(ℝ²) ≤ χ_f(ℝ²)`; and
+`χ_f(ℝ²) ≤ 1/m₁(ℝ²)` (`C133-CHIF`). Every term is squeezed to `1/m₁(ℝ²)`. (`[MatolcsiEtAl2025]`'s Theorem 2,
+`χ_f,0(ℝ²) = 1/α₁(ℝ²)`, is not used; it comes out.)
+
+**C133-FN.** `f(n) ≥ α₁(ℝ²)·n` and `inf_n f(n)/n = α₁(ℝ²)` by the definitions (`[DuczVarga2026]` p. 1 and § 3;
+`[MatolcsiEtAl2025]` p. 5). If `P_a`, `P_b` realise `f(a)`, `f(b)`, translate `P_b` so that the two are more than 1 apart: the
+union has `a + b` points and independence number `f(a) + f(b)`, so `f(a + b) ≤ f(a) + f(b)`. Fekete's lemma gives
+`lim f(n)/n = inf_n f(n)/n = α₁(ℝ²) = m₁(ℝ²)`.
+
+### The K control (prediction P-K), and what each step reads of the field
+
+Run the chain at `K₀ = ℚ(√3,√11)`, `E₀ = K₀(i)`, with its unit group `U₀`. Stage 4 runs word for word (a countable abelian
+group, an abelian rotation group): an invariant law of density `α₁(K₀²)`, which is `1/4` (Theorem B's four-colouring gives
+`≥ 1/4`; the Moser-lattice graphs of `[MatolcsiEtAl2025]` give `≤ 1/4`; G60). F3–F5 run word for word: Lemma 4.1's proof reads
+of the group only that it is a countable dense subgroup of `ℝ²`, and F7 that `U₀` is dense in `S¹` (it contains the rational
+points). F8, F9, the density step and the density points do not see the field. **F6 is the only step that cannot be run**, and it
+must not: its conclusion there would be `1/4 ≤ m₁(ℝ²) ≤ 0.247` (only `α₁(K₀²) ≥ 1/4` is used for this). So at `K₀` the spectral
+measure of `b` is a `U₀`-invariant measure, null on the continuous characters, with `∫ ψ_1 dλ_b = −⟨p, T_1 p⟩ < 0` (for the law
+given by a class of the residue colouring it is carried by characters of finite order; for a general law of density `1/4` only
+the sign is shown). P-K is met: the field enters `C133-ALG` through Theorem 2.3 alone, as its `uses only:` line says.
+
+### What C133-ONE reads of the release
+
+| step | manuscript | the release's Lean, by name (`plans/EXT-OAI1-audit.md` stage 6; `BorelTransfer.lean`, `Representations.lean` listings read for names only) | read here as |
+|---|---|---|---|
+| F6 | **Theorem 2.3** (`thm:rigidity`, M/spectral.tex:64–70) | `PlaneFiveColor.Spectral.wild_fourier` (`Ergodicity.lean:334`) with `IsWild`, `D`, `C`, `E`, `K`, `eval` | **the statement itself** — at the normalised spectral measure of `b`, one Fourier coefficient. The import in progress declares H and T only; **this is a third outside theorem** |
+| F4 | Lemma 4.1 (`lem:palettes-continuous-factor`) | no single statement: the generic `space`, `isClosed_space`, `nonlinear_mem`, `projection_fixed_of_contraction`, `orbitExtension_*`; the spectral identification sits in the `PlaneSpectrum` modules (not located by name here) | its proof, read in full; a standard-space argument (spectral theorem, Bochner) |
+| F8 | the measurable sample (M/transfer.tex:212–227) | `exists_measurable_field` (`BorelTransfer.lean:301`, generic) | re-derived above |
+| F3, F5–F7, F9 for labels | Proposition 4.2 | `color_unit_correlation`, `projected_unit_correlation`, `fieldVector_unit_correlation`, `exists_label_field`, `sample_field` | **not consumable**: stated for `LabelModel.Space k` with its `measure k ω`, the orbit mean of one proper labelling. `C133-ALG` needs the same steps for an arbitrary invariant law on independent sets |
+| density points | Lemma 4.3 | not in the Lean | re-derived (`C133-DP`) |
+| — | Theorem 1.3 (the transfer) | `proper_to_borel_weak` | **not read**: the transfer theorem as a statement gives no density, so `C133-ONE` cannot be drawn from the outside theorem T that the import declares |
+
+A note for the planner, as a question and not a route: whether the release's label-model lemmas can be reused by realising an
+invariant law of density near `α₁(𝒜²)` as the orbit mean of **one** labelling (an independent set coloured 0 and its complement
+properly 7-coloured is a proper 8-labelling of `E`) turns on finding a single independent set of `E` whose density under the
+release's fixed invariant mean is near `α₁(𝒜²)`. That is not derived here; stage 4's law is a limit of Følner pieces, not an
+orbit mean.
+
+**Theorems this stage proved:** `C133-EASY`, `C133-PER`, `C133-DP` — TRUE, [hand], one mind each, all known; `C133-CHIF` — TRUE,
+[derived] (a checking re-derivation of FS103-B-CHIF); `C133-ALG` — TRUE, [hand] over `[OAIMath2026]` Theorem 2.3, one mind;
+`C133-ONE` (posed) — TRUE, [derived]; `C133-FN` — TRUE, [derived].
