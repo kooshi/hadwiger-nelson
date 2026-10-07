@@ -1,9 +1,9 @@
 const fs=require("fs");const html=fs.readFileSync(process.argv[2],"utf8");
 const core=html.split("/*CORE*/")[1].split("/*END*/")[0];
-eval(core+";globalThis.T={steps,neighbours,clashes,stripes23,encode,decode};");
+eval(core+";globalThis.T={steps,neighbours,clashes,stripes23,encode,decode,stepList};");
 let ok=true;const say=(n,c)=>{console.log((c?"ok   ":"FAIL ")+n);if(!c)ok=false;};
 for(const q of [3,7,11,19,23]) say("q="+q+": each cell clashes with q+1 = "+(q+1), T.steps(q).length===q+1 && T.neighbours(q).every(l=>l.length===q+1 && new Set(l).size===q+1));
-const nb=T.neighbours(23), s=T.stripes23();
+const nb=T.neighbours(23), s=T.stripes23(8);
 say("the stripes at 23 use 8 colours and have no clash", new Set(s).size===8 && T.clashes(s,nb).pairs===0 && s.every(c=>c>=0));
 // planted fault: one cell recoloured to a neighbour's colour must clash
 const f=Int8Array.from(s); f[0]=f[nb[0][0]]; say("a planted clash is counted", T.clashes(f,nb).pairs>=1);
@@ -12,4 +12,6 @@ say("the clash relation is symmetric", nb.every((l,i)=>l.every(j=>nb[j].includes
 // Latin colouring at q=3 solves level 1
 const n3=T.neighbours(3), c3=Int8Array.from({length:9},(_,i)=>((i%3)+Math.floor(i/3))%3); say("x+y mod 3 solves the 3×3 level", T.clashes(c3,n3).pairs===0);
 say("a code round-trips", T.encode(T.decode(T.encode(s),529,8))===T.encode(s) && T.decode("012",9,3)===null && T.decode("9".repeat(9),9,3)===null);
+const s6=T.stripes23(6); say("the stripes cut to six colours leave only empty cells and no clash", T.clashes(s6,nb).pairs===0 && s6.filter(c=>c<0).length>0 && Math.max(...s6)===5);
+say("the steps at 23, up to sign and order", JSON.stringify(T.stepList(23))==="[[0,1],[4,10],[8,11],[9,9]]");
 process.exit(ok?0:1);
