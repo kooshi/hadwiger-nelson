@@ -768,16 +768,21 @@ theorem isPreconnected_petalSea : IsPreconnected (petalSet 0 ∩ ball (0 : ℂ) 
   -- upper wedge and the left cap
   have hb : ∀ a b : ℝ, a ^ 2 + b ^ 2 < (1 / 4) ^ 2 → (⟨a, b⟩ : ℂ) ∈ ball (0 : ℂ) (1 / 4) := fun a b h =>
     mem_ball_zero_of_sq_lt (by norm_num) h
-  have h1 := hW₁.union (⟨13 / 100, 14 / 100⟩ : ℂ)
+  have p1W : (⟨13 / 100, 14 / 100⟩ : ℂ) ∈ {z : ℂ | |z.re| < 1 * z.im} ∩ ball (0 : ℂ) (1 / 4) :=
     ⟨by show |(13 / 100 : ℝ)| < 1 * (14 / 100); rw [abs_of_pos] <;> norm_num, hb _ _ (by norm_num)⟩
-    ⟨by show (1 / 8 : ℝ) < 1 * (13 / 100); norm_num, hb _ _ (by norm_num)⟩ hC₁
-  have h2 := h1.union (⟨13 / 100, -(14 / 100)⟩ : ℂ)
-    (Or.inr ⟨by show (1 / 8 : ℝ) < 1 * (13 / 100); norm_num, hb _ _ (by norm_num)⟩)
-    ⟨by show |(13 / 100 : ℝ)| < -1 * -(14 / 100); rw [abs_of_pos] <;> norm_num, hb _ _ (by norm_num)⟩ hW₂
-  have h3 := h2.union (⟨-(13 / 100), 14 / 100⟩ : ℂ)
-    (Or.inl (Or.inl ⟨by show |(-(13 / 100) : ℝ)| < 1 * (14 / 100); rw [abs_of_neg] <;> norm_num,
-      hb _ _ (by norm_num)⟩))
-    ⟨by show (1 / 8 : ℝ) < -1 * -(13 / 100); norm_num, hb _ _ (by norm_num)⟩ hC₂
+  have p1C : (⟨13 / 100, 14 / 100⟩ : ℂ) ∈ {z : ℂ | 1 / 8 < 1 * z.re} ∩ ball (0 : ℂ) (1 / 4) :=
+    ⟨by show (1 / 8 : ℝ) < 1 * (13 / 100); norm_num, hb _ _ (by norm_num)⟩
+  have p2C : (⟨13 / 100, -(14 / 100)⟩ : ℂ) ∈ {z : ℂ | 1 / 8 < 1 * z.re} ∩ ball (0 : ℂ) (1 / 4) :=
+    ⟨by show (1 / 8 : ℝ) < 1 * (13 / 100); norm_num, hb _ _ (by norm_num)⟩
+  have p2W : (⟨13 / 100, -(14 / 100)⟩ : ℂ) ∈ {z : ℂ | |z.re| < -1 * z.im} ∩ ball (0 : ℂ) (1 / 4) :=
+    ⟨by show |(13 / 100 : ℝ)| < -1 * -(14 / 100); rw [abs_of_pos] <;> norm_num, hb _ _ (by norm_num)⟩
+  have p3W : (⟨-(13 / 100), 14 / 100⟩ : ℂ) ∈ {z : ℂ | |z.re| < 1 * z.im} ∩ ball (0 : ℂ) (1 / 4) :=
+    ⟨by show |(-(13 / 100) : ℝ)| < 1 * (14 / 100); rw [abs_of_neg] <;> norm_num, hb _ _ (by norm_num)⟩
+  have p3C : (⟨-(13 / 100), 14 / 100⟩ : ℂ) ∈ {z : ℂ | 1 / 8 < -1 * z.re} ∩ ball (0 : ℂ) (1 / 4) :=
+    ⟨by show (1 / 8 : ℝ) < -1 * -(13 / 100); norm_num, hb _ _ (by norm_num)⟩
+  have h1 := IsPreconnected.union _ p1W p1C hW₁ hC₁
+  have h2 := IsPreconnected.union _ (mem_union_right _ p2C) p2W h1 hW₂
+  have h3 := IsPreconnected.union _ (mem_union_left _ (mem_union_left _ p3W)) p3C h2 hC₂
   have heq : petalSet 0 ∩ ball (0 : ℂ) (1 / 4) =
       {z : ℂ | |z.re| < 1 * z.im} ∩ ball (0 : ℂ) (1 / 4) ∪ {z : ℂ | 1 / 8 < 1 * z.re} ∩ ball (0 : ℂ) (1 / 4) ∪
         {z : ℂ | |z.re| < -1 * z.im} ∩ ball (0 : ℂ) (1 / 4) ∪ {z : ℂ | 1 / 8 < -1 * z.re} ∩ ball (0 : ℂ) (1 / 4) := by
@@ -791,9 +796,8 @@ theorem isPreconnected_petalSea : IsPreconnected (petalSet 0 ∩ ball (0 : ℂ) 
 theorem zero_mem_closure_petalSet (i : Fin 3) : (0 : ℂ) ∈ closure (petalSet i) := by
   rcases fin_three_cases i with rfl | rfl | rfl
   · refine mem_closure_of_forall_add_ofReal_mul_mem (d := I) one_pos fun s hs _ => mem_petalSet_zero.mpr (Or.inl ?_)
-    simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
-      Complex.zero_re, Complex.zero_im, Complex.I_re, Complex.I_im, mul_zero, mul_one, sub_self, zero_add, add_zero,
-      zero_mul, abs_zero]
+    simp only [Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im,
+      mul_zero, mul_one, sub_self, zero_add, add_zero, abs_zero]
     exact abs_pos.mpr hs.ne'
   · refine mem_closure_of_forall_add_ofReal_mul_mem (d := 1) (r := 1 / 8) (by norm_num) fun s hs hs' =>
       mem_petalSet_one.mpr ?_
@@ -890,7 +894,7 @@ theorem petalPoint_edge : petalPoint.edge 1 2 = {0} := by
 theorem petalPoint_not_isFull : ¬ petalPoint.IsFull := by
   intro h
   have h12 := h 1 2 (by decide)
-  rw [petalPoint_edge, diff_self, closure_empty] at h12
+  rw [petalPoint_edge, Set.sdiff_self, closure_empty] at h12
   exact h12
 
 /-! ## Spec examples -/
@@ -938,7 +942,7 @@ example : CrossingAt (sectorPoint.piece 2) (-I) := by
 example : ¬ HasUnitArcFrom ({1} : Set ℂ) 0 1 := by
   intro h
   have h1 := h.mem_closure_diff one_ne_zero
-  rw [diff_self, closure_empty] at h1
+  rw [Set.sdiff_self, closure_empty] at h1
   exact h1
 
 /-- The unit circle about `0` holds an arc from `1`. -/

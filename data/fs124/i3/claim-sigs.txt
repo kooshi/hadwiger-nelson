@@ -1,0 +1,116 @@
+@closePair_forced_pieces : ∀ {U : Set ℂ} {c : ℂ → Fin 6},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : ClosePair U c x y),
+        w ∈ U →
+          IsCommonUnitPoint x y w →
+            (∃ i j, InnerAt (C.left.piece i) w ∧ OuterAt (C.left.piece j) w ∧ C.left.edge i j ⊆ Metric.sphere w 1) ∨
+              ∃ i j, InnerAt (C.right.piece i) w ∧ OuterAt (C.right.piece j) w ∧ C.right.edge i j ⊆ Metric.sphere w 1
+@closePair_lone : ∀ {U : Set ℂ} {c : ℂ → Fin 6},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : ClosePair U c x y),
+        w ∈ U →
+          IsCommonUnitPoint x y w →
+            ¬C.right.SeparatesAt w →
+              ∃ σ,
+                C.left.OneOfEach w σ ∧
+                  (∃ τ,
+                      ∃ η > 0,
+                        (∀ᵐ (z : ℂ), z ∈ Metric.ball w η → z ∈ τ.region y → dist z x < 1 → c z = C.left.label (σ 0)) ∧
+                          ∀ᵐ (z : ℂ), z ∈ Metric.ball w η → z ∈ τ.region y → 1 < dist z x → c z = C.left.label (σ 1)) ∧
+                    ∃ w' ∈ Metric.sphere x 1,
+                      w' ≠ w ∧
+                        ∃ η' > 0,
+                          C.left.piece (σ 0) ∩ Metric.ball x η' ⊆ Metric.closedBall w 1 ∩ Metric.closedBall w' 1 ∧
+                            Disjoint (C.left.piece (σ 1) ∩ Metric.ball x η') (Metric.ball w 1 ∪ Metric.ball w' 1) ∧
+                              closure (C.left.piece (σ 0)) ∩ closure (C.left.piece (σ 1)) ∩ Metric.ball x η' = {x}
+@closePair_both_separate : ∀ {U : Set ℂ} {c : ℂ → Fin 6},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : ClosePair U c x y),
+        w ∈ U → IsCommonUnitPoint x y w → C.left.IsFull → C.right.IsFull → C.left.SeparatesAt w ∧ C.right.SeparatesAt w
+@closePair_both_saved : ∀ {U : Set ℂ} {c : ℂ → Fin 6},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : ClosePair U c x y),
+        w ∈ U → IsCommonUnitPoint x y w → C.left.HasArcEdges → C.right.HasArcEdges → C.left.Saves w ∧ C.right.Saves w
+@closePair_four : ∀ {U : Set ℂ} {c : ℂ → Fin 6},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {x y w : ℂ} (C : ClosePair U c x y),
+        w ∈ U →
+          IsCommonUnitPoint x y w →
+            C.left.IsFull →
+              C.right.IsFull →
+                ∀ {σ τ : Equiv.Perm (Fin 3)},
+                  C.left.OneOfEach w σ →
+                    C.right.OneOfEach w τ →
+                      presentAt U c w =
+                          {C.left.label (σ 0), C.left.label (σ 1), C.right.label (τ 0), C.right.label (τ 1)} ∧
+                        (presentAt U c w).ncard = 4
+structure HadwigerNelson.Plane.ClosePair.{u_1} {α : Type u_1} (U : Set ℂ) (c : ℂ → α) (x y : ℂ) : Type u_1
+number of parameters: 5
+fields:
+  HadwigerNelson.Plane.ClosePair.left : ThreePiece U c x
+  HadwigerNelson.Plane.ClosePair.right : ThreePiece U c y
+  HadwigerNelson.Plane.ClosePair.ne : x ≠ y
+  HadwigerNelson.Plane.ClosePair.dist_lt : dist x y < 2
+  HadwigerNelson.Plane.ClosePair.label_ne : ∀ (i j : Fin 3), self.left.label i ≠ self.right.label j
+constructor:
+  HadwigerNelson.Plane.ClosePair.mk.{u_1} {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x y : ℂ} (left : ThreePiece U c x)
+    (right : ThreePiece U c y) (ne : x ≠ y) (dist_lt : dist x y < 2)
+    (label_ne : ∀ (i j : Fin 3), left.label i ≠ right.label j) : ClosePair U c x y
+structure HadwigerNelson.Plane.ThreePiece.{u_1} {α : Type u_1} (U : Set ℂ) (c : ℂ → α) (x : ℂ) : Type u_1
+number of parameters: 4
+fields:
+  HadwigerNelson.Plane.ThreePiece.nbhd : Set ℂ
+  HadwigerNelson.Plane.ThreePiece.piece : Fin 3 → Set ℂ
+  HadwigerNelson.Plane.ThreePiece.label : Fin 3 → α
+  HadwigerNelson.Plane.ThreePiece.nbhd_mem : self.nbhd ∈ nhds x
+  HadwigerNelson.Plane.ThreePiece.nbhd_subset : self.nbhd ⊆ U
+  HadwigerNelson.Plane.ThreePiece.piece_subset : ∀ (i : Fin 3), self.piece i ⊆ self.nbhd
+  HadwigerNelson.Plane.ThreePiece.isOpen_piece : ∀ (i : Fin 3), IsOpen (self.piece i)
+  HadwigerNelson.Plane.ThreePiece.isPreconnected_piece : ∀ (i : Fin 3), IsPreconnected (self.piece i)
+  HadwigerNelson.Plane.ThreePiece.mem_closure_piece : ∀ (i : Fin 3), x ∈ closure (self.piece i)
+  HadwigerNelson.Plane.ThreePiece.ae_label : ∀ (i : Fin 3), ∀ᵐ (z : ℂ), z ∈ self.piece i → c z = self.label i
+  HadwigerNelson.Plane.ThreePiece.label_injective : Function.Injective self.label
+  HadwigerNelson.Plane.ThreePiece.null_diff : MeasureTheory.volume (self.nbhd \ ⋃ i, self.piece i) = 0
+constructor:
+  HadwigerNelson.Plane.ThreePiece.mk.{u_1} {α : Type u_1} {U : Set ℂ} {c : ℂ → α} {x : ℂ} (nbhd : Set ℂ)
+    (piece : Fin 3 → Set ℂ) (label : Fin 3 → α) (nbhd_mem : nbhd ∈ nhds x) (nbhd_subset : nbhd ⊆ U)
+    (piece_subset : ∀ (i : Fin 3), piece i ⊆ nbhd) (isOpen_piece : ∀ (i : Fin 3), IsOpen (piece i))
+    (isPreconnected_piece : ∀ (i : Fin 3), IsPreconnected (piece i))
+    (mem_closure_piece : ∀ (i : Fin 3), x ∈ closure (piece i))
+    (ae_label : ∀ (i : Fin 3), ∀ᵐ (z : ℂ), z ∈ piece i → c z = label i) (label_injective : Function.Injective label)
+    (null_diff : MeasureTheory.volume (nbhd \ ⋃ i, piece i) = 0) : ThreePiece U c x
+def HadwigerNelson.Plane.IsCommonUnitPoint : ℂ → ℂ → ℂ → Prop :=
+fun x y w => dist w x = 1 ∧ dist w y = 1
+def HadwigerNelson.Plane.ThreePiece.SeparatesAt.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → ThreePiece U c x → ℂ → Prop :=
+fun {α} {U} {c} {x} D w => ∃ i j, InnerAt (D.piece i) w ∧ OuterAt (D.piece j) w
+def HadwigerNelson.Plane.ThreePiece.OneOfEach.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → ThreePiece U c x → ℂ → Equiv.Perm (Fin 3) → Prop :=
+fun {α} {U} {c} {x} D w σ => InnerAt (D.piece (σ 0)) w ∧ OuterAt (D.piece (σ 1)) w ∧ CrossingAt (D.piece (σ 2)) w
+def HadwigerNelson.Plane.ThreePiece.IsFull.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → ThreePiece U c x → Prop :=
+fun {α} {U} {c} {x} D => ∀ (i j : Fin 3), i ≠ j → x ∈ closure (D.edge i j \ {x})
+def HadwigerNelson.Plane.ThreePiece.HasArcEdges.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → ThreePiece U c x → Prop :=
+fun {α} {U} {c} {x} D => ∀ (i j : Fin 3), i ≠ j → ∃ γ, Function.Injective ⇑γ ∧ γ 0 = x ∧ Set.range ⇑γ ⊆ D.edge i j
+def HadwigerNelson.Plane.ThreePiece.Saves.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → ThreePiece U c x → ℂ → Prop :=
+fun {α} {U} {c} {x} D w => ∃ i j, i ≠ j ∧ HasUnitArcFrom (D.edge i j) w x
+def HadwigerNelson.Plane.HasUnitArcFrom : Set ℂ → ℂ → ℂ → Prop :=
+fun E w x => ∃ s, (s = 1 ∨ s = -1) ∧ ∃ δ > 0, ∀ t ∈ Set.Icc 0 δ, w + (x - w) * e (s * t) ∈ E
+def HadwigerNelson.Plane.ThreePiece.edge.{u_1} : {α : Type u_1} →
+  {U : Set ℂ} → {c : ℂ → α} → {x : ℂ} → ThreePiece U c x → Fin 3 → Fin 3 → Set ℂ :=
+fun {α} {U} {c} {x} D i j => closure (D.piece i) ∩ closure (D.piece j) ∩ D.nbhd
+def HadwigerNelson.Plane.presentAt.{u_1} : {α : Type u_1} → Set ℂ → (ℂ → α) → ℂ → Set α :=
+fun {α} U c w => {i | w ∈ essSupport (U ∩ c ⁻¹' {i})}
+def HadwigerNelson.Plane.InnerAt : Set ℂ → ℂ → Prop :=
+fun P w => P ⊆ Metric.closedBall w 1
+def HadwigerNelson.Plane.OuterAt : Set ℂ → ℂ → Prop :=
+fun P w => Disjoint P (Metric.ball w 1)
+def HadwigerNelson.Plane.CrossingAt : Set ℂ → ℂ → Prop :=
+fun P w => ¬InnerAt P w ∧ ¬OuterAt P w

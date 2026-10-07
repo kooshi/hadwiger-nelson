@@ -1,0 +1,42 @@
+compared: 111 named constants of the first dump (types; values of definitions), 9 example heads
+definitions compared by their three data fields in place of their value: 2
+internal (not compared): 15 before, 50 after
+new named constants in the second dump: 35
+  NEW THM HadwigerNelson.Plane.ThreePiece.HasArcEdges.saves_of_separatesAt
+  NEW THM HadwigerNelson.Plane.combo_lt
+  NEW THM HadwigerNelson.Plane.convex_petalSet_one
+  NEW THM HadwigerNelson.Plane.convex_petalSet_two
+  NEW THM HadwigerNelson.Plane.convex_sectorSet
+  NEW THM HadwigerNelson.Plane.convex_setOf_abs_re_lt_mul_im
+  NEW THM HadwigerNelson.Plane.convex_setOf_lt_mul_re
+  NEW THM HadwigerNelson.Plane.exists_arc_of_ray_subset
+  NEW THM HadwigerNelson.Plane.exists_perm_fin_three
+  NEW THM HadwigerNelson.Plane.fin_three_cases
+  NEW THM HadwigerNelson.Plane.isOpen_petalSet
+  NEW THM HadwigerNelson.Plane.isOpen_sectorSet
+  NEW THM HadwigerNelson.Plane.isPreconnected_petalSea
+  NEW THM HadwigerNelson.Plane.mem_ball_zero_of_abs_re_add_abs_im_lt
+  NEW THM HadwigerNelson.Plane.mem_ball_zero_of_sq_lt
+  NEW THM HadwigerNelson.Plane.mem_closure_inter_ball
+  NEW THM HadwigerNelson.Plane.mem_closure_of_forall_add_ofReal_mul_mem
+  NEW THM HadwigerNelson.Plane.mem_closure_sectorSet_one
+  NEW THM HadwigerNelson.Plane.mem_closure_sectorSet_two
+  NEW THM HadwigerNelson.Plane.mem_closure_sectorSet_zero
+  NEW THM HadwigerNelson.Plane.mem_petalSet_one
+  NEW THM HadwigerNelson.Plane.mem_petalSet_two
+  NEW THM HadwigerNelson.Plane.mem_petalSet_zero
+  NEW THM HadwigerNelson.Plane.mem_sectorPoint_edge
+  NEW THM HadwigerNelson.Plane.mem_sectorSet_one
+  NEW THM HadwigerNelson.Plane.mem_sectorSet_two
+  NEW THM HadwigerNelson.Plane.mem_sectorSet_zero
+  NEW THM HadwigerNelson.Plane.ofReal_mul_mem_ball_quarter
+  NEW THM HadwigerNelson.Plane.petalCol_of_mem
+  NEW THM HadwigerNelson.Plane.sectorCol_of_mem
+  NEW THM HadwigerNelson.Plane.volume_ball_diff_iUnion_petalSet
+  NEW THM HadwigerNelson.Plane.volume_ball_diff_iUnion_sectorSet
+  NEW THM HadwigerNelson.Plane.volume_setOf_re_im_eq
+  NEW THM HadwigerNelson.Plane.zero_mem_closure_petalSet
+  NEW THM HadwigerNelson.Plane.zero_mem_closure_sectorSet
+examples in the working files that the base does not hold: 1
+  NEW EXAMPLE Proofs/HadwigerNelson/Plane/ThreePiece.lean: example : IsWeakColouringOn (ball (0 : ℂ) (1 / 4)) sectorCol ∧ IsWeakColouringOn (ball (0 : ℂ) (1 / 4)) petalCol
+PASS: no statement and no definition changed

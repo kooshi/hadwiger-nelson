@@ -52,6 +52,9 @@ def read_dump(path):
 def example_heads(text):
     """every `example` head: from the keyword at the start of a line to the first ` :=` (the statement, as text)"""
     heads = []
+    # block comments and docstrings are not declarations: a docstring line that begins with the word `example` is not
+    # an example (the first implementer's copy of this reader counted one; found by FS124-I3 on its own added docstring)
+    text = re.sub(r"/-.*?-/", lambda m: re.sub(r"[^\n]", " ", m.group(0)), text, flags=re.S)
     for m in re.finditer(r"^example\b", text, flags=re.M):
         j = text.index(":=", m.start())
         heads.append(re.sub(r"\s+", " ", text[m.start():j]).strip())

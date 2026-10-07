@@ -1,0 +1,7 @@
+control fired: FS124I3.control_cites prints sorryAx
+control fired: FS124I3.control_planted prints sorryAx
+control fired: HadwigerNelson.Plane.closePair_both_saved_of_isSector prints sorryAx
+control fired: HadwigerNelson.Plane.exists_closePair_full prints sorryAx
+asked: 95 (91 records, 4 controls); printed: 95
+records on a subset of the standard three: 91 with axioms, 0 axiom-free; controls fired: 4 of 4
+PASS
