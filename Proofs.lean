@@ -291,6 +291,7 @@ import Proofs.HadwigerNelson.Plane.ThreePiece
 import Proofs.HadwigerNelson.Plane.ClosePair
 import Proofs.HadwigerNelson.Plane.ClosePairModel
 import Proofs.HadwigerNelson.Plane.SectorPoint
+import Proofs.HadwigerNelson.Plane.ThreeArcs
 
 /-!
 # Proofs
