@@ -6,7 +6,10 @@
 # axiom audit; the audit and its self-test; the vacuity scan and its self-test; the assumptions step and its self-test; the
 # architecture check; the guarded lint; the notes check; the records check against main's gated list, with its eight plants; this
 # job's receipt over the line's seven blocks and twelve modules, with its fault; the kernel's statements of every theorem of the
-# twelve modules against their files; the sorry scans; the three digests against main's gated receipts (FS131-LT5's, landed2).
+# twelve modules against their files (this job's wrapper of the last landing's reader, its self-test and its plants); the registration
+# and the vacuity scan against main's, row for row, each with its plants; the sibling implementer's axioms tool; the census; the
+# docstring corrections by text against the merge of main (1171c25b) and by the elaborated dump against the one taken before any
+# edit; the sorry scans; the three digests against main's gated receipts (FS131-LT5's, landed2).
 # Usage (from anywhere): data/fs131/l8a/run-gate.sh <tag>
 cd "$(dirname "$0")/../../.."
 tag="$1"; d=data/fs131/l8a/gate; S=/home/kooshi/source/lean-dir/scripts/slot.py
@@ -47,7 +50,20 @@ HEADS="$(grep -v '^#' data/fs131/l8a/heads.txt | grep . | paste -sd, -)"
   "$S" --mem 16 --cpus 4 --wait 7200 -- python3 tools/fs131_l8a_axioms.py --out "$d/l8a-axioms-$tag.raw" > "$d/l8a-axioms-$tag.txt" 2> "$d/l8a-axioms-$tag.err"; echo "l8a-axioms exit=$?"
   "$S" --mem 16 --cpus 4 --wait 7200 -- python3 tools/fs131_l8a_axioms.py --fault > "$d/l8a-axioms-fault-$tag.txt" 2> "$d/l8a-axioms-fault-$tag.err"; echo "l8a-axioms-fault exit=$? (1 expected)"
   "$S" --mem 16 --cpus 4 --wait 7200 -- lake env lean data/fs131/l8a/kernel-sigs.lean > "$d/kernel-sigs-$tag.out" 2> "$d/kernel-sigs-$tag.err"; echo "kernel-sigs exit=$?"
-  plain kernel-sigs-read python3 tools/fs131_l10b_kernelsig.py read "$d/kernel-sigs-$tag.out" --reviewed data/fs131/l8a/kernelsig-reviewed.txt --heads data/fs131/l8a/heads.txt --table "$d/kernel-sigs-table-$tag.txt"
+  python3 data/fs131/l8a/mk-reviewed.py "$d/kernel-sigs-$tag.out" > "$d/kernelsig-reviewed-$tag.txt" 2> "$d/kernelsig-reviewed-$tag.err"; echo "mk-reviewed exit=$? ($(cat "$d/kernelsig-reviewed-$tag.err"))"
+  cmp -s "$d/kernelsig-reviewed-$tag.txt" data/fs131/l8a/kernelsig-reviewed.txt; echo "the reviewed list regenerated on this commit against the committed one (cmp): exit=$?"
+  plain kernel-sigs-read python3 tools/fs131_l8a_kernelsig.py read "$d/kernel-sigs-$tag.out" --reviewed data/fs131/l8a/kernelsig-reviewed.txt --heads data/fs131/l8a/heads.txt --table "$d/kernel-sigs-table-$tag.txt"
+  plain kernel-sigs-selftest python3 tools/fs131_l8a_kernelsig.py --self-test "$d/kernel-sigs-$tag.out" --reviewed data/fs131/l8a/kernelsig-reviewed.txt
+  plain kernel-sigs-plant python3 tools/fs131_l8a_kernelsig.py --plant "$d/kernel-sigs-$tag.out"
+  plain register python3 tools/fs131_l8a_register.py "$M/count-modules-landed2.out" "$d/count-modules-$tag.out"
+  plain register-selftest python3 tools/fs131_l8a_register.py "$M/count-modules-landed2.out" "$d/count-modules-$tag.out" --self-test
+  plain vacdiff python3 tools/fs131_l5_vacdiff.py "$M/receipt-vacuity-landed2.log" "$d/receipt-vacuity-$tag.log" "$M/count-modules-landed2.out" "$d/count-modules-$tag.out"
+  plain vacdiff-plant python3 tools/fs131_l5_vacdiff.py "$M/receipt-vacuity-landed2.log" "$d/receipt-vacuity-$tag.log" "$M/count-modules-landed2.out" "$d/count-modules-$tag.out" --plant
+  "$S" --mem 16 --cpus 4 --wait 7200 -- python3 tools/fs131_i8d_axioms.py > "$d/i8d-axioms-$tag.txt" 2>&1; echo "i8d-axioms exit=$?"
+  "$S" --mem 16 --cpus 4 --wait 7200 -- lake env lean data/fs131/l8a/census.lean > "$d/census-$tag.out" 2> "$d/census-$tag.err"; echo "census exit=$?"
+  plain docstring-text python3 tools/fs131_lt5_docstring_check.py text 1171c25b
+  "$S" --mem 8 --cpus 4 --wait 7200 -- python3 tools/fs131_lt5_docstring_check.py dump "$d/sigs-$tag.txt" $(cat data/fs131/l8a/dump-modules.txt) > "$d/sigs-dump-$tag.log" 2>&1; echo "sigs-dump exit=$?"
+  plain docstring-elaborated python3 tools/fs131_lt5_docstring_check.py compare data/fs131/l8a/sigs-before.txt "$d/sigs-$tag.txt"
   grep -rnP '^\s*sorry\s*$|:= sorry|by sorry' --include='*.lean' Proofs/ Proofs.lean > "$d/sorry-narrow-$tag.txt"; echo "sorry (narrow) lines=$(wc -l < "$d/sorry-narrow-$tag.txt")"
   grep -rnP '\bsorry\b' --include='*.lean' Proofs/ Proofs.lean > "$d/sorry-wide-$tag.txt"; echo "sorry (wide) lines=$(wc -l < "$d/sorry-wide-$tag.txt")"
   plain digest-axioms python3 scripts/gate_report.py axioms "$d/receipt-axioms-$tag.log" "$M/receipt-axioms-landed2.log" CLAUDE.md

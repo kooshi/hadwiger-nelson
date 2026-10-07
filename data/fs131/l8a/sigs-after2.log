@@ -1,0 +1,14 @@
+slot: admitted python3: mem 8 GiB (hard cap), cpus 2,3,4,5
+    Proofs.HadwigerNelson.Plane.RingCalculus.Basic: 69 constants
+    Proofs.HadwigerNelson.Plane.RingCalculus.Star: 26 constants
+    Proofs.HadwigerNelson.Plane.RingCalculus.Empty: 31 constants
+    Proofs.HadwigerNelson.Plane.RingCalculus.HubCount: 65 constants
+    Proofs.HadwigerNelson.Plane.RingCalculus.TilesAt: 7 constants
+    Proofs.HadwigerNelson.Plane.RingCalculus.SoleTip: 8 constants
+    Proofs.HadwigerNelson.Plane.RingCalculus.RingColour: 17 constants
+    Proofs.HadwigerNelson.Plane.RingCalculus.StarChart: 35 constants
+    Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub: 88 constants
+    Proofs.HadwigerNelson.Plane.RingCalculus.SemiHubPlaces: 37 constants
+    Proofs.HadwigerNelson.Plane.RingCalculus.OuterAdj: 6 constants
+    Proofs.HadwigerNelson.Plane.SimpleOn: 9 constants
+dump: 398 constants of 12 modules written to data/fs131/l8a/sigs-after2.txt
