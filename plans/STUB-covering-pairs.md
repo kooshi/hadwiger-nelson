@@ -206,6 +206,17 @@ whose forced closure fills a neighbourhood of every point of the closed disc of 
 empty and none free? Such a closure is a six-coloured fragment given by formula from its seed alone. Held: none; on the held
 objects the closure has been read one step only, from pairs (`data/fs136/p1/germs_read.out`).
 
+*Correction, dated 2026-10-07 (filed by FS-136's record job, FS136-Z1; sources: `plans/FS136-E2-derivation.md` Stage 1,
+finding 1, and its entries C136-CLOSE and C136-COLLAR; FS-136 inventory items 10 and 12; the paragraph above is left
+standing, and re-wording it is the asking lane's). "Such a closure is a six-coloured fragment given by formula from its
+seed alone" does not hold as worded. What a seed forces is, in C136-CLOSE's deriver's words, "a countable family of
+corners at isolated points — each had at some radius, none of a size any statement bounds — unless a point carrying at
+least `k − 1` labels forces along an arc"; so this form "cannot be met by the closure of a finite seed unless some member
+carries at least `k − 1` labels and forces along a whole arc of its unit circle". That exception is inhabited at six on
+one held object: the bowtie fragment's two five-label points force their missing labels on one-sided collars of four arcs
+of 60° (C136-COLLAR — a definite length, no definite width). What collars force is not computed: stub FS-137,
+`plans/STUB-collars.md`.*
+
 ### Structural form
 
 In **every** weak `k`-colouring of an open set and for **every** finite family of pieces in it: at each point `w` of the set,
@@ -234,6 +245,17 @@ on that line: forced steps are exact arithmetic (a derivation); a branch is a se
 | the closure stalls | the list of free cells is the whole design space near the seed — the Searcher's family, in place of wedges | where it stalls with two labels in a cell, the transfer of rows 155 and 159 has its hypotheses supplied by pieces |
 | a closure closes round a ring | a fragment by formula past print; with growth at every radius, six | G83's killing test fires for that seed |
 | on R7 at seven the closure reproduces R7 near the seed | — | tightness at seven is rigid from two points: the control every six-coloured closure is compared with |
+
+*Correction, dated 2026-10-07 (filed by FS-136's record job, FS136-Z1; drafted by the second deriver,
+`plans/FS136-E2-derivation.md` § 7.5 item 3; source: its entries C136-CLOSE-R7 and C136-CLOSE; the table above is left
+standing). **Its last row falls**: "on R7 at seven the closure reproduces R7 near the seed … tightness at seven is rigid
+from two points" is to read "on R7 the closure of two adjacent lattice points is fifteen corners and stalls; the pair's
+table is exact at every corner and no corner is emptied" (C136-CLOSE-R7: computed exactly, one mind). **Its fourth row is
+about corners, not regions**: a closure that closes up is, in C136-CLOSE's *not claimed* line, "a set of vertex figures,
+not a coloured fragment", so "a fragment by formula past print" cannot come from the closure of a seed of points with
+three or four labels. The other rows stand as answered: the forward statement holds (C136-FORCED); no seed tried reached
+an empty corner beyond its pair's own common unit points; every closure stalled, and the free corners are the search
+lane's (queue lines 17–20).*
 
 ### The first claims a deriver takes
 
@@ -277,6 +299,15 @@ this lane's reader over the deriver's loaders) unless said.*
   FS116-N3-SEMI, FS116-N2-STAR and -N2-RECIP at a four-colour vertex's change points; N-E2 ("Siamese … or outer") is the table
   read from both ends of one unit segment. In measure: not found. *Side*: an empty cell beyond the pair's own points — toward
   seven for that seed; a closed ring — toward six; a stall — the free cells, to the Searcher.
+
+  *Correction, dated 2026-10-07 (filed by FS-136's record job, FS136-Z1; drafted by the second deriver,
+  `plans/FS136-E2-derivation.md` § 7.5 item 2; sources: its Stage 0.2 item 1 and its entry C136-CLOSE-STRIP; the bullet
+  above is left standing). Seed (c), "the six tiles of a covering pair at one of its 34 three-label coloured points",
+  names no object of the strip: those 34 points are the common unit points of pairs of four-label members (eight tiles).
+  It is to read "(c1) the eight corners of two four-label points half a unit apart, whose common unit points are two of
+  the 34 three-label coloured points; (c2) the six corners of a pair of three-label points". Both were run
+  (C136-CLOSE-STRIP): (c1) forces ten corners at six points and stalls; (c2) forces nothing in the strip. Throughout this
+  bullet a "germ" and a "cell" are, as derived, labelled corners (C136-CORNERS: a cell is one corner, or two).*
 - **C-STOP-GERMS (reads regions somebody keeps — as germs; short; it corrects the first round's closing sentence).** *Each
   of C136-STOP-DISK, C136-STOP-STRIP and C136-STOP-BOWTIE holds with "the parts of the named tiles within `r` of the two
   members" in place of the tiles, for every `0 < r ≤ r₀`, with a ball about the point across of radius at least `c·r` on the
@@ -411,3 +442,36 @@ C136-ONE and the five C136-STOP entries (`plans/FS136-E1-derivation.md`), FS112-
 FS112-C-PARTNERS, FS114-Y-PAIRSHARE, -Y-PENT, -Y3-RSTOP, FS116-Y2-SIXOFF, -N2-SIXRING, -N2-STAR, -N2-RECIP, -N3-SEMI,
 -RING-TRANSFER-QC. Stubs FS-127 and FS-128 (a first piece), FS-135 (its question 3 holds the nearest sentence to a forced
 region), FS-117 (the count).
+
+*What this milestone delivered (FS136-Z1, its record job, 2026-10-07; every entry named is in `plans/FS136-derivation.md` —
+twenty-one entries, each derived: [hand], derived from [hand] entries, or computed exactly over named corners; **one mind
+each, kernel pending**). **Every statement is about weak colourings that already have named regions or corners; no weak
+six-colouring is known to have one. None excludes a colouring of a disc; none fixes or bears on the value of χ(ℝ²).***
+
+- **The table** (C136-TABLE, § 1): near a point with finitely many points one unit away, each with finitely many pieces,
+  almost every point has a label that is pure on its side at every one of them that carries it — any number of members,
+  pieces and labels. It was reached on one route by this milestone's first deriver and by the kernel planner of FS-124's
+  second module, and counts as one mind. **The count** for two families carrying all the labels (C136-COVER) and for one
+  (C136-ONE), each on labels: the conclusions as posed were met by one region cut in two along the circle.
+- **The four held stops** (§ 4): the strip's, the disk's and the bowtie fragment's are excluded for every weak
+  six-colouring that keeps the parts of the named tiles within any `r > 0` of two vertices (C136-STOP-GERMS; first order
+  at all three, C136-STOP-GERMS-RADIUS); the flower's for the germs of six tiles (C136-STOP-FLOWER-GERMS; one label barred
+  at second order). The whole-tile forms are corollaries. A held stop is a fact about two vertex figures.
+- **The forward step and the closure** (§ 2): a corner on which the pieces one unit away leave one label has that label
+  (C136-FORCED); chained (C136-CLOSE), a seed forces labelled corners at isolated points, each of no definite size — "a
+  set of vertex figures, not a coloured fragment". **Computed on three objects** (§ 3), exactly, by forced steps only: the
+  tight seven-colouring's pair stalls after three corners, none emptied; the flower's pair after six; the strip's two
+  four-label points after ten; the strip's pair of three-label points forces nothing.
+- **The collar** (C136-COLLAR, § 2): a point whose corners carry all the labels but one forces the missing label on a
+  one-sided collar of every arc of its unit circle along which none of its own labels is pure on that side — a definite
+  length, no definite width; inhabited on the bowtie fragment's two five-label points. What collars force is not
+  computed: stub FS-137, `plans/STUB-collars.md`.
+- **The bound on partners** (C136-PARTNERS, § 5), over C124-BOTH's second clause.
+- **The two cards' branches.** First card: the third branch, "with its unit corrected — the table at the point across,
+  not the ring's type"; "always" not derived; no ring by formula. Second card: every closure stalled within two steps —
+  the card's own clause for sending the milestone to its record job; no empty corner from a pair beyond its own common
+  unit points on four seeds; and a closure cannot close into a fragment.
+- **What it did not deliver**: a piece or a corner in any weak six-colouring; an exclusion beyond one held family;
+  FS-124's eight cases one by one (they are open — the dated note in `plans/STUB-q-ring.md`); the structural form's second
+  half, a relation between the tables of one ring beyond the closure. The free corners of the four computed closures are
+  the search lane's (queue lines 17–20, with line 15).

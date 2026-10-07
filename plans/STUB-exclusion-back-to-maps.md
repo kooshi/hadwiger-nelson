@@ -129,3 +129,16 @@ it names and nothing else of the colouring; where it concludes an arc its hypoth
 vertex seen locally" (the asking lane, `plans/POROS-2026-10-07-fs124-round2.md` § 2.3). Not done, and a control in this stub's
 direction: each read back at a map vertex and matched to its map entry clause by clause. Open, from the second deriver: whether
 a three-tile vertex of an arc map with a cusp is a sector point.
+
+*Since FS-136 (FS136-Z1, the record job, 2026-10-07; every entry named is in `plans/FS136-derivation.md`, [hand], derived from [hand] entries or computed exactly over named corners, **one mind each, kernel pending**; each is about weak colourings that already have the named regions or corners, and none is known to):* **more map entries have a statement in
+measure beside them**, each naming its map entry in its `prior art:` line: FS110-N-SEAM (b) with N-E2 (two minds, one
+blind) — **C136-TABLE**; FS110-N-SEAM (a)–(b) with FS110-CALC's A-EXACT — **C136-COVER**, the count for members of any
+number of labels; FS116-N2-SIXRING — **C136-ONE**, on labels; FS112-C-PARTNERS — **C136-PARTNERS** ("nothing new but the
+class"); FS116-Y2-SIXOFF — **C136-STOP-FLOWER-GERMS**; FS112-STOP, FS112-DISK-RIM and FS114-Y-PENT — **C136-STOP-GERMS**
+(b); FS114-Y-STRIPK6 — **C136-STOP-GERMS** (a), at the strip's own colouring; FS114-Y3-RSTOP — **C136-STOP-GERMS** (c),
+the same corner as its "cone (−60°, 60°)"; FS116-N2-FIVERING — **C136-COLLAR** (the map entry read at its statement
+only); placing (G91) — **C136-FORCED** (the map entries named, not read). **In this stub's direction, back to maps, the
+derivers' own verdict is "for maps nothing"** new. One instrument does cross: **C136-CLASS** classes a corner by direction
+and then by signed curvature, where "the cone calculus of FS-116 reads directions only and says 'tangent' where this
+reads curvature" — a map vertex's corners can be classed by it exactly (`data/fs136/e2/closure.py`). Not done: any of
+these read back at a map vertex and matched to its map entry clause by clause.

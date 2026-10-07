@@ -13,7 +13,7 @@ CORPUS = ["plans/FS136-E1-derivation.md", "plans/FS136-E2-derivation.md", "data/
           "plans/FS136-the-point-across.md", "plans/FS124-derivation.md", "plans/FS124-E2-derivation.md", "data/fs136/reports/FS136-E1.md",
           "data/fs136/reports/FS136-E2.md", "data/fs136/reports/FS136-P1.md", "LEDGER.md", "CLAUDE.md", "plans/FS116-derivation.md",
           "plans/FRONTIER-STUBS.md", "data/fs136/briefs/FS136-Z1-record.md", ".claude/skills/grokkings/SKILL.md", "plans/SEARCH-QUEUE.md",
-          "plans/GROKKING-INSTANCES.md", "plans/STUB-lateral-extent.md", "plans/STUB-seed-remainder.md", "plans/STUB-q-ring.md"]
+          "plans/GROKKING-INSTANCES.md", "plans/FS136-derivation.md", "plans/STUB-lateral-extent.md", "plans/STUB-seed-remainder.md", "plans/STUB-q-ring.md"]
 corpus = "\n".join((ROOT / p).read_text() for p in CORPUS if (ROOT / p).exists())
 corpus_flat = re.sub(r"\s+", " ", corpus).replace("*", "")          # emphasis marks are not part of a quotation
 target = pathlib.Path(sys.argv[1])

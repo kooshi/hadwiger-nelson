@@ -1,0 +1,9 @@
+card lint
+  FAIL  line 177 (how-far-does-a-seed-force): rank 1 already used at line 55
+  cards: 2  no-question exits: 0
+  the ask: About a point of four or more labels, must some two pieced points of its unit circle whose labels together are all six have a second common unit point, within 2, that no weak six-colouring can contain?  [line 55]
+hunch ledger
+  hunches: 0  open: 0  confirmed: 0  killed: 0
+evidence inventory
+  warn  no section headed 'evidence inventory' — what is in front of you is not listed, so nothing can be marked unread
+GATE: FAIL (1 failure, 1 warning)

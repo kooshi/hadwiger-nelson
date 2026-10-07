@@ -679,6 +679,20 @@ pending, unless marked):*
   section of 2026-10-07, "What to carry over from the map class first, and how").
 - Grokkings: G94, G95; proposed G96 (circle data against ball data) and G97 (every exclusion ended at the unit arc).
 
+*Since FS-136 (FS136-Z1, the record job, 2026-10-07; every entry named is in `plans/FS136-derivation.md`, [hand], derived from [hand] entries or computed exactly over named corners, **one mind each, kernel pending**; each is about weak colourings that already have the named regions or corners, and none is known to):* **the eight cases of "The question, in plain language" were not taken one by one by FS-136, and are
+open.** Its unit turned out to be a point with rich points on its own unit circle, with the ring of a centre an index:
+"'Four or more labels at `p`' is not read by anything at the point across" (its reading, [tools]). What it holds that
+touches a case: **case 4** — at a point whose pieces carry all six labels the unit circle separates inner-pure from
+outer-pure labels near each of its points (**C136-ONE**: FS116-N2-SIXRING's statement on labels, with no map and no
+non-Siamese clause); at a point whose corners carry five labels the sixth is forced on a one-sided collar of every arc
+along which none of the five is pure on that side (**C136-COLLAR**; beside FS116-N2-FIVERING, which its deriver read at
+its statement only); the flower's far vertex `(√3, 0)` is excluded for every weak six-colouring that keeps the germs of
+six of its tiles at two ring points (**C136-STOP-FLOWER-GERMS**: FS116-Y2-SIXOFF at the fragment's own pattern).
+**Case 2's object**, the disk about its corner, stops at a rim point that is excluded for every weak six-colouring that
+keeps the germs of six of its tiles at two three-label vertices (**C136-STOP-GERMS** (b)): the disk's own stop, in
+measure; it does not decide case 2. **Cases 1, 3 and 5–8**: nothing. Where the eight cases go after FS-136 is the asking
+lane's to say at its re-rank.
+
 ## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
 
 question: where-else-the-identity

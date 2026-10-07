@@ -533,6 +533,21 @@ and `L1`, `T1`, `V`, `t1` at `q₁`. The statement keeps all eight, which is the
 kept tiles is the sharper one and is what the record job should file if it files one (its `statement:` would name
 `L2, T2, V′, t1, T1, W`).
 
+*Added 2026-10-07 by FS-136's record job (FS136-Z1; sources: `plans/FS136-E2-derivation.md` Stage 6, under
+C136-STOP-GERMS, with its controls `stop-corners` and `stop-shadow`; FS-136 inventory item 14). The entry and the two
+notes above are left standing.* **Which corner the two vertex figures empty.** The cells this entry's witnesses empty —
+inside the unit circle about `q₂` and outside that about `q₁`, and the mirror — are emptied by whole tiles: in the second
+deriver's words, "true of whole tiles (`T2` and `T1` cross as tiles and are inner as corners); in corner form those two
+cells keep one label each (`2` and `4`) and the emptied corner is the third, outside both, which that entry's finite list
+of witnesses did not reach. Nothing in that entry is wrong; its statement stands." That third corner is "the cone
+(−60°, 60°)" of the held map entry FS114-Y3-RSTOP. **A defect of this record's checker, reported by the second deriver,
+no verdict moving**: `stop_check.py` "proves bars from a finite list of boundary points and misses the corner outside
+both circles at the bowtie fragment's stop" — it under-reads, so its line for that cell ("labels not shown barred: 6")
+is a bar not found, never a label left. **The six-tile form named above is entered** by the record job as
+C136-STOP-BOWTIE-SIX (`plans/FS136-derivation.md` § 4), at the grade and count of minds of the note above, with a control
+that reads this record's six witness lines (`data/fs136/z1/bowtie_six.py`). It and C136-STOP-GERMS (c) are both held and
+neither contains the other: six whole tiles; the germs of eight.
+
 ### Argument — a cell with every label barred
 
 Let `c` be a weak six-colouring of an open set containing `w` and the kept tiles, with their labels almost everywhere. Each
@@ -643,6 +658,15 @@ not re-grepped for the disk's rim.
    decimals and tests "an edge lies on the circle" at `10⁻⁹`. In my copy the same rounding produced 2,296 false violations
    on the disk. Whether it moves any of that reader's counts was not examined.
 
+   *Examined, dated 2026-10-07 (FS-136's record job, FS136-Z1; `data/fs136/z1/saves_compare.py`, its output
+   `saves_compare.out`). That reader was re-run beside a copy with vertices kept at full precision
+   (`data/fs136/z1/saves_read_repaired.py`; the original left as it is), on all eleven objects it reads. **No count
+   moves**: the copy's line equals the original's on 11 of 11 objects. With the repair switched off the copy reproduces
+   the original on 11 of 11; with vertices rounded to six decimals in place of nine the lines do move (the disk reads no
+   edge on a circle at any of its 20 points: `saves_digits6.out`), so the comparison can see a rounding effect. The
+   rounding stays a defect of that reader for any later use; none of the counts FS-124's theorem record § 7 or ledger
+   row 163 quote depends on it. The dated line stands under that § 7.*
+
 ### 6.4 The gates, and where a successor takes over
 
 | stage | gate (from `plans/`, `derive_gate.py all FS136-E1-derivation.md`) | saved output |
@@ -663,6 +687,18 @@ four points named in the statement.
    suffice only because of the tangency. So: *at a point across of a covering pair, which pieces at the members must reach
    across its unit circle?* For maps this is where tiles of diameter at most 1, the Reuleaux containments (FS116-N2-SIXRING)
    and the non-Siamese clause enter; in measure nothing bounds a piece from below (G96). It is the asking lane's to pose.
+
+   *Erratum, dated 2026-10-07 (filed by FS-136's record job, FS136-Z1; drafted by the second deriver,
+   `plans/FS136-E2-derivation.md` § 7.5 item 4; source: that record's Stage 6 — the entry C136-STOP-GERMS with its controls
+   `stop-corners` and `stop-shadow`). The text above is left standing. Its sentence is false, in the second deriver's
+   words: "a cell is emptied by pieces that are *crossing* at the point across, and crossing is a fact about a piece's
+   extent … on the flower the germs suffice only because of the tangency" — "is false: at the strip's, the disk's and the
+   bowtie fragment's stops the corners at the two members already empty the corner outside both unit circles, at first
+   order, and extent only adds bars." So "which pieces at the members must reach across its unit circle?" is not the
+   question the table leaves, and this round does not point back to the existence question: a held stop is excluded by
+   the corner patterns at its two members alone (an entry at three stops; the asking lane's reading in floats at all 70,
+   `plans/POROS-2026-10-07-fs136-round1.md` § 1.3). In the asking lane's words: "No entry of the round is wrong — each
+   keeps whole tiles, a stronger hypothesis than it needs."*
 2. **The structural form's second half** — "what must the whole family of covering pairs on one ring satisfy" — is not
    answered: this job has the table at each point, not a relation between the tables of one ring. The reading's files hold
    every table of every held ring for whoever looks (`data/fs136/e1/out/`).

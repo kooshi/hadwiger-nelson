@@ -137,3 +137,15 @@ correction stands under the entry in `plans/FS124-E1-derivation.md`). **The line
 no wall for a statement that reads pieces**: C124-BOTH and C124-EDGE-CLOSED exclude configurations with a unit arc about a ring
 point by the open-piece lemma (C124-SHADOW-OPEN, C124-TYPE) — G97's killing test, fired by its deriver's own scoring; an
 amendment to G97 is drafted in `plans/FS124-Z1-record.md`. No entry gives a weak six-colouring a piece.
+
+*Since FS-136 (FS136-Z1, the record job, 2026-10-07; every entry named is in `plans/FS136-derivation.md`, [hand], derived from [hand] entries or computed exactly over named corners, **one mind each, kernel pending**; each is about weak colourings that already have the named regions or corners, and none is known to):* **question 3's forward step has an entry for
+pieces.** The sentence this stub keeps of FS132-E3's paragraph — "a region where one label is forced survives" — was read
+at its source by FS-136's second deriver: it is "the forward step **in the palette calculus**", "used inside
+C132-M-ORBIT's argument (M3–M5 …) and never entered as a statement". For pieces it is now **C136-FORCED**: at a point `w`,
+a corner cut by the unit circles about finitely many points one unit away, on which their pieces bar every label but one,
+has that label almost everywhere — at every `k`, for any number of such points. Chained it is **C136-CLOSE**, and what a
+seed of pieces forces is labelled corners at isolated points, each of no definite size. **On this stub's own data —
+palettes and exclusion sets, no piece assumed — no entry of FS-136 applies as it stands**: each reads pieces or labelled
+corners. One count of G98's has a form for pieces: at a point carrying five of six labels one label is left for its ring,
+and **C136-COLLAR** forces it on a side of every arc of the unit circle along which none of the point's own labels is
+pure on that side. No entry gives a weak six-colouring a piece or a seed.
