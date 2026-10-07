@@ -45,15 +45,16 @@ claim list `data/fs136/claims.md`). Kooshi was told of the move to FS-136 and ma
    the atlas node `DISCS`); fact audit `--base bd3df943`; **tell Kooshi: held — seven iff some disc has no weak
    six-colouring, on one declared outside theorem.** If my push is rejected because it landed first: `git pull --rebase`,
    push, never force.
-2. **FS124-K2** (kernel planner, FS-124's second module; worktree and branch `fs124-wk2`; record
-   `plans/FS124-kernel-plan-2.md` there). **Its fence is lifted** (blind commit `1681f612`); **its second look at the
-   flagged step is in — its blind route is the deriver's and the step stands** (FS-124 inventory items 32–33; grade
-   unchanged: one mind, kernel pending). It is in phase 2 and will hand back with a skeleton of 134 leaves. Then: an
-   implementer on it (pattern `data/fs124/briefs/FS124-I1-radius.md`, generator
-   `data/fs131/briefs/scripts/mk-fs124-i1.py`; worktree cut from its tip, **build copied from `fs132-wl2`'s or
-   `fs124-wl1`'s tree — `main`'s own build is stale**). **Owed by name as a kernel job: the θ-lemma** (three arcs from a
-   disc's centre; its needs in that record's § 2.4). Owed to the record: a dated line under C124-LONE (the bound
-   `η ≤ 1`; the hypothesis the step really uses).
+2. **FS124-I2** (implementer; launched 16:38 UTC; FS-124 inventory items 34–35) — the planner of the second module has
+   handed back (branch `fs124-wk2`, tip `92f09e14`: six skeleton modules, 130 leaves left, a route for each; nine
+   statements typed with no defect). **Two implementers on disjoint files**: FS124-I2 on `CircleCrossing` and `OnePiece`
+   in worktree `fs124-wk2`; **FS124-I3 on `ThreePiece` and `ClosePair` — its brief is written and gated
+   (`data/fs124/briefs/FS124-I3-close-pair.md`), its worktree `fs124-wi3` is cut and built: LAUNCH IT INTO THE NEXT FREE
+   SLOT** (`debruijn-implementer`, `model: "opus"`, the one-line launch). Each sends one line when its claims' theorems
+   print their axioms. After both: **a third job** joins the two branches, registers the audit blocks, and proves the
+   witnesses (`ClosePairModel`; `SectorPoint`'s two planned leaves) — the unit-square witness re-priced from its first
+   inequality; then the landing. **Owed by name as a kernel job: the θ-lemma** (`ThreePiece.IsSector.hasArcEdges`; its
+   needs in the planner's record § 2.4); `SectorPoint` stays off `main` until it lands.
 3. **FS136-E1** (deriver; FS-136's opening and five claims; record `plans/FS136-E1-derivation.md`, plan
    `plans/FS136-the-point-across.md`). Its first message is logged (item 3: the claims restated on labels; FS-110's held
    covering-pair theorems found as prior art). Next from it: the reading of every held object, then a verdict per claim
