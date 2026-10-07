@@ -490,3 +490,29 @@ present at `w` and its size. Two inner or two outer pieces: `hσ`, `hτ` are hyp
 - **Proof Atlas**: row 163's C124-FORCED-PIECES, C124-LONE, C124-FOUR and C124-BOTH's first clause change grade [hand]
   → [kernel] at the landing, not before; C124-BOTH's second clause changes for arc-edged decompositions only. No other
   grade moves by this job.
+
+## Stage 4 — SAVED (FS124-I3): the tree as committed, and the hand-back
+
+**The build as committed** (`9f138a204`): the same command, exit 0 — `build: OK — all 1853 modules already up to date,
+nothing built, 2 module(s) with warnings, 2s` (`data/fs124/i3/logs/build-4-as-committed.log`): the two modules with
+warnings are the third job's (`Plane/ClosePairModel`, `Plane/SectorPoint`). The last build of Stage 3 is the build of the
+committed files.
+
+**The price of the job, as measured.** 61 leaves of 61 (52 named theorems, 2 decompositions of nine proof fields each, 7
+spec examples), 35 helpers, 1 added example; 1,161 lines added to the two files, 77 removed (each a `sorry`); four builds
+that compiled (9m26s, 9m42s, 9m4s, 8m32s) and one that found nothing to build; about a dozen `lean` runs of 3 s.
+**Wall clock: 17:05 to 18:05 UTC, an hour, 37 minutes of it the four walks** — the proofs were written while the walks
+ran, in patch files and a scratch copy. No leaf took a second route in the sense of a failed first one; three leaves
+were proved by a route shorter than the planned one (`HasUnitArcFrom.mem_closure_diff`, the arc on a circle, the null
+clause of the two models: Stages 2 and 3); no leaf is left `sorry`; no statement came back through the coordinator. As
+for the first implementer, what made it an hour is the plan: every leaf had its route and its Mathlib names at the pin.
+
+**Left for others, by name.** Nothing of my two files. On the branch: `Plane/ClosePairModel` — `exists_closePair_seven_not_separatesAt`,
+`exists_closePair_not_separatesAt`, `exists_closePair_full` — and `Plane/SectorPoint` — `sectorPoint_isSector`,
+`exists_closePair_sector` (the third job's), `ThreePiece.IsSector.hasArcEdges` (the θ-lemma, a kernel job of its own).
+For the third job, from what these two files now hold: `sectorPoint`'s tools are stated for the disc of radius `1/4`
+about `0` (`sectorSet`, the three closure lemmas, `volume_setOf_re_im_eq` for the null clause, `exists_arc_of_ray_subset`
+for a straight edge, `isPreconnected_petalSea`'s chaining for a piece that is not convex); a translated copy is a new
+decomposition, not a corollary.
+
+**The report**: `data/fs124/reports/FS124-I3.md`.
