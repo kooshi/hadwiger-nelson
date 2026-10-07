@@ -5,7 +5,8 @@ import Proofs.HadwigerNelson.Plane.SixRing.Excl
 
 For a weak measurable colouring of **the whole plane**. `no_alternating_groups` is the release's
 `two_state_impossible` (`[OAIMath2026]` `States.lean:243`, every number of labels) reworded from its `RealState`
-form on `ℝ` to a statement almost everywhere on the circle of angles; `no_alternating_pairs` is its instance at six
+form on `ℝ` to a statement almost everywhere on the circle of angles (proved here from that statement and
+`ae_real_of_ae_angles`); `no_alternating_pairs` is its instance at six
 labels and two disjoint pairs — C132-DIAG-WIDE at `U = ℂ`. Not a result of this milestone: a corollary of the
 release's Lean (`plans/FS132-derivation.md` § 1).
 -/
@@ -26,7 +27,23 @@ theorem no_alternating_groups {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c) 
     (w : Angles → Bool) (hwm : Measurable w)
     (hsub : ∀ᵐ t ∂angularMeasure, (if w t then K else J) ⊆ palette c hc p t)
     (halt : ∀ᵐ t ∂angularMeasure, w (t + (sixty : Angles)) ≠ w t) : False := by
-  sorry
+  have hreal := ae_real_of_ae_angles hsub
+  have hmk : Measurable fun t : ℝ => w (t : Angles) := hwm.comp AddCircle.measurable_mk'
+  refine two_state_impossible hc hw p J K hcard w hwm
+    ⟨hmk (measurableSet_singleton false), fun i hi => ?_⟩
+    ⟨hmk (measurableSet_singleton true), fun i hi => ?_⟩ ?_
+  · filter_upwards [hreal] with θ hθ hθf
+    have hθf' : w (θ : Angles) = false := hθf
+    simp only [hθf', Bool.false_eq_true, if_false] at hθ
+    exact (mem_palette c hc p _ i).mp (hθ hi)
+  · filter_upwards [hreal] with θ hθ hθt
+    have hθt' : w (θ : Angles) = true := hθt
+    simp only [hθt', if_true] at hθ
+    exact (mem_palette c hc p _ i).mp (hθ hi)
+  · filter_upwards [halt] with t ht
+    have h60 : ((Real.pi / 3 : ℝ) : Angles) = (sixty : Angles) := rfl
+    rw [h60]
+    cases h1 : w (t + (sixty : Angles)) <;> cases h2 : w t <;> simp_all
 
 /-- **C132-DIAG-WIDE** (the instance `U = ℂ`, **the whole plane**): for a weak measurable six-colouring of the
 plane, a centre `p` and two disjoint pairs of labels `D`, `D'`, there is no measurable map `w` from the circle to

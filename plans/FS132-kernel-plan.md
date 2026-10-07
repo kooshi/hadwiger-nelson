@@ -10,6 +10,16 @@ each stage is saved before the next starts.*
 None in the kernel: a planning job. What it states is the skeleton (stage 3 onward); what it derived by hand, blind, is in the
 stages below, each at grade [hand, one mind — the planner's, blind of the derivers'].
 
+**FS132-K2 (stages 4–7), on branch `fs132-wk1`, nothing landed.** Kernel-checked on the standard three axioms, no `sorry`
+in their cone (`data/fs132/k2/probe/Axioms.out`): `shiftBounds_model`, `ShiftBounds.mono`, `HubColours.mono`
+(`Plane/SixRing/Basic`), `mem_liftPalette` (`State`), `mem_spatialSupport_ae` (`Placeholders`, the release's proof),
+`straddle_mono` (`Orbit`), and the half-line model of `NoDoubleChange` (an `example` in `StepLemma`) — definitions' models
+and bookkeeping, no claim of the list. **Proved from `sorry` leaves, so not theorems until the leaves are** (their axiom
+lists read `sorryAx`, as they must): `no_outside_orbit_points`, `no_outside_orbit`, `not_ae_outside`, `adjacent_tip_false`
+(`Orbit`), `chart_step_false` (`Kill`), `exists_shiftBounds` (`Shift`), `no_alternating_groups`, `no_alternating_pairs`
+(`TwoPairs`). By hand, one mind, at this job: the variant route for Lemma S and the reading of S5–S7 for the square
+(stages 4, 5.3, 6.2) — [hand], kernel pending.
+
 ## Stage 1 — SAVED (FS132-K1): the readback
 
 **Quotations.** By script (the brief's seven `> **C132-…` lines against the claim list's lines of the same key, character for
@@ -599,3 +609,252 @@ The chart's polar form, `chart p (α + π/3) 0 = p + e(α)`, the unit distance a
 `Plane.twoCirc_identity` in the chart; on `(0, κ]²` the ratio `ε/(d d')` lies in `[1.1547, 1.182]` at `κ = 1/50` with
 slope `≤ 0.0240 < 1/32` and `ε ≤ 0.0237·min(d, d')`. M6's count by brute force: of the 64 triples none with all adjacent
 tips different is sign-consistent.
+
+## Stage 6 — SAVED (FS132-K2): the two-pair ring's leaves; the three comparisons
+
+*Read for this stage: `plans/FS132-derivation.md` entries C132-CORES-FREE, C132-CORES-SQUARE, C132-INDEX, C132-RING-WIND
+(whole, with the prose under each) and C132-EXT-DISC's `statement:`, `uses only:` and `handoff:` fields;
+`plans/FS132-E1-derivation.md` Stage 3 steps S2–S11 and "Argument — cores exist" (lines 176–264, whole); the skeleton's
+`Winding.lean` and `CyclicCentre.lean` (statements, whole); `Topology/LebesgueCovering.lean`'s `lebesgue_covering_square`;
+the release's `Mesh.lean` (declaration list and `no_large_positive_sequence`'s statement) and
+`PlanarCovers.compact_open_cover_impossible`'s statement. Not read: the release's proofs in those files; E2's argument
+sections (the entries' fields are what is compared).*
+
+### 6.1 The two-pair ring (C132-DIAG-WIDE): both rewording leaves are proved
+
+`Plane/SixRing/TwoPairs.lean` has no `sorry` of its own. `no_alternating_groups` is proved from the placeholder
+`two_state_impossible` — **the release's statement binder for binder** (`States.lean:243`; as the kernel holds the
+placeholder: `data/fs132/k2/probe/Sigs.out`, last block) — and `ae_real_of_ae_angles`: the `RealState` hypotheses are
+`MeasurableSet {t : ℝ | w ↑t = b}` (`AddCircle.measurable_mk'`) and the palette inclusion pulled to real angles
+(`mem_palette`); the flip is `≠` on `Bool`, and `((π / 3 : ℝ) : Angles) = (sixty : Angles)` by `rfl`.
+`no_alternating_pairs` is proved from it (`(univ \ (D ∪ D')).card = 6 − 4`). So the rewording is confirmed against the
+statement the port will give: when the port's theorem replaces the placeholder, C132-DIAG-WIDE at `U = ℂ` stands on
+`ae_real_of_ae_angles` alone (the release's `angleMk_quasiMeasurePreserving`, which the coordinator has asked the port to
+bring).
+
+### 6.2 "Centres exist": the planner's route and the square form against the first deriver's steps
+
+**The comparison.** The first deriver's argument for C132-CORES-FREE is its steps S5–S7 "with `L_0 = ∅` and no core disc"
+on a disc `D₁ = B̄(o, r′) ⊂ D`. K1's route (§ 2.3) is the same two steps S5 and S7 on a compact region, with S6 replaced:
+
+| step | the first deriver (on a disc) | reads the region's shape? | K1's route (on a square) |
+|---|---|---|---|
+| S3, S4 | a missing edge gives small overlap; the threshold map, `0 < α < 1/k` | no | the same (K1: "Lemma 7.3 … any `k`") |
+| S5 | holes and tree fillings on `D₁`, inside a slightly larger region `D` with no centre; with `L_0 = ∅` no core disc | **no** — it uses compactness of `D`, a Lebesgue number, and that `D₁` is interior to `D` | the same on a square `Q₁` of side `s₁ ∈ (1, s)` inside `Q` |
+| S6 | no finite relatively open cover of a disc of radius `r′` of multiplicity two and mesh `m < r′` (Brouwer) | **yes — the only step that does** | this library's `lebesgue_covering_square` (kernel), in the open-cover form `no_fine_cover_square` |
+| S7 | the components of `{(g̃_n)_i > 0}` cover with multiplicity two and mesh `1 + o(1)`: a path joining points more than `1 + c₀` apart, a ball about one end, unit distances, `p_i(y) + p_i(z) ≤ 1` at every unit pair, `|E_n| → 0` | **no** — paths, unit distances and areas only; the ball `U` need not lie in the region | the same |
+
+**Verdict (a checking reading with the argument open, one mind; not a derivation).** K1's route *is* S5 and S7, and on this
+reading neither reads the disc; so the square form follows by the first deriver's own steps with S6 exchanged for
+Lebesgue's covering theorem, and I see no step left to derive. The entry C132-CORES-SQUARE is filed as a gap for exactly
+this comparison ("Whether those steps read the disc's shape is the comparison … that nobody has done"): it is now done, at
+this grade. Whether the entry's verdict moves is the coordinator's and the deriver's.
+
+**Can the square form be planned as a kernel statement from this library's covering theorem directly?** In two parts:
+
+- **The cover step — yes, directly, and short.** `no_fine_cover_square` (in the skeleton, a leaf): a finite subcover
+  (`IsCompact.elim_finite_subcover`), a closed shrinking (`exists_subset_iUnion_closed_subset`,
+  `Mathlib/Topology/ShrinkingLemma.lean:234`), re-indexed by `Fin m`; a set whose trace has diameter at most `m < s` does not
+  meet two opposite sides; `lebesgue_covering_square` gives a point in three members, against the multiplicity. About 40
+  lines, nothing ported, no colouring. It replaces the release's `compact_open_cover_impossible` (a degree argument on a
+  region containing the disc of radius 5).
+- **The statement itself — no, not directly: it needs the mesh bound in the kernel**, which is the release's hole chain.
+  `missing_edge_disk_cover` and the disc averages are at `Fin k` already; `GraphRealization`, `HoleApproximation`, `Mesh` are
+  typed at `Fin 5` and at `closedBall 0 5`, with `DiskExtension` under them: about 1,900 lines to port with changed types.
+  **And one constant is not the claim's**: the release's Lean mesh theorem (`Mesh.lean:92`, `no_large_positive_sequence`)
+  refutes preconnected sets joining points with `2 < dist x y`, and its cover obstruction is at diameters at most `2`.
+  Re-typed as it stands, the kernel would hold "every closed square of side above 2 holds a cyclic centre" — a disc of
+  radius above `√2`, not above `1`. The claim's radius needs the threshold `1 + c₀` (any threshold up to `√2` already gives
+  C132-CORES-FREE's disc of radius above `1` through the inscribed square; `1 + c₀` for every `c₀ > 0` gives the square of
+  side above `1`). The hand argument (S7) proves `1 + c₀`; the Lean proof has slack at that line (`2 * t n < dist`), so it
+  is a parameter in one 154-line file, but it is a change to a proof and not only to types. **Planned as a
+  planner-and-implementer job of its own** (stage 7, tier C).
+
+### 6.3 The six-step lemma against the second deriver's two index entries
+
+**No difference in statement.** The entries C132-INDEX and C132-RING-WIND carry the statements of the claim list character
+for character (the list was copied from them), and § 2.2 read the skeleton's Lean against those words. What differs is the
+route, and only for the second:
+
+- **C132-INDEX**: the entry's `uses only:` — "continuity of φ and its lift to the line; that six rotations by π/3 compose
+  to the identity; that a point of Θ whose support is disjoint from the support of a vertex lies on the closed opposite
+  edge, and from the support of an interior point of an edge is the opposite vertex" — is `exists_triLift`, the six-step
+  sum inside `sixStep`, and `step_mem_of_disjoint` with `fract_eq_zero_of_step_end`. One lemma, two authors.
+- **C132-RING-WIND**: the entry derives it *from C132-INDEX*, "applied to the loop that sits at a vertex on a singleton
+  arc, at an edge's midpoint on a pair arc, and moves along one edge across each point of J"; the skeleton proves it from
+  `sixStep` on the step lift (`RingLift`: the same vertex and mid-edge positions) with no continuous loop. **The implementer
+  builds the skeleton's**: it needs no interpolation and no covering lift for the ring. The derivers' is the second route.
+- Models: the entry's (nine arcs, joined linearly on short intervals) and the skeleton's `indexModel` (ramp for `π/9`,
+  rest for `π/9`) are the same loop at two ramp lengths; both keep a point inside an edge opposite a resting vertex.
+- A check made on the way, by hand: `ringLift_degree_unique` holds as stated (two lifts of one ring differ by a multiple
+  of `3` that is locally constant almost everywhere: two closed edges hold at most one such difference).
+
+### 6.4 The four-point form against the witness card's restatement
+
+`no_outside_orbit_points` against the entry C132-WIT-ORBIT (`plans/FS132-derivation.md` § 1), clause by clause, at `U = ℂ`:
+"for each j modulo 4 let q_j be a point other than p" — `hq : ∀ j, q j ≠ p`; "with H_{a_j} ∩ Δ({p, q_j}) = ∅" — `hl`;
+"and H_{a_{j+1}} ∩ Δ({p, q_j}) = ∅" — `hr`, `j + 1` in `Fin 4`; the labels, (i) and (ii) as in C132-M-ORBIT (§ 2.2). **The
+same statement.** The entry's `not claimed:` line "that the labels a_j are present at p or anywhere near it (nothing in the
+hypotheses says so, and nothing in the argument uses it)" is true of the Lean statement too, and of every leaf: `IsTip` is
+derived, never assumed.
+
+## Stage 7 — SAVED (FS132-K2): what else this milestone's module must state — a draft for the coordinator to fix
+
+*The statements below are copied by script from `plans/FS132-derivation.md` on `main` (`data/fs132/k2/module_list.py`; its
+`--check` fails on a named entry the file does not hold — planted and watched: exit 1 on a misspelt key, exit 0 restored);
+the line under each name is the planner's. Read for the lines: every entry's `statement:`, `uses only:` and `handoff:`
+fields in §§ 2–5 and 7 of the derivation file (the first 230–330 characters of each by script, seven of them whole); the
+asking lane's table (`plans/POROS-2026-10-07-fs132-night.md` § What to formalize) and its corrections
+(`plans/POROS-2026-10-07-fs132-round2.md` § 3.4), whole. **Not read: the arguments behind the second- and third-round
+entries.** Sizes are the planner's guesses from the `uses only:` lines, not prices; re-price each from its first two leaves.*
+
+**Already planned, from the first round** (the kernel claim list's seven): C132-M-ORBIT and C132-M-EXCL (stage 5),
+C132-DIAG-WIDE (6.1), C132-CONFINE (proved), C132-CORES-FREE (6.2), C132-INDEX and C132-RING-WIND (6.3).
+
+**Where the ranking below departs from the asking lane's, and why.** (1) C132-WIT-MARGIN, which it does not list, goes
+first: fifteen lines, and it is what lets the four-point hypothesis have a kernel model. (2) C132-PLACE is stated, not
+held: its hold was "until C132-LENS has its verdict", and the third round's entries now stand on it. (3) C132-SHADOW
+enters: the third round's other base, and it reads nothing but weak properness. (4) C132-WIT-SUPER stays where the asking
+lane put it, but it brings a port (the disc averages) and so sits in tier C. (5) C132-TURN-EDGE and C132-PLACED-RING stay
+out: each entry's own handoff says "only with a consumer".
+
+**Tier A — next, on the exclusion's leaves and the port (second round)**
+
+1. **C132-WIT-MARGIN** (grade as filed: hand) — rests on: the definitions (`Straddle`, `spatialSupport`) and the triangle inequality; about 15 lines; not a corollary. **Stated because it gives the four-point hypothesis of `no_outside_orbit_points` a kernel model** (the gate's inhabitant rule): labels absent near the ring are witnessed by every nearby point.
+
+   > let c be a measurable map from the plane to a finite set of labels, H_i the closed essential support of the class of i, p a point, η > 0, and I a set of labels each of whose supports H_i misses the open annulus of the points z with 1 − η < |z − p| < 1 + η; then H_i ∩ Δ({p, q}) = ∅ for every i in I and every point q with 0 < |q − p| ≤ η; so if I has at least three labels, every cyclic order of three or more of them, with any such points q_j, satisfies the conclusion of C132-WIT-EX at p
+   > — source: plans/FS132-derivation.md, entry C132-WIT-MARGIN, `statement:`
+
+2. **C132-WIT-SIDE** (grade as filed: hand) — rests on: the definitions and `mem_spatialSupport_ae`; no properness, no palette; about 50 lines; not a corollary. The leaf under WIT-STRIP, CROSS, PLACE and LENS-SIDE (the asking lane's "item 1's first leaf"). The open-set form costs nothing here (no ported lemma is read).
+
+   > let U be an open set of the plane, c a measurable map from U to a finite set of labels, H_i the closed essential support of the class of i, E a set of labels, x and q two distinct points with H_i ∩ Δ({x, q}) = ∅ for every i in E, and w a point of U with |w − x| = 1 and |w − q| ≠ 1; then there is η > 0 such that almost every point z of B(w, η) with |z − x| > 1 has its label outside E if |w − q| < 1, and almost every point z of B(w, η) with |z − x| < 1 has its label outside E if |w − q| > 1
+   > — source: plans/FS132-derivation.md, entry C132-WIT-SIDE, `statement:`
+
+3. **C132-WIT-STRIP** (grade as filed: hand) — rests on: C132-WIT-SIDE and one inequality on `|x + r f − q|`; about 100 lines for the strips and the count. **Its last clause (the palette meets `N` almost everywhere) rests on the release's `outer_strip_trace` and `inner_strip_trace`** (`BoundaryTrace.lean:182, 210`), not in the port's present cone: state that clause as a separate theorem and ask for the two lemmas' port. Carries C132-TRI-STRIP's strip clauses.
+
+   > let k ≥ 3 be an integer, x a point, U an open set containing the unit circle about x, c a weak measurable k-colouring of U, i_0, i_1, i_2 three distinct labels, N the set of the other k − 3 labels, and for each j modulo 3 let q_j be a point other than x with H_{i_j} ∩ Δ({x, q_j}) = ∅ and H_{i_{j+1}} ∩ Δ({x, q_j}) = ∅; then for every unit vector e with |x + e − q_j| ≠ 1 for j = 0, 1, 2 there are an arc A about e and a width w > 0 such that almost every point x + r f with f in A and 1 < r < 1 + w has its label in N if |x + e − q_j| < 1 for at least two j, and almost every point x + r f with f in A and 1 − w < r < 1 has its label in N if |x + e − q_j| > 1 for at least two j; the unit vectors f with |x + f − q_j| = 1 for some j are those with 2 f·(q_j − x) = |q_j − x|², at most six; and P_x(e), read with samplings inside U, meets N for almost every e
+   > — source: plans/FS132-derivation.md, entry C132-WIT-STRIP, `statement:`
+
+4. **C132-SHADOW** (grade as filed: hand) — rests on: weak properness alone (`WeakColoring`, Fubini for `(z, u) ↦ z + u`), an intermediate value; about 120 lines; not a corollary. The third round's base (C132-LENS).
+
+   > let U be an open set of the plane, c a measurable map from U to a finite set of labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, i a label, p and p′ two points of U with |p − p′| = 1, v a unit vector with v·(p′ − p) ≠ 0, r > 0, and W an open subset of U that contains the points p′ + sv for 0 < s < r and almost every point of which has the label i; then there is η > 0 such that, if v·(p′ − p) > 0, almost every point z of B(p, η) with |z − p′| < 1 has a label other than i, and, if v·(p′ − p) < 0, almost every point z of B(p, η) with |z − p′| > 1 has a label other than i
+   > — source: plans/FS132-derivation.md, entry C132-SHADOW, `statement:`
+
+5. **C132-CROSS** (grade as filed: hand) — rests on: C132-WIT-SIDE (its step B1) and that `z ↦ (|z − x|, |z − y|)` is a local homeomorphism at `w` (four non-empty open quadrants); no properness; about 150 lines.
+
+   > let L be a finite set of labels, U an open set of the plane, c a measurable map from U to L, H_i the closed essential support of the class of i, x and y two points with 0 < |x − y| < 2, w a point of U with |w − x| = |w − y| = 1, and 𝒦_x, 𝒦_y two finite families of pairs (K, E) of a compact set K and a set E of labels with H_i ∩ Δ(K) = ∅ for every i in E, where Δ(K) is the set of z with min over q ∈ K of |z − q| below 1 and max over q ∈ K of |z − q| above 1, with x ∈ K for the pairs of 𝒦_x and y ∈ K for the pairs of 𝒦_y; let E_x^out be the union of the sets E over the pairs of 𝒦_x whose K has a point q with |w − q| < 1, E_x^in the union over the pairs of 𝒦_x whose K has a point q with |w − q| > 1, E_y^out the union over the pairs of 𝒦_y whose K has a point q with |w − q| < 1, and E_y^in the union over the pairs of 𝒦_y whose K has a point q with |w − q| > 1; then none of the four sets E_x^out ∪ E_y^out, E_x^out ∪ E_y^in, E_x^in ∪ E_y^out, E_x^in ∪ E_y^in is all of L
+   > — source: plans/FS132-derivation.md, entry C132-CROSS, `statement:`
+
+6. **C132-COMP-SHARP** (grade as filed: derived from: C132-CROSS) — corollary of C132-CROSS by one pigeonhole; about 40 lines.
+
+   > let U be an open set of the plane, c a measurable map from U to a set of six labels, H_i the closed essential support of the class of i, x and y two points with 0 < |x − y| < 2, t_0, t_1, t_2 and t′_0, t′_1, t′_2 the six labels, K_0, K_1, K_2 compact sets containing x with H_{t_j} ∩ Δ(K_j) = ∅ and H_{t_{j+1}} ∩ Δ(K_j) = ∅ for each j modulo 3, K′_0, K′_1, K′_2 compact sets containing y with H_{t′_j} ∩ Δ(K′_j) = ∅ and H_{t′_{j+1}} ∩ Δ(K′_j) = ∅ for each j modulo 3, and w a point of U with |w − x| = |w − y| = 1; then one of the six sets K_0, K_1, K_2, K′_0, K′_1, K′_2 is contained in the unit circle about w
+   > — source: plans/FS132-derivation.md, entry C132-COMP-SHARP, `statement:`
+
+7. **C132-PLACE** (grade as filed: hand) — rests on: the release's `palette_transfer_pair` (port), this module's `chart`, `chart_quasiMeasurePreserving`, `chart_eq_angularSum` (leaves of the exclusion), and C132-WIT-SIDE; about 120 lines; whole plane first. The base of the third round with C132-SHADOW.
+
+   > let U be an open set of the plane containing the closed unit disc about a point x, c a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, T a set of three labels and K_0, K_1, K_2 compact sets containing x such that for each of the three pairs of labels of T one of the sets K_j has Δ(K_j) disjoint from the closed essential supports of both labels of the pair, N the set of the three other labels, and ψ an angle such that at least two of the sets K_j have a point q with |x + e(ψ) − q| < 1; then there is κ > 0 such that for almost every (α, d) with |α − ψ − π/3| < κ and −κ < d < 0 the label of the point x + e(α) + e(α − 2π/3 − d) lies in N and in neither of the palettes P_x(e(α)) and P_x(e(α − 2π/3 − d)); and if at least two of the sets K_j have a point q with |x + e(ψ) − q| > 1, there is κ > 0 such that for almost every (α, d) with |α − ψ − π/3| < κ and 0 < d < κ the label of that point lies in N and in neither of those two palettes
+   > — source: plans/FS132-derivation.md, entry C132-PLACE, `statement:`
+
+
+**Tier B — the third round, on A**
+
+8. **C132-LENS** (grade as filed: derived from: C132-SHADOW) — rests on: C132-PLACE at two ring points and C132-SHADOW; the entry's own handoff: "two charts read at y_1 and y_{−1}, then C132-SHADOW with the four segments"; about 200 lines.
+
+   > let U be an open set of the plane containing the closed unit disc about a point x, c a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, T a set of three labels and K_0, K_1, K_2 compact sets containing x such that for each of the three pairs of labels of T one of the sets K_j has Δ(K_j) disjoint from the closed essential supports of both labels of the pair, a, b, n the three labels outside T, ψ an angle such that for almost every θ the palette P_x(e(θ)) contains a if θ lies in (ψ − π/3, ψ) or in (ψ + 2π/3, ψ + π), b if θ lies in (ψ, ψ + π/3) or in (ψ + π, ψ + 4π/3), and n if θ lies in (ψ + π/3, ψ + 2π/3) or in (ψ + 4π/3, ψ + 5π/3), and y_k = x + e(ψ + kπ/3); if at least two of the sets K_j have a point strictly inside the unit circle about y_1, then there is η > 0 such that almost every point z of B(y_0, η) with |z − y_1| < 1 has its label outside {a, n}; if at least two of the sets K_j have a point strictly inside the unit circle about y_{−1}, then there is η > 0 such that almost every point z of B(y_0, η) with |z − y_{−1}| < 1 has its label outside {b, n}; and if both hold, there is η > 0 such that almost every point z of B(y_0, η) with |z − y_1| < 1 and |z − y_{−1}| < 1 has its label in T
+   > — source: plans/FS132-derivation.md, entry C132-LENS, `statement:`
+
+9. **C132-LENS-SIDE** (grade as filed: derived from: C132-LENS) — corollary of C132-LENS and C132-WIT-SIDE by one open set of positive measure; about 50 lines.
+
+   > let U, x, c, T, K_0, K_1, K_2, a, b, n, ψ and the points y_k be as in C132-LENS, and suppose that at least two of the sets K_j have a point strictly inside the unit circle about y_1 and at least two of them have a point strictly inside the unit circle about y_{−1}; then it is not the case that at least two of the sets K_j have a point strictly outside the unit circle about y_0
+   > — source: plans/FS132-derivation.md, entry C132-LENS-SIDE, `statement:`
+
+10. **C132-LENS-FOUR** (grade as filed: derived from: C132-LENS) — corollary of C132-LENS and C132-PLACE; about 80 lines.
+
+   > let U, x, c, T, K_0, K_1, K_2, a, b, n, ψ and the points y_k be as in C132-LENS, and k an integer such that for each of m = k − 1, k, k + 1 at least two of the sets K_j have a point strictly inside the unit circle about y_m; then y_k lies in the closed essential supports of a, of b, of n and of a label of T, and there is η > 0 such that almost every point of B(y_k, η) outside the unit circle about x has its label in {a, b, n} and almost every point of B(y_k, η) inside the unit circles about y_{k−1} and y_{k+1} has its label in T
+   > — source: plans/FS132-derivation.md, entry C132-LENS-FOUR, `statement:`
+
+11. **C132-LENS-GERM** (grade as filed: derived from: C132-LENS-SIDE) — a finite count on `ℤ/6` and C132-LENS-SIDE; about 80 lines.
+
+   > let U, x, c, T, K_0, K_1, K_2, a, b, n, ψ and the points y_k be as in C132-LENS, and suppose that each of the sets K_0, K_1, K_2 has a point that lies strictly inside the unit circles about three of the six points y_0, …, y_5 and strictly outside the unit circles about the other three; then there is an integer k such that for each of m = k − 1, k, k + 1 at least two of the sets K_j have a point strictly inside the unit circle about y_m
+   > — source: plans/FS132-derivation.md, entry C132-LENS-GERM, `statement:`
+
+12. **C132-ALT** (grade as filed: hand) — rests on: C132-PLACE at two adjacent ring points and the unit-pair relation of the exclusion's `Shift` module **for both signs of `d` and `d'`** — the exclusion's leaves state it for `d, d' ≥ 0` only, so `dist_chart_chart_shift` and `ShiftBounds` need signed companions (the same proofs on `[−1/4, 1/4]²`; numerically the unit distance holds there); about 250 lines. After the exclusion's module is green.
+
+   > let U be an open set of the plane containing the closed unit disc about a point x, c a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, T a set of three labels and K_0, K_1, K_2 compact sets containing x such that for each of the three pairs of labels of T one of the sets K_j has Δ(K_j) disjoint from the closed essential supports of both labels of the pair, a and b two labels outside T, ψ an angle and δ > 0 such that for every integer k the palette P_x(e(θ)) contains a for almost every θ in (ψ + kπ/3 − δ, ψ + kπ/3) when k is even and for almost every θ in (ψ + kπ/3, ψ + kπ/3 + δ) when k is odd, and contains b for almost every θ in (ψ + kπ/3, ψ + kπ/3 + δ) when k is even and for almost every θ in (ψ + kπ/3 − δ, ψ + kπ/3) when k is odd; then there is no integer k such that, for both m = k and m = k + 1, at least two of the sets K_j have a point strictly inside the unit circle about x + e(ψ + mπ/3) or at least two of them have a point strictly outside it
+   > — source: plans/FS132-derivation.md, entry C132-ALT, `statement:`
+
+
+**Tier C — beside them: one label's superlevel sets, the centres, the index lemmas**
+
+13. **C132-WIT-SUPER** (grade as filed: hand) — rests on: the ported `weak_all_directions` (in `Outside/OAI158Palette`) and the release's disc averages (`DiskAverages.lean`, 333 lines, at every `k`: a port); about 150 lines beside it. The asking lane's replacement for C132-EXT-DISC.
+
+   > let k ≥ 1 be an integer, c a weak measurable k-colouring of the plane, i a label, p_i^ε(z) the proportion of the disc of radius ε about z lying in the class of i, α > 0, (ε_n) a sequence of positive numbers tending to 0, C_n connected sets with p_i^{ε_n} > α at every point of C_n, and K the set of the limits of convergent sequences (z_n) with z_n in C_n; then no point of the closed essential support H_i has one point of K nearer than 1 and another farther than 1
+   > — source: plans/FS132-derivation.md, entry C132-WIT-SUPER, `statement:`
+
+14. **C132-CORES-SQUARE** (grade as filed: hand) — the skeleton's `exists_cyclicCentre_square`; rests on: `no_fine_cover_square` (from this library's `lebesgue_covering_square` and Mathlib's shrinking lemma: about 40 lines, nothing ported) and the hole chain of the release at `Fin k` on a square (`GraphRealization`, `HoleApproximation`, `Mesh`, `DiskExtension`, parts of `PlanarCovers`: about 1,900 lines with changed types, **and the mesh theorem's `2 < dist x y` made `1 + c₀ < dist x y`**): a planner-and-implementer job of its own. C132-CORES-FREE is its corollary (in the skeleton).
+
+   > for every integer k ≥ 1 and every weak measurable k-colouring of the plane, every closed axis-parallel square of side greater than 1 contains a cyclic centre; in particular every closed disc of radius greater than 1/√2 does
+   > — source: plans/FS132-derivation.md, entry C132-CORES-SQUARE, `statement:`
+
+15. **C132-INDEX** (grade as filed: hand) — in the claim list; the skeleton `Winding.lean` (9 leaves); nothing ported, no colouring; about 250 lines. An implementer can start at any time.
+
+   > Let a, b, c be three labels, Θ the union of the edges ab, bc, ca of the simplex of probability vectors, and φ a continuous map from the unit circle S to Θ such that for every e in S no label has a positive coordinate both at φ(e) and at φ(Re); then the degree of φ, for the orientation a → b → c of Θ, is congruent to 3 modulo 6
+   > — source: plans/FS132-derivation.md, entry C132-INDEX, `statement:`
+
+16. **C132-RING-WIND** (grade as filed: derived from: C132-INDEX) — in the claim list; `Winding.lean` (6 leaves and a model); from `sixStep` directly (the planner's route) — the derivers' route through C132-INDEX is the second route; about 300 lines.
+
+   > let N be a set of three labels, Π a measurable function from the unit circle S to the non-empty subsets of N with Π(e) ∩ Π(Re) = ∅ for almost every e, and J the set of the directions e having no arc about e on which Π is almost everywhere equal to one set; if J is finite and no two of its points are at angle π/3, then on each arc of S ∖ J the function Π is almost everywhere one singleton or one pair, two consecutive arcs carry subsets of one pair, and the closed walk they make around the triangle on N has winding number congruent to 3 modulo 6
+   > — source: plans/FS132-derivation.md, entry C132-RING-WIND, `statement:`
+
+
+**Left out of the module, and why.**
+
+| entry | why |
+|---|---|
+| C132-TRI-STRIP | carried by C132-WIT-STRIP; its own form reads the extraction's continua and limiting directions, which the module does not hold until C132-EXT-DISC is taken up |
+| C132-WITNESS | its handoff: "only with a consumer". The consumer would be the composition that carries the exclusion to map fragments (the record job's finding: one fact, this one); state it when that composition is posed — it shares C132-SHADOW's Fubini leaf |
+| C132-WIT-CROSSED, C132-NOESS, C132-ORBIT (the measurable shadow of the winding), C132-SEP | relay results, handoff "none"; each short, each stated only with a consumer |
+| C132-EXT-DISC, C132-FILL, C132-REL, C132-WIT-EX-FIN | the extraction with its continua: the largest item; clause (5) one mind; the asking lane's "wait". C132-WIT-EX-FIN is subsumed by it. They would share the centres' port (tier C) |
+| C132-TURN-EDGE, C132-PLACED-RING | handoff "only with a consumer" |
+| C132-WIT-ORBIT, C132-WIT-EXCL, C132-M-EMPTY, and § 10's forms as posed | the same theorems as stated ones (6.4), or instances of them |
+| the search's five entries (§ 6) | results in a named finite family: certificates with their checker, not theorems of this module |
+| C132-GRUNDY7-NOT, C132-GRUNDY7-LOCAL (§ 7) | calibrations at seven; their handoff: "nothing here is for the kernel" |
+| the stalls and gaps (§ 8) | a stall has nothing to formalize. One exception already in the skeleton: C132-CORES-SQUARE's statement and its cover step (6.2) |
+
+**What the list rests on that this library does not hold** (each is planned as a port or a leaf; **none is a new axiom
+or a new hypothesis**; each is a request to the coordinator, not an action of this job):
+
+1. `outer_strip_trace`, `inner_strip_trace` (`BoundaryTrace.lean:182, 210`) — for C132-WIT-STRIP's last clause only. The
+   two placeholders stage 5 dropped come back for that entry and no other.
+2. The release's disc averages (`DiskAverages.lean`, at every `k`) — for C132-WIT-SUPER.
+3. The hole chain at `Fin k` on a square, with the mesh threshold a parameter — for C132-CORES-SQUARE and its corollary
+   C132-CORES-FREE (6.2).
+4. Signed companions of `dist_chart_chart_shift` and `ShiftBounds` (both signs of `d`, `d'`), in a module of their own
+   beside `Shift` — for C132-ALT. Not a port: a leaf of ours.
+5. For the exclusion itself (stage 5), unchanged: `palette_transfer_pair`, `palette_sixty_disjoint`,
+   `two_state_impossible`, and by the coordinator's word of today `circleSum_quasiMeasurePreserving` (in the port's cone)
+   and `angleMk_quasiMeasurePreserving` (asked for).
+
+**The open-set forms.** Every statement above that names an open set `U` is planned at `U = ℂ` first, by the claim list's
+dated line. Three need no ported lemma and could be stated at `U` at no cost when the coordinator wants them: C132-WIT-SIDE,
+C132-CROSS, C132-COMP-SHARP (and C132-SHADOW once `WeakColoring` has a form on an open set).
+
+**Built at this stage**: `./scripts/build.sh` under the slot after 6.1's proof — exit 0, 2 modules rebuilt (`TwoPairs`,
+`Proofs`), 71 `sorry` warnings (`data/fs132/k2/probe/build-final.out`): 49 leaves of the exclusion, 3 placeholders, 16 + 3
+in `Winding` and `CyclicCentre`. `tools/check_architecture.py`: PASS.
+
+**The coordinator's reply to the stage-5 message** (2026-10-07, as received): lots C then B (`StepLemma.lean`, then
+`Shift.lean`) are briefed for one implementer, FS132-I3, in a worktree `fs132-wi3` cut from `e0c95ec12`; lots A, D, E are not
+yet assigned; `circleSum_quasiMeasurePreserving` is in the port's cone and `angleMk_quasiMeasurePreserving` is asked for;
+the port measured about one fix per 375 lines and no Fourier chain. **Neither `StepLemma.lean` nor `Shift.lean` was touched
+on this branch after `e0c95ec12`.**
+
+### 7.1 Where a successor takes over
+
+Nothing of this job is half done. In order of value: (1) when the port lands, delete `Placeholders.lean`, point its three
+importers (`ChartMeasure`, `Excl`, and `TwoPairs` through `Excl`) at the ported modules, rebuild — no leaf changes; (2) the
+skeletons of tier A (state C132-WIT-MARGIN, -WIT-SIDE, -WIT-STRIP, -SHADOW, -CROSS, -COMP-SHARP, -PLACE with `sorry`
+leaves, each read back against its entry, the modeling passes run on them); (3) the centres' job (6.2) as its own
+planner's brief; (4) the local forms (§ 3.6). The modeling companions (`debruijn-domain-modeling`,
+`-obligation-modeling`) were not invoked as separate passes in this job: stage 5's statements were shaped while the
+assembly was made to elaborate, and the budget went to that; a successor planning tier A should run them fresh.
