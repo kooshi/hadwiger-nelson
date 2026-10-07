@@ -291,3 +291,27 @@ inventory, items 607–629 (an outside proof of six became this project's litera
    base's chain re-read as the exclusion's was; the third-label rigidity), and choosing among them is the asking lane's
    job tonight.
 
+10. **FS132-E3 handed back, done but for two items (557k by the task notice — past the line where a mind is replaced, not
+    resumed)** (its report `data/fs132/reports/FS132-E3.md`, commit `5c52ede0`; its results are items 6 and 9, at the same
+    grades). **Added by the report**: **a statement defect in the plan's dictionary** — "a tip at `y` → a label `c` of the
+    cycle with `y ∈ H_c`" is too wide (true of a label present only outside the unit disc about `p`); the term that carries
+    the step is "`y` in the closure of `H_c ∩ B(p, 1)`" — a correction owed to `plans/FS132-six-by-the-nerve.md` § The
+    readings, stated, filed as a dated line at the record job (its writer has handed back); **three re-aims** — FS-123 (the
+    exclusion has no Siamese clause and covers a valid six-coloured fragment wherever four tiles of four colours meet in a
+    cycle, **given** two standard facts about maps it did not derive: a short job, "a map vertex carries the four sets"),
+    FS-124 (the orbit form is a pruning rule; the open case at a four-cycle centre is the mixed ring), row 149 (a second
+    route with no bends, after that short job); **a question for the Searcher's queue** — the placement of a
+    non-four-colourable graph at radius 2 (`plans/SEARCH-QUEUE.md` line 9) was asked for the binary four-cycle's kill, now
+    derived at radius 1 with no graph; **what it left unread**, said in its record: the base's verification, the proof of
+    the stalled input, wave 7's planner's record, rows 140–141, the manuscript's § 7; **not reached**: C132-RADIUS and the
+    REG-J′ side question. **Its held points, ruled**: (i) the third-label rigidity at a triangle centre — "a job of its
+    own" — is one of the existence side's candidates before the asking lane (item 9 (d)); (ii) **the step lemma (M8) is the
+    piece the kernel planner's blind phase is for** — said in that brief without naming the step, which would break the
+    blindness: the brief asks for its own route to the first statement and, when the fence lifts, for the two steps "its
+    deriver names as unread by a second mind"; (iii) **the short job "a map vertex carries the four sets" is not briefed
+    tonight**: it turns a measurable theorem back into the map class, strengthens rows 148–149, and bears none on the
+    measurable road — the asking lane ranks it. **The Searcher's queue**: line 9 is marked — its first consumer is met by
+    C132-M-EXCL (one mind, kernel pending); it stays open at low priority as a second route until the kernel has that
+    statement. **Slots**: two running (the asking lane's job; the import's landing); the next deriver waits for the asking
+    lane's card, the kernel planner for the landing.
+
