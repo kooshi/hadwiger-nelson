@@ -88,7 +88,7 @@ The gate's recorded state on `main`, which your counts are reconciled against:
    `ARCHITECTURE.md` conflicting in one place, the end of § 3 — keep `main`'s rows, then the branch's § 3.12 — and `Proofs.lean`
    and `scripts/Axioms.lean` merging by themselves. A conflict in a Lean file under `Proofs/` is a message to me. Build.
 3. **The comparison, again, on the joined tree.** Re-run the import's instrument on the built module
-   (`tools/fs132_i1_readback.py`, as its record's stage 2 ran it): the eight declarations must read identical to the release's,
+   (`{L}tools/fs132_i1_readback.py`, as its record's stage 2 ran it): the eight declarations must read identical to the release's,
    term for term, and its planted faults must still fire. Wave 8 brought modules and imports this branch never saw, and which
    instance a term elaborates with depends on the imports — that is how the one difference so far arose. Any difference: message
    me before repairing it.

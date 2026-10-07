@@ -47,3 +47,16 @@ what the release's proof and this project's six-colour theory give together, aim
 milestone. The budget is the owner's: as at about 20:30 UTC the evening
 before — so the slots go to the exploration, and fewer agents run at once.
 
+## Kooshi's fifth word, 2026-10-07 (UTC) — the reins (verbatim)
+
+> […] I'll hand the reins over to you […]. Keep us on track to 6 or 7. I suggest walking the standard workflow at this point once things settle into a clear direction. I'll go with whatever you recommend on the open questions with that in mind. Keep your handoff current in case of auto compaction.
+
+**How it is read** (Keryx's, labelled as mine): for this night the open questions put to him are decided by my recommendations,
+each shaped by "on track to 6 or 7" — the import's landing, when the density result is formalized, whether a blind second
+derivation runs, what of the backlog restarts. "The standard workflow" is Workflow 3.1's states for the milestone the exploration
+points at: derive, record (Derived), the kernel module planned and implemented (Closed) — so the pause on formalizing ends for
+whatever the direction stands on, once the direction is clear, and stays for the rest. Staffing is unchanged: his cap of three
+slots, and the budget is unchanged — it is not his word to spend it faster. Nothing here
+authorizes anything his standing words hold: measure rigidity at number fields stays held; nothing is published or posted; the
+release's checking tool is not run before its audit.
+

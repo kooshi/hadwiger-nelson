@@ -8934,3 +8934,30 @@ reason by the close.*
      amendment's commit: I merge the branch as one commit, re-run the two audits on `main`, tell FS-132's deriver
      the front page is current on disk, and file FS-133's drafts** (FS-133 inventory item 3 (b)) — the merged
      page says FS-133 is "Opened … its unchecked step first", stale by an hour.
+
+632. **Kooshi's fifth word (2026-10-07): the reins — "Keep us on track to 6 or 7 … walking the standard workflow … once things settle into a clear direction … whatever you recommend on the open questions with that in mind"** (source: `data/external/EXT-OAI1-request.md`, fifth word, verbatim there). **The open questions he delegates, and my recommendation on each, now the decision:**
+     (a) **The import lands tonight** (FS132-L1, the third slot, launched now). Alternative: wait until a Lean job needs
+     it. Why now: under every direction the exploration can take, whatever is formalized cites these two theorems; it
+     is one bounded job with its brief ready; and it takes the one certain prerequisite of "the standard workflow"
+     off the critical path while the derivers work. This amends ruling 630 (a). Confidence: medium-high. (b) **What
+     else is formalized waits for the direction, and the direction is FS132-E3's first verdict** — whether this
+     project's exclusion runs on the extraction's data. **If it runs**: the road to seven is the measurable one; the
+     kernel lane's planner (`debruijn`) opens on FS-132's derived statements over the import — the extraction
+     (C132-EXT-DISC, C132-CORES-FREE) and the measurable exclusion — and the backlog's map-class waves stay paused.
+     **If it stalls at a step that reads an arc or a tile**: the map step stands, and the backlog restarts by the
+     asking lane's table — wave 7 (the four-colour vertex) first, then wave 9 restated over the import, wave 6's two
+     in-flight jobs. **Either way**, when both of FS-132's derivers have reported, the asking lane re-ranks
+     (Workflow 3.1's step 1) before a second wave of launches. Alternative: start a planner now on the extraction.
+     Why not: its Lean is a port of the release's five-colour modules across 1,502 Mathlib commits, the heaviest kind
+     of job, and whether it is on the road is what the verdict says. Confidence: medium. (c) **The density result
+     (FS-133) gets its kernel planner when the kernel slot is free and FS-132 does not need it** — after the
+     import's landing, and after (b)'s planner if the verdict is in by then; no blind second derivation. Alternative:
+     first. Why second: "on track to 6 or 7" — it bears none on that; why at all tonight: it is Derived, its window
+     is the calendar's, and the workflow's next state for it is the kernel plan. Confidence: medium. (d) **Staffing
+     for the night**: his cap of three; two derive-lane agents and at most one kernel-lane agent at once; no fourth,
+     no burst. If a halt comes, every job resumes from its last saved stage by message (the handoff's § 2
+     says where each is). (e) **Unchanged**: the release's checking tool stays unrun until its audit (no audit is
+     briefed tonight: it bears none on six against seven); the fallback write-up and the six papers wait for him;
+     measure rigidity at number fields stays held. (f) **He is sent a push notification for one thing only**: a
+     statement that would fix the value of `χ(ℝ²)` — sent as "claimed by one mind, unchecked" (FS-132 inventory,
+     rule 2).
