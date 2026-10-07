@@ -1,0 +1,77 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 4,5,6,7,8,9,10,11
+==> build: this run's full output: build/gate/build/20261007T170947Z-3476434.log
+    ⚠ [5727/5781] Replayed Proofs.HadwigerNelson.Plane.ThreePiece
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:87:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:92:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:101:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:105:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:109:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:113:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:117:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:122:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:130:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:134:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:142:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:147:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:158:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:163:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:168:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:186:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:191:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:212:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:216:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:222:18: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:237:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:258:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:264:18: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:279:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:283:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:294:0: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:299:0: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:303:0: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreePiece.lean:307:0: declaration uses `sorry`
+    ⚠ [5741/5781] Replayed Proofs.HadwigerNelson.Plane.ClosePair
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:53:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:58:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:63:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:69:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:98:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:103:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:120:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:125:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:137:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:148:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:158:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:169:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:183:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:195:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:209:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:222:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:237:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:250:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:257:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:272:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:282:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:292:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:300:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:319:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:337:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:355:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:372:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:384:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:398:0: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:402:0: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePair.lean:406:0: declaration uses `sorry`
+    ⚠ [5770/5781] Replayed Proofs.HadwigerNelson.Plane.ClosePairModel
+    warning: Proofs/HadwigerNelson/Plane/ClosePairModel.lean:32:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePairModel.lean:40:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePairModel.lean:48:8: declaration uses `sorry`
+    ⚠ [5774/5781] Replayed Proofs.HadwigerNelson.Plane.SectorPoint
+    warning: Proofs/HadwigerNelson/Plane/SectorPoint.lean:51:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SectorPoint.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SectorPoint.lean:76:8: declaration uses `sorry`
+    All targets up-to-date (5958 jobs).
+==> build: OK — all 1853 modules already up to date, nothing built, 4 module(s) with warnings, 2s
+    full output: build/gate/build/20261007T170947Z-3476434.log
+EXIT 0

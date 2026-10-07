@@ -396,3 +396,21 @@ hypothesis `|w − x| = 1`. Each docstring's named inhabitant is now run by a de
   theorems; kernel-checked on a branch, not through the gate)".
 - **Proof Atlas**: row 162's five statements named above change grade [hand] → [kernel] at the landing, not before; no
   other grade moves by this job.
+
+## Stage 5 — SAVED (FS124-I2): the tree as committed, and the hand-back
+
+**The build as committed** (`169c8511f`): the same command, exit 0 — `build: OK — all 1853 modules already up to date,
+nothing built, 4 module(s) with warnings, 2s` (`data/fs124/i2/logs/build-3-as-committed.log`): the four modules with
+warnings are the other four of the skeleton. The build of Stage 3 is the build of the committed files.
+
+**The price of the job, as measured.** 63 leaves of 63 (57 named theorems, 6 spec examples), 9 helpers, 2 added
+examples; 449 lines added to the two files, 63 removed (each `  sorry`); two builds that compiled (9m29s each: the walk
+over 477 batches, six or seven modules to compile at 2 to 3 s each) and two that found nothing to build; about ten `lean`
+runs of 2 s. **Wall clock: 16:38 to 17:10 UTC, 32 minutes, 19 of them the two walks.** No leaf took a second route; no
+leaf is left `sorry`; no statement came back through the coordinator. What made it short is the plan: every leaf had its
+route and its Mathlib names, and the two leaves that carry the mathematics were proved when I began.
+
+**Left for others, by name.** Nothing of my two files. On the branch: `Plane/ThreePiece` (29) and `Plane/ClosePair` (32)
+are the other implementer's; `Plane/ClosePairModel` (3) and `Plane/SectorPoint` (3) the third job's and the θ-lemma's.
+
+**The report**: `data/fs124/reports/FS124-I2.md`.
