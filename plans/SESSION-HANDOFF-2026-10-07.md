@@ -70,14 +70,18 @@ everything else.*
 
 ## 0b. WHERE THE NIGHT STANDS (about 07:00 UTC) AND WHAT IS LEFT OF IT
 
-- **Running: the kernel planner alone** (FS132-K1, phase 2, reading the step lemma M8 first). **On its message or hand-back**:
-  if M8 holds as a leaf, **brief FS-132's record job** (`ephodos`, Workflow 3.1's step 6; fifty-one entries in six records —
-  `plans/FS132-E1-derivation.md` to `plans/FS132-E6-derivation.md` — so two jobs, the second's brief quoting the first's
-  lists; the last record job's briefs are `data/fs129/briefs/` Z1 and Z2): the derivation file `plans/FS132-derivation.md`,
-  the errata and dated corrections owed (the ring card's "opposite at antipodes" line; the second round's controls as
-  controls of the margin case; the dictionary's "tip"; C132-DIAG-WIDE's attribution; my two withdrawn rulings), the stubs'
-  bearing lines, and the front page's drafts. **If M8 fails or cannot be made a leaf: no record job** — the first night's
-  exclusion goes back to a deriver (one `ephodos` job on M8 alone), and Kooshi hears it first thing.
+- **Running: the record job, part 1, alone** (FS132-Z1, `ephodos`; brief `data/fs132/briefs/FS132-Z1-record.md`; record
+  `plans/FS132-Z1-record.md`): the derivation file `plans/FS132-derivation.md` from the six derivers' records, the search and
+  the planner's second reading — every statement at its source's grade, every stall as an entry, each entry marked for
+  which side of the unit-arc line it sits on — and the dated corrections. **On its hand-back**: review (run its gate; read
+  the exclusion's entry against `plans/FS132-E3-derivation.md` and the planner's § 3.2 myself), log; **part 2 (the stubs,
+  the predictions scored, the front page's drafts — rows 155 onward and grokkings G96 onward are free numbers) is NOT
+  briefed until Kooshi has answered the question of FS-132 inventory item 24** (what the milestone delivers).
+- **The kernel planner is done** (FS-132 inventory item 30): **the step lemma holds on its line-by-line reading — the first
+  night's exclusion has two minds on every step, kernel pending**; its skeleton and the ported palette definitions are on
+  branch `fs132-wk1` (tip `e3695302`; the skeletons hold `sorry` and must not be merged); a successor resumes at its
+  record's stage 4. **No implementer tonight**: what is formalized first is Kooshi's — my recommendation: one
+  implementer on the palette port and the step lemma's leaves, on that branch.
 - **No fourth derive round, no successor on C132-ARC, no new milestone opened tonight.** Three rounds delivered what a
   point's unit circle forces around it where no boundary is a unit arc about a ring point; each ended at that arc, which is
   FS-124's subject and the open hard case. Opening it is the asking lane's and Kooshi's.
