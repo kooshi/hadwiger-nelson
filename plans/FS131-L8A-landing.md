@@ -242,3 +242,191 @@ rebuilt, **0 module(s) with warnings**, 17m22s", `EXIT=0` — `main`'s modules c
 dependents and `Proofs`.
 
 **Token count at this stage**: no reading of the harness's count; my own estimate is about 330k.
+
+## Stage 5 — SAVED (FS131-L8A): what the wave assumes, the registration, the vacuity scan and its ruling, the heads as the kernel holds them
+
+### 5.1 What the wave assumes: nothing — two conditions declared
+
+`./scripts/assumptions.sh --self-test` first, on the merged tree with the list as it came: exit 0, "OK — all 33 checks behaved:
+every planted fault fired, and every partner stayed silent" (`data/fs131/l8a/assumptions-selftest-first.out`). Then the step
+itself: **exit 1, 2 failures** (`assumptions-first.out`; the scan, `assumptions-first.scan.log`):
+
+```
+FAIL undeclared-never-concluded HadwigerNelson.Plane.ArcMap.OuterPairFree :: taken as a hypothesis by 3 constant(s) ([…crossed_semiHub, …ringGerm_outward]), concluded by none: an assumption (.former) or a condition (.condition)?
+FAIL undeclared-never-concluded HadwigerNelson.Plane.ArcMap.TipPairFree :: taken as a hypothesis by 2 constant(s) ([…star_tip_nonempty, …ringGerm_inward]), concluded by none: an assumption (.former) or a condition (.condition)?
+```
+
+Both read from their definitions and the planners' record, not from their names. `TipPairFree p ψ` is `¬ F.GermOnQ p (ψ − π/3) .cw
+∧ ¬ F.GermOnQ p (ψ + π/3) .ccw` ("**The tip pair** `{v⁻, u⁺}` at `r(ψ)` lies on no (Q) arc", `Plane/RingCalculus/Basic` l. 70);
+`OuterPairFree` is the same of the other two germs. The first planner's record: "The two germ pairs are kept as two explicit
+conjunctions (`TipPairFree`, `OuterPairFree`)", "Hypothesis "neither v⁻ nor u⁺ lies on a (Q) arc" is `TipPairFree`"
+(`plans/FS131-w8-kernel-plan.md` ll. 132, 173): each is a row's own hypothesis about the theorem's map, point and angle — a
+configuration of the ring — and stands for no result. They hold at every angle of a (Q)-free ring (`QFreeRing.not_germOnQ`, twice),
+and so on `halfPlane2` at `0`; no theorem *concludes* the former by name because `IsHub`, which `QFreeRing.isHub` concludes, is
+stated over the four germs and equals the two pairs only through `isHub_iff`. **Declared as two `.condition` lines** in
+`AssumptionAudit.declared` (`scripts/Assumptions.lean`), each with that reason. Ratified by the coordinator's message ("right as
+you describe them").
+
+After them: **exit 0** — "assumptions: OK — 1 outside theorem(s) as axioms, with 8 theorem(s) resting on them; 19 named and 16
+inline hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s) and mentioned by 1" (`assumptions-declared.out`).
+
+| | `main` (FS131-LT5's gated scan) | this tree |
+|---|---|---|
+| `=== SCANNED ===` | constants=13795 theorems=10173 formers=303 hypotheses=17192 closed=1473 | constants=14063 theorems=10405 formers=320 hypotheses=18013 closed=1473 |
+| the nine | axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1 | **the same nine** |
+| the rest | conditions=33 … silent=1 cohyp=58 hints=0 unseen=15214 fails=0 | conditions=35 … silent=1 cohyp=58 hints=0 unseen=16035 fails=0 |
+
+**The wave brings no assumption in either form**: no `axiom`, no named hypothesis, no closed hypothesis (`closed` did not move),
+no consumer of a declared one. The nine counts are `main`'s, so the front page's nine **do not go stale** at this landing: both
+recorded sources read "match (9 of 9 compared)". `--write-ledger`: exit 0, "ledger written (107 rows)", and **the ledger gains no
+row and loses none** (the section "rows the ledger gains (+) and loses (-)" is empty; the file's digest is unchanged;
+`assumptions-write-ledger.out`).
+
+**The class the step cannot see** (a hand result or an open question written out in a binder over the theorem's own variables),
+read with the last landing's aid (`tools/fs131_lt5_docwords.py`, 29 words; `docwords-wave8.out`): twelve modules, 347 doc
+comments, **one hit**, `SemiHub`'s module doc, for "named hypothes" — the sentence "So the three rows are theorems, not
+implications from a named hypothesis", which says there is none (inventory item 571's ruling, as built). None is written out in
+a binder. `unseen` rises by 821: the wave's hypotheses over its own variables — a valid map, a non-Siamese map, a cover, a count of
+colours, a change point, an arc of `Γ` — each a condition on the theorem's objects.
+
+### 5.2 The registration: thirteen records in a block of this job's
+
+From the kernel's own list of theorems (`data/fs131/l5/count-modules.lean` on this tree against `main`'s gated list,
+`data/fs131/lt5/gate/count-modules-landed2.out`), by `tools/fs131_l8a_register.py` (the last landing's tool with the wave's
+modules, blocks and header in place of wave 10's; `register-list.out`): "main 9513 theorems, landing 9744 … the wave adds 231
+(Basic 32, Empty 20, HubCount 25, OuterAdj 6, RingColour 16, SemiHub 53, SemiHubPlaces 22, SimpleOn 8, SoleTip 8, Star 17,
+StarChart 17, TilesAt 7); generated by Lean 11 …; hand-written 220; with a record 207; MISSING 13; STALE 0; FOREIGN-MODULE 0".
+The thirteen, all of `Basic`: ten lemmas no block listed (`GammaFreeRing.not_isRingArc`, `GermOnQWith.germOnQ`,
+`IsFullSemiHub.isSemiHub`, `IsHub.not_isSemiHub`, `IsOuterTileAt.not_isTip`, `IsTip.tileAt`, `QFreeRing.not_germOnQ`,
+`TileAt.subset_ball`, `outerTileColours_subset`, `tipColours_subset`) and three theorems Lean generates for the enumeration
+`SemiKind` that the generated-name pattern does not know (`SemiKind.O.sizeOf_spec`, `SemiKind.T.sizeOf_spec`,
+`SemiKind.ofNat_ctorIdx`) — registered rather than exempted: a record is the stronger of the two. Written as a block
+"FS131-L8A" above the PURCHASED banner (`--write`: "wrote 13 records"); after it "hand-written 220; with a record 220; MISSING 0;
+STALE 0", the blocks summing to 220 (`register-after.out`). The tool's two plants (`register-selftest.out`): a wave theorem's
+record removed — MISSING fired; a record naming no declaration planted in a wave block — STALE fired.
+
+### 5.3 The vacuity scan: red on a marker, a ruling, green
+
+**The scan's own procedure** (`scripts/Vacuity.lean`, "How a later wave registers its carriers"), step (1): the census
+(`data/fs131/l8a/census.lean`, wave 5's with its scope changed to the twelve modules and nothing else; `census.out`): 19 formers —
+seventeen predicates, the enumeration `SemiKind` and one generated auxiliary of it. **None has an unconditional `¬ P …` at a
+closed instance, none an `IsEmpty` instance, none a binder site at a closed instance** (`SemiKind`'s 15 closed sites are binders
+of the enumeration itself, which is data), so for none could step (3)'s `VACUOUS` control be planted. **No new carrier IN**; each
+OUT with its reason in the wave's entry of `scripts/Vacuity.lean` (the registry is a comment of the scan; no library module
+changes). Two decisions a later reader should see:
+- **`IsStar4`**: "does one exist" is a theorem (`exists_isStar4`), so by the procedure's first clause alone it would be IN. Kept
+  OUT by the law as wave 5 applied it and wave 6's landing was ruled on (`AeColouring.Fan`): nothing refutes a star at a closed
+  instance, so no control can be planted. The third instance of that case; one mind's application of a ruled law.
+- **`SimpleOn`** (wave 7's foundation, landed here): OUT where the tracked `Simple` is IN — nothing refutes it at a closed
+  instance. Its closed model is `halfDisc` at `{0}`, inside an `example`.
+
+**The first scan: red.** `./scripts/vacuity.sh`, exit 1 (`vacuity-probe.out`, scan `vacuity-probe.scan.log`):
+
+```
+SITE STALE HadwigerNelson.Plane.ArcMap.v6_hubs :: F.Valid
+SITE STALE HadwigerNelson.Plane.ArcMap.v6_hubs :: F.NonSiamese
+=== SCANNED === declarations=14807 refutations-skipped=215
+=== TOTALS === sites=1446 vacuous=0 stale=2 declared=3 witnessed=38 generic=1401 unknown=2 untelescoped=0
+==> vacuity: FAIL — 2 site(s) that no baseline can excuse
+```
+
+**The mechanism** (`scripts/Vacuity.lean`, `marker`, `probe`): the docstring marker makes each tracked binder of the declaration
+read `DECLARED` when that binder's carrier is provably empty and `STALE` when it is not — "a docstring declares emptiness that is
+not proved" — and `STALE` fails before the baseline. `v6_hubs` binds `F.Valid` and `F.NonSiamese` at a variable `F : ArcMap 6`,
+both tracked since wave 3, neither empty alone. The emptiness its marker named is **joint**, across five hypotheses, and is a
+kernel fact (`v6_hubs_vacuous`: `False` from the exact hypotheses); a per-binder scan cannot see it, and its header says so.
+`v6_hug` carried the same marker and concludes `False`: a refutation, skipped, its marker never read. Inventory item 518 placed
+the markers "whatever the scan prints", on the premise that the scan does not track `ArcMap` binders; the one print that is a
+hard failure is the one it got.
+
+**Sent to the coordinator** with the scan's lines and three options. **Ruled, by its message of 2026-10-06: "your option (i),
+now; option (ii) is filed for the tooling job … in `Empty`, the docstrings of `v6_hubs` and `v6_hug` lose the scan's `VACUITY
+DECLARED:` marker and say the joint vacuity in words the scan does not parse, with every fact kept … Why not leave the marker and
+excuse the sites: the marker, as the scan defines it, is false of `v6_hubs` — no single carrier is empty — so `STALE` is the gate
+being right, and I do not want a baseline or a special case to make it quiet. … Your touches are extended to exactly these two doc
+comments in `Empty`."**
+
+**The two doc comments** (`data/fs131/l8a/docstring-edits-2.py`, exact replacements; before and after in `docstring-edits-2.list`):
+in each, the line "VACUITY DECLARED: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is a step of that refutation…"
+becomes "**Jointly vacuous, and a kernel fact (`v6_hubs_vacuous`)**: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is
+a step of that refutation and is consumed nowhere else. (Not the scan's `VACUITY DECLARED` marker, which claims that one
+binder's carrier is empty; here each hypothesis is satisfiable alone and the five are not together.)" — and for `v6_hug` the
+same with `v6_hug_vacuous`, "each of the first five hypotheses", and the sentence that the scan skips it as a refutation. The
+script refuses to write if the marker's string (the two words and a colon) still stands in the file; it stands 0 times in the
+ring calculus now. Shown twice as before: **text**, against `23389f17`: `files=1 doc-comments-changed=2 failed=0`
+(`docstring-text-check-2.out`); **elaborated**, the twelve modules after the rebuild against the dump before
+(`sigs-compare-2.out`): `before=398 after=398 … missing=0 added=0 changed=0`, IDENTICAL — and identical to the dump taken before
+any docstring was touched. The rebuild: "473 of 473 batches, 2 module(s) rebuilt, 0 module(s) with warnings"
+(`build-empty-docstrings.log`: `Empty`, `Proofs`).
+
+**The scan after it: green** (`vacuity-probe2.out`, scan `vacuity-probe2.scan.log`), "vacuity: OK":
+
+| | `main` | first scan | after the rewording |
+|---|---|---|---|
+| declarations | 14501 | 14807 | 14807 |
+| refutations-skipped | 199 | 215 | 215 |
+| sites | 1269 | 1446 | 1446 |
+| vacuous / stale | 0 / 0 | 0 / **2** | 0 / 0 |
+| declared | 3 | 3 | **3** |
+| witnessed | 38 | 38 | 38 |
+| generic | 1226 | 1401 | 1403 |
+| unknown | 2 | 2 | 2 |
+
+`declared` stays 3 — not the 5 the first implementer's draft expected: the two markers are gone, and `v6_hug`'s was never
+counted. **How the scan classes every new site** (`tools/fs131_l5_vacdiff.py` against `main`'s gated scan; the gated run's output
+is in stage 6): 177 added sites, **every one `GENERIC`**, each on a carrier tracked since the first waves and taken at a variable
+map — `Valid` 82, `NonSiamese` 52, `IsChangePoint` 23, `IsRingArc` 14, `IsHub` 5, `Simple` 1 — by module `SemiHub` 64,
+`SemiHubPlaces` 39, `Star` 27, `Basic` 11, `Empty` 9, `StarChart` 8, `RingColour` 7, `OuterAdj` 6, `SoleTip` 3, `TilesAt` 2,
+`SimpleOn` 1; no row of `main` lost, none added to a declaration `main` held, no new evidence row. **No site reads `VACUOUS` or
+`UNKNOWN`; nothing asks for a baseline entry.** `declarations` +306 and `refutations-skipped` +16 are, module by module, the
+twelve new modules' and no other's. The sixteen refutations skipped: four rows that conclude `False` (`emptyNS`, `doubleTip`,
+`v6_hug`, `not_sole_tip_of_adjacent_changePoints`), the two kernel facts of joint vacuity, six steps inside a proof by
+contradiction or negative clauses (`GammaFreeRing.changePoint_gap`, `not_double_two_classes`, `fin_four_three_pairs`,
+`qcol_not_one_arc`, `star_anti_ne`, `false_of_antipodal_gaps`), and four whose conclusion is a predicate that unfolds to one
+(`halfPlane2_gammaFreeRing`, `GammaFreeRing.qFreeRing`, `halfDisc_valid`, `halfDisc_nonSiamese`) — the reducing telescope's
+standing reading of `GammaFreeRing`, `QFreeRing`, `Valid`, `NonSiamese`, as for every `_valid` theorem `main` holds.
+**What the scan cannot see, and the docstrings say**: the theorems whose hypotheses no Lean object is known to meet together —
+a star, a semi-hub, two change points 60° apart, `emptyNS`'s class at nine colours. They read `GENERIC`, binder by binder, which
+is true and is not evidence that the hypotheses hold together. They are the landing's open gate items (drafts, item 8).
+
+**`scripts/vacuity-baseline.txt`**: the header's two count lines, from `scripts/gate_report.py header` on the green scan; no
+entry added, removed or reworded (`vacuity-baseline.diff`):
+
+```
+-#   declarations=14501  refutations-skipped=199  sites=1269
+-#   vacuous=0 stale=0 declared=3 witnessed=38 generic=1226 unknown=2
++#   declarations=14807  refutations-skipped=215  sites=1446
++#   vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2
+```
+
+### 5.4 Every head's statement, read from the kernel
+
+`data/fs131/l8a/kernel-sigs.lean` (the last landing's lister with the twelve modules in place of its own; its printer
+byte-identical, by `diff`) prints every theorem of the twelve modules from its stored type: 241 records. Read against the files
+by `tools/fs131_l8a_kernelsig.py`, this job's wrapper of the last landing's reader (`tools/fs131_l10b_kernelsig.py`, imported,
+not edited); `kernel-sigs-read-probe.txt`, the table `kernel-sigs-table-probe.txt` (the gated run's are in stage 6):
+
+- **"records read: 241 (theorems 241, axioms 0); generated by Lean, not compared: 24; compared with their files: 217"**;
+  **no `MISSING-BINDER`**: every named binder of every file signature is a binder of the kernel's statement; "INCLUDED 310 …
+  ABSENT inst/term 62 (reviewed 62, not reviewed 0)"; all 72 heads (`data/fs131/l8a/heads.txt`, taken from the audit's blocks by
+  unique suffix) have a record; "kernel-signatures: PASS".
+- **The class of inventory item 556 has no instance to find here.** The twelve modules declare these section variables and no
+  other: `{k : ℕ}`, `(F : ArcMap k)` / `{F : ArcMap k}`, and in `RingColour`'s section `GermColouring` `{p : ℂ} {κ : ℝ → Side →
+  Fin k}`. None is a hypothesis; every hypothesis of every theorem is a binder of its own signature. The 62 ABSENT rows are bare
+  `k` (36) and bare `F` (26) in statements that fix a map of their own (`{F : ArcMap 6}`) or speak of no map (angles, points of
+  `ℂ`, sets, finite data); written to `kernelsig-reviewed.txt` by `mk-reviewed.py`, by class and only where the statement's
+  `SIG` line does not hold the variable's name as a token ("reviewed 62; left unreviewed 0").
+- **Thirteen theorems the kernel holds have no text of their own** — the ten fields of the `Prop`-valued structure `IsStar4`
+  and three of the enumeration `SemiKind` — which the reader would report `NOT-FOUND`. The wrapper does not exempt them by
+  name: for each record with no text it looks in the module's own file for the structure and the field line, or the inductive
+  and the constructor, and counts the record as generated only then, printing the field's line beside the kernel's conclusion
+  (read: each pair agrees — e.g. "`cone₄ : coneAt t₄ p = angleIcc e₄ (e₁ + 2 * π)`" against "`coneAt t₄ p = angleIcc e₄ (e₁ +
+  2 * Real.pi)`"). Its plants (`--plant`, `kernelsig-plant.out`): a name `IsStar4.zzNoSuchField`, a `SemiKind.ZZ.sizeOf_spec`
+  and a plain theorem name with no text each stay `NOT-FOUND` and are not exempted; a true field is exempted. "plant: PASS".
+- **The five heads the brief names, as the kernel holds them** (the table's `kernel:` lines against its `file:` lines): `emptyNS`
+  — `{F : ArcMap 6}`, five hypotheses (`F.Valid`, `F.NonSiamese`, `F.Covers p 1`, `4 ≤ (F.coloursAt p).ncard`,
+  `F.GammaFreeRing p`), `False`; `outerAdj` — `{F : ArcMap 6}`, eight; `star_anti` — `{F : ArcMap 6}`, fifteen, the two ruled
+  ones (`hp''`, `hm''`) among them; `ringArc_star` — `{k} {F : ArcMap k}`, eight; `semiHub_places` — `{k} {F : ArcMap k}`, seven,
+  with `(F.coloursAt p).ncard = 4`. In each the kernel's binders are the file's, one for one.
+
+**Token count at this stage**: no reading of the harness's count; my own estimate is about 420k.
