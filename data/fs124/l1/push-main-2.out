@@ -1,0 +1,14 @@
+the commit to push: 47296ef525f1b0b47e61ac776a11e79b516b624a; the landed tip: 022f4c59; the gated commit: 24a42aa9; origin/main: 9ba528c4454cf702a025c19a0ff2c7edab996b9a  2026-10-07T17:39:09Z
+paths that differ from the landed tip, by top directory:
+      4 data
+      2 plans
+from the gated commit, outside plans/ data/ .claude/ BIBLIOGRAPHY.md LEDGER.md LEAN.md RUNNING.md: 0
+origin/main is an ancestor: a fast-forward
+narrow sorry lines in Proofs/: 0
+before: 9ba528c4454cf702a025c19a0ff2c7edab996b9a	refs/heads/main
+remote: . Processing 1 references        
+remote: Processed 1 references in total        
+To a git remote
+   9ba528c44..47296ef52  HEAD -> main
+push exit=0
+after:  47296ef525f1b0b47e61ac776a11e79b516b624a	refs/heads/main
