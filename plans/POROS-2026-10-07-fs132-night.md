@@ -256,3 +256,104 @@ hunch: the-existence-side-re-imports-regularity
 - The ranking's top three after this job differ from this morning's in at least two places: 0.7.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the road as one table, and the stall re-posed
+
+### 2.1 The road to seven, and the road to six, in the vocabulary of measurable colourings
+
+*A **weak colouring** is a measurable six-colouring proper at almost every unit pair. A **witnessed cycle** at a point `p` is a
+simple cycle of labels with, for each edge, a point `q ≠ p` such that both labels' closed essential supports miss the straddle set
+of `{p, q}` (finding A: what tonight's statements read; the extraction's continua give it). The **ring** of `p` is its unit circle
+read through the release's palettes. Status words: **outside** (the release, kernel-checked there), **derived** (tonight, [hand],
+one mind, named), **stalled at**, **posed**, **unposed**. "Needs" names the weakest class the step is known to hold in.*
+
+| step | the statement | status | needs | what a six-colouring must do here to survive |
+|---|---|---|---|---|
+| 0. the transfer | `χ(ℝ²) = χ_m⁰(ℝ²)`: the plane needs seven iff no weak colouring of the plane exists | outside (`[OAIMath2026]` Thm 1.3; G93) | nothing | nothing: it may be taken measurable |
+| 1. centres exist | every closed disc of radius above 1 holds a cyclic centre | derived — C132-CORES-FREE (FS132-E1) | nothing | it has them, in every such disc |
+| 2. a centre with data | some centre in the disc carries a label cycle of length 3 to 6 with its continua (so a witnessed cycle) | derived under a hypothesis — C132-EXT-DISC (FS132-E1): the centres finite in the disc; its argument reads zero length and isolation of the one essential centre | **a hypothesis nobody supplies at six**: a normal form, or the witness card's first branch | **hide here**: centres infinite in every disc — accumulating, or along a curve — which needs slack (G95) or wildness that properness does not forbid |
+| 3. not every centre is a triangle | some witnessed cycle has length at least four (C132-LONG; C132-M-CV) | **stalled** — FS132-E2 at the ring; FS132-E3's reading of the map route stalls at FS112-N3-DENSE3, the same statement | below | **live on triangles alone**, which no segment-and-arc map can (rows 134, 137) |
+| 3a. the strips | at a triangle centre a one-sided strip at almost every direction carries only the three outside labels | derived — C132-TRI-STRIP (FS132-E2) | a witnessed triangle | — |
+| 3b. the orbit index | the ring's outside label has an index `W ∈ {2, 3, 4}` on almost every 60° orbit | derived — C132-ORBIT (FS132-E2), over the release's Cor. 5.4 (read by FS132-E3) | a witnessed triangle | — |
+| 3c. the ring winds | a ring with finitely many changes, no two `π/3` apart, winds 3 modulo 6 times: at least nine changes | derived, colouring-free — C132-INDEX, C132-RING-WIND (FS132-E2); **its hypothesis C132-RING-TAME is the stall** | clause 2: posed as a conclusion (the ring card); clause 1: **the honest normal form**, or false | spend the ring: infinitely many changes; two changes `π/3` apart (turning, or alternating); or only two outside labels |
+| 3d. the count inside | the centres inside the unit circle of a triangle centre add up to the ring's class | the relation derived — C132-REL (FS132-E2); its use on the unit circle is **unposed** (the structural form of the ring card) | more than tameness: the smoothed colouring on the circle must be the ring | a ring whose smoothed class is not its index |
+| 3e. the complementary pair | no two triangle centres with disjoint triples are closer than 2 | **posed** — C132-COMP (this job; in the map class row 133's W-TAN, for partial colourings FS107-R-CP) | two witnessed triangles | keep complementary triangles 2 apart, or tangent |
+| 3f. the bicycle | two triangle centres of one type between 1 and 2 apart cannot both have rings winding 3 | held in the regular classes (row 132, FS110-CB-LEMMA3); **unposed** for weak colourings | a map, as the regular proof has it | — |
+| 4a. the outside-labelled four-cycle | no witnessed four-cycle has a ring whose palettes almost everywhere hold one of the two outside labels | derived — C132-M-ORBIT, C132-M-EXCL (FS132-E3); its step lemma and its kill have no second reader | a witnessed four-cycle; no map, no Siamese clause, no isolation | not this |
+| 4b. the two-pair ring | no point has a ring alternating under the 60° rotation between two disjoint pairs of labels | derived — C132-DIAG-WIDE (FS132-E3), the release's Lemma 6.4 read at six | nothing at the point | not this |
+| 4c. the mixed ring | a witnessed four-cycle whose ring holds outside labels on one set of positive measure and pairs of its own labels on another | **open** — FS-124's (Q) rings; pruning rule: every essential change of the outside state has own-label palettes near its orbit (C132-M-ORBIT) | unposed in measure; in the map class it reads arcs | **the held positives are here** (rows 136, 138: every fragment past `√3`) |
+| 4d. the diagonal ring that does not alternate | a witnessed four-cycle whose palettes almost everywhere hold a diagonal, not alternating | **unposed** (named by FS132-E3, Stage 4) | — | a candidate nobody has drawn |
+| 4e. five- and six-cycles | a witnessed cycle of five labels (one outside) or six (none) | **unposed** in measure; in the map class a six-colour vertex holds every disc below 3/2 (row 148) | — | a candidate past 3/2 |
+| 5. seven | steps 2, 3 and every row of 4 | — | — | — |
+| 5′. six | weak colourings of discs of every radius (C132-RADIUS, posed, unstarted; for maps row 145) | — | — | exist on every disc |
+
+**Which steps still need a normal form.** Step 2 (unless witnessed cycles exist with no hypothesis) and clause 1 of step 3c;
+possibly 3d. The normal form to try is **honesty** (row 143: free), and it is untested against the two slack colourings.
+**Which steps need a map.** None that was derived tonight. The regular proof's forms of 3d and 3f read one (a walk along an
+interface; two three-coloured circles), and whether they have a measurable form is unposed; 4c in the map class reads arcs and has
+no measurable statement yet beyond the stub's "a palette that is a diagonal of the vertex's own labels is a (Q) arc in measure".
+**The honest summary**: the exclusions of centres that are not triangles run with no map and no normal form, as far as they have
+been tried (two ring types of the four-cycle); the step that a non-triangle exists is where every request for regularity now
+sits. The frame "the measurable road" is right for step 4 and names a hope for step 3.
+
+### 2.2 The stall, re-posed
+
+**The class of C132-RING-TAME.** Split, as the stub's new section states: clause 2 a conclusion to be derived for every weak
+colouring that lives on triangles alone; clause 1 for honest (Grundy) colourings, not for saturated ones and not for all weak
+ones, after the two slack colourings are tested against honesty.
+**Which of the three smallest forms.** (b) and (c) together, re-posed as one question about the ring points where the outside
+label changes; (a) waits.
+**What can stand where the last two steps stand.** For "two centres of one type" and "the bicycle": the complementary pair
+(C132-COMP) is the regular chain's actual contradiction for one of its ten types and needs neither; for the other nine no weak
+form is posed, and I pose none tonight — the structural form asks first what the centres inside the unit circle must add up to,
+because without that the count has nothing to count.
+**Whether to ask the existence side another way entirely.** Weighed: (i) drop it for the hypothesis on the centres — no: that
+hypothesis is needed by every step and is the second card, but it tells six from seven nowhere; (ii) drop it for the YES side —
+no: the YES side's best-posed half is still the (Q) ring in the map class, and tonight added only a pruning rule to it; (iii) ask
+it through a normal form first — no: of its four open steps only one (clause 1) is known to need one, and the cheapest untested
+claim (C132-COMP) needs nothing. So the existence side is asked again, at the ring's change points, with no normal form.
+
+question: can-a-triangle-ring-change-at-two-points-sixty-degrees-apart
+  evidence: `plans/FS132-E2-derivation.md` ll. 457–460 (R3 "their hypothesis is C132-RING-TAME — the stall"; R5, R6 "no weak form") and ll. 552–556 (the turning ring: "C132-INDEX does not exclude it"); `plans/FS132-E3-derivation.md` l. 511 ("(⋆) and M7 are label-free and carry over word for word") and ll. 289–290 (finitely many change points: "here it is a consequence"); `LEDGER.md` row 133 ("complementary-type vertices within distance 2 are tangent pairs or bowties")
+  expected: the existence step needs a triangle centre's ring to be tame, as a hypothesis that only a normal form could supply
+  ask: in a weak measurable six-colouring all of whose centres are triangles, can a triangle centre's ring have two essential changes of its outside label π/3 apart, or does the transfer put a fourth label or a complementary triangle at the ring point?
+  if it cannot: C132-RING-TAME's second clause is a theorem with no normal form, the turning and the alternating ring leave the YES sketch, and the existence step is reduced to finitely many changes (the witness card's third claim) and the count inside the unit circle (the structural form below)
+  if a colouring by formula carries such a ring with triangles only on a disc of radius above 2: it is the first six-coloured object no map can be; extend it outward by formula, ask at which radius it dies, and rank that above the (Q) ring
+  if all three outside labels are forced at the ring point but no cycle is witnessed there: the stall has moved from the ring to which points carry witnesses, and the witness card takes the next slot
+  answered by: derivation — Ephodos
+  cost: one derivation job, no search; to read: `plans/FS132-E3-derivation.md` M0–M2 and M7, `plans/FS132-E2-derivation.md` §§ one-sided pure strips, the orbit index, the stalled step; `plans/FS107-derivation.md` for W-TAN and R-CP (row 133's map form)
+  hunch: it cannot — at a change on an outside-pure arc whose two neighbours also change, the point outside the unit circle whose two ring neighbours carry the labels on either side is left the third outside label (0.45)
+  falsifier: a weak colouring by formula near the closed unit disc about a triangle centre with ring a, b, c, a, b, c in which a ring point between two sectors on an outside-pure arc has only two outside labels near it
+  rank: 1
+
+question: do-witnessed-cycles-exist-with-no-hypothesis-on-the-centres
+  evidence: `plans/FS132-E3-derivation.md` l. 102 ("of the sets K_j only that p ∈ K_j, K_j ≠ {p}, and the exclusion") and ll. 210–237 (M4–M6 use one point of each set); `plans/FS132-E1-derivation.md` l. 326 (at the island colouring's accumulation centre "With clauses (1)–(3) alone the straight edges do satisfy it at `v`") and ll. 334–335 (isolation is read at "a continuum that must reach a fixed radius"); `LEDGER.md` row 143 ("a measurable Grundy colouring … without raising any point's colour index")
+  expected: the exclusions need the extraction's centre, so every measurable statement waits on local finiteness of the centres, or on a saturated normal form that gives it
+  ask: does every weak measurable colouring have, in every disc of radius above 1 and with no hypothesis on its centres, a point with a label cycle and one further point per edge carrying the two-label exclusion — the only data tonight's exclusions read?
+  if it does: the hypothesis on the centres leaves the road for every statement that reads witnesses only; the binary four-cycle's exclusion and the strips hold for every weak six-colouring; FS-127's accumulation question has no consumer on the exclusion side
+  if a colouring by formula has a disc with no witnessed cycle: the widest class is too wide; every statement is posed for honest colourings, and FS-127 is re-aimed at "an essential centre of an honest colouring is isolated"
+  if witnesses exist only at isolated centres, because the proof of the exclusion reads the continuum between the two points: the hypothesis stands as the first deriver left it, and its countable-closed sketch is the next claim
+  answered by: derivation — Ephodos
+  cost: one derivation job, no search; to read: the manuscript's proof of clause (3) (`M/interfaces.tex`, to ll. 581–590), `plans/FS132-E1-derivation.md` steps S8–S11 and § The two controls at seven, `plans/EXT-OAI2-reading.md` § 5.6 (the two slack colourings), `plans/FS121-D3-proof.md` (the Grundy construction)
+  hunch: the restatement is immediate; existence without isolation stalls at the proof of clause (3) (0.5)
+  falsifier: a step of C132-M-ORBIT's M0–M9 or of C132-TRI-STRIP's argument that reads a second point of one set, its connectedness or a limit of its points; or a weak colouring by formula with a disc of radius above 1 holding no witnessed cycle
+  rank: 2
+
+*The two cards are the stub's, verbatim (`plans/STUB-six-by-the-nerve.md` § The question, re-posed after the first night), where
+both forms, the six posed first claims (C132-COMP, C132-PLACE, C132-TURN; C132-WIT, C132-WIT-EX, C132-GRUNDY7), the outcome table
+and the registered expectations are.*
+
+### 2.3 The recommendation, in four parts
+
+- **The choice**: the ring card takes the first free deriver's slot, opening on C132-COMP; the witness card takes the next.
+- **An alternative weighed**: the witness card first, because every measurable statement at six is conditional on step 2.
+- **Why the ring card won**: it is the step at which six differs from seven; its first claim, if it holds, is the regular
+  chain's last line in the exact class and takes two lines; and all three of its branches change the next launch, one of them
+  toward a six-coloured object. The witness card's answers change the *class* every later statement is posed in, which costs
+  nothing to learn a job later.
+- **Confidence**: medium. The one fact that would change it: the third deriver's remaining work, or anyone's, showing that the
+  transfer (⋆) at a triangle centre forces nothing at a change point (then the ring card's second and third claims are empty
+  and the witness card goes first).
+- **Default**: if the coordinator says nothing, the ring card is launched first.
+
+## Stage 2 — SAVED
