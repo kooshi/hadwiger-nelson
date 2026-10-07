@@ -39,12 +39,18 @@ the next milestone**; staffing is his cap of three Opus slots.
 `plans/FS124-close-inventory.md`, items 1–5; its claim list `data/fs124/claims.md`); **the re-rank is filed** (the commit after
 `4bb0c8c4`; **the next filing's fact-audit base is that commit** — `git log -1 --format=%h -- plans/FRONTIER-STUBS.md`).
 
-**Running (three slots):**
+**Running (three slots, as of 13:44 UTC):**
 
 | job | where | what it hands on | on its message or hand-back |
 |---|---|---|---|
-| **FS132-I3** (`debruijn-implementer`) — the step lemma, then the shift's calculus (lots C, B) | worktree and branch `fs132-wi3`; record `plans/FS132-I3-implementation.md` there; brief `data/fs132/briefs/FS132-I3-step-lemma.md` | a message when `step_lemma` is proved — the one step of the exclusion with a single derivation | log; a line to Kooshi (the hand proof's thinnest step checked by the kernel) — or, if a leaf is false, at once |
-| **FS132-I4** (`debruijn-implementer`) — the join, then lots E and D | worktree and branch `fs132-wi4` (cut from `fs132-wk1` at `1c5e2609`; it merges `fs132-wi2`, the port); record `plans/FS132-I4-implementation.md` there; brief `data/fs132/briefs/FS132-I4-join.md`; launched 12:56 UTC | a message when the join builds (did any leaf change?); then the leaves on the ported lemmas and on the chart's null sets | log; **lot A (the chart's geometry, the tips: 18 leaves, nothing ported) is unassigned** — the next free kernel slot, on the pattern of the two briefs above (generators `data/fs131/briefs/scripts/mk-fs132-i3.py`, `mk-fs132-i4.py`) |
+| **FS124-P2** (`poros`) — the second round's card | `main`; record `plans/POROS-2026-10-07-fs124-round1.md`; brief `data/fs124/briefs/FS124-P2-round-one.md` | a message when the card is saved; then re-posed search lines, the stub's bearings, three lines for Kooshi | the paragraph below |
+| **FS124-K1** (`debruijn`) — the kernel planner for the radius clause, **blind first** | worktree and branch `fs124-wk1`; record `plans/FS124-kernel-plan.md` there; brief `data/fs124/briefs/FS124-K1-kernel-plan.md`; kernel claim list `data/fs124/claims-K1.md` | a message when its phase-1 plan is committed | **reply to lift the fence**, naming `plans/FS124-E1-derivation.md` Stage 3 (the five entries) and § 1.1; log the commit that dates its blindness (FS-124 inventory item 11); at hand-back, an implementer on its skeleton |
+| **FS132-I4** (`debruijn-implementer`) — the join (done, item 43), then lots E and D | worktree and branch `fs132-wi4`; record `plans/FS132-I4-implementation.md` there; brief `data/fs132/briefs/FS132-I4-join.md` **with Amendment 1** (merge the finished `fs132-wi3`; two rows of the architecture map) | the palettes' module, the ring form's leaves, the chart's null sets, the kill | log; then **lot A** (the chart's geometry and the tips: 18 leaves, nothing ported; one of its leaves is already stated and proved under another name in the shift's module — FS-132 inventory item 44) to an implementer on a worktree cut from `fs132-wi4`'s tip |
+
+**Done this afternoon in the kernel lane** (FS-132 inventory items 40–44): the port (branch `fs132-wi2`); the join (no leaf
+changed); **the step lemma's module and the shift's, proved** (branch `fs132-wi3`, tip `e9dd2f46`: 33 theorems on the standard
+three axioms) — so of the exclusion's nine steps, the two analytic ones are kernel-checked on a branch. Six bullets filed in
+`LEAN.md` § Searching — Lean.
 
 **FS-124's first round is in** (FS-124 inventory items 6–9): the opening job is done, all six claims at verdicts, sixteen
 entries (`plans/FS124-E1-derivation.md`), each [hand] or derived from one, one mind. **Running in its slot since 13:30 UTC:
