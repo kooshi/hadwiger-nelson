@@ -505,3 +505,29 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     the witness card reports**: its deriver has been asked what in the two-point data distinguishes a meeting point from a
     point with a margin, which is the other half of this stall; then one asking-lane job cuts the next card from both.
 
+17. **FS132-E4 handed back, done (522k by the task notice); its search request is queued and the Searcher is launched on it**
+    (its report `data/fs132/reports/FS132-E4.md`, commit `142c694e`; its results are items 15 and 16, at the same grades).
+    **Added by the report**: **a search request** — whether a six-sector turning ring `a, b, n, a, b, n` exists near the
+    closed unit disc with triangle points only: "six points, at most three wedges of at most three labels each per impure
+    side — a finite enumeration with an exact checker" of an earlier milestone's kind; **an invention-signal whiff, no side
+    picked** — the stub's claim gives every cyclic centre a witnessed triangle, and its own entry shows that at a turning
+    ring point the pair of the two ring labels is never a witnessed edge though both labels fill adjacent wedges there: the
+    premise both share is that a point's transition-graph cycle and the cycle it witnesses are one cycle — "the first
+    night's whiff met from the other side"; **corrections owed** — a sharpening for row 133; the ring card's hunch line in
+    the stub (true on outer-pure ring points of a six-sector ring, not on inner-pure ones); **where a successor takes over**
+    — three shift lemmas for the alternating ring's measurable form; the stall's one-edge form; the list's two open lines;
+    the residue object (an edge set of a triangle point lying on a unit circle about one of its own ring points — "a
+    (Q)-kind object in the measurable class, unposed"); **its slips, disclosed** — Stage 1 committed with its gate red on
+    "no entry yet"; three sections of the manuscript and two papers not read, cited through this project's records.
+    **Its held points, ruled**: the entries enter the claim list as stated (done, item 16 (a)); **the stall goes to the
+    asking lane, not straight to the witness card's deriver** — the answer turns on how the card's hypothesis is read, which
+    is the asking lane's wording, and the witness card's verdict is its other input (item 16 (d)). **The search**:
+    `plans/SEARCH-QUEUE.md` line 10, its words; **SEARCH-2026-10-07** briefed and launched into the freed slot
+    (`data/search/briefs/SEARCH-2026-10-07.md`, generator `data/fs131/briefs/scripts/mk-search-1007.py`, gate exit 0) —
+    the turning ring by exact enumeration, with the alternating ring as its positive control (a search that can decide the
+    one must reject the other). Kooshi's conditional of FS-131 inventory item 574 is met: the machine is idle but for one
+    planner's builds, and the request is a finite family. Alternative: hold the slot for a third-round deriver. Why the
+    search: the turning ring is the one surviving way to spend a ring, a model would be the YES side's first object of its
+    own, and no derivation reached it. Confidence: medium-high. Running: the witness card's deriver, the kernel planner,
+    the Searcher.
+
