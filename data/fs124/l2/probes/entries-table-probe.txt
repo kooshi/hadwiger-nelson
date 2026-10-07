@@ -1,0 +1,34 @@
+| entry | after this landing | Lean | note |
+|---|---|---|---|
+| C124-RADIUS-GRAPH | kernel, since FS124-L1 | `radius_graph` | — |
+| C124-RADIUS-COUNTABLE | kernel, since FS124-L1 | `radius_countable` | — |
+| C124-RADIUS-UP | kernel, since FS124-L1 | `radius_up` | — |
+| C124-RADIUS-DOWN | kernel, since FS124-L1 | `radius_down` | on the declared outside theorem `proper_to_borel_weak` |
+| C124-RADIUS-FIVE | kernel, since FS124-L1 | `radius_five` | on the declared outside theorem `no_proper_five_coloring` |
+| C124-EVERY-DIRECTION | by hand | — | no kernel job: stated in no module (FS124-L1's open item 1) |
+| C124-SHADOW-OPEN | **kernel, by this landing** | `shadow_open` | — |
+| C124-TYPE | **kernel, by this landing** | `piece_type` | wider than the entry: no hypothesis |w − x| = 1 |
+| C124-CENTRE-HALF | **kernel, by this landing** | `centre_half` | — |
+| C124-CENTRE | **kernel, by this landing** | `tight_centre` | — |
+| C124-STRADDLE | **kernel, by this landing** | `tight_straddle` | — |
+| C124-COMPLETION | by hand | — | no kernel job: a corollary of C124-STRADDLE at one point, stated in no module (its handoff: "subsumed by C124-STRADDLE, which crosses") |
+| C124-ANTIPODE | by hand | — | no kernel job: handed off "as written" and not among the nine a planner fixed |
+| C124-OPEN | by hand | — | no kernel job: a relay-result (its handoff: none) |
+| C124-FORCED-PIECES | **kernel, by this landing** | `closePair_forced_pieces` | — |
+| C124-FORCED | by hand | — | no kernel job for the entry: its first sentence follows from the kernel's C124-BOTH (`closePair_both_saved_of_isSector`: saved by both); its second, tightness along the arc, is stated in no module; its topological input is now a kernel theorem (`IsTriodCut.exists_opposite`) |
+| C124-FORCED-AS-POSED | by hand | — | a refutation by a held object (fragment BB with a band): no kernel job |
+| C124-LONE | **kernel, by this landing** | `closePair_lone` | — |
+| C124-LONE-EXISTS | by hand | — | needs a held object's tiles: the entry's object is fragment S1 with a band; the kernel holds the same sentence by another witness (`exists_closePair_not_separatesAt`, on `lonePair`) |
+| C124-BOTH | **kernel, by this landing** | `closePair_both_separate`, `closePair_both_saved`, `closePair_both_saved_of_isSector` | first clause; second clause in both forms — for arc-edged decompositions, and in the list's words for sector points over the three-arcs lemma |
+| C124-FOUR | **kernel, by this landing** | `closePair_four` | — |
+| C124-SECOND | by hand | — | no kernel job: handed off "after C124-FOUR" and not among the nine |
+| C124-EDGE-CLOSED | by hand | — | needs a held object's tiles (FS-112's strip); its handoff: only with a consumer |
+| C124-EDGE | by hand | — | a computation on one held object; subsumed by C124-EDGE-CLOSED |
+| C124-SIX | by hand | — | no kernel job: handed off "after C124-CENTRE" and not among the nine |
+| C124-SIX-CONES | by hand | — | no kernel job: subsumed by C124-SIX |
+| C124-HALF | by hand | — | no kernel job: over the inherited C132-WIT-SIDE, whose module is not built |
+| C124-HALF-TWO | by hand | — | no kernel job: subsumed by C124-HALF's module |
+| C124-KIND | by hand | — | a calibration at seven by formula; its handoff: only with a consumer |
+| C124-FORCED-SEVEN | by hand | — | needs a held object (the hexagonal seven-colouring); the kernel holds a control of the same kind on another object (`exists_closePair_seven_not_separatesAt`) |
+entries: 30; kernel since FS124-L1: 5; kernel by this landing: 9; by hand: 16
+entries: PASS
