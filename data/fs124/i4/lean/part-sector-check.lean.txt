@@ -1,0 +1,25 @@
+
+/-- (scratch) the definition of `Plane/SectorPoint`, copied to check that the helper's statement is its body -/
+def ThreePiece.IsSectorCheck {U : Set ℂ} {c : ℂ → α} {x : ℂ} (D : ThreePiece U c x) : Prop :=
+  ∃ r > 0, ∃ J : Fin 3 → C(unitInterval, ℂ),
+    (∀ m, Function.Injective (J m)) ∧ (∀ m, J m 0 = x) ∧ (∀ m, dist (J m 1) x = r) ∧
+      (∀ m t, t ≠ 1 → dist (J m t) x < r) ∧
+      (∀ m m' s t, m ≠ m' → J m s = J m' t → J m s = x) ∧
+      (∀ i, ∃ z ∈ D.piece i, D.piece i = connectedComponentIn (ball x r \ ⋃ m, range (J m)) z) ∧
+      ⋃ i, D.piece i = ball x r \ ⋃ m, range (J m)
+
+theorem check_sectorPoint : sectorPoint.IsSectorCheck := by
+  obtain ⟨J, hJ⟩ := sectorPoint_arcCut
+  exact hJ.sector (by norm_num)
+
+theorem check_sector :
+    ∃ (U : Set ℂ) (c : ℂ → Fin 6) (x y w : ℂ) (C : ClosePair U c x y),
+      IsOpen U ∧ IsWeakColouringOn U c ∧ w ∈ U ∧ IsCommonUnitPoint x y w ∧ C.left.IsSectorCheck ∧
+        C.right.IsSectorCheck := by
+  obtain ⟨J, hJ⟩ := squarePair_left_arcCut
+  obtain ⟨J', hJ'⟩ := squarePair_right_arcCut
+  exact ⟨_, _, _, _, _, squarePair, isOpen_threeDisc _, isWeakColouringOn_squareCol, one_mem_threeDisc _,
+    isCommonUnitPoint_zero_one_sub_I, hJ.sector (by norm_num), hJ'.sector (by norm_num)⟩
+
+#print axioms check_sectorPoint
+#print axioms check_sector

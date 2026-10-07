@@ -1,0 +1,4 @@
+names declared by this job's helper module: 69; trees scanned: 76
+CLASH HadwigerNelson.Plane.fin_three_cases  /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/ThreePiece.lean
+CLASH HadwigerNelson.Plane.fin_three_cases  /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wk3/Proofs/HadwigerNelson/Plane/ThreePiece.lean
+1 name(s) declared elsewhere

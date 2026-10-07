@@ -1,0 +1,375 @@
+
+/-! ## A decomposition cut out of a disc by three arcs -/
+
+namespace ThreePiece
+
+variable {V U : Set ℂ} {c₀ : ℂ → β} {c : ℂ → α} {p x : ℂ}
+
+/-- **The pieces of `D` are what three arcs from the point leave of a disc about it**: the arcs `J 0`, `J 1`, `J 2`
+are injective, start at `x`, end on the circle of radius `r` about `x`, lie inside it before their ends and meet at
+`x` only, and the union of the pieces is the disc of radius `r` less the three arcs. (The claim list's sector point,
+`ThreePiece.IsSector` of `Plane/SectorPoint`, asks in addition that each piece be a component of that set, which
+follows: `ArcCut.sector`.) -/
+def ArcCut (D : ThreePiece U c x) (r : ℝ) (J : Fin 3 → C(unitInterval, ℂ)) : Prop :=
+  (∀ m, Function.Injective (J m)) ∧ (∀ m, J m 0 = x) ∧ (∀ m, dist (J m 1) x = r) ∧
+    (∀ m t, t ≠ 1 → dist (J m t) x < r) ∧ (∀ m m' s t, m ≠ m' → J m s = J m' t → J m s = x) ∧
+    ⋃ i, D.piece i = ball x r \ ⋃ m, range (J m)
+
+/-- **Three pairwise disjoint open connected sets that fill a set are its components**: each piece of a
+decomposition is a component of any set the pieces fill. -/
+theorem exists_eq_connectedComponentIn (D : ThreePiece U c x) {S : Set ℂ} (h : ⋃ i, D.piece i = S) (i : Fin 3) :
+    ∃ z ∈ D.piece i, D.piece i = connectedComponentIn S z := by
+  obtain ⟨z, hz⟩ := (D.isConnected_piece i).nonempty
+  have hsub : D.piece i ⊆ S := h ▸ subset_iUnion D.piece i
+  refine ⟨z, hz, Subset.antisymm ((D.isPreconnected_piece i).subset_connectedComponentIn hz hsub) ?_⟩
+  -- the component lies in the union of the piece and the two others, which are open and disjoint from it
+  have hcover : connectedComponentIn S z ⊆ D.piece i ∪ ⋃ j ∈ {j : Fin 3 | j ≠ i}, D.piece j := by
+    intro q hq
+    have hqS := connectedComponentIn_subset S z hq
+    rw [← h] at hqS
+    obtain ⟨j, hj⟩ := mem_iUnion.mp hqS
+    by_cases hji : j = i
+    · exact Or.inl (hji ▸ hj)
+    · exact Or.inr (mem_biUnion (show j ∈ {j : Fin 3 | j ≠ i} from hji) hj)
+  exact isPreconnected_connectedComponentIn.subset_left_of_subset_union (D.isOpen_piece i)
+    (isOpen_biUnion fun j _ => D.isOpen_piece j)
+    (Set.disjoint_iUnion₂_right.mpr fun j hj => D.disjoint_piece (Ne.symm hj)) hcover
+    ⟨z, mem_connectedComponentIn (hsub hz), hz⟩
+
+/-- **A decomposition cut out of a disc by three arcs is a sector point** in the claim list's words — the statement
+is the definition `ThreePiece.IsSector` of `Plane/SectorPoint` written out (that module is downstream of the
+witnesses): "for some r > 0 there are three arcs J_0, J_1, J_2 (homeomorphic images of [0, 1]) from x to the circle
+∂B(x, r), inside B(x, r) but for their far ends and disjoint but for x, such that the three components of
+B(x, r) ∖ (J_0 ∪ J_1 ∪ J_2) are the pieces". -/
+theorem ArcCut.sector {D : ThreePiece U c x} {r : ℝ} {J : Fin 3 → C(unitInterval, ℂ)} (h : D.ArcCut r J)
+    (hr : 0 < r) :
+    ∃ r > 0, ∃ J : Fin 3 → C(unitInterval, ℂ),
+      (∀ m, Function.Injective (J m)) ∧ (∀ m, J m 0 = x) ∧ (∀ m, dist (J m 1) x = r) ∧
+        (∀ m t, t ≠ 1 → dist (J m t) x < r) ∧
+        (∀ m m' s t, m ≠ m' → J m s = J m' t → J m s = x) ∧
+        (∀ i, ∃ z ∈ D.piece i, D.piece i = connectedComponentIn (ball x r \ ⋃ m, range (J m)) z) ∧
+        ⋃ i, D.piece i = ball x r \ ⋃ m, range (J m) :=
+  ⟨r, hr, J, h.1, h.2.1, h.2.2.1, h.2.2.2.1, h.2.2.2.2.1, fun i => D.exists_eq_connectedComponentIn h.2.2.2.2.2 i,
+    h.2.2.2.2.2⟩
+
+/-- If the pieces of `D'` are the images of the pieces of `D` under a homeomorphism that is an isometry and carries
+the point of `D` to the point of `D'`, and `D` is cut out of a disc by three arcs, then `D'` is cut out of the disc of
+the same radius by the images of the arcs. -/
+theorem ArcCut.of_image {D : ThreePiece V c₀ p} {D' : ThreePiece U c x} {T : ℂ ≃ₜ ℂ} {r : ℝ}
+    {J : Fin 3 → C(unitInterval, ℂ)} (h : D.ArcCut r J) (hiso : ∀ a b, dist (T a) (T b) = dist a b)
+    (hp : ∀ i, D'.piece i = T '' D.piece i) (hx : T p = x) :
+    D'.ArcCut r fun m => ⟨fun t => T (J m t), T.continuous.comp (J m).continuous⟩ := by
+  obtain ⟨h1, h2, h3, h4, h5, h6⟩ := h
+  refine ⟨fun m => T.injective.comp (h1 m), fun m => ?_, fun m => ?_, fun m t ht => ?_, fun m m' s t hmm hst => ?_,
+    ?_⟩
+  · show T (J m 0) = x
+    rw [h2 m, hx]
+  · show dist (T (J m 1)) x = r
+    rw [← hx, hiso, h3 m]
+  · show dist (T (J m t)) x < r
+    rw [← hx, hiso]
+    exact h4 m t ht
+  · show T (J m s) = x
+    rw [h5 m m' s t hmm (T.injective hst), hx]
+  · have hball : T '' ball p r = ball x r := by
+      ext z
+      constructor
+      · rintro ⟨q, hq, rfl⟩
+        rw [mem_ball, ← hx, hiso]
+        exact hq
+      · intro hz
+        refine ⟨T.symm z, ?_, T.apply_symm_apply z⟩
+        rw [mem_ball, ← hiso, T.apply_symm_apply, hx]
+        exact hz
+    have hun : ⋃ i, D'.piece i = T '' ⋃ i, D.piece i := by
+      rw [image_iUnion]
+      exact iUnion_congr hp
+    rw [hun, h6, image_sdiff T.injective, hball, image_iUnion]
+    congr 1
+    exact iUnion_congr fun m => (range_comp T (J m)).symm
+
+/-- **Three arcs given by their distance from `0`**: let the pieces of a decomposition at `0` be three sets cut by
+the disc of radius `r₀`, and let `R m ρ` be three continuous families with `R m ρ` at distance `ρ` from `0`, no two
+equal at one `ρ > 0`. If a point of the disc is in one of the three sets exactly when it is not the point of its own
+distance on any of the three families, the decomposition is cut out of the disc by the arcs `t ↦ R m (t r₀)`. -/
+theorem arcCut_of_radii (D : ThreePiece U c (0 : ℂ)) {r₀ : ℝ} (hr₀ : 0 < r₀) {S : Fin 3 → Set ℂ}
+    (hD : ∀ i, D.piece i = S i ∩ ball (0 : ℂ) r₀) (R : Fin 3 → ℝ → ℂ) (hRc : ∀ m, Continuous (R m))
+    (hRd : ∀ m ρ, 0 ≤ ρ → ρ ≤ r₀ → dist (R m ρ) 0 = ρ)
+    (hRne : ∀ m m' ρ, m ≠ m' → 0 ≤ ρ → ρ ≤ r₀ → R m ρ = R m' ρ → ρ = 0)
+    (hS : ∀ z ∈ ball (0 : ℂ) r₀, (∃ i, z ∈ S i) ↔ ∀ m, z ≠ R m (dist z 0)) :
+    D.ArcCut r₀ fun m => ⟨fun t => R m ((t : ℝ) * r₀), (hRc m).comp (continuous_subtype_val.mul continuous_const)⟩ := by
+  have hρ : ∀ t : unitInterval, 0 ≤ (t : ℝ) * r₀ ∧ (t : ℝ) * r₀ ≤ r₀ := fun t =>
+    ⟨mul_nonneg t.2.1 hr₀.le, mul_le_of_le_one_left hr₀.le t.2.2⟩
+  have hd : ∀ m (t : unitInterval), dist (R m ((t : ℝ) * r₀)) 0 = (t : ℝ) * r₀ := fun m t =>
+    hRd m _ (hρ t).1 (hρ t).2
+  have h0 : ∀ m, R m 0 = 0 := fun m => dist_eq_zero.mp (hRd m 0 le_rfl hr₀.le)
+  have heq : ∀ m m' (s t : unitInterval), R m ((s : ℝ) * r₀) = R m' ((t : ℝ) * r₀) → (s : ℝ) = t := by
+    intro m m' s t hst
+    have h1 := congrArg (fun z : ℂ => dist z 0) hst
+    simp only [hd] at h1
+    exact mul_right_cancel₀ hr₀.ne' h1
+  refine ⟨fun m s t hst => Subtype.ext (heq m m s t hst), fun m => ?_, fun m => ?_, fun m t ht => ?_,
+    fun m m' s t hmm hst => ?_, ?_⟩
+  · show R m (((0 : unitInterval) : ℝ) * r₀) = 0
+    rw [Set.Icc.coe_zero, zero_mul, h0]
+  · show dist (R m (((1 : unitInterval) : ℝ) * r₀)) 0 = r₀
+    rw [hd, Set.Icc.coe_one, one_mul]
+  · show dist (R m ((t : ℝ) * r₀)) 0 < r₀
+    rw [hd]
+    have ht1 : (t : ℝ) < 1 := lt_of_le_of_ne t.2.2 fun h => ht (Subtype.ext h)
+    nlinarith
+  · show R m ((s : ℝ) * r₀) = 0
+    have hst' : R m ((s : ℝ) * r₀) = R m' ((t : ℝ) * r₀) := hst
+    have h1 := heq m m' s t hst'
+    rw [← h1] at hst'
+    rw [hRne m m' _ hmm (hρ s).1 (hρ s).2 hst', h0]
+  · ext z
+    constructor
+    · intro hz
+      obtain ⟨i, hi⟩ := mem_iUnion.mp hz
+      rw [hD i] at hi
+      refine ⟨hi.2, fun hmem => ?_⟩
+      obtain ⟨m, t, rfl⟩ := mem_iUnion.mp hmem
+      refine (hS _ hi.2).mp ⟨i, hi.1⟩ m ?_
+      show R m ((t : ℝ) * r₀) = R m (dist (R m ((t : ℝ) * r₀)) 0)
+      rw [hd]
+    · rintro ⟨hzb, hzn⟩
+      have hall : ∀ m, z ≠ R m (dist z 0) := by
+        intro m hzm
+        refine hzn (mem_iUnion.mpr ⟨m, ⟨dist z 0 / r₀, div_nonneg dist_nonneg hr₀.le, ?_⟩, ?_⟩)
+        · rw [div_le_one hr₀]
+          exact (mem_ball.mp hzb).le
+        · show R m (dist z 0 / r₀ * r₀) = z
+          rw [div_mul_cancel₀ _ hr₀.ne']
+          exact hzm.symm
+      obtain ⟨i, hi⟩ := (hS z hzb).mpr hall
+      exact mem_iUnion.mpr ⟨i, by rw [hD i]; exact ⟨hi, hzb⟩⟩
+
+end ThreePiece
+
+/-- The squared distance from `0`, in coordinates. -/
+theorem dist_zero_sq_eq (z : ℂ) : dist z 0 ^ 2 = z.re ^ 2 + z.im ^ 2 := by
+  rw [dist_sq_eq, Complex.zero_re, Complex.zero_im, sub_zero, sub_zero]
+
+/-! ### The split point is cut out of its disc by two radii and an arc of the unit circle about `1` -/
+
+/-- The three arcs of the split point, by their distance from `0`: the radius along `1`, the radius along `−1`, and
+the lower arc of the unit circle about `1`. -/
+noncomputable def splitRadius : Fin 3 → ℝ → ℂ
+  | 0 => fun ρ => (ρ : ℂ)
+  | 1 => fun ρ => -(ρ : ℂ)
+  | 2 => splitArc
+
+/-- **The split point is cut out of the disc of radius `1/4` by its three arcs.** -/
+theorem splitPoint_arcCut : ∃ J : Fin 3 → C(unitInterval, ℂ), splitPoint.ArcCut (1 / 4) J := by
+  refine ⟨_, ThreePiece.arcCut_of_radii splitPoint (r₀ := 1 / 4) (by norm_num) (S := splitSet) (fun _ => rfl)
+    splitRadius ?_ ?_ ?_ ?_⟩
+  · intro m
+    rcases fin_three_cases m with rfl | rfl | rfl
+    · exact Complex.continuous_ofReal
+    · exact Complex.continuous_ofReal.neg
+    · exact continuous_splitArc
+  · intro m ρ h0 h1
+    rcases fin_three_cases m with rfl | rfl | rfl
+    · show dist (ρ : ℂ) 0 = ρ
+      rw [dist_zero_right, Complex.norm_real, Real.norm_of_nonneg h0]
+    · show dist (-(ρ : ℂ)) 0 = ρ
+      rw [dist_zero_right, norm_neg, Complex.norm_real, Real.norm_of_nonneg h0]
+    · exact dist_splitArc_zero h0 (by nlinarith)
+  · intro m m' ρ hmm h0 h1 heq
+    have hre := congrArg Complex.re heq
+    have h2 : (splitArc ρ).re = ρ ^ 2 / 2 := rfl
+    rcases fin_three_cases m with rfl | rfl | rfl <;> rcases fin_three_cases m' with rfl | rfl | rfl
+    · exact absurd rfl hmm
+    · have h3 : ρ = -ρ := by simpa [splitRadius] using hre
+      linarith
+    · have h3 : ρ = ρ ^ 2 / 2 := by simpa [splitRadius, h2] using hre
+      nlinarith
+    · have h3 : -ρ = ρ := by simpa [splitRadius] using hre
+      linarith
+    · exact absurd rfl hmm
+    · have h3 : -ρ = ρ ^ 2 / 2 := by simpa [splitRadius, h2] using hre
+      nlinarith
+    · have h3 : ρ ^ 2 / 2 = ρ := by simpa [splitRadius, h2] using hre
+      nlinarith
+    · have h3 : ρ ^ 2 / 2 = -ρ := by simpa [splitRadius, h2] using hre
+      nlinarith
+    · exact absurd rfl hmm
+  · intro z hz
+    have hρ0 : 0 ≤ dist z 0 := dist_nonneg
+    have hρ4 : dist z 0 ^ 2 ≤ 4 := by nlinarith [mem_ball.mp hz]
+    have hρsq := dist_zero_sq_eq z
+    constructor
+    · rintro ⟨i, hi⟩ m hzm
+      have him : (splitRadius m (dist z 0)).im = z.im := by rw [← hzm]
+      have hd1 : dist (splitRadius m (dist z 0)) 1 = dist z 1 := by rw [← hzm]
+      -- a point of an arc is on the real axis, or below it on the unit circle about `1`
+      have hK : z.im = 0 ∨ (z.im ≤ 0 ∧ dist z 1 = 1) := by
+        rcases fin_three_cases m with rfl | rfl | rfl
+        · exact Or.inl (by rw [← him]; simp [splitRadius])
+        · exact Or.inl (by rw [← him]; simp [splitRadius])
+        · exact Or.inr ⟨by rw [← him]; exact splitArc_im_nonpos hρ0, by rw [← hd1]; exact dist_splitArc_one hρ4⟩
+      rcases fin_three_cases i with rfl | rfl | rfl
+      · obtain ⟨h1, h2⟩ := mem_splitSet_zero.mp hi
+        rcases hK with h | ⟨-, h⟩ <;> linarith
+      · obtain ⟨h1, h2⟩ := mem_splitSet_one.mp hi
+        rcases hK with h | ⟨-, h⟩ <;> linarith
+      · have h1 := mem_splitSet_two.mp hi
+        rcases hK with h | ⟨h, -⟩ <;> linarith
+    · intro hall
+      by_contra hn
+      have h0 : ¬ (z.im < 0 ∧ dist z 1 < 1) := fun h => hn ⟨0, mem_splitSet_zero.mpr h⟩
+      have h1 : ¬ (z.im < 0 ∧ 1 < dist z 1) := fun h => hn ⟨1, mem_splitSet_one.mpr h⟩
+      have h2 : ¬ 0 < z.im := fun h => hn ⟨2, mem_splitSet_two.mpr h⟩
+      rcases lt_or_eq_of_le (not_lt.mp h2) with him | him
+      · -- below the axis, on the unit circle about `1`: the point of the arc at its distance
+        have hd1 : dist z 1 = 1 := by
+          rcases lt_trichotomy (dist z 1) 1 with h | h | h
+          · exact absurd ⟨him, h⟩ h0
+          · exact h
+          · exact absurd ⟨him, h⟩ h1
+        have hd1sq := dist_sq_eq z 1
+        rw [hd1, Complex.one_re, Complex.one_im, sub_zero] at hd1sq
+        have hre : z.re = dist z 0 ^ 2 / 2 := by nlinarith
+        have hv := Real.sq_sqrt (show 0 ≤ 1 - dist z 0 ^ 2 / 4 by linarith)
+        have hv0 := Real.sqrt_nonneg (1 - dist z 0 ^ 2 / 4)
+        have hsq : (dist z 0 * √(1 - dist z 0 ^ 2 / 4)) ^ 2 = (-z.im) ^ 2 := by
+          rw [mul_pow, hv]
+          nlinarith
+        have him' : dist z 0 * √(1 - dist z 0 ^ 2 / 4) = -z.im :=
+          (sq_eq_sq₀ (mul_nonneg hρ0 hv0) (by linarith)).mp hsq
+        refine hall 2 (Complex.ext ?_ ?_)
+        · exact hre
+        · show z.im = -(dist z 0 * √(1 - dist z 0 ^ 2 / 4))
+          linarith
+      · -- on the axis: the point of a real radius at its distance
+        have hρ : dist z 0 ^ 2 = z.re ^ 2 := by rw [hρsq, him]; ring
+        rcases le_total 0 z.re with hre | hre
+        · have h3 : dist z 0 = z.re := (sq_eq_sq₀ hρ0 hre).mp hρ
+          exact hall 0 (Complex.ext (by simp [splitRadius, h3]) (by simp [splitRadius, him]))
+        · have h3 : dist z 0 = -z.re := (sq_eq_sq₀ hρ0 (by linarith)).mp (by rw [hρ]; ring)
+          exact hall 1 (Complex.ext (by simp [splitRadius, h3]) (by simp [splitRadius, him]))
+
+/-! ### The ordinary three-sector point is cut out of its disc by its three radii -/
+
+/-- The unit vectors along the three radii of the ordinary three-sector point: `1`, `i` and `(−1 − i)/√2`. -/
+noncomputable def sectorDir : Fin 3 → ℂ
+  | 0 => 1
+  | 1 => I
+  | 2 => ⟨-(√2 / 2), -(√2 / 2)⟩
+
+/-- `(√2 / 2)² = 1/2`. -/
+theorem sqrt_two_div_two_sq : (√2 / 2) ^ 2 = 1 / 2 := by
+  rw [div_pow, Real.sq_sqrt (by norm_num)]
+  norm_num
+
+/-- The three directions are unit vectors. -/
+theorem norm_sectorDir (m : Fin 3) : ‖sectorDir m‖ = 1 := by
+  rcases fin_three_cases m with rfl | rfl | rfl
+  · exact norm_one
+  · exact Complex.norm_I
+  · have h : ‖sectorDir 2‖ ^ 2 = 1 := by
+      rw [sq_norm_eq]
+      show (-(√2 / 2)) ^ 2 + (-(√2 / 2)) ^ 2 = 1
+      rw [neg_sq, sqrt_two_div_two_sq]
+      norm_num
+    nlinarith [norm_nonneg (sectorDir 2)]
+
+/-- **The ordinary three-sector point is cut out of the disc of radius `1/4` by its three radii**, along `1`, `i` and
+`−1 − i`. -/
+theorem sectorPoint_arcCut : ∃ J : Fin 3 → C(unitInterval, ℂ), sectorPoint.ArcCut (1 / 4) J := by
+  have hs0 : 0 < √2 / 2 := by positivity
+  have hre : ∀ (m : Fin 3) (ρ : ℝ), ((ρ : ℂ) * sectorDir m).re = ρ * (sectorDir m).re := fun m ρ => by simp
+  have him : ∀ (m : Fin 3) (ρ : ℝ), ((ρ : ℂ) * sectorDir m).im = ρ * (sectorDir m).im := fun m ρ => by simp
+  have hd0 : (sectorDir 0).re = 1 ∧ (sectorDir 0).im = 0 := ⟨rfl, rfl⟩
+  have hd1 : (sectorDir 1).re = 0 ∧ (sectorDir 1).im = 1 := ⟨Complex.I_re, Complex.I_im⟩
+  have hd2 : (sectorDir 2).re = -(√2 / 2) ∧ (sectorDir 2).im = -(√2 / 2) := ⟨rfl, rfl⟩
+  refine ⟨_, ThreePiece.arcCut_of_radii sectorPoint (r₀ := 1 / 4) (by norm_num) (S := sectorSet) (fun _ => rfl)
+    (fun m ρ => (ρ : ℂ) * sectorDir m) (fun m => Complex.continuous_ofReal.mul continuous_const) ?_ ?_ ?_⟩
+  · intro m ρ h0 _
+    rw [dist_zero_right, norm_mul, norm_sectorDir, mul_one, Complex.norm_real, Real.norm_of_nonneg h0]
+  · intro m m' ρ hmm h0 _ heq
+    by_contra hρ
+    have hdd : sectorDir m = sectorDir m' := mul_left_cancel₀ (Complex.ofReal_ne_zero.mpr hρ) heq
+    have h1 := congrArg Complex.re hdd
+    have h2 := congrArg Complex.im hdd
+    rcases fin_three_cases m with rfl | rfl | rfl <;> rcases fin_three_cases m' with rfl | rfl | rfl
+    · exact hmm rfl
+    · rw [hd0.1, hd1.1] at h1; norm_num at h1
+    · rw [hd0.1, hd2.1] at h1; linarith
+    · rw [hd1.1, hd0.1] at h1; norm_num at h1
+    · exact hmm rfl
+    · rw [hd1.2, hd2.2] at h2; linarith
+    · rw [hd2.1, hd0.1] at h1; linarith
+    · rw [hd2.2, hd1.2] at h2; linarith
+    · exact hmm rfl
+  · intro z hz
+    have hρ0 : 0 ≤ dist z 0 := dist_nonneg
+    have hρsq := dist_zero_sq_eq z
+    constructor
+    · rintro ⟨i, hi⟩ m hzm
+      have hzre : z.re = dist z 0 * (sectorDir m).re := by rw [← hre, ← hzm]
+      have hzim : z.im = dist z 0 * (sectorDir m).im := by rw [← him, ← hzm]
+      -- a point of a radius: on the ray along `1`, along `i`, or along `−1 − i`
+      have hK : (z.im = 0 ∧ 0 ≤ z.re) ∨ (z.re = 0 ∧ 0 ≤ z.im) ∨ (z.re = z.im ∧ z.re ≤ 0) := by
+        rcases fin_three_cases m with rfl | rfl | rfl
+        · rw [hd0.1] at hzre
+          rw [hd0.2] at hzim
+          exact Or.inl ⟨by linarith, by linarith⟩
+        · rw [hd1.1] at hzre
+          rw [hd1.2] at hzim
+          exact Or.inr (Or.inl ⟨by linarith, by linarith⟩)
+        · rw [hd2.1] at hzre
+          rw [hd2.2] at hzim
+          exact Or.inr (Or.inr ⟨by linarith, by nlinarith [mul_nonneg hρ0 hs0.le]⟩)
+      rcases fin_three_cases i with rfl | rfl | rfl
+      · obtain ⟨h1, h2⟩ := mem_sectorSet_zero.mp hi
+        rcases hK with ⟨h, -⟩ | ⟨h, -⟩ | ⟨-, h⟩ <;> linarith
+      · obtain ⟨h1, h2⟩ := mem_sectorSet_one.mp hi
+        rcases hK with ⟨-, h⟩ | ⟨h, -⟩ | ⟨h, -⟩ <;> linarith
+      · obtain ⟨h1, h2⟩ := mem_sectorSet_two.mp hi
+        rcases hK with ⟨h, -⟩ | ⟨-, h⟩ | ⟨h, -⟩ <;> linarith
+    · intro hall
+      by_contra hn
+      have h0 : ¬ (0 < z.re ∧ 0 < z.im) := fun h => hn ⟨0, mem_sectorSet_zero.mpr h⟩
+      have h1 : ¬ (z.re < 0 ∧ z.re < z.im) := fun h => hn ⟨1, mem_sectorSet_one.mpr h⟩
+      have h2 : ¬ (z.im < 0 ∧ z.im < z.re) := fun h => hn ⟨2, mem_sectorSet_two.mpr h⟩
+      rcases lt_trichotomy z.re 0 with hzre | hzre | hzre
+      · rcases lt_trichotomy z.re z.im with h | h | h
+        · exact h1 ⟨hzre, h⟩
+        · -- on the ray along `−1 − i`
+          have hsq2 := sqrt_two_div_two_sq
+          have h3 : dist z 0 * (√2 / 2) = -z.re :=
+            (sq_eq_sq₀ (mul_nonneg hρ0 hs0.le) (by linarith)).mp (by rw [mul_pow, hsq2, hρsq, ← h]; ring)
+          refine hall 2 (Complex.ext ?_ ?_)
+          · rw [hre, hd2.1]; linarith
+          · rw [him, hd2.2]; linarith
+        · exact h2 ⟨by linarith, h⟩
+      · rcases lt_or_ge z.im 0 with h | h
+        · exact h2 ⟨h, by linarith⟩
+        · -- on the ray along `i`
+          have h3 : dist z 0 = z.im := (sq_eq_sq₀ hρ0 h).mp (by rw [hρsq, hzre]; ring)
+          refine hall 1 (Complex.ext ?_ ?_)
+          · rw [hre, hd1.1]; linarith
+          · rw [him, hd1.2]; linarith
+      · rcases lt_trichotomy z.im 0 with h | h | h
+        · exact h2 ⟨h, by linarith⟩
+        · -- on the ray along `1`
+          have h3 : dist z 0 = z.re := (sq_eq_sq₀ hρ0 hzre.le).mp (by rw [hρsq, h]; ring)
+          refine hall 0 (Complex.ext ?_ ?_)
+          · rw [hre, hd0.1]; linarith
+          · rw [him, hd0.2]; linarith
+        · exact h0 ⟨hzre, h⟩
+
+/-! ### The members of the unit-square witness are cut out of their discs by three arcs -/
+
+/-- In the unit-square witness the first member is cut out of the disc of radius `1/4` about `0` by three arcs. -/
+theorem squarePair_left_arcCut : ∃ J : Fin 3 → C(unitInterval, ℂ), squarePair.left.ArcCut (1 / 4) J := by
+  obtain ⟨J, hJ⟩ := splitPoint_arcCut
+  exact ⟨_, hJ.of_image (T := Homeomorph.refl ℂ) (fun _ _ => rfl) (threeDiscPair_left_piece _ _ _ _ _ _ _) rfl⟩
+
+/-- In the unit-square witness the second member is cut out of the disc of radius `1/4` about `1 − i` by three arcs:
+those of the split point, turned by a quarter about `1`. -/
+theorem squarePair_right_arcCut : ∃ J : Fin 3 → C(unitInterval, ℂ), squarePair.right.ArcCut (1 / 4) J := by
+  obtain ⟨J, hJ⟩ := splitPoint_arcCut
+  exact ⟨_, hJ.of_image (dist_planeMotion Complex.norm_I) (threeDiscPair_right_piece _ _ _ _ _ _ _) (by simp)⟩

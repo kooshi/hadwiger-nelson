@@ -7,17 +7,18 @@ import Proofs.HadwigerNelson.Plane.ClosePairWitness
 Inhabitants for `Plane/ClosePair` (plan: `plans/FS124-kernel-plan-2.md` § the models). Each is a colouring of three
 small discs about `x`, `y` and a common unit point `w`: such a set holds unit pairs only between the disc about `w`
 and each of the other two (the pair is taken with `|x − y| ≠ 1`), so the colouring is a weak colouring as soon as it
-separates those.
+separates those. **The witnesses are constructed in `Plane/ClosePairWitness`** (`lonePair`, `squarePair`, `sevenPair`:
+`x = 0`, `w = 1`, discs of radius `1/4`); the statements below are read off them.
 
 * `exists_closePair_not_separatesAt` — **six colours, one member alone**: near `w` only two labels of `x`, inside and
-  outside the unit circle about `x`; the witness planned has `x` a three-piece point by the letter (a petal toward `w`, a sector away
-  from it, the rest); `y` an ordinary three-sector point with no inner piece at `w`. The hypotheses of `closePair_forced_pieces` and
-  of `closePair_lone` at once.
-* `exists_closePair_full` — **six colours, both members arc-edged, one piece of each kind**: the witness planned is the unit square `x = 0`,
-  `w = 1`, `y = 1 − i`; near `w` the four regions cut by the unit circles about `x` and `y` carry four labels, one
-  each; at `x` the pieces are cut by the unit circles about `1` and `i`, at `y` by those about `1` and `−i`, so every
-  edge is an arc of a unit circle from the point. The hypotheses of `closePair_both_separate`, `closePair_both_saved` and `closePair_four` at
-  once.
+  outside the unit circle about `x`; the witness (`lonePair`) has `x` a three-piece point by the letter (the petal point of
+  `Plane/ThreePiece`: a petal toward `w`, a petal away from it, the sea around them); `y = 1 + i` an ordinary three-sector point
+  with no inner piece at `w`. The hypotheses of `closePair_forced_pieces` and of `closePair_lone` at once.
+* `exists_closePair_full` — **six colours, both members arc-edged, one piece of each kind**: the witness (`squarePair`) is on the unit
+  square `x = 0`, `w = 1`, `y = 1 − i`; near `w` the four regions cut by the unit circles about `x` and `y` carry four labels, one
+  each; at `x` the pieces are the half-disc above the real axis and the two parts of the half-disc below it cut by the unit circle
+  about `1`, at `y` the same turned by a quarter about `w`, so every edge is a radius or an arc of the unit circle about `w` from the
+  point. The hypotheses of `closePair_both_separate`, `closePair_both_saved` and `closePair_four` at once.
 * `exists_closePair_seven_not_separatesAt` — **the control on six**: with seven colours there is a close
   complementary pair with a common unit point at which **neither** member separates (the seventh label fills the disc
   about `w`). So `closePair_forced_pieces` is false at seven as it stands, and the cover hypothesis of
@@ -43,7 +44,9 @@ theorem exists_closePair_full :
     ∃ (U : Set ℂ) (c : ℂ → Fin 6) (x y w : ℂ) (C : ClosePair U c x y),
       IsOpen U ∧ IsWeakColouringOn U c ∧ w ∈ U ∧ IsCommonUnitPoint x y w ∧ C.left.HasArcEdges ∧
         C.right.HasArcEdges ∧ (∃ σ, C.left.OneOfEach w σ) ∧ ∃ τ, C.right.OneOfEach w τ := by
-  sorry
+  exact ⟨_, _, _, _, _, squarePair, isOpen_threeDisc _, isWeakColouringOn_squareCol, one_mem_threeDisc _,
+    isCommonUnitPoint_zero_one_sub_I, squarePair_left_hasArcEdges, squarePair_right_hasArcEdges,
+    ⟨_, squarePair_left_oneOfEach⟩, _, squarePair_right_oneOfEach⟩
 
 /-- **The control on six**: with seven colours, a close complementary pair with a common unit point in the set at
 which neither member separates. -/

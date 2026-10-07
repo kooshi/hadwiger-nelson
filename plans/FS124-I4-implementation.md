@@ -142,3 +142,69 @@ the planner's unit square to the letter**: at `x = 0` the third piece is the hal
 inside of the unit circle about `i` — one non-convex piece per member in place of two, and two inequalities in place
 of the lens duality and its cusp; the members' edges are two real radii and an arc of `S(w)`, not three arcs of unit
 circles. Stage 3 states it.
+
+## Stage 3 — SAVED (FS124-I4): the third witness, in the build — `Plane/ClosePairModel` holds no `sorry`
+
+**In the build**: the same command, exit 0 — `build: OK — 477 of 477 batches, 3 module(s) rebuilt, 1 module(s) with
+warnings, 9m10s` (`data/fs124/i4/logs/build-2-third-witness-full.log`, `.exit`; the tool's full output,
+`build-2-third-witness-gate.log`). The full output holds **3 distinct `declaration uses sorry` warnings — the three of
+`Plane/SectorPoint` — and no other warning** (its one line with the word `error` is the up-to-date probe, line 3).
+**`Plane/ClosePairModel`: its three leaves are proved.**
+
+**Axioms, printed from that build** (`data/fs124/i4/lean/PrintStage3.lean`, output `logs/axioms-stage3.txt`):
+
+```
+'HadwigerNelson.Plane.exists_closePair_seven_not_separatesAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_closePair_not_separatesAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_closePair_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+and so `squarePair`, `isWeakColouringOn_squareCol`, `splitPoint`, `split_inner_lt`, `split_outer_gt`. **The control
+fired**: `exists_closePair_sector`, still `sorry` at this stage, prints `sorryAx`.
+
+**No statement and no definition changed**: `statements-after-2.txt` against `statements-before.txt` and the base
+commit — 9 named constants, 3 example heads, no difference (`logs/statement-diff-2.txt`, exit 0); control, 3 of 3
+planted faults reported (`logs/statement-diff-2-control.txt`). `tools/check_architecture.py`: `RESULT: PASS`
+(`logs/check-architecture-2.txt`).
+
+### 3.1 The witness: the planner's unit square with a straight cut (the coordinator's word of 18:5x UTC: keep it)
+
+`squarePair`, of `squareCol`, on `threeDisc (1 − i)`: `x = 0`, `w = 1`, `y = 1 − i`.
+
+- **At `0`, the split point** (`splitPoint`, of `splitCol`): the half-disc above the real axis (label `2`), and the
+  half-disc below it cut by the unit circle about `1` — inside (label `0`), outside (label `1`). Its edges are the
+  radius along `1` (pieces `0`, `2`), the radius along `−1` (pieces `1`, `2`) and the lower arc of `S(1)` (pieces `0`,
+  `1`): `splitPoint_hasArcEdges`. At `1`: piece `0` inner, piece `1` outer, piece `2` crossing
+  (`splitPoint_oneOfEach`, the permutation the identity).
+- **At `1 − i`, the split point turned by a quarter about `1`** (`T z = (1 − i) + i z`, which fixes `1`): the same
+  kinds at `1` and arc edges, by the transport lemmas.
+- **Near `1`**, the four regions cut by `S(0)` and `S(1 − i)`: label `0` inside both, `4` inside `S(0)` only, `3`
+  inside `S(1 − i)` only, `1` inside neither (`squareW`) — the labels of the two inner and the two outer pieces, as
+  `closePair_four` says they must be.
+- **Properness** off the null set of the three unit circles about `0`, `1`, `1 − i` (`aeProperOn_of_proper_off_null`):
+  a pair of labels `0`, `0` is excluded by `split_inner_lt`, a pair `1`, `1` by `split_outer_gt`; a pair `3`, `3` or
+  `4`, `4` is one of those turned back by the quarter (`quarterTurn_symm_zero`, `_one`, `_right`), where "inside
+  `S(1 − i)`" reads "outside `S(1 + i)`" and conversely (`one_lt_dist_of_dist_lt_one`: the two discs touch at `1`).
+
+**What differs from the planner's § 2.5**: the third piece at `x` is the half-disc `Im z > 0`, not the inside of the
+unit circle about `i`. With it one piece per member is non-convex (the outer one: `isPreconnected_splitOuter`, by
+horizontal segments to the mirror image in the imaginary axis) instead of two, and the two inequalities need only the
+sign of `Im t`: below the axis the two ordinates have one sign; what is left is one thin sliver each, where being
+outside the tangent circle gives `b < (1 − a)²`. The planner's sampled check does not cover this witness; mine does
+(Stage 1).
+
+### 3.2 The leaves
+
+| leaf | route | lines |
+|---|---|---|
+| `exists_closePair_full` | the tuple `squarePair`, `isWeakColouringOn_squareCol`, the two arc-edge lemmas, the two `OneOfEach` | 3 |
+| its section of `Plane/ClosePairWitness` | the split point (343 lines: the three sets, their closures, the outer piece connected, the null clause, the decomposition, the arc, arc edges, the kinds at `1`); the two inequalities and the frame (265 lines) | 608 |
+
+**Attempts.** `split_inner_lt`: first run. `split_outer_gt`: second (Stage 2). The split point: three errors on its
+first run (a `by … ;` broken across two lines; a `simp` normal form of a cast under `.re`; an unused `simp`
+argument), none on its second. The assembly: one repair (a rewrite of `1` that took every occurrence). No planned
+route failed in a way that needed a companion; nothing was dispatched.
+
+**The price, as measured**: 608 lines for the third witness against the plan's 500 to 700; with the shared part (510)
+and the first two witnesses (125), `Plane/ClosePairWitness` stands at 1,251 lines and `Plane/ClosePairModel`'s three
+proofs at 7. Three builds of about nine minutes; the work between them in `lean` runs of a few seconds.
