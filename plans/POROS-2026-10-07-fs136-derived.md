@@ -284,6 +284,90 @@ question: do-rich-points-carry-a-colouring-further-or-stop-it
   cost: read the two sentences at their entries first (I read them at the sentence only); then one claim
   rank: 2
 
+## Stage 3 — SAVED: the re-rank, the search and kernel paragraphs, three lines for Kooshi
+
+### 3.1 For the search lane
+
+**Run line 15 first, as written** — the nineteen lattice points with wedges, screen C136-TABLE, control R7 at seven — it
+is the first-order lattice family of the card's ask, and it runs beside the derive lane on one two-sided question.
+*Its yes* is a skeleton: the card's second branch. Hand it back with, for each of the nineteen points, the number of
+labels it carries and the sizes of its palettes round its circle, then line 16. *Its no* ([cert] in the family) agrees
+with the card's hunch (0.6) and is a fact about that family only. **One thing to put in its headline before it runs**
+(G21): the family's germs are wedges, straight-edged, and by the card's claim 2 (the asking lane's, unchecked) a
+three-label point with straight edges cannot pay at any point across — the strip's way, an edge along a unit circle,
+is outside the family by construction. So a "no" there measures "no unit-arc edges" as much as "six"; either widen the
+family by edges that are unit arcs about a lattice neighbour, or say so in the result's first sentence. Then lines 20
+(four corners, two labels each), 18, 19; line 17 is the control at seven. Line 16 stays held on 15. **One new request**
+(§ Report): a five-label point with its whole ring at first order — the existence form's first half.
+
+### 3.2 For the kernel lane
+
+The planner holds seven: C136-TABLE, -COVER, -ONE, -CORNERS, -CLASS, -FORCED, -COLLAR. **No statement beyond the seven
+gains a consumer in the card.** Within the seven, two that their own `handoff:` lines send across "only with a consumer"
+now have one: C136-CLASS (claim 1 reads it at first order — a corner of angle `α` is inner for directions in an arc of
+`180° − α`) and C136-CORNERS (claim 5 reads the four corners at a common unit point). C136-COLLAR's union step is
+consumed twice (claims 3 and 4). C136-CLOSE, the three computed closures, the partners bound and the stops stay without
+one; C136-STOP-GERMS (c) is claim 5's model, not its input. Two notes for the planner, through the coordinator: type
+C136-FORCED on the cell (its relay's item 4), and read its hypothesis back against "ℓ may itself be a label of a
+family" — claim 4 uses exactly that; and if C136-COLLAR is typed, "the palette on that side is one label" is what its
+argument reads, of which "all the labels but one" is a case.
+
+### 3.3 Three lines for Kooshi
+
+1. **What the derived milestone found.** Take two points where regions of a six-colouring meet, carrying all six
+   colours between them: the corners meeting there decide which colours are possible at the points one unit from
+   both. Read backward, that explains every place our four six-coloured objects stop — each stops at such a point, and
+   the corner patterns at two vertices alone already leave no colour there. Read forward, it pins colours at isolated
+   corners and runs out within two steps on every object tried. One thing is forced along a stretch and not at a point:
+   where five colours meet, the sixth is forced along arcs of that point's unit circle. Every statement begins "if the
+   colouring has these regions"; none moves six against seven.
+2. **What the next one asks, and where six and seven differ in it.** A point where `m` of `k` colours meet leaves, on
+   each side of its unit circle, about `k − 1 − m/2` colours to choose from on average, whatever the angles (my count,
+   unchecked). The tight seven-colouring's vertices carry six of seven and always have a choice; at six every such
+   number is one lower. FS-137 asks whether, round one ring of points, the lower number still closes — every point one
+   unit from two of them keeping a colour. *Falls short for every arrangement*: an exclusion within radius 2 of any
+   such point — toward seven, and still short of it by a proof that such points exist. *Closes*: a designed skeleton
+   for tomorrow's search to grow — toward six.
+3. **What I expect.** The five small claims hold (0.8 to 0.9 each). The ring: a clean exclusion 0.12, a first-order
+   ring 0.3, a stall 0.6. The value moves: 0.01. I have set a stop: if this ends at a list like the last two, the next
+   question is whether such points must exist at all, not a fourth local one.
+
+## Draft re-rank
+
+*For `plans/FRONTIER-STUBS.md` § Ranked stubs and `CLAUDE.md` § Paths forward; the coordinator files. Rows not named keep
+their rank and text. I did not open FS-135's stub or the closed list, and I move nothing I did not read.*
+
+**Row 1, replacing the row of FS-136:**
+
+| 1 | **FS-137 what a ring can afford: the labels a point's corners leave** — `plans/STUB-collars.md` (minted 2026-10-07 by FS136-Z1 as "collars"; question posed 2026-10-07 by FS136-P2; FS-136's successor) | at six, can the points round one ring both pay at every point across (four labels or more, or three with a unit-arc edge) and keep a label on each side of their own unit circles, as R7's points do at seven? First claims: what the windows sum to — a point's own corners leave on average `k − 1 − m/2` labels on a side (the asking lane's, derived, one mind, unchecked); a three-label point pays only along a unit arc; a forced arc is at most 60° (FS116-N2-FIVERING's second clause, in measure); a point with every label forces its own; where two collars meet | the local half of both roads, asked as one count. **Toward seven**: a count that falls short round every ring is an exclusion within 2 of a point, for every weak six-colouring that has corners there and at the points of its ring — seven only with a statement that every weak six-colouring has such a point (FS-127, FS-128; a point of four or more labels: FS-122, FS-130), which nothing held gives. **Toward six**: a ring that fits is a skeleton with its reason, for the search lane to grow. Alone it gives neither value | unpriced | Not started; **new, at rank 1** (FS136-P2); its stub sets a stop: if its ring question ends at a list, the asking lane poses no fourth card on local configurations | in-ban: derivation and exact arithmetic on named corners; its first-order lattice family is `plans/SEARCH-QUEUE.md` line 15 |
+
+**FS-136 leaves the ranked rows** (the last filing's precedent) for § Open milestones, in order:
+
+> **FS-136, the point across** — Derived 2026-10-07 (`plans/FS136-derivation.md`, 21 entries, one mind each; rows 165–167); its kernel planner at work (FS136-K1); Closed when its module passes the gate. Successor: FS-137, rank 1. Search queue lines 15 and 17–20 open, line 16 held.
+
+**Rows 2 (FS-135) and 3 (FS-127): rank and text unchanged.** No entry of FS-136 and nothing in this re-read gives the
+existence step a form it lacked this morning. **Rows 4 (FS-122) and 6 (FS-130): unchanged**; a note for their next
+re-aim, not a filing: what FS-137 reads is the number of labels at a point, and "a point of four or more labels
+exists" is theirs.
+
+**The unranked line of FS-137 is struck** (it is row 1).
+
+**Where FS-124's eight cases live after FS-136** — a line for the head of `plans/STUB-q-ring.md`, and the same under FS-136's row in the open milestones:
+
+> **The eight cases after FS-136 (FS136-P2, 2026-10-07).** Case 4 (five- and six-colour vertices) → FS-137, claims 3–5 and the ring. Cases 1, 3 and 5 (the semi-hub, crossed reciprocity, the recurrence) → one question under FS-137's third branch, how many unit-arc edges a ring needs; until that branch occurs no open milestone takes them one by one. Cases 2 and 6 (the disk's corner; FS114-K1's residues) stay here, for maps. Case 7 (Siamese and non-simple) → FS-123, as before. Case 8: DISC-F's nearest form is FS-137's first branch (radius 2, for colourings with corners on a ring); LOCAL-DENSE is the existence side, FS-122 and FS-130.
+
+**No stub is demoted; no banner beyond the two lines above. The closed list: no change.**
+
+**The top three, as `CLAUDE.md` § Paths forward should carry them:**
+
+| rank | stub | the question | bearing on the answer |
+|---|---|---|---|
+| 1 | **FS-137 what a ring can afford** — `plans/STUB-collars.md` (posed 2026-10-07) | at six, can the points round one ring both pay at every point one unit from two of them and keep a label on each side of their own unit circles, as the tight seven-colouring's points do at seven? A point's own corners leave on average `k − 1 − m/2` labels on a side (one mind, unchecked): one fewer at six | the local half of both roads as one count: falling short round every ring is an exclusion within 2 of any point with corners there and on its ring; a ring that fits is a skeleton for the search lane; neither alone gives a value |
+| 2 | **FS-135 the seed remainder** — as filed | as filed | as filed |
+| 3 | **FS-127 lateral extent** — as filed | as filed | as filed |
+
+*And for that section's open-milestones paragraph:* "**Derived 2026-10-07: FS-136, the point across** … its successor is **FS-137, what a ring can afford** (`plans/STUB-collars.md`), ranked first, Not started."
+
 ## Hunch ledger
 
 *Carried forward from `plans/POROS-2026-10-07-fs136-round1.md` (closed entries keep their status and their text there;
