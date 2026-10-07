@@ -8875,3 +8875,27 @@ reason by the close.*
      landing's filing. (f) `Outside/OAI158` importing `Plane/CoverExamples` for its model stands; a lighter
      module is cut when a consumer asks. (g) **Slot → FS-132's opening** (`ephodos`). In flight: 1.5 (FS-133's
      deriver; the Clerk).
+
+630. **Kooshi's fourth word on the release (2026-10-07, about 03:25 UTC): explore what the outside proof means together with this repository; a foothold on six against seven first; what to formalize is reprioritized after — ** (source: `data/external/EXT-OAI1-request.md`, fourth word, verbatim there; it answers the question my last two reports put to him, "restart the backlog, or keep it paused?").
+     **Rulings.** (a) **The backlog (FS-131) stays paused, and every formalizing job waits with it** — his word. That
+     covers what I had queued for the next hours: **the import's landing (FS132-L1) is not launched** — the import
+     stays on its branch, pushed, one job from landed, its brief's generator ready (this amends ruling 629 (d)); the
+     audit of the release's checking tool, the survey of the release's Lean by this project's needs (ruling 627
+     (c)) and the second filing (628 (a)) are not briefed. Alternative: land the import now, since the work is
+     done. Why not: it is a formalizing job of about one implementer's context and a full gate, the exploration
+     cites the release by hand and gains nothing from it, and "then we'll reprioritize what to formalize" puts the
+     order of all such work after the exploration. Confidence: medium-high; he is told the import waits one word
+     from him. (b) **The exploration is FS-132, running, with FS-133 beside it**: the deriver's opening and the
+     release's extraction at every number of colours (FS132-E1); the one-class result's deriver finishes its three
+     claims (FS133-E1; it bears none on six against seven, he said "definitely build on it", and it is past its
+     costly half). **When FS132-E1's first two messages are in** — the two readings stated, and the extraction's
+     verdict — **the milestone splits into two derivers' jobs**: card 1's readings (do this project's exclusions run
+     on what the extraction gives a measurable six-colouring), and card 3 (must a centre that is not a triangle
+     exist — the statement on which six differs from seven). Alternative: launch card 3 now, in the free slot. Why
+     not: both are asked on the extraction's conclusion at six, which one job is establishing; a second job now
+     would redo it. Confidence: medium. (c) **Fewer agents at once**: two Opus agents and the clerk's half until the
+     filing is back, then two, the third slot held for the split of (b) — by the two figures he has given (47 % at
+     about 20:30 UTC, 66 % at about 03:25), three to four agents spent about 2.7 points an hour, and 34 points must
+     last the rest of the week's plan. Staffing is his; this is under his cap, and he is told. (d) **The front-page
+     filing (FS132-F1) finishes**: it is bookkeeping on a half slot, and the exploration's agents read what it
+     files. (e) His words go to FS-132's deriver by message, verbatim, with their source.

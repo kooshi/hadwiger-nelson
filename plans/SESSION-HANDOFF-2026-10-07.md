@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-07: an outside proof of six is this project's literature; the Lean backlog is paused; the plan
 
 *Written 2026-10-07 (UTC) by Keryx, at Kooshi's word ("Make sure your handoff carries the new plan"). Current state only. A successor
-arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–629 (the day's record, each with what was
+arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–630 (the day's record, each with what was
 checked by whom); then, for the paused backlog only, `plans/SESSION-HANDOFF-2026-10-06.md` §§ 2–8, which this file supersedes for
 everything else.*
 
@@ -62,6 +62,13 @@ Agent ids are in this session's scratch (`agents.txt`), never in a file. If the 
 record's last SAVED stage with a fresh agent on the same brief.
 
 ## 3. The queue of the new work — in order; three slots
+
+**Kooshi's fourth word (item 630; verbatim in `data/external/EXT-OAI1-request.md`): "Let's explore what OpenAI's proof means in
+combination with our repo, and if we can get a foothold on 6/7, then we'll reprioritize what to formalize." — .** So: **every formalizing job waits** (items 2, 4, 5, 6 below are NOT launched: the import stays on its branch, one word from
+landed); **two Opus agents at once**, the third slot held for FS-132's split; the exploration is FS-132 with FS-133 beside it. When
+FS132-E1's first two messages are in (the two readings stated; C132-EXT's verdict), FS-132 splits into two derivers' jobs: card 1's
+readings, and card 3 (must a centre that is not a triangle exist). What is formalized, and in what order, is his to say after the
+exploration reports.
 
 1. **Rule FS132-F1's stops and merge its branch** (§ 1 line 4). Nothing below touches `CLAUDE.md` before that.
 2. **The import's landing, FS132-L1** (`debruijn-implementer`, `model: "opus"`; rulings 629 (b)–(d)) — **launch only after

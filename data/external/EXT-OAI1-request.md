@@ -37,3 +37,13 @@ resume its launches or keep holding.
 >
 > Oh look, you've already laid out basically the same plan. Carry on then. Make sure your handoff carries the new plan.
 
+## Kooshi's fourth word, 2026-10-07 about 03:25 UTC, answering "restart the backlog, or keep it paused?" (verbatim)
+
+> […] Let's explore what OpenAI's proof means in combination with our repo, and if we can get a foothold on 6/7, then we'll reprioritize what to formalize.
+
+**How it is read** (Keryx's, labelled as mine): the Lean backlog stays paused, and so does every other formalizing job — which results
+are formalized, and in what order, is decided after the exploration, by him. The exploration is the work of the derive and ask lanes on
+what the release's proof and this project's six-colour theory give together, aimed at a foothold on six against seven: FS-132 is that
+milestone. The budget is the owner's: as at about 20:30 UTC the evening
+before — so the slots go to the exploration, and fewer agents run at once.
+
