@@ -312,4 +312,23 @@ the death of every such cycle — which are what the answer is made of and are n
   the exclusions and two points of each set; **C132-COMP-SHARP**: six labels, witnessed triangles on disjoint triples at two
   points less than 2 apart, a common unit point in the open set — then one of the six edge sets lies on the unit circle about
   that point; C132-COMP as posed is its instance. *Not claimed*: each entry's own line.
+- **2026-10-07 (after FS132-E4's Stage 3, commit `44f4bdc9`; FS-132 inventory item 16): the ring card's other two claims have
+  their verdicts, and two entries enter the list** — each statement read whole in its entry:
+
+> derivation: C132-PLACE
+> — source: plans/FS132-E4-derivation.md Stage 3
+
+> derivation: C132-ALT
+> — source: plans/FS132-E4-derivation.md Stage 3
+
+> derivation: C132-TURN-EDGE
+> — source: plans/FS132-E4-derivation.md Stage 3
+
+  **C132-PLACE: derived** ([hand], one mind), with its list by the germs of the outside state 60° to either side. **C132-ALT**
+  ([hand]): no alternating step orbit has two adjacent ring points that both have a pure side — derived in step form; its
+  measurable form for inner–inner pairs only. **C132-TURN-EDGE** ([hand]): at a step of the ring under the stated sides, the
+  ring point carries no witnessed edge of the two ring labels. **C132-TURN: stalls** at the step from the card's hypothesis to
+  that witness — that the ring point is a cyclic centre, and that the witnessed triangle its hypothesis gives contains the
+  pair of ring labels (the relation of C132-EXT-DISC's clause (5), which no entry of that record uses). *Not claimed*: each
+  entry's own line; no ring by formula was built.
 

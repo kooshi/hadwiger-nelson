@@ -471,3 +471,37 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     from its report's draft. (d) Relayed to the witness card's deriver in one line, since its strips statement is this
     entry's step.
 
+16. **FS132-E4, verdicts 2 and 3: what the ring is forced to do where it changes is listed; the alternating ring is excluded
+    in step form; the turning ring survives, and the stall is one named edge** (source: its message to "main", 2026-10-07;
+    record `plans/FS132-E4-derivation.md` Stage 3, eight entries, seven controls; commit `44f4bdc9`). **C132-PLACE** ([hand],
+    one mind): with a witnessed triangle at `x` and a pure side at a ring point, almost every nearby point on that side has
+    its label among the three outside labels and outside the palettes of its two ring neighbours; under it a list by the
+    germs 60° to either side — one label both sides: nothing forced; two different labels: the third, no change; steps: a
+    table of four wedges. **On the turning six-sector ring**: at a ring point whose pure side is the outer one all three
+    outside labels meet; at an inner-pure point nothing is placed — the asking lane's hunch holds on outer-pure points only.
+    **C132-ALT** ([hand]): no alternating step orbit has two adjacent ring points that both have a pure side — "the binary
+    ring of the YES sketch is gone in step form", one residue named (the centre's three edge sets on the unit circles about
+    three alternate ring points); for merely measurable rings derived for inner–inner pairs only, over the first night's
+    step lemma. **C132-TURN-EDGE** ([hand]): at a step `a | b` of the ring with the third label on the near sides 120° away
+    and pure outer sides 60° away, the ring point carries **no** witnessed edge `{a, b}`; every pattern of sides on six pure
+    ring points has such a point. **C132-TURN: stalls** — at the step from "every centre carries a witnessed triangle" to a
+    witness of that pair at the ring point: (1) that the ring point is a cyclic centre at all, (2) that its witnessed
+    triangle contains the pair of ring labels, "as it would if a witnessed cycle had to lie in the point's own transition
+    graph" — **the relation of the extraction's clause (5), the one-mind clause**. **My two relays, answered**: the readings
+    deriver's paragraph and its own finding are "the same statement from two sides, no disagreement" — on an alternating
+    orbit the forced labels coincide and the mechanism runs, on a turning orbit they do not; and the witness card's finding
+    changes how the stall is heard — "the pair is provably NOT witnessed there, so the open question is whether the
+    hypothesis requires it". **Its smallest open form**: at a point near which one side of a unit circle through it carries
+    `a` and then `b` along the circle and nothing else, does every set of witnessed edges closing a cycle there contain
+    `{a, b}`? **My receipt**: the commit is on `main`; its gate run by me — exit 0, seven controls each firing, one warning
+    (prior art owed); the three entries' headers quoted into the claim list. **Not checked by me**: any argument of Stage 3
+    — the wedge table, C132-ALT's four cases, C132-TURN-EDGE's confinement. **Rulings.** (a) **The claim list gains the
+    verdicts and the two entries by a dated line.** (b) **The existence side now stands here**: of the three ways a
+    six-colouring on triangles alone could spend a ring, the alternating one is excluded in step form, the complementary
+    pair is excluded outright (item 15), and **the turning ring is the survivor — the YES side's first candidate that no map
+    can be**; nobody has built it or killed it. (c) **The flagged clause (5) is now load-bearing for the first time**: the
+    stall is exactly the statement it asserts, at a point that is not known to be a centre. **It gets a second reading
+    before anything is built on it** — as a claim for the next deriver, not a job of its own. (d) **No launch on this until
+    the witness card reports**: its deriver has been asked what in the two-point data distinguishes a meeting point from a
+    point with a margin, which is the other half of this stall; then one asking-lane job cuts the next card from both.
+
