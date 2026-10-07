@@ -744,3 +744,33 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     (d) **One deriver on this card (FS132-E6) into the asking lane's slot at its hand-back**, with the two riding controls
     in its brief (the honeycomb at circumradius 1/2 with the first claim; R7 with the third).
 
+24. **FS132-P3 handed back, done (471k by the task notice); the third round's deriver is launched on its card** (record
+    `plans/POROS-2026-10-07-fs132-round2.md` Stages 1–3; report `data/fs132/reports/FS132-P3.md`; five commits, `856e3afa` to
+    `999cf734`; its card and corrections are items 21 and 23). **Added by the report**: **its verdict on convergence** — the
+    existence side is "converging in what reads a seed … not converging in what produces a seed (no entry of two rounds
+    derives circle data at a point from its small balls; three cards on it answered off their tables)"; **one object behind
+    five leftovers** — the exception of the complementary-pair statement, the residue of the alternating ring, the void of
+    the forced-labels list, the turning ring's stall and the search's survivors are all the unit arc of rows 135–136, and
+    the search's 192 models are row 136's three-partner count attained; **the road's table rewritten in seven rows** (its
+    § 2.1, superseding the same rows of last night's); **corrections to its formalization table** — nothing moves above
+    the first night's exclusion; C132-WIT-SIDE enters as its first leaf; the complementary-pair pair is item 4, derived;
+    the extraction with continua waits and C132-WIT-SUPER takes its place in the queue; **a new whiff, no side picked** —
+    the ring card's "inner-pure ring point: only `a` and `b` inside" against its own proof read toward the ring point,
+    which leaves the lens neither: this is C132-LENS's content; **drafts to file** — two rows of the ranking with no rank
+    moved, one line for the open-milestones paragraph, one sentence for G94; **its slips, disclosed** — the over-read of R7
+    that reached me before it caught it; a miscount of cards corrected in place; two inventory items unread (the first
+    round's reports; the exclusion's last three steps, "still one reader"). **Its three lines for Kooshi's** are its
+    § 3.3, quoted in the next report as its words. **Its held point, ruled**: **"the change in what the existence side
+    delivers — from 'every weak six-colouring has a point with data' to 'every seed's growth', with a seed in every
+    colouring left to the map step — is a change of product"**: accepted for tonight's third round under ruling 23 (b),
+    and **put to Kooshi as his to confirm or refuse** — it changes what FS-132 will have delivered when it
+    is Derived, and that is a decision about scope. Alternative: refuse it tonight and spend the round on the bridge. Why
+    not: three cards went off their tables there, and his delegation asks for my recommendation with six-or-seven in
+    mind — mine is the asking lane's. Confidence: medium. **My receipt**: the commits are on `main`; its § 3.3 read; its
+    report read against items 21 and 23. Not checked by me: its § 2.1's seven rows; its "one object" identification.
+    **Launched**: **FS132-E6** (`ephodos`; `data/fs132/briefs/FS132-E6-seed-card.md`, generator
+    `data/fs131/briefs/scripts/mk-fs132-e6.py`, gate exit 0, 12 quotations) — C132-LENS first, with the two riding
+    controls (the honeycomb at circumradius 1/2; the search's kept model), then C132-PLACED and C132-ARC as far as one
+    context carries. Two agents running: it and the kernel planner. **Owed, not tonight**: its drafts filed with the first
+    re-rank's (FS-131-era ruling 12 (e)); the queue's line 11 held until C132-LENS has its verdict.
+
