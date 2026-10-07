@@ -1,0 +1,3 @@
+baseline entries: unchanged (2)
+marker string in Instances/HexShell.lean: 0
+lines of scripts/Vacuity.lean outside the registry comment that differ from main's (126bff4d): 0

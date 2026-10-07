@@ -1,0 +1,5 @@
+plant 'a changed word': FIRED
+plant 'a slot that occurs more than once (too short to place a draft)': FIRED
+plant 'a slot the record does not quote': FIRED
+SELF-TEST OK: 21 slots pass unplanted; 3 plants
+exit=0

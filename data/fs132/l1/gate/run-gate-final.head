@@ -1,0 +1,11 @@
+HEAD=5df686f0980c2731cd32ef0665e6106a3202bedc  2026-10-07T04:57:42Z
+status (tracked files modified, and untracked outside data/ and plans/):
+--
+dupnames latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/dupnames/20261007T050646Z-1434080.log
+dupnames-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/dupnames-self-test/20261007T050649Z-1434255.log
+axioms latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/axioms/20261007T050705Z-1435417.log
+axioms-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/axioms-self-test/20261007T050710Z-1435650.log
+vacuity latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/vacuity/20261007T050908Z-1441039.log
+vacuity-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/vacuity-self-test/20261007T051019Z-1442381.log
+assumptions latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/assumptions/20261007T051131Z-1443669.log
+assumptions-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/assumptions-self-test/20261007T051234Z-1445074.log

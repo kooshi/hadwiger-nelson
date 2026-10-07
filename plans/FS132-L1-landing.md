@@ -413,3 +413,342 @@ finding of the first amendment.
 +#   declarations=14845  refutations-skipped=215  sites=1447
 +#   vacuous=0 stale=0 declared=3 witnessed=38 generic=1404 unknown=2
 ```
+
+## Stage 6 — SAVED (FS132-L1): the full gate on one commit — `5df686f0`
+
+One pass is every step in order, one at a time under the slot (`data/fs132/l1/run-gate.sh final`, after the last
+landing's runner; every log under `data/fs132/l1/gate/` with its exit status on its last line;
+`run-gate-final.head` records the commit and that **no tracked file was modified**; `run-pass-final.out` holds every
+step's exit; 04:57:42Z–05:14:20Z). **Every step exit 0 but the one planted control that must exit 1** (the scan
+difference's plants); "tracked files modified after the pass: 0". Counts below are read from the saved logs.
+
+**Before the pass, the lint's negative control** (`data/fs132/l1/lint-plant.sh`; `lint-plant-run.out`): an unused
+anonymous instance binder planted at the end of the landing's module (`theorem zz_l1_lint_plant [Nonempty ℕ] : (1 : ℕ) =
+1 := rfl`; never committed), built — "474 of 474 batches, 2 module(s) rebuilt, **0 module(s) with warnings**"
+(`lint-plant-build.log`: the build's own linters do not see it) — then the guarded lint: **exit 1**, "`unusedArguments`:
+(2/2) Failed with 1 messages", "error: @zz_l1_lint_plant 1 unused argument" (`lint-plant.log`; `synTaut` fires on it
+too, for `1 = 1` — the red that answers the plant is the first). The module restored by `git checkout` under a trap:
+its digest is the one taken before the plant (`lint-plant-restore.txt`), the plant's name in the file 0 times, no
+tracked file modified; the pass's build recompiled the module and `Proofs` from the restored text.
+
+| step | result, read from its saved log (`data/fs132/l1/gate/`, tag `final`) | log |
+|---|---|---|
+| build | "build: OK — 474 of 474 batches, 2 module(s) rebuilt, **0 module(s) with warnings**, 8m22s" (`Outside.OAI158`, `Proofs`: the restore after the lint control); lines holding "warning" in the build log: 1, that sentence; in Lake's full log: 0 | `build-final.log`, `receipt-build-final.log` |
+| `sorry` | narrow pattern (`^\s*sorry\s*$`, `:= sorry`, `by sorry`): **0** lines; `\bsorry\b`: 9, all prose — the eight `main` holds, file for file, and one in the module's docstring ("a planted `sorry` reaches the headline", l. 31) | `sorry-narrow-final.txt`, `sorry-wide-final.txt` |
+| `axiom` lines in `Proofs/` | 4 line-initial: the two imports (`OAI158.lean` ll. 107, 119), `kloosterman_bound` (`WeilKloosterman.lean` l. 51), and one line of a docstring's code block (`Sat/Lrat.lean` l. 85, the print of a native auxiliary). Three axioms, as the audit counts | `axiom-lines-final.txt` |
+| doubled names, **after the build and before the audit** (`--mem 16`) | "scanned 7456 modules, 1844 of them the package's (1844 source files)"; "dupnames: OK — no name is declared by two modules (23 generated on demand, listed above)" | `dupnames-final.log` |
+| its self-test | "OK — all 15 controls behaved: every planted fault fired, and every partner passed." | `dupnames-selftest-final.log` |
+| axioms | "audited: **6576 records — 6533 clean on the standard axioms, 20 axiom-free, 18 imported** (resting on a declared outside theorem), **5 declared purchase(s)**"; "declared imports (3): …kloosterman_bound, …no_proper_five_coloring, …proper_to_borel_weak"; "library axioms other than native auxiliaries (3): … every one declared"; "axioms: OK". `CLAUDE.md` § Trust ledger flagged stale, "6521 clean → 6533, 8 imported → 18" (draft 1) | `axioms-final.log`, `receipt-axioms-final.log` |
+| its self-test | "OK — every planted fault fired, and every partner passed." (23 controls; the two state-reading ones at the new state, stage 5.3) | `axioms-selftest-final.log` |
+| **every record of the module filed on the one import it uses or on none** (`tools/fs132_l1_records.py`, three imports) | "main: 9744 theorems; landing: 9769; landing only: 25 = 22 hand-written + 3 generated with no record asked (`WeakColoring.eq_1`, `angularMeasure.eq_1`, `direction.eq_1`); gone: 0; records in the log: 6576"; "landing records on exactly the three: 12", "on the three and no_proper_five_coloring: 5", "on the three and proper_to_borel_weak: 5"; "whole log: records carrying kloosterman_bound: 8 (filed: 8) … no_proper_five_coloring: 5 (filed: 5) … proper_to_borel_weak: 5 (filed: 5)"; "records under IMPORTED 18; carrying two imports 0; carrying sorryAx 0"; "records: PASS" | `records-final.txt` |
+| its plants | ten, one at a time, "every one of 10 fired; the unplanted log passes": a record dropped, one doubled, `sorryAx`, a clean record given the transfer, one under PURCHASED, a record on H under CLEAN, one stripped of H, **the landing's theorem filed on H for T**, a record on both imports, one of `main`'s eight stripped of Weil's bound | `records-plant-final.txt` |
+| the import's block as filed, with its controls (`tools/fs132_l1_block.py`) | "records filed: 22 as filed: 22 (clean 12, on H 5, on T 5) refused: 0"; the wrong filing: refused exactly `six_le_chiM0`, `chiM0_six_or_seven`, `seven_le_chromaticNumber_plane_iff`, "CONTROL FIRED AS EXPECTED"; the planted `sorry`: refused exactly eleven, "CONTROL FIRED AS EXPECTED"; each read as a plain check exits 1; "block: PASS" | `block-final.txt`, `block-*-final.*` |
+| vacuity | "scanned: **declarations=14845 refutations-skipped=215**"; "sites: **sites=1447 vacuous=0 stale=0 declared=3 witnessed=38 generic=1404 unknown=2**"; "evidence: 18 emptiness proof(s), 63 witness(es)"; the baseline's header "match (9 of 9 compared)"; "UNKNOWN …hexShell_plane5", "UNKNOWN …hexShell_plane6", held; "vacuity: OK". `CLAUDE.md` § The gate flagged stale on three counts (draft 4) | `vacuity-final.log`, `receipt-vacuity-final.log` |
+| the scan against `main`'s, row for row | "main rows 1527, landing rows 1528; lost 0; added 1": "added SITE GENERIC …weakColoring_of_aeColouring :: HadwigerNelson.Plane.AeColouring k"; no evidence row added; "module Outside.OAI158: declarations 0 -> 38 (+38), refutations 0 -> 0"; "by module: declarations +38, refutations +0: equal to the scans difference"; "vacdiff: PASS" | `vacdiff-final.txt` |
+| its self-test, and the difference's plants | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent."; the plants: exit 1 — COUNTER-DISAGREES, LOST, NOT NEW, FLAGGED, MODULE-SUM | `vacuity-selftest-final.log`, `vacdiff-plant-final.txt` |
+| assumptions | "assumptions: OK — 3 outside theorem(s) as axioms, with 18 theorem(s) resting on them; 19 named and 16 inline hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s) and mentioned by 1"; "assumed: **axioms=3 rests=18 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1**"; "decided: … conditions=35 fails=0"; "hints=0 silent=1 unseen=16040"; the ledger's header "match (9 of 9 compared)"; `CLAUDE.md` § Trust ledger flagged stale, "axioms 1 → 3, rests 8 → 18" (draft 3) | `assumptions-final.log`, `receipt-assumptions-final.log` |
+| its self-test | "OK — all 33 checks behaved: every planted fault fired, and every partner stayed silent." | `assumptions-selftest-final.log` |
+| architecture | "RESULT: PASS" | `arch-final.txt` |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "(2/2) Passed!"; its control red before the pass (above) | `lint-final.log`; `../lint-plant.log` |
+| notes, as the last landing ran them | `tools/fs131_l5_notes.py --only-flagged`: "notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58", 0 CONFLICT — `main`'s count: the check reads the modules of QA4's audit, none of them this landing's; `tools/fs131_qa4_notes.py --self-test`: "OK (6 controls, 1 planted)" | `notes-l5-final.txt`, `notes-qa4-selftest-final.txt` |
+| **the stored-term comparison, on the module as recompiled on this commit** (olean digest `0f3b15f3…`; before the theorem `346c6b85…`) | the release's print made again at its pin and identical to the import's; "declarations: 8 compared: 8 identical: 8 different: 0 []", "READ-BACK IDENTICAL: all 8 declarations, term for term, modulo the namespace"; "SELF-TEST OK: … 6 plants"; the Lean control "FIRED AS EXPECTED" (six different, two identical) and refused as a plain comparison; level one: no constant absent, the import's table line for line; the nine characterisations, no message; 0 files written under `~/.cache/ext-oai1`, 0 under `~/source/math`; "READ-BACK RUN gate-final: OK" | `readback-final.txt`; `../readback/*-gate-final.*` |
+| every statement of the module by `#check` | the import's seventeen print line for line as its record has them (`diff`); the eighteenth: "seven_le_chromaticNumber_plane_iff : 7 ≤ (unitDistance ℂ).chromaticNumber ↔ ⨆ ε, ⨆ (_ : ε > 0), Plane.mu 6 ε < 1", with no notation `Iff (LE.le 7 …chromaticNumber) (LT.lt (iSup fun ε => iSup fun h => HadwigerNelson.Plane.mu 6 ε) 1)`; its axioms the standard three and `proper_to_borel_weak`; the ten readings of its docstring elaborate | `checks-final.out` |
+| the ruled docstring edit, by text and by the kernel | text against `b71b773b`: "1 doc comment(s) changed, nothing else", "docstring of: theorem hexShell_plane5", "files=1 doc-comments-changed=1 failed=0"; the tool's self-test "OK — every planted fault fired and every partner passed"; elaborated, `Instances/HexShell` and `Outside/OAI158` against the dump taken before the edit: "before=86 after=86 (theorems before=67) missing=0 added=0 changed=0", "IDENTICAL" | `docstring-text-final.txt`, `docstring-selftest-final.txt`, `sigs-final.txt`, `docstring-elaborated-final.txt` |
+| the baseline and the scan's source | "baseline entries: unchanged (2)"; the marker's string in `Instances/HexShell.lean`: 0; lines of `scripts/Vacuity.lean` from `def trackedProps` to its end that differ from `126bff4d`'s: 0 | `baseline-final.txt` |
+| the three digests against the previous landing's receipts | axioms: 22 rows added — 12 CLEAN on exactly the three, 5 IMPORTED on `no_proper_five_coloring`, 5 on `proper_to_borel_weak` — none removed. vacuity: "counts: declarations 14807 → 14845, sites 1446 → 1447, generic 1403 → 1404", one row added, the `GENERIC` site. assumptions: two `AXIOM` rows and ten `RESTS` rows added, the two reworded `ASSUMPTION` rows (R5), nothing else | `digest-axioms-final.txt`, `digest-vacuity-final.txt`, `digest-assumptions-final.txt` |
+
+**Read aloud against the informal claim.** The claim of this landing: "the library holds `6 ≤ χ(ℝ²) ≤ 7` and
+`χ(ℝ²) = χ_m⁰(ℝ²)`, each kernel-checked from one declared outside theorem of `[OAIMath2026]`, each of those the
+release's own statement; and the one question as a theorem." What the gate shows: two `axiom`s enter, each declared to
+the audit with its key, each the release's stored term symbol for symbol on the module the gate compiled; every theorem
+of the module has one record, on the standard three (twelve) or on the three and exactly one of the two (five and
+five), none on both, none with `sorry` beneath it; no name is declared twice, so each printed list is the list of the
+proof the kernel checked; the ten theorems that rest on an import are listed in the assumptions ledger, one row each.
+`chromaticNumber_plane_six_or_seven` aloud: *colour the points of the Euclidean plane so that no two points one unit
+apart share a colour; then at least six and at most seven colours are needed* — its upper half this library's own, its
+lower half the import. `chromaticNumber_plane_eq_chiM0`: *the least number of colours in such a colouring is the least
+number in a measurable colouring proper at almost every unit pair* — no binder, on the transfer.
+`seven_le_chromaticNumber_plane_iff`: stage 4. **What the gate does not show, and the docstrings and this record say**:
+that the two axioms are true (the release's proofs are not in this library; they were built, replayed and read
+elsewhere, one mind each); Mathlib between the two pins below the constants the statements name; and the two findings —
+an older statement emptied by the import, two "open" hypotheses implied by it — which no step of the gate reads, and
+which are said in words in the gated tree by ruling.
+
+## Drafts for the front page (FS132-L1)
+
+*For the coordinator to file; nothing here is filed by this job. Each names its slot — the file, the section, and **the
+exact words on `main` it replaces or follows**, read on the merged tree (`main` at `7eb8dbd9`), not from the import's
+record — and the log line it comes from. The gated commit is `5df686f0`; its logs are `data/fs132/l1/gate/*-final.*`
+(`receipt-axioms-final.log`, `receipt-vacuity-final.log`, `receipt-assumptions-final.log` are the three scans' full
+outputs).*
+
+**1. `CLAUDE.md` § Trust ledger, the audit's sentence.** *Replaces* "the current audit reads 6521 clean and 5 declared
+purchases, and 8 imported (and 20 axiom-free; 6,554 records at wave 8's first landing, FS131-L8A, 2026-10-06)" — from
+`axioms-final.log`, "audited: 6576 records — 6533 clean on the standard axioms, 20 axiom-free, 18 imported (resting on a
+declared outside theorem), 5 declared purchase(s)":
+
+> the current audit reads 6533 clean and 5 declared purchases, and 18 imported (and 20 axiom-free; 6,576 records at the
+> landing of FS-132's import, FS132-L1, 2026-10-07)
+
+The 22 records the landing adds: 12 on exactly the standard three (the dictionary, the models, two instances), 5 on the
+three and `no_proper_five_coloring`, 5 on the three and `proper_to_borel_weak`. 6521 + 12 = 6533; 8 + 10 = 18;
+axiom-free and purchases do not move.
+
+**2. `CLAUDE.md` § Trust ledger, the sentence naming the library's outside axioms** (the import's draft 2, at the
+joined tree's counts). *Replaces* "The library declares one outside axiom, `StandingFive.kloosterman_bound` — Weil's
+bound for Kloosterman sums, `[Weil1948]` p. 207, read against its page by two readers — and the eight imported records
+are the theorems that rest on it;" — from `axioms-final.log`, "declared imports (3): …", "library axioms other than
+native auxiliaries (3): … every one declared", and `records-final.txt`:
+
+> The library declares three outside axioms: `StandingFive.kloosterman_bound` — Weil's bound for Kloosterman sums,
+> `[Weil1948]` p. 207, read against its page by two readers — with eight imported records; and, from `[OAIMath2026]`
+> family 158, a Lean development built and audited here at its own pin, `Outside.OAI158.no_proper_five_coloring` — no
+> map `ℂ → Fin 5` separates every unit pair — with five, and `Outside.OAI158.proper_to_borel_weak` — a proper
+> `k`-colouring of the plane gives a Borel one proper at almost every unit pair — with five; no record rests on two of
+> the three, and each of the two new ones is the release's stored statement term for term
+> (`tools/fs132_i1_readback.py`, run again at the landing on the module as recompiled there);
+
+The rest of the paragraph stands ("its first import, `[Falconer1981]` Lemma 2 (i), is a theorem since FS131-IF1. Rung B
+holds none.").
+
+**3. `CLAUDE.md` § Trust ledger, the nine assumption counts** (the import's draft 3, updated; and ruling R6 (ii)).
+*(a) Replaces* "`axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — one outside theorem
+declared as an axiom, with eight theorems resting on it;" — from `receipt-assumptions-final.log`, `=== TOTALS ===`:
+
+> `axioms=3 rests=18 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — three outside theorems declared
+> as axioms, with eighteen theorems resting on them;
+
+*(b) Replaces*, in the same paragraph, "seven standing for outside theorems, twenty-three for hand results of ours and
+five for open questions — taken in 98 (hypothesis, statement) pairs by 51 statements (`scripts/assumptions-ledger.txt`
+lists each pair; FS131-LT5, 2026-10-06)." (R6 (ii)):
+
+> seven standing for outside theorems, twenty-three for hand results of ours and five declared as open questions —
+> taken in 98 (hypothesis, statement) pairs by 51 statements (`scripts/assumptions-ledger.txt` lists each pair;
+> FS131-LT5, 2026-10-06). Of the five, three are open (the seven-target at six colours, `NoPar`, fragments at every
+> radius); two — the six-target at five colours, on the plane and on its {1, 2}-distance graph (rows 43, 61) — hold
+> with nothing to prove given the declared outside theorem `Outside.OAI158.no_proper_five_coloring`, their binders
+> ranging over five-colourings, of which there are none (`Outside.OAI158.not_colorable_five`); their kind stays `open`
+> until the tooling job decides how a declared hypothesis that a declared import implies is classed (FS132-L1).
+
+The paragraph's last sentence (Weil's bound counted in three forms) stands; the two new imports take one form each, the
+axiom. Until (a) is filed the step flags `CLAUDE.md` § Trust ledger stale (not failed): "axioms 1 → 3, rests 8 → 18".
+
+**4. `CLAUDE.md` § The gate, the vacuity scan's two count lines.** *Replaces* "`declarations=14807
+refutations-skipped=215 sites=1446`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2`." — from
+`vacuity-final.log`, "scanned: declarations=14845 refutations-skipped=215", "sites: sites=1447 vacuous=0 stale=0
+declared=3 witnessed=38 generic=1404 unknown=2":
+
+> `declarations=14845 refutations-skipped=215 sites=1447`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1404 unknown=2`.
+
+Until it is filed the scan flags `CLAUDE.md` § The gate stale (not failed) on three counts: declarations, sites, generic.
+
+**5. `CLAUDE.md` § The gate, the sentence about the baseline's two entries** (ruling R4). *Replaces* "The baseline's two
+entries, `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.":
+
+> The baseline holds two entries. `hexShell_plane6` cannot be discharged: its inhabitant *is* Hadwiger–Nelson, at six.
+> `hexShell_plane5` is no longer that: given the declared outside theorem `Outside.OAI158.no_proper_five_coloring` the
+> plane has no five-colouring (`Outside.OAI158.not_colorable_five`), so its hypothesis has no inhabitant and it says
+> nothing beyond that import. The scan cannot see this — it reads as emptiness what the library states as `IsEmpty τ`
+> or as `¬ P` of a tracked `P` — so the entry stays `UNKNOWN`; the statement's docstring and the baseline's prose say it
+> in words, and whether emptiness resting on a declared import may discharge an entry is the tooling job's question.
+
+**6. `tools/claude_md_fact_audit.py`, `GATE_CHANGES`** — one entry after the last (`(("6304", "5"), ("6521", "5"))`):
+
+```python
+    (("6521", "5"), ("6533", "5")): "FS-132, the landing of the import of [OAIMath2026] family 158 (FS132-L1; copy data/fs132/l1/gate/receipt-axioms-final.log, gated commit 5df686f0): 6,576 records, 6,533 clean, 20 axiom-free, 18 imported, 5 purchases",
+```
+
+The previous landing's receipts, against which the three digests were taken: `data/fs131/l8a/gate/receipt-axioms-final.log`,
+`receipt-vacuity-final.log`, `receipt-assumptions-final.log`.
+
+**7. `CLAUDE.md` § The mission, row D.** *Replaces*, inside the row's second cell, "kernel-checked in its own library,
+built and audited here (EXT-OAI1), read in full (EXT-OAI2), not in this library — so `χ(ℝ²) ∈ {6, 7}`. With no
+hypothesis it is one question about measurable colour classes, and both of its answers decide the problem (§ The aim)":
+
+> kernel-checked in its own library, built and audited here (EXT-OAI1), read in full (EXT-OAI2) — so `χ(ℝ²) ∈ {6, 7}`.
+> **This library holds `6 ≤ χ(ℝ²) ≤ 7` on one declared outside theorem**
+> (`Outside.OAI158.chromaticNumber_plane_six_or_seven`, kernel-checked from the axiom
+> `Outside.OAI158.no_proper_five_coloring`, the release's stored statement term for term); what it proves with no import
+> is still the classical interval `5 ≤ χ(ℝ²) ≤ 7` (row 33). With no hypothesis the problem is one question about
+> measurable colour classes — in this library a theorem on the second declared outside theorem,
+> `Outside.OAI158.proper_to_borel_weak`: `seven_le_chromaticNumber_plane_iff`, `7 ≤ χ(ℝ²) ⟺ lim_{ε→0} µ₆(ε) < 1` — and
+> both of its answers decide the problem (§ The aim)
+
+**8. `CLAUDE.md` § Frontier, "Where the problem stands", the first paragraph.** *(a) Replaces* "(family 158;
+kernel-checked in its own library on the standard three axioms, the cone built and audited here, EXT-OAI1; its
+manuscript read in full, EXT-OAI2). This repository's own kernel holds the classical interval, **5 ≤ χ(ℝ²) ≤ 7** (row
+33), on the standard three axioms, its lower end through de Grey's graph (rung B).":
+
+> (family 158; kernel-checked in its own library on the standard three axioms, the cone built and audited here,
+> EXT-OAI1; its manuscript read in full, EXT-OAI2). **This library holds `6 ≤ χ(ℝ²) ≤ 7` on one declared outside
+> theorem** — `Outside.OAI158.chromaticNumber_plane_six_or_seven`, kernel-checked from the axiom
+> `Outside.OAI158.no_proper_five_coloring`, which is the release's stored statement term for term (FS132-L1). With no
+> import this repository's kernel holds the classical interval, **5 ≤ χ(ℝ²) ≤ 7** (row 33), on the standard three
+> axioms, its lower end through de Grey's graph (rung B).
+
+*(b) Follows*, in the same paragraph, "the least number of colours in a measurable colouring proper at almost every
+unit pair (`[OAIMath2026]` Thm 1.3 with row 130)":
+
+> — in this library `χ(ℝ²) = χ_m⁰(ℝ²)` is `Outside.OAI158.chromaticNumber_plane_eq_chiM0`, kernel-checked from the
+> declared outside theorem `Outside.OAI158.proper_to_borel_weak` (the release's transfer, term for term) and this
+> library's own N-EASY, and row 131's criterion read for the plane itself is `seven_le_chromaticNumber_plane_iff`, on
+> that import alone —
+
+**9. `CLAUDE.md` § Frontier, the "Last filed" line** — a clause to lead it: "**the landing of FS-132's import**
+(FS132-L1, 2026-10-07: `Outside/OAI158` through the gate — two declared outside theorems of `[OAIMath2026]` family 158;
+the library holds `6 ≤ χ(ℝ²) ≤ 7` on the first, `χ(ℝ²) = χ_m⁰(ℝ²)` and `7 ≤ χ(ℝ²) ⟺ lim µ₆(ε) < 1` on the second; no
+new row); before it …". And § Paths forward, "Open milestones", after "**Since 2026-10-07 the frontier stands on
+`[OAIMath2026]` family 158**: `χ(ℝ²) ∈ {6, 7}` and `χ(ℝ²) = χ_m⁰(ℝ²)` with no hypothesis": "— in this library since
+FS132-L1, each kernel-checked from one declared outside theorem (`Outside/OAI158`)".
+
+**10. `LEDGER.md`.**
+- **Row 33.** *Replaces* the italic sentence "*Outside this library, and audited here (`plans/EXT-OAI1-audit.md`):
+  `[OAIMath2026]` family 158 proves in Lean, at v4.34.1 on the standard three axioms, that no map `ℂ → Fin 5` separates
+  every unit pair, which in this row's form is `6 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber` — with
+  this row's upper end, `6 ≤ χ(ℝ²) ≤ 7` (`six_le_chromaticNumber_plane_of_no_proper_five`, drafted, conditional on
+  their statement, added nowhere); the theorem this library holds unconditionally is still `5 ≤ χ(ℝ²) ≤ 7`.*" (the
+  audit's Stage 8 sentence with the import's addition):
+  > *The lower end is six by `[OAIMath2026]` family 158 (audited, `plans/EXT-OAI1-audit.md`): imported as the outside
+  > theorem `Outside.OAI158.no_proper_five_coloring` (the release's stored statement, term for term:
+  > `plans/FS132-I1-implementation.md`, `plans/FS132-L1-landing.md`), it gives
+  > `Outside.OAI158.chromaticNumber_plane_six_or_seven : 6 ≤ χ(ℝ²) ≤ 7` on the standard three axioms and that import,
+  > and `6 ≤ χ_m⁰(ℝ²) ≤ 7` (`chiM0_six_or_seven`); `chromaticNumber_plane_interval`, `5 ≤ χ(ℝ²) ≤ 7`, remains the
+  > statement this library proves with no import.*
+  Its address cell gains `Outside/OAI158.lean`; its milestone cell `FS-132`.
+- **Row 130.** *Follows* "With no hypothesis (`[OAIMath2026]` Thm 1.3; `χ_m⁰ ≤ χ` kernel-checked there and audited
+  here, EXT-OAI1): `χ(ℝ²) = χ_m⁰(ℝ²)`." (the audit's Stage 8 sentence with the import's addition):
+  > *In this library the collapse needs no MR: `[OAIMath2026]`'s transfer `proper_to_borel_weak` (every `k`; audited,
+  > on the standard three at Lean v4.34.1), imported as the outside theorem `Outside.OAI158.proper_to_borel_weak`,
+  > gives `χ_m⁰(ℝ²) ≤ χ(ℝ²)` (`chiM0_le_chromaticNumber_plane`), so with N-EASY `χ(ℝ²) = χ_m⁰(ℝ²)` holds on the import
+  > of that one theorem (`Outside.OAI158.chromaticNumber_plane_eq_chiM0`, which is wave 9's `Row130Collapse`), colour by
+  > colour (`colorable_iff_nonempty_aeColouring`); `6 ≤ χ_m⁰(ℝ²)` holds on the other import (`six_le_chiM0`); the
+  > release's Borel weak colourings are this library's `AeColouring`s, with no import
+  > (`weakColoring_iff_unitPairsNull`); the equalities with `χ_CP` and with a field's plane in this row and row 128 are
+  > untouched by it.*
+- **Row 131.** *Follows* "At six, `χ_m⁰(ℝ²) ≥ 7` ⟺ `lim µ₆(ε) < 1`: `[SokolovVoronov2025]` §9's hypothesis, read
+  uniformly in `ε`, is `χ_m⁰ = 7`, and a refutation needs no wild set — it is a sequence of periodic grid colourings
+  with vanishing holes, the wildness only in the limit.":
+  > *For the plane's chromatic number itself: `Outside.OAI158.seven_le_chromaticNumber_plane_iff : 7 ≤ χ(ℝ²) ⟺ sup_{ε >
+  > 0} µ₆(ε) < 1`, kernel-checked from `Plane.seven_le_chiM0_iff` (this library's, on the standard three) and the
+  > declared outside theorem `Outside.OAI158.proper_to_borel_weak` alone (FS132-L1; read aloud in its docstring).*
+- **Row 43** (R6 (iii)). *Follows* "**the six-target**: χ(ℝ²) ≥ k + 1 from k-colour virtual edges at √3 AND at 2,
+  neither sufficing alone on the hex-shell host (`add_one_le_chromaticNumber_plane_of_forced_pairs`; the {1, 2} host
+  needs one, G26).":
+  > *Since FS-132's import the target at five colours is a consequence of the declared outside theorem
+  > `Outside.OAI158.no_proper_five_coloring`: the plane has no five-colouring (`Outside.OAI158.not_colorable_five`), so
+  > the two hypotheses of `not_colorable_five_of_forced_pairs` and `six_le_chromaticNumber_plane_of_forced_pairs` hold
+  > with nothing to prove and their conclusions are the import's own statements; on the standard three axioms alone the
+  > row stands as it was, a conditional. The target at six colours (row 61) is open.*
+- **Row 61** (R6 (iii)). *Follows* "and distance-set-generic, and over {1, 2} one √3 gadget suffices
+  (`six_le_chromaticNumber_oneTwo_of_forced_sqrt3`);":
+  > *Since FS-132's import that statement's hypothesis holds with nothing to prove given
+  > `Outside.OAI158.no_proper_five_coloring`: it ranges over five-colourings of the plane's {1, 2}-distance graph, each
+  > a five-colouring of the plane (`chromaticNumber_unitDistance_le_distanceGraph`), of which there are none
+  > (`Outside.OAI158.not_colorable_five`), and its conclusion `6 ≤ χ(ℝ²; {1, 2})` is a consequence of the import; the
+  > colour-generic form at six colours (`seven_le_chromaticNumber_plane_of_forced_pairs`) stays open.*
+- **The two theorems that take those hypotheses** (R6 (iv)), one line for wherever rows 43 and 61 or G26 cite them:
+  "`not_colorable_five_of_forced_pairs` and `six_le_chromaticNumber_plane_of_forced_pairs` (`Instances/HexShell.lean`;
+  'the six-colour programme's exact requirement'): given the import their hypotheses are true of an empty domain and
+  their conclusions — `¬ (unitDistance ℂ).Colorable 5`, `6 ≤ (unitDistance ℂ).chromaticNumber` — are the import's own
+  statements (`Outside.OAI158.not_colorable_five`, `six_le_chromaticNumber_plane`); on the standard three alone they
+  are what they were, kernel-checked conditionals (as terms: `data/fs132/l1/five-empty.lean`)."
+
+**11. `BIBLIOGRAPHY.md`, `[OAIMath2026]`, the third cell ("what of ours rests on it").** *Follows* "Nothing of ours
+rests on any family but 158." (the import's draft 9, at the landing):
+
+> Imported by FS132-I1 and landed by FS132-L1 as two declared outside theorems (`Outside/OAI158`:
+> `no_proper_five_coloring`, `proper_to_borel_weak`), on which ten records of the library rest, five each; the stored
+> statements compared term for term across the two pins (`plans/FS132-I1-implementation.md`; run again on the landed
+> module, `plans/FS132-L1-landing.md`).
+
+**12. `plans/EXT-OAI1-audit.md`, a dated note** (inventory item 629, ruling (e)). *Follows*, in "What was checked, and
+by whom", "- the import's two statements closed by the release's theorems (`ImportReadback.lean`);":
+
+> *Note, 2026-10-07 (filed at FS132-L1's landing): true at the release's pin, inside `import Mathlib`. The comparison
+> across the two pins — the stored terms of the six copied definitions and the two statements, symbol against symbol,
+> at this repository's pin under the module's own imports — is FS132-I1's (`plans/FS132-I1-implementation.md` stages
+> 1–2): it found this stage's skeleton storing another proof of `FiniteDimensional ℝ ℂ` inside `WeakColoring` than the
+> release's, equal by proof irrelevance and not symbol for symbol, and repaired it by one import. Run again by FS132-L1
+> on the module as recompiled on the landed tree: eight of eight identical
+> (`data/fs132/l1/readback/summary-gate-final.txt`).*
+
+**13. `LEAN.md`** — the import's drafts 4 and 5, their slots checked on `main`, and three sentences this landing adds.
+- § Assumptions, item 2 of "An imported theorem carries four things", *after* "(`StandingFive.kloosterman_bound`, with
+  `kloostermanBound_of_ringChar_ne_two` and `kloosterman_page_of_kloostermanBound`)": "Where the source is itself Lean,
+  copy its definitions, state the axiom over the copies, and compare the stored terms across the two pins — every
+  constant, instance, binder and universe level — with a control that fires (`Outside.OAI158`;
+  `tools/fs132_i1_readback.py`, on a print made at each pin by one dumper); the landing runs it again on the module as
+  recompiled on the joined tree."
+- § Searching — Lean, *a new line*: "Which instance a term is elaborated with depends on the imports, and equal text
+  can store different terms: `volume : Measure ℂ` takes the proof `Complex.instFiniteDimensionalReal` of
+  `FiniteDimensional ℝ ℂ` where `Mathlib.LinearAlgebra.Complex.FiniteDimensional` is imported and
+  `FiniteDimensional.rclike_to_real` where it is not — equal by proof irrelevance, not symbol for symbol. A statement
+  copied from another library is compared as the kernel stores it, never as text (FS132-I1)."
+- § The gate, the vacuity bullet, *after* "A statement that concludes `False` is skipped as a refutation, so a marker on
+  it is never read and proves nothing either way." (rulings R1, R2): "**An import can empty an older statement's
+  domain, and no scan sees it.** A landing that brings an `axiom` refuting a carrier (`¬ ∃ c, …`, `¬ Colorable k`)
+  reads the scan's sites and the assumptions step's declared hypotheses for that carrier: a statement whose hypothesis
+  is empty only given a declared import says so in words in its docstring, naming the import and the theorem that shows
+  it, and no `IsEmpty` statement or marker rests on an import until the tooling job rules how such emptiness is counted
+  (`hexShell_plane5` given `Outside.OAI158.no_proper_five_coloring`, FS132-L1)."
+- § The gate, the assumptions bullet, *after* "(`StandingFive.StandingFloor`, FS131-LT5)." (ruling R5): "A declared
+  hypothesis that a declared import implies — its binder ranging over a domain the import empties — keeps its kind and
+  says so in its source string until the tooling job classes such an entry (`inline:SixTarget`,
+  `inline:SixTargetOneTwo`, FS132-L1); the step cannot find one: no theorem states the binder."
+- § The gate's first paragraph: "23 planted faults" and "21 controls planted in one copy of the audit, 33 checks" stand
+  (`axioms-selftest-final.log`, `assumptions-selftest-final.log`). § Assumptions' "(five do on `main`, in seven
+  entries …)" stands: no hypothesis-form assumption was added.
+
+**14. The grade** (the import's draft 10; the Proof Atlas). None of these is regraded to [kernel] without its
+qualifier: `6 ≤ χ(ℝ²)` (row 33's new lower end), `6 ≤ χ_m⁰(ℝ²)`, `χ(ℝ²) = χ_m⁰(ℝ²)` (row 130's collapse) and
+`7 ≤ χ(ℝ²) ⟺ lim µ₆(ε) < 1` (row 131 for the plane) are each **kernel-checked from one declared outside theorem** —
+[kernel] over the import named beside it, the import itself [external], audited (EXT-OAI1) and read (EXT-OAI2). What is
+[kernel] with no import: the dictionary between the release's definitions and this library's
+(`properColoring_iff_colorable`, `weakColoring_iff_unitPairsNull`, `exists_weakColoring_iff_nonempty_aeColouring`) and
+the models at seven. For the atlas: the nodes of rows 33, 130 and 131 gain an edge from `[OAIMath2026]` family 158
+through `Outside/OAI158`, at that grade; row 43's and row 61's five-colour halves become consequences of the same
+import; no node becomes [kernel] on the standard three.
+
+**15. The open gate items at this landing, by name.**
+1. **`hexShell_plane5`** (`Instances/HexShell.lean`): empty given `Outside.OAI158.no_proper_five_coloring`; the scan
+   reads `UNKNOWN`, held by the baseline. Said in words in its docstring and in the baseline's prose (R2); no `IsEmpty`
+   statement, no marker (R1).
+2. **`inline:SixTarget`, `inline:SixTargetOneTwo`** (`scripts/Assumptions.lean`): declared kind `open`, implied by the
+   same import; said in their source strings (R5); the front page's "five for open questions" counts them (draft 3 (b)).
+3. **What the stored-term comparison does not cover**, as the import's record says: Mathlib between the tags `v4.32.0`
+   and `v4.34.1` below the 83 constants the eight declarations name. Of the 83, 69 are identical at level one, 6
+   identical up to universe-parameter names, 8 different — four private names of a moved file, one rename (`setOf` /
+   `Set.ofPred`), two instance paths read at their first difference and not proved equal
+   (`measureSpaceOfInnerProductSpace`, `Circle._proof_1`), one constant the module no longer names. What stands in for
+   the rest: the two equivalences to this library's own vocabulary, kernel-checked at this pin, and nine
+   characterisations that elaborate as one text at both pins. Not covered at all: the release's proofs as mathematics
+   beyond one mind's reading (EXT-OAI2); the release's comparator and a second kernel (not run).
+4. **The transfer is empty of content where no proper `k`-colouring exists** (`k ≤ 5`, by the other import; at six
+   unknown): its consumers `nonempty_aeColouring_of_colorable`, `chiM0_le_chromaticNumber_plane`,
+   `chromaticNumber_plane_eq_chiM0`, `seven_le_chromaticNumber_plane_iff` use it at every `k`; its model is at seven.
+   The module's docstring says so.
+5. **`Row130Collapse`** (branch `fs131-w9`, not merged) is `chromaticNumber_plane_eq_chiM0` by definition; the theorems
+   of `Plane/Reduction` that assume it lose that hypothesis at that wave's join, not here (ruling 629 (c)).
+6. `lean4checker` on this library was not run (a publication gate, `LEAN.md` § Trust ledger).
+
+## For the tooling job (inventory ruling 475 (d)) — questions this landing leaves, by ruling R1 and R6 (i)
+
+1. **Emptiness evidence resting on a declared import** (R1; the sentence sent to the coordinator: "the first emptiness
+   evidence resting on a declared import rather than on the standard three — the scan does not look at axioms, so it
+   would take it without saying so"). `gather` reads an unconditional `IsEmpty τ` whatever its axioms; if
+   `IsEmpty ((unitDistance ℂ).Coloring (Fin 5))` were stated from `no_proper_five_coloring`, `hexShell_plane5` would
+   read `VACUOUS`, or `DECLARED` under the marker, and "empty by the kernel on the standard three" and "empty given a
+   declared outside theorem" would be one count. To decide: whether to allow it; if so, a verdict or a column that
+   prints the two apart (the evidence row's axioms are one `collectAxioms` away), and its controls — an `IsEmpty` on a
+   planted axiom must read apart from one on the standard three.
+2. **A declared hypothesis that a declared import implies** (R6 (i)): what kind `inline:SixTarget` and
+   `inline:SixTargetOneTwo` have now, and whether the assumptions step should find such a case. It cannot today: no
+   theorem states the binder, so it reads as a declared hypothesis like any other.
+3. **A check a landing that brings an `axiom` could run**: for an axiom of the shape `¬ ∃ c : X, P c`, `¬ Colorable k`
+   or `IsEmpty τ`, list the scan's sites and the assumptions step's declared binders whose domains it empties. Both
+   instances here were found by reading the scans' printed lists, not by a verdict.
+4. **The records check knows one import** (`tools/fs131_l10b_records.py`: it refuses any record under IMPORTED but
+   Weil's eight). `tools/fs132_l1_records.py` reads a table import → records and checks each record on exactly its one
+   import, no leak, no record on two; it is a candidate for the standing form.
+5. **`scripts/vacuity.sh --baseline` rewrites the baseline's header and drops its prose**, the ruled note on
+   `hexShell_plane5` with it; the entries are what the gate reads.

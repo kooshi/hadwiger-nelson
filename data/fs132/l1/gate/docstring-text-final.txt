@@ -1,0 +1,4 @@
+ok    Proofs/HadwigerNelson/Instances/HexShell.lean: 1 doc comment(s) changed, nothing else
+    doc comment changed, l.246 (base l.246) — docstring of: theorem hexShell_plane5 (C : (unitDistance ℂ).Coloring (Fin 5)) :
+text: files=1 doc-comments-changed=1 failed=0 (base b71b773b)
+exit=0

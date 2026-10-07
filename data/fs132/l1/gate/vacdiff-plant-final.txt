@@ -1,0 +1,23 @@
+planted: dropped `EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis ::…`; a row on main's `Complex.I.eq_1`; an UNKNOWN row on new `HadwigerNelson.Outside.OAI158.WeakColoring.eq_1`; declarations +1
+counter vs the main scan: declarations 14807 / 14807, refutations 215 / 215: agree
+counter vs the landing scan: declarations 14845 / 14846, refutations 215 / 215: COUNTER-DISAGREES
+LOST EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis :: HadwigerNelson.Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1
+NOT NEW SITE GENERIC Complex.I.eq_1 :: F.Valid
+FLAGGED SITE UNKNOWN HadwigerNelson.Outside.OAI158.WeakColoring.eq_1 :: F.Valid
+main rows 1527, landing rows 1529; lost 1 (0 with a removed declaration); added 3
+  added SITE GENERIC on AeColouring: 1
+  added SITE UNKNOWN on Valid: 1
+  added rows in Outside.OAI158: 2
+  declarations: 14807 -> 14846 (+39)
+  refutations-skipped: 215 -> 215 (+0)
+  sites: 1446 -> 1447 (+1)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1403 -> 1404 (+1)
+  unknown: 2 -> 2 (+0)
+  module Outside.OAI158: declarations 0 -> 38 (+38), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +38, refutations +0: MODULE-SUM differs from the scans
+vacdiff: FAIL (5)
+exit=1

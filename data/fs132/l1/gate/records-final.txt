@@ -1,0 +1,33 @@
+main: 9744 theorems; landing: 9769; landing only: 25 = 22 hand-written + 3 generated with no record asked; gone (main only): 0; records in the log: 6576
+  theorems the landing brings, module Outside.OAI158: 25
+  landing records on exactly the three: 12
+  landing records on the three and no_proper_five_coloring: 5
+  landing records on the three and proper_to_borel_weak: 5
+  record anglePeriodPositive: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record angularMeasure.instIsProbabilityMeasure: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record chiM0_le_chromaticNumber_plane: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record chiM0_six_or_seven: under IMPORTED: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+  record chromaticNumber_plane_eq_chiM0: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record chromaticNumber_plane_six_or_seven: under IMPORTED: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+  record colorable_iff_nonempty_aeColouring: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record direction_coe: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record exists_properColoring_seven: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record exists_weakColoring_iff_nonempty_aeColouring: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record map_coe_arcLength: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record map_prodMap_coe: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record nonempty_aeColouring_of_colorable: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record nonempty_aeColouring_of_weak: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record not_colorable_five: under IMPORTED: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+  record properColoring_iff_colorable: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record proper_to_borel_weak_model: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record seven_le_chromaticNumber_plane_iff: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record six_le_chiM0: under IMPORTED: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+  record six_le_chromaticNumber_plane: under IMPORTED: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+  record weakColoring_iff_unitPairsNull: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record weakColoring_of_aeColouring: under CLEAN: [Classical.choice, Quot.sound, propext]
+  whole log: records carrying kloosterman_bound: 8 (filed: 8)
+  whole log: records carrying no_proper_five_coloring: 5 (filed: 5)
+  whole log: records carrying proper_to_borel_weak: 5 (filed: 5)
+  whole log: records under IMPORTED 18; carrying two imports 0; carrying sorryAx 0
+records: PASS
+exit=0
