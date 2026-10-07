@@ -1,0 +1,12 @@
+faithful: Proofs.lean: 288 non-blank lines; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): Proofs.lean: 287 non-blank lines; faults 1
+  LOST 'import Proofs.HadwigerNelson.Plane.MetricalBoundary' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): Proofs.lean: 289 non-blank lines; faults 1
+  EXTRA 'import Proofs.HadwigerNelson.Plane.MetricalBoundary' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): Proofs.lean: 289 non-blank lines; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+self-test: PASS

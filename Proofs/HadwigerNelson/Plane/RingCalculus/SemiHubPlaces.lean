@@ -15,10 +15,10 @@ inhabitants). Arguments: `plans/FS116-N3-proof.md` §§ 2.4, 3.1, 3.3; `plans/FS
 | FS116-N3-CROSS | `crossed_no_tip`, `crossed_tip_zeroAngle`, `crossed_outer`, `crossed_four`, `crossed_changePoint`, `crossed_semiHub`, over `crossed_star_data`, `crossed_coloursAt`, `crossed_not_germOnQ_inside` | proved (job FS131-I8D) |
 | FS116-RING-TRANSFER-QC | `transferQC` | proved from `semiHub_places` |
 
-**Proved over the statements of `Plane/RingCalculus/SemiHub`** (job FS131-I8C's leaves, in a tree of its own until the wave's
-join): no declaration of this module holds a `sorry`, and each rests on that module's leaves it cites.
+**Proved over the statements of `Plane/RingCalculus/SemiHub`** (job FS131-I8C's leaves, proved in a tree of its own; the two
+were joined by job FS131-L8A): every declaration of this module is a kernel theorem with no open leaf beneath it.
 
-**The class** (ruled on job FS131-I8D's finding): `semiHub_places`, `transferQC`, `crossed_four`, `crossed_changePoint` and
+**The class** (inventory item 592, on job FS131-I8D's finding): `semiHub_places`, `transferQC`, `crossed_four`, `crossed_changePoint` and
 `crossed_semiHub` read a vertex `p` of *exactly* four colours (`(F.coloursAt p).ncard = 4`). At a change point two colours are
 absent at `p` (`germS_absent`), so "at least four colours, at most two absent" is four colours only at `k = 6`.
 
@@ -538,7 +538,7 @@ the ring of `p`. Then
   (kind `T`: the tile toward `y`). ("Holds `ψ + 180°`, resp. `ψ`, in its interior" is stated in this stronger form, which
   is what the argument gives and which no cusp can spoil.)
 
-**The class** (`h4`; ruled on FS131-I8D's finding): `p` carries *exactly* four colours. At a change point two colours are
+**The class** (`h4`; inventory item 592): `p` carries *exactly* four colours. At a change point two colours are
 absent at `p` (`germS_absent`: `ncard + 2 = k`), so "at least four colours with at most two absent" is four colours only at
 `k = 6`; the argument reads the four tiles of `p`, and at `k ≥ 7` a fifth tile is placed by none of its windows. With `hk`
 the class is `k ≤ 6`: the row's six-coloured fragments.
@@ -697,7 +697,7 @@ the colours absent at `y` are `a` and `b`. (The row's "every tile at `y` a cone 
 freedom of the outer pair.) `y` has no tip (`crossed_no_tip`), so by FS116-N2-STAR its colours are the two absent at `p`
 and its outer colours, which lie in `{a', b'}` (`crossed_outer`): four colours need both.
 
-**The class** (`h4`; ruled on FS131-I8D's finding): `p` carries *exactly* four colours. At a change point two colours are
+**The class** (`h4`; inventory item 592): `p` carries *exactly* four colours. At a change point two colours are
 absent at `p` (`germS_absent`: `ncard + 2 = k`), so "at least four colours with at most two absent" is four colours only at
 `k = 6`; the argument reads the four tiles of `p`, and at `k ≥ 7` a fifth tile is placed by none of its windows. With `hk`
 the class is `k ≤ 6`: the row's six-coloured fragments. Here the conclusion itself forces `k = 6`: the complement of a
@@ -751,7 +751,7 @@ semi-hub `y = r(ψ)` of kind O carrying four colours and no more, unless an edge
 (`F.OnRingArc y p`), `p` is a change point of the ring of `y`, that ring being `b` just counter-clockwise of `p` and `a`
 just clockwise.
 
-**The class** (`h4`; ruled on FS131-I8D's finding): `p` carries *exactly* four colours. At a change point two colours are
+**The class** (`h4`; inventory item 592): `p` carries *exactly* four colours. At a change point two colours are
 absent at `p` (`germS_absent`: `ncard + 2 = k`), so "at least four colours with at most two absent" is four colours only at
 `k = 6`; the argument reads the four tiles of `p`, and at `k ≥ 7` a fifth tile is placed by none of its windows. With `hk`
 the class is `k ≤ 6`: the row's six-coloured fragments. Model: the strip's `P₀` at `P₂` (`P₂`'s ring is `M` just
@@ -938,7 +938,7 @@ here, "an arc of `ω(y)` through `v` (or `u`) inside `B(p, 1)` with `X̄` on `y`
 into `B(p, 1)` are a connected interval covered by those two closed cones, each met at an end. The proof reads neither `ho`
 nor *simple* at `y` (both kept as filed).
 
-**The class** (`h4`; ruled on FS131-I8D's finding): `p` carries *exactly* four colours. At a change point two colours are
+**The class** (`h4`; inventory item 592): `p` carries *exactly* four colours. At a change point two colours are
 absent at `p` (`germS_absent`: `ncard + 2 = k`), so "at least four colours with at most two absent" is four colours only at
 `k = 6`; the argument reads the four tiles of `p`, and at `k ≥ 7` a fifth tile is placed by none of its windows. With `hk`
 the class is `k ≤ 6`: the row's six-coloured fragments. Model: the strip's `P₀` at `P₂`, where `P₀` is a crossed full
@@ -1000,7 +1000,7 @@ colours are `germPair_swap`; the four edges' windows `fullSemiHub_star_crossed`;
 colours, missing pair and reciprocity `crossed_no_tip`, `crossed_outer`, `crossed_four`, `crossed_changePoint`,
 `crossed_semiHub`. (The row's "radius above 2" is read by the last two only.)
 
-**The class** (`h4`; ruled on FS131-I8D's finding): `p` carries *exactly* four colours. At a change point two colours are
+**The class** (`h4`; inventory item 592): `p` carries *exactly* four colours. At a change point two colours are
 absent at `p` (`germS_absent`: `ncard + 2 = k`), so "at least four colours with at most two absent" is four colours only at
 `k = 6`; the argument reads the four tiles of `p`, and at `k ≥ 7` a fifth tile is placed by none of its windows. With `hk`
 the class is `k ≤ 6`: the row's six-coloured fragments. -/

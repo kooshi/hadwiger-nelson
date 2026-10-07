@@ -36,8 +36,8 @@ of `u` with the germ on side `s.flip` of `v` — the tip pair `{u⁺, v⁻}` for
 | FS116-V5-DICHO | `germPair_dicho`, from `ringArc_pair_eq_or_disjoint` (any two arcs: below) | proved |
 | FS116-N3-CONE | (a) `ringTile_uMinus`, `ringTile_vMinus`, `ringTile_vPlus`, `ringTile_uPlus`; (b) `IsRingArc.germIn_closure`, `germOnQ_bar_uPlus`, `…_vMinus`, `…_uMinus`, `…_vPlus`; (c) `closure_inter_subset_sphere`, `isRingArc_of_edge`, `four_le_of_bothKind` | proved |
 | FS116-N3-STAR2 | `exists_isStar4`, `ringArc_star`, `fullSemiHub_star_crossed`, `fullSemiHub_star_parallel`, `fullSemiHub_star_parallel_T` | proved |
-| FS116-N3-SEMI | `semiHub_places` (`…/SemiHubPlaces`) | stated |
-| FS116-N3-CROSS | `crossed_no_tip`, `crossed_tip_zeroAngle`, `crossed_outer`, `crossed_four`, `crossed_changePoint`, `crossed_semiHub` (`…/SemiHubPlaces`) | `crossed_tip_zeroAngle` proved from `crossed_no_tip`; the rest stated |
+| FS116-N3-SEMI | `semiHub_places` (`…/SemiHubPlaces`) | proved there (job FS131-I8D) |
+| FS116-N3-CROSS | `crossed_no_tip`, `crossed_tip_zeroAngle`, `crossed_outer`, `crossed_four`, `crossed_changePoint`, `crossed_semiHub` (`…/SemiHubPlaces`) | proved there (job FS131-I8D) |
 | FS116-RING-TRANSFER-QC | `transferQC` (`…/SemiHubPlaces`; its first clause; the others are the rows above, cited in its docstring) | proved from `semiHub_places` |
 
 **What is wider than the rows** (each reported as a generalization).
@@ -256,7 +256,7 @@ theorem qcol_ccw (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.col
 /-- **FS116-V5-QCOL**, "an arc of `ω(p)` whose inner tile is `p`'s tile of the inner colour": in a valid non-Siamese map,
 the tile of `p` of the inner colour of an arc of `Γ` on `ω(p)` holds the whole arc in its closure (points of the inner side
 are nearer than `1` to `p`). Any point `p`, any `k`. (This is the first clause of wave 7's `qArc_inner`, FS114-N7-QOPP (i),
-stated there with `sorry` on a branch this one does not hold: one declaration at the join.) -/
+stated there as an open leaf on a branch this one does not hold: one declaration at the join.) -/
 theorem qcol_inner_tile (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
     (hA : F.IsRingArc p θ₁ θ₂ c c') {T : Set ℂ} (hT : F.TileOf c T) (hpT : p ∈ closure T) :
     ringArc p θ₁ θ₂ ⊆ closure T := by
@@ -913,9 +913,10 @@ colours carried at `p` and `{a, a'}`, `{b, b'}` disjoint. Then `ℓ + m ≤ 60°
 `[ψ + ℓ − 30°, ψ + 30° − m]`, `t_a|t_b'` in `[ψ + 30°, ψ + 150°]`, `t_b'|t_a'` in `[ψ + 150° + ℓ, ψ + 210° − m]` and
 `t_a'|t_b` in `[ψ + 210°, ψ + 330°]`.
 
-The row's "full semi-hub of kind O with (Q) arcs `A`, `B`" gives these hypotheses: the arcs by
-`GermOnQWith.exists_isRingArc_ccw`, `…_cw`, four colours by `germS_absent`. Model: the strip's `P₀` (`ℓ = m = 15.52°`, edges
-at `0°, 90°, 180°, 270°`); no Lean term. -/
+The row's "full semi-hub of kind O with (Q) arcs `A`, `B`" gives the two arcs, by `GermOnQWith.exists_isRingArc_ccw`,
+`…_cw`. It does not give `h4`: at a change point `germS_absent` makes two colours absent at `p` (`ncard + 2 = k`), which is
+four colours only at `k = 6`; exactly four colours is a hypothesis of its own (inventory item 592). Model: the strip's `P₀`
+(`ℓ = m = 15.52°`, edges at `0°, 90°, 180°, 270°`); no Lean term. -/
 theorem fullSemiHub_star_crossed (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hpd : p ∈ F.dom) (hS : F.SimpleOn {p})
     (h4 : (F.coloursAt p).ncard = 4) {ψ ℓ m : ℝ} {a a' b b' : Fin k}
     (hA : F.IsRingArc p (ψ + π / 3) (ψ + π / 3 + ℓ) a a') (hB : F.IsRingArc p (ψ - π / 3 - m) (ψ - π / 3) b b')

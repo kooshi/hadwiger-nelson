@@ -1,0 +1,19 @@
+slot: admitted python3: mem 8 GiB (hard cap), cpus 4,5,6,7
+    ok    text: a docstring reworded — passes
+    ok    text: a module doc reworded — passes
+    ok    text: a docstring holding a nested comment reworded — passes
+    ok    text: a character of a statement changed — fails
+    ok    text: a `--` comment changed — fails
+    ok    text: a plain block comment changed — fails
+    ok    text: a docstring's terminator deleted, so that it swallows the theorem below — fails
+    ok    text: a docstring added where there was none — fails
+    ok    text: the text inside a string literal changed — fails
+    ok    text: nothing changed (zero doc comments differ) — passes
+    ok    text: the planted module is lexed as 1 module doc, 2 docstrings, 1 line comment, 1 block comment
+    ok    dump: a docstring reworded — identical dump
+    ok    dump: a binder's type changed — CHANGED planted.thm, its type
+    ok    dump: a definition's value changed — CHANGED planted.val, its value
+    ok    dump: a theorem removed — MISSING planted.bare
+    ok    dump: a dump with its COUNT line cut is refused
+    ok    dump: the planted file's constants are read (val, thm, str, bare among them)
+self-test: OK — every planted fault fired and every partner passed
