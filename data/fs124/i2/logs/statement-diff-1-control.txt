@@ -1,0 +1,14 @@
+compared: 133 named constants of the first dump (types; values of definitions), 9 example heads
+internal (not compared): 39 before, 46 after
+new named constants in the second dump: 4
+  NEW THM HadwigerNelson.Plane.CircleSide.abs_sign
+  NEW THM HadwigerNelson.Plane.CircleSide.sign_eq
+  NEW THM HadwigerNelson.Plane.CrossAt.exists_mem_sphere_inside
+  NEW THM HadwigerNelson.Plane.quadrant_sign_pos
+examples in the working files that the base does not hold: 1
+  NEW EXAMPLE Proofs/HadwigerNelson/Plane/OnePiece.lean: example : ∀ᵐ z, z ∈ tightModelDom ∩ unitShadow (ball (0 : ℂ) (1 / 10)) → tightModel z = 2
+VALUE    DEF HadwigerNelson.Plane.quadPt: the stored definition differs
+TYPE     THM HadwigerNelson.Plane.tight_straddle: the stored statement differs
+EXAMPLE  Proofs/HadwigerNelson/Plane/OnePiece.lean #1: its statement is not in the working file (in order)
+    was: example : ∀ᵐ z, z ∈ tightModelDom ∩ unitShadow (ball (0 : ℂ) (1 / 10)) → tightModel z ≠ 2
+CONTROL: 3 of 3 planted faults reported — the check can fail

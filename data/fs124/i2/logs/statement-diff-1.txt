@@ -1,0 +1,9 @@
+compared: 133 named constants of the first dump (types; values of definitions), 9 example heads
+internal (not compared): 39 before, 46 after
+new named constants in the second dump: 4
+  NEW THM HadwigerNelson.Plane.CircleSide.abs_sign
+  NEW THM HadwigerNelson.Plane.CircleSide.sign_eq
+  NEW THM HadwigerNelson.Plane.CrossAt.exists_mem_sphere_inside
+  NEW THM HadwigerNelson.Plane.quadrant_sign_pos
+examples in the working files that the base does not hold: 0
+PASS: no statement and no definition changed
