@@ -7,9 +7,10 @@ generators the brief names (the port's, through which the generated modules chan
 
 ## Theorems this phase proved
 
-*Filled at the gate (the final list is at the end of this record, "Theorems this phase proved, final").* This job proves
-no theorem of its own: it gates and lands the theorems of FS132-K1, -K2 (statements), FS132-I2 (the port), FS132-I3
-and FS132-I4 (the leaves), listed in their records.
+*The final list is at the end of this record ("Theorems this phase proved, final").* One theorem is this job's own, by
+its brief's Amendment 1: `HadwigerNelson.SixRing.not_ae_outside_points` — [kernel], `[propext, Classical.choice,
+Quot.sound]`. The others it gates and lands are FS132-K1's and -K2's (statements), FS132-I2's (the port), FS132-I3's
+and FS132-I4's (the leaves), listed in their records.
 
 ## Stage 1 — SAVED (FS132-L2): the readback, what was read, the branch built as given
 
@@ -694,3 +695,57 @@ twenty-two modules' rows name no branch, the two skeleton rows are gone with the
 **13. `plans/FS132-close-inventory.md`** (for the item on this landing): the ruling of item 40 (b) is done — the
 licence copy is in; of item 40 (c) — all three instances are scoped; of item 47 — the two skeleton modules did not
 land, and one of the two names of one identity is gone.
+
+## Theorems this phase proved, final
+
+*Each [kernel], through the full gate at `b46a9d57`; axioms as `scripts/axioms.sh` printed them on that commit
+(`data/fs132/l2/gate/receipt-axioms-final.log`), every record under CLEAN. Namespace `HadwigerNelson.SixRing` unless
+said; modules under `Proofs/HadwigerNelson/`.*
+
+- **`no_outside_orbit_points`** (`Plane/SixRing/Orbit.lean`) — the first night's exclusion, orbit form over four points
+  (C132-WIT-ORBIT, row 155's first sentence), for a Borel colouring of the whole plane. `[propext, Classical.choice,
+  Quot.sound]`. No assumption in hypothesis form; no outside theorem. FS132-K2's statement and assembly.
+- **`no_outside_orbit`** (the same file) — the orbit form over four compact sets (C132-M-ORBIT). The standard three.
+- **`not_ae_outside`** (the same file) — the ring form over four compact sets (C132-M-EXCL). The standard three.
+- **`not_ae_outside_points`** (the same file) — the ring form over four points (C132-WIT-EXCL, row 155's ring
+  sentence). The standard three. **This job's**, by the brief's Amendment 1: `not_ae_outside` at the two-point sets.
+- **`no_alternating_pairs`** (`Plane/SixRing/TwoPairs.lean`) — the two-pair ring (C132-DIAG-WIDE) for the whole plane,
+  the release's `two_state_impossible` read at six. The standard three. Not a result of this milestone.
+- **The 303 other theorems the landing brings**, each with one record under CLEAN on a subset of the standard three
+  (`data/fs132/l2/gate/records-final.txt`: 377 declarations — 308 theorems, 66 definitions, 3 structures — 376 on
+  exactly the three, one on two of them), listed with what each says in their authors' records: the leaves and helpers
+  of `Plane/SixRing/State`, `Excl`, `ChartMeasure`, `Kill`, `NullSets`, `Chart`, `Tips` and the assembly's
+  `adjacent_tip_false`, `chart_step_false`, `no_alternating_groups` (`plans/FS132-I4-implementation.md` § Theorems this
+  phase proved); `StepLemma` and `Shift`, less the helper removed at stage 5 (`plans/FS132-I3-implementation.md`);
+  `Confine` and `Basic` (`plans/FS132-kernel-plan.md`); and the ported lemmas of `Outside/OAI158Palette`,
+  `OAI158CircleMaps`, `OAI158Expansion`, `OAI158CircleTransport`, `OAI158PaletteDensity`, `OAI158PaletteTransport`,
+  `OAI158BinaryPalettes`, `OAI158States`, `OAI158AngularBoundary` — among them `Outside.OAI158.palette_transfer_pair`,
+  `palette_sixty_disjoint`, `two_state_impossible`, `mem_spatialSupport_ae` (`plans/FS132-I2-implementation.md`).
+
+## Stage 10 — SAVED (FS132-L2): the landing
+
+`main` had moved again while the gate ran: `f81abeec`, 26 commits past the commit merged at stage 3. **Tried, then
+merged by hash** (`data/fs132/l2/merge-final-trial.out`, `merge-final.out`): since the merge base `357e42de` it changes
+`data/` (35 paths), `plans/` (18) and `LEAN.md` — **0 paths outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`,
+`LEDGER.md`, `LEAN.md`, `RUNNING.md`** — so the gate is not re-run. `git merge --no-ff
+f81abeecde0c8945132dac16d90d6f0d83683f6f`: **merge commit `780225d8f3ccd086183550a7a31302e4cba23039`, automatic.** The
+diff that shows it, between the gated commit and the merged one: `git diff --name-only b46a9d57 780225d8` — `data/`
+118, `plans/` 19, `LEAN.md` 1, nothing else; `git diff --stat b46a9d57 780225d8 -- Proofs Proofs.lean scripts tools
+ARCHITECTURE.md lakefile.toml lean-toolchain lake-manifest.json` — **empty**. The merged tree holds zero `sorry` by
+the narrow search, and `f81abeec` is its ancestor.
+
+**The push** (`data/fs132/l2/push-main.out`): `git push origin HEAD:main` from the worktree, at `3ab61fcd` (the merged
+commit and one commit of this job's logs under `data/`): "f81abeecd..3ab61fcdc HEAD -> main" — **a fast-forward; no
+force.** `origin/main` by `ls-remote`: `f81abeec…` before, `3ab61fcd…` after. The record's last stages and the report
+follow in a second fast-forward that touches `plans/` and `data/` only.
+
+## Slips, my own
+
+1. **A build's inputs written while it walked** (stage 2): I ran the two generators during the build after the cut.
+   It had not reached the modules they write, and the build was green, so nothing was lost; a red build would have had
+   two causes to separate. Since then no source file was written with a build in flight.
+2. **The brief's order, items 3 and 4**: the licence copy and the scoping (4 (a), (b)) were made before `main` was
+   merged (3). Item 4 (c), the comparisons, was run after the merge, on the joined tree, as the brief asks.
+3. **A count in a tool's docstring** ("eleven faults" for twelve plants), corrected before the tool was first run on a
+   gate log.
+4. **The first draft of stage 6 said "the brief's other four conditions"** for five; corrected before the commit.
