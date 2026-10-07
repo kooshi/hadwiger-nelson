@@ -1,0 +1,2 @@
+control: planted CHANGED at HadwigerNelson.Plane.AeColouring.isWeakColouringOn, MISSING at HadwigerNelson.Plane.AeProperOn; reported: ['HadwigerNelson.Plane.AeColouring.isWeakColouringOn', 'HadwigerNelson.Plane.AeProperOn']
+control: OK — both faults reported and nothing else

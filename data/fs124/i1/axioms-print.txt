@@ -1,0 +1,84 @@
+'HadwigerNelson.Plane.AeColouring.isWeakColouringOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeProperOn.ae_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeProperOn.ae_rigidMotion_arcLength' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeProperOn.ae_rigidMotion_edge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeProperOn.colorable_induce' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeProperOn.comp_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeProperOn.eq_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeProperOn.exists_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeProperOn.mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsWeakColouringOn.aeProperOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsWeakColouringOn.comp_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsWeakColouringOn.exists_aeColouring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsWeakColouringOn.measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.IsWeakColouringOn.mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.aeProperOn_congr' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.aeProperOn_iff_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.aeProperOn_iff_ae_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.aeProperOn_iff_unitPairsNull' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.aeProperOn_iff_volume' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.aeProperOn_of_proper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.aeProperOn_of_proper_off_null' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.colorable_iff_forall_ball' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Plane.colorable_induce_of_forall_aeProperOn_ball' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.colorable_induce_of_forall_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.colorable_plane_of_forall_aeProperOn_ball' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.colorable_plane_of_forall_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.continuous_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.continuous_rigidMotion_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_isWeakColouringOn_ball_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_isWeakColouringOn_iff_subtype' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_isWeakColouringOn_of_colorable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Plane.exists_isWeakColouringOn_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_isWeakColouringOn_univ_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_radius_no_weak_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_radius_of_not_colorable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_rigidMotion_edge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isOpen_setOf_mapsTo_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isWeakColouringOn_univ_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isWeakColouringOn_univ_iff_weakColoring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.measurePreserving_motionMul_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.measurePreserving_motionMul_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_monoPairSet_iff_rigidMotion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_monoPairSet_of_e_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.monoPairSet.eq_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.monoPairSet_eq_iUnion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.monoPairSet_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.motionMul.eq_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.prod_arcLength_eq_restrict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.prod_arcLength_eq_zero_iff_volume' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.radius_countable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.radius_down' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Plane.radius_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Plane.radius_graph' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.radius_up' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.rigidMotion.eq_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.rigidMotion_add_two_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.rigidMotion_apply_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.rigidMotion_apply_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.rigidMotion_motionMul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.rigidMotion_translation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.rigidMotion_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]

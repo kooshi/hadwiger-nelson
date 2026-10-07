@@ -1,0 +1,10 @@
+'FS124I1Halves.colorable_of_forall_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124I1Halves.forall_ball_of_colorable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'FS124I1Halves.exists_ball_of_seven_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS124I1Halves.seven_le_of_exists_ball' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]

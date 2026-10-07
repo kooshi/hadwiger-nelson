@@ -84,23 +84,23 @@ structure IsWeakColouringOn (U : Set ℂ) (c : ℂ → Fin k) : Prop where
 
 /-- The motion with parameter `(x, θ)` carries `0` to `x`. -/
 @[simp] theorem rigidMotion_apply_zero (q : ℂ × ℝ) : rigidMotion q 0 = q.1 := by
-  sorry
+  simp [rigidMotion]
 
 /-- The motion with parameter `(x, θ)` carries `1` to `x + e θ`. -/
 @[simp] theorem rigidMotion_apply_one (q : ℂ × ℝ) : rigidMotion q 1 = q.1 + e q.2 := by
-  sorry
+  simp [rigidMotion]
 
 /-- The parameter `0 = (0, 0)` is the identity. -/
 @[simp] theorem rigidMotion_zero (z : ℂ) : rigidMotion 0 z = z := by
-  sorry
+  simp [rigidMotion, e]
 
 /-- The parameter `(t, 0)` is the translation by `t`. -/
 theorem rigidMotion_translation (t z : ℂ) : rigidMotion (t, 0) z = t + z := by
-  sorry
+  simp [rigidMotion, e]
 
 /-- A rigid motion is an isometry. -/
 theorem dist_rigidMotion (q : ℂ × ℝ) (z w : ℂ) : dist (rigidMotion q z) (rigidMotion q w) = dist z w := by
-  sorry
+  rw [rigidMotion, rigidMotion, dist_add_left, dist_eq_norm, ← mul_sub, norm_mul, norm_e, one_mul, dist_eq_norm]
 
 /-- The parametrization is jointly continuous in the parameter and the point. -/
 theorem continuous_rigidMotion : Continuous fun p : (ℂ × ℝ) × ℂ => rigidMotion p.1 p.2 := by
@@ -110,12 +110,12 @@ theorem continuous_rigidMotion : Continuous fun p : (ℂ × ℝ) × ℂ => rigid
 
 /-- Each rigid motion is continuous (hence measurable). -/
 theorem continuous_rigidMotion_apply (q : ℂ × ℝ) : Continuous (rigidMotion q) := by
-  sorry
+  exact continuous_const.add (continuous_const.mul continuous_id)
 
 /-- The motion with parameter `(x, θ + 2π)` is the motion with parameter `(x, θ)`. -/
 theorem rigidMotion_add_two_pi (x : ℂ) (θ : ℝ) (z : ℂ) :
     rigidMotion (x, θ + 2 * Real.pi) z = rigidMotion (x, θ) z := by
-  sorry
+  simp [rigidMotion, e_add_two_pi]
 
 /-- `motionMul` is composition of motions. -/
 theorem rigidMotion_motionMul (q h : ℂ × ℝ) (z : ℂ) :
@@ -126,7 +126,12 @@ theorem rigidMotion_motionMul (q h : ℂ × ℝ) (z : ℂ) :
 `rigidMotion h 1` for the parameter `h = (v, arg (w - v))`. -/
 theorem exists_rigidMotion_edge {v w : ℂ} (h : dist v w = 1) :
     ∃ h : ℂ × ℝ, rigidMotion h 0 = v ∧ rigidMotion h 1 = w := by
-  sorry
+  refine ⟨(v, Complex.arg (w - v)), by simp, ?_⟩
+  have hn : ‖w - v‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact h
+  have harg := Complex.norm_mul_exp_arg_mul_I (w - v)
+  rw [hn, Complex.ofReal_one, one_mul] at harg
+  rw [rigidMotion_apply_one, e, harg]
+  ring
 
 /-- **Right multiplication preserves Lebesgue measure on the parameters**: for each angle a translation of the
 plane, and a translation of the angle. -/
@@ -151,7 +156,20 @@ theorem measurePreserving_motionMul_right (h : ℂ × ℝ) :
 translation of the angle. -/
 theorem measurePreserving_motionMul_left (q : ℂ × ℝ) :
     MeasurePreserving (fun h : ℂ × ℝ => motionMul q h) volume volume := by
-  sorry
+  -- a rigid motion of the plane (a rotation, then a translation), and a translation of the angle
+  have hrot : MeasurePreserving (fun z : ℂ => e q.2 * z) volume volume := by
+    -- multiplication by the unit `e θ`, as a real-linear isometry of the plane
+    have hne : e q.2 ≠ 0 := Complex.exp_ne_zero _
+    let L : ℂ ≃ₗᵢ[ℝ] ℂ :=
+      ⟨(LinearEquiv.smulOfUnit (Units.mk0 (e q.2) hne)).restrictScalars ℝ, fun z => by
+        show ‖e q.2 * z‖ = ‖z‖
+        rw [norm_mul, norm_e, one_mul]⟩
+    exact L.measurePreserving
+  have h1 : MeasurePreserving (rigidMotion q) volume volume :=
+    (measurePreserving_add_left volume q.1).comp hrot
+  have h2 : MeasurePreserving (fun θ : ℝ => q.2 + θ) volume volume := measurePreserving_add_left volume q.2
+  rw [Measure.volume_eq_prod]
+  exact h1.prod h2
 
 /-- `volume ⊗ arcLength` is Lebesgue measure on `ℂ × ℝ` restricted to the angles in `[0, 2π)`. -/
 theorem prod_arcLength_eq_restrict :
@@ -201,61 +219,100 @@ theorem mem_monoPairSet_iff_rigidMotion {U : Set ℂ} {c : ℂ → α} {q : ℂ 
 /-- The monochromatic unit pairs inside `U` are the unit pairs of the classes cut down to `U`. -/
 theorem monoPairSet_eq_iUnion (U : Set ℂ) (c : ℂ → α) :
     monoPairSet U c = ⋃ j, unitPairSet (U ∩ c ⁻¹' {j}) := by
-  sorry
+  ext ⟨x, θ⟩
+  simp only [monoPairSet, unitPairSet, mem_setOf_eq, mem_iUnion, mem_inter_iff, mem_preimage, mem_singleton_iff]
+  exact ⟨fun ⟨hx, hy, h⟩ => ⟨c x, ⟨hx, rfl⟩, hy, h.symm⟩,
+    fun ⟨j, ⟨hx, h1⟩, hy, h2⟩ => ⟨hx, hy, h1.trans h2.symm⟩⟩
 
 /-- The monochromatic pairs read the angle through the unit vector `e θ` alone. -/
 theorem mem_monoPairSet_of_e_eq {U : Set ℂ} {c : ℂ → α} (x : ℂ) (θ θ' : ℝ) (h : e θ = e θ')
     (hq : (x, θ) ∈ monoPairSet U c) : (x, θ') ∈ monoPairSet U c := by
-  sorry
+  simp only [monoPairSet, mem_setOf_eq] at hq ⊢
+  rwa [← h]
 
 /-- **In the library's primitive**: proper at almost every unit pair of `U` exactly when each class, cut down to
 `U`, has null unit pairs. -/
 theorem aeProperOn_iff_unitPairsNull [Countable α] {U : Set ℂ} {c : ℂ → α} :
     AeProperOn U c ↔ ∀ j, UnitPairsNull (U ∩ c ⁻¹' {j}) := by
-  sorry
+  rw [AeProperOn, monoPairSet_eq_iUnion, measure_iUnion_null_iff]
+  rfl
 
 /-- **In the claim list's words**: `c z ≠ c (z + u)` for almost every pair of a point `z` of `U` and a unit vector
 `u = e θ` with `z + u` in `U`. -/
 theorem aeProperOn_iff_ae {U : Set ℂ} {c : ℂ → α} :
     AeProperOn U c ↔
       ∀ᵐ q ∂(volume : Measure ℂ).prod arcLength, q.1 ∈ U → q.1 + e q.2 ∈ U → c q.1 ≠ c (q.1 + e q.2) := by
-  sorry
+  have hset : {q : ℂ × ℝ | ¬ (q.1 ∈ U → q.1 + e q.2 ∈ U → c q.1 ≠ c (q.1 + e q.2))} = monoPairSet U c := by
+    ext q
+    simp only [monoPairSet, mem_setOf_eq, Classical.not_imp, not_not]
+  rw [AeProperOn, ae_iff, hset]
 
 /-- **Over all real angles**: `AeProperOn` is nullness of the monochromatic pairs for Lebesgue measure on `ℂ × ℝ`. -/
 theorem aeProperOn_iff_volume {U : Set ℂ} {c : ℂ → α} :
     AeProperOn U c ↔ (volume : Measure (ℂ × ℝ)) (monoPairSet U c) = 0 := by
-  sorry
+  exact prod_arcLength_eq_zero_iff_volume mem_monoPairSet_of_e_eq
 
 /-- Monochromatic pairs are monotone in the set. -/
 theorem monoPairSet_mono {U V : Set ℂ} (h : V ⊆ U) (c : ℂ → α) : monoPairSet V c ⊆ monoPairSet U c := by
-  sorry
+  exact fun _ hq => ⟨h hq.1, h hq.2.1, hq.2.2⟩
 
 /-- Proper at almost every unit pair of `U`, hence of every subset of `U`. -/
 theorem AeProperOn.mono {U V : Set ℂ} {c : ℂ → α} (hc : AeProperOn U c) (h : V ⊆ U) : AeProperOn V c := by
-  sorry
+  exact measure_mono_null (monoPairSet_mono h c) hc
 
 /-- The condition reads `c` on `U` alone. -/
 theorem aeProperOn_congr {U : Set ℂ} {c c' : ℂ → α} (h : EqOn c c' U) : AeProperOn U c ↔ AeProperOn U c' := by
-  sorry
+  have hset : monoPairSet U c = monoPairSet U c' := by
+    ext q
+    simp only [monoPairSet, mem_setOf_eq]
+    constructor
+    · rintro ⟨h1, h2, h3⟩
+      exact ⟨h1, h2, by rw [← h h1, ← h h2]; exact h3⟩
+    · rintro ⟨h1, h2, h3⟩
+      exact ⟨h1, h2, by rw [h h1, h h2]; exact h3⟩
+  rw [AeProperOn, AeProperOn, hset]
 
 /-- A colouring proper at **every** unit pair of `U` is proper at almost every one — with no measurability. -/
 theorem aeProperOn_of_proper {U : Set ℂ} {c : ℂ → α} (h : ∀ x ∈ U, ∀ y ∈ U, dist x y = 1 → c x ≠ c y) :
     AeProperOn U c := by
-  sorry
+  have hempty : monoPairSet U c = ∅ := by
+    ext ⟨x, θ⟩
+    simp only [monoPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+    intro hx hy
+    exact h x hx _ hy (by simp [dist_eq_norm])
+  rw [AeProperOn, hempty, measure_empty]
 
 /-- **Proper off a null set**: if `c` separates every two points of `U` at distance `1` that both lie off a null set
 `N` (the arcs of a map, a grid), it is proper at almost every unit pair of `U` — with no measurability of `c`, `U` or
 `N`. The pairs with an end in `N` are null: `N ×ˢ univ`, and its preimage under `q ↦ motionMul q (1, 0)`. -/
 theorem aeProperOn_of_proper_off_null {U N : Set ℂ} {c : ℂ → α} (hN : volume N = 0)
     (h : ∀ x ∈ U, ∀ y ∈ U, dist x y = 1 → x ∉ N → y ∉ N → c x ≠ c y) : AeProperOn U c := by
-  sorry
+  rw [aeProperOn_iff_volume]
+  -- a monochromatic unit pair of `U` has an end in `N`: its first, or its second, which is the first of its
+  -- image under right multiplication by the motion `z ↦ 1 + z`
+  have hNu : (volume : Measure (ℂ × ℝ)) (N ×ˢ (univ : Set ℝ)) = 0 := by
+    rw [Measure.volume_eq_prod, Measure.prod_prod, hN, zero_mul]
+  have hpre := (measurePreserving_motionMul_right (1, 0)).quasiMeasurePreserving.preimage_null hNu
+  refine measure_mono_null (fun q hq => ?_) (measure_union_null hNu hpre)
+  obtain ⟨hx, hy, hcq⟩ := hq
+  by_contra hcon
+  rw [mem_union, not_or] at hcon
+  refine h _ hx _ hy (by simp [dist_eq_norm]) (fun hxN => hcon.1 ⟨hxN, mem_univ _⟩) (fun hyN => hcon.2 ?_) hcq
+  show motionMul q (1, 0) ∈ N ×ˢ (univ : Set ℝ)
+  exact ⟨by simpa [motionMul, rigidMotion] using hyN, mem_univ _⟩
 
 /-- **Rigid motions carry the condition**: if `c` is proper at almost every unit pair of `U`, then `c ∘ g` is at
 almost every unit pair of `g⁻¹ U`. (One direction is stated; the motions form a group, and for a translation the
 equivalence is `exists_isWeakColouringOn_ball_iff`.) -/
 theorem AeProperOn.comp_rigidMotion {U : Set ℂ} {c : ℂ → α} (hc : AeProperOn U c) (g : ℂ × ℝ) :
     AeProperOn (rigidMotion g ⁻¹' U) (c ∘ rigidMotion g) := by
-  sorry
+  rw [aeProperOn_iff_volume] at hc ⊢
+  have hset : monoPairSet (rigidMotion g ⁻¹' U) (c ∘ rigidMotion g) =
+      (fun h : ℂ × ℝ => motionMul g h) ⁻¹' monoPairSet U c := by
+    ext q
+    simp only [mem_preimage, mem_monoPairSet_iff_rigidMotion, rigidMotion_motionMul, Function.comp_apply]
+  rw [hset]
+  exact (measurePreserving_motionMul_left g).quasiMeasurePreserving.preimage_null hc
 
 /-! ## Weak colourings -/
 
@@ -263,32 +320,50 @@ theorem AeProperOn.comp_rigidMotion {U : Set ℂ} {c : ℂ → α} (hc : AePrope
 pairs. -/
 theorem isWeakColouringOn_univ_iff {c : ℂ → Fin k} :
     IsWeakColouringOn univ c ↔ Measurable c ∧ ∀ j, UnitPairsNull (c ⁻¹' {j}) := by
-  sorry
+  constructor
+  · rintro ⟨hm, hp⟩
+    refine ⟨hm, fun j => ?_⟩
+    have hj := aeProperOn_iff_unitPairsNull.mp hp j
+    rwa [univ_inter] at hj
+  · rintro ⟨hm, hp⟩
+    refine ⟨hm, aeProperOn_iff_unitPairsNull.mpr fun j => ?_⟩
+    rw [univ_inter]
+    exact hp j
 
 /-- An `AeColouring` of the plane is a weak colouring of every set. -/
 theorem AeColouring.isWeakColouringOn (a : AeColouring k) (U : Set ℂ) : IsWeakColouringOn U a.col := by
-  sorry
+  exact ⟨a.measurable, aeProperOn_iff_unitPairsNull.mpr fun j => (a.unitPairsNull j).mono inter_subset_right⟩
 
 /-- A weak colouring of the whole plane is the colouring of an `AeColouring`. -/
 theorem IsWeakColouringOn.exists_aeColouring {c : ℂ → Fin k} (hc : IsWeakColouringOn univ c) :
     ∃ a : AeColouring k, a.col = c := by
-  sorry
+  exact ⟨⟨c, hc.measurable, (isWeakColouringOn_univ_iff.mp hc).2⟩, rfl⟩
 
 /-- A weak colouring of `U` is one of every subset of `U`. -/
 theorem IsWeakColouringOn.mono {U V : Set ℂ} {c : ℂ → Fin k} (hc : IsWeakColouringOn U c) (h : V ⊆ U) :
     IsWeakColouringOn V c := by
-  sorry
+  exact ⟨hc.measurable, hc.aeProperOn.mono h⟩
 
 /-- Rigid motions carry weak colourings: `c ∘ g` is a weak colouring of `g⁻¹ U`. -/
 theorem IsWeakColouringOn.comp_rigidMotion {U : Set ℂ} {c : ℂ → Fin k} (hc : IsWeakColouringOn U c) (g : ℂ × ℝ) :
     IsWeakColouringOn (rigidMotion g ⁻¹' U) (c ∘ rigidMotion g) := by
-  sorry
+  exact ⟨hc.measurable.comp (continuous_rigidMotion_apply g).measurable, hc.aeProperOn.comp_rigidMotion g⟩
 
 /-- **Discs at any centre**: the disc of radius `R` about `p` has a weak `k`-colouring exactly when the disc about
 `0` has one (translate). -/
 theorem exists_isWeakColouringOn_ball_iff (p : ℂ) (R : ℝ) :
     (∃ c : ℂ → Fin k, IsWeakColouringOn (ball p R) c) ↔ ∃ c : ℂ → Fin k, IsWeakColouringOn (ball 0 R) c := by
-  sorry
+  have h1 : rigidMotion (p, 0) ⁻¹' ball p R = ball 0 R := by
+    ext z
+    simp [rigidMotion_translation, dist_eq_norm]
+  have h2 : rigidMotion (-p, 0) ⁻¹' ball 0 R = ball p R := by
+    ext z
+    simp [rigidMotion_translation, dist_eq_norm, neg_add_eq_sub]
+  constructor
+  · rintro ⟨c, hc⟩
+    exact ⟨_, h1 ▸ hc.comp_rigidMotion (p, 0)⟩
+  · rintro ⟨c, hc⟩
+    exact ⟨_, h2 ▸ hc.comp_rigidMotion (-p, 0)⟩
 
 /-- **The claim list's own form**: for a measurable `U` and `k ≥ 1`, a weak `k`-colouring of `U` exists exactly when
 there is a measurable map from the subtype `U` to `Fin k` with different labels at almost every pair of a point `z`
@@ -298,7 +373,16 @@ theorem exists_isWeakColouringOn_iff_subtype [NeZero k] {U : Set ℂ} (hU : Meas
     (∃ c : ℂ → Fin k, IsWeakColouringOn U c) ↔
       ∃ c : U → Fin k, Measurable c ∧ ∀ᵐ q ∂(volume : Measure ℂ).prod arcLength,
         ∀ (h₁ : q.1 ∈ U) (h₂ : q.1 + e q.2 ∈ U), c ⟨q.1, h₁⟩ ≠ c ⟨q.1 + e q.2, h₂⟩ := by
-  sorry
+  classical
+  constructor
+  · rintro ⟨c, hc⟩
+    refine ⟨fun z => c z, hc.measurable.comp measurable_subtype_coe, ?_⟩
+    filter_upwards [aeProperOn_iff_ae.mp hc.aeProperOn] with q hq h₁ h₂ using hq h₁ h₂
+  · rintro ⟨c, hm, hae⟩
+    refine ⟨fun z => if h : z ∈ U then c ⟨z, h⟩ else 0, hm.dite measurable_const hU, aeProperOn_iff_ae.mpr ?_⟩
+    filter_upwards [hae] with q hq h₁ h₂
+    rw [dif_pos h₁, dif_pos h₂]
+    exact hq h₁ h₂
 
 /-! ## Spec examples (each fails if its definition drifts) -/
 

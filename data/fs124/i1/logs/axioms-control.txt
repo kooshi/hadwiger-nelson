@@ -1,0 +1,5 @@
+reported: FAIL FS124I1Control.clean_but_sorry: expected clean, carries ['sorryAx']
+reported: FAIL FS124I1Control.clean_but_imported: expected clean, carries ['HadwigerNelson.Outside.OAI158.no_proper_five_coloring']
+reported: FAIL FS124I1Control.transfer_but_both: expected T, carries ['HadwigerNelson.Outside.OAI158.no_proper_five_coloring']
+passed:   FS124I1Control.clean_partner (clean) ['Classical.choice', 'Quot.sound', 'propext']
+control: OK — the three planted faults reported, the partner passed

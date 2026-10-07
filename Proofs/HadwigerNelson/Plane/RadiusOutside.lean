@@ -37,13 +37,19 @@ The release's `WeakColoring` asks `AEMeasurable c volume`; this library's notion
 `AeColouring` does and as `Outside.OAI158.proper_to_borel_weak` delivers. No axiom. -/
 theorem isWeakColouringOn_univ_iff_weakColoring {c : ℂ → Fin k} :
     IsWeakColouringOn univ c ↔ Measurable c ∧ Outside.OAI158.WeakColoring k c := by
-  sorry
+  rw [isWeakColouringOn_univ_iff]
+  exact and_congr_right fun hm => (Outside.OAI158.weakColoring_iff_unitPairsNull hm).symm
 
 /-- The weak `k`-colourings of the whole plane exist exactly when the release's Borel weak `k`-colourings do, and
 exactly when this library's `AeColouring k` is inhabited. No axiom. -/
 theorem exists_isWeakColouringOn_univ_iff :
     (∃ c : ℂ → Fin k, IsWeakColouringOn univ c) ↔ Nonempty (AeColouring k) := by
-  sorry
+  constructor
+  · rintro ⟨c, hc⟩
+    obtain ⟨a, -⟩ := hc.exists_aeColouring
+    exact ⟨a⟩
+  · rintro ⟨a⟩
+    exact ⟨a.col, a.isWeakColouringOn univ⟩
 
 /-! ## C124-RADIUS-DOWN -/
 
@@ -53,7 +59,8 @@ weak colouring of every set of the plane. Rests on the standard three axioms and
 (`Outside.OAI158.exists_properColoring_seven`), where the conclusion is `exists_isWeakColouringOn_seven`. -/
 theorem exists_isWeakColouringOn_of_colorable (h : (unitDistance ℂ).Colorable k) :
     ∃ c : ℂ → Fin k, ∀ U : Set ℂ, IsWeakColouringOn U c := by
-  sorry
+  obtain ⟨a⟩ := Outside.OAI158.nonempty_aeColouring_of_colorable h
+  exact ⟨a.col, a.isWeakColouringOn⟩
 
 /-- **C124-RADIUS-DOWN** (`data/fs124/claims-K1.md`): "For every integer k ≥ 1: if χ(ℝ²) ≤ k, every open set of the
 plane has a weak measurable k-colouring."
@@ -66,7 +73,8 @@ Inhabitant of the hypothesis: `k = 7` (`chromaticNumber_plane_interval`), where 
 (`exists_isWeakColouringOn_seven`). -/
 theorem radius_down (h : (unitDistance ℂ).chromaticNumber ≤ k) :
     ∀ U : Set ℂ, IsOpen U → ∃ c : ℂ → Fin k, IsWeakColouringOn U c := by
-  sorry
+  obtain ⟨c, hc⟩ := exists_isWeakColouringOn_of_colorable (SimpleGraph.chromaticNumber_le_iff_colorable.mp h)
+  exact fun U _ => ⟨c, hc U⟩
 
 /-! ## C124-RADIUS-FIVE -/
 
@@ -80,13 +88,16 @@ unit-distance graph with no five-colouring, which exists by de Bruijn–Erdős. 
 sentence at four colours is `exists_radius_no_weak_four`, with no import, and at seven it is false
 (`exists_isWeakColouringOn_seven`). -/
 theorem radius_five : ∃ R > (0 : ℝ), ∀ p : ℂ, ¬ ∃ c : ℂ → Fin 5, IsWeakColouringOn (ball p R) c := by
-  sorry
+  obtain ⟨R, hR, hRp⟩ := exists_radius_of_not_colorable Outside.OAI158.not_colorable_five
+  exact ⟨R, hR, fun p ⟨c, hc⟩ => hRp p c hc.aeProperOn⟩
 
 /-- C124-RADIUS-FIVE's sentence at four colours, on the standard three axioms: some radius has no disc with a weak
 measurable four-colouring (`isEmpty_coloring_plane_four`, rung B, through
 `colorable_plane_of_forall_aeProperOn_ball`). -/
 theorem exists_radius_no_weak_four : ∃ R > (0 : ℝ), ∀ p : ℂ, ¬ ∃ c : ℂ → Fin 4, IsWeakColouringOn (ball p R) c := by
-  sorry
+  have h4 : ¬ (unitDistance ℂ).Colorable 4 := fun ⟨C⟩ => isEmpty_coloring_plane_four.false C
+  obtain ⟨R, hR, hRp⟩ := exists_radius_of_not_colorable h4
+  exact ⟨R, hR, fun p ⟨c, hc⟩ => hRp p c hc.aeProperOn⟩
 
 /-! ## The join: the problem on discs -/
 
@@ -98,7 +109,11 @@ family 158); `←` (weak colourings of every disc colour the plane) is C124-RADI
 standard three axioms alone. Inhabitant of either side: `k = 7`. -/
 theorem colorable_iff_forall_ball :
     (unitDistance ℂ).Colorable k ↔ ∀ R > (0 : ℝ), ∃ c : ℂ → Fin k, IsWeakColouringOn (ball (0 : ℂ) R) c := by
-  sorry
+  constructor
+  · -- C124-RADIUS-DOWN: the half on the declared outside theorem
+    exact fun h R _ => radius_down (SimpleGraph.chromaticNumber_le_iff_colorable.mpr h) _ isOpen_ball
+  · -- C124-RADIUS-UP: no import
+    exact fun h => SimpleGraph.chromaticNumber_le_iff_colorable.mp (radius_up h).2
 
 /-- **Seven means one disc has no weak six-colouring; six means every disc has one**: `7 ≤ χ(ℝ²)` exactly when some
 open disc about the origin has no weak measurable six-colouring. With `χ(ℝ²) ≤ 7` (`chromaticNumber_plane_interval`)
@@ -112,7 +127,17 @@ rests on the declared outside theorem `Outside.OAI158.proper_to_borel_weak` (`[O
 theorem seven_le_chromaticNumber_plane_iff_exists_ball :
     7 ≤ (unitDistance ℂ).chromaticNumber ↔
       ∃ R > (0 : ℝ), ¬ ∃ c : ℂ → Fin 6, IsWeakColouringOn (ball (0 : ℂ) R) c := by
-  sorry
+  have h7 : (7 : ℕ∞) ≤ (unitDistance ℂ).chromaticNumber ↔ ¬ (unitDistance ℂ).Colorable 6 :=
+    add_one_le_chromaticNumber_iff_not_colorable (G := unitDistance ℂ) (n := 6)
+  rw [h7]
+  constructor
+  · -- the contrapositive of C124-RADIUS-UP: no import
+    intro h
+    obtain ⟨R, hR, hRp⟩ := exists_radius_of_not_colorable h
+    exact ⟨R, hR, fun ⟨c, hc⟩ => hRp 0 c hc.aeProperOn⟩
+  · -- the contrapositive of C124-RADIUS-DOWN: the half on the declared outside theorem
+    rintro ⟨R, -, hR⟩ hcol
+    exact hR (radius_down (SimpleGraph.chromaticNumber_le_iff_colorable.mpr hcol) _ isOpen_ball)
 
 /-! ## Spec examples -/
 

@@ -1,0 +1,12 @@
+data/fs124/i1/lean/AxiomsControl.lean:12:8: warning: declaration uses `sorry`
+'FS124I1Control.clean_but_sorry' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'FS124I1Control.clean_but_imported' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'FS124I1Control.transfer_but_both' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'FS124I1Control.clean_partner' depends on axioms: [propext, Classical.choice, Quot.sound]
