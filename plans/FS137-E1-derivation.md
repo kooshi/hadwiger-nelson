@@ -328,3 +328,74 @@ inner and an outer corner; by the last paragraph `s ≥ 1`: a branch of `S(w)` i
 **Theorems this stage proved**: C137-THREE — derived from C136-CLASS (inherited, one mind), one mind; kernel pending.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: claim 3, C137-SIXTY — derived, stronger than posed
+
+**Verdict: derived.** Against the card: (i) at single directions, not interiors; (ii) for either side at either point —
+inside at `θ` and outside at `θ + 60°` is excluded too; (iii) for any label `ℓ`, absent or the point's own; (iv) hence
+with the whole ring in the domain the forced set has total length at most **120°**, not 180°. *What is new beyond
+FS116-N2-FIVERING's second clause* (read whole: "If r(θ) and r(θ + 60°) were both such points, r(θ + 60°) would carry X
+while N-E1 … or FS116-N1's L1 … excludes X there"): the class (no map, no disc about the point; the hypothesis is a
+palette of one label, read direction by direction) and the bound 120°; **what is less**: the map entry concludes that
+arcs of the boundary lie along the ring over at least 180°, which nothing here gives — where the palette holds an own
+label, no statement says the label is there. *Reads* kept corners; *excludes* vertex figures: a point lacking one label,
+its whole ring in the domain, has no two adjacent corners spanning more than 240°. *Side*: both. **Tight on the held
+object**: at each of the bowtie fragment's four five-label points the forced arc is exactly 60°, its two end directions
+are not in the set, and both end points are in the fragment — the control passes with nothing to spare.
+
+derivation: C137-SIXTY
+  statement: About weak colourings that have the named corners; no weak six-colouring is known to have one. Let c be a weak k-colouring of an open set U, x a point, F a finite set of labelled corners at x that c has, and ℓ a label. Let N_in be the set of directions θ at which every label other than ℓ is the label of a corner of F that is not inner at θ, and N_out the same set with "outer" for "inner". If θ and θ + 60° both lie in N_in ∪ N_out, then U does not contain both x + e(θ) and x + e(θ + 60°). Hence, if U contains S(x): an arc of directions contained in N_in, or in N_out, has length at most 60°; N_in has total length at most 120°, and so has N_out; and if F fills a neighbourhood of x and its labels are all the labels but ℓ, the cones of any two adjacent corners of F span at most 240° together.
+  uses only: C136-FORCED (`plans/FS136-derivation.md` § 2; [hand], one mind; its label half kernel-checked on a branch — inherited, read whole) with the one member x at each of the two points; C124-SHADOW-OPEN (`plans/FS124-derivation.md` § 2; [hand], one mind — inherited, read at its statement); that for every choice of sides and every η > 0 the one-sided parts of B(x + e(θ), η) and B(x + e(θ + 60°), η) hold two points at distance 1 (an implicit function at a transversal zero); for the lengths, C137-BUDGET's first step for one corner (a corner inner at θ has its cone in the closed half-turn about θ; off finitely many directions it is inner at θ when it is outer at θ + 180°). Not consumed: the number of labels; that F fills a neighbourhood, but for the last clause; that ℓ is absent at x
+  not claimed: that a weak colouring has such corners; that a label of a palette is present anywhere; anything for two directions 60° apart at which different labels are forced (FS116-Y2-SIXFRAG's centre: six directions 60° apart, six labels); anything when U misses one of the two points — at FS114-Y2-BOWTIE's five-label points the arcs are exactly 60° and their end directions are not in N_in; that N_in is non-empty for a given F; that 120° is attained (no object held attains it; the card's 180° is not the best); the map entry FS116-N2-FIVERING's conclusion, which is about arcs of the boundary on the ring and says more for maps
+  argument: § Argument — two forced sides 60° apart
+  verdict: derived
+  grade: derived from: C136-FORCED
+  minds: 1
+  model: FS114-Y2-BOWTIE, a weak six-colouring of its disc that has the five corners at q₂ = (√3/2, −1/2): for ℓ = 4, N_in is the open arc (150°, 210°) and N_out the open arc (330°, 30°), each exactly 60°; no two of their directions are 60° apart, the end points (0, 0) and (0, −1) of the first arc are both in the fragment, and the end directions are in neither set; the same at its three other five-label points (control `sixty-forced`)
+  prior art: partly: for maps FS116-N2-FIVERING, second clause (`plans/FS116-derivation.md` l. 655, `plans/FS116-N2-proof.md` § 2.1; [hand], one mind, Siamese pairs allowed) — the same step, with "not on a (Q) arc" where this has "the palette is one label", and total length 180° where this has 120°; the asking lane's H-a (`plans/POROS-2026-10-07-fs136-derived.md` § 0.3) is the first clause for interiors of arcs; print: as C136-FORCED's line and plan §PA item 2 — not found
+  handoff: de Bruijn — the first sentence on cells: at each point the label half of C136-FORCED (kernel-checked on a branch) with one member, then one use of the open-set lemma and one explicit unit pair; the lengths only with a consumer
+
+control: sixty-forced
+  of: C137-SIXTY — the sets N_in and N_out of every label, exact, at every vertex carrying at least k − 1 labels: FS114-Y2-BOWTIE's four five-label points, FS116-Y2-SIXFRAG's centre, an R7 lattice point (and, to show they are empty, the four-label vertices of the strip and the disk). Printed: the longest arc and the largest total of one set; the number of pairs of its components 60° apart, exactly (a component rotated by 60° against every component, by exact comparison of directions), and how many have both ring points in the object; the object's own colour at float samples beside each arc. Tight: the fragment's arcs are exactly 60° — the count of pairs must be 0 with open arcs touching. The fault is the engine's planted bar (the first corner read as crossing wherever it is inner)
+  run: python3 ../data/fs137/e1/budget.py forced
+  expect: bowtie: k=6 vertices read=4 (labels>=5) | longest arc of one N=60.0000 largest total of one N=60.0000 | pairs of N-directions 60 apart (one label)=0, with both ring points in the object=0 | own-label: arcs=0 single directions=0 | the object has the forced label at 236 of 236 samples beside the arcs | fl=400 mismatches=0
+    flower: k=6 vertices read=1 (labels>=6) | longest arc of one N=0.0000 largest total of one N=0.0000 | pairs of N-directions 60 apart (one label)=0, with both ring points in the object=0 | own-label: arcs=0 single directions=6 | the object has the forced label at 0 of 0 samples beside the arcs | fl=472 mismatches=0
+    r7: k=7 vertices read=1 (labels>=6) | longest arc of one N=0.0000 largest total of one N=0.0000 | pairs of N-directions 60 apart (one label)=0, with both ring points in the object=0 | own-label: arcs=0 single directions=0 | the object has the forced label at 0 of 0 samples beside the arcs | fl=544 mismatches=0
+    strip: k=6 vertices read=10 (labels>=4) | longest arc of one N=0.0000 largest total of one N=0.0000 | pairs of N-directions 60 apart (one label)=0, with both ring points in the object=0 | own-label: arcs=0 single directions=0 | the object has the forced label at 0 of 0 samples beside the arcs | fl=864 mismatches=0
+    disk: k=6 vertices read=5 (labels>=4) | longest arc of one N=0.0000 largest total of one N=0.0000 | pairs of N-directions 60 apart (one label)=0, with both ring points in the object=0 | own-label: arcs=0 single directions=0 | the object has the forced label at 0 of 0 samples beside the arcs | fl=1184 mismatches=0
+  fault: python3 ../data/fs137/e1/budget.py forced --fault=bar
+
+### Argument — two forced sides 60° apart
+
+1. *A unit pair between any two one-sided neighbourhoods.* Let `w₁ = x + e(θ)`, `w₂ = x + e(θ + 60°)`, `ε₁, ε₂ ∈ {−1, 1}`
+   and `η > 0`. Put `z₁ = x + (1 + ε₁s)·e(θ)`, `z₂ = x + (1 + ε₂s)·e(θ + 60° + δ)`. Then `f(s, δ) = |z₁ − z₂|² = r₁² + r₂² −
+   2r₁r₂·cos(60° + δ)` with `r_i = 1 + ε_i s`, `f(0, 0) = 1` and `∂f/∂δ(0, 0) = 2 sin 60° ≠ 0`; so there is `δ(s) → 0`
+   with `f(s, δ(s)) = 1`, and for small `s > 0` the points `z_i` lie within `η` of `w_i`, inside `S(x)` if `ε_i = −1` and
+   outside if `ε_i = 1`.
+2. *A forced side.* Let `θ₁` be in `N_in` and `w₁ = x + e(θ₁)` in `U`. C136-FORCED at `w₁`, with the one member `x`, the
+   parts of the corners of `F` that `c` has as its family, and the corner at `w₁` inside `S(x)`: its hypothesis is the
+   definition of `N_in`. So there is `η₁ > 0` such that `D₁`, the part of `B(w₁, η₁)` inside `S(x)`, is an open subset
+   of `U` almost every point of which has the label `ℓ`. For `N_out`, the part outside.
+3. *The collision.* Let `θ` and `θ + 60°` lie in `N_in ∪ N_out` and both points lie in `U`; let `D₁`, `D₂` be as in step
+   2, each on its side. By step 1 there are `z₁` in `D₁` and `z₂` in `D₂` with `|z₁ − z₂| = 1`. By C124-SHADOW-OPEN with
+   `W = D₂`, the set of points of `U` at distance exactly 1 from a point of `D₂` is open and almost every point of it has
+   a label other than `ℓ`; it contains `z₁`, so it meets `D₁` in a non-empty open set, almost every point of which has
+   the label `ℓ`. A contradiction: `U` does not contain both points.
+4. *The lengths, when `U ⊃ S(x)`.* An arc in `N_in` longer than 60° holds some `θ` and `θ + 60°`. For the total: off the
+   finitely many directions at which a tangent direction is the direction of an edge of a corner of `F`, a corner is
+   inner at `θ` when it is outer at `θ + 180°` (C137-BUDGET's argument, steps 1 and 3, for one corner), so `N_out` is
+   `N_in + 180°` up to finitely many directions. If `θ` and `θ − 120°` are both in `N_in`, then `θ + 60°` is in `N_out`
+   (off a finite set), and step 3 excludes it; so `N_in` meets `N_in + 120°`, and likewise `N_in + 240°`, in a finite
+   set. `N_in` is a finite union of arcs and points, so three rotated copies with finite overlaps fit in the circle:
+   its length is at most 120°.
+5. *Adjacent corners.* Let `F` fill a neighbourhood with labels all but `ℓ`, and let two adjacent corners have cones
+   `[d₀, d₁]`, `[d₁, d₂]` with `σ = d₂ − d₀ > 180°`. For `θ` in the open arc `(d₀ + 90°, d₂ − 90°)`, of length `σ − 180°`,
+   the closed half-turn `[θ − 90°, θ + 90°]` lies in `(d₀, d₂)`; it contains neither of the two cones (each has an end
+   outside it) and meets no other. A corner inner at `θ` has its cone in that closed half-turn (C137-BUDGET's argument,
+   step 1), so no corner of `F` is inner at `θ`, and every label other than `ℓ` is the label of one: `θ` is in `N_in`.
+   So `σ − 180° ≤ 60°`. ∎
+
+**Theorems this stage proved**: C137-SIXTY — derived from C136-FORCED and C124-SHADOW-OPEN (inherited, one mind each),
+one mind; kernel pending.
+
+## Stage 5 — SAVED
