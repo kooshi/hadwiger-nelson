@@ -7878,3 +7878,48 @@ reason by the close.*
      `ValidMap/BendGap` is a question for the milestone's tidy. Alternative: have them added to the landed module
      now. Why not: a landed module is not edited on a wave's branch (two lines never change one file), and the
      twins read only landed lemmas. Confidence: high. No reply sent: it proceeds unless told, in its own words.
+
+604. **FS131-K7c, by message mid-job (its Stages 11–13 saved at `02a11514`): wave 7's two stated modules are ready for implementers — four of the five (Q)-arc leaves proved on valid maps alone, one skeleton statement found false in a degenerate case and corrected, the bowtie's stop split into eight children with its "simple" hypothesis narrowed to two points, and the fragment's plan rewritten for the rebuild** (source: K7c's message to "main", 2026-10-07 about 01:10 UTC; record `fs131-w7`'s `plans/FS131-w7-kernel-plan.md` Stages 11–13).
+     **Its account.** (i) Every binder of every leaf's file signature is a binder of the kernel's statement; the two
+     modules have no hypothesis-carrying section variable, so the defect of items 556 and 564 cannot occur there.
+     (ii) **FS114-N7-QOPP's first three clauses hold in every valid map, Siamese pairs allowed** — wave 8's reading
+     (item 571) confirmed and proved: `qArc_inner_cone`, `qArc_outer`, `qArc_ne`, `qArc_cone_disjoint` lose
+     `NonSiamese` and the membership hypotheses their proofs do not read; the arc clause of the old `qArc_inner` is
+     not stated here (it is wave 8's `qcol_inner_tile`, cited once `main` is merged); `qArc_others_absent` reads
+     every hypothesis and is unchanged. (iii) **A statement defect of the second pass's skeleton**:
+     `IsTacticAt.lens_cone` with `ψ ≤ ψ'` is false at `ψ = ψ'` (taking the second tactic edge to be the first, it
+     concludes a half-plane cone where a Reuleaux triangle's corner has 120°); now `ψ < ψ'`; one mind, the corrected
+     statement not proved; the filed row's `γ = 0` case is not stated and no row reads it. (iv) **`rstopAll`'s
+     `SimpleOn` hypothesis narrows from the closed disc of radius `√3` to the two corners `{q₁, q₂}`** — "simple" is
+     read once in the whole argument (FS114-YB3's W step 2) — and the leaf is split into eight `sorry` children
+     and a composition, with no second-order estimate needed (a half-open cone window in place of YB2-RPREC's
+     tangent case). `Bowtie`: 14 open leaves, about 2,550 lines, two jobs, the second after the first; `Local`:
+     9 open leaves, about 1,050 lines, one job. (v) Its § 7.5 is revised for the rebuild (Stage 13): the object by
+     tool lines, seven base tiles and twenty under `D₂`, 46 same-colour pairs (32 tight), 22 rim segments; what the
+     fragment's first job checks at its readback; which statements each of the four jobs' examples serve; job (C)'s
+     `SimpleOn` is now two finite sets. (vi) **The pinwheel does not fit this pass**: its unread arguments are about
+     3,700 lines, and it will not state the foundation from entries alone; it will list the wave's assumptions,
+     merge `main` if my hash arrives in time, and hand back with a fourth pass's reading list. **My receipt**: tip
+     `02a11514` equals `origin/fs131-w7`; `sorry` by the handoff's grep: `Local` 9, `Bowtie` 14, `Rainbow` 1,
+     `Basic`, `Count`, `Grid12` 0; **by my script over the theorem heads of `Local` and `Bowtie` against
+     `195c7855`: exactly the seven changes it lists and no other** — `qArc_inner` gone with `qArc_inner_cone`,
+     `qArc_region_cone_disjoint`, `disjoint_angleIcc_windows` added; `qArc_outer`, `qArc_ne`, `qArc_cone_disjoint`
+     each minus the binders it names; `lens_cone`'s `≤` to `<`; `rstopAll` and `not_covers_sqrt_three` with the
+     two-corner set; eight new heads in `Bowtie`. Not checked by me: its build log; the proofs; its kernel-signature
+     tool; the hand re-derivations. **Credit**: a planner that proved what it was asked to re-read; a false
+     statement caught by reading binders before an implementer spent a job on it; a 1,400-line leaf turned into
+     eight with a weaker hypothesis; and "I will not state them from entries alone", said before its line.
+     **Rulings.** (a) **The seven statement changes are ratified** — they were the planner's to make (its brief),
+     each has its reason in its Stage 11 or 12, and my script finds no other. (b) **`lens_cone`'s defect is a
+     skeleton's, not a filed row's**: logged; told to Kooshi as a finding, not as a defect of a filed result.
+     (c) **Wave 7's implementers, by file**: FS131-I7L (`Local`'s nine leaves, with `anchor` first — rulings 564
+     (a)–(b)); FS131-I7B1 (`Bowtie`'s first eight: `own`, the side germs, the two absent-colour leaves, `lune`,
+     the three cap leaves) and FS131-I7B2 (the five of FS114-Y4-DIAG and the composition, after I7B1); the
+     fragment's four jobs, FS131-I7F-A first. **I7L's first act merges `origin/main`** if the wave's line does not
+     hold it by then (two of its leaves cite wave 8's lemmas); I7B1 and the fragment's first job need nothing from
+     `main` and may be cut from the wave's tip as it stands. Alternative: hold all three for the merge. Why not:
+     two of the three do not read it. Confidence: high. (d) **A fourth planning pass for the pinwheel, FS131-K7d**,
+     from K7c's reading list at its hand-back. Brief not written. (e) **D1** — whether FS114-N3-HALF's last clause
+     is false without its exception needs a constructed map — joins the deriver's questions for the wave's stub
+     lines (with item 580 (c)); nothing waits on it. (f) **Launch order from here** (mine; the nearest landings
+     first): FS131-I9B, FS131-I10G, then wave 7's three (I7L when `main` holds wave 8), FS131-E9, FS131-I6Z2.
