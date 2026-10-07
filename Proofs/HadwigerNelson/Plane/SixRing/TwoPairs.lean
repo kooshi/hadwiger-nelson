@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.SixRing.Excl
+import Proofs.HadwigerNelson.Outside.OAI158States
 
 /-!
 # The ring is not two disjoint pairs alternating (FS-132, C132-DIAG-WIDE) — the release's theorem, read at six

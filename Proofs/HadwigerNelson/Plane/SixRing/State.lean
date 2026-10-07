@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.SixRing.ChartMeasure
 import Proofs.HadwigerNelson.Plane.SixRing.StepLemma
+import Proofs.HadwigerNelson.Outside.OAI158PaletteTransport
 
 /-!
 # The state of an orbit and what it forces near a hub (FS-132, C132-M-ORBIT steps M1, M2, M3) — SKELETON
@@ -12,7 +13,8 @@ and the colour at a chart point avoids the labels its two ring points name (M2, 
 hub has a tip other than `X`, `Y` (M3), and where the other labels do not tip, the colouring is as `HubColours`
 says.
 
-Stands on the release's `palette_sixty_disjoint` and `palette_transfer_pair` (placeholders until the port's join).
+Stands on the release's `palette_sixty_disjoint` (in its real-line form `palette_sixty_real`) and
+`palette_transfer_pair`, ported in `Outside/OAI158PaletteTransport` and `Outside/OAI158PaletteDensity` (FS132-I2).
 `plans/FS132-kernel-plan.md` stage 5 has the plan per leaf.
 -/
 

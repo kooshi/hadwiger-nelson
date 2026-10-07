@@ -1,4 +1,4 @@
-import Proofs.HadwigerNelson.Plane.SixRing.Placeholders
+import Proofs.HadwigerNelson.Outside.OAI158PaletteTransport
 
 /-!
 # A ring filled by two labels changes somewhere (FS-132, C132-M-EXCL's reduction) — SKELETON

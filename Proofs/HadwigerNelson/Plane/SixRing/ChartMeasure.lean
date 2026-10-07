@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Plane.SixRing.Chart
 import Proofs.HadwigerNelson.Plane.SixRing.Shift
-import Proofs.HadwigerNelson.Plane.SixRing.Placeholders
+import Proofs.HadwigerNelson.Outside.OAI158PaletteDensity
+import Proofs.HadwigerNelson.Outside.OAI158AngularBoundary
 
 /-!
 # Null sets through the chart (FS-132, C132-M-ORBIT steps M2, M5, M7, M8) — SKELETON

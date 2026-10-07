@@ -1,0 +1,62 @@
+palette_transfer_pair: Expr.equal=true beq=true  => IDENTICAL
+palette_sixty_disjoint: Expr.equal=true beq=true  => IDENTICAL
+two_state_impossible: Expr.equal=true beq=true  => IDENTICAL
+mem_spatialSupport_ae: Expr.equal=true beq=true  => IDENTICAL
+CONTROL-1 (two different statements; must be DIFFERENT): Expr.equal=false beq=false  => DIFFERENT
+CONTROL-2 (one binder annotation flipped; must be DIFFERENT): Expr.equal=false beq=true  => DIFFERENT
+@HadwigerNelson.SixRing.palette_transfer_pair : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (x : ℂ),
+      ∀ᵐ (p :
+        HadwigerNelson.Outside.OAI158.Angles ×
+          HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure.prod
+          HadwigerNelson.Outside.OAI158.angularMeasure,
+        c (HadwigerNelson.Outside.OAI158.angularSum x 1 p) ∉
+          HadwigerNelson.Outside.OAI158.palette c hc x p.1 ∪ HadwigerNelson.Outside.OAI158.palette c hc x p.2
+@HadwigerNelson.Outside.OAI158.palette_transfer_pair : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (x : ℂ),
+      ∀ᵐ (p :
+        HadwigerNelson.Outside.OAI158.Angles ×
+          HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure.prod
+          HadwigerNelson.Outside.OAI158.angularMeasure,
+        c (HadwigerNelson.Outside.OAI158.angularSum x 1 p) ∉
+          HadwigerNelson.Outside.OAI158.palette c hc x p.1 ∪ HadwigerNelson.Outside.OAI158.palette c hc x p.2
+@HadwigerNelson.SixRing.palette_sixty_disjoint : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (x : ℂ),
+      ∀ᵐ (f : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+        Disjoint (HadwigerNelson.Outside.OAI158.palette c hc x f)
+          (HadwigerNelson.Outside.OAI158.palette c hc x (f + ↑HadwigerNelson.Outside.OAI158.sixty))
+@HadwigerNelson.Outside.OAI158.palette_sixty_disjoint : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (x : ℂ),
+      ∀ᵐ (f : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+        Disjoint (HadwigerNelson.Outside.OAI158.palette c hc x f)
+          (HadwigerNelson.Outside.OAI158.palette c hc x (f + ↑HadwigerNelson.Outside.OAI158.sixty))
+@HadwigerNelson.SixRing.two_state_impossible : ∀ {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (x : ℂ) (J K : Finset (Fin k)),
+      (Finset.univ \ (J ∪ K)).card ≤ 2 →
+        ∀ (s : HadwigerNelson.Outside.OAI158.Angles → Bool),
+          Measurable s →
+            HadwigerNelson.Outside.OAI158.RealState hc x {t | s ↑t = Bool.false} J →
+              HadwigerNelson.Outside.OAI158.RealState hc x {t | s ↑t = Bool.true} K →
+                (∀ᵐ (t : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+                    s (t + ↑(Real.pi / 3)) = !s t) →
+                  False
+@HadwigerNelson.Outside.OAI158.two_state_impossible : ∀ {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c),
+  HadwigerNelson.Outside.OAI158.WeakColoring k c →
+    ∀ (x : ℂ) (J K : Finset (Fin k)),
+      (Finset.univ \ (J ∪ K)).card ≤ 2 →
+        ∀ (s : HadwigerNelson.Outside.OAI158.Angles → Bool),
+          Measurable s →
+            HadwigerNelson.Outside.OAI158.RealState hc x {t | s ↑t = Bool.false} J →
+              HadwigerNelson.Outside.OAI158.RealState hc x {t | s ↑t = Bool.true} K →
+                (∀ᵐ (t : HadwigerNelson.Outside.OAI158.Angles) ∂HadwigerNelson.Outside.OAI158.angularMeasure,
+                    s (t + ↑(Real.pi / 3)) = !s t) →
+                  False
+@HadwigerNelson.SixRing.mem_spatialSupport_ae : ∀ {k : ℕ} (c : ℂ → Fin k),
+  Measurable c → ∀ (i : Fin k), ∀ᵐ (z : ℂ), c z = i → z ∈ HadwigerNelson.Outside.OAI158.spatialSupport c i
+@HadwigerNelson.Outside.OAI158.mem_spatialSupport_ae : ∀ {k : ℕ} (c : ℂ → Fin k),
+  Measurable c → ∀ (i : Fin k), ∀ᵐ (z : ℂ), c z = i → z ∈ HadwigerNelson.Outside.OAI158.spatialSupport c i
