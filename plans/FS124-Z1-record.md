@@ -213,3 +213,68 @@ lines added, none removed; no question section and no banner touched.*
 | a second mind on C124-LONE's Step II | the second kernel planner, blind first | the coordinator, inventory item 21 (b) |
 
 **Stage 4 — SAVED** (2026-10-07).
+
+## Stage 5 — SAVED: every registered prediction, scored
+
+*Reconciled, not redone: each outcome is the one its scorer wrote — the first deriver (E1 = `plans/FS124-E1-derivation.md`,
+"Predictions scored" of Stages 3–5), the second (E2 = `plans/FS124-E2-derivation.md`, Stages 3–6), the asking lane (its ledger,
+`plans/POROS-2026-10-07-fs124-round2.md`). Where nobody had scored a line, the score is mine and marked †. Brier: for a yes/no
+line `(p − outcome)²`; for a card's branches the sum over the branches. Arithmetic: `data/fs124/z1/brier.py` (with its fault —
+every outcome flipped — the mean over the 44 yes/no lines moves from 0.083 to 0.678).*
+
+| who registered | the prediction | p | outcome | scored by | Brier |
+|---|---|---|---|---|---|
+| asking lane, first card (`plans/STUB-q-ring.md` l. 264) | C124-RADIUS (up) derived as posed | 0.90 | yes | E1, P1 | 0.0100 |
+| | (down) | 0.92 | yes | E1, P1 | 0.0064 |
+| | C124-CENTRE derived as posed | 0.92 | yes | E1, P2 | 0.0064 |
+| | C124-COMPLETION derived as posed | 0.85 | yes | E1, P2 | 0.0225 |
+| | C124-KIND true by formula | 0.80 | yes | E1, P4 | 0.0400 |
+| | C124-SIX: derived as posed / restated at its wording / refuted by an object | 0.70 / 0.25 / 0.05 | the first — "derived as posed, and it says less than its wording in one respect" (E1, Stage 5) | E1 | 0.1550 |
+| | C124-HALF derived as posed | 0.65 | yes | E1, P6 | 0.1225 |
+| | **the card**: recurs / runs out / nothing forced beyond the first step | 0.50 / 0.12 / 0.38 | **the third** (E1 Stage 4: "it is the third"; the asking lane: "one card, answered on its third branch") | E1; the asking lane | 0.6488 |
+| | an exclusion at an explicit radius, in measure, for every weak six-colouring with a tight pair of a named kind, within this milestone | 0.10 | no † | this job | 0.0100 |
+| | a six-coloured object past `φ²/√2` about a tight pair's centre, within this milestone | 0.12 | no † | this job | 0.0144 |
+| | six against seven decided by this milestone | 0.03 | no † | this job | 0.0009 |
+| asking lane, second card (the stub, l. 424) | the reading's statement holds on the strip and the disk read whole | 0.9 | yes | E2, Stage 3 | 0.0100 |
+| | some unread object shows a pattern other than (1, 1) | 0.5 | yes | E2, Stage 3 | 0.2500 |
+| | a save by one member on a held object | 0.1 | **yes** (fragment S1) | E2, Stage 3: "met, against its 0.1" | 0.8100 |
+| | every tight arc of kind both on the five unread objects is an edge of a save | 0.6 | **no** (FS116-Y2-SIXFRAG, S1) | E2, Stage 3 | 0.3600 |
+| | C124-FORCED: derived as posed / restated at its wording | 0.8 / 0.15 (0.05 unassigned) | **the second** (E2, Stage 4) | E2 | 1.3650 |
+| | C124-ONE-MEMBER: an object by formula / excluded / a gap at a named step | 0.45 / 0.2 / 0.35 | **excluded** for full members and sector points; an object exists only at a bowtie joined by the letter (E2, Stage 6) — not cleanly one branch | E2 | 0.9650 (scored as "excluded") |
+| | C124-EDGE holds as read | 0.7 | yes | E2, Stage 6 | 0.0900 |
+| | C124-SECOND derived as posed | 0.9 | yes, for sector points | E2, Stage 6 | 0.0100 |
+| | **the card**: one edge of each member forced / a save by one member exists / neither decided | 0.2 / 0.45 / 0.35 | **the first**, for sector points ("the 0.2 occurred: the mass was on the branch a held map theorem had closed" — the asking lane) | E2; the asking lane | 0.9650 |
+| | an exclusion at an explicit radius, in measure, for every weak six-colouring with a close complementary pair, within this milestone | 0.07 | no † | this job | 0.0049 |
+| | a six-coloured object above the strip's top edge or outside the disk, within this milestone | 0.12 | no † | this job | 0.0144 |
+| | six against seven decided by this milestone | 0.03 | no † | this job | 0.0009 |
+| first deriver (`plans/FS124-tight-pairs.md` ll. 243–258) | P1: (up) as posed and in the wider form; (down) at every `k` | 0.95; 0.95 | yes; yes | E1, Stage 3 | 0.0025; 0.0025 |
+| | P2: C124-CENTRE; C124-COMPLETION; C124-STRADDLE; C124-ANTIPODE | 0.97; 0.95; 0.90; 0.85 | yes ×4 | E1, Stage 4 | 0.0009; 0.0025; 0.0100; 0.0225 |
+| | P3: nothing forced beyond the first step, exhibited at seven; on R7 every end a centre and no completion an end | 0.85; 0.90 | yes; yes ("as registered") | E1, Stage 4 | 0.0225; 0.0100 |
+| | P4: C124-KIND true by formula | 0.93 | yes | E1, Stage 5 | 0.0049 |
+| | P5: C124-SIX derived as posed; found to say less than its wording | 0.85; 0.40 | yes; yes | E1, Stage 5 | 0.0225; 0.3600 |
+| | P6: C124-HALF derived as posed | 0.75 | yes | E1, Stage 5 | 0.0625 |
+| | P7: G97's killing test fires in its second clause | 0.80 | yes "as registered", with its caution — "it bounds a configuration nobody has exhibited" | E1, Stage 5 | 0.0400 |
+| second deriver (the plan, ll. 381–393) | Q1: the maps' statement; another pattern; every three-sector member separates at every common unit point; a save by a bowtie alone | 0.85; 0.8; 0.9; 0.6 | yes; yes; **no, as worded** (S1's sector member); yes | E2, Stage 3 | 0.0225; 0.0400; 0.8100; 0.1600 |
+| | Q2: the piece form; as posed for sector points; fails by the letter | 0.9; 0.9; 0.7 | yes ×3 | E2, Stage 4 | 0.0100; 0.0100; 0.0900 |
+| | Q3: excluded for members whose pieces pairwise share boundary; an object at a member of that kind | 0.85; 0.03 | yes; no | E2, Stage 5 | 0.0225; 0.0009 |
+| | Q4: the top-edge computation; C124-SECOND for sector points; exactly four labels | 0.8; 0.9; 0.8 | yes ×3 | E2, Stage 6 | 0.0400; 0.0100; 0.0400 |
+| | Q5: G97's killing test fires in the second clause | 0.8 | yes | E2, Stage 6 | 0.0400 |
+| asking lane, third card (`plans/STUB-covering-pairs.md` § Registered expectations) | always empty 0.08; a ring by formula past print 0.12; turns on the ring's type 0.8; decides six against seven 0.03 | — | **open** — they are FS-136's | — | — |
+| kernel lane, first planner | no probability registered; a price — the module "about 270 lines of proof", from its eight hardest leaves | — | "about half an hour, 204 lines, one retry on one leaf — the planner's estimate held" (inventory item 24) | the implementer; the coordinator | — |
+| kernel lane, second planner | its record is on an unfinished branch; not read | — | — | — | — |
+
+**Means over the yes/no lines** (the branch lines apart): the first card 0.026 (n = 9), the second card 0.172 (n = 9), the first
+deriver 0.043 (n = 13), the second deriver 0.100 (n = 13); all 44: 0.083. **The five branch lines**: 0.155, 0.649, 1.365, 0.965,
+0.965 — on four of the five the largest mass was on a branch that did not occur.
+
+**What the scores say, in two lines.** The derivers' lines about whether a statement would be derived were nearly all met at
+high probabilities — they measure little: each was registered after its recognition. The lines that moved a decision and lost
+were the two cards' branch lines, and by the asking lane's own account for one mechanism: the second card put 0.45 on a save by
+one member "on a branch already closed for maps" (FS112-N3-COR3, row 135), which the card had not read.
+
+**The † lines, so that they can be overruled.** No entry excludes every weak six-colouring with a tight pair, or with a close
+complementary pair, at an explicit radius: the nearest is C124-EDGE-CLOSED, which is for the colourings that keep six named
+pieces of one held object at their labels. No six-coloured object was built past the strip's edge or the disk: C124-LONE-EXISTS
+lives "on four flowers of radius at most about 1/4 and one band". Nothing here moves a value.
+
+**Stage 5 — SAVED** (2026-10-07).
