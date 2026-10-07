@@ -1333,3 +1333,13 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     statement Kooshi put first; confidence high. **FS132-L2, the landing, is briefed and takes its slot** (worktree and
     branch `fs132-wl2`, cut by me from that tip, build copied).
 
+48. **FS132-L2, the landing, is launched — a landing is in flight from 14:28 UTC** (`debruijn-implementer`, Opus; brief
+    `data/fs132/briefs/FS132-L2-landing.md`, gate exit 0; worktree and branch `fs132-wl2`, cut from `fs132-wi4` at
+    `7e4e5d2a`; record `plans/FS132-L2-landing.md` there): the two skeleton modules cut, `main` merged, the port's loose
+    ends (the licence text, three instances, both stored-term comparisons re-run), the registrations, the assumptions and
+    vacuity steps, the four theorems read aloud against row 155, the full gate on one commit, the fast-forward of `main`,
+    and the drafts for the filing. It messages one line when the gate is green, before it pushes. **While it is in
+    flight**: nothing is committed to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`,
+    `LEAN.md`, `RUNNING.md`, and **no `CLAUDE.md` filing is made until it is back**. Its stopping rule is in counts it can
+    read (a stage per item; three full gate runs without a green one), after item 47's slip.
+

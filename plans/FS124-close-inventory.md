@@ -350,4 +350,32 @@ between two colours that is an arc of the unit circle about a point one unit awa
     (c) What a derivation of C124-BOTH would be is said before it exists: the map class's two-minds result carried to
     every measurable colouring with three-piece points of the sector kind — one mind, by hand, and not a statement that
     such points exist in every colouring.
+16. **FS124-E2, second message (14:29 UTC logged): the reading is done on all seven held objects — the card's statement
+    holds on the three maps read whole, and three held objects break the card's frame** (reader
+    `data/fs124/e2/saves_read.py`, [tools], one mind, with a planted fault that fires; its Stage 3 was being saved at its
+    message and is not yet on `main` — **my receipt is of the message only**). **What holds**: the strip — 40 three-tile
+    vertices, 54 close complementary pairs, 71 common unit points inside; the disk — 20; the capped strip — as the strip;
+    at every one: one edge of each member on the point's unit circle, the rhombus's two-set hypothesis, exactly the four
+    labels. "The asking lane's sample counts are reproduced, none corrected." **What does not**: fragment T2, the search's
+    kept model and a third fragment show saves with two edges of one member; **the bowtie fragment is saved with no edge
+    of either member on the circle** — each member a bowtie whose two single-sector pieces lie one inside and one outside
+    the unit circle and meet at the member only; and **on one held fragment a common unit point is saved by one member
+    alone — the bowtie**: "so a save by one member exists on a held object — at a bowtie, as FS107-W-TAN's exception says
+    for maps — and none is seen at a member with three sectors". **Where the frame breaks**: "every tight arc of kind
+    both is an edge of a save" is false of the six-colour fragment — **18 unit arcs of kind both and no close
+    complementary pair anywhere in it** — of the lone save (its arcs are centred at the saving member) and of five of the
+    disk's twenty (the sides of its central pentagon): "a save is one cause of a tight arc of kind both, not the only
+    one: a six-label vertex makes them with no pair". **What the reading says of its own route** (pieces by side): at all
+    176 common unit points read, at least one member has a piece inside and a piece outside the point's unit circle; both
+    do whenever both members are three-sector vertices (170 of 170); where each member has one inside, one outside and one
+    crossing piece the labels at the point are exactly those four (168 of 168). **Controls**: the tight seven-colouring
+    returns no member; the honeycomb at circumradius 2/5 returns 66 pairs, 132 points, nobody separating — the failure at
+    seven. One of its registered predictions is missed as worded, and said. **Rulings.** (a) **The card's frame is
+    corrected, as its own table said it would be**: a rescue of a close pair is one cause of these boundaries; a point
+    where all six colours meet is another, with no pair near it. The re-posing is the asking lane's, at this deriver's
+    hand-back. (b) It goes on, as it proposes: the forcing claim in its piece form, then the save by one member — which it
+    now expects to close as "excluded for two full members, and existing at a bowtie". (c) Line 14 of the search queue
+    (a save by one member in the wedge family) is answered in part by a held object and is re-read when the claim has its
+    verdict. (d) Kooshi is told now: the count I gave him as "94 of 94" stands for the two maps it came from, and is not
+    the rule for every six-coloured object held.
 
