@@ -66,3 +66,21 @@ they write; so this build is of the cut **and** of the regenerated outside modul
 palette module, the eight ported modules, the thirteen of `Plane/SixRing` and the root. Green, so both hold; a red
 build would have had to be separated. The rule it breaks is my own gait's: no source file is written while a build
 of the tree is in flight.
+
+## Stage 3 — SAVED (FS132-L2): `main` merged in
+
+**Tried before it was made** (`data/fs132/l2/merge-trial.out`, on the tip before the cut against `5c6c52e8`;
+`merge-trial-2.out`, on the committed tree against `357e42de`): `git merge-tree --write-tree --name-only` exits 0 and
+names no conflict. `main` had moved three times since the brief was written (`045d3d71` → `53ce5626` → `5c6c52e8` →
+`357e42de`); since the merge base `808ef9bf` it changes 211 paths — `data/` 161, `plans/` 37, `tools/` 6
+(`claude_md_fact_audit.py`, `fs124_p1_cones.py`, `fs132_z2_append.py`, `fs132_z2_brier.py`, `fs132_z2_frontpage.py`,
+`viz_proof_atlas_facts.py`), and one each of `BIBLIOGRAPHY.md`, `CLAUDE.md`, `LEAN.md`, `LEDGER.md`, `RUNNING.md`,
+`.claude/`, `visualizations/` — and **none under `Proofs/`, `Proofs.lean`, `scripts/`, `ARCHITECTURE.md`, the lakefile,
+the toolchain file or the manifest** (counted: 0).
+
+**Made**: `git merge --no-ff 357e42de237b84656febcb262a5bfac4fc67814e` (the hash, never the ref) — **merge commit
+`26e0cb326`, automatic, no conflict.**
+
+**Built** (`data/fs132/l2/build-2-merged.log`): **exit 0** — "build: OK — all 1866 modules already up to date, nothing
+built, 0 module(s) with warnings, 2s" (1868 − the two skeleton modules; the merge brought no Lean source, so the
+compiled modules are those of stage 2's build).
