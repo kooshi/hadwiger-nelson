@@ -2,8 +2,8 @@
  "meta": {
   "title": "Proof Atlas",
   "built": "2026-10-07",
-  "job": "FS124-Z1",
-  "as_of": "FS-124, the unit arc, Derived (rows 161–164); FS-132's first theorem held (row 155)",
+  "job": "FS124-L1",
+  "as_of": "FS-124's disc criterion through the gate (row 161); FS-124, the unit arc, Derived (rows 161–164)",
   "statuses": {
    "kernel": "kernel — checked by Lean's kernel",
    "cert": "certificate — an exact object accepted by exact checkers",
@@ -1712,7 +1712,7 @@
     "file": "LEDGER.md",
     "row": "161"
    },
-   "grade": "[hand] or derived from [hand] entries, one mind each, kernel pending",
+   "grade": "[kernel], through the gate",
    "theta": 109,
    "r": 530,
    "sector": "six-up",

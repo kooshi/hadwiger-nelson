@@ -1412,4 +1412,5 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     list already fixed for this milestone's next planner (`data/fs132/claims-K1.md`, the margin statement); a kernel
     model of the ring hypothesis is added to that planner's brief as a request. **The milestone stays Derived**: Closed
     waits on the index lemmas, the centres and the seven statements of that list.
+52. **Item 51 (a) is done** (17:48 UTC logged): the import module's docstring names the release's licence and the copy beside it, added by the next landing (FS124-L1, its record's stage 4; the eight stored terms untouched, its print identical) and on `main` since `022f4c59`.
 

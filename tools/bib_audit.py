@@ -28,7 +28,8 @@ KEY = re.compile(r"\[([A-Z][A-Za-z]+\d{4}[a-z]?)\]")
 YEARLESS = re.compile(r"\[([A-Z][a-z]+(?:[A-Z][a-z]+)+)\]")
 # CamelCase words in brackets that are code identifiers, not citations (reviewed; extend with a reason).
 NOT_KEYS = {"NoZeroDivisors": "a Mathlib class named in HANDOFF-p6", "OrbitRow": "a record type in M63 phase C",
-             "Author2024": "a placeholder word in an inventory line and in FS132-F1's brief, not a citation"}
+             "Author2024": "a placeholder word in an inventory line and in FS132-F1's brief, not a citation",
+             "AeProperOn": "a Lean definition named inside a rewrite (`rw [AeProperOn]`) in FS124-I1's record, not a citation"}
 DEFN = re.compile(r"\*\*\[([A-Za-z0-9]+)\]\*\*")
 
 

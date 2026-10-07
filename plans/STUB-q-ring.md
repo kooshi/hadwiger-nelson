@@ -1,6 +1,6 @@
 # FS-124 — the (Q) ring: does every vertex of at least four colours whose ring carries (Q) arcs, and every vertex of five or six colours, die within an explicit radius? (stub)
 
-> **Derived 2026-10-07 (FS124-Z1; `plans/FS124-derivation.md`, 30 entries; ledger rows 161–164).** Its eight cases pass to its successor, FS-136, the point across (`plans/STUB-covering-pairs.md`). Closed when its Lean modules pass the gate: the first is complete on a branch, the second is being planned.
+> **Derived 2026-10-07 (FS124-Z1; `plans/FS124-derivation.md`, 30 entries; ledger rows 161–164).** Its eight cases pass to its successor, FS-136, the point across (`plans/STUB-covering-pairs.md`). Closed when its Lean modules pass the gate: the first is through the gate (FS124-L1), the second is being planned.
 
 > **Opened 2026-10-07 (Kooshi's choice).** In the ranking this stub is *the unit arc: what a tight unit pair passes on*; its question for every measurable colouring is the section dated 2026-10-07 below (FS124-P1), its claim list `data/fs124/claims.md`, its inventory `plans/FS124-close-inventory.md`. The card of 2026-10-03 and the eight cases stand for maps.
 
@@ -610,8 +610,7 @@ fired at C124-BOTH and C124-EDGE-CLOSED). Entries: FS112-C-PARTNERS, FS112-STOP,
 six tiles C124-EDGE-CLOSED keeps), FS114-Y-PAIRSHARE, FS116-Y2-SIXOFF.
 
 *At the record job (FS124-Z1, the record job, 2026-10-07; every entry named is in `plans/FS124-derivation.md`, [hand] or derived from [hand] entries, **one mind, kernel pending**):* **what this milestone delivered is
-`plans/FS124-derivation.md`** — thirty entries from two rounds, twenty-nine derived and one refuted: the radius clause (§ 1; its
-module complete on branch `fs124-wk1`, kernel-checked on a branch, not through the gate, not held); the one lemma and what one
+`plans/FS124-derivation.md`** — thirty entries from two rounds, twenty-nine derived and one refuted: the radius clause (§ 1; its module through the gate, FS124-L1 — [kernel], the half toward seven on one declared outside theorem); the one lemma and what one
 piece forces (§ 2); what a close complementary pair forces at a common unit point — for three-piece points, full members and
 sector points, the posed wording refuted at a bowtie joined by a band (§ 3); FS-112's strip closed at one named point of its top
 edge against every weak six-colouring that keeps six named pieces (§ 4); a count at a centre whose class has no held member, and

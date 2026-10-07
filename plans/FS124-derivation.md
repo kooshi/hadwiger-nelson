@@ -11,8 +11,7 @@ the record job's and proves nothing. Gate: `python3 ../.claude/skills/ephodos/sc
 **The grade of everything here.** Thirty entries: twenty-nine derived, one refuted. Each is [hand] or derived from [hand] entries,
 **one mind, kernel pending**; four rest on a declared outside theorem or on an inherited entry of FS-132, named in their lines.
 **No entry says that a weak six-colouring has a piece, a three-piece point or a close complementary pair, and none moves a value
-of χ(ℝ²).** The kernel lane's state on 2026-10-07: the five entries of § 1's radius clause are a module complete on branch
-`fs124-wk1` (57 theorems) — **kernel-checked on a branch, not through the gate, not held**; nine entries (marked "second module")
+of χ(ℝ²).** The kernel lane's state on 2026-10-07: the five entries of § 1's radius clause are kernel theorems through the gate (FS124-L1; 57 theorems, three modules); nine entries (marked "second module")
 are being planned blind on branch `fs124-wk2`; the rest have no kernel job. **A second mind is owed on C124-LONE's Step II**, by its
 deriver's own line, before what rests on it is built on outside this milestone (§ 3).
 
@@ -55,8 +54,7 @@ derivation: C124-RADIUS-GRAPH
   handoff: de Bruijn — the statement as written, on the local weak colouring of an open set; it is `AeColouring.exists_motion` with "every motion" replaced by "the open set of motions keeping V in U". Read the formal statement back against "almost every motion in that open set", not "some motion"
 
 **Class**: every weak `k`-colouring of an open set, every `k ≥ 1`. **Count**: every ("No count of labels", its *uses only* line).
-**What rests on it**: C124-RADIUS-COUNTABLE, C124-RADIUS-UP and, through it, C124-RADIUS-FIVE. **Kernel**: first module, complete
-on a branch, not held. **The kernel planner's generalizations, its own, recorded and not entered** (inventory item 14; the dated
+**What rests on it**: C124-RADIUS-COUNTABLE, C124-RADIUS-UP and, through it, C124-RADIUS-FIVE. **Kernel**: `radius_graph`, through the gate (FS124-L1). **The kernel planner's generalizations, its own, recorded and not entered** (inventory item 14; the dated
 line of `data/fs124/claims-K1.md`): in this entry, in C124-RADIUS-COUNTABLE and in C124-RADIUS-UP the measurability of the
 colouring is idle — what is used is that the monochromatic unit pairs inside the set are a null set, for any function; this
 entry's almost-every clause holds pair by pair for a countable set wherever it lies; "the pairs are the motions" is the whole
@@ -109,8 +107,7 @@ derivation: C124-RADIUS-DOWN
 **Count**: every. **Kernel**: first module; the planner's own: it holds for every subset of the plane (item 14 (4)). **The disc
 criterion** is this entry with C124-RADIUS-UP, said in this entry's `handoff:` line; as single statements it is the kernel
 planner's two join theorems, not entries here — `colorable_iff_forall_ball` and `seven_le_chromaticNumber_plane_iff_exists_ball`
-(`7 ≤ χ(ℝ²)` iff some open disc about the origin has no weak measurable six-colouring), each on the standard three axioms and
-that one declared outside theorem, **on a branch**. By the planner's record (§ 4.4, on its branch): "*Seven gives such a disc* …
+(`7 ≤ χ(ℝ²)` iff some open disc about the origin has no weak measurable six-colouring), each on the standard three axioms and that one declared outside theorem, **through the gate (FS124-L1)**. By the planner's record (§ 4.4): "*Seven gives such a disc* …
 rests on the standard three axioms; *such a disc gives seven* … rests on the declared outside theorem"; "an exclusion on a disc
 reaches seven only through the transfer, and weak six-colourings of every disc reach six with no import".
 
@@ -129,6 +126,8 @@ derivation: C124-RADIUS-FIVE
 *Corollary of C124-RADIUS-UP*, over the declared outside theorem `Outside.OAI158.no_proper_five_coloring`. **Class**: open discs
 of one radius. **Count**: five — C124-RADIUS-UP read at the one number where the plane's answer is known; the asking lane files it with the
 calibrations. No radius is exhibited. **Kernel**: first module.
+
+*One dated line for the five entries above (C124-RADIUS-GRAPH, -COUNTABLE, -UP, -DOWN, -FIVE), filed by the coordinator from the landing's draft 8 (`plans/FS124-L1-landing.md`):* **2026-10-07, FS124-L1 — [kernel], through the full gate at `24a42aa9`**: `HadwigerNelson.Plane.radius_graph` (C124-RADIUS-GRAPH), `radius_countable` (-COUNTABLE), `radius_up` (-UP), each on `[propext, Classical.choice, Quot.sound]`; `radius_down` (-DOWN), on those and the declared outside theorem `Outside.OAI158.proper_to_borel_weak`; `radius_five` (-FIVE), on those and `Outside.OAI158.no_proper_five_coloring` (`Proofs/HadwigerNelson/Plane/Radius.lean`, `RadiusOutside.lean`; the definition, `WeakColouringOn.lean`). Statements FS124-K1's, proofs FS124-I1's, landed by FS124-L1. Each entry's words are the theorem named; under them the module proves the wider forms (any function proper at almost every unit pair, a countable set anywhere, any centres, every subset), which are the module's and not entries. No assumption in hypothesis form. "Measurable" is Borel; motions are read in their parameters.
 
 control: radius-motions
   of: C124-RADIUS-GRAPH — the conclusion on its model: sampled rigid motions of a Moser spindle into the disc of radius 2 under the hexagonal seven-colouring at circumradius 2/5; the fault colours by hexagons of circumradius 3/5, of diameter 6/5, which is not a weak colouring
