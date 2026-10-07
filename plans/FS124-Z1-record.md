@@ -534,3 +534,105 @@ E("DISCS", "STRIPEDGE", "context", L(161), "an explicit radius at any k", label=
 beyond their titles, and the lint. The quotes are substrings of the rows as drafted above.*
 
 **Stage 6 — SAVED** (2026-10-07).
+
+## Stage 7 — SAVED: the sweeps
+
+### 7.1 §G re-read — which extractions paid, and which entry should have borne
+
+*Read for this: the lead line of each bearing in the plan's two walks (`plans/FS124-tight-pairs.md` § §G and § Second round, §G),
+not their bodies; the two "Silent" lines exist (ll. 88, 325).*
+
+**Paid** (the entry, the instruction it gave, what came of it): **G92** — "C132-SHADOW's argument has two halves": the half that
+reads no direction is C124-SHADOW-OPEN; and in the second round "C132-COMP-SHARP's argument reads of an 'edge set' only two of its
+points": the piece form (C124-TYPE, C124-FORCED-PIECES). **G95** — plant slack at seven: the two calibrations. **G21** — controls
+on a model with no margin: R7; the card's expected control found wrong; three reader defects found and repaired. **G86** (second
+round: the save's exception is a point where a label's germ is not connected) — the definitions *full* and *sector point*, and
+with them C124-FORCED-AS-POSED and C124-LONE-EXISTS. **G91** — ask whether a type is inhabited: C124-LONE-EXISTS; C124-SIX's
+class said to have no member in its own entry. **G97** — registered as falsifiable here in both rounds: fired in both (P7, Q5).
+**G79** — read what the held objects carry: the readings of both rounds, and from them the unit of each next card. **G82, G93** —
+the radius clause as the regular-objects form. **Bore and produced no entry**: G84, G85, G89 (saturation — passed to FS-125's
+stub in Stage 4), G94, G98.
+
+**Should have borne and was not used.**
+1. **G92's trigger — "a second milestone about to re-derive a near neighbour" — at the asking lane's second card.** The instance
+   is drafted (Stage 6, § G92). **The rewrite of the missed entry, in G67's form** — slot: `.claude/skills/grokkings/SKILL.md`,
+   entry G92, its *Do* sentence, replaced by (additions in bold; about +330 bytes):
+   > *Do: before applying or citing a held result, read its `uses only:` line, list the hypotheses its argument never consumes,
+   > and restate it without them before asking where else it bears; **and before posing a claim as open in another class, search
+   > the derivation files — not the ledger rows — of the milestones the stub cites for the entry the claim would restate, and
+   > name that entry in the claim;** trigger: a statement whose class names a property its proof does not use, a second
+   > milestone about to re-derive a near neighbour, **or a card written from a reading of objects**.*
+2. **G21, at the opening's own §IQ**: "If anything recurs it is at the *ends* of the maximal arcs" was assessed from R7, the one
+   inhabitant then read; on the strip no end of a unit-arc piece centres one (0 of 92). The deriver scored it itself (the plan's
+   dated line under §IQ; `plans/FS124-E1-derivation.md` Stage 4). No rewrite: G21 says it. **One line for the G21 instance drafted
+   in Stage 6**, to follow its "(iii)": "(iv) the opening's §IQ placed the recurrence 'at the ends' from R7 alone — R7's shape and
+   the disk's pentagon's (10 of 40), false of the strip (0 of 92) (`plans/FS124-tight-pairs.md` § §IQ, the dated line)."
+
+### 7.2 §IQ and G79 — only a counterexample to either rule
+
+- **§IQ's rule: one result came from somewhere other than the structural question — the radius clause.** It is the existence
+  form's own consumer statement (the plan's §IQ item 1: "By C124-RADIUS below (posed) a yes is `χ(ℝ²) = 6` and a no at one radius
+  is `χ(ℝ²) = 7`") and reads no tight pair; it is the milestone's one module in the kernel and the one row a later milestone must
+  cite for either answer. It is a counterexample of the weak kind: it moves no value, and its argument for the whole plane is
+  held prior art. Everything derived in § 3 of the derivation file reads the invariant the second round's §IQ proposed before
+  deriving — the side of each piece at each common unit point — which is the rule working.
+- **G79: none.** No result came from a counterexample invariant alone. The refuted wording fell to a held example (fragment BB,
+  banded) and the save by one member was found on a held example (fragment S1) before it was derived.
+
+### 7.3 §PA — recognitions about what the object is, and where each went
+
+| recognition | whose | where it went |
+|---|---|---|
+| the object is the unit shadow `W + S¹` of an open one-label set; "radius exactly 1" determines only the centre's and the antipode's statements and accompanies the rest | first deriver, Stage 2 | C124-SHADOW-OPEN at every open `W`; the drafted G99 |
+| the object is the side — inner, outer, crossing — of a connected piece at a point one unit from its closure; the count is a function of the six sides and of nothing else | second deriver, Stage 2 | C124-TYPE, C124-FORCED-PIECES; G99; the successor's first claim (the count at the class its argument reads) |
+| "A tight pair is an effect, not a cause"; every held stop is one kind of point | the asking lane | the successor's stub, minted by it |
+
+**Prior-art debts carried, none paid by this job** (no search was run): the first round's gate items 4, 5, 7, 8 "were not done and
+are debts"; "prior art: owed" at C124-RADIUS-COUNTABLE and C124-OPEN (the gate's two warnings); the θ-curve lemma and the
+release's every-direction lemma recalled, not read; C124-SECOND "not searched against FS116-N2-STAR and -N2-RECIP" (the asking
+lane, § 2.3); C124-ANTIPODE "owed beyond that".
+
+### 7.4 The plan and the stubs, grepped for "conjecture" and "not claimed"
+
+"conjecture": 0 hits in `plans/FS124-tight-pairs.md`, 0 in `plans/STUB-q-ring.md`, 0 in `plans/STUB-covering-pairs.md`.
+"not claimed": 1, 2, 0.
+
+| hit | what it is | a stub, or a decline |
+|---|---|---|
+| the plan, l. 70 | a dictate: every entry's *not claimed* line says the class of weak colourings with a tight pair is not known to be all weak six-colourings, nor inhabited at six | met by the entries; that every colouring has such data is FS-127's and FS-128's — open stubs; no new stub |
+| the stub, l. 52 | FS-129's LOCAL-DENSE, its *not claimed* line on the radius | part of the eight cases, which pass to FS-136 |
+| the stub, l. 642 | C132-PLACED-RING's *not claimed* line, in the block "Since FS-132" | see below |
+
+**One thing the grep found that has no stated home.** The milestone's stub carries three items "Open, carried here from FS-132,
+none started": C132-ARC, C132-PLACED's open line, C132-RADIUS. Two are now answered by entries — C132-RADIUS by C124-RADIUS-UP
+and -DOWN (row 161's draft), C132-ARC by C124-HALF and C124-HALF-TWO (C124-HALF's *prior art* line: "posed as C132-ARC and by the
+asking lane"). **C132-PLACED's open line** — whether any pair containing a label of the centre's triple is a witnessed edge at the
+placed point — was not started by either round, and the asking lane's verdict passes "the eight cases" and two map steps to
+FS-136 without naming it. A question for the asking lane, in the report's INVENTORY; I minted nothing for it.
+
+**Stage 7 — SAVED** (2026-10-07).
+
+## Stage 8 — SAVED: the gates, and where a successor takes over
+
+| file | command, from `plans/` | result |
+|---|---|---|
+| `FS124-derivation.md` | `derive_gate.py all FS124-derivation.md` (background, under a slot) | **PASS**, 0 failures, 2 warnings (the sources' "prior art owed" ×2); entries 30, derived 29, refuted 1; controls 17, firing 17 |
+| the same, against its sources | `derive_gate.py quotes FS124-derivation.md FS124-E1-derivation.md FS124-E2-derivation.md` | PASS; 30 statements, each identical in two files |
+| `FS124-E1-derivation.md` | `derive_gate.py all`, before and after its two appended paragraphs | PASS, 2 warnings; PASS, 2 warnings |
+| `FS124-E2-derivation.md` | the same, before and after its one | PASS, 0 warnings; PASS, 0 warnings |
+| `FS132-derivation.md` | the same, before and after its two | PASS, 9 warnings; PASS, 9 warnings |
+| this record | `derive_gate.py entries FS124-Z1-record.md` | **FAIL by construction**: "no derivation entry" — a record job's record holds none; the gated file is the derivation file |
+
+Scripts, each with a fault watched firing: `quote_check.py` (0 of 6 with one character changed), `build_derivation.py --check`
+(exit 1 with one byte appended to the file, then restored: `git status` clean), `brier.py --fault` (mean 0.083 → 0.678),
+`append_corrections.py` and `append_stubs.py` (each refuses a second run). They are under `data/fs124/z1/`, not `tools/`, as the
+brief asked while a landing is in flight.
+
+**Where a successor takes over.** Every numbered item of the brief's § Done means is at a saved stage. Not done, and said:
+(1) nothing here is a second reading of any argument — C124-LONE's Step II is still owed to the second kernel planner;
+(2) the Proof Atlas draft's edge kinds and node ids were not checked against the atlas's lint; (3) the stubs' card check (the
+asking lane's) and the front page's fact audit were not run — I wrote neither file they guard, except the stubs' bearing blocks;
+(4) the launch's copy of `CLAUDE.md` was older than the disk's, so every slot was read from disk — a landing in flight may move
+them again before the filing, and `data/fs124/z1/drafts.py` re-run will say which slot no longer matches (its asserts).
+
+**Stage 8 — SAVED** (2026-10-07).
