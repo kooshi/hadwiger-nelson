@@ -1,0 +1,12 @@
+origin/main = f81abeecde0c8945132dac16d90d6f0d83683f6f
+merge base with HEAD (baa96c94c825207b71380407e0227854cb858bfe) = 357e42de237b84656febcb262a5bfac4fc67814e   (the main commit merged at stage 3: 357e42de237b84656febcb262a5bfac4fc67814e)
+commits on main since: 26
+paths main changed since the merge base, by top-level entry:
+     35 data
+      1 LEAN.md
+     18 plans
+paths outside plans/, data/, .claude/, BIBLIOGRAPHY.md, LEDGER.md, LEAN.md, RUNNING.md:
+(count: 0)
+trial: git merge-tree --write-tree --name-only HEAD f81abeecde0c8945132dac16d90d6f0d83683f6f
+f77c2a12d223184226d7913cadf1bfc454a540d3
+merge-tree exit=0
