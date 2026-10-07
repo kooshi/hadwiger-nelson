@@ -1,0 +1,500 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api//stveOQK45v/7V3WrTseSwgpyBs</id>
+  <title>arXiv Query: search_query=all:"Hadwiger-Nelson"&amp;id_list=&amp;start=0&amp;max_results=25</title>
+  <updated>2026-10-07T03:03:41Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22Hadwiger-Nelson%22&amp;start=0&amp;max_results=25&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+  <opensearch:totalResults>29</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2609.36220v1</id>
+    <title>Hadwiger--Nelson Problem for Typical Norms</title>
+    <updated>2026-09-28T20:18:36Z</updated>
+    <link href="https://arxiv.org/abs/2609.36220v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.36220v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The classical Hadwiger-Nelson problem asks for the chromatic number of the unit distance graph of the Euclidean plane. Over the years, this problem has been considered for a variety of other normed spaces, with higher-dimensional Euclidean space $\mathbb{R}^d$ being perhaps the most natural and well-studied. Alon, Bucić, and Sauermann proved that, for a typical norm on $\mathbb{R}^d$, the chromatic number of the unit distance graph is at most $2^d$. We improve this exponential bound to a linear one by showing that the chromatic number of a typical norm on $\mathbb{R}^d$ is at most $2d$ and that this is tight. This shows a stark difference in the behavior compared to the Euclidean case, where there is an exponential lower bound.
+  One of the key ingredients is a certain high-dimensional, matrix generalization of the Lonely runner conjecture, which also allows us to completely settle the so-called view-obstruction conjecture of Schoenberg from 1978 and a more recent covering-radius conjecture of Henze and Malikiosis.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T20:18:36Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Noga Alon</name>
+    </author>
+    <author>
+      <name>Matija Bucić</name>
+    </author>
+    <author>
+      <name>James Davies</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.04542v5</id>
+    <title>A Moser-spindle-free 5-chromatic unit distance graph on 2131 vertices in the plane</title>
+    <updated>2026-10-06T08:12:14Z</updated>
+    <link href="https://arxiv.org/abs/2608.04542v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.04542v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With regard to the Hadwiger-Nelson problem, several 5-chromatic unit distance graphs in the Euclidean plane have been discovered in recent years. While most constructions rely heavily on the Moser spindle, a few recent examples completely avoid it, the smallest one consisting of 1441 vertices. In this note, we introduce an original geometric approach to constructing such graphs by utilizing the arcs of a 7-fold symmetric unit distance graph on 21 vertices, and obtain a Moser-spindle-free 5-chromatic unit distance graph on 2131 vertices. While this is not a record small result, it arises from a straightforward, structured rule rather than a purely automated or brute-force search.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-05T07:20:58Z</published>
+    <arxiv:comment>9 pages, 2 figures. Added links to preprints with recent developments. Added AI use declaration. Corrected page numbers in one reference</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jan Kristian Haugland</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.16642v2</id>
+    <title>On the chromatic number and equilateral dimension of $\mathbb{R}^n$ with the tropical norm</title>
+    <updated>2026-06-25T13:50:45Z</updated>
+    <link href="https://arxiv.org/abs/2606.16642v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.16642v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the tropical chromatic number of $\mathbb{R}^n$, $χ_{\mathrm{tr}}(\mathbb{R}^n)$, the minimal number of colors needed to color $\mathbb{R}^n$, so that no two points at tropical unit distance have the same color. It is the tropical analogue of the well-known Hadwiger-Nelson problem in $\mathbb{R}^2$. We have $\displaystyle \binom{n+1}{\lfloor (n+1)/2 \rfloor} \leq χ_{\mathrm{tr}}(\mathbb{R}^n) \leq 2^n$ for every $n$, where the lower bound comes from Sperner's antichain bound on a maximal equilateral set, as shown by Swanepoel. It is conjectured that $χ_{\mathrm{tr}}(\mathbb{R}^n) = 2^n$, which is known to be the case for the measurable chromatic number. By constructing a graph with 62 vertices and 577 edges we demonstrate that $χ_{\mathrm{tr}}(\mathbb{R}^3)=8$. We also construct a graph in $\mathbb{Z}^4$ with 37 vertices and 386 edges that is 11-colorable but not 10-colorable, which is above Sperner's lower bound of 10.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-15T12:33:10Z</published>
+    <arxiv:comment>24 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Amnon Rosenmann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.05137v1</id>
+    <title>Neural Algorithmic Reasoning for Approximate $k$-Coloring with Recursive Warm Starts</title>
+    <updated>2026-01-08T17:28:09Z</updated>
+    <link href="https://arxiv.org/abs/2601.05137v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.05137v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Node coloring is the task of assigning colors to the nodes of a graph such that no two adjacent nodes have the same color, while using as few colors as possible. It is the most widely studied instance of graph coloring and of central importance in graph theory; major results include the Four Color Theorem and work on the Hadwiger-Nelson Problem. As an abstraction of classical combinatorial optimization tasks, such as scheduling and resource allocation, it is also rich in practical applications. Here, we focus on a relaxed version, approximate $k$-coloring, which is the task of assigning at most $k$ colors to the nodes of a graph such that the number of edges whose vertices have the same color is approximately minimized. While classical approaches leverage mathematical programming or SAT solvers, recent studies have explored the use of machine learning. We follow this route and explore the use of graph neural networks (GNNs) for node coloring. We first present an optimized differentiable algorithm that improves a prior approach by Schuetz et al. with orthogonal node feature initialization and a loss function that penalizes conflicting edges more heavily when their endpoints have higher degree; the latter inspired by the classical result that a graph is $k$-colorable if and only if its $k$-core is $k$-colorable. Next, we introduce a lightweight greedy local search algorithm and show that it may be improved by recursively computing a $(k-1)$-coloring to use as a warm start. We then show that applying such recursive warm starts to the GNN approach leads to further improvements. Numerical experiments on a range of different graph structures show that while the local search algorithms perform best on small inputs, the GNN exhibits superior performance at scale. The recursive warm start may be of independent interest beyond graph coloring for local search methods for combinatorial optimization.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-08T17:28:09Z</published>
+    <arxiv:comment>33 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Knut Vanderbush</name>
+    </author>
+    <author>
+      <name>Melanie Weber</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.15516v2</id>
+    <title>Ramsey problems for graphs in Euclidean spaces and Cartesian powers</title>
+    <updated>2025-12-18T12:00:27Z</updated>
+    <link href="https://arxiv.org/abs/2512.15516v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.15516v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a graph $H$, let $χ_H(\mathbb{R}^n)$ be the smallest positive integer $r$ such that there exists an $r$-coloring of $\mathbb{R}^n$ with no monochromatic unit-copy of $H$, that is a set of $|V(H)|$ vertices of the same color such that any two vertices corresponding to an edge of $H$ are at distance one.
+  This Ramsey-type function extends the famous Hadwiger--Nelson problem on the chromatic number $χ(\mathbb{R}^n)=χ_{K_2}(\mathbb{R}^n)$ of the space from a complete graph $K_2$ on two vertices to an arbitrary graph $H$. It also extends the classical Euclidean Ramsey problem for congruent monochromatic subsets to the family of those defined by a specific subset of unit distances.
+  Among others, we show that $χ_H(\mathbb{R}^n)=χ(\mathbb{R}^n)$ for any even cycle $H$ of length $8$ or at least $12$ as well as for any forest and that $χ_H(\mathbb{R}^n)=\lceilχ(\mathbb{R}^n)/2\rceil$ for any sufficiently long odd cycle. Our main tools and results, which are of independent interest, establish that Cartesian powers enjoy Ramsey-type properties for graphs with favorable Turán-type characteristics, such as zero hypercube Turán density.
+  In addition, we prove induced variants of these results, find bounds on $χ_H(\mathbb{R}^n)$ for growing dimensions $n$, and prove a canonical-type result. We conclude with many open problems. One of these is to determine $χ_{C_4}(\mathbb{R}^2)$, for a cycle $C_4$ on four vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-17T15:13:27Z</published>
+    <arxiv:comment>28 pages (including appendix), minor \LaTeX\ compilation errors fixed</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Maria Axenovich</name>
+    </author>
+    <author>
+      <name>Dingyuan Liu</name>
+    </author>
+    <author>
+      <name>Arsenii Sagdeev</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.01958v1</id>
+    <title>On the chromatic number of the plane for map-type colorings</title>
+    <updated>2025-02-04T03:08:07Z</updated>
+    <link href="https://arxiv.org/abs/2502.01958v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.01958v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the Hadwiger-Nelson problem on the chromatic number of the plane under conditions of coloring a map containing a finite number of vertices in any bounded region. Woodall (1973) and Townsend (1981) showed that at least 6 colors would be required. In the present paper, it is shown that at least 7 colors are required to color a map in which the boundaries are not arcs of a unit circle and three boundaries connect at each vertex. As a corollary, we obtain that at least 7 colors are required for a proper coloring in which the regions are arbitrary polygons. The proof relies on techniques developed for a similar result concerning the chromatic number of the plane with a forbidden interval of distances.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-04T03:08:07Z</published>
+    <arxiv:comment>29 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Georgy Sokolov</name>
+    </author>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.18527v3</id>
+    <title>Neural Discovery in Mathematics: Do Machines Dream of Colored Planes?</title>
+    <updated>2025-06-05T07:01:14Z</updated>
+    <link href="https://arxiv.org/abs/2501.18527v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.18527v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We demonstrate how neural networks can drive mathematical discovery through a case study of the Hadwiger-Nelson problem, a long-standing open problem at the intersection of discrete geometry and extremal combinatorics that is concerned with coloring the plane while avoiding monochromatic unit-distance pairs. Using neural networks as approximators, we reformulate this mixed discrete-continuous geometric coloring problem with hard constraints as an optimization task with a probabilistic, differentiable loss function. This enables gradient-based exploration of admissible configurations that most significantly led to the discovery of two novel six-colorings, providing the first improvement in thirty years to the off-diagonal variant of the original problem. Here, we establish the underlying machine learning approach used to obtain these results and demonstrate its broader applicability through additional numerical insights.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-30T17:44:34Z</published>
+    <arxiv:comment>9 pages main paper, 11 pages references and appendix, 17 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Proc. 42nd ICML, PMLR 267, 2025</arxiv:journal_ref>
+    <author>
+      <name>Konrad Mundinger</name>
+    </author>
+    <author>
+      <name>Max Zimmer</name>
+    </author>
+    <author>
+      <name>Aldo Kiem</name>
+    </author>
+    <author>
+      <name>Christoph Spiegel</name>
+    </author>
+    <author>
+      <name>Sebastian Pokutta</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.05931v1</id>
+    <title>A New Class of Geometrically Defined Hypergraphs Arising from the Hadwiger Nelson Problem</title>
+    <updated>2024-11-08T19:33:30Z</updated>
+    <link href="https://arxiv.org/abs/2411.05931v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.05931v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>There is a famous problem in geometric graph theory to find the chromatic number of the unit distance graph on Euclidean space; it remains unsolved. A theorem of Erdos and De-Bruijn simplifies this problem to finding the maximum chromatic number of a finite unit distance graph. Via a construction built on sequential finite graphs obtained from a generalization of this theorem, we have found a class of geometrically defined hypergraphs of arbitrarily large edge cardinality, whose proper colorings exactly coincide with the proper colorings of the unit distance graph on $\mathbb R^d$. We also provide partial generalizations of this result to arbitrary real normed vector spaces.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-08T19:33:30Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics Quarterly 33 (2024) 97-106</arxiv:journal_ref>
+    <author>
+      <name>Sean Fiscus</name>
+    </author>
+    <author>
+      <name>Eric Myzelev</name>
+    </author>
+    <author>
+      <name>Hongyi Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.14398v2</id>
+    <title>A lower bound on the number of colours needed to nicely colour a sphere</title>
+    <updated>2025-04-18T17:55:55Z</updated>
+    <link href="https://arxiv.org/abs/2404.14398v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.14398v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Hadwiger--Nelson problem is about determining the chromatic number of the plane (CNP), defined as the minimum number of colours needed to colour the plane so that no two points of distance 1 have the same colour. In this paper we investigate a related problem for spheres and we use a few natural restrictions on the colouring. Thomassen showed that with these restrictions, the chromatic number of all manifolds satisfying certain properties (including the plane and all spheres with a large enough radius) is at least 7. We prove that with these restrictions, the chromatic number of any sphere with a large enough radius is at least 8. This also gives a new lower bound for the minimum colours needed for colouring the 3-dimensional space with the same restrictions.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-22T17:57:46Z</published>
+    <arxiv:comment>The result was presented at CCCG 2020. The present paper is a revised version of the paper in the conference proceedings</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Péter Ágoston</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.09973v3</id>
+    <title>Coloring and density theorems for configurations of a given volume</title>
+    <updated>2026-01-14T00:32:15Z</updated>
+    <link href="https://arxiv.org/abs/2309.09973v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.09973v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This is a treatise on finite point configurations spanning a fixed volume to be found in a single color-class of an arbitrary finite (measurable) coloring of the Euclidean space $\mathbb{R}^n$, or in a single large measurable subset $A\subseteq\mathbb{R}^n$. More specifically, we study vertex-sets of simplices, rectangular boxes, and parallelotopes, attempting to make progress on several open problems posed in the 1970s and the 1980s. As one of the highlights, we give a negative answer to a question of Erdős and Graham, by coloring the Euclidean plane $\mathbb{R}^2$ in $25$ colors without creating monochromatic rectangles of unit area. More generally, we construct a finite coloring of the Euclidean space $\mathbb{R}^n$ such that no color-class contains the $2^m$ vertices of any (possibly rotated) $m$-dimensional rectangular box of volume $1$. A positive result is still possible if rectangular boxes of merely sufficiently large volumes are sought in a single color-class of a finite measurable coloring of $\mathbb{R}^n$, and we establish it under an additional assumption $n\geq m+1$. Also, motivated by a question of Graham on reasonable bounds in his result on monochromatic axes-aligned right-angled $m$-dimensional simplices, we establish its measurable coloring and density variants with polylogarithmic bounds, again in dimensions $n\geq m+1$. Next, we generalize a result of Erdős and Mauldin, by constructing an infinite measure set $A\subseteq\mathbb{R}^n$ such that every $n$-parallelotope with vertices in $A$ has volume strictly smaller than $1$. Finally, some results complementing the literature on isometric embeddings of hypercube graphs and on the hyperbolic analogue of the Hadwiger-Nelson problem also follow as byproducts of our approaches.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-18T17:54:42Z</published>
+    <arxiv:comment>v3: 50 pages, 8 figures, 1 table. Incorporated minor suggestions from the referees</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Proc. Lond. Math. Soc. (3) 132 (2026), no. 3, e70143</arxiv:journal_ref>
+    <author>
+      <name>Vjekoslav Kovač</name>
+    </author>
+    <arxiv:doi>10.1112/plms.70143</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1112/plms.70143" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2308.16885v3</id>
+    <title>Chromatic number of spacetime</title>
+    <updated>2024-11-17T22:19:19Z</updated>
+    <link href="https://arxiv.org/abs/2308.16885v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2308.16885v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We observe that an old theorem of Graham implies that for any positive integer $s$, there exists some positive integer $T(s)$ such that every $s$-colouring of $\mathbb{Z}^2$ contains a monochromatic pair of points $(x,y),(x',y')$ with $(x-x')^2 - (y-y')^2 = (T(s))^2$. By scaling, this implies that every finite colouring of $\mathbb{Q}^2$ contains a monochromatic pair of points $(x,y),(x',y')$ with $(x-x')^2 - (y-y')^2 = 1$, which answers in a strong sense a problem of Kosheleva and Kreinovich on a pseudo-Euclidean analogue of the Hadwiger-Nelson problem.
+  The proof of Graham's theorem relies on repeated applications of van der Waerden's theorem, and so the resulting function $T(s)$ grows extremely quickly. We give an alternative proof in the weaker setting of having a second spacial dimension that results in a significantly improved bound. To be more precise, we prove that for every positive integer $s$ with $r\equiv 2 \pmod{4}$, every $s$-colouring of $\mathbb{Z}^3$ contains a monochromatic pair of points $(x,y,z),(x',y',z')$ such that $(x-x')^2 + (y-y')^2 - (z-z')^2 = (5^{(s-2)/4}(8\cdot 5^{(s-2)/2})!)^2$. In fact, we prove a stronger density version. The density version in $\mathbb{Z}^2$ remains open.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-08-31T17:44:12Z</published>
+    <arxiv:comment>8 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>James Davies</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.10163v3</id>
+    <title>The chromatic number of the plane with an interval of forbidden distances is at least 7</title>
+    <updated>2025-04-13T17:17:35Z</updated>
+    <link href="https://arxiv.org/abs/2304.10163v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.10163v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The work is devoted to one of the variations of the Hadwiger--Nelson problem on the chromatic number of the plane. In this formulation one needs to find for arbitrarily small $\varepsilon$ the least possible number of colors needed to color a Euclidean plane in such a way that any two points, the distance between which belongs to the interval $[1-\varepsilon, 1+\varepsilon]$, are colored differently. The conjecture proposed by G. Exoo in 2004, states that for arbitrary positive $\varepsilon$ at least 7 colors are required. Also, with a sufficiently small $\varepsilon$ the number of colors is exactly 7. The main result of the present paper is that the conjecture is true for the Euclidean plane as well as for any Minkowski plane.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-20T08:50:06Z</published>
+    <arxiv:comment>16 pages, 6 figures. Extended the bibliography and details of proofs concerning arbitrary norm. Added a theorem on covering a disk of radius 3 by closed sets. Corrected some inaccuracies</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.09058v2</id>
+    <title>Unit and distinct distances in typical norms</title>
+    <updated>2024-11-07T14:52:50Z</updated>
+    <link href="https://arxiv.org/abs/2302.09058v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.09058v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Erdős' unit distance problem and Erdős' distinct distances problem are among the most classical and well-known open problems in discrete mathematics. They ask for the maximum number of unit distances, or the minimum number of distinct distances, respectively, determined by $n$ points in the Euclidean plane. The question of what happens in these problems if one considers normed spaces other than the Euclidean plane has been raised in the 1980s by Ulam and Erdős and attracted a lot of attention over the years. We give an essentially tight answer to both questions for almost all norms on $\mathbb{R}^d$, in a certain Baire categoric sense.
+  For the unit distance problem we prove that for almost all norms $\|.\|$ on $\mathbb{R}^d$, any set of $n$ points defines at most $\frac{1}{2} d \cdot n \log_2 n$ unit distances according to $\|.\|$. We also show that this is essentially tight, by proving that for every norm $\|.\|$ on $\mathbb{R}^d$, for any large $n$, we can find $n$ points defining at least $\frac{1}{2}(d-1-o(1))\cdot n \log_2 n$ unit distances according to $\|.\|$.
+  For the distinct distances problem, we prove that for almost all norms $\|.\|$ on $\mathbb{R}^d$ any set of $n$ points defines at least $(1-o(1))n$ distinct distances according to $\|.\|$. This is clearly tight up to the $o(1)$ term.
+  We also answer the famous Hadwiger--Nelson problem for almost all norms on $\mathbb{R}^2$, showing that their unit distance graph has chromatic number $4$.
+  Our results settle, in a strong and somewhat surprising form, problems and conjectures of Brass, Matoušek, Brass-Moser-Pach, Chilakamarri, and Robertson. The proofs combine combinatorial and geometric ideas with tools from Linear Algebra, Topology and Algebraic Geometry.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-17T18:49:46Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Noga Alon</name>
+    </author>
+    <author>
+      <name>Matija Bucić</name>
+    </author>
+    <author>
+      <name>Lisa Sauermann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2301.13695v1</id>
+    <title>Note on the chromatic number of Minkowski planes: the regular polygon case</title>
+    <updated>2023-01-31T15:13:49Z</updated>
+    <link href="https://arxiv.org/abs/2301.13695v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2301.13695v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The famous Hadwiger-Nelson problem asks for the minimum number of colors needed to color the points of the Euclidean plane so that no two points unit distance apart are assigned the same color. In this note we consider a variant of the problem in Minkowski metric planes, where the unit circle is a regular polygon of even and at most 22 vertices. We present a simple lattice-sublattice coloring scheme that uses 6 colors, proving that the chromatic number of the Minkowski planes above are at most 6. This result is new for regular polygons having more than 8 vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-01-31T15:13:49Z</published>
+    <arxiv:comment>15 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Panna Gehér</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.04499v1</id>
+    <title>Coloring distance graphs on the plane</title>
+    <updated>2022-01-12T15:00:35Z</updated>
+    <link href="https://arxiv.org/abs/2201.04499v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.04499v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the coloring of certain distance graphs on the Euclidean plane. Namely, we ask for the minimal number of colors needed to color all points of the plane in such a way that pairs of points at distance in the interval $[1,b]$ get different colors. The classic Hadwiger-Nelson problem is a special case of this question -- obtained by taking $b=1$. The main results of the paper are improved lower and upper bounds on the number of colors for some values of $b$. In particular, we determine the minimal number of colors for two ranges of values of $b$ - one of which is enlarging an interval presented by Exoo and the second is completely new. Up to our knowledge, these are the only known families of distance graphs on the plane with a determined nontrivial chromatic number. Moreover, we present the first $8$-coloring for $b$ larger than values of $b$ for the known $7$-colorings. As a byproduct, we give some bounds and exact values for bounded parts of the plane, specifically by coloring certain annuli.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-12T15:00:35Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Joanna Chybowska-Sokół</name>
+    </author>
+    <author>
+      <name>Konstanty Junosza-Szaniawski</name>
+    </author>
+    <author>
+      <name>Krzysztof Węsek</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2112.07665v1</id>
+    <title>Probabilistic formulation of the Hadwiger--Nelson problem</title>
+    <updated>2021-12-14T18:59:16Z</updated>
+    <link href="https://arxiv.org/abs/2112.07665v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2112.07665v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This is a slightly modified version of my MSc thesis from 2019. Supervisor was Dömötör Pálvölgyi.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-12-14T18:59:16Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Péter Ágoston</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.12861v1</id>
+    <title>The chromatic number of the Minkowski plane -- the regular polygon case</title>
+    <updated>2021-08-29T15:35:56Z</updated>
+    <link href="https://arxiv.org/abs/2108.12861v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.12861v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Hadwiger-Nelson problem asks for the minimum number of colors, so that each point of the plane can be assigned a single color with the property that no two points unit-distance apart are identically colored. It is now known that the answer is $5$, $6$, or $7$, Here we consider the problem in the context of Minkowski planes, where the unit circle is a regular polygon with $8$, $10$, or $12$ vertices. We prove that in each of these cases, one also needs at least five colors.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-29T15:35:56Z</published>
+    <arxiv:comment>19 pages, 14 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Geoffrey Exoo</name>
+    </author>
+    <author>
+      <name>David Fisher</name>
+    </author>
+    <author>
+      <name>Dan Ismailescu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.02185v3</id>
+    <title>Maximum likelihood thresholds via graph rigidity</title>
+    <updated>2023-12-05T23:10:01Z</updated>
+    <link href="https://arxiv.org/abs/2108.02185v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.02185v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The maximum likelihood threshold (MLT) of a graph $G$ is the minimum number of samples to almost surely guarantee existence of the maximum likelihood estimate in the corresponding Gaussian graphical model. We give a new characterization of the MLT in terms of rigidity-theoretic properties of $G$ and use this characterization to give new combinatorial lower bounds on the MLT of any graph.
+  We use the new lower bounds to give high-probability guarantees on the maximum likelihood thresholds of sparse Erd{ö}s-Rényi random graphs in terms of their average density. These examples show that the new lower bounds are within a polylog factor of tight, where, on the same graph families, all known lower bounds are trivial.
+  Based on computational experiments made possible by our methods, we conjecture that the MLT of an Erd{ö}s-Rényi random graph is equal to its generic completion rank with high probability. Using structural results on rigid graphs in low dimension, we can prove the conjecture for graphs with MLT at most $4$ and describe the threshold probability for the MLT to switch from $3$ to $4$.
+  We also give a geometric characterization of the MLT of a graph in terms of a new "lifting" problem for frameworks that is interesting in its own right. The lifting perspective yields a new connection between the weak MLT (where the maximum likelihood estimate exists only with positive probability) and the classical Hadwiger-Nelson problem.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-04T17:21:24Z</published>
+    <arxiv:comment>In press at Annals of Applied Probability</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Daniel Irving Bernstein</name>
+    </author>
+    <author>
+      <name>Sean Dewar</name>
+    </author>
+    <author>
+      <name>Steven J. Gortler</name>
+    </author>
+    <author>
+      <name>Anthony Nixon</name>
+    </author>
+    <author>
+      <name>Meera Sitharam</name>
+    </author>
+    <author>
+      <name>Louis Theran</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2102.12815v2</id>
+    <title>Connectedness of Unit Distance Subgraphs Induced by Closed Convex Sets</title>
+    <updated>2022-02-11T16:46:57Z</updated>
+    <link href="https://arxiv.org/abs/2102.12815v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2102.12815v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The unit distance graph $G_{\mathbb{R}^d}^1$ is the infinite graph whose nodes are points in $\mathbb{R}^d$, with an edge between two points if the Euclidean distance between these points is 1. The 2-dimensional version $G_{\mathbb{R}^2}^1$ of this graph is typically studied for its chromatic number, as in the Hadwiger-Nelson problem. However, other properties of unit distance graphs are rarely studied. Here, we consider the restriction of $G_{\mathbb{R}^d}^1$ to closed convex subsets $X$ of $\mathbb{R}^d$. We show that the graph $G_{\mathbb{R}^d}^1[X]$ is connected precisely when the radius of $r(X)$ of $X$ is equal to 0, or when $r(X)\geq 1$ and the affine dimension of $X$ is at least 2. For hyperrectangles, we give bounds for the graph diameter in the critical case that the radius is exactly 1.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-25T12:31:30Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Remie Janssen</name>
+    </author>
+    <author>
+      <name>Leonie van Steijn</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2008.07987v1</id>
+    <title>A Finite Graph Approach to the Probabilistic Hadwiger-Nelson Problem</title>
+    <updated>2020-08-18T15:32:44Z</updated>
+    <link href="https://arxiv.org/abs/2008.07987v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2008.07987v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We advance a probabilistic approach to the Hadwiger-Nelson problem initially developed by the Polymath16 project, in particular relating the approach to finite unit-distance graphs. We define the numerical \textit{badness} of a given $k$-coloring of the plane to be the probability that a randomly chosen unit-distance edge is monochromatic under the coloring, and we provide lower bounds on the badness of arbitrary $k$-colorings using a probabilistic technique relating to finite graphs. The contrapositive of the resulting bounds lets us compute lower bounds on the order of non $k$-colorable unit-distance graphs, improving bounds produced by Pritikin and the Polymath16 project in the $k = 4$ and $k = 5$ cases. Additionally, we make partial progress on a probabilistic analog of the de Bruijn-Erdős compactness theorem.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-08-18T15:32:44Z</published>
+    <arxiv:comment>17 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Haydn Gwyn</name>
+    </author>
+    <author>
+      <name>Jacob Stavrianos</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.06055v1</id>
+    <title>The Hadwiger-Nelson problem with two forbidden distances</title>
+    <updated>2018-05-15T22:32:23Z</updated>
+    <link href="https://arxiv.org/abs/1805.06055v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.06055v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In 1950 Edward Nelson asked the following simple-sounding question:
+  \emph{How many colors are needed to color the Euclidean plane $\mathbb{E}^2$ such that no two points distance $1$ apart are identically colored?}
+  We say that $1$ is a \emph{forbidden} distance. For many years, we only knew that the answer was $4$, $5$, $6$, or $7$. In a recent breakthrough, de Grey \cite{degrey} proved that at least five colors are necessary.
+  In this paper we consider a related problem in which we require \emph{two} forbidden distances, $1$ and $d$. In other words, for a given positive number $d\neq 1$, how many colors are needed to color the plane such that no two points distance $1$ \underline{or} $d$ apart are assigned the same color? We find several values of $d$, for which the answer to the previous question is at least $5$. These results and graphs may be useful in constructing simpler $5$-chromatic unit distance graphs.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-15T22:32:23Z</published>
+    <arxiv:comment>17 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Geoffrey Exoo</name>
+    </author>
+    <author>
+      <name>Dan Ismailescu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1804.02385v3</id>
+    <title>The chromatic number of the plane is at least 5</title>
+    <updated>2018-05-30T20:46:47Z</updated>
+    <link href="https://arxiv.org/abs/1804.02385v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1804.02385v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a family of finite unit-distance graphs in the plane that are not 4-colourable, thereby improving the lower bound of the Hadwiger-Nelson problem. The smallest such graph that we have so far discovered has 1581 vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-04-08T00:33:50Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Aubrey D. N. J. de Grey</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1708.01081v1</id>
+    <title>Lower bounds for the measurable chromatic number of the hyperbolic plane</title>
+    <updated>2017-08-03T09:53:14Z</updated>
+    <link href="https://arxiv.org/abs/1708.01081v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1708.01081v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Consider the graph $\mathbb{H}(d)$ whose vertex set is the hyperbolic plane, where two points are connected with an edge when their distance is equal to some $d&gt;0$. Asking for the chromatic number of this graph is the hyperbolic analogue to the famous Hadwiger-Nelson problem about colouring the points of the Euclidean plane so that points at distance $1$ receive different colours.
+  As in the Euclidean case, one can lower bound the chromatic number of $\mathbb{H}(d)$ by $4$ for all $d$. Using spectral methods, we prove that if the colour classes are measurable, then at least $6$ colours are are needed to properly colour $\mathbb{H}(d)$ when $d$ is sufficiently large.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-08-03T09:53:14Z</published>
+    <arxiv:comment>13 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Discrete Comput Geom (2018)</arxiv:journal_ref>
+    <author>
+      <name>Evan DeCorte</name>
+    </author>
+    <author>
+      <name>Konstantin Golubev</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-018-0027-8</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-018-0027-8" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1701.08648v1</id>
+    <title>Chromatic numbers for the hyperbolic plane and discrete analogs</title>
+    <updated>2017-01-30T15:21:29Z</updated>
+    <link href="https://arxiv.org/abs/1701.08648v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1701.08648v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study colorings of the hyperbolic plane, analogously to the Hadwiger-Nelson problem for the Euclidean plane. The idea is to color points using the minimum number of colors such that no two points at distance exactly $d$ are of the same color. The problem depends on $d$ and, following a strategy of Kloeckner, we show linear upper bounds on the necessary number of colors. In parallel, we study the same problem on $q$-regular trees and show analogous results. For both settings, we also consider a variant which consists in replacing $d$ with an interval of distances.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-01-30T15:21:29Z</published>
+    <arxiv:comment>23 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Hugo Parlier</name>
+    </author>
+    <author>
+      <name>Camille Petit</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1509.07023v1</id>
+    <title>The Hadwiger-Nelson problem over certain fields</title>
+    <updated>2015-09-23T15:08:24Z</updated>
+    <link href="https://arxiv.org/abs/1509.07023v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1509.07023v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We compute the Hadwiger-Nelson numbers $χ(E^2)$ for certain number fields $E$, that is, the smallest number of colors required to color the points in the plane with coordinates in~$E$ so that no two points at distance $1$ from one another have the same color. Specifically, we show that $χ(\mathbb{Q}(\sqrt{2})^2) = 2$, that $χ(\mathbb{Q}(\sqrt{3})^2) = 3$, that $χ(\mathbb{Q}(\sqrt{7})^2) = 3$ despite the fact that the graph $Γ(\mathbb{Q}(\sqrt{7})^2)$ is triangle-free, and that $4 \leq χ(\mathbb{Q}(\sqrt{3}, \sqrt{11})^2) \leq 5$. We also discuss some results over other fields, for other quadratic fields. We conclude with some comments on the use of the axiom of choice.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-09-23T15:08:24Z</published>
+    <arxiv:comment>preliminary version</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>David A. Madore</name>
+    </author>
+  </entry>
+</feed>

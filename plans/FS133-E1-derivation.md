@@ -35,6 +35,7 @@ plan's § PA.3.
 - **C133-FN** — `f(n)/n → m₁(ℝ²)`: TRUE. [derived] from C133-ONE. Stage 5.
 - **C133-PAIR** — for finitely many labels and forbidden label pairs at a countable set of algebraic distances: a labelling of the plane exists iff one of the algebraic plane exists iff a measurable one exists almost everywhere: TRUE, each direction argued. [hand] over `[OAIMath2026]` family 158's Theorem 2.3, one mind. Stage 6, § Argument for C133-PAIR, § Converse for C133-PAIR.
 - **C133-HOM** (posed) — TRUE, both directions. [derived] from C133-PAIR. Stage 6.
+- Stage 7 proved none (the second prior-art pass, the trace as drafts, predictions scored).
 
 ## Stage 1 — SAVED: the readback, the definitions at their pages, and the opening
 
@@ -779,3 +780,114 @@ this direction.
 
 **Theorems this stage proved:** `C133-PAIR` — TRUE, both directions, [hand] over `[OAIMath2026]` Theorem 2.3, one mind;
 `C133-HOM` (posed) — TRUE, [derived] from it.
+
+## Stage 7 — SAVED: the second prior-art pass, the trace as drafts, predictions scored, the look-back
+
+### 7.1 §PA, second pass (2026-10-07 03:25 UTC — twenty-three minutes after the first; the calendar, not this job, sets its worth)
+
+- **zbMATH Open API: still down.** Four queries (`data/fs133/pa/zbmath_query.py`; `zbmath-second-pass.out`) each answered
+  HTTP 503, as at the opening. **No zbMATH search has been run for this milestone**; it is a debt, not a negative.
+- **arXiv**, the key listings again (`arxiv-2026-10-07-second-pass.out`): the same totals as at the opening — 6, 2, 29, 4 for
+  "fractional chromatic number" with plane, "independence ratio" with "unit-distance", "Hadwiger-Nelson", "distance-avoiding"
+  with density — and the same newest dates (2026-06-26, 2026-06-26, 2026-09-28, 2026-09-28). Three further queries got no
+  response from the API (rate limit) and are not counted.
+- **Headline, with its enumeration:** at fifteen arXiv queries, four repeated, and two web searches, all on 2026-10-07 UTC,
+  **no statement of `α₁(ℝ²) = m₁(ℝ²)`, of `χ_f,0(ℝ²) = χ_f(ℝ²)`, or of a transfer for `H`-colourings was found, and no arXiv
+  listing in these vocabularies is dated after 2026-09-28.** Not searched: zbMATH (down), MathOverflow, blogs, the release's
+  other families beyond the stub's headline grep. The proof this follows from has been public for one day; a search this
+  shallow says "not found", not "first".
+- Neighbours named and **not read**: Bernshteyn, arXiv:2105.11557 (abstract only); Conley–Kechris 2013 (recalled, and seen in a
+  search digest); Crum 1956 and Gneiting–Sasvári 1999 (the manuscript's citation, recalled); DeCorte–de Oliveira Filho–Vallentin,
+  arXiv:1804.09099, for attainment (p. 23 and § 6's first paragraph only).
+
+### 7.2 The trace: what row 129 and the grokkings it names become (drafts; the coordinator files; each names its slot)
+
+All four claims are TRUE, so one set of drafts. (Had `C133-ALG` stalled, every sentence below would stand as filed and the
+stalled step would have gone to `plans/EXT-OAI2-reading.md` § 2.6 as a correction.)
+
+**D1 — `LEDGER.md` row 129**, replacing the sentence that begins "At ℚ(√635087), given MR there: `α₁(ℝ²) = m₁(ℝ²)`" and ends
+"finite triangle-free unit-distance graphs reach it.":
+
+> With no MR (FS-133; `plans/FS133-E1-derivation.md`, C133-ONE, C133-FN): `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`, i.e. `f(n)/n → m₁(ℝ²)` — the first clause of `[DuczVarga2026]` Conjecture 1 — and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²) ∈ [4.04876, 4.35987]`, answering `[MatolcsiEtAl2025]` §2's "it is not known whether equality holds" — posed first by `[Johnson1996fcn]` (p. 103, Question 1; p. 104, Question 3) and `[Johnson2000surprises]` (p. 143, Problems 3 and 4), read at their pages 2026-09-27 and 2026-10-06; over `[OAIMath2026]` family 158's Theorem 2.3 (`wild_fourier`) read as a statement, with no Tarski. At ℚ(√635087), given MR there, finite triangle-free unit-distance graphs reach it.
+
+**D2 — row 129**, replacing the passage that begins "**A finite-graph killing test for MR:**" and ends "(FS105-W-D1, W-D2).":
+
+> **The finite-graph killing test for MR is withdrawn (FS-133):** `α₁(ℝ²) = m₁(ℝ²)` holds with no MR, so no proof of `α₁(ℝ²) > m₁(ℝ²)` exists and the test as filed can never fire (its cheap form `α₁ ≥ 1/4` was false in print, FS105-W-D1, W-D2). What stays testable is the field form: unconditionally `α₁(F²) ≥ α₁(𝒜²) = m₁(ℝ²)`, and given MR(F) at a field whose places all read below `m₁`, `α₁(F²) = m₁(ℝ²)`; so a proof that every finite unit-distance graph **in ℚ(√635087)²** has independence ratio at least some `c > m₁(ℝ²)` refutes MR there.
+
+**D3 — row 129's grade bracket**, after "the whole weight MR's (row 120)": add
+"; the plane's clause since FS-133 not MR's: C133-ONE [hand], one mind, kernel pending, over `[OAIMath2026]` Theorem 2.3
+(kernel-checked in the release's library, audited: `plans/EXT-OAI1-audit.md`)". And in its **Prior art** sentence, after "a gate
+under descriptive-combinatorics names owed": add "; FS-133's gate (fifteen arXiv queries, two web searches, 2026-10-07; zbMATH
+down): not found; the descriptive-combinatorics neighbours named, unread (`plans/FS133-one-class-transfer.md` § PA.4)".
+
+**D4 — G60** (`.claude/skills/grokkings/SKILL.md`), replacing "The finitary–measurable gap `[AmbrusEtAl2023]` §4 expected is a
+tight place's (the Moser lattice's dyadic places), gone at ℚ(√635087), where `α₁(ℝ²) = m₁(ℝ²)` given MR.":
+
+> The finitary–measurable gap `[AmbrusEtAl2023]` §4 expected is a tight place's (the Moser lattice's dyadic places); the plane has none: `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)` with no MR (FS-133, over `[OAIMath2026]` family 158's Theorem 2.3; [hand], one mind) — the principle at the one field with no stable place — and at a number field it stays given MR.
+
+**D5 — G80**, replacing its last sentence "Since row 129 MR is testable on finite graphs: a proof that `α₁(ℝ²) > m₁(ℝ²)`
+refutes it at ℚ(√635087).":
+
+> Since FS-133 (`α₁(ℝ²) = m₁(ℝ²)` with no MR) that test is withdrawn: MR at a field whose places all read below `m₁` is testable only by graphs in that field's plane — a proof that `α₁(ℚ(√635087)²) > m₁(ℝ²)` refutes it there (row 129).
+
+**D6 — `CLOSED-QUESTIONS.md` l. 655.** Replace "— **answered at [hand], given MR.** Given MR at ℚ(√635087), both hold (row 129,
+two minds); the second clause (`m₁ = δ_Croft`) is open." with "— **answered at [hand], with no hypothesis, over `[OAIMath2026]`
+family 158's rigidity theorem** (FS-133: C133-ONE, C133-FN; one mind, kernel pending; row 129 had both given MR): both hold;
+the second clause (`m₁ = δ_Croft`) is open." Replace "Not closed until MR is hardened (FS-105)." with "Not closed until
+FS-133's Lean module passes the gate." In the Johnson passage: "the equality row 129 gives, given MR" becomes "the equality
+C133-ONE gives, with no hypothesis"; the sentence "follows given MR [derived; …] … and row 129 closes the sandwich" becomes
+"holds with no hypothesis and no Tarski (C133-ONE: `1/m₁(ℝ²) = 1/α₁(𝒜²) ≤ χ_f(𝒜²) ≤ χ_f(ℝ²) ≤ 1/m₁(ℝ²)`)"; and "is
+FS103-B-CHIF [hand, one mind; …]" gains "and FS-133's C133-CHIF, a checking re-derivation". His Question 2 stays "Not answered".
+
+**D7 — `plans/EXT-OAI2-reading.md` § 2.6** (another job's record; an erratum line to follow the section, the text above it left
+standing): "*2026-10-07, FS133-E1:* the step named here is checked — it is the reverse Fatou lemma (C133-DENS,
+`plans/FS133-E1-derivation.md` stage 3), and this project had already used it at the same place of row 129's chain
+(`plans/FS103-F-fractional-shadow.md` § 3.4, link 1); the consequence is derived as C133-ONE (stage 5), reading Theorem 2.3
+itself and not Theorem 1.3."
+
+**D8 — the stub's bearing line** (`plans/STUB-one-class-transfer.md`, the paragraph "**Provisional bearings (Poros, …)**"):
+"**Bearings (Ephodos, FS133-E1 §G, 2026-10-06):** G60, G80, G81, G82, G92, G21, G24, G63, G66, G76, G79, G87; rows 129, 130,
+131 (attainment), 120, 128, 107 — `plans/FS133-one-class-transfer.md` § G." And its line "FS103-B-AMEN's Følner half (two blind
+minds, for number fields; `plans/FS103-derivation.md` l. 86)" should read "(two blind per row 129; graded one mind at
+`plans/FS103-derivation.md` l. 86)".
+
+**No draft:** `CLAUDE.md` § The aim, link 3 ("Density cannot give six …") is worded without MR already and stays true.
+
+### 7.3 Predictions scored
+
+| prediction | registered | outcome |
+|---|---|---|
+| P-DENS | 0.97 | **met** — derived as posed and at a wider class |
+| P-INV | 0.95 | **met** — with equality, for every `K`-invariant connection set |
+| P-ONE | 0.90 | **met** — and it reads the rigidity theorem itself, as registered |
+| P-HOM | 0.85 | **met** — both directions, two routes to the cross terms |
+| P-K | 0.95 | **met** — the chain at `ℚ(√3,√11)` stops at Theorem 2.3 alone |
+| Poros's (the stub): DENS 0.95, INV 0.90, ONE 0.85, HOM 0.60 | | all four landed; the card's two falsifiers did not fire (no step uses `Σ p_i = 1` but the label choice; `f(n)` is the infimum bounded) |
+
+Five of five is no measure of calibration: mine were written after a first pass through the routes. **G92's killing test**
+(widened forms failing on attack more often than they hold): three widenings attempted — C133-DENS-CLASS, C133-INV-CLASS,
+C133-PAIR — three held; an instance for G92, and for its *Do*: each posed statement named a class (every `x`; the unit
+distance; a graph `H`) that its argument never consumed.
+
+### 7.4 The look-back
+
+- **Could it have been foreseen?** Yes: it is row 129's fractional local–global principle `α₁(F²) = max(m₁(ℝ²), sup_v r_v)` at
+  the one field with no stable place, and the release proves the rigidity that field needs.
+- **What does it imply** (drawn, none entered beyond those marked): (i) with `[AmbrusEtAl2023]`'s bound, finite unit-distance
+  graphs with algebraic coordinates and fractional chromatic number above `4.0487 − ε` exist, against the best explicit `4.0007`
+  — existence only; (ii) the averaging bound `m₁(ℝ²) ≤ α(G)/|G|`, with no Fourier analysis, is exact in the limit over finite
+  graphs, so `[DuczVarga2026]`'s "Fourier-free" route can in principle reach any true bound on `m₁`; (iii) `χ_f(ℝ²)` is a
+  measurable quantity, and Fisher–Ullman's assertion that `[Johnson1996fcn]` Question 5 asks about is proved (C133-CHIF);
+  (iv) the same equality for any countable set of algebraic distances at once (C133-ALG's *not claimed* line: the argument
+  reads the distance only through `K`, but no entry is written); (v) every pair-constraint labelling problem of the plane at
+  algebraic distances is decided by its measurable form (C133-PAIR).
+- **Is it the reason?** The reason is in one line of F6: for a nonnegative class, `0 = ⟨p, T_u p⟩ + ⟨b, T_u b⟩` with the first
+  term nonnegative, so the only way a finite graph could beat every measurable set is a rotation-invariant wild spectral
+  measure with a negative coefficient at the unit vectors — which is what a number field's residue colouring supplies
+  (`ℚ(√3,√11)`) and what the algebraic plane cannot.
+- **Is any sentence about it larger than it?** "With no hypothesis" means: with no hypothesis of this project's (no MR); it
+  rests on an outside theorem kernel-checked in its own library and read here as a statement. The grade is [hand], one mind,
+  for everything in stages 3–6.
+- **Not answered:** whether a three-point constraint transfers (the structural form's other half); whether the supremum of
+  `χ_f(G)` is attained by a finite graph (`[Johnson1996fcn]` Question 2); the triangle-free form without MR (FS103-F-TF stays
+  given MR: the algebraic plane has triangles); anything at a number field.

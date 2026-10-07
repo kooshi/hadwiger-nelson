@@ -1,0 +1,48 @@
+entry lint
+  claim C133-DENS-CLASS: minds 1
+  claim C133-DENS-CLASS: prior art known
+  claim C133-DENS: governed by C133-DENS-CLASS (hand, minds 1)
+  claim C133-DENS: minds 1
+  claim C133-DENS: prior art known
+  claim C133-INV-CLASS: minds 1
+  claim C133-INV-CLASS: prior art known
+  claim C133-INV: governed by C133-INV-CLASS (hand, minds 1)
+  claim C133-INV: minds 1
+  claim C133-INV: prior art known
+  claim C133-EASY: minds 1
+  claim C133-EASY: prior art known
+  claim C133-PER: minds 1
+  claim C133-PER: prior art known
+  claim C133-DP: minds 1
+  claim C133-DP: prior art known
+  claim C133-CHIF: governed by C133-PER (hand, minds 1)
+  claim C133-CHIF: minds 1
+  claim C133-CHIF: prior art known
+  claim C133-ALG: minds 1
+  claim C133-ALG: prior art partly
+  claim C133-ONE: governed by C133-ALG (hand, minds 1)
+  claim C133-ONE: governed by C133-INV-CLASS (hand, minds 1)
+  claim C133-ONE: governed by C133-EASY (hand, minds 1)
+  claim C133-ONE: governed by C133-CHIF (derived from, minds 1)
+  claim C133-ONE: minds 1
+  claim C133-ONE: prior art partly
+  claim C133-FN: governed by C133-ONE (derived from, minds 1)
+  claim C133-FN: minds 1
+  claim C133-FN: prior art partly
+  claim C133-PAIR: minds 1
+  claim C133-PAIR: prior art partly
+  claim C133-HOM: governed by C133-PAIR (hand, minds 1)
+  claim C133-HOM: minds 1
+  claim C133-HOM: prior art partly
+  entries: 13  derived: 13  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    dens-direction: printed 'True'; with the fault planted ('upper' → 'lower') it printed 'False' — it fires
+  ok    dens-model: printed 'True'; with the fault planted ('2' → '19/10') it printed 'False' — it fires
+  ok    inv-spindle: printed '7 11 2'; with the fault planted ('11' → '13') it printed '7 5 5' — it fires
+  ok    chif-count: printed '16 [16]'; with the fault planted ('halfopen' → 'closed') it printed '16 [16, 23, 28, 33]' — it fires
+  ok    pair-polarisation: printed 'True'; with the fault planted ('complex' → 'real') it printed 'False' — it fires
+  ok    pair-converse-support: printed 'True'; with the fault planted ('1' → '3') it printed 'False' — it fires
+  controls: 6  fired on their faults: 6
+GATE: PASS (0 failures, 0 warnings)

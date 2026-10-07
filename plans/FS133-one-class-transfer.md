@@ -67,7 +67,7 @@ derived first because the `χ_f` clauses rest on them at one mind: the periodisa
 control is registered against the chain (G60). (iv) C133-HOM is attempted at the class its argument carries — pair constraints at
 algebraic distances (G92). (v) Two drafts are owed at the trace: G60's and G80's sentences.
 
-## §PA — the prior-art gate (opening pass, 2026-10-07 03:00–03:20 UTC; a second pass is owed before the report)
+## §PA — the prior-art gate (opening pass, 2026-10-07 03:00–03:20 UTC; the second pass, 2026-10-07 03:25 UTC, is the record's § 7.1: zbMATH still down, arXiv unchanged)
 
 **PA.1 The object in its disciplines' words.** *Discrete geometry / extremal combinatorics:* "fractional chromatic number of the
 plane", "finitary fractional chromatic number `χ_f,0`", "independence ratio of unit-distance graphs", Erdős's `f(n)`, "density of
