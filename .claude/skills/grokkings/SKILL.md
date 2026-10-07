@@ -773,9 +773,7 @@ writer.*
   row 44): the arithmetic hypothesis is the price of staying in the field. Either is this file's open structural question at six
   instead of five. **The aiming statement, unconditional:** six hides nowhere in the arithmetic — it hides only in the gap between
   `L(F)` and `χ(F²)` at `L(F) ≥ 6`, where `χ(F²) ≥ 5` through MR (row 123), where every ceiling instrument this project owns (residue maps, additive colourings, the hexagonal 7) is silent;
-  FS-64 is the one proposal for an instrument that is not. **Given MR the plane sits at the gap's top** (row 128): S_nf (no real number field has `χ(F²) = 6`) ⟹ `χ(ℝ²) ≠ 6`, and row 128 states its exact form over totally real fields — never S ⟺ W. Characters are shut out of that gap at the exposed fields: given CLG they need 8, 17, 22 colours at ℚ(√167), K(√7), de Grey's field (row 101). **Warning:** "six is skipped" is **not**
-  evidence for seven — it is equally consistent with every field being `≤ 5` and `χ(ℝ²) = 5`. What forces seven is the
-  conjecture's bold form at `K(√7)` (G48), never the skipping. **The norm reading** [reading]: every chromatic number this
+  FS-64 is the one proposal for an instrument that is not. **Given MR the plane sits at the gap's top** (row 128): S_nf (no real number field has `χ(F²) = 6`) ⟹ `χ(ℝ²) ≠ 6`, and row 128 states its exact form over totally real fields — never S ⟺ W. Characters are shut out of that gap at the exposed fields: given CLG they need 8, 17, 22 colours at ℚ(√167), K(√7), de Grey's field (row 101). **Warning:** "six is skipped" is **not** evidence for seven. Since `[OAIMath2026]` (`χ(ℝ²) ≥ 6`) the statement W reads `χ(ℝ²) = 7`, and S (no field's plane is six-chromatic) still does not follow from it; what would force seven is a proof, never the skipping. **The norm reading** [reading]: every chromatic number this
   project has ever pinned for a plane over a coefficient structure is **2, 3, 4, 5 or 7** — exactly the integers `≤ 7` that
   are `a² + b²` or `a² + ab + b²` — and **6 is the smallest integer that is neither**, because `6 = 2·3` with 2 inert in the
   Eisenstein integers and 3 ramified. Mechanism where it has one: a coset colouring's classes are cosets of a rotation-stable
@@ -1144,8 +1142,7 @@ writer.*
   colours; covering dimension forces an essential loop; fibres over edge midpoints are continua with Sokolov–Voronov's
   exclusion. No curve, perimeter or saturation is used. *Do: when a route stalls at making a colouring a map (route M's
   REG-J′, curved pencils, integer radii), ask first whether its consumer reads arcs or only a point with interface continua
-  and limiting directions; if the latter, the statement to prove is local finiteness of cyclic centres and nothing about
-  arcs. Killing test of the six-colour reading: a consumer in rows 134–138 or 145–150 that cannot be restated for continua.*
+  and limiting directions; if the latter, the statement to prove is about the cyclic centres and nothing about arcs: that they exist needs no hypothesis (FS-132, C132-CORES-FREE), and a centre's continua need that centre isolated among them (C132-EXT-DISC; finiteness on a disc of radius above 1 suffices and is not necessary). Killing test of the six-colour reading: a consumer in rows 134–138 or 145–150 that cannot be restated for continua.*
 * **G95 — Tightness is not regularity: the palette bound and the local finiteness of vertices are false under local slack.
   [hand, one mind (EXT-OAI2 § 4.3; entries `EXT-OAI2-SLACK7-L`, `EXT-OAI2-SLACK7-P`)]** In the hexagonal seven-colouring,
   slack at a vertex admits accumulating islands and three-colour stripes along a unit circle. So a statement of the form

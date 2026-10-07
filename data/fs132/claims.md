@@ -89,4 +89,35 @@ the death of every such cycle — which are what the answer is made of and are n
   gives it. **One reading of the stub, the deriver's, adopted**: the existence form's "cyclic centre whose label cycle has length
   four" is read as an extracted centre with a cycle of length four — the extraction returns some centre, not a prescribed one,
   and its cycle need not consist of edges of that centre's own transition graph.
+- **2026-10-07 (after FS132-E1's Stage 3, commit `eefdc6b1`; FS-132 inventory item 3): the first claim is derived, [hand], one
+  mind, at two forms wider than posed, which enter the list** — C132-EXT and C132-CORES as posed are their instances at radius 8:
+
+> derivation: C132-EXT-DISC
+> — source: plans/FS132-E1-derivation.md Stage 3
+
+>   statement: let k ≥ 1 be an integer, c a weak measurable k-colouring of the plane (`[OAIMath2026]` Definition 1.2), 𝓛 the set of its cyclic centres (the points x whose transition graph Γ_x, Definition 6.1 read with k labels, contains a cycle), and D a closed disc of radius greater than 1 with 𝓛 ∩ D finite; then there are a point x of 𝓛 in the interior of D, an integer ℓ with 3 ≤ ℓ ≤ k, distinct labels i_0, …, i_{ℓ−1}, a radius ρ > 0 with B̄(x, ρ) ⊂ D and 𝓛 ∩ B̄(x, ρ) = {x}, and for each j modulo ℓ a compact connected set K_j ⊂ B̄(x, ρ), a unit vector v_j and points q_{j,m} of K_j other than x, such that (1) x ∈ K_j and K_j meets the circle ∂B(x, ρ); (2) q_{j,m} → x and (q_{j,m} − x)/|q_{j,m} − x| → v_j as m → ∞; (3) H_{i_j} ∩ Δ(K_j) = ∅ and H_{i_{j+1}} ∩ Δ(K_j) = ∅, where H_i is the closed essential support of the class of label i and Δ(K) is the set of z with min over q ∈ K of |z − q| below 1 and max over q ∈ K of |z − q| above 1; (4) K_j ⊂ H_{i_j} ∩ H_{i_{j+1}}; (5) i_j i_{j+1} is an edge of Γ_x
+> — source: plans/FS132-E1-derivation.md Stage 3
+
+> derivation: C132-CORES-FREE
+> — source: plans/FS132-E1-derivation.md Stage 3
+
+>   statement: for every integer k ≥ 1 and every weak measurable k-colouring of the plane, every closed disc of radius greater than 1 contains a cyclic centre
+> — source: plans/FS132-E1-derivation.md Stage 3
+
+> derivation: C132-CONFINE
+> — source: plans/FS132-E1-derivation.md Stage 3
+
+>   statement: let K be a compact connected set and H a set with H ∩ Δ(K) = ∅; then for every z ∈ H, either K ⊂ B̄(z, 1) or K ∩ B(z, 1) = ∅; in particular, if x ∈ K and z ∈ H with |z − x| < 1 then K ⊂ B̄(z, 1), and if x ∈ K, z ∈ H, |z − x| = 1 and (q_m) is a sequence in K ∖ {x} tending to x with (q_m − x)/|q_m − x| → v, then v·(z − x) ≥ 0 when K ⊂ B̄(z, 1) and v·(z − x) ≤ 0 when K ∩ B(z, 1) = ∅
+> — source: plans/FS132-E1-derivation.md Stage 3
+
+  **C132-EXT-DISC** is the extraction on any closed disc of radius above 1 with finitely many cyclic centres, at every number
+  of colours, with two clauses the manuscript does not state: (4) each continuum lies in both its labels' supports; (5) each
+  edge of the returned cycle is an edge of the centre's own transition graph. **C132-CORES-FREE** needs no hypothesis on the
+  centres. **C132-CONFINE** is a relay-result, the dictionary's replacement for "the same tile". **Card 2 is answered at the
+  level of the argument** (that record, § Card 2, answered on the way): what the extraction reads of the centres is neither
+  "finite" nor "closed and totally disconnected" — it is zero length, and isolation of the one essential centre; finiteness is
+  sufficient and not necessary; a weaker sufficient hypothesis is a sketch there, not a claim here. **The relation asked at
+  the first dated line**: one way, derived (clause (5)); the other way open, and false for the argument's own selection.
+  *Not claimed*: each entry's own line; in particular nothing supplies the finiteness hypothesis for an arbitrary
+  six-colouring, and nothing says a cycle longer than three is ever returned.
 
