@@ -1,0 +1,3 @@
+card lint
+  FAIL  no question card and no `no question:` line — the turn has ended in advice
+GATE: FAIL (1 failure, 0 warnings)
