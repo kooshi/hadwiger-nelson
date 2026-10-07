@@ -412,3 +412,144 @@ control: partners-held
 
 **Predictions scored.** P4, first half — **met** (0.85): derived as restated, resting on C124-BOTH. Second half —
 withdrawn (§ 3.0 item 4). The asking lane's "C-PARTNERS 0.9" — met.
+
+
+## Stage 5 — SAVED: C136-STOP — four held stops, each excluded by its own pair's tiles; the flower also by germs
+
+*Every entry of this stage is an exclusion of the weak six-colourings that keep **named open sets of one held object at
+their labels**. None is a statement about every weak six-colouring of a disc; **none fixes or bears on the value of the
+chromatic number of the plane**; no weak six-colouring is known to have the named sets (G97 as amended). Each names the
+held map entry it restates and what is new beyond it.*
+
+derivation: C136-STOP-FLOWER
+  statement: There is no weak six-colouring of an open set that contains the point (√3, 0) and the six tiles S5, Q5, G5, S0, Q0, G0 of FS116-Y2-SIXFRAG, and that gives almost every point of each of these tiles its label in that fragment (5, 1, 3, 0, 2, 4).
+  uses only: C136-TABLE with the two members e(−30°), e(30°) and the six tiles as their families; that each tile is a connected open set with its member an end point of one of its boundary pieces; exact signs in ℚ(√3, √7) (control `stop-exact`): (√3, 0) is one unit from both members, the members are 1 apart, and each tile has a point of its boundary strictly on the needed side of the unit circle about (√3, 0) — S5, Q5, G5 strictly outside, S0, Q0, G0 strictly inside; that the six labels are distinct and are all the labels
+  not claimed: any exclusion of a weak six-colouring that does not keep these six tiles — in particular no statement about every weak six-colouring of a disc and no value of the chromatic number of the plane; that a weak six-colouring has these pieces; the fragment's other colouring pattern (FS116-Y2-SIXOFF's pattern B); the other five far vertices except through the fragment's rotation by 60°, which permutes its labels (not checked by this job beyond j = 0); anything at seven
+  argument: § Argument — a cell with every label barred
+  verdict: derived
+  grade: derived from: C136-TABLE
+  minds: 1
+  model: the fragment itself, which is cut at radius 3/2 and holds no neighbourhood of (√3, 0); the cell with every label barred is the one inside the unit circle about e(−30°) and outside that about e(30°) — the directions (240°, 300°) of FS116-Y2-SIXOFF's Step 3
+  prior art: known for maps: FS116-Y2-SIXOFF (`plans/FS116-derivation.md` l. 392; [hand], one mind: no valid fragment with the six straight sectors and the six lenses holds radius √3, either pattern); for every weak six-colouring keeping six tiles at two ring points: here; print: de Grey's and Gibbs's six-sector picture and "what next?" ([Polymath16threads] [08.17]–[08.18], by FS116-Y2's reading, not read by me) — no statement of a stop found (plan §PA; second pass `data/fs136/e1/pa/zb2.out`)
+  handoff: de Bruijn — only with a consumer: six instances of C124-TYPE with explicit points in ℚ(√3, √7)
+
+**Class**: one held family — six tiles of FS116-Y2-SIXFRAG at two ring points, at that fragment's labels; nothing assumed
+about the four other sectors, the other lenses, or anything else. **What is new beyond FS116-Y2-SIXOFF**: the class of
+colourings (weak measurable, no map) and the smallness of what is kept (six tiles, not the flower); narrower in one way —
+one pattern, the fragment's own. **The pair's own tiles suffice** (class L1 of the reading): `e(−30°)` separates — `2`
+inner-pure, `1` outer-pure — and the cell inside its circle and outside the other's has no label.
+
+derivation: C136-STOP-FLOWER-GERMS
+  statement: For every r with 0 < r ≤ 1/4 there is no weak six-colouring of an open set that contains the point (√3, 0) and the parts of the tiles S5, Q5, G5 of FS116-Y2-SIXFRAG within distance r of e(−30°) and the parts of its tiles S0, Q0, G0 within distance r of e(30°), and that gives almost every point of each of these six parts its label in that fragment.
+  uses only: C136-TABLE as in C136-STOP-FLOWER; that for r ≤ 1/4 each part is connected (S5 and S0: the intersection of two discs; the four others: one of the four wedges cut from B(member, r) by two unit circles that cross at the member and next meet at distance at least 1 from it); the witnesses, with t = r/2 — for S5 the point e(−30°) + t e(180°), at squared distance 1 + t² + √3 t from (√3, 0); for Q5 any point, since Q5 lies in the open unit disc about e(−90°), which is 2 from (√3, 0); for G5 the point e(−30°) + t e(300°) on the common tangent, at squared distance 1 + t²; for S0 the point e(30°) + t e(270°), at 1 + t² − t; for Q0 any point, since Q0 lies in the closed unit disc about (√3, 0); for G0 the point e(30°) + t e(30°), at 1 + t² − t
+  not claimed: what C136-STOP-FLOWER does not claim; a radius of exclusion bounded below as r tends to 0 — the ball about (√3, 0) on which the cell is empty has radius of the order of r², because G5's witness is at depth about t²/2
+  argument: § Argument — the flower's germs, and what "second order" costs
+  verdict: derived
+  grade: derived from: C136-TABLE
+  minds: 1
+  model: r = 1/4 gives parts of the fragment's own tiles; the tangent-ray witness at t = 1/4 is checked exactly (control `stop-exact`, its last line: in G5, strictly outside the unit circle about (√3, 0)); moved to the direction 330° the point is inside that circle (the fault)
+  prior art: partly: FS116-Y2-SIXOFF's Step 3 has this point ("whose points e(−30°) + t·e(300°) … give |x − y|² = 1 + 2s·cos(χ − 30°) + t² + O(st + s²) > 1 at t = 2√s … the horn between the tangent circles", one mind, for maps); as a witness for C124-TYPE in the class of weak colourings: here
+  handoff: none — subsumed for the kernel lane by C136-STOP-FLOWER's form; it is the answer to "does the lemma reach the flower"
+
+**The claim's content, answered.** The stub: "whether the first-order lemma reaches the flower's far vertex is this
+claim's content"; its failure clause: "If C-STOP's flower needs second order, the first-order lemma has a named limit".
+**The lemma reaches it, and it is not a first-order lemma.** C124-TYPE reads a point of the piece strictly off the unit
+circle; it reads no cone. With the fragment's tiles as they are the witnesses are corners of the tiles. With germs of any
+size `r` the one witness that is second order — a point of the gap tile on the tangent common to the unit circles about
+`e(−90°)` and `(√3, 0)` — is still a point of the piece, at depth `≈ r²/8`; what second order costs is the size of the ball on
+which the conclusion holds (`≈ r²`), never the conclusion. A calculus that reads cones at the member (the map class's side
+cones) sees "tangent" there and cannot decide; that is a limit of cones, not of the lemma.
+
+derivation: C136-STOP-DISK
+  statement: On [Polymath2021]'s disk as rebuilt in `tools/fs112_yb2_objects.py`, let x and y be its vertices nearest (−1.5, 0.16246) and (−0.80902, 1.11352), p its vertex nearest (−0.5, 0.16246), and w = x + y − p. There is no weak six-colouring of an open set that contains w and the six tiles R1, S1, W1, P0, S0, T1 of that rebuild, and that gives almost every point of each of these tiles its colour in the disk.
+  uses only: C136-TABLE with the members x, y and the six tiles — the three at x, the three at y — as their families; that each tile is a connected open set with its member an end point of one of its boundary pieces; exact signs in the disk's tower (control `stop-exact`): |w − x| = |w − y| = 1, 0 < |x − y| < 2, |w − p|² = (3 + √5)/2, and each of the six tiles has a point of its boundary strictly inside the unit circle about w; that the six colours are distinct and are all the labels
+  not claimed: any exclusion of a weak six-colouring that does not keep these six tiles; no statement about every weak six-colouring of a disc and no value of the chromatic number of the plane; the nine other rim points at that distance and the ten at 1.764 except by the disk's five-fold symmetry and mirror, which permute its colours (read in floats, class L0 at all twenty: § 2.2; not checked exactly); which of FS112-DISK-RIM's names C_k, D_k this point carries (not matched by me); anything at seven
+  argument: § Argument — a cell with every label barred
+  verdict: derived
+  grade: derived from: C136-TABLE
+  minds: 1
+  model: the disk itself, whose rim passes through w; the cell with every label barred is the one outside both members' unit circles
+  prior art: known for maps: FS112-STOP and FS112-DISK-RIM ("exactly the ten C_k, D_k, each with an open colourless cone of width 108°"; two minds and one), FS114-Y-PENT ("no valid map agrees with the disk near B_k, Z^R_k, Z^L_{k+1}"; two minds, blind); in measure it is an instance of C124-FORCED-PIECES read backwards — two three-label members with disjoint triples, neither separating — which FS-124 did not run on the disk; print: [Polymath2021] Fig. 10 gives the disk and no reason for its radius (by FS112-CAL-DISK's reading)
+  handoff: de Bruijn — only with a consumer: six instances of C124-TYPE with explicit points in the disk's tower
+
+**Class**: one held family — six tiles of the disk at two three-label vertices. **What is new beyond the held entries**: the
+class of colourings; in method nothing — it is the count (class L0), C124-FORCED-PIECES's contrapositive on whole tiles.
+
+derivation: C136-STOP-STRIP
+  statement: There is no weak six-colouring of an open set that contains the point (1/4, √15/4 + √3/2) and the six tiles T_{−1}, T_0, U_{−1}, T_1, U_0, U_1 of FS-112's strip, and that gives almost every point of each of these tiles the strip's label.
+  uses only: C136-TABLE with the members (−1/4, √15/4) and (1/2, √3/2) and the six tiles as their families; exact signs in ℚ(√3, √5) (control `stop-exact`): the point is one unit from both members, and each of the six tiles has a point of its boundary strictly inside the unit circle about it; that the six labels are distinct and are all the labels
+  not claimed: what C124-EDGE-CLOSED does not claim; that this statement contains C124-EDGE-CLOSED or is contained in it — that entry keeps three arches and the parts of T_0, T_1, T_2 below the line y = √15/4, uses three members and does not keep T_{−1}; this one keeps six whole tiles at two members; a value of the chromatic number of the plane
+  argument: § Argument — a cell with every label barred
+  verdict: derived
+  grade: derived from: C136-TABLE
+  minds: 1
+  model: the strip itself, which stops at the point; the cell with every label barred is the one outside both members' unit circles
+  prior art: known: C124-EDGE-CLOSED (`plans/FS124-derivation.md` § 4; [hand], one mind) for another six kept sets at the same point; for maps FS112-EDGE (two minds, one blind) and FS114-Y-STRIPK6 (two minds, blind: "by FS112-N3-COR3 no valid map contains these six tiles, under any colouring") — these are the same six tiles as FS114-Y-STRIPK6's up to the strip's translation, there under every colouring, here at the strip's own
+  handoff: none — the stub's control for this stage ("the strip's (1/4, √15/4 + √3/2) must reproduce C124-EDGE-CLOSED"): it does, by two members where that entry uses three
+
+**Class**: one held family. **What is new**: against C124-EDGE-CLOSED, that the pair's own six whole tiles suffice (class
+L0) — the map statement FS114-Y-STRIPK6 at the strip's colouring, in measure. Nothing else.
+
+derivation: C136-STOP-BOWTIE
+  statement: There is no weak six-colouring of an open set that contains the point (√3, 0) and the eight tiles t1, W, L1, T1, V, L2, T2, V′ of FS114-Y2-BOWTIE (the names of `tools/fs114_y2_k1.py`: t1, W, L1, T1, V have q₁ = (√3/2, 1/2) as an end point of a boundary piece, and t1, W, L2, T2, V′ have q₂ = (√3/2, −1/2)), and that gives almost every point of each of these tiles its colour in that fragment.
+  uses only: C136-TABLE with the members q₂, q₁ and the tiles named by the check (control `stop-exact`: "kept tiles: L2 T2 V' W t1 L1 T1 V W t1") as their families; exact signs in ℚ(√3): (√3, 0) is one unit from both, they are 1 apart, and the witnesses bar every label on the cell inside the unit circle about q₂ and outside that about q₁, and on its mirror cell
+  not claimed: any exclusion of a weak six-colouring that does not keep these tiles; a value of the chromatic number of the plane; that fewer tiles suffice (not looked for); the five other points at distance √3 that the reading classes L1 (floats)
+  argument: § Argument — a cell with every label barred
+  verdict: derived
+  grade: derived from: C136-TABLE
+  minds: 1
+  model: the fragment itself, which holds the closed disc of radius 3√3/5 about p and no neighbourhood of (√3, 0)
+  prior art: known for maps: FS114-Y3-RSTOP ("no valid fragment (Siamese pairs allowed) that agrees with it near q1 and q2 contains a neighbourhood of r = q1 + e(330°) = (√3, 0)"; two minds, YB2 with "the stop is the cone (−60°, 60°) at r") — the same point, the same two members, there for maps; that r is the point across of a covering pair on the ring of p: the asking lane's inference (`plans/POROS-2026-10-07-fs124-round2.md`, addendum), confirmed in Stage 2
+  handoff: none — the fourth held stop, for the card's falsifier
+
+**Class**: one held
+family. **What is new beyond FS114-Y3-RSTOP**: the class of colourings.
+
+### Argument — a cell with every label barred
+
+Let `c` be a weak six-colouring of an open set containing `w` and the kept tiles, with their labels almost everywhere. Each
+kept tile is a connected open set almost all of one label, with a member `z ∈ {x, y}` in its closure: a piece at `z`; the
+kept tiles at `x` and at `y` are two families. A point `v` of a tile's boundary with `|v − w| < 1` has points of the tile
+near it, so the tile has a point strictly inside `S(w)` and is not outer at `w`; with `|v − w| > 1` it is not inner. By
+C136-TABLE almost every point near `w` inside `S(x)` has a label that is not the label of any kept tile at `x` that is not
+inner, and so on for the three other sides. In the named cell the witnesses of control `stop-exact` leave no label: each of
+the six is the label of a kept tile at `x` that is not on the cell's side of `S(w)` there, or of one at `y`. The cell meets
+every ball about `w` in a non-empty open set (`0 < |x − y| < 2`). So a set of positive measure has none of the six labels. ∎
+
+### Argument — the flower's germs, and what "second order" costs
+
+Write `x = e(−30°)`, `y = e(30°)`, `w = (√3, 0)`, so `w − x = e(30°)`, `w − y = e(−30°)`; `D_0`, `D_1`, `D_2` the closed unit
+discs about `p`, `e(−90°)`, `e(30°)`. *The parts are connected.* `S5 ∩ B(x, r)` is `B(p, 1) ∩ B(x, r)` (the sector's edges are
+`1/2` from `x`): convex. Two unit circles crossing at `x` whose other common point is at least 1 from `x` cut `B(x, r)` into
+four connected wedges; `Q5 ∩ B(x, r)` is the wedge inside `S(e(−90°))` and outside `S(p)`; `G5 ∩ B(x, r)` is the wedge outside
+`D_1` and `D_2` — a point `x + s e(δ)` with `s ≤ 1/4` outside both has `δ ∈ (−67.2°, 7.2°)`, hence `|x + s e(δ)|² = 1 + s² +
+2s cos(δ + 30°) > 1`, outside `D_0` too. The three parts at `y` are the mirror images of `S5 ∩ B(x, r)` and `G5 ∩ B(x, r)`, and
+the wedge of `B(y, r)` inside `S(e(−30°))` and outside `S(p)`. *The witnesses* (`t = r/2`). `S5`: `x + t e(180°)` has
+`|·|² = 1 + t² − √3 t < 1` and `|· − w|² = 1 + t² + √3 t > 1`. `Q5` lies in the open unit disc about `e(−90°)`, at distance 2
+from `w`: every point of it is strictly outside `S(w)`. `G5`: `x + t e(300°)` is in the wedge (`δ = −60°`) and
+`|· − w|² = |−e(30°) + t e(300°)|² = 1 + t²`. `S0`: `y + t e(270°)` has `|·|² = 1 + t² − t < 1` and `|· − w|² = 1 + t² − t < 1`.
+`Q0` lies in the closed unit disc about `w` — for `z = ρ e(θ)` in the lens with `ρ ≥ 1`, `|z − w|² − 1 = ρ² − 2√3 ρ cos θ + 2`
+is convex in `ρ` and is `≤ 0` at `ρ = 1` (`|θ| ≤ 30°`) and on the lens's far boundary (a point `e(∓30°) + e(φ)` of it with
+`|z| ≥ 1` has `|e(φ) − e(±30°)| ≤ 1`) — and is open, so every point of it is strictly inside. `G0`: `y + t e(30°)` is outside
+`D_0` and the unit discs about `e(−30°)` and `e(90°)` (squared distances `(1 + t)²`, `1 + t + t²`, `1 + t + t²`) and has
+`|· − w|² = 1 + t² − t < 1`. So in the cell inside `S(x)` and outside `S(y)`: `5`, `1`, `3` are labels of pieces at `x` that
+are not inner, `0`, `2`, `4` of pieces at `y` that are not outer; the argument above concludes. The radius C124-TYPE gives
+is half the least depth, `(√(1 + t²) − 1)/2 ≈ r²/16`. ∎
+
+control: stop-exact
+  of: C136-STOP-FLOWER — exact, in each object's own tower: the point across of the named pair is one unit from both members, the members are less than 2 apart, its squared distance from the centre is 3, φ², φ⁴/2 and 3; every tile with a member as an end point of a boundary piece, with witnesses among exact points of its boundary strictly inside or outside the unit circle about the point; the cells in which every label is shown barred; and the horn's witness on the tangent ray. The fault reads the point moved by (1/50, 0), and a point of the direction 330° for the horn
+  run: python3 ../data/fs136/e1/stop_check.py flower disk strip bowtie horn | grep -v '^  '
+  expect: flower: p=(0.00000,0.00000) x=(0.86603,-0.50000) y=(0.86603,0.50000) w=x+y-p=(1.73205,0.00000)
+    flower: kept-tiles=8 labels=6 cells-proved-empty=in/out EXCLUDED
+    disk: p=(-0.50000,0.16246) x=(-1.50000,0.16246) y=(-0.80902,1.11352) w=x+y-p=(-1.80902,1.11352)
+    disk: kept-tiles=6 labels=6 cells-proved-empty=out/out EXCLUDED
+    strip: p=(0.00000,0.00000) x=(-0.25000,0.96825) y=(0.50000,0.86603) w=x+y-p=(0.25000,1.83427)
+    strip: kept-tiles=6 labels=6 cells-proved-empty=out/out EXCLUDED
+    bowtie: p=(0.00000,0.00000) x=(0.86603,-0.50000) y=(0.86603,0.50000) w=x+y-p=(1.73205,0.00000)
+    bowtie: kept-tiles=10 labels=6 cells-proved-empty=in/out,out/in EXCLUDED
+    horn: q=e(-30)+t*e(300), t=1/4: outside-S(p)=True outside-S(e(-90))=True outside-S(e(30))=True inside-the-cut=True strictly-outside-S(w)=True HORN WITNESS OK
+  fault: python3 ../data/fs136/e1/stop_check.py flower disk strip bowtie horn --fault | grep -v '^  '
+
+**Predictions scored.** P5 — the flower: **met** (0.9, registered as not blind); the disk: **met** (0.75). The asking
+lane's "the disk's rim by the first-order lemma 0.7" — met; "the flower's far vertex by the first-order lemma alone 0.35" —
+**met against its odds**, and for a reason that corrects the phrase: the lemma is not first order.
