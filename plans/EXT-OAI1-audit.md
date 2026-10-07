@@ -575,3 +575,177 @@ that no map `ℂ → Fin 5` separates every unit pair, which in this row's form 
 conditional on their statement, added nowhere); the theorem this library holds unconditionally is still `5 ≤ χ(ℝ²) ≤ 7`.*"
 
 Whether anything of theirs is cited, imported or built on here is Kooshi's decision.
+
+## Stage 5 — SAVED: the release's own check, as far as it was run here (written after stages 6 and 7)
+
+**The comparator was not run.** It needs three programs this machine does not have (`comparator`, `lean4export`, `landrun`);
+the release's instructions name them and pin no version or commit (`lean/ComparatorChallenges/README.md`, quoted whole in stage
+1). Kooshi's word, relayed by the coordinator: allowed after an audit of what each does, and not before. **That audit is not
+done in this job** (budget); nothing was downloaded. What the comparator checks, by the release's configuration and this
+project's notes on the tool, and who did each here:
+
+| the comparator's check | done here by | how |
+|---|---|---|
+| the solution's theorem has the challenge's statement, and the listed definition is the challenge's | **my instrument**, with the kernel behind two of its three legs | stage 4: canonical dumps from the two environments byte-identical, control fires; and at the kernel, the challenge's text closed by the solution's theorem and `@AuditChallenge.ProperColoring = @OAI.EuclideanFiveColor.ProperColoring := rfl`. Not the tool's `lean4export` comparison |
+| the axioms are within `permitted_axioms` | **Lean** (`#print axioms`, `Lean.collectAxioms`) | stage 4, with the planted-`sorry` control |
+| the solution replays in the kernel | **`leanchecker`, for the cone's own declarations only** | below |
+| the builds run sandboxed (`landrun`) | nobody | — |
+| a second kernel (`nanoda`) | nobody; the release's configuration switches it off (`"enable_nanoda": false`) | — |
+
+**The kernel replay of the cone.** `leanchecker` (shipped in the v4.34.1 toolchain), one module named per invocation,
+sequentially, `LEAN_NUM_THREADS=2`, under `slot.py --mem 16 --cpus 2` (`data/external/oai1/replay_cone.sh`; log
+`replay-cone.log`). First a single small module, read before anything else: `OAI.Geometry.PlaneColoring.Coloring`, exit 0,
+6.4 s, peak resident memory 6.3 GB (`replay-one.log`). Then all 70: **`REPLAY DONE modules=70 ok=70 failed=0`**, 477 s in all,
+the slowest 9 s. Each invocation builds a kernel environment from the module's imports as stored and re-checks that module's own
+declarations; so every declaration of the release in the cone (3,520 of them reach the headline, `audit/Pieces.out`) has now
+been checked by the kernel twice on this machine — at compilation and at replay — and Mathlib's not at all.
+
+**By nobody here:** a `--fresh` replay of the solution module, which would re-check Mathlib's declarations too. It cannot
+checkpoint, and `LEAN.md` keeps that replay off this machine; the per-module form (each Mathlib module named, one line of log
+each, resumable) is the shape that would fit a slot — about 8,900 invocations at the 6 s and 6.3 GB measured above.
+
+**A finding about the tool** (the coordinator has logged it): `leanchecker` at v4.34.1, given no module, replays the whole
+search path on every thread, and an unknown flag such as `--help` does not stop it; it reached 119 GB here (stage 4, the
+incident). It is never run bare.
+
+## Stage 8 — SAVED: the import, as a planner hands it to an implementer (after Kooshi's second and third words)
+
+*Kooshi, relayed by the coordinator and filed in `data/external/EXT-OAI1-request.md`: "You may use their proof as any other
+literature. Cite it, build on it, let's use it to slingshot us past anyone else working on this problem."; and "port or import:
+let's import and adopt parts piecemeal if needed."*
+
+### The skeleton, checked
+
+`data/external/oai1/audit/ImportSkeleton.lean` — `lake env lean` at this repository's pin under a slot, **exit 0**, one
+`sorry` (the leaf below). It is not a module of `Proofs`; the implementer's module would be
+`Proofs/HadwigerNelson/Outside/OAI158.lean`, namespace `HadwigerNelson.Outside.OAI158`, importing `Instances.Interval`,
+`Plane.YesLimit` and `Mathlib.Analysis.Fourier.AddCircle` (for `AddCircle.haarAddCircle`; without it the definition does not
+elaborate). The skeleton takes N-EASY as a hypothesis `hNEASY` in two theorems only because `Plane/YesLimit.olean` was not
+built in the main tree when it was checked; the implementer uses `Plane.chromaticNumber_plane_le_chiM0`
+(`Plane/YesLimit.lean:105`) and drops the binder.
+
+**The release's definitions, copied** (source: `lean/OAI/Geometry/PlaneColoring/Coloring.lean` at commit
+`adc7f1241b42e322a6451854ab7e4b4c146bf78a`, lines 7–8, 15–18, 27–29): `ProperColoring`, the instance `Fact (0 < 2*Real.pi)`
+(there global; here `scoped`, since an unscoped instance is permanent), `Angles := AddCircle (2*Real.pi)`,
+`angularMeasure := AddCircle.haarAddCircle`, `direction t := AddCircle.toCircle t`, `WeakColoring`.
+
+**Outside theorem H** — `axiom no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c`
+1. *Source*: `[OAIMath2026]` family 158, `lean/OAI/Geometry/PlaneColoring/Five.lean:124`,
+   `OAI.EuclideanFiveColor.no_proper_five_coloring`; manuscript Theorem 1 (`thm:main`).
+2. *Read-back*: by the kernel at the release's pin — `data/external/oai1/audit/ImportReadback.lean` (exit 0, standard three)
+   declares the same definition text in the same namespace, proves `@ProperColoring = @OAI.EuclideanFiveColor.ProperColoring`
+   by `rfl`, and closes this exact statement with the release's theorem. The definition lines of the two files are the same
+   lines (`diff`, exit 0). What is by reading: that the text means the same at v4.32.0 — the constants in it are `Complex`,
+   `Fin`, `Norm.norm`, `Complex.instNorm` (`norm z := √(normSq z)` at both tags, `Mathlib/Analysis/Complex/Norm.lean`),
+   subtraction, `1 : ℝ`.
+3. *Model*: none is asked — the statement has no hypothesis; `ProperColoring` itself is inhabited at seven
+   (`exists_properColoring_seven`, proved in the skeleton from row 33's upper end, standard three).
+4. *What rests on it*: `six_le_chromaticNumber_plane`, `chromaticNumber_plane_six_or_seven` (`6 ≤ χ(ℝ²) ≤ 7` in row 33's
+   form), `six_le_chiM0` (`6 ≤ χ_m⁰(ℝ²)`, FS-104's question, with N-EASY) — all proved in the skeleton.
+
+**Outside theorem T** — `axiom proper_to_borel_weak {k : ℕ} [NeZero k] {c : ℂ → Fin k} (hc : ProperColoring k c) :
+∃ d : ℂ → Fin k, Measurable d ∧ WeakColoring k d`
+1. *Source*: `[OAIMath2026]` family 158, `lean/OAI/Geometry/PlaneColoring/BorelTransfer.lean:436–437`,
+   `OAI.EuclideanFiveColor.proper_to_borel_weak`; manuscript Theorem "Transfer of colorability", its forward direction.
+2. *Read-back*: as for H — `ImportReadback.lean` proves `angularMeasure`, `direction` and `WeakColoring` equal to the
+   release's by `rfl` and closes this exact statement with the release's theorem (standard three). By reading:
+   `AddCircle.haarAddCircle := addHaarMeasure ⊤` and `AddCircle.toCircle := (@scaled_exp_map_periodic T).lift` are the same
+   text at the tags `v4.32.0` and `v4.34.1` (`git grep` in Mathlib's history); `volume` on `ℂ`, `Measure.prod`, `AEMeasurable`
+   and the measurable space of `Fin k` were not diffed between the tags — the implementer does, by `git diff v4.32.0 v4.34.1`
+   on their defining files.
+3. *Model of the hypothesis*: `exists_properColoring_seven` (k = 7).
+4. *What rests on it*: `chiM0_le_chromaticNumber_plane` (`χ_m⁰(ℝ²) ≤ χ(ℝ²)`) and `chromaticNumber_plane_eq_chiM0`
+   (`χ(ℝ²) = χ_m⁰(ℝ²)` — **`Row130Collapse` of branch `fs131-w9` by definition**, `Plane/Reduction/Basic.lean:44`, whose
+   other half is this library's N-EASY, `row130Collapse_iff`), both proved in the skeleton modulo the leaf. Through it every
+   "given-MR" clause of `Plane/Reduction/Maps` that takes `Row130Collapse` and nothing else loses that hypothesis — among
+   them the passage from `7 ≤ chiM0` to `7 ≤ χ(ℝ²)`.
+
+**The leaf** — `theorem nonempty_aeColouring_of_weak {k : ℕ} {d : ℂ → Fin k} (hd : Measurable d) (hw : WeakColoring k d) :
+Nonempty (Plane.AeColouring k)`. Route: `col := d`; for each `j`, `unitPairSet (d ⁻¹' {j}) ⊆ φ ⁻¹' {p | d p.1 = d (p.1 +
+direction p.2)}` with `φ (x, θ) = (x, (θ : Angles))`, because `direction (θ : Angles) = e θ` (the release's `direction_real`,
+`Coloring.lean:23–24`: `simp [direction, AddCircle.toCircle_apply_mk, Real.pi_ne_zero]`); and `(volume.prod arcLength).map φ ≪
+volume.prod angularMeasure`, from `arcLength = volume.restrict (Ico 0 (2π))`, `AddCircle.measurePreserving_mk` (stated on
+`Ioc`; the two intervals differ by a null set) and `AddCircle.volume_eq_smul_haarAddCircle`. Those three Mathlib names exist at
+v4.32.0 by `git grep` of its source; none was `#check`ed here. Hard part: none expected; 60–120 lines, under an hour. Its
+converse (an `AeColouring k` gives `Measurable ∧ WeakColoring k`) is the same computation and gives the model at `k = 9`
+(`Plane/CoverExamples`) if the gate asks one for `WeakColoring`.
+
+**Not imported, and why.** *The measurable half* `no_measurable_weak_five_coloring` — with T it yields H in three lines, so
+{it, T} is an equivalent pair of axioms; H is preferred because H is the statement the release offers for checking and the one
+audited against its challenge. *The rigidity theorem* `wild_fourier` — not worth a third now: its statement needs six more of
+the release's definitions (`E`, `K`, `DiscreteE`, `D`, `C`, `IsWild`, `eval`), nothing in this library consumes it, and it is
+about a different action from the MR of rows 120–128; it is the first thing to adopt if a job wants the transfer's *proof*.
+
+**The gate, for the landing.** Two `axiom`s are two declared purchases: one `AxiomAudit.declareImport` line each in
+`scripts/Axioms.lean`'s IMPORTED section, two lines in `ARCHITECTURE.md` § Trust, the module in the map, the docstrings' key and
+address (written in the skeleton, with the word "external"), and `CLAUDE.md` § Trust ledger's counts refiled by Keryx. The
+theorems above then print the standard three plus the import they use — measured in the skeleton: `chromaticNumber_plane_six_or_seven`
+and `six_le_chiM0` rest on H alone; `chromaticNumber_plane_eq_chiM0` on T alone.
+
+### The pieces to adopt, and what each rests on (measured)
+
+`data/external/oai1/audit/Pieces.lean` (their pin, exit 0; `Pieces.out`): for each statement, the release's declarations it
+uses transitively (generated ones included), by module.
+
+| piece (every `k` unless marked) | declarations | modules | estimate to bring to this pin |
+|---|---|---|---|
+| `PlanarCover.compact_open_cover_impossible` | 17 | 1 (`PlanarCovers`) | one short job; ≤ 400 lines |
+| `graphTree_contractible`, `forest_disk_extension` | 52, 61 | 2 (`DiskExtension`, `GraphRealization`) | one job; about 500 lines |
+| `annulus_forest_extension` | 121 | 4 (+ `GraphCuts`, `GraphPatches`) | one job on top of the previous; about 1,000 lines in all |
+| `binary_open_local_rigidity` | 57 | 3 (`Coloring`, `WeakColoring`, `Rigidity`) | one job; about 500 lines |
+| `continuum_limit_support_exclusion` (the straddle exclusion) | 61 | 5 (`Coloring`, `WeakColoring`, `DiskAverages`, `AngularBoundary`, `ContinuumLimits`) | one job; about 500 lines |
+| `palette_cardinality` (five colours) | 422 | 11 | two jobs; about 3,600 lines |
+| `cyclicCore_compact_finite` (five colours) | 849 | 23 | three or four jobs; about 7,300 lines |
+| `proper_to_borel_weak` (the transfer) | 1,997 | 32 | six to eight jobs; about 16,600 lines |
+| `wild_fourier` | 1,644 | 29 | inside the previous |
+| `no_measurable_weak_five_coloring` | 1,532 | 39 | — (the whole obstruction) |
+| the headline | 3,520 | 70 | every module of the cone is used |
+
+Lines are 8.6 per declaration, the cone's average — **an estimate, and the unknown in it is the pin**: the two Mathlib tags
+are 1,502 commits apart (`v4.32.0`, 2026-07-13, to `v4.34.1`, 2026-09-24; `Mathlib/`: 6,296 files changed, +131,227 −79,290),
+and their source is written against the later one, so a piece brought here is a backport. Re-price from the first two pieces
+(`LEAN.md`): the cover obstruction and the tree lemmas are the cheapest probes, and they are also the two pieces that hold no
+colouring at all. The five small pieces together are about 2,500 lines — a few days of agent work if the backport is quiet; the
+transfer is the week-scale item. Moving this repository's pin to theirs instead is the other way to close the distance, and its
+cost is this library's own breakage across the same 1,502 commits, which nothing here measured.
+
+### `BIBLIOGRAPHY.md` and `LEDGER.md`, for filing
+
+- `[OAIMath2026]`: stage 7 (b)'s two cells, with this added to the third: "the cone's 70 modules replayed through `leanchecker`
+  module by module, 70 of 70; import skeleton `data/external/oai1/audit/ImportSkeleton.lean`".
+- **Row 33**, one sentence: "*The lower end is six by `[OAIMath2026]` family 158 (audited, `plans/EXT-OAI1-audit.md`): imported
+  as the outside theorem `Outside.OAI158.no_proper_five_coloring`, it gives `chromaticNumber_plane_six_or_seven : 6 ≤ χ(ℝ²) ≤ 7`
+  on the standard three axioms and that import; `chromaticNumber_plane_interval`, `5 ≤ χ(ℝ²) ≤ 7`, remains the statement this
+  library proves with no import.*"
+- **Row 130**, one sentence: "*The collapse needs no MR: `[OAIMath2026]`'s transfer `proper_to_borel_weak` (every `k`; audited,
+  on the standard three at Lean v4.34.1) gives `χ_m⁰(ℝ²) ≤ χ(ℝ²)`, so with N-EASY `χ(ℝ²) = χ_m⁰(ℝ²)` holds on the import of
+  that one theorem (`Outside.OAI158.chromaticNumber_plane_eq_chiM0`, which is `Row130Collapse`), and `6 ≤ χ_m⁰(ℝ²)`; the
+  equalities with `χ_CP` and with a field's plane in this row and row 128 are untouched by it.*"
+
+## What was checked, and by whom
+
+**By the kernel, on this machine** (Lean 4.34.1; each line with its control where one exists):
+- the 70 modules of the cone, compiled from the release's source (byte-identical, 70 of 70), exit 0, no warning — and replayed
+  module by module through `leanchecker`, 70 of 70;
+- `#print axioms OAI.EuclideanFiveColor.no_proper_five_coloring` = `[propext, Classical.choice, Quot.sound]`; the same for
+  `proper_to_borel_weak`, `no_measurable_weak_five_coloring`, `wild_fourier`; a planted `sorry` shows `sorryAx` at the headline;
+- the challenge's text closed by the solution's theorem; the definitions equal by `rfl`; the restatements `audit_unfolded`,
+  `audit_mono`, `audit_real`, `audit_euclidean`, `audit_chromaticNumber`, `audit_norm`;
+- the import's two statements closed by the release's theorems (`ImportReadback.lean`);
+- at this repository's pin (Lean 4.32.0): the bridges of stage 7 and the import skeleton, one `sorry` leaf.
+
+**By my instruments and my reading:** the brief's 13 quotations (script, control); the cone (import lines; parser against `rg`);
+zero `axiom`/`sorry`/native/`unsafe`/`opaque`/`set_option`/meta-program by `rg -P` with fourteen planted controls; the stored
+statement equal to the challenge's in a canonical print (control fires); the Mathlib revision is the tag `v4.34.1`; the
+challenge and `Five.lean` and `Coloring.lean` whole; the statements and docstrings of the chain in stage 6; the manuscript's
+introduction.
+
+**By nobody here:** Mathlib's own declarations (taken from Mathlib's cache; not compiled, not replayed); the release's
+comparator, its sandbox and a second kernel; the release's full 42-package configuration; the proofs below `Five.lean` as
+mathematics a person has read; the manuscript beyond its introduction; the other 371 families and the other nine million lines
+of the release's library.
+
+## Left on the machine
+
+`/home/kooshi/.cache/ext-oai1/` — the working copy (`lean/`, with Mathlib and its cache under `.lake/packages`), the control
+tree (`control/`), about 11 GB — stays until Kooshi says the matter is closed. No process of this job is running.
