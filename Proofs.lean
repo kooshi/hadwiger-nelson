@@ -282,6 +282,11 @@ import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.Topology.SpernerGrid
 import Proofs.HadwigerNelson.Topology.LebesgueCovering
 import Proofs.HadwigerNelson.Outside.OAI158
+import Proofs.HadwigerNelson.Outside.OAI158Palette
+import Proofs.HadwigerNelson.Plane.SixRing.Confine
+import Proofs.HadwigerNelson.Plane.SixRing.Winding
+import Proofs.HadwigerNelson.Plane.SixRing.Orbit
+import Proofs.HadwigerNelson.Plane.SixRing.CyclicCentre
 
 /-!
 # Proofs
