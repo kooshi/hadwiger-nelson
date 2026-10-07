@@ -1,0 +1,5 @@
+restored digest: 2206340f1a646adaa200f373b194c7a53eeb7be4abdf577e95db778002b13df2
+digest before:   2206340f1a646adaa200f373b194c7a53eeb7be4abdf577e95db778002b13df2
+RESTORED: the module is the text it was
+plant's name in the file: 0 time(s)
+tracked files modified: 0
