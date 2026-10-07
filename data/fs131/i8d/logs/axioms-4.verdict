@@ -1,0 +1,31 @@
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_star_data: the standard three and, until the join, 3 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_no_tip: the standard three and, until the join, 4 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed, qcol_inner_tile
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle: the standard three and, until the join, 4 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed, qcol_inner_tile
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_outer: the standard three and, until the join, 3 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_coloursAt: the standard three and, until the join, 3 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_four: the standard three and, until the join, 4 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed, qcol_inner_tile
+CLEAN  HadwigerNelson.Plane.e_add_sub_e_sub: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.GermIn.tangent_mem_coneAt: ['Classical.choice', 'Quot.sound', 'propext']
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_changePoint: the standard three and, until the join, 4 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed, qcol_inner_tile
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside: the standard three and, until the join, 4 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed, qcol_inner_tile
+RESTS  HadwigerNelson.Plane.ArcMap.crossed_semiHub: the standard three and, until the join, 4 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, fullSemiHub_star_crossed, qcol_inner_tile
+CLEAN  HadwigerNelson.Plane.ArcMap.ringPt_ringPt_four_thirds: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.ArcMap.IsRingArc.inner_ne_outer: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.ArcMap.eq_of_ncard_eq_four: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.ArcMap.eq_triple_of_ncard_le_three: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_witness: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.ArcMap.mem_closure_of_coneAt_toward: ['Classical.choice', 'Quot.sound', 'propext']
+RESTS  HadwigerNelson.Plane.ArcMap.semiHub_edge: the standard three and, until the join, 2 open leaf/leaves of SemiHub: four_le_of_bothKind, isRingArc_of_edge
+RESTS  HadwigerNelson.Plane.ArcMap.semiHub_places_O: the standard three and, until the join, 10 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, four_le_of_bothKind, fullSemiHub_star_parallel, germPair_dicho, isRingArc_of_edge, ringTile_uMinus, ringTile_uPlus, ringTile_vMinus, ringTile_vPlus
+RESTS  HadwigerNelson.Plane.ArcMap.semiHub_places_T: the standard three and, until the join, 10 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, four_le_of_bothKind, fullSemiHub_star_parallel_T, germPair_dicho, isRingArc_of_edge, ringTile_uMinus, ringTile_uPlus, ringTile_vMinus, ringTile_vPlus
+RESTS  HadwigerNelson.Plane.ArcMap.semiHub_places: the standard three and, until the join, 11 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, four_le_of_bothKind, fullSemiHub_star_parallel, fullSemiHub_star_parallel_T, germPair_dicho, isRingArc_of_edge, ringTile_uMinus, ringTile_uPlus, ringTile_vMinus, ringTile_vPlus
+RESTS  HadwigerNelson.Plane.ArcMap.transferQC: the standard three and, until the join, 11 open leaf/leaves of SemiHub: GermOnQWith.exists_isRingArc_ccw, GermOnQWith.exists_isRingArc_cw, four_le_of_bothKind, fullSemiHub_star_parallel, fullSemiHub_star_parallel_T, germPair_dicho, isRingArc_of_edge, ringTile_uMinus, ringTile_uPlus, ringTile_vMinus, ringTile_vPlus
+CLEAN  HadwigerNelson.Plane.norm_e_add_e_sub_e_sq: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.one_lt_norm_e_add_e_sub_e: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ_closure: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.ArcMap.not_germOnQ_of_germIn_region: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_of_sole_outer: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints: ['Classical.choice', 'Quot.sound', 'propext']
+CLEAN  HadwigerNelson.Plane.ArcMap.outerAdj: ['Classical.choice', 'Quot.sound', 'propext']
+axioms print: 29 records — 15 on a subset of the standard three, 14 resting besides on open leaves of SemiHub only (13 distinct), 0 bad; control `FS131I8DControl.planted_sorry` prints ['sorryAx'] with root ['FS131I8DControl.planted_sorry@(this file)']
+exit=0

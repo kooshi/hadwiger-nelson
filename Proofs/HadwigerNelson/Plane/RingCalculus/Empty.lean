@@ -3,6 +3,7 @@ import Proofs.HadwigerNelson.Plane.RingCalculus.HubCount
 import Proofs.HadwigerNelson.Plane.RingCalculus.TilesAt
 import Proofs.HadwigerNelson.Plane.RingCalculus.SoleTip
 import Proofs.HadwigerNelson.Plane.RingCalculus.RingColour
+import Proofs.HadwigerNelson.Plane.RingCalculus.OuterAdj
 import Mathlib.Data.ZMod.Basic
 
 /-!
@@ -55,7 +56,8 @@ most two. **The Lean model is owed**: the map exists as `sq9Map : ArcMap 9` (`Pl
 four colours at that vertex, and `GammaFreeRing` there (a later job's, on a line holding both waves; inventory items
 525 (c), 530).
 
-**FS129-SR3-OUTERADJ** (`outerAdj`, carrying FS116-V6-ADJ; open) and **FS129-MR1-DOUBLETIP** (`doubleTip`; proved) are
+**FS129-SR3-OUTERADJ** (`outerAdj`, carrying FS116-V6-ADJ; proved, from `not_sole_outer_of_adjacent_changePoints`,
+`…/OuterAdj`) and **FS129-MR1-DOUBLETIP** (`doubleTip`; proved) are
 stated for the wider ring classes they serve, with adjacent change points whose far germs lie off (Q) arcs; their
 hypotheses' satisfiability is the open (Q)-ring question of FS-124 (no held fragment has two adjacent change points of this
 kind). `doubleTip` is proved from `not_sole_tip_of_adjacent_changePoints` (`…/SoleTip`), which reads neither *simple* nor
@@ -555,13 +557,16 @@ at `y` by a tile that is not a tile of `p`" is read as `O_y = {c}`: the ring's o
 that are not tiles of `p`, and are not colours of `p`).
 
 The hypotheses' satisfiability is open (two adjacent change points with free outer pairs: FS-124's (Q)-ring question; on a
-Γ-free ring there is none, `emptyNS`). -/
+Γ-free ring there is none, `emptyNS`).
+
+Proved from `not_sole_outer_of_adjacent_changePoints` (`Plane/RingCalculus/OuterAdj`, job FS131-I8D), which reads "at most
+two colours absent at `p`" (`k ≤ ncard + 2`), never six: the statement holds at the wider class and stays as filed. -/
 theorem outerAdj {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
     (h4 : 4 ≤ (F.coloursAt p).ncard) {ψ : ℝ} {X X' Y Y' : Fin 6} (hy : F.IsChangePoint p ψ X X')
     (hy' : F.IsChangePoint p (ψ + π / 3) Y Y') (hv : ¬ F.GermOnQ p (ψ - π / 3) .ccw)
     (hu : ¬ F.GermOnQ p (ψ + 2 * π / 3) .cw) (c : Fin 6) :
-    ¬ (F.outerTileColours p (ringPt p ψ) = {c} ∧ F.outerTileColours p (ringPt p (ψ + π / 3)) = {c}) := by
-  sorry
+    ¬ (F.outerTileColours p (ringPt p ψ) = {c} ∧ F.outerTileColours p (ringPt p (ψ + π / 3)) = {c}) :=
+  not_sole_outer_of_adjacent_changePoints hF hN hp h4 (by omega) hy hy' hv hu c
 
 /-- **FS129-MR1-DOUBLETIP**: in a valid non-Siamese six-coloured fragment, simple on `B̄(p, 1)`, on a closed disc of radius
 above 1 about a vertex `p` of at least four colours, let `y = r(ψ)` and `y' = r(ψ + 60°)` be change points of the ring

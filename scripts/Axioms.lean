@@ -6878,6 +6878,42 @@ close, their helpers, and the declarations the planner proved from those leaves.
 #print axioms HadwigerNelson.Plane.halfDisc_ncard_coloursAt_zero
 -- FS131-I8C block end
 
+
+/-! ## FS131-I8D — FS-131 wave 8's second implementer of the semi-hub rows: `Plane/RingCalculus/SemiHubPlaces`
+(FS116-N3-CROSS, FS116-N3-SEMI) and FS129-SR3-OUTERADJ. Until the wave's join each record here that cites a statement of
+`Plane/RingCalculus/SemiHub` rests on that module's open leaves (`tools/fs131_i8d_axioms.py` names them per record). -/
+-- FS131-I8D: Plane/RingCalculus/SemiHubPlaces
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_star_data
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_no_tip
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_outer
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_four
+#print axioms HadwigerNelson.Plane.e_add_sub_e_sub
+#print axioms HadwigerNelson.Plane.GermIn.tangent_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_changePoint
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_semiHub
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_four_thirds
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.inner_ne_outer
+#print axioms HadwigerNelson.Plane.ArcMap.eq_of_ncard_eq_four
+#print axioms HadwigerNelson.Plane.ArcMap.eq_triple_of_ncard_le_three
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_witness
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_of_coneAt_toward
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_edge
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_places_O
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_places_T
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_places
+#print axioms HadwigerNelson.Plane.ArcMap.transferQC
+-- FS131-I8D: Plane/RingCalculus/OuterAdj, and the leaf of Plane/RingCalculus/Empty
+#print axioms HadwigerNelson.Plane.norm_e_add_e_sub_e_sq
+#print axioms HadwigerNelson.Plane.one_lt_norm_e_add_e_sub_e
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ_closure
+#print axioms HadwigerNelson.Plane.ArcMap.not_germOnQ_of_germIn_region
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_of_sole_outer
+#print axioms HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints
+#print axioms HadwigerNelson.Plane.ArcMap.outerAdj
+-- FS131-I8D block end
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
