@@ -8271,3 +8271,67 @@ reason by the close.*
      outside theorem; ported to this pin), what the front page says, the possible consequence of item 613 (1), the
      asker's re-rank, and when the backlog's launches resume. (d) The capped replay and the proof's shape are the
      audit's remaining stages.
+
+615. **KOOSHI'S WORD ON THE OUTSIDE RELEASE, 2026-10-07 (verbatim; also in `data/external/EXT-OAI1-request.md`, second word): "You may use their proof as any other literature. Cite it, build on it, let's use it to slingshot us past anyone else working on this problem."**
+     **What it settles**: ruling 607 (c) is lifted — the release is literature of this project: cited at its read
+     status, importable in Lean as a declared outside theorem with the four items of `LEAN.md` § Assumptions, and a
+     result that milestones open on. **What it does not answer**, of the five questions put to him: the release's
+     own checking tool (three outside programs) — stays held; when the backlog's launches resume — follows the
+     asker's re-rank. **Rulings, mine, each in four parts.** (a) **In Lean the result enters first as declared
+     outside theorems — the five-colour theorem and the transfer for every `k` — and a port is priced beside it,
+     not skipped.** Alternative: port first (their 70 modules at this pin, or this pin moved to theirs — their
+     Mathlib revision is the official tag for Lean 4.34.1). Why import first: it is what "as any other literature"
+     means, it is hours, and every statement that would cite it can be written today; why price the port: Kooshi's
+     stated preference is the standard three axioms where that is about a week of agent work (`CLAUDE.md`
+     § Publication), and the proof already exists in Lean under a licence that permits it. Confidence:
+     medium-high; the audit's estimate of the distance between the two pins decides which is done at publication.
+     (b) **The front page changes at a filing after wave 8's landing is back, from lanes' drafts**: the interval
+     becomes `6 ≤ χ(ℝ²) ≤ 7` (row 33, its lower end by `[OAIMath2026]`); "given MR" leaves `χ(ℝ²) = χ_m⁰(ℝ²)` (row
+     130; the aim's links 1 and 5); FS-104's question is answered; rows 120, 121, 123, the field half of 128 and
+     the field form of 129 keep "given MR" (item 613). Drafts: the audit's (its item 7, re-asked) and the reading's
+     (its item 5). No `CLAUDE.md` edit while a landing is in flight. (c) **The asker's lane is next**: FS-132 (a
+     number fixed now) is the milestone that opens on the release — Poros re-ranks the frontier and poses its
+     question from the audit's stage 6 and the reading's record; brief being written; into the first freed slot.
+     (d) **The one-class consequence of item 613 (1)** (`α₁(ℝ²) = m₁(ℝ²)`, and the fractional form, with no
+     hypothesis) is a deriver's job on its one unchecked step, from the reading's § 2.6 — a result of this
+     project's if it closes; briefed after the asker's (it may be FS-132's first claim: the asker says). (e) **The
+     sweep of the release's other 371 families** (EXT-OAI3) for what else is usable — the Falconer distance
+     conjecture, the unit-distance power saving, the Euclidean Ramsey classification among them — follows; its
+     generator's first tier is rewritten from "is there a hit" to "what can be built on". (f) **The backlog's
+     queue stays held until the asker's re-rank says what of it still bears**; its two running jobs finish, wave 8
+     lands if green. Alternative: resume now, in the slots the analysis does not use. Why not: a third of the
+     backlog's rows carry "given MR" or pose questions the release answers, and an hour of re-ranking is cheaper
+     than a wave formalized at the wrong grade. Confidence: medium; Kooshi may overrule in a word. (g) Both
+     analysis agents told by message. (h) A memory entry written (the release's place and his word), so a later
+     session does not re-ask.
+
+616. **EXT-OAI1, fourth message: the outside proof's shape, from its Lean — two arms and a three-line headline; the five-colour arm assumes only a measurable weak colouring and builds every structured object from it by measure; a covering obstruction on a disc closes it** (source: EXT-OAI1's message to "main", 2026-10-07; record `plans/EXT-OAI1-audit.md` stage 6, commit `8fc4ab79` on `main`; `data/external/oai1/docindex-five.txt` (232 documented declarations), `module-graph-five.txt`. Statements and definitions read by it, and `Five.lean` whole; no proof below it line by line).
+     **The chain, its account.** The transfer arm is 33 modules and never mentions five; the colouring enters once,
+     restricted to the algebraic points (the converse of the manuscript's equivalence is not in the Lean library;
+     the headline does not need it). The obstruction arm, `no_measurable_weak_five_coloring`, is twelve lines from
+     three statements: (2a) `fullApprox_exists` — for every scale, a **continuous map of the closed disc of radius 5
+     into the realization of the complete graph on five vertices** (simplex points with at most two positive
+     coordinates), agreeing off finitely many small discs with the thresholded disc averages of the five classes;
+     (2b) a cover statement with no colouring in it — an open cover of a compact set holding that disc, with no
+     point in three members, has a member of diameter above 2; (2c) the mesh argument against it. **Under (2a)**:
+     a *transition graph* on the colours at each point, defined by a rate (`TransitionEdge`); its *cyclic core*,
+     **finite on compacts (`cyclicCore_compact_finite`)**; off the core the map lands in a forest and holes fill
+     because a tree is contractible; at a core point a crossing edge at every scale gives a *common interface*
+     (a continuum approaching the point in a direction, with both colours' supports missing its straddle set), and
+     **common interfaces form an acyclic graph** by three exclusions — no triangle (through the Moser spindle, by
+     an exact rational certificate), no four-cycle, no five-cycle; beneath, at every centre almost every radius
+     carries one or two colours (`palette_cardinality`). **No interface, map, perimeter or boundary regularity is
+     assumed anywhere: each is a conclusion.** Choice: an ultrafilter limit for the invariant mean; selections;
+     Mathlib's own. **What reads like this project's, listed by it and not judged**: the cyclic core's finiteness
+     as REG-J′'s local finiteness of the singular set (rows 140–141, 154) — proved there for measurable
+     five-colourings; the straddle exclusion as the band of `[Voronov2023]` and `[SokolovVoronov2025]` (row 132),
+     stated for every `k`; the rate-defined transition as the aim's item 6; the palettes as the circle colourings
+     of rows 145–148; the approximants' discs as row 131's vanishing holes, in a map's domain. **Where five is
+     used, its reading, one mind, unchecked**: the cover's order — at six colours a point may need three positive
+     coordinates, a 2-complex, where the disc is no obstruction; nothing in the cone states a six-colour analogue.
+     **Statements that hold for every `k`** (so survive as theorems about things that exist): the transfer, the
+     rigidity theorem, the straddle exclusion, the binary rigidity lemmas, the cover obstruction, the tree and
+     disc-extension lemmas. **Read by me**: its commit on `main`; nothing of stage 6 beyond the message. **Left for
+     it**: the per-module kernel replay under a 16 GiB slot (15 of 70 at its message, 6.3 GB peak), the drafts
+     (re-asked as filings by ruling 615 (b)), the report. **This item and the reading's third message are the
+     asker's input** (ruling 615 (c)).

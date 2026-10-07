@@ -14,3 +14,14 @@
   the problem or moves a bound is what the reviewer's first answer says. Until that answer the milestone's launches continue; if the answer is
   yes, the conditional's four steps run from that moment.
 - The clone is his to explore for other things: it lives at `~/source/math`, outside this repository, and the reviewer writes nothing into it.
+
+## Kooshi's second word, 2026-10-07 (UTC), after the audit's third message — the build, the axioms and the statement (verbatim)
+
+> You may use their proof as any other literature. Cite it, build on it, let's use it to slingshot us past anyone else working on this problem.
+
+**How it is read** (Keryx's, labelled as mine): ruling 607 (c) of the FS-131 inventory — nothing of the release cited, imported or built on
+until he says — is lifted. The release is literature of this project from this moment: a bibliography row at its read status, an outside
+theorem a Lean statement may import with the four items of `LEAN.md` § Assumptions, and a result later milestones open on. His message does
+not answer two of the five questions put to him (whether the release's own checking tool may be downloaded and run; when the backlog's
+launches resume): the first stays held, the second follows the asking lane's re-rank.
+
