@@ -180,3 +180,18 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-07, 15:06 UTC, by Keryx) — one theorem added: the ring form over four points
+
+You found that the library states the ring form over four compact sets, that the ledger's sentence is over four points, and
+that the second follows from the first as a term (your iteration file's `l2_not_ae_outside_points`, on the standard three
+axioms). **Added to your job, and to your touches**: put that corollary into the exclusion's assembly module as a library
+theorem, named to match the orbit form's pair of names (`not_ae_outside_points`), under a docstring that reads it against the
+ledger's ring sentence and says it is the compact-set form at the two-point sets; register it in your audit block; then the
+full gate pass as planned. No other statement is added and none changes. This is the one place the brief's "no statement
+changes" is lifted, and the reason is the one the brief gives for reading aloud: the row's sentence should have a theorem
+that says it. Your two other points are for the filing's words and need nothing from you: that every statement asks Borel
+measurability beside the weak-colouring condition, and that the row's clause on an extracted centre has no Lean theorem, like
+the open-set form — put both in your drafts as you have put them to me. The rule on agents is unchanged: you start none
+(standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+

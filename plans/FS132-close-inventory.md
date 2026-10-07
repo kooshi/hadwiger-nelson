@@ -1343,3 +1343,17 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     `LEAN.md`, `RUNNING.md`, and **no `CLAUDE.md` filing is made until it is back**. Its stopping rule is in counts it can
     read (a stage per item; three full gate runs without a green one), after item 47's slip.
 
+49. **FS132-L2, a mid-job message (15:06 UTC logged): the landing's Stages 1–4 are saved — the cut, `main` merged with no
+    conflict, the licence copy, the three instances scoped through the generators, both stored-term comparisons unchanged
+    on the joined tree — and its read-aloud found a difference of wording, not a gap.** The library's ring form is over four
+    compact sets (the first claim's own wording); row 155's ring sentence is over four points; "the Lean statement is the
+    stronger one and gives the row's" at the two-point sets — checked by it as a term. Two more clauses for the filing's
+    words: every Lean statement asks Borel measurability beside the weak-colouring condition, where the row says
+    "measurable"; and the row's clause on an extracted centre has no Lean theorem, like the open-set form. **In its working
+    tree, before the full gate pass**: the registrations; the assumptions step — three condition lines, the nine counts
+    unmoved, the ledger gaining no row; the vacuity probe — no new site, declarations 14,845 to 15,291,
+    refutations skipped 215 to 226. **Ruling**: **the four-point ring form is added to the library as a named theorem**
+    (Amendment 1 to its brief) — alternative: leave the row's sentence to follow from a stronger theorem by a remark in
+    the filing; why add it: the row's sentence should have a theorem that says it, the proof is a term it already holds,
+    and the gate has not yet been run on the commit; confidence high. Its other two points go into the filing's words.
+
