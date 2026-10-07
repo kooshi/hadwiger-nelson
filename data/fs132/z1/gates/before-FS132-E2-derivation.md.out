@@ -1,0 +1,31 @@
+entry lint
+  claim C132-FILL: minds 1
+  claim C132-FILL: prior art partly
+  claim C132-NOESS: minds 1
+  claim C132-NOESS: prior art known
+  claim C132-REL: minds 1
+  claim C132-REL: prior art known
+  claim C132-INDEX: minds 1
+  claim C132-INDEX: prior art partly
+  claim C132-RING-WIND: governed by C132-INDEX (hand, minds 1)
+  claim C132-RING-WIND: minds 1
+  claim C132-RING-WIND: prior art partly
+  claim C132-ORBIT: minds 1
+  warn  FS132-E2-derivation.md:258 (C132-ORBIT): prior art owed — novelty unmeasured; a standing finding
+  claim C132-ORBIT: prior art owed
+  claim C132-TRI-STRIP: minds 1
+  claim C132-TRI-STRIP: prior art partly
+  claim C132-SEP: minds 1
+  warn  FS132-E2-derivation.md:282 (C132-SEP): prior art owed — novelty unmeasured; a standing finding
+  claim C132-SEP: prior art owed
+  entries: 10  derived: 8  stalled, gapped or refuted: 2
+quotes
+  statements named in more than one place: 0
+controls
+  ok    two-skeleton: printed 'k=4:H1=0 k=5:H1=0 k=6:H1=0 k=7:H1=0 4cycle-in-K6+012+023=True 4cycle-in-K6+012=False'; with the fault planted ('' → '--fault') it printed 'k=4:H1=1 k=5:H1=1 k=6:H1=1 k=7:H1=1 4cyc' — it fires
+  ok    ring-degree: printed 'N=18:sequences=12,d-mod-6=[3] N=24:sequences=480,d-mod-6=[3] N=30:sequences=11520,d-mod-6=[3]'; with the fault planted ('' → '--fault') it printed 'N=18:sequences=287496,d-mod-6=[0, 1, 2, ' — it fires
+  ok    tri-strips: printed 'cycle-length=3 patterns=8 neither-side-pure=0'; with the fault planted ('' → '--fault') it printed 'cycle-length=4 patterns=16 neither-side-' — it fires
+  ok    hex7-relation: printed 'own-labels=[0, 2, 3] ring-labels=[1, 4, 5, 6] own-on-rings=[[], [], []] crossings=9 ring-walk=654164514 two-jumps-60-apart=False vertices-inside=13 relation-holds=True'; with the fault planted ('' → '--fault') it printed 'own-labels=[0, 2, 3] ring-labels=[1, 4, ' — it fires
+  ok    chord-angle: printed 'mixed-derivative-at-(1,1)=8*sqrt(3)/9 first-derivatives=-sqrt(3)/3'; with the fault planted ('' → '--fault') it printed 'mixed-derivative-at-(1,1)=0 first-deriva' — it fires
+  controls: 5  fired on their faults: 5
+GATE: PASS (0 failures, 2 warnings)

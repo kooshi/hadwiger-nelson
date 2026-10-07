@@ -1,5 +1,7 @@
 # FS-122 — the forced pair at every complexity (route R's third statement): must every near-colouring of the plane with small holes carry a close complementary pair of fat junctions? (stub)
 
+> **Re-aimed, 2026-10-07 (FS132-P2; wording corrected by FS124-P1), at the exact class: a close complementary pair is not excluded there — one of its edge sets lies on the unit circle about each common unit point (C132-COMP-SHARP) — so the question is the forcing, and what the forcing delivers is FS-124's object. B-RR stays as the band form's question.**
+
 > **Re-ranked 2026-10-03 (FS129-P1; 5 → 6).** "Meets route M nowhere below the answer" holds under Condition 5
 > only; with unit arcs its exact-map form is FS-124's case list (FS112-N3-COR3), so what is route R's own is the band form.
 
@@ -65,6 +67,21 @@ junctions of higher degree (COR3 is for cubic trichromatic vertices). The bicycl
 
 G15 (pigeonhole × kill: the count is the pigeonhole, CP the kill), G71 (the index), G40 (non-absorption, read `δ`-independently — FS-111's X9 misfired on
 exactly that), G79, G82, G21. Rows 131–134. Stubs: FS-121 (the other route), FS-109 (the dial), FS-110's closed record (SWAP-PRICE).
+
+*Since FS-132 (FS132-Z2, 2026-10-07; entries in `plans/FS132-derivation.md`, [hand] or derived from [hand], one mind, kernel pending):* **the pair's
+exclusion is derived in the exact class, up to one residue.** C132-CROSS (a covering count at a common unit point: "it reads no
+properness") and C132-COMP-SHARP: two points less than 2 apart carrying witnessed triangles on disjoint triples of six labels
+force one of the six edge sets onto the unit circle about each of their common unit points — with no cone scale. The residue
+is real: fragment T2 realizes it. Row 133's sharpening is drafted (`plans/FS132-Z1-record.md` § 5.1). **What is left of route R
+in the exact class is the forcing alone, and it stalled**: that some centre is not a triangle (C132-LONG, C132-M-CV) stalls at
+the winding of the three outside labels on a triangle centre's unit circle (C132-RING-TAME), and behind it "two further steps
+of the regular chain have no weak form (two centres of one type at distance between 1 and 2, and the bicycle)". Derived on the
+way, with no colouring in them: a loop in the triangle of three labels with the 60° exclusion has degree 3 modulo 6
+(C132-INDEX, C132-RING-WIND), and the classes of the centres inside a circle add up to the circle's (C132-REL). FS132-E3's
+hand-over for the forcing: put to row 134's base the question FS-132 put to this project's exclusion — does that chain at a
+cubic three-colour vertex read arcs and degree three, or only a triangle centre's three exclusion sets and its palettes? The
+asking lane's re-aim of this stub at the exact class (`plans/POROS-2026-10-07-fs132-night.md` § The ranked table, rank 3, and
+§ Banners) is drafted, not filed. Proposed G98 (six is the count at which the outside labels wind).
 
 ## A card carried for the opening (filed by Keryx, 2026-09-29)
 

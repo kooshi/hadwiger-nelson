@@ -1,0 +1,8 @@
+ok       hex7 tight (a=1/2)                                      want ACCEPT got ACCEPT
+ok       hex7 a=11/20 (diameter 1.1)                             want REJECT got REJECT
+ok       hex4 (index-4 sublattice)                               want REJECT got REJECT
+ok       Reuleaux triangle, width 1                              want ACCEPT got ACCEPT
+ok       minor segment (diameter = chord = 1)                    want ACCEPT got ACCEPT
+MISMATCH major segment (diameter 2/sqrt3, interior antipodes)    want REJECT got ACCEPT
+ok       two Reuleaux, gap exactly 1 (min = 1)                   want ACCEPT got ACCEPT
+PLANT endpoints_only SOME CONTROL FLIPPED

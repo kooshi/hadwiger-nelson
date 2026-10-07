@@ -1,0 +1,32 @@
+entry lint
+  claim C132-SHADOW: minds 1
+  claim C132-SHADOW: prior art partly
+  claim C132-LENS: governed by C132-SHADOW (hand, minds 1)
+  claim C132-LENS: minds 1
+  claim C132-LENS: prior art partly
+  claim C132-LENS-SIDE: governed by C132-LENS (derived from, minds 1)
+  claim C132-LENS-SIDE: minds 1
+  claim C132-LENS-SIDE: prior art partly
+  claim C132-LENS-FOUR: governed by C132-LENS (derived from, minds 1)
+  claim C132-LENS-FOUR: minds 1
+  claim C132-LENS-FOUR: prior art partly
+  claim C132-LENS-GERM: governed by C132-LENS-SIDE (derived from, minds 1)
+  claim C132-LENS-GERM: minds 1
+  claim C132-LENS-GERM: prior art partly
+  claim C132-PLACED-RING: minds 1
+  claim C132-PLACED-RING: prior art partly
+  entries: 8  derived: 6  stalled, gapped or refuted: 2
+quotes
+  statements named in more than one place: 0
+controls
+  ok    lens-shadow: printed 'lens-points=600 missing-the-wedge-at-y1=0 missing-the-wedge-at-y-1=0 points-inside-y1=1800 missing=0 points-inside-y-1=1800 missing=0 least-arc-over-depth=11 chart-samples=1681 chart-mismatches=0'; with the fault planted ('' → '--fault') it printed 'lens-points=600 missing-the-wedge-at-y1=' — it fires
+  ok    seeing: printed 'full-pairs=18 [I_ccw+I_lens+O_ccw]x[I_ccw+O_ccw+O_far] and [I_cw+O_cw+O_far]x[I_cw+I_lens+O_cw] product=True same-pairs-back=True lens1-seeing-Occw0=0.194,0.083,0.000 far1-seeing-far0=0.167,0.083,0.000'; with the fault planted ('' → '--fault') it printed 'full-pairs=0 []x[] and []x[] product=Tru' — it fires
+  ok    side-patterns: printed 'near-witness-triples=46656 three-in-a-row=44064 alternating=2592 other=0 far-witnesses=IIIIII one-outer=OIIIII outer-sets-left-open=16'; with the fault planted ('' → '--fault') it printed 'near-witness-triples=46656 three-in-a-ro' — it fires
+  ok    kept-model: printed 'first-order-pairs=108 equal-labels=0 labels=012,1234,012,0145,012,0235 lens-in-T-at=[1, 3, 5] points-with-a-b-n-and-one-of-T=[] interfaces-of-x=3 on-unit-circles-about=[1, 3, 5] sides=I-I-I- points-with-both-neighbours-outer-pure=[]'; with the fault planted ('' → '--fault') it printed 'first-order-pairs=108 equal-labels=1 lab' — it fires
+  ok    hex-half-crossings: printed 'radius=0.5 vertex-pairs=216 crossings=432 least-shared-outside=1 own-label-near-crossing=36'; with the fault planted ('' → '--radius 0.4') it printed 'radius=0.4 vertex-pairs=342 crossings=68' — it fires
+  ok    hex-half-sides: printed "radius=0.5 crossings=432 crossings-with-an-own-label=36 own-label-samples=5760 own-label-samples-outside-the-vertex's-unit-circle=0"; with the fault planted ('' → '--fault') it printed 'radius=0.45 crossings=540 crossings-with' — it fires
+  ok    hex-half-margin: printed 'radius=0.5 colourings=3 points=13 samples=982800 vertex-labels-on-annulus=6672 labels-seen=0123456'; with the fault planted ('' → '--radius 0.4') it printed 'radius=0.4 colourings=3 points=13 sample' — it fires
+  ok    hex-half-relation: printed 'radius=0.5 own-labels=[0, 2, 3] ring-labels=[1, 4, 5, 6] own-on-rings=[[0, 2, 3], [], []] crossings=9 ring-walk=654164514 two-jumps-60-apart=False vertices-inside=13 relation-holds=True'; with the fault planted ('' → '--radius 0.4') it printed 'radius=0.4 own-labels=[0, 2, 3] ring-lab' — it fires
+  ok    placed-arcs: printed "arc-points=400 outside-the-region=0 wedges=[(-1, 'in', 'O_ccw'), (-1, 'out', 'O_far'), (1, 'in', 'O_cw'), (1, 'out', 'O_far')]"; with the fault planted ('' → '--fault') it printed 'arc-points=400 outside-the-region=400 we' — it fires
+  controls: 9  fired on their faults: 9
+GATE: PASS (0 failures, 0 warnings)

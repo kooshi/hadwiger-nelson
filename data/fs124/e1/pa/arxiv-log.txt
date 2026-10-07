@@ -1,0 +1,18 @@
+## arXiv query: abs:"chromatic number of the plane" AND (abs:Reuleaux OR abs:"unit arc" OR abs:"circular arcs" OR abs:"map-type" OR abs:"tile")  hits: 0
+## arXiv query: (abs:"Hadwiger-Nelson" OR abs:"chromatic number of the plane") AND (abs:"almost every" OR abs:"almost all" OR abs:"measurable") AND (abs:disc OR abs:disk OR abs:"bounded" OR abs:"local")  hits: 3
+2026-06-15 | 2606.16642v2 | On the chromatic number and equilateral dimension of $\mathbb{R}^n$ with the tropical norm
+2023-09-18 | 2309.09973v3 | Coloring and density theorems for configurations of a given volume
+2017-08-03 | 1708.01081v1 | Lower bounds for the measurable chromatic number of the hyperbolic plane
+## arXiv query: abs:"avoiding unit distance" OR abs:"unit distance avoiding" OR abs:"1-avoiding set" OR abs:"1-avoiding sets"  hits: 5
+2026-03-18 | 2603.18287v4 | Duality for Delsarte's extremal problem on locally compact Abelian groups
+2024-07-06 | 2407.05071v1 | Clustering in typical unit-distance avoiding sets
+2023-11-16 | 2311.10069v4 | The fractional chromatic number of the plane is at least 4
+2022-07-28 | 2207.14179v3 | The density of planar sets avoiding unit distances
+2014-12-31 | 1501.00168v2 | Better bounds for planar sets avoiding unit distances
+## arXiv query: abs:"chromatic number of the plane" AND abs:"de Bruijn"  hits: 0
+## arXiv query: ti:"map-type" AND ti:chromatic  hits: 1
+2025-02-04 | 2502.01958v1 | On the chromatic number of the plane for map-type colorings
+## arXiv query: all:"chromatic number of the plane" AND (all:Reuleaux OR all:"unit arc" OR all:"arcs of unit" OR all:"unit circles")  hits: 2
+2025-02-04 | 2502.01958v1 | On the chromatic number of the plane for map-type colorings
+2023-01-31 | 2301.13695v1 | Note on the chromatic number of Minkowski planes: the regular polygon case
+## arXiv query: all:"Hadwiger-Nelson" AND (all:"tile" OR all:"tiles" OR all:"tiling") AND (all:"six" OR all:"6-coloring" OR all:"6-colouring")  hits: 0

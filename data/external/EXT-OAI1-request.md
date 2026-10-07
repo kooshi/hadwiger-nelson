@@ -60,3 +60,28 @@ slots, and the budget is unchanged — it is not his word to spend it faster. No
 authorizes anything his standing words hold: measure rigidity at number fields stays held; nothing is published or posted; the
 release's checking tool is not run before its audit.
 
+## Kooshi's sixth word, 2026-10-07 (about 11:40 UTC), after the morning report — three agreements and the direction (verbatim)
+
+> I agree with all 3. let's keep the lean backlog paused. We move to the standard workflow, attacking 6/7. During the lean phase of the workflow, if any dependencies need to be formalized, have those done as well.
+
+**What "all 3" answers** — the three items my report put to him under "Needed from you", as I wrote them:
+
+> 1. **What last night's milestone delivers.** I recommend it stop asking whether readable meeting points must exist and deliver "what any such point's circle forces". If you say nothing, I keep that scope.
+> 2. **What to formalize first.** I recommend the four-way exclusion, on the Lean planner's existing branch.
+> 3. **Whether to open the unit-arc configuration next.** It is the second-ranked milestone, and everything last night points at it.
+
+**How it is read** (Keryx's, labelled as mine): (1) FS-132 delivers what a point with data on its unit circle is forced to carry;
+the question whether every weak measurable colouring has such a point leaves this milestone (it stays with FS-127 and FS-128) — so
+the second half of FS-132's record job is briefed on that scope, and its filing makes FS-132 Derived. (2) FS-132's Lean phase
+starts, the first night's exclusion (C132-M-ORBIT, C132-M-EXCL) first, on branch `fs132-wk1`. (3) FS-124, the (Q) ring — the
+boundary that is a unit arc about a ring point — is the next milestone: the asking lane poses its question on FS-132's derivation
+file, then it is opened. **The Lean backlog (FS-131) stays paused**: none of its waves restarts. **"The standard workflow"** is
+Workflow 3.1 as written — ask, open, fix the claim list, derive and plan the kernel module, record, implement, close — at his
+standing cap of three Opus slots; my lowering to two was a ruling for the night and ends with it. **"If any dependencies need to
+be formalized, have those done as well"**: in a milestone's Lean phase, what its module rests on that this library does not yet
+hold — a lemma of the release's development, a hand result of this project's, a statement of the paused backlog — is formalized
+as part of that phase, not taken as a new hypothesis or a new axiom, and the backlog's pause does not stop it. Not read into it:
+replacing the two outside theorems already declared (`Outside.OAI158.no_proper_five_coloring`, `Outside.OAI158.proper_to_borel_weak`)
+by ports of the release's whole proofs — they stay as declared until he says otherwise; and nothing his standing words hold
+(measure rigidity at number fields; nothing published or posted; the release's checking tool not run before its audit).
+

@@ -1,0 +1,197 @@
+### E5 line 169
+derivation: C132-WIT-ORBIT
+  statement: let U be an open set of the plane containing the closed unit disc about a point p, let c be a weak measurable six-colouring of U (a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair (z, u) of a point z of U and a unit vector u with z + u in U), let a_0, a_1, a_2, a_3 be four of the labels and X, Y the other two, and for each j modulo 4 let q_j be a point other than p with H_{a_j} ∩ Δ({p, q_j}) = ∅ and H_{a_{j+1}} ∩ Δ({p, q_j}) = ∅, where H_a is the closed essential support of the class of a and Δ(K) is the set of z with min over q ∈ K of |z − q| below 1 and max over q ∈ K of |z − q| above 1; then there are no angle ψ and number δ > 0 such that (i) for every integer k and almost every θ with |θ − ψ − kπ/3| < δ the palette P_p(e(θ)) (`[OAIMath2026]` Definition 5.1, read at the centre p with samplings inside U) contains X or Y, and (ii) for every η > 0 the set of θ in (ψ − η, ψ + η) whose palette contains X and the set of those whose palette contains Y both have positive measure
+  uses only: C132-M-ORBIT (`plans/FS132-E3-derivation.md` Stage 3) at K_j = {p, q_j}, a compact set containing p and a point other than p; nothing else. Read against its argument step by step (§ The exclusion, step by step): of the sets it reads, for each j, that p is in the set, one point q_j of it other than p, and the two-label exclusion for the pair {p, q_j}
+  not claimed: more than C132-M-ORBIT — this is that theorem, not a wider one: C132-M-ORBIT follows from it by taking any q_j in K_j other than p, since Δ({p, q_j}) ⊂ Δ(K_j) (control `delta-monotone`); what C132-M-ORBIT does not claim; that the labels a_j are present at p or anywhere near it (nothing in the hypotheses says so, and nothing in the argument uses it); a second reading of M7 to M9, which I read and did not rework
+  argument: § The exclusion, step by step
+  verdict: derived
+  grade: derived from: C132-M-ORBIT
+  minds: 1
+  model: none can exist (a non-existence). The hypotheses on the q_j alone are met with room at every point p within 0.01 of a vertex of the hexagonal seven-colouring, for the vertex's three labels and every q_j within 0.012 of p (control `margin-witness`, Stage 3) — at seven labels, where the statement does not apply
+  prior art: partly: as C132-M-ORBIT's own line (`plans/FS132-E3-derivation.md` Stage 3); the restatement is this project's; owed — three zbMATH queries on 2026-10-07 05:26 UTC answered 503 (§ Prior art, this job)
+  handoff: none — subsumed by C132-M-ORBIT, which crosses; what the kernel lane should take from this entry is that its hypothesis may be stated with four points q_j in place of four compact sets, losing nothing
+
+### E5 line 181
+derivation: C132-WIT-EXCL
+  statement: let U, p, c, the labels a_0, a_1, a_2, a_3, X, Y and the points q_0, q_1, q_2, q_3 be as in C132-WIT-ORBIT; then it is not the case that for almost every unit vector e the palette P_p(e) contains X or Y
+  uses only: C132-M-EXCL at K_j = {p, q_j}
+  not claimed: more than C132-M-EXCL (it follows from this entry as C132-M-ORBIT does from C132-WIT-ORBIT); what C132-M-EXCL does not claim
+  argument: § The exclusion, step by step
+  verdict: derived
+  grade: derived from: C132-M-EXCL
+  minds: 1
+  model: none can exist (a non-existence); the model line of C132-WIT-ORBIT. An instance worth its sentence: no weak measurable six-colouring of an open set containing a closed unit disc carries only two labels, almost everywhere, on an annulus about the unit circle — the four absent labels are witnessed at the centre by every nearby point
+  prior art: partly: as C132-WIT-ORBIT
+  handoff: none — subsumed by C132-M-EXCL, which crosses
+
+### E5 line 193
+derivation: C132-WIT-STRIP
+  statement: let k ≥ 3 be an integer, x a point, U an open set containing the unit circle about x, c a weak measurable k-colouring of U, i_0, i_1, i_2 three distinct labels, N the set of the other k − 3 labels, and for each j modulo 3 let q_j be a point other than x with H_{i_j} ∩ Δ({x, q_j}) = ∅ and H_{i_{j+1}} ∩ Δ({x, q_j}) = ∅; then for every unit vector e with |x + e − q_j| ≠ 1 for j = 0, 1, 2 there are an arc A about e and a width w > 0 such that almost every point x + r f with f in A and 1 < r < 1 + w has its label in N if |x + e − q_j| < 1 for at least two j, and almost every point x + r f with f in A and 1 − w < r < 1 has its label in N if |x + e − q_j| > 1 for at least two j; the unit vectors f with |x + f − q_j| = 1 for some j are those with 2 f·(q_j − x) = |q_j − x|², at most six; and P_x(e), read with samplings inside U, meets N for almost every e
+  uses only: that an open set missing H_i meets the class of i in a null set; |x + r f − q|² = r² + |q − x|² − 2 r f·(q − x) and its continuity in (r, f); that two edges of a triangle have all three vertices among their endpoints; for the last clause the end of the proof of `[OAIMath2026]` Lemma 8.1 (`M/angular.tex:71–88`, read: radii tending to 1 from the pure side through typical samplings at the centre x; no count of labels), taken for a colouring of U on the first night's local reading of the palettes (one mind, `plans/FS132-E3-derivation.md` M0)
+  not claimed: purity of both sides at one direction; that P_x(e) lies inside N; anything at the at most six excluded directions; that the labels i_j are present at x; that a point x with such q_j is a cyclic centre (it need not be: control `margin-witness`, Stage 3); anything for a cycle of four or more labels; that the class is inhabited at six
+  argument: § The strips, with one witness per edge
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 7, the hexagonal seven-colouring with circumradius 2/5, x the vertex (0, 2/5) with labels 0, 3, 2, and q_j the point of each of its three edges at distance 0.3 from x: |q_j − x|² = 0.09, so the side changes where f·(q_j − x)/|q_j − x| = 0.15, about 8.6° from the perpendiculars, and N = {1, 4, 5, 6}; there both sides are in fact pure at every direction (the three labels keep off the annulus 0.97 ≤ |z − x| ≤ 1.03), so the model satisfies the statement with room and does not test the side rule — the control `strip-sides` does
+  prior art: partly: `[OAIMath2026]` Lemma 8.1 is the strip statement at five labels for continua with limiting directions; C132-TRI-STRIP (`plans/FS132-E2-derivation.md` Stage 3) is its form at every k for a triangle; the form with one witness per edge and the side rule |x + e − q_j| ≷ 1 not found — owed (§ Prior art, this job)
+  handoff: de Bruijn — as C132-TRI-STRIP's general form: three points in place of three continua with limiting directions; the leaf is one inequality on |x + r f − q| and a case split on three signs. C132-TRI-STRIP then follows by choosing, for each direction, a witness close enough to x (§ The strips, last paragraph)
+
+### E5 line 205
+derivation: C132-WIT
+  statement: C132-M-ORBIT, C132-M-EXCL and C132-TRI-STRIP with each set `K_j` replaced by a two-point set `{p, q_j}` — for the strips, with the changes of side at the directions `f` with `2 f·(q_j − x) = |q_j − x|²`
+  uses only: C132-WIT-ORBIT, C132-WIT-EXCL and C132-WIT-STRIP, which are the three restatements written out
+  not claimed: that the restated exclusions are wider than the originals (they are the same theorems); what each of the three does not claim
+  argument: § The exclusion, step by step
+  verdict: derived
+  grade: derived from: C132-WIT-ORBIT, C132-WIT-EXCL, C132-WIT-STRIP
+  minds: 1
+  model: the model lines of the three
+  prior art: partly: as the three
+  handoff: none — the three entries carry what crosses
+
+### E5 line 217
+control: delta-monotone
+  of: C132-WIT-ORBIT — the two-point hypothesis is the weaker one: the straddle set of {p, q} lies in the straddle set of every finite K containing p and q (100,000 fixed samples)
+  run: python3 ../data/fs132/e5/wit_check.py mono
+  expect: in-the-smaller=28434 violations=0
+  fault: python3 ../data/fs132/e5/wit_check.py mono --fault
+
+### E5 line 223
+control: strip-sides
+  of: C132-WIT-STRIP — the side rule: just outside the unit circle about x in direction f a point lies in the straddle set of {x, q} exactly when |x + f − q| < 1, just inside exactly when |x + f − q| > 1 (200,000 fixed samples, |q − x| between 0.05 and 2.5); the fault predicts the side by the sign of f·(q − x), the rule for a limiting direction
+  run: python3 ../data/fs132/e5/wit_check.py sides
+  expect: samples=200000 outer=50147 inner=149853 disagreements=0
+  fault: python3 ../data/fs132/e5/wit_check.py sides --fault
+
+### E5 line 346
+derivation: C132-WIT-SIDE
+  statement: let U be an open set of the plane, c a measurable map from U to a finite set of labels, H_i the closed essential support of the class of i, E a set of labels, x and q two distinct points with H_i ∩ Δ({x, q}) = ∅ for every i in E, and w a point of U with |w − x| = 1 and |w − q| ≠ 1; then there is η > 0 such that almost every point z of B(w, η) with |z − x| > 1 has its label outside E if |w − q| < 1, and almost every point z of B(w, η) with |z − x| < 1 has its label outside E if |w − q| > 1
+  uses only: that {z : |z − q| < 1 < |z − x|} and {z : |z − x| < 1 < |z − q|} are open and lie in Δ({x, q}); that an open subset of U missing H_i meets the class of i in a null set. No properness, no palette, one witness
+  not claimed: anything when |w − q| = 1; anything about the other side of the unit circle about x; that the labels of E are present anywhere
+  argument: § Argument — one side of a unit circle
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the model of C132-WIT-STRIP, edge by edge
+  prior art: partly: it is step B1 of the ring card's C132-CROSS (`plans/FS132-E4-derivation.md` Stage 2, derived the same night by another mind) and the first paragraph of C132-TRI-STRIP's argument with its point held fixed; in print, the mechanism of `[OAIMath2026]` Lemma 8.1 for continua; this form owed
+  handoff: de Bruijn — the statement as written; it is the leaf under C132-WIT-STRIP, C132-TRI-STRIP and C132-CROSS, and by the coordinator's ruling the entry that crosses for the strips
+
+### E5 line 358
+derivation: C132-WIT-MARGIN
+  statement: let c be a measurable map from the plane to a finite set of labels, H_i the closed essential support of the class of i, p a point, η > 0, and I a set of labels each of whose supports H_i misses the open annulus of the points z with 1 − η < |z − p| < 1 + η; then H_i ∩ Δ({p, q}) = ∅ for every i in I and every point q with 0 < |q − p| ≤ η; so if I has at least three labels, every cyclic order of three or more of them, with any such points q_j, satisfies the conclusion of C132-WIT-EX at p
+  uses only: the triangle inequality — a point z with one of |z − p|, |z − q| below 1 and the other above 1 has | |z − p| − 1 | < |q − p|
+  not claimed: that p is a cyclic centre, or that any label of I is present at p (control `margin-witness`: thirteen points about a vertex, twelve of them no centres); that every weak colouring has such a point; the anchored form
+  argument: § Argument — witnesses by margin
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the hexagonal seven-colouring with circumradius 2/5, and the island and the stripe colourings built on it at a vertex v: every p within 0.01 of v, I the three labels of v, η = 0.012 (control `margin-witness`); in the plain colouring the same at every vertex
+  prior art: owed — elementary; the statement is this project's
+  handoff: none — a relay-result: it says where C132-WIT-EX is free, and that a witnessed cycle does not locate a centre
+
+### E5 line 370
+derivation: C132-WIT-CROSSED
+  statement: let H be a set of the plane, p a point and f_1, f_2, f_3 three distinct unit vectors such that each point p + f_m is a limit of points of H nearer than 1 to p and a limit of points of H farther than 1 from p; then no point q other than p has H ∩ Δ({p, q}) = ∅
+  uses only: the definition of Δ; that two distinct points have at most two points at distance 1 from both
+  not claimed: anything when H approaches the unit circle about p from both sides at two points only — then the one candidate is q = p + f_1 + f_2; anything for a set that touches the circle from one side
+  argument: § Argument — a label that crosses the circle has no witness
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: H a hexagon of label 3 of the hexagonal seven-colouring and p the centre of the neighbouring hexagon of label 0: H crosses the unit circle about p along an arc (the fault of control `margin-witness`: with the thirteen points taken about a hexagon's centre, 327,600 samples of the annulus carry a vertex label)
+  prior art: owed — elementary
+  handoff: none — a relay-result: with C132-WIT-MARGIN it says which labels can be witnessed at a point, from the trace of their supports near its unit circle
+
+### E5 line 382
+derivation: C132-WIT-SUPER
+  statement: let k ≥ 1 be an integer, c a weak measurable k-colouring of the plane, i a label, p_i^ε(z) the proportion of the disc of radius ε about z lying in the class of i, α > 0, (ε_n) a sequence of positive numbers tending to 0, C_n connected sets with p_i^{ε_n} > α at every point of C_n, and K the set of the limits of convergent sequences (z_n) with z_n in C_n; then no point of the closed essential support H_i has one point of K nearer than 1 and another farther than 1
+  uses only: weak properness in the form |A_i ∩ (A_i − u)| = 0 for every unit vector u (from almost every u by continuity of translation in L¹), which gives p_i^ε(y) + p_i^ε(z) ≤ 1 at every unit pair (y, z); that a connected set with a point nearer than 1 to z and a point farther than 1 has a point at distance 1; p_i^ε → 1 on the class and 0 off it in L¹ on bounded sets. One label; no second label, no map to a graph, no hole, no cyclic centre, no isolation, no count of labels
+  not claimed: that K has more than one point for any choice of the C_n — where a class is dust near a point every such K through it is that point (§ The stall); anything for sets C_n that are connected only after holes are filled
+  argument: § Argument — connected pieces of a smoothed class carry the exclusion
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the hexagonal seven-colouring with circumradius 2/5, label 0, α = 1/4, C_n the closed hexagon of centre (0, 0) for every n (the proportion is at least 1/3 at each of its points once ε_n < 0.3): K is that hexagon, and the conclusion is its margin — diameter 0.8, every other hexagon of label 0 more than 1.03 away
+  prior art: partly: it is the proof of clause (3) of `[OAIMath2026]` Proposition 7.1 as the first deriver reworked it (`plans/FS132-E1-derivation.md` S2, S7, S9; `M/interfaces.tex` not opened by this job), with the fibre of the graph map replaced by any connected subset of one superlevel set, which removes the holes and with them every use of the centres; that form owed
+  handoff: de Bruijn — beside the release's `continuum_limit_support_exclusion` and `diskAverage_unit_pair` (named by the first deriver as general in the label type): the same proof with the hypothesis "connected, inside one superlevel set"; read the formal statement back against this one
+
+### E5 line 394
+derivation: C132-WIT-EX-FIN
+  statement: let k ≥ 1 be an integer, c a weak measurable k-colouring of the plane and D a closed disc of radius greater than 1 containing finitely many cyclic centres of c; then there are a cyclic centre p in the interior of D, an integer ℓ with 3 ≤ ℓ ≤ k, distinct labels i_0, …, i_{ℓ−1} forming a cycle of the transition graph of p, and points q_0, …, q_{ℓ−1} other than p such that for each j modulo ℓ the supports H_{i_j} and H_{i_{j+1}} both miss Δ({p, q_j}) and both contain p and q_j
+  uses only: C132-EXT-DISC (`plans/FS132-E1-derivation.md` Stage 3) — its clause (1) for a point q_j of K_j on the circle of radius ρ about p, clause (3) with Δ({p, q_j}) ⊂ Δ(K_j), clause (4) for the two anchors, clause (5) for the cycle
+  not claimed: anything on a disc with infinitely many cyclic centres; that ℓ ≥ 4
+  argument: § Argument — where the centres are finite
+  verdict: derived
+  grade: derived from: C132-EXT-DISC
+  minds: 1
+  model: the model of C132-EXT-DISC — the hexagonal seven-colouring at the vertex (0, 2/5) with q_j the points of its three edges at distance 0.3
+  prior art: partly: as C132-EXT-DISC
+  handoff: none — subsumed by C132-EXT-DISC, which crosses
+
+### E5 line 406
+derivation: C132-WIT-EX
+  statement: for every integer k ≥ 1, every weak measurable k-colouring of the plane and every closed disc D of radius greater than 1, there are a point p of D, an integer ℓ ≥ 3, distinct labels i_0, …, i_{ℓ−1} and points q_0, …, q_{ℓ−1} other than p such that for each j modulo ℓ the closed essential supports H_{i_j} and H_{i_{j+1}} both miss Δ({p, q_j})
+  uses only: what is derived towards it — C132-WIT-MARGIN (it holds at every point with a margin for three labels), C132-WIT-EX-FIN (it holds on every disc with finitely many cyclic centres), C132-WIT-SUPER (it holds at every point through which, for each edge of some cycle, connected pieces of both smoothed classes pass and reach a common second point) — and nothing that covers a colouring with none of the three
+  not claimed: that it is false — no colouring is offered against it, and none this record can write by formula could be one (§ The stall, last paragraph); the anchored form beyond C132-WIT-EX-FIN
+  argument: § The stall
+  verdict: stalls at: the selection of a point through which connected pieces of two smoothed classes pass and reach a common second point — the extraction's step S8 (`plans/FS132-E1-derivation.md`; the manuscript's `M/interfaces.tex:581–590` by that record), where an annulus about an isolated centre makes each fibre of the graph map cross from the centre's core to a fixed circle; with a second cyclic centre in every ball about the first there is no map on any annulus, and Lebesgue's covering theorem, which still gives a point of multiplicity three at every scale, bounds no diameter of a pairwise overlap from below
+  grade: hand
+  minds: 1
+  model: where the statement is known to hold: every colouring with a margin (C132-WIT-MARGIN's model) and every disc with finitely many centres (C132-WIT-EX-FIN's). No model of its failure is known
+  prior art: owed — the statement is the asking lane's; nothing to search beyond the milestone's gate, which this job did not extend (§ Prior art, this job)
+  handoff: Poros — not derived; stalls at the step named; the smallest open form is § The stall, (O)
+
+### E5 line 418
+control: margin-witness
+  of: C132-WIT-MARGIN — the plain, island and stripe colourings at seven: thirteen points within 0.01 of the vertex X = (0, 2/5), the annulus 0.988 ≤ |z − p| ≤ 1.012 about each (7 radii × 3600 angles): no sample carries a label of X, and the four other labels are all seen; the fault takes the thirteen points about a hexagon's centre
+  run: python3 ../data/fs132/e5/margin_check.py witness
+  expect: colourings=3 points=13 samples=982800 vertex-labels-on-annulus=0 labels-seen=1456
+  fault: python3 ../data/fs132/e5/margin_check.py witness --fault
+
+### E5 line 571
+derivation: C132-GRUNDY7-NOT
+  statement: for no order of the seven labels is the hexagonal seven-colouring with circumradius 2/5, the island colouring (EXT-OAI2-SLACK7-L) or the stripe colouring (EXT-OAI2-SLACK7-P) a Grundy colouring in the sense of FS121-D3-GRUNDY, in which the class first in the order is maximal, up to null sets, among measurable sets with null unit pairs and each later class is maximal among such sets inside the complement of the earlier classes
+  uses only: the two margins of the hexagonal colouring (two points of one hexagon at most 0.8 apart; distinct hexagons of one label more than 1.033 apart) and that the slack colourings differ from it only inside the ball of radius 0.03 about v, by labels of v; for the second reason FS121-D3-GRUNDY's step (b), which follows from the definition alone (a positive-measure set of points of a later class whose unit circles meet an earlier class in zero length could be added to the earlier class)
+  not claimed: that this tells the slack colourings from the hexagonal one — it does not, and that is the finding; anything about the hexagonal colouring at circumradius 1/2, or about this project's seven-colouring R7, which FS121-D3-GRUNDY's model line says is Grundy in every order
+  argument: § Argument — neither is honest, and neither is the colouring they were planted in
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the three colourings themselves; control `grundy-margins` — the hexagons of one label thickened by 0.016 hold no unit pair with 60 points just outside one of them, and the unit circles about a point of an island and about a point of a hexagon near v carry only the four labels that are not labels of v
+  prior art: partly: Grundy and fall colourings of finite graphs are classical (row 143's line: Dunbar et al. 2000, by that row; not read by this job); that a colouring with a margin is not Grundy is immediate from FS121-D3-GRUNDY; owed beyond that
+  handoff: none — a calibration for the asking lane's ruling on the class of C132-RING-TAME; nothing here is for the kernel
+
+### E5 line 583
+derivation: C132-GRUNDY7-LOCAL
+  statement: for each of the island colouring and the stripe colouring, and each order of the seven labels beginning with one of the three labels of the vertex v, some output (A_1, …, A_7) of FS121-D3-GRUNDY's construction on that colouring in that order has the first class A_1 containing almost every point of the ball of radius 0.03 about v; in such an output no point of that open ball is a cyclic centre, and for the stripe colouring's point x the palette P_x(e) is the single first label for almost every direction e with x + e in that ball
+  uses only: that the class of a label a of v together with B(v, 0.03) holds no unit pair (two points of the ball are less than 0.06 apart; a point of the ball and a point of the hexagon of a at v at most 0.83; a point of the ball and a point of another hexagon of a more than 1.003); that the construction's family at its first step contains every measurable set with null unit pairs that contains the class, and that every member lies below a maximal one (its own chain argument, FS111-M-SATC (i) by that record, not re-read); that a ball carrying one label almost everywhere has no transition between two classes, and every circle sample through it has that label's coordinate equal to 1 there
+  not claimed: anything about the output outside B(v, 0.03) — the maximal extension is a choice there, and nothing bounds what it does; that every output in such an order contains the ball; anything for an order beginning with one of the four other labels; that any output has finitely many cyclic centres in every disc or finitely many changes on every ring
+  argument: § Argument — some honest output erases the planted slack
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the order 3, 1, 2, 4, 5, 6, 7 on the island colouring: the first class starts from the hexagons of label 3 with the islands and is extended over B(v, 0.03), swallowing the 1–2 edge near v
+  prior art: owed — the statement is this project's
+  handoff: none — a calibration
+
+### E5 line 595
+derivation: C132-GRUNDY7
+  statement: For no order of the seven labels is the island colouring or the stripe colouring (`plans/EXT-OAI2-reading.md` § 5.6) a Grundy colouring, and the Grundy-ization of each (FS121-D3-GRUNDY's construction) has finitely many cyclic centres in every disc and finitely many changes on every ring
+  uses only: for its first clause C132-GRUNDY7-NOT; for its second, what is derived of the family the construction defines — C132-GRUNDY7-LOCAL
+  not claimed: that the second clause is false in either reading — no honest seven-colouring with accumulating centres or a ring that changes infinitely often is exhibited; that it is true in either
+  argument: § What the second clause is, and what is left of it
+  verdict: stalls at: the second clause, at the words "the Grundy-ization of each" — FS121-D3-GRUNDY's construction lets A_m be any maximal element of a family, after an order is chosen, and its own entry does not claim uniqueness; read as "some output" the clause is derived only inside the slack ball (C132-GRUNDY7-LOCAL), read as "every output" not at all: no statement held here bounds the complexity of a relatively maximal set with null unit pairs
+  grade: hand
+  minds: 1
+  model: what the first clause holds of — the three colourings of C132-GRUNDY7-NOT; for the second clause read as "some output", the output of C132-GRUNDY7-LOCAL inside the ball
+  prior art: owed — the claim is the asking lane's
+  handoff: Poros — not derived; stalls at the step named; the smallest open forms are § What the second clause is, and what is left of it, (G1) and (G2)
+
+### E5 line 607
+control: grundy-margins
+  of: C132-GRUNDY7-NOT — (a) the hexagons of label 0 thickened by 0.016 against 60 points 0.008 outside the hexagon of centre (0, 0): no unit pair on 3600 angles each, and both margins hold; (b) in the island colouring the unit circles about a point of island 6 and about a point of the label-3 hexagon near the vertex carry only the labels 1, 4, 5, 6; the fault thickens by 0.1
+  run: python3 ../data/fs132/e5/margin_check.py grundy
+  expect: thickened-unit-pairs=0 margins=True,True ring-labels-at-island-point=1456 ring-labels-at-tile-point=1456
+  fault: python3 ../data/fs132/e5/margin_check.py grundy --fault
+

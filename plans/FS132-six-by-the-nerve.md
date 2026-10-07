@@ -175,6 +175,8 @@ counterpart is assumed** for: non-Siamese, simple, a tile's sector at a point, t
 shared by two tiles, finitely many tiles meeting a small disc. Where the map used "the same tile", the measurable side has only
 clause (3) in its confinement form: for `z ∈ H_c`, `c` an endpoint label of `K_j`, either `K_j ⊂ B̄(z, 1)` or `K_j ∩ B(z, 1) = ∅`.
 
+*Dated correction (2026-10-07, filed by FS132-Z1, the record job; source: `plans/FS132-E3-derivation.md` § The route, step by step, row V6-TIP, and its report `data/fs132/reports/FS132-E3.md`, the line "statement defect"):* in the dictionary above, "a tip at `y` → a label `c` of the cycle with `y ∈ H_c`" is too wide — it also holds of a label present only outside the unit disc about `p`. The term that carries the step V6-TIP is "`y` in the closure of `H_c ∩ B(p, 1)`" (in the step table's words, `y ∈ cl(H_c ∩ B(p, 1))`). The text above is left as written.
+
 **C132-RUN-EMPTY.** *Statement:* each step of the route FS116-V6 § 2.2 (`plans/FS116-V6-verification.md`: V6-DIAM, V6-E1, V6-DICH,
 V6-RING, V6-WIN, V6-GERM, V6-TIP, V6-HUBS, V6-ANTI, V6-HUG, V6-COUNT, read with FS129-SR3-EMPTY-NS's sector form of the last)
 has a restatement under the dictionary, true of every weak measurable six-colouring of an open set containing a closed disc of

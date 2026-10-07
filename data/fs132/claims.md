@@ -274,4 +274,238 @@ the death of every such cycle — which are what the answer is made of and are n
   C132-ALT and C132-TURN-EDGE (two steps toward C132-TURN). **An overlap, ruled**: the strips with a fixed witness point in
   place of a limiting direction are the witness card's C132-WIT; the ring card's deriver uses that form as a step inside
   C132-CROSS, and the entry that crosses to the kernel lane is the witness card's.
+- **2026-10-07 (after FS132-E5's Stage 1, commit `c0284a2d`; FS-132 inventory item 14): the witness card's three claims as their
+  deriver states them** — read § 1.4 of that record whole:
+
+> - **C132-WIT-ORBIT.** C132-M-ORBIT's statement (`plans/FS132-E3-derivation.md` Stage 3) with "for each j modulo 4 let K_j be a
+> — source: plans/FS132-E5-derivation.md § 1.4
+
+> - **C132-WIT-EXCL.** C132-M-EXCL's statement with the same replacement.
+> — source: plans/FS132-E5-derivation.md § 1.4
+
+> - **C132-WIT-STRIP.** Let k ≥ 3 be an integer, x a point, U an open set containing the unit circle about x, c a weak measurable
+> — source: plans/FS132-E5-derivation.md § 1.4
+
+> **C132-WIT-EX** — as posed, with the definition written out. For every integer k ≥ 1, every weak measurable k-colouring of the
+> — source: plans/FS132-E5-derivation.md § 1.4
+
+> **C132-GRUNDY7** — the posed sentence has two clauses, and my verdicts will be about these:
+> — source: plans/FS132-E5-derivation.md § 1.4
+
+  C132-WIT is fixed as the conjunction of its three statements; C132-WIT-EX as posed with its definition written out, and an
+  anchored form the deriver will also rule on; C132-GRUNDY7 as two clauses, the second in two readings ("some output" and
+  "every output" of the Grundy construction).
+- **2026-10-07 (after FS132-E4's Stage 2, commit `5c04c375`; FS-132 inventory item 15): C132-COMP is derived as posed, [hand],
+  one mind, through two wider entries that enter the list, with one relay-result** — each statement read whole in its entry
+  (C132-COMP's own entry there carries the stub's statement, quoted above at the second round's line):
+
+> derivation: C132-CROSS
+> — source: plans/FS132-E4-derivation.md Stage 2
+
+> derivation: C132-COMP-SHARP
+> — source: plans/FS132-E4-derivation.md Stage 2
+
+> derivation: C132-WITNESS
+> — source: plans/FS132-E4-derivation.md Stage 2
+
+  **C132-CROSS** is a covering count that reads no properness, no palette, no limiting direction and no connectedness — only
+  the exclusions and two points of each set; **C132-COMP-SHARP**: six labels, witnessed triangles on disjoint triples at two
+  points less than 2 apart, a common unit point in the open set — then one of the six edge sets lies on the unit circle about
+  that point; C132-COMP as posed is its instance. *Not claimed*: each entry's own line.
+- **2026-10-07 (after FS132-E4's Stage 3, commit `44f4bdc9`; FS-132 inventory item 16): the ring card's other two claims have
+  their verdicts, and two entries enter the list** — each statement read whole in its entry:
+
+> derivation: C132-PLACE
+> — source: plans/FS132-E4-derivation.md Stage 3
+
+> derivation: C132-ALT
+> — source: plans/FS132-E4-derivation.md Stage 3
+
+> derivation: C132-TURN-EDGE
+> — source: plans/FS132-E4-derivation.md Stage 3
+
+  **C132-PLACE: derived** ([hand], one mind), with its list by the germs of the outside state 60° to either side. **C132-ALT**
+  ([hand]): no alternating step orbit has two adjacent ring points that both have a pure side — derived in step form; its
+  measurable form for inner–inner pairs only. **C132-TURN-EDGE** ([hand]): at a step of the ring under the stated sides, the
+  ring point carries no witnessed edge of the two ring labels. **C132-TURN: stalls** at the step from the card's hypothesis to
+  that witness — that the ring point is a cyclic centre, and that the witnessed triangle its hypothesis gives contains the
+  pair of ring labels (the relation of C132-EXT-DISC's clause (5), which no entry of that record uses). *Not claimed*: each
+  entry's own line; no ring by formula was built.
+- **2026-10-07 (after FS132-E5's Stages 2–3, commits `641b0836`, `7b47db5a`; FS-132 inventory item 18): two of the witness card's
+  claims have their verdicts, and five entries of that record enter the list** — each statement read whole in its entry:
+
+> derivation: C132-WIT-SIDE
+> — source: plans/FS132-E5-derivation.md
+
+> derivation: C132-WIT-MARGIN
+> — source: plans/FS132-E5-derivation.md
+
+> derivation: C132-WIT-CROSSED
+> — source: plans/FS132-E5-derivation.md
+
+> derivation: C132-WIT-SUPER
+> — source: plans/FS132-E5-derivation.md
+
+> derivation: C132-WIT-EX-FIN
+> — source: plans/FS132-E5-derivation.md
+
+  **C132-WIT: derived** ([hand] and derived from the first night's entries; one mind) — and **not a widening**: a two-point set
+  is an admissible set and the straddle set only shrinks, so C132-WIT-ORBIT and C132-WIT-EXCL are C132-M-ORBIT and C132-M-EXCL
+  themselves; C132-WIT-STRIP is wider than C132-TRI-STRIP, which is its corollary. **C132-WIT-SIDE** — any measurable
+  labelling, one witness, one side of one unit circle near a ring point — is the entry on which the strips, C132-TRI-STRIP and
+  C132-CROSS's first step all sit, and the one that crosses to the kernel lane for them. **C132-WIT-EX: stalls** at the
+  selection of a point through which connected pieces of two smoothed classes pass and reach a common second point (the
+  extraction's step at the annulus about an isolated centre); on the way C132-WIT-MARGIN (the statement as posed is free
+  wherever a colouring has a margin, at points that are no centres), C132-WIT-CROSSED, **C132-WIT-SUPER** (the exclusion
+  carried by any connected subset of one smoothed class's superlevel set — no hole, no centre, no isolation, one label at a
+  time) and C132-WIT-EX-FIN (an anchored witnessed cycle on every disc with finitely many centres). *Not claimed*: each
+  entry's own line. **Not yet answered**: C132-GRUNDY7.
+- **2026-10-07 (after FS132-E5's Stage 4, commit `1cf25b20`; FS-132 inventory item 19): C132-GRUNDY7 has its verdict** — read
+  each entry whole:
+
+> derivation: C132-GRUNDY7-NOT
+> — source: plans/FS132-E5-derivation.md
+
+> derivation: C132-GRUNDY7-LOCAL
+> — source: plans/FS132-E5-derivation.md
+
+  **C132-GRUNDY7: stalls at its second clause, which is not one statement** — "the Grundy-ization of each" names a family (a
+  maximality choice at each step, after a choice of order). Derived: **C132-GRUNDY7-NOT** (for no order is the honeycomb
+  colouring, the island colouring or the stripe colouring a Grundy colouring — true already of the unmodified honeycomb, so
+  the clause does not test the planted slack) and **C132-GRUNDY7-LOCAL** (for an order beginning with a label of the slack
+  vertex, some output has one label on the whole slack ball). **The second clause is withdrawn as posed**; its two readings —
+  "some output" and "every honest seven-colouring" — are open and go to the asking lane to pose or drop. **The class of
+  C132-RING-TAME's first clause is not decided by this claim.**
+- **2026-10-07 (after FS132-P3's Stage 1, commit `59a6fada`; FS-132 inventory item 21): A correction to two lines above, the
+  coordinator's.** The line for FS132-E4's Stage 3 calls C132-TURN's stall "the relation of C132-EXT-DISC's clause (5)". That
+  reads the clause more widely than its entry: clause (5) is derived for the extraction's own continua (its step S11, from
+  their radii filling an interval), and says nothing of whatever witnesses a hypothesis hands a point; for those the relation
+  is false in general (the witness card's record gives an anchored witnessed triangle at a point whose transition graph is a
+  path — hand, one mind, no control). **C132-TURN's stall is: that a witnessed triangle given at a point lies in that point's
+  own transition graph — a statement no entry of this list asserts.** And C132-TURN as posed carries the defect its poser
+  now names: "every cyclic centre of which carries a witnessed triangle" attaches data of a unit circle to a point defined by
+  its small balls, with nothing joining them. It stands as stalled and is not re-posed in that form.
+- **2026-10-07 (after FS132-P3's Stage 3, commit `83058514`; FS-132 inventory item 23): the milestone's third round — one card
+  of the asking lane and three claims, each posed, not derived** — read the stub's section "The question, re-posed after the
+  second round" whole, with its two forms, its controls and "What each answer gives":
+
+> question: what-does-a-seeds-circle-force-in-the-balls-about-its-ring-points
+> — source: plans/STUB-six-by-the-nerve.md
+
+> - **C132-LENS (posed, not derived).** On a six-sector turning seed, if at each of the ring points `y_1` and `y_{−1}` at least two
+> — source: plans/STUB-six-by-the-nerve.md
+
+> - **C132-PLACED (posed).** At the four-label ring point `y` of C132-LENS (ii): in the grammar of C132-PLACE's list, the labels
+> — source: plans/STUB-six-by-the-nerve.md
+
+> - **C132-ARC (posed).** In the setting of C132-COMP-SHARP, with exactly one of the six sets — a set of `x`, with labels `t_0`,
+> — source: plans/STUB-six-by-the-nerve.md
+
+  **The object is re-cut**: a *seed* — a point with data on its unit circle, however it came by them — and what that circle
+  forces in the balls about its ring points. **C132-LENS first** (the composition behind it is the asking lane's, four lines,
+  unchecked; it posits no witness at the ring point and does not use the extraction's clause (5)); then C132-PLACED and
+  C132-ARC. **Left out of this milestone by the asking lane's recommendation, adopted**: whether, in the class of all weak
+  colourings, a point with usable data must exist — C132-WIT-EX's open form, C132-RING-TAME's first clause for all weak
+  colourings, and C132-GRUNDY7's two readings go to FS-127 and FS-128. As before, each claim is stated by its deriver in its
+  record before it is derived; a change is a dated line here.
+- **2026-10-07 (FS132-K1's message from its blind phase; FS-132 inventory item 25): an attribution, and a wider form posed by the
+  kernel lane's planner.** (i) **C132-DIAG-WIDE, for colourings of the whole plane, is an instance of a theorem the release
+  already proves in Lean**: `OAI.EuclideanFiveColor.two_state_impossible`, stated there for every number of labels with at
+  most two labels outside the two sets (its `States.lean`, as the planner reads it). The release's manuscript states the
+  case of five labels only; its Lean is at the wider class. **So C132-DIAG-WIDE is `[OAIMath2026]`'s, at six, and is worded
+  from now on as a corollary of its Lean, not as a result of this milestone**; what this milestone adds is the reading of it
+  on an open set containing the closed unit disc, [hand], one mind. (ii) **C132-CORES-SQUARE (posed by the planner; [hand],
+  one mind, not yet in its record)**: every closed square of side greater than 1 contains a cyclic centre, hence every
+  closed disc of radius greater than `1/√2` — by this library's own kernel-checked covering theorem for the square
+  (`HadwigerNelson.LebesgueCovering.lebesgue_covering_square`) in place of the release's cover lemma; the mesh bound is the
+  release's argument, read by it and not re-derived at every number of labels. C132-CORES-FREE as fixed above is its
+  corollary. It is fixed here when its statement is in the planner's committed plan.
+- **2026-10-07 (after FS132-E6's Stage 1, commit `2692fd0b`; FS-132 inventory item 26): the seed card's first claim as its
+  deriver states it — in six statements — and a defect in a line it rests on** — read § 1.4 of that record whole:
+
+> - **C132-SHADOW** (the class; a relay-result). A weak colouring of an open set, any finite number of labels; `|p − p′| = 1`;
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+> - **C132-LENS** (the card's first sentence, in two halves). On a six-sector turning seed: a pure outer side at `y_1` keeps
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+> - **C132-LENS-SIDE** (the card's (i)): with both, `y_0` has no pure inner side.
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+> - **C132-LENS-FOUR** (what (ii) needs, locally): three consecutive ring points with pure outer sides — the middle one has
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+> - **C132-LENS-GERM** (the existence clause, at the hypothesis the argument reads): if each `K_j` has a point strictly inside
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+> - **C132-LENS-II**: the card's clause (ii), verbatim. Expected verdict: a gap at the antipodal step.
+> — source: plans/FS132-E6-derivation.md § 1.4
+
+  C132-LENS as posed is fixed as these: its first sentence in two halves (C132-LENS), its clause (i) (C132-LENS-SIDE), and its
+  clause (ii) kept verbatim as C132-LENS-II with two entries for what the deriver expects to derive of it (C132-LENS-FOUR,
+  C132-LENS-GERM); C132-SHADOW is the relay-result they stand on. C132-PLACED and C132-ARC stand as posed. **The defect**
+  ([hand], one mind — the deriver's): "pure sides are opposite at antipodes", used by the card's clause (ii) and by a read-off
+  line of the ring card's record, is true in one direction only when a side is "blocked by some point of the set" — a point
+  of a set strictly inside the unit circle about a ring point is strictly outside the one about its antipode, but not
+  conversely; three two-point sets with their second points at distance 3 from the centre give six pure inner sides and no
+  pure outer one. C132-TURN-EDGE's entry does not use the sentence; its stall's first item and C132-LENS (ii) as posed do.
+- **2026-10-07 (after FS132-E6's Stage 2, commit `c7783d3f`; FS-132 inventory item 28): C132-LENS has its verdict** — each
+  statement read whole in its entry (C132-LENS's own entry is beside them):
+
+> derivation: C132-SHADOW
+> — source: plans/FS132-E6-derivation.md Stage 2
+
+> derivation: C132-LENS-SIDE
+> — source: plans/FS132-E6-derivation.md Stage 2
+
+> derivation: C132-LENS-FOUR
+> — source: plans/FS132-E6-derivation.md Stage 2
+
+> derivation: C132-LENS-GERM
+> — source: plans/FS132-E6-derivation.md Stage 2
+
+> derivation: C132-LENS-II
+> — source: plans/FS132-E6-derivation.md Stage 2
+
+  **Derived** ([hand] or derived from it; one mind): **C132-SHADOW** (the class: an open one-label piece reaching a point keeps
+  its label off one whole side of the unit circle about that point, near every point at distance 1 — no palette, no chart,
+  no exclusion set); **C132-LENS** in its two halves (the lens between two outer-pure neighbours carries only the centre's
+  own labels; it reads nothing at the middle ring point); **C132-LENS-SIDE** (clause (i)); **C132-LENS-FOUR** (three
+  consecutive ring points with pure outer sides: the middle one has four labels present); **C132-LENS-GERM** (when each set
+  has a point strictly inside three of the six unit circles about the ring points and strictly outside the other three,
+  three consecutive ring points are outer-pure). **C132-LENS-II — the card's clause (ii) verbatim — is a GAP** at "pure
+  sides are opposite at antipodes"; sixteen patterns of sides stay open, all of them seeds whose sets witness from far away.
+  *Not claimed*: each entry's own line. **Not yet answered**: C132-PLACED; C132-ARC will not be reached by this job.
+- **2026-10-07 (after FS132-E6's Stage 3, commit `7145bd26`; FS-132 inventory item 29): C132-PLACED has its verdict; C132-ARC was
+  not reached** — read the entry and the list PL1–PL6 in that record's Stage 3 whole:
+
+> derivation: C132-PLACED-RING
+> — source: plans/FS132-E6-derivation.md Stage 3
+
+  **C132-PLACED: answered as a list, with a gap at one line** — whether any pair containing a label of the centre's triple is
+  a witnessed edge at the placed point; no four-cycle is closed by anything derived; in the card's table it is the second
+  row, a mixed ring. **C132-PLACED-RING** ([hand], one mind): the placed point's unit circle, at the two neighbouring ring
+  points, runs along an interface between the two ring labels, with opposite orientation at the two — so the first night's
+  exclusion says nothing on the orbit through the centre. **C132-LENS's clause (ii) stands as a gap** (C132-LENS-II), with
+  C132-LENS-FOUR and C132-LENS-GERM as what is derived of it; it is not re-posed. **C132-ARC: posed, unstarted.**
+- **2026-10-07 (after FS132-K1's Stage 3, commit `e3695302` on branch `fs132-wk1`; FS-132 inventory item 30): the kernel lane's
+  planner has read the first night's exclusion as a second mind, and two forms enter the list.** (i) **C132-M-ORBIT's steps
+  M7, M8 and M9 now have two readers** (their deriver; the planner, line by line, after a blind route of its own that reached
+  everything but M8): "no gap found". (ii) **The four-point form is the leaf**: C132-M-ORBIT with four points `q_j ≠ p` and
+  the straddle sets of `{p, q_j}` in place of four compact sets — the statement fixed above is its corollary, and
+  compactness is never used (the planner's skeleton proves the corollary; C132-WIT, derived, says the same by hand).
+  (iii) **C132-CORES-SQUARE, as the planner's record states it** (that branch's `plans/FS132-kernel-plan.md` § 3.5, copied by
+  script): "**C132-CORES-SQUARE** — statement: for every integer k ≥ 1 and every weak measurable k-colouring of the plane, every closed axis-parallel square of side greater than 1 contains a cyclic centre; in particular every closed disc of radius greater than 1/√2 does. *Not claimed:* a square of side 1 or less; that 1/√2 is sharp for discs (in the hexagonal model every disc of radius 2/5 contains one); squares that are not axis-parallel (they follow by rotating the colouring; not stated); anything for a colouring of a bounded region." — posed by the planner, [hand], one mind, its route not yet compared with the first deriver's steps;
+  C132-CORES-FREE is its corollary. (iv) **C132-CONFINE holds for every set** — neither compactness nor connectedness — and is
+  proved in Lean on that branch (not landed).
+- **2026-10-07 (after FS132-K2's Stage 6, commit `34ba3019` on branch `fs132-wk1`; FS-132 inventory item 39): the comparison
+  C132-CORES-SQUARE was waiting for is made — at the grade of a checking reading, one mind, with the argument open; the
+  verdict stays "gap" until a deriver's entry or a kernel proof stands.** The planner's successor read the first deriver's
+  steps against its predecessor's route: the route is that deriver's steps S5 and S7 with S6 exchanged for this library's
+  covering theorem for the square, "and on this reading only S6 reads the region's shape … I see no step left to derive".
+  **A fact for whoever formalizes it**: the release's Lean mesh theorem refutes connected sets joining points more than 2
+  apart, where the hand argument proves every threshold above 1; re-typed as it stands the kernel would hold a square of
+  side above 2 — a disc of radius above √2, less than C132-CORES-FREE claims. The index lemmas: "no difference in
+  statement" between the planner's one lemma and the second deriver's two entries. The four-point form and the witness
+  card's restatement: "the same statement".
 

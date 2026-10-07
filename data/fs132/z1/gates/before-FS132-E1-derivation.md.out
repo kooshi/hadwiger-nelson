@@ -1,0 +1,24 @@
+entry lint
+  claim C132-EXT-DISC: minds 1
+  claim C132-EXT-DISC: prior art partly
+  claim C132-CORES-FREE: governed by C132-EXT-DISC (hand, minds 1)
+  claim C132-CORES-FREE: minds 1
+  claim C132-CORES-FREE: prior art partly
+  claim C132-EXT: governed by C132-EXT-DISC (hand, minds 1)
+  claim C132-EXT: minds 1
+  claim C132-EXT: prior art partly
+  claim C132-CORES: governed by C132-CORES-FREE (derived from, minds 1)
+  claim C132-CORES: minds 1
+  claim C132-CORES: prior art partly
+  claim C132-CONFINE: minds 1
+  claim C132-CONFINE: prior art known
+  entries: 5  derived: 5  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    hex7-model: printed 'vertex-labels=3 edges=3 delta-samples=8963 violations=0 clause4=True'; with the fault planted ('' → '--fault') it printed 'vertex-labels=3 edges=3 delta-samples=89' — it fires
+  ok    hex7-islands: printed 'island-free-disc=True vertices-in-disc=18 clause4-at-v=False clause3-at-b=0 clause4-at-b=True'; with the fault planted ('' → '--fault') it printed 'island-free-disc=True vertices-in-disc=1' — it fires
+  ok    sec7-cites: printed 'eq:source-14 sec:transitions thm:cyclic-local-finiteness'; with the fault planted ('interfaces' → 'transitions') it printed 'eq:source-10 eq:source-11 eq:source-12 l' — it fires
+  ok    reduced-words: printed '0'; with the fault planted ('' → '--fault') it printed '2450' — it fires
+  controls: 4  fired on their faults: 4
+GATE: PASS (0 failures, 0 warnings)

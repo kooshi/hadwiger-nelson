@@ -1,0 +1,153 @@
+### E4 line 190
+derivation: C132-CROSS
+  statement: let L be a finite set of labels, U an open set of the plane, c a measurable map from U to L, H_i the closed essential support of the class of i, x and y two points with 0 < |x − y| < 2, w a point of U with |w − x| = |w − y| = 1, and 𝒦_x, 𝒦_y two finite families of pairs (K, E) of a compact set K and a set E of labels with H_i ∩ Δ(K) = ∅ for every i in E, where Δ(K) is the set of z with min over q ∈ K of |z − q| below 1 and max over q ∈ K of |z − q| above 1, with x ∈ K for the pairs of 𝒦_x and y ∈ K for the pairs of 𝒦_y; let E_x^out be the union of the sets E over the pairs of 𝒦_x whose K has a point q with |w − q| < 1, E_x^in the union over the pairs of 𝒦_x whose K has a point q with |w − q| > 1, E_y^out the union over the pairs of 𝒦_y whose K has a point q with |w − q| < 1, and E_y^in the union over the pairs of 𝒦_y whose K has a point q with |w − q| > 1; then none of the four sets E_x^out ∪ E_y^out, E_x^out ∪ E_y^in, E_x^in ∪ E_y^out, E_x^in ∪ E_y^in is all of L
+  uses only: the definition of Δ(K) with two of its points (x and q); that a point outside H_i has a neighbourhood meeting the class of i in a null set; that z ↦ (|z − x|, |z − y|) is a local diffeomorphism at w when x, y, w are not collinear, which 0 < |x − y| < 2 gives; that a set of positive measure in U has a label almost everywhere. It reads no properness, no palette, no limiting direction, no connectedness of the sets K, and of a set K two of its points
+  not claimed: anything at |x − y| = 2 (the circles are tangent and one quadrant is empty: the fault of control `crossing`) or at x = y; anything about a set K all of whose points are at distance 1 from w — such a pair enters none of the four unions; that the exclusions hold for any colouring (they are hypotheses here: at an extracted centre they are clause (3) of C132-EXT-DISC, in a map the edge exclusion, C132-WITNESS below); any area or scale (the quantified form with holes is FS107-R-CP, row 133)
+  argument: § Argument — the covering count
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: seven labels, the hexagonal seven-colouring with circumradius 2/5, x and y two of its vertices less than 2 apart with their three edges each: every edge is blocked on a side, the four unions are the six labels of the two vertices at most, and the label seen near w is outside both (control `hex7-crossings`)
+  prior art: partly: for maps it is the composition behind row 133's FS107-W-TAN (over C-T-TAN, `plans/FS107-W-near-colourings.md` § 2.5) and FS110-N-SEAM's "every tile there lies on one side of the unit circles"; its regular form is `[Voronov2023]` Prop. 2.2 by this project's record FS106-TAN (the paper not read by this job); for a measurable labelling with exclusion sets it was not found by the milestone's gate (`plans/FS132-six-by-the-nerve.md` §PA), which this job did not extend
+  handoff: de Bruijn — the statement as written: no colouring theory in it; a local diffeomorphism at w, four non-empty open quadrants, finitely many excluded label sets on each. Its first step (an edge set with a point strictly inside or outside the unit circle about w excludes its labels on one side of the centre's unit circle near w) is the strips clause of the witness card's C132-WIT, whose entry is the one that crosses (the coordinator's ruling, 2026-10-07)
+
+### E4 line 202
+derivation: C132-COMP-SHARP
+  statement: let U be an open set of the plane, c a measurable map from U to a set of six labels, H_i the closed essential support of the class of i, x and y two points with 0 < |x − y| < 2, t_0, t_1, t_2 and t′_0, t′_1, t′_2 the six labels, K_0, K_1, K_2 compact sets containing x with H_{t_j} ∩ Δ(K_j) = ∅ and H_{t_{j+1}} ∩ Δ(K_j) = ∅ for each j modulo 3, K′_0, K′_1, K′_2 compact sets containing y with H_{t′_j} ∩ Δ(K′_j) = ∅ and H_{t′_{j+1}} ∩ Δ(K′_j) = ∅ for each j modulo 3, and w a point of U with |w − x| = |w − y| = 1; then one of the six sets K_0, K_1, K_2, K′_0, K′_1, K′_2 is contained in the unit circle about w
+  uses only: C132-CROSS with the three pairs (K_j, {t_j, t_{j+1}}) at x and the three pairs (K′_j, {t′_j, t′_{j+1}}) at y; that three sets each blocked on one of two sides have two blocked on one side; that two edges of a triangle have all three of its labels among their endpoints; that two disjoint triples of six labels are all the labels
+  not claimed: which of the six sets it is, or that it is one of x's; anything with seven labels or more (two triangles then leave a label outside both, and the honeycomb is the model of that); anything at a point with three labels and only two witnessed pairs (a bowtie: sectors a, b, a, c have no edge b–c, and fragments S1, BB and MX of FS110-FRAGS are valid with one); that a configuration with a set on the unit circle about w is impossible — fragment T2 is one, on small neighbourhoods of four points
+  argument: § Argument — complementary triangles
+  verdict: derived
+  grade: derived from: C132-CROSS
+  minds: 1
+  model: fragment T2 of FS110-FRAGS (`tools/fs110_y_fragments.py`): x = (0, 0) with labels 1, 2, 3, y = (1, 0) with labels 4, 5, 6, w = (1/2, √3/2), a valid six-coloured fragment on neighbourhoods of the four points; its tiles are connected, so its edges carry the exclusion (C132-WITNESS), and three of the six edge sets lie on the unit circle about w — two of x's and one of y's (control `seam-fragments`)
+  prior art: partly: as C132-CROSS; in the map class the statement with its exception read as "tangent pair or bowtie" is FS107-W-TAN (row 133) and, with no unit arcs, FS110-NB-5 (row 134); the exception as "an edge set on the unit circle about the common unit point" is in this project's files only as fragment T2 and its planted fault `t2_flat`; not searched in print by this job — owed
+  handoff: de Bruijn — a corollary of C132-CROSS by one pigeonhole; the formal statement to read back is "one of the six sets is contained in the unit circle about w"
+
+### E4 line 214
+derivation: C132-COMP
+  statement: No weak measurable six-colouring of an open set containing the closed unit discs about two points `x ≠ y` with `|x − y| < 2` has at `x` and at `y` the data of C132-TRI-STRIP (clauses (1)–(3) with `ℓ = 3`) with disjoint label triples, provided one of the two crossing points of the unit circles lies, for `x` and for `y`, in a direction perpendicular to none of that centre's three limiting directions
+  uses only: C132-COMP-SHARP at the crossing point of the proviso; of clause (2), that a set K_j with points x + s_m w_m, s_m → 0, w_m → v_j, has a point off the unit circle about x + e whenever e·v_j ≠ 0 (the identity |x + e − q|² = 1 + s² − 2s e·w); of clause (1), x ∈ K_j; clause (3). Properness is not consumed; nothing is read of the second crossing point, of connectedness, of clauses (4) and (5), or of which side is pure
+  not claimed: that the data exist at any point of any six-colouring; the statement without the proviso (fragment T2 has the data at both points, at distance 1, and fails the proviso at both crossing points — two of its edges at x are arcs of the unit circle about w, with limiting directions perpendicular to w − x); any bound on the number of triangle types in a disc (the regular chain's count is unposed for weak colourings)
+  argument: § Argument — the posed form
+  verdict: derived
+  grade: derived from: C132-COMP-SHARP
+  minds: 1
+  model: none can exist (a non-existence); the hypotheses other than the proviso are met by fragment T2 (the model of C132-COMP-SHARP), and at seven labels two triples are never all the labels (control `hex7-crossings`: least-shared-outside=1)
+  prior art: partly: as C132-COMP-SHARP
+  handoff: none — subsumed by C132-COMP-SHARP, which crosses
+
+### E4 line 226
+derivation: C132-WITNESS
+  statement: let U be an open set of the plane, c a measurable map from U to a finite set of labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, i a label, and R a connected open subset of U almost every point of which has the label i; then the closed essential support of the class of i is disjoint from Δ(K) for every compact set K contained in the closure of R
+  uses only: that a connected open set is path-connected; the intermediate value theorem for the distance to a point along a path; Fubini for the map (z, u) ↦ z + u; weak properness in its measure form
+  not claimed: that the regions of a weak colouring are open, connected or of one label — a weak colouring need have no such region; that an edge of a transition graph is witnessed (the relation between the two is not derived here, and is where C132-TURN stalls in Stage 3); anything for a region that is not connected
+  argument: § Argument — a region witnesses its label
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the hexagonal seven-colouring with circumradius 2/5, R the interior of a tile and K one of its edges: a point of the tile's label lies in that tile, within 4/5 of every point of K, or in another tile of that label, farther than 1 from every point of the first tile (the two are at least 1.033 apart) — in neither case in Δ(K)
+  prior art: known: the edge exclusion of a map colouring — `[SokolovVoronov2025]` Props. 1–2 by this project's row 134 (not read by this job) and `[OAIMath2026]` (7.1) with Proposition 7.1 (3) for continua; the statement for a region of a weak colouring is that argument
+  handoff: de Bruijn — only with a consumer (C132-TURN-EDGE reads a witnessed edge and does not derive one); a path, the intermediate value theorem and Fubini
+
+### E4 line 238
+control: crossing
+  of: C132-CROSS — step B2: the squared Jacobian of z ↦ (|z − x|, |z − y|) at the common unit point, |x − y|² (1 − |x − y|²/4), for |x − y| = 1/10, 1/2, 1, 3/2, 19/10, and all four quadrants seen on a grid about it
+  run: python3 ../data/fs132/e4/ring_card_checks.py crossing
+  expect: least-squared-jacobian=399/40000 all-four-quadrants=True
+  fault: python3 ../data/fs132/e4/ring_card_checks.py crossing --fault
+
+### E4 line 244
+control: hex7-crossings
+  of: C132-CROSS — at seven: every two vertices of the hexagonal seven-colouring less than 2 apart, both common unit points: no label of either vertex near them, and a label outside both triangles always exists
+  run: python3 ../data/fs132/e4/ring_card_checks.py hex7
+  expect: vertex-pairs=342 crossings=684 least-shared-outside=1 own-label-near-crossing=0
+  fault: python3 ../data/fs132/e4/ring_card_checks.py hex7 --fault
+
+### E4 line 250
+control: seam-fragments
+  of: C132-COMP-SHARP — the four held seam fragments of FS110-FRAGS, both common unit points: the labels the blocking rule excludes, read off each fragment's own edges at its two centres, against the labels found near the points; FS110-Y's checker beside it; in T2, the edge sets on the unit circle about w
+  run: python3 ../data/fs132/e4/ring_card_checks.py fragments
+  expect: excluded-labels-seen-near-the-common-unit-points:S1=0,T2=0,BB=0,MX=0 checker=ACCEPT,ACCEPT,ACCEPT,ACCEPT sets-of-T2-on-the-unit-circle-about-w=3
+  fault: python3 ../data/fs132/e4/ring_card_checks.py fragments --fault
+
+### E4 line 374
+derivation: C132-PLACE
+  statement: let U be an open set of the plane containing the closed unit disc about a point x, c a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, T a set of three labels and K_0, K_1, K_2 compact sets containing x such that for each of the three pairs of labels of T one of the sets K_j has Δ(K_j) disjoint from the closed essential supports of both labels of the pair, N the set of the three other labels, and ψ an angle such that at least two of the sets K_j have a point q with |x + e(ψ) − q| < 1; then there is κ > 0 such that for almost every (α, d) with |α − ψ − π/3| < κ and −κ < d < 0 the label of the point x + e(α) + e(α − 2π/3 − d) lies in N and in neither of the palettes P_x(e(α)) and P_x(e(α − 2π/3 − d)); and if at least two of the sets K_j have a point q with |x + e(ψ) − q| > 1, there is κ > 0 such that for almost every (α, d) with |α − ψ − π/3| < κ and 0 < d < κ the label of that point lies in N and in neither of those two palettes
+  uses only: `[OAIMath2026]` Lemma 5.2 assertion (1) read locally (`palettes.tex:111–203`, read with its proof: label by label, no count, and local to the pairs whose sums stay in U — FS132-E3's reading T2, which I re-read against the source); the chart Z (FS132-E3's M2) and that it carries null sets to null sets; step B1 of C132-CROSS (a set with a point strictly inside, or outside, the unit circle about the ring point excludes its two labels on the outer, or inner, side near it); that two edges of a triangle have its three labels among their endpoints. It reads nothing of the limiting directions, of connectedness, of the transition graph, or of the other side of the ring
+  not claimed: anything on the side that is not pure — there the label lies outside the two palettes and may be a label of T; anything at a ring point with no pure side (then one of the sets K_j lies on the unit circle about the ring point, by the pigeonhole of C132-COMP-SHARP); that the two palettes are singletons, or that the outside state is a step; that the ring point is a cyclic centre
+  argument: § Argument — the transfer on the pure side
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: seven labels, the hexagonal seven-colouring at the vertex (0, 2/5), where both sides are pure at every direction (FS132-E2's control `hex7-relation`): the label at a point near the ring is outside the labels at its two ring neighbours — properness of the honeycomb at distance 1; no six-colouring is known, and at six the list under the argument is checked on the two six-sector rings as patterns (control `chart-wedges`)
+  prior art: partly: `[OAIMath2026]` Lemma 5.2 and Lemma 8.1 are the two inputs, and its lemma "Polynomial three-label region" (`angular.tex:484–524`, the eighth numbered statement of its § 8) is this statement at five labels for two outside labels and both neighbours inside sectors; in the map class it is this project's ring calculus (G91; FS116-V6's V6-GERM, as FS132-E3's M2 restates it); the three-label form on a pure side not found by the milestone's gate, which this job did not extend
+  handoff: de Bruijn — over the release's `palette_transport_param` at `Fin 6` and the strips clause of C132-WIT: the statement as written, two cases by the side
+
+### E4 line 386
+derivation: C132-ALT
+  statement: let U be an open set of the plane containing the closed unit disc about a point x, c a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, T a set of three labels and K_0, K_1, K_2 compact sets containing x such that for each of the three pairs of labels of T one of the sets K_j has Δ(K_j) disjoint from the closed essential supports of both labels of the pair, a and b two labels outside T, ψ an angle and δ > 0 such that for every integer k the palette P_x(e(θ)) contains a for almost every θ in (ψ + kπ/3 − δ, ψ + kπ/3) when k is even and for almost every θ in (ψ + kπ/3, ψ + kπ/3 + δ) when k is odd, and contains b for almost every θ in (ψ + kπ/3, ψ + kπ/3 + δ) when k is even and for almost every θ in (ψ + kπ/3 − δ, ψ + kπ/3) when k is odd; then there is no integer k such that, for both m = k and m = k + 1, at least two of the sets K_j have a point strictly inside the unit circle about x + e(ψ + mπ/3) or at least two of them have a point strictly outside it
+  uses only: C132-PLACE at two adjacent ring points; the unit-pair relation between points near two ring points π/3 apart, FS132-E3's M7, with its shift ε = d d′ h(d, d′), h smooth and h(0, 0) = 2/√3, read for both signs of d and of d′ (the derivation there does not use the signs; control `unit-shift`); weak properness; six labels, as "three outside T"
+  not claimed: the statement for a ring that alternates near the orbit without being a step (palettes that hold a or b almost everywhere near the six points, each on a set of positive measure near ψ): for two adjacent ring points with pure inner sides it follows, because FS132-E3's Lemma S makes such a state a step; for the three other patterns of sides it needs a shift lemma of that kind for three other arrangements of the two gaps, which is sketched under the argument and not entered; anything at an orbit none of whose adjacent pairs has two pure sides — then three of the six ring points, alternate ones, each have one of the three sets K_j on their unit circle; anything at seven labels
+  argument: § Argument — the alternating orbit
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none can exist (a non-existence); as a pattern, the six-sector ring a, b, a, b, a, b: at each ring point the far wedge and the lens are left the third outside label (control `chart-wedges`), and between two adjacent ring points the forced regions hold unit pairs for three of the four patterns of sides and none for two inner sides, where the argument takes its second step (control `forced-pairs`: 36, 129, 93, 0)
+  prior art: partly: at five labels the ring of a triangle centre is this alternating ring and the release kills it by rigidity and a Moser spindle in the region its lemma "Polynomial three-label region" leaves to the triangle's labels (`angular.tex:476–607`); the mechanism here is FS132-E3's M7–M9 (C132-M-ORBIT) with the third outside label in the place of the tip; the six-label statement not found by the milestone's gate, which this job did not extend
+  handoff: de Bruijn — after C132-M-ORBIT's module, which holds the chart, the unit-pair relation and the kill; here four cases by the sides, three of them one open set of unit pairs each
+
+### E4 line 398
+derivation: C132-TURN-EDGE
+  statement: let U be an open set of the plane containing the closed unit disc about a point x, c a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, T a set of three labels and K_0, K_1, K_2 compact sets containing x such that for each of the three pairs of labels of T one of the sets K_j has Δ(K_j) disjoint from the closed essential supports of both labels of the pair, a, b, n the three labels outside T, ψ an angle and δ > 0 such that the palette P_x(e(θ)) contains a for almost every θ in (ψ − δ, ψ), contains b for almost every θ in (ψ, ψ + δ), and contains n for almost every θ in (ψ + 2π/3 − δ, ψ + 2π/3) and for almost every θ in (ψ − 2π/3, ψ − 2π/3 + δ), and suppose that at least two of the sets K_j have a point strictly inside the unit circle about x + e(ψ + π/3) and at least two of them have a point strictly inside the unit circle about x + e(ψ − π/3); then there is no compact set K containing x + e(ψ) and another point such that Δ(K) is disjoint from the closed essential supports of a and of b
+  uses only: C132-PLACE on the outer side at the two ring points x + e(ψ ± π/3); the first clause of C132-CONFINE (a support point outside Δ(K) has all of K within 1 or none of K nearer than 1); that the unit circles about x + e(ψ + π/3) and x + e(ψ − π/3) meet at x and at x + e(ψ) and nowhere else (control `turning-edge`)
+  not claimed: that the ring point is a cyclic centre, or carries any witnessed edge; that the pair {a, b} is an edge of its transition graph; anything when one of the two neighbouring ring points has only a pure inner side (the third label is then forced in no region the argument can read); anything for a state that is not a step at ψ; that a colouring with these hypotheses exists
+  argument: § Argument — no witness between the two ring labels
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none at six — no six-colouring is known; the hypotheses on the ring are those of the six-sector ring a, b, n, a, b, n at any of its six ring points, and the regions the argument reads lie where it says (control `turning-edge`); at seven the honeycomb's ring at a vertex has no step whose neighbours 2π/3 away agree on a third label out of three (its ring carries four labels)
+  prior art: owed — the statement is this job's; its mechanism is C132-CONFINE (FS132-E1) read at two points of the unit circle about the ring point
+  handoff: de Bruijn — only with a consumer; from C132-PLACE and C132-CONFINE, two confinements and one intersection of circles
+
+### E4 line 410
+derivation: C132-TURN
+  statement: In a weak measurable six-colouring of a closed disc of radius above 2 about a triangle centre `x`, every cyclic centre of which carries a witnessed triangle and no longer witnessed cycle, `W_x = 3` almost everywhere and no two essential changes of the outside label are `π/3` apart
+  uses only: nothing is carried to the statement. Derived on the way: C132-ALT (two changes π/3 apart of the alternating kind, for a step and two adjacent ring points with pure sides) and C132-TURN-EDGE (at a step of the turning kind whose two neighbours have pure outer sides the two ring labels are never a witnessed edge at the ring point)
+  not claimed: its truth or its falsity; that a ring by formula survives — none was built, and § What a colouring by formula would need says why none is in reach without a search; anything for an outside state that is only measurable near the orbit
+  argument: § Where C132-TURN stalls
+  verdict: stalls at: the step from the card's hypothesis to a witness at the ring point of a turning orbit — that the ring point is a cyclic centre (the side of the ring that is not pure is left free by the transfer), and that the witnessed triangle the hypothesis then gives it contains the pair of the two ring labels, as it would if a witnessed cycle had to lie in the point's own transition graph (the relation of C132-EXT-DISC's clause (5), one mind, against a sentence of the manuscript); with that pair witnessed C132-TURN-EDGE is a contradiction
+  grade: hand
+  minds: 1
+  model: none — no six-colouring is known; at seven the statement has no analogue (four outside labels carry no orbit index, and the honeycomb's rings have no two changes π/3 apart: FS132-E2's control `hex7-relation`)
+  prior art: partly: in the map classes "no two changes π/3 apart" is Sokolov–Voronov's transversality (by `plans/FS110-CB-verification.md` § D5, as FS132-E2's entry C132-RING-TAME cites it; not read by this job); for weak colourings not found by the milestone's gate
+  handoff: Poros — not derived; stalls at a witness at the ring point; the smallest open forms are § Where C132-TURN stalls, items (i)–(iii)
+
+### E4 line 422
+control: chart-wedges
+  of: C132-PLACE — the chart's three signs (inside the ring; inside the unit circle about the forward neighbour's ring point; inside the one about the backward neighbour's) on 1,681 points, and the label sets the transfer leaves in the four wedges for the two six-sector rings
+  run: python3 ../data/fs132/e4/ring_card_checks.py wedges
+  expect: chart-samples=1681 sign-mismatches=0 turning:far=c lens=ab cw=a ccw=b alternating:far=c lens=c cw=ac ccw=bc
+  fault: python3 ../data/fs132/e4/ring_card_checks.py wedges --fault
+
+### E4 line 428
+control: unit-shift
+  of: C132-ALT — the shift ε(d, d′) of the unit-pair relation in all four sign quadrants: its ratio to d d′ and the bounds the argument uses (the sign of d d′; at most min(|d|, |d′|)/16)
+  run: python3 ../data/fs132/e4/ring_card_checks.py shift
+  expect: ratio-min=1.114 ratio-max=1.199 limit=1.1547 sign-or-size-violations=0
+  fault: python3 ../data/fs132/e4/ring_card_checks.py shift --fault
+
+### E4 line 434
+control: forced-pairs
+  of: C132-ALT — sampled unit pairs between two adjacent ring points whose two labels the transfer forces to one label, for the four patterns of pure sides (O outer, I inner), on the alternating and on the turning six-sector ring
+  run: python3 ../data/fs132/e4/ring_card_checks.py pairs
+  expect: alternating:OO=36,OI=129,IO=93,II=0 turning:OO=0,OI=0,IO=0,II=0
+  fault: python3 ../data/fs132/e4/ring_card_checks.py pairs --fault
+
+### E4 line 440
+control: turning-edge
+  of: C132-TURN-EDGE — the unit circles about the two neighbouring ring points meet at x and at the ring point; the four regions read lie outside the ring and on the stated side of the unit circle about the ring point
+  run: python3 ../data/fs132/e4/ring_card_checks.py edge
+  expect: circles-meet-at-x-and-y=True region-samples=576 side-mismatches=0
+  fault: python3 ../data/fs132/e4/ring_card_checks.py edge --fault
+

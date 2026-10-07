@@ -1,0 +1,3 @@
+== fragment T2: 14 tiles, 24 same-colour pairs (self included): ACCEPT
+   geometry guard (float): overlapping samples 0, uncovered samples within 0.05 of a vertex 0
+PLANT None YPLANT None ALL ACCEPT

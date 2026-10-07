@@ -1,0 +1,5 @@
+== fragment T2: 14 tiles, 24 same-colour pairs (self included): REJECT
+   colour 4  W_0    v_1    REJECT range ~[0.992278, 1.371629]
+   colour 1  u_1    w_0    REJECT range ~[0.992278, 1.371629]
+   REJECTED PAIRS: [('W_0', 'v_1'), ('u_1', 'w_0')]
+PLANT t2_flat YPLANT None SOME REJECT

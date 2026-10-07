@@ -1,0 +1,93 @@
+### E1 line 76
+derivation: C132-EXT-DISC
+  statement: let k ≥ 1 be an integer, c a weak measurable k-colouring of the plane (`[OAIMath2026]` Definition 1.2), 𝓛 the set of its cyclic centres (the points x whose transition graph Γ_x, Definition 6.1 read with k labels, contains a cycle), and D a closed disc of radius greater than 1 with 𝓛 ∩ D finite; then there are a point x of 𝓛 in the interior of D, an integer ℓ with 3 ≤ ℓ ≤ k, distinct labels i_0, …, i_{ℓ−1}, a radius ρ > 0 with B̄(x, ρ) ⊂ D and 𝓛 ∩ B̄(x, ρ) = {x}, and for each j modulo ℓ a compact connected set K_j ⊂ B̄(x, ρ), a unit vector v_j and points q_{j,m} of K_j other than x, such that (1) x ∈ K_j and K_j meets the circle ∂B(x, ρ); (2) q_{j,m} → x and (q_{j,m} − x)/|q_{j,m} − x| → v_j as m → ∞; (3) H_{i_j} ∩ Δ(K_j) = ∅ and H_{i_{j+1}} ∩ Δ(K_j) = ∅, where H_i is the closed essential support of the class of label i and Δ(K) is the set of z with min over q ∈ K of |z − q| below 1 and max over q ∈ K of |z − q| above 1; (4) K_j ⊂ H_{i_j} ∩ H_{i_{j+1}}; (5) i_j i_{j+1} is an edge of Γ_x
+  uses only: Definition 1.2 and Lemma 4.3 at k (density points of a class hold no unit pair); Definition 6.1 and that each edge-presence locus is closed; Lemmas 7.2 and 7.3 (which read two labels at a time); the threshold map with 0 < α < 1/k; that a clique in a forest has at most two vertices; trees are contractible; Lemma 7.5's argument on a disc of radius above the mesh (Brouwer); Lemmas 7.7 and 7.8 for a finite connected simple graph (or `annulus_forest_extension`, any finite vertex type); Hausdorff limits of continua; finitely many simple cycles in the complete graph on k labels. Of the centres it reads finiteness of 𝓛 ∩ D at three places: (i) Lemma 7.4 — the core discs' total radius |𝓛 ∩ D|·δ → 0 and one core disc per centre (`M/interfaces.tex:265–287`), consumed as |E_n| → 0 in the mesh bound and in clause (3); (ii) the pigeonhole "pass to a subsequence with a fixed x" (`:579–581`); (iii) **isolation of that x in 𝓛**, at "Choose ρ > 0 so small that B̄(x, ρ) … contains no other point of L_0 … The map g_n is therefore defined on the closed annulus" (`:581–590`) and at Lemma 7.8's use of the annulus's fundamental group ℤ (`:515–520`, `:568–571`): the continuum must cross an annulus about x that holds no other centre. It reads nothing of § 5, of Lemma 6.2 or of the state lemmas (control `sec7-cites`)
+  not claimed: the conclusion when 𝓛 ∩ D is infinite — closed and totally disconnected does not let this argument run (§ Card 2); that a point whose transition graph contains a cycle of length ℓ carries this data with a cycle of length ℓ (the argument selects a centre by an essential loop of the nerve map; the converse of clause (5) is open, § The relation asked for); that the hypothesis holds for any six-colouring; that ℓ ≥ 4 at any centre; any value of χ(ℝ²); sharpness of the radius 1
+  argument: § Argument — the extraction on a disc
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 7, the hexagonal seven-colouring with circumradius 2/5 and any closed disc of radius above 1 — its cyclic centres are the honeycomb's vertices (18 of them in the disc of control `hex7-islands`), and at the vertex (0, 2/5) the data is the triangle of labels 0, 3, 2 with the three edges cut at ρ = 0.3 (control `hex7-model`); for k ≤ 5 no weak measurable k-colouring exists (`[OAIMath2026]` Theorem 1.4) and the statement is vacuous; at k = 6 the class is not known to be inhabited
+  prior art: partly: `[OAIMath2026]` Proposition 7.1 with Lemmas 7.2–7.8 is this argument at five labels on a square of side ten, with clauses (1)–(3) and the sentence "The extracted cycle need not consist of edges of Γ_x"; the statement at every k, the disc, the hypothesis read, and clauses (4) and (5) not found in print — two web queries and the arXiv listing "chromatic number of the plane" newest first (nothing dated from 2026-10-06 on); zbMATH owed (its API returned 503 three times on 2026-10-07)
+  handoff: de Bruijn — the statement at `Fin k` with the release's own constants (cores finite in `closedBall 0 8`, the map on `closedBall 0 5`): some core x at which the graph of common interfaces contains a cycle; by the release's skeleton with `commonInterface_graph_acyclic` (five-only) turned into a hypothesis and contraposed. Already general in `L`: `annulus_forest_extension`, `graph_forest_patch`, `forest_disk_extension`, `simplex_mem_forest`, `continuum_limit_support_exclusion`, `compact_open_cover_impossible`, `diskAverage_unit_pair`, `missing_edge_disk_cover`. Typed `Fin 5`, reading five only as α < 1/5: `thresholdMap`, `forest_chart`, `small_hole_map`, `HoleApprox`, `FullApprox`, `no_large_positive_sequence`, `CommonInterface`, `eventually_forest_of_bridges`. The disc of radius above 1 and clauses (4), (5) have no Lean counterpart; read the formal statement back against this one
+
+### E1 line 88
+derivation: C132-CORES-FREE
+  statement: for every integer k ≥ 1 and every weak measurable k-colouring of the plane, every closed disc of radius greater than 1 contains a cyclic centre
+  uses only: C132-EXT-DISC in the case 𝓛 ∩ D = ∅, where its steps S5–S7 run with no core disc at all — nothing is read of the centres
+  not claimed: that a closed disc of radius 1 or less contains one (in the model every disc of radius 2/5 does; the constant here is the mesh bound of Lemma 7.6, not a sharp one); that the centre found carries any continuum; anything about a colouring defined only on a disc
+  argument: § Argument — cores exist
+  verdict: derived
+  grade: derived from: C132-EXT-DISC
+  minds: 1
+  model: k = 7, the hexagonal seven-colouring with circumradius 2/5 — every closed disc of radius 2/5 holds a vertex; and the island colouring `EXT-OAI2-SLACK7-L`, where the statement holds with infinitely many centres in every disc about v
+  prior art: partly: `[OAIMath2026]` Lemma 7.6, last sentence ("This argument also rules out the possibility of having no core disks in Q"), at five labels and under Theorem 6.5; the statement with no hypothesis on the centres and at every k not found in print (searches as for C132-EXT-DISC)
+  handoff: de Bruijn — at `Fin k` with the release's constants: `(Metric.closedBall 0 8 ∩ CyclicCore c).Nonempty`; it is `fullApprox_exists_of_finite_core` with `L = ∅` at `Fin k` against `no_large_positive_sequence` and `compact_open_cover_impossible`
+
+### E1 line 100
+derivation: C132-EXT
+  statement: For every `k` and every measurable `c : ℝ² → {1, …, k}` proper at almost every unit pair whose cyclic centres (the manuscript's Definition 6.1 with `k` labels) are finite in the closed disc of radius 8: there are a cyclic centre `x`, a simple cycle of labels of length `ℓ ∈ {3, …, k}`, and `ℓ` compact connected sets through `x` with limiting directions, each excluding the essential supports of both its labels from its straddle set — the manuscript's Proposition 7.1 with `k` in place of five
+  uses only: C132-EXT-DISC with D the closed disc of radius 8
+  not claimed: what C132-EXT-DISC does not claim; that radius 8 is needed (any radius above 1 serves)
+  argument: § Argument — the posed forms
+  verdict: derived
+  grade: derived from: C132-EXT-DISC
+  minds: 1
+  model: the model of C132-EXT-DISC, with the disc of radius 8 about any point
+  prior art: partly: as C132-EXT-DISC
+  handoff: de Bruijn — as the instance of C132-EXT-DISC that fits the release's Lean constants; the formal statement to read back is this one
+
+### E1 line 112
+derivation: C132-CORES
+  statement: for every `k`, such a colouring has a cyclic centre in every closed disc of radius 8
+  uses only: C132-CORES-FREE; the finiteness hypothesis carried by "such a colouring" is not used
+  not claimed: what C132-CORES-FREE does not claim
+  argument: § Argument — the posed forms
+  verdict: derived
+  grade: derived from: C132-CORES-FREE
+  minds: 1
+  model: the model of C132-CORES-FREE
+  prior art: partly: as C132-CORES-FREE
+  handoff: none — subsumed by C132-CORES-FREE, which crosses
+
+### E1 line 124
+derivation: C132-CONFINE
+  statement: let K be a compact connected set and H a set with H ∩ Δ(K) = ∅; then for every z ∈ H, either K ⊂ B̄(z, 1) or K ∩ B(z, 1) = ∅; in particular, if x ∈ K and z ∈ H with |z − x| < 1 then K ⊂ B̄(z, 1), and if x ∈ K, z ∈ H, |z − x| = 1 and (q_m) is a sequence in K ∖ {x} tending to x with (q_m − x)/|q_m − x| → v, then v·(z − x) ≥ 0 when K ⊂ B̄(z, 1) and v·(z − x) ≤ 0 when K ∩ B(z, 1) = ∅
+  uses only: the definition of Δ(K); for the last clause, |q − z|² = 1 − 2 (q − x)·(z − x) + |q − x|² when |z − x| = 1. Connectedness of K is not used
+  not claimed: which of the two cases occurs; that the two cases exclude each other when |z − x| = 1 (K = {x} satisfies both); anything about labels — the statement has no colouring in it
+  argument: § Argument — confinement
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: K the segment from (0, 0) to (0.3, 0) and H = {(0.15, 0.9)} — the largest distance from that point to K is √(0.15² + 0.81) ≈ 0.912 < 1, so it is outside Δ(K) and K ⊂ B̄(z, 1); checked on the hexagonal model by control `hex7-model`, whose zero count is this statement's contrapositive for the supports of the two edge labels
+  prior art: known: the contrapositive of the manuscript's definition (7.1) of the straddling region; the sign form is the mechanism of its Lemma 8.1 (read at its statement in `plans/EXT-OAI2-reading.md` § 3.1, not in `M/angular.tex`)
+  handoff: none — a relay-result for the readings (the dictionary's replacement for "the same tile")
+
+### E1 line 136
+control: hex7-model
+  of: C132-EXT-DISC — clauses (3) and (4) on the model: the hexagonal seven-colouring at the vertex (0, 2/5), three edges cut at ρ = 0.3, clause (3) on 8,963 grid points of the three straddle sets
+  run: python3 ../data/fs132/e1/hex7_check.py model
+  expect: vertex-labels=3 edges=3 delta-samples=8963 violations=0 clause4=True
+  fault: python3 ../data/fs132/e1/hex7_check.py model --fault
+
+### E1 line 142
+control: hex7-islands
+  of: C132-EXT-DISC — where its hypothesis fails: the island colouring; a disc of radius 1.05 with finitely many centres; clause (4) for the straight edge at the accumulation centre v; clauses (3), (4) at the isolated centre of island 6
+  run: python3 ../data/fs132/e1/hex7_check.py islands
+  expect: island-free-disc=True vertices-in-disc=18 clause4-at-v=False clause3-at-b=0 clause4-at-b=True
+  fault: python3 ../data/fs132/e1/hex7_check.py islands --fault
+
+### E1 line 148
+control: sec7-cites
+  of: C132-EXT-DISC — its uses only: the labels the manuscript's § 7 cites from outside itself
+  run: python3 ../data/fs132/e1/refs_outside.py interfaces.tex
+  expect: eq:source-14 sec:transitions thm:cyclic-local-finiteness
+  fault: python3 ../data/fs132/e1/refs_outside.py transitions.tex
+
+### E1 line 154
+control: reduced-words
+  of: C132-EXT-DISC — step S8's count: every cyclically reduced closed edge word of length at most 7 in the complete graph on 3 to 6 labels contains a simple cycle
+  run: python3 ../data/fs132/e1/words_check.py
+  expect: 0
+  fault: python3 ../data/fs132/e1/words_check.py --fault
+

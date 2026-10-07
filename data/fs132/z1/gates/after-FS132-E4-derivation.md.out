@@ -1,0 +1,31 @@
+entry lint
+  claim C132-CROSS: minds 1
+  claim C132-CROSS: prior art partly
+  claim C132-COMP-SHARP: governed by C132-CROSS (hand, minds 1)
+  claim C132-COMP-SHARP: minds 1
+  claim C132-COMP-SHARP: prior art partly
+  claim C132-COMP: governed by C132-COMP-SHARP (derived from, minds 1)
+  claim C132-COMP: minds 1
+  claim C132-COMP: prior art partly
+  claim C132-WITNESS: minds 1
+  claim C132-WITNESS: prior art known
+  claim C132-PLACE: minds 1
+  claim C132-PLACE: prior art partly
+  claim C132-ALT: minds 1
+  claim C132-ALT: prior art partly
+  claim C132-TURN-EDGE: minds 1
+  warn  FS132-E4-derivation.md:400 (C132-TURN-EDGE): prior art owed — novelty unmeasured; a standing finding
+  claim C132-TURN-EDGE: prior art owed
+  entries: 8  derived: 7  stalled, gapped or refuted: 1
+quotes
+  statements named in more than one place: 0
+controls
+  ok    crossing: printed 'least-squared-jacobian=399/40000 all-four-quadrants=True'; with the fault planted ('' → '--fault') it printed 'least-squared-jacobian=0 all-four-quadra' — it fires
+  ok    hex7-crossings: printed 'vertex-pairs=342 crossings=684 least-shared-outside=1 own-label-near-crossing=0'; with the fault planted ('' → '--fault') it printed 'vertex-pairs=180 crossings=360 least-sha' — it fires
+  ok    seam-fragments: printed 'excluded-labels-seen-near-the-common-unit-points:S1=0,T2=0,BB=0,MX=0 checker=ACCEPT,ACCEPT,ACCEPT,ACCEPT sets-of-T2-on-the-unit-circle-about-w=3'; with the fault planted ('' → '--fault') it printed 'excluded-labels-seen-near-the-common-uni' — it fires
+  ok    chart-wedges: printed 'chart-samples=1681 sign-mismatches=0 turning:far=c lens=ab cw=a ccw=b alternating:far=c lens=c cw=ac ccw=bc'; with the fault planted ('' → '--fault') it printed 'chart-samples=1681 sign-mismatches=1681 ' — it fires
+  ok    unit-shift: printed 'ratio-min=1.114 ratio-max=1.199 limit=1.1547 sign-or-size-violations=0'; with the fault planted ('' → '--fault') it printed 'ratio-min=-71.028 ratio-max=73.676 limit' — it fires
+  ok    forced-pairs: printed 'alternating:OO=36,OI=129,IO=93,II=0 turning:OO=0,OI=0,IO=0,II=0'; with the fault planted ('' → '--fault') it printed 'alternating:OO=0,OI=0,IO=0,II=0 turning:' — it fires
+  ok    turning-edge: printed 'circles-meet-at-x-and-y=True region-samples=576 side-mismatches=0'; with the fault planted ('' → '--fault') it printed 'circles-meet-at-x-and-y=False region-sam' — it fires
+  controls: 7  fired on their faults: 7
+GATE: PASS (0 failures, 1 warning)

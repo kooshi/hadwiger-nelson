@@ -1,0 +1,167 @@
+### E6 line 152
+derivation: C132-SHADOW
+  statement: let U be an open set of the plane, c a measurable map from U to a finite set of labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, i a label, p and p′ two points of U with |p − p′| = 1, v a unit vector with v·(p′ − p) ≠ 0, r > 0, and W an open subset of U that contains the points p′ + sv for 0 < s < r and almost every point of which has the label i; then there is η > 0 such that, if v·(p′ − p) > 0, almost every point z of B(p, η) with |z − p′| < 1 has a label other than i, and, if v·(p′ − p) < 0, almost every point z of B(p, η) with |z − p′| > 1 has a label other than i
+  uses only: the intermediate value theorem for s ↦ |p′ + sv − z| on (0, r); that W is open; Fubini for (z, u) ↦ z + u; weak properness in its measure form. It reads no palette, no chart, no exclusion set, no connectedness of W, and nothing of the number of labels
+  not claimed: anything when v is tangent at p′ to the unit circle about p — then only the points whose unit circle crosses that circle inside W are reached, a sub-wedge whose opening shrinks with the size of W (control `seeing`: 0.194, 0.083, 0.000); anything for a set W that is not open (a set of positive density reaching p′ gives the statement for the points whose unit circles meet it in positive length, which need not be almost all points of a side); anything about the other side of the unit circle about p′
+  argument: § Argument — the shadow of an open piece
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the search's kept four-label fragment (`data/search/2026-10-07/KEEP-turning-4label-arcs.json`, [cert]): p = y_0, p′ = y_1, W its wedge O_far at y_1 (a label of x), v radial — the wedges at y_0 inside the unit circle about y_1 carry b, b, b; over its six adjacent pairs of ring points, all 108 pairs of wedges on matching sides carry different labels (control `kept-model`)
+  prior art: partly: in this project it is C132-WITNESS (`plans/FS132-E4-derivation.md` Stage 2) followed by C132-WIT-SIDE (`plans/FS132-E5-derivation.md`) with the centre at p′ and a segment of W as the set, and G84's shadow identity read for an open piece; in the map class it is the ring calculus's "a tile of p′ tips p" (G91); in print the mechanism is `[OAIMath2026]` Lemma 8.1 by FS132-E5's reading (not read by me); this form not searched for in print by this job — owed
+  handoff: de Bruijn — the statement as written: one intermediate value, one open set, one Fubini; no colouring theory beyond weak properness. It gives the strips their second half (from an open piece instead of an exclusion set) and is the only tool C132-LENS adds to C132-PLACE
+
+### E6 line 164
+derivation: C132-LENS
+  statement: let U be an open set of the plane containing the closed unit disc about a point x, c a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, T a set of three labels and K_0, K_1, K_2 compact sets containing x such that for each of the three pairs of labels of T one of the sets K_j has Δ(K_j) disjoint from the closed essential supports of both labels of the pair, a, b, n the three labels outside T, ψ an angle such that for almost every θ the palette P_x(e(θ)) contains a if θ lies in (ψ − π/3, ψ) or in (ψ + 2π/3, ψ + π), b if θ lies in (ψ, ψ + π/3) or in (ψ + π, ψ + 4π/3), and n if θ lies in (ψ + π/3, ψ + 2π/3) or in (ψ + 4π/3, ψ + 5π/3), and y_k = x + e(ψ + kπ/3); if at least two of the sets K_j have a point strictly inside the unit circle about y_1, then there is η > 0 such that almost every point z of B(y_0, η) with |z − y_1| < 1 has its label outside {a, n}; if at least two of the sets K_j have a point strictly inside the unit circle about y_{−1}, then there is η > 0 such that almost every point z of B(y_0, η) with |z − y_{−1}| < 1 has its label outside {b, n}; and if both hold, there is η > 0 such that almost every point z of B(y_0, η) with |z − y_1| < 1 and |z − y_{−1}| < 1 has its label in T
+  uses only: C132-PLACE on the outer side at y_1 and at y_{−1} (inherited: `plans/FS132-E4-derivation.md` Stage 3, [hand], one mind), which is where the palettes, the witnessed triangle and the six labels are consumed; of the palettes, their values just before and just after ψ, ψ + 2π/3 and ψ − 2π/3 — nothing at ψ ± π/3; the statement (W) of that record at y_1 and y_{−1} (re-checked: control `lens-shadow`, 1,681 samples); C132-SHADOW four times; four inner products of unit vectors. It reads nothing at y_0: no side there, no palette there, no witness there
+  not claimed: anything when y_1 or y_{−1} has only a pure inner side, or no pure side (an edge set of x on its unit circle and the two others blocked on opposite sides — the kept model's case at its three four-label points); that any label of T is the one in the lens, or that the lens is of one label; that y_0 is a cyclic centre, or carries any witnessed edge; anything for an outside state that is not a step at ψ and ψ ± 2π/3; that a six-sector turning seed exists
+  argument: § Argument — the lens
+  verdict: derived
+  grade: derived from: C132-SHADOW
+  minds: 1
+  model: none satisfying every hypothesis is known — no weak six-colouring with a turning seed is held, and the kept fragment has no ring point with a pure outer side (control `kept-model`: sides I-I-I-). What is exhibited: the geometry (control `lens-shadow`: of 600 lens points none whose unit circle misses either far wedge), and the mechanism without the hypothesis — at the kept fragment's point y_1 the outer wedges of both neighbours carry the labels C132-PLACE would force there (n, b, a at y_2 and a, n, b at y_0, in the order O_cw, O_far, O_ccw) and its lens carries a label of x
+  prior art: partly: its composition was posed by the asking lane (`plans/POROS-2026-10-07-fs132-round2.md` § 1.3 E, through a chart and the transfer); the search's hand argument has its three pair rules as rows of an exact table in the wedge family (`plans/SEARCH-2026-10-07.md` § 1.5, steps 1–3); in the map class the statement is the ring calculus at a hub (G91; FS116-RING-TWIST-C); at five labels the release's lemma "Polynomial three-label region" is the neighbouring statement (by FS132-E4's reading, not mine); for a weak six-colouring not searched in print by this job — owed
+  handoff: de Bruijn — after C132-PLACE's module: two charts read at y_1 and y_{−1}, then C132-SHADOW with the four segments the argument names
+
+### E6 line 176
+derivation: C132-LENS-SIDE
+  statement: let U, x, c, T, K_0, K_1, K_2, a, b, n, ψ and the points y_k be as in C132-LENS, and suppose that at least two of the sets K_j have a point strictly inside the unit circle about y_1 and at least two of them have a point strictly inside the unit circle about y_{−1}; then it is not the case that at least two of the sets K_j have a point strictly outside the unit circle about y_0
+  uses only: C132-LENS; C132-WIT-SIDE at w = y_0 for two of the sets (inherited: `plans/FS132-E5-derivation.md`, [hand], one mind — its argument is four lines and I re-derived it); that two edges of a triangle have its three labels among their endpoints; that the lens at y_0 is a non-empty open set inside the unit circle about x
+  not claimed: that y_0 has a pure outer side; anything at a ring point one of whose neighbours has no pure outer side
+  argument: § Argument — counts over sides
+  verdict: derived
+  grade: derived from: C132-LENS
+  minds: 1
+  model: none can exist (a non-existence); the count it rests on, as a pattern: among 46,656 triples of witness points at distance 1/10 from x the sides read O I O I O I in 2,592, and in each of those the statement applies at every inner-pure point (control `side-patterns`)
+  prior art: partly: as C132-LENS; the statement is the asking lane's clause (i)
+  handoff: de Bruijn — a corollary of C132-LENS and the strips' entry by one open set of positive measure
+
+### E6 line 188
+derivation: C132-LENS-FOUR
+  statement: let U, x, c, T, K_0, K_1, K_2, a, b, n, ψ and the points y_k be as in C132-LENS, and k an integer such that for each of m = k − 1, k, k + 1 at least two of the sets K_j have a point strictly inside the unit circle about y_m; then y_k lies in the closed essential supports of a, of b, of n and of a label of T, and there is η > 0 such that almost every point of B(y_k, η) outside the unit circle about x has its label in {a, b, n} and almost every point of B(y_k, η) inside the unit circles about y_{k−1} and y_{k+1} has its label in T
+  uses only: C132-LENS at y_k, after turning the seed by kπ/3 (which carries its hypotheses to themselves with a, b, n permuted cyclically); C132-PLACE on the outer side at y_k and list line L4 of that record (the three outer wedges carry the three outside labels, one each); that the lens and the three outer wedges meet every ball about y_k in a non-empty open set
+  not claimed: which label of T is present, or that only one is; that the inner wedges beside the lens carry any label of T; that y_k is a cyclic centre in the release's sense (its transition graph is not computed); anything when k − 1, k, k + 1 are not all outer-pure
+  argument: § Argument — counts over sides
+  verdict: derived
+  grade: derived from: C132-LENS
+  minds: 1
+  model: none is known (as C132-LENS); the kept fragment has no ring point with the labels a, b, n and one label of T — its four-label points carry two labels of x and two of the ring (control `kept-model`)
+  prior art: partly: as C132-LENS; the conclusion "a four-label point is placed" is the asking lane's clause (ii) at the pattern O O O
+  handoff: de Bruijn — a corollary of C132-LENS and C132-PLACE; the formal statement to read back is "four closed essential supports contain y_k"
+
+### E6 line 200
+derivation: C132-LENS-GERM
+  statement: let U, x, c, T, K_0, K_1, K_2, a, b, n, ψ and the points y_k be as in C132-LENS, and suppose that each of the sets K_0, K_1, K_2 has a point that lies strictly inside the unit circles about three of the six points y_0, …, y_5 and strictly outside the unit circles about the other three; then there is an integer k such that for each of m = k − 1, k, k + 1 at least two of the sets K_j have a point strictly inside the unit circle about y_m
+  uses only: that a point strictly inside the unit circle about y is strictly outside the unit circle about 2x − y; a count of three three-element sets over three antipodal pairs; C132-LENS-SIDE at a ring point between two outer-pure ones, to exclude the alternating pattern
+  not claimed: anything for sets whose points off the six circles are all outside four or more of them — sets that witness from far away (the card's clause (ii) is open there: C132-LENS-II); that the hypothesis holds for the continua of an extraction — it does when each has a limiting direction at x perpendicular to none of the six directions e(ψ + kπ/3), and fails when a set lies on the unit circle about a ring point
+  argument: § Argument — counts over sides
+  verdict: derived
+  grade: derived from: C132-LENS-SIDE
+  minds: 1
+  model: none is known (as C132-LENS); the count as a pattern: 46,656 triples of witness points at distance 1/10 from x give three outer-pure points in a row in 44,064 and the alternating pattern in 2,592, nothing else (control `side-patterns`)
+  prior art: partly: the count is the ring card's (`plans/FS132-E4-derivation.md` l. 578), there without the hypothesis it needs
+  handoff: de Bruijn — a finite count on ℤ/6 and one inequality; with C132-LENS-FOUR it is the card's clause (ii) at the hypothesis the argument reads
+
+### E6 line 212
+derivation: C132-LENS-II
+  statement: On a six-sector turning seed, if each of the six ring points has a pure side, some ring point has four labels present: `a`, `b`, `n` and a label of `T`
+  uses only: nothing is carried to the statement as posed. Derived of it: C132-LENS-FOUR (wherever three consecutive ring points have pure outer sides) and C132-LENS-GERM (which gives those three when every edge set has a point inside three of the six circles and outside three)
+  not claimed: its truth or its falsity for the sixteen patterns of sides § The gap in clause (ii) lists; no seed with such sides was built, and none was excluded
+  argument: § The gap in clause (ii)
+  verdict: gap: the step "pure sides are opposite at antipodes, so the six read O O O I I I or O I O I O I" — a point of a set strictly inside the unit circle about y is strictly outside the one about 2x − y, and not conversely; three sets {x, q_j} with |q_j − x| = 3 give six pure inner sides and no pure outer side (control `side-patterns`: IIIIII)
+  grade: hand
+  minds: 1
+  model: the hypothesis alone is met by the three two-point sets of the gap, as a pattern of sides and not as a colouring
+  prior art: partly: the sentence is the asking lane's (`plans/STUB-six-by-the-nerve.md` § The first claims a deriver takes, C132-LENS (ii)); the step is the ring card's l. 578
+  handoff: Poros — not derived as posed; gap at the antipodal step; the smallest open form is the last paragraph of § The gap in clause (ii)
+
+### E6 line 224
+control: lens-shadow
+  of: C132-LENS — the card's falsifier, computed: on a polar grid in B(y_0, 0.02), the points of the lens (and all points inside the unit circle about either neighbour) whose unit circle meets the far wedge at that neighbour, within radius 0.2, in zero length; and (W) at y_1 against distances
+  run: python3 ../data/fs132/e6/lens_checks.py shadow
+  expect: lens-points=600 missing-the-wedge-at-y1=0 missing-the-wedge-at-y-1=0 points-inside-y1=1800 missing=0 points-inside-y-1=1800 missing=0 least-arc-over-depth=11 chart-samples=1681 chart-mismatches=0
+  fault: python3 ../data/fs132/e6/lens_checks.py shadow --fault
+
+### E6 line 230
+control: seeing
+  of: C132-SHADOW — which wedges at y_0 have every point's unit circle through which wedges at y_1, and back; and, for the two pairs of the search's steps 3 and 4, the fraction of the looking wedge that sees the other, at sizes 0.2, 0.05, 0.0125 of the wedge seen
+  run: python3 ../data/fs132/e6/lens_checks.py seeing
+  expect: full-pairs=18 [I_ccw+I_lens+O_ccw]x[I_ccw+O_ccw+O_far] and [I_cw+O_cw+O_far]x[I_cw+I_lens+O_cw] product=True same-pairs-back=True lens1-seeing-Occw0=0.194,0.083,0.000 far1-seeing-far0=0.167,0.083,0.000
+  fault: python3 ../data/fs132/e6/lens_checks.py seeing --fault
+
+### E6 line 236
+control: side-patterns
+  of: C132-LENS-GERM — the patterns of sides for three witness points at distance 1/10 from x on a grid of directions, for three witness points at distance 3, for one outer-pure point, and the number of sets of outer-pure points the card's clause (ii) leaves open
+  run: python3 ../data/fs132/e6/lens_checks.py sides
+  expect: near-witness-triples=46656 three-in-a-row=44064 alternating=2592 other=0 far-witnesses=IIIIII one-outer=OIIIII outer-sets-left-open=16
+  fault: python3 ../data/fs132/e6/lens_checks.py sides --fault
+
+### E6 line 242
+control: kept-model
+  of: C132-SHADOW — the search's kept four-label fragment: its 108 pairs of wedges on matching sides at adjacent ring points, its labels at each ring point, where its lens carries a label of x, its interfaces at x and its sides
+  run: python3 ../data/fs132/e6/lens_checks.py model
+  expect: first-order-pairs=108 equal-labels=0 labels=012,1234,012,0145,012,0235 lens-in-T-at=[1, 3, 5] points-with-a-b-n-and-one-of-T=[] interfaces-of-x=3 on-unit-circles-about=[1, 3, 5] sides=I-I-I- points-with-both-neighbours-outer-pure=[]
+  fault: python3 ../data/fs132/e6/lens_checks.py model --fault
+
+### E6 line 248
+control: hex-half-crossings
+  of: C132-LENS — riding: the ring card's control `hex7-crossings` on the honeycomb at circumradius 1/2 (the fault is the original radius 2/5, whose line must be the second round's)
+  run: python3 ../data/fs132/e6/hex_half.py hex7
+  expect: radius=0.5 vertex-pairs=216 crossings=432 least-shared-outside=1 own-label-near-crossing=36
+  fault: python3 ../data/fs132/e6/hex_half.py hex7 --radius 0.4
+
+### E6 line 254
+control: hex-half-sides
+  of: C132-LENS — riding: at circumradius 1/2, every sample near a common unit point that carries a label of one of the two vertices lies inside that vertex's unit circle (the fault is circumradius 0.45, where no such sample exists)
+  run: python3 ../data/fs132/e6/lens_checks.py hexcross
+  expect: radius=0.5 crossings=432 crossings-with-an-own-label=36 own-label-samples=5760 own-label-samples-outside-the-vertex's-unit-circle=0
+  fault: python3 ../data/fs132/e6/lens_checks.py hexcross --fault
+
+### E6 line 260
+control: hex-half-margin
+  of: C132-LENS — riding: the witness card's control `margin-witness` at circumradius 1/2 (the fault is the original radius)
+  run: python3 ../data/fs132/e6/hex_half.py witness
+  expect: radius=0.5 colourings=3 points=13 samples=982800 vertex-labels-on-annulus=6672 labels-seen=0123456
+  fault: python3 ../data/fs132/e6/hex_half.py witness --radius 0.4
+
+### E6 line 266
+control: hex-half-relation
+  of: C132-LENS — riding: the first round's control `hex7-relation` at circumradius 1/2, the three vertices on the unit circle counted inside it (the fault is the original radius)
+  run: python3 ../data/fs132/e6/hex_half.py hexrel --closed
+  expect: radius=0.5 own-labels=[0, 2, 3] ring-labels=[1, 4, 5, 6] own-on-rings=[[0, 2, 3], [], []] crossings=9 ring-walk=654164514 two-jumps-60-apart=False vertices-inside=13 relation-holds=True
+  fault: python3 ../data/fs132/e6/hex_half.py hexrel --closed --radius 0.4
+
+### E6 line 495
+derivation: C132-PLACED-RING
+  statement: let U, x, c, T, K_0, K_1, K_2, a, b, n, ψ and the points y_k be as in C132-LENS, and suppose that at least two of the sets K_j have a point strictly inside the unit circle about y_1 and at least two of them have a point strictly inside the unit circle about y_{−1}; then there is κ > 0 such that almost every point w of B(y_1, κ) with |w − x| > 1 and |w − y_2| > 1 has the label b when |w − y_0| < 1 and the label a when |w − y_0| > 1, and almost every point w of B(y_{−1}, κ) with |w − x| > 1 and |w − y_{−2}| > 1 has the label a when |w − y_0| < 1 and the label b when |w − y_0| > 1; and if U contains the unit circle about y_0, then for almost every θ in (ψ + 2π/3 − κ, ψ + 2π/3) and almost every θ in (ψ − 2π/3, ψ − 2π/3 + κ) the palette P_{y_0}(e(θ)) is contained in {a, b}
+  uses only: C132-PLACE on the outer side at y_1 and y_{−1} with (W) (as in C132-LENS's argument); that the points y_0 + e(θ) of the two arcs lie in the two open regions named (control `placed-arcs`); the release's definition of a typical point (density one of its own label, `palettes.tex` l. 20) and of the palette (Definition 5.1, ll. 47–68), read by me
+  not claimed: that the two palettes contain both a and b (each is present on one side of the arc, which gives it for samplings from that side; not written out); anything on the rest of the unit circle about y_0 — in particular at x, at y_0 + e(ψ ± π/3) and at y_0 + e(ψ); that y_0 has a pure outer side (with one, a and b are present at y_0 by C132-LENS-FOUR, and the two arcs then carry both their side labels at their centre)
+  argument: § Argument — the placed point's ring at its two neighbours
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none is known (as C132-LENS); the geometry is exhibited — 400 points of the two arcs, none outside its region, with O_cw and O_far of y_1 on the two sides of the unit circle about y_0, and O_ccw and O_far of y_{−1} (control `placed-arcs`)
+  prior art: partly: in the map class this is row 135's unit arc "centred at a vertex of at least four colours carrying both its side colours" with the vertex placed by the ring (G91), read by me only as `plans/STUB-six-by-the-nerve.md` and the asking lane's record quote it; the two regions are the ring card's list line L4 at y_{±1}; for a weak colouring not searched in print — owed
+  handoff: de Bruijn — only with a consumer; two charts and the definition of the palette
+
+### E6 line 507
+derivation: C132-PLACED
+  statement: At the four-label ring point `y` of C132-LENS (ii): in the grammar of C132-PLACE's list, the labels present in each of the six wedges at `y` cut by the unit circles about `x`, `y_1` and `y_{−1}`, and which labels of `T` the sides at `y` allow in the lens; then, using C132-WITNESS only on wedges the list forces to be of one label, which pairs of the four labels are witnessed edges at `y`, whether they close a four-cycle, and — if they do — what the first night's exclusion (C132-M-ORBIT in C132-WIT's four-point form) says on the orbit of `y`'s ring through `x`. Each line derived or marked open
+  uses only: for the lines derived — C132-LENS and C132-LENS-FOUR; C132-WIT-SIDE at y; C132-WITNESS on the three outer wedges (inherited); C132-TURN-EDGE (inherited, [hand], one mind, its argument read and not reworked); C132-PLACED-RING
+  not claimed: that the witnessed edges at y close a four-cycle, or that they do not; which labels fill the two inner wedges beside the lens; anything on an orbit of y's ring other than the one through x
+  argument: § The list
+  verdict: gap: whether any pair containing a label of T is a witnessed edge at y — the two inner wedges beside the lens are not forced to one label, and the closure of the lens meets the closures of the three outer wedges at y alone, so C132-WITNESS gives the path a – n – b and nothing through T
+  grade: hand
+  minds: 1
+  model: none is known (as C132-LENS)
+  prior art: partly: the sentence is the asking lane's (`plans/STUB-six-by-the-nerve.md` § The first claims a deriver takes)
+  handoff: Poros — the list with its open line; the branch of the card's table that occurred is "a mixed ring"; the smallest open forms are under § The list
+
+### E6 line 519
+control: placed-arcs
+  of: C132-PLACED-RING — the points y_0 + e(θ) just before the direction of y_1 and just after that of y_{−1}: outside the unit circle about x and about y_2 (y_{−2}), and the wedges at y_{±1} just inside and just outside the unit circle about y_0 there
+  run: python3 ../data/fs132/e6/lens_checks.py ringarc
+  expect: arc-points=400 outside-the-region=0 wedges=[(-1, 'in', 'O_ccw'), (-1, 'out', 'O_far'), (1, 'in', 'O_cw'), (1, 'out', 'O_far')]
+  fault: python3 ../data/fs132/e6/lens_checks.py ringarc --fault
+

@@ -1,0 +1,128 @@
+VARIANT turning-max3-simple-straight: vars=342 clauses=4461  UNSAT  cake_lpr=VERIFIED  proof=cnf/turning-max3-simple-straight.lrat  minimal-refusing-groups=['maxlab', 'ring', 'rr:1,1', 'rr:1,5', 'rr:2,4', 'rr:3,1', 'rr:4,0', 'rr:4,3', 'rr:5,4', 'xr:0', 'xr:1', 'xr:2', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT turning 3 simple-straight rc=0
+VARIANT turning-max3-simple-curved: vars=342 clauses=4455  UNSAT  cake_lpr=VERIFIED  proof=cnf/turning-max3-simple-curved.lrat  minimal-refusing-groups=['maxlab', 'ring', 'rr:1,0', 'rr:1,1', 'rr:1,4', 'rr:1,5', 'rr:2,4', 'rr:3,1', 'rr:4,1', 'rr:4,3', 'xr:1', 'xr:3', 'xr:4', 'xtri']
+EXIT turning 3 simple-curved rc=0
+VARIANT turning-max3-any-straight: vars=306 clauses=4155  UNSAT  cake_lpr=VERIFIED  proof=cnf/turning-max3-any-straight.lrat  minimal-refusing-groups=['maxlab', 'ring', 'rr:1,1', 'rr:1,5', 'rr:2,4', 'rr:3,1', 'rr:4,0', 'rr:4,3', 'rr:5,4', 'xr:0', 'xr:1', 'xr:2', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT turning 3 any-straight rc=0
+VARIANT turning-max3-any-curved: vars=306 clauses=4149  UNSAT  cake_lpr=VERIFIED  proof=cnf/turning-max3-any-curved.lrat  minimal-refusing-groups=['maxlab', 'ring', 'rr:1,0', 'rr:1,1', 'rr:1,4', 'rr:1,5', 'rr:2,4', 'rr:3,1', 'rr:4,1', 'rr:4,3', 'xr:1', 'xr:3', 'xr:4', 'xtri']
+EXIT turning 3 any-curved rc=0
+VARIANT turning-max4-simple-straight: vars=342 clauses=4407  UNSAT  cake_lpr=VERIFIED  proof=cnf/turning-max4-simple-straight.lrat  minimal-refusing-groups=['ring', 'rr:1,1', 'rr:1,4', 'rr:1,5', 'rr:2,1', 'rr:2,4', 'rr:4,1', 'rr:4,2', 'rr:4,3', 'simple', 'straight', 'xr:1', 'xr:2', 'xr:4', 'xr:5', 'xtri']
+EXIT turning 4 simple-straight rc=0
+VARIANT turning-max4-simple-curved: vars=342 clauses=4401  SAT  models(projected, cap 20000)=192  first -> MODEL-turning-max4-simple-curved.json
+  y_0: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=b I_cw=a
+  y_1: O_cw=4 O_far=4 O_ccw=n I_ccw=n I_lens=3 I_cw=b
+  y_2: O_cw=n O_far=b O_ccw=a I_ccw=a I_lens=a I_cw=n
+  y_3: O_cw=5 O_far=5 O_ccw=b I_ccw=b I_lens=4 I_cw=a
+  y_4: O_cw=b O_far=a O_ccw=n I_ccw=n I_lens=n I_cw=b
+  y_5: O_cw=3 O_far=3 O_ccw=a I_ccw=a I_lens=5 I_cw=n
+  x:   5 3 3 3 3 4 4 4 4 5 5 5   K=ABASAS
+EXIT turning 4 simple-curved rc=0
+VARIANT turning-max4-any-straight: vars=306 clauses=4101  SAT  models(projected, cap 20000)=11664  first -> MODEL-turning-max4-any-straight.json
+  y_0: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=3 I_cw=a
+  y_1: O_cw=b O_far=4 O_ccw=n I_ccw=n I_lens=3 I_cw=b
+  y_2: O_cw=n O_far=b O_ccw=4 I_ccw=a I_lens=a I_cw=n
+  y_3: O_cw=3 O_far=n O_ccw=b I_ccw=b I_lens=a I_cw=a
+  y_4: O_cw=b O_far=3 O_ccw=n I_ccw=4 I_lens=4 I_cw=b
+  y_5: O_cw=n O_far=b O_ccw=a I_ccw=a I_lens=4 I_cw=n
+  x:   3 5 5 5 5 5 5 5 5 4 5 5   K=SSSSSS
+EXIT turning 4 any-straight rc=0
+VARIANT turning-max4-any-curved: vars=306 clauses=4095  SAT  models(projected, cap 20000)=20000  first -> MODEL-turning-max4-any-curved.json
+  y_0: O_cw=a O_far=n O_ccw=3 I_ccw=b I_lens=b I_cw=a
+  y_1: O_cw=4 O_far=a O_ccw=n I_ccw=n I_lens=b I_cw=b
+  y_2: O_cw=n O_far=4 O_ccw=a I_ccw=a I_lens=3 I_cw=n
+  y_3: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=3 I_cw=a
+  y_4: O_cw=b O_far=a O_ccw=n I_ccw=n I_lens=4 I_cw=b
+  y_5: O_cw=n O_far=3 O_ccw=a I_ccw=a I_lens=4 I_cw=n
+  x:   5 5 5 5 3 3 5 5 5 4 5 5   K=ABBBBA
+EXIT turning 4 any-curved rc=0
+VARIANT turning-max5-simple-straight: vars=342 clauses=4377  UNSAT  cake_lpr=VERIFIED  proof=cnf/turning-max5-simple-straight.lrat  minimal-refusing-groups=['ring', 'rr:1,1', 'rr:1,4', 'rr:1,5', 'rr:2,1', 'rr:2,4', 'rr:4,1', 'rr:4,2', 'rr:4,3', 'simple', 'straight', 'xr:1', 'xr:2', 'xr:4', 'xr:5', 'xtri']
+EXIT turning 5 simple-straight rc=0
+VARIANT turning-max5-simple-curved: vars=342 clauses=4371  SAT  models(projected, cap 20000)=192  first -> MODEL-turning-max5-simple-curved.json
+  y_0: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=a I_cw=a
+  y_1: O_cw=b O_far=5 O_ccw=5 I_ccw=n I_lens=4 I_cw=4
+  y_2: O_cw=n O_far=b O_ccw=a I_ccw=a I_lens=n I_cw=n
+  y_3: O_cw=a O_far=4 O_ccw=4 I_ccw=b I_lens=3 I_cw=a
+  y_4: O_cw=b O_far=a O_ccw=n I_ccw=n I_lens=b I_cw=b
+  y_5: O_cw=n O_far=3 O_ccw=3 I_ccw=a I_lens=5 I_cw=n
+  x:   4 4 4 3 3 3 3 5 5 5 5 4   K=BBBBSB
+EXIT turning 5 simple-curved rc=0
+VARIANT turning-max5-any-straight: vars=306 clauses=4071  SAT  models(projected, cap 20000)=20000  first -> MODEL-turning-max5-any-straight.json
+  y_0: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=3 I_cw=a
+  y_1: O_cw=b O_far=4 O_ccw=n I_ccw=n I_lens=3 I_cw=b
+  y_2: O_cw=n O_far=b O_ccw=4 I_ccw=a I_lens=a I_cw=n
+  y_3: O_cw=3 O_far=n O_ccw=b I_ccw=b I_lens=a I_cw=a
+  y_4: O_cw=b O_far=3 O_ccw=n I_ccw=4 I_lens=4 I_cw=b
+  y_5: O_cw=n O_far=b O_ccw=a I_ccw=a I_lens=4 I_cw=n
+  x:   3 5 5 5 5 5 5 5 5 4 5 5   K=SSSSSS
+EXIT turning 5 any-straight rc=0
+VARIANT turning-max5-any-curved: vars=306 clauses=4065  SAT  models(projected, cap 20000)=20000  first -> MODEL-turning-max5-any-curved.json
+  y_0: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=3 I_cw=a
+  y_1: O_cw=b O_far=a O_ccw=n I_ccw=n I_lens=5 I_cw=b
+  y_2: O_cw=n O_far=3 O_ccw=a I_ccw=a I_lens=5 I_cw=5
+  y_3: O_cw=a O_far=n O_ccw=3 I_ccw=b I_lens=b I_cw=a
+  y_4: O_cw=5 O_far=a O_ccw=n I_ccw=n I_lens=b I_cw=b
+  y_5: O_cw=n O_far=5 O_ccw=5 I_ccw=a I_lens=3 I_cw=n
+  x:   4 4 5 4 4 4 4 4 4 4 4 3   K=BBSBAS
+EXIT turning 5 any-curved rc=0
+VARIANT turning-max6-simple-straight: vars=342 clauses=4371  UNSAT  cake_lpr=VERIFIED  proof=cnf/turning-max6-simple-straight.lrat  minimal-refusing-groups=['ring', 'rr:1,1', 'rr:1,4', 'rr:1,5', 'rr:2,1', 'rr:2,4', 'rr:4,1', 'rr:4,2', 'rr:4,3', 'simple', 'straight', 'xr:1', 'xr:2', 'xr:4', 'xr:5', 'xtri']
+EXIT turning 6 simple-straight rc=0
+VARIANT turning-max6-simple-curved: vars=342 clauses=4365  SAT  models(projected, cap 20000)=192  first -> MODEL-turning-max6-simple-curved.json
+  y_0: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=a I_cw=a
+  y_1: O_cw=b O_far=5 O_ccw=5 I_ccw=n I_lens=4 I_cw=4
+  y_2: O_cw=n O_far=b O_ccw=a I_ccw=a I_lens=n I_cw=n
+  y_3: O_cw=a O_far=4 O_ccw=4 I_ccw=b I_lens=3 I_cw=a
+  y_4: O_cw=b O_far=a O_ccw=n I_ccw=n I_lens=b I_cw=b
+  y_5: O_cw=n O_far=3 O_ccw=3 I_ccw=a I_lens=5 I_cw=n
+  x:   4 4 4 3 3 3 3 5 5 5 5 4   K=BBBBSB
+EXIT turning 6 simple-curved rc=0
+VARIANT turning-max6-any-straight: vars=306 clauses=4065  SAT  models(projected, cap 20000)=20000  first -> MODEL-turning-max6-any-straight.json
+  y_0: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=3 I_cw=a
+  y_1: O_cw=b O_far=4 O_ccw=n I_ccw=n I_lens=3 I_cw=b
+  y_2: O_cw=n O_far=b O_ccw=4 I_ccw=a I_lens=a I_cw=n
+  y_3: O_cw=3 O_far=n O_ccw=b I_ccw=b I_lens=a I_cw=a
+  y_4: O_cw=b O_far=3 O_ccw=n I_ccw=4 I_lens=4 I_cw=b
+  y_5: O_cw=n O_far=b O_ccw=a I_ccw=a I_lens=4 I_cw=n
+  x:   3 5 5 5 5 5 5 5 5 4 5 5   K=SSSSSS
+EXIT turning 6 any-straight rc=0
+VARIANT turning-max6-any-curved: vars=306 clauses=4059  SAT  models(projected, cap 20000)=20000  first -> MODEL-turning-max6-any-curved.json
+  y_0: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=4 I_cw=a
+  y_1: O_cw=b O_far=a O_ccw=n I_ccw=n I_lens=3 I_cw=b
+  y_2: O_cw=4 O_far=4 O_ccw=a I_ccw=a I_lens=3 I_cw=n
+  y_3: O_cw=a O_far=n O_ccw=4 I_ccw=b I_lens=b I_cw=a
+  y_4: O_cw=3 O_far=a O_ccw=n I_ccw=n I_lens=b I_cw=b
+  y_5: O_cw=n O_far=3 O_ccw=a I_ccw=a I_lens=4 I_cw=n
+  x:   5 5 3 5 5 5 5 5 5 5 5 4   K=ABABBB
+EXIT turning 6 any-curved rc=0
+VARIANT alternating-max3-simple-straight: vars=342 clauses=4461  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max3-simple-straight.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 3 simple-straight rc=0
+VARIANT alternating-max3-simple-curved: vars=342 clauses=4455  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max3-simple-curved.lrat  minimal-refusing-groups=['ring', 'rr:0,4', 'rr:1,0', 'rr:1,1', 'rr:1,5', 'rr:2,1', 'rr:3,1', 'rr:4,1', 'rr:4,2', 'rr:4,3', 'rr:5,3', 'rr:5,4', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 3 simple-curved rc=0
+VARIANT alternating-max3-any-straight: vars=306 clauses=4155  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max3-any-straight.lrat  minimal-refusing-groups=['ring', 'rr:0,4', 'rr:1,0', 'rr:1,1', 'rr:1,5', 'rr:2,1', 'rr:3,1', 'rr:4,1', 'rr:4,2', 'rr:4,3', 'rr:5,3', 'rr:5,4', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 3 any-straight rc=0
+VARIANT alternating-max3-any-curved: vars=306 clauses=4149  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max3-any-curved.lrat  minimal-refusing-groups=['ring', 'rr:0,4', 'rr:1,0', 'rr:1,1', 'rr:1,5', 'rr:2,1', 'rr:3,1', 'rr:4,1', 'rr:4,2', 'rr:4,3', 'rr:5,3', 'rr:5,4', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 3 any-curved rc=0
+VARIANT alternating-max4-simple-straight: vars=342 clauses=4407  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max4-simple-straight.lrat  minimal-refusing-groups=['ring', 'rr:0,4', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 4 simple-straight rc=0
+VARIANT alternating-max4-simple-curved: vars=342 clauses=4401  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max4-simple-curved.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 4 simple-curved rc=0
+VARIANT alternating-max4-any-straight: vars=306 clauses=4101  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max4-any-straight.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 4 any-straight rc=0
+VARIANT alternating-max4-any-curved: vars=306 clauses=4095  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max4-any-curved.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 4 any-curved rc=0
+VARIANT alternating-max5-simple-straight: vars=342 clauses=4377  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max5-simple-straight.lrat  minimal-refusing-groups=['ring', 'rr:0,4', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 5 simple-straight rc=0
+VARIANT alternating-max5-simple-curved: vars=342 clauses=4371  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max5-simple-curved.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 5 simple-curved rc=0
+VARIANT alternating-max5-any-straight: vars=306 clauses=4071  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max5-any-straight.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 5 any-straight rc=0
+VARIANT alternating-max5-any-curved: vars=306 clauses=4065  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max5-any-curved.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 5 any-curved rc=0
+VARIANT alternating-max6-simple-straight: vars=342 clauses=4371  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max6-simple-straight.lrat  minimal-refusing-groups=['ring', 'rr:0,4', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 6 simple-straight rc=0
+VARIANT alternating-max6-simple-curved: vars=342 clauses=4365  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max6-simple-curved.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 6 simple-curved rc=0
+VARIANT alternating-max6-any-straight: vars=306 clauses=4065  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max6-any-straight.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 6 any-straight rc=0
+VARIANT alternating-max6-any-curved: vars=306 clauses=4059  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max6-any-curved.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+EXIT alternating 6 any-curved rc=0
+BATCH DONE fail=0

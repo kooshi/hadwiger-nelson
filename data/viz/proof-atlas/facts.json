@@ -2,8 +2,8 @@
  "meta": {
   "title": "Proof Atlas",
   "built": "2026-10-07",
-  "job": "FS132-F1",
-  "as_of": "the outside release as literature; FS132-P1's re-rank",
+  "job": "FS132-Z2",
+  "as_of": "FS-132, six by the nerve, Derived (rows 155–160)",
   "statuses": {
    "kernel": "kernel — checked by Lean's kernel",
    "cert": "certificate — an exact object accepted by exact checkers",
@@ -37,8 +37,8 @@
    "tier": 0,
    "answer": 7,
    "status": "gap",
-   "line": 195,
-   "address": "CLAUDE.md § Where the problem stands, line 195",
+   "line": 194,
+   "address": "CLAUDE.md § Where the problem stands, line 194",
    "grade_address": "CLAUDE.md § The mission, line 64",
    "also": []
   },
@@ -63,8 +63,8 @@
    "tier": 0,
    "answer": 6,
    "status": "gap",
-   "line": 195,
-   "address": "CLAUDE.md § Where the problem stands, line 195",
+   "line": 194,
+   "address": "CLAUDE.md § Where the problem stands, line 194",
    "grade_address": "CLAUDE.md § The mission, line 64",
    "also": []
   },
@@ -89,8 +89,8 @@
    "tier": 0,
    "answer": 5,
    "status": "gap",
-   "line": 195,
-   "address": "CLAUDE.md § Where the problem stands, line 195",
+   "line": 194,
+   "address": "CLAUDE.md § Where the problem stands, line 194",
    "grade_address": "CLAUDE.md § The mission, line 64",
    "also": []
   },
@@ -504,7 +504,7 @@
       "section": "### Where the problem stands"
      },
      "quote": "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5",
-     "address": "CLAUDE.md § Where the problem stands, line 196"
+     "address": "CLAUDE.md § Where the problem stands, line 195"
     }
    ],
    "status": "kernel",
@@ -956,8 +956,8 @@
    "sector": "seven",
    "tier": 1,
    "status": "gap",
-   "line": 214,
-   "address": "CLAUDE.md § Where the problem stands, line 214",
+   "line": 213,
+   "address": "CLAUDE.md § Where the problem stands, line 213",
    "grade_address": "LEDGER.md row 135, line 180",
    "also": []
   },
@@ -1039,9 +1039,9 @@
    ],
    "note": "BASE-V re-derived row 134's print steps blind: every step but Lemma 4 at cusps upgraded.",
    "status": "hand-2b",
-   "line": 1185,
-   "address": "LEDGER.md row FS112-N3-BASE, line 1185",
-   "grade_address": "LEDGER.md row FS112-N3-BASE, line 1185"
+   "line": 1191,
+   "address": "LEDGER.md row FS112-N3-BASE, line 1191",
+   "grade_address": "LEDGER.md row FS112-N3-BASE, line 1191"
   },
   {
    "id": "N3DENSE3",
@@ -1069,7 +1069,7 @@
       "grok": "G83"
      },
      "quote": "With unit arcs, the tight question lives at one four-colour vertex.",
-     "address": ".claude/skills/grokkings/SKILL.md G83, line 1044"
+     "address": ".claude/skills/grokkings/SKILL.md G83, line 1042"
     }
    ],
    "posed": [
@@ -1085,9 +1085,9 @@
     }
    ],
    "status": "hand-2b",
-   "line": 1186,
-   "address": "LEDGER.md row FS112-N3-DENSE3, line 1186",
-   "grade_address": "LEDGER.md row FS112-N3-DENSE3, line 1186"
+   "line": 1192,
+   "address": "LEDGER.md row FS112-N3-DENSE3, line 1192",
+   "grade_address": "LEDGER.md row FS112-N3-DENSE3, line 1192"
   },
   {
    "id": "COMPOSE",
@@ -1109,9 +1109,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-1",
-   "line": 1190,
-   "address": "LEDGER.md row FS112-C-COMPOSE, line 1190",
-   "grade_address": "LEDGER.md row FS112-C-COMPOSE, line 1190",
+   "line": 1196,
+   "address": "LEDGER.md row FS112-C-COMPOSE, line 1196",
+   "grade_address": "LEDGER.md row FS112-C-COMPOSE, line 1196",
    "also": []
   },
   {
@@ -1282,9 +1282,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1179,
-   "address": "LEDGER.md row FS112-N3-PER, line 1179",
-   "grade_address": "LEDGER.md row FS112-N3-PER, line 1179",
+   "line": 1185,
+   "address": "LEDGER.md row FS112-N3-PER, line 1185",
+   "grade_address": "LEDGER.md row FS112-N3-PER, line 1185",
    "also": []
   },
   {
@@ -1307,9 +1307,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1187,
-   "address": "LEDGER.md row FS112-N3-END, line 1187",
-   "grade_address": "LEDGER.md row FS112-N3-END, line 1187",
+   "line": 1193,
+   "address": "LEDGER.md row FS112-N3-END, line 1193",
+   "grade_address": "LEDGER.md row FS112-N3-END, line 1193",
    "also": []
   },
   {
@@ -1338,13 +1338,13 @@
       "row": "FS112-Y3-END-NEEDS"
      },
      "quote": "hand; levels two minds: Y3; YB3, blind",
-     "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1212"
+     "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1218"
     }
    ],
    "status": "hand-1",
-   "line": 1212,
-   "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1212",
-   "grade_address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1212"
+   "line": 1218,
+   "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1218",
+   "grade_address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1218"
   },
   {
    "id": "HORNEND",
@@ -1372,7 +1372,7 @@
       "row": "FS112-C-DOUBLE"
      },
      "quote": "a stuck vertex with all four horn arcs unit arcs has in-type flank tiles at both neighbours, both (Q) centres with ≥ 4 colours",
-     "address": "LEDGER.md row FS112-C-DOUBLE, line 1193"
+     "address": "LEDGER.md row FS112-C-DOUBLE, line 1199"
     },
     {
      "src": {
@@ -1380,14 +1380,14 @@
       "row": "FS112-C-DOUBLE"
      },
      "quote": "hand; two minds: FS112-C2, a sketch; FS114-CV, blind",
-     "address": "LEDGER.md row FS112-C-DOUBLE, line 1193"
+     "address": "LEDGER.md row FS112-C-DOUBLE, line 1199"
     }
    ],
    "note": "Its companion C-DOUBLE (second quote above, two minds: FS112-C2, a sketch; FS114-CV, blind): when all four horn arcs are unit arcs, both neighbours are four-colour vertices, so the bowtie end sits within 1 of a four-colour vertex.",
    "status": "hand-1",
-   "line": 1192,
-   "address": "LEDGER.md row FS112-C-HORNEND, line 1192",
-   "grade_address": "LEDGER.md row FS112-C-HORNEND, line 1192"
+   "line": 1198,
+   "address": "LEDGER.md row FS112-C-HORNEND, line 1198",
+   "grade_address": "LEDGER.md row FS112-C-HORNEND, line 1198"
   },
   {
    "id": "BOWTIE",
@@ -1409,9 +1409,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "cert",
-   "line": 1194,
-   "address": "LEDGER.md row FS112-BOWTIE, line 1194",
-   "grade_address": "LEDGER.md row FS112-BOWTIE, line 1194",
+   "line": 1200,
+   "address": "LEDGER.md row FS112-BOWTIE, line 1200",
+   "grade_address": "LEDGER.md row FS112-BOWTIE, line 1200",
    "also": []
   },
   {
@@ -1440,13 +1440,13 @@
       "grok": "G83"
      },
      "quote": "With unit arcs, the tight question lives at one four-colour vertex.",
-     "address": ".claude/skills/grokkings/SKILL.md G83, line 1044"
+     "address": ".claude/skills/grokkings/SKILL.md G83, line 1042"
     }
    ],
    "status": "hand-2b",
-   "line": 1216,
-   "address": "LEDGER.md row FS114-CV-EXISTS, line 1216",
-   "grade_address": "LEDGER.md row FS114-CV-EXISTS, line 1216"
+   "line": 1222,
+   "address": "LEDGER.md row FS114-CV-EXISTS, line 1222",
+   "grade_address": "LEDGER.md row FS114-CV-EXISTS, line 1222"
   },
   {
    "id": "LOCALF",
@@ -1493,9 +1493,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1500,
-   "address": "LEDGER.md row FS116-Y4-EMPTY, line 1500",
-   "grade_address": "LEDGER.md row FS116-Y4-EMPTY, line 1500",
+   "line": 1506,
+   "address": "LEDGER.md row FS116-Y4-EMPTY, line 1506",
+   "grade_address": "LEDGER.md row FS116-Y4-EMPTY, line 1506",
    "also": []
   },
   {
@@ -1549,6 +1549,156 @@
    "also": []
   },
   {
+   "id": "MEXCL",
+   "label": "the (Q)-free exclusion, with no map",
+   "role": "nogo",
+   "plain": "For every measurable six-colouring proper at almost every unit pair: where four labels meet in a witnessed cycle, the palettes on the point's unit circle cannot almost everywhere hold one of the two other labels. No map, no Siamese clause.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "155"
+   },
+   "quote": "the palettes on its unit circle cannot almost everywhere hold one of the two other labels",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "155"
+   },
+   "grade": "[hand], one mind, with a line-by-line checking reading of its steps M4–M9 by a second mind",
+   "theta": 90,
+   "r": 520,
+   "sector": "seven",
+   "tier": 2,
+   "status": "hand-1",
+   "line": 200,
+   "address": "LEDGER.md row 155, line 200",
+   "grade_address": "LEDGER.md row 155, line 200",
+   "also": []
+  },
+  {
+   "id": "CENTRES",
+   "label": "cyclic centres exist at every k",
+   "role": "held",
+   "plain": "Every closed disc of radius above 1 holds a point where classes meet in a cycle, at every number of colours, with no hypothesis; the data at a centre need the centres finite in a disc.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "156"
+   },
+   "quote": "every closed disc of radius greater than 1 contains a cyclic centre",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "156"
+   },
+   "grade": "[hand] or derived from [hand] entries, one mind each, kernel pending",
+   "theta": 60,
+   "r": 660,
+   "sector": "seven",
+   "tier": 2,
+   "status": "kernel",
+   "line": 201,
+   "address": "LEDGER.md row 156, line 201",
+   "grade_address": "LEDGER.md row 156, line 201",
+   "also": []
+  },
+  {
+   "id": "COMPSHARP",
+   "label": "the complementary pair, in the exact class",
+   "role": "held",
+   "plain": "Two triangle points on disjoint triples of six labels, less than 2 apart, force an edge set onto the unit circle about each common unit point. No cone scale.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "157"
+   },
+   "quote": "then one of the six sets K_0, K_1, K_2, K′_0, K′_1, K′_2 is contained in the unit circle about w",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "157"
+   },
+   "grade": "[hand] or derived from [hand] entries, one mind each, kernel pending",
+   "theta": 47,
+   "r": 650,
+   "sector": "seven",
+   "tier": 2,
+   "status": "kernel",
+   "line": 202,
+   "address": "LEDGER.md row 157, line 202",
+   "grade_address": "LEDGER.md row 157, line 202",
+   "also": []
+  },
+  {
+   "id": "WIND6",
+   "label": "three outside labels wind",
+   "role": "held",
+   "plain": "A loop among three labels with the 60° exclusion has degree 3 modulo 6: six is the one count at which the labels left for a ring can wind. The forcing of a centre that is not a triangle stalls at this circle.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "158"
+   },
+   "quote": "then the degree of φ, for the orientation a → b → c of Θ, is congruent to 3 modulo 6",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "158"
+   },
+   "grade": "[hand] or derived from [hand] entries, one mind each, kernel pending",
+   "theta": 53,
+   "r": 630,
+   "sector": "seven",
+   "tier": 2,
+   "status": "kernel",
+   "line": 203,
+   "address": "LEDGER.md row 158, line 203",
+   "grade_address": "LEDGER.md row 158, line 203",
+   "also": []
+  },
+  {
+   "id": "PLACEDARC",
+   "label": "the turning ring places a unit-arc centre",
+   "role": "held",
+   "plain": "In step form with witnesses near the centre, a turning ring forces a point with four labels present whose own unit circle runs along two unit arcs. No model is known.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "159"
+   },
+   "quote": "a measurable instance of FS-124's first question, every hypothesis derived from the seed's data",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "159"
+   },
+   "grade": "[hand] or derived from [hand] entries, one mind each, kernel pending",
+   "theta": 61,
+   "r": 630,
+   "sector": "seven",
+   "tier": 2,
+   "status": "kernel",
+   "line": 204,
+   "address": "LEDGER.md row 159, line 204",
+   "grade_address": "LEDGER.md row 159, line 204",
+   "also": []
+  },
+  {
+   "id": "FLOWERS",
+   "label": "the turning ring in a finite family",
+   "role": "held",
+   "plain": "In a family of seven flowers of wedges the three-label turning ring and the alternating ring do not exist; with four labels at alternate ring points the turning ring exists, in fragment T2's shape.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "160"
+   },
+   "quote": "no model has the turning ring `a, b, n, a, b, n` and at most three labels at every ring point",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "160"
+   },
+   "grade": "[cert]",
+   "theta": 78,
+   "r": 400,
+   "sector": "seven",
+   "tier": 2,
+   "status": "?",
+   "line": 205,
+   "address": "LEDGER.md row 160, line 205",
+   "grade_address": "LEDGER.md row 160, line 205",
+   "also": []
+  },
+  {
    "id": "TOP5",
    "label": "the map step at five",
    "role": "held",
@@ -1593,9 +1743,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1423,
-   "address": "LEDGER.md row FS116-RING-GERM, line 1423",
-   "grade_address": "LEDGER.md row FS116-RING-GERM, line 1423",
+   "line": 1429,
+   "address": "LEDGER.md row FS116-RING-GERM, line 1429",
+   "grade_address": "LEDGER.md row FS116-RING-GERM, line 1429",
    "also": []
   },
   {
@@ -1618,9 +1768,9 @@
    "sector": "six-up",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1417,
-   "address": "LEDGER.md row FS116-O1-YESLIM, line 1417",
-   "grade_address": "LEDGER.md row FS116-O1-YESLIM, line 1417",
+   "line": 1423,
+   "address": "LEDGER.md row FS116-O1-YESLIM, line 1423",
+   "grade_address": "LEDGER.md row FS116-O1-YESLIM, line 1423",
    "also": []
   },
   {
@@ -1643,7 +1793,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-qfree-ring.md, line 1",
-   "grade_address": "plans/STUB-qfree-ring.md, line 100",
+   "grade_address": "plans/STUB-qfree-ring.md, line 102",
    "also": []
   },
   {
@@ -1666,7 +1816,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-q-ring.md, line 1",
-   "grade_address": "plans/STUB-q-ring.md, line 106",
+   "grade_address": "plans/STUB-q-ring.md, line 298",
    "also": []
   },
   {
@@ -1689,7 +1839,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-saturated-local.md, line 1",
-   "grade_address": "plans/STUB-saturated-local.md, line 61",
+   "grade_address": "plans/STUB-saturated-local.md, line 63",
    "also": []
   },
   {
@@ -1712,9 +1862,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1244,
-   "address": "LEDGER.md row FS114-Y4-RSTOPALL, line 1244",
-   "grade_address": "LEDGER.md row FS114-Y4-RSTOPALL, line 1244",
+   "line": 1250,
+   "address": "LEDGER.md row FS114-Y4-RSTOPALL, line 1250",
+   "grade_address": "LEDGER.md row FS114-Y4-RSTOPALL, line 1250",
    "also": []
   },
   {
@@ -1737,9 +1887,9 @@
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1247,
-   "address": "LEDGER.md row FS114-Y5-PINALL, line 1247",
-   "grade_address": "LEDGER.md row FS114-Y5-PINALL, line 1247",
+   "line": 1253,
+   "address": "LEDGER.md row FS114-Y5-PINALL, line 1253",
+   "grade_address": "LEDGER.md row FS114-Y5-PINALL, line 1253",
    "also": []
   },
   {
@@ -1769,9 +1919,9 @@
     "address": "plans/STUB-route-t-count.md, line 70"
    },
    "status": "hand-2b",
-   "line": 1226,
-   "address": "LEDGER.md row FS114-N2-ENDS, line 1226",
-   "grade_address": "LEDGER.md row FS114-N2-ENDS, line 1226",
+   "line": 1232,
+   "address": "LEDGER.md row FS114-N2-ENDS, line 1232",
+   "grade_address": "LEDGER.md row FS114-N2-ENDS, line 1232",
    "also": []
   },
   {
@@ -1794,9 +1944,9 @@
    "sector": "six-up",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1254,
-   "address": "LEDGER.md row FS114-Y-DIAL, line 1254",
-   "grade_address": "LEDGER.md row FS114-Y-DIAL, line 1254",
+   "line": 1260,
+   "address": "LEDGER.md row FS114-Y-DIAL, line 1260",
+   "grade_address": "LEDGER.md row FS114-Y-DIAL, line 1260",
    "also": []
   },
   {
@@ -1830,7 +1980,7 @@
    "status": "hand-2b",
    "line": 19,
    "address": "plans/FS111-derivation.md, line 19",
-   "grade_address": "LEDGER.md row FS111-C1-UNIF, line 1263"
+   "grade_address": "LEDGER.md row FS111-C1-UNIF, line 1269"
   },
   {
    "id": "FS121",
@@ -1875,7 +2025,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-pinch-at-junction.md, line 1",
-   "grade_address": "plans/STUB-pinch-at-junction.md, line 45",
+   "grade_address": "plans/STUB-pinch-at-junction.md, line 47",
    "also": []
   },
   {
@@ -1898,7 +2048,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-forced-pair.md, line 1",
-   "grade_address": "plans/STUB-forced-pair.md, line 37",
+   "grade_address": "plans/STUB-forced-pair.md, line 39",
    "also": []
   },
   {
@@ -1921,7 +2071,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-curved-pencils.md, line 1",
-   "grade_address": "plans/STUB-curved-pencils.md, line 43",
+   "grade_address": "plans/STUB-curved-pencils.md, line 45",
    "also": []
   },
   {
@@ -1944,7 +2094,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-lateral-extent.md, line 1",
-   "grade_address": "plans/STUB-lateral-extent.md, line 35",
+   "grade_address": "plans/STUB-lateral-extent.md, line 37",
    "also": []
   },
   {
@@ -2014,13 +2164,13 @@
    "tier": 2,
    "posed": [
     {
-     "question": "the first clause of Ducz–Varga's Conjecture 1 (2026), and Matolcsi et al.'s equality question (2025, §2) — given MR, at [hand]",
+     "question": "the first clause of Ducz–Varga's Conjecture 1 (2026), and Matolcsi et al.'s equality question (2025, §2) — with no hypothesis, over [OAIMath2026]'s rigidity theorem, at [hand], one mind",
      "state": "answered",
      "src": {
       "file": "CLAUDE.md",
       "section": "### The local–global conjecture"
      },
-     "quote": "row 129 answers the first clause of [DuczVarga2026]'s Conjecture 1 and [MatolcsiEtAl2025] §2's equality question",
+     "quote": "row 129 (FS-133; one mind) answers the first clause of [DuczVarga2026]'s Conjecture 1 and [MatolcsiEtAl2025] §2's equality question",
      "address": "CLAUDE.md § The local–global conjecture, line 160"
     }
    ],
@@ -2291,9 +2441,9 @@
     }
    ],
    "status": "cert",
-   "line": 1196,
-   "address": "LEDGER.md row FS112-CAL-STRIP, line 1196",
-   "grade_address": "LEDGER.md row FS112-CAL-STRIP, line 1196"
+   "line": 1202,
+   "address": "LEDGER.md row FS112-CAL-STRIP, line 1202",
+   "grade_address": "LEDGER.md row FS112-CAL-STRIP, line 1202"
   },
   {
    "id": "DISK",
@@ -2315,9 +2465,9 @@
    "sector": "six-up",
    "tier": 2,
    "status": "cert",
-   "line": 1201,
-   "address": "LEDGER.md row FS112-CAL-DISK, line 1201",
-   "grade_address": "LEDGER.md row FS112-CAL-DISK, line 1201",
+   "line": 1207,
+   "address": "LEDGER.md row FS112-CAL-DISK, line 1207",
+   "grade_address": "LEDGER.md row FS112-CAL-DISK, line 1207",
    "also": []
   },
   {
@@ -2340,9 +2490,9 @@
    "sector": "six-up",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1204,
-   "address": "LEDGER.md row FS112-STOP, line 1204",
-   "grade_address": "LEDGER.md row FS112-STOP, line 1204",
+   "line": 1210,
+   "address": "LEDGER.md row FS112-STOP, line 1210",
+   "grade_address": "LEDGER.md row FS112-STOP, line 1210",
    "also": []
   },
   {
@@ -2365,9 +2515,9 @@
    "sector": "six-up",
    "tier": 2,
    "status": "hand-2b",
-   "line": 1210,
-   "address": "LEDGER.md row FS112-Y3-PIN, line 1210",
-   "grade_address": "LEDGER.md row FS112-Y3-PIN, line 1210",
+   "line": 1216,
+   "address": "LEDGER.md row FS112-Y3-PIN, line 1216",
+   "grade_address": "LEDGER.md row FS112-Y3-PIN, line 1216",
    "also": []
   },
   {
@@ -2396,13 +2546,13 @@
       "row": "FS112-C-PARTNERS"
      },
      "quote": "a cubic trichromatic vertex's close complementary cubic partners are rhombus completions of its leaving centres: at most three",
-     "address": "LEDGER.md row FS112-C-PARTNERS, line 1191"
+     "address": "LEDGER.md row FS112-C-PARTNERS, line 1197"
     }
    ],
    "status": "hand-2b",
-   "line": 1183,
-   "address": "LEDGER.md row FS112-N3-COR3, line 1183",
-   "grade_address": "LEDGER.md row FS112-N3-COR3, line 1183"
+   "line": 1189,
+   "address": "LEDGER.md row FS112-N3-COR3, line 1189",
+   "grade_address": "LEDGER.md row FS112-N3-COR3, line 1189"
   },
   {
    "id": "PARTS",
@@ -2470,7 +2620,7 @@
     "row": "FS114-CV-EXISTS"
    },
    "quote": "over FS112-N3-DENSE3, N2-TERM, N4-FIN",
-   "address": "LEDGER.md row FS114-CV-EXISTS, line 1216"
+   "address": "LEDGER.md row FS114-CV-EXISTS, line 1222"
   },
   {
    "source": "CVEXISTS",
@@ -2493,7 +2643,7 @@
    },
    "quote": "has a ring carrying no",
    "label": "a ring type removed",
-   "address": "LEDGER.md row FS116-Y4-EMPTY, line 1500"
+   "address": "LEDGER.md row FS116-Y4-EMPTY, line 1506"
   },
   {
    "source": "GFREE",
@@ -2520,6 +2670,30 @@
    "address": "LEDGER.md row 149, line 194"
   },
   {
+   "source": "MEXCL",
+   "target": "QFREE",
+   "kind": "context",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "155"
+   },
+   "quote": "It is rows 148–149's exclusion in measure",
+   "label": "the same exclusion, with no map",
+   "address": "LEDGER.md row 155, line 200"
+  },
+  {
+   "source": "PLACEDARC",
+   "target": "FLOWERS",
+   "kind": "context",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "159"
+   },
+   "quote": "the one model the day's search kept (row 160) is the other case",
+   "label": "the kept model is the hard case",
+   "address": "LEDGER.md row 159, line 204"
+  },
+  {
    "source": "QPRUNE",
    "target": "LOCALF",
    "kind": "context",
@@ -2541,7 +2715,7 @@
    },
    "quote": "let y be a change point of the ring",
    "label": "the placing rule",
-   "address": "LEDGER.md row FS116-RING-GERM, line 1423"
+   "address": "LEDGER.md row FS116-RING-GERM, line 1429"
   },
   {
    "source": "YESLIM",
@@ -2553,7 +2727,7 @@
    },
    "quote": "some closed disc of radius R carries a valid k-coloured fragment",
    "label": "fragments on every disc",
-   "address": "LEDGER.md row FS116-O1-YESLIM, line 1417"
+   "address": "LEDGER.md row FS116-O1-YESLIM, line 1423"
   },
   {
    "source": "FS123",
@@ -2564,7 +2738,7 @@
    },
    "quote": "the (Q)-free ring",
    "label": "its (Q)-free half",
-   "address": "plans/STUB-qfree-ring.md, line 45"
+   "address": "plans/STUB-qfree-ring.md, line 47"
   },
   {
    "source": "FS124",
@@ -2633,7 +2807,7 @@
    },
    "quote": "negative only at a degree-4 vertex with at least three tactic edges",
    "label": "where six has room",
-   "address": "LEDGER.md row FS114-N2-ENDS, line 1226"
+   "address": "LEDGER.md row FS114-N2-ENDS, line 1232"
   },
   {
    "source": "CAPSTRIP",
@@ -2645,7 +2819,7 @@
    },
    "quote": "no extension does better",
    "label": "R > φ²/√2",
-   "address": "LEDGER.md row FS114-Y-DIAL, line 1254"
+   "address": "LEDGER.md row FS114-Y-DIAL, line 1260"
   },
   {
    "source": "LB7",
@@ -2656,7 +2830,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 195"
+   "address": "CLAUDE.md § Where the problem stands, line 194"
   },
   {
    "source": "UB7",
@@ -2667,7 +2841,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 195"
+   "address": "CLAUDE.md § Where the problem stands, line 194"
   },
   {
    "source": "LB6",
@@ -2678,7 +2852,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 195"
+   "address": "CLAUDE.md § Where the problem stands, line 194"
   },
   {
    "source": "UB6",
@@ -2689,7 +2863,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 195"
+   "address": "CLAUDE.md § Where the problem stands, line 194"
   },
   {
    "source": "LB5",
@@ -2700,7 +2874,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 195"
+   "address": "CLAUDE.md § Where the problem stands, line 194"
   },
   {
    "source": "UB5",
@@ -2711,7 +2885,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 195"
+   "address": "CLAUDE.md § Where the problem stands, line 194"
   },
   {
    "source": "DEGREY",
@@ -2853,7 +3027,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5",
-   "address": "CLAUDE.md § Where the problem stands, line 196"
+   "address": "CLAUDE.md § Where the problem stands, line 195"
   },
   {
    "source": "SUB",
@@ -2864,7 +3038,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5",
-   "address": "CLAUDE.md § Where the problem stands, line 196"
+   "address": "CLAUDE.md § Where the problem stands, line 195"
   },
   {
    "source": "R99",
@@ -3025,7 +3199,7 @@
    },
    "quote": "A measurable fall colouring with a non-locally-finite Σ refutes the claim",
    "label": "a potential refutation",
-   "address": "plans/STUB-lateral-extent.md, line 24"
+   "address": "plans/STUB-lateral-extent.md, line 26"
   },
   {
    "source": "FS120",
@@ -3058,7 +3232,7 @@
    },
    "quote": "FS-107's reduction",
    "label": "route R",
-   "address": "plans/STUB-forced-pair.md, line 14"
+   "address": "plans/STUB-forced-pair.md, line 16"
   },
   {
    "source": "FS122",
@@ -3103,7 +3277,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "under Condition 5 none does (row 134)",
-   "address": "CLAUDE.md § Where the problem stands, line 215"
+   "address": "CLAUDE.md § Where the problem stands, line 214"
   },
   {
    "source": "UANO",
@@ -3114,7 +3288,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "with unit arcs every one has a vertex of at least four colours (rows 135, 137)",
-   "address": "CLAUDE.md § Where the problem stands, line 215"
+   "address": "CLAUDE.md § Where the problem stands, line 214"
   },
   {
    "source": "R132",
@@ -3136,7 +3310,7 @@
     "row": "FS112-N3-BASE"
    },
    "quote": "over row 134's base, re-derived by BASE-V but for Lemma 4 at cusps",
-   "address": "LEDGER.md row FS112-N3-BASE, line 1185"
+   "address": "LEDGER.md row FS112-N3-BASE, line 1191"
   },
   {
    "source": "N3BASE",
@@ -3147,7 +3321,7 @@
     "row": "FS112-N3-DENSE3"
    },
    "quote": "over N3-BASE and DISC1",
-   "address": "LEDGER.md row FS112-N3-DENSE3, line 1186"
+   "address": "LEDGER.md row FS112-N3-DENSE3, line 1192"
   },
   {
    "source": "N3DENSE3",
@@ -3169,7 +3343,7 @@
     "row": "FS112-C-COMPOSE"
    },
    "quote": "the global step in DENSE3's form is the NO for all maps",
-   "address": "LEDGER.md row FS112-C-COMPOSE, line 1190"
+   "address": "LEDGER.md row FS112-C-COMPOSE, line 1196"
   },
   {
    "source": "GSTEP",
@@ -3252,7 +3426,7 @@
    },
    "quote": "no stuck ray, bounded chains",
    "label": "periodic maps need neither",
-   "address": "LEDGER.md row FS112-N3-PER, line 1179"
+   "address": "LEDGER.md row FS112-N3-PER, line 1185"
   },
   {
    "source": "N3END",
@@ -3297,7 +3471,7 @@
    },
    "quote": "FALSE as stated (BOWTIE)",
    "label": "refutes it as first stated",
-   "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1212"
+   "address": "LEDGER.md row FS112-Y3-END-NEEDS, line 1218"
   },
   {
    "source": "BOWTIE",
@@ -3538,7 +3712,7 @@
    },
    "quote": "20 unit arcs, all both-kind at four-colour corners",
    "label": "a tight fragment, not the plane",
-   "address": "LEDGER.md row FS112-CAL-DISK, line 1201"
+   "address": "LEDGER.md row FS112-CAL-DISK, line 1207"
   },
   {
    "source": "PARTS",
@@ -3573,7 +3747,7 @@
    },
    "quote": "the pinned corner: both positives end where a close complementary pair",
    "label": "the held positives stop at a pinned corner",
-   "address": "LEDGER.md row FS112-STOP, line 1204"
+   "address": "LEDGER.md row FS112-STOP, line 1210"
   },
   {
    "source": "Y3STOP",
@@ -3585,7 +3759,7 @@
    },
    "quote": "both pinned-corner escapes fail one ring further out",
    "label": "no way past the pinned corners",
-   "address": "LEDGER.md row FS112-Y3-PIN, line 1210"
+   "address": "LEDGER.md row FS112-Y3-PIN, line 1216"
   },
   {
    "source": "WPOLY",

@@ -5,11 +5,25 @@ not five-colourable became this project's literature (`[OAIMath2026]` family 158
 any other literature. Cite it, build on it, let's use it to slingshot us past anyone else working on this problem."). State: Not
 started. Its number was fixed by Keryx (`plans/FS131-close-inventory.md` item 617).*
 
-**Provisional bearings (Poros, 2026-10-07, rewritten by FS132-P2 after the first night; Ephodos's re-grokking replaces this line
-at each opening):** G94, G95, G92, G91, G83, G71, G89, G86, G79, G72, G87, G82; rows 133, 134, 137, 139, 143, 148–150 — one line of
-why each in § Bearing on the answer.
+**Provisional bearings (Poros, 2026-10-07, rewritten by FS132-P3 after the second round; Ephodos's re-grokking replaces this line
+at each opening):** G91, G83, G94, G95, G84, G92, G87, G79, G72, G71, G86, G21, G89, G82; rows 133–137, 139–141, 143, 148–150 — one
+line of why each in § Bearing on the answer.
 
 *2026-10-07 (EXT-OAI3 § 3.2):* `[OAIMath2026]` family 156 (Borsuk in dimension nine; Lean in the release, not audited here) is a second instance of the map-to-a-simplex method, with a rigidity statement at the threshold number of labels — every maximal support has exactly dim + 1 labels, by a mod-two degree count — of the kind [P₆] and [L₆] ask for. Its first step enlarges a cover to an open one, so it applies with slack only. Read its `extension.tex`, `topology.tex` and `six-labels.tex` at the opening.
+
+**What FS-132 delivers (dated line, FS132-Z2, 2026-10-07; by Kooshi's word of that day, `data/external/EXT-OAI1-request.md`
+§ Kooshi's sixth word; `plans/FS132-close-inventory.md` items 24, 32).** FS-132 delivers **what a point with data on its unit
+circle is forced to carry**, in the class of every measurable colouring proper at almost every unit pair, with no map:
+`plans/FS132-derivation.md`, 57 entries — 47 derived, 10 stalls and gaps — each [hand] or derived from [hand] entries, one mind, kernel pending, but
+the day's search ([cert] in its finite family). Whether every such colouring *has* such a point is no longer this milestone's
+question: it is FS-127's and FS-128's (`plans/STUB-lateral-extent.md`, `plans/STUB-top-colour.md`). The configuration every
+round ended at — a boundary that is an arc of a unit circle whose centre is the other end of a unit distance — is FS-124's
+(`plans/STUB-q-ring.md`), the next milestone by the same word. **No value moved.** Where each open thread went:
+`plans/FS132-Z2-record.md` Stage 2. Open inside this milestone's Lean phase, and so not stubs: the square form of "centres
+exist" (C132-CORES-SQUARE, a gap: one comparison of the planner's route with FS132-E1's steps S5–S7, on branch `fs132-wk1`);
+the first night's exclusion on an open set (its ground there is one mind's reading of two proofs of the release as local, step
+M0; the whole-plane form is formalized first). Owed from § Named deliverables and not delivered: the nerve viewer
+(`plans/FS132-close-inventory.md` item 1).
 
 ## The mission, in plain language
 
@@ -89,7 +103,7 @@ question: does-the-six-colour-chain-run-with-no-map
   cost: one opening and one derivation job, no search; to read: the manuscript's §§ 7–8, `plans/FS116-V6-verification.md` § 2.2, `plans/FS114-derivation.md` ll. 26–60
   hunch: split — EMPTY runs (pieces of diameter at most 1, unit circles, the 60° twist); CV-EXISTS does not (it bends a map)
   falsifier: EMPTY's route naming an arc's curvature or a finite count of tiles at the vertex; or CV-EXISTS restated with no modification of the map
-  rank: 3
+  rank: 4
 
 
 **Behind it, in rank order** (cards 2 and 3 of the same record; card 3 is the record's invention signal, addressed to Ephodos):
@@ -104,7 +118,7 @@ question: what-the-extraction-needs-of-the-centres
   cost: one derivation job on the manuscript's Lemmas 7.6–7.8 and Proposition 7.1; the island colouring is the test object, by formula
   hunch: total disconnectedness gives a point with essential loops at every small scale; the limiting directions of the continua are where it can fail
   falsifier: a step of Lemmas 7.6–7.8, Proposition 7.1 or Lemma 8.1 that reads an isolated centre — a continuum that must reach a fixed radius, or a direction that needs an annulus free of centres
-  rank: 4
+  rank: 5
 
 question: where-does-five-enter
   evidence: side A, `plans/FS131-close-inventory.md` l. 8333: "the cover's order — at six colours a point may need three positive coordinates, a 2-complex, where the disc is no obstruction"; side B, `plans/EXT-OAI2-reading.md` ll. 682–685: "the cover of order two against order three is not where five enters … Five enters in the two statements that would make one exist"
@@ -116,7 +130,7 @@ question: where-does-five-enter
   cost: one derivation job; `[Voronov2023]` Thm 1.3's proof re-read for where closedness enters (row 132: once, "as compactness giving a band")
   hunch: the triangle fills and the statement is route R's in the release's vocabulary (0.35)
   falsifier: a triangle centre whose disc averages do not extend the map over it into the filled triangle; or a reading of Thm 1.3's proof that uses closedness beyond the band
-  rank: 5
+  rank: 6
 
 ### Existence form
 
@@ -179,8 +193,10 @@ question: can-a-triangle-ring-change-at-two-points-sixty-degrees-apart
   answered by: derivation — Ephodos
   cost: one derivation job, no search; to read: `plans/FS132-E3-derivation.md` M0–M2 and M7, `plans/FS132-E2-derivation.md` §§ one-sided pure strips, the orbit index, the stalled step; `plans/FS107-derivation.md` for W-TAN and R-CP (row 133's map form)
   hunch: it cannot — at a change on an outside-pure arc whose two neighbours also change, the point outside the unit circle whose two ring neighbours carry the labels on either side is left the third outside label (0.45)
+
+  *Dated line (2026-10-07, from FS132-E4's report, `data/fs132/reports/FS132-E4.md`; filed by FS132-Z2):* true on outer-pure ring points of a six-sector turning ring and not on inner-pure ones, where nothing is placed (C132-PLACE and the list under it, `plans/FS132-derivation.md` § 4); "on a twelve-sector ring the sides exchange roles".
   falsifier: a weak colouring by formula near the closed unit disc about a triangle centre with ring a, b, c, a, b, c in which a ring point between two sectors on an outside-pure arc has only two outside labels near it
-  rank: 1
+  rank: 2
 
 question: do-witnessed-cycles-exist-with-no-hypothesis-on-the-centres
   evidence: `plans/FS132-E3-derivation.md` l. 102 ("of the sets K_j only that p ∈ K_j, K_j ≠ {p}, and the exclusion") and ll. 210–237 (M4–M6 use one point of each set); `plans/FS132-E1-derivation.md` l. 326 (at the island colouring's accumulation centre "With clauses (1)–(3) alone the straight edges do satisfy it at `v`") and ll. 334–335 (isolation is read at "a continuum that must reach a fixed radius"); `LEDGER.md` row 143 ("a measurable Grundy colouring … without raising any point's colour index")
@@ -193,7 +209,7 @@ question: do-witnessed-cycles-exist-with-no-hypothesis-on-the-centres
   cost: one derivation job, no search; to read: the manuscript's proof of clause (3) (`M/interfaces.tex`, to ll. 581–590), `plans/FS132-E1-derivation.md` steps S8–S11 and § The two controls at seven, `plans/EXT-OAI2-reading.md` § 5.6 (the two slack colourings), `plans/FS121-D3-proof.md` (the Grundy construction)
   hunch: the restatement is immediate; existence without isolation stalls at the proof of clause (3) (0.5)
   falsifier: a step of C132-M-ORBIT's M0–M9 or of C132-TRI-STRIP's argument that reads a second point of one set, its connectedness or a limit of its points; or a weak colouring by formula with a disc of radius above 1 holding no witnessed cycle
-  rank: 2
+  rank: 3
 
 **Which goes first.** The ring card: it is the step at which six differs from seven (three labels outside a triangle wind; four
 do not), its first claim is two lines if it holds, and each of its three answers changes the next launch. The witness card takes
@@ -255,6 +271,8 @@ the bicycle (two centres of one type), for which no weak form is posed.
   (`plans/EXT-OAI2-reading.md` § 5.6) a Grundy colouring, and the Grundy-ization of each (FS121-D3-GRUNDY's construction) has
   finitely many cyclic centres in every disc and finitely many changes on every ring.
 
+  *Dated line (2026-10-07, from FS132-E5, `plans/FS132-E5-derivation.md` § The two controls at seven; drafted by FS132-Z1):* the stripe colouring is not a witnessed triangle with a wild ring. The unit circle about the striped circle's centre `x` passes through the vertex `v` and crosses two of the three hexagons at `v` along arcs, so those two labels have no witness at `x` at all (C132-WIT-CROSSED), with the stripes or without; the colouring stays a control for a three-label palette only.
+
 ### What each answer gives
 
 | outcome | what it is, as a result | what it does to the road |
@@ -271,6 +289,133 @@ C132-COMP derived at the first attempt: 0.85. C132-PLACE's list with the third l
 C132-TURN: derived 0.45, stalls at "the ring point carries a witnessed cycle" 0.40, refuted by formula 0.15. C132-WIT: 0.90.
 C132-WIT-EX: derived 0.30, stalls 0.50, refuted 0.20. C132-GRUNDY7: 0.60. C132-LONG for every weak colouring within two jobs:
 0.07; for honest colourings: 0.15. Six against seven decided by this milestone: 0.03.
+
+## The question, re-posed after the second round (Poros, 2026-10-07, FS132-P3)
+
+*What moved (`plans/POROS-2026-10-07-fs132-round2.md` Stage 1, findings A–E). Two derivers' records and one search, read against
+each other: (A) the two cards of the second round stalled at the two **opposite** inclusions between two graphs on the labels at a
+point — the transition graph `Γ_p` (which classes meet in every small ball about `p`) and the witness graph `W_p` (which pairs a
+second point keeps off one side of the unit circle about `p`) — and the witness card's own example shuts the route the ring card
+named (a witnessed triangle need not lie in its point's transition graph); so C132-TURN as posed above has C132-WIT-EX's defect,
+and the flagged clause (5) does not bear on it; (B) every control of two rounds stands on a margin (the hexagonal colouring at
+circumradius 2/5) or on a held fragment, none on a tight colouring; the one tight seven-colouring held by formula (R7,
+`plans/FS111-derivation.md`, FS111-M-R7) has no three-label point at all — six tiles meet at each of its vertices, each boundary
+there a unit arc about a ring point of that vertex — so no entry of the second round is about any point of it; (C) the
+exception of C132-COMP-SHARP, the residue of C132-ALT, the void of C132-PLACE and the search's survivors are one object — an
+interface of a three-label point on the unit circle about one of its own ring points — which is rows 135–136's unit arc with a
+four-colour vertex at its centre; (D) every statement derived in two rounds crosses from one point's unit circle to the small
+balls about the points of that circle, by properness alone, and both stalls are attempts to cross the other way, which asks a
+measurable class for connected pieces of a definite size; (E) read in the direction that derives, the ring card's stalled claim
+may need no witness at the ring point at all (a composition of four lines of `plans/FS132-E4-derivation.md`, mine, unchecked).*
+
+**The object, re-cut.** Not "a centre with a witnessed cycle". A **seed**: a point with data on its unit circle, however it came by
+them; and what that circle forces in the balls about its ring points — what is *present* there, which is again data for the next
+circle. The existence of a seed in every weak six-colouring is not asked by this card: it is the map step met again in the exact
+class (FS-127, FS-128), and two rounds give no reason to think the measurable tools supply it (the record's Stage 2).
+
+*Terms.* A weak colouring, `H_i`, `Δ(K)`, a witnessed edge and a witnessed triangle, an edge outer- or inner-blocked at a ring
+point, a pure side, the outside state `s(θ)`, the chart `Z(α, d)` and the four wedges far, lens, cw, ccw at a ring point: as in
+`plans/FS132-E4-derivation.md` § 1.4 and the setting of its Stage 3. A label `a` is **present** at a point `p` when `p ∈ H_a`. A
+**six-sector turning seed** is an open set `U` containing the closed unit disc about a point `x`, a weak measurable six-colouring
+of `U`, a witnessed triangle at `x` on three labels `T` with sets `K_0, K_1, K_2`, the other labels `N = {a, b, n}`, and an angle
+`ψ` such that the palette `P_x(e(θ))` contains, for almost every `θ`, the label `a` on `(ψ − π/3, ψ)` and `(ψ + 2π/3, ψ + π)`,
+`b` on `(ψ, ψ + π/3)` and `(ψ + π, ψ + 4π/3)`, and `n` on the two remaining arcs. Its ring points are `y_k = x + e(ψ + kπ/3)`.
+
+### The card
+
+question: what-does-a-seeds-circle-force-in-the-balls-about-its-ring-points
+  evidence: `plans/FS132-E4-derivation.md` ll. 547–557 (near `y_+` "the label is `a`, and … these points are outside the unit circle about `y`"; near `y_−` "the label is `b`, outside the unit circle about `y`") against its l. 472 ("At a ring point with a pure inner side: inside the ring only `a` and `b`") and ll. 585–587 (the stall's smallest form); `plans/FS132-E5-derivation.md` ll. 546–550 (an anchored witnessed triangle at a point whose `Γ_p` is a path) and l. 411; `plans/SEARCH-2026-10-07.md` ll. 183–188 (four labels at exactly the ring points about which `x`'s interfaces are unit arcs; no two adjacent ring points three-way); `LEDGER.md` rows 135–136 ("a unit rhombus with four-colour corners"; "at most three close complementary partners")
+  expected: the turning ring's fate waits on a witness at the ring point, and that witness on the bridge from a meeting of classes to its witnesses — the extraction's selection step with no isolated centre
+  ask: on a six-sector turning seed, does the centre's circle data force the inner lens at a ring point between two outer-pure neighbours to carry only the centre's own labels — so that some ring point has four labels present, with no witness there?
+  if it does: in step form two changes π/3 apart place a four-label point or sit on a unit arc about a ring point; C132-TURN's stall dissolves with no clause (5); the next claim is the placed point's ring, and the Searcher's queue line 11 is ranked on the same object
+  if a colouring by formula carries a six-sector turning seed with six pure sides and three labels present at every ring point: the search's null is its family's alone and a seed that lives on triangles exists; extend it outward by formula and rank it above the (Q) ring
+  if it stalls at a line of one chart: return the chart and the line to the asking lane; the fallback is the ring card's one-edge form, and no job is spent on a second reading of clause (5)
+  answered by: derivation — Ephodos
+  cost: one derivation job, no search; to read: `plans/FS132-E4-derivation.md` Stage 3 whole (the setting, (W), P1–P3, list lines L3–L6, the proof of C132-TURN-EDGE), `plans/FS132-E5-derivation.md` C132-WIT-SIDE and its argument, `plans/SEARCH-2026-10-07.md` § 1.5 and Stage 3's last two paragraphs, `LEDGER.md` rows 135–136
+  hunch: it does — the open wedges that C132-TURN-EDGE's proof places near the two neighbours exclude `a` and `b` from the lens, and the transfer excludes `n` (0.65)
+  falsifier: a set of positive measure in that lens whose points' unit circles miss, in length, both the `a`-wedge at `y_1` and the `b`-wedge at `y_{−1}`; or a weak colouring by formula near the closed unit disc with a six-sector turning seed, six pure sides and three labels present at every ring point
+  rank: 1
+
+### Existence form
+
+*Is there an object?* **Is there a weak measurable six-colouring of an open set containing the closed disc of radius 2 about a
+point `x`, with a witnessed triangle at `x` whose ring is a step ring having two changes of its outside label `π/3` apart?**
+(Radius 2: the closed unit discs about the ring points.) *Held*: seven germs of radius about 0.25 — at `x` and its six ring
+points — with four labels at three alternate ring points and `x`'s three interfaces on the unit circles about them
+(SEARCH-1007-TURN4, [cert], `data/search/2026-10-07/KEEP-turning-4label-arcs.json`); in the wedge family, none with three labels
+at every ring point (SEARCH-1007-TURN3, [cert]) and none of the alternating kind (SEARCH-1007-ALT, [cert]; C132-ALT, [hand]).
+*Not held*: anything between the germs, or beyond 0.25 from the unit circle. An object on the disc of radius 2 would be the YES
+side's first seed with one generation of growth; its exclusion at a stated radius is a local exclusion of row 137's kind, in
+measure.
+
+### Structural form
+
+*About every solution, in the widest class where it makes sense.* **For every `k ≥ 2` and every weak measurable `k`-colouring of
+an open set containing two points `x`, `y` at distance 1: which pairs (the colouring near `x`, the colouring near `y`) occur?**
+For pieces that are open the answer is C132-WIT-SIDE's side rule: a label filling an open set near `x` inside the unit circle
+about `y` is absent near `y` outside the unit circle about `x`, and the same with inside and outside exchanged. **Of which
+invariant of a measurable germ is that rule a statement — its palette, its density on each side of the other point's unit
+circle, its sections along the unit circles about the points near the other end — in the widest class where the rule still
+holds; and where exactly does it stop holding?** It cannot be answered without naming what every weak colouring carries along
+each of its unit pairs. Two partial answers are held and neither is joined to the other: the release's transfer (`[OAIMath2026]`
+Lemma 5.2: the label at `e + v` lies in neither palette), which is averaged and hypothesis-free, and C132-WIT-SIDE, which is
+pointwise and reads an open piece. The **unit arc** — an interface near `x` lying on the unit circle about `y` — is the rule's
+equality case: there it says nothing, and the second order decides. This is not the existence form reworded: it asks for a law
+at every unit pair of every colouring, at every `k`, and names no ring.
+
+### The first claims a deriver takes (each stated in its plan before it is derived, then fixed in `data/fs132/claims.md`)
+
+- **C132-LENS (posed, not derived).** On a six-sector turning seed, if at each of the ring points `y_1` and `y_{−1}` at least two
+  of the sets `K_j` have a point strictly inside the unit circle about that ring point, then almost every point `z` near `y_0`
+  with `|z − y_1| < 1` and `|z − y_{−1}| < 1` has its label in `T`. Consequently (i) it is not the case that at least two of the
+  sets `K_j` have a point strictly outside the unit circle about `y_0`; (ii) if each of the six ring points has a pure side,
+  some ring point has four labels present: `a`, `b`, `n` and a label of `T`. *The composition behind it is the asking lane's,
+  unchecked*: the proof of C132-TURN-EDGE (`plans/FS132-E4-derivation.md` ll. 547–557) places `a` outside and `b` inside the unit
+  circle about `y_0` near `y_1`, and `b` outside and `a` inside near `y_{−1}`, on open sets; a point near `y_0` inside the unit
+  circle about `y_1` has its own unit circle passing through that `a`-set, one inside the unit circle about `y_{−1}` through that
+  `b`-set; the lens is inside both; P1 with the steps `b | n` at `ψ + π/3` and `n | a` at `ψ − π/3` keeps `n` out. For (ii):
+  pure sides are opposite at antipodes (that record's l. 578), so the six read O O O I I I or O I O I O I up to rotation; by (i)
+  the second has no inner-pure point, and in the first the middle outer-pure point has `a`, `n`, `b` in its outer wedges (list
+  line L4). *Controls a deriver should run*: the search's table (a simple straight `x` is refused at every number of labels;
+  every survivor has an edge of `x` on the unit circle about a neighbour, where the hypothesis fails), a planted fault in
+  the chart, and — riding with this claim, not a claim of its own — the second round's seven-label controls (`hex7-crossings`,
+  `margin-witness`, `hex7-relation`) re-run at circumradius 1/2, where no margin gives a witness. *Not posed*: that the ring point is a cyclic centre; that any pair is witnessed there; anything for an outside state
+  that is not a step on the six arcs; anything at a ring point one of whose neighbours has no pure outer side.
+
+  *Dated line (2026-10-07, from FS132-E6, `plans/FS132-E6-derivation.md` § The gap in clause (ii); filed by FS132-Z2):* clause (ii) is a gap as posed — C132-LENS-II. "Pure sides are opposite at antipodes" holds one way only: a point strictly inside the unit circle about `y` is strictly outside the one about `2x − y`, and not conversely; three sets `{x, q_j}` with `|q_j − x| = 3` give six pure inner sides and no pure outer side. Derived of it: C132-LENS-FOUR and C132-LENS-GERM. Open: sixteen patterns of sides, carried by FS-135 (`plans/STUB-seed-remainder.md`). The first sentence and clause (i) are derived (C132-LENS, C132-LENS-SIDE).
+- **C132-PLACED (posed).** At the four-label ring point `y` of C132-LENS (ii): in the grammar of C132-PLACE's list, the labels
+  present in each of the six wedges at `y` cut by the unit circles about `x`, `y_1` and `y_{−1}`, and which labels of `T` the
+  sides at `y` allow in the lens; then, using C132-WITNESS only on wedges the list forces to be of one label, which pairs of the
+  four labels are witnessed edges at `y`, whether they close a four-cycle, and — if they do — what the first night's exclusion
+  (C132-M-ORBIT in C132-WIT's four-point form) says on the orbit of `y`'s ring through `x`. Each line derived or marked open.
+- **C132-ARC (posed).** In the setting of C132-COMP-SHARP, with exactly one of the six sets — a set of `x`, with labels `t_0`,
+  `t_1` — contained in the unit circle about the common unit point `w`, and with `y` having a pure side at `w`: both `t_0` and
+  `t_1` are present at `w`, almost everywhere on opposite sides of the unit circle about `x` within `y`'s pure side, and the third
+  label of `x` is absent there. (C132-CROSS's four quadrants read with the exception present: the asking lane's reading,
+  unchecked. In the map class it is the property (Q) of row 135, "carrying both its side colours".) *Controls*: fragment T2, where
+  three sets lie on that circle; and R7 by formula, whose statement already has every boundary "a unit arc centred at a lattice
+  point that carries both its side colours" at seven labels and six-label vertices — the check that six tiles meet at each of
+  its vertices and that each boundary through a vertex is centred at a ring point of it rides here, as a control.
+
+The three share a setting and no step; C132-LENS is the one the card asks. If the job has room for one only, it is C132-LENS.
+
+### What each answer gives
+
+| answer | what it is | what it gives |
+|---|---|---|
+| C132-LENS derived | in step form, a turning ring with six pure sides has a ring point with four labels present | with C132-ALT: at a seed, two changes `π/3` apart place a four-label point or sit on a unit arc about a ring point — the second clause of C132-RING-TAME in step form with one residue; the stall at the flagged clause is gone; the measurable road enters FS-124's object with a derived first step |
+| C132-LENS refuted by formula | a seed that lives on three-label points, outside the search's family | the YES side's first object that no held map is; extend it outward; the search's hand argument fails for it at a step to be named |
+| C132-LENS stalls | a line of one chart will not close | the chart and the line come back to the asking lane; nothing else of the round depends on it |
+| C132-PLACED: the first night's exclusion applies on an orbit | the six-sector turning seed with six pure sides does not exist | the turning ring leaves the list of ways to spend a ring, by hand, with no witness posited and no family |
+| C132-PLACED: the placed point's ring carries its own labels toward `x` | a mixed ring, met from the measurable side | FS-124's first question — what a (Q) ring passes to the vertices it places — has a measurable instance with every hypothesis derived |
+| C132-ARC derived | the centre of a unit arc carries both its labels, in measure | the one residue of five entries is an object with a property, not a void; rows 135–136's rhombus in the exact class, first half |
+| C132-ARC refuted or void | the common unit point need carry neither label | the unit arc in measure is not row 135's (Q), and FS-124's map-class results do not transfer by this route |
+
+### Registered expectations (Poros, before any derivation of these)
+
+C132-LENS: derived 0.65, stalls at a line of one chart 0.25, refuted by formula 0.10. C132-PLACED: the exclusion applies on an
+orbit 0.25, a mixed ring 0.55, off this table 0.20. C132-ARC: derived 0.60. A seed shown to exist in every weak six-colouring
+within two derivation jobs: 0.03. Six against seven decided by this milestone: 0.03.
 
 ## The first claim a deriver takes (this morning's, kept: answered by FS132-E1 to FS132-E3)
 
@@ -347,14 +492,29 @@ statements (`M/introduction.tex:70`: "The remaining alternatives six and seven a
 ## Bearing on the answer
 
 Decisive on the route, and through it on the answer. With the transfer unconditional, `χ(ℝ²) = 7` is the conjunction of (a) a
-point with a witnessed cycle of labels in every weak measurable six-colouring, (b) a witnessed cycle that is not a triangle, and
-(c) the exclusion of every such cycle; `χ(ℝ²) = 6` is a weak six-colouring of discs of every radius (C132-RADIUS, posed). After
-the first night (FS132-E1 to E3, each [hand], one mind): (a) holds where the cyclic centres are finite in a disc of radius above
-1 and is open otherwise (the witness card); (c) holds for the four-cycle whose ring is outside-labelled and for the ring
-alternating between two disjoint pairs, with no map, no Siamese clause and no normal form, and is open for mixed rings (FS-124),
-the diagonal ring that does not alternate, and five- and six-cycles; (b) is stalled at the ring of a triangle centre (the ring
-card), and is the one step whose open parts ask for regularity. The map step (FS-126, FS-127's arcs half, FS-128) is on no
-derived step's route. Why each provisional bearing (FS132-P2's additions first):
+**seed** in every weak measurable six-colouring — a point with data on its unit circle that an exclusion can read; (b) a seed
+that is not a triangle, or a triangle seed whose growth places one; and (c) the exclusion of every such point. `χ(ℝ²) = 6` is a
+weak six-colouring of discs of every radius (C132-RADIUS, posed). After two rounds (FS132-E1 to E5 and one search, each [hand] at
+one mind or [cert] in its family): (c) holds for the four-cycle whose ring is outside-labelled and for the ring alternating
+between two disjoint pairs, with no map, no Siamese clause and no normal form, and is open for mixed rings (FS-124), the diagonal
+ring that does not alternate, and five- and six-cycles; (b) holds for the complementary pair and for the alternating ring in
+step form, each up to one residue — an interface on the unit circle about a ring point — and is posed for the turning ring
+(this stub's third section); (a) holds where the cyclic centres are finite in a disc and wherever three labels have a common
+margin, and is open otherwise: it is the map step in the exact class, and no entry of two rounds derives circle data at a
+point from what meets in its small balls. So the bearing is this: on the measurable road everything that reads a seed is being
+derived, with the unit arc as its one residue, and that residue is where both answers live in the map class (rows 136, 138,
+149); what produces a seed is not being derived. Why each provisional bearing (FS132-P3's additions first):
+- **G91, G83, rows 135–137, 149**: the ring's change points place vertices, and with unit arcs the tight question lives at one
+  four-colour vertex; the second round re-derived the placing rule in measure on the pure side, and the search found row 136's
+  three-partner count as the turning ring's only survivor.
+- **G84, rows 140–141**: contact is the regularity mechanism, a maximal class is carved by unit circles about its own points,
+  and bands vanish on Cantor sets — why a meeting of classes hands over no connected piece, and why R7's every boundary is the
+  residue.
+- **G21**: every control of two rounds stood on a margin or on a held fragment. Two controls are owed, each riding with a claim
+  and neither a claim of its own: the second round's controls at seven re-run on the hexagonal colouring at circumradius 1/2
+  (three-label points, straight edges, and each vertex's own labels touching its unit circle — the case between a margin and a
+  unit arc), with C132-LENS; and R7 (six-label points, every edge a unit arc about a ring point) as the inhabitant of C132-ARC's
+  conclusion and of the structural form's equality case.
 - **G94, G95**: the nerve replaces the map for what an exclusion reads; and a statement about every weak colouring that slack
   would break must either be a conclusion drawn inside a class it empties (C132-M-ORBIT's step lemma) or be posed for a normal
   form — honesty first (G89, row 143), since saturation costs the top colour.

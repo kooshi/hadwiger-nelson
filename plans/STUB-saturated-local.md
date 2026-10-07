@@ -1,5 +1,7 @@
 # FS-125 — the saturated local exclusion: is there an explicit radius about a four-colour vertex within which no saturated valid six-coloured fragment exists? (stub)
 
+> **Demoted, 2026-10-07 (FS132-P2, FS124-P1), 4 → 7: on the road again on one condition — C124-KIND true and FS-124's exclusions needing 'of kind both', which saturation supplies (FS116-O1-SATPIN).**
+
 > **Re-ranked 2026-10-03 (FS129-P1; 4 → 5).** FS-128 enters above it carrying the map step at five's top
 > colour, FS-104's question in route M's form; NO-SAT's bearing is unchanged, and its (Q)-free part is closed in the non-Siamese class (row 149).
 
@@ -113,3 +115,15 @@ first step of a pinch's ladder), FS-123, FS-124.
 
 *At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-OR1-QFREE,
 FS129-SR3-QFREE-NS, FS129-SR2-QFCASE, -TOUCHW (FS116-N1-TOUCH without its idle hypothesis); G84 with G89 (the binding question), G85 (INTRAD at a vertex).
+
+*Since FS-132 (FS132-Z2, 2026-10-07):* the exclusions FS-132 derived for weak measurable colourings — the outside-labelled
+four-cycle (C132-M-EXCL), the complementary pair (C132-COMP-SHARP), the alternating ring in step form (C132-ALT); each [hand],
+one mind, kernel pending — read no arc and no normal form, and each stops at one object, a boundary that is a unit arc about a
+ring point (`plans/FS132-derivation.md` § 12). So NO-SAT is on the measurable road only if a normal form is chosen for the *existence* step, and
+nothing yet says that it is saturation: the asking lane's line for this stub reads "Demoted … on the road again only on the
+condition its row names" (`plans/POROS-2026-10-07-fs132-night.md` § Banners; drafted, not filed). One statement of FS-132's is
+a normal-form statement and bears here — **three labels on a strip**: on the unit circle about a point with a witnessed
+triangle, do the three outside labels change finitely often (C132-RING-TAME's first clause, a stall; "its first clause is
+false wherever local slack exists along the strip, so it is a statement for a normal form or false at six",
+`plans/FS132-close-inventory.md` item 7)? Declined as a stub by the asking lane on the night; placed here and at FS-128
+(`plans/STUB-top-colour.md`). G95, G84.

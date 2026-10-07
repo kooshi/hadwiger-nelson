@@ -1,0 +1,9 @@
+turning-max4-simple-curved: 192 models (projected to ring and x labels)
+  interfaces at x at (30, 150, 270) deg; labels per ring point (3, 4, 3, 4, 3, 4): 48 models; ray types at the three interfaces admitted by any model of the class: ['AAA']
+     first: wedges carrying a label of x, per ring point (O_cw O_far O_ccw I_ccw I_lens I_cw): ...... 44..3. ...... 55..4. ...... 33..5.
+  interfaces at x at (30, 150, 270) deg; labels per ring point (4, 3, 4, 3, 4, 3): 48 models; ray types at the three interfaces admitted by any model of the class: ['BBB']
+     first: wedges carrying a label of x, per ring point (O_cw O_far O_ccw I_ccw I_lens I_cw): .33.4. ...... .44.5. ...... .55.3. ......
+  interfaces at x at (90, 210, 330) deg; labels per ring point (3, 4, 3, 4, 3, 4): 48 models; ray types at the three interfaces admitted by any model of the class: ['BBB']
+     first: wedges carrying a label of x, per ring point (O_cw O_far O_ccw I_ccw I_lens I_cw): ...... .33.5. ...... .55.4. ...... .44.3.
+  interfaces at x at (90, 210, 330) deg; labels per ring point (4, 3, 4, 3, 4, 3): 48 models; ray types at the three interfaces admitted by any model of the class: ['AAA']
+     first: wedges carrying a label of x, per ring point (O_cw O_far O_ccw I_ccw I_lens I_cw): 55..4. ...... 33..5. ...... 44..3. ......
