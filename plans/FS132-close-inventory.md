@@ -144,3 +144,54 @@ inventory, items 607–629 (an outside proof of six became this project's litera
    and it is asked of the readings' deriver's data in the next report, not pursued by a new job tonight. Alternative:
    launch a job on it at once. Why not: both derivers are still on their claims, and the staffing is two.
 
+6. **FS132-E3, first verdict — THE DIRECTION: this project's exclusion holds for every measurable six-colouring with no map;
+   its listed route stalls at one step, and that step is not needed** (source: its message to "main", 2026-10-07; record
+   `plans/FS132-E3-derivation.md` Stages 1–3, four entries, three controls; commit `db43b298` on `main`). **C132-M-ORBIT**
+   ([hand], one mind): on an open set containing the closed unit disc about `p`, with four labels in a cycle and four compact
+   sets through `p` carrying the two-colour exclusion, there is no ring direction `ψ` such that near all six directions
+   `ψ + 60°k` almost every palette holds one of the two outside labels while both outside labels occur near `ψ`.
+   **C132-M-EXCL** (its corollary): the palettes cannot almost everywhere hold an outside label. **C132-M-EMPTY**: that at an
+   extracted centre with a cycle of four. **C132-RUN-EMPTY: stalls at V6-HUBS** — "a tile of `p` tips at most two change
+   points" reads the tile as one connected piece; nine of the route's eleven steps are restated and derived, the count is
+   dissolved, and in their place: each of the four exclusion sets lies on one side of each of three hub axes through `p`, and
+   since `e(ψ) + e(ψ + 120°) = e(ψ + 60°)` every consistent pattern of tips has two adjacent hubs with one tip, which the
+   restated V6-HUG kills. **Wider than posed, three ways**: it reads clauses (1) and (3) of the data only — **not clause (5),
+   the one-mind clause, and not the centre's isolation**; the finiteness of the ring's change points is a conclusion (a
+   density lemma makes every essential change point a step), not a hypothesis; and it is local to one orbit, which makes it
+   a pruning rule for (Q) rings. **No Siamese clause.** **The two checks**: every held positive escapes at the ring
+   hypothesis (at each of eight change points at least two of four germs lie on (Q) arcs); the honeycomb at seven has no
+   four-label centre, and six is spent at exactly two places. **Its own account of its standing**: one mind; the two new
+   pieces — the three-axes count (exact control) and the step lemma (a sign control only) — have no second reader; no
+   prediction was registered before deriving and recognition was invoked after the argument was found (its slips,
+   disclosed); prior art unsearched (both queries failed).
+   **My receipt**: the commit is on `main`; its gate run by me — exit 0, 0 failures, 0 warnings, three controls each firing
+   on its fault; Stage 3 read whole. **Checked by me, by hand**: M2 (the chart: `|Z| = 2cos(π/3 + d/2)`, the two ring points at
+   distance 1, and (⋆) from the transport lemma with the state's period); M4 (confinement: a support point inside the unit disc
+   forces each exclusion set into its closed unit disc, and the limit); M5 (two antipodal closed unit discs meet in `p` alone
+   by the parallelogram law; two tips at a hub would take three of the four sets; hence one tip per hub and opposite labels
+   at antipodes); **M6, the three-axes count — all three cases redone**: with `e(ψ₁) = e(ψ₀) + e(ψ₂)` no vector has signs
+   (+, −, +) or (−, +, −), and each of `t₂ = t₀`, `t₀ + 1`, `t₀ − 1` forces `t₁ ∈ {t₀, t₂}`. **Not checked by me**: M7's
+   expansion (`ε = d d′ h`, `h(0,0) = 2/√3` — its control agrees); **M8, the step lemma, and M9, the kill — read, followed in
+   outline, not reworked: the two places a second mind or the kernel is most needed**; the two transport statements of the
+   release at six labels (its reading: no count in their proofs); the positives' check.
+   **Credit**: it did not stop at the stall — it asked what the stalled step was for and found the data already give it by
+   another count; it noticed which clauses its argument reads and so took the flagged clause out of the result's foundations;
+   it turned a map-class hypothesis (finitely many change points) into a conclusion; and it wrote its own slips and the two
+   unverified pieces at the head of its message.
+   **Rulings.** (a) **The direction is called: the measurable road** (FS-131 inventory ruling 632 (b), first branch). The
+   exclusion's statement is derived for measurable colourings; the step that would have needed a map is not on its route.
+   Alternative reading of the verdict: "stalls", so the map step stands. Why not: the claim list separates the reading from
+   its statement for exactly this case; what stalled is one step of one route, and the statement is derived without it.
+   Confidence: medium-high — it rests on one mind's M8 and M9. (b) **The kernel lane's planner opens on FS-132's derived
+   statements when the import's landing is back** (FS132-K1, `debruijn`; brief to be written now): C132-M-ORBIT and
+   C132-M-EXCL first — they are self-contained over the release's palette statements at six labels and are the result with
+   the unverified pieces — then C132-CORES-FREE and C132-EXT-DISC. Its blind first phase is the second route this result has
+   not had. (c) **The backlog's map-class waves stay paused**; what of them is still on the road is the asking lane's to say
+   at its re-rank, with this result in hand (wave 8's kernel theorem stands as the map-class form; the reduction to a map
+   is off the road for the binary four-cycle). (d) **The claim list gains C132-M-ORBIT and C132-M-EXCL by a dated line.**
+   (e) **Relayed to FS132-E2 at once, by address and at its grade**: its step lemma (M8) is a regularity statement about a
+   measurable ring obtained from properness alone — the kind of statement the card-3 deriver expects to be missing where a
+   winding number must be taken. My observation, labelled as mine and unchecked. (f) **Announcement**: by this inventory's
+   rule 2 (i), card 1's answer waits for the second reading; this half is told to Kooshi report as "derived,
+   one mind, kernel pending", with the two unverified pieces named. No push: it fixes no value.
+
