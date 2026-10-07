@@ -8637,3 +8637,43 @@ reason by the close.*
      the tier relayed to the asking lane by message, each family named as unread. **Ruling**: a family that its
      later stages show strong enough to change the frontier gets a reading and a Lean audit of its own, as family
      158 did; none is briefed on a catalogue sentence.
+
+625. **FS132-P1 done: the frontier is re-ranked with the outside release as literature — FS-132 ("six by the nerve") posed at rank 1, FS-133 (the one-class transfer) minted and put first in the deriver's slot, fourteen banners drafted, and a table saying which waves of the paused backlog resume** (the asking lane, `poros`; harness 436k and 24 minutes by the task notice; record `plans/POROS-2026-10-07-after-release.md` stages 1–5; report `data/fs132/reports/FS132-P1.md`; eight commits on `main`, the last `243aa6e6`; its gate exit 0).
+     **Minted**: `plans/STUB-six-by-the-nerve.md` (FS-132; item 623) and `plans/STUB-one-class-transfer.md` (FS-133:
+     `α₁(ℝ²) = m₁(ℝ²)` with no hypothesis; four posed claims, the unchecked step C133-DENS first). **The draft
+     re-rank** (its record § Draft re-rank): FS-132 at 1, FS-124 at 2, FS-123 at 3; FS-104 answered as posed and
+     re-aimed at the null-set step (rank 10); FS-44, FS-49, FS-108 to the closed list; 72 ranked rows — rows 1–12
+     with new bearing cells in full, below that the order and one clause each. **The triage** (§§ 4.1–4.3): the
+     aim's six links and all 74 ranked stubs, a line each; banners for FS-104, FS-123, FS-124, FS-127, FS-128,
+     FS-120, FS-126, FS-113, FS-39, FS-59, FS-62 and the three closed. **The backlog's restart table** (§ 4.4):
+     the import first, before any wave; **wave 7 resumes first** (FS-132's card reads exactly its arguments, and
+     its fragments are every exclusion's test objects) — `Local` and the fragment's first job, the bowtie after,
+     the pinwheel waits; **wave 9 is re-aimed, then resumes** — restated over the import so that `Row130Collapse`
+     is discharged, not assumed; **wave 6 finishes what was in flight and holds its new lines** (the join with the
+     centre leaves, and the deriver's three gaps: yes; lines X, Y, W wait for FS-132's first answer, because the
+     reduction to a map is what that card may take off the road); **wave 10 waits** but for the open gate items of
+     its second landing. **Posed by it, not derived**: C132-CORES (a cyclic centre in every closed disc of radius 8,
+     at every `k`); C132-RADIUS (`χ(ℝ²) = 7` iff some disc has no measurable six-colouring proper almost everywhere
+     inside it). **Findings about wording**: "slack" names two things — row 132's forbidden interval of distances
+     and the reading's local freedom at a vertex — so the drafted G95 must say "local slack"; a correction owed to
+     G80 and row 129 if C133-ONE holds (their finite-graph killing test for MR could then not fire). **Its
+     predictions**: five of twelve met, three half, three lost (wave 6 only half resumes; the manuscript says
+     nothing of why six is out of reach; no other catalogue family bears directly). **Slips, the job's, disclosed**:
+     one commit chained after a failing gate with `;` (repaired in the next); the existing stubs' bearing sections
+     not rewritten in place — banners and table cells only; the release's sections and Lean not opened by it (it
+     relies on the reading and the audit, one mind each). **My receipt**: its commits and both stubs are on `main`;
+     its record's headings and § 4.4 read whole; FS-133's stub's four claims read at their first lines and quoted
+     into `data/fs133/claims.md` by script. Not checked by me: the 74 triage lines; the draft ranking's cells; its
+     gate's output. **Credit**: a question whose both answers are theorems about arguments held today, chosen over
+     the nominee whose NO is the whole problem; the flaw in my brief's frame reported as a contradiction without a
+     side picked; "what this job did not do" written as a section. **Rulings.** (a) **FS-133 takes the deriver's
+     first slot** — adopted, and launched: FS133-E1 (`ephodos`; `data/fs133/briefs/FS133-E1-opening-and-derivation.md`,
+     gate exit 0; inventory `plans/FS133-close-inventory.md` opened with its announcement rule; claim list fixed).
+     Alternative: FS-132 first, by bearing. Why: the consequence follows from a public proof, and its value decays
+     by the day; FS-132 follows at FS-133's first hand-back at the latest. Confidence: medium-high. (b) **The one
+     filing of ruling 620 (a) is now due** — wave 8's landing is back and the re-rank is in: the Clerk as my pen,
+     on a branch of its own, files verbatim from the lanes' drafts (the list is in the new handoff § 3); brief not
+     written. (c) **The restart of the backlog is put to Kooshi with this table as my recommendation** — he asked
+     for a stopping point before anything restarts. (d) The fallback write-up (FS-102) and the six papers to hold
+     are his, listed to him. (e) Its third card and the two posed generalizations go into FS-132's claim list
+     when that milestone opens. In flight: 3 (the import; the sweep; FS-133's deriver).
