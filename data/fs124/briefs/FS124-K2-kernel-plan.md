@@ -146,3 +146,15 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment 1 (2026-10-07, 15:47 UTC, by Keryx) — the fence, extended to files written since you launched
+
+A record job has written files on `main` since this brief was made, and they describe the derivations as the fenced files
+do. **Until your phase-1 plan is committed and I have replied, the fence of § Fences also closes**: `plans/FS124-derivation.md`,
+`plans/FS124-Z1-record.md`, everything under `data/fs124/z1/`, `plans/STUB-covering-pairs.md`, the blocks dated 2026-10-07 in
+every other file whose name begins `plans/STUB-`, the paragraphs dated 2026-10-07 in `plans/FS132-derivation.md`, and
+`data/fs124/claims-K1.md`'s neighbour `data/fs124/claims.md` as before. None of these is in your worktree; they are on the
+main working tree, which you have no need to read before your commit. Nothing else in the brief changes, and this amendment
+carries no content from those files. The rule on agents is unchanged: you start none (standing rule 1: delegation is one
+level deep, because the coordinator can only review work it knows exists).
+
