@@ -1201,3 +1201,20 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     join builds. **Lot A (the chart's geometry, the tips) is unassigned.** Slots: FS132-I3, FS132-I4, and FS-124's opening
     job.
 
+42. **FS132-I3, first message (13:14 UTC): the step lemma is proved in the kernel** (commit `6fe55ef7` on branch `fs132-wi3`;
+    record `plans/FS132-I3-implementation.md` Stages 1–2). `step_lemma` — the derivation's Lemma S, the one step of the first
+    night's exclusion that had a single derivation — **with no `sorry` beneath it, on the standard three axioms, as
+    stated**; its whole module is done (eight leaves, 768 lines). **Route**: the planner's variant (a dyadic window, a base
+    point of four density points, no integration over the outer pair) — so the kernel has checked a second route to the
+    lemma, not the first deriver's own. **Two unused hypotheses dropped under the planner's permission** (a measurability
+    and an inequality), reported with their call sites. **"One thing the kernel settled that the hand argument left
+    implicit: Lemma S needs no measurability of the shift."** No leaf false, vacuous or short of a hypothesis. **My
+    receipt**: the commit is on `origin`; the file at that commit holds no `sorry` (counted by me); the theorem's statement
+    read by me at that commit; its axiom print's line read; the build log's last lines (exit 0, 5 modules rebuilt). Not
+    checked by me: its reading aloud against Lemma S (its record's Stage 2). **What this changes, and what it does not**:
+    the lemma is kernel-checked **on a branch** — not landed, not through the gate — and the exclusion itself still stands
+    on leaves not yet proved (the shift's calculus, the chart's geometry and null sets, the palettes' steps, the kill); its
+    grade is unchanged until the module passes the gate. **Rulings.** (a) The two dropped hypotheses and the note on
+    measurability are relayed to the implementer whose leaves call them (FS132-I4), with the choice of merging this commit
+    now. (b) Kooshi is told in the next report, as a step and not as the theorem.
+
