@@ -37,6 +37,21 @@ else:
     GOOD="Stopping at a saved stage with the interface and the four claims proved and the two constructions left is a good report"
     AXLINE="the five theorems quoted below"
 CLAIMS="\n".join(Q(CK,f"**{n}** — statement:") for n in NAMES)
+# I3 after I2's hand-back: its tip is fast-forwarded into fs124-wi3 first, and the brief says so.
+DONE2=(WHICH=="I3") and ("sorry" not in open(P+"CircleCrossing.lean").read()) and ("sorry" not in open(P+"OnePiece.lean").read())
+HELPERS="`CircleSide.sign_eq`, `CircleSide.abs_sign`, `quadrant_sign_pos`, `CrossAt.exists_mem_sphere_inside`, `tightModel_of_not_lt`, `tightModel_ne_two_of_lt`, `tightModel_far`, `tightModel_eq_two_of_mem`, `tightModel_ne_two_of_mem`"
+if WHICH=="I2":
+    LAUNCH=f"now, in the planner's own worktree — the planner has handed back and nobody else writes there; the other implementer ({OTHER}) works in another worktree on the other two statement files and writes none of yours"
+elif DONE2:
+    LAUNCH="now, in a worktree of your own, cut from the planner's tip and fast-forwarded to the first implementer's hand-back — its two files (`CircleCrossing`, `OnePiece`) are proved on your branch, and nobody else writes in your worktree"
+else:
+    LAUNCH=f"into the next free slot, in a worktree of your own cut from the planner's tip; the other implementer ({OTHER}) works in another worktree on the other two statement files and writes none of yours"
+BUILDNOTE="built by the planner today" if WHICH=="I2" else ("copied today from the planner's tree after its last build; the first implementer's two files recompile at your first build" if DONE2 else "copied today from the planner's tree after its last build")
+NOTMODS="two are the first implementer's, proved, and stay as they are" if DONE2 else "two are the other implementer's"
+WHYNOAX="one later job registers everything and takes the models" if DONE2 else "two implementers work at once, and one job joins the branches and registers everything"
+HELLO2=(" The first has handed back: the circle geometry and the first five claims are proved on your branch, 63 leaves, each on the standard three axioms." if DONE2 else "")
+OTHERLEAF=(f"The first two files are proved — the first implementer's record is `{W}plans/FS124-I2-implementation.md` — and you use their theorems as they stand. It added nine helpers whose names you must not reuse: {HELPERS}." if DONE2 else "A leaf of the other implementer's files is used as it\nstands — its statement is fixed, and its `sorry` is theirs.")
+NWARN="67" if DONE2 else "130"
 PLAN="\n".join([Q(KP,"**What the module costs.**","Stage 5"),Q(KP,"2. Order: `Plane/CircleCrossing` top to bottom (23 left)","Stage 5"),Q(KP,"**What is hard, in order.**","§ 3.2")])
 FILES=", ".join(f"`Proofs/HadwigerNelson/Plane/{m}.lean`" for m in MODS)
 b=f'''# Brief {JOB} — {TITLE}, on `{TREE}`
@@ -46,7 +61,7 @@ b=f'''# Brief {JOB} — {TITLE}, on `{TREE}`
 brief: {JOB}
   identity: {IDENT_I}
   role: one of two implementers of the second module of the milestone derived today — replace every `sorry` in two files of a planner's skeleton with a proof, changing no statement; print the axioms; draft what a landing will need
-  launch: {"now, in the planner's own worktree — the planner has handed back and nobody else writes there" if WHICH=="I2" else "into the next free slot, in a worktree of your own cut from the planner's tip"}; the other implementer ({OTHER}) works in another worktree on the other two statement files and writes none of yours; a landing of this milestone's first module is in flight on `main`, and a deriver works under `plans/` and `data/` on `main` — you touch neither
+  launch: {LAUNCH}; a landing of this milestone's first module is in flight on `main`, and a deriver works under `plans/` and `data/` on `main` — you touch neither
   mission: § Why this job
   statements: § The statements
   acceptance: § Done means
@@ -55,7 +70,7 @@ brief: {JOB}
   channel: message the coordinator ("main") by SendMessage **at once** for a leaf that is false as stated, vacuous, or provable only with a hypothesis it lacks (say which: the *statement* needs it, or your *route* does) — and for a leaf of the other implementer's files that you need in a different form; **with one line when {AXLINE} print their axioms**; and for a question you cannot work around; the report goes to `data/fs124/reports/{JOB}.md` on your branch, and its text is your final message
   standing rules: {STAND}
   record: `plans/{JOB}-implementation.md` (new, on branch `{TREE}`)
-  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/{TREE}` (branch `{TREE}`, at `{BASE}`; its `.lake/build` is its own, {"built by the planner today" if WHICH=="I2" else "copied today from the planner's tree after its last build"}): {FILES} (proofs only; helpers under names no other module declares, in these two files); `plans/{JOB}-implementation.md`, `data/fs124/{WHICH.lower()}/`, `data/fs124/reports/{JOB}.md`; **not** any statement or definition (a statement that will not go through comes back through me); **not** the other four modules of the skeleton — two are the other implementer's, and the two that hold the models are a third job's; **not** `scripts/Axioms.lean`, `scripts/Assumptions.lean`, `Proofs.lean` or `ARCHITECTURE.md` (two implementers work at once, and one job joins the branches and registers everything: you draft your audit block as a file under `data/fs124/{WHICH.lower()}/`); the planner's record, `CLAUDE.md`, `LEAN.md`, `LEDGER.md`, `main`
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/{TREE}` (branch `{TREE}`, at `{BASE}`; its `.lake/build` is its own, {BUILDNOTE}): {FILES} (proofs only; helpers under names no other module declares, in these two files); `plans/{JOB}-implementation.md`, `data/fs124/{WHICH.lower()}/`, `data/fs124/reports/{JOB}.md`; **not** any statement or definition (a statement that will not go through comes back through me); **not** the other four modules of the skeleton — {NOTMODS}, and the two that hold the models are a third job's; **not** `scripts/Axioms.lean`, `scripts/Assumptions.lean`, `Proofs.lean` or `ARCHITECTURE.md` ({WHYNOAX}: you draft your audit block as a file under `data/fs124/{WHICH.lower()}/`); the planner's record, `CLAUDE.md`, `LEAN.md`, `LEDGER.md`, `main`
   budget: about 350k by the harness's count, as guidance; you cannot read that count, so use this: **save a stage after each file; a leaf on which three attempts fail stays `sorry` with a note in your record, and you go on; if three leaves are so left, stop at the next saved stage and hand back**
 
 Hello. The Hadwiger–Nelson problem — how many colours the plane needs so that no two points at distance 1 share one — stands
@@ -66,7 +81,7 @@ from it nine statements, ending with what two nearby meeting points of three col
 planner then stated the nine in Lean, working blind from the statements; it reached each by a route of its own (three by a
 shorter one than the derivers'), found that none uses measurability, and left a skeleton that builds, with fourteen leaves
 proved and a route written for every other. Two implementers take the statement files. This brief is for
-{"the first two" if WHICH=="I2" else "the last two"}: {WHAT}.
+{"the first two" if WHICH=="I2" else "the last two"}: {WHAT}.{HELLO2}
 
 ## Why this job
 
@@ -99,15 +114,14 @@ with `lean` against a copy of the build), Stage 5 (the price from fourteen leave
 it says the job costs, its order for one implementer, and what is hard (first lines):
 
 {PLAN}
-**Your order**: {ORDER}. Your two files have {LEFT} leaves left. A leaf of the other implementer's files is used as it
-stands — its statement is fixed, and its `sorry` is theirs.
+**Your order**: {ORDER}. Your two files have {LEFT} leaves left. {OTHERLEAF}
 
 **The hand arguments**, should a leaf's route fail and you want the other side's wording: {HAND}.
 
 ## Done means
 
 1. **Your readback first**: the quotations against their sources; the planner's record; your two files whole and the
-   files they import. Build the branch once as given, under the slot (it should end with 130 `declaration uses sorry`
+   files they import. Build the branch once as given, under the slot (it should end with {NWARN} `declaration uses sorry`
    warnings and no other). Open your record. Commit and push.
 2. **Your two files, in the order above**, each leaf by its route in § 3.2 unless it fails — then yours, said in your
    record. **Before you prove a helper, search this library and Mathlib for its statement's shape, not for a name.**
