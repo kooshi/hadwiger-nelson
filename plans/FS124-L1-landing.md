@@ -439,3 +439,46 @@ proof must.
    and (five) at any centres; (five)'s sentence at four colours with no import (`exists_radius_no_weak_four`).
 6. Nothing else: the row's "Not claimed" lines are true of the Lean statements — no explicit radius at any `k`;
    nothing on whether the hypothesis holds at `k = 6`; (down) not without the import; no value of `R` in (five).
+
+## Stage 8 — SAVED (FS124-L1): the lint's control, and the first full pass — red at one check, repaired
+
+**Before the pass, the lint's negative control** (`data/fs124/l1/lint-plant.sh`, FS132-L1's script as FS132-L2 ran
+it, pointed at a module of this landing; `lint-plant-run.out`): `theorem zz_l1_lint_plant [Nonempty ℕ] : (1 : ℕ) = 1 :=
+rfl` planted at the end of `Plane/RadiusOutside.lean` (never committed), built — "480 of 480 batches, 2 module(s)
+rebuilt, **0 module(s) with warnings**, 9m30s" (`lint-plant-build.log`: the build's own linters do not see it) — then
+the guarded lint: **exit 1**, "`unusedArguments`: (2/2) Failed with 1 messages", "error: @zz_l1_lint_plant 1 unused
+argument", and `synTaut` on the same plant (`lint-plant.log`). Restored by `git checkout` under a trap: the digest is
+the one taken before (`94b537c5…`), the plant's name in the file 0 times; the pass's build recompiled the module and
+the root from the restored text.
+
+**The first full pass** (`data/fs124/l1/run-gate.sh`, after FS132-L2's runner, launched from a snapshot copy; on
+commit `97504e17`, no tracked file modified before or after; 16:58Z–17:19Z; its logs are kept under
+`data/fs124/l1/gate/` with the tag `pass1`, the bulky receipts dropped but the red one, compressed): **every step exit
+0 but two — the scan difference's plants, which must exit 1, and `./scripts/axioms.sh --self-test`: exit 1, "FAIL — 2
+of 23 control(s) did not behave as designed"** (`axioms-selftest-pass1.log`):
+
+```
+FAIL  baseline — passed; expected COUNTS imported=18 digest 'old': expected exit 0 and 'the sentence is in its older form, which records no imported count, and the audit has 18 imported', got exit 0
+        got: COUNTS clean=6967 free=20 imported=23 purchased=5 declared=3 library=3 native=10 records=7015
+FAIL  imported_declared — passed; expected COUNTS imported=19 digest 'old': expected exit 0 and 'the sentence is in its older form, which records no imported count, and the audit has 19 imported', got exit 0
+        got: COUNTS clean=6967 free=20 imported=24 purchased=5 declared=4 library=4 native=10 records=7016
+```
+
+**The mechanism, and why the repair is not a tuning.** These two of the twenty-three controls are the ones that read
+the library's state: each plants nothing false (both "passed") and asserts the count of IMPORTED records the audit
+then prints — eighteen, and eighteen plus its one planted record. This landing files five more records under
+IMPORTED, so the true count is twenty-three; the other twenty-one controls, which plant faults, all fired. The
+controls file says of exactly these two that a landing moves them ("The `baseline` and `imported_declared` counts …
+read the library's state"), FS131-I2n, FS131-L10B and FS132-L1 each moved them at their landings by that rule, and
+the brief names the file among my touches "if a control's expected count moves with your state". **The edit**
+(`scripts/axioms-controls.txt`): `imported=18` → `23` and its digest text; `imported=19` → `24` and its digest text;
+the header's sentence on the state ("with five each: eighteen IMPORTED records" → "with six and nine … twenty-three
+IMPORTED records") and its rule, which now names this case — a later record resting on a declared import moves
+`imported`, with no import declared. No control is added, removed or weakened; `declared=3`/`4` and `library=3`/`4`
+stand. After it (`probes/axioms-selftest-after-controls.out`): **exit 0**, "axioms self-test: OK — every planted
+fault fired, and every partner passed." *A slip of mine*: the implementer's record said it had run no `--self-test`,
+the brief named this file, and I did not run the audit's self-test among stage 3's probes; it cost one pass of twenty
+minutes.
+
+Every other step of the first pass read as the final pass reads (stage 9); nothing else was changed between the two
+but this file, this record and the logs.

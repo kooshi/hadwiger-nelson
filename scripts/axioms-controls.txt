@@ -19,31 +19,32 @@
 # The `baseline` and `imported_declared` counts, and `banner_dropped`'s consequences, read the library's state: three declared
 # imports — `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207; FS-131 wave 10, FS131-L10B's join), with eight IMPORTED records,
 # and `Outside.OAI158.no_proper_five_coloring` and `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158; FS-132,
-# FS132-L1's landing), with five each: eighteen IMPORTED records.
-# (The first import, `falconer_lemma2_nonempty`, is a theorem since FS131-IF1.) A later import, or one's proof, moves them
-# again — per declared import, `declared` and `library`
+# FS132-L1's landing), with six and nine — five each at that landing, and one and four more of FS-124's radius clause
+# (`Plane/RadiusOutside`; FS124-L1's landing, which brings records and no import): twenty-three IMPORTED records.
+# (The first import, `falconer_lemma2_nonempty`, is a theorem since FS131-IF1.) A later import, or one's proof, or a later record resting on
+# a declared import, moves them again — per declared import, `declared` and `library`
 # rise by one in both controls and `imported` by its records, the `old` digests' texts follow, and `banner_dropped` gains
 # `FAIL outside-banners <one of its records>` and `FAIL stale-declaration <the axiom>` (FS131-I2n's edit, `082f86c9`, is the
 # pattern; item 259's tool defect owed).
 
 ## control baseline
 ## expect PASS
-## expect COUNT imported=18
+## expect COUNT imported=23
 ## expect COUNT declared=3
 ## expect COUNT library=3
-## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 18 imported
+## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 23 imported
 ## digest new 0 match (clean, purchases and imported compared)
 ## digest doubled 3 not one
 
 ## control imported_declared
 ## expect PASS
-## expect COUNT imported=19
+## expect COUNT imported=24
 ## expect COUNT declared=4
 ## expect COUNT library=4
 ## arch t3c_import
 ## digest new 0 match (clean, purchases and imported compared)
 ## digest off 0 RECORDED COUNT IS STALE
-## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 19 imported
+## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 24 imported
 ## at PRE
 /-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, `[Planted2026]` p. 1. -/
 axiom t3c_import : True
