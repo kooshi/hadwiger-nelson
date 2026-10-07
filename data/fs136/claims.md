@@ -81,3 +81,11 @@ change is a dated line at the end.*
   **C136-STOP-STRIP** — verdict: derived; grade: derived from: C136-TABLE; minds: 1. *Statement, as its verdict is about it:* There is no weak six-colouring of an open set that contains the point (1/4, √15/4 + √3/2) and the six tiles T_{−1}, T_0, U_{−1}, T_1, U_0, U_1 of FS-112's strip, and that gives almost every point of each of these tiles the strip's label. *Not claimed:* what C124-EDGE-CLOSED does not claim; that this statement contains C124-EDGE-CLOSED or is contained in it — that entry keeps three arches and the parts of T_0, T_1, T_2 below the line y = √15/4, uses three members and does not keep T_{−1}; this one keeps six whole tiles at two members; a value of the chromatic number of the plane
 
   **C136-STOP-BOWTIE** — verdict: derived; grade: derived from: C136-TABLE; minds: 1. *Statement, as its verdict is about it:* There is no weak six-colouring of an open set that contains the point (√3, 0) and the eight tiles t1, W, L1, T1, V, L2, T2, V′ of FS114-Y2-BOWTIE (the names of `tools/fs114_y2_k1.py`: t1, W, L1, T1, V have q₁ = (√3/2, 1/2) as an end point of a boundary piece, and t1, W, L2, T2, V′ have q₂ = (√3/2, −1/2)), and that gives almost every point of each of these tiles its colour in that fragment. *Not claimed:* any exclusion of a weak six-colouring that does not keep these tiles; a value of the chromatic number of the plane; that fewer tiles suffice (not looked for); the five other points at distance √3 that the reading classes L1 (floats)
+
+- **2026-10-07 (17:13 UTC; at FS136-E1's hand-back, commits `568b864e`, `bfb0b8b1`; FS-136 inventory item 6):** the deriver has added
+  dated lines under two entries of its record: for the flower, the check keeps seven tiles and the statement's six are the
+  ones the empty cell uses; **for the bowtie fragment six kept tiles suffice** (L2, T2, V′, t1, T1, W) where the entry's
+  statement names eight. **C136-STOP-BOWTIE stays filed as its verdict is about it — eight tiles — with this line beside
+  it**: the sharper six is its deriver's dated note, and a restated entry is the record job's to write. All five claims of
+  this list have verdicts; the record job reads the statements from the entries.
+
