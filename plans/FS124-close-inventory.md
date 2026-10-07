@@ -589,4 +589,32 @@ between two colours that is an arc of the unit circle about a point one unit awa
     gate exit 0): the derivation file from thirty entries, five dated corrections, the stubs, the predictions, the front
     page's drafts; its commit subjects neutral, because a planner is working blind. (c) **The day's search is spent**
     (it ran in the night); line 11 goes to tomorrow's Searcher. (d) G97's amendment is the record job's draft to make.
+28. **FS124-Z1 done (422k and 24 minutes by the task notice): the derivation file is filed — thirty entries, each copied by
+    script from its deriver's record — with five dated corrections, eight stubs' bearing blocks, every prediction scored,
+    and the front page's drafts** (deriver; record `plans/FS124-Z1-record.md`; the file `plans/FS124-derivation.md`; report
+    `data/fs124/reports/FS124-Z1.md`; eight commits to `fc472413`, their subjects neutral). **The file**: 29 derived and 1
+    refuted, 17 controls, eight sections; "I typed no statement, grade or count of minds, and raised or lowered none";
+    **no merged statement written** — each chain's head first, its weaker forms as corollaries under their own names: "a
+    fused statement would have been a derivation by a record job, and nine names are fixed for a planner working blind".
+    **Corrections appended** (58 lines, none removed): two under first-round entries, one under the closed edge's entry,
+    **two in last night's theorem record** (the sharp form's conclusion met by a one-point set, with the piece form; the
+    square form's comparison made as a checking reading, verdict still a gap). **Stubs**: dated bearing blocks in eight;
+    no new stub. **Predictions**: 44 yes/no lines and 5 branch lines, mean Brier 0.083 — "on four of the five branch lines
+    the largest mass was on a branch that did not occur". **Drafts**: `LEDGER.md` rows 161–164; seven `CLAUDE.md` slots,
+    +1,921 bytes; G97 amended with a demotion record; G99 proposed; one sentence for G92; instances; four atlas nodes.
+    **Its findings**: the asking lane's drafted clause for this milestone's row is larger than the four-labels entry — a
+    form no larger drafted; the second deriver's caution names one entry too many and one too few among those waiting on
+    its flagged step (by their uses lines: the closed edge does not rest on it; the pair's two saves do); **last night's
+    open line on the placed point has no named home** now that this milestone is recorded — a question for the asking
+    lane. **Its slips, disclosed**: two stages in one commit; it went on past the brief's hand-back line; the launch's copy
+    of the front page was older than the disk's, found before any draft was written. **My receipt**: the commits are on
+    `main`; **the derivation file's gate run by me** — exit 0, 0 failures, 2 warnings, 30 entries, 17 controls each firing;
+    its section headings read; its commit subjects read as the blind planner would see them — none carries a verdict. Not
+    checked by me yet: the drafts (read whole at the filing); the appended paragraphs in place. **Its held points, ruled.**
+    (1) **The blind planner's fence is extended to what this job wrote**, by an amendment to its brief and a content-free
+    message (done). (2) Rows 163 and 164 stay two — the pair's theorem and the strip's closed edge are cited for
+    different things. (3) The optional clause in the aim's fifth point is decided at the filing, with the kernel planner's
+    sentence. (4) G99 is filed as a reading, with its status line as drafted. (5) Its drafts' slots are re-asserted by its
+    script after the landing in flight has filed. **FS-124 is recorded; it is Derived when the filing is made — after the
+    landing in flight is back.**
 
