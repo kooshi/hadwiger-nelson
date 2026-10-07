@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-07: an outside proof of six is this project's literature; the Lean backlog is paused; the plan
 
 *Written 2026-10-07 (UTC) by Keryx, at Kooshi's word ("Make sure your handoff carries the new plan"). Current state only. A successor
-arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–623 (the day's record, each with what was
+arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–624 (the day's record, each with what was
 checked by whom); then, for the paused backlog only, `plans/SESSION-HANDOFF-2026-10-06.md` §§ 2–8, which this file supersedes for
 everything else.*
 

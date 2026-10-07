@@ -8616,3 +8616,24 @@ reason by the close.*
      Brief not written. (b) **The order of the deriver's slot waits for its stage 3** (FS-133's stub): one
      message, not a guess. (c) Its third card (the filled-triangle frame) is logged as a candidate question; it
      ranks it in its stage 5.
+
+624. **EXT-OAI3, first message: the release's index is saved and its first tier is five families; no family but 158 claims anything on the plane's chromatic number, its measurable form, or the density of a unit-distance-avoiding set** (source: EXT-OAI3's message to "main", 2026-10-07; record `plans/EXT-OAI3-review.md`; index and sweep outputs under `data/external/oai3/`; commit `eec0f0ff` on `main`. It read all 372 family titles with their catalogue sentences and all 722 manuscript titles beside a keyword sweep whose control fires; none of the five is built or audited here).
+     **The tier**: 073 — the Falconer distance conjecture in every dimension (one manuscript; a Lean note, two
+     comparator challenges with solution modules); 166 — the higher-dimensional Erdős distinct-distances conjecture
+     (manuscript only, no Lean); 167 — the weak pinned planar distance conjecture and a power saving `O(n^{4/3−δ})`
+     for planar unit distances (two manuscripts; challenges for both, and a Lean note that contradicts itself on
+     whether the second is formalized); 172 — a classification of finite Euclidean Ramsey configurations by an
+     algebraic condition over the configuration's coordinate field, disproving a conjecture of
+     Leader–Russell–Walters (seven comparator challenges) — the one it expects to bear most on this project's
+     field-plane theory; 156 — Borsuk's conjecture fails in dimension nine (its own widening: a diameter graph's
+     chromatic number). Zero hits for the measurable chromatic number, distance-avoiding sets, Kloosterman sums,
+     Tarski, Furstenberg and others it lists. **What "has Lean" means in the release, its finding**: three things —
+     235 of 372 families have a Lean note, 162 papers are listed as having a formalized main result, and 405
+     comparator challenges exist of which 178 are in the main-results list — and the formalization catalogue marks
+     every entry "review: status: unchecked", scope "Partial progress."; each row it writes says which meaning
+     applies. **For the import's implementer**: family 158's Lean note lists a second comparator challenge, the
+     seven-colouring (known since item 608; this library holds its own). **A mismatch in my brief**: "eleven
+     reasoning summaries" is eleven files for ten subjects. **Read by me**: nothing beyond the message. **Done**:
+     the tier relayed to the asking lane by message, each family named as unread. **Ruling**: a family that its
+     later stages show strong enough to change the frontier gets a reading and a Lean audit of its own, as family
+     158 did; none is briefed on a catalogue sentence.
