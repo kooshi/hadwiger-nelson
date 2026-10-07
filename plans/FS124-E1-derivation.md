@@ -10,7 +10,9 @@ stages headed "Stage n — SAVED", each committed before the next. Scripts and o
 *One line per theorem, with its grade and its address; filled as each stage is saved. Every one is [hand] or derived from [hand]
 entries, **one mind, kernel pending**.*
 
-- (none yet — Stage 1 is the opening)
+- **C124-RADIUS-GRAPH** — [hand], one mind — Stage 3, § Argument — a random rigid motion.
+- **C124-RADIUS-COUNTABLE**, **C124-RADIUS-UP**, **C124-RADIUS-FIVE** — derived from it, one mind — Stage 3.
+- **C124-RADIUS-DOWN** — [hand] over the declared outside theorem `Outside.OAI158.proper_to_borel_weak`, one mind — Stage 3, § Argument — up, down, five.
 
 ## Notation used by every entry
 
@@ -172,3 +174,107 @@ it holds at every interface between two open one-label pieces, of any shape; wha
 (C124-CENTRE, C124-ANTIPODE). So "what a tight pair passes on to its rhombus completions" is what any interface passes on.
 
 **Stage 2 — SAVED** (2026-10-07).
+
+## Stage 3 — SAVED: C124-RADIUS
+
+derivation: C124-RADIUS-GRAPH
+  statement: Let k ≥ 1, U an open set of the plane, c a weak k-colouring of U, and V a finite subset of U. Then the rigid motions g with g(V) ⊂ U form a non-empty open set, and for almost every one of them the points g(v), g(v′) have different labels for every two points v, v′ of V at distance 1; so the unit-distance graph on V has a proper k-colouring.
+  uses only: that for two points v, v′ at distance 1 the map g ↦ (g(v), g(v′) − g(v)) is a bijection of the motion group onto the pairs (point, unit vector) carrying dφ dt to Lebesgue measure times arc length; weak properness in its measure form; that V is finite and U open. No count of labels, no regularity of c, nothing about the shape of U
+  not claimed: anything for an infinite V (C124-RADIUS-COUNTABLE takes countable sets with compact closure in U); that any open set has a weak k-colouring; a bound on the measure of the good motions beyond "full"
+  argument: § Argument — a random rigid motion
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 7, U the open disc of radius 2, c the hexagonal seven-colouring at circumradius 2/5 (colour (m + 3n) mod 7 on the hexagon about m(2√3/5, 0) + n(√3/5, 3/5)), V the seven points of a Moser spindle: of 20,000 sampled motions keeping V in U none gives a monochromatic unit pair (control `radius-motions`)
+  prior art: partly: the argument for a colouring of the whole plane is `[GwynStavrianos2022]` Lemma 2 (held; read by FS-103, not re-read by me) and this library's N-EASY (`Proofs/HadwigerNelson/Plane/YesLimit.lean`, `AeColouring.exists_motion`; statement name read, proof not); for an open set — zbMATH "probabilistic Hadwiger" and "almost every" with "unit distance" and colouring (0), arXiv Hadwiger–Nelson with measurable and disc or bounded or local (3, none on point by title): not found in print
+  handoff: de Bruijn — the statement as written, on the local weak colouring of an open set; it is `AeColouring.exists_motion` with "every motion" replaced by "the open set of motions keeping V in U". Read the formal statement back against "almost every motion in that open set", not "some motion"
+
+derivation: C124-RADIUS-COUNTABLE
+  statement: Let k ≥ 1, U an open set of the plane, c a weak k-colouring of U, and V a countable subset of U whose closure is a compact subset of U. Then the unit-distance graph on V has a proper k-colouring of the form v ↦ c(g(v)) for a rigid motion g with g(V) ⊂ U.
+  uses only: C124-RADIUS-GRAPH's argument with countably many unit pairs; that a compact subset of an open set keeps a positive distance from its complement, so the motions near the identity keep V in U
+  not claimed: anything for an uncountable V; anything for a countable V that accumulates at the boundary of U; that the colouring obtained is measurable in any sense on a larger set
+  argument: § Argument — a random rigid motion
+  verdict: derived
+  grade: derived from: C124-RADIUS-GRAPH
+  minds: 1
+  model: as C124-RADIUS-GRAPH's, with V the points of the closed disc of radius 1 with both coordinates in ℚ(√3, √11) — a countable set dense in the disc holding every Moser spindle of that field inside it
+  prior art: owed — not searched for in this form; for the whole plane it is the remark that N-EASY needs no compactness for a countable subfield's plane
+  handoff: none — a relay-result; it says where de Bruijn–Erdős (and with it the axiom of choice) enters C124-RADIUS-UP: only in passing from countable sets to the whole plane
+
+derivation: C124-RADIUS-UP
+  statement: For every integer k ≥ 1: if for every R > 0 the open disc of radius R about the origin has a weak measurable k-colouring, then every finite unit-distance graph in the plane has a proper k-colouring, and χ(ℝ²) ≤ k.
+  uses only: C124-RADIUS-GRAPH with U a disc holding the graph; the de Bruijn–Erdős theorem for the unit-distance graph of the plane. Of the hypothesis: for each finite graph, one disc that holds it
+  not claimed: an explicit radius at any k; the converse (C124-RADIUS-DOWN, which uses an import); that the hypothesis holds at k = 6; anything from one disc beyond the finite graphs that fit inside it
+  argument: § Argument — up, down, five
+  verdict: derived
+  grade: derived from: C124-RADIUS-GRAPH
+  minds: 1
+  model: k = 7: the hexagonal seven-colouring at circumradius 2/5 restricted to each disc satisfies the hypothesis, and χ(ℝ²) ≤ 7 is this library's row 33
+  prior art: partly: de Bruijn–Erdős is classical (recalled, not read; used in this library by `chromaticNumber_plane_le_chiM0`); for arc maps of discs the conclusion is row 145's FS116-O1-YESLIM by a weak-* limit (`chromaticNumber_plane_le_six_of_fragments`); the bounded case for proper colourings is Kruskal 2008 (Zbl 1139.05023, held at abstract); the disc form for weak colourings not found in print (the queries of C124-RADIUS-GRAPH)
+  handoff: de Bruijn — the statement as written, after C124-RADIUS-GRAPH; it subsumes FS116-O1-YESLIM's use (an arc map of a disc is a weak colouring of it), with no limit taken
+
+derivation: C124-RADIUS-DOWN
+  statement: For every integer k ≥ 1: if χ(ℝ²) ≤ k, every open set of the plane has a weak measurable k-colouring.
+  uses only: the declared outside theorem `Outside.OAI158.proper_to_borel_weak` ([kernel, outside]: a proper k-colouring of the plane gives a measurable one proper at almost every unit pair, at every k); that normalized angular measure and arc length have the same null sets; that the restriction of a weak colouring of the plane to an open set is a weak colouring of it
+  not claimed: anything without that import; that χ(ℝ²) ≤ 6; any regularity of the colouring obtained beyond measurability
+  argument: § Argument — up, down, five
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 7: the hypothesis is row 33, and the conclusion holds with the hexagonal seven-colouring, with no import (in this library `proper_to_borel_weak_model`)
+  prior art: known: `[OAIMath2026]` family 158, "Transfer of colorability", forward direction; the restriction is immediate
+  handoff: de Bruijn — one line over the import and the local definition; with C124-RADIUS-UP it gives, at each k, that χ(ℝ²) ≤ k and "every open disc has a weak measurable k-colouring" hold together or fail together — at k = 6, with χ(ℝ²) ≤ 7 (row 33), the plane needs seven colours precisely if some open disc has no weak measurable six-colouring (C132-RADIUS, as it was posed)
+
+derivation: C124-RADIUS-FIVE
+  statement: There is R > 0 such that no open disc of radius R has a weak measurable five-colouring.
+  uses only: C124-RADIUS-UP at k = 5; the declared outside theorem `Outside.OAI158.no_proper_five_coloring` ([kernel, outside]); that discs of one radius are translates
+  not claimed: any value of R — the argument gives the radius of a disc holding a finite unit-distance graph that is not five-colourable, which exists by compactness and has not been exhibited; the same at six
+  argument: § Argument — up, down, five
+  verdict: derived
+  grade: derived from: C124-RADIUS-UP
+  minds: 1
+  model: the statement is an existence; its analogue with an exhibited radius is at k = 3: by C124-RADIUS-GRAPH no open disc holding a Moser spindle has a weak measurable three-colouring
+  prior art: partly: `[OAIMath2026]` Thm 1.4 is the statement for the whole plane; for a disc not found in the release by the asking lane's reading (`plans/STUB-q-ring.md` § The first claims), not checked by me
+  handoff: de Bruijn — a corollary; the formal statement to read back is "∃ R, no weak five-colouring of the ball of radius R"
+
+### Argument — a random rigid motion
+
+Write `g = g_{φ,t}`, `g(v) = R_φ v + t`. The set `G` of motions with `g(V) ⊂ U` is the intersection of the finitely many open sets
+`{g : g(v) ∈ U}` and contains the identity. Fix two points `v, v′` of `V` at distance 1 and put `u₀ = v′ − v`. The map
+`Φ(φ, t) = (R_φ v + t, R_φ u₀)` is a bijection onto (point, unit vector): the second coordinate gives `φ`, then the first gives
+`t`. In the coordinates `(φ, t) ↦ (t + R_φ v, φ + arg u₀)` its Jacobian matrix is triangular with unit diagonal, so `Φ` carries
+`dφ dt` to Lebesgue measure times arc length. The set `N` of pairs `(z, u)` with `z ∈ U`, `z + u ∈ U`, `c(z) = c(z + u)` is
+measurable (`c` is) and null (weak properness). So `{g ∈ G : c(g(v)) = c(g(v′))} = G ∩ Φ⁻¹(N)` is null. The union over the unit
+pairs of `V` is null; `G` is open and non-empty, hence of positive measure; almost every `g ∈ G` is outside the union, and for
+such a `g` the map `v ↦ c(g(v))` is a proper colouring of the unit-distance graph on `V`. ∎
+
+*Countable `V` with compact closure in `U`.* The unit pairs are countably many, so the union is still null; and the closure
+of `V` keeps a positive distance from the complement of `U`, so every motion close enough to the identity keeps `V` in `U`: `G`
+contains a non-empty open set. The rest is the same. ∎
+
+### Argument — up, down, five
+
+*Up.* Let `Γ` be a finite unit-distance graph with vertex set `V`, and `R` larger than every `|v|`. A weak `k`-colouring of the
+open disc of radius `R` and C124-RADIUS-GRAPH give a proper `k`-colouring of `Γ`. Every finite subgraph of the unit-distance graph
+of the plane being `k`-colourable, so is the whole graph (de Bruijn–Erdős). ∎
+
+*Down.* `χ(ℝ²) ≤ k` gives a proper colouring `ℂ → Fin k`; the import gives a measurable `d` with `d(z) ≠ d(z + u)` for almost
+every `(z, u)`; the pairs with `z, z + u` in an open set `U` and equal labels are a subset of that null set. ∎
+
+*Five.* If every open disc about the origin had a weak five-colouring, *Up* would give a proper five-colouring of the plane,
+which the import forbids. So some disc about the origin has none, and its translates have none. (A larger disc then has none
+either, by restriction.) ∎
+
+control: radius-motions
+  of: C124-RADIUS-GRAPH — the conclusion on its model: sampled rigid motions of a Moser spindle into the disc of radius 2 under the hexagonal seven-colouring at circumradius 2/5; the fault colours by hexagons of circumradius 3/5, of diameter 6/5, which is not a weak colouring
+  run: python3 ../data/fs124/e1/tight_checks.py radius
+  expect: circumradius=0.4 disc-radius=2.0 motions=20000 unit-pairs-per-motion=11 monochromatic-pairs=0
+  fault: python3 ../data/fs124/e1/tight_checks.py radius --fault
+
+**What rests on these.** C124-RADIUS-UP and C124-RADIUS-DOWN are the statement through which either answer of the milestone is
+consumed: a NO becomes "this disc has no weak six-colouring", a YES a family of weak six-colourings of discs, of any regularity.
+C124-RADIUS-GRAPH is the form to plan in Lean; it reads one open set and one finite set. **Tight on the model?** The control's
+colouring has a margin (circumradius 2/5): it tests the motion argument, which reads no margin; its fault is a colouring that is
+not weak. **Predictions scored**: P1 — met on both halves (up derived as posed and in the wider form; down at every `k`).
+
+**Stage 3 — SAVED** (2026-10-07).
