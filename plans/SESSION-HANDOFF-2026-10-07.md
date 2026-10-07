@@ -26,30 +26,53 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
-## 0e. READ THIS BEFORE § 0d — THE WIND-DOWN (20:47 UTC, 2026-10-07): every job asked to stop
+## 0e. READ THIS BEFORE § 0d — THE WIND-DOWN IS COMPLETE (21:00 UTC, 2026-10-07): nothing is running
 
 Kooshi, after the compaction: "[…], and need to wind down. Make sure all agents come to a
-stopping point, and everything important is out of /tmp." **His idea from the puzzle is still unheard — ask for it first
-when work resumes.** § 0d below is the state the wind-down started from; this section says what changed.
+stopping point, and everything important is out of /tmp." **Done: all three agents handed back at saved stages; no
+build, solver or agent is running; every branch is pushed. HIS IDEA FROM THE PUZZLE IS STILL UNHEARD — ASK FOR IT FIRST
+when work resumes. Nothing launches until he says the budget is back.** § 0d below is the state the wind-down started
+from; where the two differ, this section is current.
 
-- **All three running jobs were asked by message (20:47 UTC) to stop at a saved stage**: finish only what is minutes from
-  done, write a dated **"Stopped at"** section in their record (what is committed and at which commit, what is left in
-  order, what they know about what is left), copy anything cited from a temp directory into `data/fsNNN/<job>/`, commit
-  by explicit path, push, hand back in a few lines. **A successor's first read for each job is that section.**
-  - the landing of FS-124's second module (FS124-L2; worktree and branch `fs124-wi3`; record `plans/FS124-L2-landing.md`
-    on its branch): told to finish the land only if the final gate pass is already green or minutes away, with nothing
-    of the gate skipped; otherwise not to land. **Until its hand-back says "landed" or "not landed", § 0d's rule on
-    `main` holds.**
-  - FS-136's implementer (FS136-I1; worktree and branch `fs136-wk1`): leaves done and left are in its record's section.
-  - FS-137's deriver (FS137-E1; record `plans/FS137-E1-derivation.md` on `main`): three of six claims have verdicts
-    (C137-BUDGET, C137-THREE, C137-SIXTY — each derived, one mind; FS-137 inventory items 5–6, **none yet read by
-    me: read the three entries and re-run one control of each before anything is built on them**); C137-OWN, -MEET,
-    -RING are left.
-- **Out of /tmp**: the session's scratch directory and the loose temp files are copied to
-  `~/source/lean-dir-tmp-rescue-2026-10-07/` (524 MB; `scratchpad/`, `tmp-root/`); the agent-id file is there as
-  `scratchpad/agents.txt` (ids resume a job only inside this session). No record of FS-124, FS-136 or FS-137 cites a
-  temp path (searched 20:50 UTC).
-- **Nothing launches until Kooshi says the budget is back.** Then: his idea; then § 0d's list from each "Stopped at".
+**What changed since § 0d.**
+1. **FS-124's second module is on `main`** (FS124-L2, landed; gated at `da96003b1`, landed tip `e89c4e92d`; FS-124
+   inventory item 50, with my receipt; record `plans/FS124-L2-landing.md`, report `data/fs124/reports/FS124-L2.md`,
+   receipts `data/fs124/l2/gate/` — `receipt-{axioms,vacuity,assumptions}-final.log` there are the next landing's
+   previous receipts). **Held: the nine statements, C124-BOTH's second clause in the claim list's words included**
+   (`closePair_both_saved_of_isSector`); told to Kooshi. Counts at the landing: 7,420 records — 7,364 clean, 28
+   axiom-free, 23 imported, 5 purchases; vacuity `declarations=15928 refutations-skipped=228 sites=1448`, the six
+   verdict counts and the nine assumption counts unchanged. **The rule "nothing on `main` outside plans/ and data/" is
+   lifted: no landing is in flight.**
+2. **THE FILING OF THAT LANDING WAS NOT MADE — IT IS THE FIRST JOB.** `CLAUDE.md` still reads the counts before it
+   (7,015 records; `declarations=15370`), so `scripts/gate_report.py` fails against it until filed. The fifteen drafts
+   are in the landing's record under "Drafts for the front page (FS124-L2)"; their seventeen slots were found once each
+   on `main` at `07290735` by `data/fs124/l2/drafts-slots.py` and not re-checked since. Then § 0d item 1's list
+   (a)–(e) as written, except (e), which is done. Read the record's stage 4 on the two `.condition` lines
+   (`Plane.IsTriod`, `Plane.IsTriodCut`) and its open gate item 1 before filing; fact-audit base `07bf6096`.
+3. **FS-136's implementer stopped at 2 of 27 leaves** (FS136-I1; FS-136 inventory item 26; branch `fs136-wk1` at
+   `914f28e32`, pushed, clean; "Stopped at" at line 129 of the branch's `plans/FS136-I1-implementation.md`; 320k by
+   the harness's count). On the branch the forward step (`forced_corner`, `forced_adjacent`) and the collar in its
+   region form (`exists_collar`) print the standard three axioms; the collar in the claim list's form does not yet.
+   Next: resume it only if this same session is running (id in the rescued `agents.txt`), else a successor on that
+   section; either way the branch merges `main` first, and the next brief carries its two reported items (an unused
+   hypothesis `0 < ρ`; a docstring that says "the two collars" where the example can use one).
+4. **FS-137's deriver stopped with five of six claims derived** (FS137-E1; FS-137 inventory items 5, 6, 8; tip
+   `95a9bf8b7` on `main`; report `data/fs137/reports/FS137-E1.md`; "Stopped at" is the last section of
+   `plans/FS137-E1-derivation.md`; 491k by the harness's count — **past its line: a successor, never a resume**).
+   C137-BUDGET, -THREE, -SIXTY, -OWN, -MEET: derived, one mind each, **none read by me — read the five entries and
+   re-run one control of each (`data/fs137/e1/budget.py`) before anything is built on them**. C137-RING: no verdict;
+   its statement fixed, its argument a sketch, its control run with no violation; the count is tight on the
+   seven-colouring and met by many assignments at six. Owed list: inventory item 8 (a)–(g) — the successor for the
+   sixth claim, the claim list's dated lines, two search requests, G100's correction for the record job, the
+   deriver's question to the asking lane with the sixth verdict.
+5. **Out of /tmp**: the session's scratch directory and the loose temp files are in
+   `~/source/lean-dir-tmp-rescue-2026-10-07/` (524 MB; `scratchpad/`, `tmp-root/`; refreshed 20:59 UTC); the agent-id
+   file is `scratchpad/agents.txt` there. No record of FS-124, FS-136 or FS-137 cites a temp path, by my search and by
+   each agent's own statement.
+
+**Order when the budget returns**: Kooshi's idea → the filing (2) → my review of FS-137's five entries → one kernel
+slot on FS-136's 25 leaves and one deriver on FS-137's sixth claim → at its verdict, the card's stop (§ 0d item 3).
+The three questions open with Kooshi (§ 0d) are still unanswered, each at its default.
 
 ## 0d. THE STATE THE WIND-DOWN STARTED FROM — written at 20:44 UTC, 2026-10-07, just before a compaction Kooshi asked for (the second today)
 
