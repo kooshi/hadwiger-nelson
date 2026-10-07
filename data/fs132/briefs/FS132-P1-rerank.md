@@ -5,7 +5,7 @@
 brief: FS132-P1
   identity: Poros — your agent file (`.claude/agents/poros.md`) is your identity and your lane's workflow (job 1: the re-rank and the next question); invoke `poros-anomaly-hunt` fresh with the Skill tool for the re-read, as job 1 says, and `poros-reframing` if the frame itself has moved — it may have
   role: the ask lane at the largest change of ground this project has had — re-read what an outside release proves, in its Lean and in its manuscript, against this project's whole theory; re-rank the frontier with those theorems as literature; say what of the running Lean backlog still bears; and pose the question of FS-132, the milestone that opens on them, aimed at six against seven; and the stub of FS-133, a consequence Kooshi wants built on at once
-  launch: into the first slot that frees; a Lean audit of the release is finishing and a reading of its manuscript is on its second half — their records are your inputs, and the reading's last stage reaches you by address when it is saved
+  launch: into the first slot that frees; a Lean audit of the release and a reading of its manuscript are finishing — their records are your inputs, and both have saved the stages you need
   mission: § Why this job
   statements: § What Kooshi asked, and where the ground now is
   acceptance: § Done means
@@ -71,6 +71,12 @@ sentences; a stub for the consequence; the backlog paused until your re-rank):
 > 616. **EXT-OAI1, fourth message: the outside proof's shape, from its Lean — two arms and a three-line headline; the five-colour arm assumes only a measurable weak colouring and builds every structured object from it by measure; a covering obstruction on a disc closes it** (source: EXT-OAI1's message to "main", 2026-10-07; record `plans/EXT-OAI1-audit.md` stage 6, commit `8fc4ab79` on `main`; `data/external/oai1/docindex-five.txt` (232 documented declarations), `module-graph-five.txt`. Statements and definitions read by it, and `Five.lean` whole; no proof below it line by line).
 > — source: plans/FS131-close-inventory.md
 
+> 617. **KOOSHI'S THIRD WORD, 2026-10-07 (verbatim; `data/external/EXT-OAI1-request.md`, third word, with the five questions it answers): "1. port or import: let's import and adopt parts piecemeal if needed. 2. indeed 3. definitely build on it... write the stub 4. not sure, probably allow, but audit what it does 5. pause the backlog, lets come to a stopping point, collect ourselves and have poros rerank. — Oh look, you've already laid out basically the same plan. Carry on then. Make sure your handoff carries the new plan."**
+> — source: plans/FS131-close-inventory.md
+
+> 618. **EXT-OAI2, third message: the outside manuscript's obstruction at five is read in full — no gap found, one mind; it goes around the map step and proves no regularity; five is one count spent in three five-only statements; two of them are false at seven, so at six they can hold only on a normal form — and that normal form is this project's** (source: EXT-OAI2's message to "main", 2026-10-07; record `plans/EXT-OAI2-reading.md` stages 3–4, commits `2f18d416`, `422dec3e`, `1076316a` on `main`; their §§ 5–8, 2,747 lines).
+> — source: plans/FS131-close-inventory.md
+
 
 **Your inputs, by address** (read them whole; nothing in this brief stands in for them):
 - the audit of the release's Lean: `plans/EXT-OAI1-audit.md` — stage 4 (the build, the axioms, the statement), **stage 6 (the proof's
@@ -78,8 +84,9 @@ sentences; a stub for the consequence; the backlog paused until your re-rank):
   the auditor's one-mind reading of where five is used)**, with `data/external/oai1/docindex-five.txt` (232 documented declarations);
 - the reading of its manuscript: `plans/EXT-OAI2-reading.md` — stage 1 (the dictionary: their notion is this project's `χ_m⁰`
   object), stage 2 (the transfer, read in full: rigidity proved at the real algebraic numbers, by properties no number field has),
-  and stage 3 when it is saved (the obstruction at five against rows 131–154, step by step: which steps are stated for every `k`, and
-  for the five-only steps the statement about six that would be needed) — I send you its address the moment it lands;
+  stage 3 (the obstruction at five, in four acts, and how it goes around the map step), and **stage 4 (every step against every
+  `k`: the three five-only statements, what six would need — its [P₆], [L₆], [G₆], [A₆] — against rows 131–154, and a calibration
+  showing two of them false at seven)**; its last stage, the front page's replacement sentences, may still be in progress;
 - the release itself, read-only: `/home/kooshi/source/math` — the manuscript's source under its `preprints` folder for the
   five-colour paper, the Lean under `lean/OAI/Geometry/PlaneColoring`, and a catalogue of 371 other result families
   (`/home/kooshi/source/math/CONTENTS.md`) that nobody here has read.

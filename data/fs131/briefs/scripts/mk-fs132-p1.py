@@ -9,7 +9,7 @@ AIM="\n".join([Q("CLAUDE.md","1. **Given MR, the plane is the measurable problem
                Q("CLAUDE.md","4. **Regular colourings need seven, verified and almost everywhere**"),Q("CLAUDE.md","5. **So, given MR, Hadwiger–Nelson is one question: can vanishing holes save a colour?**"),
                Q("CLAUDE.md","6. **Its tools are Voronov's circle topology made robust, and the density topology**"),Q("CLAUDE.md","1. **Rank a route by its bearing on the answer**")])+"\n"
 TOP="\n".join([Q(FS,"| 1 | **FS-124 the (Q) ring**"),Q(FS,"| 2 | **FS-123 the Siamese class**"),Q(FS,"| 3 | **FS-104 `χ_CP(ℝ²)` at six**")])+"\n"
-ITEMQ="\n".join(item(n) for n in [607,611,613,614,615,616])+"\n"
+ITEMQ="\n".join(item(n) for n in [607,611,613,614,615,616,617,618])+"\n"
 b=f'''# Brief FS132-P1 — the frontier after an outside proof of six became this project's literature: the re-rank, and the question of the milestone that opens on it
 
 *Written 2026-10-07 (UTC) by Keryx, the coordinator (the top-level session), at Kooshi's word. Launch line: "Your brief is on disk: read it in full first."*
@@ -17,7 +17,7 @@ b=f'''# Brief FS132-P1 — the frontier after an outside proof of six became thi
 brief: FS132-P1
   identity: Poros — your agent file (`.claude/agents/poros.md`) is your identity and your lane's workflow (job 1: the re-rank and the next question); invoke `poros-anomaly-hunt` fresh with the Skill tool for the re-read, as job 1 says, and `poros-reframing` if the frame itself has moved — it may have
   role: the ask lane at the largest change of ground this project has had — re-read what an outside release proves, in its Lean and in its manuscript, against this project's whole theory; re-rank the frontier with those theorems as literature; say what of the running Lean backlog still bears; and pose the question of FS-132, the milestone that opens on them, aimed at six against seven; and the stub of FS-133, a consequence Kooshi wants built on at once
-  launch: into the first slot that frees; a Lean audit of the release is finishing and a reading of its manuscript is on its second half — their records are your inputs, and the reading's last stage reaches you by address when it is saved
+  launch: into the first slot that frees; a Lean audit of the release and a reading of its manuscript are finishing — their records are your inputs, and both have saved the stages you need
   mission: § Why this job
   statements: § What Kooshi asked, and where the ground now is
   acceptance: § Done means
@@ -63,8 +63,9 @@ sentences; a stub for the consequence; the backlog paused until your re-rank):
   the auditor's one-mind reading of where five is used)**, with `data/external/oai1/docindex-five.txt` (232 documented declarations);
 - the reading of its manuscript: `plans/EXT-OAI2-reading.md` — stage 1 (the dictionary: their notion is this project's `χ_m⁰`
   object), stage 2 (the transfer, read in full: rigidity proved at the real algebraic numbers, by properties no number field has),
-  and stage 3 when it is saved (the obstruction at five against rows 131–154, step by step: which steps are stated for every `k`, and
-  for the five-only steps the statement about six that would be needed) — I send you its address the moment it lands;
+  stage 3 (the obstruction at five, in four acts, and how it goes around the map step), and **stage 4 (every step against every
+  `k`: the three five-only statements, what six would need — its [P₆], [L₆], [G₆], [A₆] — against rows 131–154, and a calibration
+  showing two of them false at seven)**; its last stage, the front page's replacement sentences, may still be in progress;
 - the release itself, read-only: `/home/kooshi/source/math` — the manuscript's source under its `preprints` folder for the
   five-colour paper, the Lean under `lean/OAI/Geometry/PlaneColoring`, and a catalogue of 371 other result families
   (`/home/kooshi/source/math/CONTENTS.md`) that nobody here has read.

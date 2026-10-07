@@ -8355,3 +8355,58 @@ reason by the close.*
      its §§ 2–8 on the backlog. **Numbers fixed**: FS-132, the milestone that opens on the release, aimed at six
      against seven; FS-133, the one-class consequence. Their inventories open with their opening jobs; this
      inventory's items 607–617 are their prehistory.
+
+618. **EXT-OAI2, third message: the outside manuscript's obstruction at five is read in full — no gap found, one mind; it goes around the map step and proves no regularity; five is one count spent in three five-only statements; two of them are false at seven, so at six they can hold only on a normal form — and that normal form is this project's** (source: EXT-OAI2's message to "main", 2026-10-07; record `plans/EXT-OAI2-reading.md` stages 3–4, commits `2f18d416`, `422dec3e`, `1076316a` on `main`; their §§ 5–8, 2,747 lines).
+     **The route, its account, in four acts.** (1) *The ring in measure*: a palette at a centre is the set of labels
+     with positive weight in limits of circle samples; points at distance 1 exclude each other's palettes, so
+     palettes 60° apart are disjoint (this project's ring twist, in measure); palettes have at most two labels.
+     (2) The graph of label pairs whose transition area at displacement `h` is of order `|h|`; the centres where it
+     has a cycle are closed and locally finite. (3) Thresholded disc averages are a continuous map into the complete
+     graph on the labels off small discs; Lebesgue's covering theorem forces an essential loop round one cyclic
+     centre; fibres' Hausdorff limits are continua through a point with both labels excluded from their straddle
+     sets (Sokolov–Voronov's exclusion, for continua). (4) With five labels the loop's cycle has length 3, 4 or 5,
+     leaving 2, 1 or 0 labels outside, and each is killed locally; the triangle by six alternating 60° sectors and a
+     Moser spindle (their certificate re-checked by it, with a control). **The map step**: not made — a map of the
+     plane is replaced by a map *to* the nerve, interfaces by connected fibres; row 140 had said the map step at
+     five is equivalent to `χ_m⁰(ℝ²) ≥ 6`, and they reach that without it. **Five against every `k`** (its § 4.2,
+     eighteen steps, Lean types read by text): **five-only are the palette bound, the cyclic core's finiteness, and
+     the angular kills** (`palette_cardinality`, `cyclicCore_compact_finite`, `commonInterface_graph_acyclic`, each
+     at `Fin 5`); everything else is stated for every `k`, and two lemmas carry the count as a hypothesis ("a ring
+     is rigid when it is left two labels" — G91's sentence). **It corrects the audit's one-mind reading (item
+     616)**: the cover of order two is not where five enters — that theorem has no colour in it; five enters in what
+     makes a graph-valued map exist. **What six needs, against rows 131–154** (its § 4.3): [P₆] palettes of at most
+     two labels at six — their method gives three; no row of this project's speaks of it; [L₆] cyclic centres
+     locally finite at six — not held; REG-J′ would give it on saturated colourings and is open, and **is
+     superseded as a target: the extraction needs only [L₆], not arcs, not integer radii, not the curved-pencil
+     question (FS-126)**; act 3 then runs as written and yields a cycle of length 3 to 6; [G₆] a cycle of length at
+     least 4 somewhere — supplied in the map class by row 137; [A₆] the kills — their triangle is this project's
+     four-colour vertex and their four-cycle's diagonal states its (Q) arcs: supplied in the non-Siamese class for
+     the (Q)-free ring (rows 148–149), open for (Q) rings (FS-124) and the Siamese class (FS-123); the five-colour
+     vertex not supplied; **the six-colour vertex's analogue at the same locality is contradicted by row 148's
+     fragment on discs of radius below 3/2**. No row of this project's is contradicted by anything they prove.
+     **A calibration, its own, by formula, one mind**: the palette bound and the local finiteness are false at
+     seven (slack in the hexagonal colouring lets one plant accumulating islands, or stripes of three colours along
+     a circle), so they are tightness statements; at six they can hold only for a colouring with no slack — rows
+     140 and 143's maximal covers and honest saturated colourings. **"Their act 3 can consume our normal form
+     without our arcs. The first statement nobody holds is [P₆] on saturated six-colourings."** **Prior art,
+     plainly, its words**: the equality `χ(ℝ²) = χ_m⁰(ℝ²)` that rows 128 and 130 list as not found in print is in
+     the release outright (manuscript dated 2026-09-23; this project's FS-103 is 2026-09-26), with the skeleton of
+     row 128's step at `ℝ_alg`; row 120's number-field statements are untouched. **Three things the manuscript does
+     not draw**: (i) its forward transfer uses the colouring only on the algebraic plane, so `χ(ℝ²) = χ(ℚ̄²)` and
+     the supremum over number fields follow with no Tarski — an alternative discharge of the named hypothesis
+     `RealAlgebraicDescent` for its chromatic-number consumers — and "some real number field's plane needs six" is
+     a corollary; (ii) a placement question for the Searcher (queued, `plans/SEARCH-QUEUE.md` line 9): a region
+     about a (Q)-free four-colour vertex is four-coloured with no Siamese or simplicity hypothesis, so a
+     5-chromatic unit-distance graph fitting in it kills FS-123's Siamese case at radius 2; (iii) item 613 (1).
+     **Lean against manuscript**: the converse of their transfer is not in their Lean (it is at the manuscript's
+     grade, and at this project's). **Read by me**: its three commits on `main`; in the clone, `palette_cardinality`
+     (`BinaryPalettes.lean` l. 260), `cyclicCore_compact_finite` (`CyclicCore.lean` l. 269) and
+     `commonInterface_graph_acyclic` (`ContinuumLimits.lean` l. 296) are each stated at `Fin 5`, and
+     `States.lean` l. 244 carries `(Finset.univ \ (J ∪ K)).card ≤ 2` as a hypothesis at a general `k` — as it says.
+     Not checked by me: any step of the reading; its calibration at seven; the eighteen-step table. **Grade**:
+     read in full, no gap found, one mind — with the kernel's acceptance of the corresponding Lean (item 614).
+     **Rulings.** (a) **Told to Kooshi at once.** (b) **This is the asking lane's input, whole**: its brief is
+     rewritten to name stages 3 and 4 as saved (unlaunched: regenerated, gate exit 0). (c) **The prior-art line is
+     owed to `LEDGER.md` § The claim list and rows 128, 130 at the front page's filing**: independent, and theirs
+     is dated three days earlier — said as that. (d) Item (i) is a second candidate consequence for the asking
+     lane to rank beside FS-133; item (ii) waits in the search queue for the re-rank.
