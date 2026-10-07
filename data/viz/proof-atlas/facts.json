@@ -2,8 +2,8 @@
  "meta": {
   "title": "Proof Atlas",
   "built": "2026-10-07",
-  "job": "FS132-Z2",
-  "as_of": "FS-132, six by the nerve, Derived (rows 155–160)",
+  "job": "FS132-L2",
+  "as_of": "FS-132's first theorem through the gate (row 155, the whole plane)",
   "statuses": {
    "kernel": "kernel — checked by Lean's kernel",
    "cert": "certificate — an exact object accepted by exact checkers",
@@ -1552,7 +1552,7 @@
    "id": "MEXCL",
    "label": "the (Q)-free exclusion, with no map",
    "role": "nogo",
-   "plain": "For every measurable six-colouring proper at almost every unit pair: where four labels meet in a witnessed cycle, the palettes on the point's unit circle cannot almost everywhere hold one of the two other labels. No map, no Siamese clause.",
+   "plain": "For every measurable six-colouring proper at almost every unit pair: where four labels meet in a witnessed cycle, the palettes on the point's unit circle cannot almost everywhere hold one of the two other labels. No map, no Siamese clause. Kernel-checked for the whole plane, over the release's lemmas ported with their proofs; the open-set form is by hand.",
    "src": {
     "file": "LEDGER.md",
     "row": "155"
@@ -1562,12 +1562,12 @@
     "file": "LEDGER.md",
     "row": "155"
    },
-   "grade": "[hand], one mind, with a line-by-line checking reading of its steps M4–M9 by a second mind",
+   "grade": "[kernel] for a Borel colouring of the whole plane",
    "theta": 90,
    "r": 520,
    "sector": "seven",
    "tier": 2,
-   "status": "hand-1",
+   "status": "kernel",
    "line": 200,
    "address": "LEDGER.md row 155, line 200",
    "grade_address": "LEDGER.md row 155, line 200",
@@ -1816,7 +1816,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-q-ring.md, line 1",
-   "grade_address": "plans/STUB-q-ring.md, line 298",
+   "grade_address": "plans/STUB-q-ring.md, line 460",
    "also": []
   },
   {

@@ -128,6 +128,8 @@ open set containing the closed unit disc, as the statement is written: also E3's
 (M0, one mind). The kernel lane's statement is taken at the whole plane first (item 22 (a); `data/fs132/claims-K1.md`); the
 local form is planned second (K1 § 3.6).
 
+**2026-10-07, FS132-L2 — [kernel], for a Borel colouring of the whole plane (the instance `U = ℂ`), through the full gate at `b46a9d57`**: `HadwigerNelson.SixRing.no_outside_orbit_points` (C132-WIT-ORBIT), `no_outside_orbit` (C132-M-ORBIT), `not_ae_outside` (C132-M-EXCL), `not_ae_outside_points` (C132-WIT-EXCL; added at the landing, the compact-set form at the two-point sets), `Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean`, each on `[propext, Classical.choice, Quot.sound]`, no assumption in hypothesis form, no outside theorem — over the release's palette lemmas ported with their proofs (`Outside/OAI158…`, FS132-K1 and FS132-I2). Statements FS132-K2's (the four-point ring form FS132-L2's, by a ruling). **Every step M1–M9 is checked by the kernel**: M1–M3 `State` (FS132-I4); M4–M6 `Tips`, with M6's count as 64 patterns by `decide` (FS132-I4); M7 `Shift` — the unit-pair relation in the direction used (`dist_chart_chart_shift`), the sign (`shift_pos`), the bounds (`exists_shiftBounds`), with no derivative computed and the square's side not explicit (FS132-I3) — and its null sets, `ChartMeasure.unitPair_chart_ae`, by the partner point's motion on its unit circle, with no inverse function theorem (FS132-I4); M8 `StepLemma.step_lemma`, Lemma S along the planner's variant — a dyadic window, a base point of four density points (FS132-I3) — and (†), `Kill.no_double_change` (FS132-I4); M9 `Kill.step_kill` (FS132-I4). Three hypotheses of the skeleton were idle and are dropped: `X ≠ Y` in the ring form's reduction, `0 < κ'` in (†), measurability of the state in M9; two more in the step lemma's module (`u < w` in `exists_shiftMap`; measurability of the set in `volume_change_pairs_pos`). **Not kernel**: the statement on an open set containing the closed unit disc (M0's local reading of the release's two proofs stays [hand], one mind), and C132-M-EMPTY.
+
 **Side: arc-free (α).** Hypothesis (i) asks an outside label in almost every palette near all six orbit directions. It
 fails where the centre's own labels fill the ring near one of them: at every change point of the held fragments'
 four-colour vertices at least two of the four germs at ±60° lie on (Q) arcs (control `positives-escape`), so nothing held
@@ -248,6 +250,8 @@ release's.
 
 Rests on it: C132-DIAG (§ 10). With C132-M-EXCL it leaves, at a four-cycle centre, "the mixed rings and a diagonal ring
 that does not alternate" (item 9) — the mixed ring is where every held positive lives (item 12).
+
+**2026-10-07, FS132-L2 — [kernel] at the whole plane**: `HadwigerNelson.SixRing.no_alternating_pairs` (`Plane/SixRing/TwoPairs.lean`), the standard three axioms, from the ported `two_state_impossible` through `no_alternating_groups`; the release's theorem read at six, not a result of this milestone. Its reading on an open set stays [hand], one mind.
 
 ## 2. One side of a unit circle: the strips, the shadow, the witnesses
 

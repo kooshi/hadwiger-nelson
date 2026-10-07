@@ -68,6 +68,11 @@ ALLOW: dict[str, str] = {
     "declarations=14807 refutations-skipped=215 sites=1446": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log (14845, 1447); the old line stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
     "vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log (generic=1404); the old line stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
     "declarations=14807": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
+    "declarations=14845 refutations-skipped=215 sites=1447": "superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-vacuity-final.log (15292, 226, 1447); the old line stays in data/fs132/l1/gate/receipt-vacuity-final.log",
+    "declarations=14845": "superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-vacuity-final.log (15292, 226, 1447); the old line stays in data/fs132/l1/gate/receipt-vacuity-final.log",
+    "14845": "superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-vacuity-final.log (15292, 226, 1447); the old line stays in data/fs132/l1/gate/receipt-vacuity-final.log",
+    "refutations-skipped=215": "superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-vacuity-final.log (15292, 226, 1447); the old line stays in data/fs132/l1/gate/receipt-vacuity-final.log",
+    "fs132-wi2": "a branch name that left the front page when FS-132's first theorem landed (FS132-L2, 2026-10-07): the open-milestones sentence now names the landed theorems, and the branch stays in plans/FS132-close-inventory.md items 33-50",
     "sites=1446": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
     "generic=1403": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
     "14807": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
@@ -75,6 +80,8 @@ ALLOW: dict[str, str] = {
     "1403": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log",
     "6521": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-axioms-final.log (6533 clean); the old count stays in data/fs131/l8a/gate/receipt-axioms-final.log and in GATE_CHANGES",
     "6554": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-axioms-final.log (6,576 records); the old count stays in data/fs131/l8a/gate/receipt-axioms-final.log and in GATE_CHANGES",
+    "6533": "superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-axioms-final.log (6910 clean); the old count stays in data/fs132/l1/gate/receipt-axioms-final.log and in GATE_CHANGES",
+    "6576": "superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-axioms-final.log (6,953 records); the old count stays in data/fs132/l1/gate/receipt-axioms-final.log and in GATE_CHANGES",
     "8's": "'wave 8's first landing' in the audit's sentence, superseded by FS132-L1's landing; wave 8's landing stays in plans/FS131-L8A-landing.md",
     "six_le_chromaticNumber_plane_of_no_proper_five": "LEDGER row 33's pre-import sentence named this drafted bridge; replaced at FS132-L1's landing by the landed `Outside.OAI158.chromaticNumber_plane_six_or_seven`; the draft stays in `plans/EXT-OAI1-audit.md` stage 7",
     "2))).chromaticNumber": "the same pre-import sentence of LEDGER row 33 (its Lean spelling of χ(ℝ²)); the form stays in `plans/EXT-OAI1-audit.md` stage 7 and in `Proofs/HadwigerNelson/Outside/OAI158.lean`",
@@ -732,6 +739,7 @@ GATE_CHANGES: dict[tuple, str] = {
     (("6148", "5"), ("6304", "5")): "FS-131, wave 10's second landing (FS131-L10B; copy data/fs131/l10b/receipt-axioms-final.log, gated commit f0cc3018): 6,334 records, 6,304 clean, 17 axiom-free, 8 imported, 5 purchases",
     (("6304", "5"), ("6521", "5")): "FS-131, wave 8's first landing (FS131-L8A; copy data/fs131/l8a/gate/receipt-axioms-final.log, gated commit 126bff4d): 6,554 records, 6,521 clean, 20 axiom-free, 8 imported, 5 purchases",
     (("6521", "5"), ("6533", "5")): "FS-132, the landing of the import of [OAIMath2026] family 158 (FS132-L1; copy data/fs132/l1/gate/receipt-axioms-final.log, gated commit 5df686f0): 6,576 records, 6,533 clean, 20 axiom-free, 18 imported, 5 purchases",
+    (("6533", "5"), ("6910", "5")): "FS-132, the landing of its first theorem — the first night's exclusion at the whole plane over the release's palette lemmas, ported (FS132-L2; copy data/fs132/l2/gate/receipt-axioms-final.log, gated commit b46a9d57): 6,953 records, 6,910 clean, 20 axiom-free, 18 imported, 5 purchases",
 }
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")
