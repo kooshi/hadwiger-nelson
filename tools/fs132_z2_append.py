@@ -41,7 +41,8 @@ pending, unless marked):*
   contained in `{{a, b}}`. So the unit circle about `y_0` runs along an interface between the two ring labels at both
   neighbours, oppositely oriented. **Not claimed by it**: that those two palettes contain both labels (each is present on one
   side of the arc; "not written out"); anything on the rest of the unit circle about `y_0`; that `y_0` is a cyclic centre. With
-  three consecutive outer-pure ring points `y_0` has four labels present (C132-LENS-FOUR). **No model is known** — no weak
+  three consecutive outer-pure ring points `y_0` has four labels present (C132-LENS-FOUR) — and only then is `y_0` known to
+  carry both side labels `a` and `b`, the map class's property (Q); C132-PLACED-RING alone does not give it. **No model is known** — no weak
   six-colouring with a turning seed is held — so "derived" means from the seed's data, never that a seed exists.
 - **A pruning rule on one orbit: C132-M-ORBIT** ([hand], one mind, with a line-by-line checking reading of its last steps by a
   second mind; the kernel lane's first module). At a point where four labels meet in a witnessed cycle, no ring direction `ψ`

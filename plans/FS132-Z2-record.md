@@ -583,3 +583,19 @@ no card. For the kernel lane: nothing new from this job — C132-CORES-SQUARE's 
 are named in FS-132's stub as open inside its Lean phase.
 
 ## Stage 5 — SAVED
+
+## Stage 6 — SAVED: one clause sharpened, and the report
+
+Written while composing the report, on re-reading the night's phrase for C132-PLACED-RING — "the placed point is the centre of
+two unit arcs carrying both their side labels" (item 29) — against the entry's *not claimed* line: the phrase is true of the
+placed point of C132-LENS-FOUR (three consecutive outer-pure ring points, where `a` and `b` are present at `y_0`), and
+C132-PLACED-RING's own hypotheses (the two neighbours outer-pure) give the two arcs but not that their centre carries both
+labels. The entries say this; the summary's phrase reads larger without its "placed". FS-124's bearing line now says it in a
+clause ("and only then is `y_0` known to carry both side labels … C132-PLACED-RING alone does not give it"), inserted in
+`plans/STUB-q-ring.md` and in `tools/fs132_z2_append.py` together; `--check` exit 0 after it. Row 159's draft already keeps the
+two entries apart and is unchanged. Not a contradiction between entries, and not sent ahead of the report: no draft of the
+front page says more than the entries.
+
+The report is `data/fs132/reports/FS132-Z2.md`.
+
+## Stage 6 — SAVED
