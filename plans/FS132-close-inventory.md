@@ -261,3 +261,33 @@ inventory, items 607–629 (an outside proof of six became this project's litera
    generator `data/fs131/briefs/scripts/mk-fs132-p2.py`): the road to seven as one table in the measurable vocabulary; the
    stall re-posed with a first claim; the re-rank; and what to formalize, ranked for Kooshi's.
 
+9. **FS132-E3, second verdict: the existence reading stalls at its first input, not where the asking lane expected; one more
+   exclusion derived on the way; my question about the step lemma answered no** (source: its message to "main", 2026-10-07;
+   record `plans/FS132-E3-derivation.md` Stage 4; commits `33686856`, and the report `5c52ede0`). **C132-RUN-CV: stalls at
+   FS112-N3-DENSE3** — the map argument's modification and its two companions "have nothing to restate": they exist to bring
+   every vertex of a map to one of three kinds, and the nerve does that with no modification (a repeated-colour vertex is
+   filled inside a tree; a stuck vertex is not a cyclic centre); what is left is the input that every cubic vertex has a
+   fourth colour within reach or a repeated colour, whose second alternative reads the cyclic order of tiles — and without it
+   the restated input is the claim itself. **So C132-M-CV holds exactly when the measurable side can refute "every extracted
+   centre is a triangle"**; the honeycomb at seven is the model where the restated input is false. **Its debt, stated**: it
+   did not read that input's proof (row 134's base) or the wave-7 planner's record; it names the input and its kind.
+   **Its hand-over**: put to row 134's base the question it put to this project's exclusion — does that chain at a cubic
+   three-colour vertex read arcs and degree three, or only a triangle centre's three exclusion sets and its palettes?
+   **C132-DIAG-WIDE** ([hand], one mind; wider than posed): no centre of a weak measurable six-colouring has a ring
+   alternating under the 60° rotation between two disjoint pairs of labels — the release's two-state lemma read with two
+   labels outside; with C132-M-EXCL it leaves at a four-cycle centre the mixed rings and a diagonal ring that does not
+   alternate. **My question** (whether its step lemma's mechanism has a form at a triangle centre): **no, by the same
+   mechanism** — the transfer and the straddle shift carry over; the region where one label is forced survives; the same
+   forced label near two ring points 60° apart does not; what there is, unproved, is a four-germ relation and a rigidity of
+   the third outside label — "a job of its own". **Not reached**: C132-RADIUS; the REG-J′ side question. **My receipt**:
+   both commits are on `main`; its gate run by me — exit 0, three controls firing; the new entry's statement and `uses
+   only:` read. Not checked by me: the argument for C132-DIAG-WIDE; the route table of Stage 4. **Rulings.** (a) **The claim
+   list gains the verdict and C132-DIAG-WIDE by a dated line.** (b) **Relayed at once to the asking lane's running job**, in
+   the deriver's words with the address (FS132-P2). (c) **Card 1 is answered, and announced to Kooshi as
+   derived, one mind** (rule 2 (i): both readings are in saved stages with their steps named, gate green): the exclusion
+   holds for measurable colourings with no map; the existence argument does not carry over, and what stands in its place is
+   the one statement the second deriver mapped. (d) **No new deriver until the asking lane's card is saved** — the existence
+   side now has three candidate next questions from three minds (the ring's tameness on a normal form; the classical
+   base's chain re-read as the exclusion's was; the third-label rigidity), and choosing among them is the asking lane's
+   job tonight.
+

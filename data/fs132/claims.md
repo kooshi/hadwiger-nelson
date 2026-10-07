@@ -203,4 +203,22 @@ the death of every such cycle — which are what the answer is made of and are n
   apart — at its first clause, "the three-label form of the release's two-label strip rigidity". *Not claimed*: each entry's
   own line; in particular C132-RING-TAME is said by its own entry to be possible only on a normal form (local slack along
   the ring breaks it) and not to be enough for C132-LONG by itself; C132-M-CV stalls with C132-LONG.
+- **2026-10-07 (after FS132-E3's Stage 4, commit `33686856`; FS-132 inventory item 9): the second reading has its verdict, and
+  one posed statement is derived at a wider form that enters the list** — each read whole at its address:
+
+> derivation: C132-DIAG-WIDE
+> — source: plans/FS132-E3-derivation.md Stage 4
+
+>   statement: let U be an open set of the plane containing the closed unit disc about a point p, c a weak measurable six-colouring of U, and D, D′ two disjoint pairs of labels; then there is no measurable map w from the unit circle to {D, D′} with w(e) ⊂ P_p(e) and w(Re) ≠ w(e) for almost every unit vector e, R the rotation by π/3
+> — source: plans/FS132-E3-derivation.md Stage 4
+
+> derivation: C132-RUN-CV
+> — source: plans/FS132-E3-derivation.md Stage 4
+
+  **C132-RUN-CV: stalls at FS112-N3-DENSE3**, the route's first input — its alternative "or a repeated colour" reads the cyclic
+  order of tiles at a point, and without it the restated input is C132-M-CV itself; the route's other inputs (the terminal
+  modification and what serves it) are dissolved, not stalled. C132-M-CV stays open, and stalls by the other route at
+  C132-RING-TAME (the dated line above). **C132-DIAG-WIDE** ([hand], one mind): no centre of a weak measurable six-colouring
+  has a ring alternating under the 60° rotation between two disjoint pairs of labels — C132-DIAG as posed is its instance at a
+  four-cycle's two diagonals. *Not claimed*: each entry's own line. **Not reached**: C132-RADIUS.
 
