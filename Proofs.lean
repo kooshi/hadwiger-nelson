@@ -282,6 +282,9 @@ import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.Topology.SpernerGrid
 import Proofs.HadwigerNelson.Topology.LebesgueCovering
 import Proofs.HadwigerNelson.Outside.OAI158
+import Proofs.HadwigerNelson.Plane.WeakColouringOn
+import Proofs.HadwigerNelson.Plane.Radius
+import Proofs.HadwigerNelson.Plane.RadiusOutside
 
 /-!
 # Proofs
