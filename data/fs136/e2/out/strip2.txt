@@ -1,0 +1,21 @@
+strip2: seed=6 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=1 closed=yes | forced=0 at 0 points | emptied=1 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: free=4 outside-U empty=1 outside-U forced=2 outside-U free=1 | agree-with-object=0 of 0 (disagree 0, unread 0) | class-samples=12 mismatches=0
+U = the object as its float reader reads it (two small circles about the point); fault = None
+round 1: points read 2; forced corners added 0; emptied 1; conflicts 0; tower height 2
+
+THE SEED
+  (-0.25000,0.96825): M:[90.0,194.5+](T-1) B:[194.5+,345.5-](U-1) R:[345.5-,90.0](T0)
+  (0.50000,0.86603): O:[30.0-,150.0+](T1) P:[150.0+,270.0](U0) G:[270.0,30.0-](U1)
+
+THE FORCED CORNERS (the closure less the seed)
+
+THE TABLE AT EVERY POINT ONE UNIT FROM TWO OR MORE POINTS OF THE CLOSURE (last round)
+  (0.25000,1.83427) OUTSIDE U members (-0.25000,0.96825):out (0.50000,0.86603):out corner [14.5-,150.0+] left=EMPTY empty
+  (0.25000,1.83427) OUTSIDE U members (-0.25000,0.96825):in (0.50000,0.86603):out corner [150.0+,194.5+] left=R forced
+  (0.25000,1.83427) OUTSIDE U members (-0.25000,0.96825):in (0.50000,0.86603):in corner [194.5+,330.0-] left=OR free
+  (0.25000,1.83427) OUTSIDE U members (-0.25000,0.96825):out (0.50000,0.86603):in corner [330.0-,14.5-] left=O forced
+  (0.00000,0.00000) in U members (-0.25000,0.96825):in (0.50000,0.86603):in corner [14.5+,150.0-] left=BP free
+  (0.00000,0.00000) in U members (-0.25000,0.96825):in (0.50000,0.86603):out corner [150.0-,194.5-] left=BO free
+  (0.00000,0.00000) in U members (-0.25000,0.96825):out (0.50000,0.86603):out corner [194.5-,330.0+] left=MO free
+  (0.00000,0.00000) in U members (-0.25000,0.96825):out (0.50000,0.86603):in corner [330.0+,14.5+] left=MP free
+
+ALONG THE UNIT CIRCLES OF POINTS CARRYING AT LEAST k - 1 LABELS

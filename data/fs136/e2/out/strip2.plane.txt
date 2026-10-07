@@ -1,0 +1,40 @@
+strip2: seed=6 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=2 closed=yes | forced=2 at 1 points | emptied=1 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: empty=1 forced=2 free=21 | agree-with-object=0 of 2 (disagree 0, unread 2) | class-samples=32 mismatches=0
+U = the plane (the object's edge ignored: the seed alone); fault = None
+round 1: points read 2; forced corners added 2; emptied 1; conflicts 0; tower height 2
+round 2: points read 6; forced corners added 0; emptied 1; conflicts 0; tower height 2
+
+THE SEED
+  (-0.25000,0.96825): M:[90.0,194.5+](T-1) B:[194.5+,345.5-](U-1) R:[345.5-,90.0](T0)
+  (0.50000,0.86603): O:[30.0-,150.0+](T1) P:[150.0+,270.0](U0) G:[270.0,30.0-](U1)
+
+THE FORCED CORNERS (the closure less the seed)
+  (0.25000,1.83427) label R corner [150.0+,194.5+] (forced, round 1)
+  (0.25000,1.83427) label O corner [330.0-,14.5-] (forced, round 1)
+
+THE TABLE AT EVERY POINT ONE UNIT FROM TWO OR MORE POINTS OF THE CLOSURE (last round)
+  (0.25000,1.83427) in U members (-0.25000,0.96825):out (0.50000,0.86603):out corner [14.5-,150.0+] left=EMPTY empty
+  (0.25000,1.83427) in U members (-0.25000,0.96825):in (0.50000,0.86603):out corner [150.0+,194.5+] left=R forced:held
+  (0.25000,1.83427) in U members (-0.25000,0.96825):in (0.50000,0.86603):in corner [194.5+,330.0-] left=OR free
+  (0.25000,1.83427) in U members (-0.25000,0.96825):out (0.50000,0.86603):in corner [330.0-,14.5-] left=O forced:held
+  (0.00000,0.00000) in U members (-0.25000,0.96825):in (0.50000,0.86603):in corner [14.5+,150.0-] left=BP free
+  (0.00000,0.00000) in U members (-0.25000,0.96825):in (0.50000,0.86603):out corner [150.0-,194.5-] left=BO free
+  (0.00000,0.00000) in U members (-0.25000,0.96825):out (0.50000,0.86603):out corner [194.5-,330.0+] left=MO free
+  (0.00000,0.00000) in U members (-0.25000,0.96825):out (0.50000,0.86603):in corner [330.0+,14.5+] left=MP free
+  (-0.75000,1.83427) in U members (-0.25000,0.96825):out (0.25000,1.83427):in corner [30.0-,90.0-] left=GP free
+  (-0.75000,1.83427) in U members (-0.25000,0.96825):out (0.25000,1.83427):out corner [90.0-,210.0+] left=GOP free
+  (-0.75000,1.83427) in U members (-0.25000,0.96825):in (0.25000,1.83427):out corner [210.0+,270.0+] left=GMOP free
+  (-0.75000,1.83427) in U members (-0.25000,0.96825):in (0.25000,1.83427):in corner [270.0+,30.0-] left=GMP free
+  (0.75000,0.96825) in U members (-0.25000,0.96825):out (0.25000,1.83427):in corner [30.0+,90.0+] left=GMOP free
+  (0.75000,0.96825) in U members (-0.25000,0.96825):in (0.25000,1.83427):in corner [90.0+,210.0-] left=GOP free
+  (0.75000,0.96825) in U members (-0.25000,0.96825):in (0.25000,1.83427):out corner [210.0-,270.0-] left=GP free
+  (0.75000,0.96825) in U members (-0.25000,0.96825):out (0.25000,1.83427):out corner [270.0-,30.0+] left=GMP free
+  (-0.46353,1.13364) in U members (0.50000,0.86603):out (0.25000,1.83427):in corner [74.5-,134.5-] left=BGMR free
+  (-0.46353,1.13364) in U members (0.50000,0.86603):out (0.25000,1.83427):out corner [134.5-,254.5+] left=BGM free
+  (-0.46353,1.13364) in U members (0.50000,0.86603):in (0.25000,1.83427):out corner [254.5+,314.5+] left=BM free
+  (-0.46353,1.13364) in U members (0.50000,0.86603):in (0.25000,1.83427):in corner [314.5+,74.5-] left=BMR free
+  (1.21353,1.56665) in U members (0.50000,0.86603):out (0.25000,1.83427):in corner [74.5+,134.5+] left=BMP free
+  (1.21353,1.56665) in U members (0.50000,0.86603):in (0.25000,1.83427):in corner [134.5+,254.5-] left=BM free
+  (1.21353,1.56665) in U members (0.50000,0.86603):in (0.25000,1.83427):out corner [254.5-,314.5-] left=BMR free
+  (1.21353,1.56665) in U members (0.50000,0.86603):out (0.25000,1.83427):out corner [314.5-,74.5+] left=BMPR free
+
+ALONG THE UNIT CIRCLES OF POINTS CARRYING AT LEAST k - 1 LABELS

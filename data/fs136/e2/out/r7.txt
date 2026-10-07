@@ -1,0 +1,67 @@
+r7: seed=12 corners at 2 points (full neighbourhoods: True) labels=7 | rounds=2 closed=yes | forced=3 at 2 points | emptied=0 conflicts=0 | arc-scans=2 arc-forced=0 | corners read: forced=3 free=21 seed-point free=12 | agree-with-object=3 of 3 (disagree 0, unread 0) | class-samples=156 mismatches=0
+U = the plane; fault = None
+round 1: points read 2; forced corners added 3; emptied 0; conflicts 0; tower height 1
+round 2: points read 8; forced corners added 0; emptied 0; conflicts 0; tower height 1
+
+THE SEED
+  (0.00000,0.00000): 6:[90.0-,90.0+](d-1,0) 2:[90.0+,210.0-](u-1,0) 4:[210.0-,210.0+](d-1,-1) 1:[210.0+,330.0-](u0,-1) 5:[330.0-,330.0+](d0,-1) 0:[330.0+,90.0-](u0,0)
+  (1.00000,0.00000): 4:[90.0-,90.0+](d0,0) 0:[90.0+,210.0-](u0,0) 5:[210.0-,210.0+](d0,-1) 3:[210.0+,330.0-](u1,-1) 6:[330.0-,330.0+](d1,-1) 2:[330.0+,90.0-](u1,0)
+
+THE FORCED CORNERS (the closure less the seed)
+  (0.50000,0.86603) label 0 corner [210.0+,330.0-] (forced, round 1)
+  (0.50000,-0.86603) label 1 corner [150.0-,210.0-] (forced, round 1)
+  (0.50000,-0.86603) label 3 corner [330.0+,30.0+] (forced, round 1)
+
+THE TABLE AT EVERY POINT ONE UNIT FROM TWO OR MORE POINTS OF THE CLOSURE (last round)
+  (0.00000,0.00000) in U SEED POINT members (1.00000,0.00000):in (0.50000,0.86603):in (0.50000,-0.86603):out corner [30.0-,90.0-] left=05 free
+  (0.00000,0.00000) in U SEED POINT members (1.00000,0.00000):out (0.50000,0.86603):in (0.50000,-0.86603):out corner [90.0-,150.0-] left=246 free
+  (0.00000,0.00000) in U SEED POINT members (1.00000,0.00000):out (0.50000,0.86603):out (0.50000,-0.86603):out corner [150.0-,210.0+] left=246 free
+  (0.00000,0.00000) in U SEED POINT members (1.00000,0.00000):out (0.50000,0.86603):out (0.50000,-0.86603):in corner [210.0+,270.0+] left=1246 free
+  (0.00000,0.00000) in U SEED POINT members (1.00000,0.00000):in (0.50000,0.86603):out (0.50000,-0.86603):in corner [270.0+,330.0+] left=15 free
+  (0.00000,0.00000) in U SEED POINT members (1.00000,0.00000):in (0.50000,0.86603):in (0.50000,-0.86603):in corner [330.0+,30.0-] left=015 free
+  (1.00000,0.00000) in U SEED POINT members (0.00000,0.00000):out (0.50000,0.86603):in (0.50000,-0.86603):out corner [30.0+,90.0+] left=246 free
+  (1.00000,0.00000) in U SEED POINT members (0.00000,0.00000):in (0.50000,0.86603):in (0.50000,-0.86603):out corner [90.0+,150.0+] left=05 free
+  (1.00000,0.00000) in U SEED POINT members (0.00000,0.00000):in (0.50000,0.86603):in (0.50000,-0.86603):in corner [150.0+,210.0-] left=035 free
+  (1.00000,0.00000) in U SEED POINT members (0.00000,0.00000):in (0.50000,0.86603):out (0.50000,-0.86603):in corner [210.0-,270.0-] left=35 free
+  (1.00000,0.00000) in U SEED POINT members (0.00000,0.00000):out (0.50000,0.86603):out (0.50000,-0.86603):in corner [270.0-,330.0-] left=2346 free
+  (1.00000,0.00000) in U SEED POINT members (0.00000,0.00000):out (0.50000,0.86603):out (0.50000,-0.86603):out corner [330.0-,30.0+] left=246 free
+  (0.50000,0.86603) in U members (0.00000,0.00000):out (1.00000,0.00000):out corner [30.0-,150.0+] left=135 free
+  (0.50000,0.86603) in U members (0.00000,0.00000):in (1.00000,0.00000):out corner [150.0+,210.0+] left=36 free
+  (0.50000,0.86603) in U members (0.00000,0.00000):in (1.00000,0.00000):in corner [210.0+,330.0-] left=0 forced:held
+  (0.50000,0.86603) in U members (0.00000,0.00000):out (1.00000,0.00000):in corner [330.0-,30.0-] left=14 free
+  (0.50000,-0.86603) in U members (0.00000,0.00000):in (1.00000,0.00000):in corner [30.0+,150.0-] left=135 free
+  (0.50000,-0.86603) in U members (0.00000,0.00000):in (1.00000,0.00000):out corner [150.0-,210.0-] left=1 forced:held
+  (0.50000,-0.86603) in U members (0.00000,0.00000):out (1.00000,0.00000):out corner [210.0-,330.0+] left=246 free
+  (0.50000,-0.86603) in U members (0.00000,0.00000):out (1.00000,0.00000):in corner [330.0+,30.0+] left=3 forced:held
+  (-0.50000,0.86603) in U members (0.00000,0.00000):out (0.50000,0.86603):in corner [30.0-,90.0-] left=1345 free
+  (-0.50000,0.86603) in U members (0.00000,0.00000):out (0.50000,0.86603):out corner [90.0-,210.0+] left=1345 free
+  (-0.50000,0.86603) in U members (0.00000,0.00000):in (0.50000,0.86603):out corner [210.0+,270.0+] left=236 free
+  (-0.50000,0.86603) in U members (0.00000,0.00000):in (0.50000,0.86603):in corner [270.0+,30.0-] left=236 free
+  (-0.50000,-0.86603) in U members (0.00000,0.00000):in (0.50000,-0.86603):out corner [90.0-,150.0-] left=34 free
+  (-0.50000,-0.86603) in U members (0.00000,0.00000):out (0.50000,-0.86603):out corner [150.0-,270.0+] left=0356 free
+  (-0.50000,-0.86603) in U members (0.00000,0.00000):out (0.50000,-0.86603):in corner [270.0+,330.0+] left=056 free
+  (-0.50000,-0.86603) in U members (0.00000,0.00000):in (0.50000,-0.86603):in corner [330.0+,90.0-] left=14 free
+  (1.50000,0.86603) in U members (1.00000,0.00000):out (0.50000,0.86603):in corner [90.0+,150.0+] left=1356 free
+  (1.50000,0.86603) in U members (1.00000,0.00000):in (0.50000,0.86603):in corner [150.0+,270.0-] left=124 free
+  (1.50000,0.86603) in U members (1.00000,0.00000):in (0.50000,0.86603):out corner [270.0-,330.0-] left=124 free
+  (1.50000,0.86603) in U members (1.00000,0.00000):out (0.50000,0.86603):out corner [330.0-,90.0+] left=1356 free
+  (1.50000,-0.86603) in U members (1.00000,0.00000):in (0.50000,-0.86603):out corner [30.0+,90.0+] left=16 free
+  (1.50000,-0.86603) in U members (1.00000,0.00000):in (0.50000,-0.86603):in corner [90.0+,210.0-] left=36 free
+  (1.50000,-0.86603) in U members (1.00000,0.00000):out (0.50000,-0.86603):in corner [210.0-,270.0-] left=045 free
+  (1.50000,-0.86603) in U members (1.00000,0.00000):out (0.50000,-0.86603):out corner [270.0-,30.0+] left=0145 free
+
+ALONG THE UNIT CIRCLES OF POINTS CARRYING AT LEAST k - 1 LABELS
+  about (0.00000,0.00000) arc at (0.60000,0.80000): in:left=0356 out:left=34
+  about (0.00000,0.00000) arc at (-0.39282,0.91962): out:left=1345 in:left=36
+  about (0.00000,0.00000) arc at (-0.99282,0.11962): out:left=35 in:left=2346
+  about (0.00000,0.00000) arc at (-0.60000,-0.80000): out:left=0356 in:left=34
+  about (0.00000,0.00000) arc at (0.39282,-0.91962): in:left=1345 out:left=36
+  about (0.00000,0.00000) arc at (0.99282,-0.11962): in:left=35 out:left=2346
+  about (0.00000,0.00000) point at (-1.00000,0.00000): out:left=0356 in:left=234
+  about (1.00000,0.00000) arc at (1.60000,0.80000): in:left=1246 out:left=15
+  about (1.00000,0.00000) arc at (0.60718,0.91962): out:left=1356 in:left=14
+  about (1.00000,0.00000) arc at (0.00718,0.11962): out:left=16 in:left=0145
+  about (1.00000,0.00000) arc at (0.40000,-0.80000): out:left=1246 in:left=15
+  about (1.00000,0.00000) arc at (1.39282,-0.91962): in:left=1356 out:left=14
+  about (1.00000,0.00000) arc at (1.99282,-0.11962): in:left=16 out:left=0145
+  about (1.00000,0.00000) point at (2.00000,0.00000): in:left=126 out:left=0145

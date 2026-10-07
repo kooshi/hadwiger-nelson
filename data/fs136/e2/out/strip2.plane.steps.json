@@ -1,0 +1,152 @@
+[
+ {
+  "round": 1,
+  "point": [
+   0.25,
+   1.8342712403362929
+  ],
+  "corner": "[150.0+,194.5+]",
+  "label": "R",
+  "sides": {
+   "(-0.25000,0.96825)": "in",
+   "(0.50000,0.86603)": "out"
+  },
+  "bars": {
+   "M": [
+    {
+     "member": [
+      -0.25,
+      0.9682458365518543
+     ],
+     "corner_of": "T-1",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "B": [
+    {
+     "member": [
+      -0.25,
+      0.9682458365518543
+     ],
+     "corner_of": "U-1",
+     "label": "B",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "O": [
+    {
+     "member": [
+      0.5,
+      0.8660254037844386
+     ],
+     "corner_of": "T1",
+     "label": "O",
+     "klass": "inner",
+     "needed": "outer"
+    }
+   ],
+   "P": [
+    {
+     "member": [
+      0.5,
+      0.8660254037844386
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ],
+   "G": [
+    {
+     "member": [
+      0.5,
+      0.8660254037844386
+     ],
+     "corner_of": "U1",
+     "label": "G",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ]
+  }
+ },
+ {
+  "round": 1,
+  "point": [
+   0.25,
+   1.8342712403362929
+  ],
+  "corner": "[330.0-,14.5-]",
+  "label": "O",
+  "sides": {
+   "(-0.25000,0.96825)": "out",
+   "(0.50000,0.86603)": "in"
+  },
+  "bars": {
+   "M": [
+    {
+     "member": [
+      -0.25,
+      0.9682458365518543
+     ],
+     "corner_of": "T-1",
+     "label": "M",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ],
+   "B": [
+    {
+     "member": [
+      -0.25,
+      0.9682458365518543
+     ],
+     "corner_of": "U-1",
+     "label": "B",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ],
+   "R": [
+    {
+     "member": [
+      -0.25,
+      0.9682458365518543
+     ],
+     "corner_of": "T0",
+     "label": "R",
+     "klass": "inner",
+     "needed": "outer"
+    }
+   ],
+   "P": [
+    {
+     "member": [
+      0.5,
+      0.8660254037844386
+     ],
+     "corner_of": "U0",
+     "label": "P",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "G": [
+    {
+     "member": [
+      0.5,
+      0.8660254037844386
+     ],
+     "corner_of": "U1",
+     "label": "G",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ]
+  }
+ }
+]

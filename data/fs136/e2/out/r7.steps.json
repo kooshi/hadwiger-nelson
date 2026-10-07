@@ -1,0 +1,303 @@
+[
+ {
+  "round": 1,
+  "point": [
+   0.5,
+   0.8660254037844386
+  ],
+  "corner": "[210.0+,330.0-]",
+  "label": "0",
+  "sides": {
+   "(0.00000,0.00000)": "in",
+   "(1.00000,0.00000)": "in"
+  },
+  "bars": {
+   "2": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "u-1,0",
+     "label": "2",
+     "klass": "crossing",
+     "needed": "inner"
+    },
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "u1,0",
+     "label": "2",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "4": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "d-1,-1",
+     "label": "4",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "1": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "u0,-1",
+     "label": "1",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "5": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "d0,-1",
+     "label": "5",
+     "klass": "outer",
+     "needed": "inner"
+    },
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "d0,-1",
+     "label": "5",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "3": [
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "u1,-1",
+     "label": "3",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "6": [
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "d1,-1",
+     "label": "6",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ]
+  }
+ },
+ {
+  "round": 1,
+  "point": [
+   0.5,
+   -0.8660254037844386
+  ],
+  "corner": "[150.0-,210.0-]",
+  "label": "1",
+  "sides": {
+   "(0.00000,0.00000)": "in",
+   "(1.00000,0.00000)": "out"
+  },
+  "bars": {
+   "6": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "d-1,0",
+     "label": "6",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "2": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "u-1,0",
+     "label": "2",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "4": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "d-1,-1",
+     "label": "4",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "0": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "u0,0",
+     "label": "0",
+     "klass": "crossing",
+     "needed": "inner"
+    },
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "u0,0",
+     "label": "0",
+     "klass": "crossing",
+     "needed": "outer"
+    }
+   ],
+   "5": [
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "d0,-1",
+     "label": "5",
+     "klass": "inner",
+     "needed": "outer"
+    }
+   ],
+   "3": [
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "u1,-1",
+     "label": "3",
+     "klass": "inner",
+     "needed": "outer"
+    }
+   ]
+  }
+ },
+ {
+  "round": 1,
+  "point": [
+   0.5,
+   -0.8660254037844386
+  ],
+  "corner": "[330.0+,30.0+]",
+  "label": "3",
+  "sides": {
+   "(0.00000,0.00000)": "out",
+   "(1.00000,0.00000)": "in"
+  },
+  "bars": {
+   "1": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "u0,-1",
+     "label": "1",
+     "klass": "inner",
+     "needed": "outer"
+    }
+   ],
+   "5": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "d0,-1",
+     "label": "5",
+     "klass": "inner",
+     "needed": "outer"
+    }
+   ],
+   "0": [
+    {
+     "member": [
+      0.0,
+      0.0
+     ],
+     "corner_of": "u0,0",
+     "label": "0",
+     "klass": "crossing",
+     "needed": "outer"
+    },
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "u0,0",
+     "label": "0",
+     "klass": "crossing",
+     "needed": "inner"
+    }
+   ],
+   "4": [
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "d0,0",
+     "label": "4",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "6": [
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "d1,-1",
+     "label": "6",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ],
+   "2": [
+    {
+     "member": [
+      1.0,
+      0.0
+     ],
+     "corner_of": "u1,0",
+     "label": "2",
+     "klass": "outer",
+     "needed": "inner"
+    }
+   ]
+  }
+ }
+]
