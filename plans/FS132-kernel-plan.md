@@ -405,3 +405,197 @@ At **stage 4**: (1) read `FS132-E1` Stage 3 S5–S7 against 2.3's route for C132
 C132-INDEX and C132-RING-WIND (their record is not located by this job) against `sixStep`; (3) read `FS132-E5` Stage 2
 (C132-WIT) against 3.4; (4) state M1–M9 as `sorry` leaves in `Plane/SixRing/Orbit.lean` in the chart `Z(α, d)` — only
 `no_outside_orbit_points` carries them now; (5) drop `outer_strip_trace`, `inner_strip_trace` from the OUTSIDE placeholders.
+
+## Stage 4 — SAVED (FS132-K2): the successor's readback
+
+*FS132-K2 (de Bruijn, the planner's successor; brief `data/fs132/briefs/FS132-K2-kernel-plan.md` on `main`). Nothing is blind.
+"Theorems this phase proved" (the heading at the top) still reads none in the kernel on a `sorry`-free cone: what stage 5
+proves is assembly from `sorry` leaves, listed there.*
+
+**Quotations.** By script, each `>`-quoted line of the brief against the file its source line names, whitespace-normalized:
+12 of 12 MATCH (Kooshi's three; the two claims; the predecessor's four; inventory items 30, 31, 32). No mismatch.
+
+**Read whole**: the brief; `plans/STANDING-RULES.md`; `LEAN.md`; `RUNNING.md` § Building and § Make the gate fail (to line 260);
+`data/fs132/claims-K1.md` with its dated line; this record's Stages 1–3; `plans/FS132-E3-derivation.md` Stage 3 from its
+entries through "Prior art, this job" (the nine steps M0–M9, the ring form, the fixed form, the route table, the two checks);
+`plans/FS132-derivation.md` to the end of its § 1; inventory items 30–32 (to the end of 31's fourth ruling); the skeleton's
+`Orbit.lean` and `Confine.lean` whole, the import module's and the ported module's declaration lists, the definitions of
+`palette`, `liftPalette`, `RealState`, `angularSum`, `Straddle`, `spatialSupport`; the sibling brief FS132-I2. **Read in
+part**: the release's `CircleMaps.lean` and `CircleTransport.lean` (declaration lists; `circleSum`, `angleChart`,
+`circleSum_quasiMeasurePreserving`, `angularSum_quasiMeasurePreserving`, `circleSum_local_antilipschitz` whole), the four
+statements the brief names in their files. **Not read at this stage**: `Winding.lean`, `CyclicCentre.lean` (stage 6), the
+derivation file's §§ 2–12 (stages 6–7).
+
+**The branch as given**: `./scripts/build.sh` under the slot — exit 0, nothing to build, three modules with `sorry` warnings
+(`data/fs132/k2/probe/build-asgiven.out`).
+
+**What the readback changed in the plan** (each is the planner's to decide; the hand argument is not changed):
+
+1. **Fourteen leaves became forty-nine, and the top theorem is proved from them.** K1's table (§ 3.3) names steps; a step
+   is several statements once typed. The assembly `no_outside_orbit_points` elaborates from the leaves (stage 5).
+2. **The analytic core is stated with no palette in it** (`chart_step_false`): a weak colouring, a measurable set of
+   angles, and two almost-everywhere statements in the chart. M7–M9 then need nothing ported.
+3. **Tips are stated for any number of labels and any map `a` from `Fin 4`**; six and injectivity are spent in one finite
+   lemma of the assembly (`exists_cycle_label`). The derivation says as much in prose ("M1, (⋆), M4, M5's first sentence,
+   M6's geometry, M7 and Lemma S hold at every number of labels"); the leaves now say it in their binders.
+4. **Lemma S is proved along a route that differs from the derivation's in two places** (stage 5, StepLemma): a dyadic
+   window in place of "the largest radius with `m ≥ 3/4`", and a base point of four density points with a
+   translation estimate in place of Fubini over a neighbourhood of `(u_0, w_0)`. Same lemma, same constants' shape;
+   no change of variables in three dimensions is needed anywhere in the module.
+5. **Null sets cross the chart in one direction only** (preimages), which is the release's `circleSum_quasiMeasurePreserving`;
+   the derivation's "local diffeomorphism … null sets and sets of positive measure correspond" is used nowhere in its
+   stronger direction.
+6. **`ε` is the explicit `shift`**, and the bound `ε ≤ min(d, d')/16` needs no second-order expansion: `ε` vanishes on both
+   axes and is `1/32`-Lipschitz in each variable on the closed square. Positivity is the library's own
+   `Plane.twoCirc_identity` (FS129-SR1-TWOCIRC; K1's "exact identity" § 3.3 is that theorem).
+
+## Stage 5 — SAVED (FS132-K2): the exclusion's leaves, stated; the four-point form proved from them
+
+**Built**: `./scripts/build.sh` under the slot (`--mem 40 --cpus 8`, `MEMMAX=40G BATCH=4`) — **exit 0**, 13 modules rebuilt,
+warnings only `declaration uses sorry` (`data/fs132/k2/probe/build-leaves.out`; 72 in all: 49 leaves of the exclusion, 3
+placeholders, 1 leaf of the two-pair ring, and the 16 + 3 of `Winding` and `CyclicCentre`, untouched).
+`tools/check_architecture.py`: PASS. Every leaf as the kernel holds it: `data/fs132/k2/probe/Sigs.out` (`#check @…` of each,
+407 lines; `#print axioms no_outside_orbit_points` there reads the standard three and `sorryAx`, as it must). Not run: the
+audits of the gate (a skeleton is not a landing).
+
+**Whole plane.** Every statement is for a colouring of `ℂ`; each module's header and each claim-carrying docstring says so.
+The form for an open set containing the closed unit disc is a later statement (§ 3.6).
+
+### 5.1 The modules, and who can work without sharing a file
+
+| module (`Plane/SixRing/…`) | holds | `sorry` | waits on the port? | an implementer for |
+|---|---|---|---|---|
+| `Basic` | definitions, models, drift checks | 0 | no | nobody: settled |
+| `Placeholders` | the release's three statements, verbatim; `mem_spatialSupport_ae` proved | 3 | **is** the port's stand-in | nobody: deleted at the join |
+| `Chart` | plane geometry of `chart`, `hub` | 11 | no | A (geometry) |
+| `Tips` | M4, M5, M6, the count of six | 7 | no (imports `Chart`) | A |
+| `Shift` | M7: the shift's calculus; `exists_shiftBounds` proved | 7 | no | B (calculus) |
+| `StepLemma` | M8's Lemma S and children; M3's first sentence | 8 | no | C (real analysis) |
+| `ChartMeasure` | null sets through the chart | 4 | `chart_quasiMeasurePreserving` only (or prove it by polar coordinates) | D (measure) |
+| `Kill` | M8's (†), M9; `chart_step_false` proved | 2 | no | D |
+| `State` | M1, M2, M3 on palettes | 8 | **yes**, both statements (or works against the placeholders now) | E, after or beside the port |
+| `Excl` | M-EXCL's two leaves | 2 | `palette_sixty_disjoint` | E |
+| `Orbit` | the assembly | 0 | — | nobody |
+| `TwoPairs` | C132-DIAG-WIDE | 1 | `two_state_impossible` | E |
+
+A, B, C need nothing ported and share no file: **three implementers can start now**. D needs `Chart` and `Shift`'s
+*statements* only (it imports them; it does not wait for their proofs). E can start against the placeholders.
+
+**The planner's standing permissions to an implementer** (so that a round trip is not needed for these): (1) a hypothesis a
+proof does not use is dropped from the leaf and from its call sites, and reported — it only strengthens the leaf; (2) the
+children of `step_lemma` (`StepLemma`) may be restated, `step_lemma` itself not; (3) a helper lemma is added freely, under a
+name no other module declares (`LEAN.md` § Searching: never one name in two modules). Anything else that changes a statement
+comes back.
+
+### 5.2 The assembly, read back (all of it elaborates; `Orbit.lean`, `Kill.lean`, `Shift.lean`)
+
+- `no_outside_orbit_points` — K1's statement, binder for binder unchanged. Proof: `OutsideOrbit` from (δ, i, ii);
+  `exists_tip` (M1–M3) gives at each hub a tip other than `X`, `Y`, which `exists_cycle_label` (six) puts among the four;
+  `choose τ`; `exists_adjacent_tips` (M4–M6) gives `τ n = τ (n + 1)`; `adjacent_tip_false` (M7–M9) at `b = a (τ n)`, its two
+  hypotheses from `tip_unique` (M5). **This is the derivation's order**: tips exist, one tip per hub, three axes, the kill.
+- `adjacent_tip_false` — from `OutsideOrbit.hubColours` at hub `n`, `.hubColours_flip` at hub `n + 1`, `.change_at`, and
+  `chart_step_false` on the smaller of the two boxes.
+- `chart_step_false` — `exists_shiftBounds`; `κ' = min(κ/3, κ₁)` (the derivation's `κ_1 ≤ κ_*/3`); `no_double_change` (†);
+  `step_lemma`; `step_at_of_change`; `step_kill`.
+- `exists_shiftBounds` — from `shift_pos`, `exists_shift_lipschitz`, `shift_comm`, `shift_zero_right`.
+- `no_outside_orbit`, `not_ae_outside` — as K1 proved them.
+
+### 5.3 The leaves: readback, model, plan, size
+
+*Columns: the step and its words; what the Lean statement says where it differs or sharpens; a model of the hypotheses
+where they could be empty; the route with the Mathlib or library statements it uses (each `#check`ed at this pin:
+`data/fs132/k2/probe/Check1.out`, `Check2.out`); the size in lines, the planner's estimate. "Library" = whether this
+library already holds the statement.*
+
+**`Chart` (11; geometry; nothing ported; library: no — it holds `Plane.e_add_e_eq`, `Plane.norm_e`, `Plane.e_add`)**
+
+| leaf | step, readback | route | lines |
+|---|---|---|---|
+| `chart_eq_polar` | M2 "`|Z| = 2 cos(π/3 + d/2)` … `arg Z = α − π/3 − d/2`": one identity for all real `α, d`, `Z = p + r(d) e(α − π/3 − d/2)` | `Plane.e_add_e_eq α (α − 2π/3 − d)` (in `Plane/SixFragment`; or four lines of `Plane.e_eq` and `Real.cos_add`), `Real.cos_neg` | 10 |
+| `chart_zero`, `chart_hub` | M2 "the points near `y_k`": `Z(ψ_{n+1}, 0) = y_n` | `chart_eq_polar`, `Real.cos_pi_div_three`; a cast `((n+1 : ℤ) : ℝ)` | 6 + 6 |
+| `dist_chart_centre`, `dist_chart_lt_one` | M2 "below 1 exactly when `d > 0`", the direction used, for `0 < d ≤ π/3` | polar form, `Plane.norm_e`; `Real.cos_lt_cos_of_nonneg_of_le_pi` or `Real.strictAntiOn_cos` | 6 + 10 |
+| `continuous_chart` | — | `Complex.continuous_exp` | 4 |
+| `chart_eq_angularSum` | M2 "the sum map is this chart" | `direction_coe` (import module), `one_mul` | 4 |
+| `dist_hub`, `hub_add_three`, `hub_axes`, `hub_shift` | M5 "`y_{k+3} = −y_k`"; M6 "`e(ψ_1) = e(ψ_0) + e(ψ_2)`" | `Plane.e_add`, `e π = −1`, `Plane.e_add_e_eq`; casts | 4 × 6 |
+
+**`Tips` (7; geometry and one finite check; nothing ported; library: no)**
+
+| leaf | step, readback | model | route | lines |
+|---|---|---|---|---|
+| `IsTip.dist_le_one` | M4 "`K ⊂ B̄(z_n, 1)` … in the limit `K ⊂ B̄(y_k, 1)`", for `K = {p, q}` | `c` constant, `i` its label, `y` on the ring: every `q` within `1` of every nearby `z` — i.e. `q = p` only; non-degenerate: the hexagonal colouring near a vertex | `closure_minimal` with `isClosed_le`; at a point of the support in the open disc, `subset_closedBall_of_dist_lt` (proved, `Confine`) with `x := p` | 12 |
+| `IsTip.inner_pos` | M4 "`|q − y_k|² ≤ 1` gives … `q·e(ψ_k) > 0`" | as above | `norm_sub_sq_real`, `nlinarith` as in `Confine.inner_nonneg_of_subset_closedBall` | 12 |
+| `tip_antipodal` | M5 "a set of a label of `Tip(k)` is no set of a label of `Tip(k + 3)`", in its sign form: no use of `B̄(y) ∩ B̄(−y) = {p}` | — | `inner_pos` four times (`hl j`, `hr (j − 1)` with `j − 1 + 1 = j`), `inner_neg_right`; then `j' ∉ {j − 1, j, j + 1}` in `Fin 4` by `decide`/`omega` | 25 |
+| `tip_unique` | M5 "`Tip(k) = {a_{τ(k)}}` is one label" | — | `tip_antipodal` twice against `τ (n + 3)`, `hub_add_three`, `add_right_cancel` | 8 |
+| `adjacent_of_signs` | M6's proof, as the finite statement its control checks (64 patterns; re-checked here by brute force: none escapes) | `t = (0, 0, 0)` with any consistent signs | `fin_cases` on `t 0, t 1, t 2` (64) with `linarith` from at most four sign facts per case; or the derivation's three cases by hand | 30 |
+| `exists_adjacent_tips` | M6 "`τ(k) = τ(k + 1)` for some `k`" | — | `σ j n := ⟪q j − p, hub p ψ n − p⟫`; `hpos` from `inner_pos` (`hl`, `hr`); `hneg` from the antipodal hub (`tip_antipodal`, `hub_add_three`); `hax` from `hub_axes`, `inner_add_right`; `adjacent_of_signs` | 35 |
+| `exists_cycle_label` | M2 "six is spent": "a label that is neither `X` nor `Y` is one of four" | `a = (0,1,2,3)`, `X = 4`, `Y = 5` | `Finset.card_image_of_injective`, `Finset.card_le_card` into `univ \ {X, Y, i}` (three elements): `4 ≤ 3` | 12 |
+
+**`Shift` (7; calculus; nothing ported; library: holds the sign identity `Plane.twoCirc_identity`)**
+
+| leaf | step, readback | route | lines |
+|---|---|---|---|
+| `ringRadius_mem` | (M7) `r ∈ (1/2, 1]` on `[0, 1/4]`: the triangle `(r, r', 1)` is non-degenerate | `Real.cos_add`, `cos(π/3) = 1/2`, `sin(π/3) = √3/2`, `Real.cos_le_one`, `Real.one_sub_sq_div_two_le_cos`, `Real.sin_le` | 20 |
+| `shift_comm` | — | `ring_nf` on the definition | 4 |
+| `shift_zero_right` | M7 "`ε(d, 0) = 0`" | `ringRadius 0 = 1`; the quotient is `cos(π/3 + d/2)`; `Real.arccos_cos` | 12 |
+| `dist_chart_chart_shift` | M7 "`|z − z′| = 1` ⟺ `cos(π/3 + g) = (r² + r′² − 1)/(2 r r′)`", the direction used; numerically checked here on 20,000 samples to `4·10⁻¹⁵` | `chart_eq_polar` twice; `‖r e(β) − r' e(β')‖² = r² + r'² − 2 r r' cos(β' − β)`; `β' − β = arccos(Q)` by the definition; `Real.cos_arccos` with `−1 ≤ Q ≤ 1` from `ringRadius_mem` (`(r − r')² ≤ 1 ≤ (r + r')²`) | 40 |
+| `shift_pos` | M7 "`0 < ε`": "`ε(d, 0) = ε(0, d') = 0` … `h(0,0) = 2/√3`" is replaced by the exact identity at zero shift | `Plane.twoCirc_identity` at `y₀ = p + e(α − π/3)`, `y₁ = p + e(α)`, `σ = 1`, `s = d'`, `t = d`: `Q < cos(π/3 + (d + d')/2)`; `Real.strictAntiOn_arccos` | 40 |
+| `exists_shift_lipschitz` | M7 "`|∇ε| ≤ 1/32`" on a closed square; numerically `κ = 1/50` works (slope `≤ 0.024`) | `Real.contDiffAt_arccos` at `1/2`; the gradient of `shift` at `(0,0)` is `0` (`∂ε/∂d = −Q_d/√(1 − Q²) − 1/2 = (√3/4)/(√3/2) − 1/2`); `ContDiffAt.exists_lipschitzOnWith_of_nnnorm_lt` with `K = 1/32`, restricted to a slice | 60 — **the heavy calculus leaf** |
+| `measurable_shift` | "the state is Borel" side: the shift is a measurable function | `Real.measurable_arccos`, `Real.measurable_cos`, `Measurable.div` | 6 |
+
+**`StepLemma` (8; real analysis, no colouring; nothing ported; library: no statement of this shape — `Plane/MetricalBoundary`
+holds density-ratio tools for a general measure (`continuous_measure_inter_closedBall`, `exists_closedBall_ratio_eq_half`),
+`Plane/CoverExamples.exists_density_point` a one-dimensional density point; neither is a leaf here)**
+
+| leaf | step, readback | model | route | lines |
+|---|---|---|---|---|
+| `exists_step_or_density_triple` | Lemma S "Suppose the conclusion fails. Then there are Lebesgue density points `a_* < b < c_*` … with `s(a_*) = s(c_*) ≠ s(b)`" (K1: "if no such triple exists, the density points of one value all precede those of the other") | `S = Iio 0` (step); `S = (0,1)` on `(−1, 2)` (triple) | `Besicovitch.ae_tendsto_measure_inter_div_of_measurableSet` for `S` and `Sᶜ`: a.e. point is a density point of one; `t' := sSup` of the density points of the earlier value | 70 |
+| `exists_window` | Lemma S's window, dyadic: the least `n ≥ 1` with proportion `≥ 7/8` at radius `R/2ⁿ`, `R = min(b − a, c − b)`; if `n > 1` the complement has measure `> ρ/4` in `ρ ≤ |x − b| < 2ρ`, hence a density point there | `E = (−1, 1)`, `a = −2`, `b = 0`, `c = 2`: `ρ = 1`, `u = a`, `w = c` | `Nat.find`; `Real.volume_closedBall`; `Measure.exists_mem_of_measure_ne_zero_of_ae` | 80 |
+| `exists_shiftMap` | Lemma S "`g_{u,w}(v) = v + ε`, increasing … `g′ ≥ 7/8`"; the slopes come out in `[31/33, 33/31]` | `ε = d d'/16` (`shiftBounds_model`) | `D ↦ D + ε(d, D)` is continuous and strictly increasing (`ShiftBounds.lip_right`); `intermediate_value_Icc`; `g v := w − D(v)`; the slope bound is two lines of `abs_le` and `linarith` from `lip_left`, `lip_right` | 80 |
+| `exists_density_pair` | Lemma S's overlap with base point; constants `7/4·ρ`, `(7/8)(7/4)ρ = 49/32·ρ`, both in an interval of length `35/16·ρ`: overlap `≥ 35/32·ρ` | `F = I`, `g = id + ρ/16` | `MeasureTheory.hausdorffMeasure_real`, `LipschitzOnWith.hausdorffMeasure_image_le` (for `g` and for its inverse on `g '' F`), `measure_inter_add_sdiff`; density a.e. on `F` | 90 — **hard** |
+| `volume_pattern_pos` | Lemma S's last lines, without Fubini over `(u, w)`: in the cube of side `2η` about the base point each of the four conditions fails on `o(η)·4η²` | — | for fixed `(d, d')` the four angles are translates of `α`, displaced by at most `η/16` (`lip_left`, `lip_right`); `Measure.prod_apply`/`lintegral_prod`; `IsDensityPt` unfolded at radii `η`, `2η`, `(17/16)η`, `(33/16)η` | 100 — **hard** |
+| `step_lemma` | **Lemma S, verbatim in its docstring** | a half-line (`example`, proved) | `exists_step_or_density_triple` on `Ioo (t − κ/4) (t + κ/4)`; in the triple case `exists_window`, `exists_shiftMap` at `(u, w)` (`w − u < κ/2`), `exists_density_pair` for `F = E ∩ Ioo (b − ρ) (b + ρ)` (the bound `3ρ/16` from `le_left`/`le_right` and "one end within `2ρ` of `b`"), `volume_pattern_pos` at `(v, v − u, w − g v)` against `NoDoubleChange` | 60 |
+| `step_at_of_change` | M8 "By M1, `s` is not almost everywhere constant near `ψ_1`, so `s` is a step at `ψ_1`" | — | if `t' < t`, `S` is null or conull on `(t', t + r) ∋ t`; `measure_mono_null` | 30 |
+| `volume_change_pairs_pos` | M3 first sentence | `S = Iio t` | the product of `S ∩ I` and `Sᶜ ∩ I`, `I = Ioo (t − κ/2) (t + κ/2)`, has positive measure; its image under `(x, y) ↦ (max, |x − y|)` lies in the set; a linear measure-preserving change on each half | 40 |
+
+**`ChartMeasure` (4; measure; library: no)**
+
+| leaf | step, readback | route | waits | lines |
+|---|---|---|---|---|
+| `chart_quasiMeasurePreserving` | M2 "`Z` is a diffeomorphism", one direction | the release's `circleSum_quasiMeasurePreserving` (`CircleMaps.lean:509`, in the port's cone) after `(α, d) ↦ (α, α − 2π/3 − d)` (a shear and a reflection: measure preserving) and `Complex.volume_preserving_equiv_real_prod`; **or**, with nothing ported, `chart_eq_polar` and Mathlib's polar coordinates | the port, or not | 25 |
+| `shear_quasiMeasurePreserving` | M8, pulling the statement at the second hub back to `(α, d, d')` | `Measure.measure_prod_null` / `Measure.ae_prod_iff_ae_ae`; `measurePreserving_add_right` | no | 30 |
+| `ae_ne_of_not_isTip` | M5 "for an inner `a ∉ Tip(k)` there is `κ` with `A_a` null in `B(0, 1) ∩ N_k(κ)`" | `Metric.mem_closure_iff` negated: a ball about the hub misses `support ∩ ball p 1`; `mem_spatialSupport_ae`; `continuous_chart` at `(ψ_{n+1}, 0)` with `chart_hub`; `dist_chart_lt_one`; `chart_quasiMeasurePreserving.ae` | no | 35 |
+| `unitPair_chart_ae` | M7 "The map `Φ : (α, d, d′) ↦ (z, z′ − z)` is a local diffeomorphism into the space of unit pairs", one direction, and M8 "Properness and `Φ` give" | the direction from `z` to its partner is `u = α + 2π/3 − d/2 − arccos((r² + 1 − r'²)/(2r))` (checked numerically here: `z + e(u) = z'` to `5·10⁻¹⁵`; strictly monotone in `d'`): it does not involve `ε`. `(α, d, d') ↦ (z, u)` is the chart in the first two coordinates and, for fixed `(α, d)`, a `C¹` function of `d'` with non-zero derivative: null sets pull back (`Measure.measure_prod_null`, then `LipschitzOnWith.hausdorffMeasure_image_le` for the local inverse in one variable); `AddCircle` coercion is measure-class preserving (`AddCircle.measurePreserving_mk`) | `chart_quasiMeasurePreserving` | 120 — **hard** |
+
+**`Kill` (2; measure; needs nothing ported beyond `ChartMeasure`)**
+
+| leaf | step, readback | route | lines |
+|---|---|---|---|
+| `no_double_change` | M8's (†), on the box `κ'` with `3κ' ≤ κ` (the derivation's `κ_1 ≤ κ_*/3`: the second hub's chart angle is `α + ε + d' + π/3`, within `κ' + κ'/16 + κ'` of `t + π/3`) | `h0` along the projection (`Measure.quasiMeasurePreserving_fst`-style), `h1` along `shear_quasiMeasurePreserving measurable_shift`, `unitPair_chart_ae`; `filter_upwards`; on a split pair `HubColours` leaves `b` | 45 |
+| `step_kill` | M9 (a)–(d) with `κ_3 = κ'/128`; (a) and (c) by Fubini on the sections `d'' ∈ (h, 16h)`; (d) the set `{ψ_1 − ε < α < ψ_1}` has measure `∫∫ ε > 0` (`ShiftBounds.pos`, `measurable_shift`): **openness is not needed** | as `no_double_change`, twice; `Measure.ae_prod_iff_ae_ae`; both orientations of the step by the symmetry `(X, Y, S) ↔ (Y, X, Sᶜ)` | 150 — **hard** |
+
+**`State` (8; palettes; stands on `palette_sixty_disjoint`, `palette_transfer_pair`)**
+
+| leaf | step, readback | route | lines |
+|---|---|---|---|
+| `measurableSet_liftPalette` | "`s` is taken Borel" | `paletteSet_measurable`, `AddCircle.measurable_mk'` | 3 |
+| `OutsideOrbit.ae_iff_not`, `.ae_flip` | M1 "both hold an outside label (i) and are disjoint (T3); so each holds exactly one … `s(θ + π/3) ≠ s(θ)`" | (i) at `n` and at `n + 1` (translated: `measurePreserving_add_right`), `palette_sixty_disjoint` pulled to `ℝ` (`ae_real_of_ae_angles`, or its proof), `AddCircle.coe_add` | 30 + 15 |
+| `OutsideOrbit.change_at` | M1 "each `ψ_k` is an essential change point" | induction on `m` up and down from (ii) with `.ae_flip` and `.ae_iff_not`; translation invariance | 40 |
+| `OutsideOrbit.chart_avoids` | M2's (⋆), for `|d| < δ/2` (both signs) | `palette_transfer_pair` along `(α, d) ↦ ((α : Angles), (α − 2π/3 − d : Angles))` (linear measure-preserving, then two coercions); `chart_eq_angularSum`; `.ae_flip` at `n − 1` and `n` gives the state at `α − 2π/3 − d` equal to the state at `α − d`; `.ae_iff_not` | 60 |
+| `exists_tip` | M3 | suppose no label other than `X`, `Y` tips: `ae_ne_of_not_isTip` for each (finitely many: `Finset.inf'` of the `κ`), with `.chart_avoids`, makes the pairs of `volume_change_pairs_pos` null | 40 |
+| `.hubColours`, `.hubColours_flip` | M5's last sentence with (⋆); M7 "shifts both arguments by `−π/3`, which flips both values" | `.chart_avoids`, `ae_ne_of_not_isTip`; for the flip, `.ae_flip` at `θ − π/3` | 30 + 35 |
+
+**`Excl` (2)**: `exists_change_of_ae_outside` (the ring form's argument: the set of angles near which the state is a.e.
+constant is open; connectedness of `ℝ`; `palette_sixty_disjoint`; 50 lines), `ae_real_of_ae_angles`
+(`AddCircle.measurePreserving_mk` on each period, a countable union; the release's `angleMk_quasiMeasurePreserving`, in the
+port's cone, is this statement; 15 lines).
+
+**Hard, in order**: `unitPair_chart_ae`, `step_kill`, `volume_pattern_pos`, `exists_density_pair`, `exists_shift_lipschitz`.
+Total, the planner's estimate: about 1,900 lines.
+
+### 5.4 Numerical and finite checks made at this stage (`data/fs132/k2/probe/chk.py`; exact arithmetic is not claimed)
+
+The chart's polar form, `chart p (α + π/3) 0 = p + e(α)`, the unit distance at the shift on `[0, 1/4]²` (and on
+`[−1/4, 1/4]²`), the partner direction's formula and its monotonicity in `d'`, `shift = 0` on both axes,
+`Plane.twoCirc_identity` in the chart; on `(0, κ]²` the ratio `ε/(d d')` lies in `[1.1547, 1.182]` at `κ = 1/50` with
+slope `≤ 0.0240 < 1/32` and `ε ≤ 0.0237·min(d, d')`. M6's count by brute force: of the 64 triples none with all adjacent
+tips different is sign-consistent.

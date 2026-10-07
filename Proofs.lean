@@ -286,6 +286,17 @@ import Proofs.HadwigerNelson.Outside.OAI158Palette
 import Proofs.HadwigerNelson.Plane.SixRing.Confine
 import Proofs.HadwigerNelson.Plane.SixRing.Winding
 import Proofs.HadwigerNelson.Plane.SixRing.Orbit
+import Proofs.HadwigerNelson.Plane.SixRing.Basic
+import Proofs.HadwigerNelson.Plane.SixRing.Placeholders
+import Proofs.HadwigerNelson.Plane.SixRing.Chart
+import Proofs.HadwigerNelson.Plane.SixRing.Shift
+import Proofs.HadwigerNelson.Plane.SixRing.StepLemma
+import Proofs.HadwigerNelson.Plane.SixRing.ChartMeasure
+import Proofs.HadwigerNelson.Plane.SixRing.Tips
+import Proofs.HadwigerNelson.Plane.SixRing.State
+import Proofs.HadwigerNelson.Plane.SixRing.Kill
+import Proofs.HadwigerNelson.Plane.SixRing.Excl
+import Proofs.HadwigerNelson.Plane.SixRing.TwoPairs
 import Proofs.HadwigerNelson.Plane.SixRing.CyclicCentre
 
 /-!
