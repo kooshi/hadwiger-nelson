@@ -1080,3 +1080,60 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     it goes to the asking lane's next job as a question. (h) **Its two questions for the asking lane go into that job's
     brief** (whether the seed's remainder's fourth question is a question; where C132-RADIUS belongs).
 
+36. **FS-132 is Derived: the filing is made** (2026-10-07; commit `fd398836` on `main`; the script that applied it,
+    `data/fs132/z2/file_fs132_derived.py`, imports the record job's own drafts tool and asserts each slot occurs once).
+    **Filed**: `LEDGER.md` rows 155–160, the sharpening of row 133 and the note under row 148 (under row 149 a pointer to it —
+    my shortening, for the one-home rule: the duplicate report showed the same 734 bytes twice); `CLAUDE.md`, six slots, to
+    61,236 of 80,000 bytes, with my one qualifier in item 31 (ruling 35 (d)) and the ledger's row count; grokkings G96–G98
+    and sentences in G21, G84, G89 and G94 (the asking lane's first sentence, and a one-line pointer to G96 that is mine),
+    to 180,656 of 200,000; nine instances, two under new headings; one bibliography clause; the stub list's two sentences
+    and the two new stubs named, unranked; **the atlas**: six nodes and two edges, its header data, and one quote that had
+    gone stale at the FS-133 filing (the checker failed on it before this filing touched anything) — **the six positions
+    are mine**, found by a search for zero collisions inside the page's first view (the drafter's proposals collided
+    eleven times with nodes of two other sectors): checker 220 of 220, self-test passed, palette review 0 failed, built
+    locally, **not published**. **Audits**: the fact audit against `fa12fc68` passed after four tokens were allow-listed
+    with reasons (two row ranges now reading 160; the removed sentence's file and section); the bibliography audit clean;
+    the identities check passed. **The next filing's fact-audit base is `fd398836`.** **Owed, not in this filing**: lines
+    in `LEDGER.md` § The claim list for rows 155–160 (no lane drafted them; their prior art is "partly" or "owed" in every
+    row); the re-rank (the asking lane's job, running); the atlas node edits owed since the release (it still draws five as
+    live); the prior-art search in print, never run (zbMATH was down all night).
+37. **FS132-I2, second message: the read-back across pins cannot be "one rename and nothing else" — my bar was wrong for a
+    port, and is withdrawn.** Its run over the 328 constants of the cone: 258 identical as stored with the one-entry map;
+    the rest differ by five causes, **every differing constant Mathlib's or a generated proof, never a definition of the
+    release**: the set-builder notation's function renamed between the pins (22, among them the target
+    `two_state_impossible` and three definitions); almost-everywhere inclusion of sets given a definition of its own
+    upstream (6; one definitional unfolding); an instance's argument order (7); instance names and paths (about 20); one
+    shared generated proof where the release has one per file (5 names absent). The four targets: three identical as
+    stored, the fourth identical but for the notation's rename. **All eight modules elaborate** (seven proof patches, one
+    rename). **Ruling** (sent): (a) for an imported axiom the read-back is a gate; **for a port it is an instrument for one
+    sentence — "this is the release's lemma" — because every ported theorem is kernel-checked here**; (b) its proposal
+    stands: an explicit small map (two pure renames, each checked one level down at both pins; one declared unfolding,
+    checked by reflexivity at the release's pin) and two verdicts — identical, and identical once instance arguments and
+    proofs are erased, with the differing constants listed and required to be Mathlib's, core's or generated; anything else
+    fails — alternative: fail on everything but a pure rename and carry the rest as declared exceptions; rejected because
+    fifty exceptions hide the one that would matter; confidence medium-high; what would change it: a differing constant
+    that is the release's own in a definition or a target; (c) bounds: the four targets and the 59 definitions are
+    reported by name, the rest by count; if the eraser is not working within about a stage it is dropped and the causes
+    listed; nowhere "term for term" for the port as a whole. **Credit**: it stopped at the trigger and brought the causes
+    sorted, with the sentence that settles it — "what changes is what the read-back can claim".
+38. **FS132-K2, first message: the exclusion's leaves are committed and the branch builds** (`e0c95ec1` on `fs132-wk1`; record
+    Stages 4–5). Twelve modules under the six-ring folder; **the four-point form, in its predecessor's statement binder
+    for binder, is proved from the leaves**, as are the compact-set form, the ring form and the two-pair ring's corollary;
+    **49 leaves carry the exclusion and none is the theorem**; its estimate about 1,900 lines. Five lots that share no
+    file: A (the chart's geometry and the tips, with the finite check), B (the shift's calculus), C (the step lemma, real
+    analysis with no colouring), D (null sets through the chart, and the kill), E (the palettes' three steps, on the
+    release's statements — placeholders now). **"No step of the hand argument failed to go into a leaf, and I found no
+    statement defect."** **Filed by it**: the tips, the first three steps and the whole analytic core are stated for any
+    number of labels, six being spent in one finite lemma — a generalization in form; a shorter route for the step lemma
+    (a dyadic window; four density points and a Lipschitz estimate; no change of variables in three dimensions) and for
+    the shift (no second-order expansion; the sign is this library's own kernel theorem `Plane.twoCirc_identity`) — one
+    mind, by hand, "the leaves are what will check it"; a row of the architecture map rewritten in place. **My receipt**:
+    the tip is on `origin`; the build log's last lines read by me (exit 0, 13 modules rebuilt, warnings only); the files
+    listed and their open leaves counted per module; its § 5.1 read. Not checked by me: any leaf against its step.
+    **Rulings.** (a) **Lots C then B go to one implementer, FS132-I3** (brief `data/fs132/briefs/FS132-I3-step-lemma.md`,
+    gate exit 0; worktree and branch `fs132-wi3`, cut from that tip by me, its build a copy) — the step lemma first,
+    because it is the one step with a single derivation and now a second route by hand; alternative: lot A first, the
+    easiest; rejected, the kernel's check is worth most where the hand argument is thinnest. **It launches when a slot
+    frees** (three are in use). (b) Its question for the port is relayed (one lemma is in the cone by the implementer's
+    count; the other asked for either way). (c) Its four items are logged here as its own.
+
