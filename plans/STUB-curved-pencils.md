@@ -1,5 +1,7 @@
 # FS-126 — curved pencils: can an honest saturated colouring of the plane, with any number of colours, have a curved tangent-type interface? (stub)
 
+> **Demoted, 2026-10-07 (FS132-P2): the exclusions derived for measurable colourings read no arc and no normal form; on the road again only on the condition its row names.**
+
 > Demoted 2026-10-07 (FS132-P1): `[OAIMath2026]`'s extraction reads no arcs, so this question is on the road to seven only if FS-132's card 1 finds a step of the exclusions that reads one.
 
 > **Re-ranked 2026-10-03 (FS129-P1; 7 → 9).** The map step at five reads REG-J′₅ and no ¬LRA

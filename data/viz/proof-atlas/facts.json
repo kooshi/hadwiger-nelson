@@ -1793,7 +1793,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-qfree-ring.md, line 1",
-   "grade_address": "plans/STUB-qfree-ring.md, line 100",
+   "grade_address": "plans/STUB-qfree-ring.md, line 102",
    "also": []
   },
   {
@@ -1816,7 +1816,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-q-ring.md, line 1",
-   "grade_address": "plans/STUB-q-ring.md, line 106",
+   "grade_address": "plans/STUB-q-ring.md, line 298",
    "also": []
   },
   {
@@ -1839,7 +1839,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-saturated-local.md, line 1",
-   "grade_address": "plans/STUB-saturated-local.md, line 61",
+   "grade_address": "plans/STUB-saturated-local.md, line 63",
    "also": []
   },
   {
@@ -2025,7 +2025,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-pinch-at-junction.md, line 1",
-   "grade_address": "plans/STUB-pinch-at-junction.md, line 45",
+   "grade_address": "plans/STUB-pinch-at-junction.md, line 47",
    "also": []
   },
   {
@@ -2048,7 +2048,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-forced-pair.md, line 1",
-   "grade_address": "plans/STUB-forced-pair.md, line 37",
+   "grade_address": "plans/STUB-forced-pair.md, line 39",
    "also": []
   },
   {
@@ -2071,7 +2071,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-curved-pencils.md, line 1",
-   "grade_address": "plans/STUB-curved-pencils.md, line 43",
+   "grade_address": "plans/STUB-curved-pencils.md, line 45",
    "also": []
   },
   {
@@ -2094,7 +2094,7 @@
    "status": "?",
    "line": 1,
    "address": "plans/STUB-lateral-extent.md, line 1",
-   "grade_address": "plans/STUB-lateral-extent.md, line 35",
+   "grade_address": "plans/STUB-lateral-extent.md, line 37",
    "also": []
   },
   {
@@ -2738,7 +2738,7 @@
    },
    "quote": "the (Q)-free ring",
    "label": "its (Q)-free half",
-   "address": "plans/STUB-qfree-ring.md, line 45"
+   "address": "plans/STUB-qfree-ring.md, line 47"
   },
   {
    "source": "FS124",
@@ -3199,7 +3199,7 @@
    },
    "quote": "A measurable fall colouring with a non-locally-finite Σ refutes the claim",
    "label": "a potential refutation",
-   "address": "plans/STUB-lateral-extent.md, line 24"
+   "address": "plans/STUB-lateral-extent.md, line 26"
   },
   {
    "source": "FS120",
@@ -3232,7 +3232,7 @@
    },
    "quote": "FS-107's reduction",
    "label": "route R",
-   "address": "plans/STUB-forced-pair.md, line 14"
+   "address": "plans/STUB-forced-pair.md, line 16"
   },
   {
    "source": "FS122",

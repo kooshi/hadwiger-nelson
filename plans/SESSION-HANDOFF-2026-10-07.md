@@ -35,37 +35,25 @@ FS-132 delivers what a point with data on its unit circle is forced to carry (th
 its first night's exclusion is formalized first; **FS-124, the (Q) ring — a boundary that is a unit arc about a ring point — is
 the next milestone**; staffing is his cap of three Opus slots.
 
-**State at 12:36 UTC (read from the clock) — FS-132 is DERIVED** (filed `fd398836`; FS-132 inventory items 35–36; **the next filing's
-fact-audit base is `fd398836`**); **FS-124 is chosen and its inventory is open** (`plans/FS124-close-inventory.md`).
+**State at 12:59 UTC (read from the clock) — FS-132 is DERIVED** (filed `fd398836`); **FS-124 is OPENED** (its inventory
+`plans/FS124-close-inventory.md`, items 1–5; its claim list `data/fs124/claims.md`); **the re-rank is filed** (the commit after
+`4bb0c8c4`; **the next filing's fact-audit base is that commit** — `git log -1 --format=%h -- plans/FRONTIER-STUBS.md`).
 
 **Running (three slots):**
 
 | job | where | what it hands on | on its message or hand-back |
 |---|---|---|---|
-| **FS124-P1** (`poros`) — FS-124's question, then the re-rank | `main`; record `plans/POROS-2026-10-07-fs124-question.md`; brief `data/fs124/briefs/FS124-P1-question.md` | the question card in `plans/STUB-q-ring.md` for measurable colourings (it messages when the card is saved); the re-rank of `plans/FRONTIER-STUBS.md` in full; three lines for Kooshi | **at "card saved"**: read the card; brief **FS-124's opening job** (`ephodos`: §G, §PA, §IQ, the plan, the claim list; the last opening brief is `data/fs132/briefs/FS132-E1-opening-and-first-claim.md`, its generator `data/fs131/briefs/scripts/mk-fs132-e1.py`) — it launches into the first free slot after FS132-I3; **at hand-back**: file the re-rank (`plans/FRONTIER-STUBS.md`, the banners, `CLAUDE.md`'s top three; fact audit `--base fd398836`) |
-| **FS132-I3** (`debruijn-implementer`) — the step lemma, then the shift's calculus (lots C, B) | worktree and branch `fs132-wi3` (cut from `fs132-wk1` at `e0c95ec1`); record `plans/FS132-I3-implementation.md` there; brief `data/fs132/briefs/FS132-I3-step-lemma.md`; launched 12:47 UTC | the two modules with no `sorry`; a message when `step_lemma` is proved — the one step of the exclusion with a single derivation | log; that message is worth a line to Kooshi (the hand proof's thinnest step checked by the kernel) — or, if a leaf is false, at once |
-| **FS132-I2** (`debruijn-implementer`) — the port | worktree and branch `fs132-wi2`; record `plans/FS132-I2-implementation.md` there | all eight modules elaborate; the read-back across pins by two verdicts (items 34, 37); asked to bring two more lemmas the leaves cite | at hand-back: review; the join (the planner's placeholders file deleted, its importers pointed at the ported modules) is an implementer's first step on lot E; the port and the confinement module can land alone (a landing job, the procedure of `plans/FS132-L1-landing.md`) |
+| **FS124-E1** (`ephodos`) — FS-124's opening, then its six first claims | `main`; record `plans/FS124-E1-derivation.md`, plan `plans/FS124-tight-pairs.md`; brief `data/fs124/briefs/FS124-E1-opening.md`; launched 12:52 UTC | first message: each claim's exact statement with its *not claimed* line → fix by dated lines in `data/fs124/claims.md`; then a verdict per claim; after the third claim, one paragraph on what a completion carries (the card's three branches turn on it) | log in FS-124's inventory; **anything that would fix the value → Kooshi at once, "claimed by one mind, unchecked"**; when the completion's rule and the count at a four-label centre are derived, queue line 12 of `plans/SEARCH-QUEUE.md` for the day's Searcher; at hand-back: a successor deriver on the remaining claims, and (workflow step 4) a kernel planner on FS-124's derived claims, blind first, from a kernel claim list |
+| **FS132-I3** (`debruijn-implementer`) — the step lemma, then the shift's calculus (lots C, B) | worktree and branch `fs132-wi3`; record `plans/FS132-I3-implementation.md` there; brief `data/fs132/briefs/FS132-I3-step-lemma.md` | a message when `step_lemma` is proved — the one step of the exclusion with a single derivation | log; a line to Kooshi (the hand proof's thinnest step checked by the kernel) — or, if a leaf is false, at once |
+| **FS132-I4** (`debruijn-implementer`) — the join, then lots E and D | worktree and branch `fs132-wi4` (cut from `fs132-wk1` at `1c5e2609`; it merges `fs132-wi2`, the port); record `plans/FS132-I4-implementation.md` there; brief `data/fs132/briefs/FS132-I4-join.md`; launched 12:56 UTC | a message when the join builds (did any leaf change?); then the leaves on the ported lemmas and on the chart's null sets | log; **lot A (the chart's geometry, the tips: 18 leaves, nothing ported) is unassigned** — the next free kernel slot, on the pattern of the two briefs above (generators `data/fs131/briefs/scripts/mk-fs132-i3.py`, `mk-fs132-i4.py`) |
 
-**The kernel planner's successor is done** (FS-132 inventory items 38–39; branch `fs132-wk1`, tip `1c5e2609`): 49 leaves in
-five lots that share no file — **A** (the chart's geometry, the tips), **B** and **C** (taken by FS132-I3), **D** (null sets
-through the chart; the kill), **E** (the palettes' steps, on the release's statements; its first step is the join with the
-port: the placeholders' file deleted, its importers pointed at the ported modules). **Unassigned: A, D, E** — each an
-implementer's brief on the pattern of `data/fs132/briefs/FS132-I3-step-lemma.md` (generator
-`data/fs131/briefs/scripts/mk-fs132-i3.py`), a worktree cut from the then-current tip with the build recipe. **The kernel
-claim list is extended by seven statements** (`data/fs132/claims-K1.md`, the dated line "tier A"): a planner's job for them
-(`debruijn`, running the two modeling companions fresh) and the centres' kernel job (with the mesh threshold as a parameter)
-wait for slots. **Slot order from here**: the next milestone's opening job (derive lane) first; then lot E with the join when
-the port is back; then lots A and D; then the tier-A planner.
-
-**Briefed, waiting for a slot (12:50 UTC): FS124-E1, FS-124's opening job** (`ephodos`; brief `data/fs124/briefs/FS124-E1-opening.md`,
-gate exit 0; record `plans/FS124-E1-derivation.md`, plan `plans/FS124-tight-pairs.md`): §G, §PA, §IQ, the plan, then the six
-first claims of `data/fs124/claims.md` (fixed from the asking lane's card; FS-124 inventory items 2–3) — **launch it into the
-first slot that frees** (the port's implementer or the asking lane, whichever hands back first), with the line "Your brief is
-on disk: read it in full first." and the brief's path. Its messages: each claim's statement with its *not claimed* line (fix
-by dated lines in `data/fs124/claims.md`), each verdict, and anything that would fix the value (to Kooshi at once, as "claimed
-by one mind, unchecked"). **The asking lane corrected my framing** (FS-124 inventory item 2): the unit arc is what the
-exclusions force, not what they left over; "both roads pass through one object" holds toward seven only with a point of
-usable data in every colouring (not this milestone's), and toward six is held for non-Siamese maps only.
+**Done since the morning** (FS-132 inventory items 33–41): the record job's second half; the planner's successor (49 leaves in
+five lots; the kernel claim list extended by seven statements, `data/fs132/claims-K1.md`); **the port** (163 declarations on
+the standard three axioms, branch `fs132-wi2`, tip `4060fe1d`; it lands with the exclusion's module, in one landing, with a
+copy of the release's licence text beside the ported modules); the asking lane's card and re-rank. **Waiting for kernel
+slots, in order**: lot A; a planner for the seven statements (`debruijn`, the two modeling companions run fresh); the
+centres' kernel job (the mesh threshold a parameter); the landing (procedure: `plans/FS132-L1-landing.md`; the port's
+drafts D1–D7 in its record; the three instances on Mathlib types to scope).
 
 **Owed, not yet briefed**: the asking lane's job and FS-124's opening (above); the landing of the port; FS-133's kernel planner
 (after the exclusion's module is under way); the release's checking tool's audit (not started; nothing of it has run); the

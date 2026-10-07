@@ -1,5 +1,7 @@
 # FS-127 — lateral extent: is the singular set of every honest saturated colouring of the plane locally finite? (stub)
 
+> **Re-aimed, 2026-10-07 (FS132-P2, FS124-P1): it carries the existence of a point with usable data — C132-WIT-EX's form (O), C132-RING-TAME's first clause, the REG-J′ side question — for all weak colourings or for honest ones (row 143). Ranked by bearing, 6 → 3; left unopened by Kooshi's word of 2026-10-07.**
+
 > Re-aimed 2026-10-07 (FS132-P1): at local finiteness of the *cyclic centres* of an honest saturated colouring (the reading's [L₆]) — no arcs, no integer radii — the statement `[OAIMath2026]`'s extraction consumes; and behind FS-132's card 2, which asks whether the extraction needs even that.
 
 *Minted 2026-10-03 by FS-121's close (FS121-Z1, stage 5), carrying inventory item 67 (LAT's card for Poros) and item 74's owed minds. Route M's honest

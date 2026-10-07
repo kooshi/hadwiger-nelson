@@ -1,5 +1,7 @@
 # FS-123 — the Siamese class: does any four-colour vertex whose ring carries no (Q) arc survive past radius 1 + ε, in any class? (stub)
 
+> **Absorbed on the measurable road, 2026-10-07 (FS132-P2): its first case holds for measurable colourings with no Siamese clause (C132-M-EXCL, [hand], one mind, kernel pending). FS-134 carries the composition. What is left here is a map-class statement — the vertex whose tiles meet in no cycle — which no measurable step reads. Demoted 3 → 8 until the kernel has C132-M-EXCL; then to the closed list.**
+
 > 2026-10-07 (FS132-P1): 'given MR' leaves this stub's bearing. Its first case is FS-132's existence form, asked for measurable colourings, where there is no Siamese clause; a second route to its NO at radius 2 is the reading § 3.5's region kill (a placement, queued for the Searcher).
 
 > **Re-ranked 2026-10-03 (FS129-P1; 1 → 2).** Its first question is answered yes in the non-Siamese class and

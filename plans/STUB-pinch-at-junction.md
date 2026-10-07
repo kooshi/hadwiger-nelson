@@ -1,5 +1,7 @@
 # FS-120 — the pinch at a junction: can a pinch in a measurable fall colouring of the plane be removed locally, or does its cascade reach a junction and stop there? (stub)
 
+> **Demoted, 2026-10-07 (FS132-P2): the exclusions derived for measurable colourings read no arc and no normal form; on the road again only on the condition its row names.**
+
 > 2026-10-07: the cover route at five is closed as a need — `χ(ℝ²) ≥ 6` is held by citation. The pinch question at six stands.
 
 *Minted 2026-09-28 by the close job FS111-C at FS-111's close (`plans/FS111-close-inventory.md` items 34, 37, 38; `plans/FS111-C-close.md` § Stage 5).

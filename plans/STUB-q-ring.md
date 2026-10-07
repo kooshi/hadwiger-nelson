@@ -1,5 +1,7 @@
 # FS-124 — the (Q) ring: does every vertex of at least four colours whose ring carries (Q) arcs, and every vertex of five or six colours, die within an explicit radius? (stub)
 
+> **Opened 2026-10-07 (Kooshi's choice).** In the ranking this stub is *the unit arc: what a tight unit pair passes on*; its question for every measurable colouring is the section dated 2026-10-07 below (FS124-P1), its claim list `data/fs124/claims.md`, its inventory `plans/FS124-close-inventory.md`. The card of 2026-10-03 and the eight cases stand for maps.
+
 > 2026-10-07 (FS132-P1): 'given MR' leaves this stub's bearing. From `[OAIMath2026]`: a palette that is a diagonal of the vertex's own labels is a (Q) arc in measure; its `two_state_impossible`, stated for every `k`, at six excludes a ring alternating between the two diagonals (FS-132's C132-DIAG, posed); its four-cycle argument (one outside label) is the template for the five-colour vertex. The class this stub is posed in waits on FS-132's card 1.
 
 *Minted 2026-10-03 by FS-116's close, part 2 (FS116-Z2; `plans/FS116-Z2-close.md` stage 3), carrying `plans/FS116-close-inventory.md` items 40, 53, 61,
@@ -451,6 +453,10 @@ pending, unless marked):*
 - **What transfers from the map class** — rows 135–138 and 145–150 are theorems about maps — needs the dictionary fact FS-134
   owes (`plans/STUB-exclusion-back-to-maps.md`: a map's palette is its ring read two-sidedly). The arc-free remainder of the
   seed is FS-135 (`plans/STUB-seed-remainder.md`).
+  *Dated correction (2026-10-07; FS124-P1's finding, `plans/POROS-2026-10-07-fs124-question.md`, filed by Keryx):* the dictionary fact of
+  FS-134 serves the other direction — reading a palette-stated entry (C132-M-ORBIT, C132-M-EXCL) at a map vertex. What transfers from the
+  map class to measure is carried by re-reading each argument over open one-label pieces, and needs no dictionary (this stub's question
+  section of 2026-10-07, "What to carry over from the map class first, and how").
 - Grokkings: G94, G95; proposed G96 (circle data against ball data) and G97 (every exclusion ended at the unit arc).
 
 ## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)

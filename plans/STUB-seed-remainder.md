@@ -1,5 +1,7 @@
 # FS-135 — the seed's remainder: what a triangle point's unit circle forces beyond step form and near witnesses (stub)
 
+> **Ranked 2, 2026-10-07 (FS124-P1).** Its question 4, the one-edge form of C132-TURN's stall, is not asked: its content returns as C124-CENTRE and C124-COMPLETION at the placed point (`plans/POROS-2026-10-07-fs124-question.md` § 3.4).
+
 *Minted 2026-10-07 by FS-132's record job, part 2 (FS132-Z2; `plans/FS132-Z2-record.md` Stage 2), carrying four threads FS-132
 left open on the side of its results where no boundary is a unit arc about a ring point: the gap C132-LENS-II (FS132-E6), the
 three shift lemmas and the one-edge form of C132-TURN's stall (FS132-E4), and the third-label rigidity (FS132-E3). State: Not

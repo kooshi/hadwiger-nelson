@@ -1167,3 +1167,37 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     E are unassigned; a planner for tier A and the centres' job wait for slots — the derive lane's opening job on the next
     milestone goes before them.
 
+40. **FS132-I2 done (463k and 64 minutes by the task notice): the port is in — the three outside lemmas the exclusion and
+    its corollary rest on, and a fourth small one, are theorems of this library on the standard three axioms** (implementer;
+    record `plans/FS132-I2-implementation.md` on branch `fs132-wi2`, tip `4060fe1d`; its report is its hand-back). **Ported**:
+    163 declarations (138 theorems, 24 definitions, 1 instance), 1,791 source lines, eight generated modules beside the
+    palette module; **7 proof patches and 1 Mathlib rename — "one fix per about 220 lines", no patch to a statement or a
+    definition**; no `sorry`, no axiom; final build exit 0. **Each of the four targets prints the standard three and rests
+    on neither declared outside theorem**; the print's controls fire. **The read-back across pins, as ruled** (item 37):
+    the four targets identical as stored (one through the declared rename of the set-builder's function); of the
+    definitions 44 identical and 14 identical up to instance and proof arguments — all 14 in the palette chain the first
+    planner ported; "no constant different in a target, a definition or a lemma"; 13 plants refused; **never "term for
+    term"**: what it leaves to trust is that Mathlib's instances for one class on one type agree at each pin. **The two
+    lemmas the planner asked for were already in the cone.** Architecture check, duplicate-name check and the guarded lint
+    pass. **It repaired, in its touches**: the palette module's header (no licence named) and four docstrings with no
+    source address; a plant of its own generator that could not fire. **For the landing**: three unscoped instances on
+    Mathlib types in the palette module; the palette module's own declarations are in no audit block; the drafts D1–D7.
+    **For publication**: the licence asks that a copy of its text go with a redistribution, and this repository holds no
+    copy for the ported files. **A method it leaves**: the cone of any statement, from the source's compiled constants, in
+    about a minute — a port can be priced before it is planned. **My receipt**: the four commits are on `origin`; the final
+    build log's exit read by me; the axiom print's lines for two targets and its self-test's refusals read; the read-back's
+    table opened (its first rows). Not checked by me: the ported text against the release's; the eraser.
+    **Credit**: a cone computed and not assumed; a trigger honoured, and the causes brought sorted; a self-test that failed
+    as it should and was repaired; the first measured price of a port in this project.
+    **Rulings.** (a) **The port does not land alone**: it is merged under the skeleton on a branch by the next
+    implementer, and lands with the exclusion's module in one landing — alternative: land the port and the confinement
+    module now; rejected, a landing takes a slot and freezes the front files, and nothing on `main` needs the port before
+    the module is whole; confidence medium-high. (b) **A copy of the licence text goes in beside the ported modules at
+    that landing**, and Kooshi is told now. (c) The landing decides the three instances' scope.
+41. **FS132-I4 launched** (12:56 UTC by its brief's commit; `debruijn-implementer`, Opus; brief
+    `data/fs132/briefs/FS132-I4-join.md`, gate exit 0; worktree and branch `fs132-wi4`, cut by me from `fs132-wk1` at
+    `1c5e2609`, build copied): the join — the port merged under the skeleton, the placeholders' file deleted — then lots E
+    (the palettes' steps; the ring form's two leaves) and D (null sets through the chart; the kill). It messages when the
+    join builds. **Lot A (the chart's geometry, the tips) is unassigned.** Slots: FS132-I3, FS132-I4, and FS-124's opening
+    job.
+

@@ -1,5 +1,7 @@
 # FS-122 — the forced pair at every complexity (route R's third statement): must every near-colouring of the plane with small holes carry a close complementary pair of fat junctions? (stub)
 
+> **Re-aimed, 2026-10-07 (FS132-P2; wording corrected by FS124-P1), at the exact class: a close complementary pair is not excluded there — one of its edge sets lies on the unit circle about each common unit point (C132-COMP-SHARP) — so the question is the forcing, and what the forcing delivers is FS-124's object. B-RR stays as the band form's question.**
+
 > **Re-ranked 2026-10-03 (FS129-P1; 5 → 6).** "Meets route M nowhere below the answer" holds under Condition 5
 > only; with unit arcs its exact-map form is FS-124's case list (FS112-N3-COR3), so what is route R's own is the band form.
 

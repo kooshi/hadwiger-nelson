@@ -113,6 +113,8 @@ ALLOW: dict[str, str] = {
     '√ε': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-q-ring.md`",
     '(R2)': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-curved-pencils.md`",
     '131–141': "item 31's row range now reads 131–154 (FS-129's rows 149–154)",
+    'Lemma 5.5': "FS-122's old row cited `[OAIMath2026]`'s Lemma 5.5 (centres binary for one pair of labels are separated); FS124-P1's re-rank re-aimed the row at the exact class and dropped the citation (2026-10-07); it stays in `plans/POROS-2026-10-07-after-release.md` and `plans/EXT-OAI2-reading.md`",
+    'k = 6': "FS-128's old row wrote its two cases as `k = 5` and `k = 6`; the row filed from the asking lane's draft (2026-10-07) words them; the question is unchanged in `plans/STUB-top-colour.md`",
     '131–154': "item 31's row range now reads 131–160 (FS-132's rows 155–160; the filing that made FS-132 Derived, 2026-10-07)",
     '1–154': "the ledger's row count now reads 1–160 (FS-132's rows 155–160; the same filing)",
     'plans/POROS-2026-10-07-after-release.md': "the open-milestones paragraph's sentence on the asking lane's recommended order for the Lean backlog left at Kooshi's word of 2026-10-07 (the backlog stays paused; a milestone's Lean phase formalizes what it rests on — FS132-Z2's draft, FS-132 inventory item 35 (b)); the table stays in that file",
@@ -401,6 +403,13 @@ ALLOW: dict[str, str] = {
 # in (a verified allowance, unlike ALLOW). For text whose home was never this corpus -- e.g. paths-forward rows ranked >= 30, whose
 # authoritative rows are plans/FRONTIER-STUBS.md's (E1, 2026-09-26).
 EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
+    'RINGBAND': ('plans/STUB-bicycle-windings.md', "a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it"),
+    "122's": ('plans/STUB-bicycle-windings.md', "a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it"),
+    'L₆': ('plans/STUB-lateral-extent.md', "a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it"),
+    '3/2': ('plans/STUB-q-ring.md', "a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it"),
+    '§ 9': ('plans/STUB-qfree-ring.md', "a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it"),
+    '148–149': ('plans/STUB-six-by-the-nerve.md', "a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it"),
+    'st': ('plans/STUB-forced-pair.md', "a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it"),
     'plans/STUB-sanctioned-search-fs86.md': ("plans/FRONTIER-STUBS.md", "FS-90's paths-forward row, ranked 30 once FS-113 was minted at rank 8 (the 2026-09-27 consolidation run), so it left CLAUDE.md's single rows for the group row; the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
     '[Chow1993]': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
     'U < 308.17': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),

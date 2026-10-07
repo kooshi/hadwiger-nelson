@@ -69,4 +69,38 @@ between two colours that is an arc of the unit circle about a point one unit awa
    smallest form of each, copied by script from the card, nothing of route, controls or side. Each claim's *not claimed*
    line comes from the deriver's plan and is fixed by a dated line. **The opening job is briefed** (FS124-E1, `ephodos`;
    `data/fs124/briefs/FS124-E1-opening.md`) and launches into the first free slot.
+4. **FS124-P1 done (463k and 30 minutes by the task notice): the card, the reframe, and the re-rank — filed** (asking lane;
+   record `plans/POROS-2026-10-07-fs124-question.md` Stages 0–4, its gate exit 0; report `data/fs124/reports/FS124-P1.md`;
+   five commits to `4d5d5fe5`). Beyond item 2: **where each held six-coloured object escapes FS-132's exclusions, entry by
+   entry** — "at an edge set on the unit circle about a ring point or at the centre's own labels on its ring, and nowhere
+   else"; **the search's kept model read**: a three-label centre with three complementary partners — the maximum row 136
+   allows — its four-label points the alternate ring points; **the row-139 note**: "true of the entries it cites … not
+   true as a note on row 139; recommend it stay declined"; **for the kernel lane**: plan C124-RADIUS first if derived,
+   with the weak colouring of an open set as its shared dependency, then FS-132's shadow statement with its two
+   corollaries; **for the search**: the held request is not worth a day as queued; a new one — the first-order label
+   skeleton on the unit triangular lattice — once two claims are derived; **the record job's two questions answered**
+   (the seed remainder's fourth question is not a question; the radius clause is this milestone's first claim, not a
+   milestone). **A defect of my brief, found by it**: "nothing derived last night touches it" was wider than its source
+   (the file's sentence is about a unit arc about a ring point; the release's two-pair theorem read at six is an
+   exclusion on a ring carrying the centre's labels) — the opening brief's sentence was narrowed before launch. **Its
+   slips, disclosed**: a score line mis-tallied and three line numbers mis-cited, corrected before commit; several items
+   read by sample, each named. **Three lines for Kooshi**: its § 3.3. **My receipt**: the commits are on `main`; its
+   Stage 4 read whole by me; the night's three carried rows checked at the lines it cites. Not checked by me: its § 1.2
+   table against the entries. **The re-rank is filed** (this commit; script `data/fs124/p1/file_fs124_rerank.py`, each
+   slot asserted): the stub list's first sixteen rows (FS-124 first as "the unit arc: what a tight unit pair passes on",
+   FS-135 new at 2, FS-127 at 3, FS-122 at 4; FS-132 leaves the ranked table; the ranks 1 to 72 asserted on the written
+   file); the front page's top three and its open-milestones sentence; nine banners, six in the asking lane's words and
+   three mine (the opened stub; the two new stubs' places); a dated correction under the record job's line in the stub
+   (item 2's); the closed list's one clause; **a held search request, line 12 of `plans/SEARCH-QUEUE.md`**. Fact audit
+   against `fd398836`: passed — seven details of the old rows recorded with their verified homes in the stubs, two
+   allow-listed with reasons; atlas checker 220 of 220, rebuilt locally, not published. **The next filing's fact-audit
+   base is this commit.** **Its held points, ruled.** (a) **FS-127 stands at rank 3 by bearing and is not opened** —
+   Kooshi left its question this morning; he is told the rank. (b) **The milestone keeps its number and its stub file;
+   the ranking names it "the unit arc"**, the stub's title stays, a banner says so. (c) The claim list was taken from the
+   stub's text by script (item 3). **Owed**: the citation of "eleven vertices against ten types" to two different papers
+   in two rows — "one is a slip, to check against the papers" — unchecked; the flag stands in FS-122's row.
+5. **The opening job is launched** (12:52 UTC by its brief's commit; FS124-E1, `ephodos`; brief
+   `data/fs124/briefs/FS124-E1-opening.md`, gate exit 0; record `plans/FS124-E1-derivation.md`, plan
+   `plans/FS124-tight-pairs.md`): §G, §PA, §IQ, the plan; then the six claims in order, a verdict by message as each is
+   saved.
 

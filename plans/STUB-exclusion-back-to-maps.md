@@ -1,5 +1,7 @@
 # FS-134 — the exclusion back to maps: does FS-132's measurable exclusion, read at a map, give rows 148–149 with no Siamese clause? (stub)
 
+> **Unranked, 2026-10-07 (FS124-P1): a short job, run when a derive slot is free.** It closes FS-123's first case in the map class, moves nothing on six against seven, and is not on FS-124's path: FS-124's claims are posed over open one-label pieces, so a held map is a control with no dictionary.
+
 *Minted 2026-10-07 by FS-132's record job, part 2 (FS132-Z2; `plans/FS132-Z2-record.md` Stage 2), from FS132-E3's report
 (`data/fs132/reports/FS132-E3.md`, "a short job, 'a map vertex carries hypothesis (a)'"), the coordinator's ruling that it is
 "not briefed tonight … the asking lane ranks it" (`plans/FS132-close-inventory.md` item 10 (iii)), and the first record job's
