@@ -8455,3 +8455,52 @@ reason by the close.*
      needs a piece — Kooshi's "adopt parts piecemeal if needed". (e) **The special slot is closed**: three slots
      from here. In flight: EXT-OAI2 (its report is committed; its hand-back not yet arrived), wave 8's landing,
      wave 9's implementer.
+
+620. **EXT-OAI2 done: the outside manuscript is read in full against this project's theory — no gap found, one mind, one pass; its drafts for the front page are written to be filed; two calibration statements of its own at seven** (reader, `ephodos`; harness 579k and 34 minutes by the task notice — past the line; record `plans/EXT-OAI2-reading.md` stages 1–5, 116 KB; report `data/external/reports/EXT-OAI2.md`; seven commits on `main`, the last `477ce500`; its derive gate PASS, 0 failures, 2 warnings — prior art owed on its two entries).
+     **New since item 618** (its stage 5). **(1) Drafts to be filed** (its § 5.1): `CLAUDE.md` § The mission's row D,
+     § The aim's links 1, 3, 4, 5, 6, § Frontier's first paragraph and item 31, the theory paragraph, the
+     local–global paragraph, the ranked row 3; `LEDGER.md` rows 33, 107, 120, 125, 128–132, 140, 154 and the claim
+     list; three grokkings (G93–G95); instances for eight more. **(2) The grade the drafts carry** (its § 5.0): for
+     the release's four statements, "[external: `[OAIMath2026]` family 158; kernel-checked in the release's own
+     library at its pin, the cone built and audited here on the standard three axioms; its manuscript read in full,
+     no gap found, one mind]" — **not in this library's kernel: row 33's own statement is unchanged**; the easy
+     half `χ(ℝ²) ≤ χ_m⁰(ℝ²)` is not in their Lean and stays [hand]; a composition carries the weaker grade and
+     "given MR" wherever a number field's plane is named. **(3) Two entries of its own** (its § 5.6; [hand], one
+     mind): EXT-OAI2-SLACK7-L — a seven-colouring proper at every unit pair whose cyclic centres accumulate;
+     EXT-OAI2-SLACK7-P — one with a three-label palette on positive measure; a first form of the second
+     contradicted Lebesgue's density theorem and was corrected by it before use (commit `1076316a`).
+     **(4) Stubs it would re-aim and mint** (its § 5.4, drafts; "I write no stub"): FS-104 answered by citation;
+     FS-123, FS-124, FS-127 re-aimed; FS-126 not consumed by the nerve route; the five-colour halves of FS-128 and
+     FS-120 closed; five to mint — the one-class transfer, six by the nerve, the bridge without Tarski, the axiom
+     question, measure rigidity at number fields by compact extensions. **(5) Prior-art debts**: rows 128 and 130's
+     "not found in print" (the equality is in the release, dated three days before FS-103);
+     `[BourgeatHeinrichMelottiRobert2015]` against row 130's attribution of the averaging device; Crum 1956 and
+     Gneiting–Sasvári 1999 as the classical home of row 122's FR-1. **(6) Their bibliography**: 33 entries; 17 held
+     here (7 under another key); **16 not held**, rows proposed for § C, six worth holding with a URL and a target
+     name each. **(7) Its predictions**: five of nine met, two half, two lost; and this project's stub had "χ_CP(ℝ²)
+     ≥ 6 proved — 0.02", scored against. **My receipt**: its report and seven commits are on `main`; its gate's
+     saved output ends "GATE: PASS (0 failures, 2 warnings)" with two controls fired on their planted faults; its
+     independent check of the manuscript's seven-point certificate prints "CERTIFICATE HOLDS" and, by the gate's
+     line, "CERTIFICATE FAILS" under its fault; its stages' headings and §§ 5.0, 5.5 read by me; the Lean
+     statements it names were read by me at items 613 and 618. Not checked by me: any step of its reading; its two
+     constructions at seven; its drafts against the files they would replace. **Credit**: nine predictions
+     registered before the proofs and scored against itself; a wrong construction of its own caught and replaced
+     before anyone used it; the sentence nobody wanted written — the equality this project called its own is in
+     print, earlier and stronger — written plainly; and its last line, that its own most quotable reading "is one
+     mind's reading, not a derivation". **Rulings.** (a) **Its drafts are filed in one filing, by the Clerk as my
+     pen on a branch of its own, after wave 8's landing is back and the asking lane's re-rank is in** — so that
+     the Frontier's paragraphs and its ranking change together. Alternative: file the two sentences of Kooshi's
+     answer 2 now and the rest later. Why not: a landing is in flight (no `CLAUDE.md` edit), and a front page
+     filed twice in one day would carry a ranking that contradicts its own first paragraph for some hours.
+     Confidence: high. (b) **A grade word is added to `CLAUDE.md` § Notation at that filing**: **[kernel, outside]**
+     — kernel-checked in an outside library at its own pin, built and audited here; it enters this library as a
+     declared outside theorem. Alternative: its § 5.0's sentence each time. Why a word: the grade will recur (the
+     release holds 371 other families). Confidence: medium-high; Kooshi is told. (c) **The claim list and the
+     fallback write-up (FS-102) change with the publication position** — the plane equality and six for measurable
+     colourings are theirs; this project's on that ground are the number-field side, row 131's stability form and
+     the six-map programme: the claim list at the filing, from its draft; FS-102's fate is the asking lane's to
+     rank and Kooshi's to decide. (d) **The six papers worth holding go to Kooshi as fetch requests** (a URL and a
+     target file name each, from its § 5.5): nothing is fetched around a block. (e) **Slot → FS132-P1, the asking
+     lane** (`poros`; its brief regenerated to name this job's stage 5 and the audit's hand-back, gate exit 0, 21
+     quotations), launched 2026-10-07 about 02:45 UTC. In flight: 3 (the asking lane; wave 8's landing; wave 9's
+     implementer).

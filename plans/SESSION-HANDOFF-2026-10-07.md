@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-07: an outside proof of six is this project's literature; the Lean backlog is paused; the plan
 
 *Written 2026-10-07 (UTC) by Keryx, at Kooshi's word ("Make sure your handoff carries the new plan"). Current state only. A successor
-arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–619 (the day's record, each with what was
+arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–620 (the day's record, each with what was
 checked by whom); then, for the paused backlog only, `plans/SESSION-HANDOFF-2026-10-06.md` §§ 2–8, which this file supersedes for
 everything else.*
 
@@ -34,7 +34,7 @@ everything else.*
 | # | his answer | what it means here | state |
 |---|---|---|---|
 | 1 | import; adopt parts piecemeal if needed | In Lean the release's theorems enter as **declared outside theorems** (`LEAN.md` § Assumptions, the four items): the five-colour theorem and the transfer for every `k`. A piece of their Lean is ported to this pin only when a later job needs it. | The auditor (EXT-OAI1) is drafting the exact statements, their four items, the bridging theorems (`6 ≤ χ ∧ χ ≤ 7`; what discharges `Row130Collapse`, which lives on `fs131-w9`) and the natural first pieces to adopt. **Owed: an implementer's brief from that draft; it lands through the gate after wave 8's landing** (the trust ledger's outside-axiom count rises from 1). |
-| 2 | "indeed" | **The front page changes**: the interval becomes `6 ≤ χ(ℝ²) ≤ 7` (row 33's lower end by `[OAIMath2026]`); "given MR" leaves `χ(ℝ²) = χ_m⁰(ℝ²)` (row 130; `CLAUDE.md` § The aim, links 1 and 5); FS-104's question is answered; the field rows keep "given MR". | **Owed: one filing, after wave 8's landing is back** (no `CLAUDE.md` edit while a landing is in flight), from the lanes' drafts — the audit's stage 7 and the reading's item 5 — filed verbatim, with `tools/claude_md_fact_audit.py --base e3d9b643` and `--dupes`. |
+| 2 | "indeed" | **The front page changes — one filing (ruling 620 (a)), by the Clerk as my pen on its own branch, after wave 8's landing is back and the asking lane's re-rank is in, from EXT-OAI2's § 5.1 and EXT-OAI1's stage 8, verbatim; a new grade word [kernel, outside] enters § Notation with it (ruling 620 (b))**: the interval becomes `6 ≤ χ(ℝ²) ≤ 7` (row 33's lower end by `[OAIMath2026]`); "given MR" leaves `χ(ℝ²) = χ_m⁰(ℝ²)` (row 130; `CLAUDE.md` § The aim, links 1 and 5); FS-104's question is answered; the field rows keep "given MR". | **Owed: one filing, after wave 8's landing is back** (no `CLAUDE.md` edit while a landing is in flight), from the lanes' drafts — the audit's stage 7 and the reading's item 5 — filed verbatim, with `tools/claude_md_fact_audit.py --base e3d9b643` and `--dupes`. |
 | 3 | build on it; write the stub | The consequence the manuscript's reader spotted and the manuscript does not state — the release's rigidity theorem for one colour class gives `α₁(ℝ²) = m₁(ℝ²)` and its fractional form with no hypothesis (item 613 (1); `plans/EXT-OAI2-reading.md` § 2.6; one step unchecked) — is **FS-133**. | The asking lane mints its stub (its brief, item 4). **Then a deriver's opening job on it.** |
 | 4 | probably allow, but audit what it does | The release's own checking tool needs three outside programs (`comparator`, `lean4export`, `landrun`). **Nothing is run until an audit of each — source, publisher, what it reads, writes, executes, network, privileges, a user-local build — has come to me and I have said go.** | Asked of EXT-OAI1 by message; if its budget does not hold it, a short job of its own (brief not written). |
 | 5 | pause the backlog; a stopping point; Poros re-ranks | **FS-131 launches nothing new.** Its two running jobs finish (§ 2). The asking lane re-ranks the whole frontier with the release as literature, poses **FS-132** (the milestone that opens on it, aimed at six against seven), and says which backlog waves resume, which are retired or re-aimed, and which wait. | Brief written and gated — § 3, first in the queue. |
@@ -52,7 +52,8 @@ everything else.*
 | job | where | what | on its hand-back |
 |---|---|---|---|
 | ~~EXT-OAI1~~ | — | **done, item 619**: the proof stands in the kernel at its own pin — built, axioms with a control, statement by signature, 70 of 70 modules replayed. Its drafts: the import skeleton `data/external/oai1/audit/ImportSkeleton.lean` (two axioms, five bridges, one `sorry` leaf), the sentences for rows 33 and 130 and the bibliography cells in `plans/EXT-OAI1-audit.md` stage 8. **The special slot is closed: three slots.** | — |
-| **EXT-OAI2** (`ephodos`) | `main`, under `plans/` and `data/external/oai2/` | the manuscript read in full against this project's rows — the dictionary (item 611), the transfer (item 613) and the obstruction with every step against every `k` (item 618) are done; left: its stage 5 — the front page's replacement sentences, the untouched list, the bibliography rows (16 of the manuscript's 33 references are not held) — and its report | review; log; its item-5 table is the front page's draft (answer 2). |
+| ~~EXT-OAI2~~ | — | **done, item 620**: the manuscript read in full, no gap found, one mind. **Its stage 5 is the front page's draft** (`plans/EXT-OAI2-reading.md` § 5.1: `CLAUDE.md`'s mission row, the aim's links, the Frontier's first paragraph and item 31, the theory paragraph; `LEDGER.md` rows 33, 107, 120, 125, 128–132, 140, 154 and the claim list; three grokkings; § 5.0 the grade; § 5.5 sixteen bibliography rows). | — |
+| **FS132-P1** (`poros`) | `main`, under `plans/` and `data/fs132/` | the re-rank with the release as literature; FS-132's question card; FS-133's stub; the table that restarts, retires or re-aims each backlog wave | it messages when FS-132's card is saved; on its hand-back: review, log, file its re-rank and banners **in the one filing of ruling 620 (a)**; then the openings of FS-133 and FS-132 (§ 3). |
 | **FS131-L8A** | `.claude/worktrees/fs131-w8l`, `fs131-w8l` | wave 8's landing — joined, `main` merged, docstrings corrected (items 600, 605), a first full gate pass done; a second pass, begun after the incident of item 612, is its evidence | **the landing procedure of `plans/SESSION-HANDOFF-2026-10-06.md` § 5** — `git pull --ff-only`; three digests (`scripts/gate_report.py axioms / vacuity / assumptions`, previous receipts `data/fs131/lt5/gate/receipt-{axioms,vacuity,assumptions}-landed2.log`); file `CLAUDE.md` § Trust ledger and § The gate, a `GATE_CHANGES` entry; fact audit `--base e3d9b643`; its `LEAN.md` line on the vacuity marker (item 605). **Then the front page's filing of answer 2 in a second commit.** Until it is back: commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`. |
 | **FS131-I9B** | `.claude/worktrees/fs131-w9b`, `fs131-w9b` | wave 9's first implementer — the three uniform-bound leaves are proved (its stage 4); the models M1–M3 left | review, log; it does not land. **Its slot goes to the queue of § 3, not to the backlog.** |
 
@@ -61,7 +62,7 @@ record's last SAVED stage with a fresh agent on the same brief.
 
 ## 3. The queue of the new work — in order; three slots (the special slot closes with EXT-OAI1)
 
-1. **FS132-P1, the asking lane** (`subagent_type: "poros"`): `data/fs132/briefs/FS132-P1-rerank.md` (generator
+1. ~~FS132-P1, the asking lane~~ — **running** (item 620 (e)). Was: (`subagent_type: "poros"`): `data/fs132/briefs/FS132-P1-rerank.md` (generator
    `data/fs131/briefs/scripts/mk-fs132-p1.py`; gate exit 0; it names the reading's stages 3 and 4 as saved). The re-rank; FS-132's question card; **FS-133's stub**; the
    table that restarts or retires each backlog wave. Record `plans/POROS-2026-10-07-after-release.md`. It messages when FS-132's card
    is saved. **Into the first freed slot.**
@@ -100,7 +101,8 @@ hypothesis of wave 9, is the statement the release's transfer proves** (with the
 
 ## 5. Held for Kooshi
 
-- **Nothing is waiting on him.** The comparator runs only after its audit reaches me (answer 4); I tell him what the audit says
+- **Six papers the release's manuscript rests on are worth holding and are not held** (`plans/EXT-OAI2-reading.md` § 5.5: Furstenberg 1977; Zimmer 1976, two papers; Jamneshan 2023 with its corrigendum; Bourgeat–Heinrich–Melotti–Robert, arXiv:1501.02441 — it bears on an attribution of ours; Deroin–Kleptsyn–Navas, arXiv:0806.1974; Crum 1956 with Gneiting–Sasvári 1999): each a URL and a target file name there; handed to him, not fetched around a block.
+- **Nothing else is waiting on him.** The comparator runs only after its audit reaches me (answer 4); I tell him what the audit says
   before the first run.
 - His standing words still in force: measure rigidity at number fields (FS-113, FS-101) stays held — no formalizing, no pricing, no
   re-offer (the release does not touch it: item 613); published artifacts stay local; no agent posts, comments or forks anything
