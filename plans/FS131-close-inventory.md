@@ -8074,3 +8074,21 @@ reason by the close.*
      already asks its route; the Lean names go to it by message when it is running). (c) If the build is clean, the
      first sentence this project's front page would owe is about row 130, not row 33: its "given MR" — a draft for
      Kooshi's decision, written by the audit (its brief, item 7) and the reading (its item 5), filed by nobody yet.
+
+609. **EXT-OAI1, second message: by text the proof's import cone holds nothing a kernel would not check** (source: EXT-OAI1's message to "main", 2026-10-07; record `plans/EXT-OAI1-audit.md` stage 3, commit `11fa8ea4`; prints under `data/external/oai1/`).
+     **Its account.** The cone of the solution module, from import lines (its parser checked against `rg`): **70
+     modules, 30,336 lines** — 37 of `OAI.Geometry.PlaneColoring` (14,142 lines; the directory's other nine are the
+     seven-colour side), 19 of `OAI.Analysis.PlaneSpectrum` (8,466), 14 of `OAI.MeasureTheory.CompactFactors` (7,728);
+     the only outside import is Mathlib. **Counts over the 70 files, all zero**: `axiom`; `sorry`, `admit`,
+     `sorryAx`; native evaluation in every spelling it lists; `implemented_by`, `extern`, `csimp`; `unsafe`,
+     `opaque`, `partial`; any `set_option`; debug options; new syntax, macros, `#eval`; `attribute` commands. Its
+     control: fourteen planted lines in a scratch copy, each pattern reporting its plant. What is there, elaboration
+     only: eighteen `local instance` lines, `open scoped Classical` in eleven files. The pinned Mathlib revision is
+     the official tag for the toolchain, its checkout unmodified. **What text cannot decide, in its words**: a
+     `sorryAx` or native axiom reached through a tactic, and the instance in the stored statement — the build's and
+     `#print axioms`'s to say. **My receipt**: its commit is on `main`; its print of the cone lists 70 modules; **my
+     own search** (`rg -P` for `sorry`, `admit`, `native_decide`, `sorryAx`, an `axiom` declaration, `unsafe`,
+     `implemented_by`, `set_option`) over the three directories' 79 Lean files finds no file with a match, and the
+     same pattern on the release's challenge file, which holds a `sorry`, finds it. Not checked by me: its cone
+     computation; the patterns I did not run. **Told to Kooshi at once.** The build of the 70 modules has started
+     under the slot.
