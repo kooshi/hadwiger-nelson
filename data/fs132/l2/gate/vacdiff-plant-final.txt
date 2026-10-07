@@ -1,0 +1,43 @@
+planted: dropped `EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis ::…`; a row on main's `Complex.I.eq_1`; an UNKNOWN row on new `HadwigerNelson.Outside.OAI158.DensityOne.compl`; declarations +1
+counter vs the main scan: declarations 14845 / 14845, refutations 215 / 215: agree
+counter vs the landing scan: declarations 15292 / 15293, refutations 226 / 226: COUNTER-DISAGREES
+LOST EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis :: HadwigerNelson.Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1
+NOT NEW SITE GENERIC Complex.I.eq_1 :: F.Valid
+FLAGGED SITE UNKNOWN HadwigerNelson.Outside.OAI158.DensityOne.compl :: F.Valid
+main rows 1528, landing rows 1529; lost 1 (0 with a removed declaration); added 2
+  added SITE UNKNOWN on Valid: 1
+  added rows in Outside.OAI158States: 1
+  declarations: 14845 -> 15293 (+448)
+  refutations-skipped: 215 -> 226 (+11)
+  sites: 1447 -> 1447 (+0)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1404 -> 1404 (+0)
+  unknown: 2 -> 2 (+0)
+  module Outside.OAI158AngularBoundary: declarations 0 -> 1 (+1), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158BinaryPalettes: declarations 0 -> 13 (+13), refutations 0 -> 1 (+1)  [new module]
+  module Outside.OAI158CircleMaps: declarations 0 -> 73 (+73), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158CircleTransport: declarations 0 -> 14 (+14), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Expansion: declarations 0 -> 8 (+8), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Palette: declarations 0 -> 108 (+108), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158PaletteDensity: declarations 0 -> 33 (+33), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158PaletteTransport: declarations 0 -> 22 (+22), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158States: declarations 0 -> 23 (+23), refutations 0 -> 1 (+1)  [new module]
+  module Plane.SixRing.Basic: declarations 0 -> 28 (+28), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SixRing.Chart: declarations 0 -> 14 (+14), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SixRing.ChartMeasure: declarations 0 -> 9 (+9), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SixRing.Confine: declarations 0 -> 6 (+6), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SixRing.Excl: declarations 0 -> 3 (+3), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SixRing.Kill: declarations 0 -> 7 (+7), refutations 0 -> 3 (+3)  [new module]
+  module Plane.SixRing.NullSets: declarations 0 -> 11 (+11), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SixRing.Orbit: declarations 0 -> 17 (+17), refutations 0 -> 3 (+3)  [new module]
+  module Plane.SixRing.Shift: declarations 0 -> 14 (+14), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SixRing.State: declarations 0 -> 12 (+12), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SixRing.StepLemma: declarations 0 -> 21 (+21), refutations 0 -> 1 (+1)  [new module]
+  module Plane.SixRing.Tips: declarations 0 -> 8 (+8), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SixRing.TwoPairs: declarations 0 -> 2 (+2), refutations 0 -> 2 (+2)  [new module]
+  by module: declarations +447, refutations +11: MODULE-SUM differs from the scans
+vacdiff: FAIL (5)
+exit=1

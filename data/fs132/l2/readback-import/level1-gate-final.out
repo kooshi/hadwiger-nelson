@@ -1,0 +1,85 @@
+IDENTICAL  AEMeasurable (def)
+IDENTICAL  AddCircle (def)
+IDENTICAL  AddCircle.haarAddCircle (def)
+IDENTICAL  AddCircle.toCircle (def)
+IDENTICAL up to the NAMES of universe parameters  AddCommGroup.toAddGroup (def): levels=[u_2] there, levels=[u] here
+IDENTICAL  AddSubgroup.zmultiples (def)
+IDENTICAL  And (inductive)
+DIFFERENT  Circle._proof_1 (theorem): type; at char 297: release …ing [0]) (c Complex [])) (((c Ring.toSemiring [0]) (c Complex [])) (((c DivisionRing.toRing [0]) (c Complex [])) (((c NormedDivisionRing.toDivisionRing [0]) (c Complex [])) (((c No… | here …ing [0]) (c Complex [])) (((c DivisionSemiring.toSemiring [0]) (c Complex [])) (((c DivisionRing.toDivisionSemiring [0]) (c Complex [])) (((c NormedDivisionRing.toDivisionRing [0])…
+IDENTICAL  Circle._proof_2 (theorem)
+IDENTICAL  Complex (inductive)  [module: Mathlib.Data.Complex.Basic here, Mathlib.Basic.Complex.Basic at the release]
+IDENTICAL  Complex.borelSpace (theorem)
+IDENTICAL  Complex.instAdd (def)  [module: Mathlib.Data.Complex.Basic here, Mathlib.Basic.Complex.Basic at the release]
+IDENTICAL  Complex.instFiniteDimensionalReal (theorem)
+IDENTICAL  Complex.instNorm (def)
+IDENTICAL  Complex.instNormedAddCommGroup (def)
+IDENTICAL  Complex.instNormedField (def)
+DIFFERENT  Complex.instRCLike (def): value; at char 911: release …medField [])))))))))) (((c AddMonoid.toAdd [0]) (c Complex [])) (((c AddCommMonoid.toAddMonoid [0]) (c Complex [])) (((c Semiring.toAddCommMonoid [0]) (c Complex [])) (((c Ring.toS… | here …medField [])))))))))) (((c AddSemigroup.toAdd [0]) (c Complex [])) (((c AddMonoid.toAddSemigroup [0]) (c Complex [])) (((c AddCommMonoid.toAddMonoid [0]) (c Complex [])) (((c Semir…
+IDENTICAL  Complex.instSub (def)  [module: Mathlib.Data.Complex.Basic here, Mathlib.Basic.Complex.Basic at the release]
+IDENTICAL  Complex.measurableSpace (def)
+IDENTICAL  Eq (inductive)
+IDENTICAL  Exists (inductive)
+IDENTICAL  Fact (inductive)  [module: Mathlib.Logic.Basic here, Mathlib.Basic.Logic.Basic at the release]
+DIFFERENT  Filter.Eventually (def): value; at char 377: release …ship [(p u_1)]) #2)) #0) (((c Set.ofPred [(p u_1)]) #2) (lam.d x #2 (#2 #0)))))))… | here …ship [(p u_1)]) #2)) #0) (((c setOf [(p u_1)]) #2) (lam.d x #2 (#2 #0)))))))…
+IDENTICAL  Fin (inductive)
+IDENTICAL  Fin.instMeasurableSpace (def)
+IDENTICAL  FiniteDimensional.rclike_to_real (theorem)
+IDENTICAL  HAdd.hAdd (def)
+IDENTICAL  HMul.hMul (def)
+IDENTICAL  HSub.hSub (def)
+IDENTICAL  LT.lt (def)
+IDENTICAL  Measurable (def)
+IDENTICAL up to the NAMES of universe parameters  MeasureTheory.Measure (inductive): levels=[u_5] there, levels=[u_6] here
+IDENTICAL  MeasureTheory.Measure.instFunLike (def)
+IDENTICAL  MeasureTheory.Measure.prod (def)
+IDENTICAL up to the NAMES of universe parameters  MeasureTheory.MeasureSpace.toMeasurableSpace (def): levels=[u_5] there, levels=[u_6] here
+IDENTICAL up to the NAMES of universe parameters  MeasureTheory.MeasureSpace.volume (def): levels=[u_5] there, levels=[u_6] here
+IDENTICAL  MeasureTheory.ae (def)
+IDENTICAL  Membership.mem (def)
+IDENTICAL  MulZeroClass.toZero (def)
+IDENTICAL  MulZeroOneClass.toMulOneClass (def)
+IDENTICAL  Nat (inductive)
+IDENTICAL  Nat.instAtLeastTwoHAddOfNat (theorem)
+IDENTICAL  Nat.instMulZeroClass (def)
+IDENTICAL  Nat.instNeZeroSucc (theorem)
+IDENTICAL  Ne (def)
+IDENTICAL  NeZero (inductive)
+IDENTICAL up to the NAMES of universe parameters  Norm.norm (def): levels=[u_4] there, levels=[u_8] here
+IDENTICAL  NormedCommRing.toSeminormedCommRing (def)
+IDENTICAL up to the NAMES of universe parameters  NormedField.toNormedCommRing (def): levels=[u_1] there, levels=[u_2] here
+IDENTICAL  Not (def)
+IDENTICAL  OfNat.ofNat (def)
+IDENTICAL  One.toOfNat1 (def)
+IDENTICAL  Prod (inductive)
+IDENTICAL  Prod.fst (def)
+IDENTICAL  Prod.instMeasurableSpace (def)
+IDENTICAL  Prod.snd (def)
+IDENTICAL  QuotientAddGroup.measurableSpace (def)
+IDENTICAL  Real (inductive)  [module: Mathlib.Data.Real.Basic here, Mathlib.Basic.Real.Basic at the release]
+IDENTICAL  Real.instAddCommGroup (def)  [module: Mathlib.Data.Real.Basic here, Mathlib.Basic.Real.Basic at the release]
+DIFFERENT  Real.instLT (def): value; at char 109: release …Real [])) (c _private.Mathlib.Basic.Real.Basic.0.Real.lt []))… | here …Real [])) (c _private.Mathlib.Data.Real.Basic.0.Real.lt []))…  [module: Mathlib.Data.Real.Basic here, Mathlib.Basic.Real.Basic at the release]
+DIFFERENT  Real.instMul (def): value; at char 111: release …Real [])) (c _private.Mathlib.Basic.Real.Basic.0.Real.mul []))… | here …Real [])) (c _private.Mathlib.Data.Real.Basic.0.Real.mul []))…  [module: Mathlib.Data.Real.Basic here, Mathlib.Basic.Real.Basic at the release]
+IDENTICAL  Real.instNatCast (def)  [module: Mathlib.Data.Real.Basic here, Mathlib.Basic.Real.Basic at the release]
+DIFFERENT  Real.instOne (def): value; at char 111: release …Real [])) (c _private.Mathlib.Basic.Real.Basic.0.Real.one []))… | here …Real [])) (c _private.Mathlib.Data.Real.Basic.0.Real.one []))…  [module: Mathlib.Data.Real.Basic here, Mathlib.Basic.Real.Basic at the release]
+DIFFERENT  Real.instZero (def): value; at char 113: release …Real [])) (c _private.Mathlib.Basic.Real.Basic.0.Real.zero []))… | here …Real [])) (c _private.Mathlib.Data.Real.Basic.0.Real.zero []))…  [module: Mathlib.Data.Real.Basic here, Mathlib.Basic.Real.Basic at the release]
+IDENTICAL  Real.measurableSpace (def)
+IDENTICAL  Real.pi (def)
+IDENTICAL  Ring.toSemiring (def)
+IDENTICAL  SeminormedCommRing.toSeminormedRing (def)
+IDENTICAL  SeminormedRing.toRing (def)
+IDENTICAL  SetLike.instMembership (def)
+IDENTICAL  Submonoid (inductive)
+IDENTICAL  Submonoid.instSetLike (def)
+IDENTICAL  Submonoid.unitSphere (def)
+IDENTICAL  Subtype.val (def)
+IDENTICAL  Zero.toOfNat0 (def)
+IDENTICAL  instHAdd (def)
+IDENTICAL  instHMul (def)
+IDENTICAL  instHSub (def)
+IDENTICAL  instInnerProductSpaceRealComplex (def)
+IDENTICAL  instMulZeroOneClassOfSemiring (def)
+IDENTICAL  instOfNatAtLeastTwo (def)
+IDENTICAL  instOfNatNat (def)
+DIFFERENT  measureSpaceOfInnerProductSpace (def): value; at char 2358: release … u_3)]) (c Real [])) #5) (((c CommSemiring.toSemiring [0]) (c Real [])) (((c Semifield.toCommSemiring [0]) (c Real [])) (((c Field.toSemifield [0]) (c Real [])) (((c NormedField.to… | here … u_3)]) (c Real [])) #5) (((c DivisionSemiring.toSemiring [0]) (c Real [])) (((c Semifield.toDivisionSemiring [0]) (c Real [])) (((c Field.toSemifield [0]) (c Real [])) (((c Normed…
+level one: constants 83  identical: 69  identical up to universe-parameter names: 6  different: 8  absent: 0  declared in another module at the other pin: 11
+different, to be read: Circle._proof_1, Complex.instRCLike, Filter.Eventually, Real.instLT, Real.instMul, Real.instOne, Real.instZero, measureSpaceOfInnerProductSpace

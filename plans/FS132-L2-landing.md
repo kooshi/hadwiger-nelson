@@ -403,3 +403,294 @@ clause. **The entry's statement at `U = ℂ`**; the release's `two_state_impossi
 4. Nothing else: the labels, the points or sets, the straddle regions, the two clauses on the ring and the conclusion
    are the row's, clause for clause, and the row's "Not claimed" lines are true of the Lean statements too (the
    labels `a j` are not asked to be present near `p`; nothing at seven labels; nothing about a cycle of another length).
+
+## Stage 9 — SAVED (FS132-L2): the full gate on one commit — `b46a9d57`
+
+One pass is every step in order, one at a time under the slot (`data/fs132/l2/run-gate.sh final`, after FS132-L1's
+runner, launched from a snapshot copy; every log under `data/fs132/l2/gate/` with its exit status on its last line;
+`run-gate-final.head` records the commit and that **no tracked file was modified**; `run-pass-final.out` holds every
+step's exit; 15:31Z–15:56Z). **Every step exit 0 but the one planted control that must exit 1** (the scan difference's
+plants); "tracked files modified after the pass: 0". Counts below are read from the saved logs, not from the runner's
+summary. It is the **first** full pass of this job: none was red.
+
+**Before the pass, the lint's negative control** (`data/fs132/l2/lint-plant.sh`, FS132-L1's script pointed at a module
+of this landing; `lint-plant-run.out`): `theorem zz_l2_lint_plant [Nonempty ℕ] : (1 : ℕ) = 1 := rfl` planted at the end
+of `Plane/SixRing/TwoPairs.lean` (never committed), built — "479 of 479 batches, 2 module(s) rebuilt, **0 module(s)
+with warnings**" (`lint-plant-build.log`: the build's own linters do not see it) — then the guarded lint: **exit 1**,
+"`unusedArguments`: (2/2) Failed with 1 messages", "error: @zz_l2_lint_plant 1 unused argument" (`lint-plant.log`).
+Restored by `git checkout` under a trap: the digest is the one taken before, the plant's name in the file 0 times, no
+tracked file modified; the pass's build recompiled the module and the root from the restored text.
+
+| step | result, read from its saved log (`data/fs132/l2/gate/`, tag `final`) | log |
+|---|---|---|
+| build | "build: OK — 479 of 479 batches, 2 module(s) rebuilt, **0 module(s) with warnings**, 8m49s" (`Plane.SixRing.TwoPairs`, `Proofs`: the restore after the lint control); lines holding "warning" in the build log: 1, that sentence; in Lake's full log: 0 | `build-final.log`, `receipt-build-final.log` |
+| `sorry` | narrow pattern (`^\s*sorry\s*$`, `:= sorry`, `by sorry`): **0** lines; `\bsorry\b`: 24, all prose (stage 2's 25 less the header line this job rewrote) | `sorry-narrow-final.txt`, `sorry-wide-final.txt` |
+| `axiom` lines in `Proofs/` | 4 line-initial, as on `main`: the two imports (`OAI158.lean` ll. 107, 119), `kloosterman_bound`, and one line of a docstring's code block (`Sat/Lrat.lean` l. 85). **Three axioms; the landing brings none** | `axiom-lines-final.txt` |
+| doubled names, **after the build and before the audit** (`--mem 16`) | "scanned 7490 modules, 1866 of them the package's (1866 source files)"; "dupnames: OK — no name is declared by two modules (24 generated on demand, listed above)" | `dupnames-final.log` |
+| its self-test | "OK — all 15 controls behaved: every planted fault fired, and every partner passed." | `dupnames-selftest-final.log` |
+| every declaration in a block, before the audit | "declarations the landing brings: 377 (of 447 constants in 22 modules); with one line: 377; unfiled: 0; doubled: 0" | `unfiled-final.txt` |
+| axioms | "audited: **6953 records — 6910 clean on the standard axioms, 20 axiom-free, 18 imported** (resting on a declared outside theorem), **5 declared purchase(s)**"; "declared imports (3): …kloosterman_bound, …no_proper_five_coloring, …proper_to_borel_weak"; "library axioms other than native auxiliaries (3): … every one declared"; "axioms: OK". `CLAUDE.md` § Trust ledger flagged stale, "6533 clean → 6910" (draft 1) | `axioms-final.log`, `receipt-axioms-final.log` |
+| its self-test | "OK — every planted fault fired, and every partner passed." (the controls file is untouched: no control's expected count reads a number this landing moves — it adds no import) | `axioms-selftest-final.log`, `receipt-axioms-self-test-final.log.xz` |
+| **every declaration of the landing filed on what it rests on** (`tools/fs132_l2_records.py`) | "landing: 447 constants in 22 modules; declarations it brings: 377 (308 THM, 66 DEF, 3 IND); records in the log: 6953"; "landing records on exactly the three: 376", "on fewer: [Quot.sound, propext]: 1"; the five headline lines, each "under CLEAN: [Classical.choice, Quot.sound, propext]"; "records carrying kloosterman_bound: 8 (filed: 8); of the landing's: 0", "…no_proper_five_coloring: 5 (filed: 5); of the landing's: 0", "…proper_to_borel_weak: 5 (filed: 5); of the landing's: 0"; "records under IMPORTED 18; carrying two imports 0; carrying sorryAx 0"; "records: PASS" | `records-final.txt` |
+| its plants | twelve, one at a time, "every one of 12 fired; the unplanted lists pass" (stage 5 lists them; the wrong filing — a landing record under IMPORTED on the transfer — among them) | `records-plant-final.txt` |
+| the import's block as filed, with its two controls (`tools/fs132_l1_block.py`, FS132-L1's) | "records filed: 22 as filed: 22 (clean 12, on H 5, on T 5) refused: 0"; the wrong filing: refused exactly `six_le_chiM0`, `chiM0_six_or_seven`, `seven_le_chromaticNumber_plane_iff`, "CONTROL FIRED AS EXPECTED"; the planted `sorry`: refused eleven; each read as a plain check exits 1; "block: PASS — every record as filed; both controls fired" | `block-final.txt`, `block-*-final.*` |
+| the generated modules and the licence copy against the generator | "CHECK OK" (ten files; the block of 163 records); "SELF-TEST OK: 10 plants refused and 1 partner accepted" | `port-check-final.txt`, `port-selftest-final.txt` |
+| vacuity | "scanned: **declarations=15292 refutations-skipped=226**"; "sites: **sites=1447 vacuous=0 stale=0 declared=3 witnessed=38 generic=1404 unknown=2**"; "evidence: 18 emptiness proof(s), 63 witness(es)"; the baseline's header "match (9 of 9 compared)"; "UNKNOWN …hexShell_plane5", "UNKNOWN …hexShell_plane6", held as on `main`; "vacuity: OK". `CLAUDE.md` § The gate flagged stale on two counts (draft 4) | `vacuity-final.log`, `receipt-vacuity-final.log` |
+| the scan against `main`'s, row for row | "main rows 1528, landing rows 1528; lost 0 (0 with a removed declaration); added 0"; twenty-two new modules, "by module: declarations +447, refutations +11: equal to the scans difference"; "vacdiff: PASS" | `vacdiff-final.txt` |
+| its self-test, and the difference's plants | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent."; the plants: exit 1 — COUNTER-DISAGREES, LOST, NOT NEW, FLAGGED, MODULE-SUM | `vacuity-selftest-final.log`, `vacdiff-plant-final.txt` |
+| assumptions | "assumptions: OK — 3 outside theorem(s) as axioms, with 18 theorem(s) resting on them; 19 named and 16 inline hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s) and mentioned by 1"; "assumed: **axioms=3 rests=18 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1**"; "decided: … conditions=38 fails=0"; "hints=0 silent=1 unseen=16765"; the ledger's header and `CLAUDE.md` § Trust ledger both "match (9 of 9 compared)" | `assumptions-final.log`, `receipt-assumptions-final.log` |
+| its self-test | "OK — all 33 checks behaved: every planted fault fired, and every partner stayed silent." | `assumptions-selftest-final.log` |
+| architecture | "RESULT: PASS" | `arch-final.txt` |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "(2/2) Passed!"; its control red before the pass (above) | `lint-final.log`; `../lint-plant.log` |
+| notes, as the last landing ran them | `tools/fs131_l5_notes.py --only-flagged`: "notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58", 0 CONFLICT — `main`'s count: **the check reads the modules of QA4's audit, none of them this landing's**; `tools/fs131_qa4_notes.py --self-test`: "OK (6 controls, 1 planted)" | `notes-l5-final.txt`, `notes-qa4-selftest-final.txt` |
+| **the import's stored-term comparison, on this commit** (the module's olean `0f3b15f3…`, FS132-L1's) | "declarations: 8 compared: 8 identical: 8 different: 0", "READ-BACK IDENTICAL: all 8 declarations, term for term, modulo the namespace"; "SELF-TEST OK: … 6 plants"; the Lean control "FIRED AS EXPECTED"; 0 files written at the release's side; "READ-BACK RUN gate-final: OK" | `readback-import-final.txt`; `../readback-import/*-gate-final.*` |
+| **the port's stored-term comparison, on this commit** | the release's print `c3343d13…` and this library's print `7874161e…`, each the port's committed print byte for byte; "READBACK OK"; the port's tables unchanged as git sees them; "SELF-TEST OK: 13 plants refused, the unplanted pair passes"; "LEVEL1 OK"; "PORT READ-BACK RUN gate-final: OK" | `readback-port-final.txt`; `../readback-port/*-gate-final.*` |
+| the five theorems by `#check`, with their axioms | each as stage 8 reads it; each "depends on axioms: [propext, Classical.choice, Quot.sound]"; the two controls print their imports (`not_colorable_five`, `chromaticNumber_plane_eq_chiM0`) | `checks-final.out` |
+| the baseline and the scan's source | "baseline entries: unchanged from main's (2)"; lines of `scripts/Vacuity.lean` that differ from `main`'s: 0 | `baseline-final.txt` |
+| the three digests against the previous landing's receipts (`data/fs132/l1/gate/receipt-*-final.log`) | axioms: **377 rows added**, every one CLEAN, none removed; "clean records, by axiom set: 6745 [propext, Classical.choice, Quot.sound], 86 [propext, Quot.sound], 78 [propext], 1 [Quot.sound]". vacuity: the two counts move, **no row added or removed**. assumptions: **three rows added**, the three `CONDITION` rows of stage 6, nothing else | `digest-axioms-final.txt`, `digest-vacuity-final.txt`, `digest-assumptions-final.txt` |
+
+**Read aloud against the informal claim.** The claim of this landing: "the first night's exclusion is a kernel theorem
+for a colouring of the whole plane, and so is everything of the release that it stands on." What the gate shows: no
+`axiom` enters and no `sorry` is in `Proofs/`; every one of the 377 declarations the landing brings has one record,
+under CLEAN, on a subset of the standard three, and none rests on either declared outside theorem or on Weil's bound;
+no name is declared twice, so each printed list is the list of the proof the kernel checked; nothing the landing brings
+takes a declared hypothesis, so nothing in it is conditional; the ported text is the generator's, the licence copy the
+release's file, and the stored statements and definitions print as the port's own did. **What the gate does not show,
+and this record says**: that the hypotheses of the five theorems can be met short of the conclusion — the scan has no
+site there, and stage 7 names each model and how it is held; that the row's own sentence, on an open set, is a theorem
+— it is not, and stage 8 says what is; and that the port is the release's term for term, which no check can show
+across two Mathlib pins (the port's record § 3.3).
+
+## Open gate items at this landing
+
+1. **`OutsideOrbit` has no kernel model.** Its docstring names one in words (the two-colouring by a line through `p`,
+   "not proved here"), and `scripts/Assumptions.lean`'s reason says "no declaration exhibits one". Computing a palette
+   of a given colouring is not something this library can yet do; a model would be a small module of its own.
+2. **The hypotheses of the five theorems have no joint kernel model short of one clause.** At six labels the first
+   hypothesis is the open question; the docstrings say so and name what satisfies the rest (`LEAN.md` § The gate, the
+   rule's third form). The two iteration terms of `data/fs132/l2/points-form.lean` (the labels; `FourCycleStraddle` at
+   the constant colouring) are checked and are not library theorems: Amendment 1 adds one statement and no other.
+3. **The note on the hexagonal colouring in `no_outside_orbit_points`'s docstring** ("satisfies the analogous local
+   hypotheses on the points `q j` at a point near which three tiles meet") stands on the theorem record's control
+   `margin-witness` — [tools], and for the vertex's three labels, not a four-cycle. It says "analogous"; a reader should
+   not take it for a model of the four-cycle hypothesis.
+4. **`Outside/OAI158.lean`'s header does not name the licence** (the import's module, on `main`, hand-written; ten
+   declarations copied from the release's `Coloring.lean`). Not this landing's module and not generated; held.
+5. **The vacuity scan tracks no carrier of these modules** (`WeakColoring`, as `ProperColoring` at FS132-L1): for the
+   tooling job, beside FS132-L1's questions. And the notes check reads QA4's modules only: no instrument reads the
+   model notes of `Plane/SixRing`.
+
+## Drafts for the front page (FS132-L2)
+
+*For the coordinator to file; nothing here is filed by this job. Each names its slot — the file, the section, and **the
+exact words on `main` it replaces or follows**, read on the merged tree — and the log line it comes from. The gated
+commit is `b46a9d57`; its logs are `data/fs132/l2/gate/*-final.*` (`receipt-axioms-final.log`,
+`receipt-vacuity-final.log`, `receipt-assumptions-final.log` are the three scans' full outputs).*
+
+**1. `CLAUDE.md` § Trust ledger, the audit's sentence.** *Replaces* "the current audit reads 6533 clean and 5 declared
+purchases, and 18 imported (and 20 axiom-free; 6,576 records at the landing of FS-132's import, FS132-L1, 2026-10-07)"
+— from `axioms-final.log`, "audited: 6953 records — 6910 clean on the standard axioms, 20 axiom-free, 18 imported
+(resting on a declared outside theorem), 5 declared purchase(s)":
+
+> the current audit reads 6910 clean and 5 declared purchases, and 18 imported (and 20 axiom-free; 6,953 records at the
+> landing of FS-132's first theorem, FS132-L2, 2026-10-07)
+
+The 377 records the landing adds are all clean (`records-final.txt`: 376 on exactly the standard three, one on two of
+them; none imported, none a purchase): 6533 + 377 = 6910; 6576 + 377 = 6953; imported, axiom-free and purchases do
+not move. Until it is filed the audit flags the sentence stale (not failed): "6533 clean → 6910".
+
+**2. `CLAUDE.md` § Trust ledger, one sentence on the port** (the port's draft D1, at the joined tree). *Follows* "its
+first import, `[Falconer1981]` Lemma 2 (i), is a theorem since FS131-IF1." and stands before "Rung B holds none." —
+from `records-final.txt` ("whole log: records carrying … of the landing's: 0", three times) and
+`readback-port-final.txt`:
+
+> Four lemmas of `[OAIMath2026]` family 158 that FS-132's first theorem stands on — `Outside.OAI158.palette_transfer_pair`,
+> `palette_sixty_disjoint`, `two_state_impossible` and `mem_spatialSupport_ae` — are not imports: their proofs are ported
+> (the palette chain and 163 further declarations in nine generated modules, FS132-K1 and FS132-I2), kernel-checked at
+> this pin on the standard three, and rest on neither declared outside theorem; the release's licence text is kept beside
+> them (`Outside/OAIMath2026-LICENSE.txt`).
+
+**3. `CLAUDE.md` § Trust ledger, the nine assumption counts.** *No change*: `receipt-assumptions-final.log`,
+`=== TOTALS ===`, reads `axioms=3 rests=18 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1`, the nine
+on `main`; the step reads "recorded counts in CLAUDE.md § Trust ledger: match (9 of 9 compared)". The landing declares
+three conditions on parameters (`conditions=35 → 38`), which are not among the nine, and the ledger gains no row.
+
+**4. `CLAUDE.md` § The gate, the vacuity scan's two count lines.** *Replaces* "`declarations=14845
+refutations-skipped=215 sites=1447`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1404 unknown=2`." — from
+`vacuity-final.log`, "scanned: declarations=15292 refutations-skipped=226", "sites: sites=1447 vacuous=0 stale=0
+declared=3 witnessed=38 generic=1404 unknown=2":
+
+> `declarations=15292 refutations-skipped=226 sites=1447`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1404 unknown=2`.
+
+Until it is filed the scan flags `CLAUDE.md` § The gate stale (not failed) on two counts: declarations,
+refutations-skipped. The sentences on the baseline's two entries stand.
+
+**5. `tools/claude_md_fact_audit.py`, `GATE_CHANGES`** — one entry after the last (`(("6521", "5"), ("6533", "5"))`):
+
+```python
+    (("6533", "5"), ("6910", "5")): "FS-132, the landing of its first theorem — the first night's exclusion at the whole plane over the release's palette lemmas, ported (FS132-L2; copy data/fs132/l2/gate/receipt-axioms-final.log, gated commit b46a9d57): 6,953 records, 6,910 clean, 20 axiom-free, 18 imported, 5 purchases",
+```
+
+and, in the same file's table of superseded counts, after the entries for `"6521"` and `"6554"`, the two that this
+filing supersedes, in that table's own form: `"6533"` (6910 clean) and `"6576"` (6,953 records), "refiled at FS132-L2's
+landing from data/fs132/l2/gate/receipt-axioms-final.log; the old count stays in
+data/fs132/l1/gate/receipt-axioms-final.log and in GATE_CHANGES". The previous landing's receipts, against which the
+three digests were taken: `data/fs132/l1/gate/receipt-axioms-final.log`, `receipt-vacuity-final.log`,
+`receipt-assumptions-final.log`.
+
+**6. `CLAUDE.md` § Frontier, § Paths forward, "Open milestones" — the sentence on this milestone's Lean phase.**
+*Replaces* "Its Lean phase has begun, on the first night's exclusion (row 155; branches `fs132-wk1`, `fs132-wi2`), what
+the module rests on being formalized in that phase (his word of the same day); Closed when the module passes the gate.":
+
+> Its Lean phase's first theorem is through the gate (FS132-L2, 2026-10-07): the first night's exclusion for a Borel
+> colouring of the whole plane — the orbit form `SixRing.no_outside_orbit_points`, `no_outside_orbit` and the ring form
+> `not_ae_outside_points`, `not_ae_outside` (row 155) — kernel-checked on the standard three axioms, with no import and
+> no assumption, over the release's palette lemmas ported with their proofs (`Outside/OAI158Palette` … `OAI158States`;
+> what the module rests on is formalized with it, his word of the same day). The statement on an open set and the
+> clause on an extracted centre stay [hand]. The milestone is Closed when the rest of its module passes the gate: the
+> index lemmas and the centres are skeletons on branch `fs132-wk1`.
+
+And in the same section's "Last filed:" sentence, *replaces* "no value moved; its Lean phase begun)" by "no value
+moved; its first theorem through the gate at the whole plane, FS132-L2)". Whether "Last filed" names this landing as
+its own item, as it names FS132-L1's, is the coordinator's.
+
+**7. `LEDGER.md` row 155.** *(a) Replaces* its grade sentence, "**[hand], one mind, with a line-by-line checking
+reading of its steps M4–M9 by a second mind — the kernel lane's planner, whose own blind route reached the state, the
+chart, a forced label at each hub, the unit-pair relation and the kill for a clean change, and stopped at the step
+lemma; steps M6 and M8 have one derivation each; kernel pending (the first module of FS-132's Lean phase).**" — from
+`records-final.txt` (the five headline lines) and `checks-final.out`:
+
+> **[kernel] for a Borel colouring of the whole plane (FS132-L2, 2026-10-07; every step M1–M9):
+> `HadwigerNelson.SixRing.no_outside_orbit_points` (the orbit form over four points, C132-WIT-ORBIT), `no_outside_orbit`
+> (over four compact sets, C132-M-ORBIT), `not_ae_outside_points` (the ring form over four points, C132-WIT-EXCL) and
+> `not_ae_outside` (over four compact sets, C132-M-EXCL), `Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean`, each on
+> `[propext, Classical.choice, Quot.sound]`, resting on no declared outside theorem and taking no assumption in
+> hypothesis form — over the release's palette lemmas, ported with their proofs and kernel-checked here
+> (`Outside/OAI158Palette`, `OAI158CircleMaps` … `OAI158States`). [hand], one mind, with a line-by-line checking reading
+> of its steps M4–M9 by a second mind — the kernel lane's planner, whose own blind route reached the state, the chart, a
+> forced label at each hub, the unit-pair relation and the kill for a clean change, and stopped at the step lemma — for
+> what no Lean theorem states: the statement as written, on an open set containing the closed unit disc (it adds M0, one
+> mind's reading of the release's two proofs as local), and the clause at an extracted centre (C132-M-EMPTY).**
+
+*(b) Replaces*, in "**What it stands on:** for a colouring of the whole plane, two statements of `[OAIMath2026]`,
+kernel-checked there at every number of labels (the transfer of palettes for a pair; the 60° disjointness), and its
+nine steps M1–M9;", the words "kernel-checked there at every number of labels" by "kernel-checked there at every number
+of labels and, ported, here (`Outside.OAI158.palette_transfer_pair`, `palette_sixty_disjoint`)", and "its nine steps
+M1–M9" by "its nine steps M1–M9, each now a kernel theorem".
+
+*(c) Replaces*, in "no ring alternates under the 60° rotation between two disjoint pairs of labels (C132-DIAG-WIDE) —
+for the whole plane an instance of `[OAIMath2026]`'s Lean theorem `two_state_impossible`;", the words after the dash up
+to the semicolon by "for the whole plane an instance of `[OAIMath2026]`'s Lean theorem `two_state_impossible`, in this
+library `SixRing.no_alternating_pairs` (`Plane/SixRing/TwoPairs.lean`, [kernel], the standard three, from the ported
+theorem)".
+
+*(d) The row's address cell*: *follows* "`plans/FS132-kernel-plan.md` on branch `fs132-wk1`" with "; `Proofs/HadwigerNelson/Plane/SixRing/`
+(`Orbit.lean`: the four theorems; `TwoPairs.lean`), `plans/FS132-L2-landing.md`", and "on branch `fs132-wk1`" goes: the
+plan is on `main` since this landing.
+
+*What the row may not say*: "[kernel]" without "for the whole plane" — the row's own sentence is written on an open
+set, and that form is [hand]; "two derivations" of M6 or M8 — the kernel checked those steps, which is not a second
+mind's derivation and is stronger for the statement it checked.
+
+**8. `plans/FS132-derivation.md` § 1 — one dated line under the entries C132-M-ORBIT, C132-WIT-ORBIT, C132-M-EXCL,
+C132-WIT-EXCL, and under "Who did what, step by step"** (FS132-I3's draft 2 and FS132-I4's D1, reconciled, at the gated
+commit; the entries' `grade:` and `minds:` fields are the coordinator's):
+
+> **2026-10-07, FS132-L2 — [kernel], for a Borel colouring of the whole plane (the instance `U = ℂ`), through the full
+> gate at `b46a9d57`**: `HadwigerNelson.SixRing.no_outside_orbit_points` (C132-WIT-ORBIT), `no_outside_orbit`
+> (C132-M-ORBIT), `not_ae_outside` (C132-M-EXCL), `not_ae_outside_points` (C132-WIT-EXCL; added at the landing, the
+> compact-set form at the two-point sets), `Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean`, each on `[propext,
+> Classical.choice, Quot.sound]`, no assumption in hypothesis form, no outside theorem — over the release's palette
+> lemmas ported with their proofs (`Outside/OAI158…`, FS132-K1 and FS132-I2). Statements FS132-K2's (the four-point
+> ring form FS132-L2's, by a ruling). **Every step M1–M9 is checked by the kernel**: M1–M3 `State` (FS132-I4); M4–M6
+> `Tips`, with M6's count as 64 patterns by `decide` (FS132-I4); M7 `Shift` — the unit-pair relation in the direction
+> used (`dist_chart_chart_shift`), the sign (`shift_pos`), the bounds (`exists_shiftBounds`), with no derivative
+> computed and the square's side not explicit (FS132-I3) — and its null sets, `ChartMeasure.unitPair_chart_ae`, by the
+> partner point's motion on its unit circle, with no inverse function theorem (FS132-I4); M8 `StepLemma.step_lemma`,
+> Lemma S along the planner's variant — a dyadic window, a base point of four density points (FS132-I3) — and (†),
+> `Kill.no_double_change` (FS132-I4); M9 `Kill.step_kill` (FS132-I4). Three hypotheses of the skeleton were idle and
+> are dropped: `X ≠ Y` in the ring form's reduction, `0 < κ'` in (†), measurability of the state in M9; two more in
+> the step lemma's module (`u < w` in `exists_shiftMap`; measurability of the set in `volume_change_pairs_pos`). **Not kernel**: the statement on an open set
+> containing the closed unit disc (M0's local reading of the release's two proofs stays [hand], one mind), and
+> C132-M-EMPTY.
+
+and under the entry C132-DIAG-WIDE (FS132-I4's D2):
+
+> **2026-10-07, FS132-L2 — [kernel] at the whole plane**: `HadwigerNelson.SixRing.no_alternating_pairs`
+> (`Plane/SixRing/TwoPairs.lean`), the standard three axioms, from the ported `two_state_impossible` through
+> `no_alternating_groups`; the release's theorem read at six, not a result of this milestone. Its reading on an open set
+> stays [hand], one mind.
+
+**9. `LEAN.md`.** *(a) § Assumptions*, after the bullet "An imported theorem carries four things" (the port's draft D3,
+with what the landing added):
+
+> - **An outside Lean proof may be ported instead of imported** (`Outside/OAI158Palette`, `OAI158CircleMaps` …
+>   `OAI158States`; FS132-K1, FS132-I2, landed by FS132-L2): compute the cone of the wanted statements from the source's
+>   own compiled constants at its pin, copy those declarations by line range with a generator that refuses a patch to a
+>   statement or a definition (`tools/fs132_i2_port.py`), and build. The kernel then checks every proof here and no axiom
+>   enters. A read-back across pins (`tools/fs132_i2_readback.py`) is an instrument for "this is the source's lemma",
+>   never a gate on truth, and it cannot read "term for term": the same text elaborates against another Mathlib. It
+>   reports IDENTICAL, or identical up to instance and proof arguments with the differing constants recorded, under an
+>   explicit map of Mathlib's renames between the pins; what it leaves to trust is that Mathlib's instances for one
+>   class on one type agree at each pin. The landing runs it again on the joined tree. **A port carries the source's
+>   licence**: a byte-identical copy of its text beside the modules, written and compared by the generator, each header
+>   the notice of change. **An instance the source declares on a type that is Mathlib's is scoped here**, through the
+>   generator (the keyword; an instance declared in a child namespace needs `attribute [scoped instance]` in the
+>   parent, where its uses stand) — scoping changes no stored term, so the read-back prints the same bytes.
+
+*(b) § Searching — Lean*, three bullets to follow the last (FS132-I4's draft D6, as written):
+
+> - `tauto` exhausts its heartbeats in a context holding long implications it does not need (two pulled-back
+>   `HubColours` statements): write the case split (`SixRing.no_double_change`, FS132-I4).
+> - `rw [Measure.ae_prod_iff_ae_ae h]` finds no pattern in a goal that `filter_upwards` has beta-reduced; apply it as
+>   `refine (Measure.ae_prod_iff_ae_ae (p := fun w => …) h).mpr ?_` with the predicate written out. A section of a
+>   measurable set of triples is `measurable_prodMk_left hmeas` (FS132-I4, `unitPair_chart_ae`).
+> - A map from a set of the line into a metric space that is `K`-antilipschitz there pulls sets of one-dimensional
+>   Hausdorff measure zero back to Lebesgue-null sets (`SixRing.volume_preimage_inter_le_hausdorff`); with
+>   `abs_dist_sub_le` it replaces an inverse function theorem wherever a point is known to move away from a fixed
+>   centre at a definite rate. Shears of `ℝ × (ℝ × ℝ)` are `MeasurePreserving.skew_product` between two swaps
+>   (`SixRing.shear_measurePreserving`); a statement almost everywhere on the line pulls back to triples by
+>   `QuasiMeasurePreserving.prod_of_right` (FS132-I4).
+
+*(c) § Searching — Lean*, one bullet of this job's:
+
+> - A `scoped instance` declared inside `namespace A.B` is found in `A.B` and under `open A.B`, **not** in `A`:
+>   `attribute [scoped instance] B.instName` inside `namespace A` adds `A`'s scope. An anonymous scoped instance keeps
+>   the name the unscoped one has, and `private scoped instance` parses (measured at the pin:
+>   `data/fs132/l2/probes/scoped-probe.lean`; on a built module, `scoped-built.lean`; FS132-L2).
+
+*(d) § The gate*, in the bullet on `./scripts/vacuity.sh`, *follows* the sentence ending "…until the tooling job rules
+how such emptiness is counted (`hexShell_plane5` given `Outside.OAI158.no_proper_five_coloring`, FS132-L1).":
+
+> **The scan is silent on a module whose colourings are maps under a predicate it does not track** (`WeakColoring k c`,
+> `ProperColoring k c`): the landing of FS-132's first theorem added 447 declarations and no site. Silence is not
+> evidence; the landing names, for each structure of hypotheses, its model and whether the kernel holds it (FS132-L2,
+> its record's stage 7).
+
+**10. `BIBLIOGRAPHY.md`, `[OAIMath2026]`'s entry** (the port's draft D6, with the licence) — to add to what of ours
+rests on it and what of it is held:
+
+> Ported into this library (FS132-K1, FS132-I2, landed by FS132-L2, 2026-10-07; Apache-2.0 — a byte-identical copy of
+> the release's `LICENSE` is `Proofs/HadwigerNelson/Outside/OAIMath2026-LICENSE.txt`, and each generated module's header
+> is the notice of change): of `lean/OAI/Geometry/PlaneColoring/` at commit `adc7f124`, `CircleMaps.lean` whole and parts
+> of `Expansion`, `CircleTransport`, `PaletteDensity`, `PaletteTransport`, `BinaryPalettes`, `States`, `AngularBoundary` —
+> 163 declarations, 1,791 lines — with FS132-K1's 620 lines of `WeakColoring`, `Compactness`, `Palettes`: the cone of
+> `palette_transfer_pair` (the manuscript's Lemma 5.2 (1)), `palette_sixty_disjoint` (Corollary 5.3),
+> `two_state_impossible` (Lemma 6.4 at every `k`) and `mem_spatialSupport_ae`. Seven proof lines patched and one Mathlib
+> name written at this pin; three instances on Mathlib's types scoped; no statement and no definition changed. Row 155's
+> kernel theorems stand on the first two; `SixRing.no_alternating_pairs` on the third. Read for the port: those files'
+> cone declarations as text (by the generator) and the four statements with their definitions by eye; the proofs were
+> compiled, not read.
+
+**11. The Proof Atlas.** The node of row 155 (C132-M-ORBIT, C132-WIT-ORBIT, C132-M-EXCL, C132-WIT-EXCL): **[hand] →
+[kernel] for the whole plane**, with the caveat of draft 7 in the node's text — the open-set form and C132-M-EMPTY stay
+[hand]; its edge from `[OAIMath2026]` family 158 is an edge to **ported, kernel-checked lemmas**, not to an import: no
+declared outside theorem is under it. C132-DIAG-WIDE: [kernel] for the whole plane (the release's theorem). No other
+node moves; no value moves.
+
+**12. `ARCHITECTURE.md` § Trust**: no new row (no purchase, no import). Its § 3 rows are on the branch as landed: the
+twenty-two modules' rows name no branch, the two skeleton rows are gone with their modules.
+
+**13. `plans/FS132-close-inventory.md`** (for the item on this landing): the ruling of item 40 (b) is done — the
+licence copy is in; of item 40 (c) — all three instances are scoped; of item 47 — the two skeleton modules did not
+land, and one of the two names of one identity is gone.

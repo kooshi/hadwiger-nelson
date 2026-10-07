@@ -1,0 +1,175 @@
+@no_outside_orbit_points : ∀ {c : ℂ → Fin 6} (hc : Measurable c),
+  WeakColoring 6 c →
+    ∀ {p : ℂ} {a : Fin 4 → Fin 6},
+      Function.Injective a →
+        ∀ {X Y : Fin 6},
+          X ≠ Y →
+            (∀ (j : Fin 4), a j ≠ X) →
+              (∀ (j : Fin 4), a j ≠ Y) →
+                ∀ {q : Fin 4 → ℂ},
+                  (∀ (j : Fin 4), q j ≠ p) →
+                    (∀ (j : Fin 4), Disjoint (spatialSupport c (a j)) (Straddle {p, q j})) →
+                      (∀ (j : Fin 4), Disjoint (spatialSupport c (a (j + 1))) (Straddle {p, q j})) →
+                        ∀ (ψ δ : ℝ),
+                          0 < δ →
+                            (∀ (k : ℤ),
+                                ∀ᵐ (θ : ℝ),
+                                  |θ - ψ - ↑k * (Real.pi / 3)| < δ → X ∈ palette c hc p ↑θ ∨ Y ∈ palette c hc p ↑θ) →
+                              (∀ (η : ℝ),
+                                  0 < η →
+                                    0 < MeasureTheory.volume {θ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ X ∈ palette c hc p ↑θ} ∧
+                                      0 <
+                                        MeasureTheory.volume
+                                          {θ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ Y ∈ palette c hc p ↑θ}) →
+                                False
+@no_outside_orbit : ∀ {c : ℂ → Fin 6} (hc : Measurable c),
+  WeakColoring 6 c →
+    ∀ {p : ℂ} {a : Fin 4 → Fin 6},
+      Function.Injective a →
+        ∀ {X Y : Fin 6},
+          X ≠ Y →
+            (∀ (j : Fin 4), a j ≠ X) →
+              (∀ (j : Fin 4), a j ≠ Y) →
+                ∀ {K : Fin 4 → Set ℂ},
+                  FourCycleStraddle c p a K →
+                    ∀ (ψ δ : ℝ),
+                      0 < δ →
+                        (∀ (k : ℤ),
+                            ∀ᵐ (θ : ℝ),
+                              |θ - ψ - ↑k * (Real.pi / 3)| < δ → X ∈ palette c hc p ↑θ ∨ Y ∈ palette c hc p ↑θ) →
+                          (∀ (η : ℝ),
+                              0 < η →
+                                0 < MeasureTheory.volume {θ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ X ∈ palette c hc p ↑θ} ∧
+                                  0 < MeasureTheory.volume {θ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ Y ∈ palette c hc p ↑θ}) →
+                            False
+@not_ae_outside : ∀ {c : ℂ → Fin 6} (hc : Measurable c),
+  WeakColoring 6 c →
+    ∀ {p : ℂ} {a : Fin 4 → Fin 6},
+      Function.Injective a →
+        ∀ {X Y : Fin 6},
+          X ≠ Y →
+            (∀ (j : Fin 4), a j ≠ X) →
+              (∀ (j : Fin 4), a j ≠ Y) →
+                ∀ {K : Fin 4 → Set ℂ},
+                  FourCycleStraddle c p a K →
+                    ¬∀ᵐ (t : Angles) ∂angularMeasure, X ∈ palette c hc p t ∨ Y ∈ palette c hc p t
+@not_ae_outside_points : ∀ {c : ℂ → Fin 6} (hc : Measurable c),
+  WeakColoring 6 c →
+    ∀ {p : ℂ} {a : Fin 4 → Fin 6},
+      Function.Injective a →
+        ∀ {X Y : Fin 6},
+          X ≠ Y →
+            (∀ (j : Fin 4), a j ≠ X) →
+              (∀ (j : Fin 4), a j ≠ Y) →
+                ∀ {q : Fin 4 → ℂ},
+                  (∀ (j : Fin 4), q j ≠ p) →
+                    (∀ (j : Fin 4), Disjoint (spatialSupport c (a j)) (Straddle {p, q j})) →
+                      (∀ (j : Fin 4), Disjoint (spatialSupport c (a (j + 1))) (Straddle {p, q j})) →
+                        ¬∀ᵐ (t : Angles) ∂angularMeasure, X ∈ palette c hc p t ∨ Y ∈ palette c hc p t
+@no_alternating_pairs : ∀ {c : ℂ → Fin 6} (hc : Measurable c),
+  WeakColoring 6 c →
+    ∀ (p : ℂ) {D D' : Finset (Fin 6)},
+      D.card = 2 →
+        D'.card = 2 →
+          Disjoint D D' →
+            ∀ (w : Angles → Bool),
+              Measurable w →
+                (∀ᵐ (t : Angles) ∂angularMeasure, (if w t = true then D' else D) ⊆ palette c hc p t) →
+                  (∀ᵐ (t : Angles) ∂angularMeasure, w (t + ↑sixty) ≠ w t) → False
+@no_alternating_groups : ∀ {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c),
+  WeakColoring k c →
+    ∀ (p : ℂ) {J K : Finset (Fin k)},
+      (Finset.univ \ (J ∪ K)).card ≤ 2 →
+        ∀ (w : Angles → Bool),
+          Measurable w →
+            (∀ᵐ (t : Angles) ∂angularMeasure, (if w t = true then K else J) ⊆ palette c hc p t) →
+              (∀ᵐ (t : Angles) ∂angularMeasure, w (t + ↑sixty) ≠ w t) → False
+@adjacent_tip_false : ∀ {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c),
+  WeakColoring k c →
+    ∀ {p : ℂ} {X Y : Fin k} {ψ δ : ℝ},
+      OutsideOrbit c hc p X Y ψ δ →
+        ∀ (n : ℤ) {b : Fin k},
+          (∀ (i : Fin k), i ≠ b → i ≠ X → i ≠ Y → ¬IsTip c p (hub p ψ n) i) →
+            (∀ (i : Fin k), i ≠ b → i ≠ X → i ≠ Y → ¬IsTip c p (hub p ψ (n + 1)) i) → False
+@chart_step_false : ∀ {k : ℕ} {c : ℂ → Fin k},
+  Measurable c →
+    WeakColoring k c →
+      ∀ (p : ℂ) {b X Y : Fin k} {S : Set ℝ},
+        MeasurableSet S →
+          ∀ {t κ : ℝ},
+            0 < κ →
+              (∀ (η : ℝ),
+                  0 < η →
+                    0 < MeasureTheory.volume (S ∩ Set.Ioo (t - η) (t + η)) ∧
+                      0 < MeasureTheory.volume (Sᶜ ∩ Set.Ioo (t - η) (t + η))) →
+                HubColours c p b X Y S t κ → HubColours c p b X Y {θ | θ - Real.pi / 3 ∉ S} (t + Real.pi / 3) κ → False
+'HadwigerNelson.SixRing.no_outside_orbit_points' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.no_outside_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.not_ae_outside' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.not_ae_outside_points' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SixRing.no_alternating_pairs' depends on axioms: [propext, Classical.choice, Quot.sound]
+structure HadwigerNelson.SixRing.FourCycleStraddle (c : ℂ → Fin 6) (p : ℂ) (a : Fin 4 → Fin 6) (K : Fin 4 → Set ℂ) :
+  Prop
+number of parameters: 4
+fields:
+  HadwigerNelson.SixRing.FourCycleStraddle.compact : ∀ (j : Fin 4), IsCompact (K j)
+  HadwigerNelson.SixRing.FourCycleStraddle.centre_mem : ∀ (j : Fin 4), p ∈ K j
+  HadwigerNelson.SixRing.FourCycleStraddle.other : ∀ (j : Fin 4), ∃ q ∈ K j, q ≠ p
+  HadwigerNelson.SixRing.FourCycleStraddle.left : ∀ (j : Fin 4), Disjoint (spatialSupport c (a j)) (Straddle (K j))
+  HadwigerNelson.SixRing.FourCycleStraddle.right : ∀ (j : Fin 4),
+      Disjoint (spatialSupport c (a (j + 1))) (Straddle (K j))
+constructor:
+  HadwigerNelson.SixRing.FourCycleStraddle.mk {c : ℂ → Fin 6} {p : ℂ} {a : Fin 4 → Fin 6} {K : Fin 4 → Set ℂ}
+    (compact : ∀ (j : Fin 4), IsCompact (K j)) (centre_mem : ∀ (j : Fin 4), p ∈ K j)
+    (other : ∀ (j : Fin 4), ∃ q ∈ K j, q ≠ p) (left : ∀ (j : Fin 4), Disjoint (spatialSupport c (a j)) (Straddle (K j)))
+    (right : ∀ (j : Fin 4), Disjoint (spatialSupport c (a (j + 1))) (Straddle (K j))) : FourCycleStraddle c p a K
+structure HadwigerNelson.SixRing.OutsideOrbit {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c) (p : ℂ) (X Y : Fin k)
+  (ψ δ : ℝ) : Prop
+number of parameters: 8
+fields:
+  HadwigerNelson.SixRing.OutsideOrbit.pos : 0 < δ
+  HadwigerNelson.SixRing.OutsideOrbit.outside : ∀ (n : ℤ),
+      ∀ᵐ (θ : ℝ), |θ - ψ - ↑n * (Real.pi / 3)| < δ → X ∈ palette c hc p ↑θ ∨ Y ∈ palette c hc p ↑θ
+  HadwigerNelson.SixRing.OutsideOrbit.change : ∀ (η : ℝ),
+      0 < η →
+        0 < MeasureTheory.volume {θ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ X ∈ palette c hc p ↑θ} ∧
+          0 < MeasureTheory.volume {θ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ Y ∈ palette c hc p ↑θ}
+constructor:
+  HadwigerNelson.SixRing.OutsideOrbit.mk {k : ℕ} {c : ℂ → Fin k} {hc : Measurable c} {p : ℂ} {X Y : Fin k} {ψ δ : ℝ}
+    (pos : 0 < δ)
+    (outside : ∀ (n : ℤ), ∀ᵐ (θ : ℝ), |θ - ψ - ↑n * (Real.pi / 3)| < δ → X ∈ palette c hc p ↑θ ∨ Y ∈ palette c hc p ↑θ)
+    (change :
+      ∀ (η : ℝ),
+        0 < η →
+          0 < MeasureTheory.volume {θ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ X ∈ palette c hc p ↑θ} ∧
+            0 < MeasureTheory.volume {θ | θ ∈ Set.Ioo (ψ - η) (ψ + η) ∧ Y ∈ palette c hc p ↑θ}) :
+    OutsideOrbit c hc p X Y ψ δ
+def HadwigerNelson.Outside.OAI158.WeakColoring : (k : ℕ) → (ℂ → Fin k) → Prop :=
+fun k c =>
+  AEMeasurable c MeasureTheory.volume ∧
+    ∀ᵐ (p : ℂ × Angles) ∂MeasureTheory.volume.prod angularMeasure, c p.1 ≠ c (p.1 + direction p.2)
+def HadwigerNelson.Outside.OAI158.Straddle : Set ℂ → Set ℂ :=
+fun K => {z | ∃ p ∈ K, ∃ q ∈ K, dist z p < 1 ∧ 1 < dist z q}
+def HadwigerNelson.Outside.OAI158.spatialSupport : {k : ℕ} → (ℂ → Fin k) → Fin k → Set ℂ :=
+fun {k} c i => (MeasureTheory.volume.restrict {z | c z = i}).support
+def HadwigerNelson.SixRing.IsTip : {k : ℕ} → (ℂ → Fin k) → ℂ → ℂ → Fin k → Prop :=
+fun {k} c p y i => y ∈ closure (spatialSupport c i ∩ Metric.ball p 1)
+def HadwigerNelson.SixRing.hub : ℂ → ℝ → ℤ → ℂ :=
+fun p ψ n => p + Plane.e (ψ + ↑n * (Real.pi / 3))
+def HadwigerNelson.Outside.OAI158.sixty : ℝ :=
+Real.pi / 3
+@palette : {k : ℕ} → (c : ℂ → Fin k) → Measurable c → ℂ → Angles → Finset (Fin k)
+angularMeasure : MeasureTheory.Measure Angles
+proper_to_borel_weak_model : (∃ c, ProperColoring 7 c) ∧ ∃ d, Measurable d ∧ WeakColoring 7 d
+shiftBounds_model : ShiftBounds (fun d d' => d * d' / 16) (1 / 2)
+exists_shiftBounds : ∃ κ, 0 < κ ∧ κ ≤ 1 / 4 ∧ ShiftBounds SixRing.shift κ
+@exists_weakColoring_iff_nonempty_aeColouring : ∀ {k : ℕ},
+  (∃ d, Measurable d ∧ WeakColoring k d) ↔ Nonempty (Plane.AeColouring k)
+'HadwigerNelson.Outside.OAI158.not_colorable_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ no_proper_five_coloring]
+'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ proper_to_borel_weak]
