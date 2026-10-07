@@ -212,7 +212,7 @@ three-tile vertex of both maps is an end of a unit arc, so its enumeration by ar
    in the closed unit disc about the point and one outside the open disc, and meet at the member only.
 3. *A point saved by one member alone*: S1, at both points — by the bowtie; its partner, a three-sector vertex, has no piece on the
    outer side at one point and none on the inner side at the other. Two labels are present at the point, split along the unit circle
-   about the bowtie. No point read is saved by one **sector** member alone (0 of 172 points whose members are both sectors).
+   about the bowtie. No point read is saved by one **sector** member alone (0 of 170 points whose members are both sectors).
 4. *A tight arc of kind both that is no edge of a save* — the falsifier of the asking lane's hunch `centres-are-saved-points`:
    **SIXFRAG, 18 of 18** (12 about the six-label vertex, 6 about its four-label ring points) **with no close complementary pair in
    the fragment at all**; **S1, 4 of 4** (centred at the saving bowtie, through the saved point: the boundary a save by one member
@@ -223,8 +223,8 @@ So a save is one cause of a tight arc of kind both and not the only one; "exactl
 printed maps and of the capped strip — objects built by one recipe — and of nothing else held.
 
 **What the reading says of the round's route** (pieces by side): at every one of the 176 common unit points read inside a
-six-coloured object some member separates; whenever both members are sectors both separate (172 of 172: 71 + 20 + 71 + 2 + 6 + MX's
-none — MX and S1 have a bowtie member, BB two); wherever each member has one inner, one outer and one crossing piece exactly those
+six-coloured object some member separates; whenever both members are sectors both separate (170 of 170: 71 + 20 + 71 + 2 + 6;
+MX and S1 have a bowtie member, BB two); wherever each member has one inner, one outer and one crossing piece exactly those
 four labels are present (168 of 168). At seven nobody separates at any of the honeycomb's 132 points, and R7 has no member.
 
 **Predictions scored.** Q1: first part met (71 of 71, 20 of 20); "some object shows another pattern" met; "every three-sector
@@ -238,3 +238,180 @@ unread objects an edge of a save — **missed** (SIXFRAG, as it guessed, and S1)
 `saves-r7`, `seven-exact`.*
 
 **Stage 3 — SAVED** (2026-10-07).
+
+## Stage 4 — SAVED: C124-FORCED — the lemma, the count on pieces, the posed form for sector points, its failure by the letter, its failure at seven
+
+*A correction to Stage 3's prose, made here in place: the points whose two members are both sectors number 170 (71 + 20 + 71 + 2 + 6),
+not 172 as first written; the table's rows were right.*
+
+derivation: C124-EVERY-DIRECTION
+  statement: Let U be a measurable subset of the plane and c a measurable map from U to a finite set of labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U. Then for every unit vector u, c(z) ≠ c(z + u) for almost every point z of U with z + u in U.
+  uses only: that translation is continuous in L² of the plane; Fubini for the pairs (z, u); that a continuous non-negative function vanishing at almost every point of the unit circle vanishes on it; countably many labels and radii
+  not claimed: anything for a colouring that is not measurable (the kernel lane's remark is that the finite-set clause needs no measurability; this statement does); anything at distances other than 1; any use in this round — no entry below reads a fixed direction
+  argument: § Argument — every direction
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the hexagonal seven-colouring at circumradius 2/5 on the plane: for every unit vector u no point z at all has the label of z + u (tiles of diameter 4/5, same-label tiles more than 1 apart: C124-KIND's margins, first round)
+  prior art: partly: by the kernel lane's planner it is the argument of a lemma of `[OAIMath2026]` for the whole plane (its relay, 2026-10-07; not read by me); the restriction to a measurable subset is the same four lines
+  handoff: de Bruijn — only with a consumer; the planner asked the question, and the statement to read back is "for every unit vector, almost every point"
+
+derivation: C124-TYPE
+  statement: Let c be a weak k-colouring of an open set U, P a connected open subset of U almost every point of which has the label i, x a point of the closure of P, and w a point of U with |w − x| = 1. If P has a point strictly inside S(w), there is η > 0 such that almost every point z of B(w, η) with |z − x| > 1 has a label other than i; if P has a point strictly outside S(w), there is η > 0 such that almost every point z of B(w, η) with |z − x| < 1 has a label other than i.
+  uses only: C124-SHADOW-OPEN (`plans/FS124-E1-derivation.md` Stage 4; [hand], one mind — inherited, its argument read whole) for W = P; that a connected open set is path-connected; the intermediate value theorem for the distance to z along a path; that x is a limit of points of P
+  not claimed: anything for a piece that is not connected or not open; a uniform η over pieces or over the point of P chosen; anything on the side not named; that any weak colouring has such a piece
+  argument: § Argument — one piece, one side
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: FS-112's strip at w = (0, 0), x = (1/2, √3/2): its three tiles there read inner (P), outer (O) and crossing (G), and at w the label P is read only inside S(x), O only outside, G nowhere (control `saves-maps`, Stage 5: 71 points, four labels each)
+  prior art: partly: it is C132-WITNESS followed by C132-WIT-SIDE (`plans/FS132-derivation.md` § 2; statements read, arguments not) in one statement on C124-SHADOW-OPEN; for maps the edge exclusion (`[SokolovVoronov2025]` Props. 1–2 by row 134, not read by me); this form not found in print (the plan's §PA, second round)
+  handoff: de Bruijn — the statement as written, after C124-SHADOW-OPEN: a path, one intermediate value, one inclusion in a set of the form W + S¹
+
+derivation: C124-FORCED-PIECES
+  statement: Let c be a weak six-colouring of U, (x, y) a close complementary pair of three-piece points, each with a decomposition, and w a common unit point of the pair lying in U. Then x or y separates at w: one of its pieces lies in the closed unit disc about w and another is disjoint from the open unit disc about w; the edge of those two pieces lies on S(w).
+  uses only: C124-TYPE for the six pieces; that a non-empty open set lies on no circle, so each piece has a point strictly inside or strictly outside S(w); that 0 < |x − y| < 2 makes w − x and w − y linearly independent, so the four regions cut at w by S(x) and S(y) are non-empty and open; that two disjoint triples of six labels are all the labels; one identity of propositional logic
+  not claimed: that a weak six-colouring has a three-piece point, or a close complementary pair; which member separates, or that both do (C124-BOTH needs full members; in fragment S1 one does not); that the edge of the two pieces is more than the member itself (at a bowtie it is not); anything with seven labels (C124-FORCED-SEVEN)
+  argument: § Argument — four regions, six pieces
+  verdict: derived
+  grade: derived from: C124-TYPE
+  minds: 1
+  model: fragment T2 at w = (1/2, √3/2): x = (0, 0) has two outer pieces and one inner, y = (1, 0) one of each side; fragment BB: both members bowties, each with one inner and one outer piece meeting at the member only (control `saves-fragments`)
+  prior art: partly: C132-COMP-SHARP (`plans/FS132-derivation.md` § 4, one mind) is the statement on exclusion sets, whose conclusion a one-point set satisfies; for maps FS107-W-TAN ("a tangent pair or include a bowtie", `plans/FS107-derivation.md` l. 100) and FS112-N3-COR3 (row 135); the piece form, in measure, not found in print
+  handoff: de Bruijn — the statement as written, after C124-TYPE: six applications, four non-empty open regions, and (A ∨ C)(A ∨ D)(B ∨ C)(B ∨ D) = AB ∨ CD. Read the formal statement back against "inside the closed disc" and "disjoint from the open disc" — not against "an edge lies on the circle"
+
+derivation: C124-FORCED
+  statement: Let c be a weak six-colouring of U, (x, y) a close complementary pair of sector points and w a common unit point of the pair lying in U. Then w is saved by x or by y; and for every interior point z of the arc so obtained the pair (w, z) is tight for the two labels of that edge, in one order along the arc.
+  uses only: C124-FORCED-PIECES; for a sector point, that each of the three arcs of its decomposition lies in the closure of exactly two of the three components and that every two components share one arc (the θ-curve form of the Jordan–Schoenflies theorem: recalled, not read); that a connected subset of a circle containing two points contains an arc between them; that an open subset of a closed disc lies in the open disc
+  not claimed: that a weak six-colouring has a sector point, or a close complementary pair; the same for every three-piece point by the letter (C124-FORCED-AS-POSED: refuted); that only one edge lies on S(w) (fragment T2 and the kept model have two at one member); that the arc is maximal or where it ends
+  argument: § Argument — sector points
+  verdict: derived
+  grade: derived from: C124-FORCED-PIECES
+  minds: 1
+  model: the strip, the disk, the capped strip, fragment T2 and the kept model: at each of their 170 common unit points inside, both members are sectors and each has an edge on the point's unit circle (controls `saves-maps`, `saves-fragments`)
+  prior art: partly: for maps it is half of FS112-N3-COR3 (row 135: each corner "a leaving centre of both"; two minds, one blind); in measure, posed by the asking lane's card (`plans/STUB-q-ring.md`, the section after the first round); not found in print
+  handoff: de Bruijn — after C124-FORCED-PIECES, and only if the kernel lane wants the map-shaped corollary: its one topological input is the θ-curve lemma, which is not in the statement of C124-FORCED-PIECES
+
+derivation: C124-FORCED-AS-POSED
+  statement: Let c be a weak six-colouring of U, (x, y) a close complementary pair of three-piece points and w a common unit point of the pair lying in U. Then w is saved by x or by y; and for every interior point z of the arc so obtained the pair (w, z) is tight for the two labels of that edge, in one order along the arc.
+  uses only: the definitions of the claim list, read by the letter; fragment BB of FS110-FRAGS (`tools/fs110_y_fragments.py`, valid by FS110-Y's exact checker: control `seam-fragments` of `plans/FS132-derivation.md` § 4 prints ACCEPT); two bands, each inside a disc of radius 3/10 about a member
+  not claimed: that the posed statement fails for sector points or for full points (C124-FORCED: derived); that the banded fragment extends beyond its flowers and bands; anything about a three-piece point whose pieces stay connected in every small disc about it
+  argument: § Argument — the banded bowtie
+  verdict: refuted: fragment BB with each bowtie's repeated label joined by a band — both members are three-piece points by the letter, their labels are 1, 2, 3 and 4, 5, 6, they are 1 apart, and no edge of either contains an arc of a circle
+  grade: hand
+  minds: 1
+  model: the object itself: at both common unit points the reader finds no boundary of either member on the point's unit circle, and both members separating (control `saves-fragments`: "BB … patterns=00:2 separating=xy(bb):2")
+  prior art: partly: the bowtie as the exception is FS107-W-TAN's and C132-COMP-SHARP's *not claimed* line ("fragments S1, BB and MX … are valid with one"); the letter of the card's definition admitting it is this job's reading
+  handoff: none — a refuted statement; what crosses is C124-FORCED-PIECES
+
+derivation: C124-FORCED-SEVEN
+  statement: In the hexagonal seven-colouring at circumradius 2/5 there are two vertices less than 2 apart whose label triples are disjoint, with a common unit point interior to a tile of the seventh label; neither vertex separates there and no boundary of the colouring lies on a circle.
+  uses only: the colouring (hexagon about m(2√3/5, 0) + n(√3/5, 3/5) coloured (m + 3n) mod 7); exact arithmetic in ℚ(√3, √2); that two of the three 120° sectors at a vertex share a segment, which lies on no circle, against C124-FORCED-PIECES's last clause
+  not claimed: anything at six; that a seven-colouring cannot have a separating vertex (C124-KIND's capped honeycomb has unit arcs)
+  argument: § Argument — the honeycomb at seven
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: x the common vertex of the hexagons (0, 0), (1, 0), (0, 1), labels 0, 1, 3; y the common vertex of (−1, 1), (−2, 2), (−1, 2), labels 2, 4, 5; |x − y|² = 28/25; a common unit point strictly inside the inscribed disc of the hexagon (0, 2), of label 6 (control `seven-exact`); and over a window, 66 such pairs and 132 points, none with a separating member (Stage 3's table)
+  prior art: partly: C132-CROSS's control `hex7-crossings` (`plans/FS132-derivation.md` § 4: 342 vertex pairs, "a label outside both triangles always exists"); as the failure of a save at seven, posed by the card
+  handoff: none — a calibration; it crosses only if the kernel lane wants the count's sharpness in six stated
+
+### Argument — every direction
+
+Fix a label `i` and `R > 0`; let `f` be the indicator of `c⁻¹(i) ∩ B(0, R)`, a function in `L²`. Then `g(v) = ∫ f(z) f(z + v) dz` is
+continuous in `v` (Cauchy–Schwarz and the continuity of translation in `L²`) and non-negative. The set of pairs `(z, u)` with `z`,
+`z + u` in `U` and `c(z) = c(z + u)` is null, so for almost every unit vector `u` its section is null, and `g(u)` is at most the
+measure of that section: `g(u) = 0` for almost every `u` of the unit circle, hence on a dense subset of it, hence on all of it. So
+for every unit `u` the points `z` with `z`, `z + u` in `c⁻¹(i) ∩ B(0, R)` form a null set; take the union over the labels and over
+integer `R`. ∎
+
+### Argument — one piece, one side
+
+Let `q ∈ P` with `|q − w| < 1` and `η = (1 − |q − w|)/2`, small enough that `B(w, η) ⊂ U`. Let `z ∈ B(w, η)` with `|z − x| > 1`.
+Then `|z − q| < 1`; and since `x` is a limit of points of `P`, some `x₁ ∈ P` has `|z − x₁| > 1`. A path in `P` from `q` to `x₁`
+carries the distance to `z` from below 1 to above 1, so it has a point at distance exactly 1 from `z`: `S(z)` meets `P`. By
+C124-SHADOW-OPEN almost every point of `U` whose unit circle meets `P` has a label other than `i`. The other case is the same with
+the inequalities reversed (`q` strictly outside, `η = (|q − w| − 1)/2`, `|z − x| < 1`, `x₁` with `|z − x₁| < 1`). ∎
+
+### Argument — four regions, six pieces
+
+Each piece is open and non-empty, so it has a point off `S(w)`; an inner piece then has a point strictly inside, an outer piece a
+point strictly outside, a crossing piece both. By C124-TYPE, with `η` the least of the radii it gives: near `w` the label of an
+inner piece of `x` is absent outside `S(x)`, that of an outer piece inside `S(x)`, that of a crossing piece on both sides; the same
+for `y` and `S(y)`. The unit vectors `w − x`, `w − y` are independent, so each of the four sets `{z ∈ B(w, η) : ±(|z − x| − 1) > 0,
+±(|z − y| − 1) > 0}` is open and non-empty; almost every point of it has one of the six labels, and every label is the label of
+exactly one of the six pieces. A point inside `S(x)` and inside `S(y)` can only carry the label of an inner piece of `x` or of an
+inner piece of `y`; and so for the three other regions. Write `A`, `B` for "`x` has an inner piece", "`x` has an outer piece", and
+`C`, `D` the same for `y`: all four of `A ∨ C`, `A ∨ D`, `B ∨ C`, `B ∨ D` hold, and their conjunction is `AB ∨ CD`. If `P ⊂ B̄(w, 1)`
+and `P′ ∩ B(w, 1) = ∅`, then `cl(P) ∩ cl(P′)` lies in the closed disc and in the complement of the open one: on `S(w)`. ∎
+
+### Argument — sector points
+
+Let `x` be the member that separates, with inner piece `P_i`, outer piece `P_j`, and `J` the arc of its decomposition that the two
+components share. `J ⊂ cl(P_i) ∩ cl(P_j) ⊂ S(w)` (C124-FORCED-PIECES); `J` is connected and contains `x` and a point at distance `r`
+from it, so it contains an arc of `S(w)` with an end at `x`: `w` is saved by `x`. Let `z` be an interior point of that arc. Choose
+`ρ` with `B(z, ρ) ⊂ B(x, r)`, with `B(z, ρ)` missing the two other arcs of the decomposition, and with `S(w) ∩ B(z, ρ) ⊂ J`. Then
+`B(z, ρ) ∖ S(w)` has two components, each connected and disjoint from the three arcs, so each inside one piece. `P_i` is an open
+subset of the closed disc, hence of the open disc; it meets `B(z, ρ)` because `z ∈ cl(P_i)`; so the component inside `S(w)` lies in
+`P_i`. Likewise the component outside lies in `P_j`. So `(w, z)` is tight for (the label of `P_i`, the label of `P_j`) — the same
+ordered pair at every interior point. ∎
+
+### Argument — the banded bowtie
+
+Fragment BB has, at `u = (0, 0)`, four tiles inside `B̄(u, 1/4)`: two rhombi of label 1 about the directions 0° and 180°, a triangle
+of label 2 in the sector (60°, 120°) and one of label 3 in (240°, 300°); at `v = (1, 0)` the point reflection of these about
+`(1/2, 0)` with labels 4, 4, 5, 6; at `w = (1/2, √3/2)` and `w′ = (1/2, −√3/2)` four quadrants with the labels 2, 3, 5, 6. Add the
+band `β_u = {z : |arg(z − u)| < 2°, 1/5 < |z − u| < 3/10} ∪ {z : 13/50 < |z − u| < 3/10} ∪ {z : |arg(z − u) − 180°| < 2°, 1/5 <
+|z − u| < 3/10}` with the label 1, and its reflection `β_v` with the label 4. Inside `B̄(u, 1/4)` the band lies in the two rhombi
+(at distance `t` from `u` along the axis a rhombus has half-width `(1/4 − t)√3`, the band `t sin 2°`); outside it meets no tile. Every
+point of label 1 lies in `B̄(u, 3/10)`, of diameter `3/5 < 1`, and every point of label 4 in `B̄(v, 3/10)`; so the monochromatic unit
+pairs of the banded colouring are those of BB, a null set (its exact check). It is a weak six-colouring of the union `U` of the
+flowers' interiors and the bands. The interior of (the flower at `u` together with the closure of `β_u`) is a neighbourhood of `u`
+that is, up to the null set of the tiles' sides, the union of three connected open sets — the two rhombi's interiors with `β_u`; the
+triangle of label 2; the triangle of label 3 — each with `u` in its closure, with three labels: `u` is a three-piece point by the
+letter, and so is `v`. The six labels are distinct and `|u − v| = 1`. The edges at `u` are two pairs of segments and the single
+point `u`: none contains an arc of a circle. So `w` is saved by neither member, in the claim list's sense. ∎ (In the sense of
+C124-FORCED-PIECES both members separate at `w`: the triangle of label 2 is inner, that of label 3 outer.)
+
+### Argument — the honeycomb at seven
+
+The three hexagons at a vertex have the labels `c, c + 1, c + 3` (a vertex below a hexagon) or `c + 1, c + 3, c + 4` (above one),
+`c = m + 3n` modulo 7. For the two vertices of the model the triples are `{0, 1, 3}` and `{2, 4, 5}`, the squared distance is
+`28/25 < 4`, and one of the two common unit points lies strictly inside the inscribed disc of the hexagon `(0, 2)`, of label
+`6` — all exact (control `seven-exact`). Near that point the colouring is constant with a label of neither vertex. Every two of the
+three pieces at a vertex share a segment; an inner and an outer piece would share a boundary on `S(w)`. ∎
+
+control: quadrant-count
+  of: C124-FORCED-PIECES — the count as a function of the six sides alone: over the 729 assignments of inner, outer, crossing to the six pieces, the number in which "each of the four regions has a piece of its side at x or at y" differs from "x or y has an inner and an outer piece"; the fault lets a crossing piece of x serve its regions
+  run: python3 -c "import itertools as I;print(sum(all(any(s==a for s in p[:3]) or any(s==b for s in p[3:]) for a in 'io' for b in 'io')!=(('i' in p[:3] and 'o' in p[:3]) or ('i' in p[3:] and 'o' in p[3:])) for p in I.product('ioc',repeat=6)))"
+  expect: 0
+  fault: python3 -c "import itertools as I;print(sum(all(any(s in a+'c' for s in p[:3]) or any(s==b for s in p[3:]) for a in 'io' for b in 'io')!=(('i' in p[:3] and 'o' in p[:3]) or ('i' in p[3:] and 'o' in p[3:])) for p in I.product('ioc',repeat=6)))"
+
+control: saves-fragments
+  of: C124-FORCED-PIECES — the reader on fragments T2, BB and MX and on the Searcher's kept model: members (sectors + bowties), pairs, common unit points inside, patterns (edges of x, edges of y on the point's circle), who separates (x, y, by member kind), the four-label count, C124-HALF-TWO's hypothesis, unit arcs of kind both and how many are edges of saves. Tight on these models: none has a margin. The fault moves every common unit point by 0.01
+  run: python3 ../data/fs124/e2/saves_read.py T2 BB MX kept --brief
+  expect: T2: members=2s+0b pairs=1 inside=2 patterns=12:1,21:1 separating=xy(ss):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=4
+    BB: members=0s+2b pairs=1 inside=2 patterns=00:2 separating=xy(bb):2 four=2/2 half-two=0/0 arcs-of-kind-both=0 edges-of-saves=0
+    MX: members=1s+1b pairs=1 inside=2 patterns=02:1,21:1 separating=xy(bs):2 four=1/1 half-two=0/0 arcs-of-kind-both=2 edges-of-saves=2
+    kept: members=4s+0b pairs=3 inside=6 patterns=11:3,12:1,21:2 separating=xy(ss):6 four=3/3 half-two=3/3 arcs-of-kind-both=9 edges-of-saves=9
+  fault: python3 ../data/fs124/e2/saves_read.py T2 BB MX kept --brief --fault
+
+control: saves-r7
+  of: C124-FORCED-PIECES — where the hypothesis is not met it must not be read as met: R7 on 49 lattice points has no vertex of three labels, so no member and no pair; the fault reads the honeycomb at 2/5 with the same reader (66 members)
+  run: python3 ../data/fs124/e2/saves_read.py r7 --brief
+  expect: r7: members=0s+0b pairs=0 inside=0 patterns=none separating=none four=0/0 half-two=0/0
+  fault: python3 ../data/fs124/e2/saves_read.py hex7 --brief
+
+control: seven-exact
+  of: C124-FORCED-SEVEN — exact, in sympy: the two vertices, their triples, their squared distance, and the common unit point strictly inside the inscribed disc of a hexagon of the seventh label; the fault pairs the first vertex only with vertices of its own orientation, whose triples always meet
+  run: python3 ../data/fs124/e2/edge_check.py seven
+  expect: circumradius=2/5 x=up(0,0) x-labels=[0, 1, 3] y=down(-2,1) y-labels=[2, 4, 5] squared-distance=28/25 common-unit-point-strictly-inside-the-inscribed-disc-of-hexagon=(0, 2) of-label=6 seven: OK
+  fault: python3 ../data/fs124/e2/edge_check.py seven --fault
+
+**What rests on these.** C124-TYPE is the round's one tool: every later entry is six applications of it and a count, or one of
+C124-CENTRE's computations beside it. C124-FORCED-PIECES is the statement to build on and to formalize; C124-FORCED is its shadow
+for sector points and the form the card posed. **Predictions scored**: Q2 — met on all three parts (the piece form derived; the
+posed form derived for sector points; by the letter it fails where two pieces meet only at the member — exhibited). The asking
+lane's "derived as posed 0.8, restated at its wording 0.15": the second.
+
+**Stage 4 — SAVED** (2026-10-07).
