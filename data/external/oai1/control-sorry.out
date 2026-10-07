@@ -1,0 +1,17 @@
+slot: admitted ext-oai1-control: mem 10 GiB (hard cap), cpus 4,5,6,7
+planted `sorry` at byte 21416
+396c396
+<   exact (Finset.mem_filter.mp hmem).2
+---
+>   sorry
+⚠ [8992/8993] Built OAI.Geometry.PlaneColoring.BorelTransfer (6.2s)
+warning: OAI/Geometry/PlaneColoring/BorelTransfer.lean:385:6: declaration uses `sorry`
+✔ [8993/8993] Built OAI.Geometry.PlaneColoring.Five (3.5s)
+Build completed successfully (8993 jobs).
+control build exit=0
+'OAI.EuclideanFiveColor.no_proper_five_coloring' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'OAI.EuclideanFiveColor.proper_to_borel_weak' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'OAI.EuclideanFiveColor.no_measurable_weak_five_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OAI.PlaneFiveColor.Spectral.wild_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+Audit/Axioms.lean:10:0: error: AXIOM-SET FAIL OAI.EuclideanFiveColor.no_proper_five_coloring: outside the permitted three: [sorryAx]
+control axioms exit=1

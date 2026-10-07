@@ -1,0 +1,7 @@
+slot: admitted ext-oai1-stmt: mem 10 GiB (hard cap), cpus 4,5,6,7
+Audit/Statement.lean:65:57: warning: `ENat.coe_ne_top` has been deprecated: Use `ENat.natCast_ne_top` instead
+'AuditChallenge.no_proper_five_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'audit_unfolded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'audit_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'audit_euclidean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'audit_chromaticNumber' depends on axioms: [propext, Classical.choice, Quot.sound]

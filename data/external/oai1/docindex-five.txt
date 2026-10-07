@@ -1,0 +1,1248 @@
+
+######## OAI/Analysis/PlaneSpectrum/Basic.lean  (735 lines)
+L34: /-- The group-theoretic step behind the zero-mass coset argument. -/
+      theorem finite_image_trivial {G H : Type*} [Group G] [Group H] [Finite H]
+          [RootableBy G ℕ] (f : G →* H) (g : G) : f g = 1 := by
+L42: /-- A separate synonym ensures that the dual uses the discrete topology, not the Euclidean topology inherited by the embedded algebraic field. -/
+      def DiscreteE := Multiplicative E deriving CommGroup
+L65: /-- The inclusion into the usual complex plane, with no continuity assertion needed on its discrete domain. -/
+      def embed (z : DiscreteE) : ℂ := ((Multiplicative.toAdd z : E) : ℂ)
+L72: /-- The manuscript's ordinary character parametrization. -/
+      def j (ξ : ℂ) : D where
+L99: /-- The subgroup C is not replaced by its closure. -/
+      def C : Subgroup D := jHom.range
+L108: /-- A divisible group cannot act nontrivially on a finite orbit. -/
+      theorem fixed_of_finite_orbit {G X : Type*} [Group G] [MulAction G X]
+          [RootableBy G ℕ] (x : X) (hf : (MulAction.orbit G x).Finite) (g : G) :
+          g • x = x := by
+L127: /-- Multiplication of the argument of a character. -/
+      def scaleE (a : E) : DiscreteE →ₜ* DiscreteE where
+L187: /-- Positive fibers of an equivariant partition have finite orbit. This uses only finite measure and measurability of the fibers, not a measurable quotient. -/
+      theorem fixed_of_positive_fiber {G X Y : Type*} [Group G] [RootableBy G ℕ]
+          [MulAction G X] [MulAction G Y] [MeasurableSpace X]
+          (μ : MeasureTheory.Measure X) [MeasureTheory.IsFiniteMeasure μ]
+          (π : X → Y) (heq : ∀ (g : G) (x : X), π (g • x) = g • π x)
+          (hmeas : ∀ y, MeasurableSet (π ⁻¹' {y}))
+          (hinv : ∀ g : G, MeasureTheory.MeasurePreserving (fun x : X => g • x) μ μ)
+          (y : Y) (hpos : 0 < μ (π ⁻¹' {y})) (g : G) : g • y = y := by
+L299: /-- The source's wild-law condition; probability is provided as a measure instance. -/
+      def IsWild (ν : MeasureTheory.Measure D) : Prop :=
+L340: /-- Rational tests identify the frequency of a real continuous character. -/
+      theorem frequency_zero_of_rational_tests (a : ℝ)
+          (h : ∀ q : ℚ, Circle.exp (a * (q : ℝ)) = 1) : a = 0 := by
+L397: /-- The complex algebraic closure used above is precisely F(i) from the source, not a different countable plane. -/
+      theorem algebraic_complex_iff_coordinates (z : ℂ) :
+          IsAlgebraic ℚ z ↔ IsAlgebraic ℚ z.re ∧ IsAlgebraic ℚ z.im := by
+L423: /-- Ordinary one-dimensional characters, proved from the covering property of exp. -/
+      theorem real_character (f : ℝ → Circle) (hf : Continuous f)
+          (hmul : ∀ x y, f (x + y) = f x * f y) :
+          ∃ a : ℝ, ∀ t, f t = Circle.exp (a * t) := by
+L459: /-- The source's exact ordinary-character description on the dense real algebraic field. -/
+      theorem algebraic_real_character (f : F → Circle) (hf : Continuous f)
+          (hmul : ∀ x y, f (x + y) = f x * f y) :
+          ∃ a : ℝ, ∀ t : F, f t = Circle.exp (a * (t : ℝ)) := by
+L487: /-- The real-algebraic inclusion into the algebraic plane. -/
+      def ofF : F →+* E where
+L510: /-- Standard frequencies for the real algebraic line; again use the actual image. -/
+      def jF (l : ℝ) : DF where
+L534: /-- The dual restriction to the line aF. -/
+      def lineHom (a : E) : DiscreteF →ₜ* DiscreteE where
+L634: /-- Two genuinely independent algebraic directions force an ordinary character. -/
+      theorem line_one_and_nonreal {d : D} (h1 : d ∈ L 1) {w : E}
+          (hw : d ∈ L w) (hn : imF w ≠ 0) : d ∈ C := by
+L683: /-- Squared rotations index the distinct unoriented algebraic lines. -/
+      theorem rotated_directions_independent {a : E} (ha : a ≠ 0) {u v : K}
+          (huv : u ^ 2 ≠ v ^ 2) : imF ((a * kCoeff u)⁻¹ * (a * kCoeff v)) ≠ 0 := by
+L695: /-- Complete line-event conclusion of the source's null-events lemma. -/
+      theorem wild_line_null (ν : MeasureTheory.Measure D) [MeasureTheory.IsProbabilityMeasure ν]
+          (hν : IsWild ν) {a : E} (ha : a ≠ 0) : ν (L a) = 0 := by
+
+######## OAI/Analysis/PlaneSpectrum/Characters.lean  (560 lines)
+L31: /-- Canonical frequencies of the dyadic restrictions. -/
+      def frequency (X : ℕ → Circle) (n : ℕ) : ℝ :=
+L87: /-- The quantitative lower chord bound on the principal argument. -/
+      theorem chord_bound (z : Circle) :
+          2 / Real.pi * |Complex.arg (z : ℂ)| ≤ ‖(z : ℂ) - 1‖ := by
+L111: /-- Cesàro averages of a circle point are small away from one. -/
+      theorem geom_sum_chord_bound (z : Circle) (m : ℕ) :
+          ‖∑ k ∈ Finset.range m, (z : ℂ)^k‖ * ‖(z : ℂ)-1‖ ≤ 2 := by
+L119: /-- A large canonical frequency has a large averaged real deviation. -/
+      theorem average_deviation (z : Circle) (m : ℕ)
+          (h : 4 ≤ (m : ℝ) * ‖(z : ℂ)-1‖) :
+          (m : ℝ) / 2 ≤ ∑ k ∈ Finset.range m, (1 - ((z : ℂ)^k).re) := by
+L160: /-- Uniform small deviations imply a quantitative frequency-tail bound. -/
+      theorem frequency_tail_bound {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
+          [IsFiniteMeasure μ] (X : Ω → Circle) (hX : Measurable (fun x => (X x : ℂ)))
+          (n m : ℕ) (hm : 0 < m) (R ε : ℝ)
+          (hR : 4 ≤ (m : ℝ) * (2 / Real.pi) * (R / (2 : ℝ)^n))
+          (hε : ∀ k ∈ Finset.range m, ∫ x, deviation (X x) k ∂μ ≤ ε) :
+          μ.real {x | R ≤ |(2 : ℝ)^n * Complex.arg (X x : ℂ)|} ≤ 2 * ε := by
+L198: /-- Choosing a Cesàro window within a fixed neighborhood of zero gives frequency tightness with a bound independent of the dyadic level. -/
+      theorem dyadic_tail_bound {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
+          [IsFiniteMeasure μ] (X : ℕ → Ω → Circle) (hX : ∀ n, Measurable (fun x => (X n x : ℂ)))
+          (δ ε : ℝ) (hδ : 0 < δ)
+          (he : ∀ (n k : ℕ), (k : ℝ)/(2 : ℝ)^n < δ →
+            ∫ x, deviation (X n x) k ∂μ ≤ ε) (n : ℕ) :
+          μ.real {x | 2 * Real.pi / δ ≤ |frequency (fun j => X j x) n|} ≤ 2*ε := by
+L222: /-- A measure with coefficients continuous at zero is almost surely supported on dyadic paths whose principal frequencies are bounded. -/
+      theorem dyadic_frequencies_ae_bounded {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
+          [IsFiniteMeasure μ] (X : ℕ → Ω → Circle) (hX : ∀ n, Measurable (fun x => (X n x : ℂ)))
+          (hcoh : ∀ x n, X n x = X (n+1) x ^ 2)
+          (hcont : ∀ ε : ℝ, 0 < ε → ∃ δ : ℝ, 0 < δ ∧
+            ∀ (n k : ℕ), (k : ℝ)/(2 : ℝ)^n < δ → ∫ x, deviation (X n x) k ∂μ ≤ ε) :
+          ∀ᵐ x ∂μ, ∃ R : ℝ, ∀ n, |frequency (fun j => X j x) n| ≤ R := by
+L258: /-- The canonical frequencies of almost every such path eventually stabilize. -/
+      theorem dyadic_frequencies_ae_stable {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
+          [IsFiniteMeasure μ] (X : ℕ → Ω → Circle) (hX : ∀ n, Measurable (fun x => (X n x : ℂ)))
+          (hcoh : ∀ x n, X n x = X (n+1) x ^ 2)
+          (hcont : ∀ ε : ℝ, 0 < ε → ∃ δ : ℝ, 0 < δ ∧
+            ∀ (n k : ℕ), (k : ℝ)/(2 : ℝ)^n < δ → ∫ x, deviation (X n x) k ∂μ ≤ ε) :
+          ∀ᵐ x ∂μ, ∃ N, ∀ n, N ≤ n →
+            frequency (fun j => X j x) n = frequency (fun j => X j x) N := by
+L270: /-- A stable coherent path is an ordinary frequency on every dyadic scale. -/
+      theorem ordinary_of_stable (X : ℕ → Circle) (hX : ∀ n, X n = X (n+1)^2)
+          (N : ℕ) (hN : ∀ n, N ≤ n → frequency X n = frequency X N) :
+          ∀ n, X n = Circle.exp (frequency X N / (2 : ℝ)^n) := by
+L316: /-- Exact squared distance identity for unit characters. -/
+      lemma circle_sq_dist (z w : Circle) :
+          ‖(z : ℂ)-(w : ℂ)‖^2 = 2 * deviation (z/w) 1 := by
+L374: /-- Continuous averaged coefficients give ordinary frequencies on dyadics a.e. -/
+      theorem character_ae_dyadic (μ : Measure Ω) [IsFiniteMeasure μ]
+          (χ : Ω → Multiplicative F →* Circle)
+          (hχ : ∀ t : F, Measurable (fun x => (χ x (Multiplicative.ofAdd t) : ℂ)))
+          (hc : ContinuousAt (coeff μ χ) 0) :
+          ∀ᵐ x ∂μ, ∃ l : ℝ, ∀ n : ℕ,
+            χ x (Multiplicative.ofAdd (((2 : F)^n)⁻¹)) = Circle.exp (l/(2 : ℝ)^n) := by
+L427: /-- At coefficient-continuity points, dyadic character evaluations converge in measure. -/
+      lemma character_tendstoInMeasure (μ : Measure Ω) [IsFiniteMeasure μ]
+          (χ : Ω → Multiplicative F →* Circle)
+          (hχ : ∀ t : F, Measurable (fun x => (χ x (Multiplicative.ofAdd t) : ℂ)))
+          (hc : ContinuousAt (coeff μ χ) 0) (r : ℕ → F) (t : F)
+          (hr : Filter.Tendsto r Filter.atTop (nhds t)) :
+          TendstoInMeasure μ (fun n x => (χ x (Multiplicative.ofAdd (r n)) : ℂ))
+            Filter.atTop (fun x => (χ x (Multiplicative.ofAdd t) : ℂ)) := by
+L479: /-- Direct ordinary-character support theorem on the algebraic real line. No Bochner representing-measure theorem is an input: frequency tightness and an a.e. subsequence argument prove the actual simultaneous character formula. -/
+      theorem character_ae_ordinary (μ : Measure Ω) [IsFiniteMeasure μ]
+          (χ : Ω → Multiplicative F →* Circle)
+          (hχ : ∀ t : F, Measurable (fun x => (χ x (Multiplicative.ofAdd t) : ℂ)))
+          (hc : ContinuousAt (coeff μ χ) 0) :
+          ∀ᵐ x ∂μ, ∃ l : ℝ, ∀ t : F,
+            χ x (Multiplicative.ofAdd t) = Circle.exp (l*(t : ℝ)) := by
+L520: /-- The actual character on the algebraic parameter line, forgetting only its discrete-domain continuity proof. -/
+      def lineCharacter (a : E) (d : D) : Multiplicative F →* Circle :=
+L532: /-- The exact replacement of Bochner's support step for an arbitrary finite weight absolutely continuous with respect to a wild law. -/
+      theorem wild_continuous_coefficient_zero (ν μ : Measure D) [IsProbabilityMeasure ν]
+          [IsFiniteMeasure μ] (hν : IsWild ν) (hμ : μ ≪ ν) {a : E} (ha : a ≠ 0)
+          (hc : ContinuousAt (ContinuousCharacters.coeff μ (lineCharacter a)) 0) : μ = 0 := by
+
+######## OAI/Analysis/PlaneSpectrum/CircleDecay.lean  (241 lines)
+
+######## OAI/Analysis/PlaneSpectrum/CircleOperator.lean  (308 lines)
+
+######## OAI/Analysis/PlaneSpectrum/ConditionalSpectrum.lean  (497 lines)
+L46: /-- Evaluation at the exact algebraic argument. -/
+      def eval (a : E) : D →* Circle where
+L83: /-- The actual conditional moment on a predecessor fiber is the Fourier coefficient of the actual relative difference law, not an extra hypothesis. -/
+      lemma predecessor_moment_sq (μ : Measure X) [IsProbabilityMeasure μ]
+          (p : X → W) (b : X → D) (hp : Measurable p) (hb : Measurable b) (a : E) :
+          (∫ w, ‖∫ x, (eval a (b x) : ℂ) ∂condDistrib id p μ w‖^2 ∂μ.map p) =
+            (∫ d, (eval a d : ℂ) ∂DifferenceFourier.differenceLaw (μ.map p)
+              (condDistrib b p μ)).re := by
+L159: /-- Covariance of the *actual* Newton-symmetric conditional encoding. -/
+      theorem kernelEncoding_covariance (ν : Measure Y) (β : Kernel Y G)
+          (R : Y → Y) (T : G → G) (hT : Measurable T)
+          (χ : G → ℂ) (hχ : Measurable χ) (m : ℕ)
+          (hβ : ∀ᵐ y ∂ν, β (R y) = (β y).map T) :
+          ∀ᵐ y ∂ν, kernelEncoding β χ m (R y) = kernelEncoding β (χ ∘ T) m y := by
+L202: /-- All integer multiples of all distinct pair differences are tested before any coefficient bin is selected. -/
+      theorem exists_simultaneous_moment_parameter (ν : Measure D) [IsProbabilityMeasure ν]
+          (hν : IsWild ν) (hn : ∀ a : E, 0 ≤ (∫ d, (eval a d : ℂ) ∂ν).re)
+          (M N : ℕ) (hM : 2 ≤ M) (hN : 0 < N) (ε : ℝ) (hε : 0 < ε) (hε1 : ε ≤ 1) :
+          ∃ t : F, t ≠ 0 ∧ |(t : ℝ)| < 1/(M : ℝ) ∧
+            ∀ z : MomentTest M N, (∫ d, (eval (momentArgument z * ofF t) d : ℂ) ∂ν).re < ε := by
+L226: /-- The finite Fejér implication is applied to the actual phase law on an individual conditional fiber. -/
+      theorem pair_collision_upper {X : Type*} [MeasurableSpace X]
+          (μ : Measure X) [IsProbabilityMeasure μ] (b : X → D) (hb : Measurable b)
+          (a₁ a₂ : E) (m N : ℕ) (ρ c : ℝ)
+          (harc : ∀ (ω : Measure Circle) [IsProbabilityMeasure ω],
+            (∀ n, 0 < n → n ≤ N → ‖∫ w, (w : ℂ)^n ∂ω‖ < c) →
+            ω.real {w | ‖(w : ℂ)-1‖ ≤ 4*ρ} < 1/(4*(m : ℝ)^2))
+          (hMom : ∀ n, 0 < n → n ≤ N →
+
+######## OAI/Analysis/PlaneSpectrum/Energy.lean  (453 lines)
+L32: /-- The invariant meanAt b, as the limit of the multiplicity-preserving averages. -/
+      def meanAt (f : G →ᵇ ℝ) : ℝ :=
+L74: /-- A normalized positive shift-invariant continuous real linear functional. -/
+      def meanCLM : (G →ᵇ ℝ) →L[ℝ] ℝ :=
+L115: /-- If every invariant mean gives a bounded function a value above c, its strict c-superlevel set has finitely many translates covering the group. -/
+      lemma syndetic_of_all_means (f : G →ᵇ ℝ) (c : ℝ)
+          (hf : ∀ M : Amenable.Mean G, c < M.map f) :
+          ∃ S : Finset G, ∀ v : G, ∃ s ∈ S, c < f (v+s) := by
+L367: /-- The exact evaluation character, as a bounded measurable function. -/
+      def char (z : E) : Func D := ⟨fun d => (eval z d : ℂ), measurable_eval_coe z,
+
+######## OAI/Analysis/PlaneSpectrum/Ergodicity.lean  (415 lines)
+L334: /-- The arbitrary invariant wild case, obtained from actual conditional ergodic fibers. -/
+      lemma wild_fourier (μ : Measure D) [IsProbabilityMeasure μ]
+          (hw : IsWild μ) (z : E) (hz : z ≠ 0) : ∫ d, (eval z d : ℂ) ∂μ = 0 := by
+
+######## OAI/Analysis/PlaneSpectrum/Fourier.lean  (163 lines)
+
+######## OAI/Analysis/PlaneSpectrum/FourierTests.lean  (295 lines)
+L73: /-- Positivity of the literal invariant integral supplies a common small parameter for finitely many nonnegative tests. This makes no ordinary measurability assumption on any test. -/
+      theorem exists_small_nonnegative_tests {ι : Type*} (s : Finset ι)
+          (φ : AF → ℝ) (f : ι → AF → ℝ) {N : ℕ} {B ε : ℝ}
+          (hs : ∀ t : AF, (N : ℝ) < |(t : ℝ)| → φ t = 0)
+          (hb : ∀ t, ‖φ t‖ ≤ B) (hp : ∀ t, 0 ≤ φ t)
+          (hI : 0 < integralReal φ hs hb) (hε : 0 < ε)
+          (hf : ∀ i t, 0 ≤ f i t ∧ f i t ≤ 1)
+          (hz : ∀ i, integralReal (fun t => φ t * f i t)
+L138: /-- Real part of the checked vanishing line average, with the same invariant integral and the same compact window. -/
+      lemma wild_line_average_re_zero (ν : Measure D) [IsProbabilityMeasure ν]
+          (hν : IsWild ν) {a : E} (ha : a ≠ 0)
+          (φ : ℝ → ℝ) (hc : UniformContinuous φ) {N : ℕ} {B : ℝ}
+          (hs : ∀ t : ℝ, (N : ℝ) < |t| → φ t = 0)
+          (hb : ∀ t, |φ t| ≤ B) :
+          integralReal (fun t : F => φ t * (lineFourier ν a t).re)
+            (fun t ht => by rw [hs t ht, zero_mul])
+L170: /-- A compact tent window strictly inside the requested parameter radius. -/
+      lemma exists_positive_window {r : ℝ} (hr : 0 < r) :
+          ∃ (φ : C(ℝ, ℝ)) (N : ℕ) (B : ℝ),
+            (∀ t : ℝ, (N : ℝ) < |t| → φ t = 0) ∧
+            (∀ t, ‖φ t‖ ≤ B) ∧ (∀ t, 0 ≤ φ t) ∧
+            UniformContinuous φ ∧ (0 < ∫ t : ℝ, φ t) ∧
+            (∀ t, 0 < φ t → |t| < r) := by
+
+######## OAI/Analysis/PlaneSpectrum/InvariantMean.lean  (1078 lines)
+L20: /-- Translation acts on all bounded functions because the domain is discrete. -/
+      def shift (g : G) (f : G →ᵇ ℝ) : G →ᵇ ℝ :=
+L45: /-- A single cyclic Cesàro average, always with a positive denominator. -/
+      def single (g : G) (n : ℕ) (f : G →ᵇ ℝ) : G →ᵇ ℝ :=
+L127: /-- Multiplicities in the cube are explicitly retained through composition. -/
+      def cube : List G → ℕ → (G →ᵇ ℝ) → (G →ᵇ ℝ)
+        | [], _, f => f
+        | g::L, n, f => single g n (cube L n f)
+      
+      lemma cube_norm_le (L : List G) (n : ℕ) (f : G →ᵇ ℝ) : ‖cube L n f‖ ≤ ‖f‖ := by
+L173: /-- Each listed generator has the same boundary bound, independently of the length of the list and without an injective image assumption. -/
+      lemma cube_coboundary_norm (L : List G) (g : G) (hg : g ∈ L) (n : ℕ) (f : G →ᵇ ℝ) :
+          ‖cube L n (shift g f-f)‖ ≤ 2 * ‖f‖ / (n+1 : ℕ) := by
+L187: /-- The directed weighted-cube averages. -/
+      def approx (i : Finset G × ℕ) (f : G →ᵇ ℝ) : ℝ :=
+L194: /-- One fixed ultrafilter is used for all functions. -/
+      def averagingUF (G : Type*) [AddCommGroup G] : Ultrafilter (Finset G × ℕ) :=
+L214: /-- The invariant mean, as the limit of the multiplicity-preserving averages. -/
+      def mean (f : G →ᵇ ℝ) : ℝ :=
+L283: /-- A normalized positive shift-invariant continuous real linear functional. -/
+      def meanCLM : (G →ᵇ ℝ) →L[ℝ] ℝ :=
+L300: /-- Complexification of the same (not a separately chosen) real mean. -/
+      def cmean (f : G →ᵇ ℂ) : ℂ := (mean (realPart f) : ℂ) + (mean (imagPart f) : ℂ) * Complex.I
+L350: /-- Complex translation; no ordinary measurability is asserted or needed. -/
+      def cshift (g : G) (f : G →ᵇ ℂ) : G →ᵇ ℂ :=
+L363: /-- Pullback along the dense algebraic circle embedding. -/
+      def circlePull (ρ : G →+ UnitAddCircle) (f : C(UnitAddCircle, ℂ)) : G →ᵇ ℂ :=
+L387: /-- Normalized Haar integral on the ordinary circle. -/
+      def circleIntegral : C(UnitAddCircle, ℂ) →L[ℂ] ℂ :=
+L405: /-- An ordinary nonconstant Fourier monomial has zero mean as soon as its half-period is represented in the discrete group. -/
+      lemma circleMean_fourier_nonzero (ρ : G →+ UnitAddCircle) {n : ℤ} (hn : n ≠ 0)
+          (hρ : ∃ g, ρ g = ((1 / 2 / n : ℝ) : UnitAddCircle)) : circleMean ρ (fourier n) = 0 := by
+L440: /-- The real algebraic field and the literal discrete quotient F/Z. -/
+      abbrev AF := algebraicClosure ℚ ℝ
+L449: /-- The ordinary circle quotient map, before passage to F/Z. -/
+      def fieldCircle : AF →+ UnitAddCircle :=
+L456: /-- F/Z embeds in the ordinary circle; no ordinary topology is imposed on its source. -/
+      def periodMap : PeriodGroup →+ UnitAddCircle :=
+L471: /-- The exact identification of the chosen mean on ordinary continuous periodic functions asserted in spectral.tex113–123. -/
+      theorem ordinary_mean_integral (f : C(UnitAddCircle, ℂ)) :
+          cmean (circlePull periodMap f) = ∫ x, f x ∂haarAddCircle :=
+L494: /-- Norm of a bounded vector field, still an arbitrary bounded function on this discrete domain. -/
+      def normFn (V : G →ᵇ H) : G →ᵇ ℝ :=
+L536: /-- Hilbert-space weak mean; it exists by the proved scalar mean and Riesz, without any real-variable measurability assumption on V. -/
+      def weakMean (V : G →ᵇ H) : H := (InnerProductSpace.toDual ℝ H).symm (pairingMean V)
+L590: /-- Periodization is defined for all functions; bounded support below ensures that these sums are finite and uniformly bounded. -/
+      def periodSum (h : AF → H) (t : AF) : H := ∑' k : ℤ, h (t + k)
+L606: /-- Literal quotient-valued periodization. -/
+      def periodLift (h : AF → H) : PeriodGroup → H := (periodSum_periodic h).lift
+L612: /-- A uniform finite interval of integers contains all summands after the argument has been moved to [0,1). -/
+      lemma period_term_zero {h : AF → H} {N : ℕ}
+          (hs : ∀ t : AF, (N : ℝ) < |(t : ℝ)| → h t = 0)
+          {t : AF} (ht0 : 0 ≤ (t : ℝ)) (ht1 : (t : ℝ) < 1) (k : ℤ)
+          (hk : k ∉ Finset.Icc (-(N : ℤ)-2) ((N : ℤ)+2)) : h (t+k) = 0 := by
+L644: /-- Every bounded, boundedly supported vector function has a bounded periodization on the discrete quotient F/Z. -/
+      def periodBCF (h : AF → H) {N : ℕ} {B : ℝ}
+          (hs : ∀ t : AF, (N : ℝ) < |(t : ℝ)| → h t = 0)
+          (hb : ∀ t, ‖h t‖ ≤ B) : PeriodGroup →ᵇ H :=
+L654: /-- Absolute finiteness of each period sum. -/
+      lemma period_summable {h : AF → H} {N : ℕ}
+          (hs : ∀ t : AF, (N : ℝ) < |(t : ℝ)| → h t = 0) (t : AF) :
+          Summable (fun k : ℤ => h (t+k)) := by
+L703: /-- The scalar invariant integral in the manuscript, literally the invariant mean of the period sum on F/Z. -/
+      def integralReal (h : AF → ℝ) {N : ℕ} {B : ℝ}
+          (hs : ∀ t : AF, (N : ℝ) < |(t : ℝ)| → h t = 0)
+          (hb : ∀ t, ‖h t‖ ≤ B) : ℝ := mean (periodBCF h hs hb)
+L748: /-- Hilbert-space weak invariant integral of bounded, boundedly supported functions, with no ordinary real-variable measurability hypothesis. -/
+      def weakIntegral (h : AF → H) {N : ℕ} {B : ℝ}
+          (hs : ∀ t : AF, (N : ℝ) < |(t : ℝ)| → h t = 0)
+          (hb : ∀ t, ‖h t‖ ≤ B) : H := weakMean (periodBCF h hs hb)
+L827: /-- Compact support makes all local norm sums finite, before any interchange of sums, evaluations or integrals. -/
+      lemma compact_local_summable (f : C(ℝ, ℂ)) {N : ℕ}
+          (hs : ∀ t : ℝ, (N : ℝ) < |t| → f t = 0) (K : Compacts ℝ) :
+          Summable (fun k : ℤ => ‖(f.comp (ContinuousMap.addRight k)).restrict K‖) := by
+L854: /-- The ordinary continuous periodic function associated with a test function. Continuous-map summation agrees pointwise by local finiteness. -/
+      def ordinaryPeriod (f : C(ℝ, ℂ)) : C(UnitAddCircle, ℂ) :=
+L868: /-- Exact agreement of the manuscript's invariant integral with the usual Lebesgue integral on every continuous boundedly supported test function. -/
+      theorem integralComplex_ordinary (f : C(ℝ, ℂ)) {N : ℕ} {B : ℝ}
+          (hs : ∀ t : ℝ, (N : ℝ) < |t| → f t = 0) (hb : ∀ t, ‖f t‖ ≤ B) :
+          integralComplex (fun t : AF => f t) (fun t ht => hs t ht) (fun t => hb t) =
+            ∫ t : ℝ, f t := by
+L972: /-- Translation continuity of smoothing rests only on regularity of the scalar window, not on any measurability of the discrete representation. -/
+      theorem smoothed_translation_bound
+          (hu : ∀ s t v, U s (U t v) = U (s+t) v)
+          (φ : AF → ℝ) {N : ℕ} {B C : ℝ}
+          (hφ : ∀ t : AF, (N : ℝ) < |(t : ℝ)| → φ t = 0)
+          (hb : ∀ t, |φ t| ≤ B) (v : H) (s : AF) (hs : |(s : ℝ)| ≤ 1)
+          (hC : 0 ≤ C) (hd : ∀ t, |φ (t-s)-φ t| ≤ C) :
+          ‖U s (smoothedVector U φ hφ hb v) - smoothedVector U φ hφ hb v‖ ≤
+L1031: /-- Every uniformly continuous compact window produces a strongly continuous vector even for a completely discontinuous representation of the discrete F. -/
+      theorem smoothed_tendsto
+          (hu : ∀ s t v, U s (U t v) = U (s+t) v)
+          (φ : ℝ → ℝ) (hc : UniformContinuous φ) {N : ℕ} {B : ℝ}
+          (hφ : ∀ t : ℝ, (N : ℝ) < |t| → φ t = 0)
+          (hb : ∀ t, |φ t| ≤ B) (v : H) :
+          Tendsto (fun s : AF => U s
+            (smoothedVector U (fun t => φ t) (fun t ht => hφ t ht) (fun t => hb t) v))
+
+######## OAI/Analysis/PlaneSpectrum/Multipliers.lean  (314 lines)
+L75: /-- Spectral weighting by a Hilbert vector, exactly |v|² μ. -/
+      def weight (v : Lp ℂ 2 μ) : Measure X :=
+L193: /-- A wild law has no nonzero strongly continuous vector for any nonzero algebraic line. The arbitrary L² vector is handled by its actual |v|² weight. -/
+      theorem strong_vector_zero (ν : Measure D) [IsProbabilityMeasure ν]
+          (hν : IsWild ν) {a : E} (ha : a ≠ 0) (v : Lp ℂ 2 ν)
+          (hc : Tendsto (fun t => lineU ν a t v) (𝓝 0) (𝓝 v)) : v = 0 := by
+L211: /-- Every ordinary compact window has zero weak vector average along a nonzero algebraic line of a wild law. -/
+      theorem wild_smoothed_zero (ν : Measure D) [IsProbabilityMeasure ν]
+          (hν : IsWild ν) {a : E} (ha : a ≠ 0)
+          (φ : ℝ → ℝ) (hc : UniformContinuous φ) {N : ℕ} {B : ℝ}
+          (hs : ∀ t : ℝ, (N : ℝ) < |t| → φ t = 0)
+          (hb : ∀ t, |φ t| ≤ B) (v : Lp ℂ 2 ν) :
+          InvariantMean.smoothedVector (lineU ν a) (fun t => φ t)
+            (fun t ht => hs t ht) (fun t => hb t) v = 0 := by
+L270: /-- The invariant scalar Fourier average on a nonzero algebraic line vanishes for every real ordinary compact window; no measurability of t ↦ fν(at). -/
+      theorem wild_line_average_zero (ν : Measure D) [IsProbabilityMeasure ν]
+          (hν : IsWild ν) {a : E} (ha : a ≠ 0)
+          (φ : ℝ → ℝ) (hc : UniformContinuous φ) {N : ℕ} {B : ℝ}
+          (hs : ∀ t : ℝ, (N : ℝ) < |t| → φ t = 0)
+          (hb : ∀ t, |φ t| ≤ B) :
+          InvariantMean.integralComplex
+            (fun t : F => (φ t : ℂ) * lineFourier ν a t)
+
+######## OAI/Analysis/PlaneSpectrum/NumberFields.lean  (524 lines)
+L26: /-- A scalar-rational common denominator for an algebraic linear reciprocal. -/
+      lemma reciprocal_denominator (b : L) (hb : IsAlgebraic ℚ b) :
+          ∃ (P : ℚ[X]) (R : L[X]), P.coeff 0 = 1 ∧
+            (1-C b*X)*R = P.map (algebraMap ℚ L) ∧
+            ∀ t : ℚ, 1-b*algebraMap ℚ L t ≠ 0 → P.eval t ≠ 0 := by
+L55: /-- Coefficientwise transport by a rational linear functional. -/
+      def polyLinear (ℓ : L →ₗ[ℚ] ℚ) (p : L[X]) : ℚ[X] :=
+L85: /-- The first three formal coefficients of the Cayley curve force annihilation of 1, b and b². No analytic continuity is used. -/
+      lemma cayley_annihilation (b : L) (hb : IsAlgebraic ℚ b) (ℓ : L →ₗ[ℚ] ℚ)
+          (hd : ∀ t : ℚ, 1-b*(algebraMap ℚ L t) ≠ 0)
+          (h : ∀ t : ℚ, ℓ ((1+b*(algebraMap ℚ L t))/(1-b*(algebraMap ℚ L t))) = 0) :
+          ℓ 1 = 0 ∧ ℓ b = 0 ∧ ℓ (b^2) = 0 := by
+L182: /-- Finite simultaneous avoidance for rational functions with no rational poles. -/
+      lemma rational_functions_avoid {ι : Type*} (s : Finset ι) (f : ι → ℚ → ℚ)
+          (hpoly : ∀ i ∈ s, ∃ P Q : ℚ[X], ∀ t, Q.eval t ≠ 0 ∧ P.eval t = Q.eval t*f i t)
+          (hn : ∀ i ∈ s, ∃ t, f i t ≠ 0) :
+          ∃ t, ∀ i ∈ s, f i t ≠ 0 := by
+L206: /-- An affine-line rational curve escaping each hyperplane also escapes their finite union. -/
+      lemma finite_hyperplanes_avoid {T : Type*} [Nonempty T]
+          (f : T → L) (line : T → T → ℚ → T)
+          (hzero : ∀ a b, line a b 0 = a) (hone : ∀ a b, line a b 1 = b)
+          (hline : ∀ a b (ℓ : L →ₗ[ℚ] ℚ), ∃ P Q : ℚ[X], ∀ t,
+            Q.eval t ≠ 0 ∧ P.eval t = Q.eval t * ℓ (f (line a b t)))
+          (s : Finset (L →ₗ[ℚ] ℚ)) (hs : ∀ ℓ ∈ s, ∃ t, ℓ (f t) ≠ 0) :
+          ∃ t, ∀ ℓ ∈ s, ℓ (f t) ≠ 0 := by
+L350: /-- Finite general-position sets from avoidance of finitely many proper subspaces. -/
+      lemma exists_general (A : Set V) (hd : 2 ≤ finrank ℚ V)
+          (ha : ∀ P : Finset (Submodule ℚ V), (∀ p ∈ P, p < ⊤) →
+            ∃ x ∈ A, ∀ p ∈ P, x ∉ p) (n : ℕ) :
+          ∃ s : Finset V, s.card = n ∧ (s : Set V) ⊆ A ∧ General s := by
+
+######## OAI/Analysis/PlaneSpectrum/PhaseCollision.lean  (537 lines)
+L25: /-- Ordered distinct pairs in one assigned bin. -/
+      def repeatedPairs (s : Finset ι) (f : ι → κ) : Finset (ι × ι) := by
+L86: /-- Ordered distinct phase pairs within a fixed distance. -/
+      def closePairs (v : ι → V) (r : ℝ) : Finset (ι × ι) := by
+L118: /-- The normalized source estimate `q² / #bins - 1/#indices`. -/
+      theorem normalized_close_pair_lower_bound [Nonempty ι] [Nonempty κ]
+          (s : Finset ι) (f : ι → κ) (v : ι → V) (w : κ → V) (r : ℝ)
+          (h : ∀ i ∈ s, dist (v i) (w (f i)) ≤ r) :
+          ((s.card : ℝ) / Fintype.card ι) ^ 2 / Fintype.card κ - 1 / Fintype.card ι ≤
+            (closePairs v (2 * r)).card / (Fintype.card ι : ℝ) ^ 2 := by
+L139: /-- Larger than 95 percent average phase coverage forces a colliding pair. The bins and assignments may depend on the sampled point; no measurable choice of assignments is required. -/
+      theorem average_cover_forces_collision (μ : Measure Ω) [IsProbabilityMeasure μ]
+          (s : Ω → Finset ι) (f : Ω → ι → κ) (v : Ω → ι → V) (w : Ω → κ → V)
+          (r : ℝ)
+          (hcov : ∀ᵐ x ∂μ, ∀ i ∈ s x, dist (v x i) (w x (f x i)) ≤ r)
+          (hm : ∀ i j, Measurable (fun x => dist (v x i) (v x j)))
+          (hq : Measurable (fun x => ((s x).card : ℝ) / Fintype.card ι))
+          (hlarge : 10 * Fintype.card κ < Fintype.card ι)
+L258: /-- The fraction of indices whose nonnegative error is below a threshold. -/
+      def goodFraction (e : ι → Ω → ℝ) (t : ℝ) (x : Ω) : ℝ := by
+L297: /-- Less than 5% average error gives more than 95% good indices on average. -/
+      theorem average_goodFraction (μ : Measure Ω) [IsProbabilityMeasure μ]
+          (e : ι → Ω → ℝ) (t : ℝ) (ht : 0 < t)
+          (he : ∀ i, Measurable (e i)) (hi : ∀ i, Integrable (e i) μ)
+          (hn : ∀ᵐ x ∂μ, ∀ i, 0 ≤ e i x)
+          (havg : ∀ i, ∫ x, e i x ∂μ < t/20) :
+          (19/20 : ℝ) < ∫ x, goodFraction e t x ∂μ := by
+L350: /-- The assignment itself need not be measurable and may be chosen separately at every sample. Only the phase distances and fraction are measured. -/
+      theorem average_exists_cover_forces_collision (μ : Measure Ω) [IsProbabilityMeasure μ]
+          (s : Ω → Finset ι) (v : Ω → ι → V) (w : Ω → κ → V) (r : ℝ)
+          (hcov : ∀ᵐ x ∂μ, ∀ i ∈ s x, ∃ j, dist (v x i) (w x j) ≤ r)
+          (hm : ∀ i j, Measurable (fun x => dist (v x i) (v x j)))
+          (hq : Measurable (fun x => ((s x).card : ℝ) / Fintype.card ι))
+          (hlarge : 10 * Fintype.card κ < Fintype.card ι)
+          (havg : (19/20 : ℝ) < ∫ x, ((s x).card : ℝ) / Fintype.card ι ∂μ) :
+L393: /-- This is the source's collision contradiction on one selected predecessor fiber. The lists need not be measurably enumerated. Measurability is required only of their symmetric encodings and the actual sampled phases. -/
+      theorem collision_from_close_encodings (μ : Measure Ω) [IsProbabilityMeasure μ]
+          (m : ℕ) (hm : 0 < m) (ρ : ℝ) (hρ : 0 < ρ)
+          (zp zm : Ω → ι → Fin m → Circle) (ap am : ι → Ω → Circle) (j₀ : ι)
+          (hap : ∀ j, Measurable (ap j)) (ham : ∀ j, Measurable (am j))
+          (hDp : ∀ j, Measurable (fun x => dist (encoding (zp x j)) (encoding (zp x j₀))))
+          (hDm : ∀ j, Measurable (fun x => dist (encoding (zm x j)) (encoding (zm x j₀))))
+          (hmem : ∀ᵐ x ∂μ, ∀ j, (∃ r, ap j x = zp x j r) ∧ (∃ r, am j x = zm x j r))
+L460: /-- This is the source's collision contradiction on one selected predecessor fiber. The lists need not be measurably enumerated. Measurability is required only of their symmetric encodings and the actual sampled phases. -/
+      theorem collision_from_measurable_encodings (μ : Measure Ω) [IsProbabilityMeasure μ]
+          (m : ℕ) (hm : 0 < m) (ρ : ℝ) (hρ : 0 < ρ)
+          (zp zm : Ω → ι → Fin m → Circle) (ap am : ι → Ω → Circle) (j₀ : ι)
+          (Hp Hm : ι → Ω → Fin m → ℂ)
+          (henc : ∀ᵐ x ∂μ, ∀ j, encoding (zp x j) = Hp j x ∧ encoding (zm x j) = Hm j x)
+          (hap : ∀ j, Measurable (ap j)) (ham : ∀ j, Measurable (am j))
+          (hDp : ∀ j, Measurable (fun x => dist (Hp j x) (Hp j₀ x)))
+
+######## OAI/Analysis/PlaneSpectrum/PhaseEncoding.lean  (255 lines)
+L28: /-- Exactly the elementary symmetric functions of degrees 1,…,m. -/
+      def encoding {m : ℕ} (z : Fin m → Circle) : Fin m → ℂ :=
+L86: /-- A coefficient bound on the unit circle, with the common leading term removed. -/
+      theorem eval_difference_bound {m : ℕ} (z w : Fin m → Circle) (a : Circle) :
+          ‖(phasePolynomial w).eval (a : ℂ) - (phasePolynomial z).eval (a : ℂ)‖ ≤
+            m * dist (encoding z) (encoding w) := by
+L104: /-- An explicit uniform inverse estimate sufficient for the phase collision step. -/
+      theorem close_encoding_each_phase {m : ℕ} (hm : 0 < m)
+          (z w : Fin m → Circle) {ρ : ℝ} (hρ : 0 < ρ)
+          (hzw : dist (encoding z) (encoding w) < ρ ^ m / m) :
+          ∀ i, ∃ j, dist (z i : ℂ) (w j : ℂ) < ρ := by
+L129: /-- Newton reconstruction from the entire sequence of power sums. -/
+      def fromPowers (p : ℕ → ℂ) (n : ℕ) : ℂ :=
+L203: /-- The measurable phase encoding, defined without a measurable enumeration. -/
+      def kernelEncoding (β : Kernel Y G) (χ : G → ℂ) (m : ℕ) (y : Y) : Fin m → ℂ :=
+L229: /-- On every uniform finite fiber, the formula is exactly the source's elementary-symmetric vector, including repetitions of equal phases. -/
+      theorem kernelEncoding_eq_encoding [MeasurableSingletonClass G] (β : Kernel Y G) (χ : G → Circle)
+          (m : ℕ) (hm : 0 < m) (y : Y) (g : Fin m → G)
+          (hβ : β y = (m : ℝ≥0∞)⁻¹ • ∑ i, Measure.dirac (g i)) :
+          kernelEncoding β (fun d => (χ d : ℂ)) m y = encoding (fun i => χ (g i)) := by
+L246: /-- Boundedness of the exact phase encoding, from compactness of the phase torus. -/
+      theorem exists_encoding_bound (m : ℕ) :
+          ∃ B : ℝ, ∀ z : Fin m → Circle, ‖encoding z‖ ≤ B := by
+
+######## OAI/Analysis/PlaneSpectrum/RadialEnergy.lean  (472 lines)
+L191: /-- The signed capped-residue conclusion for any integral transverse selection. -/
+      lemma selected_mass_bound (m : F → ℝ) (hm0 : m 0 = 1)
+          (hd : ∀ a b : F, 0 ≤ a → 0 ≤ b → m a*m b ≤ m |a-b|)
+          (c : ℝ) (hc0 : 0 ≤ c) (hc1 : c ≤ 1)
+          (r : F) (hr : 0 < r) {n : ℕ} (k : Fin n → E) (a b : Fin n → ℤ)
+          (D M : ℕ) (hD : 0 < D) (hM : 0 < M)
+          (ha : (∑ j, a j • k j) = D • (1:E))
+          (hb : (∑ j, b j • k j) = D • imagUnit)
+L278: /-- Arithmetic propagation: one syndetic positive mass level forces uniformly positive mass at every sufficiently small positive algebraic radius. -/
+      lemma cover_mass_positive (m : F → ℝ) (hm0 : m 0 = 1)
+          (hd : ∀ a b : F, 0 ≤ a → 0 ≤ b → m a*m b ≤ m |a-b|)
+          (c : ℝ) (hc0 : 0 < c) (hc1 : c ≤ 1)
+          (r : F) (hr : 0 < r) (Q : Finset E) (hQ : ∀ q ∈ Q, ‖(q:ℂ)‖ = 1)
+          (hcover : ∀ v : E, ‖(v:ℂ)‖ = 1 → ∃ q ∈ Q, c ≤ m |2*r*reF (q*v)|) :
+          ∃ δ : F, 0 < δ ∧ ∃ ε : ℝ, 0 < ε ∧ ε ≤ 1 ∧
+            ∀ s : F, 0 < s → s < δ → ε ≤ m s := by
+
+######## OAI/Analysis/PlaneSpectrum/Representations.lean  (477 lines)
+L10: /-- Discrete additive notation for the actual multiplicative algebraic rotation group. -/
+      def Rot := Additive K deriving AddCommGroup
+
+######## OAI/Analysis/PlaneSpectrum/Selections.lean  (432 lines)
+L10: /-- A cover evaluated at a large general-position set contains a spanning monochromatic subset. -/
+      lemma spanning_selection {ι : Type*} (Q : Finset ι) (S : Finset V) (hS : General S)
+          (hcard : Q.card*(finrank ℚ V-1) < S.card)
+          (A : ι → V → Prop) (hA : ∀ x ∈ S, ∃ i ∈ Q, A i x) :
+          ∃ i ∈ Q, ∃ T ⊆ S, T.card = finrank ℚ V ∧
+            Submodule.span ℚ (T : Set V) = ⊤ ∧ ∀ x ∈ T, A i x := by
+L113: /-- Uniform integral spanning selections extracted from the source's syndetic cover. -/
+      lemma uniform_selection (Q : Finset ℂ)
+          (hQn : ∀ q ∈ Q, ‖q‖ = 1) (hQa : ∀ q ∈ Q, IsAlgebraic ℚ q)
+          (A : ℂ → Prop)
+          (hA : ∀ v : ℂ, ‖v‖ = 1 → IsAlgebraic ℚ v → ∃ q ∈ Q, A (q*v)) :
+          ∃ D M : ℕ, 0 < D ∧ 0 < M ∧ ∀ v : ℂ, ‖v‖ = 1 → IsAlgebraic ℚ v →
+            ∃ n : ℕ, ∃ k : Fin n → ℂ, ∃ a b : Fin n → ℤ,
+              (∀ j, ‖k j‖ = 1 ∧ IsAlgebraic ℚ (k j) ∧ A (k j*v)) ∧
+
+######## OAI/Analysis/PlaneSpectrum/SmallArcs.lean  (322 lines)
+L177: /-- A quantitative finite-moment bound for the small arc about 1. -/
+      theorem small_arc_bound {N : ℕ} (hN : 0 < N) {c : ℝ} (hc : 0 ≤ c)
+          (hm : ∀ n, 0 < n → n < N → ‖∫ x, z x ^ n ∂μ‖ ≤ c) :
+          μ.real {x | ‖z x-1‖ ≤ 1 / (2 * (N : ℝ))} ≤ 4 / N + 4*c := by
+L205: /-- The source's qualitative choice, with explicit constants. -/
+      theorem exists_small_arc_constants (m : ℕ) (hm : 0 < m) :
+          ∃ (ρ c : ℝ) (N : ℕ), 0 < ρ ∧ 0 < c ∧ 0 < N ∧
+            ∀ (ω : Measure Circle) [IsProbabilityMeasure ω],
+            (∀ n, 0 < n → n ≤ N → ‖∫ w, (w : ℂ)^n ∂ω‖ < c) →
+            ω.real {w | ‖(w : ℂ)-1‖ ≤ 4*ρ} < 1/(4*(m : ℝ)^2) := by
+
+######## OAI/Analysis/PlaneSpectrum/SpectralMeasure.lean  (388 lines)
+
+######## OAI/Geometry/PlaneColoring/Accumulation.lean  (401 lines)
+
+######## OAI/Geometry/PlaneColoring/AngularBoundary.lean  (503 lines)
+L7: /-- `0` is the outsider and `1,2` the two diagonal states. -/
+      def FourWordValid (w : Fin 6 → Fin 3) : Prop :=
+L60: /-- Uniform local isolation of a value on a dense subset of a connected metric space propagates globally. This is the manuscript dense-set chain argument. -/
+      lemma dense_isolated_value_constant {E F : Type*} [MetricSpace E] [PreconnectedSpace E]
+          {G : Set E} (hG : Dense G) (f : E → F) {b : F} {ε : ℝ} (hε : 0<ε)
+          (hne : ∃x∈G,f x=b)
+          (hl : ∀x∈G,f x=b → ∀y∈G,dist x y<ε → f y=b) : ∀y∈G,f y=b := by
+L121: /-- The mixed-parity exceptional words are excluded by actual local isolation and sixty-degree covariance on a dense set. -/
+      lemma four_words_no_mixed (G : Set Angles) (hG : Dense G) (w : Angles → Fin 6 → Fin 3)
+          (hv : ∀t∈G,FourWordValid (w t))
+          (hshiftG : ∀t∈G,t+(sixty : Angles)∈G)
+          (hshift : ∀t∈G,∀j,w (t+(sixty : Angles)) j=w t (j+1))
+          {ε : ℝ} (hε : 0<ε)
+          (hcross : ∀t∈G,∀u∈G,dist t u<ε → FourWordCross (w t) (w u)) :
+          ∀t∈G,¬FourWordMixed (w t) := by
+L146: /-- The source's strict min/max straddling region, in equivalent witness form. -/
+      def Straddle (K : Set ℂ) : Set ℂ := {z | ∃p∈K,∃q∈K,dist z p<1 ∧ 1<dist z q}
+L233: /-- The approach data furnished by the manuscript interface proposition, with no assumption of angular strip conclusions. -/
+      structure ApproachingContinuum (x : ℂ) (K : Set ℂ) (v : ℂ) where
+L307: /-- The manuscript's essential spatial color support. -/
+      def spatialSupport (i : Fin k) : Set ℂ := (volume.restrict {z | c z=i}).support
+L447: /-- Core finite obstruction behind the one-orbit boundary theorem. -/
+      lemma angleBoundary_one_orbit {s : Angles → Bool}
+          (hf : ∀ᵐt∂angularMeasure,s (t+(sixty : Angles))= !(s t)) (B : Finset Angles)
+          (hB : B.card≤6) (hanti : ∀t,t+(Real.pi : Angles)∈B ↔ t∈B)
+          (hl : ∀t,t∉B → t+(sixty : Angles)∉B → ∃b,t∈angleEssential s b) :
+          ∃t,angleBoundary s={u | ∃j : Fin 6,u=t+sixAngle j} := by
+
+######## OAI/Geometry/PlaneColoring/BinaryDynamics.lean  (515 lines)
+
+######## OAI/Geometry/PlaneColoring/BinaryPalettes.lean  (375 lines)
+
+######## OAI/Geometry/PlaneColoring/BorelTransfer.lean  (451 lines)
+
+######## OAI/Geometry/PlaneColoring/BoundaryTrace.lean  (367 lines)
+L246: /-- The source local binary rigidity on arbitrary one-sided strips, allowing independent choices of radial side at the two equilateral neighbors. -/
+      lemma binary_strip_rigidity {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c) (hw : WeakColoring k c)
+          {a b : Fin k} {U V : Set ℂ} (hU : IsOpen U) (hV : IsOpen V)
+          (hUc : ∀ᵐq : ℂ∂volume,q∈U → c q=a ∨ c q=b)
+          (hVc : ∀ᵐq : ℂ∂volume,q∈V → c q=a ∨ c q=b)
+          {x e : ℂ} (he : ‖e‖=1) {δ : ℝ} (hδ : 0<δ) (bu bv : Bool)
+          (hstripU : ∀e' : ℂ,‖e'‖=1 → dist e' e<δ → ∀r : ℝ,
+            0<r → |r-1|<δ → (if bu then 1<r else r<1) → x+(r:ℂ)*e'∈U)
+L278: /-- The resulting fixed outsider is actually in the maximal palette on an angular neighborhood, by one-sided radial weak traces. -/
+      lemma binary_strip_palette_rigidity {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c) (hw : WeakColoring k c)
+          {a b : Fin k} {U V : Set ℂ} (hU : IsOpen U) (hV : IsOpen V)
+          (hUc : ∀ᵐq : ℂ∂volume,q∈U → c q=a ∨ c q=b)
+          (hVc : ∀ᵐq : ℂ∂volume,q∈V → c q=a ∨ c q=b)
+          {x : ℂ} {t : Angles} {δ : ℝ} (hδ : 0<δ) (bu bv : Bool)
+          (hstripU : ∀e' : ℂ,‖e'‖=1 → dist e' (direction t)<δ → ∀r : ℝ,
+            0<r → |r-1|<δ → (if bu then 1<r else r<1) → x+(r:ℂ)*e'∈U)
+L317: /-- If two unit rays can never be simultaneously positive at a generic angle, they are antipodal. This avoids any assumption about multiplicities of ray lines. -/
+      lemma unit_antipodes_of_no_positive {v w : ℂ} (hv : ‖v‖=1) (hw : ‖w‖=1)
+          (h : ∀ᵐt∂angularMeasure,¬(0<⟪direction t,v⟫ ∧ 0<⟪direction t,w⟫)) : w= -v := by
+L357: /-- The source's all-generic split condition already forces opposite edge positions to be actual antipodes; the collinear case is retained. -/
+      lemma four_split_antipodes (v : Fin 4 → ℂ) (hv : ∀i,‖v i‖=1)
+          (hsplit : ∀ᵐt∂angularMeasure,∀i,¬(0<⟪direction t,v i⟫ ∧ 0<⟪direction t,v (i+2)⟫)) :
+          ∀i,v (i+2)= -v i := by
+
+######## OAI/Geometry/PlaneColoring/CircleMaps.lean  (517 lines)
+L147: /-- Joint strict differentiability and a nonzero fiber derivative give one inverse Lipschitz bound simultaneously for every nearby parameter. -/
+      lemma strict_fiber_uniform_antilipschitz {S : E × ℝ → ℝ} {L : E × ℝ →L[ℝ] ℝ}
+          {p : E} {t : ℝ} (hS : HasStrictFDerivAt S L (p,t)) (hc : L (0,1) ≠ 0) :
+          ∃ P : Set E, ∃ I : Set ℝ, IsOpen P ∧ p ∈ P ∧ IsOpen I ∧ t ∈ I ∧
+            ∃ K : ℝ≥0, ∀ q ∈ P, AntilipschitzWith K (I.domRestrict (fun u => S (q,u))) := by
+
+######## OAI/Geometry/PlaneColoring/CircleTransport.lean  (336 lines)
+L9: /-- A uniformly bounded nonnegative sequence converging locally in L¹ on a conull open cover converges globally in L¹ for a finite inner-regular measure. -/
+      lemma tendsto_integral_of_local_cover {X I : Type*} [TopologicalSpace X] [T2Space X]
+          [MeasurableSpace X] [OpensMeasurableSpace X] {μ : Measure X} [IsFiniteMeasure μ]
+          [Measure.InnerRegularCompactLTTop μ] {F : ℕ → X → ℝ}
+          (hF : ∀ n, Integrable (F n) μ) (hb : ∀ n x, 0 ≤ F n x ∧ F n x ≤ 1)
+          (V : I → Set X) (hVo : ∀ i, IsOpen (V i)) (hfull : ∀ᵐ x ∂μ, x ∈ ⋃ i, V i)
+          (hlocal : ∀ i, Tendsto (fun n => ∫ x in V i, F n x ∂μ) atTop (𝓝 0)) :
+          Tendsto (fun n => ∫ x, F n x ∂μ) atTop (𝓝 0) := by
+
+######## OAI/Geometry/PlaneColoring/Coloring.lean  (34 lines)
+L25: /-- Exactly the manuscript weak measurable condition, using normalized Haar angular measure. A function is understood up to a plane-null set; no regularity is imposed on a proper coloring. -/
+      def WeakColoring (k : ℕ) (c : ℂ → Fin k) : Prop :=
+
+######## OAI/Geometry/PlaneColoring/Compactness.lean  (379 lines)
+L344: /-- A finite-measure essential union is generated by countably many members of the original family. -/
+      lemma exists_countable_essential_union (A : I → Set X) (hm : ∀ i, MeasurableSet (A i)) :
+          ∃ J : Set I, J.Countable ∧ ∀ i, A i ≤ᵐ[μ] (⋃ j ∈ J, A j) := by
+
+######## OAI/Geometry/PlaneColoring/ContinuumLimits.lean  (353 lines)
+L10: /-- Vanishing exceptional measure is enough: almost every point is outside the exceptional sets infinitely often. No summability or nesting is required. -/
+      lemma ae_frequently_notMem_of_measure_tendsto_zero {X : Type*} [MeasurableSpace X]
+          {μ : Measure X} {E : ℕ → Set X}
+          (hE : Tendsto (fun n => μ (E n)) atTop (𝓝 0)) :
+          ∀ᵐ z ∂μ, ∃ᶠ n in atTop, z ∉ E n := by
+L30: /-- Pointwise differentiation plus vanishing exceptional sets gives the measure exclusion used for both the mesh bound and the common continuum exclusions. -/
+      lemma ae_ne_one_of_eventual_bound {X : Type*} [MeasurableSpace X]
+          {μ : Measure X} {p : ℕ → X → ℝ} {f : X → ℝ} {E : ℕ → Set X} {U : Set X}
+          {α : ℝ} (hα : 0 < α)
+          (hp : ∀ᵐ z ∂μ, Tendsto (fun n => p n z) atTop (𝓝 (f z)))
+          (hE : Tendsto (fun n => μ (E n)) atTop (𝓝 0))
+          (hb : ∀ z ∈ U, ∀ᶠ n in atTop, z ∉ E n → p n z ≤ 1-α) :
+          ∀ᵐ z ∂μ, z ∈ U → f z ≠ 1 := by
+L116: /-- Connectedness passes to a Vietoris (equivalently compact Hausdorff metric) limit. -/
+      theorem nonemptyCompacts_preconnected_limit {X : Type u} [TopologicalSpace X]
+          [T2Space X] [NormalSpace X] {ι : Type v} {l : Filter ι} [NeBot l]
+          {K : ι → NonemptyCompacts X} {L : NonemptyCompacts X}
+          (hlim : Tendsto K l (𝓝 L)) (hc : ∀ᶠn in l,IsPreconnected (K n : Set X)) :
+          IsPreconnected (L : Set X) := by
+L161: /-- A finite family of nonempty compact continua in a compact metric space has one common subsequence of connected compact limits. -/
+      theorem finite_continuum_subsequence {X : Type u} [MetricSpace X] [CompactSpace X]
+          {J : Type v} [Finite J] (K : ℕ → J → NonemptyCompacts X)
+          (hc : ∀n j,IsPreconnected (K n j : Set X)) :
+          ∃L : J → NonemptyCompacts X, ∃φ : ℕ → ℕ, StrictMono φ ∧
+            (∀j,Tendsto (fun n => K (φ n) j) atTop (𝓝 (L j))) ∧
+            (∀j,IsPreconnected (L j : Set X)) := by
+L198: /-- The common-exclusion continuum limit argument. The sole exceptional sets are actual unit neighborhoods of the holes, and their measures tend to zero. -/
+      theorem continuum_limit_support_exclusion {k : ℕ} {c : ℂ → Fin k}
+          (hc : Measurable c) (hw : WeakColoring k c)
+          {K : ℕ → NonemptyCompacts ℂ} {L : NonemptyCompacts ℂ}
+          (hlim : Tendsto K atTop (𝓝 L)) (hconn : ∀n,IsPreconnected (K n : Set ℂ))
+          {ε : ℕ → ℝ} (hε : Tendsto ε atTop (𝓝 0)) (hpos : ∀n,0<ε n)
+          {H E : ℕ → Set ℂ} (hE : Tendsto (fun n => volume (E n)) atTop (𝓝 0))
+          (hnear : ∀n z q,q∈H n → dist z q=1 → z∈E n)
+L226: /-- One interface excludes both labels from the same straddling set and approaches its center in an actual unit direction. -/
+      def CommonInterface (c : ℂ → Fin 5) (x : ℂ) (i j : Fin 5) : Prop :=
+L294: /-- All actual common-exclusion interfaces at a point form a forest. This assembles triangle, four and five cases for arbitrary labels, not just canonical cycles. -/
+      theorem commonInterface_graph_acyclic {c : ℂ → Fin 5} (hc : Measurable c)
+          (hw : WeakColoring 5 c) (x : ℂ) (G : SimpleGraph (Fin 5))
+          (hG : ∀i j,G.Adj i j → CommonInterface c x i j) : G.IsAcyclic := by
+L316: /-- End-to-end limit of actual connected midpoint fibers, retaining both endpoint exclusions on the same limiting continuum. -/
+      theorem commonInterface_of_compact_sequence {c : ℂ → Fin 5}
+          (hc : Measurable c) (hw : WeakColoring 5 c) {x : ℂ} {ρ : ℝ} (hρ : 0<ρ)
+          (K : ℕ → NonemptyCompacts ℂ) (hsub : ∀n,(K n : Set ℂ)⊆Metric.closedBall x ρ)
+          (hconn : ∀n,IsPreconnected (K n : Set ℂ))
+          (a : ℕ → ℂ) (ha : ∀n,a n∈K n) (halim : Tendsto a atTop (𝓝 x))
+          (hout : ∀n,((K n : Set ℂ)∩Metric.sphere x ρ).Nonempty)
+          {ε : ℕ → ℝ} (hε : Tendsto ε atTop (𝓝 0)) (hpos : ∀n,0<ε n)
+
+######## OAI/Geometry/PlaneColoring/CyclicCore.lean  (280 lines)
+
+######## OAI/Geometry/PlaneColoring/DiskAverages.lean  (333 lines)
+
+######## OAI/Geometry/PlaneColoring/DiskExtension.lean  (611 lines)
+L88: /-- Finite disk merging with separate total and non-core radius budgets. Strict containment at merges, and the retained core witness, are both included. -/
+      theorem separate (S : Finset MarkedDisk) {L : Set ℂ} (hS : ∀d∈S,d.Valid L)
+          {η : ℝ} (hη : 0<η) : ∃T : Finset MarkedDisk,
+            (∀d∈T,d.Valid L) ∧ (T : Set MarkedDisk).Pairwise (fun a b => Disjoint a.closedBall b.closedBall) ∧
+            (∀d∈S,∃e∈T,d.ball⊆e.ball ∧ (d.core=true → e.core=true)) ∧
+            (∑d∈T,d.radius)<(∑d∈S,d.radius)+η ∧
+            (∑d∈T,d.noncoreCost)<(∑d∈S,d.noncoreCost)+η := by
+L223: /-- A contraction genuinely extends arbitrary continuous sphere data across a disk. -/
+      theorem contractible_disk_extension {Y : Type u} [TopologicalSpace Y] [ContractibleSpace Y]
+          (c : ℂ) {r : ℝ} (hr : 0<r) (f : C(Metric.sphere c r,Y)) :
+          ∃g : C(Metric.closedBall c r,Y), ∀z : Metric.sphere c r,
+            g ⟨z.val,Metric.sphere_subset_closedBall z.property⟩=f z := by
+L257: /-- Linear transfer of a leaf coordinate along its unique incident edge. -/
+      def graphLeafMove {V : Type u} (v w : V) (t : ℝ) (p : V → ℝ) : V → ℝ :=
+L456: /-- Genuine contraction of the geometric probability-simplex realization of a finite tree. -/
+      theorem graphTree_contractible {V : Type u} [Fintype V] {G : SimpleGraph V} (hG : G.IsTree) :
+          ContractibleSpace (GraphSpace G) := graphTree_contractible_aux _ V G rfl hG
+L467: /-- Forest-valued boundary data extend through an actual spanning tree inside the complete graph. Isolated labels and empty edge sets are retained. -/
+      theorem forest_disk_extension {V : Type u} [Fintype V] [Nonempty V]
+          (c : ℂ) {r : ℝ} (hr : 0<r) (f : C(Metric.sphere c r,V → ℝ))
+          {G : SimpleGraph V} (hG : G.IsAcyclic) (hf : ∀z,f z∈graphRealization G) :
+          ∃g : C(Metric.closedBall c r,GraphSpace (⊤ : SimpleGraph V)), ∀z : Metric.sphere c r,
+            (g ⟨z.val,Metric.sphere_subset_closedBall z.property⟩).val=f z := by
+L492: /-- Finite closed-cover pasting, with the actual glued continuous map. -/
+      def closedCoverMap {X : Type u} {Y : Type v} {ι : Type w}
+          [TopologicalSpace X] [TopologicalSpace Y] [Finite ι]
+          (S : ι → Set X) (hS : ∀i,IsClosed (S i)) (hc : ⋃i,S i=univ)
+          (f : ∀i,C(S i,Y))
+          (hf : ∀i j x (hi : x∈S i) (hj : x∈S j), f i ⟨x,hi⟩=f j ⟨x,hj⟩) : C(X,Y) where
+L530: /-- Finite closed pasting fills precisely the non-core holes, with actual continuous tree extensions on their disks and no change outside the original open holes. -/
+      theorem fill_noncore_disks {V : Type u} [Fintype V] [Nonempty V]
+          (Q : Set ℂ) (S : Finset MarkedDisk) (hr : ∀d∈S,0<d.radius)
+          (hdis : (S : Set MarkedDisk).Pairwise (fun a b => Disjoint a.closedBall b.closedBall))
+          (f : C(ℂ,V → ℝ))
+          (hg : ∀z∈Q,z∉diskHoles S → f z∈graphRealization (⊤ : SimpleGraph V))
+          (hb : ∀d∈S,d.core=false → (d.closedBall∩Q).Nonempty →
+            ∃G : SimpleGraph V,G.IsAcyclic ∧ ∀z∈Metric.sphere d.center d.radius,f z∈graphRealization G) :
+
+######## OAI/Geometry/PlaneColoring/Exclusion.lean  (165 lines)
+L34: /-- Labels allowed on the side selected by `b`; a label survives precisely when both of its incident edges have the opposite sign. -/
+      def sideAllowed (s : Fin 5 → Bool) (b : Bool) : Finset (Fin 5) :=
+L38: /-- Both actual one-sided strip restrictions on a palette. -/
+      def SideCompatible (s : Fin 5 → Bool) (p : Finset (Fin 5)) : Prop :=
+L141: /-- Actual five-cycle angular obstruction under exactly the directional and common-support-exclusion data extracted in source Proposition interface-cycle. This does not assert that such data have been extracted. -/
+      lemma no_five_exclusion_continua (hw : WeakColoring 5 c) {x : ℂ}
+          {K : Fin 5 → Set ℂ} {v : Fin 5 → ℂ} (hv : ∀i,‖v i‖=1)
+          (hK : ∀i,ApproachingContinuum x (K i) (v i))
+          (hH : ∀i,Disjoint (spatialSupport c i) (Straddle (K i)) ∧
+            Disjoint (spatialSupport c (i+1)) (Straddle (K i))) : False := by
+
+######## OAI/Geometry/PlaneColoring/Expansion.lean  (725 lines)
+L359: /-- L¹ continuity under measurable perturbations with a common bounded pushforward density. -/
+      lemma tendsto_integral_norm_comp_sub [IsFiniteMeasure μ] [ν.WeaklyRegular]
+          {T : ℕ → X → Y} {S : X → Y} {C : ℝ≥0}
+          (hT : ∀ n, Measurable (T n)) (hS : Measurable S)
+          (hmT : ∀ n, μ.map (T n) ≤ (C : ENNReal) • ν) (hmS : μ.map S ≤ (C : ENNReal) • ν)
+          (ht : ∀ᵐ x ∂μ, Tendsto (fun n => T n x) atTop (𝓝 (S x)))
+          {f : Y → ℝ} (hf : Integrable f ν) :
+          Tendsto (fun n => ∫ x, ‖f (T n x)-f (S x)‖ ∂μ) atTop (𝓝 0) := by
+
+######## OAI/Geometry/PlaneColoring/Five.lean  (131 lines)
+L20: /-- The actual positive-coordinate component cover contradicts the planar cover obstruction whenever every connected positive region has diameter at most two. -/
+      theorem graph_map_small_mesh_impossible
+          (F : C(Metric.closedBall (0:ℂ) 5,GraphSpace (⊤ : SimpleGraph (Fin 5))))
+          (hmesh : ∀(i : Fin 5) (K : Set ℂ),IsPreconnected K → K⊆Metric.closedBall (0:ℂ) 5 →
+            (∀z : Metric.closedBall (0:ℂ) 5,z.val∈K → 0<(F z).val i) →
+            ∀x∈K,∀y∈K,dist x y≤2) : False := by
+L92: /-- Every continuous graph-valued map of the disk has a positive-coordinate connected region of diameter greater than two. -/
+      lemma graph_map_large_positive
+          (F : C(Metric.closedBall (0:ℂ) 5,GraphSpace (⊤ : SimpleGraph (Fin 5)))) :
+          ∃i : Fin 5,∃K : Set ℂ,IsPreconnected K ∧ K⊆Metric.closedBall (0:ℂ) 5 ∧
+            (∀z : Metric.closedBall (0:ℂ) 5,z.val∈K → 0<(F z).val i) ∧
+            ∃x∈K,∃y∈K,2<dist x y := by
+L102: /-- No Borel weak five-coloring exists. The global approximants here are constructed from the actual coloring, its transition graph, and its common interface limits, rather than supplied as an extra coloring hypothesis. -/
+      theorem no_measurable_weak_five_coloring {c : ℂ → Fin 5}
+          (hc : Measurable c) (hw : WeakColoring 5 c) : False := by
+L123: /-- No unrestricted five-coloring separates all unit-distance pairs in the Euclidean plane. -/
+      theorem no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c := by
+
+######## OAI/Geometry/PlaneColoring/FiveSupport.lean  (376 lines)
+
+######## OAI/Geometry/PlaneColoring/FourContinuity.lean  (551 lines)
+
+######## OAI/Geometry/PlaneColoring/FourTransport.lean  (454 lines)
+
+######## OAI/Geometry/PlaneColoring/FullApproximation.lean  (339 lines)
+L10: /-- Compactness and the angular theorems force all sufficiently fine crossing graphs to be forests. This is about actual compact bridges, not assumed interface data. -/
+      theorem eventually_forest_of_bridges {c : ℂ → Fin 5} (hc : Measurable c)
+          (hw : WeakColoring 5 c) {x : ℂ} {ρ : ℝ} (hρ : 0<ρ)
+          (D : ℕ → SimpleGraph (Fin 5)) {r ε : ℕ → ℝ}
+          (hr : Tendsto r atTop (𝓝 0)) (hε : Tendsto ε atTop (𝓝 0)) (hpos : ∀n,0<ε n)
+          {H E : ℕ → Set ℂ} (hE : Tendsto (fun n => volume (E n)) atTop (𝓝 0))
+          (hnear : ∀n z q,q∈H n → dist z q=1 → z∈E n)
+          {α : ℝ} (hα : 0<α)
+L63: /-- The actual continuous annulus maps eventually permit disk extensions. -/
+      theorem annulus_maps_eventually_forest {c : ℂ → Fin 5} (hc : Measurable c)
+          (hw : WeakColoring 5 c) {x : ℂ} {R : ℝ} (hR : 0<R) {r ε : ℕ → ℝ}
+          (hr : Tendsto r atTop (𝓝 0)) (hε : Tendsto ε atTop (𝓝 0)) (hpos : ∀n,0<ε n)
+          {H E : ℕ → Set ℂ} (hE : Tendsto (fun n => volume (E n)) atTop (𝓝 0))
+          (hnear : ∀n z q,q∈H n → dist z q=1 → z∈E n)
+          {α : ℝ} (hα : 0<α) (hα' : α<1/5)
+          (f : ∀n,C(planeAnnulus x (r n) R,GraphSpace (⊤ : SimpleGraph (Fin 5))))
+L105: /-- Actual finite disk pasting from a closed outside domain. Disks may cross the boundary of the ambient compact region. -/
+      theorem finite_disk_paste {Y : Type u} [TopologicalSpace Y] (Q : Set ℂ)
+          (S : Finset MarkedDisk)
+          (hdis : (S : Set MarkedDisk).Pairwise (fun a b => Disjoint a.closedBall b.closedBall))
+          (f : C(↥(Q \ diskHoles S),Y))
+          (g : ∀d : S,C(d.val.closedBall,Y))
+          (hb : ∀d : S,∀z : Metric.sphere d.val.center d.val.radius,∀hzQ : z.val∈Q,
+            ∀hzS : z.val∉diskHoles S,
+L173: /-- Fill all the actual core holes simultaneously when their surrounding crossing graphs are forests, retaining the threshold map outside the original and outer disks. -/
+      theorem fill_cores {c : ℂ → Fin 5} {α t R : ℝ} {L : Finset ℂ}
+          (a : HoleApprox c α L t) (hR : R<1) (htR : 2*t<R)
+          (hsep : ∀x∈L,∀y∈L,x≠y → 2*R<dist x y)
+          (hforest : ∀x (hx : x∈activeCenters L),
+            (crossingGraph (fun z => (a.annulusMap hR htR hsep hx z).val)
+              (annulusInner x (2*t) R) (annulusOuter x (2*t) R)).IsAcyclic) :
+          ∃F : C(Metric.closedBall (0:ℂ) 5,GraphSpace (⊤ : SimpleGraph (Fin 5))),
+L204: /-- The common-exclusion limit contradiction applies to the constructed maps, so all these actual core fillings exist eventually at any fixed separated outer scale. -/
+      theorem eventually_fill_cores {c : ℂ → Fin 5} (hc : Measurable c) (hw : WeakColoring 5 c)
+          {α R : ℝ} (hα : 0<α) (hα' : α<1/5) {L : Finset ℂ} {t : ℕ → ℝ}
+          (a : ∀n,HoleApprox c α L (t n)) (ht : Tendsto t atTop (𝓝 0))
+          (hR0 : 0<R) (hR : R<1) (htR : ∀n,2*t n<R)
+          (hsep : ∀x∈L,∀y∈L,x≠y → 2*R<dist x y) :
+          ∀ᶠ n in atTop,∃F : C(Metric.closedBall (0:ℂ) 5,GraphSpace (⊤ : SimpleGraph (Fin 5))),
+            ∀z : Metric.closedBall (0:ℂ) 5,z.val∉diskHoles (a n).disks →
+L253: /-- A global graph approximation, with actual small exceptional disks. All fields will be constructed, not postulated as coloring hypotheses. -/
+      structure FullApprox (c : ℂ → Fin 5) (α t : ℝ) where
+L266: /-- The whole producer, using actual annular crossing fibers and all angular contradictions: global graph approximants exist at arbitrarily small exception scales. -/
+      theorem fullApprox_exists_of_finite_core {c : ℂ → Fin 5} (hc : Measurable c)
+          (hw : WeakColoring 5 c) {α : ℝ} (hα : 0<α) (hα' : α<1/5)
+          (L : Finset ℂ) (hL : ∀x∈Metric.closedBall (0:ℂ) 8,¬(transitionGraph c x).IsAcyclic → x∈L)
+          {t : ℝ} (ht : 0<t) : Nonempty (FullApprox c α t) := by
+L328: /-- The finite core used above is obtained from the proved actual transition core local-finiteness theorem; no regularity of the original coloring is added. -/
+      theorem fullApprox_exists {c : ℂ → Fin 5} (hc : Measurable c)
+          (hw : WeakColoring 5 c) {α : ℝ} (hα : 0<α) (hα' : α<1/5) {t : ℝ} (ht : 0<t) :
+          Nonempty (FullApprox c α t) := by
+
+######## OAI/Geometry/PlaneColoring/GraphCuts.lean  (314 lines)
+L77: /-- The closed half of a deleted edge, viewed inside the cut graph. -/
+      def graphCutStub {V : Type u} (T : SimpleGraph V) (i j : V) : Set (GraphCutSpace T) :=
+L196: /-- Removing the non-tree edge midpoints leaves a contractible graph (tree with half-open stubs). -/
+      theorem graphCut_contractible {V : Type u} [Fintype V] {T : SimpleGraph V} (hT : T.IsTree) :
+          ContractibleSpace (GraphCutSpace T) := by
+L214: /-- A compact connected fiber joins both designated boundary sets. -/
+      def FiberCrosses {X : Type u} {Y : Type v} [TopologicalSpace X]
+          (f : X → Y) (A B : Set X) (b : Y) : Prop :=
+L267: /-- All finitely many non-crossing bad fibers can simultaneously be separated, with the prescribed inner/outer closed sets on opposite sides. -/
+      theorem finite_fiber_separation {X : Type u} {Y : Type v} [TopologicalSpace X]
+          [TopologicalSpace Y] [CompactSpace X] [T2Space X] [T1Space Y]
+          (f : C(X,Y)) {A B : Set X} (hA : IsClosed A) (hB : IsClosed B) (hd : Disjoint A B)
+          (S : Finset Y) (hn : ∀b∈S,¬FiberCrosses f A B b) :
+          ∃C₀ C₁ : Set X, IsCompact C₀ ∧ IsCompact C₁ ∧ Disjoint C₀ C₁ ∧
+            A⊆C₀ ∧ B⊆C₁ ∧ f ⁻¹' (↑S : Set Y)⊆C₀∪C₁ := by
+
+######## OAI/Geometry/PlaneColoring/GraphPatches.lean  (314 lines)
+L11: /-- Patch a map across separated bad fibers. Only the intervening values need lie in a contractible subspace; the map is kept on one closed set and made constant on the other. -/
+      theorem contractible_patch {X : Type u} {Y : Type v} [TopologicalSpace X]
+          [TopologicalSpace Y] [NormalSpace X] (D : Set Y) [ContractibleSpace D]
+          (f : C(X,Y)) {A B : Set X} (hA : IsClosed A) (hB : IsClosed B) (hd : Disjoint A B)
+          (hg : ∀x,x∉A → x∉B → f x∈D) :
+          ∃a : D, ∃g : C(X,Y), EqOn g (fun _ => a.val) A ∧ EqOn g f B ∧
+            ∀x,g x=f x ∨ g x∈D := by
+L104: /-- Edges whose midpoint fibers contain a compact continuum joining the two boundaries. -/
+      def crossingGraph {X : Type u} {V : Type v} [TopologicalSpace X]
+          (f : X → V → ℝ) (A B : Set X) : SimpleGraph V where
+L115: /-- If the crossing edges form a forest, the boundary map can be patched to a constant on the inner closed set, unchanged on the outer closed set. This replaces the graph-word and winding detour for the existential interface-cycle producer. -/
+      theorem graph_forest_patch {X : Type u} {V : Type v} [TopologicalSpace X]
+          [CompactSpace X] [T2Space X] [Fintype V] [Nonempty V]
+          (f : C(X,GraphSpace (⊤ : SimpleGraph V))) {A B : Set X}
+          (hA : IsClosed A) (hB : IsClosed B) (hd : Disjoint A B)
+          (hforest : (crossingGraph (fun x => (f x).val) A B).IsAcyclic) :
+          ∃a : GraphSpace (⊤ : SimpleGraph V), ∃g : C(X,GraphSpace (⊤ : SimpleGraph V)),
+            EqOn g (fun _ => a) A ∧ EqOn g f B := by
+L181: /-- A forest crossing graph yields an actual extension of the outer boundary over its disk. This uses compact fiber separation and tree contraction, not graph words. -/
+      theorem annulus_forest_extension {V : Type u} [Fintype V] [Nonempty V]
+          {x : ℂ} {r R : ℝ} (hrR : r<R)
+          (f : C(planeAnnulus x r R,GraphSpace (⊤ : SimpleGraph V)))
+          (hforest : (crossingGraph (fun z => (f z).val) (annulusInner x r R) (annulusOuter x r R)).IsAcyclic) :
+          ∃g : C(Metric.closedBall x R,GraphSpace (⊤ : SimpleGraph V)),
+            ∀z : Metric.sphere x R,g ⟨z.val,Metric.sphere_subset_closedBall z.property⟩=
+              f ⟨z.val,sphere_mem_annulus hrR.le z.property⟩ := by
+
+######## OAI/Geometry/PlaneColoring/GraphRealization.lean  (415 lines)
+L9: /-- The directional subsequence in the last paragraph of interface-cycle follows from connectedness and an outer contact. Compactness of the continuum is not needed. -/
+      lemma continuum_has_approach {x y : ℂ} {K : Set ℂ} (hK : IsPreconnected K)
+          (hx : x∈K) (hy : y∈K) (hne : y≠x) :
+          ∃v : ℂ, ‖v‖=1 ∧ Nonempty (ApproachingContinuum x K v) := by
+L53: /-- The compact contact partition used in the manuscript's annular-crossing proof. This reuses Mathlib's Hausdorff component quotient and its profinite separation theorem. -/
+      lemma compact_component_partition {X : Type*} [TopologicalSpace X] [CompactSpace X] [T2Space X]
+          {I O : Set X} (hI : IsCompact I) (hO : IsCompact O)
+          (hno : ∀x∈I, Disjoint (connectedComponent x) O) :
+          ∃Z₁ Z₂ : Set X, IsCompact Z₁ ∧ IsCompact Z₂ ∧ Disjoint Z₁ Z₂ ∧
+            Z₁∪Z₂=univ ∧ I⊆Z₁ ∧ O⊆Z₂ := by
+L86: /-- Standard affine vertices. These are the manuscript's probability-simplex coordinates. -/
+      def graphVertex {V : Type u} (i : V) : V → ℝ := fun j => if j=i then 1 else 0
+L88: /-- Affine parameterization of an edge, including its two vertices. -/
+      def graphEdgePoint {V : Type u} (i j : V) (t : ℝ) : V → ℝ :=
+L91: /-- The geometric realization of a simple graph in its probability simplex. The equal-endpoint option includes isolated vertices. -/
+      def graphRealization {V : Type u} (G : SimpleGraph V) : Set (V → ℝ) :=
+L192: /-- A simplex vector whose positive labels form a clique in a forest is genuinely in that forest's affine realization, rather than just in the complete graph. -/
+      theorem simplex_mem_forest {V : Type u} [Fintype V] {G : SimpleGraph V}
+          (hG : G.IsAcyclic) {p : V → ℝ} (hn : ∀i,0≤p i) (hs : ∑i,p i=1)
+          (hcl : ∀i j,i≠j → 0<p i → 0<p j → G.Adj i j) : p∈graphRealization G := by
+L242: /-- The manuscript's thresholded and renormalized disk average (equation 22). -/
+      def thresholdWeight (c : ℂ → Fin 5) (ε α : ℝ) (q : ℂ) (i : Fin 5) : ℝ :=
+L304: /-- A genuine local forest chart; its exception disks have arbitrarily small total radius at sufficiently small averaging scale. -/
+      theorem forest_chart {c : ℂ → Fin 5} (hc : Measurable c) {α : ℝ}
+          (hα : 0<α) (hα' : α<1/5) (x : ℂ) (hf : (transitionGraph c x).IsAcyclic) :
+          ∃s>0,∀η>0,∃δ>0,∀ε,0<ε → ε<δ → ∃C : Finset ℂ,
+            (C.card:ℝ)*(α*ε/4)<η ∧ ∀q∈Metric.ball x s,
+            q∉⋃z∈C,Metric.ball z (α*ε/4) → thresholdMap c ε α q∈graphRealization (transitionGraph c x) := by
+L364: /-- Compact local forest control with one Lebesgue radius, chosen before the hole budget and the disk-average scale. The resulting forest controls the WHOLE nearby ball off the common exception disks, not merely the compact set. -/
+      theorem compact_forest_charts {c : ℂ → Fin 5} (hc : Measurable c) {α : ℝ}
+          (hα : 0<α) (hα' : α<1/5) (M : Set ℂ) (hM : IsCompact M)
+          (hf : ∀x∈M,(transitionGraph c x).IsAcyclic) :
+          ∃l>0,∀η>0,∃δ>0,∀ε,0<ε → ε<δ → ∃C : Finset ℂ,
+            (C.card:ℝ)*(α*ε/4)<η ∧ ∀a∈M,∃G : SimpleGraph (Fin 5),G.IsAcyclic ∧
+            ∀q∈Metric.ball a l,q∉⋃z∈C,Metric.ball z (α*ε/4) → thresholdMap c ε α q∈graphRealization G := by
+
+######## OAI/Geometry/PlaneColoring/HoleApproximation.lean  (328 lines)
+L112: /-- Actual small-hole maps on a fixed disk, with arbitrarily small total radii. The core witnesses lie in the finite actual cyclic core; all other holes have been filled by genuine tree extensions. -/
+      theorem small_hole_map {c : ℂ → Fin 5} (hc : Measurable c) {α : ℝ}
+          (hα : 0<α) (hα' : α<1/5) (L : Finset ℂ)
+          (hL : ∀x∈Metric.closedBall (0:ℂ) 8,¬(transitionGraph c x).IsAcyclic → x∈L)
+          {t : ℝ} (ht : 0<t) (ht' : t<1/2) :
+          ∃e>0,∀ε,0<ε → ε<e → ∃S : Finset MarkedDisk,
+            (∀d∈S,d.Valid (L : Set ℂ)) ∧
+            (S : Set MarkedDisk).Pairwise (fun a b => Disjoint a.closedBall b.closedBall) ∧
+L210: /-- Exception annuli for exact unit distances from the small closed disks. -/
+      def diskAnnulus (d : MarkedDisk) : Set ℂ :=
+L279: /-- Data actually constructed by the small-hole lemma. -/
+      structure HoleApprox (c : ℂ → Fin 5) (α : ℝ) (L : Finset ℂ) (t : ℝ) where
+
+######## OAI/Geometry/PlaneColoring/Interfaces.lean  (527 lines)
+L8: /-- The four cyclic edges, with outsider label `4`. This definition is local to this interface argument and agrees extensionally with `fourEdge`. -/
+      def interfaceFourEdge (i : Fin 4) : Finset (Fin 5) :=
+L164: /-- Every point of an angular essential support has a real essential-support lift. The compact fundamental domain is used only to establish the support inclusion. -/
+      lemma angle_support_lift {A : Set Angles} (hA : MeasurableSet A) {t : Angles}
+          (ht : t∈(angularMeasure.restrict A).support) :
+          ∃b : ℝ,(b : Angles)=t ∧ b∈(volume.restrict (((↑) : ℝ → Angles) ⁻¹' A)).support := by
+L361: /-- The three-direction quadratic moment replaces the source's projective arc length argument. No assumption about antipodal ray pairs or the collinear case is required: two opposite uniform diagonal triples are already contradictory. -/
+      lemma four_opposite_uniform_diagonals_false {v : Fin 4 → ℂ} {t u : Angles}
+          (hnt : ∀j i,⟪direction (t+sixAngle j),v i⟫≠0)
+          (hnu : ∀j i,⟪direction (u+sixAngle j),v i⟫≠0)
+          {a b : Fin 3} (ha : a≠0) (hb : b≠0) (hab : a≠b)
+          (hdt : ∀j : Fin 6,interfaceFourDiagonal (fourInterfaceSign v (t+sixAngle j))=a)
+          (hdu : ∀j : Fin 6,interfaceFourDiagonal (fourInterfaceSign v (u+sixAngle j))=b) : False := by
+L393: /-- Construction of the dense conull shift-invariant set and its actual six-position words, from the previously established genuine state system. -/
+      lemma four_interface_word_data (hw : WeakColoring 5 c) {x : ℂ} {v : Fin 4 → ℂ}
+          (hv : ∀i,‖v i‖=1)
+          (hcompat : ∀ᵐt∂angularMeasure,InterfaceFourCompatible (fourInterfaceSign v t) (palette c hc x t)) :
+          ∃G : Set Angles,Dense G ∧ (∀t∈G,t+(sixty : Angles)∈G) ∧
+            (∀t∈G,∀j i,⟪direction (t+sixAngle j),v i⟫≠0) ∧
+            (∀t∈G,∀j,fourInterfaceWord hc x t j≠0 → fourInterfaceWord hc x t j=
+              interfaceFourDiagonal (fourInterfaceSign v (t+sixAngle j))) ∧
+L514: /-- The actual length-four interface cycle is impossible. All hypotheses are exactly approach directions and common straddling exclusion of both endpoints. -/
+      lemma no_four_interfaces {c : ℂ → Fin 5} (hc : Measurable c) (hw : WeakColoring 5 c)
+          {x : ℂ} {K : Fin 4 → Set ℂ} {v : Fin 4 → ℂ} (hv : ∀i,‖v i‖=1)
+          (hK : ∀i,ApproachingContinuum x (K i) (v i))
+          (hH : ∀i,∀j∈fourEdge i,Disjoint (spatialSupport c j) (Straddle (K i))) : False := by
+
+######## OAI/Geometry/PlaneColoring/Mesh.lean  (154 lines)
+L9: /-- A point of a connected set with a distant partner can be moved to the boundary of its (unique) small hole. Pairwise disjoint closed disks make the new point lie outside every open hole. No path regularity is required. -/
+      lemma connected_escape_holes {S : Finset MarkedDisk} {t : ℝ}
+          (hS : ∀d∈S,0≤d.radius)
+          (hdis : (S : Set MarkedDisk).Pairwise (fun a b => Disjoint a.closedBall b.closedBall))
+          (hsum : (∑d∈S,d.radius)<t) {K : Set ℂ} (hK : IsPreconnected K)
+          {a b : ℂ} (ha : a∈K) (hb : b∈K) (hab : 2*t<dist a b) :
+          ∃a'∈K,a'∉diskHoles S ∧ dist a a'≤2*t := by
+L37: /-- Positive averages on shrinking disks force every limit center into the actual measure support of that color. -/
+      lemma support_of_positive_diskAverage_limit {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c)
+          {ε : ℕ → ℝ} (hε : Tendsto ε atTop (𝓝 0)) {a : ℕ → ℂ} {x : ℂ}
+          (ha : Tendsto a atTop (𝓝 x)) (i : Fin k)
+          (hp : ∀n,0<diskAverage c (ε n) i (a n)) : x∈spatialSupport c i := by
+L89: /-- A continuous graph approximant cannot have positive-coordinate connected sets of macroscopic diameter at every shrinking scale. This is the manuscript mesh argument, with connectedness replacing the stronger path assumption. -/
+      theorem no_large_positive_sequence {c : ℂ → Fin 5} (hc : Measurable c) (hw : WeakColoring 5 c)
+          {α : ℝ} (hα : 0<α) (hα' : α<1/5) {t : ℕ → ℝ}
+          (F : ∀n,FullApprox c α (t n)) (htlim : Tendsto t atTop (𝓝 0))
+          (htsmall : ∀n,t n≤1/16) (i : Fin 5)
+          (hbad : ∀n,∃K : Set ℂ, IsPreconnected K ∧ K⊆Metric.closedBall (0:ℂ) 5 ∧
+            (∀z : Metric.closedBall (0:ℂ) 5,z.val∈K → 0<((F n).map z).val i) ∧
+            ∃x∈K,∃y∈K,2<dist x y) : False := by
+
+######## OAI/Geometry/PlaneColoring/Moser.lean  (439 lines)
+L61: /-- Exact strict angular form of the manuscript's polynomial region. -/
+      lemma polynomial_region_angles {z : ℂ} (hz : ThreeLabelRegion z.re z.im) :
+          ∃ t u : ℝ, (Circle.exp t : ℂ)+(Circle.exp u : ℂ)=z ∧
+            Real.sin (u-t)≠0 ∧ Real.sin (3*t)*Real.sin (3*u)<0 := by
+L284: /-- Exact rational interval certificate for the manuscript's seven placed vertices. -/
+      lemma seven_point_certificate (i : Fin 7) :
+          ThreeLabelRegion (placedMoser i).re (placedMoser i).im := by
+
+######## OAI/Geometry/PlaneColoring/PaletteDensity.lean  (485 lines)
+
+######## OAI/Geometry/PlaneColoring/PaletteTransport.lean  (458 lines)
+
+######## OAI/Geometry/PlaneColoring/Palettes.lean  (124 lines)
+
+######## OAI/Geometry/PlaneColoring/PlanarCovers.lean  (402 lines)
+
+######## OAI/Geometry/PlaneColoring/Rigidity.lean  (443 lines)
+L8: /-- Common unit neighbor for the transverse chord of length `t`. -/
+      def evenOffset (v : ℂ) (t : ℝ) : ℂ :=
+L82: /-- Actual four-unit-edge paths stay inside the prescribed two open sets for all small starting-point and displacement perturbations. -/
+      lemma evenPath_local {U V : Set ℂ} (hU : IsOpen U) (hV : IsOpen V)
+          {p v w : ℂ} (hp : p∈U) (hpv : p+v∈V) (hpw : p+w∈V) :
+          ∃r>0,∃δ>0,∀q h : ℂ,q∈Metric.ball p r → ‖h‖<δ →
+            |transverseFirst v w h|<2 ∧ |transverseSecond v w h|<2 ∧
+            (∀i : Fin 5,(q+evenPath v w h i)∈if i.val%2=0 then U else V) := by
+L122: /-- Local invariance for every sufficiently small fixed translation forces local essential constancy. This is the Fubini/shear step of angular-binary-local. -/
+      lemma local_ae_translation_constant {ι : Type*} [MeasurableSpace ι] [MeasurableSingletonClass ι]
+          [Countable ι] (c : ℂ → ι) (hc : Measurable c) {p : ℂ} {r δ : ℝ}
+          (hr : 0<r) (hδ : 0<δ)
+          (hshift : ∀h : ℂ,‖h‖<δ → ∀ᵐq : ℂ∂volume,q∈Metric.ball p r → c (q+h)=c q) :
+          ∃s>0,s≤r ∧ ∃i,∀ᵐq : ℂ∂volume,q∈Metric.ball p s → c q=i := by
+L177: /-- Local essential constancy inside two-color open regions, from the source's actual four-edge paths. The directions are genuine unit directions landing in V. -/
+      lemma binary_open_local_rigidity {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c) (hw : WeakColoring k c)
+          {a b : Fin k} {U V : Set ℂ} (hU : IsOpen U) (hV : IsOpen V)
+          (hUc : ∀ᵐq : ℂ∂volume,q∈U → c q=a ∨ c q=b)
+          (hVc : ∀ᵐq : ℂ∂volume,q∈V → c q=a ∨ c q=b)
+          {p v w : ℂ} (hp : p∈U) (hpv : p+v∈V) (hpw : p+w∈V)
+          (hv : ‖v‖=1) (hw' : ‖w‖=1) (hd : transverseDet v w≠0) :
+          ∃r>0,∃i : Fin k,∀ᵐq : ℂ∂volume,q∈Metric.ball p r → c q=i := by
+L224: /-- An open set meeting a unit circle contains two nonparallel unit directions from its center. No regularity of the color classes is involved. -/
+      lemma open_two_unit_directions {V : Set ℂ} (hV : IsOpen V) {p v : ℂ}
+          (hv : ‖v‖=1) (hpv : p+v∈V) :
+          ∃w : ℂ,p+w∈V ∧ ‖w‖=1 ∧ transverseDet v w≠0 := by
+L259: /-- The unit circle from one endpoint penetrates either prescribed radial side near its equilateral neighbor. This is the constructive version of the source IFT step. -/
+      lemma radial_unit_contact {x e : ℂ} (he : ‖e‖=1) {δ : ℝ} (hδ : 0<δ)
+          {V : Set ℂ} (b : Bool)
+          (hstrip : ∀e' : ℂ,‖e'‖=1 → dist e' (e*(Circle.exp (Real.pi/3) : ℂ))<δ →
+            ∀r : ℝ,0<r → |r-1|<δ → (if b then 1<r else r<1) → x+(r:ℂ)*e'∈V) :
+          ∃v : ℂ,‖v‖=1 ∧ (x+e)+v∈V := by
+L333: /-- Arbitrarily small connected polar boxes on either side of a unit circle. -/
+      lemma polarBox_small {x e : ℂ} {b : Bool} {δ : ℝ} (hδ : 0<δ)
+          {U W : Set ℂ} (hW : IsOpen W) (hp : x+e∈W)
+          (hstrip : ∀e' : ℂ,‖e'‖=1 → dist e' e<δ → ∀r : ℝ,
+            0<r → |r-1|<δ → (if b then 1<r else r<1) → x+(r:ℂ)*e'∈U)
+          (he : ‖e‖=1) : ∃ε>0,polarBox x e b ε⊆U∩W := by
+L367: /-- A polar box contains a complete one-sided radial strip, not just selected rays. -/
+      lemma polarBox_contains_strip {x e : ℂ} (he : ‖e‖=1) (b : Bool)
+          {ε : ℝ} (hε : 0<ε) : ∃δ>0,∀e' : ℂ,‖e'‖=1 → dist e' e<δ → ∀r : ℝ,
+            |r-1|<δ → (if b then 1<r else r<1) → x+(r:ℂ)*e'∈polarBox x e b ε := by
+L399: /-- Points having a fixed essential color on some ambient neighborhood. -/
+      def essentialLocalSet {ι : Type*} (c : ℂ → ι) (i : ι) : Set ℂ :=
+L416: /-- Local essential constancy on a connected set has one global essential value. The connected set need not be open, which permits polar product images directly. -/
+      lemma connected_local_ae_constant {ι : Type*} {c : ℂ → ι} {S : Set ℂ}
+          (hS : IsConnected S) (hl : ∀p∈S,∃i,p∈essentialLocalSet c i) :
+          ∃i,S⊆essentialLocalSet c i ∧ (∀ᵐq : ℂ∂volume,q∈S → c q=i) := by
+
+######## OAI/Geometry/PlaneColoring/Sectors.lean  (453 lines)
+L30: /-- Three interface edges supply an actual outsider-only open strip in every nonexceptional direction, with the radial side chosen by the majority sign. -/
+      lemma triangle_outsider_strip {c : ℂ → Fin 5} (hc : Measurable c)
+          {x : ℂ} {K : Fin 3 → Set ℂ} {v : Fin 3 → ℂ}
+          (hK : ∀i,ApproachingContinuum x (K i) (v i))
+          (hH : ∀i,∀j∈triangleEdge i,Disjoint (spatialSupport c j) (Straddle (K i)))
+          {e : ℂ} (he : ‖e‖=1) (hn : ∀i,⟪e,v i⟫≠0) :
+          ∃b : Bool,∃δ>0,∃W : Set ℂ,IsOpen W ∧
+            (∀ᵐz : ℂ∂volume,z∈W → c z=3 ∨ c z=4) ∧
+L59: /-- Actual local triangle palette rigidity, without terminal angular sectors or boundary information as hypotheses. -/
+      lemma triangle_palette_local {c : ℂ → Fin 5} (hc : Measurable c) (hw : WeakColoring 5 c)
+          {x : ℂ} {K : Fin 3 → Set ℂ} {v : Fin 3 → ℂ}
+          (hK : ∀i,ApproachingContinuum x (K i) (v i))
+          (hH : ∀i,∀j∈triangleEdge i,Disjoint (spatialSupport c j) (Straddle (K i)))
+          {t : Angles} (hn : ∀i,⟪direction t,v i⟫≠0)
+          (hnR : ∀i,⟪direction t*(Circle.exp (Real.pi/3) : ℂ),v i⟫≠0) :
+          ∃i : Fin 5,(i=3 ∨ i=4) ∧ ∃A : Set Angles,IsOpen A ∧ t∈A ∧
+L191: /-- The actual three-interface data force the source's unique six-position boundary orbit. This theorem does not assume local rigidity or orbit finiteness. -/
+      lemma triangle_boundary_one_orbit {c : ℂ → Fin 5} (hc : Measurable c) (hw : WeakColoring 5 c)
+          {x : ℂ} {K : Fin 3 → Set ℂ} {v : Fin 3 → ℂ} (hv : ∀i,‖v i‖=1)
+          (hK : ∀i,ApproachingContinuum x (K i) (v i))
+          (hH : ∀i,∀j∈triangleEdge i,Disjoint (spatialSupport c j) (Straddle (K i))) :
+          ∃t,angleBoundary (triangleState c hc x)={u | ∃j : Fin 6,u=t+sixAngle j} := by
+L391: /-- The exact six-sector outcome of triangle rigidity is impossible, for every center and phase. -/
+      lemma no_alternating_sectors {c : ℂ → Fin 5} (hc : Measurable c) (hw : WeakColoring 5 c)
+          {x : ℂ} {a b : Fin 5} (hab : a≠b) (φ : ℝ)
+          (hpos : RealState hc x (positiveSector φ) {a})
+          (hneg : RealState hc x (negativeSector φ) {b}) : False := by
+L426: /-- Complete actual triangle-interface endgame, including boundary rigidity, sector extraction and the exact seven-point unit-distance certificate. -/
+      lemma no_triangle_interfaces {c : ℂ → Fin 5} (hc : Measurable c) (hw : WeakColoring 5 c)
+          {x : ℂ} {K : Fin 3 → Set ℂ} {v : Fin 3 → ℂ} (hv : ∀i,‖v i‖=1)
+          (hK : ∀i,ApproachingContinuum x (K i) (v i))
+          (hH : ∀i,∀j∈triangleEdge i,Disjoint (spatialSupport c j) (Straddle (K i))) : False := by
+
+######## OAI/Geometry/PlaneColoring/States.lean  (764 lines)
+
+######## OAI/Geometry/PlaneColoring/Transitions.lean  (150 lines)
+
+######## OAI/Geometry/PlaneColoring/WeakColoring.lean  (176 lines)
+L30: /-- AE exclusions over any full-support parameter measure upgrade to every parameter. -/
+      lemma all_parameters_product_zero {T : Type*} [TopologicalSpace T] [MeasurableSpace T]
+          (μ : Measure T) [μ.IsOpenPosMeasure] (d : T → ℂ) (hd : Continuous d)
+          (f : PlaneL2) (hf : ∀ᵐ x ∂volume, 0 ≤ f x)
+          (ho : ∀ᵐ t ∂μ, ∀ᵐ x ∂(volume : Measure ℂ), f x*f (x+d t)=0) :
+          ∀ t : T, ∀ᵐ x ∂(volume : Measure ℂ), f x*f (x+d t)=0 := by
+
+######## OAI/MeasureTheory/CompactFactors/AlgebraModels.lean  (664 lines)
+
+######## OAI/MeasureTheory/CompactFactors/Amenability.lean  (411 lines)
+L20: /-- A normalized positive translation-invariant real functional. -/
+      structure Mean where
+L219: /-- Invariant-mean van der Corput: positivity and finite translates suffice. There is no exchange of iterated means. -/
+      theorem vector_eq_zero_of_correlation_nonpos (V : G →ᵇ H)
+          (hc : M.map (M.correlation V V) ≤ 0) : M.vector V = 0 := by
+L312: /-- The mean ergodic projection criterion, valid for every positive invariant mean and without an assumption that the group has a distinguished generator. -/
+      theorem vector_orbit_eq_zero (U : G → H ≃ₗᵢ[ℝ] H)
+          (hU : ∀ g h v, U (g+h) v = U g (U h v)) (v : H)
+          (hv : ∀ w, (∀ g, U g w = w) → inner ℝ v w = 0) :
+          M.vector (orbit U v) = 0 := by
+
+######## OAI/MeasureTheory/CompactFactors/Approximation.lean  (496 lines)
+L382: /-- The complete source successor implication. The predecessor assertion is universal in the equivariant wild map, as required by the transfinite induction. -/
+      theorem relative_singularity_successor
+          [StandardBorelSpace X] [Nonempty X] [StandardBorelSpace Y] [Nonempty Y]
+          [StandardBorelSpace W] [Nonempty W]
+          [MulAction K W] [MeasurableConstSMul K W]
+          (μ : Measure X) [IsProbabilityMeasure μ] [ErgodicSMul K X μ]
+          (d : X → D) (p : X → Y) (q : Y → W)
+          (hd : Measurable d) (hp : Measurable p) (hq : Measurable q)
+
+######## OAI/MeasureTheory/CompactFactors/BoundedFunctions.lean  (223 lines)
+
+######## OAI/MeasureTheory/CompactFactors/Centers.lean  (703 lines)
+
+######## OAI/MeasureTheory/CompactFactors/ConditionalLimits.lean  (701 lines)
+L56: /-- A bounded vector measurable for a generated join is an L² limit of uniformly bounded functions measurable at finite stages. -/
+      theorem bounded_vector_approximation
+          (ν : Measure Y) [IsProbabilityMeasure ν] (ℱ : Filtration ℕ mY)
+          (m : ℕ) (H : Y → Fin m → ℂ) (hH : Measurable[⨆ n, ℱ n] H)
+          (C : ℝ) (hC : 0 ≤ C) (hbound : ∀ y, ‖H y‖ ≤ C) :
+          ∃ Hn : ℕ → Y → Fin m → ℂ,
+            (∀ n, Measurable[ℱ n] (Hn n)) ∧
+            (∀ n y, ‖Hn n y‖ ≤ 2*C) ∧
+L139: /-- At a generated limit factor, one earlier factor carries a bounded finite-vector approximant, with a pointwise bounded measurable representative. -/
+      theorem generated_factor_approximation
+          {Z : ℕ → Type*} [∀ n, MeasurableSpace (Z n)]
+          (ν : Measure Y) [IsProbabilityMeasure ν] (p : ∀ n, Y → Z n)
+          (hp : ∀ n, Measurable (p n))
+          (hmono : Monotone (fun n => (inferInstance : MeasurableSpace (Z n)).comap (p n)))
+          (hgen : (⨆ n, (inferInstance : MeasurableSpace (Z n)).comap (p n)) = mY)
+          (m : ℕ) (H : Y → Fin m → ℂ) (hH : Measurable H)
+L266: /-- The source limit implication: a generated increasing sequence of earlier compact successor factors supplies the requisite single approximation precision. The induction hypothesis is universal in the recentered wild map. -/
+      theorem relative_singularity_limit
+          {Z W : ℕ → Type*} [∀ n, MeasurableSpace (Z n)] [∀ n, MeasurableSpace (W n)]
+          [∀ n, StandardBorelSpace (W n)] [∀ n, Nonempty (W n)]
+          [∀ n, MulAction K (Z n)] [∀ n, MulAction K (W n)]
+          [∀ n, MeasurableConstSMul K (Z n)] [∀ n, MeasurableConstSMul K (W n)]
+          (μ : Measure X) [IsProbabilityMeasure μ] [ErgodicSMul K X μ]
+          (d : X → D) (p : X → Y) (v : ∀ n, Y → Z n) (q : ∀ n, Z n → W n)
+L619: /-- Relative singularity is closed under L² approximation by earlier factors, with all comparisons made on the ambient probability space. This form avoids choosing exactly commuting representatives at a countable tower join. -/
+      theorem relative_singularity_approximation
+          (μ : Measure X) [IsProbabilityMeasure μ] [ErgodicSMul K X μ]
+          (d : X → D) (p : X → Y) (hd : Measurable d) (hp : Measurable p)
+          (hde : ∀ k : K, ∀ᵐ x ∂μ, d (k • x) = k • d x)
+          (hpe : ∀ k : K, ∀ᵐ x ∂μ, p (k • x) = k • p x)
+          (hwild : IsWild (μ.map d))
+          (ha : ∀ (m : ℕ) (H : Y → Fin m → ℂ), Measurable H →
+
+######## OAI/MeasureTheory/CompactFactors/ConditionalSelection.lean  (442 lines)
+L59: /-- A single explicit budget gives all small-moment tests and over 90% good approximation indices on the same fiber, together with any conull identities. -/
+      theorem simultaneous_good_fiber (μ : Measure W) [IsProbabilityMeasure μ]
+          (f : T → W → ℝ) (e : ι → W → ℝ) (c τ : ℝ) (hc : 0 < c) (hτ : 0 < τ)
+          (hf : ∀ t, Integrable (f t) μ) (he : ∀ i, Integrable (e i) μ)
+          (hf0 : ∀ᵐ w ∂μ, ∀ t, 0 ≤ f t w) (he0 : ∀ᵐ w ∂μ, ∀ i, 0 ≤ e i w)
+          (hbudget : (∑ t, ∫ w, f t w ∂μ)/c +
+            10*(∑ i, ∫ w, e i w ∂μ)/((Fintype.card ι : ℝ)*τ) < 1)
+          (P : W → Prop) (hP : ∀ᵐ w ∂μ, P w) :
+L111: /-- Pigeonholing happens only after the common good fiber is fixed. -/
+      theorem large_common_bin {L B : ℕ} (s : Finset ι) (b : ι → Fin L)
+          (hs : (9/10 : ℝ)*Fintype.card ι < s.card)
+          (hLB : (L : ℝ)*B < (9/10 : ℝ)*Fintype.card ι) :
+          ∃ J : Finset ι, J ⊆ s ∧ B < J.card ∧ ∀ i ∈ J, ∀ j ∈ J, b i = b j := by
+L147: /-- Closeness of approximants costs τ, and each of the two approximation errors costs less than τ in conditional L². -/
+      theorem integrated_distance_bound (μ : Measure X) [IsProbabilityMeasure μ]
+          (H A' H₀ A₀ : X → A) (τ : ℝ)
+          (hHm : Measurable H) (hH₀m : Measurable H₀)
+          (hj : Integrable (fun x => dist (H x) (A' x)^2) μ)
+          (h₀ : Integrable (fun x => dist (H₀ x) (A₀ x)^2) μ)
+          (hAj : ∫ x, dist (H x) (A' x)^2 ∂μ < τ^2)
+          (hA₀ : ∫ x, dist (H₀ x) (A₀ x)^2 ∂μ < τ^2)
+L256: /-- The actual common-fiber contradiction. The budget is global; all phase upper bounds are required simultaneously on that fiber before a bin is chosen. The phase lists are not assumed measurable. -/
+      theorem common_fiber_contradiction (μ : Measure X) [IsProbabilityMeasure μ]
+          (p : X → W) (hp : Measurable p) (m : ℕ) (hm : 0 < m)
+          (ρ τ c : ℝ) (hρ : 0 < ρ) (hτ : 0 < τ) (hc : 0 < c)
+          (hτδ : 18*τ^2 < (ρ^m/m)^2/20)
+          (Hp Hm Ap Am : ι → X → Fin m → ℂ)
+          (hHp : ∀ j, Measurable (Hp j)) (hHm : ∀ j, Measurable (Hm j))
+          (hIp : ∀ j, Integrable (fun x => dist (Hp j x) (Ap j x)^2) μ)
+L416: /-- A common finite partition simultaneously controls both coefficient arrays. -/
+      theorem bounded_coefficient_bins (q : ℕ) (B D τ : ℝ) (hD : 0 ≤ D) (hτ : 0 < τ) :
+          ∃ L : ℕ, ∃ f : {b : Fin 2 → Fin q → ℂ // ‖b‖ ≤ B} → Fin L,
+            ∀ b c, f b = f c → ∀ H : Fin q → V, (∑ i, ‖H i‖) ≤ D →
+            ∀ j : Fin 2, dist (∑ i, b.val j i • H i) (∑ i, c.val j i • H i) < τ := by
+
+######## OAI/MeasureTheory/CompactFactors/Factors.lean  (586 lines)
+L144: /-- The orbit factor generated by a compact scalar function is an actual compact extension; the finite module is projected onto that factor. -/
+      lemma compact_orbit_extension (μ : Measure X) [IsProbabilityMeasure μ]
+          (q : X → Y) (hq : Measurable q)
+          (hpres : ∀ k : K, MeasurePreserving (fun x : X => k • x) μ μ)
+          (hqcov : ∀ k : K, ∀ᵐ x ∂μ, q (k • x) = k • q x)
+          (H : X → ℂ) (hH : Measurable H) (hc : Compact (K := K) μ q H)
+L204: /-- The strict compact-successor step of the compact tower. The new coordinate is constructed from a centered invariant conditional-product kernel. -/
+      theorem strict_compact_successor (μ : Measure X) [IsProbabilityMeasure μ]
+          [ErgodicSMul K X μ] (q : X → Y) (hq : Measurable q)
+          (hqcov : ∀ k : K, ∀ᵐ x ∂μ, q (k • x) = k • q x)
+          (hn : ¬ ErgodicSMul K (X × X) (RelativeProduct.law μ q hq)) :
+          ∃ H : X → ℂ, Measurable H ∧ (∀ x, ‖H x‖ ≤ 2) ∧
+            (¬ ∃ b : Y → ℂ, Measurable b ∧ H =ᵐ[μ] b ∘ q) ∧
+            (∀ F : Y × OrbitSpace K → ℂ, Measurable F →
+
+######## OAI/MeasureTheory/CompactFactors/Functions.lean  (884 lines)
+L367: /-- A common finite net allows measurable nearest-bin selection for every measurable map into the compact set. -/
+      lemma compact_quantization {s : Set A} (hs : IsCompact s) {ρ : ℝ} (hρ : 0 < ρ) :
+          ∃ (n : ℕ) (c : Fin n → A), (∀ i, c i ∈ s) ∧
+            ∀ a : Y → A, Measurable a → (∀ y, a y ∈ s) →
+              ∃ f : Y → Fin n, Measurable f ∧ ∀ y, dist (a y) (c (f y)) < ρ := by
+L408: /-- Functional calculus for an individual compact function. Quantizing the bounded coefficient arrays proves this directly, without a spectral theorem. -/
+      lemma compact_lipschitz {μ : Measure X} [IsProbabilityMeasure μ] {q : X → Y} {H : X → ℂ}
+          [MeasurableConstSMul K X] (hq : Measurable q) (hHm : Measurable H)
+          (hH : Compact (K := K) μ q H) (f : ℂ → ℂ) (L : NNReal) (hLip : LipschitzWith L f) :
+L801: /-- Conditional integration projects an ambient finite module to the actual new factor, without sacrificing its uniform coefficient or basis bounds. -/
+      lemma compact_descend (μ : Measure X) [IsProbabilityMeasure μ]
+          (π : X → Z) (hπ : Measurable π) (p : Z → Y) (hp : Measurable p)
+          (hπcov : ∀ k : K, ∀ᵐ x ∂μ, π (k • x) = k • π x)
+          (H : Z → ℂ) (hH : Measurable H) (D : ℝ) (_hD : 0 ≤ D)
+          (hHD : ∀ z, ‖H z‖ ≤ D)
+          (hc : Compact (K := K) μ (p ∘ π) (H ∘ π)) :
+
+######## OAI/MeasureTheory/CompactFactors/Kernels.lean  (774 lines)
+L221: /-- Bounded finite rectangle approximation for any probability coupling, not only a product measure. The common sup bound is twice the original bound. -/
+      theorem bounded_rectangles (ν : Measure (X × Y)) [IsProbabilityMeasure ν]
+          (L : X × Y → ℂ) (hL : Measurable L) (C : ℝ) (hC : 0 ≤ C)
+          (hLC : ∀ z, ‖L z‖ ≤ C) (ε : ℝ) (hε : 0 < ε) :
+          ∃ (n : ℕ) (a : Code n × Code n → ℂ),
+            (∀ z, ‖a z‖ ≤ 2*C) ∧
+            Integrable (fun z => ‖L z - a (pairCode n z)‖^2) ν ∧
+            (∫ z, ‖L z - a (pairCode n z)‖^2 ∂ν) < ε^2 := by
+L259: /-- Uniform finite bounded-module approximation to the image of the bounded unit ball under an integral kernel. This is the compactness step of the relative compact-factor construction, with no spectral decomposition. -/
+      theorem bounded_range_approximation (μ : Measure X) [IsProbabilityMeasure μ]
+          (κ : Kernel Y X) [IsMarkovKernel κ] (q : X → Y) (hq : Measurable q)
+          (L : X × X → ℂ) (hL : Measurable L) (C : ℝ) (hC : 0 ≤ C)
+          (hLC : ∀ z, ‖L z‖ ≤ C) (ε : ℝ) (hε : 0 < ε) :
+          ∃ (r : ℕ) (B C₀ : ℝ) (Hf : Fin r → X → ℂ),
+            0 ≤ B ∧ 0 ≤ C₀ ∧ (∀ i, Measurable (Hf i)) ∧ (∀ x, ∑ i, ‖Hf i x‖ ≤ C₀) ∧
+            ∀ f : X → ℂ, Measurable f → (∀ x, ‖f x‖ ≤ 1) →
+L395: /-- A nonzero bounded relative-product kernel has a nonzero image of a bounded measurable function. Finite rectangle density replaces a spectral theorem. -/
+      theorem exists_nonzero_image (μ : Measure X) [IsProbabilityMeasure μ]
+          (κ : Kernel Y X) [IsMarkovKernel κ] (q : X → Y) (hq : Measurable q)
+          (L : X × X → ℂ) (hL : Measurable L) (C : ℝ) (hC : 0 ≤ C)
+          (hLC : ∀ z, ‖L z‖ ≤ C) (hne : ¬ L =ᵐ[μ ⊗ₘ κ.comap q hq] 0) :
+          ∃ f : X → ℂ, Measurable f ∧ (∀ x, ‖f x‖ ≤ 1) ∧
+            ¬ applyKernel κ q L f =ᵐ[μ] 0 := by
+
+######## OAI/MeasureTheory/CompactFactors/RelativeCenters.lean  (598 lines)
+L87: /-- The conditional center law has finitely many, equally weighted atoms. The original cosets need not form a standard Borel quotient. -/
+      theorem finite_uniform_centers (μ : ProbabilityMeasure G) {a : ℝ≥0∞}
+          (ha : 0 < a) (hs : ∀ᵐ z ∂(μ : Measure G), (μ : Measure G) (e.coset z) = a) :
+          ∃ S : Finset G, S.Nonempty ∧
+            (∀ b ∈ S, (μ : Measure G) ((e.center μ) ⁻¹' {b}) = a) ∧
+            (∀ᵐ z ∂(μ : Measure G), e.center μ z ∈ S) ∧
+            (S.card : ℝ≥0∞) * a = 1 := by
+L101: /-- Wildness survives the measurable recentering construction. -/
+      theorem center_law_ordinary (μ : ProbabilityMeasure G) :
+          (μ.map (e.center μ) : Measure G) e.ordinary =
+            (μ : Measure G) e.ordinary := by
+L119: /-- The invariant-function consequence of group-action ergodicity, with an individual almost-everywhere identity for each group element. -/
+      theorem ae_eq_const_of_invariant {f : X → V} (hf : Measurable f)
+          (hi : ∀ k : K, ∀ᵐ x ∂μ, f (k • x) = f x) :
+          ∃ v : V, f =ᵐ[μ] (fun _ => v) := by
+L167: /-- Changing both coordinates of a conditional law by invertible measurable maps commutes with conditional sampling. -/
+      lemma condDistrib_equivariant [StandardBorelSpace Z] [Nonempty Z]
+          (μ : Measure X) [IsFiniteMeasure μ]
+          (f : X → Z) (p : X → Y) (hf : Measurable f) (hp : Measurable p)
+          (S : X ≃ᵐ X) (R : Y ≃ᵐ Y) (T : Z → Z) (hT : Measurable T)
+          (hS : MeasurePreserving S μ μ)
+          (hRp : p ∘ S =ᵐ[μ] R ∘ p) (hTf : f ∘ S =ᵐ[μ] T ∘ f) :
+          ∀ᵐ y ∂μ.map p, condDistrib f p μ (R y) = (condDistrib f p μ y).map T := by
+L233: /-- The relative difference law uses two independent samples of the same conditional probability law; it is not an independent marginal difference. -/
+      noncomputable def differenceLaw (ν : Measure Y) (κ : Kernel Y G) [IsMarkovKernel κ] :
+          Measure G := ((κ ×ₖ κ) ∘ₘ ν).map (fun p : G × G => p.1 / p.2)
+L264: /-- Positive relative mass and ergodicity force a fixed positive mass for almost all sampled cosets. The finite-center conclusion follows without a quotient measurable space for the ordinary-character subgroup. -/
+      theorem positive_mass_finite_centers [StandardBorelSpace G]
+          [MeasurableSingletonClass G]
+          {K : Type*} [SMul K X]
+          (μ : Measure X) [IsProbabilityMeasure μ] [ErgodicSMul K X μ]
+          (d : X → G) (p : X → Y) (hd : Measurable d) (hp : Measurable p)
+          (hi : ∀ k : K, ∀ᵐ x ∂μ,
+            cosetMass e (condDistrib d p μ) (p (k • x), d (k • x)) =
+
+######## OAI/MeasureTheory/CompactFactors/RelativeProducts.lean  (472 lines)
+
+######## OAI/MeasureTheory/CompactFactors/Separability.lean  (573 lines)
+L266: /-- Centered multiple vector averages for every invariant mean. The proof only uses the actual conditional pair criterion, never exchanges iterated means. -/
+      theorem avg_product_zero_of_pair (M : Amenable.Mean G) (hpair : PairVanishing μ q hq M)
+          (s : Finset ι) (φ : ι → G →+ G) (f : ι → Func X) (ha : Admissible s φ)
+          (hc : ∃ j∈s, l2 μ (project μ q hq (f j)) = 0) :
+          Family.avg μ M (∏ i∈s, Family.orbit (φ i) (f i)) = 0 := by
+
+######## OAI/MeasureTheory/CompactFactors/Stationary.lean  (201 lines)
+L123: /-- An actual standard Borel factor with universal relative spectral singularity and an ergodic conditional square. Maximality is countable, inside the separable ambient L² space. -/
+      theorem exists_terminal_factor (μ : Measure X) [IsProbabilityMeasure μ] [ErgodicSMul K X μ] :
+          ∃ p : X → OrbitSpace K, ∃ hp : Measurable p,
+            (∀ k : K, ∀ᵐ x ∂μ, p (k • x) = k • p x) ∧ UniversalGood μ p ∧
+            ErgodicSMul K (X × X) (RelativeProduct.law μ p hp) := by

@@ -1,0 +1,16 @@
+slot: admitted ext-oai1-import: mem 10 GiB (hard cap), cpus 16,17
+data/external/oai1/audit/ImportSkeleton.lean:74:8: warning: declaration uses `sorry`
+'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Outside.OAI158.exists_properColoring_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Outside.OAI158.six_le_chiM0' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]

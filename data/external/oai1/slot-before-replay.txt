@@ -1,0 +1,4 @@
+budget 90 GiB reserved-by-slots, reserve 25 GiB of MemAvailable kept free
+reserved 80 GiB in 2 slot(s); pinned CPUs 16 of 32; MemAvailable 120.5 GiB
+  env                          mem     40 GiB  cpus 0,1,2,3,8,9,10,11        wrapper 792178 child 792599  age 539s
+  env                          mem     40 GiB  cpus 12,13,14,15,16,17,18,19  wrapper 806987 child 807015  age 336s

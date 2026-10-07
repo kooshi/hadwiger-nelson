@@ -1,0 +1,48 @@
+import Mathlib
+
+namespace OAI
+
+namespace EuclideanFiveColor
+
+def ProperColoring (k : ℕ) (c : ℂ → Fin k) : Prop :=
+  ∀ x y : ℂ, ‖x - y‖ = 1 → c x ≠ c y
+
+end EuclideanFiveColor
+
+noncomputable section
+open MeasureTheory
+namespace EuclideanFiveColor
+instance anglePeriodPositive : Fact (0 < 2*Real.pi) := ⟨by positivity⟩
+abbrev Angles := AddCircle (2*Real.pi)
+def angularMeasure : Measure Angles := AddCircle.haarAddCircle
+def direction (t : Angles) : ℂ := AddCircle.toCircle t
+instance : IsProbabilityMeasure angularMeasure := inferInstanceAs (IsProbabilityMeasure (AddCircle.haarAddCircle (T := 2*Real.pi)))
+instance : angularMeasure.IsAddHaarMeasure := inferInstanceAs (AddCircle.haarAddCircle (T := 2*Real.pi)).IsAddHaarMeasure
+lemma direction_continuous : Continuous direction := continuous_subtype_val.comp AddCircle.continuous_toCircle
+@[simp] lemma direction_norm (t : Angles) : ‖direction t‖ = 1 := Circle.norm_coe _
+@[simp] lemma direction_real (t : ℝ) : direction (t : Angles) = (Circle.exp t : ℂ) := by
+  simp [direction,AddCircle.toCircle_apply_mk,Real.pi_ne_zero]
+/-- Exactly the manuscript weak measurable condition, using normalized Haar angular measure.
+A function is understood up to a plane-null set; no regularity is imposed on a proper coloring. -/
+def WeakColoring (k : ℕ) (c : ℂ → Fin k) : Prop :=
+  AEMeasurable c (volume : Measure ℂ) ∧ ∀ᵐ p ∂(volume : Measure ℂ).prod angularMeasure,
+    c p.1 ≠ c (p.1+direction p.2)
+
+end EuclideanFiveColor
+end
+
+end OAI
+axiom planted_axiom : False
+private axiom planted_private_axiom : False
+theorem planted_sorry : False := by sorry
+theorem planted_native : 2 + 2 = 4 := by native_decide
+set_option debug.skipKernelTC true in
+theorem planted_skip : True := trivial
+@[implemented_by planted_impl] def planted_ref : Nat := 0
+unsafe def planted_unsafe : Nat := 0
+opaque planted_opaque : Nat
+@[extern "c_planted"] def planted_extern : Nat := 0
+attribute [instance] planted_inst
+local notation "‖" x "‖" => planted_norm x
+theorem planted_admit : False := by admit
+theorem planted_ofReduceBool : True := Lean.ofReduceBool _ _ rfl

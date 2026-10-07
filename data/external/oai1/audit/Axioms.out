@@ -1,0 +1,14 @@
+slot: admitted ext-oai1-axioms: mem 10 GiB (hard cap), cpus 4,5,6,7
+'OAI.EuclideanFiveColor.no_proper_five_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OAI.EuclideanFiveColor.proper_to_borel_weak' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OAI.EuclideanFiveColor.no_measurable_weak_five_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OAI.PlaneFiveColor.Spectral.wild_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+AXIOM-SET PASS OAI.EuclideanFiveColor.no_proper_five_coloring: 3 axioms, all among the three permitted: [propext,
+ Classical.choice,
+ Quot.sound]
+AXIOM-SET PASS OAI.EuclideanFiveColor.proper_to_borel_weak: 3 axioms, all among the three permitted: [propext,
+ Classical.choice,
+ Quot.sound]
+AXIOM-SET PASS OAI.EuclideanFiveColor.no_measurable_weak_five_coloring: 3 axioms, all among the three permitted: [propext,
+ Classical.choice,
+ Quot.sound]

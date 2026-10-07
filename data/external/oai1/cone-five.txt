@@ -1,0 +1,73 @@
+cone of OAI.Geometry.PlaneColoring.Five: modules=70 lines=30336 outside-imports=1
+  OAI.Analysis.PlaneSpectrum.Basic  (735 lines)  imports: Mathlib
+  OAI.Analysis.PlaneSpectrum.Characters  (560 lines)  imports: OAI.Analysis.PlaneSpectrum.Basic
+  OAI.Analysis.PlaneSpectrum.CircleDecay  (241 lines)  imports: OAI.Analysis.PlaneSpectrum.Fourier OAI.Geometry.PlaneColoring.Coloring
+  OAI.Analysis.PlaneSpectrum.CircleOperator  (308 lines)  imports: OAI.Analysis.PlaneSpectrum.CircleDecay OAI.Geometry.PlaneColoring.Compactness
+  OAI.Analysis.PlaneSpectrum.ConditionalSpectrum  (497 lines)  imports: OAI.Analysis.PlaneSpectrum.FourierTests OAI.Analysis.PlaneSpectrum.SmallArcs OAI.MeasureTheory.CompactFactors.ConditionalSelection
+  OAI.Analysis.PlaneSpectrum.Energy  (453 lines)  imports: OAI.Analysis.PlaneSpectrum.Representations
+  OAI.Analysis.PlaneSpectrum.Ergodicity  (415 lines)  imports: OAI.Analysis.PlaneSpectrum.RadialEnergy OAI.Analysis.PlaneSpectrum.SpectralMeasure
+  OAI.Analysis.PlaneSpectrum.Fourier  (163 lines)  imports: Mathlib
+  OAI.Analysis.PlaneSpectrum.FourierTests  (295 lines)  imports: OAI.Analysis.PlaneSpectrum.Multipliers
+  OAI.Analysis.PlaneSpectrum.InvariantMean  (1078 lines)  imports: Mathlib
+  OAI.Analysis.PlaneSpectrum.Multipliers  (314 lines)  imports: OAI.Analysis.PlaneSpectrum.Characters OAI.Analysis.PlaneSpectrum.InvariantMean
+  OAI.Analysis.PlaneSpectrum.NumberFields  (524 lines)  imports: Mathlib
+  OAI.Analysis.PlaneSpectrum.PhaseCollision  (537 lines)  imports: OAI.Analysis.PlaneSpectrum.PhaseEncoding
+  OAI.Analysis.PlaneSpectrum.PhaseEncoding  (255 lines)  imports: Mathlib
+  OAI.Analysis.PlaneSpectrum.RadialEnergy  (472 lines)  imports: OAI.Analysis.PlaneSpectrum.Energy OAI.Analysis.PlaneSpectrum.Selections
+  OAI.Analysis.PlaneSpectrum.Representations  (477 lines)  imports: OAI.MeasureTheory.CompactFactors.AlgebraModels OAI.MeasureTheory.CompactFactors.Stationary
+  OAI.Analysis.PlaneSpectrum.Selections  (432 lines)  imports: OAI.Analysis.PlaneSpectrum.NumberFields
+  OAI.Analysis.PlaneSpectrum.SmallArcs  (322 lines)  imports: Mathlib
+  OAI.Analysis.PlaneSpectrum.SpectralMeasure  (388 lines)  imports: OAI.Analysis.PlaneSpectrum.Representations
+  OAI.Geometry.PlaneColoring.Accumulation  (401 lines)  imports: OAI.Geometry.PlaneColoring.Exclusion OAI.Geometry.PlaneColoring.FourTransport
+  OAI.Geometry.PlaneColoring.AngularBoundary  (503 lines)  imports: OAI.Geometry.PlaneColoring.BoundaryTrace
+  OAI.Geometry.PlaneColoring.BinaryDynamics  (515 lines)  imports: OAI.Geometry.PlaneColoring.Expansion
+  OAI.Geometry.PlaneColoring.BinaryPalettes  (375 lines)  imports: OAI.Geometry.PlaneColoring.PaletteTransport
+  OAI.Geometry.PlaneColoring.BorelTransfer  (451 lines)  imports: OAI.Analysis.PlaneSpectrum.Ergodicity OAI.Geometry.PlaneColoring.Coloring
+  OAI.Geometry.PlaneColoring.BoundaryTrace  (367 lines)  imports: OAI.Geometry.PlaneColoring.Rigidity OAI.Geometry.PlaneColoring.States
+  OAI.Geometry.PlaneColoring.CircleMaps  (517 lines)  imports: OAI.Geometry.PlaneColoring.Coloring
+  OAI.Geometry.PlaneColoring.CircleTransport  (336 lines)  imports: OAI.Geometry.PlaneColoring.BinaryDynamics OAI.Geometry.PlaneColoring.CircleMaps
+  OAI.Geometry.PlaneColoring.Coloring  (34 lines)  imports: Mathlib
+  OAI.Geometry.PlaneColoring.Compactness  (379 lines)  imports: OAI.Geometry.PlaneColoring.WeakColoring
+  OAI.Geometry.PlaneColoring.ContinuumLimits  (353 lines)  imports: OAI.Geometry.PlaneColoring.GraphRealization OAI.Geometry.PlaneColoring.Interfaces OAI.Geometry.PlaneColoring.Sectors
+  OAI.Geometry.PlaneColoring.CyclicCore  (280 lines)  imports: OAI.Geometry.PlaneColoring.FiveSupport
+  OAI.Geometry.PlaneColoring.DiskAverages  (333 lines)  imports: OAI.Geometry.PlaneColoring.Accumulation
+  OAI.Geometry.PlaneColoring.DiskExtension  (611 lines)  imports: OAI.Geometry.PlaneColoring.GraphRealization
+  OAI.Geometry.PlaneColoring.Exclusion  (165 lines)  imports: OAI.Geometry.PlaneColoring.AngularBoundary
+  OAI.Geometry.PlaneColoring.Expansion  (725 lines)  imports: Mathlib
+  OAI.Geometry.PlaneColoring.Five  (131 lines)  imports: OAI.Geometry.PlaneColoring.BorelTransfer OAI.Geometry.PlaneColoring.Mesh
+  OAI.Geometry.PlaneColoring.FiveSupport  (376 lines)  imports: OAI.Geometry.PlaneColoring.Accumulation
+  OAI.Geometry.PlaneColoring.FourContinuity  (551 lines)  imports: OAI.Geometry.PlaneColoring.States
+  OAI.Geometry.PlaneColoring.FourTransport  (454 lines)  imports: OAI.Geometry.PlaneColoring.FourContinuity
+  OAI.Geometry.PlaneColoring.FullApproximation  (339 lines)  imports: OAI.Geometry.PlaneColoring.ContinuumLimits OAI.Geometry.PlaneColoring.GraphPatches
+  OAI.Geometry.PlaneColoring.GraphCuts  (314 lines)  imports: OAI.Geometry.PlaneColoring.DiskExtension
+  OAI.Geometry.PlaneColoring.GraphPatches  (314 lines)  imports: OAI.Geometry.PlaneColoring.GraphCuts OAI.Geometry.PlaneColoring.HoleApproximation
+  OAI.Geometry.PlaneColoring.GraphRealization  (415 lines)  imports: OAI.Geometry.PlaneColoring.CyclicCore OAI.Geometry.PlaneColoring.PlanarCovers
+  OAI.Geometry.PlaneColoring.HoleApproximation  (328 lines)  imports: OAI.Geometry.PlaneColoring.DiskExtension
+  OAI.Geometry.PlaneColoring.Interfaces  (527 lines)  imports: OAI.Geometry.PlaneColoring.AngularBoundary
+  OAI.Geometry.PlaneColoring.Mesh  (154 lines)  imports: OAI.Geometry.PlaneColoring.FullApproximation
+  OAI.Geometry.PlaneColoring.Moser  (439 lines)  imports: Mathlib
+  OAI.Geometry.PlaneColoring.PaletteDensity  (485 lines)  imports: OAI.Geometry.PlaneColoring.CircleTransport OAI.Geometry.PlaneColoring.Palettes
+  OAI.Geometry.PlaneColoring.PaletteTransport  (458 lines)  imports: OAI.Geometry.PlaneColoring.PaletteDensity
+  OAI.Geometry.PlaneColoring.Palettes  (124 lines)  imports: OAI.Geometry.PlaneColoring.Transitions
+  OAI.Geometry.PlaneColoring.PlanarCovers  (402 lines)  imports: OAI.Geometry.PlaneColoring.DiskAverages
+  OAI.Geometry.PlaneColoring.Rigidity  (443 lines)  imports: OAI.Geometry.PlaneColoring.PaletteTransport
+  OAI.Geometry.PlaneColoring.Sectors  (453 lines)  imports: OAI.Geometry.PlaneColoring.AngularBoundary OAI.Geometry.PlaneColoring.Moser
+  OAI.Geometry.PlaneColoring.States  (764 lines)  imports: OAI.Geometry.PlaneColoring.BinaryPalettes
+  OAI.Geometry.PlaneColoring.Transitions  (150 lines)  imports: OAI.Analysis.PlaneSpectrum.CircleOperator
+  OAI.Geometry.PlaneColoring.WeakColoring  (176 lines)  imports: OAI.Geometry.PlaneColoring.Coloring
+  OAI.MeasureTheory.CompactFactors.AlgebraModels  (664 lines)  imports: OAI.MeasureTheory.CompactFactors.Separability
+  OAI.MeasureTheory.CompactFactors.Amenability  (411 lines)  imports: Mathlib
+  OAI.MeasureTheory.CompactFactors.Approximation  (496 lines)  imports: OAI.Analysis.PlaneSpectrum.ConditionalSpectrum OAI.MeasureTheory.CompactFactors.RelativeCenters
+  OAI.MeasureTheory.CompactFactors.BoundedFunctions  (223 lines)  imports: OAI.MeasureTheory.CompactFactors.Kernels
+  OAI.MeasureTheory.CompactFactors.Centers  (703 lines)  imports: Mathlib
+  OAI.MeasureTheory.CompactFactors.ConditionalLimits  (701 lines)  imports: OAI.MeasureTheory.CompactFactors.Approximation
+  OAI.MeasureTheory.CompactFactors.ConditionalSelection  (442 lines)  imports: OAI.Analysis.PlaneSpectrum.PhaseCollision
+  OAI.MeasureTheory.CompactFactors.Factors  (586 lines)  imports: OAI.MeasureTheory.CompactFactors.Functions
+  OAI.MeasureTheory.CompactFactors.Functions  (884 lines)  imports: OAI.MeasureTheory.CompactFactors.Kernels
+  OAI.MeasureTheory.CompactFactors.Kernels  (774 lines)  imports: OAI.MeasureTheory.CompactFactors.ConditionalLimits
+  OAI.MeasureTheory.CompactFactors.RelativeCenters  (598 lines)  imports: OAI.Analysis.PlaneSpectrum.Basic OAI.MeasureTheory.CompactFactors.Centers
+  OAI.MeasureTheory.CompactFactors.RelativeProducts  (472 lines)  imports: OAI.MeasureTheory.CompactFactors.Amenability OAI.MeasureTheory.CompactFactors.BoundedFunctions
+  OAI.MeasureTheory.CompactFactors.Separability  (573 lines)  imports: OAI.MeasureTheory.CompactFactors.RelativeProducts
+  OAI.MeasureTheory.CompactFactors.Stationary  (201 lines)  imports: OAI.MeasureTheory.CompactFactors.Factors
+outside imports (not followed):
+  Mathlib  x11

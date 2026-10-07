@@ -7692,3 +7692,850 @@ reason by the close.*
      landing. (e) **Slot → FS131-L8A**, launched 2026-10-06. In flight: 3 (MD1, MD2, L8A). **A landing is in
      flight: I commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`,
      `LEAN.md`.**
+
+599. **FS131-MD2 done: the example maps' second closer — `hornModel` and `twoHornModel` are clean maps, the stuck vertex's contact fact, a collar on `awayModel`'s gap; fifteen of its sixteen heads now name a Lean model; `exists_arcStep` does not** (implementer, Opus; harness 630k and 50 minutes by the task notice — past the line; record `fs131-wd2`'s `plans/FS131-MD2-implementation.md`; report `data/fs131/reports/FS131-MD2.md`; four commits, tip `cce32e92`; pushed, tree clean; not landed, the full gate not run, by its brief).
+     **Proved on the standard three** (two new modules, `Plane/Models/Clean` 464 lines and `Plane/Models/Closers` 400;
+     built, not gated): `hornModel_isClean`, `twoHornModel_isClean` (every point of `Γ` carries at least two colours),
+     with `ArcMap.paint_isClean` and `sevenBrickMap_isClean` stated for any painting and any `k ≥ 7`;
+     `stuckModel_contact_seven` (the colour `7` at the stuck vertex has one contact, the upper pole);
+     `awayModel_collarFitOut` — `exists_collarFitOut` applied on the gap — with R1, R2 through it and `AwayBend.idle`
+     on its contact piece; `hornModel_junction_not_isSite`, a model that exercises `not_isSite_of_branches`' `hdead`
+     clause. **Open gate items on landed heads: 29 → 14** by the milestone's tool (`gateitems-before.out`,
+     `gateitems-after.out`: CLOSED 33 → 48, REMAIN 29 → 14, NOT-FOUND 0); of the fourteen, one is this job's
+     (`exists_arcStep`: `awayModel.IsClean` and `IsMaxRingArc` for its arc are not proved — about 280 lines, its route
+     in the record § 2.2), three are the other closer's, six are open by design, three are FS131-E7's objects, one is
+     listed by pattern and owes no note. **What a model does not exercise**: `hasSectors_one_of_contacts`' second
+     alternative has no instance on `stuckModel`; its docstring says so. **My receipt**: tip equals
+     `origin/fs131-wd2`, tree clean; outside `data/`, `plans/`, `tools/` it changed the two new modules, `Applied`
+     (one import, one `example`), five landed modules, and the three registry files; **the five landed modules
+     (`Procedure`, `FlankUA`, `BendGap`, `CollarMapOut`, `BendAway`) with every doc comment removed are identical to
+     `1ed1cfd2` (my script)**; `sorry` by the handoff's grep: 0 in `Clean`, `Closers`, `Applied`; no `axiom`, no
+     `native_decide`; its last real build log ends "OK — 467 of 467 batches, 16 module(s) rebuilt, 0 module(s) with
+     warnings", `exit=0`, and the full log has no `warning` line; its records file parsed by my script — 41 theorems,
+     each on exactly the standard three — and its planted run names four planted faults (`sorryAx` among them); the
+     guarded lint's log ends "Linting passed for Proofs."; `hornModel_isClean`, `stuckModel_contact_seven` and
+     `awayModel_collarFitOut` read at their heads (the last is `exists_collarFitOut` applied to `awayModel`'s
+     hypotheses). Not checked by me: the proofs beyond the build; the other docstrings against their models; its
+     statement tool's code. **Slips.** *Mine (the brief's)*: the notes check as I wrote it, `tools/fs131_qa4_notes.py`
+     with no argument, prints its usage and exits 2; the tree-reading instrument is `tools/fs131_l5_notes.py
+     --only-flagged` (wave 8's landing brief names the right one; the handoff's § 5 line is corrected). *The job's,
+     disclosed*: a re-run overwrote Stage 1's quotation output (restored); its first axioms tool had no rule for
+     generated names; a wrap dropped one space in a docstring (repaired). **A tool defect, found by it**:
+     `tools/fs131_mc_docs.py`'s `apply_one` drops a replacement's trailing space; reproduced on a two-line sample;
+     the landed docstrings were repaired by hand and its own copy carries a control — for the filing's tool-defect
+     list. **Credit**: fifteen heads closed with the models named in their docstrings and the one left open said
+     exactly, with its two missing facts and their sizes; a `paint_isClean` general enough for the next model; the
+     doc tool's defect reproduced before it was worked around; the brief's wrong command reported with the right one.
+     **Rulings.** (a) **`Applied`'s one new import line is ratified.** Alternative: keep the file fenced to the
+     `example` and leave the binder. Why not: the `example` cannot lose `IsClean`'s binder without the module that
+     proves it, and its statement tool holds the file to those two differences. Confidence: high. (b) **The edit to
+     the structure `CollarFitOut`'s docstring is ratified** (docstrings only, by my script). (c) **`exists_arcStep`'s
+     model rides with the next job that builds models** (the owed models of wave 8 — a star, a semi-hub, two adjacent
+     change points, `emptyNS` at nine colours — or wave 9's M4, which reads `awayModel`: whichever is briefed
+     first), not a job of its own. Alternative: a short job now. Why not: 280 lines does not fill a job, and an
+     agent's fixed cost is about 310k tokens (item 541). Until then it is an open gate item, named. Confidence:
+     medium-high. (d) **Both closers' branches are merged by the next landing after wave 8's** (not by wave 8's,
+     which is past its join): that landing runs the doubled-name check on the joined tree — `Clean` mints general
+     names — reads 40 new clean records from the block headed "FS131-MD2", and corrects `Applied`'s module docstring
+     ("Not served: `hasSectors_one_of_contacts`" is stale). Alternative: a landing for the two closers alone. Why
+     not: a gate run and a job for docstrings and models that no other line waits on. Confidence: medium; a wave's
+     landing more than a day away would change it. (e) **Wave 9's second planner is told of the collar** — its
+     brief names this job's record for B4 and M4 (FS131-K9b's brief, item 4). (f) **Three briefs written while the
+     slots were full, each by generator, gate exit 0**: **FS131-K7c** (wave 7's third planner; `mk-k7c.py`, 47
+     quotations — the merge of the proved count and its model, the nineteen stated leaves read from the kernel and
+     item 571's relay, the discrepancy of ruling 553 (a), `rstopAll`'s hypothesis, then the pinwheel; three early
+     answers by message, each releasing a line of implementers); **FS131-K9b** (wave 9's second planner;
+     `mk-k9b.py`, 48 — `bendAny` through the obligation-modeling pass, B4 against the landed source, leaf D retired
+     by wave 8's lemma, the join with wave 8 made and the join with wave 6 planned); **FS131-I9B** (wave 9's first
+     implementer; `mk-i9b.py`, 32 — `Reduction/Uniform`'s three leaves and the models M1–M3; tree `fs131-w9b` from
+     `50c0edc5`, build copied, pushed). Both planners' generators read whether wave 8 has landed and word the merge
+     of `main` accordingly; while unlaunched they are re-run, not amended. (g) **Wave 9's line does not merge wave
+     6's** — the handoff's "by ancestry from `fs131-w6`" is withdrawn: FS131-K9b reads `ReduceI` at its path and
+     writes the instance's declaration for whichever landing comes second. Alternative: the merge, as I had written.
+     Why not: wave 6's line holds sixty-two open leaves, two of them a deriver's, and a merge would chain wave 9's
+     landing to all of them; ruling 566 (a) fixes which statement the join takes, not where it is made. Confidence:
+     high. (h) **Slot → FS131-K7c** (wave 7's third planner, `debruijn`, in `fs131-w7`), launched 2026-10-07 about
+     00:40 UTC. In flight: 3 (MD1, L8A, K7c). Next into a free slot: FS131-K9b, then FS131-I9B.
+
+600. **FS131-L8A, by message mid-job: wave 8's join is whole and `main` is merged; a twelfth module my brief did not name; docstrings the join made false** (source: L8A's message to "main", 2026-10-07 about 00:45 UTC; its record's Stages 1–2 and the merge `1171c25b` are pushed — the artifact is read at its hand-back).
+     Its account, not yet checked by me: the join `a243db17` conflicted in `ARCHITECTURE.md` and `scripts/Axioms.lean`
+     only; the joined build has no module with a warning and no `sorry` under `Proofs/`; 207 records in 7 blocks, 205
+     on exactly the standard three and 2 on `[propext, Quot.sound]`; elaborated statements unchanged against
+     `989a0393`, and against `0bdf6ea9` exactly the five of item 592. **The fact**: the line lands `Plane/SimpleOn`
+     (wave 7's foundation, commit `611ffa39`, shared by ancestry) — not on `main`, and not named in my brief.
+     **Checked by me**: one blob (`01a7215ae7`) on `origin/fs131-w8l`, `origin/fs131-w7`, `origin/fs131-w9` and at
+     `611ffa39`; `RingCalculus/Basic` imports it; no `sorry`. **The question**: three doc-comment sentences in
+     `SemiHub` and `SemiHubPlaces`, two rows of `ARCHITECTURE.md` and a block comment of `scripts/Axioms.lean` say
+     "stated", "skeleton" or "until the wave's join" of what the join proved. **A slip, mine**: the landing brief's
+     list of modules omitted the shared foundation the wave imports. **Rulings**, sent to it by message.
+     (a) **`Plane/SimpleOn` is gated and landed with the wave**, named in its record as the twelfth module.
+     Alternative: none live — the wave's modules import it. Confidence: high. (b) **The stale sentences are made
+     true of the joined state**, doc comments and registry prose only, each listed in its record as beyond the
+     brief's list with before and after text; its touches are extended to exactly these. Alternative: file them as
+     docstrings owed. Why not: "stated" would be false on `main` for two proved rows, and a later landing would
+     rebuild the modules for three sentences. Confidence: high. (c) **FS131-I10G's brief is written** while the
+     slots are full (`mk-i10g.py`, gate exit 0, 33 quotations; tree `fs131-w10g` from `main` at `d38c118b`, build
+     copied from the gate step's idle tree, pushed): its first act merges `origin/fs131-w10k` (my trial conflicts
+     in `scripts/Axioms.lean` only) and sends me the merge's hash, **onto which I fast-forward `fs131-w10k` before
+     wave 10's fourth planner is launched**, so that the planner and the implementer share one history; then the
+     level row's two leaves, the usable place (the plan's fallback to a named hypothesis is a message to me first:
+     the gate lists it), and the open gate items of ruling 575 (a). (d) **My trial of wave 6's three sibling
+     branches, for FS131-I6Z2's brief**: `fs131-w6z` with `fs131-w6l` — clean; with `fs131-w6k` — clean; `fs131-w6l`
+     with `fs131-w6k` — `scripts/Axioms.lean` only.
+
+601. **FS131-K7c, by message mid-job (its Stage 10 saved at `9b13628a`): the discrepancy of ruling 553 (a) is settled — two different bowtie fragments are on file, and FS-116's ring survey read the second under the first's name** (source: K7c's message to "main", 2026-10-07 about 00:55 UTC; record `fs131-w7`'s `plans/FS131-w7-kernel-plan.md` Stage 10; `data/fs131/k7c/ring-both.out`).
+     **(a)** FS114-Y2's own fragment (`tools/fs114_y2_k1.py`): the lune tiles `t2`, `t4` are bounded by the unit circle
+     about the centre on `[60°, 120°]` and `[240°, 300°]`, so the centre's ring carries arcs of `Γ` there, inner colour
+     carried at the centre. **(b)** FS114-YB2's independent rebuild (`tools/fs114_yb2_run.py`): no piece on that circle;
+     the ring is off `Γ` on `(30°, 150°)` and `(210°, 330°)` with change points at `top` and `bot`. The survey
+     (`tools/fs116_n1_ring.py`) imports (b) and prints it as "Y2 bowtie centre"; "off Gamma" is literal. Both have a
+     Reuleaux bowtie with four tactic edges and meet FS114-Y2-BOWTIE's statement; FS116-Z2's erratum sentence (two (Q)
+     arcs) is true of both. **Checked by me**: `tools/fs116_n1_ring.py` ll. 387–388, `tools/fs114_y2_k1.py` l. 107,
+     `tools/fs114_yb2_run.py` l. 191 say what it quotes; its saved survey of (a) prints four arcs of kind `in-P`. Not
+     checked by me: that (b)'s survey output equals the filed one line for line (its `diff`); which hypotheses each
+     object meets beyond the ring — its reading. **Corrections owed, held for the errata** (its texts, verbatim in its
+     message and its Stage 10): `plans/FS114-derivation.md` l. 496 (FS114-N4-D's model line names (b), not
+     FS114-Y2-BOWTIE's fragment) and l. 547 (FS114-N5-GRING's model line names both, each with its ring);
+     `plans/FS116-derivation.md` ll. 192, 211, 469, 1454 and the citation at l. 259 ("FS114-Y2-BOWTIE's centre", "the Y2
+     bowtie's change points" → FS114-YB2's bowtie's centre) — in (a) `top` and `bot` are not change points, so (a) is no
+     model of those four entries' hypotheses. **No filed statement moves.** **Also from it**: the merge of
+     `origin/fs131-w7m` is `7394c0e4`, built (three modules rebuilt, twenty `sorry` and no other warning); four of the
+     five `qArc_*` are proved in draft with `NonSiamese` idle; **one leaf of `Local`, `lens_cone`, is false as stated
+     at `ψ = ψ′`** — details to come with its message for `Local`'s cut. **Credit**: both objects run through the one
+     survey unedited, with the line that decides it found in the survey's own import; no side had been picked by
+     anyone before it, and it picked by evidence. **Rulings.** (a) **The kernel holds (b) as `bowtieFrag`** — the
+     fragment's four jobs build FS114-YB2's rebuild. Alternative: (a), which keeps the second planner's § 7.5 whole.
+     Why (b): the fragment exists in the kernel to be an inhabitant, and (b) inhabits strictly more of what waves 7
+     and 8 state — `ring_odd`, the class of N4-TOP, N4-FIVE and N4-ARC, wave 8's rows at a change point of the centre's
+     ring — at the same count of tiles and pairs. Confidence: medium-high; a pair-bound price well above (a)'s, or a
+     tactic or bowtie hypothesis (b) does not meet, would change it, and the fragment's first job checks both at its
+     readback. Sent to K7c by message. (b) **K7c revises its § 7.5 for (b) in one short stage, after its item 3**: the
+     fragment's first brief is written from its record. (c) **Kooshi is told at his next check-in**: two model lines
+     and five citations in filed records name the wrong object; nothing else moves. (d) **A reading for the record,
+     mine**: the verifier's "independent rebuild" verified the statement with a different witness, so
+     FS114-Y2-BOWTIE's existence has two objects, each one mind's; neither tool is the other's check.
+
+602. **FS131-MD1 done: the example maps' first closer — the stuck example map is a terminal map, in the kernel; three more landed heads now name a Lean model** (implementer, Opus; harness 665k and 95 minutes by the task notice — past the line; record `fs131-wd1`'s `plans/FS131-MD1-implementation.md` Stages 1–6; report `data/fs131/reports/FS131-MD1.md`; six commits, tip `ff583145`; pushed, tree clean; not landed, the full gate not run, by its brief).
+     **Proved on the standard three** (one new module, `Plane/Models/StuckTerminal`, 1,379 lines, 47 theorems; built,
+     not gated): **`stuckModel_terminal : stuckModel.Terminal`** (at every point of the plane none of the three moves
+     is available), **`stuckModel_qrOnly`** (every constant-sided arc of `Γ` on a unit circle is a (Q) arc, and one
+     exists: `stuckModel_exists_isQArc`), **`stuckModel_isTerminalMap`** — no hypothesis; the vertex is the map's
+     only site (`stuckModel_not_isSite`). The three `example`s of `Plane/Models/Applied` (`n3_end_chain`, `cv_l0`,
+     `hornBoundsQR_of_isChainVertex`) lose their binders. **Open gate items by the milestone's tool: 29 → 26 on this
+     branch** (CLOSED 33 → 36); with the sibling closer's fifteen (item 599) the two branches together leave eleven
+     of the twenty-nine. **A reusable instrument**: `WideAt`, `ArcMap.not_isSite_of_wideAt`,
+     `ArcMap.not_isSite_of_pieces` — no site at a point of an open chart whose pieces are wide there, with no
+     `IsClean` and no sector chart; `ArcMap.relabel_isSite`, `brickBase_not_isSite`. **My receipt**: tip equals
+     `origin/fs131-wd1`, tree clean; outside `data/`, `plans/`, `tools/` it changed the new module, `Applied` (ten
+     lines added, seven removed), `ValidMap/Terminal` and the three registry files; **`ValidMap/Terminal` with every
+     doc comment removed is identical to `1ed1cfd2` (my script)**; the new module holds no `sorry`, no `axiom`, no
+     `native_decide`; its two last build logs end "OK — 466 of 466 batches … 0 module(s) with warnings", `EXIT=0`;
+     its axioms print parsed by my script — 47 records, each on exactly the standard three — and its control shows
+     `sorryAx`; the guarded lint's log ends "Linting passed for Proofs."; the three heads read in the module (ruling
+     497 (b)'s `stuckModel.IsTerminalMap` is `⟨valid, plane map, terminal, (Q)/(R2) only⟩`, as it reports). Not
+     checked by me: the proofs beyond the build; its statement tool's code; the three docstrings against the model.
+     **Predictions scored**: the landing job's route table priced `Terminal` at 500–650 lines; written it is about
+     950 with the general lemmas, and `QROnly`, unrouted there, about 300; the calibration's line gives 489k for
+     1,379 lines against 665k measured. **Tool defects, found by it** (for the filing's list): the notes check as
+     my brief wrote it (the same slip as item 599's — the tree-reading form is `tools/fs131_l5_notes.py --tree .
+     --only-flagged`); `tools/fs131_mc_gateitems.py --self-test` asks that all sixty-two names read REMAIN on the
+     given tree, which `main` has not satisfied since the example maps landed. **Slips, the job's, disclosed**: a
+     stage that said three items were read whole before they were; one exit status read through a pipe and re-run;
+     a control that did not fire, caught by its own self-test; a lemma first named inside a Mathlib structure's
+     namespace, renamed before any commit. **Credit**: one argument (wide pieces) for the disc and the squares
+     alike where the plan had two; a lint control planted and watched to go red on its own module; `QROnly` proved
+     in the stronger form and shown live by an instance. **Rulings.** (a) **`Applied`'s import and its one corrected
+     module-doc sentence are ratified** (the sentence said the two facts "are not proved in Lean" above examples that
+     now use them). Alternative: leave the sentence. Why not: it would be false. Confidence: high. (b) The clauses
+     added to two rows of `ARCHITECTURE.md` and the extra theorem `stuckModel_exists_isQArc` (with its import of
+     `ValidMap/Terminal`) are ratified: each is what makes a docstring's claim checkable. (c) **Both closers'
+     branches go to the next landing after wave 8's** (ruling 599 (d) stands): it joins `fs131-wd1` and `fs131-wd2`
+     (conflicts to expect in the three registry files and `Applied`; no shared name at its Stage 4, by its count),
+     runs the doubled-name check, and reads 47 and 40 new clean records. (d) Its draft line for `LEAN.md` § Searching
+     — Lean (a lemma named `Convex.foo` inside this package's namespace shadows) is filed at that landing with
+     the others held. (e) **The reusable instrument is named to the owed-models job** (ruling 599 (c)): the
+     arc-step example's two missing facts and the other maps' non-vertex points are of the kind it serves.
+     (f) **Slot → FS131-K9b** (wave 9's second planner, `debruijn`, in `fs131-w9`; its brief regenerated for one
+     sentence made stale by item 599 — gate exit 0, 48 quotations), launched 2026-10-07 about 01:00 UTC. In
+     flight: 3 (L8A, K7c, K9b). Next into a free slot: FS131-I9B, then FS131-I10G, FS131-I6Z2, FS131-E9.
+
+603. **FS131-K9b, by message mid-job: the away bend on a fragment needs twins of three landed statements, and they are short — the wave's long leaf loses the half its first planner called hard** (source: K9b's message to "main", 2026-10-07 about 01:10 UTC; its Stage 6 is saved at `285a983f`; the twins are written and elaborating, "iteration, not evidence" in its words — not built, not committed; the artifact is read at its hand-back).
+     Its reading of the landed source: `CollarFitOut`'s fields name the domain only for the collar itself, so the
+     structure and `CollarFitOut.awayBend` serve a fragment as landed; the hypothesis `radiusTwoArc P θ₁ θ₂ ⊆ F.dom`
+     is read in one place, for the caps at a gap's two ends; under FS129-OR1-WHOLE's clause (the closed radius-two
+     arc misses the closure of the inner class) the caps are not needed, and wave 4's `away_clear` is already stated
+     over exactly that. **The twins**, in a new module `Plane/Classes/AwayCollar` on `fs131-w9`:
+     `exists_lensOut_clear_of_disjoint`, `exists_collarFitOut_of_disjoint`, `bend_away_collar` — the landed three
+     with `hR2 : Disjoint (radiusTwoArc P θ₁ θ₂) (closure (F.region c))` in place of the domain and gap hypotheses;
+     neither form implies the other. About 75 lines in all. **Checked by me against the landed files**: the domain
+     hypothesis is passed to `exists_gap_cap` at `BendGap.lean` ll. 784–785 and only passed down at ll. 888 and
+     1440; `CollarFitOut`'s eight fields (`CollarMapOut.lean` ll. 29–45) name `F.dom` once, in `sub_dom`, for the
+     collar; `away_clear` (`UnitArc.lean` l. 3542) takes `hr2` over a thickening of the radius-two arc and no
+     domain hypothesis. Not checked by me: that the three elaborate, or build. **Prediction to score at its
+     hand-back**: the first pass priced `bendAny` at 400–700k tokens with B4 half of it. **Credit**: the one use of
+     the hypothesis found in the landed proof, and the landed lemma that already carried the other form.
+     **Ruling.** **The twins stay in `Plane/Classes/AwayCollar` on wave 9's line**; a move beside their originals in
+     `ValidMap/BendGap` is a question for the milestone's tidy. Alternative: have them added to the landed module
+     now. Why not: a landed module is not edited on a wave's branch (two lines never change one file), and the
+     twins read only landed lemmas. Confidence: high. No reply sent: it proceeds unless told, in its own words.
+
+604. **FS131-K7c, by message mid-job (its Stages 11–13 saved at `02a11514`): wave 7's two stated modules are ready for implementers — four of the five (Q)-arc leaves proved on valid maps alone, one skeleton statement found false in a degenerate case and corrected, the bowtie's stop split into eight children with its "simple" hypothesis narrowed to two points, and the fragment's plan rewritten for the rebuild** (source: K7c's message to "main", 2026-10-07 about 01:10 UTC; record `fs131-w7`'s `plans/FS131-w7-kernel-plan.md` Stages 11–13).
+     **Its account.** (i) Every binder of every leaf's file signature is a binder of the kernel's statement; the two
+     modules have no hypothesis-carrying section variable, so the defect of items 556 and 564 cannot occur there.
+     (ii) **FS114-N7-QOPP's first three clauses hold in every valid map, Siamese pairs allowed** — wave 8's reading
+     (item 571) confirmed and proved: `qArc_inner_cone`, `qArc_outer`, `qArc_ne`, `qArc_cone_disjoint` lose
+     `NonSiamese` and the membership hypotheses their proofs do not read; the arc clause of the old `qArc_inner` is
+     not stated here (it is wave 8's `qcol_inner_tile`, cited once `main` is merged); `qArc_others_absent` reads
+     every hypothesis and is unchanged. (iii) **A statement defect of the second pass's skeleton**:
+     `IsTacticAt.lens_cone` with `ψ ≤ ψ'` is false at `ψ = ψ'` (taking the second tactic edge to be the first, it
+     concludes a half-plane cone where a Reuleaux triangle's corner has 120°); now `ψ < ψ'`; one mind, the corrected
+     statement not proved; the filed row's `γ = 0` case is not stated and no row reads it. (iv) **`rstopAll`'s
+     `SimpleOn` hypothesis narrows from the closed disc of radius `√3` to the two corners `{q₁, q₂}`** — "simple" is
+     read once in the whole argument (FS114-YB3's W step 2) — and the leaf is split into eight `sorry` children
+     and a composition, with no second-order estimate needed (a half-open cone window in place of YB2-RPREC's
+     tangent case). `Bowtie`: 14 open leaves, about 2,550 lines, two jobs, the second after the first; `Local`:
+     9 open leaves, about 1,050 lines, one job. (v) Its § 7.5 is revised for the rebuild (Stage 13): the object by
+     tool lines, seven base tiles and twenty under `D₂`, 46 same-colour pairs (32 tight), 22 rim segments; what the
+     fragment's first job checks at its readback; which statements each of the four jobs' examples serve; job (C)'s
+     `SimpleOn` is now two finite sets. (vi) **The pinwheel does not fit this pass**: its unread arguments are about
+     3,700 lines, and it will not state the foundation from entries alone; it will list the wave's assumptions,
+     merge `main` if my hash arrives in time, and hand back with a fourth pass's reading list. **My receipt**: tip
+     `02a11514` equals `origin/fs131-w7`; `sorry` by the handoff's grep: `Local` 9, `Bowtie` 14, `Rainbow` 1,
+     `Basic`, `Count`, `Grid12` 0; **by my script over the theorem heads of `Local` and `Bowtie` against
+     `195c7855`: exactly the seven changes it lists and no other** — `qArc_inner` gone with `qArc_inner_cone`,
+     `qArc_region_cone_disjoint`, `disjoint_angleIcc_windows` added; `qArc_outer`, `qArc_ne`, `qArc_cone_disjoint`
+     each minus the binders it names; `lens_cone`'s `≤` to `<`; `rstopAll` and `not_covers_sqrt_three` with the
+     two-corner set; eight new heads in `Bowtie`. Not checked by me: its build log; the proofs; its kernel-signature
+     tool; the hand re-derivations. **Credit**: a planner that proved what it was asked to re-read; a false
+     statement caught by reading binders before an implementer spent a job on it; a 1,400-line leaf turned into
+     eight with a weaker hypothesis; and "I will not state them from entries alone", said before its line.
+     **Rulings.** (a) **The seven statement changes are ratified** — they were the planner's to make (its brief),
+     each has its reason in its Stage 11 or 12, and my script finds no other. (b) **`lens_cone`'s defect is a
+     skeleton's, not a filed row's**: logged; told to Kooshi as a finding, not as a defect of a filed result.
+     (c) **Wave 7's implementers, by file**: FS131-I7L (`Local`'s nine leaves, with `anchor` first — rulings 564
+     (a)–(b)); FS131-I7B1 (`Bowtie`'s first eight: `own`, the side germs, the two absent-colour leaves, `lune`,
+     the three cap leaves) and FS131-I7B2 (the five of FS114-Y4-DIAG and the composition, after I7B1); the
+     fragment's four jobs, FS131-I7F-A first. **I7L's first act merges `origin/main`** if the wave's line does not
+     hold it by then (two of its leaves cite wave 8's lemmas); I7B1 and the fragment's first job need nothing from
+     `main` and may be cut from the wave's tip as it stands. Alternative: hold all three for the merge. Why not:
+     two of the three do not read it. Confidence: high. (d) **A fourth planning pass for the pinwheel, FS131-K7d**,
+     from K7c's reading list at its hand-back. Brief not written. (e) **D1** — whether FS114-N3-HALF's last clause
+     is false without its exception needs a constructed map — joins the deriver's questions for the wave's stub
+     lines (with item 580 (c)); nothing waits on it. (f) **Launch order from here** (mine; the nearest landings
+     first): FS131-I9B, FS131-I10G, then wave 7's three (I7L when `main` holds wave 8), FS131-E9, FS131-I6Z2.
+
+605. **FS131-L8A, by message mid-job: the vacuity scan is red on wave 8's merged tree at two sites — both from a marker my ruling 518 placed** (source: L8A's message to "main", 2026-10-07 about 01:15 UTC; its probe log `data/fs131/l8a/vacuity-probe.scan.log` on `fs131-w8l` — the artifact is read at its hand-back).
+     Its account: `SITE STALE … v6_hubs :: F.Valid` and `… :: F.NonSiamese`; totals `declarations=14807
+     refutations-skipped=215 sites=1446 vacuous=0 stale=2 declared=3 witnessed=38 generic=1401 unknown=2` — against
+     `main`, +306 declarations, +16 refutations, +177 sites (175 generic and these two); no VACUOUS, no new UNKNOWN.
+     The mechanism: the scan's `VACUITY DECLARED:` marker makes each tracked binder read DECLARED if its own carrier
+     is provably empty and STALE if not; `v6_hubs` binds `F.Valid` and `F.NonSiamese`, each satisfiable alone; the
+     emptiness is joint, across five binders (`v6_hubs_vacuous`), which a per-binder scan cannot see. `v6_hug`
+     concludes `False`, is skipped as a refutation, and its marker is never read. **Also from it, all green**: the
+     assumptions step after two `.condition` lines (`ArcMap.TipPairFree`, `ArcMap.OuterPairFree` — predicates of the
+     theorem's own map, point and angle; nine counts unchanged from `main`'s, the ledger gaining and losing no row);
+     13 records registered in a block of its own; the docstring corrections of item 600 made (nine doc comments in
+     two files; the elaborated dump of the twelve modules identical before and after, 398 constants); the build with
+     `main` merged, 79 modules rebuilt, none with a warning. **Read by me before ruling**: ruling 518; `LEAN.md`
+     § The gate ll. 236–237; the marker in `scripts/Vacuity.lean`. **A slip, mine**: ruling 518 placed the marker
+     "whatever the scan prints" on ruling 167 (b)'s premise that the scan does not track `ArcMap` binders — false
+     since wave 3 registered `F.Valid` and `F.NonSiamese`; I ruled from an older ruling's premise without re-reading
+     the scan. **Credit**: the mechanism read from the scan's own source, three options laid out with their costs,
+     and "I do not weaken the check". **Ruling**, sent by message. **The two docstrings (`v6_hubs`, `v6_hug`) lose
+     the scan's marker and say the joint vacuity in words**, every fact kept and the refuting theorem named; the two
+     sites then read GENERIC, true binder by binder, and `declared` stays 3. Alternatives: `private` (167 (b)) —
+     not taken: backlog rows cited by name, with the refutation beside each; an excuse for the sites — not taken:
+     the marker as the scan defines it is false of `v6_hubs`, so STALE is the gate being right. Confidence: high.
+     Its touches are extended to those two doc comments. **Owed**: a line for `LEAN.md` § The gate (its draft, filed
+     after its hand-back) — the marker is for one provably empty carrier; a route lemma with jointly unsatisfiable
+     hypotheses says so in words and names its refutation — and the same clarification to the plan's § 7.3 item 5 at
+     the filing; **an instrument change that would let the scan honour a marker against a named refutation of the
+     exact hypotheses joins the tooling job's questions** (ruling 475 (d)). Ruling 518 is amended to this.
+
+606. **FS131-K7c done at its Stage 14: wave 7's third planning pass — its three early answers given (items 601, 604), FS114-Y3-RSTOP stated at the class its argument reads, the wave's assumptions listed; the pinwheel not started, by its own judgment, with a fourth pass's reading list** (planner; harness 480k and 46 minutes by the task notice; record `fs131-w7`'s `plans/FS131-w7-kernel-plan.md` Stages 8–14; report `data/fs131/reports/FS131-K7c.md`; five commits, tip `b1101992`; pushed, tree clean).
+     **Since item 604** (its Stage 14): the obligation-modeling pass on the stop's split changed two of its own new
+     leaves — `outside_ring_colour` became **`col_eq_of_tiles_toward`, a lemma about any valid map** (any number of
+     colours, no bowtie, Siamese pairs allowed: FS114-Y3-R's necessary condition at the class its argument reads),
+     and `exists_side_germs` takes the two corners in the domain in place of `Covers p 1` — and gave one row whole:
+     **FS114-Y3-RSTOP is `not_mem_dom_of_tiles_toward`** (any valid map; the fragment meets its hypotheses and its
+     conclusion: a model, not a near-miss). `Bowtie` now holds 15 open leaves, about 2,500 lines, two jobs (ten
+     leaves, then five); `Local` 9, unchanged since `02a11514`. **The assumptions list for the wave's landing is one
+     binder** (`RouteT.CountData.kill`'s `hK1`, kind open, source FS114-N3-JOINT) and three formers that no theorem
+     concludes until the fragment's last job does. **Not done, said plainly**: no pinwheel row and no pinwheel
+     foundation (about 3,700 lines of argument unread by every planner of the wave; it would not state them from
+     entries); `main` not merged (wave 8 was not on it). **My receipt**: tip equals `origin/fs131-w7`, tree clean;
+     `sorry` by my script over theorem blocks: `Local` 9, `Bowtie` 15 (the fifteen it names), `Rainbow` 1,
+     `Basic` 0; its last build log ends "OK — 467 of 467 batches, 2 module(s) rebuilt, 3 module(s) with warnings",
+     `EXIT=0`; by my script, since `02a11514` `Local`'s heads are unchanged and `Bowtie` lost
+     `outside_ring_colour`, gained the two it names, and changed `exists_side_germs` (the two domain binders) and
+     `corner_tiles_toward` (its window's form) — as it reports; its § 14.2 and § 14.4 read. Not checked by me: that
+     the rewritten window is "the same set"; its mutation audit; the built module against the committed file (its
+     disclosed slip: the last module was edited while the build walked earlier batches). **Predictions scored**:
+     its "the survey uses a convention" — not met (another object); rows stated whole, 1 of 8 against its
+     registered median of 3. **Credit**: three implementer lines released inside one pass; two general lemmas found
+     under a bowtie-specific leaf by asking which hypotheses the proof reads; a test object named for a row it did
+     not read (below). **Rulings.** (a) **The bowtie's two jobs run one after the other on one branch** (FS131-I7B1,
+     ten leaves; then FS131-I7B2, five). Alternative: side by side, as its handoff allows. Why not: both prove
+     leaves of one file, and two branches never change one file; the slots, not the split, are the constraint.
+     Confidence: high. (b) **`main` is merged into wave 7's line by `Local`'s implementer as its first act**, which
+     sends the hash; **`fs131-w7` is fast-forwarded onto that hash before the fourth planner is launched** (the
+     pattern of item 600 (c)). (c) **A fourth planning pass, FS131-K7d**, from its § 14.4's list — the pinwheel
+     whole, N5-BENDG, Y3-D2, N3-PAY, N4-TOP / FIVE / ARC against `top_arc` and `corner_tiles_toward`, Y6-HALF's W,
+     FS114-Y2-BOWTIE's statements. Brief not written; it launches after the merge of (b). (d) **`kill`'s `hK1` is
+     decided at the wave's landing by the step's own procedure**; my default: a condition on the theorem's own
+     count data (`kill` refutes count data meeting it), not a declared assumption — the landing says if the step
+     reads it otherwise. Confidence: medium. (e) **A question for a deriver, from it** (unread by it, an
+     observation): the original construction's map (`tools/fs114_y2_k1.py`) is a degree-4 four-colour vertex on a
+     valid fragment of radius `3√3/5` whose ring carries arcs of `Γ` that are neither (Q) nor (R2) — so
+     FS114-N5-GRING's N5-BENDG ("the bends leave only (Q) and (R2) ring arcs at a degree-4 vertex") must carry a
+     covered radius, and that map is the object that tests its statement. It goes into the fourth planner's brief
+     as the first thing to read for that row, and to the deriver's list if the row's argument does not answer it.
+     (f) **The two general lemmas** (`col_eq_of_tiles_toward`, `not_mem_dom_of_tiles_toward`; open on its branch)
+     are named in wave 8's third planner's brief when it is written. (g) Its errata lines (item 601's seven) and
+     generalizations are held for the filing. (h) **Slot → FS131-I9B** (wave 9's first implementer, on
+     `fs131-w9b`), launched 2026-10-07 about 01:20 UTC. In flight: 3 (L8A, K9b, I9B). Next: FS131-I10G, then wave
+     7's (I7B1 and the fragment's first job now; I7L when `main` holds wave 8), FS131-E9, FS131-I6Z2.
+
+607. **KOOSHI'S STANDING CONDITIONAL HAS FIRED (item 489): an outside release holds a claimed proof, with a Lean formalization, that the plane is not five-colourable — `χ(ℝ²) ≥ 6` with no assumption on the colour classes** (source: Kooshi's message, 2026-10-07 about 01:30 UTC, verbatim in `data/external/EXT-OAI1-request.md`; the release cloned by me to `~/source/math`, commit `adc7f1241b42e322a6451854ab7e4b4c146bf78a`, one commit dated 2026-10-06, 3.1 GB, 132,851 files).
+     **His words**: "We have an analysis trigger. OpenAI released a trove of manuscripts on open questions. Have a
+     special slot reviewer check it for anything related to our project. Clone it in `~/source`, as I'll be exploring
+     it for other things as well." **What the release says of itself** (its README, read by me): 722 manuscripts in
+     372 result families "produced by an internal OpenAI model"; "results at different stages of verification. Not
+     all have accompanying Lean formalizations"; "Some of the unformalized results could have issues"; Apache
+     License 2.0. **The hit, found by my sweep of its catalogue** (`CONTENTS.md`, 640 KB; `rg` for the discipline's
+     phrases, and the directory names read): **family 158, "The Euclidean plane cannot be colored with five
+     colors"** — "Proves that every five-coloring of the Euclidean plane has a monochromatic pair at distance one,
+     with no restriction on the color classes … only six and seven remain possible chromatic numbers of the plane.
+     ([Lean](lean/docs/158.md))"; preprint dated September 23, 2026. **Its Lean, listed by me, none of the proof
+     read**: the comparator challenge `lean/ComparatorChallenges/EuclideanFiveColor.lean` states `def ProperColoring
+     (colorCount : ℕ) (coloring : ℂ → Fin colorCount) : Prop := ∀ point otherPoint : ℂ, ‖point - otherPoint‖ = 1 →
+     coloring point ≠ coloring otherPoint` and `theorem no_proper_five_coloring : ¬ ∃ coloring : ℂ → Fin 5,
+     ProperColoring 5 coloring`; the solution module is `lean/OAI/Geometry/PlaneColoring/Five.lean`, in a directory
+     of 46 files and 14,661 lines whose module names (`BorelTransfer`, `MeasurableProper`, `HoleApproximation`,
+     `Interfaces`, `Accumulation`, `PlanarCovers`, `Mesh`, …) are of an analytic and topological argument, not of a
+     finite graph; its comparator configuration permits the standard three axioms, with the second kernel off;
+     toolchain `leanprover/lean4:v4.34.1`. **Nothing here is a finding about correctness.** Other families my sweep
+     saw and did not open: 073 (the Falconer distance conjecture), 157 (a counterexample to Hadwiger's conjecture —
+     graph minors, another Hadwiger), 167 (planar unit distances), 172 (Euclidean Ramsey configurations).
+     **The trigger, on its letter** (item 489: "a published or claimed proof that decides the problem or moves a
+     bound, brought by Kooshi or found by the Searcher"): met — a claimed proof that moves the lower bound, brought by
+     Kooshi. **The conditional's four steps, and their state.** (1) *Stop launches at the next hand-backs*: **in
+     force from this item** — FS-131's queue (I10G, I7B1, I7FA, I7L, E9, I6Z2, K10d, K7d) is held; the three running
+     jobs (wave 8's landing, K9b, I9B) run to their hand-backs and are reviewed and logged as ever; wave 8 lands if
+     its gate is green. (2) *Read it in full*: **EXT-OAI1 launched** (special slot; `debruijn`; brief
+     `data/external/briefs/EXT-OAI1-outside-five-colour-lean.md`, generator `mk-ext-oai1.py`, gate exit 0, 13
+     quotations) — the Lean first, in the order of evidential value: the headline read aloud, the import cone by
+     text, the build at the release's toolchain with the axioms and a control, the release's comparator check, the
+     proof's shape; four messages mid-job. **EXT-OAI2**, a deriver's reading of the manuscript in full against rows
+     33 and 128–154, takes the first slot that frees (brief being written). (3) *A bibliography entry that day*:
+     **filed** — `BIBLIOGRAPHY.md` § A, key `[OAIMath2026]`, marked listed, not read (`tools/bib_audit.py` exits 1 on
+     one key, `[Author2024]`, first seen in this inventory two days ago — not this row's). (4) *Brief the lanes to
+     analyze it against row 33 and rows 131–154*: EXT-OAI1 and EXT-OAI2 are the first two; then the sweep of the
+     other 371 families for what this project assumes, poses or claims (EXT-OAI3; generator `mk-ext-oai3.py`,
+     written before the hit was found, to be revised), and the asker's re-rank of the frontier once the first
+     answers are in. **Slips, mine**: the first clone was killed at five minutes by a time limit I guessed for a
+     download of unknown size (re-run without one; the memory note on wrapping a long process in a timeout says
+     exactly this). **Rulings.** (a) **The special slot goes to the Lean audit first, the manuscript's reading
+     second.** Alternative: the reading first, or the wide sweep Kooshi's sentence asks for. Why: a build with a
+     faithful headline on the standard three axioms decides the claim as no reading can, and a headline that says
+     less than the abstract decides it the other way — the checks that decide run before the slow ones that cannot
+     (`CLAUDE.md` § The standard of evidence); the sweep cannot change what the project does next, and the hit it
+     would have been launched to find is found. Confidence: high. (b) **No fifth agent without Kooshi's word**: the
+     reading waits for the first freed slot; he is told he can have both at once by saying so. (c) **Nothing of the
+     release is cited, imported or built on here until Kooshi says**: the audit drafts the bridging lines and the
+     ledger's sentence as text in its record. (d) **What it bears on, mine and unread**: row 33's lower end; FS-104
+     (is `χ_CP(ℝ²) ≥ 6`), which a clean audit answers in a stronger form and with no measure rigidity; the
+     conjecture's bold form `χ(ℝ²) = 7` is untouched; the ranking of FS-123, FS-124 and FS-104 is the asker's to
+     redo. (e) **Kooshi notified by push** at the moment the hit was read.
+
+608. **EXT-OAI1, first message: the outside release's Lean headline says the claim, by text; and its proof is two steps, the first of which is — for every number of colours — the direction of this project's collapse that is held here only given measure rigidity** (source: EXT-OAI1's message to "main", 2026-10-07; its record `plans/EXT-OAI1-audit.md` stages 1–2, commits `eefde416`, `c51088d8` on `main`).
+     **Its account.** The challenge file (15 lines; imports Mathlib only; no notation, instance, attribute or option)
+     states `def ProperColoring (colorCount : ℕ) (coloring : ℂ → Fin colorCount) : Prop := ∀ point otherPoint : ℂ,
+     ‖point - otherPoint‖ = 1 → coloring point ≠ coloring otherPoint` and `theorem no_proper_five_coloring : ¬ ∃
+     coloring : ℂ → Fin 5, ProperColoring 5 coloring`: no hypothesis in the definition, the existential over every
+     map, no look-alike character — by text nothing weaker than the informal claim. The solution module's theorem is
+     the same statement with variables renamed. **Not yet checked by it**: which `Norm ℂ` instance elaboration picks;
+     the stored types' equality by signature — both wait for the build. **(a) The proof is three lines**:
+     `proper_to_borel_weak`, then `no_measurable_weak_five_coloring`. The first is stated for every `k`: a proper
+     `k`-colouring of `ℂ` gives a Borel `k`-colouring proper at almost every unit pair — **`χ_m⁰(ℝ²) ≤ χ(ℝ²)`, the
+     direction rows 128 and 130 hold given measure rigidity, at [hand], claimed here with no hypothesis**; its cone
+     is 33 modules of spectral and ergodic machinery (invariant means, number fields, compact factors). "If the build
+     is clean this is in the kernel whatever happens to the five-colour half." (b) The release's seven-colour theorem
+     is on `EuclideanSpace ℝ (Fin 2)` with `dist`, the five-colour one on `ℂ` with the norm; no Lean statement in the
+     release joins them. The cone of the solution module is **70 modules, 30,336 lines**, with Mathlib its only
+     outside import; it builds with a lakefile reduced to that requirement. **Read by me in the clone**: `Five.lean`
+     ll. 123–127 (the theorem and its three-line proof), `BorelTransfer.lean` ll. 436–437 (`lemma
+     proper_to_borel_weak {k : ℕ} [NeZero k] {c : ℂ → Fin k} (hc : ProperColoring k c) : ∃ d : ℂ → Fin k, Measurable
+     d ∧ WeakColoring k d`), `Coloring.lean` ll. 27–29 (`WeakColoring k c := AEMeasurable c volume ∧ ∀ᵐ p ∂ volume.prod
+     angularMeasure, c p.1 ≠ c (p.1 + direction p.2)`) — they say what it quotes. **A correction to my item 607 and
+     to my report to Kooshi**: "46 files and 14,661 lines" is the directory's count; the proof's cone is 70 modules
+     and 30,336 lines. **Nothing here is yet a kernel fact on this machine.** **Rulings.** (a) **Told to Kooshi at
+     once**, with the correction. (b) **The transfer lemma is named to the manuscript's reader** (EXT-OAI2's brief
+     already asks its route; the Lean names go to it by message when it is running). (c) If the build is clean, the
+     first sentence this project's front page would owe is about row 130, not row 33: its "given MR" — a draft for
+     Kooshi's decision, written by the audit (its brief, item 7) and the reading (its item 5), filed by nobody yet.
+
+609. **EXT-OAI1, second message: by text the proof's import cone holds nothing a kernel would not check** (source: EXT-OAI1's message to "main", 2026-10-07; record `plans/EXT-OAI1-audit.md` stage 3, commit `11fa8ea4`; prints under `data/external/oai1/`).
+     **Its account.** The cone of the solution module, from import lines (its parser checked against `rg`): **70
+     modules, 30,336 lines** — 37 of `OAI.Geometry.PlaneColoring` (14,142 lines; the directory's other nine are the
+     seven-colour side), 19 of `OAI.Analysis.PlaneSpectrum` (8,466), 14 of `OAI.MeasureTheory.CompactFactors` (7,728);
+     the only outside import is Mathlib. **Counts over the 70 files, all zero**: `axiom`; `sorry`, `admit`,
+     `sorryAx`; native evaluation in every spelling it lists; `implemented_by`, `extern`, `csimp`; `unsafe`,
+     `opaque`, `partial`; any `set_option`; debug options; new syntax, macros, `#eval`; `attribute` commands. Its
+     control: fourteen planted lines in a scratch copy, each pattern reporting its plant. What is there, elaboration
+     only: eighteen `local instance` lines, `open scoped Classical` in eleven files. The pinned Mathlib revision is
+     the official tag for the toolchain, its checkout unmodified. **What text cannot decide, in its words**: a
+     `sorryAx` or native axiom reached through a tactic, and the instance in the stored statement — the build's and
+     `#print axioms`'s to say. **My receipt**: its commit is on `main`; its print of the cone lists 70 modules; **my
+     own search** (`rg -P` for `sorry`, `admit`, `native_decide`, `sorryAx`, an `axiom` declaration, `unsafe`,
+     `implemented_by`, `set_option`) over the three directories' 79 Lean files finds no file with a match, and the
+     same pattern on the release's challenge file, which holds a `sorry`, finds it. Not checked by me: its cone
+     computation; the patterns I did not run. **Told to Kooshi at once.** The build of the 70 modules has started
+     under the slot.
+
+610. **FS131-K9b done at its Stage 11: wave 9's second planning pass — the wave's long leaf is proved from eight stated children, the away bend on a fragment is closed by three proved twins, a model built; the join with wave 8 prepared, not made** (planner; harness 573k and 54 minutes by the task notice — past the line; record `fs131-w9`'s `plans/FS131-w9-kernel-plan.md` Stages 6–11; report `data/fs131/reports/FS131-K9b.md`; three commits, tip `3a10b8f5`; pushed, tree clean).
+     **Proved on the standard three** (built, not gated): the three twins of item 603 (`Plane/Classes/AwayCollar`,
+     119 lines); tiles, `Simple` and `NonSiamese` carried by a homeomorphism of the plane (`isTile_image_iff`,
+     `Simple.of_homeomorph`, `NonSiamese.of_homeomorph` — new in the library); the model M4 on `awayModel`
+     (`awayModel_bendAny_hyps`, with `bendAny` applied) and the twins' inhabitant. **Proved over open leaves**:
+     **`bendAny` (FS129-SR1-BENDANY) from eight stated children** — seven in a new `Plane/Classes/RingPieces`, one
+     in `Plane/Classes/RingBend` — so its decomposition is a kernel-checked implication; `exists_ringBend`,
+     `exists_bentAlong`. Statement of `bendAny` unchanged; no statement defect. **Price of what is left for it**:
+     1,125 planned lines — one implementer job, where the first pass priced 400–700k tokens and two sittings.
+     **Not made**: the join with wave 8 (`main` did not hold wave 8; prepared as one checked edit,
+     `data/fs131/k9b/join-wave8.py`, twelve anchored replacements — leaf D's name removed and its two readers citing
+     wave 8's lemma, `GammaFreeEmptyNS` removed, the binder `hE` leaving `qfreeNS` and `qfcase`); M5 (owed: no map of
+     radius above 1 is proved simple in any tree). **The join with wave 6, planned**: the instance's declaration is
+     in its record, not elaborated; wave 6's leaf `exists_arcMap_of_hasArcInterfaces` does not follow from wave 9's
+     `exists_arcMap_of_arcBounded` in a few lines — about a hundred, in three written steps. **My receipt**: tip
+     equals `origin/fs131-w9`, tree clean; outside `data/`, `plans/`, `tools/` it changed four new modules, `Bend`
+     (225 lines added), and the three registry files — `QFree` and everything under `Reduction/` untouched; its last
+     build log ends "OK — 468 of 468 batches, 6 module(s) rebuilt, 4 module(s) with warnings", `EXIT=0`; `sorry` by
+     the handoff's grep: `RingPieces` 7, `RingBend` 1, `QFree` 1, `Uniform` 3 (the implementer's), `AwayCollar`,
+     `Bend`, `Models`, `Basic`, `Maps` 0; **by my script the three heads `Bend` had and the eight `QFree` has are
+     textually unchanged**; its axioms print parsed by my script — 17 records, the three twins on exactly the
+     standard three, and `bendAny`, `exists_bentAlong`, `exists_ringBend` on `sorryAx` as theorems over open leaves
+     should be. Not checked by me: the proofs beyond the build; its `join-wave8.py`; the hundred-line estimate.
+     **Predictions scored**: the first pass's price for `bendAny` (two sittings, B4 half of it) — not met: one job,
+     B4 seventy-five lines; its own two wrong (jobs; wave 6's leaf). **Corrections owed.** *Mine (the brief's)*: I
+     wrote that `Row130Collapse` is "declared on `main` already"; `main` declares `Row130M1`, a different statement
+     — `Row130Collapse` is this wave's own and its landing declares it. *The first pass's*: its handoff's "collapse
+     the two readings of 'simple'" is void by ruling 536 (b). **Slips, the job's, disclosed**: a spec example that
+     elaborated only under wider imports (one build lost); `debruijn-domain-modeling` not invoked for six new
+     definitions. **A tool defect**: `tools/fs131_l10b_kernelsig.py` reports the fields of a `Prop`-valued structure
+     as NOT-FOUND and exits 1 on a module that has one (wave 7's planner's copy has the fix: one tool at the tidy).
+     **Credit**: an invariant stated against the unbent restriction, so the induction carries no homeomorphism and
+     no per-piece bookkeeping; the planner's own decomposition made a kernel fact before any implementer starts;
+     the brief's wrong sentence about an assumption caught and corrected. **Rulings — each held under item 607's
+     stop on launches, not cancelled.** (a) **One implementer for what is left of `bendAny`** (FS131-I9A:
+     `RingPieces`' seven leaves, `RingBend`'s one, M5), **whose first act is the join with wave 8** — the merge of
+     `main`, the prepared edit, `ARCHITECTURE.md`'s row, a build, the doubled-name check. Alternative: two jobs side
+     by side, or the join at the wave's landing. Why: 1,125 lines is one job, and a join made early is checked by
+     every build after it. Confidence: high. Brief not written. (b) **Leaf D's name and `GammaFreeEmptyNS` are
+     removed at that join**, as it decided; `qfreeNS` and `qfcase` lose the binder `hE` — ratified. (c) **A question
+     for the join with wave 6, to the deriver's brief** (FS131-E9, unlaunched: regenerated before launch): is REG-J′₅
+     in FS129-OR1-TOP5 a standing universal hypothesis or a property of the produced colouring? Wave 6's
+     `reduce_i_of_arcInterfaces` reads the second, and "honest" is absent from its predicate. (d) The landing's
+     assumptions list is its § 9.2 (nine rows, `ReduceToMap` the one a gate cannot find by itself). **`Row130Collapse`
+     is among them — the statement the outside release of item 607 claims to prove**: nothing is done with that
+     until Kooshi says (ruling 607 (c)). (e) **Slot → EXT-OAI2** (the manuscript's reading, `ephodos`), by the
+     standing conditional: launched 2026-10-07 about 02:05 UTC. In flight: 2 of the milestone (L8A, I9B) and 2 of
+     the analysis (EXT-OAI1 in the special slot, EXT-OAI2).
+
+611. **EXT-OAI2, first message: the dictionary — the outside manuscript's "weak measurable colouring" is exactly this project's `χ_m⁰` object, its transfer theorem is `χ(ℝ²) = χ_m⁰(ℝ²)` with no hypothesis, and it does not do without measure rigidity: it proves one of its own** (source: EXT-OAI2's message to "main", 2026-10-07; record `plans/EXT-OAI2-reading.md` stage 1, commit `6c2d2134` on `main`; a reading, one mind, of definitions and statements — the proofs unread at this stage).
+     **Its dictionary.** (1) Their Definition 1.2 is the object of row 130's `χ_m⁰` (Lebesgue measurable,
+     monochromatic unit pairs null for Lebesgue × arc length): the same set of functions, not Falconer's `χ_m`.
+     (2) Their Theorem 1.3 is `χ(ℝ²) = χ_m⁰(ℝ²)`, both directions, every `k`; the ⟸ half is this project's
+     unconditional one (FS103-M-EASY); **the ⟹ half is the one held here only given MR** (row 130 through row
+     128). (3) Their Theorem 1.4 is `χ_m⁰(ℝ²) ≥ 6` — the YES of the third-ranked stub
+     (`plans/STUB-cp-plane-six.md`); with it Falconer's `χ_m(ℝ²) ≥ 6`, the Borel number, and by row 131
+     `lim µ₅(ε) < 1`. (4) **The transfer rests on a rigidity theorem of the manuscript's own**: "every `K`-invariant
+     probability on `D` assigning zero mass to `C` is Haar probability", for the algebraic plane `ℚ̄ = ℝ_alg(i)`
+     with all algebraic rotations — this project's measure-rigidity statement at the one field its version does not
+     cover (not a number field); a neighbour of row 120, neither implying the other as stated; its announced proof
+     is by the Furstenberg–Zimmer compact-extension method and a radial positive-definite function, with no
+     Einsiedler–Lindenstrauss. **Its registered expectations** (nine, in its § 1.4, before the proofs): among them,
+     that the five-specific step is the last section's case analysis over cycles of length 3, 4, 5, and that their
+     "cyclic centers form a closed locally finite set" is, at five, what this project holds open at six as the map
+     step. **An item it handed me to match**: the manuscript's footnote to its main theorem cites a "Outside2026".
+     **Matched by me**: its `references.bib` entry is this project's `[Outside2026]` — the same author, title and
+     repository as the claim EXT-HN1 and EXT-HN2 audited — and the footnote says of it what those audits found:
+     "The displayed formal theorem assumes that density bound as a hypothesis, so the argument does not establish
+     the announced equality", with its own counterexample to the bound (the half-open arc of angular measure
+     `π/3`). **Read by me**: the footnote (`introduction.tex` ll. 70–78), the bibliography entry (l. 352), the
+     rigidity sentence (ll. 174–175); its commit on `main`. Not checked by me: the dictionary's four identifications.
+     **Told to Kooshi at once.** **A note for the frontier, mine and unread**: this project's bridge (row 107) names
+     `ℝ_alg` as real closed and a named hypothesis; their rigidity is stated at `ℝ_alg(i)` — the reading's second
+     message says whether the two meet.
+
+612. **A MACHINE INCIDENT, over: an unslotted process of the outside audit exhausted the RAM twice in two and a half minutes; the kernel killed only that process** (source: EXT-OAI1's message to "main", sent by it at once, 2026-10-07 about 02:03 UTC; the kernel's log read by me).
+     **What happened, its account**: to read the usage of `leanchecker` (the kernel-replay tool in the release's
+     toolchain) it ran the binary with a help flag, outside a slot; the binary takes no such flag and, with no module
+     named, replays every module on its search path on 36 threads. Three runs between 02:00:15 and 02:02:50 UTC: two
+     killed by the kernel at about 119 GB resident, the third killed by it by PID at 95 GB. The first kill was hidden
+     from it by a pipe into `head`. **Read by me** (`journalctl -k`): exactly two `Out of memory: Killed process …
+     (leanchecker)` lines, at 02:00:46 and 02:02:09 UTC, pids 790279 and 793251, both
+     `global_oom`; no other kill; **no `ext4`, I/O, oops or segfault line in the twenty minutes around it**; at
+     02:04 UTC 119 GiB available, the slot ledger holding three slots within budget, no `leanchecker` process.
+     **The other jobs in the window**: wave 8's landing's build that started 02:00:53 UTC ends "Build completed
+     successfully (2491 jobs)"; wave 9's implementer's of 02:04:14 the same — both read by me. **The rule**
+     (`RUNNING.md` § Building: "On any unexplained process crash … HALT and report to Kooshi immediately"): the crash
+     is explained by the kernel's own lines and its cause is removed, so no halt; **reported to Kooshi at once.**
+     **Slips.** *The job's, disclosed by it*: a process run outside the slot on the guess that a flag was inert; an
+     exit status read through a pipe (standing rule 9); a second run before the first was understood. *Mine*: its
+     brief said every build and long process runs under the slot, and did not say that a first look at an unknown
+     binary is one. **A finding about the tool, the job's, for this project's own publication gate**: `leanchecker`
+     at toolchain v4.34.1 with no module argument is a whole-search-path replay, unbounded in threads and memory,
+     and an unknown flag does not stop it. **Rulings.** (a) **The audit continues**, everything under the slot; a
+     capped replay of the solution module is tried on a small module first, and "not run here, and why" is an
+     accepted line if it does not fit in about 40 GiB. Alternative: halt the audit. Why not: the cause is known and
+     removed, and the audit's third answer is what the standing conditional waits on. Confidence: high. (b) **The
+     landing and the implementer are told** (one message each): steps that overlapped the window are named in
+     their records with exit and last log line, anything not clean re-run, and the landing's evidence taken from a
+     pass begun after 02:03 UTC. (c) **A line for `RUNNING.md` § Building, filed now** (below): an unknown binary
+     is never probed outside a slot.
+
+613. **EXT-OAI2, second message: the outside manuscript's transfer is read in full — no gap found, one mind, one pass; it proves measure rigidity at the real algebraic numbers by a route that uses no entropy and no Einsiedler–Lindenstrauss, and it does not give this project's rigidity at a number field** (source: EXT-OAI2's message to "main", 2026-10-07; record `plans/EXT-OAI2-reading.md` stage 2, commit `183010ff` on `main`; their §§ 2–4, 1,557 lines).
+     **Its account.** *The route*: the forward direction is row 128's load-bearing step run at `F = ℝ_alg`, in nine
+     steps — restrict to the countable algebraic plane; average over its rigid motions (amenable); split `L²` at the
+     continuous characters, which is conditional expectation onto a factor; the remainder's spectral measure is
+     invariant under the algebraic rotations and null on the continuous characters, so Haar by their Theorem 2.3, so
+     uncorrelated at every nonzero algebraic translation; extend to all unit vectors by density; a measurable
+     version; least index. No stable place exists at `ℝ_alg`, so this project's selection over places has nothing to
+     do. *Their Theorem 2.3* ("Rigidity of wild character laws") in five moves: a zero invariant-mean average along
+     lines; a Furstenberg–Zimmer compact tower; "relative singularity" by a transfinite induction; relative weak
+     mixing along `u ↦ uⁿ` giving a functional inequality for a radial positive-definite function; a number-field
+     pigeonhole. **Answers to the brief.** (i) Nothing replaces measure rigidity: it is proved, at the one field row
+     120 does not cover, using **two properties no number field has** (the rotation group divisible; the field
+     closed under square roots of positives) — so **row 120 keeps its grade, and rows 121, 123, the field half of
+     128 and the field form of 129 stay "given MR"**. (ii) **What it removes, if it stands: "given MR" from
+     `χ(ℝ²) = χ_m⁰(ℝ²)`** (row 130; the aim's links 1 and 5) — "the number-field detour was unnecessary for the
+     plane's own equality". (iii) Choice is discharged at the restriction to a countable set, used once inside
+     Theorem 2.3 (an invariant mean) and in the reverse direction at de Bruijn–Erdős. (iv) Their easy direction is
+     not this project's: density points, a translate, de Bruijn–Erdős — no rotation. (v) Special to the plane (an
+     abelian norm-one group; fails as written in dimension three and up) and to algebraic coordinates; not to the
+     unit distance, not to finitely many colours. **Two items it sent ahead of its report.** (1) **A generalization,
+     its own sketch, one mind, one step unchecked** (its § 2.6): their Theorem 2.3 run for one class gives
+     `α₁(ℝ²) = m₁(ℝ²)` and `χ_{f,0}(ℝ²) = χ_f(ℝ²)` with no hypothesis — row 129's "given MR" clause,
+     `[DuczVarga2026]` Conjecture 1's first clause, `[Johnson1996fcn]` Question 1; **the manuscript does not state
+     it**. (2) **A reading** (its § 2.3): if the forward direction holds in ZF + DC (plausible, unchecked), the
+     Shelah–Soifer axiom-dependence question for the plane is exactly this project's null-set step `χ_m⁰ = χ_m`.
+     **Lean, by name and text**: Theorem 2.3 is `PlaneFiveColor.Spectral.wild_fourier`
+     (`lean/OAI/Analysis/PlaneSpectrum/Ergodicity.lean` l. 335), the forward direction `proper_to_borel_weak`.
+     **Read by me**: the theorem's statement in `spectral.tex` ll. 64–70 and the Lean lemma's head at l. 335
+     (`(hw : IsWild μ) (z : E) (hz : z ≠ 0) : ∫ d, (eval z d : ℂ) ∂μ = 0`); its commit on `main`. Not checked by me:
+     any step of the reading. **Grade, as it gives it**: read in full, no gap found, one mind, one pass — not
+     "verified"; the kernel's word on the same statements is EXT-OAI1's third message. **Rulings.** (a) **Told to
+     Kooshi at once.** (b) **Item (1) is a result of this project's if its one step closes** — a consequence the
+     manuscript does not draw, answering a conjecture clause the literature poses: a deriver's short job on that
+     one step (stationary mean to upper density), **after** the audit's third message, and at Kooshi's word given
+     ruling 607 (c) (it builds on the outside theorem). Not launched. (c) Its table of what changes in this
+     repository (its brief's item 5) is the input for the front page's drafts; nothing is filed.
+
+614. **EXT-OAI1, third message: THE OUTSIDE PROOF BUILDS HERE, ITS HEADLINE RESTS ON THE STANDARD THREE AXIOMS, AND ITS STORED STATEMENT IS THE CHALLENGE'S — `χ(ℝ²) ≥ 6` is a kernel-checked theorem on this machine at the release's toolchain, and so is the transfer `χ_m⁰(ℝ²) ≤ χ(ℝ²)` for every number of colours** (source: EXT-OAI1's message to "main", 2026-10-07 about 02:25 UTC; record `plans/EXT-OAI1-audit.md` stage 4, commit `e56ea847` on `main`; everything cited under `data/external/oai1/`).
+     **Its account.** *The build*: Lean 4.34.1, Mathlib at the tag v4.34.1 from Mathlib's own cache, a lakefile reduced
+     to the Mathlib requirement; the cone's 70 modules (30,336 lines, byte-identical to the release's, 70 of 70)
+     compiled from source under a 10 GiB slot in 778 s, every batch exit 0, no warning. *The axioms*:
+     `no_proper_five_coloring`, `proper_to_borel_weak` (the transfer, every `k`),
+     `no_measurable_weak_five_coloring` and `PlaneFiveColor.Spectral.wild_fourier` (their rigidity theorem) each on
+     `[propext, Classical.choice, Quot.sound]`. *The control*: one line of a lemma two modules below the headline
+     replaced by `sorry` in a second tree — the headline and the transfer then print `sorryAx`, the untouched half
+     stays clean, the set check fails with exit 1. *The statement*: the stored type and value of `ProperColoring`
+     and the stored type of the theorem, from the challenge's environment and from the solution's, in a canonical
+     form, are byte-identical; a challenge with `Measurable coloring →` inserted prints differently; the norm is
+     Mathlib's on `ℂ`, the `1` real, the colours `Fin 5`. *Restatements closed by their theorem, on the standard
+     three*: a form with no `ℂ`, no norm and no square root (`∀ c : ℝ × ℝ → Fin 5, ∃ p q, (p.1 - q.1)^2 + (p.2 -
+     q.2)^2 = 1 ∧ c p = c q`); the form on `EuclideanSpace ℝ (Fin 2)`; `6 ≤ (unitDistance …).chromaticNumber` with
+     this repository's `unitDistance` copied in; and, at this repository's own pin with their unfolded statement as
+     a hypothesis and nothing added to `Proofs/`, `6 ≤ χ ∧ χ ≤ 7` by row 33's upper end, and the converse.
+     **What it does not cover, in its words**: Mathlib's compiled declarations were loaded from Mathlib's cache, not
+     re-checked here; the release's full configuration was not resolved (the cone needs none of it); the release's
+     comparator has not been run (it needs three outside programs downloaded — held for me); no independent kernel
+     replay yet. **My receipt.** Its commit is on `main`; its saved prints read by me: `audit/Axioms.out` (the four
+     lines and three AXIOM-SET PASS), `control-sorry.out` (`sorryAx` at the headline and the transfer, "AXIOM-SET
+     FAIL", exit 1), the three dumps' heads, `build-cone.log`'s last line (`modules=70 total=778s exit=0`),
+     `audit/LeanDirBridge.out` and `audit/Statement.out`. **And one step by my own hand**
+     (`data/external/oai1/keryx/KeryxCheck.lean`, `keryx-check.out`; under a 10 GiB slot in its working copy):
+     `#print axioms OAI.EuclideanFiveColor.no_proper_five_coloring` prints the standard three; **my own wording of
+     the claim — `¬ ∃ c : ℂ → Fin 5, ∀ x y : ℂ, ‖x - y‖ = 1 → c x ≠ c y` — is closed by their theorem with no
+     error; the same line with distance 2 fails with a type mismatch, as a control must.** Not checked by me: the
+     build itself (I read its log); the byte-identity of the 70 modules; the canonical dumps beyond their first
+     lines; the bridge's statements. **The grade, in this project's words**: [kernel] at Lean 4.34.1 on this
+     machine, for a statement read aloud by two (the auditor and me) against the informal claim; outside this
+     repository's library and pin; Mathlib's own oleans trusted as distributed; no second kernel. **Rulings.**
+     (a) **Kooshi notified by push at once.** (b) **The comparator stays held for Kooshi**: three outside programs
+     run on his machine, one a third-party sandbox — an install is his decision; the audit names which of its
+     checks were made by hand. Alternative: let the job fetch and run them. Why not: installs are the principal's.
+     Confidence: high. (c) **Ruling 607 (c) stands until he speaks**: nothing is cited, imported or built on. What
+     is now his to decide is listed to him: how the result enters this repository (cited; imported as a declared
+     outside theorem; ported to this pin), what the front page says, the possible consequence of item 613 (1), the
+     asker's re-rank, and when the backlog's launches resume. (d) The capped replay and the proof's shape are the
+     audit's remaining stages.
+
+615. **KOOSHI'S WORD ON THE OUTSIDE RELEASE, 2026-10-07 (verbatim; also in `data/external/EXT-OAI1-request.md`, second word): "You may use their proof as any other literature. Cite it, build on it, let's use it to slingshot us past anyone else working on this problem."**
+     **What it settles**: ruling 607 (c) is lifted — the release is literature of this project: cited at its read
+     status, importable in Lean as a declared outside theorem with the four items of `LEAN.md` § Assumptions, and a
+     result that milestones open on. **What it does not answer**, of the five questions put to him: the release's
+     own checking tool (three outside programs) — stays held; when the backlog's launches resume — follows the
+     asker's re-rank. **Rulings, mine, each in four parts.** (a) **In Lean the result enters first as declared
+     outside theorems — the five-colour theorem and the transfer for every `k` — and a port is priced beside it,
+     not skipped.** Alternative: port first (their 70 modules at this pin, or this pin moved to theirs — their
+     Mathlib revision is the official tag for Lean 4.34.1). Why import first: it is what "as any other literature"
+     means, it is hours, and every statement that would cite it can be written today; why price the port: Kooshi's
+     stated preference is the standard three axioms where that is about a week of agent work (`CLAUDE.md`
+     § Publication), and the proof already exists in Lean under a licence that permits it. Confidence:
+     medium-high; the audit's estimate of the distance between the two pins decides which is done at publication.
+     (b) **The front page changes at a filing after wave 8's landing is back, from lanes' drafts**: the interval
+     becomes `6 ≤ χ(ℝ²) ≤ 7` (row 33, its lower end by `[OAIMath2026]`); "given MR" leaves `χ(ℝ²) = χ_m⁰(ℝ²)` (row
+     130; the aim's links 1 and 5); FS-104's question is answered; rows 120, 121, 123, the field half of 128 and
+     the field form of 129 keep "given MR" (item 613). Drafts: the audit's (its item 7, re-asked) and the reading's
+     (its item 5). No `CLAUDE.md` edit while a landing is in flight. (c) **The asker's lane is next**: FS-132 (a
+     number fixed now) is the milestone that opens on the release — Poros re-ranks the frontier and poses its
+     question from the audit's stage 6 and the reading's record; brief being written; into the first freed slot.
+     (d) **The one-class consequence of item 613 (1)** (`α₁(ℝ²) = m₁(ℝ²)`, and the fractional form, with no
+     hypothesis) is a deriver's job on its one unchecked step, from the reading's § 2.6 — a result of this
+     project's if it closes; briefed after the asker's (it may be FS-132's first claim: the asker says). (e) **The
+     sweep of the release's other 371 families** (EXT-OAI3) for what else is usable — the Falconer distance
+     conjecture, the unit-distance power saving, the Euclidean Ramsey classification among them — follows; its
+     generator's first tier is rewritten from "is there a hit" to "what can be built on". (f) **The backlog's
+     queue stays held until the asker's re-rank says what of it still bears**; its two running jobs finish, wave 8
+     lands if green. Alternative: resume now, in the slots the analysis does not use. Why not: a third of the
+     backlog's rows carry "given MR" or pose questions the release answers, and an hour of re-ranking is cheaper
+     than a wave formalized at the wrong grade. Confidence: medium; Kooshi may overrule in a word. (g) Both
+     analysis agents told by message. (h) A memory entry written (the release's place and his word), so a later
+     session does not re-ask.
+
+616. **EXT-OAI1, fourth message: the outside proof's shape, from its Lean — two arms and a three-line headline; the five-colour arm assumes only a measurable weak colouring and builds every structured object from it by measure; a covering obstruction on a disc closes it** (source: EXT-OAI1's message to "main", 2026-10-07; record `plans/EXT-OAI1-audit.md` stage 6, commit `8fc4ab79` on `main`; `data/external/oai1/docindex-five.txt` (232 documented declarations), `module-graph-five.txt`. Statements and definitions read by it, and `Five.lean` whole; no proof below it line by line).
+     **The chain, its account.** The transfer arm is 33 modules and never mentions five; the colouring enters once,
+     restricted to the algebraic points (the converse of the manuscript's equivalence is not in the Lean library;
+     the headline does not need it). The obstruction arm, `no_measurable_weak_five_coloring`, is twelve lines from
+     three statements: (2a) `fullApprox_exists` — for every scale, a **continuous map of the closed disc of radius 5
+     into the realization of the complete graph on five vertices** (simplex points with at most two positive
+     coordinates), agreeing off finitely many small discs with the thresholded disc averages of the five classes;
+     (2b) a cover statement with no colouring in it — an open cover of a compact set holding that disc, with no
+     point in three members, has a member of diameter above 2; (2c) the mesh argument against it. **Under (2a)**:
+     a *transition graph* on the colours at each point, defined by a rate (`TransitionEdge`); its *cyclic core*,
+     **finite on compacts (`cyclicCore_compact_finite`)**; off the core the map lands in a forest and holes fill
+     because a tree is contractible; at a core point a crossing edge at every scale gives a *common interface*
+     (a continuum approaching the point in a direction, with both colours' supports missing its straddle set), and
+     **common interfaces form an acyclic graph** by three exclusions — no triangle (through the Moser spindle, by
+     an exact rational certificate), no four-cycle, no five-cycle; beneath, at every centre almost every radius
+     carries one or two colours (`palette_cardinality`). **No interface, map, perimeter or boundary regularity is
+     assumed anywhere: each is a conclusion.** Choice: an ultrafilter limit for the invariant mean; selections;
+     Mathlib's own. **What reads like this project's, listed by it and not judged**: the cyclic core's finiteness
+     as REG-J′'s local finiteness of the singular set (rows 140–141, 154) — proved there for measurable
+     five-colourings; the straddle exclusion as the band of `[Voronov2023]` and `[SokolovVoronov2025]` (row 132),
+     stated for every `k`; the rate-defined transition as the aim's item 6; the palettes as the circle colourings
+     of rows 145–148; the approximants' discs as row 131's vanishing holes, in a map's domain. **Where five is
+     used, its reading, one mind, unchecked**: the cover's order — at six colours a point may need three positive
+     coordinates, a 2-complex, where the disc is no obstruction; nothing in the cone states a six-colour analogue.
+     **Statements that hold for every `k`** (so survive as theorems about things that exist): the transfer, the
+     rigidity theorem, the straddle exclusion, the binary rigidity lemmas, the cover obstruction, the tree and
+     disc-extension lemmas. **Read by me**: its commit on `main`; nothing of stage 6 beyond the message. **Left for
+     it**: the per-module kernel replay under a 16 GiB slot (15 of 70 at its message, 6.3 GB peak), the drafts
+     (re-asked as filings by ruling 615 (b)), the report. **This item and the reading's third message are the
+     asker's input** (ruling 615 (c)).
+
+617. **KOOSHI'S THIRD WORD, 2026-10-07 (verbatim; `data/external/EXT-OAI1-request.md`, third word, with the five questions it answers): "1. port or import: let's import and adopt parts piecemeal if needed. 2. indeed 3. definitely build on it... write the stub 4. not sure, probably allow, but audit what it does 5. pause the backlog, lets come to a stopping point, collect ourselves and have poros rerank. — Oh look, you've already laid out basically the same plan. Carry on then. Make sure your handoff carries the new plan."**
+     **What each sets, against rulings 615 (a)–(f)**: (1) import, with parts of the release's Lean adopted piece by
+     piece where a job needs one — ruling 615 (a) confirmed, and its "a port is priced beside it" narrowed to
+     "which pieces are the natural first to adopt"; (2) the front page's two sentences, as ruling 615 (b) has them;
+     (3) the one-class consequence is built on and gets a stub — **FS-133**, minted by the asking lane; (4) **the
+     release's comparator is allowed after an audit of what its three programs do, and not before**: asked of
+     EXT-OAI1 by message (source, publisher, what each reads, writes and executes, its network access and
+     privileges, a user-local build), which messages me and waits for my word before running any; I tell Kooshi
+     what the audit says before the first run; (5) **the backlog is paused**: FS-131 launches nothing new, its two
+     running jobs finish, wave 8 lands if its gate is green, and the asking lane's re-rank says which waves resume,
+     which are retired or re-aimed, and which wait — ruling 615 (f) confirmed and made his. **Done at his word**:
+     the asking lane's brief rewritten for his answers while unlaunched (`mk-fs132-p1.py`; gate exit 0, 18
+     quotations): FS-133's stub is its item 4, the backlog's restart table its item 5; **a new handoff,
+     `plans/SESSION-HANDOFF-2026-10-07.md`, carries the plan** — his five answers in a table with what each sets in
+     motion and its state, a six-line stopping point, the four running jobs with what to do at each hand-back, the
+     new work's queue in order, and the paused backlog's ready briefs; the 2026-10-06 handoff is superseded but for
+     its §§ 2–8 on the backlog. **Numbers fixed**: FS-132, the milestone that opens on the release, aimed at six
+     against seven; FS-133, the one-class consequence. Their inventories open with their opening jobs; this
+     inventory's items 607–617 are their prehistory.
+
+618. **EXT-OAI2, third message: the outside manuscript's obstruction at five is read in full — no gap found, one mind; it goes around the map step and proves no regularity; five is one count spent in three five-only statements; two of them are false at seven, so at six they can hold only on a normal form — and that normal form is this project's** (source: EXT-OAI2's message to "main", 2026-10-07; record `plans/EXT-OAI2-reading.md` stages 3–4, commits `2f18d416`, `422dec3e`, `1076316a` on `main`; their §§ 5–8, 2,747 lines).
+     **The route, its account, in four acts.** (1) *The ring in measure*: a palette at a centre is the set of labels
+     with positive weight in limits of circle samples; points at distance 1 exclude each other's palettes, so
+     palettes 60° apart are disjoint (this project's ring twist, in measure); palettes have at most two labels.
+     (2) The graph of label pairs whose transition area at displacement `h` is of order `|h|`; the centres where it
+     has a cycle are closed and locally finite. (3) Thresholded disc averages are a continuous map into the complete
+     graph on the labels off small discs; Lebesgue's covering theorem forces an essential loop round one cyclic
+     centre; fibres' Hausdorff limits are continua through a point with both labels excluded from their straddle
+     sets (Sokolov–Voronov's exclusion, for continua). (4) With five labels the loop's cycle has length 3, 4 or 5,
+     leaving 2, 1 or 0 labels outside, and each is killed locally; the triangle by six alternating 60° sectors and a
+     Moser spindle (their certificate re-checked by it, with a control). **The map step**: not made — a map of the
+     plane is replaced by a map *to* the nerve, interfaces by connected fibres; row 140 had said the map step at
+     five is equivalent to `χ_m⁰(ℝ²) ≥ 6`, and they reach that without it. **Five against every `k`** (its § 4.2,
+     eighteen steps, Lean types read by text): **five-only are the palette bound, the cyclic core's finiteness, and
+     the angular kills** (`palette_cardinality`, `cyclicCore_compact_finite`, `commonInterface_graph_acyclic`, each
+     at `Fin 5`); everything else is stated for every `k`, and two lemmas carry the count as a hypothesis ("a ring
+     is rigid when it is left two labels" — G91's sentence). **It corrects the audit's one-mind reading (item
+     616)**: the cover of order two is not where five enters — that theorem has no colour in it; five enters in what
+     makes a graph-valued map exist. **What six needs, against rows 131–154** (its § 4.3): [P₆] palettes of at most
+     two labels at six — their method gives three; no row of this project's speaks of it; [L₆] cyclic centres
+     locally finite at six — not held; REG-J′ would give it on saturated colourings and is open, and **is
+     superseded as a target: the extraction needs only [L₆], not arcs, not integer radii, not the curved-pencil
+     question (FS-126)**; act 3 then runs as written and yields a cycle of length 3 to 6; [G₆] a cycle of length at
+     least 4 somewhere — supplied in the map class by row 137; [A₆] the kills — their triangle is this project's
+     four-colour vertex and their four-cycle's diagonal states its (Q) arcs: supplied in the non-Siamese class for
+     the (Q)-free ring (rows 148–149), open for (Q) rings (FS-124) and the Siamese class (FS-123); the five-colour
+     vertex not supplied; **the six-colour vertex's analogue at the same locality is contradicted by row 148's
+     fragment on discs of radius below 3/2**. No row of this project's is contradicted by anything they prove.
+     **A calibration, its own, by formula, one mind**: the palette bound and the local finiteness are false at
+     seven (slack in the hexagonal colouring lets one plant accumulating islands, or stripes of three colours along
+     a circle), so they are tightness statements; at six they can hold only for a colouring with no slack — rows
+     140 and 143's maximal covers and honest saturated colourings. **"Their act 3 can consume our normal form
+     without our arcs. The first statement nobody holds is [P₆] on saturated six-colourings."** **Prior art,
+     plainly, its words**: the equality `χ(ℝ²) = χ_m⁰(ℝ²)` that rows 128 and 130 list as not found in print is in
+     the release outright (manuscript dated 2026-09-23; this project's FS-103 is 2026-09-26), with the skeleton of
+     row 128's step at `ℝ_alg`; row 120's number-field statements are untouched. **Three things the manuscript does
+     not draw**: (i) its forward transfer uses the colouring only on the algebraic plane, so `χ(ℝ²) = χ(ℚ̄²)` and
+     the supremum over number fields follow with no Tarski — an alternative discharge of the named hypothesis
+     `RealAlgebraicDescent` for its chromatic-number consumers — and "some real number field's plane needs six" is
+     a corollary; (ii) a placement question for the Searcher (queued, `plans/SEARCH-QUEUE.md` line 9): a region
+     about a (Q)-free four-colour vertex is four-coloured with no Siamese or simplicity hypothesis, so a
+     5-chromatic unit-distance graph fitting in it kills FS-123's Siamese case at radius 2; (iii) item 613 (1).
+     **Lean against manuscript**: the converse of their transfer is not in their Lean (it is at the manuscript's
+     grade, and at this project's). **Read by me**: its three commits on `main`; in the clone, `palette_cardinality`
+     (`BinaryPalettes.lean` l. 260), `cyclicCore_compact_finite` (`CyclicCore.lean` l. 269) and
+     `commonInterface_graph_acyclic` (`ContinuumLimits.lean` l. 296) are each stated at `Fin 5`, and
+     `States.lean` l. 244 carries `(Finset.univ \ (J ∪ K)).card ≤ 2` as a hypothesis at a general `k` — as it says.
+     Not checked by me: any step of the reading; its calibration at seven; the eighteen-step table. **Grade**:
+     read in full, no gap found, one mind — with the kernel's acceptance of the corresponding Lean (item 614).
+     **Rulings.** (a) **Told to Kooshi at once.** (b) **This is the asking lane's input, whole**: its brief is
+     rewritten to name stages 3 and 4 as saved (unlaunched: regenerated, gate exit 0). (c) **The prior-art line is
+     owed to `LEDGER.md` § The claim list and rows 128, 130 at the front page's filing**: independent, and theirs
+     is dated three days earlier — said as that. (d) Item (i) is a second candidate consequence for the asking
+     lane to rank beside FS-133; item (ii) waits in the search queue for the re-rank.
+
+619. **EXT-OAI1 done: the outside release's Lean proof that the plane is not five-colourable stands under everything a build can show — built, axioms printed with a control, the statement equal by signature, and replayed module by module; the import is drafted as a skeleton at this repository's pin** (auditor, `debruijn`; harness 471k and 46 minutes by the task notice; record `plans/EXT-OAI1-audit.md` stages 1–8; report `data/external/reports/EXT-OAI1.md`; eight commits on `main`, the last `2015ff98`; working copy `~/.cache/ext-oai1/`, about 11 GB, kept).
+     **New since item 616.** *The kernel replay*: 70 of 70 modules of the cone through `leanchecker`, one named
+     module at a time under a 16 GiB slot. *The pieces that hold for every `k`*, each with the count of release
+     declarations it rests on (measured): the cover obstruction 17, the tree and disc-extension lemmas 52–61, the
+     straddle exclusion 61, binary rigidity 57, the transfer 1,997; the headline 3,520 across all 70 modules.
+     *The import, drafted* (`data/external/oai1/audit/ImportSkeleton.lean`, 104 lines; it elaborates at this
+     repository's pin): namespace `HadwigerNelson.Outside.OAI158`, the release's two definitions copied, **two
+     axioms in the release's own form** — `no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c`
+     (their `Five.lean` l. 124) and `proper_to_borel_weak {k} [NeZero k] {c : ℂ → Fin k} (hc : ProperColoring k c)
+     : ∃ d : ℂ → Fin k, Measurable d ∧ WeakColoring k d` (their `BorelTransfer.lean` ll. 436–437) — and the bridges
+     proved over them: `six_le_chromaticNumber_plane`, `chromaticNumber_plane_six_or_seven`,
+     `chiM0_le_chromaticNumber_plane`, `chromaticNumber_plane_eq_chiM0`, `six_le_chiM0`; **one `sorry` leaf**,
+     `nonempty_aeColouring_of_weak` (their weak colouring gives this library's `AeColouring`; 60–120 lines by its
+     estimate); the rigidity theorem is not proposed as a third axiom (no consumer here). The sentences for rows 33
+     and 130 and the bibliography row's cells are drafted in its stage 8. *The distance between the pins*: 1,502
+     Mathlib commits, 6,296 files changed under `Mathlib/` — it proposes a backport probe on the smallest pieces
+     before any larger one. **Checked by nobody here, in its words**: Mathlib's own declarations (loaded from
+     Mathlib's cache); the release's comparator and a second kernel; the release's full 42-package configuration
+     (the cone needs only Mathlib; Lake resolved the same nine revisions); the proofs below the headline as
+     mathematics a person has read. **My receipt**: its report and eight commits are on `main`;
+     `replay-cone.log` ends "REPLAY DONE modules=70 ok=70 failed=0", its driver `exit=0`; the skeleton holds the
+     two `axiom` lines it quotes, five bridge theorems and one `sorry`, and its print shows each bridge on the
+     standard three and exactly the axiom it uses; no process of its is running and the slot ledger is clear of
+     it; item 614's check by my own hand stands. Not checked by me: the replay itself; the skeleton's elaboration;
+     the pieces' counts; that nothing was written into `~/source/math` (its statement). **Predictions**: none
+     registered by it. **Slips, the job's, disclosed**: the memory incident of item 612; a scratch file re-run
+     clean before its output was recorded. **Credit**: the order it kept — statement, cone, build, axioms, control,
+     signature — so that each message decided something; a restatement with no complex numbers and no square root
+     for a sceptic; the incident reported at once with the kernel's own lines; "checked by nobody here" written as
+     a list. **Rulings.** (a) **The import is an implementer's job from its skeleton** (queue item 2 of the new
+     handoff): it imports `Plane.YesLimit` and drops the easy-half binder, proves the one leaf, declares the two
+     outside theorems to the audit and to the assumptions step with their four items, and lands through the gate
+     after wave 8 — the library's outside axioms go from one to three. Alternative: one axiom (the transfer) with
+     the five-colour theorem left as a citation. Why two: each is a theorem a later statement will cite by itself,
+     and the release's Lean proves both. Confidence: high. (b) **The comparator's audit is a short job of its own**
+     (the release's instructions pin no commit for any of the three programs; nothing was downloaded); brief not
+     written; nothing runs before its report reaches me and Kooshi has heard it. (c) **A re-check of Mathlib's own
+     declarations is not run now**: about 8,900 modules at 6 s and 6.3 GB each — a publication-gate item, with the
+     second kernel; noted for the publication's cost measurement. Alternative: run it overnight. Why not: Mathlib's
+     distributed cache is the trust base of every Lean project, and nothing this week turns on it. Confidence:
+     medium. (d) **A backport probe** (the cover obstruction and the tree lemmas at this pin) waits for a job that
+     needs a piece — Kooshi's "adopt parts piecemeal if needed". (e) **The special slot is closed**: three slots
+     from here. In flight: EXT-OAI2 (its report is committed; its hand-back not yet arrived), wave 8's landing,
+     wave 9's implementer.
+
+620. **EXT-OAI2 done: the outside manuscript is read in full against this project's theory — no gap found, one mind, one pass; its drafts for the front page are written to be filed; two calibration statements of its own at seven** (reader, `ephodos`; harness 579k and 34 minutes by the task notice — past the line; record `plans/EXT-OAI2-reading.md` stages 1–5, 116 KB; report `data/external/reports/EXT-OAI2.md`; seven commits on `main`, the last `477ce500`; its derive gate PASS, 0 failures, 2 warnings — prior art owed on its two entries).
+     **New since item 618** (its stage 5). **(1) Drafts to be filed** (its § 5.1): `CLAUDE.md` § The mission's row D,
+     § The aim's links 1, 3, 4, 5, 6, § Frontier's first paragraph and item 31, the theory paragraph, the
+     local–global paragraph, the ranked row 3; `LEDGER.md` rows 33, 107, 120, 125, 128–132, 140, 154 and the claim
+     list; three grokkings (G93–G95); instances for eight more. **(2) The grade the drafts carry** (its § 5.0): for
+     the release's four statements, "[external: `[OAIMath2026]` family 158; kernel-checked in the release's own
+     library at its pin, the cone built and audited here on the standard three axioms; its manuscript read in full,
+     no gap found, one mind]" — **not in this library's kernel: row 33's own statement is unchanged**; the easy
+     half `χ(ℝ²) ≤ χ_m⁰(ℝ²)` is not in their Lean and stays [hand]; a composition carries the weaker grade and
+     "given MR" wherever a number field's plane is named. **(3) Two entries of its own** (its § 5.6; [hand], one
+     mind): EXT-OAI2-SLACK7-L — a seven-colouring proper at every unit pair whose cyclic centres accumulate;
+     EXT-OAI2-SLACK7-P — one with a three-label palette on positive measure; a first form of the second
+     contradicted Lebesgue's density theorem and was corrected by it before use (commit `1076316a`).
+     **(4) Stubs it would re-aim and mint** (its § 5.4, drafts; "I write no stub"): FS-104 answered by citation;
+     FS-123, FS-124, FS-127 re-aimed; FS-126 not consumed by the nerve route; the five-colour halves of FS-128 and
+     FS-120 closed; five to mint — the one-class transfer, six by the nerve, the bridge without Tarski, the axiom
+     question, measure rigidity at number fields by compact extensions. **(5) Prior-art debts**: rows 128 and 130's
+     "not found in print" (the equality is in the release, dated three days before FS-103);
+     `[BourgeatHeinrichMelottiRobert2015]` against row 130's attribution of the averaging device; Crum 1956 and
+     Gneiting–Sasvári 1999 as the classical home of row 122's FR-1. **(6) Their bibliography**: 33 entries; 17 held
+     here (7 under another key); **16 not held**, rows proposed for § C, six worth holding with a URL and a target
+     name each. **(7) Its predictions**: five of nine met, two half, two lost; and this project's stub had "χ_CP(ℝ²)
+     ≥ 6 proved — 0.02", scored against. **My receipt**: its report and seven commits are on `main`; its gate's
+     saved output ends "GATE: PASS (0 failures, 2 warnings)" with two controls fired on their planted faults; its
+     independent check of the manuscript's seven-point certificate prints "CERTIFICATE HOLDS" and, by the gate's
+     line, "CERTIFICATE FAILS" under its fault; its stages' headings and §§ 5.0, 5.5 read by me; the Lean
+     statements it names were read by me at items 613 and 618. Not checked by me: any step of its reading; its two
+     constructions at seven; its drafts against the files they would replace. **Credit**: nine predictions
+     registered before the proofs and scored against itself; a wrong construction of its own caught and replaced
+     before anyone used it; the sentence nobody wanted written — the equality this project called its own is in
+     print, earlier and stronger — written plainly; and its last line, that its own most quotable reading "is one
+     mind's reading, not a derivation". **Rulings.** (a) **Its drafts are filed in one filing, by the Clerk as my
+     pen on a branch of its own, after wave 8's landing is back and the asking lane's re-rank is in** — so that
+     the Frontier's paragraphs and its ranking change together. Alternative: file the two sentences of Kooshi's
+     answer 2 now and the rest later. Why not: a landing is in flight (no `CLAUDE.md` edit), and a front page
+     filed twice in one day would carry a ranking that contradicts its own first paragraph for some hours.
+     Confidence: high. (b) **A grade word is added to `CLAUDE.md` § Notation at that filing**: **[kernel, outside]**
+     — kernel-checked in an outside library at its own pin, built and audited here; it enters this library as a
+     declared outside theorem. Alternative: its § 5.0's sentence each time. Why a word: the grade will recur (the
+     release holds 371 other families). Confidence: medium-high; Kooshi is told. (c) **The claim list and the
+     fallback write-up (FS-102) change with the publication position** — the plane equality and six for measurable
+     colourings are theirs; this project's on that ground are the number-field side, row 131's stability form and
+     the six-map programme: the claim list at the filing, from its draft; FS-102's fate is the asking lane's to
+     rank and Kooshi's to decide. (d) **The six papers worth holding go to Kooshi as fetch requests** (a URL and a
+     target file name each, from its § 5.5): nothing is fetched around a block. (e) **Slot → FS132-P1, the asking
+     lane** (`poros`; its brief regenerated to name this job's stage 5 and the audit's hand-back, gate exit 0, 21
+     quotations), launched 2026-10-07 about 02:45 UTC. In flight: 3 (the asking lane; wave 8's landing; wave 9's
+     implementer).
+
+621. **FS131-I9B done: wave 9's uniform bound is proved with nothing open beneath it, and the three models are built — "seven almost everywhere iff the hole bound stays positive uniformly in the complexity" is a theorem on its branch with no hypothesis** (implementer, Opus; harness 400k and 70 minutes by the task notice; record `fs131-w9b`'s `plans/FS131-I9B-implementation.md`; report `data/fs131/reports/FS131-I9B.md`; seven commits, tip `0fb15c61`; pushed, tree clean; not landed, the gate not run, by its brief).
+     **Proved on the standard three** (built, not gated): the three leaves of `Plane/Reduction/Uniform` — U1 (for a
+     measurable set invariant under a lattice, the complement's upper density is one minus the set's), U2 (every
+     grid colouring lies in some complexity class, `K = 2(N + 3)²`), U3 — and so **FS111-C1-UNIF with no leaf under
+     it**: `c1_unif`, `c1_unif_tendsto`, `lt_chiM0_iff_delta0_pos`, **`seven_le_chiM0_iff_delta0 : 7 ≤ chiM0 ↔ 0 <
+     ⨅ K, delta0 K 6`**, at every `k`. **Models M1–M3 built** in a new `Plane/Reduction/Models` (218 lines) on the
+     brick map at seven colours, each the theorem applied to an object meeting every hypothesis at once; and
+     general forms (`ArcMap.faceColouring_hyps`, `ArcMap.regularCover_hyps`: every valid arc map of the plane is a
+     model). **My receipt**: tip equals `origin/fs131-w9b`, tree clean; outside `data/`, `plans/`, `tools/` it
+     changed `Uniform` (267 lines), the new `Models`, and the three registry files; `sorry` in the four reduction
+     modules: 0; no `native_decide`; **by my script the nine heads `Uniform` had, and those of `Basic` (10) and
+     `Maps` (19), are textually unchanged**; its last build log ends "OK — 467 of 467 batches, 3 module(s) rebuilt,
+     2 module(s) with warnings" (the two are the other job's `Bend` and `QFree`), `EXIT=0`; its axioms log — 34
+     records CLEAN on exactly the standard three, `seven_le_chiM0_iff_delta0` among them, and two controls on
+     `sorryAx`; the guarded lint's log ends "Linting passed for Proofs.", `EXIT=0`. Not checked by me: the proofs
+     beyond the build; its statement tool's elaborated half; the models' adequacy. **Predictions scored**: the plan
+     priced U1–U3 at about 340 lines — about 225; the calibration's line gives 374k for 485 lines against 400k
+     measured. **Slips, the job's, disclosed**: a module written during a slot wait that the build walked (whole
+     before it started); the doubled-name check not run before one push (run before the next: clean); three checks
+     that overlapped the incident of item 612 — each exit 0, and repeated outside the window. **Corrections owed**
+     (its drafts): two deprecated Mathlib names in the plan's § 4.3; U2's bound. **Credit**: the theorem read back
+     against its row with what each half of the proof actually reads; the incident window handled by naming what
+     overlapped and repeating it; one row past its fence said plainly. **Rulings.** (a) Its rewrite of
+     `ARCHITECTURE.md`'s row for `Uniform` is kept (the row said "skeleton … three `sorry` leaves"). (b) Its three
+     docstring drafts for `Basic` and `Maps` (the "model is owed" sentences) are the wave's landing's. (c) **With
+     the import of item 619 (a), that theorem reads on the plane itself**: `7 ≤ χ(ℝ²)` iff the hole bound stays
+     positive uniformly — a bridge of two lines for whoever joins wave 9 with the import; noted for the asking
+     lane (its record is open to it) and for the front page's drafts; nothing filed. (d) **Slot → FS132-I1, the
+     import** (`debruijn-implementer`, `model: "opus"`; brief `data/fs132/briefs/FS132-I1-import.md`, generator
+     `mk-fs132-i1.py`, gate exit 0, 24 quotations; tree `fs132-wi1` from `main` at `8386c256`, build copied from
+     the gate step's idle tree, pushed): the two axioms in the release's own form with the four items, the one
+     leaf, the bridges, the registrations and the landing's drafts; it does not land. Launched 2026-10-07 about
+     03:00 UTC. In flight: 3 (the asking lane; wave 8's landing; the import). **The backlog now has one job
+     running, the landing.**

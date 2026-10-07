@@ -1,0 +1,3 @@
+slot: admitted ext-oai1-readback: mem 10 GiB (hard cap), cpus 6,7,8,9
+'HadwigerNelson.Outside.OAI158.no_proper_five_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.proper_to_borel_weak' depends on axioms: [propext, Classical.choice, Quot.sound]

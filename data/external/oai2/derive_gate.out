@@ -1,0 +1,15 @@
+entry lint
+  claim EXT-OAI2-SLACK7-L: minds 1
+  warn  EXT-OAI2-reading.md:1043 (EXT-OAI2-SLACK7-L): prior art owed — novelty unmeasured; a standing finding
+  claim EXT-OAI2-SLACK7-L: prior art owed
+  claim EXT-OAI2-SLACK7-P: minds 1
+  warn  EXT-OAI2-reading.md:1055 (EXT-OAI2-SLACK7-P): prior art owed — novelty unmeasured; a standing finding
+  claim EXT-OAI2-SLACK7-P: prior art owed
+  entries: 2  derived: 2  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    slack7-margins: printed 'True True'; with the fault planted ('0.03' → '0.05'; '0.03' → '0.05') it printed 'False True' — it fires
+  ok    seven-point-certificate: printed 'CERTIFICATE HOLDS'; with the fault planted ('' → '--fault') it printed 'CERTIFICATE FAILS' — it fires
+  controls: 2  fired on their faults: 2
+GATE: PASS (0 failures, 2 warnings)

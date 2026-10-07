@@ -1,0 +1,16 @@
+EXT-OAI1 incident record: kernel and user-journal lines, 2026-10-07 02:00–02:03 UTC (= 2026-10-07 02:00–02:03 UTC), collected 2026-10-07T02:04:17Z
+--- journalctl -k: oom
+Oct 07 02:00:46 the machine kernel: leanchecker invoked oom-killer: gfp_mask=0x140dca(GFP_HIGHUSER_MOVABLE|__GFP_ZERO|__GFP_COMP), order=0, oom_score_adj=200
+Oct 07 02:00:46 the machine kernel: oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service/app.slice/vte-spawn-60793ada-fc11-49c3-b24a-7ca765e5174a.scope,task=leanchecker,pid=790279,uid=1000
+Oct 07 02:00:46 the machine kernel: Out of memory: Killed process 790279 (leanchecker) total-vm:170885104kB, anon-rss:119077144kB, file-rss:48kB, shmem-rss:0kB, UID:1000 pgtables:429060kB oom_score_adj:200
+Oct 07 02:00:48 the machine kernel: oom_reaper: reaped process 790279 (leanchecker), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+Oct 07 02:02:07 the machine kernel: leanchecker invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=200
+Oct 07 02:02:09 the machine kernel: oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service/app.slice/vte-spawn-60793ada-fc11-49c3-b24a-7ca765e5174a.scope,task=leanchecker,pid=793251,uid=1000
+Oct 07 02:02:09 the machine kernel: Out of memory: Killed process 793251 (leanchecker) total-vm:169788288kB, anon-rss:118102816kB, file-rss:48kB, shmem-rss:0kB, UID:1000 pgtables:425704kB oom_score_adj:200
+Oct 07 02:02:13 the machine kernel: oom_reaper: reaped process 793251 (leanchecker), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+--- journalctl --user: the session scope
+Oct 07 02:00:44 the machine systemd[1925]: vte-spawn-60793ada-fc11-49c3-b24a-7ca765e5174a.scope: The kernel OOM killer killed some processes in this unit.
+Oct 07 02:00:44 the machine systemd[1925]: vte-spawn-60793ada-fc11-49c3-b24a-7ca765e5174a.scope: Failed with result 'oom-kill'.
+Oct 07 02:00:44 the machine systemd[1925]: vte-spawn-60793ada-fc11-49c3-b24a-7ca765e5174a.scope: Consumed 6h 44min 57.630s CPU time over 1d 27min 38.263s wall clock time, 118.4G memory peak, 6.2G memory swap peak.
+Oct 07 02:02:08 the machine systemd[1925]: vte-spawn-60793ada-fc11-49c3-b24a-7ca765e5174a.scope: The kernel OOM killer killed some processes in this unit.
+--- systemd-oomd: inactive

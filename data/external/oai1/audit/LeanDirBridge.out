@@ -1,0 +1,10 @@
+slot: admitted ext-oai1-bridge: mem 8 GiB (hard cap), cpus 0,1
+'HadwigerNelson.six_le_chromaticNumber_plane_of_no_proper_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.chromaticNumber_plane_six_or_seven_of_no_proper_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.no_proper_five_of_six_le_chromaticNumber_plane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

@@ -89,7 +89,7 @@ shared ledger, admitting the job only while the reservations stay within 90 GiB 
 hard `MemoryMax` cap with no swap, so an over-cap job is killed inside its own scope and never takes the machine; pins it to free
 cores, one thread per physical core first; and exits 75, loudly, if not admitted within `--wait` (default 1800 s). `--status` shows
 the ledger; `--self-test` plants an over-cap job and a full ledger and watches both refused. A job under about 2 GiB and 2 minutes
-may run without a slot; anything bigger or longer declares an honest `--mem`, since an under-declared job is killed by its cap. **A
+may run without a slot; anything bigger or longer declares an honest `--mem`, since an under-declared job is killed by its cap. **An unknown binary is never probed outside a slot** — a `--help` it does not know is a guess: `leanchecker` (toolchain v4.34.1) with no module named replays its whole search path on every thread and took 119 GB twice (2026-10-07, FS-131 inventory item 612); name the module and declare a cap. **A
 job that calls `systemd-run` itself escapes the slot's cap** (the new scope is a sibling, not a child), so a Lean build reserves and
 caps at the same number: `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh`. And `systemd-run` expands `$`
 in a command's arguments unless told `--expand-environment=no` (the wrapper passes it; `bash -c '… $$ …'` arrived as `$`). More instances: `plans/GROKKING-INSTANCES.md` § Building — RAM is the discriminator.

@@ -1,0 +1,60 @@
+files=1  lines=48
+== axiom declaration  /^\s*(?:@\[[^\]]*\]\s*)*(?:private\s+|protected\s+|noncomputable\s+|unsafe\s+)*axiom\b/  hits=2
+35:axiom planted_axiom : False
+36:private axiom planted_private_axiom : False
+== the word axiom anywhere  /\baxiom\b/  hits=2
+35:axiom planted_axiom : False
+36:private axiom planted_private_axiom : False
+== sorry  /\bsorry\b/  hits=1
+37:theorem planted_sorry : False := by sorry
+== admit  /\badmit\b/  hits=1
+47:theorem planted_admit : False := by admit
+== sorryAx  /sorryAx/  hits=0
+== native_decide  /native_decide/  hits=1
+38:theorem planted_native : 2 + 2 = 4 := by native_decide
+== decide +native / +kernel  /decide\s*\+\s*(native|kernel)|decide\s*\(\s*config/  hits=0
+== bv_decide / ofReduceBool / reduceBool / trustCompiler  /bv_decide|ofReduceBool|reduceBool|ofReduceNat|reduceNat|trustCompiler/  hits=1
+48:theorem planted_ofReduceBool : True := Lean.ofReduceBool _ _ rfl
+== implemented_by  /implemented_by/  hits=1
+41:@[implemented_by planted_impl] def planted_ref : Nat := 0
+== extern  /\bextern\b/  hits=1
+44:@[extern "c_planted"] def planted_extern : Nat := 0
+== csimp  /\bcsimp\b/  hits=0
+== unsafe  /\bunsafe\b/  hits=1
+42:unsafe def planted_unsafe : Nat := 0
+== opaque  /\bopaque\b/  hits=1
+43:opaque planted_opaque : Nat
+== partial  /^\s*(?:private\s+|protected\s+)*partial\b/  hits=0
+== set_option (any)  /set_option/  hits=1
+39:set_option debug.skipKernelTC true in
+== debug.skipKernelTC / bootstrap  /skipKernelTC|bootstrap\.|debug\./  hits=1
+39:set_option debug.skipKernelTC true in
+== meta: elab/macro/syntax/notation/run_cmd/run_elab/run_meta/initialize/#eval/#exit/elab_rules/macro_rules  /^\s*(?:local\s+|scoped\s+)?(?:elab|macro|syntax|notation|infix[lr]?|prefix|postfix|run_cmd|run_elab|run_meta|initialize|builtin_initialize|elab_rules|macro_rules|declare_syntax_cat)\b|#eval|#exit|#print|#check|#reduce/  hits=1
+46:local notation "‖" x "‖" => planted_norm x
+== open Lean / import Lean / Lean.Elab / Lean.Meta / addDecl  /\bopen\s+Lean\b|import\s+Lean\b|Lean\.Elab|Lean\.Meta|addDecl|addAndCompile|Environment/  hits=0
+== attribute commands  /^\s*(?:local\s+|scoped\s+)?attribute\s*\[/  hits=1
+45:attribute [instance] planted_inst
+== local/scoped instance, instance priority  /^\s*(?:local|scoped)\s+instance\b|instance\s*\(priority/  hits=0
+== #exit / end-of-input tricks: 'stop' tactic  /^\s*stop\b|\bstop$/  hits=0
+== include/omit  /^\s*(include|omit)\b/  hits=0
+== universe-polymorphic hypotheses: variable lines  /^\s*variable\b/  hits=0
+== theorem/lemma count  /^\s*(?:@\[[^\]]*\]\s*)*(?:private\s+|protected\s+|noncomputable\s+)*(?:theorem|lemma)\b/  hits=8
+21:lemma direction_continuous : Continuous direction := continuous_subtype_val.comp AddCircle.continuous_toCircle
+22:@[simp] lemma direction_norm (t : Angles) : ‖direction t‖ = 1 := Circle.norm_coe _
+23:@[simp] lemma direction_real (t : ℝ) : direction (t : Angles) = (Circle.exp t : ℂ) := by
+37:theorem planted_sorry : False := by sorry
+38:theorem planted_native : 2 + 2 = 4 := by native_decide
+40:theorem planted_skip : True := trivial
+47:theorem planted_admit : False := by admit
+48:theorem planted_ofReduceBool : True := Lean.ofReduceBool _ _ rfl
+== def/abbrev/structure/class/inductive/instance count  /^\s*(?:@\[[^\]]*\]\s*)*(?:private\s+|protected\s+|noncomputable\s+)*(?:def|abbrev|structure|class|inductive|instance)\b/  hits=10
+7:def ProperColoring (k : ℕ) (c : ℂ → Fin k) : Prop :=
+15:instance anglePeriodPositive : Fact (0 < 2*Real.pi) := ⟨by positivity⟩
+16:abbrev Angles := AddCircle (2*Real.pi)
+17:def angularMeasure : Measure Angles := AddCircle.haarAddCircle
+18:def direction (t : Angles) : ℂ := AddCircle.toCircle t
+19:instance : IsProbabilityMeasure angularMeasure := inferInstanceAs (IsProbabilityMeasure (AddCircle.haarAddCircle (T := 2*Real.pi)))
+20:instance : angularMeasure.IsAddHaarMeasure := inferInstanceAs (AddCircle.haarAddCircle (T := 2*Real.pi)).IsAddHaarMeasure
+27:def WeakColoring (k : ℕ) (c : ℂ → Fin k) : Prop :=
+41:@[implemented_by planted_impl] def planted_ref : Nat := 0
+44:@[extern "c_planted"] def planted_extern : Nat := 0
