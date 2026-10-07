@@ -7858,3 +7858,23 @@ reason by the close.*
      (f) **Slot → FS131-K9b** (wave 9's second planner, `debruijn`, in `fs131-w9`; its brief regenerated for one
      sentence made stale by item 599 — gate exit 0, 48 quotations), launched 2026-10-07 about 01:00 UTC. In
      flight: 3 (L8A, K7c, K9b). Next into a free slot: FS131-I9B, then FS131-I10G, FS131-I6Z2, FS131-E9.
+
+603. **FS131-K9b, by message mid-job: the away bend on a fragment needs twins of three landed statements, and they are short — the wave's long leaf loses the half its first planner called hard** (source: K9b's message to "main", 2026-10-07 about 01:10 UTC; its Stage 6 is saved at `285a983f`; the twins are written and elaborating, "iteration, not evidence" in its words — not built, not committed; the artifact is read at its hand-back).
+     Its reading of the landed source: `CollarFitOut`'s fields name the domain only for the collar itself, so the
+     structure and `CollarFitOut.awayBend` serve a fragment as landed; the hypothesis `radiusTwoArc P θ₁ θ₂ ⊆ F.dom`
+     is read in one place, for the caps at a gap's two ends; under FS129-OR1-WHOLE's clause (the closed radius-two
+     arc misses the closure of the inner class) the caps are not needed, and wave 4's `away_clear` is already stated
+     over exactly that. **The twins**, in a new module `Plane/Classes/AwayCollar` on `fs131-w9`:
+     `exists_lensOut_clear_of_disjoint`, `exists_collarFitOut_of_disjoint`, `bend_away_collar` — the landed three
+     with `hR2 : Disjoint (radiusTwoArc P θ₁ θ₂) (closure (F.region c))` in place of the domain and gap hypotheses;
+     neither form implies the other. About 75 lines in all. **Checked by me against the landed files**: the domain
+     hypothesis is passed to `exists_gap_cap` at `BendGap.lean` ll. 784–785 and only passed down at ll. 888 and
+     1440; `CollarFitOut`'s eight fields (`CollarMapOut.lean` ll. 29–45) name `F.dom` once, in `sub_dom`, for the
+     collar; `away_clear` (`UnitArc.lean` l. 3542) takes `hr2` over a thickening of the radius-two arc and no
+     domain hypothesis. Not checked by me: that the three elaborate, or build. **Prediction to score at its
+     hand-back**: the first pass priced `bendAny` at 400–700k tokens with B4 half of it. **Credit**: the one use of
+     the hypothesis found in the landed proof, and the landed lemma that already carried the other form.
+     **Ruling.** **The twins stay in `Plane/Classes/AwayCollar` on wave 9's line**; a move beside their originals in
+     `ValidMap/BendGap` is a question for the milestone's tidy. Alternative: have them added to the landed module
+     now. Why not: a landed module is not edited on a wave's branch (two lines never change one file), and the
+     twins read only landed lemmas. Confidence: high. No reply sent: it proceeds unless told, in its own words.
