@@ -312,8 +312,9 @@ subject; none changes a file here beyond a bibliography line. **None is a fronti
   (`Arith/FloorPlanes.lean` l. 39: the same sum, `∑ x : Fˣ, ψ (a * x + b * x⁻¹)`, bounded by `2 * Real.sqrt (Fintype.card F)`), the
   inline hypothesis `KloostermanFrom347`, and the eight theorems the ledger lists as resting on the axiom; G44; row 123's chain.
 - *What it would let a planner do*: with a bound `B(q)` on the non-trivial eigenvalues of a residue target of degree `q + 1`, the
-  ratio floor at `k` colours needs `B(q)/(q + 1) < 1/(k − 1)`. Weil gives it from `q ≈ 4(k − 1)²`; this bound gives it once
-  `q > 3(k − 1)⁴` — `q > 768` at `k = 5`, `q > 1,875` at `k = 6`, `q > 3,888` at `k = 7`. So each floor this project takes from Weil
+  ratio bound refuses `k` colours once `B(q)/(q + 1) < 1/(k − 1)`. Weil gives that from `√q > (k − 1) + √((k − 1)² − 1)` — `q > 34`,
+  `62`, `98`, `142` for `k = 4, 5, 6, 7` (G44's and G56's smaller figures at 59 and 71 are exact spectra, not Weil); this bound gives
+  it once `q > 3(k − 1)⁴` — `q > 243`, `768`, `1,875`, `3,888`. So each floor this project takes from Weil
   holds from this theorem at every large residue field, and the axiom is needed only at the finitely many usable `q` in between —
   where an exact evaluation of the sums, or a sharper elementary bound, would remove it. That is a route to "the standard three
   axioms" for the eight resting theorems that needs no algebraic geometry. Not priced here: the finite list's cost in the kernel.
@@ -529,8 +530,9 @@ listed in the catalogue only, unread**" **with:**
 > two outside theorems — `[OAIMath2026]` family 155 (a tile of `ℤ³` with no periodic tiling; Lean in the release, not audited here) or
 > `[GreenfeldTao2024]` (large rank; recalled, not read) — through EXT-OAI3's `tile-colouring`: `Cay(A, (F − F) ∖ {0})` is
 > `|F|`-colourable with a periodic `|F|`-colouring iff `F` tiles periodically. Question 1 is therefore a threshold question (the least
-> `k ≥ 4` and the least rank at which a `k`-colourable Cayley graph of `ℤ^r` has no periodic `k`-colouring; ranks 1 and 2 are excluded
-> for graphs of this difference-set form by the periodic tiling theorems there), and question 2's two-sided certificate scheme cannot
+> `k ≥ 4` and the least rank at which a `k`-colourable Cayley graph of `ℤ^r` has no periodic `k`-colouring; for graphs of this
+> difference-set form ranks 1 and 2 are excluded by the periodic tiling theorems there — recalled, not read; the release's challenge
+> states that three is the least dimension), and question 2's two-sided certificate scheme cannot
 > exist for every `k`. Nothing moves at four colours or on a unit-distance lattice.
 
 **D5 — a bearing line for `plans/STUB-mr-in-lean.md` § Provisional bearings, to follow its first paragraph:**
