@@ -295,10 +295,204 @@ theorem (every term on the standard three):
 | `closePair_both_saved_of_isSector` | the same with `IsSector` of both members | `exists_closePair_sector`, on `squarePair` (its arcs: two radii and an arc of the unit circle about `1`); `FS124L2.model_sector` draws the conclusion | library; term |
 | `ThreePiece.IsSector.hasArcEdges`, `.isFull` | `D.IsSector` | `sectorPoint_isSector` — the three-sector point, arcs the radii along `1`, `i`, `−1 − i`; **the spec example added at the join runs the bridge on it**, and `sectorPoint_hasArcEdges` proves the same fact by construction | library |
 | `IsTriodCut.exists_opposite`, `exists_arc` (and the module's 34 theorems over `IsTriod` or `IsTriodCut`) | `IsTriodCut x r J P` | **no library theorem concludes it.** `FS124L2.model_triodCut`: the three-sector point's radii and sectors are an `IsTriodCut`, from `sectorPoint_isSector` by the bridge's own construction; `model_triodCut_arc` runs `exists_arc` on it. The bridge builds one for every sector point, so `exists_closePair_sector`'s two members give two more | **term**; the library holds it only inside the bridge's proof |
-| the control `exists_closePair_seven_not_separatesAt` | none (an existence) | at seven labels the conclusion of `closePair_forced_pieces` fails on `sevenPair`: the one hypothesis that cannot be dropped is "every label is the label of a piece of `x` or of `y`" (`Plane/ClosePairModel`'s last `example` draws its failure through `ClosePair.separatesAt_or`) | library |
+| the control `exists_closePair_seven_not_separatesAt` | none (an existence) | at seven labels the conclusion of `closePair_forced_pieces` fails on `sevenPair`: the one hypothesis that cannot be dropped is "every label is the label of a piece of `x` or of `y`" (an `example` of `Plane/ClosePairModel` draws its failure through `ClosePair.separatesAt_or`) | library |
 
 **No hypothesis of the nine claims' theorems, of the clause in the list's words or of the bridge is without a kernel
 model in the library; the three-arcs lemma's is a term.** What the witnesses are not, in the third implementer's
 words: "maps of the plane, or fragments of one — each is a colouring of three discs of radius `1/4`, and nothing
 here says that a colouring of the plane has such a pair". **No older statement is emptied by this landing**: it
 brings no axiom, and its carriers are new with it.
+
+## Stage 6 — SAVED (FS124-L2): read aloud — the nine claims' theorems against rows 162 and 163 and the entries' statements
+
+*The statements are read as the kernel holds them (`data/fs124/l2/probes/checks-probe.out`, and again in the gate's
+pass as `gate/checks-final.out`, from `data/fs124/l2/checks.lean`: `#print` of each definition, `#check @…` of each
+theorem with every binder shown, `#print axioms` of each), never as the files print them. The rows are `LEDGER.md`
+rows 162 and 163; the entries are `plans/FS124-derivation.md` §§ 2–3; the kernel claim list is
+`data/fs124/claims-K2.md`.*
+
+**The three texts are one text.** `tools/fs124_l2_entries.py` (this job's; `probes/entries-probe.txt`): each of the
+nine entries' statements stands word for word, whitespace apart, in the kernel claim list with its *not claimed*
+line, and — for the eight whose sentence the ledger quotes — in row 162 or row 163 ("entries: PASS"; four plants
+fired, a changed word in C124-LONE's statement among them). C124-CENTRE is the one the ledger names without quoting
+("for a tight pair, both halves"). So the implementers' clause-by-clause readings against the claim list
+(`plans/FS124-I2-implementation.md` § 4.2, `plans/FS124-I3-implementation.md` § 3.2) are readings against the rows'
+sentences; I read each again against the stored statement, and what follows is that reading, with every place where
+a theorem says less, more or other than its sentence.
+
+**Four readings hold throughout.** (1) *The class*: "a weak `k`-colouring of an open set `U`" is `IsOpen U` and the
+first module's `IsWeakColouringOn U c` for a total `c : ℂ → Fin k`, Borel measurable, with the monochromatic unit
+pairs inside `U` null — read on `U` alone (FS124-L1's record, stage 7). **Measurability is idle in all nine**: each
+is the corollary of a statement for `AeProperOn U c` at any label type, and the proofs pass `hc.aeProperOn` only.
+(2) "Almost every point" is `∀ᵐ` for Lebesgue measure on `ℂ`; `B(p, r)`, `B̄(p, r)`, `S(p)` are `ball p r`,
+`closedBall p r`, `sphere p 1`; inside and outside `S(p)` are `dist z p < 1` and `1 < dist z p`. (3) Every `η` is
+existential and comes after the points it is about: no statement gives a uniform one. (4) Each theorem's axioms, as
+the audit prints its record: `[propext, Classical.choice, Quot.sound]`, under CLEAN.
+
+**1. `shadow_open` — C124-SHADOW-OPEN (row 162's first sentence).** `IsOpen U → IsWeakColouringOn U c → IsOpen W → W
+⊆ U → (∀ᵐ z, z ∈ W → c z = i) → IsOpen (U ∩ unitShadow W) ∧ ∀ᵐ z, z ∈ U ∩ unitShadow W → c z ≠ i`, with `unitShadow
+W = {z | ∃ y ∈ W, dist z y = 1}`. Aloud: *if an open part of the set has one label almost everywhere, the points of
+the set at distance exactly 1 from some point of that part form an open set, and almost every one of them has another
+label.* Clause for clause the sentence; "a finite set of labels" is `Fin k`. Not claimed, and not said: nothing for a
+`W` that is not open; no open one-label set is asserted to exist.
+
+**2. `piece_type` — C124-TYPE.** `IsOpen P → IsConnected P → P ⊆ U → (∀ᵐ z, z ∈ P → c z = i) → x ∈ closure P → w ∈ U
+→ ((∃ y ∈ P, dist y w < 1) → ∃ η > 0, ∀ᵐ z, z ∈ ball w η → 1 < dist z x → c z ≠ i) ∧ ((∃ y ∈ P, 1 < dist y w) → ∃ η
+> 0, ∀ᵐ z, z ∈ ball w η → dist z x < 1 → c z ≠ i)`. **More than the sentence in one place: there is no hypothesis
+`|w − x| = 1`.** The theorem holds at every `w ∈ U`, and the row's sentence is its case at distance one (the
+planner's generalization, in the claim list's dated line). Nothing less: each of the two clauses is one conjunct with
+its own `η`, on the side of `S(x)` the sentence names.
+
+**3. `centre_half` — C124-CENTRE-HALF.** `q ∈ U → dist q z = 1 → 0 < ρ → ball z ρ ⊆ U → ∀ a, ((∀ᵐ w, w ∈ ball z ρ →
+dist w q < 1 → c w = a) → ∃ η > 0, ∀ᵐ p, p ∈ ball q η → 1 < dist p z → c p ≠ a) ∧ ((∀ᵐ w, w ∈ ball z ρ → 1 < dist w q
+→ c w = a) → ∃ η > 0, ∀ᵐ p, p ∈ ball q η → dist p z < 1 → c p ≠ a)`. The sentence, collar by collar. "`z` a point
+of `U`" is no binder: it is the centre of a disc inside `U`.
+
+**4. `tight_centre` — C124-CENTRE.** `q ∈ U → IsTight U c q z a b → ∃ η > 0, (∀ᵐ w, w ∈ ball q η → 1 < dist w z → c w
+≠ a) ∧ ∀ᵐ w, w ∈ ball q η → dist w z < 1 → c w ≠ b`. `IsTight U c q z a b` is `∃ ρ, IsTightWith …`, whose fields
+are the claim list's object word for word: `a ≠ b`, `0 < ρ`, `ball z ρ ⊆ U`, `dist q z = 1`, almost every point of
+`ball z ρ` inside `S(q)` has the label `a`, outside it `b`. One `η` for both halves, as the entry says.
+
+**5. `tight_straddle` — C124-STRADDLE.** `IsTight U c q z a b → p ∈ U → dist p z = 1 → p ≠ q → p ≠ 2 * z - q → ∃ η >
+0, ∀ᵐ w, w ∈ ball p η → c w ≠ a ∧ c w ≠ b`. The sentence. The two excluded points are hypotheses; nothing is said at
+them (the row's C124-CENTRE and C124-ANTIPODE).
+
+**Row 162's other sentences have no Lean theorem**: C124-COMPLETION (the case of `tight_straddle` at a rhombus
+completion; no statement names a completion), C124-ANTIPODE, C124-KIND, C124-SIX, and the readings by formula of R7
+and the strip ([tools]). Its *not claimed* items are true of the five theorems: an open `W`, a connected open `P`
+and the tight pair are hypotheses, and no theorem asserts that a weak colouring has one.
+
+**6. `closePair_forced_pieces` — C124-FORCED-PIECES (row 163's first sentence).** `(C : ClosePair U c x y) → w ∈ U →
+IsCommonUnitPoint x y w → (∃ i j, InnerAt (C.left.piece i) w ∧ OuterAt (C.left.piece j) w ∧ C.left.edge i j ⊆ sphere
+w 1) ∨ (∃ i j, InnerAt (C.right.piece i) w ∧ OuterAt (C.right.piece j) w ∧ C.right.edge i j ⊆ sphere w 1)`, at `c :
+ℂ → Fin 6`. "A close complementary pair of three-piece points, each with a decomposition" is the structure
+`ClosePair`: a decomposition at each (`ThreePiece`: a neighbourhood in `U`, three open preconnected pieces in it
+with the point in each closure, one label almost everywhere on each, the three labels distinct, the rest of the
+neighbourhood null), `x ≠ y`, `dist x y < 2`, no label of one a label of the other. `InnerAt P w` is `P ⊆ closedBall
+w 1`, `OuterAt P w` is `Disjoint P (ball w 1)`, `edge i j` is `closure (piece i) ∩ closure (piece j) ∩ nbhd`. **One
+word of the sentence is not a conjunct — "another"**: `i ≠ j` is not stated; it follows, since a piece is a
+non-empty open set and none is both inner and outer (`not_innerAt_and_outerAt`). Which member separates is not
+said: a disjunction.
+
+**7. `closePair_lone` — C124-LONE.** With `¬ C.right.SeparatesAt w` added: `∃ σ : Equiv.Perm (Fin 3),
+C.left.OneOfEach w σ ∧ (∃ τ : CircleSide, ∃ η > 0, (∀ᵐ z, z ∈ ball w η → z ∈ τ.region y → dist z x < 1 → c z =
+C.left.label (σ 0)) ∧ ∀ᵐ z, z ∈ ball w η → z ∈ τ.region y → 1 < dist z x → c z = C.left.label (σ 1)) ∧ ∃ w' ∈ sphere
+x 1, w' ≠ w ∧ ∃ η' > 0, C.left.piece (σ 0) ∩ ball x η' ⊆ closedBall w 1 ∩ closedBall w' 1 ∧ Disjoint (C.left.piece
+(σ 1) ∩ ball x η') (ball w 1 ∪ ball w' 1) ∧ closure (C.left.piece (σ 0)) ∩ closure (C.left.piece (σ 1)) ∩ ball x η'
+= {x}`. "Exactly one inner piece, one outer piece and one crossing piece" is the permutation `σ` with `σ 0` inner,
+`σ 1` outer, `σ 2` crossing (neither): a bijection of three pieces onto three kinds that exclude one another. "A
+side of `S(y)`" is `τ.region y`. **"Their closures meet at `x` only" is read inside `B(x, η′)`**, as the sentence's
+"inside `B(x, η′)`" governs its three clauses. Every clause has its conjunct; the configuration is not said to be
+impossible, and nothing is said of the crossing piece's edges.
+
+**8. C124-BOTH, first sentence — `closePair_both_separate`.** `C.left.IsFull → C.right.IsFull → C.left.SeparatesAt w
+∧ C.right.SeparatesAt w`, `IsFull` being: for every two pieces, the point is a limit of points other than itself of
+their edge. The sentence.
+
+**9. C124-BOTH, second sentence — both forms.** "If they are sector points, each has an edge that contains an arc of
+S(w) with an end at the member: no common unit point of a close complementary pair of sector points is saved by one
+member alone."
+
+- **For arc-edged decompositions — `closePair_both_saved`**: `C.left.HasArcEdges → C.right.HasArcEdges → C.left.Saves
+  w ∧ C.right.Saves w`. `HasArcEdges`: every edge contains an injective continuous image of `[0, 1]` starting at the
+  point. `Saves w`: some edge of two different pieces contains the points `w + (x − w) e(s t)`, `0 ≤ t ≤ δ`, for a
+  turning sense `s = ±1` and some `δ > 0` — an arc of the unit circle about `w` from the point. This is what the
+  clause reads of a sector point, and it is wider than the list's class: nothing is asked of the pieces beyond their
+  edges.
+- **In the claim list's words — `closePair_both_saved_of_isSector`** (`Plane/SectorPoint`): `C.left.IsSector →
+  C.right.IsSector → C.left.Saves w ∧ C.right.Saves w`. `D.IsSector` is the list's definition clause for clause —
+  "for some r > 0 there are three arcs J_0, J_1, J_2 (homeomorphic images of [0, 1])": `∃ r > 0, ∃ J : Fin 3 →
+  C(unitInterval, ℂ)`, each injective (a continuous injection of a compact interval is a homeomorphism onto its
+  image); "from x to the circle ∂B(x, r)": `J m 0 = x`, `dist (J m 1) x = r`; "inside B(x, r) but for their far
+  ends": `t ≠ 1 → dist (J m t) x < r`; "disjoint but for x": `m ≠ m' → J m s = J m' t → J m s = x`; "such that the
+  three components of B(x, r) ∖ (J_0 ∪ J_1 ∪ J_2) are the pieces": each piece is a component of the cut disc, and
+  the pieces fill it. **Since this landing the sentence is a kernel theorem in these words**, on the standard three:
+  the bridge `ThreePiece.IsSector.hasArcEdges` no longer prints `sorryAx`.
+
+**What the three-arcs lemma's hypotheses assume of the classical fact.** The θ-curve theorem of plane topology says
+of three arcs from the centre of a disc to its rim, disjoint but for the centre: (i) the disc less the arcs has
+exactly three components; (ii) each arc lies in the closure of exactly two of them, and every two share one.
+`IsTriodCut x r J P` — the hypothesis of `IsTriodCut.exists_opposite` and `exists_arc` — is the three arcs together
+with **three open preconnected pairwise disjoint sets given as filling the cut disc**. So **(i) is assumed, in that
+form, and (ii) is what the module proves from it**, by this library's unicoherence of the plane and its crossing
+lemma; no Jordan curve theorem is read, and that a cut disc has three components is proved nowhere and used
+nowhere. For row 163 this costs nothing: a sector point is, by the list's own definition, *given* with its three
+pieces as the components, so `IsSector` supplies the three sets and the bridge needs no more — the definition's
+sixth clause (each piece is a component) is not even read, the seventh (the pieces fill the cut disc) and the
+decomposition's fields give what the lemma asks. What it would cost: a statement about three arcs with no pieces
+given ("any such three arcs cut the disc into three regions, and …") is not a theorem here. `exists_opposite` reads
+aloud: *there is a bijection from arcs to pieces, the piece opposite an arc, such that each arc lies in the closure
+of the two other pieces and meets the closure of its opposite piece at the centre only.*
+
+**10. `closePair_four` — C124-FOUR.** With both members full and `C.left.OneOfEach w σ`, `C.right.OneOfEach w τ`:
+`presentAt U c w = {C.left.label (σ 0), C.left.label (σ 1), C.right.label (τ 0), C.right.label (τ 1)} ∧ (presentAt U
+c w).ncard = 4`. "Present at `w`" is `presentAt U c w = {i | w ∈ essSupport (U ∩ c ⁻¹' {i})}`: every disc about `w`
+meets the class of `i` in `U` in positive measure. The set of labels present is the four named, and it has four
+elements: "exactly four". Which label fills which region is not said.
+
+**Row 163's other sentences.** C124-FORCED: no Lean theorem states it; its first half ("w is saved by x or by y")
+follows from sentence 9's theorem, its second (tightness along the arc) is in no module, and its topological input —
+"recalled, not read" in the row — is now `IsTriodCut.exists_opposite`. C124-FORCED-AS-POSED, C124-SECOND, C124-HALF,
+C124-HALF-TWO, C124-FORCED-SEVEN and the reading of held objects: by hand or [tools], no Lean theorem.
+**C124-LONE-EXISTS: its sentence is a kernel theorem by another witness** — `exists_closePair_not_separatesAt`
+states "there is a weak six-colouring of an open set with a close complementary pair and a common unit point in the
+set at which the second member does not separate", on `lonePair` (a petal point and a sector point on three discs),
+not on the entry's object, fragment S1 with a band. The grade of the entry is the coordinator's.
+
+**Two places where the modules say something a row's *not claimed* line might be read against.** (a) "That a weak
+six-colouring has a three-piece point, or a close complementary pair" (row 163): the four existence theorems
+exhibit weak six-colourings **of three discs of radius `1/4`** that have one — they are the models of the
+hypotheses, C124-LONE-EXISTS's kind — and say nothing of a weak six-colouring of the plane or of a disc of any
+given radius. (b) "Anything with seven labels": the modules hold the general statement at any label type under the
+hypothesis "every label is the label of a piece of `x` or of `y`" (`ClosePair.separatesAt_or`) and a control at
+seven where it fails (`exists_closePair_seven_not_separatesAt`); neither is an entry, and neither says anything at
+seven under the row's own hypotheses beyond that the conclusion can fail.
+
+**What the read-aloud found.** No clause of the nine is missing; no hypothesis is added; no theorem claims an item
+of a *not claimed* line. One theorem is wider than its sentence (`piece_type`, no `|w − x| = 1`); one word is a
+consequence and not a conjunct ("another"); one sentence is held in two forms, the second in the list's words since
+this landing. **No gap between a theorem and the sentence it is read against.**
+
+### Which of the milestone's thirty entries are kernel theorems after this landing, and which stay by hand
+
+`tools/fs124_l2_entries.py --table` (the table is this job's reading, written once in the tool and checked: the
+theorem record holds exactly these thirty; every Lean name has one record under the banner said): **fourteen kernel
+theorems — five since FS124-L1, nine by this landing — and sixteen by hand.**
+
+| entry | after this landing | Lean | note |
+|---|---|---|---|
+| C124-RADIUS-GRAPH | kernel, since FS124-L1 | `radius_graph` | — |
+| C124-RADIUS-COUNTABLE | kernel, since FS124-L1 | `radius_countable` | — |
+| C124-RADIUS-UP | kernel, since FS124-L1 | `radius_up` | — |
+| C124-RADIUS-DOWN | kernel, since FS124-L1 | `radius_down` | on the declared outside theorem `proper_to_borel_weak` |
+| C124-RADIUS-FIVE | kernel, since FS124-L1 | `radius_five` | on the declared outside theorem `no_proper_five_coloring` |
+| C124-EVERY-DIRECTION | by hand | — | no kernel job: stated in no module (FS124-L1's open item 1) |
+| C124-SHADOW-OPEN | **kernel, by this landing** | `shadow_open` | — |
+| C124-TYPE | **kernel, by this landing** | `piece_type` | wider than the entry: no hypothesis |w − x| = 1 |
+| C124-CENTRE-HALF | **kernel, by this landing** | `centre_half` | — |
+| C124-CENTRE | **kernel, by this landing** | `tight_centre` | — |
+| C124-STRADDLE | **kernel, by this landing** | `tight_straddle` | — |
+| C124-COMPLETION | by hand | — | no kernel job: a corollary of C124-STRADDLE at one point, stated in no module (its handoff: "subsumed by C124-STRADDLE, which crosses") |
+| C124-ANTIPODE | by hand | — | no kernel job: handed off "as written" and not among the nine a planner fixed |
+| C124-OPEN | by hand | — | no kernel job: a relay-result (its handoff: none) |
+| C124-FORCED-PIECES | **kernel, by this landing** | `closePair_forced_pieces` | — |
+| C124-FORCED | by hand | — | no kernel job for the entry: its first sentence follows from the kernel's C124-BOTH (`closePair_both_saved_of_isSector`: saved by both); its second, tightness along the arc, is stated in no module; its topological input is now a kernel theorem (`IsTriodCut.exists_opposite`) |
+| C124-FORCED-AS-POSED | by hand | — | a refutation by a held object (fragment BB with a band): no kernel job |
+| C124-LONE | **kernel, by this landing** | `closePair_lone` | — |
+| C124-LONE-EXISTS | by hand | — | needs a held object's tiles: the entry's object is fragment S1 with a band; the kernel holds the same sentence by another witness (`exists_closePair_not_separatesAt`, on `lonePair`) |
+| C124-BOTH | **kernel, by this landing** | `closePair_both_separate`, `closePair_both_saved`, `closePair_both_saved_of_isSector` | first clause; second clause in both forms — for arc-edged decompositions, and in the list's words for sector points over the three-arcs lemma |
+| C124-FOUR | **kernel, by this landing** | `closePair_four` | — |
+| C124-SECOND | by hand | — | no kernel job: handed off "after C124-FOUR" and not among the nine |
+| C124-EDGE-CLOSED | by hand | — | needs a held object's tiles (FS-112's strip); its handoff: only with a consumer |
+| C124-EDGE | by hand | — | a computation on one held object; subsumed by C124-EDGE-CLOSED |
+| C124-SIX | by hand | — | no kernel job: handed off "after C124-CENTRE" and not among the nine |
+| C124-SIX-CONES | by hand | — | no kernel job: subsumed by C124-SIX |
+| C124-HALF | by hand | — | no kernel job: over the inherited C132-WIT-SIDE, whose module is not built |
+| C124-HALF-TWO | by hand | — | no kernel job: subsumed by C124-HALF's module |
+| C124-KIND | by hand | — | a calibration at seven by formula; its handoff: only with a consumer |
+| C124-FORCED-SEVEN | by hand | — | needs a held object (the hexagonal seven-colouring); the kernel holds a control of the same kind on another object (`exists_closePair_seven_not_separatesAt`) |
+
+**Complete for every statement a planner planned**: FS124-K1's five entries and the criterion (landed by FS124-L1),
+FS124-K2's nine, FS124-K3's lemma and the bridge. Of the sixteen by hand, five were handed to the kernel lane "as
+written" or "after" a landed entry and no planner has fixed them: C124-ANTIPODE, C124-SECOND, C124-SIX, C124-HALF,
+and C124-FORCED's second sentence.
