@@ -711,3 +711,36 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     six parts go; what stands on one mind is one lemma — every essential change point of a measurable two-valued ring
     state is a clean step — and that lemma is the first leaf an implementer should attempt.
 
+23. **FS132-P3, second message: the third round's card is saved — the object re-cut as a "seed"; a correction to its own
+    point about the tight seven-colouring; and what to stop** (source: its message to "main", 2026-10-07; stub
+    `plans/STUB-six-by-the-nerve.md` § The question, re-posed after the second round; commit `83058514`; its gate exit 0 by
+    its word). **Its correction to item 21's point (4), its slip**: R7 has **no three-label point** — three Reuleaux tiles
+    and three cusped tiles meet at each lattice point, six distinct labels — so no entry of the second round is about any
+    point of R7 at all, "for the simpler reason that R7 has no triangle point"; what holds there is the object those
+    entries' exceptions name (an edge on the unit circle about a ring point), at six-label points — the road's unposed
+    rows. "The second round's exclusions are the measurable form of the arc-free half" stands, on the ring card's own line.
+    Its grade: its reading of a two-mind exact statement and one line of lattice arithmetic; no control run. **Its answer
+    to my question**: checking R7 is a control that rides with the third claim, not a claim; **the control that does test
+    how much of the second round is about the hard case is the second round's seven-label controls re-run on the honeycomb
+    at circumradius 1/2**, where each vertex's own labels touch its unit circle and no margin gives a witness — it rides
+    with the first claim. **The card**: on a six-sector turning seed, does the centre's circle data force the inner lens at
+    a ring point between two outer-pure neighbours to carry only the centre's own labels — so that some ring point has four
+    labels present, with no witness there? **Its reason for the object**: "every entry derived in two rounds crosses from a
+    circle to the balls about its points, by properness alone; both stalls tried to cross the other way, which asks a
+    measurable class for connected pieces of a definite size." **Claims**: C132-LENS (first; its composition four lines,
+    unchecked, registered at 0.65), C132-PLACED, C132-ARC. **What it recommends stopping**: asking, in the class of all
+    weak colourings, whether a point with usable data must exist — "the map step in the exact class; three cards on it
+    were answered off their tables"; those forms leave this milestone for FS-127 and FS-128; no job on the flagged clause;
+    the queue's line 11 held until C132-LENS has its verdict. **My receipt**: the commit is on `main`; the card read whole
+    in the stub; the four first lines quoted into the claim list by script. Not checked by me: its composition for
+    C132-LENS; its reading of R7. **Rulings.** (a) **The card and its order are adopted; the three claims are fixed as
+    posed by a dated line.** (b) **Its stops are adopted**: the existence of usable data in the class of all weak
+    colourings leaves FS-132 — the milestone's own question, "does the chain run with no map", is answered for the
+    exclusions, and what is left of it is this card and the record job. Alternative: a third card on the bridge. Why not:
+    three cards went off their tables there, and it is the map step under another name, which has its own stubs.
+    Confidence: medium-high. (c) **My sentence to Kooshi an hour ago is corrected in the next report**: I told him the one
+    tight seven-colouring "falls outside all three results" as their common exception; it has no three-way point at all,
+    so the results do not speak of it for a simpler reason. The caveat — the second round is the arc-free half — stands.
+    (d) **One deriver on this card (FS132-E6) into the asking lane's slot at its hand-back**, with the two riding controls
+    in its brief (the honeycomb at circumradius 1/2 with the first claim; R7 with the third).
+

@@ -385,4 +385,27 @@ the death of every such cycle — which are what the answer is made of and are n
   own transition graph — a statement no entry of this list asserts.** And C132-TURN as posed carries the defect its poser
   now names: "every cyclic centre of which carries a witnessed triangle" attaches data of a unit circle to a point defined by
   its small balls, with nothing joining them. It stands as stalled and is not re-posed in that form.
+- **2026-10-07 (after FS132-P3's Stage 3, commit `83058514`; FS-132 inventory item 23): the milestone's third round — one card
+  of the asking lane and three claims, each posed, not derived** — read the stub's section "The question, re-posed after the
+  second round" whole, with its two forms, its controls and "What each answer gives":
+
+> question: what-does-a-seeds-circle-force-in-the-balls-about-its-ring-points
+> — source: plans/STUB-six-by-the-nerve.md
+
+> - **C132-LENS (posed, not derived).** On a six-sector turning seed, if at each of the ring points `y_1` and `y_{−1}` at least two
+> — source: plans/STUB-six-by-the-nerve.md
+
+> - **C132-PLACED (posed).** At the four-label ring point `y` of C132-LENS (ii): in the grammar of C132-PLACE's list, the labels
+> — source: plans/STUB-six-by-the-nerve.md
+
+> - **C132-ARC (posed).** In the setting of C132-COMP-SHARP, with exactly one of the six sets — a set of `x`, with labels `t_0`,
+> — source: plans/STUB-six-by-the-nerve.md
+
+  **The object is re-cut**: a *seed* — a point with data on its unit circle, however it came by them — and what that circle
+  forces in the balls about its ring points. **C132-LENS first** (the composition behind it is the asking lane's, four lines,
+  unchecked; it posits no witness at the ring point and does not use the extraction's clause (5)); then C132-PLACED and
+  C132-ARC. **Left out of this milestone by the asking lane's recommendation, adopted**: whether, in the class of all weak
+  colourings, a point with usable data must exist — C132-WIT-EX's open form, C132-RING-TAME's first clause for all weak
+  colourings, and C132-GRUNDY7's two readings go to FS-127 and FS-128. As before, each claim is stated by its deriver in its
+  record before it is derived; a change is a dated line here.
 
