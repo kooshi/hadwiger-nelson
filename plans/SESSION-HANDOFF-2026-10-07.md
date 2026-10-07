@@ -47,7 +47,7 @@ everything else.*
 5. The asking lane's re-rank is filed in `plans/FRONTIER-STUBS.md` with its banners, and FS-132's and FS-133's stubs exist.
 6. A report to Kooshi: the state of everything, and what restarts.
 
-## 2. Running now (2: the asking lane, the import) — and what to do at each hand-back
+## 2. Running now (3: the asking lane, the import, the sweep) — and what to do at each hand-back
 
 | job | where | what | on its hand-back |
 |---|---|---|---|
@@ -75,10 +75,7 @@ record's last SAVED stage with a fresh agent on the same brief.
    consequence; its one unchecked step is the first claim. A new inventory, `plans/FS133-close-inventory.md`, opens with it.
 4. **FS-132's opening** (`ephodos`; from the asking lane's card): its inventory `plans/FS132-close-inventory.md` opens with it, with
    FS-131's items 607–617 named as its prehistory.
-5. **EXT-OAI3, the sweep of the release's other 371 families** for what a route could use (the Falconer distance conjecture, a
-   power saving for planar unit distances, a classification of Euclidean Ramsey configurations are in its catalogue, unread):
-   generator `data/fs131/briefs/scripts/mk-ext-oai3.py`, **to be rewritten first** — it was written before the hit was found; its
-   first tier becomes "what can be built on".
+5. ~~EXT-OAI3, the sweep of the release's other 371 families~~ — **running** (`ephodos`; `data/external/briefs/EXT-OAI3-outside-release.md`, generator `mk-ext-oai3.py` rewritten, gate exit 0; record `plans/EXT-OAI3-review.md`; scripts under `data/external/oai3/`). It messages when its index is saved, with the first tier's families (the problem's nearest neighbours, each with its Lean status): **relay that list to the asking lane if it is still running**. On its hand-back: review, log; a family strong enough to change the frontier gets a reading and a Lean audit of its own, as family 158 did.
 6. **The comparator's audit** (EXT-OAI1 handed it back unstarted: ruling 619 (b)); brief not written. Three programs, no commit
    pinned by the release; read their source, report, run nothing until I and then Kooshi have the report.
 
