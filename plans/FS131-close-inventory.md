@@ -7692,3 +7692,67 @@ reason by the close.*
      landing. (e) **Slot → FS131-L8A**, launched 2026-10-06. In flight: 3 (MD1, MD2, L8A). **A landing is in
      flight: I commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`,
      `LEAN.md`.**
+
+599. **FS131-MD2 done: the example maps' second closer — `hornModel` and `twoHornModel` are clean maps, the stuck vertex's contact fact, a collar on `awayModel`'s gap; fifteen of its sixteen heads now name a Lean model; `exists_arcStep` does not** (implementer, Opus; harness 630k and 50 minutes by the task notice — past the line; record `fs131-wd2`'s `plans/FS131-MD2-implementation.md`; report `data/fs131/reports/FS131-MD2.md`; four commits, tip `cce32e92`; pushed, tree clean; not landed, the full gate not run, by its brief).
+     **Proved on the standard three** (two new modules, `Plane/Models/Clean` 464 lines and `Plane/Models/Closers` 400;
+     built, not gated): `hornModel_isClean`, `twoHornModel_isClean` (every point of `Γ` carries at least two colours),
+     with `ArcMap.paint_isClean` and `sevenBrickMap_isClean` stated for any painting and any `k ≥ 7`;
+     `stuckModel_contact_seven` (the colour `7` at the stuck vertex has one contact, the upper pole);
+     `awayModel_collarFitOut` — `exists_collarFitOut` applied on the gap — with R1, R2 through it and `AwayBend.idle`
+     on its contact piece; `hornModel_junction_not_isSite`, a model that exercises `not_isSite_of_branches`' `hdead`
+     clause. **Open gate items on landed heads: 29 → 14** by the milestone's tool (`gateitems-before.out`,
+     `gateitems-after.out`: CLOSED 33 → 48, REMAIN 29 → 14, NOT-FOUND 0); of the fourteen, one is this job's
+     (`exists_arcStep`: `awayModel.IsClean` and `IsMaxRingArc` for its arc are not proved — about 280 lines, its route
+     in the record § 2.2), three are the other closer's, six are open by design, three are FS131-E7's objects, one is
+     listed by pattern and owes no note. **What a model does not exercise**: `hasSectors_one_of_contacts`' second
+     alternative has no instance on `stuckModel`; its docstring says so. **My receipt**: tip equals
+     `origin/fs131-wd2`, tree clean; outside `data/`, `plans/`, `tools/` it changed the two new modules, `Applied`
+     (one import, one `example`), five landed modules, and the three registry files; **the five landed modules
+     (`Procedure`, `FlankUA`, `BendGap`, `CollarMapOut`, `BendAway`) with every doc comment removed are identical to
+     `1ed1cfd2` (my script)**; `sorry` by the handoff's grep: 0 in `Clean`, `Closers`, `Applied`; no `axiom`, no
+     `native_decide`; its last real build log ends "OK — 467 of 467 batches, 16 module(s) rebuilt, 0 module(s) with
+     warnings", `exit=0`, and the full log has no `warning` line; its records file parsed by my script — 41 theorems,
+     each on exactly the standard three — and its planted run names four planted faults (`sorryAx` among them); the
+     guarded lint's log ends "Linting passed for Proofs."; `hornModel_isClean`, `stuckModel_contact_seven` and
+     `awayModel_collarFitOut` read at their heads (the last is `exists_collarFitOut` applied to `awayModel`'s
+     hypotheses). Not checked by me: the proofs beyond the build; the other docstrings against their models; its
+     statement tool's code. **Slips.** *Mine (the brief's)*: the notes check as I wrote it, `tools/fs131_qa4_notes.py`
+     with no argument, prints its usage and exits 2; the tree-reading instrument is `tools/fs131_l5_notes.py
+     --only-flagged` (wave 8's landing brief names the right one; the handoff's § 5 line is corrected). *The job's,
+     disclosed*: a re-run overwrote Stage 1's quotation output (restored); its first axioms tool had no rule for
+     generated names; a wrap dropped one space in a docstring (repaired). **A tool defect, found by it**:
+     `tools/fs131_mc_docs.py`'s `apply_one` drops a replacement's trailing space; reproduced on a two-line sample;
+     the landed docstrings were repaired by hand and its own copy carries a control — for the filing's tool-defect
+     list. **Credit**: fifteen heads closed with the models named in their docstrings and the one left open said
+     exactly, with its two missing facts and their sizes; a `paint_isClean` general enough for the next model; the
+     doc tool's defect reproduced before it was worked around; the brief's wrong command reported with the right one.
+     **Rulings.** (a) **`Applied`'s one new import line is ratified.** Alternative: keep the file fenced to the
+     `example` and leave the binder. Why not: the `example` cannot lose `IsClean`'s binder without the module that
+     proves it, and its statement tool holds the file to those two differences. Confidence: high. (b) **The edit to
+     the structure `CollarFitOut`'s docstring is ratified** (docstrings only, by my script). (c) **`exists_arcStep`'s
+     model rides with the next job that builds models** (the owed models of wave 8 — a star, a semi-hub, two adjacent
+     change points, `emptyNS` at nine colours — or wave 9's M4, which reads `awayModel`: whichever is briefed
+     first), not a job of its own. Alternative: a short job now. Why not: 280 lines does not fill a job, and an
+     agent's fixed cost is about 310k tokens (item 541). Until then it is an open gate item, named. Confidence:
+     medium-high. (d) **Both closers' branches are merged by the next landing after wave 8's** (not by wave 8's,
+     which is past its join): that landing runs the doubled-name check on the joined tree — `Clean` mints general
+     names — reads 40 new clean records from the block headed "FS131-MD2", and corrects `Applied`'s module docstring
+     ("Not served: `hasSectors_one_of_contacts`" is stale). Alternative: a landing for the two closers alone. Why
+     not: a gate run and a job for docstrings and models that no other line waits on. Confidence: medium; a wave's
+     landing more than a day away would change it. (e) **Wave 9's second planner is told of the collar** — its
+     brief names this job's record for B4 and M4 (FS131-K9b's brief, item 4). (f) **Three briefs written while the
+     slots were full, each by generator, gate exit 0**: **FS131-K7c** (wave 7's third planner; `mk-k7c.py`, 47
+     quotations — the merge of the proved count and its model, the nineteen stated leaves read from the kernel and
+     item 571's relay, the discrepancy of ruling 553 (a), `rstopAll`'s hypothesis, then the pinwheel; three early
+     answers by message, each releasing a line of implementers); **FS131-K9b** (wave 9's second planner;
+     `mk-k9b.py`, 48 — `bendAny` through the obligation-modeling pass, B4 against the landed source, leaf D retired
+     by wave 8's lemma, the join with wave 8 made and the join with wave 6 planned); **FS131-I9B** (wave 9's first
+     implementer; `mk-i9b.py`, 32 — `Reduction/Uniform`'s three leaves and the models M1–M3; tree `fs131-w9b` from
+     `50c0edc5`, build copied, pushed). Both planners' generators read whether wave 8 has landed and word the merge
+     of `main` accordingly; while unlaunched they are re-run, not amended. (g) **Wave 9's line does not merge wave
+     6's** — the handoff's "by ancestry from `fs131-w6`" is withdrawn: FS131-K9b reads `ReduceI` at its path and
+     writes the instance's declaration for whichever landing comes second. Alternative: the merge, as I had written.
+     Why not: wave 6's line holds sixty-two open leaves, two of them a deriver's, and a merge would chain wave 9's
+     landing to all of them; ruling 566 (a) fixes which statement the join takes, not where it is made. Confidence:
+     high. (h) **Slot → FS131-K7c** (wave 7's third planner, `debruijn`, in `fs131-w7`), launched 2026-10-07 about
+     01:00 UTC. In flight: 3 (MD1, L8A, K7c). Next into a free slot: FS131-K9b, then FS131-I9B.
