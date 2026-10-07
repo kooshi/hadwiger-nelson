@@ -52,14 +52,16 @@ changed); **the step lemma's module and the shift's, proved** (branch `fs132-wi3
 three axioms) — so of the exclusion's nine steps, the two analytic ones are kernel-checked on a branch. Six bullets filed in
 `LEAN.md` § Searching — Lean.
 
-**FS-124's first round is in** (FS-124 inventory items 6–9): the opening job is done, all six claims at verdicts, sixteen
-entries (`plans/FS124-E1-derivation.md`), each [hand] or derived from one, one mind. **Running in its slot since 13:30 UTC:
-FS124-P2** (`poros`; brief `data/fs124/briefs/FS124-P2-round-one.md`; record `plans/POROS-2026-10-07-fs124-round1.md`) — the
-second round's card. **At its "card saved" message**: read the card whole; fix its first claims in `data/fs124/claims.md` by
-script (a dated line, as item 3 did); brief the second derive round (`ephodos`; the pattern is
-`data/fs124/briefs/FS124-E1-opening.md` without the opening, generator `data/fs131/briefs/scripts/mk-fs124-e1.py`) into the
-first free slot; file its re-posed search lines and any change of rank at its hand-back (fact-audit base: the last commit that
-touched `plans/FRONTIER-STUBS.md`).
+**FS-124's second round is posed** (FS-124 inventory item 12; the card in `plans/STUB-q-ring.md`, § dated "after the first
+round": the unit is the *save* — a close complementary pair of three-colour points and its two common unit points; five claims,
+four of which spend six; fixed in `data/fs124/claims.md`). **Briefed, waiting for the first free slot (14:00 UTC): FS124-E2**
+(`ephodos`; brief `data/fs124/briefs/FS124-E2-second-round.md`, gate exit 0; record `plans/FS124-E2-derivation.md`) — **launch
+it when the asking lane's job hands back** (it is finishing its search lines, the stub's bearings and three lines for Kooshi),
+with the line "Your brief is on disk: read it in full first." and the brief's path. Its messages: each claim's statement with
+its *not claimed* line (dated lines in the claim list); a verdict per claim; **a held object that breaks the card's pattern,
+or a save by one member built by formula — it stops and messages first**; anything that would fix the value → Kooshi at once.
+**At the asking lane's hand-back also**: file its re-posed search lines (`plans/SEARCH-QUEUE.md` lines 12, 13) and any change
+of rank (fact-audit base: the last commit that touched `plans/FRONTIER-STUBS.md`).
 
 **Briefed, waiting for the next free slot (13:22 UTC): FS124-K1, the kernel planner for FS-124's first module** (`debruijn`; brief
 `data/fs124/briefs/FS124-K1-kernel-plan.md`, gate exit 0, **fenced: blind first**; kernel claim list `data/fs124/claims-K1.md`;

@@ -245,4 +245,39 @@ between two colours that is an arc of the unit circle about a point one unit awa
     (`plans/FS124-E1-derivation.md` Stage 3). A known soft spot in its fence, logged now: my commit subjects of this
     afternoon say the radius clause was "derived" — a verdict it may have been shown at launch; by Workflow 3.1 the
     planner's blindness serves discovery and carries no grade.
+12. **FS124-P2, first message (13:59 UTC): the second round's card is saved — and the unit is neither the card's nor the
+    deriver's** (commit `5391e239`; `plans/STUB-q-ring.md` § The question (Poros, 2026-10-07, after the first round); record
+    `plans/POROS-2026-10-07-fs124-round1.md` Stages 0–2, its gate exit 0). **"A tight pair is an effect, not a cause"**:
+    read by sample from the tiles of the two six-coloured maps held ([tools], one mind; four planted faults fire), every
+    centre of unit arcs inside the strip and the disk is a point at distance 1 from two three-label points with
+    complementary triples less than 2 apart, **with exactly one edge of each of the two on the centre's unit circle — 94
+    of 94**; its four labels are those two edges' labels, its absent pair the two third labels — 91 of 91 off the cut; and
+    no common unit point of such a pair inside either object fails to be a centre. **"The number six is spent at the
+    pair, not at the centre"** — two disjoint triples are all six labels (last night's sharp form of the complementary
+    pair, one mind). The tight seven-colouring has no three-label point, "so survives every statement below with nothing
+    to check". **The card**: when a close complementary pair is *saved* at a common unit point, must one edge of each
+    member lie on its unit circle — and what does a weak six-colouring then carry there and at the second common unit
+    point? **Five first claims; four spend six** (hold at six, fail at seven, the witness named): C124-READ-SAVES (a
+    reading on the five held objects not yet read), **C124-FORCED** (a close complementary pair forces a tight arc at each
+    common unit point; fails on the honeycomb at circumradius 2/5), **C124-ONE-MEMBER** (a save by one member alone: build
+    it by formula, or name the step that forbids it — "decides the card"), C124-EDGE (the strip's top edge: no
+    continuation keeping its two central rows saves those points by both members), C124-SECOND (a pair's two saves use
+    different edges at each member; a cyclic order of the six labels). **Registered**: one edge of each member forced
+    0.2; a save by one member exists 0.45; neither decided 0.35; an exclusion at an explicit radius within this milestone
+    0.07; a six-coloured object above the strip's top edge or outside the disk 0.12; six against seven decided 0.03.
+    **Not checked, by its own word**: "everything is sampled, not exact"; one hypothesis not read; five objects unread;
+    one claim's statement "my hand computation from one output"; "nothing here is derived, and nothing says a weak
+    six-colouring has a close complementary pair — that is FS-122's". **Three findings against my brief and my item 9,
+    each accepted**: (a) **the count at a four-label centre does not spend six** — it is stated for `k ≥ 4` and true at
+    every `k`; only the rhombus's two statements use the number six: my item 9's sentence "every statement but the count
+    is true at every number of labels" named the wrong exception; (b) the rhombus's two-set statement, which I filed among
+    those that "may exclude nothing", **is met at every centre read and is the law of each centre's label set** — "it
+    excludes nothing; it determines"; (c) "0 of 92 ends centre a unit arc" is true and hid a positive: all 40 interior
+    ends of the strip are three-label points one unit from exactly two centres — "it was read for the wrong property".
+    **My receipt**: the commit is on `main`; **the new section read whole by me** (lines 271–432 of the stub). Not checked
+    by me: its reader's script; any count. **Rulings.** (a) **The five claims are fixed in the claim list by script**, with
+    the card's definitions. (b) **The second derive round is briefed on them** (FS124-E2) and launches into the first free
+    slot. (c) My two wrong sentences are corrected here and in the report to Kooshi. (d) The card's own caution is the
+    milestone's: every claim says it does not claim that a weak six-colouring has a three-piece point or a close
+    complementary pair.
 
