@@ -1,0 +1,34 @@
+no_proper_five_coloring : ¬∃ c, ProperColoring 5 c
+@proper_to_borel_weak : ∀ {k : ℕ} [NeZero k] {c : ℂ → Fin k}, ProperColoring k c → ∃ d, Measurable d ∧ WeakColoring k d
+@properColoring_iff_colorable : ∀ {k : ℕ}, (∃ c, ProperColoring k c) ↔ (unitDistance ℂ).Colorable k
+@weakColoring_iff_unitPairsNull : ∀ {k : ℕ} {d : ℂ → Fin k},
+  Measurable d → (WeakColoring k d ↔ ∀ (j : Fin k), Plane.UnitPairsNull (d ⁻¹' {j}))
+@nonempty_aeColouring_of_weak : ∀ {k : ℕ} {d : ℂ → Fin k},
+  Measurable d → WeakColoring k d → Nonempty (Plane.AeColouring k)
+@weakColoring_of_aeColouring : ∀ {k : ℕ} (a : Plane.AeColouring k), WeakColoring k a.col
+@exists_weakColoring_iff_nonempty_aeColouring : ∀ {k : ℕ},
+  (∃ d, Measurable d ∧ WeakColoring k d) ↔ Nonempty (Plane.AeColouring k)
+proper_to_borel_weak_model : (∃ c, ProperColoring 7 c) ∧ ∃ d, Measurable d ∧ WeakColoring 7 d
+not_colorable_five : ¬(unitDistance ℂ).Colorable 5
+six_le_chromaticNumber_plane : 6 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber
+chromaticNumber_plane_six_or_seven : 6 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ∧
+  (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ≤ 7
+@nonempty_aeColouring_of_colorable : ∀ {k : ℕ}, (unitDistance ℂ).Colorable k → Nonempty (Plane.AeColouring k)
+@colorable_iff_nonempty_aeColouring : ∀ {k : ℕ}, (unitDistance ℂ).Colorable k ↔ Nonempty (Plane.AeColouring k)
+chiM0_le_chromaticNumber_plane : Plane.chiM0 ≤ (unitDistance ℂ).chromaticNumber
+chromaticNumber_plane_eq_chiM0 : (unitDistance ℂ).chromaticNumber = Plane.chiM0
+six_le_chiM0 : 6 ≤ Plane.chiM0
+chiM0_six_or_seven : 6 ≤ Plane.chiM0 ∧ Plane.chiM0 ≤ 7
+seven_le_chromaticNumber_plane_iff : 7 ≤ (unitDistance ℂ).chromaticNumber ↔ ⨆ ε, ⨆ (_ : ε > 0), Plane.mu 6 ε < 1
+'HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Plane.seven_le_chiM0_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff : Iff
+  (LE.le 7 (HadwigerNelson.unitDistance Complex).chromaticNumber)
+  (LT.lt (iSup fun ε => iSup fun h => HadwigerNelson.Plane.mu 6 ε) 1)

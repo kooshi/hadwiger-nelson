@@ -167,8 +167,8 @@ under PURCHASED — and so does any axiom the library declares without a `declar
 not (`undeclared-library-axiom`, from `libraryAxioms`, the file's last command). The library
 declares three imports at present: wave 10's `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207, FS131-K10c), with
 eight records below, and FS-132's `Outside.OAI158.no_proper_five_coloring` and `Outside.OAI158.proper_to_borel_weak`
-(`[OAIMath2026]` family 158, FS132-I1), with five and four; its first, wave 2's `falconer_lemma2_nonempty`, is a theorem
-since FS131-IF1 (FS131-L10B's join).
+(`[OAIMath2026]` family 158, FS132-I1), with five and five (the fifth on the transfer is FS132-L1's); its first, wave 2's
+`falconer_lemma2_nonempty`, is a theorem since FS131-IF1 (FS131-L10B's join).
 
 **Why this section comes first.** The gate reads the sections in any order, but two things do not move:
 PURCHASED stays last, because `tools/check_architecture.py` reads every `#print axioms` after its banner
@@ -219,11 +219,12 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven
 #print axioms HadwigerNelson.Outside.OAI158.six_le_chiM0
 #print axioms HadwigerNelson.Outside.OAI158.chiM0_six_or_seven
--- FS132-I1: the records resting on `proper_to_borel_weak` (`[OAIMath2026]` family 158, `BorelTransfer.lean:436–437`)
+-- FS132-I1: the records resting on `proper_to_borel_weak` (`[OAIMath2026]` family 158, `BorelTransfer.lean:436–437`); the last is FS132-L1's
 #print axioms HadwigerNelson.Outside.OAI158.nonempty_aeColouring_of_colorable
 #print axioms HadwigerNelson.Outside.OAI158.colorable_iff_nonempty_aeColouring
 #print axioms HadwigerNelson.Outside.OAI158.chiM0_le_chromaticNumber_plane
 #print axioms HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0
+#print axioms HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff
 
 #eval IO.println "=== CLEAN ==="
 

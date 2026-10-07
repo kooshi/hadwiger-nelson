@@ -1,0 +1,4 @@
+slot: admitted python3: mem 8 GiB (hard cap), cpus 0,1,2,3
+    Proofs.HadwigerNelson.Instances.HexShell: 41 constants
+    Proofs.HadwigerNelson.Outside.OAI158: 45 constants
+dump: 86 constants of 2 modules written to data/fs132/l1/sigs-before.txt
