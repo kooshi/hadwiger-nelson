@@ -360,4 +360,20 @@ the death of every such cycle — which are what the answer is made of and are n
   carried by any connected subset of one smoothed class's superlevel set — no hole, no centre, no isolation, one label at a
   time) and C132-WIT-EX-FIN (an anchored witnessed cycle on every disc with finitely many centres). *Not claimed*: each
   entry's own line. **Not yet answered**: C132-GRUNDY7.
+- **2026-10-07 (after FS132-E5's Stage 4, commit `1cf25b20`; FS-132 inventory item 19): C132-GRUNDY7 has its verdict** — read
+  each entry whole:
+
+> derivation: C132-GRUNDY7-NOT
+> — source: plans/FS132-E5-derivation.md
+
+> derivation: C132-GRUNDY7-LOCAL
+> — source: plans/FS132-E5-derivation.md
+
+  **C132-GRUNDY7: stalls at its second clause, which is not one statement** — "the Grundy-ization of each" names a family (a
+  maximality choice at each step, after a choice of order). Derived: **C132-GRUNDY7-NOT** (for no order is the honeycomb
+  colouring, the island colouring or the stripe colouring a Grundy colouring — true already of the unmodified honeycomb, so
+  the clause does not test the planted slack) and **C132-GRUNDY7-LOCAL** (for an order beginning with a label of the slack
+  vertex, some output has one label on the whole slack ball). **The second clause is withdrawn as posed**; its two readings —
+  "some output" and "every honest seven-colouring" — are open and go to the asking lane to pose or drop. **The class of
+  C132-RING-TAME's first clause is not decided by this claim.**
 

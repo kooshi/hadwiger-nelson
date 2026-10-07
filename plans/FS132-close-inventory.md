@@ -567,3 +567,29 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     both of tonight's cards stalled, from two sides.** That sentence is the next card's subject; the asking lane cuts it
     when this job's last claim and the search have reported.
 
+19. **FS132-E5 handed back, done (477k by the task notice): the witness card is answered off its branch table, and the test of
+    the cost-free normal form was not well posed** (its report `data/fs132/reports/FS132-E5.md`, commit `67c0c71e`; Stage 4
+    commit `1cf25b20`; its first two verdicts are item 18's). **C132-GRUNDY7: stalls at its second clause** — the Grundy
+    construction defines a family of outputs, not one; derived: no order makes any of the three seven-colourings Grundy,
+    "true already of the unmodified hexagonal colouring" (so the first clause does not test the planted slack), and for a
+    suitable order some output is one label on the whole slack ball. **Its statement defects**: C132-WIT-EX as posed is met
+    at points where none of the cycle's labels is present; C132-GRUNDY7's second clause is not a statement and its first
+    tests nothing. **Corrections owed**: the asking lane's "generalization" for the two-point exclusion is a restatement;
+    the stripe colouring is not a witnessed triangle with a wild ring. **Its smallest open form (O)**: a weak colouring and a
+    disc of radius above 1 in which, at every point, the graph of witnessed label pairs is a forest — a refutation needs
+    infinitely many centres, no margin for any three labels at any point, and no cycle of connected pieces. **Two questions
+    for the asking lane**: what distinguishes a meeting point from a margin is not in two-point data; and do this project's
+    tight seven-colourings have a disc with no margin for any three labels at any point. **Its slips, disclosed**: four
+    inventory items, three ledger rows and one section of the manuscript not read; the proof of the exclusion's clause
+    taken from the first deriver's reworking and reworked from there. **My receipt**: the commits are on `main`; its gate on
+    the final record run by me — exit 0, 13 entries, six warnings (prior art owed); the two new entries' headers quoted into
+    the claim list. Not checked by me: Stage 4's arguments. **Rulings.** (a) **The claim list takes C132-GRUNDY7's verdict;
+    its second clause is withdrawn as posed.** (b) **The kernel lane's statement of the exclusion may take four points** —
+    its recommendation and the asking lane's, now with a derived entry behind it (C132-WIT): told to the planner when its
+    fence lifts. (c) **Both cards of the second round are answered, each off its branch table, and they stall at one
+    place from two sides** (item 18 (d)): the next card is the asking lane's — FS132-P3, briefed now, **launched when the
+    day's search reports**, so that it has the turning ring's fate. (d) **Staffing for the rest of the night is lowered to
+    two agents at once**, mine to rule under Kooshi's cap: by the clock the night is under two hours old and has run three
+    at a time throughout — three at a time would spend the budget too fast. Two is the kernel planner plus one of the derive lanes; the freed slot stays empty now.
+    Alternative: keep three. Why not: "keep us on track to 6 or 7" is an instruction about direction, and the budget is his. Confidence: medium — 
+
