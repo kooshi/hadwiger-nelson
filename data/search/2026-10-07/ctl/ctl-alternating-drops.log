@@ -1,0 +1,13 @@
+VARIANT alternating-max6-simple-straight: vars=342 clauses=4371  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max6-simple-straight.lrat  minimal-refusing-groups=['ring', 'rr:0,4', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+VARIANT alternating-max6-simple-straight-drop_rr1_1-drop_rr1_4-drop_rr4_1-drop_rr5_3: vars=342 clauses=4227  SAT  models(projected, cap 20000)=20000  first -> MODEL-alternating-max6-simple-straight-drop_rr1_1-drop_rr1_4-drop_rr4_1-drop_rr5_3.json
+  y_0: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=4 I_cw=a
+  y_1: O_cw=b O_far=n O_ccw=a I_ccw=a I_lens=3 I_cw=b
+  y_2: O_cw=a O_far=n O_ccw=b I_ccw=b I_lens=n I_cw=a
+  y_3: O_cw=b O_far=n O_ccw=a I_ccw=a I_lens=n I_cw=b
+  y_4: O_cw=3 O_far=n O_ccw=b I_ccw=b I_lens=n I_cw=a
+  y_5: O_cw=b O_far=n O_ccw=a I_ccw=a I_lens=n I_cw=b
+  x:   4 3 5 5 5 5 5 5 5 5 5 5   K=SSSSSS
+VARIANT alternating-max6-simple-straight-drop_rr1_1: vars=342 clauses=4335  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max6-simple-straight-drop_rr1_1.lrat  minimal-refusing-groups=['ring', 'rr:0,4', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+VARIANT alternating-max6-simple-straight-drop_rr1_4: vars=342 clauses=4335  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max6-simple-straight-drop_rr1_4.lrat  minimal-refusing-groups=['ring', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,0', 'rr:4,1', 'rr:4,2', 'rr:5,3', 'rr:5,4', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+VARIANT alternating-max6-simple-straight-drop_rr4_1: vars=342 clauses=4335  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max6-simple-straight-drop_rr4_1.lrat  minimal-refusing-groups=['ring', 'rr:0,4', 'rr:1,4', 'rr:1,5', 'rr:3,1', 'rr:3,3', 'rr:4,2', 'rr:4,3', 'rr:5,3', 'rr:5,5', 'xr:1', 'xr:3', 'xr:4', 'xr:5', 'xtri']
+VARIANT alternating-max6-simple-straight-drop_rr5_3: vars=342 clauses=4335  UNSAT  cake_lpr=VERIFIED  proof=cnf/alternating-max6-simple-straight-drop_rr5_3.lrat  minimal-refusing-groups=['ring', 'rr:0,4', 'rr:1,0', 'rr:1,1', 'rr:1,4', 'rr:1,5', 'rr:2,1', 'rr:3,1', 'rr:4,1', 'rr:4,2', 'rr:5,4', 'straight', 'xr:1', 'xr:2', 'xr:4', 'xtri']

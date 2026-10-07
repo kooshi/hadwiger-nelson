@@ -1,0 +1,8 @@
+turning     simple-straight: satisfiable with no bound on labels: False;  maximal sets of ring points with at most three labels: []
+turning     simple-curved  : satisfiable with no bound on labels: True;  maximal sets of ring points with at most three labels: [[0, 2, 4], [1, 3, 5]]
+turning     any-straight   : satisfiable with no bound on labels: True;  maximal sets of ring points with at most three labels: [[0, 3], [1, 4], [2, 5]]
+turning     any-curved     : satisfiable with no bound on labels: True;  maximal sets of ring points with at most three labels: [[0, 2, 4], [0, 3], [1, 3, 5], [1, 4], [2, 5]]
+alternating simple-straight: satisfiable with no bound on labels: False;  maximal sets of ring points with at most three labels: []
+alternating simple-curved  : satisfiable with no bound on labels: False;  maximal sets of ring points with at most three labels: []
+alternating any-straight   : satisfiable with no bound on labels: False;  maximal sets of ring points with at most three labels: []
+alternating any-curved     : satisfiable with no bound on labels: False;  maximal sets of ring points with at most three labels: []

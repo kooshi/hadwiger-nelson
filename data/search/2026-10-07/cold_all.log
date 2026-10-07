@@ -1,0 +1,110 @@
+model=MODEL-turning-max4-any-curved.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): [(270, 'B')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max4-any-curved.json ta=1/8 rc=0
+model=MODEL-turning-max4-any-curved.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): [(270, 'B')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max4-any-curved.json ta=1/20 rc=0
+model=MODEL-turning-max4-any-straight.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): []
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max4-any-straight.json ta=1/8 rc=0
+model=MODEL-turning-max4-any-straight.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): []
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max4-any-straight.json ta=1/20 rc=0
+model=MODEL-turning-max4-simple-curved.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=219 REJECTED=0
+   labels at y_0..y_5: [3, 4, 3, 4, 3, 4]  sectors at x: 3  curved interfaces at x (direction, type): [(30, 'A'), (150, 'A'), (270, 'A')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max4-simple-curved.json ta=1/8 rc=0
+model=MODEL-turning-max4-simple-curved.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=219 REJECTED=0
+   labels at y_0..y_5: [3, 4, 3, 4, 3, 4]  sectors at x: 3  curved interfaces at x (direction, type): [(30, 'A'), (150, 'A'), (270, 'A')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max4-simple-curved.json ta=1/20 rc=0
+model=MODEL-turning-max5-any-curved.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=224 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): [(90, 'B')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max5-any-curved.json ta=1/8 rc=0
+model=MODEL-turning-max5-any-curved.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=224 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): [(90, 'B')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max5-any-curved.json ta=1/20 rc=0
+model=MODEL-turning-max5-any-straight.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): []
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max5-any-straight.json ta=1/8 rc=0
+model=MODEL-turning-max5-any-straight.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): []
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max5-any-straight.json ta=1/20 rc=0
+model=MODEL-turning-max5-simple-curved.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=218 REJECTED=0
+   labels at y_0..y_5: [3, 4, 3, 4, 3, 4]  sectors at x: 3  curved interfaces at x (direction, type): [(90, 'B'), (210, 'B'), (330, 'B')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max5-simple-curved.json ta=1/8 rc=0
+model=MODEL-turning-max5-simple-curved.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=218 REJECTED=0
+   labels at y_0..y_5: [3, 4, 3, 4, 3, 4]  sectors at x: 3  curved interfaces at x (direction, type): [(90, 'B'), (210, 'B'), (330, 'B')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max5-simple-curved.json ta=1/20 rc=0
+model=MODEL-turning-max6-any-curved.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): [(90, 'B'), (330, 'B')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max6-any-curved.json ta=1/8 rc=0
+model=MODEL-turning-max6-any-curved.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): [(90, 'B'), (330, 'B')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max6-any-curved.json ta=1/20 rc=0
+model=MODEL-turning-max6-any-straight.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): []
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max6-any-straight.json ta=1/8 rc=0
+model=MODEL-turning-max6-any-straight.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): []
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max6-any-straight.json ta=1/20 rc=0
+model=MODEL-turning-max6-simple-curved.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=218 REJECTED=0
+   labels at y_0..y_5: [3, 4, 3, 4, 3, 4]  sectors at x: 3  curved interfaces at x (direction, type): [(90, 'B'), (210, 'B'), (330, 'B')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max6-simple-curved.json ta=1/8 rc=0
+model=MODEL-turning-max6-simple-curved.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=218 REJECTED=0
+   labels at y_0..y_5: [3, 4, 3, 4, 3, 4]  sectors at x: 3  curved interfaces at x (direction, type): [(90, 'B'), (210, 'B'), (330, 'B')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT MODEL-turning-max6-simple-curved.json ta=1/20 rc=0
+model=KEEP-turning-4label-arcs.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=219 REJECTED=0
+   labels at y_0..y_5: [3, 4, 3, 4, 3, 4]  sectors at x: 3  curved interfaces at x (direction, type): [(30, 'A'), (150, 'A'), (270, 'A')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT KEEP-turning-4label-arcs.json ta=1/8 rc=0
+model=KEEP-turning-4label-arcs.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=219 REJECTED=0
+   labels at y_0..y_5: [3, 4, 3, 4, 3, 4]  sectors at x: 3  curved interfaces at x (direction, type): [(30, 'A'), (150, 'A'), (270, 'A')]
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT KEEP-turning-4label-arcs.json ta=1/20 rc=0
+model=KEEP-turning-4label-straight.json ta=1/8 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): []
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT KEEP-turning-4label-straight.json ta=1/8 rc=0
+model=KEEP-turning-4label-straight.json ta=1/20 yplant=None tiles=48 same-colour pairs (self included)=227 REJECTED=0
+   labels at y_0..y_5: [4, 4, 4, 4, 4, 4]  sectors at x: 4  curved interfaces at x (direction, type): []
+   family conditions violated: none   geometry guard (float): samples=3110 wrong=0
+VERDICT ACCEPT
+EXIT KEEP-turning-4label-straight.json ta=1/20 rc=0
