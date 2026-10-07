@@ -503,4 +503,26 @@ between two colours that is an arc of the unit circle about a point one unit awa
     once**: with this library's interval, the Hadwiger–Nelson problem is the statement that some disc has no measurable
     six-colouring proper at almost every unit pair (seven) or that every disc has one (six) — a theorem of this library on
     one declared outside theorem, on a branch. It moves no value.
+24. **FS124-I1 done (389k and 31 minutes by the task notice): the radius clause's module is proved whole on its branch and
+    ready for a landing** (implementer; record `plans/FS124-I1-implementation.md` on branch `fs124-wk1`, tip `80ee1983`,
+    working tree clean; its report is its hand-back). 57 of 57 theorems; build exit 0 with no warning; **no statement,
+    definition, docstring or import changed and no declaration added** (72 of 72 stored terms identical, control fired);
+    52 on the standard three, four on the Borel-transfer import, one on the five-colour import, none on both — as the
+    planner listed; its block in the axioms script (on the branch: 6,585 clean, 23 imported); architecture check,
+    duplicate-name check and the guarded lint pass; no binder unread by its proof (asked per theorem, with a planted
+    control). **Price**: about half an hour, 204 lines, one retry on one leaf — the planner's estimate held. **For the
+    landing**: counts measured on the branch's base (clean +52, imported +5; the assumptions' `rests` +5; vacuity
+    declarations +78, one new site, nothing vacuous or unknown); **twelve drafts with their slots, a new ledger row among
+    them**; the IMPORTED section's prose in the axioms script outside its block. **Its slips, disclosed**: one build where
+    the brief asked one per module; no control on the lint itself; its checkers under `data/`. **My receipt**: item 23's,
+    and the tip and clean tree read on `origin`. **Its held points, ruled**: its checkers stay where they are (a landing is
+    in flight; `tools/` is not written now); the per-module builds are not re-run — the final build on the committed tree
+    stands for them. **Credit**: a stored-term check that no statement moved; the two halves of the criterion printed
+    apart; the planner's route corrected where its check had run under a wider import.
+    **Next for this branch**: its landing, after the one in flight (FS132-L2) is back and filed — the two do not touch the
+    same Lean files, and a second landing in flight at once is not run. **Into its slot now: the kernel planner for the
+    second module, blind first** (FS124-K2; kernel claim list `data/fs124/claims-K2.md`, fixed 15:15 UTC: nine statements
+    — the one lemma; the centre's statement, whole and collar by collar; the wide form at a point one unit from a far end;
+    the second round's lemma on one piece and one side; the forcing on pieces; what a save by one member forces; both
+    members for full ones; four labels) — **the second mind the second round's deriver asked for**.
 
