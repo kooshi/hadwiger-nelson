@@ -43,12 +43,19 @@ fact-audit base is `fd398836`**); **FS-124 is chosen and its inventory is open**
 | job | where | what it hands on | on its message or hand-back |
 |---|---|---|---|
 | **FS124-P1** (`poros`) — FS-124's question, then the re-rank | `main`; record `plans/POROS-2026-10-07-fs124-question.md`; brief `data/fs124/briefs/FS124-P1-question.md` | the question card in `plans/STUB-q-ring.md` for measurable colourings (it messages when the card is saved); the re-rank of `plans/FRONTIER-STUBS.md` in full; three lines for Kooshi | **at "card saved"**: read the card; brief **FS-124's opening job** (`ephodos`: §G, §PA, §IQ, the plan, the claim list; the last opening brief is `data/fs132/briefs/FS132-E1-opening-and-first-claim.md`, its generator `data/fs131/briefs/scripts/mk-fs132-e1.py`) — it launches into the first free slot after FS132-I3; **at hand-back**: file the re-rank (`plans/FRONTIER-STUBS.md`, the banners, `CLAUDE.md`'s top three; fact audit `--base fd398836`) |
-| **FS132-K2** (`debruijn`) — the kernel planner's successor | worktree and branch `fs132-wk1` (tip `e0c95ec1` at its first message); record `plans/FS132-kernel-plan.md` there, Stages 4–5 | **done: the exclusion's 49 leaves, the theorem proved from them** (item 38); still to come: the two-pair ring's leaf, three comparisons, a drafted list of what else the module states | **at hand-back: launch FS132-I3 into its slot** (below); fix its drafted list as a dated extension of `data/fs132/claims-K1.md`; lots A, D, E unassigned (A and D need nothing ported; E works on placeholders or after the port) |
+| **FS132-I3** (`debruijn-implementer`) — the step lemma, then the shift's calculus (lots C, B) | worktree and branch `fs132-wi3` (cut from `fs132-wk1` at `e0c95ec1`); record `plans/FS132-I3-implementation.md` there; brief `data/fs132/briefs/FS132-I3-step-lemma.md`; launched 12:47 UTC | the two modules with no `sorry`; a message when `step_lemma` is proved — the one step of the exclusion with a single derivation | log; that message is worth a line to Kooshi (the hand proof's thinnest step checked by the kernel) — or, if a leaf is false, at once |
 | **FS132-I2** (`debruijn-implementer`) — the port | worktree and branch `fs132-wi2`; record `plans/FS132-I2-implementation.md` there | all eight modules elaborate; the read-back across pins by two verdicts (items 34, 37); asked to bring two more lemmas the leaves cite | at hand-back: review; the join (the planner's placeholders file deleted, its importers pointed at the ported modules) is an implementer's first step on lot E; the port and the confinement module can land alone (a landing job, the procedure of `plans/FS132-L1-landing.md`) |
 
-**Briefed, waiting for a slot: FS132-I3** (`debruijn-implementer`, `model: "opus"`; brief `data/fs132/briefs/FS132-I3-step-lemma.md`,
-gate exit 0; worktree and branch `fs132-wi3`, cut from `fs132-wk1` at `e0c95ec1`, build copied): the step lemma's module, then
-the shift's — launch line "Your brief is on disk: read it in full first." and the brief's path.
+**The kernel planner's successor is done** (FS-132 inventory items 38–39; branch `fs132-wk1`, tip `1c5e2609`): 49 leaves in
+five lots that share no file — **A** (the chart's geometry, the tips), **B** and **C** (taken by FS132-I3), **D** (null sets
+through the chart; the kill), **E** (the palettes' steps, on the release's statements; its first step is the join with the
+port: the placeholders' file deleted, its importers pointed at the ported modules). **Unassigned: A, D, E** — each an
+implementer's brief on the pattern of `data/fs132/briefs/FS132-I3-step-lemma.md` (generator
+`data/fs131/briefs/scripts/mk-fs132-i3.py`), a worktree cut from the then-current tip with the build recipe. **The kernel
+claim list is extended by seven statements** (`data/fs132/claims-K1.md`, the dated line "tier A"): a planner's job for them
+(`debruijn`, running the two modeling companions fresh) and the centres' kernel job (with the mesh threshold as a parameter)
+wait for slots. **Slot order from here**: the next milestone's opening job (derive lane) first; then lot E with the join when
+the port is back; then lots A and D; then the tier-A planner.
 
 **Owed, not yet briefed**: the asking lane's job and FS-124's opening (above); the landing of the port; FS-133's kernel planner
 (after the exclusion's module is under way); the release's checking tool's audit (not started; nothing of it has run); the

@@ -498,4 +498,14 @@ the death of every such cycle — which are what the answer is made of and are n
   script): "**C132-CORES-SQUARE** — statement: for every integer k ≥ 1 and every weak measurable k-colouring of the plane, every closed axis-parallel square of side greater than 1 contains a cyclic centre; in particular every closed disc of radius greater than 1/√2 does. *Not claimed:* a square of side 1 or less; that 1/√2 is sharp for discs (in the hexagonal model every disc of radius 2/5 contains one); squares that are not axis-parallel (they follow by rotating the colouring; not stated); anything for a colouring of a bounded region." — posed by the planner, [hand], one mind, its route not yet compared with the first deriver's steps;
   C132-CORES-FREE is its corollary. (iv) **C132-CONFINE holds for every set** — neither compactness nor connectedness — and is
   proved in Lean on that branch (not landed).
+- **2026-10-07 (after FS132-K2's Stage 6, commit `34ba3019` on branch `fs132-wk1`; FS-132 inventory item 39): the comparison
+  C132-CORES-SQUARE was waiting for is made — at the grade of a checking reading, one mind, with the argument open; the
+  verdict stays "gap" until a deriver's entry or a kernel proof stands.** The planner's successor read the first deriver's
+  steps against its predecessor's route: the route is that deriver's steps S5 and S7 with S6 exchanged for this library's
+  covering theorem for the square, "and on this reading only S6 reads the region's shape … I see no step left to derive".
+  **A fact for whoever formalizes it**: the release's Lean mesh theorem refutes connected sets joining points more than 2
+  apart, where the hand argument proves every threshold above 1; re-typed as it stands the kernel would hold a square of
+  side above 2 — a disc of radius above √2, less than C132-CORES-FREE claims. The index lemmas: "no difference in
+  statement" between the planner's one lemma and the second deriver's two entries. The four-point form and the witness
+  card's restatement: "the same statement".
 

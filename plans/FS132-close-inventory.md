@@ -1137,3 +1137,33 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     frees** (three are in use). (b) Its question for the port is relayed (one lemma is in the cone by the implementer's
     count; the other asked for either way). (c) Its four items are logged here as its own.
 
+39. **FS132-K2 done (522k and 56 minutes by the task notice): the exclusion is a proved assembly over 49 leaves; the
+    comparisons are made; a list of what else the module states is drafted** (planner; record `plans/FS132-kernel-plan.md`
+    Stages 4–7 on branch `fs132-wk1`, tip `1c5e2609`; its report is its hand-back). Beyond item 38: **the two-pair ring's
+    two rewording leaves are proved** (that module has no `sorry` of its own; it rests on the release's theorem, a
+    placeholder until the port); **the square form's comparison** (in the claim list's dated line); the index lemmas and
+    the four-point form agree in statement with the derivers' entries; **the release's Lean mesh constant is 2 where the
+    claim needs every threshold above 1** — a port of the centres' chain as typed would prove less than row 156's first
+    statement; **the draft list**: sixteen entries in three tiers, nine groups left out with reasons, five dependencies
+    named, none a new axiom. **Its slips, disclosed**: the modeling companions not run as separate passes ("a successor
+    planning tier A should run them"); a row of the architecture map rewritten in place; the readback committed with the
+    leaves and not before them. **My receipt**: the three commits are on `origin`; the final build log's last lines read by
+    me (exit 0, 2 modules rebuilt); the diff since its first message is the two-pair module alone (19 insertions), so the
+    worktree I cut for the implementer is current in the two files it owns; its § 6.2 and Stage 7's list, omissions and
+    dependencies read whole. Not checked by me: the leaves against their steps; the two proved rewording leaves.
+    **Credit**: an assembly made to elaborate before a single leaf was proved, so that every `sorry` is a leaf and none is
+    the theorem; a constant in the release's Lean read against the claim it would be ported for; written permissions that
+    save implementers a round trip; its own shorter routes labelled "one mind, by hand".
+    **Its held points, ruled.** (a) **The kernel claim list is extended by tier A now** — seven statements, copied by
+    script — **and tiers B and C are named as the order, fixed when their planner's job is briefed** — alternative: fix
+    all sixteen now; rejected, a list is revised only while none of its jobs has launched, and the third round's entries
+    may be re-posed once the next milestone's question is in; confidence medium. Its departures from the asking lane's
+    ranking (the margin statement first, as the model of the four-point hypothesis; two entries stated rather than held)
+    and its omissions are accepted. (b) **C132-CORES-SQUARE stays a gap**, with the comparison on record as a checking
+    reading; **the centres' kernel job, when briefed, carries the mesh threshold as a parameter**. A dated line in the
+    derivation file is owed (its entry says the comparison "nobody has done"). (c) **The join with the port** (the
+    placeholders' file deleted, its importers pointed at the ported modules) is the first step of whichever implementer
+    takes lot E. (d) **FS132-I3 is launched into its slot** (12:47 UTC, read from the clock): lots C then B. Lots A, D and
+    E are unassigned; a planner for tier A and the centres' job wait for slots — the derive lane's opening job on the next
+    milestone goes before them.
+
