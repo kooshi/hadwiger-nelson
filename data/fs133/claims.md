@@ -37,3 +37,13 @@ the release states any of this (its manuscript does not).
   step for any σ-finite space, any window sequence, and a mean that is at least `α` at almost every point — is the form C133-ONE
   consumes (the transfer's field has its mean only at almost every point). C133-DENS stays as posed above, and is derived from
   it. The kernel lane's planner reads C133-DENS-CLASS's statement in that record as the one to formalize.
+- **2026-10-07 (after FS133-E1's Stage 7; FS-133 inventory item 3):** all four posed claims are derived, [hand], one mind. The
+  entries of `plans/FS133-E1-derivation.md` that carry them enter this list, each statement as its entry there states it:
+  **C133-INV-CLASS** (the invariant law, with equality, for every rotation-invariant connection set — C133-INV as posed is its
+  instance); **C133-ALG** (every invariant law on independent sets of the algebraic plane has density at most `m₁(ℝ²)` — the
+  core of C133-ONE, and the entry that reads the release's rigidity theorem); **C133-FN** (`f(n)/n → m₁(ℝ²)`); **C133-PAIR**
+  (the pair-constraint transfer — C133-HOM as posed is its instance); and the relay-results **C133-EASY, C133-PER, C133-DP,
+  C133-CHIF**, known statements re-derived. *What they rest on, added*: the release's Theorem 2.3 itself (`wild_fourier`,
+  [kernel, outside]) — not the transfer theorem — and the manuscript's Lemma 4.1 by its proof, re-run by hand for an arbitrary
+  invariant law.
+

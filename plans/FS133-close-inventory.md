@@ -53,3 +53,61 @@ inventory, items 607–625 (an outside proof of six became this project's litera
    rule is a dated line for a later change. Confidence: high. (b) **Nothing is announced**: by this inventory's rule 2 the
    headline is C133-ONE's, and the prior-art search has one pass of two done with one source down. (c) Its scripts go under
    `data/fs133/e1/` from now on, not `tools/`: a landing will be in flight within hours, and `tools/` is not exempt during one.
+
+3. **FS133-E1 done at its Stage 7: all four claims derived — `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)` and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, with no hypothesis of this project's, over one outside theorem; [hand], one mind, kernel pending** (deriver; 477k and 33
+   minutes by the task notice; record `plans/FS133-E1-derivation.md` Stages 1–7, 13 entries, 6 controls; plan
+   `plans/FS133-one-class-transfer.md`; report `data/fs133/reports/FS133-E1.md`; eight commits, `5447beb5` to `b2d58e31`, on `main`,
+   pushed). **What it derived**: C133-DENS (item 2). **C133-INV**, with equality and for every rotation-invariant connection set
+   on the algebraic plane: an invariant random independent set of density `α₁(𝒜²)` exists (Følner pieces, a weak limit); it reads
+   no statement of the release. **C133-ALG**, the core: every `E ⋊ K`-invariant law on independent sets of the algebraic plane has
+   `P(0 ∈ I) ≤ m₁(ℝ²)` — the release's transfer steps run for one indicator: split it into its part continuous in the plane's
+   topology and a rest; the rest's spectral measure is rotation-invariant and null on the continuous characters, so by the
+   release's rigidity theorem its correlation at unit vectors vanishes; the continuous part then has zero unit correlation on the
+   whole circle, is sampled as a measurable field, and C133-DENS with a density-point step gives a measurable 1-avoiding set of
+   density at least `P(0 ∈ I)`. **C133-ONE** then closes by a chain: `α₁(𝒜²) ≤ m₁(ℝ²)` (ALG) `≤ α₁(ℝ²)` (averaging) `≤ α₁(𝒜²)`
+   (fewer graphs) — so no redrawing lemma and no Tarski; the fractional line by a squeeze through `χ_f(ℝ²) ≤ 1/m₁(ℝ²)`.
+   **C133-FN**: `f(n)/n → m₁(ℝ²)` (Fekete) — the first clause of `[DuczVarga2026]`'s Conjecture 1. **C133-HOM**, both directions,
+   as an instance of **C133-PAIR**: a transfer for forbidden label pairs at any countable set of algebraic distances. **The
+   control that matters**: run at `ℚ(√3,√11)`, where the conclusion is false (`1/4 > m₁`), every step runs but the rigidity
+   theorem — the field enters there and nowhere else. **What it rests on**: the release's Theorem 2.3 (`wild_fourier`,
+   [kernel, outside]), **read itself — so the import gains a third outside theorem; the transfer theorem already imported cannot
+   stand in, it carries no density**; and **the manuscript's Lemma 4.1, read by its proof and re-run for an arbitrary invariant
+   law** — the release's Lean holds that step only for its own label model, in pieces, so this is hand work here. **Prior art**:
+   two passes on 2026-10-07 (fifteen arXiv queries, four repeated; two web searches) found no statement of either equality and
+   no listing after 2026-09-28; **zbMATH was down at both passes — not searched**; MathOverflow and blogs not searched;
+   neighbours named and unread. **Its predictions**: five of five met — written after a first pass through the routes, by its
+   own account no measure. **Slips**: the stub cites a Følner step as "two blind minds" where the cited line grades one mind
+   (the asking lane's); its own — predictions not blind to the routes, no token count readable, three scripts in `tools/` before
+   my word (they stay).
+   **My receipt**: the eight commits are on `main`; its gate run by me — exit 0, 0 failures, 0 warnings, six controls each
+   firing on its fault; Stage 5's arguments for C133-ALG, C133-ONE and C133-FN and Stage 7 read whole. **Checked by me**: F6's use
+   of the outside theorem against the theorem itself — the release's Lean statement as the audit quotes it (`wild_fourier (μ :
+   Measure D) [IsProbabilityMeasure μ] (hw : IsWild μ) (z : E) (hz : z ≠ 0) : ∫ d, (eval z d : ℂ) ∂μ = 0`, with `IsWild ν` =
+   rotation-invariant and `ν C = 0`) and the manuscript's Theorem 2.3 at its lines, read by me: the three things F5 establishes
+   of the rest's spectral measure are that statement's hypotheses; F3's bookkeeping (`T_z f` is the indicator of `z ∈ I`, so the
+   unit correlation is the probability that two adjacent points both lie in an independent set, zero); F6's cross terms; the
+   closing chain's three inequalities, each in its direction. **Not checked by me**: Lemma 4.1 run for a general invariant law —
+   **the heaviest link no second reader and no kernel has seen**; Stage 4 (the invariant law); Stage 6; the relay-results; any
+   search query.
+   **Credit**: the control at `ℚ(√3,√11)` — the chain run where its conclusion is false, to show the one step that must fail
+   is the outside theorem and only it; the closed chain that makes Tarski unnecessary; each posed claim tested at a wider class
+   and all three held; "a search this shallow says 'not found', not 'first'", written by the mind with most reason to write the
+   other word; and the note that the already-imported theorem cannot carry this.
+   **Rulings.** (a) **Announced to Kooshi now as "derived, one mind; over one outside theorem; not found in print by a search
+   that lacks one source"** — rule 2's first clause is met (every step saved; the gate green, run by me). **Not announced as "a
+   result of this project's"** until a zbMATH search has been run: both passes were made, as the rule asks, and both lacked it.
+   Alternative: call the rule met, since two passes were run. Why not: the rule's point is the search, and the reviewing
+   database is where an earlier statement would most likely sit. Confidence: high. (b) **`plans/FS133-E1-derivation.md` is the
+   milestone's derivation file**; no separate record job — thirteen entries, and its Stage 7 holds the trace as eight drafts.
+   FS-133 is **Derived when those drafts are filed**, which waits for the front-page filing's branch to merge (row 129 and the
+   grokkings file are on it) and is then done by me: D1–D8, three bibliography rows, the claim list's lines, and the state
+   words on the front page. (c) **The claim list gains dated lines** for C133-INV-CLASS, C133-ALG, C133-PAIR, C133-FN and the
+   four relay-results, statements by address. (d) **Its Lean form waits on Kooshi's word** (FS-131 inventory item 630: what is
+   formalized is reprioritized after the exploration). My recommendation to him: first among Lean jobs when he reprioritizes —
+   a planner on C133-ONE over the import with `wild_fourier` as its third outside theorem — because nothing is published
+   before Lean and the proof it follows from is public. (e) **A blind second mind before the kernel is his word** (rule 4);
+   my recommendation: none — but if the result is to be told to anyone before its Lean module passes, one first, aimed at
+   Lemma 4.1's general form. (f) **To the asking lane's next job**: two candidate stubs — does any three-point constraint
+   transfer; the field form of the measure-rigidity test (`α₁(ℚ(√635087)²) = m₁(ℝ²)`?). (g) The stub's "two blind minds" line
+   is corrected at the filing (D8). (h) **Slot: held** (FS-131 inventory ruling 630 (c): two Opus agents at once; the next
+   launch is FS-132's split).
