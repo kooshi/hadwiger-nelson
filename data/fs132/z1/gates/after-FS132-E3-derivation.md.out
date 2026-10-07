@@ -1,0 +1,23 @@
+entry lint
+  claim C132-M-ORBIT: minds 1
+  claim C132-M-ORBIT: prior art partly
+  claim C132-M-EXCL: governed by C132-M-ORBIT (hand, minds 1)
+  claim C132-M-EXCL: minds 1
+  claim C132-M-EXCL: prior art partly
+  claim C132-M-EMPTY: governed by C132-M-EXCL (derived from, minds 1)
+  claim C132-M-EMPTY: minds 1
+  claim C132-M-EMPTY: prior art partly
+  claim C132-DIAG-WIDE: minds 1
+  claim C132-DIAG-WIDE: prior art known
+  claim C132-DIAG: governed by C132-DIAG-WIDE (hand, minds 1)
+  claim C132-DIAG: minds 1
+  claim C132-DIAG: prior art known
+  entries: 7  derived: 5  stalled, gapped or refuted: 2
+quotes
+  statements named in more than one place: 0
+controls
+  ok    hug-shift: printed 'ratio-min=1.1614 ratio-max=1.2411 limit=1.1547 nonpositive=0 bad-pairs=0 axis-below-1e-30=True'; with the fault planted ('' → '--fault') it printed 'ratio-min=1.1614 ratio-max=1.2411 limit=' — it fires
+  ok    three-axes: printed 'sign-consistent=36 of 64; kind-A=12 kind-B=24; with no adjacent equal tips=0'; with the fault planted ('' → '--fault') it printed 'sign-consistent=64 of 64; kind-A=12 kind' — it fires
+  ok    positives-escape: printed 'rings=4 change-points=8 all-four-germs-off-Q=0 least-germs-on-Q=2'; with the fault planted ('' → '--fault') it printed 'rings=4 change-points=7 all-four-germs-o' — it fires
+  controls: 3  fired on their faults: 3
+GATE: PASS (0 failures, 0 warnings)

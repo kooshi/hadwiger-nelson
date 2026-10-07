@@ -247,6 +247,8 @@ control: hex7-crossings
   expect: vertex-pairs=342 crossings=684 least-shared-outside=1 own-label-near-crossing=0
   fault: python3 ../data/fs132/e4/ring_card_checks.py hex7 --fault
 
+*Dated line (2026-10-07, filed by FS132-Z1, the record job; source: `plans/FS132-E6-derivation.md` Stage 2, § The two riding controls, with its controls `hex-half-crossings` and `hex-half-sides`; `plans/FS132-close-inventory.md` item 28 (d)):* the control `hex7-crossings` above, at circumradius 2/5, is a control of the margin case. Re-run on the honeycomb at circumradius 1/2, where every tile has diameter exactly 1, its fourth count moves — own-label-near-crossing 0 → 36 of 432 crossings (216 vertex pairs) — and every one of the 5,760 such samples lies inside that vertex's unit circle, as the blocking rule requires. C132-CROSS is untouched; "the zero at 2/5 was the margin". The control stands as run.
+
 control: seam-fragments
   of: C132-COMP-SHARP — the four held seam fragments of FS110-FRAGS, both common unit points: the labels the blocking rule excludes, read off each fragment's own edges at its two centres, against the labels found near the points; FS110-Y's checker beside it; in T2, the edge sets on the unit circle about w
   run: python3 ../data/fs132/e4/ring_card_checks.py fragments
@@ -419,6 +421,8 @@ derivation: C132-TURN
   prior art: partly: in the map classes "no two changes π/3 apart" is Sokolov–Voronov's transversality (by `plans/FS110-CB-verification.md` § D5, as FS132-E2's entry C132-RING-TAME cites it; not read by this job); for weak colourings not found by the milestone's gate
   handoff: Poros — not derived; stalls at a witness at the ring point; the smallest open forms are § Where C132-TURN stalls, items (i)–(iii)
 
+*Dated correction (2026-10-07, filed by FS132-Z1, the record job; sources: `plans/POROS-2026-10-07-fs132-round2.md` ll. 66–76; `plans/FS132-close-inventory.md` item 21; `data/fs132/claims.md`, the dated correction of item 21):* the verdict line of the entry C132-TURN above calls the stalled step "the relation of C132-EXT-DISC's clause (5)". That reads the clause more widely than its entry: clause (5) is derived for the extraction's own continua and says nothing of whatever witnesses a hypothesis hands a point, and for those the relation is false in general (FS132-E5's anchored witnessed triangle at a point whose transition graph is a path: hand, one mind, no control, at seven). The claim list's wording: "C132-TURN's stall is: that a witnessed triangle given at a point lies in that point's own transition graph — a statement no entry of this list asserts." And the statement as posed carries the defect its poser names — it "attaches data of a unit circle to a point defined by its small balls, with nothing joining them"; it stands as stalled and is not re-posed in that form. The entry is left as filed.
+
 control: chart-wedges
   of: C132-PLACE — the chart's three signs (inside the ring; inside the unit circle about the forward neighbour's ring point; inside the one about the backward neighbour's) on 1,681 points, and the label sets the transfer leaves in the four wedges for the two six-sector rings
   run: python3 ../data/fs132/e4/ring_card_checks.py wedges
@@ -585,6 +589,9 @@ centre `x` supplies near the ring (L4; control `forced-pairs`: no forced pair in
   consist of edges of Γ_x"), the second is not derived. **Smallest open form:** *in a weak six-colouring, at a point `y`
   near which one side of a unit circle through `y` carries `a` and then `b` along the circle and nothing else, does every
   set of witnessed edges closing a cycle at `y` contain the pair `{a, b}`?*
+
+  *Dated line (2026-10-07, filed by FS132-Z1, the record job; the text between the quotation marks is FS132-E6's draft, verbatim), on the sentence above "Every pattern of sides has such a point when all six ring points have a pure side: the side is opposite at antipodes, so the six read O O O I I I (take the middle O) or O I O I O I (take any I).":* "2026-10-07, FS132-E6: true when each of the three sets has a point strictly inside three of the six unit circles about the ring points and strictly outside the other three (so when each has a limiting direction at `x` perpendicular to no ring direction); false as written — sets `{x, q_j}` with `|q_j − x| > 2` make all six sides inner-pure and none outer-pure. The entry C132-TURN-EDGE does not use the sentence. And by C132-LENS-SIDE the pattern O I O I O I does not occur at all. Source: `plans/FS132-E6-derivation.md` Stage 2, § The gap in clause (ii)." *And on "the first is the relation of C132-EXT-DISC's clause (5)" in the same item: the dated correction under the entry C132-TURN in this record applies — the clause is read there more widely than its entry.*
+
 - **(ii) The measurable turning orbit.** For an outside state with orbit index 2 or 4 that is not a step near the orbit,
   only L7. No derived form.
 - **(iii) Ring points with no pure side.** Every statement of this stage is void at a ring point on whose unit circle an

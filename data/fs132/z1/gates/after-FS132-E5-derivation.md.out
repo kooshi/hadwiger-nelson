@@ -1,0 +1,42 @@
+entry lint
+  warn  FS132-E5-derivation.md:169 (C132-WIT-ORBIT): derived from 'C132-M-ORBIT', which is not an entry in these files — its grade cannot be read
+  claim C132-WIT-ORBIT: minds 1
+  claim C132-WIT-ORBIT: prior art partly
+  warn  FS132-E5-derivation.md:181 (C132-WIT-EXCL): derived from 'C132-M-EXCL', which is not an entry in these files — its grade cannot be read
+  claim C132-WIT-EXCL: minds 1
+  claim C132-WIT-EXCL: prior art partly
+  claim C132-WIT-STRIP: minds 1
+  claim C132-WIT-STRIP: prior art partly
+  claim C132-WIT: governed by C132-WIT-ORBIT (derived from, minds 1)
+  claim C132-WIT: governed by C132-WIT-EXCL (derived from, minds 1)
+  claim C132-WIT: governed by C132-WIT-STRIP (hand, minds 1)
+  claim C132-WIT: minds 1
+  claim C132-WIT: prior art partly
+  claim C132-WIT-SIDE: minds 1
+  claim C132-WIT-SIDE: prior art partly
+  claim C132-WIT-MARGIN: minds 1
+  warn  FS132-E5-derivation.md:358 (C132-WIT-MARGIN): prior art owed — novelty unmeasured; a standing finding
+  claim C132-WIT-MARGIN: prior art owed
+  claim C132-WIT-CROSSED: minds 1
+  warn  FS132-E5-derivation.md:370 (C132-WIT-CROSSED): prior art owed — novelty unmeasured; a standing finding
+  claim C132-WIT-CROSSED: prior art owed
+  claim C132-WIT-SUPER: minds 1
+  claim C132-WIT-SUPER: prior art partly
+  warn  FS132-E5-derivation.md:394 (C132-WIT-EX-FIN): derived from 'C132-EXT-DISC', which is not an entry in these files — its grade cannot be read
+  claim C132-WIT-EX-FIN: minds 1
+  claim C132-WIT-EX-FIN: prior art partly
+  claim C132-GRUNDY7-NOT: minds 1
+  claim C132-GRUNDY7-NOT: prior art partly
+  claim C132-GRUNDY7-LOCAL: minds 1
+  warn  FS132-E5-derivation.md:585 (C132-GRUNDY7-LOCAL): prior art owed — novelty unmeasured; a standing finding
+  claim C132-GRUNDY7-LOCAL: prior art owed
+  entries: 13  derived: 11  stalled, gapped or refuted: 2
+quotes
+  statements named in more than one place: 0
+controls
+  ok    delta-monotone: printed 'in-the-smaller=28434 violations=0'; with the fault planted ('' → '--fault') it printed 'in-the-smaller=59075 violations=30641' — it fires
+  ok    strip-sides: printed 'samples=200000 outer=50147 inner=149853 disagreements=0'; with the fault planted ('' → '--fault') it printed 'samples=200000 outer=50147 inner=149853 ' — it fires
+  ok    margin-witness: printed 'colourings=3 points=13 samples=982800 vertex-labels-on-annulus=0 labels-seen=1456'; with the fault planted ('' → '--fault') it printed 'colourings=3 points=13 samples=982800 ve' — it fires
+  ok    grundy-margins: printed 'thickened-unit-pairs=0 margins=True,True ring-labels-at-island-point=1456 ring-labels-at-tile-point=1456'; with the fault planted ('' → '--fault') it printed 'thickened-unit-pairs=7398 margins=False,' — it fires
+  controls: 4  fired on their faults: 4
+GATE: PASS (0 failures, 6 warnings)

@@ -283,3 +283,120 @@ no search in print was run by this job). The six records' scripts run from where
 … `e6/`); nothing there was edited.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the dated corrections, appended
+
+Each is a paragraph inserted under the text it corrects by `data/fs132/z1/append_corrections.py` (anchors asserted unique;
+idempotent — a second run skips all eleven); nothing that stood was changed: `git diff --stat` reads 23 insertions, no
+deletion, in seven files.
+
+| # | file | under | what the dated line says | its source |
+|---|---|---|---|---|
+| 1 | `plans/FS132-E4-derivation.md` | § Where C132-TURN stalls, item (i) | "the side is opposite at antipodes …" is true one way only — FS132-E6's drafted line, verbatim; and a pointer to #2 for "the relation of … clause (5)" in the same item | `plans/FS132-E6-derivation.md` Stage 2, § The gap in clause (ii) |
+| 2 | the same | the entry C132-TURN | the stall is not "the relation of clause (5)"; the claim list's wording of the stall; the statement's defect, named by its poser | the asking lane's record ll. 66–76; item 21; the claim list's dated correction |
+| 3 | the same | control `hex7-crossings` | at circumradius 2/5 it is a control of the margin case; at 1/2 its fourth count moves 0 → 36 of 432 | E6 § The two riding controls; item 28 (d) |
+| 4 | `plans/FS132-E5-derivation.md` | control `margin-witness` | the same: 0 → 6,672 at circumradius 1/2 | the same |
+| 5 | `plans/FS132-six-by-the-nerve.md` | § The readings, stated, the dictionary | "a tip at `y`" is too wide; the term that carries the step | E3's step table, row V6-TIP; its report |
+| 6 | `plans/FS132-E1-derivation.md` | the entry C132-EXT-DISC | clause (5): still one mind's; its two consumers; ruling 16 (c) withdrawn; it does not bear on C132-TURN | the asking lane's record ll. 66–74; item 21 |
+| 7 | `plans/FS132-E3-derivation.md` | the entry C132-DIAG-WIDE | the attribution: the release's Lean theorem at six | K1 § 2.3; item 25 |
+| 8 | the same | the entry C132-M-ORBIT | the rework by E5, the planner's blind route and open reading, the four-point form; M6 and M8 still one derivation | E5's step table; K1 §§ 3.1–3.4; items 18, 22, 30 |
+| 9 | `plans/FS116-derivation.md` | the entry FS116-Y4-EMPTY (after its erratum of 2026-10-03) | the exclusion holds for measurable colourings with no Siamese clause — one mind's derivation, a second mind's reading, kernel pending — and covers the entry's fragments given two facts about maps, one derived and uncomposed, one underived | `plans/FS132-derivation.md` §§ 1–2; items 6, 10, 30 |
+| 10 | `plans/FS129-derivation.md` | the entry FS129-SR3-EMPTY-NS | the same note | the same |
+| 11 | the same | the entry FS129-SR3-QFREE-NS | the same note | the same |
+
+Three corrections the brief lists touch files outside this job's `touches:` — the asking lane's record, the stub and the
+search's record. They are drafted with their slots in Stage 5, and are entered in the derivation file under the entry
+each bears on (C132-WIT-ORBIT, C132-WIT-CROSSED, SEARCH-1007-TURN3-HAND; the file's § 11 lists all).
+
+### 4.1 The gates, before and after
+
+`data/fs132/z1/run_gates.sh <before|after>` runs `derive_gate.py all` on each file from `plans/`, under the slot; outputs
+in `data/fs132/z1/gates/`.
+
+| file | before | after |
+|---|---|---|
+| `plans/FS132-E1-derivation.md` | exit 0 — PASS (0 failures, 0 warnings) | exit 0 — PASS (0 failures, 0 warnings) |
+| `plans/FS132-E2-derivation.md` (not appended to) | exit 0 — PASS (0, 2) | exit 0 — PASS (0, 2) |
+| `plans/FS132-E3-derivation.md` | exit 0 — PASS (0, 0) | exit 0 — PASS (0, 0) |
+| `plans/FS132-E4-derivation.md` | exit 0 — PASS (0, 1) | exit 0 — PASS (0, 1) |
+| `plans/FS132-E5-derivation.md` | exit 0 — PASS (0, 6) | exit 0 — PASS (0, 6) |
+| `plans/FS132-E6-derivation.md` (not appended to) | exit 0 — PASS (0, 0) | exit 0 — PASS (0, 0) |
+| `plans/FS132-six-by-the-nerve.md` | **exit 1 — FAIL (1 failure)**: "no derivation entry — a result that lives only in prose has not been stated" | the same failure, unchanged |
+| `plans/FS116-derivation.md` | exit 0 — PASS (0 failures, 31 warnings) | exit 0 — PASS (0, 31) |
+| `plans/FS129-derivation.md` | exit 0 — PASS (0 failures, 55 warnings) | exit 0 — PASS (0, 55) |
+
+The plan fails the gate before and after for one reason: it is a plan, with no entry block in it. Reported, not repaired
+(the brief: "a file that already failed is reported, not repaired beyond your entry"). The derivation file's own gate,
+re-run after the last edit of its template: exit 0 — PASS (0 failures, 9 warnings), 57 entries, 32 controls each firing.
+
+`python3 ../.claude/skills/ephodos/scripts/derive_gate.py quotes FS132-derivation.md FS132-E1-derivation.md … FS132-E6-derivation.md`
+(from `plans/`): exit 0 — 51 statements named in the derivation file and in a record, each the same, character for
+character, spacing aside (`data/fs132/z1/gates/quotes.out`). `assemble.py --check` after the appends: 83 source blocks, no
+field differing.
+
+## Stage 4 — SAVED
+
+## Stage 5 — SAVED: drafts for files that are not this job's, each with its slot
+
+*Each is to be filed verbatim by the file's writer. Nothing here is a draft for the front page: that is part 2's.*
+
+### 5.1 `LEDGER.md`, row 133 — the sharpening (FS132-E4's draft, from its report)
+
+**Slot**: row 133, in the sentence "… and in such a map complementary-type vertices within distance 2 are tangent pairs or
+bowties — the cone lemma read as a design rule (W-TAN), a GAP at cusp vertices." — **to follow the words** "a GAP at cusp
+vertices", before the full stop. **Text, verbatim from `data/fs132/reports/FS132-E4.md`:**
+
+> ; in the exact class the tangent pair is an edge that lies on the unit circle about the common unit point, and a bowtie is a point with no third edge (FS-132, C132-COMP-SHARP; [hand], one mind)
+
+E4's own remark stands beside it: "The row is true as it stands (it lists a superset of the exceptions)".
+
+### 5.2 `LEDGER.md`, rows 148 and 149 — a note
+
+**Slot, row 148**: to follow the sentence "**Not claimed:** rings carrying arcs of the boundary other than (Q) arcs (whether
+a fragment's bends leave any is FS-123's first question); the Siamese and non-simple classes; anything at seven colours or
+more (SQ9 at nine meets every other hypothesis)." **Slot, row 149**: to follow "[hand], one mind, kernel pending
+(FS129-SR1's attacks on the chain's two named steps found no gap — checking readings, not second minds)." **Text, the same
+in both:**
+
+> **Since FS-132 (2026-10-07):** the exclusion holds for measurable colourings with no map and no Siamese clause — at a point where four labels meet in a cycle, each consecutive pair with a compact set through the point excluding both labels' supports from its straddle set, the palettes cannot almost everywhere hold one of the two other labels (C132-M-EXCL, `plans/FS132-derivation.md` § 1; [hand], one mind's derivation and a second mind's reading, kernel pending). It covers this row's fragments given two facts about maps: that a map's edge carries the two-colour exclusion (derived for connected open tiles as C132-WITNESS, one mind; the composition unwritten) and that a map's palette is its ring read two-sidedly (underived).
+
+### 5.3 `plans/POROS-2026-10-07-fs132-night.md`, § 1.3, finding A — the "generalization" is a restatement
+
+**Slot**: to follow the sentence ending "the widening to two-point sets is checked against M0–M9 line by line and is a
+`generalization` item; that the same holds for C132-TRI-STRIP with `s` fixed is my reading of one identity, not a
+derivation." (ll. 79–81). **Text:**
+
+> *Dated line (2026-10-07, from FS132-E5, `plans/FS132-E5-derivation.md` § The exclusion, step by step; drafted by FS132-Z1):* for the two exclusions this is a restatement, not a generalization — a two-point set `{p, q}` is itself a compact set containing `p` and another point, and `Δ({p, q}) ⊂ Δ(K)` for every `K` holding both, so C132-WIT-ORBIT and C132-M-ORBIT are one theorem ("The two are one theorem … what is new in it is the description of the hypothesis"). For the strips the two-point form *is* wider (C132-WIT-STRIP).
+
+The same sentence is in `plans/FS132-close-inventory.md` item 11 ("an entry narrower than its argument"), the
+coordinator's file; item 18 already records the verdict "that is the same theorem, not a wider one".
+
+### 5.4 `plans/STUB-six-by-the-nerve.md`, the witness card's claim C132-WIT-EX — the stripe colouring
+
+**Slot**: to follow "Controls: the island colouring's accumulation centre; the stripe colouring's unit circle." (ll.
+252–253). **Text:**
+
+> *Dated line (2026-10-07, from FS132-E5, `plans/FS132-E5-derivation.md` § The two controls at seven; drafted by FS132-Z1):* the stripe colouring is not a witnessed triangle with a wild ring. The unit circle about the striped circle's centre `x` passes through the vertex `v` and crosses two of the three hexagons at `v` along arcs, so those two labels have no witness at `x` at all (C132-WIT-CROSSED), with the stripes or without; the colouring stays a control for a three-label palette only.
+
+This job did not find, by search of the stub and the asking lane's two records, a sentence that asserts "a witnessed
+triangle with a wild ring" in those words; the words are the inventory's (items 18, 19) for what E5's control showed, and
+the slot is the control line the finding answers.
+
+### 5.5 `plans/SEARCH-2026-10-07.md`, § 1.5 — the hand argument for germs only measurable
+
+**Slot**: to follow the paragraph ending "**The mechanism in one line: with three labels per ring point the far wedge must
+take a label of `x` at all six ring points, adjacent far wedges must differ, and three labels of `x` cannot do that through
+half-planes.**" **Text:**
+
+> *Dated line (2026-10-07, from FS132-E6, `plans/FS132-E6-derivation.md` Stage 2, § The two things the brief asks to carry visibly; drafted by FS132-Z1):* read for germs that are only measurable, steps 1 and 2 hold (they are the transfer, with no wedge at all); step 3's first rule holds, and mirrored at both neighbours is C132-LENS; **step 3's second rule — (`O_ccw` at `y_k`, `I_lens` at `y_{k+1}`) rejects — fails**: it is not an every-point pair, only a sub-wedge of the lens sees the wedge it needs (0.194, 0.083, 0.000 of the lens as the wedge seen shrinks), which is enough for a lens of one label and not for a measurable lens or one split by a curve; step 4 is of the same kind; step 5 was not checked. So the argument is, as this record says, its family's.
+
+### 5.6 Owed elsewhere, named so that part 2 has them
+
+- `plans/STUB-six-by-the-nerve.md`: the ring card's hunch line (true on outer-pure ring points of a six-sector turning
+  ring, not on inner-pure ones: E4's report); the third card's clause (ii) (C132-LENS-II is its gap: "opposite at
+  antipodes" is one-way). Both are the stub's — part 2's.
+- `data/fs132/e2/ring_checks.py`, `hexrel`: a strict floating-point comparison, harmless at circumradius 2/5 and random
+  at 1/2 (E6's report). Not edited by anyone; E2's own tool.
+- The prior-art debts stand as measured: nine "owed" lines in the derivation file; zbMATH was down all night (E1, E5).
+
+## Stage 5 — SAVED

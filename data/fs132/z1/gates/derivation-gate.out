@@ -25,10 +25,10 @@ entry lint
   claim C132-CONFINE: minds 1
   claim C132-CONFINE: prior art known
   claim C132-WIT-MARGIN: minds 1
-  warn  FS132-derivation.md:395 (C132-WIT-MARGIN): prior art owed — novelty unmeasured; a standing finding
+  warn  FS132-derivation.md:396 (C132-WIT-MARGIN): prior art owed — novelty unmeasured; a standing finding
   claim C132-WIT-MARGIN: prior art owed
   claim C132-WIT-CROSSED: minds 1
-  warn  FS132-derivation.md:420 (C132-WIT-CROSSED): prior art owed — novelty unmeasured; a standing finding
+  warn  FS132-derivation.md:421 (C132-WIT-CROSSED): prior art owed — novelty unmeasured; a standing finding
   claim C132-WIT-CROSSED: prior art owed
   claim C132-WIT-SUPER: minds 1
   claim C132-WIT-SUPER: prior art partly
@@ -52,10 +52,10 @@ entry lint
   claim C132-RING-WIND: minds 1
   claim C132-RING-WIND: prior art partly
   claim C132-ORBIT: minds 1
-  warn  FS132-derivation.md:674 (C132-ORBIT): prior art owed — novelty unmeasured; a standing finding
+  warn  FS132-derivation.md:675 (C132-ORBIT): prior art owed — novelty unmeasured; a standing finding
   claim C132-ORBIT: prior art owed
   claim C132-SEP: minds 1
-  warn  FS132-derivation.md:690 (C132-SEP): prior art owed — novelty unmeasured; a standing finding
+  warn  FS132-derivation.md:691 (C132-SEP): prior art owed — novelty unmeasured; a standing finding
   claim C132-SEP: prior art owed
   claim C132-CROSS: minds 1
   claim C132-CROSS: prior art partly
@@ -67,7 +67,7 @@ entry lint
   claim C132-ALT: minds 1
   claim C132-ALT: prior art partly
   claim C132-TURN-EDGE: minds 1
-  warn  FS132-derivation.md:824 (C132-TURN-EDGE): prior art owed — novelty unmeasured; a standing finding
+  warn  FS132-derivation.md:825 (C132-TURN-EDGE): prior art owed — novelty unmeasured; a standing finding
   claim C132-TURN-EDGE: prior art owed
   claim C132-LENS: governed by C132-SHADOW (hand, minds 1)
   claim C132-LENS: minds 1
@@ -84,22 +84,22 @@ entry lint
   claim C132-PLACED-RING: minds 1
   claim C132-PLACED-RING: prior art partly
   claim SEARCH-1007-TURN3: minds 1 — one instrument, the Searcher's run and its checker; the coordinator re-ran the checker on the four proofs (a receipt)
-  warn  FS132-derivation.md:1008 (SEARCH-1007-TURN3): prior art owed — novelty unmeasured; a standing finding
+  warn  FS132-derivation.md:1009 (SEARCH-1007-TURN3): prior art owed — novelty unmeasured; a standing finding
   claim SEARCH-1007-TURN3: prior art owed
   claim SEARCH-1007-TURN3-HAND: minds 1 — the Searcher's, "unchecked by a second"; FS132-E6 read steps 1 to 4 for what survives when the wedges are only measurable, and did not check step 5
-  warn  FS132-derivation.md:1023 (SEARCH-1007-TURN3-HAND): prior art owed — novelty unmeasured; a standing finding
+  warn  FS132-derivation.md:1024 (SEARCH-1007-TURN3-HAND): prior art owed — novelty unmeasured; a standing finding
   claim SEARCH-1007-TURN3-HAND: prior art owed
   claim SEARCH-1007-TURN4: minds 1 — one instrument
   claim SEARCH-1007-TURN4: prior art partly
   claim SEARCH-1007-TURN-SS: minds 1 — one instrument
-  warn  FS132-derivation.md:1068 (SEARCH-1007-TURN-SS): prior art owed — novelty unmeasured; a standing finding
+  warn  FS132-derivation.md:1069 (SEARCH-1007-TURN-SS): prior art owed — novelty unmeasured; a standing finding
   claim SEARCH-1007-TURN-SS: prior art owed
   claim SEARCH-1007-ALT: minds 1 — one instrument
   claim SEARCH-1007-ALT: prior art partly
   claim C132-GRUNDY7-NOT: minds 1
   claim C132-GRUNDY7-NOT: prior art partly
   claim C132-GRUNDY7-LOCAL: minds 1
-  warn  FS132-derivation.md:1122 (C132-GRUNDY7-LOCAL): prior art owed — novelty unmeasured; a standing finding
+  warn  FS132-derivation.md:1123 (C132-GRUNDY7-LOCAL): prior art owed — novelty unmeasured; a standing finding
   claim C132-GRUNDY7-LOCAL: prior art owed
   claim C132-EXT: governed by C132-EXT-DISC (hand, minds 1)
   claim C132-EXT: minds 1

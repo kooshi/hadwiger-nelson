@@ -12,7 +12,8 @@ when its Lean module passes the gate.*
 
 ## What FS-132 is
 
-On 2026-10-04 an outside proof, now this project's literature (`[OAIMath2026]`, family 158), gave `χ(ℝ²) ≥ 6` and
+An outside proof, this project's literature since 2026-10-07 (`[OAIMath2026]`, family 158;
+`data/external/EXT-OAI1-request.md`), gave `χ(ℝ²) ≥ 6` and
 `χ(ℝ²) = χ_m⁰(ℝ²)`: the plane's number is that of measurable colourings proper at almost every unit pair ("weak measurable
 colourings"). FS-132 asks what that proof and this project's six-colour theory give together (`plans/STUB-six-by-the-nerve.md`;
 `plans/FS132-six-by-the-nerve.md`). It ran three rounds in one night:
@@ -291,8 +292,8 @@ a closing remark of E3 on mixed rings (the release's Lemma 6.2 acting on the ext
 cycle of the transition graph" in C132-WIT-EX-FIN (`plans/POROS-2026-10-07-fs132-round2.md` ll. 73–74; E5's report: "used
 once here"). No exclusion in this file reads it. It does **not** bear on C132-TURN's stall: the clause is derived for the
 extraction's own continua, and for whatever witnesses a hypothesis hands a point the relation is false in general (item
-21, withdrawing ruling 16 (c); the claim list's dated correction). The whiff stays on record with no side picked (E1's
-and E4's reports).
+21, withdrawing ruling 16 (c); the claim list's dated correction). The whiff stays on record with no side picked (the
+asking lane's, item 12; E4's report).
 
 **Read by one mind only** besides S11: S5's merging bookkeeping and S8 (the release's Lemmas 7.7, 7.8, read in full, not
 reworked). **Receipts** (item 3): S6 redone by the coordinator, S7's mesh bound followed step by step.
@@ -338,9 +339,9 @@ deriver's steps"; the brief calls it "the planner's square, posed". **It is ente
 reasons its own record gives: it heads this route "route:" where it heads its other statements "TRUE"; "What I did not
 re-derive: Lemmas 7.3, 7.4, 7.6 at general `k` — read, and I see no use of five beyond `α < 1/5 → α < 1/k`"; and "not
 compared with the first deriver's S5–S7 (`FS132-E1` Stage 3): unread" (§§ 2.3, 3.5). Nothing known speaks against it: if
-S5 and S7 of C132-EXT-DISC carry over from a disc to a square — they bound a mesh and read no shape — then the statement
-follows, C132-CORES-FREE is its corollary, and the release's cover lemma need not be ported (item 25). That comparison is
-one short stage and nobody has done it. **Side: no side.**
+S5 and S7 of C132-EXT-DISC carry over from a disc to a square, the statement follows, C132-CORES-FREE is its corollary,
+and the release's cover lemma need not be ported (item 25). Whether those steps read the disc's shape is the comparison,
+one short stage, that nobody has done. **Side: no side.**
 
 @@ENTRY E5 C132-WIT-EX-FIN
 
@@ -670,7 +671,7 @@ of the stalled input).
 
 @@ENTRY E2 C132-RING-TAME
 
-**The stalled step as a statement of its own, about one circle at one centre.** "Its first clause is false wherever
+**The stalled step as a statement of its own, about one circle at one centre.** Its "first clause is false wherever
 local slack exists along the strip, so it is a statement for a normal form or false at six" (item 7). The asking lane
 split its class (item 11): the second clause as a conclusion for every weak colouring living on triangles alone — the
 ring card, where C132-ALT and C132-TURN-EDGE are what was derived and C132-TURN stalls; the first clause for honest

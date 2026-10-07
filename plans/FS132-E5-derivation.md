@@ -421,6 +421,8 @@ control: margin-witness
   expect: colourings=3 points=13 samples=982800 vertex-labels-on-annulus=0 labels-seen=1456
   fault: python3 ../data/fs132/e5/margin_check.py witness --fault
 
+*Dated line (2026-10-07, filed by FS132-Z1, the record job; source: `plans/FS132-E6-derivation.md` Stage 2, § The two riding controls, with its control `hex-half-margin`; `plans/FS132-close-inventory.md` item 28 (d)):* the control `margin-witness` above, at circumradius 2/5, records the margin case only. Re-run at circumradius 1/2 it reads vertex-labels-on-annulus 6,672 where it reads 0 here, with all seven labels seen: C132-WIT-MARGIN's hypothesis fails there — "at 1/2 no witness comes from a margin" — and the entry is untouched. The same holds of the second round's other seven-colour control, `hex7-crossings` in `plans/FS132-E4-derivation.md` (its dated line is there). The control stands as run.
+
 ### Argument — one side of a unit circle
 
 Let `|w − q| < 1`. `V = {z : |z − q| < 1 < |z − x|}` is open, and each of its points has `q` nearer than 1 and `x` farther,
