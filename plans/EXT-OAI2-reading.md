@@ -363,6 +363,8 @@ distance 1 everywhere. **So Theorem 2.3 would give `α₁(ℝ²) = m₁(ℝ²)` 
 field of mean `α₁` to a set of *upper density* `α₁` (an ergodic-average step row 131's attainment lemma covers at `k` classes).
 INVENTORY: generalization.
 
+*2026-10-07, FS133-E1:* the step named here is checked — it is the reverse Fatou lemma (C133-DENS, `plans/FS133-E1-derivation.md` stage 3), and this project had already used it at the same place of row 129's chain (`plans/FS103-F-fractional-shadow.md` § 3.4, link 1); the consequence is derived as C133-ONE (stage 5), reading Theorem 2.3 itself and not Theorem 1.3.
+
 ### 2.7 What I reworked by hand, and what I took as read
 
 Reworked: Lemma 2.4's finite-orbit step and the disjointness of the `L_{ua}`; Lemma 2.5's `T_sV_φ − V_φ` estimate and why `I`

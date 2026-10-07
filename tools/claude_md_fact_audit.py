@@ -61,6 +61,9 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # FS-133's filing (2026-10-07, Keryx; FS-133 inventory item 4): row 129's finite-graph killing test for MR is withdrawn (draft D2).
+    '0.00297': "FS-133 withdrew row 129's finite-graph killing test for MR (FS133-E1's draft D2); the window's width stays in `plans/FS105-W-walk.md`",
+    '0.0176': "FS-133 withdrew row 129's finite-graph killing test for MR (FS133-E1's draft D2); the figure stays in `plans/FS105-W-walk.md`",
     # FS132-F1 (2026-10-07, the coordinator's amendment R1)
     "data/fs129/index/lean-order-corrected.md": "FS132-F1 (M8) replaced the open-milestones sentence; the fact stays in `plans/LEAN-BACKLOG.md`",
     "FS129-L1": "FS132-F1 (M8) replaced the open-milestones sentence; the fact stays in `plans/LEAN-BACKLOG.md`",

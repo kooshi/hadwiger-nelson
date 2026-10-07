@@ -111,3 +111,23 @@ inventory, items 607–625 (an outside proof of six became this project's litera
    transfer; the field form of the measure-rigidity test (`α₁(ℚ(√635087)²) = m₁(ℝ²)`?). (g) The stub's "two blind minds" line
    is corrected at the filing (D8). (h) **Slot: held** (FS-131 inventory ruling 630 (c): two Opus agents at once; the next
    launch is FS-132's split).
+
+4. **Filed, 2026-10-07: FS-133 is Derived.** After the front-page filing's branch merged (`73e203fe`; FS-131 inventory item
+   631), FS133-E1's eight drafts were filed by me, each copied from its record by script with the replaced passage asserted to
+   occur once: `LEDGER.md` row 129 (D1 the plane clause with no MR; D2 the finite-graph killing test for MR withdrawn, its
+   field form kept; D3 the grade bracket and the prior-art sentence) — and the sentence the front-page filing had put there
+   an hour earlier ("would give … a sketch, one step unchecked") removed as superseded; the grokkings file, G60 (D4) and G80
+   (D5); `CLOSED-QUESTIONS.md`, the Ducz–Varga and Johnson entry (D6, five replacements, and one word of mine: "given MR its
+   value is" reads "its value is … (FS-133, with no MR)"); `plans/EXT-OAI2-reading.md` § 2.6, an erratum line (D7); the stub —
+   a banner of mine saying Derived, its bearings (D8) and the corrected citation. Three rows in `BIBLIOGRAPHY.md` § C for the
+   neighbours seen at abstracts (`[Bernshteyn2021]`, `[Bekker2026]`, `[AlonBucicDavies2026]`), their verdicts in the plan's own
+   words. **The front page's state words** (mine): FS-133 "Derived" and FS-132 "Opened" in the open-milestones paragraph of
+   `CLAUDE.md` and `plans/FRONTIER-STUBS.md`, with Kooshi's word that what is formalized is reprioritized after FS-132's
+   exploration; the "Last filed" line; and § Publication's sentence, where row 129's answers to the two printed questions
+   leave "all given MR". **Audits on `main`**: the fact audit against the merge — two figures of the withdrawn test's window
+   (`0.00297`, `0.0176`) allow-listed with the file that keeps them (`plans/FS105-W-walk.md`), then exit 0; `--dupes` exit
+   0; the bibliography audit exit 0, "every cited work resolves"; the derive gate on the record exit 0. **Not filed, owed**:
+   an instance for G92 (three widenings attempted, three held — its Stage 7.3 states it, and drafts no text); the atlas's
+   node for row 129; the ledger's row 129 is not regraded — [hand], one mind, kernel pending. **Slips of mine at this
+   filing**: the stub's corrected citation was first written with its address twice (fixed in the same pass); the allow-list's
+   reason first named a file that does not exist (fixed before the commit).

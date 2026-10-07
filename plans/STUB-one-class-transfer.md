@@ -1,12 +1,13 @@
 # STUB — FS-133: the one-class transfer — the finitary and the measurable densities of unit-avoiding sets are equal, with no hypothesis
 
+> **Derived 2026-10-07 (FS133-E1; FS-133 inventory item 3).** All four posed claims are derived, [hand], one mind, kernel pending: `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)` and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)` with no hypothesis of this project's, over `[OAIMath2026]` family 158's rigidity theorem read itself (the import's third outside theorem when it is formalized). The derivation file is `plans/FS133-E1-derivation.md`; row 129 carries it. Prior art: not found at two passes on 2026-10-07 that lacked zbMATH. Closed when its Lean module passes the gate.
+
 *Minted 2026-10-07 by Poros (FS132-P1, `plans/POROS-2026-10-07-after-release.md` stage 3) at Kooshi's word of the same day:
 "definitely build on it... write the stub" (`data/external/EXT-OAI1-request.md`, third word, item 3). The number was fixed by Keryx
 (`plans/FS131-close-inventory.md` item 617). State: Not started. **It takes the deriver's first slot, ahead of FS-132** (the
 record's § 3.1 says why).*
 
-**Provisional bearings (Poros, 2026-10-07; Ephodos's re-grokking replaces this line at the opening):** G60, G80, G81, G92, G24;
-rows 129, 130, 120, 128, 107 — one line of why each in § Bearing on the answer.
+**Bearings (Ephodos, FS133-E1 §G, 2026-10-06):** G60, G80, G81, G82, G92, G21, G24, G63, G66, G76, G79, G87; rows 129, 130, 131 (attainment), 120, 128, 107 — `plans/FS133-one-class-transfer.md` § G.
 
 ## The mission, in plain language
 
@@ -87,8 +88,7 @@ step the reading left open and it is an afternoon.
 
 **Then, in order.**
 - **C133-INV (posed).** At the algebraic plane `E = ℚ̄`: there is an `E ⋊ K`-invariant probability on the independent subsets of
-  the unit-distance graph of `E` with `P(0 ∈ I) ≥ inf α(G)/|G|` over finite `G ⊂ E` — FS103-B-AMEN's Følner half (two blind minds,
-  for number fields; `plans/FS103-derivation.md` l. 86) restated where the group is `E ⋊ K`. Note the infimum over graphs in the
+  the unit-distance graph of `E` with `P(0 ∈ I) ≥ inf α(G)/|G|` over finite `G ⊂ E` — FS103-B-AMEN's Følner half (for number fields; two blind per row 129; graded one mind at `plans/FS103-derivation.md` l. 86) restated where the group is `E ⋊ K`. Note the infimum over graphs in the
   *algebraic* plane is at least the infimum over all finite unit-distance graphs, which is the direction needed: **no redrawing
   lemma, so no Tarski.**
 - **C133-ONE (posed).** `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`, and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`: steps F3–F9 of the transfer
