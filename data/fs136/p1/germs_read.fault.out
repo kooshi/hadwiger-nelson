@@ -1,0 +1,5 @@
+== sixfrag (FAULT): labels=6 members=13
+   READING 1 (germs): stops with an empty cell by whole tiles, not inside: 6 | still with an empty cell by germs: rho=0.2:6 rho=0.05:6 rho=0.0125:6 | orders of the germ depths (rounded): 0:72
+   READING 2 (payments): coloured common unit points inside: 42 | labels at the point 2:6 3:12 4:12 6:12 | which member separates x:9 xy:24 y:9
+   payments (cell, tile at w, member): BAD:159 backing:84 free:210 same:75 | labels barred at a member, per (point, member): 0:24 1:12 2:48 | barred labels that are absent at w: 108 of 108
+   singleton cells per coloured point (cells with exactly one unbarred label; such a cell is a.e. that label): 0:12 1:6 2:12 3:6 4:6 | cells whose unbarred labels are exactly the labels present there: 138 of 168

@@ -1,0 +1,12 @@
+   facing: w=(-0.50000,-0.86603) z=(0.50000,-0.86603) tile-at-w=y4_3 tiles-at-z=y5_5 label=2
+   facing: w=(-0.50000,-0.86603) z=(0.50000,-0.86603) tile-at-w=y4_4 tiles-at-z=y5_5 label=2
+   facing: w=(-0.50000,-0.86603) z=(-1.00000,0.00000) tile-at-w=y4_5 tiles-at-z=y3_2,y3_3 label=1
+   facing: w=(-0.50000,-0.86603) z=(-1.00000,0.00000) tile-at-w=y4_0 tiles-at-z=y3_2,y3_3 label=1
+   facing: w=(-0.50000,-0.86603) z=(0.50000,-0.86603) tile-at-w=y4_2 tiles-at-z=y5_5 label=2
+   facing: w=(0.00000,0.00000) z=(0.50000,-0.86603) tile-at-w=x_0 tiles-at-z=y5_4 label=5
+   facing: w=(0.00000,0.00000) z=(-1.00000,0.00000) tile-at-w=x_5 tiles-at-z=y3_4 label=4
+   facing: w=(0.00000,0.00000) z=(-1.00000,0.00000) tile-at-w=x_6 tiles-at-z=y3_4 label=4
+   facing: w=(0.00000,0.00000) z=(-1.00000,0.00000) tile-at-w=x_7 tiles-at-z=y3_4 label=4
+   facing: w=(0.00000,0.00000) z=(-1.00000,0.00000) tile-at-w=x_7 tiles-at-z=y3_4 label=4
+   facing: w=(0.00000,0.00000) z=(-1.00000,0.00000) tile-at-w=x_8 tiles-at-z=y3_4 label=4
+   facing: w=(0.00000,0.00000) z=(0.50000,-0.86603) tile-at-w=x_9 tiles-at-z=y5_4 label=5
