@@ -283,3 +283,80 @@ hunch: triangles-fill-in-their-own-nerve
   answers is the whole problem.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED
+
+### 2.1 The milestone chosen, as a decision in four parts
+
+- **The choice.** FS-132 is `plans/STUB-six-by-the-nerve.md`: *does this project's six-colour chain run on the object the release's
+  extraction delivers at six, with no map?* It opens on claim C132-EXT (the extraction at every `k`) and then reads
+  FS116-Y4-EMPTY and FS114-CV-EXISTS against it.
+- **The alternative weighed.** The reading's nominee (its § 4.3, § 5.4 (ii)): "six by the nerve — [P₆] first", palettes of at
+  most two labels on honest saturated six-colourings. Also weighed: opening FS-124, the (Q) ring, as ranked on 2026-10-03.
+- **Why this one won.** (i) By `the-map-needs-no-palette-bound` (§ 1.5, confirmed from the reading's own table), [P₆] is not what
+  the extraction needs; it is an ingredient of two later steps. (ii) [P₆] and [L₆] are statements about every six-colouring, so a
+  refutation of either *is* a six-colouring: as posed, one of the two answers is the whole problem. Card 1's two answers are both
+  theorems about arguments and objects this project holds today. (iii) Every stub of the regularity wall — FS-123 to FS-128,
+  FS-117, FS-120 — is posed inside a class, and card 1 decides the class; its answer changes how each of them is stated, so it
+  outranks them by bearing even though it is a smaller statement than any. (iv) It is the question only this project can ask: the
+  release's readers have the extraction and not the chain.
+- **Confidence, and the one fact that would change it.** Medium-high that this is the right first question; low that I know its
+  answer (hunch: split, 0.55). What would change the choice: C132-EXT failing at six — if the extraction itself reads five, there
+  is no object to ask card 1 on, and FS-124 in the map class is first again.
+- **The default.** If Keryx and Kooshi say nothing, FS-132 opens on C132-EXT in the first deriver's slot after FS-133's short job
+  (stage 3 says why that order).
+
+### 2.2 The cards (the stub carries the same three; card 3 is the invention signal's card, addressed to Ephodos)
+
+question: does-the-six-colour-chain-run-with-no-map
+  evidence: `plans/EXT-OAI2-reading.md` § 4.2 rows 10–13 (the manuscript's Lemmas 7.2–7.8: "uses the count? no", "typed at five only") and § 3.3 ("nothing in §§ 5–8 distinguishes Siamese pairs"); `LEDGER.md` row 137 ("every locally finite map of the plane bounded by segments and circular arcs"), rows 148–149 ("non-Siamese … valid six-coloured fragments"); `plans/FS114-derivation.md` l. 29, FS114-CV-EXISTS "uses only: … FS112-N2-TERM (the terminal modification `M*`"
+  expected: the exclusions at six need a map — arcs, tiles, a locally finite singular set — so a tight colouring must first be made one (route M: FS-126, FS-127, FS-128)
+  ask: do FS114-CV-EXISTS and FS116-Y4-EMPTY read arcs and tiles, or only what the release's extraction gives a measurable six-colouring: a point, a label cycle, connected interfaces with limiting directions, and the two-colour exclusion?
+  if both run on the extraction's data: the map step is replaced by one statement about cyclic centres; FS-126 and the arcs half of FS-127 lose their consumer; FS-123 and FS-124 are re-posed for measurable colourings with no Siamese clause; the next claim is card 2
+  if the exclusion runs and the existence step does not: the exclusions move to measurable colourings, and "some centre is not a triangle" becomes the milestone's open statement, with card 3's form as its first candidate and row 137's bending argument as the thing it must replace
+  if a named step of the exclusion reads an arc or a tile count: route M's map step stands for that step; the ranking keeps FS-124 and FS-123 in the map class; the release enters six as the transfer and as lemmas inside FS-124's cases; the named step is the stub of what a measurable form would need
+  answered by: derivation — Ephodos, reading the two arguments by their `uses only:` lines against the conclusion of the manuscript's Proposition 7.1 restated at six (claim C132-EXT)
+  cost: one opening and one derivation job, no search; to read: the manuscript's §§ 7–8, `plans/FS116-V6-verification.md` § 2.2, `plans/FS114-derivation.md` ll. 26–60
+  hunch: split — EMPTY runs (pieces of diameter at most 1, unit circles, the 60° twist); CV-EXISTS does not (it bends a map)
+  falsifier: EMPTY's route naming an arc's curvature or a finite count of tiles at the vertex; or CV-EXISTS restated with no modification of the map
+  rank: 1
+
+question: what-the-extraction-needs-of-the-centres
+  evidence: `plans/EXT-OAI2-reading.md` § 4.3, the row for step 9 ("[L₆] the centres whose transition graph has a cycle are locally finite … **Not supplied.**"); `plans/EXT-OAI1-audit.md` l. 404, `fullApprox_exists_of_finite_core` from "(L : Finset ℂ) (hL : ∀ x ∈ closedBall 0 8, ¬(transitionGraph c x).IsAcyclic → x ∈ L)"; the reading's EXT-OAI2-SLACK7-L, a seven-colouring by formula whose cyclic centres accumulate at one point
+  expected: the extraction needs the centres finite on compacts, so at six that must be proved on a normal form (FS-127's question without arcs)
+  ask: which property of the set of cyclic centres does the extraction's argument read — finite on compacts, or only closed and totally disconnected — and does the island colouring at seven, whose centres accumulate, still yield a point with its continua?
+  if closed and totally disconnected suffices: [L₆] is replaced by a statement the island colouring satisfies; FS-127's accumulation question leaves the road; the normal form is not needed for the extraction, only for the exclusions
+  if isolation is read at a named step: [L₆] stands as posed, for honest saturated colourings; FS-127 is re-aimed at it without arcs; the named step says what an accumulation of centres would break
+  answered by: derivation — Ephodos
+  cost: one derivation job on the manuscript's Lemmas 7.6–7.8 and Proposition 7.1; the island colouring is the test object, by formula
+  hunch: total disconnectedness gives a point with essential loops at every small scale; the limiting directions of the continua are where it can fail
+  falsifier: a step of Lemmas 7.6–7.8, Proposition 7.1 or Lemma 8.1 that reads an isolated centre — a continuum that must reach a fixed radius, or a direction that needs an annulus free of centres
+  rank: 2
+
+question: where-does-five-enter
+  evidence: side A, `plans/FS131-close-inventory.md` l. 8333: "the cover's order — at six colours a point may need three positive coordinates, a 2-complex, where the disc is no obstruction"; side B, `plans/EXT-OAI2-reading.md` ll. 682–685: "the cover of order two against order three is not where five enters … Five enters in the two statements that would make one exist"
+  expected: one of the two readings is wrong, and the record has already said which
+  ask: with a triangle filled in the target wherever three classes meet cyclically, which centres of a measurable six-colouring stay essential, and is their forced existence a covering statement of order three with the unit distance in it?
+  if the essential centres are the cycles of length four to six and a metric cover statement forces one: "some centre is not a triangle" is that statement — the shape of `[Voronov2023]` Thm 1.3 with holes, route R's (FS-122) — and needs no count of tiles, so G86's blindness does not reach it
+  if a triangle centre is not filled by its own disc averages, or no order-three statement survives the holes: the target stays the graph, the existence step stays row 137's in the map class, and the premise both readings share is earned
+  answered by: derivation — Ephodos, by `ephodos-invention` once recognition's homes are killed; the collision is § 1.4's invention signal, stated there in both sides' words
+  cost: one derivation job; `[Voronov2023]` Thm 1.3's proof re-read for where closedness enters (row 132: once, "as compactness giving a band")
+  hunch: the triangle fills and the statement is route R's in the release's vocabulary (0.35)
+  falsifier: a triangle centre whose disc averages do not extend the map over it into the filled triangle; or a reading of Thm 1.3's proof that uses closedness beyond the band
+  rank: 3
+
+### 2.3 Expectations scored at this stage
+
+| | claim (short) | p | outcome |
+|---|---|---|---|
+| E2 | FS-132's question is about one named step of the release's argument run at six | 0.60 | **half met** — it names an object of theirs (Proposition 7.1 at six) and asks it of two arguments of ours; not a step of theirs to be re-proved |
+| E3 | the named step is not [P₆] | 0.55 | **met** — § 2.1 (i), (ii) |
+| E4 | the frame is "order three, Voronov's band" with no palette bound | 0.50 | **half met** — it is card 3, the invention signal's card, at rank 3 and hunch 0.35, not the frame of card 1; the half that held: no palette bound in the extraction |
+
+**Invention signal:** one, § 1.4 — "where five is used": the audit's "the cover's order … a 2-complex, where the disc is no
+obstruction" (`plans/FS131-close-inventory.md` l. 8333) against the reading's "the cover of order two against order three is not
+where five enters" (`plans/EXT-OAI2-reading.md` ll. 682–685); the premise both share is that the approximant's target is the
+complete graph on the labels, fixed before the colouring. Card 3 puts it to Ephodos. Read for it: both records' stages named in
+§ 1.3, inventory items 607–619.
+
+## Stage 2 — SAVED
