@@ -219,10 +219,10 @@ the outside label of the palette at `e(ψ + α)`, `|α| < δ` (well defined a.e.
 | module | lines | `sorry` | built (`build.sh`, `data/fs132/k1/probe/build-phase1.out`: exit 0, 6 modules rebuilt, warnings only `declaration uses sorry`, 29) |
 |---|---|---|---|
 | `Outside/OAI158Palette` (generated) | 818 | 0 | yes, no warning |
-| `Plane/SixRing/Confine` | 124 | 0 | yes, no warning |
-| `Plane/SixRing/Winding` | 196 | 16 | yes |
-| `Plane/SixRing/Orbit` | 169 | 9 (5 OUTSIDE placeholders, `no_alternating_groups`, `no_alternating_pairs`, `no_outside_orbit`, `exists_change_of_ae_outside`, `ae_real_of_ae_angles` — 10 declarations, one warning per declaration) | yes |
-| `Plane/SixRing/CyclicCentre` | 96 | 3 | yes |
+| `Plane/SixRing/Confine` | 128 | 0 | yes, no warning |
+| `Plane/SixRing/Winding` | 178 | 16 | yes |
+| `Plane/SixRing/Orbit` | 168 | 10 (5 OUTSIDE placeholders, `no_alternating_groups`, `no_alternating_pairs`, `no_outside_orbit`, `exists_change_of_ae_outside`, `ae_real_of_ae_angles`) | yes |
+| `Plane/SixRing/CyclicCentre` | 85 | 3 | yes |
 
 `Proofs.lean` and `ARCHITECTURE.md` carry the five modules (`tools/check_architecture.py`: PASS). Nothing here reaches `main`
 with a `sorry`. Not run: `axioms.sh`, `vacuity.sh`, `assumptions.sh`, the linters — a skeleton is not a landing.
@@ -250,7 +250,7 @@ agent work, build 7.8 s. On that sample the backport costs about one fix per 600
 separate axioms**. My recommendation, to be confirmed in phase 2 against what the derivers' routes need: **port, do not
 declare**, the palette lemmas; the two imports stay the only axioms. The unknown is `Transitions.lean`'s input
 (`PlaneSpectrum.Fourier → CircleDecay → CircleOperator`), which `palette_transfer_pair` does not need and
-`transition_avoiding_trace` does. (2) *A leaf of ours*: C132-CONFINE, six statements, 124 lines, three iterations (one
+`transition_avoiding_trace` does. (2) *A leaf of ours*: C132-CONFINE, six statements, 128 lines, three iterations (one
 notation difference: `⟪x, y⟫` carries no `_ℝ` at this pin), proved.
 
 **Leaves per statement** (phase 1): CONFINE 0 left (done). DIAG-WIDE 2, both rewording. INDEX 9 (5 finite/real-arithmetic, 1
