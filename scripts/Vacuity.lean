@@ -555,6 +555,39 @@ Two exclusions are worth their reasons, because both look like obvious additions
   library — here the star rows, the semi-hub rows, two change points `60°` apart (`outerAdj`,
   `not_sole_outer_of_adjacent_changePoints`), and `emptyNS`'s class at nine colours, each with no Lean model and each saying
   so in its docstring.
+* **FS-132's import of `[OAIMath2026]` family 158 (FS132-L1, by the procedure below; the one module `Outside/OAI158`).**
+  **No new carrier IN.** The module declares two hypothesis-formers, the release's own, copied:
+  `Outside.OAI158.ProperColoring k c` (a map `c : ℂ → Fin k` giving different colours to every unit pair; a binder of the
+  imported `proper_to_borel_weak`) and `Outside.OAI158.WeakColoring k d` (a.e.-measurable and proper at almost every unit
+  pair; a binder of `nonempty_aeColouring_of_weak`). **OUT**, both: each is a predicate of a colour count and a FUNCTION,
+  and at every site the function is a bound variable — so every site would read `GENERIC`, at a closed count as at a
+  variable one, and step (3)'s `VACUOUS` control cannot be planted: a carrier `ProperColoring 4 c` with `c` bound matches
+  no closed evidence (the `IsTile` case: refutable only at a concrete function, which no theorem fixes). The emptiness
+  that matters is over the count, with the function bound — `∀ c, ¬ ProperColoring 4 c` is this library's own (rung B; an
+  `example` of the module), `∀ c, ¬ ProperColoring 5 c` is the import `no_proper_five_coloring` itself, and
+  `∀ d, ¬ (Measurable d ∧ WeakColoring 1 d)` is an `example` of the module — which a per-binder scan cannot read. What
+  stands in for it is said in the module: the transfer `proper_to_borel_weak` holds at every `k` and is empty of content
+  where no proper `k`-colouring exists; its hypothesis is inhabited at `k = 7` (`exists_properColoring_seven`), where its
+  conclusion is a theorem with no axiom (`proper_to_borel_weak_model`). `Angles` (a type: the circle of angles),
+  `angularMeasure` and `direction` are data, written down.
+  What this scan reads of the landing (`tools/fs131_l5_vacdiff.py` against wave 8's gated scan: no row lost, none added
+  to a declaration `main` held, no new evidence row): **one new site, `GENERIC`** — `weakColoring_of_aeColouring`, on the
+  tracked `AeColouring` at a variable number of colours — and no refutation skipped: `no_proper_five_coloring` and
+  `not_colorable_five` are stated negations with no binder, audited and raising no site. No declaration of the module is
+  evidence to `gather` (none concludes `IsEmpty`, `Nonempty`, `Colorable`, a `Coloring` or a tracked carrier
+  unconditionally), so **no verdict of this scan rests on an import**.
+  **What the import changes in what an OLDER statement says, which this scan cannot see.** Given the declared outside
+  theorem `Outside.OAI158.no_proper_five_coloring` the plane has no proper five-colouring
+  (`Outside.OAI158.not_colorable_five`), so the carrier `(unitDistance ℂ).Coloring (Fin 5)` is empty and `hexShell_plane5`
+  — one of the baseline's two entries — is, given that import, the `core9_plane` shape: a statement over an empty domain.
+  The scan still reads it `UNKNOWN`: `gather` takes as emptiness evidence an unconditional `IsEmpty τ` or a `¬ P` of a
+  tracked `P`, and `¬ (unitDistance ℂ).Colorable 5` is neither; no `IsEmpty` form of it is stated, by ruling (the
+  coordinator's, on FS132-L1's question, 2026-10-07). `hexShell_plane5`'s docstring and the baseline's prose say the
+  vacuity in words and name the two theorems; `hexShell_plane6` is the open case and is untouched. **The question this
+  leaves, filed for the tooling job** (inventory ruling 475 (d)): `gather` does not look at a declaration's axioms, so an
+  `IsEmpty` theorem resting on a declared import would be read as evidence like any other and the marker honoured on it —
+  "empty, by the kernel on the standard three" and "empty, given a declared outside theorem" would be one count. Whether
+  to allow that, and how to print the two apart, is a change in what this gate means.
 
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with

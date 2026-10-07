@@ -5,8 +5,10 @@
 # declaration's own docstring (VACUITY DECLARED:) rather than suppressed in this file.
 # Regenerate deliberately: scripts/vacuity.sh --baseline
 #
-# TWO ENTRIES, and there is nothing left here that anybody can discharge: proving an
-# inhabitant for either IS the Hadwiger-Nelson problem. 15 -> 4 -> 2 in one day
+# TWO ENTRIES. For the second there is nothing anybody can discharge: proving an inhabitant
+# for it IS the open half of the Hadwiger-Nelson problem. The first is no longer that: since
+# FS-132's import its carrier is EMPTY GIVEN A DECLARED OUTSIDE THEOREM, which this scan cannot
+# see (the note above the entries says how, and names the two theorems). 15 -> 4 -> 2 in one day
 # (FS-28, then FS-27 section 1).
 #
 # The two carriers that left on 2026-09-09 are worth a line, because their repairs were
@@ -27,9 +29,19 @@
 # The declaration count is the library's alone: the audit's own declarations stopped being counted on
 # 2026-09-11, because editing the audit moved the number with the library unchanged.
 
-# --- These two ARE the Hadwiger-Nelson problem. Whether a proper 5- or 6-colouring of the plane
+# --- hexShell_plane6 IS the Hadwiger-Nelson problem. Whether a proper 6-colouring of the plane
 # exists is exactly what this repository is trying to settle, so 'prove an inhabitant' here is not
-# a chore, it is the mission. They will sit here until the problem is solved, and that is correct.
+# a chore, it is the mission. It will sit here until the problem is solved, and that is correct.
+# --- hexShell_plane5 is NOT the problem any more (FS132-L1, 2026-10-07). Given the declared outside
+# theorem HadwigerNelson.Outside.OAI158.no_proper_five_coloring ([OAIMath2026] family 158, an axiom of
+# this library) the plane has no proper 5-colouring (HadwigerNelson.Outside.OAI158.not_colorable_five),
+# so its carrier (unitDistance ℂ).Coloring (Fin 5) is empty and the statement says nothing beyond that
+# import. On the standard three axioms alone nothing refutes the carrier; and the scan reads as
+# emptiness only what the library states as `IsEmpty τ` or as `¬ P` of a tracked `P`, which
+# `¬ (unitDistance ℂ).Colorable 5` is not. So it still reads UNKNOWN, and the entry stays. Whether
+# emptiness resting on a declared import may discharge an entry (as DECLARED, by the marker) would be a
+# change in what this gate means: filed for the tooling job (FS-131 inventory ruling 475 (d);
+# plans/FS132-L1-landing.md), by the coordinator's ruling of 2026-10-07.
 # Note they are NOT defective: both are consumed to REFUTE a colouring, and emptiness cannot damage
 # a statement whose conclusion is the emptiness. See Instances/HexShell.lean's scope comment.
 UNKNOWN HadwigerNelson.hexShell_plane5

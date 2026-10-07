@@ -246,7 +246,14 @@ theorem hexShell_plane {k : ℕ} (hk : k < 7) (C : (unitDistance ℂ).Coloring (
 /-- **The five-colour reading** — the 6-programme's Act-One seed: every proper 5-colouring of the
 plane has a mono pair at distance `√3` or `2`. A 6-forcer built over this compound pigeonhole needs
 kill webs for both distances (radicands 11 and 15, inside the 5-forcers' field). Compound =
-disjunctive: strictly weaker than a single-distance firing. -/
+disjunctive: strictly weaker than a single-distance firing.
+
+**Empty given an import** (FS132-L1; said in words, by ruling — not the scan's marker, which is for
+emptiness the library proves and counts as its own): given the declared outside theorem
+`Outside.OAI158.no_proper_five_coloring` the plane has no five-colouring
+(`Outside.OAI158.not_colorable_five`), so this statement's hypothesis has no inhabitant and it says
+nothing beyond that import; on the standard three axioms alone the vacuity scan cannot see this and
+holds the statement in its baseline as unknown; `hexShell_plane6` is the open case. -/
 theorem hexShell_plane5 (C : (unitDistance ℂ).Coloring (Fin 5)) :
     ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y :=
   hexShell_plane (by norm_num) C
