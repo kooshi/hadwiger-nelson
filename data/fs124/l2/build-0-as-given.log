@@ -1,0 +1,8 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261007T193845Z-4082889.log
+    ⚠ [5796/5847] Replayed Proofs.HadwigerNelson.Plane.SectorPoint
+    warning: Proofs/HadwigerNelson/Plane/SectorPoint.lean:52:8: declaration uses `sorry`
+    All targets up-to-date (5959 jobs).
+==> build: OK — all 1854 modules already up to date, nothing built, 1 module(s) with warnings, 3s
+    full output: build/gate/build/20261007T193845Z-4082889.log
+EXIT 0

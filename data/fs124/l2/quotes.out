@@ -1,0 +1,33 @@
+OK	data/external/EXT-OAI1-request.md	> I agree with all 3. let's keep the lean backlog paused. We move to t
+OK	CLAUDE.md § Counter-priors — read before pricing anything (Kooshi, 2026-09-26)	Do not consider Lean formalization a cost. It's practically mechanical
+OK	plans/FS124-close-inventory.md § Items	34. **FS124-K2 done (16:37 UTC logged; hand-back 16:29 UTC): the nine 
+OK	plans/FS124-close-inventory.md § Items	40. **FS124-L1 done (hand-back 17:39 UTC; 527k by the harness's count 
+OK	plans/FS124-close-inventory.md § Items	42. **FS124-I3 done (18:07 UTC logged; hand-back 18:05 UTC; 506k by th
+OK	plans/FS124-close-inventory.md § Items	44. **FS124-K3, the price (18:49 UTC logged; its message at 18:48 UTC;
+OK	plans/FS124-close-inventory.md § Items	47. **FS124-I4 done (19:19 UTC logged; hand-back 19:16 UTC; 540k by th
+OK	plans/FS124-close-inventory.md § Items	48. **FS124-I5, mid-job (19:31 UTC logged; its message at 19:30 UTC; b
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/OnePi	theorem shadow_open {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc : 
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/OnePi	theorem piece_type {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc : I
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/OnePi	theorem centre_half {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc : 
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/OnePi	theorem tight_centre {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc :
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/OnePi	theorem tight_straddle {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/Close	theorem closePair_forced_pieces {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOp
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/Close	theorem closePair_lone {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/Close	theorem closePair_both_separate {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOp
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/Close	theorem closePair_both_saved {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen 
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/Close	theorem closePair_four {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/Secto	theorem closePair_both_saved_of_isSector {U : Set ℂ} {c : ℂ → Fin 6} (
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/Secto	theorem IsSector.hasArcEdges {D : ThreePiece U c x} (h : D.IsSector) :
+OK	LEDGER.md	| 162 | **What an open piece of one label forces one unit away, in eve
+OK	LEDGER.md	| 163 | **What a close complementary pair forces at a common unit poin
+OK	CLAUDE.md § Trust ledger	as a set); the current audit reads 6967 clean and 5 declared purchases
+OK	CLAUDE.md § Trust ledger	**What the library assumes, in both forms** (`scripts/assumptions.sh`,
+OK	CLAUDE.md § The gate	`declarations=15370 refutations-skipped=226 sites=1448`, `vacuous=0 st
+  source /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/ClosePair.lean: 5
+  source /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/OnePiece.lean: 5
+  source /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wi3/Proofs/HadwigerNelson/Plane/SectorPoint.lean: 2
+  source CLAUDE.md: 4
+  source LEDGER.md: 2
+  source data/external/EXT-OAI1-request.md: 1
+  source plans/FS124-close-inventory.md: 6
+quotations: 25  mismatches: 0  root: /home/kooshi/source/lean-dir
