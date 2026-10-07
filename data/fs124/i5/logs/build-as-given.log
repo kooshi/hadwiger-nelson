@@ -1,0 +1,35 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 8,9,10,11,12,13,14,15
+==> build: this run's full output: build/gate/build/20261007T190732Z-3932379.log
+    ⚠ [5771/5959] Replayed Proofs.HadwigerNelson.Plane.ClosePairModel
+    warning: Proofs/HadwigerNelson/Plane/ClosePairModel.lean:32:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePairModel.lean:40:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ClosePairModel.lean:48:8: declaration uses `sorry`
+    ⚠ [5775/5959] Replayed Proofs.HadwigerNelson.Plane.SectorPoint
+    warning: Proofs/HadwigerNelson/Plane/SectorPoint.lean:51:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SectorPoint.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SectorPoint.lean:76:8: declaration uses `sorry`
+    ⚠ [5815/5959] Replayed Proofs.HadwigerNelson.Plane.ThreeArcs
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:264:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:316:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:322:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:332:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:343:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:409:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:413:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:418:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:424:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:432:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:442:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:450:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:457:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:465:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:476:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:486:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:492:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:497:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:502:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ThreeArcs.lean:507:8: declaration uses `sorry`
+    All targets up-to-date (5959 jobs).
+==> build: OK — all 1854 modules already up to date, nothing built, 3 module(s) with warnings, 2s
+    full output: build/gate/build/20261007T190732Z-3932379.log
+EXIT 0
