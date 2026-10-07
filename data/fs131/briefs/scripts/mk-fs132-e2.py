@@ -5,7 +5,7 @@ import os
 ST="plans/STUB-six-by-the-nerve.md"; RD="plans/EXT-OAI2-reading.md"; RQ="data/external/EXT-OAI1-request.md"; SW="plans/EXT-OAI3-review.md"
 PL="plans/FS132-six-by-the-nerve.md"; E1="plans/FS132-E1-derivation.md"; PO="plans/POROS-2026-10-07-after-release.md"; CL="data/fs132/claims.md"
 rec=open(ROOT+E1).read()
-assert "\nderivation: C132-EXT\n" in rec, "run after FS132-E1 has saved C132-EXT's entry"
+assert "\nderivation: C132-EXT-DISC\n" in rec, "run after FS132-E1 has saved C132-EXT-DISC's entry"
 os.makedirs(ROOT+"data/fs132/e2",exist_ok=True)
 C3=Q(ST,"question: where-does-five-enter")
 SIDEA=Q(PO,"- *Side A* — `plans/EXT-OAI1-audit.md` stage 6","§ 1.4")
@@ -13,7 +13,12 @@ SIDEB=Q(PO,"- *Side B* — `plans/EXT-OAI2-reading.md` § 4.1 item 4","§ 1.4")
 STF=Q(ST,"*About every solution, in the widest class where it makes sense.*")
 DATA=Q(PL,"**The data.** For a weak measurable six-colouring `c`, an **extracted centre**","§ The readings, stated")
 RCV=Q(PL,"**C132-RUN-CV.** *Statement:*","§ The readings, stated")
-EXT=Q(E1,"derivation: C132-EXT")
+EXT=Q(E1,"derivation: C132-EXT-DISC","Stage 3")
+EXTS=Q(E1,"  statement: let k ≥ 1 be an integer, c a weak measurable k-colouring of the plane","Stage 3")
+CORES=Q(E1,"  statement: for every integer k ≥ 1 and every weak measurable k-colouring of the plane, every closed disc of radius greater than 1 contains a cyclic centre","Stage 3")
+LIST=Q(E1,"### The conclusion at six, as a list (for the two jobs that read against it)","Stage 3")
+WHIFF=Q(E1,"### An invention signal's whiff (G87; no side picked)","Stage 3")
+CARD2=Q(E1,"### Card 2, answered on the way (not stretched for)","Stage 3")
 R132=Q("LEDGER.md","| 132 |")
 R139=Q("LEDGER.md","| 139 |")
 KW=Q(RQ,"> […]")
@@ -70,11 +75,27 @@ It was raised as a collision between two readings of where five enters the outsi
 The milestone's structural form, which this card is the first handle on:
 
 {STF}
-**What it is asked on — the extraction at six**, as the first deriver's record states it (read the entry whole, with its `uses
-only:` and `not claimed:` lines and its argument; its plan `{PL}` holds the milestone's §G, §PA, §IQ and the data in words):
+**What it is asked on — the extraction at six**, derived an hour ago by the milestone's first deriver, [hand], one mind (read
+its Stage 3 whole — the entries with their `uses only:` and `not claimed:` lines, the argument's eleven steps, and the sections
+quoted below by their headings; its plan `{PL}` holds the milestone's §G, §PA, §IQ and the data in words):
 
 {EXT}
+{EXTS}
+{CORES}
+{LIST}
+{CARD2}
+{WHIFF}
 {DATA}
+**Four things in that record that bear on your question, each at its grade — one mind, kernel pending:**
+- **A cyclic centre exists in every closed disc of radius above 1, at every number of colours, with no hypothesis** (its
+  C132-CORES-FREE). So existence of *some* centre is settled; your question is its cycle's length.
+- **The full data at a centre needs that centre isolated among the centres**, and finiteness in the disc is what the argument
+  takes to get it. Nothing supplies that for an arbitrary six-colouring. State every claim of yours with the hypothesis on
+  the centres it reads, and say which of your steps survive without it.
+- **Its clause (5)** — each edge of the returned cycle is an edge of the centre's own transition graph — contradicts a
+  sentence of the manuscript and has been read by one mind. If a step of yours uses it, name it in that step's `uses only:`.
+- **Its note that "the conclusion at a centre" is two statements**, with and without its clause (4), which part exactly at an
+  accumulation of centres (the island colouring at seven). It picked no side; neither do I.
 The neighbouring claim on the first deriver's side — the same conclusion asked of this project's map-class argument, by
 restating it; yours is asked by whatever route reaches it, and the two meet at the statement it names, C132-M-CV:
 
