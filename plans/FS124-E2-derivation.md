@@ -565,6 +565,12 @@ third part — met (C124-FOUR derived).
 
 **Stage 5 — SAVED** (2026-10-07).
 
+*Correction, dated 2026-10-07 (16:33 UTC; filed by the coordinator; source: the kernel planner's second look at Step II — its record
+`plans/FS124-kernel-plan-2.md` on branch `fs124-wk2`, §§ 4.2 and 4.6 — made after its own route to the same clause was committed
+blind; FS-124 inventory items 33–34). The step stands as written. The planner's note for its author, copied by script:* "with `η ≤ 1`" after "Take `w′ ∈ S(x) ∩ B(w, η)`"; and "the hypothesis used is the filled side, not that `y` does not separate" (§ 4.2).
+*What the second look found implicit, none of it a gap: that `w′` exists (the two circles cross at `w`; an intermediate value); that
+`B(w′, ρ) ⊂ U` and `x ∈ U` (from Step I's ball); the bound `η ≤ 1`; the passage from the piece to its closure (a ball is open).*
+
 ## Stage 6 — SAVED: C124-EDGE, C124-SECOND; the sweeps; where a successor takes over
 
 derivation: C124-EDGE

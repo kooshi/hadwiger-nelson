@@ -1,0 +1,9 @@
+== BB: tiles=16 labels=6 vertices=32 3-label:2 4-label:2 on-the-cut:28 | members(>=3)=4 centres(>=4)=2
+   covering-pairs=1 on-the-ring-of-a-centre=1 | common-unit-points: inside=2 not-inside=0
+   inside: classes L2:2 | labels-at-the-point 4:2 | table-violations=0 of 2880 samples (least eta 4.93e-02; points too thin to sample 0)
+   not-inside: classes none
+   rings: centres=2 least-distance-of-a-point-across-not-inside none | class-at-that-point none
+   pair x=(0.00000,0.00000)[123] y=(1.00000,0.00000)[456] d=1.00000 w=(0.50000,-0.86603) inside labels=2356 class=L2 sep=xy x[1:bar,2:out,3:in] y[4:bar,5:in,6:out] cells(x/y): in/in=35 in/out=36 out/in=25 out/out=26
+   pair x=(0.00000,0.00000)[123] y=(1.00000,0.00000)[456] d=1.00000 w=(0.50000,0.86603) inside labels=2356 class=L2 sep=xy x[1:bar,2:in,3:out] y[4:bar,5:out,6:in] cells(x/y): in/in=26 in/out=25 out/in=36 out/out=35
+   centre p=(0.50000,-0.86603) labels=2356 ring-members=2 (by labels 3 3) covering-pairs-on-ring=1 across-inside=1 (classes L2) across-not-inside=0
+   centre p=(0.50000,0.86603) labels=2356 ring-members=2 (by labels 3 3) covering-pairs-on-ring=1 across-inside=1 (classes L2) across-not-inside=0

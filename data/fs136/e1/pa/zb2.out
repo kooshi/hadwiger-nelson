@@ -1,0 +1,7 @@
+QUERY: (ab:"spindle convex*" | ab:"ball-polyhedr*" | ab:"ball polar*") & (ab:colo* | ab:"unit distance" | ab:"chromatic") -> 1
+    2025 | Borsuk and Vázsonyi problems through Reuleaux polyhedra | Lopez-Campos, Gyivan,Oliveros, Déborah,Ramírez Alfonsín, Jor | Zbl 1580.52001
+QUERY: ab:"Minkowski sum" & ab:circle & (ab:"avoid* distance" | ab:"distance-avoiding" | ab:"unit distance") -> 0
+QUERY: (ab:tile | ab:tiles | ab:region*) & ab:"unit circle" & ab:"chromatic number of the plane" -> 1
+    2026 | On the chromatic number of the plane for map-type colorings | Sokolov, Georgy,Voronov, Vsevolod | Zbl None
+QUERY: ab:"chromatic number of the plane" & (ab:"six colo*" | ab:"6-colo*") & (ab:region* | ab:tiling* | ab:map*) -> 1
+    2026 | On the chromatic number of the plane for map-type colorings | Sokolov, Georgy,Voronov, Vsevolod | Zbl None

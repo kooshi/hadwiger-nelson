@@ -225,6 +225,7 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - `rw [Measure.ae_prod_iff_ae_ae h]` finds no pattern in a goal that `filter_upwards` has beta-reduced; apply it as `refine (Measure.ae_prod_iff_ae_ae (p := fun w => …) h).mpr ?_` with the predicate written out. A section of a measurable set of triples is `measurable_prodMk_left hmeas` (FS132-I4, `unitPair_chart_ae`).
 - A map from a set of the line into a metric space that is `K`-antilipschitz there pulls sets of one-dimensional Hausdorff measure zero back to Lebesgue-null sets (`SixRing.volume_preimage_inter_le_hausdorff`); with `abs_dist_sub_le` it replaces an inverse function theorem wherever a point is known to move away from a fixed centre at a definite rate. Shears of `ℝ × (ℝ × ℝ)` are `MeasurePreserving.skew_product` between two swaps (`SixRing.shear_measurePreserving`); a statement almost everywhere on the line pulls back to triples by `QuasiMeasurePreserving.prod_of_right` (FS132-I4).
 - A `scoped instance` declared inside `namespace A.B` is found in `A.B` and under `open A.B`, **not** in `A`: `attribute [scoped instance] B.instName` inside `namespace A` adds `A`'s scope. An anonymous scoped instance keeps the name the unscoped one has, and `private scoped instance` parses (measured at the pin: `data/fs132/l2/probes/scoped-probe.lean`; on a built module, `scoped-built.lean`; FS132-L2).
+- `sphere 0 1 + W` and `IsOpen.add_left` need `open scoped Pointwise` at the declaration (FS124-K2).
 
 ## The package
 

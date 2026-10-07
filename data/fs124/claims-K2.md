@@ -55,3 +55,7 @@ For a tight pair `(q, z)` with radius `ρ`, its **collars** are the open sets `W
 **C124-FOUR** — statement: In the setting of C124-FORCED-PIECES let x and y be full, each with exactly one inner piece, one outer piece and one crossing piece at w. Then exactly four labels are present at w: those of the two inner and the two outer pieces.
 
 *Not claimed (C124-FOUR):* that a weak six-colouring has a full three-piece point, or a close complementary pair; which label fills which of the four regions, or that each region carries one label; anything when a member has two inner or two outer pieces (T2: five labels allowed, four present)
+
+- **2026-10-07 (16:33 UTC; after the kernel planner's hand-back, FS-124 inventory item 34) — how the kernel skeleton states the nine; the
+  planner's draft, copied by script from its record (`plans/FS124-kernel-plan-2.md` on branch `fs124-wk2`, § 4.6):** The kernel skeleton states the nine for any function proper at almost every unit pair (`AeProperOn`; no measurability; any label type in the first five); C124-TYPE with no hypothesis `|w − x| = 1`; the last four from the hypothesis 'every label is the label of a piece of x or of y', with the list's statements as the corollaries at six labels; C124-BOTH's second clause for decompositions each of whose edges contains an arc from the point (`ThreePiece.HasArcEdges`), the list's sector point being one by the θ-curve fact, owed as `ThreePiece.IsSector.hasArcEdges`.
+  **No statement defect was found in the nine as typed.**

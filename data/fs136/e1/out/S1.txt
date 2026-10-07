@@ -1,0 +1,7 @@
+== S1: tiles=11 labels=6 vertices=24 2-label:2 3-label:2 on-the-cut:20 | members(>=3)=2 centres(>=4)=0
+   covering-pairs=1 on-the-ring-of-a-centre=0 | common-unit-points: inside=2 not-inside=0
+   inside: classes L2:2 | labels-at-the-point 2:2 | table-violations=0 of 2880 samples (least eta 4.93e-02; points too thin to sample 0)
+   not-inside: classes none
+   rings: centres=0 least-distance-of-a-point-across-not-inside none | class-at-that-point none
+   pair x=(0.00000,0.00000)[123] y=(1.00000,0.00000)[456] d=1.00000 w=(0.50000,-0.86603) inside labels=23 class=L2 sep=x x[1:bar,2:out,3:in] y[4:bar,5:bar,6:in] cells(x/y): in/in=36 in/out=3 out/in=26 out/out=2
+   pair x=(0.00000,0.00000)[123] y=(1.00000,0.00000)[456] d=1.00000 w=(0.50000,0.86603) inside labels=23 class=L2 sep=x x[1:bar,2:in,3:out] y[4:bar,5:in,6:bar] cells(x/y): in/in=25 in/out=2 out/in=35 out/out=3

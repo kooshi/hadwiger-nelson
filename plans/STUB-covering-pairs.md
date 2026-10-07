@@ -150,6 +150,8 @@ name before it was posed. Entry names are placeholders until the milestone has i
   FS112-DISK-RIM for the disk, FS116-Y2-SIXOFF for the flower — whose Step 3 is "second order along the lens boundary", so
   whether the first-order lemma reaches the flower's far vertex is this claim's content.
 
+*Correction, dated 2026-10-07 (16:48 UTC; filed by the coordinator; source: FS136-E1's record, `plans/FS136-E1-derivation.md` § 2.2 item 4, with its control `rings-r7`, re-run by the coordinator): the control at seven as worded above is wrong. In the deriver's words: "Adjacent lattice points lack *different* labels, so two of them carry all seven: 54 pairs in the window read, at 96 common unit points inside, every one with a full table and no violation. The count is not special to six: it holds at any number of labels when the pair's labels are all the labels … What fails at seven is a pair that covers six of seven (C124-FORCED-SEVEN)." The control that passes: the tight seven-colouring's covering pairs obey the table.*
+
 ### Registered expectations (Poros, 2026-10-07, before any derivation of these)
 
 C-RINGS-READ's statement holds on the strip, the disk and the flower 0.85; on FS114-Y2-BOWTIE 0.5. C-COVER derived as posed
