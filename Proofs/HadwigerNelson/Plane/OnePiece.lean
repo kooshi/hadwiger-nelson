@@ -44,9 +44,19 @@ variable {α : Type*} {k : ℕ}
 
 /-! ## The shadow of an open set of one label -/
 
+open scoped Pointwise in
 /-- The unit shadow of an open set is open: it is the union of the translates of the set by the unit vectors. -/
 theorem isOpen_unitShadow {W : Set ℂ} (hW : IsOpen W) : IsOpen (unitShadow W) := by
-  sorry
+  have h : unitShadow W = sphere (0 : ℂ) 1 + W := by
+    ext z
+    simp only [unitShadow, mem_setOf_eq, Set.mem_add, mem_sphere_iff_norm, sub_zero]
+    constructor
+    · rintro ⟨y, hy, hd⟩
+      exact ⟨z - y, by rw [← dist_eq_norm]; exact hd, y, hy, by ring⟩
+    · rintro ⟨u, hu, y, hy, rfl⟩
+      exact ⟨y, hy, by rw [dist_eq_norm, add_sub_cancel_right]; exact hu⟩
+  rw [h]
+  exact hW.add_left
 
 /-- The unit shadow is monotone. -/
 theorem unitShadow_mono {V W : Set ℂ} (h : V ⊆ W) : unitShadow V ⊆ unitShadow W := by
@@ -115,7 +125,7 @@ about `0` and `i = 2` (the spec example below). -/
 theorem shadow_open {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {W : Set ℂ}
     (hW : IsOpen W) (hWU : W ⊆ U) {i : Fin k} (hi : ∀ᵐ z, z ∈ W → c z = i) :
     IsOpen (U ∩ unitShadow W) ∧ ∀ᵐ z, z ∈ U ∩ unitShadow W → c z ≠ i := by
-  sorry
+  exact ⟨hU.inter (isOpen_unitShadow hW), hc.aeProperOn.ae_unitShadow_ne hW hWU hi⟩
 
 /-- An open set almost every point of which satisfies a property that fails at almost every point of it is empty:
 the two-label form. -/

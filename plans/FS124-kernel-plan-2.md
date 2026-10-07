@@ -7,7 +7,15 @@ is committed before the next starts.*
 
 ## Theorems this phase proved
 
-None yet (a planning job; Stage 5 will list the leaves taken through the build to measure the price).
+On branch `fs124-wk2` only (nothing here is on `main`; the six modules still hold 130 `sorry`). Each [kernel] on
+`[propext, Classical.choice, Quot.sound]` as printed from the build (`data/fs124/k2/price-axioms.txt`):
+- **C124-SHADOW-OPEN in its claim form** — `shadow_open` (`Plane/OnePiece`), over `AeProperOn.ae_unitShadow_ne`
+  (the shadow, for any function proper at almost every unit pair) and `isOpen_unitShadow`.
+- **The type of a piece** — `IsPieceAt.ae_ne_region` (`Plane/OnePiece`; the core of C124-TYPE, both clauses), over
+  `mem_unitShadow_of_isPreconnected`, `not_onSide_iff`, `CircleSide.isOpen_region`, `CircleSide.mem_region_comm`.
+- `abs_real_inner_lt_one`, `norm_sq_quadrant` (`Plane/CircleCrossing`: the one computation under the four regions).
+- By `rfl`: `CircleSide.flip_inside`, `CircleSide.flip_outside`, `onSide_inside`, `onSide_outside`.
+None of the other eight claims is proved: this is a planning job (Stage 5).
 
 ## Stage 1 — SAVED (FS124-K2): the readback and the build as given
 
@@ -666,3 +674,148 @@ against this worktree's build with `lean` — iteration, not evidence.
   open set exists with no hypothesis).
 - **Names**: none of the declarations is declared on `main` or on this branch's base (searched before typing;
   `collar` exists in `Plane/Woodall/Basic` and is not reused; `unitShadow`, `essSupport` are the library's).
+
+## Stage 4 — SAVED (FS124-K2): phase 2, open — the derivers' routes against mine
+
+The fence was lifted by the coordinator's reply to commit `1681f6124` (16:15 UTC). Read after it, on the main working
+tree: `plans/FS124-E2-derivation.md` § Notation, § Argument — every direction, — one piece, one side, — four regions,
+six pieces, — sector points, — the save by one member (the half-collar, Steps I and II, Both, the object, Four labels,
+the control `saves-lone`); `plans/FS124-E1-derivation.md` Stage 4's two arguments (the unit shadow of an open piece;
+the centre, the straddle, the antipode) and its controls; `plans/FS124-derivation.md`: every entry's head, `uses
+only`, `argument`, `grade` and `model` lines, and the entries C124-FORCED, C124-BOTH and C124-TYPE whole. Not read:
+the other stages of the two records, the inventory, the stubs, `data/fs124/claims.md`, the asking lane's cards, the
+strip's reading.
+
+### 4.1 Route against route
+
+| claim | the derivers' route | mine (§ 3.1) | which an implementer builds, and why |
+|---|---|---|---|
+| SHADOW-OPEN | `Ω` open; the pairs `(p, u)`, `p ∈ Ω`, `p + u ∈ W`; those with `c(p + u) ≠ i` null (a translate of a null set for each `u`), the monochromatic ones null; Fubini; each fibre a non-empty open set of the circle | the same Fubini slice, on `ℂ × ℝ`, with the far-end pairs as the preimage of a null set under the first module's right multiplication | **the same route; mine as written** — it is proved (28 lines) and asks no measurability, where "by Fubini" on a measurable set would ask it of `c` |
+| TYPE | `q ∈ P` strictly inside, `η = (1 − |q − w|)/2`; a path in `P` from `q` to a point near `x` carries the distance to `z` across `1` | the same, with a preconnected set and `preconnected_dist_lt_or_gt` in place of a path, any `η` from openness, both clauses as one statement in the side `σ` | **the same route; mine** — no "a connected open set is path-connected", and one proof for the two clauses (proved, 20 lines). Neither argument reads `|w − x| = 1` |
+| CENTRE-HALF, CENTRE | for `p` near `q` the point `m = p + (z − p)/|z − p|` of `S(p)`; `n · (z − q) ≥ (1 − η)/(1 + η) ≥ 1/3`; `|m − q|² ≶ 1` by a quadratic estimate; then SHADOW-OPEN on each collar | TYPE applied to the disc tangent to `S(q)` at `z` inside the collar | **mine**: two ball inclusions by the triangle inequality in place of two quadratic estimates with an inner-product bound; and it makes CENTRE-HALF a corollary of TYPE. **The derivers' route is a second route and is kept here as one**: it is the route I found first (the same point `m`), and it gives an explicit `η` (`min(1/2, ρ)`, and a disc about `q` inside `U`), which mine does not |
+| STRADDLE | `f(s) = |x(s) − q|² − 1` along `S(p)`, `f(0) = 0`, `f′(0) = 2 (z − q) · τ ≠ 0`, so `f` changes sign; the two points persist under a small move of `p` | an intermediate value on the convex set `ball z ρ ∩ ball q 1` between two explicit points for the inside; the inside at the antipode of `q` for the outside; the shadows are open | **mine**: no derivative. The two explicit points come from one identity (`norm_sq_quadrant`, proved), which FORCED-PIECES and LONE use again |
+| FORCED-PIECES | TYPE for the six pieces; the four regions open and non-empty since `w − x`, `w − y` are independent; every label is one piece's; `(A ∨ C)(A ∨ D)(B ∨ C)(B ∨ D) = AB ∨ CD` | the same, as the quadrant lemma for two families of pieces from the cover sentence | **the same route; mine as stated** (the cover sentence a hypothesis, `ClosePair.exists_label_eq` the one use of six). "Independent, so non-empty" is `CrossAt.exists_mem_quadrant`, with its points written down |
+| LONE | Step I (the half-window: a side `Σ` of `S(y)` with only labels of `x`; counts (1, 1), (1, 2), (2, 1)); Step II (`w′` on `S(x)` on `Σ`; CENTRE-HALF at the centre `x`; the regions `D`, `E`; the two circles) | the same `w′`, the same CENTRE-HALF, the same regions; (1, 2) and (2, 1) excluded through labels where Step II uses sets | **the same route; mine as cut into children** (§ 3.4). § 4.2 |
+| BOTH | first clause: LONE in both orders against fullness. Second clause: the θ-curve fact as an input, then "a connected subset of a circle containing two points contains an arc between them", then tightness along the arc | first clause: the same, with the finer form G7. Second clause: for arc-edged decompositions; an injective path on a circle from `x` contains an arc of the circle from `x` | **the first clause: the same. The second: the coordinator's ruling** (§ 2.4) — the θ-curve fact is not an input of `closePair_both_saved`. The derivers' further conclusion (tightness at interior points of the arc) is their C124-FORCED, not one of the nine |
+| FOUR | at most four by TYPE; if one of `y`'s two is absent near `w`, "inside `S(y)` the label `b′` is absent too", so Step II applies to that side and `x` is not full; and with the members exchanged | the same (`ClosePair.label_mem_presentAt_of_isFull_right`, `ThreePiece.not_isFull_of_ae_side`) | **the same route; mine as cut** |
+
+**A second route, found blind?** For CENTRE-HALF, CENTRE and STRADDLE, yes — the type of a tangent disc, and an
+intermediate value on a convex set — and they are the ones an implementer builds. For the other six the blind route
+is the derivers'; what the blind phase added to those is in § 2.3 (the hypotheses not used, the one sentence where
+six is spent, the lemma under it with no cover) and in the statements' shapes (one side variable; the children).
+
+### 4.2 The second look at Step II of C124-LONE (asked by the coordinator; sent between 16:16 and 16:20 UTC)
+
+`plans/FS124-E2-derivation.md`, § Argument — the save by one member, Step II. **My route is its, and the step stands
+as written.** What it leaves implicit, none of it a gap: (1) that `w′` exists — `S(x)` passes arbitrarily near `w`
+through each side of `S(y)` (here `CrossAt.exists_mem_sphere_region`); (2) that `B(w′, ρ) ⊂ U` and `x ∈ U`, which
+C124-CENTRE-HALF asks, from Step I's ball; (3) that `η ≤ 1` — both "`w − x`, `w′ − x` are independent" and "the second
+point of `S(w) ∩ S(w′)` is at distance at least `√3`" need `|w − w′| ≤ 1`, which Step II has only because C124-TYPE's
+argument gives a radius of at most `1/2`; (4) from `P_a ∩ B(x, η′) ⊂ B̄(w′, 1)` to the same for the closure, by the
+openness of the ball. And a reading note: Step II's hypothesis is the filled side ("on one side of `S(y)` near `w`
+almost every point has the label `a` inside `S(x)` and `b` outside, `P_a` inner and `P_b` outer at `w`"), not "`y`
+does not separate" — that is how C124-FOUR uses it, and the skeleton states it so
+(`ThreePiece.exists_second_unit_point_of_ae_side`). In the kernel plan the distance `√3` is not needed: two different
+unit circles through `x` meet near `x` at `x` only (`exists_ball_inter_spheres_subset`), at whatever radius.
+
+### 4.3 Steps of theirs that are not a leaf here
+
+One: **the θ-curve fact** — `plans/FS124-derivation.md`, entry C124-FORCED, `uses only`: "for a sector point, that
+each of the three arcs of its decomposition lies in the closure of exactly two of the three components and that
+every two components share one arc (the θ-curve form of the Jordan–Schoenflies theorem: recalled, not read)"; used
+in `plans/FS124-E2-derivation.md` § Argument — sector points ("`J` the arc of its decomposition that the two
+components share") and in the Both paragraph ("for sector points every two components share an arc of the
+decomposition … so a sector point is full"). Sent to the coordinator in phase 1 (item H); ruled; it is the leaf
+`ThreePiece.IsSector.hasArcEdges` and is owed as its own job (§ 2.4).
+
+Not needed, so not leaves: "a connected open set is path-connected" (TYPE's `uses only`); C124-EVERY-DIRECTION (no
+one of the nine reads it — the nine need "almost every direction" only).
+
+### 4.4 The models: the derivers' and mine, and which is planned
+
+The derivers' models are held objects read by scripts: fragment S1 with a band (C124-LONE-EXISTS: a bowtie member
+and a sector member, checked by FS110-Y's exact checker), fragments T2 and BB (FORCED-PIECES), and for BOTH and FOUR
+FS-112's strip, the disk and the capped strip (71, 20 and 71 common unit points inside; exact in `ℚ(√3, √15)`). None
+is in the kernel. The one six-coloured map with unit-arc tiles that the kernel holds, `Plane/SixFragment`, has no
+close complementary pair of three-tile vertices: its three-tile vertices are the six points `e(60° j)` with labels
+`{j − 1, j, j + 2}`, and no two of those triples are complementary (my reading of its header, by hand).
+
+**Planned: my three local witnesses** (§ 2.5, § 3.2) — each a colouring by formula of three discs of radius `1/10`,
+with unit pairs only between the disc about `w` and the other two. Formalizing the strip would need its tiles'
+geometry and validity in Lean first; the unit square needs four inequalities. A sampling check of the two
+six-colour witnesses (`data/fs124/k2/square_model_check.py`; floats, an instrument and not a proof):
+`square: unit-pairs-sampled=271594 monochromatic=0`, `lone: unit-pairs-sampled=272133 monochromatic=0`; with the
+fault planted (two labels exchanged near `w`), 17,155 and 41,426 monochromatic pairs. The derivers' models stay what
+they are — evidence at [tools] that the classes are inhabited by maps; the kernel's inhabitants are the witnesses.
+
+### 4.5 The plan in final form
+
+§ 3.2's tables stand: phase 2 changed no statement and no route. Since the phase-1 commit: four more leaves proved
+(`CircleSide.isOpen_region`, `CircleSide.mem_region_comm`, `isOpen_unitShadow`, `shadow_open`), so
+**C124-SHADOW-OPEN is proved in its claim form** and the type of a piece (`IsPieceAt.ae_ne_region`) rests on no
+`sorry`. The order for the implementer: § 5.
+
+### 4.6 Drafts for the coordinator's files (each names its slot; none is written by this job)
+
+- **`data/fs124/claims-K2.md`**, a dated line: "The kernel skeleton states the nine for any function proper at
+  almost every unit pair (`AeProperOn`; no measurability; any label type in the first five); C124-TYPE with no
+  hypothesis `|w − x| = 1`; the last four from the hypothesis 'every label is the label of a piece of x or of y',
+  with the list's statements as the corollaries at six labels; C124-BOTH's second clause for decompositions each of
+  whose edges contains an arc from the point (`ThreePiece.HasArcEdges`), the list's sector point being one by the
+  θ-curve fact, owed as `ThreePiece.IsSector.hasArcEdges`."
+- **`plans/FS124-E2-derivation.md`**, Step II, a dated note for its author: "with `η ≤ 1`" after "Take `w′ ∈ S(x) ∩
+  B(w, η)`"; and "the hypothesis used is the filled side, not that `y` does not separate" (§ 4.2).
+- **`LEAN.md` § Searching — Lean**, two lines: "A null set of a product has almost every slice null with no
+  measurability of the set (`MeasureTheory.Measure.measure_ae_null_of_prod_null`): 'almost every point of an open set
+  of one label forces …' needs no measurable colouring (FS124-K2). `sphere 0 1 + W` and `IsOpen.add_left` need `open
+  scoped Pointwise` at the declaration." "To iterate with `lean` on a module that imports another unbuilt module,
+  make a symlink copy of the worktree's `.lake/build/lib/lean` (`cp -rs`), write the new `.olean`s into it with
+  `lean -o`, and put it first on `LEAN_PATH` in place of the build's own entry: an overlay holding only the new
+  files does not work, since the first root that holds `Proofs/` answers for every module of it (FS124-K2)."
+
+## Stage 5 — SAVED (FS124-K2): the price, and where the implementer starts
+
+**Leaves taken through the build** (ten that are proofs, four that are `rfl`): `abs_real_inner_lt_one` (10 lines),
+`norm_sq_quadrant` (11), `CircleSide.isOpen_region` (3), `CircleSide.mem_region_comm` (1), `flip_inside`,
+`flip_outside`; `isOpen_unitShadow` (10), `mem_unitShadow_of_isPreconnected` (5), `AeProperOn.ae_unitShadow_ne`
+(28), `shadow_open` (1), `not_onSide_iff` (3), `IsPieceAt.ae_ne_region` (17), `onSide_inside`, `onSide_outside`.
+Build under the slot: exit 0, `build: OK — 477 of 477 batches, 7 module(s) rebuilt, 6 module(s) with warnings,
+8m58s`; 130 distinct `declaration uses sorry` (23 + 40 + 29 + 32 + 3 + 3) and no other warning
+(`data/fs124/k2/logs/build-3-price.log`, `build-3-price-full.log`); `tools/check_architecture.py` PASS. Axioms, printed
+from that build (`data/fs124/k2/price-axioms.txt`): the ten proved leaves each on `[propext, Classical.choice,
+Quot.sound]`; `piece_type`, still a `sorry`, prints `sorryAx` — the print tells the two apart.
+
+| measured | value | what it measures |
+|---|---|---|
+| leaves proved | 14 of 144 declarations with a body (10 proofs, 4 `rfl`) | by count; 130 leaves left |
+| lines of proof | about 90 of about 2,400 planned (1,200 for the four statement modules, the rest for the models) | § 3.2's sizes, summed |
+| attempts | one or two per leaf: two retries on the quadrant identity (the order of rewrites; the sign of one coefficient), one on the type of a piece (a set-builder's openness, replaced by `mem_region_comm`), one on the shadow's openness (`open scoped Pointwise`) | each a `lean` run of 2 s against the overlay, not a build |
+| my working time on them | about 30 minutes, interleaved with typing the skeleton | writing and `lean` runs |
+| one build | about 9 minutes | the walk over 477 batches with 7 modules to compile — the walk, not the modules; each of the six modules elaborates in under 3 s |
+
+**What the module costs.** The leaves proved include the two that carry the mathematics of the first five claims
+(the shadow; the type of a piece), and they came out at their planned sizes. At the measured rate the four statement
+modules — 1,100 lines left, none over 45, each with its route and its Mathlib names in § 3.2 — are one implementer
+session of a few hours' work and a handful of builds; the long compositions of `Plane/ClosePair` are where a first
+attempt will miss, and they are cut into children for that reason. The models are a second session of about the
+same size, and `exists_closePair_full` is the one leaf I cannot price from a leaf tried: its four inequalities are
+checked by hand and by sampling, not in Lean. Re-price it from its first inequality (`LEAN.md`: a kernel phase is
+re-priced from its first two leaves).
+
+**Where the implementer starts.**
+1. Branch `fs124-wk2` at this stage's commit. The statements are fixed; a statement that will not prove comes back
+   through the coordinator.
+2. Order: `Plane/CircleCrossing` top to bottom (23 left); `Plane/OnePiece` (40 left: the API, TYPE's corollaries,
+   CENTRE-HALF, the tight pairs, the model); `Plane/ThreePiece`'s API (to `hasUnitArcFrom_of_arc_subset_sphere`),
+   then `Plane/ClosePair` (the nine claims are then proved, on the standard three axioms expected); then the models:
+   `sectorPoint`, `petalPoint`, `Plane/ClosePairModel` (the seven-colour control first, then the lone witness, then
+   the unit square), `Plane/SectorPoint`'s two planned leaves. `ThreePiece.IsSector.hasArcEdges` is not this
+   implementer's.
+3. Iterate with `lean` against the overlay (`build/k2-iter.sh` in this worktree's ignored `build/` folder is the
+   recipe of § 4.6; a convenience, not evidence); the build is for evidence.
+4. The probes (`data/fs124/k2/lean/Probe1.lean`, `Probe2.lean`) are in the modules; nothing is left to lift.
+5. The witnesses: § 2.5 with `data/fs124/k2/square_model_check.py` as their formulas. The implementer may take
+   another witness: the three statements are existence statements.
+6. The gate items of § 3.7 at the landing; `Plane/SectorPoint` does not land with a `sorry`.
+7. Not in scope: the θ-lemma (§ 2.4); the rhombus completions, the antipode, kind both and the other entries of the
+   derivers' § 2 that are not among the nine; C124-EVERY-DIRECTION.

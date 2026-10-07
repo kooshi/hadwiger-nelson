@@ -76,12 +76,14 @@ theorem mem_region_iff {σ : CircleSide} {z w : ℂ} : z ∈ σ.region w ↔ 0 <
 
 /-- Each side is open. -/
 theorem isOpen_region (σ : CircleSide) (w : ℂ) : IsOpen (σ.region w) := by
-  sorry
+  cases σ
+  · exact isOpen_ball
+  · exact isClosed_closedBall.isOpen_compl
 
 /-- The sides read the distance only: `y` is on the side `σ` of the circle about `z` exactly when `z` is on the side `σ`
 of the circle about `y`. -/
 theorem mem_region_comm {σ : CircleSide} {y z : ℂ} : y ∈ σ.region z ↔ z ∈ σ.region y := by
-  sorry
+  cases σ <;> simp [CircleSide.region, dist_comm]
 
 /-- The two sides are disjoint. -/
 theorem disjoint_region_flip (σ : CircleSide) (w : ℂ) : Disjoint (σ.region w) (σ.flip.region w) := by
