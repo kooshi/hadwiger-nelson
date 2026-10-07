@@ -195,3 +195,50 @@ inventory, items 607–629 (an outside proof of six became this project's litera
    rule 2 (i), card 1's answer waits for the second reading; this half is told to Kooshi report as "derived,
    one mind, kernel pending", with the two unverified pieces named. No push: it fixes no value.
 
+7. **FS132-E2, second message: card 3's verdicts — five derived, the forcing statement stalls at one named place, and the
+   existence side of six against seven is mapped step by step** (source: its message to "main", 2026-10-07; record
+   `plans/FS132-E2-derivation.md` Stage 3, ten entries, five controls; commit `7b76f48f` on `main`). **Derived** ([hand], one
+   mind): the map into the label graph with triangles filled exists at every `k` and the disc forbids nothing there
+   (C132-FILL, C132-NOESS — so the card's first branch has an empty answer, and the asking lane's collision is read: both
+   sides true, of two targets); the classes of the centres inside a circle add up to the circle's (C132-REL); **a loop in
+   the triangle of three labels with the 60° exclusion has degree 3 modulo 6** (C132-INDEX: `|d| ≥ 3`, at least nine
+   crossings — Sokolov–Voronov's nine circle points; with two labels no such loop exists at all); at an extracted triangle
+   centre the outside labels fill a one-sided strip at almost every direction (C132-TRI-STRIP, from the release's Lemma 8.1
+   read with its proof); **every extracted triangle centre of a six-colouring carries an orbit index in {2, 3, 4} with no
+   tameness assumed** (C132-ORBIT, over the release's Corollary 5.4 at its statement, unread by it). **Stalled**: C132-LONG.
+   **Its table of the regular proof against the weak class** (the proof that no six-colouring has triangle vertices only):
+   R1 a triangle centre — held; R2 its ring carries the three outside labels — derived here, one side; **R3 the ring's
+   index — the lemmas derived, their hypothesis C132-RING-TAME is the stall**; R4 the interfaces from the nine points — the
+   relation derived, its use needs more than tameness; R5 (eleven vertices against ten types) and R6 (the bicycle) — **no
+   weak form**. **The count that matters**: at five two labels lie outside a triangle and the ring is rigid; at seven four,
+   and four labels have no winding number (measured on the honeycomb: nine changes, none 60° apart, both clauses of
+   tameness true — seven escapes by its count, not by wildness); **six is the one count at which the outside labels wind**.
+   **C132-RING-TAME's own caution**: its first clause is false wherever local slack exists along the strip, so it is a
+   statement for a normal form or false at six. **The YES side's first sketch**: a six-colouring living on triangles alone
+   is not a segment-and-arc map; each of its rings carries an orbit index; its rings cannot all be tame, so it spends its
+   freedom on the ring in one of three named ways (infinitely many changes; a ring that turns with the rotation, index 2
+   or 4; a binary ring) — or its centres accumulate. **Its three smallest open forms**, each about one circle at one centre:
+   (a) three labels on a strip; (b) the changes of side; (c) is the orbit index constant, and is the turning ring excluded.
+   **My receipt**: the commit is on `main`; its gate run by me — exit 0, 0 failures, 2 warnings, five controls each firing
+   on its fault; the arguments for C132-INDEX, C132-RING-WIND, C132-ORBIT, C132-TRI-STRIP and the sections from "Where the
+   forcing statement stalls" to "Predictions scored" read whole. **Checked by me**: C132-INDEX's argument — the step from
+   `φ(e)` to `φ(Re)` lies in `[2, 4]` modulo 6 with the ends only at vertices, six steps sum to `6d`, and the extreme sums
+   force a constant map, which the exclusion forbids: it holds; C132-ORBIT's count of disjoint non-empty subsets of three
+   labels; C132-TRI-STRIP's identity `|x + rf − q|² = r² + s² − 2rs f·w`. **Not checked by me**: C132-FILL, C132-REL,
+   C132-SEP; the honeycomb's measured walk; the gate's two warnings (prior art owed, by its report).
+   **Credit**: it answered the card and then said the card's route removes the invariant; it found the statement the card
+   was after in another place, with the count of labels as the reason six is singular; it wrote the stall as a statement
+   with both controls, as asked, and said of its own stalled statement that it can be true only on a normal form; and the
+   YES side's sketch — the first description this project has of what a six-colouring on triangles alone would have to do.
+   **Rulings.** (a) **The claim list gains the four entries and the verdicts by a dated line.** (b) **Nothing is pushed to
+   Kooshi**: no value is fixed. (c) **The stall goes to the asking lane, as Workflow 3.1 routes a stall — FS132-P2, a
+   re-posing and a re-rank** (brief to be written at this job's hand-back): which of the three smallest forms is the next
+   question; whether this project's saturated normal form (rows 140–144) supplies the first clause, and so whether the
+   backlog's saturated-class work is back on the road for the existence side while the map step is off it for the
+   exclusions (item 6); what replaces R5 and R6; and the frontier re-ranked on today's results. Alternative: a deriver at
+   once on C132-RING-TAME through the readings deriver's step lemma. Why not: its own entry says the clause needs a normal
+   form the step lemma did not need, the choice among three forms and two further missing steps is a ranking question, and
+   the staffing is two — the readings deriver has been asked for one paragraph on whether its mechanism carries over,
+   which the asking lane will have. Confidence: medium. (d) **To the kernel lane's planner, when it opens**: C132-INDEX and
+   C132-RING-WIND are colouring-free and short — candidates for its first leaves.
+

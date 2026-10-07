@@ -176,4 +176,31 @@ the death of every such cycle — which are what the answer is made of and are n
   outside label on a set of positive measure near the orbit (the (Q) rings), nothing at seven labels, nothing at a cycle of
   three, five or six labels, and that a map's four-colour vertex carries the four sets is taken from row 134's base, not
   re-derived.
+- **2026-10-07 (after FS132-E2's Stage 3, commit `7b76f48f`; FS-132 inventory item 7): card 3's six claims have their verdicts,
+  and four entries of that record enter the list** — each statement read whole in its entry there:
+
+> derivation: C132-RING-TAME
+> — source: plans/FS132-E2-derivation.md Stage 3
+
+> derivation: C132-RING-WIND
+> — source: plans/FS132-E2-derivation.md Stage 3
+
+> derivation: C132-ORBIT
+> — source: plans/FS132-E2-derivation.md Stage 3
+
+> derivation: C132-SEP
+> — source: plans/FS132-E2-derivation.md Stage 3
+
+> derivation: C132-LONG
+> — source: plans/FS132-E2-derivation.md Stage 3
+
+  **Derived, [hand], one mind**: C132-FILL, C132-NOESS, C132-REL, C132-INDEX, C132-TRI-STRIP as fixed above; **C132-RING-WIND**
+  (a tame ring's winding number exists and is 3 modulo 6 — no colouring in it), **C132-ORBIT** (every extracted triangle
+  centre of a weak measurable six-colouring carries an orbit index with values 2, 3 or 4 — over the release's Corollary 5.4
+  taken at its statement), **C132-SEP** (one computation about the unit chord's angle). **Stalled**: **C132-LONG**, the forcing
+  statement, at the winding number of the three outside labels on a triangle centre's unit circle; and **C132-RING-TAME**, the
+  stalled step as a statement of its own — the pure-side palette changes at finitely many directions, no two of them 60°
+  apart — at its first clause, "the three-label form of the release's two-label strip rigidity". *Not claimed*: each entry's
+  own line; in particular C132-RING-TAME is said by its own entry to be possible only on a normal form (local slack along
+  the ring breaks it) and not to be enough for C132-LONG by itself; C132-M-CV stalls with C132-LONG.
 
