@@ -1,0 +1,112 @@
+### E3 line 100
+derivation: C132-M-ORBIT
+  statement: let U be an open set of the plane containing the closed unit disc about a point p, let c be a weak measurable six-colouring of U (a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair (z, u) of a point z of U and a unit vector u with z + u in U), let a_0, a_1, a_2, a_3 be four of the labels and X, Y the other two, and for each j modulo 4 let K_j be a compact set containing p and a point other than p with H_{a_j} ∩ Δ(K_j) = ∅ and H_{a_{j+1}} ∩ Δ(K_j) = ∅, where H_a is the closed essential support of the class of a and Δ(K) is the set of z with min over q ∈ K of |z − q| below 1 and max over q ∈ K of |z − q| above 1; then there are no angle ψ and number δ > 0 such that (i) for every integer k and almost every θ with |θ − ψ − kπ/3| < δ the palette P_p(e(θ)) (`[OAIMath2026]` Definition 5.1, read at the centre p with samplings inside U) contains X or Y, and (ii) for every η > 0 the set of θ in (ψ − η, ψ + η) whose palette contains X and the set of those whose palette contains Y both have positive measure
+  uses only: weak properness in its measure form; Definition 5.1 (every trace's positive coordinates lie in the palette); Lemma 5.2 assertion (1) read locally (for almost every pair of unit vectors (e, v) with p + e + v in U, c(p + e + v) ∉ P_p(e) ∪ P_p(v)) and Cor. 5.4 (P_p(f) ∩ P_p(Rf) = ∅ for almost every f) — both read in `M/palettes.tex` ll. 118–308 and taken at six labels on the reading's word that their proofs spend no count (`plans/EXT-OAI2-reading.md` § 4.2 rows 2–3; I read both proofs and found no count in them; one mind); of the sets K_j only that p ∈ K_j, K_j ≠ {p}, and the exclusion — E0 as a point, E1 as four labels in a cycle, clause (1) as "K_j is not {p}", clause (3) in C132-CONFINE's first form; the parallelogram law; e(ψ) + e(ψ + 2π/3) = e(ψ + π/3); the unit-pair relation between points near two ring points π/3 apart (M7); Lebesgue density on the line (M8); six labels, at M2 and at M9. It reads nothing of clause (2) (limiting directions), clause (4), clause (5), connectedness of the K_j, isolation of p among cyclic centres, Lemma 6.2, Lemma 8.1, or any tile, sector, arc or finiteness
+  not claimed: anything when the palettes near one of the six directions ψ + kπ/3 hold no outside label on a set of positive measure (rings with (Q) arcs at the orbit: FS-124); that a six-colouring with hypothesis (a) exists; that a point whose transition graph contains a four-cycle carries the sets K_j (that is the extraction's, under its hypothesis on the centres); anything at seven labels or more (M2 and M9 spend six); anything about a cycle of three, five or six labels; any value of χ(ℝ²); that a map's four-colour vertex carries the sets K_j (the edge exclusion for maps is row 134's base, not re-derived here)
+  argument: § Argument — the orbit form
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none can exist (a non-existence). The hypotheses other than (i)–(ii) are met, as maps, at the held fragments' four-colour vertices (the strip's P0 and P1, the Y2 bowtie's centre: four tiles in cyclic order whose common edges carry the two-colour exclusion — taken from row 134's base and `[SokolovVoronov2025]` Props. 1–2, not re-derived); there (i) fails at every change point: at least two of its four germs at ±60° lie on (Q) arcs (control `positives-escape`). At nine labels SQ9's lattice vertex meets every hypothesis but the count (FS116-V6's control `v6-sq9`, not rerun)
+  prior art: partly: the palette calculus is `[OAIMath2026]` §§ 5.1–5.3; steps M1–M5 and M9 are FS116-V6's V6-RING, -GERM, -TIP, -DIAM, -ANTI and -HUG restated in measure (in-house; row 148); M6 and M8 and the statement are not in the release (its § 8 treats the four-cycle only with one outside label); the search for them in print is owed — the plan's §PA of 2026-10-07 found no six-colour form of the release's §§ 5–8, and this job's two queries failed (§ Prior art, this job)
+  handoff: de Bruijn — the statement as written, over the release's palettes at `Fin 6` (`Palettes.lean`, `palette_transport_param`, `palette_sixty_disjoint`, each already at every k): hypotheses a weak colouring on an open set containing the closed unit disc, four compact sets through p with the support exclusion, the two-clause ring hypothesis; conclusion False. Leaves in the order of the argument: the chart Z and (⋆); tips exist; confinement; one tip per hub; the three-axes count (finite, 64 cases); the unit-pair relation with its sign; the step lemma; the kill. Read the formal statement back against this one, clause (ii) above all
+
+### E3 line 112
+derivation: C132-M-EXCL
+  statement: let U, p, c, the labels a_0, a_1, a_2, a_3, X, Y and the sets K_0, K_1, K_2, K_3 be as in C132-M-ORBIT; then it is not the case that for almost every unit vector e the palette P_p(e) contains X or Y
+  uses only: C132-M-ORBIT; Cor. 5.4 once more, to see that a ring whose palettes almost everywhere hold an outside label has an essential change point
+  not claimed: what C132-M-ORBIT does not claim; that the centre is binary for no pair at all (only for the pair outside the cycle)
+  argument: § Argument — the ring form
+  verdict: derived
+  grade: derived from: C132-M-ORBIT
+  minds: 1
+  model: none can exist (a non-existence); the model line of C132-M-ORBIT
+  prior art: partly: as C132-M-ORBIT; in the map class and for non-Siamese fragments this is row 149's statement (FS129-SR3-QFREE-NS), proved there through FS-112's bends
+  handoff: de Bruijn — as C132-M-ORBIT's corollary; the formal statement to read back is this one
+
+### E3 line 124
+derivation: C132-M-EMPTY
+  statement: no weak measurable six-colouring of an open set containing a closed disc of radius above 1 about a point p has, at p, the data of an extracted centre with a cycle of four labels (C132-EXT-DISC's conclusion at p with ℓ = 4: the labels i_0, i_1, i_2, i_3 and the sets K_0, K_1, K_2, K_3 with its clauses (1) to (5)) together with palettes P_p(e) that for almost every unit vector e contain a label outside the cycle
+  uses only: C132-M-EXCL with a_j = i_j; of the data, clauses (1) and (3)
+  not claimed: what C132-M-EXCL does not claim; that the extraction ever returns ℓ = 4; anything at a centre whose ring is not of that kind
+  argument: § Argument — the fixed form
+  verdict: derived
+  grade: derived from: C132-M-EXCL
+  minds: 1
+  model: none can exist (a non-existence); the model line of C132-M-ORBIT
+  prior art: partly: as C132-M-EXCL
+  handoff: none — subsumed by C132-M-EXCL, which crosses
+
+### E3 line 136
+derivation: C132-RUN-EMPTY
+  statement: each step of the route FS116-V6 § 2.2 (`plans/FS116-V6-verification.md`: V6-DIAM, V6-E1, V6-DICH, V6-RING, V6-WIN, V6-GERM, V6-TIP, V6-HUBS, V6-ANTI, V6-HUG, V6-COUNT, read with FS129-SR3-EMPTY-NS's sector form of the last) has a restatement under the dictionary, true of every weak measurable six-colouring of an open set containing a closed disc of radius above 1 about an extracted centre `p` with `ℓ = 4` whose palettes almost everywhere contain a label outside the cycle, derived from the data, the toolkit and that ring hypothesis alone; and the restated steps end in a contradiction — so that no such colouring exists (**C132-M-EMPTY**, the existence form's NO, named here so that it can be derived by another route)
+  uses only: § The route, step by step — V6-DIAM, V6-E1, V6-DICH, V6-RING, V6-WIN, V6-GERM, V6-TIP, V6-ANTI and V6-HUG each have a restatement derived inside C132-M-ORBIT's argument; V6-HUBS has none; V6-COUNT's count consumes V6-HUBS and has none, its last step has one
+  not claimed: that C132-M-EMPTY is open or false — it is derived (the entry above), by the nine restated steps with M6 in place of V6-HUBS and of the count; that no restatement of V6-HUBS could ever be derived on its own (after C132-M-EMPTY every statement about the class holds vacuously; the stall is of V6-HUBS's argument, which reads a tile)
+  argument: § The route, step by step
+  verdict: stalls at: V6-HUBS — "a tile of p tips at most two [change points], and two only if consecutive", whose argument is "a tile's tipped change points are pairwise within distance 1 (V6-DIAM)": the dictionary's left-hand term is the tile as one connected piece of diameter at most 1 holding two hubs in its closure ("the same tile"); the data confine a label's exclusion sets, not the label
+  grade: hand
+  minds: 1
+  model: the configuration the data leave where V6-HUBS stood — a label that is the tip at three consecutive hubs (pattern A of M6) — is not excluded by confinement alone: its two exclusion sets lie within 30° of the middle hub's direction, inside all three closed unit discs
+  prior art: owed — the reading is this project's; nothing to search
+  handoff: none — a reading; what crosses is C132-M-EXCL
+
+### E3 line 148
+control: hug-shift
+  of: C132-M-ORBIT — step M7: the unit-pair relation between points near two ring points 60° apart, the sign of its shift, and the pairs step M9 uses
+  run: python3 ../data/fs132/e3/hug_shift.py
+  expect: ratio-min=1.1614 ratio-max=1.2411 limit=1.1547 nonpositive=0 bad-pairs=0 axis-below-1e-30=True
+  fault: python3 ../data/fs132/e3/hug_shift.py --fault
+
+### E3 line 154
+control: three-axes
+  of: C132-M-ORBIT — step M6: every tip pattern on six hubs that is consistent with the three axes has two adjacent hubs of equal tip
+  run: python3 ../data/fs132/e3/tau_count.py
+  expect: sign-consistent=36 of 64; kind-A=12 kind-B=24; with no adjacent equal tips=0
+  fault: python3 ../data/fs132/e3/tau_count.py --fault
+
+### E3 line 160
+control: positives-escape
+  of: C132-M-ORBIT — the positives: at every change point of the held fragments' four-colour vertices a germ of the orbit lies on a (Q) arc, so hypothesis (i) fails there
+  run: python3 ../data/fs132/e3/positives_check.py
+  expect: rings=4 change-points=8 all-four-germs-off-Q=0 least-germs-on-Q=2
+  fault: python3 ../data/fs132/e3/positives_check.py --fault
+
+### E3 line 415
+derivation: C132-RUN-CV
+  statement: each input of the route to FS114-CV-EXISTS (`plans/FS114-CVB-verification.md` § 1.4, by the entry's `uses only:` — FS112-N3-DENSE3, FS112-N2-TERM with its terminal modification `M*`, N4-FIN, and "a modification creating no unit arc keeps a four-colour vertex's colours at the vertex") has a restatement under the dictionary, true of every weak measurable six-colouring of the plane whose cyclic centres are finite in every closed disc, derived from the data and the toolkit alone; and the restated steps give an extracted centre with `ℓ ≥ 4` (**C132-M-CV**, [G₆] in the measurable class under C132-EXT's hypothesis)
+  uses only: § The existence route, input by input — the reading of the four inputs against C132-EXT-DISC
+  not claimed: that C132-M-CV is false (a stall of the reading says nothing of the statement); that the measurable side needs the three inputs FS112-N2-TERM, N4-FIN and the colour-keeping of the moves at all — it does not (the extraction stands where they stood); what the proof of FS112-N3-DENSE3 reads of a cubic map (unread here)
+  argument: § The existence route, input by input
+  verdict: stalls at: FS112-N3-DENSE3 — "every closed disc of radius 3 of a valid map holds a vertex of `≥ 4` colours or a repeated colour": its second alternative reads the cyclic order of tiles at a point (no counterpart), and with that alternative gone its restatement is C132-M-CV itself; its proof is row 134's base (`[SokolovVoronov2025]` Cor. 1 for curved cubic maps), which no statement of the data or the toolkit replaces at six
+  grade: hand
+  minds: 1
+  model: the hexagonal seven-colouring — every extracted centre is a triangle (the first deriver's control `hex7-model`), so at seven the restated input is false, as FS112-N3-DENSE3 is false for it (CVB § 1.4, "Seven-colour control")
+  prior art: owed — the reading is this project's; nothing to search
+  handoff: none — a reading; its hand-over line is below
+
+### E3 line 427
+derivation: C132-DIAG-WIDE
+  statement: let U be an open set of the plane containing the closed unit disc about a point p, c a weak measurable six-colouring of U, and D, D′ two disjoint pairs of labels; then there is no measurable map w from the unit circle to {D, D′} with w(e) ⊂ P_p(e) and w(Re) ≠ w(e) for almost every unit vector e, R the rotation by π/3
+  uses only: `[OAIMath2026]` Lemma 5.2 assertion (2) (at an angular density-one direction e of the set of directions whose palette holds i, the class of i has density zero at p + e + v for every v not parallel to e), Lemma 4.3 (two density-one points of one class are not at distance 1) and the argument of Lemma 6.4 (`M/transitions.tex:228–272`) with its one count read as "the labels outside D ∪ D′ are two"; that cos γ = 5/6 makes γ/π irrational; that the three points p + e(t + 2jπ/3)(1 − e(γ)) are pairwise 1 apart at distance 1/√3 from p
+  not claimed: anything about a ring that takes a third state (a palette holding an outside label) on a set of positive measure — the mixed rings of FS-124; anything at seven labels or more (three labels outside leave the triangle properly colourable)
+  argument: § Argument — the two-diagonal ring
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none can exist (a non-existence); at five labels the same argument is the release's Lemma 6.4, with one label and one pair
+  prior art: known: `[OAIMath2026]` Lemma 6.4, whose Lean form `two_state_impossible {k}` carries the count as the hypothesis that at most two labels lie outside (`plans/EXT-OAI2-reading.md` § 4.2 row 8; the Lean not read by this job) — this entry is its instance at six labels with two pairs, read from the manuscript's proof
+  handoff: de Bruijn — the instance of the release's `two_state_impossible` at `Fin 6` with `J`, `K` the two pairs; read `RealState` first (unread by the reading and by this job)
+
+### E3 line 439
+derivation: C132-DIAG
+  statement: in a measurable six-colouring no four-cycle centre has a ring alternating, almost everywhere under the 60° rotation, between the two diagonals of its cycle
+  uses only: C132-DIAG-WIDE with D, D′ the two diagonals {i_0, i_2}, {i_1, i_3} of the cycle; "a ring alternating between the two diagonals" read as: almost every palette at the centre contains one of the two diagonals, chosen measurably, and the choice changes under the rotation
+  not claimed: what C132-DIAG-WIDE does not claim; that the centre is a four-cycle centre is not used
+  argument: § Argument — the two-diagonal ring
+  verdict: derived
+  grade: derived from: C132-DIAG-WIDE
+  minds: 1
+  model: none can exist (a non-existence)
+  prior art: known: as C132-DIAG-WIDE
+  handoff: none — subsumed by C132-DIAG-WIDE, which crosses
+

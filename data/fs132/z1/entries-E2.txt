@@ -1,0 +1,165 @@
+### E2 line 198
+derivation: C132-FILL
+  statement: Let k ≥ 3 be an integer, X_k the union of 𝒢 with all its filled triangles, c a weak measurable k-colouring of the plane and D a closed disc of radius greater than 1 with 𝓛 ∩ D finite; then for every large n there is a continuous map from D₁ to X_k that equals g_n off the core discs and equals q^{ε_n} off the holes, and the connected components of the sets on which one of its coordinates is positive form an open cover of D₁ of multiplicity at most three whose mesh is at most 1 + o(1) as n → ∞
+  uses only: the construction of C132-EXT-DISC's argument, steps S4–S5 (the threshold map, the holes, one core disc per centre, the map g_n); that the 2-skeleton of a simplex is simply connected; the mesh argument of its step S7, which reads of the map only that it equals q^{ε_n} off the holes and of the holes only that their total radius tends to 0
+  not claimed: that the disc averages themselves fill a core disc inside X_k (four or more labels may exceed the threshold there); that the members of the cover avoid the unit distance (two points 1 apart may both carry a label above the threshold α); any obstruction — the statement is that this map exists whenever the colouring does, at every k, so no covering theorem of order three forbids it
+  argument: § Argument — the filled target
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 7, the hexagonal seven-colouring with circumradius 2/5 — near a vertex only its three labels are present, so q^ε itself maps into X_7 and is the filling; the cover is the honeycomb's tiles thickened by O(ε)
+  prior art: partly: the map into the graph is `[OAIMath2026]` Lemma 7.4; the classical order-three statement is Lebesgue's covering theorem (`[HurewiczWallman1948]` Thm IV 2, held); the filled form for a weak measurable colouring not found in print by the milestone's gate (`plans/FS132-six-by-the-nerve.md` §PA), which this job did not extend
+  handoff: de Bruijn — with C132-EXT-DISC's module: the extension of each core loop over its disc into the 2-skeleton, from simple connectivity of the 2-skeleton of a simplex; the cover's mesh bound is the release's argument for `no_large_positive_sequence` read with a 2-complex target
+
+### E2 line 210
+derivation: C132-NOESS
+  statement: For k ≥ 4 every loop of 𝒢 is null-homotopic in X_k; and for a set 𝒯 of triangles of 𝒢 the simple four-cycle on the labels 0, 1, 2, 3 is null-homotopic in 𝒢 ∪ 𝒯 when 𝒯 holds the triangles 012 and 023, and is not null-homologous when 𝒯 holds the triangle 012 alone
+  uses only: that the fundamental group of a complex is that of its 2-skeleton and a simplex is contractible; that a four-cycle is the composite of two triangles sharing a diagonal; that the boundary of the one triangle 012 has coefficient 0 on the edge 23
+  not claimed: a criterion for a general 𝒯; anything metric; that a centre with a long cycle is ever essential or ever inessential in the complex whose triangles are the ones a given colouring realizes — that depends on the triangles realized at other centres, and no statement here controls them
+  argument: § Argument — nothing stays essential
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 6 and 𝒯 the twenty triangles — the first homology of X_6 has rank 0 (control `two-skeleton`)
+  prior art: known: textbook (cellular approximation; `[Hatcher2002]` § 1.2 and Proposition 1.26, recalled, not read)
+  handoff: none — a relay-result; its first clause is step F1 of C132-FILL, which crosses
+
+### E2 line 222
+derivation: C132-REL
+  statement: In the setting of C132-FILL, for a circle C in the interior of D₁ that misses 𝓛, bounding the open disc U, and every large n, the class of g_n on C in the first integral homology of 𝒢 is the sum over the points x of 𝓛 in U of the classes of g_n on ∂B_{n,x}, all circles counterclockwise
+  uses only: that g_n is continuous on D₁ minus the open core discs (step S5); that the core discs shrink to their centres; that the boundary of a compact planar domain is null-homologous in it
+  not claimed: the relation in the fundamental group (a product of conjugates along paths this statement does not fix); that either side is independent of n; that a core's class is non-zero; anything when 𝓛 ∩ D is infinite
+  argument: § Argument — the relation a disc imposes
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 7, the hexagonal seven-colouring, C the unit circle about the vertex (0, 2/5): the circle's walk of labels 6, 5, 4, 1, 6, 4, 5, 1, 4 as an integral 1-chain is the sum of the triangle chains of the thirteen vertices inside it (control `hex7-relation`)
+  prior art: known: Stokes' theorem for a map of a planar domain to a graph; `[OAIMath2026]` uses it in free-homotopy form in Lemma 7.8 (by the first deriver's step S8)
+  handoff: de Bruijn — as a statement about signed edge-crossing counts of g_n along C and along the core circles; the planner chooses between homology and a winding-count form
+
+### E2 line 234
+derivation: C132-INDEX
+  statement: Let a, b, c be three labels, Θ the union of the edges ab, bc, ca of the simplex of probability vectors, and φ a continuous map from the unit circle S to Θ such that for every e in S no label has a positive coordinate both at φ(e) and at φ(Re); then the degree of φ, for the orientation a → b → c of Θ, is congruent to 3 modulo 6
+  uses only: continuity of φ and its lift to the line; that six rotations by π/3 compose to the identity; that a point of Θ whose support is disjoint from the support of a vertex lies on the closed opposite edge, and from the support of an interior point of an edge is the opposite vertex
+  not claimed: anything for a ring that is only measurable; for a loop whose changes at e and at Re may coincide (six sectors a, b, c, a, b, c of angle π/3 have degree 2, and a, b, a, b, a, b degree 0: the control's fault); for four labels (the target is then a graph of rank three, with no degree); that the ring of any colouring satisfies the hypothesis
+  argument: § Argument — the degree of a three-labelled ring
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: nine arcs of 2π/9 labelled a, b, c, a, b, c, a, b, c, joined linearly on short intervals about the nine boundaries — degree 3; in the control's discretization the sequence 0, 0, 1, 1, 2, 2 three times on 18 positions
+  prior art: partly: the index of a three-coloured circle and its nine bichromatic points are `[Voronov2023]`'s and `[SokolovVoronov2025]`'s (by this project's records `plans/FS106-V-verification.md` row V-1.2 and `plans/FS110-CB-verification.md` § D5; neither paper read by this job); that a three-colouring's slope lies between one third and two thirds is this project's G71 (FS73-T22); the congruence modulo 6 in this form not searched
+  handoff: de Bruijn — a lemma about continuous maps of the circle with no colouring in it: the lift, the six-step sum, the two excluded ends
+
+### E2 line 246
+derivation: C132-RING-WIND
+  statement: let N be a set of three labels, Π a measurable function from the unit circle S to the non-empty subsets of N with Π(e) ∩ Π(Re) = ∅ for almost every e, and J the set of the directions e having no arc about e on which Π is almost everywhere equal to one set; if J is finite and no two of its points are at angle π/3, then on each arc of S ∖ J the function Π is almost everywhere one singleton or one pair, two consecutive arcs carry subsets of one pair, and the closed walk they make around the triangle on N has winding number congruent to 3 modulo 6
+  uses only: C132-INDEX, applied to the loop that sits at a vertex on a singleton arc, at an edge's midpoint on a pair arc, and moves along one edge across each point of J; the disjointness under R on sets of positive measure; finiteness of J and J ∩ R(J) = ∅, both used to make the loop's supports disjoint under R
+  not claimed: the conclusion when two points of J are π/3 apart (the fault of control `ring-degree`); when J is infinite; for a set N of four labels; that the pure-side palette of any colouring has a finite J
+  argument: § Argument — the winding of a tame ring
+  verdict: derived
+  grade: derived from: C132-INDEX
+  minds: 1
+  model: N = {a, b, c}, Π the singleton a, b, c, a, b, c, a, b, c on nine arcs of 2π/9 — J is the nine boundaries, J + π/3 falls on the arcs' midpoints, the winding number is 3
+  prior art: partly: as C132-INDEX
+  handoff: de Bruijn — with C132-INDEX, as its form for step functions
+
+### E2 line 258
+derivation: C132-ORBIT
+  statement: let N be a set of three labels and Π a measurable function from the unit circle S to the non-empty subsets of N with Π(e) ∩ Π(Re) = ∅ for almost every e; then for almost every e each of the six sets Π(e), Π(Re), …, Π(R⁵e) is a singleton or a pair, no two consecutive ones are pairs, and with a vertex of the triangle on N at coordinates 0, 2, 4 modulo 6 and a pair at the midpoint between its two vertices, the six steps from each set to the next, each taken in the interval [2, 4], add up to 12, 18 or 24
+  uses only: that two disjoint non-empty subsets of a three-element set are two distinct singletons or a singleton and the pair of the other two; that the six steps add up to a multiple of 6
+  not claimed: that the sum is the same for almost every e; that it is 18; anything for four labels, where two disjoint pairs exist and no step is defined
+  argument: § Argument — the orbit index
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the six sectors a, b, c, a, b, c of angle π/3 — every step is 2 and the sum is 12; the nine arcs of C132-RING-WIND's model — three steps of 2 and three of 4, sum 18
+  prior art: owed
+  handoff: none — a relay-result: the measurable shadow of the winding number, used to state C132-RING-TAME's alternatives; it crosses only if C132-RING-TAME is taken up
+
+### E2 line 270
+derivation: C132-TRI-STRIP
+  statement: Let k ≥ 3, c a weak measurable k-colouring of the plane, and x, ρ, labels i_0, i_1, i_2, continua K_j and directions v_j satisfying clauses (1), (2), (3) of C132-EXT-DISC with ℓ = 3; let N be the set of the other k − 3 labels; then for every unit vector e perpendicular to none of the v_j there are an arc A about e and a width w > 0 such that almost every point x + r f with f in A and 1 < r < 1 + w has its label in N if e·v_j > 0 for at least two j, and almost every point x + r f with f in A and 1 − w < r < 1 has its label in N if e·v_j < 0 for at least two j; and P_x(e) meets N for almost every e
+  uses only: clause (3) and x ∈ K_j; the points of K_j tending to x with directions tending to v_j; that a set missing H_i meets the class of label i in a null set; that two edges of a triangle have all three vertices among their endpoints; for the last clause the one-sided traces of `[OAIMath2026]` Lemma 8.1 (`M/angular.tex:73–95`, read with its proof, which reads no count of labels)
+  not claimed: purity of both sides at one direction; that P_x(e) lies inside N; anything at the at most six directions perpendicular to a v_j; anything for ℓ ≥ 4 (a four-cycle has four of its sixteen sign patterns with no pure side: the fault of control `tri-strips`); that the class is inhabited at six
+  argument: § Argument — one-sided pure strips
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 7, the hexagonal seven-colouring at the vertex (0, 2/5) with its three edges: N = {1, 4, 5, 6}, and there both sides are pure at every direction (control `hex7-relation`: own-on-rings empty at radii 0.98, 1, 1.02)
+  prior art: partly: `[OAIMath2026]` Lemma 8.1 is the strip statement for the sets O(e), I(e) at five labels; its use at a triangle is the opening of its Proposition 8.10 (by `plans/EXT-OAI2-reading.md` § 3.1; `M/angular.tex` past line 125 not read by this job); the statement at every k with the majority rule not found in print by the milestone's gate
+  handoff: de Bruijn — from the release's strip lemma (`AngularBoundary.lean`, `BoundaryTrace.lean`, typed at every k by the reading § 4.2 row 14) with a case split on three signs
+
+### E2 line 282
+derivation: C132-SEP
+  statement: the angle Φ(r, s) = arccos((r² + s² − 1)/(2rs)) at the common centre between a point of the circle of radius r and a point of the circle of radius s at distance 1 from it has mixed second derivative 8/(3√3) at r = s = 1, so on no neighbourhood of (1, 1) is Φ the sum of a function of r and a function of s
+  uses only: differentiation; that a sum f(r) + g(s) of twice differentiable functions has mixed derivative 0, and for arbitrary f, g that Φ(r, s) − Φ(r, s′) − Φ(r′, s) + Φ(r′, s′) would vanish identically, which the non-zero mixed derivative forbids
+  not claimed: any statement about colourings — in particular not that two changes of colour π/3 apart are impossible in a strip of positive width; that follows from this only for changes along two curves that cross the whole strip and are matched in both directions, a regularity no weak measurable colouring is known to have
+  argument: § Argument — the unit chord's angle is not separable
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: r = s = 1 gives Φ = π/3, the angle of the equilateral triangle; the first derivatives there are −1/√3 each (control `chord-angle`)
+  prior art: owed
+  handoff: none — a relay-result for the YES side's sketch; one computation
+
+### E2 line 294
+derivation: C132-RING-TAME
+  statement: for every weak measurable six-colouring of the plane and every x, ρ, labels i_0, i_1, i_2, continua K_j and directions v_j satisfying clauses (1), (2), (3) of C132-EXT-DISC with ℓ = 3, with N the set of the three other labels and Π_x(e) ⊂ N the set of the labels of positive weight, at the direction e, in the weak-* limits of the colouring's samples on circles about x whose radii tend to 1 from the side on which C132-TRI-STRIP's strip at e carries only N, the set J_x of the directions e having no arc about e on which Π_x is almost everywhere equal to one set is finite, and no two of its points are at angle π/3
+  uses only: nothing — it is posed, as the hypothesis under which C132-RING-WIND gives the ring of a triangle centre a winding number congruent to 3 modulo 6
+  not claimed: that it holds — for a class containing a six-colouring with local slack along such a ring it fails (G95's stripes, planted in the labels of N, make J_x infinite), so the class in which it can be true is a normal form, which is not chosen here; that it suffices for C132-LONG (the count of centres inside the unit circle needs the smoothed colouring on the circle itself, and the two last steps of the regular chain are beyond it); that its second clause can hold at a centre whose three directions v_j make angles of 2π/3, where the six directions at which the pure side changes are π/3 apart
+  argument: § The stalled step, as a statement of its own
+  verdict: stalls at: the first clause, finiteness of J_x — the release's strip rigidity (its Lemma 8.6) is for two labels on a strip and makes a binary ring locally constant off six directions; for three labels on a strip no rigidity is held, by the release or here, and two of them may alternate at every scale
+  grade: hand
+  minds: 1
+  model: none at six — no six-colouring is known; at seven the hexagonal colouring's ring at a vertex has J_x of nine points, no two π/3 apart, with Π_x valued in a set of four labels (control `hex7-relation`), so it satisfies both clauses and lies outside the statement only by its count of labels
+  prior art: partly: in the map classes the first clause is the definition of a map and the second is Sokolov–Voronov's transversality (`plans/FS110-CB-verification.md` § D5, "(i)/(ii) under transversality"); for weak measurable colourings the two-label form is `[OAIMath2026]` Lemmas 8.6–8.7; the three-label form not found by the milestone's gate
+  handoff: Poros — not derived; stalls at the finiteness of the changes of a three-labelled ring; the smallest open form is § The stalled step, as a statement of its own, items (a)–(c)
+
+### E2 line 306
+derivation: C132-LONG
+  statement: There is a radius R₀ > 1 such that, for every weak measurable six-colouring of the plane and every closed disc D of radius R₀ in which its cyclic centres are finitely many, the conclusion of C132-EXT-DISC holds at some point of D with ℓ ≥ 4
+  uses only: nothing is carried; the route attempted is the regular classes' cubic theorem, read step by step against the weak class in § Where the forcing statement stalls
+  not claimed: its truth or its falsity; any value of the chromatic number of the plane; anything when the centres are infinite in every such disc; that a centre whose transition graph holds a cycle of length four or more is returned by the extraction with such a cycle (the converse of C132-EXT-DISC's clause (5), open in the first deriver's record)
+  argument: § Where the forcing statement stalls
+  verdict: stalls at: the winding number of the three outside labels on the unit circle about an extracted triangle centre — C132-RING-TAME, whose first clause no held statement gives a weak measurable colouring; behind it two further steps of the regular chain have no weak form (two centres of one type at distance between 1 and 2, and the bicycle)
+  grade: hand
+  minds: 1
+  model: none — at six no colouring is known; at seven the statement's analogue is false (the hexagonal colouring has triangle centres only), and at five its class is empty (`[OAIMath2026]` Theorem 1.4)
+  prior art: partly: in the regular classes it is `[SokolovVoronov2025]` Corollary 1 (held almost everywhere for curved maps, row 134), `[Voronov2023]` Theorems 1.1–1.3 (row 132) and this project's FS114-CV-EXISTS (row 137); for weak measurable colourings `[OAIMath2026]` says "The remaining alternatives six and seven are unresolved." (`M/introduction.tex:70`, as the stub quotes it)
+  handoff: Poros — not derived; stalls at C132-RING-TAME; C132-M-CV stalls with it
+
+### E2 line 318
+control: two-skeleton
+  of: C132-NOESS — the homological shadow: the first homology of 𝒢 with all triangles filled has rank 0 for k = 4, …, 7; the four-cycle 0-1-2-3 bounds with the triangles 012, 023 and not with 012 alone
+  run: python3 ../data/fs132/e2/ring_checks.py skeleton
+  expect: k=4:H1=0 k=5:H1=0 k=6:H1=0 k=7:H1=0 4cycle-in-K6+012+023=True 4cycle-in-K6+012=False
+  fault: python3 ../data/fs132/e2/ring_checks.py skeleton --fault
+
+### E2 line 324
+control: ring-degree
+  of: C132-INDEX — every piecewise-linear loop on 18, 24 and 30 positions with supports disjoint under the rotation, enumerated: its degree modulo 6
+  run: python3 ../data/fs132/e2/ring_checks.py index3
+  expect: N=18:sequences=12,d-mod-6=[3] N=24:sequences=480,d-mod-6=[3] N=30:sequences=11520,d-mod-6=[3]
+  fault: python3 ../data/fs132/e2/ring_checks.py index3 --fault
+
+### E2 line 330
+control: tri-strips
+  of: C132-TRI-STRIP — the eight sign patterns of a triangle's three edges: in none do both sides keep a label of the triangle
+  run: python3 ../data/fs132/e2/ring_checks.py strips
+  expect: cycle-length=3 patterns=8 neither-side-pure=0
+  fault: python3 ../data/fs132/e2/ring_checks.py strips --fault
+
+### E2 line 336
+control: hex7-relation
+  of: C132-REL — at seven, on the hexagonal colouring: the unit circle about a vertex, its labels, its walk, its changes, and the sum of the triangle chains of the vertices inside it
+  run: python3 ../data/fs132/e2/ring_checks.py hexrel
+  expect: own-labels=[0, 2, 3] ring-labels=[1, 4, 5, 6] own-on-rings=[[], [], []] crossings=9 ring-walk=654164514 two-jumps-60-apart=False vertices-inside=13 relation-holds=True
+  fault: python3 ../data/fs132/e2/ring_checks.py hexrel --fault
+
+### E2 line 342
+control: chord-angle
+  of: C132-SEP — the mixed second derivative of the unit chord's angle at r = s = 1, exactly
+  run: python3 ../data/fs132/e2/ring_checks.py mixed
+  expect: mixed-derivative-at-(1,1)=8*sqrt(3)/9 first-derivatives=-sqrt(3)/3
+  fault: python3 ../data/fs132/e2/ring_checks.py mixed --fault
+

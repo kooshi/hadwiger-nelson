@@ -1,0 +1,84 @@
+record	line	kind	name	verdict_or_of	grade	minds
+E1	76	derivation	C132-EXT-DISC	derived	hand	1
+E1	88	derivation	C132-CORES-FREE	derived	derived from: C132-EXT-DISC	1
+E1	100	derivation	C132-EXT	derived	derived from: C132-EXT-DISC	1
+E1	112	derivation	C132-CORES	derived	derived from: C132-CORES-FREE	1
+E1	124	derivation	C132-CONFINE	derived	hand	1
+E1	136	control	hex7-model	C132-EXT-DISC — clauses (3) and (4) on the model: the hexagonal seven-colouring at the vertex (0, 2/		
+E1	142	control	hex7-islands	C132-EXT-DISC — where its hypothesis fails: the island colouring; a disc of radius 1.05 with finitel		
+E1	148	control	sec7-cites	C132-EXT-DISC — its uses only: the labels the manuscript's § 7 cites from outside itself		
+E1	154	control	reduced-words	C132-EXT-DISC — step S8's count: every cyclically reduced closed edge word of length at most 7 in th		
+E2	198	derivation	C132-FILL	derived	hand	1
+E2	210	derivation	C132-NOESS	derived	hand	1
+E2	222	derivation	C132-REL	derived	hand	1
+E2	234	derivation	C132-INDEX	derived	hand	1
+E2	246	derivation	C132-RING-WIND	derived	derived from: C132-INDEX	1
+E2	258	derivation	C132-ORBIT	derived	hand	1
+E2	270	derivation	C132-TRI-STRIP	derived	hand	1
+E2	282	derivation	C132-SEP	derived	hand	1
+E2	294	derivation	C132-RING-TAME	stalls at: the first clause, finiteness of J_x — the release's strip rigidity (its Lemma 8.6) is for	hand	1
+E2	306	derivation	C132-LONG	stalls at: the winding number of the three outside labels on the unit circle about an extracted tria	hand	1
+E2	318	control	two-skeleton	C132-NOESS — the homological shadow: the first homology of 𝒢 with all triangles filled has rank 0 fo		
+E2	324	control	ring-degree	C132-INDEX — every piecewise-linear loop on 18, 24 and 30 positions with supports disjoint under the		
+E2	330	control	tri-strips	C132-TRI-STRIP — the eight sign patterns of a triangle's three edges: in none do both sides keep a l		
+E2	336	control	hex7-relation	C132-REL — at seven, on the hexagonal colouring: the unit circle about a vertex, its labels, its wal		
+E2	342	control	chord-angle	C132-SEP — the mixed second derivative of the unit chord's angle at r = s = 1, exactly		
+E3	100	derivation	C132-M-ORBIT	derived	hand	1
+E3	112	derivation	C132-M-EXCL	derived	derived from: C132-M-ORBIT	1
+E3	124	derivation	C132-M-EMPTY	derived	derived from: C132-M-EXCL	1
+E3	136	derivation	C132-RUN-EMPTY	stalls at: V6-HUBS — "a tile of p tips at most two [change points], and two only if consecutive", wh	hand	1
+E3	148	control	hug-shift	C132-M-ORBIT — step M7: the unit-pair relation between points near two ring points 60° apart, the si		
+E3	154	control	three-axes	C132-M-ORBIT — step M6: every tip pattern on six hubs that is consistent with the three axes has two		
+E3	160	control	positives-escape	C132-M-ORBIT — the positives: at every change point of the held fragments' four-colour vertices a ge		
+E3	415	derivation	C132-RUN-CV	stalls at: FS112-N3-DENSE3 — "every closed disc of radius 3 of a valid map holds a vertex of `≥ 4` c	hand	1
+E3	427	derivation	C132-DIAG-WIDE	derived	hand	1
+E3	439	derivation	C132-DIAG	derived	derived from: C132-DIAG-WIDE	1
+E4	190	derivation	C132-CROSS	derived	hand	1
+E4	202	derivation	C132-COMP-SHARP	derived	derived from: C132-CROSS	1
+E4	214	derivation	C132-COMP	derived	derived from: C132-COMP-SHARP	1
+E4	226	derivation	C132-WITNESS	derived	hand	1
+E4	238	control	crossing	C132-CROSS — step B2: the squared Jacobian of z ↦ (|z − x|, |z − y|) at the common unit point, |x − 		
+E4	244	control	hex7-crossings	C132-CROSS — at seven: every two vertices of the hexagonal seven-colouring less than 2 apart, both c		
+E4	250	control	seam-fragments	C132-COMP-SHARP — the four held seam fragments of FS110-FRAGS, both common unit points: the labels t		
+E4	374	derivation	C132-PLACE	derived	hand	1
+E4	386	derivation	C132-ALT	derived	hand	1
+E4	398	derivation	C132-TURN-EDGE	derived	hand	1
+E4	410	derivation	C132-TURN	stalls at: the step from the card's hypothesis to a witness at the ring point of a turning orbit — t	hand	1
+E4	422	control	chart-wedges	C132-PLACE — the chart's three signs (inside the ring; inside the unit circle about the forward neig		
+E4	428	control	unit-shift	C132-ALT — the shift ε(d, d′) of the unit-pair relation in all four sign quadrants: its ratio to d d		
+E4	434	control	forced-pairs	C132-ALT — sampled unit pairs between two adjacent ring points whose two labels the transfer forces 		
+E4	440	control	turning-edge	C132-TURN-EDGE — the unit circles about the two neighbouring ring points meet at x and at the ring p		
+E5	169	derivation	C132-WIT-ORBIT	derived	derived from: C132-M-ORBIT	1
+E5	181	derivation	C132-WIT-EXCL	derived	derived from: C132-M-EXCL	1
+E5	193	derivation	C132-WIT-STRIP	derived	hand	1
+E5	205	derivation	C132-WIT	derived	derived from: C132-WIT-ORBIT, C132-WIT-EXCL, C132-WIT-STRIP	1
+E5	217	control	delta-monotone	C132-WIT-ORBIT — the two-point hypothesis is the weaker one: the straddle set of {p, q} lies in the 		
+E5	223	control	strip-sides	C132-WIT-STRIP — the side rule: just outside the unit circle about x in direction f a point lies in 		
+E5	346	derivation	C132-WIT-SIDE	derived	hand	1
+E5	358	derivation	C132-WIT-MARGIN	derived	hand	1
+E5	370	derivation	C132-WIT-CROSSED	derived	hand	1
+E5	382	derivation	C132-WIT-SUPER	derived	hand	1
+E5	394	derivation	C132-WIT-EX-FIN	derived	derived from: C132-EXT-DISC	1
+E5	406	derivation	C132-WIT-EX	stalls at: the selection of a point through which connected pieces of two smoothed classes pass and 	hand	1
+E5	418	control	margin-witness	C132-WIT-MARGIN — the plain, island and stripe colourings at seven: thirteen points within 0.01 of t		
+E5	571	derivation	C132-GRUNDY7-NOT	derived	hand	1
+E5	583	derivation	C132-GRUNDY7-LOCAL	derived	hand	1
+E5	595	derivation	C132-GRUNDY7	stalls at: the second clause, at the words "the Grundy-ization of each" — FS121-D3-GRUNDY's construc	hand	1
+E5	607	control	grundy-margins	C132-GRUNDY7-NOT — (a) the hexagons of label 0 thickened by 0.016 against 60 points 0.008 outside th		
+E6	152	derivation	C132-SHADOW	derived	hand	1
+E6	164	derivation	C132-LENS	derived	derived from: C132-SHADOW	1
+E6	176	derivation	C132-LENS-SIDE	derived	derived from: C132-LENS	1
+E6	188	derivation	C132-LENS-FOUR	derived	derived from: C132-LENS	1
+E6	200	derivation	C132-LENS-GERM	derived	derived from: C132-LENS-SIDE	1
+E6	212	derivation	C132-LENS-II	gap: the step "pure sides are opposite at antipodes, so the six read O O O I I I or O I O I O I" — a	hand	1
+E6	224	control	lens-shadow	C132-LENS — the card's falsifier, computed: on a polar grid in B(y_0, 0.02), the points of the lens 		
+E6	230	control	seeing	C132-SHADOW — which wedges at y_0 have every point's unit circle through which wedges at y_1, and ba		
+E6	236	control	side-patterns	C132-LENS-GERM — the patterns of sides for three witness points at distance 1/10 from x on a grid of		
+E6	242	control	kept-model	C132-SHADOW — the search's kept four-label fragment: its 108 pairs of wedges on matching sides at ad		
+E6	248	control	hex-half-crossings	C132-LENS — riding: the ring card's control `hex7-crossings` on the honeycomb at circumradius 1/2 (t		
+E6	254	control	hex-half-sides	C132-LENS — riding: at circumradius 1/2, every sample near a common unit point that carries a label 		
+E6	260	control	hex-half-margin	C132-LENS — riding: the witness card's control `margin-witness` at circumradius 1/2 (the fault is th		
+E6	266	control	hex-half-relation	C132-LENS — riding: the first round's control `hex7-relation` at circumradius 1/2, the three vertice		
+E6	495	derivation	C132-PLACED-RING	derived	hand	1
+E6	507	derivation	C132-PLACED	gap: whether any pair containing a label of T is a witnessed edge at y — the two inner wedges beside	hand	1
+E6	519	control	placed-arcs	C132-PLACED-RING — the points y_0 + e(θ) just before the direction of y_1 and just after that of y_{		
