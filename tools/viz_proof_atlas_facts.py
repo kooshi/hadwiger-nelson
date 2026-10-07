@@ -321,6 +321,10 @@ N("DISCS", "the disc criterion", "held", "Weak measurable six-colourings of the 
 N("ONEPIECE", "one piece, one side", "held", "In every weak colouring an open piece of one label bars that label one unit away; one tight pair forces nothing beyond that first step.", L(162), "no entry spends a number of labels", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(120, 560), sector="six-up")
 N("PAIRPAYS", "a close pair pays at its common unit points", "held", "Of two three-piece points less than 2 apart on disjoint triples of six labels, one has a piece inside and another outside the unit circle about each common unit point; both where both are full; one alone only at a bowtie. Nothing says a colouring has such points.", L(163), "x or y separates at w", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(122, 630), sector="six-up")
 N("STRIPEDGE", "the strip's top edge is closed", "nogo", "No weak six-colouring keeps six named pieces of the strip and contains one point of its top edge.", L(164), "bar all six labels on an open set near the point", "[hand] with an exact check, one mind, kernel pending", at=(131, 550), sector="six-up")
+N("TABLEAT", "the table at a point with pieced points one unit away", "held", "Near a point with finitely many pieced points on its unit circle, almost every point's label is pure, on that point's side, at each of them that carries it; so of two such points whose labels are all six, one has a label wholly inside and another wholly outside. Nothing says a colouring has such points.", L(165), "almost every point z of B(w, η) has a label a with the property", "[hand] (C136-TABLE, over row 162's C124-TYPE) and derived from it, one mind each, kernel pending", at=(128, 650), sector="six-up")
+N("FORWARD", "the table run forward: corners at points, and the collar", "held", "A corner on which the regions one unit away leave one label has it; a seed of points with three or four labels forces labelled corners at isolated points and never a region — every closure computed stalls within two steps; a point carrying all labels but one forces the missing label on a one-sided collar of arcs of its unit circle. No weak six-colouring is known to have such corners.", L(166), "no region of definite size is forced", "[hand] (C136-FORCED over row 165's C136-TABLE; the two lemmas) and derived from it, or computed over named corners in exact arithmetic; one mind each, kernel pending", at=(138, 650), sector="six-up")
+N("STOPS4", "the four held stops are closed by two vertex figures", "nogo", "The strip, the disk, the flower and the bowtie fragment each stop at a point one unit from two vertices whose labels are all six; no weak six-colouring keeps the corner patterns at those two vertices and contains the stop. Local to one held object each; not an exclusion on a disc.", L(167), "A held stop is a fact about two vertex figures", "derived from row 166's C136-CLOSE or row 165's C136-TABLE with exact signs in each object's own number field; C136-STOP-GERMS-RADIUS [hand]; one mind each, kernel pending", at=(98, 650), sector="six-up")
+N("FS137", "collars", "step", "A point carrying five of six labels forces the sixth on one-sided collars of arcs of its unit circle. What do the collars force one unit further on — a corner emptied, a stall, or a second collar? Unranked; its question is the asking lane's.", STUB("STUB-collars.md"), "What a collar forces one unit further on has not been computed", (STUB("STUB-collars.md"), "smallest open form"), at=(114, 650), sector="six-up")
 N("TOP5", "the map step at five", "held", "Given REG-J′₅, the honest five-colour existence form is equivalent to χ_m⁰(ℝ²) ≥ 6.", L(154),
   "The map step at five, as an equivalence", "[hand], one mind, kernel pending", at=(162, 434), sector="six-up")
 N("RINGRULE", "change points place four-colour vertices", "held", "On the unit circle of a four-colour vertex, every change point off (Q) arcs, and "
@@ -372,6 +376,13 @@ E("ONEPIECE", "STRIPEDGE", "context", L(164), "six uses of C124-TYPE", label="si
 E("COR3", "PAIRPAYS", "context", L(163), "for maps C124-BOTH is FS112-N3-COR3", label="the map theorem, in measure, by another route")
 E("STOP", "STRIPEDGE", "context", L(164), "FS112-EDGE (row 136)", label="the same point, for every weak six-colouring keeping six pieces")
 E("DISCS", "STRIPEDGE", "context", L(161), "an explicit radius at any k", label="an exclusion on a disc would reach seven here; this one is not on a disc")
+E("ONEPIECE", "TABLEAT", "context", L(165), "over row 162's C124-TYPE", label="the lemma at finitely many points one unit away")
+E("PAIRPAYS", "TABLEAT", "context", L(165), "in measure the count for two disjoint triples is row 163's C124-FORCED-PIECES", label="the count at the class its argument reads")
+E("TABLEAT", "FORWARD", "rests", L(166), "C136-FORCED over row 165's C136-TABLE", label="its forward half")
+E("TABLEAT", "STOPS4", "rests", L(167), "row 165's C136-TABLE", label="a cell with every label barred")
+E("FORWARD", "STOPS4", "rests", L(167), "derived from row 166's C136-CLOSE", label="by corners: the closure empties no corner")
+E("STRIPEDGE", "STOPS4", "context", L(167), "neither statement contains the other", label="the same point of the strip, other kept sets")
+E("FORWARD", "FS137", "rests", STUB("STUB-collars.md"), "What a collar forces one unit further on has not been computed", label="what collars force")
 E("QPRUNE", "LOCALF", "context", L(150), "The (Q)-ring case list, pruned", label="pruning rules")
 E("RINGRULE", "LOCALF", "context", B("FS116-RING-GERM"), "let y be a change point of the ring", label="the placing rule")
 E("YESLIM", "UB6", "rests", B("FS116-O1-YESLIM"), "some closed disc of radius R carries a valid k-coloured fragment", label="fragments on every disc")
@@ -712,7 +723,7 @@ def build():
             c["address"] = address_str(c["src"], locate(c["src"], c["quote"]))
     for t in NOTES:
         t["address"] = address_str(t["src"], locate(t["src"], t["quote"]))
-    facts = dict(meta=dict(title="Proof Atlas", built="2026-10-07", job="FS124-L1", as_of="FS-124's disc criterion through the gate (row 161); FS-124, the unit arc, Derived (rows 161–164)",
+    facts = dict(meta=dict(title="Proof Atlas", built="2026-10-07", job="FS136-Z1", as_of="FS-136, the point across, Derived (rows 165–167); FS-124's disc criterion through the gate (row 161)",
                            statuses={k: v for k, v in __import__("viz_proof_atlas_common").STATUS_WORDS.items()}),
                  nodes=NODES, edges=EDGES, routes=ROUTES, credence=CREDENCE, notes=NOTES)
     OUT.parent.mkdir(parents=True, exist_ok=True)
