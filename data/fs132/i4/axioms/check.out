@@ -1,0 +1,49 @@
+targets=46 clean=29 on-sorry=17 failures=0
+CLEAN (exactly a subset of [propext, Classical.choice, Quot.sound]):
+  helper  shear_measurePreserving
+  helper  quasiMeasurePreserving_triple_fst
+  helper  quasiMeasurePreserving_triple_snd
+  helper  quasiMeasurePreserving_triple_add
+  helper  change_of_ae_flip
+  helper  exists_inter_pos_of_ae_union
+  helper  volume_preimage_inter_le_hausdorff
+  helper  lipschitzWith_add_e
+  helper  hausdorffMeasure_add_e_image_eq_zero
+  helper  exists_mem_Ioo_of_ae
+  helper  exists_pos_forall_le
+  leaf    ae_real_of_ae_angles
+  helper  volume_liftPalette_ne_zero
+  leaf    exists_change_of_ae_outside
+  helper  chartAngles_quasiMeasurePreserving
+  leaf    shear_quasiMeasurePreserving
+  helper  ringRadius_sub_ge
+  helper  ringRadius_pos
+  leaf    measurableSet_liftPalette
+  helper  OutsideOrbit.ae_mem_or
+  helper  OutsideOrbit.ae_add_mem_or
+  leaf    OutsideOrbit.ae_iff_not
+  leaf    OutsideOrbit.ae_flip
+  leaf    OutsideOrbit.change_at
+  helper  HubColours.swap
+  helper  HubColours.shift_back
+  helper  HubColours.ae_partner
+  planner no_alternating_groups
+  planner no_alternating_pairs
+ON SORRY, through these declarations of other lots only:
+  leaf    chart_quasiMeasurePreserving  <-  chart_eq_angularSum
+  leaf    ae_ne_of_not_isTip  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_lt_one
+  helper  volume_partner_direction_eq_zero  <-  dist_chart_centre
+  leaf    unitPair_chart_ae  <-  chart_eq_angularSum, continuous_chart, dist_chart_centre
+  leaf    OutsideOrbit.chart_avoids  <-  chart_eq_angularSum
+  helper  ae_chart_colour_mem  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_lt_one
+  leaf    exists_tip  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_lt_one
+  leaf    OutsideOrbit.hubColours  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_lt_one
+  leaf    OutsideOrbit.hubColours_flip  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_lt_one
+  leaf    no_double_change  <-  chart_eq_angularSum, continuous_chart, dist_chart_centre
+  helper  step_kill_left  <-  chart_eq_angularSum, continuous_chart, dist_chart_centre
+  leaf    step_kill  <-  chart_eq_angularSum, continuous_chart, dist_chart_centre
+  planner chart_step_false  <-  chart_eq_angularSum, continuous_chart, dist_chart_centre
+  planner adjacent_tip_false  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_centre, dist_chart_lt_one
+  planner no_outside_orbit_points  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_centre, dist_chart_lt_one, exists_adjacent_tips, exists_cycle_label, tip_unique
+  planner no_outside_orbit  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_centre, dist_chart_lt_one, exists_adjacent_tips, exists_cycle_label, tip_unique
+  planner not_ae_outside  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_centre, dist_chart_lt_one, exists_adjacent_tips, exists_cycle_label, tip_unique

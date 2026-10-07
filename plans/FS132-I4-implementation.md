@@ -195,3 +195,56 @@ proves. `tools/check_architecture.py`: PASS (`logs/arch-4.out`).
 **The coordinator's Amendment 1, received as this build ended** (the brief's last section, 2026-10-07 13:44 UTC):
 merge the tip of `fs132-wi3` (`e9dd2f46`: the shift's module proved too) and replace the words of the two
 `ARCHITECTURE.md` rows that still say "SKELETON" by that record's draft 1. Done at stage 5.
+
+## Stage 5 — SAVED (FS132-I4): Amendment 1 (the finished branch merged, two rows), and the gate items on the sixteen leaves
+
+**The third merge** (Amendment 1). `git merge --no-ff e9dd2f46` (the tip of `fs132-wi3`): merge commit `b844cbb73`. It
+touches `Plane/SixRing/Shift.lean` (every leaf proved), three lines of `StepLemma.lean`, that job's record, report and
+data, and `scripts/Axioms.lean` — **one conflict, there**: both branches append a block after the port's, at one
+place. Resolved by keeping all three blocks in the order FS132-I2, FS132-I3, FS132-I4; no line of either side was
+dropped (`git diff` against each parent shows additions only). Neither Lean file of that branch is edited here.
+**The two rows** of `ARCHITECTURE.md` (`Plane/SixRing/Shift`, `Plane/SixRing/StepLemma`) reworded by that record's
+draft 1, as written there. On Amendment 1's item (3): `Shift.chart_eq_polar_shift` and `Chart.chart_eq_polar` do not
+collide (`dupnames` below).
+
+**Built** (the last build of the sixteen leaves): `build.sh` under the slot — **exit 0**, 7 modules rebuilt, 9m42s,
+**37 `sorry` warnings**: `Chart` 11, `CyclicCentre` 3, `Tips` 7, `Winding` 16
+(`data/fs132/i4/logs/build-5-final.out`).
+
+**The axioms of every theorem this job proved, from the built modules.** `data/fs132/i4/axioms/gen.py` writes
+`Print.lean` from `targets.txt` (46 records: the 16 leaves, the 23 helpers, and 7 theorems the planner proved from
+leaves); `lake env lean` on it after the build → `Print.out` (exit 0); `check.py` → `check.out`, **exit 0**. For each
+record it reads `Lean.collectAxioms` and the record's *sorry frontier*: every declaration of this package under it
+whose own stored term names `sorryAx`, with its module.
+- **29 records on exactly `[propext, Classical.choice, Quot.sound]`**: the 11 helpers of `NullSets`; `Excl`'s three
+  (`ae_real_of_ae_angles`, `volume_liftPalette_ne_zero`, `exists_change_of_ae_outside`);
+  `chartAngles_quasiMeasurePreserving`, `shear_quasiMeasurePreserving`, `ringRadius_sub_ge`, `ringRadius_pos`;
+  `measurableSet_liftPalette`, `OutsideOrbit.ae_mem_or`, `.ae_add_mem_or`, `.ae_iff_not`, `.ae_flip`, `.change_at`;
+  `HubColours.swap`, `.shift_back`, `.ae_partner`; and the planner's **`no_alternating_groups`,
+  `no_alternating_pairs`** (C132-DIAG-WIDE at the whole plane: sorry-free since the join).
+- **17 records read `sorryAx`, each through leaves of `Chart` and `Tips` only** (the checker fails on a frontier
+  declaration in any other module): the 13 of this job through `chart_eq_angularSum`, `continuous_chart`, `chart_hub`,
+  `dist_chart_lt_one`, `dist_chart_centre`; the assembly (`no_outside_orbit_points`, `no_outside_orbit`,
+  `not_ae_outside`) through those and `exists_adjacent_tips`, `exists_cycle_label`, `tip_unique`. `check.out` lists
+  each with its leaves.
+- **No outside theorem and no native axiom under any of the 46.**
+- Controls, in the same run: `not_colorable_five` shows `no_proper_five_coloring`; `chromaticNumber_plane_eq_chiM0`
+  shows `proper_to_borel_weak`; a `sorry` planted in `Print.lean` is found in the frontier of the theorem that uses
+  it. `check.py --self-test` (`selftest.out`): 7 plants in the output — a `sorry` in a module this job proves, an
+  outside theorem and a native axiom under a target, a target not printed, `sorryAx` with an empty frontier, the
+  planted control and an outside control gone clean — **7 of 7 refused**.
+
+**The block in `scripts/Axioms.lean`**, headed "FS132-I4": the 39 records of this job by module and the two of
+`TwoPairs`; under CLEAN, so the landing's `axioms.sh` fails on the 13 until `Chart`'s leaves are proved — as it must.
+
+| check | command | result | saved |
+|---|---|---|---|
+| the module map | `tools/check_architecture.py` | exit 0, `RESULT: PASS` | `logs/arch-5.out` |
+| doubled names | `./scripts/dupnames.sh` (slot, 16 GiB) | **exit 0**: 1868 of 1868 package modules scanned, none doubled, 23 generated on demand | `logs/dupnames-5.out` |
+| the environment linters | `slot.py --mem 8 -- lake lint --no-build -- --no-build --trace` | **exit 0**, `-- Linting passed for Proofs.`, 14 linters `(2/2) Passed!` | `logs/lint-5.out` |
+
+Not run, by the brief: the full gate (`axioms.sh`, `vacuity.sh`, `assumptions.sh`, their self-tests) — the landing's.
+
+**The coordinator's Amendment 2, received as this stage's build ended** (2026-10-07 13:49 UTC): the chart's module and
+the tips' are added to this job's touches, with a stopping rule (about 420k by my own count, or three failed attempts
+on one leaf). Stage 6 onward. Own count at this stage: about 320k (an estimate; no meter).
