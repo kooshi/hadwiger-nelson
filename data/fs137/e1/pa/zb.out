@@ -1,0 +1,27 @@
+QUERY: ab:"chromatic number of the plane" & ab:vert* & (ab:angle* | ab:"angle sum")
+  hits: 1
+     https://zbmath.org/7479477 | Geometry. A very short introduction | 2022
+QUERY: (ab:"map-type" | ab:"map type" | ab:tiling*) & ab:colo* & (ab:"unit distance" | ab:"distance 1" | ab:"monochrom*") & ab:vert* & ab:circle*
+  hits: 3
+     https://zbmath.org/51916 | Old and new unsolved problems in plane geometry and number theory | 1991
+     https://zbmath.org/6196430 | The seventh European conference on combinatorics, graph theory and applications. Extended abstracts of EuroCom | 2013
+     https://zbmath.org/7909440 | Proceedings of the 12th European conference on combinatorics, graph theory and applications. EUROCOMB'23, Prag | 2023
+QUERY: ab:Reuleaux & ab:colo* & ab:plane
+  hits: 1
+     https://zbmath.org/488301 | 4. Kolloquium Geometrie und Kombinatorik. Vorträge gehalten in Chemnitz, Germany, 9.-13.9.91 | 1991
+QUERY: (ab:"list colo*" | ab:choosab*) & ab:circle & (ab:"unit distance" | ab:"distance graph*")
+  hits: 0
+QUERY: (ab:"list colo*" | ab:choosab*) & (ab:"blow-up*" | ab:"lexicographic product") & ab:cycle*
+  hits: 1
+     https://zbmath.org/902672829 | Indicated list colouring game on graphs | 2025
+QUERY: ab:"chromatic number of the plane" & (ab:"six colo*" | ab:"6-colo*" | ab:"seven colo*" | ab:"7-colo*") & (ab:local* | ab:"vertex figure*" | ab:discharging | ab:tiling*)
+  hits: 0
+QUERY: ab:discharging & (ab:"unit distance" | ab:"chromatic number of the plane")
+  hits: 1
+     https://zbmath.org/7640252 | The number of small-degree vertices in matchstick graphs | 2023
+QUERY: au:"Townsend, Stephen" & py:1979-2006
+  hits: 0
+QUERY: au:"Coulson, D*" & (ti:tiling* | ti:chromatic*)
+  hits: 2
+     https://zbmath.org/2158909 | On the chromatic number of plane tilings | 2004
+     https://zbmath.org/2042228 | Tilings and colourings of 3-space | 2003
