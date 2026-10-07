@@ -1,0 +1,4 @@
+lone: unit-pairs-sampled=875190 monochromatic=74648 label-pairs-seen=22 (fault planted)
+square: unit-pairs-sampled=875281 monochromatic=53387 label-pairs-seen=28 (fault planted)
+lemma-I: cases=237637 violations=1384 least-slack=-5.474e-02 (fault planted)
+lemma-II: cases=291887 violations=1322 least-slack=-5.467e-02 (fault planted)

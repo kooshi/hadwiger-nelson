@@ -1,0 +1,29 @@
+
+/-! FS124-I4 — the tail appended to a module's text as it stood at the base commit: prints every constant the text
+above declares, as the kernel holds it after elaborating that text now (read-only; same line format as
+`StatementDump.lean`). -/
+namespace FS124I4Dump
+open Lean Elab Command
+
+/-- The kind of a constant, as the kernel classes it. -/
+def kindOf : ConstantInfo → String
+  | .thmInfo _ => "THM" | .axiomInfo _ => "AXIOM" | .defnInfo _ => "DEF" | .opaqueInfo _ => "OPAQUE"
+  | .inductInfo _ => "IND" | .ctorInfo _ => "CTOR" | .recInfo _ => "REC" | .quotInfo _ => "QUOT"
+
+/-- Print the constants declared by this file, the dumper's own apart. -/
+def run : CommandElabM Unit := do
+  let env ← getEnv
+  let cs := env.constants.map₂.toList.filter fun (n, _) => !(`FS124I4Dump).isPrefixOf n
+  IO.println s!"## FILE constants={cs.length}"
+  if cs.isEmpty then throwError "no constant declared above: nothing to dump"
+  for (n, ci) in cs do
+    let flag := if n.isInternalDetail then " INTERNAL" else ""
+    IO.println s!"@@ {kindOf ci} {n}{flag}"
+    IO.println s!"TYPE {ci.type.hash} {ci.type}"
+    match ci with
+    | .defnInfo v => IO.println s!"VALUE {v.value.hash} {v.value}"
+    | _ => pure ()
+
+#eval run
+
+end FS124I4Dump

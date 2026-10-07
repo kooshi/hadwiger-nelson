@@ -1,0 +1,4 @@
+lone: unit-pairs-sampled=875190 monochromatic=0 label-pairs-seen=22
+square: unit-pairs-sampled=875281 monochromatic=0 label-pairs-seen=28
+lemma-I: cases=118695 violations=0 least-slack=1.545e-03
+lemma-II: cases=145657 violations=0 least-slack=2.818e-03
