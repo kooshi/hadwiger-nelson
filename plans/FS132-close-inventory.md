@@ -774,3 +774,31 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     context carries. Two agents running: it and the kernel planner. **Owed, not tonight**: its drafts filed with the first
     re-rank's (FS-131-era ruling 12 (e)); the queue's line 11 held until C132-LENS has its verdict.
 
+25. **FS132-K1, still blind, two findings from the release's Lean and this library: an attribution owed to the release, and a
+    shorter kernel route to "centres exist"** (source: its message to "main", 2026-10-07; no commit yet). **(1) Attribution.**
+    C132-DIAG-WIDE at the whole plane is an instance of `OAI.EuclideanFiveColor.two_state_impossible`, which the release
+    proves in Lean for every number of labels under "at most two labels outside the two sets"; its manuscript states five
+    labels only. "That generalization is theirs, not mine, and C132-DIAG-WIDE should be worded as a corollary of
+    `[OAIMath2026]`'s Lean, not as a result of this night." (The readings deriver's entry had said as much in its prior-art
+    line — "this entry is its instance at six labels with two pairs" — with the Lean unread; my reports to Kooshi called it
+    "one more exclusion that came with" the night's.) **(2) A generalization and a shorter route.** "Every closed disc of
+    radius greater than 1" improves to every closed square of side greater than 1, so every closed disc of radius greater
+    than `1/√2`: the cover step needs only a region with no open cover of multiplicity two and mesh `1 + o(1)`, and **this
+    library already holds Lebesgue's covering theorem for the square in the kernel** (from the Lean backlog) — so the
+    release's own cover lemma, fixed at radius 5 and proved through a degree argument, need not be ported at all. By hand,
+    one mind; the mesh bound read, not re-derived. **(3) The first price from pieces actually tried**: the release's palette
+    definition chain — three files, 620 lines with their proofs — elaborates at this library's toolchain "after one Mathlib
+    signature patch and one import"; C132-CONFINE is proved whole in about 100 lines. **Read by me**: nothing beyond the
+    message. **Credit**: it read the release's Lean where three earlier jobs read its manuscript, and returned a result
+    this project had been counting as its own night's work to the party that proved it; and it found a theorem of this
+    library's backlog doing the work of an outside lemma. **Rulings.** (a) **C132-DIAG-WIDE is attributed to the release in
+    the claim list from now on** (a dated line), and **my sentence to Kooshi is corrected in the next report**: that
+    exclusion is the release's own Lean theorem read at six, not a result of ours. What stays this milestone's on that
+    line: nothing but the local reading, one mind. (b) **C132-CORES-SQUARE is logged as posed by the planner** and fixed
+    when its committed plan states it; it goes to the derive lane's record job as a generalization from the kernel lane
+    (Workflow 3.1's routing), not to the running deriver, whose card does not read it. (c) **Its price changes the
+    estimate I ruled on at item 22 (a)**: a port of the release's palette chain is two small patches, not "the heaviest
+    kind of work" — so the local form of the three statements may be planned after all; the planner says which at its
+    phase-1 commit, and my ruling "the whole plane first" stands only as an order. Confidence in that ruling: lowered to
+    medium.
+

@@ -408,4 +408,16 @@ the death of every such cycle — which are what the answer is made of and are n
   colourings, a point with usable data must exist — C132-WIT-EX's open form, C132-RING-TAME's first clause for all weak
   colourings, and C132-GRUNDY7's two readings go to FS-127 and FS-128. As before, each claim is stated by its deriver in its
   record before it is derived; a change is a dated line here.
+- **2026-10-07 (FS132-K1's message from its blind phase; FS-132 inventory item 25): an attribution, and a wider form posed by the
+  kernel lane's planner.** (i) **C132-DIAG-WIDE, for colourings of the whole plane, is an instance of a theorem the release
+  already proves in Lean**: `OAI.EuclideanFiveColor.two_state_impossible`, stated there for every number of labels with at
+  most two labels outside the two sets (its `States.lean`, as the planner reads it). The release's manuscript states the
+  case of five labels only; its Lean is at the wider class. **So C132-DIAG-WIDE is `[OAIMath2026]`'s, at six, and is worded
+  from now on as a corollary of its Lean, not as a result of this milestone**; what this milestone adds is the reading of it
+  on an open set containing the closed unit disc, [hand], one mind. (ii) **C132-CORES-SQUARE (posed by the planner; [hand],
+  one mind, not yet in its record)**: every closed square of side greater than 1 contains a cyclic centre, hence every
+  closed disc of radius greater than `1/√2` — by this library's own kernel-checked covering theorem for the square
+  (`HadwigerNelson.LebesgueCovering.lebesgue_covering_square`) in place of the release's cover lemma; the mesh bound is the
+  release's argument, read by it and not re-derived at every number of labels. C132-CORES-FREE as fixed above is its
+  corollary. It is fixed here when its statement is in the planner's committed plan.
 
