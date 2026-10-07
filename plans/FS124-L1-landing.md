@@ -294,3 +294,148 @@ five-colouring of a large disc does not exist, so `radius_up`, `radius_graph` an
 on a large open set assume nothing; each is stated at a free `k`, `radius_up`'s docstring names the import and the
 theorem, and no `IsEmpty` statement or marker rests on the import (`LEAN.md` § The gate). **No older statement is
 emptied by this landing**: `IsWeakColouringOn` and `AeProperOn` are new with it, and it brings no axiom.
+
+## Stage 7 — SAVED (FS124-L1): read aloud — the definition and the theorems against the row's sentences and the entries' statements
+
+*The statements are read as the kernel holds them (`data/fs124/l1/gate/checks-final.out`, from
+`data/fs124/l1/checks.lean`: `#print` of each definition, `#check @…` of each theorem with every binder's type shown,
+`#print axioms` of each), never as the files print them. The row is `LEDGER.md` row 161; the entries are
+`plans/FS124-derivation.md` § 1.*
+
+**The definition the statements name.** `IsWeakColouringOn U c`, for `U : Set ℂ` and `c : ℂ → Fin k`, is two
+clauses: `Measurable c`, and `AeProperOn U c` — `(volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ U ∧
+c q.1 = c (q.1 + e q.2)} = 0`, where `e θ = exp (θ i)` and `arcLength` is Lebesgue measure on the line restricted to
+`[0, 2π)`. Aloud: *a function from the whole plane to `k` labels, Borel measurable, such that the pairs (a point, an
+angle) whose two ends — the point, and the point moved one unit in the direction of the angle — both lie in `U` and
+carry one label form a set of measure zero, for plane measure times arc length.* Against the claim list's words — "a
+measurable map `c` from `U` to `k` labels with `c(z) ≠ c(z + u)` for almost every pair of a point `z` of `U` and a
+unit vector `u` with `z + u` in `U`": the second clause is those words (`aeProperOn_iff_ae` states it as "for almost
+every `(z, θ)`: `z ∈ U → z + e θ ∈ U → c z ≠ c (z + e θ)`"); the first differs in two things, both said in the module
+header — the map is total and read on `U` alone (`aeProperOn_congr`), which for a measurable `U` and `k ≥ 1` is the
+same notion as a measurable map on `U` itself (`exists_isWeakColouringOn_iff_subtype`), and "measurable" is Borel
+measurability.
+
+**1. `radius_up` — C124-RADIUS-UP (the row's second quoted sentence).**
+
+| the row's clause | the Lean statement | verdict |
+|---|---|---|
+| "For every integer k ≥ 1" | `∀ {k : ℕ}` | every natural `k`; at `k = 0` no `c : ℂ → Fin 0` exists, the hypothesis fails and nothing is said: the claim's range is all the statement speaks of |
+| "if for every R > 0 the open disc of radius R about the origin has a weak measurable k-colouring" | `(∀ R > (0 : ℝ), ∃ (c : ℂ → Fin k), IsWeakColouringOn (Metric.ball (0 : ℂ) R) c) →` | the same; "measurable" is Borel |
+| "then every finite unit-distance graph in the plane has a proper k-colouring" | `(∀ (V : Set ℂ), V.Finite → (SimpleGraph.induce V (unitDistance ℂ)).Colorable k)` | the graph on a finite set of points with **every** unit pair an edge is `k`-colourable; a finite unit-distance graph drawn on those points is a subgraph of it |
+| "and χ(ℝ²) ≤ k" | `∧ (unitDistance ℂ).chromaticNumber ≤ ↑k` | the same; `chromaticNumber_plane_eq_complex` equates this number with row 33's over `EuclideanSpace ℝ (Fin 2)` |
+
+Aloud: *if discs about the origin of every radius can each be coloured with `k` labels, Borel measurably, so that
+almost every unit pair inside the disc gets two labels, then every finite set of points of the plane can be properly
+`k`-coloured, and so can the plane.* **The row's sentence.** Axioms, as the audit prints the record: `[propext,
+Classical.choice, Quot.sound]`, under CLEAN. Not said, as the row's "Not claimed" asks: no radius, nothing at
+`k = 6` about the hypothesis.
+
+**2. `radius_down` — C124-RADIUS-DOWN (the row's third).** "For every integer k ≥ 1: if χ(ℝ²) ≤ k, every open set of
+the plane has a weak measurable k-colouring." — `∀ {k : ℕ}, (unitDistance ℂ).chromaticNumber ≤ ↑k → ∀ (U : Set ℂ),
+IsOpen U → ∃ (c : ℂ → Fin k), IsWeakColouringOn U c`. Word for word; `k ≥ 1` is no hypothesis because `χ(ℝ²) ≤ 0` is
+false; the colouring obtained is Borel. Aloud: *if the plane can be properly coloured with `k` colours — no
+regularity asked — then every open set has a Borel `k`-colouring under which almost every unit pair inside the set
+gets two labels.* **The row's sentence.** Axioms: the standard three and
+`HadwigerNelson.Outside.OAI158.proper_to_borel_weak`, under IMPORTED — and the row says so ("over the declared outside
+theorem"; not claimed: "anything without that import").
+
+**3. `radius_five` — C124-RADIUS-FIVE (the row's fifth).** "There is R > 0 such that no open disc of radius R has a
+weak measurable five-colouring." — `∃ R > (0 : ℝ), ∀ (p : ℂ), ¬∃ (c : ℂ → Fin 5), IsWeakColouringOn (Metric.ball p R)
+c`. "No open disc of radius R" is every centre `p`. **The row's sentence.** Axioms: the standard three and
+`HadwigerNelson.Outside.OAI158.no_proper_five_coloring`, under IMPORTED. No value of `R`, as the row says.
+
+**4. `colorable_iff_forall_ball` — the row's "So at each `k` the two hold together or fail together".**
+`∀ {k : ℕ}, (unitDistance ℂ).Colorable k ↔ ∀ R > (0 : ℝ), ∃ (c : ℂ → Fin k), IsWeakColouringOn (Metric.ball (0 : ℂ) R)
+c`. Aloud: *for every `k`, the plane has a proper `k`-colouring exactly when the disc about the origin of every
+radius has a weak `k`-colouring.* The left side is `χ(ℝ²) ≤ k` (`SimpleGraph.chromaticNumber_le_iff_colorable`); the
+right side is "every open disc has one", the discs about the origin standing for all by translation
+(`exists_isWeakColouringOn_ball_iff`). **The row's sentence.** Axioms: the standard three and `proper_to_borel_weak`.
+
+**5. `seven_le_chromaticNumber_plane_iff_exists_ball` — the row's "at six, with row 33, the plane needs seven colours
+precisely if some open disc has no weak measurable six-colouring".** `(7 : ℕ∞) ≤ (unitDistance ℂ).chromaticNumber ↔
+∃ R > (0 : ℝ), ¬∃ (c : ℂ → Fin 6), IsWeakColouringOn (Metric.ball (0 : ℂ) R) c`. No binder, no hypothesis. Aloud: *the
+plane's unit-distance graph needs at least seven colours exactly when there is a radius such that no Borel map from
+the plane to six labels gives two labels to almost every unit pair inside the open disc of that radius about the
+origin.* The row's wording differs in two harmless places, and each is closed by a term of the checks file on the
+same axioms: "needs seven colours" is `χ(ℝ²) = 7`, which with row 33's `χ(ℝ²) ≤ 7` is `7 ≤ χ(ℝ²)`; "some open disc"
+is a disc at any centre. `FS124L1.eq_seven_iff_exists_disc : (unitDistance ℂ).chromaticNumber = 7 ↔ ∃ (p : ℂ) (R : ℝ),
+0 < R ∧ ¬ ∃ c : ℂ → Fin 6, IsWeakColouringOn (ball p R) c` — **the row's sentence, as worded** — is the landed
+theorem with `chromaticNumber_plane_interval` and the translation lemma. Axioms: the standard three and
+`proper_to_borel_weak`; `no_proper_five_coloring` is not among them.
+
+**6. `radius_graph` — C124-RADIUS-GRAPH (the row's first quoted sentence).**
+
+| the row's clause | the Lean statement | verdict |
+|---|---|---|
+| "Let k ≥ 1, U an open set of the plane, c a weak k-colouring of U, and V a finite subset of U" | `{k : ℕ} {U : Set ℂ} {c : ℂ → Fin k}`, `IsOpen U →`, `IsWeakColouringOn U c →`, `{V : Set ℂ}`, `V.Finite →`, `V ⊆ U →` | the same |
+| "Then the rigid motions g with g(V) ⊂ U form a non-empty open set" | `(IsOpen {q : ℂ × ℝ \| Set.MapsTo (rigidMotion q) V U} ∧ {q : ℂ × ℝ \| Set.MapsTo (rigidMotion q) V U}.Nonempty)` | **in parameters**: the motion with parameter `q = (x, θ)` is `z ↦ x + e θ * z`, and the set of parameters is open in `ℂ × ℝ` and non-empty |
+| "and for almost every one of them the points g(v), g(v′) have different labels for every two points v, v′ of V at distance 1" | `(∀ᵐ (q : ℂ × ℝ) ∂volume.prod arcLength, Set.MapsTo (rigidMotion q) V U → ∀ v ∈ V, ∀ w ∈ V, dist v w = 1 → c (rigidMotion q v) ≠ c (rigidMotion q w))` | the same: almost every motion, each counted once (its angle in `[0, 2π)`), if it carries `V` into `U`, separates every unit pair of `V` — "almost every motion in that open set", as the entry's hand-off asks, not "some motion" |
+| "so the unit-distance graph on V has a proper k-colouring" | `(SimpleGraph.induce V (unitDistance ℂ)).Colorable k` | the same |
+
+Axioms: the standard three. **`radius_countable` — C124-RADIUS-COUNTABLE** (the row: "for a countable set with
+compact closure in the open set"): "the unit-distance graph on V has a proper k-colouring of the form v ↦ c(g(v)) for
+a rigid motion g with g(V) ⊂ U" is `∃ (q : ℂ × ℝ), Set.MapsTo (rigidMotion q) V U ∧ ∀ v ∈ V, ∀ w ∈ V, dist v w = 1 →
+c (rigidMotion q v) ≠ c (rigidMotion q w)` under `V.Countable`, `IsCompact (closure V)`, `closure V ⊆ U`. The
+standard three.
+
+**Which entry is read back by which theorem, and the wider form under it** (the module states the cores for any
+function proper at almost every unit pair, and the entries' words as corollaries):
+
+| entry | its read-back | the core it is a corollary of |
+|---|---|---|
+| C124-RADIUS-GRAPH | `radius_graph` | `AeProperOn.ae_rigidMotion` (any function, a countable `V` anywhere, every real angle), `isOpen_setOf_mapsTo_rigidMotion`, `AeProperOn.colorable_induce` |
+| C124-RADIUS-COUNTABLE | `radius_countable` | `AeProperOn.exists_rigidMotion` |
+| C124-RADIUS-UP | `radius_up` | `colorable_plane_of_forall_aeProperOn_ball` (discs at any centres, any function); its contrapositive `exists_radius_of_not_colorable` |
+| C124-RADIUS-DOWN | `radius_down` | `exists_isWeakColouringOn_of_colorable` (one colouring for every set, open or not) |
+| C124-RADIUS-FIVE | `radius_five` | `exists_radius_of_not_colorable` at `Outside.OAI158.not_colorable_five` (no map at all, at any centre) |
+| C124-EVERY-DIRECTION | **none** | not stated in this module (below) |
+| the disc criterion (the entry C124-RADIUS-DOWN's hand-off; the row's "So …") | `colorable_iff_forall_ball`, `seven_le_chromaticNumber_plane_iff_exists_ball` | `radius_up` and `radius_down` |
+
+### Which half of the criterion rests on the outside theorem, and which on the standard three alone
+
+- **Toward six — the standard three alone.** *Weak colourings of every disc colour the plane*: **`radius_up`**, under
+  CLEAN, `[propext, Classical.choice, Quot.sound]`. Its contrapositive, *if the plane needs seven colours then some
+  disc has no weak six-colouring*, is `exists_radius_of_not_colorable` at `k = 6`, under CLEAN on the same three —
+  and says more: at that radius no disc at any centre has even a non-measurable six-colouring proper at almost every
+  unit pair.
+- **Toward seven — on the declared outside theorem.** *A disc with no weak six-colouring gives seven*: the
+  contrapositive of **`radius_down`**, under IMPORTED on the standard three and
+  `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158, the transfer of colourability).
+
+The two theorems that say so are `radius_up` and `radius_down`, each a record of the gate's audit under the banner
+named. And each half of each join theorem is proved apart in the checks file, from the lemma the join theorem's
+docstring names, and printed: `FS124L1.colorable_of_forall_ball` and `FS124L1.exists_ball_of_seven_le` — the
+standard three; `FS124L1.forall_ball_of_colorable` and `FS124L1.seven_le_of_exists_ball` — the standard three and
+`proper_to_borel_weak`. **So an exclusion on one disc reaches `χ(ℝ²) = 7` only through the release's transfer; weak
+six-colourings of every disc reach `χ(ℝ²) ≤ 6` on this library's own three axioms.** That the half toward seven
+*needs* the import is a fact about this proof, not a theorem: the kernel says what a proof uses, never what every
+proof must.
+
+### What the Lean statements do not say that the row does — and what they say that it does not
+
+1. **C124-EVERY-DIRECTION has no Lean theorem.** The row's last quoted sentence — "Let U be a measurable subset of
+   the plane and c a measurable map … Then for every unit vector u, c(z) ≠ c(z + u) for almost every point z of U
+   with z + u in U" — is not stated in the three modules (the planner's decision, its record § 4.2: no entry uses it,
+   and its proof needs a lemma the release's port brings). It stays [hand], one mind.
+2. **"Measurable" is Borel measurability of a total function.** Every statement asks or delivers `Measurable c` for
+   `c : ℂ → Fin k`. The criterion does not depend on the reading: `FS124L1.seven_le_iff_no_aeProperOn : 7 ≤ χ(ℝ²) ↔ ∃
+   R > 0, ¬ ∃ c : ℂ → Fin 6, AeProperOn (ball 0 R) c` (a term, on the standard three and `proper_to_borel_weak`) —
+   the same equivalence with **no** measurability asked, hence with every class of maps between the Borel ones and
+   all of them, the Lebesgue measurable ones among them. (up) is likewise proved for any function
+   (`colorable_plane_of_forall_aeProperOn_ball`); (down) delivers a Borel colouring, the strongest reading.
+3. **"The rigid motions … form a non-empty open set" is a statement about parameters.** `rigidMotion (x, θ)` is
+   `z ↦ x + e θ * z`; that these are all the orientation-preserving isometries of the plane, and that a set of
+   motions is open exactly when its set of parameters is, are the standard facts and are "not proved here" (the
+   module header). No conclusion uses them: the colouring of `V` is `v ↦ c (rigidMotion q v)`, and each
+   `rigidMotion q` preserves distances (`dist_rigidMotion`). Nor is it a clause of the Lean statement that the open
+   set of motions has positive measure for `volume ⊗ arcLength`; it follows from the first conjunct (an open set of
+   parameters holding `(0, 0)` holds `(x, θ)` for small `x` and small `θ ≥ 0`), and the proof of the third conjunct
+   uses the positivity it needs (`AeProperOn.exists_rigidMotion`, for Lebesgue measure on all angles).
+4. **"About the origin."** The two join theorems and `radius_up` speak of discs about `0`; the row's "some open disc"
+   and "every open disc" are discs at any centre — `exists_isWeakColouringOn_ball_iff`, a theorem on the standard
+   three, and the term of item 5 above.
+5. **More than the row says** (the planner's generalizations, the module's and not entries): measurability idle in
+   GRAPH, COUNTABLE and UP; GRAPH's almost-every clause for a countable set anywhere; (down) for every subset; (up)
+   and (five) at any centres; (five)'s sentence at four colours with no import (`exists_radius_no_weak_four`).
+6. Nothing else: the row's "Not claimed" lines are true of the Lean statements — no explicit radius at any `k`;
+   nothing on whether the hypothesis holds at `k = 6`; (down) not without the import; no value of `R` in (five).
