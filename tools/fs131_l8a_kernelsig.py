@@ -15,14 +15,22 @@ looks for the reason in the module's own file and exempts the record only if it 
          `<E>.ofNat_ctorIdx` for such an inductive.
 
 Everything else the reader does is unchanged: MISSING-BINDER, NOT-FOUND for any other name, ABSENT with `--reviewed`,
-`--heads`, `--table`, and its own `--self-test`.
+`--heads`, `--table`.
 
   tools/fs131_l8a_kernelsig.py read <kernel-sigs.out> [--reviewed FILE] [--heads FILE] [--table OUT]
-  tools/fs131_l8a_kernelsig.py --self-test <kernel-sigs.out> [--reviewed FILE]
   tools/fs131_l8a_kernelsig.py --plant <kernel-sigs.out>
-      three records planted in memory, none of which may be exempted: a name `<S>.<g>` where `<g>` is no field of the
-      structure; `<E>.<c>.sizeOf_spec` where `<c>` is no constructor; and a plain theorem name with no text. Each must read
-      NOT-FOUND from the reader; and one true field must be exempted (the partner). Exit 0 iff all four behave.
+      (a) the exemption: three records planted in memory, none of which may be exempted — a name `<S>.<g>` where `<g>` is
+          no field of the structure; `<E>.<c>.sizeOf_spec` where `<c>` is no constructor; a plain theorem name with no
+          text. Each must read NOT-FOUND from the reader; and one true field must be exempted (the partner).
+      (b) the reader's own four checks, on this landing's modules. Its `--self-test` plants its second fault in
+          `Arith/NormOneTarget` and reads its partner in `Arith/Floor128` — modules of the landing it was written for,
+          which a listing of the ring calculus does not hold, so there it reports DID NOT FIRE and FAILED for want of
+          records. Re-made here: a named hypothesis of `emptyNS` dropped from the kernel's record (MISSING-BINDER);
+          `variable (hplant : (1 : Nat) = 1)` planted in a scratch copy of `Plane/RingCalculus/OuterAdj`, in scope of
+          its theorems (ABSENT term on every one of them — inventory item 556's class: the file's reader sees a
+          hypothesis the kernel lacks); a head with no record (NO-RECORD); and the partner, one section variable read
+          both ways — `Empty`'s `{F : ArcMap k}` INCLUDED where a statement mentions it and ABSENT where none does.
+      Exit 0 iff all eight behave.
 """
 import os
 import re
@@ -132,6 +140,54 @@ def main(argv):
         partner = true_field in found and not any(f.startswith('NOT-FOUND ' + true_field) for f in faults)
         print(f'partner (a true field, {true_field}): {"exempted with its field line" if partner else "NOT exempted"}')
         ok &= partner
+        # (b) the reader's own four checks, on this landing's modules
+        import copy
+        import tempfile
+        recs = base.parse_kernel(argv[1])
+        exempt_generated(recs, quiet=True)
+        faults0, rows0 = base.read(recs, {}, quiet=True)
+        head = ns + 'emptyNS'
+        victim = next((b for b in recs[head]['binders'] if b[2] == 'hΓ'), None) if head in recs else None
+        if victim is None:
+            print('plant (a named hypothesis dropped from the kernel record): COULD NOT BE PLANTED')
+            ok = False
+        else:
+            recs1 = copy.deepcopy(recs)
+            recs1[head]['binders'].remove(victim)
+            f1, _ = base.read(recs1, {}, quiet=True)
+            fired = any(x.startswith('MISSING-BINDER ' + head) for x in f1) and \
+                not any(x.startswith('MISSING-BINDER ' + head) for x in faults0)
+            print(f'plant (the kernel record of {head} loses `(hΓ : …)`): {"fired (MISSING-BINDER)" if fired else "DID NOT FIRE"}')
+            ok &= fired
+        mod = 'Proofs.HadwigerNelson.Plane.RingCalculus.OuterAdj'
+        src = open(base.module_path(mod), encoding='utf-8').read()
+        anchor = 'namespace HadwigerNelson.Plane\n'
+        if src.count(anchor) != 1:
+            print('plant (a hypothesis variable in scope): COULD NOT BE PLANTED')
+            ok = False
+        else:
+            with tempfile.NamedTemporaryFile('w', suffix='.lean', delete=False, encoding='utf-8') as f:
+                f.write(src.replace(anchor, anchor + '\nvariable (hplant : (1 : Nat) = 1)\n', 1))
+            f2, _ = base.read(recs, {}, quiet=True, override={mod: f.name})
+            os.unlink(f.name)
+            in_mod = [n_ for n_, r in recs.items() if r['module'] == mod and not base.GENERATED.search(n_)]
+            hit = [n_ for n_ in in_mod if any(x.startswith(f'ABSENT term {n_}:') and 'hplant' in x for x in f2)]
+            before = [x for x in faults0 if 'hplant' in x]
+            fired = bool(in_mod) and len(hit) == len(in_mod) and not before
+            print(f'plant (`variable (hplant : (1 : Nat) = 1)` in scope of {mod}): '
+                  f'{"fired (ABSENT term) on " + str(len(hit)) + " of " + str(len(in_mod)) + " theorems" if fired else "DID NOT FIRE"}')
+            ok &= fired
+        f3, _ = base.read(recs, {}, heads=['HadwigerNelson.NoSuch.head'], quiet=True)
+        fired = any(x.startswith('NO-RECORD ') for x in f3) and not any(x.startswith('NO-RECORD ') for x in faults0)
+        print(f'plant (a head with no record): {"fired (NO-RECORD)" if fired else "DID NOT FIRE"}')
+        ok &= fired
+        notes_e = [nt for name, r, _, notes in rows0 if r['module'].endswith('.RingCalculus.Empty') for nt in notes]
+        n_in = sum(nt.startswith('INCLUDED {F : ArcMap k}') for nt in notes_e)
+        n_ab = sum(nt.startswith('ABSENT term {F : ArcMap k}') for nt in notes_e)
+        pok = n_in > 0 and n_ab > 0
+        print(f"partner (`Empty`'s section variable `{{F : ArcMap k}}`: INCLUDED in {n_in} theorem(s), ABSENT in {n_ab}): "
+              f'{"passed" if pok else "FAILED"}')
+        ok &= pok
         print('plant: PASS' if ok else 'plant: FAIL')
         return 0 if ok else 1
     path = argv[1] if len(argv) >= 2 and argv[0] in ('read', '--self-test') else None

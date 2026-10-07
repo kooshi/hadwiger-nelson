@@ -1,0 +1,44 @@
+counter vs the main scan: declarations 14501 / 14501, refutations 199 / 199: agree
+counter vs the landing scan: declarations 14807 / 14807, refutations 215 / 215: agree
+main rows 1350, landing rows 1527; lost 0 (0 with a removed declaration); added 177
+  added SITE GENERIC on IsChangePoint: 23
+  added SITE GENERIC on IsHub: 5
+  added SITE GENERIC on IsRingArc: 14
+  added SITE GENERIC on NonSiamese: 52
+  added SITE GENERIC on Simple: 1
+  added SITE GENERIC on Valid: 82
+  added rows in Plane.RingCalculus.Basic: 11
+  added rows in Plane.RingCalculus.Empty: 9
+  added rows in Plane.RingCalculus.OuterAdj: 6
+  added rows in Plane.RingCalculus.RingColour: 7
+  added rows in Plane.RingCalculus.SemiHub: 64
+  added rows in Plane.RingCalculus.SemiHubPlaces: 39
+  added rows in Plane.RingCalculus.SoleTip: 3
+  added rows in Plane.RingCalculus.Star: 27
+  added rows in Plane.RingCalculus.StarChart: 8
+  added rows in Plane.RingCalculus.TilesAt: 2
+  added rows in Plane.SimpleOn: 1
+  declarations: 14501 -> 14807 (+306)
+  refutations-skipped: 199 -> 215 (+16)
+  sites: 1269 -> 1446 (+177)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1226 -> 1403 (+177)
+  unknown: 2 -> 2 (+0)
+  module Plane.RingCalculus.Basic: declarations 0 -> 64 (+64), refutations 0 -> 2 (+2)  [new module]
+  module Plane.RingCalculus.Empty: declarations 0 -> 20 (+20), refutations 0 -> 8 (+8)  [new module]
+  module Plane.RingCalculus.HubCount: declarations 0 -> 40 (+40), refutations 0 -> 0 (+0)  [new module]
+  module Plane.RingCalculus.OuterAdj: declarations 0 -> 6 (+6), refutations 0 -> 0 (+0)  [new module]
+  module Plane.RingCalculus.RingColour: declarations 0 -> 16 (+16), refutations 0 -> 0 (+0)  [new module]
+  module Plane.RingCalculus.SemiHub: declarations 0 -> 80 (+80), refutations 0 -> 3 (+3)  [new module]
+  module Plane.RingCalculus.SemiHubPlaces: declarations 0 -> 22 (+22), refutations 0 -> 0 (+0)  [new module]
+  module Plane.RingCalculus.SoleTip: declarations 0 -> 8 (+8), refutations 0 -> 1 (+1)  [new module]
+  module Plane.RingCalculus.Star: declarations 0 -> 17 (+17), refutations 0 -> 2 (+2)  [new module]
+  module Plane.RingCalculus.StarChart: declarations 0 -> 17 (+17), refutations 0 -> 0 (+0)  [new module]
+  module Plane.RingCalculus.TilesAt: declarations 0 -> 7 (+7), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SimpleOn: declarations 0 -> 9 (+9), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +306, refutations +16: equal to the scans difference
+vacdiff: PASS
+exit=0

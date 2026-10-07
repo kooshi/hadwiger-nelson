@@ -53,7 +53,6 @@ HEADS="$(grep -v '^#' data/fs131/l8a/heads.txt | grep . | paste -sd, -)"
   python3 data/fs131/l8a/mk-reviewed.py "$d/kernel-sigs-$tag.out" > "$d/kernelsig-reviewed-$tag.txt" 2> "$d/kernelsig-reviewed-$tag.err"; echo "mk-reviewed exit=$? ($(cat "$d/kernelsig-reviewed-$tag.err"))"
   cmp -s "$d/kernelsig-reviewed-$tag.txt" data/fs131/l8a/kernelsig-reviewed.txt; echo "the reviewed list regenerated on this commit against the committed one (cmp): exit=$?"
   plain kernel-sigs-read python3 tools/fs131_l8a_kernelsig.py read "$d/kernel-sigs-$tag.out" --reviewed data/fs131/l8a/kernelsig-reviewed.txt --heads data/fs131/l8a/heads.txt --table "$d/kernel-sigs-table-$tag.txt"
-  plain kernel-sigs-selftest python3 tools/fs131_l8a_kernelsig.py --self-test "$d/kernel-sigs-$tag.out" --reviewed data/fs131/l8a/kernelsig-reviewed.txt
   plain kernel-sigs-plant python3 tools/fs131_l8a_kernelsig.py --plant "$d/kernel-sigs-$tag.out"
   plain register python3 tools/fs131_l8a_register.py "$M/count-modules-landed2.out" "$d/count-modules-$tag.out"
   plain register-selftest python3 tools/fs131_l8a_register.py "$M/count-modules-landed2.out" "$d/count-modules-$tag.out" --self-test
