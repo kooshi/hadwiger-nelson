@@ -103,3 +103,22 @@ inventory, items 607–629 (an outside proof of six became this project's litera
    filed** (G64's warning; G94's "statement to prove"), verbatim, by script; the other six are unstarted and stay owed.
    (f) **Foothold (4) is a question for FS132-E3's brief**, not a claim.
 
+4. **FS132-E1 handed back at its Stage 3 (443k by the task notice); the milestone is split into two derivers' jobs, both
+   launched** (its report `data/fs132/reports/FS132-E1.md`, commit `520da436`; its content is item 3's — the same entries, the
+   same grades). **Added by the report**: its own slips — predictions registered after reading the manuscript's §§ 6–7; several
+   ledger rows read only through the front page's summary; the manuscript's § 8, the kernel's errata for `emptyNS` and wave 7's
+   kernel plan unread; six of the eight grokking rewrites unstarted; `CLAUDE.md` not re-read from disk after the refiling;
+   **stubs it proposes** — card 2 as a job of its own (the extraction for countable closed sets of centres, the uniformity step
+   not done), and FS-127's accumulation question re-aimed at "an essential centre is isolated"; **for the kernel lane** — which
+   of the release's modules are already general in the number of labels and which are typed at five (its entry's handoff);
+   **prior art** — zbMATH down a third time; one listing unread. **Its three held questions, ruled**: clause (5) gets no second
+   look before the readings build on it (ruling 3 (d): each use named, a defect traceable; both briefs say so and ask for a
+   message at once if their own reading of that step finds it wrong); the claim list is amended to the wider class (done, item
+   3 (a)); the second job starts where its record says. **Launched** (two Opus agents, the staffing of FS-131 inventory ruling
+   630 (c)): **FS132-E2**, card 3 — must a centre that is not a triangle exist, by any route
+   (`data/fs132/briefs/FS132-E2-card-three.md`, generator `data/fs131/briefs/scripts/mk-fs132-e2.py`, gate exit 0, 15 quotations);
+   **FS132-E3**, card 1's readings — C132-RUN-EMPTY, then C132-RUN-CV, then the two posed statements and the REG-J′ side
+   question as far as one context carries (`data/fs132/briefs/FS132-E3-card-one-readings.md`, generator `mk-fs132-e3.py` beside
+   the other, gate exit 0, 14 quotations). **To the asking lane's next job**: the two proposed stubs; the stub's existence
+   form's wording (item 2 (c)). **Owed**: the six unstarted grokking rewrites (G25, G60's remainder, G80's, G81, G82, G86, G91).
+
