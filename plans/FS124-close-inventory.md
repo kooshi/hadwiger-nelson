@@ -525,4 +525,14 @@ between two colours that is an arc of the unit circle about a point one unit awa
     — the one lemma; the centre's statement, whole and collar by collar; the wide form at a point one unit from a far end;
     the second round's lemma on one piece and one side; the forcing on pieces; what a save by one member forces; both
     members for full ones; four labels) — **the second mind the second round's deriver asked for**.
+25. **FS124-K2 launched** (15:17 UTC, read from the clock; `debruijn`, the kernel lane's planner, **blind first**; brief
+    `data/fs124/briefs/FS124-K2-kernel-plan.md`, gate exit 0 with no warning; kernel claim list `data/fs124/claims-K2.md`;
+    worktree and branch `fs124-wk2`, cut by me from `fs124-wk1` at `80ee1983`, build copied from that tree; record
+    `plans/FS124-kernel-plan-2.md` there): nine statements of the two rounds. **A slip of mine, caught before launch**: the
+    brief's first draft told it that one statement "rests on a step its own author has asked a second mind to look at" and
+    named the clause — a confidence about the derivation, in a fenced brief; removed, so that its second look is not
+    pointed. **When its phase-1 commit's message arrives**: reply to lift the fence, naming
+    `plans/FS124-E1-derivation.md` Stage 4 and `plans/FS124-E2-derivation.md` Stages 4–5 — **and then name the step the
+    deriver flagged** (C124-LONE's second step), as the first planner was told after its fence lifted. The six most recent
+    commit subjects on `main` were read by me as it would see them: none says anything of the nine statements.
 
