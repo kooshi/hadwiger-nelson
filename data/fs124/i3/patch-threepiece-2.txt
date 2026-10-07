@@ -1,0 +1,84 @@
+@@ theorem hasUnitArcFrom_of_arc_subset_sphere {E : Set ℂ} {w : ℂ} (γ : C(unitInterval, ℂ))
+  -- the arc as a function on the line, constant beyond its two ends
+  obtain ⟨Γ, hΓdef⟩ : ∃ Γ : ℝ → ℂ, ∀ t, Γ t = γ (Set.projIcc 0 1 zero_le_one t) := ⟨_, fun _ => rfl⟩
+  have hΓc : Continuous Γ := by
+    rw [funext hΓdef]
+    exact γ.continuous.comp continuous_projIcc
+  have hΓ0 : Γ 0 = x := by
+    rw [hΓdef, Set.projIcc_left, ← hx]
+    rfl
+  have hΓr : ∀ t, Γ t ∈ range γ := fun t => ⟨_, (hΓdef t).symm⟩
+  have hxw : ‖x - w‖ = 1 := by
+    have := hsph ⟨0, hx⟩
+    rwa [mem_sphere, dist_eq_norm] at this
+  have hxw0 : x - w ≠ 0 := fun h => by
+    rw [h, norm_zero] at hxw
+    exact zero_ne_one hxw
+  -- its direction from `w`, relative to the direction of `x`: a point of the unit circle, `1` at the start
+  obtain ⟨φ, hφdef⟩ : ∃ φ : ℝ → ℂ, ∀ t, φ t = (Γ t - w) / (x - w) := ⟨_, fun _ => rfl⟩
+  have hφc : Continuous φ := by
+    rw [funext hφdef]
+    exact (hΓc.sub continuous_const).div_const _
+  have hφ0 : φ 0 = 1 := by rw [hφdef, hΓ0, div_self hxw0]
+  have hφn : ∀ t, ‖φ t‖ = 1 := by
+    intro t
+    have := hsph (hΓr t)
+    rw [mem_sphere, dist_eq_norm] at this
+    rw [hφdef, norm_div, this, hxw, div_one]
+  have hφe : ∀ t, φ t = e (Complex.arg (φ t)) := by
+    intro t
+    have := Complex.norm_mul_exp_arg_mul_I (φ t)
+    rw [hφn t, Complex.ofReal_one, one_mul] at this
+    rw [e, this]
+  have hΓφ : ∀ t, Γ t = w + (x - w) * φ t := by
+    intro t
+    have h1 : (x - w) * ((Γ t - w) / (x - w)) = Γ t - w := by field_simp
+    rw [hφdef, h1]
+    ring
+  -- a stretch `[0, u₀]` on which the direction stays off the negative real axis, so that its argument is continuous
+  obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp (Complex.isOpen_slitPlane.preimage hφc) 0
+    (by rw [mem_preimage, hφ0]; exact Complex.one_mem_slitPlane)
+  have hu₀pos : 0 < min (r / 2) 1 := lt_min (by positivity) one_pos
+  have hu₀le : min (r / 2) 1 ≤ r / 2 := min_le_left _ _
+  have hu₀1 : min (r / 2) 1 ≤ 1 := min_le_right _ _
+  set u₀ := min (r / 2) 1 with hu₀
+  have hcont : ContinuousOn (fun t => Complex.arg (φ t)) (uIcc 0 u₀) := by
+    intro t ht
+    rw [uIcc_of_le hu₀pos.le] at ht
+    have hts : φ t ∈ Complex.slitPlane := hball (by
+      rw [mem_ball, Real.dist_eq, sub_zero, abs_of_nonneg ht.1]
+      linarith [ht.2])
+    exact ((Complex.continuousAt_arg hts).comp hφc.continuousAt).continuousWithinAt
+  have hivt : uIcc (Complex.arg (φ 0)) (Complex.arg (φ u₀)) ⊆ (fun t => Complex.arg (φ t)) '' uIcc 0 u₀ :=
+    intermediate_value_uIcc hcont
+  rw [hφ0, Complex.arg_one] at hivt
+  -- the argument at `u₀` is not `0`: the arc is injective
+  have hθ₀ne : Complex.arg (φ u₀) ≠ 0 := by
+    intro h0
+    have h1 : φ u₀ = 1 := by
+      rw [hφe u₀, h0]
+      simp [e]
+    have h2 : Γ u₀ = Γ 0 := by rw [hΓφ u₀, hΓφ 0, h1, hφ0]
+    rw [hΓdef, hΓdef] at h2
+    have h3 := hinj h2
+    rw [Set.projIcc_of_mem zero_le_one ⟨hu₀pos.le, hu₀1⟩, Set.projIcc_left] at h3
+    exact hu₀pos.ne' (congrArg Subtype.val h3)
+  set θ₀ := Complex.arg (φ u₀) with hθ₀
+  -- the turning sense is the sign of that argument, the length its absolute value
+  refine ⟨if 0 < θ₀ then 1 else -1, by split_ifs <;> simp, |θ₀|, abs_pos.mpr hθ₀ne, fun t ht => ?_⟩
+  have hmem : (if 0 < θ₀ then (1 : ℝ) else -1) * t ∈ uIcc 0 θ₀ := by
+    rw [mem_uIcc]
+    split_ifs with hpos
+    · left
+      rw [abs_of_pos hpos] at ht
+      exact ⟨by linarith [ht.1], by linarith [ht.2]⟩
+    · right
+      have hneg : θ₀ < 0 := lt_of_le_of_ne (not_lt.mp hpos) hθ₀ne
+      rw [abs_of_neg hneg] at ht
+      exact ⟨by linarith [ht.2], by linarith [ht.1]⟩
+  obtain ⟨u, -, hu⟩ := hivt hmem
+  have hu' : Complex.arg (φ u) = (if 0 < θ₀ then (1 : ℝ) else -1) * t := hu
+  have hpt : w + (x - w) * e ((if 0 < θ₀ then (1 : ℝ) else -1) * t) = Γ u := by
+    rw [hΓφ u, hφe u, hu']
+  rw [hpt]
+  exact hE (hΓr u)

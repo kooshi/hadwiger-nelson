@@ -1,0 +1,10 @@
+'HadwigerNelson.Plane.closePair_forced_pieces' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_lone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_both_separate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_both_saved' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+data/fs124/i3/lean/PrintClaims.lean:13:8: warning: declaration uses `sorry`
+'FS124I3.control_planted' depends on axioms: [sorryAx]
+'FS124I3.control_cites' depends on axioms: [sorryAx]
+'HadwigerNelson.Plane.sectorPoint_isFull' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_closePair_full' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

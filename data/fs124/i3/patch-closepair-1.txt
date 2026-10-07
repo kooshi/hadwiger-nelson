@@ -1,0 +1,201 @@
+@@ theorem mem_presentAt_iff {U : Set ℂ} {c : ℂ → α} {w : ℂ} {i : α} :
+  exact Iff.rfl
+@@ theorem not_mem_presentAt_of_ae_ne {U : Set ℂ} {c : ℂ → α} {w : ℂ} {i : α} {η : ℝ} (hη : 0 < η)
+  intro hi
+  refine (mem_presentAt_iff.mp hi η hη).ne' (measure_eq_zero_iff_ae_notMem.mpr ?_)
+  filter_upwards [h] with z hz hzm
+  exact hz hzm.2 hzm.1.2
+@@ theorem not_mem_presentAt_iff {U : Set ℂ} {c : ℂ → α} {w : ℂ} {i : α} :
+  constructor
+  · intro h
+    by_contra hcon
+    refine h (mem_presentAt_iff.mpr fun r hr => ?_)
+    by_contra hz
+    refine hcon ⟨r, hr, ?_⟩
+    have h0 : volume (U ∩ c ⁻¹' {i} ∩ ball w r) = 0 := le_antisymm (not_lt.mp hz) (zero_le _)
+    filter_upwards [measure_eq_zero_iff_ae_notMem.mp h0] with z hz' hzU hzb hci
+    exact hz' ⟨⟨hzU, hci⟩, hzb⟩
+  · rintro ⟨η, hη, h⟩ hi
+    refine (mem_presentAt_iff.mp hi η hη).ne' (measure_eq_zero_iff_ae_notMem.mpr ?_)
+    filter_upwards [h] with z hz hzm
+    exact hz hzm.1.1 hzm.2 hzm.1.2
+@@ theorem mem_presentAt_of_ae_eq {U : Set ℂ} {c : ℂ → α} {w : ℂ} {i : α} {V : Set ℂ} (hVU : V ⊆ U)
+  rw [mem_presentAt_iff]
+  intro r hr
+  refine lt_of_lt_of_le (hpos r hr) (measure_mono_ae ?_)
+  filter_upwards [hi] with z hz hzm
+  exact ⟨⟨hVU hzm.1, hz hzm.1⟩, hzm.2⟩
+@@ theorem presentAt_nonempty [Finite α] {U : Set ℂ} (hU : IsOpen U) (c : ℂ → α) {w : ℂ} (hw : w ∈ U) :
+  by_contra hne
+  rw [Set.not_nonempty_iff_eq_empty] at hne
+  have h : ∀ i : α, ∃ η > 0, ∀ᵐ z, z ∈ U → z ∈ ball w η → c z ≠ i := fun i =>
+    not_mem_presentAt_iff.mp (by rw [hne]; exact Set.notMem_empty i)
+  choose η hη hae using h
+  obtain ⟨r₀, hr₀, hball⟩ := Metric.isOpen_iff.mp hU w hw
+  haveI : Nonempty α := ⟨c w⟩
+  obtain ⟨i₀, hi₀⟩ := Finite.exists_min η
+  have hr : 0 < min r₀ (η i₀) := lt_min hr₀ (hη i₀)
+  -- a disc about `w` inside `U` on which almost every point has no label
+  have hnull : volume (ball w (min r₀ (η i₀))) = 0 := by
+    rw [measure_eq_zero_iff_ae_notMem]
+    filter_upwards [ae_all_iff.2 hae] with z hz hzb
+    exact hz (c z) (hball (ball_subset_ball (min_le_left _ _) hzb))
+      (ball_subset_ball ((min_le_right _ _).trans (hi₀ (c z))) hzb) rfl
+  exact (isOpen_ball.measure_pos volume ⟨w, mem_ball_self hr⟩).ne' hnull
+@@ theorem IsCommonUnitPoint.symm {x y w : ℂ} (h : IsCommonUnitPoint x y w) : IsCommonUnitPoint y x w := by
+  exact ⟨h.2, h.1⟩
+@@ theorem crossAt (C : ClosePair U c x y) (hw : IsCommonUnitPoint x y w) : CrossAt x y w := by
+  exact crossAt_of_dist_lt_two C.ne C.dist_lt hw.1 hw.2
+@@ theorem exists_label_eq {c : ℂ → Fin 6} (C : ClosePair U c x y) (ℓ : Fin 6) :
+  have hinj : Function.Injective (Sum.elim C.left.label C.right.label) := by
+    rintro (i | i) (j | j) h
+    · exact congrArg _ (C.left.label_injective h)
+    · exact absurd h (C.label_ne i j)
+    · exact absurd h.symm (C.label_ne j i)
+    · exact congrArg _ (C.right.label_injective h)
+  have hsurj : Function.Surjective (Sum.elim C.left.label C.right.label) :=
+    ((Fintype.bijective_iff_injective_and_card _).mpr ⟨hinj, by simp⟩).2
+  obtain ⟨i | j, h⟩ := hsurj ℓ
+  · exact Or.inl ⟨i, h⟩
+  · exact Or.inr ⟨j, h⟩
+@@ theorem ae_onSide_of_label {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c) {x w : ℂ} (hw : w ∈ U)
+  -- a radius for each side and each piece: the type of the piece if it is not on the side, any radius otherwise
+  have key : ∀ (σ : CircleSide) (i : ι), ∃ η > 0,
+      ∀ᵐ z, z ∈ ball w η → z ∈ σ.region x → c z = a i → OnSide σ (P i) w := by
+    intro σ i
+    by_cases hσ : OnSide σ (P i) w
+    · exact ⟨1, one_pos, Filter.Eventually.of_forall fun _ _ _ _ => hσ⟩
+    · obtain ⟨η, hη, h⟩ := (hP i).ae_ne_region hU hc hw hσ
+      exact ⟨η, hη, by filter_upwards [h] with z hz hzb hzσ hci using absurd hci (hz hzb hzσ)⟩
+  choose η hη hae using key
+  rcases isEmpty_or_nonempty ι with hι | hι
+  · exact ⟨1, one_pos, Filter.Eventually.of_forall fun z _ σ i => (hι.false i).elim⟩
+  · -- the least of the finitely many radii
+    obtain ⟨i₀, hi₀⟩ := Finite.exists_min fun i => min (η .inside i) (η .outside i)
+    refine ⟨min (η .inside i₀) (η .outside i₀), lt_min (hη _ _) (hη _ _), ?_⟩
+    have hall : ∀ᵐ z, ∀ i, (z ∈ ball w (η .inside i) → z ∈ CircleSide.inside.region x → c z = a i →
+        OnSide .inside (P i) w) ∧ (z ∈ ball w (η .outside i) → z ∈ CircleSide.outside.region x → c z = a i →
+        OnSide .outside (P i) w) := ae_all_iff.2 fun i => (hae .inside i).and (hae .outside i)
+    filter_upwards [hall] with z hz hzb σ i hzσ hci
+    cases σ
+    · exact (hz i).1 (ball_subset_ball ((hi₀ i).trans (min_le_left _ _)) hzb) hzσ hci
+    · exact (hz i).2 (ball_subset_ball ((hi₀ i).trans (min_le_right _ _)) hzb) hzσ hci
+@@ theorem exists_onSide_of_cover {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c) {x y w : ℂ}
+  obtain ⟨η₁, hη₁, h1⟩ := ae_onSide_of_label hU hc hw hP
+  obtain ⟨η₂, hη₂, h2⟩ := ae_onSide_of_label hU hc hw hQ
+  by_contra hcon
+  obtain ⟨hx, hy⟩ := not_or.mp hcon
+  -- the region on the side `σ` of `S(x)` and `τ` of `S(y)` near `w` would be null
+  refine (hcross.volume_quadrant_pos σ τ (lt_min hη₁ hη₂)).ne' (measure_eq_zero_iff_ae_notMem.mpr ?_)
+  filter_upwards [h1, h2] with z hz1 hz2 hzm
+  obtain ⟨⟨hzb, hzσ⟩, hzτ⟩ := hzm
+  rcases hcover (c z) with ⟨i, hi⟩ | ⟨j, hj⟩
+  · exact hx ⟨i, hz1 (ball_subset_ball (min_le_left _ _) hzb) σ i hzσ hi.symm⟩
+  · exact hy ⟨j, hz2 (ball_subset_ball (min_le_right _ _) hzb) τ j hzτ hj.symm⟩
+@@ theorem exists_inner_outer_of_cover {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c) {x y w : ℂ}
+  have h := exists_onSide_of_cover hU hc hcross hw hP hQ hcover
+  have h1 := h .inside .inside
+  have h2 := h .inside .outside
+  have h3 := h .outside .inside
+  have h4 := h .outside .outside
+  simp only [onSide_inside, onSide_outside] at h1 h2 h3 h4
+  by_cases hA : ∃ i, InnerAt (P i) w
+  · by_cases hB : ∃ i, OuterAt (P i) w
+    · exact Or.inl ⟨hA, hB⟩
+    · exact Or.inr ⟨h3.resolve_left hB, h4.resolve_left hB⟩
+  · exact Or.inr ⟨h1.resolve_left hA, h2.resolve_left hA⟩
+@@ theorem ae_label_left_of_forall_not_onSide {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c)
+  obtain ⟨η₁, hη₁, h1⟩ := ae_onSide_of_label hU hc hw hP
+  obtain ⟨η₂, hη₂, h2⟩ := ae_onSide_of_label hU hc hw hQ
+  refine ⟨min η₁ η₂, lt_min hη₁ hη₂, ?_⟩
+  filter_upwards [h1, h2] with z hz1 hz2 hzb hzτ σ hzσ
+  rcases hcover (c z) with ⟨i, hi⟩ | ⟨j, hj⟩
+  · exact ⟨i, hz1 (ball_subset_ball (min_le_left _ _) hzb) σ i hzσ hi.symm, hi.symm⟩
+  · exact absurd (hz2 (ball_subset_ball (min_le_right _ _) hzb) τ j hzτ hj.symm) (hτ j)
+@@ theorem exists_isTight_of_ae_side {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) {x y w : ℂ} (hcross : CrossAt x y w)
+  obtain ⟨r₀, hr₀, hball⟩ := Metric.isOpen_iff.mp hU w hw
+  have hr : 0 < min r₀ (min η ρ) := lt_min hr₀ (lt_min hη hρ)
+  have hrη : min r₀ (min η ρ) ≤ η := (min_le_right _ _).trans (min_le_left _ _)
+  have hrρ : min r₀ (min η ρ) ≤ ρ := (min_le_right _ _).trans (min_le_right _ _)
+  -- a point of the unit circle about `x`, near `w`, on the side `τ` of the unit circle about `y`
+  obtain ⟨w', hw'x, hw'b, hw'τ⟩ := hcross.exists_mem_sphere_region τ hr
+  refine ⟨w', hw'x, ?_, lt_of_lt_of_le (mem_ball.mp hw'b) hrρ, ?_⟩
+  · rintro rfl
+    have h1 := CircleSide.mem_region_iff.mp hw'τ
+    rw [hcross.right, sub_self, mul_zero] at h1
+    exact lt_irrefl _ h1
+  · refine isTight_of_ae_of_isOpen (V := ball w (min r₀ (min η ρ)) ∩ τ.region y)
+      (by rw [dist_comm]; exact mem_sphere.mp hw'x) hab (isOpen_ball.inter (τ.isOpen_region y)) ⟨hw'b, hw'τ⟩
+      (fun z hz => hball (ball_subset_ball (min_le_left _ _) hz.1)) ?_ ?_
+    · filter_upwards [hin] with z hz hzV using hz (ball_subset_ball hrη hzV.1) hzV.2
+    · filter_upwards [hout] with z hz hzV using hz (ball_subset_ball hrη hzV.1) hzV.2
+@@ theorem IsTight.closure_inter_closure_eq {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c)
+  obtain ⟨η, hη, hca, hcb⟩ := ht.ae_ne_centre hU hc hx
+  have hxw' : dist x w' = 1 := by
+    obtain ⟨ρ, hρ⟩ := ht
+    exact hρ.dist_eq
+  obtain ⟨η₂, hη₂, hsph⟩ := exists_ball_inter_spheres_subset (w := w) (w' := w') (x := x) hne.symm
+    (by rw [dist_comm]; exact hwx) hxw'
+  -- near `x` the piece `A` has no point strictly outside `S(w')`, and `B` none strictly inside
+  have hAem : A ∩ (ball x η ∩ CircleSide.outside.region w') = ∅ :=
+    hA.inter_eq_empty (isOpen_ball.inter (CircleSide.isOpen_region _ _)) (by
+      filter_upwards [hca] with z hz hzm using hz hzm.1 (CircleSide.mem_region_outside.mp hzm.2))
+  have hBem : B ∩ (ball x η ∩ CircleSide.inside.region w') = ∅ :=
+    hB.inter_eq_empty (isOpen_ball.inter (CircleSide.isOpen_region _ _)) (by
+      filter_upwards [hcb] with z hz hzm using hz hzm.1 (CircleSide.mem_region_inside.mp hzm.2))
+  have hA' : ∀ z ∈ A, z ∈ ball x η → z ∈ closedBall w' 1 := by
+    intro z hzA hzb
+    by_contra hcon
+    have hmem : z ∈ A ∩ (ball x η ∩ CircleSide.outside.region w') :=
+      ⟨hzA, hzb, CircleSide.mem_region_outside.mpr (not_le.mp fun hle => hcon (mem_closedBall.mpr hle))⟩
+    rw [hAem] at hmem
+    exact hmem
+  have hB' : ∀ z ∈ B, z ∈ ball x η → z ∉ ball w' 1 := by
+    intro z hzB hzb hzw'
+    have hmem : z ∈ B ∩ (ball x η ∩ CircleSide.inside.region w') :=
+      ⟨hzB, hzb, CircleSide.mem_region_inside.mpr (mem_ball.mp hzw')⟩
+    rw [hBem] at hmem
+    exact hmem
+  have hmin1 : min η η₂ ≤ η := min_le_left _ _
+  have hmin2 : min η η₂ ≤ η₂ := min_le_right _ _
+  refine ⟨min η η₂, lt_min hη hη₂, ?_, ?_, ?_⟩
+  · exact fun z hz => ⟨hAi hz.1, hA' z hz.1 (ball_subset_ball hmin1 hz.2)⟩
+  · refine Set.disjoint_left.mpr fun z hz hzu => ?_
+    rcases hzu with hzw | hzw'
+    · exact Set.disjoint_left.mp hBo hz.1 hzw
+    · exact hB' z hz.1 (ball_subset_ball hmin1 hz.2) hzw'
+  · refine Subset.antisymm ?_ ?_
+    · rintro t ⟨⟨htA, htB⟩, htb⟩
+      -- `t` is on `S(w)` and on `S(w')`, near `x`
+      have h1 : t ∈ sphere w 1 := hAi.closure_inter_closure_subset hBo ⟨htA, htB⟩
+      have hAi' : InnerAt (ball x (min η η₂) ∩ A) w' := fun z hz => hA' z hz.2 (ball_subset_ball hmin1 hz.1)
+      have hBo' : OuterAt (ball x (min η η₂) ∩ B) w' :=
+        Set.disjoint_left.mpr fun z hz hzw' => hB' z hz.2 (ball_subset_ball hmin1 hz.1) hzw'
+      have h2 : t ∈ sphere w' 1 := hAi'.closure_inter_closure_subset hBo'
+        ⟨isOpen_ball.inter_closure ⟨htb, htA⟩, isOpen_ball.inter_closure ⟨htb, htB⟩⟩
+      exact hsph ⟨⟨h1, h2⟩, ball_subset_ball hmin2 htb⟩
+    · rintro t ht
+      rw [mem_singleton_iff] at ht
+      rw [ht]
+      exact ⟨⟨hA.mem_closure, hB.mem_closure⟩, mem_ball_self (lt_min hη hη₂)⟩
+@@ theorem ThreePiece.exists_second_unit_point_of_ae_side {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U)
+  have hij : i ≠ j := by
+    rintro rfl
+    exact not_innerAt_and_outerAt (D.isOpen_piece i) (D.isConnected_piece i).nonempty w ⟨hi, hj⟩
+  obtain ⟨w', hw'x, hw'ne, -, ht⟩ :=
+    exists_isTight_of_ae_side hU hcross hw (D.label_injective.ne hij) hη hin hout one_pos
+  obtain ⟨η', hη', h1, h2, h3⟩ :=
+    ht.closure_inter_closure_eq hU hc D.mem hcross.left hw'ne (D.isPieceAt i) (D.isPieceAt j) hi hj
+  exact ⟨w', hw'x, hw'ne, η', hη', h1, h2, h3⟩
+@@ theorem ThreePiece.not_isFull_of_ae_side {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c)
+  intro hfull
+  have hij : i ≠ j := by
+    rintro rfl
+    exact not_innerAt_and_outerAt (D.isOpen_piece i) (D.isConnected_piece i).nonempty w ⟨hi, hj⟩
+  obtain ⟨w', -, -, η', hη', -, -, h3⟩ :=
+    D.exists_second_unit_point_of_ae_side hU hc hcross hw hi hj hη hin hout
+  obtain ⟨t, ht, htd⟩ := Metric.mem_closure_iff.mp (hfull i j hij) η' hη'
+  have hmem : t ∈ closure (D.piece i) ∩ closure (D.piece j) ∩ ball x η' :=
+    ⟨ht.1.1, by rw [mem_ball, dist_comm]; exact htd⟩
+  rw [h3] at hmem
+  exact ht.2 hmem

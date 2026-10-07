@@ -1,0 +1,8 @@
+compared: 111 named constants of the first dump (types; values of definitions), 9 example heads
+definitions compared by their three data fields in place of their value: 2
+internal (not compared): 15 before, 30 after
+new named constants in the second dump: 2
+  NEW THM HadwigerNelson.Plane.ThreePiece.HasArcEdges.saves_of_separatesAt
+  NEW THM HadwigerNelson.Plane.exists_perm_fin_three
+examples in the working files that the base does not hold: 0
+PASS: no statement and no definition changed

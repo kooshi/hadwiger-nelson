@@ -1,0 +1,14 @@
+compared: 111 named constants of the first dump (types; values of definitions), 9 example heads
+definitions compared by their three data fields in place of their value: 2
+internal (not compared): 15 before, 30 after
+new named constants in the second dump: 2
+  NEW THM HadwigerNelson.Plane.ThreePiece.HasArcEdges.saves_of_separatesAt
+  NEW THM HadwigerNelson.Plane.exists_perm_fin_three
+examples in the working files that the base does not hold: 1
+  NEW EXAMPLE Proofs/HadwigerNelson/Plane/ClosePair.lean: example (U : Set ℂ) (c : ℂ → α) (x : ℂ) : Nonempty (ClosePair U c x x)
+DATA     DEF HadwigerNelson.Plane.sectorPoint: a data field of the decomposition differs
+VALUE    DEF HadwigerNelson.Plane.presentAt: the stored definition differs
+TYPE     THM HadwigerNelson.Plane.closePair_four: the stored statement differs
+EXAMPLE  Proofs/HadwigerNelson/Plane/ClosePair.lean #1: its statement is not in the working file (in order)
+    was: example (U : Set ℂ) (c : ℂ → α) (x : ℂ) : IsEmpty (ClosePair U c x x)
+CONTROL: 4 of 4 planted faults reported — the check can fail

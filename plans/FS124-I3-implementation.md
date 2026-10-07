@@ -55,3 +55,88 @@ a planted fault of its own.
 elaborates against the built `.olean` of `Plane/ThreePiece` as it stands, since no statement changes; the two helpers it
 needs are stated in `Plane/ClosePair` itself. Leaves are written into patch files (`data/fs124/i3/patch-*.txt`, applied
 by `data/fs124/i3/patch.py`, which refuses an anchor that is missing or doubled).
+
+## Stage 2 — SAVED (FS124-I3): `Plane/ThreePiece`'s interface and `Plane/ClosePair` whole — 49 of 61 leaves, in the build; the four claims proved
+
+**In the build**: the same command, exit 0 — `build: OK — 477 of 477 batches, 5 module(s) rebuilt, 3 module(s) with
+warnings, 9m42s` (`data/fs124/i3/logs/build-1-claims.log`; the full output, `build-1-claims-full.log`). The full log holds
+**18 distinct `declaration uses sorry` warnings and no other warning**: 12 in `Plane/ThreePiece` (its two constructions
+with their measurability leaves and examples — Stage 3), 3 in `Plane/ClosePairModel`, 3 in `Plane/SectorPoint` (the third
+job's). **None in `Plane/ClosePair`: its 32 leaves are all proved; so are the 17 leaves of `Plane/ThreePiece` down to and
+including `hasUnitArcFrom_of_arc_subset_sphere`.** Its one line with the word `error` is the up-to-date probe (line 3).
+
+**The five theorems of the four claims, printed from that build** (`data/fs124/i3/lean/PrintClaims.lean`, output
+`data/fs124/i3/claims-axioms.txt`; sent to the coordinator at 17:38 UTC):
+
+```
+'HadwigerNelson.Plane.closePair_forced_pieces' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_lone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_both_separate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_both_saved' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.closePair_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+**The control fired, four ways** (each prints `sorryAx`): a theorem planted in the scratch file on `sorry`, a theorem
+planted there that cites it, `sectorPoint_isFull` (a theorem of my own file that at this stage still rests on a `sorry` of
+mine: the sector point's fields), and `exists_closePair_full` (the third job's skeleton). No one of the five rests on a
+`sorry`, mine or another job's: `Plane/ClosePair` cites nothing of the two constructions, and the first implementer's
+two files are proved.
+
+**The leaves, each against its planned route** (`plans/FS124-kernel-plan-2.md` § 3.2). No planned route failed; nothing
+was dispatched to a companion.
+
+| leaf | route |
+|---|---|
+| `HasUnitArcFrom.mem` | as planned (`t = 0`) |
+| `HasUnitArcFrom.mem_closure_diff` | the plan's conclusion by a route of mine, shorter to state: the arc `t ↦ w + (x − w) e(s t)` is continuous and starts at `x` (`Metric.continuous_iff` in place of the chord bound `norm_e_sub_e_le`); a point at a small positive angle is not `x` because `cos (s t) = 1` forces `s t = 0` on `(−2π, 2π)` (`Real.cos_eq_one_iff_of_lt_of_lt`) |
+| `ThreePiece.isPieceAt`, `mem`, `isConnected_piece`, `disjoint_piece`, `mem_edge`, `edge_comm`, `edge_subset_sphere`, `OneOfEach.separatesAt` | as planned (terms) |
+| `ThreePiece.ae_mem_piece`, `ae_label_of_forall_onSide`, `not_separatesAt_iff` | as planned |
+| `OneOfEach.eq_of_innerAt`, `eq_of_outerAt` | as planned (`σ` onto; the three values of `Fin 3` by `decide`) |
+| `HasArcEdges.isFull` | as planned (continuity of `γ` at `0`, injectivity) |
+| `hasUnitArcFrom_of_arc_subset_sphere` | the plan's route, **without the monotonicity step**: with `φ u = (γ u − w)/(x − w)` on the line (the arc extended by `Set.projIcc`), on a stretch `[0, u₀]` where `φ` stays in `Complex.slitPlane` the argument is continuous, it is `0` at `0` and not `0` at `u₀` (injectivity), and the intermediate value theorem alone (`intermediate_value_uIcc`) gives every angle between — `ContinuousOn.strictMonoOn_of_injOn_Icc'` is not needed. 68 lines against 45 planned |
+| `mem_presentAt_iff` (`Iff.rfl`), `not_mem_presentAt_of_ae_ne`, `not_mem_presentAt_iff`, `mem_presentAt_of_ae_eq`, `presentAt_nonempty` | as planned |
+| `IsCommonUnitPoint.symm`, `ClosePair.crossAt` | as planned |
+| `exists_isCommonUnitPoint` | as planned, written as `x + n ζ`, `x + n ζ̄` with `n` the unit vector from `x` to `y` and `ζ = d/2 + h i` of norm `1` (`Complex.norm_add_mul_I`): the four distances are one line each; exactly two by `EuclideanGeometry.eq_of_dist_eq_of_dist_eq_of_finrank_eq_two`, with the first implementer's way to `finrank ℝ ℂ = 2` (no new import) |
+| `ClosePair.exists_label_eq` | as planned (`Fintype.bijective_iff_injective_and_card` on `Sum.elim`) |
+| `ae_onSide_of_label` | as planned; the least radius over the pieces only (the two sides by hand: `CircleSide` has no `Finite` instance and needs none) |
+| `exists_onSide_of_cover`, `exists_inner_outer_of_cover`, `ae_label_left_of_forall_not_onSide` | as planned |
+| `exists_isTight_of_ae_side`, `IsTight.closure_inter_closure_eq` | as planned |
+| `ThreePiece.exists_second_unit_point_of_ae_side`, `.not_isFull_of_ae_side`, `.exists_ne_not_onSide_of_ae_side` | as planned |
+| `ClosePair.separatesAt_or` | as planned |
+| `ClosePair.lone_of_cover` | § 3.3's five children, in order; the middle step as one sentence used twice — *no closed side of `S(w)` holds all the pieces of `x` but one* (`hstar`, from `exists_ne_not_onSide_of_ae_side`) — at the inside against the outer piece and at the outside against the inner one, which names the third piece as crossing |
+| `ClosePair.separatesAt_right_of_isFull` | by contradiction through `lone_of_cover`, closed by `ThreePiece.not_isFull_of_ae_side` (3 lines) |
+| `ClosePair.label_mem_presentAt_of_isFull_right` | as planned, as one statement per side `s` of `S(x)` (*if one piece of `x` only is on the closed side `s` of `S(w)`, its label is present*), used at the two sides |
+| `ClosePair.presentAt_eq`, `ncard_inner_outer` | as planned |
+| `closePair_forced_pieces`, `closePair_lone`, `closePair_both_separate`, `closePair_four` | as planned (the general statement at `C.exists_label_eq`) |
+| `closePair_both_saved` | as planned, through one helper (below) |
+| the three spec examples of `Plane/ClosePair` | as planned |
+
+**Helpers added** (two, both in `Plane/ClosePair`; each name searched in `Proofs/` of `main` and of every worktree: no
+other declaration; for each the statement's shape was looked for first):
+- `exists_perm_fin_three : i ≠ j → i ≠ k → j ≠ k → ∃ σ : Equiv.Perm (Fin 3), σ 0 = i ∧ σ 1 = j ∧ σ 2 = k` — what
+  `lone_of_cover` needs to hand `OneOfEach` its permutation; `Equiv.ofBijective` on `![i, j, k]`, injective by `decide`.
+- `ThreePiece.HasArcEdges.saves_of_separatesAt : D.HasArcEdges → D.SeparatesAt w → D.Saves w` — the one-member form of
+  C124-BOTH's second clause (the edge of the inner and the outer piece lies on `S(w)` and holds an arc from the point).
+  A consumer holding one arc-edged member that separates has its saving without the pair.
+
+**No statement and no definition changed** — on the kernel's side, with a control: `statements-after-1.txt` (the dump on
+this stage's build) against `statements-before.txt`, and the `example` heads of the two files as text against the base
+commit `ab6697478`: **111 named constants compared (types; values of definitions; the three data fields of the two
+decompositions given as data), 9 example heads, no difference; 2 new named constants, the helpers above**
+(`data/fs124/i3/logs/statement-diff-1.txt`, exit 0). Control (`--control`): one stored statement, one definition's value,
+one data field of `sectorPoint` and one example's head changed in the second input — 4 of 4 reported
+(`logs/statement-diff-1-control.txt`). `git diff` on the two files removes 49 lines, each a `sorry`.
+
+**Unused hypotheses, reported and not dropped** (each is a binder of a statement of the skeleton; the build prints no
+`unused variable` warning, since each is named in a term or is an instance-free binder the linter does not flag at a
+`theorem`):
+- `ThreePiece.exists_second_unit_point_of_ae_side` and `.not_isFull_of_ae_side`: every hypothesis is read.
+- `closePair_forced_pieces` … `closePair_four`: `hc.measurable` is not read (the planner's G1); `hU`, `hw`, `hwu` are.
+- `exists_isTight_of_ae_side`: `hU` and `hw` are read (the disc inside `U`).
+- `ClosePair.ncard_inner_outer`: no hypothesis beyond the pair.
+Nothing beyond what the planner's § 2.3 already records.
+
+**The price, as measured.** 49 leaves; 649 lines added, 49 removed; the interface in one pass and one further `lean` run
+(three errors: a `simp` normal form of `cos`, two `decide +revert` that reverted too much), `Plane/ClosePair` in two
+passes of 16 leaves, the first with one error (`zero_le` takes no explicit argument at the pin) and the second with one
+linter note (an unused `simp` argument); each `lean` run about 3 s; one build, 9m42s.
