@@ -26,55 +26,46 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
-## 0d. READ THIS FIRST — brought current at 17:49 UTC, 2026-10-07 (after the compaction Kooshi asked for at 16:21)
+## 0d. READ THIS FIRST — brought current at 19:38 UTC, 2026-10-07 (after the compaction Kooshi asked for at 16:21)
 
-**Held / Derived / Opened.** FS-132's first theorem (the four-way exclusion, whole plane) is **held** (`783e7bdb`).
-**FS-124's disc criterion is HELD: landed (gated `24a42aa9`) and filed (`1344fdc0` — THE NEXT FILING'S FACT-AUDIT BASE;
-the next landing's previous receipts are `data/fs124/l1/gate/receipt-{axioms,vacuity,assumptions}-final.log`; FS-124
-inventory items 38, 40).** FS-124 is **Derived** (`plans/FS124-derivation.md`, 30 entries; rows 161–164); **all nine
-statements of its second module are kernel-checked on branch `fs124-wi3`** (items 36–41), not landed. FS-136, "the point
-across" (`plans/STUB-covering-pairs.md`), is **Opened**, ranked first, **its first round in: ten entries, each derived,
-one mind** (inventory `plans/FS136-close-inventory.md`, items 1–7; claim list `data/fs136/claims.md`; record
-`plans/FS136-E1-derivation.md`); no value moved. **NO LANDING IS IN FLIGHT.**
+**Held / Derived / Opened.** Held: FS-132's first theorem (`783e7bdb`); FS-124's disc criterion (gated `24a42aa9`, filed
+`1344fdc0`). **FS-124 is Derived; every statement of its second module is kernel-checked on two branches and its landing is
+in flight (below).** **FS-136, "the point across", is DERIVED and filed (`07bf6096` — THE NEXT FILING'S FACT-AUDIT BASE)**:
+`plans/FS136-derivation.md`, 21 entries, one mind each; rows 165–167; G100 filed; every statement is about colourings that
+already have named regions or corners; no value moved (FS-136 inventory items 1–17). **FS-137, collars
+(`plans/STUB-collars.md`), is minted, unranked.** Ledger rows 1–167; grokkings to G100; stubs to FS-137; `CLAUDE.md` 68,188
+of 80,000 bytes; grokkings 186,876 of 200,000.
 
-**Three jobs are running** (agent ids in the scratch file `agents.txt`, never in a repo file). **Disk is at 27 GB free**:
-ask Kooshi before removing any worktree's build copy.
-2. **FS124-I4 is back** (FS-124 inventory item 47): the three witnesses and the sector module's two leaves are proved on
-   branch `fs124-wi3` (tip `e33b5088`); the branch's one `sorry` is the θ-leaf. **The module is landed once, eight
-   modules, when FS124-I5 is back** (ruling 47 (a)) — see 2b for the join.
-2a. **FS136-K1** (kernel planner, **blind first**; launched 19:20 UTC; FS-136 inventory item 16) — seven statements of FS-136
-   from `data/fs136/claims-K1.md`, in worktree `fs136-wk1` (**the old `fs124-wk2` tree, moved; branch `fs136-wk1`**).
-   **While it is blind, commit subjects on `main` name no route for those statements.** At its "phase 1 committed"
-   message: lift the fence by reply, naming the entries and the three statements with no second derivation
-   (C136-FORCED, C136-CLASS's order, C136-COLLAR). At its hand-back: an implementer on its skeleton.
-2b. **FS124-I5** (implementer; launched 19:07 UTC; FS-124 inventory items 44, 46) — the θ-lemma's module. **The ruling is
-   made: the lemma is built** (the planner priced it at about 500 lines with no Jordan curve theorem, since the
-   definition already assumes the three regions). `Plane/ThreeArcs` on branch `fs124-wk3` (tip `8cd74a6b`): 41 theorems,
-   21 proved, 20 for this job. It does not write `Plane/SectorPoint.lean`. **At the join** (the landing job's first
-   act, when FS124-I4 and FS124-I5 are both back): merge `fs124-wk3` into `fs124-wi3`, add `import
-   Proofs.HadwigerNelson.Plane.ThreeArcs` to the sector module and the two lines that close
-   `ThreePiece.IsSector.hasArcEdges` (in the planner's report and its record § 3.1), add the spec example
-   `example : sectorPoint.HasArcEdges := sectorPoint_isSector.hasArcEdges`, then merge `main` and run the full gate on
-   eight modules (`CircleCrossing`, `OnePiece`, `ThreePiece`, `ClosePair`, `ClosePairWitness`, `ClosePairModel`,
-   `ThreeArcs`, `SectorPoint`); reword the two docstrings FS124-I4 names; the audit blocks are files under
-   `data/fs124/i2/` … `i5/`. Owed after it: the corrected `uses only` line of C124-FORCED.
-3. **FS136-Z1** (the record job; launched 18:59 UTC; FS-136 inventory items 8–15) — **both derive rounds are in: twenty
-   entries, each derived, one mind, kernel pending; every one is about colourings that already have named regions or
-   corners, and none fixes or bears on the value.** Round two: the forward step (a corner with one label left has it),
-   the forced closure — it stalls on every seed tried, the seven-colouring's included — the four held stops excluded by
-   the corner patterns at two points alone, and **C136-COLLAR: a point carrying five of six labels forces the sixth along
-   arcs of its unit circle** (one mind; the one entry that forces a region of definite extent). The record job writes
-   `plans/FS136-derivation.md`, the errata, **a new stub FS-137 (what collars force)**, and the front page's drafts in
-   `plans/FS136-Z1-record.md`. **At its hand-back: file its drafts** (pattern `data/fs124/z1/file_fs124_derived.py`;
-   fact audit `--base 1344fdc0` and `--dupes`; ledger rows from 165; the atlas; the asking lane's re-drafted first row
-   from `plans/POROS-2026-10-07-fs136-round1.md` § Draft re-rank) **→ FS-136 Derived; then the asking lane's re-rank and
-   next card** (`poros`; the collar's stub is a candidate; pattern `data/fs131/briefs/scripts/mk-fs124-p1.py`). Queue
-   lines 15 and 17–20 are open for tomorrow's search; line 16 is held on 15.
+**Running** (agent ids in the scratch file `agents.txt`, never in a repo file). **Disk is at 27 GB free**: ask Kooshi before
+removing any worktree's build copy; reuse a retired tree instead of copying a build.
+1. **FS124-L2 — A LANDING IN FLIGHT since 19:38 UTC** (FS-124 inventory item 49; worktree and branch `fs124-wi3`; brief
+   `data/fs124/briefs/FS124-L2-landing.md`). **Until it is back: no `CLAUDE.md` filing, and nothing committed to `main`
+   outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`.** It joins branch
+   `fs124-wk3` (the three-arcs module), closes the last `sorry` by two written lines, merges `main`, gates eight modules,
+   sends one line when green, pushes, hands back with drafts. Then: the three digests against
+   `data/fs124/l1/gate/receipt-{axioms,vacuity,assumptions}-final.log`; file its drafts by a script on the pattern of
+   `data/fs124/l1/file_fs124_landed.py` (counts; rows 162–163's grades; the open-milestones sentence; item 31's clause; the
+   theorem record's dated lines and its stale head; C124-FORCED's `uses only` line; `LEAN.md`'s unfiled lines; the atlas
+   nodes `ONEPIECE`, `PAIRPAYS`); fact audit `--base 07bf6096`; decide from its list of which of the thirty entries are
+   kernel theorems whether FS-124 is Closed; **tell Kooshi: held — the nine statements, the clause in its authors'
+   wording included.** If my push is rejected because it landed first: `git pull --rebase`, push, never force.
+2a. **FS136-K1** (kernel planner, **blind first**; FS-136 inventory item 16) — seven statements of FS-136 from
+   `data/fs136/claims-K1.md`, in worktree `fs136-wk1` (**the old `fs124-wk2` tree, moved; branch `fs136-wk1`** cut from
+   `fs124-wi3` at `e33b5088`). **While it is blind, commit subjects on `main` name no route for those statements.** At
+   its "phase 1 committed" message: lift the fence by reply, naming `plans/FS136-derivation.md` §§ 1–2 and the three
+   statements with no second derivation (C136-FORCED, C136-CLASS's order, C136-COLLAR). At its hand-back: an implementer
+   on its skeleton (its branch must merge the landed module first).
+3. **The asking lane's re-rank and next card** — to launch now if not yet launched (see FS-136 inventory's last item):
+   re-rank after FS-136 Derived; FS-137's question and rank; where FS-124's eight cases live; its draft is filed after
+   the landing.
 
-**A side page, published at Kooshi's word (18:0x UTC)**: the unit-step puzzle (`visualizations/unit-step-puzzle/page.html`,
-artifact `https://claude.ai/artifact/Yafj379vqWgrVUZaaK3AQr`, private): colour the `q × q` torus so that no two cells a
-modular unit step apart share a colour; at 23 six and seven colours are open (row 71). To change it: edit `page.html`,
-run its `build.py` and `test.js`, publish the same path again.
+**A side page, published at Kooshi's word**: the unit-step puzzle (`visualizations/unit-step-puzzle/page.html`, artifact
+`https://claude.ai/artifact/Yafj379vqWgrVUZaaK3AQr`, private). To change it: edit `page.html`, run its `build.py` and
+`test.js`, publish the same path again.
+
+**Open with Kooshi, unanswered** (told, with defaults): the disk (default: I leave old build copies alone); a blind
+verifier on the collar (default: none; the kernel planner's blind phase is the second look). **Corrections told to him
+today**: three sentences of mine about FS-136, each corrected in the next report.
 
 **For FS-136's kernel claim list, when its planner is briefed** (FS-136 inventory rulings 4 (b), 5 (d)): the head statement
 (the table), the label form of the count, the one-point form — three short statements over `ae_onSide_of_label`, a leaf
