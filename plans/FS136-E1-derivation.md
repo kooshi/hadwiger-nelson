@@ -230,3 +230,137 @@ control: rings-small
 **Predictions scored.** P1 — **met** on both parts (0.8, 0.6). P2 — **met** (0.55): four of four. P7 — **no** (0.2), as
 registered. The asking lane's: "C-RINGS-READ's statement holds on the strip, the disk and the flower 0.85" — met; "on
 FS114-Y2-BOWTIE 0.5" — met.
+
+
+## Stage 3 — SAVED: a relay from the kernel lane, addressed first; then C136-TABLE, C136-COVER, C136-ONE
+
+### 3.0 The relay (FS124-K2's hand-back, through the coordinator, after Stage 2 was saved) — read before going on
+
+Read: `.claude/worktrees/fs124-wk2/plans/FS124-kernel-plan-2.md` § 2.3, G1–G8 (ll. 286–317), whole; the coordinator's
+summary of its § 4.2; nothing else of that file. **How it changes this job's work.**
+
+1. **C136-TABLE is the planner's G6 over a finite set of members, and no more.** Its `ae_onSide_of_label` — "near `w`,
+   almost every point on the side `σ` of `S(x)` that carries the label of a piece of `x` has that piece on the closed side
+   `σ` of `S(w)`" — is C136-TABLE at `m = 1` once "that piece" is read as *every* piece of `x` with that label (which its G4
+   gives: "a piece at `x` that is **not** on the closed side `σ` of `S(w)` has its label almost nowhere on the side `σ` of
+   `S(x)` near `w`", for each of finitely many pieces). C136-TABLE is the conjunction of that statement over the members,
+   with the least radius. **Reached by two minds** — the planner blind, from nine statements; this job from the map entry
+   FS110-N-SEAM and the count's argument — **and one route**: C124-TYPE per piece, then finiteness. Not two independent
+   derivations: same lemma, same step. What this record adds to G6 is no mathematics: the words (inner-pure, outer-pure,
+   barred; a cell), the reading of held objects in them, and the use as an exclusion criterion (Stage 5).
+2. **C136-COVER is its G5 with the conclusion on labels.** G5's declaration `exists_inner_outer_of_cover` concludes a piece
+   on each closed side — the posed conclusion, which one region cut along the circle satisfies. The label form follows from
+   G6 (`ae_onSide_of_label`) and is not stated in the skeleton as I read its § 2.3: **a statement for the kernel lane, if
+   the coordinator routes it** (report, INVENTORY).
+3. **G3 — `|w − x| = 1` is not used by C124-TYPE** — is the recognition's split feature (Stage 1), found there from the
+   statement of C124-SHADOW-OPEN. C136-TABLE keeps the hypothesis in its statement, because the cells it speaks of are cut
+   at `w` only by circles through `w`, and says in its *uses only* line that the argument does not consume it.
+4. **C124-LONE's Step II has had its second look** (the planner's § 4.2, by the coordinator's summary: its blind route is
+   the deriver's; "the step stands as written"; two corrections filed under it). C136-PARTNERS cites C124-BOTH as before —
+   one mind, kernel pending — and **I do not read Step II myself**: P4's second half is withdrawn, not scored.
+5. **The question it leaves (its unit-square witness: is it the local picture of a held map?) — no, by the distances.**
+   Its members are `√2` apart. The close complementary pairs of three-label points read on the strip are `0.7569`, `1.732`
+   and `1.9364` apart, on the disk `0.9416` and `1.1755`, on the kept model `1.0` (`data/fs124/p3/pairs_read.out`,
+   "distances="; floats, the asking lane's reader). None is `√2`. The one held unit square found by this job's reader is
+   the flower's `e(180°), (−1, −1), e(270°), p` (`data/fs136/e1/out/sixfrag.txt`), whose members carry three and four
+   labels and where one member alone pays: a different pattern. So the kernel's witness and the read models are not one
+   object, as far as these readers see.
+
+### 3.1 The three entries
+
+derivation: C136-TABLE
+  statement: Let c be a weak k-colouring of an open set U, w a point of U, x_1, …, x_m distinct points with |x_i − w| = 1, and 𝒫_i a family of pieces at x_i. Then there is η > 0 such that almost every point z of B(w, η) has a label a with the property: for every i such that a is a label of 𝒫_i, a is inner-pure at w for 𝒫_i if |z − x_i| < 1, and outer-pure at w for 𝒫_i if |z − x_i| > 1.
+  uses only: C124-TYPE (`plans/FS124-derivation.md` § 2; [hand] over C124-SHADOW-OPEN, one mind — inherited; its argument read whole, C124-SHADOW-OPEN's read at its statement) once for each piece and each side on which the piece has a point; that a non-empty open set inside a closed disc has a point of the open disc; that the families and the set of members are finite. Not consumed: the number of labels; that the pieces of one member are disjoint, have different labels or fill a neighbourhood; |x_i − w| = 1 (the kernel planner's G3) — it is in the statement because the cells are cut at w by circles through w
+  not claimed: that a weak colouring has a piece; anything about a label of no 𝒫_i (it is unconstrained); a converse — a label left at every cell does not give a colouring; the largest η (it is half the least witness depth: for a piece crossing by a thin horn it is of the order of the horn's width)
+  argument: § Argument — the table
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: every held object at every common unit point of a covering pair inside it: 105 points of the strip, 60 of the disk, 42 of FS116-Y2-SIXFRAG, 34 of FS114-Y2-BOWTIE, 22 of the small fragments and the kept model, and at seven 96 of R7 — no sample off its cell's labels (controls `rings-held`, `rings-strip`, `rings-small`, `rings-r7`)
+  prior art: partly: for maps, whole tiles and two members it is FS110-N-SEAM (b) with N-E2 (`plans/FS110-derivation.md` l. 189, `plans/FS110-N-proof.md` ll. 96–119; two minds, one blind); at one member it is the kernel planner's G6, `ae_onSide_of_label` (FS124-K2, blind, one mind, typed in a skeleton, not in the kernel) — the same route; C124-FORCED-PIECES's first half for three pieces of different labels; print: plan §PA item 2 and zbMATH "ab:"unit circle" & ab:colo* & ab:plane & ab:"chromatic number" & (ab:boundary | ab:arc | ab:arcs)" (1), "ab:"distance 1" & ab:colo* & ab:plane & (ab:trichromatic | ab:"three colo*" | ab:tricolo*)" (0) — not found
+  handoff: de Bruijn — it is `ae_onSide_of_label` at each of finitely many members, intersected; read the formal statement back against "every piece of that label", not "some piece"
+
+**Class**: every weak `k`-colouring of an open set; finitely many points one unit from `w`, each with finitely many pieces.
+**Count**: every. **What is new beyond the held entries**: for maps nothing (FS110-N-SEAM (b)); in measure, beyond
+C124-FORCED-PIECES: any number of members, pieces and labels, labels repeated at a member, and the conclusion on labels.
+**What rests on it**: C136-COVER, C136-ONE, the four exclusions of Stage 5.
+
+derivation: C136-COVER
+  statement: Let c be a weak six-colouring of U, x, y points with 0 < |x − y| < 2, 𝒫_x, 𝒫_y families of pieces at x and at y such that each of the six labels is a label of 𝒫_x or of 𝒫_y, and w a point of U with |w − x| = |w − y| = 1. Then x or y separates at w by labels: one of the two families has a label all of whose pieces are inner at w and another label all of whose pieces are outer at w.
+  uses only: C136-TABLE with m = 2; that 0 < |x − y| < 2 makes w − x and w − y linearly independent, so each of the four cells cut at w by S(x) and S(y) meets every ball about w in a non-empty open set; that every label is a label of 𝒫_x or of 𝒫_y — where "six" is read, and it is read as "all the labels"; the identity (A ∨ C)(A ∨ D)(B ∨ C)(B ∨ D) = AB ∨ CD
+  not claimed: that a weak six-colouring has a pieced point or a covering pair; which member separates; that the two pure labels' pieces share more than the member; that separation suffices for w to be coloured — on FS116-Y2-SIXFRAG and FS114-Y2-BOWTIE a member separates at a point across and a cell is empty (Stage 5); anything for a pair whose labels are not all the labels (at seven, six of seven: C124-FORCED-SEVEN)
+  argument: § Argument — the count for two members, and for one
+  verdict: derived
+  grade: derived from: C136-TABLE
+  minds: 1
+  model: FS116-Y2-SIXFRAG at w = (−1, −1): x = e(180°) with labels 2, 3, 5 does not separate; y = e(270°) with labels 0, 1, 2, 4 has 0 inner-pure and 1 outer-pure; at seven, R7's 54 pairs of lattice points carrying all seven labels, each with a full table at its common unit points inside (control `rings-r7`)
+  prior art: known for maps: FS110-N-SEAM (a)–(b) with FS110-CALC's A-EXACT — "the union of the closure types is all six; disjointness is an extra hypothesis where a lemma needs it" (`data/fs110/claims.md` l. 327), members of any number of colours, families of any size, two and three minds; in measure, for two disjoint triples of three pieces: C124-FORCED-PIECES; for any two finite families, with the conclusion on pieces: the kernel planner's G5 (blind; the same route as mine); the conclusion on labels: here; print: not found (plan §PA)
+  handoff: de Bruijn — after `ae_onSide_of_label`: four non-empty open cells and one identity; the statement to read back is "a label all of whose pieces", since "an inner piece and an outer piece" is met by one region cut along the circle
+
+**Class**: every weak colouring whose labels are all carried by the two families (stated at six; the argument reads "all
+the labels"). **Verdict on the claim as posed**: derived, as the case of two pieced points with the weaker conclusion "has
+an inner and an outer piece" — and **restated**, because that conclusion is met by a degenerate case. **What is new beyond
+the held entries**: against FS110-N-SEAM — the class (no map; nothing assumed at `w`), and that the conclusion is about the
+members' pieces; against C124-FORCED-PIECES — members of any number of pieces and labels, and the label form. **My route is
+the kernel planner's** (C124-TYPE per piece, four cells, one identity); it is not a second derivation.
+
+derivation: C136-ONE
+  statement: Let c be a weak six-colouring of U, p a point with a family 𝒫 of pieces at p whose labels are all six, and w a point of U with |w − p| = 1. Then there is η > 0 such that almost every point of B(w, η) inside the unit circle about p has a label inner-pure at w, and almost every point of B(w, η) outside it a label outer-pure at w; so p separates at w by labels, and no label is present near w on both sides of that circle.
+  uses only: C136-TABLE with m = 1; that every label is a label of 𝒫; that both half-balls have positive measure
+  not claimed: that a weak six-colouring has a pieced point with six labels; that one label fills a side; that the points near w belong to the pieces of p — only that their labels are labels of pieces of p lying on that side; anything at seven (R7's lattice points carry six of seven, and the seventh fills their rings' gaps)
+  argument: § Argument — the count for two members, and for one
+  verdict: derived
+  grade: derived from: C136-TABLE
+  minds: 1
+  model: FS116-Y2-SIXFRAG's vertex p: its six sectors; at each ring point read, the sectors' labels inside and other labels of p outside (`data/fs136/e1/out/sixfrag.txt`: the twelve common unit points with six labels are p itself, read as a common unit point of six pairs; the ring points carry three and four labels, all labels of p)
+  prior art: partly: for maps FS116-N2-SIXRING ("the ring lies in Γ … every ring arc is a (Q) arc"; one mind, non-Siamese) and FS112-SIX (two minds, by FS116-Y2's § 2.3; not read by me); the asking lane posed this form (`plans/POROS-2026-10-07-fs124-round2.md` § 4.1); print: de Grey's and Gibbs's six-sector picture ([Polymath16threads] [08.17]–[08.18], by FS116-Y2's reading, not read by me) — the statement not found
+  handoff: de Bruijn — `ae_onSide_of_label` with the cover sentence at one point; one line after it
+
+**Class**: every weak colouring with a point whose family carries all the labels. **Verdict on the claim as posed**:
+derived, in the label form (the posed "has the label of a piece of `p` inner at `w`" is weaker where two pieces of `p` share
+a label). **What is new beyond FS116-N2-SIXRING**: no map and no non-Siamese clause — at that price: the conclusion is about
+labels on the two sides of the ring, not about which tile lies there. In the Siamese class that is all one can say, and it
+is what FS116-N2-SIXRING's *not claimed* line leaves open ("there an inner tile need not be p's").
+
+### Argument — the table
+
+For a piece `P` of `𝒫_i`: `P` is open and non-empty. If it is inner at `w` it lies in the closed unit disc about `w` and so
+has a point strictly inside `S(w)`; if outer, a point strictly outside; if crossing, both. C124-TYPE, with `x = x_i` (a
+point of the closure of `P`, one unit from `w`), gives for each such point a radius and a null set: with a point strictly
+inside `S(w)`, almost every `z` of the ball with `|z − x_i| > 1` has a label other than `P`'s; with a point strictly
+outside, almost every `z` with `|z − x_i| < 1`. Let `η` be the least of these finitely many radii and `N` the union of the
+finitely many null sets and of the circles `S(x_i)`. Take `z ∈ B(w, η) ∖ N`, `a = c(z)`, and `i` with `a` a label of `𝒫_i`.
+If `|z − x_i| < 1` and some piece of `𝒫_i` with label `a` were outer or crossing, it would have a point strictly outside
+`S(w)` and `z` would lie in its null set; so every piece of `𝒫_i` with label `a` is inner: `a` is inner-pure. The case
+`|z − x_i| > 1` is the same with the sides exchanged. ∎
+
+### Argument — the count for two members, and for one
+
+*Two.* `w − x` and `w − y` are unit vectors; were they dependent, `x = y` or `x + y = 2w`, that is `|x − y| = 0` or `2`. So
+`z ↦ (|z − x| − 1, |z − y| − 1)` is a local diffeomorphism at `w` and each of the four cells `{±(|z − x| − 1) > 0,
+±(|z − y| − 1) > 0}` meets `B(w, η)` in a non-empty open set, of positive measure. Take a point of it off `N`: its label is
+one of the six, hence a label of `𝒫_x` or of `𝒫_y`, and by C136-TABLE it is pure on that cell's side at each member that
+has it. Write `A`, `B` for "`𝒫_x` has an inner-pure label", "an outer-pure label", and `C`, `D` the same for `𝒫_y`: the four
+cells give `A ∨ C`, `A ∨ D`, `B ∨ C`, `B ∨ D`, whose conjunction is `AB ∨ CD`. An inner-pure and an outer-pure label of one
+family are different labels. ∎ *One.* With `m = 1` every point of `B(w, η) ∖ N` inside `S(p)` has a label of `𝒫`, hence an
+inner-pure one; outside, an outer-pure one; both half-balls have positive measure, and no label is both. ∎
+
+*A remark the count's home gives (Stage 1, home 2), not entered.* To first order each label's available directions at `w`
+are an intersection of open half-circles. So where every label is a label of some member on the unit circle about `w`, two
+labels can be all that is present at `w` only if they are split along one member's circle — the two-label points of the
+reading (§ 2.2 item 5) — and otherwise at least three are present.
+
+control: rings-r7
+  of: C136-TABLE — at seven, on R7 (25 Reuleaux tiles and 25 concave tiles about the origin): every lattice point read carries six of the seven labels, two adjacent ones carry all seven between them, and at every common unit point inside the table holds with no cell empty. The fault moves one member of every pair by 0.01
+  run: python3 ../data/fs136/e1/rings_read.py r7 --brief
+  expect: r7: labels=7 members=16 centres=16 covering-pairs=54 on-a-ring=54 inside=96[L2:96] violations=0 not-inside=12[L2:12] least=1.7321:8 stop-class=L2:12
+  fault: python3 ../data/fs136/e1/rings_read.py r7 --brief --fault
+
+control: cover-count
+  of: C136-COVER — the count as a function of the states alone: over the 50,625 assignments, to four labels, of a state at x and a state at y (inner-pure, outer-pure, barred, or not a label of that member; not absent at both), the number in which each of the four cells has a label no state bars and neither member has an inner-pure and an outer-pure label; the fault lets a label barred at x serve x's cells
+  run: python3 -c "import itertools as I;S=['in','out','bar','-'];print(sum(all(any(a in (s,'-') and b in (t,'-') for a,b in st) for s in ('in','out') for t in ('in','out')) and not ((any(a=='in' for a,b in st) and any(a=='out' for a,b in st)) or (any(b=='in' for a,b in st) and any(b=='out' for a,b in st))) for st in I.product([(a,b) for a in S for b in S if (a,b)!=('-','-')],repeat=4)))"
+  expect: 0
+  fault: python3 -c "import itertools as I;S=['in','out','bar','-'];print(sum(all(any(a in (s,'-','bar') and b in (t,'-') for a,b in st) for s in ('in','out') for t in ('in','out')) and not ((any(a=='in' for a,b in st) and any(a=='out' for a,b in st)) or (any(b=='in' for a,b in st) and any(b=='out' for a,b in st))) for st in I.product([(a,b) for a in S for b in S if (a,b)!=('-','-')],repeat=4)))"
+
+**Predictions scored.** P3 — **met** (0.93). The asking lane's "C-COVER derived as posed 0.9" — derived, and restated;
+"C-ONE 0.9" — derived, in the label form.
