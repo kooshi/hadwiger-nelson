@@ -1,0 +1,250 @@
+CLEAN  [FS131-K7] HadwigerNelson.Plane.ArcMap.Simple.simpleOn: exactly the standard three
+CLEAN  [FS131-K7] HadwigerNelson.Plane.ArcMap.simpleOn_univ: exactly the standard three
+CLEAN  [FS131-K7] HadwigerNelson.Plane.ArcMap.SimpleOn.mono: exactly the standard three
+CLEAN  [FS131-K7] HadwigerNelson.Plane.ArcMap.simpleOn_ball_iff: exactly the standard three
+CLEAN  [FS131-K7] HadwigerNelson.Plane.ArcMap.SimpleOn.coneAt_eq_angleIcc: exactly the standard three
+CLEAN  [FS131-K7] HadwigerNelson.Plane.ArcMap.SimpleOn.coneAt_eq_angleIcc_sep: exactly the standard three
+CLEAN  [FS131-K7] HadwigerNelson.Plane.halfDisc_simpleOn: exactly the standard three
+CLEAN  [FS131-K7] HadwigerNelson.Plane.ArcMap.not_simpleOn_of_not_jordan: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.coloursAt_inter_eq: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_dist_lt: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_mem_closure: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.disjoint_tipColours_outerTileColours: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.isTip_comm: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.tipColours_comm: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.mem_outerTileColours_iff: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.cos_nonpos_of_coneAt_of_disjoint: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.coneAt_subset_of_subset_closedBall: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.coneAt_subset_of_disjoint_ball: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.inter_ball_nonempty_of_coneAt: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.exists_not_mem_closedBall_of_coneAt: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.inter_ball_nonempty_of_inward_cone: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.IsTip.coneAt_subset: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.isHub_iff: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.GammaFreeRing.qFreeRing: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.QFreeRing.isHub: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.GermIn.ringPt_mem_closure: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.halfPlane2_gammaFreeRing: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.ringGerm_inward: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.ringGerm_outward: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.star_coloursAt: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.star_absent: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.star_outer_cone: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.star_flank: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.star_flank_interior: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.star_tip_nonempty: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.star_outer_nonempty: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.ringPt_ringPt_add_pi: exactly the standard three
+CLEAN  [FS131-K8] HadwigerNelson.Plane.ArcMap.v6_anti: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.allZ_iff: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.anyZ_iff: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.allF_iff: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.anyF_iff: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.stmtB_sound: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.table: a subset — ['Quot.sound', 'propext']
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.sub_one_not_cons: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.mem_shapes_single: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.mem_shapes_double: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.exists_shape: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.count: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.countModel_hyps: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.doublesB_sound: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.doublesTable: a subset — ['Quot.sound', 'propext']
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.V6Count.twoDoubles: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.exists_fin_surj_of_card_le: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.exists_fin_tileAt: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.isPreconnected_sphere_complex: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.finite_tileAt: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.exists_ball_tileAt: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.TileAt.inter_sphere_nonempty: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.sphere_subset_iUnion_closure_tileAt: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.mem_closure_diff_closedBall: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.germ_Icc_subset_closure: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_region_of_sole_tip: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.ringPt_ringPt_third_sub: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.ringPt_ringPt_third_sub_two: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.ringPt_ringPt_two_thirds: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.not_sole_tip_of_adjacent_changePoints: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.germIn_of_mem_isOpen: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.germIn_region_unique: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.GammaFreeRing.exists_germIn: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_germIn: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.GammaFreeRing.exists_absent_pair: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.germCol_eq: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.germCol_right: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.germCol_left: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.germCol_const: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.germCol_rotate_ne: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.exists_isChangePoint_iff: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.germCol_change_rotate: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.germCol_change_int: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.exists_germCol_change: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.exists_third_change: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.halfPlane2_covers: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.ringPt_sixth_congr: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.exists_int_of_three_dist_le_one: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.not_double_two_classes: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.ringPt_mem_of_sixth: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.sixth_cons_of_mem_closure: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.exists_two_double_tiles: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.fin_four_three_pairs: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.GammaFreeRing.changePoint_gap: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.v6_hubs: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.v6_hug: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.emptyNS: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.v6_hubs_vacuous: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.v6_hug_vacuous: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.doubleTip: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.intCast_zmod_six_of_half_le_cos: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.ringPt_sixth_dist_le_one: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.v6_count: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.exists_ne_mem_closure_inter_of_split: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.exists_tileOf_of_germIn: exactly the standard three
+CLEAN  [FS131-I8A] HadwigerNelson.Plane.ArcMap.star_recip: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.IsEdgeDir.symm: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.IsStar4.isEdgeDir₁₂: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.IsStar4.isEdgeDir₂₃: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.IsStar4.isEdgeDir₃₄: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.IsStar4.angleIcc_subset_cone₂: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.IsStar4.angleIcc_subset_cone₄: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.isSemiHub_iff_qSide: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.isFullSemiHub_iff_qSide: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.qcol_cw: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.qcol_ccw: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.IsTile.not_mem_closure_of_not_subset_ball: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.IsRingArc.germIn_closure: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.GermOnQWith.germIn_closure: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.germOnQ_bar_uPlus: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.germOnQ_bar_vMinus: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.germOnQ_bar_uMinus: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.germOnQ_bar_vPlus: exactly the standard three
+CLEAN  [FS131-K8b] HadwigerNelson.Plane.ArcMap.closure_inter_subset_sphere: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.exists_int_of_angleIcc_subset: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.int_eq_zero_of_two_pi_mul_lt: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.int_eq_zero_of_abs_two_pi_mul_lt: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.segment_eq_image_ray: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.Arc.InitialPiece.exists_param: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.branchPt_mem_Rgn: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.branchPt_curveGerm_add: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.not_both_mem_Rgn_curveGerm: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.mem_closure_tile_of_near: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.ncard_tileAt_eq: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.IsSectorChart.tileAt_equiv: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.exists_sectorChart_tileAt: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_branch_of_isPreconnected: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_branch: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_between: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.mem_coneAt_add_int_mul_two_pi: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.false_of_antipodal_gaps: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.star_anti_ne: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.star_anti_count: exactly the standard three
+CLEAN  [FS131-I8B] HadwigerNelson.Plane.ArcMap.star_anti: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.qcol_inner_tile: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.IsRingArc.exists_sub_of_germIn: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_ccw: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_cw: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.exists_far_of_germPair: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.qcol_not_one_arc: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.germPair_inner_ne: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.germPair_swap: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.germIn_closure_tile_of_near: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_germ: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.ringTile_uMinus: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.ringTile_vMinus: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.ringTile_vPlus: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.ringTile_uPlus: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.two_pi_mul_int_le_of_neg: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.two_pi_le_mul_int_of_pos: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.BranchGerms.nextβ_four: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.isRingArc_of_edge: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.simpleOn_not_hasRepeatedColour: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.four_le_of_bothKind: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.IsStar4.rotate: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.IsStar4.shift: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.IsStar4.exists_first: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.IsStar4.opposite_of_disjoint: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.exists_isStar4: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.ringArc_star: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.ArcMap.germPair_dicho: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.halfDisc_valid: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.halfDisc_nonSiamese: exactly the standard three
+CLEAN  [FS131-I8C] HadwigerNelson.Plane.halfDisc_ncard_coloursAt_zero: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.crossed_star_data: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.crossed_no_tip: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.crossed_outer: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.crossed_coloursAt: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.crossed_four: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.e_add_sub_e_sub: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.GermIn.tangent_mem_coneAt: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.crossed_changePoint: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.crossed_semiHub: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.ringPt_ringPt_four_thirds: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.IsRingArc.inner_ne_outer: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.eq_of_ncard_eq_four: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.eq_triple_of_ncard_le_three: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_witness: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.mem_closure_of_coneAt_toward: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.semiHub_edge: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.semiHub_places_O: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.semiHub_places_T: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.semiHub_places: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.transferQC: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.norm_e_add_e_sub_e_sq: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.one_lt_norm_e_add_e_sub_e: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ_closure: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.not_germOnQ_of_germIn_region: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_of_sole_outer: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints: exactly the standard three
+CLEAN  [FS131-I8D] HadwigerNelson.Plane.ArcMap.outerAdj: exactly the standard three
+BLOCK  FS131-K7: 8 records — 8 on exactly the standard three, 0 on a proper subset
+BLOCK  FS131-K8: 30 records — 30 on exactly the standard three, 0 on a proper subset
+BLOCK  FS131-I8A: 66 records — 64 on exactly the standard three, 2 on a proper subset
+BLOCK  FS131-K8b: 18 records — 18 on exactly the standard three, 0 on a proper subset
+BLOCK  FS131-I8B: 21 records — 21 on exactly the standard three, 0 on a proper subset
+BLOCK  FS131-I8C: 35 records — 35 on exactly the standard three, 0 on a proper subset
+BLOCK  FS131-I8D: 29 records — 29 on exactly the standard three, 0 on a proper subset
+MODULE RingCalculus.Basic: 32 hand-written theorems, 3 generated
+MODULE RingCalculus.Star: 17 hand-written theorems, 9 generated
+MODULE RingCalculus.Empty: 20 hand-written theorems, 11 generated
+MODULE RingCalculus.HubCount: 15 hand-written theorems, 34 generated
+MODULE RingCalculus.TilesAt: 7 hand-written theorems, 0 generated
+MODULE RingCalculus.SoleTip: 8 hand-written theorems, 0 generated
+MODULE RingCalculus.RingColour: 16 hand-written theorems, 1 generated
+MODULE RingCalculus.StarChart: 16 hand-written theorems, 19 generated
+MODULE RingCalculus.SemiHub: 63 hand-written theorems, 7 generated
+MODULE RingCalculus.SemiHubPlaces: 22 hand-written theorems, 15 generated
+MODULE RingCalculus.OuterAdj: 6 hand-written theorems, 0 generated
+MODULE SimpleOn: 8 hand-written theorems, 0 generated
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.QFreeRing.not_germOnQ
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.outerTileColours_subset
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.IsFullSemiHub.isSemiHub
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.SemiKind.O.sizeOf_spec
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.SemiKind.T.sizeOf_spec
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.SemiHub: HadwigerNelson.Plane.ArcMap.IsStar4.cone₂
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.IsTip.tileAt
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.SemiHub: HadwigerNelson.Plane.ArcMap.IsStar4.le₂₃
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.SemiHub: HadwigerNelson.Plane.ArcMap.IsStar4.tileAt
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.SemiHub: HadwigerNelson.Plane.ArcMap.IsStar4.ne
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.GammaFreeRing.not_isRingArc
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.SemiHub: HadwigerNelson.Plane.ArcMap.IsStar4.le₁₂
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.SemiHub: HadwigerNelson.Plane.ArcMap.IsStar4.cone₁
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.SemiKind.ofNat_ctorIdx
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.SemiHub: HadwigerNelson.Plane.ArcMap.IsStar4.le₄₁
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.TileAt.subset_ball
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.SemiHub: HadwigerNelson.Plane.ArcMap.IsStar4.le₃₄
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.SemiHub: HadwigerNelson.Plane.ArcMap.IsStar4.cone₃
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.GermOnQWith.germOnQ
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.IsOuterTileAt.not_isTip
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.IsHub.not_isSemiHub
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.SemiHub: HadwigerNelson.Plane.ArcMap.IsStar4.cone₄
+UNREGISTERED (no record in the line's seven blocks; the gate's records check decides) RingCalculus.Basic: HadwigerNelson.Plane.ArcMap.tipColours_subset
+axioms receipt: 207 records in 7 blocks — 205 on exactly the standard three, 2 on a proper subset, 0 bad; 329 theorems in 12 modules (230 hand-written, 99 generated; 23 hand-written with no record in the seven blocks), 0 bad; control `FS131L8AControl.planted_sorry` prints ['sorryAx'] with root ['FS131L8AControl.planted_sorry@(this file)']

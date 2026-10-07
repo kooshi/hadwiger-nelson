@@ -1,0 +1,21 @@
+faithful: scripts/Axioms.lean: 6524 non-blank lines; #print axioms lines 5757 = ours 5728 + theirs 5722 - base 5693; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): scripts/Axioms.lean: 6523 non-blank lines; #print axioms lines 5757 = ours 5728 + theirs 5722 - base 5693; faults 1
+  LOST "/-! ## FS131-I8D — FS-131 wave 8's second implementer of the semi-hub rows: `Plane/RingCalculus/Semi" (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): scripts/Axioms.lean: 6525 non-blank lines; #print axioms lines 5757 = ours 5728 + theirs 5722 - base 5693; faults 1
+  EXTRA "/-! ## FS131-I8D — FS-131 wave 8's second implementer of the semi-hub rows: `Plane/RingCalculus/Semi" (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): scripts/Axioms.lean: 6525 non-blank lines; #print axioms lines 5757 = ours 5728 + theirs 5722 - base 5693; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+plant (a record of theirs doubled): scripts/Axioms.lean: 6525 non-blank lines; #print axioms lines 5758 = ours 5728 + theirs 5722 - base 5693; faults 3
+  COUNT #print axioms: have 5758, expected ours 5728 + theirs 5722 - base 5693
+  EXTRA '#print axioms HadwigerNelson.Plane.ArcMap.crossed_star_data' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  TWICE HadwigerNelson.Plane.ArcMap.crossed_star_data (2)
+  -> fired (TWICE)
+plant (a record of theirs dropped): scripts/Axioms.lean: 6523 non-blank lines; #print axioms lines 5756 = ours 5728 + theirs 5722 - base 5693; faults 2
+  COUNT #print axioms: have 5756, expected ours 5728 + theirs 5722 - base 5693
+  LOST '#print axioms HadwigerNelson.Plane.ArcMap.crossed_star_data' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (COUNT)
+self-test: PASS
