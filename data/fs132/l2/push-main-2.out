@@ -1,0 +1,13 @@
+second fast-forward: e2584ab5093a848842fdc806680c35924b06b164
+paths that differ between the landed tip 3ab61fcd and this commit, by top-level entry:
+      5 data
+      5 plans
+outside plans/ and data/: 0
+paths that differ from the gated commit b46a9d57 outside plans/, data/, .claude/, BIBLIOGRAPHY.md, LEDGER.md, LEAN.md, RUNNING.md: 0
+origin/main before, by ls-remote: ca8b7bc571473df551330cb4eb7320c64e732614
+remote: . Processing 1 references        
+remote: Processed 1 references in total        
+To a git remote
+   ca8b7bc57..e2584ab50  HEAD -> main
+push exit=0
+origin/main after, by ls-remote: e2584ab5093a848842fdc806680c35924b06b164

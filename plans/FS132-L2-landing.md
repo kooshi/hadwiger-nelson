@@ -739,6 +739,12 @@ commit and one commit of this job's logs under `data/`): "f81abeecd..3ab61fcdc H
 force.** `origin/main` by `ls-remote`: `f81abeec…` before, `3ab61fcd…` after. The record's last stages and the report
 follow in a second fast-forward that touches `plans/` and `data/` only.
 
+**The second fast-forward** (`data/fs132/l2/push-main-2.out`): `main` had moved to `ca8b7bc5` (`plans/` 4 paths, `data/` 3);
+merged by hash, automatic; the commit `e2584ab5` differs from the landed tip `3ab61fcd` in `plans/` (5) and `data/` (5)
+and nowhere else, and from the gated commit `b46a9d57` in no path outside the brief's list (counted: 0).
+`git push origin HEAD:main`: "ca8b7bc57..e2584ab50 HEAD -> main", a fast-forward. `main` then holds this record and
+the report (`data/fs132/reports/FS132-L2.md`). No background process of this job is left running.
+
 ## Slips, my own
 
 1. **A build's inputs written while it walked** (stage 2): I ran the two generators during the build after the cut.
