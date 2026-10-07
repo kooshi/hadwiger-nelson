@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-07: an outside proof of six is this project's literature; the Lean backlog is paused; the plan
 
 *Written 2026-10-07 (UTC) by Keryx, at Kooshi's word ("Make sure your handoff carries the new plan"). Current state only. A successor
-arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–621 (the day's record, each with what was
+arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–622 (the day's record, each with what was
 checked by whom); then, for the paused backlog only, `plans/SESSION-HANDOFF-2026-10-06.md` §§ 2–8, which this file supersedes for
 everything else.*
 
@@ -40,21 +40,21 @@ everything else.*
 | 5 | pause the backlog; a stopping point; Poros re-ranks | **FS-131 launches nothing new.** Its two running jobs finish (§ 2). The asking lane re-ranks the whole frontier with the release as literature, poses **FS-132** (the milestone that opens on it, aimed at six against seven), and says which backlog waves resume, which are retired or re-aimed, and which wait. | Brief written and gated — § 3, first in the queue. |
 
 **The stopping point, concretely** ("collect ourselves") — each a line to tick before the milestone restarts or is re-aimed:
-1. Wave 8's landing is back and filed (§ 2), or is reported not landed with its reason.
+1. ~~Wave 8's landing is back and filed.~~ (item 622)
 2. ~~Wave 9's implementer is back, reviewed and logged.~~ (item 621)
 3. ~~The audit and the reading are back, reviewed and logged; their drafts are in hand.~~ (items 619, 620)
 4. The front page is filed (answer 2) and the Proof Atlas rebuilt locally, not published.
 5. The asking lane's re-rank is filed in `plans/FRONTIER-STUBS.md` with its banners, and FS-132's and FS-133's stubs exist.
 6. A report to Kooshi: the state of everything, and what restarts.
 
-## 2. Running now (3) — and what to do at each hand-back
+## 2. Running now (2: the asking lane, the import) — and what to do at each hand-back
 
 | job | where | what | on its hand-back |
 |---|---|---|---|
 | ~~EXT-OAI1~~ | — | **done, item 619**: the proof stands in the kernel at its own pin — built, axioms with a control, statement by signature, 70 of 70 modules replayed. Its drafts: the import skeleton `data/external/oai1/audit/ImportSkeleton.lean` (two axioms, five bridges, one `sorry` leaf), the sentences for rows 33 and 130 and the bibliography cells in `plans/EXT-OAI1-audit.md` stage 8. **The special slot is closed: three slots.** | — |
 | ~~EXT-OAI2~~ | — | **done, item 620**: the manuscript read in full, no gap found, one mind. **Its stage 5 is the front page's draft** (`plans/EXT-OAI2-reading.md` § 5.1: `CLAUDE.md`'s mission row, the aim's links, the Frontier's first paragraph and item 31, the theory paragraph; `LEDGER.md` rows 33, 107, 120, 125, 128–132, 140, 154 and the claim list; three grokkings; § 5.0 the grade; § 5.5 sixteen bibliography rows). | — |
 | **FS132-P1** (`poros`) | `main`, under `plans/` and `data/fs132/` | the re-rank with the release as literature; FS-132's question card; FS-133's stub; the table that restarts, retires or re-aims each backlog wave | it messages when FS-132's card is saved; on its hand-back: review, log, file its re-rank and banners **in the one filing of ruling 620 (a)**; then the openings of FS-133 and FS-132 (§ 3). |
-| **FS131-L8A** | `.claude/worktrees/fs131-w8l`, `fs131-w8l` | wave 8's landing — joined, `main` merged, docstrings corrected (items 600, 605), a first full gate pass done; a second pass, begun after the incident of item 612, is its evidence | **the landing procedure of `plans/SESSION-HANDOFF-2026-10-06.md` § 5** — `git pull --ff-only`; three digests (`scripts/gate_report.py axioms / vacuity / assumptions`, previous receipts `data/fs131/lt5/gate/receipt-{axioms,vacuity,assumptions}-landed2.log`); file `CLAUDE.md` § Trust ledger and § The gate, a `GATE_CHANGES` entry; fact audit `--base e3d9b643`; its `LEAN.md` line on the vacuity marker (item 605). **Then the front page's filing of answer 2 in a second commit.** Until it is back: commit nothing to `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`. |
+| ~~FS131-L8A~~ | — | **done, item 622: wave 8 is on `main`** (gated `126bff4d`, landed `fac27979`; counts filed at `f40d6bda`: 6,554 records, 6,521 clean, 5 purchases, 8 imported on one outside axiom, 20 axiom-free; `declarations=14807 refutations-skipped=215 sites=1446`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2`; the nine assumption counts unchanged). **No landing is in flight: `CLAUDE.md` may be edited.** **For the next landing**: previous receipts `data/fs131/l8a/gate/receipt-{axioms,vacuity,assumptions}-final.log`; fact audit `--base f40d6bda`. | — |
 | ~~FS131-I9B~~ | — | **done, item 621**: `fs131-w9b` at `0fb15c61` — wave 9's uniform bound proved with no leaf under it (`seven_le_chiM0_iff_delta0`), models M1–M3 built; not landed. | — |
 | **FS132-I1** (`debruijn-implementer`, Opus) | `.claude/worktrees/fs132-wi1`, `fs132-wi1` (from `main` at `8386c256`) | **the import**: the release's two theorems as declared outside theorems in the release's own form, with the four items; the one leaf (`nonempty_aeColouring_of_weak`); the bridges (`6 ≤ χ ≤ 7`; `χ = χ_m⁰` with no hypothesis; `6 ≤ χ_m⁰`); registrations; the landing's drafts | review by artifact — **read each axiom against the release's file yourself**; log; then a landing job takes its branch **after wave 8's landing**, with both example-map closers' branches (ruling 599 (d)): outside axioms one to three, the nine assumption counts refiled. Brief: `data/fs132/briefs/FS132-I1-import.md`. |
 

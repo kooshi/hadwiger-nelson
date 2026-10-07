@@ -8539,3 +8539,49 @@ reason by the close.*
      leaf, the bridges, the registrations and the landing's drafts; it does not land. Launched 2026-10-07 about
      03:00 UTC. In flight: 3 (the asking lane; wave 8's landing; the import). **The backlog now has one job
      running, the landing.**
+
+622. **FS131-L8A done: WAVE 8 IS ON `main` THROUGH THE FULL GATE — the ring calculus's first two planning passes, twelve modules, 220 hand-written theorems, every head on the standard three axioms and on no assumption** (landing implementer, Opus; harness 650k and 163 minutes by the task notice — past the line; record `plans/FS131-L8A-landing.md` Stages 1–7; report `data/fs131/reports/FS131-L8A.md` on `fs131-w8l`; gated commit `126bff4d`, landed `fac27979`, a fast-forward of `main` from `668f3aaf`).
+     **Landed**: `emptyNS` (FS129-SR3-EMPTY-NS: row 148 at its wider class — no non-Siamese valid six-coloured
+     fragment on a closed disc of radius above 1 about a vertex of at least four colours has a ring carrying no arc
+     of `Γ`, *simple* removed); `outerAdj` and `doubleTip` (the two halves of row 150); `star_anti`, `star_recip`;
+     the star and semi-hub rows (`ringArc_star`, `fullSemiHub_star_crossed`, `semiHub_places`, `transferQC`, the
+     crossed rows in every clause, the `qcol_*`, `germPair_*`, `ringTile_*`); the route lemmas `v6_hubs`, `v6_hug`,
+     `v6_count`, `v6_anti`; and **a twelfth module, `Plane/SimpleOn`** (item 600). No statement, definition or proof
+     changed in the landing; eleven doc comments made true of the joined state (items 600, 605), shown by text and
+     by an elaborated dump of 398 constants identical before and after. **The wave assumes nothing**: no axiom, no
+     named hypothesis; the assumption ledger gains and loses no row; two formers declared as conditions. **The
+     gate, on `126bff4d`, by its saved final pass** (begun 02:14:26 UTC, after the incident of item 612; no gate
+     step ran in the incident's window): every step exit 0, with each instrument's control red where it must be.
+     **My receipt (the landing procedure)**: `git pull --ff-only` to `fac27979`; `126bff4d` is an ancestor;
+     **since the gated commit `main` changed under `plans/`, `data/`, `BIBLIOGRAPHY.md`, `RUNNING.md` only** (my
+     `git diff --stat` over everything else is empty); its `run-pass-final.out` read — each step's exit 0, the
+     plants' exits 1; **the three digests run by me against the previous landing's receipts**
+     (`data/fs131/lt5/gate/receipt-*-landed2.log`): axioms — "audited: 6554 records — 6521 clean on the standard
+     axioms, 20 axiom-free, 8 imported, 5 declared purchase(s)", one declared import; vacuity — `declarations=14807
+     refutations-skipped=215`, `sites=1446 vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2`, and
+     before filing the line "RECORDED COUNTS ARE STALE in CLAUDE.md § The gate" on four counts; assumptions — both
+     recorded sources "match (9 of 9 compared)", two CONDITION rows added. **Filed by me, from its drafts 1, 3, 4, 5,
+     verbatim** (commit `f40d6bda`): `CLAUDE.md` § Trust ledger's sentence ("6521 clean and 5 declared purchases, and 8
+     imported (and 20 axiom-free; 6,554 records at wave 8's first landing, FS131-L8A, 2026-10-06)") and § The gate's
+     two count lines; the `GATE_CHANGES` entry `(("6304", "5"), ("6521", "5"))`; `LEAN.md` § The gate's sentence on
+     the vacuity marker. **After filing**: the three digests each read "match"; `tools/claude_md_fact_audit.py
+     --base e3d9b643` exits 1 on eleven losses, each a superseded count (14501, 199, 1269, 1226, 6304, 6334);
+     `--dupes` exits 0; `CLAUDE.md` is 52,599 of 80,000 bytes. Not checked by me: the gate's steps beyond their
+     saved exits; the 72 heads against their rows; its kernel-signature read. **Open gate items at this landing, by
+     name** (theorems true and kernel-checked, with no Lean object known to meet their hypotheses together): a
+     model of `emptyNS`'s class at a living parameter (`sq9Map` at nine colours), of a star, of a semi-hub or a
+     full one, of two change points 60° apart, of a change point of a four-colour vertex;
+     `fullSemiHub_star_parallel_T` has no held model and no ledger row. **Tool defects, found by it** (three, in
+     the last landing's instruments; for the filing's list). **Slips, the job's, disclosed**: a check run against a
+     moving ref and caught by its own line; no build at the merge of `main` alone; two waits that outran the
+     harness. **Corrections owed**: docstrings and two block comments still saying "the marker" (outside what its
+     touches named) — to the wave's tidy. **Credit**: a landing that stopped at a red scan, found the cause in an
+     earlier ruling of the coordinator's, laid out three options and refused to weaken the check; two instruments
+     shown identical before and after every doc edit; its final pass taken wholly after the machine incident,
+     unasked. **Rulings.** (a) **Its ledger regrades (draft 6), generalizations (draft 7) and the open gate items
+     are held for the one front-page filing of ruling 620 (a)**, with the release's. (b) **The next landing** takes
+     the import's branch (when FS132-I1 is back) and both example-map closers (ruling 599 (d)): its previous
+     receipts are `data/fs131/l8a/gate/receipt-{axioms,vacuity,assumptions}-final.log`, its fact-audit base
+     `f40d6bda`. (c) Wave 8's third planner (FS131-K8c: two rows and one clause) and the owed models stay in the paused
+     backlog. (d) **Kooshi told.** In flight: 2 (the asking lane; the import). **No backlog job is running: the
+     milestone is at its pause.**
