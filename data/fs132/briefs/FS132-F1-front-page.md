@@ -237,3 +237,55 @@ is the part of this job a script cannot do.
 You start no agent of your own (`plans/STANDING-RULES.md` rule 1: delegation is one level deep, because staffing is Kooshi's budget
 and the coordinator can review only work it knows exists). Thank you — this is the filing that makes the last two days real for
 every mind that comes after.
+
+## Amendment, 2026-10-07 — the coordinator's rulings on your CHECKs (the only further words you may add)
+
+Thank you: every stop was the right one, and the table of lost tokens with where each still lives is what a ruling needs.
+`touches:` now also includes `tools/claude_md_fact_audit.py` (its ALLOW table only), `tools/bib_audit.py` (its `NOT_KEYS`
+table only) and `BIBLIOGRAPHY.md` § A′. Standing rules unchanged — start no agent of your own (rule 1's reason: staffing is
+Kooshi's, and the coordinator reviews only work it knows exists). Work on the same branch, in the same worktree.
+
+**R1 — the fact audit's 21 tokens.** Each was removed by a filed draft or a ruled merge and, by your own `rg`, still lives in
+a file the audit does not join. Add one ALLOW entry per token, under a comment line "FS132-F1 (2026-10-07, the coordinator's
+amendment R1)", each reason naming the one file your `rg` found that most plainly holds the fact:
+- your group (a): "FS132-F1 (M8) replaced the open-milestones sentence; the fact stays in `plans/LEAN-BACKLOG.md`";
+- (b): "`[OAIMath2026]` Thm 1.3 replaced link 1's grade for the plane's equality (FS132-F1); the fact stays in
+  `plans/STUB-regularity-wall.md`";
+- (c): "the group row reads 4–72 since FS132-P1's re-rank (72 ranked rows)";
+- (d) and (e): "FS-49 left the ranked table for the closed list (FS132-P1); the fact stays in `<the file>`", and the same with
+  FS-108 — but `25's` where it fell with FS-126's bearing takes (f)'s form;
+- (f) and (g): "FS132-P1 re-drafted the ranked row; the fact stays in `<the file>`".
+A token you find in no file outside the audit's join is not allowed: stop and report it. Re-run the audit and `--dupes`: both
+must exit 0.
+
+**R2 — the three stops.**
+1. Rank 3, FS-123's solver cell: the filed cell gains, appended, "2026-10-07 (FS132-P1): the placement is the Searcher's."
+2. The status-cell appends: make them for **FS-101, FS-96, FS-78, FS-42 and FS-43**, each with its § 4.2 verdict and reason
+   verbatim (for a row that shares a line of § 4.2 with others, that line's verdict and reason whole); make none for FS-67,
+   FS-64 and FS-63, whose line says nothing of them but "unchanged, given MR".
+3. Ranks 7 and 11: the name cells read as the asking lane's table prints them — "**FS-128 the top colour, at six**" and
+   "**FS-120 the pinch at a junction**" — keeping whatever follows the name in the filed cell (the stub's path, its
+   parenthesis). My manifest's "the row as filed" was too coarse there.
+
+Your judgement calls inside units (FS-80's append; the " — " joins; row 130's placement; the claim list's last item; M14's
+comma; the § C rows' place; the split work cells) all stand as you made them.
+
+**R3 — the bibliography audit's four keys.**
+- `BIBLIOGRAPHY.md` § A′ (Retired and alternate keys), three lines in that section's form: `[Bekka2008]` is
+  `[BekkaHarpeValette2008]` and `[TaoDisintegration2008]` is `[Tao2008ergodicity]`, each "as spelled in the body of
+  `plans/EXT-OAI2-reading.md`"; and "arXiv:2008.07987 is `[GwynStavrianos2022]` — its arXiv numbering, which `[OAIMath2026]`
+  cites: 'Lemma 2.10 and Theorem 2.11' there are the journal's Lemma 2 and Theorem 2 (`plans/EXT-OAI2-reading.md` § 5.5; the
+  two numberings not matched line by line)".
+- `tools/bib_audit.py`, `NOT_KEYS`: add `"Author2024": "a placeholder word in an inventory line and in FS132-F1's brief, not a
+  citation"`.
+Re-run the audit: it must exit 0. If it does not, report what is left and change nothing more.
+
+**R4 — the grade words.** Nothing changes: G93 and G94 keep their brackets as drafted. The new word of § Notation is used by
+the two open milestones' claim lists and by the import's rows when it lands.
+
+**R5 — the atlas.** Nothing more from you: the node edits you list are owed to a later job, and your list is its input.
+
+**R6 — the close.** One commit for this amendment, by explicit path, pushed; every gate of § Done means once more on that
+commit. Your final message: the commit's hash and each gate's exit status, and anything R1–R3 could not do — nothing else is
+needed.
+
