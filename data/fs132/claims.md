@@ -449,4 +449,31 @@ the death of every such cycle — which are what the answer is made of and are n
   of a set strictly inside the unit circle about a ring point is strictly outside the one about its antipode, but not
   conversely; three two-point sets with their second points at distance 3 from the centre give six pure inner sides and no
   pure outer one. C132-TURN-EDGE's entry does not use the sentence; its stall's first item and C132-LENS (ii) as posed do.
+- **2026-10-07 (after FS132-E6's Stage 2, commit `c7783d3f`; FS-132 inventory item 28): C132-LENS has its verdict** — each
+  statement read whole in its entry (C132-LENS's own entry is beside them):
+
+> derivation: C132-SHADOW
+> — source: plans/FS132-E6-derivation.md Stage 2
+
+> derivation: C132-LENS-SIDE
+> — source: plans/FS132-E6-derivation.md Stage 2
+
+> derivation: C132-LENS-FOUR
+> — source: plans/FS132-E6-derivation.md Stage 2
+
+> derivation: C132-LENS-GERM
+> — source: plans/FS132-E6-derivation.md Stage 2
+
+> derivation: C132-LENS-II
+> — source: plans/FS132-E6-derivation.md Stage 2
+
+  **Derived** ([hand] or derived from it; one mind): **C132-SHADOW** (the class: an open one-label piece reaching a point keeps
+  its label off one whole side of the unit circle about that point, near every point at distance 1 — no palette, no chart,
+  no exclusion set); **C132-LENS** in its two halves (the lens between two outer-pure neighbours carries only the centre's
+  own labels; it reads nothing at the middle ring point); **C132-LENS-SIDE** (clause (i)); **C132-LENS-FOUR** (three
+  consecutive ring points with pure outer sides: the middle one has four labels present); **C132-LENS-GERM** (when each set
+  has a point strictly inside three of the six unit circles about the ring points and strictly outside the other three,
+  three consecutive ring points are outer-pure). **C132-LENS-II — the card's clause (ii) verbatim — is a GAP** at "pure
+  sides are opposite at antipodes"; sixteen patterns of sides stay open, all of them seeds whose sets witness from far away.
+  *Not claimed*: each entry's own line. **Not yet answered**: C132-PLACED; C132-ARC will not be reached by this job.
 

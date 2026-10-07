@@ -843,3 +843,35 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     the one result of the first night this milestone's direction rests on. (c) Phase 2 for the two index lemmas may be a
     successor's; they have no consumer until a tame ring is supplied (the asking lane's table).
 
+28. **FS132-E6, first verdict: on a turning seed the lens between two outer-pure ring points carries only the centre's own
+    colours, so the middle ring point has four colours present — derived; the card's second clause is a gap as posed; and the
+    riding controls say the second round's clean zeros were the margin** (source: its message to "main", 2026-10-07; record
+    `plans/FS132-E6-derivation.md` Stage 2; commit `c7783d3f`). **Entries** ([hand] or derived from it, one mind):
+    **C132-SHADOW**, the class — "the stub's 'side rule for open pieces', which no entry stated"; **C132-LENS**, true in two
+    halves, reading the forced wedges at the two neighbours "and nothing at `y_0`: no side, no palette, no witness there" —
+    **the card's falsifier computed and empty** (every point near the middle ring point strictly inside a neighbour's unit
+    circle has its own unit circle through that neighbour's far wedge in positive length: 600 lens points, none missing;
+    with the wedge planted on the other side, 480 miss); **C132-LENS-SIDE**; **C132-LENS-FOUR**; **C132-LENS-GERM** — under
+    a limiting direction at the centre perpendicular to no ring direction, three consecutive ring points are outer-pure,
+    and the alternating pattern of sides does not occur at all; **C132-LENS-II: a gap**, sixteen patterns of sides open,
+    "all of them seeds whose sets witness from far away". **The search's hand argument, for germs only measurable**: its
+    steps 1–2 hold; step 3's first rule holds and is this claim; **step 3's second rule is the step that fails** — only a
+    sub-wedge of the lens sees the wedge it needs ("enough for a one-label lens, not for a measurable one or one split by a
+    curve"); step 4 is of the same kind; step 5 not checked. **Sides of the line**: C132-LENS and C132-LENS-SIDE have
+    hypotheses at the two neighbours only — "the first conclusion of the milestone at a ring point of the hard kind, from
+    neighbours of the easy kind"; C132-LENS-GERM is on the arc-free side; **the search's kept model is the hard case and no
+    statement of the stage applies to it** (its sides read inner at every second point; no ring point is outer-pure).
+    **The riding controls**: on the honeycomb at circumradius 1/2 **two counts move, none against an entry** — own labels
+    near a crossing point 0 → 36 of 432, witnesses by margin 0 → 6,672 with all seven labels on the annulus; a third
+    control's script fails there for a reason outside its statement's hypothesis (the unit circle passes through three
+    vertices). **"The zeros at 2/5 were the margin."** **My receipt**: the commit is on `main`; its gate run by me — exit 0,
+    eight controls each firing; the entries' headers quoted into the claim list. **Not checked by me**: any argument of
+    Stage 2; the falsifier's computation. **Rulings.** (a) **The claim list gains the verdict by a dated line.** (b) **What
+    this is, for the morning**: in step form and with the seams close to the centre, the turning ring forces a point where
+    four colours are present — the existence side's first forcing statement in measure — **and it is on the arc-free
+    side**: the one model the search kept is the other case and nothing derived applies to it. (c) **The search's hand
+    argument is not general**: its null is its family's, as its own record said; ruling 20 (d)'s hope — the stalled claim
+    derivable for measurable germs — is answered no for step 3's second rule. (d) **The second round's seven-colour
+    controls are recorded as controls of the margin case only**; a correction owed to the two records' control lines at
+    the record job.
+
