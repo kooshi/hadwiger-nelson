@@ -26,16 +26,17 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
-## 0d. READ THIS FIRST — written at 16:21 UTC, 2026-10-07, just before a compaction Kooshi asked for
+## 0d. READ THIS FIRST — brought current at 17:15 UTC, 2026-10-07 (after the compaction Kooshi asked for at 16:21)
 
 **Held / Derived / Opened.** FS-132's first theorem (the four-way exclusion, whole plane) is **held**: landed and filed
 (`783e7bdb`; FS-132 inventory items 46–51). FS-124 is **Derived** and filed (`bd3df943`, **the next filing's fact-audit
-base**; `plans/FS124-derivation.md`, 30 entries; rows 161–164; FS-124 inventory items 1–33). FS-136, "the point across"
-(`plans/STUB-covering-pairs.md`), is **Opened** and ranked first (inventory `plans/FS136-close-inventory.md`, items 1–3;
-claim list `data/fs136/claims.md`). Kooshi was told of the move to FS-136 and may override; he has not objected.
+base**; `plans/FS124-derivation.md`, 30 entries; rows 161–164; FS-124 inventory items 1–37). FS-136, "the point across"
+(`plans/STUB-covering-pairs.md`), is **Opened**, ranked first, and **its first round is in: ten entries, each derived, one
+mind** (inventory `plans/FS136-close-inventory.md`, items 1–7; claim list `data/fs136/claims.md`; record
+`plans/FS136-E1-derivation.md`) — every held stop closed in measure by its own pair's regions; no value moved.
 
 **Three jobs are running** (agent ids in the scratch file `agents.txt`, never in a repo file):
-1. **FS124-L1 — a LANDING IN FLIGHT** (the disc criterion's module; worktree and branch `fs124-wl1`; brief
+1. **FS124-L1 — a LANDING IN FLIGHT** since 16:06 UTC (the disc criterion's module; worktree and branch `fs124-wl1`; brief
    `data/fs124/briefs/FS124-L1-landing.md`). **Until it is back: no `CLAUDE.md` filing, and nothing committed to `main`
    outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`.** It sends one line when
    the gate is green, then hands back with drafts. Then: the three digests against
@@ -45,22 +46,26 @@ claim list `data/fs136/claims.md`). Kooshi was told of the move to FS-136 and ma
    the atlas node `DISCS`); fact audit `--base bd3df943`; **tell Kooshi: held — seven iff some disc has no weak
    six-colouring, on one declared outside theorem.** If my push is rejected because it landed first: `git pull --rebase`,
    push, never force.
-2. **FS124-I2** (implementer; launched 16:38 UTC; FS-124 inventory items 34–35) — the planner of the second module has
-   handed back (branch `fs124-wk2`, tip `92f09e14`: six skeleton modules, 130 leaves left, a route for each; nine
-   statements typed with no defect). **Two implementers on disjoint files**: FS124-I2 on `CircleCrossing` and `OnePiece`
-   in worktree `fs124-wk2`; **FS124-I3 on `ThreePiece` and `ClosePair` — its brief is written and gated
-   (`data/fs124/briefs/FS124-I3-close-pair.md`), its worktree `fs124-wi3` is cut and built: LAUNCH IT INTO THE NEXT FREE
-   SLOT** (`debruijn-implementer`, `model: "opus"`, the one-line launch). Each sends one line when its claims' theorems
-   print their axioms. After both: **a third job** joins the two branches, registers the audit blocks, and proves the
-   witnesses (`ClosePairModel`; `SectorPoint`'s two planned leaves) — the unit-square witness re-priced from its first
-   inequality; then the landing. **Owed by name as a kernel job: the θ-lemma** (`ThreePiece.IsSector.hasArcEdges`; its
-   needs in the planner's record § 2.4); `SectorPoint` stays off `main` until it lands.
-3. **FS136-E1** (deriver; FS-136's opening and five claims; record `plans/FS136-E1-derivation.md`, plan
-   `plans/FS136-the-point-across.md`). Its first message is logged (item 3: the claims restated on labels; FS-110's held
-   covering-pair theorems found as prior art). Next from it: the reading of every held object, then a verdict per claim
-   (dated lines in `data/fs136/claims.md`). **An exclusion on a disc would fix the value → Kooshi at once, "claimed by
-   one mind, unchecked".** At its hand-back → the asking lane (its brief must name `plans/FS107-derivation.md` and
-   `plans/FS110-derivation.md` by file: its cards missed held prior art three times today), or a second deriver.
+2. **FS124-I3** (implementer; launched 17:12 UTC; FS-124 inventory items 34–37) — the second module's last four claims:
+   `Plane/ThreePiece` and `Plane/ClosePair`, 61 leaves, in worktree and branch `fs124-wi3` (fast-forwarded to the first
+   implementer's tip `ab669747`, where `CircleCrossing` and `OnePiece` are proved: 63 leaves, the first five claims
+   kernel-checked on a branch, standard three axioms). Brief `data/fs124/briefs/FS124-I3-close-pair.md`. It sends one line
+   when its theorems print their axioms. **Then a third job** (not briefed): the witnesses (`Plane/ClosePairModel`;
+   `Plane/SectorPoint`'s two planned leaves — the unit-square witness re-priced from its first inequality), the audit
+   blocks registered (the first implementer's is `data/fs124/i2/audit-block.txt` on the branch), then the landing of the
+   module. **Owed by name as a kernel job: the θ-lemma** (`ThreePiece.IsSector.hasArcEdges`; the planner's record § 2.4 on
+   that branch); `SectorPoint` stays off `main` until it lands.
+3. **FS136-P1** (asking lane; launched 17:15 UTC; FS-136 inventory items 6–7) — re-poses after the first round; it
+   messages when its card is saved, **with the card's home said first**. If the card stays in FS-136: a deriver on it
+   (pattern `data/fs131/briefs/scripts/mk-fs124-e2.py`). If it moves to another stub: FS-136 goes to its record job
+   (pattern `data/fs131/briefs/scripts/mk-fs124-z1.py`; numbers it may use: ledger rows from 165, grokkings from G100,
+   stubs from FS-137; it must re-run FS-124's second reader with a repaired tolerance before quoting its counts —
+   FS-136 inventory ruling 6 (b)) and the card opens its own milestone. **A statement that would fix the value → Kooshi
+   at once, "claimed by one mind, unchecked".**
+
+**For FS-136's kernel claim list, when its planner is briefed** (FS-136 inventory rulings 4 (b), 5 (d)): the head statement
+(the table), the label form of the count, the one-point form — three short statements over `ae_onSide_of_label`, a leaf
+of FS-124's second module; none of the five exclusions unless the asking lane names a consumer.
 
 **Queued for kernel slots** (none briefed): the second module's implementer; the θ-lemma; a planner for FS-132's seven
 further statements (`data/fs132/claims-K1.md`, "tier A", plus a kernel model of the ring hypothesis); the centres' kernel
