@@ -593,6 +593,20 @@ would be forced, and nothing held forces one). Rows 135 (the rhombus), 136 (the 
 C132-WIT-SIDE (`plans/FS132-derivation.md`); C124-CENTRE, C124-STRADDLE, C124-HALF, C124-HALF-TWO (`plans/FS124-E1-derivation.md`).
 Stubs FS-122 (the forced pair: whether a close complementary pair exists in every colouring), FS-127, FS-128.
 
+*After the second round (Poros, FS124-P3, 2026-10-07; `plans/POROS-2026-10-07-fs124-round2.md`):* **the asking lane's verdict is
+"record job"** — the question of this morning and the question after the first round are answered at their unit (one tight pair
+passes on nothing beyond the first step; a close complementary pair of sector points is paid for by both members at four-label
+points; the strip is closed at its top edge), and no fourth question is posed in this stub. Of the carry-over list above
+("What to carry over from the map class first, and how"), the cone form and the rhombus lemma are carried; the partner count
+(FS112-C-PARTNERS) and the placing rule (FS116-N3-SEMI) are not, and each further step at the pair restates a held map entry by
+one application of C124-TYPE (that record's § 1.2). The eight cases of "The question, in plain language" stay open and pass,
+with those two steps, to the successor `plans/STUB-covering-pairs.md` — the point across: two pieced points on the unit circle
+of a point of four or more labels whose labels together are all six, and their second common unit point, where the strip, the
+disk and the six-colour flower each stop (`φ²/√2`, `φ`, `√3`). Bearings added by that record: G83 (the unit this stub was
+minted at, and left); G92 (C124-FORCED-PIECES reads "all six labels are spoken for", not "two triples"); G97 (its killing test
+fired at C124-BOTH and C124-EDGE-CLOSED). Entries: FS112-C-PARTNERS, FS112-STOP, FS114-Y-STRIPK6 (the map statement about the
+six tiles C124-EDGE-CLOSED keeps), FS114-Y-PAIRSHARE, FS116-Y2-SIXOFF.
+
 *At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-MR1-DOUBLETIP, FS129-SR3-OUTERADJ,
 -E2ONE, FS129-SR1-TWOCIRC, -BENDANY, -BENDLE3, -RINGBAND, -SIXQ, FS129-OR1-BENDFRAG, -LOCALDENSE, -DISCF-NS; G71's height on a curve (FS110's winding)
 for case 1.
