@@ -5,22 +5,23 @@ A TARGET passes when
   * it is printed (AXIOMS and FRONTIER lines; no MISSING line);
   * its axioms are a subset of the standard three and `sorryAx` — no outside theorem, no native axiom, nothing else;
   * `sorryAx` is among them exactly when its frontier is non-empty;
-  * every declaration of its frontier is declared by a module of ANOTHER lot: Plane.SixRing.Chart, .Shift or .Tips
-    (never by a module this job proves: NullSets, Excl, ChartMeasure, State, Kill; never TwoPairs, Orbit, StepLemma).
+  * every declaration of its frontier is declared by a module of ANOTHER lot. Through stage 5 those were
+    Plane.SixRing.Chart, .Shift and .Tips; since Amendment 2 every module under the targets is proved (the chart's and
+    the tips' by this job, the shift's by FS132-I3), so the set is EMPTY: a target on `sorryAx` fails, whatever the
+    module of the `sorry`.
 The three CONTROLS must each show what they exist to show; the DONE line must give the counts of targets.txt.
 Exit 1 on any failure.  --self-test plants each fault in a copy of the output and requires exit 1 for each.
 """
 import re, sys, pathlib
 here = pathlib.Path(__file__).parent
 STD = {'propext', 'Classical.choice', 'Quot.sound'}
-ALLOWED = {'Proofs.HadwigerNelson.Plane.SixRing.Chart', 'Proofs.HadwigerNelson.Plane.SixRing.Shift',
-           'Proofs.HadwigerNelson.Plane.SixRing.Tips'}
+ALLOWED = set()      # stage 5: {…SixRing.Chart, …SixRing.Shift, …SixRing.Tips}; empty since Amendment 2 (see above)
 
 def lst(s):
     s = s.strip()
     assert s.startswith('[') and s.endswith(']'), s
     s = s[1:-1].strip()
-    return [x.strip() for x in s.split(',')] if s else []
+    return [x.strip() for x in s.split(',') if x.strip()] if s else []
 
 def parse(text):
     # messages may wrap: join the lines of one message
@@ -70,7 +71,7 @@ def decide(text, quiet=False):
     say(f'targets={len(rows)} clean={len(clean)} on-sorry={len(onsorry)} failures={len(bad)}')
     say('CLEAN (exactly a subset of [propext, Classical.choice, Quot.sound]):')
     for kind, s, _ in clean: say(f'  {kind:7s} {s}')
-    say('ON SORRY, through these declarations of other lots only:')
+    say('ON SORRY (each is a failure since Amendment 2):')
     for kind, s, h in onsorry: say(f'  {kind:7s} {s}  <-  {", ".join(h)}')
     for b in bad: say('FAIL', b)
     return 1 if bad else 0
@@ -79,8 +80,14 @@ def selftest():
     text = re.sub(r'\n\s+', ' ', OUT.read_text())      # one message per line, as `parse` reads it
     assert decide(text, quiet=True) == 0, 'the unplanted output must pass before the self-test means anything'
     plants = {
-      'a sorry in a module this job proves': lambda t: re.sub(r'(TARGET FRONTIER leaf HadwigerNelson\.SixRing\.unitPair_chart_ae \| )(\d+)( \| \[)',
-            lambda m: f'{m.group(1)}{int(m.group(2))+1}{m.group(3)}HadwigerNelson.SixRing.x@Proofs.HadwigerNelson.Plane.SixRing.State, ', t, count=1),
+      'a sorry under a target, in a module of this job': lambda t: t.replace(
+            'TARGET AXIOMS leaf HadwigerNelson.SixRing.unitPair_chart_ae | [', 'TARGET AXIOMS leaf HadwigerNelson.SixRing.unitPair_chart_ae | [sorryAx, ', 1).replace(
+            'TARGET FRONTIER leaf HadwigerNelson.SixRing.unitPair_chart_ae | 0 | []',
+            'TARGET FRONTIER leaf HadwigerNelson.SixRing.unitPair_chart_ae | 1 | [HadwigerNelson.SixRing.x@Proofs.HadwigerNelson.Plane.SixRing.State]', 1),
+      'a sorry under the headline theorem, in the chart\'s module': lambda t: t.replace(
+            'TARGET AXIOMS planner HadwigerNelson.SixRing.no_outside_orbit_points | [', 'TARGET AXIOMS planner HadwigerNelson.SixRing.no_outside_orbit_points | [sorryAx, ', 1).replace(
+            'TARGET FRONTIER planner HadwigerNelson.SixRing.no_outside_orbit_points | 0 | []',
+            'TARGET FRONTIER planner HadwigerNelson.SixRing.no_outside_orbit_points | 1 | [HadwigerNelson.SixRing.chart_hub@Proofs.HadwigerNelson.Plane.SixRing.Chart]', 1),
       'an outside theorem under a target': lambda t: t.replace('TARGET AXIOMS leaf HadwigerNelson.SixRing.OutsideOrbit.ae_flip | [',
             'TARGET AXIOMS leaf HadwigerNelson.SixRing.OutsideOrbit.ae_flip | [HadwigerNelson.Outside.OAI158.proper_to_borel_weak, ', 1),
       'a native axiom under a target': lambda t: t.replace('TARGET AXIOMS leaf HadwigerNelson.SixRing.ae_real_of_ae_angles | [',

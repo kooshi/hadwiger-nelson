@@ -8028,8 +8028,8 @@ implementers' blocks did not list. Read from the kernel's own list of the librar
 
 /-! ## FS132-I4 — the join of the port under the exclusion's skeleton: the leaves on the ported lemmas (`Plane/SixRing/State`, `Excl`), the null sets
 through the chart and the kill (`ChartMeasure`, `Kill`), their helpers (`NullSets`); and the two-pair ring, complete at the join. No axiom, no outside
-theorem. Until the leaves of `Plane/SixRing/Chart` and `Shift` are proved, the records that stand on them read `sorryAx`
-(`data/fs132/i4/axioms/check.out` lists each with the leaves it stands on) -/
+theorem; and, under the brief's Amendment 2, the chart's geometry and the tips (`Chart`, `Tips`), with the assembly that the
+leaves complete (`Kill.chart_step_false`, `Orbit`). `data/fs132/i4/axioms/check.out` is the print of each -/
 -- FS132-I4
 -- Plane/SixRing/NullSets
 #print axioms HadwigerNelson.SixRing.shear_measurePreserving
@@ -8078,6 +8078,34 @@ theorem. Until the leaves of `Plane/SixRing/Chart` and `Shift` are proved, the r
 -- Plane/SixRing/TwoPairs (FS132-K2's proofs; sorry-free since the join: the ported `two_state_impossible` and `ae_real_of_ae_angles`)
 #print axioms HadwigerNelson.SixRing.no_alternating_groups
 #print axioms HadwigerNelson.SixRing.no_alternating_pairs
+-- Plane/SixRing/Chart (Amendment 2)
+#print axioms HadwigerNelson.SixRing.chart_eq_polar
+#print axioms HadwigerNelson.SixRing.chart_zero
+#print axioms HadwigerNelson.SixRing.chart_hub
+#print axioms HadwigerNelson.SixRing.dist_chart_centre
+#print axioms HadwigerNelson.SixRing.dist_chart_lt_one
+#print axioms HadwigerNelson.SixRing.continuous_chart
+#print axioms HadwigerNelson.SixRing.chart_eq_angularSum
+#print axioms HadwigerNelson.SixRing.dist_hub
+#print axioms HadwigerNelson.SixRing.hub_add_three
+#print axioms HadwigerNelson.SixRing.hub_axes
+#print axioms HadwigerNelson.SixRing.hub_shift
+-- Plane/SixRing/Tips (Amendment 2)
+#print axioms HadwigerNelson.SixRing.IsTip.dist_le_one
+#print axioms HadwigerNelson.SixRing.IsTip.inner_pos
+#print axioms HadwigerNelson.SixRing.tip_antipodal
+#print axioms HadwigerNelson.SixRing.tip_unique
+#print axioms HadwigerNelson.SixRing.adjacent_of_signs_aux
+#print axioms HadwigerNelson.SixRing.adjacent_of_signs
+#print axioms HadwigerNelson.SixRing.exists_adjacent_tips
+#print axioms HadwigerNelson.SixRing.exists_cycle_label
+-- Plane/SixRing/Kill and Orbit (FS132-K2's proofs from the leaves: the analytic core and the assembly — C132-M-ORBIT, C132-M-EXCL at the whole plane)
+#print axioms HadwigerNelson.SixRing.chart_step_false
+#print axioms HadwigerNelson.SixRing.adjacent_tip_false
+#print axioms HadwigerNelson.SixRing.straddle_mono
+#print axioms HadwigerNelson.SixRing.no_outside_orbit_points
+#print axioms HadwigerNelson.SixRing.no_outside_orbit
+#print axioms HadwigerNelson.SixRing.not_ae_outside
 -- FS132-I4: end of the block
 
 #eval IO.println "=== PURCHASED ==="

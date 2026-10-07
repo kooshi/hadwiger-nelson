@@ -1,5 +1,6 @@
-# FS132-I4: every theorem this job proved (39), then the theorems of other hands that its proofs complete or feed.
-# column 1: kind  (leaf = one of the brief's sixteen; helper = added by this job; planner = proved by the planner
+# FS132-I4: every theorem this job proved (39 under the brief, 19 under its Amendment 2), then the theorems of other
+# hands that its proofs complete or feed.
+# column 1: kind  (leaf = one of the brief's sixteen or of Amendment 2's eighteen; helper = added by this job; planner = proved by the planner
 #                  from leaves, listed because this job's leaves are under it)
 # column 2: the declaration, in the namespace HadwigerNelson.SixRing
 helper shear_measurePreserving
@@ -41,6 +42,25 @@ helper HubColours.ae_partner
 leaf no_double_change
 helper step_kill_left
 leaf step_kill
+leaf chart_eq_polar
+leaf chart_zero
+leaf chart_hub
+leaf dist_chart_centre
+leaf dist_chart_lt_one
+leaf continuous_chart
+leaf chart_eq_angularSum
+leaf dist_hub
+leaf hub_add_three
+leaf hub_axes
+leaf hub_shift
+leaf IsTip.dist_le_one
+leaf IsTip.inner_pos
+leaf tip_antipodal
+leaf tip_unique
+helper adjacent_of_signs_aux
+leaf adjacent_of_signs
+leaf exists_adjacent_tips
+leaf exists_cycle_label
 planner no_alternating_groups
 planner no_alternating_pairs
 planner chart_step_false

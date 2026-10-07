@@ -31,31 +31,20 @@ TARGET AXIOMS leaf HadwigerNelson.SixRing.exists_change_of_ae_outside | [propext
 TARGET FRONTIER leaf HadwigerNelson.SixRing.exists_change_of_ae_outside | 0 | []
 TARGET AXIOMS helper HadwigerNelson.SixRing.chartAngles_quasiMeasurePreserving | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER helper HadwigerNelson.SixRing.chartAngles_quasiMeasurePreserving | 0 | []
-TARGET AXIOMS leaf HadwigerNelson.SixRing.chart_quasiMeasurePreserving | [propext,
- sorryAx,
- Classical.choice,
- Quot.sound]
-TARGET FRONTIER leaf HadwigerNelson.SixRing.chart_quasiMeasurePreserving | 1 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart]
+TARGET AXIOMS leaf HadwigerNelson.SixRing.chart_quasiMeasurePreserving | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.chart_quasiMeasurePreserving | 0 | []
 TARGET AXIOMS leaf HadwigerNelson.SixRing.shear_quasiMeasurePreserving | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER leaf HadwigerNelson.SixRing.shear_quasiMeasurePreserving | 0 | []
-TARGET AXIOMS leaf HadwigerNelson.SixRing.ae_ne_of_not_isTip | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER leaf HadwigerNelson.SixRing.ae_ne_of_not_isTip | 4 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.chart_hub@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_lt_one@Proofs.HadwigerNelson.Plane.SixRing.Chart]
+TARGET AXIOMS leaf HadwigerNelson.SixRing.ae_ne_of_not_isTip | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.ae_ne_of_not_isTip | 0 | []
 TARGET AXIOMS helper HadwigerNelson.SixRing.ringRadius_sub_ge | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER helper HadwigerNelson.SixRing.ringRadius_sub_ge | 0 | []
 TARGET AXIOMS helper HadwigerNelson.SixRing.ringRadius_pos | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER helper HadwigerNelson.SixRing.ringRadius_pos | 0 | []
-TARGET AXIOMS helper HadwigerNelson.SixRing.volume_partner_direction_eq_zero | [propext,
- sorryAx,
- Classical.choice,
- Quot.sound]
-TARGET FRONTIER helper HadwigerNelson.SixRing.volume_partner_direction_eq_zero | 1 | [HadwigerNelson.SixRing.dist_chart_centre@Proofs.HadwigerNelson.Plane.SixRing.Chart]
-TARGET AXIOMS leaf HadwigerNelson.SixRing.unitPair_chart_ae | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER leaf HadwigerNelson.SixRing.unitPair_chart_ae | 3 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_centre@Proofs.HadwigerNelson.Plane.SixRing.Chart]
+TARGET AXIOMS helper HadwigerNelson.SixRing.volume_partner_direction_eq_zero | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER helper HadwigerNelson.SixRing.volume_partner_direction_eq_zero | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.unitPair_chart_ae | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.unitPair_chart_ae | 0 | []
 TARGET AXIOMS leaf HadwigerNelson.SixRing.measurableSet_liftPalette | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER leaf HadwigerNelson.SixRing.measurableSet_liftPalette | 0 | []
 TARGET AXIOMS helper HadwigerNelson.SixRing.OutsideOrbit.ae_mem_or | [propext, Classical.choice, Quot.sound]
@@ -68,90 +57,80 @@ TARGET AXIOMS leaf HadwigerNelson.SixRing.OutsideOrbit.ae_flip | [propext, Class
 TARGET FRONTIER leaf HadwigerNelson.SixRing.OutsideOrbit.ae_flip | 0 | []
 TARGET AXIOMS leaf HadwigerNelson.SixRing.OutsideOrbit.change_at | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER leaf HadwigerNelson.SixRing.OutsideOrbit.change_at | 0 | []
-TARGET AXIOMS leaf HadwigerNelson.SixRing.OutsideOrbit.chart_avoids | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER leaf HadwigerNelson.SixRing.OutsideOrbit.chart_avoids | 1 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart]
-TARGET AXIOMS helper HadwigerNelson.SixRing.ae_chart_colour_mem | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER helper HadwigerNelson.SixRing.ae_chart_colour_mem | 4 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.chart_hub@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_lt_one@Proofs.HadwigerNelson.Plane.SixRing.Chart]
-TARGET AXIOMS leaf HadwigerNelson.SixRing.exists_tip | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER leaf HadwigerNelson.SixRing.exists_tip | 4 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.chart_hub@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_lt_one@Proofs.HadwigerNelson.Plane.SixRing.Chart]
-TARGET AXIOMS leaf HadwigerNelson.SixRing.OutsideOrbit.hubColours | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER leaf HadwigerNelson.SixRing.OutsideOrbit.hubColours | 4 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.chart_hub@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_lt_one@Proofs.HadwigerNelson.Plane.SixRing.Chart]
-TARGET AXIOMS leaf HadwigerNelson.SixRing.OutsideOrbit.hubColours_flip | [propext,
- sorryAx,
- Classical.choice,
- Quot.sound]
-TARGET FRONTIER leaf HadwigerNelson.SixRing.OutsideOrbit.hubColours_flip | 4 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.chart_hub@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_lt_one@Proofs.HadwigerNelson.Plane.SixRing.Chart]
+TARGET AXIOMS leaf HadwigerNelson.SixRing.OutsideOrbit.chart_avoids | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.OutsideOrbit.chart_avoids | 0 | []
+TARGET AXIOMS helper HadwigerNelson.SixRing.ae_chart_colour_mem | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER helper HadwigerNelson.SixRing.ae_chart_colour_mem | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.exists_tip | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.exists_tip | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.OutsideOrbit.hubColours | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.OutsideOrbit.hubColours | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.OutsideOrbit.hubColours_flip | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.OutsideOrbit.hubColours_flip | 0 | []
 TARGET AXIOMS helper HadwigerNelson.SixRing.HubColours.swap | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER helper HadwigerNelson.SixRing.HubColours.swap | 0 | []
 TARGET AXIOMS helper HadwigerNelson.SixRing.HubColours.shift_back | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER helper HadwigerNelson.SixRing.HubColours.shift_back | 0 | []
 TARGET AXIOMS helper HadwigerNelson.SixRing.HubColours.ae_partner | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER helper HadwigerNelson.SixRing.HubColours.ae_partner | 0 | []
-TARGET AXIOMS leaf HadwigerNelson.SixRing.no_double_change | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER leaf HadwigerNelson.SixRing.no_double_change | 3 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_centre@Proofs.HadwigerNelson.Plane.SixRing.Chart]
-TARGET AXIOMS helper HadwigerNelson.SixRing.step_kill_left | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER helper HadwigerNelson.SixRing.step_kill_left | 3 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_centre@Proofs.HadwigerNelson.Plane.SixRing.Chart]
-TARGET AXIOMS leaf HadwigerNelson.SixRing.step_kill | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER leaf HadwigerNelson.SixRing.step_kill | 3 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_centre@Proofs.HadwigerNelson.Plane.SixRing.Chart]
+TARGET AXIOMS leaf HadwigerNelson.SixRing.no_double_change | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.no_double_change | 0 | []
+TARGET AXIOMS helper HadwigerNelson.SixRing.step_kill_left | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER helper HadwigerNelson.SixRing.step_kill_left | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.step_kill | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.step_kill | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.chart_eq_polar | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.chart_eq_polar | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.chart_zero | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.chart_zero | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.chart_hub | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.chart_hub | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.dist_chart_centre | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.dist_chart_centre | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.dist_chart_lt_one | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.dist_chart_lt_one | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.continuous_chart | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.continuous_chart | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.chart_eq_angularSum | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.chart_eq_angularSum | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.dist_hub | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.dist_hub | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.hub_add_three | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.hub_add_three | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.hub_axes | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.hub_axes | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.hub_shift | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.hub_shift | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.IsTip.dist_le_one | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.IsTip.dist_le_one | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.IsTip.inner_pos | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.IsTip.inner_pos | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.tip_antipodal | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.tip_antipodal | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.tip_unique | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.tip_unique | 0 | []
+TARGET AXIOMS helper HadwigerNelson.SixRing.adjacent_of_signs_aux | [propext, Quot.sound]
+TARGET FRONTIER helper HadwigerNelson.SixRing.adjacent_of_signs_aux | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.adjacent_of_signs | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.adjacent_of_signs | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.exists_adjacent_tips | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.exists_adjacent_tips | 0 | []
+TARGET AXIOMS leaf HadwigerNelson.SixRing.exists_cycle_label | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER leaf HadwigerNelson.SixRing.exists_cycle_label | 0 | []
 TARGET AXIOMS planner HadwigerNelson.SixRing.no_alternating_groups | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER planner HadwigerNelson.SixRing.no_alternating_groups | 0 | []
 TARGET AXIOMS planner HadwigerNelson.SixRing.no_alternating_pairs | [propext, Classical.choice, Quot.sound]
 TARGET FRONTIER planner HadwigerNelson.SixRing.no_alternating_pairs | 0 | []
-TARGET AXIOMS planner HadwigerNelson.SixRing.chart_step_false | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER planner HadwigerNelson.SixRing.chart_step_false | 3 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_centre@Proofs.HadwigerNelson.Plane.SixRing.Chart]
-TARGET AXIOMS planner HadwigerNelson.SixRing.adjacent_tip_false | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER planner HadwigerNelson.SixRing.adjacent_tip_false | 5 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.chart_hub@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_centre@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_lt_one@Proofs.HadwigerNelson.Plane.SixRing.Chart]
-TARGET AXIOMS planner HadwigerNelson.SixRing.no_outside_orbit_points | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER planner HadwigerNelson.SixRing.no_outside_orbit_points | 8 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.chart_hub@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_centre@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_lt_one@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.exists_adjacent_tips@Proofs.HadwigerNelson.Plane.SixRing.Tips,
- HadwigerNelson.SixRing.exists_cycle_label@Proofs.HadwigerNelson.Plane.SixRing.Tips,
- HadwigerNelson.SixRing.tip_unique@Proofs.HadwigerNelson.Plane.SixRing.Tips]
-TARGET AXIOMS planner HadwigerNelson.SixRing.no_outside_orbit | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER planner HadwigerNelson.SixRing.no_outside_orbit | 8 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.chart_hub@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_centre@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_lt_one@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.exists_adjacent_tips@Proofs.HadwigerNelson.Plane.SixRing.Tips,
- HadwigerNelson.SixRing.exists_cycle_label@Proofs.HadwigerNelson.Plane.SixRing.Tips,
- HadwigerNelson.SixRing.tip_unique@Proofs.HadwigerNelson.Plane.SixRing.Tips]
-TARGET AXIOMS planner HadwigerNelson.SixRing.not_ae_outside | [propext, sorryAx, Classical.choice, Quot.sound]
-TARGET FRONTIER planner HadwigerNelson.SixRing.not_ae_outside | 8 | [HadwigerNelson.SixRing.chart_eq_angularSum@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.chart_hub@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.continuous_chart@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_centre@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.dist_chart_lt_one@Proofs.HadwigerNelson.Plane.SixRing.Chart,
- HadwigerNelson.SixRing.exists_adjacent_tips@Proofs.HadwigerNelson.Plane.SixRing.Tips,
- HadwigerNelson.SixRing.exists_cycle_label@Proofs.HadwigerNelson.Plane.SixRing.Tips,
- HadwigerNelson.SixRing.tip_unique@Proofs.HadwigerNelson.Plane.SixRing.Tips]
+TARGET AXIOMS planner HadwigerNelson.SixRing.chart_step_false | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER planner HadwigerNelson.SixRing.chart_step_false | 0 | []
+TARGET AXIOMS planner HadwigerNelson.SixRing.adjacent_tip_false | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER planner HadwigerNelson.SixRing.adjacent_tip_false | 0 | []
+TARGET AXIOMS planner HadwigerNelson.SixRing.no_outside_orbit_points | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER planner HadwigerNelson.SixRing.no_outside_orbit_points | 0 | []
+TARGET AXIOMS planner HadwigerNelson.SixRing.no_outside_orbit | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER planner HadwigerNelson.SixRing.no_outside_orbit | 0 | []
+TARGET AXIOMS planner HadwigerNelson.SixRing.not_ae_outside | [propext, Classical.choice, Quot.sound]
+TARGET FRONTIER planner HadwigerNelson.SixRing.not_ae_outside | 0 | []
 CONTROL AXIOMS outside HadwigerNelson.Outside.OAI158.not_colorable_five | [propext,
  Classical.choice,
  Quot.sound,
@@ -164,4 +143,4 @@ CONTROL AXIOMS outside HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_ch
 CONTROL FRONTIER outside HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0 | 0 | []
 CONTROL AXIOMS planted i4_control_user | [sorryAx]
 CONTROL FRONTIER planted i4_control_user | 1 | [i4_control_planted@«(this file)»]
-DONE 46 targets 3 controls
+DONE 65 targets 3 controls

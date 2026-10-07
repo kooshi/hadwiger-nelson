@@ -248,3 +248,53 @@ Not run, by the brief: the full gate (`axioms.sh`, `vacuity.sh`, `assumptions.sh
 **The coordinator's Amendment 2, received as this stage's build ended** (2026-10-07 13:49 UTC): the chart's module and
 the tips' are added to this job's touches, with a stopping rule (about 420k by my own count, or three failed attempts
 on one leaf). Stage 6 onward. Own count at this stage: about 320k (an estimate; no meter).
+
+## Stage 6 — SAVED (FS132-I4): Amendment 2 — the chart's module and the tips' proved; the first night's theorem on the standard three
+
+**Proved at this stage**: all 11 leaves of `Plane/SixRing/Chart` and all 7 of `Plane/SixRing/Tips`, **no statement
+changed**, one helper added (`adjacent_of_signs_aux`, permission 3). Routes, against the planner's § 5.3:
+
+| leaf | route as built |
+|---|---|
+| `chart_eq_polar` | the sum-to-product by hand (`Plane.e_add`, `Plane.e_eq`) — FS132-I3's proof of `Shift.chart_eq_polar_shift`, which states the same; `Plane.e_add_e_eq` is not in this module's imports |
+| `chart_zero`, `chart_hub`, `dist_chart_centre`, `continuous_chart`, `chart_eq_angularSum`, `dist_hub`, `hub_shift` | as planned, a few lines each (`Plane.continuous_e`, `direction_coe`, `Complex.norm_real`) |
+| `dist_chart_lt_one` | `Real.cos_lt_cos_of_nonneg_of_le_pi` against `cos (π/3) = 1/2`, and `cos ≥ 0` on `[−π/2, π/2]` |
+| `hub_add_three`, `hub_axes` | `Plane.e_add_pi`; `e(π/3) + e(−π/3) = 1` |
+| `IsTip.dist_le_one` | `closure_minimal` into `closedBall q 1`: a point of the support within `1` of `p` and farther than `1` from `q` would straddle (not through `Confine.subset_closedBall_of_dist_lt`; the two-point case is direct) |
+| `IsTip.inner_pos` | `norm_sub_sq_real` |
+| `tip_antipodal` | four signs (`inner_pos` at `q j`, `q (j − 1)`, `q j'`, `q (j' − 1)`; `hr` at `m − 1` with `sub_add_cancel`), then `∀ j j' : Fin 4, j' ≠ j → j' ≠ j − 1 → j' − 1 ≠ j → j' = j + 2` by `decide` |
+| `tip_unique` | `tip_antipodal` twice against `τ (n + 3)`, `add_right_cancel` |
+| `adjacent_of_signs` | from `adjacent_of_signs_aux`: for all `t₀ t₁ t₂ : Fin 4`, two adjacent tips are equal or some point `j` is positive at the first and third axes and negative at the second — the derivation's three cases, checked over the 64 patterns by `decide`; then `hax` and `linarith` |
+| `exists_adjacent_tips` | as planned: signs from `inner_pos`, the antipodal hub, `hub_axes` |
+| `exists_cycle_label` | cardinalities: the image of `a` (4) inside `univ \ {X, Y, i}` (3) |
+
+**On `chart_eq_polar` and `Shift.chart_eq_polar_shift`** (Amendment 1's item 3, Amendment 2's request): one statement
+under two names in two modules neither of which imports the other. **One of the two can go only with an import**: if
+`Shift` imported `Chart` (no cycle: `Chart` imports `Basic` alone), `chart_eq_polar_shift` could be deleted and its
+four uses in `Shift` renamed; that edits FS132-I3's module and is the landing's or the planner's call. As they stand
+both are needed, and `dupnames` reads no doubled name.
+
+**Built**: `build.sh` under the slot — **exit 0**, 7 modules rebuilt, 9m16s, **19 `sorry` warnings, all in `Winding`
+(16) and `CyclicCentre` (3)** — the skeletons of other claims (C132-INDEX, C132-RING-WIND, C132-CORES-FREE); **no
+module of the exclusion has a `sorry`** (`data/fs132/i4/logs/build-6-chart-tips.out`).
+
+**The print, from the built modules** (`data/fs132/i4/axioms/Print.out`, `check.out`: exit 0, **65 of 65 records on
+exactly `[propext, Classical.choice, Quot.sound]`, none on `sorryAx`**, no outside theorem, no native axiom):
+
+```
+TARGET AXIOMS planner HadwigerNelson.SixRing.no_outside_orbit_points | [propext, Classical.choice, Quot.sound]
+TARGET AXIOMS planner HadwigerNelson.SixRing.no_outside_orbit | [propext, Classical.choice, Quot.sound]
+TARGET AXIOMS planner HadwigerNelson.SixRing.not_ae_outside | [propext, Classical.choice, Quot.sound]
+TARGET AXIOMS planner HadwigerNelson.SixRing.no_alternating_pairs | [propext, Classical.choice, Quot.sound]
+```
+
+Controls in the same run: `not_colorable_five` prints `no_proper_five_coloring`, `chromaticNumber_plane_eq_chiM0` prints
+`proper_to_borel_weak`, the planted `sorry` prints `[sorryAx]` with its frontier. The checker's allowed set of
+sorry-bearing modules is now empty (a target on `sorryAx` fails wherever the `sorry` is); `--self-test`: 8 plants,
+**8 refused** (`selftest.out`) — a slip on the way: the first plant of stage 5's self-test assumed a non-empty frontier
+and raised an `IndexError` once every frontier was empty; the plant is rewritten and a second added (a `sorry` under
+the headline theorem). The four lines were messaged to the coordinator before this commit, as Amendment 2 asks.
+
+`tools/check_architecture.py`: PASS (`logs/arch-6.out`; the two rows reworded). The block in `scripts/Axioms.lean`
+gains the 19 records of the two modules and six of the assembly the leaves complete (`chart_step_false`,
+`adjacent_tip_false`, `straddle_mono`, `no_outside_orbit_points`, `no_outside_orbit`, `not_ae_outside`).

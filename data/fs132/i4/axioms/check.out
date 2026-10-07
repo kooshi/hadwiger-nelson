@@ -1,4 +1,4 @@
-targets=46 clean=29 on-sorry=17 failures=0
+targets=65 clean=65 on-sorry=0 failures=0
 CLEAN (exactly a subset of [propext, Classical.choice, Quot.sound]):
   helper  shear_measurePreserving
   helper  quasiMeasurePreserving_triple_fst
@@ -15,35 +15,54 @@ CLEAN (exactly a subset of [propext, Classical.choice, Quot.sound]):
   helper  volume_liftPalette_ne_zero
   leaf    exists_change_of_ae_outside
   helper  chartAngles_quasiMeasurePreserving
+  leaf    chart_quasiMeasurePreserving
   leaf    shear_quasiMeasurePreserving
+  leaf    ae_ne_of_not_isTip
   helper  ringRadius_sub_ge
   helper  ringRadius_pos
+  helper  volume_partner_direction_eq_zero
+  leaf    unitPair_chart_ae
   leaf    measurableSet_liftPalette
   helper  OutsideOrbit.ae_mem_or
   helper  OutsideOrbit.ae_add_mem_or
   leaf    OutsideOrbit.ae_iff_not
   leaf    OutsideOrbit.ae_flip
   leaf    OutsideOrbit.change_at
+  leaf    OutsideOrbit.chart_avoids
+  helper  ae_chart_colour_mem
+  leaf    exists_tip
+  leaf    OutsideOrbit.hubColours
+  leaf    OutsideOrbit.hubColours_flip
   helper  HubColours.swap
   helper  HubColours.shift_back
   helper  HubColours.ae_partner
+  leaf    no_double_change
+  helper  step_kill_left
+  leaf    step_kill
+  leaf    chart_eq_polar
+  leaf    chart_zero
+  leaf    chart_hub
+  leaf    dist_chart_centre
+  leaf    dist_chart_lt_one
+  leaf    continuous_chart
+  leaf    chart_eq_angularSum
+  leaf    dist_hub
+  leaf    hub_add_three
+  leaf    hub_axes
+  leaf    hub_shift
+  leaf    IsTip.dist_le_one
+  leaf    IsTip.inner_pos
+  leaf    tip_antipodal
+  leaf    tip_unique
+  helper  adjacent_of_signs_aux
+  leaf    adjacent_of_signs
+  leaf    exists_adjacent_tips
+  leaf    exists_cycle_label
   planner no_alternating_groups
   planner no_alternating_pairs
-ON SORRY, through these declarations of other lots only:
-  leaf    chart_quasiMeasurePreserving  <-  chart_eq_angularSum
-  leaf    ae_ne_of_not_isTip  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_lt_one
-  helper  volume_partner_direction_eq_zero  <-  dist_chart_centre
-  leaf    unitPair_chart_ae  <-  chart_eq_angularSum, continuous_chart, dist_chart_centre
-  leaf    OutsideOrbit.chart_avoids  <-  chart_eq_angularSum
-  helper  ae_chart_colour_mem  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_lt_one
-  leaf    exists_tip  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_lt_one
-  leaf    OutsideOrbit.hubColours  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_lt_one
-  leaf    OutsideOrbit.hubColours_flip  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_lt_one
-  leaf    no_double_change  <-  chart_eq_angularSum, continuous_chart, dist_chart_centre
-  helper  step_kill_left  <-  chart_eq_angularSum, continuous_chart, dist_chart_centre
-  leaf    step_kill  <-  chart_eq_angularSum, continuous_chart, dist_chart_centre
-  planner chart_step_false  <-  chart_eq_angularSum, continuous_chart, dist_chart_centre
-  planner adjacent_tip_false  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_centre, dist_chart_lt_one
-  planner no_outside_orbit_points  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_centre, dist_chart_lt_one, exists_adjacent_tips, exists_cycle_label, tip_unique
-  planner no_outside_orbit  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_centre, dist_chart_lt_one, exists_adjacent_tips, exists_cycle_label, tip_unique
-  planner not_ae_outside  <-  chart_eq_angularSum, chart_hub, continuous_chart, dist_chart_centre, dist_chart_lt_one, exists_adjacent_tips, exists_cycle_label, tip_unique
+  planner chart_step_false
+  planner adjacent_tip_false
+  planner no_outside_orbit_points
+  planner no_outside_orbit
+  planner not_ae_outside
+ON SORRY (each is a failure since Amendment 2):
