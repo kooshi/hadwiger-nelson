@@ -378,4 +378,20 @@ between two colours that is an arc of the unit circle about a point one unit awa
     (a save by one member in the wedge family) is answered in part by a held object and is re-read when the claim has its
     verdict. (d) Kooshi is told now: the count I gave him as "94 of 94" stands for the two maps it came from, and is not
     the rule for every six-coloured object held.
+17. **FS124-K1: its phase-1 plan is committed — `a7daf9f6` on branch `fs124-wk1`, 14:29 UTC, which dates its blindness —
+    and the fence is lifted by my reply** (14:30 UTC). What is there: its record's Stages 1–3; three skeleton modules (the
+    shared definition, the radius clause, the two statements that use an import), **57 leaves**, build exit 0 with only
+    their warnings, the architecture check passing; the three modeling passes run fresh. **Its sentence on the join**:
+    "seven implies some disc has no weak six-colouring" needs no import; "a disc with no weak six-colouring implies seven"
+    is the half that needs the declared outside theorem on Borel transfer — "so an exclusion on a disc reaches seven only
+    through the transfer, and six-colourings of every disc reach six with no import". **Two additions**: a finite
+    unit-distance graph inside an open set with no `k`-colouring refutes every `k`-colouring of the set proper at almost
+    every unit pair; a colouring that separates every unit pair whose two ends lie off a null set is one, with no
+    measurability — "the entry point for a fragment of any regularity". **Price so far**: seven of the 57 leaves, the ones
+    it expected to cost most, proved in two probes (80 lines); the module about 270 lines of proof. **Disclosed touches of
+    fenced material**: a commit subject, and a listing of the shared scratch directory (its Stage 1) — logged; the second
+    route they might have cost is the planner's own to judge, and by Workflow 3.1 no grade rests on it. **My receipt**: the
+    commit and its time read on `origin`; the three modules listed; its record's outline read. Not checked by me: the
+    skeleton's statements against the claim list. **Sent with the fence's lift**: where the deriver's entries are; its
+    route in one line; that an implementer takes the module at its hand-back.
 
