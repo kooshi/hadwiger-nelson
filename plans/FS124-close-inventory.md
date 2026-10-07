@@ -38,3 +38,35 @@ between two colours that is an arc of the unit circle about a point one unit awa
    about its object, with grades (FS-132 inventory item 35). **Step 1 of the workflow, launched**: the asking lane's job
    FS124-P1 (`data/fs124/briefs/FS124-P1-question.md`) — the question re-posed in the class the problem now lives in, and the
    re-rank. The opening job waits on its card.
+2. **FS124-P1, first message: the question card is saved** (commit `92e98418`; `plans/STUB-q-ring.md` § The question (Poros,
+   2026-10-07), under the card of 2026-10-03; record `plans/POROS-2026-10-07-fs124-question.md` Stages 0–2; its gate exit 0).
+   **The object, stated once, with no vertex, ring, palette or seed**: a unit pair `(q, z)` is *tight for `(a, b)`* when near
+   `z` the label `a` fills the inside of the unit circle about `q` and `b` the outside; a map's unit arc is an instance with
+   no dictionary; FS-132's two appearances are this pair read from its centre and from its far end. **A finding against my
+   framing, and against what I told Kooshi**: "the arc is not an exception the exclusions left over, it is what they force"
+   (the four-cycle's exclusion at every witnessed four-cycle; the complementary pair's sharp form at every close pair; rows
+   135, 137, 149 for maps) — so the card asks what a tight pair passes on, not whether it dies; and "both roads pass through
+   one object" is narrower than I said: toward seven an exclusion here needs, besides, that every colouring has such a pair
+   (the regularity milestones', not asked here); toward six it is held for non-Siamese maps only. **The card**: when near
+   one end of a unit pair one label fills the inside of the unit circle about the other end and another the outside, what
+   must a weak six-colouring carry at the two rhombus completions, and does that recur or run out? Three branches — it
+   recurs (a labelled piece of the unit triangular lattice: one question at every radius), it runs out (that distance is
+   the explicit radius), or nothing is forced beyond the first step (the case list after all). **Six first claims**, all
+   over open one-label pieces, so held maps are controls with no dictionary and no margin can meet them: C124-RADIUS (up,
+   down), C124-CENTRE, C124-COMPLETION, C124-KIND, C124-SIX, C124-HALF. **Registered**: recurs 0.50, runs out 0.12,
+   nothing beyond the first step 0.38; "an exclusion at an explicit radius, in measure, … within this milestone: 0.10";
+   "a six-coloured object past `φ²/√2` … within this milestone: 0.12"; "six against seven decided by this milestone:
+   0.03". **Unchecked, by its own word**: all six are posed, none derived; two it matched to FS-132's shadow statement
+   "sign by sign in minutes"; one has no held inhabitant. **A correction owed, found by it**: the record job's dated line
+   in the stub says what transfers from the map class needs the dictionary fact of FS-134; that fact serves the other
+   direction. **A gate note**: the asking lane's card check reports one failure on the stub by construction (two dated
+   cards each carry rank 1). **My receipt**: the commit is on `main`; **the new section read whole by me** (lines 92–268 of
+   the stub). Not checked by me: any claim's mathematics; its control script. **Rulings.** (a) **The framing is
+   corrected, and Kooshi is told**: not "the hard case left over" but "what the exclusions force", and the two
+   qualifications of "both roads". (b) **The claim list is fixed from the card by script** (item 3). (c) The correction
+   to the stub's dated line is drafted by the opening job with its replacement for the provisional bearings.
+3. **The claim list is fixed** (12:50 UTC; `data/fs124/claims.md`): the class, the object, and the six claims — statement and
+   smallest form of each, copied by script from the card, nothing of route, controls or side. Each claim's *not claimed*
+   line comes from the deriver's plan and is fixed by a dated line. **The opening job is briefed** (FS124-E1, `ephodos`;
+   `data/fs124/briefs/FS124-E1-opening.md`) and launches into the first free slot.
+

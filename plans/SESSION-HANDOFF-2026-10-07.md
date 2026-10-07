@@ -57,6 +57,16 @@ claim list is extended by seven statements** (`data/fs132/claims-K1.md`, the dat
 wait for slots. **Slot order from here**: the next milestone's opening job (derive lane) first; then lot E with the join when
 the port is back; then lots A and D; then the tier-A planner.
 
+**Briefed, waiting for a slot (12:50 UTC): FS124-E1, FS-124's opening job** (`ephodos`; brief `data/fs124/briefs/FS124-E1-opening.md`,
+gate exit 0; record `plans/FS124-E1-derivation.md`, plan `plans/FS124-tight-pairs.md`): §G, §PA, §IQ, the plan, then the six
+first claims of `data/fs124/claims.md` (fixed from the asking lane's card; FS-124 inventory items 2–3) — **launch it into the
+first slot that frees** (the port's implementer or the asking lane, whichever hands back first), with the line "Your brief is
+on disk: read it in full first." and the brief's path. Its messages: each claim's statement with its *not claimed* line (fix
+by dated lines in `data/fs124/claims.md`), each verdict, and anything that would fix the value (to Kooshi at once, as "claimed
+by one mind, unchecked"). **The asking lane corrected my framing** (FS-124 inventory item 2): the unit arc is what the
+exclusions force, not what they left over; "both roads pass through one object" holds toward seven only with a point of
+usable data in every colouring (not this milestone's), and toward six is held for non-Siamese maps only.
+
 **Owed, not yet briefed**: the asking lane's job and FS-124's opening (above); the landing of the port; FS-133's kernel planner
 (after the exclusion's module is under way); the release's checking tool's audit (not started; nothing of it has run); the
 gate's design question on imports (FS-131 inventory items 633–635 — Kooshi has not answered; nothing changes in the tooling);
