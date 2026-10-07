@@ -399,3 +399,60 @@ control: sixty-forced
 one mind; kernel pending.
 
 ## Stage 5 — SAVED
+
+## Stage 6 — SAVED: claim 4, C137-OWN — derived
+
+**Verdict: derived, as posed, at the form the kernel lane's finding 6 allows (any connected subset of the circle), with
+one clause added: along such a set the label's own corners are inner.** *About colourings nobody holds an example of*:
+**no held object has such a set of more than one point with `ℓ` a label of the point** — the only held vertex carrying
+all six labels is FS116-Y2-SIXFRAG's centre, where each of the six labels is forced at one direction (30° + 60°·j) and
+on no arc; R7's lattice points and the bowtie fragment's five-label points carry all labels but one (their arcs are
+C136-COLLAR's). *What is new beyond the held entries*: C136-COLLAR is its case "ℓ absent"; for maps FS116-N2-SIXRING
+says more (the inner tile along the arc is the vertex's own tile, in the non-Siamese class). New is only the class of
+the hypothesis — the argument never reads that `ℓ` is absent. *Reads* kept corners; *forces* a region with length and
+no width. **On G100**: its sentence "Extent is forced in one way" is narrower than the entry it rests on; a second way
+is derived (a point of all `k` labels, along a set on whose side exactly one of its labels is pure), with no instance
+held. A rewrite is drafted for the record job (report, INVENTORY).
+
+derivation: C137-OWN
+  statement: About weak colourings that have the named corners; no weak six-colouring is known to have one. Let c be a weak k-colouring of an open set U, x a point, F a finite set of labelled corners at x that c has, ℓ a label, and A a connected subset of S(x) ∩ U such that at every point w of A every label other than ℓ is the label of a corner of F that is not inner at w. Then there is a connected open subset V of U inside S(x), almost every point of which has the label ℓ, such that every point w of A has a radius η > 0 with every point of B(w, η) inside S(x) in V; and every corner of F with the label ℓ is inner at every point of A. With "outer" in place of "inner" there is such a V outside S(x), holding the points of B(w, η) outside S(x), and every corner of F with the label ℓ is outer at every point of A.
+  uses only: C136-FORCED (`plans/FS136-derivation.md` § 2; [hand], one mind — inherited, read whole) with the one member x at each point of A; C136-TABLE (the same file, § 1; [hand], one mind; kernel-checked on a branch — inherited, read whole) with the one member x, for the clause on the corners of ℓ; that an open set covered by open sets is covered by countably many of them; that the part of a disc inside a circle through its centre is convex, and its part outside is connected for a small radius; that A is connected. Not consumed: the number of labels; that ℓ is absent at x (C136-COLLAR's hypothesis); that A is an arc or open in S(x) (the kernel lane's finding 6); that F fills a neighbourhood
+  not claimed: that a weak colouring has such corners; any width — η depends on w and on c and is bounded below by nothing; anything at a point of the closure of A that is not in A; **that a set A of more than one point exists on any held object when ℓ is a label of F — none is held** (FS116-Y2-SIXFRAG's centre gives six single points, R7's lattice points none; the arcs of FS114-Y2-BOWTIE are C136-COLLAR's, with ℓ absent); that V and the corner of F with the label ℓ belong to one piece (the map entry FS116-N2-SIXRING says so, in the non-Siamese class); what V bars one unit further on
+  argument: § Argument — a forced side along a connected set
+  verdict: derived
+  grade: derived from: C136-FORCED
+  minds: 1
+  model: FS116-Y2-SIXFRAG at its centre, with A the single point e(30°) and ℓ the label 0 of the sector about that direction: every other label has its corner not inner there, the sector's corner is inner, and the fragment has the label 0 just inside (the engine's closure of this seed forces the six corners, "all six the fragment's colours": `data/fs136/e2/out/flower0.txt`); with ℓ absent, FS114-Y2-BOWTIE's eight arcs at its four five-label points (236 of 236 samples). No model with ℓ a label of F and A of more than one point is held
+  prior art: partly: C136-COLLAR (`plans/FS136-derivation.md` § 2; one mind) is the case of ℓ absent and A an open arc; the asking lane's H-b and the card's claim 4 posed this form (`plans/POROS-2026-10-07-fs136-derived.md` § 0.3); for maps FS116-N2-SIXRING ("every ring arc is a (Q) arc"; `plans/FS116-derivation.md` l. 635; one mind, non-Siamese; argument read); the kernel planner's finding 6 is the form for any connected subset; print: as C136-FORCED's line — not found
+  handoff: de Bruijn — with C136-COLLAR, as one statement: `ae_onSide_of_label` at the one member for each point of A, a countable subcover, the connectedness of a union of one-sided discs along a connected set, and one more use of the table for the corners of ℓ
+
+control: own-forced
+  of: C137-OWN — the directions at which a label of the point itself is the one label left on a side, exact, at every held vertex carrying at least k − 1 labels (the lines of `sixty-forced`'s scan for a label the point has): FS116-Y2-SIXFRAG's centre gives six single directions, 30° + 60°·j, one for each of its six labels, and no arc; no other held vertex gives any. The fault is the engine's planted bar: arcs then appear
+  run: python3 ../data/fs137/e1/budget.py forced --list | grep "(own)"
+  expect:    flower at (0.00000,0.00000) labels=6 label 0 (own) inner: [30.0]
+       flower at (0.00000,0.00000) labels=6 label 1 (own) inner: [90.0]
+       flower at (0.00000,0.00000) labels=6 label 2 (own) inner: [150.0]
+       flower at (0.00000,0.00000) labels=6 label 3 (own) inner: [210.0]
+       flower at (0.00000,0.00000) labels=6 label 4 (own) inner: [270.0]
+       flower at (0.00000,0.00000) labels=6 label 5 (own) inner: [330.0]
+  fault: python3 ../data/fs137/e1/budget.py forced --list --fault=bar | grep "(own)"
+
+### Argument — a forced side along a connected set
+
+For each `w` in `A`, C136-FORCED at `w` with the one member `x`, the parts of the corners of `F` that `c` has, and the
+corner at `w` inside `S(x)`: its hypothesis is the hypothesis on `A`. So there is `η_w > 0` such that `D_w`, the part of
+`B(w, η_w)` inside `S(x)`, is an open subset of `U` almost every point of which has the label `ℓ`; `D_w` is convex. Let
+`V` be the union of the `D_w`. It is open, inside `S(x)`, and the union of countably many `D_w`, so almost every point of
+it has the label `ℓ`. It is connected: for `w′` in `A` within `η_w` of `w`, the points just inside `S(x)` near `w′` lie
+in both `D_w` and `D_{w′}`, so the set of points of `A` whose `D` lies in the component of `V` containing `D_w` is open
+in `A`; these sets partition the connected set `A`, so there is one. Every `w` of `A` has `D_w` in `V`.
+
+*The corners of `ℓ`.* By C136-TABLE at `w` with the one member `x`, almost every point `z` of a small ball about `w`
+has a label `a` that, if it is a label of `F`, is inner-pure at `w` when `|z − x| < 1`. Almost every point of `D_w`, a
+set of positive measure inside `S(x)`, has the label `ℓ`; so if `ℓ` is a label of `F` it is inner-pure at `w`. Outside:
+the same with the part of `B(w, η_w)` outside `S(x)`, connected for small `η_w`. ∎
+
+**Theorems this stage proved**: C137-OWN — derived from C136-FORCED and C136-TABLE (inherited, one mind each), one
+mind; kernel pending.
+
+## Stage 6 — SAVED
