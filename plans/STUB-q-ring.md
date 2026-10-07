@@ -89,6 +89,183 @@ placements? The question is about every solution and cannot be answered without 
 answer either makes the placed skeleton an image of the unit triangular lattice that must recur at every radius (the YES side's shape; the capped strip's
 row of midline vertices is one finite piece), or names where every chain of placements must close (the exclusion's shape).
 
+## The question (Poros, 2026-10-07) — for every measurable colouring proper at almost every unit pair
+
+*FS124-P1 (`plans/POROS-2026-10-07-fs124-question.md`; brief `data/fs124/briefs/FS124-P1-question.md`). Posed after Kooshi chose this
+milestone (2026-10-07) and after FS-132's three rounds. The card of 2026-10-03 above stands for maps; this section is the question in
+the class the problem lives in since `[OAIMath2026]`. Nothing here is derived: every statement is posed, with what would settle it.*
+
+**The class.** A *weak `k`-colouring* of an open set `U` of the plane is a measurable map `c` from `U` to `k` labels with
+`c(z) ≠ c(z + u)` for almost every pair of a point `z` of `U` and a unit vector `u` with `z + u` in `U` (the wording of
+`plans/FS132-derivation.md`'s entries). A label is *present* at a point when the point lies in the closed essential support of its class.
+
+**The object, stated once.** Let `c` be a weak colouring of `U`, `q` and `z` two points with `|q − z| = 1` and `z` in `U`, and `a ≠ b` two
+labels. The pair `(q, z)` is **tight for `(a, b)`** when there is `ρ > 0` with `B(z, ρ) ⊂ U` such that almost every point `w` of
+`B(z, ρ)` with `|w − q| < 1` has the label `a` and almost every point `w` of `B(z, ρ)` with `|w − q| > 1` has the label `b`. `q` is the
+pair's **centre**, `z` its **far end**, `a` its inside label, `b` its outside label; the two points `q + R^{±1}(z − q)`, `R` the
+rotation by `π/3`, are its **rhombus completions** (each is at distance 1 from both `q` and `z`). The pair is **of kind both** when `a`
+and `b` are both present at `q`. In a map a boundary arc of the unit circle about `q` is a tight pair at each of its interior points,
+with no dictionary: a tile is an open set of one label. The map class's (Q) arc is a tight pair of kind both whose centre carries at
+least four colours; FS-132's two appearances, (α) and (β), are a tight pair read from its centre and from its far end
+(`plans/POROS-2026-10-07-fs124-question.md` § 1.2).
+
+### The card
+
+question: what-does-a-tight-unit-pair-pass-on
+  evidence: `plans/FS132-derivation.md` § 12 — every exclusion of FS-132 is arc-free, and the three entries that reach the object
+    conclude at it or produce it (C132-PLACED-RING, C132-COMP-SHARP as stated, C132-LENS); C132-M-EXCL (its § 1) forces the centre's own
+    labels onto the ring at every witnessed four-cycle; `LEDGER.md` row 135, "a close complementary pair … sits on a unit rhombus with
+    four-colour corners (FS-110's T2, forced)", and row 136, each printed positive "stops at the unsaved second common unit point of a
+    close complementary pair saved at its first"; control `kept-model` (that file, l. 354): labels 012, 1234, 012, 0145, 012, 0235,
+    interfaces-of-x=3 on-unit-circles-about=[1, 3, 5] — one shape in all 192 models, a three-label centre with three complementary
+    partners, each pair saved at both common unit points
+  expected: that the unit arc is the hard case — the one exception each exclusion leaves, to be excluded next at an explicit radius, ring type by ring type
+  ask: When near one end of a unit pair one label fills the inside of the unit circle about the other end and another label the outside, what must a weak six-colouring carry at the two rhombus completions, and does that recur or run out?
+  if it recurs (a completion is again an end of tight pairs, its labels fixed by the pair's): the tight pairs of a six-colouring span
+    a labelled piece of the unit triangular lattice; FS-124 becomes one question about that labelled skeleton at every radius — the YES
+    side grows the kept shape along it, the NO side looks for the lattice point with no label set left — and the cases 1, 3, 4 and 5
+    above are its local rules
+  if it runs out (some completion, or a point a bounded number of unit steps on, is left no label): that distance is the explicit
+    radius, the exclusion holds for every weak six-colouring with a tight pair of the kind named, and what remains for seven is only
+    that every six-colouring has such a pair
+  if nothing is forced beyond the first step (the completions lose the pair's two labels and are otherwise free): tight pairs are not
+    a skeleton; the milestone is the case list after all, worked case by case in this section's grammar, SEMI-PAR3 and the capped
+    strip's family first
+  answered by: derivation — Ephodos, FS-124's opening job and its first round, on the first claims below
+  cost: an opening job; five first claims of a stage or less each; then one round on the skeleton
+  hunch: it recurs at first order and the count bites at the centre — a four-label point cannot be the centre of tight pairs at all
+    six points of a 60° orbit of its ring, so a skeleton that saves every pair twice needs five-label centres (C124-SIX; 0.5 that the
+    card's first branch is the one that occurs)
+  falsifier: a weak six-colouring or a held fragment with a tight pair one of whose rhombus completions has a label of the pair
+    present; or a four-label point of a held object that centres six such pairs
+  rank: 1
+
+### Existence form
+
+Is there, for every `R > 0`, a weak measurable six-colouring of the open disc of radius `R`? By C124-RADIUS below (posed) a yes is
+`χ(ℝ²) = 6` and a no at one radius is `χ(ℝ²) = 7`: the existence form needs no vertex, no seed and no map. Its form at the object: is
+there a weak six-colouring of an open set containing the closed disc of radius `r` about the centre of a tight pair of kind both, for
+some `r` above `φ²/√2`? Held, each a map: every disc of radius below `φ²/√2` about a four-colour vertex of the capped strip (row 138);
+`φ` about a corner of the disk (row 136); below `3/2` about a six-colour vertex (FS116-Y2-SIXFRAG); nothing past `φ²/√2`. G83's
+killing test is this form's yes.
+
+### Structural form
+
+In **every** weak measurable six-colouring of an open set, and for every tight pair `(q, z)` in it: which labels are present at `q`, at
+`z` and at the two rhombus completions, and in which directions at each; which unit pairs through those four points are then tight, and
+for which labels; and is there a datum, defined at a point from the tight pairs through it, that every colouring carries from `q` to
+each point it forces to be an end of a tight pair? The question is about every solution in the widest class where it makes sense — it
+is asked at every `k`, and six enters only where a count is spent — and it cannot be answered without naming what a point carries: the
+candidate is the first-order datum (for each label, the set of directions at the point in which it is present, and for each unit pair
+through the point and each label present at both ends whether the label lies between the two ends or apart). Its answer is either a
+rule that reproduces the datum along the unit triangular lattice (the YES side's shape; R7 is the inhabitant at seven, every boundary
+"a unit arc centred at a lattice point that carries both its side colours"), or a count that fails at a named lattice step (the NO's
+shape; row 136's stop — "the unsaved second common unit point" — is the instance held for maps).
+
+### What each answer gives
+
+| answer | toward six | toward seven |
+|---|---|---|
+| C124-RADIUS derived | fragments at every radius suffice in the measurable class: a family of weak six-colourings of discs, of any regularity, is `χ(ℝ²) = 6` | seven is a statement about one disc: no data at a point is needed to *state* the NO |
+| the datum recurs, and a consistent labelled skeleton exists at every radius | the first object to build on that is not a list of fragments: fill its cells (the second-order problem, where every held kill is a straddle) | the NO is then not a first-order count; it must be a straddle or a second-order statement on a named cell |
+| the datum recurs, and no consistent skeleton exists beyond some radius | a six-colouring's tight pairs are confined below that radius about every rich point: with C132-M-EXCL, no witnessed four-cycle survives it | an exclusion at an explicit radius for every weak six-colouring with such a point; with a rich point in every colouring (not this milestone's: FS-127, FS-128) it is `χ(ℝ²) = 7` |
+| it runs out at a bounded number of steps | — | the same, shorter |
+| nothing recurs | the YES side has no skeleton and builds fragment by fragment | the case list of 2026-10-03, case by case, in this section's grammar |
+| C124-SIX refuted by an object | a four-label point centring six tight pairs: the honeycomb closes at four labels, and the kept shape is worth a search to radius 2 at once | — |
+
+### The first claims a deriver takes
+
+*Each is a statement, with its smallest form, its control and the side it would move. Each is posed in the grammar of C132-SHADOW —
+open sets with one label almost everywhere — so a held map is an instance of every hypothesis and a control needs no dictionary
+(FS-134's fact F2 is not on this milestone's path). None may be met by a margin: every hypothesis names a tight pair, and a colouring
+with a margin has none. Order: as listed.*
+
+- **C124-RADIUS (the YES side's clause; C132-RADIUS re-posed as two statements).** *(up)* For every integer `k ≥ 1`: if for every
+  `R > 0` the open disc of radius `R` about the origin has a weak measurable `k`-colouring, then every finite unit-distance graph in the
+  plane has a proper `k`-colouring, and `χ(ℝ²) ≤ k`. *(down)* If `χ(ℝ²) ≤ 6`, every open disc has a weak measurable six-colouring.
+  *Smallest form of (up)*: one finite unit-distance graph of diameter `D`, one disc of radius above `D`: among the rigid motions
+  carrying the graph into the disc, those making an edge monochromatic form a null set. *Uses expected*: for (up), the argument of this
+  library's N-EASY on a disc, and de Bruijn–Erdős; for (down), the declared outside theorem `Outside.OAI158.proper_to_borel_weak` and
+  restriction. *Controls*: at `k = 7` both hold with the hexagonal colouring; at `k = 5` (up) must fire — with `[OAIMath2026]` Thm 1.4
+  it gives a radius at which no disc has a weak five-colouring, a statement not in the release. *Side*: YES for (up); with (down) and
+  `χ(ℝ²) ∈ {6, 7}`, `χ(ℝ²) = 7` iff some disc has no weak six-colouring.
+- **C124-CENTRE (no side: the object's first property, at every `k`).** Let `c` be a weak `k`-colouring of an open set `U`, `q` and
+  `z` points of `U` with `|q − z| = 1`, and `(q, z)` tight for `(a, b)`. Then there is `η > 0` such that almost every point `w` of
+  `B(q, η)` with `|w − z| > 1` has a label other than `a`, and almost every point `w` of `B(q, η)` with `|w − z| < 1` has a label other
+  than `b`. *Smallest form*: one of the two sentences — it is C132-SHADOW (`plans/FS132-derivation.md` § 2) with `p = q`, `p′ = z`,
+  the open piece on one side of the arc and `v` radial. *Controls*: it must hold, visibly and not vacuously, at the centre of every
+  held unit arc read from the fragment's own tiles — the capped strip's midline vertices, the corners of the disk's pentagon, fragment
+  T2, the bowtie fragment, the kept model's three four-label points, and R7 at seven; the plant moves one arc's centre by `0.01` in the
+  checker's input, and the check must then fail. *Side*: none; it is why a tight pair's centre is never a margin point.
+- **C124-COMPLETION (decides between: the first thing a tight pair passes on, at every `k`).** Let `c` be a weak `k`-colouring of
+  `U`, `(q, z)` tight for `(a, b)`, and `w` a rhombus completion of the pair lying in `U`. Then there is `η > 0` such that almost every
+  point of `B(w, η)` has a label other than `a` and other than `b`. *Smallest form*: one label, one side of the unit circle about
+  `z` near `w` — C132-SHADOW with `p = w`, `p′ = z`, the half-disc of `a` at `z`, and a direction `v` in it with `v·(z − w) > 0`;
+  then one with `v·(z − w) < 0`. *Controls*: the kept model (pair `(y_1, x)`, completions `y_0`, `y_2`, whose labels 012 hold neither
+  label of the pair); fragment T2; R7 at seven. It must not fire where the pair is not tight: the hexagonal seven-colouring at
+  circumradius `1/2`, where a vertex's unit circle passes through three vertices and no edge lies on it. *Side*: both — it is the rule
+  the skeleton of the card's first branch is made of, and the exclusion's first step.
+- **C124-KIND (a calibration: is "of kind both" a property or a hypothesis?).** There is a weak measurable seven-colouring of the
+  plane, by formula, with a tight pair `(q, z)` for `(a, b)` at which neither `a` nor `b` is present at `q`. *Smallest form*: the
+  hexagonal seven-colouring at circumradius `2/5` with one straight edge replaced, inside its margin, by an arc of the unit circle
+  about a point whose neighbourhood carries neither tile's label; an exact check of the two margins. *Control*: the same arc at
+  circumradius `1/2` must be refused by the check. *Side*: none; if TRUE, property (Q) is not a consequence of tightness, every
+  NO-side statement below names the kind it needs, and what forces the kind at six is a claim that spends six.
+- **C124-SIX (decides between: the first statement on the arc's side that reads no ring label).** Let `k ≥ 4`, `U` an open set
+  containing the closed unit disc about `q`, `c` a weak `k`-colouring of `U`, `ψ` an angle, `z_j = q + e(ψ + jπ/3)` for `j = 0, …, 5`,
+  and `a, b, a′, b′` four distinct labels such that for `j = 0, 2, 4` the pair `(q, z_j)` is tight for `(a, b)` or for `(b, a)`, and
+  for `j = 1, 3, 5` the pair `(q, z_j)` is tight for `(a′, b′)` or for `(b′, a′)`. Then a label other than `a, b, a′, b′` is present at
+  `q`. *Smallest form*: three pairs — if `(q, z_0)`, `(q, z_2)`, `(q, z_4)` are tight for `(a, b)` or `(b, a)`, then near `q` almost
+  every point of label `a` lies in the intersection of the closed unit discs about the `z_j` at which `a` is the inside label and of
+  the complements of the open unit discs about the others, a set that is `{q}` when the three agree and has angle `π/3` at `q` when
+  they do not. *Control*: `tools/fs124_p1_cones.py` (the count: `equal-signs=[0, 0] mixed-signs-widths=[60]
+  most-covered-by-four-labels=240 of 360`; `--fault` exits 1); it must not fire on the kept model, whose four-label points centre
+  tight pairs at three consecutive ring points only; at SIXFRAG's six-colour vertex and at R7's vertices, where the pairs are not of
+  this two-pair pattern and the statement does not apply, the smallest form's confinement must be seen to hold label by label.
+  *Side*: both — a skeleton that saves every complementary pair at both common unit points has five-label centres (case 4
+  above), and a four-label centre is excluded on its closed unit disc under the stated pairs.
+- **C124-HALF (the NO side: row 135's rhombus in measure, first half; C132-ARC with its sides named).** In the setting of
+  C132-COMP-SHARP (`plans/FS132-derivation.md` § 4), suppose exactly one of the six sets, `K_0`, a set of `x` with labels `t_0, t_1`, is
+  contained in the unit circle about the common unit point `w`, and at least two of the three sets of `y` have a point strictly inside
+  the unit circle about `w`. Then, after exchanging the names `t_0, t_1` if need be, there is `η > 0` such that almost every point of `B(w, η)` outside
+  the unit circle about `y` has the label `t_1` if it lies inside the unit circle about `x` and the label `t_0` if it lies outside it.
+  *Smallest form*: `x`'s two other sets are blocked on opposite sides of the unit circle about `w` (else a quadrant at `w` has no
+  label left: C132-CROSS). *Second statement (two sets)*: if exactly `K_0` and one set `K′_0` of `y`, with labels `t′_0, t′_1`, are contained in
+  the unit circle about `w`, `x`'s two other sets have points strictly on opposite sides of that circle, and `y`'s two other sets
+  likewise, then almost every point near `w` has one of the four labels `t_0, t_1, t′_0, t′_1`. *Controls*: no held object meets the
+  first statement's hypothesis — in fragment T2 three sets lie on that circle, in the kept model two — so it may hold of an empty
+  class at six, and its entry says so; the second statement must hold at the kept model's `w = y_1` (labels 1234: the two third
+  labels absent) once its opposite-sides hypothesis is read off the model. *Side*: NO — it turns C132-COMP-SHARP's residue from a void into a tight
+  pair on one side, to which C124-CENTRE and C124-COMPLETION then apply. *Not asked here*: that a label of `y` is present at `w` —
+  the map class's "four-colour corners", forced there (row 135) and open in measure; it is the first thing the skeleton round asks.
+
+**Which side each is on.** The YES side's: C124-RADIUS (up). The NO side's: C124-HALF, and C124-SIX read as an exclusion on a closed
+unit disc. Deciding between: C124-COMPLETION, C124-SIX. No side: C124-CENTRE, C124-KIND, C124-RADIUS (down).
+
+**What to carry over from the map class first, and how.** In this order: row 138's cone form ("every tile's cone and colour is pinned
+by the half-planes facing the edges' centres") — it is C124-CENTRE, already carried as C132-SHADOW; row 135's rhombus lemma
+(FS112-N3-COR3) — C124-HALF, then the open "corner" statement; row 136's count (FS112's FORCE: a three-colour vertex "has at most
+three close complementary partners, at rhombus completions of its unit-arc centres") — through C124-COMPLETION; then the placing rule
+(FS116-N3-SEMI), whose second alternative is a tight pair read from its far end. Each is carried by re-reading its argument at the
+class it reads (G92) and restating it over open one-label pieces; **none needs FS-134's dictionary fact**, which serves the other
+direction — reading a palette-stated entry (C132-M-ORBIT, C132-M-EXCL) at a map vertex. A map-class statement whose argument reads a
+tile as one connected piece of diameter at most 1 (FS116-V6's V6-HUBS is the known one, C132-RUN-EMPTY) does not carry over this way,
+and says so.
+
+**Carried here from FS-132, and where each now sits.** C132-RADIUS is C124-RADIUS. C132-ARC is C124-HALF. C132-PLACED's open line —
+whether a pair containing a label of the centre's triple is a witnessed edge at the placed point — is not a first claim: C124-CENTRE
+and C124-COMPLETION, applied to the two tight pairs C132-PLACED-RING produces at the placed point, say what its inner wedges may hold,
+and the line is re-read after them.
+
+### Registered expectations (Poros, 2026-10-07, before any derivation of these)
+
+C124-RADIUS (up) derived as posed 0.90; (down) 0.92. C124-CENTRE derived as posed 0.92. C124-COMPLETION derived as posed 0.85.
+C124-KIND true by formula 0.80. C124-SIX derived as posed 0.70, restated at its wording 0.25, refuted by an object 0.05. C124-HALF
+derived as posed 0.65. The card: recurs 0.50, runs out 0.12, nothing forced beyond the first step 0.38. An exclusion at an explicit
+radius, in measure, for every weak six-colouring with a tight pair of a named kind, within this milestone: 0.10. A six-coloured object
+past `φ²/√2` about a tight pair's centre, by formula or search, within this milestone: 0.12. Six against seven decided by this
+milestone: 0.03.
+
 ## What FS-116 established that this stands on (addresses in `plans/FS116-derivation.md`)
 
 - **The placing rule, derived.** A change point whose `±60°` germs lie off (Q) arcs is a vertex of at least four colours (FS116-RING-GERM, held); at a
@@ -102,6 +279,19 @@ row of midline vertices is one finite piece), or names where every chain of plac
   `√3`; FS116-Y1-NOTCH forces the notch colours at the strip's stop points.
 
 ## Bearing on the answer
+
+**In the measurable class (Poros, 2026-10-07; FS124-P1; `plans/POROS-2026-10-07-fs124-question.md` § 1.3).** The object is not an
+exception the exclusions left over: it is what they force. At a witnessed four-cycle the centre's own labels fill part of the ring
+(C132-M-EXCL); a close complementary pair puts an edge set on the unit circle about each common unit point (C132-COMP-SHARP); in maps
+every valid six-map has a four-colour vertex and, non-Siamese, each has (Q) arcs or dies at `1 + ε` (rows 137, 149). So, stated
+honestly on each side. **Toward seven**: an exclusion here is an exclusion of weak six-colourings *that have a tight pair of a named
+kind*, at an explicit radius; it is `χ(ℝ²) = 7` only together with a statement that every weak six-colouring has such a pair, and
+whether every colouring has a point with any witnessed cycle at all is FS-127's and FS-128's, not this milestone's. **Toward six**:
+weak six-colourings of discs of every radius are `χ(ℝ²) = 6`, at any regularity (C124-RADIUS, posed); that a six-colouring must be
+*built from* tight pairs is held for non-Siamese maps only, and nothing held stops a Siamese or a wild construction from avoiding
+them — so this is the YES side's only held home, not its only possible one. **What the milestone can deliver alone**: what a tight
+pair passes on, at every number of colours, and the first count that spends six on the arc's side (C124-SIX). The paragraph of
+2026-10-03 below is the bearing in the map class and stands.
 
 **The main remaining case set of the six-map NO with unit arcs, and the YES side's home** (Poros, 2026-10-03). Every held positive past `√3` has (Q) arcs
 on its four-colour rings (row 136), and in the non-Siamese class no ring without one survives past `1 + ε` (row 149), so the life of a four-colour vertex is
@@ -196,6 +386,17 @@ graphs `KG(6, 2)` and `KG(4, 2)` — case 5's reading lives there); G84 (a (Q) a
 pairs blind every count — why case 7 is FS-123's and no count is a step); G21 (no held inhabitant past `φ²/√2` — every exclusion fails on the controls
 first); proposed G92 (a held result reaches its argument's class — read DOUBLETIP's and OUTERADJ's arguments before citing their statements). Rows 133–138,
 145–150, 153. Stubs FS-123 (the Siamese class), FS-125 (the saturated class), FS-117 (the count's K1′), FS-122 (route R's exact-map form).
+
+*For the question of 2026-10-07 (Poros, FS124-P1; one line of why each, which the opening job's re-grokking replaces):* G84 (a tight
+pair of kind both is contact's split case — the object's home); G92 (each map-class lemma is carried by re-reading its argument over
+open one-label pieces: C132-SHADOW is row 138's cone form at the class its argument reads); G91 (the placing rule is the map-class
+instance of what a tight pair passes on, and the 60° rule is why the rhombus completions are where it lands); G83 (every held kill is
+a straddle, second order — where a first-order skeleton would have to be killed or filled); G95 (kind both fails under local slack at
+seven, C124-KIND, so at six it is a hypothesis or a theorem that spends six); G82 (C124-RADIUS: the YES is objects on discs of every
+radius, the NO a statement about one disc); G86 (no count over tiles: C124-SIX counts directions at one point); G79 (the example
+invariant: what R7 and the kept shape carry at each lattice point); G94 (what these claims need from regularity is one-label open
+pieces near two points, never a map). Rows 135 and 136 (the rhombus and the stop), 138 (the cone form), 145 (FS116-O1-YESLIM, for
+maps), 149. Entries C132-SHADOW, C132-CROSS, C132-COMP-SHARP, C132-PLACED-RING, C132-M-EXCL (`plans/FS132-derivation.md`).
 
 *At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-MR1-DOUBLETIP, FS129-SR3-OUTERADJ,
 -E2ONE, FS129-SR1-TWOCIRC, -BENDANY, -BENDLE3, -RINGBAND, -SIXQ, FS129-OR1-BENDFRAG, -LOCALDENSE, -DISCF-NS; G71's height on a curve (FS110's winding)

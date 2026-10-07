@@ -185,6 +185,63 @@ pairs. No verdict of the inventory changes from "no" to a surprise. *Prediction*
 *Cost*: the stub's card of 2026-10-03 and its eight cases are not written off — the cases become the ways a tight pair's two ends can be
 filled — but the first claims change, and FS-134's dictionary fact leaves this milestone's critical path. The product does not change.
 
+## Stage 2 — SAVED: the question card
+
+*The card, its existence and structural forms, what each answer gives, the first claims and the registered expectations are in
+`plans/STUB-q-ring.md` § The question (Poros, 2026-10-07), under the card of 2026-10-03, which stays. The section's source is
+`data/fs124/p1/question-2026-10-07.md`; the card below is copied from it by script. The stub's "Bearing on the answer" has a dated
+paragraph for the measurable class and its provisional bearings a dated line; no banner and no other lane's line was touched.
+`poros_gate.py cards` on the stub reports one failure by construction — two dated cards in one file each carry rank 1 (ll. 61 and
+114) — and this record's gate is the binding one.*
+
+question: what-does-a-tight-unit-pair-pass-on
+  evidence: `plans/FS132-derivation.md` § 12 — every exclusion of FS-132 is arc-free, and the three entries that reach the object
+    conclude at it or produce it (C132-PLACED-RING, C132-COMP-SHARP as stated, C132-LENS); C132-M-EXCL (its § 1) forces the centre's own
+    labels onto the ring at every witnessed four-cycle; `LEDGER.md` row 135, "a close complementary pair … sits on a unit rhombus with
+    four-colour corners (FS-110's T2, forced)", and row 136, each printed positive "stops at the unsaved second common unit point of a
+    close complementary pair saved at its first"; control `kept-model` (that file, l. 354): labels 012, 1234, 012, 0145, 012, 0235,
+    interfaces-of-x=3 on-unit-circles-about=[1, 3, 5] — one shape in all 192 models, a three-label centre with three complementary
+    partners, each pair saved at both common unit points
+  expected: that the unit arc is the hard case — the one exception each exclusion leaves, to be excluded next at an explicit radius, ring type by ring type
+  ask: When near one end of a unit pair one label fills the inside of the unit circle about the other end and another label the outside, what must a weak six-colouring carry at the two rhombus completions, and does that recur or run out?
+  if it recurs (a completion is again an end of tight pairs, its labels fixed by the pair's): the tight pairs of a six-colouring span
+    a labelled piece of the unit triangular lattice; FS-124 becomes one question about that labelled skeleton at every radius — the YES
+    side grows the kept shape along it, the NO side looks for the lattice point with no label set left — and the cases 1, 3, 4 and 5
+    above are its local rules
+  if it runs out (some completion, or a point a bounded number of unit steps on, is left no label): that distance is the explicit
+    radius, the exclusion holds for every weak six-colouring with a tight pair of the kind named, and what remains for seven is only
+    that every six-colouring has such a pair
+  if nothing is forced beyond the first step (the completions lose the pair's two labels and are otherwise free): tight pairs are not
+    a skeleton; the milestone is the case list after all, worked case by case in this section's grammar, SEMI-PAR3 and the capped
+    strip's family first
+  answered by: derivation — Ephodos, FS-124's opening job and its first round, on the first claims below
+  cost: an opening job; five first claims of a stage or less each; then one round on the skeleton
+  hunch: it recurs at first order and the count bites at the centre — a four-label point cannot be the centre of tight pairs at all
+    six points of a 60° orbit of its ring, so a skeleton that saves every pair twice needs five-label centres (C124-SIX; 0.5 that the
+    card's first branch is the one that occurs)
+  falsifier: a weak six-colouring or a held fragment with a tight pair one of whose rhombus completions has a label of the pair
+    present; or a four-label point of a held object that centres six such pairs
+  rank: 1
+
+**Why this card and not the stub's of 2026-10-03 re-worded.** That card asked what a (Q) ring passes "to the four-colour vertices its
+change points place"; its unit was the vertex and its ring type, and three of its hypotheses (vertex, change point, (Q)) have no
+measurable form without a dictionary. This one keeps its question — what is passed on, and does it recur or close — and changes the
+unit to the pair, which is defined for every measurable colouring, and whose first two consequences (at the centre, at the
+completions) are corollaries of an entry already held. The eight cases are not withdrawn: they are the ways the two ends of a tight
+pair can be filled in a map.
+
+**The six first claims**, by side (statements in the stub): YES — C124-RADIUS (up). NO — C124-HALF; C124-SIX read as an exclusion on
+a closed unit disc. Deciding between — C124-COMPLETION, C124-SIX. No side — C124-CENTRE, C124-KIND, C124-RADIUS (down).
+
+**What I checked of my own claims before posing them, and what I did not.** C124-CENTRE and C124-COMPLETION: I matched each sentence to
+C132-SHADOW's statement, sign by sign (the two half-planes at the completion have normals 120° and 60° apart, so both directions `v`
+exist); not derived, one mind, minutes. C124-SIX: the count is `tools/fs124_p1_cones.py`; the step from closed unit discs to half-planes
+at `q` is asserted, not written. C124-HALF: the quadrant argument is C132-CROSS's, run with one set on the circle; its first statement
+has no held inhabitant and may be vacuous at six. C124-KIND: the two margins of the hexagonal colouring at circumradius 2/5 (0.8 and
+1.033) leave room for a short unit arc by a sagitta estimate only; no formula was written. C124-RADIUS (up): the motion group's map to
+(point, unit vector) for one edge is a diffeomorphism onto its image, so a null set of bad pairs pulls back to a null set of motions;
+not written out. Each is a claim for the deriver, and none is an entry.
+
 ## Hunch ledger
 
 *Carried forward from `plans/POROS-2026-10-07-fs132-night.md` and `plans/POROS-2026-10-07-fs132-round2.md`. The night's closed entries stay
