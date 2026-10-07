@@ -19,7 +19,10 @@ entry lint
   claim C136-STOP-GERMS: prior art known
   claim C136-STOP-GERMS-RADIUS: minds 1
   claim C136-STOP-GERMS-RADIUS: prior art partly
-  entries: 9  derived: 9  stalled, gapped or refuted: 0
+  claim C136-COLLAR: governed by C136-FORCED (hand, minds 1)
+  claim C136-COLLAR: minds 1
+  claim C136-COLLAR: prior art partly
+  entries: 10  derived: 10  stalled, gapped or refuted: 0
 quotes
   statements named in more than one place: 0
 controls
@@ -30,6 +33,7 @@ controls
   ok    close-strip: printed 'strip1: seed=8 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=3 closed=yes | forced=10 at 6 points | emptied=0 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: forced=14 free=106 seed-point free=16 | agree-with-object=10 of 10 (disagree 0, unread 0) | class-samples=148 mismatches=0 strip1: seed=8 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=3 closed=yes | forced=10 at 6 points | emptied=0 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: forced=14 free=106 seed-point free=16 | agree-with-object=10 of 10 (disagree 0, unread 0) | class-samples=148 mismatches=0 strip2: seed=6 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=1 closed=yes | forced=0 at 0 points | emptied=1 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: free=4 outside-U empty=1 outside-U forced=2 outside-U free=1 | agree-with-object=0 of 0 (disagree 0, unread 0) | class-samples=12 mismatches=0 strip2: seed=6 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=2 closed=yes | forced=2 at 1 points | emptied=1 conflicts=0 | arc-scans=0 arc-forced=0 | corners read: empty=1 forced=2 free=21 | agree-with-object=0 of 2 (disagree 0, unread 2) | class-samples=32 mismatches=0'; with the fault planted ('' → '--fault=bar'; '' → '--fault=bar'; '' → '--fault=bar' …) it printed 'strip1: seed=8 corners at 2 points (full' — it fires
   ok    stop-corners: printed "strip: w=(0.25000,1.83427) corners at x: T-1 U-1 T0 | at y: T1 U0 U1 | labels=6 | corners at w (x/y): out/out=EMPTY(order 1) in/out=R in/in=OR out/in=O | class-samples=6 mismatches=0 disk: w=(-1.80902,1.11352) corners at x: R1 S1 W1 | at y: S0 T1 P0 | labels=6 | corners at w (x/y): out/in=yellow out/out=EMPTY(order 1) in/out=red in/in=redyellow | class-samples=6 mismatches=0 bowtie: w=(1.73205,0.00000) corners at x: W t1 L2 V' T2 | at y: V L1 t1 W T1 | labels=6 | corners at w (x/y): out/in=4 in/in=234 in/out=2 out/out=EMPTY(order 1) | class-samples=10 mismatches=0 flower: w=(1.73205,0.00000) corners at x: Q0 S5 Q5 G5 | at y: G0 Q1 S0 Q0 | labels=6 | corners at w (x/y): out/in=1 in/in=2 in/out=EMPTY(order 2; second-order only: 3) out/out=1 | class-samples=8 mismatches=0"; with the fault planted ('' → '--fault=move') it printed 'strip: w=(0.27000,1.83427): 0 members on' — it fires
   ok    stop-shadow: printed 'strip: corners at w=4 left by the shadow: EMPTY R OR O | agree with the exact table: 4 of 4 disk: corners at w=4 left by the shadow: yellow EMPTY red redyellow | agree with the exact table: 4 of 4 bowtie: corners at w=4 left by the shadow: 4 234 2 EMPTY | agree with the exact table: 4 of 4 flower: corners at w=4 left by the shadow: 1 2 EMPTY 1 | agree with the exact table: 4 of 4'; with the fault planted ('' → '--fault') it printed 'strip: corners at w=4 left by the shadow' — it fires
+  ok    forced-arc: printed 'bowtie12: seed=10 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=3 closed=yes | forced=5 at 3 points | emptied=1 conflicts=0 | arc-scans=2 arc-forced=4 | corners read: forced=7 free=17 outside-U empty=1 outside-U forced=2 outside-U free=9 seed-point free=12 | agree-with-object=5 of 5 (disagree 0, unread 0) | class-samples=226 mismatches=0'; with the fault planted ('' → '--fault=bar') it printed 'bowtie12: seed=10 corners at 2 points (f' — it fires
   warn  C136-CLASS: two-way statement with controls on one direction only — a control that reads one direction passes a fault on the other
-  controls: 7  fired on their faults: 7
+  controls: 8  fired on their faults: 8
 GATE: PASS (0 failures, 1 warning)

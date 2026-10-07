@@ -22,6 +22,9 @@ of the family carrying at least k - 1 labels — along its whole unit circle (on
 directions, and the critical points); forced corners at points of U join the family at the end of the round; stop when a round
 adds none.  A forced corner inside a corner the family already has with that label is not new; one that overlaps a corner of
 another label at its point is a CONFLICT (the colouring would have two labels on an open set).
+LIMIT.  A label forced along an ARC of a scanned circle ("arc-forced") is counted and listed and NOT added to the family: it is
+a collar, a piece with extent along the arc, and its class at a further point is not a germ's.  A closure with arc-forced > 0
+is a lower bound of the true one.  (A corner forced at an isolated critical point of a scanned circle is added.)
 
 ARITHMETIC.  tools/fs114_yb_exact.py (imported, not edited): towers Q(sqrt d_1)...(sqrt d_n) with exact signs.  Added here:
 sqrt_in (is x a square in the current tower? exact, by descent through the levels) and tsqrt (the root, extending the tower
@@ -386,7 +389,9 @@ def obj_tiles(name):
 
 
 SEEDS = {"r7": ("r7", None), "flower": ("flower", [(-1.0, 0.0), (0.0, -1.0)]), "strip1": ("strip", [(0.0, 0.0), (0.5, 0.0)]),
-         "strip2": ("strip", [(-0.25, math.sqrt(15) / 4), (0.5, math.sqrt(3) / 2)])}
+         "strip2": ("strip", [(-0.25, math.sqrt(15) / 4), (0.5, math.sqrt(3) / 2)]),
+         # two seeds with a point of five or six labels (not claims of this round: run for the arc scan only)
+         "flower0": ("flower", [(0.0, 0.0)]), "bowtie12": ("bowtie", [(math.sqrt(3) / 2, -0.5), (math.sqrt(3) / 2, 0.5)])}
 
 
 # ----------------------------------------------------------------------------------------------- the table and the closure
@@ -521,6 +526,11 @@ def close(seed):
             if len({g.label for g in run.fam[xi]}) >= k - 1:
                 sc = run.scan(xi); scans.append((xi, sc))
                 arcforced += sum(1 for kind, wi, tab in sc if kind == "arc" for c in tab if len(c["left"]) <= 1)
+                for kind, wi, tab in sc:                      # a corner forced at an isolated critical point joins the family
+                    for c in tab:
+                        if kind == "point" and len(c["left"]) == 1 and ob["inU"](run.R.P[wi]):
+                            lab = next(iter(c["left"]))
+                            if run.status(wi, c, lab) == "new": new.append((wi, c, lab))
         for wi, c, lab in new:
             run.fam.setdefault(wi, []).append(Corner(lab, c["lo"], c["hi"], f"forced, round {r}"))
             steps.append(dict(round=r, point=fl(run.R.P[wi]), corner=cstr(c), label=str(lab),

@@ -281,3 +281,24 @@ with FS114-Y-PENT.
 **C136-RINGS-READ (as posed)** — a reading; its *statement to verify* as in the claim list. *Not claimed*: that a reading
 proves anything about a colouring not read; exactness beyond what each line says (floats, with the three radii checked
 exactly); that an object's validity is re-checked here (each object's own entry holds it).
+
+## Second round (FS136-E2, 2026-10-07) — a dated section under what stands
+
+*Everything above is the opening of the first round and stands as written. The second round's card is
+`plans/STUB-covering-pairs.md` § The question, second round; its record is `plans/FS136-E2-derivation.md`, which holds its
+own readback, its re-walk of the grokkings from inside the new unit (a seed and what it forces), its recognition, the
+statements as the verdicts are about them, and ten entries. This section only says what changed in the plan.*
+
+- **The unit**: a finite family of *labelled corners* (germs: a point, two curves from it, a label) and its *forced
+  closure* under one step — a corner at `w` on which the corners one unit away bar every label but one has that label
+  (C136-FORCED). Not the ring of a point, and not the point across.
+- **The invariant (§IQ, item 3, extended)**: the table at a point still; what is added is that a table with one label
+  left on a corner is a labelled corner, so the tables at different points are related by the closure (C136-CLOSE).
+- **What the round found against its own card**: a closure is a countable family of germs at isolated points, with no
+  radius bounded below — never a fragment — **except** where a point carrying all labels but one forces its missing label
+  along an arc (C136-COLLAR; inhabited at six by the bowtie fragment's two five-label points). The three seeds of the card
+  (the strip's as two) each stall within two steps; the tight seven-colouring's stalls after one, with no corner emptied.
+- **Statements changed after fixing**: C136-STOP-GERMS-RADIUS restated (first order at all three stops); C136-COLLAR
+  added at the coordinator's request. Nothing else.
+- **Open, for the asking lane** (the record's Stage 8, its smallest open form): what two collars, or a collar and a pieced
+  point, force one unit further on.

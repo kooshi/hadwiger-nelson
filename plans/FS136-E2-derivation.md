@@ -28,6 +28,9 @@ saved)*
   ten corners at six points and no more; the first round's pair of three-label points forces nothing.
 - **C136-STOP-GERMS** — derived from C136-CLOSE with exact signs — Stage 6: the strip's, the disk's and the bowtie fragment's
   stops are excluded for every weak six-colouring that keeps the parts of the named tiles within any `r > 0` of the two members.
+- **C136-COLLAR** — derived from C136-FORCED — Stage 8: a point whose corners carry all labels but one forces the missing
+  label on a one-sided collar of every open arc of its unit circle along which none of its own labels is pure on that
+  side — a region of definite length and no definite width. Inhabited at six by the bowtie fragment's two five-label points.
 - **C136-STOP-GERMS-RADIUS** — [hand] over C124-SHADOW-OPEN — Stage 6: at all three the corner outside both members' unit
   circles is closed to the colouring's domain within `c·r` of the point — first order, the bowtie fragment included.
 
@@ -785,7 +788,8 @@ Mine: Q1 met; Q2 met; Q3 met, met, no; Q4 met on three; Q5 no; Q6 met, met, **lo
   closure empties a corner beyond its own common unit points* — none of four; the Searcher's line 15 is the search for
   one. *A member with `k − 1` labels forcing along an arc* — not met (`arc-forced=0` everywhere); at six it needs a point of
   five or six labels whose corners leave one label inner: the bowtie fragment's `q₁`, `q₂` (five labels) and the flower's
-  centre (six) are the held candidates, **not run** — a line for a successor (§ 7.6).
+  centre (six) are the held candidates — **run after this stage was written: Stage 8. The bowtie fragment's points do
+  force along arcs.**
 - **G87 lookout.** The whiff of Stage 1 is settled and is not a signal: the stub's "tightness at seven is rigid from two
   points" was an expectation, and C136-CLOSE-R7 is the fact. One thing that looked like a collision and is not: the first
   round's bowtie entry (cells inside one circle and outside the other emptied) against this round's (the corner outside
@@ -816,7 +820,7 @@ Mine: Q1 met; Q2 met; Q3 met, met, no; Q4 met on three; Q5 no; Q6 met, met, **lo
 | stage | gate (from `plans/`, `derive_gate.py all FS136-E2-derivation.md`) | saved output |
 |---|---|---|
 | 0–1 | not run on its own: no entry yet (the first round's stage 0 has the same one expected failure) | — |
-| 2–7 | exit 0; 9 entries, each derived; 7 controls, each firing on its fault; 1 warning | `data/fs136/e2/gate-final.txt` |
+| 2–8 | exit 0; 10 entries, each derived; 8 controls, each firing on its fault; 1 warning (Stage 8's entry and control included) | `data/fs136/e2/gate-final.txt` |
 
 The warning: C136-CLASS is two-way and the gate reads its one control as reading one direction; the control's eleven
 corners include both (five that are between the branches, and the half-plane with tangent edges, which is not).
@@ -826,10 +830,10 @@ afternoon's runs — so the verdicts went to the coordinator in one message, not
 **Done**: every item of the brief's "Done means" — the three claims at verdicts, the three seeds (the strip's as two),
 the lists. **Where a successor takes over**:
 
-1. **Members with five or six labels.** The only step that reaches a continuum is at a point carrying at least `k − 1`
-   labels. The flower's centre (six labels: C136-ONE's point) and the bowtie fragment's `q₁`, `q₂` (five) are held and were
-   not seeds here. `closure.py`'s scan runs on any seed: `SEEDS` takes a line per seed. If it forces a label along an arc,
-   that is a region, and the coordinator wants it at once.
+1. **Collars.** A point carrying `k − 1` labels can force its missing label along an arc (Stage 8: the bowtie fragment's
+   `q₁`, `q₂` do; the flower's six-label centre does not). The engine counts such arcs and does not propagate from them: a
+   collar is a piece with extent, and what it bars one unit away is read from its extent (C124-TYPE on the whole collar),
+   not from a germ. **The closure of a seed with a five-label point is open**, and it is the one place a region comes out.
 2. **Seeds of three or more points.** A closure grows only where label-rich points stay within one unit; a third seed
    point changes that. The Searcher's line 15 is the systematic form.
 3. **A second mind.** C136-FORCED is three lines over a statement the kernel lane holds at one member; C136-CLASS's order
@@ -838,3 +842,88 @@ the lists. **Where a successor takes over**:
 4. **Exactness of "in the strip"** and of the choice between a tile's two candidate corners there: floats, by the
    object's own point-location (Stage 5's *uses only*). The disk and the strip would need their boundary pieces given
    with a direction of travel for this to be exact.
+
+## Stage 8 — SAVED: an addendum outside the three claims — a label forced along an arc; a gap of the engine closed
+
+*Run after the verdicts, for the arc scan only, on the two held seeds that have a point with `k − 1` or `k` labels. No
+statement was fixed for this when it was run; it went to the coordinator at once (its kept clause), **and at its request
+it is an entry, C136-COLLAR, below** — its statement sent and fixed before the entry was written. The two computed
+readings are the round's engine's — exact for every class, one mind. No value is touched; it is not a first piece.*
+
+**The flower's centre alone** (six labels; `data/fs136/e2/out/flower0.txt`): along its unit circle every open arc between
+critical directions leaves two labels on each side (`arc-forced=0`); at the six mid-arc ring points `e(60j + 30°)` the inside
+has one label left — the sector's own — and those six corners are forced (all six the fragment's colours), and then the
+closure stops. No arc.
+
+**The bowtie fragment's two five-label points** (`q₂ = (√3/2, −1/2)`, which lacks the label 4; `q₁ = (√3/2, 1/2)`, which lacks
+2; ten corners; `out/bowtie12.txt`): **`arc-forced=4`.** Along the open arc of `S(q₂)` from the origin to `(0, −1)` —
+directions `150°` to `210°` from `q₂` — the corner inside `S(q₂)` has, at every point, exactly one label left: `4`. Along the
+arc of directions `−30°` to `30°` the corner outside `S(q₂)` has only `4` left. The mirror image holds at `q₁` with the label
+`2`. *Why*: on a side of its unit circle a point carrying `k − 1` labels leaves its missing label and those of its own
+labels that are pure on that side; `q₂`'s corners have cones of `30°`, `120°`, `120°`, `6.9°`, `83.1°`, and for a direction in
+`(150°, 210°)` the tangent line cuts both `120°` corners and the near half-plane holds no whole corner — no label of `q₂` is
+inner-pure. (R7's lattice points carry six of seven labels and never do this: every half-plane there holds a whole
+Reuleaux corner or a cusp, so each side keeps two labels or more — its scans read `arc-forced=0`.) *What C136-FORCED gives
+there, with one member*: at each point `w` of such an arc almost every point of a one-sided neighbourhood of `w` has the
+label; the union over the arc is an open set, almost all one label, that holds a one-sided collar of the whole arc — **a
+region of definite length (`π/3` along the circle) and of no definite width**. *Checked on another path*: the fragment has
+the label `4` at 118 of 118 float samples just inside the first arc and `2` at 118 of 118 inside `q₁`'s (the two outer arcs
+lie beyond the fragment's radius `3√3/5`). *Held for maps*: FS116-N2-FIVERING (`plans/FS116-derivation.md` l. 655: "about a
+vertex p of five colours … the ring has no change point"; read at its statement only) — G98's count, one label left for
+the ring of a five-label point.
+
+**What this does to Stage 1's finding 1.** It stands as worded, and its exception is inhabited at six: a seed with a
+five-label point forces a region. So the sentence "at six with members of three or four labels, never from the seed
+alone" is the true scope, and the three computed closures are inside it.
+
+**What is not done.** The engine does not propagate from a collar (its header's LIMIT): the closure of the bowtie seed as
+listed — five forced corners at three points, the four arcs, and the known emptied corner at its stop — is a lower bound.
+What a collar bars one unit away is C124-TYPE on a piece with extent along an arc; nothing in this record computes it.
+**Smallest open form, for the asking lane**: *a pieced point carrying five of six labels forces its sixth along every arc
+of its unit circle on whose side none of its own labels is pure; what do two such collars, or a collar and a pieced point,
+force one unit further on — a corner emptied, a stall, or a second collar?*
+
+**A gap of the engine, found here and closed** (G21: the scan had had no positive before this seed). A corner forced at an
+isolated critical point of a scanned circle was listed and not added to the family. Closed in `closure.py` (such a corner
+now joins the family); every claimed closure re-run, line for line the same (their scans have no such point: R7's two
+critical points read `0356 | 234` and `126 | 0145`). The flower's centre is the seed that showed it: six such corners.
+
+derivation: C136-COLLAR
+  statement: About weak colourings that have the named corners; no weak six-colouring is known to have one. Let c be a weak k-colouring of an open set U, x a point, F a finite set of labelled corners at x that c has, whose labels are all the labels but one, ℓ, and A an open arc of S(x) lying in U such that at every point w of A each label of F has a corner in F that is not inner at w. Then there is a connected open subset V of U inside S(x), almost every point of which has the label ℓ, such that every point w of A has a radius η > 0 with every point of B(w, η) inside S(x) in V. With "outer" in place of "inner" there is such a V outside S(x), holding the points of B(w, η) outside S(x).
+  uses only: C136-FORCED with the one member x at each point w of A (the two corners cut at w by S(x) are the parts of a small disc inside and outside S(x)), for the pieces Σ_ρ of the corners c has, as in C136-CLOSE's argument; that an open subset of the plane is the union of countably many of any family of open sets covering it; that the part of a disc inside (or outside) a unit circle through its centre is connected for a small radius, and that an arc is connected
+  not claimed: that a weak colouring has such corners; any width — η depends on w and on c and is bounded below by nothing, at the ends of A or anywhere along it; anything at the end points of A; anything for a point whose corners lack two labels (two labels are left on each side) or lack none (there a side on which no label is pure cannot be coloured at all: C136-ONE); that an arc A exists for a given F (it is read from the corners by C136-CLASS: for the flower's centre and for R7's lattice points there is none); that V is a tile, reaches beyond its collar, or has ℓ everywhere and not almost everywhere; what V bars one unit further on (a fact about its extent; not computed here)
+  argument: § Argument — the collar
+  verdict: derived
+  grade: derived from: C136-FORCED
+  minds: 1
+  model: FS114-Y2-BOWTIE with the five corners at q₂ = (√3/2, −1/2), whose labels are all but 4: A the open arc of S(q₂) of directions 150° to 210° from q₂ (from the origin to (0, −1)), on which each of the five corners is outer or crossing; the fragment has the label 4 at 118 of 118 samples just inside that arc; and the same at q₁ with the label 2 (control `forced-arc`: "arc-forced=4" — these two and the two arcs of directions −30° to 30°, outside, beyond the fragment)
+  prior art: partly: for maps FS116-N2-FIVERING (`plans/FS116-derivation.md` l. 655: "in a valid fragment on a closed disc of radius above 1 about a vertex p of five colours, Siamese pairs allowed, the ring has no change point"; read at its statement only, its argument and mind count not read) — G98's count, one label left for the ring of a point of five; for pieces in measure: here, as C136-FORCED at one member taken along an arc; print: as C136-FORCED — not found
+  handoff: de Bruijn — only with a consumer: `ae_onSide_of_label` at the one member for each point of the arc, a countable subcover, and the connectedness of a union of half-discs along an arc
+
+**Class**: every weak `k`-colouring of an open set with a point whose corners carry all the labels but one. **What is new
+beyond the entry it restates**: against FS116-N2-FIVERING, the class (no map, no disc about the point, nothing assumed on
+the ring) and the hypothesis read arc by arc; against C136-FORCED, nothing but the passage from a point to an arc — and
+that passage is what turns a germ into **a region with a definite length**. **Side**: none alone. It is the one step of
+this round that forces a region, and no weak six-colouring is known to have a point of five labels. **The hypothesis as
+the argument reads it**: "each label of `F` has a corner that is not inner at `w`" — weaker than "no corner of `F` is inner
+at `w`" where two corners share a label.
+
+### Argument — the collar
+
+Let `D` be the open unit disc about `x`. Fix `w ∈ A`. The corners of `F` are had by `c`; their pieces `Σ_ρ`, for small `ρ`, are a
+family `𝒫` of pieces at `x`, and a corner that is not inner at `w` has a piece that is not inner at `w` (C136-CLOSE's
+argument). Every label other than `ℓ` is a label of `F`, hence of `𝒫`, with a piece that is not inner at `w`: it is not
+inner-pure at `w`. The two corners cut at `w` by `S(x)` are the parts of a small disc inside and outside `S(x)`; C136-FORCED,
+for the one inside, gives `η_w > 0` with `B(w, η_w) ⊂ U` such that almost every point of `H_w = B(w, η_w) ∩ D` has the label
+`ℓ`; shrink `η_w` so that `H_w` is connected. Let `V` be the union of the `H_w`, `w ∈ A`: open, in `U`, inside `S(x)`, and holding
+every point of `B(w, η_w)` inside `S(x)`. *Almost all `ℓ`*: `V` is the union of countably many of the `H_w`, each almost all `ℓ`.
+*Connected*: if `V` were the union of two disjoint non-empty open sets, each connected `H_w` would lie in one of them, and
+`A` would split into the two sets of its points so sorted, both non-empty; `A` is connected, so some `w₀` of one set is a
+limit of points `w_n` of the other; for large `n`, `H_{w_n}` has points within `η_{w₀}` of `w₀`, which lie in `H_{w₀}`: the two
+sets meet. The outside is the same with `D` replaced by the complement of its closure. ∎
+
+control: forced-arc
+  of: C136-COLLAR — C136-FORCED's case of one member, along an arc: the ten corners of FS114-Y2-BOWTIE at its two five-label points; the scan of both unit circles (one exact sample per open arc between critical directions); arc-forced counts the sides of arcs with one label left — four: inside and outside each circle along a 60° arc, the label the point lacks. Not a claim of this round; the closure it prints is a lower bound (collars are not propagated). The fault bars the label of the first forced corner on every corner
+  run: python3 ../data/fs136/e2/closure.py close bowtie12 --brief --rounds=3
+  expect: bowtie12: seed=10 corners at 2 points (full neighbourhoods: True) labels=6 | rounds=3 closed=yes | forced=5 at 3 points | emptied=1 conflicts=0 | arc-scans=2 arc-forced=4 | corners read: forced=7 free=17 outside-U empty=1 outside-U forced=2 outside-U free=9 seed-point free=12 | agree-with-object=5 of 5 (disagree 0, unread 0) | class-samples=226 mismatches=0
+  fault: python3 ../data/fs136/e2/closure.py close bowtie12 --brief --rounds=3 --fault=bar

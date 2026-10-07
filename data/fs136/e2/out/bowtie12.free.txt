@@ -1,0 +1,17 @@
+search request | seed bowtie12 | point (0.00000,0.00000) | corner [120.0-,180.0-] (out S(0.86603,-0.50000) out S(0.86603,0.50000) out S(0.00000,-1.00000) in S(0.00000,1.00000)) | labels left 234
+search request | seed bowtie12 | point (0.00000,0.00000) | corner [180.0-,180.0+] (out S(0.86603,-0.50000) out S(0.86603,0.50000) out S(0.00000,-1.00000) out S(0.00000,1.00000)) | labels left 234
+search request | seed bowtie12 | point (0.00000,0.00000) | corner [180.0+,240.0+] (out S(0.86603,-0.50000) out S(0.86603,0.50000) in S(0.00000,-1.00000) out S(0.00000,1.00000)) | labels left 234
+search request | seed bowtie12 | point (0.00000,-1.00000) | corner [0.0+,120.0-] (in S(0.86603,-0.50000) in S(0.00000,0.00000)) | labels left 46
+search request | seed bowtie12 | point (0.00000,-1.00000) | corner [120.0-,180.0-] (out S(0.86603,-0.50000) in S(0.00000,0.00000)) | labels left 345
+search request | seed bowtie12 | point (0.00000,-1.00000) | corner [180.0-,300.0+] (out S(0.86603,-0.50000) out S(0.00000,0.00000)) | labels left 235
+search request | seed bowtie12 | point (0.00000,1.00000) | corner [60.0-,180.0+] (out S(0.86603,0.50000) out S(0.00000,0.00000)) | labels left 346
+search request | seed bowtie12 | point (0.00000,1.00000) | corner [180.0+,240.0+] (out S(0.86603,0.50000) in S(0.00000,0.00000)) | labels left 236
+search request | seed bowtie12 | point (0.00000,1.00000) | corner [240.0+,0.0-] (in S(0.86603,0.50000) in S(0.00000,0.00000)) | labels left 25
+search request | seed bowtie12 | point (-0.86603,-0.50000) | corner [60.0-,120.0-] (in S(0.00000,0.00000) out S(0.00000,-1.00000)) | labels left 356
+search request | seed bowtie12 | point (-0.86603,-0.50000) | corner [120.0-,240.0+] (out S(0.00000,0.00000) out S(0.00000,-1.00000)) | labels left 12356
+search request | seed bowtie12 | point (-0.86603,-0.50000) | corner [240.0+,300.0+] (out S(0.00000,0.00000) in S(0.00000,-1.00000)) | labels left 1235
+search request | seed bowtie12 | point (-0.86603,-0.50000) | corner [300.0+,60.0-] (in S(0.00000,0.00000) in S(0.00000,-1.00000)) | labels left 35
+search request | seed bowtie12 | point (-0.86603,0.50000) | corner [60.0-,120.0-] (out S(0.00000,0.00000) in S(0.00000,1.00000)) | labels left 1346
+search request | seed bowtie12 | point (-0.86603,0.50000) | corner [120.0-,240.0+] (out S(0.00000,0.00000) out S(0.00000,1.00000)) | labels left 13456
+search request | seed bowtie12 | point (-0.86603,0.50000) | corner [240.0+,300.0+] (in S(0.00000,0.00000) out S(0.00000,1.00000)) | labels left 356
+search request | seed bowtie12 | point (-0.86603,0.50000) | corner [300.0+,60.0-] (in S(0.00000,0.00000) in S(0.00000,1.00000)) | labels left 36
