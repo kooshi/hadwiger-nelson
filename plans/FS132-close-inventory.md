@@ -993,3 +993,24 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     half, which also writes that stub's bearing lines — one writer per file), and the re-rank it drafts then replaces its
     two unfiled drafts of the night. (e) **Staffing returns to his cap of three Opus slots**; 
 
+33. **Three jobs launched on Kooshi's sixth word (2026-10-07, about 12:20 UTC), each on a brief that passed the gate with
+    exit 0** (generator `data/fs131/briefs/scripts/mk-fs132-day2.py`; commit `dcf89464`). **FS132-Z2** (`ephodos`; brief
+    `data/fs132/briefs/FS132-Z2-record.md`; record `plans/FS132-Z2-record.md`): the record job's second half — stubs from
+    FS-134, ledger rows from 155, grokkings from G96, every registered prediction scored, the front page's drafts.
+    **FS132-K2** (`debruijn`; brief `data/fs132/briefs/FS132-K2-kernel-plan.md`; worktree and branch `fs132-wk1`, record
+    `plans/FS132-kernel-plan.md` there from its Stage 4): the exclusion's fourteen leaves in Lean with the four-point form
+    assembled from them — it messages when they are committed and green — then the comparisons its predecessor left and a
+    drafted list of what else the module must state. **FS132-I2** (`debruijn-implementer`, Opus; brief
+    `data/fs132/briefs/FS132-I2-port.md`; worktree and branch `fs132-wi2`, cut from `fs132-wk1` at `e3695302` by me, its
+    build a copy; record `plans/FS132-I2-implementation.md` there): the port of the three release statements the exclusion
+    and its corollary rest on, with their cones, by the planner's script — no `sorry`, no axiom; it messages after two
+    files with the measured price. **File ownership between the two kernel jobs**: the planner's successor owns everything
+    under the six-ring folder of the plane's modules, the implementer everything under the outside folder and the port
+    script; both add whole lines to the module list and the architecture map. **Rulings.** (a) **The order of what
+    follows**: at the planner's message, an implementer on the leaves that need nothing ported (the step lemma's analysis,
+    the finite check, the shift's calculus) into the first free slot; at the record job's hand-back, my filing (FS-132
+    Derived), then the asking lane on the next milestone's question and the re-rank; then that milestone's opening.
+    (b) **The ported files carry the release's licence notice** (Apache-2.0; `plans/EXT-OAI1-audit.md`'s table): each
+    generated module's header names source, commit, licence and every patch — to be told to Kooshi as a thing to know, since
+    at publication the notice travels with the files.
+

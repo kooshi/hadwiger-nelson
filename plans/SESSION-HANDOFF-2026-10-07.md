@@ -26,6 +26,30 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
+## 0c. AFTER KOOSHI'S SIXTH WORD (2026-10-07, about 11:40 UTC) — READ THIS SECTION FIRST; §§ 0a and 0b are the night before it
+
+**His word** (verbatim in `data/external/EXT-OAI1-request.md` § Kooshi's sixth word, with the three items it answers and my
+reading): he agrees with all three recommendations; the Lean backlog stays paused; the work is the standard workflow, attacking
+six against seven; in a milestone's Lean phase its dependencies are formalized too. **So** (FS-132 inventory items 32–33):
+FS-132 delivers what a point with data on its unit circle is forced to carry (the existence question is FS-127's and FS-128's);
+its first night's exclusion is formalized first; **FS-124, the (Q) ring — a boundary that is a unit arc about a ring point — is
+the next milestone**; staffing is his cap of three Opus slots.
+
+**Running (three slots, launched about 12:20 UTC):**
+
+| job | where | what it hands on | on its message or hand-back |
+|---|---|---|---|
+| **FS132-Z2** (`ephodos`) — the record job's second half | `main`; record `plans/FS132-Z2-record.md`; brief `data/fs132/briefs/FS132-Z2-record.md` | new stubs (from FS-134), bearing lines in open stubs, predictions scored, `## Drafts for the front page` (ledger rows from 155, grokkings from G96, `CLAUDE.md` § Frontier, atlas facts) | review by artifact; **file FS-132 as Derived** (§ The filing of my workflow: `CLAUDE.md`, `LEDGER.md` — with the first record job's two ledger drafts in `plans/FS132-Z1-record.md` §§ 5.1–5.2 —, the grokkings, the instances, the fact audit with `--base fa12fc68` and `--dupes`, the atlas rebuilt locally and not published); **then brief the asking lane (FS124-P1, `poros`)**: FS-124's question card in the measurable vocabulary, on `plans/FS132-derivation.md` (its § 12's line; the entry C132-PLACED-RING as a measurable instance of the stub's first question; §§ 8–9), and the re-rank of `plans/FRONTIER-STUBS.md` in full — it replaces the asking lane's two unfiled drafts of the night; then FS-124's opening job (`ephodos`: §G, §PA, §IQ, the plan, the claim list) and its inventory `plans/FS124-close-inventory.md` |
+| **FS132-K2** (`debruijn`) — the kernel planner's successor | worktree and branch `fs132-wk1`; record `plans/FS132-kernel-plan.md` there, from Stage 4; brief `data/fs132/briefs/FS132-K2-kernel-plan.md` | the exclusion's fourteen leaves as Lean statements, the four-point form assembled; then the comparisons, and a drafted list of what else the module states | **at its message "leaves committed and green"**: brief an implementer (FS132-I3, `debruijn-implementer`, `model: "opus"`, a worktree `fs132-wi3` cut from `fs132-wk1`'s tip with the build recipe) on the leaves that need nothing ported — into the first free slot; fix its drafted list as a dated extension of `data/fs132/claims-K1.md` |
+| **FS132-I2** (`debruijn-implementer`) — the port | worktree and branch `fs132-wi2` (cut from `fs132-wk1` at `e3695302`); record `plans/FS132-I2-implementation.md` there; brief `data/fs132/briefs/FS132-I2-port.md` | the three release statements the exclusion and the two-pair ring rest on, proved here by the planner's port script, no axiom; a measured price after two files | log the price; at its hand-back, the leaves that wait on the port go to an implementer after a merge of `fs132-wi2` into the leaves' branch; the port and the confinement module can land alone (a landing job, the procedure of `plans/FS132-L1-landing.md`; fact-audit base `fa12fc68`) |
+
+**Owed, not yet briefed**: the asking lane's job and FS-124's opening (above); the landing of the port; FS-133's kernel planner
+(after the exclusion's module is under way); the release's checking tool's audit (not started; nothing of it has run); the
+gate's design question on imports (FS-131 inventory items 633–635 — Kooshi has not answered; nothing changes in the tooling);
+the atlas node edits owed since the release; the zbMATH search for FS-133 (the site was down all night). **Still held by his
+standing words**: measure rigidity at number fields; nothing published or posted; the fallback write-up's fate and the six
+papers to fetch are his.
+
 ## 0a. THE NIGHT OF 2026-10-07 — read this section first: Kooshi has handed over the reins
 
 > […] I'll hand the reins over to you […]. Keep us on track to 6 or 7. I suggest walking the standard workflow at this point once things settle into a clear direction. I'll go with whatever you recommend on the open questions with that in mind. Keep your handoff current in case of auto compaction.
