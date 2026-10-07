@@ -562,6 +562,37 @@ invariant: what R7 and the kept shape carry at each lattice point); G94 (what th
 pieces near two points, never a map). Rows 135 and 136 (the rhombus and the stop), 138 (the cone form), 145 (FS116-O1-YESLIM, for
 maps), 149. Entries C132-SHADOW, C132-CROSS, C132-COMP-SHARP, C132-PLACED-RING, C132-M-EXCL (`plans/FS132-derivation.md`).
 
+*Dated block (2026-10-07; filed by FS124-P2 from FS124-E1's record § 1.2, by script, with the one correction that job's report
+names — the clause "and what a ring passes on is passed at ends" struck from G91's line: R7's shape, false of the strip. The
+paragraph above stands as posed.)*
+
+*For the question of 2026-10-07 (the opening job's re-grokking, FS124-E1; `plans/FS124-tight-pairs.md` §G):* G92 and G84 (the
+first-order rule is one lemma — the class of a label is null on the unit circles about an open piece of that label — and every
+claim at a tight pair is the computation of one open set; kind both is contact from both sides, never assumed); G85, G88, G16 (the
+unit parallels of the arc are its centre and the arc of radius 2: a tight pair speaks at `2z − q` as well as at the completions);
+G91 (tightness is open along the ring, so the object is an arc with ends); G83 (the
+first-order rule is not the kill: the straddle between two pieces of one label pinned by two tight pairs is the next round's
+first test); G96 (a tight pair is ball data at its far end and circle data at its centre); G97 (falsifiable here: a first-order
+count that bounds unit arcs about ring points); G95 (C124-KIND is the planted slack at seven); G60 (per-class statements hold at
+every number of labels: only a count across classes at a point can spend six); G89 (where tightness is not forced by a count, the
+question is binding: FS-125, FS-128); G94 (the class with a tight pair is not known to be every weak six-colouring); G79 (read R7,
+the strip and the disk at their tight arcs first); G82, G93 (C124-RADIUS: a random rigid motion on one open set per finite graph);
+G86 (no claim reads a tile as one piece of diameter at most 1); G21 (every control on a model with no margin, its non-vacuous
+count in its line); G13, G22, G90, G98 (one line each in the plan). Rows 135 (the rhombus; (Q) as a normal form reached by a
+move), 136 (the stop), 138 (the cone form), 145 (fragments at every radius, for maps). Entries C132-SHADOW (whose argument is
+the lemma), C132-WITNESS, C132-WIT-SIDE, C132-CROSS, C132-COMP-SHARP (`plans/FS132-derivation.md`).
+
+*For the question after the first round (Poros, FS124-P2; one line of why each, which the second round's re-grokking replaces):* G96
+(a save is the one passage held from ball data to circle data that spends six: three pieces at each of two points, a boundary on
+a unit circle at a third); G97 (the unit arc is where a pair is saved — the hard case is an effect); G91 (the placing rule is the
+save read from the centre; C124-SECOND is what a pair carries between its two points); G79 (the example invariant was read first:
+94 saved points on two maps); G92 (C124-HALF-TWO reaches further than its filing as a rider); G95 (all four labels present at a
+saved point is read, not derived: kind stays a hypothesis); G21 ("no held object meets the hypothesis" measured three objects);
+G86 (the count is over incidences of pairs and points, never over tiles); G98 (the ring of a three-piece point is where a partner
+would be forced, and nothing held forces one). Rows 135 (the rhombus), 136 (the stop). Entries C132-CROSS, C132-COMP-SHARP,
+C132-WIT-SIDE (`plans/FS132-derivation.md`); C124-CENTRE, C124-STRADDLE, C124-HALF, C124-HALF-TWO (`plans/FS124-E1-derivation.md`).
+Stubs FS-122 (the forced pair: whether a close complementary pair exists in every colouring), FS-127, FS-128.
+
 *At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-MR1-DOUBLETIP, FS129-SR3-OUTERADJ,
 -E2ONE, FS129-SR1-TWOCIRC, -BENDANY, -BENDLE3, -RINGBAND, -SIXQ, FS129-OR1-BENDFRAG, -LOCALDENSE, -DISCF-NS; G71's height on a curve (FS110's winding)
 for case 1.
