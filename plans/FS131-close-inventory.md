@@ -8092,3 +8092,52 @@ reason by the close.*
      same pattern on the release's challenge file, which holds a `sorry`, finds it. Not checked by me: its cone
      computation; the patterns I did not run. **Told to Kooshi at once.** The build of the 70 modules has started
      under the slot.
+
+610. **FS131-K9b done at its Stage 11: wave 9's second planning pass — the wave's long leaf is proved from eight stated children, the away bend on a fragment is closed by three proved twins, a model built; the join with wave 8 prepared, not made** (planner; harness 573k and 54 minutes by the task notice — past the line; record `fs131-w9`'s `plans/FS131-w9-kernel-plan.md` Stages 6–11; report `data/fs131/reports/FS131-K9b.md`; three commits, tip `3a10b8f5`; pushed, tree clean).
+     **Proved on the standard three** (built, not gated): the three twins of item 603 (`Plane/Classes/AwayCollar`,
+     119 lines); tiles, `Simple` and `NonSiamese` carried by a homeomorphism of the plane (`isTile_image_iff`,
+     `Simple.of_homeomorph`, `NonSiamese.of_homeomorph` — new in the library); the model M4 on `awayModel`
+     (`awayModel_bendAny_hyps`, with `bendAny` applied) and the twins' inhabitant. **Proved over open leaves**:
+     **`bendAny` (FS129-SR1-BENDANY) from eight stated children** — seven in a new `Plane/Classes/RingPieces`, one
+     in `Plane/Classes/RingBend` — so its decomposition is a kernel-checked implication; `exists_ringBend`,
+     `exists_bentAlong`. Statement of `bendAny` unchanged; no statement defect. **Price of what is left for it**:
+     1,125 planned lines — one implementer job, where the first pass priced 400–700k tokens and two sittings.
+     **Not made**: the join with wave 8 (`main` did not hold wave 8; prepared as one checked edit,
+     `data/fs131/k9b/join-wave8.py`, twelve anchored replacements — leaf D's name removed and its two readers citing
+     wave 8's lemma, `GammaFreeEmptyNS` removed, the binder `hE` leaving `qfreeNS` and `qfcase`); M5 (owed: no map of
+     radius above 1 is proved simple in any tree). **The join with wave 6, planned**: the instance's declaration is
+     in its record, not elaborated; wave 6's leaf `exists_arcMap_of_hasArcInterfaces` does not follow from wave 9's
+     `exists_arcMap_of_arcBounded` in a few lines — about a hundred, in three written steps. **My receipt**: tip
+     equals `origin/fs131-w9`, tree clean; outside `data/`, `plans/`, `tools/` it changed four new modules, `Bend`
+     (225 lines added), and the three registry files — `QFree` and everything under `Reduction/` untouched; its last
+     build log ends "OK — 468 of 468 batches, 6 module(s) rebuilt, 4 module(s) with warnings", `EXIT=0`; `sorry` by
+     the handoff's grep: `RingPieces` 7, `RingBend` 1, `QFree` 1, `Uniform` 3 (the implementer's), `AwayCollar`,
+     `Bend`, `Models`, `Basic`, `Maps` 0; **by my script the three heads `Bend` had and the eight `QFree` has are
+     textually unchanged**; its axioms print parsed by my script — 17 records, the three twins on exactly the
+     standard three, and `bendAny`, `exists_bentAlong`, `exists_ringBend` on `sorryAx` as theorems over open leaves
+     should be. Not checked by me: the proofs beyond the build; its `join-wave8.py`; the hundred-line estimate.
+     **Predictions scored**: the first pass's price for `bendAny` (two sittings, B4 half of it) — not met: one job,
+     B4 seventy-five lines; its own two wrong (jobs; wave 6's leaf). **Corrections owed.** *Mine (the brief's)*: I
+     wrote that `Row130Collapse` is "declared on `main` already"; `main` declares `Row130M1`, a different statement
+     — `Row130Collapse` is this wave's own and its landing declares it. *The first pass's*: its handoff's "collapse
+     the two readings of 'simple'" is void by ruling 536 (b). **Slips, the job's, disclosed**: a spec example that
+     elaborated only under wider imports (one build lost); `debruijn-domain-modeling` not invoked for six new
+     definitions. **A tool defect**: `tools/fs131_l10b_kernelsig.py` reports the fields of a `Prop`-valued structure
+     as NOT-FOUND and exits 1 on a module that has one (wave 7's planner's copy has the fix: one tool at the tidy).
+     **Credit**: an invariant stated against the unbent restriction, so the induction carries no homeomorphism and
+     no per-piece bookkeeping; the planner's own decomposition made a kernel fact before any implementer starts;
+     the brief's wrong sentence about an assumption caught and corrected. **Rulings — each held under item 607's
+     stop on launches, not cancelled.** (a) **One implementer for what is left of `bendAny`** (FS131-I9A:
+     `RingPieces`' seven leaves, `RingBend`'s one, M5), **whose first act is the join with wave 8** — the merge of
+     `main`, the prepared edit, `ARCHITECTURE.md`'s row, a build, the doubled-name check. Alternative: two jobs side
+     by side, or the join at the wave's landing. Why: 1,125 lines is one job, and a join made early is checked by
+     every build after it. Confidence: high. Brief not written. (b) **Leaf D's name and `GammaFreeEmptyNS` are
+     removed at that join**, as it decided; `qfreeNS` and `qfcase` lose the binder `hE` — ratified. (c) **A question
+     for the join with wave 6, to the deriver's brief** (FS131-E9, unlaunched: regenerated before launch): is REG-J′₅
+     in FS129-OR1-TOP5 a standing universal hypothesis or a property of the produced colouring? Wave 6's
+     `reduce_i_of_arcInterfaces` reads the second, and "honest" is absent from its predicate. (d) The landing's
+     assumptions list is its § 9.2 (nine rows, `ReduceToMap` the one a gate cannot find by itself). **`Row130Collapse`
+     is among them — the statement the outside release of item 607 claims to prove**: nothing is done with that
+     until Kooshi says (ruling 607 (c)). (e) **Slot → EXT-OAI2** (the manuscript's reading, `ephodos`), by the
+     standing conditional: launched 2026-10-07 about 02:05 UTC. In flight: 2 of the milestone (L8A, I9B) and 2 of
+     the analysis (EXT-OAI1 in the special slot, EXT-OAI2).
