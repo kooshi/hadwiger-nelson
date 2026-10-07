@@ -4,6 +4,7 @@
   python3 data/fs124/e2/edge_check.py edge  [--fault]   the strip's top-edge point w = (1/4, sqrt15/4 + sqrt3/2): the six pieces kept below
         the line y = sqrt15/4, the side of each with respect to S(w), and the open set near w on which all six labels are barred.
         --fault reads the point w + (1/50, 0) instead (no longer at distance 1 from the four members): must print FAULT-SEEN.
+  python3 data/fs124/e2/edge_check.py second [--fault]  the 36 label patterns of C124-SECOND (see the function)
   python3 data/fs124/e2/edge_check.py seven [--fault]   the honeycomb at circumradius 2/5: two vertices with disjoint label triples
         28/25 apart in squared distance and a common unit point strictly inside the inscribed disc of a hexagon of the seventh label.
         --fault pairs the first vertex only with vertices of its own orientation, whose triples always meet: must print FAULT-SEEN.
@@ -80,7 +81,29 @@ def seven():
     return 0
 
 
+def second():
+    """C124-SECOND's count: x's saving edges at w and w' are two of the pairs of {0,1,2}, y's two of the pairs of {3,4,5}; the three
+    pairs read at a point are the two edges and the absent pair.  For every choice with different edges at the two points: the label
+    sets' intersection size, whether the absent pairs are disjoint, whether the six pairs form one hexagon alternating between the
+    points.  --fault allows the same edge of x at both points."""
+    import itertools as I
+    E3 = lambda S: list(I.combinations(S, 2)); cases = cyc = disj = 0; common = set()
+    for xa, xb in I.product(E3((0, 1, 2)), repeat=2):
+        for ya, yb in I.product(E3((3, 4, 5)), repeat=2):
+            if (xa == xb and not FAULT) or ya == yb: continue
+            third = lambda pr, S: (set(S) - set(pr)).pop()
+            M = [xa, ya, (third(xa, (0, 1, 2)), third(ya, (3, 4, 5)))]; N = [xb, yb, (third(xb, (0, 1, 2)), third(yb, (3, 4, 5)))]
+            cases += 1; common.add(len((set(xa) | set(ya)) & (set(xb) | set(yb)))); disj += not (set(M[2]) & set(N[2]))
+            v, k, turn = 0, 0, 0
+            while True:
+                pr = next(q for q in (M, N)[turn] if v in q); v = pr[0] if pr[1] == v else pr[1]; k += 1; turn ^= 1
+                if v == 0 and turn == 0 or k > 12: break
+            cyc += k == 6
+    print(f"cases={cases} labels-in-common={sorted(common)} absent-pairs-disjoint={disj} one-alternating-hexagon={cyc} " + ("second: OK" if (cases, disj, cyc) == (36, 36, 36) and common == {2} else "second: FAULT-SEEN"))
+    return 0
+
+
 if __name__ == "__main__":
-    fn = {"edge": edge, "seven": seven}.get(next((a for a in sys.argv[1:] if not a.startswith("--")), ""))
+    fn = {"edge": edge, "seven": seven, "second": second}.get(next((a for a in sys.argv[1:] if not a.startswith("--")), ""))
     if fn is None: print(__doc__); sys.exit(2)
     sys.exit(fn())
