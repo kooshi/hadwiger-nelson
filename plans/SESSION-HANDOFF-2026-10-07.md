@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-07: an outside proof of six is this project's literature; the Lean backlog is paused; the plan
 
 *Written 2026-10-07 (UTC) by Keryx, at Kooshi's word ("Make sure your handoff carries the new plan"). Current state only. A successor
-arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–622 (the day's record, each with what was
+arriving with nothing reads this file first; then `plans/FS131-close-inventory.md` items 607–623 (the day's record, each with what was
 checked by whom); then, for the paused backlog only, `plans/SESSION-HANDOFF-2026-10-06.md` §§ 2–8, which this file supersedes for
 everything else.*
 
@@ -71,9 +71,9 @@ record's last SAVED stage with a fresh agent on the same brief.
    `data/external/oai1/audit/ImportSkeleton.lean` — it imports `Plane.YesLimit` and drops the easy-half binder, proves the one
    leaf `nonempty_aeColouring_of_weak`, declares the two outside theorems with their four items to `scripts/Axioms.lean` and to
    the assumptions step, and lands through the gate after wave 8's (outside axioms: one to three).
-3. **FS-133's opening** (`ephodos`; brief not written — from the asking lane's stub and the reading's § 2.6): the one-class
+3. **FS-133's opening** (`ephodos`; brief not written — from the asking lane's stub, due at its stage 3, and the reading's § 2.6; the asking lane expects this to take the deriver's slot before FS-132 and confirms at that stage): the one-class
    consequence; its one unchecked step is the first claim. A new inventory, `plans/FS133-close-inventory.md`, opens with it.
-4. **FS-132's opening** (`ephodos`; from the asking lane's card): its inventory `plans/FS132-close-inventory.md` opens with it, with
+4. **FS-132's opening** (`ephodos`; **the card is saved — item 623: `plans/STUB-six-by-the-nerve.md`, "does this project's six-colour chain run on the object the release's extraction delivers at six, with no map?"; first claim C132-EXT with C132-CORES; fix the claim list `data/fs132/claims.md` from the stub before launch; brief not written**): its inventory `plans/FS132-close-inventory.md` opens with it, with
    FS-131's items 607–617 named as its prehistory.
 5. ~~EXT-OAI3, the sweep of the release's other 371 families~~ — **running** (`ephodos`; `data/external/briefs/EXT-OAI3-outside-release.md`, generator `mk-ext-oai3.py` rewritten, gate exit 0; record `plans/EXT-OAI3-review.md`; scripts under `data/external/oai3/`). It messages when its index is saved, with the first tier's families (the problem's nearest neighbours, each with its Lean status): **relay that list to the asking lane if it is still running**. On its hand-back: review, log; a family strong enough to change the frontier gets a reading and a Lean audit of its own, as family 158 did.
 6. **The comparator's audit** (EXT-OAI1 handed it back unstarted: ruling 619 (b)); brief not written. Three programs, no commit

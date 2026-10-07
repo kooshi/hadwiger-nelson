@@ -8585,3 +8585,34 @@ reason by the close.*
      `f40d6bda`. (c) Wave 8's third planner (FS131-K8c: two rows and one clause) and the owed models stay in the paused
      backlog. (d) **Kooshi told.** In flight: 2 (the asking lane; the import). **No backlog job is running: the
      milestone is at its pause.**
+
+623. **FS132-P1, by message mid-job: the question of FS-132 is posed — "six by the nerve": does this project's own six-colour chain run on the object the outside release's extraction delivers at six, with no map?** (source: the asking lane's message to "main", 2026-10-07; stub `plans/STUB-six-by-the-nerve.md` (23 KB, in the stub rule's form: mission, card, both forms, first claim, what each answer gives, registered expectations, failure clauses, deliverables, prior art and the risk of being second, bearing); record `plans/POROS-2026-10-07-after-release.md` stages 1–2; commit `bdc637a2` on `main`; its gate exit 0).
+     **The card, verbatim**: "do FS114-CV-EXISTS and FS116-Y4-EMPTY read arcs and tiles, or only what the release's
+     extraction gives a measurable six-colouring: a point, a label cycle, connected interfaces with limiting
+     directions, and the two-colour exclusion?" Addressee: the deriver. No search. **The first claim, posed and not
+     derived**: C132-EXT — the release's extraction (its Proposition 7.1) stated with five struck out, at the
+     weakest hypothesis on the cyclic centres its argument reads — with C132-CORES (every measurable `k`-colouring
+     has a cyclic centre in every closed disc of radius 8); its only authority today is one sentence of the reading
+     ("Acts 3 runs verbatim at six"). Then the card's two readings, FS116-Y4-EMPTY first. **Why not the reading's
+     nominee [P₆]** (item 618), its two reasons: the extraction never uses the palette bound (the map is
+     graph-valued off the cyclic centres because a clique in a forest has at most two vertices); and "every
+     six-colouring has property X" is refuted only by exhibiting a six-colouring, so one of its answers is the whole
+     problem, where the card's answers are both theorems about arguments held today. **Three branches, each a
+     result**: both arguments run (the map step is replaced by one statement about cyclic centres; FS-126 and the
+     arcs half of FS-127 lose their consumer; FS-123 and FS-124 are re-posed with no Siamese clause); the exclusion
+     runs and the existence step does not (its registered expectation, 0.55: [G₆] for measurable colourings becomes
+     the open statement); a named step reads an arc or a tile count (route M's map step stands, under an
+     unconditional headline). **A finding about my brief's frame**: its item 3 stated the frame in the audit's words
+     ("a cover of order two against a disc … at six that obstruction is gone"), which the reading contradicts (item
+     618); it reports the pair as an invention signal without picking a side — the premise both share is that the
+     approximant's target is the complete graph on the labels, fixed before the colouring — and poses a third card
+     on what stays essential when a triangle is filled wherever three classes meet. **A slip, mine**: I rewrote the
+     brief's inputs for item 618 and left the superseded frame in its acceptance item. **Its expectation for the
+     deriver's slot** (0.75, to be confirmed at its stage 3): FS-133 first, as a short job, then FS-132. **Read by
+     me**: the commit; the stub's headings and its first claim's two lines. Not checked by me: the card against the
+     two arguments it names; its gate's output. **Rulings.** (a) **FS-132 is "six by the nerve"; its opening job is
+     the deriver's, from this stub** — the inventory `plans/FS132-close-inventory.md` opens with it, and its claim
+     list (C132-EXT, C132-CORES, then the two readings) is fixed by me from the stub before the derivation launches.
+     Brief not written. (b) **The order of the deriver's slot waits for its stage 3** (FS-133's stub): one
+     message, not a guess. (c) Its third card (the filled-triangle frame) is logged as a candidate question; it
+     ranks it in its stage 5.
