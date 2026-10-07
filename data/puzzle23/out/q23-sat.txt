@@ -1,0 +1,6 @@
+q=23 cls k=4 [clash-step, v=(1, 0)]: UNSAT 
+q=23 cls k=4 [no-clash, v=(1, 2)]: UNSAT 
+  (5.93s)
+q=23 col k=7 [clash-step, v=(1, 0)]: UNSAT 
+q=23 col k=7 [no-clash, v=(1, 2)]: UNSAT 
+  (246.66s)
