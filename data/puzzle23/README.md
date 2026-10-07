@@ -33,3 +33,33 @@ at most seven colours has no translation symmetry, even up to a permutation of c
 Files: `offsets_search.py` (run on 7, 11, 19; too slow at 23 in Python, stopped), `offsets_sat.py`, `out/q23-sat.txt`.
 Reproduce: `python3 scripts/slot.py --mem 4 --name puzzle23 -- python3 data/puzzle23/offsets_sat.py 23 col 7` (about
 four minutes) and `… 23 cls 4` (seconds).
+
+## How many cells can one colour hold? (same day, second tangent; `one_colour.py`)
+
+Kooshi: "It feels like the largest independent set could be solved by exhaustive exact search (with pruning and other
+optimizations) by a more traditional computer science algo rather than SAT."
+
+**The number that matters is 88.** 529 = 6·88 + 1, so six colours need one colour on at least 89 cells: **if no clash-free
+set of 89 cells exists, the 23 board needs at least seven colours** (row 69's window would lose 23). Seven colours need
+only 76. The certificate's ceiling is 105 (row 71).
+
+| instrument | result | grade |
+|---|---|---|
+| exact branch and bound inside rotation-invariant families (order of the rotation: 24, 12, 8, 6) | best unions of orbits: 73, **85**, 81, 85 cells | exact within each family; sets re-checked |
+| the same at order 4 | at least 85 | node cap hit — a lower bound only |
+| tabu local search over all sets, 13 runs (7 from the stripes class of 69, 6 from random maximal sets of 62–64) | **87 cells in every run**, within about a second; **88 in none**, about 6–8 million swap moves each | a lower bound: α(Γ₂₃) ≥ 87, each set re-checked cell by cell (`out/one-colour*.txt` hold the sets) |
+
+**What is and is not established.** Held at [tools]: a clash-free set of 87 cells exists, so α(Γ₂₃) ∈ [87, 105].
+**Not established: that 87 is the maximum.** That every run stops at exactly 87 is a reading, with its killing test — one
+clash-free set of 88. No earlier record of a lower bound on α(Γ₂₃) was found in a quick search of the ledger and the
+grokkings (not a full check).
+
+**What an exact answer would take** (unbudgeted, unqueued; a search-lane job when the budget returns): decide whether a
+clash-free set of 89 cells exists. Notes for whoever plans it: (1) the board is vertex-transitive, so fix the origin in
+the set and use the 48 symmetries fixing it; (2) the cheap bounds are far off — the largest clique is a triangle, so a
+clique-cover bound is a third of what is left, and the certificate's 105 is final for its instrument — so plain branch
+and bound will not prune until very deep; (3) for a vertex-transitive graph, α(Γ)/529 ≤ α(H)/|H| for every set of cells
+H, so one piece H with an exactly computed α(H) < 0.1682·|H| proves it; because 87/529 = 0.1645 the piece must be nearly
+as hard as the board (for a union of j parallel no-clash lines, j·3.783 ≤ α(H) < j·3.870: no integer fits below j = 10;
+at j = 10 it would have to be exactly 38 of 230 cells, and that would give α = 87 outright); (4) Russian-doll search over
+nested unions of lines is the classical algorithm of this shape.
