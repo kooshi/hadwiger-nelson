@@ -1,0 +1,5 @@
+strip: three-corner vertices=40 directions read=480 crossing>2-s:0 | directions with an inner-pure and an outer-pure label=80, with an edge along the far circle=80, WITHOUT=0 | fl=1440 mismatches=0
+disk: three-corner vertices=25 directions read=300 crossing>2-s:0 | directions with an inner-pure and an outer-pure label=30, with an edge along the far circle=30, WITHOUT=0 | fl=2340 mismatches=0
+flower: three-corner vertices=6 directions read=48 crossing>2-s:0 | directions with an inner-pure and an outer-pure label=6, with an edge along the far circle=6, WITHOUT=0 | fl=2484 mismatches=0
+bowtie: three-corner vertices=4 directions read=32 crossing>2-s:0 | directions with an inner-pure and an outer-pure label=4, with an edge along the far circle=4, WITHOUT=0 | fl=2580 mismatches=0
+r7: no three-corner vertex (every lattice point has six corners) - silent

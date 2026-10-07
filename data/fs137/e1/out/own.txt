@@ -1,0 +1,6 @@
+   flower at (0.00000,0.00000) labels=6 label 0 (own) inner: [30.0]
+   flower at (0.00000,0.00000) labels=6 label 1 (own) inner: [90.0]
+   flower at (0.00000,0.00000) labels=6 label 2 (own) inner: [150.0]
+   flower at (0.00000,0.00000) labels=6 label 3 (own) inner: [210.0]
+   flower at (0.00000,0.00000) labels=6 label 4 (own) inner: [270.0]
+   flower at (0.00000,0.00000) labels=6 label 5 (own) inner: [330.0]

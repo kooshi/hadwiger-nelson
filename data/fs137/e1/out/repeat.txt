@@ -1,0 +1,3 @@
+a,c,b,c (c twice): corners=4 labels=3 all-angles<=180=True windows-sum=314.7603 180(c-2)=360 180(m-2)=180 pure-per-arc=[0, 2] violations=0
+reflex (270, 45, 45 degrees): corners=3 labels=3 all-angles<=180=False windows-sum=270.0000 180(c-2)=180 180(m-2)=180 pure-per-arc=[1, 2] violations=0
+control: four labels, the same four rays: corners=4 labels=4 all-angles<=180=True windows-sum=360.0000 180(c-2)=360 180(m-2)=360 pure-per-arc=[2] violations=0

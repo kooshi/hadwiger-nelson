@@ -1,0 +1,3 @@
+r7 cells: pairs=54 points=108 cells=432 empty=0 none=0 | saved by: a-pure-for-y=45 a-pure-for-y+b-pure-for-x+one-label-pure-for-both=108 a-pure-for-y+one-label-pure-for-both=63 b-pure-for-x=63 b-pure-for-x+one-label-pure-for-both=45 one-label-pure-for-both=108
+bowtie at (sqrt3,0) (q2 lacks [4], q1 lacks [2]; sides q2/q1): out/in=4:a-pure-for-y in/in=2:b-pure-for-x,3:both,4:a-pure-for-y in/out=2:b-pure-for-x out/out=EMPTY
+bowtie at origin (q2 lacks [4], q1 lacks [2]; sides q2/q1): out/in=2:b-pure-for-x out/out=2:b-pure-for-x,3:both,4:a-pure-for-y in/out=4:a-pure-for-y in/in=1:both

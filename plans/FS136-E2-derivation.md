@@ -485,6 +485,20 @@ control: forced-r7-window
 places; "found already held under another name 0.2" — **partly**: held as a step about palettes inside one argument, not
 for pieces.
 
+
+*Corrections, dated 2026-10-07 (20:41 UTC; filed by the coordinator; source: the kernel planner's second look at the three entries of this
+stage and of Stage 8 that had no second derivation — its record `plans/FS136-kernel-plan.md` on branch `fs136-wk1`, § 4.2 —
+made after its own routes to the same statements were committed blind; FS-136 inventory items 22–24). "All three stand as
+written. What each leaves implicit", copied by script:*
+
+- **C136-FORCED / C136-CORNERS**: "they cut `{|y − w| > R}` into `2m` regions, one between each two cyclically consecutive ends; each is connected" is asserted, and is the whole count. And `R₀` "exceeding the distance from `w` of every crossing point" is vacuous when no two lines cross (`m = 1`; two tangent circles): `R₀ > 1/2` is needed as well — with two tangent circles and `ρ > 2` the outside of both is one region. The statement ("there is `ρ₀`") is not affected.
+- **C136-CLASS**: that ends with different (direction, offset) are disjoint and so ordered far out is asserted (my leaf `CurveGerm.exists_forall_angle_lt`); the converse's "the intervals overlap, so the regions meet outside every disc" uses that between two germs there is a third (curvature is a real number). The tie the statement turns on — an edge of `β₋`'s direction and curvature below `1` is the last counted from `β₋` — is right (§ 2.3 item 8).
+- **C136-COLLAR**: it reads of `A` only that it is a connected subset of `S(x) ∩ U`, of `F` only that its corners give pieces at `x`. "Shrink `η_w` so that `H_w` is connected" is free inside and a real step outside (the part of a small disc outside a unit circle through its centre is not convex): leaf `isPreconnected_ball_diff_closedBall`. "Their pieces `Σ_ρ`, for small `ρ`" cites C136-CORNERS' picture, which is about unit circles through the point; that a corner between two arbitrary rays or arcs is open and connected for small `ρ` is a separate statement: leaf `exists_isPieceShape_cornerSet`.
+
+*No statement changes and no grade moves: each entry is one mind's, with a second look by a mind whose routes were
+committed first. The count of `2m` corners in C136-CORNERS rests on the asserted sentence quoted above; the forward step
+does not read it (the planner's route proves only that each corner reaches the point).*
+
 ## Stage 3 — SAVED: C136-CLOSE, and the closure of two adjacent lattice points of the tight seven-colouring
 
 derivation: C136-CLOSE
