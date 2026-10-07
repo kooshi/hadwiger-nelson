@@ -23,15 +23,19 @@ used. No Jordan curve theorem is read: the inputs are this library's unicoherenc
   plane's unicoherence pulled back along the retraction, whose fibres are points and closed rays.
 * `IsTriod x r J` — three arcs from `x` to the rim of `B(x, r)`, in the claim list's five clauses.
   `IsTriod.range_subset_of_isPreconnected` — a preconnected subset of the three arcs that holds two far ends holds
-  the whole arc to each. `IsTriod.exists_perm_polarPt` — the far ends in their order round the rim.
+  the whole arc to each. `RimOrder x r J a b c α β γ` — the far ends in their order round the rim, at angles
+  `α < β < γ < α + 2π`; the order is cyclic (`RimOrder.rotate`), and it exists (`IsTriod.exists_rimOrder`).
   `IsTriod.not_mem_closure_both_sides` — **no preconnected set of the open disc off two of the arcs reaches the rim on
   both sides of their far ends** (the crossing lemma).
 * `IsTriodCut x r J P` — the triod with three pieces `P 0`, `P 1`, `P 2` filling the cut disc.
   `IsTriodCut.exists_unique_mem_closure` — a rim point off the far ends is in the closure of exactly one piece;
   `IsTriodCut.exists_forall_rimArc` — and of the same piece all along an arc of the rim between far ends;
   `IsTriodCut.closure_inter_closure_subset` — two pieces' closures meet on the arcs only;
+  `IsTriodCut.ne_of_rimOrder` — the pieces at consecutive arcs of the rim are different;
   `IsTriodCut.isPreconnected_closure_inter` — **the part of the three arcs in the closure of one piece is
-  preconnected** (unicoherence of the disc: the piece's closure against the arcs and the other two closures).
+  preconnected** (unicoherence of the disc: the piece's closure against the arcs and the other two closures);
+  `IsTriodCut.exists_rimPiece` — the piece at an arc of the rim has the two arcs to its ends in its closure, whole,
+  and of the third arc the point `x` only.
 * `IsTriodCut.exists_opposite` — **the θ-lemma**: a bijection from arcs to pieces, the piece *opposite* an arc; the arc
   lies in the closure of each of the two other pieces and meets the closure of its opposite piece at `x` only.
   Corollaries: `exists_range_subset` (every two pieces share a whole arc), `closure_inter_closure_inter_ball` (inside
@@ -194,7 +198,7 @@ structure IsTriod (x : ℂ) (r : ℝ) (J : Fin 3 → C(unitInterval, ℂ)) : Pro
   /-- Each arc is inside the open disc but for its far end. -/
   dist_lt : ∀ m t, t ≠ 1 → dist (J m t) x < r
   /-- Two of the arcs meet at `x` only. -/
-  eq_of_eq : ∀ m m' s t, m ≠ m' → J m s = J m' t → J m s = x
+  eq_center_of_ne : ∀ m m' s t, m ≠ m' → J m s = J m' t → J m s = x
 
 /-- **The cut disc in three pieces**: three arcs from `x` to the rim of `B(x, r)`, and three open preconnected pairwise
 disjoint sets whose union is the disc less the arcs. (Three such sets are the components of the cut disc; that it has
@@ -209,6 +213,46 @@ structure IsTriodCut (x : ℂ) (r : ℝ) (J : Fin 3 → C(unitInterval, ℂ)) (P
   disjoint : ∀ i j, i ≠ j → Disjoint (P i) (P j)
   /-- The pieces fill the disc less the arcs. -/
   iUnion_eq : ⋃ i, P i = ball x r \ ⋃ m, range (J m)
+
+/-- **The far ends in their order round the rim**: `a`, `b`, `c` are the three arcs, and their far ends are the points of
+the rim at angles `α < β < γ < α + 2π`. The order is cyclic, not linear: `RimOrder.rotate` turns it by one arc, and
+every statement about "the arc of the rim from the far end of `J a` to that of `J b`" is proved once and read at the
+three rotations. -/
+structure RimOrder (x : ℂ) (r : ℝ) (J : Fin 3 → C(unitInterval, ℂ)) (a b c : Fin 3) (α β γ : ℝ) : Prop where
+  /-- The first two arcs are different. -/
+  ne_ab : a ≠ b
+  /-- The last two arcs are different. -/
+  ne_bc : b ≠ c
+  /-- The last and the first arc are different. -/
+  ne_ca : c ≠ a
+  /-- The far end of the first arc. -/
+  apply_a : J a 1 = polarPt x r α
+  /-- The far end of the second arc. -/
+  apply_b : J b 1 = polarPt x r β
+  /-- The far end of the third arc. -/
+  apply_c : J c 1 = polarPt x r γ
+  /-- The first angle is below the second. -/
+  lt_ab : α < β
+  /-- The second angle is below the third. -/
+  lt_bc : β < γ
+  /-- The third angle is less than a turn above the first. -/
+  lt_ca : γ < α + 2 * Real.pi
+
+/-- **The order round the rim is cyclic**: turned by one arc it is an order round the rim. -/
+theorem RimOrder.rotate {x : ℂ} {r : ℝ} {J : Fin 3 → C(unitInterval, ℂ)} {a b c : Fin 3} {α β γ : ℝ}
+    (ho : RimOrder x r J a b c α β γ) : RimOrder x r J b c a β γ (α + 2 * Real.pi) := by
+  refine ⟨ho.ne_bc, ho.ne_ca, ho.ne_ab, ho.apply_b, ho.apply_c, ?_, ho.lt_bc, ho.lt_ca, by linarith [ho.lt_ab]⟩
+  rw [ho.apply_a, polarPt, polarPt, e_add_two_pi]
+
+/-- The three arcs of an order round the rim are all the arcs. -/
+theorem RimOrder.eq_or {x : ℂ} {r : ℝ} {J : Fin 3 → C(unitInterval, ℂ)} {a b c : Fin 3} {α β γ : ℝ}
+    (ho : RimOrder x r J a b c α β γ) (m : Fin 3) : m = a ∨ m = b ∨ m = c := by
+  have h1 := ho.ne_ab
+  have h2 := ho.ne_bc
+  have h3 := ho.ne_ca
+  clear ho
+  revert a b c m
+  decide
 
 /-- The union of three arcs is closed. -/
 theorem isClosed_iUnion_range_arc (J : Fin 3 → C(unitInterval, ℂ)) : IsClosed (⋃ m, range (J m)) := by
@@ -249,7 +293,7 @@ theorem eq_one_of_mem_sphere (h : IsTriod x r J) {m : Fin 3} {t : unitInterval} 
 /-- The three far ends are distinct. -/
 theorem apply_one_ne (h : IsTriod x r J) {m m' : Fin 3} (hmm : m ≠ m') : J m 1 ≠ J m' 1 := by
   intro he
-  have hx := h.eq_of_eq m m' 1 1 hmm he
+  have hx := h.eq_center_of_ne m m' 1 1 hmm he
   have hd := h.dist_apply_one m
   rw [hx, dist_self] at hd
   exact h.pos.ne hd
@@ -265,10 +309,6 @@ theorem isPreconnected_iUnion_range (h : IsTriod x r J) : IsPreconnected (⋃ m,
   exact isPreconnected_iUnion ⟨x, mem_iInter.mpr fun m => ⟨0, h.apply_zero m⟩⟩ fun m =>
     isPreconnected_range (J m).continuous
 
-/-- The arcs in another order are three arcs from `x` to the rim. -/
-theorem comp_perm (h : IsTriod x r J) (σ : Equiv.Perm (Fin 3)) : IsTriod x r (fun m => J (σ m)) := by
-  sorry
-
 /-- **A preconnected subset of the three arcs that holds two far ends holds the whole arc to each**: were a point
 `J m s₀` missing, the part of `J m` beyond it and the rest of the three arcs would be two closed sets covering the
 subset, each meeting it, with only that point in common. -/
@@ -277,11 +317,20 @@ theorem range_subset_of_isPreconnected (h : IsTriod x r J) {Z : Set ℂ} (hZ : I
     range (J m) ⊆ Z := by
   sorry
 
-/-- **The far ends in their order round the rim**: after a permutation of the arcs the far ends are the points of the
-rim at angles `θ 0 < θ 1 < θ 2 < θ 0 + 2π`. (The arguments of the three far ends, sorted.) -/
-theorem exists_perm_polarPt (h : IsTriod x r J) :
-    ∃ (σ : Equiv.Perm (Fin 3)) (θ : Fin 3 → ℝ), θ 0 < θ 1 ∧ θ 1 < θ 2 ∧ θ 2 < θ 0 + 2 * Real.pi ∧
-      ∀ m, J (σ m) 1 = polarPt x r (θ m) := by
+/-- **The far ends have an order round the rim**: the arguments of the three far ends, sorted. -/
+theorem exists_rimOrder (h : IsTriod x r J) : ∃ a b c α β γ, RimOrder x r J a b c α β γ := by
+  sorry
+
+/-- A point of the rim on an arc is the arc's far end. -/
+theorem eq_apply_one_of_mem_sphere (h : IsTriod x r J) {m : Fin 3} {p : ℂ} (hp : p ∈ sphere x r)
+    (hpm : p ∈ range (J m)) : p = J m 1 := by
+  obtain ⟨t, rfl⟩ := hpm
+  rw [h.eq_one_of_mem_sphere hp]
+
+/-- **No far end lies strictly between consecutive far ends**: a point of the rim at an angle strictly between `α` and
+`β` is on none of the three arcs. -/
+theorem notMem_iUnion_range_of_mem_Ioo (h : IsTriod x r J) {a b c : Fin 3} {α β γ φ : ℝ}
+    (ho : RimOrder x r J a b c α β γ) (hφ : φ ∈ Ioo α β) : polarPt x r φ ∉ ⋃ m, range (J m) := by
   sorry
 
 /-- **No preconnected set of the open disc off two of the arcs reaches the rim on both sides of their far ends**: the
@@ -353,10 +402,6 @@ theorem piece_subset_ball (h : IsTriodCut x r J P) (i : Fin 3) : P i ⊆ ball x 
 theorem disjoint_iUnion_range (h : IsTriodCut x r J P) (i : Fin 3) : Disjoint (P i) (⋃ m, range (J m)) := by
   sorry
 
-/-- The arcs in another order cut the disc into the same pieces. -/
-theorem comp_perm (h : IsTriodCut x r J P) (σ : Equiv.Perm (Fin 3)) : IsTriodCut x r (fun m => J (σ m)) P := by
-  sorry
-
 /-- **A rim point off the far ends is in the closure of exactly one piece**: a small disc about it misses the arcs, its
 part in the open disc is convex, so inside one piece. -/
 theorem exists_unique_mem_closure (h : IsTriodCut x r J P) {p : ℂ} (hp : p ∈ sphere x r)
@@ -379,22 +424,37 @@ theorem exists_forall_rimArc (h : IsTriodCut x r J P) {α β : ℝ} (hαβ : α 
       ∀ j, ∀ φ ∈ Ioo α β, polarPt x r φ ∈ closure (P j) → j = i := by
   sorry
 
-/-- **The part of the three arcs in the closure of one piece is preconnected**, when every piece's closure meets the
-arcs: the closed disc is the union of the closure of the piece and of the arcs with the two other closures, two closed
-preconnected sets, and they meet in that part (`isPreconnected_inter_of_union_eq_closedBall`,
+/-- **The pieces at consecutive arcs of the rim are different** (the crossing lemma,
+`IsTriod.not_mem_closure_both_sides`, for the arcs `J b` and `J c`): a piece whose closure holds a rim point strictly
+between the far ends of `J a` and `J b` is not a piece whose closure holds one strictly between those of `J b` and
+`J c`. -/
+theorem ne_of_rimOrder (h : IsTriodCut x r J P) {a b c : Fin 3} {α β γ φ ψ : ℝ} (ho : RimOrder x r J a b c α β γ)
+    {i i' : Fin 3} (hφ : φ ∈ Ioo α β) (hψ : ψ ∈ Ioo β γ) (hi : polarPt x r φ ∈ closure (P i))
+    (hi' : polarPt x r ψ ∈ closure (P i')) : i ≠ i' := by
+  sorry
+
+/-- **Every piece's closure meets the arcs**: the pieces at the three arcs of the rim are different
+(`ne_of_rimOrder` at the three rotations), so they are all the pieces, and the closure of each holds two far ends. -/
+theorem closure_inter_nonempty (h : IsTriodCut x r J P) (j : Fin 3) :
+    (closure (P j) ∩ ⋃ m, range (J m)).Nonempty := by
+  sorry
+
+/-- **The part of the three arcs in the closure of one piece is preconnected**: the closed disc is the union of the
+closure of the piece and of the arcs with the two other closures, two closed preconnected sets
+(`closure_inter_nonempty`), and they meet in that part (`isPreconnected_inter_of_union_eq_closedBall`,
 `closure_inter_closure_subset`). -/
-theorem isPreconnected_closure_inter (h : IsTriodCut x r J P)
-    (hne : ∀ j, (closure (P j) ∩ ⋃ m, range (J m)).Nonempty) (i : Fin 3) :
+theorem isPreconnected_closure_inter (h : IsTriodCut x r J P) (i : Fin 3) :
     IsPreconnected (closure (P i) ∩ ⋃ m, range (J m)) := by
   sorry
 
-/-- **The θ-lemma with the far ends in order round the rim**: the piece `q k` at the arc of the rim from the far end
-of `J k` to that of `J (k + 1)` has both arcs in its closure and meets the third arc at `x` only; the three pieces so
-named are different, hence all of them. -/
-theorem exists_perm_of_sorted (h : IsTriodCut x r J P) {θ : Fin 3 → ℝ} (hθ : ∀ m, J m 1 = polarPt x r (θ m))
-    (h01 : θ 0 < θ 1) (h12 : θ 1 < θ 2) (h20 : θ 2 < θ 0 + 2 * Real.pi) :
-    ∃ q : Equiv.Perm (Fin 3), ∀ k, range (J k) ⊆ closure (P (q k)) ∧ range (J (k + 1)) ⊆ closure (P (q k)) ∧
-      closure (P (q k)) ∩ range (J (k + 2)) = {x} := by
+/-- **The piece at an arc of the rim**: for the far ends in the order `a`, `b`, `c` round the rim, one piece has in its
+closure the open arc of the rim from the far end of `J a` to that of `J b`, both arcs `J a` and `J b` whole, and of the
+third arc `J c` the point `x` only. (The part of the three arcs in its closure is preconnected and holds two far ends:
+`IsTriod.range_subset_of_isPreconnected`. A point of `J c` other than `x` in its closure would give a preconnected set
+of the open disc off `J a ∪ J b` reaching the rim on both sides: `IsTriod.not_mem_closure_both_sides`.) -/
+theorem exists_rimPiece (h : IsTriodCut x r J P) {a b c : Fin 3} {α β γ : ℝ} (ho : RimOrder x r J a b c α β γ) :
+    ∃ i, (∀ φ ∈ Ioo α β, polarPt x r φ ∈ closure (P i)) ∧ range (J a) ⊆ closure (P i) ∧
+      range (J b) ⊆ closure (P i) ∧ closure (P i) ∩ range (J c) = {x} := by
   sorry
 
 /-- **The θ-lemma**: for three arcs from `x` to the rim of a disc and three open preconnected pairwise disjoint sets

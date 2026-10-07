@@ -274,3 +274,44 @@ vertex of three tiles), together with the two facts above that come with it and 
 C136-PARTNERS read. **What the re-fixing would save**: the 350 to 450 lines left of this module. **My reading**: keep
 the list's definition and build the leaf; the bridge is short because the definition supplies the count, and the wider
 class is not the class two of the hand entries argue about. The ruling is the coordinator's, with the derive lane.
+
+**The ruling, received after the price was sent** (the coordinator; FS-124 inventory item 44, its words): "keep the
+claim list's definition of a sector point and build the leaf." The rest of this record is the plan an implementer
+builds.
+
+## Stage 4 — SAVED (FS124-K3): the two passes and the plan per leaf
+
+### 4.1 The pass on the model (`debruijn-domain-modeling`, run fresh)
+
+**The cut it found.** The order of three points round a circle is *cyclic*, and the first skeleton carried it as a
+linear one: the far ends at `θ : Fin 3 → ℝ` with `θ 0 < θ 1 < θ 2 < θ 0 + 2π`, the arcs renamed by a permutation, and
+the rim arc from the third far end back to the first as a special case in every statement that names a rim arc (index
+arithmetic `k + 1`, `k + 2` in `Fin 3`; three cases, each with its own inequality facts). That is incidental structure
+— the order the angles happened to be sorted in — and it would have been paid in the largest leaf.
+**What replaced it**: `RimOrder x r J a b c α β γ` — the three arcs named in their order round the rim, far ends at
+angles `α < β < γ < α + 2π` — with **one** lemma for the symmetry, `RimOrder.rotate : RimOrder a b c α β γ → RimOrder
+b c a β γ (α + 2π)` (proved: three lines). Every statement about "the arc of the rim from the far end of `J a` to
+that of `J b`" is now proved once and read at the three rotations. Consequences in the skeleton:
+- `IsTriod.exists_perm_polarPt` became `IsTriod.exists_rimOrder` (no permutation of the arcs: it names them);
+- both `comp_perm` lemmas are gone (nothing reorders the arcs);
+- `IsTriodCut.exists_perm_of_sorted` — the 130-line assembly — is split into `ne_of_rimOrder`,
+  `closure_inter_nonempty`, `exists_rimPiece`, each generic in `a b c`, and the hypothesis "every closure meets the
+  arcs" of the unicoherence step is discharged inside the module (`isPreconnected_closure_inter` takes no side
+  hypothesis);
+- `IsTriod.eq_apply_one_of_mem_sphere` names a step two leaves use; the field `eq_of_eq` is `eq_center_of_ne`.
+
+**What the pass kept, each checked against the cut.** `opp : Equiv.Perm (Fin 3)` in the main statement is the
+incidence itself (each arc misses one piece, each piece misses one arc): intrinsic. Arcs as injective `C(unitInterval,
+ℂ)` and pieces as `Fin 3 → Set ℂ` are the consumer's own shapes (`IsSector`, `ThreePiece.piece`). Angles on the rim
+are the crossing lemma's interface (`inter_nonempty_of_interleaved_radius` takes `s < s' < t < t' < s + 2π`); they
+stay, confined to `RimOrder` and three leaves. `IsTriodCut` as a predicate beside the data, not a bundle: every
+consumer holds the arcs and pieces already.
+
+**The seams.** *Model of the hypotheses*: the three-sector point (§ 3.1), kernel-held once `sectorPoint_isSector` is.
+*Unsampled members*: a wild arc (spiralling into `x`, or of positive area) — the route reads no tameness and no
+measure; a triod whose pieces are fewer than three — the hypotheses are then contradictory, which the module proves
+(`closure_inter_nonempty`: all three are rim pieces); `x` on the rim — excluded by the fourth clause at `t = 0`.
+*Adversary to the statement*: none found; the conclusion is the incidence, both halves. *The next lemma, named before
+looking*: "about an interior point of an arc a small disc holds only that arc and its two pieces" (what C124-FORCED's
+second sentence reads) — it states in the module's words and follows in a few lines from `exists_opposite` and the
+fill clause; not stated, no consumer in the kernel yet.
