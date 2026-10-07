@@ -144,3 +144,75 @@ an opened namespace supplies another — which the elaborated comparison of stag
    `d` with `WeakColoring k d` — `AEMeasurable d ∧ ∀ᵐ p ∂(volume.prod angularMeasure), d p.1 ≠ d (p.1 + direction p.2)`
    (`Coloring.lean:27–29`), proper at almost every unit pair. That is `χ_m⁰(ℝ²) ≤ χ(ℝ²)`, the direction `LEDGER.md` rows 128 and
    130 hold given MR, at [hand]. Listed, not judged; stage 6 reads it.
+
+## Stage 3 — SAVED: the cone, by text, before any build
+
+**The cone.** `data/external/oai1/cone.py` follows the `import` lines of `OAI.Geometry.PlaneColoring.Five` through the release's
+`lean/` tree (an import with no file under it is *outside* and is listed, not followed): **70 modules, 30,336 lines, and one
+outside import, `Mathlib`** (11 of the 70 import it directly). Print: `data/external/oai1/cone-five.txt`; file list:
+`cone-five-files.txt`; graph: `cone-five.json`. The parser is checked against `rg`: 93 import names parsed, 93 `import` lines in
+the 70 files; no `module` or `prelude` header.
+
+| part of the cone | modules | lines |
+|---|---|---|
+| `OAI.Geometry.PlaneColoring` (37 of the directory's 46) | 37 | 14,142 |
+| `OAI.Analysis.PlaneSpectrum` | 19 | 8,466 |
+| `OAI.MeasureTheory.CompactFactors` | 14 | 7,728 |
+
+The nine modules of the directory outside the cone are the seven-colour side: `Assembly`, `Basic`, `Covering`, `Lattice`, `Main`,
+`MeasurableAssembly`, `MeasurableProper`, `Metric`, `Seven`. The two other parts enter through `BorelTransfer`
+(`← PlaneSpectrum.Ergodicity`) and through `Transitions` (`← PlaneSpectrum.CircleOperator`). **None of the release's 29 other
+direct requirements is imported by the cone.**
+
+**What a kernel would not check, by text** (`data/external/oai1/conegrep.sh`, `rg -P`, over the 70 files; print:
+`conegrep-five.txt`). Every count is zero:
+
+| construct | pattern | hits |
+|---|---|---|
+| `axiom` as a declaration; the word `axiom` anywhere | `^\s*(@[…])*(private |protected |…)*axiom\b`; `\baxiom\b` | 0; 0 |
+| `sorry`, `admit`, `sorryAx` | `\bsorry\b`, `\badmit\b`, `sorryAx` | 0, 0, 0 |
+| native evaluation | `native_decide`; `decide\s*\+\s*(native|kernel)`; `bv_decide|ofReduceBool|reduceBool|ofReduceNat|reduceNat|trustCompiler` | 0; 0; 0 |
+| `implemented_by`, `extern`, `csimp` | the words | 0, 0, 0 |
+| `unsafe`, `opaque`, `partial` | the words | 0, 0, 0 |
+| any `set_option`; `debug.` / `bootstrap.` / `skipKernelTC` | `set_option`; `skipKernelTC|bootstrap\.|debug\.` | 0; 0 |
+| meta-programs and notation: `elab`, `macro`, `syntax`, `notation`, `infix`, `run_cmd`, `run_elab`, `run_meta`, `initialize`, `elab_rules`, `macro_rules`, `#eval`, `#exit`, `#print`, `#check`, `#reduce` | line-initial keywords, `#…` anywhere | 0 |
+| `open Lean`, `import Lean`, `Lean.Elab`, `Lean.Meta`, `addDecl`, `Environment` | the words | 0 |
+| `attribute [...]` commands | `^\s*(local |scoped )?attribute\s*\[` | 0 |
+
+*Control* (`conegrep-control.txt`): the same script on a scratch copy of `Coloring.lean` with fourteen planted lines — two
+`axiom`s (one `private`), `sorry`, `admit`, `native_decide`, `set_option debug.skipKernelTC true in`, `implemented_by`, `unsafe`,
+`opaque`, `extern`, `attribute [instance]`, `local notation`, `Lean.ofReduceBool` — reports each (axiom 2 and 2, sorry 1, admit 1,
+native 1, reduceBool 1, implemented_by 1, extern 1, unsafe 1, opaque 1, set_option 1, debug 1, notation 1, attribute 1).
+
+**What is in the cone that changes elaboration, and none of it the kernel's check:**
+- 18 `local instance` lines in 7 files, of three kinds: `DecidableEq` from `Classical.decEq` (4), and
+  `MeasurableSpace Circle := borel Circle` with `BorelSpace Circle := ⟨rfl⟩` (7 pairs). All `local`: none is visible to the
+  headline's statement, which mentions `ℂ`, `Fin 5` and the norm only.
+- `open scoped Classical` in 11 files. Inline attributes: `@[simp]` 167, `@[simps]` 4, `@[fun_prop]` 3, `@[ext]` 3,
+  `@[instance_reducible]` 1 — none affects the kernel.
+- 1,981 `theorem`/`lemma` lines and 569 `def`/`abbrev`/`structure`/`class`/`inductive`/`instance` lines; 363 `variable` lines and
+  276 `include`/`omit` lines (hypotheses carried by section variables: the headline is closed, so none can reach its statement;
+  its stored type is compared in stage 4).
+
+**The build configuration, by text.** The release's `lakefile.lean` sets one option, `leanOptions := #[⟨`autoImplicit, false⟩]`,
+and no `moreLeanArgs`, `weakLeanArgs`, plugin or dynlib (`rg` for those words: the one `leanOptions` line). Its `run_cmd` and
+`post_update` blocks run `git clone`, `git checkout` and `git apply` on dependency checkouts under `.lake/packages` and nothing
+else; I do not run them (next paragraph).
+
+**The Mathlib revision is the official release tag.** In the working copy's checkout of
+`https://github.com/leanprover-community/mathlib4.git`, `d13f23b723b8a846827a245b89c10fc7d3f11612` is the commit "chore: bump
+toolchain to v4.34.1" (2026-09-24 22:34:32 +0200), carries the tag `v4.34.1`, is contained in `origin/stable`, and its
+`lean-toolchain` reads `leanprover/lean4:v4.34.1`. (It is not an ancestor of `origin/master`, as a release-branch commit is not;
+a hash served by GitHub can belong to a fork, which is why the tag and the branch were read.) The checkout is unmodified
+(`git status --porcelain`: 0 lines).
+
+**My decision on the build** (the brief leaves it to me): since the cone imports nothing outside but `Mathlib`, the working copy
+builds with a lakefile **reduced to the Mathlib requirement** — the same package name, toolchain file and `leanOptions`, the
+release's `lakefile.lean` and `lake-manifest.json` kept beside it with the suffix `.release`
+(`data/external/oai1/lakefile.reduced.lean` is the copy). The release's 29 other direct requirements are not cloned, and its
+lakefile's `run_cmd` is not executed. What this cannot show: that the release's full configuration resolves and builds — its own
+instruction is `lake update` on the whole package set.
+
+**What the text cannot decide, and where it is decided:** a `sorryAx` or a native axiom reached through a tactic no pattern names
+(`#print axioms`, stage 4); the instance and coercions in the stored statement (stage 4); that the 30,336 lines elaborate (the
+build, stage 4).
