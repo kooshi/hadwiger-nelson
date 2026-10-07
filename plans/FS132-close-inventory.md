@@ -825,3 +825,21 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     time tonight a card's wording is corrected by the deriver that took it: the asking lane's next job is told the three
     instances together.
 
+27. **FS132-K1's phase 1 is committed, blind; the fence is lifted** (source: its message to "main", 2026-10-07; branch
+    `fs132-wk1` at `1eb4b94b`, pushed; record `plans/FS132-kernel-plan.md` Stages 1–2 on that branch). **What the commit
+    holds, by its message and the commit's file list** (thirteen files, seen by me): the release's palette definition chain
+    with its proofs, ported by a script of its own — 818 lines, no `sorry`, no axiom, one Mathlib signature patch;
+    C132-CONFINE proved for every set; skeletons for the other six statements, each read back clause by clause; the build
+    under the slot exit 0 with 29 "declaration uses sorry" warnings and nothing else; the module map green; C132-M-EXCL
+    proved in the skeleton from C132-M-ORBIT and one measure-theory leaf; C132-M-ORBIT with its route's first three steps
+    as leaves and the last two open — "clean change only; no argument for a general measurable state". **Its blindness is
+    dated by that commit**: "I have read nothing fenced". **My reply, after the commit** (the fence's lifting): the steps
+    the derivers' authors flag are M8 (the step lemma, a sign control only, no second reader) and M9 (the kill, no second
+    reader) of `plans/FS132-E3-derivation.md` Stage 3; its own hard leaf is M8; M1–M6 have three readers; and the four
+    things withheld — the four-point form (C132-WIT), the attribution of C132-DIAG-WIDE, its square form to be stated in
+    its record, and the extraction's changed place in the queue (C132-WIT-SUPER, C132-WIT-SIDE). **Not checked by me**: the
+    build's log; the ported file; any read-back. **Rulings.** (a) **The fence is lifted as of `1eb4b94b`.** (b) **Its
+    phase 2 reads M8 first**: if it holds, one leaf or several; if it cannot be made a leaf, a message at once — that is
+    the one result of the first night this milestone's direction rests on. (c) Phase 2 for the two index lemmas may be a
+    successor's; they have no consumer until a tame ring is supplied (the asking lane's table).
+
