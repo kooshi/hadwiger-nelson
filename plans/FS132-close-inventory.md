@@ -677,3 +677,37 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     (d) **Slips of mine, two**: a ruling and a claim-list line that widened an entry; a framing sentence that named one
     place where there are two. Both were caught because the brief asked for the attack.
 
+22. **FS132-K1, mid phase 1, still blind: the planner's own route to the first night's exclusion arrives at the derivers'
+    argument in every step but one — and names that one as the hard leaf** (source: its message to "main", 2026-10-07; no
+    commit yet; "nothing fenced read"). **Its route**, by hand: the ring form from the orbit form; in a chart about an orbit
+    point the colour avoids both neighbours' states, so each orbit direction has a forced cycle label inside the ring and
+    the opposite one outside; a count gives two adjacent orbit points with the same forced pair; **"everything … is
+    consistent to first order" — it checked the wedge-to-wedge unit distances and found no contradiction; "the
+    contradiction I can see is second order"**: when the state changes cleanly, two thin regions forced to one outside
+    label contain unit pairs — points at radius `1 − t` on the two bounding arcs are at distance `1 − (4/3)t²`. **"I have
+    this for a clean change only; for a general measurable `s` … I have no argument. That is the leaf I would call hard."**
+    **Read against the derivers' record, by me** (it has not seen it): its (a) is the ring form's argument; (b) is M2–M5
+    (the chart, tips, one tip per hub); (c) is M6, the count; its second-order relation is M7's shift (`ε = d d′ h`,
+    `h(0, 0) = 2/√3` — its `4/3` is that constant squared) and its kill for a clean change is M9; **the leaf it cannot
+    reach — a general measurable state — is exactly M8, the step lemma, the one piece with a sign control only and no
+    second reader.** So a blind second mind has reproduced the argument's shape from the statement alone, and isolated
+    the same lemma the deriver, the witness card's deriver and I each flagged. **Its hypothesis question**: as typed, the
+    sets may be two-point sets, with no antipodal symmetry of signs — "a line to check when the fence lifts" (the witness
+    card answered it: the argument reads one point of each set; C132-WIT). **Its generalizations**: the confinement
+    statement needs neither compactness nor connectedness; the two index lemmas are one lemma with one proof, and the
+    step form does not need the continuous one; a model of the index lemma's hypothesis, which the uniform loop is not;
+    C132-DIAG-WIDE holds for any two disjoint non-empty label sets whose complement has at most two labels — "two
+    disjoint pairs at six" and the release's case at five are one theorem. **Its constraint on the import**: every
+    statement of the release is for a colouring of the whole plane, and the three statements are for an open set
+    containing the closed unit disc — so the release's lemmas could only be ported, not imported, for them; it proposes a
+    total colouring with the weak condition asked inside the open set, and asks whether the road needs more than the
+    whole plane. **Rulings.** (a) **The kernel statements of the three are taken at the whole plane first** (a dated line
+    in `data/fs132/claims-K1.md`): the road to seven reads plane colourings, and that makes the release's palette
+    statements importable. Alternative: the local form by ports. Why not now: a port across the two toolchains is the
+    heaviest kind of work and no Lean statement yet consumes the local form; it is said what it would take, no more.
+    Confidence: medium-high. (b) **Nothing about the derivers' argument is told to it before its phase-1 commit** — in
+    particular not that its hard leaf has a claimed proof; my reply answers the import question only. (c) **For the
+    morning report**: the first night's exclusion has had its blind second look as far as the statement and five of its
+    six parts go; what stands on one mind is one lemma — every essential change point of a measurable two-valued ring
+    state is a clean step — and that lemma is the first leaf an implementer should attempt.
+

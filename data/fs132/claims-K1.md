@@ -33,3 +33,14 @@ order the planner takes them. A later change is a dated line at the end.*
 **C132-RING-WIND** — statement: let N be a set of three labels, Π a measurable function from the unit circle S to the non-empty subsets of N with Π(e) ∩ Π(Re) = ∅ for almost every e, and J the set of the directions e having no arc about e on which Π is almost everywhere equal to one set; if J is finite and no two of its points are at angle π/3, then on each arc of S ∖ J the function Π is almost everywhere one singleton or one pair, two consecutive arcs carry subsets of one pair, and the closed walk they make around the triangle on N has winding number congruent to 3 modulo 6
 
 *Not claimed (C132-RING-WIND):* the conclusion when two points of J are π/3 apart (the fault of control `ring-degree`); when J is infinite; for a set N of four labels; that the pure-side palette of any colouring has a finite J
+
+## Dated lines
+
+- **2026-10-07 (the coordinator's ruling on the planner's mid-phase question; FS-132 inventory item 22):** for the kernel
+  module, **C132-M-ORBIT, C132-M-EXCL and C132-DIAG-WIDE are stated first for a weak measurable six-colouring of the whole
+  plane** — the instance `U = ℂ` of each statement above — so that the release's statements they stand on can be declared
+  outside theorems in the import's form. The statements above, for an open set containing the closed unit disc, stay as the
+  claim list's; their local form in Lean is a port with a changed hypothesis and is not planned in this job: say what it
+  would take, and stop there. *Why*: the road to seven reads colourings of the whole plane (the transfer gives one); the
+  local form is read by fragments on discs, which no Lean statement consumes yet.
+
