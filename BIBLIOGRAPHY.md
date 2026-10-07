@@ -423,6 +423,9 @@ needs no entry here.*
 | `[BaderVigdorovich2026]` | **`[BaderVigdorovich2022]`** | one paper (arXiv:2208.07347, 2022; JEMS 28(8), 2026), listed so a journal-year citation resolves |
 | `[BekkaFrancini2020]` | **`[BekkaFrancini2022]`** | one paper (arXiv:2002.07497, 2020; Groups Geom. Dyn. 16(4), 2022; Zbl 1518.22005): FS-105's plan and FS105-R cited it under its arXiv year (FS105-C §R-close 4.3: "the plan's `[BekkaFrancini2020]` is this held paper") |
 | `[AHNR2018]` | **`[AngelHutchcroftNachmiasRay2018]`** | the short key FS114-N6 and FS114-NB6 used |
+| `[Bekka2008]` | **`[BekkaHarpeValette2008]`** | as spelled in the body of `plans/EXT-OAI2-reading.md` |
+| `[TaoDisintegration2008]` | **`[Tao2008ergodicity]`** | as spelled in the body of `plans/EXT-OAI2-reading.md` |
+| arXiv:2008.07987 | **`[GwynStavrianos2022]`** | its arXiv numbering, which `[OAIMath2026]` cites: 'Lemma 2.10 and Theorem 2.11' there are the journal's Lemma 2 and Theorem 2 (`plans/EXT-OAI2-reading.md` § 5.5; the two numberings not matched line by line) |
 
 ## B. The library — every held file, with its key and read status
 

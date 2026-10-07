@@ -165,3 +165,7 @@ grade "the exact value inside it remains open"), LB7 and M7 (plain text "given m
 R128, R132, MAPS6 (plain "each repairing the other"; its grade is now one mind), FS104 (a question node still open, with "No held result decides it"), FS44 (a question node "Decisive if it lands"), FS120 (label "… and the cover route at five"),
 FS128 (label "at five and six"), FS59 (plain "gives χ(ℝ²) ≥ 6"); routes `five`, `alg5` (a route to five), `cp6`, `win6`, `q167`, `wall7` (their link texts and distances, whose credences were registered before the release) and the credence table.
 The page therefore still draws five as a live answer; it is a node edit, owed.
+
+## Amendment — SAVED: the coordinator's rulings R1–R3, R6
+
+R1: 19 ALLOW entries in `tools/claude_md_fact_audit.py` (the 21 audit lines are 19 distinct tokens; `80's` and the external-home line are one token), under the comment "FS132-F1 (2026-10-07, the coordinator's amendment R1)", each reason naming the file found by `rg` (J23 / § J23 → `plans/POROS-2026-10-03-fs129-rerank.md`; `FS114-N2-AVG's` → `plans/FS129-OR1-audit.md`; `FS112-N3-COR3's` → `plans/FS112-unit-arc-half.md`). R2: FS-123's solver cell appended; status appends for FS-101, FS-96, FS-78, FS-42, FS-43 (none for FS-67, FS-64, FS-63); ranks 7 and 11 names as P prints them. R3: three lines in § A′; `NOT_KEYS["Author2024"]`. Gates on this commit: fact audit exit 0, `--dupes` 0, `bib_audit` 0, `check_architecture` 0, `identities check` 0, atlas checker 0 (212/0), self-test 0, build 0; sizes 55,413 and 173,804 bytes.
