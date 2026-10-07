@@ -194,3 +194,34 @@ C124-TYPE, C124-FORCED-PIECES, C124-LONE, C124-BOTH, C124-FOUR, C124-SECOND, C12
 FS112-C-PARTNERS, FS112-STOP (`plans/FS112-derivation.md`); FS114-Y-PAIRSHARE, -Y-STRIPK6, -Y-PENT (`plans/FS114-derivation.md`);
 FS116-Y2-SIXOFF, -N2-SIXRING, -N3-SEMI (`plans/FS116-derivation.md`). Stubs FS-124 (the predecessor, whose eight cases pass
 here), FS-127 (the seed), FS-122 (the forced pair), FS-117 (the count, and its untried torus design meeting the pair screens).
+
+*From FS-124's theorem record (FS124-Z1, the record job, 2026-10-07; every entry named is in `plans/FS124-derivation.md`, [hand] or derived from [hand] entries, **one mind, kernel pending**). None says that a weak
+six-colouring has a piece, a three-piece point or a close complementary pair:*
+
+- **The tool every first claim here would use: C124-TYPE** ([hand] over C124-SHADOW-OPEN; § 2) — every weak `k`-colouring of an
+  open set, one connected open one-label piece with a point of its closure one unit from `w`; it reads no number of labels. In
+  the kernel lane's second module, being planned blind.
+- **The count, as an entry, is for three-piece points with disjoint triples: C124-FORCED-PIECES** (derived from C124-TYPE; § 3).
+  That its argument reads "every label is a label of a piece at one of the two points" is the asking lane's reading of the
+  argument, not an entry: for members of four labels or more the count is to be derived here, not cited.
+- **What is held at the pair, each for its class**: C124-FORCED (sector points: an arc of an edge on the point's unit circle;
+  one topological input recalled, not read); C124-LONE (three-piece points by the letter: what a save by one member forces),
+  with its object C124-LONE-EXISTS (one held family: fragment S1 with a band, a three-piece point by the letter only);
+  C124-BOTH (full members: both separate; sector points: no save by one member alone); C124-FOUR (full members with one piece
+  of each side: exactly four labels at the point); C124-SECOND (sector points, both common unit points in the set, pattern
+  (1, 1): different edges, two labels in common, a cyclic order of the six). **C124-BOTH, C124-FOUR and C124-SECOND rest on
+  C124-LONE, on whose Step II its deriver asks for a second mind**; cite them outside FS-124 with that said.
+- **The method for a stop: C124-EDGE-CLOSED** ([hand], exact comparisons; § 4) — one held family: no weak six-colouring keeps
+  six named pieces of FS-112's strip at their labels and contains the point `(1/4, √15/4 + √3/2)`. It uses C124-TYPE six times
+  and no entry of § 3. The held map statement about the strip's six tiles is FS114-Y-STRIPK6 (row 138; two minds, blind);
+  neither statement is the other. The disk's rim and the flower's far vertex by this method are not run.
+- **Calibrations at seven** (§ 6): C124-FORCED-SEVEN (the count fails on the honeycomb at circumradius 2/5, exact) and
+  C124-KIND (a tight pair with neither label present at its centre).
+- **The reading** C124-READ-SAVES ([tools], one mind; § 7): the three maps read whole are of pattern (1, 1) at every common unit
+  point inside; FS116-Y2-SIXFRAG has eighteen tight arcs of kind both and no close complementary pair.
+- **The consumer of either answer: the radius clause** (§ 1). Weak measurable six-colourings of the open discs of every radius
+  give `χ(ℝ²) ≤ 6` (C124-RADIUS-UP; no import); a disc with none gives seven only over the declared outside theorem
+  `Outside.OAI158.proper_to_borel_weak` (C124-RADIUS-DOWN). Its module is complete on branch `fs124-wk1` — kernel-checked on a
+  branch, not through the gate, not held.
+- **Not held, that a claim here might assume** (that file's § 8): a piece in any weak six-colouring; anything for a member of
+  four or more labels; whether a three-tile vertex of an arc map with a cusp is a sector point.

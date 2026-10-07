@@ -180,3 +180,36 @@ circle".
 `build_derivation.py --check` after the appends: identical — no copied block moved.
 
 **Stage 3 — SAVED** (2026-10-07).
+
+## Stage 4 — SAVED: the stubs
+
+*Eight dated blocks, each headed "(FS124-Z1, the record job, 2026-10-07; every entry named is in `plans/FS124-derivation.md`,
+[hand] or derived from [hand] entries, **one mind, kernel pending**)", inserted by `data/fs124/z1/append_stubs.py` at the end of
+a stub's "Provisional bearings" section (in the milestone's own stub, after the asking lane's paragraph of the same day). 95
+lines added, none removed; no question section and no banner touched.*
+
+| stub | what the block says | the entries it is from |
+|---|---|---|
+| `plans/STUB-covering-pairs.md` (**FS-136**, the successor) | its provisional bearings from this milestone, each at its grade and class: the tool (C124-TYPE); the count as an entry is for three-piece points with disjoint triples, and its reach to members of four labels is the asking lane's reading, to be derived there; what is held at the pair, with the second mind owed under three of them; the method for a stop; the calibrations; the reading; the radius clause as the consumer of either answer; what is not held | C124-TYPE, -FORCED-PIECES, -FORCED, -LONE, -LONE-EXISTS, -BOTH, -FOUR, -SECOND, -EDGE-CLOSED, -FORCED-SEVEN, -KIND, the reading, C124-RADIUS-UP, -DOWN |
+| `plans/STUB-q-ring.md` (FS-124) | what it delivered, section by section of the derivation file; what it did not; **its eight cases pass to FS-136** | the file whole |
+| `plans/STUB-forced-pair.md` (FS-122) | the sharp form's statement with content is on pieces; for full members both pay, at a four-label point; nothing forces a pair | C124-FORCED-PIECES, -BOTH, -FOUR, -LONE |
+| `plans/STUB-seed-remainder.md` (FS-135) | two entries stated on exclusion sets; the arc is no wall for a statement that reads pieces (G97's test, fired) | C124-HALF, -HALF-TWO, -BOTH, -EDGE-CLOSED |
+| `plans/STUB-exclusion-back-to-maps.md` (FS-134) | three map entries now have a measure statement beside them, by other routes; the read-back at a map vertex not done; the cusp question | C124-BOTH, -FOUR, -LONE, -LONE-EXISTS, -EDGE-CLOSED |
+| `plans/STUB-lateral-extent.md` (FS-127) | what its regularity would supply to the derivation file is the piece, and no more is asked | C124-SHADOW-OPEN, -TYPE, -FORCED-PIECES, -FORCED, -BOTH |
+| `plans/STUB-saturated-local.md` (FS-125) | what one tight pair forces with no saturation — three statements; C124-ANTIPODE as the unsaturated neighbour of row 140's unit parallels; the first deriver's sentence on where binding has to enter | C124-CENTRE, -STRADDLE, -ANTIPODE, -KIND |
+| `plans/STUB-qfree-ring.md` (FS-123) | no entry assumes a map, simplicity or the absence of Siamese pairs; they give the stub no kill | C124-FORCED-PIECES, -FORCED, -BOTH |
+
+**New stubs: none minted; FS-137 is not used.** Each candidate the two rounds surfaced has a home or an explicit decline:
+
+| candidate | where it is | who placed it |
+|---|---|---|
+| the six-colour point (FS116-Y2-SIXFRAG: eighteen arcs, no pair) | two of the successor's five first claims, and FS-124's case 4, which passes there | the asking lane, its last record § 4.1: "It does not need a stub of its own" |
+| the partner count and the placing rule in measure (FS112-C-PARTNERS, FS116-N3-SEMI) | the successor's first claims | the asking lane, § 1.2 and the stub's dated block |
+| the disk's rim and the flower's far vertex by C124-EDGE-CLOSED's method | the successor's first claims ("exact computations, the deriver's, not searches") | the asking lane, § 4.2 |
+| an inhabitant of C124-SIX's hypothesis at seven or more (the first deriver's item 3) | **declined** as search line 13: "neither answer changes a move" | the asking lane, its second record; inventory item 13 |
+| the per-class reciprocity rule (the second deriver's sweep item (2), "Not entered") | the successor, as the measurable form of FS112-N3-NOBOTH — "one step" | the asking lane, § 1.2's table |
+| whether a three-tile vertex with a cusp is a sector point | a line in FS-134's stub (this stage) | this job |
+| C124-EVERY-DIRECTION's consumer | the kernel lane, "only with a consumer" | the first kernel planner, § 4.2 |
+| a second mind on C124-LONE's Step II | the second kernel planner, blind first | the coordinator, inventory item 21 (b) |
+
+**Stage 4 — SAVED** (2026-10-07).
