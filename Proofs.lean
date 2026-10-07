@@ -292,7 +292,6 @@ import Proofs.HadwigerNelson.Outside.OAI158BinaryPalettes
 import Proofs.HadwigerNelson.Outside.OAI158States
 import Proofs.HadwigerNelson.Outside.OAI158AngularBoundary
 import Proofs.HadwigerNelson.Plane.SixRing.Confine
-import Proofs.HadwigerNelson.Plane.SixRing.Winding
 import Proofs.HadwigerNelson.Plane.SixRing.Orbit
 import Proofs.HadwigerNelson.Plane.SixRing.Basic
 import Proofs.HadwigerNelson.Plane.SixRing.NullSets
@@ -305,7 +304,6 @@ import Proofs.HadwigerNelson.Plane.SixRing.State
 import Proofs.HadwigerNelson.Plane.SixRing.Kill
 import Proofs.HadwigerNelson.Plane.SixRing.Excl
 import Proofs.HadwigerNelson.Plane.SixRing.TwoPairs
-import Proofs.HadwigerNelson.Plane.SixRing.CyclicCentre
 
 /-!
 # Proofs

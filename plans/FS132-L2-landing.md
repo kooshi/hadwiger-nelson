@@ -37,3 +37,32 @@ In part: the planner's Stage 7 (its head and its close; the tiers of later claim
 OK — all 1868 modules already up to date, nothing built, 2 module(s) with warnings, 3s"; **19 `declaration uses sorry`
 warnings, all in two modules** — `Plane/SixRing/Winding` 16, `Plane/SixRing/CyclicCentre` 3
 (`data/fs132/l2/build-0-as-given.log`; the count by `grep -c`, by module by `uniq -c`). The brief's count.
+
+## Stage 2 — SAVED (FS132-L2): the cut
+
+**Removed** (`git rm`): `Proofs/HadwigerNelson/Plane/SixRing/Winding.lean` (16 `sorry`; C132-INDEX, C132-RING-WIND) and
+`Proofs/HadwigerNelson/Plane/SixRing/CyclicCentre.lean` (3; C132-CORES-FREE), with their two import lines in
+`Proofs.lean` and their two rows in `ARCHITECTURE.md` (the rows as they stood: `data/fs132/l2/cut-architecture-rows.txt`).
+They stay on the planner's branch `fs132-wk1` for their own jobs.
+
+**No module imports them**: the two names occur in `Proofs/`, `Proofs.lean`, `scripts/`, `tools/`, `ARCHITECTURE.md` and
+`lakefile.toml` only as the two import lines of the root file and the two rows, all four removed; after the cut the
+search finds neither (the hits for the bare word `Winding` are `ThreeColour.Winding`, FS-75's structure). No block of
+`scripts/Axioms.lean` names a declaration of either. Their orphaned compiled files, and the deleted placeholder
+module's, are removed from this worktree's own build copy (16 files; `data/fs132/l2/cut-stale-artifacts.txt`), so the
+build directory holds no module the source does not.
+
+**Zero `sorry` in `Proofs/`**, by a search that sees one (`data/fs132/l2/sorry-after-cut.txt`, `sorry-plant.txt`): the
+narrow pattern (`^\s*sorry\s*$`, `:= sorry`, `by sorry`) over `Proofs/` and `Proofs.lean` — **0 lines**; the wide one
+(`\bsorry\b`) — 25 lines, every one prose in a docstring or a header ("no `sorry`", "sorry-free"; listed in the file).
+**The plant**: a theorem with a `sorry` body appended to `Plane/SixRing/Excl.lean` (never built, never committed) —
+narrow lines 1, "PLANT FIRED" at `Excl.lean:74`; restored by `git checkout`, the file's digest the one taken before,
+the plant's name in the file 0 times, narrow lines 0 again.
+
+**Built** (`data/fs132/l2/build-1-cut.log`): **exit 0** — "build: OK — 478 of 478 batches, 23 module(s) rebuilt, **0
+module(s) with warnings**, 9m49s"; no `declaration uses sorry` line. *A slip of mine, said once*: I ran the two
+generators (stage 4's (a) and (b)) while this build was walking its early batches, before it had reached any module
+they write; so this build is of the cut **and** of the regenerated outside modules together — the 23 rebuilt are the
+palette module, the eight ported modules, the thirteen of `Plane/SixRing` and the root. Green, so both hold; a red
+build would have had to be separated. The rule it breaks is my own gait's: no source file is written while a build
+of the tree is in flight.
