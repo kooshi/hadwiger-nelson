@@ -43,16 +43,17 @@ the next milestone**; staffing is his cap of three Opus slots.
 
 | job | where | what it hands on | on its message or hand-back |
 |---|---|---|---|
-| **FS124-E1** (`ephodos`) — FS-124's opening, then its six first claims | `main`; record `plans/FS124-E1-derivation.md`, plan `plans/FS124-tight-pairs.md`; brief `data/fs124/briefs/FS124-E1-opening.md`; launched 12:52 UTC | first message: each claim's exact statement with its *not claimed* line → fix by dated lines in `data/fs124/claims.md`; then a verdict per claim; after the third claim, one paragraph on what a completion carries (the card's three branches turn on it) | log in FS-124's inventory; **anything that would fix the value → Kooshi at once, "claimed by one mind, unchecked"**; when the completion's rule and the count at a four-label centre are derived, queue line 12 of `plans/SEARCH-QUEUE.md` for the day's Searcher; at hand-back: a successor deriver on the remaining claims, and (workflow step 4) a kernel planner on FS-124's derived claims, blind first, from a kernel claim list |
 | **FS132-I3** (`debruijn-implementer`) — the step lemma, then the shift's calculus (lots C, B) | worktree and branch `fs132-wi3`; record `plans/FS132-I3-implementation.md` there; brief `data/fs132/briefs/FS132-I3-step-lemma.md` | a message when `step_lemma` is proved — the one step of the exclusion with a single derivation | log; a line to Kooshi (the hand proof's thinnest step checked by the kernel) — or, if a leaf is false, at once |
 | **FS132-I4** (`debruijn-implementer`) — the join, then lots E and D | worktree and branch `fs132-wi4` (cut from `fs132-wk1` at `1c5e2609`; it merges `fs132-wi2`, the port); record `plans/FS132-I4-implementation.md` there; brief `data/fs132/briefs/FS132-I4-join.md`; launched 12:56 UTC | a message when the join builds (did any leaf change?); then the leaves on the ported lemmas and on the chart's null sets | log; **lot A (the chart's geometry, the tips: 18 leaves, nothing ported) is unassigned** — the next free kernel slot, on the pattern of the two briefs above (generators `data/fs131/briefs/scripts/mk-fs132-i3.py`, `mk-fs132-i4.py`) |
 
-**On FS124-E1's hand-back (13:24 UTC note): brief the asking lane's re-posing job (FS124-P2, `poros`)** — FS-124 inventory
-item 8: the first-order rule is derived and gives the card's third branch (nothing forced beyond the first step; the
-completion's rule is not special to tight pairs); what the held objects share is at the centre, "of kind both for several arcs
-at once"; the deriver proposes the centre with all its tight arcs as the next unit; line 12 of the search queue is to be
-re-posed with the card. Its sources: `plans/FS124-E1-derivation.md` (all stages), `plans/FS124-tight-pairs.md` §IQ and its dated
-line, the stub's card of 2026-10-07. Then a second derive round on the re-posed claims.
+**FS-124's first round is in** (FS-124 inventory items 6–9): the opening job is done, all six claims at verdicts, sixteen
+entries (`plans/FS124-E1-derivation.md`), each [hand] or derived from one, one mind. **Running in its slot since 13:30 UTC:
+FS124-P2** (`poros`; brief `data/fs124/briefs/FS124-P2-round-one.md`; record `plans/POROS-2026-10-07-fs124-round1.md`) — the
+second round's card. **At its "card saved" message**: read the card whole; fix its first claims in `data/fs124/claims.md` by
+script (a dated line, as item 3 did); brief the second derive round (`ephodos`; the pattern is
+`data/fs124/briefs/FS124-E1-opening.md` without the opening, generator `data/fs131/briefs/scripts/mk-fs124-e1.py`) into the
+first free slot; file its re-posed search lines and any change of rank at its hand-back (fact-audit base: the last commit that
+touched `plans/FRONTIER-STUBS.md`).
 
 **Briefed, waiting for the next free slot (13:22 UTC): FS124-K1, the kernel planner for FS-124's first module** (`debruijn`; brief
 `data/fs124/briefs/FS124-K1-kernel-plan.md`, gate exit 0, **fenced: blind first**; kernel claim list `data/fs124/claims-K1.md`;

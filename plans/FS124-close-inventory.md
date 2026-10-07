@@ -229,4 +229,13 @@ between two colours that is an arc of the unit circle about a point one unit awa
    alternative: the kernel planner for the radius clause, already briefed; it takes the next kernel slot; why: the
    milestone's attack is the derive lane's, and its question has just changed; confidence medium-high. **The search
    request is queued as line 13, held with line 12 until the re-posing.**
+10. **FS124-P2 launched** (13:30 UTC, read from the clock; `poros`; brief `data/fs124/briefs/FS124-P2-round-one.md`, gate exit 0;
+    record `plans/POROS-2026-10-07-fs124-round1.md`): the re-posing after the first round — what the sixteen entries are
+    worth as instruments, calibrations or statements that may exclude nothing; **the second round's card, at least one of
+    whose first claims must spend the count**; the two held search requests re-posed or declined; the stub's provisional
+    bearings filed from the deriver's corrected draft. **A slip of mine, caught before launch**: the brief's first draft
+    said "fifteen of the sixteen are true at every number of colours" — a count I had not read from the record; the
+    deriver tags only its seven added statements (six per class, one across), and two of the posed claims are among six
+    labels. The paragraph was rewritten from the tags and the statements' words. Slots: this job, and the two implementers
+    of FS-132.
 
