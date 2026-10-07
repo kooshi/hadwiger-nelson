@@ -295,6 +295,7 @@ import Proofs.HadwigerNelson.Plane.SixRing.Confine
 import Proofs.HadwigerNelson.Plane.SixRing.Winding
 import Proofs.HadwigerNelson.Plane.SixRing.Orbit
 import Proofs.HadwigerNelson.Plane.SixRing.Basic
+import Proofs.HadwigerNelson.Plane.SixRing.NullSets
 import Proofs.HadwigerNelson.Plane.SixRing.Chart
 import Proofs.HadwigerNelson.Plane.SixRing.Shift
 import Proofs.HadwigerNelson.Plane.SixRing.StepLemma

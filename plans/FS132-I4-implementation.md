@@ -31,7 +31,7 @@ M0–M9, the ring form, on `main`) and `plans/FS132-derivation.md` § 1 (on `mai
 `declaration uses sorry` warnings, by module: `Chart` 11, `ChartMeasure` 4, `CyclicCentre` 3, `Excl` 2, `Kill` 2,
 `Placeholders` 3, `Shift` 7, `State` 8, `StepLemma` 8, `Tips` 7, `Winding` 16 — the planner's count (§ 7, "71").
 
-**What this job's leaves are** (17 `sorry`s in four files, and the three placeholders the join removes):
+**What this job's leaves are** (16 `sorry`s in four files — 8 + 2 + 4 + 2; this line first read "17", a miscount corrected at stage 3 — and the three placeholders the join removes):
 `State` 8 (`measurableSet_liftPalette`, `OutsideOrbit.ae_iff_not`, `.ae_flip`, `.change_at`, `.chart_avoids`,
 `exists_tip`, `.hubColours`, `.hubColours_flip`), `Excl` 2 (`exists_change_of_ae_outside`, `ae_real_of_ae_angles`),
 `ChartMeasure` 4 (`chart_quasiMeasurePreserving`, `shear_quasiMeasurePreserving`, `ae_ne_of_not_isTip`,
@@ -99,3 +99,63 @@ the planner's permission (1); mine to decide whether to merge that commit now). 
 `6fe55ef78` into this branch, next (stage 3)** — so that `exists_tip` is written once against the final binders and the
 final merge of the two branches finds no call site to adjust; this branch writes neither `StepLemma.lean` nor
 `Shift.lean`, so that branch's later commits merge over it without conflict.
+
+## Stage 3 — SAVED (FS132-I4): the step lemma's branch merged; the palettes' module, the ring form's two leaves and the chart's null sets proved
+
+**The second merge** (the coordinator's relay, stage 2's last paragraph). `git merge --no-ff 6fe55ef78` (branch
+`fs132-wi3`, FS132-I3's stage 2): **automatic** — merge commit `ea51e2969`. It touches
+`Proofs/HadwigerNelson/Plane/SixRing/StepLemma.lean` (every leaf proved there; `volume_change_pairs_pos` without `hS`,
+`exists_shiftMap` without `huw`; `step_lemma` and `step_at_of_change` as the planner stated them), that job's record
+`plans/FS132-I3-implementation.md` and its `data/fs132/i3/`; nothing else. `StepLemma.lean` is not edited on this
+branch. Its row in `ARCHITECTURE.md` still reads "SKELETON" — FS132-I3's to rewrite; not touched here.
+
+**Proved at this stage** (statements as the planner wrote them unless said; routes and what changed from the plan):
+
+| leaf | module | route as built | against the planner's route |
+|---|---|---|---|
+| `ae_real_of_ae_angles` | `Excl` | `angleMk_quasiMeasurePreserving.ae` (ported) | as planned (its second option) |
+| `exists_change_of_ae_outside` | `Excl` | `exists_inter_pos_of_ae_union` (new, `NullSets`): the two sets "locally null for `X`", "locally null for `Y`" are open, cover the line and are disjoint; the line is connected; neither palette set is null (`volume_liftPalette_ne_zero`, from the ported `palette_sixty_real`) | the planner's argument, on the two palette sets instead of on a state; **`hXY : X ≠ Y` dropped** (permission 1) |
+| `measurableSet_liftPalette` | `State` | the ported `liftPalette_measurable` | found in the port (not a new proof) |
+| `OutsideOrbit.ae_iff_not`, `.ae_flip` | `State` | clause (i) at `n` and at `n + 1` translated, with the ported **`palette_sixty_real`** (the real-line form of `palette_sixty_disjoint`, per label) | the planner pulled `palette_sixty_disjoint` back to `ℝ`; the port already holds the pulled-back form |
+| `OutsideOrbit.change_at` | `State` | induction up and down from clause (ii) by `change_of_ae_flip` (new, `NullSets`) | as planned |
+| `OutsideOrbit.chart_avoids` | `State` | `palette_transfer_pair` along `chartAngles_quasiMeasurePreserving`; two flips; clause (i) at `n − 1` and `n + 1` | as planned |
+| `exists_tip` | `State` | `ae_chart_colour_mem` (new: no label outside a set `T` tips ⟹ the chart's colours lie in `T` near the hub) at `T = {X, Y}`, against `volume_change_pairs_pos` (called without `hS`) | as planned |
+| `OutsideOrbit.hubColours`, `.hubColours_flip` | `State` | `ae_chart_colour_mem` at `T = {b, X, Y}` with `chart_avoids`; the flip is `hubColours` at `n + 1` reworded by `.ae_flip` | as planned |
+| `chart_quasiMeasurePreserving` | `ChartMeasure` | `angularSum_quasiMeasurePreserving` (ported) after the linear change `chartAngles_quasiMeasurePreserving` (a skew product, measure preserving, then the ported `anglePair_quasiMeasurePreserving`) | the planner's first route, through `angularSum…` instead of `circleSum…` |
+| `shear_quasiMeasurePreserving` | `ChartMeasure` | `shear_measurePreserving` (new, `NullSets`: `MeasurePreserving.skew_product` between two swaps) and a projection | as planned |
+| `ae_ne_of_not_isTip` | `ChartMeasure` | as planned: a ball about the hub, `continuous_chart`, `chart_hub`, `dist_chart_lt_one`, `mem_spatialSupport_ae` through the chart | as planned |
+| `unitPair_chart_ae` | `ChartMeasure` | **another route than the planner's.** No formula for the partner's direction and no `arccos`: the bad pairs `(z, t)` are null (weakness); so almost every chart point has a null set of bad directions (Fubini, the chart); for fixed `(α, d)` the partner `d' ↦ Z(α + ε + d' + π/3, d')` lies on the unit circle about `Z(α, d)` (`dist_chart_chart_shift`) and its distance from `p` is `ringRadius d'`, which falls at rate at least `1/4` (`ringRadius_sub_ge`), so the partner is `4`-antilipschitz in `d'` (`abs_dist_sub_le`); an antilipschitz map into the plane pulls sets of one-dimensional Hausdorff measure zero back to null sets (`volume_preimage_inter_le_hausdorff`, the release's `line_volume_preimage_bound` with any metric target), and the arc at a null set of directions has Hausdorff measure zero (`hausdorffMeasure_add_e_image_eq_zero`); Fubini again. This is the derivation's own sentence ("for fixed `z` the point `z′` moves along the unit circle about `z` with `|z′| = 2cos(π/3 + d′/2)` strictly decreasing in `d′`") | the planner's route went through the explicit direction `u = α + 2π/3 − d/2 − arccos(…)` and a `C¹` inverse; not built |
+
+**Statements changed, each under the planner's permission (1)** (a hypothesis the proof does not use):
+- `exists_change_of_ae_outside`: `(hXY : X ≠ Y)` dropped. Call site changed: `Orbit.not_ae_outside` (one argument
+  removed; `Orbit.lean` is otherwise untouched). With `X = Y` the hypothesis is already contradictory.
+
+**Helpers added** (permission 3; each under a name no other module declares — `dupnames` at stage 2 and at the last
+stage): the module `Plane/SixRing/NullSets` (no colouring): `shear_measurePreserving`,
+`quasiMeasurePreserving_triple_fst`, `_snd`, `_add`, `change_of_ae_flip`, `exists_inter_pos_of_ae_union`,
+`volume_preimage_inter_le_hausdorff`, `lipschitzWith_add_e`, `hausdorffMeasure_add_e_image_eq_zero`,
+`exists_pos_forall_le`; in `Excl`: `volume_liftPalette_ne_zero`; in `ChartMeasure`:
+`chartAngles_quasiMeasurePreserving`, `ringRadius_sub_ge`, `ringRadius_pos`, `volume_partner_direction_eq_zero`; in
+`State`: `OutsideOrbit.ae_mem_or`, `.ae_add_mem_or`, `ae_chart_colour_mem`.
+
+**Searched before proving a helper** (the brief's item 3): the ported modules by statement shape — found and used
+`liftPalette_measurable`, `palette_sixty_real`, `angleMk_quasiMeasurePreserving`, `anglePair_quasiMeasurePreserving`,
+`angularSum_quasiMeasurePreserving`, `mem_spatialSupport_ae`, and `line_volume_preimage_bound` (the pattern of
+`volume_preimage_inter_le_hausdorff`; the ported lemma is for maps `ℝ → ℝ`, the partner map is `ℝ → ℂ`). Mathlib:
+`MeasurePreserving.skew_product`, `QuasiMeasurePreserving.prod_of_right`, `Measure.ae_prod_iff_ae_ae`,
+`Measure.measure_ae_null_of_prod_null`, `AntilipschitzWith.hausdorffMeasure_preimage_le`,
+`LipschitzWith.hausdorffMeasure_image_le`, `hausdorffMeasure_real`, `Real.norm_exp_I_mul_ofReal_sub_one_le`,
+`measure_null_of_locally_null`, `isPreconnected_univ`. `exact?` on `exists_pos_forall_le`'s statement found nothing.
+
+**Built**: `build.sh` under the slot — **exit 0**, 9 modules rebuilt, 9m11s, **46 `sorry` warnings**: `Chart` 11,
+`CyclicCentre` 3, `Kill` 2, `Shift` 7, `Tips` 7, `Winding` 16 (`data/fs132/i4/logs/build-3-state.out`); none in
+`NullSets`, `Excl`, `ChartMeasure`, `State`, `StepLemma`, `TwoPairs`, `Orbit`. `tools/check_architecture.py`: PASS
+(`logs/arch-3.out`; the helper's row and import line added, four rows rewritten).
+
+**Iteration** (never evidence): `data/fs132/i4/lean1.sh` elaborates one module against a symlink farm of the built
+library and writes its `.olean` there, so that the next module can import it without a walk of the library (the
+port's device). Every claim above is from `build.sh`.
+
+**What these theorems rest on that is not yet proved** (so `#print axioms` shows `sorryAx` on some of them until lots
+A and B land; the last stage prints each): `chart_eq_angularSum`, `continuous_chart`, `chart_hub`, `dist_chart_lt_one`,
+`dist_chart_centre` (`Chart`, unassigned) and `dist_chart_chart_shift`, `measurable_shift` (`Shift`, FS132-I3's).

@@ -140,7 +140,7 @@ theorem not_ae_outside {c : ℂ → Fin 6} (hc : Measurable c) (hw : WeakColorin
     (hX : ∀ j, a j ≠ X) (hY : ∀ j, a j ≠ Y) {K : Fin 4 → Set ℂ} (hK : FourCycleStraddle c p a K) :
     ¬ ∀ᵐ t ∂angularMeasure, X ∈ palette c hc p t ∨ Y ∈ palette c hc p t := by
   intro h
-  obtain ⟨ψ, hψ⟩ := exists_change_of_ae_outside hc hw p hXY h
+  obtain ⟨ψ, hψ⟩ := exists_change_of_ae_outside hc hw p h
   exact no_outside_orbit hc hw ha hXY hX hY hK ψ 1 one_pos
     (fun _ => (ae_real_of_ae_angles h).mono fun _ hθ _ => hθ) hψ
 
