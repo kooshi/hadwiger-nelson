@@ -191,3 +191,27 @@ work it knows exists).
 verbatim — the first line of a leaf in your own file of the ring form's two leaves, quoted as it stood at launch and since
 proved by you. The quotation was checked at launch (gate exit 0, 21 quotations); the amendment adds none.*
 
+## Amendment 2 (2026-10-07, 13:49 UTC, by Keryx) — the chart's module and the tips' are yours, with a stopping rule
+
+You asked whether to take the two unassigned modules or hand back. **Take them**, after your gate items and a saved stage.
+**Added to your touches**: `Proofs/HadwigerNelson/Plane/SixRing/Chart.lean` and `Proofs/HadwigerNelson/Plane/SixRing/Tips.lean`
+(proofs; statements only as the planner's three permissions allow, each use reported). The planner's record has each leaf's
+readback, model and route in its § 5.3, under the two modules' names; the hand argument's steps for the tips are M4, M5 and M6
+of `/home/kooshi/source/lean-dir/plans/FS132-E3-derivation.md`, Stage 3. One thing to know: the shift's module, which you
+merged, holds a helper `chart_eq_polar_shift` that states what the chart's leaf `chart_eq_polar` states — the names differ, so
+nothing collides; prove the leaf as you judge best, do not change a statement of the shift's module, and say in your record
+whether one of the two can go.
+
+**Why you and not a fresh implementer**: you hold the chart's algebra and the files in context, and a successor would spend
+its first hundred thousand tokens rebuilding that. **The cost I am weighing against it**: errors rise as a context fills, and
+I cannot see your count from here. So, a stopping rule, and it is not a failure to use it: **stop at a saved stage when your
+own count reaches about 420k, or at three failed attempts on one leaf, whichever comes first**, and hand back with the leaves
+that are left named — a successor takes them from your record. Order: yours; if one module is clearly shorter, finishing it
+whole is worth more than half of each.
+
+**When the last leaf is in**: print the axioms of `no_outside_orbit_points`, `no_outside_orbit`, `not_ae_outside` and
+`no_alternating_pairs` — with a control that fires — and **message me with those four lines before anything else**: the first
+of them on the standard three is the first night's theorem checked by the kernel on your branch, and I report it at once.
+The rule on agents is unchanged: you start none (standing rule 1: delegation is one level deep, because the coordinator can
+only review work it knows exists).
+

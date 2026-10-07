@@ -1261,3 +1261,20 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     launch — the amended brief fails on one quotation the recipient's own proof has since changed. Not a defect of the
     gate; a reason to quote such leaves from the planner's printed signatures, which do not move.
 
+45. **FS132-I4, second message (13:49 UTC): all sixteen leaves of its brief are proved and built — the palettes' steps, the
+    ring form's two, the chart's null sets, the relation and the kill** (branch `fs132-wi4`, `3e063027` then `b844cbb7`: the
+    finished `fs132-wi3` merged, one conflict where both branches append a block to the axioms script, all blocks kept;
+    the two architecture rows reworded). **The leaf the planner ranked hardest went "by the partner's motion on its unit
+    circle, not by the arccos formula"**. Three unused hypotheses dropped under the planner's permission, each with its
+    call site. **The two-pair ring's theorem at the whole plane reads the standard three** (its module has had no `sorry`
+    since the join). **What still stands between the first night's theorem and the kernel**: the eleven leaves of the
+    chart's module and the seven of the tips' — its theorems "read `sorryAx` only through five Chart leaves". **Its
+    question**: take those two modules, or hand back; it is at about 300k by its own count. **My receipt**: the two
+    commits are on `origin`. Not checked by me: the build of the merge (running); the files' `sorry` counts are read at
+    its hand-back. **Ruling**: **it takes the two modules, by Amendment 2 to its brief, under a stopping rule** (a saved
+    stage first; stop at about 420k by its own count or at three failed attempts on one leaf) — alternative: hand back
+    and a fresh implementer; why this one: it holds the chart's algebra in context and a successor would spend its first
+    hundred thousand tokens rebuilding it; an implementer's errors are caught by the build, so the risk of a deep context
+    here is wasted effort, not a wrong result — and the rule bounds the waste; confidence medium. **It messages me with the
+    four theorems' axiom lines the moment the last leaf is in.**
+
