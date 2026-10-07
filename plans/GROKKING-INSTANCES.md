@@ -72,6 +72,12 @@ FS121-D1-EROSION's models SQ9 and HEX9 lie inside the diameter bound, which give
 
 "FS-116 (2026-10-03): twenty-one entries derived about the Γ-free four-colour vertex over rounds 3 and 4, nine of them frozen and four held at two minds, are true vacuously — FS116-Y4-EMPTY (held) empties the class at `1 + ε`. The plan carried the vacuity rule in its failure clauses ('the six-colour class may be empty'), and FS116-N2 noted that no held fragment has a hub (item 68); no job was asked for an inhabitant or an obstruction before the class's structure, so the structure was worked for two rounds on an empty class. A positive control for a class is an inhabitant, or the class is a candidate for emptiness."
 
+FS-132 (2026-10-07), controls with a margin: the second round's seven-colour controls read clean zeros on the honeycomb at circumradius 2/5; re-run at circumradius 1/2, "two counts move, none against an entry" — own labels near a crossing point 0 → 36 of 432, witnesses by margin 0 → 6,672 — and "The zeros at 2/5 were the margin." The asking lane had named the absence first: "all 21 controls of the five derivation records run at seven on the honeycomb with a margin, or at six on the held seam fragments; none runs on a tight colouring." A control whose model satisfies the statement with room measures the room. Source: `plans/FS132-close-inventory.md` items 21, 28; `plans/FS132-derivation.md` § 5.
+
+FS-132 (2026-10-07), a count of minds: the coordinator's ruling called the first night's exclusion "derived, two minds on every step, kernel pending" on a second mind's reading made with the argument open; the record job, briefed to raise no grade, wrote `minds: 1` with the account of who derived, reworked and read each step, and the ruling was corrected to "derived, one mind, with a line-by-line checking reading of its last six steps by a second mind". The coordinator's own line: "ruling 30 (a) raised a count of minds — the one thing this role exists not to do — and was caught by the record job". A second look is the result one likes; audit what it was a look *at*. Source: `plans/FS132-close-inventory.md` items 30 (a), 31 (1); `plans/FS132-derivation.md` § 1.
+
+FS-132 (2026-10-07), a reading with no control: the asking lane read the tight seven-colouring R7 as the common exception of three results — "its reading, no computation" — and the sentence reached Kooshi before its author caught it: R7 has "**no three-label point**", so the results do not speak of it at all. Source: `plans/FS132-close-inventory.md` items 21 (4), 23.
+
 
 ## G25 — The forcing ladder is recursive
 
@@ -495,6 +501,8 @@ statement named (rings with no arc of `Γ`), and it was carried there only by th
 
 "SAT-STRIP is a collision between a rung and a contact: the east edge's tangent partner carries `c_IV` along `y = 1` from `q_N` out to `(L_E, 1)`, while the ring forces a tile of `c_IV` against `ω(p)` from outside somewhere in quadrant II; one connected family of `c_IV` tiles cannot be within distance below 1 of that tile at `q_N` and above 1 at `(L_E, 1)`." — FS116-S1, the saturated cross killed at `R = 2` in its class (FS116-S1-QF; two derivations, not held).
 
+FS-132 (2026-10-07): the side rule for an open one-label piece (C132-SHADOW) is this entry's shadow identity read for an open piece, with no saturation; and the object every exclusion of the milestone stopped at — an interface on the unit circle about a point one unit away — is this entry's first sentence. The opening's re-grokking listed the entry only for "who supplies EXT's hypothesis" and extracted neither. Source: `plans/FS132-derivation.md` § 2 (C132-SHADOW's prior-art line), § 12; `plans/FS132-six-by-the-nerve.md` §G; `plans/FS132-Z2-record.md` Stage 5.
+
 ## G86 — Tile counts are blind to Siamese pairs
 
 EXT-OAI2 (2026-10-07): their method reads no tiles and has no Siamese hypothesis. Source: `plans/EXT-OAI2-reading.md` § 5.1.
@@ -511,6 +519,12 @@ the whole-tile restriction of radius at most `√3`, side 2 for maps — "the tw
 signal: "side 1 is a stub's bearing sentence whose conclusion exceeds its reason" — a Condition-5 theorem stated without Condition 5
 (`plans/FS129-OR1-audit.md` § J15).
 
+FS-132 (2026-10-07): three signals were raised in one night and none needed an invention job. Card 3's collision was read by the deriver that took it — "both sides true, of two targets". The manuscript's "The extracted cycle need not consist of edges of Γ_x" against the extraction's clause (5) stays on record with no side picked. And the two stalls of the second round, first called one place met from two sides, were re-read as "the two opposite inclusions between two graphs on the labels at a point" — the premise both sides shared, that a point's cycle of meetings and the cycle it witnesses are one cycle, was the one to drop (proposed G96). Source: `plans/FS132-close-inventory.md` items 7, 12, 17, 21; `plans/POROS-2026-10-07-fs132-round2.md` § 1.6.
+
+## G89 — Honesty is free
+
+FS-132 (2026-10-07): honesty was tested as the cost-free normal form on two slack seven-colourings and the test was not well posed — no order makes the hexagonal seven-colouring or either slack colouring Grundy, "true already of the unmodified hexagonal colouring", and the construction has no one output. Source: `plans/FS132-close-inventory.md` item 19; `plans/FS132-derivation.md` § 7.
+
 ## G91 — The ring is the pigeonhole
 
 EXT-OAI2 (2026-10-07): the ring re-derived in measure, for every measurable colouring (the 60° exclusion and the binary alternation are stated for every `k` in their Lean). Source: `plans/EXT-OAI2-reading.md` § 5.1.
@@ -518,6 +532,12 @@ EXT-OAI2 (2026-10-07): the ring re-derived in measure, for every measurable colo
 ## G92 — A held result reaches as far as its argument, not as far as its statement
 
 EXT-OAI3 (2026-10-07): the bibliography row for `[GreenfeldTao2024]` had called C3-aper "the colouring form" of the periodic tiling conjecture since FS-73's close and stopped there; read for what a tiling *is* in graph words — a clique partition — the form is an equivalence for one graph, and the published counterexample answers the question the stub carried as open (EXT-OAI3 § 4.5). Source: `plans/EXT-OAI3-review.md` § 4.1 B2.
+
+FS-132 (2026-10-07): four statements moved to the class their arguments read — the release's extraction to every `k` and to any closed disc of radius above 1, with existence needing no hypothesis ("G92 applied to an outside proof"); the first night's exclusion, which reads two clauses of the extraction's data and neither the centre's isolation nor a Siamese clause; the covering count, which reads no properness; the confinement statement, for any set (the kernel planner, blind). Two widenings were found not to be: the two-point form of the exclusion "is therefore a restatement, not a generalization", and the two-pair ring, entered as wider than posed, was the release's own Lean theorem. Source: `plans/FS132-close-inventory.md` items 3, 6, 15, 18, 25; `plans/FS132-derivation.md` §§ 1–3.
+
+## G95 — Tightness is not regularity
+
+FS-132 (2026-10-07): the stalled regularity statement of the existence side carries this entry's caution in its own entry — "its first clause is false wherever local slack exists along the strip, so it is a statement for a normal form or false at six" (C132-RING-TAME) — and the extraction's conclusion with its clause (4) is false at the island colouring's accumulation centre and true at the isolated ones. Source: `plans/FS132-close-inventory.md` items 3, 7; `plans/FS132-derivation.md` §§ 3, 8.
 
 ## `CLAUDE.md` § Counter-priors
 

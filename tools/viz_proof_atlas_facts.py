@@ -311,6 +311,12 @@ N("QFREE", "the (Q)-free vertex dies at 1 + ε", "nogo", "A four-colour vertex w
 N("QPRUNE", "(Q) rings pruned", "held", "On a four-colour vertex's ring, two change points 60° apart whose far germs lie off (Q) arcs share no sole tip "
   "and no sole outer colour; one pinwheel residue is empty.", L(150),
   "The (Q)-ring case list, pruned", "[hand], one mind each, kernel pending", at=(80, 540), sector="seven")
+N("MEXCL", "the (Q)-free exclusion, with no map", "nogo", "For every measurable six-colouring proper at almost every unit pair: where four labels meet in a witnessed cycle, the palettes on the point's unit circle cannot almost everywhere hold one of the two other labels. No map, no Siamese clause.", L(155), "the palettes on its unit circle cannot almost everywhere hold one of the two other labels", "[hand], one mind, with a line-by-line checking reading of its steps M4–M9 by a second mind", at=(90, 520), sector="seven")
+N("CENTRES", "cyclic centres exist at every k", "held", "Every closed disc of radius above 1 holds a point where classes meet in a cycle, at every number of colours, with no hypothesis; the data at a centre need the centres finite in a disc.", L(156), "every closed disc of radius greater than 1 contains a cyclic centre", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(60, 660), sector="seven")
+N("COMPSHARP", "the complementary pair, in the exact class", "held", "Two triangle points on disjoint triples of six labels, less than 2 apart, force an edge set onto the unit circle about each common unit point. No cone scale.", L(157), "then one of the six sets K_0, K_1, K_2, K′_0, K′_1, K′_2 is contained in the unit circle about w", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(47, 650), sector="seven")
+N("WIND6", "three outside labels wind", "held", "A loop among three labels with the 60° exclusion has degree 3 modulo 6: six is the one count at which the labels left for a ring can wind. The forcing of a centre that is not a triangle stalls at this circle.", L(158), "then the degree of φ, for the orientation a → b → c of Θ, is congruent to 3 modulo 6", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(53, 630), sector="seven")
+N("PLACEDARC", "the turning ring places a unit-arc centre", "held", "In step form with witnesses near the centre, a turning ring forces a point with four labels present whose own unit circle runs along two unit arcs. No model is known.", L(159), "a measurable instance of FS-124's first question, every hypothesis derived from the seed's data", "[hand] or derived from [hand] entries, one mind each, kernel pending", at=(61, 630), sector="seven")
+N("FLOWERS", "the turning ring in a finite family", "held", "In a family of seven flowers of wedges the three-label turning ring and the alternating ring do not exist; with four labels at alternate ring points the turning ring exists, in fragment T2's shape.", L(160), "no model has the turning ring `a, b, n, a, b, n` and at most three labels at every ring point", "[cert]", at=(78, 400), sector="seven")
 N("TOP5", "the map step at five", "held", "Given REG-J′₅, the honest five-colour existence form is equivalent to χ_m⁰(ℝ²) ≥ 6.", L(154),
   "The map step at five, as an equivalence", "[hand], one mind, kernel pending", at=(162, 434), sector="six-up")
 N("RINGRULE", "change points place four-colour vertices", "held", "On the unit circle of a four-colour vertex, every change point off (Q) arcs, and "
@@ -355,6 +361,8 @@ E("CVEXISTS", "LOCALF", "rests", L(137), "its NO follows from an explicit radius
 E("GFREE", "LOCALF", "context", B("FS116-Y4-EMPTY"), "has a ring carrying no", label="a ring type removed")
 E("GFREE", "QFREE", "rests", L(149), "the exclusion of rings with no arc of the boundary gives the (Q)-free one", label="the bends")
 E("QFREE", "LOCALF", "context", L(149), "FS-123's first question is answered yes", label="the (Q)-free half removed")
+E("MEXCL", "QFREE", "context", L(155), "It is rows 148–149's exclusion in measure", label="the same exclusion, with no map")
+E("PLACEDARC", "FLOWERS", "context", L(159), "the one model the day's search kept (row 160) is the other case", label="the kept model is the hard case")
 E("QPRUNE", "LOCALF", "context", L(150), "The (Q)-ring case list, pruned", label="pruning rules")
 E("RINGRULE", "LOCALF", "context", B("FS116-RING-GERM"), "let y be a change point of the ring", label="the placing rule")
 E("YESLIM", "UB6", "rests", B("FS116-O1-YESLIM"), "some closed disc of radius R carries a valid k-coloured fragment", label="fragments on every disc")
@@ -403,8 +411,8 @@ N("R129", "density cannot give six", "nogo", "One colour class at a time is capp
   "bound rounded up, and that route never gives six. A proof of six must use how the classes fit together.", L(129),
   "1/α_loc ≤ 4.36: that route never gives six", "FRAC, TJ, ROUND, DV, TF, 47 two derivations (FS103-F; FS103-B blind to F's record)",
   at=(110, 205), sector="six-low",
-  posed=[dict(question="the first clause of Ducz–Varga's Conjecture 1 (2026), and Matolcsi et al.'s equality question (2025, §2) — given MR, "
-              "at [hand]", state="answered", src=LGC, quote="row 129 answers the first clause of [DuczVarga2026]'s Conjecture 1 and "
+  posed=[dict(question="the first clause of Ducz–Varga's Conjecture 1 (2026), and Matolcsi et al.'s equality question (2025, §2) — with no hypothesis, over "
+              "[OAIMath2026]'s rigidity theorem, at [hand], one mind", state="answered", src=LGC, quote="row 129 (FS-133; one mind) answers the first clause of [DuczVarga2026]'s Conjecture 1 and "
               "[MatolcsiEtAl2025] §2's equality question")])
 N("FS80", "window-frequency certificate", "question", "An averaged certificate at five colours on the real plane — the integrality "
   "shape a six certificate must take (FS-80).", FSR(19), "averaged certificates at five colours on the real plane — the integrality shape a six certificate must take",
@@ -695,7 +703,7 @@ def build():
             c["address"] = address_str(c["src"], locate(c["src"], c["quote"]))
     for t in NOTES:
         t["address"] = address_str(t["src"], locate(t["src"], t["quote"]))
-    facts = dict(meta=dict(title="Proof Atlas", built="2026-10-07", job="FS132-F1", as_of="the outside release as literature; FS132-P1's re-rank",
+    facts = dict(meta=dict(title="Proof Atlas", built="2026-10-07", job="FS132-Z2", as_of="FS-132, six by the nerve, Derived (rows 155–160)",
                            statuses={k: v for k, v in __import__("viz_proof_atlas_common").STATUS_WORDS.items()}),
                  nodes=NODES, edges=EDGES, routes=ROUTES, credence=CREDENCE, notes=NOTES)
     OUT.parent.mkdir(parents=True, exist_ok=True)

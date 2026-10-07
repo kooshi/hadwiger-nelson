@@ -113,6 +113,10 @@ ALLOW: dict[str, str] = {
     '√ε': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-q-ring.md`",
     '(R2)': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-curved-pencils.md`",
     '131–141': "item 31's row range now reads 131–154 (FS-129's rows 149–154)",
+    '131–154': "item 31's row range now reads 131–160 (FS-132's rows 155–160; the filing that made FS-132 Derived, 2026-10-07)",
+    '1–154': "the ledger's row count now reads 1–160 (FS-132's rows 155–160; the same filing)",
+    'plans/POROS-2026-10-07-after-release.md': "the open-milestones paragraph's sentence on the asking lane's recommended order for the Lean backlog left at Kooshi's word of 2026-10-07 (the backlog stays paused; a milestone's Lean phase formalizes what it rests on — FS132-Z2's draft, FS-132 inventory item 35 (b)); the table stays in that file",
+    '§ 4.4': "the section of `plans/POROS-2026-10-07-after-release.md` the removed sentence on the backlog's order cited (the same filing)",
     'plans/FS129-cross-application-audit.md': "FS-129 is Derived: the amendment's R4 replaced the open-milestones sentence that named its plan; the plan file stays at plans/FS129-cross-application-audit.md (FS129-F1 CHECK for the coordinator)",
     # E1, design (b) on CLAUDE.md (2026-09-26): paths-forward ranks >= 30 cut to one pointer row (their tokens: EXTERNAL_HOMES).
     '38–42': "a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank",
