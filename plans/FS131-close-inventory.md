@@ -8194,3 +8194,40 @@ reason by the close.*
      their records with exit and last log line, anything not clean re-run, and the landing's evidence taken from a
      pass begun after 02:03 UTC. (c) **A line for `RUNNING.md` § Building, filed now** (below): an unknown binary
      is never probed outside a slot.
+
+613. **EXT-OAI2, second message: the outside manuscript's transfer is read in full — no gap found, one mind, one pass; it proves measure rigidity at the real algebraic numbers by a route that uses no entropy and no Einsiedler–Lindenstrauss, and it does not give this project's rigidity at a number field** (source: EXT-OAI2's message to "main", 2026-10-07; record `plans/EXT-OAI2-reading.md` stage 2, commit `183010ff` on `main`; their §§ 2–4, 1,557 lines).
+     **Its account.** *The route*: the forward direction is row 128's load-bearing step run at `F = ℝ_alg`, in nine
+     steps — restrict to the countable algebraic plane; average over its rigid motions (amenable); split `L²` at the
+     continuous characters, which is conditional expectation onto a factor; the remainder's spectral measure is
+     invariant under the algebraic rotations and null on the continuous characters, so Haar by their Theorem 2.3, so
+     uncorrelated at every nonzero algebraic translation; extend to all unit vectors by density; a measurable
+     version; least index. No stable place exists at `ℝ_alg`, so this project's selection over places has nothing to
+     do. *Their Theorem 2.3* ("Rigidity of wild character laws") in five moves: a zero invariant-mean average along
+     lines; a Furstenberg–Zimmer compact tower; "relative singularity" by a transfinite induction; relative weak
+     mixing along `u ↦ uⁿ` giving a functional inequality for a radial positive-definite function; a number-field
+     pigeonhole. **Answers to the brief.** (i) Nothing replaces measure rigidity: it is proved, at the one field row
+     120 does not cover, using **two properties no number field has** (the rotation group divisible; the field
+     closed under square roots of positives) — so **row 120 keeps its grade, and rows 121, 123, the field half of
+     128 and the field form of 129 stay "given MR"**. (ii) **What it removes, if it stands: "given MR" from
+     `χ(ℝ²) = χ_m⁰(ℝ²)`** (row 130; the aim's links 1 and 5) — "the number-field detour was unnecessary for the
+     plane's own equality". (iii) Choice is discharged at the restriction to a countable set, used once inside
+     Theorem 2.3 (an invariant mean) and in the reverse direction at de Bruijn–Erdős. (iv) Their easy direction is
+     not this project's: density points, a translate, de Bruijn–Erdős — no rotation. (v) Special to the plane (an
+     abelian norm-one group; fails as written in dimension three and up) and to algebraic coordinates; not to the
+     unit distance, not to finitely many colours. **Two items it sent ahead of its report.** (1) **A generalization,
+     its own sketch, one mind, one step unchecked** (its § 2.6): their Theorem 2.3 run for one class gives
+     `α₁(ℝ²) = m₁(ℝ²)` and `χ_{f,0}(ℝ²) = χ_f(ℝ²)` with no hypothesis — row 129's "given MR" clause,
+     `[DuczVarga2026]` Conjecture 1's first clause, `[Johnson1996fcn]` Question 1; **the manuscript does not state
+     it**. (2) **A reading** (its § 2.3): if the forward direction holds in ZF + DC (plausible, unchecked), the
+     Shelah–Soifer axiom-dependence question for the plane is exactly this project's null-set step `χ_m⁰ = χ_m`.
+     **Lean, by name and text**: Theorem 2.3 is `PlaneFiveColor.Spectral.wild_fourier`
+     (`lean/OAI/Analysis/PlaneSpectrum/Ergodicity.lean` l. 335), the forward direction `proper_to_borel_weak`.
+     **Read by me**: the theorem's statement in `spectral.tex` ll. 64–70 and the Lean lemma's head at l. 335
+     (`(hw : IsWild μ) (z : E) (hz : z ≠ 0) : ∫ d, (eval z d : ℂ) ∂μ = 0`); its commit on `main`. Not checked by me:
+     any step of the reading. **Grade, as it gives it**: read in full, no gap found, one mind, one pass — not
+     "verified"; the kernel's word on the same statements is EXT-OAI1's third message. **Rulings.** (a) **Told to
+     Kooshi at once.** (b) **Item (1) is a result of this project's if its one step closes** — a consequence the
+     manuscript does not draw, answering a conjecture clause the literature poses: a deriver's short job on that
+     one step (stationary mean to upper density), **after** the audit's third message, and at Kooshi's word given
+     ruling 607 (c) (it builds on the outside theorem). Not launched. (c) Its table of what changes in this
+     repository (its brief's item 5) is the input for the front page's drafts; nothing is filed.
