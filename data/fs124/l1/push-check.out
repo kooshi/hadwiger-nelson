@@ -1,0 +1,9 @@
+the commit to push: 022f4c59cfa1e18935df6912362e6d895ca2ea8c; the gated commit: 24a42aa9f7816b544c4e7a63c754a9b45e77bd49; origin/main: ac7dee7bd15f014e93287b4ad14ec4486ce13596  2026-10-07T17:37:14Z
+paths that differ between the gated commit and the commit to push, by top directory:
+     86 data
+      1 plans
+of them outside plans/ and data/: 0
+git diff --stat 24a42aa9 HEAD -- Proofs Proofs.lean scripts tools ARCHITECTURE.md lakefile.toml lean-toolchain lake-manifest.json CLAUDE.md: []
+origin/main is an ancestor of the commit to push: a fast-forward
+narrow sorry lines in Proofs/: 0
+tracked files modified: 0

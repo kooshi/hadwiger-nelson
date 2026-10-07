@@ -545,3 +545,374 @@ the ledger; the import's eight stored statements are the release's, term for ter
 constants, and stage 6 names each model and how it is held; that row 161's every sentence is a theorem — one is not
 (C124-EVERY-DIRECTION), and stage 7 says what is; that the half toward seven *needs* the import — the kernel says
 what this proof uses.
+
+## Stage 10 — SAVED (FS124-L1): the landing
+
+`main` had not moved while the gate ran: `origin/main` was `ac7dee7b`, the commit merged before the pass. **The commit
+pushed is `022f4c59`**: the gated commit `24a42aa9` and one commit of this job's logs and record. The diff that shows
+it (`data/fs124/l1/push-check.out`): `git diff --name-only 24a42aa9 022f4c59` — `data/` 86, `plans/` 1, nothing else;
+`git diff --stat 24a42aa9 022f4c59 -- Proofs Proofs.lean scripts tools ARCHITECTURE.md lakefile.toml lean-toolchain
+lake-manifest.json CLAUDE.md` — **empty**; `origin/main` is its ancestor; the tree holds zero `sorry` by the narrow
+search; no tracked file modified. The coordinator was sent one line when the gate was green, before the push.
+
+**The push** (`data/fs124/l1/push-main.out`): `git push origin HEAD:main` from the worktree — "ac7dee7bd..022f4c59c
+HEAD -> main", **a fast-forward; no force.** `origin/main` by `ls-remote`: `ac7dee7b…` before, `022f4c59…` after. The
+record's last sections and the report follow in a second fast-forward that touches `plans/` and `data/` only.
+
+## Drafts for the front page (FS124-L1)
+
+*For the coordinator to file; nothing here is filed by this job. Each names its slot — the file, the section, and **the
+exact words on `main` it replaces or follows**, read on `main` at `022f4c59 (this landing; the coordinator's files as at `ac7dee7b`)` and each asserted to occur exactly once
+there (`data/fs124/l1/drafts-slots.py`, output `drafts-slots.out`) — and the log line it comes from. The gated commit
+is `24a42aa9f7816b544c4e7a63c754a9b45e77bd49`; its logs are `data/fs124/l1/gate/*-final.*` (`receipt-axioms-final.log`, `receipt-vacuity-final.log`,
+`receipt-assumptions-final.log` are the three scans' full outputs).*
+
+**1. `CLAUDE.md` § Trust ledger, the audit's sentence.** *Replaces* "the current audit reads 6910 clean and 5 declared
+purchases, and 18 imported (and 20 axiom-free; 6,953 records at the landing of FS-132's first theorem, FS132-L2,
+2026-10-07)" — from `axioms-final.log`, "audited: 7015 records — 6967 clean on the standard axioms, 20 axiom-free, 23
+imported (resting on a declared outside theorem), 5 declared purchase(s)":
+
+> the current audit reads 6967 clean and 5 declared purchases, and 23 imported (and 20 axiom-free; 7,015 records at the
+> landing of FS-124's disc criterion, FS124-L1, 2026-10-07)
+
+6910 + 57 = 6967 (the 52 clean theorems of the three modules and their five definitions, every one on exactly the
+standard three: `records-final.txt`); 18 + 5 = 23; 6953 + 62 = 7015; axiom-free and purchases do not move. **Five more
+than my brief expected** (clean +52, records +57): the four definitions and the structure of `Plane/WeakColouringOn`
+are filed, by this job's decision (stage 3). Until it is filed the audit flags the sentence stale (not failed): "6910
+clean → 6967, 18 imported → 23".
+
+**2. `CLAUDE.md` § Trust ledger, how many records rest on each outside theorem.** *Replaces*, in the sentence after it,
+"— no map `ℂ → Fin 5` separates every unit pair — with five, and" *by* "— no map `ℂ → Fin 5` separates every unit pair
+— with six, and", and "— a proper `k`-colouring of the plane gives a Borel one proper at almost every unit pair — with
+five;" *by* "— a proper `k`-colouring of the plane gives a Borel one proper at almost every unit pair — with nine;" —
+from `records-final.txt`: "whole log: records carrying no_proper_five_coloring: 6 (filed: 6); of the landing's: 1",
+"records carrying proper_to_borel_weak: 9 (filed: 9); of the landing's: 4", "records carrying kloosterman_bound: 8
+(filed: 8)". "no record rests on two of the three" stands ("carrying two imports 0").
+
+**3. `CLAUDE.md` § Trust ledger, the nine assumption counts.** *Replaces* "`axioms=3 rests=18 named=19 inline=16
+outside=7 ours=23 open=5 takes=98 mentions=1` — three outside theorems declared as axioms, with eighteen theorems
+resting on them;" — from `receipt-assumptions-final.log`, `=== TOTALS ===`, and `assumptions-final.log`, "assumptions:
+OK — 3 outside theorem(s) as axioms, with 23 theorem(s) resting on them; 19 named and 16 inline hypotheses (7 outside,
+23 ours, 5 open), taken by 98 statement(s) and mentioned by 1":
+
+> `axioms=3 rests=23 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — three outside theorems declared
+> as axioms, with twenty-three theorems resting on them;
+
+One count of the nine moves (`rests`, 18 → 23); no hypothesis is added in either form, no line of
+`scripts/Assumptions.lean` changes, and the rest of the paragraph stands. The ledger's header is refiled by
+`--write-ledger` on the branch ("match (9 of 9 compared)"); until the front page is, the step flags it stale: "rests
+18 → 23".
+
+**4. `CLAUDE.md` § The gate, the vacuity scan's two count lines.** *Replaces* "`declarations=15292
+refutations-skipped=226 sites=1447`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1404 unknown=2`." — from
+`vacuity-final.log`, "scanned: declarations=15370 refutations-skipped=226", "sites: sites=1448 vacuous=0 stale=0
+declared=3 witnessed=38 generic=1405 unknown=2":
+
+> `declarations=15370 refutations-skipped=226 sites=1448`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1405 unknown=2`.
+
+Three counts move: declarations +78 (the landing's 78 constants), sites +1 and generic +1 (one site,
+`AeColouring.isWeakColouringOn :: AeColouring k`). The sentences on the baseline's two entries stand.
+
+**5. `tools/claude_md_fact_audit.py`, `GATE_CHANGES`** — one entry after the last (`(("6533", "5"), ("6910", "5"))`):
+
+```python
+    (("6910", "5"), ("6967", "5")): "FS-124, the landing of its first module — the disc criterion: weak colourings of a set, the radius clause and its join over the Borel transfer (FS124-L1; copy data/fs124/l1/gate/receipt-axioms-final.log, gated commit 24a42aa9): 7,015 records, 6,967 clean, 20 axiom-free, 23 imported, 5 purchases",
+```
+
+and, in the same file's table of superseded counts, after the entries for `"6533"` and `"6576"`, the two this filing
+supersedes, in that table's own form: `"6910"` (6967 clean) and `"6953"` (7,015 records), "superseded gate count,
+refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-axioms-final.log; the old count stays in
+data/fs132/l2/gate/receipt-axioms-final.log and in GATE_CHANGES". Also superseded by drafts 2–4: "eighteen theorems",
+`rests=18`, `declarations=15292`, `sites=1447`, `generic=1404`. The previous landing's receipts, against which the
+three digests were taken: `data/fs132/l2/gate/receipt-axioms-final.log`, `receipt-vacuity-final.log`,
+`receipt-assumptions-final.log`; **the next landing's previous receipts are
+`data/fs124/l1/gate/receipt-{axioms,vacuity,assumptions}-final.log`.**
+
+**6. `CLAUDE.md` § Where the problem stands — the disc criterion, and which half needs the import.** *Follows* the
+paragraph's last sentence, "Falconer's everywhere-proper `χ_m` is one step further, a GAP; by Thm 1.4 `χ_m(ℝ²) ≥
+χ_m⁰(ℝ²) ≥ 6`." The planner's sentence (`plans/FS124-kernel-plan.md` § 4.4, first item), word for word; every name in
+it is a landed declaration of namespace `HadwigerNelson.Plane` (`checks-final.out`: `#check` of each;
+`records-final.txt`: each record's banner and axioms):
+
+> On discs (`Plane/RadiusOutside`): `seven_le_chromaticNumber_plane_iff_exists_ball` — `7 ≤ χ(ℝ²)` exactly when some
+> open disc about the origin has no weak measurable six-colouring — and `colorable_iff_forall_ball` at every `k`. *Seven
+> gives such a disc* is the contrapositive of `radius_up` (`exists_radius_of_not_colorable`) and rests on the standard
+> three axioms; *such a disc gives seven* is the contrapositive of `radius_down` and rests on the declared outside
+> theorem `Outside.OAI158.proper_to_borel_weak`. So an exclusion on a disc reaches seven only through the transfer, and
+> weak six-colourings of every disc reach six with no import.
+
+Checked against the gate: `radius_up` and `exists_radius_of_not_colorable` are under CLEAN on `[propext,
+Classical.choice, Quot.sound]`; `radius_down`, `colorable_iff_forall_ball` and
+`seven_le_chromaticNumber_plane_iff_exists_ball` under IMPORTED on those three and `proper_to_borel_weak`; the halves
+proved apart print the same (`checks-final.out`). Two words a reader may want (stage 7): "weak measurable" is Borel
+measurable, and the criterion holds as well with no measurability asked; "about the origin" is any centre.
+
+**7. `LEDGER.md` row 161.** *(a) Replaces* its grade sentence, "**Grade:** [hand] or derived from [hand] entries, one
+mind each, kernel pending. **Kernel-checked on a branch, not through the gate, not held** (`fs124-wk1`, 57 theorems):
+`colorable_iff_forall_ball` and `seven_le_chromaticNumber_plane_iff_exists_ball`, each on the standard three axioms and
+that one declared outside theorem; (up) and its contrapositive on the standard three alone." — from
+`records-final.txt` and `checks-final.out`:
+
+> **Grade:** **[kernel]**, through the gate (FS124-L1, 2026-10-07, gated commit `24a42aa9`;
+> `Proofs/HadwigerNelson/Plane/` `WeakColouringOn`, `Radius`, `RadiusOutside`, namespace `HadwigerNelson.Plane`), for
+> every quoted sentence but the last: C124-RADIUS-GRAPH `radius_graph`, -COUNTABLE `radius_countable`, -UP `radius_up`,
+> each on `[propext, Classical.choice, Quot.sound]`; -DOWN `radius_down` and the two forms of the criterion,
+> `colorable_iff_forall_ball` and `seven_le_chromaticNumber_plane_iff_exists_ball`, each on those three and the declared
+> outside theorem `Outside.OAI158.proper_to_borel_weak`; -FIVE `radius_five`, on those three and
+> `Outside.OAI158.no_proper_five_coloring`; no record on both, none taking an assumption in hypothesis form. **Which
+> half of the criterion needs the import:** toward six none — (up), and its contrapositive
+> `exists_radius_of_not_colorable` (seven gives a disc with no weak six-colouring), on the standard three alone; toward
+> seven the Borel transfer — a disc with no weak six-colouring gives seven only through (down). "Measurable" is Borel
+> measurability of a map of the whole plane read on the set; rigid motions and their open sets are read in the
+> parameters `(x, θ)` of `z ↦ x + e^{iθ}z`. **[hand], one mind, with no Lean theorem:** C124-EVERY-DIRECTION.
+
+*(b) The sentence after it stands*, with its first words changed: "The kernel planner's own generalizations there are
+its module's, not entries:" → "The kernel module's own generalizations are its own, not entries:" (there is no "there"
+once the branch is gone).
+
+*(c) The row's address cell*: *replaces* "branch `fs124-wk1`" *by* "`Proofs/HadwigerNelson/Plane/WeakColouringOn.lean`,
+`Radius.lean`, `RadiusOutside.lean`; `plans/FS124-kernel-plan.md`, `plans/FS124-I1-implementation.md`,
+`plans/FS124-L1-landing.md`".
+
+*What the row may not say*: "[kernel]" of C124-EVERY-DIRECTION; "with no import" of the criterion as a whole — one
+half of it; "an explicit radius"; that the kernel's "(down) for every subset" or "measurability idle" are entries.
+`tools/check_architecture.py` lists (without failing) that row 161 names no identifier of `Plane/Radius`: with (a) it
+names `radius_graph`, `radius_countable`, `radius_up`.
+
+**8. `plans/FS124-derivation.md` — the theorem record.** *(a) One dated line under each of the entries
+C124-RADIUS-GRAPH, -COUNTABLE, -UP, -DOWN, -FIVE* (the entries' `grade:` and `minds:` fields are the coordinator's):
+
+> **2026-10-07, FS124-L1 — [kernel], through the full gate at `24a42aa9`**: `HadwigerNelson.Plane.radius_graph`
+> (C124-RADIUS-GRAPH), `radius_countable` (-COUNTABLE), `radius_up` (-UP), each on `[propext, Classical.choice,
+> Quot.sound]`; `radius_down` (-DOWN), on those and the declared outside theorem `Outside.OAI158.proper_to_borel_weak`;
+> `radius_five` (-FIVE), on those and `Outside.OAI158.no_proper_five_coloring`
+> (`Proofs/HadwigerNelson/Plane/Radius.lean`, `RadiusOutside.lean`; the definition, `WeakColouringOn.lean`). Statements
+> FS124-K1's, proofs FS124-I1's, landed by FS124-L1. Each entry's words are the theorem named; under them the module
+> proves the wider forms (any function proper at almost every unit pair, a countable set anywhere, any centres, every
+> subset), which are the module's and not entries. No assumption in hypothesis form. "Measurable" is Borel; motions are
+> read in their parameters.
+
+*(b) Replaces*, in the file's head (its line on the kernel lane's state), "the five entries of § 1's radius clause are
+a module complete on branch `fs124-wk1` (57 theorems) — **kernel-checked on a branch, not through the gate, not
+held**;" *by* "the five entries of § 1's radius clause are kernel theorems through the gate (FS124-L1; 57 theorems,
+three modules);".
+
+*(c) Replaces*, under C124-RADIUS-GRAPH, "**Kernel**: first module, complete on a branch, not held." *by* "**Kernel**:
+`radius_graph`, through the gate (FS124-L1)."; and under C124-RADIUS-DOWN, "each on the standard three axioms and that
+one declared outside theorem, **on a branch**. By the planner's record (§ 4.4, on its branch):" *by* "each on the
+standard three axioms and that one declared outside theorem, **through the gate (FS124-L1)**. By the planner's record
+(§ 4.4):".
+
+*(d) C124-EVERY-DIRECTION's line stands*: "not stated in the first module".
+
+**9. The phrase "kernel-checked on a branch", wherever it is said of this module** (each occurrence found on `main`):
+
+- `CLAUDE.md` § Frontier, "Last filed": *replaces* "no value moved; its first Lean module complete on a branch, its
+  landing owed)" *by* "no value moved; its first Lean module, the disc criterion, through the gate, FS124-L1)".
+- `CLAUDE.md` § Paths forward, "Open milestones", and the same sentence in `plans/FRONTIER-STUBS.md`: *replaces* "Its
+  first Lean module, the disc criterion, is complete on branch `fs124-wk1` (57 theorems; kernel-checked on a branch, not
+  through the gate; its landing is owed); its second is being planned; Closed when its modules pass the gate." *by*
+
+  > Its first Lean module, the disc criterion, is through the gate (FS124-L1, 2026-10-07; `Plane/WeakColouringOn`,
+  > `Plane/Radius`, `Plane/RadiusOutside`, 57 theorems): `7 ≤ χ(ℝ²)` exactly when some open disc has no weak measurable
+  > six-colouring (`Plane.seven_le_chromaticNumber_plane_iff_exists_ball`), the half toward six on the standard three
+  > axioms and the half toward seven on the declared outside theorem `Outside.OAI158.proper_to_borel_weak`; its second
+  > is being planned; Closed when its modules pass the gate.
+
+- `CLAUDE.md` § Where the problem stands, item 31: in "At the unit arc itself (FS-124; rows 161–164; [hand], one mind
+  each, kernel pending): `χ(ℝ²) ≤ 6` exactly when every open disc has a measurable six-colouring proper at almost every
+  unit pair, the direction toward seven over the outside theorem on Borel transfer (row 161);" *replaces* "(row 161);"
+  *by* "(row 161, [kernel] since FS124-L1);" — rows 162–164 stay as they are.
+- `plans/STUB-q-ring.md`, its head: *replaces* "the first is complete on a branch, the second is being planned" *by*
+  "the first is through the gate (FS124-L1), the second is being planned"; and its closing section: *replaces* "(§ 1;
+  its module complete on branch `fs124-wk1`, kernel-checked on a branch, not through the gate, not held)" *by* "(§ 1;
+  its module through the gate, FS124-L1 — [kernel], the half toward seven on one declared outside theorem)".
+- `LEDGER.md` row 161 and `plans/FS124-derivation.md`: drafts 7 and 8.
+
+**10. `LEAN.md`.** *(a) § Searching — Lean*, one bullet, the implementer's draft 12, not yet filed (the planner's two
+lines are):
+
+> - A `#check` under `import Mathlib` shows that a name exists at the pin, not that a module can see it: check a route's
+>   names under the module's own imports. `rotation` (`Mathlib.Analysis.Complex.Isometry`) is outside
+>   `Plane/AeColouring`'s closure; multiplication by a unit complex number is a real-linear isometry with no new import
+>   as `⟨(LinearEquiv.smulOfUnit (Units.mk0 a ha)).restrictScalars ℝ, _⟩`, and `LinearIsometryEquiv.measurePreserving`
+>   is in the closure (FS124-I1).
+
+*(b) § The gate*, in the bullet "Every gate keeps what it computed", *follows* "(`latest` is the last complete run;
+`scripts/gate-log.sh`)":
+
+> — a run that failed on a planted fault is a complete run: after a control planted in a gate's own input (the wrong
+> filing in `scripts/Axioms.lean`), `latest` is the planted run until the gate is run again, and a tool reading it
+> reads the plant (FS124-L1: `tools/fs124_l1_records.py` refused that log, as it should)
+
+*(c) § The gate*, in the bullet on `./scripts/vacuity.sh`, *follows* the sentence ending "(FS132-L2, its record's
+stage 7).":
+
+> A landing whose modules are consumed through a predicate on maps (`IsWeakColouringOn U c`) names in the same way the
+> parameter at which each hypothesis is inhabited, open, and empty given an import (FS124-L1, its record's stage 6:
+> seven, six, five).
+
+*(d) § Assumptions*, the bullet "An imported theorem carries four things", item 2, *follows* "the landing runs it again
+on the module as recompiled on the joined tree.": "A copy carries the source's licence in its module docstring, with
+the text beside it (`Outside/OAI158`, since FS124-L1)."
+
+**11. `BIBLIOGRAPHY.md`, `[OAIMath2026]`'s entry** — to add to what of ours rests on it:
+
+> FS-124's disc criterion (FS124-L1, 2026-10-07): `Plane.radius_down`, `Plane.exists_isWeakColouringOn_of_colorable`,
+> `Plane.colorable_iff_forall_ball` and `Plane.seven_le_chromaticNumber_plane_iff_exists_ball` rest on the imported
+> `proper_to_borel_weak`, `Plane.radius_five` on the imported `no_proper_five_coloring`; nine and six records of the
+> audit rest on the two. The import module's docstring names the release's licence (Apache-2.0) and the copy beside it.
+
+**12. The Proof Atlas.** The node of row 161's criterion (C124-RADIUS-UP with C124-RADIUS-DOWN; the join): **[hand] →
+[kernel]**, its edge to `[OAIMath2026]` family 158 an edge to a **declared outside theorem** (`proper_to_borel_weak`),
+carried by the half toward seven only. C124-RADIUS-GRAPH, -COUNTABLE, -UP: [hand] / derived → [kernel], the standard
+three, no outside edge. C124-RADIUS-DOWN: → [kernel] on `proper_to_borel_weak`. C124-RADIUS-FIVE: → [kernel] on
+`no_proper_five_coloring`. C124-EVERY-DIRECTION: stays [hand]. No value moves.
+
+**13. `ARCHITECTURE.md`**: nothing to file — § 3.13's paragraph and rows and § 5 Trust's two record lists are on the
+branch as landed (stage 3).
+
+**14. `plans/FS132-close-inventory.md` item 51 (a)** — its ruling is done: the import module's header names the
+licence (stage 4); the eight stored terms are untouched.
+
+## Open gate items at this landing
+
+1. **C124-EVERY-DIRECTION is in row 161 and in no Lean module.** Its sentence stays [hand]; the planner's reasons
+   stand (no consumer; its proof waits on a lemma the release's port brings).
+2. **Two models are terms of an iteration file, not library theorems**: every hypothesis of `radius_graph` and
+   `radius_countable` at once on a bounded open set (`FS124L1.model_graph`; the modules' own `example`s run the
+   theorems at `U = univ`), and the two truth values of `colorable_iff_forall_ball` (`join_seven`, `join_four`). The
+   brief adds no statement; a later module that wants them has the six lines each.
+3. **The vacuity scan tracks no carrier of these modules** (`IsWeakColouringOn`, `AeProperOn`): one site in 78
+   constants, on the bundled `AeColouring`. For the tooling job, beside FS132-L1's and FS132-L2's questions. The notes
+   check reads QA4's modules only: no instrument reads the `Inhabitant` notes of the three modules; stage 6 read them.
+4. **The parameter reading.** "Every orientation-preserving isometry is a `rigidMotion`" and "open in the group is open
+   in parameters" are "not proved here" (the module header). No statement uses them; row 161's first sentence is read
+   through them.
+5. **Earlier landings' record tools state earlier filings**: `tools/fs132_l1_records.py` and `tools/fs132_l2_records.py`
+   require exactly eighteen records under IMPORTED and now refuse a current log, by design; `tools/fs124_l1_records.py`
+   carries the filing (twenty-three). A later landing extends `FILED_HERE`, or the tooling job makes one filing table.
+6. **Whether a landing files its definitions** is practice, not a written rule: FS132-L1 filed theorems, FS132-L2 and
+   this landing every declaration. Not checked by me: whether every definition of earlier modules has a record.
+
+## Theorems this phase proved, final
+
+*Each [kernel], through the full gate at `24a42aa9`, on `main` since `022f4c59`. Printed from the gate's own logs
+(`data/fs124/l1/theorem-lines.py` on `gate/decls-final.out` and `gate/receipt-axioms-final.log`; output
+`data/fs124/l1/theorem-lines.md`): every declaration the landing brings — 57 theorems, 4 definitions, 1 structure —
+with the banner its record is under and its axioms as the audit printed them. Namespace `HadwigerNelson.Plane`;
+modules under `Proofs/HadwigerNelson/`. Statements FS124-K1's, proofs FS124-I1's; this job proved none and changed
+none. The informal statement each headline theorem was read against is in stage 7.*
+
+**The seven the landing is for**, with the sentence each is read against:
+
+- **`seven_le_chromaticNumber_plane_iff_exists_ball`** (`Plane/RadiusOutside.lean`) — row 161's "the plane needs seven
+  colours precisely if some open disc has no weak measurable six-colouring". `[propext, Classical.choice, Quot.sound]`
+  and `HadwigerNelson.Outside.OAI158.proper_to_borel_weak`. No assumption in hypothesis form.
+- **`colorable_iff_forall_ball`** (the same file) — "at each `k` the two hold together or fail together". The same
+  axioms.
+- **`radius_up`** (`Plane/Radius.lean`) — C124-RADIUS-UP. `[propext, Classical.choice, Quot.sound]`: the half toward
+  six, with no import; its contrapositive is `exists_radius_of_not_colorable`, on the same three.
+- **`radius_down`** (`Plane/RadiusOutside.lean`) — C124-RADIUS-DOWN. The standard three and
+  `Outside.OAI158.proper_to_borel_weak`: the half toward seven.
+- **`radius_five`** (the same file) — C124-RADIUS-FIVE. The standard three and
+  `Outside.OAI158.no_proper_five_coloring`.
+- **`radius_graph`**, **`radius_countable`** (`Plane/Radius.lean`) — C124-RADIUS-GRAPH, -COUNTABLE. The standard three.
+- **`AeProperOn`**, **`IsWeakColouringOn`** (`Plane/WeakColouringOn.lean`) — the definition the statements name.
+
+**Every declaration, one line each:**
+
+**`Plane/WeakColouringOn`** (38 declarations):
+
+- `AeColouring.isWeakColouringOn` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `AeProperOn` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `AeProperOn.comp_rigidMotion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `AeProperOn.mono` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsWeakColouringOn` — structure; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsWeakColouringOn.comp_rigidMotion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsWeakColouringOn.exists_aeColouring` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `IsWeakColouringOn.mono` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `aeProperOn_congr` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `aeProperOn_iff_ae` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `aeProperOn_iff_unitPairsNull` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `aeProperOn_iff_volume` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `aeProperOn_of_proper` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `aeProperOn_of_proper_off_null` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `continuous_rigidMotion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `continuous_rigidMotion_apply` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `dist_rigidMotion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_isWeakColouringOn_ball_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_isWeakColouringOn_iff_subtype` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_rigidMotion_edge` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isWeakColouringOn_univ_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `measurePreserving_motionMul_left` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `measurePreserving_motionMul_right` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_monoPairSet_iff_rigidMotion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `mem_monoPairSet_of_e_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `monoPairSet` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `monoPairSet_eq_iUnion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `monoPairSet_mono` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `motionMul` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `prod_arcLength_eq_restrict` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `prod_arcLength_eq_zero_iff_volume` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `rigidMotion` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `rigidMotion_add_two_pi` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `rigidMotion_apply_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `rigidMotion_apply_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `rigidMotion_motionMul` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `rigidMotion_translation` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `rigidMotion_zero` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+
+**`Plane/Radius`** (16 declarations):
+
+- `AeProperOn.ae_rigidMotion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `AeProperOn.ae_rigidMotion_arcLength` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `AeProperOn.ae_rigidMotion_edge` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `AeProperOn.colorable_induce` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `AeProperOn.exists_rigidMotion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `aeProperOn_iff_ae_rigidMotion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `colorable_induce_of_forall_aeProperOn_ball` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `colorable_induce_of_forall_ne` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `colorable_plane_of_forall_aeProperOn_ball` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `colorable_plane_of_forall_finite` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_isWeakColouringOn_seven` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_radius_of_not_colorable` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isOpen_setOf_mapsTo_rigidMotion` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `radius_countable` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `radius_graph` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `radius_up` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+
+**`Plane/RadiusOutside`** (8 declarations):
+
+- `colorable_iff_forall_ball` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound] and `HadwigerNelson.Outside.OAI158.proper_to_borel_weak`
+- `exists_isWeakColouringOn_of_colorable` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound] and `HadwigerNelson.Outside.OAI158.proper_to_borel_weak`
+- `exists_isWeakColouringOn_univ_iff` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_radius_no_weak_four` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `isWeakColouringOn_univ_iff_weakColoring` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `radius_down` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound] and `HadwigerNelson.Outside.OAI158.proper_to_borel_weak`
+- `radius_five` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound] and `HadwigerNelson.Outside.OAI158.no_proper_five_coloring`
+- `seven_le_chromaticNumber_plane_iff_exists_ball` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound] and `HadwigerNelson.Outside.OAI158.proper_to_borel_weak`
+
+## Slips, my own
+
+1. **The audit's self-test was not among my probes** (stage 8): the implementer's record said no `--self-test` had
+   been run and the brief named the controls file; I ran the audit, its wrong-filing plant and my own tool's plants
+   before the pass, and not `./scripts/axioms.sh --self-test`. It went red in the first full pass on two counts that
+   read the library's state, and cost one pass of twenty minutes.
+2. **A tracked file's mode bit set while the final pass ran** (stage 9): `chmod +x` on a script of this job under
+   `data/`, already committed. No step reads it; put back; the runner's last line reports it. I had said I would touch
+   no tracked file during a pass.
+3. **Five records more than the brief counted** (stage 3) is a decision, not a slip, but it moved two counts the
+   coordinator had drafted from: clean +57 for +52, records +62 for +57. Sent in the line before the push.
+4. **A count in my tool's docstring** ("fourteen faults" for fifteen plants), corrected before the tool was first run.
+5. **The first draft of one checks term** said "on the two imports" of a statement that the print shows rests on one
+   (`criterion_at_five`, on `no_proper_five_coloring` alone); corrected before the gate's pass read the file.
+
+## The second fast-forward
+
+After the push `main` moved once, to `9ba528c4` (the coordinator's inventory item on this landing: `plans/`, one
+path; 0 paths outside the brief's list). Merged by hash, automatic; the commit that carries this record's last
+sections and the report (`data/fs124/reports/FS124-L1.md`) differs from the landed tip `022f4c59` in `plans/` and
+`data/` only, and from the gated commit `24a42aa9` in no path outside the brief's list
+(`data/fs124/l1/push-main-2.out`). The drafts' slots, read again on `main` after the landing: 26 of 26 found, the
+control fired (`data/fs124/l1/drafts-slots.out`). No background process of this job is left running.
