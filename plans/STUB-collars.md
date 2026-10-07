@@ -116,7 +116,6 @@ where it is none, *free* otherwise. A collar is an arc on which the palette is t
 
 ### The card
 
-```markdown
 question: can-a-ring-afford-its-points-at-six
   evidence: `plans/FS136-derivation.md` l. 547 — at the bowtie fragment's stop `(√3, 0)` "out/in=4 … in/out=2 out/out=EMPTY(order 1)", and `(√3, 0) = q₂ + e(30°) = q₁ + e(−30°)` is the common end of the two outer collar arcs (ll. 75–78 above); `data/fs136/e2/out/bowtie12.txt` seed line — the arc comes from two corners of 120°, a window of exactly 60°; `plans/FS116-derivation.md` ll. 655–658 — "r(θ) or r(θ + 60°) lies on a (Q) arc; so the (Q) arcs of the ring have total length at least 180°"; `data/fs136/e1/out/*.txt` l. 1 — strip "3-label:40 4-label:10" reaching 1.8512, bowtie "5-label:4" and flower "6-label:1" reaching 1.7321, R7 "6-label:16" of seven with no cell empty anywhere; `plans/STUB-q-ring.md` l. 229 — "a skeleton that saves every complementary pair at both common unit points has five-label centres"
   expected: a collar is a curiosity of one fragment, the stops are facts about pairs of tiles, and how many labels a point carries is "not read by anything at the point across" (FS-136's first round)
@@ -129,7 +128,6 @@ question: can-a-ring-afford-its-points-at-six
   hunch: at first order the count falls short on the nineteen-point lattice family and fits only with unit-arc edges — 0.6; a count that excludes every ring at six with no family named — 0.12; that any of this moves the value — 0.01
   falsifier: a labelled set of corners at a point and the six points of its ring, with every cell at every common unit point within 2 non-empty at first order and no edge along a unit circle about a point across
   rank: 1
-```
 
 ### Existence form
 
