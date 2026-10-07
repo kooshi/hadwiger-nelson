@@ -1,0 +1,10 @@
+EXIT 0 2s FS132-E1-derivation.md
+EXIT 0 16s FS132-E2-derivation.md
+EXIT 0 8s FS132-E3-derivation.md
+EXIT 0 3s FS132-E4-derivation.md
+EXIT 0 35s FS132-E5-derivation.md
+EXIT 0 24s FS132-E6-derivation.md
+EXIT 1 0s FS132-six-by-the-nerve.md
+EXIT 0 42s FS116-derivation.md
+EXIT 0 160s FS129-derivation.md
+DONE

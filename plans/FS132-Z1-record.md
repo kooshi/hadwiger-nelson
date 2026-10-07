@@ -199,3 +199,87 @@ C132-TURN stalls, (i)) against C132-LENS (the lens between two outer-pure neighb
 together they say a ring point between two outer-pure neighbours has no pure inner side, which is C132-LENS-SIDE.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the derivation file
+
+`plans/FS132-derivation.md`: 57 entries and 32 controls in twelve sections.
+
+### 3.1 How it is made
+
+`python3 data/fs132/z1/assemble.py` writes it from `data/fs132/z1/template.md` (this job's prose, and the six entries it
+authored) and the six derivers' records: a line `@@ENTRY <rec> <name>` or `@@CONTROL <rec> <name>` of the template is
+replaced by that block of the record, verbatim, with its `§` addresses pointed into the record. `--check` compares every
+field of every block in the output with its source (83 source blocks: 51 entries, 32 controls; each present once; no
+field differs but one override and the re-pointed addresses); `--check --fault` alters one statement in memory
+(C132-CROSS: "`0 < |x − y| < 2`" to "`≤ 2`") and fails, as it must. Resume: edit the template, re-run the command; a kill
+redoes nothing but the run (under a second).
+
+### 3.2 This job's decisions, each named where it bites
+
+1. **One field changed**: C132-M-ORBIT's `minds:` keeps its source's number, 1, and gains the account of who derived,
+   reworked and read each step; the table and the reason are under the entry. The planner's "Grade: two minds on M7–M9"
+   and the coordinator's ruling 30 (a) ("two minds on every step … not two blind derivations") are quoted there. By the
+   gate's rule a reading with the argument open is a checking reading, and M6 and M8 have one derivation each; so the
+   number written is 1. **Not lowered from a source's field** (E3's entry says 1) — but lower than the inventory's
+   headline, and held for the coordinator.
+2. **C132-INDEX, C132-RING-WIND, C132-CONFINE keep `minds: 1`**, though each has a second derivation by the kernel
+   planner, blind (K1 § 2.3). Reason: no source counts them as two; the planner's are paragraphs (for C132-CONFINE a Lean
+   proof on an unmerged branch) and it has not read the derivers' entries; the count is the coordinator's to rule. The
+   prose under each says what exists.
+3. **C132-CORES-SQUARE is entered as a gap, not as derived.** The planner's own record heads it "route:" and says what it
+   did not re-derive and did not compare (§ 3.3 below). The claim list's "[hand], one mind" is kept as its grade line.
+4. **The search's results are entries written here** (its record has no entry blocks): four at `certified by:`, one at
+   `hand`. Each statement field is a sentence of the search's record, verbatim, except SEARCH-1007-TURN3-HAND's, which
+   joins two of its sentences (both quoted under the entry). SEARCH-1007-TURN-SS takes its name from the inventory.
+5. **Posed forms and restatements are kept as entries** (§ 10 of the file), each with its source's `handoff: none —
+   subsumed by …`; the form to build on is named in the file's supersession table.
+6. **No grade line was edited.** Three of E6's entries name C132-SHADOW or C132-LENS in `grade: derived from:` and
+   C132-PLACE only in `uses only:`; the prose under C132-LENS says C132-PLACE governs it equally.
+
+### 3.3 The planner's route for C132-CORES-SQUARE, quoted
+
+From `plans/FS132-kernel-plan.md` on branch `fs132-wk1` at `e3695302` (read by
+`git show origin/fs132-wk1:plans/FS132-kernel-plan.md`), § 2.3, whole paragraph:
+
+> **C132-CORES-FREE — route: the release's §7.2–7.3 with no core disc, and the cover step from this library's Lebesgue covering
+> theorem.** On a compact region `Q` with no cyclic centre every `Γ_z` is a forest; Lemma 7.3 (missing edge → small overlap, any
+> `k`: the release's `missing_edge_disk_cover` is already at `Fin k`) and the tree fillings (Lemma 7.4 with `L_0 = ∅`) give
+> continuous `g_n : Q → K_k` equal to the thresholded disc averages off discs of total radius `→ 0`; the components of
+> `{(g_n)_i > 0}` cover `Q` with multiplicity two; Lemma 7.6's argument (a component joining two points more than `1 + c` apart
+> puts a point of `H_i` in a ball where `p_i^ε ≤ 1 − α` off a set of vanishing area) bounds the mesh by `1 + o(1)`. A closed
+> square of side `s > 1` has no such cover: `no_fine_cover_square`, from `LebesgueCovering.lebesgue_covering_square` (kernel,
+> FS-131) after a closed shrinking of a finite subcover. **So the claim holds for every closed square of side above `1`, hence
+> every closed disc of radius above `1/√2`** (`exists_cyclicCentre_square`; the claim's form is derived from it in the skeleton).
+> What I did not re-derive: Lemmas 7.3, 7.4, 7.6 at general `k` — read, and I see no use of five beyond `α < 1/5 → α < 1/k`.
+
+And from its § 3.5: "Its route (2.3) rests on the release's §7.2–7.3 at general `k` — **not compared with the first
+deriver's S5–S7 (`FS132-E1` Stage 3): unread.**" The statement and its *not claimed* line are in the entry, verbatim from
+§ 3.5. What a derivation stage would do: read S5 and S7 of `plans/FS132-E1-derivation.md` § Argument — the extraction on a
+disc for any use of the disc's shape, and write the cover step (a closed shrinking of a finite subcover, then the kernel
+theorem) in place of S6's Brouwer argument.
+
+### 3.4 Findings made while assembling
+
+- **The brief's "given two standard facts about maps nobody derived tonight" is off by one.** E3's two facts (its report,
+  FS-123's re-aim) are that a map's edge carries the two-colour exclusion and that a map's palette is its ring read
+  two-sidedly. The first, for tiles that are connected open sets, was derived in round two as C132-WITNESS (E4, [hand],
+  one mind: "so a map's edges are witnessed edges", item 15). Nobody composed it with the exclusion, and the second fact
+  is underived. The dated notes under rows 148–149's entries say exactly that.
+- **No statement the night called derived was found underived by what its record's entry holds**, at the level this job
+  reads (statements, `uses only:`, `not claimed:`, `grade:` chains; no proof was reworked). **No two entries were found
+  that cannot both hold** (§ 2.6).
+- **A whole-plane and a local form differ in what they stand on** for the first night's exclusion: at the whole plane it
+  rests on two kernel-checked statements of the release and M1–M9; on an open set, also on E3's reading of those two
+  proofs as local (M0, one mind), which the second reader did not read. Said under the entry.
+
+### 3.5 The gate
+
+`python3 ../.claude/skills/ephodos/scripts/derive_gate.py all FS132-derivation.md`, from `plans/`, under the slot: **exit 0 —
+GATE: PASS (0 failures, 9 warnings)**; 57 entries (47 derived, 10 stalled or gapped); 32 controls, each printing its
+expected output and each firing on its planted fault (`data/fs132/z1/gates/derivation-gate.out`). The nine warnings are
+all "prior art owed": six are the derivers' own lines, kept as measured (C132-WIT-MARGIN, C132-WIT-CROSSED, C132-ORBIT,
+C132-SEP, C132-TURN-EDGE, C132-GRUNDY7-LOCAL), three are the search entries written here (the family is this project's;
+no search in print was run by this job). The six records' scripts run from where the file puts them (`../data/fs132/e1/`
+… `e6/`); nothing there was edited.
+
+## Stage 3 — SAVED
