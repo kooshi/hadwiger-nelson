@@ -165,6 +165,17 @@ FS-116's; stubs FS-124, FS-125, FS-117, FS-122 (R1's card: EMPTY's margin is sec
 -QFREE-CLASS, -QFREE, FS129-SR1-BENDANY, FS129-SR3-EMPTY-NS, -QFREE-NS (`plans/FS129-derivation.md`); for question 3, FS129-SR1's group 3 (FS112-U1 =
 FS116-V5-U1 in its first three clauses) and the V5-RING family without simplicity; G83's straddle (a near miss in the Siamese class).
 
+*Since FS-132 (FS132-Z2, 2026-10-07):* C132-M-EXCL (`plans/FS132-derivation.md` § 1; [hand], one mind, with a second mind's checking reading of its
+last steps; kernel pending) is this stub's first case with no map and no Siamese clause: at a point where four labels meet in a
+witnessed cycle the palettes cannot almost everywhere hold one of the two other labels. That it covers a valid six-coloured
+fragment at a vertex where four tiles of four colours meet in a cycle is **given two facts about maps** — a map's edge carries
+the two-colour exclusion (derived for connected open tiles, C132-WITNESS, one mind; the composition unwritten) and a map's
+palette is its ring read two-sidedly (underived): the short job FS-134, `plans/STUB-exclusion-back-to-maps.md`. Left to this
+stub after it: a vertex of at least four colours whose tiles about it contain no four-cycle of four colours (FS132-E3's
+report). The asking lane's banner for this stub — "Absorbed on the measurable road … Demoted 3 → 8 until the kernel has
+C132-M-EXCL; then to the closed list" (`plans/POROS-2026-10-07-fs132-night.md` § Banners) — is drafted, not filed. G86: a kill
+that reads points and distances reaches the Siamese class, and this is the instance.
+
 ## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
 
 question: does-a-fragment-bend-keep-the-class
@@ -194,3 +205,11 @@ question: does-a-fragment-bend-keep-the-class
   kills and FS114-N7-HUB on rings with (R2) arcs are owed only where Siamese pairs are allowed.
 - **§ Carried card, its hunches**: `bends-keep-the-class` (0.6) — they do, for the whole-tile restriction of radius at most `√3`;
   `qfree-class-is-empty` (0.65) — it is, in the non-Siamese class. Scored at the opening, not here.
+
+## Dated correction notes (FS132-Z2, 2026-10-07)
+
+- **The head's line of 2026-10-07 (FS132-P1), "Its first case is FS-132's existence form, asked for measurable colourings"**:
+  that form is answered NO in the measurable class — C132-M-EMPTY, the instance of C132-M-EXCL at an extracted centre with a
+  cycle of four labels (`plans/FS132-derivation.md` § 10; [hand], one mind, kernel pending). **"a second route to its NO at radius 2 … (a placement,
+  queued for the Searcher)"**: the first consumer of `plans/SEARCH-QUEUE.md` line 9 is met by C132-M-EXCL at radius 1 with no
+  graph; the line stays open at low priority as a second route (`plans/FS132-close-inventory.md` item 10).

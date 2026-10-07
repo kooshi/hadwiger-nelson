@@ -82,3 +82,11 @@ The plan (the reframe first); a derivation file in the Ephodos grammar; any colo
 
 G71 (the height: a three-colouring of a circle has a winding), G13 (row 1's two-circle theorem, a near miss), G21 (no held inhabitant), G40, G79; rows 1,
 131–134; stubs FS-122 (route R), FS-123 and FS-124 (the same winding on a ring, through FS-110's winding at a three-colour point).
+
+*Since FS-132 (FS132-Z2, 2026-10-07):* two statements with no colouring in them bear on the windings (`plans/FS132-derivation.md` §§ 3–4; [hand], one
+mind; a second derivation of the first by the kernel planner, blind, not counted): **C132-INDEX** — a continuous loop in the
+triangle of three labels whose supports at `e` and at the 60° rotation of `e` are disjoint has degree congruent to 3 modulo
+6 — and **C132-REL** — the classes of the cyclic centres inside a circle add up to the circle's. In the weak measurable class
+the bicycle is one of the regular chain's two last steps with "no weak form" (C132-LONG's stall). FS132-E2 proposed this
+line; the asking lane moved this stub 15 → 5 in its drafted re-rank of the night (`plans/POROS-2026-10-07-fs132-night.md`
+§ The ranked table; drafted, not filed).

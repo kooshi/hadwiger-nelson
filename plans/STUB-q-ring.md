@@ -201,6 +201,56 @@ first); proposed G92 (a held result reaches its argument's class — read DOUBLE
 -E2ONE, FS129-SR1-TWOCIRC, -BENDANY, -BENDLE3, -RINGBAND, -SIXQ, FS129-OR1-BENDFRAG, -LOCALDENSE, -DISCF-NS; G71's height on a curve (FS110's winding)
 for case 1.
 
+*Since FS-132 (FS132-Z2, 2026-10-07; every entry named is in `plans/FS132-derivation.md`, [hand] or derived from [hand] entries, one mind, kernel
+pending, unless marked):*
+
+- **This stub's object is where every round of FS-132 ended**: a boundary that is an arc of a unit circle whose centre is the
+  other end of a unit distance. It appears two ways (that file's § How to read an entry): (α) on the centre's own ring — in the
+  map class a (Q) arc; in measure, palettes that hold no label outside the centre's own on a set of positive measure near a ring
+  direction; (β) through the centre — an edge set of the centre lying on the unit circle about one of its ring points. The
+  asking lane reads the two as one object, the unit arc of rows 135–136 (`plans/FS132-close-inventory.md` item 24; checked by
+  neither the coordinator nor the record job). In that file's words, nothing in it "excludes, builds or bounds a boundary that
+  is a unit arc about a ring point".
+- **A measurable instance of this stub's first question** — what a (Q) ring passes to the vertices it places — **with every
+  hypothesis derived from a seed's circle data: C132-PLACED-RING** ([hand], one mind, kernel pending; § 5 of that file). On a
+  six-sector turning seed `x` (a point with a witnessed triangle whose palettes read `a, b, n, a, b, n`) whose ring points
+  `y_1`, `y_{−1}` are outer-pure: near `y_1`, outside `x`'s ring, almost every point has the label `b` inside and `a` outside
+  the unit circle about `y_0`; near `y_{−1}`, `a` inside and `b` outside; and the palettes of `y_0` on the two arcs are
+  contained in `{a, b}`. So the unit circle about `y_0` runs along an interface between the two ring labels at both
+  neighbours, oppositely oriented. **Not claimed by it**: that those two palettes contain both labels (each is present on one
+  side of the arc; "not written out"); anything on the rest of the unit circle about `y_0`; that `y_0` is a cyclic centre. With
+  three consecutive outer-pure ring points `y_0` has four labels present (C132-LENS-FOUR). **No model is known** — no weak
+  six-colouring with a turning seed is held — so "derived" means from the seed's data, never that a seed exists.
+- **A pruning rule on one orbit: C132-M-ORBIT** ([hand], one mind, with a line-by-line checking reading of its last steps by a
+  second mind; the kernel lane's first module). At a point where four labels meet in a witnessed cycle, no ring direction `ψ`
+  has palettes holding one of the two other labels almost everywhere near all six directions `ψ + kπ/3` while both occur near
+  `ψ`. Read on a ring with (Q) arcs: every essential change of the outside state has a (Q) arc at its six-fold orbit — at each
+  of the eight change points of the held fragments' four-colour vertices at least two of the four germs at ±60° lie on (Q) arcs
+  (control `positives-escape`).
+- **The head's "C132-DIAG, posed" is an instance of the release's own Lean theorem** (`two_state_impossible`, at every number
+  of labels); what FS-132 adds is its reading on an open set, one mind (C132-DIAG-WIDE).
+- **Open, carried here from FS-132, none started**: **C132-ARC** (posed in `plans/STUB-six-by-the-nerve.md` § The question,
+  re-posed after the second round; "no line of it worked, its R7 control not run"; a tool it did not have when posed is
+  C132-SHADOW); **C132-PLACED's open line** — whether any pair containing a label of the centre's triple is a witnessed edge at
+  the placed point — with FS132-E6's forms (a)–(c) (`plans/FS132-E6-derivation.md` § The list: what fills the two inner wedges;
+  what the placed point's ring carries at the orbit's four other points; the same one step on); **C132-RADIUS** — weak
+  six-colourings of discs of every radius give `χ(ℝ²) ≤ 6`, the measurable form of row 145, posed and not started: the YES
+  side's clause of this stub once it is posed in measure.
+- **The three residues of FS-132's second round are this object**: the conclusion of C132-COMP-SHARP (one of six edge sets on
+  the unit circle about the common unit point; fragment T2 realizes it with three), the residue of C132-ALT (three alternate
+  ring points, each with one of the centre's three sets on its unit circle), the void of C132-PLACE (a ring point with no pure
+  side).
+- **A model of the hard case in a finite family**: with four labels at alternate ring points the turning ring has models in
+  the Searcher's seven-flower wedge family — each interface at the centre an arc of the unit circle about a ring point, those
+  ring points exactly the four-label ones (SEARCH-1007-TURN4, [cert] by a cold check of the kept models; local, flowers of
+  radius about 0.25). "The search's kept model is the hard case and no statement of the stage applies to it"
+  (`plans/FS132-close-inventory.md` item 28). Its extension to the annulus and the closed unit disc is `plans/SEARCH-QUEUE.md`
+  line 11, held.
+- **What transfers from the map class** — rows 135–138 and 145–150 are theorems about maps — needs the dictionary fact FS-134
+  owes (`plans/STUB-exclusion-back-to-maps.md`: a map's palette is its ring read two-sidedly). The arc-free remainder of the
+  seed is FS-135 (`plans/STUB-seed-remainder.md`).
+- Grokkings: G94, G95; proposed G96 (circle data against ball data) and G97 (every exclusion ended at the unit arc).
+
 ## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
 
 question: where-else-the-identity

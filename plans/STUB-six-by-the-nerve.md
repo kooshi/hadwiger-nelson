@@ -11,6 +11,20 @@ line of why each in § Bearing on the answer.
 
 *2026-10-07 (EXT-OAI3 § 3.2):* `[OAIMath2026]` family 156 (Borsuk in dimension nine; Lean in the release, not audited here) is a second instance of the map-to-a-simplex method, with a rigidity statement at the threshold number of labels — every maximal support has exactly dim + 1 labels, by a mod-two degree count — of the kind [P₆] and [L₆] ask for. Its first step enlarges a cover to an open one, so it applies with slack only. Read its `extension.tex`, `topology.tex` and `six-labels.tex` at the opening.
 
+**What FS-132 delivers (dated line, FS132-Z2, 2026-10-07; by Kooshi's word of that day, `data/external/EXT-OAI1-request.md`
+§ Kooshi's sixth word; `plans/FS132-close-inventory.md` items 24, 32).** FS-132 delivers **what a point with data on its unit
+circle is forced to carry**, in the class of every measurable colouring proper at almost every unit pair, with no map:
+`plans/FS132-derivation.md`, 57 entries — 47 derived, 10 stalls and gaps — each [hand] or derived from [hand] entries, one mind, kernel pending, but
+the day's search ([cert] in its finite family). Whether every such colouring *has* such a point is no longer this milestone's
+question: it is FS-127's and FS-128's (`plans/STUB-lateral-extent.md`, `plans/STUB-top-colour.md`). The configuration every
+round ended at — a boundary that is an arc of a unit circle whose centre is the other end of a unit distance — is FS-124's
+(`plans/STUB-q-ring.md`), the next milestone by the same word. **No value moved.** Where each open thread went:
+`plans/FS132-Z2-record.md` Stage 2. Open inside this milestone's Lean phase, and so not stubs: the square form of "centres
+exist" (C132-CORES-SQUARE, a gap: one comparison of the planner's route with FS132-E1's steps S5–S7, on branch `fs132-wk1`);
+the first night's exclusion on an open set (its ground there is one mind's reading of two proofs of the release as local, step
+M0; the whole-plane form is formalized first). Owed from § Named deliverables and not delivered: the nerve viewer
+(`plans/FS132-close-inventory.md` item 1).
+
 ## The mission, in plain language
 
 How many colours does the plane need so that no two points at distance exactly 1 share a colour? Since 2026-10-06 the answer is
@@ -179,6 +193,8 @@ question: can-a-triangle-ring-change-at-two-points-sixty-degrees-apart
   answered by: derivation — Ephodos
   cost: one derivation job, no search; to read: `plans/FS132-E3-derivation.md` M0–M2 and M7, `plans/FS132-E2-derivation.md` §§ one-sided pure strips, the orbit index, the stalled step; `plans/FS107-derivation.md` for W-TAN and R-CP (row 133's map form)
   hunch: it cannot — at a change on an outside-pure arc whose two neighbours also change, the point outside the unit circle whose two ring neighbours carry the labels on either side is left the third outside label (0.45)
+
+  *Dated line (2026-10-07, from FS132-E4's report, `data/fs132/reports/FS132-E4.md`; filed by FS132-Z2):* true on outer-pure ring points of a six-sector turning ring and not on inner-pure ones, where nothing is placed (C132-PLACE and the list under it, `plans/FS132-derivation.md` § 4); "on a twelve-sector ring the sides exchange roles".
   falsifier: a weak colouring by formula near the closed unit disc about a triangle centre with ring a, b, c, a, b, c in which a ring point between two sectors on an outside-pure arc has only two outside labels near it
   rank: 2
 
@@ -365,6 +381,8 @@ at every unit pair of every colouring, at every `k`, and names no ring.
   the chart, and — riding with this claim, not a claim of its own — the second round's seven-label controls (`hex7-crossings`,
   `margin-witness`, `hex7-relation`) re-run at circumradius 1/2, where no margin gives a witness. *Not posed*: that the ring point is a cyclic centre; that any pair is witnessed there; anything for an outside state
   that is not a step on the six arcs; anything at a ring point one of whose neighbours has no pure outer side.
+
+  *Dated line (2026-10-07, from FS132-E6, `plans/FS132-E6-derivation.md` § The gap in clause (ii); filed by FS132-Z2):* clause (ii) is a gap as posed — C132-LENS-II. "Pure sides are opposite at antipodes" holds one way only: a point strictly inside the unit circle about `y` is strictly outside the one about `2x − y`, and not conversely; three sets `{x, q_j}` with `|q_j − x| = 3` give six pure inner sides and no pure outer side. Derived of it: C132-LENS-FOUR and C132-LENS-GERM. Open: sixteen patterns of sides, carried by FS-135 (`plans/STUB-seed-remainder.md`). The first sentence and clause (i) are derived (C132-LENS, C132-LENS-SIDE).
 - **C132-PLACED (posed).** At the four-label ring point `y` of C132-LENS (ii): in the grammar of C132-PLACE's list, the labels
   present in each of the six wedges at `y` cut by the unit circles about `x`, `y_1` and `y_{−1}`, and which labels of `T` the
   sides at `y` allow in the lens; then, using C132-WITNESS only on wedges the list forces to be of one label, which pairs of the

@@ -55,3 +55,36 @@ G84, G85; the drafted G90 (lateral extent against gap); G54 (fall colourings); G
 Since FS131-E8 (`plans/FS131-E8-derivation.md`; [hand], one mind, kernel pending): in a saturated colouring a locally finite Σ gives a fan with end
 tangents at each of its points and finitely many interface arcs in every bounded set (FS131-E8-BRIDGE, -CLAUSE2), so C121-REGJ is its first clause —
 the question is the singular points alone, and infinitely many boundary arcs in a bounded set are a wild Σ, never a second kind of crowding.
+
+*Since FS-132 (FS132-Z2, 2026-10-07) — this stub now carries the existence question FS-132 gave up.* By Kooshi's word of
+2026-10-07 (`data/external/EXT-OAI1-request.md` § Kooshi's sixth word: "I agree with all 3", the first of the three being that
+FS-132 "stop asking whether readable meeting points must exist and deliver 'what any such point's circle forces'"; the
+coordinator's reading there: the question "stays with FS-127 and FS-128"; `plans/FS132-close-inventory.md` items 23 (b), 24,
+32 (a)), **whether every weak measurable six-colouring has a point with usable data on its unit circle is no longer FS-132's
+question.** What FS-132 derived of it (`plans/FS132-derivation.md` §§ 2, 3, 8; each [hand] or derived from [hand] entries, one mind, kernel pending):
+
+- **Centres exist with no hypothesis**: every closed disc of radius above 1 holds a cyclic centre, at every number of colours
+  (C132-CORES-FREE). A square form, side above 1, is posed by the kernel planner and entered as a gap (C132-CORES-SQUARE).
+- **Data at a centre, under a hypothesis nobody supplies at six**: on a closed disc of radius above 1 with finitely many cyclic
+  centres, one centre carries a label cycle with continua, limiting directions and the two-label exclusions (C132-EXT-DISC).
+  What its argument reads of the hypothesis is zero length of the centres and **isolation of the one essential centre**; at the
+  island colouring's accumulation centre the conclusion with its clause (4) is false, and true at the isolated ones (control
+  `hex7-islands`).
+- **Where isolation is read**: not in the exclusion's proof — that runs from any connected subset of one smoothed class's
+  superlevel set, "no hole, no exceptional set, no centre, no isolation, one label at a time" (C132-WIT-SUPER) — but in the
+  step before it, the selection of a point through which connected pieces of two smoothed classes pass and reach a common
+  second point. Existence with no hypothesis on the centres stalls there (C132-WIT-EX). Its smallest open form (O), verbatim:
+  "a weak colouring and a disc of radius above 1 in which, at every point, the graph of witnessed label pairs is a forest".
+- **Data are free where there is a margin, and do not locate a centre** (C132-WIT-MARGIN): labels whose supports keep off an
+  annulus about a point's unit circle are witnessed there by every nearby point. So the question is real only for colourings
+  with no margin. FS132-E5's question for this stub: do this project's tight seven-colourings have a disc with no margin for
+  any three labels at any point?
+- **Two inclusions, not one place** (the asking lane; `plans/FS132-close-inventory.md` item 21): a point's *transition graph*
+  is a property of every small ball about it, its *witness graph* a property of its unit circle. FS-132's exclusions read the
+  second; no entry derives circle data at a point from its small balls.
+
+The asking lane's re-aim of this stub — honest colourings; "an essential centre is isolated and the centres have zero length"
+(`plans/POROS-2026-10-07-fs132-night.md` § The ranked table, rank 4, and § Banners) — is drafted, not filed. Of FS132-E1's two
+proposals: the extraction for countable closed sets of centres was declined as a stub by the asking lane (the same record,
+§ The debts); its side question — under REG-J′, are a saturated colouring's cyclic centres locally finite, "a candidate,
+unchecked" — was not started, and belongs beside FS131-E8's line above. Grokkings: G94; proposed G96.

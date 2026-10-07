@@ -52,6 +52,30 @@ FS121-D3-EQ, -SWAP1D; FS121-NOPAR and -NOPAR-C5's GAP locations; C1's containmen
 G89 (drafted: honesty is free, binding the top colour is the content), G13 (binding is coverage; FS-121's §G miss), G82, G24/G60. Stubs: FS-116,
 FS-126, FS-127; FS-104 (`χ_CP(ℝ²)` at six).
 
+*Since FS-132 (FS132-Z2, 2026-10-07) — with FS-127, this stub now carries the existence question FS-132 gave up.* By Kooshi's
+word of 2026-10-07 (`data/external/EXT-OAI1-request.md` § Kooshi's sixth word; the coordinator's reading there: it "stays with
+FS-127 and FS-128"; `plans/FS132-close-inventory.md` item 32 (a)), whether every weak measurable six-colouring has a point with
+usable data on its unit circle is no longer FS-132's question. How the head's line of 2026-10-07 ("Whether a saturated normal
+form is on the road at all waits on FS-132's cards 1 and 2") resolved: **for the exclusions no normal form is read** — on the
+side where no boundary is a unit arc about a ring point they run for every weak measurable colouring (`plans/FS132-derivation.md` § 12) — **and for
+existence the normal form is undecided.** What FS-132 found about honesty as that normal form (its §§ 7–8; [hand], one mind):
+
+- the Grundy test's first clause tests nothing: for no order of the labels is the hexagonal seven-colouring at circumradius
+  2/5, or either slack colouring planted in it, a Grundy colouring (C132-GRUNDY7-NOT, whose *not claimed* line reads "that this
+  tells the slack colourings from the hexagonal one — it does not, and that is the finding");
+- for a suitable order *some* output of the Grundy construction is one label on the whole slack ball (C132-GRUNDY7-LOCAL); "the
+  Grundy-ization" is not one output, so C132-GRUNDY7's second clause is withdrawn as posed, and its two readings are open —
+  (G1) some output, (G2) every honest seven-colouring (`plans/FS132-E5-derivation.md` § What the second clause is, and what is
+  left of it);
+- the statement honesty would have to supply: on the unit circle about a point with a witnessed triangle, the three outside
+  labels change finitely often (C132-RING-TAME's first clause, a stall: "for three labels on a strip no rigidity is held, by the
+  release or here"; false wherever local slack exists along the strip, G95). FS132-E2's form "three labels on a strip" was
+  declined as a stub by the asking lane on the night, pending C132-GRUNDY7 (`plans/POROS-2026-10-07-fs132-night.md` § The
+  debts), which did not decide the class; it is placed here and at FS-125. FS132-E5's calibration for it, a reading with its
+  killing test: a Grundy seven-colouring with a banded pair of facing unit arcs, or its exclusion (leaning on G84).
+
+Grokkings: G89, G95, G84.
+
 ## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
 
 question: is-top-six-a-coverage-question
