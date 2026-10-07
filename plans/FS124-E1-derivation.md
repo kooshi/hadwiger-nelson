@@ -15,6 +15,9 @@ entries, **one mind, kernel pending**.*
 - **C124-RADIUS-DOWN** — [hand] over the declared outside theorem `Outside.OAI158.proper_to_borel_weak`, one mind — Stage 3, § Argument — up, down, five.
 - **C124-SHADOW-OPEN** — [hand], one mind — Stage 4, § Argument — the unit shadow of an open piece.
 - **C124-OPEN** — [hand], one mind; **C124-CENTRE**, **C124-STRADDLE**, **C124-ANTIPODE** — derived from C124-SHADOW-OPEN, one mind; **C124-COMPLETION** — derived from C124-STRADDLE — Stage 4, § Argument — the centre, the straddle, the antipode.
+- **C124-KIND** — [hand], one mind, by formula with exact margins — Stage 5, § Argument — the capped honeycomb.
+- **C124-SIX-CONES**, **C124-SIX** — derived from C124-CENTRE, one mind — Stage 5, § Argument — three half-planes. No object meets C124-SIX's hypothesis.
+- **C124-HALF**, **C124-HALF-TWO** — [hand] over the inherited C132-WIT-SIDE, one mind — Stage 5, § Argument — the half. No held object meets C124-HALF's hypothesis.
 
 ## Notation used by every entry
 
@@ -471,3 +474,145 @@ assessment's (a) — "if anything recurs it is at the ends" — is wrong beyond 
 (b), the polarity at a centre, is C124-CENTRE's *not claimed* line made positive, and is what the three held objects share.
 
 **Stage 4 — SAVED** (2026-10-07).
+
+## Stage 5 — SAVED: C124-KIND, C124-SIX, C124-HALF
+
+derivation: C124-KIND
+  statement: There is a weak measurable seven-colouring of the plane, by formula, with a tight pair (q, z) for (a, b) at which neither a nor b is present at q.
+  uses only: the hexagonal seven-colouring at circumradius 2/5 (hexagon about m(2√3/5, 0) + n(√3/5, 3/5) coloured (m + 3n) mod 7) and the cap K = {(x, y) : x > √3/5, |(x, y) − q| < 1} with q = (√3/5 − 60/61, 0), recoloured 0; the Pythagorean triple (11, 60, 61); comparisons of rationals and of √3, √21 with rationals
+  not claimed: anything at six; that a tight pair with neither label present at its centre occurs in any weak six-colouring; that the colouring is saturated or honest; that the margin is what the construction uses — it does not (the same cap on the honeycomb at circumradius 1/2 is a weak seven-colouring too)
+  argument: § Argument — the capped honeycomb
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the colouring itself: (q, z) with z = q + (1, 0) is tight for (0, 1); the tight far ends are the open arc of half-angle arcsin(11/61) ≈ 10.39° about z (196 of 3,600 directions at the reader's spread); only the label 6 is read at q, and the labels 2 and 4 at the two completions; of 200,000 sampled unit pairs none is monochromatic (control `kind-cap`)
+  prior art: partly: G95's local slack at seven (EXT-OAI2 § 4.3, islands and stripes in the hexagonal seven-colouring) is the neighbouring construction; a unit arc planted in it not found in this project's files or in print — owed beyond the plan's §PA
+  handoff: de Bruijn — only with a consumer: a calibration; the formal content is four inequalities and one inclusion
+
+derivation: C124-SIX-CONES
+  statement: In the setting of C124-SIX, there is η > 0 such that almost every point of B(q, η) with a label among a, b, a′, b′ lies in a closed set that is the union of at most four regions, each bounded near q by two unit circles through q meeting at the angle π/3, or reduced to {q}.
+  uses only: C124-CENTRE at the six pairs; that three unit vectors 120° apart sum to 0, and that every direction is within 60° of one of them
+  not claimed: that any of the four labels is present at q; that the four regions are disjoint beyond q; anything for far ends that are not 120° apart
+  argument: § Argument — three half-planes
+  verdict: derived
+  grade: derived from: C124-CENTRE
+  minds: 1
+  model: the count itself, as a pattern: over the eight sign patterns of three tight pairs 120° apart the inside label's region has angle 0° at q when the three agree and 60° when they do not (control `six-cones`); no colouring meeting C124-SIX's hypothesis is held at any number of labels
+  prior art: partly: the asking lane's count (`tools/fs124_p1_cones.py`; `plans/POROS-2026-10-07-fs124-question.md` § 1.3), there with the step from discs to directions asserted; in the map class the cone calculus of FS-116 (G91); not searched in print — owed
+  handoff: none — subsumed by C124-SIX, which crosses
+
+derivation: C124-SIX
+  statement: Let k ≥ 4, U an open set containing the closed unit disc about q, c a weak k-colouring of U, ψ an angle, z_j = q + e(ψ + jπ/3) for j = 0, …, 5, and a, b, a′, b′ four distinct labels such that for j = 0, 2, 4 the pair (q, z_j) is tight for (a, b) or for (b, a), and for j = 1, 3, 5 the pair (q, z_j) is tight for (a′, b′) or for (b′, a′). Then a label other than a, b, a′, b′ is present at q.
+  uses only: C124-SIX-CONES; that a direction strictly outside a region's tangent cone leaves the region at once or for all small radii; that finitely many labels share a set of positive measure in every ball
+  not claimed: that the configuration exists at any k — no held object meets the hypothesis, and none was built; which label the fifth one is, or that five suffice; anything when the six pairs use three or more label pairs (R7's centres: three windows, three disjoint pairs, no orbit of six tight far ends)
+  argument: § Argument — three half-planes
+  verdict: derived
+  grade: derived from: C124-SIX-CONES
+  minds: 1
+  model: none satisfying every hypothesis is known at any number of labels; the statement may hold of an empty class. What is exhibited is the count (control `six-cones`: four labels cover at most 240° of 360°), and its failure when the far ends are 90° apart (the fault: 360°)
+  prior art: partly: as C124-SIX-CONES; the statement is the asking lane's hunch `four-labels-cannot-centre-six-tight-pairs`
+  handoff: de Bruijn — after C124-CENTRE: three linear inequalities per label and a positive-measure cone; read the formal statement back against "present at q"
+
+derivation: C124-HALF
+  statement: In the setting of C132-COMP-SHARP (plans/FS132-derivation.md § 4), suppose exactly one of the six sets, K_0, a set of x with labels t_0, t_1, is contained in the unit circle about the common unit point w, and at least two of the three sets of y have a point strictly inside the unit circle about w. Then, after exchanging the names t_0, t_1 if need be, there is η > 0 such that almost every point of B(w, η) outside the unit circle about y has the label t_1 if it lies inside the unit circle about x and the label t_0 if it lies outside it.
+  uses only: C132-WIT-SIDE (`plans/FS132-derivation.md` § 2; [hand], one mind, inherited — statement read, argument not) at w for x's sets K_1, K_2 and for two sets of y; that two edges of a triangle carry its three labels; that the unit circles about x and y cross at w (0 < |x − y| < 2), so each of the four quadrants at w is a non-empty open set; that six labels are all the labels
+  not claimed: that a label of y is present at w; anything inside the unit circle about y; that the class is inhabited at six (no held object meets the hypothesis); that (x, w) is a tight pair — it is tight on one side of the unit circle about y only
+  argument: § Argument — the half
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none is known: in fragment T2 three of the six sets lie on that circle and in the Searcher's kept model two (the card's reading, `plans/STUB-q-ring.md` § The first claims; not re-read by me). What is exhibited is the count: of the nine side patterns of K_1 and K_2 two leave a label in both quadrants outside S(y), with one label each (control `half-sides`)
+  prior art: partly: in the map class row 135's rhombus lemma (FS112-N3-COR3); in measure it is C132-CROSS's count run with one set on the circle, posed as C132-ARC and by the asking lane; not searched in print — owed
+  handoff: de Bruijn — after C132-WIT-SIDE's module: a case split on the sides of two sets
+
+derivation: C124-HALF-TWO
+  statement: In the setting of C132-COMP-SHARP, if exactly K_0 and one set K′_0 of y, with labels t′_0, t′_1, are contained in the unit circle about w, x's two other sets have points strictly on opposite sides of that circle, and y's two other sets have points strictly on opposite sides of that circle, then almost every point near w has one of the four labels t_0, t_1, t′_0, t′_1.
+  uses only: C132-WIT-SIDE at w for the four other sets; that six labels are all the labels
+  not claimed: which of the four labels lies in which quadrant beyond C124-HALF's reading on each side; that any of the four is present at w; that K_0 and K′_0 are tight arcs
+  argument: § Argument — the half
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the card names the Searcher's kept model at w = y_1 (labels 1234, the two third labels absent; control `kept-model` of `plans/FS132-derivation.md` § 2 prints those labels); its opposite-sides hypothesis was not read off the model by me — owed
+  prior art: partly: as C124-HALF
+  handoff: none — subsumed by C124-HALF's module (the same case split)
+
+### Argument — the capped honeycomb
+
+Let `r = 2/5`, `ap = √3 r/2 = √3/5` (the hexagons' inradius), `H(m, n)` the closed hexagon about `m(2ap, 0) + n(ap, 3r/2)`, and
+`d = 60/61`, `s = 11/61`, `h = 1/61` (`d² + s² = 1`). The cap `K` lies beyond the edge `x = ap`, `|y| ≤ r/2` of `H(0, 0)`: its
+chord has half-length `s < 1/5 = r/2` and its height is `h`; so `K ⊂ H(1, 0)`, of colour 1. Recolour `K` with 0.
+*Colour 0 stays proper.* For a vertex `P` of `H(0, 0)` the vector `q − P` has negative first coordinate (the largest is
+`2ap − d < 0`, as `2√3/5 < 60/61`), so on the arc `x = q + e(θ)`, `|θ| ≤ arcsin s`, the distance `|x − P|` is largest at an end
+of the arc — a point of the chord, in `H(0, 0)`. Distance being convex, `H(0, 0) ∪ K` has the hexagon's diameter, `4/5 < 1`.
+Two hexagons of one colour have centres at least `√21 r` apart, so every other hexagon of colour 0 is farther than
+`√21 r − 2r − h` from `H(0, 0) ∪ K`, and that exceeds 1 (`21 · 4/25 > (554/305)²`). The other classes only shrink.
+*The pair.* `z = q + (1, 0) = (ap + h, 0)`. For `ρ ≤ h`, `B(z, ρ) ∩ B(q, 1) ⊂ K` (label 0) and `B(z, ρ) ∖ B̄(q, 1)` lies in the
+interior of `H(1, 0)` off `K̄` (label 1). *The centre.* `q` is at distance `3ap − d ≈ 0.056 < ap` from the centre of
+`H(−1, 0)`, of colour 6: only 6 is present at `q`. ∎ At `r = 1/2` every line holds with "diameter 1", and two points of a hexagon
+at distance exactly 1 are opposite vertices: a null set of pairs. So the cap is a weak seven-colouring there too.
+
+### Argument — three half-planes
+
+Take `η` at most the six radii of C124-CENTRE and put `e_j = z_j − q`. For a label `ℓ` of the pair at `z_j`, almost every point
+`q + δ` of `B(q, η)` with label `ℓ` has `2δ·e_j ≥ |δ|²` if `ℓ` is the inside label there (`|δ − e_j| ≤ 1`) and `2δ·e_j ≤ |δ|²` if
+it is the outside label. Fix `ℓ = a`; `j` runs over `0, 2, 4` and `e_0 + e_2 + e_4 = 0`. *Inside at all three*: adding,
+`0 ≥ 3|δ|²`, so `δ = 0`. *Outside at all three*: some `e_j` is within 60° of `δ`, so `2δ·e_j ≥ |δ| > |δ|²` for `0 < |δ| < 1`:
+again `δ = 0`. *Inside at two, `e_i`, `e_j`*: the region lies in `{δ·e_i ≥ 0, δ·e_j ≥ 0}` to first order — bounded by the unit
+circles about `z_i` and `z_j`, which meet at `q` at the angle `π/3` — and a direction with `δ·e_i < 0` leaves it at once.
+*Inside at one, `e_l`, outside at `e_i`, `e_j`*: the region lies between the unit circles about `z_i` and `z_j` on the side
+`{δ·e_i ≤ 0, δ·e_j ≤ 0}` to first order, again of angle `π/3`, and a direction with `δ·e_i > 0` leaves it for all radii below
+`2 δ̂·e_i`. The same for `b`, and for `a′`, `b′` with `j = 1, 3, 5`. So the four regions have tangent cones of total angle at
+most `4π/3`; a closed cone of directions of positive angle lies strictly outside all four, and on it, within a small ball, almost
+every point has a label outside `{a, b, a′, b′}`. That set has positive measure in every ball about `q`; the labels being
+finitely many, one of them has positive measure in every ball about `q`. ∎
+
+### Argument — the half
+
+Outside `S(y)` near `w`: each of the two sets of `y` with a point strictly inside `S(w)` excludes its two labels there
+(C132-WIT-SIDE with centre `y`), and two edges of a triangle carry its three labels; so almost every point there has a label
+among `t_0, t_1, t_2`. `K_1` (labels `t_1, t_2`) and `K_2` (labels `t_2, t_0`) are not contained in `S(w)`. A set with a point
+strictly inside `S(w)` excludes its labels outside `S(x)` near `w`; with a point strictly outside, inside `S(x)`. If `K_1` and
+`K_2` both had a point strictly inside, all of `t_0, t_1, t_2` would be excluded on the quadrant outside `S(x)` and outside
+`S(y)`, a non-empty open set: impossible. Likewise both outside. A set with points on both sides excludes its labels on both
+quadrants, and then the other set empties one of them. So one of them lies in the closed disc with a point strictly inside and
+the other in the closed complement with a point strictly outside. If it is `K_1` inside: outside `S(x)` only `t_0` is left,
+inside `S(x)` only `t_1`. If it is `K_2`: the same with the names exchanged. ∎ *Two sets.* `x`'s two other sets on opposite sides
+exclude `t_2` on both sides of `S(x)` near `w`, `y`'s exclude `t′_2` on both sides of `S(y)`: four labels are left. ∎
+
+control: kind-cap
+  of: C124-KIND — the capped honeycomb at circumradius 2/5 and at 1/2: the four exact comparisons, the tight pair and its window read by formula, the labels at the centre and at the completions, sampled unit pairs; the fault is circumradius 3/5 (tiles of diameter 6/5: not a weak colouring)
+  run: python3 ../data/fs124/e1/tight_checks.py kind
+  expect: cap:height=1/61,half-chord=11/61(2*asin=20.78deg) ; circumradius=2/5: cap-inside-edge=True enlarged-tile-diameter=4/5 weakly-proper-by-margins=True centre-inside-opposite-tile=True tight-pair=(0, 1) tight-directions=196/3600 labels-at-centre=[6] labels-at-completions=[2, 4] monochromatic-of-200000-unit-pairs=0 ; circumradius=1/2: cap-inside-edge=True enlarged-tile-diameter=1 weakly-proper-by-margins=True centre-inside-opposite-tile=True tight-pair=(0, 1) tight-directions=196/3600 labels-at-centre=[6] labels-at-completions=[2, 4] monochromatic-of-200000-unit-pairs=0
+  fault: python3 ../data/fs124/e1/tight_checks.py kind --fault
+
+control: six-cones
+  of: C124-SIX-CONES — the angle at q of the region left to the inside label by three tight pairs 120° apart, over the eight sign patterns, read on the true regions at radius 10⁻⁴; the fault puts the far ends 90° apart
+  run: python3 ../data/fs124/e1/tight_checks.py cones
+  expect: angle-between-far-ends=120 equal-signs=[0, 0] mixed-signs-widths=[60] most-covered-by-two-pairs=240 of 360
+  fault: python3 ../data/fs124/e1/tight_checks.py cones --fault
+
+control: half-sides
+  of: C124-HALF — the nine side patterns of x's two other sets (strictly inside, strictly outside, both) against the labels left on the two quadrants outside S(y); the fault leaves one label of y there (only one of y's sets with a point strictly inside S(w))
+  run: python3 ../data/fs124/e1/tight_checks.py half
+  expect: side-patterns=9 consistent=2 K1=in,K2=out:inside-x=t1;outside-x=t0 K1=out,K2=in:inside-x=t0;outside-x=t1
+  fault: python3 ../data/fs124/e1/tight_checks.py half --fault
+
+*A wording change in C124-HALF-TWO, for the claim list*: the card's "and `y`'s two other sets likewise" is written out ("have points
+strictly on opposite sides of that circle") — the same hypothesis; the gate reads "likewise" as a scope rider.
+
+**Read against the card.** *C124-KIND*: true, and for a reason the card's control did not expect — "the same arc at circumradius
+`1/2` must be refused by the check" is false of the object: there the cap is still a weak seven-colouring. The honeycomb at 1/2
+is tight at its vertices only; its edges have room. So "of kind both" is a hypothesis at seven even on that model, and R7 is the
+model with no room. *C124-SIX*: derived as posed, and it says less than its wording in one respect — its class has no known
+member at any number of labels, so it excludes nothing held; a member at seven or more by formula, or a first-order reason none
+exists, is owed (the report's construction request). *C124-HALF*: derived as posed; its conclusion is half a tight pair `(x, w)`
+— tight on the side of `S(y)` away from `y` — reached from exclusion sets with no open piece assumed; C124-SHADOW-OPEN then
+applies to the two open quadrant pieces it produces. No held object meets its hypothesis.
+
+**Predictions scored.** P4 — met (and at 1/2 too, against the card's control). P5 — met on both parts (derived as posed; says
+less than its wording: an uninhabited class). P6 — met. P7 — met as registered (C124-SIX is a first-order statement that
+forbids six unit arcs about ring points at a four-label centre), with the caution that it bounds a configuration nobody has
+exhibited: G97's line is crossed by a statement, not yet by an object.
+
+**Stage 5 — SAVED** (2026-10-07).
