@@ -1307,3 +1307,29 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     on Mathlib types scoped or justified. (c) The two skeleton modules (the index lemmas; the centres) stay on the
     planner's branch for their own jobs.
 
+47. **FS132-I4 done (590k and 90 minutes by the task notice): the exclusion is whole on its branch — every step of the hand
+    argument in the kernel, on the standard three axioms, committed and pushed** (implementer; record
+    `plans/FS132-I4-implementation.md` Stages 1–7 on branch `fs132-wi4`, tip `7e4e5d2a`, working tree clean; its report is
+    its hand-back). **Its job in sum**: the join; the sixteen leaves of its brief; by Amendment 2 the eighteen of the chart's
+    and the tips' modules — **58 theorems, 34 leaves and 24 helpers, 1,131 lines, no statement changed beyond three unused
+    hypotheses dropped by permission**. **On the final tree**: build exit 0 with 19 `sorry` warnings, all in the two
+    skeleton modules of other claims; 65 of 65 records on the standard three with three controls and eight plants refused;
+    architecture check, duplicate-name check (1,868 modules) and the guarded lint pass; **the full gate not run**. **Read
+    against**: the derivation file's § 1 at the whole plane — "the open-set form is not formalized". **For the landing**:
+    two modules that state one identity under two names; how seven conditions on parameters are declared to the
+    assumptions step; six architecture rows and one module docstring still naming the planner's branch and "sorry until
+    implemented"; three groups of declarations in no audit block; its drafts D1–D7. **My receipt**: the tip is on `origin`
+    and the working tree is clean (read by me); the rest as item 46's. **Credit**: the theorem brought to the kernel in one
+    job from a merge of three colleagues' branches; the hardest leaf by a route of its own; every dropped hypothesis with
+    its call site; a question asked before a fence was crossed.
+    **A slip of mine, in calibration**: I set its stopping rule at about 420k by its own count, reckoning its count at
+    nine-tenths of the harness's, as the three implementers before it had run; its count ran at two-thirds, and it handed
+    back at 590k by the harness — past the line at which this project replaces an agent. Nothing was lost; the rule for
+    the next amendment of this kind is a stage count or a leaf count, which an agent can read, and not a token figure it
+    cannot.
+    **Its held point, ruled**: **the exclusion's modules land without the two skeleton modules** (nothing with a `sorry`
+    reaches `main`; no module but the root file imports them — checked by me) — alternative: staff the two skeletons first
+    and land the whole branch; rejected, they are other claims (the index lemmas; the centres) and the exclusion is the
+    statement Kooshi put first; confidence high. **FS132-L2, the landing, is briefed and takes its slot** (worktree and
+    branch `fs132-wl2`, cut by me from that tip, build copied).
+
