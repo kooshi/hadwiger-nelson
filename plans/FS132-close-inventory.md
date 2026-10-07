@@ -1377,3 +1377,39 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     say it yet**: the filing follows its hand-back (counts, row 155's grade, the theorem record's dated lines). My one
     unpushed commit was rebased onto the landed line and pushed; nothing was forced.
 
+51. **FS132-L2 done (527k and 87 minutes by the task notice), and its filing is made (16:00 UTC; commit `783e7bdb`): the first
+    night's exclusion is held, and the front page says so** (landing implementer; record `plans/FS132-L2-landing.md`; its
+    report is its hand-back; `origin/main` fast-forwarded four times, never forced). **The gate, green on its first full
+    pass**, on commit `b46a9d57`. **The five theorems**, each read aloud against the row or the entry it stands for and
+    each on the standard three: the orbit form over four points and over four compact sets, the ring form over four
+    compact sets and — added under Amendment 1 — over four points, and the two-pair ring. **What the Lean statements do
+    not say that the row does**: the open-set form; the clause at an extracted centre; and "measurable" is Borel
+    measurability in every statement. **Its other results**: the two skeleton modules cut; the licence text beside the
+    ported modules, byte-identical, written and compared by the generator; all three instances on Mathlib's types scoped;
+    both stored-term comparisons unchanged on the joined tree and on the gated commit; **377 declarations registered —
+    115 had been in no audit block**, more than my brief's three groups; one of two names for one identity removed by an
+    import edit; three conditions declared to the assumptions step. **Its tool findings**: the vacuity scan tracks no
+    carrier of these modules — 447 declarations entered with no site, "its silence is not evidence", the models named by
+    hand; the notes check reads nothing of them. **Open gate items it names**: no kernel model of the ring hypothesis (in
+    words only); no joint kernel model of the hypotheses short of one clause; a docstring note resting on a [tools]
+    control; the import module's header not naming the licence. **My receipt**: item 50's; **the three digests run by me
+    against FS132-L1's receipts — each "match"** (axioms: clean, purchases and imported; vacuity: 9 of 9 in the baseline's
+    header and in the front page; assumptions: 9 of 9 twice); **its drafts read whole by me and filed by script, each slot
+    asserted once**: the audit's sentence, the vacuity counts, the sentence on the ported lemmas, the Frontier's sentence
+    on the Lean phase (the same in the stub list), ledger row 155's grade and three of its clauses, two dated paragraphs
+    in the theorem record (its gate after: exit 0, 9 warnings), `LEAN.md` (a bullet on porting an outside Lean proof,
+    four on searching, a sentence on the scan's silence), the bibliography's row, the atlas node's grade (checker 220 of
+    220, rebuilt locally, not published); the gate-change entry and two superseded counts. Fact audit against `8afe2fde`:
+    passed after five superseded tokens were allow-listed with reasons. **The next filing's fact-audit base is
+    `783e7bdb`; the next landing's previous receipts are `data/fs132/l2/gate/receipt-{axioms,vacuity,assumptions}-final.log`.**
+    **Credit**: a gate green at the first pass on four colleagues' joined work; a read-aloud that found the row and the
+    theorem were over different objects; registrations counted from the kernel's own list, which found 115 where the
+    brief knew of three groups; the scan's silence reported as silence.
+    **Its held points, ruled.** (a) **The import module's header gets its licence sentence at the next landing** (the
+    radius module's), whose build pays for the rebuild. (b) **The Frontier says "not Closed"**, as drafted: the
+    milestone's module is not whole. (c) **The main checkout's build is behind**: worktree builds are copied from
+    `fs132-wl2`'s tree from now on. (d) **A kernel model of the four-point hypothesis** is the first statement of the
+    list already fixed for this milestone's next planner (`data/fs132/claims-K1.md`, the margin statement); a kernel
+    model of the ring hypothesis is added to that planner's brief as a request. **The milestone stays Derived**: Closed
+    waits on the index lemmas, the centres and the seven statements of that list.
+
