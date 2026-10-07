@@ -72,7 +72,7 @@ readings, and card 3 (must a centre that is not a triangle exist). What is forma
 exploration reports.
 
 1. ~~Rule FS132-F1's stops and merge its branch~~ — done (§ 1 line 4).
-1a. **FS-132's split, on FS132-E1's first two messages** (§ 2): two `ephodos` briefs, card 1's readings and card 3 — the only launches that do not wait on Kooshi.
+1a. **FS-132's split** (§ 2) — the only launches that do not wait on Kooshi. **FS132-E1's first message is in and ruled** (FS-132 inventory item 2: the two readings fixed in `data/fs132/claims.md`, with C132-M-EMPTY and C132-M-CV named). **At its second message (C132-EXT's verdict): run `python3 data/fs131/briefs/scripts/mk-fs132-e2.py`** (it asserts C132-EXT's entry is saved), gate the brief it writes (`data/fs132/briefs/FS132-E2-card-three.md`), and launch it (`ephodos`) as the second Opus slot — card 3, must a centre that is not a triangle exist. Card 1's readings stay with FS132-E1 while its context carries them; a successor's brief for them is written at its hand-back, from its record.
 2. **The import's landing, FS132-L1** (`debruijn-implementer`, `model: "opus"`; rulings 629 (b)–(d)) — **launch only after
    FS132-F1's merge is on `main`**: run `python3 data/fs131/briefs/scripts/mk-fs132-l1.py` (it asserts the front page says six, so
    it fails before the merge), gate the brief it writes under `data/fs132/briefs/`, launch. It works in the import's own tree
