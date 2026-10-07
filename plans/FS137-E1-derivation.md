@@ -456,3 +456,50 @@ the same with the part of `B(w, η_w)` outside `S(x)`, connected for small `η_w
 mind; kernel pending.
 
 ## Stage 6 — SAVED
+
+## Stage 7 — SAVED: claim 5, C137-MEET — derived; a rewording of C136-TABLE
+
+**Verdict: derived — and it is C136-TABLE in the card's words, no more.** Nothing is new but the wording and the
+read-out below. *Reads* kept corners; *forces* nothing; *excludes* only what the table excludes. **On R7, cell by cell**
+(the card's control, run): at the 108 common unit points of the 54 pairs of lattice points less than 2 apart, each
+member lacking one label and the two lacking different ones, all 432 cells keep a label, and every cell is saved by
+one of the three alternatives — the label the first lacks pure for the second in 45 cells alone, the label the second
+lacks pure for the first in 63 alone, one label pure for both in 108 alone, and by two or three of them in the other
+216. **On the held stop**: at `(√3, 0)` the cell outside both circles of `q₂` and `q₁` is empty and the three others
+keep `4`, `2, 3, 4` and `2`; at the origin the cell inside both keeps the one label `1`, pure for both (the tile both
+carry) — the card's reading, confirmed exactly. The card's further sentence, that neither outer arc lies whole in any
+domain, is C136-STOP-GERMS-RADIUS's and is not re-derived.
+
+derivation: C137-MEET
+  statement: About weak colourings that have the named corners; no weak six-colouring is known to have one. Let c be a weak k-colouring of an open set U, w a point of U, x_1, …, x_n (n ≥ 1) distinct points with |x_i − w| = 1, F_i a finite set of labelled corners at x_i that c has, and σ_i a side of S(x_i), inside or outside. Let Π_i be the set of the labels that are labels of no corner of F_i, together with the labels of F_i that are inner-pure at w if σ_i is inside and outer-pure at w if σ_i is outside. Then there is η > 0 such that almost every point of B(w, η) lying on the side σ_i of S(x_i) for every i has a label in Π_1 ∩ … ∩ Π_n. So if n = 2, the labels of F_1 are all the labels but a, those of F_2 all the labels but b, a ≠ b, and for every η > 0 some point of B(w, η) lies on the side σ_1 of S(x_1) and on the side σ_2 of S(x_2), then a is in Π_2, or b is in Π_1, or some label of both F_1 and F_2 is in Π_1 and in Π_2.
+  uses only: C136-TABLE (`plans/FS136-derivation.md` § 1; [hand], one mind; kernel-checked on a branch — inherited, read whole) for the members x_i with the parts of the corners of F_i as their families; that a non-empty open set has positive measure; that a ≠ b
+  not claimed: anything beyond C136-TABLE, of which this is a rewording in the words of the card — no new mathematics; that a label of Π_1 ∩ … ∩ Π_n is present; that a non-empty intersection gives a colouring; that the three alternatives exclude one another; the card's reading that "neither outer arc lies whole in any domain" (it is C136-STOP-GERMS-RADIUS's, not re-derived here)
+  argument: § Argument — the table, cell by cell
+  verdict: derived
+  grade: derived from: C136-TABLE
+  minds: 1
+  model: R7 at seven, any two lattice points less than 2 apart and either of their common unit points: each lacks one label, the two lack different labels, and each of the four cells keeps a label by one of the three alternatives (control `meet-r7`: 432 cells, none empty, none without an alternative)
+  prior art: known: C136-TABLE (one mind; for maps FS110-N-SEAM (b), by that entry's line) — this is its conclusion read on a cell, in the card's words; the second sentence is set algebra
+  handoff: none — subsumed by C136-TABLE, which crosses; the kernel lane's cell form of C136-FORCED ("for the set C of points on the chosen side of each S(x_i)") is this statement's first sentence already
+
+control: meet-r7
+  of: C137-MEET — at seven, on R7, exact: the 54 pairs of lattice points less than 2 apart in a window, their 108 common unit points, the 432 cells; each member lacks one label and the two lack different labels (asserted); for each cell, which of the three alternatives leaves it a label — the first's missing label pure for the second (a-pure-for-y), the second's for the first (b-pure-for-x), one label pure for both — with none = cells that keep a label by no alternative. Then the held stop in the same words: FS114-Y2-BOWTIE's q₂ and q₁ at (√3, 0) and at the origin. The fault is the engine's planted bar
+  run: python3 ../data/fs137/e1/budget.py meet
+  expect: r7 cells: pairs=54 points=108 cells=432 empty=0 none=0 | saved by: a-pure-for-y=45 a-pure-for-y+b-pure-for-x+one-label-pure-for-both=108 a-pure-for-y+one-label-pure-for-both=63 b-pure-for-x=63 b-pure-for-x+one-label-pure-for-both=45 one-label-pure-for-both=108
+    bowtie at (sqrt3,0) (q2 lacks [4], q1 lacks [2]; sides q2/q1): out/in=4:a-pure-for-y in/in=2:b-pure-for-x,3:both,4:a-pure-for-y in/out=2:b-pure-for-x out/out=EMPTY
+    bowtie at origin (q2 lacks [4], q1 lacks [2]; sides q2/q1): out/in=2:b-pure-for-x out/out=2:b-pure-for-x,3:both,4:a-pure-for-y in/out=4:a-pure-for-y in/in=1:both
+  fault: python3 ../data/fs137/e1/budget.py meet --fault=bar
+
+### Argument — the table, cell by cell
+
+C136-TABLE for the members `x_1, …, x_n`, the family at `x_i` being the parts of the corners of `F_i` that `c` has, gives
+`η > 0` such that almost every point `z` of `B(w, η)` has a label `a` with: for every `i` such that `a` is a label of
+`F_i`, `a` is inner-pure at `w` for `F_i` if `|z − x_i| < 1` and outer-pure if `|z − x_i| > 1`. If `z` is on the side `σ_i`
+of `S(x_i)`, that says `a` is in `Π_i`, for every `i`. For `n = 2`: the set of points of `B(w, η)` on the two sides is
+open and by hypothesis not empty, so some label lies in `Π_1 ∩ Π_2`. `Π_1` is `a` together with labels of `F_1`; an
+element of `Π_1 ∩ Π_2` is `a` (then `a` is in `Π_2`), or it is `b` (then `b` is in `Π_1`), or it is a label of `F_1`
+other than `b`, in `Π_2`, hence a label of `F_2` pure on its side there. ∎
+
+**Theorems this stage proved**: C137-MEET — derived from C136-TABLE (inherited), one mind; no new mathematics.
+
+## Stage 7 — SAVED
