@@ -8899,3 +8899,38 @@ reason by the close.*
      last the rest of the week's plan. Staffing is his; this is under his cap, and he is told. (d) **The front-page
      filing (FS132-F1) finishes**: it is bookkeeping on a half slot, and the exploration's agents read what it
      files. (e) His words go to FS-132's deriver by message, verbatim, with their source.
+
+631. **FS132-F1 back at its Stage 6: the front page after the outside release is filed on its branch, verbatim from the four lanes' drafts, with every unit it would have had to decide left as a stop — ruled by amendment, the Clerk resumed for it** (clerk, Sonnet; 326k and 16 minutes by the task notice; branch `fs132-filing`, six commits to `7167ec39`; record `data/fs132/f1/README.md` and report `data/fs132/reports/FS132-F1.md` there; its scripts assert each replaced string once).
+     **What it filed**: `CLAUDE.md` 52,599 → 55,413 bytes (the reading's units 1–10, the asking lane's top three and
+     open-milestones paragraph, merges M1–M10); `LEDGER.md` rows 33, 107, 120, 125, 128–132, 140, 154 and the claim
+     list's two lines; G93–G95 (the file at 173,804 bytes); eight instances and the sweep's; the bibliography (the
+     release's cells, sixteen § C rows, one row amended); `plans/FRONTIER-STUBS.md` with 72 ranked rows and three
+     moved to the closed list; fourteen banners and three bearing lines; the atlas re-pointed (30 failing quotations
+     to 0, two of them failing on `main` before it) and rebuilt, published nowhere. **Its gates**: the fact audit
+     exit 1 on 21 tokens it rightly did not allow-list; `--dupes`, sizes, the module map and the identities check
+     green; the bibliography audit exit 1 on four keys. **No filed sentence says the library holds six.**
+     **My receipt**: the branch's `CLAUDE.md` diff read whole, word by word — every hunk is a unit of the manifest or
+     one of M1–M10; row 33's sentence, G95's three "local slack" edits and its gloss, the first three and last two
+     ranked rows with the count (72, by my own script), and one banner read on the branch. **Not checked by me**: the
+     other ledger rows, the instances, the § C rows, the ranked rows 4–70, the atlas.
+     **Credit**: twenty-one lost tokens each traced to the draft that removed it and to where it still lives; eight
+     rows whose verdict was "unchanged" with a clause left alone and asked about; the disagreement between two of my
+     own merges found (M18 shortens two stub titles whose ranked rows I had told it to keep as filed); the atlas's
+     fourteen stale nodes listed and not edited.
+     **Rulings** (the brief's amendment, R1–R6, is their text). (a) **The 21 tokens are allow-listed**, each with
+     the file that still holds it. Alternative: restore each to the front page. Why not: each fell with a sentence a
+     lane's draft or a ruled merge replaced, and none is a fact the front page still asserts. Confidence: high. (b)
+     **The three stops**: the Searcher's line is appended to FS-123's solver cell; five of the eight "unchanged with
+     a clause" rows get their clause (FS-101, FS-96, FS-78, FS-42, FS-43), three get nothing; ranks 7 and 11 take
+     the asking lane's printed names — **a slip of my manifest**, which said "the row as filed" where the draft
+     prints a new name. (c) **The bibliography audit's four keys**: two alternate spellings and one arXiv number
+     recorded in the section for retired and alternate keys; `[Author2024]`, a placeholder word of mine in an
+     inventory line and in this brief, entered in the audit's table of non-keys. (d) **The grade word of ruling 620
+     (b) stands unused by the filed drafts** (they say "[external: … kernel-checked in its own library …]"); the two
+     open milestones' claim lists use it, and the import's rows will. Alternative: rewrite the drafts' brackets.
+     Why not: verbatim. Confidence: medium — the two forms are unified at the import's landing. (e) **The atlas is
+     stale on fourteen nodes and six routes — it still draws five as a live answer.** Its node edits need a design
+     draft no lane has made; owed, with the Clerk's list as its input; the page is local only. (f) **After the
+     amendment's commit: I merge the branch as one commit, re-run the two audits on `main`, tell FS-132's deriver
+     the front page is current on disk, and file FS-133's drafts** (FS-133 inventory item 3 (b)) — the merged
+     page says FS-133 is "Opened … its unchecked step first", stale by an hour.
