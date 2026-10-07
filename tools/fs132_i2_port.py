@@ -21,6 +21,11 @@ What this script changes in the copied text, and nothing else:
 EXTRA lists declarations brought in although no stored term of the cone names them (a name a tactic script needs),
 each with its reason.
 
+Extended by FS132-L2 (the landing, 2026-10-07), in one place: the release's licence text travels with the ported
+modules — the script writes a byte-identical copy of the clone's `LICENSE` beside them (`Outside/OAIMath2026-LICENSE.txt`),
+every generated header names it, `--check` compares the two files byte for byte, and `--self-test` plants a changed
+byte and an absent copy.  No declaration, statement or proof text moved.
+
 Usage:
   tools/fs132_i2_port.py                 write the modules
   tools/fs132_i2_port.py --check         regenerate in memory, compare with the files (and run FS132-K1's check of
@@ -505,8 +510,9 @@ def render(name, module, what, imports, p, patches=None, extra=None) -> str:
     o.append("do not edit by hand; rerun the script.**")
     o.append("")
     o.append("**Licence and notice of change.** The source is licensed under the Apache License, Version 2.0 (`LICENSE` at the")
-    o.append("root of the release; http://www.apache.org/licenses/LICENSE-2.0). **This file is a changed copy of part of that")
-    o.append("file.** The changes, all of them:")
+    o.append("root of the release; http://www.apache.org/licenses/LICENSE-2.0); a byte-identical copy of that licence text is")
+    o.append(f"beside this file, `Outside/{LICENCE_NAME}` (this script's `--check` compares the two). **This file is a")
+    o.append(f"changed copy of part of `{name}`.** The changes, all of them:")
     o.append("")
     o.append(f"1. *A selection.* Of the file's {p['total']} declarations, {len(p['copied'])} are copied here ({ncopy} of its")
     o.append(f"   {p['nlines']} lines) — those that the proofs of `palette_transfer_pair`, `palette_sixty_disjoint`,")
@@ -601,6 +607,32 @@ def generate(cone_text=None, patches=None, extra=None, clone=CLONE):
             for name, module, what, imports in FILES}, p
 
 
+# FS132-L2 (the landing): the release's licence text travels with the ported modules (Apache-2.0 § 4 (a)) — a
+# byte-identical copy beside them, written by this script and compared by `--check`.
+LICENCE_NAME = "OAIMath2026-LICENSE.txt"
+LICENCE_SRC = "LICENSE"
+
+
+def licence_check(outdir, clone, quiet=False) -> int:
+    """0 when `outdir/LICENCE_NAME` holds the bytes of the clone's `LICENSE`; 1 when it is absent or differs."""
+    src = pathlib.Path(clone) / LICENCE_SRC
+    dst = pathlib.Path(outdir) / LICENCE_NAME
+    if not src.exists():
+        if not quiet:
+            print(f"FAIL: the release's {src} is absent")
+        return 1
+    want = src.read_bytes()
+    cur = dst.read_bytes() if dst.exists() else None
+    if cur != want:
+        if not quiet:
+            print(f"FAIL: {dst.name} " + ("is absent" if cur is None else "differs from the release's LICENSE"))
+        return 1
+    if not quiet:
+        print(f"OK: {dst.name} is the release's LICENSE byte for byte, {len(want)} bytes, "
+              f"sha256 {hashlib.sha256(want).hexdigest()[:16]}")
+    return 0
+
+
 AXIOMS = ROOT / "scripts/Axioms.lean"
 AX_BEGIN = "/-! ## FS132-I2 — the port of `[OAIMath2026]` family 158"
 AX_END = "-- FS132-I2: end of the block"
@@ -649,6 +681,7 @@ def check(outdir=OUTDIR, cone_text=None, patches=None, extra=None, clone=CLONE, 
         elif not quiet:
             print(f"OK: {path.name} is the generated text, {text.count(chr(10))} lines, "
                   f"sha256 {hashlib.sha256(text.encode()).hexdigest()[:16]}")
+    bad += licence_check(outdir, clone, quiet)
     return 1 if bad else 0
 
 
@@ -672,6 +705,7 @@ def self_test() -> int:
         td = pathlib.Path(td)
         for module, text in texts.items():
             (td / f"{module}.lean").write_text(text)
+        (td / LICENCE_NAME).write_bytes((CLONE / LICENCE_SRC).read_bytes())
         if check(outdir=td, quiet=True) != 0:
             print("SELF-TEST FAILED: the scratch copy does not pass unplanted")
             return 1
@@ -721,6 +755,17 @@ def self_test() -> int:
         print(f"partner 'a patch into a proof': generation {'ACCEPTED' if gen_ok else 'REFUSED'}, files then "
               f"{'DIFFER' if rc else 'AGREE'}")
         ok = ok and gen_ok and rc != 0
+        # 10–11 (FS132-L2). the licence copy: one byte changed; absent
+        lic = td / LICENCE_NAME
+        b = lic.read_bytes()
+        lic.write_bytes(b[:100] + bytes([b[100] ^ 1]) + b[101:])
+        expect("the licence copy changed by one byte", check(outdir=td, quiet=True))
+        lic.unlink()
+        expect("the licence copy absent", check(outdir=td, quiet=True))
+        lic.write_bytes(b)
+        if check(outdir=td, quiet=True) != 0:
+            print("SELF-TEST FAILED: the scratch copy does not pass after the licence plants were undone")
+            return 1
         # 9. the clone at another commit
         clone2 = td / "clone"
         subprocess.run(["git", "init", "-q", str(clone2)], check=True)
@@ -728,7 +773,7 @@ def self_test() -> int:
                         "--allow-empty", "-m", "x"], check=True)
         expect("the clone at another commit", check(outdir=td, clone=clone2, quiet=True))
         shutil.rmtree(clone2)
-    print(f"SELF-TEST {'OK' if ok else 'FAILED'}: 8 plants refused and 1 partner accepted" if ok else "SELF-TEST FAILED")
+    print(f"SELF-TEST {'OK' if ok else 'FAILED'}: 10 plants refused and 1 partner accepted" if ok else "SELF-TEST FAILED")
     return 0 if ok else 1
 
 
@@ -769,6 +814,9 @@ def main() -> int:
     for module, text in texts.items():
         (OUTDIR / f"{module}.lean").write_text(text)
         print(f"wrote {module}.lean ({text.count(chr(10))} lines, sha256 {hashlib.sha256(text.encode()).hexdigest()[:16]})")
+    lic = (CLONE / LICENCE_SRC).read_bytes()
+    (OUTDIR / LICENCE_NAME).write_bytes(lic)
+    print(f"wrote {LICENCE_NAME} ({len(lic)} bytes, sha256 {hashlib.sha256(lic).hexdigest()[:16]})")
     return 0
 
 

@@ -13,8 +13,9 @@ import Mathlib.MeasureTheory.Measure.Hausdorff
 do not edit by hand; rerun the script.**
 
 **Licence and notice of change.** The source is licensed under the Apache License, Version 2.0 (`LICENSE` at the
-root of the release; http://www.apache.org/licenses/LICENSE-2.0). **This file is a changed copy of part of that
-file.** The changes, all of them:
+root of the release; http://www.apache.org/licenses/LICENSE-2.0); a byte-identical copy of that licence text is
+beside this file, `Outside/OAIMath2026-LICENSE.txt` (this script's `--check` compares the two). **This file is a
+changed copy of part of `Expansion.lean`.** The changes, all of them:
 
 1. *A selection.* Of the file's 37 declarations, 8 are copied here (134 of its
    725 lines) — those that the proofs of `palette_transfer_pair`, `palette_sixty_disjoint`,

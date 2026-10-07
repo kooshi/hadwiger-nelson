@@ -17,8 +17,9 @@ import Mathlib.Topology.Separation.CompletelyRegular
 do not edit by hand; rerun the script.**
 
 **Licence and notice of change.** The source is licensed under the Apache License, Version 2.0 (`LICENSE` at the
-root of the release; http://www.apache.org/licenses/LICENSE-2.0). **This file is a changed copy of part of that
-file.** The changes, all of them:
+root of the release; http://www.apache.org/licenses/LICENSE-2.0); a byte-identical copy of that licence text is
+beside this file, `Outside/OAIMath2026-LICENSE.txt` (this script's `--check` compares the two). **This file is a
+changed copy of part of `BinaryPalettes.lean`.** The changes, all of them:
 
 1. *A selection.* Of the file's 35 declarations, 11 are copied here (92 of its
    375 lines) — those that the proofs of `palette_transfer_pair`, `palette_sixty_disjoint`,

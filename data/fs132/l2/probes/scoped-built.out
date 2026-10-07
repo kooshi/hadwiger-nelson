@@ -1,0 +1,21 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0,1
+data/fs132/l2/probes/scoped-built.lean:12:0: error: failed to synthesize
+  CompactSpace (HadwigerNelson.Outside.OAI158.WeakBall.Space E)
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs132/l2/probes/scoped-built.lean:13:0: error: failed to synthesize
+  TopologicalSpace.MetrizableSpace (HadwigerNelson.Outside.OAI158.WeakBall.Space E)
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs132/l2/probes/scoped-built.lean:14:0: error: failed to synthesize
+  Fact (2 ≠ ⊤)
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+WeakBall.instCompactSpaceSpace E
+WeakBall.instMetrizableSpaceSpace E
+HadwigerNelson.Outside.OAI158.instFactNeENNRealOfNatTop_proofs✝
+WeakBall.instCompactSpaceSpace E
+WeakBall.instMetrizableSpaceSpace E
+HadwigerNelson.Outside.OAI158.instFactNeENNRealOfNatTop_proofs✝
+WeakBall.instCompactSpaceSpace E
+exit=1

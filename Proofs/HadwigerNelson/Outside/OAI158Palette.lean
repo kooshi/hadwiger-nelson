@@ -28,8 +28,9 @@ the directions where the trace gives a label positive weight) — the manuscript
 colours `k`. All of it is kernel-checked here: the proofs are the release's, at this pin.
 
 **Licence and notice of change.** The source is licensed under the Apache License, Version 2.0 (`LICENSE` at the
-root of the release; http://www.apache.org/licenses/LICENSE-2.0). **This file is a changed copy of parts of those
-files.** The changes, all of them:
+root of the release; http://www.apache.org/licenses/LICENSE-2.0); a byte-identical copy of that licence text is
+beside this file, `Outside/OAIMath2026-LICENSE.txt` (`tools/fs132_i2_port.py --check` compares the two). **This file
+is a changed copy of parts of the source files named above.** The changes, all of them:
 
 1. *A selection*: the line ranges above, and no other line of the release.
 2. *The namespace*: `OAI.EuclideanFiveColor` there, `HadwigerNelson.Outside.OAI158` here.
@@ -40,6 +41,14 @@ files.** The changes, all of them:
 5. *One patch, to a proof*: `Compactness.lean` line 224,
    `← eLpNorm_one_eq_lintegral_enorm (hv.sub hgi).aestronglyMeasurable]` → `← eLpNorm_one_eq_lintegral_enorm]` —
    Mathlib's lemma takes no explicit argument at this library's pin (v4.32.0; the release is at v4.34.1).
+6. *Three instances scoped* (FS132-L2). The release declares three instances on types that are Mathlib's own:
+   `CompactSpace` and `MetrizableSpace` on `WeakBall.Space E` — a reducible abbreviation of a subtype of Mathlib's
+   weak dual (`Compactness.lean` 160–162) — and a private `Fact ((2 : ENNReal) ≠ ⊤)` (line 250). There they are
+   global. Here each is a `scoped instance`: instance search finds it inside `namespace HadwigerNelson.Outside.OAI158`
+   and under `open Outside.OAI158`, and in no other module of this library. The first two are declared inside the
+   child namespace `WeakBall`, so one line is added after that namespace closes (`attribute [scoped instance] …`,
+   after `Compactness.lean` 186) to give them the parent's scope, where every use of them stands. The keyword on
+   three lines and that one line are the whole change: the names, the statements and the proofs are the release's.
 
 No axiom, no `sorry`. The definitions and the statements are compared with the release's, as the kernel stores them
 at the two pins, by `tools/fs132_i2_readback.py` (`plans/FS132-I2-implementation.md`).
@@ -434,9 +443,9 @@ variable (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteS
 /-- `[OAIMath2026]` `Compactness.lean:159`. -/
 abbrev Space := {v : WeakDual ℝ E // WeakDual.toStrongDual v ∈ Metric.closedBall 0 1}
 /-- `[OAIMath2026]` `Compactness.lean:160`. -/
-instance : CompactSpace (Space E) := isCompact_iff_compactSpace.mp (WeakDual.isCompact_closedBall 0 1)
+scoped instance : CompactSpace (Space E) := isCompact_iff_compactSpace.mp (WeakDual.isCompact_closedBall 0 1)
 /-- `[OAIMath2026]` `Compactness.lean:161`. -/
-instance : TopologicalSpace.MetrizableSpace (Space E) :=
+scoped instance : TopologicalSpace.MetrizableSpace (Space E) :=
   WeakDual.metrizable_of_isCompact ℝ E _ (WeakDual.isCompact_closedBall 0 1)
 /-- `[OAIMath2026]` `Compactness.lean:163`. -/
 def value (a : Space E) : E := (InnerProductSpace.toDual ℝ E).symm (WeakDual.toStrongDual a.1)
@@ -469,6 +478,9 @@ lemma tendsto_iff {I : Type*} {l : Filter I} {f : I → Space E} {b : Space E} :
   rw [tendsto_subtype_rng, tendsto_iff_forall_eval_tendsto_topDualPairing]
   rfl
 end HadwigerNelson.Outside.OAI158.WeakBall
+namespace HadwigerNelson.Outside.OAI158
+attribute [scoped instance] WeakBall.instCompactSpaceSpace WeakBall.instMetrizableSpaceSpace
+end HadwigerNelson.Outside.OAI158
 end
 
 noncomputable section
@@ -535,7 +547,7 @@ open MeasureTheory Filter Topology
 open scoped RealInnerProductSpace
 namespace HadwigerNelson.Outside.OAI158
 /-- `[OAIMath2026]` `Compactness.lean:250`. -/
-private instance : Fact ((2 : ENNReal) ≠ ⊤) := ⟨by norm_num⟩
+private scoped instance : Fact ((2 : ENNReal) ≠ ⊤) := ⟨by norm_num⟩
 /-- `[OAIMath2026]` `Compactness.lean:251`. -/
 abbrev TraceVector (k : ℕ) := Fin k → WeakBall.Space (RealL2 angularMeasure)
 /-- `[OAIMath2026]` `Compactness.lean:252`. -/
