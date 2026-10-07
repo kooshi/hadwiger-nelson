@@ -506,3 +506,101 @@ only *half* resuming (in-flight jobs yes, new lines held). By my own clause ("wr
 **Invention signal:** none new at this stage; read for it: the handoff's § 4, the ranking's rows as sampled, the reading § 5.2–5.4.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED
+
+## Draft re-rank
+
+*A draft of `plans/FRONTIER-STUBS.md` § Ranked stubs and § Open milestones, for Keryx to file. **What is drafted in full**: the
+open-milestones paragraph; the new row at rank 1; for ranks 2–12 the new bearing cell in full and the sentence to add to the
+question cell (the rest of each row as filed); the order of every other row; the closed list's three additions; the top three
+for `CLAUDE.md` § Paths forward. **What is not**: the cost, status and solver cells of moved rows (unchanged but for the date and
+"re-ranked by FS132-P1"), and rows below rank 12, which move without a change of text beyond § 4.2's clauses. Ranked by bearing on
+the answer, never by difficulty (`CLAUDE.md` § Counter-priors rule 1).*
+
+### Open milestones, in order (replaces the paragraph's last sentences from "**Next, in Kooshi's order**")
+
+"**Since 2026-10-07 the frontier stands on `[OAIMath2026]` family 158**: `χ(ℝ²) ∈ {6, 7}` and `χ(ℝ²) = χ_m⁰(ℝ²)` with no
+hypothesis. **Next: FS-133, the one-class transfer** (`plans/STUB-one-class-transfer.md`; a short milestone, unranked — it bears
+none on six against seven and is first because its window is closing): `α₁(ℝ²) = m₁(ℝ²)` with no hypothesis, its unchecked step
+first. **Then the top of the ranking, FS-132, six by the nerve** (`plans/STUB-six-by-the-nerve.md`), opening on the release's
+extraction stated at every `k` (C132-EXT) and on whether FS114-CV-EXISTS and FS116-Y4-EMPTY run on it with no map. **The Lean
+backlog (FS-131)** resumes by the table of `plans/POROS-2026-10-07-after-release.md` § 4.4: the import first, then wave 7, wave 9
+restated over the import, wave 6's in-flight jobs; wave 10 waits."
+
+### The ranked table
+
+| rank | stub | the question | bearing on the answer | cost | status | solver |
+|---|---|---|---|---|---|---|
+| 1 | **FS-132 six by the nerve** — `plans/STUB-six-by-the-nerve.md` (minted 2026-10-07 by FS132-P1, on `[OAIMath2026]`) | does this project's six-colour chain — a vertex of at least four colours exists (FS114-CV-EXISTS), and the exclusions about it (FS116-Y4-EMPTY, row 149) — run on what the release's extraction gives a measurable six-colouring: a point, a label cycle, connected interfaces with limiting directions and the two-colour exclusion, with no map? **First**: the extraction stated at every `k` at the weakest hypothesis on the cyclic centres its argument reads (C132-EXT; with it, a cyclic centre in every disc of radius 8 at every `k`); then the two readings; then what the extraction needs of the centres (card 2) and where five enters (card 3, an invention signal). Structural form: is a label cycle of length at least four forced at some centre of every measurable `k`-colouring of a large disc exactly when `k ≤ 6`? | decisive on the route, and through it on the answer: with the transfer unconditional, `χ(ℝ²) = 7` is a structure step, the existence of a centre that is not a triangle, and the exclusions; this stub decides whether the structure step is route M's map step (FS-126, FS-127, FS-128) or one statement about cyclic centres, and in which vocabulary FS-123, FS-124 and FS-125 are owed. If the chain runs, every exclusion held in the map class holds for measurable colourings with no Siamese clause; if a step reads an arc, the map step is necessary and the step says why. The YES side is unchanged: valid fragments on discs of every radius give `χ(ℝ²) ≤ 6` (row 145) | unpriced; one opening and one derivation job to card 1's answer | minted 2026-10-07; rank 1 (FS132-P1) | no solver: derivation and reading; colourings by formula for the nerve viewer |
+| 2 | **FS-124 the (Q) ring** | *as filed, adding:* "From `[OAIMath2026]`: a palette that is a diagonal of the vertex's own labels is a (Q) arc in measure; `two_state_impossible` at six excludes a ring alternating between the two diagonals (C132-DIAG, posed in FS-132); its four-cycle argument is the template for the five-colour vertex. The class this row is posed in waits on FS-132's card 1." | the main remaining case set of the exclusions and the YES side's home: every held positive past `√3` has (Q) arcs on its four-colour rings (row 136), and in the non-Siamese class no other ring survives past `1 + ε` (row 149); a NO here with FS-123's is C114-LOCAL-F, which with a structure step (FS-132's, or route M's map step) and the existence step is `χ(ℝ²) = 7`, **with no MR**; valid fragments about (Q)-ring vertices on discs of every radius give `χ(ℝ²) = 6` (FS116-O1-YESLIM, held; `χ ≥ 6` is `[OAIMath2026]`'s). Each case alone is a piece | as filed | rank 1 → 2 (FS132-P1) | as filed |
+| 3 | **FS-123 the Siamese class** | *as filed, adding:* "Its first case, asked for measurable colourings, is FS-132's existence form; the reading § 3.5's region kill — a unit-distance graph that is not four-colourable placed in the four-coloured region two outside labels vacate — is a second route to the NO at radius 2 (a placement, queued for the Searcher)." | a necessary piece of the exclusions in the map class (G86: tile counts cannot see Siamese pairs); for measurable colourings there is no Siamese clause, so if FS-132's card 1 runs this row is absorbed into FS-124's cases; with FS-124's NO, the structure step and the existence step, `χ(ℝ²) = 7` with no MR; Siamese fragments at every radius give `χ(ℝ²) = 6` | as filed | rank 2 → 3 (FS132-P1) | the placement is the Searcher's; otherwise as filed |
+| 4 | **FS-125 the saturated local exclusion** | *as filed* | the exclusion in the class where statements false under local slack can hold (the reading § 4.3: the palette bound and the centres' local finiteness fail in the hexagonal seven-colouring with islands or stripes): on either road the exclusions are owed for a colouring with no such freedom; NO-SAT with a structure step and the existence step gives `χ(ℝ²) = 7` with no MR; saturated fragments on discs of every radius give `χ(ℝ²) = 6` | as filed | rank 5 → 4 (FS132-P1) | as filed |
+| 5 | **FS-122 the forced pair** | *as filed, adding:* "`[OAIMath2026]`'s Lemma 5.5 — centres binary for one pair of labels are separated by an absolute constant — is a statement uniform in the colouring, the kind B-RR asks (the reading § 3.3); FS-132's card 3 asks whether 'some centre is not a triangle' is this row's statement in the release's vocabulary." | the answer itself in route R's form: A-ALL with CP and B-RR gives `χ_m⁰(ℝ²) = 7`, so `χ(ℝ²) = 7` **with no MR** and no map NO; its failure is `χ(ℝ²) = 6`; under Condition 5 it meets route M nowhere below the answer (row 134) | as filed | rank 6 → 5 (FS132-P1) | as filed |
+| 6 | **FS-127 lateral extent** | *replaces the first sentence:* "are the cyclic centres of every honest saturated colouring of the plane locally finite ([L₆]; no arcs, no integer radii) — the hypothesis `[OAIMath2026]`'s extraction is stated under — and, behind FS-132's card 2, is local finiteness even what the extraction reads?" *the rest as filed* | the structure step of the nerve road, if FS-132's card 2 says it is needed: with the existence step and the exclusions, `χ(ℝ²) = 7` with no MR; false under local slack at seven (EXT-OAI2-SLACK7-L), so posed for the saturated normal form; a colouring by formula at some `k ≥ 7`, honest and saturated, whose cyclic centres accumulate would say the road cannot take this step colour-blind | as filed | rank 8 → 6, re-aimed (FS132-P1) | as filed |
+| 7 | **FS-128 the top colour, at six** | *as filed with the five-colour clauses struck:* TOP₆ only | given a NO for honest saturated colourings, TOP₆ is seven restated, with no MR; needed only if the saturated normal form is on the road (FS-132's cards 1–2) | as filed | rank 4 → 7; its five-colour half answered by citation (FS132-P1) | as filed |
+| 8 | **FS-117 route T, the count** | *as filed* | the existence step in the map class, non-Siamese at best (G86); FS-132's card 3 names what would have to replace it for measurable colourings | as filed | rank 10 → 8 | as filed |
+| 9 | **FS-109 the hole dial** | *as filed, adding:* "`1 − µ₅(ε)` is known to stay bounded below (`[OAIMath2026]` Thm 1.4 with row 131): read it first, as the dial's positive control." | link 5 as a dial, with no MR: `χ(ℝ²) = 7` ⟺ `lim µ₆(ε) < 1`; informative both ways, decides nothing alone | as filed | rank 11 → 9 | as filed |
+| 10 | **FS-104 the null-set step and the axiom question** (re-aimed; was "`χ_CP(ℝ²)` at six") | is `χ_m⁰(ℝ²) = χ_m(ℝ²)` — can a measurable colouring proper at almost every unit pair be made proper at every pair with the same number of colours? With `[OAIMath2026]`'s transfer this is whether the plane's chromatic number depends on the axioms (the reading § 2.3); also `χ_B` against `χ_m`, and whether the transfer's forward half holds in ZF + DC | none on `χ(ℝ²)`; decisive for Falconer's `χ_m(ℝ²) ∈ {6, 7}` against `χ(ℝ²)` and for the Shelah–Soifer question for the plane; its old question is answered YES by citation | unpriced | rank 3 → 10; answered as posed, re-aimed (FS132-P1) | none |
+| 11 | **FS-120 the pinch at a junction** | *as filed with the cover route at five struck* | at six its finiteness rung is REG-A₆'s; on the road only with route M's map step | as filed | rank 7 → 11 | as filed |
+| 12 | **FS-126 curved pencils** | *as filed* | none alone; on the road to seven only if FS-132's card 1 finds a step of the exclusions that reads an arc | as filed | rank 9 → 12, demoted (FS132-P1) | as filed |
+
+**Below rank 12, in order** (text as filed, with § 4.2's clauses): FS-62 (13), FS-39 (14, re-aimed), FS-130 (15), FS-115 (16),
+FS-113 (17, demoted), FS-101 (18), FS-80 (19), FS-67 (20), FS-59 (21, re-aimed), FS-96 (22), FS-64 (23), FS-63 (24), FS-102 (25),
+FS-69 (26), FS-57 (27), FS-100 (28), FS-65 (29), FS-17 (30), FS-55 (31), FS-78 (32), FS-42 (33), FS-43 (34), FS-45 (35), then old
+ranks 38–74 in their order as ranks 36–72. **To the closed list** (each with § 4.3's banner): FS-44 (closed as a direction),
+FS-49 (closed as a need), FS-108 (closed as a need). The ranked table then holds 72 rows; with FS-133 as an open milestone and
+the three moved to the closed list every FS number still appears once.
+
+**A banner line for each demoted stub, saying why** — § 4.3 carries them: FS-104 (3 → 10: answered as posed), FS-128 (4 → 7: its
+five half answered; its six half waits on whether the normal form is on the road), FS-120 (7 → 11: the cover route at five closed
+as a need), FS-126 (9 → 12: the extraction reads no arcs), FS-113 (15 → 17: the plane's equality enters by import).
+
+**The top three, as `CLAUDE.md` § Paths forward should carry them:**
+
+| rank | stub | the question | bearing on the answer |
+|---|---|---|---|
+| 1 | **FS-132 six by the nerve** — `plans/STUB-six-by-the-nerve.md` | does this project's six-colour chain (rows 137, 148–149) run on what `[OAIMath2026]`'s extraction gives a measurable six-colouring — a point, a label cycle, connected interfaces, the two-colour exclusion — with no map? First: the extraction at every `k` (C132-EXT) | decides whether the road to seven needs route M's map step or one statement about cyclic centres, and the class in which every exclusion is owed; fragments at every radius still give `χ(ℝ²) = 6` |
+| 2 | **FS-124 the (Q) ring** — `plans/STUB-q-ring.md` | does every four-colour vertex whose ring carries (Q) arcs, and every five- or six-colour vertex, die within an explicit radius? Since `[OAIMath2026]`: (Q) arcs are diagonal palettes; a ring alternating between the two diagonals is excluded (C132-DIAG, posed) | the bulk of the exclusions and the YES side's home; with FS-123's NO, a structure step and the existence step, `χ(ℝ²) = 7` with no MR |
+| 3 | **FS-123 the Siamese class** — `plans/STUB-qfree-ring.md` | the (Q)-free ring with Siamese pairs; for measurable colourings it is FS-132's existence form, with a second route by a region kill at radius 2 | necessary in the map class (G86); absorbed into FS-124 if FS-132's card 1 runs |
+
+### 5.1 The catalogue's other families a route of this ranking could use — named from catalogue entries only, **each unread**
+
+*Two sources: my sweep of family headlines in `/home/kooshi/source/math/CONTENTS.md` (§ 1.3), and the first tier of EXT-OAI3's
+index as the coordinator relayed it mid-job (`plans/EXT-OAI3-review.md`, `data/external/oai3/`, commit `eec0f0ff` — its record
+unopened by me). Its finding stands beside mine: no family but 158 claims anything on the plane's chromatic number, its measurable
+form, or the density of a unit-avoiding set. Its note that "has Lean" means three different things in the release, and that every
+entry's review status is "unchecked", applies to every line below.*
+
+| family | catalogue headline | the route that could use it, and how — a guess from the headline |
+|---|---|---|
+| 085 | endpoint Sobolev regularity of centred disc averages | FS-132, FS-127: the release's approximants are thresholded centred disc averages; a regularity theorem for them is a tool for the transition rate of Definition 6.1 |
+| 096 | the Gaussian propeller conjecture: an extremal inequality for finite measurable partitions, optimum three sectors of 120° | FS-132's card 3: a variational statement in which the triple junction is the extremal object of a measurable partition |
+| 172 | a classification of finite Euclidean Ramsey configurations by an algebraic condition over the coordinate field (EXT-OAI3's reader expects it to bear most on the field-plane theory) | FS-133's structural form (which constraints transfer); the field rows |
+| 167 | the weak pinned planar distance conjecture; a power saving for planar unit distances (EXT-OAI3: its Lean note contradicts itself on the second) | none on the ranking; the size of finite witnesses (FS-49, closed as a need) |
+| 073 | the Falconer distance conjecture in every dimension | FS-104 re-aimed (null sets and distance sets), weakly |
+| 015 | torus-packet equidistribution over totally real fields, "combines measure rigidity" | FS-113 and row 120, as a neighbour of the outside theorem the field rows rest on |
+| 166, 156 | the higher-dimensional distinct-distances conjecture; Borsuk's conjecture fails in dimension nine (a diameter graph's chromatic number) | none on this ranking |
+
+### 5.2 Expectations scored at this stage
+
+| | claim (short) | p | outcome |
+|---|---|---|---|
+| E1 | rank 1 is a stub minted today, about a measurable six-colouring, not FS-124 | 0.70 | **met** |
+
+**Scores in one line.** Twelve registered: met E1, E3, E5, E6, E10; half met E2, E4, E12; lost E7 (on wave 6), E8, E9; open E11.
+The two I lost at low probability (E8, E9) cost little; E7 I lost by registering four waves as one claim.
+
+### 5.3 What this job did not do (so that nobody reads it as done)
+
+- It did not open the release's §§ 2–8 or its Lean: every statement about them is the reading's or the audit's, each one mind.
+- It rewrote no "Bearing on the answer" section in an existing stub: § 4.3's banners and this table's cells are drafts for
+  Keryx; the stubs of FS-123, FS-124, FS-127 and FS-104 are owed their own sections rewritten in place when FS-132's card 1 is
+  answered, since their class depends on it.
+- It read the ranking's rows below rank 3 by cell prefixes, and the closed list not at all.
+
+**Invention signal:** one in this job, § 1.4 (where five enters; card 3). None new at this stage; read for it: the re-ranked rows
+against each other for two bearings that cannot both hold — FS-122's "the answer itself in route R's form" and FS-132's "decides
+the route" do not collide: card 3 asks whether they are one statement.
+
+## Stage 5 — SAVED
