@@ -16,6 +16,10 @@ where it is used. Scripts and outputs: `data/fs132/e6/`.*
 - **C132-LENS-FOUR** — [derived] from C132-LENS — Stage 2, § Argument — counts over sides.
 - **C132-LENS-GERM** — [derived] from C132-LENS-SIDE — Stage 2, § Argument — counts over sides.
 - **C132-LENS-II** (the card's clause (ii) as posed) — **GAP** at "pure sides are opposite at antipodes" — Stage 2, § The gap in clause (ii).
+- **C132-PLACED-RING** — [hand], one mind, over C132-PLACE — Stage 3, § Argument — the placed point's ring at its two neighbours.
+- **C132-PLACED** (as posed, a list) — answered line by line, one line open: **GAP** at whether any pair containing a label of
+  `T` is a witnessed edge at the placed point — Stage 3, § The list.
+- C132-ARC — not reached; no line of it was worked.
 
 ## Stage 1 — SAVED: the readback, what I expect, recognition, and the claims stated
 
@@ -477,3 +481,125 @@ two derived entries under it. The asking lane's: C132-LENS derived (0.65) — me
 as posed; "stalls at a line of one chart" (0.25) — no; the line that failed is a count of sides, not a chart.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: C132-PLACED, as far as this context carried
+
+*Setting.* C132-LENS-FOUR's, with `k = 0`: `y = y_0`, and `y_{−1}, y_0, y_1` each have a pure outer side.
+
+**Verdict.** The list is derived but for one line, and the card's table is answered at its second row: **the placed point's
+ring carries the point's own labels toward `x` — a mixed ring.** No four-cycle of witnessed edges is closed at `y` by
+anything derived, and if one were, the first night's exclusion would still say nothing on the orbit through `x`.
+
+### The entries
+
+derivation: C132-PLACED-RING
+  statement: let U, x, c, T, K_0, K_1, K_2, a, b, n, ψ and the points y_k be as in C132-LENS, and suppose that at least two of the sets K_j have a point strictly inside the unit circle about y_1 and at least two of them have a point strictly inside the unit circle about y_{−1}; then there is κ > 0 such that almost every point w of B(y_1, κ) with |w − x| > 1 and |w − y_2| > 1 has the label b when |w − y_0| < 1 and the label a when |w − y_0| > 1, and almost every point w of B(y_{−1}, κ) with |w − x| > 1 and |w − y_{−2}| > 1 has the label a when |w − y_0| < 1 and the label b when |w − y_0| > 1; and if U contains the unit circle about y_0, then for almost every θ in (ψ + 2π/3 − κ, ψ + 2π/3) and almost every θ in (ψ − 2π/3, ψ − 2π/3 + κ) the palette P_{y_0}(e(θ)) is contained in {a, b}
+  uses only: C132-PLACE on the outer side at y_1 and y_{−1} with (W) (as in C132-LENS's argument); that the points y_0 + e(θ) of the two arcs lie in the two open regions named (control `placed-arcs`); the release's definition of a typical point (density one of its own label, `palettes.tex` l. 20) and of the palette (Definition 5.1, ll. 47–68), read by me
+  not claimed: that the two palettes contain both a and b (each is present on one side of the arc, which gives it for samplings from that side; not written out); anything on the rest of the unit circle about y_0 — in particular at x, at y_0 + e(ψ ± π/3) and at y_0 + e(ψ); that y_0 has a pure outer side (with one, a and b are present at y_0 by C132-LENS-FOUR, and the two arcs then carry both their side labels at their centre)
+  argument: § Argument — the placed point's ring at its two neighbours
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none is known (as C132-LENS); the geometry is exhibited — 400 points of the two arcs, none outside its region, with O_cw and O_far of y_1 on the two sides of the unit circle about y_0, and O_ccw and O_far of y_{−1} (control `placed-arcs`)
+  prior art: partly: in the map class this is row 135's unit arc "centred at a vertex of at least four colours carrying both its side colours" with the vertex placed by the ring (G91), read by me only as `plans/STUB-six-by-the-nerve.md` and the asking lane's record quote it; the two regions are the ring card's list line L4 at y_{±1}; for a weak colouring not searched in print — owed
+  handoff: de Bruijn — only with a consumer; two charts and the definition of the palette
+
+derivation: C132-PLACED
+  statement: At the four-label ring point `y` of C132-LENS (ii): in the grammar of C132-PLACE's list, the labels present in each of the six wedges at `y` cut by the unit circles about `x`, `y_1` and `y_{−1}`, and which labels of `T` the sides at `y` allow in the lens; then, using C132-WITNESS only on wedges the list forces to be of one label, which pairs of the four labels are witnessed edges at `y`, whether they close a four-cycle, and — if they do — what the first night's exclusion (C132-M-ORBIT in C132-WIT's four-point form) says on the orbit of `y`'s ring through `x`. Each line derived or marked open
+  uses only: for the lines derived — C132-LENS and C132-LENS-FOUR; C132-WIT-SIDE at y; C132-WITNESS on the three outer wedges (inherited); C132-TURN-EDGE (inherited, [hand], one mind, its argument read and not reworked); C132-PLACED-RING
+  not claimed: that the witnessed edges at y close a four-cycle, or that they do not; which labels fill the two inner wedges beside the lens; anything on an orbit of y's ring other than the one through x
+  argument: § The list
+  verdict: gap: whether any pair containing a label of T is a witnessed edge at y — the two inner wedges beside the lens are not forced to one label, and the closure of the lens meets the closures of the three outer wedges at y alone, so C132-WITNESS gives the path a – n – b and nothing through T
+  grade: hand
+  minds: 1
+  model: none is known (as C132-LENS)
+  prior art: partly: the sentence is the asking lane's (`plans/STUB-six-by-the-nerve.md` § The first claims a deriver takes)
+  handoff: Poros — the list with its open line; the branch of the card's table that occurred is "a mixed ring"; the smallest open forms are under § The list
+
+control: placed-arcs
+  of: C132-PLACED-RING — the points y_0 + e(θ) just before the direction of y_1 and just after that of y_{−1}: outside the unit circle about x and about y_2 (y_{−2}), and the wedges at y_{±1} just inside and just outside the unit circle about y_0 there
+  run: python3 ../data/fs132/e6/lens_checks.py ringarc
+  expect: arc-points=400 outside-the-region=0 wedges=[(-1, 'in', 'O_ccw'), (-1, 'out', 'O_far'), (1, 'in', 'O_cw'), (1, 'out', 'O_far')]
+  fault: python3 ../data/fs132/e6/lens_checks.py ringarc --fault
+
+### Argument — the placed point's ring at its two neighbours
+
+*Near `y_1`.* As in C132-LENS's first half, with the chart `Z(ψ_2 + t, d)`, `d < 0`: where `d < t < 0` the label is `a`; where
+`t < d` the neighbours' palettes hold `n` (just before `ψ_2`) and `a` (at `ψ_0 + t − d`, just before `ψ_0`), so the label is
+`b`. By (W), `t < 0` is "outside the unit circle about `y_2`" and the sign of `t − d` is the side of the unit circle about
+`y_0`. So on `{w ∈ B(y_1, κ) : |w − x| > 1, |w − y_2| > 1}` the label is `b` inside the unit circle about `y_0` and `a`
+outside it. *Near `y_{−1}`*, chart `Z(ψ_0 + t, d)`, `d < 0`: where `d < t < 0` the label is `b`; where `t > 0` the palettes
+hold `b` (just after `ψ_0`) and `n` (just after `ψ_{−2}`), so the label is `a`; `t − d > 0` is "outside the unit circle about
+`y_{−2}`" and the sign of `t` the side of the unit circle about `y_0`: `a` inside, `b` outside. *The palettes.* For `θ` in
+`(ψ + 2π/3 − κ, ψ + 2π/3)` the point `y_0 + e(θ)` is `y_1` moved along the unit circle about `y_0` in the direction
+`e(ψ + π/6)`, which has positive inner product with `e(ψ_1)` and with `y_1 − y_2 = e(ψ)`: it lies in the open region just
+described, and for `θ` in a compact part of the arc a whole neighbourhood of fixed radius does. A typical point has density
+one of its label, so in that region its label is `a` or `b`. For typical circle samplings `(y_m, r_m) → (y_0, 1)` and large
+`m` the points `y_m + r_m e(θ)` are in the region, so the traces of the four other labels vanish there, and so do their
+weak-* limits; the essential union defining the palette is one of null sets on the arc. The other arc is the mirror
+image. ∎
+
+### The list
+
+At `y = y_0`, in the ring card's grammar; O and I wedges as the search names them.
+
+- **PL1 — outside the ring: `O_cw = a`, `O_far = n`, `O_ccw = b`**, almost everywhere, each an open 60° wedge. *Derived*
+  (C132-LENS-FOUR; the ring card's L4).
+- **PL2 — the lens carries only labels of `T`.** *Derived* (C132-LENS).
+- **PL3 — `I_ccw` carries `b` or labels of `T`; `I_cw` carries `a` or labels of `T`.** *Derived*: `I_ccw` is inside the unit
+  circle about `y_1` (no `a`, no `n`), `I_cw` inside the one about `y_{−1}` (no `b`, no `n`) — C132-LENS's two halves.
+  **Open**: which of the two occurs; nothing derived forces either wedge to one label.
+- **PL4 — the labels of `T` the sides allow.** A label `t` of `T` has positive measure inside the ring near `y` only if
+  neither of the two sets `K_j` whose pair holds `t` has a point strictly outside the unit circle about `y` (C132-WIT-SIDE).
+  At most one set has such a point (C132-LENS-SIDE). If one has: inside the ring near `y` the one label of `T` is the label
+  `t*` its pair does not hold, **the lens is `t*` almost everywhere**, `I_cw ⊂ {a, t*}`, `I_ccw ⊂ {b, t*}`. If none has: all
+  three labels of `T` are allowed. *Derived.*
+- **PL5 — witnessed edges at `y` from one-label wedges.** `{a, n}`, with a set on the unit circle about `y_{−1}` (the common
+  side of `O_cw` and `O_far`), and `{n, b}`, with a set on the unit circle about `y_1` (C132-WITNESS; the ring card's l. 470).
+  `{a, b}` is **not** a witnessed edge at `y` (C132-TURN-EDGE, whose hypotheses hold here). A pair containing a label of
+  `T`: **open** — even when the lens is one label `t*`, its closure meets the closures of `O_cw`, `O_far`, `O_ccw` at `y`
+  alone, and `I_cw`, `I_ccw` are not forced to one label. So what is given is the path `a – n – b`; **no four-cycle is
+  closed.**
+- **PL6 — the first night's exclusion on the orbit of `y`'s ring through `x`.** Its hypothesis asks, at all six points of an
+  orbit, for palettes of `y` that hold one of the two labels outside the cycle. On the orbit through `x` two of the six
+  points are `y_1` and `y_{−1}`, and on a one-sided neighbourhood of each the palette of `y` lies inside `{a, b}`
+  (C132-PLACED-RING). **So the exclusion says nothing on that orbit, whatever cycle is witnessed at `y`.** *Derived.*
+
+**What the placed point is, as far as derived.** A point with four labels present, three of them in open wedges outside
+`x`'s ring; on its own unit circle, at `y_1` and at `y_{−1}`, an interface between `a` and `b` runs along that circle — `b`
+inside and `a` outside at `y_1`, `a` inside and `b` outside at `y_{−1}` — and the point carries both labels. In the map
+class's words: the centre of two unit arcs, each carrying both its side colours ((Q), row 135), **forced by the seed, with
+every hypothesis derived from the centre's circle**. That is the card's second row: FS-124's first question — what a (Q)
+ring passes to the vertices it places — has a measurable instance. The two arcs have opposite orientation.
+
+**Smallest open forms.** (a) At the placed point, are `I_cw` and `I_ccw` of one label each, and which? (b) What does the
+placed point's unit circle carry at `x`, at `y_0 + e(ψ ± π/3)` and at `2y_0 − x` — the four other points of the orbit?
+(c) The same question one step on: `y_1` is outer-pure with an outer-pure neighbour `y_0` on one side only; what C132-LENS's
+one half gives there is that the lens at `y_1` carries `b` or labels of `T`.
+
+**Read off, not entered.** On the *alternating* ring `a, b, a, b, a, b` the far wedge at an outer-pure ring point is `n`
+(the ring card's L5), so C132-SHADOW keeps `n` off the lens at each neighbour, where the transfer already keeps `a` and `b`
+off: the lens there carries only `T`, and a neighbour of an outer-pure point is never inner-pure. That is C132-ALT's cases
+O, I and I, O by a second route with no unit-pair shift — a check of two of that inherited entry's four cases, by different
+mathematics; its cases O, O and I, I are not reached this way.
+
+### Expectations scored
+
+- C132-PLACED: "the exclusion does not apply on the orbit through `x`; the ring carries the point's own labels" (0.80) —
+  **met**. "A four-cycle of witnessed edges forced closed" (0.10) — not forced; open.
+- C132-ARC: "not reached" (0.60) — **met**.
+- The asking lane's: C132-PLACED "a mixed ring" (0.55) — the branch that occurred; "the exclusion applies on an orbit"
+  (0.25) — no, on the one orbit examined.
+
+## Stage 3 — SAVED
+
+## Where a successor takes over
+
+- **C132-ARC**: untouched. Its control (R7's vertices and arcs by formula, `plans/FS111-derivation.md`) was not run. A tool
+  it did not have when posed: C132-SHADOW — an open one-label piece on one side of a unit arc keeps its label off a whole
+  side of a unit circle near every point at distance 1 from the piece's corner.
+- **C132-LENS-II**: the sixteen patterns of § The gap in clause (ii).
+- **C132-PLACED**: the open forms (a)–(c) above.
+- **Not verified by me in what I inherit**: the proof of the release's Lemma 5.2 (the transfer inside C132-PLACE);
+  C132-CONFINE (inside C132-TURN-EDGE, which only PL5's "`{a, b}` is not witnessed" uses); C132-WITNESS's argument (read,
+  not reworked; only PL5 uses it — C132-LENS does not).
