@@ -321,3 +321,192 @@ threads: the kernel's OOM killer fired globally twice (pids 790279 and 793251, a
 those two processes; the third I killed by PID at 95 GB. The first kill was hidden from me by a pipe into `head` (rule 9's pipe
 clause, broken). Kernel and journal lines: `data/external/oai1/incident-oom.txt`. No other process was killed; my slotted build
 survived (one batch took 83 s against a usual 7 s). Nothing of mine has run outside a slot since.
+
+## Stage 6 — SAVED: the proof's shape, from its Lean
+
+*What was read: `Five.lean` whole; every statement quoted below, with its docstring; the definitions quoted; the manuscript's
+introduction (TeX source, `build/sections/introduction.tex`, whole) for orientation, and the statement of its rigidity theorem
+(`spectral.tex` 56–70). **No proof below the headline's module was read line by line** — the kernel read them. A docstring is
+the release's own description, quoted, not a finding. The index of all 232 documented declarations of the cone, each with its
+statement's first lines, is `data/external/oai1/docindex-five.txt`; the module graph is `module-graph-five.txt`.*
+
+### The module graph
+
+70 modules; the longest import chain is 23 deep and ends at `Five`. Two arms meet there (PC = `OAI.Geometry.PlaneColoring`,
+PS = `OAI.Analysis.PlaneSpectrum`, CF = `OAI.MeasureTheory.CompactFactors`):
+
+```
+THE TRANSFER (33 modules, 16,194 lines)                    THE FIVE-COLOUR OBSTRUCTION (36 modules of PC)
+PS.Basic ─ PS.Characters ─┐                                PC.Coloring ─ PC.WeakColoring ─ PC.Compactness ─┐
+PS.InvariantMean ─────────┴ PS.Multipliers ─ PS.FourierTests ┐   PS.Fourier ─ PS.CircleDecay ─ PS.CircleOperator ┴ PC.Transitions
+PS.PhaseEncoding ─ PS.PhaseCollision ─ CF.ConditionalSelection ┤   ─ PC.Palettes ─ PC.PaletteDensity (← PC.CircleTransport ← PC.BinaryDynamics ← PC.Expansion; PC.CircleMaps)
+PS.SmallArcs ───────────────────────── PS.ConditionalSpectrum ─┤   ─ PC.PaletteTransport ─ PC.BinaryPalettes ─ PC.States ─ PC.FourContinuity ─ PC.FourTransport
+CF.Centers ─ CF.RelativeCenters ─ CF.Approximation ─ CF.ConditionalLimits      PC.Rigidity ─ PC.BoundaryTrace ─ PC.AngularBoundary ─┬ PC.Exclusion ─ PC.Accumulation
+─ CF.Kernels ─ CF.BoundedFunctions, CF.Functions ─ CF.Factors ─ CF.Stationary      │                                          ├ PC.Interfaces
+CF.Amenability ─ CF.RelativeProducts ─ CF.Separability ─ CF.AlgebraModels          │                                          └ PC.Sectors (← PC.Moser)
+─ PS.Representations ─ PS.Energy, PS.SpectralMeasure                               PC.Accumulation ─ PC.DiskAverages ─ PC.PlanarCovers ┐
+PS.NumberFields ─ PS.Selections ─ PS.RadialEnergy ─ PS.Ergodicity                  PC.Accumulation ─ PC.FiveSupport ─ PC.CyclicCore ───┴ PC.GraphRealization
+─ PC.BorelTransfer ────────────────────────────────┐                               ─ PC.DiskExtension ─ PC.GraphCuts, PC.HoleApproximation ─ PC.GraphPatches
+                                                    │                               PC.ContinuumLimits (← GraphRealization, Interfaces, Sectors)
+                                                    └────────── PC.Five ──────────── PC.Mesh ─ PC.FullApproximation (← ContinuumLimits, GraphPatches)
+```
+
+The two arms share `PC.Coloring` (34 lines: the two definitions) and `PS.Fourier → CircleDecay → CircleOperator` (decay of the
+circle measure's Fourier transform, used by `PC.Transitions`). The transfer arm never mentions `Fin 5`.
+
+### The chain of named statements, from the headline back
+
+**Level 0 — the headline** (`Five.lean:123`). `/-- No unrestricted five-coloring separates all unit-distance pairs in the
+Euclidean plane. -/ theorem no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c` — by two statements:
+
+**Level 1a — the transfer** (`BorelTransfer.lean:436`; no docstring).
+`lemma proper_to_borel_weak {k : ℕ} [NeZero k] {c : ℂ → Fin k} (hc : ProperColoring k c) : ∃ d : ℂ → Fin k, Measurable d ∧ WeakColoring k d`,
+with (`Coloring.lean:25`) `/-- Exactly the manuscript weak measurable condition, using normalized Haar angular measure. A
+function is understood up to a plane-null set; no regularity is imposed on a proper coloring. -/ def WeakColoring (k : ℕ)
+(c : ℂ → Fin k) : Prop := AEMeasurable c volume ∧ ∀ᵐ p ∂(volume : Measure ℂ).prod angularMeasure, c p.1 ≠ c (p.1+direction p.2)`.
+Hypotheses: `k ≠ 0` and properness; nothing else. Its own chain (statements only; the mathematical reader has the account):
+- `PlaneFiveColor.LabelModel.Space k := {ω : E → Fin k // Proper k ω}` with `E := algebraicClosure ℚ ℂ` (`Representations.lean:55–56`,
+  `Basic.lean:9`); the colouring enters once, restricted to `E`: `let ω : Space k := ⟨fun x => c x, fun x y h => hc x y h⟩`.
+- `LabelModel.measure k ω := StationaryMean.measure (tr k) (ro k) ω`, the Riesz measure of the functional
+  `f ↦ mean (b ↦ mean (a ↦ f (r b (t a ω))))` (`Stationary.lean:14–85`), `mean` the ultrafilter limit below; invariant under
+  translations by `E` and rotations by `K` (`trans_preserving`, `rotate_preserving`).
+- `/-- The arbitrary invariant wild case, obtained from actual conditional ergodic fibers. -/ lemma wild_fourier (μ : Measure D)
+  [IsProbabilityMeasure μ] (hw : IsWild μ) (z : E) (hz : z ≠ 0) : ∫ d, (eval z d : ℂ) ∂μ = 0` (`Ergodicity.lean:334`), with
+  `def IsWild (ν : Measure D) : Prop := (∀ u : K, MeasurePreserving (fun d : D => u • d) ν ν) ∧ ν (C : Set D) = 0`
+  (`Basic.lean:299`), `D := PontryaginDual DiscreteE`, `C := jHom.range` the ordinary characters `z ↦ exp(i⟨ξ, z⟩)`. The manuscript's
+  "Rigidity of wild character laws" in its Fourier form; "ν is Haar" is not stated in Lean.
+- `lemma exists_label_field : ∃ H : Fin k → ℂ × Space k → ℝ, (∀ i, Measurable (H i)) ∧ (∀ x : ℂ, ∀ᵐ η ∂measure k ω, ∑ i, H i (x,η) = 1) ∧
+  (∀ x : ℂ, ∀ u : Circle, ∀ᵐ η ∂measure k ω, ∀ i, H i (x,η)*H i (x+u,η) = 0)` (`BorelTransfer.lean:341`), then `sample_field`
+  (`:407`) picks one `η` by Fubini and `positiveSelect` a label with positive coordinate.
+- The converse direction (a weak measurable colouring gives a proper one — the manuscript's Theorem "Transfer of colorability"
+  is an equivalence) is **not in the Lean library** (`rg` over the release: no statement concluding `ProperColoring` from
+  `WeakColoring`). The headline does not need it.
+
+**Level 1b — the obstruction** (`Five.lean:102`). `/-- No Borel weak five-coloring exists. The global approximants here are
+constructed from the actual coloring, its transition graph, and its common interface limits, rather than supplied as an extra
+coloring hypothesis. -/ theorem no_measurable_weak_five_coloring {c : ℂ → Fin 5} (hc : Measurable c) (hw : WeakColoring 5 c) : False`.
+Its proof is twelve lines: a sequence `F n : FullApprox c (1/10) (t n)` with `t n = min (1/16) (1/(n+1))`, chosen by
+`Classical.choice (fullApprox_exists …)`; `graph_map_large_positive` applied to each; a subsequence on one colour `i`; and
+`FullApprox.no_large_positive_sequence`. So three statements:
+
+**Level 2a — the approximants exist** (`FullApproximation.lean:328`). `/-- The finite core used above is obtained from the proved
+actual transition core local-finiteness theorem; no regularity of the original coloring is added. -/ theorem fullApprox_exists
+{c : ℂ → Fin 5} (hc : Measurable c) (hw : WeakColoring 5 c) {α : ℝ} (hα : 0<α) (hα' : α<1/5) {t : ℝ} (ht : 0<t) :
+Nonempty (FullApprox c α t)`, where (`:253`) `/-- A global graph approximation, with actual small exceptional disks. All fields
+will be constructed, not postulated as coloring hypotheses. -/ structure FullApprox (c : ℂ → Fin 5) (α t : ℝ)` has fields
+`ε`, `0<ε`, `ε<t`, `disks : Finset MarkedDisk` (positive radii, pairwise disjoint closed balls, `∑ radius < t`),
+`map : C(Metric.closedBall (0:ℂ) 5, GraphSpace (⊤ : SimpleGraph (Fin 5)))`, and `agrees : ∀ z, z.val ∉ diskHoles disks →
+(map z).val = thresholdMap c ε α z.val`. `GraphSpace G` is the subtype of `graphRealization G := {p | ∃ i j, (i=j ∨ G.Adj i j) ∧
+∃ t ∈ Icc 0 1, p = graphEdgePoint i j t}` (`GraphRealization.lean:91`): points of the simplex on an edge of the complete graph,
+at most two positive coordinates. `thresholdMap` is `/-- The manuscript's thresholded and renormalized disk average (equation
+22). -/` (`:242–248`). In words: off finitely many disks of total radius below `t`, the thresholded disk averages of the five
+colour classes at scale `ε < t` extend to a continuous map of the disc of radius 5 into the complete graph `K₅`.
+  - `fullApprox_exists_of_finite_core` (`:266`), the same conclusion from `(L : Finset ℂ) (hL : ∀ x ∈ closedBall 0 8,
+    ¬(transitionGraph c x).IsAcyclic → x ∈ L)`; and `cyclicCore_compact_finite (hw : WeakColoring 5 c) {K} (hK : IsCompact K) :
+    (K ∩ CyclicCore c).Finite` (`CyclicCore.lean:269`) supplies `L`. Definitions (`Transitions.lean:9–24`, `CyclicCore.lean:213–218`):
+    `transitionSet c i j x R h := {q | q ∈ ball x R ∧ ((c q=i ∧ c (q+h)=j) ∨ (c q=j ∧ c (q+h)=i))}`,
+    `transitionRatio … := volume (transitionSet c i j x R h) / ENNReal.ofReal ‖h‖`,
+    `TransitionEdge c i j x := i ≠ j ∧ ∀ R : ℝ, 0<R → 0 < limsup (transitionRatio c i j x R) (𝓝[≠] (0:ℂ))`,
+    `transitionGraph c x` the graph on `Fin 5` with these edges, `CyclicCore c := {x | ¬(transitionGraph c x).IsAcyclic}`.
+  - Away from the core: `forest_chart`, `compact_forest_charts` (`GraphRealization.lean:304, 364`) — where the transition graph is
+    a forest, the threshold map lies in that forest's realization off disks of small total radius; `small_hole_map`,
+    `HoleApprox` (`HoleApproximation.lean:112, 279`); holes filled by `graphTree_contractible` (`/-- Genuine contraction of the
+    geometric probability-simplex realization of a finite tree. -/`), `forest_disk_extension`, `fill_noncore_disks`
+    (`DiskExtension.lean:456, 467, 530`).
+  - At a core point: `eventually_fill_cores` (`FullApproximation.lean:204`) from `annulus_maps_eventually_forest` (`:63`) and
+    `annulus_forest_extension` (`GraphPatches.lean:181`: if the *crossing graph* of an annulus map — `/-- Edges whose midpoint
+    fibers contain a compact continuum joining the two boundaries. -/ def crossingGraph` — is a forest, the outer boundary map
+    extends over the disc). That the crossing graphs are eventually forests is `eventually_forest_of_bridges` (`:10`), which
+    rests on the next two statements.
+  - `/-- End-to-end limit of actual connected midpoint fibers, retaining both endpoint exclusions on the same limiting
+    continuum. -/ theorem commonInterface_of_compact_sequence` (`ContinuumLimits.lean:316`): from compact connected `K n ⊆
+    closedBall x ρ` each meeting `sphere x ρ` and containing `a n → x`, on which the disk averages of colours `i` and `j` at
+    scale `ε n → 0` both exceed `α` off sets `H n` whose unit neighbourhoods `E n` have volume tending to 0, conclude
+    `CommonInterface c x i j`, where (`:226`) `def CommonInterface (c : ℂ → Fin 5) (x : ℂ) (i j : Fin 5) : Prop := ∃ K : Set ℂ,
+    ∃ v : ℂ, ‖v‖=1 ∧ Nonempty (ApproachingContinuum x K v) ∧ Disjoint (spatialSupport c i) (Straddle K) ∧ Disjoint
+    (spatialSupport c j) (Straddle K)`, with (`AngularBoundary.lean:146, 233, 307`)
+    `Straddle K := {z | ∃ p∈K, ∃ q∈K, dist z p<1 ∧ 1<dist z q}`, `spatialSupport c i := (volume.restrict {z | c z=i}).support`,
+    and `ApproachingContinuum x K v` the data `x ∈ K`, radii `r n → 0⁺`, unit `w n → v`, `x + r n • w n ∈ K`.
+  - `/-- All actual common-exclusion interfaces at a point form a forest. This assembles triangle, four and five cases for
+    arbitrary labels, not just canonical cycles. -/ theorem commonInterface_graph_acyclic {c : ℂ → Fin 5} (hc : Measurable c)
+    (hw : WeakColoring 5 c) (x : ℂ) (G : SimpleGraph (Fin 5)) (hG : ∀ i j, G.Adj i j → CommonInterface c x i j) : G.IsAcyclic`
+    (`ContinuumLimits.lean:294`), from the three exclusions, each of the form *interfaces with unit approach directions `v i`
+    and common straddling exclusion of both endpoint colours → `False`*:
+    `no_triangle_interfaces` (`Sectors.lean:426`, `/-- Complete actual triangle-interface endgame, including boundary rigidity,
+    sector extraction and the exact seven-point unit-distance certificate. -/`, through `no_alternating_sectors` and
+    `Moser.seven_point_certificate`, `/-- Exact rational interval certificate for the manuscript's seven placed vertices. -/`);
+    `no_four_interfaces` (`Interfaces.lean:514`, `/-- The actual length-four interface cycle is impossible. All hypotheses are
+    exactly approach directions and common straddling exclusion of both endpoints. -/`);
+    `no_five_exclusion_continua` (`Exclusion.lean:141`, six-position angular words).
+  - Under those: `palette_cardinality (c : ℂ → Fin 5) (hc : Measurable c) (hw : WeakColoring 5 c) (x : ℂ) : ∀ᵐ t ∂angularMeasure,
+    1 ≤ (palette c hc x t).card ∧ (palette c hc x t).card ≤ 2` (`BinaryPalettes.lean:260`) — at every centre, in almost every
+    direction, the weak-* limits of angular samples carry one or two labels; `binary_open_local_rigidity`,
+    `binary_strip_rigidity` (`Rigidity.lean:177`, `BoundaryTrace.lean:246`, stated for every `k`): an open region carrying two
+    colours almost everywhere is locally essentially one colour along unit-edge paths.
+
+**Level 2b — a topological obstruction with no colouring in it** (`Five.lean:92`, `PlanarCovers.lean:374`).
+`/-- Every continuous graph-valued map of the disk has a positive-coordinate connected region of diameter greater than two. -/
+lemma graph_map_large_positive (F : C(Metric.closedBall (0:ℂ) 5, GraphSpace (⊤ : SimpleGraph (Fin 5)))) : ∃ i : Fin 5, ∃ K : Set ℂ,
+IsPreconnected K ∧ K ⊆ Metric.closedBall (0:ℂ) 5 ∧ (∀ z : Metric.closedBall (0:ℂ) 5, z.val∈K → 0<(F z).val i) ∧ ∃ x∈K, ∃ y∈K, 2<dist x y`,
+from `lemma compact_open_cover_impossible {ι : Type*} {Q : Set ℂ} (hQ : Metric.ball (0:ℂ) 5 ⊆ Q) (hQc : IsCompact Q) (U : ι → Set Q)
+(ho : ∀ i, IsOpen (U i)) (hcov : ∀ z : Q, ∃ i, z∈U i) (hm : ∀ z : Q, ∀ i j l, z∈U i → z∈U j → z∈U l → i=j ∨ i=l ∨ j=l)
+(hd : ∀ i, ∀ x∈U i, ∀ y∈U i, ‖x.val-y.val‖≤2) : False`: an open cover of a compact set containing the open disc of radius 5,
+no point in three members, has a member of diameter above 2. (Proved through a partition of unity and
+`finite_open_cover_impossible`, `PlanarCovers.lean:348`.)
+
+**Level 2c — and no approximant can have one** (`Mesh.lean:89`). `/-- A continuous graph approximant cannot have
+positive-coordinate connected sets of macroscopic diameter at every shrinking scale. This is the manuscript mesh argument, with
+connectedness replacing the stronger path assumption. -/ theorem no_large_positive_sequence {c : ℂ → Fin 5} (hc : Measurable c)
+(hw : WeakColoring 5 c) {α : ℝ} (hα : 0<α) (hα' : α<1/5) {t : ℕ → ℝ} (F : ∀ n, FullApprox c α (t n)) (htlim : Tendsto t atTop (𝓝 0))
+(htsmall : ∀ n, t n≤1/16) (i : Fin 5) (hbad : ∀ n, ∃ K : Set ℂ, IsPreconnected K ∧ K ⊆ Metric.closedBall (0:ℂ) 5 ∧
+(∀ z : Metric.closedBall (0:ℂ) 5, z.val∈K → 0<((F n).map z).val i) ∧ ∃ x∈K, ∃ y∈K, 2<dist x y) : False`.
+
+### Where an arbitrary colouring becomes something with structure
+
+Twice, and both times by construction rather than by hypothesis.
+1. **In the transfer**, at one line: the colouring is restricted to the countable field `E` of algebraic complex numbers and
+   becomes a point `ω` of the compact space of proper labellings of `E`; everything after that is about the invariant
+   probability measure its orbit averages define. Measurability is produced at the end (`exists_measurable_field`,
+   `positiveSelect_measurable`), for a *different* colouring `d` — the theorem does not say `c` is measurable.
+2. **In the obstruction**, the hypothesis is `Measurable c ∧ WeakColoring 5 c` and nothing more — no interface, map, boundary
+   regularity or perimeter bound is assumed. The objects with structure are defined from `c` by measure: palettes (weak-*
+   limits of angular samples), the transition graph (a positive limsup of translation-difference volume over `‖h‖`), the cyclic
+   core (proved finite on compacts), the threshold map (disk averages), the common interfaces (Hausdorff limits of connected
+   fibers). The statements `FullApprox`, `HoleApprox` and `CommonInterface` are *conclusions*.
+
+### Where the axiom of choice enters, by text
+
+- **The invariant mean**: `/-- One fixed ultrafilter is used for all functions. -/ def averagingUF (G : Type*) [AddCommGroup G] :
+  Ultrafilter (Finset G × ℕ) := Ultrafilter.of atTop`, and `def mean (f : G →ᵇ ℝ) : ℝ := (averagingUF G : Filter _).limUnder
+  (fun i => approx i f)` (`InvariantMean.lean:194–216`). A non-principal ultrafilter on a countable set: this is where the
+  transfer is non-constructive in the way the problem is known to require (the manuscript: "working throughout in ZFC").
+- `Classical.choice (fullApprox_exists …)` (`Five.lean:113`), `choose … using` in `exists_label_field` and
+  `no_large_positive_sequence`, `h.choose` in `pickSupport`: selections from proved existentials.
+- `open scoped Classical` in 11 files, `Classical.decEq` as local instances, and Mathlib's own uses (Riesz–Markov, conditional
+  distributions, `limUnder`). `#print axioms` cannot say which of these the headline *needs*; it says `Classical.choice` is used.
+
+### Named statements that read like ones this project holds or poses — listed, not judged
+
+| theirs (name, statement above or cited) | reads like, here |
+|---|---|
+| `WeakColoring k c` | the colourings counted by `χ_m⁰(ℝ²)`: measurable, proper at almost every unit pair (`LEDGER.md` row 130) |
+| `proper_to_borel_weak`, every `k`, no hypothesis | `χ_m⁰(ℝ²) ≤ χ(ℝ²)`: the collapse's direction that rows 128 and 130 hold **given MR**, [hand] |
+| the converse (manuscript only, not in Lean) | `χ(ℝ²) ≤ χ_m⁰(ℝ²)`, row 130, no MR, [hand] |
+| `wild_fourier` / `IsWild` (rigidity of rotation-invariant laws on the character group of the algebraic plane) | the role MR plays in rows 120, 123, 128 (`[EinsiedlerLindenstrauss2022]` Thm 1.3); a different statement about a different action |
+| `LabelModel.measure` (orbit average of a proper labelling under an invariant mean) | the invariant-mean / `χ_CP` constructions of row 130 (`[GwynStavrianos2022]`) |
+| `TransitionEdge` (positive limsup of `vol{c q, c(q+h) = i, j}/‖h‖`) | `CLAUDE.md` § The aim item 6's reading: perimeter as the rate of `P(c(0) ≠ c(h))` in `‖h‖` |
+| `cyclicCore_compact_finite` (centres whose transition graph has a cycle are finite on compacts) | the local finiteness of the singular set asked in rows 140–141 and 154 (REG-J′), and the "vertex of at least three/four colours" of rows 135, 137 — here for measurable five-colourings, proved |
+| `Straddle K`, `CommonInterface`, `continuum_limit_support_exclusion` (every `k`) | the band argument of `[Voronov2023]` Thm 1.3 and `[SokolovVoronov2025]` Props 1–2 (row 132), which the manuscript cites as predecessor |
+| `FullApprox`, `HoleApprox`: disks of total radius `< t` | row 131's holes of vanishing density — theirs are holes in the domain of an approximating *map*, not uncoloured sets |
+| `palette_cardinality` (one or two labels in almost every direction at every centre) | the circle colourings about a vertex of rows 145–148 |
+| `compact_open_cover_impossible` | Lebesgue's covering theorem in the plane; the map arguments of row 132 use the same dimension count |
+| `no_triangle_interfaces` via `Moser.seven_point_certificate` | rung A's spindle, placed in a three-colour region as in Falconer-type arguments (row 152's fans) |
+| `binary_open_local_rigidity` (every `k`) | two colours on an open set are locally one: the local step of row 134's and row 140's interface analyses |
+
+### What the shape says about scope
+
+Every statement of the obstruction arm with `Fin 5` in it is, by the headline, about an empty class — as the interior of any
+proof by contradiction is. The statements that survive it as theorems about objects that exist are those stated for every `k`
+(`proper_to_borel_weak`, `wild_fourier`, `continuum_limit_support_exclusion`, `binary_open_local_rigidity`,
+`binary_strip_rigidity`, `compact_open_cover_impossible`, the tree-contraction and disc-extension lemmas): they hold at six and
+seven, where colourings exist or may. Nothing in the cone states or uses a six-colour analogue of the obstruction.
