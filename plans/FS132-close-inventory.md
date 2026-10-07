@@ -1278,3 +1278,32 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     here is wasted effort, not a wrong result — and the rule bounds the waste; confidence medium. **It messages me with the
     four theorems' axiom lines the moment the last leaf is in.**
 
+46. **FS132-I4, third message (14:14 UTC): the last leaf is in — the first night's exclusion, in its four-point form at the
+    whole plane, reads the standard three axioms from built modules on branch `fs132-wi4`.** Its four lines, from its axiom
+    print after a build under the slot (exit 0): `no_outside_orbit_points`, `no_outside_orbit`, `not_ae_outside` and
+    `no_alternating_pairs`, each `[propext, Classical.choice, Quot.sound]`. Controls in the same run: a theorem on each
+    declared outside theorem prints it; a planted `sorry` prints `sorryAx`. **65 of 65 records clean, none on `sorry`, no
+    outside theorem and no native axiom under any.** The chart's and the tips' modules: all 18 leaves, no statement
+    changed, one helper (the 64 sign patterns, by `decide`). **At the time of its message the last two files were built
+    and not yet committed** (it sent the lines first, as the amendment asked); 19 `sorry` warnings remain in the build,
+    all in the two skeleton modules of other claims, none under these theorems; the full gate is not run. **My receipt,
+    read in its working tree at 14:14 UTC**: the print's seven planner lines, the four above among them, each the standard
+    three; its three controls (the two imports printed, `sorryAx` for the plant); the print and the build log written in
+    the same minute; the build log's last lines (exit 0, 7 modules rebuilt, 2 with warnings); **the `sorry` count of every
+    file of the six-ring folder, by me: 0 in thirteen, 16 and 3 in the two skeletons**; **the statement of
+    `no_outside_orbit_points` read by me against row 155's orbit form, clause by clause** — a measurable six-colouring of
+    the whole plane proper at almost every unit pair; four injectively named labels and the two others, distinct; four
+    points other than the centre; for each, the two consecutive labels' closed essential supports disjoint from the
+    straddle set of the two-point set; (i) for every integer `k`, almost every angle within `δ` of `ψ + kπ/3` has a palette
+    holding one of the two other labels; (ii) near `ψ` each of the two occurs on a set of positive measure; conclusion:
+    false — and the three definitions under it (the straddle set, the essential support, the weak colouring) read at
+    their source lines. Not checked by me: the commit (not yet made); the build itself; that the hypotheses are jointly
+    satisfiable short of the conclusion (the gate's vacuity check and the planner's models are the instruments for that).
+    **By this milestone's announcement rule (2 (i))**: this is **kernel-checked on a branch, not "held"** — held is when
+    the module passes the gate with its imports named. The row's grade does not change yet. **Rulings.** (a) Kooshi is
+    told now, in those words. (b) **The landing is briefed next** and takes this implementer's slot at its hand-back: the
+    exclusion's module with the port and the confinement module, **without the two skeleton modules** (nothing with a
+    `sorry` reaches `main`), with a copy of the release's licence text beside the ported modules and the three instances
+    on Mathlib types scoped or justified. (c) The two skeleton modules (the index lemmas; the centres) stay on the
+    planner's branch for their own jobs.
+
