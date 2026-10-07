@@ -1,0 +1,9 @@
+card lint
+  cards: 1  no-question exits: 0
+  the ask: Run forward, with a cell of one unbarred label a piece and that piece a member at the next point, how far do the pieces at one covering pair force a weak six-colouring: to an empty cell, a free cell, or a whole ring?  [line 308]
+hunch ledger
+  hunches: 11  open: 7  confirmed: 2  killed: 2
+evidence inventory
+  warn  unread: `data/fs136/claims.md`
+  items: 14  surprised: 8  unread: 1
+GATE: PASS (0 failures, 1 warning)
