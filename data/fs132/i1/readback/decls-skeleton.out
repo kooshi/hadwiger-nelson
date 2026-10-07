@@ -1,0 +1,10 @@
+IDENTICAL  ProperColoring: def there, def here; 600 characters of term; 14 constants named
+IDENTICAL  anglePeriodPositive: theorem there, theorem here; 652 characters of term; 17 constants named
+IDENTICAL  Angles: def there, def here; 365 characters of term; 11 constants named
+IDENTICAL  angularMeasure: def there, def here; 982 characters of term; 18 constants named
+IDENTICAL  direction: def there, def here; 2254 characters of term; 28 constants named
+DIFFERENT  WeakColoring: value at char 395: release …ProductSpaceRealComplex [])) (c Complex.instFiniteDimensionalReal [])) (c Complex.measurableSpace [])) (c Complex.borelS… | here …ProductSpaceRealComplex [])) (((c FiniteDimensional.rclike_to_real [0]) (c Complex [])) (c Complex.instRCLike []))) (c C…; constants named: only at the release ['Complex.instFiniteDimensionalReal']; only here ['Complex.instRCLike', 'FiniteDimensional.rclike_to_real']
+IDENTICAL  no_proper_five_coloring: theorem there, axiom here; 375 characters of term; 8 constants named
+IDENTICAL  proper_to_borel_weak: theorem there, axiom here; 522 characters of term; 13 constants named
+declarations: 8  compared: 8  identical: 7  different: 1 ['WeakColoring']
+READ-BACK DIFFERS

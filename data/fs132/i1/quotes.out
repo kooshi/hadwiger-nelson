@@ -1,0 +1,35 @@
+OK	data/external/EXT-OAI1-request.md	> You may use their proof as any other literature. Cite it, build on i
+OK	data/external/EXT-OAI1-request.md	> 1. port or import: let's import and adopt parts piecemeal if needed.
+OK	plans/FS131-close-inventory.md	614. **EXT-OAI1, third message: THE OUTSIDE PROOF BUILDS HERE, ITS HEA
+OK	plans/FS131-close-inventory.md	615. **KOOSHI'S WORD ON THE OUTSIDE RELEASE, 2026-10-07 (verbatim; als
+OK	plans/FS131-close-inventory.md	617. **KOOSHI'S THIRD WORD, 2026-10-07 (verbatim; `data/external/EXT-O
+OK	plans/FS131-close-inventory.md	619. **EXT-OAI1 done: the outside release's Lean proof that the plane 
+OK	LEAN.md § Assumptions	- **An imported theorem carries four things**, because an axiom that m
+OK	LEAN.md § Assumptions	- **Every assumption in hypothesis form is declared to the gate**, in 
+OK	data/external/oai1/audit/ImportSkeleton.lean	axiom no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c
+OK	data/external/oai1/audit/ImportSkeleton.lean	axiom proper_to_borel_weak {k : ℕ} [NeZero k] {c : ℂ → Fin k} (hc : Pr
+OK	data/external/oai1/audit/ImportSkeleton.lean	theorem six_le_chromaticNumber_plane : 6 ≤ (unitDistance (EuclideanSpa
+OK	data/external/oai1/audit/ImportSkeleton.lean	theorem chromaticNumber_plane_six_or_seven :
+OK	data/external/oai1/audit/ImportSkeleton.lean	theorem nonempty_aeColouring_of_weak {k : ℕ} {d : ℂ → Fin k} (hd : Mea
+OK	data/external/oai1/audit/ImportSkeleton.lean	theorem chiM0_le_chromaticNumber_plane : Plane.chiM0 ≤ (unitDistance ℂ
+OK	data/external/oai1/audit/ImportSkeleton.lean	theorem chromaticNumber_plane_eq_chiM0 (hNEASY : (unitDistance ℂ).chro
+OK	data/external/oai1/audit/ImportSkeleton.lean	theorem six_le_chiM0 (hNEASY : (unitDistance ℂ).chromaticNumber ≤ Plan
+OK	/home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/Coloring.lean	def ProperColoring (k : ℕ) (c : ℂ → Fin k) : Prop :=
+OK	/home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/Coloring.lean	def WeakColoring (k : ℕ) (c : ℂ → Fin k) : Prop :=
+OK	/home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/Five.lean	theorem no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 
+OK	/home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/BorelTransfer.lean	lemma proper_to_borel_weak {k : ℕ} [NeZero k] {c : ℂ → Fin k} (hc : Pr
+OK	Proofs/HadwigerNelson/Plane/YesLimit.lean	theorem chromaticNumber_plane_le_chiM0 : (unitDistance ℂ).chromaticNum
+OK	Proofs/HadwigerNelson/Instances/Interval.lean	theorem chromaticNumber_plane_interval :
+OK	Proofs/HadwigerNelson/Arith/WeilKloosterman.lean	/-- **IMPORTED: Weil's bound for Kloosterman sums over a finite field 
+OK	Proofs/HadwigerNelson/Arith/WeilKloosterman.lean	axiom kloosterman_bound.{u} (F : Type u) [Field F] [Fintype F] [Decida
+  source /home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/BorelTransfer.lean: 1
+  source /home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/Coloring.lean: 2
+  source /home/kooshi/source/math/lean/OAI/Geometry/PlaneColoring/Five.lean: 1
+  source LEAN.md: 2
+  source Proofs/HadwigerNelson/Arith/WeilKloosterman.lean: 2
+  source Proofs/HadwigerNelson/Instances/Interval.lean: 1
+  source Proofs/HadwigerNelson/Plane/YesLimit.lean: 1
+  source data/external/EXT-OAI1-request.md: 2
+  source data/external/oai1/audit/ImportSkeleton.lean: 8
+  source plans/FS131-close-inventory.md: 4
+quotations: 24  mismatches: 0  root: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1
