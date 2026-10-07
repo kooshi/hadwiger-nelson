@@ -7951,3 +7951,47 @@ reason by the close.*
      hypotheses says so in words and names its refutation — and the same clarification to the plan's § 7.3 item 5 at
      the filing; **an instrument change that would let the scan honour a marker against a named refutation of the
      exact hypotheses joins the tooling job's questions** (ruling 475 (d)). Ruling 518 is amended to this.
+
+606. **FS131-K7c done at its Stage 14: wave 7's third planning pass — its three early answers given (items 601, 604), FS114-Y3-RSTOP stated at the class its argument reads, the wave's assumptions listed; the pinwheel not started, by its own judgment, with a fourth pass's reading list** (planner; harness 480k and 46 minutes by the task notice; record `fs131-w7`'s `plans/FS131-w7-kernel-plan.md` Stages 8–14; report `data/fs131/reports/FS131-K7c.md`; five commits, tip `b1101992`; pushed, tree clean).
+     **Since item 604** (its Stage 14): the obligation-modeling pass on the stop's split changed two of its own new
+     leaves — `outside_ring_colour` became **`col_eq_of_tiles_toward`, a lemma about any valid map** (any number of
+     colours, no bowtie, Siamese pairs allowed: FS114-Y3-R's necessary condition at the class its argument reads),
+     and `exists_side_germs` takes the two corners in the domain in place of `Covers p 1` — and gave one row whole:
+     **FS114-Y3-RSTOP is `not_mem_dom_of_tiles_toward`** (any valid map; the fragment meets its hypotheses and its
+     conclusion: a model, not a near-miss). `Bowtie` now holds 15 open leaves, about 2,500 lines, two jobs (ten
+     leaves, then five); `Local` 9, unchanged since `02a11514`. **The assumptions list for the wave's landing is one
+     binder** (`RouteT.CountData.kill`'s `hK1`, kind open, source FS114-N3-JOINT) and three formers that no theorem
+     concludes until the fragment's last job does. **Not done, said plainly**: no pinwheel row and no pinwheel
+     foundation (about 3,700 lines of argument unread by every planner of the wave; it would not state them from
+     entries); `main` not merged (wave 8 was not on it). **My receipt**: tip equals `origin/fs131-w7`, tree clean;
+     `sorry` by my script over theorem blocks: `Local` 9, `Bowtie` 15 (the fifteen it names), `Rainbow` 1,
+     `Basic` 0; its last build log ends "OK — 467 of 467 batches, 2 module(s) rebuilt, 3 module(s) with warnings",
+     `EXIT=0`; by my script, since `02a11514` `Local`'s heads are unchanged and `Bowtie` lost
+     `outside_ring_colour`, gained the two it names, and changed `exists_side_germs` (the two domain binders) and
+     `corner_tiles_toward` (its window's form) — as it reports; its § 14.2 and § 14.4 read. Not checked by me: that
+     the rewritten window is "the same set"; its mutation audit; the built module against the committed file (its
+     disclosed slip: the last module was edited while the build walked earlier batches). **Predictions scored**:
+     its "the survey uses a convention" — not met (another object); rows stated whole, 1 of 8 against its
+     registered median of 3. **Credit**: three implementer lines released inside one pass; two general lemmas found
+     under a bowtie-specific leaf by asking which hypotheses the proof reads; a test object named for a row it did
+     not read (below). **Rulings.** (a) **The bowtie's two jobs run one after the other on one branch** (FS131-I7B1,
+     ten leaves; then FS131-I7B2, five). Alternative: side by side, as its handoff allows. Why not: both prove
+     leaves of one file, and two branches never change one file; the slots, not the split, are the constraint.
+     Confidence: high. (b) **`main` is merged into wave 7's line by `Local`'s implementer as its first act**, which
+     sends the hash; **`fs131-w7` is fast-forwarded onto that hash before the fourth planner is launched** (the
+     pattern of item 600 (c)). (c) **A fourth planning pass, FS131-K7d**, from its § 14.4's list — the pinwheel
+     whole, N5-BENDG, Y3-D2, N3-PAY, N4-TOP / FIVE / ARC against `top_arc` and `corner_tiles_toward`, Y6-HALF's W,
+     FS114-Y2-BOWTIE's statements. Brief not written; it launches after the merge of (b). (d) **`kill`'s `hK1` is
+     decided at the wave's landing by the step's own procedure**; my default: a condition on the theorem's own
+     count data (`kill` refutes count data meeting it), not a declared assumption — the landing says if the step
+     reads it otherwise. Confidence: medium. (e) **A question for a deriver, from it** (unread by it, an
+     observation): the original construction's map (`tools/fs114_y2_k1.py`) is a degree-4 four-colour vertex on a
+     valid fragment of radius `3√3/5` whose ring carries arcs of `Γ` that are neither (Q) nor (R2) — so
+     FS114-N5-GRING's N5-BENDG ("the bends leave only (Q) and (R2) ring arcs at a degree-4 vertex") must carry a
+     covered radius, and that map is the object that tests its statement. It goes into the fourth planner's brief
+     as the first thing to read for that row, and to the deriver's list if the row's argument does not answer it.
+     (f) **The two general lemmas** (`col_eq_of_tiles_toward`, `not_mem_dom_of_tiles_toward`; open on its branch)
+     are named in wave 8's third planner's brief when it is written. (g) Its errata lines (item 601's seven) and
+     generalizations are held for the filing. (h) **Slot → FS131-I9B** (wave 9's first implementer, on
+     `fs131-w9b`), launched 2026-10-07 about 01:20 UTC. In flight: 3 (L8A, K9b, I9B). Next: FS131-I10G, then wave
+     7's (I7B1 and the fragment's first job now; I7L when `main` holds wave 8), FS131-E9, FS131-I6Z2.

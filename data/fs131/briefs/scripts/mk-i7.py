@@ -24,11 +24,11 @@ def leaves(path):
         if re.search(r"^\s*sorry\s*$|:= sorry|by sorry",m.group(0),re.M): out.append(m.group(1))
     return out
 LOC=V+"FourColour/Local.lean"; BOW=V+"FourColour/Bowtie.lean"; RAIN=V+"RouteT/Rainbow.lean"
-# FINALIZE this list from the third planner's handoff before a B lane is launched (it was still editing `Bowtie` when this was written).
-DIAG=["IsReuleauxBowtie.top_arc","IsReuleauxBowtie.top_arc'","IsReuleauxBowtie.corner_tiles_toward","IsReuleauxBowtie.outside_ring_colour","col_eq_of_tiles_toward","not_mem_dom_of_tiles_toward","IsReuleauxBowtie.partner_cone_of_far","IsReuleauxBowtie.rstopAll"]
+# The second job's leaves, from the third planner's handoff (its record § 14.4, at b1101992); everything else open in `Bowtie` is the first job's.
+DIAG=["IsReuleauxBowtie.top_arc","IsReuleauxBowtie.top_arc'","IsReuleauxBowtie.corner_tiles_toward","IsReuleauxBowtie.partner_cone_of_far","IsReuleauxBowtie.rstopAll"]
 SH8=(P+"RingCalculus/SemiHub.lean") if LANDED8 else WT+"fs131-w8c/"+P+"RingCalculus/SemiHub.lean"
 COPY=f"to spare a rebuild of everything `main` gained, copy a green build of `main`'s line over yours before you build — `cp -a /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w8l/.lake/build/. {W}.lake/build/` — and only while no `lake` runs in that source tree (`pgrep -x lake`, then `readlink /proc/<pid>/cwd` for each)"
-ITEMS=[604,601,553,564,556,573,596]
+ITEMS=[606,604,601,553,564,556,573,596]
 EXTRA=""; PRE=""
 if LANE=="L":
     L=leaves(LOC); assert len(L)==9,L
@@ -36,7 +36,7 @@ if LANE=="L":
     ROLE="wave 7's implementer for the local lemmas — prove `anchor`, then the nine open leaves of `Local`, from the planners' plan, without changing a statement, saving after each leaf or group"
     LAUNCH="when a slot frees and `main` holds wave 8; the wave's other implementers work on `Bowtie` and on the fragment in trees of their own, from the same line"
     STM="\n".join([Q(RAIN,"theorem anchor ")]+[Q(LOC,"theorem "+n+" ") for n in L])+"\n"
-    PLANQ=["- **`Plane/FourColour/Local`** (13 leaves","*Re-priced from this pass's proved leaves","**The obligation-modeling pass**","- **J1 ","- **J2 ","- **J3 ","- **J5 ","Mutation audit (statement level)",
+    PLANQ=["- **`Plane/FourColour/Local`** (9 leaves","- **`Plane/FourColour/Local`** (13 leaves","*Re-priced from this pass's proved leaves","**The obligation-modeling pass**","- **J1 ","- **J2 ","- **J3 ","- **J5 ","Mutation audit (statement level)",
            "| `sides`, `sides'` |","| `pair` |","| `ring_odd`, `ring_odd'` |","| `IsTacticAt.lens_cone` |","| `IsTacticAt.flank` |","| `IsTacticAt.four_le_centre` |",
            "**Leaves whose statement this stage changed** (all in `Local`","- **A statement defect of the skeleton, found here","- **J4 is not minted**"]
     PLAN="\n".join(Q(REC,p) for p in PLANQ)+"\n"+Q(REC,"| `qArc_others_absent` |",contains="four tiles at `p`")
@@ -62,21 +62,21 @@ elif LANE in ("B1","B2"):
     if LANE=="B1":
         MINE=B1
         WHAT="the bowtie's first half — the lune, the side germs, the cap"; FILES=f"`{P}FourColour/Bowtie.lean` (its first {len(B1)} open leaves)"
-        ROLE="wave 7's first implementer for the bowtie — prove `own`, the side germs, the two absent-colour leaves, `lune` and the three cap leaves, from the planners' plan, without changing a statement, saving after each leaf or group"
+        ROLE="wave 7's first implementer for the bowtie — prove `own`, the two general lemmas about tiles approaching a point (`col_eq_of_tiles_toward`, `not_mem_dom_of_tiles_toward`), the side germs, the two absent-colour leaves, `lune` and the three cap leaves, from the planners' plan, without changing a statement, saving after each leaf or group"
         LAUNCH="when a slot frees; the second half of the file (FS114-Y4-DIAG's leaves and the stop) is a later job's, on your branch after you"
-        PLANQ=["| `own` |","| `IsReuleauxCross.lune` |","| `cap_colour`, `cap_colour'`, `exists_cap_tile` |","**The children** (`Bowtie.lean`","| `IsReuleauxCross.exists_side_germs` (any `k`) |","| `IsReuleauxCross.side_colour_absent`, `'` (any `k`) |","- **J1 ","- **J3 ","**D1 (N3-HALF's last clause).**"]
-        ORDER="`own`; `exists_side_germs`, then `side_colour_absent` and its mirror; `lune` (the planner's largest of yours: its step (3) wants a connectedness argument on the side arc in place of the hand proof's rotation at a vertex); then the three cap leaves"
-        PRICE="about 900 lines by the second planner, plus about 200 for the three side leaves the third added"
+        PLANQ=["- **`Plane/FourColour/Bowtie`, first job**","| `own` |","| `IsReuleauxCross.lune` |","| `cap_colour`, `cap_colour'`, `exists_cap_tile` |","**The children** (`Bowtie.lean`","| `IsReuleauxCross.exists_side_germs` (any `k`) |","| `IsReuleauxCross.side_colour_absent`, `'` (any `k`) |","1. **`outside_ring_colour` became `col_eq_of_tiles_toward`","2. **`exists_side_germs` takes the two corners in the domain**","And one row stated that the same reading gave whole:","**Statement-level mutation audit of the children**","- **J1 ","- **J3 ","**D1 (N3-HALF's last clause).**"]
+        ORDER="`own`; the two general lemmas `col_eq_of_tiles_toward` and `not_mem_dom_of_tiles_toward` (statements about any valid map, about 130 lines each by the planner: they re-price the rest, and the second is a whole backlog row, FS114-Y3-RSTOP); `exists_side_germs`, then `side_colour_absent` and its mirror; `lune` (the planner's largest of yours: its step (3) wants a connectedness argument on the side arc in place of the hand proof's rotation at a vertex); then the three cap leaves"
+        PRICE="about 1,250 lines by the third planner"
         NOT=f"the six leaves of the file's second half ({', '.join('`'+n+'`' for n in B2)} — a later job's: leave their `sorry`), `{P}FourColour/Local.lean` (another implementer's: its leaves are statements you may cite and may not prove), anything else under `{P}FourColour/`"
     else:
         MINE=B2
         assert not B1 or DRY,"I7B2 launches after I7B1's hand-back, on its branch"
         WHAT="the bowtie's stop — FS114-Y4-DIAG's five steps and the composition"; FILES=f"`{P}FourColour/Bowtie.lean` (its last {len(B2)} open leaves)"
-        ROLE="wave 7's second implementer for the bowtie — prove `top_arc` and its mirror, `corner_tiles_toward`, `outside_ring_colour`, `partner_cone_of_far` and the composition `rstopAll`, from the third planner's split, without changing a statement, saving after each leaf"
+        ROLE="wave 7's second implementer for the bowtie — prove `top_arc` and its mirror, `corner_tiles_toward`, `partner_cone_of_far` and the composition `rstopAll`, from the third planner's split, without changing a statement, saving after each leaf"
         LAUNCH="when a slot frees, on the branch the bowtie's first implementer handed back"
-        PLANQ=["**The hypothesis narrows:","**YB2-RPREC, and why the split needs no second-order estimate.**","**The children** (`Bowtie.lean`","| `IsReuleauxBowtie.top_arc`, `top_arc'` |","| `IsReuleauxBowtie.corner_tiles_toward` |","| `IsReuleauxBowtie.outside_ring_colour` |","| `IsReuleauxBowtie.partner_cone_of_far` |","About 1,650 lines with the cap leaves' reuse","- **J1 ","- **J3 "]
-        ORDER="the shared lemma about the tiles at `top` first (the planner prices it as saving about 200 lines across `top_arc` and its mirror); `top_arc`, `top_arc'`; `corner_tiles_toward`; `outside_ring_colour`; `partner_cone_of_far`; `rstopAll` last, with the one helper its row names as owed"
-        PRICE="about 1,450 lines by the third planner"
+        PLANQ=["**The hypothesis narrows:","**YB2-RPREC, and why the split needs no second-order estimate.**","**The children** (`Bowtie.lean`","| `IsReuleauxBowtie.top_arc`, `top_arc'` |","| `IsReuleauxBowtie.corner_tiles_toward` |","| `IsReuleauxBowtie.partner_cone_of_far` |","About 1,650 lines with the cap leaves' reuse","- **`Plane/FourColour/Bowtie`, second job**","1. **`outside_ring_colour` became `col_eq_of_tiles_toward`","**Statement-level mutation audit of the children**","- **J1 ","- **J3 "]
+        ORDER="the shared lemma about the tiles at `top` first (the planner prices it as saving about 200 lines across `top_arc` and its mirror); `top_arc`, `top_arc'`; `corner_tiles_toward`; `partner_cone_of_far` (over your predecessor's `col_eq_of_tiles_toward`); `rstopAll` last, with the one helper its row names as owed"
+        PRICE="about 1,250 lines by the third planner"
         NOT=f"`{P}FourColour/Local.lean` (another implementer's), the first half of `Bowtie` (proved by your predecessor: cite it), anything else under `{P}FourColour/`"
     ROLE=ROLE; STM="\n".join(Q(BOW,"theorem "+n+" ") for n in MINE)+"\n"
     PLAN="\n".join(Q(REC,p) for p in PLANQ)+"\n"+(Q(REC,"| `IsReuleauxBowtie.rstopAll` |",contains="the composition") if LANE=="B2" else "")
