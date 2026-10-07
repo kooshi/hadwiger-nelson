@@ -98,3 +98,64 @@ Tags: P = per class (true at every number of labels); X = spends the number six.
 
 *Gate at this stage*: `derive_gate.py all` reports one failure by construction — "no derivation entry" — until Stage 4's first
 entry; every later stage is committed with the gate at exit 0.
+
+## Stage 2 — SAVED: recognition (`ephodos-recognition`, invoked fresh) on the five claims
+
+**The stall read.** No claim has stalled; the card's shape meets three of the skill's conditions. *A clause per case*: the pattern
+is a pair of counts with a case per value — (1, 1), (1, 0), "three sets" in fragment T2 — and C124-HALF splits nine side patterns of
+two edge sets. *A known theorem that almost applies*: C132-COMP-SHARP's conclusion "one of the six sets … is contained in the unit
+circle about w" is met by a one-point set. *A result proved only at instances*: "exactly one edge of each" is read at 94 points of
+two objects built by one recipe.
+
+**For a stranger** (a geometer who knows open sets, connectedness and Fubini; no word of this project). *A measurable map from an
+open plane set to six labels gives almost no two points at distance 1 the same label. Near a point `x` three connected open sets,
+each carrying one label, fill a neighbourhood up to a null set, and `x` is in the closure of each; the same at a point `y` with the
+three other labels; `0 < |x − y| < 2`; `w` is a point at distance 1 from both. A connected open set of label `i` with a point at
+distance less than 1 from a point `p` and a point at distance more than 1 has a point at distance exactly 1, so `i` is null near
+`p`. Which of the six sets can still reach the four regions into which the unit circles about `x` and `y` cut a neighbourhood of
+`w`?* **This is a** covering question for four open regions by six sets, each of which is confined to one side of one circle
+according to whether a connected set lies in a closed disc, in the complement of the open disc, or in neither. The reader stops at
+no word: "edge", "saved", "pattern", "tight" were not needed.
+
+**The features, sorted** (receipt beside each):
+
+| feature | sort | receipt |
+|---|---|---|
+| each piece is connected and open, with its member in its closure | determines | the intermediate value along a path in the piece; without connectedness a label can sit on both sides of `S(w)` and reach both sides at `w` (the bowtie's repeated label read as one piece) |
+| the side of a piece at `w` (inner, outer, crossing) | determines | C124-TYPE; control `quadrant-count`: the count over the four regions is a function of the six sides and of nothing else |
+| the edges, as sets | accompanies — it **splits**: consumed only as "two points of the closure of one connected piece" | C132-COMP-SHARP's *uses only* line reads of a set `K` two of its points; an edge that is one point satisfies every hypothesis and carries nothing |
+| an edge contains an arc of `S(w)` with an end at the member | accompanies for the count; **determines** for the statement "saved by" | for sector points it is equivalent to an inner and an outer piece meeting along it; at a bowtie the inner and outer pieces meet at the point only and no arc exists |
+| six labels | determines | two disjoint triples are all the labels; at seven the honeycomb's seventh label fills the point (C124-FORCED-SEVEN) |
+| `0 < |x − y| < 2` | determines | the two circles cross at `w`, so all four regions are non-empty; at distance 2 one is empty (C132-CROSS's fault) |
+| the tangent directions of the pieces at the member; curvature of the edges | accompanies | no step reads them: the sides are read on the pieces as sets |
+| "exactly one edge of each member" (the card's pattern) | unsorted before the reading; **sorted in Stage 5** | it is the case in which the third piece of each member is crossing |
+| the neighbourhood's size; which decomposition | accompanies, with a caution | every statement holds for each decomposition; a point may be full for one and not for another only through connectedness of a piece away from the point |
+
+**The homes** (each tested):
+
+1. *This project's map class* — the object is a close complementary pair of cubic trichromatic vertices, the theorems FS107-W-TAN
+   ("a tangent pair or include a bowtie") and FS112-N3-COR3 ("each a leaving centre of both"; "One failure is not enough"), two
+   minds on each. **Adopted as the theorem to carry across.** Dictionary: tile ↔ connected open one-label piece; leaving centre of
+   `u` ↔ `u` separates at the point; both-kind arc ↔ the edge of an inner and an outer piece; bowtie ↔ a three-piece point that is
+   not full; "strip holds on a clean side" ↔ no piece of the member is inner (or none outer). *The old proof's step that must
+   change*: N3-COR3 reads tangent directions and side cones of arcs (`±t_u`, N112-U1); a measurable piece has neither. The
+   replacement: C124-CENTRE's computation at the member for one neighbour `w′` of `w` — exact unit circles in place of cones.
+   *The exceptions vanish*: the patterns (1, 0), (2, 1), "three sets" become one statement about sides. *It predicts a neighbour*:
+   the label set at `w` is exactly four when each member has one piece of each side (C124-FOUR) — read by the asking lane, derived
+   by nobody.
+2. *Last night's exact class* (C132-CROSS, C132-COMP-SHARP: a measurable labelling with exclusion sets, no properness). **Adopted
+   for the count only**; its unit (the exclusion set) is the accompaniment the split above removes.
+3. *Helly-type or covering arguments for discs* (the four regions as a nerve). **Not adopted**: the count is four lines and names
+   no theorem; recalled, not read, and it predicts nothing the direct count does not.
+
+**The transfer.** Theorem read: FS112-N3-COR3 at its statement and its verification paragraph (not its full proof, nor N112-U1).
+Hypotheses to discharge here: none is taken from it — the measurable statements are derived from C124-SHADOW-OPEN and C124-CENTRE
+(first round, [hand], one mind), so N3-COR3 is prior art and a second route in the map class, not an input. *The remaining step is
+not the problem renamed*: after C124-TYPE each claim is a finite count or a computation with two circles.
+
+**The class.** C124-TYPE at every number of labels; the count at six for three-piece points by the letter; the exclusion of a save
+by one member for full points; "saved by" and tightness along an arc for sector points. **A recognition that differs from the
+card's**: the unit a save is paid in is not an edge on a circle but a pair of pieces on the two sides of it; the card's pattern is
+its shadow for sector points, and the card's open branch (a save by one member) is, in measure, exactly the bowtie of the map class.
+
+**Stage 2 — SAVED** (2026-10-07).
