@@ -639,3 +639,126 @@ spent twice before (Prop. 5.6, Theorem 6.5). P6 (0.50) **met**. P7 (0.60) **met*
 given local finiteness. P8 (0.75) **half met**: the palette is the ring in measure, and Theorem 6.5 plays at five the part REG-J′
 plays in route M, but it is not REG-J′ — `𝓛` is defined by transition graphs, is smaller than a singular set of interfaces, and
 nothing about arcs is proved. P9's second half (0.50: an extraction step I cannot verify on one reading) **lost**.
+
+## Stage 4 — SAVED: step by step, five against every `k`; what six would need; the Lean side by side
+
+*Written after the coordinator relayed three things (2026-10-07): the kernel's word is in (`plans/EXT-OAI1-audit.md` stage 4: the
+70-module cone builds at the release's pin; `no_proper_five_coloring`, `proper_to_borel_weak`, `no_measurable_weak_five_coloring`
+and `PlaneFiveColor.Spectral.wild_fourier` each on the standard three axioms; the stored statement is the challenge's; a planted
+`sorry` reaches the headline); Kooshi's word, verbatim, "You may use their proof as any other literature. Cite it, build on it,
+let's use it to slingshot us past anyone else working on this problem."; and the question the asking lane will put to this
+record — with the transfer and the five-colour obstruction as literature, what is the shortest road to six against seven. § 2.6
+stays the sketch it is, its one unchecked step named there; a colleague takes it as a job of its own.*
+
+### 4.1 Steps I could not follow
+
+**None.** Every step of §§ 2–8 was followed on one reading; what I took as read rather than reworked is listed in § 2.7 and
+§ 3.6. So brief item 4's side-by-side reads, for every step: *followed by one mind on one pass; the corresponding Lean compiles
+in the audited cone.* Five places where the manuscript and its Lean differ, none a defect, each relevant to what may be cited:
+
+1. **The converse of Theorem 1.3 is not in the Lean** (the audit, stage 6: "no statement concluding `ProperColoring` from
+   `WeakColoring`"). `χ(ℝ²) ≤ χ_m⁰(ℝ²)` is therefore at the manuscript's grade (Lemma 4.3, a translate, de Bruijn–Erdős — read,
+   followed) and at this project's own (link 2; FS103-M-EASY). The headline does not need it.
+2. **"`ν` is Haar" is in the Lean in Fourier form** (`wild_fourier`: every nontrivial coefficient of a wild law vanishes);
+   Fourier uniqueness is the manuscript's last line.
+3. **The invariant law** is a weak limit of a subsequence in the manuscript (F2; no choice) and the Riesz measure of an
+   ultrafilter mean in the Lean (`LabelModel.measure`, `averagingUF`; the audit, stage 6). § 2.3's "choice is discharged at F1"
+   is about the manuscript's proof.
+4. **The obstruction is arranged contrapositively.** The manuscript extracts an essential loop and kills its cycle (Acts 3, 4).
+   The Lean first proves that the common interfaces at a point form a forest (`commonInterface_graph_acyclic`, from
+   `no_triangle_interfaces`, `no_four_interfaces`, `no_five_exclusion_continua`), fills the core discs with that, and contradicts
+   the cover theorem with a graph-valued map of the whole disc (`fullApprox_exists`, `graph_map_large_positive`,
+   `no_large_positive_sequence`). **So the cover of order two against order three is not where five enters**: the cover theorem
+   (`compact_open_cover_impossible`) has no colour in it and says that *no* colouring, at any `k`, has a graph-valued
+   approximant on a large disc. Five enters in the two statements that would make one exist: the core is finite
+   (`cyclicCore_compact_finite`) and every core disc can be filled (`commonInterface_graph_acyclic`).
+5. **Lemma 5.5's constant.** The manuscript's `δ_*` is absolute. The stored Lean statement is
+   `binary_centers_separated {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c) (hw : WeakColoring k c) : ∃ δ > 0, ∀ (x z : ℂ) (i j : Fin k), BinaryCenter c hc x i j → BinaryCenter c hc z i j → x ≠ z → δ ≤ dist x z`
+   (`lean/OAI/Geometry/PlaneColoring/BinaryPalettes.lean:123`): `δ` is chosen after the colouring. Its proof takes `δ` from
+   `binary_dynamics_controls`, which has no colouring in it; uniformity is in the manuscript and in the proof, not in the stored
+   type.
+
+### 4.2 Every step of the obstruction: stated for which `k`, and does its proof use the count
+
+"Manuscript" is always *five* — §§ 5–8 stand under "We now assume a weak measurable five-coloring" (`M/palettes.tex:3`). The
+column that matters is the Lean's type, read by text in the audited cone (addresses under `lean/OAI/Geometry/PlaneColoring/`),
+and whether the manuscript's proof spends the count.
+
+| # | step (manuscript) | Lean statement, and its `k` | uses the count? |
+|---|---|---|---|
+| 1 | Lemma 4.3: density points of a class hold no unit pair | `WeakColoring.lean`, `Fin k` | no |
+| 2 | Def. 5.1, Lemma 5.2: traces, palettes, transport between centres | `Palettes.lean`, `PaletteDensity.lean`, `palette_transport_param {k}` (`PaletteTransport.lean:362`) | no |
+| 3 | Cor. 5.4: `P_x(f) ∩ P_x(Rf) = ∅` | `palette_sixty_disjoint`, every `k` (`PaletteTransport.lean:450`) | no |
+| 4 | Lemma 5.5: binary centres for one pair are separated | `binary_centers_separated {k}` (`BinaryPalettes.lean:123`); the dynamics (`BinaryDynamics`, `Expansion`, `CircleMaps`) has no colouring | no |
+| 5 | **Prop. 5.6: palettes have at most two labels** | `palette_cardinality (c : ℂ → Fin 5)` (`BinaryPalettes.lean:260`), from `palette_triple_null` at `Fin 5`; its core is general: `circle_complement_binary {k}` — a subset `S` of the palette with `Finset.univ \ S = {i, j}` makes `x + direction t` a binary centre (`:243`) | **yes**: the complement of a triple is a pair |
+| 6 | Def. 6.1, Lemma 6.2: transition graph; an edge empties both its labels from a trace | `Transitions.lean`, `Fin k`: `transition_small_mass` (`:110`) | no |
+| 7 | Lemma 6.3: two states covering all labels but `X` have supports with no two directions 60° apart | `strict_state_no_unit_support {k}`, hypothesis `hlabels : ∀ i, i ∉ J ∪ K ↔ i = X` (`States.lean:704`) | the count is **a hypothesis**: exactly one label outside |
+| 8 | Lemma 6.4: no alternation under `R` between a singleton and a pair | `two_state_impossible {k}`, hypothesis `hcard : (Finset.univ \ (J ∪ K)).card ≤ 2` (`States.lean:243`) | the count is **a hypothesis**: at most two labels outside |
+| 9 | **Theorem 6.5: the cyclic centres are locally finite** | `cyclicCore_compact_finite (hw : WeakColoring 5 c)` (`CyclicCore.lean:269`) | **yes**, in each of its three cases |
+| 10 | Lemmas 7.2, 7.3: disc averages; a missing edge has small overlap | `diskAverage_unit_pair {k}`, `missing_edge_overlap` at `Fin k` (`DiskAverages.lean:63, 307`) | no |
+| 11 | Lemma 7.4: graph-valued off small discs, tree fillings | `forest_chart`, `HoleApprox`, `fill_noncore_disks`: typed `Fin 5`; the tree contraction and disc extension have no colour | no (typed at five only) |
+| 12 | Lemma 7.5: no cover of multiplicity two and small mesh | `compact_open_cover_impossible` (`PlanarCovers.lean`), no colouring | no |
+| 13 | Lemma 7.6, Prop. 7.1: an essential loop; a label cycle; continua with the two-colour exclusion | `continuum_limit_support_exclusion` every `k` (the audit); `CommonInterface`, `commonInterface_of_compact_sequence` typed `Fin 5` | no (typed at five only); given step 9 |
+| 14 | Lemma 8.1: one-sided strips | `AngularBoundary.lean`, `BoundaryTrace.lean`, `Fin k` | no |
+| 15 | **Prop. 8.2: no five-cycle** | `no_five_exclusion_continua` (`Exclusion.lean:141`), `Fin 5` | **yes**: no label outside; steps mod 5 |
+| 16 | **Prop. 8.5: no four-cycle** | `no_four_interfaces` (`Interfaces.lean:514`), `Fin 5` | **yes**: one label outside |
+| 17 | Lemma 8.6: two colours on an open strip are locally one | `binary_open_local_rigidity`, `binary_strip_rigidity`, every `k` (the audit) | no |
+| 18 | **Lemmas 8.7–8.9, Prop. 8.10: no triangle** | `no_triangle_interfaces` (`Sectors.lean:426`), `Fin 5`; `Moser.seven_point_certificate` | **yes**: two labels outside, three inside |
+
+**So the five-only steps are four: 5, 9, 15–16–18 (one statement, `commonInterface_graph_acyclic`), and nothing else.** Steps 7
+and 8 are general lemmas whose hypotheses carry the count; everything else holds at six and seven as stated, on the three
+axioms in their library.
+
+### 4.3 The five-only steps at six: the statement needed, and what this project holds on it
+
+**Calibration first, by formula (hand, one mind; mine, not the manuscript's): steps 5 and 9 are false at seven.** Take the
+hexagonal seven-colouring with circumradius `r = 2/5` (theirs, `M/introduction.tex:123–135`: same-colour distances at most
+`0.8` inside a hexagon and at least `(√21 − 2)·(2/5) > 1.03` between hexagons), and a vertex `v` where colours 1, 2, 3 meet.
+(a) Recolour with colour 3 a sequence of small discs centred on the 1–2 edge at distances `2^{−n}` from `v`, all inside
+`B(v, ε)`, `ε < 0.03`: every point of the new class 3 is within `0.8 + ε < 1` of every point of its hexagon and at least
+`1.03 − ε > 1` from the other hexagons of colour 3, so the colouring is still proper at every unit pair; each disc's two
+boundary points on the edge carry all three transitions, so they are cyclic centres, and they accumulate at `v`: **`𝓛` is not
+locally finite.** (b) Recolour `B(v, ε)` by any measurable partition into three sets each of positive density at every point
+of it: proper for the same reason; and for a centre `x` at distance 1 from `v` the directions `e` with `x + e ∈ B(v, ε)` form
+an arc of positive measure on which all of 1, 2, 3 are in `P_x(e)`: **a palette of three labels.** Both constructions use only
+*slack* at `v`. So neither step is a regularity theorem about measurable colourings; each is a **tightness** statement — true
+at five, where it is true of an empty class, false at seven — and at six it can hold only for colourings with no such slack,
+or for a normal form of them.
+
+| five-only step | the statement about six that the same argument needs | this project's rows: supply, contradict, superseded |
+|---|---|---|
+| 5 (Prop. 5.6) | **[P₆]** in a weak measurable six-colouring (of a normal form: see below), at every centre, almost every palette has at most two labels. Their method gives **at most three** at six for every colouring (`circle_complement_binary` with `S` of four labels, then steps 4 and 5's argument — my reading, not instantiated in Lean). | **Supplied only inside the map class, where it is true by definition**: every row of 134–138 and 145–150 is about segment-and-arc maps or fragments, whose rings meet the boundary in finitely many points and arcs. **Not supplied** for weak or saturated colourings: no row speaks of three classes accumulating along a ring. Not contradicted. |
+| 9 (Theorem 6.5) | **[L₆]** the centres whose transition graph has a cycle are locally finite. At six their three cases become four (cycles of length 3–6 in `K₆`), and the triangle case — three labels outside, ring not binary — has no argument. | **Not supplied.** REG-J′ (rows 141, 144, 154; FS-127: "a saturated colouring whose singular set Σ is locally finite with finitely many interface arcs at each point of Σ") would give [L₆] on saturated colourings, since a cyclic centre is not a regular two-colour interface point; it is open at six (row 141: "that finiteness open"). The map rows *assume* it ("locally finite map"). **Superseded as a target:** for the extraction only [L₆] is needed — the arcs half of REG-J′, integer radii (G85) and the curved-pencil question (FS-126) are not consumed by Act 3. |
+| 13 (Act 3), given [L₆] | none: Lemmas 7.2–7.8 run as written and give a point, a simple label cycle of length `ℓ ∈ {3,…,6}`, and `ℓ` continua with both endpoint labels excluded from `Δ(K_j)`. The Lean's arrangement (fill every core) does **not** transfer — at six cores cannot all be filled; the manuscript's (an essential loop at some core) does. | Row 137 (FS114-CV-EXISTS) is the same conclusion with the type selected — "a vertex of at least four colours" — in the map class, by Woodall's reduction and S–V's Cor. 1. **Superseded where a map was wanted only to have a vertex with interfaces carrying S–V's exclusion.** Not superseded where the six-colour chain reads arcs (rows 134–138, 145–150). |
+| — (not needed at five) | **[G₆]** some cyclic centre carries an extracted cycle of length at least four; or the all-triangles case is refuted non-locally. | **Supplied in the map class** by row 137 (two minds, blind to each other) over row 134's base (S–V Cor. 1 for curved cubic maps, almost everywhere). No weak form is held. G86 applies to the counting side: a tile count is blind to Siamese pairs. |
+| 18 (triangle; two labels outside) | at six this is the **four-cycle**: a four-colour vertex. Needed: (i) the ring's state where the palette has no outside label — a diagonal of the vertex's four labels — is excluded or controlled; (ii) where the ring is binary, a kill of the alternating ring. Their kill is "a three-label open region holds a Moser spindle"; at six, "**a four-label open region holds a unit-distance graph that is not four-colourable**" (§ 3.5). | (i) is this project's **(Q) ring** (FS-124, rank 1): open; `two_state_impossible` at `k = 6` with `J`, `K` the two diagonals (`4` labels, complement `2`) excludes one sub-case as stated — a ring alternating under 60° between the two diagonals almost everywhere — by my reading of its type (`RealState` unread). (ii) **Supplied in the non-Siamese class** by rows 148–149 (the ring with no (Q) arc dies at `1 + ε`; two minds on 148, one on 149), by hubs and the straddle; **not supplied** in the Siamese class (FS-123, rank 2). Their mechanism reads no tiles, so the region kill would reach the Siamese class at radius 2 if the graph fits — a search (INVENTORY). Row 138's capped strip (a valid fragment on every disc of radius below `φ²/√2 ≈ 1.8512` about a four-colour vertex) is not contradicted: its ring carries (Q) arcs. |
+| 16 (four-cycle; one label outside) | at six the **five-cycle**: a five-colour vertex, palettes a diagonal of `C₅` or containing the one outsider. The word argument needs the non-diagonal state to be a single label. | **Not supplied**: five-colour vertices are among FS-124's open cases ("five- and six-colour vertices"). `two_state_impossible` applies (two disjoint diagonals of `C₅` leave two labels). |
+| 15 (five-cycle; no label outside) | at six the **six-cycle**: a six-colour vertex. | **Contradicted at the ring scale**: row 148 holds "a vertex of six colours holds every disc of radius below 3/2 (a fragment by formula, exact)", and their five-cycle kill reads only strips at radius `1 ± ε`. So no six-colour analogue with the same locality exists; an exclusion must read beyond `3/2` (row 148: "its straight-sector flower dies at `√3`"). |
+
+**The normal form is this project's, and it is the piece the manuscript does not have.** At five no normal form is needed,
+because the class is empty. At six [P₆] and [L₆] are false for colourings with slack if any six-colouring exists with slack at
+a vertex, so the argument must first pass to a colouring with none. Rows 140 and 143 hold that passage: every a.e.-proper
+colouring lies below a maximal cover, becomes a measurable Grundy colouring bound on every colour but the largest, and
+"honesty is free" (G89); a saturated class "is carved by unit circles about its own points" (G84). So the two bodies of work
+are complementary, and the reading I offer the asking lane, as a reading (one mind, nothing derived beyond § 4.3's two
+counterexamples at seven):
+
+> **A road to six against seven that uses both.** (1) Normal form: an honest saturated six-colouring (rows 140, 143; open
+> part: the top colour, FS-128, which G89 says is "the answer restated given a NO"). (2) **[P₆] and [L₆] on that class** — in
+> place of REG-J′'s arcs, integer radii and curved pencils (FS-126, FS-127 re-aimed): two statements about rings and
+> transition graphs, for which the manuscript supplies colour-free tools held on three axioms (steps 2–4, 6–8, 10, 17). (3)
+> Act 3, as written. (4) [G₆] and [A₆] on continua with limiting directions — this project's rows 134–138 and 145–150 restated
+> without arcs, or the map step after all. The first place where nothing is held by either side is **[P₆]**: whether three
+> classes can accumulate along a ring of a saturated six-colouring.
+
+What this reading does not say: that the road is shorter than route M or route R as ranked (that is the asking lane's);
+that [P₆] or [L₆] is true on the saturated class; that a six-colouring with slack at a vertex exists.
+
+### 4.4 The count, as the Lean states it
+
+The manuscript's three uses of five (§ 3.4) appear in the Lean as two hypotheses and three specializations: `hcomp :
+Finset.univ \ S = {i, j}` (a pair is left: step 5), `hcard : (Finset.univ \ (J ∪ K)).card ≤ 2` (at most two are left: step
+8), `hlabels : ∀ i, i ∉ J ∪ K ↔ i = X` (one is left: step 7), and `Fin 5` in steps 9 and 15–18. That is the same count this
+project's G91 names from the other side ("Six is spent where the ring has exactly two absent colours and where the tip sector
+holds only `p`'s colours"): **a ring is rigid when it is left two labels.** At five every cyclic centre leaves at most two;
+at six the triangle leaves three.
