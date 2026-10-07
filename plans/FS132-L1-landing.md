@@ -803,3 +803,35 @@ gated commit's, byte for byte (checked before the push, below).
 **The push**: `git push origin HEAD:main` from the worktree, a fast-forward (`main`'s tip `6b125da4` is an ancestor of
 the pushed commit by the merge). Its receipt — the pushed hash, `git ls-remote`, and the ancestor check — is appended
 below after the push, on the branch.
+
+**The receipt** (`data/fs132/l1/push-main.out`, `ls-remote-main.out`): `git push origin 7ea7c364…:main` — exit 0,
+"`6b125da47..7ea7c364e  7ea7c364eb1e3c86bd1536de38aa751f0054e65b -> main`", a fast-forward, no force;
+`git ls-remote origin refs/heads/main` reads `7ea7c364eb1e3c86bd1536de38aa751f0054e65b`. **`main` is at `7ea7c364`:
+the import is landed.** Checked on that commit before the push, by hash: `git diff 5df686f0 7ea7c364 -- Proofs/
+Proofs.lean scripts/ ARCHITECTURE.md lakefile.toml lake-manifest.json lean-toolchain` is empty (0 lines);
+`git diff --name-only 5df686f0 7ea7c364` outside `data/` and `plans/` lists `tools/fs132_l1_slots.py` alone;
+`git merge-base --is-ancestor 6b125da4 7ea7c364` holds. This receipt and the report are one commit on the branch after
+the landed one (`plans/`, `data/` only): `fs132-wi1` is that one commit ahead of `main`.
+
+**Left on the machine**: no process of this job (the slot ledger holds none; every build, scan and control ended with
+its exit status in a saved log). Nothing was written under `~/source/math` or `~/.cache/ext-oai1` (`find -newer` a
+marker, each comparison run: 0 files). The worktree's `.lake/build` is the gated commit's library.
+
+## Slips, my own
+
+1. **The comparison's runner read two prints as different on its first pass** — the slot's admission line, which the
+   import's saved prints hold and mine keep in a separate file. Caught by the runner's own step line; the runner now
+   takes that one line out of both sides (stage 3).
+2. **A scripted edit's anchor was mistyped** (the registry paragraph, first attempt): the script's assertion refused,
+   nothing was written; second attempt checked by script (the rulings' section).
+3. **A comment in `data/fs132/l1/five-empty.lean` said a control had been tried before it was run.** Corrected in the
+   same step: the control is its own file, run, refused as it must be (stage 5.2).
+4. **The records tool's docstring first promised its plants "all at once" as well as one at a time**; only the second
+   was written. The docstring was corrected before the tool's first run.
+5. **The gate was launched from the runner itself, not from a snapshot copy** (`RUNNING.md` § Building: a shell script
+   is never edited while it runs). Neither runner was touched while the pass ran; a later long run of mine launches
+   from the copy.
+6. **One foreground `sleep`** while waiting on a build, early in the job; later waits are on the log's own last line.
+
+**Token count**: no reading of the harness's count at any stage; my own estimate at this stage is about 430k — past
+the brief's guidance (350k), inside its hand-back line (500k).
