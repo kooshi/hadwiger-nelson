@@ -242,3 +242,22 @@ inventory, items 607–629 (an outside proof of six became this project's litera
    which the asking lane will have. Confidence: medium. (d) **To the kernel lane's planner, when it opens**: C132-INDEX and
    C132-RING-WIND are colouring-free and short — candidates for its first leaves.
 
+8. **FS132-E2 handed back, done (462k by the task notice); the stall goes to the asking lane as FS132-P2** (its report
+   `data/fs132/reports/FS132-E2.md`, commit `0a2e0c54`; its results are item 7's, at the same grades). **Added by the report**:
+   the rewording it proposes for card 3 (ask whether the three outside labels wind on a triangle centre's unit circle; strike
+   "the essential centres are the cycles of length four to six"); three candidate stubs under C132-RING-TAME (three labels on
+   a strip — a normal-form statement bearing on the saturated class; the changes of side; the orbit index's constancy); a
+   bearing line for the bicycle's windings (FS-130) and the forced pair (FS-122) from C132-INDEX and C132-REL; that C132-FILL,
+   C132-REL and C132-TRI-STRIP hold at every number of colours. **Its slips, disclosed**: it read neither `[Voronov2023]`'s
+   proof nor the release's family 156, both listed in its brief — the first through this project's own verification rows, the
+   second through the reviewer's note; a check script ran past its window once and was cut down. **Its three held points,
+   ruled**: (i) the class in which C132-RING-TAME is posed — every weak colouring, or the saturated normal form — is the
+   asking lane's question (FS132-P2, item 3 of its brief); (ii) **a reading is owed before C132-ORBIT is used at a
+   colouring**: the release's Corollary 5.4 with its proof — the readings deriver has read that proof for its own entry
+   ("I read both proofs and found no count in them; one mind", `plans/FS132-E3-derivation.md`, C132-M-ORBIT's `uses only:`),
+   so the debt is paid at one mind's reading and recorded here; (iii) the reading of `[Voronov2023]` Theorem 1.3 for where
+   closedness enters stays owed, to whichever job next leans on route R. **Prior-art debts**: "3 modulo 6" unsearched;
+   C132-ORBIT and C132-SEP carry "owed". **Launched**: FS132-P2 (`poros`; `data/fs132/briefs/FS132-P2-night-rerank.md`,
+   generator `data/fs131/briefs/scripts/mk-fs132-p2.py`): the road to seven as one table in the measurable vocabulary; the
+   stall re-posed with a first claim; the re-rank; and what to formalize, ranked for Kooshi's.
+
