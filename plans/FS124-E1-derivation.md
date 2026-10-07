@@ -13,6 +13,8 @@ entries, **one mind, kernel pending**.*
 - **C124-RADIUS-GRAPH** — [hand], one mind — Stage 3, § Argument — a random rigid motion.
 - **C124-RADIUS-COUNTABLE**, **C124-RADIUS-UP**, **C124-RADIUS-FIVE** — derived from it, one mind — Stage 3.
 - **C124-RADIUS-DOWN** — [hand] over the declared outside theorem `Outside.OAI158.proper_to_borel_weak`, one mind — Stage 3, § Argument — up, down, five.
+- **C124-SHADOW-OPEN** — [hand], one mind — Stage 4, § Argument — the unit shadow of an open piece.
+- **C124-OPEN** — [hand], one mind; **C124-CENTRE**, **C124-STRADDLE**, **C124-ANTIPODE** — derived from C124-SHADOW-OPEN, one mind; **C124-COMPLETION** — derived from C124-STRADDLE — Stage 4, § Argument — the centre, the straddle, the antipode.
 
 ## Notation used by every entry
 
@@ -278,3 +280,194 @@ colouring has a margin (circumradius 2/5): it tests the motion argument, which r
 not weak. **Predictions scored**: P1 — met on both halves (up derived as posed and in the wider form; down at every `k`).
 
 **Stage 3 — SAVED** (2026-10-07).
+
+## Stage 4 — SAVED: the first-order rule — the shadow lemma, the centre, the completions, the straddle, the antipode
+
+derivation: C124-SHADOW-OPEN
+  statement: Let U be an open set of the plane, c a measurable map from U to a finite set of labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, i a label, and W an open subset of U almost every point of which has the label i. Then the set of points of U at distance exactly 1 from some point of W is open, and almost every point of it has a label other than i.
+  uses only: that W is open; Fubini for (p, u) ↦ p + u; weak properness in its measure form. No count of labels, no connectedness of W, no direction, no second label
+  not claimed: anything for a set W that is not open; anything at a point whose unit circle meets only the boundary of W; that any weak colouring has an open one-label set
+  argument: § Argument — the unit shadow of an open piece
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: R7 at seven (the Reuleaux triangle on the lattice points (m, n), (m + 1, n), (m, n + 1) coloured 2(m mod 2) + (n mod 2), the down triangle between coloured 4 + ((m − n) mod 3)): W the interior of the up tile at the origin, label 0 — the points at distance 1 from W carry no 0, and the tile's three arcs are where that set's boundary touches W's own (control `r7-tight`)
+  prior art: partly: it is the second half of the argument of C132-SHADOW (`plans/FS132-E6-derivation.md` § Argument — the shadow of an open piece, read whole), whose statement keeps a segment and a direction the half never reads; G84's shadow identity for an open piece; in print the mechanism of `[OAIMath2026]` Lemma 8.1 by FS132-E5's reading (not read by me); for sets avoiding a distance and Minkowski sums with a circle the plan's §PA queries found no statement of it
+  handoff: de Bruijn — the statement as written: one open set, one Fubini; C132-SHADOW is its corollary by one intermediate value, and every entry of this stage is this lemma and a computation with circles
+
+derivation: C124-OPEN
+  statement: If (q, z) is tight for (a, b) with radius ρ, then (q, z′) is tight for (a, b) for every point z′ with |z′ − q| = 1 and |z′ − z| < ρ.
+  uses only: B(z′, ρ − |z′ − z|) ⊂ B(z, ρ)
+  not claimed: anything at an end of a maximal arc of tight far ends; that such an arc has ends in U
+  argument: § Argument — the centre, the straddle, the antipode
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: R7 at the origin: the far ends tight for (0, 4) are the open arc of directions (0°, 60°), read as (0.5°, 59.5°) at the control's resolution (control `r7-tight`)
+  prior art: owed — a remark on a definition of this milestone
+  handoff: none — a relay-result: the object is an arc with ends; the kernel lane needs it only if a later statement is about a maximal arc
+
+derivation: C124-CENTRE
+  statement: Let c be a weak k-colouring of an open set U, q and z points of U with |q − z| = 1, and (q, z) tight for (a, b). Then there is η > 0 such that almost every point w of B(q, η) with |w − z| > 1 has a label other than a, and almost every point w of B(q, η) with |w − z| < 1 has a label other than b.
+  uses only: C124-SHADOW-OPEN for the two collars; for a point p near q, the point of S(p) on the line through p and z, which lies in the inner collar when |p − z| > 1 and in the outer one when |p − z| < 1
+  not claimed: that a or b is present at q (C124-KIND: neither need be); anything about the other labels near q; that this is all a tight pair forces at q — with a second tight far end z′ for the same (a, b) the conclusions intersect, and near q the label a is confined to B̄(z, 1) ∩ B̄(z′, 1), a region with angle π − ∠zqz′ at q
+  argument: § Argument — the centre, the straddle, the antipode
+  verdict: derived
+  grade: derived from: C124-SHADOW-OPEN
+  minds: 1
+  model: R7 at seven, q the origin, z any point of its ring in directions (0°, 60°), (a, b) = (0, 4): near q the label 0 fills a 120° sector, all of it within 1 of z, and the label 4 is present along one ray only, the cusp at 210°, at distance at least 1 from z (control `r7-tight`: 3,213 samples with the inside label, 27 with the outside label, no violation); at six, 62 unit arcs of FS-112's strip and disk, 58 of kind both (control `maps-tight`)
+  prior art: partly: in the map class it is row 138's cone form ("every tile's cone and colour is pinned by the half-planes facing the edges' centres", FS-114) and FS121-DB1's cone lemma on R7 (`tools/fs121_db1_r7cones.py`); as an instance of C132-SHADOW it was matched sign by sign by the asking lane (`plans/POROS-2026-10-07-fs124-question.md` Stage 2); for a weak colouring not found in print (plan §PA)
+  handoff: de Bruijn — the statement as written, after C124-SHADOW-OPEN: two inclusions of a half-ball in a set of the form W + S¹
+
+derivation: C124-COMPLETION
+  statement: Let c be a weak k-colouring of U, (q, z) tight for (a, b), and w a rhombus completion of the pair lying in U. Then there is η > 0 such that almost every point of B(w, η) has a label other than a and other than b.
+  uses only: C124-STRADDLE at p = w, which is one unit from z and is neither q nor 2z − q
+  not claimed: that any given label is present at w; that w is an end of a tight pair, or carries more than one label (in R7 it is an interior point of a tile); anything that spends the number of labels; anything special to tight pairs — the conclusion holds beside every interface between two open one-label pieces
+  argument: § Argument — the centre, the straddle, the antipode
+  verdict: derived
+  grade: derived from: C124-STRADDLE
+  minds: 1
+  model: R7 at seven: the completions of every far end read lie in tiles of the label 3 (control `r7-tight`); at six: 114 completions of the strip's and the disk's unit arcs that lie in the fragments, 2,850 samples, none with a label of its pair (control `maps-tight`)
+  prior art: partly: in the map class it is the 60° rule of the ring calculus (G91; FS116-RING-TWIST-C) and the edge exclusion (`[SokolovVoronov2025]` Props. 1–2 by row 134; C132-WITNESS for a region of a weak colouring); posed for a weak colouring by the asking lane; not found in print for a weak colouring (plan §PA)
+  handoff: none — subsumed by C124-STRADDLE, which crosses
+
+derivation: C124-STRADDLE
+  statement: Let c be a weak k-colouring of U, (q, z) tight for (a, b), and p a point of U with |p − z| = 1, p ≠ q and p ≠ 2z − q. Then there is η > 0 such that almost every point of B(p, η) has a label other than a and other than b.
+  uses only: C124-SHADOW-OPEN for the two collars; that two distinct unit circles through z are tangent there only when their centres are equal or symmetric about z, and otherwise cross, each passing from the inside of the other to its outside. Of tightness: that z lies in the closure of both collars and that they lie on the two sides of S(q) near z
+  not claimed: a uniform η as p tends to q or to 2z − q (it tends to 0); anything at those two points (C124-CENTRE, C124-ANTIPODE); anything that reads the radius of the interface — for an interface of any shape the statement at a point whose unit circle crosses it is C132-WITNESS's
+  argument: § Argument — the centre, the straddle, the antipode
+  verdict: derived
+  grade: derived from: C124-SHADOW-OPEN
+  minds: 1
+  model: as C124-COMPLETION's; and as a statement about circles alone: 11,000 points near eleven points one unit from z (10° to 350° round z, the completions at 120° and 240°), every one with its unit circle meeting both collars (control `shadow-geometry`)
+  prior art: partly: C132-WITNESS (`plans/FS132-derivation.md` § 2) gives it for a connected open one-label region and a compact piece of its boundary; the map class's edge exclusion; not found in print for a weak colouring
+  handoff: de Bruijn — the statement as written; one derivative of a trigonometric function and two uses of C124-SHADOW-OPEN
+
+derivation: C124-ANTIPODE
+  statement: Let c be a weak k-colouring of U, (q, z) tight for (a, b), and suppose p = 2z − q lies in U. Then there is η > 0 such that almost every point of B(p, η) has a label other than b, and almost every point w of B(p, η) with |w − q| < 2 has a label other than a.
+  uses only: C124-SHADOW-OPEN for the two collars; that S(w) ∩ B̄(q, 1) is an arc whose length tends to 0 as |w − q| tends to 2, and is non-empty with interior exactly when |w − q| < 2; that w ↦ w + (q − w)/|q − w| is continuous
+  not claimed: that a is present near p; that the circle of radius 2 about q is an interface there; anything about the points near p at distance more than 2 from q beyond the absence of b
+  argument: § Argument — the centre, the straddle, the antipode
+  verdict: derived
+  grade: derived from: C124-SHADOW-OPEN
+  minds: 1
+  model: R7 at seven, q the origin, (a, b) = (0, 4): near the points at distance 2 in directions (0°, 60°) no sample carries 4 and none inside the circle of radius 2 carries 0 (control `r7-tight`: 1,080 samples); as a statement about circles, 4,000 points near 2z − q, 2,006 of them inside the circle of radius 2 (control `shadow-geometry`)
+  prior art: partly: G85's unit parallels (row 140, for saturated colourings) and row 135's radius-2 configuration (R2) are the map-class neighbours; this statement, for a weak colouring and with no saturation, not found in this project's files by grep of the entries I read, nor in print — owed beyond that
+  handoff: de Bruijn — the statement as written; it is the far half of what a tight pair forces and is not posed on the card
+
+### Argument — the unit shadow of an open piece
+
+Put `Ω = {p ∈ U : S(p) ∩ W ≠ ∅}`. If `p + u₀ ∈ W` then `p′ + u₀ ∈ W` for `p′` near `p`: `Ω` is open. Let
+`G = {(p, u) : p ∈ Ω, |u| = 1, p + u ∈ W}`, open in `Ω × S¹`; each fibre `G_p` is a non-empty open subset of the circle, of
+positive length. The pairs of `G` with `c(p + u) ≠ i` are null (for each `u`, the `p` with `p + u` in the null set `W ∖ c⁻¹(i)`
+form a translate of a null set). The pairs with `c(p) = c(p + u)` are null (weak properness: both points are in `U`). Off both,
+`c(p) ≠ i`. By Fubini, for almost every `p ∈ Ω` almost every `u ∈ G_p` is off both, and `G_p` is not null; so `c(p) ≠ i` for
+almost every `p ∈ Ω`. ∎ (E6's second paragraph, with its set `S` replaced by `Ω`.)
+
+### Argument — the centre, the straddle, the antipode
+
+Throughout, `(q, z)` is tight for `(a, b)` with radius `ρ`, `W_a` and `W_b` are its collars, and by C124-SHADOW-OPEN it suffices
+to show that the points named lie in `W_a + S¹`, or in `W_b + S¹`.
+
+*Open.* `B(z′, ρ − |z′ − z|) ⊂ B(z, ρ)`, and the two conditions of tightness restrict to it. ∎
+
+*The centre.* Take `η ≤ 1/2`, `η < ρ`, `B(q, η) ⊂ U`, and `p ∈ B(q, η)`. Put `n = (z − p)/|z − p|` and `m = p + n`, a point of
+`S(p)` on the line through `p` and `z`, with `|m − z| = | |z − p| − 1 | ≤ |p − q| < ρ`; and `n·(z − q) = (1 − (p − q)·(z −
+q))/|z − p| ≥ (1 − η)/(1 + η) ≥ 1/3`. If `|p − z| > 1`, then `m = z − t n` with `0 < t ≤ η`, and `|m − q|² = 1 − 2t n·(z − q) +
+t² ≤ 1 − t(2/3 − 1/2) < 1`: `m ∈ W_a`. If `|p − z| < 1`, then `m = z + t n` with `0 < t ≤ η`, and `|m − q|² = 1 + 2t n·(z − q) +
+t² > 1`: `m ∈ W_b`. ∎
+
+*The straddle.* Let `|p − z| = 1`, `p ∉ {q, 2z − q}`, and `x(s) = p + R_s(z − p)`, the point of `S(p)` at angle `s` from `z`.
+The function `f(s) = |x(s) − q|² − 1 = |p − q|² + 2(p − q)·R_s(z − p)` is smooth, `f(0) = 0`, and `f′(0) = 2(p − q)·τ = 2(z −
+q)·τ`, where `τ = R_{π/2}(z − p)` is the unit tangent of `S(p)` at `z` (and `(p − z)·τ = 0`). The unit vectors `z − q` and
+`z − p` are neither equal nor opposite, so `(z − q)·τ ≠ 0`: `f` changes sign at 0. Choose `s₀` with `0 < s₀ < ρ` and `f(s₀)`,
+`f(−s₀)` of opposite signs; `|x(±s₀) − z| ≤ s₀ < ρ`, so one of the two points lies in `W_a` and the other in `W_b`. Both sets
+are open, so for `p′` close to `p` the points `x(±s₀) + (p′ − p)` of `S(p′)` lie in them still: a ball about `p` lies in
+`(W_a + S¹) ∩ (W_b + S¹)`. A rhombus completion is such a `p`: it is one unit from `z`, and it is neither `q` (it is one unit
+from `q`) nor `2z − q` (which is two units from `q`). ∎
+
+*The antipode.* Let `p₀ = 2z − q` and `w` near `p₀`, `D = |w − q|`. The arc `S(w) ∩ B(z, ρ)` has length tending to that of
+`S(p₀) ∩ B(z, ρ)`, which is positive; the arc `S(w) ∩ B̄(q, 1)` is empty for `D > 2` and has angular length `2 arccos(D/2)` for
+`D ≤ 2`, tending to 0 as `D → 2`. So for `w` close to `p₀` the first arc is not inside the second: `S(w)` has a point in
+`B(z, ρ)` outside `B̄(q, 1)`, a point of `W_b`. And if `D < 2`, the point `x* = w + (q − w)/D` of `S(w)` has `|x* − q| = D − 1
+< 1`, and it tends to `p₀ + (q − p₀)/2 = z` as `w → p₀`; so for `w` close to `p₀` it lies in `B(z, ρ) ∩ B(q, 1) = W_a`. ∎
+
+control: shadow-geometry
+  of: C124-STRADDLE — the three computations as statements about circles, no colouring: for sampled points near q, near eleven points one unit from z, and near 2z − q, whether the unit circle meets each collar (ρ = 0.05), against the claims of C124-CENTRE, C124-STRADDLE and C124-ANTIPODE; the fault takes an interface arc of radius 0.9 about q, for which the centre's and the antipode's predicates must fail
+  run: python3 ../data/fs124/e1/tight_checks.py geometry
+  expect: arc-radius=1.0 centre-samples-far,near=1961,2039 straddle-samples=11000 antipode-samples,inside-radius-2=4000,2006 disagreements=0
+  fault: python3 ../data/fs124/e1/tight_checks.py geometry --fault
+
+control: r7-tight
+  of: C124-CENTRE — on R7 by formula, at a lattice point: the tight windows of its ring with their label pairs; near the centre, the samples with the inside and the outside label and those on the wrong side; the labels at the completions; the antipode; and which points centre tight arcs — the six ends of the three windows, and six completions of interior far ends. Tight on this model: R7 has no margin. The fault colours the up tiles by n mod 2 only (an improper colouring that keeps the arcs)
+  run: python3 ../data/fs124/e1/tight_checks.py r7
+  expect: windows=3 (0.5,59.5):0|4 (120.5,179.5):2|5 (240.5,299.5):1|6 centre-samples=9720 with-inside-label=3213 with-outside-label=27 centre-violations=0 completion-labels=[3] completion-violations=0 antipode-samples=1080 antipode-violations=0 ends-centring-tight-arcs=6/6 completions-centring-tight-arcs=0/6
+  fault: python3 ../data/fs124/e1/tight_checks.py r7 --fault
+
+control: maps-tight
+  of: C124-COMPLETION — the held six-coloured maps, read from their own tiles (FS-112's strip, tiles −4 to 6, and its disk, through `tools/fs116_n1_ring.py`'s loader and `tools/fs116_n3_semi.py`'s two-ray point location): every boundary piece of radius 1 read as a tight pair at its midpoint; C124-CENTRE at its centre; C124-COMPLETION at its two completions. The fault recolours the tile at one completion with the pair's inside label, and reads the centres with the two labels exchanged
+  run: python3 ../data/fs124/e1/tight_checks.py maps
+  expect: strip: unit-arcs=46 tight=42 centres-in-fragment=42 of-kind-both=38 centre-samples-inside-label,outside-label=1514,1366 centre-violations=0 completions-in-fragment=74 completion-samples=1850 completion-violations=0 ; disk: unit-arcs=20 tight=20 centres-in-fragment=20 of-kind-both=20 centre-samples-inside-label,outside-label=720,720 centre-violations=0 completions-in-fragment=40 completion-samples=1000 completion-violations=0
+  fault: python3 ../data/fs124/e1/tight_checks.py maps --fault
+
+control: hex-half-none
+  of: C124-CENTRE — where the hypothesis is not met it must not be read as met: on the hexagonal seven-colouring at circumradius 1/2 a vertex's unit circle passes through three vertices and no edge lies on it — no direction of its ring reads as tight; the fault reads R7's ring with the same reader
+  run: python3 ../data/fs124/e1/tight_checks.py hexhalf
+  expect: colouring=hex7 circumradius=0.5 labels-at-vertex=3 three-label-points-on-its-ring=3 ring-directions=720 tight-directions=0
+  fault: python3 ../data/fs124/e1/tight_checks.py hexhalf --fault
+
+**Reading the controls** (what each count is, and what was not read). *The strip*: 46 boundary pieces of radius 1 after
+identifying the two tiles' copies; 42 read as tight at their midpoint and 4 not — the four pieces at the two cut ends of the window
+(centres `(−2.5, 0)` and `(3, 0)`), where one side is outside the fragment; of the 42, 38 are of kind both and 4 are not — their
+centres `(−2, 0)` and `(3.5, 0)` lie on the window's cut, where two of the strip's four labels are read. So row 136's "every unit
+arc of kind both" is met at every arc whose centre is inside the window. The loader is FS-112's strip as printed (row 136), not
+FS-114's capped strip: its midline vertices are the same points; the caps are not loaded. *The disk*: 20 of 20 tight, 20 of kind
+both. *Not run*: fragment T2, the bowtie fragment, FS116-Y2-SIXFRAG and the Searcher's kept model (their loaders were not opened
+by this job) — owed, named in the report. *An instrument defect met and repaired on the way*: the first tightness reader took radial offsets of
+`10⁻³` with an angular spread of `10⁻³`; on R7 it reported nine windows (the outside label misread within 2° of an arc's end,
+where the down tile is a cusp of width `φ²`) and "tight" directions at two of six completions (a boundary merely crossing the
+ring). Its 18 centre violations and 324 antipode violations were all from those misreadings; with offsets of `10⁻⁶` and a spread
+of `10⁻²` they are 0 and the windows are three. Recorded because the defect flattered nothing and would have been kept if it had
+(G21).
+
+### What the datum at a completion is, and whether the completion is again an end of a tight pair
+
+At a rhombus completion `w` of a tight pair `(q, z)` for `(a, b)` the first-order rule forces one thing: a full neighbourhood of
+`w` carries neither `a` nor `b` (C124-COMPLETION) — at every number of labels, and with no other content. **That is not a property
+of tight pairs.** It holds at every point one unit from `z` whose unit circle crosses the interface (C124-STRADDLE), and the
+argument never reads the interface's radius: every interface between two open one-label pieces passes the same absence to every
+point whose unit circle crosses it. **The completion is not forced to be an end of a tight pair**: in R7 the completions of the
+interior far ends read are interior points of a tile of the single label absent at the centre, and none centres a tight arc
+(0 of 6); in C124-KIND's colouring (Stage 5) they are interior points of tiles, and that colouring has one maximal tight arc and
+nothing else curved. What tightness itself adds sits at the two points of `S(z)` where the unit circle is tangent to the arc
+instead of crossing it: the centre `q`, where each label of the pair is confined to one side of `S(z)` — for an arc, to a wedge of
+angle `π` minus the arc's angle — and `2z − q`, where `b` is absent and `a` is absent inside the circle of radius 2 about `q`
+(C124-CENTRE, C124-ANTIPODE). **So of the card's three branches, for one tight pair and first-order tools, it is the third:
+nothing is forced beyond the first step, and the first step is not special to tight pairs.** **Where the held objects do repeat, read by formula — and it
+is not one place.** In R7 each of the six ends of the three windows at a lattice point is a lattice point that centres three
+tight arcs (6 of 6; control `r7-tight`). On FS-112's disk 10 of the 40 ends of its unit-arc pieces are centres of unit arcs — the
+five sides of the central Reuleaux pentagon — and 30 are not. On FS-112's strip **no** end of a unit-arc piece is a centre of one
+(0 of 92; control `maps-ends`): its centres are the midline vertices and its arcs end elsewhere. So "the recurrence sits at the
+ends of maximal tight arcs", which the plan's §IQ proposed before the derivation, is R7's shape and the pentagon's, and is
+**false of the strip**; neither the completions nor the ends are where every held six-coloured object carries its tight arcs
+on. What all three share is at the centre: each centre is of kind both for several arcs at once (three at an R7 lattice point;
+"four arcs at each midline vertex of the strip and at each corner of the disk's central Reuleaux pentagon", row 136). Whether
+anything is forced at an end, or at a centre, beyond C124-CENTRE is not a first-order statement at any number of labels (at
+seven C124-KIND's arc ends at two corners where two labels meet, and its centre carries one label); it is where a count across
+classes, or binding (FS-125, FS-128), has to enter. **For the next round**: the unit to pose is the centre with all its tight
+arcs — which windows of its ring are tight, for which ordered pairs, against which cones of presence (C124-CENTRE gives the
+polarity; C124-SIX is its first count) — and the first reading owed is the strip's: where its arcs end, and what those ends are
+one unit from.
+
+control: maps-ends
+  of: C124-OPEN — the ends of the tight arcs on the held six-coloured maps: for every boundary piece of radius 1 of FS-112's strip and disk, whether its two end points are centres of boundary pieces of radius 1; the fault shifts every end point by 0.01
+  run: python3 ../data/fs124/e1/tight_checks.py ends
+  expect: strip: unit-arc-pieces=46 ends=92 ends-that-centre-a-unit-arc=0 ; disk: unit-arc-pieces=20 ends=40 ends-that-centre-a-unit-arc=10
+  fault: python3 ../data/fs124/e1/tight_checks.py ends --fault
+
+**Predictions scored.** P2 — met on all four parts (C124-CENTRE and C124-COMPLETION as posed; C124-STRADDLE; C124-ANTIPODE).
+P3 — met on both parts as registered (nothing forced at interior completions; R7's ends 6 of 6, completions 0 of 6). **The §IQ
+assessment's (a) — "if anything recurs it is at the ends" — is wrong beyond R7**: the strip's ends centre nothing (0 of 92). Its
+(b), the polarity at a centre, is C124-CENTRE's *not claimed* line made positive, and is what the three held objects share.
+
+**Stage 4 — SAVED** (2026-10-07).

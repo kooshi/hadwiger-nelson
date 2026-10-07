@@ -194,6 +194,16 @@ an interior point of an arc. On R7, the one inhabitant "at seven" the card names
 interior points of a one-label tile; the lattice points are the arcs' ends. The derivation's paragraph after C124-COMPLETION says
 this with the exact reading.
 
+*Dated line (2026-10-07, this job's Stage 4; the text above stands as registered).* Scored against the derivation and its
+controls: the assessment's first half held — at the completions of an interior far end the first-order rule gives the absence of
+two labels and nothing else, and that is not special to tight pairs (C124-STRADDLE). Its second half — "if anything recurs it is
+at the ends" — is R7's shape (6 of 6 ends centre tight arcs) and the disk's pentagon's (10 of 40), and is **false of the strip**
+(0 of 92 ends of its unit-arc pieces centre a unit arc; control `maps-ends`). So the finding for the asking lane is narrower than
+the paragraph above says: the card's unit reads the object at a place where nothing is carried on; the ends are not that place
+on every held object either; what the three held objects share is the centre, of kind both for several arcs at once
+(`plans/FS124-E1-derivation.md` § What the datum at a completion is). The route's item (i) below is changed with it: the next
+round's unit is the centre with all its tight arcs.
+
 ## The plan proper
 
 **Tags.** *Per class* (true at every `k`; cannot alone move six against seven, G60): C124-SHADOW-OPEN, C124-OPEN, C124-CENTRE,
