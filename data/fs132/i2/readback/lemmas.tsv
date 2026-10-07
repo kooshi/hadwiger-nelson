@@ -1,0 +1,41 @@
+class	name	kind	verdict	constants only at the release's pin	constants only at this pin	note
+aux	§.circleTargetDeriv._proof_1	theorem	UP-TO-INSTANCES	AddMonoid.toAddZeroClass AddZero.toAdd AddZeroClass.toAddZero	AddMonoid.toAddSemigroup AddSemigroup.toAdd	
+lemma	§.angleChart_measure	theorem	UP-TO-INSTANCES	—	—	
+lemma	§.map_restrict_volume_le	theorem	UP-TO-INSTANCES	—	—	
+aux	§.circleSumDerivEquiv._proof_3	theorem	UP-TO-INSTANCES	CommSemiring.toSemiring Semifield.toCommSemiring	DivisionSemiring.toSemiring Semifield.toDivisionSemiring	
+aux	§.circleSumDerivEquiv._proof_4	theorem	UP-TO-INSTANCES	CommSemiring.toSemiring Semifield.toCommSemiring	DivisionSemiring.toSemiring Semifield.toDivisionSemiring	
+aux	§.circleSumDerivEquiv._proof_5	theorem	UP-TO-INSTANCES	CommSemiring.toSemiring Semifield.toCommSemiring	DivisionSemiring.toSemiring Semifield.toDivisionSemiring	
+aux	§.weakHilbert._proof_8	theorem	UP-TO-INSTANCES	CommSemiring.toSemiring Semifield.toCommSemiring	DivisionSemiring.toSemiring Semifield.toDivisionSemiring	
+lemma	§.sample_ae	theorem	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+lemma	§.sample_norm_le	theorem	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+lemma	§.sample_sum	theorem	UP-TO-INSTANCES	AddGroup.toSubNegMonoid AddSubgroup.instAddSubgroupClass AddSubgroupClass.toAddSubmonoidClass AddSubmonoidClass.toAddCommMonoid CommRing.toNonUnitalCommRing IsSemitopologicalRing.toIsSemitopologicalSemiring IsSemitopologicalSemiring.toContinuousAdd IsTopologicalRing.toIsSemitopologicalRing MeasureTheory.AEEqFun.instAddCommMonoid NonUnitalCommRing.toNonUnitalNonAssocCommRing NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring Real.commRing Real.instAddCommMonoid Real.instAddGroup instIsTopologicalAddGroupReal instIsTopologicalRingReal	AddCommGroup.toAddCommMonoid AddCommMonoidWithOne.toAddMonoidWithOne AddMonoidWithOne.toNatCast ENNReal ENNReal.instAddCommMonoidWithOne MeasureTheory.Lp.instAddCommGroup §.PlaneL2._proof_1	
+lemma	§.WeakBall.instMetrizableSpaceSpace	theorem	UP-TO-INSTANCES	WeakDual.instAddCommMonoid	instAddCommMonoidWeakDual	
+lemma	§.WeakBall.value_eval	theorem	UP-TO-INSTANCES	WeakDual.instAddCommMonoid	instAddCommMonoidWeakDual	
+aux	§.WeakBall.ofNorm._proof_1	theorem	UP-TO-INSTANCES	WeakDual.instAddCommMonoid	instAddCommMonoidWeakDual	
+lemma	§.WeakBall.tendsto_iff	theorem	UP-TO-INSTANCES	WeakDual.instAddCommMonoid	instAddCommMonoidWeakDual	
+aux	§private.instFactNeENNRealOfNatTop_oAI	theorem	AUX-ABSENT	—	—	
+aux	§.TraceVector._proof_1	theorem	AUX-ABSENT	—	—	
+aux	§.traceValue._proof_1	theorem	UP-TO-INSTANCES	§.RealL2._proof_1 §.TraceVector._proof_1	§.PlaneL2._proof_1 §.shiftL2._proof_1	
+lemma	§.trace_realization	theorem	UP-TO-INSTANCES	WeakDual.instAddCommMonoid §.RealL2._proof_1 §.TraceVector._proof_1	instAddCommMonoidWeakDual §.PlaneL2._proof_1 §.shiftL2._proof_1	
+lemma	§.traceCode_tendsto_iff	theorem	UP-TO-INSTANCES	WeakDual.instAddCommMonoid §.RealL2._proof_1 §.TraceVector._proof_1	instAddCommMonoidWeakDual §.PlaneL2._proof_1 §.shiftL2._proof_1	
+lemma	§.trace_bounds	theorem	UP-TO-INSTANCES	AddGroup.toSubNegMonoid AddSubgroup.instAddSubgroupClass AddSubgroupClass.toAddSubmonoidClass AddSubmonoidClass.toAddCommMonoid CommRing.toNonUnitalCommRing IsSemitopologicalRing.toIsSemitopologicalSemiring IsSemitopologicalSemiring.toContinuousAdd IsTopologicalRing.toIsSemitopologicalRing MeasureTheory.AEEqFun.instAddCommMonoid NonUnitalCommRing.toNonUnitalNonAssocCommRing NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring Real.commRing Real.instAddCommMonoid Real.instAddGroup instIsTopologicalAddGroupReal instIsTopologicalRingReal §.RealL2._proof_1	AddCommGroup.toAddCommMonoid MeasureTheory.Lp.instAddCommGroup §.PlaneL2._proof_1	
+lemma	§.trace_realization_weakStar	theorem	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+aux	§.RealL2._proof_1	theorem	AUX-ABSENT	—	—	
+lemma	§.oneL2_ae	theorem	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+lemma	§.weak_limit_nonneg	theorem	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+lemma	§.weak_limit_le_one	theorem	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+lemma	§.weak_limit_sum	theorem	UP-TO-INSTANCES	AddGroup.toSubNegMonoid AddSubgroup.instAddSubgroupClass AddSubgroupClass.toAddSubmonoidClass AddSubmonoidClass.toAddCommMonoid CommRing.toNonUnitalCommRing IsSemitopologicalRing.toIsSemitopologicalSemiring IsSemitopologicalSemiring.toContinuousAdd IsTopologicalRing.toIsSemitopologicalRing MeasureTheory.AEEqFun.instAddCommMonoid NonUnitalCommRing.toNonUnitalNonAssocCommRing NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring Real.commRing Real.instAddCommMonoid Real.instAddGroup instIsTopologicalAddGroupReal instIsTopologicalRingReal	AddCommGroup.toAddCommMonoid AddCommMonoidWithOne.toAddMonoidWithOne AddMonoidWithOne.toNatCast ENNReal ENNReal.instAddCommMonoidWithOne MeasureTheory.Lp.instAddCommGroup OfNat.ofNat instOfNatAtLeastTwo §.PlaneL2._proof_1	
+aux	§.weak_limit_sum._simp_1_1	theorem	UP-TO-INSTANCES	CommSemiring.toSemiring Semifield.toCommSemiring	DivisionSemiring.toSemiring Semifield.toDivisionSemiring	
+lemma	§.line_map_restrict_volume_le	theorem	UP-TO-INSTANCES	—	—	
+lemma	§.integrable_comp_of_map_le	theorem	UP-TO-INSTANCES	—	—	
+lemma	§.integral_norm_comp_le	theorem	UP-TO-INSTANCES	—	—	
+lemma	§.tendsto_integral_norm_comp_sub	theorem	UP-TO-INSTANCES	—	—	
+aux	§.tendsto_integral_norm_comp_sub._simp_1_1	theorem	AUX-DIFFERS	—	—	type, erased print, at char 22: release …(pi.i E (Sort (S (p u_4))) (pi.c inst ((c SeminormedAddCommGroup [(p u_4)]) @0) (pi.d a @0 (pi.d b @0 ((((c Eq [(S 0)]) (c… | here …(pi.i E (Sort (S (p u_5))) (pi.c inst ((c SeminormedAddCommGroup [(p u_5)]) @0) (pi.d a @0 (pi.d b @0 ((((c Eq [(S 0)]) (c…
+lemma	§.tendsto_integral_norm_comp_sub_eventual	theorem	UP-TO-INSTANCES	—	—	
+lemma	§.trace_pair_disjoint	theorem	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+lemma	§.palette_trace_branch	theorem	UP-TO-INSTANCES	§.RealL2._proof_1	§.PlaneL2._proof_1	
+aux	§.paletteGenerators._proof_1	theorem	AUX-DIFFERS	MeasureTheory.OuterMeasureClass	And Complex Exists Filter.EventuallyLE Fin Measurable MeasureTheory.ae Membership.mem Nat Set Set.Countable Set.iUnion §.Traces §.angularMeasure §.tracePositive	type, erased print, at char 1: release …((((c MeasureTheory.OuterMeasureClass [0,0]) (((c MeasureTheory.Measure [0]) (c §.Angles [])) _)) (c … | here …(pi.i k (c Nat []) (pi.d c (pi.d a (c Complex []) ((c Fin []) @0)) (pi.d hc ((((((c Measurable [0,0])…
+aux	§.paletteGenerators._proof_2	theorem	AUX-ABSENT	—	—	
+aux	§.shiftL2._proof_2	theorem	AUX-DIFFERS	ContinuousAdd Real	Complex HAdd.hAdd MeasureTheory.MeasurePreserving MeasureTheory.MeasureSpace.volume	type, erased print, at char 1: release …((((c ContinuousAdd [0]) (c Real [])) _) _)… | here …(pi.d z (c Complex []) ((((((((c MeasureTheory.MeasurePreserving [0,0]) (c Complex [])) (c Complex []…
+aux	§.shiftL2._proof_3	theorem	AUX-ABSENT	—	—	
+aux	§.shiftL2._proof_4	theorem	AUX-ABSENT	—	—	

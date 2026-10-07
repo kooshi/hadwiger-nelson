@@ -1,0 +1,36 @@
+@palette_transfer_pair : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c),
+  WeakColoring k c →
+    ∀ (x : ℂ),
+      ∀ᵐ (p : Angles × Angles) ∂angularMeasure.prod angularMeasure,
+        c (angularSum x 1 p) ∉ palette c hc x p.1 ∪ palette c hc x p.2
+@palette_sixty_disjoint : ∀ {k : ℕ} (c : ℂ → Fin k) (hc : Measurable c),
+  WeakColoring k c →
+    ∀ (x : ℂ), ∀ᵐ (f : Angles) ∂angularMeasure, Disjoint (palette c hc x f) (palette c hc x (f + ↑sixty))
+@two_state_impossible : ∀ {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c),
+  WeakColoring k c →
+    ∀ (x : ℂ) (J K : Finset (Fin k)),
+      (Finset.univ \ (J ∪ K)).card ≤ 2 →
+        ∀ (s : Angles → Bool),
+          Measurable s →
+            RealState hc x {t | s ↑t = false} J →
+              RealState hc x {t | s ↑t = true} K →
+                (∀ᵐ (t : Angles) ∂angularMeasure, s (t + ↑(Real.pi / 3)) = !s t) → False
+@mem_spatialSupport_ae : ∀ {k : ℕ} (c : ℂ → Fin k),
+  Measurable c → ∀ (i : Fin k), ∀ᵐ (z : ℂ), c z = i → z ∈ spatialSupport c i
+@circleSum_quasiMeasurePreserving : ∀ {r : ℝ},
+  r ≠ 0 → MeasureTheory.Measure.QuasiMeasurePreserving (circleSum r) MeasureTheory.volume MeasureTheory.volume
+angleMk_quasiMeasurePreserving : MeasureTheory.Measure.QuasiMeasurePreserving QuotientAddGroup.mk MeasureTheory.volume
+  angularMeasure
+def HadwigerNelson.Outside.OAI158.angularSum : ℂ → ℝ → Angles × Angles → ℂ :=
+fun x r p => x + ↑r * direction p.1 + direction p.2
+def HadwigerNelson.Outside.OAI158.sixty : ℝ :=
+Real.pi / 3
+def HadwigerNelson.Outside.OAI158.RealState : {k : ℕ} →
+  {c : ℂ → Fin k} → Measurable c → ℂ → Set ℝ → Finset (Fin k) → Prop :=
+fun {k} {c} hc x A J => MeasurableSet A ∧ ∀ i ∈ J, A ≤ᵐ[MeasureTheory.volume] liftPalette c hc x i
+def HadwigerNelson.Outside.OAI158.liftPalette : {k : ℕ} → (c : ℂ → Fin k) → Measurable c → ℂ → Fin k → Set ℝ :=
+fun {k} c hc x i => QuotientAddGroup.mk ⁻¹' paletteSet c hc x i
+def HadwigerNelson.Outside.OAI158.spatialSupport : {k : ℕ} → (ℂ → Fin k) → Fin k → Set ℂ :=
+fun {k} c i => (MeasureTheory.volume.restrict {z | c z = i}).support
+def HadwigerNelson.Outside.OAI158.palette : {k : ℕ} → (c : ℂ → Fin k) → Measurable c → ℂ → Angles → Finset (Fin k) :=
+fun {k} c hc x t => {i | t ∈ paletteSet c hc x i}

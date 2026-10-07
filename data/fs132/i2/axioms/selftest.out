@@ -1,0 +1,7 @@
+unplanted: PASS (as it must)
+plant 'an outside theorem under a target': REFUSED (HadwigerNelson.Outside.OAI158.palette_transfer_pair: rests on ['HadwigerNelson.Outside.OAI158.no_proper_five_coloring'])
+plant 'sorryAx under a target': REFUSED (HadwigerNelson.Outside.OAI158.palette_transfer_pair: rests on ['sorryAx'])
+plant 'a native axiom under a target': REFUSED (HadwigerNelson.Outside.OAI158.palette_transfer_pair: rests on ['HadwigerNelson.Outside.OAI158.palette_transfer_pair._nat)
+plant 'a record not printed': REFUSED (HadwigerNelson.Outside.OAI158.palette_transfer_pair: not printed)
+plant 'a control gone clean': REFUSED (control HadwigerNelson.Outside.OAI158.not_colorable_five: its print does not show HadwigerNelson.Outside.OAI158.no_prope)
+SELF-TEST OK: 5 plants refused

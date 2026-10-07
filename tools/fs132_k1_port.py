@@ -8,6 +8,11 @@ else: the namespace (`OAI.EuclideanFiveColor` -> `HadwigerNelson.Outside.OAI158`
 every declaration that has none (this library's `linter.missingDocs`), and the patches listed in PATCHES (each one a
 Mathlib signature that differs between the two pins).
 
+Extended by FS132-I2 (2026-10-07), in two places and no other: a declaration that has the release's own docstring now
+carries its source address at the head of that docstring (before, only declarations with no docstring carried one), and
+the module header names the release's licence and lists every change, the patch included (Apache-2.0 asks a changed
+file for a prominent notice of the change).  No declaration, statement or proof text moved.
+
 Usage:  tools/fs132_k1_port.py [--check]     (--check: regenerate in memory, compare with the file, exit 1 if different)
 """
 import hashlib
@@ -76,11 +81,24 @@ as points of the weak-* compact unit ball of `L²` of the circle (`sample`, `Wea
 `sampleCode`); the traces at a centre (`IsTrace`: the closure of the samples at centres tending to `x` and radii
 tending to `1`); and the maximal palette (`paletteSet`, `palette`: the essential union, over the traces at `x`, of
 the directions where the trace gives a label positive weight) — the manuscript's Definition 5.1, for every number of
-colours `k`. All of it is kernel-checked here: the proofs are the release's, at this pin, with the patches the
-script lists (one Mathlib signature).
+colours `k`. All of it is kernel-checked here: the proofs are the release's, at this pin.
 
-No axiom, no `sorry`. The definitions are compared with the release's stored terms by the landing that brings an
-outside theorem stated over them (`tools/fs132_i1_readback.py`, `LEAN.md` § Assumptions).
+**Licence and notice of change.** The source is licensed under the Apache License, Version 2.0 (`LICENSE` at the
+root of the release; http://www.apache.org/licenses/LICENSE-2.0). **This file is a changed copy of parts of those
+files.** The changes, all of them:
+
+1. *A selection*: the line ranges above, and no other line of the release.
+2. *The namespace*: `OAI.EuclideanFiveColor` there, `HadwigerNelson.Outside.OAI158` here.
+3. *Docstrings*: every declaration's docstring opens with its source line at the commit; where the release has a
+   docstring it follows the address, and where it has none the address is the docstring.
+4. *The two instances of `Coloring.lean` 19–20* are anonymous there and named here (`Outside/OAI158`'s
+   `angularMeasure.instIsProbabilityMeasure`, and `angularMeasure.instIsAddHaarMeasure` below).
+5. *One patch, to a proof*: `Compactness.lean` line 224,
+   `← eLpNorm_one_eq_lintegral_enorm (hv.sub hgi).aestronglyMeasurable]` → `← eLpNorm_one_eq_lintegral_enorm]` —
+   Mathlib's lemma takes no explicit argument at this library's pin (v4.32.0; the release is at v4.34.1).
+
+No axiom, no `sorry`. The definitions and the statements are compared with the release's, as the kernel stores them
+at the two pins, by `tools/fs132_i2_readback.py` (`plans/FS132-I2-implementation.md`).
 -/
 
 noncomputable section
@@ -106,6 +124,26 @@ def clone_commit() -> str:
                           text=True).stdout.strip()
 
 
+def addressed(name: str, lines, first: int, last: int):
+    """The source lines first..last (1-based, inclusive), each declaration's docstring carrying its source address:
+    added where the release has no docstring, prefixed where it has one.  Yields (line number, text) pairs; a
+    line number of 0 marks an added docstring line."""
+    prev = ""
+    for no in range(first, last + 1):
+        line = lines[no - 1]
+        if line.startswith("/-- "):
+            j = no
+            while not lines[j - 1].rstrip().endswith("-/"):
+                j += 1
+            if not lines[j].startswith(DECL):
+                sys.exit(f"FAIL: {name}:{no}: a docstring not followed by a declaration")
+            line = f"/-- `[OAIMath2026]` `{name}:{j + 1}`. " + line[4:]
+        elif line.startswith(DECL) and not prev.rstrip().endswith("-/"):
+            yield 0, f"/-- `[OAIMath2026]` `{name}:{no}`. -/"
+        yield no, line
+        prev = line
+
+
 def generate() -> str:
     head = clone_commit()
     if head != COMMIT:
@@ -115,9 +153,7 @@ def generate() -> str:
     for name, first, last in SEGMENTS:
         lines = (SRC / name).read_text().split("\n")
         out.append(f"\n/-! ## `{name}` {first}–{last} -/\n")
-        prev = ""
-        for no in range(first, last + 1):
-            line = lines[no - 1]
+        for no, line in addressed(name, lines, first, last):
             for i, (pf, pl, old, new) in enumerate(PATCHES):
                 if pf == name and pl == no:
                     if old not in line:
@@ -126,10 +162,7 @@ def generate() -> str:
                     used.add(i)
             line = line.replace("namespace EuclideanFiveColor", "namespace HadwigerNelson.Outside.OAI158")
             line = line.replace("end EuclideanFiveColor", "end HadwigerNelson.Outside.OAI158")
-            if line.startswith(DECL) and not prev.rstrip().endswith("-/"):
-                out.append(f"/-- `[OAIMath2026]` `{name}:{no}`. -/")
             out.append(line)
-            prev = line
     for name, ranges, opens in SNIPPETS:
         lines = (SRC / name).read_text().split("\n")
         where = ", ".join(f"{a}–{b}" for a, b in ranges)
@@ -137,14 +170,9 @@ def generate() -> str:
         out.append("noncomputable section")
         out.append(f"open {opens}")
         out.append("namespace HadwigerNelson.Outside.OAI158")
-        prev = ""
         for first, last in ranges:
-            for no in range(first, last + 1):
-                line = lines[no - 1]
-                if line.startswith(DECL) and not prev.rstrip().endswith("-/"):
-                    out.append(f"/-- `[OAIMath2026]` `{name}:{no}`. -/")
+            for _, line in addressed(name, lines, first, last):
                 out.append(line)
-                prev = line
         out.append("end HadwigerNelson.Outside.OAI158")
         out.append("end")
     if len(used) != len(PATCHES):
