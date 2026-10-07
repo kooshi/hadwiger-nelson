@@ -531,3 +531,39 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     own, and no derivation reached it. Confidence: medium-high. Running: the witness card's deriver, the kernel planner,
     the Searcher.
 
+18. **FS132-E5, two verdicts: the exclusion needs two points per seam and nothing more — and that is the same theorem, not a
+    wider one; existence of the data with no hypothesis on the centres stalls at one named step, which is not the step
+    anyone expected** (source: its message to "main", 2026-10-07; record `plans/FS132-E5-derivation.md` Stages 2–3; commits
+    `641b0836`, `7b47db5a`). **C132-WIT: derived.** Its step table for the first night's exclusion: one step confines each
+    point of a set on its own, two use one point, the transfer, the density lemma and the kill read nothing of the sets;
+    compactness is not read. **"I reworked M1–M6 and read M7–M9 without reworking them — those still have no second
+    reader."** The strips with a fixed witness are wider than with a limiting direction (the direction "was only a way to
+    find a witness on the wanted side"); its form with no properness, C132-WIT-SIDE, agrees exactly with the ring card's
+    step, and "nothing of either record is wrong". **C132-WIT-EX: stalls** at the extraction's selection step — a point
+    through which connected pieces of two smoothed classes pass and reach a common second point (the annulus about an
+    isolated centre). **Derived on the way**: C132-WIT-MARGIN — labels whose supports keep off an annulus about a unit
+    circle are witnessed at its centre by every nearby point; in the honeycomb and both slack colourings at seven every
+    point within 0.01 of a vertex carries a witnessed triangle (982,800 samples; the control fires on its fault) — so
+    existence as posed is free wherever there is a margin; C132-WIT-CROSSED — a label approaching the unit circle from both
+    sides at three points has no witness; **C132-WIT-SUPER — the proof of the exclusion redone with any connected subset of
+    one smoothed class's superlevel set: "no hole, no exceptional set, no centre, no isolation, one label at a time. So the
+    exclusion's proof is not where isolation is read; the step before it is"**; C132-WIT-EX-FIN — an anchored witnessed
+    cycle at a centre on every disc with finitely many centres. **The controls**: at the island colouring's accumulation
+    centre the statement holds, by the margin; the stripe colouring's centre carries no witnessed triangle (two stripe
+    labels cross its unit circle in the plain colouring) — so that colouring is not a witnessed triangle with a wild ring.
+    **My question, answered in one line**: "nothing in the two-point exclusions tells a meeting point from a margin — the
+    exclusion is about a neighbourhood of `p`'s unit circle, a meeting is about a neighbourhood of `p`"; anchoring the
+    witnesses removes the margin-only points and still does not give a cyclic centre, "because a centre is a property of
+    every small ball about the point, which no finite set of points records". **My receipt**: both commits are on `main`;
+    its gate run by me — exit 0; the new entries' headers quoted into the claim list. **Not checked by me**: any argument
+    of Stages 2–3. **Rulings.** (a) **The claim list gains the verdicts and the entries by a dated line.** (b) **The
+    exclusion's first six steps now have three readers** (their deriver, this one's rework, my own of four of them);
+    **its last three — the unit-pair relation, the step lemma, the kill — still have one**: unchanged for the kernel
+    planner, who is told at the lifting of its fence. (c) **C132-WIT-SIDE is the strips' entry for the kernel lane**, as
+    both derivers propose. (d) **The asking lane's two words are now sorted by a deriver**: a *witnessed cycle* is a
+    property of the unit circle about a point and exists wherever there is a margin; a *cyclic centre* is a property of
+    every small ball about the point. The exclusions read the first; the existence side is about the second; **the bridge
+    between them — the extraction's selection step, and whether a centre's own cycle is the cycle it witnesses — is where
+    both of tonight's cards stalled, from two sides.** That sentence is the next card's subject; the asking lane cuts it
+    when this job's last claim and the search have reported.
+

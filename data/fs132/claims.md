@@ -331,4 +331,33 @@ the death of every such cycle — which are what the answer is made of and are n
   that witness — that the ring point is a cyclic centre, and that the witnessed triangle its hypothesis gives contains the
   pair of ring labels (the relation of C132-EXT-DISC's clause (5), which no entry of that record uses). *Not claimed*: each
   entry's own line; no ring by formula was built.
+- **2026-10-07 (after FS132-E5's Stages 2–3, commits `641b0836`, `7b47db5a`; FS-132 inventory item 18): two of the witness card's
+  claims have their verdicts, and five entries of that record enter the list** — each statement read whole in its entry:
+
+> derivation: C132-WIT-SIDE
+> — source: plans/FS132-E5-derivation.md
+
+> derivation: C132-WIT-MARGIN
+> — source: plans/FS132-E5-derivation.md
+
+> derivation: C132-WIT-CROSSED
+> — source: plans/FS132-E5-derivation.md
+
+> derivation: C132-WIT-SUPER
+> — source: plans/FS132-E5-derivation.md
+
+> derivation: C132-WIT-EX-FIN
+> — source: plans/FS132-E5-derivation.md
+
+  **C132-WIT: derived** ([hand] and derived from the first night's entries; one mind) — and **not a widening**: a two-point set
+  is an admissible set and the straddle set only shrinks, so C132-WIT-ORBIT and C132-WIT-EXCL are C132-M-ORBIT and C132-M-EXCL
+  themselves; C132-WIT-STRIP is wider than C132-TRI-STRIP, which is its corollary. **C132-WIT-SIDE** — any measurable
+  labelling, one witness, one side of one unit circle near a ring point — is the entry on which the strips, C132-TRI-STRIP and
+  C132-CROSS's first step all sit, and the one that crosses to the kernel lane for them. **C132-WIT-EX: stalls** at the
+  selection of a point through which connected pieces of two smoothed classes pass and reach a common second point (the
+  extraction's step at the annulus about an isolated centre); on the way C132-WIT-MARGIN (the statement as posed is free
+  wherever a colouring has a margin, at points that are no centres), C132-WIT-CROSSED, **C132-WIT-SUPER** (the exclusion
+  carried by any connected subset of one smoothed class's superlevel set — no hole, no centre, no isolation, one label at a
+  time) and C132-WIT-EX-FIN (an anchored witnessed cycle on every disc with finitely many centres). *Not claimed*: each
+  entry's own line. **Not yet answered**: C132-GRUNDY7.
 
