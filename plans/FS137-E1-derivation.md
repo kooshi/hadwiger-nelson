@@ -270,3 +270,61 @@ directions has length `max(0, 180° − h)`, `h` the hull's angle; `budget-repea
 **Theorems this stage proved**: C137-BUDGET — derived, [hand], one mind; kernel pending.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: claim 2, C137-THREE — derived
+
+**Verdict: derived, as plane geometry at any number of corners.** *Is it the held statement and no more?* For three
+corners it is the geometric step of C124-BOTH's second sentence and of FS112-N3-COR3 — "separates ⟹ an edge along the
+far circle" — and no more than that step; those entries add a count that makes both members separate, which this
+entry does not re-derive (C124-BOTH's argument was not read). *What is new*: the step stated alone, for any number of
+corners, with the number `s` of edges along the far circle as an explicit term (crossing corners ≤ `2 − s`); and the
+escape it names — three labels on **four** corners separate on open sets of directions with no unit arc (`budget-repeat`,
+first line: two pure labels on some arcs). *Class*: plane geometry; corners bounded by rays and circular arcs. *Reads*
+kept corners; *forces* nothing; *excludes* nothing by itself. **Consequence for C136-COVER, by the definition of
+"separates"**: a member whose family is the parts of three corners filling a neighbourhood separates at `w` only if one
+of its edges lies along `S(w)`. **R7 is silent**: it has no three-corner vertex. **The card's control, said exactly**: the
+strip's 17 pairs were not read pair by pair; every direction at every three-corner vertex of the strip was (40
+vertices, 480 directions), which contains them.
+
+derivation: C137-THREE
+  statement: Plane geometry; no colouring. Let F be a finite set of labelled corners at x that fills a neighbourhood of x, θ a direction, w = x + e(θ), and s the number of the two branches of S(w) at x that are edges of F. Then at most 2 − s corners of F are crossing at θ. If s = 0 and F has a corner inner at θ and a corner outer at θ, then two corners of F are crossing at θ and F has at least four corners. So if F has three corners, and one label of F is inner-pure at θ and another outer-pure at θ, an edge of F lies along S(w).
+  uses only: C136-CLASS (`plans/FS136-derivation.md` § 2; [hand], one mind, typed and not proved in the kernel — inherited; its statement read, its argument not) — a corner is inner at w when it lies between the branches β₋ and β₊ of S(w) in the cyclic order of curves at x by direction and then signed curvature, outer when it lies between β₊ and β₋; that the corners of a set filling a neighbourhood are the intervals between cyclically consecutive edges in that order; that a branch which is not an edge lies strictly inside one such interval. Not consumed: any colouring; the labels, but for the last sentence
+  not claimed: anything about a colouring; that an edge along S(w) gives an inner-pure and an outer-pure label (it makes no corner beside it crossing; the labels beside it may recur at other corners); the case of three labels on four corners — a, c, b, c in cyclic order, the two c's holding the tangent directions, has a inner-pure and b outer-pure on an open set of directions and no edge along any unit circle; anything for edges that are not rays or circular arcs; that C124-BOTH or FS112-N3-COR3 follows from this alone (each also needs a count that makes both members separate)
+  argument: § Argument — at most 2 − s corners cross
+  verdict: derived
+  grade: derived from: C136-CLASS
+  minds: 1
+  model: FS-112's strip — at each of its 40 three-corner vertices exactly two directions have an inner-pure and an outer-pure label, and at each of those 80 an edge of the vertex lies along the far unit circle; the disk (25 vertices, 30 such directions), FS116-Y2-SIXFRAG (6, 6), FS114-Y2-BOWTIE (4, 4) — control `three-held`
+  prior art: partly: C124-BOTH's second sentence ("each has an edge that contains an arc of S(w) with an end at the member"; `plans/FS124-derivation.md` l. 429; one mind; its argument not read by me) and for maps FS112-N3-COR3 (ledger row 135; two minds) hold the case of a close complementary pair of three-piece points with its count; the step alone, at any number of corners: here; print: as C137-BUDGET — not found
+  handoff: de Bruijn — only with C136-CLASS in the kernel (it is typed there, not proved); then three lines on a cyclic order. Read "lies along S(w)" back against "is equal, as a curve from x, to a branch of S(w)"
+
+control: three-held
+  of: C137-THREE — every three-corner vertex of the four held six-coloured objects (the strip 40, the disk 25, FS116-Y2-SIXFRAG 6, FS114-Y2-BOWTIE 4), every direction (one per open arc between critical directions, and each critical direction), exact classes: crossing>2-s counts directions with more crossing corners than the bound; WITHOUT counts directions with an inner-pure and an outer-pure label and no edge along the far circle (the edge test reads the arc's centre and radius, not the classifier). R7 has no three-corner vertex. The fault is the engine's `bend` (curves ordered by direction only): a straight edge on the tangent then separates
+  run: python3 ../data/fs137/e1/budget.py three
+  expect: strip: three-corner vertices=40 directions read=480 crossing>2-s:0 | directions with an inner-pure and an outer-pure label=80, with an edge along the far circle=80, WITHOUT=0 | fl=1440 mismatches=0
+    disk: three-corner vertices=25 directions read=300 crossing>2-s:0 | directions with an inner-pure and an outer-pure label=30, with an edge along the far circle=30, WITHOUT=0 | fl=2340 mismatches=0
+    flower: three-corner vertices=6 directions read=48 crossing>2-s:0 | directions with an inner-pure and an outer-pure label=6, with an edge along the far circle=6, WITHOUT=0 | fl=2484 mismatches=0
+    bowtie: three-corner vertices=4 directions read=32 crossing>2-s:0 | directions with an inner-pure and an outer-pure label=4, with an edge along the far circle=4, WITHOUT=0 | fl=2580 mismatches=0
+    r7: no three-corner vertex (every lattice point has six corners) - silent
+  fault: python3 ../data/fs137/e1/budget.py three --fault=bend
+
+### Argument — at most 2 − s corners cross
+
+Order the curves from `x` cyclically as in C136-CLASS. The edges of `F` are `c` distinct curves, and since `F` fills a
+neighbourhood its corners are the `c` open intervals between cyclically consecutive edges. The branches `β₋`, `β₊` of
+`S(w)` at `x` are two more curves; each is an edge of `F` or lies strictly inside exactly one corner's interval. The two
+branches cut the cyclic order into the closed intervals `[β₋, β₊]` and `[β₊, β₋]`, and by C136-CLASS a corner inside the
+first is inner at `w`, one inside the second outer. A corner with no branch strictly inside it lies in one of the two,
+so it is inner or outer; hence the crossing corners are among those with a branch strictly inside, at most `2 − s`.
+
+Let `s = 0`. If one corner held both branches strictly inside, its interval would contain `[β₋, β₊]` or `[β₊, β₋]`, and
+every other corner would lie in the other: all outer, or all inner. So if some corner is inner and another outer, the
+branches lie in two different corners, both crossing (each has curves on both sides of a branch strictly inside it),
+and with the inner and the outer one `F` has at least four corners.
+
+Let `F` have three corners, one label inner-pure and another outer-pure at `θ`. Each label has a corner, so `F` has an
+inner and an outer corner; by the last paragraph `s ≥ 1`: a branch of `S(w)` is an edge of `F`. ∎
+
+**Theorems this stage proved**: C137-THREE — derived from C136-CLASS (inherited, one mind), one mind; kernel pending.
+
+## Stage 4 — SAVED
