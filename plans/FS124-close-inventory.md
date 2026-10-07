@@ -485,4 +485,22 @@ between two colours that is an arc of the unit circle about a point one unit awa
     round's card, or "record job" with what follows**; the six-colour point the frame leaves out; the held search line;
     three lines for Kooshi. Its brief asks of every claim it poses the check the last card lacked: the held theorem or
     entry it would restate. Slots: it, the landing, the radius module's implementer.
+23. **FS124-I1, first message (15:04 UTC): the radius clause is proved on its branch — all 49 leaves, and the disc criterion
+    prints the standard three axioms and the one declared outside theorem on Borel transfer, nothing else** (branch
+    `fs124-wk1`, commit `87267e70`; build exit 0, no warning, no `sorry`). Its two lines: `colorable_iff_forall_ball` and
+    `seven_le_chromaticNumber_plane_iff_exists_ball`, each `[propext, Classical.choice, Quot.sound,
+    Outside.OAI158.proper_to_borel_weak]`. Two more theorems on that import, one on the five-colour import, **the other 52
+    of the 57 on the standard three alone** — (up) and its contrapositive among them; no record on both imports. **"The
+    halves, each proved separately … and printed"**: seven implies a disc with no weak six-colouring, and discs imply
+    colourable, on the standard three; a disc with none implies seven, and colourable implies discs, on the import. **No
+    statement changed**: 72 of 72 stored terms identical before and after, by a check whose control fired. One route
+    changed (an isometry built inside a proof to add no import). **My receipt**: the commit is on `origin`; the three
+    modules at that commit hold no `sorry` (counted by me); **the criterion's statement read by me at that commit** —
+    `7 ≤ (unitDistance ℂ).chromaticNumber ↔ ∃ R > 0, ¬ ∃ c : ℂ → Fin 6, IsWeakColouringOn (ball 0 R) c` — with the
+    definition under it (measurable, and the monochromatic unit pairs with both ends in the set a null set); its axiom
+    line found in the job's print. Not checked by me: the build log; the other 55 prints. **By the announcement rule**:
+    kernel-checked on a branch, **not held** — the full gate is the landing's, after the one in flight. **What it is, said
+    once**: with this library's interval, the Hadwiger–Nelson problem is the statement that some disc has no measurable
+    six-colouring proper at almost every unit pair (seven) or that every disc has one (six) — a theorem of this library on
+    one declared outside theorem, on a branch. It moves no value.
 
