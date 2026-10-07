@@ -212,3 +212,48 @@ elaborated as first written.
 premise `IsOpen U` inside `radius_down`'s conclusion — the colouring serves every set, as its docstring says
 (generalization 4); (c) `V`-membership of the two points in `AeProperOn.ae_rigidMotion`'s pair-by-pair step, which is
 `ae_ball_iff`'s shape and not a hypothesis of the statement. Nothing is dropped: the statements are fixed.
+
+## Stage 3 — SAVED (FS124-I1): the audit block, and the checks of the brief's step 4
+
+**`scripts/Axioms.lean`, a block headed "FS124-I1"** (68 lines added, none changed): under the IMPORTED banner, after
+FS132-I1's records, `radius_five` beneath a line naming `no_proper_five_coloring`, and
+`exists_isWeakColouringOn_of_colorable`, `radius_down`, `colorable_iff_forall_ball`,
+`seven_le_chromaticNumber_plane_iff_exists_ball` beneath a line naming `proper_to_borel_weak`; above the PURCHASED
+banner, after FS131-L8A's block, the other 52 theorems in the files' order. 57 records: every hand-written theorem of
+the three modules once.
+
+**The audit on this branch** — `scripts/slot.py --mem 16 --cpus 2 -- ./scripts/axioms.sh`, exit 0:
+`axioms: OK — 6585 clean, 20 axiom-free, 23 imported, 5 declared purchase(s)` (`data/fs124/i1/logs/axioms-sh.txt`);
+6,633 records. Against the branch's base (6533 clean, 18 imported, 6,576 records): **clean +52, imported +5, records
++57**, nothing else moved; the digest reads the recorded count as stale, as it must until the front page is refiled.
+The imports' consumers: `no_proper_five_coloring` 5 → 6, `proper_to_borel_weak` 5 → 9. Control, on the block itself:
+`radius_five`'s line and `radius_up`'s exchanged (an imported record under CLEAN, a clean one under IMPORTED) —
+exit 1, `FAIL import-in-clean 'HadwigerNelson.Plane.radius_five' …` and `FAIL stale-import
+'HadwigerNelson.Plane.radius_up' …`, two checks failed (`data/fs124/i1/logs/axioms-sh-control.txt`); the file put back
+from its copy (`sha256sum -c`: OK) and the audit run again, so the saved `latest` run is the true one.
+
+**`tools/check_architecture.py`**: exit 0, `RESULT: PASS` (`data/fs124/i1/logs/check-architecture.txt`). No module was
+added and no import changed, so the map's three rows (the planner's) stand.
+
+**`./scripts/dupnames.sh`** under the slot (`--mem 12`): exit 0 — `dupnames: OK — no name is declared by two modules
+(23 generated on demand, listed above)`; 1,847 of the package's modules scanned against 1,847 source files
+(`data/fs124/i1/logs/dupnames.txt`). None of the 23 generated names has a copy in the three modules (the full log names
+neither `WeakColouringOn` nor `Plane.Radius`).
+
+**The guarded lint** — `scripts/slot.py --mem 8 --cpus 2 -- lake lint --no-build -- --no-build --trace`: exit 0,
+`-- Linting passed for Proofs.`, 14 linters started and 14 `(2/2) Passed!` (`data/fs124/i1/logs/lint.txt`).
+**No control was run on `lake lint` itself**: a planted fault in a module needs two more builds (plant, restore). In
+its place, the one linter that bears on the brief's step 3 was asked directly: `data/fs124/i1/lean/UnusedArgs.lean`
+runs Batteries' `unusedArguments` test on each theorem of the three modules by name and prints a line per theorem
+visited — **63 visited, 63 `ok`** — and on two theorems declared in that file: the one with a hypothesis its proof
+does not read is reported (`1 unused argument: argument 2: (hU : IsOpen U)`), its partner is not
+(`data/fs124/i1/logs/unused-args.txt`).
+
+**The assumptions step, run to read what the landing must add (nothing written)** —
+`./scripts/assumptions.sh` under the slot: exit 1 on exactly five `unlisted-consumer` rows, the five records above
+(`RESTS <import> <theorem>`, absent from `scripts/assumptions-ledger.txt`), and no other failure: `fails=0` among the
+decided hypotheses; `rests` 18 → 23 and the other eight counts unchanged
+(`data/fs124/i1/logs/assumptions-sh.txt`). So, as the planner's § 3.5 expected: **no line is owed to
+`scripts/Assumptions.lean`** — neither `AeProperOn` nor `IsWeakColouringOn` is read as an undeclared former (each is
+concluded by theorems with no assumption: `aeProperOn_of_proper`, `AeColouring.isWeakColouringOn`), and no hypothesis
+of the 57 statements is closed. The landing's `--write-ledger` adds the five rows.

@@ -1,0 +1,72 @@
+data/fs124/i1/lean/UnusedArgs.lean:13:32: warning: Variable name `hU` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ok HadwigerNelson.Plane.AeColouring.isWeakColouringOn
+ok HadwigerNelson.Plane.AeProperOn.ae_rigidMotion
+ok HadwigerNelson.Plane.AeProperOn.ae_rigidMotion_arcLength
+ok HadwigerNelson.Plane.AeProperOn.ae_rigidMotion_edge
+ok HadwigerNelson.Plane.AeProperOn.colorable_induce
+ok HadwigerNelson.Plane.AeProperOn.comp_rigidMotion
+ok HadwigerNelson.Plane.AeProperOn.eq_1
+ok HadwigerNelson.Plane.AeProperOn.exists_rigidMotion
+ok HadwigerNelson.Plane.AeProperOn.mono
+ok HadwigerNelson.Plane.IsWeakColouringOn.aeProperOn
+ok HadwigerNelson.Plane.IsWeakColouringOn.comp_rigidMotion
+ok HadwigerNelson.Plane.IsWeakColouringOn.exists_aeColouring
+ok HadwigerNelson.Plane.IsWeakColouringOn.measurable
+ok HadwigerNelson.Plane.IsWeakColouringOn.mono
+ok HadwigerNelson.Plane.aeProperOn_congr
+ok HadwigerNelson.Plane.aeProperOn_iff_ae
+ok HadwigerNelson.Plane.aeProperOn_iff_ae_rigidMotion
+ok HadwigerNelson.Plane.aeProperOn_iff_unitPairsNull
+ok HadwigerNelson.Plane.aeProperOn_iff_volume
+ok HadwigerNelson.Plane.aeProperOn_of_proper
+ok HadwigerNelson.Plane.aeProperOn_of_proper_off_null
+ok HadwigerNelson.Plane.colorable_iff_forall_ball
+ok HadwigerNelson.Plane.colorable_induce_of_forall_aeProperOn_ball
+ok HadwigerNelson.Plane.colorable_induce_of_forall_ne
+ok HadwigerNelson.Plane.colorable_plane_of_forall_aeProperOn_ball
+ok HadwigerNelson.Plane.colorable_plane_of_forall_finite
+ok HadwigerNelson.Plane.continuous_rigidMotion
+ok HadwigerNelson.Plane.continuous_rigidMotion_apply
+ok HadwigerNelson.Plane.dist_rigidMotion
+ok HadwigerNelson.Plane.exists_isWeakColouringOn_ball_iff
+ok HadwigerNelson.Plane.exists_isWeakColouringOn_iff_subtype
+ok HadwigerNelson.Plane.exists_isWeakColouringOn_of_colorable
+ok HadwigerNelson.Plane.exists_isWeakColouringOn_seven
+ok HadwigerNelson.Plane.exists_isWeakColouringOn_univ_iff
+ok HadwigerNelson.Plane.exists_radius_no_weak_four
+ok HadwigerNelson.Plane.exists_radius_of_not_colorable
+ok HadwigerNelson.Plane.exists_rigidMotion_edge
+ok HadwigerNelson.Plane.isOpen_setOf_mapsTo_rigidMotion
+ok HadwigerNelson.Plane.isWeakColouringOn_univ_iff
+ok HadwigerNelson.Plane.isWeakColouringOn_univ_iff_weakColoring
+ok HadwigerNelson.Plane.measurePreserving_motionMul_left
+ok HadwigerNelson.Plane.measurePreserving_motionMul_right
+ok HadwigerNelson.Plane.mem_monoPairSet_iff_rigidMotion
+ok HadwigerNelson.Plane.mem_monoPairSet_of_e_eq
+ok HadwigerNelson.Plane.monoPairSet.eq_1
+ok HadwigerNelson.Plane.monoPairSet_eq_iUnion
+ok HadwigerNelson.Plane.monoPairSet_mono
+ok HadwigerNelson.Plane.motionMul.eq_1
+ok HadwigerNelson.Plane.prod_arcLength_eq_restrict
+ok HadwigerNelson.Plane.prod_arcLength_eq_zero_iff_volume
+ok HadwigerNelson.Plane.radius_countable
+ok HadwigerNelson.Plane.radius_down
+ok HadwigerNelson.Plane.radius_five
+ok HadwigerNelson.Plane.radius_graph
+ok HadwigerNelson.Plane.radius_up
+ok HadwigerNelson.Plane.rigidMotion.eq_1
+ok HadwigerNelson.Plane.rigidMotion_add_two_pi
+ok HadwigerNelson.Plane.rigidMotion_apply_one
+ok HadwigerNelson.Plane.rigidMotion_apply_zero
+ok HadwigerNelson.Plane.rigidMotion_motionMul
+ok HadwigerNelson.Plane.rigidMotion_translation
+ok HadwigerNelson.Plane.rigidMotion_zero
+ok HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball
+UNUSED FS124I1Control.unused_hyp: 1 unused argument:
+  argument 2: (hU : IsOpen U)
+ok FS124I1Control.used_hyp
+VISITED 63 theorems of the three modules and 2 controls; reported 1

@@ -225,6 +225,13 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.Outside.OAI158.chiM0_le_chromaticNumber_plane
 #print axioms HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0
 #print axioms HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff
+-- FS124-I1: the radius clause's record resting on `no_proper_five_coloring` (C124-RADIUS-FIVE, `Plane/RadiusOutside`)
+#print axioms HadwigerNelson.Plane.radius_five
+-- FS124-I1: the radius clause's records resting on `proper_to_borel_weak` (C124-RADIUS-DOWN and the join with -UP, `Plane/RadiusOutside`)
+#print axioms HadwigerNelson.Plane.exists_isWeakColouringOn_of_colorable
+#print axioms HadwigerNelson.Plane.radius_down
+#print axioms HadwigerNelson.Plane.colorable_iff_forall_ball
+#print axioms HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball
 
 #eval IO.println "=== CLEAN ==="
 
@@ -7809,6 +7816,67 @@ implementers' blocks did not list. Read from the kernel's own list of the librar
 #print axioms HadwigerNelson.Plane.ArcMap.outerTileColours_subset
 #print axioms HadwigerNelson.Plane.ArcMap.tipColours_subset
 -- FS131-L8A block end
+/-! ## FS124-I1 — FS-124's radius clause (planned by FS124-K1): `Plane/WeakColouringOn`, `Plane/Radius`, and the three theorems
+of `Plane/RadiusOutside` that use no import. The module's other five records rest on a declared outside theorem and are under
+IMPORTED: `radius_five` on `no_proper_five_coloring`; `exists_isWeakColouringOn_of_colorable`, `radius_down`,
+`colorable_iff_forall_ball` and `seven_le_chromaticNumber_plane_iff_exists_ball` on `proper_to_borel_weak`. `radius_up` and
+`exists_radius_of_not_colorable` below are the halves of the two join theorems that need no import. -/
+-- FS124-I1: Plane/WeakColouringOn
+#print axioms HadwigerNelson.Plane.rigidMotion_apply_zero
+#print axioms HadwigerNelson.Plane.rigidMotion_apply_one
+#print axioms HadwigerNelson.Plane.rigidMotion_zero
+#print axioms HadwigerNelson.Plane.rigidMotion_translation
+#print axioms HadwigerNelson.Plane.dist_rigidMotion
+#print axioms HadwigerNelson.Plane.continuous_rigidMotion
+#print axioms HadwigerNelson.Plane.continuous_rigidMotion_apply
+#print axioms HadwigerNelson.Plane.rigidMotion_add_two_pi
+#print axioms HadwigerNelson.Plane.rigidMotion_motionMul
+#print axioms HadwigerNelson.Plane.exists_rigidMotion_edge
+#print axioms HadwigerNelson.Plane.measurePreserving_motionMul_right
+#print axioms HadwigerNelson.Plane.measurePreserving_motionMul_left
+#print axioms HadwigerNelson.Plane.prod_arcLength_eq_restrict
+#print axioms HadwigerNelson.Plane.prod_arcLength_eq_zero_iff_volume
+#print axioms HadwigerNelson.Plane.mem_monoPairSet_iff_rigidMotion
+#print axioms HadwigerNelson.Plane.monoPairSet_eq_iUnion
+#print axioms HadwigerNelson.Plane.mem_monoPairSet_of_e_eq
+#print axioms HadwigerNelson.Plane.aeProperOn_iff_unitPairsNull
+#print axioms HadwigerNelson.Plane.aeProperOn_iff_ae
+#print axioms HadwigerNelson.Plane.aeProperOn_iff_volume
+#print axioms HadwigerNelson.Plane.monoPairSet_mono
+#print axioms HadwigerNelson.Plane.AeProperOn.mono
+#print axioms HadwigerNelson.Plane.aeProperOn_congr
+#print axioms HadwigerNelson.Plane.aeProperOn_of_proper
+#print axioms HadwigerNelson.Plane.aeProperOn_of_proper_off_null
+#print axioms HadwigerNelson.Plane.AeProperOn.comp_rigidMotion
+#print axioms HadwigerNelson.Plane.isWeakColouringOn_univ_iff
+#print axioms HadwigerNelson.Plane.AeColouring.isWeakColouringOn
+#print axioms HadwigerNelson.Plane.IsWeakColouringOn.exists_aeColouring
+#print axioms HadwigerNelson.Plane.IsWeakColouringOn.mono
+#print axioms HadwigerNelson.Plane.IsWeakColouringOn.comp_rigidMotion
+#print axioms HadwigerNelson.Plane.exists_isWeakColouringOn_ball_iff
+#print axioms HadwigerNelson.Plane.exists_isWeakColouringOn_iff_subtype
+-- FS124-I1: Plane/Radius
+#print axioms HadwigerNelson.Plane.exists_isWeakColouringOn_seven
+#print axioms HadwigerNelson.Plane.AeProperOn.ae_rigidMotion_edge
+#print axioms HadwigerNelson.Plane.AeProperOn.ae_rigidMotion
+#print axioms HadwigerNelson.Plane.AeProperOn.ae_rigidMotion_arcLength
+#print axioms HadwigerNelson.Plane.aeProperOn_iff_ae_rigidMotion
+#print axioms HadwigerNelson.Plane.isOpen_setOf_mapsTo_rigidMotion
+#print axioms HadwigerNelson.Plane.AeProperOn.exists_rigidMotion
+#print axioms HadwigerNelson.Plane.colorable_induce_of_forall_ne
+#print axioms HadwigerNelson.Plane.AeProperOn.colorable_induce
+#print axioms HadwigerNelson.Plane.radius_graph
+#print axioms HadwigerNelson.Plane.radius_countable
+#print axioms HadwigerNelson.Plane.colorable_plane_of_forall_finite
+#print axioms HadwigerNelson.Plane.colorable_induce_of_forall_aeProperOn_ball
+#print axioms HadwigerNelson.Plane.colorable_plane_of_forall_aeProperOn_ball
+#print axioms HadwigerNelson.Plane.exists_radius_of_not_colorable
+#print axioms HadwigerNelson.Plane.radius_up
+-- FS124-I1: Plane/RadiusOutside (the three with no import)
+#print axioms HadwigerNelson.Plane.isWeakColouringOn_univ_iff_weakColoring
+#print axioms HadwigerNelson.Plane.exists_isWeakColouringOn_univ_iff
+#print axioms HadwigerNelson.Plane.exists_radius_no_weak_four
+-- FS124-I1 block end
 
 #eval IO.println "=== PURCHASED ==="
 
