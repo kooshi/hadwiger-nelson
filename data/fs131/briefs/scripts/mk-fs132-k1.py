@@ -43,7 +43,7 @@ b=f'''# Brief FS132-K1 — the kernel module for the first night's results on si
 
 brief: FS132-K1
   identity: {IDENT_P}
-  role: the kernel lane's planner for FS-132 — state in Lean seven statements derived by hand last night, the first of them a theorem about every measurable six-colouring of the plane that no second mind has read; find your own route to each before you see the derivers'; then, with the derivations open, give an implementer a skeleton and a plan per leaf, and say which statements of an outside Lean library are imported and which are ported
+  role: the kernel lane's planner for FS-132 — state in Lean seven statements claimed by hand last night, the first of them about every measurable six-colouring of the plane and read by no second mind; find your own route to each — or to its failure — before you see the derivers'; then, with the derivations open, give an implementer a skeleton and a plan per leaf, and say which statements of an outside Lean library are imported and which are ported
   launch: now, in a tree of your own cut from `main` after the outside theorems landed there; two other jobs work under `plans/` and `data/` on `main`
   mission: § Why this job
   statements: § The statements
@@ -66,8 +66,8 @@ second mind any of them will have.
 ## Why this job
 
 A milestone here closes only when its Lean module passes the gate; until then a result is "derived, one mind". The first
-statement below is the one that matters most and is least checked: it says a configuration this project had excluded only for
-maps is excluded for every measurable six-colouring, and two steps of its hand proof have no second reader. Your blind phase
+statement below is the one that matters most and is least checked: it claims that a configuration this project had excluded only
+for maps is excluded for every measurable six-colouring, on one mind's hand argument that nobody has re-read. Your blind phase
 is that second reading in the strongest form there is — a route found without seeing theirs. A statement defect found by you
 tonight is worth more than the module. Kooshi's instruction for the night, and his standing word on what formalization is:
 
@@ -122,15 +122,15 @@ import, the release and every landed module are open.
      import copied five, or re-stated: say which and why), each with a model so that no hypothesis is empty by accident;
    - **each statement typed and read back aloud against its words**, clause by clause — for the first, its two-clause
      hypothesis on the ring above all — with the *not claimed* line as the list of what your Lean statement must not say;
-   - **your own route to each**, as a plan per leaf: what you would prove, from what, in what order. For the first two this
+   - **your own route to each**, as a plan per leaf: what each leaf states, from what, in what order. For the first two this
      is the second derivation they have not had. Where you see no route, say where you stop. Where you see the statement is
      false, vacuous or wider than it need be, that is a message to me at once;
    - **the skeleton**: modules that build with `sorry` at every leaf, statements only.
    **Commit the phase-1 plan and message me.** That commit dates your blindness.
 3. **Phase 2, open — after my reply.** Read the three derivations' entries for these statements with their arguments. For
    each statement: where your route and theirs part, which is the better route for an implementer and why, and a plan per
-   leaf in final form. Any step of theirs you cannot make a leaf of — the two in the first statement's argument that its
-   deriver names as unread by a second mind, above all — is a message to me with the step's address.
+   leaf in final form. Any step of theirs you cannot make a leaf of is a message to me with the step's address; when
+   the fence lifts I will name the steps their own authors flag.
 4. **The outside statements.** Which statements of the release your plan stands on, by their Lean names, and for each: declared
    here as a further outside theorem in the import's form (definitions copied, stored terms compared, the four items), or
    ported to this toolchain — priced from the first two pieces you try (`LEAN.md`'s re-pricing rule), not from a table. The
